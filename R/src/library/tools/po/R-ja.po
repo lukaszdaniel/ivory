@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -221,6 +221,11 @@ msgid ""
 msgstr ""
 " '--no-docs' の使用は推奨されません。代わりに '--install-args' を使用してくだ"
 "さい "
+
+#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#: R/build.R:0
+msgid "'.build_package()' exit status %d"
+msgstr ""
 
 #. R/install.R: stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
 #: R/install.R:0

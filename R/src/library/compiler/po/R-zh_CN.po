@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2015-01-17 15:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -50,9 +50,9 @@ msgstr "'env'必需是顶级环境"
 msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr "'ns'必须是一个命名空间或命名空间的进口环境"
 
-#. R/cmp.R: gettext("'switch()' with no alternatives")
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -145,9 +145,10 @@ msgstr "编译'%s'"
 msgid "done"
 msgstr "做完了"
 
-#. R/cmp.R: stop("empty alternative in numeric switch")
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
 #: R/cmp.R:0
-msgid "empty alternative in numeric switch"
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
 msgstr "在数字交换机里不能有空的替代"
 
 #. R/cmp.R: warning("empty input file; no output written")

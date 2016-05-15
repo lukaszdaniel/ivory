@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R /3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2016-01-09 18:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -46,9 +46,9 @@ msgstr "'env' skal være et miljø på topniveau"
 msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
-#. R/cmp.R: gettext("'switch()' with no alternatives")
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -141,9 +141,10 @@ msgstr "kompilerer '%s'"
 msgid "done"
 msgstr "færdig"
 
-#. R/cmp.R: stop("empty alternative in numeric switch")
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
 #: R/cmp.R:0
-msgid "empty alternative in numeric switch"
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
 msgstr "tom alternativ i numerisk kontakt"
 
 #. R/cmp.R: warning("empty input file; no output written")

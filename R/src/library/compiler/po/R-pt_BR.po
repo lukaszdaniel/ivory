@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -45,9 +45,9 @@ msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr ""
 "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
 
-#. R/cmp.R: gettext("'switch()' with no alternatives")
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -140,9 +140,10 @@ msgstr "compilando '%s'"
 msgid "done"
 msgstr "pronto"
 
-#. R/cmp.R: stop("empty alternative in numeric switch")
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
 #: R/cmp.R:0
-msgid "empty alternative in numeric switch"
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
 msgstr "alternativa vazia em switch numérico"
 
 #. R/cmp.R: warning("empty input file; no output written")

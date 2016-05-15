@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.4.0\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,6 +286,13 @@ msgstr ""
 #. R/MethodsListClass.R: gettext("'initialize' method returned an object of class %s instead of the required class %s",     domain = "R-methods")
 
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
+msgstr ""
+
+
+#: R/cbind.R: 0
+#. R/cbind.R: warning("'methods:::bind_activation(TRUE)' is deprecated;\n you should rather provide methods for 'cbind2()' / 'rbind2()'")
+
+msgid "'methods:::bind_activation(TRUE)' is deprecated;\n you should rather provide methods for 'cbind2()' / 'rbind2()'"
 msgstr ""
 
 

@@ -2651,7 +2651,7 @@ notifyMultipleSwitchDefaults <- function(ndflt, cntxt)
 
 notifyNoSwitchcases <- function(cntxt)
     if (! suppressAll(cntxt))
-        cntxt$warn(gettext("'switch()' with no alternatives"), cntxt)
+        cntxt$warn(gettext("'switch()' function with no alternatives"), cntxt)
 
 
 ##

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2015-01-17 14:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -47,9 +47,9 @@ msgstr ""
 " 'ns' はネームスペースか, あるいは環境をインポートしたネームスペースでなけれ"
 "ばなりません "
 
-#. R/cmp.R: gettext("'switch()' with no alternatives")
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -142,9 +142,10 @@ msgstr " '%s' をコンパイルしています "
 msgid "done"
 msgstr " 完了 "
 
-#. R/cmp.R: stop("empty alternative in numeric switch")
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
 #: R/cmp.R:0
-msgid "empty alternative in numeric switch"
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
 msgstr " 数値によるスイッチの中で, 代替選択肢が空です。 "
 
 #. R/cmp.R: warning("empty input file; no output written")

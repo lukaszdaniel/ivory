@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -202,6 +202,11 @@ msgid ""
 msgstr ""
 "użycie '--no-vignettes' zostało zlikwidowane: użyj '--no-build-vignettes' w "
 "zamian"
+
+#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#: R/build.R:0
+msgid "'.build_package()' exit status %d"
+msgstr ""
 
 #. R/install.R: stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
 #: R/install.R:0

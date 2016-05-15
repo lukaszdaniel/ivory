@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1090,6 +1090,12 @@ msgstr "l'argomento 'x' deve essere numerico"
 msgid "'sig.level' argument must be numeric in [0, 1]"
 msgstr "'sig.level' deve essere numerico in [0, 1]"
 
+#. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
+#: R/lm.R:0
+#, fuzzy
+msgid "'simulate()' function is not yet implemented for multivariate 'lm()'"
+msgstr "'se.fit' non ancora implementato per modelli multidimensionali"
+
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
 #, fuzzy
@@ -1730,10 +1736,10 @@ msgstr ""
 msgid "Coefficients  [contrasts: %s]:"
 msgstr "i coefficienti non sommano ad 1"
 
-#. R/ppr.R: gettext("Coefficients of ridge terms:", domain = "R-stats")
+#. R/ppr.R: gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats")
 #: R/ppr.R:0
 #, fuzzy
-msgid "Coefficients of ridge terms:"
+msgid "Coefficients of ridge terms ('beta'):"
 msgstr "i coefficienti non sommano ad 1"
 
 #. R/HoltWinters.R: gettext("Coefficients:", domain = "R-stats")
@@ -2708,9 +2714,9 @@ msgstr ""
 msgid "Predicted values"
 msgstr ""
 
-#. R/ppr.R: gettext("Projection direction vectors:", domain = "R-stats")
+#. R/ppr.R: gettext("Projection direction vectors ('alpha'):", domain = "R-stats")
 #: R/ppr.R:0
-msgid "Projection direction vectors:"
+msgid "Projection direction vectors ('alpha'):"
 msgstr ""
 
 #. R/quade.test.R: gettext("Quade F", domain = "R-stats")

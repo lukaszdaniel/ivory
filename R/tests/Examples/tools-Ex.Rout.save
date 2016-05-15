@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-04-29 r724) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-05-14 r735) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-04-29 r70562) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-05-14 r70616) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -195,7 +195,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x21abd30>
+<environment: 0x28dc6c8>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -718,6 +718,14 @@ NULL
 > ### Keywords: utilities
 > 
 > ### ** Examples
+> ## Don't show: 
+> checkMV <- function(r)
++   stopifnot(is.character(r),
++             length(r) == 0 || (length(r) == 1 && file.exists(r)))
+> checkMV(makevars_user())
+> checkMV(makevars_site())
+> ## End (Don't show)
+> 
 > 
 > 
 > cleanEx()
@@ -751,13 +759,6 @@ NULL
 > 
 > ### ** Examples
 > 
-> ## Don't run: 
-> ##D pdb <- available.packages()
-> ##D deps <- package_dependencies(packages = "MASS", pdb,
-> ##D                     which = c("Depends", "Imports", "LinkingTo", "Suggests"),
-> ##D                     recursive = TRUE, reverse = TRUE)
-> ##D length(deps$MASS)
-> ## End (Don't run)
 > 
 > 
 > 
@@ -1022,7 +1023,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.288 0.016 0.306 0 0 
+Time elapsed:  0.26 0.016 0.277 0 0 
 > grDevices::dev.off()
 null device 
           1 

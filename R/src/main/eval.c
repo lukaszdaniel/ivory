@@ -6106,7 +6106,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 		   errorcall(call, _("bad numeric 'switch()' offsets"));
 	       if (LENGTH(ioffsets) == 1) {
 		   pc = codebase + INTEGER(ioffsets)[0]; /* returns NULL */
-		   warningcall(call, _("'switch()' with no alternatives"));
+		   warningcall(call, _("'switch()' function with no alternatives"));
 	       }
 	       else
 		   errorcall(call, _("numeric 'EXPR' required for 'switch()' without named alternatives"));
@@ -6134,7 +6134,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	   if (which < 0 || which >= LENGTH(ioffsets))
 	       which = LENGTH(ioffsets) - 1;
 	   if (LENGTH(ioffsets) == 1)
-	       warningcall(call, _("'switch()' with no alternatives"));
+	       warningcall(call, _("'switch()' function with no alternatives"));
 	   pc = codebase + INTEGER(ioffsets)[which];
        }
        NEXT();

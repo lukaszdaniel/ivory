@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -296,6 +296,13 @@ msgid ""
 "'initialize' method returned an object of class %s instead of the required "
 "class %s"
 msgstr " クラス %s のオブジェクト(要求されたクラス %s ではなく)を初期化 "
+
+#. R/cbind.R: warning("'methods:::bind_activation(TRUE)' is deprecated;\n you should rather provide methods for 'cbind2()' / 'rbind2()'")
+#: R/cbind.R:0
+msgid ""
+"'methods:::bind_activation(TRUE)' is deprecated;\n"
+" you should rather provide methods for 'cbind2()' / 'rbind2()'"
+msgstr ""
 
 #. R/MethodsListClass.R: gettextf("(All objects are from package %s)", unique(sQuote(pkg)), domain = "R-methods")
 #: R/MethodsListClass.R:0

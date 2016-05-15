@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -219,6 +219,11 @@ msgid ""
 "'--no-vignettes' is defunct:\n"
 "  use '--no-build-vignettes' instead"
 msgstr "Nutzung von '--no-docs' ist veraltet; bitte '--install-args' nutzen"
+
+#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#: R/build.R:0
+msgid "'.build_package()' exit status %d"
+msgstr ""
 
 #. R/install.R: stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
 #: R/install.R:0

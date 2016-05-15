@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -279,6 +279,13 @@ msgid ""
 msgstr ""
 "'initialize' 메소드는 필요한 클래스 %2$s이 아닌 클래스 %1$s의 객체를 반환하였"
 "습니다"
+
+#. R/cbind.R: warning("'methods:::bind_activation(TRUE)' is deprecated;\n you should rather provide methods for 'cbind2()' / 'rbind2()'")
+#: R/cbind.R:0
+msgid ""
+"'methods:::bind_activation(TRUE)' is deprecated;\n"
+" you should rather provide methods for 'cbind2()' / 'rbind2()'"
+msgstr ""
 
 #. R/MethodsListClass.R: gettextf("(All objects are from package %s)", unique(sQuote(pkg)), domain = "R-methods")
 #: R/MethodsListClass.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1021,6 +1021,13 @@ msgstr "argument 'sides' musi mieć wartość 1 lub 2"
 msgid "'sig.level' argument must be numeric in [0, 1]"
 msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
 
+#. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
+#: R/lm.R:0
+#, fuzzy
+msgid "'simulate()' function is not yet implemented for multivariate 'lm()'"
+msgstr ""
+"'se.fit()' nie jest jeszcze zaimplementowana dla wielowymiarowych modeli"
+
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
 msgid "'spline' requires n >= 1"
@@ -1632,9 +1639,10 @@ msgstr "Test Cochrana-Mantela-Haenszela"
 msgid "Coefficients  [contrasts: %s]:"
 msgstr "Współczynniki  [kontrasty: %s]:"
 
-#. R/ppr.R: gettext("Coefficients of ridge terms:", domain = "R-stats")
+#. R/ppr.R: gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats")
 #: R/ppr.R:0
-msgid "Coefficients of ridge terms:"
+#, fuzzy
+msgid "Coefficients of ridge terms ('beta'):"
 msgstr "Współczyniki członów grzbietowych:"
 
 #. R/HoltWinters.R: gettext("Coefficients:", domain = "R-stats")
@@ -2612,9 +2620,10 @@ msgstr ""
 msgid "Predicted values"
 msgstr "Przewidziane wartości"
 
-#. R/ppr.R: gettext("Projection direction vectors:", domain = "R-stats")
+#. R/ppr.R: gettext("Projection direction vectors ('alpha'):", domain = "R-stats")
 #: R/ppr.R:0
-msgid "Projection direction vectors:"
+#, fuzzy
+msgid "Projection direction vectors ('alpha'):"
 msgstr "Wektory kierunku rzutowania:"
 
 #. R/quade.test.R: gettext("Quade F", domain = "R-stats")

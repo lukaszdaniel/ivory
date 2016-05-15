@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1094,6 +1094,12 @@ msgstr " 引数 'x' は数値でなければなりません "
 msgid "'sig.level' argument must be numeric in [0, 1]"
 msgstr " 'sig.level' は [0,1] 中の数字でなければなりません "
 
+#. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
+#: R/lm.R:0
+#, fuzzy
+msgid "'simulate()' function is not yet implemented for multivariate 'lm()'"
+msgstr " 'se.fit' は多変量モデルにはまだ実装されていません "
+
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
 #, fuzzy
@@ -1730,10 +1736,10 @@ msgstr ""
 msgid "Coefficients  [contrasts: %s]:"
 msgstr " 係数の総和は 1 ではありません "
 
-#. R/ppr.R: gettext("Coefficients of ridge terms:", domain = "R-stats")
+#. R/ppr.R: gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats")
 #: R/ppr.R:0
 #, fuzzy
-msgid "Coefficients of ridge terms:"
+msgid "Coefficients of ridge terms ('beta'):"
 msgstr " 係数の総和は 1 ではありません "
 
 #. R/HoltWinters.R: gettext("Coefficients:", domain = "R-stats")
@@ -2712,9 +2718,9 @@ msgstr ""
 msgid "Predicted values"
 msgstr ""
 
-#. R/ppr.R: gettext("Projection direction vectors:", domain = "R-stats")
+#. R/ppr.R: gettext("Projection direction vectors ('alpha'):", domain = "R-stats")
 #: R/ppr.R:0
-msgid "Projection direction vectors:"
+msgid "Projection direction vectors ('alpha'):"
 msgstr ""
 
 #. R/quade.test.R: gettext("Quade F", domain = "R-stats")

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -293,6 +293,13 @@ msgid ""
 msgstr ""
 "inicialização do método retornou um objeto de classe \"%s\" ao invés da "
 "classe necessária \"%s\""
+
+#. R/cbind.R: warning("'methods:::bind_activation(TRUE)' is deprecated;\n you should rather provide methods for 'cbind2()' / 'rbind2()'")
+#: R/cbind.R:0
+msgid ""
+"'methods:::bind_activation(TRUE)' is deprecated;\n"
+" you should rather provide methods for 'cbind2()' / 'rbind2()'"
+msgstr ""
 
 #. R/MethodsListClass.R: gettextf("(All objects are from package %s)", unique(sQuote(pkg)), domain = "R-methods")
 #: R/MethodsListClass.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-15 09:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1401,6 +1401,13 @@ msgid "'sig.level' argument must be numeric in [0, 1]"
 msgstr ""
 
 
+#: R/lm.R: 0
+#. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
+
+msgid "'simulate()' function is not yet implemented for multivariate 'lm()'"
+msgstr ""
+
+
 #: R/spline.R: 0
 #. R/spline.R: stop("'spline' requires n >= 1")
 
@@ -2253,9 +2260,9 @@ msgstr ""
 
 
 #: R/ppr.R: 0
-#. R/ppr.R: gettext("Coefficients of ridge terms:", domain = "R-stats")
+#. R/ppr.R: gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats")
 
-msgid "Coefficients of ridge terms:"
+msgid "Coefficients of ridge terms ('beta'):"
 msgstr ""
 
 
@@ -3549,9 +3556,9 @@ msgstr ""
 
 
 #: R/ppr.R: 0
-#. R/ppr.R: gettext("Projection direction vectors:", domain = "R-stats")
+#. R/ppr.R: gettext("Projection direction vectors ('alpha'):", domain = "R-stats")
 
-msgid "Projection direction vectors:"
+msgid "Projection direction vectors ('alpha'):"
 msgstr ""
 
 
