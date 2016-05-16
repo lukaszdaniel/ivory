@@ -577,9 +577,7 @@ checkCall <- function(def, call, signal = warning) {
         msg <- tryCatch({match.call(def, call); NULL},
                         error = function(e) conditionMessage(e))
         if (! is.null(msg)) {
-            emsg <- gettextf("possible error in '%s': %s",
-                             deparse(call, 20)[1], msg)
-            if (! is.null(signal)) signal(emsg)
+            if (! is.null(signal)) signal(gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg))
             FALSE
         }
         else TRUE
@@ -873,11 +871,10 @@ this is used for the [[SWITCH]] instruction.
 patchlabels <- function() {
     offset <- function(lbl) {
         if (is.null(labels[[lbl]]))
-            stop(gettextf("no offset recorded for label \"%s\"", lbl),
-                 domain = NA)
+            stop(gettextf("no offset recorded for label \"%s\"", lbl), domain = "R-compiler")
         labels[[lbl]]
     }
-    for (i in 1 : codeCount) {
+    for (i in seq_len(codeCount)) {
         v <- codeBuf[[i]]
         if (is.character(v))
             codeBuf[[i]] <<- offset(v)
@@ -934,7 +931,7 @@ make.toplevelContext <- function(cenv, options = NULL)
                    call = NULL,
                    stop = function(msg, cntxt)
                        stop(simpleError(msg, cntxt$call)),
-                   warn = function(x, cntxt) cat(paste("Note:", x, "\n"))),
+                   warn = function(x, cntxt) cat(paste(gettext("Note: ", domain = "R-compiler"), x, "\n", sep = ""))),
               class = "compiler_context")
 @ %def make.toplevelContext
 Errors are signaled using a version of [[stop]] that uses the current
@@ -1110,18 +1107,14 @@ suppressed in the current context.
 <<[[notifyUndefFun]] function>>=
 notifyUndefFun <- function(fun, cntxt) {
     if (! suppressUndef(fun, cntxt)) {
-        msg <- gettextf("no visible global function definition for '%s'",
-                        as.character(fun))
-        cntxt$warn(msg, cntxt)
+        cntxt$warn(gettextf("no visible global function definition for '%s'", as.character(fun)), cntxt)
     }
 }
 @ %def notifyUndefFun
 <<[[notifyUndefVar]] function>>=
 notifyUndefVar <- function(var, cntxt) {
     if (! suppressUndef(var, cntxt)) {
-        msg <- gettextf("no visible binding for global variable '%s'",
-                        as.character(var))
-        cntxt$warn(msg, cntxt)
+        cntxt$warn(gettextf("no visible binding for global variable '%s'", as.character(var)), cntxt)
     }
 }
 @ %def notifyUndefVar
@@ -1142,7 +1135,7 @@ are sent by [[notifyWrongDotsUse]].
 <<[[notifyWrongDotsUse]] function>>=
 notifyWrongDotsUse <- function(var, cntxt) {
     if (! suppressAll(cntxt))
-        cntxt$warn(paste(var, "may be used in an incorrect context"), cntxt)
+        cntxt$warn(gettextf("%s may be used in an incorrect context", var), cntxt)
 }
 @ %def notifyWrongDotsUse
 
@@ -1150,9 +1143,7 @@ Wrong argument count issues are signaled by [[notifyWrongArgCount]].
 <<[[notifyWrongArgCount]] function>>=
 notifyWrongArgCount <- function(fun, cntxt) {
     if (! suppressAll(cntxt))
-        cntxt$warn(gettextf("wrong number of arguments to '%s'",
-                            as.character(fun)),
-                   cntxt)
+        cntxt$warn(gettextf("wrong number of arguments to '%s'", as.character(fun)), cntxt)
 }
 @ %def notifyWrongArgCount
 Other issues with calls that do not match their definitions are
@@ -1172,8 +1163,7 @@ visible will most likely result in runtime errors, and
 <<[[notifyWrongBreakNext]] function>>=
 notifyWrongBreakNext <- function(fun, cntxt) {
     if (! suppressAll(cntxt)) {
-        msg <- paste(fun, "may be used in wrong context: no loop is visible")
-        cntxt$warn(msg, cntxt)
+        cntxt$warn(gettextf("%s may be used in wrong context: no loop is visible", fun), cntxt)
     }
 }
 @ %def notifyWrongBreakNext
@@ -1184,9 +1174,7 @@ warning.
 <<[[notifyNoSuperAssignVar]] function>>=
 notifyNoSuperAssignVar <- function(symbol, cntxt) {
     if (! suppressAll(cntxt)) {
-        msg <- gettextf("no visible binding for '<<-' assignment to '%s'",
-                        as.character(symbol))
-        cntxt$warn(msg, cntxt)
+        cntxt$warn(gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol)), cntxt)
     }
 }
 @ %def notifyNoSuperAssignVar
@@ -1500,23 +1488,19 @@ The assigned variable is determined by [[getAssignedVar]]:
 getAssignedVar <- function(e) {
     v <- e[[2]]
     if (missing(v))
-        stop(gettextf("bad assignment: %s", pasteExpr(e)),
-             domain = NA)
+        stop(gettextf("bad assignment: %s", pasteExpr(e)), domain = "R-compiler")
     else if (typeof(v) %in% c("symbol", "character"))
         as.character(v)
     else {
         while (typeof(v) == "language") {
             if (length(v) < 2)
-                stop(gettextf("bad assignment: %s", pasteExpr(e)),
-                     domain = NA)
+                stop(gettextf("bad assignment: %s", pasteExpr(e)), domain = "R-compiler")
             v <- v[[2]]
             if (missing(v))
-                stop(gettextf("bad assignment: %s", pasteExpr(e)),
-                     domain = NA)
+                stop(gettextf("bad assignment: %s", pasteExpr(e)), domain = "R-compiler")
         }
         if (typeof(v) != "symbol")
-            stop(gettextf("bad assignment: %s", pasteExpr(e)),
-                 domain = NA)
+            stop(gettextf("bad assignment: %s", pasteExpr(e)), domain = "R-compiler")
         as.character(v)
     }
 }
@@ -1663,10 +1647,9 @@ findLocalsList <- function(elist, cntxt) {
         if (last.nsf == nsf) {
             rdsf <- vals %in% specialSyntaxFuns
             if (any(rdsf)) {
-                msg <- ngettext(sum(rdsf),
+                warning(ngettext(sum(rdsf),
                                 "local assignment to syntactic function: ",
-                                "local assignments to syntactic functions: ")
-                warning(msg, paste(vals[rdsf], collapse = ", "),
+                                "local assignments to syntactic functions: ", domain = "R-compiler"), paste(vals[rdsf], collapse = ", "),
                         domain = NA)
             }
             return(vals)
@@ -1840,8 +1823,7 @@ setInlineHandler <- function(name, h, package = "base") {
     if (exists(name, inlineHandlers, inherits = FALSE)) {
         entry <- get(name, inlineHandlers)
         if (entry$package != package) {
-            fmt <- "handler for '%s' is already defined for another package"
-            stop(gettextf(fmt, name), domain = NA)
+            stop(gettextf("handler for '%s' is already defined for another package", name), domain = "R-compiler")
         }
     }
     entry <- list(handler = h, package = package)
@@ -2974,7 +2956,7 @@ cmpMath1 <- function(e, cb, cntxt) {
         name <- as.character(e[[1]])
         idx <- match(name, math1funs) - 1
         if (is.na(idx))
-            stop(sQuote(name), "is not a registered math1 function")
+            stop(gettextf("%s is not a registered math1 function", sQuote(name)))
         ncntxt <- make.nonTailCallContext(cntxt)
         cmp(e[[2]], cb, ncntxt);
         ci <- cb$putconst(e)
@@ -3696,7 +3678,7 @@ identified by the label [[missLabel]].
 ## make more sense but that isn't the way switch() works)
 if (any(miss)) {
     cb$putlabel(missLabel)
-    cmp(quote(stop("empty alternative in numeric switch")), cb, cntxt)
+    cmp(quote(stop("empty alternative in numeric 'switch()' function")), cb, cntxt)
 }
 @ %def
 
@@ -4191,8 +4173,7 @@ setSetterInlineHandler <- function(name, h, package = "base") {
     if (exists(name, setterInlineHandlers, inherits = FALSE)) {
         entry <- get(name, setterInlineHandlers)
         if (entry$package != package) {
-            fmt <- "handler for '%s' is already defined for another package"
-            stop(gettextf(fmt, name), domain = NA)
+            stop(gettextf("handler for '%s' is already defined for another package", name), domain = "R-compiler")
         }
     }
     entry <- list(handler = h, package = package)
@@ -4362,8 +4343,7 @@ setGetterInlineHandler <- function(name, h, package = "base") {
     if (exists(name, getterInlineHandlers, inherits = FALSE)) {
         entry <- get(name, getterInlineHandlers)
         if (entry$package != package) {
-            fmt <- "handler for '%s' is already defined for another package"
-            stop(gettextf(fmt, name), domain = NA)
+            stop(gettextf("handler for '%s' is already defined for another package", name), domain = "R-compiler")
         }
     }
     entry <- list(handler = h, package = package)
@@ -4685,16 +4665,15 @@ cmpfile <- function(infile, outfile, ascii = FALSE, env = .GlobalEnv,
             if (verbose) {
                 if (typeof(e) == "language" && e[[1]] == "<-" &&
                     typeof(e[[3]]) == "language" && e[[3]][[1]] == "function")
-                    cat(paste0("compiling function \"", e[[2]], "\"\n"))
+                    cat(gettextf("compiling function %s", sQuote(e[[2]]), domain = "R-compiler"), "\n", sep = "")
                 else
-                    cat(paste("compiling expression", deparse(e, 20)[1],
-                              "...\n"))
+                    cat(gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler"), "\n", sep = "")
             }
             cforms[[i]] <- genCode(e, cntxt)
         }
-        cat(gettextf("saving to file \"%s\" ... ", outfile))
+        cat(gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler"))
         .Internal(save.to.file(cforms, outfile, ascii))
-        cat(gettext("done"), "\n", sep = "")
+        cat(gettext("done", domain = "R-compiler"), "\n", sep = "")
     }
     else warning("empty input file; no output written");
     invisible(NULL)
@@ -4722,7 +4701,7 @@ expressions are then evaluated in the global environment.
 <<[[loadcmp]] function>>=
 loadcmp <- function (file, envir = .GlobalEnv, chdir = FALSE) {
     if (!(is.character(file) && file.exists(file)))
-        stop(gettextf("file '%s' does not exist", file), domain = NA)
+        stop(gettextf("file '%s' does not exist", file), domain = "R-compiler")
     exprs <- .Internal(load.from.file(file))
     if (length(exprs) == 0)
         return(invisible())
@@ -4757,14 +4736,14 @@ cmpframe <- function(inpos, file) {
     for (f in ls(pos = inpos, all.names = TRUE)) {
         def <- get(f, pos = inpos)
         if (typeof(def) == "closure") {
-                cat(gettextf("compiling '%s'", f), "\n", sep = "")
+                cat(gettextf("compiling %s", sQuote(f), domain = "R-compiler"), "\n", sep = "")
                 fc <- cmpfun(def)
                 assign(f, fc, pos=outpos)
         }
     }
-    cat(gettextf("saving to file \"%s\" ... ", file))
+    cat(gettextf("saving to file %s ... ", sQuote(file), domain = "R-compiler"))
     save(list = ls(pos = outpos, all.names = TRUE), file = file)
-    cat(gettext("done"), "\n", sep = "")
+    cat(gettext("done", domain = "R-compiler"), "\n", sep = "")
 }
 @ %def cmpframe
 
@@ -4806,8 +4785,7 @@ setCompilerOptions <- function(...) {
     nm <- names(options)
     for (n in nm)
         if (! exists(n, compilerOptions))
-            stop(gettextf("'%s' is not a valid compiler option", n),
-                 domain = NA)
+            stop(gettextf("'%s' is not a valid compiler option", n), domain = "R-compiler")
     old <- list()
     newOptions <- as.list(compilerOptions) # copy options
     for (n in nm) {
@@ -5309,7 +5287,7 @@ while (! identical(env, top)) {
     env <- parent.env(env)
     nl <- nl + 1
     if (identical(env, empty))
-        stop("not a proper evaluation environment")
+        stop("supplied 'env' argument is not a proper evaluation environment")
 }
 @ %def
 The number of namespace frames is computed by continuing down the
@@ -5326,7 +5304,7 @@ if (isNamespace(env)) {
         env <- parent.env(env)
         nn <- nn + 1
         if (identical(env, empty))
-            stop("not a proper evaluation environment")
+            stop("supplied 'env' argument is not a proper evaluation environment")
     }
 }
 @ %def
@@ -5383,7 +5361,7 @@ if (! isNamespace(ns)) {
     ## namespace.
     name <- attr(ns, "name")
     if (is.null(name))
-        stop("'ns' must be a namespace or a namespace imports environment")
+        stop("'ns' argument must be a namespace or a namespace imports environment")
     ns <- getNamespace(sub("imports:", "", attr(ns, "name")))
 }
 @ %def
