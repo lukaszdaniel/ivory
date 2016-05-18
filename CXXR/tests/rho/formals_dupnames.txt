@@ -1,5 +1,0 @@
-blue : BLUE
-violet : 
-grey : GREY
-violet : VIOLET
-white :

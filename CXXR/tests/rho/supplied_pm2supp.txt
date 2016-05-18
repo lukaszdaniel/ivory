@@ -1,8 +1,0 @@
-brown : brun
-red : rouge
-yellow : jaune
-gree : vert
-spurious : canard
-violet : violette
-gre : gris
-white : blanc

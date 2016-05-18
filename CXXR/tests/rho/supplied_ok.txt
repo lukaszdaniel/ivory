@@ -1,8 +1,0 @@
-: noir
-brown : brun
-: corail
-gre : gris
-ye : jaune
-: bleu
-red : rouge
-green : vert
