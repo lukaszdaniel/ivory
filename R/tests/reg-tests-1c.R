@@ -400,7 +400,7 @@ stopifnot(identical(ans2, myFormula))
 
 
 ## PR#15753
-0x110p-5L
+0x110p-5L # (+ warning)
 stopifnot(.Last.value == 8.5)
 ## was 272 with a garbled message in R 3.0.0 - 3.1.0.
 
@@ -1635,6 +1635,12 @@ stopifnot(identical(deparse(z, 200, control = "digits17"),
           ## deparse <-> parse equivalence, 17 digits should be perfect:
           all.equal(z2, eval(parse(text = dz2)), tolerance = 0))
 ## deparse() for these was "ugly" in R <= 3.3.0
+
+
+## length(environment(.)) == #{objects}
+stopifnot(identical(length(      baseenv()),
+                    length(names(baseenv()))))
+## was 0 in R <= 3.3.0
 
 
 

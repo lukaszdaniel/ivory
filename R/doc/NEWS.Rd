@@ -34,12 +34,14 @@
 
       \item \code{str()} and \code{strOptions()} get a new option
       \code{drop.deparse.attr} with improved but \emph{changed} default
-      behaviour for expressions.% plan: backport to 3.3.1
+      behaviour for expressions.  For \code{expression} objects
+      \code{x}, \code{str(x)} now may remove extraneous white space and
+      truncate long lines.
 
       \item \code{isSymmetric(m)} is much faster for large asymmetric
       matrices \code{m} via pre-tests and a new option \code{tol1}
       (with which strict back compatibility is possible but not the
-      default).% plan: backport
+      default).
 
       \item The result of \code{eigen()} now is of class \code{"eigen"}
       in the default case when eigenvectors are computed.
@@ -133,6 +135,13 @@
       incremental search and line editing after terminal resizing
       behaved confusingly in \R (unix) consoles.  This has been fixed
       thanks to patches by Frederick Eaton in \PR{16603} and \PR{16604}.
+
+      \item \code{length(baseenv())} is correct now.
+
+      \item \code{pretty(d, ..)} for date-time \code{d} rarely
+      failed on \sQuote{inaccurate} platforms such as 32-bit windows or
+      a configuration with \command{--disable-long-double}; see comment
+      #15 of \PR{16761}.
     }
   }
 }

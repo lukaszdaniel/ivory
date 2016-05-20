@@ -6835,7 +6835,7 @@ List of 11 components
  $ dev.resids:function (y, mu, wt)  
  $ aic       :function (y, n, mu, wt, dev)  
  $ mu.eta    :function (eta)  
- $ initialize:  expression({     n <- rep.int(1, nobs)     if (is.null(etastart) && is.null(start) && is.null(mustart) && ((family$link ==          "inverse" && any(y == 0)) || (family$link == "log" && any(y <=          0))))          stop("cannot find valid starting values: please specify some")     mustart <- y })
+ $ initialize:  expression({  n <- rep.int(1, nobs)  if (is.null(etastart) && is.null(start) && is.null(mustart) && ((family$link ==  "inverse" "| __truncated__
  $ validmu   :function (mu)  
  $ valideta  :function (eta)  
  - attr(*, "class")= character "family"
@@ -6856,7 +6856,7 @@ List of 12 components
  $ dev.resids:function (y, mu, wt)  
  $ aic       :function (y, n, mu, wt, dev)  
  $ mu.eta    :function (eta)  
- $ initialize:  expression({     if (any(y <= 0))          stop("non-positive values not allowed for the 'gamma' family")     n <- rep.int(1, nobs)     mustart <- y })
+ $ initialize:  expression({  if (any(y <= 0))  stop("non-positive values not allowed for the 'gamma' family")  n <- rep.int(1, nobs)  mustart <"| __truncated__
  $ validmu   :function (mu)  
  $ valideta  :function (eta)  
  $ simulate  :function (object, nsim)  
@@ -11448,16 +11448,14 @@ Warning in command 'xy.coords(x, y, xlabel, ylabel, log)':
 > 
 > require(graphics)
 > 
-> with(rock, {
-+ area1 <- area/10000; peri1 <- peri/10000
-+ par(mfrow = c(3,2)) # maybe: , pty = "s")
-+ rock.ppr <- ppr(log(perm) ~ area1 + peri1 + shape,
-+                 data = rock, nterms = 2, max.terms = 5)
-+ plot(rock.ppr, main = "ppr(log(perm)~ ., nterms=2, max.terms=5)")
-+ plot(update(rock.ppr, bass = 5), main = "update(..., bass = 5)")
-+ plot(update(rock.ppr, sm.method = "gcv", gcvpen = 2),
+> rock1 <- within(rock, { area1 <- area/10000; peri1 <- peri/10000 })
+> par(mfrow = c(3,2)) # maybe: , pty = "s")
+> rock.ppr <- ppr(log(perm) ~ area1 + peri1 + shape,
++                 data = rock1, nterms = 2, max.terms = 5)
+> plot(rock.ppr, main = "ppr(log(perm)~ ., nterms=2, max.terms=5)")
+> plot(update(rock.ppr, bass = 5), main = "update(..., bass = 5)")
+> plot(update(rock.ppr, sm.method = "gcv", gcvpen = 2),
 +      main = "update(..., sm.method=\"gcv\", gcvpen=2)")
-+ })
 > 
 > 
 > 

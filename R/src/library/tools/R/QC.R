@@ -3345,13 +3345,40 @@ function(aar, strict = FALSE)
             else {
                 attr(out, "Author") <- s
                 if(strict) {
-                    ## Specifically check for persons with missing or
-                    ## non-standard roles.
-                    s <- format(aar[sapply(aar,
-                                           utils:::.format_person_for_plain_author_spec)
-                                    == ""])
-                    if(length(s))
-                        out$bad_authors_at_R_field_has_author_without_role <- s
+                    has_no_name <- 
+                        vapply(aar,
+                               function(e)
+                               is.null(e$given) && is.null(e$family),
+                               NA)
+                    if(any(has_no_name)) {
+                        out$bad_authors_at_R_field_has_persons_with_no_name <-
+                            format(aar[has_no_name])
+                    }
+                    has_no_role <-
+                        vapply(aar,
+                               function(e) is.null(e$role),
+                               NA)
+                    if(any(has_no_role)) {
+                        out$bad_authors_at_R_field_has_persons_with_no_role <-
+                            format(aar[has_no_role])
+                    }
+                    if(all(has_no_name |
+                           vapply(aar,
+                                  function(e)
+                                  is.na(match("aut", e$role)),
+                                  NA)))
+                        out$bad_authors_at_R_field_has_no_author_roles <- TRUE
+                    non_standard_roles <-
+                        lapply(aar$role, setdiff,
+                               utils:::MARC_relator_db_codes_used_with_R)
+                    ind <- sapply(non_standard_roles, length) > 0L
+                    if(any(ind)) {
+                        out$bad_authors_at_R_field_has_persons_with_nonstandard_roles <-
+                            sprintf("%s: %s",
+                                    format(aar[ind]),
+                                    sapply(non_standard_roles[ind], paste,
+                                           collapse = ", "))
+                    }
                 }
             }
         }
