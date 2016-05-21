@@ -1633,7 +1633,7 @@ stopifnot(identical(deparse(z, 200, control = "digits17"),
                     paste0("c(", paste(fz0, collapse=", "), ")")),
           print((sum(nchar(dz2)) - 2) / length(z2)) < 22, # much larger in <= 3.3.0
           ## deparse <-> parse equivalence, 17 digits should be perfect:
-          all.equal(z2, eval(parse(text = dz2)), tolerance = 0))
+	  all.equal(z2, eval(parse(text = dz2)), tolerance = 3e-16)) # seen 2.2e-35 on 32b
 ## deparse() for these was "ugly" in R <= 3.3.0
 
 
