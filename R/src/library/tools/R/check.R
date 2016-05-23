@@ -654,7 +654,9 @@ setRlibs <-
         ## and does not check for persons with no valid roles.
         db <- .read_description(dfile)
         if(!is.na(aar <- db["Authors@R"])) {
-            out <- .check_package_description_authors_at_R_field(aar, strict = TRUE)
+            lev <- if(check_incoming) 2L else 1L
+            out <- .check_package_description_authors_at_R_field(aar,
+                                                                 strict = lev)
             if(length(out)) {
                 if(!any) noteLog(Log)
                 any <- TRUE
@@ -663,7 +665,7 @@ setRlibs <-
             }
             ## and there might be stale Authors and Maintainer fields
             yorig <- db[c("Author", "Maintainer")]
-            if(check_incoming &&any(!is.na(yorig))) {
+            if(check_incoming && any(!is.na(yorig))) {
                 enc <- db["Encoding"]
                 aar <- utils:::.read_authors_at_R_field(aar)
                 tmp <- utils:::.format_authors_at_R_field_for_author(aar)
@@ -2439,22 +2441,33 @@ setRlibs <-
                 wrapLog(gettext("Note that CRAN packages must never use more than two cores simultaneously during their checks.", domain = "R-tools"))
             }
             any <- any || bad
-            if (!any) resultLog(Log, "OK")
 
             if (do_timings) {
+                theta <-
+                    as.numeric(Sys.getenv("_R_CHECK_EXAMPLE_TIMING_THRESHOLD_",
+                                          "5"))
                 tfile <- paste0(pkgname, "-Ex.timings")
 		times <-
                     utils::read.table(tfile, header = TRUE, row.names = 1L,
                                       colClasses = c("character", rep("numeric", 3)))
-                o <- order(times[[1]]+times[[2]], decreasing = TRUE)
+                o <- order(times[[1L]] + times[[2L]], decreasing = TRUE)
                 times <- times[o, ]
-                keep <- (times[[1]] + times[[2]] > 5) | (times[[3]] > 5)
+                keep <- ((times[[1L]] + times[[2L]] > theta) |
+                         (times[[3L]] > theta))
                 if(any(keep)) {
-                    printLog(Log, gettext("Examples with CPU or elapsed time > 5s\n", domain = "R-tools"))
+                    if(!any) {
+                        resultLog(Log, gettext("NOTE", domain = "R-tools"))
+                        any <- TRUE
+                    }
+                    printLog(Log,
+                             gettextf("Examples with CPU or elapsed time > %gs\n",
+                                     theta, domain = "R-tools"))
                     times <- utils::capture.output(format(times[keep, ]))
                     printLog0(Log, paste(times, collapse = "\n"), "\n")
                 }
             }
+
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
 
             ## Try to compare results from running the examples to
             ## a saved previous version.
