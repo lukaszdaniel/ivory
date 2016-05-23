@@ -322,18 +322,42 @@ testInstalledPackage <-
             }
             if (file.exists(savefile)) {
                if (file.exists(savefile)) {
-                   message(gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(savefile))), appendLF = FALSE, domain = "R-tools")
-                    res <- Rdiff(outfile, savefile)
-                    if (!res) message(" OK")
-                    else if(strict)
-                        stop("  results differ from reference results")
+                   message(gettextf("  comparing %s to %s ...",
+                                    sQuote(outfile), sQuote(basename(savefile))),
+                           appendLF = FALSE, domain = "R-tools")
+                   cmd <-
+                       sprintf("invisible(tools::Rdiff('%s','%s',TRUE,TRUE))",
+                               outfile, savefile)
+                   out <- R_runR(cmd, "--vanilla --slave")
+                   if(length(out)) {
+                       if(strict)
+                           message(gettext(" ERROR", domain = "R-tools"))
+                       else
+                           message(gettext(" NOTE", domain = "R-tools"))
+                       writeLines(paste0("  ", out))
+                       if(strict)
+                           stop("  ",
+                                gettext("results differ from reference results", domain = "R-tools"))
+                   } else {
+                       message(gettext(" OK", domain = "R-tools"))
+                   }
                 }
             } else {
                 prevfile <- paste(outfile, "prev", sep = "." )
                 if (file.exists(prevfile)) {
-                    message(gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(prevfile))), appendLF = FALSE, domain = "R-tools")
-                    res <- Rdiff(outfile, prevfile)
-                    if (!res) message(" OK")
+                    message(gettextf("  comparing %s to %s ...",
+                            sQuote(outfile), sQuote(basename(prevfile))),
+                            appendLF = FALSE, domain = "R-tools")
+                    cmd <-
+                        sprintf("invisible(tools::Rdiff('%s','%s',TRUE,TRUE))",
+                                outfile, prevfile)
+                    out <- R_runR(cmd, "--vanilla --slave")
+                    if(length(out)) {
+                        message(gettext(" NOTE", domain = "R-tools"))
+                        writeLines(paste0("  ", out))
+                    } else {
+                        message(gettext(" OK", domain = "R-tools"))
+                    }
                 }
             }
         } else
