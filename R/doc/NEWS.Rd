@@ -70,6 +70,14 @@
 
       \item \code{sample.int()} got an explicit \code{useHash} option
       (with a back compatible default).
+
+      \item \code{identical()} gets an \code{ignore.srcref} option
+      which drops \code{"srcref"} and similar attributes when true (as
+      by default).
+
+      \item \code{diag(x, n=.)} now preserves \code{typeof(x)}, also
+      for logical, integer and raw \code{x} (and as previously for
+      complex and numeric).
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -102,6 +110,13 @@
       %% \code{NA}s identically, but showing real and imaginary parts
       %% for the \code{NaN} \dQuote{class}.
 
+      \item The API for readline libraries >= 6.3 had changed such
+      terminal window resizes where no longer properly signalled
+      (\PR{16604}).  Also, \command{Ctrl C} in incremental search
+      behaved confusingly in \R (unix) consoles (\PR{16603}) also for
+      older readline versions.  These have been fixed (for readline >=
+      6.3 only), thanks to patches by Frederick Eaton.
+
       \item \code{deparse(<complex>, options = "digits17")} prints more
       nicely now, mostly thanks to a suggestion by Richie Cotton.
     }
@@ -126,11 +141,6 @@
 
       \item \code{rgamma(1,Inf)} or \code{rgamma(1, 0,0)} no longer give
       \code{NaN} but the correct limit.
-
-      \item The API for readline libraries >= 6.3 had changed such that
-      incremental search and line editing after terminal resizing
-      behaved confusingly in \R (unix) consoles.  This has been fixed
-      thanks to patches by Frederick Eaton in \PR{16603} and \PR{16604}.
 
       \item \code{length(baseenv())} is correct now.
 
