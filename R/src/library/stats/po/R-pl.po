@@ -1023,10 +1023,10 @@ msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
 
 #. R/lm.R: stop("'simulate()' function is not yet implemented for multivariate 'lm()'")
 #: R/lm.R:0
-#, fuzzy
 msgid "'simulate()' function is not yet implemented for multivariate 'lm()'"
 msgstr ""
-"'se.fit()' nie jest jeszcze zaimplementowana dla wielowymiarowych modeli"
+"funkcja 'simulate()' nie jest jeszcze zaimplementowana dla wielowymiarowych "
+"'lm()'"
 
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
@@ -1641,9 +1641,8 @@ msgstr "Współczynniki  [kontrasty: %s]:"
 
 #. R/ppr.R: gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats")
 #: R/ppr.R:0
-#, fuzzy
 msgid "Coefficients of ridge terms ('beta'):"
-msgstr "Współczyniki członów grzbietowych:"
+msgstr "Współczynniki członów grzbietowych ('beta'):"
 
 #. R/HoltWinters.R: gettext("Coefficients:", domain = "R-stats")
 #. R/ar.R: gettext("Coefficients:", domain = "R-stats")
@@ -2622,9 +2621,8 @@ msgstr "Przewidziane wartości"
 
 #. R/ppr.R: gettext("Projection direction vectors ('alpha'):", domain = "R-stats")
 #: R/ppr.R:0
-#, fuzzy
 msgid "Projection direction vectors ('alpha'):"
-msgstr "Wektory kierunku rzutowania:"
+msgstr "Wektory kierunku rzutowania ('alpha'):"
 
 #. R/quade.test.R: gettext("Quade F", domain = "R-stats")
 #: R/quade.test.R:0

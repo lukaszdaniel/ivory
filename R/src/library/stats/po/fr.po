@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 12:35+0200\n"
+"POT-Creation-Date: 2016-05-24 22:01+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -136,8 +136,8 @@ msgstr "La fonction '%s' n'est pas dans la table des dérivées"
 
 #: deriv.c:634
 #, fuzzy, c-format
-msgid "'%s' argument must be an expression or call"
-msgstr "L'argument m doit être numérique"
+msgid "'%s' argument must not be of type '%s'"
+msgstr "'m' doit être une liste"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -1174,6 +1174,10 @@ msgstr "valeur manquante dans les %d dernières observations"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be an expression or call"
+#~ msgstr "L'argument m doit être numérique"
 
 #, fuzzy
 #~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 12:35+0200\n"
+"POT-Creation-Date: 2016-05-24 22:01+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -137,8 +137,8 @@ msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
 #: deriv.c:634
 #, fuzzy, c-format
-msgid "'%s' argument must be an expression or call"
-msgstr "인자 m 은 반드시 수치형이어야 합니다 "
+msgid "'%s' argument must not be of type '%s'"
+msgstr "'m' 은 반드시 list 이어야 합니다 "
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -1164,6 +1164,10 @@ msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be an expression or call"
+#~ msgstr "인자 m 은 반드시 수치형이어야 합니다 "
 
 #, fuzzy
 #~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"

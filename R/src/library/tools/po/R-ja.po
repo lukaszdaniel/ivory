@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-05-24 22:01\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -991,7 +991,8 @@ msgstr "EOFマーカーが見つかりませんでした "
 #. R/build.R: gettext("ERROR", domain = "R-tools")
 #. R/build.R: gettext("ERROR", domain = "R-tools")
 #. R/logging.R: gettext("ERROR", domain = "R-tools")
-#: R/build.R:0 R/logging.R:0
+#. R/testing.R: gettext(" ERROR", domain = "R-tools")
+#: R/build.R:0 R/logging.R:0 R/testing.R:0
 #, fuzzy
 msgid "ERROR"
 msgstr " エラー: "
@@ -1362,9 +1363,9 @@ msgstr ""
 msgid "Example timings for package %s:"
 msgstr " パッケージ %s に対する例文が見つかりません "
 
-#. R/check.R: gettext("Examples with CPU or elapsed time > 5s\n", domain = "R-tools")
+#. R/check.R: gettextf("Examples with CPU or elapsed time > %gs\n", theta, domain = "R-tools")
 #: R/check.R:0
-msgid "Examples with CPU or elapsed time > 5s"
+msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
@@ -2139,8 +2140,11 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
+#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
-#: R/logging.R:0
+#. R/testing.R: gettext(" NOTE", domain = "R-tools")
+#. R/testing.R: gettext(" NOTE", domain = "R-tools")
+#: R/check.R:0 R/logging.R:0 R/testing.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2427,9 +2431,11 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/checktools.R: gettext("OK", domain = "R-tools")
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
+#. R/testing.R: gettext(" OK", domain = "R-tools")
+#. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK\n", domain = "R-tools")
@@ -5654,7 +5660,7 @@ msgstr ""
 msgid "restoring previous package directory %s"
 msgstr " パッケージ dir "
 
-#. R/testing.R: stop("  results differ from reference results")
+#. R/testing.R: gettext("results differ from reference results", domain = "R-tools")
 #: R/testing.R:0
 #, fuzzy
 msgid "results differ from reference results"

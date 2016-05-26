@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-26 22:11\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -98,12 +98,6 @@ msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
 #. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
 #: R/convertColor.R:0
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
-msgstr "argument 'gamma' musi być liczbą lub wartością 'sRGB'"
-
-#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
-#: R/prettyDate.R:0
-#, fuzzy
-msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr "argument 'gamma' musi być liczbą lub wartością 'sRGB'"
 
 #. R/device.R: stop("'name' must be a character vector")
@@ -209,7 +203,7 @@ msgstr "program 'GhostScript' nie został znaleziony"
 #. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
 #: R/xyz.coords.R:0
 msgid "Index"
-msgstr ""
+msgstr "Indeks"
 
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
@@ -234,7 +228,7 @@ msgstr "Zapisane wykresy z R w wersji 1.4.0 lub późniejszej"
 #. R/xyz.coords.R: gettext("Time", domain = "R-grDevices")
 #: R/xyz.coords.R:0
 msgid "Time"
-msgstr ""
+msgstr "Czas"
 
 #. R/gevents.R: gettext("Waiting for input", domain = "R-grDevices")
 #: R/gevents.R:0
@@ -389,7 +383,7 @@ msgstr "wyświetl gamma = %s"
 #. R/prettyDate.R: stop("failed to add more ticks; 'min.n' argument too large?")
 #: R/prettyDate.R:0
 msgid "failed to add more ticks; 'min.n' argument too large?"
-msgstr ""
+msgstr "nie udało się dodać więcej kresek; argument 'min.n' jest zbyt duży?"
 
 #. R/calc.R: stop("finite coordinates are required")
 #: R/calc.R:0
@@ -734,6 +728,9 @@ msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "niepoprawna nazwa argumentu %s w '%s'"
 msgstr[1] "niepoprawne nazwy argumentów %s w '%s'"
 msgstr[2] "niepoprawne nazwy argumentów %s w '%s'"
+
+#~ msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
+#~ msgstr "argument 'mday' musi mieć wartość 1 lub 15 dla 'halfmonth'"
 
 #~ msgid "range too small for 'min.n'"
 #~ msgstr "zakres jest zbyt mały dla 'min.m'"

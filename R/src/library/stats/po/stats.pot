@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 12:35+0200\n"
+"POT-Creation-Date: 2016-05-24 22:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgstr ""
 
 #: deriv.c:634
 #, c-format
-msgid "'%s' argument must be an expression or call"
+msgid "'%s' argument must not be of type '%s'"
 msgstr ""
 
 #: deriv.c:637

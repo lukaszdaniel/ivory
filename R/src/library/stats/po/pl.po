@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 12:35+0200\n"
+"POT-Creation-Date: 2016-05-24 22:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: Srunmed.c:54
@@ -137,8 +137,8 @@ msgstr "Funkcja '%s' nie znajduje się w tablicy pochodnych"
 
 #: deriv.c:634
 #, c-format
-msgid "'%s' argument must be an expression or call"
-msgstr "argument '%s' musi być wyrażeniem lub wywołaniem"
+msgid "'%s' argument must not be of type '%s'"
+msgstr "argument '%s' nie może być typu '%s'"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -1176,6 +1176,9 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
+
+#~ msgid "'%s' argument must be an expression or call"
+#~ msgstr "argument '%s' musi być wyrażeniem lub wywołaniem"
 
 #~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
 #~ msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.4.0\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-26 22:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,13 +128,6 @@ msgstr ""
 #. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
 
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
-msgstr ""
-
-
-#: R/prettyDate.R: 0
-#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
-
-msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr ""
 
 

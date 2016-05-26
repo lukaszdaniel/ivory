@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
 #: R/cmp.R:0
@@ -140,9 +140,8 @@ msgstr "wykonano"
 
 #. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
 #: R/cmp.R:0
-#, fuzzy
 msgid "empty alternative in numeric 'switch()' function"
-msgstr "pusta alternatywa w numerycznej instrukcji 'switch'"
+msgstr "pusta alternatywa w numerycznej funkcji 'switch()'"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0

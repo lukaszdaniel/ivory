@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 12:35+0200\n"
+"POT-Creation-Date: 2016-05-24 22:01+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -136,8 +136,8 @@ msgstr ""
 
 #: deriv.c:634
 #, fuzzy, c-format
-msgid "'%s' argument must be an expression or call"
-msgstr "Argument m skal være numerisk"
+msgid "'%s' argument must not be of type '%s'"
+msgstr "'m' skal være en liste"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -1153,6 +1153,10 @@ msgstr "manglende værdi i sidste %d observationer"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be an expression or call"
+#~ msgstr "Argument m skal være numerisk"
 
 #, fuzzy
 #~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-26 22:11\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -103,12 +103,6 @@ msgstr "'file' deve ser uma cadeia de caracteres não-vazia"
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
-msgstr "'gamma' deve ser um escalar ou 'sRGB'"
-
-#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
-#: R/prettyDate.R:0
-#, fuzzy
-msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr "'gamma' deve ser um escalar ou 'sRGB'"
 
 #. R/device.R: stop("'name' must be a character vector")
@@ -752,6 +746,10 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "nomes de argumentos inválidos %s em '%s'"
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
+#~ msgstr "'gamma' deve ser um escalar ou 'sRGB'"
 
 #, fuzzy
 #~ msgid "range too small for 'min.n'"
