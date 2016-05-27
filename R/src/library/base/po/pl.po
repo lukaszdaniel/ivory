@@ -9059,14 +9059,12 @@ msgid "argument type[1]='%s' must be one of '1','O', or 'I'"
 msgstr "argument type[1]='%s' musi być jednym z '1','O', lub 'I'"
 
 #: src/modules/lapack/Lapack.c:98
-#, fuzzy
 msgid "non-integer dim(u)"
-msgstr "wymiary nie będące liczbami całkowitymi"
+msgstr "'dim(u)' nie jest liczbą całkowitą"
 
 #: src/modules/lapack/Lapack.c:101
-#, fuzzy
 msgid "non-integer dim(vt)"
-msgstr "wymiary nie będące liczbami całkowitymi"
+msgstr "'dim(vt)' nie jest liczbą całkowitą"
 
 #: src/modules/lapack/Lapack.c:114 src/modules/lapack/Lapack.c:121
 #: src/modules/lapack/Lapack.c:180 src/modules/lapack/Lapack.c:191

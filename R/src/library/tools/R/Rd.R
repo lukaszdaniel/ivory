@@ -774,7 +774,7 @@ function(db)
             stop(sprintf(ngettext(sum(idx),
                                   "missing/empty \\name field in Rd file\n%s",
                                   "missing/empty \\name field in Rd files\n%s", domain = "R-tools"),
-                         paste(" ", Rd_paths[idx], collapse = "\n")),
+                         paste0("  ", Rd_paths[idx], collapse = "\n")),
                  call. = FALSE, domain = NA)
         }
     }

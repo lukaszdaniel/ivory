@@ -690,6 +690,8 @@ msgstr "próba użycia 'locator' po 'dev.hold()'"
 #: devWindows.c:3159
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
+"urządzenie graficzne zostało zamknięte podczas wywołania lokatora lub "
+"identyfikacji"
 
 #: devWindows.c:3399
 msgid "option 'windowsTimeouts' should be integer"

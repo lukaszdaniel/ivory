@@ -276,6 +276,8 @@ msgid ""
 "'methods:::bind_activation(TRUE)' is deprecated;\n"
 " you should rather provide methods for 'cbind2()' / 'rbind2()'"
 msgstr ""
+"'methods:::bind_activation(TRUE)' jest przestarzałe;\n"
+"dostarcz metody dla  'cbind2()' / 'rbind2()'"
 
 #. R/MethodsListClass.R: gettextf("(All objects are from package %s)", unique(sQuote(pkg)), domain = "R-methods")
 #: R/MethodsListClass.R:0

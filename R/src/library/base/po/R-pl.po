@@ -27,6 +27,8 @@ msgid ""
 "%s and %s are not equal:\n"
 "  %s"
 msgstr ""
+"%s oraz %s nie są równe:\n"
+"  %s"
 
 #. R/namespace.R: gettextf("%s failed in %s function for namespace %s, details:\n  call: %s\n  error: %s",     sQuote(hookname), sQuote("attachNamespace()"), sQuote(nsname), deparse(conditionCall(res))[1L],     conditionMessage(res))
 #. R/namespace.R: gettextf("%s failed in %s function for namespace %s, details:\n  call: %s\n  error: %s",     sQuote(hookname), sQuote("unloadNamespace()"), sQuote(nsname), deparse(conditionCall(res))[1L],     conditionMessage(res))
@@ -2070,18 +2072,20 @@ msgstr "nie udało się znaleźć obiektu metadanych dla  %s"
 #. R/debug.R: stop("failed to load methods package for handling signature")
 #: R/debug.R:0
 msgid "failed to load methods package for handling signature"
-msgstr ""
+msgstr "nie udało się załadować pakietu 'methods' do obsługi sygnatur"
 
 #. R/debug.R: stop("failed to load methods package for undebugging by signature")
 #: R/debug.R:0
 msgid "failed to load methods package for undebugging by signature"
 msgstr ""
+"nie udało się załadować pakietu 'methods' do oddebugowywania przez sygnaturę"
 
 #. R/debug.R: stop("failed to load the methods package for debugging by signature")
 #. R/debug.R: stop("failed to load the methods package for debugging by signature")
 #: R/debug.R:0
 msgid "failed to load the methods package for debugging by signature"
 msgstr ""
+"nie udało się załadować pakietu 'methods' do debugowania przez sygnaturę"
 
 #. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
 #: R/windows/junctions.R:0

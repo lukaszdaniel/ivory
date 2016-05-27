@@ -233,7 +233,7 @@ function(dir, outDir)
         if(length(badFiles)) {
             out <- gettextf("\nduplicated files in %s field:", sQuote(collationField))
             out <- paste(out,
-                         paste(" ", badFiles, collapse = "\n"),
+                         paste0("  ", badFiles, collapse = "\n"),
                          sep = "\n")
             stop(out, domain = "R-tools")
         }
@@ -245,7 +245,7 @@ function(dir, outDir)
                             sQuote(collationField),
                             sQuote(codeDir))
             out <- paste(out,
-                         paste(" ", badFiles, collapse = "\n"),
+                         paste0("  ", badFiles, collapse = "\n"),
                          sep = "\n")
             stop(out, domain = "R-tools")
         }
@@ -258,7 +258,7 @@ function(dir, outDir)
                             sQuote(codeDir),
                             sQuote(collationField))
             out <- paste(out,
-                         paste(" ", badFiles, collapse = "\n"),
+                         paste0("  ", badFiles, collapse = "\n"),
                          sep = "\n")
             stop(out, domain = "R-tools")
         }
