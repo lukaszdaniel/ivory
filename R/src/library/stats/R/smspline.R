@@ -127,6 +127,7 @@ smooth.spline <-
         if(is.null(spar) || missing(spar)) { ## || spar == 0
             if(contr.sp$trace) -1L else 0L
         } else 1L
+    spar.is.lambda <- ispar == 1L && identical(names(spar), "lambda")
     spar <- if(ispar == 1L) as.double(spar) else double(1)
     ## was <- if(missing(spar)) 0 else if(spar < 1.01e-15) 0 else  1
     ## but package forecast passed a length-0 vector.
@@ -142,8 +143,8 @@ smooth.spline <-
 	    dofoff <- df
 	} else warning(gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx))
     }
-    iparms <- c(icrit=icrit, ispar=ispar, iter=as.integer(contr.sp$maxit))
-
+    iparms <- c(icrit=icrit, ispar=ispar, iter = as.integer(contr.sp$maxit),
+                spar.is.lambda)
     keep.stuff <- FALSE ## << to become an argument in the future
     ans.names <- c("coef","ty","lev","spar","parms","crit","iparms","ier",
                    if(keep.stuff) "scratch")
@@ -183,18 +184,20 @@ smooth.spline <-
 	    stop("NA lev[]; probably smoothing parameter 'spar' is way too large!")
     }
     if(fit$ier > 0L ) {
-        sml <- fit$spar < 0.5
-	if(sml)
-	 wtxt <- gettext("smoothing parameter value is too small")
-	else
-	 wtxt <- gettext("smoothing parameter value is too large")
-        if(sml) {
+	if(spar.is.lambda) { # not easy to know if small | large
+	 wtxt <- gettext("smoothing parameter value too extreme")
+	} else if(sml <- fit$spar < 0.5) {
+	 wtxt <- gettext("smoothing parameter value too small")
+	} else {
+	 wtxt <- gettext("smoothing parameter value too large")
+	}
+        if(spar.is.lambda || sml) {
             ## used to give warning too and mean() as below, but that's rubbish
             stop(wtxt)
         } else {
             fit$ty <- rep(mean(y), nx) ## would be df = 1
             df <- 1
-            warning(wtxt,"\n", "setting df = 1  __use with care!__", sep = "")
+            warning(wtxt,"\n", "setting 'df = 1'  __use with care!__", sep = "")
         }
     }
     cv.crit <-
@@ -205,21 +208,22 @@ smooth.spline <-
 	    weighted.mean(((y - fit$ty[ox])/(1 - (lev[ox] * w)/ww[ox]))^2, w)
 	} else weighted.mean((y - fit$ty[ox])^2, w)/
 	    (1 - (df.offset + penalty * df)/n)^2
-    pen.crit <- sum(wbar * (ybar - fit$ty)^2)
-    fit.object <- list(knot = knot, nk = nk, min = ux[1L], range = r.ux,
-		       coef = fit$coef)
-    class(fit.object) <- "smooth.spline.fit"
-    ## parms :  c(low = , high = , tol = , eps = )
-    object <- list(x = ux, y = fit$ty, w = wbar, yin = ybar,
-                   data = if(keep.data) list(x = x, y = y, w = w),
-		   lev = lev, cv.crit = cv.crit, pen.crit = pen.crit,
-                   crit = fit$crit,
-                   df = df, spar = fit$spar,
-                   lambda = unname(fit$parms["low"]),
-                   iparms = fit$iparms, # c(icrit= , ispar= , iter= )
-                   fit = fit.object, call = match.call())
-    class(object) <- "smooth.spline"
-    object
+    ## return :
+    structure(
+	## parms :  c(low = , high = , tol = , eps = )
+	list(x = ux, y = fit$ty, w = wbar, yin = ybar, tol = tol,
+	     data = if(keep.data) list(x = x, y = y, w = w),
+	     lev = lev, cv.crit = cv.crit,
+	     pen.crit = sum(wbar * (ybar - fit$ty)^2),
+	     crit = fit$crit,
+	     df = df, spar = if(spar.is.lambda) NA else fit$spar,
+	     lambda = unname(fit$parms["low"]),
+	     iparms = fit$iparms, # c(icrit= , ispar= , iter= )
+	     fit = structure(list(knot = knot, nk = nk, min = ux[1L], range = r.ux,
+				  coef = fit$coef),
+			     class = "smooth.spline.fit"),
+	     call = match.call()),
+	class = "smooth.spline")
 }
 
 fitted.smooth.spline <- function(object, ...) {
@@ -251,6 +255,15 @@ residuals.smooth.spline <-
     res
 }
 
+hatvalues.smooth.spline <- function (model, ...) {
+    if(!is.list(dat <- model$data))
+        stop("need result of 'smooth.spline(keep.data = TRUE)'")
+    ## "expand" leverages:
+    hat <- model$lev
+    hat[hat > 1 - 10 * .Machine$double.eps] <- 1 # as in hatvalues.lm
+    hat[match(dat$x, model$x)]
+}
+
 
 print.smooth.spline <- function(x, digits = getOption("digits"), ...)
 {
@@ -272,7 +285,8 @@ print.smooth.spline <- function(x, digits = getOption("digits"), ...)
     cat(gettextf("Penalized Criterion: %s", format(x$pen.crit, digits=digits), domain = "R-stats"))
     cat("\n")
     if(!is.na(cv))
-        cat(if(cv) "PRESS: " else "GCV: ", format(x$cv.crit, digits = digits), "\n", sep = "")
+	cat(if(cv) "PRESS(l.o.o. CV): " else "GCV: ",
+            format(x$cv.crit, digits = digits), "\n", sep = "")
     invisible(x)
 }
 

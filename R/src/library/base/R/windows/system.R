@@ -74,7 +74,10 @@ system2 <- function(command, args = character(),
 
     if(is.null(stdout)) stdout <- FALSE
     if(is.null(stderr)) stderr <- FALSE
-
+    
+    if(length(stdout) != 1L) stop(gettextf("'%s' argument must be of length 1", "stdout"))
+    if(length(stderr) != 1L) stop(gettextf("'%s' argument must be of length 1", "stderr"))
+    
     if (!is.null(input)) {
         f <- tempfile()
         on.exit(unlink(f))
