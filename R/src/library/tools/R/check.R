@@ -2458,7 +2458,7 @@ setRlibs <-
                          (times[[3L]] > theta))
                 if(any(keep)) {
                     if(!any && check_incoming)
-                        resultLog(Log, gettext("NOTE", domain = "R-tools"))
+                        noteLog(Log)
                     printLog(Log,
                              gettextf("Examples with CPU or elapsed time > %gs\n",
                                      theta, domain = "R-tools"))

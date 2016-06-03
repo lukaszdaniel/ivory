@@ -1686,6 +1686,20 @@ stopifnot(identical(Nni, names(as.factor(ni))),
 ## The first one lost names in  3.1.0 <= R <= 3.3.0
 
 
+## strtrim(<empty>, *) should work as substr(<empty>, *) does
+c0 <- character(0)
+stopifnot(identical(c0, strtrim(c0, integer(0))))
+## failed in R <= 3.3.0
+
+
+## Factors with duplicated levels {created via low-level code}:
+f0 <- factor(sample.int(9, 20, replace=TRUE))
+(f <- structure(f0, "levels" = as.character(c(2:7, 2:4))))
+tools::assertWarning(print(f))
+tools::assertError(validObject(f))
+## no warning in print() for R <= 3.3.x
+
+
 
 
 ## keep at end

@@ -89,6 +89,17 @@
       \item New option \code{rstandard(<lm>, type = "predicted")}
       provides the \dQuote{PRESS}-related leave-one-out
       cross-validation errors for linear models.
+
+      \item After seven years of deprecation, duplicated factor levels
+      now produce an error in \code{levels<-} instead of a warning, and
+      a warning when printed.
+
+      \item \code{str(<looooooooong_string>)} is no longer very slow;
+      inspired by Mikko Korpela's proposal in \PR{16527}.
+
+      \item Illegal factors, e.g., with duplicated levels (illegal but
+      constructable) now give a warning when printed, via new
+      \code{.valid.factor}.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -167,6 +178,8 @@
 
       \item \code{as.factor(c(a = 1L))} preserves \code{names()} again
       as in \R < 3.1.0.
+
+      \item \code{strtrim(""[0], 0[0])} now works.
     }
   }
 }
