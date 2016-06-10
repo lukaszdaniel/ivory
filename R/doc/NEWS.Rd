@@ -100,8 +100,17 @@
       \item Illegal factors, e.g., with duplicated levels (illegal but
       constructable) now give a warning when printed, via new
       \code{.valid.factor}.
+
+      \item \code{extSoftVersion()} now reports the version (if any) of
+      the \code{readline} library in use.
     }
   }
+  \subsection{INSTALLATION and INCLUDED SOFTWARE}{
+    \itemize{
+      \item \code{readline} headers (and not just the library) are
+      required unless configuring with \option{--with-readline=no}.
+    }
+  }  
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item The deprecated support for PCRE versions 8.10 to 8.31 will
@@ -132,12 +141,11 @@
       %% \code{NA}s identically, but showing real and imaginary parts
       %% for the \code{NaN} \dQuote{class}.
 
-      \item The API for readline libraries >= 6.3 had changed such
-      terminal window resizes where no longer properly signalled
-      (\PR{16604}).  Also, \command{Ctrl C} in incremental search
-      behaved confusingly in \R (unix) consoles (\PR{16603}) also for
-      older readline versions.  These have been fixed (for readline >=
-      6.3 only), thanks to patches by Frederick Eaton.
+      \item Versions of the \code{readline} library >= 6.3 had been
+      changed so that terminal window resizes were not signalled to
+      \code{readline}: code has been added using a explicit signal
+      handler to work around that (if \R was compiled under 6.3 or
+      later).  (\PR{16604})
 
       \item \code{deparse(<complex>, options = "digits17")} prints more
       nicely now, mostly thanks to a suggestion by Richie Cotton.
@@ -181,21 +189,27 @@
 
       \item \code{strtrim(""[0], 0[0])} now works.
 
+      \item Use of \code{Ctrl-C} to terminate a reverse incremental
+      search started by \code{Ctrl-R} in the \code{readline}-based Unix
+      terminal interface is now supported when \R{} was compiled against
+      \code{readline} >= 6.0 (\code{Ctrl-G} always worked).
+      (\PR{16603})
+
       \item \code{as<-()} avoids an infinite loop when a virtual class
-      intercedes between a subclass and an actual superclass.
+      is interposed between a subclass and an actual superclass.
 
       \item Fix level propagation in \code{unlist()} when the list
       contains zero-length lists or factors.
 
-      \item Fix S3 dispatch on S4 objects when the methods package is
+      \item Fix S3 dispatch on S4 objects when the \pkg{methods} package is
       not attached.
 
-      \item Internal S4 dispatch sets .Generic in the method frame for
+      \item Internal S4 dispatch sets \code{.Generic} in the method frame for
       consistency with \code{standardGeneric()} (\PR{16929}).
 
       \item Fix \code{order(x, decreasing=TRUE)} when \code{x} is an
       integer vector containing \code{MAX_INT}. Ported from a fix Matt
-      Dowle made to data.table.
+      Dowle made to \CRANpkg{data.table}.
     }
   }
 
