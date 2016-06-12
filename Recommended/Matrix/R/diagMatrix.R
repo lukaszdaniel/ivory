@@ -655,7 +655,10 @@ diagmatprod <- function(x, y) {
     ## x is diagonalMatrix
     dy <- dim(y)
     if(x@Dim[2L] != dy[1L]) stop("non-matching dimensions")
-    Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
+    if(prod(dy))
+	Matrix(if(x@diag == "U") y else x@x * y)
+    else
+	Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
 }
 setMethod("%*%", signature(x = "diagonalMatrix", y = "matrix"), diagmatprod)
 
@@ -664,7 +667,10 @@ diagmatprod2 <- function(x, y=NULL, boolArith = NA, ...) {
     ## x is diagonalMatrix
     dy <- dim(y)
     if(x@Dim[2L] != dy[1L]) stop("non-matching dimensions")
-    Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
+    if(prod(dy))
+	Matrix(if(x@diag == "U") y else x@x * y)
+    else
+	Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
 }
 setMethod("crossprod",  signature(x = "diagonalMatrix", y = "matrix"), diagmatprod2)
 

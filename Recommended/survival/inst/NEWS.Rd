@@ -1,11 +1,33 @@
 \name{NEWS}
 \title{NEWS file for the survival package}
+
+\section{Changes in version 2.39-4}{
+  \itemize{
+    \item Create a stronger test suite for summary.survreg, and use
+    it to actually fix the error that 2.39-3 claimed to fix.  This
+    uncovered a long-standing inaccuracy with n.risk for in-between
+    time points.
+    \item Add a section on monotone splines to the splines vignette.
+}}
+  
+\section{Changes in version 2.39-3}{
+  \itemize{
+    \item For multi-state curves, the returned n.event component lost
+    its dimensions if any of the curves had only one observation.
+
+    \item Fix error in summary.survreg.  For multiple curves and
+    requested time points at or before the first time point in the data,
+    the values from curve 1 was used for all.  Pointed out by T Eigentler.
+
+    \item Fix an unitialized variable in C code, pointed out by Brian Ripley.
+}}
+
 \section{Changes in version 2.39-2}{
   \itemize{
     \item Small updates based on feedback from CRAN
 }}
 
-\section{Changes in version 2.38-6}{
+\section{Changes in version 2.39-1}{
   \itemize{
     \item Label the output dimnames from pyears with the variable names
     from the model.  This makes it easier to read.

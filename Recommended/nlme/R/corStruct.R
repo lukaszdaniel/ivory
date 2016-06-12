@@ -19,6 +19,12 @@
 #  http://www.r-project.org/Licenses/
 #
 
+### FIXME: For larger problems, the approach of corFactor() / corMatrix() of
+### ------ of size sumLenSq := sum(len^2), len := table(groups) sucks !
+### Conceptually, one could consider using something like  Matrix::sparseVector(.)
+### but would have to deal with corresponding C code as well !
+
+
 ##*## Generics that should be implemented for any corStruct class
 
 corFactor <-
@@ -34,15 +40,24 @@ corMatrix <-
 ### There is no constructor function for this class (i.e. no function
 ### called corStruct) because the class is virtual.
 
+## --- We now check 'sumLenSq' when it is first computed!
+## .chkLenSq <- function(nn) {
+##   if(nn > .Machine$integer.max)
+##     stop(gettextf("'sumLenSq' = %g is too large (larger than maximal integer)",
+## 		  nn), domain = NA)
+##   else
+##     nn
+## }
+
 ###*# Methods for local generics
 
-corFactor.corStruct <-
-  function(object, ...)
+corFactor.corStruct <- function(object, ...)
 {
   if (!is.null(aux <- attr(object, "factor"))) {
     return(aux)
   }
   corD <- Dim(object)
+  ## .chkLenSq(corD[["sumLenSq"]])
   val <- .C(corStruct_factList,
 	    as.double(unlist(corMatrix(object))),
 	    as.integer(unlist(corD)),
@@ -62,15 +77,13 @@ corMatrix.corStruct <-
       stop(gettextf("do not know how to calculate correlation matrix of %s object", dQuote(class(object)[1])), domain = "R-nlme")
   } else {
     ## transpose inverse square root
-    if (data.class(covariate) == "list") {
-      if (is.null(names(covariate))) {
-	names(covariate) <- seq_along(covariate)
-      }
-      corD <- Dim(object, rep(names(covariate),
-			      lengths(covariate)))
-    } else {
-      corD <- Dim(object, rep(1, length(covariate)))
-    }
+    corD <- Dim(object,
+		if (data.class(covariate) == "list") {
+		  if (is.null(names(covariate)))
+		    names(covariate) <- seq_along(covariate)
+		  rep(names(covariate), lengths(covariate))
+		} else
+		  rep(1, length(covariate)))
     val <- .C(corStruct_factList,
 	      as.double(unlist(corMatrix(object, covariate))),
 	      as.integer(unlist(corD)),
@@ -96,8 +109,7 @@ corMatrix.corStruct <-
 
 ###*# Methods for standard generics
 
-as.matrix.corStruct <-
-  function(x, ...) corMatrix(x)
+as.matrix.corStruct <- function(x, ...) corMatrix(x)
 
 coef.corStruct <-
   ## Accessor for constrained or unconstrained parameters of
@@ -118,8 +130,7 @@ coef.corStruct <-
   }
 }
 
-"coef<-.corStruct" <-
-  function(object, ..., value)
+`coef<-.corStruct` <- function(object, ..., value)
 {
   ## Assignment of the unconstrained parameter of corStruct objects
   value <- as.numeric(value)
@@ -135,19 +146,23 @@ coef.corStruct <-
   object
 }
 
-Dim.corStruct <-
-  function(object, groups, ...)
+Dim.corStruct <- function(object, groups, ...)
 {
   if (missing(groups)) return(attr(object, "Dim"))
   ugrp <- unique(groups)
   groups <- factor(groups, levels = ugrp)
   len <- table(groups)
+  suml2 <- sum(len^2)
+  if(suml2 > .Machine$integer.max)
+    stop(gettextf(
+      "'sumLenSq := sum(table(groups)^2)' = %g is too large. Too large or no groups in your correlation structure?",
+		  suml2), call. = FALSE, domain = "R-nlme")
   list(N = length(groups),
        M = length(len),
        maxLen = max(len),
-       sumLenSq = sum(len^2),
+       sumLenSq = suml2,
        len = len,
-       start = match(ugrp, groups) - 1)
+       start = match(ugrp, groups) - 1L)
 }
 
 formula.corStruct <-
@@ -166,11 +181,8 @@ getCovariate.corStruct <-
       stop(gettextf("'%s' argument is required in order to calculate covariate of an object of class %s", "data", dQuote("corStruct")))
     }
     covForm <- getCovariateFormula(form)
-    if (!is.null(getGroupsFormula(form))) {
-      grps <- getGroups(object, data = data)
-    } else {
-      grps <- NULL
-    }
+    grps <- if(!is.null(getGroupsFormula(form)))
+                getGroups(object, data = data) ## else NULL
     if (length(all.vars(covForm)) > 0) { # primary covariate present
       if (is.null(grps)) {
         covar <- getCovariate(data, covForm)
@@ -247,9 +259,9 @@ logDet.corStruct <-
     ## checking for logDet attribute; if not present, get corr matrix
     aux <- corMatrix(object, covariate)
     if (data.class(aux) == "list") {    # by group
-      sum(log(abs(unlist(lapply(aux, function(el) svd(el)$d)))))/2
+      sum(log(abs(unlist(lapply(aux, svd.d)))))/2
     } else {
-      sum(log(abs(svd(aux)$d)))/2
+      sum(log(abs(svd.d(aux))))/2
     }
   } else {
     -aux1
@@ -257,11 +269,9 @@ logDet.corStruct <-
 }
 
 ## NB, no "nobs"
-logLik.corStruct <-
-  function(object, data, ...) -logDet(object)
+logLik.corStruct <- function(object, data, ...) -logDet(object)
 
-needUpdate.corStruct <-
-  function(object) FALSE
+needUpdate.corStruct <- function(object) FALSE
 
 print.corStruct <- function(x, ...)
 {
@@ -331,8 +341,7 @@ corSymm <-
 
 ###*# Methods for local generics
 
-corFactor.corSymm <-
-  function(object, ...)
+corFactor.corSymm <- function(object, ...)
 {
   corD <- Dim(object)
   val <- .C(symm_factList,
@@ -351,15 +360,13 @@ corFactor.corSymm <-
 corMatrix.corSymm <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   if (corr) {
     val <- .C(symm_matList,
 	      as.double(as.vector(object)),
@@ -396,8 +403,7 @@ corMatrix.corSymm <-
 
 ###*# Methods for standard generics
 
-coef.corSymm <-
-  function(object, unconstrained = TRUE, ...)
+coef.corSymm <- function(object, unconstrained = TRUE, ...)
 {
   if (unconstrained) {
     if (attr(object, "fixed")) {
@@ -411,8 +417,7 @@ coef.corSymm <-
      as.integer(mC), corr = double(round(mC * (mC - 1) / 2)))[["corr"]]
 }
 
-"coef<-.corSymm" <-
-  function(object, ..., value)
+`coef<-.corSymm` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corSymm")))
@@ -432,8 +437,7 @@ coef.corSymm <-
   object
 }
 
-Initialize.corSymm <-
-  function(object, data, ...)
+Initialize.corSymm <- function(object, data, ...)
 {
   if (!is.null(attr(object, "maxCov"))) {# initialized - nothing to do
     return(object)
@@ -491,11 +495,9 @@ Initialize.corSymm <-
   object
 }
 
-print.corSymm <-
-  function(x, ...)
+print.corSymm <- function(x, ...)
 {
-  if (length(as.vector(x)) > 0 &&
-      !is.null(mC <- attr(x, "maxCov"))) {
+  if (length(as.vector(x)) > 0 && !is.null(mC <- attr(x, "maxCov"))) {
     aux <- coef.corSymm(x, unconstrained = FALSE)
     val <- diag(mC)
     dimnames(val) <- list(seq_len(mC), seq_len(mC))
@@ -508,11 +510,9 @@ print.corSymm <-
   invisible(x)
 }
 
-print.summary.corSymm <-
-  function(x, ...)
+print.summary.corSymm <- function(x, ...)
 {
-  if (length(as.vector(x)) > 0 &&
-      !is.null(mC <- attr(x, "maxCov"))) {
+  if (length(as.vector(x)) > 0 && !is.null(mC <- attr(x, "maxCov"))) {
     cat(gettext("Correlation Structure: General", domain = "R-nlme"), "\n", sep = "")
     cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
     cat(gettext(" Parameter estimates:", domain = "R-nlme"), "\n", sep = "")
@@ -525,8 +525,7 @@ print.summary.corSymm <-
   invisible(x)
 }
 
-recalc.corSymm <-
-  function(object, conLin, ...)
+recalc.corSymm <- function(object, conLin, ...)
 {
   val <-
     .C(symm_recalc,
@@ -542,8 +541,7 @@ recalc.corSymm <-
   conLin
 }
 
-summary.corSymm <-
-  function(object, structName = gettext("General correlation", domain = "R-nlme"), ...)
+summary.corSymm <- function(object, structName = gettext("General correlation", domain = "R-nlme"), ...)
 {
   attr(object, "structName") <- structName
   class(object) <- "summary.corSymm"
@@ -554,9 +552,7 @@ summary.corSymm <-
 
 ####* Constructor
 
-corNatural <-
-  ## Constructor for the corSymm class
-  function(value = numeric(0), form = ~ 1, fixed = FALSE)
+corNatural <- function(value = numeric(0), form = ~ 1, fixed = FALSE)
 {
   attr(value, "formula") <- form
   attr(value, "fixed") <- fixed
@@ -566,8 +562,7 @@ corNatural <-
 
 ###*# Methods for local generics
 
-corFactor.corNatural <-
-  function(object, ...)
+corFactor.corNatural <- function(object, ...)
 {
   corD <- Dim(object)
   val <- .C(nat_factList,
@@ -586,15 +581,13 @@ corFactor.corNatural <-
 corMatrix.corNatural <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   if (corr) {
     val <- .C(nat_matList,
 	      as.double(as.vector(object)),
@@ -617,8 +610,8 @@ corMatrix.corNatural <-
   if (corD[["M"]] > 1) {
     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
     val <- lapply(val, function(el) {
-      nel <- round(sqrt(length(el)))
-      array(el, c(nel, nel))
+        nel <- round(sqrt(length(el)))
+        array(el, c(nel, nel))
     })
     names(val) <- names(corD[["len"]])
     val <- as.list(val)
@@ -644,15 +637,12 @@ coef.corNatural <-
   mC <- attr(object, "maxCov")
   val <- .C(nat_fullCorr, as.double(object),
             as.integer(mC), corr = double(round(mC * (mC - 1) / 2)))[["corr"]]
-  names(val) <- outer(seq_len(mC), seq_len(mC),
-                      function(x,y) {
-                        paste("cor(",y,",",x,")",sep="")
-                      })[lower.tri(diag(mC))]
+  names(val) <- outer(seq_len(mC), seq_len(mC), function(x,y) paste0("cor(",y,",",x,")"))[
+      lower.tri(diag(mC))]
   val
 }
 
-"coef<-.corNatural" <-
-  function(object, ..., value)
+`coef<-.corNatural` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corNatural")))
@@ -672,8 +662,7 @@ coef.corNatural <-
   object
 }
 
-Initialize.corNatural <-
-  function(object, data, ...)
+Initialize.corNatural <- function(object, data, ...)
 {
   if (!is.null(attr(object, "maxCov"))) {# initialized - nothing to do
     return(object)
@@ -725,8 +714,7 @@ Initialize.corNatural <-
   object
 }
 
-print.corNatural <-
-  function(x, ...)
+print.corNatural <- function(x, ...)
 {
   if (length(as.vector(x)) > 0 &&
       !is.null(mC <- attr(x, "maxCov"))) {
@@ -819,8 +807,7 @@ corMatrix.corIdent <-
 coef.corIdent <-
   function(object, unconstrained = TRUE, ...) numeric(0)
 
-"coef<-.corIdent" <-
-  function(object, ..., value) object
+`coef<-.corIdent` <- function(object, ..., value) object
 
 Initialize.corIdent <-
   function(object, data, ...)
@@ -859,14 +846,16 @@ corAR1 <-
 
 ###*# Methods for local generics
 
-corFactor.corAR1 <-
-  function(object, ...)
+corFactor.corAR1 <- function(object, ...)
 {
   corD <- Dim(object)
+  if(corD[["sumLenSq"]] > .Machine$integer.max)
+    stop(gettextf("'sumLenSq' = %g is too large (larger than maximal integer)",
+		  corD[["sumLenSq"]]), domain = "R-nlme")
   val <- .C(AR1_factList,
 	    as.double(as.vector(object)),
 	    as.integer(unlist(corD)),
-	    factor = double(corD[["sumLenSq"]]),
+	    factor = double(corD[["sumLenSq"]]), ## of size n^2 -- too large !!
 	    logDet = double(1))[c("factor", "logDet")]
   lD <- val[["logDet"]]
   val <- val[["factor"]]
@@ -877,15 +866,13 @@ corFactor.corAR1 <-
 corMatrix.corAR1 <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   if (corr) {
     val <- .C(AR1_matList,
 	      as.double(as.vector(object)),
@@ -934,8 +921,7 @@ coef.corAR1 <-
   aux
 }
 
-"coef<-.corAR1" <-
-  function(object, ..., value)
+`coef<-.corAR1` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corAR1")))
@@ -1041,15 +1027,13 @@ corFactor.corCAR1 <-
 corMatrix.corCAR1 <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   if (corr) {
     val <- .C(CAR1_matList,
 	      as.double(as.vector(object)),
@@ -1100,8 +1084,7 @@ coef.corCAR1 <-
   aux
 }
 
-"coef<-.corCAR1" <-
-  function(object, ..., value)
+`coef<-.corCAR1` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCAR1")))
@@ -1221,15 +1204,13 @@ corFactor.corARMA <-
 corMatrix.corARMA <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   p <- attr(object, "p")
   q <- attr(object, "q")
   maxLag <- attr(object, "maxLag")
@@ -1299,8 +1280,7 @@ coef.corARMA <-
   val
 }
 
-"coef<-.corARMA" <-
-  function(object, ..., value)
+`coef<-.corARMA` <- function(object, ..., value)
 {
   maxLag <- attr(object, "maxLag")
   if(is.null(maxLag)) stop("'object' argument has not been initialized with 'Initialize()' function")
@@ -1418,15 +1398,13 @@ corFactor.compSymm <-
 corMatrix.corCompSymm <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    lengths(covariate)))
-  } else {
-    corD <- Dim(object, rep(1, length(covariate)))
-  }
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), lengths(covariate))
+	      } else
+		rep(1, length(covariate)))
   if (corr) {
     val <- .C(compSymm_matList,
 	      as.double(as.vector(object)),
@@ -1477,8 +1455,7 @@ coef.corCompSymm <-
   val
 }
 
-"coef<-.corCompSymm" <-
-  function(object, ..., value)
+`coef<-.corCompSymm` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCompSymm")))
@@ -1571,15 +1548,13 @@ summary.corCompSymm <-
 #corMatrix.corHF <-
 #  function(object, covariate = getCovariate(object), corr = TRUE)
 #{
-#  if (data.class(covariate) == "list") {
-#    if (is.null(names(covariate))) {
-#      names(covariate) <- seq_along(covariate)
-#    }
-#    corD <- Dim(object, rep(names(covariate),
-#			    lengths(covariate)))
-#  } else {
-#    corD <- Dim(object, rep(1, length(covariate)))
-#  }
+#   corD <- Dim(object,
+# 	      if (data.class(covariate) == "list") {
+# 		if (is.null(names(covariate)))
+# 		  names(covariate) <- seq_along(covariate)
+# 		rep(names(covariate), lengths(covariate))
+# 	      } else
+# 		rep(1, length(covariate)))
 #  if (corr) {
 #    val <- .C("HF_matList",
 #	      as.double(as.vector(object)),
@@ -1772,16 +1747,15 @@ corFactor.corSpatial <-
 corMatrix.corSpatial <-
   function(object, covariate = getCovariate(object), corr = TRUE, ...)
 {
-  if (data.class(covariate) == "list") {
-    if (is.null(names(covariate))) {
-      names(covariate) <- seq_along(covariate)
-    }
-    corD <- Dim(object, rep(names(covariate),
-			    unlist(lapply(covariate,
-		  function(el) round((1 + sqrt(1 + 8 * length(el)))/2)))))
-  } else {
-    corD <- Dim(object, rep(1, round((1 + sqrt(1 + 8* length(covariate)))/2)))
-  }
+  nRt <- function(vec) round((1 + sqrt(1 + 8 * length(vec))) / 2)
+  corD <- Dim(object,
+	      if (data.class(covariate) == "list") {
+		if (is.null(names(covariate)))
+		  names(covariate) <- seq_along(covariate)
+		rep(names(covariate), vapply(covariate, nRt, numeric(1)))
+	      }
+	      else
+		rep(1, nRt(covariate)))
   if (corr) {
     val <- .C(spatial_matList,
 	      as.double(as.vector(object)),
@@ -1834,13 +1808,11 @@ coef.corSpatial <-
     val <- exp(val)
     if (attr(object, "nugget")) val[2] <- val[2]/(1+val[2])
   }
-  if (attr(object, "nugget")) names(val) <- c("range", "nugget")
-  else names(val) <- "range"
+  names(val) <- if(attr(object, "nugget")) c("range", "nugget") else "range"
   val
 }
 
-"coef<-.corSpatial" <-
-  function(object, ..., value)
+`coef<-.corSpatial` <- function(object, ..., value)
 {
   if (length(value) != length(object)) {
     stop("cannot change the length of the parameter after initialization")
@@ -1861,8 +1833,7 @@ coef.corSpatial <-
   object
 }
 
-Dim.corSpatial <-
-  function(object, groups, ...)
+Dim.corSpatial <- function(object, groups, ...)
 {
   if (missing(groups)) return(attr(object, "Dim"))
   val <- Dim.corStruct(object, groups)
@@ -2313,6 +2284,5 @@ Variogram.corSpher <-
 ### Local variables:
 ### mode: outline-minor
 ### outline-regexp: "\^L\\|\\`#\\|##\\*\\|###\\*\\|[a-zA-Z]\\|\\\"[a-zA-Z]\\|####\\*"
+### ess-indent-offset: 2
 ### End:
-
-

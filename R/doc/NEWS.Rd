@@ -109,8 +109,19 @@
     \itemize{
       \item \code{readline} headers (and not just the library) are
       required unless configuring with \option{--with-readline=no}.
+
+      \item Versions of the \code{readline} library >= 6.3 had been
+      changed so that terminal window resizes were not signalled to
+      \code{readline}: code has been added using a explicit signal
+      handler to work around that (if \R was compiled against readline
+      >= 6.3).  (\PR{16604})
+      %% The intention is to port this to 3.3.1 patched.
+
+      \item (Windows only) Tcl/Tk version 8.6.4 is now included in the
+      binary builds. The \file{tcltk*.chm} help file is no longer
+      included; please use \url{http://www.tcl.tk/man/} instead.
     }
-  }  
+  }
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item The deprecated support for PCRE versions 8.10 to 8.31 will
@@ -141,19 +152,13 @@
       %% \code{NA}s identically, but showing real and imaginary parts
       %% for the \code{NaN} \dQuote{class}.
 
-      \item Versions of the \code{readline} library >= 6.3 had been
-      changed so that terminal window resizes were not signalled to
-      \code{readline}: code has been added using a explicit signal
-      handler to work around that (if \R was compiled under 6.3 or
-      later).  (\PR{16604})
-
       \item \code{deparse(<complex>, options = "digits17")} prints more
       nicely now, mostly thanks to a suggestion by Richie Cotton.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.3.0 patched}{
+\section{\Rlogo CHANGES IN R 3.3.1}{
   \subsection{BUG FIXES}{
     \itemize{
       \item \command{R CMD INSTALL} and hence \code{install.packages()}
@@ -210,16 +215,11 @@
       \item Fix \code{order(x, decreasing=TRUE)} when \code{x} is an
       integer vector containing \code{MAX_INT}. Ported from a fix Matt
       Dowle made to \CRANpkg{data.table}.
+
+      \item \code{diff(<difftime>)} now keeps the \code{"units"}
+      attribute, as subtraction already did, \PR{16940}.
     }
   }
-
-  \subsection{INSTALLATION and INCLUDED SOFTWARE}{
-    \itemize{
-      \item (Windows only) Tcl/Tk version 8.6.4 is now included in the
-      binary builds. The \file{tcltk*.chm} help file is no longer 
-      included; please use \url{http://www.tcl.tk/man/} instead.
-    }
-  }  
 }
 
 \section{\Rlogo CHANGES IN R 3.3.0}{
