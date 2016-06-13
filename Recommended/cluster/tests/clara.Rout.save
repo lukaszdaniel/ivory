@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-03-03 r635) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-03-03 r70269) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1490,10 +1490,10 @@ $sample
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  2.328 0.116 2.447 0 0 
+Time elapsed:  1.68 0.008 1.688 0 0 
 > ## Lynne (P IV, 1.6 GHz): 18.81; then (no NA; R 1.9.0-alpha): 15.07
 > ## nb-mm (P III,700 MHz): 27.97
 > 
 > proc.time()
    user  system elapsed 
-  2.524   0.136   2.653 
+  1.772   0.016   1.784 

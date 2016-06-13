@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-06-06 r760) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-06-06 r70718) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -919,6 +919,6 @@ Error in command 'nchar(x, "w")': invalid multibyte string, element 10
 +     rm(M)
 +     detach("package:Matrix", unload=TRUE)
 + }##{Matrix}
-Loading required package: Matrix
+Loading required package: 'Matrix'
 > 
 > 
