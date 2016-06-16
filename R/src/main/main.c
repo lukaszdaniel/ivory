@@ -565,13 +565,13 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	REprintf("\n");
 		break;
 #endif
-#ifdef BUS_ADRERR /* not on MacOS X, apparently */
+#ifdef BUS_ADRERR /* not on macOS, apparently */
 	    case BUS_ADRERR:
 	REprintf(_("address %p, cause: non-existent physical address"), ip->si_addr);
 	REprintf("\n");
 		break;
 #endif
-#ifdef BUS_OBJERR /* not on MacOS X, apparently */
+#ifdef BUS_OBJERR /* not on macOS, apparently */
 	    case BUS_OBJERR:
 	REprintf(_("address %p, cause: object specific hardware error"), ip->si_addr);
 	REprintf("\n");

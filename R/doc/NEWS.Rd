@@ -101,8 +101,11 @@
       constructable) now give a warning when printed, via new
       \code{.valid.factor}.
 
-      \item \code{extSoftVersion()} now reports the version (if any) of
-      the \code{readline} library in use.
+      \item \code{sessionInfo()} has been updated for Apple's change in
+      OS naming as from \sQuote{10.12} (\sQuote{macOS Sierra}).
+
+      Its \code{toLatex()} method now includes the \code{running}
+      component.
     }
   }
   \subsection{INSTALLATION and INCLUDED SOFTWARE}{
@@ -110,16 +113,10 @@
       \item \code{readline} headers (and not just the library) are
       required unless configuring with \option{--with-readline=no}.
 
-      \item Versions of the \code{readline} library >= 6.3 had been
-      changed so that terminal window resizes were not signalled to
-      \code{readline}: code has been added using a explicit signal
-      handler to work around that (when \R is compiled against readline
-      >= 6.3).  (\PR{16604})
-      %% The intention is to port this to 3.3.1 patched.
-
       \item (Windows only) Tcl/Tk version 8.6.4 is now included in the
       binary builds.  The \file{tcltk*.chm} help file is no longer
-      included; please use \url{http://www.tcl.tk/man/} instead.
+      included; please consult the online help at
+      \url{http://www.tcl.tk/man/} instead.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -154,6 +151,28 @@
 
       \item \code{deparse(<complex>, options = "digits17")} prints more
       nicely now, mostly thanks to a suggestion by Richie Cotton.
+
+      \item Rotated symbols in plotmath expressions are now positioned
+      correctly on \code{x11(type = "Xlib")}. (\PR{16948})
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 3.3.1 patched}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{extSoftVersion()} now reports the version (if any) of
+      the \code{readline} library in use.
+    }
+  }
+
+  \subsection{INSTALLATION and INCLUDED SOFTWARE}{
+    \itemize{
+      \item Versions of the \code{readline} library >= 6.3 had been
+      changed so that terminal window resizes were not signalled to
+      \code{readline}: code has been added using a explicit signal
+      handler to work around that (when \R is compiled against readline
+      >= 6.3).  (\PR{16604})
     }
   }
 }

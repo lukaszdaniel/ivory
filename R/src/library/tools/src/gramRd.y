@@ -30,6 +30,7 @@
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <ctype.h>
 #include <Rmath.h> /* for imax2(.),..*/
+#include <R_ext/Minmax.h>
 #include "localization.h"
 
 /* bison creates a non-static symbol yylloc in both gramLatex.o and gramRd.o,
@@ -543,7 +544,7 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
     }
     for (c = CHAR(STRING_ELT(thedefn, 0)); *c; c++) {
     	if (*c == '#' && isdigit(*(c+1))) 
-    	    maxarg = imax2(maxarg, *(c+1) - '0');
+    	    maxarg = max(maxarg, *(c+1) - '0');
     }
     if (maxarg > 4) {
     	snprintf(buffer, sizeof(buffer), _("At most 4 arguments are allowed for user defined macros."));
@@ -841,7 +842,7 @@ static int xxungetc(int c)
     	R_ParseContextLine = parseState.xxlineno;
     
     	R_ParseContext[R_ParseContextLast] = '\0';
-    	/* Mac OS X requires us to keep this non-negative */
+    	/* macOS requires us to keep this non-negative */
     	R_ParseContextLast = (R_ParseContextLast + PARSE_CONTEXT_SIZE - 1) 
 		% PARSE_CONTEXT_SIZE;
     }

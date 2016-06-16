@@ -56,7 +56,8 @@ sessionInfo <- function(package = NULL)
                        ver <- sub(".*<string>", "", ver)
                        ver <- sub("</string>$", "", ver)
                        ver1 <- strsplit(ver, ".", fixed = TRUE)[[1L]][2L]
-                       sprintf("OS X %s (%s)", ver,
+                       sprintf("%s %s (%s)",
+                               ifelse(ver1 < 12, "OS X", "macOS"),
                                switch(ver1,
                                       "4" = "Tiger",
                                       "5" = "Leopard",
@@ -66,7 +67,8 @@ sessionInfo <- function(package = NULL)
                                       "9" = "Mavericks",
                                       "10" = "Yosemite",
                                       "11" = "El Capitan",
-                                      "unknown"))
+                                      "12" = "Sierra",
+                                      "unknown"), ver)
                    },
                    "SunOS" = {
                        ver <- system('uname -r', intern = TRUE)
@@ -106,7 +108,7 @@ sessionInfo <- function(package = NULL)
     z
 }
 
-print.sessionInfo <- function(x, locale=TRUE, ...)
+print.sessionInfo <- function(x, locale = TRUE, ...)
 {
     mkLabel <- function(L, n) {
         vers <- sapply(L[[n]], function(x) x[["Version"]])
@@ -118,7 +120,7 @@ print.sessionInfo <- function(x, locale=TRUE, ...)
     cat(gettext("Platform: ", domain = "R-utils"), x$platform, "\n", sep = "")
     if (!is.null(x$running)) cat(gettext("Running under:", domain = "R-utils"), " ", x$running, "\n", sep = "")
     cat("\n")
-    if(locale){
+    if(locale) {
         cat(gettext("locale:", domain = "R-utils"), "\n", sep = "")
 	print(strsplit(x$locale, ";", fixed=TRUE)[[1]], quote=FALSE, ...)
         cat("\n")
@@ -127,16 +129,16 @@ print.sessionInfo <- function(x, locale=TRUE, ...)
     print(x$basePkgs, quote=FALSE, ...)
     if(!is.null(x$otherPkgs)){
         cat("\n", gettext("other attached packages:", domain = "R-utils"), "\n", sep = "")
-	print(mkLabel(x, "otherPkgs"), quote=FALSE, ...)
+	print(mkLabel(x, "otherPkgs"), quote = FALSE, ...)
     }
     if(!is.null(x$loadedOnly)){
         cat("\n", gettext("loaded via a namespace (and not attached):", domain = "R-utils"), "\n", sep = "")
-	print(mkLabel(x, "loadedOnly"), quote=FALSE, ...)
+	print(mkLabel(x, "loadedOnly"), quote = FALSE, ...)
     }
     invisible(x)
 }
 
-toLatex.sessionInfo <- function(object, locale=TRUE, ...)
+toLatex.sessionInfo <- function(object, locale = TRUE, ...)
 {
     opkgver <- sapply(object$otherPkgs, function(x) x$Version)
     nspkgver <- sapply(object$loadedOnly, function(x) x$Version)
@@ -144,11 +146,15 @@ toLatex.sessionInfo <- function(object, locale=TRUE, ...)
            paste0("  \\item ", object$R.version$version.string,
                   ", \\verb|", object$R.version$platform, "|"))
 
-    if(locale){
+    if(locale) {
         z <- c(z,
                paste0("  \\item Locale: \\verb|",
                       gsub(";","|, \\\\verb|", object$locale) , "|"))
     }
+
+    z <- c(z,
+           paste0("  \\item Running under: \\verb|",
+                  gsub(";","|, \\\\verb|", object$running) , "|"))
 
     z <- c(z, strwrap(paste("\\item Base packages: ",
                          paste(sort(object$basePkgs), collapse = ", ")),
