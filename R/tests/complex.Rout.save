@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-06-20 r770) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-06-20 r70799) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -262,8 +262,8 @@ n= 30 : 465+0i -15+142.7155i -15+70.56945i -15+46.16525i -15+33.69055i -15+25.98
 > atan(z)
 [1]  1.5708+0.5493i  1.5708+0.5493i -1.5708-0.5493i -1.5708-0.5493i
 > ## According to C99, should have continuity from the side given if there
-> ## are not signed zeros
-> ## Both glibc 2.12 and macOS 10.6 use continuity from above in the first set
+> ## are not signed zeros.
+> ## Both glibc 2.12 and macOS 10.6 used continuity from above in the first set
 > ## but they seem to assume signed zeros.
 > ## Windows gave incorrect (NaN) values on the cuts.
 > 
