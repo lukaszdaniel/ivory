@@ -5193,6 +5193,14 @@ static R_INLINE Rboolean GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
     }
 }
 
+static SEXP markSpecialArgs(SEXP args)
+{
+    SEXP arg;
+    for(arg = args; arg != R_NilValue; arg = CDR(arg))
+	MARK_NOT_MUTABLE(CAR(arg));
+    return args;
+}
+
 static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 {
   SEXP value = R_NilValue, constants;
@@ -5646,7 +5654,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	case SPECIALSXP:
 	  flag = PRIMPRINT(fun);
 	  R_Visible = flag != 1;
-	  value = PRIMFUN(fun) (call, fun, CDR(call), rho);
+	  value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
 	  if (flag < 2) R_Visible = flag != 1;
 	  break;
 	case CLOSXP:
@@ -5698,7 +5706,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	}
 	flag = PRIMPRINT(fun);
 	R_Visible = flag != 1;
-	value = PRIMFUN(fun) (call, fun, CDR(call), rho);
+	value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
 	if (flag < 2) R_Visible = flag != 1;
 	vmaxset(vmax);
 	BCNPUSH(value);
