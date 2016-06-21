@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.4.0\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -529,6 +529,8 @@ msgstr ""
 #: R/seq.R: 0
 #: R/unix/system.unix.R: 0
 #: R/unix/system.unix.R: 0
+#: R/windows/system.R: 0
+#: R/windows/system.R: 0
 #. R/dates.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/dates.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/dates.R: gettextf("'%s' argument must be of length 1", "length.out")
@@ -548,6 +550,8 @@ msgstr ""
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 
 msgid "'%s' argument must be of length 1"
 msgstr ""
@@ -2529,6 +2533,13 @@ msgid "duplicate values in 'row.names' are not allowed"
 msgstr ""
 
 
+#: R/factor.R: 0
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
+
 #: R/eigen.R: 0
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 
@@ -2582,6 +2593,13 @@ msgstr ""
 #. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
 
 msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr ""
+
+
+#: R/factor.R: 0
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+
+msgid "factor levels must be \"character\""
 msgstr ""
 
 

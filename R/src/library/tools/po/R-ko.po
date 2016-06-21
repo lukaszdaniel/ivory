@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-24 22:01\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2085,11 +2085,10 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
-#: R/check.R:0 R/logging.R:0 R/testing.R:0
+#: R/logging.R:0 R/testing.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2374,7 +2373,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/checktools.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2383,7 +2381,7 @@ msgstr ""
 #. R/testing.R: message(" OK")
 #. R/testing.R: message("OK")
 #. R/testing.R: message("OK")
-#: R/build.R:0 R/check.R:0 R/checktools.R:0 R/testing.R:0
+#: R/build.R:0 R/check.R:0 R/testing.R:0
 msgid "OK"
 msgstr "OK"
 
@@ -6032,6 +6030,12 @@ msgstr ""
 msgid "will not attempt to install this package on Windows"
 msgstr ""
 
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+#: R/checktools.R:0
+msgid "wrong class"
+msgstr "잘못된 클래스입니다"
+
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
@@ -7035,9 +7039,6 @@ msgstr[0] "코드 파일들을 기록할 수 없습니다"
 
 #~ msgid "%s"
 #~ msgstr "%s"
-
-#~ msgid "wrong class"
-#~ msgstr "잘못된 클래스입니다"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "'%s'을 파싱합니다"

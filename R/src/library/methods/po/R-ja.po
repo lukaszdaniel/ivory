@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1935,11 +1935,6 @@ msgstr " 上位クラス中に重複したクラス名があります: %s "
 msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr " 'MethodsList' のレベル %d に重複した要素名： %s "
 
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-#: R/BasicClasses.R:0
-msgid "duplicated level [%d] in factor"
-msgstr ""
-
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 #: R/MethodsList.R:0
 msgid ""
@@ -2034,11 +2029,6 @@ msgid ""
 msgstr ""
 "  as(x, \"%s\") <- value （旧式のクラス %s に対しては）に対する明示的な置き換"
 "えは定義されていません "
-
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-#: R/BasicClasses.R:0
-msgid "factor levels must be \"character\""
-msgstr ""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0

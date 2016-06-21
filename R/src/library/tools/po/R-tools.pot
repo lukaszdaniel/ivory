@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-05-24 22:01\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2517,11 +2517,9 @@ msgid "NONE"
 msgstr ""
 
 
-#: R/check.R: 0
 #: R/logging.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
-#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
@@ -2869,7 +2867,6 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
-#: R/checktools.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -2951,7 +2948,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/checktools.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -7488,6 +7484,14 @@ msgstr ""
 #. R/check.R: gettext("will not attempt to install this package on Windows", domain = "R-tools")
 
 msgid "will not attempt to install this package on Windows"
+msgstr ""
+
+
+#: R/checktools.R: 0
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+
+msgid "wrong class"
 msgstr ""
 
 

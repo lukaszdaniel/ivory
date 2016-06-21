@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -4811,6 +4811,7 @@ msgstr "수치형 데이터가 필요합니다"
 
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
+#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #: R/smspline.R:0
 #, fuzzy
 msgid "need result of 'smooth.spline(keep.data = TRUE)'"
@@ -5627,9 +5628,9 @@ msgid "setVarying : 'vary' length must match length of parameters"
 msgstr ""
 "setVarying : 'vary'의 길이는 반드시 파라미터들의 길이와 일치해야 합니다"
 
-#. R/smspline.R: warning(wtxt, "\n", "setting df = 1  __use with care!__", sep = "")
+#. R/smspline.R: warning(wtxt, "\n", "setting 'df = 1'  __use with care!__", sep = "")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+msgid "setting 'df = 1'  __use with care!__"
 msgstr ""
 
 #. R/arima.R: gettextf("sigma^2 estimated as %s:  log likelihood = %s,  aic = %s", format(x$sigma2,     digits = digits), format(round(x$loglik, 2L)), format(round(x$aic, 2L)), domain = "R-stats")
@@ -5681,16 +5682,22 @@ msgstr "size가 sum(x)와 다르기 때문에 둘 중 하나는 잘못되었습�
 msgid "size cannot be NA nor exceed 65536"
 msgstr "크기는 NA가 될 수 없으며 65536도 넘을 수 없습니다"
 
-#. R/smspline.R: gettext("smoothing parameter value is too large")
+#. R/smspline.R: gettext("smoothing parameter value too extreme")
 #: R/smspline.R:0
 #, fuzzy
-msgid "smoothing parameter value is too large"
+msgid "smoothing parameter value too extreme"
 msgstr "유효하지 않은 파라미터 값입니다"
 
-#. R/smspline.R: gettext("smoothing parameter value is too small")
+#. R/smspline.R: gettext("smoothing parameter value too large")
 #: R/smspline.R:0
 #, fuzzy
-msgid "smoothing parameter value is too small"
+msgid "smoothing parameter value too large"
+msgstr "유효하지 않은 파라미터 값입니다"
+
+#. R/smspline.R: gettext("smoothing parameter value too small")
+#: R/smspline.R:0
+#, fuzzy
+msgid "smoothing parameter value too small"
 msgstr "유효하지 않은 파라미터 값입니다"
 
 #. R/arima.R: warning("some AR parameters were fixed: setting 'transform.pars = FALSE'")

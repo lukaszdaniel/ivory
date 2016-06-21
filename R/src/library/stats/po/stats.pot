@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 22:01+0200\n"
+"POT-Creation-Date: 2016-06-21 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1101,7 +1101,7 @@ msgstr ""
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:351
+#: sbart.c:354
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

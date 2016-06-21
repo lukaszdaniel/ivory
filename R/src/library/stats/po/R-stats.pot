@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6357,6 +6357,7 @@ msgstr ""
 #: R/smspline.R: 0
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
+#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 
 msgid "need result of 'smooth.spline(keep.data = TRUE)'"
 msgstr ""
@@ -7436,9 +7437,9 @@ msgstr ""
 
 
 #: R/smspline.R: 0
-#. R/smspline.R: warning(wtxt, "\n", "setting df = 1  __use with care!__", sep = "")
+#. R/smspline.R: warning(wtxt, "\n", "setting 'df = 1'  __use with care!__", sep = "")
 
-msgid "setting df = 1  __use with care!__"
+msgid "setting 'df = 1'  __use with care!__"
 msgstr ""
 
 
@@ -7511,16 +7512,23 @@ msgstr ""
 
 
 #: R/smspline.R: 0
-#. R/smspline.R: gettext("smoothing parameter value is too large")
+#. R/smspline.R: gettext("smoothing parameter value too extreme")
 
-msgid "smoothing parameter value is too large"
+msgid "smoothing parameter value too extreme"
 msgstr ""
 
 
 #: R/smspline.R: 0
-#. R/smspline.R: gettext("smoothing parameter value is too small")
+#. R/smspline.R: gettext("smoothing parameter value too large")
 
-msgid "smoothing parameter value is too small"
+msgid "smoothing parameter value too large"
+msgstr ""
+
+
+#: R/smspline.R: 0
+#. R/smspline.R: gettext("smoothing parameter value too small")
+
+msgid "smoothing parameter value too small"
 msgstr ""
 
 

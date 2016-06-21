@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-24 22:01\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2140,11 +2140,10 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
-#: R/check.R:0 R/logging.R:0 R/testing.R:0
+#: R/logging.R:0 R/testing.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2433,7 +2432,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/checktools.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2442,7 +2440,7 @@ msgstr ""
 #. R/testing.R: message(" OK")
 #. R/testing.R: message("OK")
 #. R/testing.R: message("OK")
-#: R/build.R:0 R/check.R:0 R/checktools.R:0 R/testing.R:0
+#: R/build.R:0 R/check.R:0 R/testing.R:0
 msgid "OK"
 msgstr "OK "
 
@@ -6185,6 +6183,12 @@ msgstr " 以下の中にあるコードを実行中 "
 msgid "will not attempt to install this package on Windows"
 msgstr ""
 
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+#: R/checktools.R:0
+msgid "wrong class"
+msgstr " クラスが間違っています "
+
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
@@ -7245,9 +7249,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 #, fuzzy
 #~ msgid "installing to %s"
 #~ msgstr " 以下にインストール中: "
-
-#~ msgid "wrong class"
-#~ msgstr " クラスが間違っています "
 
 #~ msgid "unable to create '%s'"
 #~ msgstr " '%s' を生成することが出来ません "

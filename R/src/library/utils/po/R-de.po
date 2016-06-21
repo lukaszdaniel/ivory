@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -353,6 +353,11 @@ msgstr "'list' muss ein Charaktervektor sein, mit Namen von R Objekten"
 msgid "'menu()' function cannot be used non-interactively"
 msgstr "menu() kann nicht nicht-interaktiv genutzt werden"
 
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
 #. R/str.R: warning("'object' does not have valid levels()")
 #: R/str.R:0
 msgid "'object' does not have valid levels()"
@@ -413,6 +418,16 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 "'topic' sollte ein Name, ein Zeichenkettenvektor der Länge 1 oder ein "
 "reserviertes Word sein"
+
+#. R/packages2.R: stop("'type == \"both\"' option can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+#, fuzzy
+msgid ""
+"'type == \"both\"' option can only be used on Windows or a CRAN build for "
+"macOS"
+msgstr ""
+"type == \"both\" kann nur unter Windows oder einem CRAN-build für MacOS\n"
+"X benutzt werden"
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1809,20 +1824,22 @@ msgstr ""
 msgid "cannot handle S4 methods yet"
 msgstr "Kann noch nicht mit S4 Methoden umgehen"
 
-#. R/packages2.R: stop("cannot install MacOS X binary packages on Windows")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on Windows"
-msgstr "kann keine MacOS X Binaries auf Windows installieren"
-
-#. R/packages2.R: stop("cannot install MacOS X binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on this platform"
-msgstr "kann keine MacOS X Binaries auf dieser Plattform installieren"
-
 #. R/packages2.R: stop("cannot install Windows binary packages on this platform")
 #: R/packages2.R:0
 msgid "cannot install Windows binary packages on this platform"
 msgstr "kann keine Windows Binaries auf dieser Plattform installieren"
+
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on Windows"
+msgstr "kann keine MacOS X Binaries auf Windows installieren"
+
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on this platform"
+msgstr "kann keine MacOS X Binaries auf dieser Plattform installieren"
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -2939,14 +2956,6 @@ msgstr "versuche CRAN ohne einen Spiegelserver zu nutzen"
 #: R/packages2.R:0
 msgid "type 'binary' is not supported on this platform"
 msgstr ""
-
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
-msgstr ""
-"type == \"both\" kann nur unter Windows oder einem CRAN-build für MacOS\n"
-"X benutzt werden"
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0

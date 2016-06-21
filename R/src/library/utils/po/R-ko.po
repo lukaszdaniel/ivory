@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -347,6 +347,11 @@ msgstr "'list' 는 반드시 R 객체를 이름짓는 문자형 벡터이어야 
 msgid "'menu()' function cannot be used non-interactively"
 msgstr "menu() 는 인터랙티브하게 사용할 수 없습니다 "
 
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
 #. R/str.R: warning("'object' does not have valid levels()")
 #: R/str.R:0
 msgid "'object' does not have valid levels()"
@@ -405,6 +410,15 @@ msgstr "'tar' 는 0 이 아닌 종료코드 %d 를 반환했습니다 "
 #: R/help.R:0
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic' 은 이름, 길이가 한개인 문자 벡터, 또는 예약어 이어야 합니다 "
+
+#. R/packages2.R: stop("'type == \"both\"' option can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+#, fuzzy
+msgid ""
+"'type == \"both\"' option can only be used on Windows or a CRAN build for "
+"macOS"
+msgstr ""
+"type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1793,20 +1807,22 @@ msgstr ""
 msgid "cannot handle S4 methods yet"
 msgstr "아직은 S4 메소드들을 처리할 수 없습니다 "
 
-#. R/packages2.R: stop("cannot install MacOS X binary packages on Windows")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on Windows"
-msgstr "Windows 에 MacOS X 의 바이너리 패키지를 설치할 수 없습니다 "
-
-#. R/packages2.R: stop("cannot install MacOS X binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on this platform"
-msgstr "이 플랫폼에서는 MacOS X 바이너리 패키지들을 설치 할 수 없습니다 "
-
 #. R/packages2.R: stop("cannot install Windows binary packages on this platform")
 #: R/packages2.R:0
 msgid "cannot install Windows binary packages on this platform"
 msgstr "이 플랫폼에서는 Windows 바이너리 패키지들을 설치 할 수 없습니다 "
+
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on Windows"
+msgstr "Windows 에 MacOS X 의 바이너리 패키지를 설치할 수 없습니다 "
+
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on this platform"
+msgstr "이 플랫폼에서는 MacOS X 바이너리 패키지들을 설치 할 수 없습니다 "
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -2922,13 +2938,6 @@ msgstr "미러 설정 없이 CRAN 을 사용하려고 합니다 "
 #: R/packages2.R:0
 msgid "type 'binary' is not supported on this platform"
 msgstr ""
-
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
-msgstr ""
-"type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0

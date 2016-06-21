@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -348,6 +348,11 @@ msgstr ""
 msgid "'menu()' function cannot be used non-interactively"
 msgstr " menu() は対話的にしか使用できません "
 
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
 #. R/str.R: warning("'object' does not have valid levels()")
 #: R/str.R:0
 msgid "'object' does not have valid levels()"
@@ -406,6 +411,16 @@ msgstr " 'tar' がゼロでない終了コード %d を返しました "
 #: R/help.R:0
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr " 'topic'は名前、長さ１の文字列、または予約語でなければなりません "
+
+#. R/packages2.R: stop("'type == \"both\"' option can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+#, fuzzy
+msgid ""
+"'type == \"both\"' option can only be used on Windows or a CRAN build for "
+"macOS"
+msgstr ""
+" type == \"both\" はWindows か Mac OS X に対する CRAN build に対してだけ使え"
+"ます "
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1809,24 +1824,26 @@ msgstr ""
 msgid "cannot handle S4 methods yet"
 msgstr "S4メソッドはまだ扱えません "
 
-#. R/packages2.R: stop("cannot install MacOS X binary packages on Windows")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on Windows"
-msgstr ""
-" MacOS X バイナリのパッケージをWindows 上にインストールすることはできません "
-
-#. R/packages2.R: stop("cannot install MacOS X binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install MacOS X binary packages on this platform"
-msgstr ""
-" MacOS X バイナリのパッケージをこのプラットフォームにインストールすることはで"
-"きません "
-
 #. R/packages2.R: stop("cannot install Windows binary packages on this platform")
 #: R/packages2.R:0
 msgid "cannot install Windows binary packages on this platform"
 msgstr ""
 " Windows バイナリのパッケージをこのプラットフォームにインストールすることはで"
+"きません "
+
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on Windows"
+msgstr ""
+" MacOS X バイナリのパッケージをWindows 上にインストールすることはできません "
+
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
+#, fuzzy
+msgid "cannot install macOS binary packages on this platform"
+msgstr ""
+" MacOS X バイナリのパッケージをこのプラットフォームにインストールすることはで"
 "きません "
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -2954,14 +2971,6 @@ msgstr " ミラーを設定することなくCRANを使おうとしています 
 #: R/packages2.R:0
 msgid "type 'binary' is not supported on this platform"
 msgstr ""
-
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
-msgstr ""
-" type == \"both\" はWindows か Mac OS X に対する CRAN build に対してだけ使え"
-"ます "
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0

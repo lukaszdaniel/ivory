@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1819,11 +1819,6 @@ msgstr "powtórzone nazwy klasy pośród superklas: %s"
 msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr "powtórzone nazwy elementów w 'MethodsList' na poziomie %d: %s"
 
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-#: R/BasicClasses.R:0
-msgid "duplicated level [%d] in factor"
-msgstr "powtórzony poziom [%d] w czynniku"
-
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 #: R/MethodsList.R:0
 msgid ""
@@ -1917,11 +1912,6 @@ msgid ""
 msgstr ""
 "nie zdefiniowano jawnej zamiany dla 'as(x, \"%s\") <- value' dla klasy "
 "starego stylu %s"
-
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-#: R/BasicClasses.R:0
-msgid "factor levels must be \"character\""
-msgstr "poziomy czynnika muszą być typu \"character\""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0
@@ -3673,6 +3663,12 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#~ msgid "duplicated level [%d] in factor"
+#~ msgstr "powtórzony poziom [%d] w czynniku"
+
+#~ msgid "factor levels must be \"character\""
+#~ msgstr "poziomy czynnika muszą być typu \"character\""
 
 #~ msgid ""
 #~ "Note: the specification for S3 class %s in package %s seems equivalent to "

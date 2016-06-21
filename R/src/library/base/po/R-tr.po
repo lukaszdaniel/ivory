@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -440,8 +440,10 @@ msgstr "isim alanı"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0
+#: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "isim alanı"
@@ -1962,6 +1964,11 @@ msgstr ""
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr ""
 
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+#: R/factor.R:0
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 #: R/eigen.R:0
 msgid "eigenvalues and eigenvectors decomposition"
@@ -2003,6 +2010,11 @@ msgstr ""
 #: R/datetime.R:0
 msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr ""
+
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+#: R/factor.R:0
+msgid "factor levels must be \"character\""
 msgstr ""
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))

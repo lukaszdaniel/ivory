@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -1958,11 +1958,6 @@ msgstr "doppelte Klassennamen unter den Superklassen: %s"
 msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr "doppelte Elementnamen in 'MethodsList' auf Stufe %d: %s"
 
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-#: R/BasicClasses.R:0
-msgid "duplicated level [%d] in factor"
-msgstr ""
-
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 #: R/MethodsList.R:0
 msgid ""
@@ -2057,11 +2052,6 @@ msgid ""
 msgstr ""
 "explizite Ersetzung ist für as(x , \"%s\") <- value für eine Klasse %s alten "
 "Stils nicht definiert"
-
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-#: R/BasicClasses.R:0
-msgid "factor levels must be \"character\""
-msgstr ""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0

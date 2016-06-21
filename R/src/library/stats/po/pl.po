@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 22:01+0200\n"
+"POT-Creation-Date: 2016-06-21 13:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1153,7 +1153,7 @@ msgstr "niepoprawny drugi argument 'size'"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr "rcont2 [%d,%d]: wyrażenie spadło do 0; niepowodzenie algorytmu"
 
-#: sbart.c:351
+#: sbart.c:354
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr "spar-finding: nieskończona wartość %g; używanie wartości BIG\n"

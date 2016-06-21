@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-24 22:01\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2122,11 +2122,10 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
-#: R/check.R:0 R/logging.R:0 R/testing.R:0
+#: R/logging.R:0 R/testing.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2413,7 +2412,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/checktools.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2422,7 +2420,7 @@ msgstr ""
 #. R/testing.R: message(" OK")
 #. R/testing.R: message("OK")
 #. R/testing.R: message("OK")
-#: R/build.R:0 R/check.R:0 R/checktools.R:0 R/testing.R:0
+#: R/build.R:0 R/check.R:0 R/testing.R:0
 msgid "OK"
 msgstr "OK"
 
@@ -6143,6 +6141,12 @@ msgstr "запускаю код в "
 msgid "will not attempt to install this package on Windows"
 msgstr ""
 
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+#: R/checktools.R:0
+msgid "wrong class"
+msgstr "неправильный класс"
+
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
@@ -7399,9 +7403,6 @@ msgstr[2] "не могу перекодировать '%s' строк(и) %s"
 #, fuzzy
 #~ msgid "installing to %s"
 #~ msgstr "устанавливаю в"
-
-#~ msgid "wrong class"
-#~ msgstr "неправильный класс"
 
 #~ msgid "unable to create '%s'"
 #~ msgstr "не могу создать '%s'"

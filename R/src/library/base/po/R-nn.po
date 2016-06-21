@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -461,8 +461,10 @@ msgstr "«arg» må ha eitt element"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0
+#: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "«arg» må ha eitt element"
@@ -2112,6 +2114,11 @@ msgstr "dupliserte symbolnamn %s i useDynlib(\"%s\")"
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "duplikatverdiar i «row.names» er ikkje tillatne"
 
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+#: R/factor.R:0
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 #: R/eigen.R:0
 msgid "eigenvalues and eigenvectors decomposition"
@@ -2157,6 +2164,12 @@ msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må opp
 msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må oppgjevast"
+
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+#: R/factor.R:0
+#, fuzzy
+msgid "factor levels must be \"character\""
+msgstr "«compress» må vera boolsk eller teikn"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))
 #: R/namespace.R:0
@@ -4069,9 +4082,6 @@ msgstr[1] "T brukt i staden for TRUE"
 
 #~ msgid "'file' must be specified"
 #~ msgstr "må definera «file»"
-
-#~ msgid "'compress' must be logical or character"
-#~ msgstr "«compress» må vera boolsk eller teikn"
 
 #~ msgid "bad file argument"
 #~ msgstr "ugyldig «file»-argument"

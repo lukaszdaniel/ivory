@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -4870,6 +4870,7 @@ msgstr "нужны числовые данные"
 
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
+#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #: R/smspline.R:0
 #, fuzzy
 msgid "need result of 'smooth.spline(keep.data = TRUE)'"
@@ -5717,9 +5718,10 @@ msgstr "серия не периодическая или имеет менее 
 msgid "setVarying : 'vary' length must match length of parameters"
 msgstr "setVarying : длина 'vary' должна соответствовать длине параметров"
 
-#. R/smspline.R: warning(wtxt, "\n", "setting df = 1  __use with care!__", sep = "")
+#. R/smspline.R: warning(wtxt, "\n", "setting 'df = 1'  __use with care!__", sep = "")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting 'df = 1'  __use with care!__"
 msgstr "устанавливаю df = 1  __использовать с осторожностью!__"
 
 #. R/arima.R: gettextf("sigma^2 estimated as %s:  log likelihood = %s,  aic = %s", format(x$sigma2,     digits = digits), format(round(x$loglik, 2L)), format(round(x$aic, 2L)), domain = "R-stats")
@@ -5771,16 +5773,22 @@ msgstr "size != sum(x), т.е. одно неправильно"
 msgid "size cannot be NA nor exceed 65536"
 msgstr ""
 
-#. R/smspline.R: gettext("smoothing parameter value is too large")
+#. R/smspline.R: gettext("smoothing parameter value too extreme")
 #: R/smspline.R:0
 #, fuzzy
-msgid "smoothing parameter value is too large"
+msgid "smoothing parameter value too extreme"
 msgstr "NA lev[]; возможно, сглаживающий параметр 'spar' слишком велик!"
 
-#. R/smspline.R: gettext("smoothing parameter value is too small")
+#. R/smspline.R: gettext("smoothing parameter value too large")
 #: R/smspline.R:0
 #, fuzzy
-msgid "smoothing parameter value is too small"
+msgid "smoothing parameter value too large"
+msgstr "NA lev[]; возможно, сглаживающий параметр 'spar' слишком велик!"
+
+#. R/smspline.R: gettext("smoothing parameter value too small")
+#: R/smspline.R:0
+#, fuzzy
+msgid "smoothing parameter value too small"
 msgstr "неправильные значения параметра"
 
 #. R/arima.R: warning("some AR parameters were fixed: setting 'transform.pars = FALSE'")

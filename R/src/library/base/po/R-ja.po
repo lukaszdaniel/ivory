@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -458,8 +458,10 @@ msgstr " 'arg' は長さ 1 でなければなりません "
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0
+#: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr " 'arg' は長さ 1 でなければなりません "
@@ -2121,6 +2123,11 @@ msgstr " 重複したシンボル名 %s が useDynlib(\"%s\")中に見つかり�
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr " 重複した 'row.names' は許されません "
 
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+#: R/factor.R:0
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 #: R/eigen.R:0
 msgid "eigenvalues and eigenvectors decomposition"
@@ -2170,6 +2177,12 @@ msgid ""
 msgstr ""
 " 'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければ"
 "なりません "
+
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+#: R/factor.R:0
+#, fuzzy
+msgid "factor levels must be \"character\""
+msgstr " 'compress'は論理値または文字列でなければなりません "
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))
 #: R/namespace.R:0
@@ -4074,9 +4087,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 
 #~ msgid "'file' must be specified"
 #~ msgstr " 'file' が指定されなければなりません "
-
-#~ msgid "'compress' must be logical or character"
-#~ msgstr " 'compress'は論理値または文字列でなければなりません "
 
 #~ msgid "bad file argument"
 #~ msgstr " 誤ったファイル引数です "

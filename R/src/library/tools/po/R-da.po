@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-24 22:01\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2003,11 +2003,10 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
-#: R/check.R:0 R/logging.R:0 R/testing.R:0
+#: R/logging.R:0 R/testing.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2286,7 +2285,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/checktools.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2295,7 +2293,7 @@ msgstr ""
 #. R/testing.R: message(" OK")
 #. R/testing.R: message("OK")
 #. R/testing.R: message("OK")
-#: R/build.R:0 R/check.R:0 R/checktools.R:0 R/testing.R:0
+#: R/build.R:0 R/check.R:0 R/testing.R:0
 msgid "OK"
 msgstr ""
 
@@ -5818,6 +5816,12 @@ msgstr "Argumentnavne i kode men ikke i dokumenter:"
 #. R/check.R: gettext("will not attempt to install this package on Windows", domain = "R-tools")
 #: R/check.R:0
 msgid "will not attempt to install this package on Windows"
+msgstr ""
+
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+#: R/checktools.R:0
+msgid "wrong class"
 msgstr ""
 
 #. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1932,11 +1932,6 @@ msgstr "совпадение имен классов среди суперклассов: %s"
 msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr "повторяющиеся имена элементов в 'MethodsList' на уровне %d: %s"
 
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-#: R/BasicClasses.R:0
-msgid "duplicated level [%d] in factor"
-msgstr ""
-
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 #: R/MethodsList.R:0
 msgid ""
@@ -2032,11 +2027,6 @@ msgid ""
 msgstr ""
 "не определено четкой замены для as(x, \"%s\") <- value для устаревшего "
 "класса %s"
-
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-#: R/BasicClasses.R:0
-msgid "factor levels must be \"character\""
-msgstr ""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0

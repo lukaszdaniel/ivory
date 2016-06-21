@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -463,8 +463,10 @@ msgstr "'arg' deve ter comprimento 1"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0
+#: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "'arg' deve ter comprimento 1"
@@ -2120,6 +2122,11 @@ msgstr "nomes de símbolos duplicados %s em useDynlib(\"%s\")"
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "'row.names' duplicados não são permitidos"
 
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+#: R/factor.R:0
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 #: R/eigen.R:0
 msgid "eigenvalues and eigenvectors decomposition"
@@ -2169,6 +2176,12 @@ msgid ""
 msgstr ""
 "exatamente dois de 'to', 'by' e 'length.out' / 'along.width' devem ser "
 "especificados"
+
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+#: R/factor.R:0
+#, fuzzy
+msgid "factor levels must be \"character\""
+msgstr "'from' deve ser de tipo raw ou caractere"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))
 #: R/namespace.R:0
@@ -4100,10 +4113,6 @@ msgstr[1] "T usado ao invés de TRUE"
 
 #~ msgid "'file' must be specified"
 #~ msgstr "'file' deve ser especificado"
-
-#, fuzzy
-#~ msgid "'compress' must be logical or character"
-#~ msgstr "'from' deve ser de tipo raw ou caractere"
 
 #~ msgid "bad file argument"
 #~ msgstr "argumento de arquivo inválido"

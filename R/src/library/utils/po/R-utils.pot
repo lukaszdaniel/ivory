@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.4.0\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-06-21 13:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -417,6 +417,13 @@ msgstr ""
 
 
 #: R/str.R: 0
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
+
+#: R/str.R: 0
 #. R/str.R: warning("'object' does not have valid levels()")
 
 msgid "'object' does not have valid levels()"
@@ -488,6 +495,13 @@ msgstr ""
 #. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
 
 msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: stop("'type == \"both\"' option can only be used on Windows or a CRAN build for macOS")
+
+msgid "'type == \"both\"' option can only be used on Windows or a CRAN build for macOS"
 msgstr ""
 
 
@@ -2192,23 +2206,23 @@ msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: stop("cannot install MacOS X binary packages on Windows")
-
-msgid "cannot install MacOS X binary packages on Windows"
-msgstr ""
-
-
-#: R/packages2.R: 0
-#. R/packages2.R: stop("cannot install MacOS X binary packages on this platform")
-
-msgid "cannot install MacOS X binary packages on this platform"
-msgstr ""
-
-
-#: R/packages2.R: 0
 #. R/packages2.R: stop("cannot install Windows binary packages on this platform")
 
 msgid "cannot install Windows binary packages on this platform"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+
+msgid "cannot install macOS binary packages on Windows"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+
+msgid "cannot install macOS binary packages on this platform"
 msgstr ""
 
 
@@ -3666,13 +3680,6 @@ msgstr ""
 #. R/packages2.R: stop("type 'binary' is not supported on this platform")
 
 msgid "type 'binary' is not supported on this platform"
-msgstr ""
-
-
-#: R/packages2.R: 0
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
-
-msgid "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
 msgstr ""
 
 

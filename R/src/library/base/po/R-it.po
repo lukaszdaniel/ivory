@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-11 18:13\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -458,8 +458,10 @@ msgstr "'from' deve avere lunghezza 1"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0
+#: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "'from' deve avere lunghezza 1"
@@ -2077,6 +2079,11 @@ msgstr "nomi importati doppi"
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "'row.names' duplicate non sono permesse"
 
+#. R/factor.R: gettextf("duplicated level [%d] in factor", d, domain = "R-base")
+#: R/factor.R:0
+msgid "duplicated level [%d] in factor"
+msgstr ""
+
 #. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
 #: R/eigen.R:0
 msgid "eigenvalues and eigenvectors decomposition"
@@ -2126,6 +2133,12 @@ msgid ""
 msgstr ""
 "si devono specificare esattamente due tra 'to', 'by' e 'length.out' / 'along."
 "with'"
+
+#. R/factor.R: gettext("factor levels must be \"character\"", domain = "R-base")
+#: R/factor.R:0
+#, fuzzy
+msgid "factor levels must be \"character\""
+msgstr "'normal.kind' deve essere una stringa di caratteri di lunghezza 1"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))
 #: R/namespace.R:0
@@ -4033,10 +4046,6 @@ msgstr[1] "non è"
 
 #~ msgid "'file' must be specified"
 #~ msgstr "'file' deve essere specificato"
-
-#, fuzzy
-#~ msgid "'compress' must be logical or character"
-#~ msgstr "'normal.kind' deve essere una stringa di caratteri di lunghezza 1"
 
 #~ msgid "bad file argument"
 #~ msgstr "argomento file non corretto"

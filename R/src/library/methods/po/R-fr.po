@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1988,11 +1988,6 @@ msgstr "Noms de classes dupliqués dans les superclasses : %s"
 msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr "noms d'éléments dupliqués dans 'MethodsList' au niveau %d : %s"
 
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-#: R/BasicClasses.R:0
-msgid "duplicated level [%d] in factor"
-msgstr ""
-
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 #: R/MethodsList.R:0
 msgid ""
@@ -2092,11 +2087,6 @@ msgid ""
 msgstr ""
 "un remplacement explicite n'est pas défini pour as(x, \"%s\") <- value pour "
 "la classe d'ancien style %s"
-
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-#: R/BasicClasses.R:0
-msgid "factor levels must be \"character\""
-msgstr ""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0

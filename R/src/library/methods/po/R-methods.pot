@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.4.0\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2022,13 +2022,6 @@ msgid "duplicate element names in 'MethodsList' at level %d: %s"
 msgstr ""
 
 
-#: R/BasicClasses.R: 0
-#. R/BasicClasses.R: gettextf("duplicated level [%d] in factor", d)
-
-msgid "duplicated level [%d] in factor"
-msgstr ""
-
-
 #: R/MethodsList.R: 0
 #. R/MethodsList.R: gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",     i, level, dQuote(class(eli)))
 
@@ -2117,13 +2110,6 @@ msgstr ""
 #. R/oldClass.R: gettextf("explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s",     to, dQuote(class(from)[1L]))
 
 msgid "explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s"
-msgstr ""
-
-
-#: R/BasicClasses.R: 0
-#. R/BasicClasses.R: gettext("factor levels must be \"character\"")
-
-msgid "factor levels must be \"character\""
 msgstr ""
 
 

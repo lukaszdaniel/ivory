@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-06-21 13:54\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -4713,6 +4713,7 @@ msgstr "potrzeba danych liczbowych"
 
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
+#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
 #: R/smspline.R:0
 msgid "need result of 'smooth.spline(keep.data = TRUE)'"
 msgstr "potrzeba wyniku 'smooth.spline(keep.data=TRUE)'"
@@ -5527,9 +5528,9 @@ msgstr "szereg nie jest periodyczny lyb ma mniej niż dwa okresy"
 msgid "setVarying : 'vary' length must match length of parameters"
 msgstr "setVarying : długość 'vary' musi zgadzać się z długością parametrów"
 
-#. R/smspline.R: warning(wtxt, "\n", "setting df = 1  __use with care!__", sep = "")
+#. R/smspline.R: warning(wtxt, "\n", "setting 'df = 1'  __use with care!__", sep = "")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+msgid "setting 'df = 1'  __use with care!__"
 msgstr "ustawianie 'df = 1'  __używaj z ostrożnością!__"
 
 #. R/arima.R: gettextf("sigma^2 estimated as %s:  log likelihood = %s,  aic = %s", format(x$sigma2,     digits = digits), format(round(x$loglik, 2L)), format(round(x$aic, 2L)), domain = "R-stats")
@@ -5582,14 +5583,19 @@ msgstr "'size != sum(x)', tzn. jeden jest niepoprawny"
 msgid "size cannot be NA nor exceed 65536"
 msgstr "rozmiar nie może wynosić NA ani też przekraczać wartość 65536"
 
-#. R/smspline.R: gettext("smoothing parameter value is too large")
+#. R/smspline.R: gettext("smoothing parameter value too extreme")
 #: R/smspline.R:0
-msgid "smoothing parameter value is too large"
+msgid "smoothing parameter value too extreme"
+msgstr "wartość parametru wygładzającego jest zbyt ekstremalna"
+
+#. R/smspline.R: gettext("smoothing parameter value too large")
+#: R/smspline.R:0
+msgid "smoothing parameter value too large"
 msgstr "wartość parametru wygładzającego jest zbyt duża"
 
-#. R/smspline.R: gettext("smoothing parameter value is too small")
+#. R/smspline.R: gettext("smoothing parameter value too small")
 #: R/smspline.R:0
-msgid "smoothing parameter value is too small"
+msgid "smoothing parameter value too small"
 msgstr "wartość parametru wygładzającego jest zbyt mała"
 
 #. R/arima.R: warning("some AR parameters were fixed: setting 'transform.pars = FALSE'")
