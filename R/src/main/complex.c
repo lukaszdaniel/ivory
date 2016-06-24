@@ -706,7 +706,7 @@ SEXP attribute_hidden complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     case 10004: /* signif */
 	f = z_prec; break;
     default:
-	errorcall_return(call, _("unimplemented complex function"));
+	error_return(_("unimplemented complex function"));
     }
 
     PROTECT(sa = coerceVector(CAR(args), CPLXSXP));
@@ -732,7 +732,7 @@ SEXP attribute_hidden complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     });
     if (naflag)
-	warningcall(call, _("NaN values produced in '%s' function"), PRIMNAME(op));
+	warning(_("NaN values produced in '%s' function"), PRIMNAME(op));
     if(n == na) {
 	SHALLOW_DUPLICATE_ATTRIB(sy, sa);
     } else if(n == nb) {
