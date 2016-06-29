@@ -133,7 +133,8 @@ void R_CheckUserInterrupt(void)
 }
 
 static SEXP getInterruptCondition();
-void onintr()
+
+static void onintrEx(Rboolean resumeOK)
 {
     if (R_interrupts_suspended) {
 	R_interrupts_pending = 1;
@@ -141,25 +142,40 @@ void onintr()
     }
     else R_interrupts_pending = 0;
 
-    SEXP hooksym = install(".signalInterrupt");
-    if (SYMVALUE(hooksym) != R_UnboundValue) {
-	int resume = FALSE;
-	SEXP cond, hcall;
-	PROTECT(cond = getInterruptCondition());
-	PROTECT(hcall = LCONS(hooksym, LCONS(cond, R_NilValue)));
-	resume = asLogical(eval(hcall, R_GlobalEnv));
-	UNPROTECT(2);
-	if (resume) return;
+    if (resumeOK) {
+	SEXP rho = R_GlobalContext->cloenv;
+	int dbflag = RDEBUG(rho);
+	RCNTXT restartcontext;
+	begincontext(&restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
+		     R_BaseEnv, R_NilValue, R_NilValue);
+	if (SETJMP(restartcontext.cjmpbuf)) {
+	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+	    R_ReturnedValue = R_NilValue;
+	    R_Visible = FALSE;
+	    endcontext(&restartcontext);
+	    return;
+	}
+	R_InsertRestartHandlers(&restartcontext, "resume");
+	signalInterrupt();
+	endcontext(&restartcontext);
     }
     else signalInterrupt();
 
+    /* Interrupts do not inherit from error, so we should not run the
+       user erro handler. But we have been, so as a transition,
+       continue to use options('error') if options('interrupt') is not
+       set */
+    Rboolean tryUserError = GetOption1(install("interrupt")) == R_NilValue;
+
     REprintf("\n");
-    /* Attempt to run user error option, save a traceback, show
-       warnings, and reset console; also stop at restart (try/browser)
-       frames.  Not clear this is what we really want, but this
-       preserves current behavior */
-    jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
+    /* Attempt to save a traceback, show warnings, and reset console;
+       also stop at restart (try/browser) frames.  Not clear this is
+       what we really want, but this preserves current behavior */
+    jump_to_top_ex(TRUE, tryUserError, TRUE, TRUE, FALSE);
 }
+
+void onintr()  { onintrEx(TRUE); }
+void onintrNoResume() { onintrEx(FALSE); }
 
 /* SIGUSR1: save and quit
    SIGUSR2: save and quit, don't run .Last or on.exit().
@@ -1694,10 +1710,16 @@ static void signalInterrupt(void)
     }
     R_HandlerStack = oldstack;
     UNPROTECT(1);
+
+    SEXP h = GetOption1(install("interrupt"));
+    if (h != R_NilValue) {
+	SEXP call = PROTECT(LCONS(h, R_NilValue));
+	eval(call, R_GlobalEnv);
+    }
 }
 
 void attribute_hidden
-R_InsertRestartHandlers(RCNTXT *cptr, Rboolean browser)
+R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry, name;
 
@@ -1715,7 +1737,7 @@ R_InsertRestartHandlers(RCNTXT *cptr, Rboolean browser)
     entry = mkHandlerEntry(klass, rho, R_RestartToken, rho, R_NilValue, TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
     UNPROTECT(1);
-    PROTECT(name = mkString(browser ? "browser" : "tryRestart"));
+    PROTECT(name = mkString(cname));
     PROTECT(entry = allocVector(VECSXP, 2));
     SET_VECTOR_ELT(entry, 0, name);
     SET_VECTOR_ELT(entry, 1, R_MakeExternalPtr(cptr, R_NilValue, R_NilValue));
@@ -1839,7 +1861,7 @@ SEXP attribute_hidden do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 	! (R_GlobalContext->callflag & CTXT_FUNCTION))
 	error(_("not in a try context"));
     SET_RESTART_BIT_ON(R_GlobalContext->callflag);
-    R_InsertRestartHandlers(R_GlobalContext, FALSE);
+    R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
     return R_NilValue;
 }
 

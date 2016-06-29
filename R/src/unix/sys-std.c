@@ -125,7 +125,8 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	   non-interruptable? LT */
 	return select(n, readfds, writefds, exceptfds, timeout);
     else {
-	volatile sel_intr_handler_t myintr = intr != NULL ? intr : onintr;
+	volatile sel_intr_handler_t myintr = intr != NULL ?
+	    intr : onintrNoResume;
 	volatile int old_interrupts_suspended = R_interrupts_suspended;
 	if (SIGSETJMP(seljmpbuf, 1)) {
 	    myintr();
@@ -680,7 +681,7 @@ static void
 handleInterrupt(void)
 {
     popReadline();
-    onintr();
+    onintrNoResume();
 }
 
 #ifdef HAVE_RL_COMPLETION_MATCHES
@@ -909,7 +910,7 @@ void set_rl_word_breaks(const char *str)
 static void
 handleInterrupt(void)
 {
-    onintr();
+    onintrNoResume();
 }
 #endif /* HAVE_LIBREADLINE */
 
