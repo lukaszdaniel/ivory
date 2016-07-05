@@ -1625,7 +1625,7 @@ msgstr "wymiary [produkt %d] nie odpowiadają długości obiektu [%d]"
 #: src/main/attrib.c:1250
 #, c-format
 msgid "factor level [%d] is duplicated"
-msgstr ""
+msgstr "poziom [%d] czynnika jest powtórzony"
 
 #: src/main/attrib.c:1280
 msgid "attributes must be a list or NULL"
@@ -4522,14 +4522,16 @@ msgid "cannot find index for threaded code address"
 msgstr "nie można znaleźć indeksu dla wątkowego adresu kodu"
 
 #: src/main/eval.c:6317
-#, fuzzy
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
-msgstr "funkcja 'match()' wymaga wektorów jako argumentów"
+msgstr ""
+"funkcja 'registerBC()' wymaga wektora liczb całkowitych jako argumentu "
+"'bcBytes'"
 
 #: src/main/eval.c:6319
-#, fuzzy
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
-msgstr "funkcja 'match()' wymaga wektorów jako argumentów"
+msgstr ""
+"funkcja 'registerBC()' wymaga obiektu klasy \"BCODESXP\" jako argumentu "
+"'bcode'"
 
 #: src/main/eval.c:6432 src/main/eval.c:6443
 #, c-format
@@ -9006,13 +9008,12 @@ msgstr[1] "Błąd: bufor przepełniony o %d bajty\n"
 msgstr[2] "Błąd: bufor przepełniony o %d bajtów\n"
 
 #: src/modules/internet/nanohttp.c:1455
-#, fuzzy
 msgid ""
 "Proxy authentication failed:\n"
 "\tplease re-enter the credentials or hit Cancel"
 msgstr ""
-"Autentykacja proxy nie powiodła się:\tproszę ponownie wprowadzić "
-"poświadczenie lub anulować"
+"Autentykacja proxy nie powiodła się:\n"
+"\tproszę ponownie wprowadzić poświadczenie lub anulować"
 
 #: src/modules/internet/nanohttp.c:1469
 #, c-format
