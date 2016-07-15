@@ -133,6 +133,10 @@
       \code{stack()} preserve the names of empty elements in the levels
       of the \code{ind} column of the return value.  Set the new
       \code{drop} argument to \code{TRUE} for the previous behavior.
+
+      Speedup in \code{simplify2array()} and hence \code{sapply()} and
+      \code{mapply()} (for the case of names and common length > 1),
+      thanks to Suharto Anggono's \PR{17118}.
     }
   }
 
@@ -145,13 +149,22 @@
       binary builds.  The \file{tcltk*.chm} help file is no longer
       included; please consult the online help at
       \url{http://www.tcl.tk/man/} instead.
+
+      \item \command{configure} now adds a compiler switch for C++11
+      code, even if the compiler supports C++11 by default.
+
+      \item \command{configure} now tests for a C++14-compliant compiler
+      by testing some basic features.  This by default tries flags for
+      the compiler specified by \samp{CXX}, but an alternative compiler,
+      options and standard can be specified by variables \samp{CXX1Y},
+      \samp{CXX1YFLAGS} and \samp{CXX1YSTD} (e.g., \samp{-std=gnu++14}).
     }
   }
 
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item (Windows only) Function \code{setInternet2()} is defunct.
-      
+
       \item Installation support for \code{readline} emulations based on
       \code{editline} (aka \code{libedit}) is deprecated.
     }
@@ -162,13 +175,6 @@
       \item Getting or setting \code{body()} or \code{formals()} on
       non-functions for now signals a warning and may become an error
       for setting.
-
-      \item When a class name matches multiple classes in the cache,
-      perform a dynamic search in order to obey namespace imports. This
-      should eliminate annoying messages about multiple hits in the
-      class cache.  Also, pass along the package from the
-      \code{ClassExtends} object when looking up superclasses in the
-      cache.
 
       \item \code{match(x, t)}, \code{duplicated(x)} and
       \code{unique(x)} work as documented for complex numbers with \code{NA}s
@@ -184,7 +190,7 @@
 
       \item Rotated symbols in plotmath expressions are now positioned
       correctly on \code{x11(type = "Xlib")}. (\PR{16948})
-      
+
       \item \code{as<-()} avoids an infinite loop when a virtual class
       is interposed between a subclass and an actual superclass.
 
@@ -206,6 +212,10 @@
 
       \item \code{grouping()} puts NAs last, to be consistent with the
       default behavior of \code{order()}.
+
+      \item Point mass limit cases: \code{qpois(-2, 0)} now gives
+      \code{NaN} with a warning and \code{qgeom(1, 1)} is \code{0}.
+      (\PR{16972})
     }
   }
 }
@@ -215,9 +225,9 @@
     \itemize{
       \item \code{extSoftVersion()} now reports the version (if any) of
       the \code{readline} library in use.
-      
-      \item Convenience function \code{hasName()} has been added; it 
-      is intended to replace the common idiom \code{!is.null(x$name)} 
+
+      \item Convenience function \code{hasName()} has been added; it
+      is intended to replace the common idiom \code{!is.null(x$name)}
       without the usually unintended partial name matching.
     }
   }
@@ -237,10 +247,19 @@
       \item The check for non-portable flags in \command{R CMD check}
       could be stymied by \file{src/Makevars} files which contained
       targets.
-      
-      \item (Windows only) When using certain desktop themes in Windows 
+
+      \item (Windows only) When using certain desktop themes in Windows
       7 or higher, \kbd{Alt-Tab} could cause \command{Rterm} to stop
       accepting input.  (\PR{14406}; patch submitted by Jan Gleixner.)
+
+      \code{pretty(d, ..)} for date-time \code{d} tweaked more nicely (\PR{16923}).
+
+      \item When a class name matches multiple classes in the cache,
+      perform a dynamic search in order to obey namespace imports. This
+      should eliminate annoying messages about multiple hits in the
+      class cache. Also, pass along the package from the
+      \code{ClassExtends} object when looking up superclasses in the
+      cache.
     }
   }
 }
