@@ -134,7 +134,7 @@
       of the \code{ind} column of the return value.  Set the new
       \code{drop} argument to \code{TRUE} for the previous behavior.
 
-      Speedup in \code{simplify2array()} and hence \code{sapply()} and
+      \item Speedup in \code{simplify2array()} and hence \code{sapply()} and
       \code{mapply()} (for the case of names and common length > 1),
       thanks to Suharto Anggono's \PR{17118}.
     }
@@ -151,13 +151,23 @@
       \url{http://www.tcl.tk/man/} instead.
 
       \item \command{configure} now adds a compiler switch for C++11
-      code, even if the compiler supports C++11 by default.
+      code, even if the compiler supports C++11 by default.  (This
+      ensures that \command{gcc} 6.x uses C++11 mode and not its default
+      C++14 mode.)
 
       \item \command{configure} now tests for a C++14-compliant compiler
       by testing some basic features.  This by default tries flags for
       the compiler specified by \samp{CXX}, but an alternative compiler,
       options and standard can be specified by variables \samp{CXX1Y},
       \samp{CXX1YFLAGS} and \samp{CXX1YSTD} (e.g., \samp{-std=gnu++14}).
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item There is support for compiling C++14 code in packages on
+      suitable platforms: see \sQuote{Writing R Extensions} for how to
+      request this.
     }
   }
 
@@ -252,7 +262,8 @@
       7 or higher, \kbd{Alt-Tab} could cause \command{Rterm} to stop
       accepting input.  (\PR{14406}; patch submitted by Jan Gleixner.)
 
-      \code{pretty(d, ..)} for date-time \code{d} tweaked more nicely (\PR{16923}).
+      \item \code{pretty(d, ..)} behaves better for date-time \code{d} 
+      (\PR{16923}).
 
       \item When a class name matches multiple classes in the cache,
       perform a dynamic search in order to obey namespace imports. This
