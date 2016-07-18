@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-07-17 21:19\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -4737,6 +4737,11 @@ msgstr ""
 #. R/parseLatex.R: stop("internal error", domain = "R-tools")
 #: R/parseLatex.R:0
 msgid "internal error"
+msgstr ""
+
+#. R/build.R: gettext("invalid 'Package' field", domain = "R-tools")
+#: R/build.R:0
+msgid "invalid 'Package' field"
 msgstr ""
 
 #. R/pdftools.R: stop("invalid index in object stream lookup")

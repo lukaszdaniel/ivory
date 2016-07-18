@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 21:07+0200\n"
+"POT-Creation-Date: 2016-07-17 21:19+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -63,77 +63,81 @@ msgstr ""
 msgid "alpha level %d, not in 0:255"
 msgstr ""
 
-#: colors.c:127
+#: colors.c:114
+msgid "inputs must be finite"
+msgstr ""
+
+#: colors.c:129
 msgid "bad hsv to rgb color conversion"
 msgstr ""
 
-#: colors.c:219 colors.c:233
+#: colors.c:221 colors.c:235
 msgid "invalid hsv color"
 msgstr ""
 
-#: colors.c:345 colors.c:365
+#: colors.c:347 colors.c:367
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.c:397
+#: colors.c:399
 #, fuzzy
 msgid "invalid value of 'maxColorValue'"
 msgstr "ugyldig værdi for '%s'"
 
-#: colors.c:425
+#: colors.c:427
 #, fuzzy
 msgid "invalid 'names' vector"
 msgstr "ugyldigt 'fil'-argument"
 
-#: colors.c:484 colors.c:493
+#: colors.c:486 colors.c:495
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
+#: colors.c:551 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
 #: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
 #: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldigt 'fil'-argument"
 
-#: colors.c:1341
+#: colors.c:1343
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr ""
 
-#: colors.c:1351 colors.c:1361
+#: colors.c:1353 colors.c:1363
 #, fuzzy
 msgid "invalid RGB specification"
 msgstr "Ugyldig skriftspecifikation"
 
-#: colors.c:1394
+#: colors.c:1396
 #, fuzzy, c-format
 msgid "invalid color name '%s'"
 msgstr "ugyldig streng i '%s'"
 
-#: colors.c:1444 colors.c:1453
+#: colors.c:1446 colors.c:1455
 #, fuzzy, c-format
 msgid "invalid color specification \"%s\""
 msgstr "Ugyldig skriftspecifikation"
 
-#: colors.c:1481
+#: colors.c:1483
 msgid "supplied color is neither numeric nor character"
 msgstr ""
 
-#: colors.c:1485
+#: colors.c:1487
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr ""
 
-#: colors.c:1496
+#: colors.c:1498
 #, fuzzy
 msgid "invalid argument type"
 msgstr "ugyldigt 'fil'-argument"
 
-#: colors.c:1507
+#: colors.c:1509
 msgid "unknown palette (need >= 2 colors)"
 msgstr ""
 
-#: colors.c:1511 colors.c:1533
+#: colors.c:1513 colors.c:1535
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr ""
@@ -790,6 +794,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
+
+#: devices.c:81 devices.c:89 devices.c:97
+msgid "NA argument is invalid"
+msgstr ""
 
 #: qdBitmap.c:79
 #, c-format

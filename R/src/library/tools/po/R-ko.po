@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-07-17 21:19\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -5083,6 +5083,12 @@ msgstr "종속된 %s들을 설치하고 있습니다"
 #: R/parseLatex.R:0
 msgid "internal error"
 msgstr ""
+
+#. R/build.R: gettext("invalid 'Package' field", domain = "R-tools")
+#: R/build.R:0
+#, fuzzy
+msgid "invalid 'Package' field"
+msgstr "패키지가 잘못되었습니다"
 
 #. R/pdftools.R: stop("invalid index in object stream lookup")
 #: R/pdftools.R:0

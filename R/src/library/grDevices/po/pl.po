@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 21:07+0200\n"
+"POT-Creation-Date: 2016-07-17 21:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -61,73 +61,77 @@ msgstr "poziom alfa '%s', nie jest w zakresie 0:255"
 msgid "alpha level %d, not in 0:255"
 msgstr "poziom alfa %d, nie jest w zakresie 0:255"
 
-#: colors.c:127
+#: colors.c:114
+msgid "inputs must be finite"
+msgstr "wejścia muszą być skończone"
+
+#: colors.c:129
 msgid "bad hsv to rgb color conversion"
 msgstr "błędna konwersja hsv na rgb"
 
-#: colors.c:219 colors.c:233
+#: colors.c:221 colors.c:235
 msgid "invalid hsv color"
 msgstr "niepoprawny kolor hsv"
 
-#: colors.c:345 colors.c:365
+#: colors.c:347 colors.c:367
 msgid "invalid hcl color"
 msgstr "niepoprawny kolor hcl"
 
-#: colors.c:397
+#: colors.c:399
 msgid "invalid value of 'maxColorValue'"
 msgstr "niepoprawna wartość 'maxColorValue'"
 
-#: colors.c:425
+#: colors.c:427
 msgid "invalid 'names' vector"
 msgstr "niepoprawny wektor 'names'"
 
-#: colors.c:484 colors.c:493
+#: colors.c:486 colors.c:495
 msgid "invalid gray level, must be in [0,1]."
 msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
-#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
+#: colors.c:551 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
 #: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
 #: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: colors.c:1341
+#: colors.c:1343
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr "niepoprawna liczba szestnastkowa w 'color' lub 'lty'"
 
-#: colors.c:1351 colors.c:1361
+#: colors.c:1353 colors.c:1363
 msgid "invalid RGB specification"
 msgstr "niepoprawne określenie RGB"
 
-#: colors.c:1394
+#: colors.c:1396
 #, c-format
 msgid "invalid color name '%s'"
 msgstr "niepoprawna nazwa koloru '%s'"
 
-#: colors.c:1444 colors.c:1453
+#: colors.c:1446 colors.c:1455
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr "niepoprawne określenie koloru \"%s\""
 
-#: colors.c:1481
+#: colors.c:1483
 msgid "supplied color is neither numeric nor character"
 msgstr "dostarczony kolor nie jest ani liczbą ani tekstem"
 
-#: colors.c:1485
+#: colors.c:1487
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr "liczbowe wartości koloru muszą być >=0, znaleziono %d"
 
-#: colors.c:1496
+#: colors.c:1498
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: colors.c:1507
+#: colors.c:1509
 msgid "unknown palette (need >= 2 colors)"
 msgstr "nieznana paleta (potrzeba >= 2 kolory)"
 
-#: colors.c:1511 colors.c:1533
+#: colors.c:1513 colors.c:1535
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
@@ -738,6 +742,10 @@ msgstr "argument musi mieć dodatnią długość"
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
+
+#: devices.c:81 devices.c:89 devices.c:97
+msgid "NA argument is invalid"
+msgstr "argument N jest niepoprawny"
 
 #: qdBitmap.c:79
 #, c-format
