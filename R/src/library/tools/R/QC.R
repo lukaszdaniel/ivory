@@ -4145,7 +4145,7 @@ function(pkgDir)
             utf8 <<- utf8 + sum(enc == "UTF-8")
             bytes <<- bytes + sum(enc == "bytes")
             unk <- xx[enc == "unknown"]
-            ind <- .Call(check_nonASCII2, unk)
+            ind <- .Call(C_check_nonASCII2, unk)
             if(length(ind)) {
                 non_ASCII <<- c(non_ASCII, unk[ind])
                 where <<- c(where, rep.int(ds, length(ind)))
@@ -4480,7 +4480,7 @@ function(dir, respect_quotes = FALSE)
                                         OS_subdirs = OS_subdirs)
         for(f in R_files) {
             text <- readLines(file.path(code_dir, f), warn = FALSE)
-            if(.Call(check_nonASCII, text, !respect_quotes))
+            if(.Call(C_check_nonASCII, text, !respect_quotes))
                 wrong_things <- c(wrong_things, f)
         }
     }
@@ -6252,17 +6252,17 @@ function(dir, localOnly)
     class(out) <- "check_package_CRAN_incoming"
 
     meta <- .get_package_metadata(dir, FALSE)
-    info <- analyze_license(meta["License"])
+    lic_info <- analyze_license(meta["License"])
     ## Use later to indicate changes from FOSS to non-FOSS licence.
-    foss <- info$is_verified
+    foss <- lic_info$is_verified
     ## Record to notify about components extending a base license which
     ## permits extensions.
-    if(length(extensions <- info$extensions) &&
+    if(length(extensions <- lic_info$extensions) &&
        any(ind <- extensions$extensible)) {
         out$extensions <- extensions$components[ind]
         out$pointers <-
             Filter(length,
-                   lapply(info$pointers,
+                   lapply(lic_info$pointers,
                           function(p) {
                               fp <- file.path(dir, p)
                               if(file_test("-f", fp)) {
@@ -6564,12 +6564,12 @@ function(dir, localOnly)
     }
 
     ## Check build time stamp
-    info <- trimws(as.vector(meta["Packaged"]))
-    if(is.na(info)) {
+    ptime <- trimws(as.vector(meta["Packaged"]))
+    if(is.na(ptime)) {
         out$build_time_stamp_msg <-
             gettext("The build time stamp is missing.", domain = "R-tools")
     } else {
-        ts <- strptime(info, "%Y-%m-%d", tz = "GMT")
+        ts <- strptime(ptime, "%Y-%m-%d", tz = "GMT")
         if(is.na(ts)) {
             out$build_time_stamp_msg <-
                 gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
@@ -6699,11 +6699,11 @@ function(dir, localOnly)
         ## repository overrides.  Note that the license info predicates
         ## are logicals (TRUE, NA or FALSE) and the repository overrides
         ## are character ("yes", missing or "no").
-        if(!is.na(iif <- info$is_FOSS) &&
+        if(!is.na(iif <- lic_info$is_FOSS) &&
            !is.na(lif <- entry["License_is_FOSS"]) &&
            ((lif == "yes") != iif))
             out$conflict_in_license_is_FOSS <- lif
-        if(!is.na(iru <- info$restricts_use) &&
+        if(!is.na(iru <- lic_info$restricts_use) &&
            !is.na(lru <- entry["License_restricts_use"]) &&
            ((lru == "yes") != iru))
             out$conflict_in_license_restricts_use <- lru
