@@ -352,12 +352,14 @@ in_R_newurl(const char *description, const char * const mode, int type)
     if(!newcon->conclass) {
 	free(newcon);
 	error(_("allocation of url connection failed"));
+        /* for Solaris 12.5 */ newcon = NULL;
     }
     strcpy(newcon->conclass, "url");
     newcon->description = (char *) malloc(strlen(description) + 1);
     if(!newcon->description) {
 	free(newcon->conclass); free(newcon);
 	error(_("allocation of url connection failed"));
+        /* for Solaris 12.5 */ newcon = NULL;
     }
     init_con(newcon, description, CE_NATIVE, mode);
     newcon->canwrite = FALSE;
@@ -380,6 +382,7 @@ in_R_newurl(const char *description, const char * const mode, int type)
     if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of url connection failed"));
+	/* for Solaris 12.5 */ newcon = NULL;
     }
 
     IDquiet = TRUE;
