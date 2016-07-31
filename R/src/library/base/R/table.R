@@ -45,7 +45,7 @@ table <- function (..., exclude = if (useNA=="no") c(NA, NaN),
 	stop("nothing to tabulate")
     if (length(args) == 1L && is.list(args[[1L]])) {
 	args <- args[[1L]]
-	if (length(dnn) != 1L) # == length(args)
+	if (length(dnn) != length(args))
 	    dnn <- if (!is.null(argn <- names(args))) argn
 		   else paste(dnn[1L], seq_along(args), sep = ".")
     }
@@ -71,7 +71,7 @@ table <- function (..., exclude = if (useNA=="no") c(NA, NaN),
 
         if (!fact.a) # NB: this excludes first, unlike the case above.
             a <- factor(a, exclude = exclude)
-        if (useNA != "no" && !anyNA(levels(a)))
+	if (useNA != "no" && (anyNA(a) || !anyNA(levels(a))))
             a <- addNA(a, ifany = (useNA == "ifany"))
         ll <- levels(a)
         a <- as.integer(a)
