@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2016-04-17 14:04\n"
+"POT-Creation-Date: 2016-08-04 22:47\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -399,6 +399,18 @@ msgstr ""
 msgid "'subset' ignored with single grouping factor"
 msgstr ""
 
+#. R/corStruct.R: gettextf("'sumLenSq := sum(table(groups)^2)' = %g is too large. Too large or no groups in your correlation structure?",     suml2)
+#: R/corStruct.R:0
+msgid ""
+"'sumLenSq := sum(table(groups)^2)' = %g is too large. Too large or no groups "
+"in your correlation structure?"
+msgstr ""
+
+#. R/corStruct.R: gettextf("'sumLenSq' = %g is too large (larger than maximal integer)", corD[["sumLenSq"]])
+#: R/corStruct.R:0
+msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
+msgstr ""
+
 #. R/pdMat.R: stop("'value' must be a square matrix")
 #: R/pdMat.R:0
 msgid "'value' must be a square matrix"
@@ -579,6 +591,11 @@ msgstr ""
 #. R/lme.R: gettext("Fitted values", domain = "R-nlme")
 #: R/gls.R:0 R/lmList.R:0 R/lme.R:0
 msgid "Fitted values"
+msgstr ""
+
+#. R/gls.R: gettext("Fixed Residual standard error:", domain = "R-nlme")
+#: R/gls.R:0
+msgid "Fixed Residual standard error:"
 msgstr ""
 
 #. R/lme.R: gettext("Fixed effects:", domain = "R-nlme")
@@ -850,6 +867,7 @@ msgstr ""
 msgid "Rational quadratic spatial correlation"
 msgstr ""
 
+#. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
@@ -1482,13 +1500,6 @@ msgstr ""
 #. R/simulate.R: stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
 #: R/lme.R:0 R/simulate.R:0
 msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
-msgstr ""
-
-#. R/lme.R: warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
-#: R/lme.R:0
-msgid ""
-"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
-"available."
 msgstr ""
 
 #. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")

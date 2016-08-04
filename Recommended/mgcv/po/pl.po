@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 20:43+0100\n"
+"POT-Creation-Date: 2016-08-04 22:47+0200\n"
 "PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: magic.c:591
+#: magic.c:445
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 "'magic' wymaga wartości startowych dla parametru wygładzającego jeśli L "
 "zostało dostarczone"
 
-#: magic.c:753
+#: magic.c:563
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "'magic', omptymalizator gcv/ubre, nie zdodał uzbieżnić się po 400 iteracjach."
@@ -42,58 +42,59 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:2603
+#: mat.c:2604
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:2608
+#: mat.c:2609
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
 
-#: matrix.c:86
+#: matrix.c:81
 msgid "Failed to initialize memory for matrix."
 msgstr "Nie udało się zainicjalizować pamięci dla macierzy."
 
-#: matrix.c:182 matrix.c:265
+#: matrix.c:143 matrix.c:201
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Nastąpił zapis poza zakresem macierzy!"
 
-#: matrix.c:192
+#: matrix.c:149
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEM SPÓJNOŚCI w istniejącej liście macierzy."
 
-#: matrix.c:236
+#: matrix.c:181
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr "Próbujesz sprawdzić integralność macierzy bez określania 'RANGECHECK'"
 
-#: matrix.c:309
+#: matrix.c:239
 msgid "Target matrix too small in mcopy"
 msgstr "Docelowa macierz jest zbyt mała, aby wykonać 'mcopy'"
 
-#: matrix.c:335 matrix.c:347 matrix.c:363 matrix.c:375
+#: matrix.c:259 matrix.c:267 matrix.c:280 matrix.c:288
 msgid "Incompatible matrices in matmult."
 msgstr "Niespójne macierze w 'matmult'."
 
-#: matrix.c:485
+#: matrix.c:375
 msgid "Attempt to invert() non-square matrix"
 msgstr "Próba odwrócenia metodą 'invert()' niekwadratowej macierzy"
 
-#: matrix.c:524
+#: matrix.c:397
 msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
 
-#: matrix.c:1870
-msgid "'svd()' not converged"
+#: matrix.c:1317
+#, fuzzy
+msgid "svd() not converged"
 msgstr "'svd()' nie uzbieżnił się"
 
-#: matrix.c:1951
+#: matrix.c:1393
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
 
-#: matrix.c:1982
+#: matrix.c:1421
 msgid "Sort failed"
 msgstr "Sortowanie nie powiodło się"
 
@@ -105,29 +106,29 @@ msgstr "BŁĄD w 'addconQT()'."
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Niedobór rang w modelu"
 
-#: sparse-smooth.c:162
+#: sparse-smooth.c:143
 msgid "More than 2 points in a box!!\n"
 msgstr "Więcej niż 2 punkty w pudełku!!\n"
 
-#: sparse-smooth.c:171
+#: sparse-smooth.c:148
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr "punkt %d w %d pudełkach!\n"
 
-#: sparse-smooth.c:366 sparse-smooth.c:388
+#: sparse-smooth.c:150
+msgid "kd tree sanity checks\n"
+msgstr "sprawdzanie drzewa 'kd'\n"
+
+#: sparse-smooth.c:310 sparse-smooth.c:326
 msgid "too many boxes!!"
 msgstr "zbyt dużo pudełek!!"
 
-#: sparse-smooth.c:410
+#: sparse-smooth.c:342
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr "'bi' nie jest równe 'nb-1' %d %d\n"
 
-#: sparse-smooth.c:523
-msgid "child boundary problem\n"
-msgstr "problem brzegu dziecka\n"
-
-#: sparse-smooth.c:651
+#: sparse-smooth.c:551
 msgid ""
 "\n"
 " 'star()' function is useful only in 2D\n"
@@ -135,20 +136,21 @@ msgstr ""
 "\n"
 "funkcja 'star()' jest przydatna jedynie w 2D\n"
 
-#: sparse-smooth.c:720
-msgid "indexing error in 'p_area()' function!\n"
+#: sparse-smooth.c:608
+#, fuzzy
+msgid "indexing error in p_area!\n"
 msgstr "indeksowanie błędu w funkcji 'p_area()'!\n"
 
-#: sparse-smooth.c:1222
+#: sparse-smooth.c:1055
 msgid "hello\n"
 msgstr "witaj\n"
 
-#: sparse-smooth.c:1260
+#: sparse-smooth.c:1087
 #, c-format
 msgid "%d upper neighbour claimed to be self d=%d!\n"
 msgstr "%d górny sąsiad twierdzi, że jest samym sobą d=%d!\n"
 
-#: sparse-smooth.c:1333
+#: sparse-smooth.c:1150
 msgid "lower neighbour claimed to be self!\n"
 msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
 
@@ -164,8 +166,8 @@ msgstr ""
 "Człon posiada mniej unikalnych kombinacji zmiennych niezależnych niż "
 "określona maksymalna liczba stopni swobody"
 
-#~ msgid "kd tree sanity checks\n"
-#~ msgstr "sprawdzanie drzewa 'kd'\n"
+#~ msgid "child boundary problem\n"
+#~ msgstr "problem brzegu dziecka\n"
 
 #~ msgid ""
 #~ "Overall smoothing parameter estimate on upper boundary.\n"

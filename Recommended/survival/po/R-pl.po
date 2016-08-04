@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2016-04-23 13:23\n"
+"POT-Creation-Date: 2016-08-04 22:47\n"
 "PO-Revision-Date: 2016-04-23 13:23+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -121,7 +121,7 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/print.survdiff.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survdiff"))
 #. R/print.survexp.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survexp"))
 #. R/print.survreg.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("servreg.penal"))
-#. R/pspline.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
+#. R/pspline.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
 #. R/quantile.survfit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survfit"))
 #. R/summary.aareg.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("aareg"))
 #. R/summary.ratetable.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable"))
@@ -134,7 +134,7 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #: R/basehaz.R:0 R/cox.zph.S:0 R/coxph.rvar.S:0 R/finegray.R:0
 #: R/is.ratetable.S:0 R/lines.aareg.S:0 R/plot.aareg.S:0 R/predict.coxph.R:0
 #: R/print.aareg.S:0 R/print.coxph.penal.S:0 R/print.survdiff.S:0
-#: R/print.survexp.S:0 R/print.survreg.penal.S:0 R/pspline.S:0
+#: R/print.survexp.S:0 R/print.survreg.penal.S:0 R/pspline.R:0
 #: R/quantile.survfit.R:0 R/summary.aareg.S:0 R/summary.ratetable.S:0
 #: R/summary.survexp.R:0 R/survfit.R:0 R/survfitKM.S:0 R/survfitTurnbull.S:0
 msgid "'%s' argument is not an object of class %s"
@@ -234,7 +234,6 @@ msgstr "argument '%s' musi być nazwą zmiennej w zbiorze danych"
 #. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
 #. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
 #. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
-#. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
 #: R/Surv.S:0 R/plot.survfit.R:0 R/survfitms.R:0
 msgid "'%s' argument must be numeric"
 msgstr "argument '%s' musi być liczbą"
@@ -303,6 +302,12 @@ msgstr "argument 'breaks' musi określać przynajmniej jeden interwał"
 msgid "'cohort.size' and 'stratum' levels lengths do not match"
 msgstr "długości poziomów 'cohort.size' oraz 'stratum' nie zgadzają się"
 
+#. R/pspline.R: stop("'combine' argument must be an increasing vector of positive integers")
+#: R/pspline.R:0
+#, fuzzy
+msgid "'combine' argument must be an increasing vector of positive integers"
+msgstr "argument 'cut' musi być wektorem skończonych liczb"
+
 #. R/survSplit.R: stop("'cut' argument must be a vector of finite numbers")
 #: R/survSplit.R:0
 msgid "'cut' argument must be a vector of finite numbers"
@@ -369,8 +374,8 @@ msgid "'istate' argument should be a vector of integers or a factor"
 msgstr ""
 "argument 'istate' powinien być wektorem liczb całkowitych lub czynnikiem"
 
-#. R/pspline.S: gettextf("'nterm' argument is too small for df=%s", df)
-#: R/pspline.S:0
+#. R/pspline.R: gettextf("'nterm' argument is too small for df=%s", df)
+#: R/pspline.R:0
 msgid "'nterm' argument is too small for df=%s"
 msgstr "argument 'nterm' jest zbyt mały dla stopni swobody=%s"
 
@@ -1577,11 +1582,11 @@ msgstr ""
 "dla numerycznej precyzyjności, wartość argumentu 'tolerance' powinna być "
 "mniejsza niż argumentu 'eps'"
 
-#. R/tmerge.R: stop("for the first call (that establishes the time range) data1 must have no duplicat identifiers")
+#. R/tmerge.R: stop("for the first call (that establishes the time range) data1 must have no duplicate identifiers")
 #: R/tmerge.R:0
 msgid ""
 "for the first call (that establishes the time range) data1 must have no "
-"duplicat identifiers"
+"duplicate identifiers"
 msgstr ""
 
 #. R/frailty.S: gettextf("function %s was not found", sQuote(temp))
@@ -1605,6 +1610,12 @@ msgstr "wartości 'id' znalezione w 'data2', których nie ma w 'data1'"
 #: R/tmerge.R:0
 #, fuzzy
 msgid "id variable not found in data1"
+msgstr "zmienna nie została znaleziona w tabeli szybkości:"
+
+#. R/tmerge.R: stop("id variable not found in data2")
+#: R/tmerge.R:0
+#, fuzzy
+msgid "id variable not found in data2"
 msgstr "zmienna nie została znaleziona w tabeli szybkości:"
 
 #. R/is.ratetable.S: gettext("illegal 'factor' attribute of <0")
@@ -1676,8 +1687,8 @@ msgstr ""
 #. R/plot.survfit.R: gettextf("invalid '%s' argument", "conf.int")
 #. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
 #. R/predict.coxph.R: gettextf("invalid '%s' argument", "terms")
-#. R/pspline.S: gettextf("invalid '%s' argument", "theta")
-#. R/pspline.S: gettextf("invalid '%s' argument", "Boundary.knots")
+#. R/pspline.R: gettextf("invalid '%s' argument", "theta")
+#. R/pspline.R: gettextf("invalid '%s' argument", "Boundary.knots")
 #. R/pyears.R: gettextf("invalid '%s' argument", "rcall")
 #. R/survexp.R: gettextf("invalid '%s' argument", "rcall")
 #. R/survexp.fit.S: gettextf("invalid '%s' argument", "death")
@@ -1685,7 +1696,7 @@ msgstr ""
 #. R/survreg.fit.S: gettextf("invalid '%s' argument", "scale")
 #. R/survreg.fit.S: gettextf("invalid '%s' argument", "strata")
 #: R/aareg.taper.S:0 R/lines.survfit.coxph.S:0 R/plot.survfit.R:0
-#: R/predict.coxph.R:0 R/pspline.S:0 R/pyears.R:0 R/survexp.R:0
+#: R/predict.coxph.R:0 R/pspline.R:0 R/pyears.R:0 R/survexp.R:0
 #: R/survexp.fit.S:0 R/survpenal.fit.S:0 R/survreg.fit.S:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -2258,12 +2269,6 @@ msgstr ""
 msgid "the id argument is required for start:stop data"
 msgstr "argument 'id' jest wymagany dla danych start:stop"
 
-#. R/tmerge.R: stop("the id variable is null")
-#: R/tmerge.R:0
-#, fuzzy
-msgid "the id variable is null"
-msgstr "zmienna %s jest poza zakresem"
-
 #. R/survSplit.R: stop("the model must have an object of class \"Surv\" as the response")
 #: R/survSplit.R:0
 #, fuzzy
@@ -2318,13 +2323,13 @@ msgstr "jest tylko jedna grupa"
 msgid "this function cannot deal with iteraction terms"
 msgstr "ta funkcja nie obsługuje członów interakcji"
 
-#. R/pspline.S: stop("too few basis functions")
-#: R/pspline.S:0
+#. R/pspline.R: stop("too few basis functions")
+#: R/pspline.R:0
 msgid "too few basis functions"
 msgstr "zbyt mało funkcji bazowych"
 
-#. R/pspline.S: stop("too few degrees of freedom")
-#: R/pspline.S:0
+#. R/pspline.R: stop("too few degrees of freedom")
+#: R/pspline.R:0
 msgid "too few degrees of freedom"
 msgstr "zbyt mało stopni swobody"
 
@@ -2409,6 +2414,12 @@ msgstr "niepoprawna długość argumentu '%s'"
 msgid "wrong length for '%s' component"
 msgstr "niepoprawna długość komponentu '%s'"
 
+#. R/pspline.R: stop("wrong length for 'combine' argument")
+#: R/pspline.R:0
+#, fuzzy
+msgid "wrong length for 'combine' argument"
+msgstr "niepoprawna długość argumentu '%s'"
+
 #. R/is.ratetable.S: gettext("wrong length for 'type' attribute")
 #: R/is.ratetable.S:0
 msgid "wrong length for 'type' attribute"
@@ -2485,6 +2496,10 @@ msgid_plural "unrecognized options: %s"
 msgstr[0] "nierozpoznana opcja: %s"
 msgstr[1] "nierozpoznane opcje: %s"
 msgstr[2] "nierozpoznane opcje: %s"
+
+#, fuzzy
+#~ msgid "the id variable is null"
+#~ msgstr "zmienna %s jest poza zakresem"
 
 #, fuzzy
 #~ msgid "'%s' argument is not an object of class"

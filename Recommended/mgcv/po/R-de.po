@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:03\n"
+"POT-Creation-Date: 2016-08-04 22:47\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -191,6 +191,11 @@ msgstr ""
 msgid "'%s' function requires 2 or more dimensional data"
 msgstr ""
 
+#. R/gamlss.r: gettextf("'%s' link not available for mu parameter of gaulss", link[[i]])
+#: R/gamlss.r:0
+msgid "'%s' link not available for mu parameter of gaulss"
+msgstr ""
+
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
 msgid "'%s', '%s' and '%s' components should have the same length"
@@ -265,6 +270,11 @@ msgstr ""
 msgid "'absorb.cons' argument must be TRUE for multi-formula models"
 msgstr ""
 
+#. R/gam.fit3.r: warning("'all.derivs' argument only available in rho, theta parameterization")
+#: R/gam.fit3.r:0
+msgid "'all.derivs' argument only available in rho, theta parameterization"
+msgstr ""
+
 #. R/smooth.r: stop("'by' variable must be same dimension as smooth arguments")
 #. R/smooth.r: stop("'by' variable must be same dimension as smooth arguments")
 #: R/smooth.r:0
@@ -279,6 +289,12 @@ msgstr ""
 msgid "'by=.' is not allowed"
 msgstr "by=. nicht erlaubt"
 
+#. R/coxph.r: stop("'cox.ph()' function does not yet handle offsets")
+#: R/coxph.r:0
+#, fuzzy
+msgid "'cox.ph()' function does not yet handle offsets"
+msgstr "s(.) wird noch nicht unterstützt."
+
 #. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
 #: R/smooth.r:0
 #, fuzzy
@@ -290,7 +306,6 @@ msgstr "d kann im Aufruf von null.space.dimension() nicht negativ sein."
 msgid "'exclude' argument ignored by discrete prediction at present"
 msgstr ""
 
-#. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #: R/bam.r:0
@@ -313,6 +328,11 @@ msgstr ""
 #. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
 #: R/jagam.r:0
 msgid "'jagam()' function requires a file for the JAGS model specification"
+msgstr ""
+
+#. R/mgcv.r: stop("'length(drop.intercept)' should be equal to number of model formulas")
+#: R/mgcv.r:0
+msgid "'length(drop.intercept)' should be equal to number of model formulas"
 msgstr ""
 
 #. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
@@ -398,11 +418,6 @@ msgstr "H hat falsche Dimension"
 msgid "'sp' is too short"
 msgstr ""
 
-#. R/bam.r: warning("'sparse=TRUE' option is deprecated")
-#: R/bam.r:0
-msgid "'sparse=TRUE' option is deprecated"
-msgstr ""
-
 #. R/mgcv.r: warning("'test' argument ignored")
 #: R/mgcv.r:0
 #, fuzzy
@@ -474,6 +489,7 @@ msgid "0s in V(mu)"
 msgstr "0s in V(mu)"
 
 #. R/gam.fit3.r: stop("1<a<b<2 (strict) required")
+#. R/gam.fit3.r: stop("1<a<b<2 (strict) required")
 #: R/gam.fit3.r:0
 msgid "1<a<b<2 (strict) required"
 msgstr ""
@@ -491,17 +507,11 @@ msgstr ""
 msgid "AR1 parameter rho unused with generalized model"
 msgstr ""
 
-#. R/bam.r: warning("AR1 parameter rho unused with sparse fitting")
-#: R/bam.r:0
-msgid "AR1 parameter rho unused with sparse fitting"
-msgstr ""
-
 #. R/gam.sim.r: gettext("Additive model + factor", domain = "R-mgcv")
 #: R/gam.sim.r:0
 msgid "Additive model + factor"
 msgstr ""
 
-#. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/gam.fit3.r: warning("Algorithm did not converge")
@@ -677,7 +687,6 @@ msgstr ""
 
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
-#. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/gam.fit3.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/mgcv.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
@@ -762,6 +771,11 @@ msgstr ""
 #. R/mgcv.r: gettext("Estimated degrees of freedom:", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "Estimated degrees of freedom:"
+msgstr ""
+
+#. R/mgcv.r: warning("Extended Fellner Schall only implemented for general families")
+#: R/mgcv.r:0
+msgid "Extended Fellner Schall only implemented for general families"
 msgstr ""
 
 #. R/smooth.r: stop("F is missing from cr smooth - refit model with current mgcv")
@@ -1049,7 +1063,6 @@ msgstr "Keine Varianzschätzungen verfügbar"
 
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
-#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit4.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/mgcv.r: gettextf("Non-finite coefficients at iteration %d", iter)
@@ -1070,7 +1083,6 @@ msgstr ""
 "Glättungsparameter leitet Iterationsabweichung ab. Näherungstoleranz "
 "vermindern! Siehe »epsilon« in »gam.control«"
 
-#. R/bam.r: stop("Non-finite deviance")
 #. R/bam.r: stop("Non-finite deviance")
 #. R/bam.r: stop("Non-finite deviance")
 #: R/bam.r:0
@@ -1513,6 +1525,11 @@ msgstr ""
 msgid "calling gdi..."
 msgstr ""
 
+#. R/mgcv.r: stop("can't handle '[[' in formula")
+#: R/mgcv.r:0
+msgid "can't handle '[[' in formula"
+msgstr ""
+
 #. R/soap.r: stop("can't soap smooth without a boundary")
 #. R/soap.r: stop("can't soap smooth without a boundary")
 #. R/soap.r: stop("can't soap smooth without a boundary")
@@ -1520,7 +1537,6 @@ msgstr ""
 msgid "can't soap smooth without a boundary"
 msgstr ""
 
-#. R/bam.r: stop("cannot find valid starting values: please specify some")
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
 #: R/bam.r:0
@@ -1640,9 +1656,9 @@ msgstr ""
 msgid "done!"
 msgstr ""
 
-#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+#. R/mgcv.r: warning("dropping unidentifiable parametric terms from model", call. = FALSE)
 #: R/mgcv.r:0
-msgid "dropping unidentifiable parameteric terms from model"
+msgid "dropping unidentifiable parametric terms from model"
 msgstr ""
 
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
@@ -1664,6 +1680,11 @@ msgstr "Elemente von min.sp dürfen nicht negativ sein."
 #. R/gam.fit4.r: stop("empty models are not available")
 #: R/gam.fit4.r:0
 msgid "empty models are not available"
+msgstr ""
+
+#. R/bam.r: stop("extended families are not supported by 'bam()' function")
+#: R/bam.r:0
+msgid "extended families are not supported by 'bam()' function"
 msgstr ""
 
 #. R/smooth.r: stop("factor 'by' variables can not be used with matrix arguments")
@@ -1712,7 +1733,6 @@ msgstr ""
 
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
-#. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/gam.fit3.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/mgcv.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
@@ -1721,7 +1741,6 @@ msgstr ""
 "Es trat der Fall auf, dass die angenäherten Wahrscheinlichkeiten numerisch 0 "
 "oder 1 waren"
 
-#. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/gam.fit3.r: warning("fitted rates numerically 0 occurred")
@@ -1745,7 +1764,8 @@ msgstr ""
 #. R/fast-REML.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
-#: R/fast-REML.r:0 R/gam.fit3.r:0
+#. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
+#: R/fast-REML.r:0 R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "full convergence"
 msgstr ""
 
@@ -1778,6 +1798,11 @@ msgstr ""
 #. R/gamm.r: warning("gamm not converged, try increasing niterPQL")
 #: R/gamm.r:0
 msgid "gamm not converged, try increasing niterPQL"
+msgstr ""
+
+#. R/gamlss.r: stop("gevlss requires 3 links specified as character strings")
+#: R/gamlss.r:0
+msgid "gevlss requires 3 links specified as character strings"
 msgstr ""
 
 #. R/plots.r: stop("grid vectors are different lengths")
@@ -1873,7 +1898,8 @@ msgstr ""
 
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
-#: R/gam.fit3.r:0
+#. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
+#: R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "iteration limit reached"
 msgstr ""
 
@@ -2022,11 +2048,6 @@ msgstr ""
 msgid "model has repeated 1-d smooths of same variable"
 msgstr "Modell hat 1-d-Glättungen der gleichen Variable wiederholt."
 
-#. R/bam.r: warning("model matrix too dense for any possible benefit from sparse")
-#: R/bam.r:0
-msgid "model matrix too dense for any possible benefit from sparse"
-msgstr ""
-
 #. R/smooth.r: warning("more knots than data in a ds term: knots ignored")
 #: R/smooth.r:0
 #, fuzzy
@@ -2059,6 +2080,16 @@ msgstr "mehr Knoten als einheitliche Datenwerte sind nicht erlaubt"
 #. R/mvam.r: stop("mvn dimension error")
 #: R/mvam.r:0
 msgid "mvn dimension error"
+msgstr ""
+
+#. R/mvam.r: stop("mvn does not yet handle offsets")
+#: R/mvam.r:0
+msgid "mvn does not yet handle offsets"
+msgstr ""
+
+#. R/mgcv.r: stop("na.action not character or function")
+#: R/mgcv.r:0
+msgid "na.action not character or function"
 msgstr ""
 
 #. R/plots.r: stop("names of 'z' and 'pc' must match")
@@ -2122,6 +2153,12 @@ msgstr ""
 #: R/smooth.r:0
 msgid "no data to predict at"
 msgstr "keine Daten zum Vorausberechnen von"
+
+#. R/smooth.r: warning("no factor supplied to fs smooth")
+#: R/smooth.r:0
+#, fuzzy
+msgid "no factor supplied to fs smooth"
+msgstr "Keine Daten für gam.setup bereitgestellt"
 
 #. R/soap.r: stop("no free coefs in sf smooth")
 #: R/soap.r:0
@@ -2238,6 +2275,11 @@ msgstr ""
 #. R/smooth.r: stop("order too low")
 #: R/smooth.r:0
 msgid "order too low"
+msgstr ""
+
+#. R/gam.fit3.r: stop("p must be in [1,2]")
+#: R/gam.fit3.r:0
+msgid "p must be in [1,2]"
 msgstr ""
 
 #. R/mgcv.r: warning("p-values for any terms that can be penalized to zero will be unreliable: refit model to fix this")
@@ -2379,6 +2421,11 @@ msgstr ""
 msgid "sd should have exactly one less entry than ld"
 msgstr ""
 
+#. R/mgcv.r: stop("shared offsets are not allowed")
+#: R/mgcv.r:0
+msgid "shared offsets are not allowed"
+msgstr ""
+
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
 #: R/gamm.r:0
 msgid "side conditions are not allowed for nested smooths"
@@ -2435,11 +2482,6 @@ msgstr ""
 msgid "soap films are bivariate only"
 msgstr ""
 
-#. R/smooth.r: stop("something wrong in monotone setup - no unpenalized terms!")
-#: R/smooth.r:0
-msgid "something wrong in monotone setup - no unpenalized terms!"
-msgstr ""
-
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #: R/smooth.r:0
@@ -2465,17 +2507,6 @@ msgid "sorry no option for contouring with errors: try plot.gam"
 msgstr ""
 "Entschuldigung. Keine Option für Formgebung mit Fehlern: Versuchen Sie plot."
 "gam"
-
-#. R/mgcv.r: warning("sorry, general families currently ignore offsets")
-#. R/mgcv.r: warning("sorry, general families currently ignore offsets")
-#: R/mgcv.r:0
-msgid "sorry, general families currently ignore offsets"
-msgstr ""
-
-#. R/bam.r: warning("sparse=TRUE not supported with fast REML, reset to REML.")
-#: R/bam.r:0
-msgid "sparse=TRUE not supported with fast REML, reset to REML."
-msgstr ""
 
 #. R/fast-REML.r: gettext("step failed", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("step failed", domain = "R-mgcv")
@@ -2510,6 +2541,13 @@ msgstr ""
 #, fuzzy
 msgid "supplied penalty wrong dimension!"
 msgstr "H hat falsche Dimension"
+
+#. R/smooth.r: stop("supply a value for each variable for a point constraint")
+#. R/smooth.r: stop("supply a value for each variable for a point constraint")
+#. R/smooth.r: stop("supply a value for each variable for a point constraint")
+#: R/smooth.r:0
+msgid "supply a value for each variable for a point constraint"
+msgstr ""
 
 #. R/smooth.r: warning("sweep and drop constraints unlikely to work well with self handling of by vars")
 #: R/smooth.r:0
@@ -2600,6 +2638,11 @@ msgstr "Unbekannte Typ, wird auf terms zurückgesetzt."
 msgid "type must be \"link\" or \"response\""
 msgstr "Typ muss »link« oder »response« sein"
 
+#. R/mgcv.r: stop("un-supported test")
+#: R/mgcv.r:0
+msgid "un-supported test"
+msgstr ""
+
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
 msgid "unimplemented sparse constraint type requested"
@@ -2626,6 +2669,12 @@ msgstr ""
 #, fuzzy
 msgid "unknown tensor constraint type"
 msgstr "Unbekannte GAM äußere Optimierungsmethode"
+
+#. R/mgcv.r: stop("unrecognised na.action")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "unrecognised na.action"
+msgstr "unerkannter (Vektor?) Verweis"
 
 #. R/gam.fit3.r: stop("unrecognized (vector?) link")
 #: R/gam.fit3.r:0
@@ -2688,6 +2737,16 @@ msgstr "Gewichte müssen wie glm-Gewichte sein für verallgemeinerten Fall"
 #. R/soap.r: stop("x and y must be same length")
 #: R/soap.r:0
 msgid "x and y must be same length"
+msgstr ""
+
+#. R/gam.fit3.r: stop("y must be an integer multiple of phi for Tweedie(p=1)")
+#: R/gam.fit3.r:0
+msgid "y must be an integer multiple of phi for Tweedie(p=1)"
+msgstr ""
+
+#. R/gam.fit3.r: stop("y must be strictly positive for a Gamma density")
+#: R/gam.fit3.r:0
+msgid "y must be strictly positive for a Gamma density"
 msgstr ""
 
 #. R/plots.r: ngettext(boi$iter, "%s after %d iteration.", "%s after %d iterations.", domain = "R-mgcv")

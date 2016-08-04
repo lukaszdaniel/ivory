@@ -131,9 +131,9 @@ c39a26dfe7ccaafd044e88468155b153 *vignettes/Introduction.Rnw
 aa4803052d7bb73d8b6fdb81046ef00d *po/R-fr.po
 9931e81edf788ca8eed84e8d75860e53 *po/R-ko.po
 6306f5d87852b1250406aca93e58cb4f *po/R-de.po
-014a859f3ae8509acac395b277a2c552 *po/R-Matrix.pot
+6273fee4ea1be8c7b02dc8347de1d449 *po/R-Matrix.pot
 4eb9120fc116b4c717b50b2a228be30b *po/R-pl.po
-6a796a97a82dac8985566c0789c68c57 *po/Matrix.pot
+3a72f926ade1a536274a7f2ac91b3f98 *po/Matrix.pot
 9cff7339a849c0b4e455c2291af71269 *po/de.po
 e23ab5be4fd03f0085929c32bcf59b46 *po/update-me.sh
 9c81cb05cff2b0eea470e2f965fdcd99 *po/fr.po
@@ -148,8 +148,8 @@ c57e30865f91a82a5f25370026517822 *inst/NEWS.Rd
 a79e591e17b3f1aee36decd46a00f419 *inst/test-tools-1.R
 82f663b9c13798441e09a5cf1c3ac4be *inst/po/fr/LC_MESSAGES/Matrix.mo
 d816a990e5ade799335217911f3921e0 *inst/po/fr/LC_MESSAGES/R-Matrix.mo
-24749135627c74cdabda338416962f88 *inst/po/en@quot/LC_MESSAGES/Matrix.mo
-0f7c563b7422b2f8c639d11df40bbf9a *inst/po/en@quot/LC_MESSAGES/R-Matrix.mo
+fac0274d9519dc9bca61dda28c666089 *inst/po/en@quot/LC_MESSAGES/Matrix.mo
+ab8df224e9fbb553dc4f07527f8aa238 *inst/po/en@quot/LC_MESSAGES/R-Matrix.mo
 4bce812e65a97221becc900ce9e03160 *inst/po/de/LC_MESSAGES/Matrix.mo
 db771e431c8c95487f84d6940ea526e3 *inst/po/de/LC_MESSAGES/R-Matrix.mo
 88d73ef690800e8eb81a7f36cf005f83 *inst/po/pl/LC_MESSAGES/Matrix.mo

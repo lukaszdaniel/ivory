@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-12\n"
+"Project-Id-Version: mgcv 1.8-13\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-17 14:04+0200\n"
+"POT-Creation-Date: 2016-08-04 22:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: magic.c:591
+#: magic.c:445
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 
-#: magic.c:753
+#: magic.c:563
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 
@@ -37,58 +37,58 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:2603
+#: mat.c:2604
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:2608
+#: mat.c:2609
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""
 
-#: matrix.c:86
+#: matrix.c:81
 msgid "Failed to initialize memory for matrix."
 msgstr ""
 
-#: matrix.c:182 matrix.c:265
+#: matrix.c:143 matrix.c:201
 msgid "An out of bound write to matrix has occurred!"
 msgstr ""
 
-#: matrix.c:192
+#: matrix.c:149
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr ""
 
-#: matrix.c:236
+#: matrix.c:181
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr ""
 
-#: matrix.c:309
+#: matrix.c:239
 msgid "Target matrix too small in mcopy"
 msgstr ""
 
-#: matrix.c:335 matrix.c:347 matrix.c:363 matrix.c:375
+#: matrix.c:259 matrix.c:267 matrix.c:280 matrix.c:288
 msgid "Incompatible matrices in matmult."
 msgstr ""
 
-#: matrix.c:485
+#: matrix.c:375
 msgid "Attempt to invert() non-square matrix"
 msgstr ""
 
-#: matrix.c:524
+#: matrix.c:397
 msgid "Singular Matrix passed to invert()"
 msgstr ""
 
-#: matrix.c:1870
-msgid "'svd()' not converged"
+#: matrix.c:1317
+msgid "svd() not converged"
 msgstr ""
 
-#: matrix.c:1951
+#: matrix.c:1393
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr ""
 
-#: matrix.c:1982
+#: matrix.c:1421
 msgid "Sort failed"
 msgstr ""
 
@@ -100,48 +100,48 @@ msgstr ""
 msgid "QPCLS - Rank deficiency in model"
 msgstr ""
 
-#: sparse-smooth.c:162
+#: sparse-smooth.c:143
 msgid "More than 2 points in a box!!\n"
 msgstr ""
 
-#: sparse-smooth.c:171
+#: sparse-smooth.c:148
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr ""
 
-#: sparse-smooth.c:366 sparse-smooth.c:388
+#: sparse-smooth.c:150
+msgid "kd tree sanity checks\n"
+msgstr ""
+
+#: sparse-smooth.c:310 sparse-smooth.c:326
 msgid "too many boxes!!"
 msgstr ""
 
-#: sparse-smooth.c:410
+#: sparse-smooth.c:342
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr ""
 
-#: sparse-smooth.c:523
-msgid "child boundary problem\n"
-msgstr ""
-
-#: sparse-smooth.c:651
+#: sparse-smooth.c:551
 msgid ""
 "\n"
 " 'star()' function is useful only in 2D\n"
 msgstr ""
 
-#: sparse-smooth.c:720
-msgid "indexing error in 'p_area()' function!\n"
+#: sparse-smooth.c:608
+msgid "indexing error in p_area!\n"
 msgstr ""
 
-#: sparse-smooth.c:1222
+#: sparse-smooth.c:1055
 msgid "hello\n"
 msgstr ""
 
-#: sparse-smooth.c:1260
+#: sparse-smooth.c:1087
 #, c-format
 msgid "%d upper neighbour claimed to be self d=%d!\n"
 msgstr ""
 
-#: sparse-smooth.c:1333
+#: sparse-smooth.c:1150
 msgid "lower neighbour claimed to be self!\n"
 msgstr ""
 

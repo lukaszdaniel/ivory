@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.39-2\n"
-"POT-Creation-Date: 2016-04-23 13:23\n"
+"Project-Id-Version: survival 2.39-5\n"
+"POT-Creation-Date: 2016-08-04 22:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,7 +145,7 @@ msgstr ""
 #: R/print.survdiff.S: 0
 #: R/print.survexp.S: 0
 #: R/print.survreg.penal.S: 0
-#: R/pspline.S: 0
+#: R/pspline.R: 0
 #: R/quantile.survfit.R: 0
 #: R/summary.aareg.S: 0
 #: R/summary.ratetable.S: 0
@@ -171,7 +171,7 @@ msgstr ""
 #. R/print.survdiff.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survdiff"))
 #. R/print.survexp.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survexp"))
 #. R/print.survreg.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("servreg.penal"))
-#. R/pspline.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
+#. R/pspline.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
 #. R/quantile.survfit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survfit"))
 #. R/summary.aareg.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("aareg"))
 #. R/summary.ratetable.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable"))
@@ -316,7 +316,6 @@ msgstr ""
 #: R/plot.survfit.R: 0
 #: R/plot.survfit.R: 0
 #: R/survfitms.R: 0
-#: R/survfitms.R: 0
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
@@ -324,7 +323,6 @@ msgstr ""
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time2")
 #. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
 #. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
-#. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
 #. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
 
 msgid "'%s' argument must be numeric"
@@ -422,6 +420,13 @@ msgid "'cohort.size' and 'stratum' levels lengths do not match"
 msgstr ""
 
 
+#: R/pspline.R: 0
+#. R/pspline.R: stop("'combine' argument must be an increasing vector of positive integers")
+
+msgid "'combine' argument must be an increasing vector of positive integers"
+msgstr ""
+
+
 #: R/survSplit.R: 0
 #. R/survSplit.R: stop("'cut' argument must be a vector of finite numbers")
 
@@ -506,8 +511,8 @@ msgid "'istate' argument should be a vector of integers or a factor"
 msgstr ""
 
 
-#: R/pspline.S: 0
-#. R/pspline.S: gettextf("'nterm' argument is too small for df=%s", df)
+#: R/pspline.R: 0
+#. R/pspline.R: gettextf("'nterm' argument is too small for df=%s", df)
 
 msgid "'nterm' argument is too small for df=%s"
 msgstr ""
@@ -2143,9 +2148,9 @@ msgstr ""
 
 
 #: R/tmerge.R: 0
-#. R/tmerge.R: stop("for the first call (that establishes the time range) data1 must have no duplicat identifiers")
+#. R/tmerge.R: stop("for the first call (that establishes the time range) data1 must have no duplicate identifiers")
 
-msgid "for the first call (that establishes the time range) data1 must have no duplicat identifiers"
+msgid "for the first call (that establishes the time range) data1 must have no duplicate identifiers"
 msgstr ""
 
 
@@ -2174,6 +2179,13 @@ msgstr ""
 #. R/tmerge.R: stop("id variable not found in data1")
 
 msgid "id variable not found in data1"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("id variable not found in data2")
+
+msgid "id variable not found in data2"
 msgstr ""
 
 
@@ -2273,8 +2285,8 @@ msgstr ""
 #: R/plot.survfit.R: 0
 #: R/plot.survfit.R: 0
 #: R/predict.coxph.R: 0
-#: R/pspline.S: 0
-#: R/pspline.S: 0
+#: R/pspline.R: 0
+#: R/pspline.R: 0
 #: R/pyears.R: 0
 #: R/survexp.R: 0
 #: R/survexp.fit.S: 0
@@ -2289,8 +2301,8 @@ msgstr ""
 #. R/plot.survfit.R: gettextf("invalid '%s' argument", "conf.int")
 #. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
 #. R/predict.coxph.R: gettextf("invalid '%s' argument", "terms")
-#. R/pspline.S: gettextf("invalid '%s' argument", "theta")
-#. R/pspline.S: gettextf("invalid '%s' argument", "Boundary.knots")
+#. R/pspline.R: gettextf("invalid '%s' argument", "theta")
+#. R/pspline.R: gettextf("invalid '%s' argument", "Boundary.knots")
 #. R/pyears.R: gettextf("invalid '%s' argument", "rcall")
 #. R/survexp.R: gettextf("invalid '%s' argument", "rcall")
 #. R/survexp.fit.S: gettextf("invalid '%s' argument", "death")
@@ -3072,13 +3084,6 @@ msgid "the id argument is required for start:stop data"
 msgstr ""
 
 
-#: R/tmerge.R: 0
-#. R/tmerge.R: stop("the id variable is null")
-
-msgid "the id variable is null"
-msgstr ""
-
-
 #: R/survSplit.R: 0
 #. R/survSplit.R: stop("the model must have an object of class \"Surv\" as the response")
 
@@ -3150,15 +3155,15 @@ msgid "this function cannot deal with iteraction terms"
 msgstr ""
 
 
-#: R/pspline.S: 0
-#. R/pspline.S: stop("too few basis functions")
+#: R/pspline.R: 0
+#. R/pspline.R: stop("too few basis functions")
 
 msgid "too few basis functions"
 msgstr ""
 
 
-#: R/pspline.S: 0
-#. R/pspline.S: stop("too few degrees of freedom")
+#: R/pspline.R: 0
+#. R/pspline.R: stop("too few degrees of freedom")
 
 msgid "too few degrees of freedom"
 msgstr ""
@@ -3274,6 +3279,13 @@ msgstr ""
 #. R/is.ratetable.S: gettextf("wrong length for '%s' component", "factor")
 
 msgid "wrong length for '%s' component"
+msgstr ""
+
+
+#: R/pspline.R: 0
+#. R/pspline.R: stop("wrong length for 'combine' argument")
+
+msgid "wrong length for 'combine' argument"
 msgstr ""
 
 

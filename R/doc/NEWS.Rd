@@ -328,6 +328,12 @@
       \item \code{merge(df1, df2)} now also works for data frames with
       column names \code{"na.last"}, \code{"decreasing"}, or
       \code{"method"}.  (\PR{17119})
+
+      \item \code{contour()} caused a segfault if the \code{labels}
+      argument had length zero.  (Reported by Bill Dunlap.)
+
+      \item \code{unique(warnings())} works more correctly, thanks to a
+      new \code{duplicated.warnings()} method.
     }
   }
 }
