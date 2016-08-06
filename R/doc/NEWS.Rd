@@ -265,8 +265,12 @@
       and \code{NA}s, these are tabulated correctly (again).% to be % backported
 
       \item \code{pmax()} and \code{pmin()} now work with (more ?)
-      classed objects, such \code{"Matrix"} from the \CRANpkg{Matrix}
+      classed objects, such as \code{"Matrix"} from the \CRANpkg{Matrix}
       package, as documented for a long time.
+
+      \item \code{wilcox.test(x, conf.int=TRUE)} no longer errors out in
+      cases where the confidence interval is not available, such as for
+      \code{x = 0:2}.
     }
   }
 }
@@ -284,6 +288,9 @@
       \item The version of LAPACK included in the sources has been
       updated to 3.6.1, a bug-fix release including a speedup for the
       non-symmetric case of \code{eigen()}.
+
+      \item Use \code{options(deparse.max.lines)} to limit the number of
+      lines recorded in .Traceback and other deparsing activities.
     }
   }
 
@@ -334,6 +341,9 @@
 
       \item \code{unique(warnings())} works more correctly, thanks to a
       new \code{duplicated.warnings()} method.
+
+      \item \code{findInterval(x, vec=numeric(), all.inside=TRUE)} now
+      returns \code{0}s as documented.  (Reported by Bill Dunlap.)
     }
   }
 }
