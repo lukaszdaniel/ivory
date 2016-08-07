@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1430,7 +1430,6 @@ msgstr ""
 msgid "(offset)"
 msgstr ""
 
-#. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
@@ -3415,10 +3414,15 @@ msgstr "kan ikke ændre frekvens fra %g til %g"
 msgid "cannot compute asymptotic confidence set or estimator"
 msgstr ""
 
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are tied", call. = FALSE)
 #: R/wilcox.test.R:0
 msgid "cannot compute confidence interval when all observations are tied"
+msgstr ""
+
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are zero or tied",     call. = FALSE)
+#: R/wilcox.test.R:0
+msgid ""
+"cannot compute confidence interval when all observations are zero or tied"
 msgstr ""
 
 #. R/ansari.test.R: warning("cannot compute confidence set, returning NA")
@@ -5322,9 +5326,13 @@ msgstr ""
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#: R/wilcox.test.R:0
+msgid "requested 'conf.level' not achievable"
+msgstr ""
+
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 msgid "requested 'conf.level' value is not achievable"

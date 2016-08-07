@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 22:32\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -30,6 +30,12 @@ msgstr ""
 #, fuzzy
 msgid "'%s' argument must be numeric"
 msgstr "»side« skal være i {1:4}"
+
+#. R/contour.R: gettextf("'%s' is of length zero.  Use 'drawlabels = FALSE' option to suppress labels.",     "labels")
+#: R/contour.R:0
+msgid ""
+"'%s' is of length zero.  Use 'drawlabels = FALSE' option to suppress labels."
+msgstr ""
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 22:32\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: 2005-05-25 15:04+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -34,6 +34,12 @@ msgstr ""
 #, fuzzy
 msgid "'%s' argument must be numeric"
 msgstr "'x'는 수치가 아니면 되지 않습니다"
+
+#. R/contour.R: gettextf("'%s' is of length zero.  Use 'drawlabels = FALSE' option to suppress labels.",     "labels")
+#: R/contour.R:0
+msgid ""
+"'%s' is of length zero.  Use 'drawlabels = FALSE' option to suppress labels."
+msgstr ""
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0

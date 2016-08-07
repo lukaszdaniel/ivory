@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1377,7 +1377,6 @@ msgstr "(SS_pomiedzy / SS_całkowite = %5.1f %%)"
 msgid "(offset)"
 msgstr "(przesunięcie)"
 
-#. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
@@ -3420,10 +3419,17 @@ msgstr "nie można zmienić częstotliwości z %g na %g"
 msgid "cannot compute asymptotic confidence set or estimator"
 msgstr "nie można obliczyć asymptotycznego przedziału ufności lub estymatora"
 
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are tied", call. = FALSE)
 #: R/wilcox.test.R:0
 msgid "cannot compute confidence interval when all observations are tied"
+msgstr ""
+"nie można obliczyć przedziału ufności gdy wszystkie obserwacje są powtórzone"
+
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are zero or tied",     call. = FALSE)
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid ""
+"cannot compute confidence interval when all observations are zero or tied"
 msgstr ""
 "nie można obliczyć przedziału ufności gdy wszystkie obserwacje są powtórzone"
 
@@ -5385,9 +5391,14 @@ msgstr "ref = %d musi być w przedziale 1L:%d"
 msgid "relative convergence (4)"
 msgstr "względna zbieżność (4)"
 
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "requested 'conf.level' not achievable"
+msgstr "żądany 'conf.level' nie jest osiągalny"
+
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 msgid "requested 'conf.level' value is not achievable"

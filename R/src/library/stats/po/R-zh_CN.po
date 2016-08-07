@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1469,7 +1469,6 @@ msgstr ""
 msgid "(offset)"
 msgstr ""
 
-#. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
@@ -3522,10 +3521,16 @@ msgstr "无法将頻率从%g改到%g"
 msgid "cannot compute asymptotic confidence set or estimator"
 msgstr "无法計算渐近置信集或估计量"
 
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are tied", call. = FALSE)
 #: R/wilcox.test.R:0
 msgid "cannot compute confidence interval when all observations are tied"
+msgstr "所有观察数据值都是一样的话无法計算精確的置信区间"
+
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are zero or tied",     call. = FALSE)
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid ""
+"cannot compute confidence interval when all observations are zero or tied"
 msgstr "所有观察数据值都是一样的话无法計算精確的置信区间"
 
 #. R/ansari.test.R: warning("cannot compute confidence set, returning NA")
@@ -5511,9 +5516,14 @@ msgstr "ref = %d必需在1L:%d里"
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "requested 'conf.level' not achievable"
+msgstr "无法达到所要求的conf.level"
+
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy

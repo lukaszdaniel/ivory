@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-08-06 10:07\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1465,7 +1465,6 @@ msgstr ""
 msgid "(offset)"
 msgstr ""
 
-#. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #. R/wilcox.test.R: gettext("(pseudo)median", domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "(pseudo)median"
@@ -3491,10 +3490,16 @@ msgstr "빈도를 %1$g에서 %2$g로 변경할 수 없습니다"
 msgid "cannot compute asymptotic confidence set or estimator"
 msgstr "asymptotic confidence set 또는 estimator를 계산할 수 없습니다"
 
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
-#. R/wilcox.test.R: stop("cannot compute confidence interval when all observations are tied", call. = FALSE)
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are tied", call. = FALSE)
 #: R/wilcox.test.R:0
 msgid "cannot compute confidence interval when all observations are tied"
+msgstr "모든 관측치들의 값이 같다면 신뢰구간을 계산 할 수 없습니다"
+
+#. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are zero or tied",     call. = FALSE)
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid ""
+"cannot compute confidence interval when all observations are zero or tied"
 msgstr "모든 관측치들의 값이 같다면 신뢰구간을 계산 할 수 없습니다"
 
 #. R/ansari.test.R: warning("cannot compute confidence set, returning NA")
@@ -5484,9 +5489,14 @@ msgstr "ref = %d은 반드시 1L:%d 내에 있어야 합니다"
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "requested 'conf.level' not achievable"
+msgstr "성취 될 수 없는 conf.level이 요청되었습니다"
+
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy

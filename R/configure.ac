@@ -56,9 +56,11 @@ AH_TOP([#ifndef R_CONFIG_H
 AH_BOTTOM([
 #endif /* not R_CONFIG_H */])
 
-## The gettext macros call AC_GNU_SOURCE early, so all the
-## C compiling makes use of that.  If it is ever removed, we
-## would need it or something similar here.
+## We call AC_GNU_SOURCE early (it is a prerequisite for the gettext
+## macros), so all the C compiling makes use of that.  glibc then
+## defines all its extensions (_POSIX_C_SOURCE, _XOPEN_SOURCE,
+## _BSD_SOURCE) and these unlock declarations of non-C99 functions and
+## constants.
 
 
 ### ** Platform.
@@ -619,7 +621,7 @@ AC_ARG_VAR([PKG_CONFIG_LIBDIR], [path overriding pkg-config's default search pat
 
 AC_PROG_CC
 AC_PROG_GCC_TRADITIONAL
-AC_GNU_SOURCE ## needed for libintl
+AC_GNU_SOURCE ## see note above
 
 AC_PROG_CPP
 R_PROG_CPP_CPPFLAGS
@@ -635,6 +637,9 @@ AC_PROG_CXX
 ## check this actually compiles
 R_PROG_CXX
 CXXFLAGS="${r_save_CXXFLAGS}"
+
+R_PROG_CXX98FLAG
+
 AC_PROG_CXXCPP
 if test "${CXXCPP}" = "${CXX} -E"; then
   CXXCPP0="\$(CXX) -E"
@@ -1818,6 +1823,19 @@ if test "${ac_cv_have_decl_popen}" = "no"; then
    AC_MSG_ERROR([Building R requires the 'popen' system call])
 fi
 R_CHECK_FUNCS([getline], [#include <stdio.h>])
+R_CHECK_FUNCS([select], 
+[#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
+#endif])
+if test "${ac_cv_have_decl_select}" = "no" -o "${ac_cv_header_sys_select_h}" = "no"; then
+  case "${host_os}" in
+    mingw*|windows*|winnt)
+    ;;
+    *)
+     AC_MSG_ERROR([Building R on Unix requires the <sys/select.h> header and the 'select' system call])
+    ;;
+  esac
+fi
 ## Windows has neither setenv nor unsetenv
 R_CHECK_FUNCS([setenv unsetenv], [#include <stdlib.h>])
 R_CHECK_FUNCS([getrlimit getrusage getpriority], [#include <sys/resource.h>])
@@ -1849,10 +1867,10 @@ R_CHECK_FUNCS([clock_gettime timespec_get], [#include <time.h>])
 ## It is not always declared, so we do not require a declaration.
 AC_CHECK_FUNCS(putenv)
 AC_CHECK_DECLS([putenv], , , [#include <stdlib.h>])
-## this is a GNU extension so usually hidden.  Not on Solaris
+## this is a GNU extension so usually hidden.  Not in Solaris 10
 AC_CHECK_FUNCS(vasprintf)
 AC_CHECK_DECLS([vasprintf], , , [#include <stdio.h>])
-## mempcpy is a GNU extension used by the included gettext.  Not on Solaris
+## mempcpy is a GNU extension used by the included gettext.  Not in Solaris 10
 AC_CHECK_FUNCS(mempcpy)
 ## realpath is POSIX 2001 (and BSD)
 ## Some early GNU libc systems had it in unistd.h.
@@ -1941,7 +1959,7 @@ fi
 AC_SUBST(RMATH_HAVE_LOG1P)
 
 ## Do we need substitutes?
-## mkdtemp is not on Solaris, added in POSIX 2008
+## mkdtemp is not on Solaris 10, added in POSIX 2008
 ## strdup strncasecmp were first required in POSIX 2008.
 AC_REPLACE_FUNCS([mkdtemp strdup strncasecmp])
 ## Enable declarations in Defn.h?
