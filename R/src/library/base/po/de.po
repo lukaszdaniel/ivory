@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07+0200\n"
+"POT-Creation-Date: 2016-08-07 16:19+0200\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -721,8 +721,8 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1313
-#: src/unix/sys-std.c:1336
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
+#: src/unix/sys-std.c:1338
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
@@ -863,17 +863,17 @@ msgstr "CPU Zeitlimit für die Sitzung erreicht"
 msgid "reached CPU time limit"
 msgstr "CPU Zeitlimit erreicht"
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Fataler Fehler: %s\n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:951
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "Kodierung '%s' wird nicht erkannt"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:957
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<Fehler: Rekodierungsfehler aus Kodierung '%s'>\n"
@@ -882,7 +882,7 @@ msgstr "<Fehler: Rekodierungsfehler aus Kodierung '%s'>\n"
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1255
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -3396,7 +3396,7 @@ msgstr "'norm' muss eine Zeichenkette sein"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1316 src/unix/sys-std.c:1339
+#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "Argument für 'file' zu lang"
@@ -7125,7 +7125,7 @@ msgstr "unif_rand: nicht implementierter Typ RNG %d"
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds: nicht implementierter Typ RNG %d"
 
-#: src/main/RNG.c:302 src/main/RNG.c:489
+#: src/main/RNG.c:302 src/main/RNG.c:491
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "%s Symbolname \"%s\" nicht in Ladeliste"
@@ -7168,34 +7168,34 @@ msgstr ".Random.seed[1] = 5, aber kein Generator vom Nutzer angegeben"
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] ist kein gültiger RNG Typ (Kode)"
 
-#: src/main/RNG.c:413
+#: src/main/RNG.c:415
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed hat die falsche Länge"
 
-#: src/main/RNG.c:432
+#: src/main/RNG.c:434
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:466
+#: src/main/RNG.c:468
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: nicht implementierter RNG Typ %d"
 
-#: src/main/RNG.c:472
+#: src/main/RNG.c:474
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:486
+#: src/main/RNG.c:488
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "ungültiger Normalverteilungstyp Typ in RNGkind"
 
-#: src/main/RNG.c:533
+#: src/main/RNG.c:535
 msgid "supplied seed is not a valid integer"
 msgstr "angegebener Startwert ist keine gültige ganze Zahl"
 
-#: src/main/RNG.c:773
+#: src/main/RNG.c:775
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -10090,11 +10090,11 @@ msgstr ""
 msgid "Rscript is not supported on this system"
 msgstr "nsl() wird auf dieser Plattform nicht unterstützt"
 
-#: src/unix/sys-std.c:134
+#: src/unix/sys-std.c:136
 msgid "interrupt handler must not return"
 msgstr "Interrupt-Handler darf nicht zurückkehren"
 
-#: src/unix/sys-std.c:566
+#: src/unix/sys-std.c:568
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
@@ -10102,33 +10102,33 @@ msgstr ""
 "Ungewöhnliches Ereignis aufgetreten in verschachtelter readline Eingabe. "
 "Bitte melden Sie's via bug.report()"
 
-#: src/unix/sys-std.c:1146
+#: src/unix/sys-std.c:1148
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1179 src/unix/sys-std.c:1345
+#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "Problem beim Speichern der Befehlshistory '%s'"
 
-#: src/unix/sys-std.c:1281
+#: src/unix/sys-std.c:1283
 #, fuzzy
 msgid "Enter file name: "
 msgstr "kein korrekter Dateiname"
 
-#: src/unix/sys-std.c:1322 src/unix/sys-std.c:1324
+#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
 msgid "no history mechanism available"
 msgstr "kein History Mechanismus verfügbar"
 
-#: src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1353
 msgid "problem in truncating the history file"
 msgstr "Problem beim Kürzen der Befehlshistory"
 
-#: src/unix/sys-std.c:1353 src/unix/sys-std.c:1355
+#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
 msgid "no history available to save"
 msgstr "keine History zum Sichern verfügbar"
 
-#: src/unix/sys-std.c:1367
+#: src/unix/sys-std.c:1369
 msgid "invalid timestamp"
 msgstr "ungültiger Zeitstempel"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -5465,24 +5465,14 @@ msgstr ""
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested 'conf.level' not achievable"
-msgstr "İstenen conf.level elde edilemiyor"
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "requested 'conf.level' value is not achievable"
-msgstr "İstenen conf.level elde edilemiyor"
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested conf.level not achievable"
 msgstr "İstenen conf.level elde edilemiyor"
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
@@ -6836,6 +6826,14 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "requested 'conf.level' not achievable"
+#~ msgstr "İstenen conf.level elde edilemiyor"
+
+#, fuzzy
+#~ msgid "requested conf.level not achievable"
+#~ msgstr "İstenen conf.level elde edilemiyor"
 
 #, fuzzy
 #~ msgid "Rotation:"

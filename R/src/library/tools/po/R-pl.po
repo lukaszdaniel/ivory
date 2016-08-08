@@ -377,9 +377,8 @@ msgstr "... niekompletne wyjście.  Nagłe przerwanie?"
 
 #. R/install.R: stop(".install_packages() exit status ", status)
 #: R/install.R:0
-#, fuzzy
 msgid ".install_packages() exit status"
-msgstr "Status wyjścia %d dla funkcji '.build_package()'"
+msgstr "Status wyjścia dla funkcji '.install_packages()'"
 
 #. R/QC.R: gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools")
 #: R/QC.R:0

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -5578,24 +5578,14 @@ msgstr "ref = %d должен быть в пределах 1L:%d"
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested 'conf.level' not achievable"
-msgstr "Заданный доверительный интервал не достигнут"
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "requested 'conf.level' value is not achievable"
-msgstr "Заданный доверительный интервал не достигнут"
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested conf.level not achievable"
 msgstr "Заданный доверительный интервал не достигнут"
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
@@ -7040,6 +7030,14 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "использую %d/%d строк из комбинированного выравнивания"
 msgstr[1] "использую %d/%d строк из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
+
+#, fuzzy
+#~ msgid "requested 'conf.level' not achievable"
+#~ msgstr "Заданный доверительный интервал не достигнут"
+
+#, fuzzy
+#~ msgid "requested conf.level not achievable"
+#~ msgstr "Заданный доверительный интервал не достигнут"
 
 #~ msgid "specified both 'df' and 'cv'; will disregard the latter"
 #~ msgstr "указано и 'df' и 'cv'; значение последнего проигнорировано"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07+0200\n"
+"POT-Creation-Date: 2016-08-07 16:19+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -715,8 +715,8 @@ msgstr "feil ved vising av «%s»"
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1313
-#: src/unix/sys-std.c:1336
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
+#: src/unix/sys-std.c:1338
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ugyldig «%s»-argument"
@@ -857,17 +857,17 @@ msgstr "nådde CPU-tidsgrensa for økta"
 msgid "reached CPU time limit"
 msgstr "nådde CPU-tidsgrensa"
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Kritisk feil: %s\n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:951
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "kjenner ikkje teiknkodinga «%s»"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:957
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<FEIL: Feil ved omkoding frå teiknkodinga «%s»>\n"
@@ -876,7 +876,7 @@ msgstr "<FEIL: Feil ved omkoding frå teiknkodinga «%s»>\n"
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1255
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -3380,7 +3380,7 @@ msgstr "«norm» må vera ein teiknstreng"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1316 src/unix/sys-std.c:1339
+#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "argumentet «file» er for langt"
@@ -7087,7 +7087,7 @@ msgstr "unif_rand: RND-typen «%d» er ikkje implementert"
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds: RNG-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:302 src/main/RNG.c:489
+#: src/main/RNG.c:302 src/main/RNG.c:491
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "%s symbolnamnet «%s» finst ikkje i lastetabellen"
@@ -7132,34 +7132,34 @@ msgstr ".Random.seed[1] er 5, men ingen generator er oppgjeven"
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] er ikkje ein gyldig RNG-type (kode)"
 
-#: src/main/RNG.c:413
+#: src/main/RNG.c:415
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed har feil lengd"
 
-#: src/main/RNG.c:432
+#: src/main/RNG.c:434
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:466
+#: src/main/RNG.c:468
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: RNG-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:472
+#: src/main/RNG.c:474
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:486
+#: src/main/RNG.c:488
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "ugyldig «Normal»-type i RNGkind"
 
-#: src/main/RNG.c:533
+#: src/main/RNG.c:535
 msgid "supplied seed is not a valid integer"
 msgstr "det oppgjevne frøet er ikkje eit gyldig heiltal"
 
-#: src/main/RNG.c:773
+#: src/main/RNG.c:775
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -10041,11 +10041,11 @@ msgstr ""
 msgid "Rscript is not supported on this system"
 msgstr "nsl() er ikkje støtta på denne plattforma"
 
-#: src/unix/sys-std.c:134
+#: src/unix/sys-std.c:136
 msgid "interrupt handler must not return"
 msgstr "avbrotshandtering må ikkje returnera"
 
-#: src/unix/sys-std.c:566
+#: src/unix/sys-std.c:568
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
@@ -10053,33 +10053,33 @@ msgstr ""
 "Det oppstod eit uvanleg tilfelle i nøsting av readline-inndata. Meld frå om "
 "dette med bug.report()."
 
-#: src/unix/sys-std.c:1146
+#: src/unix/sys-std.c:1148
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1179 src/unix/sys-std.c:1345
+#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "feil ved lagring av historiefila «%s»"
 
-#: src/unix/sys-std.c:1281
+#: src/unix/sys-std.c:1283
 #, fuzzy
 msgid "Enter file name: "
 msgstr "ikkje eit gyldig filnamn"
 
-#: src/unix/sys-std.c:1322 src/unix/sys-std.c:1324
+#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
 msgid "no history mechanism available"
 msgstr "ingen historiemekanisme er tilgjengeleg"
 
-#: src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1353
 msgid "problem in truncating the history file"
 msgstr "feil ved trunkering av historiefila"
 
-#: src/unix/sys-std.c:1353 src/unix/sys-std.c:1355
+#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
 msgid "no history available to save"
 msgstr "ingen historie er klar for lagring"
 
-#: src/unix/sys-std.c:1367
+#: src/unix/sys-std.c:1369
 msgid "invalid timestamp"
 msgstr "ugyldig tidsstempel"
 

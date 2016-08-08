@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07+0200\n"
+"POT-Creation-Date: 2016-08-07 16:19+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -710,8 +710,8 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1313
-#: src/unix/sys-std.c:1336
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
+#: src/unix/sys-std.c:1338
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 인수가 잘못되었습니다 "
@@ -852,17 +852,17 @@ msgstr "세션 CPU 시간제한에 도달했습니다"
 msgid "reached CPU time limit"
 msgstr "CPU 시간제한에 도달했습니다"
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "치명적 오류: %s\n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:951
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "인코딩 '%s'는 인식하지 못합니다 "
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:957
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<에러: 인코딩 '%s' 에서 재인코딩 실패>\n"
@@ -871,7 +871,7 @@ msgstr "<에러: 인코딩 '%s' 에서 재인코딩 실패>\n"
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1255
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -3359,7 +3359,7 @@ msgstr "'norm'는 문자열이어야 합니다"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1316 src/unix/sys-std.c:1339
+#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "'file' 인수가 너무 깁니다"
@@ -7037,7 +7037,7 @@ msgstr "unif_rand :  RNG 종류 %d 는 구현되지 않았습니다"
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds : RNG 종류 %d 는 구현되지 않았습니다"
 
-#: src/main/RNG.c:302 src/main/RNG.c:489
+#: src/main/RNG.c:302 src/main/RNG.c:491
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "%s 심볼명 \"%s\" 가 로드 테이블에 없습니다"
@@ -7080,34 +7080,34 @@ msgstr ".Random.seed[1] = 5 지만 사용자로부터 제공된 생성기가 아
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] 는 유효한 RNG 종류(코드)가 아닙니다"
 
-#: src/main/RNG.c:413
+#: src/main/RNG.c:415
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed 은 길이가 잘못되었습니다"
 
-#: src/main/RNG.c:432
+#: src/main/RNG.c:434
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:466
+#: src/main/RNG.c:468
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind : RNG 종류 %d는 구현되지 않았습니다"
 
-#: src/main/RNG.c:472
+#: src/main/RNG.c:474
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:486
+#: src/main/RNG.c:488
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "RNGkind의 정규형이 잘못되었습니다"
 
-#: src/main/RNG.c:533
+#: src/main/RNG.c:535
 msgid "supplied seed is not a valid integer"
 msgstr "주어진 seed는 유효한 정수가 아닙니다"
 
-#: src/main/RNG.c:773
+#: src/main/RNG.c:775
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -9980,11 +9980,11 @@ msgstr ""
 msgid "Rscript is not supported on this system"
 msgstr "이 플랫폼에서 nsl() 는 지원되지 않습니다"
 
-#: src/unix/sys-std.c:134
+#: src/unix/sys-std.c:136
 msgid "interrupt handler must not return"
 msgstr "인터럽트 처리기를 반환되지 않아야 합니다"
 
-#: src/unix/sys-std.c:566
+#: src/unix/sys-std.c:568
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
@@ -9992,33 +9992,33 @@ msgstr ""
 "readline 입력을 내포시키는 중에 특이한 상황이 발생하였습니다. bug.report 함수"
 "를 사용하여 보고해 주십시오"
 
-#: src/unix/sys-std.c:1146
+#: src/unix/sys-std.c:1148
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1179 src/unix/sys-std.c:1345
+#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "기록파일 '%s' 를 저장하는 도중 문제가 발생했습니다"
 
-#: src/unix/sys-std.c:1281
+#: src/unix/sys-std.c:1283
 #, fuzzy
 msgid "Enter file name: "
 msgstr "파일명은 잘못되었습니다"
 
-#: src/unix/sys-std.c:1322 src/unix/sys-std.c:1324
+#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
 msgid "no history mechanism available"
 msgstr "기록 방식이 없습니다"
 
-#: src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1353
 msgid "problem in truncating the history file"
 msgstr "problem in truncating the history file"
 
-#: src/unix/sys-std.c:1353 src/unix/sys-std.c:1355
+#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
 msgid "no history available to save"
 msgstr "저장해야 할 기록이 없습니다"
 
-#: src/unix/sys-std.c:1367
+#: src/unix/sys-std.c:1369
 msgid "invalid timestamp"
 msgstr "타임스태프가 잘못되었습니다 "
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -5555,24 +5555,14 @@ msgstr " ref = %d は 1L:%d 中になければなりません: "
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested 'conf.level' not achievable"
-msgstr " 要求された conf.level は達成不能です "
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "requested 'conf.level' value is not achievable"
-msgstr " 要求された conf.level は達成不能です "
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested conf.level not achievable"
 msgstr " 要求された conf.level は達成不能です "
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
@@ -6897,6 +6887,14 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#, fuzzy
+#~ msgid "requested 'conf.level' not achievable"
+#~ msgstr " 要求された conf.level は達成不能です "
+
+#, fuzzy
+#~ msgid "requested conf.level not achievable"
+#~ msgstr " 要求された conf.level は達成不能です "
 
 #~ msgid "specified both 'df' and 'cv'; will disregard the latter"
 #~ msgstr " 'df' と 'cv' の両方が特定されているので、後者は無視されます "

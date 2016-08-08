@@ -114,7 +114,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                c(-Inf, diffs[ql+1])
                            })
                 if (achieved.alpha - alpha > alpha/2){
-                    warning("requested conf.level not achievable")
+                    warning("requested 'conf.level' value is not achievable")
                     conf.level <- 1 - signif(achieved.alpha, 2)
                 }
                 attr(cint, "conf.level") <- conf.level
@@ -210,7 +210,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 			}
 			if (alpha >= 1 || 1 - conf.level < alpha*0.75) {
 			    conf.level <- 1 - pmin(1, alpha)
-			    warning("requested 'conf.level' not achievable")
+			    warning("requested 'conf.level' value is not achievable")
 			}
 			if(alpha < 1) {
 			    l <- root(zq = qnorm(alpha/2, lower.tail = FALSE))
@@ -226,7 +226,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 			}
 			if (alpha >= 1 || 1 - conf.level < alpha*0.75) {
 			    conf.level <- 1 - pmin(1, alpha)
-			    warning("requested 'conf.level' not achievable")
+			    warning("requested 'conf.level' value is not achievable")
 			}
 			l <- if(alpha < 1)
 				 root(zq = qnorm(alpha, lower.tail = FALSE))
@@ -241,7 +241,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 			}
 			if (alpha >= 1 || 1 - conf.level < alpha*0.75) {
 			    conf.level <- 1 - pmin(1, alpha)
-			    warning("requested 'conf.level' not achievable")
+			    warning("requested 'conf.level' value is not achievable")
 			}
 			u <- if(alpha < 1)
 				 root(zq = qnorm(alpha))

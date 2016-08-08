@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3427,7 +3427,6 @@ msgstr ""
 
 #. R/wilcox.test.R: warning("cannot compute confidence interval when all observations are zero or tied",     call. = FALSE)
 #: R/wilcox.test.R:0
-#, fuzzy
 msgid ""
 "cannot compute confidence interval when all observations are zero or tied"
 msgstr ""
@@ -5391,23 +5390,14 @@ msgstr "ref = %d musi być w przedziale 1L:%d"
 msgid "relative convergence (4)"
 msgstr "względna zbieżność (4)"
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested 'conf.level' not achievable"
-msgstr "żądany 'conf.level' nie jest osiągalny"
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 msgid "requested 'conf.level' value is not achievable"
 msgstr "żądana wartość 'conf.level' nie jest osiągalna"
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "requested conf.level not achievable"
-msgstr "żądany 'conf.level' nie jest osiągalny"
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
 #: R/factanal.R:0
@@ -6790,6 +6780,12 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "requested 'conf.level' not achievable"
+#~ msgstr "żądana wartość 'conf.level' nie jest osiągalna"
+
+#~ msgid "requested conf.level not achievable"
+#~ msgstr "żądany 'conf.level' nie jest osiągalny"
 
 #~ msgid "specified both 'df' and 'cv'; will disregard the latter"
 #~ msgstr "określono jednocześnie 'df' oraz 'cv'; drugi zostanie odrzucony"

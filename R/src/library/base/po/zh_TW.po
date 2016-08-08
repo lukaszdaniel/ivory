@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07+0200\n"
+"POT-Creation-Date: 2016-08-07 16:19+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -708,8 +708,8 @@ msgstr "顯示'%s' 時發生問題"
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1313
-#: src/unix/sys-std.c:1336
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
+#: src/unix/sys-std.c:1338
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數不正確"
@@ -850,17 +850,17 @@ msgstr "達到了作業階段 CPU 時間的限制"
 msgid "reached CPU time limit"
 msgstr "達到了 CPU 時間的限制"
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "嚴重錯誤：%s\n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:951
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "編碼 '%s' 無法確認"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:957
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<錯誤：從編碼 '%s' 重新編碼時失敗>\n"
@@ -869,7 +869,7 @@ msgstr "<錯誤：從編碼 '%s' 重新編碼時失敗>\n"
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1255
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -3328,7 +3328,7 @@ msgstr "'norm' 必須是字串"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1316 src/unix/sys-std.c:1339
+#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "'file' 引數太長"
@@ -6988,7 +6988,7 @@ msgstr "unif_rand: RNG 類型 %d 尚未實作"
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds: RNG 類型 %d 尚未實作"
 
-#: src/main/RNG.c:302 src/main/RNG.c:489
+#: src/main/RNG.c:302 src/main/RNG.c:491
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "載入表中沒有 %s 的符號名稱 \"%s\""
@@ -7031,34 +7031,34 @@ msgstr ".Random.seed[1]=5 但沒有使用者指定的產生器"
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] 不是正確的 RNG 類別 (程式碼)"
 
-#: src/main/RNG.c:413
+#: src/main/RNG.c:415
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed 的長度不正確"
 
-#: src/main/RNG.c:432
+#: src/main/RNG.c:434
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:466
+#: src/main/RNG.c:468
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: RNG 類型 %d 尚未實作"
 
-#: src/main/RNG.c:472
+#: src/main/RNG.c:474
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:486
+#: src/main/RNG.c:488
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "RNGkind 中的 Normal 類別不正確"
 
-#: src/main/RNG.c:533
+#: src/main/RNG.c:535
 msgid "supplied seed is not a valid integer"
 msgstr "提供的隨機種子不是正確的整數"
 
-#: src/main/RNG.c:773
+#: src/main/RNG.c:775
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -9896,43 +9896,43 @@ msgstr ""
 msgid "Rscript is not supported on this system"
 msgstr "本平臺不支援 nsl()"
 
-#: src/unix/sys-std.c:134
+#: src/unix/sys-std.c:136
 msgid "interrupt handler must not return"
 msgstr "插斷處置程式不能有回傳值"
 
-#: src/unix/sys-std.c:566
+#: src/unix/sys-std.c:568
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
 msgstr "巢狀 readline 輸入出了不尋常的錯，請用 bug.report()"
 
-#: src/unix/sys-std.c:1146
+#: src/unix/sys-std.c:1148
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1179 src/unix/sys-std.c:1345
+#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "儲存歷史檔案 '%s' 時出了問題"
 
-#: src/unix/sys-std.c:1281
+#: src/unix/sys-std.c:1283
 #, fuzzy
 msgid "Enter file name: "
 msgstr "檔案名稱不正確"
 
-#: src/unix/sys-std.c:1322 src/unix/sys-std.c:1324
+#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
 msgid "no history mechanism available"
 msgstr "沒有歷史功能"
 
-#: src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1353
 msgid "problem in truncating the history file"
 msgstr "截斷歷史檔案時發生問題"
 
-#: src/unix/sys-std.c:1353 src/unix/sys-std.c:1355
+#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
 msgid "no history available to save"
 msgstr "沒有可以儲存的歷史紀錄"
 
-#: src/unix/sys-std.c:1367
+#: src/unix/sys-std.c:1369
 msgid "invalid timestamp"
 msgstr "時間戳記不正確"
 

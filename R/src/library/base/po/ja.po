@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07+0200\n"
+"POT-Creation-Date: 2016-08-07 16:19+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -709,8 +709,8 @@ msgstr " '%s'の表示に問題があります "
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1313
-#: src/unix/sys-std.c:1336
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
+#: src/unix/sys-std.c:1338
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
@@ -851,17 +851,17 @@ msgstr "  セッションCPU時間が経過して上限に達しました "
 msgid "reached CPU time limit"
 msgstr " CPU時間が経過して上限に達しました "
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr " 致命的なエラーです： %s \n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:951
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr " '%s' というエンコーディングは認識できません "
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:957
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
@@ -871,7 +871,7 @@ msgstr ""
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1255
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -3372,7 +3372,7 @@ msgstr " 'norm' は文字列でなければなりません "
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1316 src/unix/sys-std.c:1339
+#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr " 'file' 引数が長過ぎます "
@@ -7074,7 +7074,7 @@ msgstr " unif_rand：種類 %d の RNG は実装されていません "
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr " FixupSeeds：種類  %d の RNG は未実装です "
 
-#: src/main/RNG.c:302 src/main/RNG.c:489
+#: src/main/RNG.c:302 src/main/RNG.c:491
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr " %s シンボル名 \"%s\" は load table にありません "
@@ -7119,34 +7119,34 @@ msgstr " .Random.seed[1] = 5 ですが，ユーザ定義の乱数発生器があ
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr " .Random.seed[1] が有効な種類の RNG (コード)ではありません "
 
-#: src/main/RNG.c:413
+#: src/main/RNG.c:415
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr " .Random.seed の長さが不正です "
 
-#: src/main/RNG.c:432
+#: src/main/RNG.c:434
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:466
+#: src/main/RNG.c:468
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr " RNGkind: RNG kind %d は未実装です "
 
-#: src/main/RNG.c:472
+#: src/main/RNG.c:474
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:486
+#: src/main/RNG.c:488
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr " RNGkind 中の正規乱数発生法が不正です "
 
-#: src/main/RNG.c:533
+#: src/main/RNG.c:535
 msgid "supplied seed is not a valid integer"
 msgstr " 与えられた seed は適切な整数ではありません "
 
-#: src/main/RNG.c:773
+#: src/main/RNG.c:775
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -10030,11 +10030,11 @@ msgstr ""
 msgid "Rscript is not supported on this system"
 msgstr " このプラットフォームでは nsl 関数はサポートされていません "
 
-#: src/unix/sys-std.c:134
+#: src/unix/sys-std.c:136
 msgid "interrupt handler must not return"
 msgstr " 割り込みハンドラーはリターンすべきではありません "
 
-#: src/unix/sys-std.c:566
+#: src/unix/sys-std.c:568
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
@@ -10042,33 +10042,33 @@ msgstr ""
 " readline 入力のネスティング中に普通でない状況が起こりました。bug.report 関数"
 "を使って報告して下さい "
 
-#: src/unix/sys-std.c:1146
+#: src/unix/sys-std.c:1148
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1179 src/unix/sys-std.c:1345
+#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr " 履歴ファイル '%s' の保存に問題があります "
 
-#: src/unix/sys-std.c:1281
+#: src/unix/sys-std.c:1283
 #, fuzzy
 msgid "Enter file name: "
 msgstr " ファイル名が不適切です "
 
-#: src/unix/sys-std.c:1322 src/unix/sys-std.c:1324
+#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
 msgid "no history mechanism available"
 msgstr " 利用できる履歴機構がありません "
 
-#: src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1353
 msgid "problem in truncating the history file"
 msgstr " 履歴ファイルの切り詰め中に問題がおきました "
 
-#: src/unix/sys-std.c:1353 src/unix/sys-std.c:1355
+#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
 msgid "no history available to save"
 msgstr " 保存すべき履歴がありません "
 
-#: src/unix/sys-std.c:1367
+#: src/unix/sys-std.c:1369
 msgid "invalid timestamp"
 msgstr " タイムスタンプが不正です "
 

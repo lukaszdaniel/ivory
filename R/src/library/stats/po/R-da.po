@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -5326,21 +5326,13 @@ msgstr ""
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-msgid "requested 'conf.level' not achievable"
-msgstr ""
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 msgid "requested 'conf.level' value is not achievable"
-msgstr ""
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "requested conf.level not achievable"
 msgstr ""
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-08-07 16:19\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -5646,24 +5646,14 @@ msgstr "ref = %d doit appartenir à 1L:%d"
 msgid "relative convergence (4)"
 msgstr ""
 
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#. R/wilcox.test.R: warning("requested 'conf.level' not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested 'conf.level' not achievable"
-msgstr "Requête 'conf.level' impossible à atteindre"
-
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
+#. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #. R/wilcox.test.R: warning("requested 'conf.level' value is not achievable")
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "requested 'conf.level' value is not achievable"
-msgstr "Requête 'conf.level' impossible à atteindre"
-
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "requested conf.level not achievable"
 msgstr "Requête 'conf.level' impossible à atteindre"
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
@@ -7080,6 +7070,14 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation des %d/%d lignes d'un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
+
+#, fuzzy
+#~ msgid "requested 'conf.level' not achievable"
+#~ msgstr "Requête 'conf.level' impossible à atteindre"
+
+#, fuzzy
+#~ msgid "requested conf.level not achievable"
+#~ msgstr "Requête 'conf.level' impossible à atteindre"
 
 #~ msgid "specified both 'df' and 'cv'; will disregard the latter"
 #~ msgstr "'df' et 'cv' sont spécifiés simultanément ; le second sera ignoré"

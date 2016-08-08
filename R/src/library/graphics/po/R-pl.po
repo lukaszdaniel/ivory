@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
@@ -37,6 +37,7 @@ msgstr "argument '%s' musi być liczbą"
 msgid ""
 "'%s' is of length zero.  Use 'drawlabels = FALSE' option to suppress labels."
 msgstr ""
+"'%s' ma długość zero. Użyj opcji 'drawlabels = FALSE' aby pominąć etykiety."
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
