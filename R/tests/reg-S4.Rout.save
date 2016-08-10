@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-07-28 r800) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-08-09 r811) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-07-28 r70995) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-08-09 r71070) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -666,7 +666,7 @@ An object of class "foo"
 + 	      ##
 + 	      TRUE)
 + }
-Loading required package: Matrix
+Loading required package: 'Matrix'
 > 
 > 
 > ## containing "array" ("matrix", "ts", ..)
