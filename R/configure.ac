@@ -57,11 +57,12 @@ AH_BOTTOM([
 #endif /* not R_CONFIG_H */])
 
 ## We call AC_GNU_SOURCE early (it is a prerequisite for the gettext
-## macros), so all the C compiling makes use of that.  glibc then
-## defines all its extensions (_POSIX_C_SOURCE, _XOPEN_SOURCE,
-## _BSD_SOURCE) and these unlock declarations of non-C99 functions and
-## constants.
-
+## macros), so all the C compiling makes use of that.  Nowadays it calls
+## AC_USE_SYSTEM_EXTENSIONS ....
+## This sets _GNU_SOURCE, so glibc defines all its extensions
+## (_POSIX_C_SOURCE, _XOPEN_SOURCE, _BSD_SOURCE, __USE_MISC) and these
+## unlock declarations of non-C99 functions and constants.  
+## Ditto for __EXTENSIONS__ on Solaris and _ALL_SOURCE on AIX.
 
 ### ** Platform.
 
@@ -1828,7 +1829,7 @@ fi
 R_CHECK_FUNCS([getline], [#include <stdio.h>])
 R_CHECK_FUNCS([select], 
 [#ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>  /* POSIX >= 2004 */
+#include <sys/select.h>  /* POSIX >= 2001 */
 #endif
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>  /* Earlier POSIX, HP-UX? */
@@ -1969,13 +1970,13 @@ AC_SUBST(RMATH_HAVE_LOG1P)
 
 ## Do we need substitutes?
 ## mkdtemp is not on Solaris 10, added in POSIX 2008
-## strdup strncasecmp were first required in POSIX 2008.
+## strdup strncasecmp were first required in POSIX 2001.
 AC_REPLACE_FUNCS([mkdtemp strdup strncasecmp])
 ## Enable declarations in Defn.h?
 AC_CHECK_DECLS([mkdtemp, strdup, strncasecmp])
 
 AC_SEARCH_LIBS(connect, [socket])
-# gethostbyname was removed in POSIX 2008 (in favour of getaddrinfo, POSIX 2004)
+# gethostbyname was removed in POSIX 2008 (in favour of getaddrinfo, POSIX 2001)
 AC_SEARCH_LIBS(gethostbyname, [nsl socket])
 AC_SEARCH_LIBS(xdr_string, [nsl tirpc])
 R_FUNC_CALLOC
