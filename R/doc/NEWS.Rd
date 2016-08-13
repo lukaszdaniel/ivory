@@ -143,6 +143,13 @@
       will occasionally change \R outputs (and need changes to some
       \file{*.Rout(.save)} files).
 
+      \item \code{table(x, exclude=NULL)} now sets \code{useNA =
+      "ifany"} (instead of \code{"always"}).  Together with the bug
+      fixes for this case, this recovers more consistent behaviour, also
+      compatible to older versions of R.  As a consequence,
+      \code{summary()} for a logical vector no longer reports (zero)
+      counts for \code{NA} when there are no \code{NA}s.
+
       %% Would need more work (notably in  ../src/main/sort.c )
       %% \item New \code{orderL(lst, ....)} for use in \code{do.call()} to
       %% avoid the name problem seen in \PR{17119}.
@@ -180,7 +187,7 @@
 
       \item \command{configure} checks if the compiler specified by
       \samp{CXX} \samp{CXXFLAGS} is able to compile C++ code.
-      
+
       \item \command{configure} checks for the required header
       \file{sys/select.h} (or \file{sys/time.h} on legacy systems) and
       system call \code{select} and aborts if they are not found.
@@ -283,7 +290,11 @@
       \item \code{table()} no longer drops an \code{"NaN"} factor level,
       and better obeys \code{exclude = <chr>}, thanks to Suharto Anggono's
       patch for \PR{16936}.  Also, in the case of \code{exclude=NULL}
-      and \code{NA}s, these are tabulated correctly (again).% to be % backported
+      and \code{NA}s, these are tabulated correctly (again).
+
+      Additionally, all cases of empty \code{exclude} are equivalent,
+      and \code{useNA} is not overwritten when specified (as it was by
+      \code{exclude=NULL}).
 
       \item \code{pmax()} and \code{pmin()} now work with (more ?)
       classed objects, such as \code{"Matrix"} from the \CRANpkg{Matrix}
@@ -365,6 +376,10 @@
 
       \item \code{findInterval(x, vec=numeric(), all.inside=TRUE)} now
       returns \code{0}s as documented.  (Reported by Bill Dunlap.)
+
+      \item (Windows only) \command{R CMD SHLIB} failed when a symbol
+      in the resulting library had the same name as a keyword in
+      the \file{.def} file.  (\PR{17130})
     }
   }
 }
