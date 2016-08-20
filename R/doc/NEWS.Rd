@@ -236,7 +236,7 @@
       run very quickly compared to the remote tests.
 
       \item \command{R CMD check} reports more dubious flags in files
-      \file{src/Makevars[.in]}, includng \option{-w} and \option{-g}.
+      \file{src/Makevars[.in]}, including \option{-w} and \option{-g}.
 
       \item \command{R CMD check} has been set up to filter important
       warnings from recent versions of \command{gfortran} with
@@ -311,7 +311,7 @@
       and \code{NA}s, these are tabulated correctly (again).
 
       Further, \code{table(1:2, exclude = 1, useNA = "ifany")} no longer
-      erronously reports \code{<NA>} counts.
+      erroneously reports \code{<NA>} counts.
 
       Additionally, all cases of empty \code{exclude} are equivalent,
       and \code{useNA} is not overwritten when specified (as it was by
@@ -403,6 +403,11 @@
       package, as documented for a long time.
 
       \item \code{droplevels(f)} now keeps <NA> levels when present.
+
+      \item \code{axis(side, x = D)} and hence \code{Axis()} and
+      \code{plot()} now work correctly for \code{"Date"} and time
+      objects \code{D}, even when \dQuote{time goes backward}, e.g.,
+      with decreasing \code{xlim}.  (Reported by William May).
     }
   }
 }
