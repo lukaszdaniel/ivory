@@ -1,5 +1,5 @@
 595f7fa74dd678ae4be1f6968e174555 *NAMESPACE
-2c8676d65853d99efc1bfb7ebc454d8f *man/gaulss.Rd
+ec2d1b2aa87cc3f8424e07b6dc0340d5 *man/gaulss.Rd
 f77ca1471881d2f93c74864d076c0a0e *man/rTweedie.Rd
 c17814cea1b11e5ca374e72d6e1cbd98 *man/gam.scale.Rd
 717401fd7efa3b39d90418a5d1d0c216 *man/gamObject.Rd
@@ -124,8 +124,8 @@ b45d8e71bda4ceca8203dffea577e441 *man/smooth.construct.re.smooth.spec.Rd
 f0791d830687d6155efb8a73db787401 *man/summary.gam.Rd
 d4083ff900aa69fa07610e0af2a2987b *man/smooth.terms.Rd
 6eebb6ef90374ee09453d6da6449ed79 *man/tensor.prod.model.matrix.Rd
-5de85e587fe407b6155adbe7a4757259 *ChangeLog
-b0a372da89d61623c335e7a9937dcfc0 *DESCRIPTION
+7df0bec9645b1dadeee2a563262c54a8 *ChangeLog
+ca275901f459de1d298d7f5865990c2a *DESCRIPTION
 a4b7079232fe9080b4b86509bfd01007 *po/R-fr.po
 8a807615ea9d2d4e4c9f67f862730a31 *po/R-mgcv.pot
 535606d833224aa312967f8c6712976a *po/R-ko.po
@@ -157,10 +157,10 @@ f59dabf09c545eb8aab4f7097a9be0af *R/gam.fit3.r
 c33bc3267ba5c24bd2b44023529c3f5f *R/misc.r
 ad31fe0bd8b3ba98b706cd80f4251325 *R/efam.r
 a78e93441a3d82d52c8cfa6173627fe5 *R/soap.r
-3dd74e0d99ad804f8d0830e96e1d1600 *R/smooth.r
+948cfc70260cb12371cfe0f4887450bb *R/smooth.r
 c8d2b1242dfbf144f97aac2b79a10678 *R/gam.fit4.r
 b2e5b9eaa58f511872823d76dd666856 *R/bam.r
-84712cfc9f826f88f702ae426d7d37b0 *R/mgcv.r
+8aa7c109bf5c421972b9cab41983d0e3 *R/mgcv.r
 32e45717e886010eba481dfb0ef2fb15 *R/gamlss.r
 359c5466cb2912a8211c9d100a0b01f6 *R/jagam.r
 40874e3ced720a596750f499ded8a60a *data/columb.rda
