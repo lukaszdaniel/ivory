@@ -205,12 +205,6 @@
       \item \command{configure} checks for the required header
       \file{sys/select.h} (or \file{sys/time.h} on legacy systems) and
       system call \code{select} and aborts if they are not found.
-
-      \item (In progress.) \command{configure} looks for a flag for the
-      C++ compiler which approximates C++98/C++03 compliance, and uses
-      it as part of the \code{CXX98} macro in file \file{etc/Makeconf}.
-      For example, \option{-std=gnu++98} is selected for \command{g++}
-      6.x.
     }
   }
 
@@ -238,14 +232,6 @@
       \env{_R_CHECK_CRAN_INCOMING_REMOTE_} false now skips tests that
       require remote access.  The remaining (local) tests typically
       run very quickly compared to the remote tests.
-
-      \item \command{R CMD check} reports more dubious flags in files
-      \file{src/Makevars[.in]}, including \option{-w} and \option{-g}.
-
-      \item \command{R CMD check} has been set up to filter important
-      warnings from recent versions of \command{gfortran} with
-      \option{-Wall -pedantic}: this now reports non-portable GNU
-      extensions such as out-of-order declarations.
     }
   }
 
@@ -324,6 +310,8 @@
       \item \code{wilcox.test(x, conf.int=TRUE)} no longer errors out in
       cases where the confidence interval is not available, such as for
       \code{x = 0:2}.
+
+      \item \code{droplevels(f)} now keeps <NA> levels when present.
     }
   }
 }
@@ -357,6 +345,18 @@
 
       \item \command{configure} works better with Oracle Developer
       Studio 12.5.
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} reports more dubious flags in files
+      \file{src/Makevars[.in]}, including \option{-w} and \option{-g}.
+
+      \item \command{R CMD check} has been set up to filter important
+      warnings from recent versions of \command{gfortran} with
+      \option{-Wall -pedantic}: this now reports non-portable GNU
+      extensions such as out-of-order declarations.
     }
   }
 
@@ -406,12 +406,12 @@
       classed objects, such as \code{"Matrix"} from the \CRANpkg{Matrix}
       package, as documented for a long time.
 
-      \item \code{droplevels(f)} now keeps <NA> levels when present.
-
       \item \code{axis(side, x = D)} and hence \code{Axis()} and
       \code{plot()} now work correctly for \code{"Date"} and time
       objects \code{D}, even when \dQuote{time goes backward}, e.g.,
       with decreasing \code{xlim}.  (Reported by William May).
+
+      \item \code{str(I(matrix(..)))} now looks as always intended.
     }
   }
 }

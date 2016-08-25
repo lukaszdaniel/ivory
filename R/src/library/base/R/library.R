@@ -92,6 +92,28 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             stop(gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname), r_arch), call. = FALSE, domain = "R-base")
     }
 
+    testFeatures <- function(features, pkgInfo, pkgname, pkgpath)
+    {
+        ## Check that the internals version used to build this package
+        ## matches the version of current R. Failure in this test
+        ## should only occur if the R version is an unreleased devel
+        ## version or the package was build with an unrelease devel
+        ## version.  Other mismatches should be caught earlier by the
+        ## version checks.
+        needsComp <- isTRUE(pkgInfo$DESCRIPTION["NeedsCompilation"] == "yes")
+        isBase <- isTRUE(pkgInfo$DESCRIPTION["Priority"] == "base")
+        if (needsComp || isBase) {
+            internalsID <- features$internalsID
+            if (is.null(internalsID))
+                ## the initial internalsID for packages installed
+                ## prior to introducing features.rds in the meta data
+                internalsID <- "0310d4b8-ccb1-4bb8-ba94-d36a55f60262"
+            if (internalsID != .Internal(internalsID()))
+                stop(gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",
+                              sQuote(pkgname)), call. = FALSE, domain = "R-tools")
+        }
+    }
+
     checkLicense <- function(pkg, pkgInfo, pkgPath)
     {
         L <- tools:::analyze_license(pkgInfo$DESCRIPTION["License"])
@@ -248,6 +270,10 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             	stop(gettextf("%s package is not a valid installed package", sQuote(package), domain = "R-base"), domain = NA)
             pkgInfo <- readRDS(pfile)
             testRversion(pkgInfo, package, pkgpath)
+            ffile <- system.file("Meta", "features.rds", package = package,
+                                 lib.loc = which.lib.loc)
+            features <- if (file.exists(ffile)) readRDS(ffile) else NULL
+            testFeatures(features, pkgInfo, package, pkgpath)
             ## avoid any bootstrapping issues by these exemptions
             if(!package %in% c("datasets", "grDevices", "graphics", "methods",
                                "splines", "stats", "stats4", "tcltk", "tools",

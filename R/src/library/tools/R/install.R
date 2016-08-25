@@ -298,7 +298,7 @@
         is_source_package <- is.na(desc["Built"])
 
         if (is_source_package) {
-            ## Find out if C++11 or C++14 is requested in DESCRIPTION file
+            ## Find out if any C++ standard is requested in DESCRIPTION file
             sys_requires <- desc["SystemRequirements"]
             if (!is.na(sys_requires)) {
                 sys_requires <- unlist(strsplit(sys_requires, ","))
@@ -310,6 +310,11 @@
                 else if(any(grepl("^[[:space:]]*C[+][+]11[[:space:]]*$",
                              sys_requires, ignore.case=TRUE))) {
                     Sys.setenv("R_PKG_CXX_STD"="CXX11")
+                    on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
+                }
+                else if(any(grepl("^[[:space:]]*C[+][+]98[[:space:]]*$",
+                                  sys_requires, ignore.case=TRUE))) {
+                    Sys.setenv("R_PKG_CXX_STD"="CXX98")
                     on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
                 }
             }
@@ -1691,6 +1696,7 @@
     with_f77 <- FALSE
     with_f9x <- FALSE
     with_objc <- FALSE
+    use_cxx98 <- FALSE
     use_cxx1x <- FALSE
     use_cxx1y <- FALSE
     pkg_libs <- character()
@@ -1796,6 +1802,9 @@
             else if (cxxstd == "CXX11") {
                 use_cxx1x <- TRUE
             }
+            else if (cxxstd == "CXX98") {
+                use_cxx98 <- TRUE
+            }
         }
     } else if (file.exists("Makevars")) {
         makefiles <- c("Makevars", makefiles)
@@ -1812,17 +1821,23 @@
             else if (cxxstd == "CXX11") {
                 use_cxx1x <- TRUE
             }
-
+            else if (cxxstd == "CXX98") {
+                use_cxx98 <- TRUE
+            }
         }
     }
-    if (!use_cxx1x && !use_cxx1y) {
+    if (!use_cxx1x && !use_cxx1y && !use_cxx98) {
         valy <- Sys.getenv("USE_CXX1Y", NA_character_)
         valx <- Sys.getenv("USE_CXX1X", NA_character_)
+        val98 <- Sys.getenv("USE_CXX98", NA_character_)
         if(!is.na(valy)) {
             use_cxx1y <- TRUE
         }
         else if (!is.na(valx)) {
             use_cxx1x <- TRUE
+        }
+        else if (!is.na(val98)) {
+            use_cxx98 <- TRUE
         }
         else {
             val <- Sys.getenv("R_PKG_CXX_STD")
@@ -1831,6 +1846,9 @@
             }
             else if (val == "CXX11") {
                 use_cxx1x <- TRUE
+            }
+            else if (val == "CXX98") {
+                use_cxx98 <- TRUE
             }
         }
     }
@@ -1852,6 +1870,12 @@
               "CXXPICFLAGS='$(CXX1XPICFLAGS)'",
               "SHLIB_LDFLAGS='$(SHLIB_CXX1XLDFLAGS)'",
               "SHLIB_LD='$(SHLIB_CXX1XLD)'", makeargs)
+        else if (use_cxx98)
+            c("CXX='$(CXX98) $(CXX98STD)'",
+              "CXXFLAGS='$(CXX98FLAGS)'",
+              "CXXPICFLAGS='$(CXX98PICFLAGS)'",
+              "SHLIB_LDFLAGS='$(SHLIB_CXX98LDFLAGS)'",
+              "SHLIB_LD='$(SHLIB_CXX98LD)'", makeargs)
         else
             c("SHLIB_LDFLAGS='$(SHLIB_CXXLDFLAGS)'",
               "SHLIB_LD='$(SHLIB_CXXLD)'", makeargs)
