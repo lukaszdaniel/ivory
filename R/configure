@@ -28299,9 +28299,6 @@ ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 $as_echo "$as_me: No compiler with C++98 support was found" >&6;}
   else
     HAVE_CXX98=1
-
-$as_echo "#define HAVE_CXX98 1" >>confdefs.h
-
   fi
 
 
@@ -29334,9 +29331,6 @@ ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 $as_echo "$as_me: No compiler with C++11 support was found" >&6;}
   else
     HAVE_CXX11=1
-
-$as_echo "#define HAVE_CXX11 1" >>confdefs.h
-
   fi
 
 
@@ -30690,9 +30684,6 @@ ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 $as_echo "$as_me: No compiler with C++14 support was found" >&6;}
   else
     HAVE_CXX14=1
-
-$as_echo "#define HAVE_CXX14 1" >>confdefs.h
-
   fi
 
 

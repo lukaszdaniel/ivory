@@ -13,6 +13,10 @@
       Consequently, \code{table(1:2, exclude=NULL)} no longer contains a
       zero count for \code{<NA>}, but \code{useNA = "always"} continues
       to do so.
+
+      \item \code{summary.default()} no longer rounds, but its print
+      method does, resulting in much less extraneous rounding notably of
+      numbers in the ten thousands.
     }
   }
   \subsection{NEW FEATURES}{
@@ -332,6 +336,9 @@
 
       \item Use \code{options(deparse.max.lines)} to limit the number of
       lines recorded in .Traceback and other deparsing activities.
+
+      \item \code{format(<AsIs>)} looks more regular, also for
+      non-character atomic matrices.
     }
   }
 
@@ -412,6 +419,10 @@
       with decreasing \code{xlim}.  (Reported by William May).
 
       \item \code{str(I(matrix(..)))} now looks as always intended.
+
+      \item \code{plot.ts()}, the \code{plot()} method for time series,
+      now obeys \code{cex}, \code{lwd}, and \code{lty}.  (Reported by
+      Greg Werbin).
     }
   }
 }
