@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-08-20 r822) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-08-25 r826) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-08-20 r71123) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-08-25 r71160) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6405,15 +6405,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x275b2e0> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x42e9698> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x276ca50> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x42f2930> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x276ca50> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x42f2930> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7848,4 +7848,10 @@ logical       1
 > summary(1L)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
       1       1       1       1       1       1 
+> 
+> 
+> ## str.default() for "AsIs" arrays
+> str(I(m <- matrix(pi*1:4, 2)))
+ AsIs [1:2, 1:2] 3.14 6.28 9.42 12.57
+> ## did look ugly (because of toString() for numbers) in R <= 3.3.1
 > 
