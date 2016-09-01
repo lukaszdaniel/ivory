@@ -17,6 +17,9 @@
       \item \code{summary.default()} no longer rounds, but its print
       method does, resulting in much less extraneous rounding notably of
       numbers in the ten thousands.
+
+      \item \code{factor(x, exclude = L)} behaves more rationally when
+      \code{x} or \code{L} are character vectors.
     }
   }
   \subsection{NEW FEATURES}{
@@ -168,9 +171,26 @@
       \code{cat()} when terminated early, such that
       \code{suppressMessages()} has an effect; suggested by Ben Bolker.
 
+      \item \code{citation()} supports inst/CITATION files from package
+      source trees, with \code{lib.loc} pointing to the directory
+      containing the package.
+
       %% Would need more work (notably in  ../src/main/sort.c )
       %% \item New \code{orderL(lst, ....)} for use in \code{do.call()} to
       %% avoid the name problem seen in \PR{17119}.
+
+      \item \code{try()} gets a new argument \code{outFile} with a default
+      that can be modified via \code{options(try.outFile = .)}, useful
+      notably for \code{Sweave}.
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item There are new entry points \code{R_MakeExternalPtrFn} and
+      \code{R_ExternalPtrFn} to facilitate creating and retrieving an
+      \R{} external pointer from a C function pointer without ISO C
+      warnings about the conversion of function pointers.
     }
   }
 
@@ -316,6 +336,9 @@
       \code{x = 0:2}.
 
       \item \code{droplevels(f)} now keeps <NA> levels when present.
+
+      \item In integer arithmetic, \code{NULL} is now treated as
+      \code{integer(0)} where it was \code{double(0)}, previously.
     }
   }
 }
@@ -339,6 +362,8 @@
 
       \item \code{format(<AsIs>)} looks more regular, also for
       non-character atomic matrices.
+
+      \item \code{abbreviate()} gets option \code{named = TRUE}.
     }
   }
 
@@ -364,6 +389,9 @@
       warnings from recent versions of \command{gfortran} with
       \option{-Wall -pedantic}: this now reports non-portable GNU
       extensions such as out-of-order declarations.
+
+      \item \command{R CMD config} copes better with paths containing
+      spaces, even home directories.
     }
   }
 
@@ -423,6 +451,10 @@
       \item \code{plot.ts()}, the \code{plot()} method for time series,
       now obeys \code{cex}, \code{lwd}, and \code{lty}.  (Reported by
       Greg Werbin).
+
+      \item \code{mccollect()} now returns a named list (as
+      documented) called with \code{wait=FALSE}.  (Reported by
+      Michel Lang.)
     }
   }
 }
