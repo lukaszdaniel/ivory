@@ -179,9 +179,16 @@
       %% \item New \code{orderL(lst, ....)} for use in \code{do.call()} to
       %% avoid the name problem seen in \PR{17119}.
 
-      \item \code{try()} gets a new argument \code{outFile} with a default
+      \item \code{try()} gains a new argument \code{outFile} with a default
       that can be modified via \code{options(try.outFile = .)}, useful
       notably for \code{Sweave}.
+
+      \item The unexported low-level functions in package \pkg{parallel}
+      for passing serialized \R objects to and from forked children now
+      support long vectors on 64-bit platforms.  This removes some
+      limits on higher-level functions such as \code{mclapply()} (but
+      returning gigabyte results from forked processes \emph{via}
+      serialization should be avoided if at all possible).
     }
   }
 
@@ -338,7 +345,14 @@
       \item \code{droplevels(f)} now keeps <NA> levels when present.
 
       \item In integer arithmetic, \code{NULL} is now treated as
-      \code{integer(0)} where it was \code{double(0)}, previously.
+      \code{integer(0)} whereas it was previously treated as \code{double(0)}.
+
+      \item The radix sort considers \code{NA_real_} and \code{NaN} to
+      be equivalent in rank (like the other sort algorithms).
+
+      \item When \code{index.return=TRUE} is passed to \code{sort.int()},
+      the radix sort treats \code{NA}s like \code{sort.list()} does
+      (like the other sort algorithms).
     }
   }
 }
@@ -390,8 +404,8 @@
       \option{-Wall -pedantic}: this now reports non-portable GNU
       extensions such as out-of-order declarations.
 
-      \item \command{R CMD config} copes better with paths containing
-      spaces, even home directories.
+      \item \command{R CMD config} works better with paths containing
+      spaces, even those of home directories (as reported by Ken Beath).
     }
   }
 

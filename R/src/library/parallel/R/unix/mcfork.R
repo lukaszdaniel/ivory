@@ -88,7 +88,7 @@ processID <- function(process) {
     else stop(gettextf("'process' argument must be of class %s", dQuote("process")), domain = "R-parallel")
 }
 
-# unused
+# unused in the package
 sendChildStdin <- function(child, what)
 {
     if (inherits(child, "process") || is.list(child)) child <- processID(child)
