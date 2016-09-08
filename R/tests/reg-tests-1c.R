@@ -1906,22 +1906,13 @@ stopifnot(identical(faN, factor(faN, exclude="c")))
 Lm <- m; storage.mode(Lm) <- "logical"
 Im <- m; storage.mode(Im) <- "integer"
 stopifnot(
-    identical( m, m + 1 ), identical( m,  m + 1 [0]), identical( m,  m + NULL)
-   ,
-    identical(Im, Im+ 1L), identical(Im, Im + 1L[0]), identical(Im, Im + NULL)
-   ,
-    identical(m, m+2:3)
-   ,
-    identical(Im, Im+2:3)
-   ,
-    identical(Lm, m & 1),       identical(Lm, m | 2:3)
-   ,
-    identical(Lm, m & TRUE[0]), identical(Lm, Lm | FALSE[0])
-    ,
-    identical(Lm, m & NULL) # gave Error (*only* place where NULL was not allowed)
-   ,
-    identical(Lm, m > 1), identical(Lm, m > .1[0]), identical(Lm, m > NULL)
-   ,
+    identical( m, m + 1 ), identical( m,  m + 1 [0]), identical( m,  m + NULL),
+    identical(Im, Im+ 1L), identical(Im, Im + 1L[0]), identical(Im, Im + NULL),
+    identical(m, m + 2:3), identical(Im, Im + 2:3),
+    identical(Lm, m & 1),  identical(Lm,  m | 2:3),
+    identical(Lm, m & TRUE[0]), identical(Lm, Lm | FALSE[0]),
+    identical(Lm, m & NULL), # gave Error (*only* place where NULL was not allowed)
+    identical(Lm, m > 1), identical(Lm, m > .1[0]), identical(Lm, m > NULL),
     identical(Lm, m <= 2:3)
 )
 mm <- m[,c(1:2,2:1,2)]
@@ -1933,8 +1924,6 @@ tools::assertError(m == mm)# ... non-conformable arrays
 ## arithmetic, logic, and comparison (relop) -- inconsistency for 1x1 array o <vector >= 2>:
 (m1 <- matrix(1,1,1, dimnames=list("Ro","col")))
 (m2 <- matrix(1,2,1, dimnames=list(c("A","B"),"col")))
-##    col
-## Ro   1
 if(FALSE) { # in the future (~ 2018):
 tools::assertError(m1  + 1:2) ## was [1] 2 3  even w/o warning in R <= 3.3.x
 } else tools::assertWarning(m1v <- m1 + 1:2); stopifnot(identical(m1v, 1+1:2))
@@ -1942,16 +1931,21 @@ tools::assertError(m1  & 1:2) # ERR: dims [product 1] do not match the length of
 tools::assertError(m1 <= 1:2) # ERR:                  (ditto)
 ##
 ## non-0-length arrays combined with {NULL or double() or ...} *fail*
-
-if(FALSE) { # in the future (~ 2018):
-tools::assertError(m1 + NULL) ## was numeric(0) in R <= 3.3.x
-} else tools::assertWarning(m1N <- m1 + NULL); stopifnot(identical(m1N, numeric()))
-tools::assertError(m1 & NULL)
-tools::assertError(m1 > NULL) ## was logical(0) in R <= 3.3.x
+n0 <- numeric(0)
+l0 <- logical(0)
+stopifnot(identical(m1 + NULL, n0), # as "always"
+	  identical(m1 +  n0 , n0), # as "always"
+	  identical(m1 & NULL, l0), # ERROR in R <= 3.3.x
+	  identical(m1 &  l0,  l0), # ERROR in R <= 3.3.x
+	  identical(m1 > NULL, l0), # as "always"
+	  identical(m1 >  n0 , l0)) # as "always"
 ## m2 was slightly different:
-tools::assertError(m2 + NULL)
-tools::assertError(m2 & NULL)
-tools::assertError(m2 == NULL) ## was logical(0) in R <= 3.3.x
+stopifnot(identical(m2 + NULL, n0), # ERROR in R <= 3.3.x
+	  identical(m2 +  n0 , n0), # ERROR in R <= 3.3.x
+	  identical(m2 & NULL, l0), # ERROR in R <= 3.3.x
+	  identical(m2 &  l0 , l0), # ERROR in R <= 3.3.x
+	  identical(m2 == NULL, l0), # as "always"
+	  identical(m2 ==  n0 , l0)) # as "always"
 
 
 
