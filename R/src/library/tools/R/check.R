@@ -372,7 +372,7 @@ setRlibs <-
 	    printLog(Log, gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools"))
 	}
         if (dir.exists(tests_dir) && # trackObjs has only *.Rin
-            length(dir(tests_dir, pattern = "\\.(R|Rin)$")))
+            length(dir(tests_dir, pattern = "\\.(R|r|Rin)$")))
             run_tests()
 
         ## Check package vignettes.
@@ -1945,13 +1945,57 @@ setRlibs <-
                      "")
             printLog(Log, paste(msg, collapse = "\n"))
         }
+        
+	## Did the vignettes get updated in inst/doc?
+	inst_doc_files <- list.files(file.path(pkgdir, "inst", "doc"), 
+				     recursive = TRUE)
+	vignette_files <- list.files(vign_dir, recursive = TRUE)
+	if (!is_base_pkg && length(vignette_files)) {
+	    if (!length(inst_doc_files)) {
+		if (!any) warningLog(Log)
+		any <- TRUE
+		msg <- c(gettext("Files in the 'vignettes' directory but no files in 'inst/doc':", domain = "R-tools"),
+			 strwrap(paste(sQuote(vignette_files), collapse = ", "),
+				 indent = 2L, exdent = 4L),
+			 "")
+		printLog0(Log, paste(msg, collapse = "\n"))
+	    } else {
+		vignette_times <- file.mtime(file.path(vign_dir, vignette_files))
+		inst_doc_times <- file.mtime(file.path(pkgdir, "inst", "doc", inst_doc_files))
+		if (max(vignette_times) > max(inst_doc_times)) {
+		    if (!any) warningLog(Log)
+		    any <- TRUE
+		    msg <- c(gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':", domain = "R-tools"),
+			     strwrap(paste(sQuote(vignette_files[vignette_times > max(inst_doc_times)]), 
+					   collapse = ", "),
+				     indent = 2L, exdent = 4L),
+			     "")
+		    keep <- vignette_times <= max(inst_doc_times)
+		    vignette_files <- vignette_files[keep]
+		    vignette_times <- vignette_times[keep]
+		    printLog0(Log, paste(msg, collapse = "\n"))
+		}
+		matches <- match(vignette_files, inst_doc_files)
+		newer <- !is.na(matches) & vignette_times > inst_doc_times[matches]
+		if (any(newer)) {
+		    if (!any) warningLog(Log)
+		    any <- TRUE
+		    msg <- c(gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':", domain = "R-tools"),
+			     strwrap(paste(sQuote(vignette_files[newer]), 
+					   collapse = ", "),
+				     indent = 2L, exdent = 4L),
+			     "")
+		    printLog0(Log, paste(msg, collapse = "\n"))   
+		}
+	    }
+	}
 
         files <- dir(file.path(pkgdir, "vignettes"))
         if(length(files) &&
            !length(dir(file.path(pkgdir, "vignettes"),
                        pattern = pattern)) &&
            is.na(desc["VignetteBuilder"])) {
-            noteLog(Log)
+            if(!any) noteLog(Log)
             any <- TRUE
             printLog0(Log,
                       gettext("Package has only non-Sweave vignette sources but no VignetteBuilder field.\n"), domain = "R-tools")
@@ -1959,7 +2003,7 @@ setRlibs <-
         already <- c("jss.cls", "jss.bst", "Rd.sty", "Sweave.sty")
         bad <- files[files %in% already]
         if (length(bad)) {
-            noteLog(Log)
+            if(!any) noteLog(Log)
             any <- TRUE
             printLog(Log,
                      gettextf("The following files are already in R: %s\nPlease remove them from your package.", paste(sQuote(bad), collapse = ", "), domain = "R-tools"), "\n")
@@ -2005,7 +2049,7 @@ setRlibs <-
                                     indent = 2, exdent = 2), collapse = "\n")),
                       "")
         }
-
+        
         if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
@@ -4640,7 +4684,7 @@ setRlibs <-
             dir.exists(file.path(pkgdir, "R"))) {
             tests_dir <- file.path(pkgdir, test_dir)
             if (dir.exists(tests_dir) &&
-                length(dir(tests_dir, pattern = "\\.(R|Rin)$")))
+                length(dir(tests_dir, pattern = "\\.(r|R|Rin)$")))
                 no_examples <- FALSE
             vigns <- pkgVignettes(dir = pkgdir)
             if (!is.null(vigns) && length(vigns$docs)) no_examples <- FALSE

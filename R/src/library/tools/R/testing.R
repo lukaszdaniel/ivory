@@ -378,7 +378,7 @@ testInstalledPackage <-
         file.copy(Sys.glob(file.path(d, "*")), this, recursive = TRUE)
         setwd(this)
         message(gettextf("Running specific tests for package %s", sQuote(pkg)), domain = "R-tools")
-        Rfiles <- dir(".", pattern="\\.R$")
+        Rfiles <- dir(".", pattern="\\.[rR]$")
         for(f in Rfiles) {
             message(gettextf("  Running file %s", sQuote(f)), domain = "R-tools")
             outfile <- paste0(f, "out")
@@ -505,7 +505,7 @@ testInstalledPackage <-
         if (nfail > 0) return(nfail)
     }
 
-    Rfiles <- dir(".", pattern="\\.R$")
+    Rfiles <- dir(".", pattern="\\.[rR]$")
     for(f in Rfiles) {
         nfail <- nfail + runone(f)
         if (nfail > 0) return(nfail)
