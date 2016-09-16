@@ -381,7 +381,7 @@ testInstalledPackage <-
         Rfiles <- dir(".", pattern="\\.[rR]$")
         for(f in Rfiles) {
             message(gettextf("  Running file %s", sQuote(f)), domain = "R-tools")
-            outfile <- paste0(f, "out")
+            outfile <- sub("rout$", "Rout", paste0(f, "out"))
             cmd <- paste(shQuote(file.path(R.home("bin"), "R")),
                          "CMD BATCH --vanilla --no-timing", Ropts,
                          shQuote(f), shQuote(outfile))
@@ -450,7 +450,7 @@ testInstalledPackage <-
         message(gettextf("  Running %s", sQuote(f), domain = "R-tools"), appendLF = FALSE)
         if(!is.null(Log))
             cat(gettextf("  Running %s", sQuote(f), domain = "R-tools"), sep = "", file = Log)
-        outfile <- paste0(f, "out")
+        outfile <- sub("rout$", "Rout", paste0(f, "out"))
         cmd <- paste(shQuote(file.path(R.home("bin"), "R")),
                      "CMD BATCH --vanilla",
                      if(use_valgrind) "--debugger=valgrind",
@@ -584,7 +584,7 @@ testInstalledBasic <- function(scope = c("basic", "devel", "both", "internet"))
             on.exit(unlink(f))
         }
         message(gettextf("  running code in %s", sQuote(f)), domain = "R-tools")
-        outfile <- paste0(f, "out")
+        outfile <- sub("rout$", "Rout", paste0(f, "out"))
         cmd <- paste(shQuote(file.path(R.home("bin"), "R")),
                      "CMD BATCH --vanilla --no-timing",
                      shQuote(f), shQuote(outfile))
