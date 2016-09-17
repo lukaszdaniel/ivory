@@ -1,22 +1,22 @@
 /* PSPP - computes sample statistics.
- Copyright (C) 1997-9, 2000, 2001 Free Software Foundation, Inc.
- Written by Ben Pfaff <blp@gnu.org>.
- Modified for R foreign library by Saikat DebRoy <saikat@stat.wisc.edu>.
+   Copyright (C) 1997-9, 2000, 2001 Free Software Foundation, Inc.
+   Written by Ben Pfaff <blp@gnu.org>.
+   Modified for R foreign library by Saikat DebRoy <saikat@stat.wisc.edu>.
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License as
- published by the Free Software Foundation; either version 2 of the
- License, or (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful, but
- WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- General Public License for more details.
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, a copy is available at
- http://www.r-project.org/Licenses/
- */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, a copy is available at
+   http://www.r-project.org/Licenses/
+*/
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -26,6 +26,7 @@
 #include <math.h>
 #include <float.h>
 #include <limits.h>
+#include <string.h>
 #include "foreign.h"
 #include "avl.h"
 #include "file-handle.h"
@@ -47,7 +48,7 @@
 	(((X) + ((Y) - 1)) / (Y))
 
 /* Returns nonnegative difference between {nonnegative X} and {the
- least multiple of positive Y greater than or equal to X}. */
+   least multiple of positive Y greater than or equal to X}. */
 #if __GNUC__ && !__STRICT_ANSI__
 #define REM_RND_UP(X, Y)			\
 	({					\
@@ -70,23 +71,26 @@
 #undef DEBUGGING
 /*#define DEBUGGING 1*/
 
+
 /* pfm's file_handle extension. */
-struct pfm_fhuser_ext {
-	FILE *file; /* Actual file. */
+struct pfm_fhuser_ext
+  {
+    FILE *file;			/* Actual file. */
 
-	struct dictionary *dict; /* File's dictionary. */
-	int weight_index; /* 0-based index of weight variable, or -1. */
+    struct dictionary *dict;	/* File's dictionary. */
+    int weight_index;		/* 0-based index of weight variable, or -1. */
 
-	unsigned char *trans; /* 256-byte character set translation table. */
+    unsigned char *trans;	/* 256-byte character set translation table. */
 
-	int nvars; /* Number of variables. */
-	int *vars; /* Variable widths, 0 for numeric. */
-	int case_size; /* Number of `value's per case. */
+    int nvars;			/* Number of variables. */
+    int *vars;			/* Variable widths, 0 for numeric. */
+    int case_size;		/* Number of `value's per case. */
 
-	unsigned char buf[83]; /* Input buffer. */
-	unsigned char *bp; /* Buffer pointer. */
-	int cc; /* Current character. */
-};
+    unsigned char buf[83];	/* Input buffer. */
+    unsigned char *bp;		/* Buffer pointer. */
+    int cc;			/* Current character. */
+  };
+
 
 #ifndef Macintosh
 static struct fh_ext_class pfm_r_class;
@@ -94,26 +98,28 @@ static struct fh_ext_class pfm_r_class;
 static void pfm_close (struct file_handle * h);
 static struct fh_ext_class pfm_r_class =
 {
-	5,
-	N_("reading as a portable file"),
-	pfm_close,
+  5,
+  N_("reading as a portable file"),
+  pfm_close,
 };
 #endif
 
 extern char *xstrdup(const char *s);
 
 /* Closes a portable file after we're done with it. */
-static void pfm_close(struct file_handle * h) {
-	struct pfm_fhuser_ext *ext = h->ext;
+static void
+pfm_close (struct file_handle * h)
+{
+  struct pfm_fhuser_ext *ext = h->ext;
 
-	Free(ext->vars);
-	Free(ext->trans);
-	if (EOF == fclose(ext->file))
-		error(_("%s: Closing portable file: %s"), h->fn, strerror(errno));
+  Free (ext->vars);
+  Free (ext->trans);
+  if (EOF == fclose (ext->file))
+    error(_("%s: Closing portable file: %s"), h->fn, strerror (errno));
 }
 
 /* Displays the message X with corrupt_msg, then jumps to the lossage
- label. */
+   label. */
 #define lose(X)					\
 	do					\
 	  {					\

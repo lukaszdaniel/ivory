@@ -15,32 +15,34 @@
  */
 
 /**
- Read  Stata version 8.0, 7.0, 7/SE, 6.0 and 5.0 .dta files, write version 7.0, 6.0.
+  Read  Stata version 8.0, 7.0, 7/SE, 6.0 and 5.0 .dta files, write version 7.0, 6.0.
 
- (c) 1999, 2000, 2001, 2002 Thomas Lumley.
- 2000 Saikat DebRoy
+  (c) 1999, 2000, 2001, 2002 Thomas Lumley.
+  2000 Saikat DebRoy
 
- Patches by the R Core Team and Brian Quistorff, 2002, 2007-2015.
+  Patches by the R Core Team and Brian Quistorff, 2002, 2007-2015.
 
- Frozen 2013-10-07 at Stata version 10 aka 114 (11 is the same as 10,
- and 12 seems compatible despite being described separately as 115).
+  Frozen 2013-10-07 at Stata version 10 aka 114 (11 is the same as 10,
+  and 12 seems compatible despite being described separately as 115).
 
- The format of Stata files is documented under 'file formats' in the
- Stata manual and at http://www.stata.com/help.cgi?dta (with,
- currently, links to various versions).
+  The format of Stata files is documented under 'file formats' in the
+  Stata manual and at http://www.stata.com/help.cgi?dta (with,
+  currently, links to various versions).
 
- This code currently does not make use of the print format information in
- a .dta file (except for dates). It cannot handle files with 'int',
- 'float' or 'double' that differ from IEEE 4-byte integer, 4-byte
- real and 8-byte real respectively: it's not clear whether such files
- can exist.
+  This code currently does not make use of the print format information in
+   a .dta file (except for dates). It cannot handle files with 'int',
+  'float' or 'double' that differ from IEEE 4-byte integer, 4-byte
+  real and 8-byte real respectively: it's not clear whether such files
+  can exist.
 
- Versions of Stata before 4.0 and after 12 used different file formats.
+  Versions of Stata before 4.0 and after 12 used different file formats.
 
- **/
+**/
+
 
 #include <stdio.h>
 #include <stdlib.h> /* for abs */
+#include <math.h>
 #include "foreign.h"
 #include "localization.h"
 #include "swap_bytes.h"

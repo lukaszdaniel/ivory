@@ -114,6 +114,9 @@ if [[ "$1" == "foreign" ]] || [[ "$1" == "all" ]]; then
 fi;
 
 
+if [[ "$1" == "boot" ]] || [[ "$1" == "all" ]]; then
+`$cmd boot.Rcheck/boot-Ex.Rout	../../$RECIVORY/boot/tests/boot-Ex.Rout.save`
+fi;
 
 
 if [[ "$1" == "MASS" ]] || [[ "$1" == "all" ]]; then
@@ -225,4 +228,5 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/turnbull.Rout		../../$RECIVORY/survival/tests/turnbull.Rout.save`
 `$cmd	survival.Rcheck/tests/factor2.Rout		../../$RECIVORY/survival/tests/factor2.Rout.save`
 `$cmd	survival.Rcheck/tests/r_lung.Rout		../../$RECIVORY/survival/tests/r_lung.Rout.save`
+`$cmd	survival.Rcheck/tests/tmerge.Rout		../../$RECIVORY/survival/tests/tmerge.Rout.save`
 fi;

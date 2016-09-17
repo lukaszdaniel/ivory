@@ -20,6 +20,7 @@
  *  http://www.r-project.org/Licenses/
  */
 
+#include <string.h>
 #include "foreign.h"
 #include "file-handle.h"
 #include "pfm.h"
@@ -37,41 +38,42 @@
 	(((X) + ((Y) - 1)) / (Y))
 
 char *
-xstrdup(const char *s) {
-	int len = (int) strlen(s);
-	char *c = Calloc(len + 1, char);
-	strcpy(c, s);
-	return c;
+xstrdup(const char *s)
+{
+    int len = (int) strlen(s);
+    char *c = Calloc(len + 1, char);
+    strcpy(c, s);
+    return c;
 }
 
 /* Returns a newly created empty dictionary. */
 struct dictionary *
-new_dictionary(int copy) {
-	struct dictionary
-	*d = Calloc (1, struct dictionary);
+new_dictionary (int copy)
+{
+  struct dictionary *d = Calloc (1, struct dictionary);
 
-	d->var = NULL;
-	d->var_by_name = R_avl_create(cmp_variable, NULL);
-	d->nvar = 0;
+  d->var = NULL;
+  d->var_by_name = R_avl_create (cmp_variable, NULL);
+  d->nvar = 0;
 
-	d->N = 0;
+  d->N = 0;
 
-	d->nval = 0;
+  d->nval = 0;
 
-	d->n_splits = 0;
-	d->splits = NULL;
+  d->n_splits = 0;
+  d->splits = NULL;
 
-	d->label = NULL;
+  d->label = NULL;
 
-	d->n_documents = 0;
-	d->documents = NULL;
+  d->n_documents = 0;
+  d->documents = NULL;
 
-	d->weight_index = -1;
-	d->weight_var[0] = 0;
+  d->weight_index = -1;
+  d->weight_var[0] = 0;
 
-	d->filter_var[0] = 0;
+  d->filter_var[0] = 0;
 
-	return d;
+  return d;
 }
 
 /* Find and return the variable in dictionary D having name NAME, or

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-09-16 r838) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-09-16 r71292) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -79,7 +79,7 @@ Cluster sizes and average silhouette widths:
 0.9773277 0.6926798 0.7467236 
 Individual silhouette widths:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.03353 0.76940 0.86120 0.80560 0.97560 0.98920 
+0.03353 0.76937 0.86121 0.80558 0.97564 0.98919 
 
  4 :
 ==
@@ -93,7 +93,7 @@ Cluster sizes and average silhouette widths:
 0.5653722 0.5226372 0.6926798 0.7467236 
 Individual silhouette widths:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-0.03353 0.56620 0.75100 0.66400 0.84240 0.89390 
+0.03353 0.56621 0.75102 0.66399 0.84240 0.89390 
 
  5 :
 ==
@@ -617,9 +617,9 @@ pdf
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  1.304 0 1.302 0 0 
+Time elapsed:  1.368 0.02 1.387 0 0 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  1.400   0.008   1.405 
+  1.476   0.040   1.513 

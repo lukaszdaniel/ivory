@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-08-25 r826) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-09-16 r838) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-08-25 r71160) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-09-16 r71292) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3789,7 +3789,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x266e8d0>
+<environment: 0x3c5dba0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4496,6 +4496,28 @@ factor> is.na(x)
 
 factor> # [1] FALSE  TRUE FALSE
 factor> 
+factor> ## More rational, since R 3.4.0 :
+factor> factor(c(1:2, NA), exclude =  "" ) # keeps <NA> , as
+[1] 1    2    <NA>
+Levels: 1 2 <NA>
+
+factor> factor(c(1:2, NA), exclude = NULL) # always did
+[1] 1    2    <NA>
+Levels: 1 2 <NA>
+
+factor> ## exclude = <character>
+factor> z # ordered levels 'A < B < C'
+[1] C B A
+Levels: A < B < C
+
+factor> factor(z, exclude = "C") # does exclude
+[1] <NA> B    A   
+Levels: A < B
+
+factor> factor(z, exclude = "B") # ditto
+[1] C    <NA> A   
+Levels: A < C
+
 factor> ## Using addNA()
 factor> Month <- airquality$Month
 
@@ -4752,7 +4774,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x398d8d0>
+<bytecode: 0x4f25c20>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -4831,7 +4853,7 @@ attr(,"legend")
 > EV <- function(m) eigen(m, only.values=TRUE)$values
 > summary(abs(1 - EV(Rp)/EV(R.)) / abs(1 - EV(Rc)/EV(R.)))
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.8942  1.1464  1.2451  1.3732  1.3722  2.3265 
+ 0.8942  1.1464  1.2452  1.3732  1.3722  2.3265 
 > 
 > 
 > 
@@ -7283,7 +7305,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5cb1328>
+<environment: 0x7271130>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -11889,14 +11911,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x5fba800>
-<environment: 0x5fc1f68>
+<bytecode: 0x75f18b8>
+<environment: 0x75f9fc0>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x5fba6e8>
-<environment: 0x5fc1f68>
+<bytecode: 0x75f2708>
+<environment: 0x75f9fc0>
 
 > 
 > 
@@ -15925,8 +15947,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x249c5f0>
-<environment: 0x4bc7648>
+<bytecode: 0x3c2be08>
+<environment: 0x609fb50>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18203,7 +18225,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.368 0.116 4.485 0 0 
+Time elapsed:  4.284 0.112 4.396 0 0 
 > grDevices::dev.off()
 null device 
           1 

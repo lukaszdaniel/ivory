@@ -202,6 +202,10 @@
 
       \item Connections now \code{print()} without error, even if
       invalid, i.e., typically after having been closed.
+      
+      \item \code{apropos()} and \code{find(simple.words = FALSE)} no
+      longer match object names starting with \samp{.} which are known
+      to be internal objects (such as \code{.__S3MethodsTable__.}).
     }
   }
 
@@ -442,6 +446,14 @@
     }
   }
 
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Use of the C/C++ macro \samp{NO_C_HEADERS} is deprecated
+      (no C headers are included by \R headers from C++ as from \R
+      3.3.0, so it should no longer be needed).
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item The check for non-portable flags in \command{R CMD check}
@@ -491,16 +503,16 @@
       \item \code{axis(side, x = D)} and hence \code{Axis()} and
       \code{plot()} now work correctly for \code{"Date"} and time
       objects \code{D}, even when \dQuote{time goes backward}, e.g.,
-      with decreasing \code{xlim}.  (Reported by William May).
+      with decreasing \code{xlim}.  (Reported by William May.)
 
       \item \code{str(I(matrix(..)))} now looks as always intended.
 
       \item \code{plot.ts()}, the \code{plot()} method for time series,
-      now obeys \code{cex}, \code{lwd}, and \code{lty}.  (Reported by
-      Greg Werbin).
+      now respects \code{cex}, \code{lwd} and \code{lty}.  (Reported by
+      Greg Werbin.)
 
-      \item \code{mccollect()} now returns a named list (as
-      documented) called with \code{wait=FALSE}.  (Reported by
+      \item \code{parallel::mccollect()} now returns a named list (as
+      documented) when called with \code{wait = FALSE}.  (Reported by
       Michel Lang.)
     }
   }

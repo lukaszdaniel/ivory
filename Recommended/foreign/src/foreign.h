@@ -26,6 +26,7 @@
 #ifndef FOREIGN_H
 #define FOREIGN_H
 
+#include <stddef.h>
 #include <R.h>
 #include <R_ext/Minmax.h>
 #include <Rinternals.h>

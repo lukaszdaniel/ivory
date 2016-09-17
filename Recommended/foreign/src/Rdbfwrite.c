@@ -21,8 +21,10 @@
  *  http://www.r-project.org/Licenses/
  */
 
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "shapefil.h"
 #include <R.h>
 #include <Rinternals.h>
@@ -31,12 +33,12 @@
 
 static DBFHandle Rdbfwrite(DBFHandle, SEXP, SEXP, SEXP, SEXP);
 
-static char* nameMangleOut(char *dbfFldname, int len) {
-	int i;
-	for (i = 0; i < len; i++)
-		if (dbfFldname[i] == '.')
-			dbfFldname[i] = '_';
-	return dbfFldname;
+static char* nameMangleOut(char *dbfFldname, int len)
+{
+    int i;
+    for(i = 0; i < len; i++)
+      if (dbfFldname[i] == '.') dbfFldname[i] = '_';
+    return dbfFldname;
 }
 
 SEXP DoWritedbf(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes) {

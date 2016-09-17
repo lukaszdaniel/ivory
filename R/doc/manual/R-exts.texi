@@ -9573,7 +9573,10 @@ as from @R{} 3.3.0) and the platform, but
 #include <cstddef>
 using std::FILE;
 @end example
-is likely to suffice.)
+is likely to suffice.)  As from @R{} 3.3.0, @R{} headers do not include
+legacy headers when used with C++, so @samp{NO_C_HEADERS} will only be
+needed if the package C++ code includes legacy headers or for earlier
+versions of @R{}: it is deprecated and likely to be removed in future.
 
 Legacy header @file{S.h} cannot be used with C++.
 
@@ -12607,10 +12610,11 @@ use @code{ln(x)} for the natural logarithm (@code{log(x)} in @R{}).
 @item @code{M_LN_SQRT_PI} @tab ln(sqrt(@eqn{\pi, pi})) @tab 0.5723649
 @item @code{M_LN_SQRT_2PI} @tab ln(sqrt(@eqn{2\pi, 2*pi})) @tab 0.9189385
 @item @code{M_LN_SQRT_PId2} @tab ln(sqrt(@eqn{\pi, pi}/2)) @tab 0.2257914
+@item @code{M_EC} @tab @eqn{\gamma, gamma} @tab 0.5772157
 @end multitable
 @end quotation
 
-There are a set of constants (@code{PI}, @code{DOUBLE_EPS}) (and so on)
+There are a set of constants (e.g. @code{DOUBLE_EPS} and so on)
 defined (unless @code{STRICT_R_HEADERS} is defined) in the included
 header @file{R_ext/Constants.h}, mainly for compatibility with @Sl{}.
 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-09-16 r838) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-09-16 r71292) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -156,8 +156,8 @@ Clustering vector:
 89       2        1 0.4482549
 
 4005 dissimilarities, summarized:
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
- 0.18647 11.58500 20.05800 27.81500 45.57800 85.23200 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1865 11.5850 20.0580 27.8150 45.5780 85.2320 
 Metric: euclidean
 Number of objects: 90
 
@@ -280,8 +280,8 @@ Clustering vector:
 1207       2        1 0.2694097
 
 946 dissimilarities, summarized:
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
- 0.48462 12.32300 26.49900 32.21300 52.39100 77.17500 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.4846 12.3230 26.4990 32.2130 52.3910 77.1750 
 Metric: euclidean
 Number of objects: 44
 
@@ -863,8 +863,8 @@ Clustering vector:
 980        5        1 0.4671695
 
 1225 dissimilarities, summarized:
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
- 0.69682 19.31600 34.09200 33.07000 46.25400 92.25300 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.6968 19.3160 34.0920 33.0700 46.2540 92.2530 
 Metric: euclidean
 Number of objects: 50
 
@@ -1490,10 +1490,10 @@ $sample
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  1.68 0.008 1.688 0 0 
+Time elapsed:  1.62 0.02 1.64 0 0 
 > ## Lynne (P IV, 1.6 GHz): 18.81; then (no NA; R 1.9.0-alpha): 15.07
 > ## nb-mm (P III,700 MHz): 27.97
 > 
 > proc.time()
    user  system elapsed 
-  1.772   0.016   1.784 
+  1.708   0.028   1.731 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-06-13 r765) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-09-16 r838) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-06-13 r70766) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-09-16 r71292) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -410,11 +410,19 @@ TRUE
 >  
 > fit1 <- coxph(Surv(time, status) ~x + cluster(id), test1, method='breslow',
 +               weights=wt)
+Warning message:
+In command 'rr * vv': dropping dim() of array of length one.  Will become an error.
 > fit2 <- coxph(Surv(time, status) ~x + cluster(id), testx, method='breslow')
+Warning message:
+In command 'rr * vv': dropping dim() of array of length one.  Will become an error.
 > 
 > db1 <- resid(fit1, 'dfbeta', weighted=F)
+Warning message:
+In command 'rr * vv': dropping dim() of array of length one.  Will become an error.
 > db1 <- db1[-2]         #toss the missing
 > db2 <- resid(fit2, 'dfbeta')
+Warning message:
+In command 'rr * vv': dropping dim() of array of length one.  Will become an error.
 > aeq(db1, db2[3:8])
 [1] TRUE
 > 
@@ -427,4 +435,4 @@ TRUE
 > 
 > proc.time()
    user  system elapsed 
-  0.900   0.032   0.930 
+  0.844   0.032   0.872 

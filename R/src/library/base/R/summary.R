@@ -40,13 +40,14 @@ summary.default <- function(object, ..., digits)
 	nas <- is.na(object)
 	object <- object[!nas]
 	qq <- stats::quantile(object)
+        qq <- c(qq[1L:3L], mean(object), qq[4L:5L])
+	if(!missing(digits)) qq <- signif(qq, digits)
 	if(any(nas)) {
-	    qq <- c(signif(c(qq[1L:3L], mean(object), qq[4L:5L]), digits), sum(nas))
+	    qq <- c(qq, sum(nas))
 	    names(qq) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
 	    qq
 	}
 	else {
-	    qq <- signif(c(qq[1L:3L], mean(object), qq[4L:5L]), digits)
 	    names(qq) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."))
 	    qq
 	}

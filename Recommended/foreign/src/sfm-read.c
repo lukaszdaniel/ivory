@@ -1,28 +1,29 @@
 /* PSPP - computes sample statistics.
- Copyright (C) 1997-9, 2000 Free Software Foundation, Inc.
- Written by Ben Pfaff <blp@gnu.org>.
- Modified for R foreign library by Saikat DebRoy <saikat@stat.wisc.edu>.
+   Copyright (C) 1997-9, 2000 Free Software Foundation, Inc.
+   Written by Ben Pfaff <blp@gnu.org>.
+   Modified for R foreign library by Saikat DebRoy <saikat@stat.wisc.edu>.
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License as
- published by the Free Software Foundation; either version 2 of the
- License, or (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful, but
- WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- General Public License for more details.
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with this program; if not, a copy is available at
- http://www.r-project.org/Licenses/
- */
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, a copy is available at
+   http://www.r-project.org/Licenses/
+*/
 
 #include <stdlib.h>
 #include <ctype.h>
 #include <errno.h>
 #include <float.h>
 #include <limits.h>
+#include <string.h>
 #include "foreign.h"
 #include "avl.h"
 #include "file-handle.h"
@@ -42,7 +43,7 @@
 	(((X) + ((Y) - 1)) / (Y))
 
 /* Returns nonnegative difference between {nonnegative X} and {the
- least multiple of positive Y greater than or equal to X}. */
+   least multiple of positive Y greater than or equal to X}. */
 #if __GNUC__ && !__STRICT_ANSI__
 #define REM_RND_UP(X, Y)			\
     (__extension__				\
