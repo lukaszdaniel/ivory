@@ -2000,7 +2000,7 @@ setRlibs <-
             if(!any) noteLog(Log)
             any <- TRUE
             printLog0(Log,
-                      gettext("Package has only non-Sweave vignette sources but no VignetteBuilder field.\n"), domain = "R-tools")
+                      gettext("Package has no Sweave vignette sources and no VignetteBuilder field.\n"), domain = "R-tools")
         }
         already <- c("jss.cls", "jss.bst", "Rd.sty", "Sweave.sty")
         bad <- files[files %in% already]

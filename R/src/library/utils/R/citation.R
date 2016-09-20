@@ -315,7 +315,9 @@ function(x)
         else NULL
         x <- sub("[[:space:]]*\\([^)]*\\)", "", x)
         email <- if(grepl("<.*>", x))
-            sub(".*<([^>]*)>.*", "\\1", x)
+            unlist(strsplit(gsub("[[:space:]]*", "",
+                                 sub(".*<([^>]*)>.*", "\\1", x)),
+                            ",", fixed = TRUE))
         else NULL
         x <- sub("[[:space:]]*<[^>]*>", "", x)
         role <- if(grepl("\\[.*\\]", x))
@@ -423,11 +425,26 @@ function(x,
     braces <- braces[include]
     collapse <- collapse[include]
 
+    paste_collapse <- function(x, collapse) {
+        if(is.na(collapse) || identical(collapse, FALSE)) {
+ 	    x[1L]
+ 	} else {
+ 	    paste(x, collapse = collapse)
+ 	}
+    }
+
     ## format 1 person
     format_person1 <- function(p) {
-	rval <- lapply(seq_along(p), function(i) if(is.null(p[[i]])) NULL else
-		       paste0(braces[[i]][1L], paste(p[[i]], collapse = collapse[[i]]),
-			      braces[[i]][2L]))
+	rval <- lapply(seq_along(p),
+                       function(i) {
+                           if(is.null(p[[i]]))
+                               NULL
+                           else
+                               paste0(braces[[i]][1L],
+                                      paste_collapse(p[[i]],
+                                                     collapse[[i]]),
+                                      braces[[i]][2L])
+                       })
 	paste(do.call("c", rval), collapse = " ")
     }
 
@@ -1358,7 +1375,8 @@ function(x)
     ## If this leaves nothing or more than one ...
     if(length(x) != 1L) return("")
     display <- format(x, include = c("given", "family"))
-    address <- format(x, include = c("email"))
+    address <- format(x, include = c("email"),
+                      collapse = list(email = FALSE))
     ## Need to quote display names at least when they contain commas
     ## (RFC 5322 <https://tools.ietf.org/html/rfc5322>).
     if(any(ind <- grepl(",", display))) {
