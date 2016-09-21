@@ -38,7 +38,7 @@ function(given = NULL, family = NULL, middle = NULL,
     if(!all(args_length_ok <- args_length %in% c(1L, max(args_length))))
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
                          paste(names(args)[!args_length_ok], collapse = ", ")), domain = "R-utils")
-    args <- lapply(args, function(x) rep(x, length.out = max(args_length)))
+    args <- lapply(args, function(x) rep_len(x, max(args_length)))
 
     ## <COMMENT Z>
     ## We could do this more elegantly, but let's just go through the
@@ -219,7 +219,7 @@ function(x, name, value)
 {
     name <- match.arg(name, c("given", "family", "role", "email", "comment"))
     x <- .listify(unclass(x))
-    value <- rep(value, length.out = length(x))
+    value <- rep_len(value, length(x))
 
     if(name == "role")
         value <- lapply(value, .canonicalize_person_role)
@@ -493,14 +493,14 @@ function(bibtype, textVersion = NULL, header = NULL, footer = NULL, key = NULL,
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
                          paste(names(args)[!args_length_ok], collapse = ", ")),
                 domain = "R-utils")
-    args <- lapply(args, function(x) rep(x, length.out = max_length))
+    args <- lapply(args, function(x) rep_len(x, max_length))
 
     other_length <- lengths(other)
     if(!all(other_length_ok <- other_length %in% c(1L, max_length)))
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
                          paste(names(other)[!other_length_ok], collapse = ", ")),
                 domain = "R-utils")
-    other <- lapply(other, function(x) rep(x, length.out = max_length))
+    other <- lapply(other, function(x) rep_len(x, max_length))
 
     bibentry1 <-
     function(bibtype, textVersion, header = NULL, footer = NULL, key = NULL, ..., other = list())
@@ -932,7 +932,7 @@ function(x, name, value)
     name <- tolower(name)
 
     ## recycle value
-    value <- rep(.listify(value), length.out = length(x))
+    value <- rep_len(.listify(value), length(x))
 
     ## check bibtype
     if(name == "bibtype") {
@@ -1270,7 +1270,14 @@ function(x)
 .read_authors_at_R_field <-
 function(x)
 {
-    out <- eval(parse(text = x))
+    out <- if((Encoding(x) == "UTF-8") && !l10n_info()$"UTF-8") {
+        con <- file()
+        on.exit(close(con))
+        writeLines(x, con, useBytes = TRUE)
+        eval(parse(con, encoding = "UTF-8"))
+    } else {
+        eval(parse(text = x))
+    }
 
     ## Let's by nice ...
     ## Alternatively, we could throw an error.
@@ -1343,9 +1350,12 @@ function(x)
     ## all subsequent lines are indented (as .write_description avoids
     ## folding for Author fields).  We use a common indentation of 2,
     ## with an extra indentation of 2 within single author descriptions.
-    out <- paste(lapply(strwrap(x, indent = 0L, exdent = 4L,
-                                simplify = FALSE),
-                        paste, collapse = "\n"),
+    out <- paste(lapply(x,
+                        function(e) {
+                            paste(strwrap(e, indent = 0L, exdent = 4L),
+                                  ## simplify = FALSE),
+                                  collapse = "\n")
+                        }),
                  collapse = ",\n  ")
     if(!is.null(header)) {
         header <- paste(strwrap(header, indent = 0L, exdent = 2L), collapse = "\n")
