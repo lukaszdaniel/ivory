@@ -171,7 +171,7 @@ setRlibs <-
 }
 
 ###- The main function for "R CMD check"
-.check_packages <- function(args = NULL)
+.check_packages <- function(args = NULL, no.q = interactive())
 {
     WINDOWS <- .Platform$OS.type == "windows"
     ## this requires on Windows: file.exe (optional)
@@ -239,14 +239,7 @@ setRlibs <-
     }
 
     parse_description_field <- function(desc, field, default=TRUE)
-    {
-        tmp <- desc[field]
-        if (is.na(tmp)) default
-        else switch(tmp,
-                    "yes"=, "Yes" =, "true" =, "True" =, "TRUE" = TRUE,
-                    "no" =, "No" =, "false" =, "False" =, "FALSE" = FALSE,
-                    default)
-    }
+        str_parse_logic(desc[field], default=default)
 
     check_pkg <- function(pkg, pkgname, pkgoutdir, startdir, libdir, desc,
                           is_base_pkg, is_rec_pkg, subdirs, extra_arch)
@@ -3965,7 +3958,12 @@ setRlibs <-
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
-    do_exit <- function(status = 1L) q("no", status = status, runLast = FALSE)
+    do_exit <-
+	if(no.q) {
+	    function(status = 1L) (if(status) stop else message)
+		gettextf("'.check_packages()' exit status %s", status, domain = "R-tools")
+	} else
+	    function(status = 1L) q("no", status = status, runLast = FALSE)
 
     maybe_exit <- function(status = 1L) {
 	if (R_check_exit_on_first_error) {
@@ -3973,11 +3971,6 @@ setRlibs <-
 	    summaryLog(Log)
 	    do_exit(status)
 	}
-    }
-
-    env_path <- function(...) {
-        paths <- c(...)
-        paste(paths[nzchar(paths)], collapse = .Platform$path.sep)
     }
 
     Usage <- function() {
@@ -4399,7 +4392,7 @@ setRlibs <-
     if (nzchar(libdir)) {
         setwd(libdir)
         libdir <- getwd()
-        Sys.setenv(R_LIBS = env_path(libdir, R_LIBS))
+        Sys.setenv(R_LIBS = path_and_libPath(libdir, R_LIBS))
         setwd(startdir)
     }
 
@@ -4534,9 +4527,9 @@ setRlibs <-
         else if (length(opts) == 1L)
             messageLog(Log, gettextf("using option %s", sQuote(opts), domain = "R-tools"))
 
-        if (!nzchar(libdir)) {
+        if (!nzchar(libdir)) { # otherwise have set R_LIBS above
             libdir <- pkgoutdir
-            Sys.setenv(R_LIBS = env_path(libdir, R_LIBS))
+            Sys.setenv(R_LIBS = path_and_libPath(libdir, R_LIBS))
         }
         if (WINDOWS && grepl(" ", libdir)) # need to avoid spaces in libdir
             libdir <- gsub("\\", "/", utils::shortPathName(libdir), fixed = TRUE)

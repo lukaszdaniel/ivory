@@ -242,10 +242,7 @@
     }
 
     pkgerrmsg <- function(msg)
-    {
-        message(msg, domain = "R-tools")
-        do_exit_on_error()
-    }
+	errmsg(msg)
 
     ## 'pkg' is the absolute path to package sources.
     do_install <- function(pkg)
@@ -1060,14 +1057,13 @@
 	## LazyLoading/Compiling
 	if (install_R && dir.exists("R") && length(dir("R"))) {
             BC <- if (!is.na(byte_compile)) byte_compile
-            else
-                parse_description_field(desc, "ByteCompile", default = FALSE)
+                  else
+                      parse_description_field(desc, "ByteCompile", default = FALSE)
             rcps <- Sys.getenv("R_COMPILE_PKGS")
             rcp <- switch(rcps,
-                "TRUE"=, "true"=, "True"=, "yes"=, "Yes"= 1,
-                "FALSE"=,"false"=,"False"=, "no"=, "No" = 0,
-                as.numeric(rcps)
-            )
+                          "TRUE"=, "true"=, "True"=, "yes"=, "Yes"= 1,
+                          "FALSE"=,"false"=,"False"=, "no"=, "No" = 0,
+                          as.numeric(rcps))
             BC <- BC || (!is.na(rcp) && rcp > 0)
             if (BC) {
                 starsmsg(stars, gettext("byte-compile and prepare package for lazy loading"))

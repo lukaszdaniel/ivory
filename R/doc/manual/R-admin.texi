@@ -2206,7 +2206,7 @@ to @samp{tar.exe}.
 If you have only a source package that is known to work with current
 @R{} and just want a binary Windows build of it, you could make use of
 the building service offered at
-@uref{http://win-builder.r-project.org/}.
+@uref{https://win-builder.r-project.org/}.
 
 For almost all packages @command{R CMD INSTALL} will attempt to install
 both 32- and 64-bit builds of a package if run from a 32/64-bit install
@@ -2317,6 +2317,17 @@ CFLAGS=-mtune=native -g -O2 -Wall -pedantic -Wconversion
 CXXFLAGS=-mtune=native -g -O2 -Wall -pedantic -Wconversion
 @end example
 
+Apple includes a wealth of Open Source libraries in macOS but
+increasingly without the corresponding headers (not even in Xcode nor
+the Command Line Tools): they are often rather old versions.  If
+installing packages from source using them it is usually easiest to
+install a statically-linked up-to-date copy of the Open Source package
+from its sources or from @uref{https://r.research.att.com/libs}.  But
+sometimes it is desirable/necessary to use Apple's dynamically linked
+library, in which case appropriate headers could be extracted from the
+sources@footnote{Note that capitalization and version may differ from
+the Open Source project.} available via
+@uref{https://opensource.apple.com}.
 
 @node Customizing package compilation, Multiple sub-architectures, macOS packages, Installing packages
 @subsection Customizing package compilation
@@ -4712,9 +4723,9 @@ project (@url{http://libcxx.llvm.org/}) has also been tested: for some
 @R{} packages only the variant using @code{libcxxabi} was successful.
 
 Most builds of @command{clang} have no OpenMP support.  Builds of
-version 3.7.0 or later may.@footnote{This also needs the OpenMP runtime,
-which has sometimes been distributed separately, e.g.@: for 3.7.0 at
-@uref{http://llvm.org/releases}.}
+versions 3.7.0 or later may.@footnote{This also needs the OpenMP
+runtime which has sometimes been distributed separately, e.g.@: for
+3.7.0 at @uref{http://llvm.org/releases}.}
 
 @node Intel compilers,  , Clang, Linux
 @subsection Intel compilers
@@ -4791,9 +4802,10 @@ of GNU readline 4.2 based on the NetBSD @code{editline} library.  That
 is not recommended but for the time being @R{}'s installation scripts
 will make use of it if GNU readline is not found.} and a Fortran
 compiler.  Those and other binary components are available from
-@uref{https://r.research.att.com/libs}: you are likely to need
-@code{pcre} and @code{xz} (for @code{libzma}) as recent macOS versions
-provide libraries but not headers for these).
+@uref{https://r.research.att.com/libs}: you will need @code{pcre} and
+@code{xz} (for @code{libzma}) as recent macOS versions provide libraries
+but not headers for these (and the system @code{pcre} is too old at
+version 8.02) .
 
 An X sub-system is required unless configuring using
 @option{--without-x}: see @uref{https://xquartz.macosforge.org/}.

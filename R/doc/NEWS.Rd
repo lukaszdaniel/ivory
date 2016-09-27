@@ -208,7 +208,14 @@
       to be internal objects (such as \code{.__S3MethodsTable__.}).
 
       \item \code{strcapture()} no longer fixes column names nor coerces
-      strings to factors.
+      strings to factors (suggested by Bill Dunlap).
+
+      \item \code{strcapture()} returns \code{NA} for non-matching
+      values in \code{x} (suggested by Bill Dunlap).
+
+      \item \code{source()} gets new optional arguments, notably
+      \code{exprs}; this is made use of in the new utility function
+      \code{withAutoprint()}.
     }
   }
 
@@ -224,10 +231,14 @@
       to the dropping (in \R 3.3.0) of legacy C++ headers from headers
       such as \file{R.h} and \file{Rmath.h} --- this has now been
       removed.  That compiler has strict C++98 compliance hence does not
-      include extensions in its (non-legacy) C++ headers, so some
+      include extensions in its (non-legacy) C++ headers: some
       packages will need to request C++11 or replace non-C++98 calls
       such as \code{lgamma}: see §1.6.4 of \sQuote{Writing R
 	Extensions}.
+    
+      \item When included from C++, the \R headers now use forms such as
+      \code{std::FILE} directly rather than including the line \preformatted{using std::FILE;}
+      C++ code including these headers might be relying on the latter.
     }
   }
 
@@ -278,6 +289,12 @@
     }
   }
 
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Use of the C/C++ macro \samp{NO_C_HEADERS} is defunct and
+      silently ignored.
+    }
+  }
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
@@ -308,6 +325,10 @@
       \item For consistency with other package subdirectories, files
       named \file{*.r} in the \file{tests} directory are now recognized
       as tests by \command{R CMD check}. (Wish of \PR{17143})
+
+      \item \command{R CMD build} and \command{R CMD check} now use the
+      \emph{union} of \env{R_LIBS} \code{.libPaths()}.  They may not be
+      equivalent, e.g., when the latter is determined by \env{R_PROFILE}.
     }
   }
 
@@ -406,6 +427,10 @@
 
       \item \code{as.character.factor()} respects S4 inheritance when
       checking the type of its argument. (\PR{17141})
+
+      \item \code{print.factor()} no longer sets the class of the factor
+      to \code{NULL}, which would violate a basic constraint of an S4
+      object.
     }
   }
 }

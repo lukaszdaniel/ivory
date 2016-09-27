@@ -125,8 +125,9 @@ str.default <-
     ## ------------------------------------------------------------------------
     ## Author: Martin Maechler <maechler@stat.math.ethz.ch>	1990--1997
 
-    ## Get defaults for these
-    oDefs <- c("vec.len", "digits.d", "strict.width", "formatNum")
+    ## strOptions() defaults for
+    oDefs <- c("vec.len", "digits.d", "strict.width", "formatNum",
+	       "drop.deparse.attr")
     ## from
     strO <- getOption("str")
     if (!is.list(strO)) {
@@ -181,6 +182,7 @@ str.default <-
         vec.len <- 0
     }
 
+    ## x: character
     maybe_truncate <- function(x, nx = nchar(x, type="w"), S = "\"", ch = gettext("| __truncated__"))
     {
 	ok <- if(anyNA(nx)) !is.na(nx) else TRUE
@@ -278,7 +280,7 @@ str.default <-
 		       indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	    }
 
-	} else {
+	} else { ## S4 non-envRefClass
 	    a <- sapply(methods::.slotNames(object), methods::slot,
 			object=object, simplify = FALSE)
 	    cat(sprintf(ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")),  length(a)), "\n", sep = "")
@@ -598,12 +600,12 @@ str.default <-
 	    formObj <- function(x) paste(as.character(x), collapse = " ")
 	}
 	else { # not char.like
-	    if(!exists("format.fun", inherits=TRUE)) #-- define one --
+	    if(!exists("format.fun"))
 		format.fun <-
 		    if(mod == "num" || mod == "cplx") format else as.character
 	    ## v.len <- max(1,round(v.len))
 	    ile <- min(v.len, le)
-	    formObj <- function(x) maybe_truncate(paste(format.fun(x), collapse = " "))
+	    formObj <- function(x) maybe_truncate(paste(format.fun(x), collapse = " "), S = "") # *not* string-like
 	}
 
 	cat(if(give.head) paste0(str1, " "),
