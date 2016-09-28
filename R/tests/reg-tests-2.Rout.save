@@ -4885,8 +4885,7 @@ coef[0] = 1
 > ## using NULL as a replacement value
 > DF <- data.frame(A=1:2, B=3:4)
 > try(DF[2, 1:3] <- NULL)
-Error in command '`[<-.data.frame`(`*tmp*`, 2, 1:3, value = NULL)': 
-  replacement has length zero
+Error in x[[jj]][iseq] <- vjj : replacement has length zero
 > ## wrong error message in R < 2.2.0
 > 
 > 
@@ -7066,8 +7065,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 observations of 3 variables:
  $ A      : integer  1 2 3
- $ Bº  : Factor w/ 1 level "B": 1 1 1
- $ C«cd: numeric  4 4 4
+ $ B\BA  : Factor w/ 1 level "B": 1 1 1
+ $ C\ABcd: numeric  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 
