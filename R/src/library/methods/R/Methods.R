@@ -508,7 +508,9 @@ setMethod <-
     if(!hasMethods) {
         ## create using the visible non-generic as a pattern and default method
         setGeneric(f, where = where)
+        doMessage <- !isS3Generic(fdef)
         fdef <- getGeneric(f, where = where)
+        if(doMessage) {
         thisPackage <- getPackageName(where)
 #        thisPName <- if(identical(thisPackage, ".GlobalEnv"))
 #            gettext("the global environment") else gettextf("package %s", sQuote(thisPackage))
@@ -525,6 +527,7 @@ setMethod <-
           message(gettextf("Creating a generic function for %s from package %s in package %s",
                            sQuote(f), sQuote(fdef@package), sQuote(thisPackage), domain = "R-methods"), domain = NA)
 	}
+      }
     }
     else if(identical(gwhere, NA)) {
         ## better be a primitive since getGeneric returned a generic, but none was found

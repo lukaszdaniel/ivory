@@ -3643,7 +3643,7 @@ setRlibs <-
             f <- file.path(pkgdir, "DESCRIPTION")
             desc <- try(.read_description(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, gettext("file EXISTS but is not of correct format", domain = "R-tools"))
+                errorLog(Log, gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
@@ -3672,7 +3672,8 @@ setRlibs <-
             summaryLog(Log)
             do_exit(1L)
         } else {
-            resultLog(Log, gettext("NO", domain = "R-tools"))
+            errorLog(Log,
+                     gettext("File DESCRIPTION does not exist", domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
@@ -4456,7 +4457,6 @@ setRlibs <-
         dir.create(pkgoutdir, mode = "0755")
         if (!dir.exists(pkgoutdir)) {
             message(gettextf("ERROR: cannot create check dir %s", sQuote(pkgoutdir), domain = "R-tools"))
-            summaryLog(Log)
             do_exit(1L)
         }
         Log <- newLog(file.path(pkgoutdir, "00check.log"))
@@ -4549,7 +4549,7 @@ setRlibs <-
             file.exists(file.path(pkgdir, "Makefile.in"))) {
             desc <- try(read.dcf(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, gettext("EXISTS but not correct format", domain = "R-tools"))
+                errorLog(Log, gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }

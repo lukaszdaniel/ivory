@@ -162,7 +162,6 @@ show method
 > ## show(foo)
 > 
 > setMethod("print", "bar", function(x, ...){cat("S4 print method\n")})
-Creating a generic function for 'print' from package 'base' in the global environment
 [1] "print"
 > foo
 show method
