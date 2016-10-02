@@ -183,9 +183,9 @@
       \code{cat()} when terminated early, such that
       \code{suppressMessages()} has an effect; suggested by Ben Bolker.
 
-      \item \code{citation()} supports inst/CITATION files from package
-      source trees, with \code{lib.loc} pointing to the directory
-      containing the package.
+      \item \code{citation()} supports \file{inst/CITATION} files from
+      package source trees, with \code{lib.loc} pointing to the
+      directory containing the package.
 
       %% Would need more work (notably in  ../src/main/sort.c )
       %% \item New \code{orderL(lst, ....)} for use in \code{do.call()} to
@@ -236,6 +236,10 @@
       platforms since \R 2.14.0.  (NB: some filesystems do not
       record modification and access timestamps to sub-second
       resolution.)
+
+      \item The license check enabled by
+      \code{options(checkPackageLicense = TRUE)} is now done when the
+      package's namespace is first loaded.
     }
   }
 
@@ -595,10 +599,13 @@
       \item \code{rbeta(4, NA)} and similarly \code{rgamma()} and
       \code{rnbinom()} now return \code{NaN}'s with a warning, as other
       r<dist>(), and as documented.  (\PR{17155})
-      
+
       \item Using \code{options(checkPackageLicense = TRUE)} no longer
       requires acceptance of the licence for non-default standard
       packages such as \pkg{compiler}.  (Reported by Mikko Korpela.)
+
+      \item \code{split(<very_long>, *)} now works with long vectors.
+      (\PR{17193})
     }
   }
 }

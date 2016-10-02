@@ -380,6 +380,58 @@ loadNamespace <- function (package, lib.loc = NULL,
                !do.call(zop, list(as.numeric_version(version), zversion)))
                 stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, zop, zversion), domain = "R-base")
         }
+
+        ## moved from libray in R 3.4.0
+        checkLicense <- function(pkg, pkgInfo, pkgPath)
+        {
+            L <- tools:::analyze_license(pkgInfo$DESCRIPTION["License"])
+            if(!L$is_empty && !L$is_verified) {
+                site_file <-
+                    path.expand(file.path(R.home("etc"), "licensed.site"))
+                if(file.exists(site_file) &&
+                   pkg %in% readLines(site_file)) return()
+                personal_file <- path.expand("~/.R/licensed")
+                if(file.exists(personal_file)) {
+                    agreed <- readLines(personal_file)
+                    if(pkg %in% agreed) return()
+                } else agreed <- character()
+                if(!interactive())
+                    stop(gettextf(
+                        "package %s has a license that you need to accept in an interactive session",
+                        sQuote(pkg)), domain = "R-base")
+                lfiles <- file.path(pkgpath, c("LICENSE", "LICENCE"))
+                lfiles <- lfiles[file.exists(lfiles)]
+                if(length(lfiles)) {
+                    message(gettextf(
+                        "package %s has a license that you need to accept after viewing",
+                        sQuote(pkg)), domain = "R-base")
+                    readline(gettext("press RETURN to view license", domain = "R-base"))
+                    encoding <- pkgInfo$DESCRIPTION["Encoding"]
+                    if(is.na(encoding)) encoding <- ""
+                    ## difR and EVER have a Windows' 'smart quote' LICEN[CS]E file
+                    if(encoding == "latin1") encoding <- "cp1252"
+                    file.show(lfiles[1L], encoding = encoding)
+                } else {
+                    message(gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",
+                                     sQuote(pkg),
+                                     pkgInfo$DESCRIPTION["License"]), domain = "R-base")
+                }
+                choice <- utils::menu(c("accept", "decline"),
+                                      title = gettextf("License for %s", sQuote(pkg), domain = "R-base"))
+                if(choice != 1)
+                    stop(gettextf("license for package %s not accepted",
+                                  sQuote(package)), domain = "R-base", call. = FALSE)
+                dir.create(dirname(personal_file), showWarnings=FALSE)
+                writeLines(c(agreed, pkg), personal_file)
+            }
+        }
+
+        ## avoid any bootstrapping issues by these exemptions
+        if(!package %in% c("datasets", "grDevices", "graphics", "methods",
+                           "stats", "tools", "utils") &&
+           isTRUE(getOption("checkPackageLicense", FALSE)))
+            checkLicense(package, pkgInfo, pkgpath)
+
         ns <- makeNamespace(package, version = version, lib = package.lib)
         on.exit(.Internal(unregisterNamespace(package)))
 
