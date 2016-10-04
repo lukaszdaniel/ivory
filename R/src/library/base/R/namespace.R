@@ -381,7 +381,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                 stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, zop, zversion), domain = "R-base")
         }
 
-        ## moved from libray in R 3.4.0
+        ## moved from library in R 3.4.0
         checkLicense <- function(pkg, pkgInfo, pkgPath)
         {
             L <- tools:::analyze_license(pkgInfo$DESCRIPTION["License"])
@@ -419,7 +419,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                 choice <- utils::menu(c("accept", "decline"),
                                       title = gettextf("License for %s", sQuote(pkg), domain = "R-base"))
                 if(choice != 1)
-                    stop(gettextf("license for package %s not accepted",
+                    stop(gettextf("license for package %s was not accepted",
                                   sQuote(package)), domain = "R-base", call. = FALSE)
                 dir.create(dirname(personal_file), showWarnings=FALSE)
                 writeLines(c(agreed, pkg), personal_file)

@@ -55,7 +55,7 @@
 		RAW(VECTOR_ELT(vec, j - 1))[k] = RAW(x)[i];
 		break;
 	    default:
-		UNIMPLEMENTED_TYPE("split", x);
+		UNIMPLEMENTED_TYPE("split()", x);
 	    }
 	    if(have_names) {
 		nmj = getAttrib(VECTOR_ELT(vec, j - 1), R_NamesSymbol);
