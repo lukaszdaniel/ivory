@@ -13,6 +13,7 @@ options(warn = 2)
 ##      ======== No warnings, unless explicitly asserted via
 assertWarning <- tools::assertWarning
 
+as.nan <- function(x) { x[is.na(x) & !is.nan(x)] <- NaN ; x }
 ###-- these are identical in ./arith-true.R ["fixme": use source(..)]
 opt.conformance <- 0
 Meps <- .Machine $ double.eps
