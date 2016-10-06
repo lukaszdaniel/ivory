@@ -6,27 +6,6 @@
 \name{as}
 \alias{as}
 \alias{as<-}
-\alias{coerce}
-\alias{coerce<-}
-\alias{setAs}
-\alias{coerce-methods}
-\alias{coerce,ANY,array-method}
-\alias{coerce,ANY,call-method}
-\alias{coerce,ANY,character-method}
-\alias{coerce,ANY,complex-method}
-\alias{coerce,ANY,environment-method}
-\alias{coerce,ANY,expression-method}
-\alias{coerce,ANY,function-method}
-\alias{coerce,ANY,integer-method}
-\alias{coerce,ANY,list-method}
-\alias{coerce,ANY,logical-method}
-\alias{coerce,ANY,matrix-method}
-\alias{coerce,ANY,name-method}
-\alias{coerce,ANY,numeric-method}
-\alias{coerce,ANY,single-method}
-\alias{coerce,ANY,ts-method}
-\alias{coerce,ANY,vector-method}
-\alias{coerce,ANY,NULL-method}
 \title{Force an Object to Belong to a Class}
 \description{
   These functions manage the relations that allow coercing an object to
@@ -36,8 +15,6 @@
 as(object, Class, strict=TRUE, ext)
 
 as(object, Class) <- value
-
-setAs(from, to, def, replace, where = topenv(parent.frame()))
 
 }
 \section{Summary of Functions}{
