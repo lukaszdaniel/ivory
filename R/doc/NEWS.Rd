@@ -242,8 +242,8 @@
       package's namespace is first loaded.
 
       \item \code{ppr()} and \code{supsmu()} get an optional
-      \code{trace} argument, and \code{ppr(.., sm.method=..spline)} is no longer
-      limited to sample size \eqn{n \le 2500}{n <= 2500}.
+      \code{trace} argument, and \code{ppr(.., sm.method = ..spline)} is
+      no longer limited to sample size \eqn{n \le 2500}{n <= 2500}.
     }
   }
 
@@ -261,12 +261,17 @@
       removed.  That compiler has strict C++98 compliance hence does not
       include extensions in its (non-legacy) C++ headers: some
       packages will need to request C++11 or replace non-C++98 calls
-      such as \code{lgamma}: see §1.6.4 of \sQuote{Writing R
-	Extensions}.
+      such as \code{lgamma}: see §1.6.4 of \sQuote{Writing R Extensions}.
 
       \item When included from C++, the \R headers now use forms such as
       \code{std::FILE} directly rather than including the line \preformatted{using std::FILE;}
       C++ code including these headers might be relying on the latter.
+
+      \item Headers \file{R_ext/BLAS.h} and \file{R_ext/Lapack.h} have
+      many improved declarations including \code{const} for
+      double-precision complex routines. \emph{Inter alia} this avoids
+      warnings when passing \sQuote{string literal} arguments from C++11
+      code.
     }
   }
 
@@ -354,6 +359,11 @@
       \item \command{R CMD build} and \command{R CMD check} now use the
       \emph{union} of \env{R_LIBS} \code{.libPaths()}.  They may not be
       equivalent, e.g., when the latter is determined by \env{R_PROFILE}.
+
+      \item \command{R CMD build} now preserves dates when it copies files
+      in preparing the tarball.  (Previously on Windows it changed the
+      dates on all files; on Unix, it changed some dates when installing
+      vignettes.)
     }
   }
 
@@ -610,6 +620,9 @@
 
       \item \code{split(<very_long>, *)} now works even when the split
       off parts are long. (\PR{17139})
+
+      \item \code{min()} and \code{max()} now also work correctly when
+      the argument list starts with \code{character(0)}.  (\PR{17160})
     }
   }
 }

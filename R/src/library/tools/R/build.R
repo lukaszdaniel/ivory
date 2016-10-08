@@ -319,14 +319,14 @@ get_exclude_patterns <- function()
                     ## inst may not yet exist
                     dir.create(doc_dir, recursive = TRUE, showWarnings = FALSE)
                     tocopy <- c(vigns$docs, vigns$outputs, unlist(vigns$sources))
-                    copied <- file.copy(tocopy, doc_dir)
+                    copied <- file.copy(tocopy, doc_dir, copy.date = TRUE)
                     if (!all(copied)) {
                     	warning(sprintf(ngettext(sum(!copied), 
 			"%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",
 			"%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."),
 			 sQuote("inst/doc"), strwrap(paste(sQuote(basename(tocopy[!copied])), collapse=", "), indent = 4, exdent = 2)),
 			     call. = FALSE)
-			file.copy(tocopy[!copied], doc_dir, overwrite = TRUE)
+			file.copy(tocopy[!copied], doc_dir, overwrite = TRUE, copy.date = TRUE)
 		    }
                     unlink(c(vigns$outputs, unlist(vigns$sources)))
                     extras_file <- file.path("vignettes", ".install_extras")
@@ -340,7 +340,7 @@ get_exclude_patterns <- function()
                             for (e in extras)
                                 inst <- inst | grepl(e, allfiles, perl = TRUE,
                                                      ignore.case = TRUE)
-                            file.copy(allfiles[inst], doc_dir, recursive = TRUE)
+                            file.copy(allfiles[inst], doc_dir, recursive = TRUE, copy.date = TRUE)
                         }
                     }
                 }
@@ -903,8 +903,8 @@ get_exclude_patterns <- function()
         Tdir <- tempfile("Rbuild")
         dir.create(Tdir, mode = "0755")
         if (WINDOWS) {
-            ## This preserves read-only for files, but not dates
-            if (!file.copy(pkgname, Tdir, recursive = TRUE)) {
+            ## This preserves read-only for files, and (as of r71464) dates
+            if (!file.copy(pkgname, Tdir, recursive = TRUE, copy.date = TRUE)) {
                 errorLog(Log, gettext("copying to build directory failed", domain = "R-tools"))
                 do_exit(1L)
             }
