@@ -12,12 +12,15 @@
 ##    - it uses  boot() nicely  [2012-01: ORPHANED because  Justin Harrington is amiss]
 ## MM: renamed arguments, and changed almost everything
 
-clusGap <- function (x, FUNcluster, K.max, B = 100, d.power = 1, verbose = interactive(), ...)
+clusGap <- function (x, FUNcluster, K.max, B = 100, d.power = 1,
+		     spaceH0 = c("scaledPCA", "original"),
+                     verbose = interactive(), ...)
 {
     stopifnot(is.function(FUNcluster), length(dim(x)) == 2, K.max >= 2,
 	      (n <- nrow(x)) >= 1, ncol(x) >= 1)
     if(B != (B. <- as.integer(B)) || (B <- B.) <= 0)
         stop("'B' has to be a positive integer")
+    cl. <- match.call()
 
     if(is.data.frame(x))
         x <- as.matrix(x)
@@ -35,22 +38,33 @@ clusGap <- function (x, FUNcluster, K.max, B = 100, d.power = 1, verbose = inter
         logW[k] <- log(W.k(x, k))
     if(verbose) cat(gettext("done", domain = "R-cluster"), "\n", sep = "")
 
-    ## Scale 'x' into "hypercube" -- we later fill with H0-generated data
-    ## The next 4 lines do what stats:::prcomp.default() does :
+    spaceH0 <- match.arg(spaceH0)
+    ## Scale 'x' into hypercube -- later fill with H0-generated data
     xs <- scale(x, center=TRUE, scale=FALSE)
-    m.x <- rep(attr(xs,"scaled:center"), each = n)# for back transforming
-    V.sx <- svd(xs, nu=0)$v
-    rng.x1 <- apply(xs %*% V.sx, # = transformed(x)
-                    2, range)
+    m.x <- rep(attr(xs,"scaled:center"), each = n) # for back-trafo later
+    switch(spaceH0,
+	   "scaledPCA" =
+	       {
+		   ## (These & (xs,m.x) above basically do stats:::prcomp.default()
+		   V.sx <- svd(xs, nu=0)$v
+		   xs <- xs %*% V.sx # = transformed(x)
+	       },
+	   "original" = {}, # (do nothing, use 'xs')
+	   ## otherwise
+	   stop("invalid 'spaceH0':", spaceH0))
 
-    logWks <- matrix(0., B, K.max)
+    rng.x1 <- apply(xs, 2L, range)
+    logWks <- matrix(0, B, K.max)
     if(verbose) cat(gettextf("Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:", B, domain = "R-cluster"), "\n", sep = "")
     for (b in seq_len(B)) {
         ## Generate "H0"-data as "parametric bootstrap sample" :
         z1 <- apply(rng.x1, 2,
                     function(M, nn) runif(nn, min=M[1], max=M[2]),
                     nn=n)
-        z <- tcrossprod(z1, V.sx) + m.x # back transformed
+	z <- switch(spaceH0,
+		    "scaledPCA" = tcrossprod(z1, V.sx), # back transformed
+		    "original" = z1
+		    ) + m.x
         for(k in seq_len(K.max)) {
             logWks[b,k] <- log(W.k(z, k))
         }
@@ -62,6 +76,7 @@ clusGap <- function (x, FUNcluster, K.max, B = 100, d.power = 1, verbose = inter
     structure(class = "clusGap",
               list(Tab = cbind(logW, E.logW, gap = E.logW - logW, SE.sim),
                    ## K.max == nrow(T)
+                   call = cl., spaceH0=spaceH0,
                    n = n, B = B, FUNcluster=FUNcluster))
 }
 
@@ -125,8 +140,7 @@ print.clusGap <- function(x, method="firstSEmax", SE.factor = 1, ...)
 {
     method <- match.arg(method, choices = eval(formals(maxSE)$method))
     stopifnot((K <- nrow(T <- x$Tab)) >= 1, SE.factor >= 0)
-    cat(gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster"), "\n",
-        gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster"), "\n", sep = "")
+    cat(gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n", paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster"), sep="")
     nc <- maxSE(f = T[,"gap"], SE.f = T[,"SE.sim"],
                 method=method, SE.factor=SE.factor)
 	if(grepl("SE", method))
@@ -138,15 +152,19 @@ print.clusGap <- function(x, method="firstSEmax", SE.factor = 1, ...)
 }
 
 plot.clusGap <- function(x, type="b", xlab = "k", ylab = expression(Gap[k]),
-                         do.arrows=TRUE,
+                         main = NULL,
+                         do.arrows = TRUE,
                          arrowArgs = list(col="red3", length=1/16, angle=90, code=3),
                          ...)
 {
     stopifnot(is.matrix(Tab <- x$Tab), is.numeric(Tab))
     K <- nrow(Tab)
     k <- seq_len(K) # == 1,2,... k
+    if(is.null(main))
+	main <- paste(strwrap(deparse(x$call, 150)[1], width = 60, exdent = 7),
+		      collapse="\n")
     gap <- Tab[, "gap"]
-    plot(k, gap, type=type, xlab=xlab, ylab=ylab, ...)
+    plot(k, gap, type=type, xlab=xlab, ylab=ylab, main=main, ...)
     if(do.arrows)
 	do.call(arrows,
 		c(list(k, gap+ Tab[, "SE.sim"], k, gap- Tab[, "SE.sim"]), arrowArgs))
