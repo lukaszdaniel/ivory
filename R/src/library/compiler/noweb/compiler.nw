@@ -2233,6 +2233,8 @@ setInlineHandler("function", function(e, cb, cntxt) {
     body <- e[[3]]
     sref <- e[[4]]
     ncntxt <- make.functionContext(cntxt, forms, body)
+    if (mayCallBrowser(body, cntxt))
+        return(FALSE)
     cbody <- genCode(body, ncntxt, loc = cb$savecurloc())
     ci <- cb$putconst(list(forms, cbody, sref))
     cb$putcode(MAKECLOSURE.OP, ci)
@@ -2926,7 +2928,12 @@ cannot contain relevant [[break]] or [[next]] calls.  These stop
 expressions are calls to the three loop functions and to [[function]].
 Calls to functions like [[quote]] that are known not to evaluate their
 arguments could also be included among the stop functions but this
-doesn't seem particularly worth while at this time.
+doesn't seem particularly worth while at this time. Loops that include a
+call to [[eval]] (or [[evalq]]) are compiled with context to support a
+programming pattern present e.g. in package [[Rmpi]]: a server application
+is implemented using an infinite loop, which evaluates de-serialized code
+received from the client; the server shuts down when it receives a
+serialized version of [[break]].
 
 The recursive checking function is defined as
 <<[[checkSkipLoopCntxt]] function>>=
@@ -2941,6 +2948,8 @@ checkSkipLoopCntxt <- function(e, cntxt, breakOK = TRUE) {
                 TRUE
             else if (isLoopTopFun(fname, cntxt))
                 checkSkipLoopCntxtList(e[-1], cntxt, breakOK)
+            else if (fname %in% c("eval", "evalq"))
+                FALSE
             else
                 checkSkipLoopCntxtList(e[-1], cntxt, FALSE)
         }
@@ -4818,6 +4827,8 @@ cmpfun <- function(f, options = NULL) {
     if (type == "closure") {
         cntxt <- make.toplevelContext(makeCenv(environment(f)), options)
         ncntxt <- make.functionContext(cntxt, formals(f), body(f))
+        if (mayCallBrowser(body(f), ncntxt))
+            return(f)
         if (typeof(body(f)) != "language" || body(f)[1] != "{")
             loc <- list(expr = body(f), srcref = getExprSrcref(f))
         else
@@ -4857,6 +4868,42 @@ tryCompile <- function(e, ...)
     })
 @ %def tryCompile
 
+If a function contains a call to [[browser]], it should not be compiled,
+because the byte-code interpreter does not support command-by-command
+execution ("n"). This function explores the AST of a closure to find out if
+it may contain a call to [[browser]]:
+
+<<[[mayCallBrowser]] function>>=
+mayCallBrowser <- function(e, cntxt) {
+    if (typeof(e) == "language") {
+        fun <- e[[1]]
+        if (typeof(fun) == "symbol") {
+            fname <- as.character(fun)
+            if (fname == "browser") ## not checking isBaseVar to err on the
+                                    ## positive
+                TRUE
+            else if (fname == "function" && isBaseVar(fname, cntxt))
+                FALSE
+            else
+                mayCallBrowserList(e[-1], cntxt)
+        }
+        else
+            mayCallBrowserList(e, cntxt)
+    }
+    else FALSE
+}
+@ %def mayCallBrowser
+
+A version that operates on a list of expressions is
+<<[[mayCallBrowserList]] function>>=
+mayCallBrowserList <- function(elist, cntxt) {
+    for (a in as.list(elist))
+        if (! missing(a) && mayCallBrowser(a, cntxt))
+            return(TRUE)
+    FALSE
+}
+@ %def mayCallBrowserList
+
 
 \subsection{Compiling and loading files}
 A file can be compiled with [[cmpfile]] and loaded with [[loadcmp]].
@@ -4892,7 +4939,8 @@ cmpfile <- function(infile, outfile, ascii = FALSE, env = .GlobalEnv,
                 else
                     cat(gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler"), "\n", sep = "")
             }
-            cforms[[i]] <- genCode(e, cntxt)
+            if (!mayCallBrowser(e, cntxt))
+                cforms[[i]] <- genCode(e, cntxt)
         }
         cat(gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler"))
         .Internal(save.to.file(cforms, outfile, ascii))
@@ -6179,6 +6227,9 @@ Opcodes.names <- names(Opcodes.argc)
 
 <<[[cmpTag]] function>>
 
+<<[[mayCallBrowser]] function>>
+
+<<[[mayCallBrowserList]] function>>
 
 ##
 ## Inlining mechanism

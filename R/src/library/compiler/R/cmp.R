@@ -1222,6 +1222,31 @@ cmpTag <- function(n, cb) {
     }
 }
 
+mayCallBrowser <- function(e, cntxt) {
+    if (typeof(e) == "language") {
+        fun <- e[[1]]
+        if (typeof(fun) == "symbol") {
+            fname <- as.character(fun)
+            if (fname == "browser") ## not checking isBaseVar to err on the
+                                    ## positive
+                TRUE
+            else if (fname == "function" && isBaseVar(fname, cntxt))
+                FALSE
+            else
+                mayCallBrowserList(e[-1], cntxt)
+        }
+        else
+            mayCallBrowserList(e, cntxt)
+    }
+    else FALSE
+}
+
+mayCallBrowserList <- function(elist, cntxt) {
+    for (a in as.list(elist))
+        if (! missing(a) && mayCallBrowser(a, cntxt))
+            return(TRUE)
+    FALSE
+}
 
 ##
 ## Inlining mechanism
@@ -1320,6 +1345,8 @@ setInlineHandler("function", function(e, cb, cntxt) {
     body <- e[[3]]
     sref <- e[[4]]
     ncntxt <- make.functionContext(cntxt, forms, body)
+    if (mayCallBrowser(body, cntxt))
+        return(FALSE)
     cbody <- genCode(body, ncntxt, loc = cb$savecurloc())
     ci <- cb$putconst(list(forms, cbody, sref))
     cb$putcode(MAKECLOSURE.OP, ci)
@@ -1847,6 +1874,8 @@ checkSkipLoopCntxt <- function(e, cntxt, breakOK = TRUE) {
                 TRUE
             else if (isLoopTopFun(fname, cntxt))
                 checkSkipLoopCntxtList(e[-1], cntxt, breakOK)
+            else if (fname %in% c("eval", "evalq"))
+                FALSE
             else
                 checkSkipLoopCntxtList(e[-1], cntxt, FALSE)
         }
@@ -2823,6 +2852,8 @@ cmpfun <- function(f, options = NULL) {
     if (type == "closure") {
         cntxt <- make.toplevelContext(makeCenv(environment(f)), options)
         ncntxt <- make.functionContext(cntxt, formals(f), body(f))
+        if (mayCallBrowser(body(f), ncntxt))
+            return(f)
         if (typeof(body(f)) != "language" || body(f)[1] != "{")
             loc <- list(expr = body(f), srcref = getExprSrcref(f))
         else
@@ -2924,7 +2955,8 @@ cmpfile <- function(infile, outfile, ascii = FALSE, env = .GlobalEnv,
                 else
                     cat(gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler"), "\n", sep = "")
             }
-            cforms[[i]] <- genCode(e, cntxt)
+            if (!mayCallBrowser(e, cntxt))
+                cforms[[i]] <- genCode(e, cntxt)
         }
         cat(gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler"))
         .Internal(save.to.file(cforms, outfile, ascii))

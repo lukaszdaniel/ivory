@@ -650,7 +650,6 @@ extern "C" {
 extern size_t R_max_memory;
 extern int R_Is_Running;
 static size_t R_used = 0;
-void Rf_warning(const char *, ...);
 
 #if !ONLY_MSPACES
 
@@ -1337,9 +1336,6 @@ static void* win32mmap(size_t size) {
   void* ptr;
   /* printf("current %0.1f, asking %0.1f\n", R_used/1048576., size/1048576.);*/
   if (R_used + size > R_max_memory) {
-      if(R_Is_Running) 
-	  Rf_warning(_("Reached total allocation of %dMb: see help(memory.size)"),
-		     R_max_memory/1048576);
       return MFAIL;
   }
   ptr = VirtualAlloc(0, size, MEM_RESERVE|MEM_COMMIT, PAGE_READWRITE);
@@ -1352,9 +1348,6 @@ static void* win32direct_mmap(size_t size) {
   void* ptr;
   /* printf("current %0.1f, asking %0.1f\n", R_used/1048576., size/1048576.);*/
   if (R_used + size > R_max_memory) {
-      if(R_Is_Running) 
-	  Rf_warning(_("Reached total allocation of %dMb: see help(memory.size)"),
-		     R_max_memory/1048576);
       return MFAIL;
   }
   ptr = VirtualAlloc(0, size, MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN,
