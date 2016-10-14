@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1392,6 +1392,11 @@ msgstr ""
 "Der Namensraum für Paket \"%s\" ist geschlossen; Es können keine\n"
 "Änderungen in der globalen Variablenliste möglich."
 
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -2645,11 +2650,6 @@ msgstr "nicht alle in 'as.is' benannten Spalten exisitieren"
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
 msgstr "nicht alle Spalten in 'colClasses' exisitieren"
-
-#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
-#: R/strcapture.R:0
-msgid "number of matches does not always match ncol(proto)"
-msgstr ""
 
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")

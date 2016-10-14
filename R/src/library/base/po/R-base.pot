@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.4.0\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,6 +412,13 @@ msgstr ""
 #. R/det.R: gettextf("'%s' argument must be a square matrix", "x")
 
 msgid "'%s' argument must be a square matrix"
+msgstr ""
+
+
+#: R/format.R: 0
+#. R/format.R: gettextf("'%s' argument must be a string, i.e., of length 1", "flag")
+
+msgid "'%s' argument must be a string, i.e., of length 1"
 msgstr ""
 
 
@@ -906,10 +913,24 @@ msgid "'envir' chosen:"
 msgstr ""
 
 
+#: R/table.R: 0
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr ""
+
+
 #: R/namespace.R: 0
 #. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s",     sQuote(package))
 
 msgid "'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s"
+msgstr ""
+
+
+#: R/source.R: 0
+#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
+
+msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
 msgstr ""
 
 
@@ -935,9 +956,9 @@ msgstr ""
 
 
 #: R/format.R: 0
-#. R/format.R: stop("'flag' argument can contain only '0+- #'")
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
 
-msgid "'flag' argument can contain only '0+- #'"
+msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr ""
 
 
@@ -1324,6 +1345,27 @@ msgid "<restart: %s>"
 msgstr ""
 
 
+#: R/connections.R: 0
+#. R/connections.R: gettext("A connection with:", domain = "R-base")
+
+msgid "A connection with:"
+msgstr ""
+
+
+#: R/connections.R: 0
+#. R/connections.R: gettext("A connection, but invalid.", domain = "R-base")
+
+msgid "A connection, but invalid."
+msgstr ""
+
+
+#: R/connections.R: 0
+#. R/connections.R: gettextf("A connection, specifically, %s, but invalid.", paste(sQuote(cl), collapse = ", "),     domain = "R-base")
+
+msgid "A connection, specifically, %s, but invalid."
+msgstr ""
+
+
 #: R/library.R: 0
 #. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
 
@@ -1638,8 +1680,8 @@ msgid "Levels:"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettextf("License for %s", sQuote(pkg))
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg), domain = "R-base")
 
 msgid "License for %s"
 msgstr ""
@@ -2128,13 +2170,6 @@ msgid "[TRUNCATED]"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettext("accept")
-
-msgid "accept"
-msgstr ""
-
-
 #: R/message.R: 0
 #: R/stop.R: 0
 #: R/stop.R: 0
@@ -2476,13 +2511,6 @@ msgstr ""
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 
 msgid "cyclic namespace dependency detected when loading package %s, already loading %s"
-msgstr ""
-
-
-#: R/library.R: 0
-#. R/library.R: gettext("decline")
-
-msgid "decline"
 msgstr ""
 
 
@@ -3084,8 +3112,8 @@ msgid "level sets of factors are different"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettextf("license for package %s was not accepted", sQuote(package))
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("license for package %s was not accepted", sQuote(package))
 
 msgid "license for package %s was not accepted"
 msgstr ""
@@ -3650,24 +3678,24 @@ msgid "package %s does not have a namespace and should be re-installed"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
 
 msgid "package %s has a license that you need to accept after viewing"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
 
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 
-msgid "package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s"
+msgid "package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s"
 msgstr ""
 
 
@@ -3761,14 +3789,21 @@ msgstr ""
 
 
 #: R/library.R: 0
+#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
+
+msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
+msgstr ""
+
+
+#: R/library.R: 0
 #. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
 
 msgid "package or namespace load failed for package %s"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: gettext("press RETURN to view license")
+#: R/namespace.R: 0
+#. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 
 msgid "press RETURN to view license"
 msgstr ""
@@ -3909,6 +3944,13 @@ msgstr ""
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
 
 msgid "some row.names duplicated: %s --> row.names NOT used"
+msgstr ""
+
+
+#: R/source.R: 0
+#. R/source.R: stop("specify either 'file' or 'exprs' argument but not both")
+
+msgid "specify either 'file' or 'exprs' argument but not both"
 msgstr ""
 
 
@@ -4193,7 +4235,7 @@ msgstr[1]    ""
 
 
 #: R/source.R: 0
-#. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
+#. R/source.R: ngettext(length(exprs), "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 
 msgid        "--> parsed %d expression; now evaluating them:"
 msgid_plural "--> parsed %d expressions; now evaluating them:"

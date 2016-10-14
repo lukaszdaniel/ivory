@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -744,6 +744,11 @@ msgstr "É inválido especificar 'id' e 'id.lengths' juntos"
 #, fuzzy
 msgid "it is only valid to add a child to a \"gTree\""
 msgstr "Somente é válido adicionar um filho a um 'gTree'"
+
+#. R/gpar.R: gettextf("mixture of missing and non-missing values for %s", gparname)
+#: R/gpar.R:0
+msgid "mixture of missing and non-missing values for %s"
+msgstr ""
 
 #. R/primitives.R: stop("must have exactly 4 control points")
 #: R/primitives.R:0

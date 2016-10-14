@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1370,6 +1370,11 @@ msgstr ""
 "Przestrzeń nazw dla pakietu '%s' jest zablokowana; nie można dokonać żadnych "
 "zmian w globalnej liście zmiennych."
 
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -2601,11 +2606,6 @@ msgstr "nie wszystkie kolumny nazwane w 'as.is' istnieją"
 msgid "not all columns named in 'colClasses' exist"
 msgstr "nie wszystkie kolumny nazwane w 'colClasses' istnieją"
 
-#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
-#: R/strcapture.R:0
-msgid "number of matches does not always match ncol(proto)"
-msgstr "liczba dopasowań nie zawsze pasuje do 'ncol(proto)'"
-
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")
@@ -3523,6 +3523,9 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "pakiet %s nie jest dostępny (dla '%s')"
 msgstr[1] "pakiety %s nie są dostępne (dla %s)"
 msgstr[2] "pakiety %s nie są dostępne (dla %s)"
+
+#~ msgid "number of matches does not always match ncol(proto)"
+#~ msgstr "liczba dopasowań nie zawsze pasuje do 'ncol(proto)'"
 
 #~ msgid "'use != NA' option is defunct"
 #~ msgstr "opcja 'use != NA' została zlikwidowana"

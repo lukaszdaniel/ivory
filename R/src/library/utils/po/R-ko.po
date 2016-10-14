@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1383,6 +1383,11 @@ msgid ""
 "variables list may be made."
 msgstr ""
 
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -2628,11 +2633,6 @@ msgstr "'as.is' 내에 명명된 모든 열들이 존재하지 않습니다 "
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
 msgstr "'colClasses' 안에 지정된 모든 열들이 존재하지 않습니다 "
-
-#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
-#: R/strcapture.R:0
-msgid "number of matches does not always match ncol(proto)"
-msgstr ""
 
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")

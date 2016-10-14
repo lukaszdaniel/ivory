@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -37,6 +37,16 @@ msgid ""
 msgstr ""
 " %fは適切な総称的関数ではありません：メソッドリストはクラス %s のオブジェクト"
 "でした "
+
+#. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid ""
+"%s arguments (%s) after %s in the generic must appear in the method, in the "
+"same place at the end of the argument list"
+msgstr ""
+" 総称的関数 中の '...' 以降の引数(%s)はメソッド中の、引数リストの最後の同じ場"
+"所に登場しなければなりません "
 
 #. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
 #: R/Methods.R:0
@@ -799,7 +809,7 @@ msgstr ""
 msgid "For package %s"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 #: R/RClassUtils.R:0
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
@@ -1481,15 +1491,6 @@ msgstr ""
 #: R/MethodsList.R:0
 msgid "arguments 'names' and 'signature' must have the same length"
 msgstr " 引数 'names' と 'signature' は同じ長さを持たなければなりません "
-
-#. R/RMethodUtils.R: gettext("arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list",     domain = "R-methods")
-#: R/RMethodUtils.R:0
-msgid ""
-"arguments (%s) after '...' in the generic must appear in the method, in the "
-"same place at the end of the argument list"
-msgstr ""
-" 総称的関数 中の '...' 以降の引数(%s)はメソッド中の、引数リストの最後の同じ場"
-"所に登場しなければなりません "
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0

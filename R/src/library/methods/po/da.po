@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:48+0100\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: class_support.c:33
+#: class_support.c:30
 msgid "calling the C routine used as an initializer for 'externalptr' objects"
 msgstr "kalder C-rutinen brugt som en opstarter for 'externalptr'-objekter"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-10-14 11:37\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -217,9 +217,14 @@ msgid ""
 "  use '--no-build-vignettes' instead"
 msgstr ""
 
-#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#. R/build.R: gettextf("'.build_packages()' exit status %s", status, domain = "R-tools")
 #: R/build.R:0
-msgid "'.build_package()' exit status %d"
+msgid "'.build_packages()' exit status %s"
+msgstr ""
+
+#. R/check.R: gettextf("'.check_packages()' exit status %s", status, domain = "R-tools")
+#: R/check.R:0
+msgid "'.check_packages()' exit status %s"
 msgstr ""
 
 #. R/install.R: stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
@@ -1224,11 +1229,6 @@ msgstr ""
 msgid "ERROR: unable to create installation directory %s"
 msgstr "错误：无法建锁住的目录"
 
-#. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
-#: R/check.R:0
-msgid "EXISTS but not correct format"
-msgstr ""
-
 #. R/Rprof.R: gettextf("Each sample represents %s seconds.", format(res$sample.interval), domain = "R-tools")
 #: R/Rprof.R:0
 msgid "Each sample represents %s seconds."
@@ -1415,9 +1415,21 @@ msgstr "文件%s:"
 msgid "File 'DESCRIPTION' is missing."
 msgstr "缺少'DESCRIPTION'这个文件"
 
+#. R/check.R: gettext("File DESCRIPTION does not exist", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "File DESCRIPTION does not exist"
+msgstr "不存在'%s'这一文件"
+
 #. R/check.R: gettext("File DESCRIPTION does not exist but there is a case-insensitive match.",     domain = "R-tools")
 #: R/check.R:0
 msgid "File DESCRIPTION does not exist but there is a case-insensitive match."
+msgstr ""
+
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+#: R/check.R:0
+msgid "File DESCRIPTION exists but is not in correct format"
 msgstr ""
 
 #. R/check.R: gettext("File NAMESPACE does not exist but there is a case-insensitive match.", domain = "R-tools")
@@ -1444,6 +1456,21 @@ msgstr "缺少'DESCRIPTION'和'DESCRIPTION.in'这两个文件"
 msgid ""
 "Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being "
 "installed."
+msgstr ""
+
+#. R/check.R: gettext("Files in the 'vignettes' directory but no files in 'inst/doc':", domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory but no files in 'inst/doc':"
+msgstr ""
+
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':",     domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
+msgstr ""
+
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
@@ -2094,8 +2121,7 @@ msgstr "没有叫'%s'的程辑包"
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
-#. R/check.R: gettext("NO", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/build.R:0
 msgid "NO"
 msgstr ""
 
@@ -2588,6 +2614,11 @@ msgstr ""
 #, fuzzy
 msgid "Package has no 'Version' field"
 msgstr "程辑包'%s'里没有.rda文件"
+
+#. R/check.R: gettext("Package has no Sweave vignette sources and no VignetteBuilder field.\n")
+#: R/check.R:0
+msgid "Package has no Sweave vignette sources and no VignetteBuilder field."
+msgstr ""
 
 #. R/QC.R: gettext("Package installs .java files.", domain = "R-tools")
 #: R/QC.R:0
@@ -4965,8 +4996,7 @@ msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
-#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/build.R:0
 msgid "file EXISTS but is not of correct format"
 msgstr ""
 
@@ -5067,8 +5097,9 @@ msgstr ""
 msgid "installing *source* package %s ..."
 msgstr "试验程序包范例"
 
+#. R/build.R: gettextf("installing dependencies %s", paste(sQuote(sort(depends)), collapse = ", "),     domain = "R-tools")
 #. R/checktools.R: gettext("installing dependencies %s", domain = "R-tools")
-#: R/checktools.R:0
+#: R/build.R:0 R/checktools.R:0
 #, fuzzy
 msgid "installing dependencies %s"
 msgstr "安装至"
@@ -5455,6 +5486,7 @@ msgstr ""
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", u)
 #: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr "处理%s "
@@ -6152,6 +6184,20 @@ msgstr[0] ""
 msgid "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
 msgstr[0] "载入失败"
+
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+#: R/build.R:0
+msgid ""
+"%s file\n"
+"%s\n"
+"  was ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgid_plural ""
+"%s files\n"
+"%s\n"
+"  were ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(xx), "'::' or ':::' import not declared from: %s", "'::' or ':::' imports not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0

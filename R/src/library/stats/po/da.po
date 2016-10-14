@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:55+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -310,7 +310,7 @@ msgstr ""
 msgid "'%s' argument must be of length one"
 msgstr "'m' skal være en liste"
 
-#: ksmooth.c:63
+#: ksmooth.c:64
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "kun 2.500 rækker er tilladt for sm.method=\"spline\""
 
@@ -1130,7 +1130,7 @@ msgstr "ugyldig argumenttype"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:354
+#: sbart.c:357
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

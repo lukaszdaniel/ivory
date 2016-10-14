@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:55+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -311,7 +311,7 @@ msgstr "'zeroin'函数值不对"
 msgid "'%s' argument must be of length one"
 msgstr "'m'的值必需是串列"
 
-#: ksmooth.c:63
+#: ksmooth.c:64
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\"最多只能算2500行"
 
@@ -1132,7 +1132,7 @@ msgstr "第二参数'size'不对"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:354
+#: sbart.c:357
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r-2-15-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-07 16:19+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2011-11-29 21:34+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -632,11 +632,11 @@ msgstr "problem med visning af '%s'"
 #: src/main/connections.c:4845 src/main/connections.c:4873
 #: src/main/connections.c:5007 src/main/connections.c:5046
 #: src/main/connections.c:5051 src/main/connections.c:5056
-#: src/main/connections.c:5077 src/main/context.c:605 src/main/context.c:614
-#: src/main/context.c:618 src/main/datetime.c:781 src/main/datetime.c:869
+#: src/main/connections.c:5077 src/main/context.c:627 src/main/context.c:636
+#: src/main/context.c:640 src/main/datetime.c:781 src/main/datetime.c:869
 #: src/main/datetime.c:872 src/main/datetime.c:876 src/main/datetime.c:1043
 #: src/main/datetime.c:1045 src/main/datetime.c:1250 src/main/debug.c:245
-#: src/main/deparse.c:412 src/main/dotcode.c:479 src/main/dotcode.c:483
+#: src/main/deparse.c:418 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
 #: src/main/dounzip.c:354 src/main/envir.c:1820 src/main/envir.c:1823
@@ -645,16 +645,16 @@ msgstr "problem med visning af '%s'"
 #: src/main/envir.c:2155 src/main/envir.c:2162 src/main/envir.c:2173
 #: src/main/envir.c:2405 src/main/envir.c:2526 src/main/envir.c:2823
 #: src/main/envir.c:3085 src/main/envir.c:3099 src/main/envir.c:3106
-#: src/main/envir.c:3122 src/main/envir.c:3703 src/main/errors.c:1048
-#: src/main/eval.c:452 src/main/eval.c:461 src/main/eval.c:464
+#: src/main/envir.c:3122 src/main/envir.c:3703 src/main/errors.c:1054
+#: src/main/eval.c:457 src/main/eval.c:466 src/main/eval.c:469
 #: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3802 src/main/names.c:1307 src/main/names.c:1310
-#: src/main/objects.c:1616 src/main/objects.c:1618 src/main/paste.c:96
+#: src/main/memory.c:3855 src/main/names.c:1309 src/main/names.c:1312
+#: src/main/objects.c:1634 src/main/objects.c:1636 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
@@ -662,21 +662,21 @@ msgstr "problem med visning af '%s'"
 #: src/main/platform.c:309 src/main/platform.c:311 src/main/platform.c:327
 #: src/main/platform.c:338 src/main/platform.c:391 src/main/platform.c:393
 #: src/main/platform.c:703 src/main/platform.c:705 src/main/platform.c:791
-#: src/main/platform.c:794 src/main/platform.c:973 src/main/platform.c:1132
-#: src/main/platform.c:1138 src/main/platform.c:1141 src/main/platform.c:1144
-#: src/main/platform.c:1147 src/main/platform.c:1150 src/main/platform.c:1153
-#: src/main/platform.c:1156 src/main/platform.c:1253 src/main/platform.c:1256
-#: src/main/platform.c:1259 src/main/platform.c:1297 src/main/platform.c:1355
-#: src/main/platform.c:1358 src/main/platform.c:1564 src/main/platform.c:1567
-#: src/main/platform.c:1570 src/main/platform.c:1606 src/main/platform.c:1609
-#: src/main/platform.c:1612 src/main/platform.c:1648 src/main/platform.c:1681
-#: src/main/platform.c:1683 src/main/platform.c:1754 src/main/platform.c:1838
-#: src/main/platform.c:2079 src/main/platform.c:2138 src/main/platform.c:2323
-#: src/main/platform.c:2326 src/main/platform.c:2329 src/main/platform.c:2332
-#: src/main/platform.c:2335 src/main/platform.c:2338 src/main/platform.c:2542
-#: src/main/platform.c:2545 src/main/platform.c:2548 src/main/platform.c:2551
-#: src/main/platform.c:2554 src/main/platform.c:2557 src/main/platform.c:2635
-#: src/main/platform.c:2643 src/main/platform.c:2679 src/main/platform.c:2729
+#: src/main/platform.c:794 src/main/platform.c:1006 src/main/platform.c:1165
+#: src/main/platform.c:1171 src/main/platform.c:1174 src/main/platform.c:1177
+#: src/main/platform.c:1180 src/main/platform.c:1183 src/main/platform.c:1186
+#: src/main/platform.c:1189 src/main/platform.c:1286 src/main/platform.c:1289
+#: src/main/platform.c:1292 src/main/platform.c:1330 src/main/platform.c:1388
+#: src/main/platform.c:1391 src/main/platform.c:1597 src/main/platform.c:1600
+#: src/main/platform.c:1603 src/main/platform.c:1639 src/main/platform.c:1642
+#: src/main/platform.c:1645 src/main/platform.c:1681 src/main/platform.c:1714
+#: src/main/platform.c:1716 src/main/platform.c:1787 src/main/platform.c:1871
+#: src/main/platform.c:2112 src/main/platform.c:2171 src/main/platform.c:2356
+#: src/main/platform.c:2359 src/main/platform.c:2362 src/main/platform.c:2365
+#: src/main/platform.c:2368 src/main/platform.c:2371 src/main/platform.c:2584
+#: src/main/platform.c:2587 src/main/platform.c:2590 src/main/platform.c:2593
+#: src/main/platform.c:2596 src/main/platform.c:2599 src/main/platform.c:2677
+#: src/main/platform.c:2685 src/main/platform.c:2721 src/main/platform.c:2771
 #: src/main/print.c:234 src/main/print.c:240 src/main/print.c:262
 #: src/main/print.c:268 src/main/print.c:275 src/main/random.c:471
 #: src/main/random.c:475 src/main/random.c:482 src/main/random.c:510
@@ -694,11 +694,11 @@ msgstr "problem med visning af '%s'"
 #: src/main/unique.c:1349 src/main/unique.c:1359 src/main/unique.c:1755
 #: src/main/util.c:652 src/main/util.c:655 src/main/util.c:1395
 #: src/main/util.c:1409 src/main/util.c:1991 src/main/util.c:2214
-#: src/main/util.c:2215 src/main/util.c:2216 src/main/util.c:2233
-#: src/main/util.c:2262 src/main/util.c:2266 src/main/util.c:2268
-#: src/main/util.c:2294 src/main/util.c:2296 src/main/util.c:2298
-#: src/main/util.c:2301 src/main/util.c:2304 src/main/util.c:2308
-#: src/main/util.c:2310 src/modules/internet/internet.c:457
+#: src/main/util.c:2215 src/main/util.c:2216 src/main/util.c:2232
+#: src/main/util.c:2274 src/main/util.c:2278 src/main/util.c:2280
+#: src/main/util.c:2306 src/main/util.c:2308 src/main/util.c:2310
+#: src/main/util.c:2313 src/main/util.c:2316 src/main/util.c:2320
+#: src/main/util.c:2322 src/modules/internet/internet.c:457
 #: src/modules/internet/internet.c:463 src/modules/internet/internet.c:469
 #: src/modules/internet/internet.c:472 src/modules/internet/internet.c:476
 #: src/modules/internet/internet.c:481 src/modules/internet/libcurl.c:246
@@ -710,8 +710,8 @@ msgstr "problem med visning af '%s'"
 #: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:877
 #: src/modules/lapack/Lapack.c:1202 src/modules/X11/devX11.c:3238
 #: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3244
-#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1315
-#: src/unix/sys-std.c:1338
+#: src/modules/X11/devX11.c:3268 src/unix/sys-std.c:1308
+#: src/unix/sys-std.c:1331
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ugyldigt '%s'-argument"
@@ -732,14 +732,14 @@ msgstr "vær ikke fjollet!: din maskine har en 4GB adressebegrænsning"
 msgid "cannot decrease memory limit: ignored"
 msgstr "kan ikke formindske hukommelsesbegrænsning: ignoreret"
 
-#: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:857
+#: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:882
 #: src/main/sysutils.c:642 src/main/unique.c:1642 src/main/util.c:978
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "'msg1' skal være en tegnstreng"
 
-#: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1050
-#: src/main/errors.c:1052 src/main/objects.c:420 src/main/objects.c:1175
+#: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1056
+#: src/main/errors.c:1058 src/main/objects.c:420 src/main/objects.c:1193
 #: src/main/options.c:340 src/main/raw.c:155 src/main/Renviron.c:311
 #: src/main/unique.c:1646 src/modules/lapack/Lapack.c:83
 #: src/modules/lapack/Lapack.c:325 src/modules/lapack/Lapack.c:355
@@ -778,15 +778,10 @@ msgstr "ugyldig enhed"
 msgid "invalid input in '%s' function"
 msgstr "ugyldige inddata i Rmbstowcs"
 
-#: src/gnuwin32/extra.c:825 src/main/platform.c:1330
+#: src/gnuwin32/extra.c:825 src/main/platform.c:1363
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "filvalg afbrudt"
-
-#: src/gnuwin32/malloc.c:1341 src/gnuwin32/malloc.c:1356
-#, c-format
-msgid "Reached total allocation of %dMb: see help(memory.size)"
-msgstr ""
 
 #: src/gnuwin32/run.c:244
 #, fuzzy, c-format
@@ -852,17 +847,17 @@ msgstr ""
 msgid "reached CPU time limit"
 msgstr ""
 
-#: src/gnuwin32/system.c:156 src/unix/sys-std.c:76
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:73
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:953
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:946
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr ""
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:959
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:952
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
@@ -871,7 +866,7 @@ msgstr ""
 #: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2601 src/main/serialize.c:2606
-#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1257
+#: src/main/serialize.c:2691 src/main/serialize.c:2736 src/unix/sys-std.c:1250
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -1019,7 +1014,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6620 src/main/eval.c:6641
+#: src/main/edit.c:122 src/main/eval.c:6977 src/main/eval.c:6998
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1123,23 +1118,23 @@ msgstr ""
 msgid "input string y[%d] is invalid in this locale"
 msgstr ""
 
-#: src/main/apply.c:99 src/main/util.c:2341
+#: src/main/apply.c:99 src/main/util.c:2353
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector"
 msgstr "'path' skal være en tegnvektor"
 
 #: src/main/apply.c:101 src/main/array.c:506 src/main/character.c:846
-#: src/main/character.c:1655 src/main/connections.c:3579 src/main/context.c:651
-#: src/main/context.c:670 src/main/datetime.c:682 src/main/datetime.c:783
-#: src/main/datetime.c:1047 src/main/dotcode.c:220 src/main/errors.c:948
-#: src/main/errors.c:980 src/main/errors.c:1086 src/main/errors.c:1111
-#: src/main/errors.c:1116 src/main/errors.c:1388 src/main/identical.c:74
+#: src/main/character.c:1655 src/main/connections.c:3579 src/main/context.c:673
+#: src/main/context.c:692 src/main/datetime.c:682 src/main/datetime.c:783
+#: src/main/datetime.c:1047 src/main/dotcode.c:220 src/main/errors.c:954
+#: src/main/errors.c:986 src/main/errors.c:1092 src/main/errors.c:1117
+#: src/main/errors.c:1122 src/main/errors.c:1400 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
-#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:2980
+#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3031
 #: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
 #: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
 #: src/main/sort.c:1245 src/main/sort.c:1328 src/main/sort.c:1332
-#: src/main/sort.c:1339 src/main/source.c:223 src/main/summary.c:954
+#: src/main/sort.c:1339 src/main/source.c:223 src/main/summary.c:957
 #: src/main/sysutils.c:250 src/main/util.c:1067 src/main/util.c:1072
 #: src/main/util.c:1079 src/main/util.c:1082 src/main/util.c:2051
 #: src/modules/lapack/Lapack.c:937 src/modules/X11/devX11.c:3140
@@ -1151,7 +1146,7 @@ msgstr "'path' skal være en tegnvektor"
 msgid "invalid '%s' value"
 msgstr "ugyldig '%s'-værdi"
 
-#: src/main/apply.c:104 src/main/complex.c:754
+#: src/main/apply.c:104 src/main/complex.c:756
 msgid "invalid length"
 msgstr ""
 
@@ -1179,7 +1174,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr ""
 
-#: src/main/arithmetic.c:43 src/main/eval.c:3674
+#: src/main/arithmetic.c:43 src/main/eval.c:3715
 msgid "NaN values produced"
 msgstr ""
 
@@ -1204,43 +1199,55 @@ msgstr ""
 msgid "non-numeric argument passed to binary operator"
 msgstr ""
 
-#: src/main/arithmetic.c:575 src/main/relop.c:231
+#: src/main/arithmetic.c:569
+msgid ""
+"Recycling array of length 1 in array-vector arithmetic is deprecated.\n"
+"  Use c() or as.vector() instead.\n"
+msgstr ""
+
+#: src/main/arithmetic.c:577
+msgid ""
+"Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
+"  Use c() or as.vector() instead.\n"
+msgstr ""
+
+#: src/main/arithmetic.c:591 src/main/logic.c:94 src/main/relop.c:207
 msgid "non-conformable arrays"
 msgstr ""
 
-#: src/main/arithmetic.c:618 src/main/relop.c:251
+#: src/main/arithmetic.c:630 src/main/relop.c:231
 msgid "non-conformable time-series"
 msgstr ""
 
-#: src/main/arithmetic.c:639 src/main/logic.c:136 src/main/relop.c:171
-#: src/main/relop.c:269
+#: src/main/arithmetic.c:652 src/main/logic.c:138 src/main/relop.c:154
+#: src/main/relop.c:252
 msgid "longer object length is not a multiple of shorter object length"
 msgstr ""
 
-#: src/main/arithmetic.c:710
+#: src/main/arithmetic.c:718
 #, fuzzy
 msgid "invalid argument passed to unary operator"
 msgstr "ugyldigt '%s'-argument"
 
-#: src/main/arithmetic.c:739 src/main/arithmetic.c:764
-#: src/main/arithmetic.c:783
+#: src/main/arithmetic.c:747 src/main/arithmetic.c:772
+#: src/main/arithmetic.c:791
 msgid "invalid unary operator"
 msgstr ""
 
-#: src/main/arithmetic.c:1189 src/main/arithmetic.c:1481
-#: src/main/arithmetic.c:1872 src/main/arithmetic.c:2043
-#: src/main/arithmetic.c:2145
+#: src/main/arithmetic.c:1197 src/main/arithmetic.c:1489
+#: src/main/arithmetic.c:1880 src/main/arithmetic.c:2051
+#: src/main/arithmetic.c:2153
 #, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/arithmetic.c:1203 src/main/complex.c:639 src/main/complex.c:709
+#: src/main/arithmetic.c:1211 src/main/complex.c:641 src/main/complex.c:711
 msgid "unimplemented complex function"
 msgstr ""
 
-#: src/main/arithmetic.c:1508
+#: src/main/arithmetic.c:1516
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
@@ -1248,22 +1255,22 @@ msgid_plural ""
 msgstr[0] "argument skal være et miljø"
 msgstr[1] "argument skal være et miljø"
 
-#: src/main/arithmetic.c:1526
+#: src/main/arithmetic.c:1534
 msgid "invalid second argument of length 0"
 msgstr ""
 
-#: src/main/arithmetic.c:1621 src/main/arithmetic.c:1639 src/main/envir.c:1534
-#: src/main/envir.c:2040 src/main/eval.c:625 src/main/eval.c:626
-#: src/main/eval.c:4279 src/main/eval.c:4280 src/main/RNG.c:352
+#: src/main/arithmetic.c:1629 src/main/arithmetic.c:1647 src/main/envir.c:1534
+#: src/main/envir.c:2040 src/main/eval.c:637 src/main/eval.c:638
+#: src/main/eval.c:4343 src/main/eval.c:4344 src/main/RNG.c:352
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "argument %d er tomt"
 
-#: src/main/arithmetic.c:1645
+#: src/main/arithmetic.c:1653
 msgid "invalid argument 'base' of length 0"
 msgstr ""
 
-#: src/main/arithmetic.c:2162
+#: src/main/arithmetic.c:2170
 msgid "bad arithmetic function index"
 msgstr ""
 
@@ -1390,7 +1397,7 @@ msgid "value is out of range in 'perm' argument"
 msgstr "ugyldigt fjerde argument"
 
 #: src/main/array.c:1351 src/main/connections.c:5523
-#: src/main/connections.c:5526 src/main/debug.c:112 src/main/objects.c:1043
+#: src/main/connections.c:5526 src/main/debug.c:112 src/main/objects.c:1061
 #: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
 #: src/main/sort.c:1249 src/main/unique.c:680 src/main/unique.c:1455
 #: src/main/unique.c:1527 src/main/util.c:657 src/main/util.c:659
@@ -1533,7 +1540,7 @@ msgstr ""
 msgid "'dimnames()' applied to non-array"
 msgstr "'names' er ikke en tegnstreng"
 
-#: src/main/attrib.c:1039 src/main/coerce.c:2473 src/main/engine.c:2985
+#: src/main/attrib.c:1039 src/main/coerce.c:2473 src/main/engine.c:3081
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'path' skal være en tegnvektor"
@@ -1618,7 +1625,7 @@ msgid "exactly one attribute 'which' must be given"
 msgstr ""
 
 #: src/main/attrib.c:1453 src/main/attrib.c:1476 src/main/subscript.c:246
-#: src/main/subscript.c:250 src/main/subset.c:1258 src/main/subset.c:1312
+#: src/main/subscript.c:250 src/main/subset.c:1259 src/main/subset.c:1313
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr ""
@@ -1685,39 +1692,39 @@ msgstr "»%s« er ikke en %s-funktion"
 msgid "repeated formal argument '%s'"
 msgstr "ingen argumenter"
 
-#: src/main/bind.c:901
+#: src/main/bind.c:898
 #, fuzzy, c-format
 msgid "'%s' argument is not a list"
 msgstr "argument %d er ikke en vektor"
 
-#: src/main/bind.c:1045 src/main/names.c:1273 src/main/names.c:1278
-#: src/main/names.c:1283 src/main/names.c:1288
+#: src/main/bind.c:1043 src/main/names.c:1275 src/main/names.c:1280
+#: src/main/names.c:1285 src/main/names.c:1290
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "kaldnavn for langt i '%s'"
 
-#: src/main/bind.c:1129
+#: src/main/bind.c:1127
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr "kan ikke oprette mappe '%s', årsag '%s'"
 
-#: src/main/bind.c:1198
+#: src/main/bind.c:1196
 #, c-format
 msgid "number of rows of matrices must match (see argument %d)"
 msgstr ""
 
-#: src/main/bind.c:1225
+#: src/main/bind.c:1223
 #, c-format
 msgid ""
 "number of rows of result is not a multiple of vector length (argument %d)"
 msgstr ""
 
-#: src/main/bind.c:1454
+#: src/main/bind.c:1452
 #, c-format
 msgid "number of columns of matrices must match (see argument %d)"
 msgstr ""
 
-#: src/main/bind.c:1483
+#: src/main/bind.c:1481
 #, fuzzy, c-format
 msgid ""
 "number of columns of result is not a multiple of vector length (argument %d)"
@@ -1742,13 +1749,13 @@ msgstr ""
 
 #: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:305
 #: src/main/builtin.c:338 src/main/builtin.c:395 src/main/builtin.c:409
-#: src/main/coerce.c:1537 src/main/connections.c:3090 src/main/engine.c:2987
+#: src/main/coerce.c:1537 src/main/connections.c:3090 src/main/engine.c:3083
 #: src/main/envir.c:1071 src/main/envir.c:1124 src/main/envir.c:1280
 #: src/main/envir.c:1817 src/main/envir.c:1941 src/main/envir.c:2007
 #: src/main/envir.c:2140 src/main/envir.c:2859 src/main/envir.c:2946
 #: src/main/envir.c:3245 src/main/envir.c:3274 src/main/envir.c:3295
 #: src/main/envir.c:3318 src/main/envir.c:3352 src/main/envir.c:3372
-#: src/main/envir.c:3693 src/main/envir.c:3698 src/main/eval.c:6533
+#: src/main/envir.c:3693 src/main/envir.c:3698 src/main/eval.c:6890
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2758
 msgid "use of NULL environment is defunct"
@@ -1791,7 +1798,7 @@ msgstr ""
 #: src/main/connections.c:4106 src/main/connections.c:4140
 #: src/main/connections.c:4518 src/main/connections.c:4588
 #: src/main/connections.c:4799 src/main/connections.c:4803
-#: src/main/connections.c:5226 src/main/deparse.c:373 src/main/deparse.c:462
+#: src/main/connections.c:5226 src/main/deparse.c:379 src/main/deparse.c:468
 #: src/main/serialize.c:2048
 msgid "cannot write to this connection"
 msgstr ""
@@ -1830,9 +1837,9 @@ msgid "invalid value"
 msgstr ""
 
 #: src/main/builtin.c:975 src/main/coerce.c:2543 src/main/coerce.c:2586
-#: src/main/eval.c:615 src/main/eval.c:734 src/main/eval.c:2295
-#: src/main/eval.c:2375 src/main/eval.c:2436 src/main/eval.c:2776
-#: src/main/eval.c:5658 src/main/eval.c:5785
+#: src/main/eval.c:627 src/main/eval.c:746 src/main/eval.c:2314
+#: src/main/eval.c:2394 src/main/eval.c:2455 src/main/eval.c:2796
+#: src/main/eval.c:6003 src/main/eval.c:6134
 msgid "'...' used in an incorrect context"
 msgstr ""
 
@@ -1846,7 +1853,7 @@ msgstr ""
 msgid "'%s' argument is missing"
 msgstr "argument %d er tomt"
 
-#: src/main/builtin.c:1034 src/main/eval.c:6137
+#: src/main/builtin.c:1034 src/main/eval.c:6490
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "argument skal være en tegnvektor en en rå (raw) vektor"
@@ -1862,7 +1869,7 @@ msgstr ""
 msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6149 src/main/eval.c:6177
+#: src/main/builtin.c:1093 src/main/eval.c:6502 src/main/eval.c:6530
 #, fuzzy
 msgid "'switch()' function with no alternatives"
 msgstr "'names' er ikke en tegnstreng"
@@ -1963,7 +1970,7 @@ msgstr ""
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr ""
 
-#: src/main/coerce.c:76 src/main/errors.c:1230
+#: src/main/coerce.c:76 src/main/errors.c:1236
 msgid "NA values introduced by coercion"
 msgstr ""
 
@@ -1972,7 +1979,7 @@ msgstr ""
 msgid "NA values introduced by coercion to integer range"
 msgstr "»%s« er ikke en %s-funktion"
 
-#: src/main/coerce.c:80 src/main/errors.c:1232
+#: src/main/coerce.c:80 src/main/errors.c:1238
 msgid "imaginary parts discarded in coercion"
 msgstr ""
 
@@ -2015,7 +2022,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr ""
 
-#: src/main/coerce.c:1541 src/main/eval.c:6537
+#: src/main/coerce.c:1541 src/main/eval.c:6894
 msgid "invalid environment"
 msgstr ""
 
@@ -2084,7 +2091,7 @@ msgstr "'msg1' skal være en tegnstreng"
 msgid "'%s' argument must be a list or expression"
 msgstr "argument skal være et miljø"
 
-#: src/main/coerce.c:2477 src/main/engine.c:2991 src/main/envir.c:1851
+#: src/main/coerce.c:2477 src/main/engine.c:3087 src/main/envir.c:1851
 #: src/main/envir.c:2866 src/main/envir.c:2948 src/main/unique.c:1353
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
@@ -2184,29 +2191,29 @@ msgstr ""
 msgid "WARNING: '--max-ppsize' value is too large: ignored"
 msgstr ""
 
-#: src/main/complex.c:124
+#: src/main/complex.c:126
 msgid "invalid complex unary operator"
 msgstr ""
 
-#: src/main/complex.c:252
+#: src/main/complex.c:254
 msgid "unimplemented complex operation"
 msgstr ""
 
-#: src/main/complex.c:354
+#: src/main/complex.c:356
 #, fuzzy
 msgid "non-numeric argument passed to function"
 msgstr "forkert antal argumenter for »%s«"
 
-#: src/main/complex.c:642 src/main/complex.c:735
+#: src/main/complex.c:644 src/main/complex.c:737
 #, fuzzy, c-format
 msgid "NaN values produced in '%s' function"
 msgstr "»%s« er ikke en %s-funktion"
 
-#: src/main/complex.c:823
+#: src/main/complex.c:825
 msgid "invalid polynomial coefficient"
 msgstr ""
 
-#: src/main/complex.c:828
+#: src/main/complex.c:830
 msgid "root finding code failed"
 msgstr ""
 
@@ -2372,7 +2379,7 @@ msgstr ""
 #: src/main/connections.c:3868 src/main/connections.c:4133
 #: src/main/connections.c:4461 src/main/connections.c:4581
 #: src/main/connections.c:4795 src/main/connections.c:5207 src/main/dcf.c:94
-#: src/main/deparse.c:365 src/main/deparse.c:454 src/main/saveload.c:2261
+#: src/main/deparse.c:371 src/main/deparse.c:460 src/main/saveload.c:2261
 #: src/main/saveload.c:2342 src/main/scan.c:933 src/main/serialize.c:2219
 #: src/main/serialize.c:2270 src/main/source.c:268
 msgid "cannot open the connection"
@@ -2971,49 +2978,57 @@ msgstr "allokering for datakanalforbindelse fejlede"
 msgid "bad target context--should NEVER happen if R was called correctly"
 msgstr ""
 
-#: src/main/context.c:317
+#: src/main/context.c:323
 msgid "no loop for break/next, jumping to top level"
 msgstr ""
 
-#: src/main/context.c:325 src/main/errors.c:1309
+#: src/main/context.c:331 src/main/errors.c:1315
 msgid "no function to return from, jumping to top level"
 msgstr ""
 
-#: src/main/context.c:340
+#: src/main/context.c:346
 msgid "target context is not on the stack"
 msgstr ""
 
-#: src/main/context.c:355
+#: src/main/context.c:361
 #, fuzzy
 msgid "NA argument is invalid"
 msgstr "argument %d er ikke en vektor"
 
-#: src/main/context.c:363 src/main/context.c:378 src/main/context.c:443
-#: src/main/context.c:464 src/main/context.c:475 src/main/context.c:487
+#: src/main/context.c:369 src/main/context.c:384 src/main/context.c:466
+#: src/main/context.c:478 src/main/context.c:489 src/main/context.c:501
 msgid "not that many frames on the stack"
 msgstr ""
 
-#: src/main/context.c:394
+#: src/main/context.c:400
 msgid "only positive values of 'n' are allowed"
 msgstr ""
 
-#: src/main/context.c:524
+#: src/main/context.c:539
 msgid "number of contexts must be positive"
 msgstr ""
 
-#: src/main/context.c:537
+#: src/main/context.c:552
 msgid "no browser context to query"
 msgstr ""
 
-#: src/main/context.c:555
+#: src/main/context.c:570
 msgid "not that many calls to browser are active"
 msgstr ""
 
-#: src/main/context.c:569
+#: src/main/context.c:585
 msgid "not that many functions on the call stack"
 msgstr ""
 
-#: src/main/context.c:654 src/main/random.c:110 src/main/random.c:202
+#: src/main/context.c:589
+msgid "debug flag in compiled function has no effect"
+msgstr ""
+
+#: src/main/context.c:591
+msgid "debug will apply when function leaves compiled code"
+msgstr ""
+
+#: src/main/context.c:676 src/main/random.c:110 src/main/random.c:202
 #: src/main/random.c:289
 #, fuzzy, c-format
 msgid "internal error in '%s' function"
@@ -3025,7 +3040,7 @@ msgid "k = %d, should be 2 or 4"
 msgstr ""
 
 #: src/main/cum.c:50 src/main/summary.c:69 src/main/summary.c:81
-#: src/main/summary.c:106 src/main/summary.c:637
+#: src/main/summary.c:106 src/main/summary.c:639
 #, fuzzy, c-format
 msgid "integer overflow in '%s' function; use '%s'"
 msgstr "intern fejl i brugen af rekursiv indeksering"
@@ -3124,55 +3139,55 @@ msgstr ""
 msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr ""
 
-#: src/main/deparse.c:258
+#: src/main/deparse.c:264
 msgid "deparse of an S4 object will not be sourceable by 'source()'"
 msgstr ""
 
-#: src/main/deparse.c:260
+#: src/main/deparse.c:266
 msgid "deparse may be incomplete"
 msgstr ""
 
-#: src/main/deparse.c:262
+#: src/main/deparse.c:268
 msgid ""
 "deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr ""
 
-#: src/main/deparse.c:354
+#: src/main/deparse.c:360
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or connection"
 msgstr "'msg1' skal være en tegnstreng"
 
-#: src/main/deparse.c:382 src/main/deparse.c:477 src/main/deparse.c:483
+#: src/main/deparse.c:388 src/main/deparse.c:483 src/main/deparse.c:489
 msgid "wrote too few characters"
 msgstr ""
 
-#: src/main/deparse.c:404 src/main/source.c:204
+#: src/main/deparse.c:410 src/main/source.c:204
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "'msg1' skal være en tegnstreng"
 
-#: src/main/deparse.c:406
+#: src/main/deparse.c:412
 msgid "character arguments expected"
 msgstr ""
 
-#: src/main/deparse.c:409
+#: src/main/deparse.c:415
 #, fuzzy
 msgid "zero-length argument"
 msgstr "forkert længde for argument"
 
-#: src/main/deparse.c:416
+#: src/main/deparse.c:422
 #, fuzzy
 msgid "'opts' argument should be small non-negative integer"
 msgstr "'gap' skal være et ikkenegativt heltal"
 
-#: src/main/deparse.c:426 src/main/envir.c:1966 src/main/envir.c:2051
-#: src/main/eval.c:621 src/main/eval.c:1427 src/main/eval.c:4293
+#: src/main/deparse.c:432 src/main/envir.c:1966 src/main/envir.c:2051
+#: src/main/eval.c:633 src/main/eval.c:1441 src/main/eval.c:4357
 #: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2776
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "'%s' ikke fundet"
 
-#: src/main/deparse.c:1596
+#: src/main/deparse.c:1602
 msgid "badly formed function expression"
 msgstr ""
 
@@ -3283,7 +3298,7 @@ msgstr "'msg1' skal være en tegnstreng"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
 #: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
-#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1341
+#: src/unix/sys-std.c:1311 src/unix/sys-std.c:1334
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "'to' skal være finitte"
@@ -3297,7 +3312,7 @@ msgid "no arguments supplied"
 msgstr ""
 
 #: src/main/dotcode.c:513 src/main/dotcode.c:1215 src/main/dotcode.c:1440
-#: src/main/eval.c:2313
+#: src/main/eval.c:2332
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' mangler"
@@ -3318,7 +3333,7 @@ msgstr ""
 msgid "compiler constants were modified (in '.Call'?)!\n"
 msgstr ""
 
-#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3013
+#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3109
 msgid "invalid graphics state"
 msgstr ""
 
@@ -3679,53 +3694,53 @@ msgstr ""
 msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr ""
 
-#: src/main/engine.c:2784
+#: src/main/engine.c:2880
 msgid "display list redraw incomplete"
 msgstr ""
 
-#: src/main/engine.c:2788
+#: src/main/engine.c:2884
 #, fuzzy
 msgid "invalid display list"
 msgstr "ugyldige enheder"
 
-#: src/main/engine.c:2900
+#: src/main/engine.c:2996
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:2904
+#: src/main/engine.c:3000
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:2983
+#: src/main/engine.c:3079
 #, fuzzy, c-format
 msgid "'%s' argument must be an expression"
 msgstr "argument skal være et miljø"
 
-#: src/main/engine.c:3071 src/main/engine.c:3079
+#: src/main/engine.c:3167 src/main/engine.c:3175
 #, fuzzy
 msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr "ugyldig værdi for '%s'"
 
-#: src/main/engine.c:3126
+#: src/main/engine.c:3222
 #, fuzzy
 msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr "ugyldigt fjerde argument"
 
-#: src/main/engine.c:3149
+#: src/main/engine.c:3245
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr ""
 
-#: src/main/engine.c:3153
+#: src/main/engine.c:3249
 msgid "invalid line type: zeroes are not allowed"
 msgstr ""
 
-#: src/main/engine.c:3162 src/main/engine.c:3170 src/main/engine.c:3177
+#: src/main/engine.c:3258 src/main/engine.c:3266 src/main/engine.c:3273
 msgid "invalid line type"
 msgstr ""
 
@@ -4032,588 +4047,601 @@ msgstr ""
 msgid "interrupts suspended; signal ignored"
 msgstr ""
 
-#: src/main/errors.c:337 src/main/errors.c:855
+#: src/main/errors.c:340 src/main/errors.c:861
 #, fuzzy, c-format
 msgid "invalid \"%s\" option"
 msgstr "ugyldig filnavnsspecifikation"
 
-#: src/main/errors.c:366
+#: src/main/errors.c:369
 #, c-format
 msgid "(converted from warning) %s"
 msgstr "(konverteret fra advarsel) %s"
 
-#: src/main/errors.c:376
+#: src/main/errors.c:379
 #, fuzzy
 msgid "Warning:"
 msgstr "Advarsel: %s\n"
 
-#: src/main/errors.c:378
+#: src/main/errors.c:381
 #, fuzzy, c-format
 msgid "Warning in command '%s':"
 msgstr "Advarsel i %s : %s\n"
 
-#: src/main/errors.c:387 src/main/errors.c:401 src/main/errors.c:725
+#: src/main/errors.c:390 src/main/errors.c:404 src/main/errors.c:728
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.c:448 src/main/errors.c:470 src/main/errors.c:640
+#: src/main/errors.c:451 src/main/errors.c:473 src/main/errors.c:643
 #, fuzzy
 msgid "Lost warning messages"
 msgstr "Mistede advarselsbeskeder\n"
 
-#: src/main/errors.c:460
+#: src/main/errors.c:463
 #, fuzzy
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Advarselsbesked:\n"
 msgstr[1] "Advarselsbesked:\n"
 
-#: src/main/errors.c:489 src/main/errors.c:517
+#: src/main/errors.c:492 src/main/errors.c:520
 #, fuzzy, c-format
 msgid "In command '%s':"
 msgstr ""
 "Advarsel i %s :\n"
 "  %s\n"
 
-#: src/main/errors.c:542
+#: src/main/errors.c:545
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Der var %d advarsler (brug warnings() for at se dem)\n"
 msgstr[1] "Der var %d advarsler (brug warnings() for at se dem)\n"
 
-#: src/main/errors.c:547
+#: src/main/errors.c:550
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr ""
 "Der var %d eller flere advarsler (brug warnings() for at se den første %d)\n"
 
-#: src/main/errors.c:631
+#: src/main/errors.c:634
 msgid "Error during wrapup: "
 msgstr ""
 
-#: src/main/errors.c:656
+#: src/main/errors.c:659
 #, fuzzy
 msgid "Error in command:"
 msgstr "Fejl i "
 
-#: src/main/errors.c:672 src/main/errors.c:687
+#: src/main/errors.c:675 src/main/errors.c:690
 #, fuzzy, c-format
 msgid "Error in command '%s': "
 msgstr "Fejl i "
 
-#: src/main/errors.c:678 src/main/errors.c:685
+#: src/main/errors.c:681 src/main/errors.c:688
 #, fuzzy, c-format
 msgid "Error in command '%s' (from %s): "
 msgstr " (fra %s) :"
 
-#: src/main/errors.c:707 src/main/errors.c:713
+#: src/main/errors.c:710 src/main/errors.c:716
 #, c-format
 msgid "Error: "
 msgstr "Fejl: "
 
-#: src/main/errors.c:734 src/main/errors.c:1340
+#: src/main/errors.c:737 src/main/errors.c:1346
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Mistede advarselsbeskeder\n"
 msgstr[1] "Mistede advarselsbeskeder\n"
 
-#: src/main/errors.c:1015
+#: src/main/errors.c:1021
 #, c-format
 msgid "translating '%s' in domain '%s'\n"
 msgstr ""
 
-#: src/main/errors.c:1152 src/main/errors.c:1184
+#: src/main/errors.c:1158 src/main/errors.c:1190
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [ugyldig streng i stop(.)]"
 
-#: src/main/errors.c:1200
+#: src/main/errors.c:1206
 #, fuzzy, c-format
 msgid "incorrect number of arguments passed to '%s' function"
 msgstr "forkert antal argumenter for »%s«"
 
-#: src/main/errors.c:1206 src/main/errors.c:1221
+#: src/main/errors.c:1212 src/main/errors.c:1227
 #, fuzzy, c-format
 msgid "unimplemented feature in '%s' function"
 msgstr "funktion ikke implementeret i %s"
 
-#: src/main/errors.c:1215
+#: src/main/errors.c:1221
 msgid "invalid number of arguments"
 msgstr "ugyldigt antal argumenter"
 
-#: src/main/errors.c:1216 src/main/logic.c:182
+#: src/main/errors.c:1222 src/main/logic.c:191
 msgid "invalid argument type"
 msgstr ""
 
-#: src/main/errors.c:1218
+#: src/main/errors.c:1224
 msgid "time-series/vector length mismatch"
 msgstr ""
 
-#: src/main/errors.c:1219
+#: src/main/errors.c:1225
 msgid "incompatible arguments"
 msgstr "argumenter er ikke kompatible"
 
-#: src/main/errors.c:1222
+#: src/main/errors.c:1228
 msgid "unknown error (report this!)"
 msgstr "ukendt fejl (rapporter denne!)"
 
-#: src/main/errors.c:1231
+#: src/main/errors.c:1237
 msgid "inaccurate integer conversion in coercion"
 msgstr ""
 
-#: src/main/errors.c:1234
+#: src/main/errors.c:1240
 msgid "unknown warning (report this!)"
 msgstr "ukendt advarsel (rapporter denne !)"
 
-#: src/main/errors.c:1325
+#: src/main/errors.c:1331
 msgid "top level inconsistency?"
 msgstr ""
 
-#: src/main/errors.c:1498
+#: src/main/errors.c:1510
 msgid "bad handler data"
 msgstr "ugyldige håndtagsdata"
 
-#: src/main/errors.c:1650 src/main/errors.c:1875
+#: src/main/errors.c:1662 src/main/errors.c:1887
 #, fuzzy
 msgid "error message is not a character string"
 msgstr "fejlbesked skal være en tegnstreng"
 
-#: src/main/errors.c:1731
+#: src/main/errors.c:1743
 msgid "handler or restart stack mismatch in old restart"
 msgstr ""
 
-#: src/main/errors.c:1757 src/main/errors.c:1773
+#: src/main/errors.c:1769 src/main/errors.c:1785
 msgid "bad error message"
 msgstr "ugyldig fejlbesked"
 
-#: src/main/errors.c:1814
+#: src/main/errors.c:1826
 msgid "bad restart"
 msgstr "ugyldig restart"
 
-#: src/main/errors.c:1846
+#: src/main/errors.c:1858
 #, fuzzy
 msgid "restart is not on stack"
 msgstr "argument %d er ikke en vektor"
 
-#: src/main/errors.c:1862
+#: src/main/errors.c:1874
 msgid "not in a try context"
 msgstr ""
 
-#: src/main/eval.c:365
+#: src/main/errors.c:2023
+msgid "body function is required"
+msgstr ""
+
+#: src/main/errors.c:2056
+#, fuzzy
+msgid "this is not an external pointer"
+msgstr "»%s« er ikke en %s-funktion"
+
+#: src/main/eval.c:370
 #, c-format
 msgid "source files skipped by Rprof; please increase '%s'"
 msgstr ""
 
-#: src/main/eval.c:384
+#: src/main/eval.c:389
 #, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr "Rprof: Kan ikke åbne profilfil '%s'"
 
-#: src/main/eval.c:419
+#: src/main/eval.c:424
 #, fuzzy
 msgid "unable to create profiling thread"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/eval.c:433 src/main/eval.c:6821
+#: src/main/eval.c:438 src/main/eval.c:7178
 msgid "setting profile timer failed"
 msgstr ""
 
-#: src/main/eval.c:447
+#: src/main/eval.c:452
 #, fuzzy
 msgid "cannot use R profiling while byte code profiling"
 msgstr "kan ikke bruge R-profilering under bytekode-profilering"
 
-#: src/main/eval.c:477
+#: src/main/eval.c:482
 msgid "R profiling is not available on this system"
 msgstr "R-profilering er ikke tilgængelig på dette system"
 
-#: src/main/eval.c:488
+#: src/main/eval.c:493
 #, c-format
 msgid "Warning: stack imbalance in '%s', %d then %d\n"
 msgstr ""
 
-#: src/main/eval.c:500
+#: src/main/eval.c:505
 msgid ""
 "promise is already under evaluation: recursive default argument reference or "
 "earlier problems?"
 msgstr ""
 
-#: src/main/eval.c:502
+#: src/main/eval.c:510
 msgid "restarting interrupted promise evaluation"
 msgstr ""
 
-#: src/main/eval.c:578 src/main/eval.c:984
+#: src/main/eval.c:590 src/main/eval.c:998
 #, fuzzy, c-format
 msgid "'rho' argument cannot be C NULL: detected in C-level '%s' function"
 msgstr "argument skal være et miljø"
 
-#: src/main/eval.c:580 src/main/eval.c:986
+#: src/main/eval.c:592 src/main/eval.c:1000
 #, fuzzy, c-format
 msgid ""
 "'rho' argument must be an environment not %s: detected in C-level '%s' "
 "function"
 msgstr "argument skal være et miljø"
 
-#: src/main/eval.c:596
+#: src/main/eval.c:608
 msgid ""
 "evaluation is nested too deeply: infinite recursion / options(expressions=)?"
 msgstr ""
 
-#: src/main/eval.c:671 src/main/eval.c:5551 src/main/eval.c:5567
-#: src/main/eval.c:5585 src/main/eval.c:5739
+#: src/main/eval.c:683 src/main/eval.c:5895 src/main/eval.c:5911
+#: src/main/eval.c:5929 src/main/eval.c:6088
 msgid "trace: "
 msgstr ""
 
-#: src/main/eval.c:686
+#: src/main/eval.c:698
 #, c-format
 msgid "vis: special %s\n"
 msgstr ""
 
-#: src/main/eval.c:716
+#: src/main/eval.c:728
 #, c-format
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:730 src/main/eval.c:1311 src/main/eval.c:5607
+#: src/main/eval.c:742 src/main/eval.c:1325 src/main/eval.c:5951
 msgid "attempt to apply non-function"
 msgstr ""
 
-#: src/main/eval.c:753
+#: src/main/eval.c:766
 #, c-format
 msgid "%s at %s#%d: "
 msgstr ""
 
-#: src/main/eval.c:1086 src/main/eval.c:1195
+#: src/main/eval.c:1100 src/main/eval.c:1209
 msgid "debugging in: "
 msgstr ""
 
-#: src/main/eval.c:1146 src/main/eval.c:1249
+#: src/main/eval.c:1160 src/main/eval.c:1263
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1303 src/main/eval.c:2300 src/main/eval.c:5162
+#: src/main/eval.c:1317 src/main/eval.c:2319 src/main/eval.c:5223
 #, c-format
 msgid "argument %d is empty"
 msgstr "argument %d er tomt"
 
-#: src/main/eval.c:1304
+#: src/main/eval.c:1318
 #, fuzzy
 msgid "something weird happened"
 msgstr "intet at tilføje til"
 
-#: src/main/eval.c:1355
+#: src/main/eval.c:1369
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr ""
 
-#: src/main/eval.c:1372
+#: src/main/eval.c:1386
 #, fuzzy, c-format
 msgid "symbol \"%s\" is not in environment of method"
 msgstr "ikke et miljø"
 
-#: src/main/eval.c:1484
+#: src/main/eval.c:1498
 msgid "the condition has length > 1 and only the first element will be used"
 msgstr "betingelsen har længde > 1 og kun det første element vil blive brugt"
 
-#: src/main/eval.c:1503
+#: src/main/eval.c:1517
 msgid "missing value where TRUE/FALSE needed"
 msgstr "manglende værdi hvor TRUE/FALSE er krævet"
 
-#: src/main/eval.c:1504
+#: src/main/eval.c:1518
 msgid "argument is not interpretable as logical"
 msgstr "argument kan ikke fortolkes som logisk"
 
-#: src/main/eval.c:1505 src/main/seq.c:161
+#: src/main/eval.c:1519 src/main/seq.c:161
 #, fuzzy
 msgid "argument is of length 0"
 msgstr "argument har længden nul"
 
-#: src/main/eval.c:1604
+#: src/main/eval.c:1618
 msgid "non-symbol loop variable"
 msgstr ""
 
-#: src/main/eval.c:1695 src/main/eval.c:5374
+#: src/main/eval.c:1710 src/main/eval.c:5715
 #, fuzzy
 msgid "invalid 'for()' loop sequence"
 msgstr "ugyldigt fjerde argument"
 
-#: src/main/eval.c:1834
+#: src/main/eval.c:1851
 msgid "multi-argument returns are not permitted"
 msgstr ""
 
-#: src/main/eval.c:1881
+#: src/main/eval.c:1898
 msgid "invalid (NULL) left side of assignment"
 msgstr ""
 
-#: src/main/eval.c:1915
+#: src/main/eval.c:1932
 msgid "target of assignment expands to non-language object"
 msgstr ""
 
-#: src/main/eval.c:2013
+#: src/main/eval.c:2032
 #, fuzzy, c-format
 msgid "over-long name in '%s' function"
 msgstr "intern fejl i brugen af rekursiv indeksering"
 
-#: src/main/eval.c:2103
+#: src/main/eval.c:2122
 msgid "cannot do complex assignments in base namespace"
 msgstr ""
 
-#: src/main/eval.c:2105
+#: src/main/eval.c:2124
 msgid "cannot do complex assignments in base environment"
 msgstr ""
 
-#: src/main/eval.c:2144 src/main/eval.c:2171
+#: src/main/eval.c:2163 src/main/eval.c:2190
 msgid "invalid function in complex assignment"
 msgstr ""
 
-#: src/main/eval.c:2231
+#: src/main/eval.c:2250
 msgid "invalid ('do_set()' function) left-hand side to assignment"
 msgstr ""
 
-#: src/main/eval.c:2468
+#: src/main/eval.c:2487
 msgid "invalid formal argument list for \"function\""
 msgstr ""
 
-#: src/main/eval.c:2529 src/main/eval.c:2559 src/main/eval.c:2563
+#: src/main/eval.c:2548 src/main/eval.c:2578 src/main/eval.c:2582
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "ugyldigt '%s'-argument"
 
-#: src/main/eval.c:2556
+#: src/main/eval.c:2575
 #, fuzzy
 msgid "numeric 'envir' argument is not of length one"
 msgstr "'%s' skal have en længde på 1"
 
-#: src/main/eval.c:2579 src/main/eval.c:2604
+#: src/main/eval.c:2598 src/main/eval.c:2623
 #, fuzzy
 msgid "restarts are not supported in 'eval()' function"
 msgstr "navne i vedvarende strenge er endnu ikke understøttet"
 
-#: src/main/eval.c:2663 src/main/eval.c:2676
+#: src/main/eval.c:2682 src/main/eval.c:2695
 msgid "'Recall()' function called from outside a closure"
 msgstr ""
 
-#: src/main/eval.c:2769
+#: src/main/eval.c:2789
 msgid "value in '...' is not a promise"
 msgstr ""
 
-#: src/main/eval.c:3030
+#: src/main/eval.c:3050
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr ""
 
-#: src/main/eval.c:3078
+#: src/main/eval.c:3098
 msgid "dispatch error in group dispatch"
 msgstr ""
 
-#: src/main/eval.c:3575 src/main/eval.c:5711 src/main/seq.c:919
+#: src/main/eval.c:3616 src/main/eval.c:6059 src/main/seq.c:919
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "»%s« er ikke en %s-funktion"
 
-#: src/main/eval.c:4089
+#: src/main/eval.c:4130
 msgid "node stack overflow"
 msgstr ""
 
-#: src/main/eval.c:4095
+#: src/main/eval.c:4136
 msgid "integer stack overflow"
 msgstr ""
 
-#: src/main/eval.c:4149
+#: src/main/eval.c:4226
 #, fuzzy
 msgid "bad operation code"
 msgstr "ugyldig enhed"
 
-#: src/main/eval.c:5146 src/main/logic.c:254 src/main/logic.c:260
+#: src/main/eval.c:5207 src/main/logic.c:263 src/main/logic.c:269
 #, fuzzy, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr "ugyldigt '%s'-argument"
 
-#: src/main/eval.c:5176
+#: src/main/eval.c:5237
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr "argument %d er tomt"
 
-#: src/main/eval.c:5269
+#: src/main/eval.c:5560
 msgid "bytecode version mismatch; using eval"
 msgstr ""
 
-#: src/main/eval.c:5274
+#: src/main/eval.c:5566
 msgid "bytecode version is too old"
 msgstr ""
 
-#: src/main/eval.c:5275
+#: src/main/eval.c:5567
 msgid "bytecode version is too new"
 msgstr ""
 
-#: src/main/eval.c:5309
+#: src/main/eval.c:5605
 msgid "byte code version mismatch"
 msgstr ""
 
-#: src/main/eval.c:5456
+#: src/main/eval.c:5798
 #, fuzzy
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "ugyldigt '%s'-argument"
 
-#: src/main/eval.c:5581
+#: src/main/eval.c:5925
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:5597 src/main/names.c:1312
+#: src/main/eval.c:5941 src/main/names.c:1314
 #, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr ""
 
-#: src/main/eval.c:5698 src/main/eval.c:6049 src/main/eval.c:6089
+#: src/main/eval.c:6046 src/main/eval.c:6401 src/main/eval.c:6442
 msgid "bad function"
 msgstr ""
 
-#: src/main/eval.c:6140
+#: src/main/eval.c:6493
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6146 src/main/eval.c:6171
+#: src/main/eval.c:6499 src/main/eval.c:6524
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "ugyldige variabelnavne"
 
-#: src/main/eval.c:6152
+#: src/main/eval.c:6505
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 
-#: src/main/eval.c:6155
+#: src/main/eval.c:6508
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr "ugyldige variabelnavne"
 
-#: src/main/eval.c:6157
+#: src/main/eval.c:6510
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr "ugyldige variabelnavne"
 
-#: src/main/eval.c:6258
+#: src/main/eval.c:6615
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "ukendt kildeformat"
 
-#: src/main/eval.c:6274
+#: src/main/eval.c:6631
 msgid "cannot find index for threaded code address"
 msgstr ""
 
-#: src/main/eval.c:6318
+#: src/main/eval.c:6675
 #, fuzzy
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
 msgstr "forkert type for argument"
 
-#: src/main/eval.c:6320
+#: src/main/eval.c:6677
 #, fuzzy
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
 msgstr "forkert type for argument"
 
-#: src/main/eval.c:6401
+#: src/main/eval.c:6758
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:6403
+#: src/main/eval.c:6760
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:6405
+#: src/main/eval.c:6762
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.c:6406
+#: src/main/eval.c:6763
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.c:6409
+#: src/main/eval.c:6766
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.c:6411
+#: src/main/eval.c:6768
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.c:6441 src/main/eval.c:6452
+#: src/main/eval.c:6798 src/main/eval.c:6809
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.c:6466
+#: src/main/eval.c:6823
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.c:6530
+#: src/main/eval.c:6887
 msgid "invalid body"
 msgstr ""
 
-#: src/main/eval.c:6550
+#: src/main/eval.c:6907
 msgid "invalid symbol"
 msgstr ""
 
-#: src/main/eval.c:6594
+#: src/main/eval.c:6951
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr "'path' skal være en tegnvektor"
 
-#: src/main/eval.c:6616
+#: src/main/eval.c:6973
 msgid "bad file name"
 msgstr ""
 
-#: src/main/eval.c:6635
+#: src/main/eval.c:6992
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr "'msg1' skal være en tegnstreng"
 
-#: src/main/eval.c:6637 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:6994 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2192 src/modules/lapack/Lapack.c:1234
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'to' skal være finitte"
 
-#: src/main/eval.c:6667 src/main/eval.c:6674
+#: src/main/eval.c:7024 src/main/eval.c:7031
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr "R_LibraryFileName: mellemlager for lille"
 
-#: src/main/eval.c:6708 src/main/eval.c:6727 src/main/eval.c:6761
+#: src/main/eval.c:7065 src/main/eval.c:7084 src/main/eval.c:7118
 msgid "constant buffer must be a generic vector"
 msgstr ""
 
-#: src/main/eval.c:6731
+#: src/main/eval.c:7088
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr "ugyldig '%s'-værdi"
 
-#: src/main/eval.c:6763
+#: src/main/eval.c:7120
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.c:6801
+#: src/main/eval.c:7158
 msgid "profile timer is in use"
 msgstr ""
 
-#: src/main/eval.c:6803
+#: src/main/eval.c:7160
 msgid "already byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:6839
+#: src/main/eval.c:7196
 #, fuzzy
 msgid "no byte code profiling"
 msgstr "kan ikke bruge R-profilering under bytekode-profilering"
 
-#: src/main/eval.c:6855 src/main/eval.c:6859 src/main/eval.c:6863
+#: src/main/eval.c:7212 src/main/eval.c:7216 src/main/eval.c:7220
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr ""
 "symbolske henvisninger er ikke understøttet på denne version af Windows"
+
+#: src/main/eval.c:7270
+msgid "parse error"
+msgstr ""
 
 #: src/main/gevents.c:44
 #, c-format
@@ -4974,33 +5002,29 @@ msgstr ""
 msgid "LAPACK routines cannot be loaded"
 msgstr ""
 
-#: src/main/logic.c:81 src/main/logic.c:143
+#: src/main/logic.c:80
 msgid "operations are possible only for numeric, logical or complex types"
 msgstr ""
 
-#: src/main/logic.c:91
-msgid "binary operation on non-conformable arrays"
-msgstr ""
-
-#: src/main/logic.c:117
+#: src/main/logic.c:118
 msgid "non-conformable time series"
 msgstr ""
 
-#: src/main/logic.c:248
+#: src/main/logic.c:257
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr ""
 
-#: src/main/logic.c:333
+#: src/main/logic.c:342
 #, fuzzy
 msgid "Unary operator '!' called with two arguments"
 msgstr "ingen argumenter"
 
-#: src/main/logic.c:396
+#: src/main/logic.c:405
 msgid "bad operator value for 'do_logic3()' function"
 msgstr ""
 
-#: src/main/logic.c:438
+#: src/main/logic.c:447
 #, c-format
 msgid "coercing argument of type '%s' to logical"
 msgstr ""
@@ -5316,373 +5340,373 @@ msgid_plural "unused arguments %s"
 msgstr[0] "ingen argumenter"
 msgstr[1] "ingen argumenter"
 
-#: src/main/memory.c:161
+#: src/main/memory.c:160
 #, c-format
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:743
+#: src/main/memory.c:758
 msgid "untraced old-to-new reference\n"
 msgstr ""
 
-#: src/main/memory.c:752
+#: src/main/memory.c:767
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:759 src/main/memory.c:769 src/main/memory.c:779
+#: src/main/memory.c:774 src/main/memory.c:784 src/main/memory.c:794
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:771 src/main/memory.c:781
+#: src/main/memory.c:786 src/main/memory.c:796
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:784
+#: src/main/memory.c:799
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:814
+#: src/main/memory.c:829
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:819
+#: src/main/memory.c:834
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:820
+#: src/main/memory.c:835
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:831
+#: src/main/memory.c:846
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:835
+#: src/main/memory.c:850
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1122 src/main/memory.c:1544
+#: src/main/memory.c:1137 src/main/memory.c:1559
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1239
+#: src/main/memory.c:1254
 msgid "can only weakly reference/finalize reference objects"
 msgstr ""
 
-#: src/main/memory.c:1273
+#: src/main/memory.c:1288
 msgid "finalizer must be a function or NULL"
 msgstr ""
 
-#: src/main/memory.c:1329 src/main/memory.c:1337 src/main/memory.c:1348
+#: src/main/memory.c:1344 src/main/memory.c:1352 src/main/memory.c:1363
 msgid "not a weak reference"
 msgstr ""
 
-#: src/main/memory.c:1482
+#: src/main/memory.c:1497
 msgid "first argument must be environment or external pointer"
 msgstr ""
 
-#: src/main/memory.c:1484
+#: src/main/memory.c:1499
 msgid "second argument must be a function"
 msgstr ""
 
-#: src/main/memory.c:1488
+#: src/main/memory.c:1503
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr ""
 
-#: src/main/memory.c:1834
+#: src/main/memory.c:1854
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1837
+#: src/main/memory.c:1857
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:1991
+#: src/main/memory.c:2011
 msgid "vector memory exhausted (limit reached?)"
 msgstr ""
 
-#: src/main/memory.c:1997
+#: src/main/memory.c:2017
 msgid "cons memory exhausted (limit reached?)"
 msgstr ""
 
-#: src/main/memory.c:2002
+#: src/main/memory.c:2022
 msgid "memory exhausted (limit reached?)"
 msgstr ""
 
-#: src/main/memory.c:2023
+#: src/main/memory.c:2043
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr "kan ikke allokere hukommelse (i GPath)"
 
-#: src/main/memory.c:2080
+#: src/main/memory.c:2100
 msgid "couldn't allocate node stack"
 msgstr ""
 
-#: src/main/memory.c:2085
+#: src/main/memory.c:2105
 msgid "couldn't allocate integer stack"
 msgstr ""
 
-#: src/main/memory.c:2138
+#: src/main/memory.c:2158
 #, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr ""
 
-#: src/main/memory.c:2143
+#: src/main/memory.c:2163
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr ""
 
-#: src/main/memory.c:2470
+#: src/main/memory.c:2526
 msgid "vector is too large"
 msgstr ""
 
-#: src/main/memory.c:2473
+#: src/main/memory.c:2528
 msgid "negative length vectors are not allowed"
 msgstr ""
 
-#: src/main/memory.c:2485
+#: src/main/memory.c:2540
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2499 src/main/memory.c:2512 src/main/memory.c:2525
-#: src/main/memory.c:2540
+#: src/main/memory.c:2554 src/main/memory.c:2566 src/main/memory.c:2578
+#: src/main/memory.c:2592
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr ""
 
-#: src/main/memory.c:2550 src/main/memory.c:2557
+#: src/main/memory.c:2602 src/main/memory.c:2609
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "ugyldig værdi for '%s'"
 
-#: src/main/memory.c:2561
+#: src/main/memory.c:2613
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr ""
 
-#: src/main/memory.c:2660
+#: src/main/memory.c:2712
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr ""
 
-#: src/main/memory.c:2664
+#: src/main/memory.c:2716
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr ""
 
-#: src/main/memory.c:2668
+#: src/main/memory.c:2720
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr ""
 
-#: src/main/memory.c:2924
+#: src/main/memory.c:2976
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2929
+#: src/main/memory.c:2981
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2952
+#: src/main/memory.c:3004
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2957 src/main/memory.c:2962
+#: src/main/memory.c:3009 src/main/memory.c:3014
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2972
+#: src/main/memory.c:3024
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2976
+#: src/main/memory.c:3028
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2981
+#: src/main/memory.c:3033
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3054
+#: src/main/memory.c:3106
 msgid "protect(): protection stack overflow"
 msgstr ""
 
-#: src/main/memory.c:3061
+#: src/main/memory.c:3113
 #, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3096
+#: src/main/memory.c:3148
 msgid "unprotect_ptr: pointer not found"
 msgstr ""
 
-#: src/main/memory.c:3134
+#: src/main/memory.c:3186
 #, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3186
+#: src/main/memory.c:3238
 #, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr ""
 
-#: src/main/memory.c:3196
+#: src/main/memory.c:3248
 #, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr ""
 
-#: src/main/memory.c:3327
+#: src/main/memory.c:3380
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3365
+#: src/main/memory.c:3418
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3380
+#: src/main/memory.c:3433
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a charecter, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3387 src/main/memory.c:3447
+#: src/main/memory.c:3440 src/main/memory.c:3500
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a character vector, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3397 src/main/memory.c:3464
+#: src/main/memory.c:3450 src/main/memory.c:3517
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a list, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3404
+#: src/main/memory.c:3457
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a logical, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3412
+#: src/main/memory.c:3465
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a integer, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3419
+#: src/main/memory.c:3472
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3426
+#: src/main/memory.c:3479
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a numeric, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3433
+#: src/main/memory.c:3486
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/main/memory.c:3442
+#: src/main/memory.c:3495
 msgid "not safe to return vector pointer"
 msgstr ""
 
-#: src/main/memory.c:3450
+#: src/main/memory.c:3503
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3453
+#: src/main/memory.c:3506
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3468
+#: src/main/memory.c:3521
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3493 src/main/memory.c:3503 src/main/memory.c:3515
-#: src/main/memory.c:3529 src/main/memory.c:3544 src/main/memory.c:3562
+#: src/main/memory.c:3546 src/main/memory.c:3556 src/main/memory.c:3568
+#: src/main/memory.c:3582 src/main/memory.c:3597 src/main/memory.c:3615
 msgid "bad value"
 msgstr ""
 
-#: src/main/memory.c:3644
+#: src/main/memory.c:3697
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3725
+#: src/main/memory.c:3778
 msgid "memory profiling is not available on this system"
-msgstr ""
-
-#: src/main/memory.c:3789
-#, fuzzy, c-format
-msgid "'Rprofmem()': cannot open output file '%s'"
-msgstr "Rprof: Kan ikke åbne profilfil '%s'"
-
-#: src/main/memory.c:3825
-msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
 #: src/main/memory.c:3842
 #, fuzzy, c-format
+msgid "'Rprofmem()': cannot open output file '%s'"
+msgstr "Rprof: Kan ikke åbne profilfil '%s'"
+
+#: src/main/memory.c:3878
+msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
+msgstr ""
+
+#: src/main/memory.c:3895
+#, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "kan ikke allokere hukommelse (i GPath)"
 
-#: src/main/memory.c:3894
+#: src/main/memory.c:3947
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1021
+#: src/main/names.c:1023
 msgid "string argument required"
 msgstr ""
 
-#: src/main/names.c:1024
+#: src/main/names.c:1026
 msgid "no such primitive function"
 msgstr ""
 
-#: src/main/names.c:1146
+#: src/main/names.c:1157
 msgid "couldn't allocate memory for symbol table"
 msgstr ""
 
-#: src/main/names.c:1212 src/main/names.c:1242
+#: src/main/names.c:1214 src/main/names.c:1244
 msgid "attempt to use zero-length variable name"
 msgstr ""
 
-#: src/main/names.c:1214 src/main/names.c:1244
+#: src/main/names.c:1216 src/main/names.c:1246
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr ""
 
-#: src/main/names.c:1333
+#: src/main/names.c:1335
 #, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr ""
 
-#: src/main/names.c:1340
+#: src/main/names.c:1342
 #, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr ""
@@ -5777,115 +5801,111 @@ msgstr ""
 msgid "cannot unclass an external pointer"
 msgstr ""
 
-#: src/main/objects.c:861
+#: src/main/objects.c:886
 #, fuzzy, c-format
 msgid "'%s' argument must be a logical vector of length 1"
 msgstr "argument skal være en tegnvektor en en rå (raw) vektor"
 
-#: src/main/objects.c:867
-msgid "use 'is()' instead of 'inherits()' on S4 objects"
-msgstr ""
-
-#: src/main/objects.c:996
+#: src/main/objects.c:1014
 msgid "could not find correct environment; please report!"
 msgstr ""
 
-#: src/main/objects.c:1050
+#: src/main/objects.c:1068
 msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
 msgstr ""
 
-#: src/main/objects.c:1108
+#: src/main/objects.c:1126
 #, c-format
 msgid "unable to find a non-generic version of function '%s'"
 msgstr ""
 
-#: src/main/objects.c:1138
+#: src/main/objects.c:1156
 msgid ""
 "'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"
 msgstr ""
 
-#: src/main/objects.c:1146
+#: src/main/objects.c:1164
 #, fuzzy, c-format
 msgid "argument passed to '%s' function must be a non-empty character string"
 msgstr "'caption' skal være en tegnstreng"
 
-#: src/main/objects.c:1151
+#: src/main/objects.c:1169
 #, c-format
 msgid ""
 "call to standardGeneric(\"%s\") apparently not from the body of that generic "
 "function"
 msgstr ""
 
-#: src/main/objects.c:1195
+#: src/main/objects.c:1213
 #, c-format
 msgid "'internal' slot does not name an internal function: %s"
 msgstr ""
 
-#: src/main/objects.c:1250
+#: src/main/objects.c:1268
 #, c-format
 msgid ""
 "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", "
 "\"set\", or \"suppress\""
 msgstr ""
 
-#: src/main/objects.c:1258
+#: src/main/objects.c:1276
 msgid "invalid object: must be a primitive function"
 msgstr ""
 
-#: src/main/objects.c:1305
+#: src/main/objects.c:1323
 #, c-format
 msgid ""
 "the formal definition of a primitive generic must be a function object (got "
 "type '%s')"
 msgstr ""
 
-#: src/main/objects.c:1334
+#: src/main/objects.c:1352
 #, c-format
 msgid "object returned as generic function '%s' does not appear to be one"
 msgstr ""
 
-#: src/main/objects.c:1439
+#: src/main/objects.c:1457
 msgid "invalid primitive operation given for dispatch"
 msgstr ""
 
-#: src/main/objects.c:1470 src/main/objects.c:1491
+#: src/main/objects.c:1488 src/main/objects.c:1509
 msgid "dispatch error"
 msgstr ""
 
-#: src/main/objects.c:1486
+#: src/main/objects.c:1504
 #, c-format
 msgid ""
 "primitive function '%s' has been set for methods but no generic function "
 "supplied"
 msgstr ""
 
-#: src/main/objects.c:1510
+#: src/main/objects.c:1528
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr ""
 
-#: src/main/objects.c:1526
+#: src/main/objects.c:1544
 msgid "'methods' package not yet loaded"
 msgstr ""
 
-#: src/main/objects.c:1536
+#: src/main/objects.c:1554
 msgid "'R_getClassDef(.)' called with NULL string pointer"
 msgstr ""
 
-#: src/main/objects.c:1581
+#: src/main/objects.c:1599
 msgid "C level NEW macro called with null class definition pointer"
 msgstr ""
 
-#: src/main/objects.c:1585
+#: src/main/objects.c:1603
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr ""
 
-#: src/main/objects.c:1630
+#: src/main/objects.c:1648
 #, fuzzy
 msgid "'R_get_primname()' called on a non-primitive"
 msgstr "'names' er ikke en tegnstreng"
 
-#: src/main/objects.c:1666
+#: src/main/objects.c:1684
 #, fuzzy, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "Objekt for klasse »%s« korresponderer ikke til et gyldigt S3-objekt"
@@ -6062,128 +6082,128 @@ msgstr "udvidet 'to'-navn er for langt"
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "kan ikke omdøbe fil '%s' til '%s', årsag '%s'"
 
-#: src/main/platform.c:1162
+#: src/main/platform.c:1195
 msgid "invalid 'pattern' regular expression"
 msgstr "ugyldigt regulært udtryk for 'pattern'"
 
-#: src/main/platform.c:1279
+#: src/main/platform.c:1312
 msgid "unable to determine R home location"
 msgstr ""
 
-#: src/main/platform.c:1332 src/unix/Rscript.c:223
+#: src/main/platform.c:1365 src/unix/Rscript.c:223
 #, fuzzy
 msgid "file name is too long"
 msgstr "filnavn er for langt"
 
-#: src/main/platform.c:1394
+#: src/main/platform.c:1427
 #, fuzzy, c-format
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr "kan ikke oprette mappe '%ls', årsag '%s'"
 
-#: src/main/platform.c:1408 src/main/platform.c:2856
+#: src/main/platform.c:1441 src/main/platform.c:2907
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "kan ikke oprette mappe '%ls', årsag '%s'"
 
-#: src/main/platform.c:1419
+#: src/main/platform.c:1452
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "kan ikke oprette mappe '%ls', årsag '%s'"
 
-#: src/main/platform.c:1577 src/main/platform.c:1624 src/main/sysutils.c:1805
+#: src/main/platform.c:1610 src/main/platform.c:1657 src/main/sysutils.c:1805
 #: src/main/sysutils.c:1819
 msgid "internal out-of-memory condition"
 msgstr ""
 
-#: src/main/platform.c:1620 src/main/sysutils.c:1815
+#: src/main/platform.c:1653 src/main/sysutils.c:1815
 #, c-format
 msgid "read error on '%s'"
 msgstr "læsefejl på '%s'"
 
-#: src/main/platform.c:1719
+#: src/main/platform.c:1752
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr "angivelse af 'LC_NUMERIC' kan få R til at fungere mærkeligt"
 
-#: src/main/platform.c:1733
+#: src/main/platform.c:1766
 msgid "LC_MESSAGES exists on Windows but is not operational"
 msgstr ""
 
-#: src/main/platform.c:1760
+#: src/main/platform.c:1793
 #, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr ""
 
-#: src/main/platform.c:2121
+#: src/main/platform.c:2154
 #, fuzzy, c-format
 msgid "directory '%s' already exists"
 msgstr "'%s' findes allerede"
 
-#: src/main/platform.c:2124
+#: src/main/platform.c:2157
 #, fuzzy, c-format
 msgid "cannot create directory '%s', reason '%s'"
 msgstr "kan ikke oprette mappe '%s', årsag '%s'"
 
-#: src/main/platform.c:2170
+#: src/main/platform.c:2203
 #, fuzzy, c-format
 msgid "directory '%ls' already exists"
 msgstr "'%s' findes allerede"
 
-#: src/main/platform.c:2172 src/main/platform.c:2178
+#: src/main/platform.c:2205 src/main/platform.c:2211
 #, fuzzy, c-format
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr "kan ikke oprette mappe '%ls', årsag '%s'"
 
-#: src/main/platform.c:2212 src/main/platform.c:2424
+#: src/main/platform.c:2245 src/main/platform.c:2466
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.c:2220 src/main/platform.c:2233 src/main/platform.c:2251
-#: src/main/platform.c:2271 src/main/platform.c:2440 src/main/platform.c:2453
-#: src/main/platform.c:2472 src/main/platform.c:2493
+#: src/main/platform.c:2253 src/main/platform.c:2266 src/main/platform.c:2284
+#: src/main/platform.c:2304 src/main/platform.c:2482 src/main/platform.c:2495
+#: src/main/platform.c:2514 src/main/platform.c:2535
 #, fuzzy
 msgid "path is too long"
 msgstr "'default' er for lang"
 
-#: src/main/platform.c:2240
+#: src/main/platform.c:2273
 #, fuzzy, c-format
 msgid "problem with creating directory %ls: %s"
 msgstr "problem ved oprettelse af mappe %ls: %s"
 
-#: src/main/platform.c:2260
+#: src/main/platform.c:2293
 #, fuzzy, c-format
 msgid "problem with reading directory %ls: %s"
 msgstr "problem ved læsning af mappe %s: %s"
 
-#: src/main/platform.c:2279
+#: src/main/platform.c:2312
 #, fuzzy, c-format
 msgid "problem with copying %ls to %ls: %s"
 msgstr "problem med at kopiere %s til %s: %s"
 
-#: src/main/platform.c:2462
+#: src/main/platform.c:2504
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr "problem ved oprettelse af mappe %ls: %s"
 
-#: src/main/platform.c:2481
+#: src/main/platform.c:2523
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr "problem ved læsning af mappe %s: %s"
 
-#: src/main/platform.c:2502
+#: src/main/platform.c:2544
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr "problem med at kopiere %s til %s: %s"
 
-#: src/main/platform.c:2640
+#: src/main/platform.c:2682
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr "'mode' skal mindst have længden en"
 
-#: src/main/platform.c:2681 src/main/platform.c:2707
+#: src/main/platform.c:2723 src/main/platform.c:2749
 msgid "insufficient OS support on this platform"
 msgstr "utilstrækkelig OS-understøttelse på denne platform"
 
-#: src/main/platform.c:2877
+#: src/main/platform.c:2928
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "kan ikke oprette mappe '%ls', årsag '%s'"
@@ -6527,7 +6547,7 @@ msgstr ""
 msgid "Internal error: range = %d; isorted cannot handle range > %d"
 msgstr "intern fejl i brugen af rekursiv indeksering"
 
-#: src/main/radixsort.c:405 src/main/radixsort.c:421 src/main/radixsort.c:1139
+#: src/main/radixsort.c:405 src/main/radixsort.c:421 src/main/radixsort.c:1122
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6550,137 +6570,137 @@ msgid ""
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:595 src/main/radixsort.c:893
+#: src/main/radixsort.c:595 src/main/radixsort.c:876
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. radix="
 "%d"
 msgstr ""
 
-#: src/main/radixsort.c:755
+#: src/main/radixsort.c:738
 #, c-format
 msgid ""
 "Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:767
+#: src/main/radixsort.c:750
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:779 src/main/radixsort.c:867
+#: src/main/radixsort.c:762 src/main/radixsort.c:850
 msgid "Not yet used, still using iradix instead"
 msgstr ""
 
-#: src/main/radixsort.c:956
+#: src/main/radixsort.c:939
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr ""
 
-#: src/main/radixsort.c:1044
+#: src/main/radixsort.c:1027
 #, c-format
 msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1078
+#: src/main/radixsort.c:1061
 #, c-format
 msgid ""
 "Internal error. 'ustr' variable isn't empty when starting 'cgroup()' "
 "function: ustr_n=%d, ustr_alloc=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1103
+#: src/main/radixsort.c:1086
 #, fuzzy, c-format
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "kan ikke allokere hukommelse (i GPath)"
 
-#: src/main/radixsort.c:1182
+#: src/main/radixsort.c:1165
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
-#: src/main/radixsort.c:1230
+#: src/main/radixsort.c:1213
 #, fuzzy, c-format
 msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
 msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
 msgstr[0] "»%s« er ikke en %s-funktion"
 msgstr[1] "»%s« er ikke en %s-funktion"
 
-#: src/main/radixsort.c:1255 src/main/radixsort.c:1263
+#: src/main/radixsort.c:1238 src/main/radixsort.c:1246
 #, fuzzy, c-format
 msgid "Failed to allocate '%s' variable"
 msgstr "»%s« er ikke en %s-funktion"
 
-#: src/main/radixsort.c:1485
+#: src/main/radixsort.c:1468
 #, c-format
 msgid ""
 "Internal error: 'isort()' function received n=%d. 'isorted()' function "
 "should have dealt with this (e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1508
+#: src/main/radixsort.c:1491
 msgid ""
 "Internal error: 'isort()' passed all-NA. isorted should have caught this "
 "before this point"
 msgstr ""
 
-#: src/main/radixsort.c:1536
+#: src/main/radixsort.c:1519
 #, c-format
 msgid ""
 "Internal error: 'dsort()' received n=%d. dsorted should have dealt with this "
 "(e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1560
+#: src/main/radixsort.c:1543
 msgid "radix sort assumes sizeof(int) == 4"
 msgstr ""
 
-#: src/main/radixsort.c:1563
+#: src/main/radixsort.c:1546
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.c:1592 src/main/sort.c:1258
+#: src/main/radixsort.c:1575 src/main/sort.c:1258
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "argument %d er ikke en vektor"
 
-#: src/main/radixsort.c:1595 src/main/sort.c:1260
+#: src/main/radixsort.c:1578 src/main/sort.c:1260
 msgid "argument lengths differ"
 msgstr "argumentlængder er forskellige"
 
-#: src/main/radixsort.c:1599
+#: src/main/radixsort.c:1582
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.c:1602
+#: src/main/radixsort.c:1585
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreasing' skal være SAND eller FALSK"
 
-#: src/main/radixsort.c:1611
+#: src/main/radixsort.c:1594
 #, fuzzy
 msgid "long vectors are not supported"
 msgstr "version %d er ikke understøttet"
 
-#: src/main/radixsort.c:1696 src/main/radixsort.c:1789
+#: src/main/radixsort.c:1679 src/main/radixsort.c:1772
 msgid "Internal error: previous default should have caught unsupported type"
 msgstr ""
 
-#: src/main/radixsort.c:1709 src/main/radixsort.c:1714
+#: src/main/radixsort.c:1692 src/main/radixsort.c:1697
 #, fuzzy, c-format
 msgid "Couldn't allocate '%s' variable in forder, requested %d * %d bytes."
 msgstr "»%s« er ikke en %s-funktion"
 
-#: src/main/radixsort.c:1753
+#: src/main/radixsort.c:1736
 #, fuzzy, c-format
 msgid "Arg %d is type '%s', not yet supported"
 msgstr "version %d er ikke understøttet"
 
-#: src/main/radixsort.c:1860
+#: src/main/radixsort.c:1843
 #, c-format
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
@@ -6821,29 +6841,29 @@ msgstr ""
 msgid "table entry must be an external pointer"
 msgstr ""
 
-#: src/main/relop.c:73 src/main/relop.c:107
+#: src/main/relop.c:72 src/main/relop.c:106
 #, fuzzy
 msgid "operator needs two arguments"
 msgstr "ingen argumenter"
 
-#: src/main/relop.c:206
+#: src/main/relop.c:190
 #, c-format
 msgid "comparison (%d) is possible only for atomic and list types"
 msgstr ""
 
-#: src/main/relop.c:211
+#: src/main/relop.c:194
 msgid "comparison is not allowed for expressions"
 msgstr ""
 
-#: src/main/relop.c:300
+#: src/main/relop.c:286
 msgid "comparison of these types is not implemented"
 msgstr ""
 
-#: src/main/relop.c:504
+#: src/main/relop.c:420
 msgid "invalid comparison with complex values"
 msgstr ""
 
-#: src/main/relop.c:761
+#: src/main/relop.c:677
 #, fuzzy
 msgid "'A' and 'B' must have the same type"
 msgstr "'a' og 'b' skal være finitte"
@@ -6901,7 +6921,7 @@ msgstr ""
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr ""
 
-#: src/main/RNG.c:302 src/main/RNG.c:491
+#: src/main/RNG.c:302 src/main/RNG.c:490
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "'%s' element %d er ikke et vindueshåndtag"
@@ -6940,34 +6960,34 @@ msgstr ""
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ""
 
-#: src/main/RNG.c:415
+#: src/main/RNG.c:414
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr "'ndeps' er af forkert længde"
 
-#: src/main/RNG.c:434
+#: src/main/RNG.c:433
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:468
+#: src/main/RNG.c:467
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr ""
 
-#: src/main/RNG.c:474
+#: src/main/RNG.c:473
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:488
+#: src/main/RNG.c:487
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "ugyldig plottype '%c'"
 
-#: src/main/RNG.c:535
+#: src/main/RNG.c:534
 msgid "supplied seed is not a valid integer"
 msgstr ""
 
-#: src/main/RNG.c:775
+#: src/main/RNG.c:774
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -7685,10 +7705,6 @@ msgstr ""
 msgid "data length is not a multiple of split variable"
 msgstr ""
 
-#: src/main/split.c:59
-msgid "factor has bad level"
-msgstr ""
-
 #: src/main/sprintf.c:98
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
@@ -7767,7 +7783,7 @@ msgstr ""
 msgid "likely truncation of character string to %d characters"
 msgstr ""
 
-#: src/main/sprintf.c:424 src/main/util.c:2360
+#: src/main/sprintf.c:424 src/main/util.c:2372
 msgid "unsupported type"
 msgstr "ej understøttet type"
 
@@ -7935,7 +7951,7 @@ msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr ""
 
 #: src/main/subassign.c:1987 src/main/subscript.c:152 src/main/subscript.c:279
-#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1177
+#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1178
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr ""
@@ -8048,11 +8064,11 @@ msgstr ""
 msgid "getter call used outside of a complex assignment"
 msgstr ""
 
-#: src/main/subset.c:1220
+#: src/main/subset.c:1221
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1341
+#: src/main/subset.c:1342
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -8071,34 +8087,34 @@ msgstr ""
 msgid "internal error ('op = %d' in do_summary).\t Call a Guru"
 msgstr ""
 
-#: src/main/summary.c:750
+#: src/main/summary.c:752
 msgid "no non-missing arguments, returning NA"
 msgstr ""
 
-#: src/main/summary.c:753
+#: src/main/summary.c:755
 #, fuzzy
 msgid "no non-missing arguments passed to 'min()' function; returning Inf"
 msgstr "'path' skal være en tegnvektor"
 
-#: src/main/summary.c:755
+#: src/main/summary.c:757
 #, fuzzy
 msgid "no non-missing arguments passed to 'max()' function; returning -Inf"
 msgstr "'path' skal være en tegnvektor"
 
-#: src/main/summary.c:913
+#: src/main/summary.c:916
 #, fuzzy
 msgid "argument passed to 'which()' function is not logical"
 msgstr "argument skal være et miljø"
 
-#: src/main/summary.c:957
+#: src/main/summary.c:960
 msgid "no arguments"
 msgstr "ingen argumenter"
 
-#: src/main/summary.c:968 src/main/summary.c:985
+#: src/main/summary.c:971 src/main/summary.c:988
 msgid "invalid input type"
 msgstr ""
 
-#: src/main/summary.c:1002
+#: src/main/summary.c:1005
 msgid "an argument will be fractionally recycled"
 msgstr ""
 
@@ -8450,32 +8466,32 @@ msgstr "'default' skal være en tegnstreng"
 msgid "'breaks' argument is not sorted"
 msgstr "version %d er ikke understøttet"
 
-#: src/main/util.c:2208 src/main/util.c:2259
+#: src/main/util.c:2208 src/main/util.c:2271
 #, fuzzy, c-format
 msgid "long vector '%s' is not supported"
 msgstr "version %d er ikke understøttet"
 
-#: src/main/util.c:2228 src/main/util.c:2256
+#: src/main/util.c:2228 src/main/util.c:2268
 #, fuzzy
 msgid "invalid input"
 msgstr "ugyldige enheder"
 
-#: src/main/util.c:2313
+#: src/main/util.c:2325
 #, fuzzy, c-format
 msgid "'%s' argument must be 0, 1, or 2"
 msgstr "'path' skal være en tegnvektor"
 
-#: src/main/util.c:2445
+#: src/main/util.c:2457
 #, fuzzy
 msgid "width cannot be zero"
 msgstr ".C(..): Bredde kan ikke være nul"
 
-#: src/main/util.c:2460
+#: src/main/util.c:2472
 #, fuzzy
 msgid "'type' argument must be \"integer\" for \"d\"-format"
 msgstr ".C(..): 'type' skal være »heltal« for »d«-format"
 
-#: src/main/util.c:2541
+#: src/main/util.c:2553
 #, fuzzy
 msgid "'type' argument must be \"real\" for this format"
 msgstr ".C(..): 'type' skal være »reel« for dette format"
@@ -9752,43 +9768,43 @@ msgid "Rscript is not supported on this system"
 msgstr ""
 "symbolske henvisninger er ikke understøttet på denne version af Windows"
 
-#: src/unix/sys-std.c:136
+#: src/unix/sys-std.c:129
 msgid "interrupt handler must not return"
 msgstr ""
 
-#: src/unix/sys-std.c:568
+#: src/unix/sys-std.c:561
 msgid ""
 "An unusual circumstance has arisen in the nesting of readline input. Please "
 "report using bug.report()"
 msgstr ""
 
-#: src/unix/sys-std.c:1148
+#: src/unix/sys-std.c:1141
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1181 src/unix/sys-std.c:1347
+#: src/unix/sys-std.c:1174 src/unix/sys-std.c:1340
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr ""
 
-#: src/unix/sys-std.c:1283
+#: src/unix/sys-std.c:1276
 #, fuzzy
 msgid "Enter file name: "
 msgstr "ikke et korrekt filnavn"
 
-#: src/unix/sys-std.c:1324 src/unix/sys-std.c:1326
+#: src/unix/sys-std.c:1317 src/unix/sys-std.c:1319
 msgid "no history mechanism available"
 msgstr ""
 
-#: src/unix/sys-std.c:1353
+#: src/unix/sys-std.c:1346
 msgid "problem in truncating the history file"
 msgstr ""
 
-#: src/unix/sys-std.c:1355 src/unix/sys-std.c:1357
+#: src/unix/sys-std.c:1348 src/unix/sys-std.c:1350
 msgid "no history available to save"
 msgstr ""
 
-#: src/unix/sys-std.c:1369
+#: src/unix/sys-std.c:1362
 msgid "invalid timestamp"
 msgstr "ugyldigt tidsstempel"
 

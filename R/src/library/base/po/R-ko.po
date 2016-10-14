@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -365,6 +365,12 @@ msgstr "두번째 인수는 반드시 list 이어야 합니다 "
 #, fuzzy
 msgid "'%s' argument must be a square matrix"
 msgstr "'x'는 정방행렬이어야 합니다 "
+
+#. R/format.R: gettextf("'%s' argument must be a string, i.e., of length 1", "flag")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' argument must be a string, i.e., of length 1"
+msgstr "'file' 은 반드시 문자열 또는 연결이어야 합니다. "
 
 #. R/rle.R: gettextf("'%s' argument must be a vector of an atomic type", "x")
 #: R/rle.R:0
@@ -783,6 +789,11 @@ msgstr "인코딩 \"%s\" 가 선택되었습니다 "
 msgid "'envir' chosen:"
 msgstr ""
 
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr ""
+
 #. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s",     sQuote(package))
 #: R/namespace.R:0
 #, fuzzy
@@ -792,6 +803,12 @@ msgid ""
 msgstr ""
 "exportClassPattern specified in NAMESPACE but no matching classes in package "
 "%s"
+
+#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
+#: R/source.R:0
+#, fuzzy
+msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
+msgstr "'nu' 는 0, nrow(x), ncol(x) 중 하나 이어야 합니다"
 
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
@@ -808,10 +825,10 @@ msgstr "'file' 은 반드시 NULL, 연결, 혹은 문자열 이어야 합니다 
 msgid "'file' must be a character string or connection"
 msgstr "'file' 은 반드시 문자열 또는 연결이어야 합니다. "
 
-#. R/format.R: stop("'flag' argument can contain only '0+- #'")
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
 #: R/format.R:0
 #, fuzzy
-msgid "'flag' argument can contain only '0+- #'"
+msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' 는 '0+- #' 만을 포함할 수 있습니다 "
 
 #. R/format.R: stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
@@ -1153,6 +1170,21 @@ msgstr "<0 rows> (or 0-length row.names)"
 msgid "<restart: %s>"
 msgstr "Timestamp of '"
 
+#. R/connections.R: gettext("A connection with:", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection with:"
+msgstr ""
+
+#. R/connections.R: gettext("A connection, but invalid.", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, but invalid."
+msgstr ""
+
+#. R/connections.R: gettextf("A connection, specifically, %s, but invalid.", paste(sQuote(cl), collapse = ", "),     domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, specifically, %s, but invalid."
+msgstr ""
+
 #. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
 #: R/library.R:0
 #, fuzzy
@@ -1413,8 +1445,8 @@ msgstr ""
 msgid "Levels:"
 msgstr ""
 
-#. R/library.R: gettextf("License for %s", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg), domain = "R-base")
+#: R/namespace.R:0
 #, fuzzy
 msgid "License for %s"
 msgstr "License"
@@ -1801,11 +1833,6 @@ msgstr "[이전에 저장한 워크스페이스를 불러옵니다]"
 msgid "[TRUNCATED]"
 msgstr ""
 
-#. R/library.R: gettext("accept")
-#: R/library.R:0
-msgid "accept"
-msgstr ""
-
 #. R/message.R: gettextf("additional arguments ignored in '%s' function", "message()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "stop()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "warning()", domain = "R-base")
@@ -2078,11 +2105,6 @@ msgstr "cost components must be non-negative"
 msgid ""
 "cyclic namespace dependency detected when loading package %s, already "
 "loading %s"
-msgstr ""
-
-#. R/library.R: gettext("decline")
-#: R/library.R:0
-msgid "decline"
 msgstr ""
 
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
@@ -2551,8 +2573,8 @@ msgstr ""
 msgid "level sets of factors are different"
 msgstr "요인들에 대한 수준들의 개수가 다릅니다 "
 
-#. R/library.R: gettextf("license for package %s was not accepted", sQuote(package))
-#: R/library.R:0
+#. R/namespace.R: gettextf("license for package %s was not accepted", sQuote(package))
+#: R/namespace.R:0
 #, fuzzy
 msgid "license for package %s was not accepted"
 msgstr "License for package %s not accepted"
@@ -2996,27 +3018,28 @@ msgstr "패키지 %s 는 네임스페이스를 가지고 있지 않습니다 "
 msgid "package %s does not have a namespace and should be re-installed"
 msgstr "패키지 '%s' 는 네임스페이스가 없으므로 재설치되어야합니다 "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept after viewing"
 msgstr ""
 "패키지 %s 는 당신이 먼저 확인 후에 수락을 해야할 라이센스를 가지고 있습니다 "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
 msgid ""
 "package %s has a license that you need to accept in an interactive session"
 msgstr ""
 "패키지 %s 는 당신이 인터랙티브 세션에서 수락을 해야할 라이센스를 가지고 있습"
 "니다 "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#: R/namespace.R:0
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is %s"
+"according to the DESCRIPTION file it is\n"
+"%s"
 msgstr ""
 "패키지 %s 는 당신이 수락해야할 라이센스가 있습니다 \n"
 " DESCRIPTION 파일을 참고하세요. "
@@ -3099,14 +3122,21 @@ msgstr ""
 "여러개의 패키지 %s 가 검색되었습니다.\n"
 "%s 에 검색된 것을 사용합니다"
 
+#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
+#: R/library.R:0
+msgid ""
+"package %s was installed by an R version with different internals; it needs "
+"to be reinstalled for use with this R version"
+msgstr ""
+
 #. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package or namespace load failed for package %s"
 msgstr "'%s' 에 대한 패키지/네임스페이스 로드가 실패했습니다 "
 
-#. R/library.R: gettext("press RETURN to view license")
-#: R/library.R:0
+#. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
+#: R/namespace.R:0
 msgid "press RETURN to view license"
 msgstr ""
 
@@ -3221,6 +3251,11 @@ msgstr "singular matrix 'a' in 'solve'"
 #, fuzzy
 msgid "some row.names duplicated: %s --> row.names NOT used"
 msgstr "일부 row.names 가 중복되었습니다 "
+
+#. R/source.R: stop("specify either 'file' or 'exprs' argument but not both")
+#: R/source.R:0
+msgid "specify either 'file' or 'exprs' argument but not both"
+msgstr ""
 
 #. R/time.R: gettext("system")
 #: R/time.R:0
@@ -3437,7 +3472,7 @@ msgid "'by' argument must specify a uniquely valid column"
 msgid_plural "'by' argument must specify uniquely valid columns"
 msgstr[0] "'by' 에 올바른 열이 지정되어야 합니다 "
 
-#. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
+#. R/source.R: ngettext(length(exprs), "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 #: R/source.R:0
 msgid "--> parsed %d expression; now evaluating them:"
 msgid_plural "--> parsed %d expressions; now evaluating them:"
@@ -3773,10 +3808,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 #, fuzzy
 #~ msgid "there are no packages called %s"
 #~ msgstr "%s 라는 이름의 패키지는 없습니다"
-
-#, fuzzy
-#~ msgid "'%s' argument must be equal to 0, 'nrow(x)' or 'ncol(x)'"
-#~ msgstr "'nu' 는 0, nrow(x), ncol(x) 중 하나 이어야 합니다"
 
 #, fuzzy
 #~ msgid "In function %s"

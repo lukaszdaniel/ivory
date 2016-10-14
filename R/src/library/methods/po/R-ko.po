@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -43,6 +43,16 @@ msgid ""
 msgstr ""
 "%f는 유효한 제네릭 함수가 아닙니다: 메소드 리스트가 클래스 %s의 객체이기 때문"
 "입니다"
+
+#. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid ""
+"%s arguments (%s) after %s in the generic must appear in the method, in the "
+"same place at the end of the argument list"
+msgstr ""
+"제네릭 함수내에 '...' 다음에 오는 인자들 (%s)은 반드시 메소드내에, 인자의 목"
+"록 끝부분에 같은 순서를 가져야 합니다"
 
 #. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
 #: R/Methods.R:0
@@ -767,7 +777,7 @@ msgstr ""
 msgid "For package %s"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 #: R/RClassUtils.R:0
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
@@ -1414,15 +1424,6 @@ msgstr ""
 #: R/MethodsList.R:0
 msgid "arguments 'names' and 'signature' must have the same length"
 msgstr "인자 'names'와 'signature'는 같은 길이를 가져야 합니다"
-
-#. R/RMethodUtils.R: gettext("arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list",     domain = "R-methods")
-#: R/RMethodUtils.R:0
-msgid ""
-"arguments (%s) after '...' in the generic must appear in the method, in the "
-"same place at the end of the argument list"
-msgstr ""
-"제네릭 함수내에 '...' 다음에 오는 인자들 (%s)은 반드시 메소드내에, 인자의 목"
-"록 끝부분에 같은 순서를 가져야 합니다"
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0

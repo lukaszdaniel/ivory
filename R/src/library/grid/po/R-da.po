@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2016-01-09 19:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -696,6 +696,11 @@ msgstr "Ugyldig »at«-placering i »axis«"
 #. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #: R/grob.R:0
 msgid "it is only valid to add a child to a \"gTree\""
+msgstr ""
+
+#. R/gpar.R: gettextf("mixture of missing and non-missing values for %s", gparname)
+#: R/gpar.R:0
+msgid "mixture of missing and non-missing values for %s"
 msgstr ""
 
 #. R/primitives.R: stop("must have exactly 4 control points")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R /3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2016-01-09 18:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -40,15 +40,14 @@ msgstr "'%s' er ikke et gyldigt kompilertilvalg"
 msgid "'env' must be a top level environment"
 msgstr "'env' skal være et miljø på topniveau"
 
-#. R/cmp.R: stop("'ns' argument must be a namespace or a namespace imports environment")
-#: R/cmp.R:0
-#, fuzzy
-msgid "'ns' argument must be a namespace or a namespace imports environment"
-msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
-
 #. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
 msgid "'switch()' function with no alternatives"
+msgstr ""
+
+#. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "Error: compilation failed:"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -56,13 +55,13 @@ msgstr ""
 msgid "Note:"
 msgstr ""
 
-#. R/cmp.R: stop("bad assignment 1")
+#. R/cmp.R: gettext("bad assignment 1")
 #: R/cmp.R:0
 #, fuzzy
 msgid "bad assignment 1"
 msgstr "ugyldig tildeling 1"
 
-#. R/cmp.R: stop("bad assignment 2")
+#. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
 msgid "bad assignment 2"
 msgstr "ugyldig tildeling 2"
@@ -256,12 +255,16 @@ msgstr "ikke et korrekt evuleringsmiljø"
 msgid "wrong number of arguments to '%s'"
 msgstr "forkert antal argumenter for '%s'"
 
-#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ",     domain = "R-compiler")
+#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
 #: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "lokal tildeling til syntaksfunktion: "
 msgstr[1] "lokale tildelinger til syntaksfunktioner: "
+
+#, fuzzy
+#~ msgid "'ns' argument must be a namespace or a namespace imports environment"
+#~ msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
 #~ msgid "expected a single logical value for the S4 state flag"
 #~ msgstr "forventede en enkel logisk værdi for S4-tilstandsflaget"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:55+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -310,7 +310,7 @@ msgstr "valeur de fonction incorrecte dans 'zeroin'"
 msgid "'%s' argument must be of length one"
 msgstr "'m' doit être une liste"
 
-#: ksmooth.c:63
+#: ksmooth.c:64
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "seulement 2500 lignes autorisées pour sm.method=\"spline\""
 
@@ -1151,7 +1151,7 @@ msgstr "second argument 'size' incorrect"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:354
+#: sbart.c:357
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

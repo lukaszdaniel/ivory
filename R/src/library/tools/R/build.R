@@ -323,9 +323,9 @@ get_exclude_patterns <- function()
                     if (!all(copied)) {
                     	warning(sprintf(ngettext(sum(!copied), 
 			"%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",
-			"%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."),
+			"%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.", domain = "R-tools"),
 			 sQuote("inst/doc"), strwrap(paste(sQuote(basename(tocopy[!copied])), collapse=", "), indent = 4, exdent = 2)),
-			     call. = FALSE)
+			     call. = FALSE, domain = NA)
 			file.copy(tocopy[!copied], doc_dir, overwrite = TRUE, copy.date = TRUE)
 		    }
                     unlink(c(vigns$outputs, unlist(vigns$sources)))

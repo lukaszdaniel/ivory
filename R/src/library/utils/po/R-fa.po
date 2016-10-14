@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1282,6 +1282,11 @@ msgid ""
 "variables list may be made."
 msgstr ""
 
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -2456,11 +2461,6 @@ msgstr ""
 #. R/readtable.R: warning("not all columns named in 'colClasses' exist")
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
-msgstr ""
-
-#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
-#: R/strcapture.R:0
-msgid "number of matches does not always match ncol(proto)"
 msgstr ""
 
 #. R/str.R: gettext("numeric", domain = "R-utils")

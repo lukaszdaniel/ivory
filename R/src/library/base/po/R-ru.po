@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -368,6 +368,12 @@ msgstr "второй аргумент должен быть списком"
 #, fuzzy
 msgid "'%s' argument must be a square matrix"
 msgstr "'x' должен быть квадратной матрицей"
+
+#. R/format.R: gettextf("'%s' argument must be a string, i.e., of length 1", "flag")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' argument must be a string, i.e., of length 1"
+msgstr "'file' должен быть текстовой строкой или соединением"
 
 #. R/rle.R: gettextf("'%s' argument must be a vector of an atomic type", "x")
 #: R/rle.R:0
@@ -786,6 +792,11 @@ msgstr "выбрана кодировка = \"%s\""
 msgid "'envir' chosen:"
 msgstr ""
 
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr ""
+
 #. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s",     sQuote(package))
 #: R/namespace.R:0
 #, fuzzy
@@ -795,6 +806,12 @@ msgid ""
 msgstr ""
 "в NAMESPACE указан 'exportClassPattern', но отсутствуют соответствующие "
 "классы в %s"
+
+#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
+#: R/source.R:0
+#, fuzzy
+msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
+msgstr "'nu' должен быть 0, nrow(x) или ncol(x)"
 
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
@@ -811,10 +828,10 @@ msgstr "'file' должен быть NULL, соединением или тек�
 msgid "'file' must be a character string or connection"
 msgstr "'file' должен быть текстовой строкой или соединением"
 
-#. R/format.R: stop("'flag' argument can contain only '0+- #'")
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
 #: R/format.R:0
 #, fuzzy
-msgid "'flag' argument can contain only '0+- #'"
+msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' может содержать лишь '0+- #'"
 
 #. R/format.R: stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
@@ -1155,6 +1172,21 @@ msgstr "<0 строк> (или 'row.names' нулевой длины)"
 msgid "<restart: %s>"
 msgstr "ВременнАя маска '"
 
+#. R/connections.R: gettext("A connection with:", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection with:"
+msgstr ""
+
+#. R/connections.R: gettext("A connection, but invalid.", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, but invalid."
+msgstr ""
+
+#. R/connections.R: gettextf("A connection, specifically, %s, but invalid.", paste(sQuote(cl), collapse = ", "),     domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, specifically, %s, but invalid."
+msgstr ""
+
 #. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
 #: R/library.R:0
 #, fuzzy
@@ -1414,8 +1446,8 @@ msgstr ""
 msgid "Levels:"
 msgstr ""
 
-#. R/library.R: gettextf("License for %s", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg), domain = "R-base")
+#: R/namespace.R:0
 #, fuzzy
 msgid "License for %s"
 msgstr "Лицензия"
@@ -1802,11 +1834,6 @@ msgstr "[Загружено ранее сохраненное рабочее п�
 msgid "[TRUNCATED]"
 msgstr ""
 
-#. R/library.R: gettext("accept")
-#: R/library.R:0
-msgid "accept"
-msgstr ""
-
 #. R/message.R: gettextf("additional arguments ignored in '%s' function", "message()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "stop()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "warning()", domain = "R-base")
@@ -2080,11 +2107,6 @@ msgstr "компоненты платы должны быть неотрицат
 msgid ""
 "cyclic namespace dependency detected when loading package %s, already "
 "loading %s"
-msgstr ""
-
-#. R/library.R: gettext("decline")
-#: R/library.R:0
-msgid "decline"
 msgstr ""
 
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
@@ -2546,8 +2568,8 @@ msgstr ""
 msgid "level sets of factors are different"
 msgstr "установки уровней для факторов различны"
 
-#. R/library.R: gettextf("license for package %s was not accepted", sQuote(package))
-#: R/library.R:0
+#. R/namespace.R: gettextf("license for package %s was not accepted", sQuote(package))
+#: R/namespace.R:0
 #, fuzzy
 msgid "license for package %s was not accepted"
 msgstr "Лицензия для пакета %s не принята"
@@ -2995,25 +3017,26 @@ msgid "package %s does not have a namespace and should be re-installed"
 msgstr ""
 "пакет '%s' не имеет пространства имен и должен быть инсталлирован заново"
 
-#. R/library.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept after viewing"
 msgstr "Пакет %s имеет лицензию, которую Вам нужно принять после просмотра"
 
-#. R/library.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
 msgid ""
 "package %s has a license that you need to accept in an interactive session"
 msgstr ""
 "у пакета %s есть лицензия, которую Вам нужно принять в инерактивной сессии"
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#: R/namespace.R:0
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is %s"
+"according to the DESCRIPTION file it is\n"
+"%s"
 msgstr ""
 "Пакет %s имеет лицензию, которую надо принять::\n"
 "в соответствии с файлом DESCRIPTION это"
@@ -3095,14 +3118,21 @@ msgstr ""
 "пакет %s найден больше одного раза,\n"
 "использую тот, который найден в %s"
 
+#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
+#: R/library.R:0
+msgid ""
+"package %s was installed by an R version with different internals; it needs "
+"to be reinstalled for use with this R version"
+msgstr ""
+
 #. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package or namespace load failed for package %s"
 msgstr "не удалась загрузка пакета/пространства имен для %s"
 
-#. R/library.R: gettext("press RETURN to view license")
-#: R/library.R:0
+#. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
+#: R/namespace.R:0
 msgid "press RETURN to view license"
 msgstr ""
 
@@ -3217,6 +3247,11 @@ msgstr "сингулярная матрица 'a' в 'solve'"
 #, fuzzy
 msgid "some row.names duplicated: %s --> row.names NOT used"
 msgstr "некоторые имена строк одинаковы:"
+
+#. R/source.R: stop("specify either 'file' or 'exprs' argument but not both")
+#: R/source.R:0
+msgid "specify either 'file' or 'exprs' argument but not both"
+msgstr ""
 
 #. R/time.R: gettext("system")
 #: R/time.R:0
@@ -3445,7 +3480,7 @@ msgstr[0] "'by' должен определять правильные коло�
 msgstr[1] "'by' должен определять правильные колонк(и)"
 msgstr[2] "'by' должен определять правильные колонк(и)"
 
-#. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
+#. R/source.R: ngettext(length(exprs), "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 #: R/source.R:0
 msgid "--> parsed %d expression; now evaluating them:"
 msgid_plural "--> parsed %d expressions; now evaluating them:"
@@ -3840,10 +3875,6 @@ msgstr[2] "T использовано вместо TRUE"
 #, fuzzy
 #~ msgid "there are no packages called %s"
 #~ msgstr "нет пакета под названием %s"
-
-#, fuzzy
-#~ msgid "'%s' argument must be equal to 0, 'nrow(x)' or 'ncol(x)'"
-#~ msgstr "'nu' должен быть 0, nrow(x) или ncol(x)"
 
 #, fuzzy
 #~ msgid "In function %s"

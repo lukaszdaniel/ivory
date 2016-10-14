@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2011-04-02 18:32+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -43,17 +43,14 @@ msgstr "'%s' n'est pas une option de compilation reconnue"
 msgid "'env' must be a top level environment"
 msgstr "'env' doit être un environnement de premier niveau"
 
-#. R/cmp.R: stop("'ns' argument must be a namespace or a namespace imports environment")
-#: R/cmp.R:0
-#, fuzzy
-msgid "'ns' argument must be a namespace or a namespace imports environment"
-msgstr ""
-"'ns' doit être être un espace de noms (namespace) ou un environnement "
-"d'importation d'espace de noms"
-
 #. R/cmp.R: gettext("'switch()' function with no alternatives")
 #: R/cmp.R:0
 msgid "'switch()' function with no alternatives"
+msgstr ""
+
+#. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "Error: compilation failed:"
 msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
@@ -61,13 +58,13 @@ msgstr ""
 msgid "Note:"
 msgstr ""
 
-#. R/cmp.R: stop("bad assignment 1")
+#. R/cmp.R: gettext("bad assignment 1")
 #: R/cmp.R:0
 #, fuzzy
 msgid "bad assignment 1"
 msgstr "mauvaise affectation 1"
 
-#. R/cmp.R: stop("bad assignment 2")
+#. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
 msgid "bad assignment 2"
 msgstr "mauvaise affectation 1"
@@ -267,12 +264,18 @@ msgstr "ceci n'est pas un environnement adéquat pour l'évaluation"
 msgid "wrong number of arguments to '%s'"
 msgstr "nombre incorrect d'arguments pour '%s'"
 
-#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ",     domain = "R-compiler")
+#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
 #: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "affectation locale vers une fonction syntaxique :"
 msgstr[1] "affectations locales vers des fonctions syntaxiques :"
+
+#, fuzzy
+#~ msgid "'ns' argument must be a namespace or a namespace imports environment"
+#~ msgstr ""
+#~ "'ns' doit être être un espace de noms (namespace) ou un environnement "
+#~ "d'importation d'espace de noms"
 
 #~ msgid "expected a single logical value for the S4 state flag"
 #~ msgstr ""

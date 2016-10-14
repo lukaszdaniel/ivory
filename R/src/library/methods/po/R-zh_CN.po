@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -41,6 +41,15 @@ msgstr "%d: 目标\"%s\": 选择\"%s\" (其它：%s)"
 msgid ""
 "%f is not a valid generic function: methods list was an object of class %s"
 msgstr "%f不是正确的泛型函数: 方法串列是类别为%s的对象"
+
+#. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid ""
+"%s arguments (%s) after %s in the generic must appear in the method, in the "
+"same place at the end of the argument list"
+msgstr ""
+"泛型方法里在'...'之后的参数(%s)必需也存在于方法里，在参数串列同一个最后的地方"
 
 #. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
 #: R/Methods.R:0
@@ -767,7 +776,7 @@ msgstr "%s函数，\"%s\"标记：方法定义中的参数从(%s)改变成(%s)"
 msgid "For package %s"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 #: R/RClassUtils.R:0
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
@@ -1408,14 +1417,6 @@ msgstr ""
 #: R/MethodsList.R:0
 msgid "arguments 'names' and 'signature' must have the same length"
 msgstr "'names'和'signature'这两个参数的长度必需相同"
-
-#. R/RMethodUtils.R: gettext("arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list",     domain = "R-methods")
-#: R/RMethodUtils.R:0
-msgid ""
-"arguments (%s) after '...' in the generic must appear in the method, in the "
-"same place at the end of the argument list"
-msgstr ""
-"泛型方法里在'...'之后的参数(%s)必需也存在于方法里，在参数串列同一个最后的地方"
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0

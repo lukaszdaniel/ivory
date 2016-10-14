@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-10-14 11:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -203,9 +203,16 @@ msgstr ""
 "użycie '--no-vignettes' zostało zlikwidowane: użyj '--no-build-vignettes' w "
 "zamian"
 
-#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#. R/build.R: gettextf("'.build_packages()' exit status %s", status, domain = "R-tools")
 #: R/build.R:0
-msgid "'.build_package()' exit status %d"
+#, fuzzy
+msgid "'.build_packages()' exit status %s"
+msgstr "Status wyjścia %d dla funkcji '.build_package()'"
+
+#. R/check.R: gettextf("'.check_packages()' exit status %s", status, domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "'.check_packages()' exit status %s"
 msgstr "Status wyjścia %d dla funkcji '.build_package()'"
 
 #. R/install.R: stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
@@ -1199,11 +1206,6 @@ msgstr "BŁĄD: nie można zebrać i zparsować plików R dla pakietu %s"
 msgid "ERROR: unable to create installation directory %s"
 msgstr "BŁĄD: nie udało się utworzyć katalogu instalacyjnego %s"
 
-#. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
-#: R/check.R:0
-msgid "EXISTS but not correct format"
-msgstr "ISTNIEJE ale nie posiada poprawnego formatu"
-
 #. R/Rprof.R: gettextf("Each sample represents %s seconds.", format(res$sample.interval), domain = "R-tools")
 #: R/Rprof.R:0
 msgid "Each sample represents %s seconds."
@@ -1382,12 +1384,25 @@ msgstr "Plik %s:"
 msgid "File 'DESCRIPTION' is missing."
 msgstr "Brakuje pliku 'DESCRIPTION'."
 
+#. R/check.R: gettext("File DESCRIPTION does not exist", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "File DESCRIPTION does not exist"
+msgstr "plik %s nie istnieje"
+
 #. R/check.R: gettext("File DESCRIPTION does not exist but there is a case-insensitive match.",     domain = "R-tools")
 #: R/check.R:0
 msgid "File DESCRIPTION does not exist but there is a case-insensitive match."
 msgstr ""
 "Plik 'DESCRIPTION' nie istnieje, ale istnieje plik o tej samej nazwie, ale "
 "różnej wielkości liter."
+
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "File DESCRIPTION exists but is not in correct format"
+msgstr "plik ISTNIEJE ale nie posiada poprawnego formatu"
 
 #. R/check.R: gettext("File NAMESPACE does not exist but there is a case-insensitive match.", domain = "R-tools")
 #: R/check.R:0
@@ -1421,6 +1436,21 @@ msgid ""
 msgstr ""
 "Plik 'README.md' oraz 'NEWS.md' nie mogą być sprawdzone bez zainstalowanego "
 "pakietu 'pandoc'."
+
+#. R/check.R: gettext("Files in the 'vignettes' directory but no files in 'inst/doc':", domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory but no files in 'inst/doc':"
+msgstr ""
+
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':",     domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
+msgstr ""
+
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+#: R/check.R:0
+msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
 #: R/Vignettes.R:0
@@ -2100,8 +2130,7 @@ msgstr "NB: ten pakiet jest teraz zależny od R (>= %s)"
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
-#. R/check.R: gettext("NO", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/build.R:0
 msgid "NO"
 msgstr "NIE"
 
@@ -2602,6 +2631,11 @@ msgstr ""
 #: R/QC.R:0
 msgid "Package has no 'Version' field"
 msgstr "Pakiet nie posiada pola 'Version'"
+
+#. R/check.R: gettext("Package has no Sweave vignette sources and no VignetteBuilder field.\n")
+#: R/check.R:0
+msgid "Package has no Sweave vignette sources and no VignetteBuilder field."
+msgstr ""
 
 #. R/QC.R: gettext("Package installs .java files.", domain = "R-tools")
 #: R/QC.R:0
@@ -4944,8 +4978,7 @@ msgid "file %s: non-ASCII input and no declared encoding"
 msgstr "plik %s: wejście nie-ASCII, a brak zadeklarowanego kodowania"
 
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
-#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/build.R:0
 msgid "file EXISTS but is not of correct format"
 msgstr "plik ISTNIEJE ale nie posiada poprawnego formatu"
 
@@ -5038,8 +5071,9 @@ msgstr "instalowanie *binarnego* pakietu %s ..."
 msgid "installing *source* package %s ..."
 msgstr "instalowanie *źródłowego* pakietu %s ..."
 
+#. R/build.R: gettextf("installing dependencies %s", paste(sQuote(sort(depends)), collapse = ", "),     domain = "R-tools")
 #. R/checktools.R: gettext("installing dependencies %s", domain = "R-tools")
-#: R/checktools.R:0
+#: R/build.R:0 R/checktools.R:0
 msgid "installing dependencies %s"
 msgstr "instalowanie zależności %s"
 
@@ -5405,6 +5439,7 @@ msgstr "przygotowywanie pakietu do leniwego ładowania"
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", u)
 #: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr "przetwarzanie %s"
@@ -6062,6 +6097,22 @@ msgid_plural "%d of the package tests failed"
 msgstr[0] "%d z testów pakietu nie powiódł się"
 msgstr[1] "%d z testów pakietu nie powiódły się"
 msgstr[2] "%d z testów pakietu nie powiódło się"
+
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+#: R/build.R:0
+msgid ""
+"%s file\n"
+"%s\n"
+"  was ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgid_plural ""
+"%s files\n"
+"%s\n"
+"  were ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. R/QC.R: ngettext(length(xx), "'::' or ':::' import not declared from: %s", "'::' or ':::' imports not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0
@@ -7178,6 +7229,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "EXISTS but not correct format"
+#~ msgstr "ISTNIEJE ale nie posiada poprawnego formatu"
 
 #~ msgid "looks like a binary bundle"
 #~ msgstr "wygląda, że jest to binarna paczka"

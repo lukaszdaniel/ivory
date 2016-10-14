@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-07 16:19\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -289,9 +289,8 @@ msgstr "'bw'는 양수가 아닙니다"
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
-#. R/reshape.R: gettextf("'%s' argument is of the wrong length", "times")
 #: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/hclust.R:0 R/kernel.R:0
-#: R/nls-profile.R:0 R/reshape.R:0
+#: R/nls-profile.R:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
 msgstr "'scores' 인자의 길이가 잘못되었습니다"
@@ -415,7 +414,7 @@ msgstr "'termobj'은 반드시 클래스 %s인 객체이어야 합니다"
 #. R/approx.R: gettextf("'%s' argument must be at least %d", "n", 1)
 #. R/ar.R: gettextf("'%s' argument must be at least %d", "n.ahead", 1)
 #. R/contr.poly.R: gettextf("'%s' argument must be at least %d", "degree", 1)
-#. R/smspline.R: gettextf("'%s' argument must be at least %d", "nknots", 1)
+#. R/smspline.R: gettextf("'%s' argument must be at least %d", "knots", 1)
 #: R/acf.R:0 R/approx.R:0 R/ar.R:0 R/contr.poly.R:0 R/smspline.R:0
 #, fuzzy
 msgid "'%s' argument must be at least %d"
@@ -440,6 +439,12 @@ msgstr "'x'는 반드시  %s와 %s사이에 있어야 합니다"
 #, fuzzy
 msgid "'%s' argument must be in {1,..,%d}"
 msgstr "'id.n'는 반드시 {1,..,%d}내에 있어야 합니다"
+
+#. R/ts.R: gettextf("'%s' argument must be logical or character", "xy.labels", domain = "R-stats")
+#: R/ts.R:0
+#, fuzzy
+msgid "'%s' argument must be logical or character"
+msgstr "'xy.labels'는 반드시 논리값 또는 문자이어야 합니다"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -515,9 +520,11 @@ msgstr ""
 msgid "'%s', '%s' and '%s' arguments must have the same length"
 msgstr "'x', 'y', 그리고 'z'는 반드시 같은 길이를 가져야 합니다"
 
-#. R/smspline.R: message("'.nknots.smspl()' is now exported; use it instead of 'n.knots()'")
+#. R/smspline.R: message("'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' function")
 #: R/smspline.R:0
-msgid "'.nknots.smspl()' is now exported; use it instead of 'n.knots()'"
+msgid ""
+"'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' "
+"function"
 msgstr ""
 
 #. R/anova.R: stop("'P.values' argument is TRUE, but 'has.Pvalue' argument is not")
@@ -556,6 +563,14 @@ msgstr "'X'행렬은 collinear입니다"
 #: R/smspline.R:0
 #, fuzzy
 msgid "'all.knots' argument is TRUE; 'nknots' specification is disregarded"
+msgstr "'all.knots'가 TRUE이기 때문에 'nknots'지정은 사용되지 않습니다"
+
+#. R/smspline.R: warning("'all.knots' argument is vector of knots; 'nknots' specification is disregarded")
+#: R/smspline.R:0
+#, fuzzy
+msgid ""
+"'all.knots' argument is vector of knots; 'nknots' specification is "
+"disregarded"
 msgstr "'all.knots'가 TRUE이기 때문에 'nknots'지정은 사용되지 않습니다"
 
 #. R/HoltWinters.R: stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
@@ -772,6 +787,11 @@ msgstr "'k'는 반드시 홀수이어야 합니다!  'k'를 to %d로 변경합�
 msgid "'kernapply' is not available for object 'x'"
 msgstr "객체 'x'에 'kernapply'을 사용할 수 없습니다"
 
+#. R/reshape.R: stop("'lengths(varying)' must all match 'length(times)'")
+#: R/reshape.R:0
+msgid "'lengths(varying)' must all match 'length(times)'"
+msgstr ""
+
 #. R/logLik.R: gettextf("'log Lik.' %s (df=%s)", paste(format(c(x), digits = digits), collapse = ", "),     format(attr(x, "df")), domain = "R-stats")
 #: R/logLik.R:0
 msgid "'log Lik.' %s (df=%s)"
@@ -909,9 +929,10 @@ msgstr "'newdata'는 올바른 열의 수를 가지고 있지 않습니다"
 msgid "'newdata' must be a matrix or data frame"
 msgstr "'newdata'는 반드시 행렬 또는 데이터 프레임이어야 합니다"
 
-#. R/smspline.R: stop("'nknots' must be numeric (in {1,..,n})")
+#. R/smspline.R: stop("'nknots' argument must be numeric (in {1,..,n})")
 #: R/smspline.R:0
-msgid "'nknots' must be numeric (in {1,..,n})"
+#, fuzzy
+msgid "'nknots' argument must be numeric (in {1,..,n})"
 msgstr "'nknots'는 반드시 {1,..,n)내에 있는 수치형이어야 합니다"
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
@@ -1395,11 +1416,6 @@ msgstr "'xreg'와 'newxred'의 열의 길이가 서로 다릅니다"
 #, fuzzy
 msgid "'xreg' argument is collinear"
 msgstr "'xreg'는 공선형입니다"
-
-#. R/ts.R: stop("'xy.labels' must be logical or character")
-#: R/ts.R:0
-msgid "'xy.labels' must be logical or character"
-msgstr "'xy.labels'는 반드시 논리값 또는 문자이어야 합니다"
 
 #. R/qqnorm.R: stop("'y' argument is empty or has only NA values")
 #: R/qqnorm.R:0
@@ -2402,6 +2418,14 @@ msgstr "'%s' 내에 NA가 존재합니다"
 msgid "NA values in 'x'"
 msgstr "'x'내에 NA가 있습니다"
 
+#. R/distn.R: warning("NA values produced")
+#. R/distn.R: warning("NA values produced")
+#. R/distn.R: warning("NA values produced")
+#: R/distn.R:0
+#, fuzzy
+msgid "NA values produced"
+msgstr "NA를 사용할 수 없습니다"
+
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
 msgid "NAs in V(mu)"
@@ -2520,6 +2544,12 @@ msgstr "최대반복수는 반드시 0 보다 커야 합니다"
 #: R/hclust.R:0
 msgid "Number of objects:"
 msgstr ""
+
+#. R/smspline.R: stop("Numeric 'all.knots' argument must be strictly increasing")
+#: R/smspline.R:0
+#, fuzzy
+msgid "Numeric 'all.knots' argument must be strictly increasing"
+msgstr "'n'은 반드시 양수이어야 합니다"
 
 #. R/constrOptim.R: gettextf("Objective function decreased at outer iteration %d", i)
 #: R/constrOptim.R:0
@@ -2668,9 +2698,14 @@ msgstr ""
 msgid "Pearson's product-moment correlation"
 msgstr ""
 
-#. R/smspline.R: gettextf("Penalized Criterion: %s", format(x$pen.crit, digits = digits), domain = "R-stats")
+#. R/smspline.R: gettextf("Penalized Criterion (RSS): %s", format(x$pen.crit, digits = digits), domain = "R-stats")
 #: R/smspline.R:0
-msgid "Penalized Criterion: %s"
+msgid "Penalized Criterion (RSS): %s"
+msgstr ""
+
+#. R/smspline.R: gettextf("Penalized Criterion (weightedRSS): %s", format(x$pen.crit, digits = digits),     domain = "R-stats")
+#: R/smspline.R:0
+msgid "Penalized Criterion (weightedRSS): %s"
 msgstr ""
 
 #. R/ts-tests.R: gettext("Phillips-Perron Unit Root Test")
@@ -3358,6 +3393,12 @@ msgstr ""
 msgid "at least 2 points are needed to select a bandwidth automatically"
 msgstr ""
 "bandwidth를 자동으로 선택하기 위해서 적어도 2개의 포인트들이 필요합니다"
+
+#. R/smspline.R: stop("at least four unique 'x' values are needed")
+#: R/smspline.R:0
+#, fuzzy
+msgid "at least four unique 'x' values are needed"
+msgstr "적어도 네개의 고유한 'x'값들이 필요합니다"
 
 #. R/chisq.test.R: stop("at least one entry of 'x' must be positive")
 #: R/chisq.test.R:0
@@ -4200,8 +4241,9 @@ msgstr ""
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "r")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "c")
 #. R/smooth.R: gettextf("invalid '%s' argument", "endrule")
+#. R/smspline.R: gettextf("invalid '%s' argument", "keep.stuff")
 #: R/arima.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0 R/glm.R:0 R/loess.R:0
-#: R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0
+#: R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0 R/smspline.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 'use' 인자입니다"
@@ -4743,6 +4785,11 @@ msgstr ""
 msgid "must have same number of columns in 'x' and 'centers'"
 msgstr "'x'와 'centers'는 반드시 같은수의 열을 가져야 합니다"
 
+#. R/smspline.R: stop("must not specify both 'spar' and 'lambda' arguments")
+#: R/smspline.R:0
+msgid "must not specify both 'spar' and 'lambda' arguments"
+msgstr ""
+
 #. R/spectrum.R: stop("must specify 'spans' or a valid kernel")
 #: R/spectrum.R:0
 msgid "must specify 'spans' or a valid kernel"
@@ -4792,11 +4839,6 @@ msgid "need at least 2 periods to compute seasonal start values"
 msgstr ""
 "seasonal start value를 계산하기 위해서는 최소한 2개의 주기를 필요로 합니다"
 
-#. R/smspline.R: stop("need at least four unique 'x' values")
-#: R/smspline.R:0
-msgid "need at least four unique 'x' values"
-msgstr "적어도 네개의 고유한 'x'값들이 필요합니다"
-
 #. R/hclust.R: stop("need dendrograms where all leaves have labels")
 #: R/hclust.R:0
 msgid "need dendrograms where all leaves have labels"
@@ -4813,14 +4855,6 @@ msgstr ""
 #: R/median.R:0
 msgid "need numeric data"
 msgstr "수치형 데이터가 필요합니다"
-
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#: R/smspline.R:0
-#, fuzzy
-msgid "need result of 'smooth.spline(keep.data = TRUE)'"
-msgstr "smooth.spline(keep.data = TRUE)의 결과가 필요합니다"
 
 #. R/family.R: gettextf("negative values are not allowed for the '%s' family", "Poisson")
 #. R/family.R: gettextf("negative values are not allowed for the '%s' family", "quasiPoisson")
@@ -5240,6 +5274,12 @@ msgstr "weights의 개수 %1$d는 응답의 개수 %2$d와 같아야 합니다"
 msgid "number of weights must match number of observations"
 msgstr "가중치의 개수는 반드시 관측치의 개수와 일치해야 합니다"
 
+#. R/smspline.R: stop("numeric 'all.knots' argument must cover [0,1] (= the transformed data-range)")
+#: R/smspline.R:0
+msgid ""
+"numeric 'all.knots' argument must cover [0,1] (= the transformed data-range)"
+msgstr ""
+
 #. R/ksmooth.R: stop("numeric 'y' argument must be supplied.\nFor density estimation use 'density()'")
 #: R/ksmooth.R:0
 #, fuzzy
@@ -5527,6 +5567,14 @@ msgstr "잔차는  %2$s보다 작은 수의 rank %1$s를 가집니다"
 #: R/factanal.R:0 R/prcomp.R:0 R/princomp.R:0
 msgid "response not allowed in formula"
 msgstr "formula에서 허용되지 않은 response입니다"
+
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#: R/smspline.R:0
+#, fuzzy
+msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
+msgstr "smooth.spline(keep.data = TRUE)의 결과가 필요합니다"
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0

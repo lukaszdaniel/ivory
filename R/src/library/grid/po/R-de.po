@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -736,6 +736,11 @@ msgstr "Es ist nicht zulässig 'id' und 'id.lengths' anzugeben"
 #, fuzzy
 msgid "it is only valid to add a child to a \"gTree\""
 msgstr "es ist nur zulässig ein Kind zu einem 'gTree' hinzuzufügen"
+
+#. R/gpar.R: gettextf("mixture of missing and non-missing values for %s", gparname)
+#: R/gpar.R:0
+msgid "mixture of missing and non-missing values for %s"
+msgstr ""
 
 #. R/primitives.R: stop("must have exactly 4 control points")
 #: R/primitives.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -359,6 +359,12 @@ msgstr " 第二引数はリストでなければなりません "
 #, fuzzy
 msgid "'%s' argument must be a square matrix"
 msgstr " 'x' は正方行列でなければなりません "
+
+#. R/format.R: gettextf("'%s' argument must be a string, i.e., of length 1", "flag")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' argument must be a string, i.e., of length 1"
+msgstr " 'file' は文字列かコネクションでなければなりません "
 
 #. R/rle.R: gettextf("'%s' argument must be a vector of an atomic type", "x")
 #: R/rle.R:0
@@ -779,6 +785,11 @@ msgstr " エンコーディング %s が選択されました "
 msgid "'envir' chosen:"
 msgstr ""
 
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr ""
+
 #. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s",     sQuote(package))
 #: R/namespace.R:0
 #, fuzzy
@@ -788,6 +799,12 @@ msgid ""
 msgstr ""
 "NAMESPACEの中で exportClassPattern が指定されましたが、%s パッケージには該当"
 "するクラスがありません "
+
+#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
+#: R/source.R:0
+#, fuzzy
+msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
+msgstr " 'nu' は 0 , nrow(x) または ncol(x) でなければなりません "
 
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
@@ -804,10 +821,10 @@ msgstr " 'file' は NULL、コネクション、または文字列でなけれ�
 msgid "'file' must be a character string or connection"
 msgstr " 'file' は文字列かコネクションでなければなりません "
 
-#. R/format.R: stop("'flag' argument can contain only '0+- #'")
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
 #: R/format.R:0
 #, fuzzy
-msgid "'flag' argument can contain only '0+- #'"
+msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr " 'flag' は '0 + - #' だけを含むことができます "
 
 #. R/format.R: stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
@@ -1153,6 +1170,21 @@ msgstr " <0 行> (または長さ0のrow.names) "
 msgid "<restart: %s>"
 msgstr " タイムスタンプ ( ' "
 
+#. R/connections.R: gettext("A connection with:", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection with:"
+msgstr ""
+
+#. R/connections.R: gettext("A connection, but invalid.", domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, but invalid."
+msgstr ""
+
+#. R/connections.R: gettextf("A connection, specifically, %s, but invalid.", paste(sQuote(cl), collapse = ", "),     domain = "R-base")
+#: R/connections.R:0
+msgid "A connection, specifically, %s, but invalid."
+msgstr ""
+
 #. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
 #: R/library.R:0
 #, fuzzy
@@ -1412,8 +1444,8 @@ msgstr ""
 msgid "Levels:"
 msgstr ""
 
-#. R/library.R: gettextf("License for %s", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg), domain = "R-base")
+#: R/namespace.R:0
 #, fuzzy
 msgid "License for %s"
 msgstr " ライセンス "
@@ -1800,11 +1832,6 @@ msgstr " [以前にセーブされたワークスペースを復帰します] "
 msgid "[TRUNCATED]"
 msgstr ""
 
-#. R/library.R: gettext("accept")
-#: R/library.R:0
-msgid "accept"
-msgstr ""
-
 #. R/message.R: gettextf("additional arguments ignored in '%s' function", "message()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "stop()")
 #. R/stop.R: gettextf("additional arguments ignored in '%s' function", "warning()", domain = "R-base")
@@ -2078,11 +2105,6 @@ msgstr " コスト成分は非負でなければなりません "
 msgid ""
 "cyclic namespace dependency detected when loading package %s, already "
 "loading %s"
-msgstr ""
-
-#. R/library.R: gettext("decline")
-#: R/library.R:0
-msgid "decline"
 msgstr ""
 
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
@@ -2552,8 +2574,8 @@ msgstr ""
 msgid "level sets of factors are different"
 msgstr " 因子の水準セットが異なっています "
 
-#. R/library.R: gettextf("license for package %s was not accepted", sQuote(package))
-#: R/library.R:0
+#. R/namespace.R: gettextf("license for package %s was not accepted", sQuote(package))
+#: R/namespace.R:0
 #, fuzzy
 msgid "license for package %s was not accepted"
 msgstr " パッケージ '%s' のライセンスは受諾されていません "
@@ -3011,26 +3033,27 @@ msgstr ""
 " パッケージ '%s' は名前空間を持っていません。再インストールする必要がありま"
 "す。 "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept after viewing"
 msgstr " パッケージ '%s' を使うにはライセンスを確認して受諾する必要があります "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
 msgid ""
 "package %s has a license that you need to accept in an interactive session"
 msgstr ""
 " パッケージ '%s'を使うには対話的セッションでライセンスを受諾する必要がありま"
 "す "
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#: R/namespace.R:0
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is %s"
+"according to the DESCRIPTION file it is\n"
+"%s"
 msgstr ""
 " パッケージ '%s' を使うにはライセンスを受諾する必要があります。Description"
 "ファイルによれば、以下の通りです:  "
@@ -3119,14 +3142,21 @@ msgstr ""
 " パッケージ '%s' が複数見つかりました。 \n"
 " '%s' 中に見つかったものを使います "
 
+#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
+#: R/library.R:0
+msgid ""
+"package %s was installed by an R version with different internals; it needs "
+"to be reinstalled for use with this R version"
+msgstr ""
+
 #. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package or namespace load failed for package %s"
 msgstr " '%s' に対するパッケージもしくは名前空間のロードが失敗しました "
 
-#. R/library.R: gettext("press RETURN to view license")
-#: R/library.R:0
+#. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
+#: R/namespace.R:0
 msgid "press RETURN to view license"
 msgstr ""
 
@@ -3244,6 +3274,11 @@ msgstr " 'solve' 中に特異行列 'a' があります' "
 #, fuzzy
 msgid "some row.names duplicated: %s --> row.names NOT used"
 msgstr " row.names が重複しています： "
+
+#. R/source.R: stop("specify either 'file' or 'exprs' argument but not both")
+#: R/source.R:0
+msgid "specify either 'file' or 'exprs' argument but not both"
+msgstr ""
 
 #. R/time.R: gettext("system")
 #: R/time.R:0
@@ -3460,7 +3495,7 @@ msgid "'by' argument must specify a uniquely valid column"
 msgid_plural "'by' argument must specify uniquely valid columns"
 msgstr[0] " 'by' は有効な列を指定しなければなりません "
 
-#. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
+#. R/source.R: ngettext(length(exprs), "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 #: R/source.R:0
 msgid "--> parsed %d expression; now evaluating them:"
 msgid_plural "--> parsed %d expressions; now evaluating them:"
@@ -3797,10 +3832,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 #, fuzzy
 #~ msgid "there are no packages called %s"
 #~ msgstr " '%s' という名前のパッケージはありません "
-
-#, fuzzy
-#~ msgid "'%s' argument must be equal to 0, 'nrow(x)' or 'ncol(x)'"
-#~ msgstr " 'nu' は 0 , nrow(x) または ncol(x) でなければなりません "
 
 #, fuzzy
 #~ msgid "In function %s"

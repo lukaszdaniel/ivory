@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 13:55+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,7 +301,7 @@ msgstr ""
 msgid "'%s' argument must be of length one"
 msgstr ""
 
-#: ksmooth.c:63
+#: ksmooth.c:64
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr ""
 
@@ -1101,7 +1101,7 @@ msgstr ""
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:354
+#: sbart.c:357
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

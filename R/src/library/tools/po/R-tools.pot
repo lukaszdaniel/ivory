@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2016-10-14 11:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,9 +252,16 @@ msgstr ""
 
 
 #: R/build.R: 0
-#. R/build.R: gettextf("'.build_package()' exit status %d", status)
+#. R/build.R: gettextf("'.build_packages()' exit status %s", status, domain = "R-tools")
 
-msgid "'.build_package()' exit status %d"
+msgid "'.build_packages()' exit status %s"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("'.check_packages()' exit status %s", status, domain = "R-tools")
+
+msgid "'.check_packages()' exit status %s"
 msgstr ""
 
 
@@ -1469,13 +1476,6 @@ msgid "ERROR: unable to create installation directory %s"
 msgstr ""
 
 
-#: R/check.R: 0
-#. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
-
-msgid "EXISTS but not correct format"
-msgstr ""
-
-
 #: R/Rprof.R: 0
 #. R/Rprof.R: gettextf("Each sample represents %s seconds.", format(res$sample.interval), domain = "R-tools")
 
@@ -1708,9 +1708,24 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("File DESCRIPTION does not exist", domain = "R-tools")
+
+msgid "File DESCRIPTION does not exist"
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("File DESCRIPTION does not exist but there is a case-insensitive match.",     domain = "R-tools")
 
 msgid "File DESCRIPTION does not exist but there is a case-insensitive match."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+#. R/check.R: gettext("File DESCRIPTION exists but is not in correct format", domain = "R-tools")
+
+msgid "File DESCRIPTION exists but is not in correct format"
 msgstr ""
 
 
@@ -1739,6 +1754,27 @@ msgstr ""
 #. R/check.R: gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n",     domain = "R-tools")
 
 msgid "Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Files in the 'vignettes' directory but no files in 'inst/doc':", domain = "R-tools")
+
+msgid "Files in the 'vignettes' directory but no files in 'inst/doc':"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':",     domain = "R-tools")
+
+msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+
+msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
 msgstr ""
 
 
@@ -2507,11 +2543,9 @@ msgstr ""
 
 
 #: R/build.R: 0
-#: R/check.R: 0
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
 #. R/build.R: gettext("NO", domain = "R-tools")
-#. R/check.R: gettext("NO", domain = "R-tools")
 
 msgid "NO"
 msgstr ""
@@ -3193,6 +3227,13 @@ msgstr ""
 #. R/QC.R: stop("Package has no 'Version' field", call. = FALSE)
 
 msgid "Package has no 'Version' field"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Package has no Sweave vignette sources and no VignetteBuilder field.\n")
+
+msgid "Package has no Sweave vignette sources and no VignetteBuilder field."
 msgstr ""
 
 
@@ -6116,9 +6157,7 @@ msgstr ""
 
 
 #: R/build.R: 0
-#: R/check.R: 0
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
-#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 
 msgid "file EXISTS but is not of correct format"
 msgstr ""
@@ -6244,7 +6283,9 @@ msgid "installing *source* package %s ..."
 msgstr ""
 
 
+#: R/build.R: 0
 #: R/checktools.R: 0
+#. R/build.R: gettextf("installing dependencies %s", paste(sQuote(sort(depends)), collapse = ", "),     domain = "R-tools")
 #. R/checktools.R: gettext("installing dependencies %s", domain = "R-tools")
 
 msgid "installing dependencies %s"
@@ -6730,9 +6771,11 @@ msgstr ""
 #: R/pdftools.R: 0
 #: R/urltools.R: 0
 #: R/urltools.R: 0
+#: R/urltools.R: 0
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
+#. R/urltools.R: gettextf("processing %s", u)
 
 msgid "processing %s"
 msgstr ""
@@ -7599,6 +7642,15 @@ msgstr[1]    ""
 
 msgid        "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/build.R: 0
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+
+msgid        "%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgid_plural "%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0]    ""
 msgstr[1]    ""
 

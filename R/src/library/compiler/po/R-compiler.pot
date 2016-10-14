@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.4.0\n"
-"POT-Creation-Date: 2016-05-15 09:06\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,16 +47,16 @@ msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: stop("'ns' argument must be a namespace or a namespace imports environment")
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
 
-msgid "'ns' argument must be a namespace or a namespace imports environment"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: gettext("'switch()' function with no alternatives")
+#. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
 
-msgid "'switch()' function with no alternatives"
+msgid "Error: compilation failed:"
 msgstr ""
 
 
@@ -68,14 +68,14 @@ msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: stop("bad assignment 1")
+#. R/cmp.R: gettext("bad assignment 1")
 
 msgid "bad assignment 1"
 msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: stop("bad assignment 2")
+#. R/cmp.R: gettext("bad assignment 2")
 
 msgid "bad assignment 2"
 msgstr ""
@@ -329,7 +329,7 @@ msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ",     domain = "R-compiler")
+#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
 
 msgid        "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "

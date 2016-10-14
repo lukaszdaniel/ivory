@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.4.0\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,13 @@ msgstr ""
 #. R/MethodsList.R: gettextf("%f is not a valid generic function: methods list was an object of class %s",     sQuote(f), dQuote(class(mlist)))
 
 msgid "%f is not a valid generic function: methods list was an object of class %s"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
+
+msgid "%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list"
 msgstr ""
 
 
@@ -872,7 +879,7 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 
 msgid "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
@@ -1561,13 +1568,6 @@ msgstr ""
 #. R/MethodsList.R: stop("arguments 'names' and 'signature' must have the same length")
 
 msgid "arguments 'names' and 'signature' must have the same length"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettext("arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list",     domain = "R-methods")
-
-msgid "arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list"
 msgstr ""
 
 

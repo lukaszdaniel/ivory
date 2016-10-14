@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:44+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2011-10-18 22:15-0600\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -76,24 +76,24 @@ msgstr "ошибка распределения памяти"
 msgid "descriptors must be integers"
 msgstr ""
 
-#: fork.c:369
+#: fork.c:371
 msgid "only children can send data to the master process"
 msgstr "только дочерние процессы могут посылать данные мастер-процессу"
 
-#: fork.c:371
+#: fork.c:373
 msgid "there is no pipe to the master process"
 msgstr "нет трубы к мастер-процессу"
 
-#: fork.c:373
+#: fork.c:375
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "посылаемый контент должен быть RAW, используйте serialize(), если надо"
 
-#: fork.c:377
+#: fork.c:379
 #, c-format
 msgid "child %d: send_master (%d bytes)\n"
 msgstr ""
 
-#: fork.c:382 fork.c:389 fork.c:713
+#: fork.c:384 fork.c:392 fork.c:717
 msgid "write error, closing pipe to the master"
 msgstr "ошибка записи, закрываю трубу к мастеру"
 
@@ -139,45 +139,45 @@ msgstr ""
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.c:695
+#: fork.c:699
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill не удался"
 
-#: fork.c:703
+#: fork.c:707
 #, fuzzy, c-format
 msgid "child %d: 'mcexit' called\n"
 msgstr "mcexit не удался"
 
-#: fork.c:705
+#: fork.c:709
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit может быть использован только в дочернем процессе"
 
-#: fork.c:717
+#: fork.c:721
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.c:723
+#: fork.c:727
 #, fuzzy, c-format
 msgid "child %d: exiting\n"
 msgstr "дочерний процесс %d не существует"
 
-#: fork.c:726
+#: fork.c:730
 #, fuzzy
 msgid "'mcexit()' function failed"
 msgstr "mcexit не удался"
 
-#: fork.c:755 fork.c:764
+#: fork.c:759 fork.c:768
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:775
+#: fork.c:779
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:798
+#: fork.c:802
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

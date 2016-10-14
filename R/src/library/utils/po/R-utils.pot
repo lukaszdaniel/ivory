@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.4.0\n"
-"POT-Creation-Date: 2016-06-21 13:55\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1691,6 +1691,13 @@ msgid "The namespace for package \"%s\" is locked; no changes in the global vari
 msgstr ""
 
 
+#: R/strcapture.R: 0
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
+
 #: R/RSiteSearch.R: 0
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 
@@ -3284,13 +3291,6 @@ msgstr ""
 #. R/readtable.R: warning("not all columns named in 'colClasses' exist")
 
 msgid "not all columns named in 'colClasses' exist"
-msgstr ""
-
-
-#: R/strcapture.R: 0
-#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
-
-msgid "number of matches does not always match ncol(proto)"
 msgstr ""
 
 

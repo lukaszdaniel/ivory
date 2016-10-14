@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-06-21 13:54\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -40,6 +40,13 @@ msgid ""
 msgstr ""
 "'%f' não é uma função genérica válida: lista de métodos era um objeto de "
 "classe \"%s\""
+
+#. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
+#: R/RMethodUtils.R:0
+msgid ""
+"%s arguments (%s) after %s in the generic must appear in the method, in the "
+"same place at the end of the argument list"
+msgstr ""
 
 #. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
 #: R/Methods.R:0
@@ -776,7 +783,7 @@ msgstr ""
 msgid "For package %s"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 #: R/RClassUtils.R:0
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
@@ -1426,13 +1433,6 @@ msgstr ""
 #: R/MethodsList.R:0
 msgid "arguments 'names' and 'signature' must have the same length"
 msgstr "argumentos 'names' e 'signature' devem ter o mesmo comprimento"
-
-#. R/RMethodUtils.R: gettext("arguments (%s) after '...' in the generic must appear in the method, in the same place at the end of the argument list",     domain = "R-methods")
-#: R/RMethodUtils.R:0
-msgid ""
-"arguments (%s) after '...' in the generic must appear in the method, in the "
-"same place at the end of the argument list"
-msgstr ""
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 23:06+0200\n"
+"POT-Creation-Date: 2016-10-14 11:23+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -119,11 +119,11 @@ msgstr "par()'a geçersiz bir argüman geçirildi"
 msgid "metric information not available for this device"
 msgstr "Bu aygıtta metrik bilgisi bulunmuyor"
 
-#: par-common.c:143
+#: par-common.c:146
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "grafiksel parametre 'family' 200 bayt üst sınırına sahip"
 
-#: par-common.c:243
+#: par-common.c:246
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

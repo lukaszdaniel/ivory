@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-07 16:19\n"
+"POT-Creation-Date: 2016-10-14 11:23\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -288,9 +288,8 @@ msgstr "o argumento  'split' deve ser uma lista"
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
-#. R/reshape.R: gettextf("'%s' argument is of the wrong length", "times")
 #: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/hclust.R:0 R/kernel.R:0
-#: R/nls-profile.R:0 R/reshape.R:0
+#: R/nls-profile.R:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
 msgstr "argumento 'score' é de comprimento errado"
@@ -416,7 +415,7 @@ msgstr "'termobj' deve ser um objeto da classe \"terms\""
 #. R/approx.R: gettextf("'%s' argument must be at least %d", "n", 1)
 #. R/ar.R: gettextf("'%s' argument must be at least %d", "n.ahead", 1)
 #. R/contr.poly.R: gettextf("'%s' argument must be at least %d", "degree", 1)
-#. R/smspline.R: gettextf("'%s' argument must be at least %d", "nknots", 1)
+#. R/smspline.R: gettextf("'%s' argument must be at least %d", "knots", 1)
 #: R/acf.R:0 R/approx.R:0 R/ar.R:0 R/contr.poly.R:0 R/smspline.R:0
 #, fuzzy
 msgid "'%s' argument must be at least %d"
@@ -441,6 +440,12 @@ msgstr "'x' deve estra entre %s e %s"
 #, fuzzy
 msgid "'%s' argument must be in {1,..,%d}"
 msgstr "o argumento  'split' deve ser uma lista"
+
+#. R/ts.R: gettextf("'%s' argument must be logical or character", "xy.labels", domain = "R-stats")
+#: R/ts.R:0
+#, fuzzy
+msgid "'%s' argument must be logical or character"
+msgstr "argumento 'x ' deve ser numérico"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -516,9 +521,11 @@ msgstr "'r' é menor que 1"
 msgid "'%s', '%s' and '%s' arguments must have the same length"
 msgstr "'x', 'y', e 'z' devem ter o mesmo comprimento"
 
-#. R/smspline.R: message("'.nknots.smspl()' is now exported; use it instead of 'n.knots()'")
+#. R/smspline.R: message("'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' function")
 #: R/smspline.R:0
-msgid "'.nknots.smspl()' is now exported; use it instead of 'n.knots()'"
+msgid ""
+"'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' "
+"function"
 msgstr ""
 
 #. R/anova.R: stop("'P.values' argument is TRUE, but 'has.Pvalue' argument is not")
@@ -557,6 +564,13 @@ msgstr "matriz 'X' foi colinear"
 #. R/smspline.R: warning("'all.knots' argument is TRUE; 'nknots' specification is disregarded")
 #: R/smspline.R:0
 msgid "'all.knots' argument is TRUE; 'nknots' specification is disregarded"
+msgstr ""
+
+#. R/smspline.R: warning("'all.knots' argument is vector of knots; 'nknots' specification is disregarded")
+#: R/smspline.R:0
+msgid ""
+"'all.knots' argument is vector of knots; 'nknots' specification is "
+"disregarded"
 msgstr ""
 
 #. R/HoltWinters.R: stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
@@ -772,6 +786,11 @@ msgstr ""
 msgid "'kernapply' is not available for object 'x'"
 msgstr "'kernapply' não está disponível para objeto 'x'"
 
+#. R/reshape.R: stop("'lengths(varying)' must all match 'length(times)'")
+#: R/reshape.R:0
+msgid "'lengths(varying)' must all match 'length(times)'"
+msgstr ""
+
 #. R/logLik.R: gettextf("'log Lik.' %s (df=%s)", paste(format(c(x), digits = digits), collapse = ", "),     format(attr(x, "df")), domain = "R-stats")
 #: R/logLik.R:0
 msgid "'log Lik.' %s (df=%s)"
@@ -909,10 +928,11 @@ msgstr ""
 msgid "'newdata' must be a matrix or data frame"
 msgstr "'newdata' deve ser uma matriz ou um quadro de dados"
 
-#. R/smspline.R: stop("'nknots' must be numeric (in {1,..,n})")
+#. R/smspline.R: stop("'nknots' argument must be numeric (in {1,..,n})")
 #: R/smspline.R:0
-msgid "'nknots' must be numeric (in {1,..,n})"
-msgstr ""
+#, fuzzy
+msgid "'nknots' argument must be numeric (in {1,..,n})"
+msgstr "o argumento  'split' deve ser uma lista"
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
 #: R/ppr.R:0
@@ -1397,11 +1417,6 @@ msgstr "'xreg' e 'newxreg' têm número de colunas diferentes"
 #, fuzzy
 msgid "'xreg' argument is collinear"
 msgstr "'xreg' é colinear"
-
-#. R/ts.R: stop("'xy.labels' must be logical or character")
-#: R/ts.R:0
-msgid "'xy.labels' must be logical or character"
-msgstr ""
 
 #. R/qqnorm.R: stop("'y' argument is empty or has only NA values")
 #: R/qqnorm.R:0
@@ -2420,6 +2435,14 @@ msgstr "NAs em 'x'"
 msgid "NA values in 'x'"
 msgstr "NAs em 'x'"
 
+#. R/distn.R: warning("NA values produced")
+#. R/distn.R: warning("NA values produced")
+#. R/distn.R: warning("NA values produced")
+#: R/distn.R:0
+#, fuzzy
+msgid "NA values produced"
+msgstr "NAs não são permitidos"
+
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
 msgid "NAs in V(mu)"
@@ -2539,6 +2562,12 @@ msgstr "número insuficiente de observações"
 #, fuzzy
 msgid "Number of objects:"
 msgstr "número insuficiente de observações"
+
+#. R/smspline.R: stop("Numeric 'all.knots' argument must be strictly increasing")
+#: R/smspline.R:0
+#, fuzzy
+msgid "Numeric 'all.knots' argument must be strictly increasing"
+msgstr "'x' deve ser inteiro e não negativo"
 
 #. R/constrOptim.R: gettextf("Objective function decreased at outer iteration %d", i)
 #: R/constrOptim.R:0
@@ -2688,9 +2717,14 @@ msgstr ""
 msgid "Pearson's product-moment correlation"
 msgstr ""
 
-#. R/smspline.R: gettextf("Penalized Criterion: %s", format(x$pen.crit, digits = digits), domain = "R-stats")
+#. R/smspline.R: gettextf("Penalized Criterion (RSS): %s", format(x$pen.crit, digits = digits), domain = "R-stats")
 #: R/smspline.R:0
-msgid "Penalized Criterion: %s"
+msgid "Penalized Criterion (RSS): %s"
+msgstr ""
+
+#. R/smspline.R: gettextf("Penalized Criterion (weightedRSS): %s", format(x$pen.crit, digits = digits),     domain = "R-stats")
+#: R/smspline.R:0
+msgid "Penalized Criterion (weightedRSS): %s"
 msgstr ""
 
 #. R/ts-tests.R: gettext("Phillips-Perron Unit Root Test")
@@ -3391,6 +3425,12 @@ msgid "at least 2 points are needed to select a bandwidth automatically"
 msgstr ""
 "são precisos ao menos 2 pontos para selecionar uma largura de banda "
 "automaticamente"
+
+#. R/smspline.R: stop("at least four unique 'x' values are needed")
+#: R/smspline.R:0
+#, fuzzy
+msgid "at least four unique 'x' values are needed"
+msgstr "são precisos ao menos dois valores não-NA para interpolar"
 
 #. R/chisq.test.R: stop("at least one entry of 'x' must be positive")
 #: R/chisq.test.R:0
@@ -4233,8 +4273,9 @@ msgstr ""
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "r")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "c")
 #. R/smooth.R: gettextf("invalid '%s' argument", "endrule")
+#. R/smspline.R: gettextf("invalid '%s' argument", "keep.stuff")
 #: R/arima.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0 R/glm.R:0 R/loess.R:0
-#: R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0
+#: R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0 R/smspline.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "argumento 'method' inválido"
@@ -4778,6 +4819,11 @@ msgstr ""
 msgid "must have same number of columns in 'x' and 'centers'"
 msgstr "deve ter o mesmo número de colunas em 'x' e 'centers'"
 
+#. R/smspline.R: stop("must not specify both 'spar' and 'lambda' arguments")
+#: R/smspline.R:0
+msgid "must not specify both 'spar' and 'lambda' arguments"
+msgstr ""
+
 #. R/spectrum.R: stop("must specify 'spans' or a valid kernel")
 #: R/spectrum.R:0
 msgid "must specify 'spans' or a valid kernel"
@@ -4829,11 +4875,6 @@ msgstr ""
 "pelo menos 2 períodos são necessários para calcular valores de início "
 "sazonais"
 
-#. R/smspline.R: stop("need at least four unique 'x' values")
-#: R/smspline.R:0
-msgid "need at least four unique 'x' values"
-msgstr ""
-
 #. R/hclust.R: stop("need dendrograms where all leaves have labels")
 #: R/hclust.R:0
 msgid "need dendrograms where all leaves have labels"
@@ -4850,13 +4891,6 @@ msgstr "são precisas respostas múltiplas"
 #: R/median.R:0
 msgid "need numeric data"
 msgstr "são precisos dados numéricos"
-
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#. R/smspline.R: stop("need result of 'smooth.spline(keep.data = TRUE)'")
-#: R/smspline.R:0
-msgid "need result of 'smooth.spline(keep.data = TRUE)'"
-msgstr ""
 
 #. R/family.R: gettextf("negative values are not allowed for the '%s' family", "Poisson")
 #. R/family.R: gettextf("negative values are not allowed for the '%s' family", "quasiPoisson")
@@ -5284,6 +5318,12 @@ msgstr "número de pesos = %d deve igualar %d (número de respostas)"
 msgid "number of weights must match number of observations"
 msgstr "número de offsets é %d, deve igualar %d (número de observações)"
 
+#. R/smspline.R: stop("numeric 'all.knots' argument must cover [0,1] (= the transformed data-range)")
+#: R/smspline.R:0
+msgid ""
+"numeric 'all.knots' argument must cover [0,1] (= the transformed data-range)"
+msgstr ""
+
 #. R/ksmooth.R: stop("numeric 'y' argument must be supplied.\nFor density estimation use 'density()'")
 #: R/ksmooth.R:0
 #, fuzzy
@@ -5580,6 +5620,13 @@ msgstr "resíduos têm postos %d < %d"
 #: R/factanal.R:0 R/prcomp.R:0 R/princomp.R:0
 msgid "response not allowed in formula"
 msgstr "resposta não permitida na fórmula"
+
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
+#: R/smspline.R:0
+msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
+msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0
