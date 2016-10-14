@@ -679,7 +679,7 @@ msgstr "poprawne jest jedynie dodanie dziecka do \"gTree\""
 #. R/gpar.R: gettextf("mixture of missing and non-missing values for %s", gparname)
 #: R/gpar.R:0
 msgid "mixture of missing and non-missing values for %s"
-msgstr ""
+msgstr "kombinacja brakujących i niebrakujących wartości dla %s"
 
 #. R/primitives.R: stop("must have exactly 4 control points")
 #: R/primitives.R:0

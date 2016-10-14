@@ -1373,7 +1373,7 @@ msgstr ""
 #. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
 #: R/strcapture.R:0
 msgid "The number of captures in 'pattern' != 'length(proto)'"
-msgstr ""
+msgstr "Liczba przechwytań w 'pattern' != 'length(proto)'"
 
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0

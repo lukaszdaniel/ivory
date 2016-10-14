@@ -406,9 +406,8 @@ msgstr "argument '%s' musi być w przedziale {1,..,%d}"
 
 #. R/ts.R: gettextf("'%s' argument must be logical or character", "xy.labels", domain = "R-stats")
 #: R/ts.R:0
-#, fuzzy
 msgid "'%s' argument must be logical or character"
-msgstr "'xy.labels' musi być tekstem lub zmienną logiczną"
+msgstr "argument '%s' musi być zmienną logiczną lub tekstem"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -2351,9 +2350,8 @@ msgstr "wartości NA w 'x'"
 #. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #: R/distn.R:0
-#, fuzzy
 msgid "NA values produced"
-msgstr "wartości NA nie są dozwolone"
+msgstr "wyprodukowano wartości NA"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -3331,9 +3329,8 @@ msgstr ""
 
 #. R/smspline.R: stop("at least four unique 'x' values are needed")
 #: R/smspline.R:0
-#, fuzzy
 msgid "at least four unique 'x' values are needed"
-msgstr "potrzeba przynajmniej czterech unikalnych wartości 'x'"
+msgstr "co najmniej cztery unikalne wartości 'x' są wymagane"
 
 #. R/chisq.test.R: stop("at least one entry of 'x' must be positive")
 #: R/chisq.test.R:0
@@ -4694,7 +4691,7 @@ msgstr "potrzeba mieć tę samą liczbę kolumn w 'x' oraz 'centers'"
 #. R/smspline.R: stop("must not specify both 'spar' and 'lambda' arguments")
 #: R/smspline.R:0
 msgid "must not specify both 'spar' and 'lambda' arguments"
-msgstr ""
+msgstr "nie wolno określać równocześnie argumentu 'spar' oraz 'lambda'"
 
 #. R/spectrum.R: stop("must specify 'spans' or a valid kernel")
 #: R/spectrum.R:0

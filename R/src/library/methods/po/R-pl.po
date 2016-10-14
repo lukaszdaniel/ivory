@@ -40,12 +40,11 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("%s arguments (%s) after %s in the generic must appear in the method, in the same place at the end of the argument list",     .renderSignature(generic@generic, signature), paste(sQuote(trailingArgs), collapse = ", "),     sQuote("..."))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid ""
 "%s arguments (%s) after %s in the generic must appear in the method, in the "
 "same place at the end of the argument list"
 msgstr ""
-"argumenty (%s) po '...' w ogólnej funkcji muszą pojawić się w metodzie w tym "
+"argumenty %s (%s) po %s w ogólnej funkcji muszą pojawić się w metodzie w tym "
 "samym miejscu na końcu listy argumentów"
 
 #. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))

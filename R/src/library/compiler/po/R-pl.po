@@ -49,7 +49,7 @@ msgstr "funkcja 'switch()' nie posiada alternatyw"
 #. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
 #: R/cmp.R:0
 msgid "Error: compilation failed:"
-msgstr ""
+msgstr "Błąd: kompilacja nie powiodła się:"
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
 #: R/cmp.R:0
