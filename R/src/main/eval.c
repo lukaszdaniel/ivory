@@ -503,8 +503,12 @@ static SEXP forcePromise(SEXP e)
 	    if (PRSEEN(e) == 1)
 		errorcall(R_GlobalContext->call,
 			  _("promise is already under evaluation: recursive default argument reference or earlier problems?"));
-	    else warningcall(R_GlobalContext->call,
+	    else {
+		/* set PRSEEN to 1 to avoid infinite recursion */
+		SET_PRSEEN(e, 1);
+		warningcall(R_GlobalContext->call,
 			     _("restarting interrupted promise evaluation"));
+	    }
 	}
 	/* Mark the promise as under evaluation and push it on a stack
 	   that can be used to unmark pending promises if a jump out
@@ -5629,7 +5633,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	    R_bcstack_t *oldtop = R_BCNodeStackTop;
 	    RCNTXT *cntxt = BCNALLOC_CNTXT();
 	    BCNPUSH_INTEGER(GETOP());       /* pc offset for 'break' */
-	    BCNPUSH_INTEGER(pc - codebase); /* pc offset for 'next' */
+	    BCNPUSH_INTEGER((int)(pc - codebase)); /* pc offset for 'next' */
 	    if (is_for_loop) {
 		/* duplicate the for loop state data on the top of the stack */
 		R_bcstack_t *loopdata = oldtop - FOR_LOOP_STATE_SIZE;
