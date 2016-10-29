@@ -95,7 +95,7 @@ setRlibs <-
             c("Modalclust", "aroma.core", "iWebPlots",
               "openair", "oce", "pcalg", "tileHMM"))
             exceptions <- c(exceptions, "KernSmooth")
-        recommended <- recommended[!recommended %in% exceptions]
+        recommended <- recommended %w/o% exceptions
         for(pkg in recommended) {
             if(pkg == thispkg) next
             dir.create(pd <- file.path(tmplib, pkg))
@@ -125,7 +125,7 @@ setRlibs <-
     lp <- .libPaths()
     poss <- c(lp[length(lp)], .Library)
     already <- thispkg
-    more <- unique(deps[!deps %in% already]) # should not depend on itself ...
+    more <- unique(deps %w/o% already) # should not depend on itself ...
     while(length(more)) {
         m0 <- more; more <- character()
         for (pkg in m0) {
@@ -156,7 +156,7 @@ setRlibs <-
             }
         }
         already <- c(already, m0)
-        more <- unique(more[!more %in% already])
+        more <- unique(more %w/o% already)
     }
     if (self) flink(normalizePath(pkgdir), tmplib)
     # print(dir(tmplib))
@@ -1075,7 +1075,7 @@ setRlibs <-
                                   .format_lines_with_indent(bad), "\n")
                     else printLog0(Log, "  ", bad, "\n")
                     wrapLog(gettext("Portable packages must use only ASCII characters in their demos.\nUse \\uxxxx escapes for other characters.\n", domain = "R-tools"))
-                    demos <- demos[! basename(demos) %in% bad]
+                    demos <- demos[basename(demos) %notin% bad]
                 }
                 ## check we can parse each demo.
                 bad <- character()
@@ -1791,7 +1791,7 @@ setRlibs <-
             fi <- list.files("data")
             if (!any(grepl("\\.[Rr]$", fi))) { # code files can do anything
                 dataFiles <- basename(list_files_with_type("data", "data"))
-                odd <- fi[! fi %in% c(dataFiles, "datalist")]
+                odd <- fi %w/o% c(dataFiles, "datalist")
                 if (length(odd)) {
                     warningLog(Log)
                     msg <- gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n", .pretty_format(odd), domain = "R-tools")
@@ -1861,8 +1861,8 @@ setRlibs <-
         files2 <- dir(file.path(pkgdir, "inst", "doc"), recursive = TRUE,
                      pattern = "[.](cls|sty|drv)$", full.names = TRUE)
         ## Skip Rnews.sty and RJournal.sty for now
-        files2 <- files2[! basename(files2) %in%
-                       c("jss.cls", "jss.drv", "Rnews.sty", "RJournal.sty")]
+        files2 <- files2[basename(files2) %notin%
+                         c("jss.cls", "jss.drv", "Rnews.sty", "RJournal.sty")]
         bad <- character()
         for(f in files2) {
             pat <- "%% (This generated file may be distributed as long as the|original source files, as listed above, are part of the|same distribution.)"
@@ -1886,7 +1886,7 @@ setRlibs <-
         }
 
         files <- dir(doc_dir)
-        files <- files[! files %in% already]
+        files <- files %w/o% already
         bad <- grepl("[.](tex|lyx|png|jpg|jpeg|gif|ico|bst|cls|sty|ps|eps|img)$",
                      files, ignore.case = TRUE)
         bad <- bad | grepl("(Makefile|~$)", files)
@@ -2011,8 +2011,8 @@ setRlibs <-
         }
         files2 <- dir(file.path(pkgdir, "vignettes"), recursive = TRUE,
                      pattern = "[.](cls|sty|drv)$", full.names = TRUE)
-        files2 <- files2[! basename(files2) %in%
-                       c("jss.cls", "jss.drv", "Rnews.sty", "RJournal.sty")]
+        files2 <- files2[basename(files2) %notin%
+                         c("jss.cls", "jss.drv", "Rnews.sty", "RJournal.sty")]
         bad <- character()
         for(f in files2) {
             pat <- "%% (This generated file may be distributed as long as the|original source files, as listed above, are part of the|same distribution.)"
@@ -3188,7 +3188,7 @@ setRlibs <-
         }
         if (R_check_executables_exclusions && file.exists("BinaryFiles")) {
             excludes <- readLines("BinaryFiles")
-            execs <- execs[!execs %in% excludes]
+            execs <- execs %w/o% excludes
         }
         if (nb <- length(execs)) {
             msg <- ngettext(nb,
@@ -3222,7 +3222,7 @@ setRlibs <-
         dots <- sub("^./","", dots)
         allowed <-
             c(".Rbuildignore", ".Rinstignore", "vignettes/.install_extras")
-        dots <- dots[!dots %in% allowed]
+        dots <- dots %w/o% allowed
         alldirs <- list.dirs(".", full.names = TRUE, recursive = TRUE)
         alldirs <- sub("^./","", alldirs)
         alldirs <- alldirs[alldirs != "."]
@@ -4669,7 +4669,7 @@ setRlibs <-
                     } else this_multiarch <- FALSE  # no compiled code
                 }
                 if (this_multiarch && length(R_check_skip_arch))
-                    inst_archs <- inst_archs[!(inst_archs %in% R_check_skip_arch)]
+                    inst_archs <- inst_archs[inst_archs %notin% R_check_skip_arch]
             }
         } else check_incoming <- FALSE  ## end of if (!is_base_pkg)
 

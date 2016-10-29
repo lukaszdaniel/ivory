@@ -881,7 +881,8 @@ next_char:
 # ifndef _WIN32
 		if((unsigned int) wc < 65536) {
 # endif
-		    snprintf(outbuf, 9, "<U+%04X>", (unsigned int) wc);
+		// gcc 7 objects to this with unsigned int
+		    snprintf(outbuf, 9, "<U+%04X>", (unsigned short) wc);
 		    outbuf += 8; outb -= 8;
 # ifndef _WIN32
 		} else {
