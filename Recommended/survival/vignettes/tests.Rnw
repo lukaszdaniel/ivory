@@ -603,7 +603,7 @@ emat[6,] <- tfun(rep(1/5,5))
     & estimate & sd & SS \\ \hline
 <<echo=FALSE, results=tex>>=
 temp <- dimnames(emat)[[1]]
-for (i in 1:nrow(emat))
+for (i in seq_len(nrow(emat)))
    cat(temp[i], sprintf(" &%5.3f", emat[i,1]),sprintf(" &%6.5f", emat[i,2]), 
        sprintf(" & %6.1f", emat[i,3]), "\\\\ \n")
 @ 

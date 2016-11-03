@@ -439,7 +439,7 @@ Since time is in days the fractional time of 0.5 could be any value
 between 0 and 1, our choice will not affect the results.
 
 <<stanford>>=
-jasa$subject <- 1:nrow(jasa)  #we need an identifier variable
+jasa$subject <- seq_len(nrow(jasa))  #we need an identifier variable
 tdata <- with(jasa, data.frame(subject = subject,
                                futime= pmax(.5, fu.date - accept.dt),
                                txtime= ifelse(tx.date== fu.date,

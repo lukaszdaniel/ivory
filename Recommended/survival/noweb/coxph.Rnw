@@ -239,7 +239,7 @@ Y <- Surv(rep(counts$time, counts$nrisk), counts$status)
 type <- 'right'  # new Y is right censored, even if the old was (start, stop]
 
 mf <- mf[tindex,]
-strats <- rep(1:length(counts$nrisk), counts$nrisk)
+strats <- rep(seq_along(counts$nrisk), counts$nrisk)
 weights <- model.weights(mf)
 if (!is.null(weights) && any(!is.finite(weights)))
     stop("weights must be finite")  
@@ -666,7 +666,7 @@ else {
         # The init vector might be longer than the betas, for a sparse term
         if (is.null(init)) temp <- fit$coefficients[nabeta]
         else temp <- (fit$coefficients - 
-    		  init[1:length(fit$coefficients)])[nabeta]
+    		  init[seq_along(fit$coefficients)])[nabeta]
         fit$wald.test <-  coxph.wtest(fit$var[nabeta,nabeta], temp,
     				  control$toler.chol)$test
     }

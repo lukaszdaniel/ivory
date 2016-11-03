@@ -73,7 +73,7 @@ points.survfit <- function(x, xscale, xmax, fun, censor=FALSE,
                 pch2 <- rep(strsplit(pch, '')[[1]], length=ncurve)
             else pch2 <- rep(pch, length=ncurve)
         }
-        for (j in 1:ncol(ssurv)) {
+        for (j in seq_len(ncol(ssurv))) {
             for (i in unique(stemp)) {
                 if (censor) who <- which(stemp==i)
                 else who <- which(stemp==i & x$n.event >0)
