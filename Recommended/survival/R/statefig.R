@@ -27,7 +27,7 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
     else {
         if (any(layout <=0 | layout != floor(layout)))
             stop("non-integer number of states in layout argument")
-        space <- function(n) (1:n -.5)/n   # centers of the boxes
+        space <- function(n) (seq_len(n) -.5)/n   # centers of the boxes
         if (sum(layout) != nstate) stop("number of boxes != number of states")
         cbox <- matrix(0, ncol=2, nrow=nstate)  #coordinates will be here
         n <- length(layout)
@@ -35,10 +35,10 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
         ix <- rep(seq(along=layout), layout) 
         if (is.vector(layout) || ncol(layout)> 1) { #left to right     
             cbox[,1] <- space(n)[ix]
-            for (i in 1:n) cbox[ix==i,2] <- 1 -space(layout[i])
+            for (i in seq_len(n)) cbox[ix==i,2] <- 1 -space(layout[i])
         } else { # top to bottom
             cbox[,2] <- 1- space(n)[ix]
-            for (i in 1:n) cbox[ix==i,1] <- space(layout[i])
+            for (i in seq_len(n)) cbox[ix==i,1] <- space(layout[i])
         }
     }
     text(cbox[,1], cbox[,2], statenames, cex=cex, col=col)  # write the labels
@@ -54,7 +54,7 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
                   y+ c(-dy, -dy, dy, dy, -dy), lwd=lwd, lty=lty, col=col)
         }
         bcol <- rep(bcol, length=nstate)
-        for (i in 1:nstate) 
+        for (i in seq_len(nstate)) 
             drawbox(cbox[i,1], cbox[i,2], textwd[i]/2 + dx, textht[i]/2 + dy,
                     col=bcol[i])
         dx <- 2*dx; dy <- 2*dy   # move arrows out from the box
@@ -87,8 +87,8 @@ statefig <- function(layout, connect, margin=.03, box=TRUE,
                    lwd=lwd, lty=lty, col=col)
         }
     }
-    for (i in 1:nstate) {
-        for (j in 1:nstate) {
+    for (i in seq_len(nstate)) {
+        for (j in seq_len(nstate)) {
             if (i != j && connect[i,j] !=0) {
                 doline(cbox[i,], cbox[j,], connect[i,j]-1,
                        delta1 = c(textwd[i]/2 + dx, textht[i]/2 + dy),

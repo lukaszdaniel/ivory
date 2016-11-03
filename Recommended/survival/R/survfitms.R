@@ -85,7 +85,7 @@ summary.survfit <- function(object, times, censored=FALSE,
                 }
                 # the "factor" is needed for the case that a strata has no
                 #  events at all, and hence 0 lines of output
-                fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
+                fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
             }
         }
         #if missing(times) and censored=TRUE, the fit object is ok as it is
@@ -189,7 +189,7 @@ summary.survfit <- function(object, times, censored=FALSE,
  
     # Expand the strata
     if (!is.null(fit$strata)) 
-        fit$strata <- factor(rep(1:nstrat, fit$strata), 1:nstrat,
+        fit$strata <- factor(rep(seq_len(nstrat), fit$strata), seq_len(nstrat),
                              labels= names(fit$strata))
     class(fit) <- "summary.survfit"
     fit
@@ -272,7 +272,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
                 }
                 # the "factor" is needed for the case that a strata has no
                 #  events at all, and hence 0 lines of output
-                fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
+                fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
             }
         }
         #if missing(times) and censored=TRUE, the fit object is ok as it is
@@ -360,7 +360,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
         if (is.null(fit$strata)) fit <- findrow(fit, times, extend, fit$p0)
         else {
             ltemp <- vector("list", nstrat)
-            for (i in 1:nstrat) 
+            for (i in seq_len(nstrat)) 
                 ltemp[[i]] <- findrow(fit[i], times, extend, fit$p0[i,])
             fit <- unpacksurv(fit, ltemp)
         }
