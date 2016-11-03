@@ -127,7 +127,7 @@ predict.survreg <-
 	#   now add quantiles and then invert
 	qq <- dd$quantile(p, object$parm)
 	if (length(qq)==1 || length(pred)==1) {
-	    pred <- pred + qq*scale
+	    pred <- drop(pred) + qq*scale
 	    if (se.fit && fixedscale) {
 		var <- ((x %*% vv) * x) %*% rep(1., ncol(x))
 		se <- rep(sqrt(drop(var)), length(qq))
@@ -136,7 +136,7 @@ predict.survreg <-
 		x.strata <- outer(strata, seq_len(nstrata),
 				  function(x,y) 1*(x==y))
 		se <- matrix(0, ncol=length(qq), nrow=nrow(x))
-		for (i in seq_len(length(qq))) {
+		for (i in seq_along(qq)) {
 		    temp <- cbind(x, (qq[i]*scale)* x.strata)
 		    var <- ((temp %*% object$var) *temp) %*% rep(1, ncol(temp))
 		    se[,i] <- sqrt(drop(var))

@@ -1,6 +1,3 @@
-#
-# $Id: is.ratetable.S 11183 2009-01-21 13:33:40Z therneau $
-#
 is.ratetable <- function(x, verbose=FALSE) {
     dlist <- c("dim", "dimnames", "dimid", "cutpoints")
     if (!verbose) {
@@ -72,7 +69,7 @@ is.ratetable <- function(x, verbose=FALSE) {
         if (any(fac <0)) msg <- c(msg, gettext("illegal 'factor' attribute of <0"))
         if (length(att$factor)!=nd)
             msg <- c(msg, gettextf("wrong length for '%s' component", "factor"))
-        type <- 1*(fac==1) + 2*(fac==0) + 4*(fac>0)
+        type <- 1*(fac==1) + 2*(fac==0) + 4*(fac>1)
         }
     else if (!is.null(att$type)) {
         if (any(is.na(match(att$type, 1:4))))
