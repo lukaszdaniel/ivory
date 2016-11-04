@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-09-21 r844) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-11-03 r878) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-09-21 r71385) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-11-03 r71626) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3789,7 +3789,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x34ed390>
+<environment: 0x5722cc0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4774,7 +4774,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x48116b8>
+<bytecode: 0x5513a70>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7305,7 +7305,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x6b3e460>
+<environment: 0x6687370>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -11911,14 +11911,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x6eeb070>
-<environment: 0x6ef3548>
+<bytecode: 0x59d2b58>
+<environment: 0x59c9100>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x6eeaf58>
-<environment: 0x6ef3548>
+<bytecode: 0x59d2ca8>
+<environment: 0x59c9100>
 
 > 
 > 
@@ -12267,7 +12267,7 @@ Coefficients of ridge terms ('beta'):
 > # .....  (same as above)
 > # .....
 > #
-> # Projection direction vectors:
+> # Projection direction vectors ('alpha'):
 > #       term 1      term 2
 > # area1  0.34357179  0.37071027
 > # peri1 -0.93781471 -0.61923542
@@ -12965,9 +12965,11 @@ $data$y
 [39]  32  48  52  56  64  66  54  70  92  93 120  85
 
 $data$w
- [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-[39] 1 1 1 1 1 1 1 1 1 1 1 1
+[1] 1
 
+
+$no.weights
+[1] TRUE
 
 $lev
  [1] 0.8934338 0.4379689 0.1842314 0.1529048 0.3641292 0.2022506 0.3399561
@@ -12989,12 +12991,18 @@ $df
 $spar
 [1] 0.4873957
 
+$ratio
+[1] 6.575971e-05
+
 $lambda
 [1] 0.0008526606
 
 $iparms
-icrit ispar  iter       
-    3     0    13     0 
+ icrit  ispar   iter        errorI 
+     3      0     13      0     NA 
+
+$auxM
+NULL
 
 $fit
 $knot
@@ -15429,39 +15437,42 @@ smooth.spline(x = speed, y = dist)
 
 Smoothing Parameter  spar=0.7801305 lambda=0.1112206 (11 iterations)
 Equivalent Degrees of Freedom (Df): 2.635278
-Penalized Criterion: 4187.776
+Penalized Criterion (weightedRSS): 4187.776
 GCV: 244.1044
 > ## This example has duplicate points, so avoid cv = TRUE
 > ## Don't show: 
 >   stopifnot(cars.spl $ w == table(cars$speed)) # weights = multiplicities
 >   utils::str(cars.spl, digits = 5, vec.len = 6)
-List of 16 components
- $ x       : numeric [1:19] 4 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ...
- $ y       : numeric [1:19] 1.6578 11.6829 15.0644 18.4823 21.9471 25.4656 29.0505 32.7076 ...
- $ w       : numeric [1:19] 2 2 1 1 3 2 4 4 4 3 2 3 4 3 5 ...
- $ yin     : numeric [1:19] 6 13 16 10 26 22.5 21.5 35 ...
- $ tol     : numeric 7e-06
- $ data    :List of 3 components
+List of 19 components
+ $ x         : numeric [1:19] 4 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ...
+ $ y         : numeric [1:19] 1.6578 11.6829 15.0644 18.4823 21.9471 25.4656 29.0505 32.7076 ...
+ $ w         : numeric [1:19] 2 2 1 1 3 2 4 4 4 3 2 3 4 3 5 ...
+ $ yin       : numeric [1:19] 6 13 16 10 26 22.5 21.5 35 ...
+ $ tol       : numeric 7e-06
+ $ data      :List of 3 components
   ..$ x: numeric [1:50] 4 4 7 7 8 9 10 10 10 11 11 12 12 12 12 ...
   ..$ y: numeric [1:50] 2 10 4 22 16 10 18 26 34 17 28 14 20 24 28 ...
-  ..$ w: numeric [1:50] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ...
- $ lev     : numeric [1:19] 0.399342 0.179105 0.069771 0.055561 0.136721 0.077539 0.137252 0.126354 ...
- $ cv.crit : numeric 244.1
- $ pen.crit: numeric 4187.8
- $ crit    : numeric 244.1
- $ df      : numeric 2.6353
- $ spar    : numeric 0.78013
- $ lambda  : numeric 0.11122
- $ iparms  : Named integer [1:4] 1 0 11 0
-  ..- attr(*, "names")= character [1:4] "icrit" "ispar" "iter" ""
- $ fit     :List of 5 components
+  ..$ w: numeric 1
+ $ no.weights: logical TRUE
+ $ lev       : numeric [1:19] 0.399342 0.179105 0.069771 0.055561 0.136721 0.077539 0.137252 0.126354 ...
+ $ cv.crit   : numeric 244.1
+ $ pen.crit  : numeric 4187.8
+ $ crit      : numeric 244.1
+ $ df        : numeric 2.6353
+ $ spar      : numeric 0.78013
+ $ ratio     : numeric 6.576e-05
+ $ lambda    : numeric 0.11122
+ $ iparms    : Named integer [1:5] 1 0 11 0 NA
+  ..- attr(*, "names")= character [1:5] "icrit" "ispar" "iter" "" "errorI"
+ $ auxM      : NULL
+ $ fit       :List of 5 components
   ..$ knot : numeric [1:25] 0 0 0 0 0.14286 0.19048 0.2381 0.28571 ...
   ..$ nk   : integer 21
   ..$ min  : numeric 4
   ..$ range: numeric 21
   ..$ coef : numeric [1:21] 1.6578 4.9869 9.4256 15.0584 18.4743 21.9384 25.4544 29.0377 ...
   ..- attr(*, "class")= character "smooth.spline.fit"
- $ call    : language smooth.spline(x = speed, y = dist)
+ $ call      : language smooth.spline(x = speed, y = dist)
  - attr(*, "class")= character "smooth.spline"
 >   cars.spl$fit
 $knot
@@ -15526,7 +15537,7 @@ smooth.spline(x = y18)
 
 Smoothing Parameter  spar=0.3928105 lambda=9.672776e-05 (13 iterations)
 Equivalent Degrees of Freedom (Df): 8.494168
-Penalized Criterion: 3.59204
+Penalized Criterion (weightedRSS): 3.59204
 GCV: 0.7155391
 > (s02  <- smooth.spline(y18, spar = 0.2))
 Call:
@@ -15534,7 +15545,7 @@ smooth.spline(x = y18, spar = 0.2)
 
 Smoothing Parameter  spar=0.2 lambda=3.911187e-06
 Equivalent Degrees of Freedom (Df): 15.259
-Penalized Criterion: 0.4973656
+Penalized Criterion (weightedRSS): 0.4973656
 GCV: 1.191602
 > (s02. <- smooth.spline(y18, spar = 0.2, cv = NA))
 Call:
@@ -15542,23 +15553,23 @@ smooth.spline(x = y18, spar = 0.2, cv = NA)
 
 Smoothing Parameter  spar=0.2 lambda=3.911187e-06
 Equivalent Degrees of Freedom (Df): NA
-Penalized Criterion: 0.4973656
+Penalized Criterion (weightedRSS): 0.4973656
 > plot(y18, main = deparse(s2$call), col.main = 2)
 > lines(s2, col = "gray"); lines(predict(s2, xx), col = 2)
 > lines(predict(s02, xx), col = 3); mtext(deparse(s02$call), col = 3)
 > 
 > ## Specifying 'lambda' instead of usual spar :
-> (s2. <- smooth.spline(y18, spar = c(lambda = s2$lambda), tol = s2$tol))
+> (s2. <- smooth.spline(y18, lambda = s2$lambda, tol = s2$tol))
 Call:
-smooth.spline(x = y18, spar = c(lambda = s2$lambda), tol = s2$tol)
+smooth.spline(x = y18, lambda = s2$lambda, tol = s2$tol)
 
 Smoothing Parameter  spar=NA lambda=9.672776e-05
 Equivalent Degrees of Freedom (Df): 8.494168
-Penalized Criterion: 3.59204
+Penalized Criterion (weightedRSS): 3.59204
 GCV: 0.7155391
 > 
 > ## Don't show: 
-> nD <- c("spar", "iparms", "call"); nn <- setdiff(names(s2), nD)
+> nD <- c("spar", "ratio", "iparms", "call"); nn <- setdiff(names(s2), nD)
 > stopifnot(all.equal(s2[nn], s2.[nn], tol = 7e-7), # seen 6.86e-8
 +           all.equal(predict(s02 , xx),
 + 		    predict(s02., xx), tol = 1e-15))
@@ -15947,8 +15958,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x345e518>
-<environment: 0x5904d08>
+<bytecode: 0x4c9c070>
+<environment: 0x407c690>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18225,7 +18236,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.78 0.14 4.921 0 0 
+Time elapsed:  4.28 0.104 4.384 0 0 
 > grDevices::dev.off()
 null device 
           1 

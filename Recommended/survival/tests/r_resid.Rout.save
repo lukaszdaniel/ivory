@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-09-16 r838) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-11-03 r878) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-09-16 r71292) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-11-03 r71626) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -295,9 +295,6 @@ $fit
 $se.fit
 [1] 0.2135247 0.2202088
 
-Warning message:
-In command 'pred + qq * scale':
-  dropping dim() of array of length one.  Will become an error.
 > 
 > fit2 <- survreg(Surv(time, status) ~ temp, data=motor, scale=fit1$scale)
 > predict(fit2, data.frame(temp=130), type='uquantile', p=c(.5, .1), se=T)
@@ -308,9 +305,6 @@ $se.fit
         1         1 
 0.2057964 0.2057964 
 
-Warning message:
-In command 'pred + qq * scale':
-  dropping dim() of array of length one.  Will become an error.
 > 
 > fit3 <- fit2
 > fit3$var <- fit1$var[1:2,1:2]
@@ -322,16 +316,10 @@ $se.fit
         1         1 
 0.2219959 0.2219959 
 
-Warning message:
-In command 'pred + qq * scale':
-  dropping dim() of array of length one.  Will become an error.
 > 
 > pp <- seq(.05, .7, length=40)
 > xx <- predict(fit1, data.frame(temp=130), type='uquantile', se=T,
 + 	      p=pp)
-Warning message:
-In command 'pred + qq * scale':
-  dropping dim() of array of length one.  Will become an error.
 > #matplot(pp, cbind(xx$fit, xx$fit+2*xx$se, xx$fit - 2*xx$se), type='l')
 > 
 > 
@@ -354,9 +342,6 @@ In command 'pred + qq * scale':
 [1] TRUE
 > 
 > qq4 <- predict(fit1, type='quantile', p=c(.2, .3, .4), se=T, newdata=lung[7,])
-Warning message:
-In command 'pred + qq * scale':
-  dropping dim() of array of length one.  Will become an error.
 > aeq(qq4$fit, qq2$fit[7,])
 [1] TRUE
 > 
@@ -368,4 +353,4 @@ In command 'pred + qq * scale':
 > 
 > proc.time()
    user  system elapsed 
-  0.884   0.012   0.892 
+  1.140   0.064   1.199 

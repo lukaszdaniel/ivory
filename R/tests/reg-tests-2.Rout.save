@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-09-21 r844) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-11-03 r878) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-09-21 r71385) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-11-03 r71626) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -4885,7 +4885,7 @@ coef[0] = 1
 > ## using NULL as a replacement value
 > DF <- data.frame(A=1:2, B=3:4)
 > try(DF[2, 1:3] <- NULL)
-Error in x[[jj]][iseq] <- vjj : replacement has length zero
+Error in command 'x[[jj]][iseq] <- vjj': replacement has length zero
 > ## wrong error message in R < 2.2.0
 > 
 > 
@@ -6404,15 +6404,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x28ded58> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3a67418> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x2da9d30> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3a79738> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x2da9d30> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3a79738> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7065,8 +7065,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 observations of 3 variables:
  $ A      : integer  1 2 3
- $ B\BA  : Factor w/ 1 level "B": 1 1 1
- $ C\ABcd: numeric  4 4 4
+ $ Bº  : Factor w/ 1 level "B": 1 1 1
+ $ C«cd: numeric  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 

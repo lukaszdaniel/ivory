@@ -209,8 +209,8 @@ ed231754703a243d3731f29b7057cba4 *tests/group-methods.R
 92213c349590000081de59b1fb21bebe *tests/Class+Meth.R
 4966b9ac5a23de46814439a84174973b *tests/abIndex-tsts.R
 8d94ef0528ccbd6756361acd354279a5 *tests/validObj.R
-49fedc4713440d2ec3d36f6d30d46cad *tests/indexing.Rout.save
-916b89bb89a0ff2580389f166a685cfd *tests/bind.Rout.save
+315e1ed4a9847aaf4f005b056ea86bd5 *tests/indexing.Rout.save
+1f0723f7aeee2aba26d4fe6d4e599a72 *tests/bind.Rout.save
 f2ad5375e270deeb7b041272dd095032 *cleanup
 952b2122422438fe96f3e8f08056b99a *R/eigen.R
 b00fe8a1183a02e0059ddb4045e8b1b9 *R/dgTMatrix.R
