@@ -2646,6 +2646,7 @@ setRlibs <-
             if (use_valgrind) extra <- c(extra, "use_valgrind = TRUE")
             tf <- gsub("\\", "/", tempfile(), fixed=TRUE)
             extra <- c(extra, paste0('Log="', tf, '"'))
+            if (!stop_on_error) extra <- c(extra, "stop_on_error = FALSE")
             ## might be diff-ing results against tests/*.R.out.save
             ## so force LANGUAGE=en
             cmd <- paste0("tools:::.runPackageTestsR(", paste(extra, collapse = ", "), ")")
@@ -4017,6 +4018,7 @@ setRlibs <-
             "      --timings         record timings for examples",
             "      --install-args=	command-line args to be passed to INSTALL",
 	    "      --test-dir=       look in this subdirectory for test scripts (default tests)",
+            "      --no-stop-on-error    do not stop running tests after first error",
             "      --check-subdirs=default|yes|no",
             "			run checks on the package subdirectories",
             "			(default is yes for a tarball, no otherwise)",
@@ -4096,6 +4098,7 @@ setRlibs <-
     as_cran <- FALSE
     run_dontrun <- FALSE
     run_donttest <- FALSE
+    stop_on_error <- TRUE
 
     libdir <- ""
     outdir <- ""
@@ -4148,7 +4151,7 @@ setRlibs <-
             ignore_vignettes  <- TRUE
             do_vignettes  <- FALSE
             do_build_vignettes  <- FALSE
-       } else if (a == "--no-manual") {
+	} else if (a == "--no-manual") {
             do_manual  <- FALSE
         } else if (a == "--no-latex") {
             stop("'--no-latex' is defunct: use '--no-manual' instead", call. = FALSE, domain = "R-tools")
@@ -4178,6 +4181,8 @@ setRlibs <-
             force_multiarch  <- TRUE
         } else if (a == "--as-cran") {
             as_cran  <- TRUE
+	} else if (a == "--no-stop-on-error") {
+	    stop_on_error <- FALSE
         } else if (substr(a, 1, 9) == "--rcfile=") {
             warning("configuration files are not supported as from R 2.12.0")
         } else if (substr(a, 1, 1) == "-") {
@@ -4525,6 +4530,7 @@ setRlibs <-
         }
         if (use_gct) opts <- c(opts, "--use-gct")
         if (use_valgrind) opts <- c(opts, "--use-valgrind")
+	if (!stop_on_error) opts <- c(opts, "--no-stop-on-error")
         if (as_cran) opts <- c(opts, "--as-cran")
         if (length(opts) > 1L)
             messageLog(Log, gettextf("using options %s", sQuote(paste(opts, collapse=" ")), domain = "R-tools"))
