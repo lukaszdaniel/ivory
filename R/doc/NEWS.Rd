@@ -449,10 +449,6 @@
       \code{NaN} with a warning and \code{qgeom(1, 1)} is \code{0}.
       (\PR{16972})
 
-      \item Package installation into a library where the package exists
-      via symbolic link now should work wherever \code{Sys.readlink()}
-      works, resolving \PR{16725}.
-
       \item \code{table()} no longer drops an \code{"NaN"} factor level,
       and better obeys \code{exclude = <chr>}, thanks to Suharto Anggono's
       patch for \PR{16936}.  Also, in the case of \code{exclude = NULL}
@@ -495,6 +491,11 @@
 
       \item \code{formatC(x, flag=f)} allows two new flags, and signals an
       error for invalid flags also in the case of character formatting.
+
+      \item Reading from stdin now also closes the connection and
+      hence no longer leaks memory when reading from a full pipe, thanks
+      to Gábor Csárdi, see thread starting at
+      \url{https://stat.ethz.ch/pipermail/r-devel/2016-November/073360.html}.
     }
   }
 }
@@ -514,6 +515,10 @@
 
       \item \code{grepRaw(<long>, <short>, fixed = TRUE)} now works,
       thanks to a patch by Mikko Korpela.  (\PR{17132})
+
+      \item Package installation into a library where the package exists
+      via symbolic link now should work wherever \code{\link{Sys.readlink}()}
+      works, resolving \PR{16725}.
     }
   }
 }
