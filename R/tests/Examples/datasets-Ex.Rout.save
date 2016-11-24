@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-11-03 r878) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-11-22 r886) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-11-03 r71626) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-11-22 r71674) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2775,6 +2775,13 @@ Warning: not plotting observations with leverage one:
 > dotchart(precip[order(precip)], main = "precip data")
 > title(sub = "Average annual precipitation (in.)")
 > 
+> ## Old ("wrong") version of dataset (just name change):
+> precip.O <- local({
++    p <- precip; names(p)[names(p) == "Cincinnati"] <- "Cincinati" ; p })
+> stopifnot(all(precip == precip.O),
++ 	  match("Cincinnati", names(precip)) == 46,
++ 	  identical(names(precip)[-46], names(precip.O)[-46]))
+> 
 > 
 > 
 > cleanEx()
@@ -3486,7 +3493,7 @@ c0   -5.14
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.224 0.016 1.24 0 0 
+Time elapsed:  1.336 0.02 1.354 0 0 
 > grDevices::dev.off()
 null device 
           1 
