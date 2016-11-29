@@ -2,8 +2,11 @@
 
 source conf.sh
 
-  rm -rf $filefroz
-  if test `echo $filemine | grep "@"`; then
-   filemine=`echo $filemine | sed  -e 's/$/@/'`
+for ix in ${!filedev[@]}
+do
+  rm -rf ${filefroz[$ix]}
+  if test `echo ${filemine[$ix]} | grep "@"`; then
+   filemine[$ix]=`echo ${filemine[$ix]} | sed  -e 's/$/@/'`
   fi;
-  svn --force delete $filemine
+  svn --force delete ${filemine[$ix]}
+done;
