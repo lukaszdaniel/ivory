@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-11-22 r886) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-12-04 r890) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-11-22 r71674) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-12-04 r71723) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -582,9 +582,9 @@ $R
 attr(,"class")
 [1] "DependsList"
 Warning messages:
-1: Function 'getDepList()' is deprecated.
-Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
- 
+1: Function 'getDepList' is deprecated.
+Use function 'dependsOnPkgs() or package_dependencies()' instead.
+See help("Deprecated") 
 2: Function 'package.dependencies' is deprecated.
 Use function 'package_dependencies' instead.
 See help("Deprecated") 
