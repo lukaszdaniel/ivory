@@ -3655,7 +3655,7 @@ no_more_lines:
     if(!wasopen) {endcontext(&cntxt); con->close(con);}
     if(nbuf > 0) { /* incomplete last line */
 	if(con->text && !con->blocking &&
-	   (strcmp(con->class, "gzfile") != 0)) {
+	   (strcmp(con->conclass, "gzfile") != 0)) {
 	    /* push back the rest */
 	    con_pushback(con, 0, buf);
 	    con->incomplete = TRUE;

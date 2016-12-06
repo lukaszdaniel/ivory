@@ -204,7 +204,7 @@
             "Which of --html or --no-html is the default depends on the build of R:",
                    if(static_html) "for this one it is --html." else "for this one it is --no-html.",
             "",
-            "Report bugs at bugs.r-project.org .", sep = "\n")
+            "Report bugs at <https://bugs.R-project.org>.", sep = "\n")
     }
 
 
@@ -1650,7 +1650,7 @@
             "Windows only:",
             "  -d, --debug		build a debug DLL",
             "",
-            "Report bugs at bugs@r-project.org .",
+            "Report bugs at <https://bugs.R-project.org>.",
             sep = "\n")
 
     ## FIXME shQuote here?
