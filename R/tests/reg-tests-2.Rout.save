@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-12-04 r890) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-12-08 r894) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-12-04 r71723) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-12-08 r71752) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6362,7 +6362,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x3c690e8>
+<bytecode: 0x54feb70>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6373,7 +6373,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x3c690e8>
+<bytecode: 0x54feb70>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6385,7 +6385,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x3c690e8>
+<bytecode: 0x54feb70>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6407,15 +6407,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3c29778> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x553d3a0> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3c34380> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5532a38> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3c34380> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5532a38> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7068,8 +7068,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 observations of 3 variables:
  $ A      : integer  1 2 3
- $ B\BA  : Factor w/ 1 level "B": 1 1 1
- $ C\ABcd: numeric  4 4 4
+ $ Bº  : Factor w/ 1 level "B": 1 1 1
+ $ C«cd: numeric  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 
@@ -7522,7 +7522,7 @@ $`a\bc`
 [1] "backspace"
 
 > cat(names(L), "\n")# yes, backspace is backspace here
-a\b a\c c 
+a\b a\c ac 
 > L
 $`a\\b`
 [1] 1

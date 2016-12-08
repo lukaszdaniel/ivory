@@ -922,14 +922,14 @@ read.table(tf)
 unlink(tf)
 
 
-## PR 870 (as.numeric and NAs)	Harald Fekjær, 2001-03-08,
+## PR 870 (as.numeric and NAs)	Harald FekjÃ¦r, 2001-03-08,
 is.na(as.numeric(" "))
 is.na(as.integer(" "))
 is.na(as.complex(" "))
 ## all false in 1.2.2
 
 
-## PR 871 (deparsing of attribute names) Harald Fekjær, 2001-03-08,
+## PR 871 (deparsing of attribute names) Harald FekjÃ¦r, 2001-03-08,
 midl <- 4
 attr(midl,"Object created") <- date()
 deparse(midl)
@@ -1525,7 +1525,7 @@ poly(x, degree=2)
 ## failed in 1.5.1
 
 
-## PR#1694 cut with infinite values -> NA (Markus Jäntti)
+## PR#1694 cut with infinite values -> NA (Markus JÃ¤ntti)
 cut.off <- c(-Inf, 0, Inf)
 x <- c(-Inf, -10, 0, 10, Inf)
 (res <- cut(x, cut.off, include.lowest=TRUE))
@@ -2869,7 +2869,7 @@ try(approx(list(x=rep(NaN, 9), y=1:9), xout=NaN))
 
 
 ## aggregate.data.frame failed if result would have one row
-## Philippe Hupé, R-help, 2004-05-14
+## Philippe HupÃ©, R-help, 2004-05-14
 dat <- data.frame(a=rep(2,10),b=rep("a",10))
 aggregate(dat$a, by=list(a1=dat$a, b1=dat$b), NROW)
 ## failed due to missing drop = FALSE

@@ -2508,20 +2508,45 @@ setRlibs <-
                                       colClasses = c("character", rep("numeric", 3)))
                 o <- order(times[[1L]] + times[[2L]], decreasing = TRUE)
                 times <- times[o, ]
+                
                 keep <- ((times[[1L]] + times[[2L]] > theta) |
                          (times[[3L]] > theta))
                 if(any(keep)) {
-                    if(!any && check_incoming)
+                    if(!any && check_incoming) {
                         noteLog(Log)
+                        any <- TRUE
+                    }
                     printLog(Log,
                              gettextf("Examples with CPU or elapsed time > %gs\n",
                                      theta, domain = "R-tools"))
-                    times <- utils::capture.output(format(times[keep, ]))
-                    printLog0(Log, paste(times, collapse = "\n"), "\n")
-                } else {
-                    if(!any && check_incoming)
-                        resultLog(Log, gettext("OK", domain = "R-tools"))
+                    out <- utils::capture.output(format(times[keep, ]))
+                    printLog0(Log, paste(out, collapse = "\n"), "\n")
                 }
+
+                theta <-
+                    as.numeric(Sys.getenv("_R_CHECK_EXAMPLE_TIMING_USER_TO_ELAPSED_THRESHOLD_",
+                                          NA_character_))
+                if(!is.na(theta)) {
+                    keep <- (times[[1L]] >= pmax(theta * times[[3L]], 1))
+                    if(any(keep)) {
+                        if(!any && check_incoming) {
+                            noteLog(Log)
+                            any <- TRUE
+                        }
+                        printLog(Log,
+                                 gettextf("Examples with user time > %g times elapsed time\n",
+                                         theta, domain = "R-tools"))
+                        bad <- times[keep, ]
+                        bad <- cbind(bad,
+                                     ratio = round(bad[[1L]] / bad[[3L]], 3L))
+                        bad <- bad[order(bad$ratio, decreasing = TRUE), ]
+                        out <- utils::capture.output(format(bad))
+                        printLog0(Log, paste(out, collapse = "\n"), "\n")
+                    }
+                }
+
+                if(!any && check_incoming)
+                    resultLog(Log, "OK")
             }
 
             ## Try to compare results from running the examples to
