@@ -1493,7 +1493,8 @@ SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
   This could call findVar1.  NB: they behave differently on failure.
 */
 
-SEXP findFun(SEXP symbol, SEXP rho)
+attribute_hidden
+SEXP findFun3(SEXP symbol, SEXP rho, SEXP call)
 {
     SEXP vl;
 
@@ -1531,15 +1532,19 @@ SEXP findFun(SEXP symbol, SEXP rho)
 		TYPEOF(vl) == SPECIALSXP)
 		return (vl);
 	    if (vl == R_MissingArg)
-		error(_("'%s' argument is missing, with no default"), CHAR(PRINTNAME(symbol)));
+		errorcall(call, _("'%s' argument is missing, with no default"), CHAR(PRINTNAME(symbol)));
 	}
 	rho = ENCLOS(rho);
     }
-    error(_("could not find function '%s'"), EncodeChar(PRINTNAME(symbol)));
+    errorcall(call, _("could not find function '%s'"), EncodeChar(PRINTNAME(symbol)));
     /* NOT REACHED */
     return R_UnboundValue;
 }
 
+SEXP findFun(SEXP symbol, SEXP rho)
+{
+    return findFun3(symbol, rho, R_CurrentExpression);
+}
 
 /*----------------------------------------------------------------------
 

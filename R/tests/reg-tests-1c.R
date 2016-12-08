@@ -53,6 +53,7 @@ stopifnot(!is.unsorted(NA))
 
 ## str(.) for large factors should be fast:
 u <- as.character(runif(1e5))
+dummy <- str(u); dummy <- str(u); # force compilation of str
 t1 <- max(0.001, system.time(str(u))[[1]]) # get a baseline > 0
 uf <- factor(u)
 (t2 <- system.time(str(uf))[[1]]) / t1 # typically around 1--2
@@ -2031,6 +2032,25 @@ stopifnot(
 (S.t <- Sys.timezone())
 if(is.na(S.t) || !nzchar(S.t)) stop("could not get timezone")
 ## has been NA_character_  in Ubuntu 14.04.5 LTS
+
+
+## format()ing "illegal"  POSIXlt  objects
+d <- as.POSIXlt("2016-12-06"); d$zone <- 1
+tools::assertError(format(d))
+d$zone <- NULL
+stopifnot(identical(format(d),"2016-12-06"))
+d$zone <- "CET" # = previous, but 'zone' now is last
+tools::assertError(format(d))
+dlt <- structure(
+    list(sec = 52, min = 59L, hour = 18L, mday = 6L, mon = 11L, year = 116L,
+         wday = 2L, yday = 340L, isdst = 0L, zone = "CET", gmtoff = 3600L),
+    class = c("POSIXlt", "POSIXt"), tzone = c("", "CET", "CEST"))
+dlt$sec <- 10000 + 1:10 # almost three hours & uses re-cycling ..
+fd <- format(dlt)
+stopifnot(length(fd) == 10, identical(fd, format(dct <- as.POSIXct(dlt))))
+dlt2 <- as.POSIXlt(dct)
+stopifnot(identical(format(dlt2), fd))
+## The two assertError()s gave a seg.fault in  R <= 3.3.2
 
 
 
