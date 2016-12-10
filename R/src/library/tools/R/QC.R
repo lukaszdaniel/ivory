@@ -562,7 +562,7 @@ function(package, dir, lib.loc = NULL,
     names(db) <- db_names <- .Rd_get_names_from_Rd_db(db)
 
     ## pkg-defunct.Rd is not expected to list arguments
-    ind <- db_names %in% paste(package_name, "defunct", sep = "-")
+    ind <- db_names %in% paste0(package_name, "-defunct")
     db <- db[!ind]
     db_names <- db_names[!ind]
 
@@ -3877,7 +3877,7 @@ function(package, lib.loc = NULL)
 	    }
     }
     checkMethodUsagePackage <- function (pack, ...) {
-	pname <- paste("package", pack, sep = ":")
+	pname <- paste0("package:", pack)
 	if (!pname %in% search())
 	    stop("package must be loaded", domain = "R-tools")
 	checkMethodUsageEnv(if (isNamespaceLoaded(pack))
@@ -7828,7 +7828,7 @@ function(x)
 .package_env <-
 function(package_name)
 {
-    as.environment(paste("package", package_name, sep = ":"))
+    as.environment(paste0("package:", package_name))
 }
 
 ### ** .parse_text_as_much_as_possible
@@ -7880,12 +7880,12 @@ function(x)
     ## bad_lines attribute.
     txt <- gsub("(<<?see below>>?)", "`\\1`", txt)
     ## \usage is only 'verbatim-like'
-    ## <FIXME>
-    ## 'LanguageClasses.Rd' in package methods has '"\{"' in its usage.
-    ## But why should it use the backslash escape?
-    txt <- gsub("\\{", "{", txt, fixed = TRUE)
-    txt <- gsub("\\}", "}", txt, fixed = TRUE)
-    ## </FIXME>
+    ## ## <FIXME>
+    ## ## 'LanguageClasses.Rd' in package methods has '"\{"' in its usage.
+    ## ## But why should it use the backslash escape?
+    ## txt <- gsub("\\{", "{", txt, fixed = TRUE)
+    ## txt <- gsub("\\}", "}", txt, fixed = TRUE)
+    ## ## </FIXME>
     ## now any valid escape by \ is
     ##   \a \b \f \n \r \t \u \U \v \x \' \" \\ or \octal
     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
@@ -7905,7 +7905,7 @@ function(x)
 function(msg, x)
 {
     xx <- strwrap(paste(sQuote(x), collapse = " "), exdent = 2L)
-    if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > options("width")$width))
+    if (length(xx) > 1L || nchar(msg) + nchar(xx) + 1L > options("width")$width)
         c(msg, .pretty_format(x))
     else paste(msg, xx, sep = " ")
 }
