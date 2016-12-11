@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-10-14 11:37\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,7 +143,6 @@ msgstr ""
 #: R/Rd.R: 0
 #: R/Vignettes.R: 0
 #: R/Vignettes.R: 0
-#: R/pkgDepends.R: 0
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
@@ -166,7 +165,6 @@ msgstr ""
 #. R/Rd.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "vignette")
-#. R/pkgDepends.R: gettextf("'%s' argument must be of length 1", "pkg")
 
 msgid "'%s' argument must be of length 1"
 msgstr ""
@@ -1624,6 +1622,13 @@ msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
 
+#: R/check.R: 0
+#. R/check.R: gettextf("Examples with user time > %g times elapsed time\n", theta, domain = "R-tools")
+
+msgid "Examples with user time > %g times elapsed time"
+msgstr ""
+
+
 #: R/testing.R: 0
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
 
@@ -2002,13 +2007,6 @@ msgstr ""
 #. R/check.R: gettext("Found the following warnings:", domain = "R-tools")
 
 msgid "Found the following warnings:"
-msgstr ""
-
-
-#: R/pkgDepends.R: 0
-#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
-
-msgid "Function %s is deprecated.\nUse function %s or %s instead."
 msgstr ""
 
 
@@ -2907,7 +2905,6 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
-#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -2921,7 +2918,6 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3145,10 +3141,10 @@ msgid "PDF header was not found"
 msgstr ""
 
 
-#: R/pkgDepends.R: 0
-#. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
 
-msgid "Package %s had its dependencies reduced to a minimal set."
+msgid "Package '%s' had its dependencies reduced to a minimal set."
 msgstr ""
 
 
@@ -4848,6 +4844,13 @@ msgid "apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s"
 msgstr ""
 
 
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
+
+msgid "argument 'pkg' must be of length 1"
+msgstr ""
+
+
 #: R/parseLatex.R: 0
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 
@@ -4890,8 +4893,8 @@ msgid "backing up earlier installation"
 msgstr ""
 
 
-#: R/pkgDepends.R: 0
-#. R/pkgDepends.R: stop("bad operand")
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: stop("bad operand")
 
 msgid "bad operand"
 msgstr ""
@@ -5118,9 +5121,9 @@ msgstr ""
 
 
 #: R/utils.R: 0
-#. R/utils.R: stop("cannot source package code", "\n", conditionMessage(e), call. = FALSE)
+#. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 
-msgid "cannot source package code"
+msgid "cannot source package code:"
 msgstr ""
 
 
@@ -6644,8 +6647,8 @@ msgid "package %s was already a binary package and will not be rebuilt"
 msgstr ""
 
 
-#: R/pkgDepends.R: 0
-#. R/pkgDepends.R: gettextf("package '%s' was not found", pkg)
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: gettextf("package '%s' was not found", pkg)
 
 msgid "package '%s' was not found"
 msgstr ""
@@ -7218,8 +7221,8 @@ msgid "testing package %s failed"
 msgstr ""
 
 
-#: R/pkgDepends.R: 0
-#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
 
 msgid "the 'lib.loc' argument has always been unused and is deprecated now"
 msgstr ""

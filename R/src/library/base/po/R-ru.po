@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2652,10 +2652,10 @@ msgstr "пропущенные значения в 'row.names' не разреш
 msgid "more 'from' files than 'to' files"
 msgstr "больше файлов 'from', чем 'to'"
 
-#. R/dynload.R: gettextf("multiple DLL files match %s. Using file %s", sQuote(dll), sQuote(dll[["path"]]))
+#. R/dynload.R: gettextf("multiple DLL files match '%s'. Using file '%s'", names(dll), dlls[[dll]][["path"]])
 #: R/dynload.R:0
 #, fuzzy
-msgid "multiple DLL files match %s. Using file %s"
+msgid "multiple DLL files match '%s'. Using file '%s'"
 msgstr "несколько DLL соответствуют '%s'. Использую '%s'"
 
 #. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))

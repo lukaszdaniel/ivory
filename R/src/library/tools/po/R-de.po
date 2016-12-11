@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:37\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -144,8 +144,7 @@ msgstr "'x' muss eine Zeichenkette sein"
 #. R/Rd.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "vignette")
-#. R/pkgDepends.R: gettextf("'%s' argument must be of length 1", "pkg")
-#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/pkgDepends.R:0
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "Argument 'pkg' muss Länge 1 haben"
@@ -1368,6 +1367,11 @@ msgstr "Keine Beispiele zum Paket %s gefunden"
 msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
+#. R/check.R: gettextf("Examples with user time > %g times elapsed time\n", theta, domain = "R-tools")
+#: R/check.R:0
+msgid "Examples with user time > %g times elapsed time"
+msgstr ""
+
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
 #: R/testing.R:0
 msgid "Extracting from parsed Rd's"
@@ -1679,13 +1683,6 @@ msgstr ""
 #, fuzzy
 msgid "Found the following warnings:"
 msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
-
-#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
-#: R/pkgDepends.R:0
-msgid ""
-"Function %s is deprecated.\n"
-"Use function %s or %s instead."
-msgstr ""
 
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
@@ -2445,7 +2442,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2573,10 +2569,10 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "PDF Header nicht gefunden"
 
-#. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
+#: R/tools-deprecated.R:0
 #, fuzzy
-msgid "Package %s had its dependencies reduced to a minimal set."
+msgid "Package '%s' had its dependencies reduced to a minimal set."
 msgstr "Abhängigkeiten von Paket '%s' auf minimale Menge reduziert."
 
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
@@ -4046,6 +4042,11 @@ msgstr ""
 msgid "apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s"
 msgstr ""
 
+#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
+#: R/tools-deprecated.R:0
+msgid "argument 'pkg' must be of length 1"
+msgstr "Argument 'pkg' muss Länge 1 haben"
+
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 #, fuzzy
@@ -4078,8 +4079,8 @@ msgstr "Versuch mehr als ein Element auszuwählen"
 msgid "backing up earlier installation"
 msgstr "gepackte Installation von"
 
-#. R/pkgDepends.R: stop("bad operand")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: stop("bad operand")
+#: R/tools-deprecated.R:0
 msgid "bad operand"
 msgstr "ungeeigneter Operand"
 
@@ -4256,9 +4257,10 @@ msgstr "kann Streamdaten nicht lesen"
 msgid "cannot read stream object"
 msgstr "kann Streamobjekt nicht lesen"
 
-#. R/utils.R: stop("cannot source package code", "\n", conditionMessage(e), call. = FALSE)
+#. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 #: R/utils.R:0
-msgid "cannot source package code"
+#, fuzzy
+msgid "cannot source package code:"
 msgstr "kann Paketquelltext nicht einlesen"
 
 #. R/admin.R: warning("cannot turn off locale-specific sorting via LC_COLLATE")
@@ -5470,8 +5472,8 @@ msgstr "Paket %s erfolgreich entpackt und MD5 Summen überprüft"
 msgid "package %s was already a binary package and will not be rebuilt"
 msgstr ""
 
-#. R/pkgDepends.R: gettextf("package '%s' was not found", pkg)
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: gettextf("package '%s' was not found", pkg)
+#: R/tools-deprecated.R:0
 msgid "package '%s' was not found"
 msgstr "Paket '%s' nicht gefunden"
 
@@ -5943,8 +5945,8 @@ msgstr "Link %s konnte im Paket %s nicht gefunden werden"
 msgid "testing package %s failed"
 msgstr "Test von '%s' fehlgeschlagen"
 
-#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/tools-deprecated.R:0
 msgid "the 'lib.loc' argument has always been unused and is deprecated now"
 msgstr ""
 
@@ -7393,9 +7395,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
 #~ msgid "argument 'vignette' must be of length 1"
 #~ msgstr "Argument 'vignette' muss Länge 1 haben"
-
-#~ msgid "argument 'pkg' must be of length 1"
-#~ msgstr "Argument 'pkg' muss Länge 1 haben"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "Datei '%s' existiert nicht"

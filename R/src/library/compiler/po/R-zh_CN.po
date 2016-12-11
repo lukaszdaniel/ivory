@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2015-01-17 15:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -182,6 +182,11 @@ msgstr "输入和输出文件的文件名是一样的"
 msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
 msgstr ""
 
+#. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName, value)
+#: R/cmp.R:0
+msgid "invalid environment variable value: %s==%s"
+msgstr ""
+
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
@@ -259,7 +264,7 @@ msgstr "不是一个正确的评估环境"
 msgid "wrong number of arguments to '%s'"
 msgstr "给'%s'的参数个数不对"
 
-#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
+#. R/cmp.R: ngettext(length(funs), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
 #: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "

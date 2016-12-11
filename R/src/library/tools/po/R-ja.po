@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:37\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -140,8 +140,7 @@ msgstr " 引数 'txt' は１つの文字でなければなりません "
 #. R/Rd.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "vignette")
-#. R/pkgDepends.R: gettextf("'%s' argument must be of length 1", "pkg")
-#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/pkgDepends.R:0
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr " 引数 'pkg' は長さ1でなければなりません "
@@ -1373,6 +1372,11 @@ msgstr " パッケージ %s に対する例文が見つかりません "
 msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
+#. R/check.R: gettextf("Examples with user time > %g times elapsed time\n", theta, domain = "R-tools")
+#: R/check.R:0
+msgid "Examples with user time > %g times elapsed time"
+msgstr ""
+
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
 #: R/testing.R:0
 msgid "Extracting from parsed Rd's"
@@ -1697,13 +1701,6 @@ msgstr ""
 msgid "Found the following warnings:"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
-
-#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
-#: R/pkgDepends.R:0
-msgid ""
-"Function %s is deprecated.\n"
-"Use function %s or %s instead."
-msgstr ""
 
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
@@ -2462,7 +2459,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2591,10 +2587,10 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "PDFヘッダが見つかりませんでした "
 
-#. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
+#: R/tools-deprecated.R:0
 #, fuzzy
-msgid "Package %s had its dependencies reduced to a minimal set."
+msgid "Package '%s' had its dependencies reduced to a minimal set."
 msgstr " パッケージ '%s' は最小のセットに縮小された依存関係を持ちます "
 
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
@@ -4074,6 +4070,11 @@ msgstr ""
 msgid "apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s"
 msgstr ""
 
+#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
+#: R/tools-deprecated.R:0
+msgid "argument 'pkg' must be of length 1"
+msgstr " 引数 'pkg' は長さ1でなければなりません "
+
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 #, fuzzy
@@ -4106,8 +4107,8 @@ msgstr " 2個以上の要素を選択しようとしました "
 msgid "backing up earlier installation"
 msgstr " 以下のパッケージ化されたインストール "
 
-#. R/pkgDepends.R: stop("bad operand")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: stop("bad operand")
+#: R/tools-deprecated.R:0
 msgid "bad operand"
 msgstr " 誤ったオペランド "
 
@@ -4284,9 +4285,10 @@ msgstr " ストリームデータを読めません "
 msgid "cannot read stream object"
 msgstr " ストリームオブジェクトを読めません "
 
-#. R/utils.R: stop("cannot source package code", "\n", conditionMessage(e), call. = FALSE)
+#. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 #: R/utils.R:0
-msgid "cannot source package code"
+#, fuzzy
+msgid "cannot source package code:"
 msgstr " パッケージコードを読み込めません "
 
 #. R/admin.R: warning("cannot turn off locale-specific sorting via LC_COLLATE")
@@ -5498,8 +5500,8 @@ msgstr " パッケージ %s の解凍およびMD5サムの検証に成功しま�
 msgid "package %s was already a binary package and will not be rebuilt"
 msgstr ""
 
-#. R/pkgDepends.R: gettextf("package '%s' was not found", pkg)
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: gettextf("package '%s' was not found", pkg)
+#: R/tools-deprecated.R:0
 msgid "package '%s' was not found"
 msgstr " パッケージ '%s' は見つかりませんでした "
 
@@ -5969,8 +5971,8 @@ msgstr " リンク %s （パッケージ %s 中の）は所在不明です "
 msgid "testing package %s failed"
 msgstr " '%s' のテストに失敗しました "
 
-#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/tools-deprecated.R:0
 msgid "the 'lib.loc' argument has always been unused and is deprecated now"
 msgstr ""
 
@@ -7318,9 +7320,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
 #~ msgid "argument 'vignette' must be of length 1"
 #~ msgstr " 引数 'vignette' は長さ1でなければなりません "
-
-#~ msgid "argument 'pkg' must be of length 1"
-#~ msgstr " 引数 'pkg' は長さ1でなければなりません "
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr " ファイル '%s' が存在しません "

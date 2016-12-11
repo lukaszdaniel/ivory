@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -527,11 +527,11 @@ msgstr ""
 msgid "Browsing in the environment with call:"
 msgstr "Просмотр окружения с вызовом:"
 
-#. R/bug.report.R: gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at http://bugs.r-project.org/ .\n\n  We will now try to open that website in a browser")
+#. R/bug.report.R: gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at <https://bugs.R-project.org/>.\n\n  We will now try to open that website in a browser")
 #: R/bug.report.R:0
 msgid ""
 "Bug reports on R and the base packages need to be submitted\n"
-"  to the tracker at http://bugs.r-project.org/ .\n"
+"  to the tracker at <https://bugs.R-project.org/>.\n"
 "\n"
 "  We will now try to open that website in a browser"
 msgstr ""

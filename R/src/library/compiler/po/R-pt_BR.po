@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -176,6 +176,11 @@ msgstr "nomes de entrada e saida são os mesmos"
 msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
 msgstr ""
 
+#. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName, value)
+#: R/cmp.R:0
+msgid "invalid environment variable value: %s==%s"
+msgstr ""
+
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
@@ -254,7 +259,7 @@ msgstr "não é um ambiente apropriado para avaliação"
 msgid "wrong number of arguments to '%s'"
 msgstr "número de argumentos inválidos para '%s'"
 
-#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
+#. R/cmp.R: ngettext(length(funs), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
 #: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2646,10 +2646,10 @@ msgstr "manglande verdiar i «row.names» er ikkje tillatne"
 msgid "more 'from' files than 'to' files"
 msgstr "fleire «from»-filer enn «to»-filer"
 
-#. R/dynload.R: gettextf("multiple DLL files match %s. Using file %s", sQuote(dll), sQuote(dll[["path"]]))
+#. R/dynload.R: gettextf("multiple DLL files match '%s'. Using file '%s'", names(dll), dlls[[dll]][["path"]])
 #: R/dynload.R:0
 #, fuzzy
-msgid "multiple DLL files match %s. Using file %s"
+msgid "multiple DLL files match '%s'. Using file '%s'"
 msgstr "fleire DLL-ar passar til «%s». Brukar «%s»."
 
 #. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))

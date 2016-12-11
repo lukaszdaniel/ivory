@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:37\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -144,8 +144,7 @@ msgstr "'x'는 반드시 한개의 문자열이어야 합니다"
 #. R/Rd.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "vignette")
-#. R/pkgDepends.R: gettextf("'%s' argument must be of length 1", "pkg")
-#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/pkgDepends.R:0
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "인자 'pkg'는 반드시 길이가 1이어야 합니다"
@@ -1346,6 +1345,11 @@ msgstr "패키지 %s에 대한 예제를 찾을 수 없습니다"
 msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
+#. R/check.R: gettextf("Examples with user time > %g times elapsed time\n", theta, domain = "R-tools")
+#: R/check.R:0
+msgid "Examples with user time > %g times elapsed time"
+msgstr ""
+
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
 #: R/testing.R:0
 msgid "Extracting from parsed Rd's"
@@ -1652,13 +1656,6 @@ msgstr ""
 #, fuzzy
 msgid "Found the following warnings:"
 msgstr "다음의 함수로부터 .Internal 호출을 찾았습니다:"
-
-#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
-#: R/pkgDepends.R:0
-msgid ""
-"Function %s is deprecated.\n"
-"Use function %s or %s instead."
-msgstr ""
 
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
@@ -2403,7 +2400,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2528,9 +2524,9 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "PDF 헤더를 찾을 수 없습니다"
 
-#. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
-#: R/pkgDepends.R:0
-msgid "Package %s had its dependencies reduced to a minimal set."
+#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
+#: R/tools-deprecated.R:0
+msgid "Package '%s' had its dependencies reduced to a minimal set."
 msgstr ""
 
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
@@ -3972,6 +3968,12 @@ msgstr ""
 msgid "apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s"
 msgstr ""
 
+#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "argument 'pkg' must be of length 1"
+msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
+
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 #, fuzzy
@@ -4003,8 +4005,8 @@ msgstr ""
 msgid "backing up earlier installation"
 msgstr ""
 
-#. R/pkgDepends.R: stop("bad operand")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: stop("bad operand")
+#: R/tools-deprecated.R:0
 msgid "bad operand"
 msgstr "잘못된 연산자입니다"
 
@@ -4179,9 +4181,10 @@ msgstr "스트림 데이터를 읽을 수 없습니다"
 msgid "cannot read stream object"
 msgstr "스트림 객체를 읽을 수 없습니다"
 
-#. R/utils.R: stop("cannot source package code", "\n", conditionMessage(e), call. = FALSE)
+#. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 #: R/utils.R:0
-msgid "cannot source package code"
+#, fuzzy
+msgid "cannot source package code:"
 msgstr "패키지 코드를 소스할 수 없습니다"
 
 #. R/admin.R: warning("cannot turn off locale-specific sorting via LC_COLLATE")
@@ -5353,8 +5356,8 @@ msgstr "패키지 %s는 성공적으로 압축해제되었고, MD5 sums 이 확�
 msgid "package %s was already a binary package and will not be rebuilt"
 msgstr ""
 
-#. R/pkgDepends.R: gettextf("package '%s' was not found", pkg)
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: gettextf("package '%s' was not found", pkg)
+#: R/tools-deprecated.R:0
 msgid "package '%s' was not found"
 msgstr "패키지 '%s'를 찾을 수 없습니다"
 
@@ -5822,8 +5825,8 @@ msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없�
 msgid "testing package %s failed"
 msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
-#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/pkgDepends.R:0
+#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/tools-deprecated.R:0
 msgid "the 'lib.loc' argument has always been unused and is deprecated now"
 msgstr ""
 
@@ -7020,9 +7023,6 @@ msgstr[0] "코드 파일들을 기록할 수 없습니다"
 #, fuzzy
 #~ msgid "parse error in file %s:\n"
 #~ msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
-
-#~ msgid "argument 'package' must be of length 1"
-#~ msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
 
 #~ msgid ""
 #~ "parse error in file '%s':\n"

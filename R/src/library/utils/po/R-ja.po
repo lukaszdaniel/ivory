@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2016-12-10 14:40\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -519,11 +519,11 @@ msgstr ""
 msgid "Browsing in the environment with call:"
 msgstr " 以下の呼び出しに伴う環境でブラウジング：  "
 
-#. R/bug.report.R: gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at http://bugs.r-project.org/ .\n\n  We will now try to open that website in a browser")
+#. R/bug.report.R: gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at <https://bugs.R-project.org/>.\n\n  We will now try to open that website in a browser")
 #: R/bug.report.R:0
 msgid ""
 "Bug reports on R and the base packages need to be submitted\n"
-"  to the tracker at http://bugs.r-project.org/ .\n"
+"  to the tracker at <https://bugs.R-project.org/>.\n"
 "\n"
 "  We will now try to open that website in a browser"
 msgstr ""
