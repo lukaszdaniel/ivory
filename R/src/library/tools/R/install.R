@@ -415,7 +415,7 @@
             }
             if(length(archs))
                 for(arch in archs) {
-                    ss <- paste("src", arch, sep = "-")
+                    ss <- paste0("src-", arch)
                     ## it seems fixing permissions is sometimes needed
                     .Call(C_dirchmod, ss, group.writable)
                     unlink(ss, recursive = TRUE)
@@ -753,7 +753,7 @@
                         for(arch in archs) {
                             message("", domain = "R-tools") # a blank line
                             starsmsg("***", "arch - ", arch)
-                            ss <- paste("src", arch, sep = "-")
+                            ss <- paste0("src-", arch)
                             dir.create(ss, showWarnings = FALSE)
                             file.copy(Sys.glob("src/*"), ss, recursive = TRUE)
                             ## avoid read-only files/dir such as nested .svn
@@ -811,7 +811,7 @@
                                     has_error <- run_shlib(pkg_name, srcs, instdir, "")
                                 } else {
                                     starsmsg("***", "arch - ", arch)
-                                    ss <- paste("src", arch, sep = "-")
+                                    ss <- paste0("src-", arch)
                                     dir.create(ss, showWarnings = FALSE)
                                     file.copy(Sys.glob("src/*"), ss, recursive = TRUE)
                                     setwd(ss)
@@ -1530,7 +1530,7 @@
         if (WINDOWS) {
             ## file.access is unreliable on Windows
             ## the only known reliable way is to try it
-            fn <- file.path(lib, paste("_test_dir", Sys.getpid(), sep = "_"))
+            fn <- file.path(lib, paste0("_test_dir_", Sys.getpid()))
             unlink(fn, recursive = TRUE) # precaution
             res <- try(dir.create(fn, showWarnings = FALSE))
             if (inherits(res, "try-error") || !res) ok <- FALSE
@@ -1611,7 +1611,7 @@
 
     for(pkg in allpkgs) {
         if (pkglock) {
-            lockdir <- file.path(lib, paste("00LOCK", basename(pkg), sep = "-"))
+            lockdir <- file.path(lib, paste0("00LOCK-", basename(pkg)))
             mk_lockdir(lockdir)
         }
         do_install(pkg)
@@ -2313,9 +2313,8 @@ function()
         if(!is.na(f <- Sys.getenv("R_MAKEVARS_USER", NA_character_))) {
             if(file.exists(f)) m <- f
         }
-        else if(file.exists(f <- path.expand(paste("~/.R/Makevars",
-                                                   Sys.getenv("R_PLATFORM"),
-                                                   sep = "-"))))
+        else if(file.exists(f <- path.expand(paste0("~/.R/Makevars-",
+                                                    Sys.getenv("R_PLATFORM")))))
             m <- f
         else if(file.exists(f <- path.expand("~/.R/Makevars")))
             m <- f

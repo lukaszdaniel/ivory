@@ -175,8 +175,8 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         cfiles <- grep("^#", readLines("po/POTFILES"), value = TRUE, invert = TRUE)
     }
     cmd <- sprintf("xgettext --keyword=_ --keyword=N_ --keyword=n_:1,2 -o %s", shQuote(ofile))
-    cmd <- c(cmd, paste("--package-name", name, sep = "="),
-             paste("--package-version", version, sep = "="),
+    cmd <- c(cmd, paste0("--package-name=", name),
+             paste0("--package-version=", version),
              "--add-comments=TRANSLATORS:",
              if(!is.null(copyright))
                  sprintf('--copyright-holder="%s"', copyright),
@@ -259,7 +259,7 @@ update_RGui_po <- function(srcdir)
     ofile <- tempfile()
     cmd <- sprintf("xgettext --keyword --keyword=G_ --keyword=GN_ -o %s", shQuote(ofile))
     cmd <- c(cmd, "--package-name=R",
-             paste("--package-version", getRversion(), sep = "="),
+             paste0("--package-version=", getRversion()),
              "--add-comments=TRANSLATORS:",
              '--copyright-holder="The R Core Team"',
              '--msgid-bugs-address="bugs.r-project.org"')
