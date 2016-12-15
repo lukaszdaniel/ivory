@@ -90,7 +90,7 @@ unpackPkgZip <- function(pkg, pkgname, lib, libs_only = FALSE,
         if(identical(lock, "pkglock") || isTRUE(lock)) {
             ## This is code adapted from tools:::.install_packages
 	    lockdir <- if(identical(lock, "pkglock"))
-                file.path(lib, paste("00LOCK", pkgname, sep = "-"))
+                file.path(lib, paste0("00LOCK-", pkgname))
             else file.path(lib, "00LOCK")
 	    if (file.exists(lockdir)) {
                 stop(gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s", sQuote(lib), sQuote(lockdir)), domain = "R-utils")

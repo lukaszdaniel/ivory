@@ -256,7 +256,7 @@ print.help_files_with_topic <- function(x, ...)
         stop(gettextf("invalid '%s' argument", "file"), domain = "R-utils")
     pkgname <- basename(dirpath)
     RdDB <- file.path(path, pkgname)
-    if(!file.exists(paste(RdDB, "rdx", sep = ".")))
+    if(!file.exists(paste0(RdDB, ".rdx")))
         stop(gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed", sQuote(pkgname)), domain = "R-utils")
     tools:::fetchRdDB(RdDB, basename(file))
 }
