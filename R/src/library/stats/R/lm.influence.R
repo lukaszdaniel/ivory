@@ -227,7 +227,7 @@ influence.measures <- function(model)
 	if(n <= k)
 	    stop("too few cases, n < k")
 	absmat <- abs(infmat)
-	result <- cbind(absmat[, 1L:k] > 1, # |dfbetas| > 1
+	result <- cbind(absmat[, seq_len(k)] > 1, # |dfbetas| > 1
 			absmat[, k + 1] > 3 * sqrt(k/(n - k)), # |dffit| > ..
 			abs(1 - infmat[, k + 2]) > (3*k)/(n - k),# |1-cov.r| >..
 			pf(infmat[, k + 3], k, n - k) > 0.5,# "P[cook.d..]" > .5
@@ -245,7 +245,7 @@ influence.measures <- function(model)
     h <- infl$hat
     dfbetas <- infl$coefficients / outer(infl$sigma, sqrt(diag(xxi)))
     vn <- variable.names(model); vn[vn == gettext("(Intercept)", domain = "R-stats")] <- "1_"
-    colnames(dfbetas) <- paste("dfb",abbreviate(vn),sep=".")
+    colnames(dfbetas) <- paste0("dfb.", abbreviate(vn))
     ## Compatible to dffits():
     dffits <- e*sqrt(h)/(si*(1-h))
     if(any(ii <- is.infinite(dffits))) dffits[ii] <- NaN

@@ -217,23 +217,23 @@ strptime <- function(x, format, tz = "")
 format.POSIXct <- function(x, format = "", tz = "", usetz = FALSE, ...)
 {
     if(!inherits(x, "POSIXct")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXct")))
-    if(missing(tz) && !is.null(tzone <- attr(x, "tzone"))) tz <- tzone
+    if(identical(tz, "") && !is.null(tzone <- attr(x, "tzone"))) tz <- tzone
     structure(format.POSIXlt(as.POSIXlt(x, tz), format, usetz, ...),
               names = names(x))
 }
 
-## could handle arrays for max.print; cf print.Date() in ./dates.R
+## could handle arrays for max.print \\ keep in sync with  print.Date() in ./dates.R
 print.POSIXct <-
-print.POSIXlt <- function(x, ...)
+print.POSIXlt <- function(x, tz = "", usetz = TRUE, ...)
 {
     max.print <- getOption("max.print", 9999L)
     if(max.print < length(x)) {
-        print(format(x[seq_len(max.print)], usetz = TRUE), ...)
+        print(format(x[seq_len(max.print)], tz = tz, usetz = usetz), ...)
         cat(sprintf(ngettext(as.integer(length(x) - max.print),
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
             length(x) - max.print), "\n", sep = "")
-    } else print(if(length(x)) format(x, usetz = TRUE)
+    } else print(if(length(x)) format(x, tz = tz, usetz = usetz)
 		 else gettextf("class %s of length 0", dQuote(class(x)[1L])), ...)
     invisible(x)
 }
