@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2016-12-18 11:18\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3329,14 +3329,6 @@ msgstr ""
 #. R/check.R: gettext("Packages without R code can be installed without a 'NAMESPACE' file, but it is cleaner to add an empty one.",     domain = "R-tools")
 
 msgid "Packages without R code can be installed without a 'NAMESPACE' file, but it is cleaner to add an empty one."
-msgstr ""
-
-
-#: R/packages.R: 0
-#. R/packages.R: gettext("Path: ", domain = "R-tools")
-#. R/packages.R: gettext("Path: ", domain = "R-tools")
-
-msgid "Path:"
 msgstr ""
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 14:40+0100\n"
+"POT-Creation-Date: 2016-12-18 11:17+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -633,9 +633,9 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/connections.c:5008 src/main/connections.c:5047
 #: src/main/connections.c:5052 src/main/connections.c:5057
 #: src/main/connections.c:5078 src/main/context.c:627 src/main/context.c:636
-#: src/main/context.c:640 src/main/datetime.c:782 src/main/datetime.c:871
-#: src/main/datetime.c:874 src/main/datetime.c:878 src/main/datetime.c:1048
-#: src/main/datetime.c:1050 src/main/datetime.c:1255 src/main/debug.c:245
+#: src/main/context.c:640 src/main/datetime.c:780 src/main/datetime.c:869
+#: src/main/datetime.c:872 src/main/datetime.c:876 src/main/datetime.c:1046
+#: src/main/datetime.c:1048 src/main/datetime.c:1253 src/main/debug.c:245
 #: src/main/deparse.c:418 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
@@ -653,7 +653,7 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/grep.c:2348 src/main/grep.c:2650 src/main/grep.c:2655
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3863 src/main/names.c:1310 src/main/names.c:1313
+#: src/main/memory.c:3862 src/main/names.c:1310 src/main/names.c:1313
 #: src/main/objects.c:1632 src/main/objects.c:1634 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -1129,8 +1129,8 @@ msgstr "첫번째 인수는 벡터여야 합니다"
 
 #: src/main/apply.c:101 src/main/array.c:506 src/main/character.c:846
 #: src/main/character.c:1655 src/main/connections.c:3579 src/main/context.c:673
-#: src/main/context.c:692 src/main/datetime.c:682 src/main/datetime.c:784
-#: src/main/datetime.c:1052 src/main/dotcode.c:220 src/main/errors.c:960
+#: src/main/context.c:692 src/main/datetime.c:680 src/main/datetime.c:782
+#: src/main/datetime.c:1050 src/main/dotcode.c:220 src/main/errors.c:960
 #: src/main/errors.c:992 src/main/errors.c:1098 src/main/errors.c:1123
 #: src/main/errors.c:1128 src/main/errors.c:1406 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
@@ -3123,31 +3123,31 @@ msgstr "복소수에 대해서는 min/max가 정의되어 있지 않습니다"
 msgid "unknown '%s' function"
 msgstr "알수 없는 cumxxx 함수입니다"
 
-#: src/main/datetime.c:551 src/main/datetime.c:561
+#: src/main/datetime.c:549 src/main/datetime.c:559
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "입력 문자열이 너무 깁니다"
 
-#: src/main/datetime.c:555 src/main/datetime.c:563 src/main/datetime.c:577
-#: src/main/datetime.c:582
+#: src/main/datetime.c:553 src/main/datetime.c:561 src/main/datetime.c:575
+#: src/main/datetime.c:580
 msgid "problem with setting timezone"
 msgstr "시간대 설정에 문제가 있습니다"
 
-#: src/main/datetime.c:567
+#: src/main/datetime.c:565
 msgid "cannot set timezones on this system"
 msgstr "이 시스템은 시간대를 설정할 수 없습니다"
 
-#: src/main/datetime.c:589 src/main/datetime.c:591
+#: src/main/datetime.c:587 src/main/datetime.c:589
 msgid "problem with unsetting timezone"
 msgstr "시간대가 설정되지 않아서 생긴 문제입니다"
 
-#: src/main/datetime.c:811 src/main/datetime.c:814 src/main/datetime.c:910
-#: src/main/datetime.c:1263 src/main/datetime.c:1266
+#: src/main/datetime.c:809 src/main/datetime.c:812 src/main/datetime.c:908
+#: src/main/datetime.c:1261 src/main/datetime.c:1264
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "zero length component in non-empty POSIXlt structure"
 
-#: src/main/datetime.c:923
+#: src/main/datetime.c:921
 msgid "invalid component [[10]] in \"POSIXlt\" should be 'zone'"
 msgstr ""
 
@@ -5580,212 +5580,212 @@ msgstr "크기 %0.1f Gb의 메모리 블록을 할당할 수 없습니다"
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr "크기 %0.1f Gb의 메모리 블록을 할당할 수 없습니다"
 
-#: src/main/memory.c:2527
+#: src/main/memory.c:2526
 #, fuzzy
 msgid "vector is too large"
 msgstr "지정된 벡터의 크기가 너무 큽니다"
 
-#: src/main/memory.c:2529
+#: src/main/memory.c:2528
 msgid "negative length vectors are not allowed"
 msgstr "음수 길이의 벡터는 허용되지 않습니다"
 
-#: src/main/memory.c:2541
+#: src/main/memory.c:2540
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2555 src/main/memory.c:2567 src/main/memory.c:2579
-#: src/main/memory.c:2593
+#: src/main/memory.c:2554 src/main/memory.c:2566 src/main/memory.c:2578
+#: src/main/memory.c:2592
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr "길이 %d 벡터를 할당할 수 없습니다"
 
-#: src/main/memory.c:2603 src/main/memory.c:2610
+#: src/main/memory.c:2602 src/main/memory.c:2609
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "길이가 0 인 인수는 잘못되었습니다"
 
-#: src/main/memory.c:2614
+#: src/main/memory.c:2613
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "벡터 할당에서 형식 또는 길이 (%s 또는 %d)가 잘못되었습니다"
 
-#: src/main/memory.c:2713
+#: src/main/memory.c:2712
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr "크기 %0.1f Gb 벡터를 할당할 수 없습니다"
 
-#: src/main/memory.c:2717
+#: src/main/memory.c:2716
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr "크기 %0.1f Mb 벡터를 할당할 수 없습니다"
 
-#: src/main/memory.c:2721
+#: src/main/memory.c:2720
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "크기 %0.f Kb 벡터를 할당할 수 없습니다"
 
-#: src/main/memory.c:2977
+#: src/main/memory.c:2976
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2982
+#: src/main/memory.c:2981
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:3005
+#: src/main/memory.c:3004
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:3010 src/main/memory.c:3015
+#: src/main/memory.c:3009 src/main/memory.c:3014
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:3025
+#: src/main/memory.c:3024
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3029
+#: src/main/memory.c:3028
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3034
+#: src/main/memory.c:3033
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3107
+#: src/main/memory.c:3106
 msgid "protect(): protection stack overflow"
 msgstr "protect () : 보호 스택이 가득 찼습니다"
 
-#: src/main/memory.c:3114
+#: src/main/memory.c:3113
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] "unprotect () : %d 개의 보호된 항목"
 
-#: src/main/memory.c:3149
+#: src/main/memory.c:3148
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr : 포인터가 없습니다"
 
-#: src/main/memory.c:3187
+#: src/main/memory.c:3186
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] "unprotect () : %d 개의 보호된 항목"
 
-#: src/main/memory.c:3239
+#: src/main/memory.c:3238
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc이 메모리 (%.0f / %u 바이트)를 할당할 수 없습니다"
 
-#: src/main/memory.c:3249
+#: src/main/memory.c:3248
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc가 메모리를 재확보할 수 없습니다 (%.0f 바이트)"
 
-#: src/main/memory.c:3381
+#: src/main/memory.c:3380
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3426
+#: src/main/memory.c:3425
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3441
+#: src/main/memory.c:3440
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a charecter, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3448 src/main/memory.c:3508
+#: src/main/memory.c:3447 src/main/memory.c:3507
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a character vector, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3458 src/main/memory.c:3525
+#: src/main/memory.c:3457 src/main/memory.c:3524
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a list, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3465
+#: src/main/memory.c:3464
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a logical, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3473
+#: src/main/memory.c:3472
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a integer, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3480
+#: src/main/memory.c:3479
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3487
+#: src/main/memory.c:3486
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a numeric, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3494
+#: src/main/memory.c:3493
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr "nsl 함수가 호스트 '%s'를 결정할 수 없습니다"
 
-#: src/main/memory.c:3503
+#: src/main/memory.c:3502
 msgid "not safe to return vector pointer"
 msgstr "벡터의 포인터를 돌려주는 것은 안전하지 않습니다"
 
-#: src/main/memory.c:3511
+#: src/main/memory.c:3510
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3514
+#: src/main/memory.c:3513
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3529
+#: src/main/memory.c:3528
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3554 src/main/memory.c:3564 src/main/memory.c:3576
-#: src/main/memory.c:3590 src/main/memory.c:3605 src/main/memory.c:3623
+#: src/main/memory.c:3553 src/main/memory.c:3563 src/main/memory.c:3575
+#: src/main/memory.c:3589 src/main/memory.c:3604 src/main/memory.c:3622
 msgid "bad value"
 msgstr "부적절한 값입니다"
 
-#: src/main/memory.c:3705
+#: src/main/memory.c:3704
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3786
+#: src/main/memory.c:3785
 msgid "memory profiling is not available on this system"
 msgstr "메모리 프로파일은 이 시스템에서 사용할 수 없습니다"
 
-#: src/main/memory.c:3850
+#: src/main/memory.c:3849
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: cannot open output file '%s'"
 
-#: src/main/memory.c:3886
+#: src/main/memory.c:3885
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3903
+#: src/main/memory.c:3902
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "'read.dcf'를위한 메모리를 할당할 수 없습니다"
 
-#: src/main/memory.c:3955
+#: src/main/memory.c:3954
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -9090,21 +9090,26 @@ msgid ""
 "\tplease re-enter the credentials or hit Cancel"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1469
+#: src/modules/internet/nanohttp.c:1470
+#, fuzzy, c-format
+msgid "cannot handle https redirection to: '%s'"
+msgstr "'%s'의 파일 변경 시간을 결정할 수 없습니다"
+
+#: src/modules/internet/nanohttp.c:1473
 #, c-format
 msgid "redirect to: '%s'"
 msgstr "'%s'로 리디렉션됩니다"
 
-#: src/modules/internet/nanohttp.c:1480
+#: src/modules/internet/nanohttp.c:1484
 msgid "too many redirects, aborting ..."
 msgstr "리디렉션이 너무 많습니다, 취소합니다 .."
 
-#: src/modules/internet/nanohttp.c:1493
+#: src/modules/internet/nanohttp.c:1497
 #, c-format
 msgid "Code %d, content-type '%s'"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1496
+#: src/modules/internet/nanohttp.c:1500
 #, c-format
 msgid "Code %d, no content-type"
 msgstr ""
