@@ -1568,15 +1568,6 @@ SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 	    body = bytecodeExpr(body);
 	Rprintf(_("debugging in: "));
 	PrintCall(call, rho);
-
-	/* Is the body a bare symbol (PR#6804) */
-	if (!isSymbol(body) & !isVectorAtomic(body)){
-		/* Find out if the body is function with only one statement. */
-		if (isSymbol(CAR(body)))
-			tmp = findFun(CAR(body), rho);
-		else
-			tmp = eval(CAR(body), rho);
-	}
 	savesrcref = R_Srcref;
 	PROTECT(R_Srcref = getSrcref(getBlockSrcrefs(body), 0));
 	SrcrefPrompt("debug", R_Srcref);
@@ -1677,15 +1668,6 @@ static SEXP R_execClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	    body = bytecodeExpr(body);
 	Rprintf(_("debugging in: "));
 	PrintCall(call,rho);
-
-	/* Is the body a bare symbol (PR#6804) */
-	if (!isSymbol(body) & !isVectorAtomic(body)){
-	/* Find out if the body is function with only one statement. */
-	if (isSymbol(CAR(body)))
-	    tmp = findFun(CAR(body), rho);
-	else
-	    tmp = eval(CAR(body), rho);
-	}
 	savesrcref = R_Srcref;
 	PROTECT(R_Srcref = getSrcref(getBlockSrcrefs(body), 0));
 	SrcrefPrompt("debug", R_Srcref);
