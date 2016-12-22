@@ -903,8 +903,6 @@ static SEXP R_RepeatSymbol = NULL;
 static SEXP JIT_cache = NULL;
 static R_exprhash_t JIT_cache_hashes[JIT_CACHE_SIZE];
 
-static int R_disable_bytecode = 0;
-
 /**** allow MIN_JIT_SCORE, or both, to be changed by environment variables? */
 static int MIN_JIT_SCORE = 50;
 #define LOOP_JIT_SCORE MIN_JIT_SCORE
@@ -1138,7 +1136,7 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
     if (cmpenv == top && frmls == R_NilValue)
 	return cmpenv;
     else {
-	SEXP newenv = NewEnvironment(R_NilValue, R_NilValue, top);
+	SEXP newenv = PROTECT(NewEnvironment(R_NilValue, R_NilValue, top));
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
 	for (SEXP env = cmpenv; env != top; env = CDR(env)) {
@@ -1149,14 +1147,17 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
 		int n = length(h);
 		for (int i = 0; i < n; i++)
 		    cmpenv_enter_frame(VECTOR_ELT(h, i), newenv);
+	    } else {
+		UNPROTECT(1); /* newenv */
+		return top;
 	    }
-	    else return top;
 		/* topenv is a safe conservative answer; if a closure
 		   defines anything, its environment will not match, and
 		   it will never be compiled */
 		/* FIXME: would it be safe to simply ignore elements of
 		   of these environments? */
 	}
+	UNPROTECT(1); /* newenv */
 	return newenv;
     }
 }
@@ -1169,8 +1170,8 @@ static R_INLINE void set_jit_cache_entry(R_exprhash_t hash, SEXP val)
 
     PROTECT(val);
     SEXP entry = CONS(BODY(val), make_cached_cmpenv(val));
-    SET_TAG(entry, getAttrib(val, R_SrcrefSymbol));
     SET_VECTOR_ELT(JIT_cache, hashidx, entry);
+    SET_TAG(entry, getAttrib(val, R_SrcrefSymbol));
     UNPROTECT(1); /* val */
 
     JIT_cache_hashes[hashidx] = hash;
@@ -1277,6 +1278,23 @@ static R_INLINE Rboolean jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
     return R_compute_identical(cmpsrcref, srcref, 0);
 }
 
+SEXP attribute_hidden R_cmpfun1(SEXP fun)
+{
+    int old_visible = R_Visible;
+    SEXP packsym, funsym, call, fcall, val;
+
+    packsym = install("compiler");
+    funsym = install("tryCmpfun");
+
+    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
+    PROTECT(call = lang2(fcall, fun));
+    val = eval(call, R_GlobalEnv);
+    UNPROTECT(2);
+
+    R_Visible = old_visible;
+    return val;
+}
+
 SEXP attribute_hidden R_cmpfun(SEXP fun)
 {
     R_exprhash_t hash = 0;
@@ -1325,23 +1343,13 @@ SEXP attribute_hidden R_cmpfun(SEXP fun)
 	PRINT_JIT_INFO;
     }
 
-    int old_visible = R_Visible;
-    SEXP packsym, funsym, call, fcall, val;
-
-    packsym = install("compiler");
-    funsym = install("tryCmpfun");
-
-    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
-    PROTECT(call = lang2(fcall, fun));
-    val = eval(call, R_GlobalEnv);
-    UNPROTECT(2);
+    SEXP val = R_cmpfun1(fun);
 
     if (TYPEOF(BODY(val)) != BCODESXP)
 	SET_NOJIT(fun);
     else if (jit_strategy != STRATEGY_NO_CACHE)
-	set_jit_cache_entry(hash, val);
+	set_jit_cache_entry(hash, val); /* val is protected by callee */
 
-    R_Visible = old_visible;
     return val;
 }
 
