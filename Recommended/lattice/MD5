@@ -68,9 +68,9 @@ d72779236b0673f784313dc100ca16d1 *ChangeLog
 f9f48df883d7e1e37653a07b76af524c *po/R-fr.po
 dfa2cf098ea5c65a765dd1aa128c0d6c *po/R-ko.po
 e50ac3f226bb8853f8c2f98833a73e75 *po/R-de.po
-daeac72b4ee6b188e62a0dddcb32ec65 *po/R-lattice.pot
+e30b2cf5620899fdfd77f90ef8648ffb *po/R-lattice.pot
 4c291efee0affc4b8081398d87870c1c *po/R-pl.po
-8808cec10117f87adf75b2e397938662 *po/lattice.pot
+e8c40e9505629ff1422b61f5c1d15334 *po/lattice.pot
 727c4beb4897b4909405e84ba01ce0bc *po/R-en@quot.po
 41662f59de40581fd680540fa4aad2e9 *po/pl.po
 42364b62ff702d39971d181f2ff62235 *NEWS
@@ -81,7 +81,7 @@ aeb8a42c24baed6f0918691449a49681 *demo/lattice.R
 9ec1d932fca442660b60818b0be9c0f3 *demo/labels.R
 a6a64750f8d29e22e7abaf210b1dded4 *inst/CITATION
 55eef6918e64fed74f5733a03c4f1f79 *inst/po/fr/LC_MESSAGES/R-lattice.mo
-0c6840307611d715adba59d8cbccd826 *inst/po/en@quot/LC_MESSAGES/R-lattice.mo
+4777d07f6566523b20421e819c6c52fa *inst/po/en@quot/LC_MESSAGES/R-lattice.mo
 0529b53918b98ff09b715fb6286b9f89 *inst/po/de/LC_MESSAGES/R-lattice.mo
 0661eaf9c42f9969ecfc6f43408265eb *inst/po/pl/LC_MESSAGES/R-lattice.mo
 bcd910fa53380691bd09b434a96cf72a *inst/po/ko/LC_MESSAGES/R-lattice.mo
@@ -134,7 +134,7 @@ e3d49e6f5a6bfbd6afca2a7b0313d859 *data/melanoma.rda
 ee480b535f5c4c5d78266446a6f982c0 *data/environmental.rda
 eb723b61539feef013de476e68b5c50a *GPL-2
 d32239bcb673463ab874e80d47fae504 *GPL-3
-62d2c9af466af137dc5d7d0151c1b493 *Changes
+79b7ab2846897ce29141e321f9702ad4 *Changes
 e92972db59c6aa30de492fc63d8a332f *src/init.c
 80e8b0a897f8133d230cc79351d8eed4 *src/threeDplot.h
 69dfca4fdce9bfeba0732fa69605c5b0 *src/localization.h

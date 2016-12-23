@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -387,6 +387,11 @@ msgstr ""
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
 msgid "(each package appears only once)"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettext("(missing #line/file info)", domain = "R-utils")
+#: R/SweaveDrivers.R:0
+msgid "(missing #line/file info)"
 msgstr ""
 
 #. R/str.R: gettextf(", mode %s:", dQuote(mod))

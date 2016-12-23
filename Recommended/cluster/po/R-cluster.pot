@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.4\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"Project-Id-Version: cluster 2.0.5\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -359,13 +359,6 @@ msgid "Average silhouette width:"
 msgstr ""
 
 
-#: R/clusGap.R: 0
-#. R/clusGap.R: gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster")
-
-msgid "B=%d simulated reference sets, k = 1..%d"
-msgstr ""
-
-
 #: R/plothier.q: 0
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
@@ -444,9 +437,9 @@ msgstr ""
 
 
 #: R/clusGap.R: 0
-#. R/clusGap.R: gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster")
+#. R/clusGap.R: gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",     paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster")
 
-msgid "Clustering Gap statistic [\"clusGap\"]."
+msgid "Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\""
 msgstr ""
 
 
@@ -1068,6 +1061,14 @@ msgid "full silhouette is only available for results of 'clara(*, keep.data = TR
 msgstr ""
 
 
+#: R/pam.q: 0
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+
+msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+
 #: R/daisy.q: 0
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 
@@ -1093,6 +1094,13 @@ msgstr ""
 #. R/silhouette.R: stop("invalid 'silhouette' object")
 
 msgid "invalid 'silhouette' object"
+msgstr ""
+
+
+#: R/clusGap.R: 0
+#. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
+
+msgid "invalid 'spaceH0':"
 msgstr ""
 
 

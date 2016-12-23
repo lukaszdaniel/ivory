@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2015-04-20 17:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1104,6 +1104,11 @@ msgstr "m[ <ij-matrix> ] <- v: nieefektywne traktowanie pojedynczych elementów"
 msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
 msgstr "m[ <ij-matrix> ]: nieefektywne indeksowanie pojedynczych elementów"
 
+#. R/bandSparse.R: stop("matrix can only be symmetric if square, but n != m")
+#: R/bandSparse.R:0
+msgid "matrix can only be symmetric if square, but n != m"
+msgstr ""
+
 #. R/diagMatrix.R: stop("matrix is not diagonal")
 #: R/diagMatrix.R:0
 msgid "matrix is not diagonal"
@@ -1701,11 +1706,6 @@ msgstr ""
 "używanie\t części 'old code' w przypisaniu w 'Csparse'\n"
 ">>> proszę zgłosić raport na adres Matrix-authors@r-project.org"
 
-#. R/spModels.R: gettextf("variable '%s' converted to a factor", i)
-#: R/spModels.R:0
-msgid "variable '%s' converted to a factor"
-msgstr "zmienna '%s' została zamieniona na czynnik"
-
 #. R/spModels.R: gettextf("variable '%s' is absent, its contrast will be ignored", nn)
 #: R/spModels.R:0
 msgid "variable '%s' is absent, its contrast will be ignored"
@@ -1811,6 +1811,9 @@ msgstr[1] ""
 msgstr[2] ""
 "argumenty %s zostały odrzucone w\n"
 " %s"
+
+#~ msgid "variable '%s' converted to a factor"
+#~ msgstr "zmienna '%s' została zamieniona na czynnik"
 
 #~ msgid "'Dimnames' slot must be list of length 2"
 #~ msgstr "gniazdo 'Dimnames' musi być listą o długości 2"

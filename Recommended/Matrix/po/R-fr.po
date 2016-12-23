@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2014-03-30 09:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -1120,6 +1120,11 @@ msgstr "m[ <ij-matrix> ] <- v : traitement inefficace d'éléments uniques"
 msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
 msgstr "m[ <ij-matrix> ] : indice sur un seul élément inefficace "
 
+#. R/bandSparse.R: stop("matrix can only be symmetric if square, but n != m")
+#: R/bandSparse.R:0
+msgid "matrix can only be symmetric if square, but n != m"
+msgstr ""
+
 #. R/diagMatrix.R: stop("matrix is not diagonal")
 #: R/diagMatrix.R:0
 msgid "matrix is not diagonal"
@@ -1721,11 +1726,6 @@ msgstr ""
 " >>> veuillez envoyer un rapport à Matrix-authors@r-project.org, s'il-vous-"
 "plait"
 
-#. R/spModels.R: gettextf("variable '%s' converted to a factor", i)
-#: R/spModels.R:0
-msgid "variable '%s' converted to a factor"
-msgstr "variable '%s' converti en facteur"
-
 #. R/spModels.R: gettextf("variable '%s' is absent, its contrast will be ignored", nn)
 #: R/spModels.R:0
 msgid "variable '%s' is absent, its contrast will be ignored"
@@ -1827,6 +1827,9 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments %s ne sont pas utilisés dans\n"
 " %s"
+
+#~ msgid "variable '%s' converted to a factor"
+#~ msgstr "variable '%s' converti en facteur"
 
 #, fuzzy
 #~ msgid "'Dimnames' slot must be list of length 2"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.39-5\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"Project-Id-Version: survival 2.40-1\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -970,6 +970,7 @@ msgstr ""
 
 #: R/survfit.coxph.R: 0
 #. R/survfit.coxph.R: stop("Could not reconstruct the y vector")
+#. R/survfit.coxph.R: stop("Could not reconstruct the y vector")
 
 msgid "Could not reconstruct the y vector"
 msgstr ""
@@ -1923,13 +1924,6 @@ msgid "can only handle right censored or counting data"
 msgstr ""
 
 
-#: R/survSplit.R: 0
-#. R/survSplit.R: stop("cannot deal with complex arguments within a Surv call")
-
-msgid "cannot deal with complex arguments within a Surv call"
-msgstr ""
-
-
 #: R/anova.coxph.R: 0
 #: R/anova.coxph.penal.R: 0
 #: R/anova.coxphlist.S: 0
@@ -2043,6 +2037,20 @@ msgstr ""
 #. R/cch.R: stop("cohort size must be a scalar for unstratified analysis")
 
 msgid "cohort size must be a scalar for unstratified analysis"
+msgstr ""
+
+
+#: R/statefig.R: 0
+#. R/statefig.R: stop("connect must be a square matrix")
+
+msgid "connect must be a square matrix"
+msgstr ""
+
+
+#: R/statefig.R: 0
+#. R/statefig.R: stop("connect must have the state names as dimnames")
+
+msgid "connect must have the state names as dimnames"
 msgstr ""
 
 
@@ -2464,13 +2472,6 @@ msgid "invalid survival times for this distribution"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("invalid survival type")
-
-msgid "invalid survival type"
-msgstr ""
-
-
 #: R/coxph.getdata.S: 0
 #. R/coxph.getdata.S: stop("invalid terms component of fit")
 
@@ -2514,6 +2515,27 @@ msgid "invalid weights, must be >0"
 msgstr ""
 
 
+#: R/statefig.R: 0
+#. R/statefig.R: stop("layout coordinates must be between 0 and 1")
+
+msgid "layout coordinates must be between 0 and 1"
+msgstr ""
+
+
+#: R/statefig.R: 0
+#. R/statefig.R: stop("layout matrix should have one row per state")
+
+msgid "layout matrix should have one row per state"
+msgstr ""
+
+
+#: R/statefig.R: 0
+#. R/statefig.R: stop("layout must be a numeric vector or matrix")
+
+msgid "layout must be a numeric vector or matrix"
+msgstr ""
+
+
 #: R/survConcordance.R: 0
 #. R/survConcordance.R: stop("left hand side of the formula  must be a numeric vector or a surival")
 
@@ -2543,6 +2565,13 @@ msgstr ""
 #. R/is.ratetable.S: gettext("length of the data does not match 'prod(dim)'")
 
 msgid "length of the data does not match 'prod(dim)'"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("length of the influence matrix is > the maximum integer")
+
+msgid "length of the influence matrix is > the maximum integer"
 msgstr ""
 
 
@@ -2649,6 +2678,13 @@ msgid "multi-state curves are not a valid input"
 msgstr ""
 
 
+#: R/survreg.S: 0
+#. R/survreg.S: stop("multi-state survival is not supported")
+
+msgid "multi-state survival is not supported"
+msgstr ""
+
+
 #: R/cch.R: 0
 #. R/cch.R: stop("multiple records per id not allowed")
 
@@ -2728,6 +2764,13 @@ msgid "no time variable!"
 msgstr ""
 
 
+#: R/statefig.R: 0
+#. R/statefig.R: stop("non-integer number of states in layout argument")
+
+msgid "non-integer number of states in layout argument"
+msgstr ""
+
+
 #: R/match.ratetable.S: 0
 #. R/match.ratetable.S: gettextf("non-unique ratetable match for variable %s", dimid[i])
 
@@ -2746,6 +2789,13 @@ msgstr ""
 #. R/survSplit.R: gettextf("not valid for %s censored survival data", attr(Y, "type"))
 
 msgid "not valid for %s censored survival data"
+msgstr ""
+
+
+#: R/statefig.R: 0
+#. R/statefig.R: stop("number of boxes != number of states")
+
+msgid "number of boxes != number of states"
 msgstr ""
 
 
@@ -2967,12 +3017,33 @@ msgid "start time must be < stop time"
 msgstr ""
 
 
+#: R/survreg.S: 0
+#. R/survreg.S: stop("start-stop type Surv objects are not supported")
+
+msgid "start-stop type Surv objects are not supported"
+msgstr ""
+
+
 #: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
 #. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
 #. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
 
 msgid "start.time = %s is greater than all time points."
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("start.time argument has removed all endpoints")
+
+msgid "start.time argument has removed all endpoints"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("start.time must be a single numeric value")
+
+msgid "start.time must be a single numeric value"
 msgstr ""
 
 
@@ -3010,13 +3081,6 @@ msgstr ""
 #. R/cch.R: warning("stratum levels and names(cohort.size) do not agree")
 
 msgid "stratum levels and names(cohort.size) do not agree"
-msgstr ""
-
-
-#: R/survfitCI.R: 0
-#. R/survfitCI.R: gettextf("subject changes case weights, id %s", id[indx1[who]])
-
-msgid "subject changes case weights, id %s"
 msgstr ""
 
 

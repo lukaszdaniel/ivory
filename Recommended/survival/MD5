@@ -108,9 +108,9 @@ e9baa8fef68a58ba373651d2d818398c *vignettes/adjcurve.Rnw
 df85b7b3e957d1a2f3c959b6f9a50cd8 *vignettes/validate.Rnw
 121af41ff89aeb7552a7556139c4843e *vignettes/refer.bib
 9b68bc2fb5b87f755df1ca94888527e8 *DESCRIPTION
-1ba38c3629bfac62cab637fdd9e47626 *po/survival.pot
-d0f50d4fb404a7e14f5ccba1cd9a2fab *po/R-pl.po
-226290f01cb376ad6cf35497c7c2344a *po/R-survival.pot
+1dcff74e0799f292cc489ad43dda7954 *po/survival.pot
+a5d9900d92ac1c0297b0b6a5541b64ce *po/R-pl.po
+09a702cf3124cbef2dcb37aedbd4877d *po/R-survival.pot
 b56bf3213086895a1e7c698f2ee15476 *po/pl.po
 db3bb80d1f73d33dc9da8d6536d33510 *noweb/coxsurv.Rnw
 6e6cadac2b3f4c5c4f80b9a3837e7b6b *noweb/pyears.Rnw
@@ -156,8 +156,8 @@ b75ba40c947031f3285135bf83218664 *noweb/rates/usdecennial.dat
 40daba122be0c002e101c3d9b603668e *.Rinstignore
 b6991f4124dcc3bef51e7340d91beb64 *inst/CITATION
 2c8d8f271e237a809b1aa56c82b8f27b *inst/NEWS.Rd
-9f97cd1bb0aafe023bfd391e8f69e862 *inst/po/en@quot/LC_MESSAGES/R-survival.mo
-3f24f9a73a6bf1423293f5f7fe9ae4b1 *inst/po/pl/LC_MESSAGES/R-survival.mo
+278baa95d6afef521ad1c9106c86535b *inst/po/en@quot/LC_MESSAGES/R-survival.mo
+03664d24759bff090f7c81569bfc9d1d *inst/po/pl/LC_MESSAGES/R-survival.mo
 3e8ebae349953a3b7a665eecce562802 *inst/COPYRIGHTS
 4f1a95578adbb22ac73c5b2901bb0814 *inst/doc/timedep.pdf
 d3dc1e0934d75f8e9f6be12fb764c510 *inst/doc/multi.Rnw
@@ -504,7 +504,7 @@ ba8f4bf4656d05f12e3e66649318f52d *data/bladder.rda
 7b14acde4513dba5ddf30bf676500a1d *data/logan.rda
 81cbcf099abf5f0cbea248e0012b483c *data/colon.rda
 b75bf4f19a344d7defddeed1a48cbc1c *data/stanford2.rda
-38cdaf23d4045a4f3d66a5cfb47ebd31 *Changes
+98ddec4090fe516ee7ad968704f08781 *Changes
 405fd3e24157bf1eb860576a2225362a *src/survdiff2.c
 f3921f3624fb74d3055b05318a67290e *src/coxfit6.c
 2aa944d9f6e99effe1a8f00be0b7026e *src/coxmart2.c

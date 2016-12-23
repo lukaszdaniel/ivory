@@ -436,34 +436,29 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static size_t getshort(short *sh, FILE *fp) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
-29a30
+30a31
 > #include "localization.h"
-31,32c32
-< SEXP Rdbfread(SEXP dbfnm)
-< {
----
-> SEXP Rdbfread(SEXP dbfnm) {
-55c54,55
+56c57,58
 <     if( hDBF == NULL ) error(_("unable to open DBF file"));
 ---
 > 	if (hDBF == NULL)
 > 		error(_("unable to open DBF file"));
-60,61c60
+61,62c63
 <     if( DBFGetFieldCount(hDBF) == 0 )
 <     {
 ---
 > 	if (DBFGetFieldCount(hDBF) == 0) {
-70c69,70
+71c72,73
 <     PROTECT(DataTypes = allocVector(STRSXP, nflds)); pc++;
 ---
 > 	PROTECT(DataTypes = allocVector(STRSXP, nflds));
 > 	pc++;
-93c93,94
+94c96,97
 < 	buf[0] = hDBF->pachFieldType[i]; buf[1] = '\0';
 ---
 > 		buf[0] = hDBF->pachFieldType[i];
 > 		buf[1] = '\0';
-97,100c98,102
+98,101c101,105
 <     PROTECT(df = allocVector(VECSXP, nRvar)); pc++;
 <     PROTECT(varlabels = allocVector(STRSXP, nRvar)); pc++;
 <     for(i = 0, nRvar = 0; i < nflds; i++)
@@ -474,53 +469,43 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	PROTECT(varlabels = allocVector(STRSXP, nRvar));
 > 	pc++;
 > 	for (i = 0, nRvar = 0; i < nflds; i++) {
-122,123c124
+123,124c127
 <     for(iRecord = 0; iRecord < nrecs; iRecord++)
 <     {
 ---
 > 	for (iRecord = 0; iRecord < nrecs; iRecord++) {
-142c143,144
+143c146,147
 < 			int ii, *it; double *r;
 ---
 > 						int ii, *it;
 > 						double *r;
-205c207,208
+206c210,211
 <     PROTECT(tmp = mkString("data.frame")); pc++;
 ---
 > 	PROTECT(tmp = mkString("data.frame"));
 > 	pc++;
-209c212,213
+210c215,216
 <     PROTECT(row_names = allocVector(STRSXP, nrecs)); pc++;
 ---
 > 	PROTECT(row_names = allocVector(STRSXP, nrecs));
 > 	pc++;
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
-30c30
+32c32
 < 
 ---
 > #include "localization.h"
-34,35c34
-< static char* nameMangleOut(char *dbfFldname, int len)
-< {
----
-> static char* nameMangleOut(char *dbfFldname, int len) {
-38c37,38
-<       if (dbfFldname[i] == '.') dbfFldname[i] = '_';
----
-> 		if (dbfFldname[i] == '.')
-> 			dbfFldname[i] = '_';
-42,44c42
+44,46c44
 < 
 < SEXP DoWritedbf(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes)
 < {
 ---
 > SEXP DoWritedbf(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes) {
-51c49,50
+53c51,52
 <     if (hDBF == NULL) error(_("unable to open file"));
 ---
 > 	if (hDBF == NULL)
 > 		error(_("unable to open file"));
-58,61c57,58
+60,63c59,60
 < 
 < static DBFHandle
 < Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes)
@@ -528,36 +513,36 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static DBFHandle Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc,
 > 		SEXP DataTypes) {
-82,83c79,80
+84,85c81,82
 < 		DBFAddField(hDBF, nameMangleOut(szTitle,11), FTInteger,
 < 			    nWidth, 0);
 ---
 > 				DBFAddField(hDBF, nameMangleOut(szTitle, 11), FTInteger, nWidth,
 > 						0);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
-29a30
+31a32
 > #include "localization.h"
-61,62c61
+63,64c63
 < static double get_IBM_double(char* c, size_t len)
 < {
 ---
 > static double get_IBM_double(char* c, size_t len) {
-96c95,96
+98c97,98
 <     if (c[1] == '\0' && c[0] != '\0') return R_NaReal;
 ---
 > 	if (c[1] == '\0' && c[0] != '\0')
 > 		return R_NaReal;
-99c99,100
+101c101,102
 <     for (i = 1; i < 4; i++) buf[i] = c[i];
 ---
 > 	for (i = 1; i < 4; i++)
 > 		buf[i] = c[i];
-102c103,104
+104c105,106
 <     for (i = 0; i < 4; i++) buf[i] = c[i + 4];
 ---
 > 	for (i = 0; i < 4; i++)
 > 		buf[i] = c[i + 4];
-105,107c107,110
+107,109c109,112
 <     value = ((double) upper + ((double) lower)/Two32) *
 < 	pow(16., (double) exponent);
 <     if (negative) value = -value;
@@ -566,55 +551,55 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			* pow(16., (double) exponent);
 > 	if (negative)
 > 		value = -value;
-111,113c114,115
+113,115c116,117
 < static int
 < get_nam_header(FILE *fp, struct SAS_XPORT_namestr *namestr, int length)
 < {
 ---
 > static int get_nam_header(FILE *fp, struct SAS_XPORT_namestr *namestr,
 > 		int length) {
-140,142c142
+142,144c144
 < static int
 < get_lib_header(FILE *fp, struct SAS_XPORT_header *head)
 < {
 ---
 > static int get_lib_header(FILE *fp, struct SAS_XPORT_header *head) {
-178,180c178
+180,182c180
 < static int
 < get_mem_header(FILE *fp, struct SAS_XPORT_member *member)
 < {
 ---
 > static int get_mem_header(FILE *fp, struct SAS_XPORT_member *member) {
-210,212c208
+212,214c210
 < static int
 < init_xport_info(FILE *fp)
 < {
 ---
 > static int init_xport_info(FILE *fp) {
-229,230c225,226
+231,232c227,228
 <     if(n != 80 || strncmp(MEM_HEADER, record, 75) != 0 ||
 <        strncmp("  ", record+78, 2) != 0)
 ---
 > 	if (n != 80 || strncmp(MEM_HEADER, record, 75) != 0
 > 			|| strncmp("  ", record + 78, 2) != 0)
-238,240c234
+240,242c236
 < static int
 < init_mem_info(FILE *fp, char *name)
 < {
 ---
 > static int init_mem_info(FILE *fp, char *name) {
-254,255c248,249
+256,257c250,251
 <     if(n != 80 || strncmp(NAM_HEADER, record, 54) != 0 ||
 <        (strrchr(record+58, ' ') - record) != 79) {
 ---
 > 	if (n != 80 || strncmp(NAM_HEADER, record, 54) != 0
 > 			|| (strrchr(record + 58, ' ') - record) != 79) {
-269c263,264
+271c265,266
 <     } else name[0] = '\0';
 ---
 > 	} else
 > 		name[0] = '\0';
-276,280c271,273
+278,282c273,275
 < static int
 < next_xport_info(FILE *fp, int namestr_length, int nvars, int *headpad,
 < 		int *tailpad, int *length, int *ntype, int *nlng,
@@ -624,35 +609,35 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > static int next_xport_info(FILE *fp, int namestr_length, int nvars,
 > 		int *headpad, int *tailpad, int *length, int *ntype, int *nlng,
 > 		int *nvar0, SEXP nname, SEXP nlabel, SEXP nform, int *npos) {
-382,383c375,376
+384,385c377,378
 < 	    if(n == 80 && strncmp(MEM_HEADER, record, 75) == 0 &&
 < 	       strncmp("  ", record+78, 2) == 0) {
 ---
 > 			if (n == 80 && strncmp(MEM_HEADER, record, 75) == 0
 > 					&& strncmp("  ", record + 78, 2) == 0) {
-389,390c382
+391,392c384
 < 	}
 < 	else /* beware that the previous member can end on card
 ---
 > 		} else /* beware that the previous member can end on card
-392,394c384,385
+394,396c386,387
 < 	    if (restOfCard == 80 && n == 80 &&
 < 		strncmp(MEM_HEADER, tmp, 75) == 0 &&
 < 		strncmp("  ", tmp+78, 2) == 0) {
 ---
 > 		if (restOfCard == 80 && n == 80 && strncmp(MEM_HEADER, tmp, 75) == 0
 > 				&& strncmp("  ", tmp + 78, 2) == 0) {
-414c405,406
+416c407,408
 < 	restOfCard = (restOfCard >= totwidth)?
 ---
 > 		restOfCard =
 > 				(restOfCard >= totwidth) ?
-429,430c421
+431,432c423
 < static SEXP
 < getListElement(SEXP list, char *str) {
 ---
 > static SEXP getListElement(SEXP list, char *str) {
-450,462c441,442
+452,464c443,444
 < const char *cVarInfoNames[] = {
 <     "headpad",
 <     "type",
@@ -669,23 +654,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > const char *cVarInfoNames[] = { "headpad", "type", "width", "index", "position",
 > 		"name", "label", "format", "sexptype", "tailpad", "length" };
-491,493c471
+493,495c473
 < SEXP
 < xport_info(SEXP xportFile)
 < {
 ---
 > SEXP xport_info(SEXP xportFile) {
-520,521c498
+522,523c500
 <     while(!feof(fp))
 <       {
 ---
 > 	while (!feof(fp)) {
-539,540c516
+541,542c518
 < 	namestrLength =
 < 	    next_xport_info(fp, namestrLength, memLength,
 ---
 > 		namestrLength = next_xport_info(fp, namestrLength, memLength,
-546,549c522,523
+548,551c524,525
 < 			    INTEGER(XPORT_VAR_INDEX(varInfo)),
 < 			    XPORT_VAR_NAME(varInfo),
 < 			    XPORT_VAR_LABEL(varInfo),
@@ -693,24 +678,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 				INTEGER(XPORT_VAR_INDEX(varInfo)), XPORT_VAR_NAME(varInfo),
 > 				XPORT_VAR_LABEL(varInfo), XPORT_VAR_FORM(varInfo),
-555,556c529
+557,558c531
 < 			   (ntype[i] == REALSXP) ? char_numeric :
 < 			   char_character);
 ---
 > 					(ntype[i] == REALSXP) ? char_numeric : char_character);
-585,587c558
+587,589c560
 < SEXP
 < xport_read(SEXP xportFile, SEXP xportInfo)
 < {
 ---
 > SEXP xport_read(SEXP xportFile, SEXP xportInfo) {
-645,646c616,617
+647,648c618,619
 < 		    REAL(VECTOR_ELT(data, k))[j] =
 < 			get_IBM_double(tmpchar, dataWidth[k]);
 ---
 > 					REAL(VECTOR_ELT(data, k))[j] = get_IBM_double(tmpchar,
 > 							dataWidth[k]);
-655,656c626
+657,658c628
 < 				   (c < tmpchar) ? R_BlankString :
 < 				   mkChar(tmpchar));
 ---
@@ -1456,97 +1441,8 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	for (i = 0; i < DBFGetFieldCount(psDBF); i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/file-handle.c Recommended/foreign/src/file-handle.c
-27a28
+28a29
 > #include "localization.h"
-53,55c53
-< static void
-< init_file_handle (struct file_handle *h)
-< {
----
-> static void init_file_handle(struct file_handle *h) {
-68,69c65
-< fh_get_handle_by_filename (const char *filename)
-< {
----
-> fh_get_handle_by_filename(const char *filename) {
-88,89c84
-<   if (!fp)
-<     {
----
-> 	if (!fp) {
-95,97c90
-<     }
-<   else
-<     {
----
-> 	} else {
-107,108c100
-< fh_get_handle_by_name (const char name[9])
-< {
----
-> fh_get_handle_by_name(const char name[9]) {
-114c106,109
-<     error (_("file handle `%s' has not been previously declared on FILE HANDLE"), name);
----
-> 		error(
-> 				_(
-> 						"file handle `%s' has not been previously declared on FILE HANDLE"),
-> 				name);
-125,126c120
-< fh_handle_name (struct file_handle *h)
-< {
----
-> fh_handle_name(struct file_handle *h) {
-129,130c123
-<   if (buf)
-<     {
----
-> 	if (buf) {
-137,138c130
-<   if (h->name[0] == '*')
-<     {
----
-> 	if (h->name[0] == '*') {
-153,155c145
-< void
-< fh_close_handle (struct file_handle *h)
-< {
----
-> void fh_close_handle(struct file_handle *h) {
-167c157,158
-<   if(h->ext) Free(h->ext);
----
-> 	if (h->ext)
-> 		Free(h->ext);
-172,174c163
-< static int
-< cmp_file_handle (const void *a, const void *b, void *foo)
-< {
----
-> static int cmp_file_handle(const void *a, const void *b, void *foo) {
-184,186c173
-< void
-< fh_init_files (void)
-< {
----
-> void fh_init_files(void) {
-194,195c181,182
-<   inline_file->where.filename
-<       = inline_file->fn = inline_file->norm_fn = inline_filename;
----
-> 	inline_file->where.filename = inline_file->fn = inline_file->norm_fn =
-> 			inline_filename;
-202,203c189
-< fh_handle_filename (struct file_handle * h)
-< {
----
-> fh_handle_filename(struct file_handle * h) {
-208,210c194
-< size_t
-< fh_record_width (struct file_handle *h)
-< {
----
-> size_t fh_record_width(struct file_handle *h) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/file-handle.h Recommended/foreign/src/file-handle.h
 34,35c34
 < enum
@@ -1574,9 +1470,9 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > struct file_handle {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/foreign.h Recommended/foreign/src/foreign.h
-29a30
+30a31
 > #include <R_ext/Minmax.h>
-32,40d32
+33,41d33
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
 < #define _(String) dgettext ("foreign", String)
@@ -1586,7 +1482,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #define gettext_noop(String) (String)
 < #endif
 < 
-67,75d58
+68,76d59
 < 
 < #ifdef max
 < # undef max
@@ -1757,156 +1653,87 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
 Only in Recommended/foreign/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/minitab.c Recommended/foreign/src/minitab.c
-28a29
+30a31
 > #include "localization.h"
-50,51c51
-< char *strtrim(char *str)
-< {
----
-> char *strtrim(char *str) {
-58,59c58
-< static
-< SEXP MTB2SEXP(MTB mtb[], int len) /* Create a list from a vector of
----
-> static SEXP MTB2SEXP(MTB mtb[], int len) /* Create a list from a vector of
-62,63c61,62
-<     SEXP ans = PROTECT(allocVector(VECSXP,len)),
-< 	names = PROTECT(allocVector(STRSXP, len));
----
-> 	SEXP ans = PROTECT(allocVector(VECSXP, len)), names = PROTECT(
-> 			allocVector(STRSXP, len));
-103,105c101
-< SEXP
-< read_mtp(SEXP fname)
-< {
----
-> SEXP read_mtp(SEXP fname) {
-117,120c113,116
-< 	error(_("unable to open file '%s': '%s'"), 
-< 	      CHAR(fname), strerror(errno));
-<     if ((fgets(buf, MTP_BUF_SIZE, f) == NULL) ||
-< 	strncmp(buf, "Minitab Portable Worksheet ", 27) != 0)
----
-> 		error(_("unable to open file '%s': '%s'"), CHAR(fname),
-> 				strerror(errno));
-> 	if ((fgets(buf, MTP_BUF_SIZE, f) == NULL)
-> 			|| strncmp(buf, "Minitab Portable Worksheet ", 27) != 0)
-124c120,121
-<     if(pres != buf) error(_("file read error"));
----
-> 	if (pres != buf)
-> 		error(_("file read error"));
-135,136c132,133
-< 		   &(thisRec->cnum), &(thisRec->len),
-< 		   &(thisRec->dtype), blank, thisRec->name) != 6)
----
-> 				&(thisRec->cnum), &(thisRec->len), &(thisRec->dtype), blank,
-> 				thisRec->name) != 6)
-145c142,143
-< 		if(res == EOF) error(_("file read error"));
----
-> 				if (res == EOF)
-> 					error(_("file read error"));
-153c151,152
-< 		    if(res == EOF) error(_("file read error"));
----
-> 					if (res == EOF)
-> 						error(_("file read error"));
-160c159,160
-<   	if(pres != buf) error(_("file read error"));
----
-> 		if (pres != buf)
-> 			error(_("file read error"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/pfm-read.c Recommended/foreign/src/pfm-read.c
-34a35
+35a36
 > #include "localization.h"
-74,75c74
-< struct pfm_fhuser_ext
-<   {
----
-> struct pfm_fhuser_ext {
-100c98
+101c102
 <   "reading as a portable file",
 ---
-> 	N_("reading as a portable file"),
-108,110c106
-< static void
-< pfm_close (struct file_handle * h)
-< {
----
-> static void pfm_close(struct file_handle * h) {
-131,133c127
+>   N_("reading as a portable file"),
+132,134c133
 < static int
 < fill_buf (struct file_handle *h)
 < {
 ---
 > static int fill_buf(struct file_handle *h) {
-152,153c146
+153,154c152
 <   if (ext->trans)
 <     {
 ---
 > 	if (ext->trans) {
-164,165c157
+165,166c163
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-169,171c161
+170,172c167
 < static int
 < read_char (struct file_handle *h)
 < {
 ---
 > static int read_char(struct file_handle *h) {
-185,187c175
+186,188c181
 < static inline int
 < skip_char (struct file_handle *h, int c)
 < {
 ---
 > static inline int skip_char(struct file_handle *h, int c) {
-190,191c178
+191,192c184
 <   if (ext->cc == c)
 <     {
 ---
 > 	if (ext->cc == c) {
-195,196c182
+196,197c188
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-213,214c199
+214,215c205
 < pfm_read_dictionary (struct file_handle *h, struct pfm_read_info *inf)
 < {
 ---
 > pfm_read_dictionary(struct file_handle *h, struct pfm_read_info *inf) {
-219,220c204
+220,221c210
 <   if (h->class == &pfm_r_class)
 <     {
 ---
 > 	if (h->class == &pfm_r_class) {
-223,225c207
+224,226c213
 <     }
 <   else if (h->class != NULL)
 <     {
 ---
 > 	} else if (h->class != NULL) {
-239,240c221
+240,241c227
 <   if (ext->file == NULL)
 <     {
 ---
 > 	if (ext->file == NULL) {
-242c223,225
+243c229,231
 <       error(_("an error occurred while opening \"%s\" for reading as a portable file: %s"),
 ---
 > 		error(
 > 				_(
 > 						"an error occurred while opening \"%s\" for reading as a portable file: %s"),
-300,302c283
+301,303c289
 < static double
 < read_float (struct file_handle *h)
 < {
 ---
 > static double read_float(struct file_handle *h) {
-314,316c295,297
+315,317c301,303
 <   if (pfm_match (137 /* * */))
 <     {
 <       advance ();	/* Probably a dot (.) but doesn't appear to matter. */
@@ -1914,12 +1741,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	if (pfm_match(137 /* * */)) {
 > 		advance ();
 > 		/* Probably a dot (.) but doesn't appear to matter. */
-318,319c299
+319,320c305
 <     }
 <   else if (pfm_match (141 /* - */))
 ---
 > 	} else if (pfm_match(141 /* - */))
-322,325c302,303
+323,326c308,309
 <   for (;;)
 <     {
 <       if (ext->cc >= 64 /* 0 */ && ext->cc <= 93 /* T */)
@@ -1927,135 +1754,135 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	for (;;) {
 > 		if (ext->cc >= 64 /* 0 */&& ext->cc <= 93 /* T */) {
-345,346c323
+346,347c329
 < 	}
 <       else if (!got_dot && ext->cc == 127 /* . */)
 ---
 > 		} else if (!got_dot && ext->cc == 127 /* . */)
-359,360c336
+360,361c342
 <   if (ext->cc == 130 /* + */ || ext->cc == 141 /* - */)
 <     {
 ---
 > 	if (ext->cc == 130 /* + */|| ext->cc == 141 /* - */) {
-365,366c341
+366,367c347
 <       for (;;)
 < 	{
 ---
 > 		for (;;) {
-391,392c366
+392,393c372
 <   else if (exponent > 0)
 <     {
 ---
 > 	else if (exponent > 0) {
-403,404c377
+404,405c383
 <  overflow:
 <   if (neg)
 ---
 > 	overflow: if (neg)
-409,410c382
+410,411c388
 <  lossage:
 <   return NA_REAL;
 ---
 > 	lossage: return NA_REAL;
-414,416c386
+415,417c392
 < int
 < read_int (struct file_handle *h)
 < {
 ---
 > int read_int(struct file_handle *h) {
-425,426c395
+426,427c401
 <  lossage:
 <   return NA_INTEGER;
 ---
 > 	lossage: return NA_INTEGER;
-433,434c402
+434,435c408
 < read_string (struct file_handle *h)
 < {
 ---
 > read_string(struct file_handle *h) {
-457,458c425
+458,459c431
 <     for (i = 0; i < n; i++)
 <       {
 ---
 > 		for (i = 0; i < n; i++) {
-467,468c434
+468,469c440
 <  lossage:
 <   return NULL;
 ---
 > 	lossage: return NULL;
-472,474c438
+473,475c444
 < static int
 < read_header (struct file_handle *h)
 < {
 ---
 > static int read_header(struct file_handle *h) {
-490,491c454
+491,492c460
 <     for (i = 0; i < 256; i++)
 <       {
 ---
 > 		for (i = 0; i < 256; i++) {
-508c471,472
+509c477,478
 < 	ext->trans[i] = trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
 ---
 > 			ext->trans[i] =
 > 					trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
-527,528c491
+528,529c497
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-533,535c496
+534,536c502
 < int
 < read_version_data (struct file_handle *h, struct pfm_read_info *inf)
 < {
 ---
 > int read_version_data(struct file_handle *h, struct pfm_read_info *inf) {
-555,556c516
+556,557c522
 <     for (i = 0; i < 8; i++)
 <       {
 ---
 > 		for (i = 0; i < 8; i++) {
-562,563c522
+563,564c528
 <     if (inf)
 <       {
 ---
 > 		if (inf) {
-582,583c541
+583,584c547
 <     for (i = 0; i < 6; i++)
 <       {
 ---
 > 		for (i = 0; i < 6; i++) {
-589,590c547
+590,591c553
 <     if (inf)
 <       {
 ---
 > 		if (inf) {
-597,598c554
+598,599c560
 <   if (pfm_match (65 /* 1 */))
 <     {
 ---
 > 	if (pfm_match(65 /* 1 */)) {
-606,607c562
+607,608c568
 <     }
 <   else if (inf)
 ---
 > 	} else if (inf)
-611,612c566
+612,613c572
 <   if (pfm_match (67 /* 3 */))
 <     {
 ---
 > 	if (pfm_match(67 /* 3 */)) {
-620,621c574
+621,622c580
 <     }
 <   else if (inf)
 ---
 > 	} else if (inf)
-625,626c578
+626,627c584
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-629,632c581,582
+630,633c587,588
 < static int
 < convert_format (struct file_handle *h, int fmt[3], struct fmt_spec *v,
 < 		struct variable *vv)
@@ -2063,7 +1890,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static int convert_format(struct file_handle *h, int fmt[3], struct fmt_spec *v,
 > 		struct variable *vv) {
-645,650c595,611
+646,651c601,617
 <   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
 <     lose ((_("%s variable %s has %s format specifier %s"),
 < 	   vv->type == ALPHA ? "String" : "Numeric",
@@ -2088,50 +1915,50 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 						(_("Numeric variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
 > 		}
 > 	}
-653,654c614
+654,655c620
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-664,665c624
+665,666c630
 <     "                                                                "
 <   };
 ---
 > 						"                                                                " };
-668,670c627
+669,671c633
 < static void
 < asciify (char *s)
 < {
 ---
 > static void asciify(char *s) {
-678,680c635
+679,681c641
 < static int
 < read_variables (struct file_handle *h)
 < {
 ---
 > static int read_variables(struct file_handle *h) {
-706,707c661
+707,708c667
 <   if (pfm_match (70 /* 6 */))
 <     {
 ---
 > 	if (pfm_match(70 /* 6 */)) {
-716,717c670
+717,718c676
 <   for (i = 0; i < ext->nvars; i++)
 <     {
 ---
 > 	for (i = 0; i < ext->nvars; i++) {
-737,738c690
+738,739c696
 <       for (j = 0; j < 6; j++)
 < 	{
 ---
 > 		for (j = 0; j < 6; j++) {
-749,750c701,702
+750,751c707,708
 < 	lose ((_("position %d: Variable name has %u characters"),
 < 	       i, strlen ((char *) name)));
 ---
 > 			lose(
 > 					(_("position %d: Variable name has %u characters"), i, strlen ((char *) name)));
-753,757c705,710
+754,758c711,716
 < 	lose ((_("position %d: Variable name begins with invalid character"),
 < 	       i));
 <       if (name[0] >= 100 /* a */ && name[0] <= 125 /* z */)
@@ -2144,12 +1971,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			warning(
 > 					_(
 > 							"position %d: Variable name begins with lowercase letter %c"),
-763,764c716
+764,765c722
 <       for (j = 1; j < (int) strlen ((char *) name); j++)
 < 	{
 ---
 > 		for (j = 1; j < (int) strlen((char *) name); j++) {
-767,769c719,722
+768,770c725,728
 < 	  if (c >= 100 /* a */ && c <= 125 /* z */)
 < 	    {
 < 	      warning(_("position %d: Variable name character %d is lowercase letter %c"),
@@ -2158,43 +1985,43 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				warning(
 > 						_(
 > 								"position %d: Variable name character %d is lowercase letter %c"),
-772,774c725,726
+773,775c731,732
 < 	    }
 < 	  else if ((c >= 64 /* 0 */ && c <= 99 /* Z */)
 < 		   || c == 127 /* . */ || c == 152 /* @ */
 ---
 > 			} else if ((c >= 64 /* 0 */&& c <= 99 /* Z */) || c == 127 /* . */
 > 					|| c == 152 /* @ */
-778,779c730,731
+779,780c736,737
 < 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"),
 < 		   i, c));
 ---
 > 				lose(
 > 						(_("position %d: character `\\%03o' is not valid in a variable name"), i, c));
-786,787c738,739
+787,788c744,745
 <       v = create_variable (ext->dict, (char *) name,
 < 			   width ? ALPHA : NUMERIC, width);
 ---
 > 		v = create_variable(ext->dict, (char *) name, width ? ALPHA : NUMERIC,
 > 				width);
-797,798c749
+798,799c755
 <       if (pfm_match (75 /* B */))
 < 	{
 ---
 > 		if (pfm_match(75 /* B */)) {
-803,805c754
+804,806c760
 < 	}
 <       else if (pfm_match (74 /* A */))
 < 	{
 ---
 > 		} else if (pfm_match(74 /* A */)) {
-809,811c758
+810,812c764
 < 	}
 <       else if (pfm_match (73 /* 9 */))
 < 	{
 ---
 > 		} else if (pfm_match(73 /* 9 */)) {
-818,825c765,768
+819,826c771,774
 <       while (pfm_match (72 /* 8 */))
 < 	{
 < 	  static const int map_next[MISSING_COUNT] =
@@ -2208,7 +2035,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			static const int map_next[MISSING_COUNT] = { MISSING_1, MISSING_2,
 > 					MISSING_3, -1, MISSING_RANGE_1, MISSING_LOW_1,
 > 					MISSING_HIGH_1, -1, -1, -1, };
-827,830c770,771
+828,831c776,777
 < 	  static const int map_ofs[MISSING_COUNT] =
 < 	    {
 < 	      -1, 0, 1, 2, -1, -1, -1, 2, 1, 1,
@@ -2216,23 +2043,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 			static const int map_ofs[MISSING_COUNT] = { -1, 0, 1, 2, -1, -1, -1,
 > 					2, 1, 1, };
-842,843c783
+843,844c789
 <       if (pfm_match (76 /* C */))
 < 	{
 ---
 > 		if (pfm_match(76 /* C */)) {
-857,858c797,798
+858,859c803,804
 <     lose ((_("Weighting variable %s not present in dictionary"),
 < 	   ext->dict->weight_var));
 ---
 > 		lose(
 > 				(_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
-862,863c802
+863,864c808
 <  lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-867,871c806,808
+868,872c812,814
 < static int
 < parse_value (struct file_handle *h, union value *v, struct variable *vv)
 < {
@@ -2242,96 +2069,96 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > static int parse_value(struct file_handle *h, union value *v,
 > 		struct variable *vv) {
 > 	if (vv->type == ALPHA) {
-885,887c822
+886,888c828
 <     }
 <   else
 <     {
 ---
 > 	} else {
-897,899c832
+898,900c838
 < static int
 < read_value_label (struct file_handle *h)
 < {
 ---
 > static int read_value_label(struct file_handle *h) {
-916,917c849
+917,918c855
 <   for (i = 0; i < nv; i++)
 <     {
 ---
 > 	for (i = 0; i < nv; i++) {
-928,929c860,861
+929,930c866,867
 < 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"),
 < 	       v[0]->name, v[i]->name));
 ---
 > 			lose(
 > 					(_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
-936,937c868
+937,938c874
 <   for (i = 0; i < n_labels; i++)
 <     {
 ---
 > 	for (i = 0; i < n_labels; i++) {
-959,960c890
+960,961c896
 <       for (j = 0; j < nv; j++)
 < 	{
 ---
 > 		for (j = 0; j < nv; j++) {
-974,975c904,905
+975,976c910,911
 < 	    lose ((_("Duplicate label for value %g for variable %s"),
 < 		   vl->v.f, var->name));
 ---
 > 				lose(
 > 						(_("Duplicate label for value %g for variable %s"), vl->v.f, var->name));
-977,978c907,908
+978,979c913,914
 < 	    lose ((_("Duplicate label for value `%.*s' for variable %s"),
 < 		   var->width, vl->v.s, var->name));
 ---
 > 				lose(
 > 						(_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
-986,987c916
+987,988c922
 <  lossage:
 <   Free (v);
 ---
 > 	lossage: Free(v);
-994,996c923
+995,997c929
 < static void
 < st_bare_pad_copy (char *dest, const char *src, size_t n)
 < {
 ---
 > static void st_bare_pad_copy(char *dest, const char *src, size_t n) {
-1000,1001c927
+1001,1002c933
 <   else
 <     {
 ---
 > 	else {
-1011,1013c937,938
+1012,1014c943,944
 < int
 < pfm_read_case (struct file_handle *h, union value *perm, struct dictionary *dict)
 < {
 ---
 > int pfm_read_case(struct file_handle *h, union value *perm,
 > 		struct dictionary *dict) {
-1028,1029c953
+1029,1030c959
 <     if (ext->vars[i] == 0)
 <       {
 ---
 > 		if (ext->vars[i] == 0) {
-1034,1036c958
+1035,1037c964
 <       }
 <     else
 <       {
 ---
 > 		} else {
-1048,1049c970
+1049,1050c976
 <   for (i = 0; i < dict->nvar; i++)
 <     {
 ---
 > 	for (i = 0; i < dict->nvar; i++) {
-1067,1068c988
+1068,1069c994
 <  lossage:
 <   Free (temp);
 ---
 > 	lossage: Free(temp);
-1073,1078c993,994
+1074,1079c999,1000
 < static struct fh_ext_class pfm_r_class =
 < {
 <   5,
@@ -2356,41 +2183,41 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > struct pfm_read_info {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/sfm-read.c Recommended/foreign/src/sfm-read.c
-32a33
+33a34
 > #include "localization.h"
-68,70c69
+69,71c70
 < static double
 < second_lowest_double_val()
 < {
 ---
 > static double second_lowest_double_val() {
-98,99c97
+99,100c98
 < struct sfm_fhuser_ext
 <   {
 ---
 > struct sfm_fhuser_ext {
-135c133
+136c134
 <   "reading as a system file",
 ---
 > 	N_("reading as a system file"),
-155,157c153
+156,158c154
 < static void
 < sfm_close (struct file_handle * h)
 < {
 ---
 > static void sfm_close(struct file_handle * h) {
-161c157,158
+162c158,159
 <   if (!(ext->opened == 0)) error("assert failed : ext->opened == 0");
 ---
 > 	if (!(ext->opened == 0))
 > 		error(_("assert failed : ext->opened == 0"));
-168,170c165
+169,171c166
 < void
 < sfm_maybe_close (struct file_handle *h)
 < {
 ---
 > void sfm_maybe_close(struct file_handle *h) {
-187,189c182,187
+188,190c183,188
 < static int read_value_labels (struct file_handle * h, struct variable ** var_by_index);
 < static int read_variables (struct file_handle * h, struct variable *** var_by_index);
 < static int read_machine_int32_info (struct file_handle * h, int size, int count, int *encoding);
@@ -2401,13 +2228,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		struct variable *** var_by_index);
 > static int read_machine_int32_info(struct file_handle * h, int size, int count,
 > 		int *encoding);
-191,192c189,190
+192,193c190,191
 < static int read_long_var_names (struct file_handle * h, struct dictionary *
 < 		, unsigned long size, unsigned int count);
 ---
 > static int read_long_var_names(struct file_handle * h, struct dictionary *,
 > 		unsigned long size, unsigned int count);
-217,222c215,218
+218,223c216,219
 < void
 < free_value_label (struct value_label * v)
 < {
@@ -2419,98 +2246,98 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	if (!(v->ref_count >= 1))
 > 		error(_("assert failed : v->ref_count >= 1"));
 > 	if (--v->ref_count == 0) {
-230,232c226
+231,233c227
 < void
 < free_val_lab (void *p, void *param)
 < {
 ---
 > void free_val_lab(void *p, void *param) {
-237,239c231
+238,240c232
 < void
 < free_dictionary (struct dictionary * d)
 < {
 ---
 > void free_dictionary(struct dictionary * d) {
-249,250c241
+250,251c242
 <   for (i = 0; i < d->nvar; i++)
 <     {
 ---
 > 	for (i = 0; i < d->nvar; i++) {
-253,254c244
+254,255c245
 <       if (v->val_lab)
 < 	{
 ---
 > 		if (v->val_lab) {
-258,259c248
+259,260c249
 <       if (v->label)
 < 	{
 ---
 > 		if (v->label) {
-277,278c266
+278,279c267
 < sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
 < {
 ---
 > sfm_read_dictionary(struct file_handle * h, struct sfm_read_info * inf) {
-287,288c275
+288,289c276
 <   if (h->class == &sfm_r_class)
 <     {
 ---
 > 	if (h->class == &sfm_r_class) {
-292,294c279
+293,295c280
 <     }
 <   else if (h->class != NULL)
 <     {
 ---
 > 	} else if (h->class != NULL) {
-307,308c292
+308,309c293
 <   if (ext->file == NULL)
 <     {
 ---
 > 	if (ext->file == NULL) {
-310c294,296
+311c295,297
 <       error(_("An error occurred while opening '%s' for reading as a system file: %s"),
 ---
 > 		error(
 > 				_(
 > 						"An error occurred while opening '%s' for reading as a system file: %s"),
-336,337c322
+337,338c323
 <   if (ext->weight_index != -1)
 <     {
 ---
 > 	if (ext->weight_index != -1) {
-341c326,327
+342c327,328
 < 	lose ((_("%s: Weighting variable may not be a continuation of a long string variable"), h->fn));
 ---
 > 			lose(
 > 					(_("%s: Weighting variable may not be a continuation of a long string variable"), h->fn));
-343,344c329,330
+344,345c330,331
 < 	lose ((_("%s: Weighting variable may not be a string variable"),
 < 	       h->fn));
 ---
 > 			lose(
 > 					(_("%s: Weighting variable may not be a string variable"), h->fn));
-347,348c333
+348,349c334
 <     }
 <   else
 ---
 > 	} else
-352,353c337
+353,354c338
 <   for (;;)
 <     {
 ---
 > 	for (;;) {
-360,361c344
+361,362c345
 <       switch (rec_type)
 < 	{
 ---
 > 		switch (rec_type) {
-368,369c351,352
+369,370c352,353
 < 	  lose ((_("%s: Orphaned variable index record (type 4).  Type 4 records must always immediately follow type 3 records"),
 < 		 h->fn));
 ---
 > 			lose(
 > 					(_("%s: Orphaned variable index record (type 4). Type 4 records must always immediately follow type 3 records"), h->fn));
-376,379c359,360
+377,380c360,361
 < 	case 7:
 < 	  {
 < 	    struct
@@ -2518,82 +2345,82 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		case 7: {
 > 			struct {
-383,384c364
+384,385c365
 < 	      }
 < 	    data;
 ---
 > 			} data;
-389,390c369
+390,391c370
 < 	    if (ext->reverse_endian)
 < 	      {
 ---
 > 			if (ext->reverse_endian) {
-403,404c382
+404,405c383
 < 	    switch (data.subtype)
 < 	      {
 ---
 > 			switch (data.subtype) {
-441c419,422
+442c420,423
 < 		warning(_("%s: Unrecognized record type 7, subtype %d encountered in system file"), h->fn, data.subtype);
 ---
 > 				warning(
 > 						_(
 > 								"%s: Unrecognized record type 7, subtype %d encountered in system file"),
 > 						h->fn, data.subtype);
-445,446c426
+446,447c427
 < 	    if (skip)
 < 	      {
 ---
 > 			if (skip) {
-455,456c435
+456,457c436
 < 	case 999:
 < 	  {
 ---
 > 		case 999: {
-472c451
+473c452
 <   warning ("Read system-file dictionary successfully");
 ---
 > 	warning(_("Read system-file dictionary successfully"));
-493,495c472,473
+494,496c473,474
 < static int
 < read_machine_int32_info (struct file_handle * h, int size, int count, int *encoding)
 < {
 ---
 > static int read_machine_int32_info(struct file_handle * h, int size, int count,
 > 		int *encoding) {
-504,505c482,483
+505,506c483,484
 <     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3.	Expected size %d, count 8"),
 < 	h->fn, size, count, sizeof (R_int32)));
 ---
 > 		lose(
 > 				(_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3. Expected size %d, count 8"), h->fn, size, count, sizeof (R_int32)));
-513,514c491
+514,515c492
 <   switch (FPREP)
 <     {
 ---
 > 	switch (FPREP) {
-517c494,495
+518c495,496
 < 	lose ((_("%s: Floating-point representation in system file is not IEEE-754.  read.spss cannot convert between floating-point formats"), h->fn));
 ---
 > 			lose(
 > 					(_("%s: Floating-point representation in system file is not IEEE-754. read.spss cannot convert between floating-point formats"), h->fn));
-520c498,499
+521c499,500
 <       if (!(0)) error("assert failed : 0");
 ---
 > 		if (!(0))
 > 			error(_("assert failed : 0"));
-526,527c505
+527,528c506
 <   if (ext->reverse_endian)
 <     {
 ---
 > 	if (ext->reverse_endian) {
-532,533c510,511
+533,534c511,512
 <       else
 < 	if (!(0)) error("assert failed : 0");
 ---
 > 		else if (!(0))
 > 			error(_("assert failed : 0"));
-536,539c514,515
+537,540c515,516
 <     lose ((_("%s: File-indicated endianness (%s) does not match endianness intuited from file header (%s)"),
 < 	   h->fn, file_endian == BIG ? "big-endian" : "little-endian",
 < 	   data[6] == 1 ? "big-endian" : (data[6] == 2 ? "little-endian"
@@ -2601,42 +2428,42 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		lose(
 > 				(_("%s: File-indicated endianness (%s) does not match endianness intuited from file header (%s)"), h->fn, file_endian == BIG ? "big-endian" : "little-endian", data[6] == 1 ? "big-endian" : (data[6] == 2 ? "little-endian" : "unknown")));
-548,549c524,525
+549,550c525,526
 <     lose ((_("%s: File-indicated character representation code (%s) is not ASCII"), h->fn,
 <        data[7] == 1 ? "EBCDIC" : (data[7] == 4 ? "DEC Kanji" : "Unknown")));
 ---
 > 		lose(
 > 				(_("%s: File-indicated character representation code (%s) is not ASCII"), h->fn, data[7] == 1 ? "EBCDIC" : (data[7] == 4 ? "DEC Kanji" : "Unknown")));
-553c529,532
+554c530,533
 <       warning(_("%s: File-indicated character representation code (%d) is unknown"), h->fn, data[7]);
 ---
 > 		warning(
 > 				_(
 > 						"%s: File-indicated character representation code (%d) is unknown"),
 > 				h->fn, data[7]);
-556,557c535
+557,558c536
 < lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-561,563c539
+562,564c540
 < static int
 < read_machine_flt64_info (struct file_handle * h, int size, int count)
 < {
 ---
 > static int read_machine_flt64_info(struct file_handle * h, int size, int count) {
-571,572c547,548
+572,573c548,549
 <     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4.	Expected size %d, count 8"),
 < 	   h->fn, size, count, sizeof (R_flt64)));
 ---
 > 		lose(
 > 				(_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4. Expected size %d, count 8"), h->fn, size, count, sizeof (R_flt64)));
-580,581c556
+581,582c557
 <       || data[2] != second_lowest_double_val())
 <     {
 ---
 > 			|| data[2] != second_lowest_double_val()) {
-585,588c560,565
+586,589c561,566
 <       warning(_("%s: File-indicated value is different from internal value for at least one of the three system values.  SYSMIS: indicated %g, expected %g; HIGHEST: %g, %g; LOWEST: %g, %g"),
 < 	  h->fn, (double) data[0], (double) SYSMIS,
 < 	  (double) data[1], (double) DBL_MAX,
@@ -2648,12 +2475,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				h->fn, (double) data[0], (double) SYSMIS, (double) data[1],
 > 				(double) DBL_MAX, (double) data[2],
 > 				(double) second_lowest_double_val());
-593,594c570
+594,595c571
 < lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-600,603c576,577
+601,604c577,578
 < static int
 < read_long_var_names (struct file_handle * h, struct dictionary * dict
 < 		, unsigned long size, unsigned int count)
@@ -2661,7 +2488,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static int read_long_var_names(struct file_handle * h, struct dictionary * dict,
 > 		unsigned long size, unsigned int count) {
-611,613c585,588
+612,614c586,589
 <     warning("%s: strange record info seen, size=%u, count=%u"
 <       ", ignoring long variable names"
 <       , h->fn, size, count);
@@ -2670,11 +2497,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				_(
 > 						"%s: strange record info seen, size=%u, count=%u, ignoring long variable names"),
 > 				h->fn, size, count);
-626c601
+627c602
 <       warning("%s: no long variable name for variable '%s'", h->fn, p);
 ---
 > 			warning(_("%s: no long variable name for variable '%s'"), h->fn, p);
-638,640c613,616
+639,641c614,617
 <         warning("%s: long variable name mapping '%s' to '%s'"
 <         "for variable which does not exist"
 <         , h->fn, p, val);
@@ -2683,24 +2510,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 						_(
 > 								"%s: long variable name mapping '%s' to '%s' for variable which does not exist"),
 > 						h->fn, p, val);
-650,652c626
+651,653c627
 < static int
 < read_header (struct file_handle * h, struct sfm_read_info * inf)
 < {
 ---
 > static int read_header(struct file_handle * h, struct sfm_read_info * inf) {
-693,694c667,668
+694,695c668,669
 <     lose ((_("%s: Bad magic.  Proper system files begin with the four characters `$FL2'. This file will not be read"),
 < 	   h->fn));
 ---
 > 		lose(
 > 				(_("%s: Bad magic. Proper system files begin with the four characters `$FL2'. This file will not be read"), h->fn));
-702,703c676
+703,704c677
 <     if (!isgraph ((unsigned char) prod_name[i]))
 <       {
 ---
 > 		if (!isgraph((unsigned char ) prod_name[i])) {
-711,715c684,685
+712,716c685,686
 <     static const char *prefix[N_PREFIXES] =
 <       {
 < 	"@(#) SPSS DATA FILE",
@@ -2709,23 +2536,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		static const char *prefix[N_PREFIXES] = { "@(#) SPSS DATA FILE",
 > 				"SPSS SYSTEM FILE.", };
-720,721c690
+721,722c691
 <       if (!strncmp (prefix[i], hdr.prod_name, strlen (prefix[i])))
 < 	{
 ---
 > 			if (!strncmp(prefix[i], hdr.prod_name, strlen(prefix[i]))) {
-731,732c700
+732,733c701
 <   else
 <     {
 ---
 > 	else {
-735,736c703,704
+736,737c704,705
 < 	lose ((_("%s: File layout code has unexpected value %d.  Value should be 2 or 3, in big-endian or little-endian format"),
 < 	       h->fn, hdr.layout_code));
 ---
 > 			lose(
 > 					(_("%s: File layout code has unexpected value %d. Value should be 2 or 3, in big-endian or little-endian format"), h->fn, hdr.layout_code));
-748,751c716,719
+749,752c717,720
 <   if (hdr.case_size <= 0 || ext->case_size > (INT_MAX
 < 					      / (int) sizeof (union value) / 2))
 <     lose ((_("%s: Number of elements per case (%d) is not between 1 and %d"),
@@ -2735,74 +2562,74 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			|| ext->case_size > (INT_MAX / (int) sizeof(union value) / 2))
 > 		lose(
 > 				(_("%s: Number of elements per case (%d) is not between 1 and %d"), h->fn, hdr.case_size, INT_MAX / sizeof (union value) / 2));
-757,758c725,726
+758,759c726,727
 <     lose ((_("%s: Index of weighting variable (%d) is not between 0 and number of elements per case (%d)"),
 < 	   h->fn, hdr.weight_index, ext->case_size));
 ---
 > 		lose(
 > 				(_("%s: Index of weighting variable (%d) is not between 0 and number of elements per case (%d)"), h->fn, hdr.weight_index, ext->case_size));
-762,763c730,731
+763,764c731,732
 <     lose ((_("%s: Number of cases in file (%d) is not between -1 and %d"),
 < 	   h->fn, ext->ncases, INT_MAX / 2));
 ---
 > 		lose(
 > 				(_("%s: Number of cases in file (%d) is not between -1 and %d"), h->fn, ext->ncases, INT_MAX / 2));
-778,779c746
+779,780c747
 < 	  && hdr.file_label[i] != 0)
 < 	{
 ---
 > 					&& hdr.file_label[i] != 0) {
-787,788c754
+788,789c755
 <   if (inf)
 <     {
 ---
 > 	if (inf) {
-814,815c780
+815,816c781
 < lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-818,820c783
+819,821c784
 < int
 < cmp_variable (const void *a, const void *b, void *foo)
 < {
 ---
 > int cmp_variable(const void *a, const void *b, void *foo) {
-833,835c796,797
+834,836c797,798
 < static int
 < read_variables (struct file_handle * h, struct variable *** var_by_index)
 < {
 ---
 > static int read_variables(struct file_handle * h,
 > 		struct variable *** var_by_index) {
-851,852c813
+852,853c814
 <   for (i = 0; i < ext->case_size; i++)
 <     {
 ---
 > 	for (i = 0; i < ext->case_size; i++) {
-858,859c819
+859,860c820
 <       if (ext->reverse_endian)
 < 	{
 ---
 > 		if (ext->reverse_endian) {
-869,870c829,830
+870,871c830,831
 < 	lose ((_("%s: position %d: Bad record type (%d); the expected value was 2"),
 < 	       h->fn, i, sv.rec_type));
 ---
 > 			lose(
 > 					(_("%s: position %d: Bad record type (%d); the expected value was 2"), h->fn, i, sv.rec_type));
-875,876c835
+876,877c836
 <       if (long_string_count)
 < 	{
 ---
 > 		if (long_string_count) {
-878,879c837,838
+879,880c838,839
 < 	    lose ((_("%s: position %d: String variable does not have proper number of continuation records"),
 < 		   h->fn, i));
 ---
 > 				lose(
 > 						(_("%s: position %d: String variable does not have proper number of continuation records"), h->fn, i));
-884,887c843,845
+885,888c844,846
 < 	}
 <       else if (sv.type == -1)
 < 	lose ((_("%s: position %d: Superfluous long string continuation record"),
@@ -2811,24 +2638,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		} else if (sv.type == -1)
 > 			lose(
 > 					(_("%s: position %d: Superfluous long string continuation record"), h->fn, i));
-891,892c849,850
+892,893c850,851
 < 	lose ((_("%s: position %d: Bad variable type code %d"),
 < 	       h->fn, i, sv.type));
 ---
 > 			lose(
 > 					(_("%s: position %d: Bad variable type code %d"), h->fn, i, sv.type));
-894,895c852,853
+895,896c853,854
 < 	lose ((_("%s: position %d: Variable label indicator field is not 0 or 1"),
 < 	       h->fn, i));
 ---
 > 			lose(
 > 					(_("%s: position %d: Variable label indicator field is not 0 or 1"), h->fn, i));
-898c856,857
+899c857,858
 < 	lose ((_("%s: position %d: Missing value indicator field is not -3, -2, 0, 1, 2, or 3"), h->fn, i));
 ---
 > 			lose(
 > 					(_("%s: position %d: Missing value indicator field is not -3, -2, 0, 1, 2, or 3"), h->fn, i));
-911,913c870,873
+912,914c871,874
 <       if (!isalpha ((unsigned char) sv.name[0])
 < 	  && sv.name[0] != '@' && sv.name[0] != '#')
 < 	lose ((_("%s: position %d: Variable name begins with invalid character"), h->fn, i));
@@ -2837,24 +2664,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				&& sv.name[0] != '#')
 > 			lose(
 > 					(_("%s: position %d: Variable name begins with invalid character"), h->fn, i));
-915c875,877
+916c876,878
 < 	warning(_("%s: position %d: Variable name begins with lowercase letter %c"),
 ---
 > 			warning(
 > 					_(
 > 							"%s: position %d: Variable name begins with lowercase letter %c"),
-918c880,882
+919c881,883
 < 	warning(_("%s: position %d: Variable name begins with octothorpe ('#').  Scratch variables should not appear in system files"),
 ---
 > 			warning(
 > 					_(
 > 							"%s: position %d: Variable name begins with octothorpe ('#'). Scratch variables should not appear in system files"),
-923,924c887
+924,925c888
 <       for (j = 1; j < 8; j++)
 < 	{
 ---
 > 		for (j = 1; j < 8; j++) {
-929,931c892,895
+930,932c893,896
 < 	  else if (islower (c))
 < 	    {
 < 	      warning(_("%s: position %d: Variable name character %d is lowercase letter %c"),
@@ -2863,138 +2690,138 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				warning(
 > 						_(
 > 								"%s: position %d: Variable name character %d is lowercase letter %c"),
-934,936c898,899
+935,937c899,900
 < 	    }
 < 	  else if (isalnum (c) || c == '.' || c == '@'
 < 		   || c == '#' || c == '$' || c == '_' || c > 127)
 ---
 > 			} else if (isalnum(c) || c == '.' || c == '@' || c == '#'
 > 					|| c == '$' || c == '_' || c > 127)
-939,940c902,903
+940,941c903,904
 < 	    lose ((_("%s: position %d: character `\\%03o' (%c) is not valid in a variable name"),
 < 		   h->fn, j, c, c)); /* changed from 'i', PR#14465 */
 ---
 > 				lose(
 > 						(_("%s: position %d: character `\\%03o' (%c) is not valid in a variable name"), h->fn, j, c, c)); /* changed from 'i', PR#14465 */
-946,947c909
+947,948c910
 <       if (sv.type == 0)
 < 	{
 ---
 > 		if (sv.type == 0) {
-953,955c915
+954,956c916
 < 	}
 <       else
 < 	{
 ---
 > 		} else {
-967,968c927
+968,969c928
 <       if (sv.has_var_label == 1)
 < 	{
 ---
 > 		if (sv.has_var_label == 1) {
-981,982c940,941
+982,983c941,942
 < 	    lose ((_("%s: Variable %s indicates variable label of invalid length %d"),
 < 		   h->fn, vv->name, len));
 ---
 > 				lose(
 > 						(_("%s: Variable %s indicates variable label of invalid length %d"), h->fn, vv->name, len));
-985c944,945
+986c945,946
 < 	  vv->label = bufread (h, NULL, ROUND_UP (len, sizeof (R_int32)), len + 1);
 ---
 > 			vv->label = bufread(h, NULL, ROUND_UP(len, sizeof(R_int32)),
 > 					len + 1);
-992,993c952
+993,994c953
 <       if (sv.n_missing_values != 0)
 < 	{
 ---
 > 		if (sv.n_missing_values != 0) {
-997c956,957
+998c957,958
 < 	    lose ((_("%s: Long string variable %s may not have missing values"), h->fn, vv->name));
 ---
 > 				lose(
 > 						(_("%s: Long string variable %s may not have missing values"), h->fn, vv->name));
-1005,1006c965
+1006,1007c966
 < 	  if (sv.n_missing_values > 0)
 < 	    {
 ---
 > 			if (sv.n_missing_values > 0) {
-1014,1016c973
+1015,1017c974
 < 	    }
 < 	  else
 < 	    {
 ---
 > 			} else {
-1020,1021c977,978
+1021,1022c978,979
 < 		lose ((_("%s: String variable %s may not have missing values specified as a range"),
 < 		       h->fn, vv->name));
 ---
 > 					lose(
 > 							(_("%s: String variable %s may not have missing values specified as a range"), h->fn, vv->name));
-1023,1024c980
+1024,1025c981
 < 	      if (mv[0] == ext->lowest)
 < 		{
 ---
 > 				if (mv[0] == ext->lowest) {
-1027,1029c983
+1028,1030c984
 < 		}
 < 	      else if (mv[1] == ext->highest)
 < 		{
 ---
 > 				} else if (mv[1] == ext->highest) {
-1032,1034c986
+1033,1035c987
 < 		}
 < 	      else
 < 		{
 ---
 > 				} else {
-1040,1041c992
+1041,1042c993
 < 	      if (sv.n_missing_values == -3)
 < 		{
 ---
 > 				if (sv.n_missing_values == -3) {
-1046,1047c997
+1047,1048c998
 < 	}
 <       else
 ---
 > 		} else
-1057,1058c1007,1008
+1058,1059c1008,1009
 <     lose ((_("%s: Long string continuation records omitted at end of dictionary"),
 < 	   h->fn));
 ---
 > 		lose(
 > 				(_("%s: Long string continuation records omitted at end of dictionary"), h->fn));
-1060,1061c1010,1011
+1061,1062c1011,1012
 <     lose ((_("%s: System file header indicates %d variable positions but %d were read from file"),
 < 	   h->fn, ext->case_size, next_value));
 ---
 > 		lose(
 > 				(_("%s: System file header indicates %d variable positions but %d were read from file"), h->fn, ext->case_size, next_value));
-1069,1070c1019,1020
+1070,1071c1020,1021
 <       lose ((_("%s: Duplicate variable name `%s' within system file"),
 < 	     h->fn, dict->var[i]->name));
 ---
 > 			lose(
 > 					(_("%s: Duplicate variable name `%s' within system file"), h->fn, dict->var[i]->name));
-1074,1076c1024
+1075,1077c1025
 < lossage:
 <   for (i = 0; i < dict->nvar; i++)
 <     {
 ---
 > 	lossage: for (i = 0; i < dict->nvar; i++) {
-1091,1093c1039,1040
+1092,1094c1040,1041
 < static int
 < parse_format_spec (struct file_handle *h, R_int32 s, struct fmt_spec *v, struct variable *vv)
 < {
 ---
 > static int parse_format_spec(struct file_handle *h, R_int32 s,
 > 		struct fmt_spec *v, struct variable *vv) {
-1096,1097c1043,1044
+1097,1098c1044,1045
 <     lose ((_("%s: Bad format specifier byte (%d)"),
 < 	   h->fn, (s >> 16) & 0xff));
 ---
 > 		lose(
 > 				(_("%s: Bad format specifier byte (%d)"), h->fn, (s >> 16) & 0xff));
-1106,1113c1053,1071
+1107,1114c1054,1072
 <     lose ((_("%s: Bad format specifier byte (%d)"),
 < 	   h->fn, (s >> 16) & 0xff));
 <   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
@@ -3023,56 +2850,56 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 						(_("%s: Numeric variable %s has numeric format specifier %s"), h->fn, vv->name, formats[v->type].name));
 > 		}
 > 	}
-1116,1117c1074
+1117,1118c1075
 < lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-1122,1124c1079
+1123,1125c1080
 < int
 < read_value_labels (struct file_handle * h, struct variable ** var_by_index)
 < {
 ---
 > int read_value_labels(struct file_handle * h, struct variable ** var_by_index) {
-1152,1153c1107
+1153,1154c1108
 <   for (i = 0; i < n_labels; i++)
 <     {
 ---
 > 	for (i = 0; i < n_labels; i++) {
-1188c1142,1143
+1189c1143,1144
 <       lose ((_("%s: Variable index record (type 4) does not immediately follow value label record (type 3) as it ought"), h->fn));
 ---
 > 			lose(
 > 					(_("%s: Variable index record (type 4) does not immediately follow value label record (type 3) as it ought"), h->fn));
-1197,1198c1152,1153
+1198,1199c1153,1154
 <     lose ((_("%s: Number of variables associated with a value label (%d) is not between 1 and the number of variables (%d)"),
 < 	   h->fn, n_vars, ext->dict->nvar));
 ---
 > 		lose(
 > 				(_("%s: Number of variables associated with a value label (%d) is not between 1 and the number of variables (%d)"), h->fn, n_vars, ext->dict->nvar));
-1204,1205c1159
+1205,1206c1160
 <   for (i = 0; i < n_vars; i++)
 <     {
 ---
 > 	for (i = 0; i < n_vars; i++) {
-1214,1215c1168,1169
+1215,1216c1169,1170
 < 	lose ((_("%s: Variable index associated with value label (%d) is not between 1 and the number of values (%d)"),
 < 	       h->fn, var_index, ext->case_size));
 ---
 > 			lose(
 > 					(_("%s: Variable index associated with value label (%d) is not between 1 and the number of values (%d)"), h->fn, var_index, ext->case_size));
-1220,1221c1174,1175
+1221,1222c1175,1176
 < 	lose ((_("%s: Variable index associated with value label (%d) refers to a continuation of a string variable, not to an actual variable"),
 < 	       h->fn, var_index));
 ---
 > 			lose(
 > 					(_("%s: Variable index associated with value label (%d) refers to a continuation of a string variable, not to an actual variable"), h->fn, var_index));
-1223c1177,1178
+1224c1178,1179
 < 	lose ((_("%s: Value labels are not allowed on long string variables (%s)"), h->fn, v->name));
 ---
 > 			lose(
 > 					(_("%s: Value labels are not allowed on long string variables (%s)"), h->fn, v->name));
-1231,1234c1186,1193
+1232,1235c1187,1194
 <     if (var[i]->type != var[0]->type)
 <       lose ((_("%s: Variables associated with value label are not all of identical type.  Variable %s has %s type, but variable %s has %s type"), h->fn,
 < 	     var[0]->name, var[0]->type == ALPHA ? "string" : "numeric",
@@ -3086,7 +2913,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				lose(
 > 						(_("%s: Variables associated with value label are not all of identical type. Variable %s has numeric type, but variable %s has string type"), h->fn, var[0]->name, var[i]->name));
 > 		}
-1238,1241c1197,1198
+1239,1242c1198,1199
 <   for (i = 0; i < n_labels; i++)
 <     {
 <       if (var[0]->type == ALPHA)
@@ -3094,18 +2921,18 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	for (i = 0; i < n_labels; i++) {
 > 		if (var[0]->type == ALPHA) {
-1256,1257c1213
+1257,1258c1214
 <   for (i = 0; i < n_vars; i++)
 <     {
 ---
 > 	for (i = 0; i < n_vars; i++) {
-1264c1220,1222
+1265c1221,1223
 < 	v->val_lab = R_avl_create (val_lab_cmp, (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) &width);
 ---
 > 			v->val_lab =
 > 					R_avl_create(val_lab_cmp,
 > 							(void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) &width);
-1267,1269c1225,1227
+1268,1270c1226,1228
 <       for (j = 0; j < n_labels; j++)
 < 	{
 < 	  struct value_label *old = R_avl_replace (v->val_lab, cooked_label[j]);
@@ -3113,13 +2940,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		for (j = 0; j < n_labels; j++) {
 > 			struct value_label *old = R_avl_replace(v->val_lab,
 > 					cooked_label[j]);
-1274c1232,1234
+1275c1233,1235
 < 	    warning(_("%s: File contains duplicate label for value %g for variable %s"),
 ---
 > 				warning(
 > 						_(
 > 								"%s: File contains duplicate label for value %g for variable %s"),
-1277,1279c1237,1240
+1278,1280c1238,1241
 < 	    warning(_("%s: File contains duplicate label for value `%.*s' for variable %s"),
 < 		      h->fn, v->width,
 < 		 cooked_label[j]->v.s, v->name);
@@ -3128,148 +2955,148 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 						_(
 > 								"%s: File contains duplicate label for value `%.*s' for variable %s"),
 > 						h->fn, v->width, cooked_label[j]->v.s, v->name);
-1290,1291c1251
+1291,1292c1252
 < lossage:
 <   if (cooked_label)
 ---
 > 	lossage: if (cooked_label)
-1293,1294c1253
+1294,1295c1254
 <       if (cooked_label[i])
 < 	{
 ---
 > 			if (cooked_label[i]) {
-1308,1309c1267
+1309,1310c1268
 < bufread (struct file_handle * h, void *buf, size_t nbytes, size_t minalloc)
 < {
 ---
 > bufread(struct file_handle * h, void *buf, size_t nbytes, size_t minalloc) {
-1314,1315c1272
+1315,1316c1273
 <   if ((nbytes != 0) && (1 != fread (buf, nbytes, 1, ext->file)))
 <     {
 ---
 > 	if ((nbytes != 0) && (1 != fread(buf, nbytes, 1, ext->file))) {
-1328,1330c1285
+1329,1331c1286
 < static int
 < read_documents (struct file_handle * h)
 < {
 ---
 > static int read_documents(struct file_handle * h) {
-1336,1337c1291,1292
+1337,1338c1292,1293
 <     lose ((_("%s: System file contains multiple type 6 (document) records"),
 < 	   h->fn));
 ---
 > 		lose(
 > 				(_("%s: System file contains multiple type 6 (document) records"), h->fn));
-1343c1298,1299
+1344c1299,1300
 <   if (ext->reverse_endian) bswap_int32 (&n_lines);
 ---
 > 	if (ext->reverse_endian)
 > 		bswap_int32(&n_lines);
-1346,1347c1302,1303
+1347,1348c1303,1304
 <     lose ((_("%s: Number of document lines (%d) must be greater than 0"),
 < 	   h->fn, dict->n_documents));
 ---
 > 		lose(
 > 				(_("%s: Number of document lines (%d) must be greater than 0"), h->fn, dict->n_documents));
-1354,1355c1310
+1355,1356c1311
 < lossage:
 <   return 0;
 ---
 > 	lossage: return 0;
-1426c1381
+1427c1382
 <           if (!(0)) warning("assert failed : 0");
 ---
 > 			if (!(0)) warning(_("assert failed : 0"));
-1446,1448c1401
+1447,1449c1402
 < static size_t
 < buffer_input (struct file_handle * h)
 < {
 ---
 > static size_t buffer_input(struct file_handle * h) {
-1455,1456c1408
+1456,1457c1409
 <   if (ferror (ext->file))
 <     {
 ---
 > 	if (ferror(ext->file)) {
-1473,1475c1425
+1474,1476c1426
 < static int
 < read_compressed_data (struct file_handle * h, R_flt64 * temp)
 < {
 ---
 > static int read_compressed_data(struct file_handle * h, R_flt64 * temp) {
-1484,1485c1434
+1485,1486c1435
 <   for (;;)
 <     {
 ---
 > 	for (;;) {
-1487,1488c1436
+1488,1489c1437
 < 	switch (*p)
 < 	  {
 ---
 > 			switch (*p) {
-1495c1443,1444
+1496c1444,1445
 < 	      lose ((_("%s: Compressed data is corrupted.  Data ends partway through a case"), h->fn));
 ---
 > 					lose(
 > 							(_("%s: Compressed data is corrupted.  Data ends partway through a case"), h->fn));
-1501,1502c1450
+1502,1503c1451
 < 	      if (!buffer_input (h))
 < 		{
 ---
 > 					if (!buffer_input(h)) {
-1541,1542c1489
+1542,1543c1490
 < 	if (!buffer_input (h))
 < 	  {
 ---
 > 			if (!buffer_input(h)) {
-1568,1570c1515,1516
+1569,1571c1516,1517
 < int
 < sfm_read_case (struct file_handle * h, union value * perm, struct dictionary * dict)
 < {
 ---
 > int sfm_read_case(struct file_handle * h, union value * perm,
 > 		struct dictionary * dict) {
-1580c1526,1527
+1581c1527,1528
 <   if (!(dict->nval > 0)) error("assert failed : dict->nval > 0");
 ---
 > 	if (!(dict->nval > 0))
 > 		error(_("assert failed : dict->nval > 0"));
-1588,1589c1535
+1589,1590c1536
 <   if (ext->compressed == 0)
 <     {
 ---
 > 	if (ext->compressed == 0) {
-1592,1593c1538
+1593,1594c1539
 <       if (amt != nbytes)
 < 	{
 ---
 > 		if (amt != nbytes) {
-1600,1601c1545
+1601,1602c1546
 <     }
 <   else if (!read_compressed_data (h, temp))
 ---
 > 	} else if (!read_compressed_data(h, temp))
-1606,1607c1550
+1607,1608c1551
 <   for (i = 0; i < dict->nvar; i++)
 <     {
 ---
 > 	for (i = 0; i < dict->nvar; i++) {
-1613,1614c1556
+1614,1615c1557
 <       if (v->type == NUMERIC)
 < 	{
 ---
 > 		if (v->type == NUMERIC) {
-1619,1620c1561
+1620,1621c1562
 < 	}
 <       else
 ---
 > 		} else
-1627,1628c1568
+1628,1629c1569
 < lossage:
 <   Free (temp);
 ---
 > 	lossage: Free(temp);
-1633,1638c1573,1574
+1634,1639c1574,1575
 < static struct fh_ext_class sfm_r_class =
 < {
 <   3,
@@ -3370,27 +3197,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > DBFGetFieldInfo(DBFHandle psDBF, int iField, char * pszFieldName, int * pnWidth,
 > 		int * pnDecimals);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
-28a29
+29a30
 > #include "localization.h"
-39,40c40
-< xstrdup(const char *s)
-< {
----
-> xstrdup(const char *s) {
-49,51c49,51
-< new_dictionary (int copy)
-< {
-<   struct dictionary *d = Calloc (1, struct dictionary);
----
-> new_dictionary(int copy) {
-> 	struct dictionary
-> 	*d = Calloc (1, struct dictionary);
-80,81c80
+81,82c82
 < find_dict_variable (const struct dictionary *d, const char *name)
 < {
 ---
 > find_dict_variable(const struct dictionary *d, const char *name) {
-87,90c86,87
+88,91c88,89
 < static inline void
 < common_init_stuff (struct dictionary *dict, struct variable *v,
 < 		   const char *name, int type, int width)
@@ -3398,18 +3212,18 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static inline void common_init_stuff(struct dictionary *dict,
 > 		struct variable *v, const char *name, int type, int width) {
-101,102c98
+102,103c100
 <   if (v->type == NUMERIC)
 <     {
 ---
 > 	if (v->type == NUMERIC) {
-106,108c102
+107,109c104
 <     }
 <   else
 <     {
 ---
 > 	} else {
-118,121c112,113
+119,122c114,115
 < void
 < init_variable (struct dictionary *dict, struct variable *v, const char *name,
 < 	       int type, int width)
@@ -3417,19 +3231,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > void init_variable(struct dictionary *dict, struct variable *v,
 > 		const char *name, int type, int width) {
-137,139c129
+138,140c131
 < create_variable (struct dictionary *dict, const char *name,
 < 		 int type, int width)
 < {
 ---
 > create_variable(struct dictionary *dict, const char *name, int type, int width) {
-159,161c149
+160,162c151
 < int
 < val_lab_cmp (const void *a, const void *b, void *param)
 < {
 ---
 > int val_lab_cmp(const void *a, const void *b, void *param) {
-165,168c153,154
+166,169c155,156
 < 		    (char *)((struct value_label *) b)->v.s,
 < 		    width);
 <   else
@@ -3437,153 +3251,153 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 				(char *) ((struct value_label *) b)->v.s, width);
 > 	else {
-199,200c184
+200,201c186
 <       while (p != NULL)
 < 	{
 ---
 > 		while (p != NULL) {
-219,221c203
+220,222c205
 < 
 < static SEXP getSPSSvaluelabels(struct dictionary *dict)
 < {
 ---
 > static SEXP getSPSSvaluelabels(struct dictionary *dict) {
-229c211,212
+230c213,214
 <     if (nvars == 0) return R_NilValue;
 ---
 > 	if (nvars == 0)
 > 		return R_NilValue;
-234c217,218
+235c219,220
 < 	if (!labelset) continue;
 ---
 > 		if (!labelset)
 > 			continue;
-264,265c248
+265,266c250
 < static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss)
 < {
 ---
 > static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss) {
-270c253,254
+271c255,256
 <     if (nvars == 0) return R_NilValue;
 ---
 > 	if (nvars == 0)
 > 		return R_NilValue;
-320c304,305
+321c306,307
 < 	if (strcmp(type, "none")) (*have_miss)++;
 ---
 > 		if (strcmp(type, "none"))
 > 			(*have_miss)++;
-333c318,319
+334c320,321
 < 		for(j = 0; j < n; j++) rx[j] = v->missing[j].f;
 ---
 > 				for (j = 0; j < n; j++)
 > 					rx[j] = v->missing[j].f;
-353,355c339
+354,356c341
 < static SEXP
 < read_SPSS_PORT(const char *filename)
 < {
 ---
 > static SEXP read_SPSS_PORT(const char *filename) {
-369c353,354
+370c355,356
 <     SEXP miss_labels; int have_miss = 0;
 ---
 > 	SEXP miss_labels;
 > 	int have_miss = 0;
-395,396c380
+396,397c382
 < 	    case_vals[v->fv].c =
 < 		(unsigned char *) R_alloc(v->width + 1, 1);
 ---
 > 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
-471,473c455
+472,474c457
 < static SEXP
 < read_SPSS_SAVE(const char *filename)
 < {
 ---
 > static SEXP read_SPSS_SAVE(const char *filename) {
-485c467,468
+486c469,470
 <     SEXP miss_labels; int have_miss = 0;
 ---
 > 	SEXP miss_labels;
 > 	int have_miss = 0;
-517,518c500
+518,519c502
 < 	    case_vals[v->fv].c =
 < 		(unsigned char *) R_alloc(v->width + 1, 1);
 ---
 > 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
-581,583c563
+582,584c565
 < static size_t
 < fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream)
 < {
 ---
 > static size_t fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream) {
-609,611c589
+610,612c591
 < static int
 < is_PORT(FILE *fp)
 < {
 ---
 > static int is_PORT(FILE *fp) {
-660,662c638
+661,663c640
 < SEXP
 < do_read_SPSS(SEXP file)
 < {
 ---
 > SEXP do_read_SPSS(SEXP file) {
-682,683c658
+683,684c660
 < 	    error(_("file '%s' is not in any supported SPSS format"),
 < 		  filename);
 ---
 > 			error(_("file '%s' is not in any supported SPSS format"), filename);
-692,694c667
+693,695c669
 < void
 < spss_init(void)
 < {
 ---
 > void spss_init(void) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/stataread.c Recommended/foreign/src/stataread.c
-45a45
+46a47
 > #include "localization.h"
-90,91c89
+91,92c91
 < static int InIntegerBinary(FILE * fp, int naok, int swapends)
 < {
 ---
 > static int InIntegerBinary(FILE * fp, int naok, int swapends) {
-100,101c98
+101,102c100
 < static int InByteBinary(FILE * fp, int naok)
 < {
 ---
 > static int InByteBinary(FILE * fp, int naok) {
-108,109c105
+109,110c107
 < static int RawByteBinary(FILE * fp, int naok)
 < {
 ---
 > static int RawByteBinary(FILE * fp, int naok) {
-116,117c112
+117,118c114
 < static int InShortIntBinary(FILE * fp, int naok,int swapends)
 < {
 ---
 > static int InShortIntBinary(FILE * fp, int naok, int swapends) {
-128c123,124
+129c125,126
 <   if (result > STATA_SHORTINT_NA) result -= 65536;
 ---
 > 	if (result > STATA_SHORTINT_NA)
 > 		result -= 65536;
-132,134c128
+133,135c130
 < 
 < static double InDoubleBinary(FILE * fp, int naok, int swapends)
 < {
 ---
 > static double InDoubleBinary(FILE * fp, int naok, int swapends) {
-143,144c137
+144,145c139
 < static double InFloatBinary(FILE * fp, int naok, int swapends)
 < {
 ---
 > static double InFloatBinary(FILE * fp, int naok, int swapends) {
-153,154c146
+154,155c148
 < static void InStringBinary(FILE * fp, int nchar, char* buffer)
 < {
 ---
 > static void InStringBinary(FILE * fp, int nchar, char* buffer) {
-179,184c171,173
+180,185c173,175
 < 
 < 
 < SEXP R_LoadStataData(FILE *fp)
@@ -3594,66 +3408,66 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > SEXP R_LoadStataData(FILE *fp) {
 > 	int i, j = 0, nvar, nobs, charlen, version, swapends, varnamelength,
 > 			nlabels, totlen, res;
-337c324,325
+338c326,327
 <     for (i = 0; i < 2*(nvar+1); i++) RawByteBinary(fp, 1);
 ---
 > 	for (i = 0; i < 2 * (nvar + 1); i++)
 > 		RawByteBinary(fp, 1);
-421c408,409
+422c410,411
 < 	    for (i = 0; i < charlen; i++) InByteBinary(fp, 1);
 ---
 > 			for (i = 0; i < charlen; i++)
 > 				InByteBinary(fp, 1);
-432,433c420,422
+433,434c422,424
 < 	error(_("something strange in the file\n (Type 0 characteristic of nonzero length)"));
 < 
 ---
 > 		error(
 > 				_(
 > 						"something strange in the file\n (Type 0 characteristic of nonzero length)"));
-445c434,435
+446c436,437
 < 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
 ---
 > 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
 > 							swapends);
-448c438,439
+449c440,441
 < 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
 ---
 > 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
 > 							swapends);
-451c442,443
+452c444,445
 < 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
 ---
 > 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
 > 							swapends);
-459c451,453
+460c453,455
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
 > 						warning(
 > 								_(
 > 										"invalid character string length -- truncating to 244 bytes"));
-477c471,472
+478c473,474
 < 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
 ---
 > 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
 > 							swapends);
-480c475,476
+481c477,478
 < 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
 ---
 > 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
 > 							swapends);
-483c479,480
+484c481,482
 < 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
 ---
 > 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
 > 							swapends);
-491c488,490
+492c490,492
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
 > 						warning(
 > 								_(
 > 										"invalid character string length -- truncating to 244 bytes"));
-512,513c510,513
+513,514c512,515
 < 	    if (feof(fp)) break;
 < 	    if (res != 1) warning(_("a binary read error occurred"));
 ---
@@ -3661,13 +3475,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				break;
 > 			if (res != 1)
 > 				warning(_("a binary read error occurred"));
-521c521,523
+522c523,525
 < 	    RawByteBinary(fp, 1); RawByteBinary(fp, 1); RawByteBinary(fp, 1); /*padding*/
 ---
 > 			RawByteBinary(fp, 1);
 > 			RawByteBinary(fp, 1);
 > 			RawByteBinary(fp, 1); /*padding*/
-561,562c563,566
+562,563c565,568
 < 	if(j > 0) setAttrib(df, install("label.table"), labeltable);
 < 	UNPROTECT(1); /*labeltable*/;
 ---
@@ -3675,38 +3489,38 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			setAttrib(df, install("label.table"), labeltable);
 > 		UNPROTECT(1); /*labeltable*/
 > 		;
-571,572c575
+572,573c577
 < SEXP do_readStata(SEXP call)
 < {
 ---
 > SEXP do_readStata(SEXP call) {
-595,596c596
+596,597c598
 < static void OutIntegerBinary(int i, FILE * fp, int naok)
 < {
 ---
 > static void OutIntegerBinary(int i, FILE * fp, int naok) {
-603,604c603
+604,605c605
 < static void OutByteBinary(unsigned char i, FILE * fp)
 < {
 ---
 > static void OutByteBinary(unsigned char i, FILE * fp) {
-608,609c607
+609,610c609
 < static void OutDataByteBinary(int i, FILE * fp)
 < {
 ---
 > static void OutDataByteBinary(int i, FILE * fp) {
-615,616c613
+616,617c615
 < static void OutShortIntBinary(int i,FILE * fp)
 < {
 ---
 > static void OutShortIntBinary(int i, FILE * fp) {
-632,634c629
+633,635c631
 < 
 < static void  OutDoubleBinary(double d, FILE * fp, int naok)
 < {
 ---
 > static void OutDoubleBinary(double d, FILE * fp, int naok) {
-640,643c635,637
+641,644c637,639
 < 
 < static void OutStringBinary(const char *buffer, FILE * fp, int nchar)
 < {
@@ -3715,17 +3529,17 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > static void OutStringBinary(const char *buffer, FILE * fp, int nchar) {
 > 	if (nchar == 0)
 > 		return;
-648,649c642
+649,650c644
 < static char* nameMangleOut(char *stataname, int len)
 < {
 ---
 > static char* nameMangleOut(char *stataname, int len) {
-651c644,645
+652c646,647
 <       if (stataname[i] == '.') stataname[i] = '_';
 ---
 > 		if (stataname[i] == '.')
 > 			stataname[i] = '_';
-659,662c653,655
+660,663c655,657
 < static Rboolean 
 < writeStataValueLabel(const char *labelName, const SEXP theselabels,
 < 		     const SEXP theselevels, const int namelength, FILE *fp)
@@ -3734,7 +3548,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > static Rboolean writeStataValueLabel(const char *labelName,
 > 		const SEXP theselabels, const SEXP theselevels, const int namelength,
 > 		FILE *fp) {
-669,671c662,664
+670,672c664,666
 <     if (!isNull(theselevels) && 
 < 	((TYPEOF(theselevels)!=INTSXP && TYPEOF(theselevels)!=REALSXP)  || 
 < 	 LENGTH(theselabels) != LENGTH(theselevels)))
@@ -3742,56 +3556,56 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	if (!isNull(theselevels)
 > 			&& ((TYPEOF(theselevels) != INTSXP && TYPEOF(theselevels) != REALSXP)
 > 					|| LENGTH(theselabels) != LENGTH(theselevels)))
-682,683c675,676
+683,684c677,678
 <     OutStringBinary(nameMangleOut(labelName2, (int)strlen(labelName)),
 < 		    fp, namelength);
 ---
 > 	OutStringBinary(nameMangleOut(labelName2, (int) strlen(labelName)), fp,
 > 			namelength);
-685c678,680
+686c680,682
 <     OutByteBinary(0, fp); OutByteBinary(0, fp); OutByteBinary(0, fp); /*padding*/
 ---
 > 	OutByteBinary(0, fp);
 > 	OutByteBinary(0, fp);
 > 	OutByteBinary(0, fp); /*padding*/
-698,699c693
+699,700c695
 <     }
 <     else{
 ---
 > 	} else {
-703,704c697
+704,705c699
 < 	}
 < 	else{
 ---
 > 		} else {
-715c708,709
+716c710,711
 < 	if (txtlen < 0) error(_("this should happen: overrun"));
 ---
 > 		if (txtlen < 0)
 > 			error(_("this should happen: overrun"));
-717c711,712
+718c713,714
 <     if (txtlen > 0) error(_("this should happen: underrun"));
 ---
 > 	if (txtlen > 0)
 > 		error(_("this should happen: underrun"));
-723,724c718
+724,725c720
 < void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable)
 < {
 ---
 > void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable) {
-726,727c720,721
+727,728c722,723
 <     char datalabel[81] = "Written by R.              ",
 < 	timestamp[18], aname[33];
 ---
 > 	char datalabel[81] = "Written by R.              ", timestamp[18],
 > 			aname[33];
-730,731c724,725
+731,732c726,727
 <     SEXP names, types, theselabels, orig_names, vlabels, dlabel, 
 < 	exp_fields, exp_field, curr_val_labels, label_table, names_lt,
 ---
 > 	SEXP names, types, theselabels, orig_names, vlabels, dlabel, exp_fields,
 > 			exp_field, curr_val_labels, label_table, names_lt,
-737,738c731,734
+738,739c733,736
 <     if (version >= 7) namelength=32;
 <     if (version >= 10) fmtlist_len = 49;
 ---
@@ -3799,88 +3613,88 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		namelength = 32;
 > 	if (version >= 10)
 > 		fmtlist_len = 49;
-769c764,765
+770c766,767
 <     for(i = 0; i < 18; i++) timestamp[i] = 0;
 ---
 > 	for (i = 0; i < 18; i++)
 > 		timestamp[i] = 0;
-799c793,794
+800c795,796
 < 		    if (k > charlen) charlen = k;
 ---
 > 					if (k > charlen)
 > 						charlen = k;
-802c797,800
+803c799,802
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
 > 					warning(
 > 							_(
 > 									"character strings of >244 bytes in column %d will be truncated"),
 > 							i + 1);
-804c802,803
+805c804,805
 < 		OutByteBinary((unsigned char)(charlen+STATA_STRINGOFFSET), fp);
 ---
 > 				OutByteBinary((unsigned char) (charlen + STATA_STRINGOFFSET),
 > 						fp);
-829c828,829
+830c830,831
 < 		    if (k > charlen) charlen = k;
 ---
 > 					if (k > charlen)
 > 						charlen = k;
-832c832,835
+833c834,837
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
 > 					warning(
 > 							_(
 > 									"character strings of >244 bytes in column %d will be truncated"),
 > 							i + 1);
-834c837,838
+835c839,840
 < 		OutByteBinary((unsigned char)(charlen+STATA_SE_STRINGOFFSET), fp);
 ---
 > 				OutByteBinary((unsigned char) (charlen + STATA_SE_STRINGOFFSET),
 > 						fp);
-855c857,858
+856c859,860
 <     for (i = 0; i < 2*(nvar+1); i++) OutByteBinary(0, fp);
 ---
 > 	for (i = 0; i < 2 * (nvar + 1); i++)
 > 		OutByteBinary(0, fp);
-877c880,881
+878c882,883
 < 	    for(j = 0; j < namelength+1; j++) OutByteBinary(0, fp);
 ---
 > 			for (j = 0; j < namelength + 1; j++)
 > 				OutByteBinary(0, fp);
-882c886,887
+883c888,889
 < 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
 ---
 > 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
 > 						namelength);
-902,903c906
+903,904c908
 <     }
 <     else{
 ---
 > 	} else {
-920c922,923
+921c924,925
 <     if(!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP && abs(version) >= 7){
 ---
 > 	if (!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP
 > 			&& abs(version) >= 7) {
-924c927,928
+925c929,930
 < 	    if(!isNull(exp_field) && isString(exp_field) && LENGTH(exp_field) == 3) {
 ---
 > 			if (!isNull(exp_field) && isString(exp_field)
 > 					&& LENGTH(exp_field) == 3) {
-926c930,933
+927c932,935
 < 		OutIntegerBinary(2*(namelength+1) + (length(STRING_ELT(exp_field,2))+1), fp, 1);
 ---
 > 				OutIntegerBinary(
 > 						2 * (namelength + 1)
 > 								+ (length(STRING_ELT(exp_field, 2)) + 1), fp,
 > 						1);
-935c942,943
+936c944,945
 < 		OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp, length(STRING_ELT(exp_field, 2)));
 ---
 > 				OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp,
 > 						length(STRING_ELT(exp_field, 2)));
-969,970c976,980
+970,971c978,982
 < 		    error("empty string is not valid in Stata's documented format");
 < 		if(k > 244) k = 244;
 ---
@@ -3889,12 +3703,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 									"empty string is not valid in Stata's documented format"));
 > 				if (k > 244)
 > 					k = 244;
-972c982,983
+973c984,985
 < 		for(l = INTEGER(types)[j]-k; l > 0; l--) OutByteBinary(0, fp);
 ---
 > 				for (l = INTEGER(types)[j] - k; l > 0; l--)
 > 					OutByteBinary(0, fp);
-988,989c999,1002
+989,990c1001,1004
 < 	    if(!isNull(curr_val_labels) && isString(curr_val_labels) && LENGTH(curr_val_labels) > i)
 < 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
 ---
@@ -3902,23 +3716,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 					&& LENGTH(curr_val_labels) > i)
 > 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
 > 						namelength);
-993c1006,1007
+994c1008,1009
 < 	    writeStataValueLabel(aname, theselabels, R_NilValue, namelength, fp);
 ---
 > 			writeStataValueLabel(aname, theselabels, R_NilValue, namelength,
 > 					fp);
-1005c1019,1021
+1006c1021,1023
 < 					if(strncmp(thisnamechar, CHAR(STRING_ELT(curr_val_labels, j)), namelength) == 0)
 ---
 > 						if (strncmp(thisnamechar,
 > 								CHAR(STRING_ELT(curr_val_labels, j)),
 > 								namelength) == 0)
-1008c1024,1025
+1009c1026,1027
 < 				if(j<LENGTH(curr_val_labels)) continue;
 ---
 > 					if (j < LENGTH(curr_val_labels))
 > 						continue;
-1013,1014c1030,1034
+1014,1015c1032,1036
 < 				PROTECT(theselabels = getAttrib(theselabelslevels, R_NamesSymbol));
 < 				writeStataValueLabel(thisnamechar, theselabels, theselabelslevels, namelength, fp);
 ---
@@ -3927,12 +3741,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 									R_NamesSymbol));
 > 					writeStataValueLabel(thisnamechar, theselabels,
 > 							theselabelslevels, namelength, fp);
-1025,1026c1045
+1026,1027c1047
 < SEXP do_writeStata(SEXP call)
 < {
 ---
 > SEXP do_writeStata(SEXP call) {
-1043c1061,1062
+1044c1063,1064
 <     if (!fp) error(_("unable to open file for writing: '%s'"), strerror(errno));
 ---
 > 	if (!fp)

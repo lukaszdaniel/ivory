@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core Team <r-core@r-project.org>\n"
@@ -292,11 +292,6 @@ msgstr ""
 msgid "Average silhouette width:"
 msgstr ""
 
-#. R/clusGap.R: gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster")
-#: R/clusGap.R:0
-msgid "B=%d simulated reference sets, k = 1..%d"
-msgstr ""
-
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", deparse(x$call), domain = "R-cluster")
@@ -353,9 +348,12 @@ msgstr ""
 msgid "Cluster sizes:"
 msgstr ""
 
-#. R/clusGap.R: gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster")
+#. R/clusGap.R: gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",     paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster")
 #: R/clusGap.R:0
-msgid "Clustering Gap statistic [\"clusGap\"]."
+msgid ""
+"Clustering Gap statistic [\"clusGap\"] from call:\n"
+"%s\n"
+"B=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\""
 msgstr ""
 
 #. R/clusGap.R: gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster")
@@ -846,6 +844,12 @@ msgid ""
 "full silhouette is only available for results of 'clara(*, keep.data = TRUE)'"
 msgstr "die volle Silhoutte ist nur verfügbar für Resultate von"
 
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#: R/pam.q:0
+msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 #: R/daisy.q:0
 #, fuzzy
@@ -867,6 +871,11 @@ msgstr "unzulässiger 'jstop' aus .C(cl_clara,.):"
 #: R/silhouette.R:0
 msgid "invalid 'silhouette' object"
 msgstr "unzulässiges 'silhouette' Objekt"
+
+#. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
+#: R/clusGap.R:0
+msgid "invalid 'spaceH0':"
+msgstr ""
 
 #. R/coef.R: stop("invalid 'twins' object")
 #: R/coef.R:0

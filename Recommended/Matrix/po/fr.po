@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-20 21:44+0200\n"
+"POT-Creation-Date: 2016-12-23 19:40+0100\n"
 "PO-Revision-Date: 2014-03-30 09:05+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -306,73 +306,73 @@ msgstr "'uplo' doit être UPP ou LOW"
 msgid "replacement diagonal has wrong length"
 msgstr ""
 
-#: Mutils.c:681
+#: Mutils.c:682
 #, fuzzy, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"
 msgstr "classe '%s' incorrecte pour dup_mMatrix_as_geMatrix"
 
-#: Mutils.c:811
+#: Mutils.c:812
 #, fuzzy, c-format
 msgid "unexpected ctype = %d in 'dup_mMatrix_as_geMatrix' function"
 msgstr "ctype = %d inattendu dans dup_mMatrix_as_geMatrix"
 
-#: Mutils.c:839
+#: Mutils.c:840
 #, fuzzy, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_dgeMatrix()' function"
 msgstr "classe '%s' incorrecte pour dup_mMatrix_as_dgeMatrix"
 
-#: Mutils.c:889
+#: Mutils.c:890
 #, fuzzy
 msgid "Argument 'ij' must be 2-column integer matrix"
 msgstr "L'argument ij doit être une matrice d'entiers à 2 colonnes"
 
-#: Mutils.c:908
+#: Mutils.c:909
 msgid "subscript 'i' out of bounds in M[ij]"
 msgstr "indice 'i' hors plage dans M[ij]"
 
-#: Mutils.c:910
+#: Mutils.c:911
 msgid "subscript 'j' out of bounds in M[ij]"
 msgstr "indice 'j' hors plage dans M[ij]"
 
-#: Mutils.c:954
+#: Mutils.c:955
 #, fuzzy
 msgid "'i' and 'j' arguments must be integer vectors of the same length"
 msgstr "i et j doivent être des vecteurs d'entiers de même longueur"
 
-#: Mutils.c:999
+#: Mutils.c:1000
 msgid "'data' must be of a vector type"
 msgstr "'data' doit être un vecteur de type"
 
-#: Mutils.c:1006
+#: Mutils.c:1007
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: Mutils.c:1013 Mutils.c:1021
+#: Mutils.c:1014 Mutils.c:1022
 msgid "non-numeric matrix extent"
 msgstr "étendue de matrice non numérique"
 
-#: Mutils.c:1016
+#: Mutils.c:1017
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr "valeur 'nrow' incorrecte (trop large ou NA)"
 
-#: Mutils.c:1018
+#: Mutils.c:1019
 msgid "invalid 'nrow' value (< 0)"
 msgstr "valeur 'nrow' incorrecte (< 0)"
 
-#: Mutils.c:1024
+#: Mutils.c:1025
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr "valeur 'ncol' incorrecte (trop large ou NA)"
 
-#: Mutils.c:1026
+#: Mutils.c:1027
 msgid "invalid 'ncol' value (< 0)"
 msgstr "valeur 'ncol' incorrecte (< 0)"
 
-#: Mutils.c:1029 Mutils.c:1032 Mutils.c:1035
+#: Mutils.c:1030 Mutils.c:1033 Mutils.c:1036
 msgid "data is too long"
 msgstr ""
 
-#: Mutils.c:1044
+#: Mutils.c:1045
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of rows [%d]"
@@ -380,7 +380,7 @@ msgstr ""
 "la longueur des données [%d] n'est pas un sous-multiple ou un multiple du "
 "nombre de lignes [%d]"
 
-#: Mutils.c:1047
+#: Mutils.c:1048
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of columns "
@@ -389,20 +389,20 @@ msgstr ""
 "la longueur des données [%d] n'est pas un sous-multiple ou un multiple du "
 "nombre de colonnes [%d]"
 
-#: Mutils.c:1050
+#: Mutils.c:1051
 msgid "data length exceeds size of matrix"
 msgstr "la longueur des données excède la taille de la matrice"
 
-#: Mutils.c:1056
+#: Mutils.c:1057
 msgid "too many elements specified"
 msgstr "trop d'éléments sont spécifiés"
 
-#: Mutils.c:1129
+#: Mutils.c:1130
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1183 Mutils.c:1214 Mutils.c:1225 Mutils.c:1252
+#: Mutils.c:1184 Mutils.c:1215 Mutils.c:1226 Mutils.c:1253
 msgid "Argument must be numeric-like atomic vector"
 msgstr ""
 "L'argument doit être un vecteur atomique de type numérique ou convertible en "
@@ -750,44 +750,44 @@ msgstr "la matrice n'est pas carrée ! (partie symétrique)"
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr "la matrice n'est pas carrée ! (partie 'skew-symetric')"
 
-#: dgCMatrix.c:18 dgTMatrix.c:15
+#: dgCMatrix.c:25 dgTMatrix.c:15
 msgid "lengths of slots 'i' and 'x' must match"
 msgstr "les longueurs des slots 'i' et 'x' doivent correspondre"
 
-#: dgCMatrix.c:30
+#: dgCMatrix.c:37
 msgid "lengths of slots 'j' and 'x' must match"
 msgstr "les longueurs des slots 'j' et 'x' doivent correspondre"
 
-#: dgCMatrix.c:52
+#: dgCMatrix.c:59
 #, fuzzy, c-format
 msgid "invalid class(x) '%s' in 'compressed_to_TMatrix(x)' function"
 msgstr "class(x) incorrecte '%s' dans compressed_to_TMatrix(x)"
 
-#: dgCMatrix.c:87
+#: dgCMatrix.c:94
 #, fuzzy, c-format
 msgid "invalid class(x) '%s' in 'R_to_CMatrix(x)' function"
 msgstr "class(x) incorrecte '%s' dans R_to_CMatrix(x)"
 
-#: dgCMatrix.c:158
+#: dgCMatrix.c:165
 msgid "dgCMatrix_lusol requires a square, non-empty matrix"
 msgstr "dgCMatrix_lusol nécessite une matrice carrée non vide"
 
-#: dgCMatrix.c:160 dgCMatrix.c:187 dgCMatrix.c:502 dgCMatrix.c:543
+#: dgCMatrix.c:167 dgCMatrix.c:194 dgCMatrix.c:509 dgCMatrix.c:550
 #: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81 dspMatrix.c:79
 #: dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
 msgid "Dimensions of system to be solved are inconsistent"
 msgstr "Les dimensions du système à résoudre sont incohérentes"
 
-#: dgCMatrix.c:162
+#: dgCMatrix.c:169
 msgid "cs_lusol failed"
 msgstr "cs_lusol a échoué"
 
-#: dgCMatrix.c:184
+#: dgCMatrix.c:191
 #, fuzzy
 msgid "'dgCMatrix_qrsol(., order)' function needs order in {0,..,3}"
 msgstr "dgCMatrix_qrsol(., order) nécessite un ordre compris entre {0,..,3}"
 
-#: dgCMatrix.c:193
+#: dgCMatrix.c:200
 #, fuzzy, c-format
 msgid ""
 "'dgCMatrix_qrsol(<%d x %d>-matrix)' function requires a 'tall' rectangular "
@@ -796,80 +796,80 @@ msgstr ""
 "dgCMatrix_qrsol(<%d x %d>-matrix) nécessite une matrice rectangulaire haute "
 "('tall')"
 
-#: dgCMatrix.c:204
+#: dgCMatrix.c:211
 #, fuzzy
 msgid "'cs_qrsol()' function failed inside 'dgCMatrix_qrsol()' function"
 msgstr "cs_qrsol() a échoué à l'intérieur de dgCMatrix_qrsol()"
 
-#: dgCMatrix.c:223
+#: dgCMatrix.c:230
 #, fuzzy
 msgid "'A' must have #{rows} >= #{columns}"
 msgstr "A doit avoir #{lignes} >= #{colonnes}"
 
-#: dgCMatrix.c:228
+#: dgCMatrix.c:235
 #, fuzzy
 msgid "'cs_sqr' function failed"
 msgstr "cs_sqr a échoué"
 
-#: dgCMatrix.c:231
+#: dgCMatrix.c:238
 msgid "dgcMatrix_QR(*, keep_dimnames = NA): NA value taken as TRUE"
 msgstr ""
 
-#: dgCMatrix.c:234
+#: dgCMatrix.c:241
 #, c-format
 msgid "Symbolic QR(): Matrix structurally rank deficient (m2-m = %d)\n"
 msgstr ""
 
-#: dgCMatrix.c:237
+#: dgCMatrix.c:244
 #, fuzzy
 msgid "'cs_qr' function failed"
 msgstr "cs_qr a échoué"
 
-#: dgCMatrix.c:323
+#: dgCMatrix.c:330
 #, fuzzy
 msgid "'SuiteSparseQR_C_QR' function returned an error code"
 msgstr "SuiteSparseQR_C_QR a renvoyé un code d'erreur"
 
-#: dgCMatrix.c:367
+#: dgCMatrix.c:374
 msgid "LU decomposition applies only to square matrices"
 msgstr "la décomposition LU n'est utilisable que pour des matrices carrées"
 
-#: dgCMatrix.c:376
+#: dgCMatrix.c:383
 #, fuzzy
 msgid "cs_lu(A) failed: near-singular 'A' (or out of memory)"
 msgstr "cs_lu(A) a échoué : A pratiquement singulière (ou manque de mémoire)"
 
-#: dgCMatrix.c:462
+#: dgCMatrix.c:469
 msgid "dgcMatrix_LU(*, keep_dimnames = NA): NA taken as TRUE"
 msgstr ""
 
-#: dgCMatrix.c:474
+#: dgCMatrix.c:481
 msgid "dgCMatrix_matrix_solve(.., sparse=TRUE) not yet implemented"
 msgstr "dgCMatrix_matrix_solve(.., sparse=TRUE) pas encore implémenté"
 
-#: dgCMatrix.c:541
+#: dgCMatrix.c:548
 #, fuzzy
 msgid ""
 "'dgCMatrix_cholsol' function requires a 'short, wide' rectangular matrix"
 msgstr "dgCMatrix_cholsol nécessite une matrice rectangulaire en longueur"
 
-#: dgCMatrix.c:549
+#: dgCMatrix.c:556
 #, fuzzy
 msgid "'cholmod_sdmult' function error (rhs)"
 msgstr "erreur cholmod_sdmult (partie droite de l'équation)"
 
-#: dgCMatrix.c:552
+#: dgCMatrix.c:559
 #, fuzzy, c-format
 msgid "'cholmod_factorize' function failed: status %d, minor %d from ncol %d"
 msgstr "cholmod_factorize a échoué : statut %d, mineur %d pour ncol %d"
 
-#: dgCMatrix.c:556
+#: dgCMatrix.c:563
 #, fuzzy, c-format
 msgid ""
 "'cholmod_solve' function (CHOLMOD_A) failed: status %d, minor %d from ncol %d"
 msgstr "cholmod_solve (CHOLMOD_A) a échoué : statut %d, mineur %d pour ncol %d"
 
-#: dgCMatrix.c:573
+#: dgCMatrix.c:580
 #, fuzzy
 msgid "'cholmod_sdmult' function error (resid)"
 msgstr "erreur cholmod_sdmult (resid)"

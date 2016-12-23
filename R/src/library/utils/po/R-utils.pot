@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.4.0\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -509,6 +509,13 @@ msgstr ""
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 
 msgid "(each package appears only once)"
+msgstr ""
+
+
+#: R/SweaveDrivers.R: 0
+#. R/SweaveDrivers.R: gettext("(missing #line/file info)", domain = "R-utils")
+
+msgid "(missing #line/file info)"
 msgstr ""
 
 

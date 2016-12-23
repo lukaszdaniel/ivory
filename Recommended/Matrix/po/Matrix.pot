@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-6\n"
+"Project-Id-Version: Matrix 1.2-7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-04 22:47+0200\n"
+"POT-Creation-Date: 2016-12-23 19:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,97 +294,97 @@ msgstr ""
 msgid "replacement diagonal has wrong length"
 msgstr ""
 
-#: Mutils.c:681
+#: Mutils.c:682
 #, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"
 msgstr ""
 
-#: Mutils.c:811
+#: Mutils.c:812
 #, c-format
 msgid "unexpected ctype = %d in 'dup_mMatrix_as_geMatrix' function"
 msgstr ""
 
-#: Mutils.c:839
+#: Mutils.c:840
 #, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_dgeMatrix()' function"
 msgstr ""
 
-#: Mutils.c:889
+#: Mutils.c:890
 msgid "Argument 'ij' must be 2-column integer matrix"
 msgstr ""
 
-#: Mutils.c:908
+#: Mutils.c:909
 msgid "subscript 'i' out of bounds in M[ij]"
 msgstr ""
 
-#: Mutils.c:910
+#: Mutils.c:911
 msgid "subscript 'j' out of bounds in M[ij]"
 msgstr ""
 
-#: Mutils.c:954
+#: Mutils.c:955
 msgid "'i' and 'j' arguments must be integer vectors of the same length"
 msgstr ""
 
-#: Mutils.c:999
+#: Mutils.c:1000
 msgid "'data' must be of a vector type"
 msgstr ""
 
-#: Mutils.c:1006
+#: Mutils.c:1007
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: Mutils.c:1013 Mutils.c:1021
+#: Mutils.c:1014 Mutils.c:1022
 msgid "non-numeric matrix extent"
 msgstr ""
 
-#: Mutils.c:1016
+#: Mutils.c:1017
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr ""
 
-#: Mutils.c:1018
+#: Mutils.c:1019
 msgid "invalid 'nrow' value (< 0)"
 msgstr ""
 
-#: Mutils.c:1024
+#: Mutils.c:1025
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr ""
 
-#: Mutils.c:1026
+#: Mutils.c:1027
 msgid "invalid 'ncol' value (< 0)"
 msgstr ""
 
-#: Mutils.c:1029 Mutils.c:1032 Mutils.c:1035
+#: Mutils.c:1030 Mutils.c:1033 Mutils.c:1036
 msgid "data is too long"
 msgstr ""
 
-#: Mutils.c:1044
+#: Mutils.c:1045
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of rows [%d]"
 msgstr ""
 
-#: Mutils.c:1047
+#: Mutils.c:1048
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of columns "
 "[%d]"
 msgstr ""
 
-#: Mutils.c:1050
+#: Mutils.c:1051
 msgid "data length exceeds size of matrix"
 msgstr ""
 
-#: Mutils.c:1056
+#: Mutils.c:1057
 msgid "too many elements specified"
 msgstr ""
 
-#: Mutils.c:1129
+#: Mutils.c:1130
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1183 Mutils.c:1214 Mutils.c:1225 Mutils.c:1252
+#: Mutils.c:1184 Mutils.c:1215 Mutils.c:1226 Mutils.c:1253
 msgid "Argument must be numeric-like atomic vector"
 msgstr ""
 
@@ -691,115 +691,115 @@ msgstr ""
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr ""
 
-#: dgCMatrix.c:18 dgTMatrix.c:15
+#: dgCMatrix.c:25 dgTMatrix.c:15
 msgid "lengths of slots 'i' and 'x' must match"
 msgstr ""
 
-#: dgCMatrix.c:30
+#: dgCMatrix.c:37
 msgid "lengths of slots 'j' and 'x' must match"
 msgstr ""
 
-#: dgCMatrix.c:52
+#: dgCMatrix.c:59
 #, c-format
 msgid "invalid class(x) '%s' in 'compressed_to_TMatrix(x)' function"
 msgstr ""
 
-#: dgCMatrix.c:87
+#: dgCMatrix.c:94
 #, c-format
 msgid "invalid class(x) '%s' in 'R_to_CMatrix(x)' function"
 msgstr ""
 
-#: dgCMatrix.c:158
+#: dgCMatrix.c:165
 msgid "dgCMatrix_lusol requires a square, non-empty matrix"
 msgstr ""
 
-#: dgCMatrix.c:160 dgCMatrix.c:187 dgCMatrix.c:502 dgCMatrix.c:543
+#: dgCMatrix.c:167 dgCMatrix.c:194 dgCMatrix.c:509 dgCMatrix.c:550
 #: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81 dspMatrix.c:79
 #: dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
 msgid "Dimensions of system to be solved are inconsistent"
 msgstr ""
 
-#: dgCMatrix.c:162
+#: dgCMatrix.c:169
 msgid "cs_lusol failed"
 msgstr ""
 
-#: dgCMatrix.c:184
+#: dgCMatrix.c:191
 msgid "'dgCMatrix_qrsol(., order)' function needs order in {0,..,3}"
 msgstr ""
 
-#: dgCMatrix.c:193
+#: dgCMatrix.c:200
 #, c-format
 msgid ""
 "'dgCMatrix_qrsol(<%d x %d>-matrix)' function requires a 'tall' rectangular "
 "matrix"
 msgstr ""
 
-#: dgCMatrix.c:204
+#: dgCMatrix.c:211
 msgid "'cs_qrsol()' function failed inside 'dgCMatrix_qrsol()' function"
 msgstr ""
 
-#: dgCMatrix.c:223
+#: dgCMatrix.c:230
 msgid "'A' must have #{rows} >= #{columns}"
 msgstr ""
 
-#: dgCMatrix.c:228
+#: dgCMatrix.c:235
 msgid "'cs_sqr' function failed"
 msgstr ""
 
-#: dgCMatrix.c:231
+#: dgCMatrix.c:238
 msgid "dgcMatrix_QR(*, keep_dimnames = NA): NA value taken as TRUE"
 msgstr ""
 
-#: dgCMatrix.c:234
+#: dgCMatrix.c:241
 #, c-format
 msgid "Symbolic QR(): Matrix structurally rank deficient (m2-m = %d)\n"
 msgstr ""
 
-#: dgCMatrix.c:237
+#: dgCMatrix.c:244
 msgid "'cs_qr' function failed"
 msgstr ""
 
-#: dgCMatrix.c:323
+#: dgCMatrix.c:330
 msgid "'SuiteSparseQR_C_QR' function returned an error code"
 msgstr ""
 
-#: dgCMatrix.c:367
+#: dgCMatrix.c:374
 msgid "LU decomposition applies only to square matrices"
 msgstr ""
 
-#: dgCMatrix.c:376
+#: dgCMatrix.c:383
 msgid "cs_lu(A) failed: near-singular 'A' (or out of memory)"
 msgstr ""
 
-#: dgCMatrix.c:462
+#: dgCMatrix.c:469
 msgid "dgcMatrix_LU(*, keep_dimnames = NA): NA taken as TRUE"
 msgstr ""
 
-#: dgCMatrix.c:474
+#: dgCMatrix.c:481
 msgid "dgCMatrix_matrix_solve(.., sparse=TRUE) not yet implemented"
 msgstr ""
 
-#: dgCMatrix.c:541
+#: dgCMatrix.c:548
 msgid ""
 "'dgCMatrix_cholsol' function requires a 'short, wide' rectangular matrix"
 msgstr ""
 
-#: dgCMatrix.c:549
+#: dgCMatrix.c:556
 msgid "'cholmod_sdmult' function error (rhs)"
 msgstr ""
 
-#: dgCMatrix.c:552
+#: dgCMatrix.c:559
 #, c-format
 msgid "'cholmod_factorize' function failed: status %d, minor %d from ncol %d"
 msgstr ""
 
-#: dgCMatrix.c:556
+#: dgCMatrix.c:563
 #, c-format
 msgid ""
 "'cholmod_solve' function (CHOLMOD_A) failed: status %d, minor %d from ncol %d"
 msgstr ""
 
-#: dgCMatrix.c:573
+#: dgCMatrix.c:580
 msgid "'cholmod_sdmult' function error (resid)"
 msgstr ""
 

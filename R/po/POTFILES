@@ -24,7 +24,6 @@ src/gnuwin32/dos_wglob.c
 src/gnuwin32/dynload.c
 src/gnuwin32/editor.c
 src/gnuwin32/extra.c
-src/gnuwin32/malloc.c
 src/gnuwin32/pager.c
 src/gnuwin32/preferences.c
 src/gnuwin32/rui.c
@@ -115,6 +114,7 @@ src/main/serialize.c
 src/main/sort.c
 src/main/source.c
 src/main/split.c
+src/main/split-incl.c
 src/main/sprintf.c
 src/main/startup.c
 src/main/subassign.c

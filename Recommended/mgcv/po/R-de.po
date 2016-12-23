@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -1219,6 +1219,11 @@ msgstr ""
 msgid "Response"
 msgstr ""
 
+#. R/efam.r: stop("Response should be integer class labels")
+#: R/efam.r:0
+msgid "Response should be integer class labels"
+msgstr ""
+
 #. R/plots.r: gettext("Response vs. Fitted Values", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Response vs. Fitted Values"
@@ -1363,11 +1368,6 @@ msgstr ""
 msgid "The RMS %s score gradient at convergence was %s."
 msgstr ""
 
-#. R/plots.r: gettextf("The estimated model rank was %s (maximum possible: %s)", b$mgcv.conv$rank,     b$mgcv.conv$full.rank, domain = "R-mgcv")
-#: R/plots.r:0
-msgid "The estimated model rank was %s (maximum possible: %s)"
-msgstr ""
-
 #. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "The following arguments to anova.glm(..) are invalid and dropped:"
@@ -1447,6 +1447,11 @@ msgstr "Elemente von min.sp dürfen nicht negativ sein."
 #, fuzzy
 msgid "argument 'k' of 's()' function should be integer and has been rounded"
 msgstr "Argument k von s() sollte ganzzahlig sein und wurde gerundet"
+
+#. R/smooth.r: warning("argument of mrf should be a factor variable")
+#: R/smooth.r:0
+msgid "argument of mrf should be a factor variable"
+msgstr ""
 
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
@@ -1659,6 +1664,11 @@ msgstr ""
 #. R/mgcv.r: warning("dropping unidentifiable parametric terms from model", call. = FALSE)
 #: R/mgcv.r:0
 msgid "dropping unidentifiable parametric terms from model"
+msgstr ""
+
+#. R/mgcv.r: stop("edge.correct must be logical or a positive number")
+#: R/mgcv.r:0
+msgid "edge.correct must be logical or a positive number"
 msgstr ""
 
 #. R/plots.r: gettext("effects", domain = "R-mgcv")

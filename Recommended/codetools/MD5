@@ -5,8 +5,8 @@ d7d4587719d6cbb3083123501ec23dd3 *NAMESPACE
 215ca204e6c7206111e585206cee095c *man/codetools.Rd
 dfa8498b455155a5b2fc59c318c55f3f *DESCRIPTION
 ecfdfce9918eeccddc2df4614c82658a *po/R-pl.po
-1356d01620eb7f1040bc8c8b600abd0d *po/R-codetools.pot
-e62a3d723ae5834262039d308102f5b0 *inst/po/en@quot/LC_MESSAGES/R-codetools.mo
+b1af3fdbb2bf986f87bffcad602d8d24 *po/R-codetools.pot
+d3d77177611ce18c4613b61d57300ebf *inst/po/en@quot/LC_MESSAGES/R-codetools.mo
 81cf9cbfb920b873d7ae780c4dcc132b *inst/po/pl/LC_MESSAGES/R-codetools.mo
 838118aa4116e6b2d66e393dae8e4073 *tests/tests.R
 a53e193880333acf2b361dd0eaf3a5eb *R/codetools.R

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -304,11 +304,6 @@ msgstr ""
 msgid "Average silhouette width:"
 msgstr ""
 
-#. R/clusGap.R: gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster")
-#: R/clusGap.R:0
-msgid "B=%d simulated reference sets, k = 1..%d"
-msgstr ""
-
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", deparse(x$call), domain = "R-cluster")
@@ -365,9 +360,12 @@ msgstr ""
 msgid "Cluster sizes:"
 msgstr ""
 
-#. R/clusGap.R: gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster")
+#. R/clusGap.R: gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",     paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster")
 #: R/clusGap.R:0
-msgid "Clustering Gap statistic [\"clusGap\"]."
+msgid ""
+"Clustering Gap statistic [\"clusGap\"] from call:\n"
+"%s\n"
+"B=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\""
 msgstr ""
 
 #. R/clusGap.R: gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster")
@@ -873,6 +871,12 @@ msgstr ""
 "full silhouette는 'clara(*, keep.data = TRUE)'의 결과만에 오로지 사용할 수 있"
 "습니다."
 
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#: R/pam.q:0
+msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 #: R/daisy.q:0
 msgid "invalid %s; must be named list"
@@ -896,6 +900,11 @@ msgstr ""
 #: R/silhouette.R:0
 msgid "invalid 'silhouette' object"
 msgstr "'silhouette' 객체가 올바르지 않습니다."
+
+#. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
+#: R/clusGap.R:0
+msgid "invalid 'spaceH0':"
+msgstr ""
 
 #. R/coef.R: stop("invalid 'twins' object")
 #: R/coef.R:0

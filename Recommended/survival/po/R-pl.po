@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2016-04-23 13:23+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -715,6 +715,7 @@ msgid "Correlation of Coefficients:"
 msgstr "Korelacja współczynników:"
 
 #. R/survfit.coxph.R: stop("Could not reconstruct the y vector")
+#. R/survfit.coxph.R: stop("Could not reconstruct the y vector")
 #: R/survfit.coxph.R:0
 msgid "Could not reconstruct the y vector"
 msgstr "Nie można było zrekonstruować wektora 'y'"
@@ -1420,11 +1421,6 @@ msgstr "nie można mieć dwóch członów grupujących"
 msgid "can only handle right censored or counting data"
 msgstr ""
 
-#. R/survSplit.R: stop("cannot deal with complex arguments within a Surv call")
-#: R/survSplit.R:0
-msgid "cannot deal with complex arguments within a Surv call"
-msgstr ""
-
 #. R/anova.coxph.R: stop("cannot do anova tables with robust variances")
 #. R/anova.coxph.penal.R: stop("cannot do anova tables with robust variances")
 #. R/anova.coxphlist.S: stop("cannot do anova tables with robust variances")
@@ -1504,6 +1500,17 @@ msgstr "grupa nie może być użyta w interakcji"
 #: R/cch.R:0
 msgid "cohort size must be a scalar for unstratified analysis"
 msgstr "rozmiar kohorty musi być skalarem dla analizy bezwarstwowej"
+
+#. R/statefig.R: stop("connect must be a square matrix")
+#: R/statefig.R:0
+#, fuzzy
+msgid "connect must be a square matrix"
+msgstr "'x' musi być macierzą"
+
+#. R/statefig.R: stop("connect must have the state names as dimnames")
+#: R/statefig.R:0
+msgid "connect must have the state names as dimnames"
+msgstr ""
 
 #. R/cch.R: gettextf("cox model doesn't support \"%s\" survival data", type)
 #: R/cch.R:0
@@ -1809,11 +1816,6 @@ msgstr "niepoprawna wartość statusu, musi być wartością logiczną lub liczb
 msgid "invalid survival times for this distribution"
 msgstr "niepoprawne czasy przeżycia dla tego rozkładu"
 
-#. R/survreg.S: stop("invalid survival type")
-#: R/survreg.S:0
-msgid "invalid survival type"
-msgstr "niepoprawny typ przeżycia"
-
 #. R/coxph.getdata.S: stop("invalid terms component of fit")
 #: R/coxph.getdata.S:0
 msgid "invalid terms component of fit"
@@ -1845,6 +1847,22 @@ msgstr "niepoprawna wartość iteracji"
 msgid "invalid weights, must be >0"
 msgstr "niepoprawne wagi, muszą być > 0"
 
+#. R/statefig.R: stop("layout coordinates must be between 0 and 1")
+#: R/statefig.R:0
+msgid "layout coordinates must be between 0 and 1"
+msgstr ""
+
+#. R/statefig.R: stop("layout matrix should have one row per state")
+#: R/statefig.R:0
+msgid "layout matrix should have one row per state"
+msgstr ""
+
+#. R/statefig.R: stop("layout must be a numeric vector or matrix")
+#: R/statefig.R:0
+#, fuzzy
+msgid "layout must be a numeric vector or matrix"
+msgstr "parametry domyślne muszą być wektorem liczbowym"
+
 #. R/survConcordance.R: stop("left hand side of the formula  must be a numeric vector or a surival")
 #: R/survConcordance.R:0
 #, fuzzy
@@ -1867,6 +1885,11 @@ msgstr "błąd długości w obiekcie 'coxlist2'"
 #: R/is.ratetable.S:0
 msgid "length of the data does not match 'prod(dim)'"
 msgstr "długość danych nie zgadza się z 'prod(dim)'"
+
+#. R/survfitCI.R: stop("length of the influence matrix is > the maximum integer")
+#: R/survfitCI.R:0
+msgid "length of the influence matrix is > the maximum integer"
+msgstr ""
 
 #. R/match.ratetable.S: gettextf("levels do not match for 'ratetable()' variable %s", dimid[i])
 #: R/match.ratetable.S:0
@@ -1947,6 +1970,11 @@ msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 msgid "multi-state curves are not a valid input"
 msgstr ""
 
+#. R/survreg.S: stop("multi-state survival is not supported")
+#: R/survreg.S:0
+msgid "multi-state survival is not supported"
+msgstr ""
+
 #. R/cch.R: stop("multiple records per id not allowed")
 #: R/cch.R:0
 msgid "multiple records per id not allowed"
@@ -2001,6 +2029,11 @@ msgstr "brak dostępnej informacji używając 'start.time = %s'."
 msgid "no time variable!"
 msgstr "brak zmiennej czasowej!"
 
+#. R/statefig.R: stop("non-integer number of states in layout argument")
+#: R/statefig.R:0
+msgid "non-integer number of states in layout argument"
+msgstr ""
+
 #. R/match.ratetable.S: gettextf("non-unique ratetable match for variable %s", dimid[i])
 #: R/match.ratetable.S:0
 msgid "non-unique ratetable match for variable %s"
@@ -2018,6 +2051,12 @@ msgstr ""
 #, fuzzy
 msgid "not valid for %s censored survival data"
 msgstr "nierozpoznany typ przeżycia"
+
+#. R/statefig.R: stop("number of boxes != number of states")
+#: R/statefig.R:0
+#, fuzzy
+msgid "number of boxes != number of states"
+msgstr "liczba etykiet musi równać się liczbie interwałów"
 
 #. R/survreg.distributions.S: stop("number of degrees of freedom must be >=3")
 #: R/survreg.distributions.S:0
@@ -2179,11 +2218,28 @@ msgstr "człon 'sparse' musi być pojedynczą kolumną"
 msgid "start time must be < stop time"
 msgstr "czas stopu musi być > czas startu"
 
+#. R/survreg.S: stop("start-stop type Surv objects are not supported")
+#: R/survreg.S:0
+msgid "start-stop type Surv objects are not supported"
+msgstr ""
+
 #. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
 #. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
 #: R/survfitKM.S:0 R/survfitTurnbull.S:0
 msgid "start.time = %s is greater than all time points."
 msgstr "czas startu = %s jest większy niż wszystkie punkty czasowe."
+
+#. R/survfit.coxph.R: stop("start.time argument has removed all endpoints")
+#: R/survfit.coxph.R:0
+#, fuzzy
+msgid "start.time argument has removed all endpoints"
+msgstr "czas startu = %s jest większy niż wszystkie punkty czasowe."
+
+#. R/survfit.coxph.R: stop("start.time must be a single numeric value")
+#: R/survfit.coxph.R:0
+#, fuzzy
+msgid "start.time must be a single numeric value"
+msgstr "człon 'sparse' musi być pojedynczą kolumną"
 
 #. R/Surv.S: warning("status must be 0, 1, 2 or 3; converted to NA")
 #: R/Surv.S:0
@@ -2210,12 +2266,6 @@ msgstr "człony warstwy nie są dozwolone"
 #: R/cch.R:0
 msgid "stratum levels and names(cohort.size) do not agree"
 msgstr "poziomy 'stratum' oraz 'names(cohort.size)' nie zgadzają się"
-
-#. R/survfitCI.R: gettextf("subject changes case weights, id %s", id[indx1[who]])
-#: R/survfitCI.R:0
-#, fuzzy
-msgid "subject changes case weights, id %s"
-msgstr "obiekt zmienia wagi przypadku, id %s"
 
 #. R/survfitCI.R: gettextf("subject changes to the same state, id %s", id[indx1[who]])
 #: R/survfitCI.R:0
@@ -2496,6 +2546,13 @@ msgid_plural "unrecognized options: %s"
 msgstr[0] "nierozpoznana opcja: %s"
 msgstr[1] "nierozpoznane opcje: %s"
 msgstr[2] "nierozpoznane opcje: %s"
+
+#~ msgid "invalid survival type"
+#~ msgstr "niepoprawny typ przeżycia"
+
+#, fuzzy
+#~ msgid "subject changes case weights, id %s"
+#~ msgstr "obiekt zmienia wagi przypadku, id %s"
 
 #, fuzzy
 #~ msgid "the id variable is null"
@@ -2843,9 +2900,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 
 #~ msgid "Invalid y matrix"
 #~ msgstr "Niepoprawna macierz 'y'"
-
-#~ msgid "x must be a matrix"
-#~ msgstr "'x' musi być macierzą"
 
 #~ msgid "Invalid value for death indicator"
 #~ msgstr "Niepoprawna wartość dla wskaźnika śmierci"

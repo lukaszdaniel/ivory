@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-13\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"Project-Id-Version: mgcv 1.8-16\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1552,6 +1552,13 @@ msgid "Response"
 msgstr ""
 
 
+#: R/efam.r: 0
+#. R/efam.r: stop("Response should be integer class labels")
+
+msgid "Response should be integer class labels"
+msgstr ""
+
+
 #: R/plots.r: 0
 #. R/plots.r: gettext("Response vs. Fitted Values", domain = "R-mgcv")
 
@@ -1746,13 +1753,6 @@ msgid "The RMS %s score gradient at convergence was %s."
 msgstr ""
 
 
-#: R/plots.r: 0
-#. R/plots.r: gettextf("The estimated model rank was %s (maximum possible: %s)", b$mgcv.conv$rank,     b$mgcv.conv$full.rank, domain = "R-mgcv")
-
-msgid "The estimated model rank was %s (maximum possible: %s)"
-msgstr ""
-
-
 #: R/mgcv.r: 0
 #. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 
@@ -1855,6 +1855,13 @@ msgstr ""
 #. R/smooth.r: warning("argument 'k' of 's()' function should be integer and has been rounded")
 
 msgid "argument 'k' of 's()' function should be integer and has been rounded"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: warning("argument of mrf should be a factor variable")
+
+msgid "argument of mrf should be a factor variable"
 msgstr ""
 
 
@@ -2131,6 +2138,13 @@ msgstr ""
 #. R/mgcv.r: warning("dropping unidentifiable parametric terms from model", call. = FALSE)
 
 msgid "dropping unidentifiable parametric terms from model"
+msgstr ""
+
+
+#: R/mgcv.r: 0
+#. R/mgcv.r: stop("edge.correct must be logical or a positive number")
+
+msgid "edge.correct must be logical or a positive number"
 msgstr ""
 
 

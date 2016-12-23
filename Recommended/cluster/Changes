@@ -70,29 +70,39 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                       sampsize, n), domain=NA)
 ---
 > 	stop(gettextf("'sampsize' = %d should not be larger than the number of objects, %d", sampsize, n), domain = "R-cluster")
-93,96c92
+48,50c47
+< 	    warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula.
+< Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly
+< to suppress this warning.")
+---
+> 	    warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
+52c49
+< 	    stop("invalid 'correct.d'")
+---
+> 	    stop("invalid 'correct.d' value")
+101,104c98
 < 		stop(sprintf(ngettext(nNA,
 < 			      "Observation %s has *only* NAs --> omit it for clustering",
 < 			      "Observations %s have *only* NAs --> omit them for clustering!"),
 < 			     pasteC(i)), domain = NA)
 ---
 > 	     stop(sprintf(ngettext(nNA, "Observation %s has *only* NAs --> omit it for clustering", "Observations %s have *only* NAs --> omit them for clustering!", domain = "R-cluster"), pasteC(i)), domain = NA)
-98,101c94
+106,109c100
 < 		stop(sprintf(ngettext(nNA,
 < 			      "%d observation (%s) has *only* NAs --> omit them for clustering!",
 < 			      "%d observations (%s ...) have *only* NAs --> omit them for clustering!"),
 < 			     nNA, pasteC(i[1:12])), domain = NA)
 ---
 > 	     stop(sprintf(ngettext(nNA, "%d observation (%s) has *only* NAs --> omit them for clustering!", "%d observations (%s ...) have *only* NAs --> omit them for clustering!", domain = "R-cluster"), nNA, pasteC(i[1:12])), domain = NA)
-108c101
+116c107
 < 	stop("invalid 'jstop' from .C(cl_clara,.): ", res$jstop)
 ---
 > 	stop(gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop))
-111c104
+119c110
 <     res$clu <- as.integer(res$clu[1:n])
 ---
 >     res$clu <- as.integer(res$clu[seq_len(n)])
-149,155c142,148
+157,163c148,154
 <     cat("Call:	", deparse(x$call),
 < 	"\nMedoids:\n");		print(x$medoids, ...)
 <     cat("Objective function:\t ", format(x$objective, ...),"\n",
@@ -108,7 +118,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("Cluster sizes:", domain = "R-cluster"), "	    \t", x$clusinfo[,1], "\n", sep = "")
 > 	cat(gettext("Best sample:", domain = "R-cluster"), "\n", sep = "");		print(x$sample, quote = FALSE, ...)
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-167,170c160,163
+175,178c166,169
 <     cat("Object of class 'clara' from call:\n", deparse(x$call),
 < 	"\nMedoids:\n");		print(x$medoids, ...)
 <     cat("Objective function:\t ", format(x$objective, ...),
@@ -118,59 +128,59 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	cat(gettext("Medoids:", domain = "R-cluster"), "\n", sep = "");		print(x$medoids, ...)
 >     cat(gettext("Objective function:", domain = "R-cluster"), "\t", format(x$objective, ...), "\n", sep = "")
 > 	cat(gettext("Numerical information per cluster:", domain = "R-cluster"), "\n", sep = "")
-173c166
+181c172
 < 	cat("Average silhouette width per cluster:\n")
 ---
 > 	cat(gettext("Average silhouette width per cluster:", domain = "R-cluster"), "\n", sep = "")
-175,176c168,169
+183,184c174,175
 < 	cat("Average silhouette width of best sample:",
 < 	    format(x$silinfo[[3]], ...), "\n")
 ---
 > 	cat(gettext("Average silhouette width of best sample: ", domain = "R-cluster"),
 > 	    format(x$silinfo[[3]], ...), "\n", sep = "")
-178,179c171,172
+186,187c177,178
 <     cat("\nBest sample:\n");		print(x$sample, quote = FALSE, ...)
 <     cat("Clustering vector:\n");	print(x$clustering, ...)
 ---
 >     cat("\n", gettext("Best sample:", domain = "R-cluster"), "\n");		print(x$sample, quote = FALSE, ...)
 >     cat(gettext("Clustering vector:", domain = "R-cluster"), "\n");	print(x$clustering, ...)
-181c174
+189c180
 < 	cat("\nSilhouette plot information for best sample:\n")
 ---
 > 	cat("\n", gettext("Silhouette plot information for best sample:", domain = "R-cluster"), "\n")
-187c180
+195c186
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/R/clusGap.R Recommended/cluster/R/clusGap.R
-33,34c33,34
+36,37c36,37
 <     if(verbose) cat("Clustering k = 1,2,..., K.max (= ",K.max,"): .. ", sep='')
 <     for(k in 1:K.max)
 ---
 >     if(verbose) cat(gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster"), sep = "")
 >     for(k in seq_len(K.max))
-36c36
+39c39
 <     if(verbose) cat("done\n")
 ---
 >     if(verbose) cat(gettext("done", domain = "R-cluster"), "\n", sep = "")
-46,48c46,47
+58,60c58,59
 <     if(verbose) cat("Bootstrapping, b = 1,2,..., B (= ", B,
 <                     ")  [one \".\" per sample]:\n", sep="")
 <     for (b in 1:B) {
 ---
 >     if(verbose) cat(gettextf("Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:", B, domain = "R-cluster"), "\n", sep = "")
 >     for (b in seq_len(B)) {
-54c53
+69c68
 <         for(k in 1:K.max) {
 ---
 >         for(k in seq_len(K.max)) {
-128,129c127,128
-<     cat("Clustering Gap statistic [\"clusGap\"].\n",
-<         sprintf("B=%d simulated reference sets, k = 1..%d\n",x$B, K), sep="")
+144,146c143
+<     cat("Clustering Gap statistic [\"clusGap\"] from call:\n", deparse(x$call),
+<         sprintf("\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",
+<                 x$B, K, x$spaceH0), sep="")
 ---
->     cat(gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster"), "\n",
->         gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster"), "\n", sep = "")
-132,134c131,134
+>     cat(gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n", paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster"), sep="")
+149,151c146,149
 <     cat(sprintf(" --> Number of clusters (method '%s'%s): %d\n",
 < 		method, if(grepl("SE", method))
 < 		sprintf(", SE.factor=%g",SE.factor) else "", nc))
@@ -185,72 +195,72 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     ## stopifnot(all.equal(seq_len(n), sort(-mrg[mrg < 0])))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/R/daisy.q Recommended/cluster/R/daisy.q
-7c7
+9c9
 < 	stop("x is not a dataframe or a numeric matrix.")
 ---
 > 	stop(gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x"))
-69,73c69,71
-<     if(n > 9 && any(tI) &&
+71,75c71,73
+<     if(warnBin && n > 9 && any(tI) &&
 <        any(iBin <- apply(x[, tI, drop = FALSE], 2,
 < 			 function(v) length(table(v)) == 2)))
 < 	warning(gettextf("binary variable(s) %s treated as interval scaled",
 < 			 pColl(which(tI)[iBin])))
 ---
->     if(n > 9 && any(tI) && any(iBin <- apply(x[, tI, drop = FALSE], 2, function(v) length(table(v)) == 2)))
+>     if(warnBin && n > 9 && any(tI) && any(iBin <- apply(x[, tI, drop = FALSE], 2, function(v) length(table(v)) == 2)))
 > 	#warning(sprintf(ngettext(as.integer(length(which(tI))), "binary variable %s treated as interval scaled", "binary variables %s treated as interval scaled"), pColl(which(tI)[iBin])))
 > 	warning(gettextf("binary variable(s) %s treated as interval scaled", pColl(which(tI)[iBin])))
-80c78
+82c80
 < 				 "setting 'logical' variables %s to type 'asymm'"),
 ---
 > 				 "setting 'logical' variables %s to type 'asymm'", domain = "R-cluster"),
-94,96c92
-< 		warning(gettextf(
+96,98c94
+< 		if(warnConst) warning(gettextf(
 < 		    "%s has constant columns %s; these are standardized to 0",
 < 		    sQuote("x"), pColl(which(sx == 0))))
 ---
-> 		warning(gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"), pColl(which(sx == 0))))
-129,130c125
+> 		if(warnConst) warning(gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"), pColl(which(sx == 0))))
+131,132c127
 < 	stop(gettextf("invalid type %s for column numbers %s",
 < 		      type2[ina], pColl(which(ina))))
 ---
 > 	stop(gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(ina))))
-162c157
+164c159
 < 	"NA-values in the dissimilarity matrix !"
 ---
 > 	gettext("NA values in the dissimilarity matrix!")
-176c171
+178c173
 <     cat("Dissimilarities :\n")
 ---
 >     cat(gettext("Dissimilarities:", domain = "R-cluster"), "\n", sep = "")
-180,181c175,176
+182,183c177,178
 < 	cat("Warning : ", attr(x, "NA.message"), "\n")
 <     cat("Metric : ", attr(x, "Metric"),
 ---
 > 	cat(gettext("Warning: ", domain = "R-cluster"), attr(x, "NA.message"), "\n", sep = "")
 >     cat(gettext("Metric: ", domain = "R-cluster"), attr(x, "Metric"), sep = "")
-183,184c178,180
+185,186c180,182
 < 	paste(";  Types =", paste(aT, collapse=", ")), "\n")
 <     cat("Number of objects : ", attr(x, "Size"), "\n", sep="")
 ---
 > 	cat(";  ", gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster"), sep = "")
 >     cat("\n")
 >     cat(gettext("Number of objects:", domain = "R-cluster"), " ", attr(x, "Size"), "\n", sep = "")
-201c197
+203c199
 <     cat(x$n, "dissimilarities, summarized :\n")
 ---
 >     cat(sprintf(ngettext(x$n, "%d dissimilarity, summarized:", "%d dissimilarities, summarized:", domain = "R-cluster"), x$n), "\n", sep = "")
-203c199
+205c201
 <     cat("Metric : ", x $ Metric,
 ---
 >     cat(gettext("Metric: ", domain = "R-cluster"), x$Metric, sep = "")
-205,206c201,203
+207,208c203,205
 < 	paste(";  Types =", paste(aT, collapse=", ")), "\n")
 <     cat("Number of objects : ", x $ Size, "\n", sep="")
 ---
 > 	cat(";  ", gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster"), sep = "")
 >     cat("\n")
 >     cat(gettext("Number of objects:", domain = "R-cluster"), " ", x$Size, "\n", sep = "")
-208c205
+210c207
 < 	cat("Warning : ", x $ NA.message, "\n")
 ---
 > 	cat(gettext("Warning: ", domain = "R-cluster"), x$NA.message, "\n", sep = "")
@@ -433,29 +443,29 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 		    stop("'x' is not and cannot be converted to class \"dissimilarity\"")
 ---
 > 		    stop(gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"", "x"))
-47c47
+50c50
 < 	if(!is.numeric(x)) stop("x is not a numeric dataframe or matrix.")
 ---
 > 	if(!is.numeric(x)) stop(gettextf("'%s' argument is not a numeric dataframe or matrix.", "x"))
-76,78c76
+82,84c82
 < 	    stop(gettextf(
 < 		"'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d",
 < 		k, n))
 ---
 > 	    stop(gettextf("'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d", k, n))
-128c126
+134c132
 < 	stop("No clustering performed, NAs in the computed dissimilarity matrix.")
 ---
 > 	stop("No clustering performed, NA values in the computed dissimilarity matrix.")
-170c168
+176c174
 <     names(r.isol) <- 1:k
 ---
 >     names(r.isol) <- seq_len(k)
-184c182
+190c188
 < 		      clus.avg.widths = res$avsil[1:k],
 ---
 > 		      clus.avg.widths = res$avsil[seq_len(k)],
-199,201c197,199
+205,207c203,205
 <     cat("Medoids:\n");		print(cbind(ID = x$id.med, x$medoids), ...)
 <     cat("Clustering vector:\n");	print(x$clustering, ...)
 <     cat("Objective function:\n");	print(x$objective, ...)
@@ -463,33 +473,33 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("Medoids:", domain = "R-cluster"), "\n", sep = "");		print(cbind(ID = x$id.med, x$medoids), ...)
 >     cat(gettext("Clustering vector:", domain = "R-cluster"), "\n", sep = "");	print(x$clustering, ...)
 >     cat(gettext("Objective function:", domain = "R-cluster"), "\n", sep = "");	print(x$objective, ...)
-207c205
+213c211
 <     cat("\nAvailable components:\n")
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "")
-221,222c219,220
+227,228c225,226
 <     cat("\nNumerical information per cluster:\n"); print(x$clusinfo, ...)
 <     cat("\nIsolated clusters:\n L-clusters: ")
 ---
 >     cat("\n", gettext("Numerical information per cluster:", domain = "R-cluster"), "\n", sep = ""); print(x$clusinfo, ...)
 >     cat("\n", gettext("Isolated clusters:", domain = "R-cluster"), "\n ", gettext("L-clusters: ", domain = "R-cluster"), sep = "")
-224c222
+230c228
 <     cat(" L*-clusters: ")
 ---
 >     cat(gettext(" L*-clusters: ", domain = "R-cluster"))
-227c225
+233c231
 < 	cat("\nSilhouette plot information:\n")
 ---
 > 	cat("\n", gettext("Silhouette plot information:", domain = "R-cluster"), "\n", sep = "")
-229c227
+235c233
 < 	cat("Average silhouette width per cluster:\n")
 ---
 > 	cat(gettext("Average silhouette width per cluster:", domain = "R-cluster"), "\n", sep = "")
-231c229
+237c235
 < 	cat("Average silhouette width of total data set:\n")
 ---
 > 	cat(gettext("Average silhouette width of total data set:", domain = "R-cluster"), "\n", sep = "")
-237c235
+243c241
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
@@ -565,7 +575,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	if(!is.matrix(x)) stop("x is not a data matrix")
 ---
 > 	if(!is.matrix(x)) stop("'x' is not a data matrix")
-153,156c153,155
+152,155c152,154
 < 	 main = paste("CLUSPLOT(", deparse(substitute(x)),")"),
 < 	 sub = paste("These two components explain",
 < 	       round(100 * var.dec, digits = 2), "% of the point variability."),
@@ -574,64 +584,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	 main = gettextf("CLUSPLOT(%s)", deparse(substitute(x))),
 > 	 sub = gettextf("These two components explain %s percent of the point variability.", round(100 * var.dec, digits = 2)),
 > 	 xlab = gettext("Component 1", domain = "R-cluster"), ylab = gettext("Component 2", domain = "R-cluster"),
-164c163
+163c162
 < 	stop("x is not numeric")
 ---
 > 	stop("'x' is not numeric")
-179c178
+178c177
 < 	stop("NA-values are not allowed in clustering vector")
 ---
 > 	stop("NA values are not allowed in clustering vector")
-195c194
+194c193
 <     for(i in 1:nC) { ##-------------  i-th cluster  --------------
 ---
 >     for(i in seq_len(nC)) { ##-------------  i-th cluster  --------------
-200c199
+199c198
 < 			 cat("cluster",i," has only one observation ..\n")
 ---
 > 			 cat(gettextf("cluster %d  has only one observation ..", i, domain = "R-cluster"), "\n", sep = "")
-288c287
+287c286
 < 		    cat("span & rank2 : calling \"spannel\" ..\n")
 ---
 > 		    cat(gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster"), "\n", sep = "")
-314,316c313
+313,315c312
 < 		    cat("ellipse( A= (", format(cov[1,]),"*", format(cov[2,2]),
 < 			"),\n\td2=", format(d2[i]),
 < 			", loc[]=", format(loc[i, ]), ")\n")
 ---
 > 		    cat(sprintf("ellipse( A= (%s*%s),\n\td2=%s, loc[]=%s)", format(cov[1,]), format(cov[2,2]), format(d2[i]), format(loc[i, ])), "\n", sep = "")
-357c354
+356c353
 < 	    stop("'col.clus' should have length 4 when color is TRUE")
 ---
 > 	    stop("'col.clus' argument should have length 4 when color is TRUE")
-359,360c356,357
+358,359c355,356
 < 	jInd <- if(nC > 4) pam(verhoud[i.verh], 4)$clustering else 1:nC
 < 	for(i in 1:nC) {
 ---
 > 	jInd <- if(nC > 4) pam(verhoud[i.verh], 4)$clustering else seq_len(nC)
 > 	for(i in seq_len(nC)) {
-368c365
+367c364
 < 	for(i in 1:nC)
 ---
 > 	for(i in seq_len(nC))
-376c373
+375c372
 < 	for(i in 1:nC) {
 ---
 > 	for(i in seq_len(nC)) {
-406c403
+405c402
 < 	for(i in 1:(nC - 1)) {
 ---
 > 	for(i in seq_len(nC - 1)) {
-465c462
+464c461
 < 	    for(i in 1:nC) { ## add cluster border points
 ---
 > 	    for(i in seq_len(nC)) { ## add cluster border points
-512,513c509
+511,512c508
 < 		stop(gettextf("no diss nor data found, nor the original argument of %s",
 < 			      deparse(x$call)))
 ---
 > 		stop(gettextf("no diss nor data found, nor the original argument of %s", deparse(x$call)))
-519c515
+518c514
 < 	else stop("no diss nor data found for clusplot()'")
 ---
 > 	else stop("no diss nor data found for 'clusplot()' function")
@@ -710,374 +720,8 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > \method{pltree}{twins}(x, main = gettextf("Dendrogram of \%s", paste(deparse(x$call), collapse = ""), domain = "R-cluster"),
 >              labels = NULL, ylab = gettext("Height", domain = "R-cluster"), \dots)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/src/clara.c Recommended/cluster/src/clara.c
-19a20
+20a21
 > #include "localization.h"
-40,41c41
-< 	      int *nsel,
-< 	      int *nbest,/* x[nbest[j],] : the j-th obs in the final sample */
----
-> 		int *nsel, int *nbest,/* x[nbest[j],] : the j-th obs in the final sample */
-43,48c43,45
-< 	      double *radus, double *ttd, double *ratt,
-< 	      double *ttbes, double *rdbes, double *rabes,
-< 	      int *mtt, double *obj,
-< 	      double *avsyl, double *ttsyl, double *sylinf,
-< 	      int *jstop, int *trace_lev,
-< 	      double *tmp, /* = double [ 3 * nsam ] */
----
-> 		double *radus, double *ttd, double *ratt, double *ttbes, double *rdbes,
-> 		double *rabes, int *mtt, double *obj, double *avsyl, double *ttsyl,
-> 		double *sylinf, int *jstop, int *trace_lev, double *tmp, /* = double [ 3 * nsam ] */
-50,51c47
-<     )
-< {
----
-> 		) {
-65,66c61
-<     Rboolean nafs, kall, full_sample, lrg_sam, dyst_toomany_NA,
-< 	has_NA = *mdata;
----
-> 	Rboolean nafs, kall, full_sample, lrg_sam, dyst_toomany_NA, has_NA = *mdata;
-84,86c79,82
-<     if(*trace_lev) Rprintf("C clara(): (nsam,nran,n) = (%d,%d,%d);%s\n",
-< 			   *nsam, *nran, *n,
-< 			   full_sample ? " 'full_sample',":
----
-> 	if (*trace_lev)
-> 		Rprintf("C clara(): (nsam,nran,n) = (%d,%d,%d);%s\n", *nsam, *nran, *n,
-> 				full_sample ?
-> 						" 'full_sample'," :
-90c86,87
-<     else /* << initialize `random seed' of the very simple randm() below */
----
-> 	else
-> 		/* << initialize `random seed' of the very simple randm() below */
-113c110,111
-< 	if(*trace_lev) Rprintf("C clara(): sample %d ", jran);
----
-> 		if (*trace_lev)
-> 			Rprintf("C clara(): sample %d ", jran);
-119c117,118
-< 		if(*trace_lev >= 2) Rprintf(" if (kall && nunfs...): \n");
----
-> 				if (*trace_lev >= 2)
-> 					Rprintf(" if (kall && nunfs...): \n");
-133c132,133
-< 		    nsel[jsm] = nsel[jk]; nsel[jk] = nsm;
----
-> 					nsel[jsm] = nsel[jk];
-> 					nsel[jk] = nsm;
-136,138c136,138
-< 	    }
-< 	    else { /* no valid sample  _OR_  lrg_sam */
-< 		if(*trace_lev >= 2) Rprintf(" finding 1st... new k{ran}:\n");
----
-> 			} else { /* no valid sample  _OR_  lrg_sam */
-> 				if (*trace_lev >= 2)
-> 					Rprintf(" finding 1st... new k{ran}:\n");
-162c162,163
-< 		    for (jk = 0; jk < *kk; jk++) Rprintf("%d ",nrx[jk]);
----
-> 					for (jk = 0; jk < *kk; jk++)
-> 						Rprintf("%d ", nrx[jk]);
-164c165,166
-< 		    for (jk = 0; jk < ntt; jk++) Rprintf("%d ",nsel[jk]);
----
-> 					for (jk = 0; jk < ntt; jk++)
-> 						Rprintf("%d ", nsel[jk]);
-196,197c198
-< 	    L290:
-< 		++ntt;
----
-> 				L290: ++ntt;
-200,201c201,202
-< 	L295:
-< 	    if(*trace_lev) Rprintf(" {295} [ntt=%d, nunfs=%d] ", ntt, nunfs);
----
-> 			L295: if (*trace_lev)
-> 				Rprintf(" {295} [ntt=%d, nunfs=%d] ", ntt, nunfs);
-215,217c216,217
-< 		for (jk = 0; jk < *nsam; jk++) Rprintf("%d ",nsel[jk]);
-< 	    }
-< 	    if(*trace_lev) Rprintf(" -> dysta2()\n");
----
-> 				for (jk = 0; jk < *nsam; jk++)
-> 					Rprintf("%d ", nsel[jk]);
-219c219,221
-< 	else { /* full_sample : *n = *nsam -- one sample is enough ! */
----
-> 			if (*trace_lev)
-> 				Rprintf(" -> dysta2()\n");
-> 		} else { /* full_sample : *n = *nsam -- one sample is enough ! */
-224,225c226,227
-< 	dysta2(*nsam, *jpp, nsel, x, *n, dys, *diss_kind,
-< 	       jtmd, valmd, has_NA, &dyst_toomany_NA);
----
-> 		dysta2(*nsam, *jpp, nsel, x, *n, dys, *diss_kind, jtmd, valmd, has_NA,
-> 				&dyst_toomany_NA);
-258,259c260
-< 	}
-< 	else if(!kall || zba > zb) { /* 1st proper sample  or  new best */
----
-> 		} else if (!kall || zba > zb) { /* 1st proper sample  or  new best */
-261c262,263
-< 	    if(*trace_lev >= 2) Rprintf(" 1st proper or new best:");
----
-> 			if (*trace_lev >= 2)
-> 				Rprintf(" 1st proper or new best:");
-273c275,276
-< 	if(*trace_lev >= 2) Rprintf(" obj= %g\n", zb/rnn);
----
-> 		if (*trace_lev >= 2)
-> 			Rprintf(" obj= %g\n", zb / rnn);
-275c278,279
-< 	if(full_sample) break; /* out of resampling */
----
-> 		if (full_sample)
-> 			break; /* out of resampling */
-281c285,288
-<     if (nunfs >= *nran) { *jstop = 1; return; }
----
-> 	if (nunfs >= *nran) {
-> 		*jstop = 1;
-> 		return;
-> 	}
-283c290,293
-<     if (!kall) { *jstop = 2; return; }
----
-> 	if (!kall) {
-> 		*jstop = 2;
-> 		return;
-> 	}
-291c301,302
-< 		if(js+1 < *nsam) Rprintf(",");
----
-> 				if (js + 1 < *nsam)
-> 					Rprintf(",");
-303,304c313,314
-<     dysta2(*nsam, *jpp, nbest, x, *n, dys, *diss_kind, jtmd, valmd,
-< 	   has_NA, &dyst_toomany_NA);
----
-> 	dysta2(*nsam, *jpp, nbest, x, *n, dys, *diss_kind, jtmd, valmd, has_NA,
-> 			&dyst_toomany_NA);
-306c316,317
-< 	error(_(
----
-> 		error(
-> 				_(
-329,333c340,342
-< 
-< void dysta2(int nsam, int jpp, int *nsel,
-< 	    double *x, int n, double *dys, int diss_kind,
-< 	    int *jtmd, double *valmd, Rboolean has_NA, Rboolean *toomany_NA)
-< {
----
-> void dysta2(int nsam, int jpp, int *nsel, double *x, int n, double *dys,
-> 		int diss_kind, int *jtmd, double *valmd, Rboolean has_NA,
-> 		Rboolean *toomany_NA) {
-341c350,352
-< 	    error(_("C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
----
-> 			error(
-> 					_(
-> 							"C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
-346c357,359
-< 		error(_("C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
----
-> 				error(
-> 						_(
-> 								"C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
-378,379c391
-< double randm(int *nrun)
-< {
----
-> double randm(int *nrun) {
-392,393c404
-< 	    double s, const double dys[],
-< 	    Rboolean pam_like, int trace_lev,
----
-> double s, const double dys[], Rboolean pam_like, int trace_lev,
-395,397c406
-< 	    double *sky, int *nrepr,
-< 	    double *dysma, double *dysmb, double *beter)
-< {
----
-> 		double *sky, int *nrepr, double *dysma, double *dysmb, double *beter) {
-405c414,415
-<     --dysma;	--dysmb;
----
-> 	--dysma;
-> 	--dysmb;
-466c476,477
-< 	    if(nrepr[i] == 1) Rprintf(" %2d", i);
----
-> 			if (nrepr[i] == 1)
-> 				Rprintf(" %2d", i);
-471c482,483
-< 		if(i % 10 == 0) Rprintf("\n");
----
-> 				if (i % 10 == 0)
-> 					Rprintf("\n");
-473,474c485,488
-< 	    if(n % 10 != 0) Rprintf("\n");
-< 	} else Rprintf("\n");
----
-> 			if (n % 10 != 0)
-> 				Rprintf("\n");
-> 		} else
-> 			Rprintf("\n");
-507,508c521,524
-<     for (h = 1; h <= n; ++h) if (!nrepr[h]) {
-<         for (i = 1; i <= n; ++i) if (nrepr[i]) {
----
-> 	for (h = 1; h <= n; ++h)
-> 		if (!nrepr[h]) {
-> 			for (i = 1; i <= n; ++i)
-> 				if (nrepr[i]) {
-512,513c528
-< 		int ij = ind_2(i, j),
-< 		    hj = ind_2(h, j);
----
-> 						int ij = ind_2(i, j), hj = ind_2(h, j);
-518c533,534
-< 		    else // old clara code which differs from pam()'s
----
-> 							else
-> 								// old clara code which differs from pam()'s
-522,523c538
-< 		}
-< 		else if (dys[hj] < dysma[j])
----
-> 						} else if (dys[hj] < dysma[j])
-539,540c554,555
-< 	    Rprintf( "   swp new %d <-> %d old; decreasing diss. by %g\n",
-< 		     hbest, nbest, dzsky);
----
-> 			Rprintf("   swp new %d <-> %d old; decreasing diss. by %g\n", hbest,
-> 					nbest, dzsky);
-553,557c568,570
-< void selec(int kk, int n, int jpp, int diss_kind,
-< 	   double *zb, int nsam, Rboolean has_NA, int *jtmd, double *valmd,
-< 	   int trace_lev,
-< 	   int *nrepr, int *nsel, double *dys, double *x, int *nr,
-< 	   Rboolean *nafs, /* := TRUE if a distance cannot be calculated */
----
-> void selec(int kk, int n, int jpp, int diss_kind, double *zb, int nsam,
-> 		Rboolean has_NA, int *jtmd, double *valmd, int trace_lev, int *nrepr,
-> 		int *nsel, double *dys, double *x, int *nr, Rboolean *nafs, /* := TRUE if a distance cannot be calculated */
-561,562c574
-< 	   double *ttnew, double *rdnew)
-< {
----
-> 		double *ttnew, double *rdnew) {
-571c583,584
-<     --nsel;    --nrepr;
----
-> 	--nsel;
-> 	--nrepr;
-574,576c587,597
-<     --radus; --ttd;    --np;	--nr;	 --ns;
-< 
-<     --rdnew; --ttnew; --npnew; --nrnew; --nsnew;
----
-> 	--radus;
-> 	--ttd;
-> 	--np;
-> 	--nr;
-> 	--ns;
-> 
-> 	--rdnew;
-> 	--ttnew;
-> 	--npnew;
-> 	--nrnew;
-> 	--nsnew;
-623,624c644
-< 	}
-< 	else { /* _has_ missing data */
----
-> 		} else { /* _has_ missing data */
-660c680,681
-< 		*nafs = TRUE; return;
----
-> 				*nafs = TRUE;
-> 				return;
-677c698,699
-< 			goto L90;/* next jj */
----
-> 						goto L90;
-> 					/* next jj */
-683,684c705
-<     L90:
-< 	;
----
-> 		L90: ;
-741,743c761,762
-< void resul(int kk, int n, int jpp, int diss_kind, Rboolean has_NA,
-< 	   int *jtmd, double *valmd, double *x, int *nrx, int *mtt)
-< {
----
-> void resul(int kk, int n, int jpp, int diss_kind, Rboolean has_NA, int *jtmd,
-> 		double *valmd, double *x, int *nrx, int *mtt) {
-754c773,774
-< 		goto L220; /* continue next jj (i.e., outer loop) */
----
-> 				goto L220;
-> 			/* continue next jj (i.e., outer loop) */
-775,776c795
-< 	}
-< 	else { /* _has_ missing data */
----
-> 		} else { /* _has_ missing data */
-807,808c826
-<     L220:
-< 	;
----
-> 		L220: ;
-828,829c844,845
-< void black(int kk, int jpp, int nsam, int *nbest,
-< 	   double *dys, double s, double *x,
----
-> void black(int kk, int jpp, int nsam, int *nbest, double *dys, double s,
-> 		double *x,
-833,835c849,850
-< 	   int *ncluv, int *nsend, int *nelem, int *negbr,
-< 	   double *syl, double *srank)
-< {
----
-> 		int *ncluv, int *nsend, int *nelem, int *negbr, double *syl,
-> 		double *srank) {
-850,852c865,871
-<     --srank;    --syl;
-<     --negbr; --nelem; --nsend;
-<     --ncluv;	--nbest;
----
-> 	--srank;
-> 	--syl;
-> 	--negbr;
-> 	--nelem;
-> 	--nsend;
-> 	--ncluv;
-> 	--nbest;
-906c925,926
-< 		syl[j] = 0.;	    continue /* j */;
----
-> 				syl[j] = 0.;
-> 				continue /* j */;
-929c949,950
-< 		else /* (dysb == dysa) */
----
-> 				else
-> 					/* (dysb == dysa) */
-936,937c957
-< 	    }
-< 	    else {
----
-> 			} else {
-970,971c990
-< 	}
-< 	else {
----
-> 		} else {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/src/cluster.h Recommended/cluster/src/cluster.h
 7,12d6
 < #ifdef ENABLE_NLS
@@ -1108,27 +752,27 @@ Only in Recommended/cluster/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/src/pam.c Recommended/cluster/src/pam.c
 17a18
 > #include "localization.h"
-312c313
+318c319
 < 	if(trace_lev) Rprintf("medoids given\n");
 ---
 > 	if(trace_lev) Rprintf(_("medoids given\n"));
-328c329
+334c335
 < 	if(trace_lev) Rprintf("build %d medoids:\n", kk);
 ---
 > 	if(trace_lev) Rprintf(_("build %d medoids:\n"), kk);
-359c360
+365c366
 < 		Rprintf("    new repr. %d\n", nmax);
 ---
 > 		Rprintf(_("    new representative. %d\n"), nmax);
-373c374
+379c380
 < 	Rprintf("  after build: medoids are");
 ---
 > 	Rprintf(_("  after build: medoids are"));
-377c378
+383c384
 < 	    Rprintf("\n  and min.dist dysma[1:n] are\n");
 ---
 > 	    Rprintf(_("\n  and min.dist dysma[1:n] are\n"));
-551c552
+557c558
 < 		Rprintf( "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n",
 ---
 > 		Rprintf(_("   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"),

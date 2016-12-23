@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-20 21:44\n"
+"POT-Creation-Date: 2016-12-23 19:40\n"
 "PO-Revision-Date: 2015-07-30 09:44+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -275,11 +275,6 @@ msgstr "Przeciętna szerokość sylwetki na grupę:"
 msgid "Average silhouette width:"
 msgstr "Przeciętna szerokość sylwetki:"
 
-#. R/clusGap.R: gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster")
-#: R/clusGap.R:0
-msgid "B=%d simulated reference sets, k = 1..%d"
-msgstr "B=%d symulowane zbiory referencyjne, k = 1..%d"
-
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", deparse(x$call), domain = "R-cluster")
@@ -337,10 +332,13 @@ msgstr "Rozmiary grup, ids = (%s), oraz przeciętne szerokości sylwetek:"
 msgid "Cluster sizes:"
 msgstr "Rozmiary grup:"
 
-#. R/clusGap.R: gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster")
+#. R/clusGap.R: gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",     paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster")
 #: R/clusGap.R:0
-msgid "Clustering Gap statistic [\"clusGap\"]."
-msgstr "Statystyka przerwy grupowania [\"clusGap\"]."
+msgid ""
+"Clustering Gap statistic [\"clusGap\"] from call:\n"
+"%s\n"
+"B=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\""
+msgstr ""
 
 #. R/clusGap.R: gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster")
 #: R/clusGap.R:0
@@ -825,6 +823,12 @@ msgid ""
 msgstr ""
 "pełna sylwetka jest dostępna jedynie dla wyników 'clara(*, keep.data = TRUE)'"
 
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#: R/pam.q:0
+msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 #: R/daisy.q:0
 msgid "invalid %s; must be named list"
@@ -844,6 +848,11 @@ msgstr "niepoprawny 'jstop' z '.C(cl_clara,.)': %s"
 #: R/silhouette.R:0
 msgid "invalid 'silhouette' object"
 msgstr "niepoprawny obiekt 'silhouette'"
+
+#. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
+#: R/clusGap.R:0
+msgid "invalid 'spaceH0':"
+msgstr ""
 
 #. R/coef.R: stop("invalid 'twins' object")
 #: R/coef.R:0
@@ -975,6 +984,12 @@ msgid_plural "setting 'logical' variables %s to type 'asymm'"
 msgstr[0] "ustawianie zmiennej 'logical' %s na tym 'asymm'"
 msgstr[1] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
 msgstr[2] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
+
+#~ msgid "B=%d simulated reference sets, k = 1..%d"
+#~ msgstr "B=%d symulowane zbiory referencyjne, k = 1..%d"
+
+#~ msgid "Clustering Gap statistic [\"clusGap\"]."
+#~ msgstr "Statystyka przerwy grupowania [\"clusGap\"]."
 
 #~ msgid "calling .C(cl_clara, ..., DUP = %s):"
 #~ msgstr "wywoływanie .C(cl_clara, ..., DUP = %s):"
