@@ -232,17 +232,7 @@ double  Rlog1p(double);
 #define M_EC            0.57721566490153286060651209008240243104215933593992 /* euler's constant */
 #endif
 
-#ifdef MATHLIB_STANDALONE
-# ifndef R_EXT_BOOLEAN_H_
-/* "copy-paste" R_ext/Boolean.h if not already included: */
- #define R_EXT_BOOLEAN_H_
- #undef FALSE
- #undef TRUE
- typedef enum { FALSE = 0, TRUE } Rboolean;
-# endif
-#else
 # include <R_ext/Boolean.h>
-#endif
 
 
 #if !defined(MATHLIB_STANDALONE) && !defined(R_NO_REMAP_RMATH)
