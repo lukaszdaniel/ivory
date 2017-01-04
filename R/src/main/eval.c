@@ -1467,7 +1467,7 @@ SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 {
     SEXP formals, actuals, savedrho;
     volatile SEXP body, newrho;
-    SEXP f, a, tmp, savesrc;
+    SEXP f, a;
     RCNTXT cntxt;
 
     /* formals = list of formal parameters */
@@ -1552,14 +1552,14 @@ SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 	the generic as the sysparent of the method because the method
 	is a straight substitution of the generic.  */
 
-    PROTECT(savesrc = R_Srcref);
     if( R_GlobalContext->callflag == CTXT_GENERIC )
 	begincontext(&cntxt, CTXT_RETURN, call,
 		     newrho, R_GlobalContext->sysparent, arglist, op);
     else
 	begincontext(&cntxt, CTXT_RETURN, call, newrho, rho, arglist, op);
 
-    /* Get the srcref record from the closure object */
+    /* Get the srcref record from the closure object. The old srcref was
+       saved in cntxt by begincontext above. */
 
     R_Srcref = getAttrib(op, R_SrcrefSymbol);
 
@@ -1569,20 +1569,15 @@ SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 		     || (RDEBUG(rho) && R_BrowserLastCommand == 's')) ;
     if( RSTEP(op) ) SET_RSTEP(op, 0);
     if (RDEBUG(newrho)) {
-	SEXP savesrcref;
 	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
 	/* switch to interpreted version when debugging compiled code */
 	if (TYPEOF(body) == BCODESXP)
 	    body = bytecodeExpr(body);
 	Rprintf(_("debugging in: "));
 	PrintCall(call, rho);
-	savesrcref = R_Srcref;
-	PROTECT(R_Srcref = getSrcref(getBlockSrcrefs(body), 0));
 	SrcrefPrompt("debug", R_Srcref);
 	PrintValue(body);
 	do_browser(call, op, R_NilValue, newrho);
-	R_Srcref = savesrcref;
-	UNPROTECT(1);
     }
 
     /*  Set a longjmp target which will catch any explicit returns
@@ -1593,24 +1588,24 @@ SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedvars)
 	    R_ReturnedValue == R_RestartToken) {
 	    cntxt.callflag = CTXT_RETURN;  /* turn restart off */
 	    R_ReturnedValue = R_NilValue;  /* remove restart token */
-	    PROTECT(tmp = eval(body, newrho));
+	    cntxt.returnValue = eval(body, newrho);
 	}
 	else
-	    PROTECT(tmp = R_ReturnedValue);
+	    cntxt.returnValue = R_ReturnedValue;
     }
-    else {
-	PROTECT(tmp = eval(body, newrho));
-    }
-    cntxt.returnValue = tmp; /* make it available to on.exit */
-    R_Srcref = savesrc;
+    else
+	/* make it available to on.exit and implicitly protect */
+	cntxt.returnValue = eval(body, newrho);
+
+    R_Srcref = cntxt.srcref;
     endcontext(&cntxt);
 
     if (RDEBUG(op) && R_current_debug_state()) {
 	Rprintf(_("exiting from: "));
 	PrintCall(call, rho);
     }
-    UNPROTECT(4);
-    return (tmp);
+    UNPROTECT(2);
+    return cntxt.returnValue;
 }
 
 /* **** FIXME: This code is factored out of applyClosure.  If we keep
@@ -1620,7 +1615,6 @@ static SEXP R_execClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 			  SEXP newrho)
 {
     volatile SEXP body;
-    SEXP tmp;
     RCNTXT cntxt;
 
     body = BODY(op);
@@ -1638,26 +1632,26 @@ static SEXP R_execClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
     begincontext(&cntxt, CTXT_RETURN, call, newrho, rho, arglist, op);
 /* *** from here on : "Copy-Paste from applyClosure" (~ l.965) above ***/
 
+    /* Get the srcref record from the closure object. The old srcref was
+       saved in cntxt by begincontext above. */
+
+    R_Srcref = getAttrib(op, R_SrcrefSymbol);
+
     /* Debugging */
 
     SET_RDEBUG(newrho, (RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
 		     || (RDEBUG(rho) && R_BrowserLastCommand == 's')) ;
     if( RSTEP(op) ) SET_RSTEP(op, 0);
     if (RDEBUG(newrho)) {
-	SEXP savesrcref;
 	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
 	/* switch to interpreted version when debugging compiled code */
 	if (TYPEOF(body) == BCODESXP)
 	    body = bytecodeExpr(body);
 	Rprintf(_("debugging in: "));
 	PrintCall(call,rho);
-	savesrcref = R_Srcref;
-	PROTECT(R_Srcref = getSrcref(getBlockSrcrefs(body), 0));
 	SrcrefPrompt("debug", R_Srcref);
 	PrintValue(body);
 	do_browser(call, op, R_NilValue, newrho);
-	R_Srcref = savesrcref;
-	UNPROTECT(1);
     }
 
     /*  Set a longjmp target which will catch any explicit returns
@@ -1668,23 +1662,23 @@ static SEXP R_execClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	    R_ReturnedValue == R_RestartToken) {
 	    cntxt.callflag = CTXT_RETURN;  /* turn restart off */
 	    R_ReturnedValue = R_NilValue;  /* remove restart token */
-	    PROTECT(tmp = eval(body, newrho));
+	    cntxt.returnValue = eval(body, newrho);
 	}
 	else
-	    PROTECT(tmp = R_ReturnedValue);
+	    cntxt.returnValue = R_ReturnedValue;
     }
-    else {
-	PROTECT(tmp = eval(body, newrho));
-    }
-    cntxt.returnValue = tmp; /* make it available to on.exit */
+    else
+	/* make it available to on.exit and implicitly protect */
+	cntxt.returnValue = eval(body, newrho);
+
+    R_Srcref = cntxt.srcref;
     endcontext(&cntxt);
 
     if (RDEBUG(op) && R_current_debug_state()) {
 	Rprintf(_("exiting from: "));
 	PrintCall(call, rho);
     }
-    UNPROTECT(1);
-    return (tmp);
+    return cntxt.returnValue;
 }
 
 SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
