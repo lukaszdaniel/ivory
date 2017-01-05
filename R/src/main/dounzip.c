@@ -490,38 +490,41 @@ static int null_fflush(Rconnection con)
 Rconnection attribute_hidden
 R_newunz(const char *description, const char *const mode)
 {
-    Rconnection new;
-    new = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new) error(_("allocation of 'unz' connection failed"));
-    new->conclass = (char *) malloc(strlen("unz") + 1);
-    if(!new->conclass) {
-	free(new);
+    Rconnection newconn;
+    newconn = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!newconn) error(_("allocation of 'unz' connection failed"));
+    newconn->conclass = (char *) malloc(strlen("unz") + 1);
+    if(!newconn->conclass) {
+	free(newconn);
 	error(_("allocation of 'unz' connection failed"));
+	/* for Solaris 12.5 */ newconn = NULL;
     }
-    strcpy(new->conclass, "unz");
-    new->description = (char *) malloc(strlen(description) + 1);
-    if(!new->description) {
-	free(new->conclass); free(new);
+    strcpy(newconn->conclass, "unz");
+    newconn->description = (char *) malloc(strlen(description) + 1);
+    if(!newconn->description) {
+	free(newconn->conclass); free(newconn);
 	error(_("allocation of 'unz' connection failed"));
+	/* for Solaris 12.5 */ newconn = NULL;
     }
-    init_con(new, description, CE_NATIVE, mode);
+    init_con(newconn, description, CE_NATIVE, mode);
 
-    new->canseek = TRUE;
-    new->open = &unz_open;
-    new->close = &unz_close;
-    new->vfprintf = &null_vfprintf;
-    new->fgetc_internal = &unz_fgetc_internal;
-    new->fgetc = &dummy_fgetc;
-    new->seek = &null_seek;
-    new->fflush = &null_fflush;
-    new->read = &unz_read;
-    new->write = &null_write;
-    new->private = (void *) malloc(sizeof(struct unzconn));
-    if(!new->private) {
-	free(new->description); free(new->conclass); free(new);
+    newconn->canseek = TRUE;
+    newconn->open = &unz_open;
+    newconn->close = &unz_close;
+    newconn->vfprintf = &null_vfprintf;
+    newconn->fgetc_internal = &unz_fgetc_internal;
+    newconn->fgetc = &dummy_fgetc;
+    newconn->seek = &null_seek;
+    newconn->fflush = &null_fflush;
+    newconn->read = &unz_read;
+    newconn->write = &null_write;
+    newconn->private = (void *) malloc(sizeof(struct unzconn));
+    if(!newconn->private) {
+	free(newconn->description); free(newconn->conclass); free(newconn);
 	error(_("allocation of 'unz' connection failed"));
+	/* for Solaris 12.5 */ newconn = NULL;
     }
-    return new;
+    return newconn;
 }
 
        /* =================== second part ====================== */

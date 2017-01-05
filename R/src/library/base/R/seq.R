@@ -1,7 +1,7 @@
 #  File src/library/base/R/seq.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ seq.default <-
     if((One <- nargs() == 1L) && !missing(from)) {
 	lf <- length(from)
 	return(if(mode(from) == "numeric" && lf == 1L) {
-            if(!is.finite(from)) stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "from"))
+            if(!is.finite(from)) stop(gettextf("'%s' argument must be a finite number", "from"))
             seq_len(from)
         } else if(lf) seq_len(lf) else integer())
     }
@@ -46,10 +46,10 @@ seq.default <-
     chkDots(...)
     if (!missing(from) && length(from) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     if (!missing(to) && length(to) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
-    if (!missing(from) && !is.finite(from))
-        stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "from"))
-    if (!missing(to) && !is.finite(to))
-        stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "to"))
+    if (!missing(from) && !is.finite(from <- as.numeric(from)))
+        stop(gettextf("'%s' argument must be a finite number", "from"))
+    if (!missing(to) && !is.finite(to <- as.numeric(to)))
+        stop(gettextf("'%s' argument must be a finite number", "to"))
     if(is.null(length.out))
 	if(missing(by))
 	    from:to

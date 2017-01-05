@@ -2958,20 +2958,37 @@ setRlibs <-
                                      stdout = outfile, stderr = outfile)
                     t2b <- proc.time()
                     out <- readLines(outfile, warn = FALSE)
+                    pos <- which(out == " *** Run successfully completed ***")
+                    if(!length(pos) || any(nzchar(out[seq_len(pos[1L] - 1L)])))
+                        ran <- TRUE
                     savefile <- savefiles[i]
                     if(length(grep("^  When (running|tangling|sourcing)", out,
                                    useBytes = TRUE))) {
                         cat(" ", gettext("failed", domain = "R-tools"), "\n", sep ="")
-                        res <- c(res,
-                                 gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
-                                 utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
+                        keep <- as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_",
+                                                      "10"))
+                        res <- if (keep > 0)
+                            c(res,
+                              gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tool"),
+                              utils::tail(out, keep))
+                        else
+                            c(res,
+                              gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools"),
+                              out)
+
                     } else if(status || ! " *** Run successfully completed ***" %in% out) {
                         ## (Need not be the final line if running under valgrind)
+
                         cat(" ", gettext("failed to complete the test", domain = "R-tools"), "\n", sep = "")
                         out <- c(out, "", gettext("... incomplete output.  Crash?", domain = "R-tools"))
-                        res <- c(res,
+                        res <- if (keep > 0)
+                            c(res,
                                  gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
-                                 utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
+                                 utils::tail(out, keep))
+                        else
+                            c(res,
+                                 gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools"),
+                                 out)
                     } else if (file.exists(savefile)) {
                         cmd <- paste0("invisible(tools::Rdiff('",
                                       outfile, "', '", savefile, "',TRUE,TRUE))")
@@ -2994,21 +3011,25 @@ setRlibs <-
                     }
                 }
                 t2 <- proc.time()
-                print_time(t1, t2, Log)
-                if(R_check_suppress_RandR_message)
-                    res <- grep('^Xlib: *extension "RANDR" missing on display', res,
-                                invert = TRUE, value = TRUE, useBytes = TRUE)
-                if(length(res)) {
-                    if(length(grep("there is no package called", res,
-                                   useBytes = TRUE))) {
-                        warningLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tool"))
-                        printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
-                    } else {
-                        errorLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tools"))
-                        printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
-                        maybe_exit(1L)
-                    }
-                } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                if(!ran) {
+                    resultLog(Log, gettext("NONE", domain = "R-tools"))
+                } else {
+                    print_time(t1, t2, Log)
+                    if(R_check_suppress_RandR_message)
+                        res <- grep('^Xlib: *extension "RANDR" missing on display', res,
+                                    invert = TRUE, value = TRUE, useBytes = TRUE)
+                    if(length(res)) {
+                        if(length(grep("there is no package called", res,
+                                       useBytes = TRUE))) {
+                            warningLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tool"))
+                            printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
+                        } else {
+                            errorLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tools"))
+                            printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
+                            maybe_exit(1L)
+                        }
+                    } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                }
             }
 
             if (do_build_vignettes) {
@@ -3028,7 +3049,7 @@ setRlibs <-
                 Sys.setenv(PATH = paste(R.home("bin"), oPATH,
                                         sep = .Platform$path.sep))
                 on.exit(Sys.setenv(PATH = oPATH))
-                ## And too many inst/doc/Makefile are not safe for
+                ## And too many 'vignettes/Makefile's are not safe for
                 ## parallel makes
                 Sys.setenv(MAKEFLAGS="")
                 ## we could use clean = FALSE, but that would not be
@@ -3046,8 +3067,10 @@ setRlibs <-
                 warns <- grep("^Warning: file .* is not portable",
                               out, value = TRUE, useBytes = TRUE)
                 if (status) {
+                    keep <- as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_",
+                                                  "25"))
                     if(skip_run_maybe) warningLog(Log) else noteLog(Log)
-                    out <- utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "25")))
+                    if(keep > 0) out <- utils::tail(out, keep)
                     printLog0(Log,
                               paste(c(gettext("Error in re-building vignettes:", domain = "R-tools"), "  ...", out, "", ""), collapse = "\n"))
                 } else if(nw <- length(warns)) {

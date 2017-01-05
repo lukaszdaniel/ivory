@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2016-12-29 r906) -- "Internationalized Version of R"
-Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2017-01-04 r913) -- "Internationalized Version of R"
+Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-12-29 r71860) -- "Unsuffered Consequences"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R Under development (unstable) (2017-01-04 r71919) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -46,7 +46,7 @@ Type 'q()' to quit R.
 > ## IGNORE_RDIFF_BEGIN
 > pdb <- CRAN_package_db()
 > dim(pdb)
-[1] 9826   65
+[1] 9851   65
 > ## DESCRIPTION fields included:
 > colnames(pdb)
  [1] "Package"                 "Version"                
@@ -85,7 +85,7 @@ Type 'q()' to quit R.
 > ## Summarize publication dates:
 > summary(as.Date(pdb$Published))
         Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
-"2005-10-29" "2014-09-19" "2016-01-10" "2015-07-10" "2016-09-03" "2017-01-01" 
+"2005-10-29" "2014-09-22" "2016-01-13" "2015-07-13" "2016-09-07" "2017-01-05" 
 > ## Summarize numbers of packages according to maintainer:
 > summary(lengths(split(pdb$Package, pdb$Maintainer)))
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -108,19 +108,19 @@ Type 'q()' to quit R.
 > with(results, table(Flavor, Status))
                                    Status
 Flavor                              ERROR FAIL NOTE   OK WARN
-  r-devel-linux-x86_64-debian-clang    98    1 3377 6189  139
-  r-devel-linux-x86_64-debian-gcc      70    1 3380 6223  129
-  r-devel-linux-x86_64-fedora-clang    76    0 3871 5718  137
-  r-devel-linux-x86_64-fedora-gcc      69    0 3923 5682  130
-  r-devel-macos-x86_64-clang           81    0 3709 5840  141
-  r-devel-windows-ix86+x86_64         117    5 3473 5929  229
-  r-patched-linux-x86_64               49    0 3431 6283   40
-  r-patched-solaris-sparc             225    0 3744 5583  122
-  r-patched-solaris-x86               183    0 3750 5659  113
-  r-release-linux-x86_64               52    0 3435 6269   42
-  r-release-osx-x86_64-mavericks      191   11 3785 5453  367
-  r-release-windows-ix86+x86_64        88    4 3539 6102   51
-  r-oldrel-windows-ix86+x86_64        138    4 2222 7214   50
+  r-devel-linux-x86_64-debian-clang    85    0 3373 6239  130
+  r-devel-linux-x86_64-debian-gcc      69    0 3376 6247  130
+  r-devel-linux-x86_64-fedora-clang    75    0 3867 5747  139
+  r-devel-linux-x86_64-fedora-gcc      65    0 3920 5715  132
+  r-devel-macos-x86_64-clang           78    0 3705 5870  144
+  r-devel-windows-ix86+x86_64         113    3 3491 6034  145
+  r-patched-linux-x86_64               54    0 3426 6312   38
+  r-patched-solaris-sparc             218    0 3742 5613  125
+  r-patched-solaris-x86               184    0 3747 5684  116
+  r-release-linux-x86_64               51    0 3425 6307   44
+  r-release-osx-x86_64-mavericks      192   11 3785 5481  365
+  r-release-windows-ix86+x86_64        82    3 3536 6134   46
+  r-oldrel-windows-ix86+x86_64        140    2 2226 7233   46
 > 
 > details <- CRAN_check_details()
 > ## Available variables:
@@ -133,47 +133,78 @@ Flavor                              ERROR FAIL NOTE   OK WARN
 +               ((Check == "whether package can be installed") &
 +                (Status != "OK")))
 > head(bad[sample(seq_len(NROW(bad)), NROW(bad)), ])
-Package: basicspace 0.18
+Package: deTestSet 1.1.3
 Flavor: r-devel-macos-x86_64-clang
 Flags: --no-stop-on-test-error
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    Warning: GNU Extension: Different type kinds at (1)
-  See ‘/Users/ripley/R/packages/tests-devel/basicspace.Rcheck/00install.out’ for details.
+    Warning: control reaches end of non-void function [-Wreturn-type]
+  See ‘/Users/ripley/R/packages/tests-devel/deTestSet.Rcheck/00install.out’ for details.
 
-Package: gamsel 1.7-3
+Package: humarray 1.0.2
 Flavor: r-devel-windows-ix86+x86_64
-Check: whether package can be installed, Result: ERROR
-  Installation failed.
-  See 'd:/Rcompile/CRANpkg/local/3.4/gamsel.Rcheck/00install.out' for details.
+Check: whether package can be installed, Result: WARNING
+  Found the following significant warnings:
+    Warning: multiple methods tables found for 'rowSums'
+    Warning: multiple methods tables found for 'rowMeans'
+    Warning: multiple methods tables found for 'colSums'
+    Warning: multiple methods tables found for 'colMeans'
+    Warning: replacing previous import 'BiocGenerics::sd' by 'stats::sd' when loading 'humarray'
+  See 'd:/Rcompile/CRANpkg/local/3.4/humarray.Rcheck/00install.out' for details.
 
-Package: TauStar 1.1.0
+Package: semver 0.1.0
 Flavor: r-patched-solaris-x86
 Check: whether package can be installed, Result: ERROR
   Installation failed.
-  See ‘/home/ripley/R/packages/tests32/TauStar.Rcheck/00install.out’ for details.
+  See ‘/home/ripley/R/packages/tests32/semver.Rcheck/00install.out’ for details.
 
-Package: selectr 0.3-1
-Flavor: r-release-windows-ix86+x86_64
+Package: arulesViz 1.2-0
+Flavor: r-oldrel-windows-ix86+x86_64
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    Warning: S3 methods '[.xml_nodeset', 'xml_attr<-.xml_node', 'xml_attr<-.xml_nodeset', 'xml_attrs<-.xml_node', 'xml_attrs<-.xml_nodeset', 'xml_name<-.xml_node', 'xml_name<-.xml_nodeset', 'xml_text<-.xml_node', 'xml_text<-.xml_nodeset', 'as.character.xml_document', 'as.character.xml_missing', 'as.character.xml_node', 'as.character.xml_nodeset', 'as_list.xml_missing', 'as_list.xml_node', 'as_list.xml_nodeset', 'format.xml_node', 'nodeset_apply.xml_missing', 'nodeset_apply.xml_node', 'nodeset_apply.xml_nodeset', 'print.xml_document', 'print.xml_missing', 'print.xml_namespace', 'print.xml_node', 'print.xml_nodeset', 'read_html.default', 'read_html.response', 'read_xml.character', 'read_xml.connection', 'read_xml.raw', 'read_xml.response', 'tree_structure.xml_missing', 'tree_structure.xml_node', 'tree_structure.xml_nodeset', 'write_xml.xml_document', 'write_xml.xml_missing', 'write_xml.xml_node', 'write_xml.xml_nodeset', 'xml_add_child.xml_document', 'xml_add_child.xml_node', 'xml_add_child.xml_nodes [... truncated]
-  See 'd:/Rcompile/CRANpkg/local/3.3/selectr.Rcheck/00install.out' for details.
+    Warning: failed to assign NativeSymbolInfo for lhs since lhs is already defined in the 'lazyeval' namespace
+    Warning: failed to assign NativeSymbolInfo for rhs since rhs is already defined in the 'lazyeval' namespace
+  See 'd:/Rcompile/CRANpkg/local/3.2/arulesViz.Rcheck/00install.out' for details.
 
-Package: stpp 1.0-5
-Flavor: r-devel-linux-x86_64-fedora-clang
+Package: BayesXsrc 2.1-2
+Flavor: r-devel-linux-x86_64-fedora-gcc
 Flags: --no-stop-on-test-error
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    Warning: GNU Extension: Nonstandard type declaration REAL*8 at (1)
-    Warning: ‘pi’ is used uninitialized in this function [-Wuninitialized]
-  See ‘/data/gannet/ripley/R/packages/tests-clang/stpp.Rcheck/00install.out’ for details.
+    bayesxsrc/mcmc/fullcond.h:801:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond.h:863:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond.h:1192:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/dag/dagobject.cpp:567:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/distribution.cpp:3848:23: warning: unknown escape sequence: '\%'
+    bayesxsrc/mcmc/fullcond_merror.cpp:515:14: warning: operation on ‘help’ may be undefined [-Wsequence-point]
+    bayesxsrc/mcmc/fullcond_merror.cpp:850:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond_merror.cpp:854:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond_merror.cpp:1136:5: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond_mult.cpp:188:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/fullcond_mult.cpp:200:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/mcmc/gaussian_heteroskedastic.cpp:213:3: warning: control reaches end of non-void function [-Wreturn-type]
+    bayesxsrc/mcmc/mcmc_nonp.h:385:4: warning: control reaches end of non-void function [-Wreturn-type]
+    bayesxsrc/psplines/spline_basis_surf.cpp:2416:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/structadd/FC_nonp.cpp:1243:3: warning: control reaches end of non-void function [-Wreturn-type]
+    bayesxsrc/structadd/distr.cpp:772:17: warning: unknown escape sequence: '\%'
+    bayesxsrc/structadd/distr.cpp:778:17: warning: unknown escape sequence: '\%'
+    bayesxsrc/structadd/distr.cpp:784:17: warning: unknown escape sequence: '\%'
+    bayesxsrc/structadd/distr_categorical_mult.cpp:182:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/structadd/superbayesreg.cpp:588:3: warning: no return statement in function returning non-void [-Wreturn-type]
+    bayesxsrc/bib/map.h:433:5: warning: control reaches end of non-void function [-Wreturn-type]
+  See ‘/data/gannet/ripley/R/packages/tests-devel/BayesXsrc.Rcheck/00install.out’ for details.
 
-Package: RDieHarder 0.1.3
+Package: RQuantLib 0.4.2
 Flavor: r-release-windows-ix86+x86_64
-Check: whether package can be installed, Result: ERROR
-  Installation failed.
-  See 'd:/Rcompile/CRANpkg/local/3.3new/RDieHarder.Rcheck/00install.out' for details.
+Check: whether package can be installed, Result: WARNING
+  Found the following significant warnings:
+    d:/RCompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomdefaultlatentmodel.hpp:824:13: warning: this decimal constant is unsigned only in ISO C90
+    d:/RCompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomdefaultlatentmodel.hpp:842:13: warning: this decimal constant is unsigned only in ISO C90
+    d:/RCompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomlosslatentmodel.hpp:84:13: warning: this decimal constant is unsigned only in ISO C90
+    d:/Rcompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomdefaultlatentmodel.hpp:824:13: warning: this decimal constant is unsigned only in ISO C90
+    d:/Rcompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomdefaultlatentmodel.hpp:842:13: warning: this decimal constant is unsigned only in ISO C90
+    d:/Rcompile/CRANpkg/extralibs330/quantlib/ql/experimental/credit/randomlosslatentmodel.hpp:84:13: warning: this decimal constant is unsigned only in ISO C90
+  See 'd:/Rcompile/CRANpkg/local/3.3/RQuantLib.Rcheck/00install.out' for details.
 > 
 > mtnotes <- CRAN_memtest_notes()
 > head(mtnotes)
@@ -194,136 +225,117 @@ $audio
      Test       Path           
 [1,] "valgrind" "audio-Ex.Rout"
 
+$BAMBI
+     Test       Path           
+[1,] "valgrind" "BAMBI-Ex.Rout"
+
 $BASIX
      Test          Path           
 [1,] "clang-UBSAN" "BASIX-Ex.Rout"
-
-$BayesSingleSub
-     Test          Path                    
-[1,] "clang-UBSAN" "BayesSingleSub"        
-[2,] "clang-UBSAN" "BayesSingleSub-Ex.Rout"
-[3,] "gcc6-UBSAN"  "BayesSingleSub"        
-[4,] "gcc6-UBSAN"  "BayesSingleSub-Ex.Rout"
-[5,] "gcc7-UBSAN"  "BayesSingleSub"        
-[6,] "gcc7-UBSAN"  "BayesSingleSub-Ex.Rout"
 
 > ## Show counts of issues according to test:
 > table(do.call(rbind, mtnotes)[, "Test"])
 
  clang-ASAN clang-UBSAN   gcc6-ASAN  gcc6-UBSAN   gcc7-ASAN  gcc7-UBSAN 
-         33         118          23          77          25          73 
+         32         118          23          76          24          71 
        Keep    valgrind 
-          4         125 
+          4         122 
 > 
 > ## Summarize CRAN check status for 10 random packages
 > ## (reusing the information already read in):
 > pos <- sample(seq_len(NROW(pdb)), 10L)
 > summarize_CRAN_check_status(pdb[pos, "Package"],
 +                             results, details, mtnotes)
-Package: bigReg
-***************
+Package: glmmLasso
+******************
 
-Current CRAN status: OK: 10
-See: <https://CRAN.R-project.org/web/checks/check_results_bigReg.html>
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_glmmLasso.html>
 
-Package: bpkde
-**************
+Package: abf2
+*************
 
 Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_bpkde.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_abf2.html>
 
-Version: 1.0-7
+Version: 0.7-1
 Check: R code for possible problems, Result: NOTE
-  M0: no visible global function definition for ‘fft’
-  M1: no visible global function definition for ‘fft’
-  bpk: no visible binding for global variable ‘dnorm’
-  bpkde: no visible binding for global variable ‘dnorm’
-  bpkde: no visible binding for global variable ‘bw.SJ’
-  bpkde: no visible global function definition for ‘rnorm’
-  bpkde: no visible global function definition for ‘fft’
-  bpkde: no visible global function definition for ‘optimize’
-  contour.discretize.kernel: no visible global function definition for
-    ‘contour.default’
-  contour.mvkde: no visible global function definition for
-    ‘contour.default’
-  image.discretize.kernel: no visible global function definition for
-    ‘image.default’
-  image.discretize.kernel: no visible global function definition for
-    ‘gray’
-  image.mvkde: no visible global function definition for ‘image.default’
-  image.mvkde: no visible global function definition for ‘gray’
-  image.mvlinbin: no visible global function definition for ‘image’
-  image.mvlinbin: no visible global function definition for ‘gray’
-  plot.discretize.kernel: no visible global function definition for
-    ‘mtext’
-  plot.discretize.kernel: no visible global function definition for ‘par’
-  plot.mvkde: no visible global function definition for ‘mtext’
-  plot.mvkde: no visible global function definition for ‘par’
-  plot.mvlinbin: no visible global function definition for ‘plot’
-  plot.mvlinbin: no visible global function definition for ‘mtext’
-  plot.mvlinbin: no visible global function definition for ‘par’
+  multiplot: no visible global function definition for ‘rainbow’
+  multiplot: no visible global function definition for ‘plot’
+  multiplot: no visible global function definition for ‘text’
+  multiplot: no visible global function definition for ‘lines’
+  multiplot: no visible global function definition for ‘par’
+  plot.abf2: no visible global function definition for ‘plot’
+  plot.abf2: no visible global function definition for ‘abline’
+  plot.abf2: no visible global function definition for ‘text’
+  plot.abf2split: no visible global function definition for ‘plot’
   Undefined global functions or variables:
-    bw.SJ contour.default dnorm fft gray image image.default mtext
-    optimize par plot rnorm
+    abline lines par plot rainbow text
   Consider adding
-    importFrom("grDevices", "gray")
-    importFrom("graphics", "contour.default", "image", "image.default",
-               "mtext", "par", "plot")
-    importFrom("stats", "bw.SJ", "dnorm", "fft", "optimize", "rnorm")
+    importFrom("grDevices", "rainbow")
+    importFrom("graphics", "abline", "lines", "par", "plot", "text")
   to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/bpkde-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/abf2-00check.html>
 
-Version: 1.0-7
+Version: 0.7-1
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  M0: no visible global function definition for ‘fft’
-  M1: no visible global function definition for ‘fft’
-  bpk: no visible binding for global variable ‘dnorm’
-  bpkde: no visible binding for global variable ‘dnorm’
-  bpkde: no visible binding for global variable ‘bw.SJ’
-  bpkde: no visible global function definition for ‘rnorm’
-  bpkde: no visible global function definition for ‘fft’
-  bpkde: no visible global function definition for ‘optimize’
-  contour.discretize.kernel: no visible global function definition for
-    ‘contour.default’
-  contour.mvkde: no visible global function definition for
-    ‘contour.default’
-  image.discretize.kernel: no visible global function definition for
-    ‘image.default’
-  image.discretize.kernel: no visible global function definition for
-    ‘gray’
-  image.mvkde: no visible global function definition for ‘image.default’
-  image.mvkde: no visible global function definition for ‘gray’
-  image.mvlinbin: no visible global function definition for ‘image’
-  image.mvlinbin: no visible global function definition for ‘gray’
-  plot.discretize.kernel: no visible global function definition for
-    ‘mtext’
-  plot.discretize.kernel: no visible global function definition for ‘par’
-  plot.mvkde: no visible global function definition for ‘mtext’
-  plot.mvkde: no visible global function definition for ‘par’
-  plot.mvlinbin: no visible global function definition for ‘plot’
-  plot.mvlinbin: no visible global function definition for ‘mtext’
-  plot.mvlinbin: no visible global function definition for ‘par’
+  multiplot: no visible global function definition for ‘rainbow’
+  multiplot: no visible global function definition for ‘plot’
+  multiplot: no visible global function definition for ‘text’
+  multiplot: no visible global function definition for ‘lines’
+  multiplot: no visible global function definition for ‘par’
+  plot.abf2: no visible global function definition for ‘plot’
+  plot.abf2: no visible global function definition for ‘abline’
+  plot.abf2: no visible global function definition for ‘text’
+  plot.abf2split: no visible global function definition for ‘plot’
   Undefined global functions or variables:
-    bw.SJ contour.default dnorm fft gray image image.default mtext
-    optimize par plot rnorm
+    abline lines par plot rainbow text
   Consider adding
-    importFrom("grDevices", "gray")
-    importFrom("graphics", "contour.default", "image", "image.default",
-               "mtext", "par", "plot")
-    importFrom("stats", "bw.SJ", "dnorm", "fft", "optimize", "rnorm")
+    importFrom("grDevices", "rainbow")
+    importFrom("graphics", "abline", "lines", "par", "plot", "text")
   to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/bpkde-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/bpkde-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/abf2-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/abf2-00check.html>
+
+Package: bigrquery
+******************
+
+Current CRAN status: NOTE: 7, OK: 6
+See: <https://CRAN.R-project.org/web/checks/check_results_bigrquery.html>
+
+Version: 0.3.0
+Flags: --no-stop-on-test-error
+Check: dependencies in R code, Result: NOTE
+  Namespace in Imports field not imported from: ‘R6’
+    All declared Imports should be used.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/bigrquery-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/bigrquery-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/bigrquery-00check.html>
+
+Version: 0.3.0
+Check: dependencies in R code, Result: NOTE
+  Namespace in Imports field not imported from: ‘R6’
+    All declared Imports should be used.
+See: <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/bigrquery-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/bigrquery-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/bigrquery-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/bigrquery-00check.html>
+
+Package: bpp
+************
+
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_bpp.html>
 
 Package: AIM
 ************
@@ -585,286 +597,158 @@ Check: R code for possible problems, Result: NOTE
   cv.cox.main: no visible global function definition for 'coxph'
 See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/AIM-00check.html>
 
-Package: gnmf
-*************
-
-Current CRAN status: NOTE: 11, OK: 2
-See: <https://CRAN.R-project.org/web/checks/check_results_gnmf.html>
-
-Memtest notes: clang-UBSAN gcc6-UBSAN gcc7-UBSAN valgrind
-See: <https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/gnmf-Ex.Rout>,
-     <https://www.stats.ox.ac.uk/pub/bdr/memtests/gcc6-UBSAN/gnmf-Ex.Rout>,
-     <https://www.stats.ox.ac.uk/pub/bdr/memtests/gcc7-UBSAN/gnmf-Ex.Rout>,
-     <https://www.stats.ox.ac.uk/pub/bdr/memtests/valgrind/gnmf-Ex.Rout>
-
-Version: 0.7.1
-Check: compiled code, Result: NOTE
-  File ‘gnmf/libs/gnmf.so’:
-    Found ‘rand’, possibly from ‘rand’ (C)
-      Object: ‘FactorMatrix.o’
-    Found ‘srand’, possibly from ‘srand’ (C)
-      Object: ‘FactorMatrix.o’
-  
-  Compiled code should not call entry points which might terminate R nor
-  write to stdout/stderr instead of to the console, nor the system RNG.
-  
-  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/gnmf-00check.html>
-
-Version: 0.7.1
-Flags: --no-stop-on-test-error
-Check: compiled code, Result: NOTE
-  File ‘gnmf/libs/gnmf.so’:
-    Found ‘rand’, possibly from ‘rand’ (C)
-      Object: ‘FactorMatrix.o’
-    Found ‘srand’, possibly from ‘srand’ (C)
-      Object: ‘FactorMatrix.o’
-  
-  Compiled code should not call entry points which might terminate R nor
-  write to stdout/stderr instead of to the console, nor the system RNG.
-  
-  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/gnmf-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gnmf-00check.html>
-
-Version: 0.7.1
-Flags: --no-stop-on-test-error
-Check: installed package size, Result: NOTE
-    installed size is  5.2Mb
-    sub-directories of 1Mb or more:
-      libs   5.1Mb
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gnmf-00check.html>
-
-Version: 0.7.1
-Flags: --no-stop-on-test-error
-Check: compiled code, Result: NOTE
-  File ‘gnmf/libs/gnmf.so’:
-    Found ‘_rand’, possibly from ‘rand’ (C)
-      Object: ‘FactorMatrix.o’
-    Found ‘_srand’, possibly from ‘srand’ (C)
-      Object: ‘FactorMatrix.o’
-  
-  Compiled code should not call entry points which might terminate R nor
-  write to stdout/stderr instead of to the console, nor the system RNG.
-  
-  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/gnmf-00check.html>
-
-Version: 0.7.1
-Check: compiled code, Result: NOTE
-  File ‘gnmf/libs/gnmf.so’:
-    Found ‘_rand’, possibly from ‘rand’ (C)
-      Object: ‘FactorMatrix.o’
-    Found ‘_srand’, possibly from ‘srand’ (C)
-      Object: ‘FactorMatrix.o’
-  
-  Compiled code should not call entry points which might terminate R nor
-  write to stdout/stderr instead of to the console, nor the system RNG.
-  
-  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/gnmf-00check.html>
-
-Version: 0.7.1
-Check: compiled code, Result: NOTE
-  File 'gnmf/libs/i386/gnmf.dll':
-    Found 'rand', possibly from 'rand' (C)
-      Object: 'FactorMatrix.o'
-    Found 'srand', possibly from 'srand' (C)
-      Object: 'FactorMatrix.o'
-  File 'gnmf/libs/x64/gnmf.dll':
-    Found 'rand', possibly from 'rand' (C)
-      Object: 'FactorMatrix.o'
-    Found 'srand', possibly from 'srand' (C)
-      Object: 'FactorMatrix.o'
-  
-  Compiled code should not call entry points which might terminate R nor
-  write to stdout/stderr instead of to the console, nor the system RNG.
-  
-  See 'Writing portable packages' in the 'Writing R Extensions' manual.
-See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/gnmf-00check.html>
-
-Package: climextRemes
-*********************
-
-Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_climextRemes.html>
-
-Package: orddom
-***************
+Package: gnm
+************
 
 Current CRAN status: NOTE: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_orddom.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_gnm.html>
 
-Version: 3.1
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘psych’ which was already attached by Depends.
-    Please remove these calls from your code.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/orddom-00check.html>
-
-Version: 3.1
+Version: 1.0-8
 Check: R code for possible problems, Result: NOTE
-  cohd2delta: no visible global function definition for ‘pnorm’
-  delta2cohd: no visible global function definition for ‘qnorm’
-  delta_gr: no visible global function definition for ‘plot’
-  delta_gr: no visible global function definition for ‘lines’
-  delta_gr: no visible global function definition for ‘text’
-  delta_gr: no visible global function definition for ‘barplot’
-  delta_gr: no visible global function definition for ‘grey’
-  delta_gr: no visible global function definition for ‘mtext’
-  delta_gr: no visible global function definition for ‘var’
-  delta_gr: no visible global function definition for ‘hist’
-  delta_gr: no visible global function definition for ‘clip’
-  delta_gr : first: no visible global function definition for ‘dnorm’
-  delta_gr : second: no visible global function definition for ‘dnorm’
-  delta_gr: no visible global function definition for ‘dnorm’
-  delta_gr: no visible global function definition for ‘polygon’
-  delta_gr: no visible global function definition for ‘rgb’
-  delta_gr: no visible global function definition for ‘legend’
-  dmes.boot: no visible global function definition for ‘qnorm’
-  dmes.boot: no visible global function definition for ‘sd’
-  dmes.boot: no visible global function definition for ‘pnorm’
-  metric_t: no visible global function definition for ‘t.test’
-  orddom: no visible global function definition for ‘pnorm’
-  orddom: no visible global function definition for ‘var’
-  orddom: no visible global function definition for ‘qt’
-  orddom: no visible global function definition for ‘qnorm’
-  orddom: no visible global function definition for ‘pt’
-  orddom: no visible global function definition for ‘cor’
-  orddom: no visible global function definition for ‘write.table’
-  orddom_f: no visible global function definition for ‘write.table’
-  orddom_f: no visible global function definition for ‘var’
-  orddom_p: no visible global function definition for ‘write.table’
+  confint.gnm: no visible global function definition for ‘flush.console’
+  hatvalues.gnm: no visible global function definition for ‘as’
+  plot.gnm: no visible binding for global variable ‘panel.smooth’
+  plot.gnm: no visible binding for global variable ‘points’
+  plot.gnm: no visible global function definition for ‘par’
+  plot.gnm: no visible global function definition for ‘dev.interactive’
+  plot.gnm : text.id: no visible global function definition for ‘text’
+  plot.gnm : getCaption: no visible global function definition for
+    ‘as.graphicsAnnot’
+  plot.gnm: no visible global function definition for ‘devAskNewPage’
+  plot.gnm: no visible global function definition for ‘extendrange’
+  plot.gnm: no visible global function definition for ‘title’
+  plot.gnm: no visible global function definition for ‘mtext’
+  plot.gnm: no visible global function definition for ‘strheight’
+  plot.gnm: no visible global function definition for ‘abline’
+  plot.gnm: no visible global function definition for ‘axis’
+  plot.gnm: no visible global function definition for ‘frame’
+  plot.gnm: no visible global function definition for ‘lines’
+  plot.gnm: no visible global function definition for ‘legend’
+  plot.profile.gnm: no visible global function definition for ‘par’
+  plot.profile.gnm: no visible global function definition for ‘points’
+  plot.profile.gnm: no visible global function definition for ‘lines’
+  prattle: no visible global function definition for ‘flush.console’
+  predict.gnm: no visible binding for global variable ‘eliminate’
   Undefined global functions or variables:
-    barplot clip cor dnorm grey hist legend lines mtext plot pnorm
-    polygon pt qnorm qt rgb sd t.test text var write.table
+    abline as as.graphicsAnnot axis dev.interactive devAskNewPage
+    eliminate extendrange flush.console frame legend lines mtext
+    panel.smooth par points strheight text title
   Consider adding
-    importFrom("grDevices", "grey", "rgb")
-    importFrom("graphics", "barplot", "clip", "hist", "legend", "lines",
-               "mtext", "plot", "polygon", "text")
-    importFrom("stats", "cor", "dnorm", "pnorm", "pt", "qnorm", "qt", "sd",
-               "t.test", "var")
-    importFrom("utils", "write.table")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/orddom-00check.html>
+    importFrom("grDevices", "as.graphicsAnnot", "dev.interactive",
+               "devAskNewPage", "extendrange")
+    importFrom("graphics", "abline", "axis", "frame", "legend", "lines",
+               "mtext", "panel.smooth", "par", "points", "strheight",
+               "text", "title")
+    importFrom("methods", "as")
+    importFrom("utils", "flush.console")
+  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+  contains 'methods').
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/gnm-00check.html>
 
-Version: 3.1
-Check: Rd line widths, Result: NOTE
-  Rd file 'dmes.Rd':
-    \examples lines wider than 100 characters:
-       > #cf. Efron, B. & Tibshirani (1993). An Introduction to the Bootstrap. New York/London: Chapman&Hall.
-       > #Ruscio, J. & Mullen, T. (2012). Confidence Intervals for the Probability of Superiority Effect Size Measure and the Area Under a Rec ... [TRUNCATED]
-  
-  Rd file 'orddom_f.Rd':
-    \examples lines wider than 100 characters:
-       orddom_f(con_pre,ex_pre,alpha=0.025,decimalpt=",",description="EXP 01: Between groups at time 01")   
-       orddom_f(con_post,ex_post,alpha=0.025,decimalpt=",",description="EXP 01: Between groups at time 02") 
-       orddom_f(ex_pre,ex_post,alpha=0.025,paired=TRUE,decimalpt=",",description="EXP 01: Within exp 01 to 02") 
-       orddom_f(con_pre,con_post,alpha=0.025,paired=TRUE,decimalpt=",",description="EXP 01: Within con 01 to 02") 
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/orddom-00check.html>
-
-Version: 3.1
-Flags: --no-stop-on-test-error
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘psych’ which was already attached by Depends.
-    Please remove these calls from your code.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/orddom-00check.html>
-
-Version: 3.1
+Version: 1.0-8
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  cohd2delta: no visible global function definition for ‘pnorm’
-  delta2cohd: no visible global function definition for ‘qnorm’
-  delta_gr: no visible global function definition for ‘plot’
-  delta_gr: no visible global function definition for ‘lines’
-  delta_gr: no visible global function definition for ‘text’
-  delta_gr: no visible global function definition for ‘barplot’
-  delta_gr: no visible global function definition for ‘grey’
-  delta_gr: no visible global function definition for ‘mtext’
-  delta_gr: no visible global function definition for ‘var’
-  delta_gr: no visible global function definition for ‘hist’
-  delta_gr: no visible global function definition for ‘clip’
-  delta_gr : first: no visible global function definition for ‘dnorm’
-  delta_gr : second: no visible global function definition for ‘dnorm’
-  delta_gr: no visible global function definition for ‘dnorm’
-  delta_gr: no visible global function definition for ‘polygon’
-  delta_gr: no visible global function definition for ‘rgb’
-  delta_gr: no visible global function definition for ‘legend’
-  dmes.boot: no visible global function definition for ‘qnorm’
-  dmes.boot: no visible global function definition for ‘sd’
-  dmes.boot: no visible global function definition for ‘pnorm’
-  metric_t: no visible global function definition for ‘t.test’
-  orddom: no visible global function definition for ‘pnorm’
-  orddom: no visible global function definition for ‘var’
-  orddom: no visible global function definition for ‘qt’
-  orddom: no visible global function definition for ‘qnorm’
-  orddom: no visible global function definition for ‘pt’
-  orddom: no visible global function definition for ‘cor’
-  orddom: no visible global function definition for ‘write.table’
-  orddom_f: no visible global function definition for ‘write.table’
-  orddom_f: no visible global function definition for ‘var’
-  orddom_p: no visible global function definition for ‘write.table’
+  confint.gnm: no visible global function definition for ‘flush.console’
+  hatvalues.gnm: no visible global function definition for ‘as’
+  plot.gnm: no visible binding for global variable ‘panel.smooth’
+  plot.gnm: no visible binding for global variable ‘points’
+  plot.gnm: no visible global function definition for ‘par’
+  plot.gnm: no visible global function definition for ‘dev.interactive’
+  plot.gnm : text.id: no visible global function definition for ‘text’
+  plot.gnm : getCaption: no visible global function definition for
+    ‘as.graphicsAnnot’
+  plot.gnm: no visible global function definition for ‘devAskNewPage’
+  plot.gnm: no visible global function definition for ‘extendrange’
+  plot.gnm: no visible global function definition for ‘title’
+  plot.gnm: no visible global function definition for ‘mtext’
+  plot.gnm: no visible global function definition for ‘strheight’
+  plot.gnm: no visible global function definition for ‘abline’
+  plot.gnm: no visible global function definition for ‘axis’
+  plot.gnm: no visible global function definition for ‘frame’
+  plot.gnm: no visible global function definition for ‘lines’
+  plot.gnm: no visible global function definition for ‘legend’
+  plot.profile.gnm: no visible global function definition for ‘par’
+  plot.profile.gnm: no visible global function definition for ‘points’
+  plot.profile.gnm: no visible global function definition for ‘lines’
+  prattle: no visible global function definition for ‘flush.console’
+  predict.gnm: no visible binding for global variable ‘eliminate’
   Undefined global functions or variables:
-    barplot clip cor dnorm grey hist legend lines mtext plot pnorm
-    polygon pt qnorm qt rgb sd t.test text var write.table
+    abline as as.graphicsAnnot axis dev.interactive devAskNewPage
+    eliminate extendrange flush.console frame legend lines mtext
+    panel.smooth par points strheight text title
   Consider adding
-    importFrom("grDevices", "grey", "rgb")
-    importFrom("graphics", "barplot", "clip", "hist", "legend", "lines",
-               "mtext", "plot", "polygon", "text")
-    importFrom("stats", "cor", "dnorm", "pnorm", "pt", "qnorm", "qt", "sd",
-               "t.test", "var")
-    importFrom("utils", "write.table")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/orddom-00check.html>
+    importFrom("grDevices", "as.graphicsAnnot", "dev.interactive",
+               "devAskNewPage", "extendrange")
+    importFrom("graphics", "abline", "axis", "frame", "legend", "lines",
+               "mtext", "panel.smooth", "par", "points", "strheight",
+               "text", "title")
+    importFrom("methods", "as")
+    importFrom("utils", "flush.console")
+  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+  contains 'methods').
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gnm-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/gnm-00check.html>
 
-Version: 3.1
+Version: 1.0-8
+Check: R code for possible problems, Result: NOTE
+  predict.gnm: no visible binding for global variable 'eliminate'
+See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/gnm-00check.html>
+
+Package: climwin
+****************
+
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_climwin.html>
+
+Package: ordBTL
+***************
+
+Current CRAN status: NOTE: 12, OK: 1
+See: <https://CRAN.R-project.org/web/checks/check_results_ordBTL.html>
+
+Version: 0.8
+Check: R code for possible problems, Result: NOTE
+  BTLboost: no visible global function definition for ‘as.formula’
+  design: no visible global function definition for ‘as.formula’
+  wide2long: no visible global function definition for ‘reshape’
+  Undefined global functions or variables:
+    as.formula reshape
+  Consider adding
+    importFrom("stats", "as.formula", "reshape")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/ordBTL-00check.html>
+
+Version: 0.8
 Flags: --no-stop-on-test-error
-Check: Rd line widths, Result: NOTE
-  Rd file 'dmes.Rd':
-    \examples lines wider than 100 characters:
-       > #cf. Efron, B. & Tibshirani (1993). An Introduction to the Bootstrap. New York/London: Chapman&Hall.
-       > #Ruscio, J. & Mullen, T. (2012). Confidence Intervals for the Probability of Superiority Effect Size Measure and the Area Under a Rec ... [TRUNCATED]
-  
-  Rd file 'orddom_f.Rd':
-    \examples lines wider than 100 characters:
-       orddom_f(con_pre,ex_pre,alpha=0.025,decimalpt=",",description="EXP 01: Between groups at time 01")   
-       orddom_f(con_post,ex_post,alpha=0.025,decimalpt=",",description="EXP 01: Between groups at time 02") 
-       orddom_f(ex_pre,ex_post,alpha=0.025,paired=TRUE,decimalpt=",",description="EXP 01: Within exp 01 to 02") 
-       orddom_f(con_pre,con_post,alpha=0.025,paired=TRUE,decimalpt=",",description="EXP 01: Within con 01 to 02") 
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/orddom-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/orddom-00check.html>
+Check: R code for possible problems, Result: NOTE
+  BTLboost: no visible global function definition for ‘as.formula’
+  design: no visible global function definition for ‘as.formula’
+  wide2long: no visible global function definition for ‘reshape’
+  Undefined global functions or variables:
+    as.formula reshape
+  Consider adding
+    importFrom("stats", "as.formula", "reshape")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/ordBTL-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/ordBTL-00check.html>
 
 Package: audiolyzR
 ******************
@@ -1137,62 +1021,6 @@ Check: R code for possible problems, Result: NOTE
   fn.dmvt: no visible global function definition for 'dmvt'
   fn.rmvt: no visible global function definition for 'rmvt'
 See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/AdMit-00check.html>
-
-Package: curlconverter
-**********************
-
-Current CRAN status: ERROR: 6, OK: 6
-See: <https://CRAN.R-project.org/web/checks/check_results_curlconverter.html>
-
-Version: 0.7.0
-Check: examples, Result: ERROR
-  Running examples in ‘curlconverter-Ex.R’ failed
-  The error most likely occurred in:
-  
-  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-  > ### Name: make_req
-  > ### Title: Turn parsed cURL command lines into 'httr' request functions
-  > ### Aliases: make_req
-  > 
-  > ### ** Examples
-  > 
-  > library(httr)
-  > 
-  > my_ip <- straighten("curl 'https://httpbin.org/ip'") %>% make_req()
-  curl 'https://httpbin.org/ip'
-  Error: Clipboard on X11 requires that the DISPLAY envvar be configured.
-  Execution halted
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/curlconverter-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/curlconverter-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/curlconverter-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/curlconverter-00check.html>
-
-Version: 0.7.0
-Flags: --no-stop-on-test-error
-Check: examples, Result: ERROR
-  Running examples in ‘curlconverter-Ex.R’ failed
-  The error most likely occurred in:
-  
-  > ### Name: make_req
-  > ### Title: Turn parsed cURL command lines into 'httr' request functions
-  > ### Aliases: make_req
-  > 
-  > ### ** Examples
-  > 
-  > library(httr)
-  > 
-  > my_ip <- straighten("curl 'https://httpbin.org/ip'") %>% make_req()
-  curl 'https://httpbin.org/ip'
-  Error: Clipboard on X11 requires 'xclip' (recommended) or 'xsel'.
-  Execution halted
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/curlconverter-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/curlconverter-00check.html>
-
-Package: SGCS
-*************
-
-Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_SGCS.html>
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -1362,7 +1190,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x6a15520>
+<environment: 0x6f71bb8>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -2114,7 +1942,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.02 0.16 11.876 0 0 
+Time elapsed:  4.12 0.144 14.738 0 0 
 > grDevices::dev.off()
 null device 
           1 
