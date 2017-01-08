@@ -59,13 +59,21 @@ bug.report <- function(subject = "", address,
     info <- c(info, "", bug.report.info())
     if(identical(DESC$Priority, "base")) return(baseR())
 
-    if (!is.null(DESC$BugReports)) {
-        writeLines(info)
-        cat("\n", gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.", DESC$Maintainer), "\n", sep = "")
-        flush.console()
-        Sys.sleep(2)
-        browseURL(DESC$BugReports)
-        return(invisible())
+    BR <- DESC$BugReports
+    if (!is.null(BR) && nzchar(BR)) {
+        ## do some basic validity checking!
+        if (grepl("http(,s)://", BR)) {
+            writeLines(info)
+            cat(gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report. If the web\npage doesn't work, you should send email to the maintainer,\n%s.", DESC$Maintainer, domain = "R-utils"), "\n", sep = "")
+            flush.console()
+            Sys.sleep(2)
+            browseURL(DESC$BugReports)
+            return(invisible())
+        } else {
+            cat(gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nWe will ignore it and email the maintainer.\n\n", BR, domain = "R-utils"), sep = "")
+            flush.console()
+            Sys.sleep(2)
+       }
     }
 
     if (missing(address)) address <- findEmail(DESC$Maintainer)

@@ -587,7 +587,7 @@
   
   \subsection{UTILITIES}{
     \itemize{
-      \item Enviromental variable \env{_R_CHECK_TESTS_NLINES_} controls
+      \item Environmental variable \env{_R_CHECK_TESTS_NLINES_} controls
       how \command{R CMD check} reports failing tests (see §8 of the
       \sQuote{R Internals} manual).
     }
@@ -630,6 +630,10 @@
 
       \item \code{methods(f)} now also works for \code{f} \code{"("}
       or \code{"{"}.
+      
+      \item (Windows only)  \code{dir.create()} did not check the length
+      of the path to create, and so could overflow a buffer and crash
+      \R.  \PR{17206}
 
       %% Not yet ported from trunk
       \item \code{pmin()} and \code{pmax()} now work again for

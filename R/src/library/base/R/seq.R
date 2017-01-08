@@ -46,9 +46,11 @@ seq.default <-
     chkDots(...)
     if (!missing(from) && length(from) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     if (!missing(to) && length(to) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
-    if (!missing(from) && !is.finite(from <- as.numeric(from)))
+    if (!missing(from) && !is.finite(if(is.numeric(from) || is.complex(from)) from
+				     else from <- as.numeric(from)))
         stop(gettextf("'%s' argument must be a finite number", "from"))
-    if (!missing(to) && !is.finite(to <- as.numeric(to)))
+    if (!missing(to) && !is.finite(if(is.numeric(to) || is.complex(to)) to
+				     else to <- as.numeric(to)))
         stop(gettextf("'%s' argument must be a finite number", "to"))
     if(is.null(length.out))
 	if(missing(by))
@@ -56,11 +58,12 @@ seq.default <-
 	else { # dealing with 'by'
 	    del <- to - from
 	    if(del == 0 && to == 0) return(to)
-	    n <- del/by
-	    if(!(length(n) && is.finite(n))) {
-		if(length(by) && by == 0 && length(del) && del == 0)
+            if (length(by) != 1L) stop(gettextf("'%s' argument must be of length 1", "by"))
+	    n <- del/by # of length 1, as {from, to, by} are
+	    if(!is.finite(n)) {
+		if(by == 0 && del == 0)
 		    return(from)
-		stop("invalid '(to - from)/by' in 'seq(.)' function")
+		stop("invalid '(to - from)/by'")
 	    }
 	    if(n < 0L)
 		stop("wrong sign in 'by' argument")
