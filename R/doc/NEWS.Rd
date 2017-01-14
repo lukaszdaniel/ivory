@@ -280,6 +280,17 @@
 
       \item The default method for \code{quantile(x, prob)} should now
       be monotone in \code{prob}, even in border cases, see \PR{16672}.
+
+      \item \code{bug.report()} now tries to extract an email address
+      from a \samp{BugReports} field, and if there is none, from a
+      \samp{Contacts} field.
+
+      \item The \code{format()} and \code{print()} methods for
+      \code{object.size()} results get new options \code{standard} and
+      \code{digits}; notably, \code{standard = "IEC"} and
+      \code{standard = "SI"} allow more standard abbreviations than the
+      default ones, e.g., for kilo bytes.  From contributions by Henrik
+      Bengtsson.
     }
   }
 
@@ -385,6 +396,15 @@
       \item There is support for compiling C++14 code in packages on
       suitable platforms: see \sQuote{Writing R Extensions} for how to
       request this.
+
+      \item The order of flags when \samp{LinkingTo} other packages has
+      been changed so their include directories come earlier, before
+      those specified in \code{CPPFLAGS}.  This will only have an effect
+      if non-system include directories are included with \option{-I}
+      flags in \code{CPPFLAGS} (and so not the default
+      \code{-I/usr/local/include} on most platforms).
+      %% This ensures that BH's 'boost' directory gets precedent over
+      %% any Boost headers in, say, /opt/csw/include .
     }
   }
 
@@ -427,6 +447,9 @@
       \item Check customization via environment variables to detect side
       effects of \code{.Call()} and \code{.External()} calls which alter
       their arguments is described in §8 of the \sQuote{R Internals} manual.
+
+      \item \command{R CMD check} now checks any \samp{BugReports} field
+      to be non-empty and a suitable single URL.
     }
   }
 
@@ -579,12 +602,12 @@
   }
 
   \subsection{INSTALLATION and INCLUDED SOFTWARE}{
-    \itemize{      
+    \itemize{
       \item The check for the zlib version is now robust to versions
       longer than 5 characters, including 1.2.10.
     }
   }
-  
+
   \subsection{UTILITIES}{
     \itemize{
       \item Environmental variable \env{_R_CHECK_TESTS_NLINES_} controls
@@ -635,10 +658,31 @@
       of the path to create, and so could overflow a buffer and crash
       \R.  \PR{17206}
 
+      \item (Windows only)  \code{dir.create()} did not check the length
+      of the path to create, and so could overflow a buffer and crash
+      \R.  (\PR{17206})
+
+      \item On some systems, very small hexadecimal numbers in hex notation
+      would underflow to zero.  (\PR{17199})
+
       %% Not yet ported from trunk
       \item \code{pmin()} and \code{pmax()} now work again for
       \code{ordered} factors and 0-length S3 classed objects, thanks to
       Suharto Anggono's \PR{17195} and \PR{17200}.
+
+      \item \code{bug.report()} did not do any validity checking on a
+      package's \samp{BugReports} field.  It now ignores an empty field,
+      removes leading whitespace and only attempts to open
+      \samp{http://} and \samp{https://} URLs, falling back to emailing
+      the maintainer.
+
+      \item \code{findMethod} failed if the active signature had
+      expanded beyond what a particular package used. (Example with
+      packages XR and XRJulia on CRAN).
+
+      \item \code{bw.SJ()} and \code{density(*, bw="SJ")} no longer fail
+      because of integer overflow for large sample size n (starting from
+      n as small as 65536).
     }
   }
 }

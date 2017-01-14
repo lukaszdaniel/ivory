@@ -1,7 +1,7 @@
 #  File src/library/utils/R/unix/bug.report.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -42,11 +42,6 @@ bug.report <- function(subject = "", address,
         browseURL("https://bugs.r-project.org/bugzilla3/index.cgi")
     }
 
-    findEmail <- function(x) {
-        ## extract the part within the first < >: the rest may be invalid.
-        x <- paste(x, collapse = " ") # could be multiple lines
-        sub("[^<]*<([^>]+)>.*", "\\1", x)
-    }
     if (is.null(package)) return(baseR())
 
     DESC <- packageDescription(package, lib.loc)
@@ -59,24 +54,61 @@ bug.report <- function(subject = "", address,
     info <- c(info, "", bug.report.info())
     if(identical(DESC$Priority, "base")) return(baseR())
 
+    findEmail2 <- function(x) {
+        x <- paste(x, collapse = " ") # could be multiple lines
+        if (grepl("mailto:", x))
+            sub(".*mailto:([^ ]+).*", "\\1", x)
+        else if (grepl("[^<]*<([^>]+)", x))
+            sub("[^<]*<([^>]+)>.*", "\\1", x)
+        else if (grepl("(^|.* )[^ ]+@[[:alnum:]._]+", x)) # too generous
+            sub("(^|.* )([^ ]+@[[:alnum:]._]+).*", "\\2", x)
+        else NA_character_
+    }
+
     BR <- DESC$BugReports
     if (!is.null(BR) && nzchar(BR)) {
-        ## do some basic validity checking!
-        if (grepl("http(,s)://", BR)) {
+        BR <- trimws(BR)  # some packages have e.g. leading \n
+        if (grepl("^https?://", BR)) {
             writeLines(info)
-            cat(gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report. If the web\npage doesn't work, you should send email to the maintainer,\n%s.", DESC$Maintainer, domain = "R-utils"), "\n", sep = "")
+            cat(gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report.\nIf the web page does not work, you should send email to the maintainer,\n%s.", DESC$Maintainer, domain = "R-utils"), "\n", sep = "")
             flush.console()
             Sys.sleep(2)
-            browseURL(DESC$BugReports)
+            browseURL(BR)
             return(invisible())
         } else {
-            cat(gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nWe will ignore it and email the maintainer.\n\n", BR, domain = "R-utils"), sep = "")
+            em <- findEmail2(BR)
+            if (!is.na(em)) {
+                cat(gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nIt appears to contain an email address, so we will try that.", BR, domain = "R-utils"))
+                address <- em
+            } else cat(gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nWe will ignore it and email the maintainer.", BR, domain = "R-utils"))
+            cat("\n\n")
             flush.console()
             Sys.sleep(2)
        }
     }
 
-    if (missing(address)) address <- findEmail(DESC$Maintainer)
+    CT <- DESC$Contact
+    if (!is.null(CT) && nzchar(CT)) {
+        cat("This package has a Contact field:\n\n",
+            "  Contact: ", CT, "\n\n", sep = "")
+        em <- findEmail2(CT)
+        if (!is.na(em)) {
+            cat("That appears to contain an email address, so we will try that\n")
+            address <- em
+        } else cat("We cannot make sense of that, so will ignore it.\n\n");
+        flush.console()
+        Sys.sleep(2)
+    }
+
+    if (missing(address)) {
+        findEmail <- function(x) {
+            ## extract the part within the first < >: the rest may be invalid.
+            x <- paste(x, collapse = " ") # could be multiple lines
+            sub("[^<]*<([^>]+)>.*", "\\1", x)
+        }
+        address <- findEmail(DESC$Maintainer)
+    }
+
     create.post(instructions = c("", gettext("<<insert bug report here>>"), rep("", 3)),
                 description = gettext("bug report"),
                 subject = subject, address = address,

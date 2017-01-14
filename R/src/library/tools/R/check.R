@@ -1,7 +1,7 @@
 #  File src/library/tools/R/check.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -709,6 +709,47 @@ setRlibs <-
                 printLog(Log, gettext("'NeedsCompilation' field should likely be 'yes'", domain = "R-tools"), "\n")
             }
         }
+
+        ## check for BugReports field added at R 3.4.0
+        if(!is.na(BR0 <- db["BugReports"])) {
+            if (nzchar(BR0)) {
+                BR <- trimws(BR0)
+                msg <- ""
+                ## prior to 3.4.0 this was said to be
+                ## 'a URL to which bug reports about the package
+                ## should be submitted'
+                ## We will take that to mean a http[s]:// URL,
+                isURL <- grepl("^https?://[^ ]*$", BR)
+                ## As from 3.4.0 bug,report() is able to extract
+                ## an email addr.
+                if(!isURL) {
+                    findEmail <- function(x) {
+                        x <- paste(x, collapse = " ")
+                        if (grepl("mailto:", x))
+                            sub(".*mailto:([^ ]+).*", "\\1", x)
+                        else if (grepl("[^<]*<([^>]+)", x))
+                            sub("[^<]*<([^>]+)>.*", "\\1", x)
+                        else NA_character_
+                    }
+                    msg <- if (is.na(findEmail(BR))) {
+                        if (grepl("(^|.* )[^ ]+@[[:alnum:]._]+", BR))
+                            gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >", domain = "R-tools")
+                        else
+                            gettext("BugReports field should be the URL of a single webpage", domain = "R-tools")
+                    } else
+                        gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0", domain = "R-tools")
+                } else if (grepl("^\n *http", BR0))
+                    msg <- gettext("BugReports field has an empty first line and will not work in R <= 3.3.2", domain = "R-tools")
+            } else {
+                msg <- gettext("BugReports field should not be empty", domain = "R-tools")
+            }
+            if (nzchar(msg)) {
+                if(!any) noteLog(Log)
+                any <- TRUE
+                printLog(Log, msg, "\n")
+           }
+        }
+
 
         out <- format(.check_package_description2(dfile))
         if (length(out)) {
