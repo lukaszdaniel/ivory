@@ -3383,7 +3383,7 @@ function(aar, strict = FALSE)
                     non_standard_roles <-
                         lapply(aar$role, setdiff,
                                utils:::MARC_relator_db_codes_used_with_R)
-                    ind <- sapply(non_standard_roles, length) > 0L
+                    ind <- lengths(non_standard_roles) > 0L
                     if(any(ind)) {
                         out$bad_authors_at_R_field_has_persons_with_nonstandard_roles <-
                             sprintf("%s: %s",
@@ -7318,8 +7318,7 @@ function(package, dir, lib.loc = NULL)
 
     files_grouped_by_names <- split(files, names)
     files_with_duplicated_names <-
-        files_grouped_by_names[sapply(files_grouped_by_names,
-                                      length) > 1L]
+        files_grouped_by_names[lengths(files_grouped_by_names) > 1L]
     if(length(files_with_duplicated_names))
         out$files_with_duplicated_names <-
             files_with_duplicated_names
@@ -7328,8 +7327,7 @@ function(package, dir, lib.loc = NULL)
         split(rep.int(files, lengths(aliases)),
               unlist(aliases, use.names = FALSE))
     files_with_duplicated_aliases <-
-        files_grouped_by_aliases[sapply(files_grouped_by_aliases,
-                                      length) > 1L]
+        files_grouped_by_aliases[lengths(files_grouped_by_aliases) > 1L]
     if(length(files_with_duplicated_aliases))
         out$files_with_duplicated_aliases <-
             files_with_duplicated_aliases

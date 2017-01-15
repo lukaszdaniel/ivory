@@ -40,17 +40,16 @@ seq.default <-
             warning("first element used of 'length.out' argument")
             length.out <- length.out[1L]
         }
-	length.out <- ceiling(length.out)
-	#length.out <- as.integer(length.out) #IVORY: maybe we should have this line in order to have: seq_len(12.3) == seq(length.out=12.3)
+	if(!is.integer(length.out)) length.out <- ceiling(length.out)
     }
     chkDots(...)
     if (!missing(from) && length(from) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     if (!missing(to) && length(to) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
-    if (!missing(from) && !is.finite(if(is.numeric(from) || is.complex(from)) from
-				     else from <- as.numeric(from)))
+    if (!missing(from) && # For seq("2","5") but not breaking seq(to=1, from=as.Date(.)):
+        !is.finite(if(is.character(from)) from <- as.numeric(from) else from))
         stop(gettextf("'%s' argument must be a finite number", "from"))
-    if (!missing(to) && !is.finite(if(is.numeric(to) || is.complex(to)) to
-				     else to <- as.numeric(to)))
+    if (!missing(to) &&
+        !is.finite(if(is.character(to)) to <- as.numeric(to) else to))
         stop(gettextf("'%s' argument must be a finite number", "to"))
     if(is.null(length.out))
 	if(missing(by))
@@ -94,7 +93,12 @@ seq.default <-
 	    from <- to - length.out + 1L
 	if(length.out > 2L) # not clear why these have as.vector, and not others
 	    if(from == to) rep.int(from, length.out)
-	    else as.vector(c(from, from + seq_len(length.out - 2L) * by, to))
+	    else { # *only* place we could (and did) use 'by's formal default
+		by <- # integer if "easy"
+		    if(is.integer(del <- to - from) & is.integer(n1 <- length.out - 1L)
+		       && del %% n1 == 0L) del %/% n1 else del / n1
+		as.vector(c(from, from + seq_len(length.out - 2L) * by, to))
+	    }
 	else as.vector(c(from, to))[seq_len(length.out)]
     }
     else if(missing(to))

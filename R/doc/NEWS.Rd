@@ -271,8 +271,8 @@
 
       \item Package \pkg{tools} now exports function
       \code{CRAN_package_db()} for obtaining information about current
-      packages in the CRAN package repository, and several functions for
-      obtaining the check status of these packages.
+      packages in the \acronym{CRAN} package repository, and several
+      functions for obtaining the check status of these packages.
 
       \item The (default) Stangle driver \code{Rtangle} allows
       \code{annotate} to be a function and gets a new
@@ -587,6 +587,11 @@
       too, and the "non-finite" error messages are consistent between
       \code{seq.default()} and \code{seq.int()}, no longer mentioning
       \code{NaN} etc.
+
+      \item \code{download.file(method="libcurl")} does not check for
+      URL existence before attempting downloads; this is more robust to
+      servers that do not support HEAD or range-based retrieval, but may
+      create empty or incomplete files for aborted download requests.
     }
   }
 }
@@ -653,10 +658,6 @@
 
       \item \code{methods(f)} now also works for \code{f} \code{"("}
       or \code{"{"}.
-      
-      \item (Windows only)  \code{dir.create()} did not check the length
-      of the path to create, and so could overflow a buffer and crash
-      \R.  \PR{17206}
 
       \item (Windows only)  \code{dir.create()} did not check the length
       of the path to create, and so could overflow a buffer and crash
@@ -678,7 +679,7 @@
 
       \item \code{findMethod} failed if the active signature had
       expanded beyond what a particular package used. (Example with
-      packages XR and XRJulia on CRAN).
+      packages \CRANpkg{XR} and \CRANpkg{XRJulia} on \acronym{CRAN}).
 
       \item \code{bw.SJ()} and \code{density(*, bw="SJ")} no longer fail
       because of integer overflow for large sample size n (starting from
