@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2016-11-03 r878) -- "Internationalized Version of R"
-Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2017-01-04 r913) -- "Internationalized Version of R"
+Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-11-03 r71626) -- "Unsuffered Consequences"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R Under development (unstable) (2017-01-04 r71898) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -189,7 +189,7 @@ Available components:
 [1] "order"     "height"    "dc"        "merge"     "diss"      "call"     
 [7] "order.lab"
 > cat('Time elapsed: ', proc.time() - .p00,'\n')
-Time elapsed:  0.008 0 0.009 0 0 
+Time elapsed:  0.004 0.004 0.008 0 0 
 > 
 > data(agriculture)
 > data(ruspini)
@@ -199,7 +199,7 @@ Time elapsed:  0.008 0 0.009 0 0
 > drusp0  <- diana(ruspini, keep.diss=FALSE, keep.data=FALSE)
 > drusp1  <- diana(ruspini, metric = "manhattan")
 > cat('Time elapsed: ', proc.time() - .p0,'\n')
-Time elapsed:  0.004 0 0.003 0 0 
+Time elapsed:  0 0 0.002 0 0 
 > 
 > summary(dia.agr)
 Merge:
@@ -453,7 +453,7 @@ List of 8 components
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0 0 0.001 0 0 
+Time elapsed:  0 0 0 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
 --[dendrogram with 2 branches and 47 members, at height 127]
   |--[dendrogram with 2 branches and 31 members, at height 99.2]
@@ -551,4 +551,4 @@ Time elapsed:  0 0 0.001 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.196   0.024   0.218 
+  0.168   0.016   0.181 
