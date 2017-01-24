@@ -3994,6 +3994,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     ind[[1]] <- 1:n
 ---
 >     ind[[1]] <- seq_len(n)
+Only in R-recommended/mgcv/inst/po: ko
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/mgcv/src/general.h Recommended/mgcv/src/general.h
 3,8d2
 < #ifdef ENABLE_NLS
