@@ -401,7 +401,6 @@ attr.all.equal <- function(target, current, ...,
 	if(length(nx)) ax <- ax[order(nx)]
 	if(length(ny)) ay <- ay[order(ny)]
 	tt <- all.equal(ax, ay, ..., check.attributes = check.attributes)
-#        if(is.character(tt)) msg <- c(msg, paste("Attributes: <", tt, ">"))
 	if(is.character(tt)) msg <- c(msg, paste(gettext("Attributes:", domain = "R-base"), paste("<", tt, ">")))
     }
     msg # NULL or character

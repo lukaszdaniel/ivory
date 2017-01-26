@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -156,14 +156,6 @@ msgstr "'input' и 'target' должны быть текстовыми вект�
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "все аргументы должны иметь одинаковую длину"
-
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "to")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument cannot be NA, NaN or infinite"
-msgstr "'from' должен быть raw либо текстовой строкой"
 
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
@@ -355,6 +347,14 @@ msgstr "'file' должен быть текстовой строкой или с
 msgid "'%s' argument must be a character vector or 'NULL'"
 msgstr "'input' должен быть текстовым вектором либо 'NULL'"
 
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "to")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a finite number"
+msgstr "длина должна быть неотрицательным числом"
+
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
 #. R/lapply.R: gettextf("'%s' argument must be a list", "object")
@@ -362,6 +362,12 @@ msgstr "'input' должен быть текстовым вектором либ
 #, fuzzy
 msgid "'%s' argument must be a list"
 msgstr "второй аргумент должен быть списком"
+
+#. R/seq.R: gettextf("'%s' argument must be a non-negative number", "length.out")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a non-negative number"
+msgstr "длина должна быть неотрицательным числом"
 
 #. R/det.R: gettextf("'%s' argument must be a square matrix", "x")
 #: R/det.R:0
@@ -434,12 +440,6 @@ msgstr "'from' должен быть raw либо текстовой строк�
 msgid "'%s' argument must be non-empty character string"
 msgstr "'from' должен быть raw либо текстовой строкой"
 
-#. R/seq.R: gettextf("'%s' argument must be non-negative number", "length.out")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument must be non-negative number"
-msgstr "длина должна быть неотрицательным числом"
-
 #. R/cut.R: gettextf("'%s' argument must be numeric", "x")
 #. R/jitter.R: gettextf("'%s' argument must be numeric", "x")
 #. R/rowsum.R: gettextf("'%s' argument must be numeric", "x")
@@ -471,6 +471,7 @@ msgstr "'arg' должен быть длиной 1"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "length.out")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
@@ -1206,6 +1207,13 @@ msgstr ""
 #. R/table.R: gettext("Call: ", domain = "R-base")
 #: R/table.R:0
 msgid "Call:"
+msgstr ""
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
 msgstr ""
 
 #. R/table.R: gettext("Chi-squared approximation may be incorrect", domain = "R-base")
@@ -2415,10 +2423,10 @@ msgstr "неправильный аргумент 'time'"
 msgid "invalid '%s' value"
 msgstr "неправильное значение 'n'"
 
-#. R/seq.R: stop("invalid '(to - from)/by' in 'seq(.)' function")
+#. R/seq.R: stop("invalid '(to - from)/by'")
 #: R/seq.R:0
 #, fuzzy
-msgid "invalid '(to - from)/by' in 'seq(.)' function"
+msgid "invalid '(to - from)/by'"
 msgstr "неправильный (to - from)/by в seq(.)"
 
 #. R/dates.R: stop("invalid 'by' string")
@@ -3765,6 +3773,10 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T использовано вместо TRUE"
 msgstr[1] "T использовано вместо TRUE"
 msgstr[2] "T использовано вместо TRUE"
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be NA, NaN or infinite"
+#~ msgstr "'from' должен быть raw либо текстовой строкой"
 
 #, fuzzy
 #~ msgid "'method = \"radix\"' option is only for integer 'x'"

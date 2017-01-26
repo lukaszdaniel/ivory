@@ -194,28 +194,28 @@ static SEXP rep2(SEXP s, SEXP ncopy)
     case INTSXP: \
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		INTEGER(a)[n++] = INTEGER(s)[i]; \
 	} \
 	break; \
     case REALSXP: \
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		REAL(a)[n++] = REAL(s)[i]; \
 	} \
 	break; \
     case CPLXSXP: \
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		COMPLEX(a)[n++] = COMPLEX(s)[i]; \
 	} \
 	break; \
     case STRSXP: \
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		SET_STRING_ELT(a, n++, STRING_ELT(s, i)); \
 	} \
 	break; \
@@ -224,7 +224,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
 	    SEXP elt = lazy_duplicate(VECTOR_ELT(s, i)); \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		SET_VECTOR_ELT(a, n++, elt); \
 	    if (j > 1) SET_NAMED(elt, 2); \
 	} \
@@ -232,7 +232,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
     case RAWSXP: \
 	for (i = 0; i < nc; i++) { \
 /*	    if ((i+1) % ni == 0) R_CheckUserInterrupt();*/ \
-	    for (j = 0; j < (R_xlen_t) it[i]; j++) \
+	    for (j = (R_xlen_t) it[i]; j > 0; j--) \
 		RAW(a)[n++] = RAW(s)[i]; \
 	} \
 	break; \

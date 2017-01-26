@@ -1040,7 +1040,6 @@ format.compactPDF <- function(x, ratio = 0.9, diff = 1e4, ...)
     z[] <- lapply(y, function(x) sprintf("%.0fKb", x/1024))
     large <- y$new >= 1024^2
     z[large, ] <- lapply(y[large, ], function(x) sprintf("%.1fMb", x/1024^2))
-    #paste("  compacted", sQuote(basename(row.names(y))), "from", z[, 1L], "to", z[, 2L])
     gettextf("  compacted %s from %s to %s", sQuote(basename(row.names(y))), z[, 1L], z[, 2L], domain = "R-tools")
 }
 

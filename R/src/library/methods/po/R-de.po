@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -377,11 +377,6 @@ msgstr ""
 #: R/methodsTable.R:0
 msgid "** individual arguments' distances:"
 msgstr ""
-
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
-#: R/Methods.R:0
-msgid "** should no longer happen!"
-msgstr "** sollte nicht mehr auftreten!"
 
 #. R/methodsTable.R: gettextf(" .. method %d: length(sig) = %d < nArg = %d\n", i, length(sig), nArg, domain = "R-methods")
 #: R/methodsTable.R:0
@@ -1356,8 +1351,8 @@ msgstr ""
 "anscheinend unbrauchbare Methode oder Klassenmetadaten in gespeicherter "
 "Umgebung"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)))
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)))
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"
@@ -2109,13 +2104,13 @@ msgstr ""
 "formale Argumente (%s), die in der Methodendefinition ausgelassen wurden, "
 "können nicht in der Signatur  sein"
 
-#. R/Methods.R: gettext("formal arguments differ (in default values?)")
+#. R/Methods.R: gettext("formal arguments differ (in default values?)", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "formal arguments differ (in default values?)"
 msgstr "Die formalen Argumente unterscheiden sich (in den Standardwerten?)"
 
-#. R/Methods.R: gettext("formal arguments differ: (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("formal arguments differ: (%s), (%s)", paste(a1, collapse = ", "), paste(a2,     collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "formal arguments differ: (%s), (%s)"
@@ -2160,7 +2155,7 @@ msgstr "generische Funktion %s nicht gefunden, um sie zu entfernen"
 msgid "generic function supplied was not created for %s"
 msgstr "angegebene generische Funktion für \"%s\" nicht gefunden"
 
-#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic))
+#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "generic names differ: %s, %s"
@@ -2180,7 +2175,7 @@ msgstr ""
 msgid "got a negative maximum number of frames to look at"
 msgstr "bekam eine negative maximale Zahl von zu beachtenden Frames"
 
-#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)))
+#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "groups differ: %s, %s"
@@ -2885,7 +2880,7 @@ msgstr "keine Methode für Funktion %s und Signatur %s gefunden"
 msgid "no method found for function '%s' and signature %s"
 msgstr "Keine Methode für Funktion \"%s\" und Signatur %s gefunden"
 
-#. R/Methods.R: gettext("no method found for signature %s", domain = "R-methods")
+#. R/Methods.R: gettextf("no method found for signature %s", paste(signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "no method found for signature %s"
@@ -3011,7 +3006,7 @@ msgstr "Keine Referenzklasse"
 msgid "not allowed to have test==TRUE and an S4Class definition"
 msgstr "test == TRUE und S4Class Definition nicht gleichzeitig zulässig"
 
-#. R/Methods.R: gettext("not both functions!")
+#. R/Methods.R: gettext("not both functions!", domain = "R-methods")
 #: R/Methods.R:0
 msgid "not both functions!"
 msgstr "nicht beide Funktionen!"
@@ -3092,7 +3087,7 @@ msgid ""
 "allowed"
 msgstr "nur ein Datenobjekt (namenloses Argument für Prototypen) erlaubt"
 
-#. R/Methods.R: gettext("original function is prohibited as a generic function")
+#. R/Methods.R: gettext("original function is prohibited as a generic function", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "original function is prohibited as a generic function"
@@ -3114,7 +3109,7 @@ msgid ""
 "installed)"
 msgstr ""
 
-#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)))
+#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "package slots  differ: %s, %s"
@@ -3177,10 +3172,12 @@ msgstr ""
 msgid "see ?MethodsList. (This warning is shown once per session.)"
 msgstr ""
 
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
+#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
-msgid "selectMethod(): mlist is not an environment or NULL :"
+msgid ""
+"selectMethod(): mlist is not an environment or NULL :\n"
+"** should no longer happen!"
 msgstr "selectMethod(): mlist ist keine Umgebung oder NULL"
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
@@ -3191,7 +3188,7 @@ msgstr ""
 "Setzen einer Methode über die Bindung des Symbols %s in der Umgebung / im "
 "Paket %s"
 
-#. R/Methods.R: gettext("signatures differ:  (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature, collapse = ", "),     paste(f2@signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "signatures differ:  (%s), (%s)"
@@ -3947,6 +3944,9 @@ msgstr[1] ""
 "die formalen Argumente der generischen Funktion für \"%s\" (%s) "
 "unterscheiden sich von denen der nicht-generischen Funktion, die als "
 "Standard genutzt wird (%s)"
+
+#~ msgid "** should no longer happen!"
+#~ msgstr "** sollte nicht mehr auftreten!"
 
 #, fuzzy
 #~ msgid ""

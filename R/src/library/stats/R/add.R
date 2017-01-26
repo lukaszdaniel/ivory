@@ -635,13 +635,12 @@ factor.scope <- function(factor, scope)
             nmdrop0 <- sapply(strsplit(nmdrop, ":", fixed=TRUE),
                              function(x) paste(sort(x), collapse=":"))
 	    where <- match(nmdrop0, nmfac0, 0L)
-	    if(any(!where)) {
+	    if(any(!where))
                 stop(sprintf(ngettext(sum(where==0),
                                       "lower scope has term %s not included in model",
                                       "lower scope has terms %s not included in model", domain = "R-stats"),
                              paste(sQuote(nmdrop[where==0]), collapse = ", ")),
                      domain = NA)
-		}
 	    facs <- factor[, -where, drop = FALSE]
 	    nmdrop <- nmfac[-where]
 	} else nmdrop <- colnames(factor)
@@ -666,13 +665,12 @@ factor.scope <- function(factor, scope)
             nmadd0 <- sapply(strsplit(nmadd, ":", fixed=TRUE),
                              function(x) paste(sort(x), collapse=":"))
 	    where <- match(nmfac0, nmadd0, 0L)
-	    if(any(!where)) {
+	    if(any(!where))
                 stop(sprintf(ngettext(sum(where==0),
                                       "upper scope has term %s not included in model",
                                       "upper scope has terms %s not included in model", domain = "R-stats"),
                              paste(sQuote(nmdrop[where==0]), collapse=", ")),
                      domain = NA)
-		}
 	    nmadd <- nmadd[-where]
 	    add <- add[, -where, drop = FALSE]
 	}

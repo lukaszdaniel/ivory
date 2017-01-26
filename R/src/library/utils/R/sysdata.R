@@ -33,6 +33,7 @@ function()
           "cre" = gettext("Use for the package maintainer.", domain = "R-utils"),
           "ctr" = gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.", domain = "R-utils"),
           "dtc" = gettext("Use for persons who contributed data sets for the package.", domain = "R-utils"),
+          "fnd" = gettext("Use for persons or organizations that furnished financial support\nfor the development of the package", domain = "R-utils"),
           "ths" = gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils"),
           "trl" = gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.", domain = "R-utils"))
 

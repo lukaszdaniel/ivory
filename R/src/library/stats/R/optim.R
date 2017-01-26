@@ -49,8 +49,7 @@ optim <-
     }
     con[(namc <- names(control))] <- control
     if(length(noNms <- namc[!namc %in% nmsC])) {
-	tmp_N <- paste(noNms,collapse=", ")
-	warning(gettextf("unknown names in control: %s"), tmp_N)
+	warning(gettextf("unknown names in control: %s", paste(noNms,collapse=", "), domain = "R-stats"), domain = NA)
 	}
     if(con$trace < 0)
 	warning("read the documentation for 'trace' more carefully")

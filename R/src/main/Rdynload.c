@@ -154,8 +154,6 @@ attribute_hidden OSDynSymbol Rf_osDynSymbol;
 attribute_hidden OSDynSymbol *R_osDynSymbol = &Rf_osDynSymbol;
 
 void R_init_base(DllInfo *); /* In Registration.c */
-DL_FUNC R_dlsym(DllInfo *dll, char const *name,
-		R_RegisteredNativeSymbol *symbol);
 
 void attribute_hidden
 InitDynload()
@@ -217,7 +215,7 @@ R_addExternalRoutine(DllInfo *info,
 /*
  Returns a reference to the DllInfo object associated with the shared object
  with the path name `path'. This ensures uniqueness rather than having the
- undesirable situation of two object with the same name but in different
+ undesirable situation of two objects with the same name but in different
  directories.
  This is available so that it can be called from arbitrary C routines
  that need to call R_registerRoutines(). The initialization routine

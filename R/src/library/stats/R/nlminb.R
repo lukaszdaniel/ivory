@@ -82,11 +82,10 @@ nlminb <-
 	    stop("'control' argument must be a named list")
 	pos <- pmatch(nms, names(port_cpos))
 	if (any(nap <- is.na(pos))) {
-		tmp_n <- paste(sQuote(nms[nap]), collapse = ", ")
             warning(sprintf(ngettext(length(nap),
                                      "unrecognized control element named %s ignored",
                                      "unrecognized control elements named %s ignored", domain = "R-stats"),
-                            tmp_n),
+                            paste(sQuote(nms[nap]), collapse = ", ")),
                     domain = NA)
 	    pos <- pos[!nap]
 	    control <- control[!nap]

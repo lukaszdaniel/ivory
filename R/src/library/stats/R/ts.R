@@ -372,9 +372,9 @@ print.ts <- function(x, calendar, ...)
 	calendar <- any(fr.x == c(4,12)) && length(start(x)) == 2L
     if(!calendar) {
         if(fr.x != 1)
-			cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", deparse(start(x)), deparse(end(x)), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
+	  cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", deparse(start(x)), deparse(end(x)), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
         else
-		cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", format(tsp(x)[1L]), format(tsp(x)[2L]), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
+	  cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", format(tsp(x)[1L]), format(tsp(x)[2L]), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
     }
     print(.preformat.ts(x, calendar, ...), quote = FALSE, right = TRUE, ...)
     invisible(x)

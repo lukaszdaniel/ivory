@@ -2297,6 +2297,7 @@ setRlibs <-
             else noteLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
             nAPIs <- length(grep("Found non-API", out))
+            nRS <- length(grep("Found no call", out))
             nBad <- length(grep(", possibly from ", out))
             msg <- if (nBad) {
                 if(haveObjs)
@@ -2306,6 +2307,9 @@ setRlibs <-
             } else character()
             if(nAPIs)
                 msg <- c(msg, gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools"))
+            if(nRS)
+                msg <- c(msg,
+                         gettext("It is good practice to use registered native symbols and to disable symbol search.\n", domain = "R-tools"))
             wrapLog("\n", paste(msg, collapse = " "), "\n",
                     gettext("See 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
@@ -4457,6 +4461,8 @@ setRlibs <-
         Sys.setenv("_R_CHECK_S3_METHODS_NOT_REGISTERED_" = "TRUE")
         Sys.setenv("_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_" = "TRUE")
         Sys.setenv("_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_" = "TRUE")
+### to come once fully documented
+###        Sys.setenv("_R_CHECK_SYMBOL_REGISTRATION_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

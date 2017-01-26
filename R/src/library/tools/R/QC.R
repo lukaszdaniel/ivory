@@ -1921,8 +1921,8 @@ function(package, dir, file, lib.loc = NULL,
     	sym <- tryCatch(eval(sym, code_env), error = function(e) e)
     	if (inherits(sym, "error")) {
             if (have_registration || !allow_suppress)  {
-    	    other_problem <<- c(other_problem, e)
-    	    other_desc <<- c(other_desc, gettextf("Evaluating %s during check gives error\n%s", sQuote(name), sQuote(sym$message), domain = "R-tools"))
+                other_problem <<- c(other_problem, e)
+                other_desc <<- c(other_desc, gettextf("Evaluating %s during check gives error\n%s", sQuote(name), sQuote(sym$message), domain = "R-tools"))
             }
     	    return("OTHER")
     	}
@@ -2264,7 +2264,6 @@ function(package, dir, lib.loc = NULL)
     else {
         if(missing(dir))
             stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
-
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -3444,11 +3443,25 @@ function(x)
           c(gettext("Cannot extract Author field from Authors@R field:", domain = "R-tools"), paste(" ", bad))
       },
       if(length(x[["bad_authors_at_R_field_has_no_author"]])) {
-          gettext("Authors@R field gives no person with author role.", domain = "R-tools")
+          gettext("Authors@R field gives no person with name and roles.", domain = "R-tools")
       },
       if(length(bad <-
-                x[["bad_authors_at_R_field_has_author_without_role"]])) {
-          c(gettext("Authors@R field gives persons with no valid roles:", domain = "R-tools"), paste(" ", bad))
+                x[["bad_authors_at_R_field_has_persons_with_no_name"]])) {
+          c(gettext("Authors@R field gives persons with no name:", domain = "R-tools"),
+            paste0("  ", bad))
+      },
+      if(length(bad <-
+                x[["bad_authors_at_R_field_has_persons_with_no_role"]])) {
+          c(gettext("Authors@R field gives persons with no role:", domain = "R-tools"),
+            paste0("  ", bad))
+      },
+      if(length(x[["bad_authors_at_R_field_has_no_author_roles"]])) {
+          gettext("Authors@R field gives no person with name and author role", domain = "R-tools")
+      },
+      if(length(bad <-
+                x[["bad_authors_at_R_field_has_persons_with_nonstandard_roles"]])) {
+          c(gettext("Authors@R field gives persons with non-standard roles:", domain = "R-tools"),
+            paste0("  ", bad))
       },
       if(length(bad <- x[["bad_authors_at_R_field_for_maintainer"]])) {
           c(gettext("Cannot extract Maintainer field from Authors@R field:", domain = "R-tools"), paste(" ", bad))

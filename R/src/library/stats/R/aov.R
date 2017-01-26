@@ -321,11 +321,10 @@ summary.aov <- function(object, intercept = FALSE, split,
                 stop(gettextf("'%s' argument must be a list", "split"))
             if(!all(ns %in% nmeffect)) {
                 na <- sum(!ns %in% nmeffect)
-		tmp_N <- paste(sQuote(ns[na]), collapse = ", ")
                 stop(sprintf(ngettext(na,
                                       "unknown name %s in the 'split' list",
                                       "unknown names %s in the 'split' list", domain = "R-stats"),
-                             tmp_N),
+                             paste(sQuote(ns[na]), collapse = ", ")),
                      domain = NA)
             }
         }

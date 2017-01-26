@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2334,7 +2334,7 @@ msgstr ""
 
 
 #: R/nls.R: 0
-#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     tmp_n), "\n", "Consider specifying 'start' or using a selfStart model", domain = "R-stats",     sep = "")
+#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 
 msgid "Consider specifying 'start' or using a selfStart model"
 msgstr ""
@@ -2900,7 +2900,7 @@ msgstr ""
 
 
 #: R/nls.R: 0
-#. R/nls.R: gettextf("Initializing %s to '1.'.", tmp_n)
+#. R/nls.R: gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse = ", "))
 
 msgid "Initializing %s to '1.'."
 msgstr ""
@@ -3255,7 +3255,7 @@ msgstr ""
 
 
 #: R/nls.R: 0
-#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     tmp_n), "\n", "Consider specifying 'start' or using a selfStart model", domain = "R-stats",     sep = "")
+#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 
 msgid "No starting values specified for some parameters."
 msgstr ""
@@ -6270,7 +6270,7 @@ msgstr ""
 
 
 #: R/reshape.R: 0
-#. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i])
+#. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i], domain = "R-stats")
 
 msgid "multiple rows match for %s=%s: first taken"
 msgstr ""
@@ -7157,7 +7157,7 @@ msgstr ""
 
 
 #: R/nls.R: 0
-#. R/nls.R: gettextf("parameters without starting value in 'data': %s", tmp_n)
+#. R/nls.R: gettextf("parameters without starting value in 'data': %s", paste(nnn, collapse = ", "))
 
 msgid "parameters without starting value in 'data': %s"
 msgstr ""
@@ -7597,7 +7597,7 @@ msgstr ""
 
 
 #: R/reshape.R: 0
-#. R/reshape.R: gettextf("some constant variables (%s) are really varying", tmp_N)
+#. R/reshape.R: gettextf("some constant variables (%s) are really varying", paste(names(rval)[!really.constant],     collapse = ","), domain = "R-stats")
 
 msgid "some constant variables (%s) are really varying"
 msgstr ""
@@ -8416,7 +8416,7 @@ msgstr ""
 
 
 #: R/optim.R: 0
-#. R/optim.R: gettextf("unknown names in control: %s")
+#. R/optim.R: gettextf("unknown names in control: %s", paste(noNms, collapse = ", "), domain = "R-stats")
 
 msgid "unknown names in control: %s"
 msgstr ""
@@ -8502,7 +8502,7 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: gettextf("variables %s were specified with different types from the fit", tmp_N)
+#. R/models.R: gettextf("variables %s were specified with different types from the fit", paste(sQuote(names(old)[wrong]),     collapse = ", "))
 
 msgid "variables %s were specified with different types from the fit"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1790,7 +1790,7 @@ msgstr ""
 msgid "Consider providing '%s' method"
 msgstr "请考虑提供as.hclust.%s()这一方法"
 
-#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     tmp_n), "\n", "Consider specifying 'start' or using a selfStart model", domain = "R-stats",     sep = "")
+#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 #: R/nls.R:0
 msgid "Consider specifying 'start' or using a selfStart model"
 msgstr "请考虑设'start'的值，或使用一个自我设定初始值的模型"
@@ -2228,7 +2228,7 @@ msgstr ""
 msgid "Initial Model:"
 msgstr "模型顺序:"
 
-#. R/nls.R: gettextf("Initializing %s to '1.'.", tmp_n)
+#. R/nls.R: gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse = ", "))
 #: R/nls.R:0
 #, fuzzy
 msgid "Initializing %s to '1.'."
@@ -2492,7 +2492,7 @@ msgstr ""
 msgid "No error degrees of freedom"
 msgstr "零自由度不能设对比"
 
-#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     tmp_n), "\n", "Consider specifying 'start' or using a selfStart model", domain = "R-stats",     sep = "")
+#. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 #: R/nls.R:0
 msgid "No starting values specified for some parameters."
 msgstr "有些参数没有设定初始值"
@@ -4764,7 +4764,7 @@ msgstr "群集中心的数目要比数据点数目多"
 msgid "more cluster centers than distinct data points."
 msgstr "群集中心的数目要比数据点数目多。"
 
-#. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i])
+#. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i], domain = "R-stats")
 #: R/reshape.R:0
 msgid "multiple rows match for %s=%s: first taken"
 msgstr ""
@@ -5449,7 +5449,7 @@ msgstr ""
 msgid "package 'MASS' must be installed"
 msgstr ""
 
-#. R/nls.R: gettextf("parameters without starting value in 'data': %s", tmp_n)
+#. R/nls.R: gettextf("parameters without starting value in 'data': %s", paste(nnn, collapse = ", "))
 #: R/nls.R:0
 #, fuzzy
 msgid "parameters without starting value in 'data': %s"
@@ -5785,7 +5785,7 @@ msgstr "一些AR参数是固定的：把transform.pars设成FALSE"
 msgid "some ARMA parameters were fixed: setting transform.pars = FALSE"
 msgstr "一些ARMA参数是固定的：把transform.pars设成FALSE"
 
-#. R/reshape.R: gettextf("some constant variables (%s) are really varying", tmp_N)
+#. R/reshape.R: gettextf("some constant variables (%s) are really varying", paste(names(rval)[!really.constant],     collapse = ","), domain = "R-stats")
 #: R/reshape.R:0
 msgid "some constant variables (%s) are really varying"
 msgstr "某些恆量变量(%s)其实在变动"
@@ -6396,7 +6396,7 @@ msgstr "没有这样的頻寬规则"
 msgid "unknown named kernel"
 msgstr "没有这样的内核名"
 
-#. R/optim.R: gettextf("unknown names in control: %s")
+#. R/optim.R: gettextf("unknown names in control: %s", paste(noNms, collapse = ", "), domain = "R-stats")
 #: R/optim.R:0
 #, fuzzy
 msgid "unknown names in control: %s"
@@ -6463,7 +6463,7 @@ msgstr "变量'%s'不是因子"
 msgid "variable '%s' was fitted with type \"%s\" but type \"%s\" was supplied"
 msgstr "变量'%s'是由\"%s\"类别拟合而成，与提供的类别\"%s\"不相配"
 
-#. R/models.R: gettextf("variables %s were specified with different types from the fit", tmp_N)
+#. R/models.R: gettextf("variables %s were specified with different types from the fit", paste(sQuote(names(old)[wrong]),     collapse = ", "))
 #: R/models.R:0
 msgid "variables %s were specified with different types from the fit"
 msgstr "设定的变量%s的类别同拟合的类别不相符"

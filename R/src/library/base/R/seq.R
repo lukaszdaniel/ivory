@@ -82,7 +82,7 @@ seq.default <-
             }
 	}
     else if(!is.finite(length.out) || length.out < 0L)
-	stop(gettextf("'%s' argument must be non-negative number", "length.out"))
+	stop(gettextf("'%s' argument must be a non-negative number", "length.out"))
     else if(length.out == 0L) integer()
     else if (One) seq_len(length.out)
     else if(missing(by)) {

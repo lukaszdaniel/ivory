@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-01-26 00:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -766,6 +766,11 @@ msgstr "Plik::"
 msgid "Filter '%s' is not available."
 msgstr "Filtr '%s' nie jest dostępny."
 
+#. R/object.size.R: stop("For SI units, specify 'standard = \"SI\"'")
+#: R/object.size.R:0
+msgid "For SI units, specify 'standard = \"SI\"'"
+msgstr ""
+
 #. R/package.skeleton.R: gettextf("Further steps are described in '%s'.", file.path(dir, "Read-and-delete-me"))
 #: R/package.skeleton.R:0
 msgid "Further steps are described in '%s'."
@@ -1398,12 +1403,34 @@ msgstr "Niewysłany %s można znaleźć w pliku %s"
 msgid "These will not be installed"
 msgstr "Te nie zostaną zainstalowane"
 
-#. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
+#. R/bug.report.R: gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nIt appears to contain an email address, so we will try that.",     BR, domain = "R-utils")
 #: R/bug.report.R:0
 msgid ""
-"This package has a bug submission web page, which we will now attempt to "
-"open. The information above may be useful in your report. If the web page "
-"doesn't work, you should send email to the maintainer, %s."
+"This package has a BugReports field which is not the URL of a web page:\n"
+"\n"
+"  BugReports: %s\n"
+"\n"
+"It appears to contain an email address, so we will try that."
+msgstr ""
+
+#. R/bug.report.R: gettextf("\nThis package has a BugReports field which is not the URL of a web page:\n\n  BugReports: %s\n\nWe will ignore it and email the maintainer.",     BR, domain = "R-utils")
+#: R/bug.report.R:0
+msgid ""
+"This package has a BugReports field which is not the URL of a web page:\n"
+"\n"
+"  BugReports: %s\n"
+"\n"
+"We will ignore it and email the maintainer."
+msgstr ""
+
+#. R/bug.report.R: gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report.\nIf the web page does not work, you should send email to the maintainer,\n%s.",     DESC$Maintainer, domain = "R-utils")
+#: R/bug.report.R:0
+#, fuzzy
+msgid ""
+"This package has a bug submission web page, which we will now attempt\n"
+"to open.  The information above may be useful in your report.\n"
+"If the web page does not work, you should send email to the maintainer,\n"
+"%s."
 msgstr ""
 "Ten pakiet posiada stronę internetową do zgłaszania błędów, którą R będzie "
 "próbował teraz otworzyć. Informacja powyżej może się przydać w Twoim "
@@ -1466,6 +1493,11 @@ msgid ""
 "Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'."
 msgstr ""
 "Wpisz 'vignette(\"FOO\", package=\"PKG\")' aby sprawdzić wpisy 'PKG::FOO'."
+
+#. R/object.size.R: gettextf("Unit %s is not part of standard %s", sQuote(units), sQuote(standard))
+#: R/object.size.R:0
+msgid "Unit %s is not part of standard %s"
+msgstr ""
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
@@ -1567,6 +1599,13 @@ msgstr ""
 "Użyj dla osoby utrzymującej pakiet, która zebrała kod (potencjalnie\n"
 "napisany w różnych językach) ale nie poczyniła żadnych istotnych\n"
 "zmian w pakiecie."
+
+#. R/sysdata.R: gettext("Use for persons or organizations that furnished financial support\nfor the development of the package",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for persons or organizations that furnished financial support\n"
+"for the development of the package"
+msgstr ""
 
 #. R/sysdata.R: gettext("Use for persons who contributed data sets for the package.", domain = "R-utils")
 #: R/sysdata.R:0

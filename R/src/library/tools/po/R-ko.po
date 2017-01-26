@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-18 11:18\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -242,6 +242,11 @@ msgstr ""
 #. R/check.R: gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools")
 #: R/check.R:0
 msgid "'NeedsCompilation' field must take value 'yes' or 'no'"
+msgstr ""
+
+#. R/check.R: gettext("'NeedsCompilation' field should likely be 'yes'", domain = "R-tools")
+#: R/check.R:0
+msgid "'NeedsCompilation' field should likely be 'yes'"
 msgstr ""
 
 #. R/translations.R: stop("'R CMD build' failed")
@@ -544,11 +549,6 @@ msgstr ""
 "Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
 "을 수 없습니다."
 
-#. R/QC.R: gettext("Authors@R field gives no person with author role.", domain = "R-tools")
-#: R/QC.R:0
-msgid "Authors@R field gives no person with author role."
-msgstr ""
-
 #. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -559,10 +559,45 @@ msgstr ""
 "Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
 "을 수 없습니다."
 
-#. R/QC.R: gettext("Authors@R field gives persons with no valid roles:", domain = "R-tools")
+#. R/QC.R: gettext("Authors@R field gives no person with name and author role", domain = "R-tools")
 #: R/QC.R:0
-msgid "Authors@R field gives persons with no valid roles:"
+#, fuzzy
+msgid "Authors@R field gives no person with name and author role"
 msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
+
+#. R/QC.R: gettext("Authors@R field gives no person with name and roles.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives no person with name and roles."
+msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
+
+#. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with no name:"
+msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
+
+#. R/QC.R: gettext("Authors@R field gives persons with no role:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with no role:"
+msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
+
+#. R/QC.R: gettext("Authors@R field gives persons with non-standard roles:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with non-standard roles:"
+msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
 
 #. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
 #: R/QC.R:0
@@ -606,6 +641,37 @@ msgstr "문서 객체 '%s'내에서 올바르지 않은 \\usage 라인들을 찾
 #. R/utils.R: gettext("BibTeX errors:")
 #: R/utils.R:0
 msgid "BibTeX errors:"
+msgstr ""
+
+#. R/check.R: gettext("BugReports field has an empty first line and will not work in R <= 3.3.2",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"BugReports field has an empty first line and will not work in R <= 3.3.2"
+msgstr ""
+
+#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"BugReports field is not a suitable URL but appears to contain an email "
+"address\n"
+"  not specified by mailto: nor contained in < >"
+msgstr ""
+
+#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"BugReports field is not a suitable URL but contains an email address\n"
+"  which will be used as from R 3.4.0"
+msgstr ""
+
+#. R/check.R: gettext("BugReports field should be the URL of a single webpage", domain = "R-tools")
+#: R/check.R:0
+msgid "BugReports field should be the URL of a single webpage"
+msgstr ""
+
+#. R/check.R: gettext("BugReports field should not be empty", domain = "R-tools")
+#: R/check.R:0
+msgid "BugReports field should not be empty"
 msgstr ""
 
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
@@ -1406,6 +1472,7 @@ msgstr "ASCII가 아닌 값을 가지는 항목들:"
 #. R/Vignettes.R: gettextf("File %s:", names(y)[k], domain = "R-tools")
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #: R/QC.R:0 R/Vignettes.R:0 R/sotools.R:0
 msgid "File %s:"
 msgstr "파일 %s:"
@@ -1533,6 +1600,16 @@ msgstr ""
 #. R/check.R: gettext("Found directory 'R' with no source files.", domain = "R-tools")
 #: R/check.R:0
 msgid "Found directory 'R' with no source files."
+msgstr ""
+
+#. R/sotools.R: gettextf("  Found no call to: %s", sQuote(x), domain = "R-tools")
+#: R/sotools.R:0
+msgid "Found no call to: %s"
+msgstr ""
+
+#. R/sotools.R: gettextf("Found no calls to: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools")
+#: R/sotools.R:0
+msgid "Found no calls to: %s"
 msgstr ""
 
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
@@ -1801,10 +1878,10 @@ msgstr "Priority 항목이 잘못되었습니다."
 msgid "Invalid URI scheme"
 msgstr "패키지가 잘못되었습니다"
 
-#. R/urltools.R: gettext("Invalid URI scheme (use \\doi for DOIs)", domain = "R-tools")
+#. R/urltools.R: gettext("Invalid URI scheme (use \\doi for DOIs in Rd markup)", domain = "R-tools")
 #: R/urltools.R:0
 #, fuzzy
-msgid "Invalid URI scheme (use \\doi for DOIs)"
+msgid "Invalid URI scheme (use \\doi for DOIs in Rd markup)"
 msgstr "패키지가 잘못되었습니다"
 
 #. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
@@ -1828,6 +1905,13 @@ msgstr "라이센스 파일 포인터가 올바르지 않습니다: %s"
 #, fuzzy
 msgid "Invalid package name."
 msgstr "패키지가 잘못되었습니다"
+
+#. R/check.R: gettext("It is good practice to use registered native symbols and to disable symbol search.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"It is good practice to use registered native symbols and to disable symbol "
+"search."
+msgstr ""
 
 #. R/check.R: gettext("It is recommended not to interfere with package subdirectories used by R.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -2108,6 +2192,7 @@ msgstr "'%s'이라는 패키지가 없습니다"
 msgid "NO"
 msgstr ""
 
+#. R/check.R: gettext("NONE", domain = "R-tools")
 #. R/check.R: gettext("NONE", domain = "R-tools")
 #: R/check.R:0
 msgid "NONE"
@@ -6059,7 +6144,14 @@ msgstr ""
 msgid "warning: control may reach end of non-void function"
 msgstr ""
 
-#. R/check.R: gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools")
+#. R/check.R: gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools")
+#. R/check.R: gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "when running code in %s"
+msgstr "%s를 실행중입니다"
+
+#. R/check.R: gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tool")
 #. R/check.R: gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools")
 #: R/check.R:0
 msgid "when running code in %s ..."

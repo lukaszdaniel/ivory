@@ -152,11 +152,9 @@ reshape <-
                 unlist(lapply(rval,
                               function(a) all(tapply(a, as.vector(tmp),
                                                      function(b) length(unique(b)) == 1L))))
-            if (!all(really.constant)) {
-		tmp_N <- paste(names(rval)[!really.constant],collapse = ",")
+            if (!all(really.constant))
                 warning(gettextf("some constant variables (%s) are really varying",
-                                 tmp_N), domain = NA)
-		}
+                                 paste(names(rval)[!really.constant],collapse = ","), domain = "R-stats"), domain = NA)
         }
 
         rval <- data[!duplicated(data[, idvar]),
@@ -167,7 +165,7 @@ reshape <-
             tab <- table(thistime[, idvar])
             if (any(tab > 1L))
                 warning(gettextf("multiple rows match for %s=%s: first taken",
-                                timevar, times[i]), domain = NA)
+                                timevar, times[i], domain = "R-stats"), domain = NA)
             rval[, varying[, i]] <-
                 thistime[match(rval[, idvar], thistime[, idvar]), v.names]
         }

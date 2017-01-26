@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -347,11 +347,6 @@ msgstr ""
 #. R/methodsTable.R: gettext("** individual arguments' distances:", domain = "R-methods")
 #: R/methodsTable.R:0
 msgid "** individual arguments' distances:"
-msgstr ""
-
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
-#: R/Methods.R:0
-msgid "** should no longer happen!"
 msgstr ""
 
 #. R/methodsTable.R: gettextf(" .. method %d: length(sig) = %d < nArg = %d\n", i, length(sig), nArg, domain = "R-methods")
@@ -1290,8 +1285,8 @@ msgstr ""
 "저장된 환경내에서 메소드 또는 클래스 메타데이터가 올바르지 않은 것처럼 보입니"
 "다;"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)))
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)))
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"
@@ -1974,12 +1969,12 @@ msgid ""
 "signature"
 msgstr "메소드 정의내에서 삭제된 형식 인자들(%s)은 서명에 존재할 수 없습니다"
 
-#. R/Methods.R: gettext("formal arguments differ (in default values?)")
+#. R/Methods.R: gettext("formal arguments differ (in default values?)", domain = "R-methods")
 #: R/Methods.R:0
 msgid "formal arguments differ (in default values?)"
 msgstr "형식 인자들이 다릅니다 (기본값들인가요?)"
 
-#. R/Methods.R: gettext("formal arguments differ: (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("formal arguments differ: (%s), (%s)", paste(a1, collapse = ", "), paste(a2,     collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 msgid "formal arguments differ: (%s), (%s)"
 msgstr "형식 인자들이 다릅니다: (%s), (%s)"
@@ -2015,7 +2010,7 @@ msgstr "제거하고자 하는 제네릭 함수 %s를 찾을 수 없습니다"
 msgid "generic function supplied was not created for %s"
 msgstr "제공된 제네릭 함수는 %s를 위하여 생성되지 않았습니다"
 
-#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic))
+#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic), domain = "R-methods")
 #: R/Methods.R:0
 msgid "generic names differ: %s, %s"
 msgstr "제네릭명이 다릅니다: %s, %s"
@@ -2032,7 +2027,7 @@ msgstr ""
 msgid "got a negative maximum number of frames to look at"
 msgstr ""
 
-#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)))
+#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)),     domain = "R-methods")
 #: R/Methods.R:0
 msgid "groups differ: %s, %s"
 msgstr "그룹들이 다릅니다: %s, %s"
@@ -2669,7 +2664,7 @@ msgstr "함수 %s와 서명 %s를 위한 메소드를 찾을 수 없습니다"
 msgid "no method found for function '%s' and signature %s"
 msgstr "함수 '%s'와 서명 %s에 대한 메소드를 찾을 수 없습니다"
 
-#. R/Methods.R: gettext("no method found for signature %s", domain = "R-methods")
+#. R/Methods.R: gettextf("no method found for signature %s", paste(signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 msgid "no method found for signature %s"
 msgstr "서명 %s에 대한 메소드를 찾을 수 없습니다"
@@ -2777,7 +2772,7 @@ msgstr "다음은 레퍼런스 클래스가 아닙니다: %s"
 msgid "not allowed to have test==TRUE and an S4Class definition"
 msgstr ""
 
-#. R/Methods.R: gettext("not both functions!")
+#. R/Methods.R: gettext("not both functions!", domain = "R-methods")
 #: R/Methods.R:0
 msgid "not both functions!"
 msgstr "둘 다 함수가 아닙니다!"
@@ -2853,7 +2848,7 @@ msgid ""
 "allowed"
 msgstr "오로지 데이터 객체 (unnamed argument to prototype) 만이 허용됩니다"
 
-#. R/Methods.R: gettext("original function is prohibited as a generic function")
+#. R/Methods.R: gettext("original function is prohibited as a generic function", domain = "R-methods")
 #: R/Methods.R:0
 msgid "original function is prohibited as a generic function"
 msgstr "원래의 함수는 제네릭함수이기 때문에 사용될 수 없습니다"
@@ -2872,7 +2867,7 @@ msgid ""
 "installed)"
 msgstr ""
 
-#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)))
+#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)),     domain = "R-methods")
 #: R/Methods.R:0
 msgid "package slots  differ: %s, %s"
 msgstr "패키지 슬롯이 다릅니다: %s, %s"
@@ -2928,9 +2923,11 @@ msgstr ""
 msgid "see ?MethodsList. (This warning is shown once per session.)"
 msgstr ""
 
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
+#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
-msgid "selectMethod(): mlist is not an environment or NULL :"
+msgid ""
+"selectMethod(): mlist is not an environment or NULL :\n"
+"** should no longer happen!"
 msgstr ""
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
@@ -2939,7 +2936,7 @@ msgid ""
 "setting a method over the binding of symbol %s in environment/package %s"
 msgstr ""
 
-#. R/Methods.R: gettext("signatures differ:  (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature, collapse = ", "),     paste(f2@signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 msgid "signatures differ:  (%s), (%s)"
 msgstr "서명이 다릅니다:  (%s), (%s)"

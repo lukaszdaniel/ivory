@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -147,14 +147,6 @@ msgstr " 'input' そして 'target' は文字ベクトルでなければなり�
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr " 全ての引数は同じ長さでなければなりません "
-
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "to")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument cannot be NA, NaN or infinite"
-msgstr " 'from'はrawまたは文字でなければなりません "
 
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
@@ -346,6 +338,14 @@ msgstr " 'file' は文字列かコネクションでなければなりません 
 msgid "'%s' argument must be a character vector or 'NULL'"
 msgstr " 'input' は文字ベクトルまたは NULL でなければなりません "
 
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "to")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a finite number"
+msgstr " 長さは非負の数値でなければなりません "
+
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
 #. R/lapply.R: gettextf("'%s' argument must be a list", "object")
@@ -353,6 +353,12 @@ msgstr " 'input' は文字ベクトルまたは NULL でなければなりませ
 #, fuzzy
 msgid "'%s' argument must be a list"
 msgstr " 第二引数はリストでなければなりません "
+
+#. R/seq.R: gettextf("'%s' argument must be a non-negative number", "length.out")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a non-negative number"
+msgstr " 長さは非負の数値でなければなりません "
 
 #. R/det.R: gettextf("'%s' argument must be a square matrix", "x")
 #: R/det.R:0
@@ -425,12 +431,6 @@ msgstr " 'from'はrawまたは文字でなければなりません "
 msgid "'%s' argument must be non-empty character string"
 msgstr " 'from'はrawまたは文字でなければなりません "
 
-#. R/seq.R: gettextf("'%s' argument must be non-negative number", "length.out")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument must be non-negative number"
-msgstr " 長さは非負の数値でなければなりません "
-
 #. R/cut.R: gettextf("'%s' argument must be numeric", "x")
 #. R/jitter.R: gettextf("'%s' argument must be numeric", "x")
 #. R/rowsum.R: gettextf("'%s' argument must be numeric", "x")
@@ -462,6 +462,7 @@ msgstr " 'arg' は長さ 1 でなければなりません "
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "length.out")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
@@ -1204,6 +1205,13 @@ msgstr ""
 #. R/table.R: gettext("Call: ", domain = "R-base")
 #: R/table.R:0
 msgid "Call:"
+msgstr ""
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
 msgstr ""
 
 #. R/table.R: gettext("Chi-squared approximation may be incorrect", domain = "R-base")
@@ -2421,10 +2429,10 @@ msgstr " 無効な 'time' 引数です "
 msgid "invalid '%s' value"
 msgstr " 無効な 'n' 値です "
 
-#. R/seq.R: stop("invalid '(to - from)/by' in 'seq(.)' function")
+#. R/seq.R: stop("invalid '(to - from)/by'")
 #: R/seq.R:0
 #, fuzzy
-msgid "invalid '(to - from)/by' in 'seq(.)' function"
+msgid "invalid '(to - from)/by'"
 msgstr " seq(.) 中の (to - from)/by が不正です "
 
 #. R/dates.R: stop("invalid 'by' string")
@@ -3723,6 +3731,10 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be NA, NaN or infinite"
+#~ msgstr " 'from'はrawまたは文字でなければなりません "
 
 #, fuzzy
 #~ msgid "'method = \"radix\"' option is only for integer 'x'"

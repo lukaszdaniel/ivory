@@ -245,8 +245,7 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
                  method = METHOD,
                  data.name = DNAME)
     if(conf.int) {
-#EST <- ESTIMATE
-names(ESTIMATE) <- names(NVAL)
+	names(ESTIMATE) <- names(NVAL)
         RVAL <- c(RVAL,
                   list(conf.int = cint,
                        estimate = ESTIMATE))

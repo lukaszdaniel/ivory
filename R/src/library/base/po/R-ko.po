@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -153,14 +153,6 @@ msgstr "'input' 과 'target' 은 반드시 문자벡터이어야 합니다 "
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
-
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
-#. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "to")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument cannot be NA, NaN or infinite"
-msgstr "'from' 은 반드시 raw 이거나 문자이어야 합니다 "
 
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
@@ -352,6 +344,14 @@ msgstr "'file' 은 반드시 문자열 또는 연결이어야 합니다. "
 msgid "'%s' argument must be a character vector or 'NULL'"
 msgstr "'input' 은 반드시 문자형 또는 'NULL' 이어야 합니다 "
 
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
+#. R/seq.R: gettextf("'%s' argument must be a finite number", "to")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a finite number"
+msgstr "길이는 양수이어야 합니다 "
+
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
 #. R/lapply.R: gettextf("'%s' argument must be a list", "object")
@@ -359,6 +359,12 @@ msgstr "'input' 은 반드시 문자형 또는 'NULL' 이어야 합니다 "
 #, fuzzy
 msgid "'%s' argument must be a list"
 msgstr "두번째 인수는 반드시 list 이어야 합니다 "
+
+#. R/seq.R: gettextf("'%s' argument must be a non-negative number", "length.out")
+#: R/seq.R:0
+#, fuzzy
+msgid "'%s' argument must be a non-negative number"
+msgstr "길이는 양수이어야 합니다 "
 
 #. R/det.R: gettextf("'%s' argument must be a square matrix", "x")
 #: R/det.R:0
@@ -431,12 +437,6 @@ msgstr "'from' 은 반드시 raw 이거나 문자이어야 합니다 "
 msgid "'%s' argument must be non-empty character string"
 msgstr "'from' 은 반드시 raw 이거나 문자이어야 합니다 "
 
-#. R/seq.R: gettextf("'%s' argument must be non-negative number", "length.out")
-#: R/seq.R:0
-#, fuzzy
-msgid "'%s' argument must be non-negative number"
-msgstr "길이는 양수이어야 합니다 "
-
 #. R/cut.R: gettextf("'%s' argument must be numeric", "x")
 #. R/jitter.R: gettextf("'%s' argument must be numeric", "x")
 #. R/rowsum.R: gettextf("'%s' argument must be numeric", "x")
@@ -468,6 +468,7 @@ msgstr "'arg' 의 길이는 반드시 1 이어야 합니다 "
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "length.out")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
@@ -1204,6 +1205,13 @@ msgstr ""
 #. R/table.R: gettext("Call: ", domain = "R-base")
 #: R/table.R:0
 msgid "Call:"
+msgstr ""
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
 msgstr ""
 
 #. R/table.R: gettext("Chi-squared approximation may be incorrect", domain = "R-base")
@@ -2420,10 +2428,10 @@ msgstr "'time' 이 잘못되었습니다 "
 msgid "invalid '%s' value"
 msgstr "'n' 값이 잘 못되었습니다 "
 
-#. R/seq.R: stop("invalid '(to - from)/by' in 'seq(.)' function")
+#. R/seq.R: stop("invalid '(to - from)/by'")
 #: R/seq.R:0
 #, fuzzy
-msgid "invalid '(to - from)/by' in 'seq(.)' function"
+msgid "invalid '(to - from)/by'"
 msgstr "seq(.) 안의 (to - from)/by 가 잘못되었습니다 "
 
 #. R/dates.R: stop("invalid 'by' string")
@@ -3699,6 +3707,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be NA, NaN or infinite"
+#~ msgstr "'from' 은 반드시 raw 이거나 문자이어야 합니다 "
 
 #, fuzzy
 #~ msgid "'method = \"radix\"' option is only for integer 'x'"

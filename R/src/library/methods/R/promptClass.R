@@ -279,7 +279,7 @@ function (clName, filename = NULL, type = "class",
 }
 
 ## used in promptClass() above and in promptMethods() :
-#R-ELS UPDATE: functionality of .fileDesc() is now incorporated in above methods
+#IVORY UPDATE: functionality of .fileDesc() is now incorporated in above methods
 
 refClassPrompt <- function(clDef, Rdtxt, nmeths, nslots, .meths.head) {
     ## exclude some sections that are usually irrelevant

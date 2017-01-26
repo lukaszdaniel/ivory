@@ -148,9 +148,8 @@ function(x, centers, iter.max = 10L, nstart = 1L,
 ## modelled on print methods in the cluster package
 print.kmeans <- function(x, ...)
 {
-    tmp_N <- paste(x$size, collapse=", ")
     cat(sprintf(ngettext(length(x$size), "K-means clustering with %d cluster of size %s",
-				"K-means clustering with %d clusters of sizes %s", domain = "R-stats"), length(x$size), tmp_N), "\n", sep = "")
+				"K-means clustering with %d clusters of sizes %s", domain = "R-stats"), length(x$size), paste(x$size, collapse=", ")), "\n", sep = "")
     cat("\n", gettext("Cluster means:", domain = "R-stats"), "\n", sep = "")
     print(x$centers, ...)
     cat("\n", gettext("Clustering vector:", domain = "R-stats"), "\n", sep = "")

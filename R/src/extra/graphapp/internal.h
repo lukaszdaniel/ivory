@@ -263,8 +263,8 @@ struct callinfo
 
 
 /*  Useful definitions.  */
-#include <R_ext/Minmax.h>
 
+#include <R_ext/Minmax.h>
 
 #define MinMenuID  0x0100
 #define MinChildID 0x6000

@@ -511,8 +511,8 @@ setMethod <-
         doMessage <- !isS3Generic(fdef)
         fdef <- getGeneric(f, where = where)
         if(doMessage) {
-        thisPackage <- getPackageName(where)
-#        thisPName <- if(identical(thisPackage, ".GlobalEnv"))
+            thisPackage <- getPackageName(where)
+#            thisPName <- if(identical(thisPackage, ".GlobalEnv"))
 #            gettext("the global environment") else gettextf("package %s", sQuote(thisPackage))
         if(identical(as.character(fdef@package), thisPackage))
 	 if(identical(thisPackage, ".GlobalEnv"))
@@ -845,8 +845,7 @@ selectMethod <-
 		return(methods[[1L]])
 	    else if(optional)
 		return(NULL)
-	    else stop(sprintf(gettext("no method found for signature %s", domain = "R-methods"),
-			       paste(signature, collapse=", ")), domain = NA)
+	    else stop(gettextf("no method found for signature %s", paste(signature, collapse=", "), domain = "R-methods"), domain = NA)
 	}
 	else
 	  return(method)
@@ -860,8 +859,7 @@ selectMethod <-
                  domain = "R-methods")
     }
     else ## mlist not an environment nor NULL :
-	stop("selectMethod(): mlist is not an environment or NULL :\n",
-	     "** should no longer happen!", domain = "R-methods")
+	stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!", domain = "R-methods")
 }
 
 hasMethod <-
@@ -1494,32 +1492,32 @@ registerImplicitGenerics <- function(what = .ImplicitGenericsTable(where),
 	    "<none>"
     }
     if(identical(f2, FALSE))
-	return(gettext("original function is prohibited as a generic function"))
+	return(gettext("original function is prohibited as a generic function", domain = "R-methods"))
     if(!(is.function(f2) && is.function(f1)))
-	return(gettext("not both functions!"))
+	return(gettext("not both functions!", domain = "R-methods"))
     ## environments will be different
     if(!identical(class(f1), class(f2)))
 	return(sprintf("classes: %s, %s",
                        .dQ(class(f1)), .dQ(class(f2))))
     if(!isS4(f1)) return(gettextf("argument %s is not S4",
-                                  deparse(substitute(f1))))
+                                  deparse(substitute(f1)), domain = "R-methods"))
     if(!isS4(f2)) return(gettextf("argument %s is not S4",
-                                  deparse(substitute(f2))))
+                                  deparse(substitute(f2)), domain = "R-methods"))
     f1d <- f1@.Data
     f2d <- f2@.Data
     ## xtra... <- FALSE
     if(!identical(formals(f1d), formals(f2d))) {
 	a1 <- names(formals(f1d)); a2 <- names(formals(f2d))
 	if(identical(a1, a2))
-	    return(gettext("formal arguments differ (in default values?)"))
+	    return(gettext("formal arguments differ (in default values?)", domain = "R-methods"))
 	else if(identical(c(a1, "..."), a2) && allow.extra.dots)
             ## silently accept an extra "..."
             { } ## xtra... <- TRUE
 	    ## and continue
 	else
-	    return(sprintf(gettext("formal arguments differ: (%s), (%s)", domain = "R-methods"),
+	    return(gettextf("formal arguments differ: (%s), (%s)",
 			    paste(a1, collapse = ", "),
-			    paste(a2, collapse = ", ")))
+			    paste(a2, collapse = ", "), domain = "R-methods"))
     }
     if(!identical(f1@valueClass, f2@valueClass))
 	return(gettextf("value classes differ: %s, %s",
@@ -1529,21 +1527,21 @@ registerImplicitGenerics <- function(what = .ImplicitGenericsTable(where),
                   body(utils::removeSource(f2d))))
 	return("function body differs")
     if(!identical(f1@signature, f2@signature))
-	return(sprintf(gettext("signatures differ:  (%s), (%s)", domain = "R-methods"),
+	return(gettextf("signatures differ:  (%s), (%s)",
                         paste(f1@signature, collapse = ", "),
-                        paste(f2@signature, collapse = ", ")))
+                        paste(f2@signature, collapse = ", "), domain = "R-methods"))
     if(!identical(f1@package, f2@package))
 	return(gettextf("package slots  differ: %s, %s",
                         .dQ(gpString(f1@package)),
-                        .dQ(gpString(f2@package))))
+                        .dQ(gpString(f2@package)), domain = "R-methods"))
     if(!identical(f1@group, f2@group)) {
 	return(gettextf("groups differ: %s, %s",
                         .dQ(gpString(f1@group)),
-                        .dQ(gpString(f2@group))))
+                        .dQ(gpString(f2@group)), domain = "R-methods"))
     }
     if(!identical(as.character(f1@generic), as.character(f2@generic)))
 	return(gettextf("generic names differ: %s, %s",
-                        .dQ(f1@generic), .dQ(f2@generic)))
+                        .dQ(f1@generic), .dQ(f2@generic), domain = "R-methods"))
     TRUE
 }
 

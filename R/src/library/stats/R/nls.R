@@ -501,9 +501,8 @@ nls <-
                     stop("no starting values specified")
                 ## Provide some starting values instead of erroring out later;
                 ## '1' seems slightly better than 0 (which is often invalid):
-		tmp_n <- paste(sQuote(nnn), collapse=", ")
                 warning("No starting values specified for some parameters.", "\n",
-                        gettextf("Initializing %s to '1.'.", tmp_n), "\n",
+                        gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse=", ")), "\n",
                         "Consider specifying 'start' or using a selfStart model", domain = "R-stats", sep = "")
 		start <- setNames(as.list(rep_len(1., length(nnn))), nnn)
                 varNames <- varNames[i <- is.na(match(varNames, nnn))]
@@ -511,20 +510,18 @@ nls <-
             }
             else                        # has 'start' but forgot some
 		{
-		tmp_n <- paste(nnn, collapse=", ")
                 stop(gettextf("parameters without starting value in 'data': %s",
-                              tmp_n), domain = "R-stats")
+                              paste(nnn, collapse=", ")), domain = "R-stats")
 		}
         }
     }
     else { ## length(varNames) == 0
 	if(length(pnames) && any((np <- sapply(pnames, lenVar)) == -1)) {
-		tmp_n <- paste(sQuote(pnames[np == -1]), collapse=", ")
             ## Can fit a model with pnames even if no varNames
             message(sprintf(ngettext(sum(np == -1),
                                      "fitting parameter %s without any variables",
                                      "fitting parameters %s without any variables", domain = "R-stats"),
-                            tmp_n),
+                            paste(sQuote(pnames[np == -1]), collapse=", ")),
                     domain = NA)
             n <- integer()
         }

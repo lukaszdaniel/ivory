@@ -27,6 +27,7 @@
 #include <math.h>
 #include <limits.h>
 #include <R.h>
+#include <R_ext/Minmax.h>
 #include "localization.h"
 
 /* Forward declarations */
@@ -62,11 +63,6 @@ void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc);
 
 
 
-#undef min
-#undef max
-
-#define	min(x,y)  ((x) < (y) ? (x) : (y))
-#define	max(x,y)  ((x) > (y) ? (x) : (y))
 #define	GAUSSIAN	1
 #define SYMMETRIC	0
 

@@ -352,10 +352,9 @@ offset <- function(object) object
                           names(old)[wrong], old[wrong], new[wrong]),
                  call. = FALSE, domain = "R-stats")
         else {
-	    tmp_N <- paste(sQuote(names(old)[wrong]), collapse=", ")
             stop(gettextf(
     "variables %s were specified with different types from the fit",
-                 tmp_N),
+                 paste(sQuote(names(old)[wrong]), collapse=", ")),
                  call. = FALSE, domain = "R-stats") }
     }
 }

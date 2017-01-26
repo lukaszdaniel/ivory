@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2017-01-25 23:59\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -347,11 +347,6 @@ msgstr ""
 #: R/methodsTable.R:0
 msgid "** individual arguments' distances:"
 msgstr ""
-
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
-#: R/Methods.R:0
-msgid "** should no longer happen!"
-msgstr "不应该产生**!"
 
 #. R/methodsTable.R: gettextf(" .. method %d: length(sig) = %d < nArg = %d\n", i, length(sig), nArg, domain = "R-methods")
 #: R/methodsTable.R:0
@@ -1285,8 +1280,8 @@ msgid ""
 "move the file or remove the class/method"
 msgstr "保存的环境中出现了不良方法或类别元数据；"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)))
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)))
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"
@@ -1954,13 +1949,13 @@ msgid ""
 "signature"
 msgstr "方法定义里所忽略的正式参数(%s)不能存在于标记"
 
-#. R/Methods.R: gettext("formal arguments differ (in default values?)")
+#. R/Methods.R: gettext("formal arguments differ (in default values?)", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "formal arguments differ (in default values?)"
 msgstr "正式参数不相对(缺省值不一样？)"
 
-#. R/Methods.R: gettext("formal arguments differ: (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("formal arguments differ: (%s), (%s)", paste(a1, collapse = ", "), paste(a2,     collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "formal arguments differ: (%s), (%s)"
@@ -2000,7 +1995,7 @@ msgstr "没有%s这样的泛型函数，因此不能将之删除"
 msgid "generic function supplied was not created for %s"
 msgstr "为\"%s\"找不到泛型函数"
 
-#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic))
+#. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "generic names differ: %s, %s"
@@ -2018,7 +2013,7 @@ msgstr ""
 msgid "got a negative maximum number of frames to look at"
 msgstr "框的最大数不能是负值"
 
-#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)))
+#. R/Methods.R: gettextf("groups differ: %s, %s", .dQ(gpString(f1@group)), .dQ(gpString(f2@group)),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "groups differ: %s, %s"
@@ -2655,7 +2650,7 @@ msgstr "找不到对函数%s和标记%s适用的方法"
 msgid "no method found for function '%s' and signature %s"
 msgstr "函数'%s'和标记%s没有方法"
 
-#. R/Methods.R: gettext("no method found for signature %s", domain = "R-methods")
+#. R/Methods.R: gettextf("no method found for signature %s", paste(signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "no method found for signature %s"
@@ -2775,7 +2770,7 @@ msgstr "非引用类别"
 msgid "not allowed to have test==TRUE and an S4Class definition"
 msgstr "test==TRUE和S4Class定义不能同时存在"
 
-#. R/Methods.R: gettext("not both functions!")
+#. R/Methods.R: gettext("not both functions!", domain = "R-methods")
 #: R/Methods.R:0
 msgid "not both functions!"
 msgstr "不能同时用于两个函数!"
@@ -2849,7 +2844,7 @@ msgid ""
 "allowed"
 msgstr "只能有一个数据对象(原型的参数没有名字)"
 
-#. R/Methods.R: gettext("original function is prohibited as a generic function")
+#. R/Methods.R: gettext("original function is prohibited as a generic function", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "original function is prohibited as a generic function"
@@ -2870,7 +2865,7 @@ msgid ""
 "installed)"
 msgstr ""
 
-#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)))
+#. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)), .dQ(gpString(f2@package)),     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "package slots  differ: %s, %s"
@@ -2927,10 +2922,12 @@ msgstr ""
 msgid "see ?MethodsList. (This warning is shown once per session.)"
 msgstr ""
 
-#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
+#. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
-msgid "selectMethod(): mlist is not an environment or NULL :"
+msgid ""
+"selectMethod(): mlist is not an environment or NULL :\n"
+"** should no longer happen!"
 msgstr "selectMethod(): mlist不是环境也不是空的"
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
@@ -2939,7 +2936,7 @@ msgid ""
 "setting a method over the binding of symbol %s in environment/package %s"
 msgstr "在环境/程輯包%2$s里将符号%1$s的连结重新进行了方法设定"
 
-#. R/Methods.R: gettext("signatures differ:  (%s), (%s)", domain = "R-methods")
+#. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature, collapse = ", "),     paste(f2@signature, collapse = ", "), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "signatures differ:  (%s), (%s)"
@@ -3587,6 +3584,9 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#~ msgid "** should no longer happen!"
+#~ msgstr "不应该产生**!"
 
 #, fuzzy
 #~ msgid ""
