@@ -296,6 +296,12 @@
       \code{standard = "SI"} allow more standard abbreviations than the
       default ones, e.g., for kilo bytes.  From contributions by Henrik
       Bengtsson.
+
+      \item Improved performance and robustness of matrix multiplication
+      using BLAS: DGEMV is now used instead of DGEMM for matrix/vector and
+      vector/matrix multiplication, DGEMM/DGEMV is bypassed when the input
+      has NaN or Inf values, and performance for these input checks has been
+      improved.
     }
   }
 
@@ -475,7 +481,8 @@
       set attributes on \code{\link{NULL}}.
 
       \item Header \file{Rconfig.h} no longer defines
-      \samp{SUPPORT_OPENMP}; use \samp{_OPENMP} as long documented.
+      \samp{SUPPORT_OPENMP}; instead use \samp{_OPENMP} (as documented
+      for a long time).
     }
   }
 
@@ -691,16 +698,16 @@
       \item Bandwidth selectors \code{bw.ucv()} and
       \code{bw.SJ()} gave incorrect answers or incorrectly reported an
       error (because of integer overflow) for inputs longer than
-      46341.  Similarly for \code{b2.bcv()} at length 5793.
+      46341.  Similarly for \code{bw.bcv()} at length 5793.
 
-      Another possible integer overflow is checked and may result in a
-      reported error (rather than an incorrect result) for much longer
+      Another possible integer overflow is checked and may result in an
+      error report (rather than an incorrect result) for much longer
       inputs (millions for a smooth distribution).
 
       \item \code{findMethod} failed if the active signature had
       expanded beyond what a particular package used. (Example with
       packages \CRANpkg{XR} and \CRANpkg{XRJulia} on \acronym{CRAN}).
-   }
+    }
   }
 }
 
