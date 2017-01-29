@@ -2,11 +2,12 @@ useDynLib(nlme, .registration=TRUE)
 
 importFrom("graphics", pairs, par, plot)
 
-importFrom("stats",
+importFrom("stats", # many S3 generics for which we define methods
            AIC, BIC, anova, as.formula, asOneSidedFormula, coef, coefficients,
+           confint,
            contr.SAS, contr.helmert, contr.poly, contr.sum, contr.treatment,
            contrasts, "contrasts<-",
-           delete.response, dist, fitted, formula, lm, logLik,
+           delete.response, dist, fitted, extractAIC, formula, lm, logLik,
            mad, median, model.frame, model.matrix,
            na.fail, na.omit, napredict, naresid,
            nlm, nlminb, nls, nls.control, nobs, optim,
@@ -15,13 +16,19 @@ importFrom("stats",
            resid, residuals, rnorm, runif, simulate, setNames, terms,
            update, update.formula, var, vcov)
 
-importFrom("utils", head, tail, capture.output)
+importFrom("utils", head, tail, capture.output, packageDescription)
 
 importFrom("lattice",
            Rows, bwplot, dotplot, llines, lpoints, lsegments, ltext,
            panel.abline, panel.bwplot, panel.dotplot,  panel.grid,
            panel.histogram, panel.linejoin, panel.loess, panel.superpose,
            panel.xyplot, splom, strip.default, trellis.par.get, xyplot)
+
+if(getRversion() >= "3.3.0") {
+    importFrom("stats", sigma)
+} else {
+    export(sigma)
+}
 
 export(ACF, allCoef, asOneFormula, asTable, augPred, balancedGrouped,
        "coef<-", "coefficients<-", collapse, compareFits,
@@ -126,6 +133,9 @@ S3method(collapse, groupedData)
 S3method(comparePred, gls)
 S3method(comparePred, lme)
 S3method(comparePred, lmList)
+S3method(confint, lme)
+S3method(confint, lmList)
+S3method(confint, nlsList)
 S3method(corFactor, compSymm)
 S3method(corFactor, corAR1)
 S3method(corFactor, corARMA)
@@ -150,6 +160,8 @@ S3method(corMatrix, pdIdent)
 S3method(corMatrix, pdMat)
 S3method(corMatrix, reStruct)
 S3method("covariate<-", varFunc)
+S3method(deviance, gls)
+S3method(deviance, lme)
 S3method(Dim, corSpatial)
 S3method(Dim, corStruct)
 S3method(Dim, default)
@@ -159,6 +171,8 @@ S3method(Dim, pdIdent)
 S3method(Dim, pdMat)
 S3method(Dim, pdNatural)
 S3method(Dim, pdSymm)
+S3method(extractAIC, gls)
+S3method(extractAIC, lme)
 S3method(fitted, gls)
 S3method(fitted, glsStruct)
 S3method(fitted, gnls)
@@ -401,6 +415,9 @@ S3method(residuals, lme)
 S3method(residuals, lmeStruct)
 S3method(residuals, lmList)
 S3method(residuals, nlmeStruct)
+S3method(sigma, gls)
+S3method(sigma, lme)
+S3method(sigma, lmList)
 S3method(simulate, lme)
 S3method(solve, pdBlocked)
 S3method(solve, pdDiag)
@@ -444,6 +461,7 @@ S3method(summary, varFixed)
 S3method(summary, varFunc)
 S3method(summary, varIdent)
 S3method(summary, varPower)
+S3method(terms, gls)
 S3method(update, corStruct)
 S3method(update, gls)
 S3method(update, gnls)

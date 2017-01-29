@@ -18178,16 +18178,17 @@ Test for independence of all factors:
 Gender   Admitted Rejected
   Male       1078     1286
   Female      540     1270
-> xtabs(Freq ~ Gender + Admit, DN, na.action = na.pass) # Fem x Rej : NA
+> xtabs(Freq ~ Gender + Admit, DN, na.action = na.pass)
         Admit
 Gender   Admitted Rejected
   Male       1078     1286
-  Female      540        0
-> xtabs(Freq ~ Gender + Admit, DN, addNA = TRUE) # count and indicate NAs
+  Female      540         
+> ## The Female:Rejected combination has NA 'Freq' (and NA prints 'invisibly' as "")
+> xtabs(Freq ~ Gender + Admit, DN, addNA = TRUE) # ==> count NAs
         Admit
 Gender   Admitted Rejected <NA>
   Male       1078     1286  327
-  Female      540        0    0
+  Female      540             0
   <NA>         17        0    0
 > 
 > ## Create a nice display for the warp break data.

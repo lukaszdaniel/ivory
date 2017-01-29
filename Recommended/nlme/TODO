@@ -15,7 +15,6 @@
 *** stats:::print.summary.lm (x, digits = max(3L, getOption("digits") - 3L),
                               symbolic.cor = x$symbolic.cor,
   			      signif.stars = getOption("show.signif.stars"), ...)
-
 *** 'nlme' should at least *allow* to not compute and print
     so people would use  summary(.)  much more often probably !
     MM thinks the default should even *change* not to print the correlation
@@ -25,4 +24,6 @@
 ** TODO Bug 16806 - nlme getVarCov() fails for corSpatial fits for individuals with a single observation only
 *** https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16806
 
+** TODO methods extractAIC.lme & extractAIC.gls should be here rather than in MASS,
+ because extractAIC() and step() are in stats
 * Priority 5 (nice to have)
