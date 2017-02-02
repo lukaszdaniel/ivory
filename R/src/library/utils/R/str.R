@@ -344,9 +344,9 @@ str.default <-
                            nest.lev = nest.lev + 1,
                            indent.str = paste(indent.str,".."))
 		}
+		if(list.len < le)
+		    cat(indent.str, gettext("[list output truncated]", domain = "R-utils"), "\n", sep = "")
 	    }
-	    if(list.len < le)
-		cat(indent.str, gettext("[list output truncated]", domain = "R-utils"), "\n", sep = "")
 	}
     } else { #- not function, not list
 	if(is.vector(object)
