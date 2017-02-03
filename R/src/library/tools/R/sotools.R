@@ -684,7 +684,10 @@ function(file = "symbols.rds")
     saveRDS(tables, file = file)
 }
 
-package_ff_call_db <- 
+
+### --- Helpers for registering native routines added in R 3.4.0 ---
+
+package_ff_call_db <-
 function(dir)
 {
     ff_call_names <- c(".C", ".Call", ".Fortran", ".External")
@@ -700,7 +703,7 @@ function(dir)
     calls <- unlist(Filter(length, calls))
 
     if(!length(calls)) return(NULL)
-    
+
     attr(calls, "dir") <- dir
     calls
 }
@@ -709,7 +712,7 @@ native_routine_registration_db_from_ff_call_db <-
 function(calls, dir = NULL)
 {
     if(!length(calls)) return(NULL)
-    
+
     ff_call_names <- c(".C", ".Call", ".Fortran", ".External")
     ff_call_args <- lapply(ff_call_names,
                            function(e) args(get(e, baseenv())))
@@ -777,7 +780,7 @@ function(calls, dir = NULL)
     imports <- info$imports
     imports <- imports[lengths(imports) == 2L]
     imports <- unlist(lapply(imports, `[[`, 2L))
-    
+
     info <- info$nativeRoutines[[package]]
     ## First adjust native routine names for explicit remapping or
     ## namespace .fixes.
@@ -799,16 +802,16 @@ function(calls, dir = NULL)
 }
 
 format_native_routine_registration_db_for_skeleton <-
-function(nrdb, align = TRUE)
+function(nrdb, align = TRUE, include_declarations = FALSE)
 {
     if(!length(nrdb))
         return(character())
-    
+
     fmt1 <- function(x, n) {
         c(if(align) {
               paste(format(sprintf("    {\"%s\",", x[, 1L])),
                     format(sprintf(if(n == "Fortran")
-                                       "(DL_FUNC) &F77_SUB(%s),"
+                                       "(DL_FUNC) &F77_NAME(%s),"
                                    else
                                        "(DL_FUNC) &%s,",
                                    x[, 1L])),
@@ -816,7 +819,7 @@ function(nrdb, align = TRUE)
                            justify = "right"))
           } else {
               sprintf(if(n == "Fortran")
-                          "    {\"%s\", (DL_FUNC) &F77_SUB(%s), %d},"
+                          "    {\"%s\", (DL_FUNC) &F77_NAME(%s), %d},"
                       else
                           "    {\"%s\", (DL_FUNC) &%s, %d},",
                       x[, 1L],
@@ -827,12 +830,12 @@ function(nrdb, align = TRUE)
     }
 
     package <- attr(nrdb, "package")
-    
+
     nrdb <- split(nrdb[, -1L, drop = FALSE],
                   factor(nrdb[, 1L],
                          levels =
                              c(".C", ".Call", ".Fortran", ".External")))
-    
+
     has <- vapply(nrdb, NROW, 0L) > 0L
     nms <- names(nrdb)
     entries <- substring(nms, 2L)
@@ -845,13 +848,46 @@ function(nrdb, align = TRUE)
                   },
                   nrdb[has],
                   entries[has])
+
+    decls <- c(
+        "/* FIXME: ",
+        "   Add declarations for the native routines registered below.",
+        "*/")
+
+    if(include_declarations) {
+        decls <- c(
+            "/* FIXME: ",
+            "   Check these declarations against the C/Fortran source code.",
+            "*/",
+            if(NROW(y <- nrdb$.C)) {
+                 args <- sapply(y$n, function(n)
+                                paste(rep("void *", n), collapse=", "))
+                c("", "/* .C calls */",
+                  paste0("extern void ", y$s, "(", args, ");"))
+           },
+            if(NROW(y <- nrdb$.Call)) {
+                args <- sapply(y$n, function(n)
+                               paste(rep("SEXP", n), collapse=", "))
+                c("", "/* .Call calls */",
+                  paste0("extern SEXP ", y$s, "(", args, ");"))
+            },
+            if(NROW(y <- nrdb$.Fortran)) {
+                 args <- sapply(y$n, function(n)
+                                paste(rep("void *", n), collapse=", "))
+                c("", "/* .Fortran calls */",
+                  paste0("extern void F77_NAME(", y$s, ")(", args, ");"))
+            },
+            if(NROW(y <- nrdb$.External))
+                c("", "/* .External calls */",
+                  paste0("extern SEXP ", y$s, "(SEXP);"))
+            )
+    }
+
     c("#include <R.h>",
       "#include <Rinternals.h>",
       "#include <R_ext/Rdynload.h>",
       "",
-      "/* FIXME: ",
-      "   Add declarations for the native routines registered below.",
-      "*/",
+      decls,
       "",
       unlist(blocks, use.names = FALSE),
       sprintf("void R_init_%s(DllInfo *dll)", package),
@@ -873,10 +909,10 @@ function(dir)
 }
 
 package_native_routine_registration_skeleton <-
-function(dir, con = stdout(), align = TRUE)
+function(dir, con = stdout(), align = TRUE, include_declarations = FALSE)
 {
     nrdb <- package_native_routine_registration_db(dir)
     writeLines(format_native_routine_registration_db_for_skeleton(nrdb,
-                                                                  align),
+                align, include_declarations),
                con)
 }

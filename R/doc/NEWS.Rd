@@ -313,6 +313,10 @@
 
       \item \code{read.dcf()} now consistently interprets any
       \sQuote{whitespace} to be stripped to include newlines.
+
+      \item The maximum number of DLLs that can be loaded into R e.g. via
+      dyn.load can now be increased by setting the environment variable
+      \code{R_MAX_NUM_DLLS} before starting R.
     }
   }
 
@@ -725,9 +729,6 @@
 
       \item \code{qbeta()} underflowed too early in some very asymmetric
       cases.  (\PR{17178})
-
-      \item \command{R CMD build} no longer wraps a \samp{BugReports}
-      field containing a long URL, which made it unusable in \R <= 3.3.2.
     }
   }
 }
