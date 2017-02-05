@@ -38,12 +38,29 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   needs to be added to enable registration, conventionally as file
   \file{src/init.c} or appended to the sole C file of the package.
 
+  If the number of arguments cannot be determined by the code it will
+  be recorded as \code{-1}: such values should be corrected.
+
   Optionally the skeleton will include declarations for the registered
   routines: they should be checked against the C/Fortran source code,
   not least as the number of arguments is taken from the \R code.
   For \code{.Call} and \code{.External} calls they will often suffice,
   but for \code{.C} and \code{.Fortran} calls the \code{void *}
-  arguments should be replaced by the actual types.
+  arguments should be replaced by the actual types.  Otherwise
+  declarations need to be included (they may exist earlier in the file
+  if appending to a file, or in a header file which can be included in
+  \file{init.c}).
+
+  If an entry point is used with different numbers of arguments in the
+  package's \R code, an entry in the table (and optionally, a
+  declaration) is made for each number, and a comment placed in the
+  output.  Obviously this needs to be resolved: only \code{.External}
+  calls can have a variable number of arguments, which should be
+  declared as \code{-1}.
+
+  A surprisingly large number of \acronym{CRAN} packages had calls in \R
+  code to native routines not included in the packages, which will lead
+  to a compilation error when registration C code is added.
 }
 
 \value{
@@ -58,6 +75,10 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   On the other hand, it will fail to find the entry points in
   constructs like \preformatted{
     .Call(if(int) "rle_i" else "rle_d", i, force)
+  }
+  and does not know the value of variables in calls like \preformatted{
+    .Call (cfunction, ...)
+    .Call(..., PACKAGE="sparseLTSEigen")
   }
 
   Call to entry points in other packages will be skipped if they have an
