@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -2939,11 +2939,12 @@ msgstr "zobacz '?MethodsList'. (To ostrzeżenie jest pokazane raz na sesję.)"
 
 #. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
-#, fuzzy
 msgid ""
 "selectMethod(): mlist is not an environment or NULL :\n"
 "** should no longer happen!"
-msgstr "selectMethod(): 'mlist' nie jest ani środowiskiem ani wartością NULL:"
+msgstr ""
+"selectMethod(): 'mlist' nie jest ani środowiskiem ani wartością NULL:\n"
+"** nie powinno się to więcej powtórzyć!"
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
 #: R/trace.R:0

@@ -408,7 +408,7 @@ msgstr "(każdy pakiet pojawia się tylko raz)"
 #. R/SweaveDrivers.R: gettext("(missing #line/file info)", domain = "R-utils")
 #: R/SweaveDrivers.R:0
 msgid "(missing #line/file info)"
-msgstr ""
+msgstr "(informacja o brakującej linii/pliku)"
 
 #. R/str.R: gettextf(", mode %s:", dQuote(mod))
 #: R/str.R:0
@@ -769,7 +769,7 @@ msgstr "Filtr '%s' nie jest dostępny."
 #. R/object.size.R: stop("For SI units, specify 'standard = \"SI\"'")
 #: R/object.size.R:0
 msgid "For SI units, specify 'standard = \"SI\"'"
-msgstr ""
+msgstr "Dla jednostek układu SI, wybierz 'standard = \"SI\"'"
 
 #. R/package.skeleton.R: gettextf("Further steps are described in '%s'.", file.path(dir, "Read-and-delete-me"))
 #: R/package.skeleton.R:0
@@ -1425,7 +1425,6 @@ msgstr ""
 
 #. R/bug.report.R: gettextf("\nThis package has a bug submission web page, which we will now attempt\nto open.  The information above may be useful in your report.\nIf the web page does not work, you should send email to the maintainer,\n%s.",     DESC$Maintainer, domain = "R-utils")
 #: R/bug.report.R:0
-#, fuzzy
 msgid ""
 "This package has a bug submission web page, which we will now attempt\n"
 "to open.  The information above may be useful in your report.\n"
@@ -1497,7 +1496,7 @@ msgstr ""
 #. R/object.size.R: gettextf("Unit %s is not part of standard %s", sQuote(units), sQuote(standard))
 #: R/object.size.R:0
 msgid "Unit %s is not part of standard %s"
-msgstr ""
+msgstr "Jednostka %s nie jest częścią standardu %s"
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0

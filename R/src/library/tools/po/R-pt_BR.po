@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:38\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -594,12 +594,6 @@ msgstr ""
 #. R/utils.R: gettext("BibTeX errors:")
 #: R/utils.R:0
 msgid "BibTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("BugReports field has an empty first line and will not work in R <= 3.3.2",     domain = "R-tools")
-#: R/check.R:0
-msgid ""
-"BugReports field has an empty first line and will not work in R <= 3.3.2"
 msgstr ""
 
 #. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
@@ -5095,6 +5089,11 @@ msgstr ""
 #. R/Rd2pdf.R: message("no inputs")
 #: R/Rd2pdf.R:0
 msgid "no inputs"
+msgstr ""
+
+#. R/sotools.R: stop("no native symbols were extracted")
+#: R/sotools.R:0
+msgid "no native symbols were extracted"
 msgstr ""
 
 #. R/checktools.R: message("no packages to check")

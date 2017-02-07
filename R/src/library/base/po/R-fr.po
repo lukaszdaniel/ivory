@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:37\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1652,10 +1652,10 @@ msgstr ""
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "la longueur des arguments diffère"
 
-#. R/library.R: gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion,     domain = "R-base")
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded: %s", sQuote(package), oldversion,     conditionMessage(e))
 #: R/library.R:0
 #, fuzzy
-msgid "Package %s version %s cannot be unloaded"
+msgid "Package %s version %s cannot be unloaded: %s"
 msgstr "la package %s n'est pas chargé"
 
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
@@ -3178,10 +3178,10 @@ msgid ""
 "to be reinstalled for use with this R version"
 msgstr ""
 
-#. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
+#. R/library.R: gettextf("package or namespace load failed for %s: %s", sQuote(package), conditionMessage(e))
 #: R/library.R:0
 #, fuzzy
-msgid "package or namespace load failed for package %s"
+msgid "package or namespace load failed for %s: %s"
 msgstr "le chargement du package / espace de noms a échoué pour %s"
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -750,13 +750,6 @@ msgstr ""
 #. R/utils.R: gettext("BibTeX errors:")
 
 msgid "BibTeX errors:"
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettext("BugReports field has an empty first line and will not work in R <= 3.3.2",     domain = "R-tools")
-
-msgid "BugReports field has an empty first line and will not work in R <= 3.3.2"
 msgstr ""
 
 
@@ -6631,6 +6624,13 @@ msgstr ""
 #. R/Rd2pdf.R: message("no inputs")
 
 msgid "no inputs"
+msgstr ""
+
+
+#: R/sotools.R: 0
+#. R/sotools.R: stop("no native symbols were extracted")
+
+msgid "no native symbols were extracted"
 msgstr ""
 
 

@@ -53,23 +53,29 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
   not least as the number of arguments is taken from the \R code.  For
   \code{.Call} and \code{.External} calls they will often suffice, but
   for \code{.C} and \code{.Fortran} calls the \code{void *} arguments
-  should be replaced by the actual types.  Otherwise declarations need
-  to be included (they may exist earlier in that file if appending to a
-  file, or in a header file which can be included in \file{init.c}).
+  would ideally be replaced by the actual types.  Otherwise declarations
+  need to be included (they may exist earlier in that file if appending
+  to a file, or in a header file which can be included in
+  \file{init.c}).
   
   The default value of \code{character_only} is appropriate when working
   on a package without any existing registration: \code{character_only =
   FALSE} can be used to suggest updates for a package which has been
   extended since registration.  For the default value, if \code{.NAME}
-  values are found which are not character strings this is noted via a
-  comment in the output.
+  values are found which are not character strings (e.g.\sspace{}names
+  or expressiions) this is noted via a comment in the output.
+
+  Packages which used the earlier form of creating \R objects for native
+  symbols \emph{via} additional arguments in a \code{useDynLib}
+  directive will probably most easily be updated to use registration
+  with \code{character_only = FALSE}.
 
   If an entry point is used with different numbers of arguments in the
   package's \R code, an entry in the table (and optionally, a
   declaration) is made for each number, and a comment placed in the
-  output.  Obviously this needs to be resolved: only \code{.External}
-  calls can have a variable number of arguments, which should be
-  declared as \code{-1}.
+  output.  This needs to be resolved: only \code{.External} calls can
+  have a variable number of arguments, which should be declared as
+  \code{-1}.
 
   A surprisingly large number of \acronym{CRAN} packages had calls in \R
   code to native routines not included in the package, which will lead
@@ -95,7 +101,8 @@ package_native_routine_registration_skeleton(dir, con = stdout(),
     .Call (cfunction, ...)
     .Call(..., PACKAGE="sparseLTSEigen")
   } (but if \code{character_only} is false, will extract the first as
-  \code{"cfunction"}).
+  \code{"cfunction"}).  Calls which have not been fully resolved will be
+  noted \emph{via} comments in the output file.
 
   Call to entry points in other packages will be ignored if they have an
   explicit (character string) \code{PACKAGE} argument.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:38\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -641,12 +641,6 @@ msgstr "문서 객체 '%s'내에서 올바르지 않은 \\usage 라인들을 찾
 #. R/utils.R: gettext("BibTeX errors:")
 #: R/utils.R:0
 msgid "BibTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("BugReports field has an empty first line and will not work in R <= 3.3.2",     domain = "R-tools")
-#: R/check.R:0
-msgid ""
-"BugReports field has an empty first line and will not work in R <= 3.3.2"
 msgstr ""
 
 #. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
@@ -5360,6 +5354,11 @@ msgstr "패키지 %s에 대한 예제를 찾을 수 없습니다"
 #: R/Rd2pdf.R:0
 msgid "no inputs"
 msgstr "입력이 없습니다"
+
+#. R/sotools.R: stop("no native symbols were extracted")
+#: R/sotools.R:0
+msgid "no native symbols were extracted"
+msgstr ""
 
 #. R/checktools.R: message("no packages to check")
 #: R/checktools.R:0

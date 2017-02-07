@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.9\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -478,7 +478,6 @@ msgstr "argumenty '%s', '%s' oraz '%s' muszą mieć tę samą długość"
 
 #. R/smspline.R: message("'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' function")
 #: R/smspline.R:0
-#, fuzzy
 msgid ""
 "'.nknots.smspl()' function is now exported; use it instead of 'n.knots()' "
 "function"
@@ -524,12 +523,12 @@ msgstr ""
 
 #. R/smspline.R: warning("'all.knots' argument is vector of knots; 'nknots' specification is disregarded")
 #: R/smspline.R:0
-#, fuzzy
 msgid ""
 "'all.knots' argument is vector of knots; 'nknots' specification is "
 "disregarded"
 msgstr ""
-"argument 'all.knots' ma wartość TRUE; specyfikacja 'nknots' została odrzucona"
+"argument 'all.knots' jest wektorem węzłów; specyfikacja 'nknots' została "
+"odrzucona"
 
 #. R/HoltWinters.R: stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
 #: R/HoltWinters.R:0
@@ -880,9 +879,8 @@ msgstr "'newdata' musi być macierzą lub ramką danych"
 
 #. R/smspline.R: stop("'nknots' argument must be numeric (in {1,..,n})")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'nknots' argument must be numeric (in {1,..,n})"
-msgstr "'nknots' musi być liczbą (w przedziale {1,..,n})"
+msgstr "argument 'nknots' musi być liczbą (w przedziale {1,..,n})"
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
 #: R/ppr.R:0
@@ -2471,9 +2469,8 @@ msgstr "Liczba obiektów:"
 
 #. R/smspline.R: stop("Numeric 'all.knots' argument must be strictly increasing")
 #: R/smspline.R:0
-#, fuzzy
 msgid "Numeric 'all.knots' argument must be strictly increasing"
-msgstr "argument 'n' musi być ściśle dodatni"
+msgstr "Liczbowy argument 'all.knots' musi być ściśle rosnący"
 
 #. R/constrOptim.R: gettextf("Objective function decreased at outer iteration %d", i)
 #: R/constrOptim.R:0
@@ -2626,15 +2623,13 @@ msgstr "Korelacja Pearsona"
 
 #. R/smspline.R: gettextf("Penalized Criterion (RSS): %s", format(x$pen.crit, digits = digits), domain = "R-stats")
 #: R/smspline.R:0
-#, fuzzy
 msgid "Penalized Criterion (RSS): %s"
-msgstr "Kryterium kary: %s"
+msgstr "Kryterium kary (RSS): %s"
 
 #. R/smspline.R: gettextf("Penalized Criterion (weightedRSS): %s", format(x$pen.crit, digits = digits),     domain = "R-stats")
 #: R/smspline.R:0
-#, fuzzy
 msgid "Penalized Criterion (weightedRSS): %s"
-msgstr "Kryterium kary: %s"
+msgstr "Kryterium kary (ważone RSS): %s"
 
 #. R/ts-tests.R: gettext("Phillips-Perron Unit Root Test")
 #: R/ts-tests.R:0
@@ -5474,9 +5469,8 @@ msgstr "zmienna zależna nie jest dozwolona w formule"
 #. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
 #. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
 #: R/smspline.R:0
-#, fuzzy
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
-msgstr "potrzeba wyniku 'smooth.spline(keep.data=TRUE)'"
+msgstr "wynik 'smooth.spline(keep.data = TRUE)' jest wymagany"
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0

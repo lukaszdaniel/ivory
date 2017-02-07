@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
 #: R/cmp.R:0
@@ -178,7 +178,7 @@ msgstr ""
 #. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName, value)
 #: R/cmp.R:0
 msgid "invalid environment variable value: %s==%s"
-msgstr ""
+msgstr "nieprawidłowa wartość zmiennej środowiskowej: %s==%s"
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")

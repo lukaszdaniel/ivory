@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:38\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -634,12 +634,6 @@ msgstr "Ungültige \\usage Zeile im Dokuobjekt '%s' gefunden:"
 #. R/utils.R: gettext("BibTeX errors:")
 #: R/utils.R:0
 msgid "BibTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("BugReports field has an empty first line and will not work in R <= 3.3.2",     domain = "R-tools")
-#: R/check.R:0
-msgid ""
-"BugReports field has an empty first line and will not work in R <= 3.3.2"
 msgstr ""
 
 #. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
@@ -5465,6 +5459,11 @@ msgstr "Keine Beispiele zum Paket %s gefunden"
 #: R/Rd2pdf.R:0
 msgid "no inputs"
 msgstr "keine Eingaben"
+
+#. R/sotools.R: stop("no native symbols were extracted")
+#: R/sotools.R:0
+msgid "no native symbols were extracted"
+msgstr ""
 
 #. R/checktools.R: message("no packages to check")
 #: R/checktools.R:0

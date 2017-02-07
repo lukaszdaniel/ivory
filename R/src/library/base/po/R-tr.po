@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-02-07 06:37\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1514,9 +1514,9 @@ msgstr ""
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr ""
 
-#. R/library.R: gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion,     domain = "R-base")
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded: %s", sQuote(package), oldversion,     conditionMessage(e))
 #: R/library.R:0
-msgid "Package %s version %s cannot be unloaded"
+msgid "Package %s version %s cannot be unloaded: %s"
 msgstr ""
 
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
@@ -2910,9 +2910,9 @@ msgid ""
 "to be reinstalled for use with this R version"
 msgstr ""
 
-#. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
+#. R/library.R: gettextf("package or namespace load failed for %s: %s", sQuote(package), conditionMessage(e))
 #: R/library.R:0
-msgid "package or namespace load failed for package %s"
+msgid "package or namespace load failed for %s: %s"
 msgstr ""
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
