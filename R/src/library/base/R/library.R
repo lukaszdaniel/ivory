@@ -1,7 +1,7 @@
 #  File src/library/base/R/library.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -264,10 +264,14 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                     if (newversion != oldversion) {
                     	## No, so try to unload the previous one
                     	res <- tryCatch(unloadNamespace(package),
-					error = function(e)
-					    stop(gettextf("Package %s version %s cannot be unloaded: %s",
-							  sQuote(package), oldversion, conditionMessage(e)),
-						 domain = "R-base"))
+					error = function(e) {
+					    P <- if(!is.null(cc <- conditionCall(e)))
+						     gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+						 else gettext("Error: ", domain = "R-base")
+					    stop(gettextf("Package %s version %s cannot be unloaded:\n %s",
+							  sQuote(package), oldversion,
+							  paste0(P, conditionMessage(e),"\n"), domain = "R-base"),
+						 domain = NA)})
                     }
                 }
 		tt <- tryCatch({
@@ -275,10 +279,14 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                     ns <- loadNamespace(package, lib.loc)
                     env <- attachNamespace(ns, pos = pos, deps)
 		}, error = function(e) {
-		    if (!logical.return)
-			stop(gettextf("package or namespace load failed for %s: %s",
-				      sQuote(package), conditionMessage(e)),
-			     call. = FALSE, domain = "R-base")
+		    if(!is.null(cc <- conditionCall(e))) {
+		      msg <- gettextf("package or namespace load failed for %s in %s:\n %s", sQuote(package), paste(deparse(cc)[1L], collapse = "", sep = ""),  conditionMessage(e), domain = "R-base")
+		    } else {
+		      msg <- gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e), domain = "R-base")
+		    }
+		    if(logical.return)
+			message(gettext("Error:", domain = "R-base"), msg, domain = NA) # returns NULL
+		    else stop(msg, call. = FALSE, domain = NA)
 		})
 		if(logical.return && is.null(tt))
 		    return(FALSE)

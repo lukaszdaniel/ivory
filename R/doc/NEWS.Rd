@@ -50,6 +50,18 @@
       logical option \code{addNA} allows to count \code{NA}s where
       appropriate.  Additionally, for the case \code{sparse = TRUE}, the
       result's \code{dimnames} are identical to the default case's.
+
+      \item Matrix products now consistently bypass BLAS when the inputs
+      have NaN/Inf values. Performance of the check of inputs has been
+      improved. Performance when BLAS is used is improved for matrix/vector
+      and vector/matrix multiplication (DGEMV is now used instead of DGEMM).
+
+      One can now choose from alternative matrix product implementations via
+      \code{options(matprod = )}.  The \code{"internal"} implementation is
+      unoptimized but consistent in precision with other summation in R
+      (uses \code{long double} accumulators).  \code{"blas"} calls BLAS
+      directly for best performance, yet usually with undefined behavior for
+      inputs with NaN/Inf.
     }
   }
 
@@ -302,12 +314,6 @@
       \code{validObject} will be called automatically from the
       default initialization method for reference classes.
 
-      \item Improved performance and robustness of matrix multiplication
-      using BLAS: DGEMV is now used instead of DGEMM for matrix/vector and
-      vector/matrix multiplication, ZGEMM/DGEMM/DGEMV is bypassed when the
-      input has NaN or Inf values, and performance for these input checks has
-      been improved.
-
       \item \code{tapply()} gets new option \code{default = NA}
       allowing to change the previously hardcoded value.
 
@@ -384,6 +390,8 @@
       packages, e.g.\sspace50 packages called entry points with varying
       numbers of arguments and 65 packages called entry points not in
       the package.)
+      %% 235 fail out of 2460, with 15 others working with
+      %% character_only = FALSE.
     }
   }
 
@@ -426,7 +434,8 @@
       \item If available, the POSIX 2008 system call \code{utimensat}
       will be used by \code{Sys.setFileTime()} and
       \code{file.copy(copy.date = TRUE)}.  This may result in slightly
-      more accurate file times.
+      more accurate file times.  (It is available on Linux and FreeBSD
+      but not macOS nor Solaris.)
     }
   }
 
