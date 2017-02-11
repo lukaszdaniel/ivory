@@ -209,8 +209,8 @@ ce85ee2aba7d78e88fef738a0d1c7118 *tests/base-matrix-fun.R
 92213c349590000081de59b1fb21bebe *tests/Class+Meth.R
 4966b9ac5a23de46814439a84174973b *tests/abIndex-tsts.R
 d3896ab8dd5cc88f7a66eff69fb119f2 *tests/validObj.R
-4f4d1dfcc8e0de2c6a0640c921de0932 *tests/indexing.Rout.save
-cef7b2230e850b204f6722026ed2bf2a *tests/bind.Rout.save
+7c155b76385b723a6115a150fb528b71 *tests/indexing.Rout.save
+3bc485f3dcb17ff3af008bb0d21c95ce *tests/bind.Rout.save
 f2ad5375e270deeb7b041272dd095032 *cleanup
 952b2122422438fe96f3e8f08056b99a *R/eigen.R
 b00fe8a1183a02e0059ddb4045e8b1b9 *R/dgTMatrix.R

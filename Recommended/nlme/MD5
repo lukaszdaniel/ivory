@@ -284,8 +284,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-227905154e25c002ac3a96ce5f391351 *ChangeLog
-6835b24439cbdf2e1ebd8afb0c79a6fa *DESCRIPTION
+619e9a9dc95cda0c3181e8e163949f9a *ChangeLog
+da35d5fd4963939743ed38366ad52112 *DESCRIPTION
 1263278c88a96ea4a7f4ca6250486f57 *po/R-fr.po
 bc8c6b45de2722869038e12bc81277fc *po/R-ko.po
 efc4067c10e5c828813e22b41d1c2afd *po/R-de.po
@@ -325,7 +325,7 @@ f1a1b0e9e331e825486a6c33fc3e9134 *inst/po/de/LC_MESSAGES/R-nlme.mo
 288260d4e0f679d5d51eb982ad5be4f8 *tests/deparse.R
 4378c87c973e3e4d865be4cbf3df3610 *tests/lmList.R
 395bfa0ee325c0e8b45d76b851e56b23 *tests/augPred_lab.R
-2b641064929a96a1653df4078acd54c1 *tests/sigma-fixed-etc.R
+c924556ceeacda19874796b7c160794b *tests/sigma-fixed-etc.R
 639e9b20186b1cef4c0adb6bf75b7bb0 *tests/data.frame.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R
 76d9ab62c0e13149aa5927aeae01715a *tests/lme.R
@@ -339,11 +339,11 @@ fbc3578ce2cb6c7873734d6dc39f7e21 *tests/nlme.R
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 1dcb40c8ec95980cb02af27cd02a6c8b *tests/predict.lme.R
-2a90a284a34e0ab13737690a054393a2 *tests/lme.Rout.save
+04ee49fb747791d7f814aff142e3cc24 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 743614ba47af2cfd64c7f15b06d8ede9 *tests/anova.gls.R
-62243cd1669de7cdd3773b94af65d071 *tests/coef.Rout.save
-9ed30017c0a2e8f61faf399bb0affca6 *tests/missing.Rout.save
+96f6cc406beb0024ba2cc90f4de0b246 *tests/coef.Rout.save
+a4fb04f38fbda338d121a6918fe09685 *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 983a211f5ce1f86238b827a45974bfa1 *R/varFunc.R

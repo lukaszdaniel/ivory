@@ -192,10 +192,10 @@ cfe49768ecb548ac7f483e75ce75d0e0 *inst/NEWS
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
 8d87026da3c153e0fa65eb33c150d072 *tests/lme.R
-a4a3d28a3c403d3544c55e2d16caf994 *tests/fitdistr.Rout.save
+8162102a472abfbfa64aa7390d10f79a *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
-75e32e957743515d29cdbebd1304a2f2 *tests/regression.Rout.save
+476e749926ff6f5ca6bf42790253424b *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
 56792b626bf62ab63a5b087c09b7bff7 *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
