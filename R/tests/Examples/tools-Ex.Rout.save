@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-02-10 r935) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-02-11 r936) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-02-10 r72157) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-02-11 r72157) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -49,7 +49,7 @@ Type 'q()' to quit R.
 > ## End (Don't show)
 > pdb <- CRAN_package_db()
 > dim(pdb)
-[1] 10072    65
+[1] 10081    65
 > ## DESCRIPTION fields included:
 > colnames(pdb)
  [1] "Package"                 "Version"                
@@ -88,7 +88,7 @@ Type 'q()' to quit R.
 > ## Summarize publication dates:
 > summary(as.Date(pdb$Published))
         Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
-"2005-10-29" "2014-10-24" "2016-02-18" "2015-08-11" "2016-10-10" "2017-02-11" 
+"2005-10-29" "2014-10-25" "2016-02-19" "2015-08-12" "2016-10-11" "2017-02-13" 
 > ## Summarize numbers of packages according to maintainer:
 > summary(lengths(split(pdb$Package, pdb$Maintainer)))
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -112,18 +112,18 @@ Type 'q()' to quit R.
                                    Status
 Flavor                              ERROR FAIL NOTE   OK WARN
   r-devel-linux-x86_64-debian-clang   102    0 3341 6493  119
-  r-devel-linux-x86_64-debian-gcc      97    0 3346 6491  117
-  r-devel-linux-x86_64-fedora-clang    73    0 3871 5984  123
-  r-devel-linux-x86_64-fedora-gcc      62    0 3926 5950  115
-  r-devel-macos-x86_64-clang           73    0 3701 6119  123
-  r-devel-windows-ix86+x86_64         102   14 3459 6262  172
+  r-devel-linux-x86_64-debian-gcc      64    0 3338 6552  112
+  r-devel-linux-x86_64-fedora-clang    72    0 3874 5990  124
+  r-devel-linux-x86_64-fedora-gcc      60    0 3930 5958  114
+  r-devel-macos-x86_64-clang           75    0 3702 6123  125
+  r-devel-windows-ix86+x86_64          94    4 3458 6291  177
   r-patched-linux-x86_64               41    0 3366 6614   34
-  r-patched-solaris-sparc             219    0 3716 5864  116
-  r-patched-solaris-x86               184    0 3722 5929  111
-  r-release-linux-x86_64               41    0 3369 6610   35
-  r-release-osx-x86_64-mavericks      198    9 3764 5722  366
-  r-release-windows-ix86+x86_64        80    6 3475 6421   47
-  r-oldrel-windows-ix86+x86_64        199    7 2209 7391   49
+  r-patched-solaris-sparc             219    0 3718 5871  116
+  r-patched-solaris-x86               184    0 3723 5940  111
+  r-release-linux-x86_64               38    0 3365 6633   32
+  r-release-osx-x86_64-mavericks      198    9 3761 5737  367
+  r-release-windows-ix86+x86_64        79    4 3475 6435   47
+  r-oldrel-windows-ix86+x86_64        199    6 2213 7397   49
 > 
 > details <- CRAN_check_details()
 > ## Available variables:
@@ -136,14 +136,13 @@ Flavor                              ERROR FAIL NOTE   OK WARN
 +               ((Check == "whether package can be installed") &
 +                (Status != "OK")))
 > head(bad[sample(seq_len(NROW(bad)), NROW(bad)), ])
-Package: powell 1.0-0
+Package: pvrank 1.1.1
 Flavor: r-devel-macos-x86_64-clang
 Flags: --no-stop-on-test-error
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    powell.c:700:14: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
-    powell.c:724:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]
-  See ‘/Users/ripley/R/packages/tests-devel/powell.Rcheck/00install.out’ for details.
+    Warning: GNU Extension: Symbol ‘n’ is used before it is typed at (1)
+  See ‘/Users/ripley/R/packages/tests-devel/pvrank.Rcheck/00install.out’ for details.
 
 Package: AMModels 0.1.1
 Flavor: r-devel-linux-x86_64-debian-clang
@@ -152,11 +151,11 @@ Check: whether package can be installed, Result: WARNING
     Warning: namespace ‘unmarked’ is not available and has been replaced
   See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/AMModels.Rcheck/00install.out’ for details.
 
-Package: hBayesDM 0.3.0
+Package: LatentREGpp 0.2.2
 Flavor: r-patched-solaris-x86
 Check: whether package can be installed, Result: ERROR
   Installation failed.
-  See ‘/home/ripley/R/packages/tests32/hBayesDM.Rcheck/00install.out’ for details.
+  See ‘/home/ripley/R/packages/tests32/LatentREGpp.Rcheck/00install.out’ for details.
 
 Package: EMMIXskew 1.0.1
 Flavor: r-devel-linux-x86_64-debian-clang
@@ -165,19 +164,19 @@ Check: whether package can be installed, Result: WARNING
     Warning: Integer division truncated to constant ‘1’ at (1) [-Winteger-division]
   See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/EMMIXskew.Rcheck/00install.out’ for details.
 
-Package: survrec 1.2-2
+Package: stpp 1.0-5
 Flavor: r-devel-linux-x86_64-debian-clang
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
     Warning: GNU Extension: Nonstandard type declaration REAL*8 at (1)
-  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/survrec.Rcheck/00install.out’ for details.
+    Warning: ‘pi’ is used uninitialized in this function [-Wuninitialized]
+  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/stpp.Rcheck/00install.out’ for details.
 
-Package: NAPPA 2.0.1
+Package: odbc 1.0.1
 Flavor: r-oldrel-windows-ix86+x86_64
-Check: whether package can be installed, Result: WARNING
-  Found the following significant warnings:
-    Warning: failed to assign NativeSymbolInfo for env since env is already defined in the 'lazyeval' namespace
-  See 'd:/Rcompile/CRANpkg/local/3.2/NAPPA.Rcheck/00install.out' for details.
+Check: whether package can be installed, Result: ERROR
+  Installation failed.
+  See 'd:/Rcompile/CRANpkg/local/3.2/odbc.Rcheck/00install.out' for details.
 > 
 > mtnotes <- CRAN_memtest_notes()
 > head(mtnotes)
@@ -210,3274 +209,261 @@ $BASIX
 > table(do.call(rbind, mtnotes)[, "Test"])
 
  clang-ASAN clang-UBSAN   gcc6-ASAN  gcc6-UBSAN   gcc7-ASAN  gcc7-UBSAN 
-         41         121          25          76          26          76 
+         41         123          25          78          26          78 
        Keep    valgrind 
-          4         125 
+          4         124 
 > 
 > ## Summarize CRAN check status for 10 random packages
 > ## (reusing the information already read in):
 > pos <- sample(seq_len(NROW(pdb)), 10L)
 > summarize_CRAN_check_status(pdb[pos, "Package"],
 +                             results, details, mtnotes)
-Package: DivMelt
+Package: censReg
 ****************
-
-Current CRAN status: ERROR: 1, NOTE: 12
-See: <https://CRAN.R-project.org/web/checks/check_results_DivMelt.html>
-
-Version: 1.0.3
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘glmnet’ which was already attached by Depends.
-    Please remove these calls from your code.
-  Packages in Depends field not imported from:
-    ‘glmnet’ ‘tcltk’
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: R code for possible problems, Result: NOTE
-  DivMelt_gui: no visible global function definition for ‘tktoplevel’
-  DivMelt_gui: no visible global function definition for ‘tkwm.title’
-  DivMelt_gui: no visible global function definition for ‘tkwm.geometry’
-  DivMelt_gui: no visible global function definition for ‘tkfont.create’
-  DivMelt_gui: no visible global function definition for ‘tclVar’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkframe’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘setTkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘tcl’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘setTkProgressBar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : inputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkradiobutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : plottingDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkscale’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : analysisDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : outputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tcl’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkscrollbar’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkyview’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tklistbox’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkset’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkinsert’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkcurselection’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkgetSaveFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tkchooseDirectory’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tkchooseDirectory’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : helpDialog: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui: no visible global function definition for ‘tkwidget’
-  DivMelt_gui: no visible global function definition for ‘tkbutton’
-  DivMelt_gui: no visible global function definition for ‘tkgrid’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.rowconfigure’
-  DivMelt_gui: no visible global function definition for ‘tkfocus’
-  modelDivMelt: no visible global function definition for ‘read.csv’
-  modelDivMelt: no visible global function definition for ‘cv.glmnet’
-  modelDivMelt: no visible global function definition for ‘predict’
-  modelDivMelt: no visible global function definition for ‘coef’
-  processDivMelt: no visible global function definition for ‘data’
-  processDivMelt: no visible global function definition for ‘pdf’
-  processDivMelt: no visible global function definition for ‘layout’
-  processDivMelt: no visible global function definition for ‘par’
-  processDivMelt: no visible global function definition for ‘png’
-  processDivMelt: no visible global function definition for ‘plot.new’
-  processDivMelt: no visible global function definition for ‘text’
-  processDivMelt: no visible global function definition for ‘plot’
-  processDivMelt: no visible global function definition for ‘lines’
-  processDivMelt: no visible global function definition for ‘lowess’
-  processDivMelt: no visible global function definition for ‘lm’
-  processDivMelt: no visible global function definition for ‘sd’
-  processDivMelt: no visible global function definition for ‘loess’
-  processDivMelt: no visible global function definition for ‘segments’
-  processDivMelt: no visible global function definition for ‘abline’
-  processDivMelt: no visible global function definition for ‘predict’
-  processDivMelt: no visible global function definition for ‘title’
-  processDivMelt: no visible global function definition for ‘dev.off’
-  Undefined global functions or variables:
-    abline coef cv.glmnet data dev.off layout lines lm loess lowess par
-    pdf plot plot.new png predict read.csv sd segments setTkProgressBar
-    tcl tclVar tclvalue tclvalue<- text title tkProgressBar tkbind
-    tkbutton tkcheckbutton tkchooseDirectory tkconfigure tkcurselection
-    tkdestroy tkentry tkfocus tkfont.create tkframe tkgetOpenFile
-    tkgetSaveFile tkgrab.release tkgrab.set tkgrid tkgrid.columnconfigure
-    tkgrid.configure tkgrid.rowconfigure tkinsert tklabel tklistbox
-    tkmessageBox tkradiobutton tkscale tkscrollbar tkset tktoplevel
-    tkwait.variable tkwidget tkwm.deiconify tkwm.geometry tkwm.title
-    tkyview
-  Consider adding
-    importFrom("grDevices", "dev.off", "pdf", "png")
-    importFrom("graphics", "abline", "layout", "lines", "par", "plot",
-               "plot.new", "segments", "text", "title")
-    importFrom("stats", "coef", "lm", "loess", "lowess", "predict", "sd")
-    importFrom("utils", "data", "read.csv")
-  to your NAMESPACE file.
-  
-  Found the following calls to data() loading into the global environment:
-  File ‘DivMelt/R/processDivMelt.R’:
-    data(model)
-  See section ‘Good practice’ in ‘?data’.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DivMelt-00check.html>
-
-Version: 1.0.3
-Flags: --no-stop-on-test-error
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘glmnet’ which was already attached by Depends.
-    Please remove these calls from your code.
-  Packages in Depends field not imported from:
-    ‘glmnet’ ‘tcltk’
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/DivMelt-00check.html>
-
-Version: 1.0.3
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  DivMelt_gui: no visible global function definition for ‘tktoplevel’
-  DivMelt_gui: no visible global function definition for ‘tkwm.title’
-  DivMelt_gui: no visible global function definition for ‘tkwm.geometry’
-  DivMelt_gui: no visible global function definition for ‘tkfont.create’
-  DivMelt_gui: no visible global function definition for ‘tclVar’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkframe’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘setTkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘tcl’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘setTkProgressBar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : inputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkradiobutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : plottingDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkscale’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : analysisDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : outputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tcl’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkscrollbar’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkyview’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tklistbox’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkset’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkinsert’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkcurselection’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkgetSaveFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tkchooseDirectory’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tkchooseDirectory’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : helpDialog: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui: no visible global function definition for ‘tkwidget’
-  DivMelt_gui: no visible global function definition for ‘tkbutton’
-  DivMelt_gui: no visible global function definition for ‘tkgrid’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.rowconfigure’
-  DivMelt_gui: no visible global function definition for ‘tkfocus’
-  modelDivMelt: no visible global function definition for ‘read.csv’
-  modelDivMelt: no visible global function definition for ‘cv.glmnet’
-  modelDivMelt: no visible global function definition for ‘predict’
-  modelDivMelt: no visible global function definition for ‘coef’
-  processDivMelt: no visible global function definition for ‘data’
-  processDivMelt: no visible global function definition for ‘pdf’
-  processDivMelt: no visible global function definition for ‘layout’
-  processDivMelt: no visible global function definition for ‘par’
-  processDivMelt: no visible global function definition for ‘png’
-  processDivMelt: no visible global function definition for ‘plot.new’
-  processDivMelt: no visible global function definition for ‘text’
-  processDivMelt: no visible global function definition for ‘plot’
-  processDivMelt: no visible global function definition for ‘lines’
-  processDivMelt: no visible global function definition for ‘lowess’
-  processDivMelt: no visible global function definition for ‘lm’
-  processDivMelt: no visible global function definition for ‘sd’
-  processDivMelt: no visible global function definition for ‘loess’
-  processDivMelt: no visible global function definition for ‘segments’
-  processDivMelt: no visible global function definition for ‘abline’
-  processDivMelt: no visible global function definition for ‘predict’
-  processDivMelt: no visible global function definition for ‘title’
-  processDivMelt: no visible global function definition for ‘dev.off’
-  Undefined global functions or variables:
-    abline coef cv.glmnet data dev.off layout lines lm loess lowess par
-    pdf plot plot.new png predict read.csv sd segments setTkProgressBar
-    tcl tclVar tclvalue tclvalue<- text title tkProgressBar tkbind
-    tkbutton tkcheckbutton tkchooseDirectory tkconfigure tkcurselection
-    tkdestroy tkentry tkfocus tkfont.create tkframe tkgetOpenFile
-    tkgetSaveFile tkgrab.release tkgrab.set tkgrid tkgrid.columnconfigure
-    tkgrid.configure tkgrid.rowconfigure tkinsert tklabel tklistbox
-    tkmessageBox tkradiobutton tkscale tkscrollbar tkset tktoplevel
-    tkwait.variable tkwidget tkwm.deiconify tkwm.geometry tkwm.title
-    tkyview
-  Consider adding
-    importFrom("grDevices", "dev.off", "pdf", "png")
-    importFrom("graphics", "abline", "layout", "lines", "par", "plot",
-               "plot.new", "segments", "text", "title")
-    importFrom("stats", "coef", "lm", "loess", "lowess", "predict", "sd")
-    importFrom("utils", "data", "read.csv")
-  to your NAMESPACE file.
-  
-  Found the following calls to data() loading into the global environment:
-  File ‘DivMelt/R/processDivMelt.R’:
-    data(model)
-  See section ‘Good practice’ in ‘?data’.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/DivMelt-00check.html>
-
-Version: 1.0.3
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  DivMelt_gui: no visible global function definition for ‘tktoplevel’
-  DivMelt_gui: no visible global function definition for ‘tkwm.title’
-  DivMelt_gui: no visible global function definition for ‘tkwm.geometry’
-  DivMelt_gui: no visible global function definition for ‘tkfont.create’
-  DivMelt_gui: no visible global function definition for ‘tclVar’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : loadSettings: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkframe’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘setTkProgressBar’
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for ‘tcl’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘setTkProgressBar’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : showOptions: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : inputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : inputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkradiobutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : plottingDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkcheckbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkscale’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : analysisDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tklabel’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkentry’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : outputDlg : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : outputDlg: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tcl’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tktoplevel’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.deiconify’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.set’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkfocus’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.title’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwm.geometry’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwidget’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid.configure’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkscrollbar’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkyview’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tklistbox’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkset’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrid’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkinsert’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbind’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkcurselection’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tkmessageBox’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tclVar’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkbutton’
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for ‘tclvalue<-’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkwait.variable’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkgrab.release’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : viewCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : loadCommand: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkgetSaveFile’
-  DivMelt_gui : saveCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui : exitCommand: no visible global function definition for
-    ‘tkdestroy’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tkchooseDirectory’
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tkchooseDirectory’
-  DivMelt_gui : selectDir: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tkgetOpenFile’
-  DivMelt_gui : selectFile: no visible global function definition for
-    ‘tclvalue<-’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tkgetOpenFile’
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for ‘tclvalue<-’
-  DivMelt_gui : helpDialog: no visible global function definition for
-    ‘tkmessageBox’
-  DivMelt_gui: no visible global function definition for ‘tkwidget’
-  DivMelt_gui: no visible global function definition for ‘tkbutton’
-  DivMelt_gui: no visible global function definition for ‘tkgrid’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.columnconfigure’
-  DivMelt_gui: no visible global function definition for
-    ‘tkgrid.rowconfigure’
-  DivMelt_gui: no visible global function definition for ‘tkfocus’
-  modelDivMelt: no visible global function definition for ‘read.csv’
-  modelDivMelt: no visible global function definition for ‘cv.glmnet’
-  modelDivMelt: no visible global function definition for ‘predict’
-  modelDivMelt: no visible global function definition for ‘coef’
-  processDivMelt: no visible global function definition for ‘data’
-  processDivMelt: no visible global function definition for ‘pdf’
-  processDivMelt: no visible global function definition for ‘layout’
-  processDivMelt: no visible global function definition for ‘par’
-  processDivMelt: no visible global function definition for ‘png’
-  processDivMelt: no visible global function definition for ‘plot.new’
-  processDivMelt: no visible global function definition for ‘text’
-  processDivMelt: no visible global function definition for ‘plot’
-  processDivMelt: no visible global function definition for ‘lines’
-  processDivMelt: no visible global function definition for ‘lowess’
-  processDivMelt: no visible global function definition for ‘lm’
-  processDivMelt: no visible global function definition for ‘sd’
-  processDivMelt: no visible global function definition for ‘loess’
-  processDivMelt: no visible global function definition for ‘segments’
-  processDivMelt: no visible global function definition for ‘abline’
-  processDivMelt: no visible global function definition for ‘predict’
-  processDivMelt: no visible global function definition for ‘title’
-  processDivMelt: no visible global function definition for ‘dev.off’
-  Undefined global functions or variables:
-    abline coef cv.glmnet data dev.off layout lines lm loess lowess par
-    pdf plot plot.new png predict read.csv sd segments setTkProgressBar
-    tcl tclVar tclvalue tclvalue<- text title tkProgressBar tkbind
-    tkbutton tkcheckbutton tkchooseDirectory tkconfigure tkcurselection
-    tkdestroy tkentry tkfocus tkfont.create tkframe tkgetOpenFile
-    tkgetSaveFile tkgrab.release tkgrab.set tkgrid tkgrid.columnconfigure
-    tkgrid.configure tkgrid.rowconfigure tkinsert tklabel tklistbox
-    tkmessageBox tkradiobutton tkscale tkscrollbar tkset tktoplevel
-    tkwait.variable tkwidget tkwm.deiconify tkwm.geometry tkwm.title
-    tkyview
-  Consider adding
-    importFrom("grDevices", "dev.off", "pdf", "png")
-    importFrom("graphics", "abline", "layout", "lines", "par", "plot",
-               "plot.new", "segments", "text", "title")
-    importFrom("stats", "coef", "lm", "loess", "lowess", "predict", "sd")
-    importFrom("utils", "data", "read.csv")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: R code for possible problems, Result: NOTE
-  DivMelt_gui: no visible global function definition for 'tktoplevel'
-  DivMelt_gui: no visible global function definition for 'tkwm.title'
-  DivMelt_gui: no visible global function definition for 'tkwm.geometry'
-  DivMelt_gui: no visible global function definition for 'tkfont.create'
-  DivMelt_gui: no visible global function definition for 'tclVar'
-  DivMelt_gui : loadSettings: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : loadSettings: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkframe'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkProgressBar'
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for 'setTkProgressBar'
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for 'tcl'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'setTkProgressBar'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for 'tkmessageBox'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : inputDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkradiobutton'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkcheckbutton'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : plottingDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkcheckbutton'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkscale'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : analysisDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : outputDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tcl'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkscrollbar'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkyview'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tklistbox'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkset'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkinsert'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkcurselection'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkmessageBox'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : loadCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : loadCommand: no visible global function definition for
-    'tkgetOpenFile'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tkgetSaveFile'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : exitCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : exitCommand: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tkchooseDirectory'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tkchooseDirectory'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tkgetOpenFile'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tkgetOpenFile'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tkgetOpenFile'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : helpDialog: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui: no visible global function definition for 'tkwidget'
-  DivMelt_gui: no visible global function definition for 'tkbutton'
-  DivMelt_gui: no visible global function definition for 'tkgrid'
-  DivMelt_gui: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui: no visible global function definition for
-    'tkgrid.rowconfigure'
-  DivMelt_gui: no visible global function definition for 'tkfocus'
-  modelDivMelt: no visible global function definition for 'read.csv'
-  modelDivMelt: no visible global function definition for 'cv.glmnet'
-  modelDivMelt: no visible global function definition for 'predict'
-  modelDivMelt: no visible global function definition for 'coef'
-  processDivMelt: no visible global function definition for 'data'
-  processDivMelt: no visible global function definition for 'pdf'
-  processDivMelt: no visible global function definition for 'layout'
-  processDivMelt: no visible global function definition for 'par'
-  processDivMelt: no visible global function definition for 'png'
-  processDivMelt: no visible global function definition for 'plot.new'
-  processDivMelt: no visible global function definition for 'text'
-  processDivMelt: no visible global function definition for 'plot'
-  processDivMelt: no visible global function definition for 'lines'
-  processDivMelt: no visible global function definition for 'lowess'
-  processDivMelt: no visible global function definition for 'lm'
-  processDivMelt: no visible global function definition for 'sd'
-  processDivMelt: no visible global function definition for 'loess'
-  processDivMelt: no visible global function definition for 'segments'
-  processDivMelt: no visible global function definition for 'abline'
-  processDivMelt: no visible global function definition for 'predict'
-  processDivMelt: no visible global function definition for 'title'
-  processDivMelt: no visible global function definition for 'dev.off'
-  Undefined global functions or variables:
-    abline coef cv.glmnet data dev.off layout lines lm loess lowess par
-    pdf plot plot.new png predict read.csv sd segments setTkProgressBar
-    tcl tclVar tclvalue tclvalue<- text title tkProgressBar tkbind
-    tkbutton tkcheckbutton tkchooseDirectory tkconfigure tkcurselection
-    tkdestroy tkentry tkfocus tkfont.create tkframe tkgetOpenFile
-    tkgetSaveFile tkgrab.release tkgrab.set tkgrid tkgrid.columnconfigure
-    tkgrid.configure tkgrid.rowconfigure tkinsert tklabel tklistbox
-    tkmessageBox tkradiobutton tkscale tkscrollbar tkset tktoplevel
-    tkwait.variable tkwidget tkwm.deiconify tkwm.geometry tkwm.title
-    tkyview
-  Consider adding
-    importFrom("grDevices", "dev.off", "pdf", "png")
-    importFrom("graphics", "abline", "layout", "lines", "par", "plot",
-               "plot.new", "segments", "text", "title")
-    importFrom("stats", "coef", "lm", "loess", "lowess", "predict", "sd")
-    importFrom("utils", "data", "read.csv")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: dependencies in R code, Result: NOTE
-  Invalid MIT-MAGIC-COOKIE-1 key'library' or 'require' call to ‘glmnet’ which was already attached by Depends.
-    Please remove these calls from your code.
-  Packages in Depends field not imported from:
-    ‘glmnet’ ‘tcltk’
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: S3 generic/method consistency, Result: WARNING
-  Invalid MIT-MAGIC-COOKIE-1 key
-  See section ‘Generic functions and methods’ in the ‘Writing R
-  Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: replacement functions, Result: WARNING
-  Invalid MIT-MAGIC-COOKIE-1 key
-  The argument of a replacement function which corresponds to the right
-  hand side must be named ‘value’.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: foreign function calls, Result: NOTE
-  Invalid MIT-MAGIC-COOKIE-1 key
-  See chapter ‘System and foreign language interfaces’ in the ‘Writing R
-  Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: for missing documentation entries, Result: WARNING
-  Invalid MIT-MAGIC-COOKIE-1 key
-  All user-level objects in a package should have documentation entries.
-  See chapter ‘Writing R documentation files’ in the ‘Writing R
-  Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: for code/documentation mismatches, Result: WARNING
-  Invalid MIT-MAGIC-COOKIE-1 key
-  Invalid MIT-MAGIC-COOKIE-1 key
-  Invalid MIT-MAGIC-COOKIE-1 key
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: Rd \usage sections, Result: NOTE
-  Invalid MIT-MAGIC-COOKIE-1 key
-  The \usage entries for S3 methods should use the \method markup and not
-  their full name.
-  See chapter ‘Writing R documentation files’ in the ‘Writing R
-  Extensions’ manual.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: examples, Result: ERROR
-  Running examples in ‘DivMelt-Ex.R’ failed
-  The error most likely occurred in:
-  
-  > ### Name: DivMelt_gui
-  > ### Title: User Interface for the Diversity Assay Analysis Tool
-  > ### Aliases: DivMelt_gui
-  > ### Keywords: interface
-  > 
-  > ### ** Examples
-  > 
-  > ##
-  > library (DivMelt)
-  > DivMelt_gui()
-  Error in structure(.External(.C_dotTclObjv, objv), class = "tclObj") : 
-    [tcl] invalid command name "toplevel".
-  Calls: DivMelt_gui ... tktoplevel -> tkwidget -> tcl -> .Tcl.objv -> structure
-  Execution halted
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DivMelt-00check.html>
-
-Version: 1.0.3
-Check: R code for possible problems, Result: NOTE
-  DivMelt_gui: no visible global function definition for 'tktoplevel'
-  DivMelt_gui: no visible global function definition for 'tkwm.title'
-  DivMelt_gui: no visible global function definition for 'tkwm.geometry'
-  DivMelt_gui: no visible global function definition for 'tkfont.create'
-  DivMelt_gui: no visible global function definition for 'tclVar'
-  DivMelt_gui : loadSettings: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : loadSettings: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkframe'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkProgressBar'
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for 'setTkProgressBar'
-  DivMelt_gui : showOptions : updateBar: no visible global function
-    definition for 'tcl'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'setTkProgressBar'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : showOptions : <anonymous>: no visible global function
-    definition for 'tkmessageBox'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : showOptions: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : inputDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : inputDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkradiobutton'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkcheckbutton'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : plottingDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : plottingDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkcheckbutton'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkscale'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : analysisDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : analysisDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tklabel'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkentry'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : outputDlg : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : outputDlg: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkconfigure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tcl'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tktoplevel'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.deiconify'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrab.set'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkfocus'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.title'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwm.geometry'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwidget'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid.configure'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkscrollbar'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkyview'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tklistbox'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkset'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrid'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkinsert'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkbind'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkcurselection'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tkmessageBox'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tclVar'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkbutton'
-  DivMelt_gui : viewCommand : <anonymous>: no visible global function
-    definition for 'tclvalue<-'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkwait.variable'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkgrab.release'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : viewCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : loadCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : loadCommand: no visible global function definition for
-    'tkgetOpenFile'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tkgetSaveFile'
-  DivMelt_gui : saveCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : exitCommand: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui : exitCommand: no visible global function definition for
-    'tkdestroy'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tkchooseDirectory'
-  DivMelt_gui : selectOutputDir: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tkchooseDirectory'
-  DivMelt_gui : selectDir: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tclvalue'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tkgetOpenFile'
-  DivMelt_gui : selectFile: no visible global function definition for
-    'tclvalue<-'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tkgetOpenFile'
-  DivMelt_gui : selectScoreFile: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tclvalue'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tkgetOpenFile'
-  DivMelt_gui : selectModelFile: no visible global function definition
-    for 'tclvalue<-'
-  DivMelt_gui : helpDialog: no visible global function definition for
-    'tkmessageBox'
-  DivMelt_gui: no visible global function definition for 'tkwidget'
-  DivMelt_gui: no visible global function definition for 'tkbutton'
-  DivMelt_gui: no visible global function definition for 'tkgrid'
-  DivMelt_gui: no visible global function definition for
-    'tkgrid.columnconfigure'
-  DivMelt_gui: no visible global function definition for
-    'tkgrid.rowconfigure'
-  DivMelt_gui: no visible global function definition for 'tkfocus'
-  modelDivMelt: no visible global function definition for 'cv.glmnet'
-See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/DivMelt-00check.html>
-
-Package: ecolMod
-****************
-
-Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_ecolMod.html>
-
-Version: 1.2.6
-Check: R code for possible problems, Result: NOTE
-  dilution: no visible global function definition for ‘grey’
-  dilution: no visible global function definition for ‘lines’
-  dilution: no visible global function definition for ‘rect’
-  dilution: no visible global function definition for ‘segments’
-  dilution: no visible global function definition for ‘text’
-  dilution: no visible global function definition for ‘arrows’
-  pricefit: no visible global function definition for ‘runif’
-  Undefined global functions or variables:
-    arrows grey lines rect runif segments text
-  Consider adding
-    importFrom("grDevices", "grey")
-    importFrom("graphics", "arrows", "lines", "rect", "segments", "text")
-    importFrom("stats", "runif")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/ecolMod-00check.html>
-
-Version: 1.2.6
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  dilution: no visible global function definition for ‘grey’
-  dilution: no visible global function definition for ‘lines’
-  dilution: no visible global function definition for ‘rect’
-  dilution: no visible global function definition for ‘segments’
-  dilution: no visible global function definition for ‘text’
-  dilution: no visible global function definition for ‘arrows’
-  pricefit: no visible global function definition for ‘runif’
-  Undefined global functions or variables:
-    arrows grey lines rect runif segments text
-  Consider adding
-    importFrom("grDevices", "grey")
-    importFrom("graphics", "arrows", "lines", "rect", "segments", "text")
-    importFrom("stats", "runif")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/ecolMod-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/ecolMod-00check.html>
-
-Package: BAMMtools
-******************
 
 Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_BAMMtools.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_censReg.html>
 
-Package: gte
-************
-
-Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_gte.html>
-
-Version: 1.2-2
-Check: R code for possible problems, Result: NOTE
-  gte: no visible global function definition for ‘model.extract’
-  gte: no visible global function definition for ‘model.matrix’
-  gte: no visible binding for global variable ‘sd’
-  gte: no visible global function definition for ‘dnorm’
-  plot.gte: no visible global function definition for ‘plot’
-  plot.gte: no visible global function definition for ‘par’
-  plot.gte: no visible global function definition for ‘polygon’
-  plot.gte: no visible global function definition for ‘gray’
-  plot.gte: no visible global function definition for ‘lines’
-  plot.gte: no visible global function definition for ‘legend’
-  Undefined global functions or variables:
-    dnorm gray legend lines model.extract model.matrix par plot polygon
-    sd
-  Consider adding
-    importFrom("grDevices", "gray")
-    importFrom("graphics", "legend", "lines", "par", "plot", "polygon")
-    importFrom("stats", "dnorm", "model.extract", "model.matrix", "sd")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/gte-00check.html>
-
-Version: 1.2-2
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  gte: no visible global function definition for ‘model.extract’
-  gte: no visible global function definition for ‘model.matrix’
-  gte: no visible binding for global variable ‘sd’
-  gte: no visible global function definition for ‘dnorm’
-  plot.gte: no visible global function definition for ‘plot’
-  plot.gte: no visible global function definition for ‘par’
-  plot.gte: no visible global function definition for ‘polygon’
-  plot.gte: no visible global function definition for ‘gray’
-  plot.gte: no visible global function definition for ‘lines’
-  plot.gte: no visible global function definition for ‘legend’
-  Undefined global functions or variables:
-    dnorm gray legend lines model.extract model.matrix par plot polygon
-    sd
-  Consider adding
-    importFrom("grDevices", "gray")
-    importFrom("graphics", "legend", "lines", "par", "plot", "polygon")
-    importFrom("stats", "dnorm", "model.extract", "model.matrix", "sd")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gte-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/gte-00check.html>
-
-Package: coRanking
-******************
+Package: fivethirtyeight
+************************
 
 Current CRAN status: NOTE: 7, OK: 6
-See: <https://CRAN.R-project.org/web/checks/check_results_coRanking.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_fivethirtyeight.html>
 
-Version: 0.1.3
+Version: 0.1.0
 Flags: --no-stop-on-test-error
-Check: dependencies in R code, Result: NOTE
-  Namespaces in Imports field not imported from:
-    ‘Rtsne’ ‘scatterplot3d’
-    All declared Imports should be used.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/coRanking-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/coRanking-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/coRanking-00check.html>
+Check: data for non-ASCII characters, Result: NOTE
+    Note: found 346 marked UTF-8 strings
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/fivethirtyeight-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/fivethirtyeight-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/fivethirtyeight-00check.html>
 
-Version: 0.1.3
-Check: dependencies in R code, Result: NOTE
-  Namespaces in Imports field not imported from:
-    ‘Rtsne’ ‘scatterplot3d’
-    All declared Imports should be used.
-See: <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/coRanking-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/coRanking-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/coRanking-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/coRanking-00check.html>
+Version: 0.1.0
+Check: data for non-ASCII characters, Result: NOTE
+    Note: found 346 marked UTF-8 strings
+See: <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/fivethirtyeight-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/fivethirtyeight-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/fivethirtyeight-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/fivethirtyeight-00check.html>
 
-Package: autopls
+Package: mvtnorm
 ****************
 
-Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_autopls.html>
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_mvtnorm.html>
 
-Version: 1.3
-Check: R code for possible problems, Result: NOTE
-  autopls: no visible global function definition for ‘model.response’
-  autopls: no visible global function definition for ‘model.matrix’
-  autopls: no visible binding for global variable ‘var’
-  autopls : ac: no visible global function definition for ‘cor’
-  autopls : ac: no visible global function definition for ‘median’
-  autopls : tryaround: no visible global function definition for ‘sd’
-  autopls: no visible global function definition for ‘coef’
-  autopls: no visible global function definition for ‘flush.console’
-  coef.autopls: no visible global function definition for ‘coef’
-  plot.autopls : ovpplot: no visible global function definition for ‘par’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘fitted’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘points’
-  plot.autopls : ovpplot: no visible global function definition for ‘lm’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘text’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : ovpplot: no visible global function definition for ‘box’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘clip’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘abline’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘par’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘predict’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘axis’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘mtext’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘points’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘text’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘lm’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘legend’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘box’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘clip’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘abline’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘par’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘grey’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘points’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘barplot’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘box’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘par’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘lines’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘grey’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘points’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘barplot’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘axis’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘mtext’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘box’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘legend’
-  plot.autopls : rcplot: no visible global function definition for ‘coef’
-  plot.autopls : rcplot: no visible global function definition for ‘par’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘title’
-  plot.autopls : rcplot: no visible global function definition for ‘rect’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘axTicks’
-  plot.autopls : rcplot: no visible global function definition for ‘grey’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : rcplot: no visible global function definition for ‘axis’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘points’
-  plot.autopls : rcplot: no visible global function definition for ‘box’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘par’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘text’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘points’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘residuals’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘par’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘text’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘points’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘par’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘rect’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘grey’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘points’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘text’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘box’
-  plot.autopls : pL: no visible global function definition for
-    ‘as.graphicsAnnot’
-  plot.autopls : pL: no visible global function definition for ‘par’
-  plot.autopls : pL: no visible global function definition for
-    ‘xy.coords’
-  plot.autopls : pL: no visible global function definition for ‘strwidth’
-  plot.autopls : pL: no visible global function definition for
-    ‘strheight’
-  plot.autopls : pL : SANN: no visible global function definition for
-    ‘runif’
-  plot.autopls: no visible global function definition for ‘dev.new’
-  plot.autopls: no visible global function definition for ‘devAskNewPage’
-  predict.autopls: no visible global function definition for ‘coef’
-  predict.autopls: no visible global function definition for
-    ‘txtProgressBar’
-  predict.autopls: no visible global function definition for
-    ‘setTxtProgressBar’
-  predict.slim: no visible global function definition for ‘coef’
-  predict.slim: no visible global function definition for
-    ‘txtProgressBar’
-  predict.slim: no visible global function definition for
-    ‘setTxtProgressBar’
-  repeatedCV: no visible global function definition for ‘sd’
-  residuals.autopls: no visible global function definition for
-    ‘residuals’
-  slim: no visible global function definition for ‘coef’
-  Undefined global functions or variables:
-    abline as.graphicsAnnot axTicks axis barplot box clip coef cor
-    dev.new devAskNewPage fitted flush.console grey legend lines lm
-    median model.matrix model.response mtext par points predict rect
-    residuals runif sd setTxtProgressBar strheight strwidth text title
-    txtProgressBar var xy.coords
-  Consider adding
-    importFrom("grDevices", "as.graphicsAnnot", "dev.new", "devAskNewPage",
-               "grey", "xy.coords")
-    importFrom("graphics", "abline", "axTicks", "axis", "barplot", "box",
-               "clip", "legend", "lines", "mtext", "par", "points", "rect",
-               "strheight", "strwidth", "text", "title")
-    importFrom("stats", "coef", "cor", "fitted", "lm", "median",
-               "model.matrix", "model.response", "predict", "residuals",
-               "runif", "sd", "var")
-    importFrom("utils", "flush.console", "setTxtProgressBar",
-               "txtProgressBar")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/autopls-00check.html>
-
-Version: 1.3
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  autopls: no visible global function definition for ‘model.response’
-  autopls: no visible global function definition for ‘model.matrix’
-  autopls: no visible binding for global variable ‘var’
-  autopls : ac: no visible global function definition for ‘cor’
-  autopls : ac: no visible global function definition for ‘median’
-  autopls : tryaround: no visible global function definition for ‘sd’
-  autopls: no visible global function definition for ‘coef’
-  autopls: no visible global function definition for ‘flush.console’
-  coef.autopls: no visible global function definition for ‘coef’
-  plot.autopls : ovpplot: no visible global function definition for ‘par’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘fitted’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘points’
-  plot.autopls : ovpplot: no visible global function definition for ‘lm’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘text’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : ovpplot: no visible global function definition for ‘box’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘clip’
-  plot.autopls : ovpplot: no visible global function definition for
-    ‘abline’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘par’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘predict’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘axis’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘mtext’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘points’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘text’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘lm’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘legend’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘box’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘clip’
-  plot.autopls : ovpplot.testset: no visible global function definition
-    for ‘abline’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘par’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘grey’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘points’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘barplot’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘box’
-  plot.autopls : rmseplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘par’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘lines’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘grey’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘points’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘barplot’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘axis’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘mtext’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘box’
-  plot.autopls : rmseplot.testset: no visible global function definition
-    for ‘legend’
-  plot.autopls : rcplot: no visible global function definition for ‘coef’
-  plot.autopls : rcplot: no visible global function definition for ‘par’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘title’
-  plot.autopls : rcplot: no visible global function definition for ‘rect’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘axTicks’
-  plot.autopls : rcplot: no visible global function definition for ‘grey’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : rcplot: no visible global function definition for ‘axis’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘points’
-  plot.autopls : rcplot: no visible global function definition for ‘box’
-  plot.autopls : rcplot: no visible global function definition for
-    ‘legend’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘par’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘text’
-  plot.autopls : x.influence: no visible global function definition for
-    ‘points’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘residuals’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘par’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘text’
-  plot.autopls : y.influence: no visible global function definition for
-    ‘points’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘par’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘rect’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘lines’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘grey’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘points’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘text’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘axis’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘mtext’
-  plot.autopls : metaplot: no visible global function definition for
-    ‘box’
-  plot.autopls : pL: no visible global function definition for
-    ‘as.graphicsAnnot’
-  plot.autopls : pL: no visible global function definition for ‘par’
-  plot.autopls : pL: no visible global function definition for
-    ‘xy.coords’
-  plot.autopls : pL: no visible global function definition for ‘strwidth’
-  plot.autopls : pL: no visible global function definition for
-    ‘strheight’
-  plot.autopls : pL : SANN: no visible global function definition for
-    ‘runif’
-  plot.autopls: no visible global function definition for ‘dev.new’
-  plot.autopls: no visible global function definition for ‘devAskNewPage’
-  predict.autopls: no visible global function definition for ‘coef’
-  predict.autopls: no visible global function definition for
-    ‘txtProgressBar’
-  predict.autopls: no visible global function definition for
-    ‘setTxtProgressBar’
-  predict.slim: no visible global function definition for ‘coef’
-  predict.slim: no visible global function definition for
-    ‘txtProgressBar’
-  predict.slim: no visible global function definition for
-    ‘setTxtProgressBar’
-  repeatedCV: no visible global function definition for ‘sd’
-  residuals.autopls: no visible global function definition for
-    ‘residuals’
-  slim: no visible global function definition for ‘coef’
-  Undefined global functions or variables:
-    abline as.graphicsAnnot axTicks axis barplot box clip coef cor
-    dev.new devAskNewPage fitted flush.console grey legend lines lm
-    median model.matrix model.response mtext par points predict rect
-    residuals runif sd setTxtProgressBar strheight strwidth text title
-    txtProgressBar var xy.coords
-  Consider adding
-    importFrom("grDevices", "as.graphicsAnnot", "dev.new", "devAskNewPage",
-               "grey", "xy.coords")
-    importFrom("graphics", "abline", "axTicks", "axis", "barplot", "box",
-               "clip", "legend", "lines", "mtext", "par", "points", "rect",
-               "strheight", "strwidth", "text", "title")
-    importFrom("stats", "coef", "cor", "fitted", "lm", "median",
-               "model.matrix", "model.response", "predict", "residuals",
-               "runif", "sd", "var")
-    importFrom("utils", "flush.console", "setTxtProgressBar",
-               "txtProgressBar")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/autopls-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/autopls-00check.html>
-
-Package: RMark
-**************
-
-Current CRAN status: ERROR: 1, OK: 9
-See: <https://CRAN.R-project.org/web/checks/check_results_RMark.html>
-
-Version: 2.2.2
-Check: whether package can be installed, Result: WARNING
-  Found the following significant warnings:
-    Warning: Software mark not found in path.
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/RMark-00check.html>
-
-Version: 2.2.2
-Check: examples, Result: ERROR
-  Running examples in ‘RMark-Ex.R’ failed
-  The error most likely occurred in:
-  
-  > ### Name: Blackduck
-  > ### Title: Black duck known fate data
-  > ### Aliases: Blackduck
-  > ### Keywords: datasets
-  > 
-  > ### ** Examples
-  > 
-  > 
-  > data(Blackduck)
-  > # Change BirdAge to numeric; starting with version 1.6.3 factor variables are
-  > # no longer allowed.  They can work as in this example but they can be misleading
-  > # and fail if the levels are non-numeric.  The real parameters will remain 
-  > # unchanged but the betas will be different.
-  > Blackduck$BirdAge=as.numeric(Blackduck$BirdAge)-1
-  > run.Blackduck=function()
-  + {
-  + #
-  + # Process data
-  + #
-  + bduck.processed=process.data(Blackduck,model="Known")
-  + #
-  + # Create default design data
-  + #
-  + bduck.ddl=make.design.data(bduck.processed)
-  + #
-  + #  Add occasion specific data min < 0; I have no idea what it is
-  + #
-  + bduck.ddl$S$min=c(4,6,7,7,7,6,5,5)
-  + #
-  + #  Define range of models for S
-  + #
-  + S.dot=list(formula=~1)
-  + S.time=list(formula=~time)
-  + S.min=list(formula=~min)
-  + S.BirdAge=list(formula=~BirdAge)
-  + #
-  + # Note that in the following model in the MARK example, the covariates
-  + # have been standardized.  That means that the beta parameters will be different
-  + # for BirdAge, Weight and their interaction but the likelihood and real parameter
-  + # estimates are the same.
-  + #
-  + S.BirdAgexWeight.min=list(formula=~min+BirdAge*Weight)
-  + S.BirdAge.Weight=list(formula=~BirdAge+Weight)
-  + #
-  + # Create model list and run assortment of models
-  + #
-  + model.list=create.model.list("Known")
-  + bduck.results=mark.wrapper(model.list,data=bduck.processed,ddl=bduck.ddl,
-  +                invisible=FALSE,threads=1)
-  + 
-  + #
-  + # Return model table and list of models
-  + #
-  + return(bduck.results)
-  + }
-  > bduck.results=run.Blackduck()
-  
-  S.BirdAge
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  S.BirdAge.Weight
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  S.BirdAgexWeight.min
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  S.dot
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  S.min
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  S.time
-  
-  sh: mark: command not found
-  Error in run.mark.model(model, invisible = invisible, adjust = adjust,  : 
-    
-  Output file does not exist. Unable to find or run mark.exe
-  
-  
-  No mark models found
-  
-  Error in collect.models() : 
-  Calls: run.Blackduck -> mark.wrapper -> collect.models
-  Execution halted
-See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/RMark-00check.html>
-
-Package: qfasar
-***************
+Package: bindrcpp
+*****************
 
 Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_qfasar.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_bindrcpp.html>
 
-Package: aspace
+Package: CNprep
 ***************
 
-Current CRAN status: NOTE: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_aspace.html>
+Current CRAN status: NOTE: 12, OK: 1
+See: <https://CRAN.R-project.org/web/checks/check_results_CNprep.html>
 
-Version: 3.2
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' calls to packages already attached by Depends:
-    ‘Hmisc’ ‘splancs’
-    Please remove these calls from your code.
-  Packages in Depends field not imported from:
-    ‘Hmisc’ ‘shapefiles’ ‘splancs’
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/aspace-00check.html>
-
-Version: 3.2
+Version: 2.0
 Check: R code for possible problems, Result: NOTE
-  CF: no visible binding for global variable ‘activities’
-  CF: no visible global function definition for ‘write.table’
-  CF2PTS: no visible binding for global variable ‘activities’
-  CF2PTS: no visible binding for global variable ‘activities2’
-  CF2PTS: no visible global function definition for ‘write.table’
-  CMD: no visible binding for global variable ‘activities’
-  CMD: no visible global function definition for ‘chull’
-  CMD: no visible global function definition for ‘gridpts’
-  CMD: no visible global function definition for ‘write.table’
-  calc_box: no visible binding for global variable ‘activities’
-  calc_box: no visible global function definition for ‘wtd.var’
-  calc_box: no visible global function definition for ‘sd’
-  calc_box: no visible global function definition for ‘write.table’
-  calc_sdd: no visible binding for global variable ‘activities’
-  calc_sdd: no visible global function definition for ‘write.table’
-  calc_sde: no visible binding for global variable ‘activities’
-  calc_sde: no visible global function definition for ‘write.table’
-  distances: no visible binding for global variable ‘centre’
-  distances: no visible binding for global variable ‘activities’
-  mean_centre: no visible binding for global variable ‘activities’
-  mean_centre: no visible global function definition for ‘write.table’
-  median_centre: no visible binding for global variable ‘activities’
-  median_centre: no visible global function definition for ‘median’
-  median_centre: no visible global function definition for ‘write.table’
-  plot_box: no visible global function definition for ‘par’
-  plot_box: no visible binding for global variable ‘r.BOX’
-  plot_box: no visible global function definition for ‘plot’
-  plot_box: no visible global function definition for ‘title’
-  plot_box: no visible global function definition for ‘segments’
-  plot_box: no visible global function definition for ‘abline’
-  plot_box: no visible global function definition for ‘points’
-  plot_box: no visible global function definition for ‘dev.off’
-  plot_centres: no visible global function definition for ‘par’
-  plot_centres: no visible binding for global variable ‘r.SDE’
-  plot_centres: no visible global function definition for ‘plot’
-  plot_centres: no visible global function definition for ‘points’
-  plot_centres: no visible binding for global variable ‘r.CF’
-  plot_centres: no visible binding for global variable ‘r.median’
-  plot_centres: no visible binding for global variable ‘r.CMD’
-  plot_centres: no visible binding for global variable ‘r.CF2PTS’
-  plot_sdd: no visible global function definition for ‘par’
-  plot_sdd: no visible binding for global variable ‘r.SDD’
-  plot_sdd: no visible global function definition for ‘plot’
-  plot_sdd: no visible global function definition for ‘lines’
-  plot_sdd: no visible global function definition for ‘title’
-  plot_sdd: no visible global function definition for ‘abline’
-  plot_sdd: no visible global function definition for ‘points’
-  plot_sdd: no visible global function definition for ‘dev.off’
-  plot_sde: no visible global function definition for ‘par’
-  plot_sde: no visible binding for global variable ‘r.SDE’
-  plot_sde: no visible global function definition for ‘plot’
-  plot_sde: no visible global function definition for ‘lines’
-  plot_sde: no visible global function definition for ‘title’
-  plot_sde: no visible global function definition for ‘segments’
-  plot_sde: no visible global function definition for ‘points’
-  plot_sde: no visible global function definition for ‘dev.off’
+  CNclusterNcenter: no visible global function definition for ‘median’
+  CNclusterNcenter: no visible binding for global variable ‘var’
+  breakIntoGaps: no visible global function definition for ‘runif’
+  centerprob: no visible global function definition for ‘pnorm’
+  getz: no visible global function definition for ‘predict’
+  smad: no visible global function definition for ‘mad’
+  smedian: no visible global function definition for ‘median’
+  smedian.sample: no visible global function definition for ‘median’
+  smedmad: no visible global function definition for ‘median’
+  smedmad: no visible global function definition for ‘mad’
   Undefined global functions or variables:
-    abline activities activities2 centre chull dev.off gridpts lines
-    median par plot points r.BOX r.CF r.CF2PTS r.CMD r.SDD r.SDE r.median
-    sd segments title write.table wtd.var
+    mad median pnorm predict runif var
   Consider adding
-    importFrom("grDevices", "chull", "dev.off")
-    importFrom("graphics", "abline", "lines", "par", "plot", "points",
-               "segments", "title")
-    importFrom("stats", "median", "sd")
-    importFrom("utils", "write.table")
+    importFrom("stats", "mad", "median", "pnorm", "predict", "runif",
+               "var")
   to your NAMESPACE file.
-  
-  Found the following assignments to the global environment:
-  File ‘aspace/R/CF.R’:
-    assign("cfloc", cfloc, pos = 1)
-    assign("r.CF", r.CF, pos = 1)
-    assign("cfatt", result.CF, pos = 1)
-  File ‘aspace/R/CF2PTS.R’:
-    assign("cf2ptsloc", cf2ptsloc, pos = 1)
-    assign("r.CF2PTS", r.CF2PTS, pos = 1)
-    assign("cf2ptsatt", result.CF2PTS, pos = 1)
-  File ‘aspace/R/CMD.R’:
-    assign("cmdloc", cmdloc, pos = 1)
-    assign("r.CMD", r.CMD, pos = 1)
-    assign("cmdatt", result.CMD, pos = 1)
-  File ‘aspace/R/calc_box.R’:
-    assign("boxloc", boxloc, pos = 1)
-    assign("r.BOX", r.BOX, pos = 1)
-    assign("boxatt", result.box, pos = 1)
-  File ‘aspace/R/calc_sdd.R’:
-    assign("sddloc", sddloc, pos = 1)
-    assign("r.SDD", r.SDD, pos = 1)
-    assign("sddatt", result.sdd, pos = 1)
-  File ‘aspace/R/calc_sde.R’:
-    assign("r.SDE", r.SDE, pos = 1)
-    assign("sdeatt", result.sde, pos = 1)
-    assign("sdeloc", sdeloc, pos = 1)
-  File ‘aspace/R/mean_centre.R’:
-    assign("meanloc", meanloc, pos = 1)
-    assign("r.mean", r.mean, pos = 1)
-    assign("meanatt", result.mean, pos = 1)
-  File ‘aspace/R/median_centre.R’:
-    assign("medianloc", medianloc, pos = 1)
-    assign("r.median", r.median, pos = 1)
-    assign("medianatt", result.median, pos = 1)
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/aspace-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/CNprep-00check.html>
 
-Version: 3.2
-Check: Rd line widths, Result: NOTE
-  Rd file 'calc_box.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_box by default takes as input the result produced from the calc_box, read from the current workspace. 
-  
-  Rd file 'calc_sdd.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sdd by default takes as input the result produced from the calc_sdd, read from the current workspace. 
-  
-  Rd file 'calc_sde.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sde by default takes as input the result produced from the calc_sde, read from the current workspace. 
-  
-  Rd file 'centre.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_centres by default takes as input the result produced from mean_centre, median centre, CF, CF2PTS, and CMD, read from the curre ... [TRUNCATED]
-  
-  Rd file 'plot_box.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_box by default takes as input the result produced from the calc_box, read from the current workspace. 
-  
-  Rd file 'plot_centres.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_centres by default takes as input the result produced from CF, CF2PTS, and CMD, read from the current workspace. 
-  
-  Rd file 'plot_sdd.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sdd by default takes as input the result produced from the calc_sdd, read from the current workspace. 
-  
-  Rd file 'plot_sde.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sde by default takes as input the result produced from the calc_sde, read from the current workspace. 
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/aspace-00check.html>
-
-Version: 3.2
-Flags: --no-stop-on-test-error
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' calls to packages already attached by Depends:
-    ‘Hmisc’ ‘splancs’
-    Please remove these calls from your code.
-  Packages in Depends field not imported from:
-    ‘Hmisc’ ‘shapefiles’ ‘splancs’
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/aspace-00check.html>
-
-Version: 3.2
+Version: 2.0
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  CF: no visible binding for global variable ‘activities’
-  CF: no visible global function definition for ‘write.table’
-  CF2PTS: no visible binding for global variable ‘activities’
-  CF2PTS: no visible binding for global variable ‘activities2’
-  CF2PTS: no visible global function definition for ‘write.table’
-  CMD: no visible binding for global variable ‘activities’
-  CMD: no visible global function definition for ‘chull’
-  CMD: no visible global function definition for ‘gridpts’
-  CMD: no visible global function definition for ‘write.table’
-  calc_box: no visible binding for global variable ‘activities’
-  calc_box: no visible global function definition for ‘wtd.var’
-  calc_box: no visible global function definition for ‘sd’
-  calc_box: no visible global function definition for ‘write.table’
-  calc_sdd: no visible binding for global variable ‘activities’
-  calc_sdd: no visible global function definition for ‘write.table’
-  calc_sde: no visible binding for global variable ‘activities’
-  calc_sde: no visible global function definition for ‘write.table’
-  distances: no visible binding for global variable ‘centre’
-  distances: no visible binding for global variable ‘activities’
-  mean_centre: no visible binding for global variable ‘activities’
-  mean_centre: no visible global function definition for ‘write.table’
-  median_centre: no visible binding for global variable ‘activities’
-  median_centre: no visible global function definition for ‘median’
-  median_centre: no visible global function definition for ‘write.table’
-  plot_box: no visible global function definition for ‘par’
-  plot_box: no visible binding for global variable ‘r.BOX’
-  plot_box: no visible global function definition for ‘plot’
-  plot_box: no visible global function definition for ‘title’
-  plot_box: no visible global function definition for ‘segments’
-  plot_box: no visible global function definition for ‘abline’
-  plot_box: no visible global function definition for ‘points’
-  plot_box: no visible global function definition for ‘dev.off’
-  plot_centres: no visible global function definition for ‘par’
-  plot_centres: no visible binding for global variable ‘r.SDE’
-  plot_centres: no visible global function definition for ‘plot’
-  plot_centres: no visible global function definition for ‘points’
-  plot_centres: no visible binding for global variable ‘r.CF’
-  plot_centres: no visible binding for global variable ‘r.median’
-  plot_centres: no visible binding for global variable ‘r.CMD’
-  plot_centres: no visible binding for global variable ‘r.CF2PTS’
-  plot_sdd: no visible global function definition for ‘par’
-  plot_sdd: no visible binding for global variable ‘r.SDD’
-  plot_sdd: no visible global function definition for ‘plot’
-  plot_sdd: no visible global function definition for ‘lines’
-  plot_sdd: no visible global function definition for ‘title’
-  plot_sdd: no visible global function definition for ‘abline’
-  plot_sdd: no visible global function definition for ‘points’
-  plot_sdd: no visible global function definition for ‘dev.off’
-  plot_sde: no visible global function definition for ‘par’
-  plot_sde: no visible binding for global variable ‘r.SDE’
-  plot_sde: no visible global function definition for ‘plot’
-  plot_sde: no visible global function definition for ‘lines’
-  plot_sde: no visible global function definition for ‘title’
-  plot_sde: no visible global function definition for ‘segments’
-  plot_sde: no visible global function definition for ‘points’
-  plot_sde: no visible global function definition for ‘dev.off’
+  CNclusterNcenter: no visible global function definition for ‘median’
+  CNclusterNcenter: no visible binding for global variable ‘var’
+  breakIntoGaps: no visible global function definition for ‘runif’
+  centerprob: no visible global function definition for ‘pnorm’
+  getz: no visible global function definition for ‘predict’
+  smad: no visible global function definition for ‘mad’
+  smedian: no visible global function definition for ‘median’
+  smedian.sample: no visible global function definition for ‘median’
+  smedmad: no visible global function definition for ‘median’
+  smedmad: no visible global function definition for ‘mad’
   Undefined global functions or variables:
-    abline activities activities2 centre chull dev.off gridpts lines
-    median par plot points r.BOX r.CF r.CF2PTS r.CMD r.SDD r.SDE r.median
-    sd segments title write.table wtd.var
+    mad median pnorm predict runif var
   Consider adding
-    importFrom("grDevices", "chull", "dev.off")
-    importFrom("graphics", "abline", "lines", "par", "plot", "points",
-               "segments", "title")
-    importFrom("stats", "median", "sd")
-    importFrom("utils", "write.table")
+    importFrom("stats", "mad", "median", "pnorm", "predict", "runif",
+               "var")
   to your NAMESPACE file.
-  
-  Found the following assignments to the global environment:
-  File ‘aspace/R/CF.R’:
-    assign("cfloc", cfloc, pos = 1)
-    assign("r.CF", r.CF, pos = 1)
-    assign("cfatt", result.CF, pos = 1)
-  File ‘aspace/R/CF2PTS.R’:
-    assign("cf2ptsloc", cf2ptsloc, pos = 1)
-    assign("r.CF2PTS", r.CF2PTS, pos = 1)
-    assign("cf2ptsatt", result.CF2PTS, pos = 1)
-  File ‘aspace/R/CMD.R’:
-    assign("cmdloc", cmdloc, pos = 1)
-    assign("r.CMD", r.CMD, pos = 1)
-    assign("cmdatt", result.CMD, pos = 1)
-  File ‘aspace/R/calc_box.R’:
-    assign("boxloc", boxloc, pos = 1)
-    assign("r.BOX", r.BOX, pos = 1)
-    assign("boxatt", result.box, pos = 1)
-  File ‘aspace/R/calc_sdd.R’:
-    assign("sddloc", sddloc, pos = 1)
-    assign("r.SDD", r.SDD, pos = 1)
-    assign("sddatt", result.sdd, pos = 1)
-  File ‘aspace/R/calc_sde.R’:
-    assign("r.SDE", r.SDE, pos = 1)
-    assign("sdeatt", result.sde, pos = 1)
-    assign("sdeloc", sdeloc, pos = 1)
-  File ‘aspace/R/mean_centre.R’:
-    assign("meanloc", meanloc, pos = 1)
-    assign("r.mean", r.mean, pos = 1)
-    assign("meanatt", result.mean, pos = 1)
-  File ‘aspace/R/median_centre.R’:
-    assign("medianloc", medianloc, pos = 1)
-    assign("r.median", r.median, pos = 1)
-    assign("medianatt", result.median, pos = 1)
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/aspace-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/CNprep-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/CNprep-00check.html>
 
-Version: 3.2
-Flags: --no-stop-on-test-error
-Check: Rd line widths, Result: NOTE
-  Rd file 'calc_box.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_box by default takes as input the result produced from the calc_box, read from the current workspace. 
-  
-  Rd file 'calc_sdd.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sdd by default takes as input the result produced from the calc_sdd, read from the current workspace. 
-  
-  Rd file 'calc_sde.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sde by default takes as input the result produced from the calc_sde, read from the current workspace. 
-  
-  Rd file 'centre.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_centres by default takes as input the result produced from mean_centre, median centre, CF, CF2PTS, and CMD, read from the curre ... [TRUNCATED]
-  
-  Rd file 'plot_box.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_box by default takes as input the result produced from the calc_box, read from the current workspace. 
-  
-  Rd file 'plot_centres.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_centres by default takes as input the result produced from CF, CF2PTS, and CMD, read from the current workspace. 
-  
-  Rd file 'plot_sdd.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sdd by default takes as input the result produced from the calc_sdd, read from the current workspace. 
-  
-  Rd file 'plot_sde.Rd':
-    \examples lines wider than 100 characters:
-       ## plot_sde by default takes as input the result produced from the calc_sde, read from the current workspace. 
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/aspace-00check.html>
+Package: cgwtools
+*****************
 
-Version: 3.2
+Current CRAN status: NOTE: 12, OK: 1
+See: <https://CRAN.R-project.org/web/checks/check_results_cgwtools.html>
+
+Version: 3.0
+Check: R code for possible problems, Result: NOTE
+  !: no visible global function definition for ‘dev.new’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘setNames’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘slotNames’
+  lssize : s4gonebyte : fb4: no visible binding for global variable
+    ‘slot’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘object.size’
+  lssize : s4gone : fs4: no visible global function definition for
+    ‘setNames’
+  lssize : s4gone : fs4: no visible global function definition for
+    ‘slotNames’
+  lssize : s4gone : fs4: no visible binding for global variable ‘slot’
+  mystat: no visible global function definition for ‘median’
+  mystat: no visible global function definition for ‘sd’
+  seqle: no visible global function definition for ‘head’
+  thekurt: no visible global function definition for ‘var’
+  theskew: no visible global function definition for ‘sd’
+  Undefined global functions or variables:
+    dev.new head median object.size sd setNames slot slotNames var
+  Consider adding
+    importFrom("grDevices", "dev.new")
+    importFrom("methods", "slot", "slotNames")
+    importFrom("stats", "median", "sd", "setNames", "var")
+    importFrom("utils", "head", "object.size")
+  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+  contains 'methods').
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/cgwtools-00check.html>
+
+Version: 3.0
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  CF: no visible binding for global variable ‘activities’
-  CF: no visible global function definition for ‘write.table’
-  CF2PTS: no visible binding for global variable ‘activities’
-  CF2PTS: no visible binding for global variable ‘activities2’
-  CF2PTS: no visible global function definition for ‘write.table’
-  CMD: no visible binding for global variable ‘activities’
-  CMD: no visible global function definition for ‘chull’
-  CMD: no visible global function definition for ‘gridpts’
-  CMD: no visible global function definition for ‘write.table’
-  calc_box: no visible binding for global variable ‘activities’
-  calc_box: no visible global function definition for ‘wtd.var’
-  calc_box: no visible global function definition for ‘sd’
-  calc_box: no visible global function definition for ‘write.table’
-  calc_sdd: no visible binding for global variable ‘activities’
-  calc_sdd: no visible global function definition for ‘write.table’
-  calc_sde: no visible binding for global variable ‘activities’
-  calc_sde: no visible global function definition for ‘write.table’
-  distances: no visible binding for global variable ‘centre’
-  distances: no visible binding for global variable ‘activities’
-  mean_centre: no visible binding for global variable ‘activities’
-  mean_centre: no visible global function definition for ‘write.table’
-  median_centre: no visible binding for global variable ‘activities’
-  median_centre: no visible global function definition for ‘median’
-  median_centre: no visible global function definition for ‘write.table’
-  plot_box: no visible global function definition for ‘par’
-  plot_box: no visible binding for global variable ‘r.BOX’
-  plot_box: no visible global function definition for ‘plot’
-  plot_box: no visible global function definition for ‘title’
-  plot_box: no visible global function definition for ‘segments’
-  plot_box: no visible global function definition for ‘abline’
-  plot_box: no visible global function definition for ‘points’
-  plot_box: no visible global function definition for ‘dev.off’
-  plot_centres: no visible global function definition for ‘par’
-  plot_centres: no visible binding for global variable ‘r.SDE’
-  plot_centres: no visible global function definition for ‘plot’
-  plot_centres: no visible global function definition for ‘points’
-  plot_centres: no visible binding for global variable ‘r.CF’
-  plot_centres: no visible binding for global variable ‘r.median’
-  plot_centres: no visible binding for global variable ‘r.CMD’
-  plot_centres: no visible binding for global variable ‘r.CF2PTS’
-  plot_sdd: no visible global function definition for ‘par’
-  plot_sdd: no visible binding for global variable ‘r.SDD’
-  plot_sdd: no visible global function definition for ‘plot’
-  plot_sdd: no visible global function definition for ‘lines’
-  plot_sdd: no visible global function definition for ‘title’
-  plot_sdd: no visible global function definition for ‘abline’
-  plot_sdd: no visible global function definition for ‘points’
-  plot_sdd: no visible global function definition for ‘dev.off’
-  plot_sde: no visible global function definition for ‘par’
-  plot_sde: no visible binding for global variable ‘r.SDE’
-  plot_sde: no visible global function definition for ‘plot’
-  plot_sde: no visible global function definition for ‘lines’
-  plot_sde: no visible global function definition for ‘title’
-  plot_sde: no visible global function definition for ‘segments’
-  plot_sde: no visible global function definition for ‘points’
-  plot_sde: no visible global function definition for ‘dev.off’
+  !: no visible global function definition for ‘dev.new’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘setNames’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘slotNames’
+  lssize : s4gonebyte : fb4: no visible binding for global variable
+    ‘slot’
+  lssize : s4gonebyte : fb4: no visible global function definition for
+    ‘object.size’
+  lssize : s4gone : fs4: no visible global function definition for
+    ‘setNames’
+  lssize : s4gone : fs4: no visible global function definition for
+    ‘slotNames’
+  lssize : s4gone : fs4: no visible binding for global variable ‘slot’
+  mystat: no visible global function definition for ‘median’
+  mystat: no visible global function definition for ‘sd’
+  seqle: no visible global function definition for ‘head’
+  thekurt: no visible global function definition for ‘var’
+  theskew: no visible global function definition for ‘sd’
   Undefined global functions or variables:
-    abline activities activities2 centre chull dev.off gridpts lines
-    median par plot points r.BOX r.CF r.CF2PTS r.CMD r.SDD r.SDE r.median
-    sd segments title write.table wtd.var
+    dev.new head median object.size sd setNames slot slotNames var
   Consider adding
-    importFrom("grDevices", "chull", "dev.off")
-    importFrom("graphics", "abline", "lines", "par", "plot", "points",
-               "segments", "title")
-    importFrom("stats", "median", "sd")
-    importFrom("utils", "write.table")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/aspace-00check.html>
+    importFrom("grDevices", "dev.new")
+    importFrom("methods", "slot", "slotNames")
+    importFrom("stats", "median", "sd", "setNames", "var")
+    importFrom("utils", "head", "object.size")
+  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+  contains 'methods').
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/cgwtools-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/cgwtools-00check.html>
 
-Version: 3.2
-Check: R code for possible problems, Result: NOTE
-  CF: no visible binding for global variable 'activities'
-  CF: no visible global function definition for 'write.table'
-  CF2PTS: no visible binding for global variable 'activities'
-  CF2PTS: no visible binding for global variable 'activities2'
-  CF2PTS: no visible global function definition for 'write.table'
-  CMD: no visible binding for global variable 'activities'
-  CMD: no visible global function definition for 'chull'
-  CMD: no visible global function definition for 'gridpts'
-  CMD: no visible global function definition for 'write.table'
-  calc_box: no visible binding for global variable 'activities'
-  calc_box: no visible global function definition for 'wtd.var'
-  calc_box: no visible global function definition for 'sd'
-  calc_box: no visible global function definition for 'write.table'
-  calc_sdd: no visible binding for global variable 'activities'
-  calc_sdd: no visible global function definition for 'write.table'
-  calc_sde: no visible binding for global variable 'activities'
-  calc_sde: no visible global function definition for 'write.table'
-  distances: no visible binding for global variable 'centre'
-  distances: no visible binding for global variable 'activities'
-  mean_centre: no visible binding for global variable 'activities'
-  mean_centre: no visible global function definition for 'write.table'
-  median_centre: no visible binding for global variable 'activities'
-  median_centre: no visible global function definition for 'median'
-  median_centre: no visible global function definition for 'write.table'
-  plot_box: no visible global function definition for 'par'
-  plot_box: no visible binding for global variable 'r.BOX'
-  plot_box: no visible global function definition for 'plot'
-  plot_box: no visible global function definition for 'title'
-  plot_box: no visible global function definition for 'segments'
-  plot_box: no visible global function definition for 'abline'
-  plot_box: no visible global function definition for 'points'
-  plot_box: no visible global function definition for 'dev.off'
-  plot_centres: no visible global function definition for 'par'
-  plot_centres: no visible binding for global variable 'r.SDE'
-  plot_centres: no visible global function definition for 'plot'
-  plot_centres: no visible global function definition for 'points'
-  plot_centres: no visible binding for global variable 'r.CF'
-  plot_centres: no visible binding for global variable 'r.median'
-  plot_centres: no visible binding for global variable 'r.CMD'
-  plot_centres: no visible binding for global variable 'r.CF2PTS'
-  plot_sdd: no visible global function definition for 'par'
-  plot_sdd: no visible binding for global variable 'r.SDD'
-  plot_sdd: no visible global function definition for 'plot'
-  plot_sdd: no visible global function definition for 'lines'
-  plot_sdd: no visible global function definition for 'title'
-  plot_sdd: no visible global function definition for 'abline'
-  plot_sdd: no visible global function definition for 'points'
-  plot_sdd: no visible global function definition for 'dev.off'
-  plot_sde: no visible global function definition for 'par'
-  plot_sde: no visible binding for global variable 'r.SDE'
-  plot_sde: no visible global function definition for 'plot'
-  plot_sde: no visible global function definition for 'lines'
-  plot_sde: no visible global function definition for 'title'
-  plot_sde: no visible global function definition for 'segments'
-  plot_sde: no visible global function definition for 'points'
-  plot_sde: no visible global function definition for 'dev.off'
-  Undefined global functions or variables:
-    abline activities activities2 centre chull dev.off gridpts lines
-    median par plot points r.BOX r.CF r.CF2PTS r.CMD r.SDD r.SDE r.median
-    sd segments title write.table wtd.var
-  Consider adding
-    importFrom("grDevices", "chull", "dev.off")
-    importFrom("graphics", "abline", "lines", "par", "plot", "points",
-               "segments", "title")
-    importFrom("stats", "median", "sd")
-    importFrom("utils", "write.table")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/aspace-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/aspace-00check.html>
+Package: gravity
+****************
 
-Version: 3.2
-Check: R code for possible problems, Result: NOTE
-  CF: no visible binding for global variable 'activities'
-  CF2PTS: no visible binding for global variable 'activities'
-  CF2PTS: no visible binding for global variable 'activities2'
-  CMD: no visible binding for global variable 'activities'
-  CMD: no visible global function definition for 'gridpts'
-  calc_box: no visible binding for global variable 'activities'
-  calc_box: no visible global function definition for 'wtd.var'
-  calc_sdd: no visible binding for global variable 'activities'
-  calc_sde: no visible binding for global variable 'activities'
-  distances: no visible binding for global variable 'centre'
-  distances: no visible binding for global variable 'activities'
-  mean_centre: no visible binding for global variable 'activities'
-  median_centre: no visible binding for global variable 'activities'
-  plot_box: no visible binding for global variable 'r.BOX'
-  plot_centres: no visible binding for global variable 'r.SDE'
-  plot_centres: no visible binding for global variable 'r.CF'
-  plot_centres: no visible binding for global variable 'r.median'
-  plot_centres: no visible binding for global variable 'r.CMD'
-  plot_centres: no visible binding for global variable 'r.CF2PTS'
-  plot_sdd: no visible binding for global variable 'r.SDD'
-  plot_sde: no visible binding for global variable 'r.SDE'
-See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/aspace-00check.html>
+Current CRAN status: OK: 12
+See: <https://CRAN.R-project.org/web/checks/check_results_gravity.html>
 
-Package: Ohmage
-***************
+Package: iRegression
+********************
+
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_iRegression.html>
+
+Package: DiversitySampler
+*************************
 
 Current CRAN status: NOTE: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_Ohmage.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_DiversitySampler.html>
 
-Version: 2.11-4
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘XML’ in package code.
-    Please use :: or requireNamespace() instead.
-    See section 'Suggested packages' in the 'Writing R Extensions' manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/Ohmage-00check.html>
+Version: 2.1
+Check: DESCRIPTION meta-information, Result: NOTE
+  Malformed Title field: should not end in a period.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/DiversitySampler-00check.html>
 
-Version: 2.11-4
-Check: S3 generic/method consistency, Result: NOTE
-  Found the following apparent S3 methods exported but not registered:
-    as.vector.multifactor
-  See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
-  manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/Ohmage-00check.html>
+Version: 2.1
+Check: Rd line widths, Result: NOTE
+  Rd file 'H.sampler.Rd':
+    \usage lines wider than 90 characters:
+       H.sampler(x = "community matrix (spp=col,obs=row)", n = "sample size vector", nit = "number of iterations to use", base = exp(1), corr  ... [TRUNCATED]
+  
+  These lines will be truncated in the PDF manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DiversitySampler-00check.html>
 
-Version: 2.11-4
-Check: R code for possible problems, Result: NOTE
-  multifactor: no visible global function definition for ‘na.omit’
-  ruuid: no visible global function definition for ‘runif’
-  Undefined global functions or variables:
-    na.omit runif
-  Consider adding
-    importFrom("stats", "na.omit", "runif")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/Ohmage-00check.html>
-
-Version: 2.11-4
+Version: 2.1
 Flags: --no-stop-on-test-error
-Check: dependencies in R code, Result: NOTE
-  'library' or 'require' call to ‘XML’ in package code.
-    Please use :: or requireNamespace() instead.
-    See section 'Suggested packages' in the 'Writing R Extensions' manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/Ohmage-00check.html>
+Check: DESCRIPTION meta-information, Result: NOTE
+  Malformed Title field: should not end in a period.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/DiversitySampler-00check.html>
 
-Version: 2.11-4
+Version: 2.1
 Flags: --no-stop-on-test-error
-Check: S3 generic/method consistency, Result: NOTE
-  Found the following apparent S3 methods exported but not registered:
-    as.vector.multifactor
-  See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
-  manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/Ohmage-00check.html>
+Check: Rd line widths, Result: NOTE
+  Rd file 'H.sampler.Rd':
+    \usage lines wider than 90 characters:
+       H.sampler(x = "community matrix (spp=col,obs=row)", n = "sample size vector", nit = "number of iterations to use", base = exp(1), corr  ... [TRUNCATED]
+  
+  These lines will be truncated in the PDF manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DiversitySampler-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DiversitySampler-00check.html>
 
-Version: 2.11-4
-Flags: --no-stop-on-test-error
-Check: R code for possible problems, Result: NOTE
-  multifactor: no visible global function definition for ‘na.omit’
-  ruuid: no visible global function definition for ‘runif’
-  Undefined global functions or variables:
-    na.omit runif
-  Consider adding
-    importFrom("stats", "na.omit", "runif")
-  to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/Ohmage-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/Ohmage-00check.html>
+Package: EcoGenetics
+********************
+
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_EcoGenetics.html>
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -3647,7 +633,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x7e14f60>
+<environment: 0x6d9b710>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -4442,7 +1428,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.344 0.124 13.112 0 0 
+Time elapsed:  4.136 0.116 13.837 0 0 
 > grDevices::dev.off()
 null device 
           1 

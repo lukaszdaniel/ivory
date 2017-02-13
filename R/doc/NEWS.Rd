@@ -336,6 +336,15 @@
       \item Loading the \pkg{parallel} package namespace no longer sets
       or changes the \code{.Random.seed}, even if \env{R_PARALLEL_PORT}
       is unset.
+      
+      \item (Unix-alike)
+      For \samp{http://} URLs and the default method (\code{"auto"}),
+      \code{download.file()} switches to \code{method = "libcurl"} if a
+      redirection to a \samp{https://} URL is encountered.
+
+      For \code{url()} with method \code{"default"} and an explicit
+      \code{open} argument, if opening fails because of redirection to
+      an \samp{https://} URL then \code{method = "libcurl"} is tried.
     }
   }
 
