@@ -529,8 +529,10 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     do {
 	int numfds;
 	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
-	if (mc != CURLM_OK)  // internal, do not translate
-	    error(_("'curl_multi_wait()' function failed, code %d"), mc);
+	if (mc != CURLM_OK)  { // internal, do not translate
+	    warning(_("'curl_multi_wait()' function failed, code %d"), mc);
+	    break;
+	}
 	if (!numfds) {
 	    /* 'numfds' being zero means either a timeout or no file
 	       descriptors to wait for. Try timeout on first
@@ -673,8 +675,10 @@ static int fetchData(RCurlconn ctxt)
     do {
 	int numfds;
 	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
-	if (mc != CURLM_OK)
-	    error(_("'curl_multi_wait()' function failed, code %d"), mc);
+	if (mc != CURLM_OK) {
+	    warning(_("'curl_multi_wait()' function failed, code %d"), mc);
+	    break;
+	}
 	if (!numfds) {
 	    if (repeats++ > 0) Rsleep(0.1);
 	} else repeats = 0;
