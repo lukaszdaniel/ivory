@@ -8,6 +8,18 @@
 \section{\Rlogo CHANGES IN R-devel}{
   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
     \itemize{
+      \item (Unix-alike)
+      The default method for \code{download.file()} and \code{url()}
+      now chooses \code{"libcurl"} except for \samp{file://}
+      URLs.  There will be small changes in the format and wording of
+      messages, including in rare cases if an issue is a warning or an
+      error.
+
+      Those who use proxies should check that their settings are
+      compatible (see \code{?download.file}: the most commonly used
+      forms work for both methods \code{"internal"} and
+      \code{"libcurl"}).
+      
       \item \code{table()} has been amended to be more internally
       consistent and become back compatible to \R <= 2.7.2 again.
       Consequently, \code{table(1:2, exclude=NULL)} no longer contains a
@@ -53,15 +65,16 @@
 
       \item Matrix products now consistently bypass BLAS when the inputs
       have NaN/Inf values. Performance of the check of inputs has been
-      improved. Performance when BLAS is used is improved for matrix/vector
-      and vector/matrix multiplication (DGEMV is now used instead of DGEMM).
+      improved. Performance when BLAS is used is improved for
+      matrix/vector and vector/matrix multiplication (DGEMV is now used
+      instead of DGEMM).
 
-      One can now choose from alternative matrix product implementations via
-      \code{options(matprod = )}.  The \code{"internal"} implementation is
-      unoptimized but consistent in precision with other summation in R
-      (uses \code{long double} accumulators).  \code{"blas"} calls BLAS
-      directly for best performance, yet usually with undefined behavior for
-      inputs with NaN/Inf.
+      One can now choose from alternative matrix product implementations
+      via \code{options(matprod = )}.  The \code{"internal"}
+      implementation is not optimized for speed but consistent in
+      precision with other summations in R (uses \code{long double}
+      accumulators).  \code{"blas"} calls BLAS directly for best speed,
+      yet usually with undefined behavior for inputs with NaN/Inf.
     }
   }
 
@@ -510,6 +523,10 @@
 
       \item \command{R CMD check} now checks any \samp{BugReports} field
       to be non-empty and a suitable single URL.
+
+      \item \command{R CMD check --as-cran} now NOTEs if the package does not
+      register its native routines or does not declare its intentions on
+      (native) symbol search.  (This will become a WARNING in due course.)
     }
   }
       
@@ -768,7 +785,7 @@
       error report (rather than an incorrect result) for much longer
       inputs (millions for a smooth distribution).
 
-      \item \code{findMethod} failed if the active signature had
+      \item \code{findMethod()} failed if the active signature had
       expanded beyond what a particular package used. (Example with
       packages \CRANpkg{XR} and \CRANpkg{XRJulia} on \acronym{CRAN}).
 
