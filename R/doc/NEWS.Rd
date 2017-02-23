@@ -243,8 +243,8 @@
       %% avoid the name problem seen in \PR{17119}.
 
       \item \code{try()} gains a new argument \code{outFile} with a
-      default that can be modified \emph{via} \code{options(try.outFile
-      = .)}, useful notably for \code{Sweave}.
+      default that can be modified \emph{via}
+      \code{options(try.outFile = .)}, useful notably for \code{Sweave}.
 
       \item The unexported low-level functions in package \pkg{parallel}
       for passing serialized \R objects to and from forked children now
@@ -253,8 +253,8 @@
       returning gigabyte results from forked processes \emph{via}
       serialization should be avoided if at all possible).
 
-      \item Connections now \code{print()} without error, even if
-      invalid, i.e., typically after having been destroyed.
+      \item Connections now \code{print()} without error even if
+      invalid, e.g.\sspace{}after having been destroyed.
 
       \item \code{apropos()} and \code{find(simple.words = FALSE)} no
       longer match object names starting with \samp{.} which are known
@@ -361,6 +361,39 @@
       \item Methods \code{"wget"} and \code{"curl"} for
       \code{download.file()} now give an \R error rather than a non-zero
       return value when the external command has a non-zero status.
+
+      \item Encoding name \code{"utf8"} is mapped to \code{"UTF-8"}.
+      Many implementations of \code{iconv} accept \code{"utf8"}, but not
+      GNU \pkg{libiconv} (including the late 2016 version 1.15).
+
+      \item \code{sessionInfo()} shows the full paths to the library or
+      executable files providing the BLAS/LAPACK implementations
+      currently in use (not available on Windows).
+
+      \item The binning algorithm used by bandwidth selectors
+      \code{bw.ucv()}, \code{bw.bcv()} and \code{bw.SJ()} switches to a
+      version linear in the input size \code{n} for \code{n > nb/2}.
+      (The calculations are the same, but for larger \code{n/nb} it is
+      worth doing the binning in advance.)
+ 
+      \item \code{grep(perl = TRUE)} and friends can now make use of
+      PCRE's Just-In-Time mechanism, for PCRE \eqn{\le}{>=} 8.20 on
+      platforms where JIT is supported.  It is used by default whenever
+      the \code{pattern} is studied, which by default requires an input
+      \code{x} of length at least 10.  (Based on a patch from Mikko
+      Korpela.)
+
+      This is controlled by a new option \code{PCRE_use_JIT}.
+
+      Note that in general this makes little difference to the speed,
+      and may take a little longer: its benefits are most evident on
+      strings of thousands of characters.  As a side effect it reduces
+      the chances of C stack overflow in the PCRE library on very long
+      strings (millions of characters).
+
+      \item There is a new option \code{PCRE_study} which controls when
+      \code{grep(perl = TRUE)} and friends \sQuote{study} the compiled
+      pattern.
     }
   }
 
@@ -460,7 +493,8 @@
       will be used by \code{Sys.setFileTime()} and
       \code{file.copy(copy.date = TRUE)}.  This may result in slightly
       more accurate file times.  (It is available on Linux and FreeBSD
-      but not macOS nor Solaris.)
+      but not macOS.)
+      %% My Solaris 10 system does not have it, but Oracle's online help does
       
       \item The minimum version requirement for \code{libcurl} has been
       reduced to 7.22.0, although at least 7.28.0 is preferred and
@@ -571,6 +605,11 @@
       \item Header \file{Rconfig.h} no longer defines
       \samp{SUPPORT_OPENMP}; instead use \samp{_OPENMP} (as documented
       for a long time).
+      
+      \item (C-level Native routine registration.)  The deprecated
+      \code{styles} component of \code{R_CMethodDef} and
+      \code{R_FortranMethodDef} no longer does anything.
+      %% used by packages RandomFieldUtils SOD aster aster2 polyapost potts
     }
   }
 
@@ -704,6 +743,11 @@
       \item \code{str()} no longer shows \code{"list output truncated"},
       in cases that list was not shown at all.  Thanks to Neal Fultz
       (\PR{17219})
+
+      \item Fix for \code{cairo_pdf()} (and \code{svg()} and
+      \code{cairo_ps()}) when replaying a saved display list that contains
+      a mix of \pkg{grid} and \pkg{graphics} output.
+      (Report by Yihui Xie.)
     }
   }
 }
@@ -714,17 +758,19 @@
       \item Changes when redirection of a \samp{http://} URL to a
       \samp{https://} URL is encountered:
       
-      The internal methods of \code{download.file()} and \code{url()}
-      now report that they cannot follow this (rather than failing
-      silently).
+      \itemize{
+	\item The internal methods of \code{download.file()} and
+	\code{url()} now report that they cannot follow this (rather
+	than failing silently).
 
-      (Unix-alike) \code{download.file(method = "auto")} (the default)
-      re-tries with \code{method = "libcurl"}.
+	\item (Unix-alike) \code{download.file(method = "auto")} (the
+	default) re-tries with \code{method = "libcurl"}.
 
-      (Unix-alike) \code{url(method = "default")} with an explicit
-      \code{open} argument re-tries with \code{method = "libcurl"}.
-      This covers many of the usages, e.g.\sspace{}\code{readLines()}
-      with a URL argument.
+	\item (Unix-alike) \code{url(method = "default")} with an
+	explicit \code{open} argument re-tries with
+	\code{method = "libcurl"}.  This covers many of the usages,
+	e.g.\sspace{}\code{readLines()} with a URL argument.
+      }
     }
   }
 
@@ -741,6 +787,14 @@
       \item Environmental variable \env{_R_CHECK_TESTS_NLINES_} controls
       how \command{R CMD check} reports failing tests (see §8 of the
       \sQuote{R Internals} manual).
+    }
+  }
+
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item (C-level Native routine registration.)  The undocumented
+      \code{styles} field of the components of \code{R_CMethodDef} and
+      \code{R_FortranMethodDef} is deprecated.
     }
   }
 
@@ -814,6 +868,10 @@
 
       \item \code{qbeta()} underflowed too early in some very asymmetric
       cases.  (\PR{17178})
+              
+      \item \command{R CMD Rd2pdf} had problems with packages with
+      non-ASCII titles in \file{.Rd} files (usually the titles were
+      omitted).
     }
   }
 }

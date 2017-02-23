@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2016  The R Core Team
+ *  Copyright (C) 1997--2017  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Pulic License as published by
@@ -80,6 +80,24 @@ strsplit grep [g]sub [g]regexpr
 # include <pcre.h>
 #endif
 
+/* Compatibility with PCRE < 8.20 */
+#ifndef PCRE_STUDY_JIT_COMPILE
+# define PCRE_STUDY_JIT_COMPILE 0
+#else
+/* 
+   Maximum stack size: note this is reserved but not allocated until needed.
+   The help says 1M suffices, but we found more was needed for strings
+   around a million bytes.
+*/
+#define JIT_STACK_MAX 64*1024*1024
+/* 
+   This will stay reserved until the end of the sesiion, but at 64MB
+   that is not an issue -- and most sessions will not use PCRE with
+   more than 10 strings.
+ */
+static pcre_jit_stack *jit_stack = NULL; // allocated at first use.
+#endif
+
 
 /* we allow pat == NULL if the regex cannot be safely expressed
    as a string (e.g., when using grepRaw) */
@@ -120,6 +138,39 @@ static SEXP mkCharW(const wchar_t *wc)
     return ans;
 }
 
+
+static void pcre_exec_error(int rc, R_xlen_t i)
+{
+    if (rc > -2) return;
+    // too mucn effort to handle long-vector indices, including on Windows
+    switch (rc) {
+#ifdef PCRE_ERROR_JIT_STACKLIMIT
+    case PCRE_ERROR_JIT_STACKLIMIT:
+	warning(_("JIT stack limit reached in PCRE for element %d"),
+		(int) i + 1);
+	break;
+#endif
+    case PCRE_ERROR_MATCHLIMIT:
+	warning(_("back-tracking limit reached in PCRE for element %d"),
+		(int) i + 1);
+	break;
+    case PCRE_ERROR_RECURSIONLIMIT:
+	warning(_("recursion limit reached in PCRE for element %d"),
+		(int) i + 1);
+	break;
+    case PCRE_ERROR_INTERNAL:
+    case PCRE_ERROR_UNKNOWN_OPCODE:
+	warning(_("unexpected internal error in PCRE for element %d"),
+		(int) i + 1);
+	break;
+#ifdef PCRE_ERROR_RECURSELOOP
+   case PCRE_ERROR_RECURSELOOP:
+	warning(_("PCRE detected a recursive loop in the pattern for element %d"),
+		(int) i + 1);
+	break;
+#endif
+    }
+}
 
 /* strsplit is going to split the strings in the first argument into
  * tokens depending on the second argument. The characters of the second
@@ -372,7 +423,7 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	} else if (perl_opt) {
 	    pcre *re_pcre;
-	    pcre_extra *re_pe;
+	    pcre_extra *re_pe = NULL;
 	    int erroffset, ovector[30];
 	    const char *errorptr;
 	    int options = 0;
@@ -400,9 +451,22 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			    errorptr, split+erroffset);
 		error(_("invalid split pattern '%s'"), split);
 	    }
-	    re_pe = pcre_study(re_pcre, 0, &errorptr);
+	    Rboolean use_JIT = TRUE;
+	    SEXP op = GetOption1(install("PCRE_use_JIT"));
+	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
+	    re_pe = pcre_study(re_pcre,
+			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
+#if PCRE_STUDY_JIT_COMPILE
+	    else {
+		if (!jit_stack)
+		    jit_stack = pcre_jit_stack_alloc(32*1024, JIT_STACK_MAX);
+		if (jit_stack)
+		    pcre_assign_jit_stack(re_pe, NULL, jit_stack);
+	    }
+#endif
 
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
@@ -435,14 +499,17 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		ntok = 0;
 		bufp = buf;
 		if (*bufp) {
-		    while(pcre_exec(re_pcre, re_pe, bufp, (int) strlen(bufp),
-				    0, 0, ovector, 30) >= 0) {
+		    int rc;
+		    while((rc = pcre_exec(re_pcre, re_pe, bufp, 
+					  (int) strlen(bufp),
+					  0, 0, ovector, 30)) >= 0) {
 			/* Empty matches get the next char, so move by one. */
 			bufp += max(ovector[1], 1);
 			ntok++;
 			if (*bufp == '\0')
 			    break;
 		    }
+		    pcre_exec_error(rc, i);
 		}
 		SET_VECTOR_ELT(ans, i,
 			       t = allocVector(STRSXP, ntok + (*bufp ? 1 : 0)));
@@ -450,8 +517,10 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		bufp = buf;
 		pt = Realloc(pt, strlen(buf)+1, char);
 		for (j = 0; j < ntok; j++) {
-		    pcre_exec(re_pcre, re_pe, bufp, (int) strlen(bufp), 0, 0,
-			      ovector, 30);
+		    int rc = pcre_exec(re_pcre, re_pe, bufp, 
+				       (int) strlen(bufp), 0, 0,
+				       ovector, 30);
+		    pcre_exec_error(rc, i);
 		    if (ovector[1] > 0) {
 			/* Match was non-empty. */
 			if (ovector[0] > 0)
@@ -477,7 +546,11 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		vmaxset(vmax2);
 	    }
-	    pcre_free(re_pe);
+#if PCRE_STUDY_JIT_COMPILE
+	    if(re_pe) pcre_free_study(re_pe);
+#else
+	    if(re_pe) pcre_free(re_pe);
+#endif
 	    pcre_free(re_pcre);
 	} else if (!useBytes && use_UTF8) { /* ERE in wchar_t */
 	    regex_t reg;
@@ -592,12 +665,16 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		ntok = 0;
 		bufp = buf;
 		if (*bufp) {
-		    while(tre_regexec(&reg, bufp, 1, regmatch, 0) == 0) {
+		    while((rc = tre_regexec(&reg, bufp, 1, regmatch, 0)) == 0) {
 			/* Empty matches get the next char, so move by one. */
 			bufp += max(regmatch[0].rm_eo, 1);
 			ntok++;
 			if (*bufp == '\0') break;
 		    }
+		    // AFAICS the only possible error report is REG_ESPACE
+		    if (rc == REG_ESPACE)
+			warning(_("Out-of-memory error in regexp matching for element %d"),
+				(int) i + 1);
 		}
 		SET_VECTOR_ELT(ans, i,
 			       t = allocVector(STRSXP, ntok + (*bufp ? 1 : 0)));
@@ -605,7 +682,11 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		bufp = buf;
 		pt = Realloc(pt, strlen(buf)+1, char);
 		for (j = 0; j < ntok; j++) {
-		    tre_regexec(&reg, bufp, 1, regmatch, 0);
+		    int rc = tre_regexec(&reg, bufp, 1, regmatch, 0);
+		    // AFAICS the only possible error report is REG_ESPACE
+		    if (rc == REG_ESPACE)
+			warning(_("Out-of-memory error in regexp matching for element %d"),
+				(int) i + 1);
 		    if (regmatch[0].rm_eo > 0) {
 			/* Match was non-empty. */
 			if (regmatch[0].rm_so > 0)
@@ -852,6 +933,14 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
+	Rboolean pcre_st = (n >= 10);
+	SEXP op = GetOption1(install("PCRE_study"));
+	if (TYPEOF(op) == LGLSXP) {
+	    pcre_st = asLogical(op) > 0;
+	} else {
+	    int nth = asInteger(op);
+	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
+	}
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -862,11 +951,24 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
 			errorptr, spat+erroffset);
 	    error(_("invalid regular expression '%s'"), spat);
-	    if (n > 10) {
-		re_pe = pcre_study(re_pcre, 0, &errorptr);
-		if (errorptr)
-		    warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
+	}
+	if (pcre_st) {
+	    Rboolean use_JIT = TRUE;
+	    SEXP op = GetOption1(install("PCRE_use_JIT"));
+	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
+	    re_pe = pcre_study(re_pcre,
+			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       &errorptr);
+	    if (errorptr)
+		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
+#if PCRE_STUDY_JIT_COMPILE
+	    else {
+		if (!jit_stack)
+		    jit_stack = pcre_jit_stack_alloc(32*1024, JIT_STACK_MAX);
+		if (jit_stack)
+		    pcre_assign_jit_stack(re_pe, NULL, jit_stack);
 	    }
+#endif
 	}
     } else {
 	int cflags = REG_NOSUB | REG_EXTENDED;
@@ -907,8 +1009,13 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (fixed_opt)
 		LOGICAL(ind)[i] = fgrep_one(spat, s, useBytes, use_UTF8, NULL) >= 0;
 	    else if (perl_opt) {
-		if (pcre_exec(re_pcre, re_pe, s, (int) strlen(s), 0, 0, ov, 0) >= 0)
-		    INTEGER(ind)[i] = 1;
+		int rc =
+		    pcre_exec(re_pcre, re_pe, s, (int) strlen(s), 0, 0, ov, 0);
+		if(rc >= 0) INTEGER(ind)[i] = 1;
+		else {
+		    INTEGER(ind)[i] = 0;
+		    pcre_exec_error(rc, i);
+		}
 	    } else {
 		if (!use_WC)
 		    rc = tre_regexecb(&reg, s, 0, NULL, 0);
@@ -916,6 +1023,10 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		    rc = tre_regwexec(&reg, wtransChar(STRING_ELT(text, i)),
 				      0, NULL, 0);
 		if (rc == 0) LOGICAL(ind)[i] = 1;
+		// AFAICS the only possible error report is REG_ESPACE
+		if (rc == REG_ESPACE)
+		    warning(_("Out-of-memory error in regexp matching for element %d"),
+			    (int) i + 1);
 	    }
 	}
 	vmaxset(vmax);
@@ -924,7 +1035,12 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt);
     else if (perl_opt) {
+#if PCRE_STUDY_JIT_COMPILE
+	// function added in 8.20, needed if JIT is used.
+	if (re_pe) pcre_free_study(re_pe);
+#else
 	if (re_pe) pcre_free(re_pe);
+#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
     } else
@@ -1609,6 +1725,14 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     } else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
+	Rboolean pcre_st = (n >= 10);
+	SEXP op = GetOption1(install("PCRE_study"));
+	if (TYPEOF(op) == LGLSXP) {
+	    pcre_st = asLogical(op) > 0;
+	} else {
+	    int nth = asInteger(op);
+	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
+	}
 	if (use_UTF8) cflags |= PCRE_UTF8;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -1620,10 +1744,23 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 			errorptr, spat+erroffset);
 	    error(_("invalid regular expression '%s'"), spat);
 	}
-	if (n > 10) {
-	    re_pe = pcre_study(re_pcre, 0, &errorptr);
+	if (pcre_st) {
+	    Rboolean use_JIT = TRUE;
+	    SEXP op = GetOption1(install("PCRE_use_JIT"));
+	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
+	    re_pe = pcre_study(re_pcre,
+			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
+#if PCRE_STUDY_JIT_COMPILE
+	    else {
+		if (!jit_stack)
+		    jit_stack = pcre_jit_stack_alloc(32*1024, JIT_STACK_MAX);
+		if (jit_stack)
+		    pcre_assign_jit_stack(re_pe, NULL, jit_stack);
+	    }
+#endif
 	}
 	replen = strlen(srep);
     } else {
@@ -1756,6 +1893,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	       }
 	       eflag = PCRE_NOTBOL;  /* probably not needed */
 	   }
+	   pcre_exec_error(ncap, i);
 	   if (nmatch == 0)
 	       SET_STRING_ELT(ans, i, STRING_ELT(text, i));
 	   else if (STRING_ELT(rep, 0) == NA_STRING)
@@ -1781,7 +1919,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	   }
 	   Free(cbuf);
        } else if (!use_WC) {
-	    int maxrep;
+	    int maxrep, rc;
 	    /* extended regexp in bytes */
 
 	    ns = (int) strlen(s);
@@ -1796,7 +1934,8 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	    } else nns = ns + maxrep + 1000;
 	    u = cbuf = Calloc(nns, char);
 	    offset = 0; nmatch = 0; eflags = 0; last_end = -1;
-	    while (tre_regexecb(&reg, s+offset, 10, regmatch, eflags) == 0) {
+	    while ((rc = tre_regexecb(&reg, s+offset, 10, regmatch, eflags))
+		   == 0) {
 		/* printf("%s, %d %d\n", &s[offset],
 		   regmatch[0].rm_so, regmatch[0].rm_eo); */
 		nmatch++;
@@ -1820,6 +1959,11 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		eflags = REG_NOTBOL;
 	    }
+	    // AFAICS the only possible error report is REG_ESPACE
+	    if (rc == REG_ESPACE)
+		warning(_("Out-of-memory error in regexp matching for element %d"),
+			(int) i + 1);
+
 	    if (nmatch == 0)
 		SET_STRING_ELT(ans, i, STRING_ELT(text, i));
 	    else if (STRING_ELT(rep, 0) == NA_STRING)
@@ -1908,7 +2052,11 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt) ;
     else if (perl_opt) {
+#if PCRE_STUDY_JIT_COMPILE
+	if (re_pe) pcre_free_study(re_pe);
+#else
 	if (re_pe) pcre_free(re_pe);
+#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
     } else tre_regfree(&reg);
@@ -1930,9 +2078,10 @@ static int getNc(const char *s, int st)
 
 
 static SEXP
-gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use_WC)
+gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use_WC,
+		R_xlen_t i)
 {
-    int matchIndex = -1, j, st, foundAll = 0, foundAny = 0;
+    int matchIndex = -1, j, st, foundAll = 0, foundAny = 0, rc;
     size_t len, offset = 0;
     regmatch_t regmatch[10];
     SEXP ans, matchlen;         /* Return vect and its attribute */
@@ -1960,7 +2109,7 @@ gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use_WC)
 
     while (!foundAll) {
 	if ( offset < len &&
-	     (!use_WC ? tre_regexecb(reg, string+offset, 1, regmatch, eflags) :
+	     (rc = !use_WC ? tre_regexecb(reg, string+offset, 1, regmatch, eflags) :
 	      tre_regwexec(reg, ws+offset, 1, regmatch, eflags))
 	     == 0) {
 	    if ((matchIndex + 1) == bufsize) {
@@ -2000,6 +2149,10 @@ gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use_WC)
 	    }
 	}
 	eflags = REG_NOTBOL;
+	// AFAICS the only possible error report is REG_ESPACE
+	if (rc == REG_ESPACE)
+	    warning(_("Out-of-memory error in regexp matching for element %d"),
+		    (int) i + 1);
     }
     PROTECT(ans = allocVector(INTSXP, matchIndex + 1));
     PROTECT(matchlen = allocVector(INTSXP, matchIndex + 1));
@@ -2163,7 +2316,7 @@ gregexpr_perl(const char *pattern, const char *string,
 	      pcre *re_pcre, pcre_extra *re_pe,
 	      Rboolean useBytes, Rboolean use_UTF8,
 	      int *ovector, int ovector_size,
-	      int capture_count, SEXP capture_names)
+	      int capture_count, SEXP capture_names, R_xlen_t n)
 {
     Rboolean foundAll = FALSE, foundAny = FALSE;
     int matchIndex = -1, start = 0;
@@ -2183,6 +2336,7 @@ gregexpr_perl(const char *pattern, const char *string,
 	int rc, slen = (int) strlen(string);
 	rc = pcre_exec(re_pcre, re_pe, string, slen, start, 0, ovector,
 		       ovector_size);
+	pcre_exec_error(rc, n);
 	if (rc >= 0) {
 	    if ((matchIndex + 1) == bufsize) {
 		/* Reallocate match buffers */
@@ -2407,6 +2561,14 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
+	Rboolean pcre_st = (n >= 10);
+	SEXP op = GetOption1(install("PCRE_study"));
+	if (TYPEOF(op) == LGLSXP) {
+	    pcre_st = asLogical(op) > 0;
+	} else {
+	    int nth = asInteger(op);
+	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
+	}
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -2418,10 +2580,23 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			errorptr, spat+erroffset);
 	    error(_("invalid regular expression '%s'"), spat);
 	}
-	if (n > 10) {
-	    re_pe = pcre_study(re_pcre, 0, &errorptr);
+	if (pcre_st) {
+	    Rboolean use_JIT = TRUE;
+	    SEXP op = GetOption1(install("PCRE_use_JIT"));
+	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
+	    re_pe = pcre_study(re_pcre,
+			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
+#if PCRE_STUDY_JIT_COMPILE
+	    else {
+		if (!jit_stack)
+		    jit_stack = pcre_jit_stack_alloc(32*1024, JIT_STACK_MAX);
+		if (jit_stack)
+		    pcre_assign_jit_stack(re_pe, NULL, jit_stack);
+	    }
+#endif
 	}
 	/* also extract info for named groups */
 	pcre_fullinfo(re_pcre, re_pe, PCRE_INFO_NAMECOUNT, &name_count);
@@ -2526,6 +2701,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    int rc;
 		    rc = pcre_exec(re_pcre, re_pe, s, (int) strlen(s), 0, 0,
 				   ovector, ovector_size);
+		    pcre_exec_error(rc, i);
 		    if (rc >= 0) {
 			extract_match_and_groups(use_UTF8, ovector,
 						 capture_count,
@@ -2552,6 +2728,10 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			INTEGER(ans)[i] = st + 1; /* index from one */
 			INTEGER(matchlen)[i] = regmatch[0].rm_eo - st;
 		    } else INTEGER(ans)[i] = INTEGER(matchlen)[i] = -1;
+		    // AFAICS the only possible error report is REG_ESPACE
+		    if (rc == REG_ESPACE)
+			warning(_("Out-of-memory error in regexp matching for element %d"),
+				(int) i + 1);
 		}
 	    }
 	    vmaxset(vmax);
@@ -2584,11 +2764,11 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			    elt = gregexpr_perl(spat, s, re_pcre, re_pe,
 						useBytes, use_UTF8, ovector,
 						ovector_size, capture_count,
-						capture_names);
+						capture_names, i);
 		    }
 		} else
 		    elt = gregexpr_Regexc(&reg, STRING_ELT(text, i),
-					  useBytes, use_WC);
+					  useBytes, use_WC, i);
 	    }
 	    SET_VECTOR_ELT(ans, i, elt);
 	    vmaxset(vmax);
@@ -2597,7 +2777,11 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt) ;
     else if (perl_opt) {
+#if PCRE_STUDY_JIT_COMPILE
+	if (re_pe) pcre_free_study(re_pe);
+#else
 	if (re_pe) pcre_free(re_pe);
+#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
 	UNPROTECT(1);
@@ -2762,7 +2946,11 @@ SEXP attribute_hidden do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	    } else {
 		/* No match (or could there be an error?). */
 		/* Alternatively, could return nmatch -1 values.
-		*/
+		 */
+		// AFAICS the only possible error report is REG_ESPACE
+		if (rc == REG_ESPACE)
+		    warning(_("Out-of-memory error in regexp matching for element %d"),
+			    (int) i + 1);
 		PROTECT(matchpos = ScalarInteger(-1));
 		PROTECT(matchlen = ScalarInteger(-1));
 		setAttrib(matchpos, install("match.length"), matchlen);

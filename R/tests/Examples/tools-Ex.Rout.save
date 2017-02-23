@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-02-11 r936) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-02-18 r940) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-02-11 r72157) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-02-18 r72207) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -49,7 +49,7 @@ Type 'q()' to quit R.
 > ## End (Don't show)
 > pdb <- CRAN_package_db()
 > dim(pdb)
-[1] 10081    65
+[1] 10152    65
 > ## DESCRIPTION fields included:
 > colnames(pdb)
  [1] "Package"                 "Version"                
@@ -88,11 +88,11 @@ Type 'q()' to quit R.
 > ## Summarize publication dates:
 > summary(as.Date(pdb$Published))
         Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
-"2005-10-29" "2014-10-25" "2016-02-19" "2015-08-12" "2016-10-11" "2017-02-13" 
+"2005-10-29" "2014-11-05" "2016-03-02" "2015-08-21" "2016-10-22" "2017-02-23" 
 > ## Summarize numbers of packages according to maintainer:
 > summary(lengths(split(pdb$Package, pdb$Maintainer)))
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  1.000   1.000   1.000   1.643   2.000  63.000 
+  1.000   1.000   1.000   1.642   2.000  64.000 
 > ## Packages with 'LASSO' in their Description:
 > pdb$Package[grepl("LASSO", pdb$Description)]
  [1] "apple"           "CovSelHigh"      "crrp"            "ExactPath"      
@@ -111,19 +111,19 @@ Type 'q()' to quit R.
 > with(results, table(Flavor, Status))
                                    Status
 Flavor                              ERROR FAIL NOTE   OK WARN
-  r-devel-linux-x86_64-debian-clang   102    0 3341 6493  119
-  r-devel-linux-x86_64-debian-gcc      64    0 3338 6552  112
-  r-devel-linux-x86_64-fedora-clang    72    0 3874 5990  124
-  r-devel-linux-x86_64-fedora-gcc      60    0 3930 5958  114
-  r-devel-macos-x86_64-clang           75    0 3702 6123  125
-  r-devel-windows-ix86+x86_64          94    4 3458 6291  177
-  r-patched-linux-x86_64               41    0 3366 6614   34
-  r-patched-solaris-sparc             219    0 3718 5871  116
-  r-patched-solaris-x86               184    0 3723 5940  111
-  r-release-linux-x86_64               38    0 3365 6633   32
-  r-release-osx-x86_64-mavericks      198    9 3761 5737  367
-  r-release-windows-ix86+x86_64        79    4 3475 6435   47
-  r-oldrel-windows-ix86+x86_64        199    6 2213 7397   49
+  r-devel-linux-x86_64-debian-clang    66    0 5029 4921  110
+  r-devel-linux-x86_64-debian-gcc      52    0 5052 4911  103
+  r-devel-linux-x86_64-fedora-clang    58    0 5357 4596  113
+  r-devel-linux-x86_64-fedora-gcc      46    0 5374 4602  104
+  r-devel-macos-x86_64-clang           58    0 5321 4596  114
+  r-devel-windows-ix86+x86_64          86   11 3454 6363  166
+  r-patched-linux-x86_64               30    0 3352 6702   29
+  r-patched-solaris-sparc             215    0 3716 5941  117
+  r-patched-solaris-x86               181    0 3716 6016  109
+  r-release-linux-x86_64               34    0 3347 6709   29
+  r-release-osx-x86_64-mavericks      199    9 3760 5803  361
+  r-release-windows-ix86+x86_64        75    6 3467 6512   42
+  r-oldrel-windows-ix86+x86_64        198    6 2211 7446   48
 > 
 > details <- CRAN_check_details()
 > ## Available variables:
@@ -136,47 +136,46 @@ Flavor                              ERROR FAIL NOTE   OK WARN
 +               ((Check == "whether package can be installed") &
 +                (Status != "OK")))
 > head(bad[sample(seq_len(NROW(bad)), NROW(bad)), ])
-Package: pvrank 1.1.1
+Package: rncl 0.8.2
 Flavor: r-devel-macos-x86_64-clang
 Flags: --no-stop-on-test-error
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    Warning: GNU Extension: Symbol ‘n’ is used before it is typed at (1)
-  See ‘/Users/ripley/R/packages/tests-devel/pvrank.Rcheck/00install.out’ for details.
+    /Users/ripley/R/test-3.4/progress/include/RProgress.h:172:13: warning: variable length arrays are a C99 feature [-Wvla-extension]
+    /Users/ripley/R/test-3.4/progress/include/RProgress.h:220:16: warning: variable length arrays are a C99 feature [-Wvla-extension]
+  See ‘/Users/ripley/R/packages/tests-devel/rncl.Rcheck/00install.out’ for details.
 
-Package: AMModels 0.1.1
+Package: BAMBI 1.1.0
 Flavor: r-devel-linux-x86_64-debian-clang
-Check: whether package can be installed, Result: WARNING
-  Found the following significant warnings:
-    Warning: namespace ‘unmarked’ is not available and has been replaced
-  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/AMModels.Rcheck/00install.out’ for details.
+Check: whether package can be installed, Result: ERROR
+  Installation failed.
+  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/BAMBI.Rcheck/00install.out’ for details.
 
-Package: LatentREGpp 0.2.2
+Package: medSTC 1.0.0
 Flavor: r-patched-solaris-x86
 Check: whether package can be installed, Result: ERROR
   Installation failed.
-  See ‘/home/ripley/R/packages/tests32/LatentREGpp.Rcheck/00install.out’ for details.
+  See ‘/home/ripley/R/packages/tests32/medSTC.Rcheck/00install.out’ for details.
 
-Package: EMMIXskew 1.0.1
+Package: fastcox 1.1.1
 Flavor: r-devel-linux-x86_64-debian-clang
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
-    Warning: Integer division truncated to constant ‘1’ at (1) [-Winteger-division]
-  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/EMMIXskew.Rcheck/00install.out’ for details.
+    Warning: GNU Extension: Different type kinds at (1)
+  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/fastcox.Rcheck/00install.out’ for details.
 
-Package: stpp 1.0-5
+Package: survrec 1.2-2
 Flavor: r-devel-linux-x86_64-debian-clang
 Check: whether package can be installed, Result: WARNING
   Found the following significant warnings:
     Warning: GNU Extension: Nonstandard type declaration REAL*8 at (1)
-    Warning: ‘pi’ is used uninitialized in this function [-Wuninitialized]
-  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/stpp.Rcheck/00install.out’ for details.
+  See ‘/home/hornik/tmp/R.check/r-devel-clang/Work/PKGS/survrec.Rcheck/00install.out’ for details.
 
-Package: odbc 1.0.1
+Package: ndjson 0.2.0
 Flavor: r-oldrel-windows-ix86+x86_64
 Check: whether package can be installed, Result: ERROR
   Installation failed.
-  See 'd:/Rcompile/CRANpkg/local/3.2/odbc.Rcheck/00install.out' for details.
+  See 'd:/Rcompile/CRANpkg/local/3.2/ndjson.Rcheck/00install.out' for details.
 > 
 > mtnotes <- CRAN_memtest_notes()
 > head(mtnotes)
@@ -209,261 +208,674 @@ $BASIX
 > table(do.call(rbind, mtnotes)[, "Test"])
 
  clang-ASAN clang-UBSAN   gcc6-ASAN  gcc6-UBSAN   gcc7-ASAN  gcc7-UBSAN 
-         41         123          25          78          26          78 
+         42         125          24          78          26          77 
        Keep    valgrind 
-          4         124 
+          4         126 
 > 
 > ## Summarize CRAN check status for 10 random packages
 > ## (reusing the information already read in):
 > pos <- sample(seq_len(NROW(pdb)), 10L)
 > summarize_CRAN_check_status(pdb[pos, "Package"],
 +                             results, details, mtnotes)
-Package: censReg
+Package: EcoSimR
 ****************
 
-Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_censReg.html>
+Current CRAN status: ERROR: 1, NOTE: 11, OK: 1
+See: <https://CRAN.R-project.org/web/checks/check_results_EcoSimR.html>
 
-Package: fivethirtyeight
-************************
-
-Current CRAN status: NOTE: 7, OK: 6
-See: <https://CRAN.R-project.org/web/checks/check_results_fivethirtyeight.html>
+Version: 0.1.0
+Check: R code for possible problems, Result: NOTE
+  c_score: no visible global function definition for ‘rbinom’
+  c_score_skew: no visible global function definition for ‘rbinom’
+  c_score_skew: no visible global function definition for ‘sd’
+  c_score_var: no visible global function definition for ‘rbinom’
+  c_score_var: no visible global function definition for ‘var’
+  checker: no visible global function definition for ‘rbinom’
+  checker: no visible global function definition for ‘combn’
+  czekanowski: no visible global function definition for ‘rpois’
+  czekanowski: no visible global function definition for ‘combn’
+  czekanowski_skew: no visible global function definition for ‘rpois’
+  czekanowski_skew: no visible global function definition for ‘combn’
+  czekanowski_skew: no visible global function definition for ‘sd’
+  czekanowski_var: no visible global function definition for ‘rpois’
+  czekanowski_var: no visible global function definition for ‘combn’
+  czekanowski_var: no visible global function definition for ‘var’
+  min_diff: no visible global function definition for ‘runif’
+  min_ratio: no visible global function definition for ‘runif’
+  null_model_engine: no visible global function definition for
+    ‘txtProgressBar’
+  null_model_engine: no visible global function definition for
+    ‘setTxtProgressBar’
+  pianka: no visible global function definition for ‘rpois’
+  pianka: no visible global function definition for ‘combn’
+  pianka_skew: no visible global function definition for ‘rpois’
+  pianka_skew: no visible global function definition for ‘combn’
+  pianka_skew: no visible global function definition for ‘sd’
+  pianka_var: no visible global function definition for ‘rpois’
+  pianka_var: no visible global function definition for ‘combn’
+  pianka_var: no visible global function definition for ‘var’
+  plot.coocnullmod: no visible global function definition for ‘par’
+  plot.coocnullmod: no visible global function definition for ‘plot’
+  plot.coocnullmod: no visible global function definition for ‘mtext’
+  plot.coocnullmod: no visible global function definition for ‘rect’
+  plot.coocnullmod: no visible global function definition for ‘hist’
+  plot.coocnullmod: no visible global function definition for ‘abline’
+  plot.coocnullmod: no visible global function definition for ‘quantile’
+  plot.coocnullmod: no visible global function definition for ‘lines’
+  plot.coocnullmod: no visible global function definition for ‘lowess’
+  plot.nichenullmod: no visible global function definition for ‘par’
+  plot.nichenullmod: no visible global function definition for ‘hist’
+  plot.nichenullmod: no visible global function definition for ‘abline’
+  plot.nichenullmod: no visible global function definition for ‘quantile’
+  plot.nichenullmod: no visible global function definition for ‘mtext’
+  plot.nichenullmod: no visible global function definition for ‘plot’
+  plot.nullmod: no visible global function definition for ‘par’
+  plot.nullmod: no visible global function definition for ‘hist’
+  plot.nullmod: no visible global function definition for ‘abline’
+  plot.nullmod: no visible global function definition for ‘quantile’
+  plot.nullmod: no visible global function definition for ‘mtext’
+  plot.sizenullmod: no visible global function definition for ‘par’
+  plot.sizenullmod: no visible global function definition for ‘hist’
+  plot.sizenullmod: no visible global function definition for ‘abline’
+  plot.sizenullmod: no visible global function definition for ‘quantile’
+  plot.sizenullmod: no visible global function definition for ‘mtext’
+  plot.sizenullmod: no visible global function definition for ‘plot’
+  plot.sizenullmod: no visible global function definition for ‘lines’
+  plot.sizenullmod: no visible global function definition for ‘points’
+  plot.sizenullmod: no visible global function definition for ‘text’
+  plot.sizenullmod: no visible global function definition for ‘barplot’
+  ra1: no visible global function definition for ‘rpois’
+  ra1: no visible global function definition for ‘runif’
+  ra2: no visible global function definition for ‘rpois’
+  ra2: no visible global function definition for ‘runif’
+  ra3: no visible global function definition for ‘rpois’
+  ra4: no visible global function definition for ‘rpois’
+  ra4 : NonZeroRowShuffle: no visible global function definition for
+    ‘runif’
+  ranMatGen: no visible global function definition for ‘rbeta’
+  ranMatGen: no visible global function definition for ‘rpois’
+  sim10: no visible global function definition for ‘runif’
+  sim9: no visible global function definition for ‘txtProgressBar’
+  sim9: no visible global function definition for ‘setTxtProgressBar’
+  sim9_single: no visible global function definition for ‘rbinom’
+  size_gamma: no visible global function definition for ‘rnorm’
+  size_gamma: no visible global function definition for ‘rgamma’
+  size_source_pool: no visible global function definition for ‘runif’
+  size_uniform: no visible global function definition for ‘runif’
+  size_uniform_user: no visible global function definition for ‘runif’
+  species_combo: no visible global function definition for ‘rbinom’
+  summary.coocnullmod: no visible global function definition for ‘var’
+  summary.coocnullmod: no visible global function definition for
+    ‘quantile’
+  summary.coocnullmod: no visible global function definition for ‘sd’
+  summary.nichenullmod: no visible global function definition for ‘var’
+  summary.nichenullmod: no visible global function definition for
+    ‘quantile’
+  summary.nichenullmod: no visible global function definition for ‘sd’
+  summary.nullmod: no visible global function definition for ‘var’
+  summary.nullmod: no visible global function definition for ‘quantile’
+  summary.nullmod: no visible global function definition for ‘sd’
+  summary.sizenullmod: no visible global function definition for ‘var’
+  summary.sizenullmod: no visible global function definition for
+    ‘quantile’
+  summary.sizenullmod: no visible global function definition for ‘sd’
+  v_ratio: no visible global function definition for ‘rbinom’
+  v_ratio: no visible global function definition for ‘var’
+  v_ratio: no visible binding for global variable ‘var’
+  var_diff: no visible global function definition for ‘runif’
+  var_diff: no visible global function definition for ‘var’
+  var_ratio: no visible global function definition for ‘runif’
+  var_ratio: no visible global function definition for ‘var’
+  Undefined global functions or variables:
+    abline barplot combn hist lines lowess mtext par plot points quantile
+    rbeta rbinom rect rgamma rnorm rpois runif sd setTxtProgressBar text
+    txtProgressBar var
+  Consider adding
+    importFrom("graphics", "abline", "barplot", "hist", "lines", "mtext",
+               "par", "plot", "points", "rect", "text")
+    importFrom("stats", "lowess", "quantile", "rbeta", "rbinom", "rgamma",
+               "rnorm", "rpois", "runif", "sd", "var")
+    importFrom("utils", "combn", "setTxtProgressBar", "txtProgressBar")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/EcoSimR-00check.html>
 
 Version: 0.1.0
 Flags: --no-stop-on-test-error
-Check: data for non-ASCII characters, Result: NOTE
-    Note: found 346 marked UTF-8 strings
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/fivethirtyeight-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/fivethirtyeight-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/fivethirtyeight-00check.html>
+Check: R code for possible problems, Result: NOTE
+  c_score: no visible global function definition for ‘rbinom’
+  c_score_skew: no visible global function definition for ‘rbinom’
+  c_score_skew: no visible global function definition for ‘sd’
+  c_score_var: no visible global function definition for ‘rbinom’
+  c_score_var: no visible global function definition for ‘var’
+  checker: no visible global function definition for ‘rbinom’
+  checker: no visible global function definition for ‘combn’
+  czekanowski: no visible global function definition for ‘rpois’
+  czekanowski: no visible global function definition for ‘combn’
+  czekanowski_skew: no visible global function definition for ‘rpois’
+  czekanowski_skew: no visible global function definition for ‘combn’
+  czekanowski_skew: no visible global function definition for ‘sd’
+  czekanowski_var: no visible global function definition for ‘rpois’
+  czekanowski_var: no visible global function definition for ‘combn’
+  czekanowski_var: no visible global function definition for ‘var’
+  min_diff: no visible global function definition for ‘runif’
+  min_ratio: no visible global function definition for ‘runif’
+  null_model_engine: no visible global function definition for
+    ‘txtProgressBar’
+  null_model_engine: no visible global function definition for
+    ‘setTxtProgressBar’
+  pianka: no visible global function definition for ‘rpois’
+  pianka: no visible global function definition for ‘combn’
+  pianka_skew: no visible global function definition for ‘rpois’
+  pianka_skew: no visible global function definition for ‘combn’
+  pianka_skew: no visible global function definition for ‘sd’
+  pianka_var: no visible global function definition for ‘rpois’
+  pianka_var: no visible global function definition for ‘combn’
+  pianka_var: no visible global function definition for ‘var’
+  plot.coocnullmod: no visible global function definition for ‘par’
+  plot.coocnullmod: no visible global function definition for ‘plot’
+  plot.coocnullmod: no visible global function definition for ‘mtext’
+  plot.coocnullmod: no visible global function definition for ‘rect’
+  plot.coocnullmod: no visible global function definition for ‘hist’
+  plot.coocnullmod: no visible global function definition for ‘abline’
+  plot.coocnullmod: no visible global function definition for ‘quantile’
+  plot.coocnullmod: no visible global function definition for ‘lines’
+  plot.coocnullmod: no visible global function definition for ‘lowess’
+  plot.nichenullmod: no visible global function definition for ‘par’
+  plot.nichenullmod: no visible global function definition for ‘hist’
+  plot.nichenullmod: no visible global function definition for ‘abline’
+  plot.nichenullmod: no visible global function definition for ‘quantile’
+  plot.nichenullmod: no visible global function definition for ‘mtext’
+  plot.nichenullmod: no visible global function definition for ‘plot’
+  plot.nullmod: no visible global function definition for ‘par’
+  plot.nullmod: no visible global function definition for ‘hist’
+  plot.nullmod: no visible global function definition for ‘abline’
+  plot.nullmod: no visible global function definition for ‘quantile’
+  plot.nullmod: no visible global function definition for ‘mtext’
+  plot.sizenullmod: no visible global function definition for ‘par’
+  plot.sizenullmod: no visible global function definition for ‘hist’
+  plot.sizenullmod: no visible global function definition for ‘abline’
+  plot.sizenullmod: no visible global function definition for ‘quantile’
+  plot.sizenullmod: no visible global function definition for ‘mtext’
+  plot.sizenullmod: no visible global function definition for ‘plot’
+  plot.sizenullmod: no visible global function definition for ‘lines’
+  plot.sizenullmod: no visible global function definition for ‘points’
+  plot.sizenullmod: no visible global function definition for ‘text’
+  plot.sizenullmod: no visible global function definition for ‘barplot’
+  ra1: no visible global function definition for ‘rpois’
+  ra1: no visible global function definition for ‘runif’
+  ra2: no visible global function definition for ‘rpois’
+  ra2: no visible global function definition for ‘runif’
+  ra3: no visible global function definition for ‘rpois’
+  ra4: no visible global function definition for ‘rpois’
+  ra4 : NonZeroRowShuffle: no visible global function definition for
+    ‘runif’
+  ranMatGen: no visible global function definition for ‘rbeta’
+  ranMatGen: no visible global function definition for ‘rpois’
+  sim10: no visible global function definition for ‘runif’
+  sim9: no visible global function definition for ‘txtProgressBar’
+  sim9: no visible global function definition for ‘setTxtProgressBar’
+  sim9_single: no visible global function definition for ‘rbinom’
+  size_gamma: no visible global function definition for ‘rnorm’
+  size_gamma: no visible global function definition for ‘rgamma’
+  size_source_pool: no visible global function definition for ‘runif’
+  size_uniform: no visible global function definition for ‘runif’
+  size_uniform_user: no visible global function definition for ‘runif’
+  species_combo: no visible global function definition for ‘rbinom’
+  summary.coocnullmod: no visible global function definition for ‘var’
+  summary.coocnullmod: no visible global function definition for
+    ‘quantile’
+  summary.coocnullmod: no visible global function definition for ‘sd’
+  summary.nichenullmod: no visible global function definition for ‘var’
+  summary.nichenullmod: no visible global function definition for
+    ‘quantile’
+  summary.nichenullmod: no visible global function definition for ‘sd’
+  summary.nullmod: no visible global function definition for ‘var’
+  summary.nullmod: no visible global function definition for ‘quantile’
+  summary.nullmod: no visible global function definition for ‘sd’
+  summary.sizenullmod: no visible global function definition for ‘var’
+  summary.sizenullmod: no visible global function definition for
+    ‘quantile’
+  summary.sizenullmod: no visible global function definition for ‘sd’
+  v_ratio: no visible global function definition for ‘rbinom’
+  v_ratio: no visible global function definition for ‘var’
+  v_ratio: no visible binding for global variable ‘var’
+  var_diff: no visible global function definition for ‘runif’
+  var_diff: no visible global function definition for ‘var’
+  var_ratio: no visible global function definition for ‘runif’
+  var_ratio: no visible global function definition for ‘var’
+  Undefined global functions or variables:
+    abline barplot combn hist lines lowess mtext par plot points quantile
+    rbeta rbinom rect rgamma rnorm rpois runif sd setTxtProgressBar text
+    txtProgressBar var
+  Consider adding
+    importFrom("graphics", "abline", "barplot", "hist", "lines", "mtext",
+               "par", "plot", "points", "rect", "text")
+    importFrom("stats", "lowess", "quantile", "rbeta", "rbinom", "rgamma",
+               "rnorm", "rpois", "runif", "sd", "var")
+    importFrom("utils", "combn", "setTxtProgressBar", "txtProgressBar")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/EcoSimR-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/EcoSimR-00check.html>
 
 Version: 0.1.0
-Check: data for non-ASCII characters, Result: NOTE
-    Note: found 346 marked UTF-8 strings
-See: <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/fivethirtyeight-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/fivethirtyeight-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/fivethirtyeight-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/fivethirtyeight-00check.html>
+Check: tests, Result: ERROR
+  Running the tests in ‘tests/testthat.R’ failed.
+  Last 13 lines of output:
+      |=================================================                     |  70%
+      |                                                                            
+      |========================================================              |  80%
+      |                                                                            
+      |===============================================================       |  90%
+      |                                                                            
+      |======================================================================| 100%
+    testthat results ================================================================
+    OK: 234 SKIPPED: 0 FAILED: 1
+    1. Failure: ra4 algorithm works: (@test_nichebreadth.R#38) 
+    
+    Error: testthat unit tests failed
+    Execution halted
+See: <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/EcoSimR-00check.html>
 
-Package: mvtnorm
-****************
-
-Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_mvtnorm.html>
-
-Package: bindrcpp
-*****************
-
-Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_bindrcpp.html>
-
-Package: CNprep
+Package: bandit
 ***************
 
 Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_CNprep.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_bandit.html>
 
-Version: 2.0
+Version: 0.5.0
 Check: R code for possible problems, Result: NOTE
-  CNclusterNcenter: no visible global function definition for ‘median’
-  CNclusterNcenter: no visible binding for global variable ‘var’
-  breakIntoGaps: no visible global function definition for ‘runif’
-  centerprob: no visible global function definition for ‘pnorm’
-  getz: no visible global function definition for ‘predict’
-  smad: no visible global function definition for ‘mad’
-  smedian: no visible global function definition for ‘median’
-  smedian.sample: no visible global function definition for ‘median’
-  smedmad: no visible global function definition for ‘median’
-  smedmad: no visible global function definition for ‘mad’
+  best_binomial_bandit : f: no visible global function definition for
+    ‘dbeta’
+  best_binomial_bandit : f: no visible global function definition for
+    ‘pbeta’
+  best_binomial_bandit: no visible global function definition for
+    ‘integrate’
+  best_poisson_bandit : f: no visible global function definition for
+    ‘dgamma’
+  best_poisson_bandit : f: no visible global function definition for
+    ‘pgamma’
+  best_poisson_bandit: no visible global function definition for
+    ‘integrate’
+  deseasonalized_trend: no visible global function definition for
+    ‘predict’
+  distribution_estimate: no visible global function definition for
+    ‘quantile’
+  distribution_estimate: no visible global function definition for
+    ‘qbeta’
+  significance_analysis: no visible global function definition for
+    ‘prop.test’
+  sim_post: no visible global function definition for ‘rbeta’
+  summarize_metrics: no visible global function definition for ‘median’
+  summarize_metrics: no visible global function definition for
+    ‘prop.test’
   Undefined global functions or variables:
-    mad median pnorm predict runif var
+    dbeta dgamma integrate median pbeta pgamma predict prop.test qbeta
+    quantile rbeta
   Consider adding
-    importFrom("stats", "mad", "median", "pnorm", "predict", "runif",
-               "var")
+    importFrom("stats", "dbeta", "dgamma", "integrate", "median", "pbeta",
+               "pgamma", "predict", "prop.test", "qbeta", "quantile",
+               "rbeta")
   to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/CNprep-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/bandit-00check.html>
 
-Version: 2.0
+Version: 0.5.0
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  CNclusterNcenter: no visible global function definition for ‘median’
-  CNclusterNcenter: no visible binding for global variable ‘var’
-  breakIntoGaps: no visible global function definition for ‘runif’
-  centerprob: no visible global function definition for ‘pnorm’
-  getz: no visible global function definition for ‘predict’
-  smad: no visible global function definition for ‘mad’
-  smedian: no visible global function definition for ‘median’
-  smedian.sample: no visible global function definition for ‘median’
-  smedmad: no visible global function definition for ‘median’
-  smedmad: no visible global function definition for ‘mad’
+  best_binomial_bandit : f: no visible global function definition for
+    ‘dbeta’
+  best_binomial_bandit : f: no visible global function definition for
+    ‘pbeta’
+  best_binomial_bandit: no visible global function definition for
+    ‘integrate’
+  best_poisson_bandit : f: no visible global function definition for
+    ‘dgamma’
+  best_poisson_bandit : f: no visible global function definition for
+    ‘pgamma’
+  best_poisson_bandit: no visible global function definition for
+    ‘integrate’
+  deseasonalized_trend: no visible global function definition for
+    ‘predict’
+  distribution_estimate: no visible global function definition for
+    ‘quantile’
+  distribution_estimate: no visible global function definition for
+    ‘qbeta’
+  significance_analysis: no visible global function definition for
+    ‘prop.test’
+  sim_post: no visible global function definition for ‘rbeta’
+  summarize_metrics: no visible global function definition for ‘median’
+  summarize_metrics: no visible global function definition for
+    ‘prop.test’
   Undefined global functions or variables:
-    mad median pnorm predict runif var
+    dbeta dgamma integrate median pbeta pgamma predict prop.test qbeta
+    quantile rbeta
   Consider adding
-    importFrom("stats", "mad", "median", "pnorm", "predict", "runif",
-               "var")
+    importFrom("stats", "dbeta", "dgamma", "integrate", "median", "pbeta",
+               "pgamma", "predict", "prop.test", "qbeta", "quantile",
+               "rbeta")
   to your NAMESPACE file.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/CNprep-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/CNprep-00check.html>
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/bandit-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/bandit-00check.html>
 
-Package: cgwtools
-*****************
+Package: gte
+************
 
 Current CRAN status: NOTE: 12, OK: 1
-See: <https://CRAN.R-project.org/web/checks/check_results_cgwtools.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_gte.html>
 
-Version: 3.0
+Version: 1.2-2
 Check: R code for possible problems, Result: NOTE
-  !: no visible global function definition for ‘dev.new’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘setNames’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘slotNames’
-  lssize : s4gonebyte : fb4: no visible binding for global variable
-    ‘slot’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘object.size’
-  lssize : s4gone : fs4: no visible global function definition for
-    ‘setNames’
-  lssize : s4gone : fs4: no visible global function definition for
-    ‘slotNames’
-  lssize : s4gone : fs4: no visible binding for global variable ‘slot’
-  mystat: no visible global function definition for ‘median’
-  mystat: no visible global function definition for ‘sd’
-  seqle: no visible global function definition for ‘head’
-  thekurt: no visible global function definition for ‘var’
-  theskew: no visible global function definition for ‘sd’
+  gte: no visible global function definition for ‘model.extract’
+  gte: no visible global function definition for ‘model.matrix’
+  gte: no visible binding for global variable ‘sd’
+  gte: no visible global function definition for ‘dnorm’
+  plot.gte: no visible global function definition for ‘plot’
+  plot.gte: no visible global function definition for ‘par’
+  plot.gte: no visible global function definition for ‘polygon’
+  plot.gte: no visible global function definition for ‘gray’
+  plot.gte: no visible global function definition for ‘lines’
+  plot.gte: no visible global function definition for ‘legend’
   Undefined global functions or variables:
-    dev.new head median object.size sd setNames slot slotNames var
+    dnorm gray legend lines model.extract model.matrix par plot polygon
+    sd
   Consider adding
-    importFrom("grDevices", "dev.new")
-    importFrom("methods", "slot", "slotNames")
-    importFrom("stats", "median", "sd", "setNames", "var")
-    importFrom("utils", "head", "object.size")
-  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
-  contains 'methods').
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/cgwtools-00check.html>
+    importFrom("grDevices", "gray")
+    importFrom("graphics", "legend", "lines", "par", "plot", "polygon")
+    importFrom("stats", "dnorm", "model.extract", "model.matrix", "sd")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/gte-00check.html>
 
-Version: 3.0
+Version: 1.2-2
+Check: compiled code, Result: NOTE
+  File ‘gte/libs/gte.so’:
+    Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
+  
+  It is good practice to register native routines and to disable symbol
+  search.
+  
+  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/gte-00check.html>
+
+Version: 1.2-2
 Flags: --no-stop-on-test-error
 Check: R code for possible problems, Result: NOTE
-  !: no visible global function definition for ‘dev.new’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘setNames’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘slotNames’
-  lssize : s4gonebyte : fb4: no visible binding for global variable
-    ‘slot’
-  lssize : s4gonebyte : fb4: no visible global function definition for
-    ‘object.size’
-  lssize : s4gone : fs4: no visible global function definition for
-    ‘setNames’
-  lssize : s4gone : fs4: no visible global function definition for
-    ‘slotNames’
-  lssize : s4gone : fs4: no visible binding for global variable ‘slot’
-  mystat: no visible global function definition for ‘median’
-  mystat: no visible global function definition for ‘sd’
-  seqle: no visible global function definition for ‘head’
-  thekurt: no visible global function definition for ‘var’
-  theskew: no visible global function definition for ‘sd’
+  gte: no visible global function definition for ‘model.extract’
+  gte: no visible global function definition for ‘model.matrix’
+  gte: no visible binding for global variable ‘sd’
+  gte: no visible global function definition for ‘dnorm’
+  plot.gte: no visible global function definition for ‘plot’
+  plot.gte: no visible global function definition for ‘par’
+  plot.gte: no visible global function definition for ‘polygon’
+  plot.gte: no visible global function definition for ‘gray’
+  plot.gte: no visible global function definition for ‘lines’
+  plot.gte: no visible global function definition for ‘legend’
   Undefined global functions or variables:
-    dev.new head median object.size sd setNames slot slotNames var
+    dnorm gray legend lines model.extract model.matrix par plot polygon
+    sd
   Consider adding
-    importFrom("grDevices", "dev.new")
-    importFrom("methods", "slot", "slotNames")
-    importFrom("stats", "median", "sd", "setNames", "var")
-    importFrom("utils", "head", "object.size")
-  to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
-  contains 'methods').
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/cgwtools-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/cgwtools-00check.html>
+    importFrom("grDevices", "gray")
+    importFrom("graphics", "legend", "lines", "par", "plot", "polygon")
+    importFrom("stats", "dnorm", "model.extract", "model.matrix", "sd")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/gte-00check.html>
 
-Package: gravity
+Version: 1.2-2
+Flags: --no-stop-on-test-error
+Check: compiled code, Result: NOTE
+  File ‘gte/libs/gte.so’:
+    Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
+  
+  It is good practice to register native routines and to disable symbol
+  search.
+  
+  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/gte-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/gte-00check.html>
+
+Package: corcounts
+******************
+
+Current CRAN status: NOTE: 12, OK: 1
+See: <https://CRAN.R-project.org/web/checks/check_results_corcounts.html>
+
+Version: 1.4
+Check: R code for possible problems, Result: NOTE
+  h.inv: no visible global function definition for ‘pnorm’
+  h.inv: no visible global function definition for ‘qnorm’
+  hfunc: no visible global function definition for ‘pnorm’
+  hfunc: no visible global function definition for ‘qnorm’
+  modified.cvine.alg: no visible global function definition for ‘qpois’
+  modified.cvine.alg: no visible global function definition for ‘qnbinom’
+  modified.cvine.alg: no visible global function definition for ‘cor’
+  modified.cvine.alg.reg: no visible global function definition for
+    ‘qpois’
+  modified.cvine.alg.reg: no visible global function definition for
+    ‘qnbinom’
+  modified.cvine.alg.reg: no visible global function definition for ‘cor’
+  rcounts : mysampling: no visible global function definition for ‘runif’
+  rcounts : mysampling: no visible global function definition for ‘qpois’
+  rcounts : mysampling: no visible global function definition for
+    ‘qnbinom’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘runif’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘qpois’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘qnbinom’
+  unstructured: no visible global function definition for ‘runif’
+  Undefined global functions or variables:
+    cor pnorm qnbinom qnorm qpois runif
+  Consider adding
+    importFrom("stats", "cor", "pnorm", "qnbinom", "qnorm", "qpois",
+               "runif")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/corcounts-00check.html>
+
+Version: 1.4
+Flags: --no-stop-on-test-error
+Check: R code for possible problems, Result: NOTE
+  h.inv: no visible global function definition for ‘pnorm’
+  h.inv: no visible global function definition for ‘qnorm’
+  hfunc: no visible global function definition for ‘pnorm’
+  hfunc: no visible global function definition for ‘qnorm’
+  modified.cvine.alg: no visible global function definition for ‘qpois’
+  modified.cvine.alg: no visible global function definition for ‘qnbinom’
+  modified.cvine.alg: no visible global function definition for ‘cor’
+  modified.cvine.alg.reg: no visible global function definition for
+    ‘qpois’
+  modified.cvine.alg.reg: no visible global function definition for
+    ‘qnbinom’
+  modified.cvine.alg.reg: no visible global function definition for ‘cor’
+  rcounts : mysampling: no visible global function definition for ‘runif’
+  rcounts : mysampling: no visible global function definition for ‘qpois’
+  rcounts : mysampling: no visible global function definition for
+    ‘qnbinom’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘runif’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘qpois’
+  rcounts.reg : mysampling: no visible global function definition for
+    ‘qnbinom’
+  unstructured: no visible global function definition for ‘runif’
+  Undefined global functions or variables:
+    cor pnorm qnbinom qnorm qpois runif
+  Consider adding
+    importFrom("stats", "cor", "pnorm", "qnbinom", "qnorm", "qpois",
+               "runif")
+  to your NAMESPACE file.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/corcounts-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/corcounts-00check.html>
+
+Package: autoSEM
 ****************
 
-Current CRAN status: OK: 12
-See: <https://CRAN.R-project.org/web/checks/check_results_gravity.html>
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_autoSEM.html>
 
-Package: iRegression
-********************
+Package: rly
+************
+
+Current CRAN status: ERROR: 1, NOTE: 5, OK: 7
+See: <https://CRAN.R-project.org/web/checks/check_results_rly.html>
+
+Version: 1.4.2
+Check: compiled code, Result: NOTE
+  File ‘rly/libs/rly.so’:
+    Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
+  
+  It is good practice to register native routines and to disable symbol
+  search.
+  
+  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/rly-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/rly-00check.html>
+
+Version: 1.4.2
+Flags: --no-stop-on-test-error
+Check: compiled code, Result: NOTE
+  File ‘rly/libs/rly.so’:
+    Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
+  
+  It is good practice to register native routines and to disable symbol
+  search.
+  
+  See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/rly-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/rly-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/rly-00check.html>
+
+Version: 1.2.1
+Check: R code for possible problems, Result: NOTE
+  parse_grammar : <anonymous>: no visible global function definition for
+    'startsWith'
+See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/rly-00check.html>
+
+Version: 1.2.1
+Check: running tests for arch ‘i386’, Result: ERROR
+  Running the tests in 'tests/testthat.R' failed.
+  Last 13 lines of output:
+    
+    
+    Generating LALR tables 
+    testthat results ================================================================
+    OK: 153 SKIPPED: 0 FAILED: 5
+    1. Failure: rule (@test.yacc_badrule.R#181) 
+    2. Failure: rule (@test.yacc_badrule.R#183) 
+    3. Failure: rule (@test.yacc_badrule.R#185) 
+    4. Failure: rule (@test.yacc_badrule.R#187) 
+    5. Failure: misplaced (@test.yacc_misplaced.R#52) 
+    
+    Error: testthat unit tests failed
+    Execution halted
+See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/rly-00check.html>
+
+Version: 1.2.1
+Check: running tests for arch ‘x64’, Result: ERROR
+  Running the tests in 'tests/testthat.R' failed.
+  Last 13 lines of output:
+    
+    
+    Generating LALR tables 
+    testthat results ================================================================
+    OK: 153 SKIPPED: 0 FAILED: 5
+    1. Failure: rule (@test.yacc_badrule.R#181) 
+    2. Failure: rule (@test.yacc_badrule.R#183) 
+    3. Failure: rule (@test.yacc_badrule.R#185) 
+    4. Failure: rule (@test.yacc_badrule.R#187) 
+    5. Failure: misplaced (@test.yacc_misplaced.R#52) 
+    
+    Error: testthat unit tests failed
+    Execution halted
+See: <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/rly-00check.html>
+
+Package: qdapTools
+******************
 
 Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_iRegression.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_qdapTools.html>
 
-Package: DiversitySampler
-*************************
-
-Current CRAN status: NOTE: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_DiversitySampler.html>
-
-Version: 2.1
-Check: DESCRIPTION meta-information, Result: NOTE
-  Malformed Title field: should not end in a period.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-sparc/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-windows-ix86+x86_64/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-oldrel-windows-ix86+x86_64/DiversitySampler-00check.html>
-
-Version: 2.1
-Check: Rd line widths, Result: NOTE
-  Rd file 'H.sampler.Rd':
-    \usage lines wider than 90 characters:
-       H.sampler(x = "community matrix (spp=col,obs=row)", n = "sample size vector", nit = "number of iterations to use", base = exp(1), corr  ... [TRUNCATED]
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-clang/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-debian-gcc/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-patched-linux-x86_64/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-release-linux-x86_64/DiversitySampler-00check.html>
-
-Version: 2.1
-Flags: --no-stop-on-test-error
-Check: DESCRIPTION meta-information, Result: NOTE
-  Malformed Title field: should not end in a period.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-macos-x86_64-clang/DiversitySampler-00check.html>
-
-Version: 2.1
-Flags: --no-stop-on-test-error
-Check: Rd line widths, Result: NOTE
-  Rd file 'H.sampler.Rd':
-    \usage lines wider than 90 characters:
-       H.sampler(x = "community matrix (spp=col,obs=row)", n = "sample size vector", nit = "number of iterations to use", base = exp(1), corr  ... [TRUNCATED]
-  
-  These lines will be truncated in the PDF manual.
-See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/DiversitySampler-00check.html>,
-     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/DiversitySampler-00check.html>
-
-Package: EcoGenetics
-********************
+Package: aspect
+***************
 
 Current CRAN status: OK: 13
-See: <https://CRAN.R-project.org/web/checks/check_results_EcoGenetics.html>
+See: <https://CRAN.R-project.org/web/checks/check_results_aspect.html>
+
+Package: oem
+************
+
+Current CRAN status: WARN: 1, NOTE: 3, OK: 9
+See: <https://CRAN.R-project.org/web/checks/check_results_oem.html>
+
+Memtest notes: clang-UBSAN
+See: <https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/oem/>,
+     <https://www.stats.ox.ac.uk/pub/bdr/memtests/clang-UBSAN/oem-Ex.Rout>
+
+Version: 2.0.4
+Flags: --no-stop-on-test-error
+Check: installed package size, Result: NOTE
+    installed size is 79.1Mb
+    sub-directories of 1Mb or more:
+      libs  78.8Mb
+See: <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-clang/oem-00check.html>,
+     <https://www.r-project.org/nosvn/R.check/r-devel-linux-x86_64-fedora-gcc/oem-00check.html>
+
+Version: 2.0.4
+Check: whether package can be installed, Result: WARNING
+  Found the following significant warnings:
+    d:/RCompile/CRANpkg/lib/3.4/BH/include/boost/unordered/detail/buckets.hpp:586:29: warning: ISO C++ 1998 does not support 'long long' [-Wlong-long]
+    d:/RCompile/CRANpkg/lib/3.4/BH/include/boost/unordered/detail/buckets.hpp:591:38: warning: ISO C++ 1998 does not support 'long long' [-Wlong-long]
+See: <https://www.r-project.org/nosvn/R.check/r-devel-windows-ix86+x86_64/oem-00check.html>
+
+Version: 2.0.4
+Check: installed package size, Result: NOTE
+    installed size is 74.2Mb
+    sub-directories of 1Mb or more:
+      libs  73.9Mb
+See: <https://www.r-project.org/nosvn/R.check/r-release-osx-x86_64-mavericks/oem-00check.html>
+
+Package: randomizeR
+*******************
+
+Current CRAN status: OK: 13
+See: <https://CRAN.R-project.org/web/checks/check_results_randomizeR.html>
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -633,7 +1045,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x6d9b710>
+<environment: 0x55d319e96468>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -1428,7 +1840,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.136 0.116 13.837 0 0 
+Time elapsed:  4.072 0.088 11.897 0 0 
 > grDevices::dev.off()
 null device 
           1 
