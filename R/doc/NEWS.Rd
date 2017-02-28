@@ -19,7 +19,7 @@
       Those who use proxies should check that their settings are
       compatible (see \code{?download.file}: the most commonly used
       forms work for both \code{"internal"} and \code{"libcurl"}).
-      
+
       \item \code{table()} has been amended to be more internally
       consistent and become back compatible to \R \eqn{\le}{<=} 2.7.2
       again.  Consequently, \code{table(1:2, exclude = NULL)} no longer
@@ -375,13 +375,18 @@
       version linear in the input size \code{n} for \code{n > nb/2}.
       (The calculations are the same, but for larger \code{n/nb} it is
       worth doing the binning in advance.)
- 
+
+      \item There is a new option \code{PCRE_study} which controls when
+      \code{grep(perl = TRUE)} and friends \sQuote{study} the compiled
+      pattern.  Previously this was done for 11 or more input strings:
+      it now defaults to 10 or more (but most examples need many more
+      for the difference from studying to be noticeable).
+      
       \item \code{grep(perl = TRUE)} and friends can now make use of
       PCRE's Just-In-Time mechanism, for PCRE \eqn{\le}{>=} 8.20 on
       platforms where JIT is supported.  It is used by default whenever
-      the \code{pattern} is studied, which by default requires an input
-      \code{x} of length at least 10.  (Based on a patch from Mikko
-      Korpela.)
+      the \code{pattern} is studied (see the prnextevious item).  (Based on
+      a patch from Mikko Korpela.)
 
       This is controlled by a new option \code{PCRE_use_JIT}.
 
@@ -389,17 +394,29 @@
       and may take a little longer: its benefits are most evident on
       strings of thousands of characters.  As a side effect it reduces
       the chances of C stack overflow in the PCRE library on very long
-      strings (millions of characters).
-
-      \item There is a new option \code{PCRE_study} which controls when
-      \code{grep(perl = TRUE)} and friends \sQuote{study} the compiled
-      pattern.
+      strings (millions of characters, but see next item).
 
       \item \code{grep(perl = TRUE)} and friends set a maximal recursion
       limit, taking into account \R's estimate of the remaining C stack
       space.  This reduces the chance of C stack overflow, but because
-      it is conservative may return a non-match with a warning in
-      examples that succeeded before. (\PR{16757})
+      it is conservative may report a non-match with a warning in
+      examples that matched before. (\PR{16757})
+
+      \item \code{getGraphicsEvent()} now works on
+      \code{X11(type = "cairo")} devices.  Thanks to Frederick Eaton (for
+      reviving an earlier patch).
+
+      \item There is a new argument \code{onIdle} for
+      \code{getGraphicsEvent()}, which allows an R function to be run
+      whenever there are no pending graphics events.  This is currently
+      only supported on X11 devices.  Thanks to Frederick Eaton.
+
+      \item The \code{deriv()} and similar functions now can compute
+      derivatives of \code{log1p()}, \code{sinpi()} and similar one
+      argument functions, thanks to a contribution by Jerry Lewis.
+
+      \item \code{median()} gets a formal \code{\dots} argument, so
+      methods with extra arguments can be provided.
     }
   }
 
@@ -501,12 +518,12 @@
       more accurate file times.  (It is available on Linux and FreeBSD
       but not macOS.)
       %% My Solaris 10 system does not have it, but Oracle's online help does
-      
+
       \item The minimum version requirement for \code{libcurl} has been
       reduced to 7.22.0, although at least 7.28.0 is preferred and
-      earlier versions are little tested.  (This is to support Debian
-      Wheezy LTS and Ubuntu 12.04 LTS, although the latter is close to
-      end-of-life.)
+      earlier versions are little tested.  (This is to support Debian 7
+      \sQuote{Wheezy} LTS and Ubuntu \sQuote{Precise} 12.04 LTS,
+      although the latter is close to end-of-life.)
       %% Debian Wheezy LTS is supported until 2018-05-31
     }
   }
@@ -517,7 +534,7 @@
       binary builds.  The \file{tcltk*.chm} help file is no longer
       included; please consult the online help at
       \url{http://www.tcl.tk/man/} instead.
-  
+
       \item The version of LAPACK included in the sources has been
       updated to 3.7.0: no new routines have been added to \R{}.
     }
@@ -591,7 +608,7 @@
       in due course.)
     }
   }
-      
+
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item (Windows only) Function \code{setInternet2()} is defunct.
@@ -611,12 +628,12 @@
       \item Header \file{Rconfig.h} no longer defines
       \samp{SUPPORT_OPENMP}; instead use \samp{_OPENMP} (as documented
       for a long time).
-      
+
       \item (C-level Native routine registration.)  The deprecated
       \code{styles} component of \code{R_CMethodDef} and
       \code{R_FortranMethodDef} no longer does anything.
       %% used by packages RandomFieldUtils SOD aster aster2 polyapost potts
-      
+
       \item The deprecated support for PCRE versions older than 8.20
       will be removed in \R 3.4.1. (Versions 8.20--8.31 will still be
       accepted but deprecated.)
@@ -742,6 +759,10 @@
       \code{seq.default()} and \code{seq.int()}, no longer mentioning
       \code{NaN} etc.
 
+      \item \code{rep(x, times)} and \code{rep.int(x, times)} now work
+      also when \code{times} is larger than the maximal integer and of
+      length greater than one. (\PR{16932})
+
       \item \code{download.file(method = "libcurl")} does not check for
       URL existence before attempting downloads; this is more robust to
       servers that do not support HEAD or range-based retrieval, but may
@@ -758,16 +779,19 @@
       \code{cairo_ps()}) when replaying a saved display list that contains
       a mix of \pkg{grid} and \pkg{graphics} output.
       (Report by Yihui Xie.)
+
+      \item \code{rep(3, list(4))} works again, as \code{\link{list}}s
+      \emph{are} vectors.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.3.2 patched}{
+\section{\Rlogo CHANGES IN R 3.3.3}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item Changes when redirection of a \samp{http://} URL to a
       \samp{https://} URL is encountered:
-      
+
       \itemize{
 	\item The internal methods of \code{download.file()} and
 	\code{url()} now report that they cannot follow this (rather
@@ -811,8 +835,8 @@
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{rep(x, times)} and \code{rep.int(x, times)} now both
-      work also when \code{times} is larger than the maximal integer,
-      including when it is of length greater than one. (\PR{16932})
+      work also when \code{times} is of length one and larger than the
+      maximal integer.
 
       \item \code{vapply(x, *)} now works with long vectors \code{x}.
       (\PR{17174})
@@ -878,7 +902,7 @@
 
       \item \code{qbeta()} underflowed too early in some very asymmetric
       cases.  (\PR{17178})
-              
+
       \item \command{R CMD Rd2pdf} had problems with packages with
       non-ASCII titles in \file{.Rd} files (usually the titles were
       omitted).

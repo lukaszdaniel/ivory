@@ -207,7 +207,11 @@ static long R_pcre_max_recursions()
     const uintptr_t recursion_size = 600;
 
     const uintptr_t fallback_used = 10000;
+    /* This is about 6MB stack, reasonable since stacks are usually >= 8MB
+       OTOH, the out-of-box limit is 10000000.
+    */
     const long fallback_limit = 10000;
+    /* Was PCRE compiled to use stack or heap for recursion? 1=stack */
     int use_recursion;
     pcre_config(PCRE_CONFIG_STACKRECURSE, &use_recursion);
     if (!use_recursion) return -1L;
@@ -232,14 +236,16 @@ set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
     pcre_extra *re_pe = *re_pe_ptr;
     if (limit >= 0) {
 	if (!re_pe) {
-	    // this will be freed by pcre_free_study
+	    // this will be freed by pcre_free_study so cannot use Calloc
 	    re_pe = (pcre_extra *) calloc(1, sizeof(pcre_extra));
-	    if (!re_pe)
+	    if (!re_pe) {
 		warning(_("allocation failure in set_pcre_recursion_limit"));
+		return;
+	    }
 	    re_pe->flags = PCRE_EXTRA_MATCH_LIMIT_RECURSION;
 	    *re_pe_ptr = re_pe;
 	} else
-	    re_pe->flags = re_pe->flags | PCRE_EXTRA_MATCH_LIMIT_RECURSION;
+	    re_pe->flags |= PCRE_EXTRA_MATCH_LIMIT_RECURSION;
 	re_pe->match_limit_recursion = (unsigned long) limit;
     }
 }
@@ -524,16 +530,13 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			    errorptr, split+erroffset);
 		error(_("invalid split pattern '%s'"), split);
 	    }
-	    Rboolean use_JIT = TRUE;
-	    SEXP op = GetOption1(install("PCRE_use_JIT"));
-	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
 	    re_pe = pcre_study(re_pcre,
-			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       R_PCRE_use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
 #if PCRE_STUDY_JIT_COMPILE
-	    else setup_jit(re_pe);
+	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
 #endif
 	    set_pcre_recursion_limit(&re_pe, R_pcre_max_recursions());
 
@@ -1002,14 +1005,7 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
-	Rboolean pcre_st = (n >= 10);
-	SEXP op = GetOption1(install("PCRE_study"));
-	if (TYPEOF(op) == LGLSXP) {
-	    pcre_st = asLogical(op) > 0;
-	} else {
-	    int nth = asInteger(op);
-	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
-	}
+	Rboolean pcre_st = R_PCRE_study == -2 ?  FALSE : n >= R_PCRE_study;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -1018,20 +1014,17 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (!re_pcre) {
 	    if (errorptr)
 		warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
-			errorptr, spat+erroffset);
+			errorptr, spat + erroffset);
 	    error(_("invalid regular expression '%s'"), spat);
 	}
 	if (pcre_st) {
-	    Rboolean use_JIT = TRUE;
-	    SEXP op = GetOption1(install("PCRE_use_JIT"));
-	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
 	    re_pe = pcre_study(re_pcre,
-			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       R_PCRE_use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
 #if PCRE_STUDY_JIT_COMPILE
-	    else setup_jit(re_pe);
+	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
 #endif
 	}
 	set_pcre_recursion_limit(&re_pe, R_pcre_max_recursions());
@@ -1790,14 +1783,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     } else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
-	Rboolean pcre_st = (n >= 10);
-	SEXP op = GetOption1(install("PCRE_study"));
-	if (TYPEOF(op) == LGLSXP) {
-	    pcre_st = asLogical(op) > 0;
-	} else {
-	    int nth = asInteger(op);
-	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
-	}
+	Rboolean pcre_st = R_PCRE_study == -2 ?  FALSE : n >= R_PCRE_study;
 	if (use_UTF8) cflags |= PCRE_UTF8;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -1810,16 +1796,13 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("invalid regular expression '%s'"), spat);
 	}
 	if (pcre_st) {
-	    Rboolean use_JIT = TRUE;
-	    SEXP op = GetOption1(install("PCRE_use_JIT"));
-	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
 	    re_pe = pcre_study(re_pcre,
-			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       R_PCRE_use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
 #if PCRE_STUDY_JIT_COMPILE
-	    else setup_jit(re_pe);
+	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
 #endif
 	}
 	set_pcre_recursion_limit(&re_pe, R_pcre_max_recursions());
@@ -2622,14 +2605,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	int cflags = 0, erroffset;
 	const char *errorptr;
-	Rboolean pcre_st = (n >= 10);
-	SEXP op = GetOption1(install("PCRE_study"));
-	if (TYPEOF(op) == LGLSXP) {
-	    pcre_st = asLogical(op) > 0;
-	} else {
-	    int nth = asInteger(op);
-	    if (nth >= 0) pcre_st = (n > nth); // NA_INTEGER is < 0
-	}
+	Rboolean pcre_st = R_PCRE_study == -2 ?  FALSE : n >= R_PCRE_study;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
 	// PCRE docs say this is not needed, but it is on Windows
@@ -2642,16 +2618,13 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("invalid regular expression '%s'"), spat);
 	}
 	if (pcre_st) {
-	    Rboolean use_JIT = TRUE;
-	    SEXP op = GetOption1(install("PCRE_use_JIT"));
-	    if(TYPEOF(op) == LGLSXP) use_JIT = asLogical(op);
 	    re_pe = pcre_study(re_pcre,
-			       use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
+			       R_PCRE_use_JIT ?  PCRE_STUDY_JIT_COMPILE : 0, 
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
 #if PCRE_STUDY_JIT_COMPILE
-	    else setup_jit(re_pe);
+	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
 #endif
 	}
 	set_pcre_recursion_limit(&re_pe, R_pcre_max_recursions());
