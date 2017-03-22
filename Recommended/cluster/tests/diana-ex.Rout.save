@@ -453,101 +453,101 @@ List of 8 components
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0.012 0 0.016 0 0 
+Time elapsed:  0 0 0 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
---[dendrogram with 2 branches and 47 members, at height 127]
-  |--[dendrogram with 2 branches and 31 members, at height 99.2]
-  |  |--[dendrogram with 2 branches and 11 members, at height 60.9]
-  |  |  |--[dendrogram with 2 branches and 8 members, at height 29.1]
-  |  |  |  |--[dendrogram with 2 branches and 5 members, at height 22.7]
-  |  |  |  |  |--[dendrogram with 2 branches and 4 members, at height 17.4]
-  |  |  |  |  |  |--[dendrogram with 2 branches and 3 members, at height 11.7]
-  |  |  |  |  |  |  |--leaf "Courtelary"
-  |  |  |  |  |  |  `--[dendrogram with 2 branches and 2 members, at height 7.48]
-  |  |  |  |  |  |     |--leaf "Le Locle"
-  |  |  |  |  |  |     `--leaf "ValdeTravers"
-  |  |  |  |  |  `--leaf "La Chauxdfnd"
-  |  |  |  |  `--leaf "La Vallee"
-  |  |  |  `--[dendrogram with 2 branches and 3 members, at height 19]
-  |  |  |     |--[dendrogram with 2 branches and 2 members, at height 11.5]
-  |  |  |     |  |--leaf "Lausanne"
-  |  |  |     |  `--leaf "Neuchatel"
-  |  |  |     `--leaf "Vevey"
-  |  |  `--[dendrogram with 2 branches and 3 members, at height 56.1]
-  |  |     |--leaf "V. De Geneve"
-  |  |     `--[dendrogram with 2 branches and 2 members, at height 21.4]
-  |  |        |--leaf "Rive Droite"
-  |  |        `--leaf "Rive Gauche"
-  |  `--[dendrogram with 2 branches and 20 members, at height 48.4]
-  |     |--leaf "Moutier"
-  |     `--[dendrogram with 2 branches and 19 members, at height 44.3]
-  |        |--[dendrogram with 2 branches and 18 members, at height 39.1]
-  |        |  |--[dendrogram with 2 branches and 6 members, at height 21.9]
-  |        |  |  |--[dendrogram with 2 branches and 4 members, at height 12.1]
-  |        |  |  |  |--[dendrogram with 2 branches and 2 members, at height 10.8]
-  |        |  |  |  |  |--leaf "Neuveville"
-  |        |  |  |  |  `--leaf "Boudry"
-  |        |  |  |  `--[dendrogram with 2 branches and 2 members, at height 4.56]
-  |        |  |  |     |--leaf "Grandson"
-  |        |  |  |     `--leaf "Val de Ruz"
-  |        |  |  `--[dendrogram with 2 branches and 2 members, at height 13.5]
-  |        |  |     |--leaf "Nyone"
-  |        |  |     `--leaf "Yverdon"
-  |        |  `--[dendrogram with 2 branches and 12 members, at height 20.4]
-  |        |     |--[dendrogram with 2 branches and 7 members, at height 15.1]
-  |        |     |  |--[dendrogram with 2 branches and 5 members, at height 11.6]
-  |        |     |  |  |--[dendrogram with 2 branches and 4 members, at height 8.05]
-  |        |     |  |  |  |--[dendrogram with 2 branches and 3 members, at height 6.79]
-  |        |     |  |  |  |  |--[dendrogram with 2 branches and 2 members, at height 4.79]
-  |        |     |  |  |  |  |  |--leaf "Aigle"
-  |        |     |  |  |  |  |  `--leaf "Morges"
-  |        |     |  |  |  |  `--leaf "Rolle"
-  |        |     |  |  |  `--leaf "Avenches"
-  |        |     |  |  `--leaf "Orbe"
-  |        |     |  `--[dendrogram with 2 branches and 2 members, at height 6.04]
-  |        |     |     |--leaf "Moudon"
-  |        |     |     `--leaf "Payerne"
-  |        |     `--[dendrogram with 2 branches and 5 members, at height 17.3]
-  |        |        |--[dendrogram with 2 branches and 4 members, at height 11.2]
-  |        |        |  |--[dendrogram with 2 branches and 2 members, at height 7.57]
-  |        |        |  |  |--leaf "Aubonne"
-  |        |        |  |  `--leaf "Oron"
-  |        |        |  `--[dendrogram with 2 branches and 2 members, at height 6.35]
-  |        |        |     |--leaf "Cossonay"
-  |        |        |     `--leaf "Lavaux"
-  |        |        `--leaf "Paysd'enhaut"
-  |        `--leaf "Echallens"
-  `--[dendrogram with 2 branches and 16 members, at height 56.2]
-     |--[dendrogram with 2 branches and 5 members, at height 20.4]
-     |  |--[dendrogram with 2 branches and 3 members, at height 12.7]
-     |  |  |--leaf "Delemont"
-     |  |  `--[dendrogram with 2 branches and 2 members, at height 9.4]
-     |  |     |--leaf "Franches-Mnt"
-     |  |     `--leaf "Porrentruy"
-     |  `--[dendrogram with 2 branches and 2 members, at height 13]
-     |     |--leaf "Gruyere"
-     |     `--leaf "Sarine"
-     `--[dendrogram with 2 branches and 11 members, at height 30]
-        |--[dendrogram with 2 branches and 5 members, at height 12.9]
-        |  |--[dendrogram with 2 branches and 4 members, at height 11.9]
-        |  |  |--[dendrogram with 2 branches and 3 members, at height 8.45]
-        |  |  |  |--leaf "Broye"
-        |  |  |  `--[dendrogram with 2 branches and 2 members, at height 4.14]
-        |  |  |     |--leaf "Glane"
-        |  |  |     `--leaf "Veveyse"
-        |  |  `--leaf "Sion"
-        |  `--leaf "Monthey"
-        `--[dendrogram with 2 branches and 6 members, at height 16]
-           |--[dendrogram with 2 branches and 4 members, at height 7.42]
-           |  |--[dendrogram with 2 branches and 3 members, at height 5.94]
-           |  |  |--[dendrogram with 2 branches and 2 members, at height 2.05]
-           |  |  |  |--leaf "Conthey"
-           |  |  |  `--leaf "Sierre"
-           |  |  `--leaf "Herens"
-           |  `--leaf "Entremont"
-           `--[dendrogram with 2 branches and 2 members, at height 5.09]
-              |--leaf "Martigwy"
-              `--leaf "St Maurice"
+--[dendrogram with 2 branches and 47 members at height 127]
+  |--[dendrogram with 2 branches and 31 members at height 99.2]
+  |  |--[dendrogram with 2 branches and 11 members at height 60.9]
+  |  |  |--[dendrogram with 2 branches and 8 members at height 29.1]
+  |  |  |  |--[dendrogram with 2 branches and 5 members at height 22.7]
+  |  |  |  |  |--[dendrogram with 2 branches and 4 members at height 17.4]
+  |  |  |  |  |  |--[dendrogram with 2 branches and 3 members at height 11.7]
+  |  |  |  |  |  |  |--leaf "Courtelary" 
+  |  |  |  |  |  |  `--[dendrogram with 2 branches and 2 members at height 7.48]
+  |  |  |  |  |  |     |--leaf "Le Locle" 
+  |  |  |  |  |  |     `--leaf "ValdeTravers" 
+  |  |  |  |  |  `--leaf "La Chauxdfnd" 
+  |  |  |  |  `--leaf "La Vallee" 
+  |  |  |  `--[dendrogram with 2 branches and 3 members at height 19]
+  |  |  |     |--[dendrogram with 2 branches and 2 members at height 11.5]
+  |  |  |     |  |--leaf "Lausanne" 
+  |  |  |     |  `--leaf "Neuchatel" 
+  |  |  |     `--leaf "Vevey" 
+  |  |  `--[dendrogram with 2 branches and 3 members at height 56.1]
+  |  |     |--leaf "V. De Geneve" 
+  |  |     `--[dendrogram with 2 branches and 2 members at height 21.4]
+  |  |        |--leaf "Rive Droite" 
+  |  |        `--leaf "Rive Gauche" 
+  |  `--[dendrogram with 2 branches and 20 members at height 48.4]
+  |     |--leaf "Moutier" 
+  |     `--[dendrogram with 2 branches and 19 members at height 44.3]
+  |        |--[dendrogram with 2 branches and 18 members at height 39.1]
+  |        |  |--[dendrogram with 2 branches and 6 members at height 21.9]
+  |        |  |  |--[dendrogram with 2 branches and 4 members at height 12.1]
+  |        |  |  |  |--[dendrogram with 2 branches and 2 members at height 10.8]
+  |        |  |  |  |  |--leaf "Neuveville" 
+  |        |  |  |  |  `--leaf "Boudry" 
+  |        |  |  |  `--[dendrogram with 2 branches and 2 members at height 4.56]
+  |        |  |  |     |--leaf "Grandson" 
+  |        |  |  |     `--leaf "Val de Ruz" 
+  |        |  |  `--[dendrogram with 2 branches and 2 members at height 13.5]
+  |        |  |     |--leaf "Nyone" 
+  |        |  |     `--leaf "Yverdon" 
+  |        |  `--[dendrogram with 2 branches and 12 members at height 20.4]
+  |        |     |--[dendrogram with 2 branches and 7 members at height 15.1]
+  |        |     |  |--[dendrogram with 2 branches and 5 members at height 11.6]
+  |        |     |  |  |--[dendrogram with 2 branches and 4 members at height 8.05]
+  |        |     |  |  |  |--[dendrogram with 2 branches and 3 members at height 6.79]
+  |        |     |  |  |  |  |--[dendrogram with 2 branches and 2 members at height 4.79]
+  |        |     |  |  |  |  |  |--leaf "Aigle" 
+  |        |     |  |  |  |  |  `--leaf "Morges" 
+  |        |     |  |  |  |  `--leaf "Rolle" 
+  |        |     |  |  |  `--leaf "Avenches" 
+  |        |     |  |  `--leaf "Orbe" 
+  |        |     |  `--[dendrogram with 2 branches and 2 members at height 6.04]
+  |        |     |     |--leaf "Moudon" 
+  |        |     |     `--leaf "Payerne" 
+  |        |     `--[dendrogram with 2 branches and 5 members at height 17.3]
+  |        |        |--[dendrogram with 2 branches and 4 members at height 11.2]
+  |        |        |  |--[dendrogram with 2 branches and 2 members at height 7.57]
+  |        |        |  |  |--leaf "Aubonne" 
+  |        |        |  |  `--leaf "Oron" 
+  |        |        |  `--[dendrogram with 2 branches and 2 members at height 6.35]
+  |        |        |     |--leaf "Cossonay" 
+  |        |        |     `--leaf "Lavaux" 
+  |        |        `--leaf "Paysd'enhaut" 
+  |        `--leaf "Echallens" 
+  `--[dendrogram with 2 branches and 16 members at height 56.2]
+     |--[dendrogram with 2 branches and 5 members at height 20.4]
+     |  |--[dendrogram with 2 branches and 3 members at height 12.7]
+     |  |  |--leaf "Delemont" 
+     |  |  `--[dendrogram with 2 branches and 2 members at height 9.4]
+     |  |     |--leaf "Franches-Mnt" 
+     |  |     `--leaf "Porrentruy" 
+     |  `--[dendrogram with 2 branches and 2 members at height 13]
+     |     |--leaf "Gruyere" 
+     |     `--leaf "Sarine" 
+     `--[dendrogram with 2 branches and 11 members at height 30]
+        |--[dendrogram with 2 branches and 5 members at height 12.9]
+        |  |--[dendrogram with 2 branches and 4 members at height 11.9]
+        |  |  |--[dendrogram with 2 branches and 3 members at height 8.45]
+        |  |  |  |--leaf "Broye" 
+        |  |  |  `--[dendrogram with 2 branches and 2 members at height 4.14]
+        |  |  |     |--leaf "Glane" 
+        |  |  |     `--leaf "Veveyse" 
+        |  |  `--leaf "Sion" 
+        |  `--leaf "Monthey" 
+        `--[dendrogram with 2 branches and 6 members at height 16]
+           |--[dendrogram with 2 branches and 4 members at height 7.42]
+           |  |--[dendrogram with 2 branches and 3 members at height 5.94]
+           |  |  |--[dendrogram with 2 branches and 2 members at height 2.05]
+           |  |  |  |--leaf "Conthey" 
+           |  |  |  `--leaf "Sierre" 
+           |  |  `--leaf "Herens" 
+           |  `--leaf "Entremont" 
+           `--[dendrogram with 2 branches and 2 members at height 5.09]
+              |--leaf "Martigwy" 
+              `--leaf "St Maurice" 
 > 
 > proc.time()
    user  system elapsed 

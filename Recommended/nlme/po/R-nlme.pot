@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-128\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"Project-Id-Version: nlme 3.1-131\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -534,6 +534,13 @@ msgstr ""
 #. R/pdMat.R: stop("'value' must be a square matrix")
 
 msgid "'value' must be a square matrix"
+msgstr ""
+
+
+#: R/zzMethods.R: 0
+#. R/zzMethods.R: stop("AIC undefined for REML fit")
+
+msgid "AIC undefined for REML fit"
 msgstr ""
 
 
@@ -1099,6 +1106,13 @@ msgstr ""
 #. R/nlme.R: gettextf("PNLS step: RSS = %s", format(work$set[6]), domain = "R-nlme")
 
 msgid "PNLS step: RSS = %s"
+msgstr ""
+
+
+#: R/zzMethods.R: 0
+#. R/zzMethods.R: gettextf("Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R.",     dQuote(pkgname), built.R.ver, getRversion(), domain = "R-nlme")
+
+msgid "Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R."
 msgstr ""
 
 
@@ -1931,6 +1945,13 @@ msgid "degrees of freedom and weights must have the same length"
 msgstr ""
 
 
+#: R/zzMethods.R: 0
+#. R/zzMethods.R: warning("deviance undefined for REML fit")
+
+msgid "deviance undefined for REML fit"
+msgstr ""
+
+
 #: R/pdMat.R: 0
 #. R/pdMat.R: stop("dimnames of 'value' must match or be NULL")
 
@@ -2529,6 +2550,13 @@ msgstr ""
 #. R/lmList.R: stop("nonexistent groups requested in 'subset' argument")
 
 msgid "nonexistent groups requested in 'subset' argument"
+msgstr ""
+
+
+#: R/zzMethods.R: 0
+#. R/zzMethods.R: stop("not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)")
+
+msgid "not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)"
 msgstr ""
 
 

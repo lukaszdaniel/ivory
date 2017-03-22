@@ -83,10 +83,10 @@ isSeq <- function(i, n, Ostart = TRUE) {
 
 
 .bail.out.1 <- function(fun, cl) {
-    stop(gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl), call. = FALSE, domain = "R-Matrix")
+    stop(gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl[1L]), call. = FALSE, domain = "R-Matrix")
 }
 .bail.out.2 <- function(fun, cl1, cl2) {
-    stop(gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl1, cl2), call. = FALSE, domain = "R-Matrix")
+    stop(gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl1[1L], cl2[1L]), call. = FALSE, domain = "R-Matrix")
 }
 
 Matrix.msg <- function(..., .M.level = 1) {
@@ -266,6 +266,9 @@ mkDet <- function(d, logarithm = TRUE, ldet = sum(log(abs(d))),
     class(val) <- "det"
     val
 }
+
+##' utility, basically == norm(x, type = "2")
+norm2 <- function(x) if(anyNA(x)) NaN else svd(x, nu = 0L, nv = 0L)$d[1L]
 
 dimCheck <- function(a, b) {
     da <- dim(a)

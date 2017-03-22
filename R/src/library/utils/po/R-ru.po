@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-26 00:00\n"
+"POT-Creation-Date: 2017-03-20 22:36\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -276,6 +276,13 @@ msgstr "у 'as.is' -- неправильная длина %d != cols = %d"
 msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
 msgstr "col.names = NA не имеет смысла если row.names = FALSE"
 
+#. R/unix/download.file.R: stop("'curl()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'curl()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'curl()' call had nonzero exit status"
+msgstr "у скачивания ненулевой статус выхода"
+
 #. R/packages.R: stop("'destdir' is not a directory")
 #: R/packages.R:0
 msgid "'destdir' is not a directory"
@@ -429,6 +436,13 @@ msgid ""
 msgstr ""
 "type == \"both\" можно использовать только на Windows или CRAN-сборке для "
 "Mac OS X"
+
+#. R/unix/download.file.R: stop("'wget()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'wget()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'wget()' call had nonzero exit status"
+msgstr "у скачивания ненулевой статус выхода"
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -952,6 +966,11 @@ msgstr "Делаю packages.html ..."
 #: R/package.skeleton.R:0
 msgid "Making help files ..."
 msgstr "Делаю файлы помощи..."
+
+#. R/sessionInfo.R: gettext("Matrix products: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Matrix products:"
+msgstr ""
 
 #. R/debugger.R: gettext("Message: ", domain = "R-utils")
 #: R/debugger.R:0

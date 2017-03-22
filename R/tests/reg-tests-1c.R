@@ -609,6 +609,8 @@ stopifnot(identical(check2(one, , three), c(FALSE, TRUE, FALSE)))
 
 ## takes too long with JIT enabled:
 .jit.lev <- compiler::enableJIT(0)
+Sys.getenv("_R_CHECK_LENGTH_1_CONDITION_") -> oldV
+Sys.setenv("_R_CHECK_LENGTH_1_CONDITION_" = "false") # only *warn*
 ## while did not protect its argument, which caused an error
 ## under gctorture, PR#15990
 gctorture()
@@ -616,6 +618,7 @@ suppressWarnings(while(c(FALSE, TRUE)) 1)
 gctorture(FALSE)
 ## gave an error because the test got released when the warning was generated.
 compiler::enableJIT(.jit.lev)# revert
+Sys.setenv("_R_CHECK_LENGTH_1_CONDITION_" = oldV)
 
 
 ## hist(x, breaks =) with too large bins, PR#15988
@@ -1561,6 +1564,17 @@ z <- ts(cbind(1:5,1:5))
 tsp(z) <- NULL
 stopifnot(identical(class(z), "matrix"))
 ## kept "mts" in 3.2.4, PR#16769
+
+
+## as.hclust() and str() for deeply nested dendrograms
+op <- options(expressions = 300) # so problem triggers early
+d500 <- mkDend(500, 'x', 'single')
+sink(tempfile()); str(d500) ; sink()
+hc2 <- as.hclust(d500)
+options(op)
+## gave .. nested too deeply / node stack overflow / "C stack usage ..."
+## for R <= 3.3.z
+
 
 
 ## keep at end

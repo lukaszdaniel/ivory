@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2017-02-07 06:38\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -781,6 +781,34 @@ msgid "BugReports field should not be empty"
 msgstr ""
 
 
+#: R/install.R: 0
+#. R/install.R: stop("C++11 standard requested but CXX1X is not defined")
+
+msgid "C++11 standard requested but CXX1X is not defined"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: stop("C++14 standard requested but CXX1Y is not defined")
+
+msgid "C++14 standard requested but CXX1Y is not defined"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: stop("C++17 standard requested but CXX1Z is not defined")
+
+msgid "C++17 standard requested but CXX1Z is not defined"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
+
+msgid "C++98 standard requested but CXX98 is not defined"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
 
@@ -848,6 +876,13 @@ msgstr ""
 #. R/news.R: gettextf("Cannot process chunk/lines:\n%s", .collapse(x))
 
 msgid "Cannot process chunk/lines:\n%s"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("  Canonical CRAN.R-project.org URLs use https.", domain = "R-tools")
+
+msgid "Canonical CRAN.R-project.org URLs use https."
 msgstr ""
 
 
@@ -2289,9 +2324,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("It is good practice to use registered native symbols and to disable symbol search.\n",     domain = "R-tools")
+#. R/check.R: gettext("It is good practice to register native routines and to disable symbol search.\n",     domain = "R-tools")
 
-msgid "It is good practice to use registered native symbols and to disable symbol search."
+msgid "It is good practice to register native routines and to disable symbol search."
 msgstr ""
 
 
@@ -3525,6 +3560,13 @@ msgid "R shared object builder:"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+
+msgid "R-tools"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("Rd conversion errors:", domain = "R-tools")
 
@@ -4147,6 +4189,20 @@ msgid "The build time stamp is missing."
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("  The canonical URL of the CRAN page for a package is: https://CRAN.R-project.org/package=pkgname",     domain = "R-tools")
+
+msgid "The canonical URL of the CRAN page for a package is: https://CRAN.R-project.org/package=pkgname"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("  The canonical URL of the CRAN page for a task view is: https://CRAN.R-project.org/view=viewname",     domain = "R-tools")
+
+msgid "The canonical URL of the CRAN page for a task view is: https://CRAN.R-project.org/view=viewname"
+msgstr ""
+
+
 #: R/bibstyle.R: 0
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 
@@ -4230,6 +4286,13 @@ msgstr ""
 #. R/check.R: gettextf("The following files should probably not be installed:\n%s\n", paste(strwrap(paste(sQuote(badf),     collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools")
 
 msgid "The following files should probably not be installed:\n%s"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+
+msgid "The maintainer field is invalid or specifies more than one person"
 msgstr ""
 
 
@@ -6458,17 +6521,17 @@ msgid "invalid value for '%s' : %s"
 msgstr ""
 
 
+#: R/makeLazyLoad.R: 0
+#. R/makeLazyLoad.R: gettextf("invalid value for '%s': should be FALSE, TRUE, 2 or 3", "compress")
+
+msgid "invalid value for '%s': should be FALSE, TRUE, 2 or 3"
+msgstr ""
+
+
 #: R/build.R: 0
 #. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s", "\"qpdf\"")
 
 msgid "invalid value for '--compact-vignettes', assuming %s"
-msgstr ""
-
-
-#: R/makeLazyLoad.R: 0
-#. R/makeLazyLoad.R: stop("invalid value for 'compress': should be FALSE, TRUE, 2 or 3")
-
-msgid "invalid value for 'compress': should be FALSE, TRUE, 2 or 3"
 msgstr ""
 
 
@@ -7132,9 +7195,16 @@ msgstr ""
 
 
 #: R/testing.R: 0
-#. R/testing.R: message("running tests of Internet functions - expect some differences", domain = "R-tools")
+#. R/testing.R: message("running tests of CRAN tools", domain = "R-tools")
 
-msgid "running tests of Internet functions - expect some differences"
+msgid "running tests of CRAN tools"
+msgstr ""
+
+
+#: R/testing.R: 0
+#. R/testing.R: message("running tests of Internet functions", domain = "R-tools")
+
+msgid "running tests of Internet functions"
 msgstr ""
 
 
@@ -7356,6 +7426,20 @@ msgstr ""
 #. R/install.R: warning("this package has a non-empty 'configure.win' file,\nso building only the main architecture\n",     call. = FALSE, domain = "R-tools")
 
 msgid "this package has a non-empty 'configure.win' file,\nso building only the main architecture"
+msgstr ""
+
+
+#: R/sotools.R: 0
+#. R/sotools.R: warning("this requires 'nm' to be on the PATH")
+
+msgid "this requires 'nm' to be on the PATH"
+msgstr ""
+
+
+#: R/sotools.R: 0
+#. R/sotools.R: warning("this requires 'objdump.exe' to be on the PATH")
+
+msgid "this requires 'objdump.exe' to be on the PATH"
 msgstr ""
 
 

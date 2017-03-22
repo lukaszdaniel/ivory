@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2016-03-03 21:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1158,6 +1158,11 @@ msgstr ""
 msgid ""
 "Please put term with most levels last in 're' to avoid spoiling supplied "
 "penalties"
+msgstr ""
+
+#. R/fast-REML.r: warning("Possible divergence detected in fast.REML.fit", call. = FALSE, immediate. = TRUE)
+#: R/fast-REML.r:0
+msgid "Possible divergence detected in fast.REML.fit"
 msgstr ""
 
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
@@ -2638,6 +2643,11 @@ msgstr ""
 msgid "unimplemented sparse constraint type requested"
 msgstr "zażądano niezaimplementowanego typu rzadkiego więzu"
 
+#. R/smooth.r: warning("uniquecombs has not worked properly")
+#: R/smooth.r:0
+msgid "uniquecombs has not worked properly"
+msgstr ""
+
 #. R/mgcv.r: stop("unknown optimizer")
 #: R/mgcv.r:0
 msgid "unknown optimizer"
@@ -2724,6 +2734,12 @@ msgstr "wagi muszą być jak wagi w 'glm' dla ogólnego przypadku"
 #: R/soap.r:0
 msgid "x and y must be same length"
 msgstr "x oraz y muszą mieć tę samą długość"
+
+#. R/smooth.r: stop("x is null")
+#: R/smooth.r:0
+#, fuzzy
+msgid "x is null"
+msgstr "'x' ma wartość NULL"
 
 #. R/gam.fit3.r: stop("y must be an integer multiple of phi for Tweedie(p=1)")
 #: R/gam.fit3.r:0
@@ -2889,9 +2905,6 @@ msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 
 #~ msgid "'x' has no row attribute"
 #~ msgstr "'x' nie posiada atrybutu 'row'"
-
-#~ msgid "'x' is null"
-#~ msgstr "'x' ma wartość NULL"
 
 #~ msgid "'bs' wrong length and ignored"
 #~ msgstr ""

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-02-18 r940) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-02-28 r944) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-02-18 r72207) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-02-28 r72279) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -23,7 +23,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > ### Regression tests for which the printed output is the issue
-> ### May fail, e.g. by needing Recommended packages
+> ### May fail.
+> ### Skipped on a Unix-alike without Recommended packages
 > 
 > pdf("reg-tests-3.pdf", encoding = "ISOLatin1.enc")
 > 
@@ -904,7 +905,7 @@ Error in command 'nchar(x, "w")': invalid multibyte string, element 10
  character "J\xf6reskog"
 > nchar(L <- strrep(paste(LETTERS, collapse="."), 100000), type="b")# 5.1 M
 [1] 5100000
-> stopifnot(system.time( str(L) )[[1]] < 0.05)
+> stopifnot(system.time( str(L) )[[1L]] < 0.10) # Sparc Solaris needed 0.052
  character "A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.ZA.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.ZA.B.C.D.E"| __truncated__
 > Sys.setlocale("LC_CTYPE", oloc)
 [1] "C"

@@ -305,7 +305,12 @@
             sys_requires <- desc["SystemRequirements"]
             if (!is.na(sys_requires)) {
                 sys_requires <- unlist(strsplit(sys_requires, ","))
-                if(any(grepl("^[[:space:]]*C[+][+]14[[:space:]]*$",
+                if(any(grepl("^[[:space:]]*C[+][+]17[[:space:]]*$",
+                             sys_requires, ignore.case=TRUE))) {
+                    Sys.setenv("R_PKG_CXX_STD"="CXX17")
+                    on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
+                }
+                else if(any(grepl("^[[:space:]]*C[+][+]14[[:space:]]*$",
                              sys_requires, ignore.case=TRUE))) {
                     Sys.setenv("R_PKG_CXX_STD"="CXX14")
                     on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
@@ -1702,8 +1707,9 @@
     with_f9x <- FALSE
     with_objc <- FALSE
     use_cxx98 <- FALSE
-    use_cxx1x <- FALSE
-    use_cxx1y <- FALSE
+    use_cxx11 <- FALSE
+    use_cxx14 <- FALSE
+    use_cxx17 <- FALSE
     pkg_libs <- character()
     clean <- FALSE
     preclean <- FALSE
@@ -1801,11 +1807,14 @@
                               value = TRUE, useBytes = TRUE))) {
             cxxstd <- gsub("^CXX_STD *=", "", ll)
             cxxstd <- gsub(" *", "", cxxstd)
-            if (cxxstd == "CXX14") {
-                use_cxx1y <- TRUE
+            if (cxxstd == "CXX17") {
+                use_cxx17 <- TRUE
+            }
+            else if (cxxstd == "CXX14") {
+                use_cxx14 <- TRUE
             }
             else if (cxxstd == "CXX11") {
-                use_cxx1x <- TRUE
+                use_cxx11 <- TRUE
             }
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
@@ -1820,41 +1829,79 @@
                               value = TRUE, useBytes = TRUE))) {
             cxxstd <- gsub("^CXX_STD *=", "", ll)
             cxxstd <- gsub(" *", "", cxxstd)
-            if (cxxstd == "CXX14") {
-                use_cxx1y <- TRUE
+            if (cxxstd == "CXX17") {
+                use_cxx17 <- TRUE
+            }
+            else if (cxxstd == "CXX14") {
+                use_cxx14 <- TRUE
             }
             else if (cxxstd == "CXX11") {
-                use_cxx1x <- TRUE
+                use_cxx11 <- TRUE
             }
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
             }
         }
     }
-    if (!use_cxx1x && !use_cxx1y && !use_cxx98) {
-        valy <- Sys.getenv("USE_CXX1Y", NA_character_)
-        valx <- Sys.getenv("USE_CXX1X", NA_character_)
+    if (!use_cxx11 && !use_cxx14 && !use_cxx17 && !use_cxx98) {
+        val17 <- Sys.getenv("USE_CXX17", NA_character_)
+        val14 <- Sys.getenv("USE_CXX14", NA_character_)
+        val11 <- Sys.getenv("USE_CXX11", NA_character_)
         val98 <- Sys.getenv("USE_CXX98", NA_character_)
-        if(!is.na(valy)) {
-            use_cxx1y <- TRUE
+        if (!is.na(val17)) {
+            use_cxx17 <- TRUE
         }
-        else if (!is.na(valx)) {
-            use_cxx1x <- TRUE
+        else if(!is.na(val14)) {
+            use_cxx14 <- TRUE
+        }
+        else if (!is.na(val11)) {
+            use_cxx11 <- TRUE
         }
         else if (!is.na(val98)) {
             use_cxx98 <- TRUE
         }
         else {
             val <- Sys.getenv("R_PKG_CXX_STD")
-            if (val == "CXX14") {
-                use_cxx1y <- TRUE
+            if (val == "CXX17") {
+                use_cxx17 <- TRUE
+            }
+            else if (val == "CXX14") {
+                use_cxx14 <- TRUE
             }
             else if (val == "CXX11") {
-                use_cxx1x <- TRUE
+                use_cxx11 <- TRUE
             }
             else if (val == "CXX98") {
                 use_cxx98 <- TRUE
             }
+        }
+    }
+
+    if (with_cxx) {
+        checkCXX <- function(cxxstd) {
+            for (i in rev(seq_along(makefiles))) {
+                lines <- readLines(makefiles[i], warn = FALSE)
+                pattern <- paste0("^", cxxstd, " *= *")
+                ll <- grep(pattern, lines, perl = TRUE, value = TRUE,
+                           useBytes = TRUE)
+                for (j in rev(seq_along(ll))) {
+                    cxx <- gsub(pattern, "", ll[j])
+                    return(nzchar(cxx))
+                }
+            }
+            return(FALSE)
+        }
+        if (use_cxx17 && !checkCXX("CXX17")) {
+            stop("C++17 standard requested but CXX17 is not defined")
+        }
+        if (use_cxx14 && !checkCXX("CXX14")) {
+            stop("C++14 standard requested but CXX14 is not defined")
+        }
+        if (use_cxx11 && !checkCXX("CXX11")) {
+            stop("C++11 standard requested but CXX11 is not defined")
+        }
+        if (use_cxx98 && !checkCXX("CXX98")) {
+            stop("C++98 standard requested but CXX98 is not defined")
         }
     }
 
@@ -1863,18 +1910,24 @@
         makeargs <- c("SHLIB_LDFLAGS='$(SHLIB_FCLDFLAGS)'",
                       "SHLIB_LD='$(SHLIB_FCLD)'", makeargs)
     } else if (with_cxx) {
-        makeargs <- if (use_cxx1y)
-            c("CXX='$(CXX1Y) $(CXX1YSTD)'",
-              "CXXFLAGS='$(CXX1YFLAGS)'",
-              "CXXPICFLAGS='$(CXX1YPICFLAGS)'",
-              "SHLIB_LDFLAGS='$(SHLIB_CXX1YLDFLAGS)'",
-              "SHLIB_LD='$(SHLIB_CXX1YLD)'", makeargs)
-        else if (use_cxx1x)
-            c("CXX='$(CXX1X) $(CXX1XSTD)'",
-              "CXXFLAGS='$(CXX1XFLAGS)'",
-              "CXXPICFLAGS='$(CXX1XPICFLAGS)'",
-              "SHLIB_LDFLAGS='$(SHLIB_CXX1XLDFLAGS)'",
-              "SHLIB_LD='$(SHLIB_CXX1XLD)'", makeargs)
+        makeargs <- if (use_cxx17)
+            c("CXX='$(CXX17) $(CXX17STD)'",
+              "CXXFLAGS='$(CXX17FLAGS)'",
+              "CXXPICFLAGS='$(CXX17PICFLAGS)'",
+              "SHLIB_LDFLAGS='$(SHLIB_CXX17LDFLAGS)'",
+              "SHLIB_LD='$(SHLIB_CXX17LD)'", makeargs)
+        else if (use_cxx14)
+            c("CXX='$(CXX14) $(CXX14STD)'",
+              "CXXFLAGS='$(CXX14FLAGS)'",
+              "CXXPICFLAGS='$(CXX14PICFLAGS)'",
+              "SHLIB_LDFLAGS='$(SHLIB_CXX14LDFLAGS)'",
+              "SHLIB_LD='$(SHLIB_CXX14LD)'", makeargs)
+        else if (use_cxx11)
+            c("CXX='$(CXX11) $(CXX11STD)'",
+              "CXXFLAGS='$(CXX11FLAGS)'",
+              "CXXPICFLAGS='$(CXX11PICFLAGS)'",
+              "SHLIB_LDFLAGS='$(SHLIB_CXX11LDFLAGS)'",
+              "SHLIB_LD='$(SHLIB_CXX11LD)'", makeargs)
         else if (use_cxx98)
             c("CXX='$(CXX98) $(CXX98STD)'",
               "CXXFLAGS='$(CXX98FLAGS)'",

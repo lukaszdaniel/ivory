@@ -1231,7 +1231,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	for (int i = 0; i < n; i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpart.h Recommended/rpart/src/rpart.h
-9,15d8
+12,18d11
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
 < #define _(String) dgettext ("rpart", String)
@@ -1240,7 +1240,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #endif
 < 
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpart_callback.c Recommended/rpart/src/rpart_callback.c
-7,14c7
+9,15c9
 < 
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
@@ -1248,77 +1248,8 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #else
 < #define _(String) (String)
 < #endif
-< 
 ---
 > #include "localization.h"
-33,35c26
-< SEXP
-< init_rpcallback(SEXP rhox, SEXP ny, SEXP nr, SEXP expr1x, SEXP expr2x)
-< {
----
-> SEXP init_rpcallback(SEXP rhox, SEXP ny, SEXP nr, SEXP expr1x, SEXP expr2x) {
-69,71c60
-< void
-< rpart_callback0(int *nr)
-< {
----
-> void rpart_callback0(int *nr) {
-78,81c67
-< void
-< rpart_callback1(int n, double *y[], double *wt, double *z)
-< {
-<     int i, j, k;
----
-> void rpart_callback1(int n, double *y[], double *wt, double *z) {
-86,87c72,73
-<     for (i = 0, k = 0; i < ysave; i++)
-< 	for (j = 0; j < n; j++)
----
-> 	for (int i = 0, k = 0; i < ysave; i++)
-> 		for (int j = 0; j < n; j++)
-90,91c76
-< 
-<     for (i = 0; i < n; i++)
----
-> 	for (int i = 0; i < n; i++)
-108c93
-<     for (i = 0; i <= rsave; i++)
----
-> 	for (int i = 0; i <= rsave; i++)
-116,120c101,103
-< void
-< rpart_callback2(int n, int ncat, double *y[], double *wt,
-< 		double *x, double *good)
-< {
-<     int i, j, k;
----
-> void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
-> 		double *good) {
-> 	int j;
-124,125c107,108
-<     for (i = 0, k = 0; i < ysave; i++)
-< 	for (j = 0; j < n; j++)
----
-> 	for (int i = 0, k = 0; i < ysave; i++)
-> 		for (int j = 0; j < n; j++)
-128c111
-<     for (i = 0; i < n; i++) {
----
-> 	for (int i = 0; i < n; i++) {
-148c131,133
-< 	    error("the expression expr1 returned a list of %d elements, %d required",
----
-> 			error(
-> 					_(
-> 							"the expression expr1 returned a list of %d elements, %d required"),
-151c136
-< 	for (i = 0; i < j; i++)
----
-> 		for (int i = 0; i < j; i++)
-160c145
-< 	for (i = 0; i < j; i++)
----
-> 		for (int i = 0; i < j; i++)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpartexp.c Recommended/rpart/src/rpartexp.c
 15,17c15
 < void

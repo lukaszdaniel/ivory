@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.4.0\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,10 +172,10 @@ msgstr ""
 
 
 #: R/RngStream.R: 0
-#. R/RngStream.R: stop("invalid value of 'seed'")
-#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 
-msgid "invalid value of 'seed'"
+msgid "invalid value of %s"
 msgstr ""
 
 

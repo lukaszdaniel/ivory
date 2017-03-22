@@ -1077,7 +1077,7 @@ function()
             repos <- .get_repositories()[nms, "URL"]
             names(repos) <- nms
             if(repos["CRAN"] == "@CRAN@")
-                repos["CRAN"] <- "http://CRAN.R-project.org"
+                repos["CRAN"] <- "https://CRAN.R-project.org"
         }
     }
     repos
@@ -1145,6 +1145,7 @@ function()
                "Package",
                "Packaged",
                "Priority",
+               "RdMacros",
                "Suggests",
                "SysDataCompression",
                "SystemRequirements",
@@ -1602,7 +1603,8 @@ function(ifile, ofile)
     .system_with_capture("pandoc",
                          paste(shQuote(normalizePath(ifile)), "-s",
                                "--email-obfuscation=references",
-                               "--css=../../CRAN_web.css",
+                               ## "--css=https://cran.r-project.org/web/CRAN_web.css",
+                               "--self-contained",
                                "-o", shQuote(ofile)))
 }
 

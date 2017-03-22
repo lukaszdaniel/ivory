@@ -130,7 +130,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     pterms <- rep(0, length(assign))
     names(pterms) <- names(assign)
     pindex <- rep(0, npenal)
-    for (i in 1:npenal) {
+    for (i in seq_len(npenal)) {
 	temp <- unlist(lapply(assign, function(x,y) (length(x) == length(y) &&
 					     all(x==y)), pcols[[i]]))
 	if (sparse[i]) pterms[temp] <- 2
@@ -157,11 +157,11 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	# Remove the sparse term from the X matrix
 	frailx <- x[, fcol]
 	x <- x[, -fcol, drop=FALSE]
-	for (i in 1:length(assign)){
+	for (i in seq_along(assign)){
 	    j <- assign[[i]]
 	    if (j[1] > fcol) assign[[i]] <- j-1
 	    }
-	for (i in 1:npenal) {
+	for (i in seq_len(npenal)) {
 	    j <- pcols[[i]]
 	    if (j[1] > fcol) pcol[[i]] <- j-1
 	    }
@@ -235,7 +235,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     #  There can be multiple penalized terms
     if (sum(!sparse) >0) {
 	full.imat <- !all(unlist(lapply(pattr, function(x) x$diag)))
-	ipenal <- (1:length(pattr))[!sparse]   #index for non-sparse terms
+	ipenal <- seq_along(pattr)[!sparse]   #index for non-sparse terms
         if (full.imat) {
             coxlist2 <- list(coef=double(nvar), first=double(nvar), 
                     second= double(nvar^2), penalty=0.0, 
@@ -297,19 +297,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     
 
     # Create the frame for penalized evaluation
-    # In R new.env inherits everything, in Splus new.frame only has
-    #   what I specify at this time.  The variable thetalist will
-    #   be iterated below, so we need to remember to update it within
-    #   the Splus rho each time we do!
-    # The variables parms, sd, and n2 are used for fdensity evaluation
-    #
-    if (is.R()) rho <- new.env()  
-    #Splus    else rho <- new.frame(list(pfun1=pfun1, theta1=NULL, extra1=NULL,
-    #			   nfrail=nfrail, pcols=pcols, pattr=pattr,
-    #			   length2=length2, full.imat=full.imat,
-    #			   ipenal = ipenal, nvar=nvar,
-    #			   coxlist1=coxlist1, coxlist2=coxlist2, 
-    #                       sd=sd, parms=parms, n2=n2))
+    rho <- new.env()  
 
     #
     # "Unpack" the passed in paramter list, 
@@ -323,7 +311,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     printfun  <- lapply(pattr, function(x) x$printfun)
     extra1 <- NULL
     theta1 <- NULL
-    for (i in 1:length(cfun)) {
+    for (i in seq_along(cfun)) {
 	temp <- (cfun[[i]])(parmlist[[i]], iter=0)
 	if (sparse[i]) {
 	    assign('theta1', temp$theta, rho)
@@ -332,10 +320,6 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	thetalist[[i]] <- temp$theta
 	iterlist[[i]] <- temp
 	}
-#    if (!is.R()) {  # Splus support
-#	assign('thetalist', thetalist, frame=rho)
-#    	assign('extralist', extralist, frame=rho)
-#	}
 
     #
     # Manufacture the list of calls to cfun, with appropriate arguments
@@ -347,7 +331,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	       'fit$loglik', 'status', 'n.eff')
     calls <- vector('expression', length(cfun))
     cargs <- lapply(pattr, function(x) x$cargs)
-    for (i in 1:length(cfun)) {
+    for (i in seq_along(cfun)) {
 	tempchar <- paste("(cfun[[", i, "]])(parmlist[[", i, "]], iter,",
 			  "iterlist[[", i, "]]")
 	temp2b <- c(temp2, paste('pdf[', i, ']'), paste('trH[', i, ']'))
@@ -369,7 +353,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     # Last of the setup: create the vector of variable names
     #
     varnames <- dimnames(x)[[2]]
-    for (i in 1:npenal) {
+    for (i in seq_len(npenal)) {
 	if (!is.null(pattr[[i]]$varname))
 		varnames[pcols[[i]]] <- pattr[[i]]$varname
         }
@@ -415,7 +399,6 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     # The "effective n" of the model
     temp <-  mean(exp(fit0$coef[-1]))   #overall sd
     n.eff <- sd$variance(temp^2) * (solve(matrix(fit0$var,1+nstrat2)))[1,1]
-    #if (!is.R()) assign('n.eff', n.eff, frame=rho)
 
     #
     # Fit the model with all covariates
@@ -445,7 +428,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
     iter2 <- 0
     iterfail <- NULL
     thetasave <- unlist(thetalist)
-    for (iterx in 1:outer.max) {
+    for (iterx in seq_len(outer.max)) {
 	fit <- .Call(Csurvreg7,
 		   iter = as.integer(iter.max),
 		   as.integer(nvar),
@@ -473,28 +456,22 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	if (fit$flag == 1000) iterfail <- c(iterfail, iter)
 
 	if (nfrail >0) {
-	    fcoef <- fit$coef[1:nfrail]
-	    coef  <- fit$coef[nfrail + 1:nvar2]
+	    fcoef <- fit$coef[seq_len(nfrail)]
+	    coef  <- fit$coef[nfrail + seq_len(nvar2)]
 	    }
-	else coef <- fit$coef[1:nvar2]
+	else coef <- fit$coef[seq_len(nvar2)]
 
         # We need to fetch back some of the results from the
         #  evaluation area of f.expr1 and f.expr2
-	if (is.R()) {
-	    if (nfrail >0) coxlist1 <- get('coxlist1', envir=rho)
-	    if (ptype >1 ) coxlist2 <- get('coxlist2', envir=rho)
-	    }
-	#else {
-	#    if (nfrail >0) coxlist1 <- get('coxlist1', frame=rho)
-	#    if (ptype >1 ) coxlist2 <- get('coxlist2', frame=rho)
-	#    }
-
+        if (nfrail >0) coxlist1 <- get('coxlist1', envir=rho)
+        if (ptype >1 ) coxlist2 <- get('coxlist2', envir=rho)
+	
 	# If any penalties were infinite, the C code has made hdiag=1 out
 	#  of self-preservation (avoid zero divides).  But such coefs are 
 	#  guarranteed to be zero so the variance should be too.
 	temp <- rep(FALSE, nvar2+nfrail)
-	if (nfrail>0) temp[1:nfrail] <- coxlist1$flag
-	if (ptype >1) temp[nfrail+ 1:nvar] <- coxlist2$flag
+	if (nfrail>0) temp[seq_len(nfrail)] <- coxlist1$flag
+	if (ptype >1) temp[nfrail+ seq_len(nvar)] <- coxlist2$flag
 	hdiag <- ifelse(temp, 0, fit$hdiag)
 
 	if (need.df) {
@@ -504,7 +481,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    if (ptype>1)  {
 		if (full.imat) {
 		    temp2 <- matrix(0., nvar2, nvar2)
-		    temp2[1:nvar, 1:nvar] <- coxlist2$second
+		    temp2[seq_len(nvar), seq_len(nvar)] <- coxlist2$second
 		    }
 		else  temp2 <- diag(c(coxlist2$second, rep(0, nstrat2)))
 		}
@@ -525,7 +502,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	# Call the control function(s)
 	#
 	done <- TRUE
-	for (i in 1:length(cfun)) {
+	for (i in seq_along(cfun)) {
 	    pen.col <- pcols[[i]]
 	    temp <- eval(calls[i])
 	    if (sparse[i]) assign('theta1', temp$theta, rho)
@@ -534,7 +511,6 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    done <- done & temp$done
     	    }
 	if (done) break
-	#if (!is.R()) assign('thetalist', thetalist, frame=rho)
 
 	# 
 	# Choose starting estimates for the next iteration
@@ -550,7 +526,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	    # *save = prior thetas and the resultant fits
 	    # choose as initial values the result for the closest old theta
 	    howclose <- apply((thetasave-temp)^2,2, sum)
-	    which <- min((1:iter)[howclose==min(howclose)])
+	    which <- min((seq_len(iter))[howclose==min(howclose)])
 	    init <- coefsave[,which]
 	    thetasave <- cbind(thetasave, temp)
 	    }
@@ -563,7 +539,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 	if (ptype>1)  {
 		if (full.imat) {
 		    temp2 <- matrix(0., nvar2, nvar2)
-		    temp2[1:nvar, 1:nvar] <- coxlist2$second
+		    temp2[seq_len(nvar), seq_len(nvar)] <- coxlist2$second
 		    }
 		else  temp2 <- diag(c(coxlist2$second, rep(0, nstrat2)))
 		}
@@ -581,7 +557,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
         
     if (iter.max >1 && length(iterfail)>0)
 	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail), collapse = ", ")))
-    which.sing <- (hdiag[nfrail + 1:nvar] ==0)
+    which.sing <- (hdiag[nfrail + seq_len(nvar)] ==0)
     coef[which.sing] <- NA
 
     names(iterlist) <- names(pterms[pterms>0])
@@ -592,7 +568,7 @@ survpenal.fit<- function(x, y, weights, offset, init, controlvals, dist,
 
     if (nfrail >0) {
 	lp <- offset + fcoef[frailx]
-	lp <- lp + x %*%coef[1:nvar] 
+	lp <- lp + x %*%coef[seq_len(nvar)] 
 	list(coefficients  = coef,
 	     icoef = fit0$coef,
 	     var    = var,

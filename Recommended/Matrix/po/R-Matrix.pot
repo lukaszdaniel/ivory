@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-7.1\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"Project-Id-Version: Matrix 1.2-9\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,6 +104,13 @@ msgid "'EValues' is not of correct length"
 msgstr ""
 
 
+#: R/Ops.R: 0
+#. R/Ops.R: stop("'Logic.Mat.atomic()' should not be called for diagonalMatrix")
+
+msgid "'Logic.Mat.atomic()' should not be called for diagonalMatrix"
+msgstr ""
+
+
 #: R/MatrixFactorization.R: 0
 #. R/MatrixFactorization.R: gettext("'MatrixFactorization' of:", domain = "R-Matrix")
 
@@ -112,6 +119,7 @@ msgstr ""
 
 
 #: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("'NA' indices are not (yet?) supported for sparse Matrices")
 #. R/Tsparse.R: stop("'NA' indices are not (yet?) supported for sparse Matrices")
 
 msgid "'NA' indices are not (yet?) supported for sparse Matrices"
@@ -546,8 +554,6 @@ msgstr ""
 
 #: R/Ops.R: 0
 #. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
 
 msgid "<Matrix> %s %s is undefined"
 msgstr ""
@@ -693,13 +699,6 @@ msgid "LU computationally singular: ratio of extreme entries in |diag(U)| = %9.4
 msgstr ""
 
 
-#: R/Ops.R: 0
-#. R/Ops.R: stop("Logic.Mat.atomic() should not be called for diagonalMatrix")
-
-msgid "Logic.Mat.atomic() should not be called for diagonalMatrix"
-msgstr ""
-
-
 #: R/Auxiliaries.R: 0
 #. R/Auxiliaries.R: gettextf("Matrices must have same dimensions in %s", deparse(sys.call(sys.parent())))
 
@@ -778,6 +777,13 @@ msgstr ""
 #. R/Tsparse.R: stop("NAs are not allowed in subscripted assignments")
 
 msgid "NAs are not allowed in subscripted assignments"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("Not a valid 'Mnumeric' class object", domain = "R-Matrix")
+
+msgid "Not a valid 'Mnumeric' class object"
 msgstr ""
 
 
@@ -1001,6 +1007,9 @@ msgstr ""
 
 
 #: R/Ops.R: 0
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix")
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, le, domain = "R-Matrix")
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix")
 #. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n1, n2)
 #. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n2, n1)
 
@@ -1681,14 +1690,14 @@ msgstr ""
 
 
 #: R/Auxiliaries.R: 0
-#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl)
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl[1L])
 
 msgid "not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature."
 msgstr ""
 
 
 #: R/Auxiliaries.R: 0
-#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl1, cl2)
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl1[1L], cl2[1L])
 
 msgid "not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature."
 msgstr ""

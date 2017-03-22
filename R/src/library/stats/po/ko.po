@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -64,7 +64,7 @@ msgstr "arima0 는 최대 100 개까지의 파라미터들만 변환이 가능�
 msgid "maximum supported lag is 350"
 msgstr "지원되는 최대의 lag 은 350 입니다 "
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr ""
@@ -122,42 +122,44 @@ msgstr "'x'가 비어 있습니다"
 msgid "the standard deviation is zero"
 msgstr "표준 편차가 0 입니다"
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr "단항 마이너스 검사에 잘못된 형식이 있습니다"
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
-#: deriv.c:634
+#: deriv.c:781
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr "변수는 문자열이어야 합니다"
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr " 번째 요소만 변수 이름으로 사용되었습니다 "
 
-#: deriv.c:652
+#: deriv.c:799
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'의 식이 잘못되었습니다"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr "변수 이름들이 잘못되었습니다"
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr "태그가 부적절합니다"
 

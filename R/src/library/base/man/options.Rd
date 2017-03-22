@@ -116,9 +116,9 @@ getOption(x, default = NULL)
       and upon entry to a function whose debugging flag is set.
       Initially unset, and only used if set to a positive integer.}
 
-    \item{\code{digits}:}{controls the number of digits to print when
-      printing numeric values.  It is a suggestion only.  Valid values
-      are 1\dots{}22 with default 7.  See the note in
+    \item{\code{digits}:}{controls the number of significant digits to
+      print when printing numeric values.  It is a suggestion only.
+      Valid values are 1\dots{}22 with default 7.  See the note in
       \code{\link{print.default}} about values greater than 15.}
 
     \item{\code{digits.secs}:}{controls the maximum number of digits to
@@ -262,7 +262,18 @@ getOption(x, default = NULL)
 #endif
     }
     
-    \item{\code{PCRE_study}:}{Logical or integer: should
+    \item{\code{PCRE_limit_recursion}:}{Logical: should
+      \code{\link{grep}(perl = TRUE)} and similar limit the maximal
+      recursion allowed when matching?  PCRE can be built not to use a
+      recursion stack (see \code{\link{pcre_config}}, but it is by
+      default with a recursion limit of 10000000 which potentially needs
+      a very large C stack: see the discussion at
+      \url{http://www.pcre.org/original/doc/html/pcrestack.html}.  If
+      true, the limit is reduced using \R's estimate of the C stack size
+      available (if known), otherwise 10000.  If \code{NA}, the limit is
+      imposed only if any input string has 1000 or more bytes.}
+       
+     \item{\code{PCRE_study}:}{Logical or integer: should
       \code{\link{grep}(perl = TRUE)} and similar \sQuote{study} the
       patterns?  Either logical or a numerical threshold for the minimum
       number of strings to be matched for the pattern to be studied (the
@@ -272,7 +283,7 @@ getOption(x, default = NULL)
     \item{\code{PCRE_use_JIT}:}{Logical: should \code{\link{grep}(perl =
 	TRUE)}, \code{\link{strsplit}(perl = TRUE)} and similar make use
       of PCRE's Just-In-Time compiler for studied patterns, if
-      avaliable?  Missing values are treated as false.}
+      available?  Missing values are treated as false.}
       
     \item{\code{pdfviewer}:}{default PDF viewer.
       The default is set from the environment variable \env{R_PDFVIEWER},

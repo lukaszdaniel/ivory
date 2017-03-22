@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 14:40+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -89,9 +89,9 @@ msgstr "niepoprawny wektor 'names'"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
-#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3648
-#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
-#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
+#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3649
+#: devWindows.c:3653 devWindows.c:3661 devWindows.c:3672 devWindows.c:3678
+#: devWindows.c:3685 devWindows.c:3692 devWindows.c:3696
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -295,8 +295,8 @@ msgstr "niepoprawny ukośnik linii"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "próba użycia niepoprawnej czcionki %d zastąpionej przez czcionkę 1"
 
-#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1809 devWindows.c:1846
-#: devWindows.c:1876 devWindows.c:1908
+#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1810 devWindows.c:1847
+#: devWindows.c:1877 devWindows.c:1909
 #, c-format
 msgid "filename too long in '%s' call"
 msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
@@ -345,7 +345,7 @@ msgstr "'postscript(print.it=TRUE)' użyte z pustą komendą 'print'"
 msgid "invalid page type '%s' (postscript)"
 msgstr "niepoprawny typ '%s' strony (postscript)"
 
-#: devPS.c:3465 devPS.c:4578 devWindows.c:2343
+#: devPS.c:3465 devPS.c:4578 devWindows.c:2344
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -564,7 +564,7 @@ msgstr "niepoprawny parametr '%s' w '%s'"
 msgid "unable to start '%s' device"
 msgstr "nie można uruchomić urządzenia '%s'"
 
-#: devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3737
 #, c-format
 msgid "unable to start %s() device"
 msgstr "nie można uruchomić urządzenia '%s()'"
@@ -649,97 +649,97 @@ msgstr "historia wykresu wygląda na uszkodzoną"
 msgid "no plot history!"
 msgstr "brak historii wykresu!"
 
-#: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
+#: devWindows.c:1815 devWindows.c:1850 devWindows.c:1880
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d' są mało prawdopodobnymi wartościami w pikselach"
 
-#: devWindows.c:1822 devWindows.c:1827 devWindows.c:1852 devWindows.c:1857
-#: devWindows.c:1882 devWindows.c:1887
+#: devWindows.c:1823 devWindows.c:1828 devWindows.c:1853 devWindows.c:1858
+#: devWindows.c:1883 devWindows.c:1888
 msgid "unable to allocate bitmap"
 msgstr "nie można przydzielić bitmapy"
 
-#: devWindows.c:1833 devWindows.c:1863 devWindows.c:2183
+#: devWindows.c:1834 devWindows.c:1864 devWindows.c:2184
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "nie można otworzyć pliku '%s' do zapisu"
 
-#: devWindows.c:1918
+#: devWindows.c:1919
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "nie można otworzyć metapliku '%s' do zapisu"
 
-#: devWindows.c:1920
+#: devWindows.c:1921
 msgid "unable to open clipboard to write metafile"
 msgstr "nie można otworzyć schowka aby zapisać metaplik"
 
-#: devWindows.c:2131
+#: devWindows.c:2132
 msgid "Insufficient memory for resize. Killing device"
 msgstr ""
 "Niewystarczająca ilość pamięci do zmiany rozmiaru. Zabijanie urządzenia"
 
-#: devWindows.c:2139
+#: devWindows.c:2140
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr ""
 "Niewystarczająca ilość pamięci do zmiany rozmiaru. Wyłączenie mieszania alfa"
 
-#: devWindows.c:2168
+#: devWindows.c:2169
 msgid "a clipboard metafile can store only one figure."
 msgstr "metaplik schowka może przechowywać tylko jeden obrazek."
 
-#: devWindows.c:2174
+#: devWindows.c:2175
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "metaplik '%s' nie mógł zostać utworzony"
 
-#: devWindows.c:3114 devWindows.c:3760
+#: devWindows.c:3115 devWindows.c:3761
 msgid "R Graphics"
 msgstr "R Grafika"
 
-#: devWindows.c:3128
+#: devWindows.c:3129
 msgid "attempt to use the locator after dev.hold()"
 msgstr "próba użycia 'locator' po 'dev.hold()'"
 
-#: devWindows.c:3159
+#: devWindows.c:3160
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 "urządzenie graficzne zostało zamknięte podczas wywołania lokatora lub "
 "identyfikacji"
 
-#: devWindows.c:3399
+#: devWindows.c:3400
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "opcja 'windowsTimeouts' powinna być liczba całkowitą"
 
-#: devWindows.c:3420
+#: devWindows.c:3421
 msgid "invalid device number in 'savePlot()' function"
 msgstr "niepoprawny numer urządzenia w funkcji 'savePlot()'"
 
-#: devWindows.c:3422
+#: devWindows.c:3423
 msgid "invalid device in 'savePlot()' function"
 msgstr "niepoprawny numer urządzenia w funkcji 'savePlot()'"
 
-#: devWindows.c:3425
+#: devWindows.c:3426
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "niepoprawny argument nazwy pliku w funkcji 'savePlot()'"
 
-#: devWindows.c:3430
+#: devWindows.c:3431
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "niepoprawny typ argument w funkcji 'savePlot()'"
 
-#: devWindows.c:3457
+#: devWindows.c:3458
 msgid "unknown type in savePlot"
 msgstr "nieznany typ w funkcji 'savePlot()'"
 
-#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
-#: devWindows.c:3614
+#: devWindows.c:3503 devWindows.c:3535 devWindows.c:3563 devWindows.c:3594
+#: devWindows.c:3615
 msgid "processing of the plot ran out of memory"
 msgstr "zabrakło pamięci podczas przetwarzania wykresu"
 
-#: devWindows.c:3578
+#: devWindows.c:3579
 msgid "Impossible to open "
 msgstr "Nie można otworzyć "
 
-#: devWindows.c:3643
+#: devWindows.c:3644
 msgid "invalid 'width' or 'height'"
 msgstr "niepoprawna wartość 'width' lub 'height'"
 

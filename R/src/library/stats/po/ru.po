@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -68,7 +68,7 @@ msgstr "могу трансформировать только 100 пар в ari
 msgid "maximum supported lag is 350"
 msgstr "максимальный поддерживаемый лаг -- 350"
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr ""
@@ -126,42 +126,44 @@ msgstr "'x' пусто"
 msgid "the standard deviation is zero"
 msgstr "стандартное отклонение нулевое"
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr "неправильная форма при проверке унарного минуса"
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Функция '%s' отсутствует в таблице производных"
 
-#: deriv.c:634
+#: deriv.c:781
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' должен быть списком"
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr "переменная должна быть текстовой строкой"
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr "только первый элемент использован как имя переменной"
 
-#: deriv.c:652
+#: deriv.c:799
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "неправильное выражение в '%s'"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr "неправильные имена переменных"
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr "неправильный тег"
 

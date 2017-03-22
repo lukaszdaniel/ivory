@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:24\n"
 "PO-Revision-Date: 2015-07-30 09:44+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -129,6 +129,11 @@ msgstr ""
 msgid "'memb.exp' must be a finite number > 1"
 msgstr "'memb.exp' musi być skończoną liczbą > 1"
 
+#. R/mona.q: stop("'mona()' needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "'mona()' needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
 #. R/internal.R: stop("'n' argument must be >= 2")
 #. R/internal.R: stop("'n' argument must be >= 2")
 #: R/internal.R:0
@@ -232,9 +237,11 @@ msgstr "Współczynnik aglomeracyjny = %s"
 msgid "Agglomerative coefficient:"
 msgstr "Współczynnik aglomeracyjny:"
 
-#. R/mona.q: stop("All variables must be binary (e.g., factor with 2 levels).")
+#. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
 #: R/mona.q:0
-msgid "All variables must be binary (e.g., factor with 2 levels)."
+#, fuzzy
+msgid ""
+"All variables must be binary (e.g., a factor with 2 levels, both present)."
 msgstr "Wszystkie zmienne muszą być binarne (czynnik z dwoma poziomami)"
 
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
@@ -652,11 +659,6 @@ msgstr "Funkcja celu:"
 msgid "Order of objects:"
 msgstr "Kolejność (rząd) obiektów:"
 
-#. R/mona.q: gettext("Revised data:", domain = "R-cluster")
-#: R/mona.q:0
-msgid "Revised data:"
-msgstr "Przeglądnięte dane:"
-
 #. R/plothier.q: gettext("Separation step", domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Separation step"
@@ -884,6 +886,11 @@ msgstr "niepoprawny typ %s dla liczb kolumn %s"
 msgid "k_crisp (= %d) < k !!"
 msgstr "k_crisp (= %d) < k !!"
 
+#. R/mona.q: stop("mona() needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "mona() needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
 #. R/agnes.q: stop("need at least 2 objects to cluster")
 #: R/agnes.q:0
 msgid "need at least 2 objects to cluster"
@@ -984,6 +991,9 @@ msgid_plural "setting 'logical' variables %s to type 'asymm'"
 msgstr[0] "ustawianie zmiennej 'logical' %s na tym 'asymm'"
 msgstr[1] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
 msgstr[2] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
+
+#~ msgid "Revised data:"
+#~ msgstr "Przeglądnięte dane:"
 
 #~ msgid "B=%d simulated reference sets, k = 1..%d"
 #~ msgstr "B=%d symulowane zbiory referencyjne, k = 1..%d"

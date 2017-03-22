@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-26 00:00\n"
+"POT-Creation-Date: 2017-03-20 22:36\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -244,6 +244,12 @@ msgstr ""
 msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
 msgstr ""
 
+#. R/unix/download.file.R: stop("'curl()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'curl()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'curl()' call had nonzero exit status"
+msgstr ""
+
 #. R/packages.R: stop("'destdir' is not a directory")
 #: R/packages.R:0
 msgid "'destdir' is not a directory"
@@ -377,6 +383,12 @@ msgstr ""
 msgid ""
 "'type == \"both\"' option can only be used on Windows or a CRAN build for "
 "macOS"
+msgstr ""
+
+#. R/unix/download.file.R: stop("'wget()' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'wget()' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'wget()' call had nonzero exit status"
 msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
@@ -867,6 +879,11 @@ msgstr ""
 #. R/package.skeleton.R: message("Making help files ...", domain = "R-utils")
 #: R/package.skeleton.R:0
 msgid "Making help files ..."
+msgstr ""
+
+#. R/sessionInfo.R: gettext("Matrix products: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Matrix products:"
 msgstr ""
 
 #. R/debugger.R: gettext("Message: ", domain = "R-utils")

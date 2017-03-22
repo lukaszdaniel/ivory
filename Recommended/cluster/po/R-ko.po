@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:24\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -155,6 +155,11 @@ msgstr ""
 msgid "'memb.exp' must be a finite number > 1"
 msgstr "'memb.exp'는 반드시 1보다 큰 유한한(finite) 숫자이어야 합니다."
 
+#. R/mona.q: stop("'mona()' needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "'mona()' needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
 #. R/internal.R: stop("'n' argument must be >= 2")
 #. R/internal.R: stop("'n' argument must be >= 2")
 #: R/internal.R:0
@@ -259,9 +264,11 @@ msgstr ""
 msgid "Agglomerative coefficient:"
 msgstr ""
 
-#. R/mona.q: stop("All variables must be binary (e.g., factor with 2 levels).")
+#. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
 #: R/mona.q:0
-msgid "All variables must be binary (e.g., factor with 2 levels)."
+#, fuzzy
+msgid ""
+"All variables must be binary (e.g., a factor with 2 levels, both present)."
 msgstr ""
 "모든 변수들은 반드시 2개의 수준(levels)으로 이루어진 요인(factor)이어야 합니"
 "다."
@@ -696,11 +703,6 @@ msgstr ""
 msgid "Order of objects:"
 msgstr ""
 
-#. R/mona.q: gettext("Revised data:", domain = "R-cluster")
-#: R/mona.q:0
-msgid "Revised data:"
-msgstr ""
-
 #. R/plothier.q: gettext("Separation step", domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Separation step"
@@ -934,6 +936,11 @@ msgstr "행번호 %2$s에 잘못된 유형(type) %1$s이 주어졌습니다."
 #. R/fanny.q: gettextf("k_crisp (= %d) < k !!", x$k.crisp, domain = "R-cluster")
 #: R/fanny.q:0
 msgid "k_crisp (= %d) < k !!"
+msgstr ""
+
+#. R/mona.q: stop("mona() needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "mona() needs at least p >= 2 variables (in current implementation)"
 msgstr ""
 
 #. R/agnes.q: stop("need at least 2 objects to cluster")

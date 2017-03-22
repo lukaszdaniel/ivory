@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 14:40+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2012-03-06 21:34+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -93,9 +93,9 @@ msgstr "argument 'file' incorrect"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3648
-#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
-#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
+#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3649
+#: devWindows.c:3653 devWindows.c:3661 devWindows.c:3672 devWindows.c:3678
+#: devWindows.c:3685 devWindows.c:3692 devWindows.c:3696
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "argument 'file' incorrect"
@@ -311,8 +311,8 @@ msgstr "Mitre (jointure pointue) de ligne incorrecte"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "tentative d'utiliser la police incorrecte %d remplacée par police 1"
 
-#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1809 devWindows.c:1846
-#: devWindows.c:1876 devWindows.c:1908
+#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1810 devWindows.c:1847
+#: devWindows.c:1877 devWindows.c:1909
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "nom de fichier trop long dans l'appel %s()"
@@ -365,7 +365,7 @@ msgstr "postscript(print.it=TRUE) utilisé avec une commande d'impression vide"
 msgid "invalid page type '%s' (postscript)"
 msgstr "type de page incorrect '%s' (postscript)"
 
-#: devPS.c:3465 devPS.c:4578 devWindows.c:2343
+#: devPS.c:3465 devPS.c:4578 devWindows.c:2344
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -599,7 +599,7 @@ msgstr "paramètre 'fonts' incorrect dans %s"
 msgid "unable to start '%s' device"
 msgstr "impossible de démarrer le périphérique %s()"
 
-#: devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3737
 #, c-format
 msgid "unable to start %s() device"
 msgstr "impossible de démarrer le périphérique %s()"
@@ -692,103 +692,103 @@ msgstr "l'historique des graphes semble corrompu"
 msgid "no plot history!"
 msgstr "pas d'historique des graphes !"
 
-#: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
+#: devWindows.c:1815 devWindows.c:1850 devWindows.c:1880
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d' ne sont probablement pas des valeurs en pixels"
 
-#: devWindows.c:1822 devWindows.c:1827 devWindows.c:1852 devWindows.c:1857
-#: devWindows.c:1882 devWindows.c:1887
+#: devWindows.c:1823 devWindows.c:1828 devWindows.c:1853 devWindows.c:1858
+#: devWindows.c:1883 devWindows.c:1888
 #, fuzzy
 msgid "unable to allocate bitmap"
 msgstr "Impossible d'allouer un bitmap"
 
-#: devWindows.c:1833 devWindows.c:1863 devWindows.c:2183
+#: devWindows.c:1834 devWindows.c:1864 devWindows.c:2184
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Impossible d'ouvrir le fichier '%s' pour écriture"
 
-#: devWindows.c:1918
+#: devWindows.c:1919
 #, fuzzy, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "Impossible d'ouvrir le fichier metafile '%s' pour écriture"
 
-#: devWindows.c:1920
+#: devWindows.c:1921
 #, fuzzy
 msgid "unable to open clipboard to write metafile"
 msgstr "Impossible d'ouvrir le presse-papier pour écrire les données metafile"
 
-#: devWindows.c:2131
+#: devWindows.c:2132
 msgid "Insufficient memory for resize. Killing device"
 msgstr ""
 "Mémoire insuffisante pour modifier la taille. Le périphérique va être fermé"
 
-#: devWindows.c:2139
+#: devWindows.c:2140
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr ""
 "Mémoire insuffisante pour modifier la taille. L'\"alpha blending\" est "
 "désactivé"
 
-#: devWindows.c:2168
+#: devWindows.c:2169
 #, fuzzy
 msgid "a clipboard metafile can store only one figure."
 msgstr "Un presse-papier metafile ne peut stocker qu'une seule figure"
 
-#: devWindows.c:2174
+#: devWindows.c:2175
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "le fichier metafile '%s' ne peut être créé"
 
-#: devWindows.c:3114 devWindows.c:3760
+#: devWindows.c:3115 devWindows.c:3761
 msgid "R Graphics"
 msgstr "R Graphes"
 
-#: devWindows.c:3128
+#: devWindows.c:3129
 msgid "attempt to use the locator after dev.hold()"
 msgstr "tentative d'utilisation du localisateur (locator) après dev.hold()"
 
-#: devWindows.c:3159
+#: devWindows.c:3160
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.c:3399
+#: devWindows.c:3400
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "l'option 'windowsTimeouts' doit être un entier"
 
-#: devWindows.c:3420
+#: devWindows.c:3421
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "numéro de périphérique incorrect dans 'savePlot'"
 
-#: devWindows.c:3422
+#: devWindows.c:3423
 #, fuzzy
 msgid "invalid device in 'savePlot()' function"
 msgstr "numéro de périphérique incorrect dans 'savePlot'"
 
-#: devWindows.c:3425
+#: devWindows.c:3426
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "argument nom de fichier incorrect dans savePlot"
 
-#: devWindows.c:3430
+#: devWindows.c:3431
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "argument nom de fichier incorrect dans savePlot"
 
-#: devWindows.c:3457
+#: devWindows.c:3458
 msgid "unknown type in savePlot"
 msgstr "type inconnu dans savePlot"
 
-#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
-#: devWindows.c:3614
+#: devWindows.c:3503 devWindows.c:3535 devWindows.c:3563 devWindows.c:3594
+#: devWindows.c:3615
 msgid "processing of the plot ran out of memory"
 msgstr "la réalisation du graphe manque de mémoire"
 
-#: devWindows.c:3578
+#: devWindows.c:3579
 msgid "Impossible to open "
 msgstr "Impossible d'ouvrir "
 
-#: devWindows.c:3643
+#: devWindows.c:3644
 msgid "invalid 'width' or 'height'"
 msgstr "'width' ou 'height' incorrecte"
 

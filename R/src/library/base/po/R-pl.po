@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-02-07 06:37\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1206,6 +1206,12 @@ msgstr "Kodowanie: %s, przekodowane na %s"
 msgid "Enter values for restart arguments:"
 msgstr "Wprowadź wartości dla argumentów restartu:"
 
+#. R/library.R: gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid "Error in %s:"
+msgstr "Błąd w poleceniu '%s':"
+
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0
@@ -1214,7 +1220,9 @@ msgstr "Błąd w poleceniu '%s':"
 
 #. R/New-Internal.R: gettext("Error: ")
 #. R/conditions.R: gettext("Error:", domain = "R-base")
-#: R/New-Internal.R:0 R/conditions.R:0
+#. R/library.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error:", domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
 msgstr "Błąd:"
 
@@ -1529,10 +1537,12 @@ msgstr "Liczba czynników:"
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "Liczba: długości (%d, %d) różnią się"
 
-#. R/library.R: gettextf("Package %s version %s cannot be unloaded: %s", sQuote(package), oldversion,     conditionMessage(e))
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
-msgid "Package %s version %s cannot be unloaded: %s"
+msgid ""
+"Package %s version %s cannot be unloaded:\n"
+" %s"
 msgstr "Pakiet %s wersja %s nie może zostać zwolniony"
 
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
@@ -2228,11 +2238,6 @@ msgstr "niepoprawna długość argumentu 'group'"
 #: R/array.R:0 R/strwrap.R:0
 msgid "incorrect value for '%s' argument"
 msgstr "niepoprawna wartość dla argumentu '%s'"
-
-#. R/strwrap.R: stop("incorrect values of 'indent' and 'width' arguments")
-#: R/strwrap.R:0
-msgid "incorrect values of 'indent' and 'width' arguments"
-msgstr "niepoprawne wartości argumentów 'indent' oraz 'width'"
 
 #. R/LAPACK.R: gettextf("infinite or missing values in '%s' argument", "x")
 #. R/eigen.R: gettextf("infinite or missing values in '%s' argument", "x")
@@ -2969,10 +2974,20 @@ msgid ""
 "to be reinstalled for use with this R version"
 msgstr ""
 
-#. R/library.R: gettextf("package or namespace load failed for %s: %s", sQuote(package), conditionMessage(e))
+#. R/library.R: gettextf("package or namespace load failed for %s in %s:\n %s", sQuote(package),     paste(deparse(cc)[1L], collapse = "", sep = ""), conditionMessage(e), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
-msgid "package or namespace load failed for %s: %s"
+msgid ""
+"package or namespace load failed for %s in %s:\n"
+" %s"
+msgstr "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s"
+
+#. R/library.R: gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e),     domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"package or namespace load failed for %s:\n"
+" %s"
 msgstr "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s"
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
@@ -3612,6 +3627,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "incorrect values of 'indent' and 'width' arguments"
+#~ msgstr "niepoprawne wartości argumentów 'indent' oraz 'width'"
 
 #~ msgid "'%s' argument cannot be NA, NaN or infinite"
 #~ msgstr "argument '%s' nie może mieć wartości NA, NaN lub nieskończoność"

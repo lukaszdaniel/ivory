@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:24\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core Team <r-core@r-project.org>\n"
@@ -143,6 +143,11 @@ msgstr "verschiedenen Indizes aus {1, 2,..., n}, n="
 msgid "'memb.exp' must be a finite number > 1"
 msgstr "'memb.exp' muss endliche Zahl > 1 sein"
 
+#. R/mona.q: stop("'mona()' needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "'mona()' needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
 #. R/internal.R: stop("'n' argument must be >= 2")
 #. R/internal.R: stop("'n' argument must be >= 2")
 #: R/internal.R:0
@@ -248,10 +253,11 @@ msgstr ""
 msgid "Agglomerative coefficient:"
 msgstr ""
 
-#. R/mona.q: stop("All variables must be binary (e.g., factor with 2 levels).")
+#. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
 #: R/mona.q:0
 #, fuzzy
-msgid "All variables must be binary (e.g., factor with 2 levels)."
+msgid ""
+"All variables must be binary (e.g., a factor with 2 levels, both present)."
 msgstr "Alle Variablen müssen binär sein (Faktor mit 2 Stufen)"
 
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
@@ -672,11 +678,6 @@ msgstr ""
 msgid "Order of objects:"
 msgstr ""
 
-#. R/mona.q: gettext("Revised data:", domain = "R-cluster")
-#: R/mona.q:0
-msgid "Revised data:"
-msgstr ""
-
 #. R/plothier.q: gettext("Separation step", domain = "R-cluster")
 #: R/plothier.q:0
 #, fuzzy
@@ -906,6 +907,11 @@ msgstr "für Spaltenzahlen"
 #. R/fanny.q: gettextf("k_crisp (= %d) < k !!", x$k.crisp, domain = "R-cluster")
 #: R/fanny.q:0
 msgid "k_crisp (= %d) < k !!"
+msgstr ""
+
+#. R/mona.q: stop("mona() needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "mona() needs at least p >= 2 variables (in current implementation)"
 msgstr ""
 
 #. R/agnes.q: stop("need at least 2 objects to cluster")

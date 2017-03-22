@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -1207,6 +1207,11 @@ msgstr ""
 msgid ""
 "Please put term with most levels last in 're' to avoid spoiling supplied "
 "penalties"
+msgstr ""
+
+#. R/fast-REML.r: warning("Possible divergence detected in fast.REML.fit", call. = FALSE, immediate. = TRUE)
+#: R/fast-REML.r:0
+msgid "Possible divergence detected in fast.REML.fit"
 msgstr ""
 
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
@@ -2675,6 +2680,11 @@ msgstr ""
 msgid "unimplemented sparse constraint type requested"
 msgstr ""
 
+#. R/smooth.r: warning("uniquecombs has not worked properly")
+#: R/smooth.r:0
+msgid "uniquecombs has not worked properly"
+msgstr ""
+
 #. R/mgcv.r: stop("unknown optimizer")
 #: R/mgcv.r:0
 msgid "unknown optimizer"
@@ -2767,6 +2777,11 @@ msgstr ""
 #: R/soap.r:0
 msgid "x and y must be same length"
 msgstr "x의 길이와 y의 길이는 반드시 같아야 합니다."
+
+#. R/smooth.r: stop("x is null")
+#: R/smooth.r:0
+msgid "x is null"
+msgstr "x는 아무런 구성요소도 가지고 있지 않습니다."
 
 #. R/gam.fit3.r: stop("y must be an integer multiple of phi for Tweedie(p=1)")
 #: R/gam.fit3.r:0
@@ -2944,9 +2959,6 @@ msgstr[0] ""
 
 #~ msgid "object is not a glm or gam"
 #~ msgstr "object의 클래스가 glm 또는 gam이 아닙니다."
-
-#~ msgid "x is null"
-#~ msgstr "x는 아무런 구성요소도 가지고 있지 않습니다."
 
 #~ msgid "x has no col attribute"
 #~ msgstr "x는 열속성(col attribute)를 가지고 있지 않습니다."

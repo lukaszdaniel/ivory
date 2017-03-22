@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:01\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2012-03-15 11:57-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -143,10 +143,11 @@ msgstr "разветвленные кластеры под винды не поддерживаются"
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент 'jobs'"
 
-#. R/RngStream.R: stop("invalid value of 'seed'")
-#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
-msgid "invalid value of 'seed'"
+#, fuzzy
+msgid "invalid value of %s"
 msgstr "неправильное значение 'seed'"
 
 #. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")

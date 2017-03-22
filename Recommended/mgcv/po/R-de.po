@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -1172,6 +1172,11 @@ msgstr ""
 msgid ""
 "Please put term with most levels last in 're' to avoid spoiling supplied "
 "penalties"
+msgstr ""
+
+#. R/fast-REML.r: warning("Possible divergence detected in fast.REML.fit", call. = FALSE, immediate. = TRUE)
+#: R/fast-REML.r:0
+msgid "Possible divergence detected in fast.REML.fit"
 msgstr ""
 
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
@@ -2658,6 +2663,11 @@ msgstr ""
 msgid "unimplemented sparse constraint type requested"
 msgstr ""
 
+#. R/smooth.r: warning("uniquecombs has not worked properly")
+#: R/smooth.r:0
+msgid "uniquecombs has not worked properly"
+msgstr ""
+
 #. R/mgcv.r: stop("unknown optimizer")
 #: R/mgcv.r:0
 msgid "unknown optimizer"
@@ -2748,6 +2758,11 @@ msgstr "Gewichte müssen wie glm-Gewichte sein für verallgemeinerten Fall"
 #: R/soap.r:0
 msgid "x and y must be same length"
 msgstr ""
+
+#. R/smooth.r: stop("x is null")
+#: R/smooth.r:0
+msgid "x is null"
+msgstr "x ist Null"
 
 #. R/gam.fit3.r: stop("y must be an integer multiple of phi for Tweedie(p=1)")
 #: R/gam.fit3.r:0
@@ -2924,9 +2939,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "object is not a glm or gam"
 #~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#~ msgid "x is null"
-#~ msgstr "x ist Null"
 
 #~ msgid "x has no col attribute"
 #~ msgstr "x hat kein Spaltenattribut"

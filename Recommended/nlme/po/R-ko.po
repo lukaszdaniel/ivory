@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -416,6 +416,11 @@ msgstr ""
 msgid "'value' must be a square matrix"
 msgstr ""
 
+#. R/zzMethods.R: stop("AIC undefined for REML fit")
+#: R/zzMethods.R:0
+msgid "AIC undefined for REML fit"
+msgstr ""
+
 #. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #. R/lme.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #: R/gls.R:0 R/lme.R:0
@@ -808,6 +813,14 @@ msgstr ""
 #. R/nlme.R: gettextf("PNLS step: RSS = %s", format(work$set[6]), domain = "R-nlme")
 #: R/nlme.R:0
 msgid "PNLS step: RSS = %s"
+msgstr ""
+
+#. R/zzMethods.R: gettextf("Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R.",     dQuote(pkgname), built.R.ver, getRversion(), domain = "R-nlme")
+#: R/zzMethods.R:0
+msgid ""
+"Package %s installed with old R version %s should not be used with R version "
+"%s\n"
+"  Rather re-install it with this version of R."
 msgstr ""
 
 #. R/corStruct.R: gettext(" Parameter estimates:", domain = "R-nlme")
@@ -1419,6 +1432,11 @@ msgstr ""
 msgid "degrees of freedom and weights must have the same length"
 msgstr ""
 
+#. R/zzMethods.R: warning("deviance undefined for REML fit")
+#: R/zzMethods.R:0
+msgid "deviance undefined for REML fit"
+msgstr ""
+
 #. R/pdMat.R: stop("dimnames of 'value' must match or be NULL")
 #: R/pdMat.R:0
 msgid "dimnames of 'value' must match or be NULL"
@@ -1877,6 +1895,13 @@ msgstr ""
 #. R/lmList.R: stop("nonexistent groups requested in 'subset' argument")
 #: R/lmList.R:0
 msgid "nonexistent groups requested in 'subset' argument"
+msgstr ""
+
+#. R/zzMethods.R: stop("not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)")
+#: R/zzMethods.R:0
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
 msgstr ""
 
 #. R/nlme.R: gettextf("number of columns in starting values for random component at level %s should be %d",     namGrp[i], rlength[i])

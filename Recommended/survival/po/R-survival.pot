@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.40-1\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"Project-Id-Version: survival 2.41-2\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,6 +216,7 @@ msgstr ""
 #: R/neardate.R: 0
 #: R/neardate.R: 0
 #: R/neardate.R: 0
+#: R/pyears.R: 0
 #: R/survSplit.R: 0
 #: R/survfit.R: 0
 #: R/survobrien.S: 0
@@ -228,6 +229,7 @@ msgstr ""
 #. R/neardate.R: gettextf("'%s' argument is required", "id2")
 #. R/neardate.R: gettextf("'%s' argument is required", "y1")
 #. R/neardate.R: gettextf("'%s' argument is required", "y2")
+#. R/pyears.R: gettextf("'%s' argument is required", "formula")
 #. R/survSplit.R: gettextf("'%s' argument is required", "data")
 #. R/survfit.R: gettextf("'%s' argument is required", "formula")
 #. R/survobrien.S: gettextf("'%s' argument is required", "formula")
@@ -393,7 +395,7 @@ msgstr ""
 
 
 #: R/residuals.coxph.S: 0
-#. R/residuals.coxph.S: gettextf("'%s' residuals are not available for the exact method", type)
+#. R/residuals.coxph.S: gettextf("'%s' residuals are not available for the exact method", otype)
 
 msgid "'%s' residuals are not available for the exact method"
 msgstr ""
@@ -505,9 +507,9 @@ msgstr ""
 
 
 #: R/survfitCI.R: 0
-#. R/survfitCI.R: stop("'istate' argument should be a vector of integers or a factor")
+#. R/survfitCI.R: stop("'istate' argument should be a vector of positive integers or a factor")
 
-msgid "'istate' argument should be a vector of integers or a factor"
+msgid "'istate' argument should be a vector of positive integers or a factor"
 msgstr ""
 
 
@@ -603,6 +605,13 @@ msgstr ""
 #. R/Surv.S: gettextf("'time2' argument (stop time) must be numeric", "time2")
 
 msgid "'time2' argument (stop time) must be numeric"
+msgstr ""
+
+
+#: R/coxph.control.S: 0
+#. R/coxph.control.S: stop("'timefix' argument must be TRUE or FALSE")
+
+msgid "'timefix' argument must be TRUE or FALSE"
 msgstr ""
 
 
@@ -741,6 +750,13 @@ msgid "*mean time in state, restricted (per curve cutoff)"
 msgstr ""
 
 
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: paste(tname[!temp], collapse = ", ")
+
+msgid ","
+msgstr ""
+
+
 #: R/coxph.R: 0
 #. R/coxph.R: stop("A formula argument is required")
 
@@ -782,6 +798,13 @@ msgid "Analysis of Deviance Table\n Cox model: response is %s\nTerms added seque
 msgstr ""
 
 
+#: R/coxph.R: 0
+#. R/coxph.R: gettextf("Argument %s not matched", names(extraArgs)[indx == 0L])
+
+msgid "Argument %s not matched"
+msgstr ""
+
+
 #: R/plot.cox.zph.S: 0
 #. R/plot.cox.zph.S: gettextf("Beta(t) for %s", dimnames(yy)[[2]])
 
@@ -806,7 +829,6 @@ msgstr ""
 #: R/print.survfit.S: 0
 #: R/print.survreg.S: 0
 #: R/print.survreg.penal.S: 0
-#: R/summary.pyears.S: 0
 #: R/survConcordance.R: 0
 #: R/survfitms.R: 0
 #. R/cch.R: gettext("Call: ", domain = "R-survival")
@@ -827,7 +849,6 @@ msgstr ""
 #. R/print.survfit.S: gettext("Call: ", domain = "R-survival")
 #. R/print.survreg.S: gettext("Call:", domain = "R-survival")
 #. R/print.survreg.penal.S: gettext("Call:", domain = "R-survival")
-#. R/summary.pyears.S: gettext("Call:", domain = "R-survival")
 #. R/survConcordance.R: gettext("Call:", domain = "R-survival")
 #. R/survfitms.R: gettext("Call:", domain = "R-survival")
 
@@ -1093,6 +1114,13 @@ msgid "Interaction terms are not valid for this function"
 msgstr ""
 
 
+#: R/cipoisson.R: 0
+#. R/cipoisson.R: stop("Invalid method")
+
+msgid "Invalid method"
+msgstr ""
+
+
 #: R/pyears.R: 0
 #: R/survexp.R: 0
 #. R/pyears.R: stop("Invalid rate table")
@@ -1216,13 +1244,6 @@ msgid "Loglik(model)= %s   Loglik(intercept only)= %s"
 msgstr ""
 
 
-#: R/summary.pyears.S: 0
-#. R/summary.pyears.S: gettextf("Matches to the chosen rate table:\n  %s", object$summary)
-
-msgid "Matches to the chosen rate table:\n  %s"
-msgstr ""
-
-
 #: R/anova.coxphlist.S: 0
 #. R/anova.coxphlist.S: gettextf(" Model %s:", format(seq_len(nmodels)))
 
@@ -1316,13 +1337,6 @@ msgstr ""
 #. R/print.summary.survreg.S: gettext("Number of Newton-Raphson Iterations: ", domain = "R-survival")
 
 msgid "Number of Newton-Raphson Iterations:"
-msgstr ""
-
-
-#: R/summary.pyears.S: 0
-#. R/summary.pyears.S: gettext("Observations in the data set: ", domain = "R-survival")
-
-msgid "Observations in the data set:"
 msgstr ""
 
 
@@ -1674,13 +1688,6 @@ msgid "Times must be in increasing order"
 msgstr ""
 
 
-#: R/summary.pyears.S: 0
-#. R/summary.pyears.S: gettextf("Total number of person-years tabulated: %s\nTotal number of person-years off table: %s",     format(sum(object$data$pyears)), format(object$offtable), domain = "R-survival")
-
-msgid "Total number of person-years tabulated: %s\nTotal number of person-years off table: %s"
-msgstr ""
-
-
 #: R/print.survfit.S: 0
 #: R/survfitms.R: 0
 #: R/survfitms.R: 0
@@ -1810,6 +1817,13 @@ msgid "a variable appears on both the left and right sides of the formula"
 msgstr ""
 
 
+#: R/aeqSurv.R: 0
+#. R/aeqSurv.R: stop("aeqSurv exception, an interval has effective length 0")
+
+msgid "aeqSurv exception, an interval has effective length 0"
+msgstr ""
+
+
 #: R/tmerge.R: 0
 #. R/tmerge.R: stop("all additional arguments must have a name")
 
@@ -1854,6 +1868,13 @@ msgid "all curves must be the same type"
 msgstr ""
 
 
+#: R/survfit.matrix.R: 0
+#. R/survfit.matrix.R: stop("all curves must have a consistent 'start.time' value")
+
+msgid "all curves must have a consistent 'start.time' value"
+msgstr ""
+
+
 #: R/survfitCI.R: 0
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 
@@ -1861,10 +1882,10 @@ msgid "an observation transitions to it's starting state, transition ignored"
 msgstr ""
 
 
-#: R/coxph.R: 0
-#. R/coxph.R: gettextf("argument %s was not matched", names(extraArgs)[indx == 0L])
+#: R/aeqSurv.R: 0
+#. R/aeqSurv.R: stop("argument is not a Surv object")
 
-msgid "argument %s was not matched"
+msgid "argument is not a Surv object"
 msgstr ""
 
 
@@ -1879,6 +1900,13 @@ msgstr ""
 #. R/tmerge.R: gettextf("argument(s) %s not a recognized type", argname[is.na(check)])
 
 msgid "argument(s) %s not a recognized type"
+msgstr ""
+
+
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("the ", paste(tname[!temp], collapse = ", "), "argument(s) must be single logical values")
+
+msgid "argument(s) must be single logical values"
 msgstr ""
 
 
@@ -2040,6 +2068,13 @@ msgid "cohort size must be a scalar for unstratified analysis"
 msgstr ""
 
 
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("conf.level must be a single numeric between 0 and 1")
+
+msgid "conf.level must be a single numeric between 0 and 1"
+msgstr ""
+
+
 #: R/statefig.R: 0
 #. R/statefig.R: stop("connect must be a square matrix")
 
@@ -2058,6 +2093,13 @@ msgstr ""
 #. R/cch.R: gettextf("cox model doesn't support \"%s\" survival data", type)
 
 msgid "cox model doesn't support \"%s\" survival data"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("data and options$tdcstart do not agree on data type")
+
+msgid "data and options$tdcstart do not agree on data type"
 msgstr ""
 
 
@@ -2222,6 +2264,13 @@ msgid "incorrect length in 'coxlist1' object"
 msgstr ""
 
 
+#: R/survfit.matrix.R: 0
+#. R/survfit.matrix.R: stop("incorrect number of states in p0")
+
+msgid "incorrect number of states in p0"
+msgstr ""
+
+
 #: R/coxph.R: 0
 #. R/coxph.R: stop("initial values lead to overflow or underflow of the exp function")
 
@@ -2250,16 +2299,16 @@ msgstr ""
 
 
 #: R/survfit.matrix.R: 0
-#. R/survfit.matrix.R: stop("input matrix and p0 have different dimensions")
-
-msgid "input matrix and p0 have different dimensions"
-msgstr ""
-
-
-#: R/survfit.matrix.R: 0
 #. R/survfit.matrix.R: stop("input must be a matrix of survival curves")
 
 msgid "input must be a matrix of survival curves"
+msgstr ""
+
+
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("input must be a pyears object")
+
+msgid "input must be a pyears object"
 msgstr ""
 
 
@@ -2382,6 +2431,13 @@ msgid "invalid distribution object"
 msgstr ""
 
 
+#: R/survfit.matrix.R: 0
+#. R/survfit.matrix.R: stop("invalid elements in p0")
+
+msgid "invalid elements in p0"
+msgstr ""
+
+
 #: R/tmerge.R: 0
 #. R/tmerge.R: stop("invalid increment for cumtdc or cumevent")
 
@@ -2403,13 +2459,6 @@ msgstr ""
 #. R/Surv.S: stop("invalid operation on a survival time")
 
 msgid "invalid operation on a survival time"
-msgstr ""
-
-
-#: R/survfit.matrix.R: 0
-#. R/survfit.matrix.R: stop("invalid p0 vector")
-
-msgid "invalid p0 vector"
 msgstr ""
 
 
@@ -2492,6 +2541,13 @@ msgid "invalid terms component of object"
 msgstr ""
 
 
+#: R/survfit.R: 0
+#. R/survfit.R: stop("invalid value for 'timefix' option")
+
+msgid "invalid value for 'timefix' option"
+msgstr ""
+
+
 #: R/tmerge.R: 0
 #. R/tmerge.R: stop("invalid value for a status variable")
 
@@ -2503,6 +2559,13 @@ msgstr ""
 #. R/coxph.control.S: stop("invalid value for iterations")
 
 msgid "invalid value for iterations"
+msgstr ""
+
+
+#: R/aeqSurv.R: 0
+#. R/aeqSurv.R: stop("invalid value for tolerance")
+
+msgid "invalid value for tolerance"
 msgstr ""
 
 
@@ -2845,6 +2908,13 @@ msgid "offsets must be finite"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("on the first call 'id' must be a single variable name")
+
+msgid "on the first call 'id' must be a single variable name"
+msgstr ""
+
+
 #: R/ridge.S: 0
 #. R/ridge.S: stop("only one of 'df' or 'theta' arguments can be specified")
 
@@ -2933,6 +3003,15 @@ msgid "predicted survival curves are not defined for a 'clogit' model"
 msgstr ""
 
 
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("programming length error, notify package author")
+#. R/print.pyears.R: stop("programming length error, notify package author")
+#. R/print.pyears.R: stop("programming length error, notify package author")
+
+msgid "programming length error, notify package author"
+msgstr ""
+
+
 #: R/pyears.R: 0
 #. R/pyears.R: stop("pyears cannot handle stratified Cox models")
 
@@ -2992,6 +3071,20 @@ msgid "robust variance plus the exact method is not supported"
 msgstr ""
 
 
+#: R/agreg.fit.R: 0
+#. R/agreg.fit.R: stop("routine failed due to numeric overflow. This should never happen. Please contact the author.")
+
+msgid "routine failed due to numeric overflow. This should never happen. Please contact the author."
+msgstr ""
+
+
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("scale must be a value > 0")
+
+msgid "scale must be a value > 0"
+msgstr ""
+
+
 #: R/anova.survreglist.S: 0
 #. R/anova.survreglist.S: warning("some fit objects deleted because response differs from the first model")
 
@@ -3041,7 +3134,9 @@ msgstr ""
 
 
 #: R/survfit.coxph.R: 0
+#: R/survfitCI.R: 0
 #. R/survfit.coxph.R: stop("start.time must be a single numeric value")
+#. R/survfitCI.R: stop("start.time must be a single numeric value")
 
 msgid "start.time must be a single numeric value"
 msgstr ""
@@ -3120,6 +3215,20 @@ msgid "survfit object has only a single survival curve"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("tdcstart must be a single value")
+
+msgid "tdcstart must be a single value"
+msgstr ""
+
+
+#: R/print.pyears.R: 0
+#. R/print.pyears.R: stop("the ", paste(tname[!temp], collapse = ", "), "argument(s) must be single logical values")
+
+msgid "the"
+msgstr ""
+
+
 #: R/cox.zph.S: 0
 #. R/cox.zph.S: stop("the are no score residuals for a Null model")
 
@@ -3166,6 +3275,13 @@ msgstr ""
 #. R/survreg.S: stop("the scale argument is not valid with multiple strata")
 
 msgid "the scale argument is not valid with multiple strata"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("the second argument of tdc must be numeric, character, or factor")
+
+msgid "the second argument of tdc must be numeric, character, or factor"
 msgstr ""
 
 
@@ -3394,6 +3510,13 @@ msgstr ""
 #. R/Surv.S: stop("wrong number of arguments for this type of survival data")
 
 msgid "wrong number of arguments for this type of survival data"
+msgstr ""
+
+
+#: R/survfit.matrix.R: 0
+#. R/survfit.matrix.R: stop("wrong number of rows for p0")
+
+msgid "wrong number of rows for p0"
 msgstr ""
 
 

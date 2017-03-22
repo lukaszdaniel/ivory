@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -60,7 +60,7 @@ msgstr "można przekształcić tylko do 100 par w 'arima0'"
 msgid "maximum supported lag is 350"
 msgstr "maksymalne obsługiwane opóźnienie wynosi 350"
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr "nieskończone x[%d] podczas wyliczania pasma"
@@ -122,42 +122,45 @@ msgstr "'x' jest puste"
 msgid "the standard deviation is zero"
 msgstr "odchylenie standardowe wynosi zero"
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr "niepoprawna forma sprawdzania jednoargumentowej operacji minus"
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+#, fuzzy
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr "tylko wywołania o jednym argumencie są wspierane"
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcja '%s' nie znajduje się w tablicy pochodnych"
 
-#: deriv.c:634
+#: deriv.c:781
 #, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "argument '%s' nie może być typu '%s'"
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr "zmienna musi być łańcuchem tekstowym"
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr "tylko pierwszy element jest używany jako nazwa zmiennej"
 
-#: deriv.c:652
+#: deriv.c:799
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "niepoprawne wyrażenie w '%s'"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr "niepoprawne nazwy zmiennych"
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr "niepoprawny znacznik"
 

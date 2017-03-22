@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2016-01-09 19:16+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -138,10 +138,11 @@ msgstr "forgreningsklynger er ikke understøttet på Windows"
 msgid "invalid '%s' argument"
 msgstr "ugyldigt »jobs«-argument"
 
-#. R/RngStream.R: stop("invalid value of 'seed'")
-#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
-msgid "invalid value of 'seed'"
+#, fuzzy
+msgid "invalid value of %s"
 msgstr "ugyldig værdi for »seed«"
 
 #. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")

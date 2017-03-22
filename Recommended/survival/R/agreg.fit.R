@@ -4,21 +4,19 @@ agreg.fit <- function(x, y, strata, offset, init, control,
     {
     n <- nrow(y)
     nvar <- ncol(x)
-    start <- y[,1]
-    stopp <- y[,2]
     event <- y[,3]
     if (all(event==0)) stop("Can't fit a Cox model with 0 failures")
 
     # Sort the data (or rather, get a list of sorted indices)
     #  For both stop and start times, the indices go from last to first
     if (length(strata)==0) {
-        sort.end  <- order(-stopp) -1L #indices start at 0 for C code
-        sort.start<- order(-start) -1L
+        sort.end  <- order(-y[,2]) -1L #indices start at 0 for C code
+        sort.start<- order(-y[,1]) -1L
         newstrat  <- n
         }
     else {
-        sort.end  <- order(strata, -stopp) -1L
-        sort.start<- order(strata, -start) -1L
+        sort.end  <- order(strata, -y[,2]) -1L
+        sort.start<- order(strata, -y[,1]) -1L
         newstrat  <- cumsum(table(strata))
         }
     if (missing(offset) || is.null(offset)) offset <- rep(0.0, n)
@@ -64,6 +62,8 @@ agreg.fit <- function(x, y, strata, offset, init, control,
 
     var <- matrix(agfit$imat,nvar,nvar)
     coef <- agfit$coef
+    if (any(!is.finite(coef)) || any(!is.finite(var)))
+        stop("routine failed due to numeric overflow. This should never happen. Please contact the author.")
     if (agfit$flag[1] < nvar) which.sing <- diag(var)==0
     else which.sing <- rep(FALSE,nvar)
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1175,6 +1175,12 @@ msgstr " 'ts' オブジェクトは1つ以上の観測値を持たなければ�
 #, fuzzy
 msgid "'type = \"partial\"' is not yet implemented"
 msgstr " type = \"partial\" はまだ実装されていません "
+
+#. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' argument must be 1 or 3 for ordered factors"
+msgstr " 'xy.labels' は論理値もしくは文字です "
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0
@@ -3839,14 +3845,14 @@ msgstr " 枝数が正でないデンドログラムノードです "
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr " 枝数が非負のデンドログラムの葉ではないノードです "
 
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members at height %s"
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members total, at height %s"
-msgstr ""
-
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
-#: R/dendrogram.R:0
-msgid "dendrogram with %d branches and %d members, at height %s"
 msgstr ""
 
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
@@ -4444,6 +4450,11 @@ msgstr " 無効なパラメータ値です "
 msgid "invalid response type"
 msgstr " 無効な応答タイプです "
 
+#. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
+#: R/loess.R:0
+msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
+msgstr ""
+
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
 msgid "iterTrace = %s not obeyed as iterations = %d"
@@ -4459,8 +4470,7 @@ msgstr ""
 msgid "layout: widths = %s, heights = %s; lmat="
 msgstr ""
 
-#. R/dendrogram.R: gettextf("leaf %s", dQuote(at$label), domain = "R-stats")
-#. R/dendrogram.R: gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats")
+#. R/dendrogram.R: gettextf("leaf %s", if (is.character(at$label)) dQuote(at$label) else format(object,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "leaf %s"
 msgstr ""
@@ -5643,6 +5653,11 @@ msgstr " モデル式中で許されない応答です "
 #, fuzzy
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
 msgstr " smooth.spline(*, keep.data=TRUE) の結果が必要です "
+
+#. R/loess.R: gettext("robustness weights:", domain = "R-stats")
+#: R/loess.R:0
+msgid "robustness weights:"
+msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0

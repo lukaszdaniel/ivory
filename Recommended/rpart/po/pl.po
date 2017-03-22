@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rpart 3.1-53\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2017-03-14 22:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -138,38 +138,33 @@ msgstr "niepoprawna wartość dla 'method'"
 msgid "unknown error"
 msgstr "nieznany błąd"
 
-#: rpart_callback.c:37
+#: rpart_callback.c:42
 msgid "'yback' not found"
 msgstr "nie znaleziono 'yback'"
 
-#: rpart_callback.c:41
+#: rpart_callback.c:46
 msgid "'wback' not found"
 msgstr "nie znaleziono 'wback'"
 
-#: rpart_callback.c:45
+#: rpart_callback.c:50
 msgid "'xback' not found"
 msgstr "nie znaleziono 'xback'"
 
-#: rpart_callback.c:49
+#: rpart_callback.c:54
 msgid "'nback' not found"
 msgstr "nie znaleziono 'nback'"
 
-#: rpart_callback.c:89
+#: rpart_callback.c:100
 msgid "return value not a vector"
 msgstr "zwrócona wartość nie jest wektorem"
 
-#: rpart_callback.c:91
+#: rpart_callback.c:102
 msgid "returned value is the wrong length"
 msgstr "zwrócona wartość ma błędną długość"
 
-#: rpart_callback.c:121
+#: rpart_callback.c:134
 msgid "the expression expr1 did not return a vector!"
 msgstr "wyrażenie 'expr1' nie zwróciło wektora!"
-
-#: rpart_callback.c:133
-#, c-format
-msgid "the expression expr1 returned a list of %d elements, %d required"
-msgstr "wyrażenie 'expr1' zwróciło listę %d elementów, %d jest wymaganych"
 
 #: rundown.c:47
 msgid "Warning message--see rundown.c"
@@ -178,6 +173,9 @@ msgstr "Komunikat ostrzegawczy--zobacz 'rundown.c'"
 #: rundown2.c:47
 msgid "Warning message--see rundown2.c"
 msgstr "Komunikat ostrzegawczy--zobacz 'rundown2.c'"
+
+#~ msgid "the expression expr1 returned a list of %d elements, %d required"
+#~ msgstr "wyrażenie 'expr1' zwróciło listę %d elementów, %d jest wymaganych"
 
 #~ msgid "Out of memory"
 #~ msgstr "Brak pamięci"

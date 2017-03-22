@@ -1,43 +1,45 @@
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/Surv.S Recommended/survival/R/Surv.S
-9,10c9,10
+9c9
 <     if (missing(time)) stop ("Must have a time argument")
-<     if (!is.numeric(time)) stop ("Time variable is not numeric")
 ---
 >     if (missing(time)) stop(gettextf("'%s' argument is required", "time"))
+12c12
+<     if (!is.numeric(time)) stop ("Time variable is not numeric")
+---
 >     if (!is.numeric(time)) stop(gettextf("'%s' argument must be numeric", "time"))
-26c26
+28c28
 <         else stop ("No time variable!") # no time variable at all!
 ---
 >         else stop("no time variable!") # no time variable at all!
-31c31
-< 		stop("Wrong number of args for this type of survival data")
----
-> 		stop("wrong number of arguments for this type of survival data")
 33c33
 < 		stop("Wrong number of args for this type of survival data")
 ---
 > 		stop("wrong number of arguments for this type of survival data")
-37c37
+35c35
+< 		stop("Wrong number of args for this type of survival data")
+---
+> 		stop("wrong number of arguments for this type of survival data")
+39c39
 <         if (!is.numeric(time)) stop("Time variable is not numeric")
 ---
 >         if (!is.numeric(time)) stop(gettextf("'%s' argument must be numeric", "time"))
-42c42
+44c44
 <         if (!is.numeric(time)) stop("Time variable is not numeric")
 ---
 >         if (!is.numeric(time)) stop(gettextf("'%s' argument must be numeric", "time"))
-47c47
+49c49
 <         if (length(event) != nn) stop ("Time and status are different lengths")
 ---
 >         if (length(event) != nn) stop(gettextf("'%s' and '%s' arguments are of different lengths", "time", "event"))
-62c62
+64c64
 < 		    warning("Invalid status value, converted to NA")
 ---
 > 		    warning("invalid status value, converted to NA")
-64c64
+66c66
 <             else stop("Invalid status value, must be logical or numeric")
 ---
 >             else stop("invalid status value, must be logical or numeric")
-69,72c69,72
+71,74c71,74
 < 	if (length(time2) !=nn) stop ("Start and stop are different lengths")
 < 	if (length(event)!=nn) stop ("Start and event are different lengths")
 <         if (!is.numeric(time))  stop("Start time is not numeric")
@@ -47,55 +49,55 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	if (length(event)!=nn) stop("'time' (start time) and 'event' arguments are of different lengths")
 >         if (!is.numeric(time))  stop(gettextf("'time' argument (start time) must be numeric", "time"))
 > 	if (!is.numeric(time2)) stop(gettextf("'time2' argument (stop time) must be numeric", "time2"))
-76c76
+78c78
 < 	    warning("Stop time must be > start time, NA created")
 ---
 > 	    warning("stop time must be > start time, NA created")
-92c92
+94c94
 < 		    warning("Invalid status value, converted to NA")
 ---
 > 		    warning("invalid status value, converted to NA")
-94c94
+96c96
 < 	    else stop("Invalid status value")
 ---
 > 	    else stop("invalid status value")
-102c102
+104c104
 < 	    if (!is.numeric(time2)) stop("Time2 must be numeric")
 ---
 > 	    if (!is.numeric(time2)) stop(gettextf("'%s' argument must be numeric", "time2"))
-104c104
+106c106
 < 		    stop ("time and time2 are different lengths")
 ---
 > 		    stop(gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2"))
-115c115
+119c119
 <                 warning("Invalid interval: start > stop, NA created")
 ---
 >                 warning("invalid interval: start > stop, NA created")
-123c123
+127c127
 < 		    stop("Time and status are different lengths")
 ---
 > 		    stop(gettextf("'%s' and '%s' arguments are of different lengths", "time", "event"))
-125c125
+129c129
 < 		   stop("Invalid status value, must be logical or numeric")
 ---
 > 		   stop("invalid status value, must be logical or numeric")
-129c129
+133c133
 <                 warning("Status must be 0, 1, 2 or 3; converted to NA")
 ---
 >                 warning("status must be 0, 1, 2 or 3; converted to NA")
-132c132
+136c136
 < 		if (!is.numeric(time2)) stop("Time2 must be numeric")
 ---
 > 		if (!is.numeric(time2)) stop(gettextf("'%s' argument must be numeric", "time2"))
-134c134
+138c138
 < 		    stop ("time and time2 are different lengths")
 ---
 > 		    stop(gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2"))
-138c138
+142c142
 <                     warning("Invalid interval: start > stop, NA created")
 ---
 >                     warning("invalid interval: start > stop, NA created")
-262,264c262,264
+265,267c265,267
 < Math.Surv <- function(...)  stop("Invalid operation on a survival time")
 < Ops.Surv  <- function(...)  stop("Invalid operation on a survival time")
 < Summary.Surv<-function(...) stop("Invalid operation on a survival time")
@@ -151,7 +153,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	for (i in 1:nevent) {	    
 ---
 > 	for (i in seq_len(nevent)) {	    
-368c367
+367c366
 <     if (!inherits(x, 'aareg')) stop ("Must be an aareg object")
 ---
 >     if (!inherits(x, 'aareg')) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg")))
@@ -224,14 +226,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", responses[1]), sep = "")
 >     topnote <- paste(gettextf(" Model %s:", format(seq_len(nmodels))), variables, collapse = "\n")
-46,49c43,44
-<     if (is.R()) structure(table, heading = c(title, topnote), 
-< 			  class = c("anova", "data.frame"))
-<     else structure(table, heading = c(title, topnote), 
-< 			  class = "anova")	     
----
->     if (is.R()) structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
->     else structure(table, heading = c(title, topnote), class = "anova")	     
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/attrassign.R Recommended/survival/R/attrassign.R
 27c27
 <                 stop("need terms object")
@@ -294,57 +288,61 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				"%d censored observation not in subcohort",
 > 				"%d censored observations not in subcohort", domain = "R-survival"),
 > 			 sum(!subcoh & !cens)), domain = NA)
-240c243
+204c207
+<   idx <- 1:length(nobs)
+---
+>   idx <- seq_along(nobs)
+246c249
 <   for (j in 1:jj) {
 ---
 >   for (j in seq_len(jj)) {
-292c295
+297c300
 <   for (j in 1:jj) {
 ---
 >   for (j in seq_len(jj)) {
-326,327c329
+331,332c334
 <     dimnames(coefficients) <- list(names(coef), c("Value", 
 <                                                   "SE", "Z", "p"))
 ---
 >     dimnames(coefficients) <- list(names(coef), c("Value", "SE", "Z", "p"))
-335c337
+340c342
 <         cat("Exposure-stratified case-cohort analysis,", x$method, "method.\n")
 ---
 >         cat(gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival"), "\n", sep = "")
-339,341c341
+344,346c346
 <         cat("Case-cohort analysis,")
 <         cat("x$method,", x$method,"\n with subcohort of",
 <             x$subcohort.size,"from cohort of", x$cohort.size,"\n\n")
 ---
 >         cat(gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s", x$method, x$subcohort.size, x$cohort.size, domain = "R-survival"), "\n\n", sep = "")
-343,344c343,344
+348,349c348,349
 <     cat("Call: "); print(x$call)
 <     cat("\nCoefficients:\n")
 ---
 >     cat(gettext("Call: ", domain = "R-survival")); print(x$call)
 >     cat("\n", gettext("Coefficients:", domain = "R-survival"), "\n", sep = "")
-362,363c362
+367,368c367
 <     dimnames(coefficients) <- list(names(coef), c("Value", 
 <                                                   "SE", "Z", "p"))
 ---
 >     dimnames(coefficients) <- list(names(coef), c("Value", "SE", "Z", "p"))
-377c376
+382c381
 <         cat("Exposure-stratified case-cohort analysis,", x$method, "method.\n")
 ---
 >         cat(gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival"), "\n", sep = "")
-381,383c380
+386,388c385
 <         cat("Case-cohort analysis,")
 <         cat("x$method,", x$method,"\n with subcohort of",
 <             x$subcohort.size,"from cohort of", x$cohort.size,"\n\n")
 ---
 >         cat(gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s", x$method, x$subcohort.size, x$cohort.size, domain = "R-survival"), "\n\n", sep = "")
-385,386c382,383
+390,391c387,388
 <     cat("Call: "); print(x$call)
 <     cat("\nCoefficients:\n")
 ---
 >     cat(gettext("Call: ", domain = "R-survival")); print(x$call)
 >     cat("\n", gettext("Coefficients:", domain = "R-survival"), "\n", sep = "")
-388,389c385,386
+393,394c390,391
 <                   "(95%"=exp(x$coefficients[,1]-1.96*x$coefficients[,2]),
 <                   "CI)"=exp(x$coefficients[,1]+1.96*x$coefficients[,2]),
 ---
@@ -360,49 +358,48 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     stop("predicted survival curves are not defined for a 'clogit' model")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/coxph.R Recommended/survival/R/coxph.R
-30c30
+19c19
+<                           names(extraArgs)[indx==0L]), domain = NA)
+---
+>                           names(extraArgs)[indx==0L]), domain = "R-survival")
+42c42
 <     if (nrow(mf) ==0) stop("No (non-missing) observations")
 ---
 >     if (nrow(mf) ==0) stop("no (non-missing) observations")
-42,43c42
-<             stop(gettextf("Argument %s not matched", names(extraArgs)[indx==0L]),
-<                  domain = NA)
----
->             stop(gettextf("argument %s was not matched", names(extraArgs)[indx==0L]), domain = "R-survival")
-51,52c50
+50,51c50
 <         stop(paste("Cox model doesn't support \"", type,
 <                           "\" survival data", sep=''))
 ---
 >         stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
-93c91
+92c91
 <                  stop("The tt argument must contain function or list of functions")
 ---
 >                  stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-97c95
+96c95
 <                      for (i in 1:ntrans) temp[[i]] <- tt[[1]]
 ---
 >                      for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
-100c98
+99c98
 <                  else stop("Wrong length for tt argument")
 ---
 >                  else stop(gettextf("wrong length for '%s' argument", "tt"))
-103c101
+102c101
 <          else stop("The tt argument must contain a function or list of functions")
 ---
 >          else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-151c149
+150c149
 <          for (i in 1:ntrans) {
 ---
 >          for (i in seq_len(ntrans)) {
-236c234
+235c234
 <         if (length(init) != ncol(X)) stop("wrong length for init argument")
 ---
 >         if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
-265c263
+264c263
 <         else stop(paste ("Unknown method", method))
 ---
 >         else stop(gettextf("unknown '%s' method", method))
-276,278c274,275
+275,277c274,275
 <            vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
 <            msg <-paste("X matrix deemed to be singular; variable",
 <                            paste(vars, collapse=" "))
@@ -410,18 +407,20 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >            vars <- seq_along(fit$coefficients)[is.na(fit$coefficients)]
 >            msg <- gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/coxph.control.S Recommended/survival/R/coxph.control.S
-8,9c8,9
+9,10c9,10
 <     if (iter.max <0) stop("Invalid value for iterations")
 <     if (eps <=0) stop ("Invalid convergence criteria")
 ---
 >     if (iter.max <0) stop("invalid value for iterations")
 >     if (eps <=0) stop("invalid convergence criteria")
-11,12c11,12
+12,14c12,14
 < 	    warning("For numerical accuracy, tolerance should be < eps")
 <     if (toler.inf <=0) stop ("The inf.warn setting must be >0")
+<     if (!is.logical(timefix)) stop("timefix must be TRUE or FALSE")
 ---
 > 	    warning("for numerical accuracy, tolerance should be < eps")
 >     if (toler.inf <=0) stop("'toler.inf' argument must be >0")
+>     if (!is.logical(timefix)) stop("'timefix' argument must be TRUE or FALSE")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/coxph.rvar.S Recommended/survival/R/coxph.rvar.S
 5c5
 < 	stop ("First argument must be a fitted Cox model")
@@ -472,15 +471,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (!inherits(Y, "Surv")) stop("Response must be a survival object")
 ---
 >     if (!inherits(Y, "Surv")) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
-43c43
+44c44
 <         if (!is.null(id)) stop("an id argument and a cluster() term are redundant")
 ---
 >         if (!is.null(id)) stop("'id' argument and a 'cluster()' term are redundant")
-80c80
+81c81
 <             stop ("etype argument has a state that is not in the data")
 ---
 >             stop("'etype' argument has a state that is not in the data")
-186c186
+189c189
 <         tlist <- lapply(1:max(istrat), stratfun)
 ---
 >         tlist <- lapply(seq_len(max(istrat)), stratfun)
@@ -780,35 +779,35 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("Primary argument much be a coxph object")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
-19c19
+25c25
 <                     terms <1)) stop("Invalid terms argument")
 ---
 >                     terms <1)) stop(gettextf("invalid '%s' argument", "terms"))
-22c22
+28c28
 <            stop("a name given in the terms argument not found in the model")
 ---
 >            stop("a name given in the 'terms' argument not found in the model")
-170c170
+176c176
 <                     j1 <- approx(afit$time, 1:afit.n, y[indx,1], method='constant',
 ---
 >                     j1 <- approx(afit$time, seq_len(afit.n), y[indx,1], method='constant',
-181c181
+187c187
 <                         j2 <- approx(afit$time, 1:afit.n, y[indx,2], method='constant',
 ---
 >                         j2 <- approx(afit$time, seq_len(afit.n), y[indx,2], method='constant',
-198c198
+204c204
 <                     j1 <- approx(afit$time, 1:afit.n, newy[indx2,1], 
 ---
 >                     j1 <- approx(afit$time, seq_len(afit.n), newy[indx2,1], 
-214c214
+220c220
 <                         j2 <- approx(afit$time, 1:afit.n, newy[indx2,2], 
 ---
 >                         j2 <- approx(afit$time, seq_len(afit.n), newy[indx2,2], 
-281c281
+291c291
 <             for (i in 1:nterms) {
 ---
 >             for (i in seq_len(nterms)) {
-308c308
+318c318
 <         if (length(collapse) != n2) stop("Collapse vector is the wrong length")
 ---
 >         if (length(collapse) != n2) stop("Collapse vector is of the wrong length")
@@ -897,81 +896,89 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (intercept) xnames <-paste('ps(', xname, ')', 1:nvar, sep='')
 ---
 >     if (intercept) xnames <-paste('ps(', xname, ')', seq_len(nvar), sep='')
-221c221
+213c213
 <         stop("Argment must be the result of a call to pspline")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline")))
-226c226
+218c218
 <         indx <- 1:(ncol(x)+1) + (nknot- (ncol(x) +1))/2
 ---
 >         indx <- seq_len(ncol(x)+1) + (nknot- (ncol(x) +1))/2
-230c230
+222c222
 <         indx <- 1:ncol(x) + (nknot - ncol(x))/2
 ---
 >         indx <- seq_len(ncol(x)) + (nknot - ncol(x))/2
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/pyears.R Recommended/survival/R/pyears.R
-23c23
+15c15
+<     if (indx[1] ==0) stop("A formula argument is required")
+---
+>     if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
+28c28
 <             stop("Can have only 1 ratetable() call in a formula")
 ---
 >             stop("Can have only 1 'ratetable()' call in a formula")
-28c28
+33c33
 <                 stop("The ratetable() call in a formula is depreciated")
 ---
 >                 stop("The 'ratetable()' call in a formula is depreciated")
-38c38
+43c43
 <                 stop ("Invalid rcall argument")
 ---
 >                 stop(gettextf("invalid '%s' argument", "rcall"))
-54c54
+59c59
 <             stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
 ---
 >             stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
-91,93c91
+95,97c95
 <                 warning(paste(nzero, 
 <                          "observations with an event and 0 follow-up time,",
 <                        "any rate calculations are statistically questionable"))
 ---
 >                 warning(sprintf(ngettext(nzero, "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable","%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"), nzero), domain = NA)
-100c98
+104c102
 <     if (is.null(n) || n==0) stop("Data set has 0 observations")
 ---
 >     if (is.null(n) || n==0) stop("data set has 0 observations")
-140c138
+144c142
 <         for (i in 1:odim) {
 ---
 >         for (i in seq_len(odim)) {
-204c202
+208c206
 <             else stop("Can't find an appropriate date class\n") 
 ---
 >             else stop("Can't find an appropriate date class") 
-213c211
+217c215
 <                 cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
 ---
 >                 cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
-278c276
+283c281
 <         row.names(df) <- 1:nrow(df)
 ---
 >         row.names(df) <- seq_len(nrow(df))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/ratetable.S Recommended/survival/R/ratetable.S
-34c34
+33c33
 <     for (i in 1:nargs) {
 ---
 >     for (i in seq_len(nargs)) {
-37,38c37
+36,37c36
 <             stop(paste("Aguments do not all have the same length (arg ",
 < 			i, ")", sep=''))
 ---
 >             stop(gettextf("Aguments do not all have the same length (arg %d)", i))
-41c40
+40c39
 <         if (inherits(args[[i]], 'cateogory') || is.character(args[[i]]))
 ---
 >         if (inherits(args[[i]], 'category') || is.character(args[[i]]))
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/residuals.coxph.S Recommended/survival/R/residuals.coxph.S
-26c26
-< 	stop(paste(type, 'residuals are not available for the exact method'))
+95c94
+< 	for (i in (1:length(change))[change])
 ---
-> 	stop(gettextf("'%s' residuals are not available for the exact method", type))
-169c169
+> 	for (i in seq_along(change)[change])
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/residuals.coxph.S Recommended/survival/R/residuals.coxph.S
+27c27
+< 	stop(paste(otype, 'residuals are not available for the exact method'))
+---
+> 	stop(gettextf("'%s' residuals are not available for the exact method", otype))
+170c170
 < 	if (length(collapse) !=n) stop("Wrong length for 'collapse'")
 ---
 > 	if (length(collapse) !=n) stop(gettextf("wrong length for '%s' argument", "collapse"))
@@ -1107,27 +1114,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("either a formula or the end and event arguments are required")
 ---
 >         stop(gettextf("'%s' or '%s' and '%s arguments are required", "formula", "end", "event"))
-49c49
+50c50
 <     if (!is.Surv(Y)) stop ("the model must have a Surv object as the response")
 ---
 >     if (!is.Surv(Y)) stop ("the model must have an object of class \"Surv\" as the response")
-51c51
+52c52
 <         stop(paste("not valid for", attr(Y, "type"), "censored survival data"))
 ---
 >         stop(gettextf("not valid for %s censored survival data", attr(Y, "type")))
-57c57
+59c59
 <         stop("cut must be a vector of finite numbers")
 ---
 >         stop("'cut' argument must be a vector of finite numbers")
-63c63
+65c65
 <         if (!is.character(id)) stop("id must be a variable name")
 ---
 >         if (!is.character(id)) stop(gettextf("'%s' argument must be a variable name", "id"))
-115c115
+119c119
 <             stop("left hand side not recognized")
 ---
 >             stop("left hand side was not recognized")
-121c121
+125c125
 <         if (!is.character(episode)) stop("episode must be a character string")
 ---
 >         if (!is.character(episode)) stop(gettextf("'%s' argument must be a character string", "episode"))
@@ -1169,21 +1176,21 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("The 'formula' argument is not a formula")
 ---
 >         stop("'formula' argument is not a formula")
-17,18c17,18
+16,17c16,17
 <     if (!inherits(y, "Surv")) stop("Response must be a survival object")
 <     if (attr(y, 'type') != 'right') stop("Right censored data only")
 ---
 >     if (!inherits(y, "Surv")) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
 >     if (attr(y, 'type') != 'right') stop("right censored data only")
-27c27
+26c26
 < 		stop("Cannot have both an offset and groups")
 ---
 > 		stop("cannot have both an offset and groups")
-29c29
+28c28
 < 	    stop("The offset must be a survival probability")
 ---
 > 	    stop("the offset must be a survival probability")
-59c59
+58c58
 < 	if (length(ll) == 0) stop("No groups to test")
 ---
 > 	if (length(ll) == 0) stop("no groups to test")
@@ -1266,60 +1273,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             temp <- rep(1:length(x$strata), x$strata)
 ---
 >             temp <- rep(seq_along(x$strata), x$strata)
-109c107
+111c109
 <     if (indx[1]==0) stop("a formula argument is required")
 ---
 >     if (indx[1]==0) stop(gettextf("'%s' argument is required", "formula"))
-121c119
+123c121
 <     if (!is.Surv(Y)) stop("Response must be a survival object")
 ---
 >     if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
-142c140
+144c142
 <     if (!is.Surv(Y)) stop("y must be a Surv object")
 ---
 >     if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv")))
-149c147
+151c149
 <             stop("cannot use both the etype argument and mstate survival type")
 ---
 >             stop("cannot use both the 'etype' argument and 'mstate' survival type")
-151c149
+153c151
 <             stop("cannot use both the etype and istate arguments")
 ---
 >             stop("cannot use both the 'etype' and 'istate' arguments")
-168c166
+170c168
 <         else stop("etype argument incompatable with survival type")
 ---
 >         else stop("'etype' argument incompatable with survival type")
+175c173
+<         stop("invalid value for timefix option")
+---
+>         stop("invalid value for 'timefix' option")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfit.coxph.R Recommended/survival/R/survfit.coxph.R
 119c119
 <         stop("Cannot handle \"", type, "\" type survival data")
 ---
 >         stop(gettextf("Cannot handle \"%s\" type survival data", type))
-204c204
+205c205
 <             if (individual) stop("newdata must be a data frame")
 ---
 >             if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
-206c206
+207c207
 <                 stop("Newdata argument must be a data frame")
 ---
 >                 stop(gettextf("'%s' argument must be a data frame", "newdata"))
-270c270
+271c271
 <             stop("The newdata argument must be present when individual=TRUE")
 ---
 >             stop("The newdata argument must be present when 'individual=TRUE'")
-273c273
+274c274
 <             if (is.null(id)) stop("id=NULL is an invalid argument")
 ---
 >             if (is.null(id)) stop("'id=NULL' is an invalid argument")
-289c289
+290c290
 <             stop("Individual=TRUE is only valid for counting process data")
 ---
 >             stop("'individual=TRUE' is only valid for counting process data")
-318c318
+319c319
 <                 indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
 ---
 >                 indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
-387c387
+389c389
 <     result <- c(result[1:indx], type=attr(y, 'type'), result[-(1:indx)])
 ---
 >     result <- c(result[seq_len(indx)], type=attr(y, 'type'), result[-seq_len(indx)])
@@ -1333,47 +1344,47 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                           "\" survival data", sep=''))
 ---
 >          stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
-123c122
-<                 stop("istate should be a vector of integers or a factor")
+138c137
+<                 stop("istate should be a vector of positive integers or a factor")
 ---
->                 stop("'istate' argument should be a vector of integers or a factor")
-128c127
+>                 stop("'istate' argument should be a vector of positive integers or a factor")
+143c142
 <     if (length(id) ==0) id <- 1:n
 ---
 >     if (length(id) ==0) id <- seq_len(n)
-132c131
+147c146
 <     if (length(istate) !=n) stop ("wrong length for istate")
 ---
 >     if (length(istate) !=n) stop(gettextf("'%s' argument is of the wrong length", "istate"))
-135c134
+150c149
 <     states <- unique(c(1:nstate, istate))
 ---
 >     states <- unique(c(seq_len(nstate), istate))
-151,152c150,151
+166,167c165,166
 <         transitions <- table(factor(istate, 1:nst), factor(Y[,2], 1:nstate))
 <         dimnames(transitions) <-list(from=state.names, to=state.names[1:nstate])
 ---
 >         transitions <- table(factor(istate, seq_len(nst)), factor(Y[,2], seq_len(nstate)))
 >         dimnames(transitions) <-list(from=state.names, to=state.names[seq_len(nstate)])
-175c174
+190c189
 <             stop("subject is in two different groups, id ", id[indx1[who]])
 ---
 >             stop(gettextf("subject is in two different groups, id %s", id[indx1[who]]))
-179c178
+194c193
 <             stop("gap in follow-up, id ", id[indx1[who]])
 ---
 >             stop(gettextf("gap in follow-up, id %s", id[indx1[who]]))
-186c185
+201c200
 <             warning("subject changes to the same state, id ", id[indx1[who]])
 ---
 >             warning(gettextf("subject changes to the same state, id %s", id[indx1[who]]))
-192,193c191,192
+207,208c206,207
 <         transitions <- table(factor(istate[first], 1:nst), 
 <                              factor(Y[first,3], 1:nstate))
 ---
 >         transitions <- table(factor(istate[first], seq_len(nst)), 
 >                              factor(Y[first,3], seq_len(nstate)))
-195,197c194,196
+210,212c209,211
 <             transitions <- transitions + table(factor(Y[indx1[same],3], 1:nst),
 <                                                factor(Y[indx2[same],3], 1:nstate))
 <         dimnames(transitions) = list(from=state.names, to=state.names[1:nstate])
@@ -1592,69 +1603,69 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     if (all(keepers)) stop("no continuous variables to modify")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survreg.S Recommended/survival/R/survreg.S
-10c10
+8c8
 <     if (indx[1] ==0) stop("A formula argument is required")
 ---
 >     if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
-23c23
+20c20
 <     if (!inherits(Y, "Surv")) stop("Response must be a survival object")
 ---
 >     if (!inherits(Y, "Surv")) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
-38c38
+35c35
 <         if (any(ord>1)) stop ("Cluster can not be used in an interaction")
 ---
 >         if (any(ord>1)) stop("cluster cannot be used in an interaction")
-95c95
+77c77
 < 	if (is.null(dlist)) stop(paste(dist, ": distribution not found"))
 ---
 > 	if (is.null(dlist)) stop(gettextf("%s distribution was not found", sQuote(dist)))
-98c98
+80c80
 <     else stop("Invalid distribution object")
 ---
 >     else stop("invalid distribution object")
-103c103
+85c85
 <     if (!survregDtest(dlist)) stop("Invalid distribution object")
 ---
 >     if (!survregDtest(dlist)) stop("invalid distribution object")
-126c126
+108c108
 < 	    stop("Invalid survival times for this distribution")
 ---
 > 	    stop("invalid survival times for this distribution")
-134,135c134
+116,117c116
 <         if (!missing(scale)) warning(paste(dlist$name, 
 <                            "has a fixed scale, user specified value ignored"))
 ---
 >         if (!missing(scale)) warning(gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name)))
-146,147c145
+128,129c127
 <         if (!is.null(parms)) stop(paste(dlist$name, 
 <                               "distribution has no optional parameters"))
 ---
 >         if (!is.null(parms)) stop(gettextf("%s distribution has no optional parameters", sQuote(dlist$name)))
-151c149
+133c131
 <             stop("Default parameters must be a numeric vector")
 ---
 >             stop("default parameters must be a numeric vector")
-155c153
+137c135
 <             if (any(is.na(indx))) stop("Invalid parameter names")
 ---
 >             if (any(is.na(indx))) stop("invalid parameter names")
-172c170
+154c152
 <     if (any(scale < 0)) stop("Invalid scale value")
 ---
 >     if (any(scale < 0)) stop("invalid scale value")
-174c172
+156c154
 < 	    stop("The scale argument is not valid with multiple strata")
 ---
 > 	    stop("the scale argument is not valid with multiple strata")
-189c187
+171c169
 < 	if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 > 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
-211c209
+192c190
 < 	    fit$scale <- exp(fit$coefficients[-(1:nvar)])
 ---
 > 	    fit$scale <- exp(fit$coefficients[-seq_len(nvar)])
-214c212
+195c193
 < 	    fit$coefficients  <- fit$coefficients[1:nvar]
 ---
 > 	    fit$coefficients  <- fit$coefficients[seq_len(nvar)]
@@ -1765,79 +1776,79 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             stop("na.rm option must be TRUE or FALSE")
 ---
 >             stop(gettextf("'%s' argument must be TRUE or FALSE", "na.rm"))
-51c51
+53c53
 <         stop("data1 does not match its own tname attribute")
 ---
 >         stop("'data1' does not match its own 'tname' attribute")
-74c74
+76c76
 <     if (missing(id)) stop("the id argument is required")
 ---
 >     if (missing(id)) stop(gettextf("'%s' argument is required", "id"))
-84c84
+86c86
 <                  stop("tstop and id must be the same length")
 ---
 >                  stop(gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id"))
-91c91
+93c93
 <                 stop("tstart and id must be the same length")
 ---
 >                  stop(gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id"))
-93c93
+95c95
 <                 stop("tstart must be < tstop")
 ---
 >                 stop("'tstart' must be < 'tstop'")
-98c98
+100c100
 <             stop("tstart and tstop arguments only apply to the first call")
 ---
 >             stop("'tstart' and 'tstop' arguments only apply to the first call")
-109c109
+111c111
 <     if (any(argname== "")) stop("all additional argments must have a name")
 ---
 >     if (any(argname== "")) stop("all additional arguments must have a name")
-113,114c113
+115,116c115
 <         stop(paste("argument(s)", argname[is.na(check)], 
 <                        "not a recognized type"))
 ---
 >         stop(gettextf("argument(s) %s not a recognized type", argname[is.na(check)]))
-130c129
+139c138
 <             warning("overwriting data1 variables", paste(overwrite, collapse=' '))
 ---
 >             warning(gettextf("overwriting data1 variables %s", paste(overwrite, collapse = " ")))
-169c168
+170c169
 <             stop("tstart must be > tstop")
 ---
 >             stop("'tstart' must be > 'tstop'")
-179c178
+180c179
 <         if (any(tstart >= tstop)) stop("tstart must be < tstop")
 ---
 >         if (any(tstart >= tstop)) stop("'tstart' must be < 'tstop'")
-199c198
+200c199
 <             stop("argument ", argname[ii], " is not the same length as id")
 ---
 >             stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
-202c201
+203c202
 <                 stop("argument", argname[ii], "is not the same length as id")
 ---
 >                 stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
-279c278
+278c277
 <             jrep <- rep(1:nrow(newdata), irep)  #stutter the duplicated rows
 ---
 >             jrep <- rep(seq_len(nrow(newdata)), irep)  #stutter the duplicated rows
-288c287
+287c286
 <             for (j in 1:nfix) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
 ---
 >             for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/inst/NEWS.Rd Recommended/survival/inst/NEWS.Rd
-403c403
+460c460
 < 2    \item Change code in the coxpenal.fit routine: the use of a vector of
 ---
 >     \item Change code in the coxpenal.fit routine: the use of a vector of
 Only in Recommended/survival/inst: po
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/agreg.Rnw Recommended/survival/noweb/agreg.Rnw
-76c76
+74c74
 < 	x <- matrix(as.double(1:n), ncol=1)  #keep the .C call happy
 ---
 > 	x <- matrix(as.double(seq_len(n)), ncol=1)  #keep the .C call happy
-135,137c135,136
+139,141c139,140
 <             warning(paste("Loglik converged before variable ",
 <                           paste((1:nvar)[infs],collapse=","),
 < 				      "; beta may be infinite. "))
@@ -1862,93 +1873,92 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         for (i in seq_along(ustrat)) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/coxph.Rnw Recommended/survival/noweb/coxph.Rnw
-26,27c26
+29c29
+<                           names(extraArgs)[indx==0L]), domain = NA)
+---
+>                           names(extraArgs)[indx==0L]), domain = "R-survival")
+38,39c38
 < 	stop(paste("Cox model doesn't support \"", type,
 < 			  "\" survival data", sep=''))
 ---
 > 	stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
-99c98
+111c110
 < if (nrow(mf) ==0) stop("No (non-missing) observations")
 ---
 > if (nrow(mf) ==0) stop("no (non-missing) observations")
-111,112c110
-<         stop(gettextf("Argument %s not matched", names(extraArgs)[indx==0L]),
-<              domain = NA)
----
->         stop(gettextf("argument %s was not matched", names(extraArgs)[indx==0L]), domain = "R-survival")
-164c162
+163c162
 <         stop("The tt argument must contain function or list of functions")
 ---
 >         stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-168c166
+167c166
 <             for (i in 1:ntrans) temp[[i]] <- tt[[1]]
 ---
 >             for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
-171c169
+170c169
 <         else stop("Wrong length for tt argument")
 ---
 >         else stop(gettextf("wrong length for '%s' argument", "tt"))
-174c172
+173c172
 < else stop("The tt argument must contain a function or list of functions")
 ---
 > else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-244c242
+243c242
 < strats <- rep(1:length(counts$nrisk), counts$nrisk)
 ---
 > strats <- rep(seq_along(counts$nrisk), counts$nrisk)
-252c250
+251c250
 < for (i in 1:ntrans) {
 ---
 > for (i in seq_len(ntrans)) {
-575c573
+574c573
 <     if (length(init) != ncol(X)) stop("wrong length for init argument")
 ---
 >     if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
-612c610
+611c610
 <     else stop(paste ("Unknown method", method))
 ---
 >     else stop(gettextf("unknown '%s' method", method))
-626,628c624,625
+625,627c624,625
 <        vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
 <        msg <-paste("X matrix deemed to be singular; variable",
 <     		   paste(vars, collapse=" "))
 ---
 >        vars <- seq_along(fit$coefficients)[is.na(fit$coefficients)]
 >        msg <- gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
-672c669
+671c669
 <     		  init[1:length(fit$coefficients)])[nabeta]
 ---
 >     		  init[seq_along(fit$coefficients)])[nabeta]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/coxsurv.Rnw Recommended/survival/noweb/coxsurv.Rnw
-217c217
+218c218
 <     stop("Cannot handle \"", type, "\" type survival data")
 ---
 >     stop(gettextf("Cannot handle \"%s\" type survival data", type))
-400c400
+402c402
 <     if (individual) stop("newdata must be a data frame")
 ---
 >     if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
-402c402
+404c404
 <         stop("Newdata argument must be a data frame")
 ---
 >         stop(gettextf("'%s' argument must be a data frame", "newdata"))
-513c513
+515c515
 <         stop("The newdata argument must be present when individual=TRUE")
 ---
 >         stop("The newdata argument must be present when 'individual=TRUE'")
-516c516
+518c518
 <         if (is.null(id)) stop("id=NULL is an invalid argument")
 ---
 >         if (is.null(id)) stop("'id=NULL' is an invalid argument")
-532c532
+534c534
 <         stop("Individual=TRUE is only valid for counting process data")
 ---
 >         stop("'individual=TRUE' is only valid for counting process data")
-582c582
+584c584
 < indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
 ---
 > indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
-660c660
+663c663
 < result <- c(result[1:indx], type=attr(y, 'type'), result[-(1:indx)])
 ---
 > result <- c(result[seq_len(indx)], type=attr(y, 'type'), result[-seq_len(indx)])
@@ -1974,27 +1984,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         indx  <- approx(etime, seq_along(etime), time, method='constant',
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/finegray.Rnw Recommended/survival/noweb/finegray.Rnw
-32c32
+33c33
 <     if (indx[1] ==0) stop("A formula argument is required")
 ---
 >     if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
-42c42
+43c43
 <     if (nrow(mf) ==0) stop("No (non-missing) observations")
 ---
 >     if (nrow(mf) ==0) stop("no (non-missing) observations")
-46c46
+47c47
 <     if (!inherits(Y, "Surv")) stop("Response must be a survival object")
 ---
 >     if (!inherits(Y, "Surv")) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
-68c68
+70c70
 <         if (!is.null(id)) stop("an id argument and a cluster() term are redundant")
 ---
 >         if (!is.null(id)) stop("'id' argument and a 'cluster()' term are redundant")
-105c105
+107c107
 <             stop ("etype argument has a state that is not in the data")
 ---
 >             stop("'etype' argument has a state that is not in the data")
-294c294
+298c298
 <     tlist <- lapply(1:max(istrat), stratfun)
 ---
 >     tlist <- lapply(seq_len(max(istrat)), stratfun)
@@ -2048,33 +2058,37 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > for (j in seq_len(ncol(ssurv))) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/pyears.Rnw Recommended/survival/noweb/pyears.Rnw
-61c61
+52c52
+< if (indx[1] ==0) stop("A formula argument is required")
+---
+> if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
+65c65
 <         stop("Can have only 1 ratetable() call in a formula")
 ---
 >         stop("Can have only 1 'ratetable()' call in a formula")
-84,86c84
+87,89c87
 <             warning(paste(nzero, 
 <                      "observations with an event and 0 follow-up time,",
 <                    "any rate calculations are statistically questionable"))
 ---
 >             warning(sprintf(ngettext(nzero, "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable","%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"), nzero), domain = NA)
-93c91
+96c94
 < if (is.null(n) || n==0) stop("Data set has 0 observations")
 ---
 > if (is.null(n) || n==0) stop("data set has 0 observations")
-153c151
+156c154
 <     for (i in 1:odim) {
 ---
 >     for (i in seq_len(odim)) {
-252c250
+255c253
 <         else stop("Can't find an appropriate date class\n") 
 ---
 >         else stop("Can't find an appropriate date class") 
-261c259
+264c262
 <             cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
 ---
 >             cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
-330c328
+334c332
 <     row.names(df) <- 1:nrow(df)
 ---
 >     row.names(df) <- seq_len(nrow(df))
@@ -2161,27 +2175,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             temp <- rep(1:length(x$strata), x$strata)
 ---
 >             temp <- rep(seq_along(x$strata), x$strata)
-178c176
+180c178
 <     if (indx[1]==0) stop("a formula argument is required")
 ---
 >     if (indx[1]==0) stop(gettextf("'%s' argument is required", "formula"))
-190c188
+192c190
 <     if (!is.Surv(Y)) stop("Response must be a survival object")
 ---
 >     if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
-211c209
+213c211
 <     if (!is.Surv(Y)) stop("y must be a Surv object")
 ---
 >     if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv")))
-218c216
+220c218
 <             stop("cannot use both the etype argument and mstate survival type")
 ---
 >             stop("cannot use both the 'etype' argument and 'mstate' survival type")
-220c218
+222c220
 <             stop("cannot use both the etype and istate arguments")
 ---
 >             stop("cannot use both the 'etype' and 'istate' arguments")
-237c235
+239c237
 <         else stop("etype argument incompatable with survival type")
 ---
 >         else stop("'etype' argument incompatable with survival type")
@@ -2191,47 +2205,51 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                           "\" survival data", sep=''))
 ---
 >          stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
-97c96
-<                 stop("istate should be a vector of integers or a factor")
+77c76
+<             stop("start.time must be a single numeric value")
 ---
->                 stop("'istate' argument should be a vector of integers or a factor")
-102c101
+>             stop("'start.time' srgument must be a single numeric value")
+112c111
+<                 stop("istate should be a vector of positive integers or a factor")
+---
+>                 stop("'istate' argument should be a vector of positive integers or a factor")
+117c116
 <     if (length(id) ==0) id <- 1:n
 ---
 >     if (length(id) ==0) id <- seq_len(n)
-106c105
+121c120
 <     if (length(istate) !=n) stop ("wrong length for istate")
 ---
 >     if (length(istate) !=n) stop(gettextf("'%s' argument is of the wrong length", "istate"))
-109c108
+124c123
 <     states <- unique(c(1:nstate, istate))
 ---
 >     states <- unique(c(seq_len(nstate), istate))
-132,133c131,132
+147,148c146,147
 <         transitions <- table(factor(istate, 1:nst), factor(Y[,2], 1:nstate))
 <         dimnames(transitions) <-list(from=state.names, to=state.names[1:nstate])
 ---
 >         transitions <- table(factor(istate, seq_len(nst)), factor(Y[,2], seq_len(nstate)))
 >         dimnames(transitions) <-list(from=state.names, to=state.names[seq_len(nstate)])
-261c260
+276c275
 <     stop("subject is in two different groups, id ", id[indx1[who]])
 ---
 >     stop(gettextf("subject is in two different groups, id %s", id[indx1[who]]))
-265c264
+280c279
 <     stop("gap in follow-up, id ", id[indx1[who]])
 ---
 >     stop(gettextf("gap in follow-up, id %s", id[indx1[who]]))
-272c271
+287c286
 <     warning("subject changes to the same state, id ", id[indx1[who]])
 ---
 >     warning(gettextf("subject changes to the same state, id %s", id[indx1[who]]))
-278,279c277,278
+293,294c292,293
 < transitions <- table(factor(istate[first], 1:nst), 
 <                      factor(Y[first,3], 1:nstate))
 ---
 > transitions <- table(factor(istate[first], seq_len(nst)), 
 >                      factor(Y[first,3], seq_len(nstate)))
-281,283c280,282
+296,298c295,297
 <     transitions <- transitions + table(factor(Y[indx1[same],3], 1:nst),
 <                                        factor(Y[indx2[same],3], 1:nstate))
 < dimnames(transitions) = list(from=state.names, to=state.names[1:nstate])
@@ -2239,39 +2257,39 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     transitions <- transitions + table(factor(Y[indx1[same],3], seq_len(nst)),
 >                                        factor(Y[indx2[same],3], seq_len(nstate)))
 > dimnames(transitions) = list(from=state.names, to=state.names[seq_len(nstate)])
-461c460
+477c476
 <         for (j in 1:nstate) 
 ---
 >         for (j in seq_len(nstate)) 
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/survfitKM.Rnw Recommended/survival/noweb/survfitKM.Rnw
-37,38c37,38
+39,40c39,40
 <     if (!is.Surv(y)) stop("y must be a Surv object")
 <     if (!is.factor(x)) stop("x must be a factor")
 ---
 >     if (!is.Surv(y)) stop(gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv")))
 >     if (!is.factor(x)) stop(gettextf("'%s' argument must be a factor", "x"))
-52,53c52
+54,55c54
 < 		stop(paste("start.time =", start.time,
 < 			   "is greater than all time points."))
 ---
 > 		stop(gettextf("start.time = %s is greater than all time points.", start.time))
-78c77
+80c79
 < for (i in 1:nstrat) {
 ---
 > for (i in seq_len(nstrat)) {
-117c116
+119c118
 <     stop("subject is in two different groups, id ", (id[indx1])[who])
 ---
 >     stop(gettextf("subject is in two different groups, id %s", (id[indx1])[who]))
-121c120
+123c122
 <     stop("gap in follow-up, id ", (id[indx1])[who])
 ---
 >     stop(gettextf("gap in follow-up, id %s", (id[indx1])[who]))
-128c127
+130c129
 <     stop("subject changes to the same state, id ", (id[indx1])[who])
 ---
 >     stop(gettextf("subject changes to the same state, id %s", (id[indx1])[who]))
-132c131
+134c133
 <     stop("subject changes case weights, id ", (id[indx1])[who])
 ---
 >     stop(gettextf("subject changes case weights, id %s", (id[indx1])[who]))
@@ -2416,64 +2434,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("na.rm option must be TRUE or FALSE")
 ---
 >         stop(gettextf("'%s' argument must be TRUE or FALSE", "na.rm"))
-100c100
+102c102
 <     stop("data1 does not match its own tname attribute")
 ---
 >     stop("'data1' does not match its own 'tname' attribute")
-123c123
+125c125
 < if (missing(id)) stop("the id argument is required")
 ---
 > if (missing(id)) stop(gettextf("'%s' argument is required", "id"))
-133c133
+135c135
 <              stop("tstop and id must be the same length")
 ---
 >              stop(gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id"))
-140c140
+142c142
 <             stop("tstart and id must be the same length")
 ---
 >              stop(gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id"))
-142c142
+144c144
 <             stop("tstart must be < tstop")
 ---
 >             stop("'tstart' must be < 'tstop'")
-147c147
+149c149
 <         stop("tstart and tstop arguments only apply to the first call")
 ---
 >         stop("'tstart' and 'tstop' arguments only apply to the first call")
-166c166
+168c168
 < if (any(argname== "")) stop("all additional argments must have a name")
 ---
 > if (any(argname== "")) stop("all additional arguments must have a name")
-170,171c170
+172,173c172
 <     stop(paste("argument(s)", argname[is.na(check)], 
 <                    "not a recognized type"))
 ---
 >     stop(gettextf("argument(s) %s not a recognized type", argname[is.na(check)]))
-212c211
+221c220
 <         warning("overwriting data1 variables", paste(overwrite, collapse=' '))
 ---
 >         warning(gettextf("overwriting data1 variables %s", paste(overwrite, collapse = " ")))
-251c250
+252c251
 <         stop("tstart must be > tstop")
 ---
 >         stop("'tstart' must be > 'tstop'")
-261c260
+262c261
 <     if (any(tstart >= tstop)) stop("tstart must be < tstop")
 ---
 >     if (any(tstart >= tstop)) stop("'tstart' must be < 'tstop'")
-293c292
+292c291
 <         stop("argument ", argname[ii], " is not the same length as id")
 ---
 >         stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
-296c295
+295c294
 <             stop("argument", argname[ii], "is not the same length as id")
 ---
 >             stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
-437c436
+434c433
 <     jrep <- rep(1:nrow(newdata), irep)  #stutter the duplicated rows
 ---
 >     jrep <- rep(seq_len(nrow(newdata)), irep)  #stutter the duplicated rows
-446c445
+443c442
 <     for (j in 1:nfix) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
 ---
 >     for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
@@ -2786,418 +2804,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		for (int j = 0; j < i; j++)
 > 			imat[i][j] = imat[j][i];
 > 	for (int i = 0; i < nvar; i++)
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agfit5.c Recommended/survival/src/agfit5.c
-93,101c93,97
-< void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, 
-< 	       double *covar2, double *offset2,
-< 	       double *weights2, 
-< 	       Sint   *strata,  Sint   *sort,
-< 	       double *means, double *beta, double *u, 
-< 	       double *loglik, 
-< 	       Sint *methodx, Sint *ptype2, Sint *pdiag2,
-< 	       Sint *nfrail,  Sint *frail2,
-<                void *fexpr1, void *fexpr2, void *rho) {
----
-> void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
-> 		double *offset2, double *weights2, Sint *strata, Sint *sort,
-> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
-> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
-> 		void *fexpr2, void *rho) {
-103c99
-<     int i,j,k, person;
----
-> 	int i, j, k;
-148c144
-<     for (i=0; i<nused; i++) {
----
-> 	for (int i = 0; i < nused; i++) {
-162,163c158,165
-<     if (nf > nvar) i=nf; else i=nvar;
-<     if (nf > nvar*nvar) j=nf; else j=nvar*nvar;
----
-> 	if (nf > nvar)
-> 		i = nf;
-> 	else
-> 		i = nvar;
-> 	if (nf > nvar * nvar)
-> 		j = nf;
-> 	else
-> 		j = nvar * nvar;
-167,168c169,172
-<     if (ptype>1)  zflag = Calloc(nvar, Sint);
-<     else          zflag = Calloc(2, Sint);
----
-> 	if (ptype > 1)
-> 		zflag = Calloc(nvar, Sint);
-> 	else
-> 		zflag = Calloc(2, Sint);
-172c176,177
-< 	for (i=0; i<nused; i++) frail[i] = frail2[i];
----
-> 		for (int i = 0; i < nused; i++)
-> 			frail[i] = frail2[i];
-179c184
-<     for (i=0; i<nvar; i++) {
----
-> 	for (int i = 0; i < nvar; i++) {
-181c186,187
-< 	for (person=0; person<nused; person++) temp += covar[i][person];
----
-> 		for (int person = 0; person < nused; person++)
-> 			temp += covar[i][person];
-184c190,191
-< 	for (person=0; person<nused; person++) covar[i][person] -=temp;
----
-> 		for (int person = 0; person < nused; person++)
-> 			covar[i][person] -= temp;
-193c200
-<     for (person=0; person<nused; person++) {
----
-> 	for (int person = 0; person < nused; person++) {
-195c202
-<         for (i=0; i<nvar; i++)
----
-> 		for (int i = 0; i < nvar; i++)
-219c226
-<     for (person=0; person<nused;) {
----
-> 	for (int person = 0; person < nused;) {
-225,226c232
-< 	    }
-< 	else {
----
-> 		} else {
-233c239,240
-< 		if (start[p] < time) break;
----
-> 				if (start[p] < time)
-> 					break;
-247c254,255
-< 		if (stop[p] < time) break;
----
-> 				if (stop[p] < time)
-> 					break;
-298,305c306,310
-< void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, 
-< 	       Sint *strata, double *beta, double *u,
-< 	       double *imat2,  double *jmat2, double *loglik, 
-< 	       Sint *flag,  double *eps, double *tolerch, Sint *methodx, 
-< 	       Sint *nfrail, double *fbeta, double *fdiag,
-<                void *fexpr1, void *fexpr2, void *rho)
-< {
-<     int i,j,k, person;
----
-> void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
-> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
-> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
-> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
-> 	int i, j, k;
-307c312
-<     int     iter;
----
-> 
-331,332c336
-<         }
-<     else {
----
-> 	} else {
-337,338c341,344
-<     for (i=0; i<nf; i++) oldbeta[i] = fbeta[i];
-<     for (i=0; i<nvar; i++) oldbeta[i+nf] = beta[i];
----
-> 	for (int i = 0; i < nf; i++)
-> 		oldbeta[i] = fbeta[i];
-> 	for (int i = 0; i < nvar; i++)
-> 		oldbeta[i + nf] = beta[i];
-341c347
-<     for (iter=0; iter<=*maxiter; iter++) {
----
-> 	for (int iter = 0; iter <= *maxiter; iter++) {
-343,344c349,351
-< 	for (i=0; i<nf; i++) fdiag[i] =0;
-< 	for (i=0; i<nvar2; i++) {
----
-> 		for (int i = 0; i < nf; i++)
-> 			fdiag[i] = 0;
-> 		for (int i = 0; i < nvar2; i++) {
-346c353,354
-< 	    for (j=0; j<nvar; j++) jmat[j][i] =0 ;
----
-> 			for (int j = 0; j < nvar; j++)
-> 				jmat[j][i] = 0;
-349c357
-<         for (person=0; person<nused; person++) {
----
-> 		for (int person = 0; person < nused; person++) {
-353,355c361,363
-< 	        }
-< 	    else zbeta = offset[person];
-< 	    for (i=0; i<nvar; i++)
----
-> 			} else
-> 				zbeta = offset[person];
-> 			for (int i = 0; i < nvar; i++)
-386c394
-< 		for (i=0; i<nvar; i++)
----
-> 				for (int i=0; i<nvar; i++)
-388c396
-< 		for (i=0; i<nf; i++)
----
-> 				for (int i=0; i<nf; i++)
-398c406
-< 	for (i=0; i<nvar2; i++) {
----
-> 		for (int i = 0; i < nvar2; i++) {
-400c408
-< 	    for (j=0; j<nvar; j++) {
----
-> 			for (int j = 0; j < nvar; j++) {
-405c413
-< 	for (person=0; person<nused; ) {
----
-> 		for (int person = 0; person < nused;) {
-407,408c415,418
-< 	    if (nf>0)  fgrp = frail[p] -1;
-< 	    else       fgrp = -1;
----
-> 			if (nf > 0)
-> 				fgrp = frail[p] - 1;
-> 			else
-> 				fgrp = -1;
-412,413c422,424
-< 		if (fgrp >=0) a[fgrp] += risk;
-< 		for (i=0; i<nvar; i++) {
----
-> 				if (fgrp >= 0)
-> 					a[fgrp] += risk;
-> 				for (int i = 0; i < nvar; i++) {
-415,416c426,428
-< 		    if (fgrp >=0) cmat[i][fgrp] += risk * covar[i][p];
-< 		    for (j=0; j<=i; j++)
----
-> 					if (fgrp >= 0)
-> 						cmat[i][fgrp] += risk * covar[i][p];
-> 					for (int j = 0; j <= i; j++)
-420,421c432
-< 		}
-< 	    else {
----
-> 			} else {
-428c439,440
-< 		    if (start[p] < time) break;
----
-> 					if (start[p] < time)
-> 						break;
-431,434c443,449
-< 		    if (nf >0) fgrp = frail[p] - 1;
-< 		    else       fgrp = -1;
-< 		    if (fgrp >=0) a[fgrp] -= risk;
-< 		    for (i=0; i<nvar; i++) {
----
-> 					if (nf > 0)
-> 						fgrp = frail[p] - 1;
-> 					else
-> 						fgrp = -1;
-> 					if (fgrp >= 0)
-> 						a[fgrp] -= risk;
-> 					for (int i = 0; i < nvar; i++) {
-436,437c451,453
-< 			if (fgrp >=0) cmat[i][fgrp] -= risk* covar[i][p];
-< 			for (j=0; j<=i; j++)
----
-> 						if (fgrp >= 0)
-> 							cmat[i][fgrp] -= risk * covar[i][p];
-> 						for (int j = 0; j <= i; j++)
-446c462
-< 		for (i=0; i<nvar2; i++) {
----
-> 				for (int i = 0; i < nvar2; i++) {
-448c464
-< 		    for (j=0; j<nvar; j++) {
----
-> 					for (int j = 0; j < nvar; j++) {
-455c471,472
-< 		    if (stop[p] < time) break;
----
-> 					if (stop[p] < time)
-> 						break;
-460,463c477,481
-< 			if (fgrp>=0) a[fgrp] += risk;
-< 			}
-< 		    else fgrp = -1;
-< 		    for (i=0; i<nvar; i++) {
----
-> 						if (fgrp >= 0)
-> 							a[fgrp] += risk;
-> 					} else
-> 						fgrp = -1;
-> 					for (int i = 0; i < nvar; i++) {
-465,466c483,485
-< 			if (fgrp>=0) cmat[i][fgrp] += risk*covar[i][p];
-< 			for (j=0; j<=i; j++)
----
-> 						if (fgrp >= 0)
-> 							cmat[i][fgrp] += risk * covar[i][p];
-> 						for (int j = 0; j <= i; j++)
-477c496
-< 			for (i=0; i<nvar; i++) {
----
-> 						for (int i = 0; i < nvar; i++) {
-480,482c499,503
-< 			    if (fgrp >=0) cmat2[i][fgrp] += risk*covar[i][p];
-< 			    for (j=0; j<=i; j++)
-< 				cmat2[i][j+nf] += risk*covar[i][p]*covar[j][p];
----
-> 							if (fgrp >= 0)
-> 								cmat2[i][fgrp] += risk * covar[i][p];
-> 							for (int j = 0; j <= i; j++)
-> 								cmat2[i][j + nf] += risk * covar[i][p]
-> 										* covar[j][p];
-498c519
-< 			for (i=0; i<nvar2; i++) {  /* by row of full matrix */
----
-> 						for (int i = 0; i < nvar2; i++) { /* by row of full matrix */
-502c523,524
-< 			    if (i<nf) fdiag[i] += temp2 * (1-temp2);
----
-> 							if (i < nf)
-> 								fdiag[i] += temp2 * (1 - temp2);
-505,508c527,531
-< 				for (j=0; j<=i; j++) 
-< 				    jmat[ii][j] +=  meanwt*(
-< 					(cmat[ii][j] - temp*cmat2[ii][j]) /d2 -
-< 					temp2*tmean[j]);
----
-> 								for (int j = 0; j <= i; j++)
-> 									jmat[ii][j] += meanwt
-> 											* ((cmat[ii][j]
-> 													- temp * cmat2[ii][j]) / d2
-> 													- temp2 * tmean[j]);
-519c542
-< 		for (i=0; i<nvar2; i++) {
----
-> 				for (int i = 0; i < nvar2; i++) {
-521c544
-< 		    for (j=0; j<nvar; j++) {
----
-> 					for (int j = 0; j < nvar; j++) {
-535c558
-< 		for (i=0; i<nf; i++) {
----
-> 				for (int i = 0; i < nf; i++) {
-538c561,562
-< 		    for (j=0; j<nvar; j++) jmat[j][i]=0;
----
-> 					for (int j = 0; j < nvar; j++)
-> 						jmat[j][i] = 0;
-540,542c564,565
-< 		}
-< 	    else {
-< 		for (i=0; i<nf; i++) {
----
-> 			} else {
-> 				for (int i = 0; i < nf; i++) {
-552c575,576
-< 	    cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2, rho);
----
-> 			cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,
-> 					rho);
-555c579
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-559,560c583
-< 		}
-< 	    else {
----
-> 			} else {
-562c585
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-564c587,588
-< 		    for (j=nf; j<nvar2; j++) jmat[i][j] += ipen[k++];
----
-> 					for (int j = nf; j < nvar2; j++)
-> 						jmat[i][j] += ipen[k++];
-567c591
-< 	    for (i=0; i<nvar; i++) {
----
-> 			for (int i = 0; i < nvar; i++) {
-570c594,595
-< 		    for (j=0; j<i; j++) jmat[i][j+nf]=0;
----
-> 					for (int j = 0; j < i; j++)
-> 						jmat[i][j + nf] = 0;
-583c608,609
-< 		for (j=0; j<nvar2; j++)  imat[i][j] = jmat[i][j];
----
-> 				for (j = 0; j < nvar2; j++)
-> 					imat[i][j] = jmat[i][j];
-586c612
-< 	    for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
----
-> 			for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
-590c616
-< 		for (j=i+1; j<nvar2; j++) {
----
-> 				for (int j = i + 1; j < nvar2; j++) {
-600c626,627
-< 	if (iter==*maxiter) break;  /*skip the step halving and etc */
----
-> 		if (iter == *maxiter)
-> 			break; /*skip the step halving and etc */
-604c631
-< 	    for (i=0; i<nvar; i++)
----
-> 			for (int i = 0; i < nvar; i++)
-606c633
-< 	    for (i=0; i<nf; i++)
----
-> 			for (int i = 0; i < nf; i++)
-608,609c635
-< 	    }
-< 	else {
----
-> 		} else {
-615c641
-< 	    for (i=0; i<nvar; i++) {
----
-> 			for (int i = 0; i < nvar; i++) {
-619c645
-< 	    for (i=0; i<nf; i++) {
----
-> 			for (int i = 0; i < nf; i++) {
-627,628c653,654
-<     for (i=0; i<nvar; i++) 
-< 	for (j=0; j<nvar2; j++) {
----
-> 	for (int i = 0; i < nvar; i++)
-> 		for (int j = 0; j < nvar2; j++) {
-632c658
-<     for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
----
-> 	for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
-636c662
-<   	for (j=i+1; j<nvar2; j++) {
----
-> 		for (int j = i + 1; j < nvar2; j++) {
-645,646c671
-< static double **cmatrix(double *data, int ncol, int nrow)
-<     {
----
-> static double **cmatrix(double *data, int ncol, int nrow) {
-658,659c683
-<         }
-<     else {
----
-> 	} else {
-662c686,687
-< 	    for (j=0; j<ncol; j++) *temp++ = *data++;
----
-> 			for (j = 0; j < ncol; j++)
-> 				*temp++ = *data++;
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agmart.c Recommended/survival/src/agmart.c
 28,32c28,30
 < void agmart(Sint   *n,     Sint   *method,  double *start,   double *stop, 
@@ -4075,436 +3681,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 				if (strata[k] == 1)
 > 					break;
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxfit5.c Recommended/survival/src/coxfit5.c
-94,100c94,98
-< void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy, 
-< 	       double *covar2,   double *offset2, double *weights2,
-< 	       Sint *strata,     Sint *sorted,    double *means, 
-<                double *beta,     double *u,       double *loglik, 
-< 	       Sint *methodx,    Sint *ptype2,    Sint *pdiag2,
-< 	       Sint *nfrail,     Sint *frail2,
-<                void *fexpr1,     void *fexpr2,    void *rho) {
----
-> void coxfit5_a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
-> 		double *offset2, double *weights2, Sint *strata, Sint *sorted,
-> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
-> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
-> 		void *fexpr2, void *rho) {
-103d100
-<     int ii; 
-144c141
-<     for (i=0; i<nused; i++) {
----
-> 	for (int i = 0; i < nused; i++) {
-156,157c153,160
-<     if (nf > nvar) i=nf; else i=nvar;
-<     if (nf > nvar*nvar) j=nf; else j=nvar*nvar;
----
-> 	if (nf > nvar)
-> 		i = nf;
-> 	else
-> 		i = nvar;
-> 	if (nf > nvar * nvar)
-> 		j = nf;
-> 	else
-> 		j = nvar * nvar;
-161,162c164,167
-<     if (ptype>1)  zflag = Calloc(nvar, Sint);
-<     else          zflag = Calloc(2, Sint);
----
-> 	if (ptype > 1)
-> 		zflag = Calloc(nvar, Sint);
-> 	else
-> 		zflag = Calloc(2, Sint);
-166c171,172
-< 	for (i=0; i<nused; i++) frail[i] = frail2[i];
----
-> 		for (int i = 0; i < nused; i++)
-> 			frail[i] = frail2[i];
-178c184
-<     for (i=0; i<nused; i++)
----
-> 	for (int i = 0; i < nused; i++)
-180c186
-<     for (i=0; i<nused; ) {
----
-> 	for (int i = 0; i < nused;) {
-187c193,194
-< 		if ((ttime[k] != ttime[p]) || (j==strata[istrat])) break;
----
-> 				if ((ttime[k] != ttime[p]) || (j == strata[istrat]))
-> 					break;
-195,197c202,205
-< 	    }
-< 	else i++;
-< 	if (i==strata[istrat]) istrat++;
----
-> 		} else
-> 			i++;
-> 		if (i == strata[istrat])
-> 			istrat++;
-204c212
-<     for (i=0; i<nvar; i++) {
----
-> 	for (int i = 0; i < nvar; i++) {
-206c214,215
-< 	for (p=0; p<nused; p++) temp += covar[i][p];
----
-> 		for (int p = 0; p < nused; p++)
-> 			temp += covar[i][p];
-209c218,219
-< 	for (p=0; p<nused; p++) covar[i][p] -=temp;
----
-> 		for (int p = 0; p < nused; p++)
-> 			covar[i][p] -= temp;
-217c227
-<     for (i=0; i<nvar; i++) {
----
-> 	for (int i = 0; i < nvar; i++) {
-225c235
-<     for (ii=0; ii<nused; ii++) {
----
-> 	for (int ii = 0; ii < nused; ii++) {
-228c238,239
-< 	    for (i=0; i<nvar; i++) a[i] = 0;
----
-> 			for (int i = 0; i < nvar; i++)
-> 				a[i] = 0;
-234c245
-< 	for (i=0; i<nvar; i++)
----
-> 		for (int i = 0; i < nvar; i++)
-240c251,252
-< 	for (i=0; i<nvar; i++) a[i] += risk*covar[i][p];
----
-> 		for (int i = 0; i < nvar; i++)
-> 			a[i] += risk * covar[i][p];
-244c256
-< 	    for (i=0; i<nvar; i++) {
----
-> 			for (int i = 0; i < nvar; i++) {
-254c266
-< 	    for (k=0; k<ndead; k++) {
----
-> 			for (int k = 0; k < ndead; k++) {
-258c270
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-264c276,277
-< 	    for (i=0; i<nvar; i++) a2[i]=0;
----
-> 			for (int i = 0; i < nvar; i++)
-> 				a2[i] = 0;
-284,294c296,302
-< void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, 
-< 	       Sint *strata, double *beta, double *u,
-< 	       double *imat2,  double *jmat2, double *loglik, 
-< 	       Sint *flag,  double *eps, double *tolerch, Sint *methodx, 
-< 	       Sint *nfrail, double *fbeta, double *fdiag,
-<                void *fexpr1, void *fexpr2, void *rho)
-< {
-< 
-<     int i,j,k, p;
-<     int ii, istrat, ip;
-<     int     iter;
----
-> void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
-> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
-> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
-> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
-> 
-> 	int k, p;
-> 	int ii, istrat;
-316,317c324
-<         }
-<     else {
----
-> 	} else {
-322,323c329,332
-<     for (i=0; i<nf; i++) oldbeta[i] = fbeta[i];
-<     for (i=0; i<nvar; i++) oldbeta[i+nf] = beta[i];
----
-> 	for (int i = 0; i < nf; i++)
-> 		oldbeta[i] = fbeta[i];
-> 	for (int i = 0; i < nvar; i++)
-> 		oldbeta[i + nf] = beta[i];
-326c335
-<     for (iter=0; iter<=*maxiter; iter++) {
----
-> 	for (int iter = 0; iter <= *maxiter; iter++) {
-328,329c337,339
-< 	for (i=0; i<nf; i++) fdiag[i] =0;
-< 	for (i=0; i<nvar2; i++) {
----
-> 		for (int i = 0; i < nf; i++)
-> 			fdiag[i] = 0;
-> 		for (int i = 0; i < nvar2; i++) {
-331c341
-< 	    for (j=0; j<nvar; j++)
----
-> 			for (int j = 0; j < nvar; j++)
-336c346
-< 	for (ip=0; ip<nused; ip++) {
----
-> 		for (int ip = 0; ip < nused; ip++) {
-341c351
-< 		for (i=0; i<nvar2; i++) {
----
-> 				for (int i = 0; i < nvar2; i++) {
-344c354
-< 		    for (j=0; j<nvar; j++) {
----
-> 					for (int j = 0; j < nvar; j++) {
-350c360,361
-< 	    if (ip==strata[istrat]) istrat++;
----
-> 			if (ip == strata[istrat])
-> 				istrat++;
-355,356c366,367
-< 	        }
-< 	    else zbeta = offset[p];
----
-> 			} else
-> 				zbeta = offset[p];
-358c369
-< 	    for (i=0; i<nvar; i++)
----
-> 			for (int i = 0; i < nvar; i++)
-365,366c376,378
-< 	    if (nf>0) a[fgrp] += risk;
-< 	    for (i=0; i<nvar; i++) {
----
-> 			if (nf > 0)
-> 				a[fgrp] += risk;
-> 			for (int i = 0; i < nvar; i++) {
-368,369c380,382
-< 		if (nf>0) cmat[i][fgrp] += risk*covar[i][p];
-< 		for (j=0; j<=i; j++)
----
-> 				if (nf > 0)
-> 					cmat[i][fgrp] += risk * covar[i][p];
-> 				for (int j = 0; j <= i; j++)
-380c393
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-383,384c396,398
-< 		    if (nf>0) cmat2[i][fgrp] += risk*covar[i][p];	
-< 		    for (j=0; j<=i; j++)
----
-> 					if (nf > 0)
-> 						cmat2[i][fgrp] += risk * covar[i][p];
-> 					for (int j = 0; j <= i; j++)
-391c405
-< 		for (k=0; k<ndead; k++) {
----
-> 				for (int k = 0; k < ndead; k++) {
-396c410
-< 		    for (i=0; i<nvar2; i++) {  /* by row of full matrix */
----
-> 					for (int i = 0; i < nvar2; i++) { /* by row of full matrix */
-400c414,415
-< 			if (i<nf) fdiag[i] += temp2 * (1-temp2);
----
-> 						if (i < nf)
-> 							fdiag[i] += temp2 * (1 - temp2);
-403,406c418,421
-< 			    for (j=0; j<=i; j++) 
-< 				jmat[ii][j] +=  wtave[p]*(
-<                                    (cmat[ii][j] - temp*cmat2[ii][j]) /d2 -
-<                                           temp2*tmean[j]);
----
-> 							for (int j = 0; j <= i; j++)
-> 								jmat[ii][j] += wtave[p]
-> 										* ((cmat[ii][j] - temp * cmat2[ii][j])
-> 												/ d2 - temp2 * tmean[j]);
-411c426
-< 		for (i=0; i<nvar2; i++) {
----
-> 				for (int i = 0; i < nvar2; i++) {
-413c428,429
-< 		    for (j=0; j<nvar; j++)  cmat2[j][i]=0;
----
-> 					for (int j = 0; j < nvar; j++)
-> 						cmat2[j][i] = 0;
-425c441
-< 		for (i=0; i<nf; i++) {
----
-> 				for (int i = 0; i < nf; i++) {
-428,429c444,445
-< 		    for (j=0; j<nvar; j++) jmat[j][i]=0;
-< 		    }
----
-> 					for (int j = 0; j < nvar; j++)
-> 						jmat[j][i] = 0;
-431,432c447,448
-< 	    else {
-< 		for (i=0; i<nf; i++) {
----
-> 			} else {
-> 				for (int i = 0; i < nf; i++) {
-442c458,459
-< 	    cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,rho);
----
-> 			cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,
-> 					rho);
-445c462
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-449,450c466
-< 	        }
-< 	    else {
----
-> 			} else {
-452c468
-< 		for (i=0; i<nvar; i++) {
----
-> 				for (int i = 0; i < nvar; i++) {
-454c470,471
-< 		    for (j=nf; j<nvar2; j++) jmat[i][j] += ipen[k++];
----
-> 					for (int j = nf; j < nvar2; j++)
-> 						jmat[i][j] += ipen[k++];
-457c474
-< 	    for (i=0; i<nvar; i++) {
----
-> 			for (int i = 0; i < nvar; i++) {
-460c477,478
-< 		    for (j=0; j<i; j++) jmat[i][j+nf]=0;
----
-> 					for (int j = 0; j < i; j++)
-> 						jmat[i][j + nf] = 0;
-472,473c490,492
-< 	    for (i=0; i<nvar; i++) {
-< 	        for (j=0; j<nvar2; j++)  imat[i][j] = jmat[i][j];
----
-> 			for (int i = 0; i < nvar; i++) {
-> 				for (int j = 0; j < nvar2; j++)
-> 					imat[i][j] = jmat[i][j];
-476c495
-< 	    for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
----
-> 			for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
-480c499
-< 		for (j=i+1; j<nvar2; j++) {
----
-> 				for (int j = i + 1; j < nvar2; j++) {
-490c509,510
-< 	if (iter==*maxiter) break;  /*skip the step halving and etc */
----
-> 		if (iter == *maxiter)
-> 			break; /*skip the step halving and etc */
-494c514
-< 		for (i=0; i<nvar; i++)
----
-> 			for (int i = 0; i < nvar; i++)
-496c516
-< 		for (i=0; i<nf; i++)
----
-> 			for (int i = 0; i < nf; i++)
-498,499c518
-< 		}
-< 	    else {
----
-> 		} else {
-504,505c523
-< 		j=0;
-< 		for (i=0; i<nvar; i++) {
----
-> 			for (int i = 0; i < nvar; i++) {
-509c527
-< 		for (i=0; i<nf; i++) {
----
-> 			for (int i = 0; i < nf; i++) {
-517,518c535,536
-<     for (i=0; i<nvar; i++) 
-< 	for (j=0; j<nvar2; j++) {
----
-> 	for (int i = 0; i < nvar; i++)
-> 		for (int j = 0; j < nvar2; j++) {
-522c540
-<     for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
----
-> 	for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
-526c544
-<   	for (j=i+1; j<nvar2; j++) {
----
-> 		for (int j = i + 1; j < nvar2; j++) {
-534a553
-> static double **cmatrix(double *data, int ncol, int nrow) {
-536,539d554
-< static double **cmatrix(double *data, int ncol, int nrow)
-<     {
-< 
-<     int i,j;
-546c561
-< 	for (i=0; i<nrow; i++) {
----
-> 		for (int i = 0; i < nrow; i++) {
-550,552c565,566
-<         }
-<     else {
-< 	for (i=0; i<nrow; i++) {
----
-> 	} else {
-> 		for (int i = 0; i < nrow; i++) {
-554c568,569
-< 	    for (j=0; j<ncol; j++) *temp++ = *data++;
----
-> 			for (int j = 0; j < ncol; j++)
-> 				*temp++ = *data++;
-560,561c575
-< static void cmatrix_free(double **data) 
-< {
----
-> static void cmatrix_free(double **data) {
-569,579c582,583
-<     double hazard, 
-<            denom,
-<            temp, temp2,
-<            efron_wt,
-<            ndead, 
-<            hazard2;
-<     int    p,
-<            nused,
-<            method,
-< 	   ip, istrat,
-<            i, j;
----
-> 	double hazard, denom, temp, temp2, efron_wt, ndead, hazard2;
-> 	int p, nused, method, istrat, i;
-589c593
-<     for (ip=0; ip<nused; ip++) {
----
-> 	for (int ip = 0; ip < nused; ip++) {
-607c611
-< 	    for (j=0; j<ndead; j++) {  
----
-> 			for (int j = 0; j < ndead; j++) {
-617,618c621
-< 		}
-< 	    else {
----
-> 			} else {
-622c625
-<                 for (j=0; j<ndead; j++) {
----
-> 				for (int j = 0; j < ndead; j++) {
-637c640
-<     for (ip=nused-1; ip>=0; ) {
----
-> 	for (int ip = nused - 1; ip >= 0;) {
-644c647
-< 	    for (j=0; j<ndead; j++) {
----
-> 			for (int j = 0; j < ndead; j++) {
-650,651c653
-< 	    }
-< 	else {
----
-> 		} else {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxmart.c Recommended/survival/src/coxmart.c
 24,28c24,25
 < void coxmart(Sint   *sn,     Sint   *method,    double *time, 
@@ -6370,7 +5546,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > for (i in seq_len(nrow(emat)))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/vignettes/timedep.Rnw Recommended/survival/vignettes/timedep.Rnw
-442c442
+459c459
 < jasa$subject <- 1:nrow(jasa)  #we need an identifier variable
 ---
 > jasa$subject <- seq_len(nrow(jasa))  #we need an identifier variable

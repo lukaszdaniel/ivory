@@ -40,6 +40,6 @@ anova.coxphlist <- function (object, test =  'Chisq' ,...) {
     if (!is.null(test)) {
         table[['P(>|Chi|)']] <- 1-pchisq(table$Chisq, table$Df)
         }
-    if (is.R()) structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
-    else structure(table, heading = c(title, topnote), class = "anova")	     
+    structure(table, heading = c(title, topnote), 
+			  class = c("anova", "data.frame"))
 } 

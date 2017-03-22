@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 19:01\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -135,10 +135,11 @@ msgstr "rozgałęzione klastry nie są obsługiwane w systemie Windows"
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#. R/RngStream.R: stop("invalid value of 'seed'")
-#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
-msgid "invalid value of 'seed'"
+#, fuzzy
+msgid "invalid value of %s"
 msgstr "niepoprawna wartość 'seed'"
 
 #. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")

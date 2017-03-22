@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -62,7 +62,7 @@ msgstr "posso trasformare al più 100 parametri in arima0"
 msgid "maximum supported lag is 350"
 msgstr ""
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr ""
@@ -120,42 +120,44 @@ msgstr "'x' è vuoto"
 msgid "the standard deviation is zero"
 msgstr "la deviazione standard è zero"
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr ""
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funzione '%s' non presente nelle tavole delle derivate"
 
-#: deriv.c:634
+#: deriv.c:781
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m' deve essere di tipo list"
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr "la variabile deve essere una stringa character"
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr "solo il primo elemento è utilizzato come nome di variabile"
 
-#: deriv.c:652
+#: deriv.c:799
 #, fuzzy, c-format
 msgid "invalid expression in '%s'"
 msgstr "espressione non valida in \"%s\""
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr "nomi variabili non validi"
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr "'tag' non valido"
 

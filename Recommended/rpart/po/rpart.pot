@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: rpart 4.1-10\n"
+"Project-Id-Version: rpart 4.1-11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-17 14:04+0200\n"
+"POT-Creation-Date: 2017-03-14 22:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,37 +128,32 @@ msgstr ""
 msgid "unknown error"
 msgstr ""
 
-#: rpart_callback.c:37
+#: rpart_callback.c:42
 msgid "'yback' not found"
 msgstr ""
 
-#: rpart_callback.c:41
+#: rpart_callback.c:46
 msgid "'wback' not found"
 msgstr ""
 
-#: rpart_callback.c:45
+#: rpart_callback.c:50
 msgid "'xback' not found"
 msgstr ""
 
-#: rpart_callback.c:49
+#: rpart_callback.c:54
 msgid "'nback' not found"
 msgstr ""
 
-#: rpart_callback.c:89
+#: rpart_callback.c:100
 msgid "return value not a vector"
 msgstr ""
 
-#: rpart_callback.c:91
+#: rpart_callback.c:102
 msgid "returned value is the wrong length"
 msgstr ""
 
-#: rpart_callback.c:121
+#: rpart_callback.c:134
 msgid "the expression expr1 did not return a vector!"
-msgstr ""
-
-#: rpart_callback.c:133
-#, c-format
-msgid "the expression expr1 returned a list of %d elements, %d required"
 msgstr ""
 
 #: rundown.c:47

@@ -1,115 +1,115 @@
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/AllClass.R Recommended/Matrix/R/AllClass.R
-116c116
+131c131
 < 	     if(d[1] != (n <- d[2])) return("matrix is not square")
 ---
 > 	     if(d[1] != (n <- d[2])) return(gettext("matrix is not square"))
-120c120
+135c135
 < 		     return("diag = \"U\" (identity matrix) requires empty 'x' slot")
 ---
 > 		     return(gettext("diag = \"U\" (identity matrix) requires empty 'x' slot", domain = "R-Matrix"))
-123,124c123,124
+138,139c138,139
 < 		     return("diagonal matrix has 'x' slot of length != 'n'")
 < 	     } else return("diagonal matrix 'diag' slot must be \"U\" or \"N\"")
 ---
 > 		     return(gettext("diagonal matrix has 'x' slot of length != 'n'", domain = "R-Matrix"))
 > 	     } else return(gettext("diagonal matrix 'diag' slot must be \"U\" or \"N\"", domain = "R-Matrix"))
-285c285
+300c300
 < 		 return("'sd' slot must be of length 'dim(.)[1]'")
 ---
 > 		 return(gettext("'sd' slot must be of length 'dim(.)[1]'", domain = "R-Matrix"))
-287c287
+302c302
 < 		 return("'sd' slot has non-finite entries")
 ---
 > 		 return(gettext("'sd' slot has non-finite entries", domain = "R-Matrix"))
-289c289
+304c304
 < 		 return("'sd' slot has negative entries")
 ---
 > 		 return(gettext("'sd' slot has negative entries", domain = "R-Matrix"))
-554c554
+569c569
 < 		 return(paste("length of 'perm' slot must be", n))
 ---
 > 		 return(gettextf("length of 'perm' slot must be %s", n, domain = "R-Matrix"))
-556c556
+571c571
 < 		 return("'perm' slot is not a valid index")
 ---
 > 		 return("'perm' slot is not a valid index", domain = "R-Matrix")
-564c564
+579c579
 < 	     if (d[2] != (n <- d[1])) return("pMatrix must be square")
 ---
 > 	     if (d[2] != (n <- d[1])) return(gettext("pMatrix must be square", domain = "R-Matrix"))
-567c567
+582c582
 < 		 return(paste("length of 'perm' slot must be", n))
 ---
 > 		 return(gettextf("length of 'perm' slot must be %d", n))
-570c570
+585c585
 < 		 return("'perm' slot is not a valid permutation")
 ---
 > 		 return(gettext("'perm' slot is not a valid permutation", domain = "R-Matrix"))
-675c675
+690c690
 < 		 "'Dim' slot is not (n,n)"
 ---
 > 		 gettext("'Dim' slot is not (n,n)", domain = "R-Matrix")
-677c677
+692c692
 < 		 "'dim(T)' is incorrect"
 ---
 > 		 gettext("'dim(T)' is incorrect", domain = "R-Matrix")
-679c679
+694c694
 < 		 "'dim(Q)' is incorrect"
 ---
 > 		 gettext("'dim(Q)' is incorrect", domain = "R-Matrix")
-681c681
+696c696
 < 		 "'EValues' is not of correct length"
 ---
 > 		 gettext("'EValues' is not of correct length", domain = "R-Matrix")
-736c736
+751c751
 < 		 return("'first' must be of length one")
 ---
 > 		 return(gettext("'first' must be of length one", domain = "R-Matrix"))
-740c740
+755c755
 < 		 return("'rle' must be a list (lengths = *, values = *)")
 ---
 > 		 return(gettext("'rle' must be a list (lengths = *, values = *)", domain = "R-Matrix"))
-742c742
+757c757
 < 		 return("'lengths' and 'values' differ in length")
 ---
 > 		 return(gettext("'lengths' and 'values' differ in length", domain = "R-Matrix"))
-744c744
+759c759
 < 		 return("'lengths' must be positive")
 ---
 > 		 return(gettext("'lengths' must be positive", domain = "R-Matrix"))
-758c758
+773c773
 < 	     if(!is.numeric(object)) return("is not numeric")
 ---
 > 	     if(!is.numeric(object)) return(gettext("'object' argument is not numeric", domain = "R-Matrix"))
-761c761
+776c776
 < 		 return("not a	 3 x n	matrix")
 ---
 > 		 return(gettext("'object' argument is not a 3 x n matrix", domain = "R-Matrix"))
-763c763
+778c778
 < 		 return("some entries are not integer valued")
 ---
 > 		 return(gettext("some entries are not integer valued", domain = "R-Matrix"))
-777c777
+792c792
 <                    return("'x' slot must be integer when kind is 'int32'")
 ---
 >                    return(gettext("'x' slot must be integer when kind is 'int32'", domain = "R-Matrix"))
-780c780
+795c795
 <                    return("'x' slot must be double when kind is 'double'")
 ---
 >                    return(gettext("'x' slot must be double when kind is 'double'", domain = "R-Matrix"))
-784c784
+799c799
 <                    return("'x' slot must be empty when kind is 'rleDiff'")
 ---
 >                    return(gettext("'x' slot must be empty when kind is 'rleDiff'", domain = "R-Matrix"))
-787c787
+802c802
 <                    return("'kind' must be one of (\"int32\", \"double\", \"rleDiff\")")
 ---
 >                    return(gettext("'kind' must be one of (\"int32\", \"double\", \"rleDiff\")", domain = "R-Matrix"))
-813c813
+828c828
 <                 "Not a valid 'Mnumeric' class object"
 ---
 >                 gettext("Not a valid 'Mnumeric' class object", domain = "R-Matrix")
-833,837c833,837
+848,852c848,852
 < 	     if(anyNA(i <- object@i))	 "'i' slot has NAs"
 < 	     else if(any(!is.finite(i))) "'i' slot is not all finite"
 < 	     else if(any(i < 1))	 "'i' must be >= 1"
@@ -121,11 +121,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	     else if(any(i < 1))	 	 gettext("'i' must be >= 1", domain = "R-Matrix")
 > 	     else if(n == 0 && length(i)) gettext("'i' must be empty when the object length is zero", domain = "R-matrix")
 > 	     else if(any(i > n)) gettextf("'i' must be in 1:%d", n, domain = "R-Matrix")
-839c839
+854c854
 < 		 "'i' must be sorted strictly increasingly"
 ---
 > 		 gettext("'i' must be sorted strictly increasingly", domain = "R-Matrix")
-889c889
+904c904
 <         "'i' and 'x' differ in length"
 ---
 >         gettext("'i' and 'x' differ in length", domain = "R-Matrix")
@@ -138,62 +138,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	   "complex"= 0+0i, stop(gettextf("invalid 'mod': %s", mod), domain = NA))
 ---
 > 	   "complex"= 0+0i, stop(gettextf("invalid 'mod': %s", mod), domain = "R-Matrix"))
-86,87c86
-<     stop(gettextf('not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.', fun, cl),
-< 	 call. = FALSE, domain=NA)
+86,88c86
+<     stop(gettextf(
+<      'not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.',
+< 		  fun, cl[1L]), call. = FALSE, domain=NA)
 ---
->     stop(gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl), call. = FALSE, domain = "R-Matrix")
-90,91c89
-<     stop(gettextf('not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.',
-< 		  fun, cl1, cl2), call. = FALSE, domain=NA)
+>     stop(gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl[1L]), call. = FALSE, domain = "R-Matrix")
+91,93c89
+<     stop(gettextf(
+<      'not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.',
+< 		  fun, cl1[1L], cl2[1L]), call. = FALSE, domain=NA)
 ---
->     stop(gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl1, cl2), call. = FALSE, domain = "R-Matrix")
-174c172
+>     stop(gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl1[1L], cl2[1L]), call. = FALSE, domain = "R-Matrix")
+176c172
 < 	list(c(if(!isTRUE(msg)) msg, paste0("class(target) is ", c1, ", current is ", c2)))
 ---
 > 	list(c(if(!isTRUE(msg)) msg, gettextf("class(target) is %s, current is %s", c1, c2, domain = "R-Matrix")))
-276,278c274
+281,283c277
 < 	stop(gettextf("Matrices must have same dimensions in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same dimensions in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-303,305c299
+308,310c302
 < 	stop(gettextf("non-conformable matrix dimensions in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("non-conformable matrix dimensions in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-344c338
+349c341
 <                                 call. = FALSE, domain=NA)
 ---
 >                                 call. = FALSE, domain = "R-Matrix")
-391,393c385
+396,398c388
 < 	stop(gettextf("Matrices must have same number of rows in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same number of rows in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-402,404c394
+407,409c397
 < 	stop(gettextf("Matrices must have same number of columns in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-462,464c452,453
+467,469c455,456
 < 	message(if(lc > 3)
 < 		gettextf("   [[ suppressing %d column names %s ... ]]", nc,
 < 			 paste(sQuote(cn[1:3]), collapse = ", "))
 ---
 > 	if(lc > 3)
 > 	message(sprintf(gettext("   [[ suppressing %d column names %s ... ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:3]), collapse = ", ")), domain = NA)
-466,468c455
+471,473c458
 < 		gettextf("   [[ suppressing %d column names %s ]]", nc,
 < 			 paste(sQuote(cn[1:lc]), collapse = ", ")),
 < 		domain=NA)
 ---
 > 	message(sprintf(gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:lc]), collapse = ", ")), domain = NA)
-560,562c547,550
+565,567c550,553
 <     xtra <- if(tri && x@diag == "U") " (unitriangular)" else ""
 <     cat(sprintf('%d x %d Matrix of class "%s"%s\n',
 < 		d[1], d[2], cl, xtra))
@@ -202,38 +204,38 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettextf("%d x %d Matrix of class \"%s\" (unitriangular)", d[1], d[2], cl, domain = "R-Matrix"), "\n", sep = "")
 >     else
 >     cat(gettextf("%d x %d Matrix of class \"%s\"", d[1], d[2], cl, domain = "R-Matrix"), "\n", sep = "")
-614c602
+619c605
 <     else stop(gettext("'x' must be \"sparseMatrix\""), domain=NA)
 ---
 >     else stop(gettext("'x' must be \"sparseMatrix\""), domain = "R-Matrix")
-750c738
+755c741
 < 	     domain = NA)
 ---
 > 	     domain = "R-Matrix")
-963,964c951
+968,969c954
 < 	else stop(gettextf("not yet implemented for matrix with typeof %s",
 < 			   typeof(x)), domain = NA)
 ---
 > 	else stop(gettextf("not yet implemented for matrix with typeof %s", typeof(x)), domain = "R-Matrix")
-977,978c964
+982,983c967
 < 	else stop(gettextf("not yet implemented for matrix with typeof %s",
 < 			   typeof(x)), domain = NA)
 ---
 > 	else stop(gettextf("not yet implemented for matrix with typeof %s", typeof(x)), domain = "R-Matrix")
-994c980
+999c983
 < 		  domain = NA)
 ---
 > 		  domain = "R-Matrix")
-1003c989
+1008c992
 < 	      domain = NA)
 ---
 > 	      domain = "R-Matrix")
-1060,1061c1046
+1065,1066c1049
 <     else stop(gettextf("general Matrix class not yet implemented for %s",
 < 		       dQuote(class(x))), domain = NA)
 ---
 >     else stop(gettextf("general Matrix class not yet implemented for %s", dQuote(class(x))), domain = "R-Matrix")
-1548c1533
+1553c1536
 <                                  "extra arguments %s will be disregarded in\n %s"),
 ---
 >                                  "extra arguments %s will be disregarded in\n %s", domain = "R-Matrix"),
@@ -364,58 +366,58 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	      cat(gettext("packed 'Bunch-Kaufman' factorization of:", domain = "R-Matrix"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/Ops.R Recommended/Matrix/R/Ops.R
-141,142c141,142
+157,158c157,158
 < 	stop(sprintf(
 < 	    "dim [product %d] do not match the length of object [%d]", n1, l2))
 ---
 > 	stop(gettextf(
 > 	    "dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix"))
-246,247c246
+262,263c262
 <             Matrix.msg(sprintf("sparse to dense (%s) coercion in '%s' -> %s",
 <                                lClass, .Generic, "Cmp.Mat.atomic"), .M.level = 2)
 ---
 >             Matrix.msg(gettextf("sparse to dense (%s) coercion in '%s' -> %s", lClass, .Generic, "Cmp.Mat.atomic", domain = "R-Matrix"), .M.level = 2)
-453,454c452
+469,470c468
 < 		      stop(gettextf("number of rows are not compatible for %s",
 < 				    .Generic), domain=NA)
 ---
 > 		      stop(gettextf("number of rows are not compatible for %s", .Generic), domain = "R-Matrix")
-509,510c507,508
+525,526c523,524
 < 	stop(sprintf(
 < 	    "dim [product %d] do not match the length of object [%d]", n1, le))
 ---
 > 	stop(gettextf(
 > 	    "dim [product %d] do not match the length of object [%d]", n1, le, domain = "R-Matrix"))
-667,668c665,666
+683,684c681,682
 < 	stop(sprintf(
 < 	    "dim [product %d] do not match the length of object [%d]", n1, l2))
 ---
 > 	stop(gettextf(
 > 	    "dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix"))
-732c730
+748c746
 <             stop("Logic.Mat.atomic() should not be called for diagonalMatrix")
 ---
 >             stop("'Logic.Mat.atomic()' should not be called for diagonalMatrix")
-785,786c783
+801,802c799
 <             Matrix.msg(sprintf("sparse to dense (%s) coercion in '%s' -> %s",
 <                                lClass, .Generic, "Logic.Mat.atomic"), .M.level = 2)
 ---
 >             Matrix.msg(gettextf("sparse to dense (%s) coercion in '%s' -> %s", lClass, .Generic, "Logic.Mat.atomic", domain = "R-Matrix"), .M.level = 2)
-1011c1008
+1027c1024
 < 	      Matrix.msg("suboptimal 'Arith' implementation of  'dsC*  o  dsC*'")
 ---
 > 	      Matrix.msg(gettext("suboptimal 'Arith' implementation of  'dsC*  o  dsC*'", domain = "R-Matrix"))
-1177,1178c1174
+1193,1194c1190
 < 	stop(gettextf("<Matrix> %s %s is undefined",
 < 		      .Generic, paste0(class(e2),"(0)")), domain=NA)
 ---
 > 	stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
-1217,1218c1213
+1233,1234c1229
 < 	stop(gettextf("%s %s <Matrix> is undefined",
 < 		      paste0(class(e2),"(0)"), .Generic), domain=NA)
 ---
 > 	stop(sprintf(gettext("%s %s <Matrix> is undefined", domain = "R-Matrix"), paste0(class(e2),"(0)"), .Generic), domain = NA)
-1301,1303c1296
+1317,1319c1312
 < 	      Matrix.msg(sprintf("Compare <Csparse> -- \"%s\" %s \"%s\" :\n",
 < 				 cD1@className, .Generic,
 < 				 cD2@className), .M.level = 2)
@@ -435,11 +437,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    stop(gettextf("index larger than maximal %d", n), domain=NA)
 ---
 > 	    stop(gettextf("index larger than maximal %d", n), domain = "R-Matrix")
-147c147
+146c146
 < 		stop(gettextf("index larger than maximal %d", n), domain=NA)
 ---
 > 		stop(gettextf("index larger than maximal %d", n), domain = "R-Matrix")
-155,156c155
+154,155c154
 < 	    stop(gettextf("logical subscript too long (%d, should be %d)",
 < 			  length(i), n), domain=NA)
 ---
@@ -787,12 +789,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             x <- x[ , 1:nc, drop = FALSE]
 ---
 >             x <- x[ , seq_len(nc), drop = FALSE]
-926c926
+927c927
 < 	Matrix.msg(sprintf("%3g duplicated (i,j) pairs", m), .M.level = 2)
 ---
 > 	Matrix.msg(gettextf("%3g duplicated (i,j) pairs", m), .M.level = 2)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/sparseVector.R Recommended/Matrix/R/sparseVector.R
-295,296c295
+299,300c299
 < 	    stop(gettextf("Class %s is not yet implemented", dQuote(cNam)),
 < 		 domain=NA)
 ---

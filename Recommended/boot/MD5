@@ -94,11 +94,11 @@ f54f247c3d01528762d614ed3b1b6156 *po/R-fr.po
 ff099806c027496ed3bea85d6c78c094 *po/R-de.po
 38732e7b37039a9f6c550c23b21dbf53 *po/R-pl.po
 af1d51062bf26c42aca25a77093164fa *po/R-ru.po
-d034c57d3fac1d1cb5e822b4b85c52da *po/R-boot.pot
+993aaf9b4db6aa49ba67c7b659d0fda1 *po/R-boot.pot
 e6929f73b03924d15f3af4a4c8549a45 *INDEX
 5dc2147b194c15507379de49828222c1 *inst/CITATION
 340eeb6a93ac3bac62246e5413020f9c *inst/po/fr/LC_MESSAGES/R-boot.mo
-c013e0e82c3deedd44cd4a5362929e6c *inst/po/en@quot/LC_MESSAGES/R-boot.mo
+1efc65180fe0b60b0dc649aabe041f46 *inst/po/en@quot/LC_MESSAGES/R-boot.mo
 700b17b5e90aa4e50dec415a0f89b0d4 *inst/po/de/LC_MESSAGES/R-boot.mo
 f0ece7302d2c5c67cf46b1f577c6b4f1 *inst/po/ru/LC_MESSAGES/R-boot.mo
 9a8b948c5389b64897f804bfe948b82d *inst/po/pl/LC_MESSAGES/R-boot.mo

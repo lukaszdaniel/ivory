@@ -23,21 +23,21 @@ summary.aareg <- function(object, maxtime, test=c('aalen', 'nrisk'), scale=1,...
 
     if (!missing(maxtime)) ntime <- sum(object$time <= maxtime)
     else 		   ntime <- nrow(object$coefficient)
-    times <- object$time[1:ntime]
+    times <- object$time[seq_len(ntime)]
 
     if (test=='aalen') {
         twt <- (as.matrix(object$tweight))[1:ntime,]
         scale <- apply(twt, 2, sum)/scale
         }
     else {
-        twt <-  object$nrisk[1:ntime]
+        twt <-  object$nrisk[seq_len(ntime)]
         scale <- ntime/scale
         }
 
     # Compute a "slope" for each line, using appropriate weighting
     #  Since this is a single variable model, no intercept, I
     #  don't need to call lm.wfit!
-    tx <- as.matrix(twt * object$coefficient[1:ntime,])
+    tx <- as.matrix(twt * object$coefficient[seq_len(ntime),])
     ctx  <- apply(tx, 2, cumsum)
     if (is.matrix(twt) && ncol(twt) >1) tempwt <- apply(twt*times^2, 2, sum)
     else                                tempwt <- sum(twt*times^2)
@@ -54,7 +54,7 @@ summary.aareg <- function(object, maxtime, test=c('aalen', 'nrisk'), scale=1,...
 	    dd <- dim(object$dfbeta)
 	    indx <- match(unique(times), object$times)
 	    influence <- matrix(0, dd[1], dd[2])
-	    for (i in 1:length(indx)) {
+	    for (i in seq_along(indx)) {
 		if (test=='aalen') 
 		     influence <- influence + object$dfbeta[,,i] %*% 
 			                            diag(twt[indx[i],])
@@ -95,8 +95,7 @@ summary.aareg <- function(object, maxtime, test=c('aalen', 'nrisk'), scale=1,...
 		 n = c(object$n[1], length(unique(times)), object$n[3]))
 
     
-    if (is.R()) class(temp) <- 'summary.aareg'
-    else      oldClass(temp) <- 'summary.aareg'
+    class(temp) <- 'summary.aareg'
     temp
     }
 

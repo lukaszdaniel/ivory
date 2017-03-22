@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2014-03-30 09:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -81,11 +81,18 @@ msgstr ""
 msgid "'EValues' is not of correct length"
 msgstr "'ncol' n'est pas un factor de length(x)"
 
+#. R/Ops.R: stop("'Logic.Mat.atomic()' should not be called for diagonalMatrix")
+#: R/Ops.R:0
+#, fuzzy
+msgid "'Logic.Mat.atomic()' should not be called for diagonalMatrix"
+msgstr "Logic.Mat.atomic() ne devrait pas être appelé pour diagonalMatrix"
+
 #. R/MatrixFactorization.R: gettext("'MatrixFactorization' of:", domain = "R-Matrix")
 #: R/MatrixFactorization.R:0
 msgid "'MatrixFactorization' of:"
 msgstr ""
 
+#. R/Tsparse.R: stop("'NA' indices are not (yet?) supported for sparse Matrices")
 #. R/Tsparse.R: stop("'NA' indices are not (yet?) supported for sparse Matrices")
 #: R/Tsparse.R:0
 msgid "'NA' indices are not (yet?) supported for sparse Matrices"
@@ -424,8 +431,6 @@ msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
 msgstr ".M.repl.i.2col() : le cas 'matrix' est laissé tombé ..."
 
 #. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
 #: R/Ops.R:0
 msgid "<Matrix> %s %s is undefined"
 msgstr "<Matrix> %s %s est indéfini"
@@ -549,11 +554,6 @@ msgid ""
 msgstr ""
 "LU calculée singulière : rapport d'entrées extrêmes dans |diag(U)| = %9.4g"
 
-#. R/Ops.R: stop("Logic.Mat.atomic() should not be called for diagonalMatrix")
-#: R/Ops.R:0
-msgid "Logic.Mat.atomic() should not be called for diagonalMatrix"
-msgstr "Logic.Mat.atomic() ne devrait pas être appelé pour diagonalMatrix"
-
 #. R/Auxiliaries.R: gettextf("Matrices must have same dimensions in %s", deparse(sys.call(sys.parent())))
 #: R/Auxiliaries.R:0
 msgid "Matrices must have same dimensions in %s"
@@ -615,6 +615,11 @@ msgstr "NAs dans (i,j) ne sont pas permis"
 #: R/Matrix.R:0 R/Tsparse.R:0
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "les NAs ne sont pas autorisés dans les assignations avec indices"
+
+#. R/AllClass.R: gettext("Not a valid 'Mnumeric' class object", domain = "R-Matrix")
+#: R/AllClass.R:0
+msgid "Not a valid 'Mnumeric' class object"
+msgstr ""
 
 #. R/HBMM.R: stop("Not a valid format")
 #: R/HBMM.R:0
@@ -805,6 +810,9 @@ msgstr ""
 "diagonalMatrix dans .dense2C() -- ne devrait jamais se produire, veuillez "
 "reporter ceci !"
 
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix")
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, le, domain = "R-Matrix")
+#. R/Ops.R: gettextf("dim [product %d] do not match the length of object [%d]", n1, l2, domain = "R-Matrix")
 #. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n1, n2)
 #. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n2, n1)
 #: R/Ops.R:0
@@ -1335,7 +1343,7 @@ msgstr "méthode 'Matrix[<-' non encore implémentée"
 msgid "not-yet-implemented coercion to \"TsparseMatrix\""
 msgstr "conversion automatique en \"TsparseMatrix\" pas encore implémentée"
 
-#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl)
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl[1L])
 #: R/Auxiliaries.R:0
 msgid ""
 "not-yet-implemented method for %s(<%s>).\n"
@@ -1344,7 +1352,7 @@ msgstr ""
 "méthode non encore implémentée pour %s(<%s>).\n"
 " ->> Demandez à l'auteur du package d'implémenter cette fonction manquante."
 
-#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl1, cl2)
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl1[1L], cl2[1L])
 #: R/Auxiliaries.R:0
 msgid ""
 "not-yet-implemented method for %s(<%s>, <%s>).\n"
@@ -1831,21 +1839,6 @@ msgstr[1] ""
 #~ msgid "variable '%s' converted to a factor"
 #~ msgstr "variable '%s' converti en facteur"
 
-#, fuzzy
-#~ msgid "'Dimnames' slot must be list of length 2"
-#~ msgstr "la valeur de dim(.) doit être numérique de longueur 2"
-
-#, fuzzy
-#~ msgid "Dim slot must be of length 2"
-#~ msgstr "la valeur de dim(.) doit être numérique de longueur 2"
-
-#, fuzzy
-#~ msgid "Dim slot must contain non-negative values"
-#~ msgstr "la longueur doit être un nombre non négatif"
-
-#~ msgid "not a skinny matrix"
-#~ msgstr "pas une matrice légère"
-
 #~ msgid "\"dMatrix\" object with NAs cannot be coerced to \"nMatrix\""
 #~ msgstr ""
 #~ "un objet \"dMatrix\" avec NAs ne peut être converti automatiquement en "
@@ -1855,6 +1848,9 @@ msgstr[1] ""
 #~ msgstr ""
 #~ "un objet \"Matrix\" avec NAs ne peut être converti automatiquement en "
 #~ "\"nMatrix\""
+
+#~ msgid "not a skinny matrix"
+#~ msgstr "pas une matrice légère"
 
 #~ msgid "longer object length"
 #~ msgstr "la longueur de l'objet le plus long"

@@ -345,76 +345,76 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #  else cat("Unitialized correlation structure of class corHF\n")
 ---
 > #  else cat("Uninitialized correlation structure of class corHF\n")
-1785c1781
+1779c1775
 <     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
 ---
 >     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
-1849,1850c1845
+1843,1844c1839
 <     match(class(object)[1], c("corSpher", "corExp", "corGaus", "corLin",
 <                               "corRatio"), 0)
 ---
 >     match(class(object)[1], c("corSpher", "corExp", "corGaus", "corLin", "corRatio"), 0)
-1859c1854
+1853c1848
 <       stop("need data to calculate covariate")
 ---
 >       stop(gettextf("'%s' argument is required in order to calculate covariate of an object of class %s", "data", dQuote("corSpatial")))
-1890c1885
+1884c1879
 <             dist(1:nrow(data))
 ---
 >             dist(seq_len(nrow(data)))
-1895c1890
+1889c1884
 <       stop("cannot have zero distances in \"corSpatial\"")
 ---
 >       stop("cannot have zero distances in an object of class \"corSpatial\"")
-1913c1908
+1907c1902
 <       stop("'range' must be > 0 in \"corSpatial\" initial value")
 ---
 >       stop(gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corSpatial")))
-1920c1915
+1914c1909
 < 	  stop("initial value for \"corSpatial\" parameters of wrong dimension")
 ---
 > 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial")))
-1928c1923
+1922c1917
 < 	stop("initial value for \"corSpatial\" parameters of wrong dimension")
 ---
 > 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial")))
-2003c1998
+1997c1992
 <   function(object, structName = "Exponential spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Exponential spatial correlation", domain = "R-nlme"), ...)
-2033c2028
+2027c2022
 <   function(object, structName = "Gaussian spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Gaussian spatial correlation", domain = "R-nlme"), ...)
-2083c2078
+2077c2072
 <       stop("'range' must be > 0 in \"corLin\" initial value")
 ---
 >       stop(gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corLin")))
-2094c2089
+2088c2083
 < 	  stop("initial value for \"corLin\" parameters of wrong dimension")
 ---
 > 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin")))
-2102c2097
+2096c2091
 < 	stop("initial value for \"corLin\" parameters of wrong dimension")
 ---
 > 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin")))
-2121c2116
+2115c2110
 <   function(object, structName = "Linear spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Linear spatial correlation", domain = "R-nlme"), ...)
-2151c2146
+2145c2140
 <   function(object, structName = "Rational quadratic spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Rational quadratic spatial correlation", domain = "R-nlme"), ...)
-2215c2210
+2209c2204
 < 	  stop("initial value for \"corSpher\" parameters of wrong dimension")
 ---
 > 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher")))
-2223c2218
+2217c2212
 < 	stop("initial value for \"corSpher\" parameters of wrong dimension")
 ---
 > 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher")))
-2242c2237
+2236c2231
 <   function(object, structName = "Spherical spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Spherical spatial correlation", domain = "R-nlme"), ...)
@@ -783,7 +783,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <       "Non-positive definite approximate variance-covariance"
 ---
 >       gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
-720,721c720,721
+721,722c721,722
 <                                 "level %s not allowed for %s",
 <                                 "levels %s not allowed for %s"),
 ---
@@ -802,49 +802,49 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     stop("first argument to 'groupedData' must be a two-sided formula")
 ---
 >     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()")))
-52c52
+53c53
 <     stop("first argument to 'nfGroupedData' must be a two-sided formula")
 ---
 >     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()")))
-69c69
+70c70
 <       stop("second argument to 'groupedData' must inherit from data.frame")
 ---
 >       stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
-152c152
+153c153
 <     stop("first argument to 'nmGroupedData' must be a two-sided formula")
 ---
 >     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()")))
-178c178
+179c179
 <       stop("second argument to 'groupedData' must inherit from data.frame")
 ---
 >       stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
-229c229
+230c230
 <       stop("'subset' must be a list")
 ---
 >       stop(gettextf("'%s' argument must be a list", "subset"))
-250,251c250
+251,252c251
 <       stop(gettextf("undefined display level %s for %s",
 <                     displayLevel, sQuote(substitute(object))), domain = NA)
 ---
 >       stop(gettextf("undefined display level %s for %s", displayLevel, sQuote(substitute(object))), domain = "R-nlme")
-276,277c275
+277,278c276
 <         stop(gettextf("undefined collapsing level %s for %s",
 <                       collapseLevel, sQuote(substitute(object))), domain = NA)
 ---
 >         stop(gettextf("undefined collapsing level %s for %s", collapseLevel, sQuote(substitute(object))), domain = "R-nlme")
-297c295
+298c296
 <           stop("'preserve' must be a two-sided formula")
 ---
 >           stop(gettextf("'%s' argument must be a two-sided formula", "preserve"))
-564c562
+565c563
 <   cat("Grouped Data: ")
 ---
 >   cat(gettext("Grouped Data: ", domain = "R-nlme"))
-630c628
+631c629
 <     stop("'asTable' cannot be used with multilevel grouped data")
 ---
 >     stop("'asTable()' function cannot be used with multilevel grouped data")
-634c632
+635c633
 <     stop("'asTable' can only be used with balanced 'groupedData' objects")
 ---
 >     stop("'asTable()' function can only be used with balanced object of class \"groupedData\"")
@@ -1644,22 +1644,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     stop("need an object with call component")
 ---
 >     stop("an object with 'call' component is required")
-2733c2750
+2731c2748
 <         stop("'nint' is not consistent with 'breaks'")
 ---
 >         stop(gettextf("'%s' is not consistent with '%s'", "nint", "breaks"))
-2771,2772c2788,2790
+2769,2770c2786,2788
 <   structure(val, class = c("Variogram", "data.frame"),
 <             collapse = (collapse != "none"))
 ---
 >   attr(val, "collapse") <- collapse != "none"
 >   class(val) <- c("Variogram", "data.frame")
 >   val
-2818c2836
+2816c2834
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-2883,2884c2901,2902
+2881,2882c2899,2900
 <   attr(val, "gradient") <- -aux[1 + (1:q)]
 <   attr(val, "hessian") <- -array(aux[-(1:(q+1))], c(q, q))
 ---
@@ -1883,119 +1883,119 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <       stop("'data' must be given explicitly to use 'nlsList'")
 ---
 >       stop(gettextf("'%s' argument must be given explicitly to use %s function", "data", sQuote("nlsList()")))
-261c260
+262c261
 <       stop ("'fixed' must be a formula or list of formulae")
 ---
 >       stop(gettextf("'%s' argument must be a formula or list of formulae", "fixed"))
-263c262
+264c263
 <       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
 ---
 >       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
-265c264
+266c265
 <       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
 ---
 >       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
-275c274
+276c275
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-280c279
+281c280
 <         stop ("'random' must be a formula or list of formulae")
 ---
 >         stop(gettextf("'%s' argument must be a formula or list of formulae", "random"))
-282c281
+283c282
 <         stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
 ---
 >         stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
-284c283
+285c284
 <         stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
 ---
 >         stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
-314,315c313,314
+315,316c314,315
 <         if (any(corGrpsForm != lmeGrpsForm[1:corQ])) {
 <           stop("incompatible formulas for groups in \"random\" and \"correlation\"")
 ---
 >         if (any(corGrpsForm != lmeGrpsForm[seq_len(corQ)])) {
 >           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
-318c317
+319c318
 <           warning("cannot use smaller level of grouping for \"correlation\" than for \"random\". Replacing the former with the latter.")
 ---
 >           warning("cannot use smaller level of grouping for 'correlation' than for 'random'. Replacing the former with the latter.")
-325,326c324,325
+326,327c325,326
 <         if (any(lmeGrpsForm != corGrpsForm[1:lmeQ])) {
 <           stop("incompatible formulas for groups in \"random\" and \"correlation\"")
 ---
 >         if (any(lmeGrpsForm != corGrpsForm[seq_len(lmeQ)])) {
 >           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
-422c421
+423c422
 <       for(i in 1:Q) {
 ---
 >       for(i in seq_len(Q)) {
-511c510
+512c511
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-540,541c539
+541,542c540
 <     warning(gettextf("fewer observations than random effects in all level %s groups",
 <                      Q), domain = NA)
 ---
 >     warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
-558,559c556
+559,560c557
 <         stop(gettextf("list with starting values for random effects must have names or be of length %d",
 <                       Q), domain = NA)
 ---
 >         stop(gettextf("list with starting values for random effects must have names or be of length %d", Q), domain = "R-nlme")
-566c563
+567c564
 <                               "group names not matched in starting values for random effects: %s"),
 ---
 >                               "group names not matched in starting values for random effects: %s", domain = "R-nlme"),
-571c568
+572c569
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-580,581c577
+581,582c578
 <         stop(gettextf("number of rows in starting values for random component at level %s should be %d",
 <                       namGrp[i], Dims$ngrps[i]), domain = NA)
 ---
 >         stop(gettextf("number of rows in starting values for random component at level %s should be %d", namGrp[i], Dims$ngrps[i]), domain = "R-nlme")
-584,585c580
+585,586c581
 <         stop(gettextf("number of columns in starting values for random component at level %s should be %d",
 <                       namGrp[i], rlength[i]), domain = NA)
 ---
 >         stop(gettextf("number of columns in starting values for random component at level %s should be %d", namGrp[i], rlength[i]), domain = "R-nlme")
-593,594c588
+594,595c589
 <           stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s",
 <                         namGrp[i]), domain = NA)
 ---
 >           stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s", namGrp[i]), domain = "R-nlme")
-612,613c606
+613,614c607
 <                   stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s",
 <                                  namGrp[i]), domain = NA)
 ---
 >                   stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s", namGrp[i]), domain = "R-nlme")
-651c644
+652c645
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-718c711
+719c712
 <       for(i in 1:Q) {
 ---
 >       for(i in seq_len(Q)) {
-749c742
+750c743
 <   w <- ww[NReal * pLen + (1:NReal)]
 ---
 >   w <- ww[NReal * pLen + seq_len(NReal)]
-752c745
+753c746
 <   w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
 ---
 >   w <- w + as.vector(ZX[, rLen + seq_len(fLen), drop = FALSE] %*% sfix)
-755,756c748,749
+756,757c749,750
 <     for(i in 1:Q) {
 <       w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
 ---
 >     for(i in seq_len(Q)) {
 >       w <- w + as.vector((ZX[, startRan + seq_len(ncols[i]), drop = FALSE] *
-825,827c818,820
+826,828c819,821
 <       cat("\n**Iteration", numIter)
 <       cat(sprintf("\nLME step: Loglik: %s, %s iterations: %d\n",
 <                   format(nlmeFit$logLik), controlvals$opt, convIter))
@@ -2003,15 +2003,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       cat("\n**", gettextf("Iteration %d", numIter, domain = "R-nlme"), sep = "")
 >       cat("\n")
 >       cat(gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt, convIter, domain = "R-nlme"), "\n", sep = "")
-860c853
+861c854
 <       msg <- "step halving factor reduced below minimum in PNLS step"
 ---
 >       msg <- gettext("step halving factor reduced below minimum in PNLS step", domain = "R-nlme")
-878c871
+879c872
 <     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
 ---
 >     for(i in seq_len(Q)) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
-881,883c874,876
+882,884c875,877
 <       cat("PNLS step: RSS = ", format(work$settings[6]), "\n fixed effects: ")
 <       for (i in 1:fLen) cat(format(sfix[i])," ")
 <       cat("\n iterations:", work$settings[5],"\n")
@@ -2019,7 +2019,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       cat("\n", gettextf("PNLS step: RSS = %s", format(work$set[6]), domain = "R-nlme"), "\n ", gettext("Fixed effects:", domain = "R-nlme"), sep = "")
 >       for (i in seq_len(fLen)) cat(format(sfix[i])," ")
 >       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$settings[5], "\n", sep = "")
-886,888c879,881
+887,889c880,882
 <     w[] <- work$additional[(NReal * pLen) + 1:NReal]
 <     ZX[] <- work$additional[1:(NReal * pLen)]
 <     w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
@@ -2027,45 +2027,45 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     w[] <- work$additional[(NReal * pLen) + seq_len(NReal)]
 >     ZX[] <- work$additional[seq_len(NReal * pLen)]
 >     w <- w + as.vector(ZX[, rLen + seq_len(fLen), drop = FALSE] %*% sfix)
-890,891c883,884
+891,892c884,885
 <     for(i in 1:Q) {
 <       w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
 ---
 >     for(i in seq_len(Q)) {
 >       w <- w + as.vector((ZX[, startRan + seq_len(ncols[i]), drop = FALSE] *
-906,907c899,900
+907,908c900,901
 <     aConv <- c(fixed = max(conv[1:fLen]))
 <     conv <- conv[-(1:fLen)]
 ---
 >     aConv <- c(fixed = max(conv[seq_len(fLen)]))
 >     conv <- conv[-seq_len(fLen)]
-916,917c909,910
+917,918c910,911
 <       cat(sprintf("Convergence crit. (must all become <= tolerance = %g):\n",
 <                   controlvals$tolerance))
 ---
 >       cat(gettextf("Convergence crit. (must all become <= tolerance = %g):",
 >                   controlvals$tolerance, domain = "R-nlme"), "\n", sep = "")
-930c923
+931c924
 < 	controlvals$maxIter)
 ---
 > 	controlvals$maxIter, domain = "R-nlme")
-932c925
+933c926
 < 	warning(msg, domain=NA)
 ---
 > 	warning("maximum number of iterations reached without convergence")
-935c928
+936c929
 < 	stop(msg, domain=NA)
 ---
 > 	stop("maximum number of iterations reached without convergence")
-947c940
+948c941
 <   fixDF <- getFixDF(ZX[, rLen + (1:fLen), drop = FALSE],
 ---
 >   fixDF <- getFixDF(ZX[, rLen + seq_len(fLen), drop = FALSE],
-980c973
+981c974
 <       "Approximate variance-covariance matrix not available"
 ---
 >       gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
-1171,1174c1164,1166
+1172,1175c1165,1167
 <                               "level %s not allowed for %s",
 <                               "levels %s not allowed for %s"),
 <                      paste(levs[wch], collapse = ",")),
@@ -2074,15 +2074,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                               "level %s is not allowed for %s",
 >                               "levels %s ares not allowed for %s", domain = "R-nlme"),
 >                      paste(levs[wch], collapse = ", ")), domain = NA)
-1264c1256
+1265c1257
 <   for(i in 1:nlev) {
 ---
 >   for(i in seq_len(nlev)) {
-1298c1290
+1299c1291
 <     lab <- "Predicted values"
 ---
 >     lab <- gettext("Predicted values", domain = "R-nlme")
-1314c1306
+1315c1307
 <     stop("need an object with call component")
 ---
 >     stop("an object with 'call' component is required")
@@ -2589,6 +2589,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   function(object, structName = "Combination of variance functions:", ...)
 ---
 >   function(object, structName = gettext("Combination of variance functions:", domain = "R-nlme"), ...)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/R/zzMethods.R Recommended/nlme/R/zzMethods.R
+37,39c37,38
+< 	    warning("Package ", dQuote(pkgname), " installed with old R version ",
+< 		    built.R.ver, " should not be used with R version ", getRversion(),
+< 		    "\n  Rather re-install it with this version of R.")
+---
+> 	    warning(gettextf("Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R.", dQuote(pkgname),
+> 		    built.R.ver, getRversion(), domain = "R-nlme"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/src/base.h Recommended/nlme/src/base.h
 33,38d32
 < #ifdef ENABLE_NLS

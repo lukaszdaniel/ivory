@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:01\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <r-core@r-project.org>\n"
@@ -145,10 +145,11 @@ msgstr "Fork-Cluster sind unter Windows nicht unterstützt"
 msgid "invalid '%s' argument"
 msgstr "unzulässiges 'jobs' Argument"
 
-#. R/RngStream.R: stop("invalid value of 'seed'")
-#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
-msgid "invalid value of 'seed'"
+#, fuzzy
+msgid "invalid value of %s"
 msgstr "unzulässiger Wert für 'seed'"
 
 #. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")

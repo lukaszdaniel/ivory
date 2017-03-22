@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 14:40+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2015-01-17 15:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -93,9 +93,9 @@ msgstr "unzulässiges 'file' Argument"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3648
-#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
-#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
+#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3649
+#: devWindows.c:3653 devWindows.c:3661 devWindows.c:3672 devWindows.c:3678
+#: devWindows.c:3685 devWindows.c:3692 devWindows.c:3696
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "unzulässiges 'file' Argument"
@@ -313,8 +313,8 @@ msgstr ""
 "Versuch den unzulässigen Zeichensatz %d zu benutzen, nutze stattdessen "
 "Zeichensatz 1"
 
-#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1809 devWindows.c:1846
-#: devWindows.c:1876 devWindows.c:1908
+#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1810 devWindows.c:1847
+#: devWindows.c:1877 devWindows.c:1909
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "Dateiname im Aufruf von %s() zu lang"
@@ -367,7 +367,7 @@ msgstr "postscript(print.it=TRUE) mit leerem Druckkommando benutzt"
 msgid "invalid page type '%s' (postscript)"
 msgstr "ungültiger Seitentyp '%s' (postscript)"
 
-#: devPS.c:3465 devPS.c:4578 devWindows.c:2343
+#: devPS.c:3465 devPS.c:4578 devWindows.c:2344
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -596,7 +596,7 @@ msgstr "ungültiger 'fonts' Parameter in %s<"
 msgid "unable to start '%s' device"
 msgstr "kann %s()-Gerät nicht starten"
 
-#: devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3737
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kann %s()-Gerät nicht starten"
@@ -687,100 +687,100 @@ msgstr "Grafikhistorie scheint beschädigt"
 msgid "no plot history!"
 msgstr "keine Plot-Historie"
 
-#: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
+#: devWindows.c:1815 devWindows.c:1850 devWindows.c:1880
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d'sind unwahrscheinliche Pixelzahlen"
 
-#: devWindows.c:1822 devWindows.c:1827 devWindows.c:1852 devWindows.c:1857
-#: devWindows.c:1882 devWindows.c:1887
+#: devWindows.c:1823 devWindows.c:1828 devWindows.c:1853 devWindows.c:1858
+#: devWindows.c:1883 devWindows.c:1888
 #, fuzzy
 msgid "unable to allocate bitmap"
 msgstr "kann Bitmap nicht allozieren"
 
-#: devWindows.c:1833 devWindows.c:1863 devWindows.c:2183
+#: devWindows.c:1834 devWindows.c:1864 devWindows.c:2184
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Kann Datei '%s' nicht zum Schreiben öffnen"
 
-#: devWindows.c:1918
+#: devWindows.c:1919
 #, fuzzy, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "Kann Metafile '%s' nicht zum Schreiben öffnen<"
 
-#: devWindows.c:1920
+#: devWindows.c:1921
 #, fuzzy
 msgid "unable to open clipboard to write metafile"
 msgstr "Kann die Zwischenablage nicht zum Schreiben eines Metafiles öffnen"
 
-#: devWindows.c:2131
+#: devWindows.c:2132
 msgid "Insufficient memory for resize. Killing device"
 msgstr "Zu wenig Speicher für Größenänderung. Schalte Gerät ab."
 
-#: devWindows.c:2139
+#: devWindows.c:2140
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "Zu wenig Speicher für Größenänderung. Schalte Alpha-Blending ab.<"
 
-#: devWindows.c:2168
+#: devWindows.c:2169
 #, fuzzy
 msgid "a clipboard metafile can store only one figure."
 msgstr "Ein Zwischenablagemetafile kann nur eine Figur speichern."
 
-#: devWindows.c:2174
+#: devWindows.c:2175
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "Das Metafile '%s' kann nicht erzeugt werden"
 
-#: devWindows.c:3114 devWindows.c:3760
+#: devWindows.c:3115 devWindows.c:3761
 msgid "R Graphics"
 msgstr "R Grafiken"
 
-#: devWindows.c:3128
+#: devWindows.c:3129
 msgid "attempt to use the locator after dev.hold()"
 msgstr "Versuch den Lokator zu nutzen nach Aufruf von dev.hold()"
 
-#: devWindows.c:3159
+#: devWindows.c:3160
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.c:3399
+#: devWindows.c:3400
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "Option 'windowsTimeouts' sollte ganzzahlig sein"
 
-#: devWindows.c:3420
+#: devWindows.c:3421
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "unzulässige Gerätenummer in 'savePlot'"
 
-#: devWindows.c:3422
+#: devWindows.c:3423
 #, fuzzy
 msgid "invalid device in 'savePlot()' function"
 msgstr "unzulässige Gerätenummer in 'savePlot'"
 
-#: devWindows.c:3425
+#: devWindows.c:3426
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "unzulässiges Dateinamenargument in savePlot"
 
-#: devWindows.c:3430
+#: devWindows.c:3431
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "unzulässiges Dateinamenargument in savePlot"
 
-#: devWindows.c:3457
+#: devWindows.c:3458
 msgid "unknown type in savePlot"
 msgstr "unbekannter Typ in savePlot"
 
-#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
-#: devWindows.c:3614
+#: devWindows.c:3503 devWindows.c:3535 devWindows.c:3563 devWindows.c:3594
+#: devWindows.c:3615
 msgid "processing of the plot ran out of memory"
 msgstr "Bei Bearbeitung der Grafik ging der Speicher aus"
 
-#: devWindows.c:3578
+#: devWindows.c:3579
 msgid "Impossible to open "
 msgstr "Kann nicht öffnen"
 
-#: devWindows.c:3643
+#: devWindows.c:3644
 msgid "invalid 'width' or 'height'"
 msgstr "unzulässige 'with' oder 'height'"
 

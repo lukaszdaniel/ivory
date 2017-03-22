@@ -195,11 +195,11 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
 	    del.SS <- abs(oSS-wRSS)/(if(wRSS == 0) 1 else wRSS)
 	    d.rob.w <- if(j < iterations) ## have updated 'robust', see above
 			   sum(abs(old.rob - robust)) / sum(robust) else NA
-	    cat(sprintf(
+	    cat(gettextf(
 		"iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",
-		j, wRSS, del.SS, d.rob.w)) #LUKI
+		j, wRSS, del.SS, d.rob.w, domain = "R-stats"), "\n", sep = "")
 	    if(iterTrace >= 2 && j < iterations) {
-		cat("robustness weights:", "\n", sep = "") #LUKI
+		cat(gettext("robustness weights:", domain = "R-stats"), "\n", sep = "")
 		print(quantile(robust, probs=(0:8)/8), digits=3)
 	    }
 	}

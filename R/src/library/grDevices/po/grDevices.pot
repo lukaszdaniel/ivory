@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 14:40+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,9 +90,9 @@ msgstr ""
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3648
-#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
-#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
+#: colors.c:551 devPS.c:8256 devPS.c:8419 devPS.c:8422 devWindows.c:3649
+#: devWindows.c:3653 devWindows.c:3661 devWindows.c:3672 devWindows.c:3678
+#: devWindows.c:3685 devWindows.c:3692 devWindows.c:3696
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
@@ -287,8 +287,8 @@ msgstr ""
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
 
-#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1809 devWindows.c:1846
-#: devWindows.c:1876 devWindows.c:1908
+#: devPS.c:3104 devPS.c:4728 devPS.c:5842 devWindows.c:1810 devWindows.c:1847
+#: devWindows.c:1877 devWindows.c:1909
 #, c-format
 msgid "filename too long in '%s' call"
 msgstr ""
@@ -337,7 +337,7 @@ msgstr ""
 msgid "invalid page type '%s' (postscript)"
 msgstr ""
 
-#: devPS.c:3465 devPS.c:4578 devWindows.c:2343
+#: devPS.c:3465 devPS.c:4578 devWindows.c:2344
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -547,7 +547,7 @@ msgstr ""
 msgid "unable to start '%s' device"
 msgstr ""
 
-#: devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3737
 #, c-format
 msgid "unable to start %s() device"
 msgstr ""
@@ -630,93 +630,93 @@ msgstr ""
 msgid "no plot history!"
 msgstr ""
 
-#: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
+#: devWindows.c:1815 devWindows.c:1850 devWindows.c:1880
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr ""
 
-#: devWindows.c:1822 devWindows.c:1827 devWindows.c:1852 devWindows.c:1857
-#: devWindows.c:1882 devWindows.c:1887
+#: devWindows.c:1823 devWindows.c:1828 devWindows.c:1853 devWindows.c:1858
+#: devWindows.c:1883 devWindows.c:1888
 msgid "unable to allocate bitmap"
 msgstr ""
 
-#: devWindows.c:1833 devWindows.c:1863 devWindows.c:2183
+#: devWindows.c:1834 devWindows.c:1864 devWindows.c:2184
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr ""
 
-#: devWindows.c:1918
+#: devWindows.c:1919
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr ""
 
-#: devWindows.c:1920
+#: devWindows.c:1921
 msgid "unable to open clipboard to write metafile"
 msgstr ""
 
-#: devWindows.c:2131
+#: devWindows.c:2132
 msgid "Insufficient memory for resize. Killing device"
 msgstr ""
 
-#: devWindows.c:2139
+#: devWindows.c:2140
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr ""
 
-#: devWindows.c:2168
+#: devWindows.c:2169
 msgid "a clipboard metafile can store only one figure."
 msgstr ""
 
-#: devWindows.c:2174
+#: devWindows.c:2175
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr ""
 
-#: devWindows.c:3114 devWindows.c:3760
+#: devWindows.c:3115 devWindows.c:3761
 msgid "R Graphics"
 msgstr ""
 
-#: devWindows.c:3128
+#: devWindows.c:3129
 msgid "attempt to use the locator after dev.hold()"
 msgstr ""
 
-#: devWindows.c:3159
+#: devWindows.c:3160
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.c:3399
+#: devWindows.c:3400
 msgid "option 'windowsTimeouts' should be integer"
 msgstr ""
 
-#: devWindows.c:3420
+#: devWindows.c:3421
 msgid "invalid device number in 'savePlot()' function"
 msgstr ""
 
-#: devWindows.c:3422
+#: devWindows.c:3423
 msgid "invalid device in 'savePlot()' function"
 msgstr ""
 
-#: devWindows.c:3425
+#: devWindows.c:3426
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr ""
 
-#: devWindows.c:3430
+#: devWindows.c:3431
 msgid "invalid type argument in 'savePlot()' function"
 msgstr ""
 
-#: devWindows.c:3457
+#: devWindows.c:3458
 msgid "unknown type in savePlot"
 msgstr ""
 
-#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
-#: devWindows.c:3614
+#: devWindows.c:3503 devWindows.c:3535 devWindows.c:3563 devWindows.c:3594
+#: devWindows.c:3615
 msgid "processing of the plot ran out of memory"
 msgstr ""
 
-#: devWindows.c:3578
+#: devWindows.c:3579
 msgid "Impossible to open "
 msgstr ""
 
-#: devWindows.c:3643
+#: devWindows.c:3644
 msgid "invalid 'width' or 'height'"
 msgstr ""
 

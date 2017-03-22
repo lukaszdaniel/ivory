@@ -14,8 +14,8 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.R-project.org/Licenses/
 
+## Cppyright (C) 2003-2017  R Core Team
 ## Copyright     1997-1999  Adrian Trapletti
-## Cppyright (C) 2003-2015  R Core Team
 ## This version distributed under GPL (version 2 or later)
 
 diffinv <- function (x, ...) { UseMethod("diffinv") }

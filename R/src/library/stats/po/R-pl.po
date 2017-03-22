@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1099,6 +1099,12 @@ msgstr "obiekt 'ts' musi mieć jedną lub więcej obserwacji"
 #: R/smspline.R:0
 msgid "'type = \"partial\"' is not yet implemented"
 msgstr "'type = \"partial\"' nie jest jeszcze zaimplementowany"
+
+#. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' argument must be 1 or 3 for ordered factors"
+msgstr "argument '%s' musi być zmienną logiczną lub tekstem"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0
@@ -3729,14 +3735,14 @@ msgstr "węzeł drzewa z niedodatnią liczbą gałęzi"
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr "bezliściowy węzeł drzewa celu z wartościami nie-dodatnimi #{gałęziami}"
 
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members at height %s"
+msgstr "dendrogram z %d gałęziami oraz %d członkami na wysokości %s"
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members total, at height %s"
-msgstr "dendrogram z %d gałęziami oraz %d członkami, na wysokości %s"
-
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
-#: R/dendrogram.R:0
-msgid "dendrogram with %d branches and %d members, at height %s"
 msgstr "dendrogram z %d gałęziami oraz %d członkami, na wysokości %s"
 
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
@@ -4324,6 +4330,11 @@ msgstr "niepoprawne wartości parametrów"
 msgid "invalid response type"
 msgstr "niepoprawny typ zmiennej zależnej"
 
+#. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
+#: R/loess.R:0
+msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
+msgstr ""
+
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
 msgid "iterTrace = %s not obeyed as iterations = %d"
@@ -4339,8 +4350,7 @@ msgstr "osiągnięto granicę iteracji bez uzyskania zbieżności (10)"
 msgid "layout: widths = %s, heights = %s; lmat="
 msgstr "układ: szerokości = %s, wysokości = %s; lmat="
 
-#. R/dendrogram.R: gettextf("leaf %s", dQuote(at$label), domain = "R-stats")
-#. R/dendrogram.R: gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats")
+#. R/dendrogram.R: gettextf("leaf %s", if (is.character(at$label)) dQuote(at$label) else format(object,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "leaf %s"
 msgstr "liść %s"
@@ -5471,6 +5481,11 @@ msgstr "zmienna zależna nie jest dozwolona w formule"
 #: R/smspline.R:0
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
 msgstr "wynik 'smooth.spline(keep.data = TRUE)' jest wymagany"
+
+#. R/loess.R: gettext("robustness weights:", domain = "R-stats")
+#: R/loess.R:0
+msgid "robustness weights:"
+msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0

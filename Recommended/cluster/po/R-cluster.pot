@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.5\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"Project-Id-Version: cluster 2.0.6\n"
+"POT-Creation-Date: 2017-03-14 22:24\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,6 +162,13 @@ msgid "'memb.exp' must be a finite number > 1"
 msgstr ""
 
 
+#: R/mona.q: 0
+#. R/mona.q: stop("'mona()' needs at least p >= 2 variables (in current implementation)")
+
+msgid "'mona()' needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
+
 #: R/internal.R: 0
 #. R/internal.R: stop("'n' argument must be >= 2")
 #. R/internal.R: stop("'n' argument must be >= 2")
@@ -293,9 +300,9 @@ msgstr ""
 
 
 #: R/mona.q: 0
-#. R/mona.q: stop("All variables must be binary (e.g., factor with 2 levels).")
+#. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
 
-msgid "All variables must be binary (e.g., factor with 2 levels)."
+msgid "All variables must be binary (e.g., a factor with 2 levels, both present)."
 msgstr ""
 
 
@@ -837,13 +844,6 @@ msgid "Order of objects:"
 msgstr ""
 
 
-#: R/mona.q: 0
-#. R/mona.q: gettext("Revised data:", domain = "R-cluster")
-
-msgid "Revised data:"
-msgstr ""
-
-
 #: R/plothier.q: 0
 #. R/plothier.q: gettext("Separation step", domain = "R-cluster")
 
@@ -1143,6 +1143,13 @@ msgstr ""
 #. R/fanny.q: gettextf("k_crisp (= %d) < k !!", x$k.crisp, domain = "R-cluster")
 
 msgid "k_crisp (= %d) < k !!"
+msgstr ""
+
+
+#: R/mona.q: 0
+#. R/mona.q: stop("mona() needs at least p >= 2 variables (in current implementation)")
+
+msgid "mona() needs at least p >= 2 variables (in current implementation)"
 msgstr ""
 
 

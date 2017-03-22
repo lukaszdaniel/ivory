@@ -5,7 +5,7 @@ The source was converted to noweb when adding time-transform terms.
 
 The call starts out with the basic building of a model frame
 and proceeds from there.
-The normalizetime function is used to adjucate near ties in the time
+The aeqSurv function is used to adjucate near ties in the time
 variable, numerical precision issues that occur when users base
 caculations on days/365.25 instead of days.
 <<coxph>>=
@@ -17,6 +17,18 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     ties <- match.arg(ties)
     Call <- match.call()
+    ## We want to pass any ... args to coxph.control, but not pass things
+    ##  like "dats=mydata" where someone just made a typo.  The use of ...
+    ##  is simply to allow things like "eps=1e6" with easier typing
+    extraArgs <- list(...)
+    if (length(extraArgs)) {
+        controlargs <- names(formals(coxph.control)) #legal arg names
+        indx <- pmatch(names(extraArgs), controlargs, nomatch=0L)
+        if (any(indx==0L))
+            stop(gettextf("Argument %s not matched", 
+                          names(extraArgs)[indx==0L]), domain = "R-survival")
+    }
+    if (missing(control)) control <- coxph.control(...)    
     <<coxph-getdata>>
 
     Y <- model.extract(mf, "response")
@@ -25,7 +37,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     if (type!='right' && type!='counting')
 	stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
     data.n <- nrow(Y)   #remember this before any time transforms
-    Y <- normalizetime(Y, replace=TRUE)
+    if (control$timefix) Y <- aeqSurv(Y)
     <<coxph-bothsides>>
         
     # The time transform will expand the data frame mf.  To do this
@@ -98,18 +110,6 @@ mf <- eval(temp, parent.frame())
 if (nrow(mf) ==0) stop("no (non-missing) observations")
 Terms <- terms(mf)
 
-
-## We want to pass any ... args to coxph.control, but not pass things
-##  like "dats=mydata" where someone just made a typo.  The use of ...
-##  is simply to allow things like "eps=1e6" with easier typing
-extraArgs <- list(...)
-if (length(extraArgs)) {
-    controlargs <- names(formals(coxph.control)) #legal arg names
-    indx <- pmatch(names(extraArgs), controlargs, nomatch=0L)
-    if (any(indx==0L))
-        stop(gettextf("argument %s was not matched", names(extraArgs)[indx==0L]), domain = "R-survival")
-}
-if (missing(control)) control <- coxph.control(...)
 @ 
 
 An increasingly common error is for users to put the time variable on
@@ -798,7 +798,7 @@ model.frame.coxph <- function(formula, ...) {
        if (!is.null(attr(Terms, "specials")$tt)) {
           # Do time transform
 	  tt <- eval(formula$call$tt)
-	  Y <- normalizetime(model.response(mf), replace=TRUE)
+	  Y <- aeqSurv(model.response(mf))
 	  strats <- attr(Terms, "specials")$strata
 	  if (length(strats)) {
 	      stemp <- untangle.specials(Terms, 'strata', 1)

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2017-03-14 22:25+0100\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -144,38 +144,33 @@ msgstr "неправильное значение 'method'"
 msgid "unknown error"
 msgstr ""
 
-#: rpart_callback.c:37
+#: rpart_callback.c:42
 msgid "'yback' not found"
 msgstr "'yback' не найден"
 
-#: rpart_callback.c:41
+#: rpart_callback.c:46
 msgid "'wback' not found"
 msgstr "'wback' не найден"
 
-#: rpart_callback.c:45
+#: rpart_callback.c:50
 msgid "'xback' not found"
 msgstr "'xback' не найден"
 
-#: rpart_callback.c:49
+#: rpart_callback.c:54
 msgid "'nback' not found"
 msgstr "'nback' не найден"
 
-#: rpart_callback.c:89
+#: rpart_callback.c:100
 msgid "return value not a vector"
 msgstr "возвращенное значение -- не вектор"
 
-#: rpart_callback.c:91
+#: rpart_callback.c:102
 msgid "returned value is the wrong length"
 msgstr "возвращенное значение -- неправильной длины"
 
-#: rpart_callback.c:121
+#: rpart_callback.c:134
 msgid "the expression expr1 did not return a vector!"
 msgstr "выражение expr1 не вернуло вектор!"
-
-#: rpart_callback.c:133
-#, c-format
-msgid "the expression expr1 returned a list of %d elements, %d required"
-msgstr "выражение expr1 вернуло список из %d элементов, а надо %d"
 
 #: rundown.c:47
 msgid "Warning message--see rundown.c"
@@ -184,6 +179,9 @@ msgstr ""
 #: rundown2.c:47
 msgid "Warning message--see rundown2.c"
 msgstr ""
+
+#~ msgid "the expression expr1 returned a list of %d elements, %d required"
+#~ msgstr "выражение expr1 вернуло список из %d элементов, а надо %d"
 
 #~ msgid "Out of memory"
 #~ msgstr "Не хватает памяти"

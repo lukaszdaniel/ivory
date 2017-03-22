@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1170,6 +1170,12 @@ msgstr "l'oggetto 'ts' deve avere una o più osservazioni"
 #, fuzzy
 msgid "'type = \"partial\"' is not yet implemented"
 msgstr "SE per il tipo '%s' non ancora implementati"
+
+#. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' argument must be 1 or 3 for ordered factors"
+msgstr "'xy.labels' devono essere logical o character"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0
@@ -3845,14 +3851,14 @@ msgstr "nodo del dendrogramma con #{branches} non positivi"
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr "nodo non terminale del dendrogramma con #{branches} non positivi"
 
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members at height %s"
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members total, at height %s"
-msgstr ""
-
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
-#: R/dendrogram.R:0
-msgid "dendrogram with %d branches and %d members, at height %s"
 msgstr ""
 
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
@@ -4458,6 +4464,11 @@ msgstr "valori dei parametri non validi"
 msgid "invalid response type"
 msgstr "tipo risposta non valido"
 
+#. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
+#: R/loess.R:0
+msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
+msgstr ""
+
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
 msgid "iterTrace = %s not obeyed as iterations = %d"
@@ -4473,8 +4484,7 @@ msgstr ""
 msgid "layout: widths = %s, heights = %s; lmat="
 msgstr ""
 
-#. R/dendrogram.R: gettextf("leaf %s", dQuote(at$label), domain = "R-stats")
-#. R/dendrogram.R: gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats")
+#. R/dendrogram.R: gettextf("leaf %s", if (is.character(at$label)) dQuote(at$label) else format(object,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "leaf %s"
 msgstr ""
@@ -5667,6 +5677,11 @@ msgstr "risposta non ammessa in formula"
 #. R/smspline.R: stop("result of 'smooth.spline(keep.data = TRUE)' is needed")
 #: R/smspline.R:0
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
+msgstr ""
+
+#. R/loess.R: gettext("robustness weights:", domain = "R-stats")
+#: R/loess.R:0
+msgid "robustness weights:"
 msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")

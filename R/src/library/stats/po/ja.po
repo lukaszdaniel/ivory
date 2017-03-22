@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -64,7 +64,7 @@ msgstr " arima0 では 100 個のパラメータまでしか変換出来ませ�
 msgid "maximum supported lag is 350"
 msgstr " サポートされているラグの最大値は350です "
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr ""
@@ -122,42 +122,44 @@ msgstr " 'x' が空です "
 msgid "the standard deviation is zero"
 msgstr " 標準偏差が0です "
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr " 単項のマイナスの検査に不正な形式があります "
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr " 関数 '%s' は導関数の表中にありません "
 
-#: deriv.c:634
+#: deriv.c:781
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr " 'm' はリストでなければなりません "
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr " 変数は文字列でなければいけません "
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr " 最初の要素だけが変数名として使われました "
 
-#: deriv.c:652
+#: deriv.c:799
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr " \"%s\" 中の式が不正です "
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr " 変数名が不正です "
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr " タグが不正です "
 

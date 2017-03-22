@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-02-07 06:38\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -668,6 +668,26 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
+#. R/install.R: stop("C++11 standard requested but CXX1X is not defined")
+#: R/install.R:0
+msgid "C++11 standard requested but CXX1X is not defined"
+msgstr ""
+
+#. R/install.R: stop("C++14 standard requested but CXX1Y is not defined")
+#: R/install.R:0
+msgid "C++14 standard requested but CXX1Y is not defined"
+msgstr ""
+
+#. R/install.R: stop("C++17 standard requested but CXX1Z is not defined")
+#: R/install.R:0
+msgid "C++17 standard requested but CXX1Z is not defined"
+msgstr ""
+
+#. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
+#: R/install.R:0
+msgid "C++98 standard requested but CXX98 is not defined"
+msgstr ""
+
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
 #: R/QC.R:0
 msgid "CRAN repository db conflicts: %s"
@@ -718,6 +738,11 @@ msgstr "다음의 섹션 제목으로부터 버전정보를 추출할 수 없습
 msgid ""
 "Cannot process chunk/lines:\n"
 "%s"
+msgstr ""
+
+#. R/QC.R: gettext("  Canonical CRAN.R-project.org URLs use https.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Canonical CRAN.R-project.org URLs use https."
 msgstr ""
 
 #. R/news.R: gettext("Category")
@@ -1900,11 +1925,10 @@ msgstr "라이센스 파일 포인터가 올바르지 않습니다: %s"
 msgid "Invalid package name."
 msgstr "패키지가 잘못되었습니다"
 
-#. R/check.R: gettext("It is good practice to use registered native symbols and to disable symbol search.\n",     domain = "R-tools")
+#. R/check.R: gettext("It is good practice to register native routines and to disable symbol search.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"It is good practice to use registered native symbols and to disable symbol "
-"search."
+"It is good practice to register native routines and to disable symbol search."
 msgstr ""
 
 #. R/check.R: gettext("It is recommended not to interfere with package subdirectories used by R.\n",     domain = "R-tools")
@@ -2871,6 +2895,11 @@ msgstr "로딩에 실패했습니다"
 msgid "R shared object builder:"
 msgstr ""
 
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+#: R/QC.R:0
+msgid "R-tools"
+msgstr ""
+
 #. R/check.R: gettext("Rd conversion errors:", domain = "R-tools")
 #: R/check.R:0
 msgid "Rd conversion errors:"
@@ -3404,6 +3433,20 @@ msgstr ""
 msgid "The build time stamp is missing."
 msgstr "파일 'DESCRIPTION'이 없습니다."
 
+#. R/QC.R: gettext("  The canonical URL of the CRAN page for a package is: https://CRAN.R-project.org/package=pkgname",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The canonical URL of the CRAN page for a package is: https://CRAN.R-project."
+"org/package=pkgname"
+msgstr ""
+
+#. R/QC.R: gettext("  The canonical URL of the CRAN page for a task view is: https://CRAN.R-project.org/view=viewname",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The canonical URL of the CRAN page for a task view is: https://CRAN.R-"
+"project.org/view=viewname"
+msgstr ""
+
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
 msgid "The default JSS style may not be modified."
@@ -3489,6 +3532,11 @@ msgid ""
 "The following files should probably not be installed:\n"
 "%s"
 msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
+
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+#: R/QC.R:0
+msgid "The maintainer field is invalid or specifies more than one person"
+msgstr ""
 
 #. R/QC.R: gettext("The maintainer field lacks a name", domain = "R-tools")
 #: R/QC.R:0
@@ -5223,18 +5271,18 @@ msgstr "패키지 레이아웃이 잘못되었습니다."
 msgid "invalid value for '%s' : %s"
 msgstr "'%s'에 대한 값이 잘못되었습니다 : %s"
 
+#. R/makeLazyLoad.R: gettextf("invalid value for '%s': should be FALSE, TRUE, 2 or 3", "compress")
+#: R/makeLazyLoad.R:0
+#, fuzzy
+msgid "invalid value for '%s': should be FALSE, TRUE, 2 or 3"
+msgstr ""
+"'compress'의 값이 잘못되었습니다.  가질 수 있는 값들은 FALSE, TRUE, 2 또는 3 "
+"입니다"
+
 #. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s", "\"qpdf\"")
 #: R/build.R:0
 msgid "invalid value for '--compact-vignettes', assuming %s"
 msgstr "'--compact-vignettes'의 값이 잘못되었고, %s로 가정합니다"
-
-#. R/makeLazyLoad.R: stop("invalid value for 'compress': should be FALSE, TRUE, 2 or 3")
-#: R/makeLazyLoad.R:0
-#, fuzzy
-msgid "invalid value for 'compress': should be FALSE, TRUE, 2 or 3"
-msgstr ""
-"'compress'의 값이 잘못되었습니다.  가질 수 있는 값들은 FALSE, TRUE, 2 또는 3 "
-"입니다"
 
 #. R/admin.R: stop("loading package failed", call. = FALSE)
 #: R/admin.R:0
@@ -5772,10 +5820,17 @@ msgstr "패키지 %s에 특정 테스트들을 실행중입니다"
 msgid "running tests demos from base and stats"
 msgstr ""
 
-#. R/testing.R: message("running tests of Internet functions - expect some differences", domain = "R-tools")
+#. R/testing.R: message("running tests of CRAN tools", domain = "R-tools")
 #: R/testing.R:0
-msgid "running tests of Internet functions - expect some differences"
-msgstr ""
+#, fuzzy
+msgid "running tests of CRAN tools"
+msgstr "패키지 %s에 특정 테스트들을 실행중입니다"
+
+#. R/testing.R: message("running tests of Internet functions", domain = "R-tools")
+#: R/testing.R:0
+#, fuzzy
+msgid "running tests of Internet functions"
+msgstr "패키지 %s에 특정 테스트들을 실행중입니다"
 
 #. R/testing.R: message("running tests of consistency of as/is.*", domain = "R-tools")
 #: R/testing.R:0
@@ -5948,6 +6003,16 @@ msgstr ""
 msgid ""
 "this package has a non-empty 'configure.win' file,\n"
 "so building only the main architecture"
+msgstr ""
+
+#. R/sotools.R: warning("this requires 'nm' to be on the PATH")
+#: R/sotools.R:0
+msgid "this requires 'nm' to be on the PATH"
+msgstr ""
+
+#. R/sotools.R: warning("this requires 'objdump.exe' to be on the PATH")
+#: R/sotools.R:0
+msgid "this requires 'objdump.exe' to be on the PATH"
 msgstr ""
 
 #. R/xgettext.R: gettext("too few entries")

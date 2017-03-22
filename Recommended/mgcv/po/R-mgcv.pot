@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-16\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"Project-Id-Version: mgcv 1.8-17\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1488,6 +1488,13 @@ msgstr ""
 #. R/smooth.r: stop("Please put term with most levels last in 're' to avoid spoiling supplied penalties")
 
 msgid "Please put term with most levels last in 're' to avoid spoiling supplied penalties"
+msgstr ""
+
+
+#: R/fast-REML.r: 0
+#. R/fast-REML.r: warning("Possible divergence detected in fast.REML.fit", call. = FALSE, immediate. = TRUE)
+
+msgid "Possible divergence detected in fast.REML.fit"
 msgstr ""
 
 
@@ -3422,6 +3429,13 @@ msgid "unimplemented sparse constraint type requested"
 msgstr ""
 
 
+#: R/smooth.r: 0
+#. R/smooth.r: warning("uniquecombs has not worked properly")
+
+msgid "uniquecombs has not worked properly"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: stop("unknown optimizer")
 
@@ -3539,6 +3553,13 @@ msgstr ""
 #. R/soap.r: stop("x and y must be same length")
 
 msgid "x and y must be same length"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: stop("x is null")
+
+msgid "x is null"
 msgstr ""
 
 

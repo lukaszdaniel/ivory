@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-125\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-08-04 22:47\n"
+"POT-Creation-Date: 2017-03-14 22:25\n"
 "PO-Revision-Date: 2016-03-03 20:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -420,6 +420,11 @@ msgstr ""
 msgid "'value' must be a square matrix"
 msgstr "'value' musi być kwadratową macierzą"
 
+#. R/zzMethods.R: stop("AIC undefined for REML fit")
+#: R/zzMethods.R:0
+msgid "AIC undefined for REML fit"
+msgstr ""
+
 #. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #. R/lme.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #: R/gls.R:0 R/lme.R:0
@@ -821,6 +826,14 @@ msgstr "Funkcja celu:"
 #: R/nlme.R:0
 msgid "PNLS step: RSS = %s"
 msgstr "krok PNLS: RSS = %s"
+
+#. R/zzMethods.R: gettextf("Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R.",     dQuote(pkgname), built.R.ver, getRversion(), domain = "R-nlme")
+#: R/zzMethods.R:0
+msgid ""
+"Package %s installed with old R version %s should not be used with R version "
+"%s\n"
+"  Rather re-install it with this version of R."
+msgstr ""
 
 #. R/corStruct.R: gettext(" Parameter estimates:", domain = "R-nlme")
 #. R/corStruct.R: gettext(" Parameter estimates:", domain = "R-nlme")
@@ -1453,6 +1466,11 @@ msgstr "dane w wywołaniu %s muszą wyliczać się do ramki danych"
 msgid "degrees of freedom and weights must have the same length"
 msgstr "stopnie swobody oraz wagi muszą mieć tę samą długość"
 
+#. R/zzMethods.R: warning("deviance undefined for REML fit")
+#: R/zzMethods.R:0
+msgid "deviance undefined for REML fit"
+msgstr ""
+
 #. R/pdMat.R: stop("dimnames of 'value' must match or be NULL")
 #: R/pdMat.R:0
 msgid "dimnames of 'value' must match or be NULL"
@@ -1938,6 +1956,13 @@ msgstr "nieistniejące nazwy grup dla początkowych wartości w funkcji %s"
 #: R/lmList.R:0
 msgid "nonexistent groups requested in 'subset' argument"
 msgstr "zażądano nieistniejących grup w argumencie 'subset'"
+
+#. R/zzMethods.R: stop("not (yet) implemented.  Contributions are welcome; use intervals() instead (for now)")
+#: R/zzMethods.R:0
+msgid ""
+"not (yet) implemented.  Contributions are welcome; use intervals() instead "
+"(for now)"
+msgstr ""
 
 #. R/nlme.R: gettextf("number of columns in starting values for random component at level %s should be %d",     namGrp[i], rlength[i])
 #: R/nlme.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.4.0\n"
-"POT-Creation-Date: 2017-02-07 06:37\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1523,6 +1523,13 @@ msgid "Enter values for restart arguments:"
 msgstr ""
 
 
+#: R/library.R: 0
+#. R/library.R: gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+
+msgid "Error in %s:"
+msgstr ""
+
+
 #: R/New-Internal.R: 0
 #: R/conditions.R: 0
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1534,8 +1541,12 @@ msgstr ""
 
 #: R/New-Internal.R: 0
 #: R/conditions.R: 0
+#: R/library.R: 0
+#: R/library.R: 0
 #. R/New-Internal.R: gettext("Error: ")
 #. R/conditions.R: gettext("Error:", domain = "R-base")
+#. R/library.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error:", domain = "R-base")
 
 msgid "Error:"
 msgstr ""
@@ -1920,9 +1931,9 @@ msgstr ""
 
 
 #: R/library.R: 0
-#. R/library.R: gettextf("Package %s version %s cannot be unloaded: %s", sQuote(package), oldversion,     conditionMessage(e))
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 
-msgid "Package %s version %s cannot be unloaded: %s"
+msgid "Package %s version %s cannot be unloaded:\n %s"
 msgstr ""
 
 
@@ -2818,13 +2829,6 @@ msgstr ""
 #. R/strwrap.R: gettextf("incorrect value for '%s' argument", "x")
 
 msgid "incorrect value for '%s' argument"
-msgstr ""
-
-
-#: R/strwrap.R: 0
-#. R/strwrap.R: stop("incorrect values of 'indent' and 'width' arguments")
-
-msgid "incorrect values of 'indent' and 'width' arguments"
 msgstr ""
 
 
@@ -3805,9 +3809,16 @@ msgstr ""
 
 
 #: R/library.R: 0
-#. R/library.R: gettextf("package or namespace load failed for %s: %s", sQuote(package), conditionMessage(e))
+#. R/library.R: gettextf("package or namespace load failed for %s in %s:\n %s", sQuote(package),     paste(deparse(cc)[1L], collapse = "", sep = ""), conditionMessage(e), domain = "R-base")
 
-msgid "package or namespace load failed for %s: %s"
+msgid "package or namespace load failed for %s in %s:\n %s"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e),     domain = "R-base")
+
+msgid "package or namespace load failed for %s:\n %s"
 msgstr ""
 
 

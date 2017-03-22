@@ -1,7 +1,7 @@
 #  File src/library/tools/R/makeLazyLoad.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -257,7 +257,7 @@ makeLazyLoading <-
              keep.source = getOption("keep.source.pkgs"))
 {
     if(!is.logical(compress) && ! compress %in% c(2,3))
-        stop("invalid value for 'compress': should be FALSE, TRUE, 2 or 3")
+	stop(gettextf("invalid value for '%s': should be FALSE, TRUE, 2 or 3", "compress"), domain = "R-tools")
     options(warn = 1L)
     findpack <- function(package, lib.loc) {
         pkgpath <- find.package(package, lib.loc, quiet = TRUE)

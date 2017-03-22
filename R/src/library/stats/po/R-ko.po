@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1169,6 +1169,12 @@ msgstr "'ts' 객체는 반드시 하나 또는 그 이상의 관찰값들을 가
 #, fuzzy
 msgid "'type = \"partial\"' is not yet implemented"
 msgstr "type에 \"partial\" 옵션은 아직 구현되지 않았습니다"
+
+#. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' argument must be 1 or 3 for ordered factors"
+msgstr "'xy.labels'는 반드시 논리값 또는 문자이어야 합니다"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0
@@ -3802,14 +3808,14 @@ msgstr "양수가 아닌 #{branches}가 사용된 덴드로그램 노드입니�
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr ""
 
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members at height %s"
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members total, at height %s"
-msgstr ""
-
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
-#: R/dendrogram.R:0
-msgid "dendrogram with %d branches and %d members, at height %s"
 msgstr ""
 
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
@@ -4405,6 +4411,11 @@ msgstr "유효하지 않은 파라미터 값입니다"
 msgid "invalid response type"
 msgstr "종속변수 타입이 유효하지 않습니다"
 
+#. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
+#: R/loess.R:0
+msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
+msgstr ""
+
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
 msgid "iterTrace = %s not obeyed as iterations = %d"
@@ -4420,8 +4431,7 @@ msgstr ""
 msgid "layout: widths = %s, heights = %s; lmat="
 msgstr ""
 
-#. R/dendrogram.R: gettextf("leaf %s", dQuote(at$label), domain = "R-stats")
-#. R/dendrogram.R: gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats")
+#. R/dendrogram.R: gettextf("leaf %s", if (is.character(at$label)) dQuote(at$label) else format(object,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "leaf %s"
 msgstr ""
@@ -5575,6 +5585,11 @@ msgstr "formula에서 허용되지 않은 response입니다"
 #, fuzzy
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
 msgstr "smooth.spline(keep.data = TRUE)의 결과가 필요합니다"
+
+#. R/loess.R: gettext("robustness weights:", domain = "R-stats")
+#: R/loess.R:0
+msgid "robustness weights:"
+msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0

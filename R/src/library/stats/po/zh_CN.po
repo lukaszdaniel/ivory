@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-03-20 22:35+0100\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -64,7 +64,7 @@ msgstr "arima0里只能转换100个参数"
 msgid "maximum supported lag is 350"
 msgstr "滞后不能大于350"
 
-#: bandwidths.c:120
+#: bandwidths.c:119
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr ""
@@ -122,42 +122,44 @@ msgstr "'x'是空的"
 msgid "the standard deviation is zero"
 msgstr "标准差为零"
 
-#: deriv.c:120
+#: deriv.c:152
 msgid "invalid form in unary minus check"
 msgstr "检查一进列减号时发现形式不对"
 
-#: deriv.c:380
-msgid "only single-argument calls are supported"
+#: deriv.c:436
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "微分表里没有这个函数'%s'"
 
-#: deriv.c:634
+#: deriv.c:781
 #, fuzzy, c-format
 msgid "'%s' argument must not be of type '%s'"
 msgstr "'m'的值必需是串列"
 
-#: deriv.c:637
+#: deriv.c:784
 msgid "variable must be a character string"
 msgstr "变数必需是字符串"
 
-#: deriv.c:639
+#: deriv.c:786
 msgid "only the first element is used as variable name"
 msgstr "只用了第一个元素作为变数名"
 
-#: deriv.c:652
+#: deriv.c:799
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'的表达式不对"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:1077 model.c:93
 msgid "invalid variable names"
 msgstr "变数名字不对"
 
-#: deriv.c:939
+#: deriv.c:1086
 msgid "invalid tag"
 msgstr "标签不对"
 

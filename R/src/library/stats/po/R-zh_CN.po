@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-01-25 23:59\n"
+"POT-Creation-Date: 2017-03-20 22:35\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1172,6 +1172,12 @@ msgstr "'ts'对象至少必需有一个或多个观察量"
 #, fuzzy
 msgid "'type = \"partial\"' is not yet implemented"
 msgstr "还没有实现type=\"partial\"的算法"
+
+#. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' argument must be 1 or 3 for ordered factors"
+msgstr "'xy.labels'必需是逻辑值或是字符"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0
@@ -3828,14 +3834,14 @@ msgstr "系統樹圖節點有非正#{分支}"
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr "系統樹圖里有非正#{分支}的非叶節點"
 
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members at height %s"
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members total, at height %s"
-msgstr ""
-
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
-#: R/dendrogram.R:0
-msgid "dendrogram with %d branches and %d members, at height %s"
 msgstr ""
 
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
@@ -4431,6 +4437,11 @@ msgstr "参数值不对"
 msgid "invalid response type"
 msgstr "反应种类不对"
 
+#. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
+#: R/loess.R:0
+msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
+msgstr ""
+
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
 msgid "iterTrace = %s not obeyed as iterations = %d"
@@ -4446,8 +4457,7 @@ msgstr ""
 msgid "layout: widths = %s, heights = %s; lmat="
 msgstr ""
 
-#. R/dendrogram.R: gettextf("leaf %s", dQuote(at$label), domain = "R-stats")
-#. R/dendrogram.R: gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats")
+#. R/dendrogram.R: gettextf("leaf %s", if (is.character(at$label)) dQuote(at$label) else format(object,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "leaf %s"
 msgstr ""
@@ -5602,6 +5612,11 @@ msgstr "公式里不能有反应"
 #, fuzzy
 msgid "result of 'smooth.spline(keep.data = TRUE)' is needed"
 msgstr "需要的是.spline(*, keep.data=TRUE) 的运算结果"
+
+#. R/loess.R: gettext("robustness weights:", domain = "R-stats")
+#: R/loess.R:0
+msgid "robustness weights:"
+msgstr ""
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0
