@@ -1609,7 +1609,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-203c203
+196c196
 < #endif /* ifdef R_DYNPRIV_H */
 ---
 > #endif /* R_DYNPRIV_H */
@@ -3878,10 +3878,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     stop(gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode")))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/library/base/R/outer.R R/src/library/base/R/outer.R
-40c40
-<         if(!missing(...)) stop('using ... with FUN = "*" is an error')
+41c41
+<             if(!missing(...)) stop('using ... with FUN = "*" is an error')
 ---
->         if(!missing(...)) stop("using '...' with 'FUN = \"*\"' option is an error")
+>             if(!missing(...)) stop("using '...' with 'FUN = \"*\"' option is an error")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/library/base/R/pmax.R R/src/library/base/R/pmax.R
 25c25
 <     if(length(elts) == 0L) stop("no arguments")
@@ -22836,36 +22836,36 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                 "or later for copying conditions.  There is NO warranty.",
 ---
 >                 "This is free software; see the GNU General Public License version 2 or later for copying conditions. There is NO warranty.",
-2021c1965
+2019c1963
 <         cat("make cmd is\n  ", cmd, "\n\nmake would use\n", sep = "")
 ---
 >         cat(gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools"))
-2254c2198
+2252c2196
 <     cat("  converting help for package ", sQuote(pkg), "\n", sep = "")
 ---
 >     cat(gettextf("  converting help for package %s", sQuote(pkg), domain = "R-tools"), "\n", sep = "")
-2259c2203
+2257c2201
 <         if (!silent) message("    finding HTML links ...", appendLF = FALSE, domain = NA)
 ---
 >         if (!silent) message("    finding HTML links ...", appendLF = FALSE, domain = "R-tools")
-2263c2207
+2261c2205
 <             message("\n    finding level-2 HTML links ...", appendLF = FALSE, domain = NA)
 ---
 >             message("\n    finding level-2 HTML links ...", appendLF = FALSE, domain = "R-tools")
-2265c2209
+2263c2207
 <             message(" done", domain = NA)
 ---
 >             message(" done", domain = "R-tools")
-2284c2228,2229
+2282c2226,2227
 <         message("", domain = NA) # force newline
 ---
 >         #message("", domain = "R-tools") # force newline
 > 	cat("\n")
-2286c2231
+2284c2229
 <         stop(conditionMessage(e), domain = NA, call. = FALSE)
 ---
 >         stop(conditionMessage(e), domain = "R-tools", call. = FALSE)
-2327,2328c2272
+2325,2326c2270
 <             ff <- file.path(outDir, dirname[type],
 <                             paste0(bf, ext[type]))
 ---
@@ -25401,11 +25401,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("cannot choose a ", label, " mirror non-interactively")
 ---
 >         stop(gettextf("cannot choose a %s mirror non-interactively", label))
-1066c1065
+1070c1069
 <         stop(gettextf("%s must be supplied", sQuote("available")), domain = NA)
 ---
 >         stop(gettextf("%s must be supplied", sQuote("available")), domain = "R-utils")
-1114c1113
+1118c1117
 <                     domain = NA)
 ---
 >                     domain = "R-utils")
@@ -26969,77 +26969,77 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    error(_("'allocArray': too many elements specified by 'dims'"));
 ---
 > 	    error(_("'allocArray()': too many elements specified by 'dims' argument"));
-526c526
+530c530
 < 	    error(_("'%s' must be a list or atomic vector"), "x");
 ---
 > 	    error(_("'%s' argument must be a list or atomic vector"), "x");
-570,571c570
+574,575c574
 < 	error(_("a matrix-like object is required as argument to '%s'"),
 < 	      (PRIMVAL(op) == 2) ? "col" : "row");
 ---
 > 	error(_("a matrix-like object is required as argument passed to '%s'"), (PRIMVAL(op) == 2) ? "col" : "row");
-1231c1230
+1235c1234
 < 	errorcall(call, _("requires numeric/complex matrix/vector arguments"));
 ---
 > 	errorcall(call, _("numeric/complex matrix/vector arguments are required"));
-1648c1647
+1652c1651
 <     error(_("argument is not a matrix"));
 ---
 >     error(_("'%s' argument is not a matrix"), "x");
-1725c1724
+1729c1728
 < 	else error(_("value out of range in 'perm'"));
 ---
 > 	else error(_("value is out of range in 'perm' argument"));
-1802c1801
+1806c1805
 < 	UNIMPLEMENTED_TYPE("aperm", a);
 ---
 > 	UNIMPLEMENTED_TYPE("aperm()", a);
-1807c1806
+1811c1810
 <     if (resize == NA_LOGICAL) error(_("'resize' must be TRUE or FALSE"));
 ---
 >     if (resize == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "resize");
-1877c1876
+1881c1880
 < 	error(_("'x' must be numeric"));
 ---
 > 	error(_("'%s' must be numeric"), "x");
-1880c1879
+1884c1883
 < 	error(_("'x' is too short")); /* PR#16367 */
 ---
 > 	error(_("'%s' argument is too short"), "x"); /* PR#16367 */
-2015c2014
+2019c2018
 < 	    stop("'dim' specifies too large an array")
 ---
 > 	    stop(_("'dim' specifies too large array"))
-2046,2047c2045
+2050,2051c2049
 < 	    error(_("'data' must be of a vector type, was '%s'"),
 < 		type2char(TYPEOF(vals)));
 ---
 > 	    error(_("'%s' argument must be of a vector type, was '%s'"), "data", type2char(TYPEOF(vals)));
-2054c2052
+2058c2056
 <     if (nd == 0) error(_("'dims' cannot be of length 0"));
 ---
 >     if (nd == 0) error(_("'%s' argument cannot be of length 0"), "dims");
-2150c2148
+2154c2152
 < 	error(_("invalid 'nrow' value (too large or NA)"));
 ---
 > 	error(_("invalid '%s' value (too large or NA)"), "nrow");
-2152c2150
+2156c2154
 < 	error(_("invalid 'nrow' value (< 0)"));
 ---
 > 	error(_("invalid '%s' value (< 0)"), "nrow");
-2155c2153
+2159c2157
 < 	error(_("invalid 'ncol' value (too large or NA)"));
 ---
 > 	error(_("invalid '%s' value (too large or NA)"), "ncol");
-2157c2155
+2161c2159
 < 	error(_("invalid 'ncol' value (< 0)"));
 ---
 > 	error(_("invalid '%s' value (< 0)"), "ncol");
-2160c2158
+2164c2162
 < 	error(_("'x' must have positive length"));
 ---
 > 	error(_("'%s' must have positive length"), "x");
-2261,2262c2259
+2265,2266c2263
 < 	    error(_("singular matrix in 'backsolve'. First zero in diagonal [%d]"),
 < 		  i + 1);
 ---
@@ -33464,44 +33464,44 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1157c1158
+1158c1159
 < 	R_Suicide("couldn't allocate memory for symbol table");
 ---
 > 	R_Suicide(_("couldn't allocate memory for symbol table"));
-1279c1280
+1280c1281
 < 	    error(_("class name too long in '%s'"), className);
 ---
 > 	    error(_("class name is too long in '%s'"), className);
-1284c1285
+1285c1286
 < 	error(_("class name too long in '%s'"), className);
 ---
 > 	error(_("class name is too long in '%s'"), className);
-1289c1290
+1290c1291
 < 	    error(_("class name too long in '%s'"), className);
 ---
 > 	    error(_("class name is too long in '%s'"), className);
-1294c1295
+1295c1296
 < 	error(_("class name too long in '%s'"), className);
 ---
 > 	error(_("class name is too long in '%s'"), className);
-1313c1314
+1314c1315
 < 	errorcall(call, _("invalid .Internal() argument"));
 ---
 > 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
-1316c1317
+1317c1318
 < 	errorcall(call, _("invalid .Internal() argument"));
 ---
 > 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
-1318c1319
+1319c1320
 < 	errorcall(call, _("there is no .Internal function '%s'"),
 ---
 > 	errorcall(call, _("there is no '.Internal' function '%s'"),
-1339,1340c1340
+1340,1341c1341
 < 	    errorcall(call,
 < 		      ".Internal(%s()) not called from a base namespace\n", fn);
 ---
 > 	    errorcall(call, _("'.Internal(%s())' not called from a base namespace\n"), fn);
-1347,1348c1347
+1348,1349c1348
 < 	    errorcall(call,
 < 		      ".Internal(%s()) called from namespace '%s'\n", fn, ns);
 ---
@@ -33719,397 +33719,397 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/platform.c R/src/main/platform.c
 40a41
 > #include <Localization.h>
-183c184
+184c185
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-243c244
+244c245
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-306c307
+307c308
 < 	error(_("invalid filename specification"));
 ---
 > 	error(_("invalid '%s' specification"), "filename");
-318c319
+319c320
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-324c325
+325c326
 < 	    error(_("invalid filename specification"));
 ---
 > 	    error(_("invalid '%s' specification"), "filename");
-463,464c464
+464,465c465
 < 	    warning(_("cannot create file '%s', reason '%s'"),
 < 		    translateChar(STRING_ELT(fn, i)), strerror(errno));
 ---
 > 	    warning(_("cannot create file '%s', reason '%s'"), translateChar(STRING_ELT(fn, i)), strerror(errno));
-484c484
+485c485
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-490,491c490
+491,492c491
 < 		warning(_("cannot remove file '%s', reason '%s'"),
 < 			translateChar(STRING_ELT(f, i)), strerror(errno));
 ---
 > 		warning(_("cannot remove file '%s', reason '%s'"), translateChar(STRING_ELT(f, i)), strerror(errno));
-509c508
+510c509
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-558c557
+559c558
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-573c572
+574c573
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-579c578
+580c579
 < 	    	error(_("'%s' path too long"), "from");
 ---
 > 	    	error(_("'%s' path is too long"), "from");
-588,589c587
+589,590c588
 < 		warning(_("cannot symlink '%ls' to '%ls', reason '%s'"),
 < 			from, to, formatError(GetLastError()));
 ---
 > 		warning(_("cannot symlink '%ls' to '%ls', reason '%s'"), from, to, formatError(GetLastError()));
-608,609c606
+609,610c607
 < 		warning(_("cannot symlink '%s' to '%s', reason '%s'"),
 < 			from, to, strerror(errno));
 ---
 > 		warning(_("cannot symlink '%s' to '%s', reason '%s'"), from, to, strerror(errno));
-650c647
+651c648
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-654c651
+655c652
 < 	    	error(_("'%s' path too long"), "from");
 ---
 > 	    	error(_("'%s' path is too long"), "from");
-659,660c656
+660,661c657
 < 		warning(_("cannot link '%ls' to '%ls', reason '%s'"),
 < 			from, to, formatError(GetLastError()));
 ---
 > 		warning(_("cannot link '%ls' to '%ls', reason '%s'"), from, to, formatError(GetLastError()));
-679,680c675
+680,681c676
 < 		warning(_("cannot link '%s' to '%s', reason '%s'"),
 < 			from, to, strerror(errno));
 ---
 > 		warning(_("cannot link '%s' to '%s', reason '%s'"), from, to, strerror(errno));
-693c688
+694c689
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-702c697
+703c698
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-720c715
+721c716
 < 	error(_("'from' and 'to' are of different lengths"));
 ---
 > 	error(_("'from' and 'to' arguments are of different lengths"));
-728c723
+729c724
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-731c726
+732c727
 < 	    error(_("expanded 'from' name too long"));
 ---
 > 	    error(_("expanded '%s' name is too long"), "from");
-735c730
+736c731
 < 	    error(_("expanded 'to' name too long"));
 ---
 > 	    error(_("expanded '%s' name is too long"), "to");
-741c736
+742c737
 < 	    error(_("expanded 'from' name too long"));
 ---
 > 	    error(_("expanded '%s' name is too long"), "from");
-745c740
+746c741
 < 	    error(_("expanded 'to' name too long"));
 ---
 > 	    error(_("expanded '%s' name is too long"), "to");
-749,750c744
+750,751c745
 < 	    warning(_("cannot rename file '%s' to '%s', reason '%s'"),
 < 		    from, to, strerror(errno));
 ---
 > 	    warning(_("cannot rename file '%s' to '%s', reason '%s'"), from, to, strerror(errno));
-766c760
+767c761
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-794c788
+795c789
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-804c798
+805c799
 < 	error(_("invalid filename argument"));
 ---
 > 	error(_("invalid '%s' argument"), "filename");
-812c806
+813c807
 < #elif defined(Win32)
 ---
 > #elif defined(_WIN32)
-841c835
+842c836
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-847c841
+848c842
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-863c857
+864c858
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-953c947
+954c948
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-993c987
+994c988
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1010c1004
+1011c1005
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1019c1013
+1020c1014
 < 	error(_("invalid filename argument"));
 ---
 > 	error(_("invalid '%s' argument"), "filename");
-1023c1017
+1024c1018
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1039c1033
+1040c1034
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1076c1070
+1077c1071
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1116c1110
+1117c1111
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1143c1137
+1144c1138
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1252c1246
+1253c1247
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1329c1323
+1330c1324
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1349c1343
+1350c1344
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1368c1362
+1369c1363
 < #ifndef Win32
 ---
 > #ifndef _WIN32
-1376c1370
+1377c1371
 < 	error(_("file choice cancelled"));
 ---
 > 	error(_("file choice was cancelled"));
-1378c1372
+1379c1373
 < 	error(_("file name too long"));
 ---
 > 	error(_("file name is too long"));
-1388c1382
+1389c1383
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1413c1407
+1414c1408
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1424c1418
+1425c1419
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1440,1441c1434
+1441,1442c1435
 < 	warning("cannot get info on '%ls', reason '%s'",
 < 		name, formatError(GetLastError()));
 ---
 > 	warning(_("cannot get info on '%ls', reason '%s'"), name, formatError(GetLastError()));
-1455,1456c1448
+1456,1457c1449
 < 	warning("cannot open reparse point '%ls', reason '%s'",
 < 		name, formatError(GetLastError()));
 ---
 > 	warning(_("cannot open reparse point '%ls', reason '%s'"), name, formatError(GetLastError()));
-1467,1468c1459
+1468,1469c1460
 < 	warning("cannot delete reparse point '%ls', reason '%s'",
 < 		name, formatError(GetLastError()));
 ---
 > 	warning(_("cannot delete reparse point '%ls', reason '%s'"), name, formatError(GetLastError()));
-1599c1590
+1600c1591
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1780c1771
+1781c1772
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-1809,1810c1800
+1810,1811c1801
 < 	warning(_("OS reports request to set locale to \"%s\" cannot be honored"),
 < 		CHAR(STRING_ELT(locale, 0)));
 ---
 > 	warning(_("OS reports request to set locale to \"%s\" cannot be honored"), CHAR(STRING_ELT(locale, 0)));
-2033c2023
+2034c2024
 < #if defined(Win32)
 ---
 > #if defined(_WIN32)
-2069c2059
+2070c2060
 < #elif defined(Win32)
 ---
 > #elif defined(_WIN32)
-2118c2108
+2119c2109
 < #ifndef Win32
 ---
 > #ifndef _WIN32
-2171c2161
+2172c2162
 < 	warning(_("'%s' already exists"), dir);
 ---
 > 	warning(_("directory '%s' already exists"), dir);
-2174,2175c2164
+2175,2176c2165
 < 	warning(_("cannot create dir '%s', reason '%s'"), dir,
 < 		strerror(serrno));
 ---
 > 	warning(_("cannot create directory '%s', reason '%s'"), dir, strerror(serrno));
-2197c2186
+2198c2187
 <     	error(_("'%s' too long"), "path");
 ---
 >     	error(_("'%s' is too long"), "path");
-2224c2213
+2225c2214
 < 	    warning(_("'%ls' already exists"), dir);
 ---
 > 	    warning(_("directory '%ls' already exists"), dir);
-2226c2215
+2227c2216
 <             warning(_("cannot create dir '%ls', reason '%s'"), dir,
 ---
 >             warning(_("cannot create directory '%ls', reason '%s'"), dir,
-2232c2221
+2233c2222
 < 	warning(_("cannot create dir '%ls', reason '%s'"), dir,
 ---
 > 	warning(_("cannot create directory '%ls', reason '%s'"), dir,
-2241c2230
+2242c2231
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2274c2263
+2275c2264
 < 	warning(_("over-long path"));
 ---
 > 	warning(_("path is too long"));
-2287c2276
+2288c2277
 < 	    warning(_("over-long path"));
 ---
 > 	    warning(_("path is too long"));
-2294c2283
+2295c2284
 < 	    warning(_("problem creating directory %ls: %s"),
 ---
 > 	    warning(_("problem with creating directory %ls: %s"),
-2305c2294
+2306c2295
 < 		    warning(_("over-long path"));
 ---
 > 		    warning(_("path is too long"));
-2314c2303
+2315c2304
 < 	    warning(_("problem reading dir %ls: %s"), this, strerror(errno));
 ---
 > 	    warning(_("problem with reading directory %ls: %s"), this, strerror(errno));
-2325c2314
+2326c2315
 < 	    warning(_("over-long path length"));
 ---
 > 	    warning(_("path is too long"));
-2333c2322
+2334c2323
 < 		warning(_("problem copying %ls to %ls: %s"),
 ---
 > 		warning(_("problem with copying %ls to %ls: %s"),
-2395c2384
+2396c2385
 < 	    error(_("'%s' path too long"), "to");
 ---
 > 	    error(_("'%s' path is too long"), "to");
-2404c2393
+2405c2394
 < 	    	    error(_("'%s' path too long"), "from");
 ---
 > 	    	    error(_("'%s' path is too long"), "from");
-2505c2494
+2506c2495
 < 	warning(_("over-long path length"));
 ---
 > 	warning(_("path is too long"));
-2518c2507
+2519c2508
 < 	    warning(_("over-long path length"));
 ---
 > 	    warning(_("path is too long"));
-2527,2528c2516
+2528,2529c2517
 < 	    warning(_("problem creating directory %s: %s"),
 < 		    this, strerror(errno));
 ---
 > 	    warning(_("problem with creating directory %s: %s"), this, strerror(errno));
-2538c2526
+2539c2527
 < 		    warning(_("over-long path length"));
 ---
 > 		    warning(_("path is too long"));
-2547,2548c2535
+2548,2549c2536
 < 	    warning(_("problem reading directory %s: %s"),
 < 		    this, strerror(errno));
 ---
 > 	    warning(_("problem with reading directory %s: %s"), this, strerror(errno));
-2560c2547
+2561c2548
 < 	    warning(_("over-long path length"));
 ---
 > 	    warning(_("path is too long"));
-2569c2556
+2570c2557
 < 		warning(_("problem copying %s to %s: %s"),
 ---
 > 		warning(_("problem with copying %s to %s: %s"),
-2666c2653
+2667c2654
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2681c2668
+2682c2669
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2707c2694
+2708c2695
 <     if(!m && n) error(_("'mode' must be of length at least one"));
 ---
 >     if(!m && n) error(_("'mode' argument must be of length at least one"));
-2721c2708
+2722c2709
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2728c2715
+2729c2716
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2748c2735
+2749c2736
 <     warning("insufficient OS support on this platform");
 ---
 >     warning(_("insufficient OS support on this platform"));
-2837c2824
+2838c2825
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2876c2863
+2877c2864
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2900c2887
+2901c2888
 < #ifdef Win32
 ---
 > #ifdef _WIN32
-2932c2919
+2933c2920
 < 	warning("cannot open reparse point '%ls', reason '%s'",
 ---
 > 	warning(_("cannot open reparse point '%ls', reason '%s'"),
-2953c2940
+2954c2941
 < 	warning("cannot set reparse point '%ls', reason '%s'",
 ---
 > 	warning(_("cannot set reparse point '%ls', reason '%s'"),
@@ -38011,236 +38011,236 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/modules/lapack/Lapack.c R/src/modules/lapack/Lapack.c
 26a27
 > #include <Localization.h>
-82c83
+100c101
 < 	error("'jobu' must be a character string");
 ---
 > 	error(_("'%s' argument must be a character string"), "jobu");
-97c98
+115c116
 <     if (TYPEOF(dims) != INTSXP) error("non-integer dim(u)");
 ---
 >     if (TYPEOF(dims) != INTSXP) error(_("non-integer dim(u)"));
-100c101
+118c119
 <     if (TYPEOF(dims) != INTSXP) error("non-integer dim(vt)");
 ---
 >     if (TYPEOF(dims) != INTSXP) error(_("non-integer dim(vt)"));
-113c114
+131c132
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd()");
-120c121
+138c139
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd()");
-179c180
+197c198
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dsyevr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dsyevr()");
-190c191
+208c209
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dsyevr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dsyevr()");
-272c273
+290c291
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev()");
-278c279
+296c297
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev()");
-322c323
+340c341
 <     if (!isMatrix(A)) error(_("'A' must be a numeric matrix"));
 ---
 >     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
-324c325
+342c343
 < 	error(_("'type' must be a character string"));
 ---
 > 	error(_("'%s' argument must be a character string"), "type");
-352c353
+370c371
 <     if (!isMatrix(A)) error(_("'A' must be a numeric matrix"));
 ---
 >     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
-354c355
+372c373
 < 	error(_("'norm' must be a character string"));
 ---
 > 	error(_("'%s' argument must be a character string"), "norm");
-374c375
+392c393
 < 	    error(_("error [%d] from Lapack 'dgetrf()'"), info);
 ---
 > 	    error(_("error code %d from Lapack routine '%s'"), info, "dgetrf()");
-391c392
+409c410
 <     if (info) error(_("error [%d] from Lapack 'dgecon()'"), info);
 ---
 >     if (info) error(_("error code %d from Lapack routine '%s'"), info, "dgecon()");
-401,402c402,403
+419,420c420,421
 <     if (!isMatrix(A)) error(_("'A' must be a numeric matrix"));
 <     if (!isString(norm)) error(_("'norm' must be a character string"));
 ---
 >     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
 >     if (!isString(norm)) error(_("'%s' argument must be a character string"), "norm");
-411c412
+429c430
 < 	error(_("'A' must be a *square* matrix"));
 ---
 > 	error(_("'%s' must be a square matrix"), "A");
-425c426
+443c444
 <     if (info) error(_("error [%d] from Lapack 'dtrcon()'"), info);
 ---
 >     if (info) error(_("error code %d from Lapack routine '%s'"), info, "dtrcon()");
-438c439
+456c457
 <     if (!isString(norm)) error(_("'norm' must be a character string"));
 ---
 >     if (!isString(norm)) error(_("'%s' argument must be a character string"), "norm");
-440c441
+458c459
 < 	error(_("'A' must be a complex matrix"));
 ---
 > 	error(_("'%s' must be a complex matrix"), "A");
-443c444
+461c462
 <     if(n != dims[1]) error(_("'A' must be a *square* matrix"));
 ---
 >     if(n != dims[1]) error(_("'%s' must be a square matrix"), "A");
-469c470
+487c488
 < 	error(_("error [%d] from Lapack 'zgetrf()'"), info);
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgetrf()");
-477c478
+495c496
 <     if (info) error(_("error [%d] from Lapack 'zgecon()'"), info);
 ---
 >     if (info) error(_("error code %d from Lapack routine '%s'"), info, "zgecon()");
-495c496
+513c514
 < 	error(_("'norm' must be a character string"));
 ---
 > 	error(_("'%s' argument must be a character string"), "norm");
-497c498
+515c516
 < 	error(_("'A' must be a complex matrix"));
 ---
 > 	error(_("'%s' must be a complex matrix"), "A");
-501c502
+519c520
 < 	error(_("'A' must be a *square* matrix"));
 ---
 > 	error(_("'%s' must be a square matrix"), "A");
-513c514
+531c532
 <     if (info) error(_("error [%d] from Lapack 'ztrcon()'"), info);
 ---
 >     if (info) error(_("error code %d from Lapack routine '%s'"), info, "ztrcon()");
-529c530
+547c548
 <     if (!isMatrix(A)) error(_("'a' must be a complex matrix"));
 ---
 >     if (!isMatrix(A)) error(_("'%s' must be a complex matrix"), "A");
-532c533
+550c551
 <     if(n == 0) error(_("'a' is 0-diml"));
 ---
 >     if(n == 0) error(_("matrix 'A' is zero dimensional"));
-534c535
+552c553
 <     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
 ---
 >     if(n2 != n) error(_("'A' (%d x %d) must be a square matrix"), n, n2);
-543c544
+561c562
 < 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 ---
 > 	    error(_("'B' (%d x %d) must be compatible with 'A' (%d x %d)"),
-557c558
+575c576
 < 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 ---
 > 	    error(_("'B' (%d x %d) must be compatible with 'A' (%d x %d)"),
-578,579c579
+596,597c597
 < 	error(_("argument %d of Lapack routine %s had invalid value"),
 < 	      -info, "zgesv");
 ---
 > 	error(_("argument %d of Lapack routine '%s' had invalid value"), -info, "zgesv()");
-599c599
+617c617
 < 	error(_("'a' must be a complex matrix"));
 ---
 > 	error(_("'%s' must be a complex matrix"), "A");
-614c614
+632c632
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3()");
-620c620
+638c638
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3()");
-659c659
+677c677
 <     if (!isMatrix(Bin)) error(_("'b' must be a complex matrix"));
 ---
 >     if (!isMatrix(Bin)) error(_("'%s' must be a complex matrix"), "b");
-674c674
+692c692
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr()");
-681c681
+699c699
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr()");
-685c685
+703c703
 < 	error(_("error code %d from Lapack routine '%s'"), info, "ztrtrs");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "ztrtrs()");
-704c704
+722c722
 < 	error(_("'b' must be a complex matrix"));
 ---
 > 	error(_("'%s' must be a complex matrix"), "b");
-720c720
+738c738
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr()");
-727c727
+745c745
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr()");
-740c740
+758c758
 < 	error(_("'jobu' must be a character string"));
 ---
 > 	error(_("'%s' argument must be a character string"), "jobu");
-767c767
+785c785
 <     if (TYPEOF(dims) != INTSXP) error("non-integer dims");
 ---
 >     if (TYPEOF(dims) != INTSXP) error(_("non-integer dimensions"));
-770c770
+788c788
 <     if (TYPEOF(dims) != INTSXP) error("non-integer dims");
 ---
 >     if (TYPEOF(dims) != INTSXP) error(_("non-integer dimensions"));
-776c776
+794c794
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd()");
-783c783
+801c801
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd()");
-831c831
+849c849
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zheev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zheev()");
-837c837
+855c855
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zheev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zheev()");
-891c891
+909c909
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev()");
-897c897
+915c915
 < 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev()");
-923c923
+941c941
 <     if (!isMatrix(A)) error(_("'a' must be a numeric matrix"));
 ---
 >     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
-927c927
+945c945
 <     if (TYPEOF(adims) != INTSXP) error("non-integer dims");
 ---
 >     if (TYPEOF(adims) != INTSXP) error(_("non-integer dimensions"));
-930,931c930,931
+948,949c948,949
 <     if (m != n) error(_("'a' must be a square matrix"));
 <     if (m <= 0) error(_("'a' must have dims > 0"));
 ---
 >     if (m != n) error(_("'%s' must be a square matrix"), "A");
 >     if (m <= 0) error(_("'A' matrix must have dimensions > 0"));
-937c937
+955c955
 <     if (piv != 0 && piv != 1) error("invalid '%s' value", "pivot");
 ---
 >     if (piv != 0 && piv != 1) error(_("invalid '%s' value"), "pivot");
-943,946c943,944
+961,964c961,962
 < 		error(_("the leading minor of order %d is not positive definite"),
 < 		      info);
 < 	    error(_("argument %d of Lapack routine %s had invalid value"),
@@ -38248,24 +38248,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		error(_("the leading minor of order %d is not positive definite"), info);
 > 	    error(_("argument %d of Lapack routine '%s' had invalid value"), -info, "dpotrf()");
-959,960c957
+977,978c975
 < 		error(_("argument %d of Lapack routine %s had invalid value"),
 < 		      -info, "dpstrf");
 ---
 > 		error(_("argument %d of Lapack routine '%s' had invalid value"), -info, "dpstrf()");
-985c982
+1003c1000
 < 	error(_("'size' argument must be a positive integer"));
 ---
 > 	error(_("'%s' argument must be a positive integer"), "size");
-995c992
+1013c1010
 < 	    if (TYPEOF(adims) != INTSXP) error("non-integer dims");
 ---
 > 	    if (TYPEOF(adims) != INTSXP) error(_("non-integer dimensions"));
-998c995
+1016c1013
 < 	} else error(_("'a' must be a numeric matrix"));
 ---
 > 	} else error(_("'%s' must be a numeric matrix"), "A");
-1013,1016c1010,1011
+1031,1034c1028,1029
 < 		error(_("element (%d, %d) is zero, so the inverse cannot be computed"),
 < 		      info, info);
 < 	    error(_("argument %d of Lapack routine %s had invalid value"),
@@ -38273,98 +38273,98 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		error(_("element (%d, %d) is zero, so the inverse cannot be computed"), info, info);
 > 	    error(_("argument %d of Lapack routine '%s' had invalid value"), -info, "dpotri()");
-1037c1032
+1055c1050
 < 	error(_("'a' must be a numeric matrix"));
 ---
 > 	error(_("'%s' must be a numeric matrix"), "A");
-1040c1035
+1058c1053
 <     if(n == 0) error(_("'a' is 0-diml"));
 ---
 >     if(n == 0) error(_("matrix 'A' is zero dimensional"));
-1042c1037
+1060c1055
 <     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
 ---
 >     if(n2 != n) error(_("'A' (%d x %d) must be a square matrix"), n, n2);
-1051,1052c1046
+1069,1070c1064
 < 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 < 		  p2, p, n, n);
 ---
 > 	    error(_("'B' (%d x %d) must be compatible with 'A' (%d x %d)"), p2, p, n, n);
-1067,1068c1061
+1085,1086c1079
 < 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 < 		  length(Bin), p, n, n);
 ---
 > 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"), length(Bin), p, n, n);
-1089,1090c1082
+1107,1108c1100
 < 	error(_("argument %d of Lapack routine %s had invalid value"),
 < 	      -info, "dgesv");
 ---
 > 	error(_("argument %d of Lapack routine '%s' had invalid value"), -info, "dgesv()");
-1092,1093c1084
+1110,1111c1102
 < 	error(_("Lapack routine %s: system is exactly singular: U[%d,%d] = 0"),
 < 	      "dgesv", info, info);
 ---
 > 	error(_("Lapack routine %s: system is exactly singular: U[%d,%d] = 0"), "dgesv()", info, info);
-1100,1101c1091
+1118,1119c1109
 < 	    error(_("system is computationally singular: reciprocal condition number = %g"),
 < 		  rcond);
 ---
 > 	    error(_("system is computationally singular: reciprocal condition number = %g"), rcond);
-1112c1102
+1130c1120
 <     if (!isMatrix(Ain)) error(_("'a' must be a numeric matrix"));
 ---
 >     if (!isMatrix(Ain)) error(_("'%s' must be a numeric matrix"), "A");
-1132c1122
+1150c1140
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3()");
-1138c1128
+1156c1146
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3()");
-1172c1162
+1190c1180
 <     if (!isMatrix(Bin)) error(_("'b' must be a numeric matrix"));
 ---
 >     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
-1186c1176
+1204c1194
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr()");
-1193c1183
+1211c1201
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr()");
-1197c1187
+1215c1205
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dtrtrs");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dtrtrs()");
-1210c1200
+1228c1218
 <     if (!isMatrix(Bin)) error(_("'b' must be a numeric matrix"));
 ---
 >     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
-1225c1215
+1243c1233
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr()");
-1232c1222
+1250c1240
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr()");
-1243,1244c1233,1234
+1261,1262c1251,1252
 <     if (!isMatrix(Ain)) error(_("'a' must be a numeric matrix"));
 <     if (useLog == NA_LOGICAL) error(_("argument 'logarithm' must be logical"));
 ---
 >     if (!isMatrix(Ain)) error(_("'%s' must be a numeric matrix"), "A");
 >     if (useLog == NA_LOGICAL) error(_("'%s' argument must be logical"), "logarithm");
-1248c1238
+1266c1256
 <     if (Adims[1] != n) error(_("'a' must be a square matrix"));
 ---
 >     if (Adims[1] != n) error(_("'%s' must be a square matrix"), "A");
-1252c1242
+1270c1260
 < 	error(_("error code %d from Lapack routine '%s'"), info, "dgetrf");
 ---
 > 	error(_("error code %d from Lapack routine '%s'"), info, "dgetrf()");
-1254c1244
+1272c1262
 < 	/*warning("Lapack dgetrf(): singular matrix: U[%d,%d]=0", info,info);*/
 ---
 > 	/*warning(_("Lapack dgetrf(): singular matrix: U[%d,%d]=0"), info,info);*/
@@ -39322,6 +39322,7 @@ Only in R/tests: no-segfault.R
 Only in R/tests: no-segfault.Rout
 Only in R/tests: ok-errors.Rout
 Only in R/tests: p-qbeta-strict-tst.Rout
+Only in R/tests: p-r-random-tests.Rout
 Only in R/tests: parallel.Rcheck
 Only in R/tests: primitives.Rout
 Only in R/tests: print-tests.Rout

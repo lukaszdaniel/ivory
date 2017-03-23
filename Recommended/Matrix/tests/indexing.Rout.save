@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-02-10 r935) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-03-22 r945) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-02-10 r72157) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-03-22 r72384) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -39,7 +39,7 @@ doExtras: FALSE
 + } else if(FALSE) { ## MM @ testing *manually* only
 +     options(error = recover, Matrix.verbose = TRUE, warn = 1)
 + } else {
-+     options(Matrix.verbose = TRUE, warn = 1)
++     options(                 Matrix.verbose = TRUE, warn = 1)
 + }
 > 
 > 
@@ -134,7 +134,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical(a.m, array(v, dim=dim(mn), dimnames=dimnames(mn)))
 + 	  )
 > showProc.time()
-Time elapsed:  0.209 0.013 0.224 
+Time elapsed:  0.592 0 0.591 
 > 
 > ## Bug found thanks to Timothy Mak, Feb 3, 2017:
 > ## sparseMatrix logical indexing with (partial) NA:
@@ -144,10 +144,10 @@ Time elapsed:  0.209 0.013 0.224
 > assert.EQ(as.matrix(mn[,iN4]), a.m[,iN4]) # (incl. dimnames)
 > ##assert.EQ(as.matrix(ms[,iN4]), a.m[,iN4]) # ms[, <with_NA>]  fails still :
 > try(ms[,iN4])
-Error in intI(j, n = x@Dim[2], dn[[2]], give.dn = FALSE) : 
+Error in command 'intI(j, n = x@Dim[2], dn[[2]], give.dn = FALSE)': 
   'NA' indices are not (yet?) supported for sparse Matrices
 > try(ms[,iN4] <- 100) ## <- segfaulted in Matrix <= 1.2-8  (!)
-Error in intI(i, n = di[margin], dn = dn[[margin]], give.dn = FALSE) : 
+Error in command 'intI(i, n = di[margin], dn = dn[[margin]], give.dn = FALSE)': 
   'NA' indices are not (yet?) supported for sparse Matrices
 > 
 > ## R-forge Matrix bug #2556: Subsetting a sparse matrix did remove  names(dimnames(.)) :
@@ -233,7 +233,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical3(m[!sel],  m[!ssel], as.matrix(m)[as.matrix(!ssel)])
 + 	  )
 > showProc.time()
-Time elapsed:  0.16 0 0.162 
+Time elapsed:  0.208 0 0.207 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -569,7 +569,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time elapsed:  0.684 0.004 0.688 
+Time elapsed:  0.956 0.02 0.98 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -727,7 +727,7 @@ Time elapsed:  0.684 0.004 0.688
 +     assert.EQ.mat(T[i,i], ss[i,i])
 + }
 > showProc.time()
-Time elapsed:  0.256 0 0.257 
+Time elapsed:  0.312 0 0.314 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -937,7 +937,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  all(sm[,-(1:3)] == 0)
 + 	  )
 > showProc.time()
-Time elapsed:  0.192 0 0.19 
+Time elapsed:  0.26 0.004 0.261 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -994,7 +994,7 @@ Time elapsed:  0.192 0 0.19
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.> showProc.time()
-Time elapsed:  0.168 0 0.168 
+Time elapsed:  0.18 0.004 0.185 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -1172,7 +1172,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 > stopifnot(is(T, "dtCMatrix"), identical(T[,3], c(10,10,10,0,0)),
 + 	  Qidentical(as(Z, "matrix"), z))
 > showProc.time()
-Time elapsed:  0.468 0 0.469 
+Time elapsed:  0.648 0.008 0.656 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -1381,7 +1381,7 @@ Warning in command '`[<-`(`*tmp*`, i, value = 1:7)':
 > ## mixing of negative and positive must give error
 > assertError(mT[-1:1,])
 > showProc.time()
-Time elapsed:  0.152 0 0.15 
+Time elapsed:  0.212 0 0.213 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -1489,7 +1489,7 @@ r5   .   2  4   .  6  .  .
 r2  2
 r4  .
 > showProc.time()
-Time elapsed:  0.232 0 0.233 
+Time elapsed:  0.372 0 0.37 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -1710,7 +1710,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time elapsed:  0.54 0 0.539 
+Time elapsed:  0.548 0.004 0.552 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -1853,7 +1853,7 @@ r5  TRUE TRUE FALSE TRUE TRUE TRUE TRUE
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time elapsed:  0.504 0.012 0.519 
+Time elapsed:  0.488 0.004 0.495 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -1997,11 +1997,11 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 > 
 > 
 > showProc.time()
-Time elapsed:  0.576 0.012 0.586 
+Time elapsed:  0.656 0.028 0.682 
 > 
 > if(!interactive()) warnings()
 NULL
 > 
 > proc.time()
    user  system elapsed 
-  5.304   0.048   5.352 
+  6.464   0.092   6.554 
