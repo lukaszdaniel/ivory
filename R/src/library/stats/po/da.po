@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 22:35+0100\n"
+"POT-Creation-Date: 2017-03-27 22:34+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1132,7 +1132,7 @@ msgstr "ugyldig argumenttype"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:357
+#: sbart.c:355
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

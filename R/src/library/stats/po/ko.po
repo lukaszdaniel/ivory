@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 22:35+0100\n"
+"POT-Creation-Date: 2017-03-27 22:34+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1143,7 +1143,7 @@ msgstr "두번째의 인수 'size'가 잘못되었습니다"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:357
+#: sbart.c:355
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

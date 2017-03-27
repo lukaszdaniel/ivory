@@ -484,14 +484,6 @@ static double complex csinh(double complex z)
 }
 #endif
 
-#ifndef HAVE_CTANH
-#define ctanh R_ctanh
-static double complex ctanh(double complex z)
-{
-    return -I * ctan(z * I); /* A&S 4.5.9 */
-}
-#endif
-
 static double complex z_tan(double complex z)
 {
     double y = cimag(z);
@@ -507,6 +499,15 @@ static double complex z_tan(double complex z)
     }
     return r;
 }
+
+#ifndef HAVE_CTANH
+#define ctanh R_ctanh
+static double complex ctanh(double complex z)
+{
+    return -I * z_tan(z * I); /* A&S 4.5.9 */
+}
+#endif
+
 
 /* Don't rely on the OS at the branch cuts */
 

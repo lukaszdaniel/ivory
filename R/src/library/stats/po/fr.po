@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 22:35+0100\n"
+"POT-Creation-Date: 2017-03-27 22:34+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1153,7 +1153,7 @@ msgstr "second argument 'size' incorrect"
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr ""
 
-#: sbart.c:357
+#: sbart.c:355
 #, c-format
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-20 22:35+0100\n"
+"POT-Creation-Date: 2017-03-27 22:34+0200\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -600,9 +600,9 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:773 src/main/agrep.c:778
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:93 src/main/array.c:1726 src/main/array.c:1865
-#: src/main/array.c:1867 src/main/array.c:1868 src/main/array.c:2246
-#: src/main/array.c:2248 src/main/array.c:2250 src/main/attrib.c:194
+#: src/main/array.c:93 src/main/array.c:1730 src/main/array.c:1869
+#: src/main/array.c:1871 src/main/array.c:1872 src/main/array.c:2250
+#: src/main/array.c:2252 src/main/array.c:2254 src/main/attrib.c:194
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:570
 #: src/main/builtin.c:586 src/main/builtin.c:772 src/main/builtin.c:774
@@ -665,30 +665,30 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/main/grep.c:2583 src/main/grep.c:2912 src/main/grep.c:2917
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3869 src/main/names.c:1314 src/main/names.c:1317
+#: src/main/memory.c:3869 src/main/names.c:1315 src/main/names.c:1318
 #: src/main/objects.c:1632 src/main/objects.c:1634 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
-#: src/main/paste.c:619 src/main/paste.c:624 src/main/platform.c:309
-#: src/main/platform.c:311 src/main/platform.c:313 src/main/platform.c:329
-#: src/main/platform.c:340 src/main/platform.c:393 src/main/platform.c:395
-#: src/main/platform.c:710 src/main/platform.c:712 src/main/platform.c:798
-#: src/main/platform.c:801 src/main/platform.c:1013 src/main/platform.c:1172
-#: src/main/platform.c:1178 src/main/platform.c:1181 src/main/platform.c:1184
-#: src/main/platform.c:1187 src/main/platform.c:1190 src/main/platform.c:1193
-#: src/main/platform.c:1196 src/main/platform.c:1293 src/main/platform.c:1296
-#: src/main/platform.c:1299 src/main/platform.c:1337 src/main/platform.c:1395
-#: src/main/platform.c:1398 src/main/platform.c:1604 src/main/platform.c:1607
-#: src/main/platform.c:1610 src/main/platform.c:1646 src/main/platform.c:1649
-#: src/main/platform.c:1652 src/main/platform.c:1688 src/main/platform.c:1721
-#: src/main/platform.c:1723 src/main/platform.c:1794 src/main/platform.c:1878
-#: src/main/platform.c:2119 src/main/platform.c:2178 src/main/platform.c:2366
-#: src/main/platform.c:2369 src/main/platform.c:2372 src/main/platform.c:2375
-#: src/main/platform.c:2378 src/main/platform.c:2381 src/main/platform.c:2596
-#: src/main/platform.c:2599 src/main/platform.c:2602 src/main/platform.c:2605
-#: src/main/platform.c:2608 src/main/platform.c:2611 src/main/platform.c:2689
-#: src/main/platform.c:2697 src/main/platform.c:2733 src/main/platform.c:2783
+#: src/main/paste.c:619 src/main/paste.c:624 src/main/platform.c:310
+#: src/main/platform.c:312 src/main/platform.c:314 src/main/platform.c:330
+#: src/main/platform.c:341 src/main/platform.c:394 src/main/platform.c:396
+#: src/main/platform.c:711 src/main/platform.c:713 src/main/platform.c:799
+#: src/main/platform.c:802 src/main/platform.c:1014 src/main/platform.c:1173
+#: src/main/platform.c:1179 src/main/platform.c:1182 src/main/platform.c:1185
+#: src/main/platform.c:1188 src/main/platform.c:1191 src/main/platform.c:1194
+#: src/main/platform.c:1197 src/main/platform.c:1294 src/main/platform.c:1297
+#: src/main/platform.c:1300 src/main/platform.c:1338 src/main/platform.c:1396
+#: src/main/platform.c:1399 src/main/platform.c:1605 src/main/platform.c:1608
+#: src/main/platform.c:1611 src/main/platform.c:1647 src/main/platform.c:1650
+#: src/main/platform.c:1653 src/main/platform.c:1689 src/main/platform.c:1722
+#: src/main/platform.c:1724 src/main/platform.c:1795 src/main/platform.c:1879
+#: src/main/platform.c:2120 src/main/platform.c:2179 src/main/platform.c:2367
+#: src/main/platform.c:2370 src/main/platform.c:2373 src/main/platform.c:2376
+#: src/main/platform.c:2379 src/main/platform.c:2382 src/main/platform.c:2597
+#: src/main/platform.c:2600 src/main/platform.c:2603 src/main/platform.c:2606
+#: src/main/platform.c:2609 src/main/platform.c:2612 src/main/platform.c:2690
+#: src/main/platform.c:2698 src/main/platform.c:2734 src/main/platform.c:2784
 #: src/main/print.c:234 src/main/print.c:240 src/main/print.c:262
 #: src/main/print.c:268 src/main/print.c:275 src/main/random.c:464
 #: src/main/random.c:468 src/main/random.c:475 src/main/random.c:503
@@ -719,9 +719,9 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/modules/internet/libcurl.c:309 src/modules/internet/libcurl.c:473
 #: src/modules/internet/libcurl.c:477 src/modules/internet/libcurl.c:482
 #: src/modules/internet/libcurl.c:485 src/modules/internet/libcurl.c:489
-#: src/modules/lapack/Lapack.c:153 src/modules/lapack/Lapack.c:259
-#: src/modules/lapack/Lapack.c:706 src/modules/lapack/Lapack.c:815
-#: src/modules/lapack/Lapack.c:877 src/modules/lapack/Lapack.c:1202
+#: src/modules/lapack/Lapack.c:171 src/modules/lapack/Lapack.c:277
+#: src/modules/lapack/Lapack.c:724 src/modules/lapack/Lapack.c:833
+#: src/modules/lapack/Lapack.c:895 src/modules/lapack/Lapack.c:1220
 #: src/modules/X11/devX11.c:3246 src/modules/X11/devX11.c:3249
 #: src/modules/X11/devX11.c:3252 src/modules/X11/devX11.c:3276
 #: src/unix/sys-std.c:1308 src/unix/sys-std.c:1331
@@ -756,10 +756,10 @@ msgstr "il primo argomento deve essere una vettore character"
 #: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1077
 #: src/main/errors.c:1079 src/main/objects.c:420 src/main/objects.c:1191
 #: src/main/options.c:372 src/main/raw.c:155 src/main/Renviron.c:311
-#: src/main/unique.c:1646 src/modules/lapack/Lapack.c:83
-#: src/modules/lapack/Lapack.c:325 src/modules/lapack/Lapack.c:355
-#: src/modules/lapack/Lapack.c:403 src/modules/lapack/Lapack.c:439
-#: src/modules/lapack/Lapack.c:496 src/modules/lapack/Lapack.c:740
+#: src/main/unique.c:1646 src/modules/lapack/Lapack.c:101
+#: src/modules/lapack/Lapack.c:343 src/modules/lapack/Lapack.c:373
+#: src/modules/lapack/Lapack.c:421 src/modules/lapack/Lapack.c:457
+#: src/modules/lapack/Lapack.c:514 src/modules/lapack/Lapack.c:758
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'msg1' deve essere una stringa di tipo character"
@@ -793,7 +793,7 @@ msgstr "dispositivo errato"
 msgid "invalid input in '%s' function"
 msgstr "input non valido per Rmbstowcs"
 
-#: src/gnuwin32/extra.c:825 src/main/platform.c:1370
+#: src/gnuwin32/extra.c:825 src/main/platform.c:1371
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "scelta del file annullata"
@@ -1148,21 +1148,21 @@ msgstr "stringa di input %d non valida in questo locale"
 msgid "'%s' argument must be a vector"
 msgstr "il primo argomento deve essere un vettore"
 
-#: src/main/apply.c:101 src/main/array.c:509 src/main/character.c:846
+#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:846
 #: src/main/character.c:1656 src/main/connections.c:3579 src/main/context.c:673
 #: src/main/context.c:692 src/main/datetime.c:680 src/main/datetime.c:782
 #: src/main/datetime.c:1050 src/main/dotcode.c:220 src/main/errors.c:975
 #: src/main/errors.c:1007 src/main/errors.c:1113 src/main/errors.c:1138
 #: src/main/errors.c:1143 src/main/errors.c:1421 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
-#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3151
+#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3128
 #: src/main/seq.c:259 src/main/seq.c:266 src/main/seq.c:270 src/main/seq.c:367
 #: src/main/seq.c:374 src/main/seq.c:377 src/main/seq.c:379 src/main/seq.c:418
 #: src/main/seq.c:422 src/main/seq.c:426 src/main/sort.c:1245
 #: src/main/sort.c:1328 src/main/sort.c:1332 src/main/sort.c:1339
 #: src/main/source.c:223 src/main/summary.c:957 src/main/sysutils.c:250
 #: src/main/util.c:1067 src/main/util.c:1072 src/main/util.c:1079
-#: src/main/util.c:1082 src/main/util.c:2060 src/modules/lapack/Lapack.c:937
+#: src/main/util.c:1082 src/main/util.c:2060 src/modules/lapack/Lapack.c:955
 #: src/modules/X11/devX11.c:3148 src/modules/X11/devX11.c:3174
 #: src/modules/X11/devX11.c:3179 src/modules/X11/devX11.c:3184
 #: src/modules/X11/devX11.c:3194 src/modules/X11/devX11.c:3199
@@ -1171,7 +1171,7 @@ msgstr "il primo argomento deve essere un vettore"
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
-#: src/main/apply.c:104 src/main/complex.c:720
+#: src/main/apply.c:104 src/main/complex.c:721
 msgid "invalid length"
 msgstr "lunghezza non valida"
 
@@ -1274,7 +1274,7 @@ msgid_plural "unimplemented real function of %d numeric arguments"
 msgstr[0] "funzione reale di %d argomenti numerici non implementata"
 msgstr[1] "funzione reale di %d argomenti numerici non implementata"
 
-#: src/main/arithmetic.c:1211 src/main/complex.c:605 src/main/complex.c:675
+#: src/main/arithmetic.c:1211 src/main/complex.c:606 src/main/complex.c:676
 msgid "unimplemented complex function"
 msgstr "funzione complessa non implementata"
 
@@ -1307,7 +1307,7 @@ msgstr "secondo argomento di lunghezza 0 non valido"
 msgid "bad arithmetic function index"
 msgstr "funzione sbagliata"
 
-#: src/main/array.c:86 src/main/array.c:2045
+#: src/main/array.c:86 src/main/array.c:2049
 #, fuzzy, c-format
 msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr "'path' deve essere un vettore di tipo character"
@@ -1316,14 +1316,14 @@ msgstr "'path' deve essere un vettore di tipo character"
 msgid "non-numeric matrix extent"
 msgstr "limite matrice non numerico"
 
-#: src/main/array.c:103 src/main/array.c:111 src/main/array.c:2148
-#: src/main/array.c:2153
+#: src/main/array.c:103 src/main/array.c:111 src/main/array.c:2152
+#: src/main/array.c:2157
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "matrix: valore di 'nrow' non ammissibile (troppo grande o NA)"
 
-#: src/main/array.c:105 src/main/array.c:113 src/main/array.c:2150
-#: src/main/array.c:2155
+#: src/main/array.c:105 src/main/array.c:113 src/main/array.c:2154
+#: src/main/array.c:2159
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "matrix:valore 'nrow' non valido (< 0)"
@@ -1362,7 +1362,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "la lunghezza dei dati supera la dimensione della matrice"
 
-#: src/main/array.c:153 src/main/array.c:2056 src/main/array.c:2162
+#: src/main/array.c:153 src/main/array.c:2060 src/main/array.c:2166
 #, fuzzy
 msgid "too many elements specified"
 msgstr "matrix: troppi elementi specificati"
@@ -1392,54 +1392,54 @@ msgstr "allocMatrix: troppi elementi specificati"
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray: troppi elementi specificati in 'dims'"
 
-#: src/main/array.c:526
+#: src/main/array.c:530
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or atomic vector"
 msgstr "il primo argomento deve essere un vettore"
 
-#: src/main/array.c:570
+#: src/main/array.c:574
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr "'row/col' richiedono come argomento un oggetto matrix"
 
-#: src/main/array.c:1230
+#: src/main/array.c:1234
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "richiesti argomenti numerici per matrix/vector"
 
-#: src/main/array.c:1340 src/main/array.c:1344 src/main/array.c:1348
+#: src/main/array.c:1344 src/main/array.c:1348 src/main/array.c:1352
 msgid "non-conformable arguments"
 msgstr "gli argomenti non sono compatibili"
 
-#: src/main/array.c:1647
+#: src/main/array.c:1651
 #, fuzzy, c-format
 msgid "'%s' argument is not a matrix"
 msgstr "l'argomento non è di tipo matrix"
 
-#: src/main/array.c:1682
+#: src/main/array.c:1686
 msgid "invalid first argument, must be an array"
 msgstr "primo argomento non valido, deve essere di tipo array"
 
-#: src/main/array.c:1696
+#: src/main/array.c:1700
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' ha una lunghezza non ammissibile"
 
-#: src/main/array.c:1701 src/main/array.c:1704
+#: src/main/array.c:1705 src/main/array.c:1708
 msgid "'a' does not have named dimnames"
 msgstr ""
 
-#: src/main/array.c:1711
+#: src/main/array.c:1715
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr ""
 
-#: src/main/array.c:1724
+#: src/main/array.c:1728
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr "valore fuori limite in 'perm'"
 
-#: src/main/array.c:1806 src/main/connections.c:5528
+#: src/main/array.c:1810 src/main/connections.c:5528
 #: src/main/connections.c:5531 src/main/debug.c:112 src/main/objects.c:1059
 #: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
 #: src/main/sort.c:1249 src/main/unique.c:680 src/main/unique.c:1455
@@ -1448,27 +1448,27 @@ msgstr "valore fuori limite in 'perm'"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'decreasing' deve essere TRUE o FALSE"
 
-#: src/main/array.c:1876
+#: src/main/array.c:1880
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' deve essere di tipo numeric"
 
-#: src/main/array.c:1879
+#: src/main/array.c:1883
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "argomento 'file' troppo lungo"
 
-#: src/main/array.c:2052
+#: src/main/array.c:2056
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' deve essere di lunghezza 1"
 
-#: src/main/array.c:2158
+#: src/main/array.c:2162
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "l'argomento deve avere lunghezza positiva"
 
-#: src/main/array.c:2259
+#: src/main/array.c:2263
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1757,8 +1757,8 @@ msgstr "argomento formale 'recursive' ripetuto"
 msgid "'%s' argument is not a list"
 msgstr "l'argomento non è di tipo list"
 
-#: src/main/bind.c:1043 src/main/names.c:1280 src/main/names.c:1285
-#: src/main/names.c:1290 src/main/names.c:1295
+#: src/main/bind.c:1043 src/main/names.c:1281 src/main/names.c:1286
+#: src/main/names.c:1291 src/main/names.c:1296
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "nome class troppo lungo in '%s'"
@@ -1873,8 +1873,8 @@ msgstr "non posso rompere i legami nell'environment base"
 msgid "cannot write to this connection"
 msgstr "non posso scrivere su questa connessione"
 
-#: src/main/builtin.c:562 src/main/builtin.c:592 src/main/platform.c:307
-#: src/main/platform.c:325 src/main/print.c:141 src/main/print.c:246
+#: src/main/builtin.c:562 src/main/builtin.c:592 src/main/platform.c:308
+#: src/main/platform.c:326 src/main/print.c:141 src/main/print.c:246
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "specificazione di '%s' non valida"
@@ -2293,16 +2293,16 @@ msgstr "operazione tra numeri complessi non implementata"
 msgid "non-numeric argument passed to function"
 msgstr "argomento non numerico alla funzione"
 
-#: src/main/complex.c:608 src/main/complex.c:701
+#: src/main/complex.c:609 src/main/complex.c:702
 #, fuzzy, c-format
 msgid "NaN values produced in '%s' function"
 msgstr "non trovo la funzione \"%s\""
 
-#: src/main/complex.c:789
+#: src/main/complex.c:790
 msgid "invalid polynomial coefficient"
 msgstr "coefficiente polinomiale non valido"
 
-#: src/main/complex.c:794
+#: src/main/complex.c:795
 msgid "root finding code failed"
 msgstr "codice di ricerca della radice fallito"
 
@@ -4648,7 +4648,7 @@ msgstr "argomento 'sequence' non valido nel ciclo 'for'"
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:6332 src/main/names.c:1319
+#: src/main/eval.c:6332 src/main/names.c:1320
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "nessuna funzione interna \"%s\""
@@ -4760,7 +4760,7 @@ msgid "'%s' argument must be non-empty character string"
 msgstr "'title' deve essere una stringa di tipo character"
 
 #: src/main/eval.c:7387 src/main/saveload.c:1943 src/main/saveload.c:2238
-#: src/main/serialize.c:2196 src/modules/lapack/Lapack.c:1234
+#: src/main/serialize.c:2196 src/modules/lapack/Lapack.c:1252
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'ascii' deve essere di tipo logico"
@@ -5913,34 +5913,34 @@ msgstr "non è possibile allocare memoria per 'read.dcf'"
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1023
+#: src/main/names.c:1024
 msgid "string argument required"
 msgstr "necessario argomento stringa"
 
-#: src/main/names.c:1026
+#: src/main/names.c:1027
 msgid "no such primitive function"
 msgstr "funzione primitiva non esistente"
 
-#: src/main/names.c:1158
+#: src/main/names.c:1159
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "non è possibile allocare memoria per 'read.dcf'"
 
-#: src/main/names.c:1216 src/main/names.c:1249
+#: src/main/names.c:1217 src/main/names.c:1250
 msgid "attempt to use zero-length variable name"
 msgstr "tentativo di utilizzo di un nome variabile di lunghezza zero"
 
-#: src/main/names.c:1218 src/main/names.c:1251
+#: src/main/names.c:1219 src/main/names.c:1252
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr ""
 
-#: src/main/names.c:1340
+#: src/main/names.c:1341
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "impossibile rimuovere variabili dal namespace base"
 
-#: src/main/names.c:1347
+#: src/main/names.c:1348
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "impossibile rimuovere variabili dal namespace base"
@@ -6257,225 +6257,225 @@ msgstr "modalità ( x ) impossbile"
 msgid "atomic vector arguments only"
 msgstr "solo argomenti vettoriali"
 
-#: src/main/platform.c:378 src/main/platform.c:423
+#: src/main/platform.c:379 src/main/platform.c:424
 msgid "write error during file append"
 msgstr "errore di scrittura durante file append"
 
-#: src/main/platform.c:398
+#: src/main/platform.c:399
 msgid "nothing to append to"
 msgstr "niente da accodare"
 
-#: src/main/platform.c:452
+#: src/main/platform.c:453
 msgid "invalid filename argument"
 msgstr "argomento 'filename' non valido"
 
-#: src/main/platform.c:464
+#: src/main/platform.c:465
 #, fuzzy, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:478 src/main/platform.c:547 src/main/platform.c:631
+#: src/main/platform.c:479 src/main/platform.c:548 src/main/platform.c:632
 msgid "invalid first filename"
 msgstr "il nome del primo file non è valido"
 
-#: src/main/platform.c:490
+#: src/main/platform.c:491
 #, fuzzy, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:549 src/main/platform.c:633
+#: src/main/platform.c:550 src/main/platform.c:634
 msgid "invalid second filename"
 msgstr "il nome del secondo file non è valido"
 
-#: src/main/platform.c:552 src/main/platform.c:636
+#: src/main/platform.c:553 src/main/platform.c:637
 msgid "nothing to link"
 msgstr "niente da collegare"
 
-#: src/main/platform.c:562
+#: src/main/platform.c:563
 #, fuzzy
 msgid "symbolic links are not supported on this version of Windows"
 msgstr "symlink non supportati su questa piattaforma"
 
-#: src/main/platform.c:578 src/main/platform.c:651 src/main/platform.c:2384
-#: src/main/platform.c:2393
+#: src/main/platform.c:579 src/main/platform.c:652 src/main/platform.c:2385
+#: src/main/platform.c:2394
 #, fuzzy, c-format
 msgid "'%s' path is too long"
 msgstr "percorso troppo lungo"
 
-#: src/main/platform.c:587
+#: src/main/platform.c:588
 #, fuzzy, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:606
+#: src/main/platform.c:607
 #, fuzzy, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:613
+#: src/main/platform.c:614
 #, fuzzy
 msgid "symbolic links are not supported on this platform"
 msgstr "symlink non supportati su questa piattaforma"
 
-#: src/main/platform.c:656
+#: src/main/platform.c:657
 #, fuzzy, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:675
+#: src/main/platform.c:676
 #, fuzzy, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:683
+#: src/main/platform.c:684
 #, fuzzy
 msgid "(hard) links are not supported on this platform"
 msgstr "symlink non supportati su questa piattaforma"
 
-#: src/main/platform.c:715
+#: src/main/platform.c:716
 #, fuzzy
 msgid "'from' and 'to' arguments are of different lengths"
 msgstr "'which' deve essere di lunghezza 1"
 
-#: src/main/platform.c:726 src/main/platform.c:730 src/main/platform.c:736
-#: src/main/platform.c:740
+#: src/main/platform.c:727 src/main/platform.c:731 src/main/platform.c:737
+#: src/main/platform.c:741
 #, fuzzy, c-format
 msgid "expanded '%s' name is too long"
 msgstr "nome sorgente esteso troppo lungo"
 
-#: src/main/platform.c:744
+#: src/main/platform.c:745
 #, fuzzy, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:1202
+#: src/main/platform.c:1203
 msgid "invalid 'pattern' regular expression"
 msgstr "espressione regolare 'pattern' non valida"
 
-#: src/main/platform.c:1319
+#: src/main/platform.c:1320
 msgid "unable to determine R home location"
 msgstr "impossibile determinare posizione R home"
 
-#: src/main/platform.c:1372 src/unix/Rscript.c:223
+#: src/main/platform.c:1373 src/unix/Rscript.c:223
 #, fuzzy
 msgid "file name is too long"
 msgstr "nome del file troppo lungo"
 
-#: src/main/platform.c:1434
+#: src/main/platform.c:1435
 #, fuzzy, c-format
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:1448 src/main/platform.c:2919
+#: src/main/platform.c:1449 src/main/platform.c:2920
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/main/platform.c:1459
+#: src/main/platform.c:1460
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:1617 src/main/platform.c:1664 src/main/sysutils.c:1811
+#: src/main/platform.c:1618 src/main/platform.c:1665 src/main/sysutils.c:1811
 #: src/main/sysutils.c:1825
 msgid "internal out-of-memory condition"
 msgstr ""
 
-#: src/main/platform.c:1660 src/main/sysutils.c:1821
+#: src/main/platform.c:1661 src/main/sysutils.c:1821
 #, fuzzy, c-format
 msgid "read error on '%s'"
 msgstr "errore di lettura"
 
-#: src/main/platform.c:1759
+#: src/main/platform.c:1760
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr "l'impostazione 'LC_NUMERIC' può causare uno strano funzionamento di R"
 
-#: src/main/platform.c:1773
+#: src/main/platform.c:1774
 msgid "LC_MESSAGES exists on Windows but is not operational"
 msgstr ""
 
-#: src/main/platform.c:1800
+#: src/main/platform.c:1801
 #, fuzzy, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr "Il sistema operativo segnala che la richiesta non può essere esaudita"
 
-#: src/main/platform.c:2161
+#: src/main/platform.c:2162
 #, fuzzy, c-format
 msgid "directory '%s' already exists"
 msgstr "'%s' già esistente"
 
-#: src/main/platform.c:2164
+#: src/main/platform.c:2165
 #, fuzzy, c-format
 msgid "cannot create directory '%s', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:2186
+#: src/main/platform.c:2187
 #, fuzzy, c-format
 msgid "'%s' is too long"
 msgstr "nome DLL '%s' troppo lungo"
 
-#: src/main/platform.c:2213
+#: src/main/platform.c:2214
 #, fuzzy, c-format
 msgid "directory '%ls' already exists"
 msgstr "'%s' già esistente"
 
-#: src/main/platform.c:2215 src/main/platform.c:2221
+#: src/main/platform.c:2216 src/main/platform.c:2222
 #, fuzzy, c-format
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/main/platform.c:2255 src/main/platform.c:2478
+#: src/main/platform.c:2256 src/main/platform.c:2479
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.c:2263 src/main/platform.c:2276 src/main/platform.c:2294
-#: src/main/platform.c:2314 src/main/platform.c:2494 src/main/platform.c:2507
-#: src/main/platform.c:2526 src/main/platform.c:2547
+#: src/main/platform.c:2264 src/main/platform.c:2277 src/main/platform.c:2295
+#: src/main/platform.c:2315 src/main/platform.c:2495 src/main/platform.c:2508
+#: src/main/platform.c:2527 src/main/platform.c:2548
 #, fuzzy
 msgid "path is too long"
 msgstr "percorso troppo lungo"
 
-#: src/main/platform.c:2283
+#: src/main/platform.c:2284
 #, fuzzy, c-format
 msgid "problem with creating directory %ls: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2303
+#: src/main/platform.c:2304
 #, fuzzy, c-format
 msgid "problem with reading directory %ls: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2322
+#: src/main/platform.c:2323
 #, fuzzy, c-format
 msgid "problem with copying %ls to %ls: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2516
+#: src/main/platform.c:2517
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2535
+#: src/main/platform.c:2536
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2556
+#: src/main/platform.c:2557
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr "è sorto un problema nel lanciare l'editor %s"
 
-#: src/main/platform.c:2694
+#: src/main/platform.c:2695
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr "'hadj' deve essere di lunghezza 1"
 
-#: src/main/platform.c:2735 src/main/platform.c:2761
+#: src/main/platform.c:2736 src/main/platform.c:2762
 #, fuzzy
 msgid "insufficient OS support on this platform"
 msgstr "nls() non è supportato in questa piattaforma"
 
-#: src/main/platform.c:2940
+#: src/main/platform.c:2941
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "impossibile creare fifo '%s' perché '%s'"
@@ -9400,191 +9400,191 @@ msgstr "le routine lapack non pososno essere caricate"
 msgid "allocation of socket connection failed"
 msgstr "allocazione socket della connessione fallita"
 
-#: src/modules/lapack/Lapack.c:49 src/modules/lapack/Lapack.c:68
+#: src/modules/lapack/Lapack.c:67 src/modules/lapack/Lapack.c:86
 #, fuzzy, c-format
 msgid "argument type[1]='%s' must be a character string of string length 1"
 msgstr "l'argomento deve essere un vettore character di lunghezza 1"
 
-#: src/modules/lapack/Lapack.c:57
+#: src/modules/lapack/Lapack.c:75
 #, c-format
 msgid "argument type[1]='%s' must be one of 'M','1','O','I','F' or 'E'"
 msgstr ""
 
-#: src/modules/lapack/Lapack.c:74
+#: src/modules/lapack/Lapack.c:92
 #, c-format
 msgid "argument type[1]='%s' must be one of '1','O', or 'I'"
 msgstr ""
 
-#: src/modules/lapack/Lapack.c:98
+#: src/modules/lapack/Lapack.c:116
 #, fuzzy
 msgid "non-integer dim(u)"
 msgstr "numero di dimensioni errato"
 
-#: src/modules/lapack/Lapack.c:101
+#: src/modules/lapack/Lapack.c:119
 #, fuzzy
 msgid "non-integer dim(vt)"
 msgstr "numero di dimensioni errato"
 
-#: src/modules/lapack/Lapack.c:114 src/modules/lapack/Lapack.c:121
-#: src/modules/lapack/Lapack.c:180 src/modules/lapack/Lapack.c:191
-#: src/modules/lapack/Lapack.c:273 src/modules/lapack/Lapack.c:279
-#: src/modules/lapack/Lapack.c:375 src/modules/lapack/Lapack.c:392
-#: src/modules/lapack/Lapack.c:426 src/modules/lapack/Lapack.c:470
-#: src/modules/lapack/Lapack.c:478 src/modules/lapack/Lapack.c:514
-#: src/modules/lapack/Lapack.c:614 src/modules/lapack/Lapack.c:620
-#: src/modules/lapack/Lapack.c:674 src/modules/lapack/Lapack.c:681
-#: src/modules/lapack/Lapack.c:685 src/modules/lapack/Lapack.c:720
-#: src/modules/lapack/Lapack.c:727 src/modules/lapack/Lapack.c:776
-#: src/modules/lapack/Lapack.c:783 src/modules/lapack/Lapack.c:831
-#: src/modules/lapack/Lapack.c:837 src/modules/lapack/Lapack.c:891
-#: src/modules/lapack/Lapack.c:897 src/modules/lapack/Lapack.c:1122
-#: src/modules/lapack/Lapack.c:1128 src/modules/lapack/Lapack.c:1176
-#: src/modules/lapack/Lapack.c:1183 src/modules/lapack/Lapack.c:1187
-#: src/modules/lapack/Lapack.c:1215 src/modules/lapack/Lapack.c:1222
-#: src/modules/lapack/Lapack.c:1242
+#: src/modules/lapack/Lapack.c:132 src/modules/lapack/Lapack.c:139
+#: src/modules/lapack/Lapack.c:198 src/modules/lapack/Lapack.c:209
+#: src/modules/lapack/Lapack.c:291 src/modules/lapack/Lapack.c:297
+#: src/modules/lapack/Lapack.c:393 src/modules/lapack/Lapack.c:410
+#: src/modules/lapack/Lapack.c:444 src/modules/lapack/Lapack.c:488
+#: src/modules/lapack/Lapack.c:496 src/modules/lapack/Lapack.c:532
+#: src/modules/lapack/Lapack.c:632 src/modules/lapack/Lapack.c:638
+#: src/modules/lapack/Lapack.c:692 src/modules/lapack/Lapack.c:699
+#: src/modules/lapack/Lapack.c:703 src/modules/lapack/Lapack.c:738
+#: src/modules/lapack/Lapack.c:745 src/modules/lapack/Lapack.c:794
+#: src/modules/lapack/Lapack.c:801 src/modules/lapack/Lapack.c:849
+#: src/modules/lapack/Lapack.c:855 src/modules/lapack/Lapack.c:909
+#: src/modules/lapack/Lapack.c:915 src/modules/lapack/Lapack.c:1140
+#: src/modules/lapack/Lapack.c:1146 src/modules/lapack/Lapack.c:1194
+#: src/modules/lapack/Lapack.c:1201 src/modules/lapack/Lapack.c:1205
+#: src/modules/lapack/Lapack.c:1233 src/modules/lapack/Lapack.c:1240
+#: src/modules/lapack/Lapack.c:1260
 #, c-format
 msgid "error code %d from Lapack routine '%s'"
 msgstr "codice errore %d nella routine Lapack '%s'"
 
-#: src/modules/lapack/Lapack.c:151 src/modules/lapack/Lapack.c:246
-#: src/modules/lapack/Lapack.c:871
+#: src/modules/lapack/Lapack.c:169 src/modules/lapack/Lapack.c:264
+#: src/modules/lapack/Lapack.c:889
 msgid "'x' must be a square numeric matrix"
 msgstr "'x' deve essere una matrice quadrata di tipo numeric"
 
-#: src/modules/lapack/Lapack.c:323 src/modules/lapack/Lapack.c:353
-#: src/modules/lapack/Lapack.c:402 src/modules/lapack/Lapack.c:923
-#: src/modules/lapack/Lapack.c:995 src/modules/lapack/Lapack.c:1032
-#: src/modules/lapack/Lapack.c:1102 src/modules/lapack/Lapack.c:1162
-#: src/modules/lapack/Lapack.c:1200 src/modules/lapack/Lapack.c:1233
+#: src/modules/lapack/Lapack.c:341 src/modules/lapack/Lapack.c:371
+#: src/modules/lapack/Lapack.c:420 src/modules/lapack/Lapack.c:941
+#: src/modules/lapack/Lapack.c:1013 src/modules/lapack/Lapack.c:1050
+#: src/modules/lapack/Lapack.c:1120 src/modules/lapack/Lapack.c:1180
+#: src/modules/lapack/Lapack.c:1218 src/modules/lapack/Lapack.c:1251
 #, fuzzy, c-format
 msgid "'%s' must be a numeric matrix"
 msgstr "'a' deve essere una matrice di tipo numeric"
 
-#: src/modules/lapack/Lapack.c:380
+#: src/modules/lapack/Lapack.c:398
 #, c-format
 msgid "exact singularity: U[%d,%d] = 0 in LU-decomposition {Lapack 'dgetrf()'}"
 msgstr ""
 
-#: src/modules/lapack/Lapack.c:412 src/modules/lapack/Lapack.c:444
-#: src/modules/lapack/Lapack.c:502 src/modules/lapack/Lapack.c:930
-#: src/modules/lapack/Lapack.c:1238
+#: src/modules/lapack/Lapack.c:430 src/modules/lapack/Lapack.c:462
+#: src/modules/lapack/Lapack.c:520 src/modules/lapack/Lapack.c:948
+#: src/modules/lapack/Lapack.c:1256
 #, fuzzy, c-format
 msgid "'%s' must be a square matrix"
 msgstr "'a' deve essere una matrice quadrata"
 
-#: src/modules/lapack/Lapack.c:441 src/modules/lapack/Lapack.c:498
-#: src/modules/lapack/Lapack.c:530 src/modules/lapack/Lapack.c:599
-#: src/modules/lapack/Lapack.c:659 src/modules/lapack/Lapack.c:704
+#: src/modules/lapack/Lapack.c:459 src/modules/lapack/Lapack.c:516
+#: src/modules/lapack/Lapack.c:548 src/modules/lapack/Lapack.c:617
+#: src/modules/lapack/Lapack.c:677 src/modules/lapack/Lapack.c:722
 #, fuzzy, c-format
 msgid "'%s' must be a complex matrix"
 msgstr "'a' deve essere una matrice di tipo complex"
 
-#: src/modules/lapack/Lapack.c:463
+#: src/modules/lapack/Lapack.c:481
 #, fuzzy, c-format
 msgid "error [%d] from Lapack 'zgetrf()'"
 msgstr "codice errore %d nella routine Lapack '%s'"
 
-#: src/modules/lapack/Lapack.c:482 src/modules/lapack/Lapack.c:517
-#: src/modules/lapack/Lapack.c:585 src/modules/lapack/Lapack.c:645
-#: src/modules/lapack/Lapack.c:689 src/modules/lapack/Lapack.c:731
-#: src/modules/lapack/Lapack.c:797 src/modules/lapack/Lapack.c:854
-#: src/modules/lapack/Lapack.c:914
+#: src/modules/lapack/Lapack.c:500 src/modules/lapack/Lapack.c:535
+#: src/modules/lapack/Lapack.c:603 src/modules/lapack/Lapack.c:663
+#: src/modules/lapack/Lapack.c:707 src/modules/lapack/Lapack.c:749
+#: src/modules/lapack/Lapack.c:815 src/modules/lapack/Lapack.c:872
+#: src/modules/lapack/Lapack.c:932
 msgid "Fortran complex functions are not available on this platform"
 msgstr "Funzioni complesse Fortran non disponibili per questa piattaforma"
 
-#: src/modules/lapack/Lapack.c:533 src/modules/lapack/Lapack.c:1035
+#: src/modules/lapack/Lapack.c:551 src/modules/lapack/Lapack.c:1053
 #, fuzzy
 msgid "matrix 'A' is zero dimensional"
 msgstr "'a' deve avere dimensioni > 0"
 
-#: src/modules/lapack/Lapack.c:535 src/modules/lapack/Lapack.c:1037
+#: src/modules/lapack/Lapack.c:553 src/modules/lapack/Lapack.c:1055
 #, fuzzy, c-format
 msgid "'A' (%d x %d) must be a square matrix"
 msgstr "'a' (%d x %d) deve essere quadrata"
 
-#: src/modules/lapack/Lapack.c:541 src/modules/lapack/Lapack.c:1043
+#: src/modules/lapack/Lapack.c:559 src/modules/lapack/Lapack.c:1061
 msgid "no right-hand side in 'b'"
 msgstr "nessun membro di destra in 'b'"
 
-#: src/modules/lapack/Lapack.c:544 src/modules/lapack/Lapack.c:558
-#: src/modules/lapack/Lapack.c:1046
+#: src/modules/lapack/Lapack.c:562 src/modules/lapack/Lapack.c:576
+#: src/modules/lapack/Lapack.c:1064
 #, fuzzy, c-format
 msgid "'B' (%d x %d) must be compatible with 'A' (%d x %d)"
 msgstr "'b' (%d, %d) deve essere compatibile con 'a' (%d x %d)"
 
-#: src/modules/lapack/Lapack.c:579 src/modules/lapack/Lapack.c:944
-#: src/modules/lapack/Lapack.c:957 src/modules/lapack/Lapack.c:1011
-#: src/modules/lapack/Lapack.c:1082
+#: src/modules/lapack/Lapack.c:597 src/modules/lapack/Lapack.c:962
+#: src/modules/lapack/Lapack.c:975 src/modules/lapack/Lapack.c:1029
+#: src/modules/lapack/Lapack.c:1100
 #, fuzzy, c-format
 msgid "argument %d of Lapack routine '%s' had invalid value"
 msgstr "l'argomento %d della routie Lapack %s ha un valore non valido"
 
-#: src/modules/lapack/Lapack.c:667 src/modules/lapack/Lapack.c:713
-#: src/modules/lapack/Lapack.c:1169 src/modules/lapack/Lapack.c:1208
+#: src/modules/lapack/Lapack.c:685 src/modules/lapack/Lapack.c:731
+#: src/modules/lapack/Lapack.c:1187 src/modules/lapack/Lapack.c:1226
 #, c-format
 msgid "right-hand side should have %d not %d rows"
 msgstr "il membro di destra deve avere %d righe e non %d"
 
-#: src/modules/lapack/Lapack.c:748
+#: src/modules/lapack/Lapack.c:766
 msgid "matrices of 2^31 or more elements are not supported"
 msgstr ""
 
-#: src/modules/lapack/Lapack.c:767 src/modules/lapack/Lapack.c:770
-#: src/modules/lapack/Lapack.c:927 src/modules/lapack/Lapack.c:992
+#: src/modules/lapack/Lapack.c:785 src/modules/lapack/Lapack.c:788
+#: src/modules/lapack/Lapack.c:945 src/modules/lapack/Lapack.c:1010
 #, fuzzy
 msgid "non-integer dimensions"
 msgstr "numero di dimensioni errato"
 
-#: src/modules/lapack/Lapack.c:813
+#: src/modules/lapack/Lapack.c:831
 #, fuzzy
 msgid "'x' must be a square complex matrix"
 msgstr "'x' deve essere una matrice quadrata di tipo numeric"
 
-#: src/modules/lapack/Lapack.c:931
+#: src/modules/lapack/Lapack.c:949
 #, fuzzy
 msgid "'A' matrix must have dimensions > 0"
 msgstr "'a' deve avere dimensioni > 0"
 
-#: src/modules/lapack/Lapack.c:943
+#: src/modules/lapack/Lapack.c:961
 #, c-format
 msgid "the leading minor of order %d is not positive definite"
 msgstr "il minore principale di ordine %d non è definito positivo"
 
-#: src/modules/lapack/Lapack.c:955
+#: src/modules/lapack/Lapack.c:973
 msgid "the matrix is either rank-deficient or indefinite"
 msgstr ""
 
-#: src/modules/lapack/Lapack.c:982
+#: src/modules/lapack/Lapack.c:1000
 #, fuzzy, c-format
 msgid "'%s' argument must be a positive integer"
 msgstr "l'argomento 'size' deve essere un intero positivo"
 
-#: src/modules/lapack/Lapack.c:997
+#: src/modules/lapack/Lapack.c:1015
 #, c-format
 msgid "'size' cannot exceed ncol(x) = %d"
 msgstr "'size' non può superare ncol(x) = %d"
 
-#: src/modules/lapack/Lapack.c:998
+#: src/modules/lapack/Lapack.c:1016
 #, c-format
 msgid "'size' cannot exceed nrow(x) = %d"
 msgstr "'size' non può superare nrow(x) = %d"
 
-#: src/modules/lapack/Lapack.c:1010
+#: src/modules/lapack/Lapack.c:1028
 #, c-format
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "l'elemento (%d, %d) è zero, quindi l'inversa non può essere calcolata"
 
-#: src/modules/lapack/Lapack.c:1061
+#: src/modules/lapack/Lapack.c:1079
 #, fuzzy, c-format
 msgid "'b' (%d x %d) must be compatible with 'a' (%d x %d)"
 msgstr "'b' (%d, %d) deve essere compatibile con 'a' (%d x %d)"
 
-#: src/modules/lapack/Lapack.c:1084
+#: src/modules/lapack/Lapack.c:1102
 #, fuzzy, c-format
 msgid "Lapack routine %s: system is exactly singular: U[%d,%d] = 0"
 msgstr "Lapack routine dgesv: is sistema è esattamente singolare"
 
-#: src/modules/lapack/Lapack.c:1091
+#: src/modules/lapack/Lapack.c:1109
 #, c-format
 msgid "system is computationally singular: reciprocal condition number = %g"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-03-27 22:37\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -668,19 +668,19 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX1X is not defined")
+#. R/install.R: stop("C++11 standard requested but CXX11 is not defined")
 #: R/install.R:0
-msgid "C++11 standard requested but CXX1X is not defined"
+msgid "C++11 standard requested but CXX11 is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++14 standard requested but CXX1Y is not defined")
+#. R/install.R: stop("C++14 standard requested but CXX14 is not defined")
 #: R/install.R:0
-msgid "C++14 standard requested but CXX1Y is not defined"
+msgid "C++14 standard requested but CXX14 is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++17 standard requested but CXX1Z is not defined")
+#. R/install.R: stop("C++17 standard requested but CXX17 is not defined")
 #: R/install.R:0
-msgid "C++17 standard requested but CXX1Z is not defined"
+msgid "C++17 standard requested but CXX17 is not defined"
 msgstr ""
 
 #. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
@@ -6303,17 +6303,15 @@ msgid "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
 msgstr[0] "'%s'를 테스팅하는 것은 실패했습니다"
 
-#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  was ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  were ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+#. R/build.R: ngettext(sum(!copied), "%s file %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
-"%s file\n"
-"%s\n"
-"  was ignored as vignettes have been rebuilt.\n"
+"%s file %s\n"
+"  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgid_plural ""
-"%s files\n"
-"%s\n"
-"  were ignored as vignettes have been rebuilt.\n"
+"%s files %s\n"
+"  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0] ""
 
