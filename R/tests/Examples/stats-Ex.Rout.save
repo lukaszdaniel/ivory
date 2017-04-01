@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-03-22 r945) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-03-29 r949) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-03-22 r72384) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-03-29 r72465) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3789,7 +3789,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x42dc600>
+<environment: 0x4d420b0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4774,7 +4774,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x51012d0>
+<bytecode: 0x5fa6928>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7331,7 +7331,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5800b50>
+<environment: 0x6266158>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -8091,7 +8091,7 @@ United States  0.33_*
 Zambia         0.06  
 Libya          0.53_*
 > plot(rstudent(lm.SR) ~ hatvalues(lm.SR)) # recommended by some
-> plot(lm.SR, which = 5) # an enhaced version of that via plot(<lm>)
+> plot(lm.SR, which = 5) # an enhanced version of that via plot(<lm>)
 > 
 > ## The 'infl' argument is not needed, but avoids recomputation:
 > rs <- rstandard(lm.SR)
@@ -11943,14 +11943,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x4f02c20>
-<environment: 0x4d68078>
+<bytecode: 0x6301230>
+<environment: 0x86a0418>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x4f02ad0>
-<environment: 0x4d68078>
+<bytecode: 0x63010e0>
+<environment: 0x86a0418>
 
 > 
 > 
@@ -16022,8 +16022,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x3fffc30>
-<environment: 0x4506d28>
+<bytecode: 0x4a77048>
+<environment: 0x4f082a8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18347,7 +18347,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.352 0.1 4.452 0 0 
+Time elapsed:  4.36 0.068 4.428 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -80,10 +80,6 @@ strsplit grep [g]sub [g]regexpr
 # include <pcre.h>
 #endif
 
-/* Compatibility with PCRE < 8.20 */
-#ifndef PCRE_STUDY_JIT_COMPILE
-# define PCRE_STUDY_JIT_COMPILE 0
-#else
 /* 
    Default maximum stack size: note this is reserved but not allocated
    until needed.  The help says 1M suffices, but we found more was
@@ -114,8 +110,6 @@ static void setup_jit(pcre_extra *re_pe)
     if (jit_stack)
 	pcre_assign_jit_stack(re_pe, NULL, jit_stack);
 }
-
-#endif // PCRE >= 8.20
 
 
 
@@ -539,9 +533,7 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
-#if PCRE_STUDY_JIT_COMPILE
 	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
-#endif
 	    if(R_PCRE_limit_recursion == NA_LOGICAL) {
 		// use recursion limit only on long strings
 		Rboolean use = FALSE;
@@ -633,11 +625,7 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		vmaxset(vmax2);
 	    }
-#if PCRE_STUDY_JIT_COMPILE
 	    if(re_pe) pcre_free_study(re_pe);
-#else
-	    if(re_pe) pcre_free(re_pe);
-#endif
 	    pcre_free(re_pcre);
 	} else if (!useBytes && use_UTF8) { /* ERE in wchar_t */
 	    regex_t reg;
@@ -1038,9 +1026,7 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
-#if PCRE_STUDY_JIT_COMPILE
 	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
-#endif
 	}
 	if(R_PCRE_limit_recursion == NA_LOGICAL) {
 	    // use recursion limit only on long strings
@@ -1119,12 +1105,7 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt);
     else if (perl_opt) {
-#if PCRE_STUDY_JIT_COMPILE
-	// function added in 8.20, needed if JIT is used.
 	if (re_pe) pcre_free_study(re_pe);
-#else
-	if (re_pe) pcre_free(re_pe);
-#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
     } else
@@ -1827,9 +1808,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
-#if PCRE_STUDY_JIT_COMPILE
 	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
-#endif
 	}
 	if(R_PCRE_limit_recursion == NA_LOGICAL) {
 	    // use recursion limit only on long strings
@@ -2133,11 +2112,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt) ;
     else if (perl_opt) {
-#if PCRE_STUDY_JIT_COMPILE
 	if (re_pe) pcre_free_study(re_pe);
-#else
-	if (re_pe) pcre_free(re_pe);
-#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
     } else tre_regfree(&reg);
@@ -2660,9 +2635,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			       &errorptr);
 	    if (errorptr)
 		warning(_("PCRE pattern study error\n\t'%s'\n"), errorptr);
-#if PCRE_STUDY_JIT_COMPILE
 	    else if(R_PCRE_use_JIT) setup_jit(re_pe);
-#endif
 	}
 	if(R_PCRE_limit_recursion == NA_LOGICAL) {
 	    // use recursion limit only on long strings
@@ -2855,11 +2828,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (fixed_opt) ;
     else if (perl_opt) {
-#if PCRE_STUDY_JIT_COMPILE
 	if (re_pe) pcre_free_study(re_pe);
-#else
-	if (re_pe) pcre_free(re_pe);
-#endif
 	pcre_free(re_pcre);
 	pcre_free((void *)tables);
 	UNPROTECT(1);
