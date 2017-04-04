@@ -637,6 +637,7 @@ function(style)
 format.bibentry <-
 function(x, style = "text", .bibstyle = NULL,
          citation.bibtex.max = getOption("citation.bibtex.max", Inf),
+         bibtex = length(x) <= citation.bibtex.max,
          sort = FALSE, ...)
 {
     if(!length(x)) return(character())
@@ -645,8 +646,11 @@ function(x, style = "text", .bibstyle = NULL,
 
     if(sort) x <- sort(x, .bibstyle = .bibstyle)
     x$.index <- as.list(seq_along(x))
+    if(!missing(citation.bibtex.max))
+	warning(gettextf("Argument '%s' is deprecated; rather set '%s' instead.",
+			 "citation.bibtex.max", "bibtex=*"), domain = "R-utils")
 
-    .format_bibentry_via_Rd <- function(f) {
+    format_via_Rd <- function(f) {
         out <- file()
         saveopt <- tools::Rd2txt_options(width = getOption("width"))
         on.exit({tools::Rd2txt_options(saveopt); close(out)})
@@ -671,12 +675,8 @@ function(x, style = "text", .bibstyle = NULL,
                })
     }
 
-    .format_bibentry_as_citation <- function(x) {
-        bibtex <- length(x) <= citation.bibtex.max
-	if(!bibtex && missing(citation.bibtex.max))
-	    message("there are additional BiBTeX citations. Use 'citation(*, citation.bibtex.max=Inf)' to see them all.")
-
-        c(paste(strwrap(attr(x, "mheader")), collapse = "\n"),
+    format_as_citation <- function(x, msg) {
+         c(paste(strwrap(attr(x, "mheader")), collapse = "\n"),
           unlist(lapply(x, function(y) {
               paste(c(if(!is.null(y$header))
                       c(strwrap(y$header), ""),
@@ -692,15 +692,17 @@ function(x, style = "text", .bibstyle = NULL,
                       c("", strwrap(y$footer))),
                     collapse = "\n")
           })),
-          paste(strwrap(attr(x, "mfooter")), collapse = "\n")
+	  paste(strwrap(c(attr(x, "mfooter"),
+			  if(!bibtex && msg)
+	c(gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.", domain = "R-utils")))))
           )
     }
 
     out <-
         switch(style,
-               "text" = .format_bibentry_via_Rd(tools::Rd2txt),
-               "html" = .format_bibentry_via_Rd(tools::Rd2HTML),
-               "latex" = .format_bibentry_via_Rd(tools::Rd2latex),
+               "text" = format_via_Rd(tools::Rd2txt),
+               "html" = format_via_Rd(tools::Rd2HTML),
+               "latex" = format_via_Rd(tools::Rd2latex),
                "Bibtex" = {
                    unlist(lapply(x,
                                  function(y)
@@ -711,7 +713,9 @@ function(x, style = "text", .bibstyle = NULL,
                    out[!lengths(out)] <- ""
                    unlist(out)
                },
-               "citation" = .format_bibentry_as_citation(x),
+               "citation" = format_as_citation(x,
+                                               msg = missing(bibtex) &&
+                                                   missing(citation.bibtex.max)),
                "R" = .format_bibentry_as_R_code(x, ...)
                )
     as.character(out)
@@ -1260,12 +1264,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     .citation(rval)
 }
 
-.citation <-
-function(x)
-{
-    class(x) <- c("citation", "bibentry")
-    x
-}
+.citation <- function(x) structure(x, class = c("citation", "bibentry"))
 
 .read_authors_at_R_field <-
 function(x)
@@ -1298,12 +1297,10 @@ function(x)
     "aut" %in% x$role
 }
 
+format.citation <-
+function(x, style = "citation", ...) format.bibentry(x, style = style, ...)
 print.citation <-
-function(x, style = "citation", ...)
-{
-    NextMethod("print", x, style = style, ...)
-    invisible(x)
-}
+function(x, style = "citation", ...) print.bibentry(x, style = style, ...)
 
 as.bibentry <-
 function(x)
