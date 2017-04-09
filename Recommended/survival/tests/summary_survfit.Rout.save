@@ -177,6 +177,53 @@ Type 'q()' to quit R.
 > all.equal(s1$n.censor, diff(temp))
 [1] TRUE
 > 
+> #
+> # A check on the censor option
+> #
+> s1 <- summary(fit[1])
+> s2 <- summary(fit[2])
+> s3 <- summary(fit)
+> tfun('n')
+[1] TRUE
+> tfun("time")
+[1] TRUE
+> tfun("n.risk")
+[1] TRUE
+> tfun("n.event")
+[1] TRUE
+> tfun("n.censor")
+[1] TRUE
+> tfun("surv")
+[1] TRUE
+> tfun("std.err")
+[1] TRUE
+> tfun("lower")
+[1] TRUE
+> tfun("upper")
+[1] TRUE
+> 
+> s1 <- summary(mfit[1])
+> s2 <- summary(mfit[2])
+> s3 <- summary(mfit)
+> tfun('n')
+[1] TRUE
+> tfun("time")
+[1] TRUE
+> tfun("n.risk")
+[1] TRUE
+> tfun("n.event")
+[1] TRUE
+> tfun("n.censor")
+[1] TRUE
+> tfun("surv")
+[1] TRUE
+> tfun("std.err")
+[1] TRUE
+> tfun("lower")
+[1] TRUE
+> tfun("upper")
+[1] TRUE
+> 
 > proc.time()
    user  system elapsed 
   1.000   0.036   1.032 

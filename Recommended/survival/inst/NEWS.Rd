@@ -1,5 +1,27 @@
 \name{NEWS}
 \title{NEWS file for the survival package}
+\section{Changes in version 2.41-3}{
+  \itemize{
+    \item A check for infinite loglik was incorrect in agfit4.c, and could
+    fail to detect the need for step halving.  It required a very
+    unusual data set to trigger this.
+
+    \item The survfit routine would fail for interval censored data, on
+    a group that had only a single step in the curve.  (Needed to add
+    drop=FALSE to a matrix subscript.)
+
+    \item Minor change to Surv to ensure that its check for difftime
+    objects will not trigger a "length >1 inside an if ()" warning.
+
+    \item The summary.survfit function had n.censor wrong when there
+    were multiple curves and censor=TRUE (spurious NA values).  Added more
+    lines to the test suite.
+
+    \item Pointed out by Mikko Korpela: the dynamic symbols check added
+    in 2.41-0 requires R version 2.16 or later.  Add an ifdef to init.c
+    that checks the version of R, mimicing a similar line in the MASS library.
+}}
+
 \section{Changes in version 2.41-2}{
   \itemize{
     \item Fix two memory leaks and an uninitialized array, found by B Ripley. 
@@ -457,7 +479,7 @@
     The result of survfit now (sometimes) includes the cumulative
     hazard.  This will be expanded. 29Jul13
     
-    \item Change code in the coxpenal.fit routine: the use of a vector of
+2    \item Change code in the coxpenal.fit routine: the use of a vector of
     symbols as arguments to my .C calls was confusing to a new CRAN
     consistency check.  Both the old and new are legal R; but the old
     was admittedly an unusual construction and it was simpler to change it.

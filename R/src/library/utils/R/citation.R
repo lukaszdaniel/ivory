@@ -636,7 +636,7 @@ function(style)
 
 format.bibentry <-
 function(x, style = "text", .bibstyle = NULL,
-         citation.bibtex.max = getOption("citation.bibtex.max", Inf),
+         citation.bibtex.max = getOption("citation.bibtex.max", 1),
          bibtex = length(x) <= citation.bibtex.max,
          sort = FALSE, ...)
 {
@@ -694,7 +694,7 @@ function(x, style = "text", .bibstyle = NULL,
           })),
 	  paste(strwrap(c(attr(x, "mfooter"),
 			  if(!bibtex && msg)
-	c(gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.", domain = "R-utils")))))
+	gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.", domain = "R-utils"))))
           )
     }
 
