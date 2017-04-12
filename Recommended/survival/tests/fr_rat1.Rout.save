@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-03-22 r945) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-04-12 r955) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-03-22 r72384) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-04-12 r72505) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -115,4 +115,4 @@ Likelihood ratio test = 30 on 14.6 df, p=0.0101 n=150
 > 
 > proc.time()
    user  system elapsed 
-  0.964   0.012   0.970 
+  0.924   0.032   0.953 

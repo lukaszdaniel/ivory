@@ -1,10 +1,11 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+Ivory Under development (unstable) (2017-04-12 r955) -- "Internationalized Version of R"
+Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
 
-Ivory is a modified version of R. See README-IVORY file for details.
-Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+R Under development (unstable) (2017-04-12 r72505) -- "Unsuffered Consequences"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
@@ -1465,86 +1466,86 @@ Smoothing spline used 20 points in the range 9.8 to 304.7.
 > ufn <- function(t, data) c(0,10)
 > saddle.distn(A = Afn, u = ufn, wdist = "b", type = "cond",
 +              t0 = bigcity.t0, data = bigcity)
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
 Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
-Warning in command 'eval(expr, envir, enclos)':
+Warning in command 'eval(family$initialize)':
   non-integer counts in a binomial glm!
 
 Saddlepoint Distribution Approximations
@@ -2029,7 +2030,7 @@ t3* 0.000000 -0.8862944    2.208945
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  40.709 0.377 41.946 0 0 
+Time elapsed:  12.976 0.044 13.039 0 0 
 > grDevices::dev.off()
 null device 
           1 

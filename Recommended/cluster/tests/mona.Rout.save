@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-03-22 r945) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-04-12 r955) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-03-22 r72384) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-04-12 r72505) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2645,15 +2645,6 @@ Error in command 'mona(ani.idNA)':
 +     mx # (too much, but still)
 + })
 Loading required package: 'MASS'
-List of 7 components
- $ data     : integer [1:512, 1:4] 0 0 0 0 1 1 1 0 1 0 ...
- $ hasNA    : logical FALSE
- $ order    : integer [1:512] 1 137 154 204 353 398 30 52 69 85 ...
- $ variable : integer [1:511] 0 0 0 0 0 3 0 0 0 0 ...
- $ step     : integer [1:511] 0 0 0 0 0 4 0 0 0 0 ...
- $ order.lab: NULL
- $ call     : language mona(x = x)
- - attr(*, "class")= character "mona"
 > if (R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
 > set.seed(253)
 > n <- 512
@@ -2809,10 +2800,8 @@ Separation step:
 Available components:
 [1] "data"      "hasNA"     "order"     "variable"  "step"      "order.lab"
 [7] "call"     
-Warning messages:
-1: In command 'RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage")':
-  buggy version of Kinderman-Ramage generator used
-2: In command 'RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage")':
+Warning message:
+In command 'RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage")':
   buggy version of Kinderman-Ramage generator used
 > 
 > 
@@ -2828,4 +2817,4 @@ Error in command 'mona(cbind(1:0), trace = 2)':
 > 
 > proc.time()
    user  system elapsed 
-  0.256   0.016   0.268 
+  0.232   0.020   0.250 

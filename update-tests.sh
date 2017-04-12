@@ -72,6 +72,7 @@ cd ..
 `$cmd stats.Rcheck/tests/ks-test.Rout	../src/library/stats/tests/ks-test.Rout.save`
 `$cmd stats.Rcheck/tests/nls.Rout	../src/library/stats/tests/nls.Rout.save`
 `$cmd stats.Rcheck/tests/simulate.Rout	../src/library/stats/tests/simulate.Rout.save`
+`$cmd stats.Rcheck/tests/bandwidth.Rout	../src/library/stats/tests/bandwidth.Rout.save`
 
 `$cmd grid.Rcheck/tests/testls.Rout	../src/library/grid/tests/testls.Rout.save`
 
@@ -115,7 +116,7 @@ fi;
 
 
 if [[ "$1" == "boot" ]] || [[ "$1" == "all" ]]; then
-`$cmd boot.Rcheck/boot-Ex.Rout	../../$RECIVORY/boot/tests/boot-Ex.Rout.save`
+`$cmd boot.Rcheck/boot-Ex.Rout	../../$RECIVORY/boot/tests/Examples/boot-Ex.Rout.save`
 fi;
 
 
@@ -156,7 +157,8 @@ fi;
 if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/aareg.Rout		../../$RECIVORY/survival/tests/aareg.Rout.save`
 `$cmd	survival.Rcheck/tests/factor.Rout		../../$RECIVORY/survival/tests/factor.Rout.save`
-`$cmd	survival.Rcheck/tests/rounding.Rout		../../$RECIVORY/survival/tests/rounding.Rout.save`
+#`$cmd	survival.Rcheck/tests/rounding.Rout		../../$RECIVORY/survival/tests/rounding.Rout.save`
+`$cmd	survival.Rcheck/tests/survSplit.Rout		../../$RECIVORY/survival/tests/survSplit.Rout.save`
 `$cmd	survival.Rcheck/tests/anova.Rout		../../$RECIVORY/survival/tests/anova.Rout.save`
 `$cmd	survival.Rcheck/tests/frailty.Rout		../../$RECIVORY/survival/tests/frailty.Rout.save`
 `$cmd	survival.Rcheck/tests/r_peterson.Rout		../../$RECIVORY/survival/tests/r_peterson.Rout.save`
@@ -229,4 +231,5 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/factor2.Rout		../../$RECIVORY/survival/tests/factor2.Rout.save`
 `$cmd	survival.Rcheck/tests/r_lung.Rout		../../$RECIVORY/survival/tests/r_lung.Rout.save`
 `$cmd	survival.Rcheck/tests/tmerge.Rout		../../$RECIVORY/survival/tests/tmerge.Rout.save`
+`$cmd	survival.Rcheck/tests/tmerge2.Rout		../../$RECIVORY/survival/tests/tmerge2.Rout.save`
 fi;
