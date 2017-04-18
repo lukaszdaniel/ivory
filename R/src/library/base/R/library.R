@@ -263,15 +263,15 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                     oldversion <- as.numeric_version(getNamespaceVersion(package))
                     if (newversion != oldversion) {
                     	## No, so try to unload the previous one
-                    	res <- tryCatch(unloadNamespace(package),
-					error = function(e) {
-					    P <- if(!is.null(cc <- conditionCall(e)))
-						     gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
-						 else gettext("Error: ", domain = "R-base")
-					    stop(gettextf("Package %s version %s cannot be unloaded:\n %s",
-							  sQuote(package), oldversion,
-							  paste0(P, conditionMessage(e),"\n"), domain = "R-base"),
-						 domain = NA)})
+			tryCatch(unloadNamespace(package),
+				 error = function(e) {
+				     P <- if(!is.null(cc <- conditionCall(e)))
+					      gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+					  else gettext("Error: ", domain = "R-base")
+				     stop(gettextf("Package %s version %s cannot be unloaded:\n %s",
+						   sQuote(package), oldversion,
+						   paste0(P, conditionMessage(e),"\n"), domain = "R-base"),
+					  domain = NA)})
                     }
                 }
 		tt <- tryCatch({

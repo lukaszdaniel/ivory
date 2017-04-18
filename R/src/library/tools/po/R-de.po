@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-27 22:37\n"
+"POT-Creation-Date: 2017-04-14 13:22\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1630,16 +1630,6 @@ msgstr ""
 msgid "Found directory 'R' with no source files."
 msgstr ""
 
-#. R/sotools.R: gettextf("  Found no call to: %s", sQuote(x), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found no call to: %s"
-msgstr ""
-
-#. R/sotools.R: gettextf("Found no calls to: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found no calls to: %s"
-msgstr ""
-
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 #: R/sotools.R:0
 msgid "Found non-API call to R: %s"
@@ -2936,11 +2926,6 @@ msgstr "Laden fehlgeschlagen"
 msgid "R shared object builder:"
 msgstr ""
 
-#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
-#: R/QC.R:0
-msgid "R-tools"
-msgstr ""
-
 #. R/check.R: gettext("Rd conversion errors:", domain = "R-tools")
 #: R/check.R:0
 msgid "Rd conversion errors:"
@@ -3584,7 +3569,7 @@ msgid ""
 "%s"
 msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 
-#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", domain = "R-tools")
 #: R/QC.R:0
 msgid "The maintainer field is invalid or specifies more than one person"
 msgstr ""
@@ -6659,6 +6644,13 @@ msgid_plural ""
 "Found an obsolete/platform-specific call in the following functions:"
 msgstr[0] ".Internal Aufruf in folgender Funktion gefunden:"
 msgstr[1] ".Internal Aufrufe in folgenden Funktionen gefunden:"
+
+#. R/sotools.R: ngettext(length(x), "Found no call to: %s", "Found no calls to: %s", domain = "R-tools")
+#: R/sotools.R:0
+msgid "Found no call to: %s"
+msgid_plural "Found no calls to: %s"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/QC.R: ngettext(length(x$bad_examples), "Found possibly global 'T' or 'F' in the examples of the following Rd file:",     "Found possibly global 'T' or 'F' in the examples of the following Rd files:",     domain = "R-tools")
 #: R/QC.R:0

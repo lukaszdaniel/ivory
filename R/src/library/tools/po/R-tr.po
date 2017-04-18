@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-27 22:37\n"
+"POT-Creation-Date: 2017-04-14 13:22\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1488,16 +1488,6 @@ msgstr ""
 msgid "Found directory 'R' with no source files."
 msgstr ""
 
-#. R/sotools.R: gettextf("  Found no call to: %s", sQuote(x), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found no call to: %s"
-msgstr ""
-
-#. R/sotools.R: gettextf("Found no calls to: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found no calls to: %s"
-msgstr ""
-
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 #: R/sotools.R:0
 msgid "Found non-API call to R: %s"
@@ -2701,11 +2691,6 @@ msgstr ""
 msgid "R shared object builder:"
 msgstr ""
 
-#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
-#: R/QC.R:0
-msgid "R-tools"
-msgstr ""
-
 #. R/check.R: gettext("Rd conversion errors:", domain = "R-tools")
 #: R/check.R:0
 msgid "Rd conversion errors:"
@@ -3279,7 +3264,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools")
+#. R/QC.R: gettext("The maintainer field is invalid or specifies more than one person", domain = "R-tools")
 #: R/QC.R:0
 msgid "The maintainer field is invalid or specifies more than one person"
 msgstr ""
@@ -6068,6 +6053,13 @@ msgstr[1] ""
 msgid "Found an obsolete/platform-specific call in the following function:"
 msgid_plural ""
 "Found an obsolete/platform-specific call in the following functions:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/sotools.R: ngettext(length(x), "Found no call to: %s", "Found no calls to: %s", domain = "R-tools")
+#: R/sotools.R:0
+msgid "Found no call to: %s"
+msgid_plural "Found no calls to: %s"
 msgstr[0] ""
 msgstr[1] ""
 

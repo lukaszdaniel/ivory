@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-04-15 13:49\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -809,12 +809,6 @@ msgstr ""
 "exportClassPattern spécifié dans le fichier NAMESPACE, mais aucune classe ne "
 "correspond dans le package %s"
 
-#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
-#: R/source.R:0
-#, fuzzy
-msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
-msgstr "'nu' doit être 0, nrow(x) ou ncol(x)"
-
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
 msgid "'file' must be NULL or an already open connection"
@@ -1315,10 +1309,10 @@ msgstr ""
 msgid "Enter values for restart arguments:"
 msgstr ""
 
-#. R/library.R: gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
-msgid "Error in %s:"
+msgid "Error in '%s':"
 msgstr "(R-fr)Erreur dans %s:"
 
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -3808,6 +3802,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T utilisé à la place de TRUE"
 msgstr[1] "T utilisé à la place de TRUE"
+
+#, fuzzy
+#~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
+#~ msgstr "'nu' doit être 0, nrow(x) ou ncol(x)"
 
 #, fuzzy
 #~ msgid "incorrect values of 'indent' and 'width' arguments"

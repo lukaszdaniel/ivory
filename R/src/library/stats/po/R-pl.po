@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -1102,9 +1102,9 @@ msgstr "'type = \"partial\"' nie jest jeszcze zaimplementowany"
 
 #. R/quantile.R: stop("'type' argument must be 1 or 3 for ordered factors")
 #: R/quantile.R:0
-#, fuzzy
 msgid "'type' argument must be 1 or 3 for ordered factors"
-msgstr "argument '%s' musi być zmienną logiczną lub tekstem"
+msgstr ""
+"argument 'type' musi mieć wartość 1 lub 3 dla uporządkowanych czynników"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
 #: R/family.R:0

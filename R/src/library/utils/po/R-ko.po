@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-27 22:35\n"
+"POT-Creation-Date: 2017-04-14 10:09\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -513,6 +513,12 @@ msgstr ""
 #: R/windows/choose.files.R:0
 msgid "All files (*.*)"
 msgstr ""
+
+#. R/citation.R: gettextf("Argument '%s' is deprecated; rather set '%s' instead.", "citation.bibtex.max",     "bibtex=*")
+#: R/citation.R:0
+#, fuzzy
+msgid "Argument '%s' is deprecated; rather set '%s' instead."
+msgstr "인수 'namespace' 가 무시되었습니다 "
 
 #. R/debugger.R: gettext("Available environments had calls:", domain = "R-utils")
 #: R/debugger.R:0
@@ -1494,6 +1500,14 @@ msgstr ""
 #. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
 #: R/citation.R:0
 msgid "To cite package %s in publications use:"
+msgstr ""
+
+#. R/citation.R: gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.",     domain = "R-utils")
+#: R/citation.R:0
+msgid ""
+"To see these entries in BibTeX format, use 'print(<citation>, "
+"bibtex=TRUE)',\n"
+"'toBibtex(.)', or set 'options(citation.bibtex.max=999)'."
 msgstr ""
 
 #. R/demo.R: gettext("Type  <Return> to start:")
@@ -2974,13 +2988,6 @@ msgstr "출력파일 '%s' 가 사라졌습니다 "
 msgid "the relevant mailing list"
 msgstr ""
 
-#. R/citation.R: message("there are additional BiBTeX citations. Use 'citation(*, citation.bibtex.max=Inf)' to see them all.")
-#: R/citation.R:0
-msgid ""
-"there are additional BiBTeX citations. Use 'citation(*, citation.bibtex."
-"max=Inf)' to see them all."
-msgstr ""
-
 #. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))
 #: R/windows/install.packages.R:0
 msgid "there is no 'libs' directory in package %s"
@@ -3621,9 +3628,6 @@ msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 
 #~ msgid "you could try %s"
 #~ msgstr "%s 를 시도해보세요 "
-
-#~ msgid "Argument 'namespace' is deprecated."
-#~ msgstr "인수 'namespace' 가 무시되었습니다 "
 
 #, fuzzy
 #~ msgid "The 'flesh' argument does not contain a skeleton attribute."

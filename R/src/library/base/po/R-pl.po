@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-04-15 13:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -310,9 +310,8 @@ msgstr "argument '%s' musi być wektorem tekstowym lub wartością 'NULL'"
 #. R/seq.R: gettextf("'%s' argument must be a finite number", "from")
 #. R/seq.R: gettextf("'%s' argument must be a finite number", "to")
 #: R/seq.R:0
-#, fuzzy
 msgid "'%s' argument must be a finite number"
-msgstr "argument '%s' musi być liczbą nieujemną"
+msgstr "argument '%s' musi być skończoną liczbą"
 
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
@@ -323,7 +322,6 @@ msgstr "argument '%s' musi być listą"
 
 #. R/seq.R: gettextf("'%s' argument must be a non-negative number", "length.out")
 #: R/seq.R:0
-#, fuzzy
 msgid "'%s' argument must be a non-negative number"
 msgstr "argument '%s' musi być liczbą nieujemną"
 
@@ -723,12 +721,6 @@ msgid ""
 msgstr ""
 "'exportClassPattern' określono w pliku 'NAMESPACE', ale brak pasujących klas "
 "w pakiecie %s"
-
-#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
-#: R/source.R:0
-#, fuzzy
-msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
-msgstr "argument '%s' musi być równy 0, 'nrow(x)' lub 'ncol(x)'"
 
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
@@ -1206,10 +1198,9 @@ msgstr "Kodowanie: %s, przekodowane na %s"
 msgid "Enter values for restart arguments:"
 msgstr "Wprowadź wartości dla argumentów restartu:"
 
-#. R/library.R: gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
 #: R/library.R:0
-#, fuzzy
-msgid "Error in %s:"
+msgid "Error in '%s':"
 msgstr "Błąd w poleceniu '%s':"
 
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1539,11 +1530,12 @@ msgstr "Liczba: długości (%d, %d) różnią się"
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "Package %s version %s cannot be unloaded:\n"
 " %s"
-msgstr "Pakiet %s wersja %s nie może zostać zwolniony"
+msgstr ""
+"Pakiet %s wersja %s nie może zostać zwolniony:\n"
+" %s"
 
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
 #: R/library.R:0
@@ -2297,9 +2289,8 @@ msgstr "niepoprawna wartość '%s'"
 
 #. R/seq.R: stop("invalid '(to - from)/by'")
 #: R/seq.R:0
-#, fuzzy
 msgid "invalid '(to - from)/by'"
-msgstr "niepoprawne '(to - from)/by' w funkcji 'seq(.)'"
+msgstr "niepoprawne '(to - from)/by'"
 
 #. R/dates.R: stop("invalid 'by' string")
 #: R/dates.R:0
@@ -2522,7 +2513,6 @@ msgstr "więcej plików 'from' niż plików 'to'"
 
 #. R/dynload.R: gettextf("multiple DLL files match '%s'. Using file '%s'", names(dll), dlls[[dll]][["path"]])
 #: R/dynload.R:0
-#, fuzzy
 msgid "multiple DLL files match '%s'. Using file '%s'"
 msgstr "wielokrotna zgodność plików DLL z '%s'. Używanie pliku '%s'"
 
@@ -3627,6 +3617,10 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#, fuzzy
+#~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
+#~ msgstr "argument '%s' musi być równy 0, 'nrow(x)' lub 'ncol(x)'"
 
 #~ msgid "incorrect values of 'indent' and 'width' arguments"
 #~ msgstr "niepoprawne wartości argumentów 'indent' oraz 'width'"

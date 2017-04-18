@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-27 22:34+0200\n"
+"POT-Creation-Date: 2017-04-14 10:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.1\n"
 
 #: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
@@ -127,11 +127,12 @@ msgid "invalid form in unary minus check"
 msgstr "niepoprawna forma sprawdzania jednoargumentowej operacji minus"
 
 #: deriv.c:436
-#, fuzzy
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
-msgstr "tylko wywołania o jednym argumencie są wspierane"
+msgstr ""
+"tylko jednoargumentow wywołania funkcji 'log()' są wspierane;\n"
+"  spróbuj skorzystać z tożsamościc log(x,a) = log(x)/log(a)"
 
 #: deriv.c:675
 #, c-format
@@ -423,7 +424,7 @@ msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 "'ihat=1' (diagonala 'L') w funkcji 'l2fit()' ma sens tylko jeśli 'z=x "
-"(eval=data)'"
+"(eval=data)'."
 
 #: loessc.c:360
 #, c-format
@@ -686,37 +687,37 @@ msgstr "niepoprawna formuła w 'update'"
 msgid "formula expected"
 msgstr "oczekiwano formuły"
 
-#: model.c:1041
+#: model.c:1042
 msgid "invalid term in model formula"
 msgstr "niepoprawny człon w formule modelu"
 
-#: model.c:1116 model.c:1178 model.c:1586
+#: model.c:1117 model.c:1179 model.c:1587
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
-#: model.c:1142 model.c:1402
+#: model.c:1143 model.c:1403
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1525
+#: model.c:1526
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1672
+#: model.c:1673
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1682
+#: model.c:1683
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1694
+#: model.c:1695
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:1964
+#: model.c:1966
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 

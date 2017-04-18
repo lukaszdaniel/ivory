@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-27 22:35\n"
+"POT-Creation-Date: 2017-04-14 10:09\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -470,6 +470,11 @@ msgstr ""
 #. R/windows/choose.files.R: gettext("All files (*.*)", domain = "R-utils")
 #: R/windows/choose.files.R:0
 msgid "All files (*.*)"
+msgstr ""
+
+#. R/citation.R: gettextf("Argument '%s' is deprecated; rather set '%s' instead.", "citation.bibtex.max",     "bibtex=*")
+#: R/citation.R:0
+msgid "Argument '%s' is deprecated; rather set '%s' instead."
 msgstr ""
 
 #. R/debugger.R: gettext("Available environments had calls:", domain = "R-utils")
@@ -1401,6 +1406,14 @@ msgstr ""
 #. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
 #: R/citation.R:0
 msgid "To cite package %s in publications use:"
+msgstr ""
+
+#. R/citation.R: gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.",     domain = "R-utils")
+#: R/citation.R:0
+msgid ""
+"To see these entries in BibTeX format, use 'print(<citation>, "
+"bibtex=TRUE)',\n"
+"'toBibtex(.)', or set 'options(citation.bibtex.max=999)'."
 msgstr ""
 
 #. R/demo.R: gettext("Type  <Return> to start:")
@@ -2800,13 +2813,6 @@ msgstr ""
 #. R/windows/create.post.R: gettext("the relevant mailing list", domain = "R-utils")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
 msgid "the relevant mailing list"
-msgstr ""
-
-#. R/citation.R: message("there are additional BiBTeX citations. Use 'citation(*, citation.bibtex.max=Inf)' to see them all.")
-#: R/citation.R:0
-msgid ""
-"there are additional BiBTeX citations. Use 'citation(*, citation.bibtex."
-"max=Inf)' to see them all."
 msgstr ""
 
 #. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))

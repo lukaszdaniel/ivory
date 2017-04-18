@@ -7042,7 +7042,7 @@ function(x, ...)
       else
           gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
       fmt(c(if(x$Maintainer_invalid_or_multi_person)
-                gettext("The maintainer field is invalid or specifies more than one person", doomain = "R-tools"),
+                gettext("The maintainer field is invalid or specifies more than one person", domain = "R-tools"),
             if(x$empty_Maintainer_name)
                 gettext("The maintainer field lacks a name", domain = "R-tools"),
             if(x$Maintainer_needs_quotes)

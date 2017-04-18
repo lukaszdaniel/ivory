@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:35\n"
+"POT-Creation-Date: 2017-04-14 10:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -620,6 +620,13 @@ msgstr ""
 #. R/windows/choose.files.R: gettext("All files (*.*)", domain = "R-utils")
 
 msgid "All files (*.*)"
+msgstr ""
+
+
+#: R/citation.R: 0
+#. R/citation.R: gettextf("Argument '%s' is deprecated; rather set '%s' instead.", "citation.bibtex.max",     "bibtex=*")
+
+msgid "Argument '%s' is deprecated; rather set '%s' instead."
 msgstr ""
 
 
@@ -1819,6 +1826,13 @@ msgstr ""
 #. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
 
 msgid "To cite package %s in publications use:"
+msgstr ""
+
+
+#: R/citation.R: 0
+#. R/citation.R: gettext("To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'.",     domain = "R-utils")
+
+msgid "To see these entries in BibTeX format, use 'print(<citation>, bibtex=TRUE)',\n'toBibtex(.)', or set 'options(citation.bibtex.max=999)'."
 msgstr ""
 
 
@@ -3711,13 +3725,6 @@ msgstr ""
 #. R/windows/create.post.R: gettext("the relevant mailing list", domain = "R-utils")
 
 msgid "the relevant mailing list"
-msgstr ""
-
-
-#: R/citation.R: 0
-#. R/citation.R: message("there are additional BiBTeX citations. Use 'citation(*, citation.bibtex.max=Inf)' to see them all.")
-
-msgid "there are additional BiBTeX citations. Use 'citation(*, citation.bibtex.max=Inf)' to see them all."
 msgstr ""
 
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-27 22:34+0200\n"
+"POT-Creation-Date: 2017-04-14 10:09+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -518,11 +518,11 @@ msgid ""
 "please set environment variable 'TZ'"
 msgstr ""
 
-#: src/gnuwin32/console.c:1003 src/main/errors.c:277
+#: src/gnuwin32/console.c:1006 src/main/errors.c:277
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2086 src/gnuwin32/editor.c:259
+#: src/gnuwin32/console.c:2089 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -653,10 +653,10 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/main/envir.c:3090 src/main/envir.c:3104 src/main/envir.c:3111
 #: src/main/envir.c:3127 src/main/envir.c:3708 src/main/errors.c:1075
 #: src/main/eval.c:454 src/main/eval.c:463 src/main/eval.c:466
-#: src/main/grep.c:943 src/main/grep.c:948 src/main/grep.c:1277
-#: src/main/grep.c:1279 src/main/grep.c:1281 src/main/grep.c:1726
-#: src/main/grep.c:1730 src/main/grep.c:1735 src/main/grep.c:2578
-#: src/main/grep.c:2583 src/main/grep.c:2912 src/main/grep.c:2917
+#: src/main/grep.c:931 src/main/grep.c:936 src/main/grep.c:1258
+#: src/main/grep.c:1260 src/main/grep.c:1262 src/main/grep.c:1707
+#: src/main/grep.c:1711 src/main/grep.c:1716 src/main/grep.c:2553
+#: src/main/grep.c:2558 src/main/grep.c:2881 src/main/grep.c:2886
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3869 src/main/names.c:1315 src/main/names.c:1318
@@ -697,9 +697,9 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/main/seq.c:731 src/main/seq.c:738 src/main/seq.c:742 src/main/seq.c:748
 #: src/main/sort.c:176 src/main/sysutils.c:597 src/main/sysutils.c:601
 #: src/main/sysutils.c:605 src/main/sysutils.c:611 src/main/sysutils.c:615
-#: src/main/sysutils.c:1792 src/main/sysutils.c:1796 src/main/unique.c:1039
-#: src/main/unique.c:1345 src/main/unique.c:1349 src/main/unique.c:1359
-#: src/main/unique.c:1748 src/main/util.c:652 src/main/util.c:655
+#: src/main/sysutils.c:1792 src/main/sysutils.c:1796 src/main/unique.c:1040
+#: src/main/unique.c:1346 src/main/unique.c:1350 src/main/unique.c:1360
+#: src/main/unique.c:1749 src/main/util.c:652 src/main/util.c:655
 #: src/main/util.c:1395 src/main/util.c:1409 src/main/util.c:2000
 #: src/main/util.c:2223 src/main/util.c:2224 src/main/util.c:2225
 #: src/main/util.c:2241 src/main/util.c:2283 src/main/util.c:2287
@@ -742,7 +742,7 @@ msgid "cannot decrease memory limit: ignored"
 msgstr "impossible de diminuer la limite de mémoire allouée : ignorée"
 
 #: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:880
-#: src/main/sysutils.c:642 src/main/unique.c:1642 src/main/util.c:978
+#: src/main/sysutils.c:642 src/main/unique.c:1643 src/main/util.c:978
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "le premier argument doit être un vecteur de caractères"
@@ -750,7 +750,7 @@ msgstr "le premier argument doit être un vecteur de caractères"
 #: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1077
 #: src/main/errors.c:1079 src/main/objects.c:420 src/main/objects.c:1191
 #: src/main/options.c:372 src/main/raw.c:155 src/main/Renviron.c:311
-#: src/main/unique.c:1646 src/modules/lapack/Lapack.c:101
+#: src/main/unique.c:1647 src/modules/lapack/Lapack.c:101
 #: src/modules/lapack/Lapack.c:343 src/modules/lapack/Lapack.c:373
 #: src/modules/lapack/Lapack.c:421 src/modules/lapack/Lapack.c:457
 #: src/modules/lapack/Lapack.c:514 src/modules/lapack/Lapack.c:758
@@ -1059,9 +1059,9 @@ msgstr "ouverture de fichier impossible"
 msgid "invalid call %s"
 msgstr "valeur incorrecte"
 
-#: src/include/Errormsg.h:27 src/main/subscript.c:384 src/main/subscript.c:402
-#: src/main/subscript.c:426 src/main/subscript.c:465 src/main/subscript.c:663
-#: src/main/subscript.c:702 src/main/subscript.c:845
+#: src/include/Errormsg.h:27 src/main/subscript.c:388 src/main/subscript.c:406
+#: src/main/subscript.c:430 src/main/subscript.c:469 src/main/subscript.c:667
+#: src/main/subscript.c:706 src/main/subscript.c:849
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr "indice hors limites"
@@ -1084,8 +1084,8 @@ msgid "cycle detected"
 msgstr ""
 
 #: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1288
-#: src/main/character.c:1292 src/main/grep.c:945 src/main/grep.c:1728
-#: src/main/grep.c:1732 src/main/grep.c:2580 src/main/grep.c:2914
+#: src/main/character.c:1292 src/main/grep.c:933 src/main/grep.c:1709
+#: src/main/grep.c:1713 src/main/grep.c:2555 src/main/grep.c:2883
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
@@ -1097,31 +1097,31 @@ msgstr ""
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' doit être une chaîne de caractères non vide"
 
-#: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:1016
-#: src/main/grep.c:2638 src/main/grep.c:2967
+#: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:1004
+#: src/main/grep.c:2613 src/main/grep.c:2936
 msgid "regular expression is invalid in this locale"
 msgstr "expression régulière incorrecte dans cet environnement linguistique"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:832
-#: src/main/grep.c:2973
+#: src/main/grep.c:2942
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "erreur regcomp : '%s'"
 
-#: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:362
-#: src/main/grep.c:452 src/main/grep.c:580 src/main/grep.c:745
-#: src/main/grep.c:1088 src/main/grep.c:1881 src/main/grep.c:2761
-#: src/main/grep.c:2835 src/main/grep.c:3004
+#: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:356
+#: src/main/grep.c:446 src/main/grep.c:572 src/main/grep.c:733
+#: src/main/grep.c:1074 src/main/grep.c:1860 src/main/grep.c:2734
+#: src/main/grep.c:2808 src/main/grep.c:2973
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr ""
 "la chaîne de caractères entrée %d est incorrecte dans cet environnement "
 "linguistique"
 
-#: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:288
-#: src/main/grep.c:936 src/main/grep.c:938 src/main/grep.c:1263
-#: src/main/grep.c:1271 src/main/grep.c:1719 src/main/grep.c:1721
-#: src/main/grep.c:2570 src/main/grep.c:2572 src/main/grep.c:2902
+#: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:282
+#: src/main/grep.c:924 src/main/grep.c:926 src/main/grep.c:1244
+#: src/main/grep.c:1252 src/main/grep.c:1700 src/main/grep.c:1702
+#: src/main/grep.c:2545 src/main/grep.c:2547 src/main/grep.c:2871
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "l'argument '%s' sera ignoré"
@@ -1442,8 +1442,8 @@ msgstr "valeur de 'perm' hors intervalle"
 #: src/main/array.c:1810 src/main/connections.c:5528
 #: src/main/connections.c:5531 src/main/debug.c:112 src/main/objects.c:1059
 #: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
-#: src/main/sort.c:1249 src/main/unique.c:680 src/main/unique.c:1455
-#: src/main/unique.c:1527 src/main/util.c:657 src/main/util.c:659
+#: src/main/sort.c:1249 src/main/unique.c:681 src/main/unique.c:1456
+#: src/main/unique.c:1528 src/main/util.c:657 src/main/util.c:659
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' doit être TRUE ou FALSE"
@@ -1613,7 +1613,7 @@ msgstr "la longueur de 'dimnames' [%d] n'est pas égale à l'étendue du tableau"
 #: src/main/attrib.c:1160 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1813 src/main/envir.c:1941 src/main/envir.c:2001
 #: src/main/envir.c:2138 src/main/paste.c:74 src/main/paste.c:293
-#: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1747
+#: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1748
 msgid "invalid first argument"
 msgstr "premier argument incorrect"
 
@@ -2009,7 +2009,7 @@ msgstr "les noms ne sont pas des chaînes de caractères"
 msgid "invalid multibyte input string %d"
 msgstr "chaîne de caractères multioctets incorrecte en entrée"
 
-#: src/main/character.c:947 src/main/grep.c:292
+#: src/main/character.c:947 src/main/grep.c:286
 msgid "non-character argument"
 msgstr "l'argument n'est pas une chaîne de caractères"
 
@@ -2038,7 +2038,7 @@ msgid "'old' is longer than 'new'"
 msgstr "'old' est plus long que 'new'"
 
 #: src/main/character.c:1664 src/main/envir.c:3773 src/main/envir.c:3787
-#: src/main/grep.c:151
+#: src/main/grep.c:145
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "les noms de variables sont limités à %d octets"
@@ -2170,7 +2170,7 @@ msgid "'%s' argument must be a list or expression"
 msgstr "l'argument 'expr' doit être une expression"
 
 #: src/main/coerce.c:2477 src/main/engine.c:3087 src/main/envir.c:1856
-#: src/main/envir.c:2871 src/main/envir.c:2953 src/main/unique.c:1353
+#: src/main/envir.c:2871 src/main/envir.c:2953 src/main/unique.c:1354
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "l'argument 'env' doit être un environnement"
@@ -5059,72 +5059,72 @@ msgstr "débordement vers le haut du tampon d'entrée à la ligne %d"
 msgid "relative range of values =%4.0f * EPS, is small (axis %d)"
 msgstr "plage relative des valeurs = %4.0f * EPS trop petite (axe %d)"
 
-#: src/main/grep.c:110
+#: src/main/grep.c:106
 msgid "R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"
 msgstr ""
 
-#: src/main/grep.c:134
+#: src/main/grep.c:128
 #, c-format
 msgid "invalid regular expression '%s', reason '%s'"
 msgstr "expression régulière '%s' incorrecte, à cause de '%s'"
 
-#: src/main/grep.c:136
+#: src/main/grep.c:130
 #, c-format
 msgid "invalid regular expression, reason '%s'"
 msgstr "expression régulière incorrecte, à cause de '%s'"
 
-#: src/main/grep.c:174
+#: src/main/grep.c:168
 #, c-format
 msgid "JIT stack limit reached in PCRE for element %d"
 msgstr ""
 
-#: src/main/grep.c:179
+#: src/main/grep.c:173
 #, c-format
 msgid "back-tracking limit reached in PCRE for element %d"
 msgstr ""
 
-#: src/main/grep.c:183
+#: src/main/grep.c:177
 #, c-format
 msgid ""
 "recursion limit reached in PCRE for element %d\n"
 "  consider increasing the C stack size for the R process"
 msgstr ""
 
-#: src/main/grep.c:188
+#: src/main/grep.c:182
 #, fuzzy, c-format
 msgid "unexpected internal error in PCRE for element %d"
 msgstr "erreur interne dans do_random1"
 
-#: src/main/grep.c:193
+#: src/main/grep.c:187
 #, c-format
 msgid "PCRE detected a recursive loop in the pattern for element %d"
 msgstr ""
 
-#: src/main/grep.c:246
+#: src/main/grep.c:240
 #, fuzzy
 msgid "allocation failure in set_pcre_recursion_limit"
 msgstr "erreur d'affectation mémoire dans R_tmpnam2"
 
-#: src/main/grep.c:354 src/main/grep.c:444 src/main/grep.c:572
-#: src/main/grep.c:1081 src/main/grep.c:1877 src/main/grep.c:2753
+#: src/main/grep.c:348 src/main/grep.c:438 src/main/grep.c:564
+#: src/main/grep.c:1067 src/main/grep.c:1856 src/main/grep.c:2726
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "la chaîne de caractères entrée %d est incorrecte comme encodage UTF-8"
 
-#: src/main/grep.c:421 src/main/grep.c:520
+#: src/main/grep.c:415 src/main/grep.c:514
 #, c-format
 msgid "'split' string %d is invalid UTF-8"
 msgstr "la chaîne de caractères 'split' %d est incorrecte comme encodage UTF-8"
 
-#: src/main/grep.c:425 src/main/grep.c:524 src/main/grep.c:726
+#: src/main/grep.c:419 src/main/grep.c:518 src/main/grep.c:714
 #, c-format
 msgid "'split' string %d is invalid in this locale"
 msgstr ""
 "la chaîne de caractères 'split' %d est incorrecte dans cet environnement "
 "linguistique"
 
-#: src/main/grep.c:533 src/main/grep.c:1031 src/main/grep.c:1820
-#: src/main/grep.c:2653
+#: src/main/grep.c:527 src/main/grep.c:1019 src/main/grep.c:1801
+#: src/main/grep.c:2628
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -5135,13 +5135,13 @@ msgstr ""
 "\t'%s'\n"
 "\tat '%s'\n"
 
-#: src/main/grep.c:535
+#: src/main/grep.c:529
 #, c-format
 msgid "invalid split pattern '%s'"
 msgstr "motif de découpage '%s' incorrect"
 
-#: src/main/grep.c:541 src/main/grep.c:1040 src/main/grep.c:1829
-#: src/main/grep.c:2662
+#: src/main/grep.c:535 src/main/grep.c:1028 src/main/grep.c:1810
+#: src/main/grep.c:2637
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -5150,59 +5150,59 @@ msgstr ""
 "Erreur d'analyse du motif PCRE\n"
 "\t'%s'\n"
 
-#: src/main/grep.c:763 src/main/grep.c:775 src/main/grep.c:1112
-#: src/main/grep.c:2045 src/main/grep.c:2235 src/main/grep.c:2811
-#: src/main/grep.c:3030
+#: src/main/grep.c:751 src/main/grep.c:763 src/main/grep.c:1098
+#: src/main/grep.c:2024 src/main/grep.c:2210 src/main/grep.c:2784
+#: src/main/grep.c:2999
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
 
-#: src/main/grep.c:1012 src/main/grep.c:2634
+#: src/main/grep.c:1000 src/main/grep.c:2609
 msgid "regular expression is invalid UTF-8"
 msgstr "expression régulière incorrecte comme encodage UTF-8"
 
-#: src/main/grep.c:1033 src/main/grep.c:1822 src/main/grep.c:2655
+#: src/main/grep.c:1021 src/main/grep.c:1803 src/main/grep.c:2630
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "expression régulière incorrecte '%s'"
 
-#: src/main/grep.c:1480
+#: src/main/grep.c:1461
 msgid "pattern matches an empty string infinitely, returning first match only"
 msgstr ""
 "le motif correspond à une chaîne vide infiniment, retourne la première "
 "correspondance seulement"
 
-#: src/main/grep.c:1793
+#: src/main/grep.c:1774
 msgid "'pattern' is invalid UTF-8"
 msgstr "'pattern' est incorrect comme encodage UTF-8"
 
-#: src/main/grep.c:1795
+#: src/main/grep.c:1776
 msgid "'replacement' is invalid UTF-8"
 msgstr "'replacement' est incorrect comme encodage UTF-8"
 
-#: src/main/grep.c:1799
+#: src/main/grep.c:1780
 msgid "'pattern' is invalid in this locale"
 msgstr "'pattern' est incorrect dans cet environnement linguistique"
 
-#: src/main/grep.c:1802
+#: src/main/grep.c:1783
 msgid "'replacement' is invalid in this locale"
 msgstr "'replacement' est incorrect dans cet environnement linguistique"
 
-#: src/main/grep.c:1807
+#: src/main/grep.c:1788
 msgid "zero-length pattern"
 msgstr "motif de longueur nulle"
 
-#: src/main/grep.c:1969 src/main/grep.c:1986 src/main/grep.c:2035
-#: src/main/grep.c:2056 src/main/grep.c:2103 src/main/grep.c:2119
+#: src/main/grep.c:1948 src/main/grep.c:1965 src/main/grep.c:2014
+#: src/main/grep.c:2035 src/main/grep.c:2082 src/main/grep.c:2098
 msgid "result string is too long"
 msgstr "chaîne de caractères résultat trop longue"
 
-#: src/main/grep.c:2687
+#: src/main/grep.c:2660
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "pcre_fullinfo a renvoyé '%d'"
 
-#: src/main/grep.c:2721
+#: src/main/grep.c:2694
 #, fuzzy
 msgid "vector is too long"
 msgstr "la longueur choisie pour le vecteur est trop grande"
@@ -6422,7 +6422,7 @@ msgstr "expression régulière 'pattern' incorrecte"
 msgid "unable to determine R home location"
 msgstr "incapable de localiser R home"
 
-#: src/main/platform.c:1373 src/unix/Rscript.c:223
+#: src/main/platform.c:1373 src/unix/Rscript.c:281
 #, fuzzy
 msgid "file name is too long"
 msgstr "nom de fichier trop long"
@@ -6633,27 +6633,27 @@ msgstr "chaîne de charactères multioctets incorrecte %d"
 msgid "invalid character in current multibyte locale"
 msgstr "taille de caractère incorrecte dans dblepr"
 
-#: src/main/plotmath.c:1261 src/main/plotmath.c:1366 src/main/plotmath.c:2655
+#: src/main/plotmath.c:1261 src/main/plotmath.c:1367 src/main/plotmath.c:2656
 msgid "invalid mathematical annotation"
 msgstr "annotation mathématique incorrecte"
 
-#: src/main/plotmath.c:1670
+#: src/main/plotmath.c:1671
 msgid "invalid accent"
 msgstr "accent incorrect"
 
-#: src/main/plotmath.c:1964
+#: src/main/plotmath.c:1965
 msgid "invalid group delimiter"
 msgstr "délimitateur de groupes incorrect"
 
-#: src/main/plotmath.c:1991 src/main/plotmath.c:2128
+#: src/main/plotmath.c:1992 src/main/plotmath.c:2129
 msgid "invalid group specification"
 msgstr "spécification de groupes incorrecte"
 
-#: src/main/plotmath.c:2053
+#: src/main/plotmath.c:2054
 msgid "group is incomplete"
 msgstr "groupe incomplet"
 
-#: src/main/plotmath.c:3181
+#: src/main/plotmath.c:3182
 msgid "Metric information not available for this family/device"
 msgstr "Information de métrique indisponible pour cette famille / périphérique"
 
@@ -7851,7 +7851,7 @@ msgid "'%s' argument must be a non-negative number"
 msgstr "'length.out' doit être un entier positif ou nul"
 
 #: src/main/seq.c:839 src/main/seq.c:846 src/main/seq.c:854
-#: src/main/unique.c:677
+#: src/main/unique.c:678
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'fromLast' doit être de longueur 1"
@@ -8456,8 +8456,8 @@ msgstr "tentative de sélectionner moins d'un élément"
 msgid "attempt to select more than one element in %s"
 msgstr "tentative de sélectionner plus d'un élément"
 
-#: src/main/subscript.c:152 src/main/subscript.c:279 src/main/subscript.c:904
-#: src/main/subscript.c:997 src/main/subset.c:1175
+#: src/main/subscript.c:152 src/main/subscript.c:279 src/main/subscript.c:908
+#: src/main/subscript.c:1001 src/main/subset.c:1175
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "type '%s' d'indice incorrect"
@@ -8490,31 +8490,31 @@ msgstr "un tel index n'existe pas au niveau %d\n"
 msgid "invalid subscript for pairlist"
 msgstr "nombre incorrect d'indices pour l'affectation d'une liste"
 
-#: src/main/subscript.c:361
+#: src/main/subscript.c:365
 msgid "incorrect number of columns in matrix subscript"
 msgstr "nombre de colonnes incorrect dans un indice de matrice"
 
-#: src/main/subscript.c:380 src/main/subscript.c:398 src/main/subscript.c:422
+#: src/main/subscript.c:384 src/main/subscript.c:402 src/main/subscript.c:426
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "valeurs négatives interdites dans un indice de matrice"
 
-#: src/main/subscript.c:501
+#: src/main/subscript.c:505
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) indice logique trop long"
 
-#: src/main/subscript.c:669 src/main/subscript.c:724
+#: src/main/subscript.c:673 src/main/subscript.c:728
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "les indices négatifs ne peuvent être mélangés qu'à des 0"
 
-#: src/main/subscript.c:697
+#: src/main/subscript.c:701
 msgid "subscript too large for 32-bit R"
 msgstr ""
 
-#: src/main/subscript.c:896
+#: src/main/subscript.c:900
 msgid "no 'dimnames' attribute for array"
 msgstr "aucun attribut 'dimnames' pour le tableau"
 
-#: src/main/subscript.c:932
+#: src/main/subscript.c:936
 msgid "subscripting on non-vector"
 msgstr "indiçage d'un élément non vectoriel"
 
@@ -8741,75 +8741,75 @@ msgstr "aucun nom de fichier temporaire disponible"
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr "'dirmark = TRUE' n'est pas supporté sur cette architecture"
 
-#: src/main/unique.c:331 src/main/unique.c:334
+#: src/main/unique.c:332 src/main/unique.c:335
 #, c-format
 msgid "length %d is too large for hashing"
 msgstr "la longueur %d est trop grande pour le hachage"
 
-#: src/main/unique.c:430 src/main/unique.c:442
+#: src/main/unique.c:431 src/main/unique.c:443
 #, fuzzy
 msgid "hash table is full"
 msgstr "la pile de la sortie par défaut est pleine"
 
-#: src/main/unique.c:500 src/main/unique.c:529 src/main/unique.c:559
-#: src/main/unique.c:583 src/main/unique.c:622 src/main/unique.c:691
+#: src/main/unique.c:501 src/main/unique.c:530 src/main/unique.c:560
+#: src/main/unique.c:584 src/main/unique.c:623 src/main/unique.c:692
 #, fuzzy, c-format
 msgid "'%s' method applies only to vectors"
 msgstr "%s() s'applique seulement aux vecteurs"
 
-#: src/main/unique.c:627
+#: src/main/unique.c:628
 msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
-#: src/main/unique.c:698
+#: src/main/unique.c:699
 #, fuzzy, c-format
 msgid "'%s' argument must be positive"
 msgstr "'to' doit être fini"
 
-#: src/main/unique.c:995
+#: src/main/unique.c:996
 #, fuzzy
 msgid "'match()' function requires vector arguments"
 msgstr "'match' exige des arguments vectoriels"
 
-#: src/main/unique.c:1043 src/main/unique.c:1181
+#: src/main/unique.c:1044 src/main/unique.c:1182
 msgid "argument is not of mode character"
 msgstr "argument n'est pas de mode caractère"
 
-#: src/main/unique.c:1304
+#: src/main/unique.c:1305
 #, fuzzy
 msgid "'...' used in a situation where it does not exist"
 msgstr "... utilisé dans une situation où il n'existe pas"
 
-#: src/main/unique.c:1310
+#: src/main/unique.c:1311
 #, fuzzy
 msgid "'...' is not a pairlist"
 msgstr "la valeur dans '...' n'est pas une promesse (promise)"
 
-#: src/main/unique.c:1501
+#: src/main/unique.c:1502
 #, fuzzy
 msgid "non-numeric matrix in 'rowsum()': this should not happen"
 msgstr "matrice non numérique dans rowsum() : cela ne peut se produire"
 
-#: src/main/unique.c:1503 src/main/unique.c:1575
+#: src/main/unique.c:1504 src/main/unique.c:1576
 #, fuzzy
 msgid "row names are not character"
 msgstr "'fmt' n'est pas un vecteur de caractères"
 
-#: src/main/unique.c:1539
+#: src/main/unique.c:1540
 #, fuzzy
 msgid "non-numeric data frame in 'rowsum()'"
 msgstr "tableau de données non numériques dans rowsum"
 
-#: src/main/unique.c:1571
+#: src/main/unique.c:1572
 msgid "this cannot happen"
 msgstr "cela ne peut se produire"
 
-#: src/main/unique.c:1723
+#: src/main/unique.c:1724
 #, fuzzy
 msgid "'csduplicated()' function was not called on a STRSXP"
 msgstr "csduplicated n'est pas appelé avec un argument STRSXP"
 
-#: src/main/unique.c:1749
+#: src/main/unique.c:1750
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 
@@ -10298,58 +10298,58 @@ msgstr "l'allocation de mémoire pour une copie dans le presse-papier a échoué"
 msgid "symbol '%s' was not found"
 msgstr "'%s' introuvable"
 
-#: src/unix/Rscript.c:130
+#: src/unix/Rscript.c:154 src/unix/Rscript.c:162 src/unix/Rscript.c:188
 #, c-format
 msgid "malloc failure\n"
 msgstr ""
 
-#: src/unix/Rscript.c:142
+#: src/unix/Rscript.c:200
 #, fuzzy, c-format
 msgid "installation problem\n"
 msgstr "l'allocation du tampon de dépassement pour le fichier bzfile a échoué"
 
-#: src/unix/Rscript.c:150
+#: src/unix/Rscript.c:208
 #, c-format
 msgid "impossibly long path for RHOME\n"
 msgstr ""
 
-#: src/unix/Rscript.c:181
+#: src/unix/Rscript.c:239
 #, fuzzy, c-format
 msgid "-e not followed by an expression\n"
 msgstr "comparaison interdite pour les expressions"
 
-#: src/unix/Rscript.c:197 src/unix/Rscript.c:207
+#: src/unix/Rscript.c:255 src/unix/Rscript.c:265
 #, fuzzy, c-format
 msgid "unable to set R_DEFAULT_PACKAGES\n"
 msgstr "spécification de R_SESSION_TMPDIR impossible"
 
-#: src/unix/Rscript.c:202
+#: src/unix/Rscript.c:260
 #, fuzzy, c-format
 msgid "setting '%s'\n"
 msgstr "essai de l'URL '%s'\n"
 
-#: src/unix/Rscript.c:219
+#: src/unix/Rscript.c:277
 #, fuzzy, c-format
 msgid "file name is missing\n"
 msgstr "'name' est manquant"
 
-#: src/unix/Rscript.c:246
+#: src/unix/Rscript.c:304
 #, c-format
 msgid "impossibly long string for R_ARCH\n"
 msgstr ""
 
-#: src/unix/Rscript.c:256
+#: src/unix/Rscript.c:314
 #, fuzzy, c-format
 msgid ""
 "running\n"
 "  '%s"
 msgstr "Avis : %s\n"
 
-#: src/unix/Rscript.c:262
+#: src/unix/Rscript.c:320
 msgid "Rscript execution error"
 msgstr ""
 
-#: src/unix/Rscript.c:268
+#: src/unix/Rscript.c:326
 #, fuzzy, c-format
 msgid "Rscript is not supported on this system"
 msgstr "nsl() ne fonctionne pas sur cette architecture"

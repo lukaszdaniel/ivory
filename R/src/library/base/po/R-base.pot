@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-04-15 13:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -929,13 +929,6 @@ msgid "'exportClassPattern' specified in 'NAMESPACE' file but no matching classe
 msgstr ""
 
 
-#: R/source.R: 0
-#. R/source.R: stop("'exprs' argument must be an unevaluated call, 'expression' or 'list'")
-
-msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
-msgstr ""
-
-
 #: R/sink.R: 0
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 
@@ -1524,9 +1517,9 @@ msgstr ""
 
 
 #: R/library.R: 0
-#. R/library.R: gettext("Error in %s: ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
 
-msgid "Error in %s:"
+msgid "Error in '%s':"
 msgstr ""
 
 

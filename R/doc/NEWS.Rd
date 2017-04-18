@@ -9,13 +9,19 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item Placeholder.
+      \item \code{diag()} gets optional \code{names} argument.
+ 
+      \item \code{chooseCRANmirror} and \code{chooseBioCmirror} no
+      longer have a \code{useHTTPS} argument, not needed now all \R
+      builds support \samp{https://} downloads.
     }
   }
 
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{readRDS(url(....))} now works too.% <- port to 3.4.0 patched
+
+      \item \code{printCoefmat()} now also works without column names.
     }
   }
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-27 22:34+0200\n"
+"POT-Creation-Date: 2017-04-14 10:09+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -665,37 +665,37 @@ msgstr "'update'의 식이 잘못되었습니다"
 msgid "formula expected"
 msgstr "식이 있어야 합니다"
 
-#: model.c:1041
+#: model.c:1042
 msgid "invalid term in model formula"
 msgstr "모델식에 잘못된 항목이 있습니다"
 
-#: model.c:1116 model.c:1178 model.c:1586
+#: model.c:1117 model.c:1179 model.c:1587
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "EncodeVars의 모델식이 잘못되었습니다"
 
-#: model.c:1142 model.c:1402
+#: model.c:1143 model.c:1403
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
 
-#: model.c:1525
+#: model.c:1526
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "''를 사용한 데이터 프레임에서 중복된 이름 '%s'이 있습니다"
 
-#: model.c:1672
+#: model.c:1673
 msgid "argument is not a valid model"
 msgstr "인수는 유효한 모델이 아닙니다"
 
-#: model.c:1682
+#: model.c:1683
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' must be NULL or a character vector"
 
-#: model.c:1694
+#: model.c:1695
 msgid "'data' argument is of the wrong type"
 msgstr "'data'인수가 잘못된 유형입니다"
 
-#: model.c:1964
+#: model.c:1966
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.'가 수식에서 있습니다만, 'data'인수가 아닙니다"
 

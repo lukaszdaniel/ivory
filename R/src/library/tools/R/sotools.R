@@ -672,11 +672,7 @@ function(x, ...)
 {
     if(length(x))
         c(gettextf("File %s:", sQuote(attr(x, "file"))),
-          if (length(x) > 1L) {
-              strwrap(gettextf("Found no calls to: %s",
-                            paste(sQuote(x), collapse = ", "), domain = "R-tools"),
-                      indent = 2L, exdent = 4L)
-          } else gettextf("  Found no call to: %s", sQuote(x), domain = "R-tools")
+              strwrap(sprintf(ngettext(length(x), "Found no call to: %s", "Found no calls to: %s", domain = "R-tools"), paste(sQuote(x), collapse = ", ")), indent = 2L, exdent = 4L)
           )
     else character()
 }
