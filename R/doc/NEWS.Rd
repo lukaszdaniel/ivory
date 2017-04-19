@@ -22,6 +22,9 @@
       \item \code{readRDS(url(....))} now works too.% <- port to 3.4.0 patched
 
       \item \code{printCoefmat()} now also works without column names.
+
+      \item The S4 methods on \code{Ops()} for the \code{"structure"} class no
+      longer cause infinite recursion when the structure is not an S4 object.
     }
   }
 }
@@ -32,6 +35,16 @@
     \itemize{
       \item The deprecated support for PCRE versions older than 8.20
       will be removed in \R 3.4.1.
+    }
+  }
+  
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{getParseData()} gave incorrect column information when
+      code contained multi-byte characters.  (\PR{17254})
+      
+      \item Asking for help using expressions like \code{?stats::cor()}
+      did not work.  (\PR{17250})
     }
   }
 }

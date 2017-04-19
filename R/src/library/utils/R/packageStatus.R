@@ -1,7 +1,7 @@
 #  File src/library/utils/R/packageStatus.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -166,7 +166,7 @@ upgrade.packageStatus <- function(object, ask=TRUE, ...)
             cat(pkg, ":\n")
             askprint(object$inst[k,c("Version", "LibPath")])
             askprint(object$avail[pkg, c("Version", "Repository")])
-            answer <- substr(readline(gettext("Update (y/N/x)?  ", domain = "R-utils")), 1L, 1L)
+            answer <- substr(readline(gettext("Update (y/N/c)?  ", domain = "R-utils")), 1L, 1L)
             if(answer == "c" | answer == "c") {
                 cat(gettext("cancelled by user", domain = "R-utils"), "\n", sep = "")
                 return(invisible())

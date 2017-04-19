@@ -622,9 +622,9 @@ installed.packages <-
             ## it is actually 32-bit on some systems)
             enc <- sprintf("%d_%s", nchar(base), .Call(C_crc64, base))
             dest <- file.path(tempdir(), paste0("libloc_", enc, ".rds"))
-            if(file.exists(dest) &&
-               file.mtime(dest) > file.mtime(lib) &&
-               (val <- readRDS(dest))$base == base)
+            test <- file.exists(dest) && file.mtime(dest) > file.mtime(lib) &&
+                (val <- readRDS(dest))$base == base
+            if(identical(test, TRUE))
                 ## use the cache file
                 retval <- rbind(retval, val$value)
             else {
@@ -859,20 +859,14 @@ getCRANmirrors <- function(all = FALSE, local.only = FALSE)
                           fixed = TRUE))
     	mHTTPS <- m[isHTTPS,]
     	mHTTP <- m[!isHTTPS,]
-    	if (useHTTPS) {
-    	    m <- mHTTPS
-    	    if (!nrow(m)) {
-    	    	useHTTPS <- FALSE
-    	    	m <- mHTTP
-    	    }
-    	}
         httpsLabel <- paste("Secure", label, "mirrors")
         httpLabel <- paste("Other", label, "mirrors")
+        m <- mHTTPS
         res <- menu(c(m[, 1L], "(other mirrors)"), graphics, httpsLabel)
         if (res > nrow(m)) {
             m <- mHTTP
             res <- menu(m[, 1L], graphics, httpLabel)
-    	    }
+        }
     }
     if (res > 0L) {
         URL <- m[res, "URL"]
