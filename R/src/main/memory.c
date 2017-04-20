@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1998--2017  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998--2016  The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -3337,7 +3337,7 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
     EXTPTR_PROT(s) = p;
 }
 
-/* 
+/*
    Added to API in R 3.4.0.
    Work around casting issues: works where it is needed.
  */
@@ -3443,7 +3443,7 @@ R_xlen_t (XTRUELENGTH)(SEXP x) { return XTRUELENGTH(CHK2(x)); }
 int  (IS_LONG_VEC)(SEXP x) { return IS_LONG_VEC(CHK2(x)); }
 
 const char *(R_CHAR)(SEXP x) {
-    if(TYPEOF(x) != CHARSXP)
+    if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
     return (const char *)CHAR(x);

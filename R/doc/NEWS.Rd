@@ -10,10 +10,13 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{diag()} gets optional \code{names} argument.
- 
+
       \item \code{chooseCRANmirror} and \code{chooseBioCmirror} no
       longer have a \code{useHTTPS} argument, not needed now all \R
       builds support \samp{https://} downloads.
+
+      \item New \code{summary()} method for \code{warnings()} with a
+      (somewhat experimental) \code{print()} method.
     }
   }
 
@@ -25,6 +28,18 @@
 
       \item The S4 methods on \code{Ops()} for the \code{"structure"} class no
       longer cause infinite recursion when the structure is not an S4 object.
+
+      \item \code{nlm(f, ..)} for the case where \code{f()} has a
+      \code{"hessian"} attribute now computes \eqn{LL' = H + \mu I}{LL' = H + µI} correctly,
+      (part 1 of \PR{17249}).
+
+      \item An S4 method that \dQuote{rematches} to its generic and
+      overrides the default value of a generic formal argument to
+      \code{NULL} no longer drops the argument from its formals.
+
+      \item \code{Rscript} can now accept more than one argument given on
+      the \samp{#!} line of a script. Previously, one could only pass a
+      single argument on the \samp{#!} line in Linux.
     }
   }
 }
@@ -37,12 +52,12 @@
       will be removed in \R 3.4.1.
     }
   }
-  
+
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{getParseData()} gave incorrect column information when
       code contained multi-byte characters.  (\PR{17254})
-      
+
       \item Asking for help using expressions like \code{?stats::cor()}
       did not work.  (\PR{17250})
     }
