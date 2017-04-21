@@ -24,7 +24,7 @@ warnings(\dots)
 \S3method{summary}{warnings}(object, \dots)
 
 \S3method{print}{warnings}(x, tags,
-      header = ngettext(n, "Warning message:\n", "Warning messages:\n"),
+      header = ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base"),
       \dots)
 \S3method{print}{summary.warnings}(x, \dots)
 }

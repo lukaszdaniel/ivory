@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-04-18 r958) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-04-20 r960) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-04-18 r72531) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-04-20 r72568) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -710,4 +710,4 @@ Warning in command 'nls(y ~ b0[fac] + b1 * x, start = list(b0 = c(1, 1), b1 = 10
 > 
 > proc.time()
    user  system elapsed 
-  1.112   0.020   1.129 
+  1.076   0.008   1.083 

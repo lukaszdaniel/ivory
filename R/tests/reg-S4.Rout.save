@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-04-18 r958) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-04-20 r960) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-04-18 r72531) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-04-20 r72568) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1296,4 +1296,23 @@ Also defined by 'package2'
 [1] "genericExtraArg"
 > 
 > stopifnot(identical(genericExtraArg("foo", 1L), 1L))
+> 
+> ## callNextMethod() was broken for ... dispatch
+> f <- function(...) length(list(...))
+> setGeneric("f")
+[1] "f"
+> setMethod("f", "character", function(...){ callNextMethod() })
+[1] "f"
+> stopifnot(identical(f(1, 2, 3), 3L))
+> stopifnot(identical(f("a", "b", "c"), 3L))
+> 
+> ## ... dispatch was evaluating missing arguments in the generic frame
+> f <- function(x, ..., a = b) {
++     b <- "a"
++     a
++ }
+> setGeneric("f", signature = "...")
+[1] "f"
+> stopifnot(identical(f(a=1), 1))
+> stopifnot(identical(f(), "a"))
 > 
