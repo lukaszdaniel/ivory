@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-15 13:49\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -22,6 +22,11 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
+msgstr ""
+
+#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warnings:"
 msgstr ""
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
@@ -288,6 +293,11 @@ msgstr ""
 #. R/dcf.R: gettextf("'%s' argument must be a character string or connection", "file")
 #: R/dcf.R:0
 msgid "'%s' argument must be a character string or connection"
+msgstr ""
+
+#. R/warnings.R: gettextf("'%s' argument must be a character vector of the same length as '%s'", "tags",     "x")
+#: R/warnings.R:0
+msgid "'%s' argument must be a character vector of the same length as '%s'"
 msgstr ""
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
@@ -1135,14 +1145,10 @@ msgstr ""
 msgid "Enter values for restart arguments:"
 msgstr ""
 
-#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
-#: R/library.R:0
-msgid "Error in '%s':"
-msgstr ""
-
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
-#: R/New-Internal.R:0 R/conditions.R:0
+#. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error in command '%s':"
 msgstr ""
 
@@ -1435,6 +1441,11 @@ msgstr ""
 msgid "No traceback available"
 msgstr ""
 
+#. R/warnings.R: gettext("No warnings", domain = "R-base")
+#: R/warnings.R:0
+msgid "No warnings"
+msgstr ""
+
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
 msgid "Number of cases in table:"
@@ -1536,6 +1547,11 @@ msgstr ""
 #. R/load.R: message("Specified environment not found: using '.GlobalEnv' instead")
 #: R/load.R:0
 msgid "Specified environment not found: using '.GlobalEnv' instead"
+msgstr ""
+
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
 msgstr ""
 
 # /src/library/base/R/../../../../share/R/examples-header.R
@@ -3210,10 +3226,10 @@ msgid_plural ""
 "%s\n"
 msgstr[0] ""
 
-#. R/warnings.R: ngettext(n, "Warning message:", "Warning messages:", domain = "R-base")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
-msgid "Warning message:"
-msgid_plural "Warning messages:"
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
 msgstr[0] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'", "classes %s are not exported by 'namespace:%s'",     domain = "R-base")

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2017-04-14 10:09\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1886,9 +1886,9 @@ msgstr ""
 
 
 #: R/packageStatus.R: 0
-#. R/packageStatus.R: gettext("Update (y/N/x)?  ", domain = "R-utils")
+#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
 
-msgid "Update (y/N/x)?"
+msgid "Update (y/N/c)?"
 msgstr ""
 
 

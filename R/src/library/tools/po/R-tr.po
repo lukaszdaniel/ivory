@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-14 13:22\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -5924,6 +5924,13 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Call with 'DUP':"
 msgid_plural "Calls with 'DUP':"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:", domain = "R-tools")
+#: R/toHTML.R:0
+msgid "Corresponding BibTeX entry:"
+msgid_plural "Corresponding BibTeX entries:"
 msgstr[0] ""
 msgstr[1] ""
 

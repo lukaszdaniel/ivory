@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-14 10:09\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1556,9 +1556,9 @@ msgstr " 認識不能な特殊データ値です "
 msgid "Unrecognized value indicator"
 msgstr " 認識不能な値指示子です "
 
-#. R/packageStatus.R: gettext("Update (y/N/x)?  ", domain = "R-utils")
+#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
 #: R/packageStatus.R:0
-msgid "Update (y/N/x)?"
+msgid "Update (y/N/c)?"
 msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-15 13:49\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -22,6 +22,11 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
+msgstr ""
+
+#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warnings:"
 msgstr ""
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
@@ -335,6 +340,12 @@ msgstr "'kind'는 길이 1의 문자열 이어야 합니다 (사용하게 될 RN
 #: R/dcf.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string or connection"
+msgstr "'file' 은 반드시 문자열 또는 연결이어야 합니다. "
+
+#. R/warnings.R: gettextf("'%s' argument must be a character vector of the same length as '%s'", "tags",     "x")
+#: R/warnings.R:0
+#, fuzzy
+msgid "'%s' argument must be a character vector of the same length as '%s'"
 msgstr "'file' 은 반드시 문자열 또는 연결이어야 합니다. "
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
@@ -1299,14 +1310,10 @@ msgstr ""
 msgid "Enter values for restart arguments:"
 msgstr ""
 
-#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
-#: R/library.R:0
-msgid "Error in '%s':"
-msgstr ""
-
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
-#: R/New-Internal.R:0 R/conditions.R:0
+#. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error in command '%s':"
 msgstr ""
 
@@ -1624,6 +1631,11 @@ msgstr "\"%s\" 에서 요청에 만족하는 메소드를 찾을 수 없습니�
 msgid "No traceback available"
 msgstr "이용 할수 있는 트레이스백이 없습니다 "
 
+#. R/warnings.R: gettext("No warnings", domain = "R-base")
+#: R/warnings.R:0
+msgid "No warnings"
+msgstr ""
+
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
 msgid "Number of cases in table:"
@@ -1734,6 +1746,11 @@ msgstr "help(\"Deprecated\") 와 help(\"%s-deprecate\") 의 도움말을 참조�
 #, fuzzy
 msgid "Specified environment not found: using '.GlobalEnv' instead"
 msgstr "찾을 수 없습니다. 대신 .GlobalEnv 을 사용합니다 "
+
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3554,11 +3571,11 @@ msgid_plural ""
 "%s\n"
 msgstr[0] ""
 
-#. R/warnings.R: ngettext(n, "Warning message:", "Warning messages:", domain = "R-base")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
 #, fuzzy
-msgid "Warning message:"
-msgid_plural "Warning messages:"
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
 msgstr[0] "경고 매시지: \n"
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'", "classes %s are not exported by 'namespace:%s'",     domain = "R-base")

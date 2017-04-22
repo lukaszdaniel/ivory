@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 13:22\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -6349,6 +6349,14 @@ msgid_plural "Calls with 'DUP':"
 msgstr[0] "Wywołanie z 'DUP':"
 msgstr[1] "Wywołania z 'DUP':"
 msgstr[2] "Wywołania z 'DUP':"
+
+#. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:", domain = "R-tools")
+#: R/toHTML.R:0
+msgid "Corresponding BibTeX entry:"
+msgid_plural "Corresponding BibTeX entries:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
 #: R/install.R:0

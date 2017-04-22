@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-15 13:49\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -21,6 +21,11 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
+msgstr ""
+
+#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warnings:"
 msgstr ""
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
@@ -336,6 +341,12 @@ msgstr ""
 #: R/dcf.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string or connection"
+msgstr "'file' doit être une chîne de caractères ou une connection"
+
+#. R/warnings.R: gettextf("'%s' argument must be a character vector of the same length as '%s'", "tags",     "x")
+#: R/warnings.R:0
+#, fuzzy
+msgid "'%s' argument must be a character vector of the same length as '%s'"
 msgstr "'file' doit être une chîne de caractères ou une connection"
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
@@ -1309,15 +1320,10 @@ msgstr ""
 msgid "Enter values for restart arguments:"
 msgstr ""
 
-#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
-#: R/library.R:0
-#, fuzzy
-msgid "Error in '%s':"
-msgstr "(R-fr)Erreur dans %s:"
-
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
-#: R/New-Internal.R:0 R/conditions.R:0
+#. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 #, fuzzy
 msgid "Error in command '%s':"
 msgstr "(R-fr)Erreur dans %s:"
@@ -1638,6 +1644,11 @@ msgstr "Pas de méthodes trouvées das \"%s\" pour les requêtes : %s"
 msgid "No traceback available"
 msgstr "Pas d'historique des fonctions appelées ('traceback') disponible"
 
+#. R/warnings.R: gettext("No warnings", domain = "R-base")
+#: R/warnings.R:0
+msgid "No warnings"
+msgstr ""
+
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
 msgid "Number of cases in table:"
@@ -1748,6 +1759,11 @@ msgstr "Voir help(\"Deprecated\") et help(\"%s-deprecated\")."
 #, fuzzy
 msgid "Specified environment not found: using '.GlobalEnv' instead"
 msgstr "introuvable : utilisation de .GlobalEnv à la place"
+
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3618,11 +3634,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/warnings.R: ngettext(n, "Warning message:", "Warning messages:", domain = "R-base")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
 #, fuzzy
-msgid "Warning message:"
-msgid_plural "Warning messages:"
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
 msgstr[0] "Message d'avis :\n"
 msgstr[1] "Messages d'avis :\n"
 
@@ -3802,6 +3818,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T utilisé à la place de TRUE"
 msgstr[1] "T utilisé à la place de TRUE"
+
+#, fuzzy
+#~ msgid "Error in '%s':"
+#~ msgstr "(R-fr)Erreur dans %s:"
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"

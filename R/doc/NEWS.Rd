@@ -9,8 +9,8 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item \code{diag()} gets optional \code{names} argument: this
-      requires updates to packages defining S4 methods for it.
+      \item \code{diag()} gets an optional \code{names} argument: this
+      may require updates to packages defining S4 methods for it.
 
       \item \code{chooseCRANmirror()} and \code{chooseBioCmirror()} no
       longer have a \code{useHTTPS} argument, not needed now all \R
@@ -26,8 +26,6 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{readRDS(url(....))} now works too.% <- port to 3.4.0 patched
-
       \item \code{printCoefmat()} now also works without column names.
 
       \item The S4 methods on \code{Ops()} for the \code{"structure"} class no
@@ -59,7 +57,7 @@
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
       \item The deprecated support for PCRE versions older than 8.20
-      will be removed in \R 3.4.1.
+      has been removed.
     }
   }
 
@@ -70,6 +68,8 @@
 
       \item Asking for help using expressions like \code{?stats::cor()}
       did not work.  (\PR{17250})
+
+      \item \code{readRDS(url(....))} now works too.
     }
   }
 }

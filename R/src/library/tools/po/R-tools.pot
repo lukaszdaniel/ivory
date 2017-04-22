@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.5.0\n"
-"POT-Creation-Date: 2017-04-14 13:22\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7876,6 +7876,15 @@ msgstr[1]    ""
 
 msgid        "Call with 'DUP':"
 msgid_plural "Calls with 'DUP':"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/toHTML.R: 0
+#. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:", domain = "R-tools")
+
+msgid        "Corresponding BibTeX entry:"
+msgid_plural "Corresponding BibTeX entries:"
 msgstr[0]    ""
 msgstr[1]    ""
 

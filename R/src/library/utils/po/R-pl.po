@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1553,9 +1553,10 @@ msgstr "Nierozpoznana specjalna wartość danej"
 msgid "Unrecognized value indicator"
 msgstr "Nierozpoznany wskaźnik wartości"
 
-#. R/packageStatus.R: gettext("Update (y/N/x)?  ", domain = "R-utils")
+#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
 #: R/packageStatus.R:0
-msgid "Update (y/N/x)?"
+#, fuzzy
+msgid "Update (y/N/c)?"
 msgstr "Aktualizować (y/N/x)?"
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")

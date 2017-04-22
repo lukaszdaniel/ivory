@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-15 13:49\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -20,6 +20,11 @@ msgstr ""
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr "opcje \"hexNumeric\" oraz \"digits17\" są wzajemnie wykluczające się"
+
+#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warnings:"
+msgstr ""
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
 #: R/stop.R:0
@@ -299,6 +304,12 @@ msgstr ""
 #: R/dcf.R:0
 msgid "'%s' argument must be a character string or connection"
 msgstr "argument '%s' musi być łańcuchem tekstowym lub połączeniem"
+
+#. R/warnings.R: gettextf("'%s' argument must be a character vector of the same length as '%s'", "tags",     "x")
+#: R/warnings.R:0
+#, fuzzy
+msgid "'%s' argument must be a character vector of the same length as '%s'"
+msgstr "argument '%s' musi być łańcuchem tekstowym o długości 1"
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
@@ -739,9 +750,8 @@ msgstr "argument 'file' musi być łańcuchem tekstowym lub połączeniem"
 
 #. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
 #: R/format.R:0
-#, fuzzy
 msgid "'flag' should contain only characters from [0+- #'I]"
-msgstr "argument 'flag' może zawierać jedynie znaki '0+- #'"
+msgstr "argument 'flag' może zawierać jedynie znaki z zakresu [0+- #]"
 
 #. R/format.R: stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
 #: R/format.R:0
@@ -1198,14 +1208,10 @@ msgstr "Kodowanie: %s, przekodowane na %s"
 msgid "Enter values for restart arguments:"
 msgstr "Wprowadź wartości dla argumentów restartu:"
 
-#. R/library.R: gettext("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
-#: R/library.R:0
-msgid "Error in '%s':"
-msgstr "Błąd w poleceniu '%s':"
-
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
-#: R/New-Internal.R:0 R/conditions.R:0
+#. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error in command '%s':"
 msgstr "Błąd w poleceniu '%s':"
 
@@ -1513,6 +1519,11 @@ msgstr "Nie znaleziono metod w pakiecie %s dla żądań: %s"
 msgid "No traceback available"
 msgstr "Śledzenie nie jest dostepne"
 
+#. R/warnings.R: gettext("No warnings", domain = "R-base")
+#: R/warnings.R:0
+msgid "No warnings"
+msgstr ""
+
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
 msgid "Number of cases in table:"
@@ -1622,6 +1633,11 @@ msgstr "Zobacz help(\"Deprecated\") oraz help(\"%s-deprecated\")."
 msgid "Specified environment not found: using '.GlobalEnv' instead"
 msgstr ""
 "Nie znaleziono określonego środowiska: zamiast tego używanie '.GlobalEnv'"
+
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -2875,14 +2891,14 @@ msgstr ""
 
 #. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #: R/namespace.R:0
-#, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
 "according to the DESCRIPTION file it is\n"
 "%s"
 msgstr ""
 "pakiet %s posiada licencję, którą musisz zaakceptować:\n"
-"zgodnie z opisem w pliku DESCRIPTION jest to %s"
+"zgodnie z opisem w pliku DESCRIPTION jest to\n"
+"%s"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
 #: R/namespace.R:0
@@ -2966,19 +2982,22 @@ msgstr ""
 
 #. R/library.R: gettextf("package or namespace load failed for %s in %s:\n %s", sQuote(package),     paste(deparse(cc)[1L], collapse = "", sep = ""), conditionMessage(e), domain = "R-base")
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "package or namespace load failed for %s in %s:\n"
 " %s"
-msgstr "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s"
+msgstr ""
+"ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s w "
+"%s:\n"
+" %s"
 
 #. R/library.R: gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e),     domain = "R-base")
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "package or namespace load failed for %s:\n"
 " %s"
-msgstr "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s"
+msgstr ""
+"ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s:\n"
+" %s"
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
@@ -3430,13 +3449,13 @@ msgstr[2] ""
 "\n"
 "%s\n"
 
-#. R/warnings.R: ngettext(n, "Warning message:", "Warning messages:", domain = "R-base")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
-msgid "Warning message:"
-msgid_plural "Warning messages:"
-msgstr[0] "Komunikat ostrzegawczy:"
-msgstr[1] "Komunikaty ostrzegawcze:"
-msgstr[2] "Komunikaty ostrzegawcze:"
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
+msgstr[0] "Komunikat ostrzegawczy:\n"
+msgstr[1] "Komunikaty ostrzegawcze:\n"
+msgstr[2] "Komunikaty ostrzegawcze:\n"
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'", "classes %s are not exported by 'namespace:%s'",     domain = "R-base")
 #: R/namespace.R:0
@@ -3617,6 +3636,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "Error in '%s':"
+#~ msgstr "Błąd w poleceniu '%s':"
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"

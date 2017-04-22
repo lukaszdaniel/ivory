@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-14 10:09\n"
+"POT-Creation-Date: 2017-04-21 22:02\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1454,9 +1454,9 @@ msgstr ""
 msgid "Unrecognized value indicator"
 msgstr ""
 
-#. R/packageStatus.R: gettext("Update (y/N/x)?  ", domain = "R-utils")
+#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
 #: R/packageStatus.R:0
-msgid "Update (y/N/x)?"
+msgid "Update (y/N/c)?"
 msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
