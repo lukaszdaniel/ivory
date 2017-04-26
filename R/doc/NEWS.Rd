@@ -21,6 +21,9 @@
 
       \item \code{.self} is now automatically registered as a global
       variable when registering a reference class method.
+
+      \item \code{tempdir(check=TRUE)} recreates the \code{tmpdir()} if
+      it is no longer valid.
     }
   }
 
@@ -70,6 +73,12 @@
       did not work.  (\PR{17250})
 
       \item \code{readRDS(url(....))} now works too.
+
+      \item \code{installed.packages()} on Windows would fail when
+      \code{file.mtime()} (?) returned NA.
+
+      \item \command{R CMD Sweave} again returns \samp{status = 0} on
+      successful completion.
     }
   }
 }
