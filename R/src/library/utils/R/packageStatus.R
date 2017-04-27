@@ -166,12 +166,12 @@ upgrade.packageStatus <- function(object, ask=TRUE, ...)
             cat(pkg, ":\n")
             askprint(object$inst[k,c("Version", "LibPath")])
             askprint(object$avail[pkg, c("Version", "Repository")])
-            answer <- substr(readline(gettext("Update (y/N/c)?  ", domain = "R-utils")), 1L, 1L)
-            if(answer == "c" | answer == "c") {
+            answer <- askYesNo(gettext("Update?"))
+            if(is.na(answer)) {
                 cat(gettext("cancelled by user", domain = "R-utils"), "\n", sep = "")
                 return(invisible())
             }
-            if(answer == "y" | answer == "Y")
+            if(isTRUE(answer))
                 update <-
                     rbind(update,
                           c(pkg, as.character(object$inst[k, "LibPath"]),

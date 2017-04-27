@@ -1,7 +1,7 @@
 #  File src/library/utils/R/unix/create.post.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -80,8 +80,7 @@ create.post <- function(instructions = character(),
                              shQuote(address), "<",
                              filename, "2>/dev/null")
         status <- 1L
-        answer <- readline(gettextf("Email the %s now? (yes/no) ", description, domain = "R-utils"))
-        answer <- grep("yes", answer, ignore.case=TRUE)
+        answer <- askYesNo(gettextf("Email the %s now?", description))
         if(length(answer)) {
             cat(gettext("Sending email ...", domain = "R-utils"), "\n", sep = "")
             status <- system(paste("mailx", cmdargs), , TRUE, TRUE)

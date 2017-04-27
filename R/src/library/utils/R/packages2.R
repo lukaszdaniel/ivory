@@ -1,7 +1,7 @@
 #  File src/library/utils/R/packages2.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -284,25 +284,14 @@ install.packages <-
         userdir <- unlist(strsplit(Sys.getenv("R_LIBS_USER"),
                                    .Platform$path.sep))[1L]
 	if(interactive()) {
-	    ask.yes.no <- function(msg) {
-                ##' returns "no" for "no",  otherwise 'ans', a string
-		#msg <- gettext(msg)
-		if(.Platform$OS.type == "windows") {
-                    flush.console() # so warning is seen
-		    ans <- winDialog("yesno", sprintf(msg, sQuote(userdir)))
-		    if(ans != "YES") "no" else ans
-		} else {
-		    ans <- readline(paste(sprintf(msg, userdir), " (y/n) "))
-		    if(substr(ans, 1L, 1L) == "n") "no" else ans
-		}
-	    }
-	    ans <- ask.yes.no(gettext("Would you like to use a personal library instead?", domain = "R-utils"))
-	    if(identical(ans, "no")) stop("unable to install packages")
+	    ans <- askYesNo(gettext("Would you like to use a personal library instead?"), default = FALSE)
+	    if(!isTRUE(ans)) stop("unable to install packages")
 
 	    lib <- userdir
 	    if(!file.exists(userdir)) {
-		ans <- ask.yes.no(gettext("Would you like to create a personal library\n%s\nto install packages into?", domain = "R-utils"))
-		if(identical(ans, "no")) stop("unable to install packages")
+		ans <- askYesNo(gettextf("Would you like to create a personal library\n%s\nto install packages into?",
+		                        sQuote(userdir)), default = FALSE) 
+		if(!isTRUE(ans)) stop("unable to install packages")
 		if(!dir.create(userdir, recursive = TRUE))
                     stop(gettextf("unable to create %s", sQuote(userdir)),
                          domain = "R-utils")
@@ -434,9 +423,9 @@ install.packages <-
                         ngettext(sum(later & hasSrc),
                                  "Do you want to install from sources the package which needs compilation?",
                                  "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
-                    message(msg, domain = NA)
-                    res <- readline("y/n: ")
-                    if(res != "y") later <- later & !hasSrc
+                    res <- askYesNo(msg)
+                    if (is.na(res)) stop("Cancelled by user")
+                    if(!isTRUE(res)) later <- later & !hasSrc
                 } else if (action == "never") {
                     cat("  ", gettext("Binaries will be installed", domain = "R-utils"), "\n", sep = "")
                     later <- later & !hasSrc
@@ -456,9 +445,9 @@ install.packages <-
                 msg <- strwrap(paste(msg, collapse = " "), exdent = 2)
                 message(paste(msg, collapse = "\n"), domain = NA)
                 if(action == "interactive" && interactive()) {
-                    message("Do you want to attempt to install these from sources?")
-                    res <- readline("y/n: ")
-                    if(res != "y") pkgs <- setdiff(pkgs, s2)
+                    res <- askYesNo(gettext("Do you want to attempt to install these from sources?"))
+                    if (is.na(res)) stop("Cancelled by user")
+                    if(!isTRUE(res)) pkgs <- setdiff(pkgs, s2)
                 } else if(action == "never") {
                     cat("  ", gettext("These will not be installed", domain = "R-utils"), "\n", sep = "")
                     pkgs <- setdiff(pkgs, s2)
