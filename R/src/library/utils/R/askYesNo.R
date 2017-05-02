@@ -16,18 +16,6 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.R-project.org/Licenses/
 
-
-# Windows Rgui setup will set this as the askYesNo option
-
-askYesNoWinDialog <- function(msg, ...) {
-    flush.console() # so warning is seen
-    ans <- winDialog("yesnocancel", msg)
-    switch(ans,
-            YES = TRUE,
-            NO  = FALSE,
-            NA)
-}
-
 askYesNo <- function(msg, default = TRUE, 
                      prompts = getOption("askYesNo", gettext(c("Yes", "No", "Cancel"))),
 		     ...) {
@@ -40,13 +28,14 @@ askYesNo <- function(msg, default = TRUE,
     choices <- tolower(prompts)
     if (is.na(default)) choices[3L] <- prompts[3L]
     else if (default) choices[1L] <- prompts[1L]
-    else choices[2L] <- prompts[2L]
-    msg <- paste0(msg, " (", paste(choices, collapse = "/"), ") ")
+    else choices[2L] <- prompts[2L] 
+    msg1 <- paste0("(", paste(choices, collapse = "/"), ") ")
     # readline truncates the prompt; try to avoid that
-    if (nchar(msg) > 250) {
-	cat(substr(msg, 1, nchar(msg) - 250))
-	msg <- substr(msg, nchar(msg) - 250 + 1, nchar(msg))
-    }
+    if (nchar(paste0(msg, msg1)) > 250) {
+	cat(msg, "\n")
+	msg <- msg1
+    } else
+    	msg <- paste0(msg, " ", msg1)
     ans <- readline(msg)
     match <- pmatch(tolower(ans), tolower(choices))
     if (!nchar(ans)) default
