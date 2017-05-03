@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 21:02\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -16,11 +16,6 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
-msgstr ""
-
-#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
-#: R/warnings.R:0
-msgid "%d identical warnings:"
 msgstr ""
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
@@ -3498,6 +3493,12 @@ msgstr[0] ""
 #: R/all.equal.R:0
 msgid "%d element mismatch"
 msgid_plural "%d element mismatches"
+msgstr[0] ""
+
+#. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n", domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warning:\n"
+msgid_plural "%d identical warnings:\n"
 msgstr[0] ""
 
 #. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows",     domain = "R-base")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 20:51\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -552,6 +552,20 @@ msgstr ""
 msgid "Built dbMat[%d,%d]"
 msgstr ""
 
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Cancel"
+msgstr ""
+
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#: R/help.request.R:0 R/packages2.R:0
+msgid "Cancelled by user"
+msgstr ""
+
 #. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
 #: R/debugcall.R:0
 msgid ""
@@ -684,7 +698,7 @@ msgstr ""
 "不知道'lib'元素里如何安装依赖程序\n"
 "因此略过不装"
 
-#. R/packages2.R: message("Do you want to attempt to install these from sources?")
+#. R/packages2.R: gettext("Do you want to attempt to install these from sources?")
 #: R/packages2.R:0
 msgid "Do you want to attempt to install these from sources?"
 msgstr ""
@@ -725,9 +739,9 @@ msgstr "错误：不能打开锁定目录"
 msgid "Edit the file and move it to the appropriate directory."
 msgstr "修改文件再把它放到合适的目录中去。"
 
-#. R/unix/create.post.R: gettextf("Email the %s now? (yes/no) ", description, domain = "R-utils")
+#. R/unix/create.post.R: gettextf("Email the %s now?", description)
 #: R/unix/create.post.R:0
-msgid "Email the %s now? (yes/no)"
+msgid "Email the %s now?"
 msgstr ""
 
 #. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
@@ -1013,6 +1027,11 @@ msgstr ""
 #. R/str.R: gettextf(" Named vector %s", le.str, domain = "R-utils")
 #: R/str.R:0
 msgid "Named vector %s"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "No"
 msgstr ""
 
 #. R/read.DIF.R: stop("No DIF data on clipboard")
@@ -1520,10 +1539,21 @@ msgid ""
 "Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'."
 msgstr ""
 
+#. R/help.request.R: warning("Unable to connect to CRAN to check R version.")
+#: R/help.request.R:0
+msgid "Unable to connect to CRAN to check R version."
+msgstr ""
+
 #. R/object.size.R: gettextf("Unit %s is not part of standard %s", sQuote(units), sQuote(standard))
 #: R/object.size.R:0
 msgid "Unit %s is not part of standard %s"
 msgstr ""
+
+#. R/askYesNo.R: gettextf("Unrecognized response %s", dQuote(ans))
+#: R/askYesNo.R:0
+#, fuzzy
+msgid "Unrecognized response %s"
+msgstr "没有这样的特殊数据值"
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
@@ -1535,9 +1565,10 @@ msgstr "没有这样的特殊数据值"
 msgid "Unrecognized value indicator"
 msgstr "没有这样的数值指示器"
 
-#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
-#: R/packageStatus.R:0
-msgid "Update (y/N/c)?"
+#. R/packageStatus.R: gettext("Update?")
+#. R/packages.R: gettext("Update?")
+#: R/packageStatus.R:0 R/packages.R:0
+msgid "Update?"
 msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
@@ -1690,7 +1721,7 @@ msgstr "警告：没有这样的选项"
 msgid "Windows bitmap files (*.bmp)"
 msgstr ""
 
-#. R/packages2.R: gettext("Would you like to create a personal library\n%s\nto install packages into?",     domain = "R-utils")
+#. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
 #: R/packages2.R:0
 msgid ""
 "Would you like to create a personal library\n"
@@ -1701,7 +1732,7 @@ msgstr ""
 "%s\n"
 "用来安装程序包?"
 
-#. R/packages2.R: gettext("Would you like to use a personal library instead?", domain = "R-utils")
+#. R/packages2.R: gettext("Would you like to use a personal library instead?")
 #: R/packages2.R:0
 #, fuzzy
 msgid "Would you like to use a personal library instead?"
@@ -1732,6 +1763,11 @@ msgstr "处理文件%s"
 #. R/edit.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
 #: R/edit.R:0
 msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Yes"
 msgstr ""
 
 #. R/SweaveDrivers.R: gettextf("You can now run (pdf)latex on %s", sQuote(outputname), domain = "R-utils")

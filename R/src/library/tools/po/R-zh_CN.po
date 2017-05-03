@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 20:51\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -390,6 +390,16 @@ msgstr ""
 #. R/check.R: gettext("... incomplete output.  Crash?", domain = "R-tools")
 #: R/check.R:0
 msgid "... incomplete output.  Crash?"
+msgstr ""
+
+#. R/testing.R: gettextf(".Rdiff() exit status %s", status)
+#: R/testing.R:0
+msgid ".Rdiff() exit status %s"
+msgstr ""
+
+#. R/Rprof.R: gettextf(".Rprof() exit status %s", status)
+#: R/Rprof.R:0
+msgid ".Rprof() exit status %s"
 msgstr ""
 
 #. R/install.R: stop(".install_packages() exit status ", status)
@@ -4825,12 +4835,6 @@ msgstr "建造"
 msgid "creating tarball"
 msgstr "建造"
 
-#. R/build.R: gettext("creating vignettes ...", domain = "R-tools")
-#: R/build.R:0
-#, fuzzy
-msgid "creating vignettes ..."
-msgstr "文件'%s'里有警告："
-
 #. R/testing.R: gettextf("creation of %s failed", sQuote(Rfile))
 #. R/testing.R: gettextf("creation of %s failed", sQuote(f))
 #: R/testing.R:0
@@ -6129,6 +6133,12 @@ msgstr "无法写编码文件"
 msgid "unimplemented encoding"
 msgstr "还没有实现的编码"
 
+#. R/toHTML.R: warning("unknown header specification")
+#: R/toHTML.R:0
+#, fuzzy
+msgid "unknown header specification"
+msgstr "非标准执照规格"
+
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 #, fuzzy
@@ -6311,14 +6321,16 @@ msgid "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
 msgstr[0] "载入失败"
 
-#. R/build.R: ngettext(sum(!copied), "%s file %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
-"%s file %s\n"
+"%s file\n"
+"%s\n"
 "  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgid_plural ""
-"%s files %s\n"
+"%s files\n"
+"%s\n"
 "  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0] ""
@@ -7090,6 +7102,10 @@ msgstr[0] "%s里不能有T/F这样的值"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码'%s'%s行"
+
+#, fuzzy
+#~ msgid "creating vignettes ..."
+#~ msgstr "文件'%s'里有警告："
 
 #, fuzzy
 #~ msgid "unknown package layout"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.5.0\n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 21:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,13 +15,6 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
-msgstr ""
-
-
-#: R/warnings.R: 0
-#. R/warnings.R: gettextf("%d identical warnings:\n", sum(cn), domain = "R-base")
-
-msgid "%d identical warnings:"
 msgstr ""
 
 
@@ -4229,6 +4222,15 @@ msgstr[1]    ""
 
 msgid        "%d element mismatch"
 msgid_plural "%d element mismatches"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/warnings.R: 0
+#. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n", domain = "R-base")
+
+msgid        "%d identical warning:\n"
+msgid_plural "%d identical warnings:\n"
 msgstr[0]    ""
 msgstr[1]    ""
 

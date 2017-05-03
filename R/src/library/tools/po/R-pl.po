@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 20:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -384,6 +384,18 @@ msgstr "... [PRZYCIĘTE]"
 #: R/check.R:0
 msgid "... incomplete output.  Crash?"
 msgstr "... niekompletne wyjście.  Nagłe przerwanie?"
+
+#. R/testing.R: gettextf(".Rdiff() exit status %s", status)
+#: R/testing.R:0
+#, fuzzy
+msgid ".Rdiff() exit status %s"
+msgstr "Status wyjścia %s dla funkcji '.build_packages()'"
+
+#. R/Rprof.R: gettextf(".Rprof() exit status %s", status)
+#: R/Rprof.R:0
+#, fuzzy
+msgid ".Rprof() exit status %s"
+msgstr "Status wyjścia %s dla funkcji '.build_packages()'"
 
 #. R/install.R: stop(".install_packages() exit status ", status)
 #: R/install.R:0
@@ -4828,11 +4840,6 @@ msgstr "tworzenie nowego %s"
 msgid "creating tarball"
 msgstr "tworzenie pliku tarball"
 
-#. R/build.R: gettext("creating vignettes ...", domain = "R-tools")
-#: R/build.R:0
-msgid "creating vignettes ..."
-msgstr "tworzenie ilustracji ..."
-
 #. R/testing.R: gettextf("creation of %s failed", sQuote(Rfile))
 #. R/testing.R: gettextf("creation of %s failed", sQuote(f))
 #: R/testing.R:0
@@ -6046,6 +6053,12 @@ msgstr "nie można zapisać plików kodu"
 msgid "unimplemented encoding"
 msgstr "niezaimplementowana strona kodowa"
 
+#. R/toHTML.R: warning("unknown header specification")
+#: R/toHTML.R:0
+#, fuzzy
+msgid "unknown header specification"
+msgstr "Nierozpoznany format: %s"
+
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 msgid "unsupported %s predictor %d"
@@ -6129,7 +6142,6 @@ msgstr "ostrzeżenie: kontrola może osiągnąć koniec funkcji"
 #. R/check.R: gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools")
 #. R/check.R: gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "when running code in %s"
 msgstr "podczas uruchamiania kodu w %s"
 
@@ -6230,14 +6242,16 @@ msgstr[0] "%d z testów pakietu nie powiódł się"
 msgstr[1] "%d z testów pakietu nie powiódły się"
 msgstr[2] "%d z testów pakietu nie powiódło się"
 
-#. R/build.R: ngettext(sum(!copied), "%s file %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files %s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
 msgid ""
-"%s file %s\n"
+"%s file\n"
+"%s\n"
 "  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgid_plural ""
-"%s files %s\n"
+"%s files\n"
+"%s\n"
 "  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0] ""
@@ -6354,9 +6368,9 @@ msgstr[2] "Wywołania z 'DUP':"
 #: R/toHTML.R:0
 msgid "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odpowiedni wpis BibTeX:"
+msgstr[1] "Odpowiednie wpisy BibTeX:"
+msgstr[2] "Odpowiednie wpisy BibTeX:"
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
 #: R/install.R:0
@@ -7376,6 +7390,9 @@ msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
 
+#~ msgid "creating vignettes ..."
+#~ msgstr "tworzenie ilustracji ..."
+
 #, fuzzy
 #~ msgid "Found no calls to: %s"
 #~ msgstr "Znaleziono wywołania nie-API do R: %s"
@@ -7714,10 +7731,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 #, fuzzy
 #~ msgid "'fmt' must be length 1"
 #~ msgstr "argument '%s' musi być długości 1"
-
-#, fuzzy
-#~ msgid "unrecognised format specification '%s'"
-#~ msgstr "Nierozpoznany format: %s"
 
 #, fuzzy
 #~ msgid "invalid '%s' value"

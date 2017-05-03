@@ -82,11 +82,10 @@ print.summary.warnings <- function(x, ...) {
     if(n == 0)
 	cat(gettext("No warnings", domain = "R-base"), "\n", sep = "")
     else if(n == 1)
-	print.warnings(x, header = gettextf("%d identical warnings:\n", sum(cn), domain = "R-base"))
+	print.warnings(x, header = sprintf(ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n", domain = "R-base"), sum(cn)))
     else ## n >= 2
 	print.warnings(x, tags = paste0(format(cn), "x : "),
-		       header = gettextf("Summary of (a total of %d) warning messages:\n",
-					 sum(cn)))
+		       header = gettextf("Summary of (a total of %d) warning messages:\n", sum(cn)))
     invisible(x)
 }
 

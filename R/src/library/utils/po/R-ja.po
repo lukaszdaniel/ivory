@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-04-21 22:02\n"
+"POT-Creation-Date: 2017-05-03 20:51\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -558,6 +558,20 @@ msgstr ""
 msgid "Built dbMat[%d,%d]"
 msgstr ""
 
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Cancel"
+msgstr ""
+
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#: R/help.request.R:0 R/packages2.R:0
+msgid "Cancelled by user"
+msgstr ""
+
 #. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
 #: R/debugcall.R:0
 msgid ""
@@ -691,7 +705,7 @@ msgstr ""
 " 'lib' のどの要素を依存関係のインストールに使うかわかりません \n"
 " 依存関係のインストールをスキップします "
 
-#. R/packages2.R: message("Do you want to attempt to install these from sources?")
+#. R/packages2.R: gettext("Do you want to attempt to install these from sources?")
 #: R/packages2.R:0
 msgid "Do you want to attempt to install these from sources?"
 msgstr ""
@@ -732,9 +746,9 @@ msgstr " ディレクトリのロックに失敗しました。 "
 msgid "Edit the file and move it to the appropriate directory."
 msgstr " ファイルを編集してきとうなディレクトリに移動してください "
 
-#. R/unix/create.post.R: gettextf("Email the %s now? (yes/no) ", description, domain = "R-utils")
+#. R/unix/create.post.R: gettextf("Email the %s now?", description)
 #: R/unix/create.post.R:0
-msgid "Email the %s now? (yes/no)"
+msgid "Email the %s now?"
 msgstr ""
 
 #. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
@@ -1028,6 +1042,11 @@ msgstr ""
 #. R/str.R: gettextf(" Named vector %s", le.str, domain = "R-utils")
 #: R/str.R:0
 msgid "Named vector %s"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "No"
 msgstr ""
 
 #. R/read.DIF.R: stop("No DIF data on clipboard")
@@ -1541,10 +1560,21 @@ msgid ""
 "Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'."
 msgstr ""
 
+#. R/help.request.R: warning("Unable to connect to CRAN to check R version.")
+#: R/help.request.R:0
+msgid "Unable to connect to CRAN to check R version."
+msgstr ""
+
 #. R/object.size.R: gettextf("Unit %s is not part of standard %s", sQuote(units), sQuote(standard))
 #: R/object.size.R:0
 msgid "Unit %s is not part of standard %s"
 msgstr ""
+
+#. R/askYesNo.R: gettextf("Unrecognized response %s", dQuote(ans))
+#: R/askYesNo.R:0
+#, fuzzy
+msgid "Unrecognized response %s"
+msgstr " 認識不能な特殊データ値です "
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
@@ -1556,9 +1586,10 @@ msgstr " 認識不能な特殊データ値です "
 msgid "Unrecognized value indicator"
 msgstr " 認識不能な値指示子です "
 
-#. R/packageStatus.R: gettext("Update (y/N/c)?  ", domain = "R-utils")
-#: R/packageStatus.R:0
-msgid "Update (y/N/c)?"
+#. R/packageStatus.R: gettext("Update?")
+#. R/packages.R: gettext("Update?")
+#: R/packageStatus.R:0 R/packages.R:0
+msgid "Update?"
 msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
@@ -1711,7 +1742,7 @@ msgstr " 警告：　未知のオプション "
 msgid "Windows bitmap files (*.bmp)"
 msgstr ""
 
-#. R/packages2.R: gettext("Would you like to create a personal library\n%s\nto install packages into?",     domain = "R-utils")
+#. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
 #: R/packages2.R:0
 msgid ""
 "Would you like to create a personal library\n"
@@ -1722,7 +1753,7 @@ msgstr ""
 " '%s' \n"
 " を作りたいのですか？ "
 
-#. R/packages2.R: gettext("Would you like to use a personal library instead?", domain = "R-utils")
+#. R/packages2.R: gettext("Would you like to use a personal library instead?")
 #: R/packages2.R:0
 #, fuzzy
 msgid "Would you like to use a personal library instead?"
@@ -1753,6 +1784,11 @@ msgstr " ファイル %s を処理中 "
 #. R/edit.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
 #: R/edit.R:0
 msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Yes"
 msgstr ""
 
 #. R/SweaveDrivers.R: gettextf("You can now run (pdf)latex on %s", sQuote(outputname), domain = "R-utils")
