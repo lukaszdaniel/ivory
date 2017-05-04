@@ -571,8 +571,8 @@ static Rboolean file_open(Rconnection con)
 	    && (!strcmp(con->encname, "UTF-16LE") || !strcmp(con->encname, "UCS-2LE"))) {
 	    strcat(mode, ",ccs=UTF-16LE");
 	    if (con->canread) {
-	    	this->use_fgetwc = TRUE;
-	    	this->have_wcbuffered = FALSE;
+	    	thiscon->use_fgetwc = TRUE;
+	    	thiscon->have_wcbuffered = FALSE;
 	    }
 	}
 	if(con->enc == CE_UTF8) {
@@ -684,15 +684,15 @@ static int file_fgetc_internal(Rconnection con)
 	f_seek(thiscon->fp, thiscon->rpos, SEEK_SET);
     }
 #ifdef _WIN32
-    if (this->use_fgetwc) {
-    	if (this->have_wcbuffered) {
-    	    c = this->wcbuf;
-    	    this->have_wcbuffered = FALSE;
+    if (thiscon->use_fgetwc) {
+    	if (thiscon->have_wcbuffered) {
+    	    c = thiscon->wcbuf;
+    	    thiscon->have_wcbuffered = FALSE;
     	} else {
     	    wint_t wc = fgetwc(fp);
     	    c = (char) wc & 0xFF;
-    	    this->wcbuf = (char) wc >> 8;
-    	    this->have_wcbuffered = TRUE;
+    	    thiscon->wcbuf = (char) wc >> 8;
+    	    thiscon->have_wcbuffered = TRUE;
     	}
     } else
 #endif  
