@@ -4945,6 +4945,10 @@ say that is declared in headers @code{unistd.h} and @code{sys/types.h},
 and the latter is often included indirectly by other headers on some
 but not all systems.
 
+Similarly for constants: for example @code{SIZE_MAX} is defined in
+@code{stdint.h} alongside @code{size_t} (according to the C99 standard:
+it is not part of C++98).
+
 @item
 For C++ code, be careful to specify namespaces where needed.  Many
 functions are defined by the standards to be in the @code{std}
@@ -5981,6 +5985,15 @@ need someone to interact with.)  Note that code included in
 be declared in the @file{DESCRIPTION} file.  It is good practice to
 include a comment in the @code{\donttest} section explaining why it is
 needed.
+
+As from @R{} 3.4.0, output from code between comments
+@example
+## IGNORE_RDIFF_BEGIN
+## IGNORE_RDIFF_END
+@end example
+@noindent
+is ignored when comparing check output to reference output (a
+@file{-Ex.Rout.save} file).
 
 @findex \keyword
 @item \keyword@{@var{key}@}
