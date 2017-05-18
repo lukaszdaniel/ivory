@@ -3780,6 +3780,9 @@ function(package, lib.loc = NULL)
             assign("quartz.options", function(..., reset = TRUE) {}, envir = compat)
         }
         if(.Platform$OS.type != "windows") {
+            assign("askYesNoWinDialog",
+                   function(msg, ...) {},
+                   envir = compat)
             assign("bringToTop", function (which = grDevices::dev.cur(), stay = FALSE) {},
                    envir = compat)
             assign("choose.dir",

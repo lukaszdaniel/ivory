@@ -1100,7 +1100,7 @@ function(file, meta = NULL)
     if(!.is_not_nonempty_text(mfooter))
         attr(rval, "mfooter") <- paste(mfooter, collapse = "\n")
 
-    .citation(rval)
+    .citation(rval, meta$Package)
 }
 
 ######################################################################
@@ -1150,7 +1150,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     	attr(cit, "mheader")[1L] <-
 	    paste0(gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils"), "  ",
 		   attr(cit, "mheader")[1L])
-        return(.citation(cit))
+        return(.citation(cit, package))
     }
 
     year <- sub("-.*", "", meta$`Date/Publication`)
@@ -1261,10 +1261,12 @@ function(package = "base", lib.loc = NULL, auto = NULL)
                      footer = footer,
                      other = z
                      )
-    .citation(rval)
+    .citation(rval, package)
 }
 
-.citation <- function(x) structure(x, class = c("citation", "bibentry"))
+.citation <-
+function(x, package = NULL)
+    structure(x, package = package, class = c("citation", "bibentry"))
 
 .read_authors_at_R_field <-
 function(x)

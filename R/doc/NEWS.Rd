@@ -28,6 +28,17 @@
       \item New \code{askYesNo()} function and \code{"askYesNo"} option
       to ask the user binary response questions in a customizable but
       consistent way.  Suggestion of \PR{17242}.
+
+      \item New low level utilities \code{...elt(n)} and \code{...length()}
+      for working with \code{...} parts inside a function.
+
+      \item \code{isTRUE()} is more tolerant and now true in
+      \code{x <- rlnorm(99); isTRUE(median(x) == quantile(x)["50\%"])}.
+      New function \code{isFALSE()} defined analogously.
+
+      \item The default symbol table size has been increased from 4119
+      to 49157; this may improve symbol resolution performance when many
+      packages are loaded. Suggested by Jim Hester.
     }
   }
 
@@ -55,9 +66,13 @@
       and only attempts to pass non-missing arguments from the generic.
 
       \item \code{callNextMethod()} works for \code{\dots} methods.
-      
-      \item Connections are now written correctly with encoding 
+
+      \item Connections are now written correctly with encoding
       \code{"UTF-16LE"}.  (\PR{16737}).
+
+      \item Evaluation of \code{..0} now signals an error.  When
+      \code{..1} is used and \code{...} is empty, the error message is
+      more appropriate now.
     }
   }
 }
@@ -92,6 +107,9 @@
 
       \item \code{file.mtime()} no longer returns NA on Windows when the
       file or directory is being used by another process.
+
+      \item \command{R CMD INSTALL} Windows .zip file obeys \code{--lock}
+      and \code{--pkglock} flags.
     }
   }
 }

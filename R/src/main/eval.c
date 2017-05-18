@@ -690,7 +690,7 @@ SEXP eval(SEXP e, SEXP rho)
 	if (TYPEOF(op) == SPECIALSXP) {
 	    int save = R_PPStackTop, flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
-	    PROTECT(CDR(e));
+	    PROTECT(e);
 	    R_Visible = flag != 1;
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
@@ -1625,7 +1625,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
-	PROTECT(CDR(e));
+	PROTECT(e);
 	R_Visible = flag != 1;
 	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
 	if (flag < 2) R_Visible = flag != 1;
@@ -2175,6 +2175,7 @@ SEXP attribute_hidden do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP s = R_NilValue;
     if (args != R_NilValue) {
 	SEXP srcrefs = getBlockSrcrefs(call);
+	PROTECT(srcrefs);
 	int i = 1;
 	while (args != R_NilValue) {
 	    PROTECT(R_Srcref = getSrcref(srcrefs, i++));
@@ -2188,6 +2189,7 @@ SEXP attribute_hidden do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    args = CDR(args);
 	}
 	R_Srcref = R_NilValue;
+	UNPROTECT(1); /* srcrefs */
     }
     return s;
 }
