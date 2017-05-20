@@ -1439,11 +1439,11 @@ SEXP ddfind(int i, SEXP rho)
 	    vl = nthcdr(vl, i - 1);
 	    return(CAR(vl));
 	}
-	else
-	    error(n_("the ... list does not contain a single element",
-			   "the ... list does not contain %d elements", i));
+	else // length(...) < i
+	    error(n_("the ... list does not contain any elements",
+			   "the ... list does not contain %d elements", i), i);
     }
-    else error(_("'..%d' used in an incorrect context, no '...' list to look in"), i);
+    else error(_("'..%d' used in an incorrect context, no ... to look in"), i);
 
     return R_NilValue;
 }
