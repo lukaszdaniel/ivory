@@ -774,7 +774,7 @@ stopifnot(identical(t1(pi, 2), pi), identical(t1(t1), t1),
 	  identical(t2(pi, 2), 2))
 et1 <- tryCatch(t1(), error=identity)
 if(englishMsgs)
-    stopifnot(identical("the ... list does not contain any element",
+    stopifnot(identical("the ... list does not contain any (1) elements",
 			conditionMessage(et1)))
 ## previously gave   "'nthcdr' needs a list to CDR down"
 et0   <- tryCatch(t0(),  error=identity); (mt0   <- conditionMessage(et0))
@@ -787,6 +787,39 @@ if(englishMsgs)
 tools::assertError(t0(1))
 tools::assertError(t0(1, 2))
 ## the first gave a different error msg, the next gave no error in R < 3.5.0
+
+
+## stopifnot(e1, e2, ...) .. evaluating expressions sequentially
+one <- 1
+try(stopifnot(3 < 4:5, 5:6 >= 5, 6:8 <= 7, one <- 2))
+stopifnot(identical(one, 1))
+## all the expressions were evaluated in R <= 3.4.x
+et <- tryCatch(stopifnot(0 < 1:10, is.numeric(..vaporware..)),
+	       error=identity)
+stopifnot(identical(print(conditionCall(et))[[1]],
+		    quote(is.numeric)))
+## call was the full 'stopifnot(..)' in R < 3.5.0
+
+
+## path.expand shouldn't translate to local encoding PR#17120
+## This has been fixed on Windows, but not yet on Unix non-UTF8 systems
+if(.Platform$OS.type == "windows") {
+    filename <- "\U9b3c.R"
+    stopifnot(identical(path.expand(paste0("~/", filename)),
+		 	      paste0(path.expand("~/"), filename)))
+}
+## Chinese character was changed to hex code 
+
+
+## aggregate.data.frame(*, drop=FALSE)  {new feature in R 3.3.0}
+## PR#16918 : problem with near-eq. factor() levels "not quite matching"
+group <- c(2 + 2^-51, 2)
+d1 <- data.frame(n = seq(group))
+b1 <- list(group = group)
+stopifnot(
+    identical(aggregate(d1, b1, length, drop = TRUE),
+              aggregate(d1, b1, length, drop = FALSE)))
+## drop=FALSE gave two rows + deprec. warning in R 3.3.x, and an error in 3.4.0
 
 
 

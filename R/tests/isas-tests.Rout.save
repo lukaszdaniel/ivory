@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-05-13 r974) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-05-20 r977) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-05-13 r72670) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-05-20 r72710) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -418,7 +418,8 @@ In command 'as.dist.default(x)': 'm' argument is not a square matrix
 > res <- try(as.vector( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.vector(res))
 [1] FALSE
-Error: variable x is not TRUE
+Error in command 'report(is.vector(res))': variable x is not TRUE
+Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.stepfun(res))
 > res <- try(as.ts( x ), silent = TRUE)
@@ -545,7 +546,8 @@ IS: [1] TRUE
 +    report({if(is.vector(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
 [1] FALSE
-Error: variable x is not TRUE
+Error in command 'report({': variable x is not TRUE
+Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error'))
 +    report({if(is.stepfun(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
@@ -2344,7 +2346,8 @@ In command 'doTryCatch(return(expr), name, parentenv, handler)':
 > res <- try(as.vector( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.vector(res))
 [1] FALSE
-Error: variable x is not TRUE
+Error in command 'report(is.vector(res))': variable x is not TRUE
+Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.stepfun(res))
 > res <- try(as.ts( x ), silent = TRUE)
@@ -2410,7 +2413,8 @@ IS: [1] TRUE
 +    } else   !isall.equal(x, res)})
 IS: [1] "Attributes: < names for 'target' argument but not for 'current' argument >"
 [2] "Attributes: < Length mismatch: comparison on first 0 components >"         
-Error: variables x are not all TRUE
+Error in command 'report({': variables x are not all TRUE
+Calls: report -> stopifnot
 > res <- try(as.logical( x ), silent = TRUE)
 > if(!inherits(res, 'try-error'))
 +    report({if(is.logical(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
@@ -2478,7 +2482,8 @@ In command 'doTryCatch(return(expr), name, parentenv, handler)':
 +    report({if(is.vector(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
 [1] FALSE
-Error: variable x is not TRUE
+Error in command 'report({': variable x is not TRUE
+Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error'))
 +    report({if(is.stepfun(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
@@ -2593,6 +2598,6 @@ In command 'as.dist.default(x)': 'm' argument is not a square matrix
 > f <- try(as.ts( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.ts( f )))
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.2 0.004 0.206 0 0 
+Time elapsed:  0.188 0.012 0.199 0 0 
 > 
 > 

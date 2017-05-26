@@ -2391,7 +2391,10 @@ function(package, dir, lib.loc = NULL)
                         functions_in_code),
                  .get_S3_generics_as_seen_from_package(dir,
                                                        !missing(package),
-                                                       FALSE),
+                                                       TRUE),
+                 ## This had 'FALSE' for a long time, in which case we
+                 ## miss the primitive generics regarded as language
+                 ## elements.
                  S3_group_generics, S3_primitive_generics))
     ## <FIXME>
     ## Not yet:
@@ -2443,6 +2446,8 @@ function(package, dir, lib.loc = NULL)
                       setdiff(delta, objects_in_code))
             }
         }
+
+        if(any(g == langElts)) next
 
         for(m in methods)
             ## Both all() and all.equal() are generic.

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.5.0\n"
-"POT-Creation-Date: 2017-05-03 20:51\n"
+"POT-Creation-Date: 2017-05-20 19:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -520,6 +520,13 @@ msgstr ""
 #. R/QC.R: gettext("Adding so many packages to the search path is excessive and importing selectively is preferable.",     domain = "R-tools")
 
 msgid "Adding so many packages to the search path is excessive and importing selectively is preferable."
+msgstr ""
+
+
+#: R/CRANtools.R: 0
+#. R/CRANtools.R: gettextf("Additional issues: %s", paste(unique(i$kind), collapse = " "), domain = "R-tools")
+
+msgid "Additional issues: %s"
 msgstr ""
 
 

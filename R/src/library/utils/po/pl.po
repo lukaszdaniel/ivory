@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:06+0100\n"
+"POT-Creation-Date: 2017-05-20 19:27+0200\n"
 "PO-Revision-Date: 2016-04-05 23:04+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -135,7 +135,7 @@ msgid "invalid '%s' specification"
 msgstr "niepoprawne określenie '%s'"
 
 #: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
+#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
@@ -246,7 +246,7 @@ msgstr "Wybierz jeden lub więcej"
 msgid "Select one"
 msgstr "Wybierz jeden"
 
-#: windows/widgets.c:184 windows/widgets.c:249
+#: windows/widgets.c:184 windows/widgets.c:252
 msgid "'default' argument is overlong"
 msgstr "argument 'default' jest wydłużone"
 

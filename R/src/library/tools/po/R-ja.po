@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-05-03 20:51\n"
+"POT-Creation-Date: 2017-05-20 19:27\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -442,6 +442,11 @@ msgstr ""
 msgid ""
 "Adding so many packages to the search path is excessive and importing "
 "selectively is preferable."
+msgstr ""
+
+#. R/CRANtools.R: gettextf("Additional issues: %s", paste(unique(i$kind), collapse = " "), domain = "R-tools")
+#: R/CRANtools.R:0
+msgid "Additional issues: %s"
 msgstr ""
 
 #. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")

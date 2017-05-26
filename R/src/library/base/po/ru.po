@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 20:51+0200\n"
+"POT-Creation-Date: 2017-05-20 19:41+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -487,7 +487,7 @@ msgstr "внутренняя ошибка в 'do_random1'"
 msgid "End of file"
 msgstr "конец строки"
 
-#: src/extra/trio/trio.c:7618 src/main/builtin.c:930 src/main/builtin.c:940
+#: src/extra/trio/trio.c:7618 src/main/builtin.c:939 src/main/builtin.c:949
 #: src/main/options.c:739 src/modules/X11/dataentry.c:315
 #: src/modules/X11/dataentry.c:470 src/modules/X11/dataentry.c:473
 #: src/modules/X11/dataentry.c:503
@@ -610,15 +610,15 @@ msgstr "проблема при отображении '%s'"
 #: src/main/array.c:1871 src/main/array.c:1872 src/main/array.c:2250
 #: src/main/array.c:2252 src/main/array.c:2254 src/main/attrib.c:194
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
-#: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:570
-#: src/main/builtin.c:586 src/main/builtin.c:772 src/main/builtin.c:774
-#: src/main/builtin.c:776 src/main/character.c:238 src/main/character.c:241
-#: src/main/character.c:246 src/main/character.c:787 src/main/character.c:790
-#: src/main/character.c:1286 src/main/character.c:1290
-#: src/main/character.c:1293 src/main/character.c:1527
-#: src/main/character.c:1531 src/main/character.c:1593
-#: src/main/character.c:1596 src/main/coerce.c:1450 src/main/coerce.c:1502
-#: src/main/coerce.c:1940 src/main/connections.c:1245
+#: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:579
+#: src/main/builtin.c:595 src/main/builtin.c:781 src/main/builtin.c:783
+#: src/main/builtin.c:785 src/main/character.c:243 src/main/character.c:246
+#: src/main/character.c:251 src/main/character.c:792 src/main/character.c:795
+#: src/main/character.c:1291 src/main/character.c:1295
+#: src/main/character.c:1298 src/main/character.c:1532
+#: src/main/character.c:1536 src/main/character.c:1598
+#: src/main/character.c:1601 src/main/coerce.c:1453 src/main/coerce.c:1505
+#: src/main/coerce.c:1943 src/main/connections.c:1245
 #: src/main/connections.c:1251 src/main/connections.c:1254
 #: src/main/connections.c:1258 src/main/connections.c:1406
 #: src/main/connections.c:1422 src/main/connections.c:1427
@@ -657,13 +657,13 @@ msgstr "проблема при отображении '%s'"
 #: src/main/deparse.c:418 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
-#: src/main/dounzip.c:354 src/main/envir.c:1825 src/main/envir.c:1828
-#: src/main/envir.c:1949 src/main/envir.c:1954 src/main/envir.c:2018
-#: src/main/envir.c:2034 src/main/envir.c:2040 src/main/envir.c:2152
-#: src/main/envir.c:2160 src/main/envir.c:2167 src/main/envir.c:2178
-#: src/main/envir.c:2410 src/main/envir.c:2531 src/main/envir.c:2828
-#: src/main/envir.c:3090 src/main/envir.c:3104 src/main/envir.c:3111
-#: src/main/envir.c:3127 src/main/envir.c:3708 src/main/errors.c:1075
+#: src/main/dounzip.c:354 src/main/envir.c:1851 src/main/envir.c:1854
+#: src/main/envir.c:1975 src/main/envir.c:1980 src/main/envir.c:2044
+#: src/main/envir.c:2060 src/main/envir.c:2066 src/main/envir.c:2178
+#: src/main/envir.c:2186 src/main/envir.c:2193 src/main/envir.c:2204
+#: src/main/envir.c:2436 src/main/envir.c:2557 src/main/envir.c:2854
+#: src/main/envir.c:3116 src/main/envir.c:3130 src/main/envir.c:3137
+#: src/main/envir.c:3153 src/main/envir.c:3734 src/main/errors.c:1075
 #: src/main/eval.c:454 src/main/eval.c:463 src/main/eval.c:466
 #: src/main/grep.c:931 src/main/grep.c:936 src/main/grep.c:1258
 #: src/main/grep.c:1260 src/main/grep.c:1262 src/main/grep.c:1707
@@ -671,7 +671,7 @@ msgstr "проблема при отображении '%s'"
 #: src/main/grep.c:2558 src/main/grep.c:2881 src/main/grep.c:2886
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3869 src/main/names.c:1315 src/main/names.c:1318
+#: src/main/memory.c:3869 src/main/names.c:1317 src/main/names.c:1320
 #: src/main/objects.c:1632 src/main/objects.c:1634 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -707,17 +707,17 @@ msgstr "проблема при отображении '%s'"
 #: src/main/seq.c:649 src/main/seq.c:656 src/main/seq.c:665 src/main/seq.c:671
 #: src/main/seq.c:714 src/main/seq.c:719 src/main/seq.c:722 src/main/seq.c:726
 #: src/main/seq.c:731 src/main/seq.c:738 src/main/seq.c:742 src/main/seq.c:748
-#: src/main/sort.c:176 src/main/sysutils.c:604 src/main/sysutils.c:608
-#: src/main/sysutils.c:612 src/main/sysutils.c:618 src/main/sysutils.c:622
-#: src/main/sysutils.c:1811 src/main/sysutils.c:1815 src/main/unique.c:1040
+#: src/main/sort.c:176 src/main/sysutils.c:605 src/main/sysutils.c:609
+#: src/main/sysutils.c:613 src/main/sysutils.c:619 src/main/sysutils.c:623
+#: src/main/sysutils.c:1813 src/main/sysutils.c:1817 src/main/unique.c:1040
 #: src/main/unique.c:1346 src/main/unique.c:1350 src/main/unique.c:1360
-#: src/main/unique.c:1749 src/main/util.c:652 src/main/util.c:655
-#: src/main/util.c:1395 src/main/util.c:1409 src/main/util.c:2000
-#: src/main/util.c:2223 src/main/util.c:2224 src/main/util.c:2225
-#: src/main/util.c:2241 src/main/util.c:2283 src/main/util.c:2287
-#: src/main/util.c:2289 src/main/util.c:2315 src/main/util.c:2317
-#: src/main/util.c:2319 src/main/util.c:2322 src/main/util.c:2325
-#: src/main/util.c:2329 src/main/util.c:2331
+#: src/main/unique.c:1749 src/main/util.c:654 src/main/util.c:657
+#: src/main/util.c:1442 src/main/util.c:1456 src/main/util.c:2047
+#: src/main/util.c:2270 src/main/util.c:2271 src/main/util.c:2272
+#: src/main/util.c:2288 src/main/util.c:2330 src/main/util.c:2334
+#: src/main/util.c:2336 src/main/util.c:2362 src/main/util.c:2364
+#: src/main/util.c:2366 src/main/util.c:2369 src/main/util.c:2372
+#: src/main/util.c:2376 src/main/util.c:2378
 #: src/modules/internet/internet.c:457 src/modules/internet/internet.c:463
 #: src/modules/internet/internet.c:469 src/modules/internet/internet.c:472
 #: src/modules/internet/internet.c:476 src/modules/internet/internet.c:481
@@ -752,7 +752,7 @@ msgid "cannot decrease memory limit: ignored"
 msgstr "не могу уменьшить предел памяти: пропущено"
 
 #: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:880
-#: src/main/sysutils.c:649 src/main/unique.c:1643 src/main/util.c:978
+#: src/main/sysutils.c:650 src/main/unique.c:1643 src/main/util.c:980
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "первый аргумент должен быть текстовым вектором"
@@ -833,8 +833,8 @@ msgid "broken Windows pipe"
 msgstr ""
 
 #: src/gnuwin32/run.c:717 src/main/connections.c:330 src/main/connections.c:347
-#: src/main/connections.c:2969 src/main/printutils.c:886
-#: src/main/printutils.c:900
+#: src/main/connections.c:2969 src/main/printutils.c:881
+#: src/main/printutils.c:895
 msgid "printing of extremely long output is truncated"
 msgstr "печать слишком длинного вывода обрезана"
 
@@ -845,7 +845,7 @@ msgstr "печать слишком длинного вывода обрезан
 msgid "allocation of pipe connection failed"
 msgstr "выделение соединения по каналу не удалось"
 
-#: src/gnuwin32/run.c:790 src/main/sprintf.c:106 src/main/util.c:1802
+#: src/gnuwin32/run.c:790 src/main/sprintf.c:106 src/main/util.c:1849
 #, fuzzy, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' не является текстовым вектором"
@@ -1036,7 +1036,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:7371 src/main/eval.c:7392
+#: src/main/edit.c:122 src/main/eval.c:7376 src/main/eval.c:7397
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1087,18 +1087,18 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:725
+#: src/include/Rinlinedfuns.h:727
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1288
-#: src/main/character.c:1292 src/main/grep.c:933 src/main/grep.c:1709
+#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1293
+#: src/main/character.c:1297 src/main/grep.c:933 src/main/grep.c:1709
 #: src/main/grep.c:1713 src/main/grep.c:2555 src/main/grep.c:2883
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "длина аргумента '%s' > 1, будет использован только первый элемент"
 
-#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2827
+#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2830
 #: src/main/saveload.c:1941
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1141,13 +1141,13 @@ msgstr "неправильная входная строка x[%d] для это
 msgid "input string y[%d] is invalid in this locale"
 msgstr "неправильная входная строка y[%d] для этой локали"
 
-#: src/main/apply.c:99 src/main/util.c:2362
+#: src/main/apply.c:99 src/main/util.c:2409
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector"
 msgstr "первый аргумент должен быть вектором"
 
-#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:846
-#: src/main/character.c:1656 src/main/connections.c:3614 src/main/context.c:673
+#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:851
+#: src/main/character.c:1661 src/main/connections.c:3614 src/main/context.c:673
 #: src/main/context.c:692 src/main/datetime.c:680 src/main/datetime.c:782
 #: src/main/datetime.c:1051 src/main/dotcode.c:220 src/main/errors.c:975
 #: src/main/errors.c:1007 src/main/errors.c:1113 src/main/errors.c:1138
@@ -1158,9 +1158,9 @@ msgstr "первый аргумент должен быть вектором"
 #: src/main/seq.c:374 src/main/seq.c:377 src/main/seq.c:379 src/main/seq.c:418
 #: src/main/seq.c:422 src/main/seq.c:426 src/main/sort.c:1245
 #: src/main/sort.c:1328 src/main/sort.c:1332 src/main/sort.c:1339
-#: src/main/source.c:223 src/main/summary.c:957 src/main/sysutils.c:257
-#: src/main/util.c:1067 src/main/util.c:1072 src/main/util.c:1079
-#: src/main/util.c:1082 src/main/util.c:2060 src/modules/lapack/Lapack.c:955
+#: src/main/source.c:223 src/main/summary.c:957 src/main/sysutils.c:258
+#: src/main/util.c:1069 src/main/util.c:1074 src/main/util.c:1081
+#: src/main/util.c:1084 src/main/util.c:2107 src/modules/lapack/Lapack.c:955
 #: src/modules/X11/devX11.c:3148 src/modules/X11/devX11.c:3174
 #: src/modules/X11/devX11.c:3179 src/modules/X11/devX11.c:3184
 #: src/modules/X11/devX11.c:3194 src/modules/X11/devX11.c:3199
@@ -1169,7 +1169,7 @@ msgstr "первый аргумент должен быть вектором"
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: src/main/apply.c:104 src/main/complex.c:721
+#: src/main/apply.c:104 src/main/complex.c:725
 msgid "invalid length"
 msgstr "неправильная длина"
 
@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>) не является ни NULL, ни списком длины %d"
 
-#: src/main/arithmetic.c:43 src/main/eval.c:4076
+#: src/main/arithmetic.c:43 src/main/eval.c:4081
 #, fuzzy
 msgid "NaN values produced"
 msgstr "получились NA"
@@ -1275,7 +1275,7 @@ msgstr[0] "нереализованная действительная функ�
 msgstr[1] "нереализованная действительная функция %d числовых аргументов"
 msgstr[2] "нереализованная действительная функция %d числовых аргументов"
 
-#: src/main/arithmetic.c:1211 src/main/complex.c:606 src/main/complex.c:676
+#: src/main/arithmetic.c:1211 src/main/complex.c:610 src/main/complex.c:680
 msgid "unimplemented complex function"
 msgstr "нереализованная комплексная функция"
 
@@ -1292,9 +1292,9 @@ msgstr[2] "%d аргумент передан '%s', а требуется %d"
 msgid "invalid second argument of length 0"
 msgstr "неправильный второй аргумент нулевой длины"
 
-#: src/main/arithmetic.c:1633 src/main/arithmetic.c:1651 src/main/envir.c:1535
-#: src/main/envir.c:2045 src/main/eval.c:634 src/main/eval.c:635
-#: src/main/eval.c:4708 src/main/eval.c:4709 src/main/RNG.c:353
+#: src/main/arithmetic.c:1633 src/main/arithmetic.c:1651 src/main/envir.c:1561
+#: src/main/envir.c:2071 src/main/eval.c:634 src/main/eval.c:635
+#: src/main/eval.c:4713 src/main/eval.c:4714 src/main/RNG.c:353
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "аргумент пропущен, умолчаний нет"
@@ -1439,7 +1439,7 @@ msgstr "'perm': значение за пределами"
 #: src/main/connections.c:5566 src/main/debug.c:112 src/main/objects.c:1059
 #: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
 #: src/main/sort.c:1249 src/main/unique.c:681 src/main/unique.c:1456
-#: src/main/unique.c:1528 src/main/util.c:657 src/main/util.c:659
+#: src/main/unique.c:1528 src/main/util.c:659 src/main/util.c:661
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' должен быть TRUE или FALSE"
@@ -1583,7 +1583,7 @@ msgstr "неправильный (%s) тип установки атрибута
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' применены для не-многомерной матрицы"
 
-#: src/main/attrib.c:1046 src/main/coerce.c:2473 src/main/engine.c:3081
+#: src/main/attrib.c:1046 src/main/coerce.c:2476 src/main/engine.c:3090
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "аргумент 'list' должен быть списком"
@@ -1604,8 +1604,8 @@ msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "длина 'dimnames' [%d] не равна протяженности многомерной матрицы"
 
 #: src/main/attrib.c:1160 src/main/builtin.c:76 src/main/builtin.c:113
-#: src/main/envir.c:1813 src/main/envir.c:1941 src/main/envir.c:2001
-#: src/main/envir.c:2138 src/main/paste.c:74 src/main/paste.c:293
+#: src/main/envir.c:1839 src/main/envir.c:1967 src/main/envir.c:2027
+#: src/main/envir.c:2164 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1748
 msgid "invalid first argument"
 msgstr "неправильный первый аргумент"
@@ -1747,8 +1747,8 @@ msgstr "повторный формальный аргумент 'recursive'"
 msgid "'%s' argument is not a list"
 msgstr "аргумент не является списком"
 
-#: src/main/bind.c:1043 src/main/names.c:1281 src/main/names.c:1286
-#: src/main/names.c:1291 src/main/names.c:1296
+#: src/main/bind.c:1043 src/main/names.c:1283 src/main/names.c:1288
+#: src/main/names.c:1293 src/main/names.c:1298
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "слишком длинное имя класса в '%s'"
@@ -1792,61 +1792,61 @@ msgstr "размер вектора не может быть NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "размер вектора не может быть неопределенным"
 
-#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:949
+#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:958
 #: src/main/sort.c:1326
 msgid "vector size specified is too large"
 msgstr "указанный размер вектора слишком велик"
 
-#: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:305
-#: src/main/builtin.c:338 src/main/builtin.c:395 src/main/builtin.c:409
-#: src/main/coerce.c:1537 src/main/connections.c:3125 src/main/engine.c:3083
+#: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:314
+#: src/main/builtin.c:347 src/main/builtin.c:404 src/main/builtin.c:418
+#: src/main/coerce.c:1540 src/main/connections.c:3125 src/main/engine.c:3092
 #: src/main/envir.c:1071 src/main/envir.c:1124 src/main/envir.c:1280
-#: src/main/envir.c:1822 src/main/envir.c:1946 src/main/envir.c:2012
-#: src/main/envir.c:2145 src/main/envir.c:2864 src/main/envir.c:2951
-#: src/main/envir.c:3250 src/main/envir.c:3279 src/main/envir.c:3300
-#: src/main/envir.c:3323 src/main/envir.c:3357 src/main/envir.c:3377
-#: src/main/envir.c:3698 src/main/envir.c:3703 src/main/eval.c:7284
+#: src/main/envir.c:1848 src/main/envir.c:1972 src/main/envir.c:2038
+#: src/main/envir.c:2171 src/main/envir.c:2890 src/main/envir.c:2977
+#: src/main/envir.c:3276 src/main/envir.c:3305 src/main/envir.c:3326
+#: src/main/envir.c:3349 src/main/envir.c:3383 src/main/envir.c:3403
+#: src/main/envir.c:3724 src/main/envir.c:3729 src/main/eval.c:7289
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2762
 msgid "use of NULL environment is defunct"
 msgstr "использование окружения NULL не одобряется"
 
-#: src/main/builtin.c:251 src/main/builtin.c:264 src/main/envir.c:3321
+#: src/main/builtin.c:254 src/main/builtin.c:270 src/main/envir.c:3347
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "аргумент должен быть функцией"
 
-#: src/main/builtin.c:318
+#: src/main/builtin.c:327
 msgid "replacement object is not an environment"
 msgstr "замещающий объект не является окружением"
 
-#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:400
-#: src/main/builtin.c:414 src/main/envir.c:3225 src/main/envir.c:3253
-#: src/main/envir.c:3282 src/main/envir.c:3303 src/main/envir.c:3325
-#: src/main/envir.c:3359 src/main/envir.c:3379
+#: src/main/builtin.c:352 src/main/builtin.c:373 src/main/builtin.c:409
+#: src/main/builtin.c:423 src/main/envir.c:3251 src/main/envir.c:3279
+#: src/main/envir.c:3308 src/main/envir.c:3329 src/main/envir.c:3351
+#: src/main/envir.c:3385 src/main/envir.c:3405
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "аргумент не является окружением"
 
-#: src/main/builtin.c:366
+#: src/main/builtin.c:375
 msgid "the empty environment has no parent"
 msgstr "пустое окружение не имеет родительского"
 
-#: src/main/builtin.c:402
+#: src/main/builtin.c:411
 msgid "can not set parent of the empty environment"
 msgstr "не могу установить родителя для пустого окружения"
 
-#: src/main/builtin.c:404
+#: src/main/builtin.c:413
 #, fuzzy
 msgid "can not set the parent environment of a namespace"
 msgstr "не могу установить родителя для пустого окружения"
 
-#: src/main/builtin.c:406
+#: src/main/builtin.c:415
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "не могу установить родителя для пустого окружения"
 
-#: src/main/builtin.c:557 src/main/connections.c:3750
+#: src/main/builtin.c:566 src/main/connections.c:3750
 #: src/main/connections.c:4142 src/main/connections.c:4176
 #: src/main/connections.c:4554 src/main/connections.c:4624
 #: src/main/connections.c:4835 src/main/connections.c:4839
@@ -1855,79 +1855,79 @@ msgstr "не могу установить родителя для пустог�
 msgid "cannot write to this connection"
 msgstr "не могу записать в это соединение"
 
-#: src/main/builtin.c:562 src/main/builtin.c:592 src/main/platform.c:308
+#: src/main/builtin.c:571 src/main/builtin.c:601 src/main/platform.c:308
 #: src/main/platform.c:326 src/main/print.c:141 src/main/print.c:246
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "неправильное определение '%s'"
 
-#: src/main/builtin.c:579
+#: src/main/builtin.c:588
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "неположительный аргумент 'fill' будет проигнорирован"
 
-#: src/main/builtin.c:653
+#: src/main/builtin.c:662
 #, fuzzy, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat()' function"
 msgstr "'cat' не может работать с аргументом %d (тип '%s')"
 
-#: src/main/builtin.c:792
+#: src/main/builtin.c:801
 msgid "too long for a pairlist"
 msgstr ""
 
-#: src/main/builtin.c:796
+#: src/main/builtin.c:805
 #, fuzzy, c-format
 msgid "'vector()': cannot make a vector of mode '%s'."
 msgstr "вектор: не могу сделать вектор типа '%s'."
 
-#: src/main/builtin.c:822
+#: src/main/builtin.c:831
 msgid "cannot set length of non-vector"
 msgstr "установить длину для не-вектора"
 
-#: src/main/builtin.c:932 src/main/builtin.c:942 src/main/builtin.c:944
-#: src/main/character.c:524 src/main/coerce.c:2836
+#: src/main/builtin.c:941 src/main/builtin.c:951 src/main/builtin.c:953
+#: src/main/character.c:529 src/main/coerce.c:2839
 msgid "invalid value"
 msgstr "неправильное значение"
 
-#: src/main/builtin.c:975 src/main/coerce.c:2543 src/main/coerce.c:2586
-#: src/main/eval.c:624 src/main/eval.c:750 src/main/eval.c:2672
-#: src/main/eval.c:2754 src/main/eval.c:2815 src/main/eval.c:3156
-#: src/main/eval.c:6395 src/main/eval.c:6526
+#: src/main/builtin.c:984 src/main/coerce.c:2546 src/main/coerce.c:2589
+#: src/main/eval.c:624 src/main/eval.c:750 src/main/eval.c:2674
+#: src/main/eval.c:2756 src/main/eval.c:2820 src/main/eval.c:3161
+#: src/main/eval.c:6400 src/main/eval.c:6531
 msgid "'...' used in an incorrect context"
 msgstr "'...' использовано в неправильном контексте"
 
-#: src/main/builtin.c:997
+#: src/main/builtin.c:1006
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "повторяющиеся значения по-молучанию в переключателе: '%s' и '%s'"
 
-#: src/main/builtin.c:1030 src/main/coerce.c:2427
+#: src/main/builtin.c:1039 src/main/coerce.c:2430
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "аргумент %d пуст"
 
-#: src/main/builtin.c:1034 src/main/eval.c:6882
+#: src/main/builtin.c:1043 src/main/eval.c:6887
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "'hostname' должен быть единичным текстовым вектором"
 
-#: src/main/builtin.c:1037
+#: src/main/builtin.c:1046
 #, c-format
 msgid ""
 "'EXPR' is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/builtin.c:1084
+#: src/main/builtin.c:1093
 msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6894 src/main/eval.c:6922
+#: src/main/builtin.c:1102 src/main/eval.c:6899 src/main/eval.c:6927
 #, fuzzy
 msgid "'switch()' function with no alternatives"
 msgstr ""
 "числовое выражение (EXPR) требуется для switch() без именованных альтернатив"
 
-#: src/main/character.c:105 src/main/character.c:225
+#: src/main/character.c:105 src/main/character.c:230
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' which requires %d to %d"
 msgid_plural "%d arguments passed to '%s' which requires %d to %d"
@@ -1935,14 +1935,14 @@ msgstr[0] "%d аргументов передано '%s', а требуется 
 msgstr[1] "%d аргументов передано '%s', а требуется 1 или 2"
 msgstr[2] "%d аргументов передано '%s', а требуется 1 или 2"
 
-#: src/main/character.c:112 src/main/character.c:115 src/main/character.c:231
-#: src/main/character.c:234 src/main/character.c:1520
+#: src/main/character.c:112 src/main/character.c:115 src/main/character.c:236
+#: src/main/character.c:239 src/main/character.c:1525
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr "'%s' требует текстового вектора"
 
 #: src/main/character.c:152 src/main/character.c:167 src/main/character.c:177
-#: src/main/character.c:205
+#: src/main/character.c:210
 #, fuzzy, c-format
 msgid "invalid multibyte string, %s"
 msgstr "неправильная многобайтная строка в '%s'"
@@ -1952,75 +1952,75 @@ msgstr "неправильная многобайтная строка в '%s'"
 msgid "number of characters is not computable in \"bytes\" encoding, %s"
 msgstr "число символов не вычислимо для элемента %d в кодировке \"bytes\""
 
-#: src/main/character.c:190
+#: src/main/character.c:195
 #, fuzzy, c-format
 msgid "width is not computable for %s in \"bytes\" encoding"
 msgstr "длина не вычислима для элемента %d в кодировке \"bytes\""
 
-#: src/main/character.c:310
+#: src/main/character.c:315
 msgid "extracting substrings from a non-character object"
 msgstr "извлечение подстрок из не-текстового объекта"
 
-#: src/main/character.c:320 src/main/character.c:521
+#: src/main/character.c:325 src/main/character.c:526
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr "неправильный подстроковый аргумент(ы)"
 
-#: src/main/character.c:360
+#: src/main/character.c:365
 #, fuzzy
 msgid "non-character object(s)"
 msgstr "не-текстовые имена"
 
-#: src/main/character.c:516
+#: src/main/character.c:521
 msgid "replacing substrings in a non-character object"
 msgstr "замещение подстрок не-текстовым объектом"
 
-#: src/main/character.c:784
+#: src/main/character.c:789
 msgid "the first argument must be a character vector"
 msgstr "первый аргумент должен быть текстовым вектором"
 
-#: src/main/character.c:821
+#: src/main/character.c:826
 msgid "abbreviate used with non-ASCII chars"
 msgstr "'abbreviate' использована с не-ASCII символами"
 
-#: src/main/character.c:842
+#: src/main/character.c:847
 msgid "non-character names"
 msgstr "не-текстовые имена"
 
-#: src/main/character.c:904 src/main/character.c:1001 src/main/character.c:1413
+#: src/main/character.c:909 src/main/character.c:1006 src/main/character.c:1418
 #, fuzzy, c-format
 msgid "invalid multibyte input string %d"
 msgstr "неправильная многобайтная строка"
 
-#: src/main/character.c:947 src/main/grep.c:286
+#: src/main/character.c:952 src/main/grep.c:286
 msgid "non-character argument"
 msgstr "не-текстовый аргумент"
 
-#: src/main/character.c:1056
+#: src/main/character.c:1061
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "уменьшающееся определение ранга ('%lc-%lc')"
 
-#: src/main/character.c:1141
+#: src/main/character.c:1146
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "уменьшающееся определение ранга ('%c-%c')"
 
-#: src/main/character.c:1328 src/main/character.c:1347
+#: src/main/character.c:1333 src/main/character.c:1352
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr "неправильный UTF-8 строка 'old'"
 
-#: src/main/character.c:1334 src/main/character.c:1353 src/main/plotmath.c:981
+#: src/main/character.c:1339 src/main/character.c:1358 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "неправильная многобайтная строка в '%s'"
 
-#: src/main/character.c:1381 src/main/character.c:1470
+#: src/main/character.c:1386 src/main/character.c:1475
 msgid "'old' is longer than 'new'"
 msgstr "'old' длиннее чем 'new'"
 
-#: src/main/character.c:1664 src/main/envir.c:3773 src/main/envir.c:3787
+#: src/main/character.c:1669 src/main/envir.c:3799 src/main/envir.c:3813
 #: src/main/grep.c:145
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
@@ -2044,127 +2044,127 @@ msgstr "мнимые части убраны при преобразовании
 msgid "out-of-range values treated as 0 in coercion to raw"
 msgstr "запредельные значения вынужденно преобразованы в 0"
 
-#: src/main/coerce.c:398
+#: src/main/coerce.c:401
 #, c-format
 msgid "invalid data of mode '%s' (too short)"
 msgstr "неправильные данные типа '%s' (слишком короткие)"
 
-#: src/main/coerce.c:1000 src/main/coerce.c:1117 src/main/coerce.c:1139
+#: src/main/coerce.c:1003 src/main/coerce.c:1120 src/main/coerce.c:1142
 #, fuzzy, c-format
 msgid "an object of class \"%s\" cannot be coerced to type '%s'"
 msgstr "объект (список) не может быть преобразован в тип '%s'"
 
-#: src/main/coerce.c:1154 src/main/coerce.c:1482
+#: src/main/coerce.c:1157 src/main/coerce.c:1485
 msgid "no method for coercing this S4 class to a vector"
 msgstr "Отсутствует метод для конверсии данного класса S4 в вектор"
 
-#: src/main/coerce.c:1217
+#: src/main/coerce.c:1220
 msgid "environments cannot be coerced to other types"
 msgstr "окружения не могут быть преобразованы в другие типы"
 
-#: src/main/coerce.c:1226
+#: src/main/coerce.c:1229
 #, fuzzy, c-format
 msgid "cannot coerce type '%s' to vector of type '%s'"
 msgstr "не могу найти файл '%s' в zip-файле '%s'"
 
-#: src/main/coerce.c:1369
+#: src/main/coerce.c:1372
 msgid "attempting to coerce non-factor"
 msgstr "попытка конверсии не-фактора"
 
-#: src/main/coerce.c:1374 src/main/coerce.c:1384
+#: src/main/coerce.c:1377 src/main/coerce.c:1387
 msgid "malformed factor"
 msgstr ""
 
-#: src/main/coerce.c:1533
+#: src/main/coerce.c:1536
 msgid "list argument expected"
 msgstr "ожидается аргумент-список"
 
-#: src/main/coerce.c:1541 src/main/eval.c:7288
+#: src/main/coerce.c:1544 src/main/eval.c:7293
 msgid "invalid environment"
 msgstr "неправильное окружение"
 
-#: src/main/coerce.c:1545
+#: src/main/coerce.c:1548
 msgid "argument must have length at least 1"
 msgstr "аргумент должен быть по крайней мере единичной длины"
 
-#: src/main/coerce.c:1567
+#: src/main/coerce.c:1570
 msgid "invalid body for function"
 msgstr "неправильное тело функции"
 
-#: src/main/coerce.c:1590
+#: src/main/coerce.c:1593
 #, fuzzy
 msgid "invalid argument of length 0"
 msgstr "неправильный второй аргумент нулевой длины"
 
-#: src/main/coerce.c:1605
+#: src/main/coerce.c:1608
 msgid "invalid argument list"
 msgstr "неправильный список аргументов"
 
-#: src/main/coerce.c:1917
+#: src/main/coerce.c:1920
 #, fuzzy
 msgid "type \"single\" is unimplemented in R"
 msgstr "тип \"single\" не реализован в R"
 
-#: src/main/coerce.c:1919
+#: src/main/coerce.c:1922
 msgid "unimplemented predicate"
 msgstr "нереализованный предикат"
 
-#: src/main/coerce.c:1994 src/main/coerce.c:2237 src/main/coerce.c:2299
-#: src/main/coerce.c:2363
+#: src/main/coerce.c:1997 src/main/coerce.c:2240 src/main/coerce.c:2302
+#: src/main/coerce.c:2366
 #, fuzzy, c-format
 msgid "'%s' function applies only to lists and vectors"
 msgstr "применимо только к спискам и векторам"
 
-#: src/main/coerce.c:2074 src/main/coerce.c:2188
+#: src/main/coerce.c:2077 src/main/coerce.c:2191
 #, fuzzy, c-format
 msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() применен к не-списку/вектору типа '%s'"
 
-#: src/main/coerce.c:2199
+#: src/main/coerce.c:2202
 #, fuzzy
 msgid "'anyNA()' function takes 1 or 2 arguments"
 msgstr "неправильный тип для аргумента"
 
-#: src/main/coerce.c:2269 src/main/coerce.c:2333 src/main/coerce.c:2405
+#: src/main/coerce.c:2272 src/main/coerce.c:2336 src/main/coerce.c:2408
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "метод по умолчанию для типа '%s' не сделан"
 
-#: src/main/coerce.c:2434
+#: src/main/coerce.c:2437
 msgid "first argument must be a character string"
 msgstr "первый аргумент должен быть текстовой строкой"
 
-#: src/main/coerce.c:2436 src/main/coerce.c:2486 src/main/coerce.c:2490
+#: src/main/coerce.c:2439 src/main/coerce.c:2489 src/main/coerce.c:2493
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2466
+#: src/main/coerce.c:2469
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "'what' должен быть текстовой строкой или функцией"
 
-#: src/main/coerce.c:2470
+#: src/main/coerce.c:2473
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "аргумент 'expr' должен быть выражением"
 
-#: src/main/coerce.c:2477 src/main/engine.c:3087 src/main/envir.c:1856
-#: src/main/envir.c:2871 src/main/envir.c:2953 src/main/unique.c:1354
+#: src/main/coerce.c:2480 src/main/engine.c:3096 src/main/envir.c:1882
+#: src/main/envir.c:2897 src/main/envir.c:2979 src/main/unique.c:1354
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "аргумент 'env' должен быть окружением"
 
-#: src/main/coerce.c:2636
+#: src/main/coerce.c:2639
 msgid "invalid environment specified"
 msgstr "задано неправильное окружение"
 
-#: src/main/coerce.c:2702
+#: src/main/coerce.c:2705
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr ""
 "Выставляю атрибут class(x) в NULL;   результат не будет являться объектом S4"
 
-#: src/main/coerce.c:2705
+#: src/main/coerce.c:2708
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
@@ -2173,7 +2173,7 @@ msgstr ""
 "Выставляю class(x) в набор строк (\"%s\", \"%s\", ...);  результат не будет "
 "являться объектом S4"
 
-#: src/main/coerce.c:2708
+#: src/main/coerce.c:2711
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
@@ -2182,11 +2182,11 @@ msgstr ""
 "Установка class(x) в \"%s\" выставляет атрибут в NULL; результат не будет "
 "больше объектом S4"
 
-#: src/main/coerce.c:2740
+#: src/main/coerce.c:2743
 msgid "invalid replacement object to be a class string"
 msgstr "неправильный замещающий объект, для того чтобы быть классовой строкой"
 
-#: src/main/coerce.c:2761
+#: src/main/coerce.c:2764
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
@@ -2194,7 +2194,7 @@ msgstr ""
 "\"%s\" может быть установлен как класс если объект имеет этот тип; найден "
 "\"%s\""
 
-#: src/main/coerce.c:2779
+#: src/main/coerce.c:2782
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2203,22 +2203,22 @@ msgstr ""
 "не способен правильно установить класс для матрицы покуда атрибут "
 "'dimension' не станет длиной 2 (был %d)"
 
-#: src/main/coerce.c:2787
+#: src/main/coerce.c:2790
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
 "не могу установить класс для \"array\" до тех пор, пока атрибут \"dimension"
 "\" не станет > 0"
 
-#: src/main/coerce.c:2832
+#: src/main/coerce.c:2835
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2834
+#: src/main/coerce.c:2837
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2840
+#: src/main/coerce.c:2843
 msgid "invalid to change the storage mode of a factor"
 msgstr "не могу поменять тип хранения фактора"
 
@@ -2261,29 +2261,29 @@ msgstr "ВНИМАНИЕ: значение '--max-ppsize' слишком мал�
 msgid "WARNING: '--max-ppsize' value is too large: ignored"
 msgstr "ВНИМАНИЕ: значение '--max-ppsize' слишком велико: пропущено"
 
-#: src/main/complex.c:90
+#: src/main/complex.c:94
 msgid "invalid complex unary operator"
 msgstr "неправильный комплексный унарный оператор"
 
-#: src/main/complex.c:218
+#: src/main/complex.c:222
 msgid "unimplemented complex operation"
 msgstr "не реализованная комплексная операция"
 
-#: src/main/complex.c:320
+#: src/main/complex.c:324
 #, fuzzy
 msgid "non-numeric argument passed to function"
 msgstr "нечисловой аргумент аргумент для функции"
 
-#: src/main/complex.c:609 src/main/complex.c:702
+#: src/main/complex.c:613 src/main/complex.c:706
 #, fuzzy, c-format
 msgid "NaN values produced in '%s' function"
 msgstr "не могу найти функцию \"%s\""
 
-#: src/main/complex.c:790
+#: src/main/complex.c:794
 msgid "invalid polynomial coefficient"
 msgstr "неправильный коэффициент многочлена"
 
-#: src/main/complex.c:795
+#: src/main/complex.c:799
 msgid "root finding code failed"
 msgstr "ошибка кода нахождения корня"
 
@@ -2305,9 +2305,9 @@ msgstr "неправильное соединение"
 msgid "closing unused connection %d (%s)"
 msgstr "закрываю неиспользованное соединение %d (%s)\n"
 
-#: src/main/connections.c:229 src/main/sysutils.c:637 src/main/sysutils.c:845
-#: src/main/sysutils.c:860 src/main/sysutils.c:990 src/main/sysutils.c:1063
-#: src/main/sysutils.c:1073 src/main/sysutils.c:1086 src/main/sysutils.c:1484
+#: src/main/connections.c:229 src/main/sysutils.c:638 src/main/sysutils.c:846
+#: src/main/sysutils.c:861 src/main/sysutils.c:992 src/main/sysutils.c:1065
+#: src/main/sysutils.c:1075 src/main/sysutils.c:1088 src/main/sysutils.c:1486
 #, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "неподдерживаемая конвертация из '%s' в '%s'"
@@ -3284,8 +3284,8 @@ msgstr "нулевой аргумент"
 msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts' должен быть малым положительным целым числом"
 
-#: src/main/deparse.c:432 src/main/envir.c:1971 src/main/envir.c:2056
-#: src/main/eval.c:630 src/main/eval.c:1788 src/main/eval.c:4722
+#: src/main/deparse.c:432 src/main/envir.c:1997 src/main/envir.c:2082
+#: src/main/eval.c:630 src/main/eval.c:1788 src/main/eval.c:4727
 #: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2780
 #, fuzzy, c-format
 msgid "object '%s' was not found"
@@ -3404,8 +3404,8 @@ msgstr "неправильный тип второго аргумента"
 msgid "'%s' argument must be a single character string"
 msgstr "'norm' должен быть текстовой строкой"
 
-#: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:823
-#: src/main/util.c:858 src/main/util.c:900 src/main/util.c:941
+#: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:825
+#: src/main/util.c:860 src/main/util.c:902 src/main/util.c:943
 #: src/unix/sys-std.c:1311 src/unix/sys-std.c:1334
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
@@ -3421,7 +3421,7 @@ msgid "no arguments supplied"
 msgstr "не заданы аргументы"
 
 #: src/main/dotcode.c:513 src/main/dotcode.c:1215 src/main/dotcode.c:1439
-#: src/main/eval.c:2691
+#: src/main/eval.c:2693
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' отсутствует"
@@ -3442,7 +3442,7 @@ msgstr ""
 msgid "compiler constants were modified (in '.Call'?)!\n"
 msgstr ""
 
-#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3109
+#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3118
 msgid "invalid graphics state"
 msgstr "неправильное графическое состояние"
 
@@ -3761,92 +3761,92 @@ msgstr "Захват растра недоступен на этом устро�
 msgid "font face %d is not supported for font family '%s'"
 msgstr "начертание %d не поддерживается семейством шрифтов '%s'"
 
-#: src/main/engine.c:1978
+#: src/main/engine.c:1981
 msgid "no graphics device is active"
 msgstr "нет активных графических устройств"
 
-#: src/main/engine.c:2016
+#: src/main/engine.c:2019
 msgid "use of negative 'pch' argument with symbol font is invalid"
 msgstr ""
 
-#: src/main/engine.c:2055
+#: src/main/engine.c:2058
 #, fuzzy, c-format
 msgid "'pch' value '%d' is invalid in this locale"
 msgstr "неправильное значение pch '%d' для этой локали"
 
-#: src/main/engine.c:2313
+#: src/main/engine.c:2316
 #, fuzzy, c-format
 msgid "unimplemented 'pch' value '%d'"
 msgstr "не разработанное pch-значение '%d'"
 
-#: src/main/engine.c:2336
+#: src/main/engine.c:2339
 #, fuzzy, c-format
 msgid "invalid axis extents '[GEPretty(.,.,n=%d)]'"
 msgstr "неправильная протяженность оси [GEPretty(.,.,n=%d)"
 
-#: src/main/engine.c:2340
+#: src/main/engine.c:2343
 #, fuzzy, c-format
 msgid "infinite axis extents '[GEPretty(%g,%g,%d)]'"
 msgstr "неопределенная протяженность оси [GEPretty(%g,%g,%d)]"
 
-#: src/main/engine.c:2377
+#: src/main/engine.c:2380
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *lo = %g < %g = x1"
 msgstr " .. GEPretty(.): новая *lo = %g < %g = x1"
 
-#: src/main/engine.c:2379
+#: src/main/engine.c:2382
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr " .. GEPretty(.): новая *up = %g > %g = x2"
 
-#: src/main/engine.c:2880
+#: src/main/engine.c:2889
 #, fuzzy
 msgid "display list redraw incomplete"
 msgstr "Отражение списка перерисовки неполное"
 
-#: src/main/engine.c:2884
+#: src/main/engine.c:2893
 #, fuzzy
 msgid "invalid display list"
 msgstr "неправильный список аргументов"
 
-#: src/main/engine.c:2996
+#: src/main/engine.c:3005
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:3000
+#: src/main/engine.c:3009
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:3079
+#: src/main/engine.c:3088
 #, fuzzy, c-format
 msgid "'%s' argument must be an expression"
 msgstr "аргумент 'expr' должен быть выражением"
 
-#: src/main/engine.c:3167 src/main/engine.c:3175
+#: src/main/engine.c:3180 src/main/engine.c:3188
 #, fuzzy
 msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr "неправильный многобайтный знак в pch=\"c\""
 
-#: src/main/engine.c:3222
+#: src/main/engine.c:3235
 #, fuzzy
 msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr "неправильное шестнадцатеричное число в 'color' или 'lty'"
 
-#: src/main/engine.c:3245
+#: src/main/engine.c:3258
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr "неправильный тип линии: должен быть длиной 2, 4, 6 или 8"
 
-#: src/main/engine.c:3249
+#: src/main/engine.c:3262
 msgid "invalid line type: zeroes are not allowed"
 msgstr "неправильный тип линии: нули не разрешены"
 
-#: src/main/engine.c:3258 src/main/engine.c:3266 src/main/engine.c:3273
+#: src/main/engine.c:3271 src/main/engine.c:3279 src/main/engine.c:3286
 msgid "invalid line type"
 msgstr "неправильный тип линии"
 
@@ -3855,7 +3855,7 @@ msgstr "неправильный тип линии"
 msgid "cannot change value of locked binding for '%s'"
 msgstr "не могу изменить значение блокированной связи '%s'"
 
-#: src/main/envir.c:308 src/main/envir.c:1604
+#: src/main/envir.c:308 src/main/envir.c:1630
 msgid "cannot add bindings to a locked environment"
 msgstr "не могу добавить связи в блокированное окружение"
 
@@ -3877,7 +3877,7 @@ msgstr "не могу освободить в базовом окружении"
 msgid "unbind in the base environment is unimplemented"
 msgstr "освобождение в базовом окружении не реализовано"
 
-#: src/main/envir.c:910 src/main/envir.c:1891
+#: src/main/envir.c:910 src/main/envir.c:1917
 msgid "cannot remove bindings from a locked environment"
 msgstr "не могу убрать связи в блокированном окружении"
 
@@ -3891,259 +3891,272 @@ msgstr "не могу удалить переменные из базового 
 msgid "argument passed to '%s' function is not an environment"
 msgstr "аргумент для %s не является окружением"
 
-#: src/main/envir.c:1444
+#: src/main/envir.c:1434
+#, c-format
+msgid "indexing '...' with non-positive index %d"
+msgstr ""
+
+#: src/main/envir.c:1443
 #, fuzzy, c-format
-msgid "the '...' list does not contain %d elements"
-msgstr "Список  ... не содержит %d элементов"
+msgid "the ... list does not contain any (%d) elements"
+msgid_plural "the ... list does not contain %d elements"
+msgstr[0] "Список  ... не содержит %d элементов"
+msgstr[1] "Список  ... не содержит %d элементов"
+msgstr[2] "Список  ... не содержит %d элементов"
 
 #: src/main/envir.c:1446
 #, fuzzy, c-format
-msgid "'..%d' used in an incorrect context, no '...' list to look in"
+msgid "'..%d' used in an incorrect context, no ... to look in"
 msgstr "..%d использовано в неправильном контексте, нет ... чтобы найти"
 
-#: src/main/envir.c:1539
+#: src/main/envir.c:1472
+#, fuzzy
+msgid "incorrect context: the current call has no '...' to look in"
+msgstr "..%d использовано в неправильном контексте, нет ... чтобы найти"
+
+#: src/main/envir.c:1565
 #, fuzzy, c-format
 msgid "could not find function '%s'"
 msgstr "не могу найти функцию \"%s\""
 
-#: src/main/envir.c:1566
+#: src/main/envir.c:1592
 msgid "cannot assign values in the empty environment"
 msgstr "не могу присваивать значения в пустом окружении"
 
-#: src/main/envir.c:1572 src/main/envir.c:1701
+#: src/main/envir.c:1598 src/main/envir.c:1727
 msgid "cannot assign variables to this database"
 msgstr "не могу присвоить переменные этой базе данных"
 
-#: src/main/envir.c:1644
+#: src/main/envir.c:1670
 msgid "additional variables should now be passed as a list, not an environment"
 msgstr ""
 
-#: src/main/envir.c:1785
+#: src/main/envir.c:1811
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr "не могу добавить связи '%s' в базовое окружение"
 
-#: src/main/envir.c:1816
+#: src/main/envir.c:1842
 msgid "only the first element is used as variable name"
 msgstr "только первый элемент использован как имя переменной"
 
-#: src/main/envir.c:1848
+#: src/main/envir.c:1874
 msgid "first argument must be a named list"
 msgstr "первый аргумент должен быть именованным списком"
 
-#: src/main/envir.c:1853
+#: src/main/envir.c:1879
 #, fuzzy
 msgid "'names(x)' must be a character vector of the same length as 'x'"
 msgstr "names(x) должен быть строковым вектором длиной, совпадающей с длиной x"
 
-#: src/main/envir.c:1885
+#: src/main/envir.c:1911
 msgid "cannot remove variables from base namespace"
 msgstr "не могу убрать переменные из базового пространства имен"
 
-#: src/main/envir.c:1887
+#: src/main/envir.c:1913
 msgid "cannot remove variables from the base environment"
 msgstr "не могу удалить переменные из базового окружения"
 
-#: src/main/envir.c:1889
+#: src/main/envir.c:1915
 msgid "cannot remove variables from the empty environment"
 msgstr "не могу удалить переменные из пустого окружения"
 
-#: src/main/envir.c:1897
+#: src/main/envir.c:1923
 msgid "cannot remove variables from this database"
 msgstr "не могу удалить переменные из этой базы данных"
 
-#: src/main/envir.c:2058
+#: src/main/envir.c:2084
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "переменная '%s' типа '%s' не найдена"
 
-#: src/main/envir.c:2141
+#: src/main/envir.c:2167
 #, c-format
 msgid "invalid name in position %d"
 msgstr "неправильное имя в позиции %d"
 
-#: src/main/envir.c:2147
+#: src/main/envir.c:2173
 msgid "second argument must be an environment"
 msgstr "второй аргумент должен быть окружением"
 
-#: src/main/envir.c:2155 src/main/envir.c:2163
+#: src/main/envir.c:2181 src/main/envir.c:2189
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
 
-#: src/main/envir.c:2294
+#: src/main/envir.c:2320
 msgid "invalid use of 'missing'"
 msgstr "неправильное использование 'missing'"
 
-#: src/main/envir.c:2320
+#: src/main/envir.c:2346
 msgid "'missing' can only be used for arguments"
 msgstr "'missing' может использоваться только для аргументов"
 
-#: src/main/envir.c:2406
+#: src/main/envir.c:2432
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer"
 msgstr "аргумент 'list' должен быть списком"
 
-#: src/main/envir.c:2420
+#: src/main/envir.c:2446
 msgid "all elements of a list must be named"
 msgstr "все элементы должны быть именованы"
 
-#: src/main/envir.c:2443
+#: src/main/envir.c:2469
 #, fuzzy
 msgid "'attach()' function only works for lists, data frames and environments"
 msgstr "'attach' работает только со списками, таблицами данных и окружениями"
 
-#: src/main/envir.c:2526
+#: src/main/envir.c:2552
 msgid "detaching \"package:base\" is not allowed"
 msgstr "отделение \"package:base\" не разрешено"
 
-#: src/main/envir.c:2675
+#: src/main/envir.c:2701
 #, fuzzy
 msgid "bad hash table contents"
 msgstr "неправильное имя переменной"
 
-#: src/main/envir.c:2957
+#: src/main/envir.c:2983
 msgid "arguments must be symbolic"
 msgstr "аргументы должны быть символическими"
 
-#: src/main/envir.c:3100
+#: src/main/envir.c:3126
 msgid "no enclosing environment"
 msgstr "нет вложенного окружения"
 
-#: src/main/envir.c:3153
+#: src/main/envir.c:3179
 #, fuzzy, c-format
 msgid "no item called '%s' on the search list"
 msgstr "в списке поиска нет пункта по имени \"%s\""
 
-#: src/main/envir.c:3178
+#: src/main/envir.c:3204
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "использование 'as.environment(NULL)' не одобряется"
 
-#: src/main/envir.c:3184
+#: src/main/envir.c:3210
 msgid "S4 object does not extend class \"environment\""
 msgstr "объект S4 не расширяет класс \"environment\""
 
-#: src/main/envir.c:3199
+#: src/main/envir.c:3225
 #, fuzzy
 msgid "invalid object for 'as.environment()' function"
 msgstr "неправильный объект для 'as.environment'"
 
-#: src/main/envir.c:3277 src/main/envir.c:3298 src/main/envir.c:3319
-#: src/main/envir.c:3355 src/main/envir.c:3375 src/main/envir.c:3474
+#: src/main/envir.c:3303 src/main/envir.c:3324 src/main/envir.c:3345
+#: src/main/envir.c:3381 src/main/envir.c:3401 src/main/envir.c:3500
 #, fuzzy, c-format
 msgid "'%s' argument is not a symbol"
 msgstr "не символ"
 
-#: src/main/envir.c:3290 src/main/envir.c:3311 src/main/envir.c:3367
-#: src/main/envir.c:3387
+#: src/main/envir.c:3316 src/main/envir.c:3337 src/main/envir.c:3393
+#: src/main/envir.c:3413
 #, fuzzy, c-format
 msgid "no binding for '%s'"
 msgstr "нет связи для \"%s\""
 
-#: src/main/envir.c:3328 src/main/envir.c:3344
+#: src/main/envir.c:3354 src/main/envir.c:3370
 msgid "symbol already has a regular binding"
 msgstr "символ уже имеет правильную связь"
 
-#: src/main/envir.c:3330 src/main/envir.c:3346
+#: src/main/envir.c:3356 src/main/envir.c:3372
 msgid "cannot change active binding if binding is locked"
 msgstr "не могу изменить активную связь когда связь блокирована"
 
-#: src/main/envir.c:3432 src/main/envir.c:3670
+#: src/main/envir.c:3458 src/main/envir.c:3696
 msgid "unknown op"
 msgstr "неизвестный op"
 
-#: src/main/envir.c:3478
+#: src/main/envir.c:3504
 msgid "cannot unbind a locked binding"
 msgstr "не могу освободить блокированную связь"
 
-#: src/main/envir.c:3480
+#: src/main/envir.c:3506
 msgid "cannot unbind an active binding"
 msgstr "не могу освободить активную связь"
 
-#: src/main/envir.c:3621
+#: src/main/envir.c:3647
 msgid "bad namespace name"
 msgstr "неправильное имя пространства имен"
 
-#: src/main/envir.c:3633
+#: src/main/envir.c:3659
 #, fuzzy
 msgid "namespace is already registered"
 msgstr "пространство имен уже зарегистрировано"
 
-#: src/main/envir.c:3645
+#: src/main/envir.c:3671
 #, fuzzy
 msgid "namespace is not registered"
 msgstr "пространство имен не регистрировано"
 
-#: src/main/envir.c:3701
+#: src/main/envir.c:3727
 msgid "bad import environment argument"
 msgstr "неправильный аргумент импорта окружения"
 
-#: src/main/envir.c:3706
+#: src/main/envir.c:3732
 msgid "bad export environment argument"
 msgstr "неправильный аргумент экспорта окружения"
 
-#: src/main/envir.c:3710
+#: src/main/envir.c:3736
 msgid "length of import and export names must match"
 msgstr "длины экспортируемых и импортируемых имен должны совпадать"
 
-#: src/main/envir.c:3733
+#: src/main/envir.c:3759
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "экспортируемый символ '%s' не имеет значения"
 
-#: src/main/envir.c:3765
+#: src/main/envir.c:3791
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr "аргумент должен быть окружением"
 
-#: src/main/envir.c:3871
+#: src/main/envir.c:3897
 #, c-format
 msgid "Resized: size %d => %d\tpri %d => %d\n"
 msgstr ""
 
 # fuzzy, c-format
-#: src/main/envir.c:3898
+#: src/main/envir.c:3924
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "неизвестная кодировка: %d"
 
-#: src/main/envir.c:3918
+#: src/main/envir.c:3944
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "внутреннее nul в строке: '%s'"
 
 # fuzzy, c-format
-#: src/main/envir.c:3961
+#: src/main/envir.c:3987
 #, fuzzy, c-format
 msgid "unknown encoding mask: %d"
 msgstr "неизвестная кодировка: %d"
 
-#: src/main/envir.c:3997 src/main/envir.c:4024
+#: src/main/envir.c:4023 src/main/envir.c:4050
 #, c-format
 msgid "Cache size: %d\n"
 msgstr ""
 
-#: src/main/envir.c:3998 src/main/envir.c:4025
+#: src/main/envir.c:4024 src/main/envir.c:4051
 #, c-format
 msgid "Cache pri:  %d\n"
 msgstr ""
 
-#: src/main/envir.c:4002 src/main/envir.c:4029
+#: src/main/envir.c:4028 src/main/envir.c:4055
 #, c-format
 msgid "Line %d: "
 msgstr ""
 
-#: src/main/envir.c:4092
+#: src/main/envir.c:4118
 #, fuzzy, c-format
 msgid "'%s' argument is not a namespace"
 msgstr "аргумент не является матрицей"
 
-#: src/main/envir.c:4108
+#: src/main/envir.c:4134
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.c:4126
+#: src/main/envir.c:4152
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -4356,7 +4369,7 @@ msgstr "Rprof: не могу открыть файл профиля '%s'"
 msgid "unable to create profiling thread"
 msgstr "не могу создать 'pixmap'"
 
-#: src/main/eval.c:435 src/main/eval.c:7572
+#: src/main/eval.c:435 src/main/eval.c:7577
 msgid "setting profile timer failed"
 msgstr "установить профильный таймер не удалось"
 
@@ -4389,12 +4402,12 @@ msgstr ""
 msgid "restarting interrupted promise evaluation"
 msgstr "перезапуск прерван выполнением обещания"
 
-#: src/main/eval.c:587 src/main/eval.c:1483
+#: src/main/eval.c:587 src/main/eval.c:1485
 #, fuzzy, c-format
 msgid "'rho' argument cannot be C NULL: detected in C-level '%s' function"
 msgstr "первый аргумент должен быть окружением или внешним указателем"
 
-#: src/main/eval.c:589 src/main/eval.c:1485
+#: src/main/eval.c:589 src/main/eval.c:1487
 #, fuzzy, c-format
 msgid ""
 "'rho' argument must be an environment not %s: detected in C-level '%s' "
@@ -4409,8 +4422,8 @@ msgstr ""
 "исполнение расположено слишком глубоко: неопределенная рекурсия / "
 "options(expressions=)?"
 
-#: src/main/eval.c:687 src/main/eval.c:6288 src/main/eval.c:6303
-#: src/main/eval.c:6321 src/main/eval.c:6480
+#: src/main/eval.c:687 src/main/eval.c:6293 src/main/eval.c:6308
+#: src/main/eval.c:6326 src/main/eval.c:6485
 msgid "trace: "
 msgstr ""
 
@@ -4424,7 +4437,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:746 src/main/eval.c:1672 src/main/eval.c:6343
+#: src/main/eval.c:746 src/main/eval.c:1672 src/main/eval.c:6348
 msgid "attempt to apply non-function"
 msgstr "попытка применить не-функцию"
 
@@ -4441,7 +4454,7 @@ msgstr ""
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1664 src/main/eval.c:2677 src/main/eval.c:5589
+#: src/main/eval.c:1664 src/main/eval.c:2679 src/main/eval.c:5594
 #, c-format
 msgid "argument %d is empty"
 msgstr "аргумент %d пуст"
@@ -4486,292 +4499,292 @@ msgstr "аргумент нулевой длины"
 msgid "non-symbol loop variable"
 msgstr "несимвольная переменная цикла"
 
-#: src/main/eval.c:2063 src/main/eval.c:6107
+#: src/main/eval.c:2063 src/main/eval.c:6112
 #, fuzzy
 msgid "invalid 'for()' loop sequence"
 msgstr "неправильная циклическая последовательность for()"
 
-#: src/main/eval.c:2206
+#: src/main/eval.c:2208
 msgid "multi-argument returns are not permitted"
 msgstr "многоаргументные возвраты не разрешены"
 
-#: src/main/eval.c:2253
+#: src/main/eval.c:2255
 msgid "invalid (NULL) left side of assignment"
 msgstr "неправильная (NULL) левая сторона присваивания"
 
-#: src/main/eval.c:2287
+#: src/main/eval.c:2289
 msgid "target of assignment expands to non-language object"
 msgstr "цель присваивания раскрывается в неязыковой объект"
 
-#: src/main/eval.c:2387
+#: src/main/eval.c:2389
 #, fuzzy, c-format
 msgid "over-long name in '%s' function"
 msgstr "слишком длинное имя в '%s'"
 
-#: src/main/eval.c:2477
+#: src/main/eval.c:2479
 msgid "cannot do complex assignments in base namespace"
 msgstr "не могу делать комплексные присваивания в базовом пространстве имен"
 
-#: src/main/eval.c:2479
+#: src/main/eval.c:2481
 msgid "cannot do complex assignments in base environment"
 msgstr "не могу делать комплексные присваивания в базовом окружении"
 
-#: src/main/eval.c:2518 src/main/eval.c:2545
+#: src/main/eval.c:2520 src/main/eval.c:2547
 msgid "invalid function in complex assignment"
 msgstr "неправильная функция в комплексном присвоении"
 
-#: src/main/eval.c:2605
+#: src/main/eval.c:2607
 #, fuzzy
 msgid "invalid ('do_set()' function) left-hand side to assignment"
 msgstr "неправильная (do_set) левая сторона в присвоении"
 
-#: src/main/eval.c:2847
+#: src/main/eval.c:2852
 msgid "invalid formal argument list for \"function\""
 msgstr "неправильный список формальных аргументов для \"функция\""
 
-#: src/main/eval.c:2908 src/main/eval.c:2938 src/main/eval.c:2942
+#: src/main/eval.c:2913 src/main/eval.c:2943 src/main/eval.c:2947
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "неправильный аргумент '%s'"
 
-#: src/main/eval.c:2935
+#: src/main/eval.c:2940
 #, fuzzy
 msgid "numeric 'envir' argument is not of length one"
 msgstr "числовой аргумент 'envir' не единичной длины"
 
-#: src/main/eval.c:2958 src/main/eval.c:2983
+#: src/main/eval.c:2963 src/main/eval.c:2988
 #, fuzzy
 msgid "restarts are not supported in 'eval()' function"
 msgstr "перезапуск не поддерживается в 'eval'"
 
-#: src/main/eval.c:3042 src/main/eval.c:3055
+#: src/main/eval.c:3047 src/main/eval.c:3060
 #, fuzzy
 msgid "'Recall()' function called from outside a closure"
 msgstr "'Recall' вызвано снаружи вложения"
 
-#: src/main/eval.c:3149
+#: src/main/eval.c:3154
 msgid "value in '...' is not a promise"
 msgstr "значение в '...' не является перспективным"
 
-#: src/main/eval.c:3410
+#: src/main/eval.c:3415
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "Несовместимые методы (\"%s\", \"%s\") для \"%s\""
 
-#: src/main/eval.c:3458
+#: src/main/eval.c:3463
 msgid "dispatch error in group dispatch"
 msgstr "ошибка отправки в групповой отправке"
 
-#: src/main/eval.c:3977 src/main/eval.c:6451 src/main/seq.c:1008
+#: src/main/eval.c:3982 src/main/eval.c:6456 src/main/seq.c:1008
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "'%s' не является %s функцией"
 
-#: src/main/eval.c:4491
+#: src/main/eval.c:4496
 msgid "node stack overflow"
 msgstr "переполнение стека узла"
 
-#: src/main/eval.c:4497
+#: src/main/eval.c:4502
 msgid "integer stack overflow"
 msgstr "переполнение стека целых чисел"
 
-#: src/main/eval.c:4591
+#: src/main/eval.c:4596
 #, fuzzy
 msgid "bad operation code"
 msgstr "Неправильный 'opcode'"
 
-#: src/main/eval.c:5573 src/main/logic.c:263 src/main/logic.c:269
+#: src/main/eval.c:5578 src/main/logic.c:263 src/main/logic.c:269
 #, fuzzy, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr "неправильный тип %s в 'x %s y'"
 
-#: src/main/eval.c:5603
+#: src/main/eval.c:5608
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr "аргумент %d пуст"
 
-#: src/main/eval.c:5952
+#: src/main/eval.c:5957
 msgid "bytecode version mismatch; using eval"
 msgstr "несоответствие версии байтового кода; использую eval"
 
-#: src/main/eval.c:5958
+#: src/main/eval.c:5963
 msgid "bytecode version is too old"
 msgstr "версия байтового кода слишком старая"
 
-#: src/main/eval.c:5959
+#: src/main/eval.c:5964
 msgid "bytecode version is too new"
 msgstr "версия байтового кода слишком новая"
 
-#: src/main/eval.c:5997
+#: src/main/eval.c:6002
 msgid "byte code version mismatch"
 msgstr "несоответствие версии байтового кода"
 
-#: src/main/eval.c:6190
+#: src/main/eval.c:6195
 #, fuzzy
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "неправильная последовательность аргументов в цикле 'for'"
 
-#: src/main/eval.c:6317
+#: src/main/eval.c:6322
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:6333 src/main/names.c:1320
+#: src/main/eval.c:6338 src/main/names.c:1322
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "нет внутренней функции \"%s\""
 
-#: src/main/eval.c:6438 src/main/eval.c:6793 src/main/eval.c:6834
+#: src/main/eval.c:6443 src/main/eval.c:6798 src/main/eval.c:6839
 msgid "bad function"
 msgstr "неправильная функция"
 
-#: src/main/eval.c:6885
+#: src/main/eval.c:6890
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6891 src/main/eval.c:6916
+#: src/main/eval.c:6896 src/main/eval.c:6921
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "неверное смещение числовых переключателей"
 
-#: src/main/eval.c:6897
+#: src/main/eval.c:6902
 #, fuzzy
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 "числовое выражение (EXPR) требуется для switch() без именованных альтернатив"
 
-#: src/main/eval.c:6900
+#: src/main/eval.c:6905
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr "неверное смещение строковых переключателей"
 
-#: src/main/eval.c:6902
+#: src/main/eval.c:6907
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr "неправильное имя переключателя"
 
-#: src/main/eval.c:7009
+#: src/main/eval.c:7014
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "неизвестный формат ввода"
 
-#: src/main/eval.c:7025
+#: src/main/eval.c:7030
 msgid "cannot find index for threaded code address"
 msgstr "не могу найти индекс для нитевого адреса кода"
 
-#: src/main/eval.c:7069
+#: src/main/eval.c:7074
 #, fuzzy
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
 msgstr "'match' требует векторных аргументов"
 
-#: src/main/eval.c:7071
+#: src/main/eval.c:7076
 #, fuzzy
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
 msgstr "'match' требует векторных аргументов"
 
-#: src/main/eval.c:7152
+#: src/main/eval.c:7157
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7154
+#: src/main/eval.c:7159
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7156
+#: src/main/eval.c:7161
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.c:7157
+#: src/main/eval.c:7162
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7160
+#: src/main/eval.c:7165
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7162
+#: src/main/eval.c:7167
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.c:7192 src/main/eval.c:7203
+#: src/main/eval.c:7197 src/main/eval.c:7208
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.c:7217
+#: src/main/eval.c:7222
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.c:7281
+#: src/main/eval.c:7286
 msgid "invalid body"
 msgstr "неправильное тело"
 
-#: src/main/eval.c:7301
+#: src/main/eval.c:7306
 msgid "invalid symbol"
 msgstr "неправильный символ"
 
-#: src/main/eval.c:7345
+#: src/main/eval.c:7350
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr "аргумент не является объектом байтового кода"
 
-#: src/main/eval.c:7367
+#: src/main/eval.c:7372
 msgid "bad file name"
 msgstr "неправильное имя файла"
 
-#: src/main/eval.c:7386
+#: src/main/eval.c:7391
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr "'pattern' должен быть непустой текстовой строкой"
 
-#: src/main/eval.c:7388 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:7393 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2196 src/modules/lapack/Lapack.c:1252
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'ascii' должно быть логическим"
 
-#: src/main/eval.c:7418 src/main/eval.c:7425
+#: src/main/eval.c:7423 src/main/eval.c:7430
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr "R_CompiledFileName: буфер слишком мал"
 
-#: src/main/eval.c:7459 src/main/eval.c:7478 src/main/eval.c:7512
+#: src/main/eval.c:7464 src/main/eval.c:7483 src/main/eval.c:7517
 msgid "constant buffer must be a generic vector"
 msgstr "константный буфер должен быть общим вектором"
 
-#: src/main/eval.c:7482
+#: src/main/eval.c:7487
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: src/main/eval.c:7514
+#: src/main/eval.c:7519
 msgid "bad constant count"
 msgstr "неверное число констант"
 
-#: src/main/eval.c:7552
+#: src/main/eval.c:7557
 #, fuzzy
 msgid "profile timer is in use"
 msgstr "используется профильный таймер"
 
-#: src/main/eval.c:7554
+#: src/main/eval.c:7559
 msgid "already byte code profiling"
 msgstr "уже есть побайтное профилирование"
 
-#: src/main/eval.c:7590
+#: src/main/eval.c:7595
 #, fuzzy
 msgid "no byte code profiling"
 msgstr "не побайтное профилирование"
 
-#: src/main/eval.c:7606 src/main/eval.c:7610 src/main/eval.c:7614
+#: src/main/eval.c:7611 src/main/eval.c:7615 src/main/eval.c:7619
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "ICU не поддерживается в этой сборке"
 
-#: src/main/eval.c:7664
+#: src/main/eval.c:7669
 #, fuzzy
 msgid "parse error"
 msgstr "ошибка чтения"
@@ -4936,13 +4949,13 @@ msgstr ""
 msgid "invalid %s sequence (line %d)"
 msgstr "неправильная \\u{xxxx} последовательность (строка %d)"
 
-#: src/main/gram.c:4820 src/main/gram.y:2481
+#: src/main/gram.c:4827 src/main/gram.y:2488
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr ""
 "'\\%c' -- нераспознаваемый префикс в строке в строке начинающейся с \"%s\""
 
-#: src/main/gram.c:4874 src/main/gram.y:2535
+#: src/main/gram.c:4881 src/main/gram.y:2542
 #, c-format
 msgid "[%u char quoted with '%c']"
 msgid_plural "[%u chars quoted with '%c']"
@@ -4950,7 +4963,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/main/gram.c:4876 src/main/gram.y:2537
+#: src/main/gram.c:4883 src/main/gram.y:2544
 #, c-format
 msgid "[%d wide char quoted with '%c']"
 msgid_plural "[%d wide chars quoted with '%c']"
@@ -4958,11 +4971,11 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/main/gram.c:4884 src/main/gram.y:2545
+#: src/main/gram.c:4891 src/main/gram.y:2552
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr "смешивание Юникода и octal/hex escapes в строке не позволяется"
 
-#: src/main/gram.c:4888 src/main/gram.y:2549
+#: src/main/gram.c:4895 src/main/gram.y:2556
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
@@ -4971,14 +4984,14 @@ msgstr ""
 "подстрока на строке %d, содержащая Unicode-escapes не из этой локали\n"
 "слишком длинная (максимум 10000 символов)"
 
-#: src/main/gram.c:5486 src/main/gram.c:5493 src/main/gram.c:5499
-#: src/main/gram.c:5506 src/main/gram.y:3147 src/main/gram.y:3154
-#: src/main/gram.y:3160 src/main/gram.y:3167
+#: src/main/gram.c:5493 src/main/gram.c:5500 src/main/gram.c:5506
+#: src/main/gram.c:5513 src/main/gram.y:3154 src/main/gram.y:3161
+#: src/main/gram.y:3167 src/main/gram.y:3174
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr "переполнение стека целых чисел на строке %d"
 
-#: src/main/gram.c:5601 src/main/gram.y:3262
+#: src/main/gram.c:5608 src/main/gram.y:3269
 #, fuzzy, c-format
 msgid "internal parser error at line %d"
 msgstr "переполнение буфера ввода на строке %d"
@@ -5144,7 +5157,7 @@ msgstr "неправильная функция в комплексном при
 msgid "error reading the file"
 msgstr "ошибка CRC в zip-файле"
 
-#: src/main/identical.c:57 src/main/util.c:493 src/main/util.c:499
+#: src/main/identical.c:57 src/main/util.c:495 src/main/util.c:501
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires %d"
 msgid_plural "%d arguments passed to '%s' function which requires %d"
@@ -5889,34 +5902,34 @@ msgstr "не могу разместить память для 'read.dcf'"
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1024
+#: src/main/names.c:1026
 msgid "string argument required"
 msgstr "нужен текстовый аргумент"
 
-#: src/main/names.c:1027
+#: src/main/names.c:1029
 msgid "no such primitive function"
 msgstr "нет такой примитивной функции"
 
-#: src/main/names.c:1159
+#: src/main/names.c:1161
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "не могу разместить память для 'read.dcf'"
 
-#: src/main/names.c:1217 src/main/names.c:1250
+#: src/main/names.c:1219 src/main/names.c:1252
 msgid "attempt to use zero-length variable name"
 msgstr "попытка использовать имя переменной нулевой длины"
 
-#: src/main/names.c:1219 src/main/names.c:1252
+#: src/main/names.c:1221 src/main/names.c:1254
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "имена переменных ограничены %d байтами"
 
-#: src/main/names.c:1341
+#: src/main/names.c:1343
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "не могу убрать переменные из базового пространства имен"
 
-#: src/main/names.c:1348
+#: src/main/names.c:1350
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "не могу убрать переменные из базового пространства имен"
@@ -6346,12 +6359,12 @@ msgstr "не могу открыть файл назначения '%s' по п�
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "не могу создать каталог '%ls' по причине '%s'"
 
-#: src/main/platform.c:1621 src/main/platform.c:1668 src/main/sysutils.c:1830
-#: src/main/sysutils.c:1844
+#: src/main/platform.c:1621 src/main/platform.c:1668 src/main/sysutils.c:1832
+#: src/main/sysutils.c:1846
 msgid "internal out-of-memory condition"
 msgstr "внутренняя нехватка памяти"
 
-#: src/main/platform.c:1664 src/main/sysutils.c:1840
+#: src/main/platform.c:1664 src/main/sysutils.c:1842
 #, c-format
 msgid "read error on '%s'"
 msgstr "ошибка чтения в '%s'"
@@ -6777,7 +6790,7 @@ msgstr "плохое окружение"
 msgid "unsupported encoding (%d) in '%s' function"
 msgstr "нереализованный  тип (%d) в '%s'\n"
 
-#: src/main/printutils.c:708
+#: src/main/printutils.c:707
 #, fuzzy
 msgid "it is not known that wchar_t is Unicode on this platform"
 msgstr "nsl() не поддерживается на этой платформе"
@@ -7087,7 +7100,7 @@ msgstr "не могу выделить место под 'имя'"
 msgid "'R_RegisterRoutines()' called with invalid DllInfo object."
 msgstr "R_RegisterRoutines вызваны с неправильным объектом DllInfo."
 
-#: src/main/Rdynload.c:362 src/main/sysutils.c:1691
+#: src/main/Rdynload.c:362 src/main/sysutils.c:1693
 #, fuzzy, c-format
 msgid "allocation failure in '%s' function"
 msgstr "размещение в R_tmpnam2 не удалось"
@@ -7097,7 +7110,7 @@ msgstr "размещение в R_tmpnam2 не удалось"
 msgid "maximal number of DLL files reached..."
 msgstr "Достигнуто максимальное количество DLL..."
 
-#: src/main/Rdynload.c:915 src/main/Rdynload.c:931 src/main/util.c:778
+#: src/main/Rdynload.c:915 src/main/Rdynload.c:931 src/main/util.c:780
 msgid "character argument expected"
 msgstr "нужен текстовый аргумент"
 
@@ -8118,7 +8131,7 @@ msgstr "используйте формат %s для текстовых"
 msgid "likely truncation of character string to %d characters"
 msgstr "похоже на укорочение текстовой строки на %d символов"
 
-#: src/main/sprintf.c:424 src/main/util.c:2381
+#: src/main/sprintf.c:424 src/main/util.c:2428
 msgid "unsupported type"
 msgstr "неподдерживаемый тип"
 
@@ -8473,136 +8486,136 @@ msgstr "неправильный тип ввода"
 msgid "an argument will be fractionally recycled"
 msgstr "аргумент будет частично зациклен"
 
-#: src/main/sysutils.c:71 src/main/sysutils.c:85
+#: src/main/sysutils.c:72 src/main/sysutils.c:86
 #, c-format
 msgid "cannot determine file modification time of '%s'"
 msgstr "не могу определить время изменения файла '%s'"
 
-#: src/main/sysutils.c:169
+#: src/main/sysutils.c:170
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "кодировка для имени файла не может быть 'bytes'"
 
-#: src/main/sysutils.c:172 src/main/sysutils.c:842 src/main/sysutils.c:857
-#: src/main/sysutils.c:987
+#: src/main/sysutils.c:173 src/main/sysutils.c:843 src/main/sysutils.c:858
+#: src/main/sysutils.c:989
 #, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "неподдерживаемая конвертация из '%s' в кодовой странице '%d'"
 
-#: src/main/sysutils.c:180
+#: src/main/sysutils.c:181
 msgid "file name conversion problem -- name too long?"
 msgstr "проблема конвертирования имени файла -- имя слишком длинное?"
 
-#: src/main/sysutils.c:181
+#: src/main/sysutils.c:182
 msgid "file name conversion problem"
 msgstr "проблема конвертирования имени файла"
 
-#: src/main/sysutils.c:255
+#: src/main/sysutils.c:256
 msgid "invalid filename pattern"
 msgstr "неправильный образец имени файла"
 
-#: src/main/sysutils.c:259
+#: src/main/sysutils.c:260
 msgid "invalid file extension"
 msgstr "неправильное расширение файла"
 
-#: src/main/sysutils.c:261 src/main/sysutils.c:263 src/main/sysutils.c:265
+#: src/main/sysutils.c:262 src/main/sysutils.c:264 src/main/sysutils.c:266
 #, fuzzy, c-format
 msgid "no '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: src/main/sysutils.c:335
+#: src/main/sysutils.c:336
 #, fuzzy, c-format
 msgid "system call failed: %s"
 msgstr "на %s не удалось найти"
 
-#: src/main/sysutils.c:364 src/main/sysutils.c:367 src/main/sysutils.c:458
-#: src/main/sysutils.c:460 src/main/sysutils.c:496
+#: src/main/sysutils.c:365 src/main/sysutils.c:368 src/main/sysutils.c:459
+#: src/main/sysutils.c:461 src/main/sysutils.c:497
 msgid "wrong type for argument"
 msgstr "неправильный тип для аргумента"
 
-#: src/main/sysutils.c:462
+#: src/main/sysutils.c:463
 msgid "wrong length for argument"
 msgstr "неправильная длина аргумента"
 
-#: src/main/sysutils.c:483 src/main/sysutils.c:538
+#: src/main/sysutils.c:484 src/main/sysutils.c:539
 #, fuzzy, c-format
 msgid "'%s' function is not available on this system"
 msgstr "'Sys.setenv' в этой системе недоступен"
 
-#: src/main/sysutils.c:527
+#: src/main/sysutils.c:528
 msgid "this system cannot unset environment variables: setting to \"\""
 msgstr ""
 "эта система не может отменить переменные окружения: устанавливаю в \"\""
 
-#: src/main/sysutils.c:635
+#: src/main/sysutils.c:636
 #, c-format
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "неподдерживаемая конвертация из '%s' в '%s' в кодовой странице %d"
 
-#: src/main/sysutils.c:664
+#: src/main/sysutils.c:665
 #, fuzzy
 msgid ""
 "'x' argument must be a character vector or a list of NULL or raw vectors"
 msgstr "аргумент должен быть текстовым вектором или простым вектором"
 
-#: src/main/sysutils.c:742 src/main/sysutils.c:944 src/main/sysutils.c:961
-#: src/main/sysutils.c:977 src/main/sysutils.c:1054
+#: src/main/sysutils.c:743 src/main/sysutils.c:946 src/main/sysutils.c:963
+#: src/main/sysutils.c:979 src/main/sysutils.c:1056
 #, c-format
 msgid "'%s' must be called on a CHARSXP"
 msgstr "'%s' должен быть вызван на CHARSXP"
 
-#: src/main/sysutils.c:816 src/main/sysutils.c:982 src/main/sysutils.c:1057
+#: src/main/sysutils.c:817 src/main/sysutils.c:984 src/main/sysutils.c:1059
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "перевод строк с кодировкой \"bytes\" запрещено"
 
-#: src/main/sysutils.c:829
+#: src/main/sysutils.c:830
 #, fuzzy
 msgid "internal error: no translation needed"
 msgstr "внутренняя ошибка в 'do_random1'"
 
-#: src/main/sysutils.c:926
+#: src/main/sysutils.c:928
 #, fuzzy, c-format
 msgid "'%s' function must be called on a CHARSXP"
 msgstr "'%s' должен быть вызван на CHARSXP"
 
-#: src/main/sysutils.c:1083
+#: src/main/sysutils.c:1085
 #, c-format
 msgid "unsupported conversion to '%s' from codepage %d"
 msgstr "неподдерживаемая конвертация в '%s' из кодовой страницы %d"
 
-#: src/main/sysutils.c:1349
+#: src/main/sysutils.c:1351
 #, fuzzy
 msgid "converted string is too long for buffer"
 msgstr "форматированная строка слишком длинна"
 
-#: src/main/sysutils.c:1498
+#: src/main/sysutils.c:1500
 #, fuzzy, c-format
 msgid "invalid Unicode point %u"
 msgstr "неправильное объединение строк"
 
-#: src/main/sysutils.c:1607
+#: src/main/sysutils.c:1609
 #, fuzzy
 msgid "cannot create 'R_TempDir'"
 msgstr "не могу разместить 'R_TempDir'"
 
-#: src/main/sysutils.c:1612 src/main/sysutils.c:1620 src/main/sysutils.c:1623
+#: src/main/sysutils.c:1614 src/main/sysutils.c:1622 src/main/sysutils.c:1625
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "не могу установить R_SESSION_TMPDIR"
 
-#: src/main/sysutils.c:1632
+#: src/main/sysutils.c:1634
 #, fuzzy
 msgid "cannot allocate 'R_TempDir'"
 msgstr "не могу разместить 'R_TempDir'"
 
-#: src/main/sysutils.c:1673
+#: src/main/sysutils.c:1675
 #, fuzzy
 msgid "temporary name is too long"
 msgstr "временное имя слишком длинное"
 
-#: src/main/sysutils.c:1688
+#: src/main/sysutils.c:1690
 msgid "cannot find unused tempfile name"
 msgstr "не могу найти неиспользованное имя временного файла"
 
-#: src/main/sysutils.c:1818
+#: src/main/sysutils.c:1820
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr "'dirmarke = TRUE' не поддерживается на этой платформе"
 
@@ -8678,190 +8691,190 @@ msgstr "'csduplicated' не вызван на 'STRSXP'"
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 
-#: src/main/util.c:88 src/main/util.c:106
+#: src/main/util.c:90 src/main/util.c:108
 msgid "object is not a matrix"
 msgstr "объект не является матрицей"
 
-#: src/main/util.c:117 src/main/util.c:119
+#: src/main/util.c:119 src/main/util.c:121
 #, fuzzy
 msgid "invalid type passed to internal function\n"
 msgstr "драйверу X11 передан неправильный тип цвета"
 
-#: src/main/util.c:304 src/main/util.c:316 src/main/util.c:326
-#: src/main/util.c:341 src/main/util.c:354
+#: src/main/util.c:306 src/main/util.c:318 src/main/util.c:328
+#: src/main/util.c:343 src/main/util.c:356
 #, fuzzy, c-format
 msgid "type %d is unimplemented in '%s' function"
 msgstr "тип %d не реализован в '%s'"
 
-#: src/main/util.c:306 src/main/util.c:328
+#: src/main/util.c:308 src/main/util.c:330
 #, fuzzy, c-format
 msgid "unknown type #%d"
 msgstr "неизвестный тип"
 
-#: src/main/util.c:352
+#: src/main/util.c:354
 #, fuzzy, c-format
 msgid "unimplemented type '%s' in '%s' function"
 msgstr "нереализованный тип '%s' в '%s'\n"
 
-#: src/main/util.c:479
+#: src/main/util.c:481
 msgid "invalid tag in name extraction"
 msgstr "неправильный ярлык при выделении имени"
 
-#: src/main/util.c:514
+#: src/main/util.c:516
 #, c-format
 msgid "supplied argument name '%s' does not match '%s'"
 msgstr "предложенное имя аргумента '%s' не соответствует '%s'"
 
-#: src/main/util.c:523
+#: src/main/util.c:525
 #, fuzzy, c-format
 msgid "'nthcdr()' list is shorter than %d"
 msgstr "список 'nthcdr' короче, чем %d"
 
-#: src/main/util.c:528
+#: src/main/util.c:530
 msgid "'nthcdr' needs a list to CDR down"
 msgstr "'nthcdr' нужен список для выполнения CDR"
 
-#: src/main/util.c:688
+#: src/main/util.c:690
 #, fuzzy
 msgid "number of rows in the result exceeds maximum vector length"
 msgstr "число единиц для замены не является произведением длины замены"
 
-#: src/main/util.c:780
+#: src/main/util.c:782
 msgid "missing value is invalid"
 msgstr "неправильное пропущенное значение"
 
-#: src/main/util.c:789 src/main/util.c:796
+#: src/main/util.c:791 src/main/util.c:798
 msgid "cannot change working directory"
 msgstr "невозможно сменить рабочий каталог"
 
-#: src/main/util.c:816 src/main/util.c:850 src/main/util.c:891
-#: src/main/util.c:933 src/main/util.c:1062 src/main/util.c:1121
-#: src/main/util.c:1144
+#: src/main/util.c:818 src/main/util.c:852 src/main/util.c:893
+#: src/main/util.c:935 src/main/util.c:1064 src/main/util.c:1123
+#: src/main/util.c:1146
 msgid "a character vector argument expected"
 msgstr "нужен аргумент -- текстовый вектор"
 
-#: src/main/util.c:1001
+#: src/main/util.c:1003
 msgid ""
 "this platform does not have realpath so the results may not be canonical"
 msgstr ""
 
-#: src/main/util.c:1043
+#: src/main/util.c:1045
 #, fuzzy
 msgid "system timezone name is unknown: set environment variable TZ"
 msgstr ""
 "эта система не может отменить переменные окружения: устанавливаю в \"\""
 
-#: src/main/util.c:1076
+#: src/main/util.c:1078
 #, fuzzy
 msgid "only the first character of 'quote' argument will be used"
 msgstr "будет использован только первый символ 'quote'"
 
-#: src/main/util.c:1146
+#: src/main/util.c:1148
 msgid "a character vector 'value' expected"
 msgstr "ожидается текстовый вектор 'value'"
 
-#: src/main/util.c:1149
+#: src/main/util.c:1151
 #, fuzzy
 msgid "'value' argument must be of positive length"
 msgstr "'value' должно иметь положительную длину"
 
-#: src/main/util.c:1278 src/main/util.c:1286
+#: src/main/util.c:1306 src/main/util.c:1319
 #, fuzzy, c-format
 msgid "invalid input '%s' in 'utf8towcs()' function"
 msgstr "неправильный ввод '%s' в 'utf8towcs'"
 
-#: src/main/util.c:1371
+#: src/main/util.c:1418
 #, c-format
 msgid "invalid multibyte string at '%s'"
 msgstr "неправильная многобайтная строка в '%s'"
 
-#: src/main/util.c:1513
+#: src/main/util.c:1560
 msgid "error message truncated to 255 chars"
 msgstr "сообщение об ошибке сокращено до 255 символов"
 
-#: src/main/util.c:1526
+#: src/main/util.c:1573
 msgid "warning message truncated to 255 chars"
 msgstr "предупреждающее сообщение сокращено до 255 символов"
 
-#: src/main/util.c:1675
+#: src/main/util.c:1722
 #, c-format
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr ""
 
-#: src/main/util.c:1994
+#: src/main/util.c:2041
 #, fuzzy
 msgid "all arguments must be named"
 msgstr "атрибуты должны быть именованы"
 
-#: src/main/util.c:2015
+#: src/main/util.c:2062
 #, fuzzy, c-format
 msgid "failed to set ICU locale %s (%d)"
 msgstr "попытка установить неправильный атрибут 'class'"
 
-#: src/main/util.c:2019 src/main/util.c:2091
+#: src/main/util.c:2066 src/main/util.c:2138
 #, fuzzy, c-format
 msgid "failed to open ICU collator (%d)"
 msgstr "не удалось привязать порт"
 
-#: src/main/util.c:2041
+#: src/main/util.c:2088
 #, fuzzy
 msgid "failed to set ICU collator attribute"
 msgstr "попытка установить неправильный атрибут 'class'"
 
-#: src/main/util.c:2066 src/main/util.c:2123
+#: src/main/util.c:2113 src/main/util.c:2170
 msgid "ICU not in use"
 msgstr ""
 
-#: src/main/util.c:2087
+#: src/main/util.c:2134
 #, fuzzy, c-format
 msgid "failed to set ICU locale (%d)"
 msgstr "попытка установить неправильный атрибут 'class'"
 
-#: src/main/util.c:2108
+#: src/main/util.c:2155
 #, fuzzy
 msgid "could not collate using ICU"
 msgstr "не могу открыть файл '%s'"
 
-#: src/main/util.c:2116
+#: src/main/util.c:2163
 msgid "ICU is not supported on this build"
 msgstr "ICU не поддерживается в этой сборке"
 
-#: src/main/util.c:2165
+#: src/main/util.c:2212
 #, fuzzy
 msgid "input must be a character string"
 msgstr "'title' должен быть текстовой строкой"
 
-#: src/main/util.c:2183
+#: src/main/util.c:2230
 #, fuzzy
 msgid "'breaks' argument is not sorted"
 msgstr "тип '%s' не поддерживается"
 
-#: src/main/util.c:2217 src/main/util.c:2280
+#: src/main/util.c:2264 src/main/util.c:2327
 #, fuzzy, c-format
 msgid "long vector '%s' is not supported"
 msgstr "тип '%s' не поддерживается"
 
-#: src/main/util.c:2237 src/main/util.c:2277
+#: src/main/util.c:2284 src/main/util.c:2324
 #, fuzzy
 msgid "invalid input"
 msgstr "неправильный тип ввода"
 
-#: src/main/util.c:2334
+#: src/main/util.c:2381
 #, fuzzy, c-format
 msgid "'%s' argument must be 0, 1, or 2"
 msgstr "первый аргумент должен быть вектором"
 
-#: src/main/util.c:2466
+#: src/main/util.c:2513
 #, fuzzy
 msgid "width cannot be zero"
 msgstr ".C(..): ширина не может = 0"
 
-#: src/main/util.c:2481
+#: src/main/util.c:2528
 #, fuzzy
 msgid "'type' argument must be \"integer\" for \"d\"-format"
 msgstr ".C(..): для  \"d\"-формата 'тип' должно быть \"integer\" "
 
-#: src/main/util.c:2562
+#: src/main/util.c:2609
 #, fuzzy
 msgid "'type' argument must be \"real\" for this format"
 msgstr ".C(..): для этого формата 'тип' должен быть \"real\""

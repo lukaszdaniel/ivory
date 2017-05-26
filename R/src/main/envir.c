@@ -1440,7 +1440,7 @@ SEXP ddfind(int i, SEXP rho)
 	    return(CAR(vl));
 	}
 	else // length(...) < i
-	    error(n_("the ... list does not contain any elements",
+	    error(n_("the ... list does not contain any (%d) elements",
 			   "the ... list does not contain %d elements", i), i);
     }
     else error(_("'..%d' used in an incorrect context, no ... to look in"), i);
