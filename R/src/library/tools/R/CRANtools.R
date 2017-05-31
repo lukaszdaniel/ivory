@@ -132,10 +132,12 @@ function(packages, results = NULL, details = NULL, issues = NULL)
 
     summarize_issues <- function(i) {
         if(!length(i)) return(character())
-        ## No need for hyperrefs: these can be obtained from the package
-        ## check results page already pointed to by summarize_results().
-        gettextf("Additional issues: %s",
-                paste(unique(i$kind), collapse = " "), domain = "R-tools")
+        ## In principle the hyperrefs can be obtained from the package
+        ## check results page already pointed to by summarize_results(),
+        ## but this is not convenient for plain text processing ...
+        paste(c(gettext("Additional issues:", domain = "R-tools"),
+                sprintf("  %s <%s>", i$kind, i$href)),
+              collapse = "\n")
     }
 
     summarize <- function(p, r, d, i) {

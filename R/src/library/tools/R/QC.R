@@ -6607,7 +6607,18 @@ function(dir, localOnly = FALSE)
     if(grepl("^(The|This|A|In this|In the) package", descr))
         out$descr_bad_start <- TRUE
     if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
-       out$descr_bad_initial <- TRUE
+        out$descr_bad_initial <- TRUE
+    descr <- strwrap(descr)
+    if(any(ind <- grepl("[^<]https?://", descr))) {
+        ## Could try to filter out the matches for DOIs and arXiv ids
+        ## noted differently below: not entirely straightforward when
+        ## matching wrapped texts for to ease reporting ...
+        out$descr_bad_URLs <- descr[ind]
+    }
+    if(any(ind <- grepl("https?://.*doi.org/", descr)))
+        out$descr_bad_DOIs <- descr[ind]
+    if(any(ind <- grepl("https?://arxiv.org", descr)))
+        out$descr_bad_arXiv_ids <- descr[ind]
 
     skip_dates <-
         config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_DATES_",
@@ -7300,7 +7311,23 @@ function(x, ...)
             },
             if(length(x$descr_bad_start)) {
                 gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
-            })),
+            },
+            if(length(y <- x$descr_bad_URLs)) { #LUKI
+                paste(gettextf("The Description field contains\n%s", paste0("  ", y), domain = "R-tools"),
+                        gettext("Please enclose URLs in angle brackets (<...>).", domain = "R-tools"),
+                      collapse = "\n")
+            },
+            if(length(y <- x$descr_bad_DOIs)) {
+                paste(gettextf("The Description field contains\n%s", paste0("  ", y), domain = "R-tools"),
+                        gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools"),
+                      collapse = "\n")
+            },
+            if(length(y <- x$descr_bad_arXiv_ids)) {
+                paste(gettext("The Description field contains\n%s", paste0("  ", y), domain = "R-tools"),
+                        gettext("Please write arXiv ids as <arXiv:YYMM.NNNNN>.", domain = "R-tools"),
+                      collapse = "\n")
+            }
+            )),
       fmt(c(if(length(x$bad_date)) {
                 gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
             },
