@@ -39,6 +39,16 @@
       \item The default symbol table size has been increased from 4119
       to 49157; this may improve symbol resolution performance when many
       packages are loaded. Suggested by Jim Hester.
+
+      \item \code{line()} gets a new option \code{iter = 1}.
+
+      \item Reading from connections in text mode is buffered,
+      significantly improving the performance of \code{readLines()}, as
+      well as \code{scan()} and \code{read.table()}, at least when
+      specfiying \code{colClasses}.
+
+      \item \code{order()} is smarter about picking a default sort
+      \code{method} when its arguments are objects.
     }
   }
 
@@ -86,6 +96,10 @@
       \item \code{path.expand()} on Windows now accepts paths specified as
       UTF-8-encoded character strings even if not representable in the
       current locale.  (\PR{17120})
+
+      \item \code{line(x,y)} now correctly computes the medians of the
+      left and right group's x-values and reproduces straight lines in
+      all cases.
     }
   }
 }

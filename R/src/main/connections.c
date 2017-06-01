@@ -84,6 +84,7 @@
 #include <R_ext/RS.h>		/* R_chk_calloc and Free */
 #include <R_ext/Riconv.h>
 #include <R_ext/Print.h> // REprintf, REvprintf
+#include <R_ext/Minmax.h>
 #undef ERROR			/* for compilation on Windows */
 
 #ifdef _WIN32
@@ -229,6 +230,108 @@ static void NORET set_iconv_error(Rconnection con, char* from, char* to)
     snprintf(buf, 100, _("unsupported conversion from '%s' to '%s'"), from, to);
     con_destroy(ConnIndex(con));
     error(buf);
+}
+
+/* ------------------- buffering --------------------- */
+
+#define RBUFFCON_LEN_DEFAULT 4096
+
+
+static size_t buff_set_len(Rconnection con, size_t len) {
+    size_t unread_len = 0;
+    unsigned char *buff;
+    
+    if (con->buff_len == len)
+	return len;
+    
+    if (con->buff) {
+	unread_len = con->buff_stored_len - con->buff_pos;
+	len = max(len, unread_len);
+    }
+
+    buff = (unsigned char *)malloc(sizeof(unsigned char) * len);
+
+    if (con->buff) {
+	memcpy(buff, con->buff + con->buff_pos, unread_len);
+	free(con->buff);
+    }
+    
+    con->buff = buff;
+    con->buff_len = len;
+    con->buff_pos = 0;
+    con->buff_stored_len = unread_len;
+
+    return len;
+}
+
+static void buff_init(Rconnection con)
+{
+    con->buff_pos = con->buff_stored_len = 0;
+    buff_set_len(con, RBUFFCON_LEN_DEFAULT);
+}
+
+static void buff_reset(Rconnection con) {
+    size_t unread_len = con->buff_stored_len - con->buff_pos;
+
+    if (unread_len > 0)
+	memmove(con->buff, con->buff + con->buff_pos, unread_len);
+
+    con->buff_pos = 0;
+    con->buff_stored_len = unread_len;
+}
+
+static size_t buff_fill(Rconnection con) {
+    size_t free_len, read_len;
+    
+    buff_reset(con);
+
+    free_len = con->buff_len - con->buff_stored_len;
+    read_len = con->read(con->buff, sizeof(unsigned char), free_len, con);
+    
+    con->buff_stored_len += read_len;
+
+    return read_len;
+}
+
+static int buff_fgetc(Rconnection con)
+{
+    size_t unread_len;
+
+    if (!con->buff) {
+	buff_init(con);
+    }
+    
+    unread_len = con->buff_stored_len - con->buff_pos;
+    if (unread_len == 0) {
+	size_t filled_len = buff_fill(con);
+	if (filled_len == 0)
+	    return R_EOF;
+    }
+
+    return con->buff[con->buff_pos++];
+}
+
+static double buff_seek(Rconnection con, double where, int origin, int rw)
+{
+    size_t unread_len = con->buff_stored_len - con->buff_pos;
+
+    if (rw == 2) /* write */
+	return con->seek(con, where, origin, rw);
+    
+    if (ISNA(where)) /* tell */
+	return con->seek(con, where, origin, rw) - unread_len;
+
+    if (origin == 2) { /* current */
+	if (where < unread_len) {
+	    con->buff_pos += where;
+	    return con->seek(con, NA_REAL, origin, rw);
+	} else {
+	    where -= unread_len;
+	}
+    }
+    con->buff_pos = con->buff_stored_len = 0;
+    
+    return con->seek(con, where, origin, rw);
 }
 
 void set_iconv(Rconnection con)
@@ -402,7 +505,7 @@ int dummy_fgetc(Rconnection con)
 	    }
 	    p = con->iconvbuff + con->inavail;
 	    for(i = con->inavail; i < 25; i++) {
-		c = con->fgetc_internal(con);
+		c = buff_fgetc(con);
 		if(c == R_EOF){ con->EOF_signalled = TRUE; break; }
 		*p++ = (char) c;
 		con->inavail++;
@@ -441,7 +544,9 @@ int dummy_fgetc(Rconnection con)
 	}
 	con->navail--;
 	return *con->next++;
-    } else
+    } else if (con->text)
+	return buff_fgetc(con);
+    else
 	return con->fgetc_internal(con);
 }
 
@@ -502,6 +607,8 @@ void init_con(Rconnection newcon, const char *description, int enc,
     newcon->private = NULL;
     newcon->inconv = newcon->outconv = NULL;
     newcon->UTF8out = FALSE;
+    newcon->buff = NULL;
+    newcon->buff_pos = newcon->buff_stored_len = newcon->buff_len = 0;
     /* increment id, avoid NULL */
     current_id = (void *)((size_t) current_id+1);
     if(!current_id) current_id = (void *) 1;
@@ -3379,9 +3486,11 @@ SEXP attribute_hidden do_isseekable(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarLogical(con->canseek != FALSE);
 }
 
-static void con_close1(Rconnection con)
+static int con_close1(Rconnection con)
 {
+    int status;
     if(con->isopen) con->close(con);
+    status = con->status;
     if(con->isGzcon) {
 	Rgzconn priv = con->private;
 	con_close1(priv->con);
@@ -3392,7 +3501,9 @@ static void con_close1(Rconnection con)
     if(con->outconv) Riconv_close(con->outconv);
     con->destroy(con);
     free(con->conclass);
+    con->conclass = NULL;
     free(con->description);
+    con->description = NULL;
     /* clear the pushBack */
     if(con->nPushBack > 0) {
 	int j;
@@ -3401,6 +3512,23 @@ static void con_close1(Rconnection con)
 	    free(con->PushBack[j]);
 	free(con->PushBack);
     }
+    con->nPushBack = 0;
+    if (con->buff) {
+	free(con->buff);
+	con->buff = NULL;
+    }
+    con->buff_len = con->buff_pos = con->buff_stored_len = 0;
+    con->open = &null_open;
+    con->close = &null_close;
+    con->destroy = &null_destroy;
+    con->vfprintf = &null_vfprintf;
+    con->fgetc = con->fgetc_internal = &null_fgetc;
+    con->seek = &null_seek;
+    con->truncate = &null_truncate;
+    con->fflush = &null_fflush;
+    con->read = &null_read;
+    con->write = &null_write;
+    return status;
 }
 
 
@@ -3430,13 +3558,16 @@ SEXP attribute_hidden do_close(SEXP call, SEXP op, SEXP args, SEXP env)
     if(i == R_ErrorCon)
 	error(_("cannot close 'message' sink connection"));
     Rconnection con = getConnection(i);
-    // close to get the status set for pipes (PR#16481)
-    if(con->isopen) con->close(con);
-    int status = con->status;
-    con_close1(con);
+    int status = con_close1(con);
     free(Connections[i]);
     Connections[i] = NULL;
     return (status != NA_INTEGER) ? ScalarInteger(status) : R_NilValue;
+}
+
+static double Rconn_seek(Rconnection con, double where, int origin, int rw) {
+    if (con->buff)
+	return buff_seek(con, where, origin, rw);
+    return con->seek(con, where, origin, rw);
 }
 
 /* seek(con, where = numeric(), origin = "start", rw = "") */
@@ -3461,7 +3592,7 @@ SEXP attribute_hidden do_seek(SEXP call, SEXP op, SEXP args, SEXP env)
 	free(con->PushBack);
 	con->nPushBack = 0;
     }
-    return ScalarReal(con->seek(con, where, origin, rw));
+    return ScalarReal(Rconn_seek(con, where, origin, rw));
 }
 
 /* truncate(con) */
@@ -3636,7 +3767,7 @@ SEXP attribute_hidden do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* for a non-blocking connection, more input may
 	   have become available, so re-position */
 	if(con->canseek && !con->blocking)
-	    con->seek(con, con->seek(con, -1, 1, 1), 1, 1);
+	    Rconn_seek(con, con->seek(con, -1, 1, 1), 1, 1);
     }
     con->incomplete = FALSE;
     if(con->UTF8out || streql(encoding, "UTF-8")) oenc = CE_UTF8;
