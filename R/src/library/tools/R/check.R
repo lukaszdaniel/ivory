@@ -3799,18 +3799,21 @@ setRlibs <-
             summaryLog(Log)
             do_exit(1L)
         }
-        if (!is.na(desc["Type"])) { # standard packages do not have this
+        if(!is.na(desc["Type"])) { # standard packages do not have this
             checkingLog(Log, gettext("checking extension type ...", domain = "R-tools"))
-            resultLog(Log, desc["Type"])
-            if (desc["Type"] != "Package") {
-                printLog(Log, gettext("Only 'Type = Package' extensions can be checked.\n", domain = "R-tools"))
+            if(desc["Type"] != "Package") {
+                errorLog(Log,
+                         gettextf("Extensions with Type %s cannot be checked.",
+                                 sQuote(desc["Type"]), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(0L)
-            }
+            } else resultLog(Log, desc["Type"])
         }
-        if (!is.na(desc["Bundle"])) {
-            messageLog(Log, gettextf("looks like %s is a package bundle -- they are defunct", sQuote(pkgname0), domain = "R-tools"))
-            errorLog(Log, "")
+        if(!is.na(desc["Bundle"])) {
+            checkingLog(Log, gettext("checking package bundle ...", domain = "R-tools"))
+            errorLog(Log,
+                     gettextf("Looks like %s is a package bundle -- they are defunct",
+                             sQuote(pkgname0), domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
@@ -4588,11 +4591,22 @@ setRlibs <-
             message(gettextf("ERROR: cannot create check dir %s", sQuote(pkgoutdir), domain = "R-tools"))
             do_exit(1L)
         }
+
         Log <- newLog(file.path(pkgoutdir, "00check.log"))
+
+        messageLog(Log, gettextf("using log directory %s", sQuote(pkgoutdir), domain = "R-tools"))
+        messageLog(Log, gettextf("using %s", R.version.string, domain = "R-tools"))
+        messageLog(Log, gettextf("using platform: %s (%s-bit)", R.version$platform, 8*.Machine$sizeof.pointer, domain = "R-tools"))
+        charset <-
+            if (l10n_info()[["UTF-8"]]) "UTF-8" else utils::localeToCharset()
+        messageLog(Log, "using session charset: ", charset)
+        is_ascii <- charset == "ASCII"
+
         if (istar) {
             dir <- file.path(pkgoutdir, "00_pkg_src")
             dir.create(dir, mode = "0755")
             if (!dir.exists(dir)) {
+                checkingLog(Log, gettext("checking whether tarball can be unpacked ...", domain = "R-tools"))
                 errorLog(Log, gettextf("cannot create %s", sQuote(dir), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
@@ -4601,6 +4615,7 @@ setRlibs <-
             ## so e.g. .tar.xz works everywhere
             if (utils::untar(pkg, exdir = dir,
                              tar = Sys.getenv("R_INSTALL_TAR", "internal"))) {
+                checkingLog(Log, gettext("checking whether tarball can be unpacked ...", domain = "R-tools"))
                 errorLog(Log, gettextf("cannot unpack %s", sQuote(pkg), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
@@ -4611,8 +4626,14 @@ setRlibs <-
             ## to test that.
             pkg <- file.path(dir, pkgname0)
         }
-        if (!dir.exists(pkg))
-            stop(gettextf("Package directory %s does not exist", sQuote(pkg)), domain = "R-tools")
+        if (!dir.exists(pkg)) {
+            checkingLog(Log, gettext("checking package directory ...", domain = "R-tools"))
+            errorLog(Log,
+                     gettextf("package directory %s does not exist",
+                              sQuote(pkg)))
+            summaryLog(Log)
+            do_exit(1L)
+        }
         setwd(pkg)
         pkgdir <- getwd()
         thispkg_src_subdirs <- thispkg_subdirs
@@ -4627,14 +4648,6 @@ setRlibs <-
             }
         }
         setwd(startdir)
-
-        messageLog(Log, gettextf("using log directory %s", sQuote(pkgoutdir), domain = "R-tools"))
-        messageLog(Log, gettextf("using %s", R.version.string, domain = "R-tools"))
-        messageLog(Log, gettextf("using platform: %s (%s-bit)", R.version$platform, 8*.Machine$sizeof.pointer, domain = "R-tools"))
-        charset <-
-            if (l10n_info()[["UTF-8"]]) "UTF-8" else utils::localeToCharset()
-        messageLog(Log, gettextf("using session charset: %s", charset, domain = "R-tools"))
-        is_ascii <- charset == "ASCII"
 
         .unpack.time <- Sys.time()
 

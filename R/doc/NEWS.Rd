@@ -45,7 +45,7 @@
       \item Reading from connections in text mode is buffered,
       significantly improving the performance of \code{readLines()}, as
       well as \code{scan()} and \code{read.table()}, at least when
-      specfiying \code{colClasses}.
+      specifying \code{colClasses}.
 
       \item \code{order()} is smarter about picking a default sort
       \code{method} when its arguments are objects.
@@ -100,6 +100,9 @@
       \item \code{line(x,y)} now correctly computes the medians of the
       left and right group's x-values and reproduces straight lines in
       all cases.
+
+      \item Extending S4 classes with slots corresponding to special
+      attributes like \code{dim} and \code{dimnames} now works.
     }
   }
 }
@@ -1847,12 +1850,12 @@
       \item The deprecated header \file{Rdefines.h} is now compatible
       with defining \code{R_NO_REMAP}.
 
-      \item The connections API now includes a function
+      \item The connections interface now includes a function
       \code{R_GetConnection()} which allows packages implementing
       connections to convert R \code{connection} objects to
-      \code{Rconnection} handles used in the API. Code which previously
+      \code{Rconnection} handles. Code which previously
       used the low-level R-internal \code{getConnection()} entry point
-      should switch to the official API.
+      should switch.
     }
   }
 
