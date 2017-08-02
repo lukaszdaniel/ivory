@@ -1,7 +1,7 @@
 #  File src/library/base/R/dates.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2017 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -112,8 +112,10 @@ print.Date <- function(x, max = NULL, ...)
 			" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
 			length(x) - max), "\n", sep = "")
-    } else print(if(length(x)) format(x) else paste(class(x)[1L], "of length 0"),
-		 max = max, ...)
+    } else if(length(x))
+	print(format(x), max = max, ...)
+    else
+	cat(gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base"), "\n", sep = "", collapse = "")
     invisible(x)
 }
 

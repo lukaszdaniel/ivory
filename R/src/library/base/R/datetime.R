@@ -236,8 +236,10 @@ print.POSIXlt <- function(x, tz = "", usetz = TRUE, ...)
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
             length(x) - max.print), "\n", sep = "")
-    } else
-	print(if(length(x)) FORM(x) else gettextf("class %s of length 0", dQuote(class(x)[1L])), ...)
+    } else if(length(x))
+	print(FORM(x), max = max.print, ...)
+    else
+	cat(gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base"), "\n", sep = "", collapse = "")
     invisible(x)
 }
 

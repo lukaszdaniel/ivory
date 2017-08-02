@@ -56,9 +56,8 @@ f0 <- nlm(si,th0,y=y,x=x,z=z,fx=TRUE,k=5)
 f1 <- nlm(si,f0$estimate,y=y,x=x,z=z,hessian=TRUE,k=10)
 theta.est <-f1$estimate 
 
-## Alternative using 'optim' ('Not run' simply to keep
-## CRAN check time down)... 
-\dontrun{
+## Alternative using 'optim'... 
+\donttest{
 th0 <- rep(0,m-1) 
 ## get initial theta, using no penalization...
 f0 <- optim(th0,si,y=y,x=x,z=z,fx=TRUE,k=5)

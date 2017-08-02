@@ -97,8 +97,6 @@ Norway,Norway,Bergen,http://cran.uib.no/,"University of Bergen","sundrift # It.u
 Philippines,Philippines,"Quezon City",http://cran.stat.upd.edu.ph/,"University of the Philippines and PREGINET","Bert Mendoza <bert # asti.dost.gov.ph>, ops # pregi.net",1,ph,"secure_mirror_from_master"
 "Portugal (Lisbon)",Portugal,Lisbon,http://cran.radicaldevelop.com/,"RadicalDevelop, Lda","geral # radicaldevelop.com",1,pt
 "Portugal (Porto)",Portugal,Porto,http://cran.dcc.fc.up.pt/,"University of Porto","labcc # labcc.dcc.fc.up.pt",1,pt
-"Russia (Moscow) [https]",Russia,Moscow,https://cran.gis-lab.info/,GIS-Lab.info,"sim # gis-lab.info",1,ru,"secure_mirror_from_master"
-"Russia (Moscow)",Russia,Moscow,http://cran.gis-lab.info/,GIS-Lab.info,"sim # gis-lab.info",1,ru,"secure_mirror_from_master"
 "Serbia [https]",Serbia,Belgrade,https://fourdots.com/mirror/CRAN/,"Four Dots","Goran Tepsic <goran.tepsic # fourdots.com>",1,rs,"secure_mirror_from_master"
 Singapore,Singapore,Singapore,http://cran.stat.nus.edu.sg/,"National University of Singapore, Singapore","ccezr # nus.edu.sg",1,sg
 "South Africa (Cape Town)","South Africa","Cape Town",http://r.adu.org.za/,"University of Cape Town","michael.brooks # uct.ac.za",1,za
@@ -140,7 +138,7 @@ Thailand,Thailand,Hatyai,http://mirrors.psu.ac.th/pub/cran/,"Prince of Songkla U
 "USA (MO)",USA,"St. Louis",http://cran.wustl.edu/,"Washington University, St. Louis, MO","admartin # wustl.edu",1,us,"maintainer_address_bounces"
 "USA (NC)",USA,Durham,http://archive.linux.duke.edu/cran/,"Duke University, Durham, NC","csi-linux-admins # duke.edu",1,us
 "USA (OH 1)",USA,Cleveland,http://cran.case.edu/,"Case Western Reserve University, Cleveland, OH","""Alberto H. Santana"" <ahs4 # case.edu>",1,us
-"USA (OH 2)",USA,Dayton,http://iis.stat.wright.edu/CRAN/,"Wright State University, Dayton, OH","Long Qu <long.qu # wright.edu>",1,us
+"USA (OH 2)",USA,Dayton,http://iis.stat.wright.edu/CRAN/,"Wright State University, Dayton, OH","Gengxin Li <gengxin.li # wright.edu>",1,us
 "USA (OR) [https]",USA,Corvallis,https://ftp.osuosl.org/pub/cran/,"Oregon State University","support # Osuosl.org",1,us,"secure_mirror_from_master"
 "USA (OR)",USA,Corvallis,http://ftp.osuosl.org/pub/cran/,"Oregon State University","support # Osuosl.org",1,us,"secure_mirror_from_master"
 "USA (PA 1)",USA,Pittsburgh,http://lib.stat.cmu.edu/R/CRAN/,"Statlib, Carnegie Mellon University, Pittsburgh, PA","Carl Skipper <remarks # stat.cmu.edu>",1,us

@@ -24,13 +24,15 @@
 ## of (space-delimited) terms that would be passed to R CMD check.
 
 ## Used for INSTALL and Rd2pdf
-run_Rcmd <- function(args, out = "", env = "")
+run_Rcmd <- function(args, out = "", env = "", timeout = 0)
 {
     if(.Platform$OS.type == "windows")
-        system2(file.path(R.home("bin"), "Rcmd.exe"), args, out, out)
+        system2(file.path(R.home("bin"), "Rcmd.exe"), args, out, out,
+                timeout = timeout)
     else
         system2(file.path(R.home("bin"), "R"), c("CMD", args), out, out,
-                env = env)
+                env = env,
+                timeout = timeout)
 }
 
 R_runR <- function(cmd = NULL, Ropts = "", env = "",
@@ -2135,6 +2137,28 @@ setRlibs <-
 
     check_src_dir <- function(desc)
     {
+        ## Added in R 3.4.2: check line endings for shell scripts:
+        ## for Unix CRLF line endings are fatal but these are not used
+        ## on Windows and hence this is not detected.
+        ## Packages could have arbitrary scripts, so we could
+        ## extend this to look for scripts at top level or elsewhere.
+        scripts <- dir(".", pattern = "^(configure|configure.in|configure.ac|cleanup)$")
+        if(length(scripts)) {
+            checkingLog(Log, gettext("Checking line endings in shell scripts ...", domain = "R-tools"))
+            bad_files <- character()
+            for(f in scripts) {
+                contents <- readChar(f, file.size(f), useBytes = TRUE)
+                if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
+                    bad_files <- c(bad_files, f)
+            }
+            if (length(bad_files)) {
+                warningLog(Log, gettext("Found the following shell script(s) with CR or CRLF line endings:", domain = "R-tools"))
+                printLog0(Log, .format_lines_with_indent(bad_files), "\n")
+                printLog(Log, gettext("Non-Windows OSes require LF line endings.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+       }
+
+
         ## Check C/C++/Fortran sources/headers for CRLF line endings.
         ## <FIXME>
         ## Does ISO C really require LF line endings?  (Reference?)
@@ -2806,6 +2830,10 @@ setRlibs <-
 
     run_vignettes <- function(desc)
     {
+        theta <-
+            as.numeric(Sys.getenv("_R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_",
+                                  NA_character_))
+
         libpaths <- .libPaths()
         .libPaths(c(libdir, libpaths))
         vigns <- pkgVignettes(dir = pkgdir)
@@ -3055,6 +3083,15 @@ setRlibs <-
                         if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                             unlink(outfile)
                     }
+                    if(!WINDOWS && !is.na(theta)) {
+                        td <- t2b - t1b
+                        cpu <- sum(td[-3L])
+                        if(cpu >= pmax(theta * td[3L], 1)) {
+                            ratio <- round(cpu/td[3L], 1L)
+                            cat(gettextf("Running R code from vignette %s had CPU time %g times elapsed time\n",
+                                        sQuote((basename(file))), ratio, domain = "R-tools"))
+                        }
+                    }
                 }
                 t2 <- proc.time()
                 if(!ran) {
@@ -3075,6 +3112,16 @@ setRlibs <-
                             maybe_exit(1L)
                         }
                     } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                    if(!WINDOWS && !is.na(theta)) {
+                        td <- t2 - t1
+                        cpu <- sum(td[-3L])
+                        if(cpu >= pmax(theta * td[3L], 1)) {
+                            ratio <- round(cpu/td[3L], 1L)
+                            printLog(Log,
+                                     gettextf("Running R code from vignettes had CPU time %g times elapsed time\n",
+                                             ratio, domain = "R-tools"))
+                        }
+                    }
                 }
             }
 
@@ -3135,6 +3182,16 @@ setRlibs <-
                     if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", "false")))
                             unlink(outfile)
                     resultLog(Log, gettext("OK", domain = "R-tools"))
+                }
+                if(!WINDOWS && !is.na(theta)) {
+                    td <- t2 - t1
+                    cpu <- sum(td[-3L])
+                    if(cpu >= pmax(theta * td[3L], 1)) {
+                        ratio <- round(cpu/td[3L], 1L)
+                        printLog(Log,
+                                 gettextf("Re-building vignettes had CPU time %g times elapsed time\n",
+                                        ratio, domain = "R-tools"))
+                    }
                 }
             } else {
                 checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
@@ -3432,7 +3489,10 @@ setRlibs <-
 ##                    env <- ""
                     ## Normal use of R CMD INSTALL
                     t1 <- proc.time()
-                    install_error <- run_Rcmd(args, outfile)
+                    tlim <-
+                        as.numeric(Sys.getenv("_R_INSTALL_TIME_LIMIT_", "0"))
+                    install_error <-
+                        run_Rcmd(args, outfile, timeout = tlim)
                     t2 <- proc.time()
                     print_time(t1, t2, Log)
                     lines <- readLines(outfile, warn = FALSE)
@@ -4599,7 +4659,7 @@ setRlibs <-
         messageLog(Log, gettextf("using platform: %s (%s-bit)", R.version$platform, 8*.Machine$sizeof.pointer, domain = "R-tools"))
         charset <-
             if (l10n_info()[["UTF-8"]]) "UTF-8" else utils::localeToCharset()
-        messageLog(Log, "using session charset: ", charset)
+        messageLog(Log, gettextf("using session charset: %s", charset, domain = "R-tools"))
         is_ascii <- charset == "ASCII"
 
         if (istar) {

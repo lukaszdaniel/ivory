@@ -12,9 +12,8 @@ Simon Wood <simon.wood@r-project.org>
 }
 
 \examples{
-## The example takes a couple of minutes to run, so is marked 
-## don't run to save CRAN time.
-\dontrun{
+## The example takes a couple of minutes to run...
+\donttest{
 require(mgcv)
 par(mfrow=c(4,4),mar=c(4,4,1,1))
 for (sim in c(1,7)) { ## cycle over uncorrelated and correlated covariates

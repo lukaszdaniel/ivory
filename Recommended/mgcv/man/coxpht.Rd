@@ -62,7 +62,7 @@ tdpois <- function(dat,event="z",et="futime",t="day",status="status1",
 
 ## The following takes too long for CRAN checking
 ## (but typically takes a minute or less).
-\dontrun{
+\donttest{
 ## Convert pbcseq to equivalent Poisson form...
 pbcseq$status1 <- as.numeric(pbcseq$status==2) ## death indicator
 pb <- tdpois(pbcseq) ## conversion

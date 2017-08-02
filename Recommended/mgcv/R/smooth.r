@@ -601,13 +601,13 @@ s <- function (..., k=-1,fx=FALSE,bs="tp",m=NA,by=NA,xt=NULL,id=NULL,sp=NULL,pc=
 # a model formula term representing the smooth, the basis dimension, the type of basis
 # , whether it is fixed or penalized and the order of the penalty (0 for auto).
 # xt contains information to be passed straight on to the basis constructor
-{ vars<-as.list(substitute(list(...)))[-1] # gets terms to be smoothed without evaluation
+{ vars <- as.list(substitute(list(...)))[-1] # gets terms to be smoothed without evaluation
 
-  d<-length(vars) # dimension of smoother
+  d <- length(vars) # dimension of smoother
 # term<-deparse(vars[[d]],backtick=TRUE,width.cutoff=500) # last term in the ... arguments
-  by.var<-deparse(substitute(by),backtick=TRUE,width.cutoff=500) #getting the name of the by variable
+  by.var <- deparse(substitute(by),backtick=TRUE,width.cutoff=500) #getting the name of the by variable
   if (by.var==".") stop("'by=.' is not allowed")
-  term<-deparse(vars[[1]],backtick=TRUE,width.cutoff=500) # first covariate
+  term <- deparse(vars[[1]],backtick=TRUE,width.cutoff=500) # first covariate
   if (term[1]==".") stop("'s(.)' function is not yet supported")
   if (d>1) # then deal with further covariates
   for (i in 2:d)

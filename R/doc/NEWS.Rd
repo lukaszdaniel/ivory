@@ -41,7 +41,7 @@
 
       \item \code{isTRUE()} is more tolerant and now true in
       \code{x <- rlnorm(99); isTRUE(median(x) == quantile(x)["50\%"])}.
-      
+
       New function \code{isFALSE()} defined analogously to \code{isTRUE()}.
 
       \item The default symbol table size has been increased from 4119
@@ -57,6 +57,49 @@
 
       \item \code{order()} is smarter about picking a default sort
       \code{method} when its arguments are objects.
+
+      \item \code{available.packages()} has two new arguments which
+      control if the values from the per-session repository cache are
+      used (default true, as before) and if so how old cached values can
+      be to be used (default one hour).
+
+      These arguments can be passed from \code{install.packages()},
+      \code{update.packages()} and functions calling that: to enable
+      this \code{available.packages()}, \code{packageStatus()} and
+      \code{download.file()} gain a \code{\dots} argument.
+
+      \item \code{packageStatus()}'s \code{upgrade()} method no longer ignores
+      its \code{\dots} argument but passes it to \code{install.packages()}.
+
+      \item \code{installed.packages()} gains a \code{\dots} argument to allow
+      arguments (including \code{noCache}) to be passed from
+      \code{new.packages()}, \code{old.packages()},
+      \code{update.packages()} and \code{packageStatus()}.
+
+      \item \code{factor(x, levels, labels)} now allows duplicated
+      \code{labels} (not duplicated \code{levels}!).  Hence you can map
+      different values of \code{x} to the same level directly.
+
+      \item No longer emit a warning when attempting to use
+      \code{names<-()} on an S4 derivative of a basic type.
+
+      \item The \code{list} method of \code{within()} gets an
+      option \code{keepAttrs = FALSE} for speed up.
+
+      \item \command{system()} and \command{system2()} now allow the
+      specification of a maximum elapsed time.
+      (This feature is currently experimental and subject to change.)
+
+      \item \code{debug()} supports debugging of methods on any object
+      of S4 class \code{"genericFunction"}, including group generics.
+
+      \item \code{c()} and \code{unlist()} are now more efficient in
+      constructing the \code{names(.)} of their return value, thanks to
+      a proposal by Suharto Anggono.  (\PR{17284})
+
+      \item Attempting to increase the length of a variable containing
+      \code{NULL} using \code{length()<-} still has no effect on the
+      target variable, but now triggers a warning.
     }
   }
 
@@ -112,11 +155,106 @@
 
       \item Extending S4 classes with slots corresponding to special
       attributes like \code{dim} and \code{dimnames} now works.
+
+      \item Fix for \code{legend()} when \code{fill} has multiple
+      values, the first of which is \code{NA} (all colours then defaulted to
+      \code{par(fg)}).  (\PR{17288})
+
+      \item \code{installed.packages()} did not remove the cached value
+      for a library tree that had been emptied (but would not use the
+      old value, just waste time checking it).
+
+      \item The documentation for \code{installed.packages(noCache = TRUE)}
+      incorrectly claimed it would refresh the cache.
+
+      \item \code{aggregate(<data.frame>)} no longer uses spurious names
+      in some cases.  (\PR{17283})
+
+      \item \code{object.size()} now also works for long vectors.
+
+      \item \code{packageDescription()} tries harder to solve
+      re-encoding issues, notably seen in some Windows locales.  This
+      fixes the \code{citation()} issue in \PR{17291}.
+
+      \item \code{model.matrix(~1, mf)} now gets the row names from
+      \code{mf} also when they differ from \code{1:nrow(mf)}, fixing
+      \PR{14992} thanks to the suggestion by Sebastian Meyer.
+
+      \item \code{poly(<matrix>, 3)} now works, thanks to prompting by
+      Marc Schwartz.
+
+      \item \code{readLines()} no longer segfaults on very large files
+      with embedded \code{'\0'} (aka \sQuote{nul}).  (\PR{17311})
+
+      \item \code{ns()} (package \pkg{splines}) now also works for a
+      single observation.  \code{interpSpline()} gives a more friendly
+      error message when the number of points is less than four.
+
+      \item \code{dist(x, method="canberra")} now uses the correct
+      definition; the result may only differ when \code{x} contains
+      values of differing signs, i.e., e.g., not for 0-1 data.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.4.0 patched}{
+\section{\Rlogo CHANGES IN R 3.4.1 patched}{
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Setting the \code{LC_ALL} category in \code{Sys.setlocale()}
+      invalidates any cached locale-specific day/month names and the
+      AM/PM indicator for \code{strptime()} (as setting \code{LC_TIME}
+      has since \R 3.1.0).
+
+      \item The version of LAPACK included in the sources has been
+      updated to 3.7.1, a bug-fix release.
+
+      \item The default for \code{tools::write_PACKAGES(rds_compress=)}
+      has been changed to \code{"xz"} to match the compression used by
+      \acronym{CRAN}.
+
+      \item \command{R CMD check} checks for and \command{R CMD build}
+      corrects CRLF line endings in shell scripts \command{configure}
+      and \command{cleanup} (even on Windows).
+    }
+  }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{within(List, rm(x1, x2))} works correctly again, also
+      when \code{List[["x2"]]} is \code{NULL}.
+
+      \item \code{regexec(pattern, text, *)} now also applies
+      \code{as.character(.)} to its first two arguments, as documented.
+
+      \item \code{write.table()} and related functions,
+      \code{writeLines()}, and perhaps other functions writing text to
+      connections did not signal errors when the writes failed,
+      e.g.\sspace{}due to a disk being full.  Errors will now be
+      signalled if detected during the write, warnings if detected when
+      the connection is closed.  (\PR{17243})
+
+      \item \code{rt()} assumed the \code{ncp} parameter was a scalar.  (\PR{17306})
+
+      \item \code{menu(choices)} with more than 10 choices which easily
+      fit into one \code{getOption("width")}-line no longer erronously
+      repeats choices.  (\PR{17312})
+
+      \item \code{length()<-} on a pairlist succeeds.
+      (\url{https://stat.ethz.ch/pipermail/r-devel/2017-July/074680.html})
+
+      \item Language objects such as \code{quote(("\n"))} or \R
+      functions are correctly printed again, where \R 3.4.1 accidentally
+      duplicated the backslashes.
+
+      \item Construction of \code{names()} for very large objects in
+      \code{c()} and \code{unlist()} now works, thanks to Suharto
+      Anggono's patch proposals in \PR{17992}.
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 3.4.1}{
 
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
@@ -157,12 +295,18 @@
 
       \item \code{fourfoldplot()} could encounter integer overflow when
       calculating the odds ratio. (\PR{17286})
-      
+
       \item \code{parse()} no longer gives spurious warnings when
       extracting srcrefs from a file not encoded in the current locale.
 
       This was seen from \command{R CMD check} with \file{inst/doc/*.R}
       files, and \code{check} has some additional protection for such files.
+
+      \item \code{print.noquote(x)} now always returns its argument
+      \code{x} (invisibly).
+
+      \item Non-UTF-8 multibyte character sets were not handled properly
+      in source references.  (\PR{16732})
     }
   }
 }

@@ -964,16 +964,24 @@ namespaceImportMethods <- function(self, ns, vars, from = NULL)
     allFuns <- methods:::.getGenerics(ns) # all the methods tables in ns
     allPackages <- attr(allFuns, "package")
     pkg <- methods::getPackageName(ns)
-    if(!all(vars %in% allFuns)) {
-        message(gettextf("No methods were found in package %s for requests: %s",
-                         sQuote(pkg), paste(vars[is.na(match(vars, allFuns))], collapse = ", ")),
-                domain = "R-base")
-        vars <- vars[vars %in% allFuns]
+    found <- vars %in% allFuns
+    if(!all(found)) {
+        message(sprintf(ngettext(sum(!found),
+                                 "No methods were found in package %s for request: %s",
+                                 "No methods were found in package %s for requests: %s", domain = "R-base"),
+                        sQuote(pkg),
+                        paste(sQuote(vars[!found]), collapse = ", ")),
+                domain = NA)
+        vars <- vars[found]
     }
-    if(any(is.na(match(vars, allFuns))))
-        stop(gettextf("requested methods were not found in environment/package %s: %s",
-                      sQuote(pkg),
-                      paste(vars[is.na(match(vars, allFuns))], collapse = ", ")), call. = FALSE, domain = "R-base")
+    found <- vars %in% allFuns
+    if(!all(found))
+        stop(sprintf(ngettext(sum(!found),
+                              "requested method was not found in environment/package %s: %s",
+                              "requested methods were not found in environment/package %s: %s", domain = "R-base"),
+                     sQuote(pkg),
+                     paste(sQuote(vars[!found]), collapse = ", ")),
+             call. = FALSE, domain = NA)
     for(i in seq_along(allFuns)) {
         ## import methods tables if asked for
         ## or if the corresponding generic was imported

@@ -762,8 +762,11 @@ setwd(owd)
 
 
 ## print.noquote(*,  right = *)
-print(noquote(LETTERS[1:9]), right = TRUE)
-## failed a few days end in R-devel ca. May 1, 2017
+nq <- noquote(LETTERS[1:9]); stopifnot(identical(nq, print(nq, right = TRUE)))
+## print() failed a few days end in R-devel ca. May 1, 2017; non-identical for longer
+tt <- table(c(rep(1, 7), 2,2,2))
+stopifnot(identical(tt, print.noquote(tt)))
+## print.noquote(<table>) failed for 6 weeks after r72638
 
 
 ## accessing  ..1  when ... is empty and using ..0, etc.
@@ -831,6 +834,130 @@ cf2 <- t(sapply(2:50, function(k) {
 stopifnot(all.equal(cfs, matrix(c(2,  1), 49, 2, byrow=TRUE), tol = 1e-14), # typically exact
           all.equal(cf2, matrix(c(1, -2), 49, 2, byrow=TRUE), tol = 1e-14))
 ## had incorrect medians of the left/right third of the data (x_L, x_R), in R < 3.5.0
+
+
+## 0-length Date and POSIX[cl]t:  PR#71290
+D <- structure(17337, class = "Date") # Sys.Date() of "now"
+D; D[0]; D[c(1,2,1)] # test printing of NA too
+stopifnot(identical(capture.output(D[0]), 'Class "Date" of length 0'))
+D <- structure(1497973313.62798, class = c("POSIXct", "POSIXt")) # Sys.time()
+D; D[0]; D[c(1,2,1)] # test printing of NA too
+stopifnot(identical(capture.output(D[0]), 'Class "POSIXct" of length 0'))
+D <- as.POSIXlt(D)
+D; D[0]; D[c(1,2,1)] # test printing of NA too
+stopifnot(identical(capture.output(D[0]), 'Class "POSIXlt" of length 0'))
+## They printed as   '[1] "Date of length 0"'  etc in R < 3.5.0
+
+
+## aggregate.data.frame() producing spurious names  PR#17283
+dP <- state.x77[,"Population", drop=FALSE]
+by <- list(Region = state.region, Cold = state.x77[,"Frost"] > 130)
+a1 <- aggregate(dP, by=by, FUN=mean, simplify=TRUE)
+a2 <- aggregate(dP, by=by, FUN=mean, simplify=FALSE)
+stopifnot(is.null(names(a1$Population)),
+	  is.null(names(a2$Population)),
+	  identical(unlist(a2$Population), a1$Population),
+	  all.equal(unlist(a2$Population),
+		    c(8802.8, 4208.12, 7233.83, 4582.57, 1360.5, 2372.17, 970.167),
+		    tol = 1e-6))
+## in R <= 3.4.1, a2$Population had spurious names
+
+
+## factor() with duplicated labels allowing to "merge levels"
+x <- c("Male", "Man", "male", "Man", "Female")
+## The pre-3.5.0 way {two function calls, nicely aligned}:
+xf1 <- factor(x, levels = c("Male", "Man",  "male", "Female"))
+           levels(xf1) <- c("Male", "Male", "Male", "Female")
+## the new "direct" way:
+xf <- factor(x, levels = c("Male", "Man",  "male", "Female"),
+                labels = c("Male", "Male", "Male", "Female"))
+stopifnot(identical(xf1, xf),
+          identical(xf, factor(c(rep(1,4),2), labels = c("Male", "Female"))))
+## Before R 3.5.0, the 2nd factor() call gave an error
+aN <- c("a",NA)
+stopifnot(identical(levels(factor(1:2, labels = aN)), aN))
+## the NA-level had been dropped for a few days in R-devel(3.5.0)
+##
+## This slightly changed - for the better - in R >= 3.5.0 :
+ff <- factor(c(NA,2,3), levels = c(2, NA), labels = c("my", NA), exclude = NULL)
+stopifnot( ## all these but the last were TRUE "forever" :
+    identical(as.vector(ff), as.character(ff)),
+    identical(as.vector(ff), c(NA, "my", NA)),
+    identical(capture.output(ff), c("[1] <NA> my   <NA>",
+				    "Levels: my <NA>")),
+    identical(factor(ff),
+	      structure(c(NA, 1L, NA), .Label = "my", class = "factor")),
+    identical(factor(ff, exclude=NULL),
+	      structure(c(2L, 1L, 2L), .Label = c("my", NA), class = "factor")),
+    identical(as.integer(ff), # <- new in R 3.5.0 : c(2, 1, 2); before was c(2, 1, NA)
+	      as.integer(factor(ff, exclude=NULL))))
+
+
+## within.list({ .. rm( >=2 entries ) }) :
+L <- list(x = 1, y = 2, z = 3)
+stopifnot(identical(within(L, rm(x,y)), list(z = 3)))
+## has failed since R 2.7.2 patched (Aug. 2008) without any noticeable effect
+sortN <- function(x) x[sort(names(x))]
+LN <- list(y = 2, N = NULL, z = 5)
+stopifnot(
+    identical(within(LN, { z2 <- z^2 ; rm(y,z,N) }),
+              list(z2 = 5^2)) ## failed since Aug. 2008
+   ,
+    identical(within(LN, { z2 <- z^2 ; rm(y,z) }),
+              list(N = NULL, z2 = 5^2)) ## failed for a few days in R-devel
+   , # within.list() fast version
+    identical(sortN(within(LN, { z2 <- z^2 ; rm(y,z) }, keepAttrs=FALSE)),
+              sortN(list(N = NULL, z2 = 5^2)))
+)
+
+
+## write.csv did not signal an error if the disk was full PR#17243
+if (file.access("/dev/full", mode = 2) == 0) { # Not on all systems...
+    # Large writes should fail mid-write
+    stopifnot(inherits(tryCatch(write.table(data.frame(x=1:1000000),
+                                            file = "/dev/full"),
+                                error = identity),
+                       "error"))
+    # Small writes should fail on closing
+    stopifnot(inherits(tryCatch(write.table(data.frame(x=1),
+                                                file = "/dev/full"),
+                                    warning = identity),
+                       "warning"))
+}
+## Silently failed up to 3.4.1
+
+
+## model.matrix() with "empty RHS" -- PR#14992 re-opened
+row.names(trees) <- 42 + seq_len(nrow(trees))
+.RN <- row.names(mf <- model.frame(log(Volume) ~ log(Height) + log(Girth), trees))
+stopifnot(identical(.RN, row.names(model.matrix(~ 1, mf))),
+	  identical(.RN, row.names(model.matrix(~ 0, mf))))
+## had 1:nrow()  up to 3.4.x
+
+
+## "\n" etc in calls and function definitions
+(qq <- quote(-"\n"))
+stopifnot(identical('-"\\n"', cq <- capture.output(qq)),
+          identical(5L, nchar(cq)),
+          identical(6L, nchar(capture.output(quote(("\t"))))))
+## backslashes in language objects accidentally duplicated in R 3.4.1
+
+
+## length(<pairlist>) <- N
+pl <- pairlist(a=1, b=2); length(pl) <- 1
+al <- formals(ls);        length(al) <- 2
+stopifnot(identical(pl, pairlist(a = 1)),
+	  identical(al, as.pairlist(alist(name = , pos = -1L))))
+## both `length<-` failed in R <= 3.4.1; the 2nd one for the wrong reason
+
+
+## dist(*, "canberra") :
+x <- cbind(c(-1,-5,10), c(-2,7,8)); (dc <- dist(x, method="canberra"))
+##          1        2
+## 2 1.666667
+## 3 2.000000 1.066667
+stopifnot(all.equal(as.vector(dc), c(25, 30, 16)/15))
+## R's definition wrongly assumed x[] entries all of the same sign
 
 
 

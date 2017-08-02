@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-05-20 r977) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-06-17 r984) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-05-20 r72710) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-06-17 r72803) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -227,6 +227,19 @@ factor> factor(z, exclude = "B") # ditto
 [1] C    <NA> A   
 Levels: A < C
 
+factor> ## Now, labels maybe duplicated:
+factor> ## factor() with duplicated labels allowing to "merge levels"
+factor> x <- c("Man", "Male", "Man", "Lady", "Female")
+
+factor> ## Map from 4 different values to only two levels:
+factor> (xf <- factor(x, levels = c("Male", "Man" , "Lady",   "Female"),
+factor+                  labels = c("Male", "Male", "Female", "Female")))
+[1] Male   Male   Male   Female Female
+Levels: Male Female
+
+factor> #> [1] Male   Male   Male   Female Female
+factor> #> Levels: Male Female
+factor> 
 factor> ## Using addNA()
 factor> Month <- airquality$Month
 
@@ -567,11 +580,11 @@ pckgDs>
 [13] "rms"             "rrcov"           "sp"              "zoo"            
 [17] "MatrixModels"    "RcppEigen"       "VIM"             "akima"          
 [21] "expm"            "fpc"             "igraph"          "irlba"          
-[25] "lmtest"          "mgcv"            "pbkrtest"        "plotly"         
-[29] "quantreg"        "rgdal"           "rgeos"           "robCompositions"
-[33] "sandwich"        "spdep"           "survival"        "tables"         
-[37] "TH.data"         "car"             "coin"            "multcomp"       
-[41] "mvoutlier"       "vcd"            
+[25] "lmtest"          "mgcv"            "pbkrtest"        "quantreg"       
+[29] "rgdal"           "rgeos"           "robCompositions" "sandwich"       
+[33] "spdep"           "survival"        "tables"          "TH.data"        
+[37] "car"             "coin"            "multcomp"        "mvoutlier"      
+[41] "vcd"            
 > 
 > ## This may not be installed
 > gridEx <- system.file("doc", "grid.Rnw", package = "grid")

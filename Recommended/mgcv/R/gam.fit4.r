@@ -59,7 +59,7 @@ dDeta <- function(y,mu,wt,theta,fam,deriv=0) {
      d$Deta3th <-  ig13*r$Dmu3th - 3 *r$Dmu2th*g2g*ig12 + r$Dmuth*(3*g2g^2-g3g)*ig1
    }
    d
-} ## dDmu
+} ## dDeta
 
 fetad.test <- function(y,mu,wt,theta,fam,eps = 1e-7,plot=TRUE) {
 ## test family derivatives w.r.t. eta
@@ -101,17 +101,34 @@ fetad.test <- function(y,mu,wt,theta,fam,eps = 1e-7,plot=TRUE) {
     cat(gettextf("Detath[%d]: rdiff = %s cor = %s", i, paste(range(um-Detath.fd), collapse = " "), cor(um,Detath.fd), domain = "R-mgcv"), "\n", sep = "")
     plot(um,Detath.fd);abline(0,1)
     Deta2th.fd <- (dd1$Deta2 - dd$Deta2)/eps
+    um <- if (nt>1) dd$Deta2th[,i] else dd$Deta2th
     cat(gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th-Deta2th.fd), collapse = " "), cor(dd$Deta2th,Deta2th.fd), domain = "R-mgcv"), "\n", sep = "")
+    plot(um,Deta2th.fd);abline(0,1)
     Deta3th.fd <- (dd1$Deta3 - dd$Deta3)/eps
+    um <- if (nt>1) dd$Deta3th[,i] else dd$Deta3th
     cat(gettextf("Deta3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta3th-Deta3th.fd), collapse = " "), cor(dd$Deta3th,Deta3th.fd), domain = "R-mgcv"), "\n", sep = "")
+    plot(um,Deta3th.fd);abline(0,1)
     ## now the 3 second derivative w.r.t. theta terms
 
     Dth2.fd <- (dd1$Dth - dd$Dth)/eps
+    um <- if (nt>1) dd$Dth2[,ind] else dd$Dth2
+    er <- if (nt>1) Dth2.fd[,i:nt] else Dth2.fd
     cat(gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2-Dth2.fd), collapse = " "), cor(dd$Dth2,Dth2.fd), domain = "R-mgcv"), "\n", sep = "")
+    plot(um,er);abline(0,1)
     Detath2.fd <- (dd1$Detath - dd$Detath)/eps
+    um <- if (nt>1) dd$Detath2[,ind] else dd$Detath2
+    er <- if (nt>1) Detath2.fd[,i:nt] else Detath2.fd
     cat(gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th-Deta2th.fd), collapse = " "), cor(dd$Deta2th,Deta2th.fd), domain = "R-mgcv"), "\n", sep = "")
+    ## cat("Detath2[",i,",]: rdiff = ",range(dd$Detath2-Detath2.fd)," cor = ",cor(dd$Detath2,Detath2.fd),"\n")
+    plot(um,er);abline(0,1)
+ 
     Deta2th2.fd <- (dd1$Deta2th - dd$Deta2th)/eps
+    um <- if (nt>1) dd$Deta2th2[,ind] else dd$Deta2th2
+    er <- if (nt>1) Deta2th2.fd[,i:nt] else Deta2th2.fd
     cat(gettextf("Deta2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th2-Deta2th2.fd), collapse = " "), cor(dd$Deta2th2,Deta2th2.fd), domain = "R-mgcv"), "\n", sep = "")
+    ## cat("Deta2th2[",i,",]: rdiff = ",range(dd$Deta2th2-Deta2th2.fd)," cor = ",cor(dd$Deta2th2,Deta2th2.fd),"\n") 
+    ind <- max(ind)+1:(nt-i) 
+    plot(um,er);abline(0,1)
   }
 } ## fetad.test
 
@@ -122,10 +139,11 @@ fmud.test <- function(y,mu,wt,theta,fam,eps = 1e-7) {
   dev1 <- fam$dev.resids(y, mu+eps, wt,theta)
   Dmu.fd <- (dev1-dev)/eps
   cat(gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu-Dmu.fd), collapse = " "), cor(dd$Dmu,Dmu.fd), domain = "R-mgcv"), "\n", sep = "")
-  for (i in seq_len(length(theta))) {
+  for (i in seq_along(theta)) {
     th1 <- theta;th1[i] <- th1[i] + eps
     dev1 <- fam$dev.resids(y, mu, wt,th1)
     Dth.fd <- (dev1-dev)/eps
+    um <- if (nt>1) dd$Dth[,i] else dd$Dth
     cat(gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth-Dth.fd), collapse = " "), cor(dd$Dth,Dth.fd), domain = "R-mgcv"), "\n", sep = "")
   }
   ## second order up...
@@ -137,22 +155,37 @@ fmud.test <- function(y,mu,wt,theta,fam,eps = 1e-7) {
   Dmu4.fd <- (dd1$Dmu3 - dd$Dmu3)/eps
   cat(gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4-Dmu4.fd), collapse = " "), cor(dd$Dmu4,Dmu4.fd), domain = "R-mgcv"), "\n", sep = "")
   ## and now the higher derivs wrt theta 
-  for (i in seq_len(length(theta))) {
+  ind <- seq_len(nt)
+  for (i in seq_len(nt)) {
     th1 <- theta;th1[i] <- th1[i] + eps
     dd1 <- fam$Dd(y, mu, th1, wt, level=2)
     Dmuth.fd <- (dd1$Dmu - dd$Dmu)/eps
-    cat(gettextf("Dmuth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmuth-Dmuth.fd), collapse = " "), cor(dd$Dmuth,Dmuth.fd), domain = "R-mgcv"), "\n", sep = "")
+    um <- if (nt>1) dd$Dmuth[,i] else dd$Dmuth #LUKI
+    cat("Dmuth[",i,"]: rdiff = ",range(um-Dmuth.fd)," cor = ",cor(um,Dmuth.fd),"\n")
     Dmu2th.fd <- (dd1$Dmu2 - dd$Dmu2)/eps
-    cat(gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th-Dmu2th.fd), collapse = " "), cor(dd$Dmu2th,Dmu2th.fd), domain = "R-mgcv"), "\n", sep = "")
+    um <- if (nt>1) dd$Dmu2th[,i] else dd$Dmu2th
+    cat("Dmu2th[",i,"]: rdiff = ",range(um-Dmu2th.fd)," cor = ",cor(um,Dmu2th.fd),"\n")
     Dmu3th.fd <- (dd1$Dmu3 - dd$Dmu3)/eps
-    cat(gettextf("Dmu3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu3th-Dmu3th.fd), collapse = " "), cor(dd$Dmu3th,Dmu3th.fd), domain = "R-mgcv"), "\n", sep = "")
-    ## now the 3 second derivative w.r.t. theta terms
+    um <- if (nt>1) dd$Dmu3th[,i] else dd$Dmu3th
+    cat("Dmu3th[",i,"]: rdiff = ",range(um-Dmu3th.fd)," cor = ",cor(um,Dmu3th.fd),"\n")
+
+    ## now the 3 second derivative w.r.t. theta terms...
+
     Dth2.fd <- (dd1$Dth - dd$Dth)/eps
-    cat(gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2-Dth2.fd), collapse = " "), cor(dd$Dth2,Dth2.fd), domain = "R-mgcv"), "\n", sep = "")
+    um <- if (nt>1) dd$Dth2[,ind] else dd$Dth2
+    er <- if (nt>1) Dth2.fd[,i:nt] else Dth2.fd
+    cat("Dth2[",i,",]: rdiff = ",range(um-er)," cor = ",cor(as.numeric(um),as.numeric(er)),"\n")
+
     Dmuth2.fd <- (dd1$Dmuth - dd$Dmuth)/eps
-    cat(gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th-Dmu2th.fd), collapse = " "), cor(dd$Dmu2th,Dmu2th.fd), domain = "R-mgcv"), "\n", sep = "")
+    um <- if (nt>1) dd$Dmuth2[,ind] else dd$Dmuth2
+    er <- if (nt>1) Dmuth2.fd[,i:nt] else Dmuth2.fd
+    cat("Dmuth2[",i,",]: rdiff = ",range(um-er)," cor = ",cor(as.numeric(um),as.numeric(er)),"\n")
+ 
     Dmu2th2.fd <- (dd1$Dmu2th - dd$Dmu2th)/eps
-    cat(gettextf("Dmu2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th2-Dmu2th2.fd), collapse = " "), cor(dd$Dmu2th2,Dmu2th2.fd), domain = "R-mgcv"), "\n", sep = "")
+    um <- if (nt>1) dd$Dmu2th2[,ind] else dd$Dmu2th2
+    er <- if (nt>1) Dmu2th2.fd[,i:nt] else Dmu2th2.fd
+    cat("Dmu2th2[",i,",]: rdiff = ",range(um-er)," cor = ",cor(as.numeric(um),as.numeric(er)),"\n")
+    ind <- max(ind)+seq_len(nt-i)
   }
 }
 
@@ -290,17 +323,19 @@ gam.fit4 <- function(x, y, sp, Eb,UrS=list(),
      
    coefold <- null.coef
    conv <-  boundary <- FALSE
- 
+   dd <- dDeta(y,mu,weights,theta,family,0) ## derivatives of deviance w.r.t. eta
+   w <- dd$Deta2 * .5;
+   wz <- w*(eta-offset) - .5*dd$Deta
+   z <- (eta-offset) - dd$Deta.Deta2
+   good <- is.finite(z)&is.finite(w)
+
    for (iter in seq_len(control$maxit)) { ## start of main fitting iteration 
       if (control$trace) cat(iter," ")
-      dd <- dDeta(y,mu,weights,theta,family,0) ## derivatives of deviance w.r.t. eta
-
-      # good <- is.finite(dd$Deta.Deta2)
-  
-      w <- dd$Deta2 * .5;
-      wz <- w*(eta-offset) - .5*dd$Deta
-      z <- (eta-offset) - dd$Deta.Deta2
-      good <- is.finite(z)&is.finite(w)
+    #  dd <- dDeta(y,mu,weights,theta,family,0) ## derivatives of deviance w.r.t. eta
+    #  w <- dd$Deta2 * .5;
+    #  wz <- w*(eta-offset) - .5*dd$Deta
+    #  z <- (eta-offset) - dd$Deta.Deta2
+    #  good <- is.finite(z)&is.finite(w)
       if (control$trace&sum(!good)>0) cat("\n",sum(!good)," not good\n") #LUKI
       if (sum(!good)) {
         use.wy <- TRUE
@@ -314,7 +349,8 @@ gam.fit4 <- function(x, y, sp, Eb,UrS=list(),
                      q=as.integer(ncol(x)),rE=as.integer(rows.E),eta=as.double(z),
                      penalty=as.double(1),rank.tol=as.double(rank.tol),
                      nt=as.integer(control$nthreads),use.wy=as.integer(use.wy))
-      if (oo$n<0) { ## then problem is indefinite - switch to +ve weights for this step
+      posdef <- oo$n >= 0
+      if (!posdef) { ## then problem is indefinite - switch to +ve weights for this step
         if (control$trace) cat(gettext("**using positive weights", domain = "R-mgcv"), "\n", sep = "")
         # problem is that Fisher can be very poor for zeroes  
 
@@ -425,12 +461,17 @@ gam.fit4 <- function(x, y, sp, Eb,UrS=list(),
         }
      } ## end of pdev divergence
 
+     ## get new weights and pseudodata (needed now for grad testing)...
+     dd <- dDeta(y,mu,weights,theta,family,0) ## derivatives of deviance w.r.t. eta
+     w <- dd$Deta2 * .5;
+     wz <- w*(eta-offset) - .5*dd$Deta
+     z <- (eta-offset) - dd$Deta.Deta2
+     good <- is.finite(z)&is.finite(w) 
      ## convergence testing...
-
-     if (abs(pdev - old.pdev)/(0.1 + abs(pdev)) < control$epsilon) {
+     if (posdef && abs(pdev - old.pdev)/(0.1 + abs(pdev)) < control$epsilon) {
        ## Need to check coefs converged adequately, to ensure implicit differentiation
        ## ok. Testing coefs unchanged is problematic under rank deficiency (not guaranteed to
-       ## drop same parameter every iteration!)       
+       ## drop same parameter every iteration!)
        grad <- 2 * t(x[good,])%*%((w[good]*(x%*%start)[good]-wz[good]))+ 2*St%*%start 
        if (max(abs(grad)) > control$epsilon*max(abs(start+coefold))/2) {
          old.pdev <- pdev  ## not converged quite enough
@@ -849,7 +890,7 @@ gam.fit5 <- function(x,y,lsp,Sl,weights=NULL,offset=NULL,deriv=2,family,
                   lpi[[i]] <- ij[lpi[[i]][!(lpi[[i]]%in%drop)]] # drop and shuffle up
                 }
               } ## lpi adjustment done
-              for (i in seq_along(xat)) attr(x,names(xat)[i]) <- xat[[i]]
+              if (length(xat)>0) for (i in seq_along(xat)) attr(x,names(xat)[i]) <- xat[[i]]
               attr(x,"lpi") <- lpi
               attr(x,"drop") <- drop ## useful if family has precomputed something from x
               ll <- llf(y,x,coef,weights,family,offset=offset,deriv=1) 
@@ -995,7 +1036,7 @@ gam.fit5 <- function(x,y,lsp,Sl,weights=NULL,offset=NULL,deriv=2,family,
   }
 
   ## get grad and Hessian of REML score...
-  REML <- -as.numeric(ll$l - t(coef)%*%St%*%coef/2 + rp$ldetS/2  - ldetHp/2  + Mp*log(2*pi)/2)
+  REML <- -as.numeric(ll$l - drop(t(coef)%*%St%*%coef)/2 + rp$ldetS/2  - ldetHp/2  + Mp*log(2*pi)/2)
  
   REML1 <- if (deriv<1) NULL else -as.numeric( # d1l # cancels
                                    - d1bSb/2 + rp$ldet1/2  - d1ldetH/2 ) 

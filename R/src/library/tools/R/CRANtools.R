@@ -200,12 +200,12 @@ function()
 
     results <- CRAN_check_results()
     details <- CRAN_check_details()
-    mtnotes <- CRAN_memtest_notes()
+    issues <- CRAN_check_issues()
 
     split(format(summarize_CRAN_check_status(pdb[ind, "Package"],
                                              results,
                                              details,
-                                             mtnotes),
+                                             issues),
                  header = TRUE),
           maintainer[ind])
 }
@@ -253,7 +253,7 @@ function(flavors = NULL)
     db
 }
 
-## Deprecated in 3.5.0
+## Deprecated in 3.4.1
 CRAN_memtest_notes <-
 function()
 {

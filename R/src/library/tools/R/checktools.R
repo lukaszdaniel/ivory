@@ -323,6 +323,7 @@ function(dir,
                          sprintf("check_%s_stderr.txt", pname))
         env <- c(check_env_db[[pname]],
                  sprintf("R_LIBS=%s", shQuote(libdir)))
+        lim <- as.numeric(Sys.getenv("_R_CHECK_TIME_LIMIT_", "0"))
         system.time(system2(file.path(R.home("bin"), "R"),
                             c("CMD",
                               "check",
@@ -331,7 +332,8 @@ function(dir,
                               pfile),
                             stdout = out,
                             stderr = err,
-                            env = env))
+                            env = env,
+                            timeout = lim))
     }
 
     if(Ncpus > 1L) {
@@ -705,7 +707,8 @@ function(log, drop = TRUE)
     ## Remove eventually.
     len <- length(lines)
     end <- lines[len]
-    if(grepl(re <- "^(\\*.*\\.\\.\\.)(\\* elapsed time.*)$", end,
+    if(length(end) &&
+       grepl(re <- "^(\\*.*\\.\\.\\.)(\\* elapsed time.*)$", end,
              perl = TRUE, useBytes = TRUE)) {
         lines <- c(lines[seq_len(len - 1L)],
                    sub(re, "\\1", end, perl = TRUE, useBytes = TRUE),
@@ -1138,6 +1141,25 @@ function(new, old, outputs = FALSE)
     class(db) <- check_details_changes_classes
 
     db
+}
+
+`[.check_details_changes` <-
+function(x, i, j, drop = FALSE)
+{
+    if(((na <- nargs() - (!missing(drop))) == 3L)
+       && (length(i) == 1L)
+       && any(!is.na(match(i, c("==", "!=", "<", "<=", ">", ">="))))) {
+        levels <- c("", "OK", "NOTE", "WARNING", "ERROR", "FAIL")        
+        encode <- function(s) {
+            s <- sub("\n.*", "", s)
+            s[is.na(match(s, levels))] <- ""
+            ordered(s, levels)
+        }
+        old <- encode(x$Old)
+        new <- encode(x$New)
+        i <- do.call(i, list(old, new))
+    }
+    NextMethod()
 }
 
 format.check_details_changes <-
