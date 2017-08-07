@@ -78,7 +78,7 @@ Discussion).
 \code{\link{boot.ci}}
 }
 \examples{
-\testonly{op <- options(digits = 5)}
+\dontshow{op <- options(digits = 5)}
 # 90\% and 95\% confidence intervals for the correlation 
 # coefficient between the columns of the bigcity data
 
@@ -92,7 +92,7 @@ mean.diff <- function(y, w)
 }
 grav1 <- gravity[as.numeric(gravity[, 2]) >= 7, ]
 abc.ci(grav1, mean.diff, strata = grav1$series)
-\testonly{options(op)}
+\dontshow{options(op)}
 }
 \keyword{nonparametric}
 \keyword{htest}

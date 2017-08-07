@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-20 19:27+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
 #: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:831 io.c:835
-#: io.c:841 io.c:842 io.c:1065 io.c:1066 io.c:1068 io.c:1069 io.c:1070
-#: io.c:1071 io.c:1072 io.c:1073 stubs.c:39 stubs.c:59 windows/dialogs.c:169
+#: io.c:841 io.c:842 io.c:1075 io.c:1076 io.c:1078 io.c:1079 io.c:1080
+#: io.c:1081 io.c:1082 io.c:1083 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
 #: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
@@ -32,7 +32,7 @@ msgstr "ungültiges '%s' Argument"
 msgid "invalid quote symbol set"
 msgstr "ungültiges Symbol für Quotatinen gesetzt"
 
-#: io.c:356 io.c:851 io.c:1053
+#: io.c:356 io.c:851 io.c:1063
 msgid "cannot open the connection"
 msgstr "kann die Verbindung nicht öffnen"
 
@@ -81,31 +81,40 @@ msgstr "unvollstädige letzte Zeile von readTableHeader in '%s' gefunden"
 msgid "index out of range"
 msgstr "Index außerhalb der Grenzen"
 
-#: io.c:1046
+#: io.c:1031
+#, c-format
+msgid "Problem closing connection:  %s"
+msgstr ""
+
+#: io.c:1033
+msgid "Problem closing connection"
+msgstr ""
+
+#: io.c:1056
 #, fuzzy
 msgid "'file' argument is not a connection"
 msgstr "'file' ist keine Verbindung"
 
-#: io.c:1049
+#: io.c:1059
 msgid "cannot write to this connection"
 msgstr "kann in diese Verbindung nicht schreiben"
 
-#: io.c:1079
+#: io.c:1089
 #, fuzzy
 msgid "'dec' argument must be a single character"
 msgstr "'dec' muss ein einzelnes Zeichen sein"
 
-#: io.c:1105
+#: io.c:1115
 #, c-format
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr "korrupter Datafram -- Länge der Spalte %d entspricht nicht nrows"
 
-#: io.c:1136
+#: io.c:1146
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "Spalte %s behauptet Faktor zu sein, hat aber keine numerischen Kodes"
 
-#: io.c:1154
+#: io.c:1164
 msgid "corrupt matrix -- dims not not match length"
 msgstr "korrupte Matrix -- Dimensionen entsprechen nicht der Länge"
 

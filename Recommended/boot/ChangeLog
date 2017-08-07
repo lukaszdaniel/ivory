@@ -1,3 +1,10 @@
+version 1.3-20 2017-07-30
+
+	Allow for calls like boot::boot(), and record the type
+	(boot/censboot/tsboot/tilt.boot) on the object itself.
+	?print.boot now makes explicit that this assumes one of those
+	four functions was used to generate the object.
+
 version 1.3-19 2017-02-11
 
 	Update output for R 3.4.0.

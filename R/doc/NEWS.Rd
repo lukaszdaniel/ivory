@@ -87,7 +87,7 @@
       option \code{keepAttrs = FALSE} for speed up.
 
       \item \command{system()} and \command{system2()} now allow the
-      specification of a maximum elapsed time.
+      specification of a maximum elapsed time (\sQuote{timeout}).
       (This feature is currently experimental and subject to change.)
 
       \item \code{debug()} supports debugging of methods on any object
@@ -100,6 +100,26 @@
       \item Attempting to increase the length of a variable containing
       \code{NULL} using \code{length()<-} still has no effect on the
       target variable, but now triggers a warning.
+
+      \item \code{type.convert()} becomes a generic, with additional
+      methods that operate recursively over list and \code{data.frame}
+      objects. Courtesy of Arni Magnusson (\PR{17269}).
+
+      \item \code{lower.tri(x)} and \code{upper.tri(x)} only needing
+      \code{dim(x)} now work via new \code{.row()} \code{.col()} and
+      no longer call \code{as.matrix()} by default in order to work
+      efficiently for all kind of matrix-like objects.
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item It is now possible to set \sQuote{timeouts} (elapsed-time
+      limits) for most parts of \command{R CMD check} \emph{via}
+      environment variables documented in the \sQuote{R Internals}
+      manual. [This depends on the experimental \sQuote{timeout} feature
+      of \code{system2()} and hence subject to change, as are the names
+      of the environment variables.]
     }
   }
 
@@ -125,8 +145,6 @@
       \item Dispatch on \code{\dots} calls the method using its name,
       instead of \code{.Method} (for consistency with default dispatch),
       and only attempts to pass non-missing arguments from the generic.
-
-      \item \code{callNextMethod()} works for \code{\dots} methods.
 
       \item Connections are now written correctly with encoding
       \code{"UTF-16LE"}.  (\PR{16737}).
@@ -176,10 +194,6 @@
       re-encoding issues, notably seen in some Windows locales.  This
       fixes the \code{citation()} issue in \PR{17291}.
 
-      \item \code{model.matrix(~1, mf)} now gets the row names from
-      \code{mf} also when they differ from \code{1:nrow(mf)}, fixing
-      \PR{14992} thanks to the suggestion by Sebastian Meyer.
-
       \item \code{poly(<matrix>, 3)} now works, thanks to prompting by
       Marc Schwartz.
 
@@ -193,6 +207,9 @@
       \item \code{dist(x, method="canberra")} now uses the correct
       definition; the result may only differ when \code{x} contains
       values of differing signs, i.e., e.g., not for 0-1 data.
+
+      \item \code{methods:::cbind()} and \code{methods:::rbind()} avoid
+      deep recursion, thanks to Suharto Anggono via \PR{17300}.
     }
   }
 }
@@ -212,7 +229,11 @@
       \item The default for \code{tools::write_PACKAGES(rds_compress=)}
       has been changed to \code{"xz"} to match the compression used by
       \acronym{CRAN}.
+    }
+  }
 
+  \subsection{UTILITIES}{
+    \itemize{
       \item \command{R CMD check} checks for and \command{R CMD build}
       corrects CRLF line endings in shell scripts \command{configure}
       and \command{cleanup} (even on Windows).
@@ -237,7 +258,7 @@
       \item \code{rt()} assumed the \code{ncp} parameter was a scalar.  (\PR{17306})
 
       \item \code{menu(choices)} with more than 10 choices which easily
-      fit into one \code{getOption("width")}-line no longer erronously
+      fit into one \code{getOption("width")}-line no longer erroneously
       repeats choices.  (\PR{17312})
 
       \item \code{length()<-} on a pairlist succeeds.
@@ -249,7 +270,39 @@
 
       \item Construction of \code{names()} for very large objects in
       \code{c()} and \code{unlist()} now works, thanks to Suharto
-      Anggono's patch proposals in \PR{17992}.
+      Anggono's patch proposals in \PR{17292}.
+
+      \item Resource leaks (and similar) reported by Steve Grubb fixed.
+      (\PR{17314}, \PR{17316}, \PR{17317}, \PR{17318}, \PR{17319}, \PR{17320})
+
+      \item \code{model.matrix(~1, mf)} now gets the row names from
+      \code{mf} also when they differ from \code{1:nrow(mf)}, fixing
+      \PR{14992} thanks to the suggestion by Sebastian Meyer.
+
+      \item \code{sigma(fm)} now takes the correct denominator degrees
+      of freedom for a fitted model with \code{NA} coefficients.  (\PR{17313})
+
+      \item \code{hist(x, "FD")} no longer \dQuote{dies} with a somewhat
+      cryptic error message when \code{x} has extreme outliers or
+      \code{IQR()} zero:  \code{nclass.FD(x)} tries harder to find a
+      robust bin width \eqn{h} in the latter case, and
+      \code{hist.default(*, breaks)} now checks and corrects a too large
+      \code{breaks} number.  (\PR{17274})
+
+      \item \code{callNextMethod()} works for \code{\dots} methods.
+
+      \item \code{qr.coef(qd, y)} now has correct names also when
+      \code{qd} is a complex QR or stems from \code{qr(*, LAPACK=TRUE)}.
+
+      \item Setting \code{options(device = *)} to an invalid function no
+      longer segfaults when plotting is initiated.  (\PR{15883})
+
+      \item \code{encodeString(<very large string>)} no longer
+      segfaults.  (\PR{15885})
+
+      \item It is again possible to use \command{configure
+      --enable-maintainer-mode} without having installed
+      \command{notangle} (it was required in \R 3.4.[01]).
     }
   }
 }

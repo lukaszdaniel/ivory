@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 11:23+0200\n"
+"POT-Creation-Date: 2017-08-07 20:45+0200\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -87,7 +87,7 @@ msgstr "limiti asse non finiti [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "stile asse \"%c\" non implementato"
 
-#: graphics.c:2209 graphics.c:2606
+#: graphics.c:2209 graphics.c:2607
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Nessun dispositivo grafico attivo"
@@ -100,27 +100,27 @@ msgstr "plot.new non è ancora stato chiamato"
 msgid "invalid graphics state"
 msgstr "stato grafico non valido"
 
-#: graphics.c:2556
+#: graphics.c:2557
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3065
+#: graphics.c:3066
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr ""
 "frecce di lunghezza nulla hanno un angolo indeterminato e quindi saranno "
 "ignorate"
 
-#: graphics.c:3146
+#: graphics.c:3147
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = '%c' non valido; no disegno il box()"
 
-#: graphics.c:3163 par.c:1121
+#: graphics.c:3164 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "parametro non valido passato a par()"
 
-#: graphics.c:3408
+#: graphics.c:3409
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "'truncation' non disponibile per questa connessione"

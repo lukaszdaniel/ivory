@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2441,7 +2441,6 @@ msgstr "NAs em 'x'"
 msgid "NA values in 'x'"
 msgstr "NAs em 'x'"
 
-#. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #: R/distn.R:0

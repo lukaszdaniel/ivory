@@ -332,7 +332,7 @@ John Wiley & Sons.
   \code{\link{tsboot}}.
 }
 \examples{
-\testonly{op <- options(digits = 5)}
+\dontshow{op <- options(digits = 5)}
 # Usual bootstrap of the ratio of means using the city data
 ratio <- function(d, w) sum(d$x * w)/sum(d$u * w)
 boot(city, ratio, R = 999, stype = "w")
@@ -417,7 +417,7 @@ air.boot <- boot(aircondit, air.fun, R = 999, sim = "parametric",
 
 # The bootstrap p-value can then be approximated by
 sum(abs(air.boot$t[,2]-1) > abs(air.boot$t0[2]-1))/(1+air.boot$R)
-\testonly{options(op)}
+\dontshow{options(op)}
 }
 \keyword{nonparametric}
 \keyword{htest}

@@ -253,7 +253,7 @@ function(x)
 {
     if(inherits(x, "person")) return(x)
 
-    x <- as.character(x)
+    x <- trimws(as.character(x))
 
     if(!length(x)) return(person())
 
@@ -654,6 +654,10 @@ function(x, style = "text", .bibstyle = NULL,
         out <- file()
         saveopt <- tools::Rd2txt_options(width = getOption("width"))
         on.exit({tools::Rd2txt_options(saveopt); close(out)})
+        permissive <-
+            Sys.getenv("_R_UTILS_FORMAT_BIBENTRY_VIA_RD_PERMISSIVE_",
+                       "TRUE")
+        permissive <- tools:::config_val_to_logical(permissive)
         sapply(.bibentry_expand_crossrefs(x),
                function(y) {
                    txt <- tools::toRd(y, style = .bibstyle)
@@ -666,7 +670,7 @@ function(x, style = "text", .bibstyle = NULL,
                    on.exit(close(con))
                    rd <- tools::parse_Rd(con,
                                          fragment = TRUE,
-                                         permissive = TRUE)
+                                         permissive = permissive)
                    rd <- tools:::processRdSexprs(rd,
                                                  "build",
                                                  macros = attr(rd, "macros"))

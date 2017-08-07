@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3189,7 +3189,6 @@ msgstr ""
 
 
 #: R/distn.R: 0
-#. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 

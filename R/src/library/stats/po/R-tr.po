@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2430,7 +2430,6 @@ msgstr "'x' de NAs"
 msgid "NA values in 'x'"
 msgstr "'x' de NAs"
 
-#. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #. R/distn.R: warning("NA values produced")
 #: R/distn.R:0

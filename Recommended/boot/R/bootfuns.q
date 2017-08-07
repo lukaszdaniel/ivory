@@ -196,8 +196,11 @@ boot <- function(data, statistic, R, sim = "ordinary",
     for(r in seq_len(RR)) t.star[r, ] <- res[[r]]
 
     if (is.null(weights)) weights <- 1/tabulate(strata)[strata]
-    boot.return(sim, t0, t.star, temp.str, R, data, statistic, stype, call,
-                seed, L, m, pred.i, weights, ran.gen, mle)
+    boot0 <- boot.return(sim, t0, t.star, temp.str, R, data, statistic,
+                         stype, call,
+                         seed, L, m, pred.i, weights, ran.gen, mle)
+    attr(boot0, "boot_type") <- "boot"
+    boot0
 }
 
 normalize <- function(wts, strata)
@@ -267,7 +270,8 @@ boot.array <- function(boot.out, indices=FALSE) {
     n <- NROW(boot.out$data)
     R <- boot.out$R
     sim <- boot.out$sim
-    if (boot.out$call[[1L]] == "tsboot") {
+    type <- find_type(boot.out)
+    if (type == "tsboot") {
 #  Recreate the array for an object created by tsboot, The default for
 #  such objects is to return the index array unless index is specifically
 #  passed as F
@@ -290,7 +294,7 @@ boot.array <- function(boot.out, indices=FALSE) {
             out[r,] <- inds
         }
     }
-    else if (boot.out$call[[1L]] == "censboot") {
+    else if (type == "censboot") {
 #  Recreate the array for an object created by censboot as long
 #  as censboot was called with sim = "ordinary"
         if (sim == "ordinary") {
@@ -304,7 +308,7 @@ boot.array <- function(boot.out, indices=FALSE) {
         if (sim == "parametric")
             stop("array cannot be found for parametric bootstrap")
         strata <- tapply(seq_len(n),as.numeric(boot.out$strata))
-        if (boot.out$call[[1L]] == "tilt.boot")
+        if (find_type(boot.out) == "tilt.boot")
             weights <- boot.out$weights
         else {
             weights <- boot.out$call$weights
@@ -431,18 +435,21 @@ print.boot <- function(x, digits = getOption("digits"),
             dimnames(op) <- list(rn,c(gettext("original", domain = "R-boot"), gettext(" bias  ", domain = "R-boot"), gettext(" std. error", domain = "R-boot"), gettext(" mean(t*)", domain = "R-boot")))
         }
     }
-    if (cl[[1L]] == "boot") {
+    type <- find_type(boot.out)
+    if (type == "boot") {
         if (sim == "parametric")
             cat("\n", gettext("PARAMETRIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
         else if (sim == "antithetic") {
             if (is.null(cl$strata))
                 cat("\n", gettext("ANTITHETIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
-            else	cat("\n", gettext("STRATIFIED ANTITHETIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+            else
+                cat("\n", gettext("STRATIFIED ANTITHETIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
         }
         else if (sim == "permutation") {
             if (is.null(cl$strata))
                 cat("\n", gettext("DATA PERMUTATION", domain = "R-boot"), "\n\n", sep = "")
-            else	cat("\n", gettext("STRATIFIED DATA PERMUTATION", domain = "R-boot"), "\n\n", sep = "")
+            else
+                cat("\n", gettext("STRATIFIED DATA PERMUTATION", domain = "R-boot"), "\n\n", sep = "")
         }
         else if (sim == "balanced") {
             if (is.null(cl$strata) && is.null(cl$weights))
@@ -451,7 +458,8 @@ print.boot <- function(x, digits = getOption("digits"),
                 cat("\n", gettext("BALANCED WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
             else if (is.null(cl$weights))
                 cat("\n", gettext("STRATIFIED BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
-            else	cat("\n", gettext("STRATIFIED WEIGHTED BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+            else
+                cat("\n", gettext("STRATIFIED WEIGHTED BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
         }
         else {
             if (is.null(cl$strata) && is.null(cl$weights))
@@ -460,10 +468,11 @@ print.boot <- function(x, digits = getOption("digits"),
                 cat("\n", gettext("WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
             else if (is.null(cl$weights))
                 cat("\n", gettext("STRATIFIED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
-            else 	cat("\n", gettext("STRATIFIED WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+            else
+                cat("\n", gettext("STRATIFIED WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
         }
     }
-    else if (cl[[1L]] == "tilt.boot") {
+    else if (type == "tilt.boot") {
         R <- boot.out$R
         th <- boot.out$theta
         if (sim == "balanced")
@@ -486,7 +495,7 @@ print.boot <- function(x, digits = getOption("digits"),
         }
         op <- op[, 1L:3L]
     }
-    else if (cl[[1L]] == "tsboot") {
+    else if (type == "tsboot") {
         if (!is.null(cl$indices))
             cat("\n", gettext("TIME SERIES BOOTSTRAP USING SUPPLIED INDICES", domain = "R-boot"), "\n\n", sep = "")
         else if (sim == "model")
@@ -495,21 +504,25 @@ print.boot <- function(x, digits = getOption("digits"),
             cat("\n", gettext("PHASE SCRAMBLED BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
             if (boot.out$norm)
                 cat(gettext("Normal margins used.", domain = "R-boot"), "\n", sep = "")
-            else	cat(gettext("Observed margins used.", domain = "R-boot"), "\n", sep = "")
+            else
+                cat(gettext("Observed margins used.", domain = "R-boot"), "\n", sep = "")
         }
         else if (sim == "geom") {
             if (is.null(cl$ran.gen))
                 cat("\n", gettext("STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
-            else	cat("\n", gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+            else
+                cat("\n", gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
             cat(gettextf("Average Block Length of %s", boot.out$l, domain = "R-boot"), "\n", sep = "")
         }
-        else {	if (is.null(cl$ran.gen))
+        else {
+            if (is.null(cl$ran.gen))
                     cat("\n", gettext("BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
-        else	cat("\n", gettext("POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
-                    cat(gettextf("Fixed Block Length of %s", boot.out$l, domain = "R-boot"), "\n", sep = "")
-		}
+            else
+                cat("\n", gettext("POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+            cat(gettextf("Fixed Block Length of %s", boot.out$l, domain = "R-boot"), "\n", sep = "")
+        }
     }
-    else {
+    else if (type == "censboot") {
         cat("\n")
         if (sim == "weird") {
             if (!is.null(cl$strata)) cat(gettext("STRATIFIED WEIRD BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
@@ -534,7 +547,7 @@ print.boot <- function(x, digits = getOption("digits"),
 	    else
 		cat(gettext("CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot"), "\n\n", sep = "")
         }
-    }
+    } else warning('unknown type of "boot" object')
     cat("\n", gettext("Call:", domain = "R-boot"), "\n", sep = "")
     dput(cl, control=NULL)
     cat("\n\n", gettext("Bootstrap Statistics:", domain = "R-boot"), "\n", sep = "")
@@ -949,7 +962,7 @@ boot.ci <- function(boot.out,conf = 0.95,type = "all",
     if (any(type == "all" | type == "perc"))
         output <- c(output, list(percent=perc.ci(t,conf,hinv=hinv)))
     if (any(type == "all" | type == "bca")) {
-        if (as.character(boot.out$call[1L]) == "tsboot")
+        if (find_type(boot.out) == "tsboot")
             warning("BCa intervals not defined for time series bootstraps")
         else
             output <- c(output, list(bca=bca.ci(boot.out,conf,
@@ -1416,6 +1429,7 @@ cens.return <- function(sim, t0, t, strata, R, data, statistic, call, seed) {
     out <- list(t0 = t0, t = t, R = R, sim = sim, data = data, seed = seed,
                 statistic = statistic, strata = strata, call = call)
     class(out) <- "boot"
+    attr(boot, "boot_type") <- "censboot"
     out
 }
 
@@ -2381,6 +2395,7 @@ tilt.boot <- function(data, statistic, R, sim="ordinary",
     boot0$R <- c(boot0$R, boot1$R)
     boot0$call <- call
     boot0$theta <- theta
+    attr(boot0, "boot_type") <- "tilt.boot"
     boot0
 }
 
@@ -3498,5 +3513,15 @@ ts.return <- function(t0, t, R, tseries, seed, stat, sim, endcorr,
             out <- c(out,list(ran.gen = ran.gen, ran.args = ran.args))
     }
     class(out) <- "boot"
+    attr(out, "boot_type") <- "tsboot"
     out
+}
+
+## unexported helper
+
+find_type <- function(boot.out)
+{
+    if(is.null(type <- attr(boot.out, "boot_type")))
+        type <- sub("^boot::", "", deparse(boot.out$call[[1L]]))
+    type
 }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-05-03 21:02\n"
+"POT-Creation-Date: 2017-08-07 20:45\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1614,12 +1614,6 @@ msgstr ""
 " \"%s\" に対して要求されたインポートされたメソッド（パッケージ \"%s\" から"
 "の）に対応する総称的関数がありません (不正確なエクスポート？) "
 
-#. R/namespace.R: gettextf("No methods were found in package %s for requests: %s", sQuote(pkg), paste(vars[is.na(match(vars,     allFuns))], collapse = ", "))
-#: R/namespace.R:0
-#, fuzzy
-msgid "No methods were found in package %s for requests: %s"
-msgstr " \"%s\" 中には要求に対するメソッドが見つかりません: %s "
-
 #. R/traceback.R: gettext("No traceback available", domain = "R-base")
 #: R/traceback.R:0
 msgid "No traceback available"
@@ -2080,8 +2074,9 @@ msgstr " メッセージコネクションを分割できません "
 msgid "character string is not in a standard unambiguous format"
 msgstr " 文字列は標準的な曖昧さのない書式にはなっていません "
 
-#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
-#: R/datetime.R:0
+#. R/dates.R: gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base")
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base")
+#: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "class %s of length 0"
 msgstr " 'to' は長さ 1 でなければなりません "
@@ -2461,7 +2456,7 @@ msgstr " 無効な 'name' 引数です "
 msgid "invalid 'dimnames' given for data frame"
 msgstr " データフレームに無効な 'dimnames' が与えられました "
 
-#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL)
+#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab, length(levels))
 #: R/factor.R:0
 #, fuzzy
 msgid "invalid 'labels'; length %d should be 1 or %d"
@@ -3234,14 +3229,6 @@ msgstr " 以前のインポート %s を置き換えています（%sのロー�
 msgid "replacing previous import by %s when loading namespace %s"
 msgstr " 以前のインポート %s を置き換えています（%sのロード中） "
 
-#. R/namespace.R: gettextf("requested methods were not found in environment/package %s: %s", sQuote(pkg),     paste(vars[is.na(match(vars, allFuns))], collapse = ", "))
-#: R/namespace.R:0
-#, fuzzy
-msgid "requested methods were not found in environment/package %s: %s"
-msgstr ""
-" 要求された 'methods' オブジェクトは環境もしくはパッケージ '%s'中に見付かりま"
-"せん： %s "
-
 #. R/dataframe.R: stop("row names contain missing values")
 #. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
@@ -3556,6 +3543,13 @@ msgid_plural ""
 " extra arguments %s will be disregarded"
 msgstr[0] "  余分な引数 %s は無視されます "
 
+#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s", "No methods were found in package %s for requests: %s",     domain = "R-base")
+#: R/namespace.R:0
+#, fuzzy
+msgid "No methods were found in package %s for request: %s"
+msgid_plural "No methods were found in package %s for requests: %s"
+msgstr[0] " \"%s\" 中には要求に対するメソッドが見つかりません: %s "
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3732,6 +3726,15 @@ msgstr[0] " 置き換えは %d 個の項目を持ちますが、%d 個必要で�
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] " 置き換えは %d 列ですが、データは %d 列です "
+
+#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s",     "requested methods were not found in environment/package %s: %s", domain = "R-base")
+#: R/namespace.R:0
+#, fuzzy
+msgid "requested method was not found in environment/package %s: %s"
+msgid_plural "requested methods were not found in environment/package %s: %s"
+msgstr[0] ""
+" 要求された 'methods' オブジェクトは環境もしくはパッケージ '%s'中に見付かりま"
+"せん： %s "
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0

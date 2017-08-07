@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -173,7 +173,7 @@ msgstr "traktowanie nieskończonych wartości jako NA"
 msgid "'distance()': invalid 'p' argument"
 msgstr "'distance()': niepoprawny argument 'p'"
 
-#: distance.c:229
+#: distance.c:230
 msgid "'distance()': invalid distance"
 msgstr "'distance()': niepoprawna odległość"
 
@@ -326,7 +326,7 @@ msgstr "argument '%s' musi mieć długość jeden"
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "tylko 2500 wierszy jest dozwolonych dla 'sm.method=\"spline\"'"
 
-#: line.c:115
+#: line.c:148
 msgid "insufficient observations"
 msgstr "niewystarczające obserwacje"
 

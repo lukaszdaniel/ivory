@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-08-06 10:07\n"
+"POT-Creation-Date: 2017-08-07 20:45\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -69,6 +69,11 @@ msgstr "'at' muss die selbe Länge haben wie die Anzahl %d der Gruppen"
 #, fuzzy
 msgid "'at' must have same length as 'z$n', i.e. %d"
 msgstr "'at' muss dieselbe Länge wie 'z$n' haben, z. B."
+
+#. R/hist.R: gettextf("'breaks = %g' is too large and set to 1e6", breaks)
+#: R/hist.R:0
+msgid "'breaks = %g' is too large and set to 1e6"
+msgstr ""
 
 #. R/hist.R: stop("'breaks' are not strictly increasing")
 #: R/hist.R:0
@@ -143,6 +148,13 @@ msgstr "'include.lowest' ignoriert, da 'breaks' kein Vektor ist"
 #, fuzzy
 msgid "'legend' argument is of length 0"
 msgstr "'legend' hat Länge 0"
+
+#. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
+#: R/arrows.R:0
+msgid ""
+"'length', 'angle', or 'code' greater than length 1; values after the first "
+"are ignored"
+msgstr ""
 
 #. R/stars.R: stop("'locations' must be a 2-column matrix.")
 #: R/stars.R:0

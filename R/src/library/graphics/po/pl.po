@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 11:23+0200\n"
+"POT-Creation-Date: 2017-08-07 20:45+0200\n"
 "PO-Revision-Date: 2016-04-26 22:56+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -71,7 +71,7 @@ msgstr "nieskończone granice osi [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "styl \"%c\" osi nie został zaimplementowany"
 
-#: graphics.c:2209 graphics.c:2606
+#: graphics.c:2209 graphics.c:2607
 msgid "no graphics device is active"
 msgstr "brak aktywnego urządzenia graficznego"
 
@@ -83,28 +83,28 @@ msgstr "'plot.new' nie został jeszcze wywołany"
 msgid "invalid graphics state"
 msgstr "niepoprawny stan grafiki"
 
-#: graphics.c:2556
+#: graphics.c:2557
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 "urządzenie graficzne zostało zamknięte podczas wywołania funkcji 'locator()' "
 "lub 'idenfify()'"
 
-#: graphics.c:3065
+#: graphics.c:3066
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr ""
 "strzałka o zerowej długości ma nieokreślony kąt tak więc zostaje pominięta"
 
-#: graphics.c:3146
+#: graphics.c:3147
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "niepoprawne par(\"bty\") = '%c'; nie wykonano funkcji 'box()'"
 
-#: graphics.c:3163 par.c:1121
+#: graphics.c:3164 par.c:1121
 #, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "niepoprawny argument przekazany do funkcji '%s'"
 
-#: graphics.c:3408
+#: graphics.c:3409
 msgid "metric information not available for this device"
 msgstr "informacja o metryce nie jest dostępna dla tego urządzenia"
 

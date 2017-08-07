@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2017-05-03 20:51\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2012,6 +2012,13 @@ msgstr ""
 #. R/sysdata.R: gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",     domain = "R-utils")
 
 msgid "Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for persons or organizations responsible for reviewing\n(parts of) the package.",     domain = "R-utils")
+
+msgid "Use for persons or organizations responsible for reviewing\n(parts of) the package."
 msgstr ""
 
 

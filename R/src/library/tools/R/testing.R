@@ -423,8 +423,13 @@ testInstalledPackage <-
 }
 
 .runPackageTests <-
-    function(use_gct = FALSE, use_valgrind = FALSE, Log = NULL, stop_on_error = TRUE, ...)
+    function(use_gct = FALSE, use_valgrind = FALSE, Log = NULL,
+             stop_on_error = TRUE, ...)
 {
+    tlim <- Sys.getenv("_R_CHECK_ONE_TEST_ELAPSED_TIMEOUT_",
+            Sys.getenv("_R_CHECK_TESTS_ELAPSED_TIMEOUT_",
+            Sys.getenv("_R_CHECK_ELAPSED_TIMEOUT_")))
+    tlim <- get_timeout(tlim)
     if (!is.null(Log)) Log <- file(Log, "wt")
     WINDOWS <- .Platform$OS.type == "windows"
     td0 <- as.numeric(Sys.getenv("_R_CHECK_TIMINGS_"))
@@ -465,7 +470,7 @@ testInstalledPackage <-
         } else
             cmd <- paste("LANGUAGE=C", "R_TESTS=startup.Rs", cmd)
         t1 <- proc.time()
-        res <- system(cmd)
+        res <- system(cmd, timeout = tlim)
         t2 <- proc.time()
         print_time(t1, t2, Log)
         if (!WINDOWS && !is.na(theta)) {
@@ -480,6 +485,7 @@ testInstalledPackage <-
             }
         }
         if (res) {
+            if(identical(res, 124L)) report_timeout(tlim)
             file.rename(outfile, paste0(outfile, ".fail"))
             return(1L)
         }

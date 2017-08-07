@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-05-20 19:27\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -410,9 +410,9 @@ msgid ""
 "selectively is preferable."
 msgstr ""
 
-#. R/CRANtools.R: gettextf("Additional issues: %s", paste(unique(i$kind), collapse = " "), domain = "R-tools")
+#. R/CRANtools.R: gettext("Additional issues:", domain = "R-tools")
 #: R/CRANtools.R:0
-msgid "Additional issues: %s"
+msgid "Additional issues:"
 msgstr ""
 
 #. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
@@ -745,6 +745,11 @@ msgstr ""
 #. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
 #: R/QC.R:0
 msgid "Checking URLs requires 'libcurl' support in the R build"
+msgstr ""
+
+#. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
+#: R/check.R:0
+msgid "Checking line endings in shell scripts ..."
 msgstr ""
 
 #. R/check.R: gettext("Checking should be performed on sources prepared by 'R CMD build'.", domain = "R-tools")
@@ -1319,9 +1324,14 @@ msgstr ""
 msgid "Examples with CPU or elapsed time > %gs"
 msgstr ""
 
-#. R/check.R: gettextf("Examples with user time > %g times elapsed time\n", theta, domain = "R-tools")
+#. R/check.R: gettextf("Examples with CPU time > %g times elapsed time\n", theta, domain = "R-tools")
 #: R/check.R:0
-msgid "Examples with user time > %g times elapsed time"
+msgid "Examples with CPU time > %g times elapsed time"
+msgstr ""
+
+#. R/check.R: gettextf("Extensions with Type %s cannot be checked.", sQuote(desc["Type"]), domain = "R-tools")
+#: R/check.R:0
+msgid "Extensions with Type %s cannot be checked."
 msgstr ""
 
 #. R/testing.R: message("  Extracting from parsed Rd's ", appendLF = FALSE, domain = "R-tools")
@@ -1601,6 +1611,11 @@ msgstr ""
 msgid "Found the following possibly unsafe calls:"
 msgstr ""
 
+#. R/check.R: gettext("Found the following shell script(s) with CR or CRLF line endings:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found the following shell script(s) with CR or CRLF line endings:"
+msgstr ""
+
 #. R/check.R: gettext("Found the following significant warnings:\n", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
@@ -1878,6 +1893,11 @@ msgstr ""
 msgid ""
 "Located more than one %s output file (by engine %s) for vignette with name: "
 "%s"
+msgstr ""
+
+#. R/check.R: gettextf("Looks like %s is a package bundle -- they are defunct", sQuote(pkgname0),     domain = "R-tools")
+#: R/check.R:0
+msgid "Looks like %s is a package bundle -- they are defunct"
 msgstr ""
 
 #. R/install.R: gettext("MD5 sums")
@@ -2217,6 +2237,11 @@ msgstr ""
 msgid "Non-FOSS package license (%s)"
 msgstr ""
 
+#. R/check.R: gettext("Non-Windows OSes require LF line endings.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Non-Windows OSes require LF line endings."
+msgstr ""
+
 #. R/QC.R: gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools")
 #: R/QC.R:0
 msgid "Non-portable flags in variable %s:"
@@ -2338,6 +2363,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2389,11 +2415,6 @@ msgstr ""
 #. R/QC.R: gettextf("One or more packages in %s depend on this package.", x$all_depends, domain = "R-tools")
 #: R/QC.R:0
 msgid "One or more packages in %s depend on this package."
-msgstr ""
-
-#. R/check.R: gettext("Only 'Type = Package' extensions can be checked.\n", domain = "R-tools")
-#: R/check.R:0
-msgid "Only 'Type = Package' extensions can be checked."
 msgstr ""
 
 #. R/check.R: gettext("Only *source* packages can be checked.\n", domain = "R-tools")
@@ -2476,7 +2497,6 @@ msgid "Package detach functions should not call %s."
 msgstr ""
 
 #. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg), domain = "R-tools")
-#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg))
 #: R/check.R:0
 msgid "Package directory %s does not exist"
 msgstr ""
@@ -2618,6 +2638,11 @@ msgid ""
 "Please fix permissions and try again."
 msgstr ""
 
+#. R/QC.R: gettext("Please enclose URLs in angle brackets (<...>).", domain = "R-tools")
+#: R/QC.R:0
+msgid "Please enclose URLs in angle brackets (<...>)."
+msgstr ""
+
 #. R/check.R: gettext("Please fix their permissions\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Please fix their permissions"
@@ -2628,6 +2653,16 @@ msgstr ""
 msgid ""
 "Please remove or rename the files.\n"
 "See section 'Package subdirectories' in the 'Writing R Extensions' manual."
+msgstr ""
+
+#. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Please write DOIs as <doi:10.prefix/suffix>."
+msgstr ""
+
+#. R/QC.R: gettext("Please write arXiv ids as <arXiv:YYMM.NNNNN>.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Please write arXiv ids as <arXiv:YYMM.NNNNN>."
 msgstr ""
 
 #. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
@@ -2737,6 +2772,11 @@ msgstr ""
 msgid "Rd object is required"
 msgstr ""
 
+#. R/check.R: gettextf("Re-building vignettes had CPU time %g times elapsed time\n", ratio, domain = "R-tools")
+#: R/check.R:0
+msgid "Re-building vignettes had CPU time %g times elapsed time"
+msgstr ""
+
 #. R/check.R: gettext("Re-running with no redirection of stdout/stderr.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Re-running with no redirection of stdout/stderr."
@@ -2781,6 +2821,21 @@ msgstr ""
 #. R/utils.R: gettextf("Running 'texi2dvi' on file %s failed.", sQuote(file))
 #: R/utils.R:0
 msgid "Running 'texi2dvi' on file %s failed."
+msgstr ""
+
+#. R/check.R: gettextf("Running R code from vignette %s had CPU time %g times elapsed time\n",     sQuote((basename(file))), ratio, domain = "R-tools")
+#: R/check.R:0
+msgid "Running R code from vignette %s had CPU time %g times elapsed time"
+msgstr ""
+
+#. R/check.R: gettextf("Running R code from vignettes had CPU time %g times elapsed time\n", ratio,     domain = "R-tools")
+#: R/check.R:0
+msgid "Running R code from vignettes had CPU time %g times elapsed time"
+msgstr ""
+
+#. R/testing.R: gettextf("Running R code in %s had CPU time %g times elapsed time\n", sQuote(f),     ratio, domain = "R-tools")
+#: R/testing.R:0
+msgid "Running R code in %s had CPU time %g times elapsed time"
 msgstr ""
 
 #. R/check.R: gettextf("Running examples in %s failed", sQuote(basename(exfile)), domain = "R-tools")
@@ -3128,6 +3183,15 @@ msgstr ""
 #. R/QC.R: gettext("The Date field is over a month old.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Date field is over a month old."
+msgstr ""
+
+#. R/QC.R: gettextf("The Description field contains\n%s", paste0("  ", y), domain = "R-tools")
+#. R/QC.R: gettextf("The Description field contains\n%s", paste0("  ", y), domain = "R-tools")
+#. R/QC.R: gettext("The Description field contains\n%s", paste0("  ", y), domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The Description field contains\n"
+"%s"
 msgstr ""
 
 #. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
@@ -4158,9 +4222,9 @@ msgstr ""
 msgid "checking for GNU extensions in Makefiles ..."
 msgstr ""
 
-#. R/build.R: gettext("checking for LF line-endings in source and make files", domain = "R-tools")
+#. R/build.R: gettext("checking for LF line-endings in source and make files and shell scripts",     domain = "R-tools")
 #: R/build.R:0
-msgid "checking for LF line-endings in source and make files"
+msgid "checking for LF line-endings in source and make files and shell scripts"
 msgstr ""
 
 #. R/check.R: gettext("checking for code which exercises the package ...", domain = "R-tools")
@@ -4294,11 +4358,17 @@ msgstr ""
 msgid "checking package %s ..."
 msgstr ""
 
+#. R/check.R: gettext("checking package bundle ...", domain = "R-tools")
+#: R/check.R:0
+msgid "checking package bundle ..."
+msgstr ""
+
 #. R/check.R: gettext("checking package dependencies ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking package dependencies ..."
 msgstr ""
 
+#. R/check.R: gettext("checking package directory ...", domain = "R-tools")
 #. R/check.R: gettext("checking package directory ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking package directory ..."
@@ -4375,6 +4445,12 @@ msgstr ""
 #. R/check.R: gettextf("checking whether package %s can be installed ...", sQuote(desc["Package"]),     domain = "R-tools")
 #: R/check.R:0
 msgid "checking whether package %s can be installed ..."
+msgstr ""
+
+#. R/check.R: gettext("checking whether tarball can be unpacked ...", domain = "R-tools")
+#. R/check.R: gettext("checking whether tarball can be unpacked ...", domain = "R-tools")
+#: R/check.R:0
+msgid "checking whether tarball can be unpacked ..."
 msgstr ""
 
 #. R/check.R: gettext("checking whether the namespace can be loaded with stated dependencies ...",     domain = "R-tools")
@@ -4628,6 +4704,13 @@ msgstr ""
 #. R/admin.R: gettextf("\nduplicated files in %s field:", sQuote(collationField))
 #: R/admin.R:0
 msgid "duplicated files in %s field:"
+msgstr ""
+
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process", round(tlim/3600,     1L), "hours")
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process", round(tlim/60, 1L),     "minutes")
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process", tlim, "seconds")
+#: R/check.R:0
+msgid "elapsed-time limit of %g %s reached for sub-process"
 msgstr ""
 
 #. R/install.R: warning("empty 'data' directory", call. = FALSE)
@@ -4931,11 +5014,6 @@ msgstr ""
 msgid "looks like %s is a base package"
 msgstr ""
 
-#. R/check.R: gettextf("looks like %s is a package bundle -- they are defunct", sQuote(pkgname0),     domain = "R-tools")
-#: R/check.R:0
-msgid "looks like %s is a package bundle -- they are defunct"
-msgstr ""
-
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 #: R/install.R:0
 msgid ""
@@ -5026,7 +5104,7 @@ msgstr ""
 msgid "no inputs"
 msgstr ""
 
-#. R/sotools.R: stop("no native symbols were extracted")
+#. R/sotools.R: message("no native symbols were extracted")
 #: R/sotools.R:0
 msgid "no native symbols were extracted"
 msgstr ""
@@ -5114,6 +5192,11 @@ msgstr ""
 msgid "package contains no R code"
 msgstr ""
 
+#. R/check.R: gettextf("package directory %s does not exist", sQuote(pkg))
+#: R/check.R:0
+msgid "package directory %s does not exist"
+msgstr ""
+
 #. R/check.R: gettextf("package encoding: %s", encoding, domain = "R-tools")
 #: R/check.R:0
 msgid "package encoding: %s"
@@ -5167,10 +5250,16 @@ msgstr ""
 #. R/QC.R: gettextf("parse error in file %s:", sQuote(file))
 #. R/QC.R: gettextf("parse error in file %s:\n", sQuote(file), .massage_file_parse_error_message(conditionMessage(e)))
 #. R/QC.R: gettextf("parse error in file %s:", sQuote(file))
-#. R/QC.R: gettextf("parse error in file %s:", sQuote(f))
 #. R/QC.R: gettextf("parse error in file %s:", sQuote(summary(files)$description))
 #: R/QC.R:0
 msgid "parse error in file %s:"
+msgstr ""
+
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
+#: R/QC.R:0
+msgid ""
+"parse error in file '%s':\n"
+"%s"
 msgstr ""
 
 #. R/xgettext.R: gettextf("parsing file %s", sQuote(f))

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -172,7 +172,7 @@ msgstr "유한하지 않은 값들은 NA 처리됩니다 "
 msgid "'distance()': invalid 'p' argument"
 msgstr "distance(): p 값이 잘못되었습니다 "
 
-#: distance.c:229
+#: distance.c:230
 #, fuzzy
 msgid "'distance()': invalid distance"
 msgstr "distance(): 거리가 잘못되었습니다 "
@@ -317,7 +317,7 @@ msgstr "'m' 은 반드시 list 이어야 합니다 "
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" 에서는 최대 2500 개의 행만을 가질 수 있습니다 "
 
-#: line.c:115
+#: line.c:148
 #, fuzzy
 msgid "insufficient observations"
 msgstr "마지막 %d 개의 관측치가 결측치입니다 "

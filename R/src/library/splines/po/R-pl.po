@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 21:37\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -66,6 +66,11 @@ msgstr "reprezentacja bSpline  splajnu"
 msgid "bSpline representation of spline for %s"
 msgstr "reprezentacja bSpline splajnu dla %s"
 
+#. R/splineClasses.R: stop("currently implemented only for cubic splines")
+#: R/splineClasses.R:0
+msgid "currently implemented only for cubic splines"
+msgstr ""
+
 #. R/splineClasses.R: stop("empty 'derivs' argument")
 #: R/splineClasses.R:0
 msgid "empty 'derivs' argument"
@@ -97,6 +102,12 @@ msgstr "długości 'x' oraz 'y' muszą być takie same"
 msgid "lengths of 'x' and 'y' must match"
 msgstr "długości 'x' oraz 'y' muszą być zgodne"
 
+#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "must have at least 'ord'=%d points"
+msgstr "przynajmniej 'ord' węzłów jest wymagane"
+
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -119,7 +130,7 @@ msgstr ""
 msgid "spline must be monotone"
 msgstr "funkcja sklejana musi być funkcją monotoniczną"
 
-#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - degree], "outer.ok = TRUE", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "dane 'x' muszą być w przedziale od %g do %g chyba, że ustawiono '%s'"
@@ -151,9 +162,6 @@ msgstr[2] "przynajmniej %s (=%d) węzłów jest potrzebnych"
 
 #~ msgid "'ord' must be >= 2"
 #~ msgstr "'ord' musi być >= 2"
-
-#~ msgid "must have at least 'ord' knots"
-#~ msgstr "przynajmniej 'ord' węzłów jest wymagane"
 
 #~ msgid "'%s' was too small; have used %d"
 #~ msgstr "argument '%s' był zbyt mały; użyto %d"

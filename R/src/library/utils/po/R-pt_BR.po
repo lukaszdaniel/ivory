@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-05-03 20:51\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1553,6 +1553,13 @@ msgid ""
 "Use for package maintainers that collected code (potentially in\n"
 "other languages) but did not make further substantial\n"
 "contributions to the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for persons or organizations responsible for reviewing\n(parts of) the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for persons or organizations responsible for reviewing\n"
+"(parts of) the package."
 msgstr ""
 
 #. R/sysdata.R: gettext("Use for persons or organizations that furnished financial support\nfor the development of the package",     domain = "R-utils")

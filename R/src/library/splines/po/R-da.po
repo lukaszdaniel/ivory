@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 21:37\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2016-01-09 19:17+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -65,6 +65,11 @@ msgstr ""
 msgid "bSpline representation of spline for %s"
 msgstr ""
 
+#. R/splineClasses.R: stop("currently implemented only for cubic splines")
+#: R/splineClasses.R:0
+msgid "currently implemented only for cubic splines"
+msgstr ""
+
 #. R/splineClasses.R: stop("empty 'derivs' argument")
 #: R/splineClasses.R:0
 msgid "empty 'derivs' argument"
@@ -97,6 +102,12 @@ msgstr "længden for »x«og »y« skal være den samme"
 msgid "lengths of 'x' and 'y' must match"
 msgstr "længden på »x« og »y« skal være ens"
 
+#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "must have at least 'ord'=%d points"
+msgstr "skal have mindst »ord« knob"
+
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -118,7 +129,7 @@ msgstr ""
 msgid "spline must be monotone"
 msgstr "kurve skal være monoton"
 
-#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - degree], "outer.ok = TRUE", domain = "R-splines")
 #: R/splineClasses.R:0
 #, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
@@ -153,9 +164,6 @@ msgstr[1] "skal mindst være 2*ord -1 (=%d) knob"
 
 #~ msgid "'ord' must be >= 2"
 #~ msgstr "»ord« skal være >= 2"
-
-#~ msgid "must have at least 'ord' knots"
-#~ msgstr "skal have mindst »ord« knob"
 
 #, fuzzy
 #~ msgid "'%s' was too small; have used %d"

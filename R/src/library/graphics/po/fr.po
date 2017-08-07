@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 11:23+0200\n"
+"POT-Creation-Date: 2017-08-07 20:45+0200\n"
 "PO-Revision-Date: 2012-03-06 22:22+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -82,7 +82,7 @@ msgstr "limites d'axes non finis [GScale(%g,%g,%d, .) ; log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "style d'axe \"%c\" non implémenté"
 
-#: graphics.c:2209 graphics.c:2606
+#: graphics.c:2209 graphics.c:2607
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Aucun périphérique graphique n'est actif"
@@ -95,26 +95,26 @@ msgstr "plot.new n'a pas encore été appelé"
 msgid "invalid graphics state"
 msgstr "état des graphiques incorrect"
 
-#: graphics.c:2556
+#: graphics.c:2557
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3065
+#: graphics.c:3066
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "un flèche de longueur nulle n'a pas d'angle déterminé et est ignorée"
 
-#: graphics.c:3146
+#: graphics.c:3147
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr ""
 "par(\"bty\") = '%c' incorrect ; aucune boîte n'est tracée à l'aide de box()"
 
-#: graphics.c:3163 par.c:1121
+#: graphics.c:3164 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "paramètre passé à par() invalide"
 
-#: graphics.c:3408
+#: graphics.c:3409
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Information de métrique non disponible pour ce périphérique"

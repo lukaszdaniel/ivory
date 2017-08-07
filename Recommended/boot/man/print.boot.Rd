@@ -5,7 +5,8 @@ Print a Summary of a Bootstrap Object
 }
 \description{
   This is a method for the function \code{print()} for objects of the
-  class \code{"boot"}.
+  class \code{"boot"} created by a call to \code{\link{boot}},
+  \code{\link{censboot}}, \code{\link{tilt.boot}} or \code{\link{tsboot}}.
 }
 \usage{
 \method{print}{boot}(x, digits = getOption("digits"), 
@@ -32,7 +33,7 @@ Print a Summary of a Bootstrap Object
   For each statistic calculated in the bootstrap the original value and
   the bootstrap estimates of its bias and standard error are printed.
   If \code{boot.out$t0} is missing (such as when it was created by a
-  call to \code{tsboot} with \code{orig.t=FALSE}) the bootstrap mean and
+  call to \code{tsboot} with \code{orig.t = FALSE}) the bootstrap mean and
   standard error are printed. If resampling was done using importance
   resampling weights, then the bootstrap estimates are reweighted as if
   uniform resampling had been done.  The ratio importance sampling

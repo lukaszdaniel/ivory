@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -170,7 +170,7 @@ msgstr ""
 msgid "'distance()': invalid 'p' argument"
 msgstr "distance(): p non valido"
 
-#: distance.c:229
+#: distance.c:230
 #, fuzzy
 msgid "'distance()': invalid distance"
 msgstr "distance(): distanza non valida"
@@ -315,7 +315,7 @@ msgstr "'m' deve essere di tipo list"
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" permette solo 2500 righe"
 
-#: line.c:115
+#: line.c:148
 #, fuzzy
 msgid "insufficient observations"
 msgstr "valori mancanti nelle ultime %d osservazioni"

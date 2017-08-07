@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-20 19:27+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:831 io.c:835
-#: io.c:841 io.c:842 io.c:1065 io.c:1066 io.c:1068 io.c:1069 io.c:1070
-#: io.c:1071 io.c:1072 io.c:1073 stubs.c:39 stubs.c:59 windows/dialogs.c:169
+#: io.c:841 io.c:842 io.c:1075 io.c:1076 io.c:1078 io.c:1079 io.c:1080
+#: io.c:1081 io.c:1082 io.c:1083 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
 #: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
@@ -32,7 +32,7 @@ msgstr ""
 msgid "invalid quote symbol set"
 msgstr ""
 
-#: io.c:356 io.c:851 io.c:1053
+#: io.c:356 io.c:851 io.c:1063
 msgid "cannot open the connection"
 msgstr ""
 
@@ -81,29 +81,38 @@ msgstr ""
 msgid "index out of range"
 msgstr ""
 
-#: io.c:1046
+#: io.c:1031
+#, c-format
+msgid "Problem closing connection:  %s"
+msgstr ""
+
+#: io.c:1033
+msgid "Problem closing connection"
+msgstr ""
+
+#: io.c:1056
 msgid "'file' argument is not a connection"
 msgstr ""
 
-#: io.c:1049
+#: io.c:1059
 msgid "cannot write to this connection"
 msgstr ""
 
-#: io.c:1079
+#: io.c:1089
 msgid "'dec' argument must be a single character"
 msgstr ""
 
-#: io.c:1105
+#: io.c:1115
 #, c-format
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr ""
 
-#: io.c:1136
+#: io.c:1146
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.c:1154
+#: io.c:1164
 msgid "corrupt matrix -- dims not not match length"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-20 19:26+0200\n"
+"POT-Creation-Date: 2017-08-07 20:45+0200\n"
 "PO-Revision-Date: 2012-03-06 21:34+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -93,7 +93,7 @@ msgstr "argument 'file' incorrect"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8257 devPS.c:8420 devPS.c:8423 devWindows.c:3649
+#: colors.c:551 devPS.c:8259 devPS.c:8422 devPS.c:8425 devWindows.c:3649
 #: devWindows.c:3653 devWindows.c:3661 devWindows.c:3672 devWindows.c:3678
 #: devWindows.c:3685 devWindows.c:3692 devWindows.c:3696
 #, fuzzy, c-format
@@ -166,8 +166,8 @@ msgstr "CharInfo ne peut être analysé"
 msgid "unknown AFM entity encountered"
 msgstr "entité AFM inconnue rencontrée"
 
-#: devPS.c:741 devPS.c:744 devPS.c:4429 devPS.c:7926 devPicTeX.c:485
-#: devPicTeX.c:487
+#: devPS.c:741 devPS.c:744 devPS.c:4428 devPS.c:7928 devPicTeX.c:466
+#: devPicTeX.c:468
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
 msgstr "argument chaîne de caractère incorrect dans '%s'"
@@ -177,7 +177,7 @@ msgstr "argument chaîne de caractère incorrect dans '%s'"
 msgid "font width unknown for character 0x%x"
 msgstr "largeur de police inconnue pour le caractère 0x%x"
 
-#: devPS.c:833 devPS.c:4309
+#: devPS.c:833 devPS.c:4308
 #, fuzzy, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr "encodage inconnu '%s' dans 'mbcsToSbcs'"
@@ -290,12 +290,12 @@ msgstr "Echec d'enregistrement de l'encodage du périphérique"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "L'objet .ps.prolog n'est pas un vecteur de mode caractère"
 
-#: devPS.c:2647 devPS.c:6424 devWindows.c:795
+#: devPS.c:2647 devPS.c:6426 devWindows.c:795
 #, fuzzy
 msgid "invalid line end"
 msgstr "Fin de ligne incorrecte"
 
-#: devPS.c:2666 devPS.c:6443 devWindows.c:808
+#: devPS.c:2666 devPS.c:6445 devWindows.c:808
 #, fuzzy
 msgid "invalid line join"
 msgstr "Jointure de ligne incorrecte"
@@ -305,34 +305,34 @@ msgstr "Jointure de ligne incorrecte"
 msgid "invalid line mitre"
 msgstr "Mitre (jointure pointue) de ligne incorrecte"
 
-#: devPS.c:2883 devPS.c:3779 devPS.c:4227 devPS.c:4254 devPS.c:5264
-#: devPS.c:7776 devPS.c:7821
+#: devPS.c:2883 devPS.c:3778 devPS.c:4226 devPS.c:4253 devPS.c:5263
+#: devPS.c:7778 devPS.c:7823
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "tentative d'utiliser la police incorrecte %d remplacée par police 1"
 
-#: devPS.c:3105 devPS.c:4729 devPS.c:5843 devWindows.c:1810 devWindows.c:1847
+#: devPS.c:3105 devPS.c:4728 devPS.c:5845 devWindows.c:1810 devWindows.c:1847
 #: devWindows.c:1877 devWindows.c:1909
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "nom de fichier trop long dans l'appel %s()"
 
-#: devPS.c:3111 devPS.c:4735 devPS.c:5849
+#: devPS.c:3111 devPS.c:4734 devPS.c:5851
 #, fuzzy, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr "problème d'allocation mémoire dans %s()"
 
-#: devPS.c:3128 devPS.c:5909
+#: devPS.c:3128 devPS.c:5911
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "chemin d'accès à l'encodage trop long dans %s()"
 
-#: devPS.c:3142 devPS.c:4775
+#: devPS.c:3142 devPS.c:4774
 #, fuzzy, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr "Echec de chargement du fichier d'encodage '%s'"
 
-#: devPS.c:3187 devPS.c:3250 devPS.c:5968 devPS.c:6023 devPS.c:7656
+#: devPS.c:3187 devPS.c:3250 devPS.c:5970 devPS.c:6025 devPS.c:7658
 #, fuzzy
 msgid "invalid font type"
 msgstr "Spécification de police incorrecte"
@@ -365,7 +365,7 @@ msgstr "postscript(print.it=TRUE) utilisé avec une commande d'impression vide"
 msgid "invalid page type '%s' (postscript)"
 msgstr "type de page incorrect '%s' (postscript)"
 
-#: devPS.c:3466 devPS.c:4579 devWindows.c:2344
+#: devPS.c:3466 devPS.c:4578 devWindows.c:2344
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -373,17 +373,22 @@ msgstr ""
 "la semi-transparence n'est pas supportée sur ce périphérique : reporté "
 "seulement une fois par page"
 
-#: devPS.c:3572 devPS.c:3581
-#, c-format
-msgid "cannot open 'postscript' pipe to '%s'"
+#: devPS.c:3572
+#, fuzzy
+msgid "cannot open 'postscript' pipe to <command>)"
 msgstr "impossible d'ouvrir une conduite 'postscript' vers '%s'"
 
-#: devPS.c:3592 devPS.c:4984 devPS.c:4995 devPS.c:7075 qdPDF.c:98
+#: devPS.c:3581
+#, fuzzy
+msgid "cannot open 'postscript' pipe to <file>"
+msgstr "impossible d'ouvrir une conduite 'postscript' vers '%s'"
+
+#: devPS.c:3591 devPS.c:4983 devPS.c:4994 devPS.c:7077 qdPDF.c:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "impossible d'ouvrir le fichier '%s'"
 
-#: devPS.c:3720 devPS.c:3735
+#: devPS.c:3719 devPS.c:3734
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -392,97 +397,97 @@ msgstr ""
 "erreur de la part de postscript() en exécutant :\n"
 "    %s"
 
-#: devPS.c:3767
+#: devPS.c:3766
 #, fuzzy, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "famille CID '%s' non incluse dans le périphérique PostScript"
 
-#: devPS.c:3785 devPS.c:3796 devPS.c:4234 devPS.c:4264 devPS.c:4369
+#: devPS.c:3784 devPS.c:3795 devPS.c:4233 devPS.c:4263 devPS.c:4368
 #, fuzzy, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "famille '%s' non incluse dans le périphérique PostScript"
 
-#: devPS.c:4319
+#: devPS.c:4318
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr ""
 "erreur de conversion de '%s' dans 'mbcsToSbcs' : le point est substitué pour "
 "<%02x>"
 
-#: devPS.c:4327
+#: devPS.c:4326
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr ""
 "erreur de conversion de '%s' dans 'mbcsToSbcs' : le point est substitué pour "
 "<%02x>"
 
-#: devPS.c:4397
+#: devPS.c:4396
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "erreur d'ouverture du convertisseur vers l'encodage '%s'"
 
-#: devPS.c:4415 devPS.c:5309 devPS.c:7911
+#: devPS.c:4414 devPS.c:5308 devPS.c:7913
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "erreur dans la conversion du texte vers l'encodage '%s'"
 
-#: devPS.c:4593
+#: devPS.c:4592
 #, fuzzy
 msgid "ran out of colors in 'xfig()' function"
 msgstr "trop de couleurs pour xfig()"
 
-#: devPS.c:4622
+#: devPS.c:4621
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "texture de lignes non implémentée %08x : utilise 'Dash-double-dotted'"
 
-#: devPS.c:4688
+#: devPS.c:4687
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "famille de police postscript '%s' inconnue, utilisation d'Helvetica"
 
-#: devPS.c:4760
+#: devPS.c:4759
 msgid "invalid foreground/background color (xfig)"
 msgstr "couleurs de premier/arrière plans incorrectes (xfig)"
 
-#: devPS.c:4793
+#: devPS.c:4792
 #, fuzzy
 msgid "only Type 1 fonts supported for XFig"
 msgstr "Seules les fontes Type 1 sont supportées pour XFig"
 
-#: devPS.c:4806
+#: devPS.c:4805
 #, fuzzy
 msgid "failed to initialise default XFig font"
 msgstr "Echec d'initialisation des polices XFig par défaut"
 
-#: devPS.c:4843
+#: devPS.c:4842
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "type de page '%s' incorrect (xfig)"
 
-#: devPS.c:4851
+#: devPS.c:4850
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s, onefile=FALSE) ne retournera que le dernier graphe"
 
-#: devPS.c:4976
+#: devPS.c:4975
 msgid "empty file name"
 msgstr "nom de fichier vide"
 
-#: devPS.c:5041 devPS.c:5093 devPS.c:5671 devPS.c:5715 devPS.c:7135
+#: devPS.c:5040 devPS.c:5092 devPS.c:5670 devPS.c:5714 devPS.c:7137
 msgid "write failed"
 msgstr "écriture non exécutée"
 
-#: devPS.c:5298
+#: devPS.c:5297
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "Impossible d'utiliser l'encodage '%s'"
 
-#: devPS.c:5559 devPS.c:5562
+#: devPS.c:5558 devPS.c:5561
 msgid "failed to increase 'maxRaster'"
 msgstr "Echec d'augmentation de 'maxRaster'"
 
-#: devPS.c:5574
+#: devPS.c:5573
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr "Impossible d'allouer une image en mode pixel"
@@ -492,77 +497,77 @@ msgstr "Impossible d'allouer une image en mode pixel"
 msgid "corrupt loaded encodings;  font not added"
 msgstr "Encodages chargés corrompus ; police non ajoutée"
 
-#: devPS.c:5784
+#: devPS.c:5785
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr ""
 "Echec d'enregistrement de l'encodage du périphérique ; police non ajoutée"
 
-#: devPS.c:5895 devPS.c:6297 devPS.c:6934
+#: devPS.c:5897 devPS.c:6299 devPS.c:6936
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr "la version du PDF est augmentée à 1.2"
 
-#: devPS.c:5925
+#: devPS.c:5927
 msgid "failed to load default encoding"
 msgstr "Echec de chargement du fichier d'encodage par défaut"
 
-#: devPS.c:5991
+#: devPS.c:5993
 #, fuzzy
 msgid "failed to initialise default PDF font"
 msgstr "Echec d'initialisation des polices PDF par défaut"
 
-#: devPS.c:6046
+#: devPS.c:6048
 #, fuzzy
 msgid "failed to initialise additional PDF fonts"
 msgstr "Echec d'initialisation des polices PDF supplémentaires"
 
-#: devPS.c:6059
+#: devPS.c:6061
 msgid "failed to allocate rasters"
 msgstr "Echec d'allocation d'images en mode pixel"
 
-#: devPS.c:6066
+#: devPS.c:6068
 msgid "failed to allocate masks"
 msgstr "Echec d'allocation pour des masques"
 
-#: devPS.c:6129
+#: devPS.c:6131
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "type de papier '%s' incorrect (pdf)"
 
-#: devPS.c:6153
+#: devPS.c:6155
 msgid "invalid foreground/background color (pdf)"
 msgstr "couleurs de premier/arrière plans incorrectes (pdf)"
 
-#: devPS.c:6272
+#: devPS.c:6274
 #, fuzzy
 msgid "invalid 'alpha' value in PDF"
 msgstr "Valeur d'alpha incorrecte dans PDF"
 
-#: devPS.c:6348 devPS.c:6395
+#: devPS.c:6350 devPS.c:6397
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "'colormodel' inconnu, utilisation de 'rgb'"
 
-#: devPS.c:6589
+#: devPS.c:6591
 #, fuzzy
 msgid "failed to load sRGB colorspace file"
 msgstr "Echec de chargement de l'espace de couleur sRGB"
 
-#: devPS.c:6853
+#: devPS.c:6855
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Encodage corrompus dans le périphérique PDF"
 
-#: devPS.c:7059
-#, c-format
-msgid "cannot open 'pdf' pipe to '%s'"
+#: devPS.c:7061
+#, fuzzy
+msgid "cannot open 'pdf' pipe  | <cmd>"
 msgstr "impossible d'ouvrir une conduite 'pdf' vers '%s'"
 
-#: devPS.c:7065
+#: devPS.c:7067
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" implique 'onefile = TRUE'"
 
-#: devPS.c:7208
+#: devPS.c:7210
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -571,35 +576,35 @@ msgstr ""
 "impossible d'ouvrir le fichier en argument de 'pdf' '%s'\n"
 "  fermez le périphérique PDF"
 
-#: devPS.c:7227
+#: devPS.c:7229
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.c:7681 devPS.c:8043 devPS.c:8090
+#: devPS.c:7683 devPS.c:8045 devPS.c:8092
 #, fuzzy
 msgid "failed to find or load PDF font"
 msgstr "Impossible de trouver ou de charger la police PDF"
 
-#: devPS.c:7865 devPS.c:7998
+#: devPS.c:7867 devPS.c:8000
 #, fuzzy
 msgid "failed to find or load PDF CID font"
 msgstr "Impossible de trouver ou de charger la police PDF CID"
 
-#: devPS.c:8229 devPS.c:8233 devPS.c:8251 devPS.c:8394 devPS.c:8398
-#: devPS.c:8410
+#: devPS.c:8231 devPS.c:8235 devPS.c:8253 devPS.c:8396 devPS.c:8400
+#: devPS.c:8412
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "paramètre 'fonts' incorrect dans %s"
 
-#: devPS.c:8270 devPS.c:8337 devPS.c:8437
+#: devPS.c:8272 devPS.c:8339 devPS.c:8439
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr "impossible de démarrer le périphérique %s()"
 
-#: devPicTeX.c:741 devWindows.c:3737
+#: devPicTeX.c:737 devWindows.c:3737
 #, c-format
 msgid "unable to start %s() device"
 msgstr "impossible de démarrer le périphérique %s()"

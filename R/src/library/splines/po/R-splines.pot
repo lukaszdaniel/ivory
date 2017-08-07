@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: splines 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,6 +80,13 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("currently implemented only for cubic splines")
+
+msgid "currently implemented only for cubic splines"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
 #. R/splineClasses.R: stop("empty 'derivs' argument")
 
 msgid "empty 'derivs' argument"
@@ -123,6 +130,13 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
+
+msgid "must have at least 'ord'=%d points"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 
 msgid "polynomial representation of spline"
@@ -151,7 +165,7 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
-#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - degree], "outer.ok = TRUE", domain = "R-splines")
 
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr ""

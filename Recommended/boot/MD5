@@ -29,7 +29,7 @@ b26e9ac6f0af87f63ad47df97c0bbc9f *man/k3.linear.Rd
 c2e632660f6fd8a9b61d3c774436d834 *man/nuclear.Rd
 754e4c70902000d799c3bfbf6ee0e5d9 *man/cane.Rd
 eb986c3263baeaeb9ff867964c297249 *man/saddle.distn.Rd
-56dfd17e0b58f5b89ea876f64889473a *man/boot.Rd
+fc35253ffbea816cafa819e6df02abeb *man/boot.Rd
 eea8936771bb17c1fc7b87b4af51c46f *man/remission.Rd
 31134456f3f3105174fca2291431aa79 *man/fir.Rd
 d4a6bfc12756bb6bf576e9c3d913abf4 *man/envelope.Rd
@@ -48,7 +48,7 @@ a51320555e514596e7daa274dd19d7ac *man/tsboot.Rd
 956d104f3dfc94de7a01d63c4ede6869 *man/imp.weights.Rd
 46e101fae60869b1db42ebd19eed6b24 *man/polar.Rd
 a00a318f35d0e660725fc5ee921fd5d9 *man/cav.Rd
-10c9b8344a65d4680db3d2faf648ff1f *man/abc.ci.Rd
+321fa746ad4232b89044b526ea5c3b96 *man/abc.ci.Rd
 fdfaee6a4ccc168ca3e859f38c651cac *man/catsM.Rd
 79e800e09d75d9ca045cb5e8e72a4d39 *man/dogs.Rd
 7e2dff3ff232fd6cefe3bbabfbed70fd *man/acme.Rd
@@ -68,7 +68,7 @@ f57945e898eb78bd561996c48d771178 *man/breslow.Rd
 3fde927ffc636d5856e48210703cacc0 *man/hirose.Rd
 06163244dd842e5898d894f08fd0658e *man/tau.Rd
 33c4ae265b37dc295fc5f10c582f0330 *man/cum3.Rd
-19954d3140135902dfb2b6570db343cd *man/print.boot.Rd
+5d18e11507461aef8d035372eb507836 *man/print.boot.Rd
 b673cbbf7c86182dc9f823dcb7ff4062 *man/wool.Rd
 5b470a1e949bc2e15530c9683cbb1404 *man/boot-practicals.Rd
 a3a144b86a8ce44f946177789668db2f *man/exp.tilt.Rd
@@ -87,8 +87,8 @@ a0d5e8c4e705d42ac0490f121ea867b8 *man/Imp.Estimates.Rd
 09f1f6270ee82a18bd544006290b3267 *man/sunspot.Rd
 11f465056ac27fe90b765b879339fb51 *man/EEF.profile.Rd
 b16c33994e8ac8ec02b2e33b4588e279 *man/saddle.distn.object.Rd
-68cbf5d8beeb3f3c540469e3696b2a1f *ChangeLog
-89f0582289a96156e5e0ce4c3f01d879 *DESCRIPTION
+0a6d68ca197d64f8b74e8963b848416c *ChangeLog
+36aaa36590efbe36b6f5fe722bf9c4ad *DESCRIPTION
 f54f247c3d01528762d614ed3b1b6156 *po/R-fr.po
 80d1628c5b5da69a425410a1bc4911c8 *po/R-ko.po
 ff099806c027496ed3bea85d6c78c094 *po/R-de.po
@@ -106,7 +106,7 @@ f977351e4742b8b36477a7288a4467b9 *inst/po/ko/LC_MESSAGES/R-boot.mo
 6e887574f4c46cddf29707098ab3fccf *inst/bd.q
 c707bff6515de12a08d4d1a1cc385290 *tests/Examples/boot-Ex.Rout.save
 167a3d2551651549fa966891802002d5 *R/bootpracs.q
-04b5d2315a91013e372b83ebb5a5593e *R/bootfuns.q
+591c70055cc432c50fbff8c9fc8a2cfa *R/bootfuns.q
 5a3e04afacf5edf673d0b11aef8fe760 *data/remission.rda
 21f7485781fa5fec0a15c06c26f5eebd *data/survival.rda
 4cd11bda40ed2cbc807b2a4670f738f5 *data/claridge.rda

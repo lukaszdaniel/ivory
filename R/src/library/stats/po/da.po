@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -173,7 +173,7 @@ msgstr "behandler ikkebegrænsende værdier som NA"
 msgid "'distance()': invalid 'p' argument"
 msgstr "distance(): ugyldig p"
 
-#: distance.c:229
+#: distance.c:230
 #, fuzzy
 msgid "'distance()': invalid distance"
 msgstr "distance(): ugyldig afstand"
@@ -316,7 +316,7 @@ msgstr "'m' skal være en liste"
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "kun 2.500 rækker er tilladt for sm.method=\"spline\""
 
-#: line.c:115
+#: line.c:148
 #, fuzzy
 msgid "insufficient observations"
 msgstr "manglende værdi i sidste %d observationer"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 20:51\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1673,6 +1673,16 @@ msgstr ""
 "Użyj dla osoby utrzymującej pakiet, która zebrała kod (potencjalnie\n"
 "napisany w różnych językach) ale nie poczyniła żadnych istotnych\n"
 "zmian w pakiecie."
+
+#. R/sysdata.R: gettext("Use for persons or organizations responsible for reviewing\n(parts of) the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+#, fuzzy
+msgid ""
+"Use for persons or organizations responsible for reviewing\n"
+"(parts of) the package."
+msgstr ""
+"Użyj dla osób lub organizacji, które pozyskały wsparcie finansowe\n"
+"w celu dostarczenia pakietu"
 
 #. R/sysdata.R: gettext("Use for persons or organizations that furnished financial support\nfor the development of the package",     domain = "R-utils")
 #: R/sysdata.R:0

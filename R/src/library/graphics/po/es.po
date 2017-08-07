@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 11:23+0200\n"
+"POT-Creation-Date: 2017-08-07 20:45+0200\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -80,7 +80,7 @@ msgstr "límites de ejes no finitos [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "estilo de ejes \"%c\" ignorado"
 
-#: graphics.c:2209 graphics.c:2606
+#: graphics.c:2209 graphics.c:2607
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Ningún dispositivo gráfico está activo"
@@ -93,25 +93,25 @@ msgstr "plot.new no ha sido llamado aún"
 msgid "invalid graphics state"
 msgstr "estado gráfico inválido"
 
-#: graphics.c:2556
+#: graphics.c:2557
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3065
+#: graphics.c:3066
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "vector de argumento cero tiene un ángulo indeterminado y se saltea"
 
-#: graphics.c:3146
+#: graphics.c:3147
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "parámetro inválido par(\"bty\") = '%c'; no box() desechado"
 
-#: graphics.c:3163 par.c:1121
+#: graphics.c:3164 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "el parámetro pasado a par() es inválido"
 
-#: graphics.c:3408
+#: graphics.c:3409
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "\t\"Información métrica no disponible para este dispositivo"

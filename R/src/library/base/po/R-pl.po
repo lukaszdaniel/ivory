@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-05-03 21:02\n"
+"POT-Creation-Date: 2017-08-07 20:45\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1504,11 +1504,6 @@ msgstr ""
 "Nie znaleziono ogólnej funkcji %s odpowiadającej zażądanym zaimportowanym "
 "metodom z pakietu %s podczas ładowania %s (uszkodzone eksporty?)"
 
-#. R/namespace.R: gettextf("No methods were found in package %s for requests: %s", sQuote(pkg), paste(vars[is.na(match(vars,     allFuns))], collapse = ", "))
-#: R/namespace.R:0
-msgid "No methods were found in package %s for requests: %s"
-msgstr "Nie znaleziono metod w pakiecie %s dla żądań: %s"
-
 #. R/traceback.R: gettext("No traceback available", domain = "R-base")
 #: R/traceback.R:0
 msgid "No traceback available"
@@ -1951,8 +1946,9 @@ msgstr "nie można rozdzielić komunikatu wiadomości"
 msgid "character string is not in a standard unambiguous format"
 msgstr "łańcuch tekstowy nie jest w standardowym jednoznacznym formacie"
 
-#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
-#: R/datetime.R:0
+#. R/dates.R: gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base")
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base")
+#: R/dates.R:0 R/datetime.R:0
 msgid "class %s of length 0"
 msgstr "klasa %s o długości 0"
 
@@ -2319,7 +2315,7 @@ msgstr "niepoprawny argument 'compress': %s"
 msgid "invalid 'dimnames' given for data frame"
 msgstr "niepoprawne 'dimnames' dla podanej ramki danych"
 
-#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL)
+#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab, length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "nieprawidłowe 'labels'; długość %d powinna wynosić 1 lub %d"
@@ -3047,11 +3043,6 @@ msgstr ""
 "zastępowanie poprzedniego importu przez %s podczas ładowania przestrzeni "
 "nazw %s"
 
-#. R/namespace.R: gettextf("requested methods were not found in environment/package %s: %s", sQuote(pkg),     paste(vars[is.na(match(vars, allFuns))], collapse = ", "))
-#: R/namespace.R:0
-msgid "requested methods were not found in environment/package %s: %s"
-msgstr "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
-
 #. R/dataframe.R: stop("row names contain missing values")
 #. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
@@ -3379,6 +3370,15 @@ msgstr[2] ""
 "W poleceniu '%s':\n"
 " dodatkowe argumenty %s zostaną odrzucone"
 
+#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s", "No methods were found in package %s for requests: %s",     domain = "R-base")
+#: R/namespace.R:0
+#, fuzzy
+msgid "No methods were found in package %s for request: %s"
+msgid_plural "No methods were found in package %s for requests: %s"
+msgstr[0] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
+msgstr[1] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
+msgstr[2] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3612,6 +3612,15 @@ msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] "zamiana ma %d wiersz, dane mają %d"
 msgstr[1] "zamiana ma %d wiersze, dane mają %d"
 msgstr[2] "zamiana ma %d wierszy, dane mają %d"
+
+#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s",     "requested methods were not found in environment/package %s: %s", domain = "R-base")
+#: R/namespace.R:0
+#, fuzzy
+msgid "requested method was not found in environment/package %s: %s"
+msgid_plural "requested methods were not found in environment/package %s: %s"
+msgstr[0] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
+msgstr[1] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
+msgstr[2] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0

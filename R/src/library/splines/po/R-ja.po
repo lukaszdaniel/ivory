@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 21:37\n"
+"POT-Creation-Date: 2017-08-07 20:46\n"
 "PO-Revision-Date: 2015-01-17 15:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -65,6 +65,11 @@ msgstr ""
 msgid "bSpline representation of spline for %s"
 msgstr ""
 
+#. R/splineClasses.R: stop("currently implemented only for cubic splines")
+#: R/splineClasses.R:0
+msgid "currently implemented only for cubic splines"
+msgstr ""
+
 #. R/splineClasses.R: stop("empty 'derivs' argument")
 #: R/splineClasses.R:0
 msgid "empty 'derivs' argument"
@@ -97,6 +102,12 @@ msgstr " 'x' と 'y' の長さは同じでなければなりません "
 msgid "lengths of 'x' and 'y' must match"
 msgstr " 'x' と 'y' の長さを合わせる必要があります "
 
+#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "must have at least 'ord'=%d points"
+msgstr " 少なくとも 'ord' 個のノットを持たなければなりません "
+
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -119,7 +130,7 @@ msgstr ""
 msgid "spline must be monotone"
 msgstr " スプラインは単調でなければなりません "
 
-#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - degree], "outer.ok = TRUE", domain = "R-splines")
 #: R/splineClasses.R:0
 #, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
@@ -153,9 +164,6 @@ msgstr[0] " 少なくとも 2*ord -1 (=%d) 個のノット必要です "
 
 #~ msgid "'ord' must be >= 2"
 #~ msgstr " 'ord' は 2 以上でなければなりません "
-
-#~ msgid "must have at least 'ord' knots"
-#~ msgstr " 少なくとも 'ord' 個のノットを持たなければなりません "
 
 #, fuzzy
 #~ msgid "'%s' was too small; have used %d"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 10:09+0200\n"
+"POT-Creation-Date: 2017-08-07 20:46+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -171,7 +171,7 @@ msgstr "valeurs infinies traitées comme NA"
 msgid "'distance()': invalid 'p' argument"
 msgstr "distance() : p incorrect"
 
-#: distance.c:229
+#: distance.c:230
 #, fuzzy
 msgid "'distance()': invalid distance"
 msgstr "distance() : distance incorrecte"
@@ -316,7 +316,7 @@ msgstr "'m' doit être une liste"
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "seulement 2500 lignes autorisées pour sm.method=\"spline\""
 
-#: line.c:115
+#: line.c:148
 #, fuzzy
 msgid "insufficient observations"
 msgstr "valeur manquante dans les %d dernières observations"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-08-07 20:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,6 +72,13 @@ msgstr ""
 #. R/boxplot.R: gettextf("'at' must have same length as 'z$n', i.e. %d", n)
 
 msgid "'at' must have same length as 'z$n', i.e. %d"
+msgstr ""
+
+
+#: R/hist.R: 0
+#. R/hist.R: gettextf("'breaks = %g' is too large and set to 1e6", breaks)
+
+msgid "'breaks = %g' is too large and set to 1e6"
 msgstr ""
 
 
@@ -168,6 +175,13 @@ msgstr ""
 #. R/legend.R: stop("'legend' argument is of length 0")
 
 msgid "'legend' argument is of length 0"
+msgstr ""
+
+
+#: R/arrows.R: 0
+#. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
+
+msgid "'length', 'angle', or 'code' greater than length 1; values after the first are ignored"
 msgstr ""
 
 
