@@ -25,10 +25,11 @@
 #include "localization.h"
 
 #include <math.h>
-#include <Rmath.h>		/* fmax2, imin2, imax2 */
+#include <Rmath.h>		/* fmax2 */
 #include <R_ext/Applic.h>	/* prototypes for lowess and clowess */
 #include <R_ext/Boolean.h>
 #include <R_ext/Utils.h>	/* rPsort() */
+#include <R_ext/Minmax.h>
 #ifdef DEBUG_lowess
 # include <R_ext/Print.h>
 #endif
@@ -147,7 +148,7 @@ void clowess(double *x, double *y, int n,
 
 
     /* at least two, at most n points */
-    ns = imax2(2, imin2(n, (int)(f*n + 1e-7)));
+    ns = max(2, min(n, (int)(f*n + 1e-7)));
 #ifdef DEBUG_lowess
     REprintf("lowess(): ns = %d\n", ns);
 #endif
@@ -220,7 +221,7 @@ void clowess(double *x, double *y, int n,
 		    last = i;
 		}
 	    }
-	    i = imax2(last+1, i-1);
+	    i = max(last+1, i-1);
 	    if (last >= n)
 		break;
 	}

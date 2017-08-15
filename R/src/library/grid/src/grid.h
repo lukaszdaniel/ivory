@@ -25,6 +25,7 @@
 
 #include <R_ext/Constants.h>
 #include <R_ext/GraphicsEngine.h>
+#include <R_ext/Minmax.h>
 
 #include <Rinternals.h>
 

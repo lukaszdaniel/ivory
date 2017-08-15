@@ -28,7 +28,7 @@
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
-#include <Rmath.h> // for Rexp10, imax2
+#include <Rmath.h> // for Rexp10
 #include <R_ext/Minmax.h>
 
 /* used in graphics and grid */

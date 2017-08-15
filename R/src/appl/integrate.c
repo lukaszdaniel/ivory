@@ -29,8 +29,9 @@
 
 #include <math.h>
 #include <float.h>
-#include <Rmath.h> /* for fmax2, fmin2, imin2 */
+#include <Rmath.h> /* for fmax2, fmin2 */
 #include <R_ext/Applic.h> /* exporting the API , particularly */
+#include <R_ext/Minmax.h>
 /*--- typedef void integr_fn(double *x, int n, void *ex) ---
  * vectorizing function   f(x[1:n], ...) -> x[]  {overwriting x[]}.
  * Vectorization can be used to speed up the integrand
@@ -1628,7 +1629,7 @@ static void rdqk15i(integr_fn f, void *ex,
 /* ***first executable statement  dqk15i */
     epmach = DBL_EPSILON;
     uflow = DBL_MIN;
-    dinf = (double) imin2(1, *inf);
+    dinf = (double) min(1, *inf);
 
     centr = (*a + *b) * .5;
     hlgth = (*b - *a) * .5;

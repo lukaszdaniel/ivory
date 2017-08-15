@@ -21,6 +21,7 @@
 
 #include <R.h>
 #include <Rmath.h>
+#include <R_ext/Minmax.h>
 
 static void
 int_d2x2xk(int K, double *m, double *n, double *t, double *d)
@@ -33,8 +34,8 @@ int_d2x2xk(int K, double *m, double *n, double *t, double *d)
     c[0] = (double *) R_alloc(1, sizeof(double));
     c[0][0] = 1;
     for(i = 0; i < K; i++) {
-	y = imax2(0,  (int)(*t - *n));
-	z = imin2((int)*m, (int)*t);
+	y = max(0,  (int)(*t - *n));
+	z = min((int)*m, (int)*t);
 	c[i + 1] = (double *) R_alloc(l + z - y + 1, sizeof(double));
 	for(j = 0; j <= l + z - y; j++) c[i + 1][j] = 0;
 	for(j = 0; j <= z - y; j++) {

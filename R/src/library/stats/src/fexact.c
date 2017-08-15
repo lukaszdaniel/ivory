@@ -34,6 +34,7 @@
 #include <limits.h>
 #include <math.h>
 #include <R.h>
+#include <R_ext/Minmax.h>
 #include "localization.h"
 
 static void f2xact(int nrow, int ncol, int *table, int ldtabl,
@@ -238,9 +239,9 @@ fexact(int *nrow, int *ncol, int *table, int *ldtabl,
     i3a = iwork(iwkmax, &iwkpt, nco, i_int);
     i3b = iwork(iwkmax, &iwkpt, nro, i_int);
     i3c = iwork(iwkmax, &iwkpt, nro, i_int);
-    ikh = imax2(k * 5 + (kk << 1), nco * 7 + 800);
+    ikh = max(k * 5 + (kk << 1), nco * 7 + 800);
     iiwk= iwork(iwkmax, &iwkpt, ikh, i_int);
-    ikh = imax2(nco + 401, k);
+    ikh = max(nco + 401, k);
     irwk= iwork(iwkmax, &iwkpt, ikh, i_real);
 
     /* NOTE:
@@ -567,7 +568,7 @@ Outer_Loop:
     /* Generate the first daughter */
     do {
 	--kd;
-	ntot = imin2(n, iro[kd]);
+	ntot = min(n, iro[kd]);
 	idif[kd] = ntot;
 	if (idif[kmax] == 0)
 	    --kmax;
@@ -1013,7 +1014,7 @@ LoopNode: /* Generate a node */
     } else { /* Column marginals are new node */
 
 	for (i = 1; i <= nco; ++i)
-	    it[i] = imax2(ico[i] - lb[i], 0);
+	    it[i] = max(ico[i] - lb[i], 0);
 
 	/* Sort column marginals it[] : */
 	if (nco == 2) {
@@ -1237,7 +1238,7 @@ f4xact(int nrow, int *irow, int ncol, int *icol, double dspt,
 
 	irt = irstk[i + istk * nrow];
 	ict = icstk[j + istk * ncol];
-	y += fact[imin2(irt, ict)];
+	y += fact[min(irt, ict)];
 	if (irt == ict) {
 	    --nro;
 	    --nco;
@@ -1608,7 +1609,7 @@ f7xact(int nrow, int *imax, int *idif, int *k, int *ks, int *iflag)
 
 	do {
 	    --(*k);
-	    m = imin2(mm, imax[*k]);
+	    m = min(mm, imax[*k]);
 	    idif[*k] = m;
 	    mm -= m;
 	} while (mm > 0 && *k != 1);

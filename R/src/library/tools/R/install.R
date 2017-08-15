@@ -713,7 +713,7 @@
                     message("  running 'src/Makefile.win' ...", domain = "R-tools")
                     res <- system(paste("make --no-print-directory",
                                         paste("-f", shQuote(makefiles), collapse = " ")))
-                    if (res == 0) shlib_install(instdir, rarch)
+                    if (res == 0L) shlib_install(instdir, rarch)
                     else has_error <- TRUE
                 } else { ## no src/Makefile.win
                     srcs <- dir(pattern = "\\.([cfmM]|cc|cpp|f90|f95|mm)$",
@@ -789,7 +789,7 @@
                                    makevars_user())
                     res <- system(paste(MAKE,
                                         paste("-f", shQuote(makefiles), collapse = " ")))
-                    if (res == 0) shlib_install(instdir, rarch)
+                    if (res == 0L) shlib_install(instdir, rarch)
                     else has_error <- TRUE
                     setwd(owd)
                 } else { ## no src/Makefile
@@ -847,8 +847,10 @@
             if (length(dirs)) {
                 descfile <- file.path(instdir, "DESCRIPTION")
                 olddesc <- readLines(descfile, warn = FALSE)
-                olddesc <- grep("^Archs:", olddesc, invert = TRUE, value = TRUE, useBytes = TRUE)
-                newdesc <- c(olddesc, paste("Archs:", paste(dirs, collapse = ", ")))
+                olddesc <- filtergrep("^Archs:", olddesc, useBytes = TRUE)
+                newdesc <- c(olddesc,
+                             paste("Archs:", paste(dirs, collapse = ", "))
+                             )
                 writeLines(newdesc, descfile, useBytes = TRUE)
             }
         } else if (multiarch) {   # end of src dir
@@ -1013,7 +1015,7 @@
             length(dir("inst", all.files = TRUE)) > 2L) {
 	    starsmsg(stars, gettextf("'%s' directory", "inst"))
             i_dirs <- list.dirs("inst")[-1L] # not inst itself
-            i_dirs <- grep(.vc_dir_names_re, i_dirs, invert = TRUE, value = TRUE)
+            i_dirs <- filtergrep(.vc_dir_names_re, i_dirs)
             ## This ignores any restrictive permissions in the source
             ## tree, since the later .Call(C_dirchmod) call will
             ## fix the permissions.
@@ -1025,23 +1027,22 @@
                 ignore[nzchar(ignore)]
             } else character()
             for(e in ignore)
-                i_dirs <- grep(e, i_dirs, perl = TRUE, invert = TRUE, value = TRUE, ignore.case = TRUE)
-            lapply(gsub("^inst", instdir, i_dirs), function(p) dir.create(p, FALSE, TRUE)) # be paranoid
-            i_files <- list.files("inst", all.files = TRUE, full.names = TRUE, recursive = TRUE)
-            i_files <- grep(.vc_dir_names_re, i_files, invert = TRUE, value = TRUE)
+                i_dirs <- filtergrep(e, i_dirs, perl = TRUE, ignore.case = TRUE)
+            lapply(gsub("^inst", instdir, i_dirs),
+                   function(p) dir.create(p, FALSE, TRUE)) # be paranoid
+            i_files <- list.files("inst", all.files = TRUE,
+                                  full.names = TRUE, recursive = TRUE)
+            i_files <- filtergrep(.vc_dir_names_re, i_files)
             for(e in ignore)
-                i_files <- grep(e, i_files, perl = TRUE, invert = TRUE,
-                                value = TRUE, ignore.case = TRUE)
+                i_files <- filtergrep(e, i_files, perl = TRUE, ignore.case = TRUE)
             i_files <- i_files %w/o% c("inst/doc/Rplots.pdf",
                                        "inst/doc/Rplots.ps")
-            i_files <- grep("inst/doc/.*[.](log|aux|bbl|blg|dvi)$",
-                            i_files, perl = TRUE, invert = TRUE,
-                            value = TRUE, ignore.case = TRUE)
+            i_files <- filtergrep("inst/doc/.*[.](log|aux|bbl|blg|dvi)$",
+                                  i_files, perl = TRUE, ignore.case = TRUE)
             ## Temporary kludge
             if (!dir.exists("vignettes") && ! pkgname %in% c("RCurl"))
-                i_files <- grep("inst/doc/.*[.](png|jpg|jpeg|gif|ps|eps)$",
-                                i_files, perl = TRUE, invert = TRUE,
-                                value = TRUE, ignore.case = TRUE)
+                i_files <- filtergrep("inst/doc/.*[.](png|jpg|jpeg|gif|ps|eps)$",
+                                      i_files, perl = TRUE, ignore.case = TRUE)
             i_files <- i_files %w/o% "Makefile"
             i2_files <- gsub("^inst", instdir, i_files)
             file.copy(i_files, i2_files)
@@ -1217,7 +1218,7 @@
         }
     }
 
-    options(showErrorCalls=FALSE)
+    options(showErrorCalls = FALSE)
     pkgs <- character()
     if (is.null(args)) {
         args <- commandArgs(TRUE)
@@ -1543,7 +1544,7 @@
             res <- try(dir.create(fn, showWarnings = FALSE))
             if (inherits(res, "try-error") || !res) ok <- FALSE
             else unlink(fn, recursive = TRUE)
-        } else ok <- file.access(lib, 2L) == 0
+        } else ok <- file.access(lib, 2L) == 0L
     }
     if (!ok)
         stop(gettextf("ERROR: no permission to install to directory %s", sQuote(lib)), call. = FALSE)

@@ -32,6 +32,7 @@
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
+#include <R_ext/Minmax.h>
 
 #include <Fileio.h>
 #include <stdio.h>
@@ -49,12 +50,6 @@
 #include "devWindows.h"
 #define DEVWINDOWS 1
 #include "grDevices.h"
-
-/* there are conflicts with Rmath.h */
-#define imax2		Rf_imax2
-#define imin2		Rf_imin2
-int	imax2(int, int);
-int	imin2(int, int);
 
 #include "localization.h"
 
@@ -2646,10 +2641,10 @@ static void GA_Polygon(int n, double *x, double *y,
 	devy = y[i];
 	points[i].x = (int) (devx);
 	points[i].y = (int) (devy);
-	mx0 = imin2(mx0, points[i].x);
-	mx1 = imax2(mx1, points[i].x);
-	my0 = imin2(my0, points[i].y);
-	my1 = imax2(my1, points[i].y);
+	mx0 = min(mx0, points[i].x);
+	mx1 = max(mx1, points[i].x);
+	my0 = min(my0, points[i].y);
+	my1 = max(my1, points[i].y);
     }
     r.x = mx0; r.width = mx1 - mx0;
     r.y = my0; r.height = my1 - my0;
@@ -2718,10 +2713,10 @@ static void GA_Path(double *x, double *y,
 	devy = y[i];
 	points[i].x = (int) (devx);
 	points[i].y = (int) (devy);
-	mx0 = imin2(mx0, points[i].x);
-	mx1 = imax2(mx1, points[i].x);
-	my0 = imin2(my0, points[i].y);
-	my1 = imax2(my1, points[i].y);
+	mx0 = min(mx0, points[i].x);
+	mx1 = max(mx1, points[i].x);
+	my0 = min(my0, points[i].y);
+	my1 = max(my1, points[i].y);
     }
     r.x = mx0; r.width = mx1 - mx0;
     r.y = my0; r.height = my1 - my0;

@@ -26,8 +26,9 @@
 #include <stddef.h> /* for size_t */
 #include <stdlib.h> /* for abs */
 #include <math.h>
-#include <Rmath.h> /* for imax2(.),..*/
+#include <Rmath.h>
 #include <R_ext/Applic.h>
+#include <R_ext/Minmax.h>
 
 /*  Fast Fourier Transform
  *
@@ -181,7 +182,7 @@ static void fftmx(double *a, double *b, int ntot, int n, int nspan, int isn,
     i = 0;
     jf = 0;
     maxf = nfac[m - kt];
-    if(kt > 0) maxf = imax2(nfac[kt],maxf);
+    if(kt > 0) maxf = max(nfac[kt],maxf);
 
 	/* compute fourier transform */
 
@@ -216,7 +217,7 @@ L_start:
 L60:
     c1 = 1.0 - cd;
     s1 = sd;
-    mm = imin2(k1/2,klim);
+    mm = min(k1/2,klim);
     goto L80;
 
 L70:
@@ -260,7 +261,7 @@ L80:
     s1 = ((kk-1)/jc)*dr*rad;
     c1 = cos(s1);
     s1 = sin(s1);
-    mm = imin2(k1/2,mm+klim);
+    mm = min(k1/2,mm+klim);
     goto L80;
 
 /* transform for factor of 3 (optional code) */
@@ -297,7 +298,7 @@ L110:
 L120:
     c1 = 1.0;
     s1 = 0;
-    mm = imin2(kspan,klim);
+    mm = min(kspan,klim);
     goto L150;
 L130:
     c2 = c1 - (cd*c1+sd*s1);
@@ -378,7 +379,7 @@ L200:
     s1 = ((kk-1)/jc)*dr*rad;
     c1 = cos(s1);
     s1 = sin(s1);
-    mm = imin2(kspan,mm+klim);
+    mm = min(kspan,mm+klim);
     goto L140;
 
 /* transform for factor of 5 (optional code) */
@@ -513,7 +514,7 @@ L290:
 L300:
     c2 = 1.0 - cd;
     s1 = sd;
-    mm = imin2(kspan,klim);
+    mm = min(kspan,klim);
 
     do { /* L320: */
 	c1 = c2;
@@ -552,7 +553,7 @@ L300:
 	s1 = ((kk-1)/jc)*dr*rad;
 	c2 = cos(s1);
 	s1 = sin(s1);
-	mm = imin2(kspan,mm+klim);
+	mm = min(kspan,mm+klim);
     } while(1);
 
 /*------------------------------------------------------------*/
@@ -685,7 +686,7 @@ L_ord:
     jj = jc;
 
 L520:
-    kspan = imin2(jj,maxf);
+    kspan = min(jj,maxf);
     jj -= kspan;
     k = np[j];
     kk = jc*k + i + jj;
@@ -808,7 +809,7 @@ void fft_factor(int n, int *pmaxf, int *pmaxp)
 	/* all square factors out now, but k >= 5 still */
 
 	kt = m_fac;
-	maxp = imax2(kt+kt+2, k-1);
+	maxp = max(kt+kt+2, k-1);
 	j = 2;
 	do {
 	    if (k % j == 0) {
@@ -836,9 +837,9 @@ void fft_factor(int n, int *pmaxf, int *pmaxp)
 	}
 	maxf = nfac[m_fac-kt-1];
 /* The last squared factor is not necessarily the largest PR#1429 */
-	if (kt > 0) maxf = imax2(nfac[kt-1], maxf);
-	if (kt > 1) maxf = imax2(nfac[kt-2], maxf);
-	if (kt > 2) maxf = imax2(nfac[kt-3], maxf);
+	if (kt > 0) maxf = max(nfac[kt-1], maxf);
+	if (kt > 1) maxf = max(nfac[kt-2], maxf);
+	if (kt > 2) maxf = max(nfac[kt-3], maxf);
     }
     *pmaxf = maxf;
     *pmaxp = maxp;

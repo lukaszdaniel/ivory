@@ -351,7 +351,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
             PROTECT(snapshotEngineVersion = 
                     getAttrib(data, install("engineVersion")));
             if (isNull(snapshotEngineVersion)) {
-                gridState = VECTOR_ELT(data, imin2(nState, 2));
+                gridState = VECTOR_ELT(data, min(nState, 2));
             } else {
                 for (i=0; i<nState; i++) {
                     SEXP state = VECTOR_ELT(data, i + 1);

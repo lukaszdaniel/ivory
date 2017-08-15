@@ -1506,8 +1506,9 @@ Math.data.frame <- function (x, ...)
 	return(x)
     } else {
 	vnames <- names(x)
-	if (is.null(vnames)) vnames <- seq_along(x)
-	stop("non-numeric variable in data frame: ", vnames[!mode.ok])
+	if (is.null(vnames)) vnames <- seq_along(x) #LUKI
+	stop("non-numeric variable(s) in data frame: ",
+	     paste(vnames[!mode.ok], collapse = ", "))
     }
 }
 
@@ -1569,13 +1570,18 @@ Ops.data.frame <- function(e1, e2 = NULL)
 	right <- if(!rscalar) e2[[j]] else e2
 	value[[j]] <- eval(f)
     }
-    if(.Generic %in% c("+","-","*","/","%%","%/%") ) {
-	names(value) <- cn
-	data.frame(value, row.names = rn, check.names = FALSE,
-                   check.rows = FALSE)
+    if(.Generic %in% c("+","-","*","^","%%","%/%","/")) {## == 'Arith'
+	if(length(value)) {
+	    names(value) <- cn
+	    data.frame(value, row.names = rn, check.names = FALSE)
+	} else
+	    data.frame(       row.names = rn, check.names = FALSE)
     }
-    else matrix(unlist(value, recursive = FALSE, use.names = FALSE),
-		nrow = nr, dimnames = list(rn,cn))
+    else { ## 'Logic' ("&","|")  and  'Compare' ("==",">","<","!=","<=",">=") :
+	value <- unlist(value, recursive = FALSE, use.names = FALSE)
+	matrix(if(is.null(value)) logical() else value,
+	       nrow = nr, dimnames = list(rn,cn))
+    }
 }
 
 Summary.data.frame <- function(..., na.rm)

@@ -27,8 +27,9 @@
 #include "localization.h"
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
+#include <R_ext/Minmax.h>
 #include <Print.h>
-#include <Rmath.h>  // Rexp10, fmin2, fmax2, imax2
+#include <Rmath.h>  // Rexp10, fmin2, fmax2
 
 #include "graphics.h"
 
@@ -2156,7 +2157,7 @@ SEXP C_text(SEXP args)
     GMode(1, dd);
     if (n == 0 && ntxt > 0)
 	error(_("no coordinates were supplied"));
-    for (i = 0; i < imax2(n,ntxt); i++) {
+    for (i = 0; i < max(n,ntxt); i++) {
 	xx = x[i % n];
 	yy = y[i % n];
 	GConvert(&xx, &yy, USER, INCHES, dd);

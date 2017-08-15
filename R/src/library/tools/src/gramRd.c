@@ -94,7 +94,7 @@
 #define STRICT_R_HEADERS
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <ctype.h>
-#include <Rmath.h> /* for imax2(.),..*/
+#include <Rmath.h>
 #include <R_ext/Minmax.h>
 #include "localization.h"
 

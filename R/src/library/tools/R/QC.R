@@ -3070,7 +3070,7 @@ function(dfile, strict = FALSE)
         out$missing_encoding <- TRUE
     }
 
-    if(any(is.na(nchar(db, "c", TRUE)))) {
+    if(anyNA(nchar(db, "c", TRUE))) {
         ## Ouch, invalid in the current locale.
         ## (Can only happen in a MBCS locale.)
         ## Try re-encoding from Latin1.
@@ -3182,7 +3182,6 @@ function(dfile, strict = FALSE)
         out$bad_Description <- TRUE
 
     class(out) <- "check_package_description"
-
     out
 }
 
@@ -4285,7 +4284,7 @@ function(pkgDir, thorough = FALSE)
         files <- Sys.glob(c(file.path(pkgDir, "data", "*.rda"),
                             file.path(pkgDir, "data", "*.RData")))
         ## Exclude .RData, which this may or may not match
-        files <- grep("/[.]RData$", files, value = TRUE, invert = TRUE)
+        files <- filtergrep("/[.]RData$", files)
         if (length(files)) {
             cpdir <- tempfile('cp')
             dir.create(cpdir)
@@ -6373,22 +6372,31 @@ function(dir, localOnly = FALSE)
     if(any(unlist(package_version(ver)) >= 1234))
         out$version_with_large_components <- ver
 
-    language <- meta["Language"]
-    if((is.na(language) || language == "en") &&
-       config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_USE_ASPELL_",
-                                        "FALSE"))) {
+    .aspell_package_description_for_CRAN <- function(dir, meta = NULL) {
+        if(!is.null(meta)) {
+            dir.create(dir <- tempfile(pattern = "aspell"))
+            on.exit(unlink(dir, recursive = TRUE))
+            .write_description(meta, file.path(dir, "DESCRIPTION"))
+        }
         ignore <-
             list(c("(?<=[ \t[:punct:]])'[^']*'(?=[ \t[:punct:]])",
                    "(?<=[ \t[:punct:]])([[:alnum:]]+::)?[[:alnum:]_.]*\\(\\)(?=[ \t[:punct:]])",
                    "(?<=[<])(https?://|DOI:|doi:|arXiv:)[^>]+(?=[>])"),
                  perl = TRUE)
-        a <- utils:::aspell_package_description(dir,
-                                                ignore = ignore,
-                                                control =
-                                                 c("--master=en_US",
-                                                   "--add-extra-dicts=en_GB"),
-                                                program = "aspell",
-                                                dictionaries = "en_stats")
+        utils:::aspell_package_description(dir,
+                                           ignore = ignore,
+                                           control =
+                                               c("--master=en_US",
+                                                 "--add-extra-dicts=en_GB"),
+                                           program = "aspell",
+                                           dictionaries = "en_stats")
+    }
+
+    language <- meta["Language"]
+    if((is.na(language) || language == "en") &&
+       config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_USE_ASPELL_",
+                                        "FALSE"))) {
+        a <- .aspell_package_description_for_CRAN(dir)
         if(NROW(a))
             out$spelling <- a
     }
@@ -6520,7 +6528,8 @@ function(dir, localOnly = FALSE)
         .libPaths(character())
         on.exit(.libPaths(libpaths))
         out <- list()
-        if(nzchar(system.file(package = meta["Package"]))) {
+        installed <- nzchar(system.file(package = meta["Package"]))
+        if(installed) {
             ## Ignore pre-2.8.0 compatibility calls to
             ## packageDescription() inside
             ##   if(!exists("meta") || is.null(meta))
@@ -6542,14 +6551,40 @@ function(dir, localOnly = FALSE)
                           c("packageDescription", "library", "require"))
             if(length(cnames))
                 out$citation_calls <- cnames
+            cinfo <-
+                .eval_with_capture(tryCatch(utils::readCitationFile(cfile,
+                                                                    meta),
+                                            error = identity))$value
+            if(inherits(cinfo, "error")) {
+                out$citation_error_reading_if_installed <-
+                    conditionMessage(cinfo)
+                return(out)
+            }
         } else {
             cinfo <-
                 .eval_with_capture(tryCatch(utils::readCitationFile(cfile,
                                                                     meta),
                                             error = identity))$value
-            if(inherits(cinfo, "error"))
-                out$citation_error <- conditionMessage(cinfo)
+            if(inherits(cinfo, "error")) {
+                out$citation_error_reading_if_not_installed <-
+                    conditionMessage(cinfo)
+                return(out)
+            }
         }
+        ## If we can successfully read in the citation file, also check
+        ## whether we can at least format the bibentries we obtained. 
+        cfmt <- tryCatch(format(cinfo, style = "text"),
+                         warning = identity, error = identity)
+        ## This only finds unbalanced braces by default, with messages
+        ##   unexpected END_OF_INPUT ... { no }
+        ##   unexpected '}'          ... } no {
+        ## One can also find 'unknown Rd macros' by setting env var
+        ## _R_UTILS_FORMAT_BIBENTRY_VIA_RD_PERMISSIVE_ to something
+        ## true, and perhaps we should do this here. 
+        if(inherits(cfmt, "condition"))
+            out$citation_problem_when_formatting <-
+                conditionMessage(cfmt)
+
         out
     }
     if(file.exists(cfile <- file.path(dir, "inst", "CITATION"))) {
@@ -6617,7 +6652,7 @@ function(dir, localOnly = FALSE)
     if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
         out$descr_bad_initial <- TRUE
     descr <- strwrap(descr)
-    if(any(ind <- grepl("[^<]https?://", descr))) {
+    if(any(ind <- grepl("(^|[^<])https?://", descr))) {
         ## Could try to filter out the matches for DOIs and arXiv ids
         ## noted differently below: not entirely straightforward when
         ## matching wrapped texts for to ease reporting ...
@@ -7034,8 +7069,10 @@ function(dir, localOnly = FALSE)
     db <- tryCatch(CRAN_package_db(), error = identity)
     if(inherits(db, "error")) return(out)
 
+    meta0 <- unlist(db[db[, "Package"] == package, ])
+
     m_m <- as.vector(meta["Maintainer"]) # drop name
-    m_d <- db[db[, "Package"] == package, "Maintainer"]
+    m_d <- meta0["Maintainer"]
     # There may be white space differences here
     m_m_1 <- gsub("[[:space:]]+", " ", m_m)
     m_d_1 <- gsub("[[:space:]]+", " ", m_d)
@@ -7046,10 +7083,26 @@ function(dir, localOnly = FALSE)
         out$new_maintainer <- list(m_m, m_d)
     }
 
-    l_d <- db[db[, "Package"] == package, "License"]
+    l_d <- meta0["License"]
     if(!foss && analyze_license(l_d)$is_verified)
         out$new_license <- list(meta["License"], l_d)
 
+    ## Re-check for possible mis-spellings and keep only the new ones,
+    ## if enabled and current version was published recently enough.
+    if(NROW(a <- out$spelling)
+       && config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_ASPELL_RECHECK_MAYBE_",
+                                           "TRUE"))
+       && !inherits(year <- tryCatch(format(as.Date(meta0["Published"]),
+                                            "%Y"),
+                                     error = identity),
+                    "error")
+       && (year >=
+           as.numeric(Sys.getenv("_R_CHECK_CRAN_INCOMING_ASPELL_RECHECK_START_",
+                                 "2013")))) {
+        a0 <- .aspell_package_description_for_CRAN(meta = meta0)
+        out$spelling <- a[is.na(match(a$Original, a0$Original)), ]
+    }
+       
     out
 }
 
@@ -7239,9 +7292,19 @@ function(x, ...)
                         strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
                       collapse = "\n")
             },
-            if(length(y <- x$citation_error)) {
+            if(length(y <- x$citation_error_reading_if_installed)) {
+                paste(c(gettext("Reading CITATION file fails with:", domain = "R-tools"),
+                        paste0("  ", y)),
+                      collapse = "\n")
+            },
+            if(length(y <- x$citation_error_reading_if_not_installed)) {
                 paste(c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
                         paste(" ", y), domain = "R-tools")),
+                      collapse = "\n")
+            },
+            if(length(y <- x$citation_problem_when_formatting)) {
+                paste(c(gettext("Problems when formatting CITATION entries:", domain = "R-tools"),
+                        paste0("  ", y)),
                       collapse = "\n")
             })),
       fmt(c(if(length(y <- x$bad_urls)) {

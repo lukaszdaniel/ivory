@@ -26,10 +26,11 @@
 #include <math.h>
 #include <limits.h> /* INT_MAX */
 #include <stdlib.h> /* abs */
-#include <Rmath.h> /* for imin2 and imax2 */
+#include <Rmath.h>
 #include <R_ext/Print.h> /* for Rprintf */
 #include <R_ext/Utils.h> /* for R_rsort */
 #include <R_ext/Error.h>
+#include <R_ext/Minmax.h>
 #include <R_ext/Arith.h> /* for R_FINITE */
 
 #include "localization.h"
@@ -60,7 +61,7 @@ stem_leaf(double *x, int n, double scale, int width, double atom)
 	r = atom + (x[n-1] - x[0])/scale;
 	// this needs to be exact: exp10 in glibc is not accurate
 	c = R_pow_di(10.0, (int)(1.0 - floor(log10(r))));
-	mm = imin2(2, imax2(0, (int)(r*c/25)));
+	mm = min(2, max(0, (int)(r*c/25)));
 	k = 3*mm + 2 - 150/(n + 50);
 	if ((k-1)*(k-2)*(k-5) == 0)
 	    c *= 10.;

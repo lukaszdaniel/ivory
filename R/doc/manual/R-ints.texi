@@ -4180,13 +4180,15 @@ other commonly-used repositories.
 Several environment variables can be used to set `timeouts': limits for
 the elapsed time taken by the sub-processes used for parts of the
 checks.  A value of @code{0} indicates no limit, and is the default.
-Character strings ending in @samp{m} or @samp{h} indicate a number of
-minutes or hours respectively: other values are interpreted as a whole
-number of seconds (with invalid inputs being treated as no limit).
+Character strings ending in @samp{s}, @samp{m} or @samp{h} indicate a
+number of seconds, minutes or hours respectively: other values are
+interpreted as a whole number of seconds (with invalid inputs being
+treated as no limit).
 @vtable @code
 @item _R_CHECK_ELAPSED_TIMEOUT_
 The default timeout for sub-processes not otherwise mentioned, and the
 default value for all except @env{_R_CHECK_1TEST_ELAPSED_TIMEOUT_}.
+(This is also used by @code{tools::check_packages_in_dir}.)
 
 @item _R_CHECK_INSTALL_ELAPSED_TIMEOUT_
 Limit for when @command{R CMD INSTALL} is run by @command{check}.
