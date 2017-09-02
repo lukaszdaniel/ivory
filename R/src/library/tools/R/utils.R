@@ -1398,7 +1398,7 @@ function(package, lib.loc)
             pos <- match(paste0("package:", package), search())
             if(!is.na(pos)) {
                 detach(pos = pos,
-                       unload = ! package %in% c("tcltk", "tools"))
+                       unload = package %notin% c("tcltk", "tools"))
             }
             library(package, lib.loc = lib.loc, character.only = TRUE,
                     verbose = FALSE)
@@ -1624,7 +1624,7 @@ function(file, encoding = NA, keep.source = getOption("keep.source"))
     suppressWarnings({
         if(!is.na(encoding) &&
            (encoding != "unknown") &&
-           !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
+           (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
             ## Previous use of con <- file(file, encoding = encoding)
             ## was intolerant so do something similar to what
             ## .install_package_code_files() does.  Do not use a #line
@@ -1856,11 +1856,11 @@ function(file, envir, enc = NA)
     ##                        ls(pattern = "^set[A-Z]", pos = "package:methods"))
     assignmentSymbols <- c("<-", "=")
 ### </FIXME>
-    con <-
-	if(!is.na(enc) && !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
-	    on.exit(close(con), add = TRUE)
-	    file(file, encoding = enc)
-	} else file
+    con <- if(!is.na(enc) &&
+              (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
+               on.exit(close(con), add = TRUE)
+               file(file, encoding = enc)
+           } else file
     exprs <- parse(n = -1L, file = con)
     exprs <- exprs[lengths(exprs) > 0L]
     for(e in exprs) {
@@ -2103,6 +2103,7 @@ toTitleCase <- function(text)
                        tolower(substring(x, 3L)))
             else paste0(toupper(x1), tolower(substring(x, 2L)))
         }
+        if(is.na(x)) return(NA_character_)
         xx <- .Call(C_splitString, x, ' -/"()\n')
         ## for 'alone' we could insist on that exact capitalization
         alone <- xx %in% c(alone, either)

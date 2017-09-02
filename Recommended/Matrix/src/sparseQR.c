@@ -72,7 +72,7 @@ void sparseQR_Qmult(cs *V, SEXP dmns, double *beta, int *p, int trans,
 	    UNPROTECT(1);
 	}
     }
-}
+} // sparseQR_Qmult
 
 
 /**
@@ -147,10 +147,20 @@ SEXP sparseQR_coef(SEXP qr, SEXP y)
 {
     SEXP qslot = GET_SLOT(qr, install("q")), R_ = GET_SLOT(qr, install("R"));
     CSP	R = AS_CSP__(R_);
-
-    INIT_sparseQR_(FALSE); // (y, ...)
-    // ans := R^{-1} Q' y ==>  rownames(ans) := rownames(R^{-1}) = colnames(R) :
+    // FIXME: check  n_R, M (= R->m)   vs  n, m
+    int *q = INTEGER(qslot), lq = LENGTH(qslot), n_R = R->n; // = ncol(R)
+    INIT_sparseQR_(FALSE); // <- FALSE: no dimnames from V
+    // ans := R^{-1} Q' y ==>  rownames(ans) := rownames(R^{-1}) = colnames(R)
     dnms = duplicate(GET_SLOT(R_, Matrix_DimNamesSym));
+    if(!isNull(VECTOR_ELT(dnms, 1))) { // need to correctly *permute* the colnames
+	SEXP cns = PROTECT(duplicate(VECTOR_ELT(dnms, 1)));
+	// *back* permute colnames from 'qslot' :
+	for(int j=0; j < lq; j++)
+	    SET_STRING_ELT(VECTOR_ELT(dnms, 1), q[j], STRING_ELT(cns, j));
+	UNPROTECT(1);
+    }
+
+    // rownames(ans) := colnames(ans)
     SET_VECTOR_ELT(dnms, 0, VECTOR_ELT(dnms, 1));
 
     /* apply row permutation and multiply by Q' */
@@ -158,10 +168,7 @@ SEXP sparseQR_coef(SEXP qr, SEXP y)
 		   INTEGER(GET_SLOT(qr, Matrix_pSym)), /* trans = */ TRUE,
 		   ans);
 
-    double *ax = REAL(GET_SLOT(ans, Matrix_xSym));
-  // FIXME: check  n_R, M (= R->m)   vs  n, m
-    int *q = INTEGER(qslot), lq = LENGTH(qslot), n_R = R->n; // = ncol(R)
-    double *x;
+    double *ax = REAL(GET_SLOT(ans, Matrix_xSym)), *x;
     if(lq) { C_or_Alloca_TO(x, M, double); }
     for (int j = 0; j < n; j++) {
 	double *aj = ax + j * M;

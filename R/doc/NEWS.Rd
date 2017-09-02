@@ -10,11 +10,11 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{factor()} now uses \code{order()} to sort its levels,
-      not \code{sort.list()}.  This makes \code{factor()} support custom
-      vector-like objects if methods for the appropriate generics are
-      defined.  This change has the side effect of making \code{factor()}
-      succeed on empty or length-one non-atomic vector(-like) types (e.g.,
-      list), where it failed before.
+      rather than \code{sort.list()}.  This makes \code{factor()}
+      support custom vector-like objects if methods for the appropriate
+      generics are defined.  This change has the side effect of making
+      \code{factor()} succeed on empty or length-one non-atomic
+      vector(-like) types (e.g., \code{list}), where it failed before.
 
       \item \code{diag()} gets an optional \code{names} argument: this
       may require updates to packages defining S4 methods for it.
@@ -107,13 +107,41 @@
       (\PR{17269}).
 
       \item \code{lower.tri(x)} and \code{upper.tri(x)} only needing
-      \code{dim(x)} now work via new \code{.row()} \code{.col()} and
-      no longer call \code{as.matrix()} by default in order to work
-      efficiently for all kind of matrix-like objects.
+      \code{dim(x)} now work via new functions \code{.row()} and
+      \code{.col()}, so no longer call \code{as.matrix()} by default in
+      order to work efficiently for all kind of matrix-like objects.
 
       \item \code{print()} methods for \code{"xgettext"} and
       \code{"xngettext"} now use \code{encodeString()} which keeps,
       e.g., \code{"\n"}, visible.  (Wish of \PR{17298}.)
+
+      \item \code{package.skeleton()} gets optional \code{encoding} argument.
+
+      \item \code{approx()}, \code{spline()}, \code{splinefun()} and
+      \code{approxfun()} also work for long vectors.
+
+      \item \code{deparse()} (and \code{dump()}) are more useful for S4
+      objects; \code{dput()} now using the same internal C code (instead
+      of its previous imperfect workaround R code).  More user visibly,
+      \code{dput()}, etc now print the \code{names()} information only
+      once, using the more readable \code{(tag = value)} syntax.  These
+      functions gain a new (partly experimental) control option
+      \emph{via} \code{.deparseOpts()}, \code{"nice_names"}, which when
+      set (e.g.\sspace{}as part of \code{"all"}) also use the
+      \code{(tag = value)} syntax for atomic vectors.
+
+      \item If the option \code{setWidthOnResize} is set and \code{TRUE},
+      \R run in a terminal using a recent \code{readline} library will
+      set the \code{width} option when the terminal is
+      resized.  Suggested by Ralf Goertz.
+
+      \item If multiple \code{on.exit} expressions are set using
+      \code{add = TRUE} then all expressions will now be run even if one
+      signals an error.
+
+      \item \code{mclapply()} gets an option \code{affinity.list} which
+      allows more efficient execution with heterogenous processors,
+      thanks to Helena Kotthaus.
     }
   }
 
@@ -132,6 +160,15 @@
       manual. [This depends on the experimental \sQuote{timeout} argument
       of \code{system2()} and hence subject to change, as are the names
       of the environment variables.]
+    }
+  }
+
+  \subsection{DOCUMENTATION}{
+    \itemize{
+      \item \sQuote{Writing R Extensions} now mentions the macros
+      \code{MAYBE_REFERENCED}, \code{MAYBE_SHARED}, and
+      \code{MARK_NOT_MUTABLE} that should be used by package \code{C}
+      code instead \code{NAMED} or \code{SET_NAMED}.
     }
   }
 
@@ -224,12 +261,30 @@
       deep recursion, thanks to Suharto Anggono via \PR{17300}.
 
       \item arithmetic with zero-column data frames now works more
-      consistently; issue raised by Bill Dunlap.
+      consistently; issue raised by Bill Dunlap.  Arithmetic with data
+      frames gives a data frame now also for \code{^} which previously
+      gave a numeric matrix.
 
-      \item \code{pretty(x, n=<large>)} now works better (though
+      \item \code{pretty(x, n)} for large \code{n} or large
+      \code{diff(range(x))} now works better (though
       it was never meant for large \code{n}); internally it uses the
       same rounding fuzz (1e-10) as \code{seq.default()} - as it did up
       to 2010-02-03 when both were 1e-7.
+
+      \item Internal C-level \code{R_check_class_and_super()} and hence
+      \code{R_check_class_etc()} now also consider non-direct super
+      classes and hence return a match in more cases.  This e.g., fixes
+      behaviour of derived classes in package \CRANpkg{Matrix}.
+
+      \item Reverted unintended change in behavior of \code{return}
+      calls in \code{on.exit} expressions introduced by stack unwinding
+      changes in \R 3.3.0.
+
+      \item \code{array(character(), 1)} now gives (a 1D array with)
+      \code{NA} as has been documented for a long time as in the other
+      cases of zero-length array initialization and also compatibly with
+      \code{matrix(character(), *)}.  As mentioned there, this also
+      fixes \PR{17333}.
     }
   }
 }
@@ -325,6 +380,21 @@
       \command{notangle} (it was required in \R 3.4.[01]).
 
       \item \code{readRDS(textConnection(.))} works again.  (\PR{17325})
+
+      \item \code{(1:n)[-n]} no longer segfaults for \code{n <- 2.2e9}
+      (on a platform with enough RAM).
+
+      \item \code{x <- 1:2; tapply(x, list(x, x), function(x) "")[1,2]}
+      now correctly returns \code{NA} again.  (\PR{17333})
+
+      \item Runing of finalizers after explicit GC request moved from
+      the \R interface \code{do_gc} to the \code{C} interface
+      \code{R_gc}.  This helps with reclaiming inaccessible connections.
+
+      \item \code{help.search(topic)} and \code{??topic} matching topics
+      in vignettes with multiple file name extensions (e.g.,
+      \file{*.md.rsp} but not \file{*.Rmd}) failed with an error 
+      when using \code{options(help_type = "html")}.      
     }
   }
 }

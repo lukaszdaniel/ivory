@@ -194,7 +194,7 @@ SEXP lazy_duplicate(SEXP s) {
     case RAWSXP:
     case STRSXP:
     case S4SXP:
-	SET_NAMED(s, 2);
+	ENSURE_NAMEDMAX(s);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("lazy_duplicate()", s);

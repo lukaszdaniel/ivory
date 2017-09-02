@@ -180,7 +180,7 @@ setRlibs <-
             }
             where <- find.package(pkg, quiet = TRUE)
             if(length(where)) {
-                if (!(dirname(where) %in% poss))
+                if (dirname(where) %notin% poss)
                     flink(where, tmplib)
                 else if (!test_recommended)
                     # If the package is in the standard library we can
@@ -778,7 +778,7 @@ setRlibs <-
         }
 
         if(!is.na(ncomp <- db["NeedsCompilation"])) {
-            if (!ncomp %in% c("yes", "no")) {
+            if (ncomp %notin% c("yes", "no")) {
                 if(!any) noteLog(Log)
                 any <- TRUE
                 printLog(Log, gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools"), "\n")
@@ -2393,7 +2393,7 @@ setRlibs <-
             pat <- paste("possibly from",
                          sQuote("(abort|assert|exit|_exit|_Exit)"))
             if(haveObjs && any(grepl(pat, out)) &&
-               !pkgname %in% c("parallel", "fork")) # need _exit in forked child
+               pkgname %notin% c("parallel", "fork")) # need _exit in forked child
                 warningLog(Log)
             else noteLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
@@ -2514,7 +2514,7 @@ setRlibs <-
         }
 
         ## No point in this test if already installed in .Library
-        if (!pkgname %in% dir(.Library)) {
+        if (pkgname %notin% dir(.Library)) {
             checkingLog(Log, gettext("checking loading without being on the library search path ...", domain = "R-tools"))
             Rcmd <- sprintf("library(%s, lib.loc = '%s')", pkgname, libdir)
             opts <- if(nzchar(arch)) R_opts4 else R_opts2
@@ -2849,9 +2849,9 @@ setRlibs <-
                         lines <- readLines(f, warn = FALSE)
                         f <- file.path(test_dir, sub("out\\.fail$", "", f))
                         src_files <- dir(".", pattern = "\\.[rR]$")
-                        if (!(basename(f) %in% src_files)) {
+                        if (basename(f) %notin% src_files) {
                             f <- sub("R$", "r", f) # This assumes only one of foo.r and foo.R exists.
-                            if (!(basename(f) %in% src_files))
+                            if (basename(f) %notin% src_files)
                                 f <- sub("r$", "[rR]", f) # Just in case the test script got deleted somehow, show the pattern.
                         }
                         keep <- as.integer(Sys.getenv("_R_CHECK_TESTS_NLINES_",
@@ -2897,7 +2897,7 @@ setRlibs <-
                 printLog(Log, "\n")
                 res <- TRUE
                 for (arch in inst_archs)
-                    if (!(arch %in% R_check_skip_tests_arch)) {
+                    if (arch %notin% R_check_skip_tests_arch) {
                         printLog(Log, gettextf("** running tests for arch %s", sQuote(arch), domain = "R-tools"))
                         res <- res & run_one_arch(arch)
                     }
@@ -3132,7 +3132,7 @@ setRlibs <-
                               gettextf("when running code in %s", sQuote(basename(file)), domain = "R-tools"),
                               out)
 
-                    } else if(status || ! " *** Run successfully completed ***" %in% out) {
+                    } else if(status || " *** Run successfully completed ***" %notin% out) {
                         ## (Need not be the final line if running under valgrind)
 
                         cat(" ", gettext("failed to complete the test", domain = "R-tools"), "\n", sep = "")
@@ -4062,7 +4062,7 @@ setRlibs <-
                 current <- as.numeric_version("3.0.1")
                 for(depends in deps) {
                     ## .check_package_description will insist on these operators
-                    if(!depends$op %in% c("<=", ">=", "<", ">", "==", "!="))
+                    if(depends$op %notin% c("<=", ">=", "<", ">", "==", "!="))
                         next
                     status <- if(inherits(depends$version, "numeric_version"))
                         !do.call(depends$op, list(current, depends$version))
@@ -4959,7 +4959,7 @@ setRlibs <-
                     } else this_multiarch <- FALSE  # no compiled code
                 }
                 if (this_multiarch && length(R_check_skip_arch))
-                    inst_archs <- inst_archs[inst_archs %notin% R_check_skip_arch]
+                    inst_archs <- inst_archs %w/o% R_check_skip_arch
             }
         } else check_incoming <- FALSE  ## end of if (!is_base_pkg)
 

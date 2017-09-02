@@ -97,7 +97,7 @@ RweaveRdOptions <- function(options)
     NOLOGOPTS <- c(NUMOPTS, "results", "stage", "strip.white")
 
     for(opt in names(options)){
-        if(! (opt %in% NOLOGOPTS)){
+        if(opt %notin% NOLOGOPTS) {
             oldval <- options[[opt]]
             if(!is.logical(options[[opt]])){
                 options[[opt]] <- c2l(options[[opt]])
@@ -486,7 +486,7 @@ prepare2_Rd <- function(Rd, Rdfile)
         	stopRd(docType, Rdfile, gettextf("'%s' must be plain text", "docType"))
             ## Some people have \docType{ package } and similar.
             docTypes[i] <- sub("^ *", "", sub(" *$", "", docType[[1L]]))
-            if (! docTypes[i] %in%
+            if (docTypes[i] %notin%
                 c("data", "package", "methods", "class", "import"))
                 warnRd(dt[i], Rdfile, gettextf("docType %s is unrecognized", sQuote(docTypes[i])))
          }
@@ -496,7 +496,7 @@ prepare2_Rd <- function(Rd, Rdfile)
     extras <- c("COMMENT", "TEXT", "\\docType", "\\Rdversion", "\\RdOpts",
                 "USERMACRO", "\\newcommand", "\\renewcommand")
     drop <- drop | (sections %in% extras)
-    bad <- ! sections %in% c(names(sectionOrder), extras)
+    bad <- sections %notin% c(names(sectionOrder), extras)
     if (any(bad)) {
         for(s in which(bad))
             warnRd(Rd[[s]], Rdfile, gettextf("Section %s is unrecognized and will be dropped", sections[s]))
@@ -719,8 +719,8 @@ checkRd <- function(Rd, defines=.Platform$OS.type, stages = "render",
     		       stopRd(block, Rdfile, gettext("Condition must be \\Sexpr or plain text"))
     		   condition <- condition[tags == "TEXT"]
     		   allow <- trimws(strsplit(paste(condition, collapse=""), ",")[[1L]])
-    		   unknown <- allow[!(allow %in%
-    		          c("", "latex", "example", "text", "html", "TRUE", "FALSE"))]
+    		   unknown <- allow %w/o% c("", "latex", "example", "text",
+                                            "html", "TRUE", "FALSE")
     		   if (length(unknown))
     		       warnRd(block, Rdfile, gettextf("Unrecognized format: %s", unknown))
                    checkContent(block[[2L]])
@@ -864,7 +864,7 @@ checkRd <- function(Rd, defines=.Platform$OS.type, stages = "render",
     		"\\itemize"= {})
     	    },
     	    { # default
-    	    	if (inlist && !(blocktag %in% c("\\itemize", "\\enumerate"))
+    	    	if (inlist && (blocktag %notin% c("\\itemize", "\\enumerate"))
     	    	           && !(tag == "TEXT" && isBlankRd(block))) {
     		    inlist <- FALSE
     		}

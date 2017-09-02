@@ -225,9 +225,9 @@ function(package, dir, lib.loc = NULL)
         ## </NOTE>
         ## The bad ones:
         S4_classes <-
-            S4_classes[!vapply(S4_classes, utils:::topicName, " ",
-                               type = "class", USE.NAMES=FALSE)
-                       %in% all_doc_topics]
+            S4_classes[vapply(S4_classes, utils:::topicName, " ",
+                              type = "class", USE.NAMES = FALSE)
+                       %notin% all_doc_topics]
         undoc_things <-
             c(undoc_things, list("S4 classes" = unique(S4_classes)))
     }
@@ -254,9 +254,9 @@ function(package, dir, lib.loc = NULL)
 
         ## The bad ones:
         S4_methods <-
-	    S4_methods[!vapply(S4_methods, utils:::topicName, " ",
-			       type="method", USE.NAMES=FALSE)
-                       %in% all_doc_topics]
+	    S4_methods[vapply(S4_methods, utils:::topicName, " ",
+			       type="method", USE.NAMES = FALSE)
+                       %notin% all_doc_topics]
         undoc_things <-
             c(undoc_things,
               list("S4 methods" =
@@ -614,7 +614,7 @@ function(package, dir, lib.loc = NULL,
         ## Catch assignments: checkDocFiles() will report these, so drop
         ## them here.
         ## And also unary/binary operators
-        ind <- !(functions %in% c("<-", "=", "+", "-"))
+        ind <- (functions %notin% c("<-", "=", "+", "-"))
         exprs <- exprs[ind]
         functions <- functions[ind]
         functions <- .transform_S3_method_markup(as.character(functions))
@@ -1950,7 +1950,7 @@ function(package, dir, file, lib.loc = NULL,
         ## This might be symbol from another (base?) package.
         ## Allow for Rcpp modules
         parg <- unclass(sym$dll)$name
-        if(length(parg) == 1L && ! parg %in% c("Rcpp", pkgDLL)) {
+        if(length(parg) == 1L && parg %notin% c("Rcpp", pkgDLL)) {
             wrong_pkg <<- c(wrong_pkg, e)
             bad_pkg <<- c(bad_pkg, parg)
         }
@@ -1980,7 +1980,8 @@ function(package, dir, file, lib.loc = NULL,
                 }
             }
         }
-    	if (inherits(sym, "CallRoutine") && !(FF_fun %in% c(".Call", ".Call.graphics"))) {
+    	if (inherits(sym, "CallRoutine") &&
+            (FF_fun %notin% c(".Call", ".Call.graphics"))) {
     	    other_problem <<- c(other_problem, e)
     	    other_desc <<- c(other_desc, gettextf("%s registered as %s, but called with %s", sQuote(name), sQuote(".Call"), sQuote(FF_fun), domain = "R-tools"))
     	    return("OTHER")
@@ -2026,7 +2027,8 @@ function(package, dir, file, lib.loc = NULL,
                             ## This might be symbol from another package.
                             ## Allow for Rcpp modules
                             parg <- unclass(sym$dll)$name
-                            if(length(parg) == 1L && !parg %in% c("Rcpp", pkgDLL)) {
+                            if(length(parg) == 1L &&
+                               parg %notin% c("Rcpp", pkgDLL)) {
                                 wrong_pkg <<- c(wrong_pkg, e)
                                 bad_pkg <<- c(bad_pkg, parg)
                             }
@@ -2082,7 +2084,7 @@ function(package, dir, file, lib.loc = NULL,
         }
     } else {
         if(!is.na(enc) &&
-           !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
+           (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
             ## FIXME: what if conversion fails on e.g. UTF-8 comments
 	    con <- file(file, encoding=enc)
             on.exit(close(con))
@@ -2776,7 +2778,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
             info <- available[, dependencies, drop = FALSE]
             rn <- rownames(info)
             deps <- function(p) {
-                if(!(p %in% rn)) return(character())
+                if(p %notin% rn) return(character())
                 this <- utils:::.clean_up_dependencies(info[p, ])
                 setdiff(this, "R")
             }
@@ -2888,7 +2890,9 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
                     bad_depends$required_but_obsolete <- bad
             }
         }
-        if (length(lenhances)) {
+        if (length(lenhances) &&
+            !config_val_to_logical(Sys.getenv("_R_CHECK_PACKAGE_DEPENDS_IGNORE_MISSING_ENHANCES_",
+                                             "FALSE"))) {
             m <- setdiff(sapply(lenhances, `[[`, 1L), installed)
             if(length(m))
                 bad_depends$enhances_but_not_installed <- m
@@ -3061,7 +3065,7 @@ function(dfile, strict = FALSE)
     ## Determine encoding and re-encode if necessary and possible.
     if("Encoding" %in% names(db)) {
         encoding <- db["Encoding"]
-        if((! Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX")))
+        if(Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))
             db <- iconv(db, encoding, sub = "byte")
     }
     else if(!all(.is_ISO_8859(db))) {
@@ -3140,7 +3144,7 @@ function(dfile, strict = FALSE)
             }
             if(nzchar(sub(dep_regexp, "\\2", dep))) {
                 ## If not just a valid package name ...
-                if(!sub(dep_regexp, "\\3", dep) %in%
+                if(sub(dep_regexp, "\\3", dep) %notin%
                    c("<=", ">=", "<", ">", "==", "!="))
                     bad_dep_op <- c(bad_dep_op, dep)
                 else if(grepl("^[[:space:]]*R", dep)) {
@@ -3168,7 +3172,7 @@ function(dfile, strict = FALSE)
     if(!is.na(val <- db["Priority"])
        && !is.na(package_name)
        && (tolower(val) %in% c("base", "recommended", "defunct-base"))
-       && !(package_name %in% unlist(standard_package_names)))
+       && (package_name %notin% unlist(standard_package_names)))
         out$bad_priority <- val
 
     ## Minimal check (so far) of Title and Description.
@@ -3295,7 +3299,7 @@ function(dfile)
         status <- 0L
         current <- as.numeric_version("3.0.1")
         for(depends in deps) {
-            if(!depends$op %in% c("<=", ">=", "<", ">", "==", "!=")) next
+            if(depends$op %notin% c("<=", ">=", "<", ">", "==", "!=")) next
             status <- if(inherits(depends$version, "numeric_version"))
                 !do.call(depends$op, list(current, depends$version))
             else {
@@ -3496,7 +3500,7 @@ function(dfile)
     if(any(ind <- !.is_ASCII(names(db))))
         out$fields_with_non_ASCII_tags <- names(db)[ind]
 
-    if(! "Encoding" %in% names(db)) {
+    if("Encoding" %notin% names(db)) {
         ind <- !.is_ASCII(db)
         if(any(ind)) {
             out$missing_encoding <- TRUE
@@ -3504,7 +3508,7 @@ function(dfile)
         }
     } else {
         enc <- db[["Encoding"]]
-        if (! enc %in% c("latin1", "latin2", "UTF-8"))
+        if (enc %notin% c("latin1", "latin2", "UTF-8"))
             out$non_portable_encoding <- enc
     }
 
@@ -3898,7 +3902,7 @@ function(package, lib.loc = NULL)
     }
     checkMethodUsagePackage <- function (pack, ...) {
 	pname <- paste0("package:", pack)
-	if (!pname %in% search())
+	if (pname %notin% search())
 	    stop("package must be loaded", domain = "R-tools")
 	checkMethodUsageEnv(if (isNamespaceLoaded(pack))
 			    getNamespace(pack) else as.environment(pname), ...)
@@ -4584,7 +4588,7 @@ function(dir)
         .error <- .warnings <- character()
         file <- file.path(dir, f)
         if(!is.na(enc) &&
-           !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
+           (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
             lines <- iconv(readLines(file, warn = FALSE), from = enc, to = "", sub = "byte")
             withCallingHandlers(tryCatch(parse(text = lines),
                                          error = function(e)
@@ -5203,7 +5207,7 @@ function(package, dir, lib.loc = NULL)
                             }
                        } else {
                            pkg <- sub('^"(.*)"$', '\\1', deparse(pkg))
-                            if(! pkg %in% c(depends_suggests, common_names))
+                            if(pkg %notin% c(depends_suggests, common_names))
                                 bad_exprs <<- c(bad_exprs, pkg)
                             if(pkg %in% depends)
                                 bad_deps <<- c(bad_deps, pkg)
@@ -5216,7 +5220,7 @@ function(package, dir, lib.loc = NULL)
             } else if(Call %in% "::") {
                 pkg <- deparse(e[[2L]])
                 all_imports <<- c(all_imports, pkg)
-                if(! pkg %in% imports)
+                if(pkg %notin% imports)
                     bad_imports <<- c(bad_imports, pkg)
                 else {
                     imp2 <<- c(imp2, pkg)
@@ -5227,7 +5231,7 @@ function(package, dir, lib.loc = NULL)
                 all_imports <<- c(all_imports, pkg)
                 imp3 <<- c(imp3, pkg)
                 imp3f <<- c(imp3f, deparse(e[[3L]]))
-                if(! pkg %in% imports)
+                if(pkg %notin% imports)
                     bad_imports <<- c(bad_imports, pkg)
             } else if(Call %in% c("setClass", "setMethod")) {
                 uses_methods <<- TRUE
@@ -5261,7 +5265,7 @@ function(package, dir, lib.loc = NULL)
     else {
         enc <- db["Encoding"]
         if(!is.na(enc) &&
-           !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
+           (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
             ## FIXME: what if conversion fails on e.g. UTF-8 comments
 	    con <- file(file, encoding=enc)
             on.exit(close(con))
@@ -5289,7 +5293,7 @@ function(package, dir, lib.loc = NULL)
     depends_not_import <- setdiff(depends, c(imp, default_package_names))
 
     methods_message <-
-        if(uses_methods && !"methods" %in% c(depends, imports))
+        if(uses_methods && "methods" %notin% c(depends, imports))
             gettext("package 'methods' is used but not declared", domain = "R-tools")
         else ""
 
@@ -5580,7 +5584,7 @@ function(db, files)
                             dunno <- TRUE
                         ## </NOTE>
                         if(! dunno
-                           && ! pkg %in% c(depends_suggests, common_names))
+                           && pkg %notin% c(depends_suggests, common_names))
                             bad_exprs <<- c(bad_exprs, pkg)
                     }
                 }
@@ -5592,11 +5596,11 @@ function(db, files)
                     bad_imports <<- c(bad_imports, pkg)
             } else if(Call %in%  "data" && length(e) >= 3L) {
                 mc <- match.call(utils::data, e)
-                if(!is.null(pkg <- mc$package) && !pkg %in% depends_suggests)
+                if(!is.null(pkg <- mc$package) && pkg %notin% depends_suggests)
                     bad_data <<- c(bad_data, pkg)
             } else if(deparse(e[[1L]])[1L] %in% c("utils::data", "utils:::data")) {
                 mc <- match.call(utils::data, e)
-                if(!is.null(pkg <- mc$package) && !pkg %in% depends_suggests)
+                if(!is.null(pkg <- mc$package) && pkg %notin% depends_suggests)
                     bad_data <<- c(bad_data, pkg)
             }
 
@@ -5670,7 +5674,7 @@ function(package, dir, lib.loc = NULL)
     on.exit(unlink(file))
     enc <- db["Encoding"]
     if(!is.na(enc) &&
-       !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
+       (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
         ## FIXME: what if conversion fails on e.g. UTF-8 comments
         con <- file(file, encoding = enc)
         on.exit(close(con), add = TRUE)
@@ -5921,7 +5925,7 @@ function(package, dir, lib.loc = NULL, details = TRUE)
         if(length(package) != 1L)
             stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
-        if(! package %in% .get_standard_package_names()$base) {
+        if(package %notin% .get_standard_package_names()$base) {
             .load_package_quietly(package, lib.loc)
             code_env <- if(packageHasNamespace(package, dirname(dir)))
                            asNamespace(package)
@@ -6197,7 +6201,7 @@ function(package, dir, lib.loc = NULL, WINDOWS = FALSE)
         if(length(package) != 1L)
             stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
-        if(! package %in% .get_standard_package_names()$base) {
+        if(package %notin% .get_standard_package_names()$base) {
             .load_package_quietly(package, lib.loc)
             code_env <- if(packageHasNamespace(package, dirname(dir)))
                            asNamespace(package)
@@ -6836,7 +6840,7 @@ function(dir, localOnly = FALSE)
     ## need to re-encode.  Eventually, it might be in UTF-8 ...
     entry <- odb[odb[, "Package"] == meta["Package"], ]
     entry <- entry[!is.na(entry) &
-                   !(names(entry) %in% c("Package", "X-CRAN-History"))]
+                   (names(entry) %notin% c("Package", "X-CRAN-History"))]
     if(length(entry)) {
         ## Check for conflicts between package license implications and
         ## repository overrides.  Note that the license info predicates
@@ -6881,7 +6885,7 @@ function(dir, localOnly = FALSE)
     ## ignoring case.
     package <- meta["Package"]
     packages <- db[, "Package"]
-    if(! package %in% packages) out$new_submission <- TRUE
+    if(package %notin% packages) out$new_submission <- TRUE
     clashes <- character()
     pos <- which((tolower(packages) == tolower(package)) &
                  (packages != package))
@@ -7383,7 +7387,7 @@ function(x, ...)
             if(length(x$descr_bad_start)) {
                 gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
             },
-            if(length(y <- x$descr_bad_URLs)) { #LUKI
+            if(length(y <- x$descr_bad_URLs)) {
                 paste(gettextf("The Description field contains\n%s", paste0("  ", y), domain = "R-tools"),
                         gettext("Please enclose URLs in angle brackets (<...>).", domain = "R-tools"),
                       collapse = "\n")

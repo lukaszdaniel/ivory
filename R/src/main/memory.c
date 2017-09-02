@@ -1354,8 +1354,8 @@ SEXP R_WeakRefValue(SEXP w)
     if (TYPEOF(w) != WEAKREFSXP)
 	error(_("not a weak reference"));
     v = WEAKREF_VALUE(w);
-    if (v != R_NilValue && NAMED(v) <= 1)
-	SET_NAMED(v, 2);
+    if (v != R_NilValue)
+	ENSURE_NAMEDMAX(v);
     return v;
 }
 
@@ -1403,10 +1403,18 @@ static Rboolean RunFinalizers(void)
     for (s = R_weak_refs, last = R_NilValue; s != R_NilValue;) {
 	SEXP next = WEAKREF_NEXT(s);
 	if (IS_READY_TO_FINALIZE(s)) {
+	    /**** use R_ToplevelExec here? */
 	    RCNTXT thiscontext;
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile int savestack;
-	    volatile SEXP topExp;
+	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
+	    volatile Rboolean oldvis;
+	    PROTECT(oldHStack = R_HandlerStack);
+	    PROTECT(oldRStack = R_RestartStack);
+	    PROTECT(oldRVal = R_ReturnedValue);
+	    oldvis = R_Visible;
+	    R_HandlerStack = R_NilValue;
+	    R_RestartStack = R_NilValue;
 
 	    finalizer_run = TRUE;
 
@@ -1440,7 +1448,11 @@ static Rboolean RunFinalizers(void)
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
 	    R_CurrentExpr = topExp;
-	    UNPROTECT(1);
+	    R_HandlerStack = oldHStack;
+	    R_RestartStack = oldRStack;
+	    R_ReturnedValue = oldRVal;
+	    R_Visible = oldvis;
+	    UNPROTECT(4);/* topExp, oldRVal, oldRStack, oldHStack */
 	}
 	else last = s;
 	s = next;
@@ -1978,9 +1990,7 @@ SEXP attribute_hidden do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     reset_max = asLogical(CADR(args));
     num_old_gens_to_collect = NUM_OLD_GENERATIONS;
     R_gc();
-#ifndef IMMEDIATE_FINALIZERS
-    R_RunPendingFinalizers();
-#endif
+
     gc_reporting = ogc;
     /*- now return the [used , gc trigger size] for cells and heap */
     PROTECT(value = allocVector(REALSXP, 14));
@@ -2417,7 +2427,7 @@ SEXP attribute_hidden mkPROMISE(SEXP expr, SEXP rho)
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
-    if (NAMED(expr) < 2) SET_NAMED(expr, 2);
+    ENSURE_NAMEDMAX(expr);
 
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
@@ -2515,6 +2525,8 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    SET_NODE_CLASS(s, node_class);
 	    R_SmallVallocSize += alloc_size;
+	    /* Note that we do not include the header size into VallocSize,
+	       but it is counted into memory usage via R_NodesInUse. */
 	    ATTRIB(s) = R_NilValue;
 	    SET_TYPEOF(s, type);
 	    SET_SHORT_VEC_LENGTH(s, (R_len_t) length); // is 1
@@ -2671,6 +2683,11 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 #endif
 	    void *mem = NULL; /* initialize to suppress warning */
 	    if (size < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
+		/* I think subtracting the header is fine, "size" (*VSize)
+		   variables do not count the header, but the header is
+		   included into memory usage via NodesInUse, instead.
+		   We want the whole object including the header to be
+		   indexable by size_t. - TK */
 		mem = allocator ?
 		    custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
 		    malloc(hdrsize + size * sizeof(VECREC));
@@ -2729,6 +2746,9 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    if (!allocator) R_LargeVallocSize += size;
 	    R_GenHeap[node_class].AllocCount++;
 	    R_NodesInUse++;
+	    /* FIXME: for long vectors, the R_long_vec_hdr_t size will not be
+	       included into memory usage. It is neither in VallocSize nor in
+	       NodesInUse. */
 	    SNAP_NODE(s, R_GenHeap[node_class].New);
 	}
 	ATTRIB(s) = R_NilValue;
@@ -2863,6 +2883,9 @@ SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 void R_gc(void)
 {
     R_gc_internal(0);
+#ifndef IMMEDIATE_FINALIZERS
+    R_RunPendingFinalizers();
+#endif
 }
 
 static void R_gc_full(R_size_t size_needed)

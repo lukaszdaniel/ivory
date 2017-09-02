@@ -51,7 +51,7 @@ checkMD5sums <- function(package, dir)
     x <- x[names(x) != "MD5"]
     nmx <- names(x)
     res <- TRUE
-    not.here <- !(nmxx %in% nmx)
+    not.here <- (nmxx %notin% nmx)
     if(any(not.here)) {
         res <- FALSE
         cat(sprintf(ngettext(sum(not.here), "file %s is missing",

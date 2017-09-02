@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-04-12 r955) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-08-15 r987) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-04-12 r72505) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -96,4 +96,4 @@ In command 'fitter(X, Y, strats, offset, init, control, weights = weights, metho
 > 
 > proc.time()
    user  system elapsed 
-  1.356   0.020   1.378 
+  1.212   0.024   1.236 

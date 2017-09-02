@@ -442,10 +442,9 @@ summary.loess <- function(object, ...)
 print.summary.loess <-
     function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    print.loess(x, digits=digits, ...) #LUKI
-    cat("Trace of smoother matrix: ", format(round(x$trace.hat, 2L)),
-        "  (",x$pars$trace.hat, ")\n", sep="")
-    cat("\nControl settings:\n")
+    print.loess(x, digits=digits, ...)
+    cat(gettext("Trace of smoother matrix:", domain = "R-stats"), " ", format(round(x$trace.hat, 2L)), "  (",x$pars$trace.hat, ")\n", sep="")
+    cat("\n", gettext("Control settings:", domain = "R-stats"), "\n", sep = "")
     cat("  span     : ", format(x$pars$span), "\n")
     cat("  degree   : ", x$pars$degree, "\n")
     cat("  family   : ", x$pars$family)

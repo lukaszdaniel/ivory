@@ -89,7 +89,6 @@ missingArgs <- function(args) {
 frameTypes <- function(env) {
     top <- topenv(env)
     empty <- emptyenv()
-    base <- baseenv()
     nl <- 0
     while (! identical(env, top)) {
         if (isNamespace(env))
@@ -961,7 +960,8 @@ genCode <- function(e, cntxt, gen = NULL, loc = NULL) {
 ##
 
 make.toplevelContext <- function(cenv, options = NULL)
-    structure(list(tailcall = TRUE,
+    structure(list(toplevel = TRUE,
+                   tailcall = TRUE,
                    needRETURNJMP = FALSE,
                    env = cenv,
                    optimize = getCompilerOption("optimize", options),
@@ -980,6 +980,7 @@ make.callContext <- function(cntxt, call) {
 }
 
 make.promiseContext <- function(cntxt) {
+    cntxt$toplevel <- FALSE
     cntxt$tailcall <- TRUE
     cntxt$needRETURNJMP <- TRUE
     if (! is.null(cntxt$loop))
@@ -1002,6 +1003,7 @@ make.nonTailCallContext <- function(cntxt) {
 }
 
 make.argContext <- function(cntxt) {
+    cntxt$toplevel <- FALSE
     cntxt$tailcall <- FALSE
     if (! is.null(cntxt$loop))
         cntxt$loop$gotoOK <- FALSE
@@ -1337,7 +1339,7 @@ tryInline <- function(e, cb, cntxt) {
         if (! is.null(h)) {
             if (info$guard) {
                 tailcall <- cntxt$tailcall
-                if (tailcall) cntxttailcall <- FALSE
+                if (tailcall) cntxt$tailcall <- FALSE
                 expridx <- cb$putconst(e)
                 endlabel <- cb$makelabel()
                 cb$putcode(BASEGUARD.OP, expridx, endlabel)
@@ -1557,6 +1559,8 @@ tryGetterInline <- function(call, cb, cntxt) {
 }
 
 cmpAssign <- function(e, cb, cntxt) {
+    if (! cntxt$toplevel)
+        return(cmpSpecial(e, cb, cntxt))
     if (! checkAssign(e, cntxt))
         return(cmpSpecial(e, cb, cntxt))
     superAssign <- as.character(e[[1]]) == "<<-"
@@ -1892,7 +1896,7 @@ checkSkipLoopCntxt <- function(e, cntxt, breakOK = TRUE) {
                 TRUE
             else if (isLoopTopFun(fname, cntxt))
                 checkSkipLoopCntxtList(e[-1], cntxt, breakOK)
-            else if (fname %in% c("eval", "evalq"))
+            else if (fname %in% c("eval", "evalq", "source"))
                 FALSE
             else
                 checkSkipLoopCntxtList(e[-1], cntxt, FALSE)
@@ -2492,7 +2496,6 @@ is.simpleInternal <- function(def) {
 inlineSimpleInternalCall <- function(e, def) {
     if (! dots.or.missing(e) && is.simpleInternal(def)) {
         forms <- formals(def)
-        fnames <- names(forms)
         b <- body(def)
         if (typeof(b) == "language" && length(b) == 2 && b[[1]] == "{")
             b <- b[[2]]
@@ -2903,15 +2906,15 @@ cmpfun <- function(f, options = NULL) {
     else stop("cannot compile a non-function")
 }
 
-tryCmpfun <- function(f) #LUKI
+tryCmpfun <- function(f)
     tryCatch(cmpfun(f), error = function(e) {
-        notifyCompilerError(paste(e$message, "at", deparse(e$call)))
+        notifyCompilerError(gettextf("%s at %s", paste(e$message, collapse = ""),  paste(deparse(e$call), collapse = ""), domain = "R-compiler"))
         f
     })
 
-tryCompile <- function(e, ...) #LUKI
+tryCompile <- function(e, ...)
     tryCatch(compile(e, ...), error = function(err) {
-        notifyCompilerError(paste(err$message, "at", deparse(err$call)))
+        notifyCompilerError(gettextf("%s at %s", paste(err$message, collapse = ""),  paste(deparse(err$call), collapse = ""), domain = "R-compiler"))
         e
     })
 
@@ -3009,7 +3012,7 @@ loadcmp <- function (file, envir = .GlobalEnv, chdir = FALSE) {
         setwd(path)
     }
     for (i in exprs) {
-        yy <- eval(i, envir)
+        eval(i, envir)
     }
     invisible()
 }

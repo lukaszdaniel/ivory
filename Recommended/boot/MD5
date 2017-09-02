@@ -104,7 +104,7 @@ f0ece7302d2c5c67cf46b1f577c6b4f1 *inst/po/ru/LC_MESSAGES/R-boot.mo
 9a8b948c5389b64897f804bfe948b82d *inst/po/pl/LC_MESSAGES/R-boot.mo
 f977351e4742b8b36477a7288a4467b9 *inst/po/ko/LC_MESSAGES/R-boot.mo
 6e887574f4c46cddf29707098ab3fccf *inst/bd.q
-c707bff6515de12a08d4d1a1cc385290 *tests/Examples/boot-Ex.Rout.save
+2b14ad81086029a85252f469eb7b9627 *tests/Examples/boot-Ex.Rout.save
 167a3d2551651549fa966891802002d5 *R/bootpracs.q
 591c70055cc432c50fbff8c9fc8a2cfa *R/bootfuns.q
 5a3e04afacf5edf673d0b11aef8fe760 *data/remission.rda

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-06-17 r984) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-08-15 r987) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-06-17 r72803) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3493,7 +3493,7 @@ c0   -5.14
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.368 0.036 1.404 0 0 
+Time elapsed:  1.284 0.028 1.311 0 0 
 > grDevices::dev.off()
 null device 
           1 

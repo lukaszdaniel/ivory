@@ -1506,9 +1506,8 @@ Math.data.frame <- function (x, ...)
 	return(x)
     } else {
 	vnames <- names(x)
-	if (is.null(vnames)) vnames <- seq_along(x) #LUKI
-	stop("non-numeric variable(s) in data frame: ",
-	     paste(vnames[!mode.ok], collapse = ", "))
+	if (is.null(vnames)) vnames <- seq_along(x)
+	stop(ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ", domain = "R-base"), paste(vnames[!mode.ok], collapse = ", "), domain = NA)
     }
 }
 

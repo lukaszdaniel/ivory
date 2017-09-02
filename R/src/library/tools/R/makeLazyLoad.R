@@ -256,7 +256,7 @@ makeLazyLoading <-
     function(package, lib.loc = NULL, compress = TRUE,
              keep.source = getOption("keep.source.pkgs"))
 {
-    if(!is.logical(compress) && ! compress %in% c(2,3))
+    if(!is.logical(compress) && compress %notin% c(2,3))
 	stop(gettextf("invalid value for '%s': should be FALSE, TRUE, 2 or 3", "compress"), domain = "R-tools")
     options(warn = 1L)
     findpack <- function(package, lib.loc) {
