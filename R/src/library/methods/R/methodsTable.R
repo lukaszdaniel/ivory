@@ -1053,13 +1053,10 @@
     ## else: non-empty methods list
     doFun(f,p)
     for(m in mget(labels, table)) {
+        pkgs <- NULL
 	if(is.environment(m)) {  ## duplicate class case -- compare .findMethodInTable()
             pkgs <- names(m)
-            if(length(pkgs) == 1)
-                m <- m[[pkgs]]
-            else if(length(pkgs) > 1)
-                cf(sprintf(ngettext(length(pkgs), "  (%d methods defined for this signature, with different packages)\n",
-				 "  (%d methods defined for this signature, with different packages)\n", domain = "R-methods"), length(pkgs)))
+            m <- m[[pkgs[1L]]]
         }
 	if( is(m, "MethodDefinition")) {
 	    t <- m@target
@@ -1073,6 +1070,9 @@
 		cf("    ", gettextf("(inherited from: %s)", sigString(d), domain = "R-methods"), "\n")
             if(!.identC(m@generic, f) && length(m@generic) == 1L && nzchar(m@generic))
 		cf("    ", gettextf("(definition from function %s)", sQuote(m@generic), domain = "R-methods"), "\n")
+            if(length(pkgs) > 1)
+                cf(sprintf(ngettext(length(pkgs), "  (%d methods defined for this signature, with different packages)\n",
+				 "  (%d methods defined for this signature, with different packages)\n", domain = "R-methods"), length(pkgs)))
 	}
 	if(includeDefs && is(m, "function")) {
 	    if(is(m, "MethodDefinition"))
@@ -1217,7 +1217,7 @@ outerLabels <- function(labels, new) {
     ## and so must change if that does (e.g. to include package)
     n <- length(labels)
     m <- length(new)
-    paste(labels[rep.int(1L:n, rep.int(m,n))], new[rep.int(1L:m,n)], sep ="#")
+    paste(labels[rep.int(seq_len(n), rep.int(m,n))], new[rep.int(1L:m,n)], sep ="#")
 }
 
 
@@ -1231,14 +1231,18 @@ outerLabels <- function(labels, new) {
       sig <- c(as.character(sig), rep("ANY", more))
   }
   else if(n > nargs) { #reset table?
-    if(all(sig[(nargs+1):n] == "ANY"))
-      length(sig) <- length(pkgs) <- nargs
-    else {
+    if(all(sig[(nargs+1):n] == "ANY")) {
+        length(sig) <- nargs
+        if (!is.null(pkgs))
+            length(pkgs) <- nargs
+    } else {
       while(sig[[n]] == "ANY")
         n <- n-1
       if(reset)
         .resetSigLength(fdef, n)
-      length(sig) <- length(pkgs) <- n
+      length(sig) <- n
+      if (!is.null(pkgs))
+          length(pkgs) <- n
     }
   }
   packageSlot(sig) <- pkgs
