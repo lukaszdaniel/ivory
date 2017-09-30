@@ -7841,6 +7841,20 @@ AIC: 27.032
 
 Number of Fisher Scoring iterations: 3
 
+> ## Aliased ("S"ingular) -> 1 NA coefficient
+> (fS <- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma))
+
+Call:  glm(formula = lot2 ~ log(u) + log(u^2), family = Gamma, data = clotting)
+
+Coefficients:
+(Intercept)       log(u)     log(u^2)  
+   -0.02391      0.02360           NA  
+
+Degrees of Freedom: 8 Total (i.e. Null);  7 Residual
+Null Deviance:	    3.119 
+Residual Deviance: 0.01267 	AIC: 27.03
+> tools::assertError(update(fS, singular.ok=FALSE), verbose=interactive())
+> ## -> .. "singular fit encountered"
 > 
 > ## Don't run: 
 > ##D ## for an example of the use of a terms object as a formula

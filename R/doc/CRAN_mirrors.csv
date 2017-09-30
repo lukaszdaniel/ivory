@@ -21,7 +21,8 @@ Austria,Austria,Wien,http://cran.wu.ac.at/,"Wirtschaftsuniversität Wien","CRAN 
 "Brazil (RJ)",Brazil,"Rio de Janeiro",http://cran.fiocruz.br/,"Oswaldo Cruz Foundation, Rio de Janeiro","oswaldo.cruz # fiocruz.br",1,br,"secure_mirror_from_master"
 "Brazil (SP 1) [https]",Brazil,"Sao Paulo",https://vps.fmvz.usp.br/CRAN/,"University of Sao Paulo, Sao Paulo","Fernando Ferreira <fernando # vps.fmvz.usp.br>",1,br,"secure_mirror_from_master"
 "Brazil (SP 1)",Brazil,"Sao Paulo",http://vps.fmvz.usp.br/CRAN/,"University of Sao Paulo, Sao Paulo","Fernando Ferreira <fernando # vps.fmvz.usp.br>",1,br,"secure_mirror_from_master"
-"Brazil (SP 2)",Brazil,Piracicaba,http://brieger.esalq.usp.br/CRAN/,"University of Sao Paulo, Piracicaba","A Augusto F Garcia <aafgarci # gmail.com>, augusto.garcia # usp.br",1,br,
+"Brazil (SP 2) [https]",Brazil,Piracicaba,https://brieger.esalq.usp.br/CRAN/,"University of Sao Paulo, Piracicaba","A Augusto F Garcia <aafgarci # gmail.com>, augusto.garcia # usp.br",1,br,"secure_mirror_from_master"
+"Brazil (SP 2)",Brazil,Piracicaba,http://brieger.esalq.usp.br/CRAN/,"University of Sao Paulo, Piracicaba","A Augusto F Garcia <aafgarci # gmail.com>, augusto.garcia # usp.br",1,br,"secure_mirror_from_master"
 "Bulgaria [https]",Bulgaria,Sofia,https://ftp.uni-sofia.bg/CRAN/,"Sofia University","Alexander Velin <velin # fccf.net>",1,bg,"secure_mirror_from_master"
 Bulgaria,Bulgaria,Sofia,http://ftp.uni-sofia.bg/CRAN/,"Sofia University","Alexander Velin <velin # fccf.net>",1,bg,"secure_mirror_from_master"
 "Canada (BC)",Canada,Burnaby,http://cran.stat.sfu.ca/,"Simon Fraser University, Burnaby","gripe # sfu.ca",1,ca,"maintainer_address_bounces"
@@ -36,6 +37,7 @@ Bulgaria,Bulgaria,Sofia,http://ftp.uni-sofia.bg/CRAN/,"Sofia University","Alexan
 "China (Beijing)",China,Beijing,http://mirrors.tuna.tsinghua.edu.cn/CRAN/,"TUNA Team, Tsinghua University","Justin Wong <justin.w.xd # gmail.com>",1,cn
 "China (Hefei) [https]",China,Hefei,https://mirrors.ustc.edu.cn/CRAN/,"University of Science and Technology of China","mirrors # Ustc.edu.cn",1,cn
 "China (Hefei)",China,Hefei,http://mirrors.ustc.edu.cn/CRAN/,"University of Science and Technology of China","mirrors # Ustc.edu.cn",1,cn
+"China (Guangzhou) [https]",China,Guangzhou,https://mirrors.eliteu.cn/CRAN/,"Elite Education","x.liu # eliteu.cn",1,cn,"secure_mirror_from_master"
 "China (Lanzhou) [https]",China,Lanzhou,https://mirror.lzu.edu.cn/CRAN/,"Lanzhou University Open Source Society","oss.lzu.edu.cn # gmail.com",1,cn,"secure_mirror_from_master"
 "China (Lanzhou)",China,Lanzhou,http://mirror.lzu.edu.cn/CRAN/,"Lanzhou University Open Source Society","oss.lzu.edu.cn # gmail.com",1,cn,"secure_mirror_from_master"
 "Colombia (Cali) [https]",Colombia,Cali,https://www.icesi.edu.co/CRAN/,"Icesi University","adminred # Icesi.edu.co",1,co,"secure_mirror_from_master"

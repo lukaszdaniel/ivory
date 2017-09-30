@@ -3700,7 +3700,7 @@ attribute_hidden
 size_t Rconn_getline(Rconnection con, char *buf, size_t bufsize)
 {
     int c;
-    size_t nbuf = -1;
+    ssize_t nbuf = -1;
 
     while((c = Rconn_fgetc(con)) != R_EOF) {
 	if(nbuf+1 >= bufsize) error(_("line is longer than buffer size %lu"), (unsigned long) bufsize);
@@ -3718,7 +3718,7 @@ size_t Rconn_getline(Rconnection con, char *buf, size_t bufsize)
 	if(nbuf+1 >= bufsize) error(_("line is longer than buffer size %lu"), (unsigned long) bufsize);
 	buf[++nbuf] = '\0';
     }
-    return(nbuf);
+    return (size_t) nbuf;
 }
 
 int Rconn_printf(Rconnection con, const char *format, ...)

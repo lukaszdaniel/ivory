@@ -230,13 +230,13 @@ Rboolean R_envHasNoSpecialSymbols (SEXP env)
   internal changes of implementation without affecting client code.
 */
 
-//#define HASHSIZE(x)	     LENGTH(x)
+//#define HASHSIZE(x)	     ((int) STDVEC_LENGTH(x))
 static R_INLINE int HASHSIZE(SEXP x) {
- return LENGTH(x);
+ return (int) STDVEC_LENGTH(x);
  }
-//#define HASHPRI(x)	     TRUELENGTH(x)
+//#define HASHPRI(x)	     ((int) STDVEC_TRUELENGTH(x))
 static R_INLINE int HASHPRI(SEXP x) {
- return TRUELENGTH(x);
+ return (int) STDVEC_TRUELENGTH(x);
  }
 #define HASHTABLEGROWTHRATE  1.2
 #define HASHMINSIZE	     29
@@ -244,6 +244,7 @@ static R_INLINE int HASHPRI(SEXP x) {
 static R_INLINE void SET_HASHPRI(SEXP x, int v) {
  SET_TRUELENGTH(x, v);
  }
+#define HASHCHAIN(table, i)  ((SEXP *) STDVEC_DATAPTR(table))[i]
 
 //#define IS_HASHED(x)	     (HASHTAB(x) != R_NilValue)
 static R_INLINE Rboolean IS_HASHED(SEXP x) {
@@ -331,7 +332,7 @@ static SEXP R_HashGet(int hashcode, SEXP symbol, SEXP table)
     SEXP chain;
 
     /* Grab the chain from the hashtable */
-    chain = VECTOR_ELT(table, hashcode);
+    chain = HASHCHAIN(table, hashcode);
     /* Retrieve the value from the chain */
     for (; chain != R_NilValue ; chain = CDR(chain))
 	if (TAG(chain) == symbol) return BINDING_VALUE(chain);
