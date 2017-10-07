@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.5.0\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3560,6 +3560,13 @@ msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
+
+msgid "Problems when formatting CITATION entries:"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("Problems with news in 'inst/NEWS.Rd':\n", domain = "R-tools")
 
@@ -3654,6 +3661,13 @@ msgstr ""
 
 
 #: R/Rd.R: 0
+#. R/Rd.R: gettextf("Rd macro package %s is not installed.", sQuote(p))
+
+msgid "Rd macro package %s is not installed."
+msgstr ""
+
+
+#: R/Rd.R: 0
 #. R/Rd.R: stop("Rd object is required")
 
 msgid "Rd object is required"
@@ -3686,6 +3700,13 @@ msgstr ""
 #. R/QC.R: gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",     paste(" ", y), domain = "R-tools")
 
 msgid "Reading CITATION file fails with\n%s\nwhen package is not installed."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Reading CITATION file fails with:", domain = "R-tools")
+
+msgid "Reading CITATION file fails with:"
 msgstr ""
 
 
@@ -7028,7 +7049,11 @@ msgstr ""
 #: R/urltools.R: 0
 #: R/urltools.R: 0
 #: R/urltools.R: 0
+#: R/urltools.R: 0
+#: R/urltools.R: 0
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/urltools.R: gettextf("processing %s", u)

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -2818,6 +2818,11 @@ msgstr ""
 msgid "Possibly mis-spelled words in DESCRIPTION:"
 msgstr ""
 
+#. R/QC.R: gettext("Problems when formatting CITATION entries:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Problems when formatting CITATION entries:"
+msgstr ""
+
 #. R/check.R: gettext("Problems with news in 'inst/NEWS.Rd':\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Problems with news in 'inst/NEWS.Rd':"
@@ -2893,6 +2898,12 @@ msgstr "I file Rd devono avere \\title non vuoto."
 msgid "Rd files with duplicated name %s:"
 msgstr "I file Rd devono avere \\title non vuoto."
 
+#. R/Rd.R: gettextf("Rd macro package %s is not installed.", sQuote(p))
+#: R/Rd.R:0
+#, fuzzy
+msgid "Rd macro package %s is not installed."
+msgstr "esecuzione di make fallita"
+
 #. R/Rd.R: stop("Rd object is required")
 #: R/Rd.R:0
 msgid "Rd object is required"
@@ -2920,6 +2931,11 @@ msgid ""
 "Reading CITATION file fails with\n"
 "%s\n"
 "when package is not installed."
+msgstr ""
+
+#. R/QC.R: gettext("Reading CITATION file fails with:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Reading CITATION file fails with:"
 msgstr ""
 
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
@@ -5606,6 +5622,8 @@ msgid "preparing package for lazy loading"
 msgstr ""
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/urltools.R: gettextf("processing %s", u)

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: gettextf("%s at %s", paste(e$message, collapse = ""), paste(deparse(e$call), collapse = ""),     domain = "R-compiler")
+#. R/cmp.R: gettextf("%s at %s", paste(err$message, collapse = ""), paste(deparse(err$call),     collapse = ""), domain = "R-compiler")
+
+msgid "%s at %s"
+msgstr ""
 
 
 #: R/cmp.R: 0

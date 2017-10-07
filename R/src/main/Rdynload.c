@@ -196,11 +196,11 @@ static void initLoadedDLL()
 	    R_Suicide(_("R_MAX_NUM_DLLS must be at least 100"));
 	if (reqlimit > maxlimit) {
 	    if (maxlimit == 1000)
-		R_Suicide(_("MAX_NUM_DLLS cannot be bigger than 1000"));
+		R_Suicide(_("R_MAX_NUM_DLLS cannot be bigger than 1000"));
 	    
 	    char msg[128];
 	    snprintf(msg, 128,
-	      _("MAX_NUM_DLLS bigger than %d may exhaust open files limit"),
+	      _("R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"),
 	      maxlimit);
 	    R_Suicide(msg);
 	}
@@ -499,6 +499,7 @@ found:
     if(R_osDynSymbol->deleteCachedSymbols)
 	R_osDynSymbol->deleteCachedSymbols(&LoadedDLL[loc]);
 #endif
+    R_reinit_altrep_classes(&LoadedDLL[loc]);
     R_callDLLUnload(&LoadedDLL[loc]);
     R_osDynSymbol->closeLibrary(LoadedDLL[loc].handle);
     Rf_freeDllInfo(LoadedDLL+loc);

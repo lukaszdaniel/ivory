@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-20 22:35\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: 2012-03-06 21:44+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -71,6 +71,11 @@ msgstr ""
 msgid "'mc.cores' argument > 1 is not supported on Windows"
 msgstr "'mc.cores' > 1 n'est pas supporté sous Windows"
 
+#. R/unix/mclapply.R: warning("'mc.preschedule' must be false if 'affinity.list' is used")
+#: R/unix/mclapply.R:0
+msgid "'mc.preschedule' must be false if 'affinity.list' is used"
+msgstr ""
+
 #. R/snowSOCK.R: stop("'port' argument must be specified")
 #: R/snowSOCK.R:0
 msgid "'port' argument must be specified"
@@ -108,6 +113,11 @@ msgid "Zero-length inputs cannot be mixed with those of non-zero length"
 msgstr ""
 "Les entrées de longueur nulle ne peuvent être mélangées à celles de longueur "
 "non nulle"
+
+#. R/unix/mclapply.R: stop("affinity.list and X must have the same length")
+#: R/unix/mclapply.R:0
+msgid "affinity.list and X must have the same length"
+msgstr ""
 
 #. R/unix/mclapply.R: warning("all scheduled cores encountered errors in user code")
 #: R/unix/mclapply.R:0

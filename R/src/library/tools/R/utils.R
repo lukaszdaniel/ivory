@@ -338,18 +338,16 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(file_test("-f", log)) {
             lines <- .get_LaTeX_errors_from_log_file(log)
             if(length(lines))
-                errors <- paste(gettext("LaTeX errors:"),
-                                paste(lines, collapse = "\n"),
-                                sep = "\n")
+                errors <- paste0(gettext("LaTeX errors:"),
+                                paste(lines, collapse = "\n"))
         }
         ## BibTeX errors.
         log <- paste0(file_path_sans_ext(file), ".blg")
         if(file_test("-f", log)) {
             lines <- .get_BibTeX_errors_from_blg_file(log)
             if(length(lines))
-                errors <- paste(gettext("BibTeX errors:"),
-                                paste(lines, collapse = "\n"),
-                                sep = "\n")
+                errors <- paste0(gettext("BibTeX errors:"),
+                                paste(lines, collapse = "\n"))
         }
 
         msg <- ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -855,6 +855,11 @@ msgstr ""
 "'n' jest liczbą *par*, 'sd' jest odchyleniem standardowym *różnić* w obrębie "
 "par"
 
+#. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
+#: R/fisher.test.R:0
+msgid "'names(hybridPars)' should be NULL or be identical to the default's"
+msgstr ""
+
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #: R/prcomp.R:0 R/princomp-add.R:0
@@ -967,10 +972,16 @@ msgstr ""
 msgid "'ref' must be an existing level"
 msgstr "'ref' musi być istniejącym poziomem"
 
-#. R/relevel.R: stop("'relevel' only for factors")
-#. R/relevel.R: stop("'relevel' only for factors")
+#. R/relevel.R: stop("'relevel' only for (unordered) factors")
 #: R/relevel.R:0
-msgid "'relevel' only for factors"
+#, fuzzy
+msgid "'relevel' only for (unordered) factors"
+msgstr "'relevel' tylko dla czynników"
+
+#. R/relevel.R: stop("'relevel' only for unordered factors")
+#: R/relevel.R:0
+#, fuzzy
+msgid "'relevel' only for unordered factors"
 msgstr "'relevel' tylko dla czynników"
 
 #. R/dendrogram.R: stop("'reorder.dendrogram' requires a dendrogram")
@@ -1746,6 +1757,11 @@ msgstr "Kontrasty ortogonalne do %s"
 #: R/mlm.R:0
 msgid "Contrasts spanned by %s"
 msgstr "Kontrasty rozciągnięte przez %s"
+
+#. R/loess.R: gettext("Control settings:", domain = "R-stats")
+#: R/loess.R:0
+msgid "Control settings:"
+msgstr "Ustawienia kontrolne:"
 
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
 #: R/nls.R:0
@@ -3006,6 +3022,11 @@ msgstr ""
 #: R/stl.R:0
 msgid "Time.series components:"
 msgstr "Komponenty szeregu czasowego:"
+
+#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
+#: R/loess.R:0
+msgid "Trace of smoother matrix:"
+msgstr "Ślad gładkiej macierzy:"
 
 #. R/ts-tests.R: gettext("Truncation lag parameter")
 #: R/ts-tests.R:0
@@ -5616,9 +5637,10 @@ msgstr "osobliwa macierz kontrastów"
 msgid "singular convergence (7)"
 msgstr "osobliwa zbieżność (7)"
 
+#. R/glm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
-#: R/lm.R:0
+#: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
 msgstr "napotkano osobliwe dopasowanie"
 
@@ -6859,12 +6881,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "not all arguments have the same length"
 #~ msgstr "nie wszystkie argumenty mają tę samą długość"
-
-#~ msgid "Control settings:"
-#~ msgstr "Ustawienia kontrolne:"
-
-#~ msgid "Trace of smoother matrix:"
-#~ msgstr "Ślad gładkiej macierzy:"
 
 #~ msgid "'x.ret=TRUE' is disregarded when 'list.=FALSE'"
 #~ msgstr "opcja 'x.ret=TRUE' jest ignorowana, gdy 'list.=FALSE'"

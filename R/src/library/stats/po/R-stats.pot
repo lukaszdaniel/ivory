@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.5.0\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1177,6 +1177,13 @@ msgid "'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs"
 msgstr ""
 
 
+#: R/fisher.test.R: 0
+#. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
+
+msgid "'names(hybridPars)' should be NULL or be identical to the default's"
+msgstr ""
+
+
 #: R/prcomp.R: 0
 #: R/princomp-add.R: 0
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
@@ -1324,10 +1331,16 @@ msgstr ""
 
 
 #: R/relevel.R: 0
-#. R/relevel.R: stop("'relevel' only for factors")
-#. R/relevel.R: stop("'relevel' only for factors")
+#. R/relevel.R: stop("'relevel' only for (unordered) factors")
 
-msgid "'relevel' only for factors"
+msgid "'relevel' only for (unordered) factors"
+msgstr ""
+
+
+#: R/relevel.R: 0
+#. R/relevel.R: stop("'relevel' only for unordered factors")
+
+msgid "'relevel' only for unordered factors"
 msgstr ""
 
 
@@ -2391,6 +2404,13 @@ msgstr ""
 #. R/mlm.R: gettextf("Contrasts spanned by %s", paste(deparse(formula(orig.M)), collapse = ""),     domain = "R-stats")
 
 msgid "Contrasts spanned by %s"
+msgstr ""
+
+
+#: R/loess.R: 0
+#. R/loess.R: gettext("Control settings:", domain = "R-stats")
+
+msgid "Control settings:"
 msgstr ""
 
 
@@ -4064,6 +4084,13 @@ msgstr ""
 #. R/stl.R: gettext("Time.series components:", domain = "R-stats")
 
 msgid "Time.series components:"
+msgstr ""
+
+
+#: R/loess.R: 0
+#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
+
+msgid "Trace of smoother matrix:"
 msgstr ""
 
 
@@ -7544,7 +7571,10 @@ msgid "singular convergence (7)"
 msgstr ""
 
 
+#: R/glm.R: 0
 #: R/lm.R: 0
+#: R/lm.R: 0
+#. R/glm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 

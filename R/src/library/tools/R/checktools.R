@@ -1001,7 +1001,7 @@ function(x, ...)
 {
     flags <- x$Flags
     flavor <- x$Flavor
-    paste(gettextf("Package: %s %s\n",
+    paste0(gettextf("Package: %s %s\n",
                   x$Package, x$Version, domain = "R-tools"),
           ifelse(nzchar(flavor),
                  gettextf("Flavor: %s\n", flavor, domain = "R-tools"),
@@ -1013,8 +1013,7 @@ function(x, ...)
                   x$Check, x$Status, domain = "R-tools"),
           sprintf("  %s",
                   gsub("\n", "\n  ", x$Output,
-                       perl = TRUE, useBytes = TRUE)),
-          sep = "")
+                       perl = TRUE, useBytes = TRUE)))
 }
 
 print.check_details <-

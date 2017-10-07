@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-12-10 14:40\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: 2015-01-17 14:59+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -14,6 +14,12 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#. R/cmp.R: gettextf("%s at %s", paste(e$message, collapse = ""), paste(deparse(e$call), collapse = ""),     domain = "R-compiler")
+#. R/cmp.R: gettextf("%s at %s", paste(err$message, collapse = ""), paste(deparse(err$call),     collapse = ""), domain = "R-compiler")
+#: R/cmp.R:0
+msgid "%s at %s"
+msgstr ""
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
 #: R/cmp.R:0

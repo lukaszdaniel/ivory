@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.5.0\n"
-"POT-Creation-Date: 2017-03-27 22:34\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,6 +80,13 @@ msgid "'mc.cores' argument > 1 is not supported on Windows"
 msgstr ""
 
 
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: warning("'mc.preschedule' must be false if 'affinity.list' is used")
+
+msgid "'mc.preschedule' must be false if 'affinity.list' is used"
+msgstr ""
+
+
 #: R/snowSOCK.R: 0
 #. R/snowSOCK.R: stop("'port' argument must be specified")
 
@@ -121,6 +128,13 @@ msgstr ""
 #. R/unix/mcmapply.R: stop("Zero-length inputs cannot be mixed with those of non-zero length")
 
 msgid "Zero-length inputs cannot be mixed with those of non-zero length"
+msgstr ""
+
+
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: stop("affinity.list and X must have the same length")
+
+msgid "affinity.list and X must have the same length"
 msgstr ""
 
 

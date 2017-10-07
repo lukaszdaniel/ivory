@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-10-07 19:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -20,3 +20,13 @@ msgstr ""
 #, c-format
 msgid "'%s' argument must be a positive integer"
 msgstr "argument '%s' musi być dodatnią liczbą całkowitą"
+
+#: splines.c:217
+#, c-format
+msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
+msgstr ""
+
+#: splines.c:220
+#, c-format
+msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
+msgstr ""

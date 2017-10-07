@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46+0200\n"
+"POT-Creation-Date: 2017-10-07 19:12+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -39,15 +39,15 @@ msgstr ""
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "Wahrscheinlichkeiten außerhalb von [0,1] in qansar()"
 
-#: approx.c:96
+#: approx.c:108
 msgid "approx(): invalid f value"
 msgstr "approx(): unzulässiger f Wert"
 
-#: approx.c:99
+#: approx.c:111
 msgid "approx(): invalid interpolation method"
 msgstr "approx(): ungültige Interpolationsmethode"
 
-#: approx.c:105
+#: approx.c:117
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx(): Versuch NAs zu interpolieren"
 
@@ -205,14 +205,19 @@ msgstr "Argument %s muss ein numerischer Vektor der Länge 1 oder %d sein"
 msgid "NROW must be less than or equal to LDTABL."
 msgstr ""
 
-#: fexact.c:212 fexact.c:415
-msgid "All elements of TABLE may not be negative."
+#: fexact.c:212 fexact.c:418
+msgid "All elements of TABLE must be nonnegative."
 msgstr ""
 
-#: fexact.c:217 fexact.c:422
+#: fexact.c:217 fexact.c:426
 msgid ""
 "All elements of TABLE are zero.\n"
 "PRT and PRE are set to missing values."
+msgstr ""
+
+#: fexact.c:274
+#, c-format
+msgid "integer overflow would happen in 'mult * ldkey' = %g"
 msgstr ""
 
 #: fexact.c:395
@@ -220,52 +225,75 @@ msgstr ""
 msgid "NCOL must be at least 2"
 msgstr "n muss mindestes zwei sein"
 
-#: fexact.c:465 fexact.c:474
+#: fexact.c:464 fexact.c:473
 msgid ""
 "The hash table key cannot be computed because the largest key\n"
 "is larger than the largest representable int.\n"
 "The algorithm cannot proceed.\n"
-"Reduce the workspace size or use another algorithm."
+"Reduce the workspace, consider using 'simulate.p.value=TRUE' or another "
+"algorithm."
 msgstr ""
 
-#: fexact.c:657 fexact.c:1399
+#: fexact.c:653
+#, c-format
 msgid ""
-"LDKEY is too small for this problem.\n"
+"FEXACT error 6.  LDKEY=%d is too small for this problem,\n"
+"  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
+"Try increasing the size of the workspace and possibly 'mult'"
+msgstr ""
+
+#: fexact.c:1033
+#, c-format
+msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
+msgstr ""
+
+#: fexact.c:1062
+#, c-format
+msgid ""
+"FEXACT error 30.  Stack length exceeded in f3xact,\n"
+"  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'"
+msgstr ""
+
+#: fexact.c:1395
+#, c-format
+msgid ""
+"FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
 "Try increasing the size of the workspace."
 msgstr ""
 
-#: fexact.c:1032
-msgid "Bug in FEXACT: gave negative key"
-msgstr ""
-
-#: fexact.c:1053
+#: fexact.c:1407
+#, c-format
 msgid ""
-"Stack length exceeded in f3xact.\n"
-"This problem should not occur."
+"FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
+"  (kval=%d, itop-ldstp=%d).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
 
-#: fexact.c:1415 fexact.c:1452
+#: fexact.c:1442
+#, c-format
 msgid ""
-"LDSTP is too small for this problem.\n"
-"Try increasing the size of the workspace."
+"FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
+"  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
 
-#: fexact.c:1809
+#: fexact.c:1792
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
 "%s"
 msgstr ""
 
-#: fexact.c:1844
+#: fexact.c:1827
 msgid "Out of workspace."
 msgstr ""
 
-#: fexact.c:1923
-msgid "This should never occur."
+#: fexact.c:1906
+msgid "This should never occur, please report!"
 msgstr ""
 
-#: filter.c:37 filter.c:40 filter.c:88 lowess.c:283 lowess.c:285
+#: filter.c:37 filter.c:40 filter.c:88 lowess.c:284 lowess.c:286
 #, fuzzy
 msgid "invalid input"
 msgstr "ungültiger tag"
@@ -537,12 +565,12 @@ msgstr ""
 msgid "incorrect specification of 'table' or 'start'"
 msgstr ""
 
-#: lowess.c:287 lowess.c:293
+#: lowess.c:288 lowess.c:294
 #, fuzzy, c-format
 msgid "'%s' argument must be finite and > 0"
 msgstr "'maxiter' muss positiv sein"
 
-#: lowess.c:290
+#: lowess.c:291
 #, fuzzy, c-format
 msgid "'%s' argument must be finite and >= 0"
 msgstr "'maxiter' muss positiv sein"
@@ -1160,7 +1188,7 @@ msgstr ""
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "unzulässige Endregel für laufenden Median von 3: %d"
 
-#: splines.c:374
+#: splines.c:370
 msgid "inputs of different lengths"
 msgstr ""
 

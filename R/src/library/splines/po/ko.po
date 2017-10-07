@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 23:59+0100\n"
+"POT-Creation-Date: 2017-10-07 19:12+0200\n"
 "PO-Revision-Date: 2012-03-06 18:03+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -23,3 +23,13 @@ msgstr ""
 #, fuzzy, c-format
 msgid "'%s' argument must be a positive integer"
 msgstr "'ord' 는 반드시 양의 정수이어야 합니다 "
+
+#: splines.c:217
+#, c-format
+msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
+msgstr ""
+
+#: splines.c:220
+#, c-format
+msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
+msgstr ""

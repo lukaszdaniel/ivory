@@ -41,10 +41,9 @@
       \item New low level utilities \code{...elt(n)} and \code{...length()}
       for working with \code{...} parts inside a function.
 
-      \item \code{isTRUE()} is more tolerant and now true in
-      \preformatted{x <- rlnorm(99)
-	isTRUE(median(x) == quantile(x)["50\%"])
-      }
+      \item \code{isTRUE()} is more tolerant and now true
+      in  \preformatted{   x <- rlnorm(99)
+   isTRUE(median(x) == quantile(x)["50\%"])}
       New function \code{isFALSE()} defined analogously to \code{isTRUE()}.
 
       \item The default symbol table size has been increased from 4119
@@ -172,7 +171,16 @@
       \item Provide \code{`[`} method for \code{"DLLInfoList"}
 
       \item \code{glm()} and \code{glm.fit} get the same
-      \code{singular.ok=TRUE} argument that \code{lm()} has had forever.
+      \code{singular.ok=TRUE} argument that \code{lm()} has had
+      forever.  As a consequence, in \code{glm(*, method = <your_own>)},
+      user specified methods need to accept a \code{singular.ok}
+      argument as well.
+
+      \item \code{aspell()} gains a filter for Markdown (\file{.md} and
+      \file{.Rmd}) files.
+
+      \item \code{intToUtf8(multiple = FALSE)} gains an argument to
+      allow surrogate pairs to be interpreted.
     }
   }
 
@@ -354,8 +362,20 @@
   }
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{raw(0) & raw(0)} now returns \code{raw} again; ditto
-      for \code{|}.
+      \item \code{raw(0) & raw(0)} and \code{raw(0) | raw(0)}
+      again return \code{raw(0)} (rather than \code{logical(0)}).
+
+      \item \code{intToUtf8()} converts integers corresponding to
+      surrogate code points to \code{NA} rather than invalid UTF-8, as
+      well as values larger than the current Unicode maximum of
+      \code{0x10FFFF}.  (This aligns with the current RFC3629.)
+      
+      \item Fix calling of methods on S4 generics that dispatch on
+      \code{\dots} when the call contains \code{\dots}.
+
+      \item Following Unicode \sQuote{Corrigendum 9}, the UTF-8
+      representations of U+FFFE and U+FFFF are now regarded as valid by
+      \code{utf8ToInt()}.
     }
   }
 }

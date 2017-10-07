@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46+0200\n"
+"POT-Creation-Date: 2017-10-07 19:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -36,15 +36,15 @@ msgstr "Po funkcji 'inittree()':\n"
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "prawdopodobieństwa poza przedziałem [0,1] w funkcji 'qansari()'"
 
-#: approx.c:96
+#: approx.c:108
 msgid "approx(): invalid f value"
 msgstr "approx(): niepoprawna wartość 'f'"
 
-#: approx.c:99
+#: approx.c:111
 msgid "approx(): invalid interpolation method"
 msgstr "approx(): niepoprawna metoda interpolacji"
 
-#: approx.c:105
+#: approx.c:117
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx(): próbowano interpolować wartości NA"
 
@@ -204,11 +204,12 @@ msgstr "argument '%s' musi być wektorem liczbowym o długości 1 lub długości
 msgid "NROW must be less than or equal to LDTABL."
 msgstr "'NROW' musi być mniejsze bądź równe 'LDTABL'."
 
-#: fexact.c:212 fexact.c:415
-msgid "All elements of TABLE may not be negative."
+#: fexact.c:212 fexact.c:418
+#, fuzzy
+msgid "All elements of TABLE must be nonnegative."
 msgstr "Wszystkie elementy 'TABLE' nie mogą być ujemne."
 
-#: fexact.c:217 fexact.c:422
+#: fexact.c:217 fexact.c:426
 msgid ""
 "All elements of TABLE are zero.\n"
 "PRT and PRE are set to missing values."
@@ -216,51 +217,78 @@ msgstr ""
 "Wszystkie elementy 'TABLE' wynoszą zero.\n"
 "'PRT' oraz 'PRE' są ustawione na brakujące wartości."
 
+#: fexact.c:274
+#, c-format
+msgid "integer overflow would happen in 'mult * ldkey' = %g"
+msgstr ""
+
 #: fexact.c:395
 msgid "NCOL must be at least 2"
 msgstr "'NCOL' musi wynosić co najmniej 2"
 
-#: fexact.c:465 fexact.c:474
+#: fexact.c:464 fexact.c:473
+#, fuzzy
 msgid ""
 "The hash table key cannot be computed because the largest key\n"
 "is larger than the largest representable int.\n"
 "The algorithm cannot proceed.\n"
-"Reduce the workspace size or use another algorithm."
+"Reduce the workspace, consider using 'simulate.p.value=TRUE' or another "
+"algorithm."
 msgstr ""
 "Klucz tablicy hashowej nie może zostać wyznaczony ponieważ największy klucz\n"
 "jest większy niż najwięsza reprezentowalna liczba całkowita.\n"
 "Alrogytm nie może kontynuować.\n"
 "Zmniejsz obszar roboczy lub użyj innego algorytmu."
 
-#: fexact.c:657 fexact.c:1399
+#: fexact.c:653
+#, fuzzy, c-format
 msgid ""
-"LDKEY is too small for this problem.\n"
+"FEXACT error 6.  LDKEY=%d is too small for this problem,\n"
+"  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
+"Try increasing the size of the workspace and possibly 'mult'"
+msgstr ""
+"'LDKEY' jest zbyt małe dla tego problemu.\n"
+"Spróbuj zwięszyć rozmiar obszaru roboczego."
+
+#: fexact.c:1033
+#, c-format
+msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
+msgstr ""
+
+#: fexact.c:1062
+#, c-format
+msgid ""
+"FEXACT error 30.  Stack length exceeded in f3xact,\n"
+"  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'"
+msgstr ""
+
+#: fexact.c:1395
+#, fuzzy, c-format
+msgid ""
+"FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
 "Try increasing the size of the workspace."
 msgstr ""
 "'LDKEY' jest zbyt małe dla tego problemu.\n"
 "Spróbuj zwięszyć rozmiar obszaru roboczego."
 
-#: fexact.c:1032
-msgid "Bug in FEXACT: gave negative key"
-msgstr "Błąd w 'FEXACT()': otrzymano ujemny klucz"
-
-#: fexact.c:1053
+#: fexact.c:1407
+#, c-format
 msgid ""
-"Stack length exceeded in f3xact.\n"
-"This problem should not occur."
+"FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
+"  (kval=%d, itop-ldstp=%d).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
-"Długość stosu została przekroczona w 'f3xact'.\n"
-"Ten problem nie powinien się pojawić."
 
-#: fexact.c:1415 fexact.c:1452
+#: fexact.c:1442
+#, c-format
 msgid ""
-"LDSTP is too small for this problem.\n"
-"Try increasing the size of the workspace."
+"FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
+"  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
+"Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
-"'LDSTP' jest zbyt małe dla tego problemu.\n"
-"Spróbuj zwięszyć rozmiar obszaru roboczego."
 
-#: fexact.c:1809
+#: fexact.c:1792
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
@@ -269,15 +297,16 @@ msgstr ""
 "błąd FEXACT %d.\n"
 "%s"
 
-#: fexact.c:1844
+#: fexact.c:1827
 msgid "Out of workspace."
 msgstr "Zabrakło obszaru roboczego."
 
-#: fexact.c:1923
-msgid "This should never occur."
+#: fexact.c:1906
+#, fuzzy
+msgid "This should never occur, please report!"
 msgstr "Nie nigdy nie powinno się pojawić."
 
-#: filter.c:37 filter.c:40 filter.c:88 lowess.c:283 lowess.c:285
+#: filter.c:37 filter.c:40 filter.c:88 lowess.c:284 lowess.c:286
 msgid "invalid input"
 msgstr "niepoprawne wejście"
 
@@ -558,12 +587,12 @@ msgstr "algorytm nie uzbieżnił się"
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "niepoprawne określenie 'table' lub 'start'"
 
-#: lowess.c:287 lowess.c:293
+#: lowess.c:288 lowess.c:294
 #, c-format
 msgid "'%s' argument must be finite and > 0"
 msgstr "argument '%s' musi być skończony oraz > 0"
 
-#: lowess.c:290
+#: lowess.c:291
 #, c-format
 msgid "'%s' argument must be finite and >= 0"
 msgstr "argument '%s' musi być skończony oraz >= 0"
@@ -1167,7 +1196,7 @@ msgstr "spar-finding: nieskończona wartość %g; używanie wartości BIG\n"
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"
 
-#: splines.c:374
+#: splines.c:370
 msgid "inputs of different lengths"
 msgstr "wejścia o różnych długościach"
 
@@ -1180,6 +1209,23 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
+
+#~ msgid "Bug in FEXACT: gave negative key"
+#~ msgstr "Błąd w 'FEXACT()': otrzymano ujemny klucz"
+
+#~ msgid ""
+#~ "Stack length exceeded in f3xact.\n"
+#~ "This problem should not occur."
+#~ msgstr ""
+#~ "Długość stosu została przekroczona w 'f3xact'.\n"
+#~ "Ten problem nie powinien się pojawić."
+
+#~ msgid ""
+#~ "LDSTP is too small for this problem.\n"
+#~ "Try increasing the size of the workspace."
+#~ msgstr ""
+#~ "'LDSTP' jest zbyt małe dla tego problemu.\n"
+#~ "Spróbuj zwięszyć rozmiar obszaru roboczego."
 
 #~ msgid "'%s' argument must be an expression or call"
 #~ msgstr "argument '%s' musi być wyrażeniem lub wywołaniem"

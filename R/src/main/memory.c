@@ -909,7 +909,7 @@ static void GetNewPage(int node_class)
 	SNAP_NODE(s, base);
 #if  VALGRIND_LEVEL > 1
 	if (NodeClassSize[node_class] > 0)
-	    VALGRIND_MAKE_MEM_NOACCESS(DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
+	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
 #endif
 	s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	INIT_REFCNT(s);
@@ -1814,7 +1814,7 @@ static void RunGenCollect(R_size_t size_needed)
 	for(s = NEXT_NODE(R_GenHeap[i].New);
 	    s != R_GenHeap[i].Free;
 	    s = NEXT_NODE(s)) {
-	    VALGRIND_MAKE_MEM_NOACCESS(DATAPTR(s),
+	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
 				       NodeClassSize[i]*sizeof(VECREC));
 	}
     }
@@ -2522,7 +2522,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    case INTSXP: actual_size = sizeof(int); break;
 	    case LGLSXP: actual_size = sizeof(int); break;
 	    }
-	    VALGRIND_MAKE_MEM_UNDEFINED(DATAPTR(s), actual_size);
+	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    SETSCALAR(s, 1);
@@ -2669,7 +2669,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (node_class < NUM_SMALL_NODE_CLASSES) {
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
-	    VALGRIND_MAKE_MEM_UNDEFINED(DATAPTR(s), actual_size);
+	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
@@ -4058,35 +4058,3 @@ R_len_t NORET R_BadLongVector(SEXP x, const char *file, int line)
     error(_("long vectors not supported yet: %s:%d"), file, line);
 }
 #endif
-
-
-#define ALTREP_STUBS
-#ifdef ALTREP_STUBS
-R_xlen_t ALTREP_LENGTH(SEXP x) { return 0; }
-R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
-SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep) { return NULL; }
-SEXP ALTREP_SERIALIZED_CLASS(SEXP x) { return NULL; }
-SEXP ALTREP_SERIALIZED_STATE(SEXP x) { return NULL; }
-SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
-{
-    return NULL;
-}
-Rboolean
-ALTREP_INSPECT(SEXP x, int pre, int deep, int pvec,
-	       void (*inspect_subtree)(SEXP, int, int, int))
-{
-    return FALSE;
-}
-void *ALTVEC_DATAPTR(SEXP x, Rboolean writeable) { return NULL; }
-void *ALTVEC_DATAPTR_OR_NULL(SEXP x, Rboolean writeable) { return NULL; }
-int ALTINTEGER_ELT(SEXP x, R_xlen_t i) { return 0; }
-int ALTLOGICAL_ELT(SEXP x, R_xlen_t i) { return 0; }
-double ALTREAL_ELT(SEXP x, R_xlen_t i) { return 0.0; }
-Rcomplex ALTCOMPLEX_ELT(SEXP x, R_xlen_t i)
-{
-    Rcomplex v = {0.0, 0.0};
-    return v;
-}
-#endif
-SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i) { return NULL; }
-void ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v) {}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2017-10-07 19:11\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2904,12 +2904,6 @@ msgstr "존재하지 않는 행은 허용되지 않습니다"
 msgid "non-finite 'partial'"
 msgstr "유한하지 않은 'partial' "
 
-#. R/dataframe.R: stop("non-numeric variable in data frame: ", vnames[!mode.ok])
-#: R/dataframe.R:0
-#, fuzzy
-msgid "non-numeric variable in data frame:"
-msgstr "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
-
 #. R/eigen.R: stop("non-square matrix in 'eigen()' function")
 #: R/eigen.R:0
 #, fuzzy
@@ -3522,11 +3516,12 @@ msgid_plural ""
 " extra arguments %s will be disregarded"
 msgstr[0] "추가적인 %s 는 고려되지 않습니다 "
 
-#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s", "No methods were found in package %s for requests: %s",     domain = "R-base")
+#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s when loading %s",     "No methods were found in package %s for requests: %s when loading %s", domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
-msgid "No methods were found in package %s for request: %s"
-msgid_plural "No methods were found in package %s for requests: %s"
+msgid "No methods were found in package %s for request: %s when loading %s"
+msgid_plural ""
+"No methods were found in package %s for requests: %s when loading %s"
 msgstr[0] "\"%s\" 에서 요청에 만족하는 메소드를 찾을 수 없습니다: %s"
 
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
@@ -3614,6 +3609,13 @@ msgstr[0] ""
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] "라이브러리 %s 는 아무런 패키지를 포함하고 있지 않습니다 "
+
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric variable in data frame: "
+msgid_plural "non-numeric variables in data frame: "
+msgstr[0] "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3705,11 +3707,14 @@ msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] "replacement has %d rows, data has %d"
 
-#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s",     "requested methods were not found in environment/package %s: %s", domain = "R-base")
+#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s when loading %s",     "requested methods were not found in environment/package %s: %s when loading %s",     domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
-msgid "requested method was not found in environment/package %s: %s"
-msgid_plural "requested methods were not found in environment/package %s: %s"
+msgid ""
+"requested method was not found in environment/package %s: %s when loading %s"
+msgid_plural ""
+"requested methods were not found in environment/package %s: %s when loading "
+"%s"
 msgstr[0] "요청된 메소드들은 환경/패키지 %s 에서 찾을 수 없습니다: %s "
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")

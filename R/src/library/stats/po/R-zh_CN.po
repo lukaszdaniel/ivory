@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -917,6 +917,11 @@ msgid ""
 "'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs"
 msgstr ""
 
+#. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
+#: R/fisher.test.R:0
+msgid "'names(hybridPars)' should be NULL or be identical to the default's"
+msgstr ""
+
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #: R/prcomp.R:0 R/princomp-add.R:0
@@ -1033,10 +1038,16 @@ msgstr "'proj'还没有为多反应实现"
 msgid "'ref' must be an existing level"
 msgstr "'ref'必需是存在的层次"
 
-#. R/relevel.R: stop("'relevel' only for factors")
-#. R/relevel.R: stop("'relevel' only for factors")
+#. R/relevel.R: stop("'relevel' only for (unordered) factors")
 #: R/relevel.R:0
-msgid "'relevel' only for factors"
+#, fuzzy
+msgid "'relevel' only for (unordered) factors"
+msgstr "'relevel'只适用于因子"
+
+#. R/relevel.R: stop("'relevel' only for unordered factors")
+#: R/relevel.R:0
+#, fuzzy
+msgid "'relevel' only for unordered factors"
 msgstr "'relevel'只适用于因子"
 
 #. R/dendrogram.R: stop("'reorder.dendrogram' requires a dendrogram")
@@ -1839,6 +1850,11 @@ msgstr ""
 #. R/mlm.R: gettextf("Contrasts spanned by %s", paste(deparse(formula(orig.M)), collapse = ""),     domain = "R-stats")
 #: R/mlm.R:0
 msgid "Contrasts spanned by %s"
+msgstr ""
+
+#. R/loess.R: gettext("Control settings:", domain = "R-stats")
+#: R/loess.R:0
+msgid "Control settings:"
 msgstr ""
 
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
@@ -3109,6 +3125,11 @@ msgstr ""
 #. R/stl.R: gettext("Time.series components:", domain = "R-stats")
 #: R/stl.R:0
 msgid "Time.series components:"
+msgstr ""
+
+#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
+#: R/loess.R:0
+msgid "Trace of smoother matrix:"
 msgstr ""
 
 #. R/ts-tests.R: gettext("Truncation lag parameter")
@@ -5744,9 +5765,10 @@ msgstr "奇异对比矩阵"
 msgid "singular convergence (7)"
 msgstr "遇到了奇异拟合"
 
+#. R/glm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
-#: R/lm.R:0
+#: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
 msgstr "遇到了奇异拟合"
 

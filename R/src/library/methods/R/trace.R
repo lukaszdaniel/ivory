@@ -797,8 +797,8 @@ insertSource <- function(source, package = "",
         notThere <- is.na(match(functions, allObjects))
         if(any(notThere)) {
             warning(sprintf(gettext("cannot insert these (not found in source): %s", domain = "R-methods"),
-                    paste('"',functions[notThere],'"',
-                          sep = "", collapse = ", ")),
+                    paste0('"', functions[notThere], '"',
+                           collapse = ", ")),
                     domain = NA)
         }
     }
@@ -808,8 +808,8 @@ insertSource <- function(source, package = "",
 	    length(grep(fname, .mnames, fixed = TRUE)) == 0, NA)
         if(any(notThere)) {
             warning(sprintf(gettext("cannot insert methods for these functions (methods table not found in source): %s", domain = "R-methods"),
-                    paste('"',methods[notThere],'"',
-                          sep = "", collapse = ", ")),
+                    paste0('"', methods[notThere], '"',
+                           collapse = ", ")),
                     domain = NA)
             methods <- methods[!notThere]
         }

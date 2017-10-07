@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2017-10-07 19:11\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -2942,12 +2942,6 @@ msgstr "les lignes inexistantes ne sont pas permises"
 msgid "non-finite 'partial'"
 msgstr "'partial' non fini"
 
-#. R/dataframe.R: stop("non-numeric variable in data frame: ", vnames[!mode.ok])
-#: R/dataframe.R:0
-#, fuzzy
-msgid "non-numeric variable in data frame:"
-msgstr "variable non numérique dans le tableau de données :"
-
 #. R/eigen.R: stop("non-square matrix in 'eigen()' function")
 #: R/eigen.R:0
 #, fuzzy
@@ -3579,11 +3573,12 @@ msgid_plural ""
 msgstr[0] "l'argument supplémentaire %s sera ignoré"
 msgstr[1] "l'argument supplémentaire %s sera ignoré"
 
-#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s", "No methods were found in package %s for requests: %s",     domain = "R-base")
+#. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s when loading %s",     "No methods were found in package %s for requests: %s when loading %s", domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
-msgid "No methods were found in package %s for request: %s"
-msgid_plural "No methods were found in package %s for requests: %s"
+msgid "No methods were found in package %s for request: %s when loading %s"
+msgid_plural ""
+"No methods were found in package %s for requests: %s when loading %s"
 msgstr[0] "Pas de méthodes trouvées das \"%s\" pour les requêtes : %s"
 msgstr[1] "Pas de méthodes trouvées das \"%s\" pour les requêtes : %s"
 
@@ -3685,6 +3680,14 @@ msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] "la bibliothèque %s ne contient aucun package"
 msgstr[1] "les bibliothèques %s ne contiennent aucun package"
+
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric variable in data frame: "
+msgid_plural "non-numeric variables in data frame: "
+msgstr[0] "variable non numérique dans le tableau de données :"
+msgstr[1] "variable non numérique dans le tableau de données :"
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3789,11 +3792,14 @@ msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] "le tableau de remplacement a %d lignes, le tableau remplacé en a %d"
 msgstr[1] "le tableau de remplacement a %d lignes, le tableau remplacé en a %d"
 
-#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s",     "requested methods were not found in environment/package %s: %s", domain = "R-base")
+#. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s when loading %s",     "requested methods were not found in environment/package %s: %s when loading %s",     domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
-msgid "requested method was not found in environment/package %s: %s"
-msgid_plural "requested methods were not found in environment/package %s: %s"
+msgid ""
+"requested method was not found in environment/package %s: %s when loading %s"
+msgid_plural ""
+"requested methods were not found in environment/package %s: %s when loading "
+"%s"
 msgstr[0] ""
 "des méthodes demandées sont introuvables dans l'environnement / le package "
 "%s : %s"

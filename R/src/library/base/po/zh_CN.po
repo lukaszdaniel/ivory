@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:45+0200\n"
+"POT-Creation-Date: 2017-10-07 19:11+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -320,11 +320,11 @@ msgstr "'%s'的值不对"
 msgid "sann stopped after %d iterations"
 msgstr ""
 
-#: src/appl/pretty.c:102
+#: src/appl/pretty.c:105
 msgid "Internal(pretty()): very small range.. corrected"
 msgstr "Internal(pretty()): 范围太小，纠正了"
 
-#: src/appl/pretty.c:105
+#: src/appl/pretty.c:108
 msgid "Internal(pretty()): very large range.. corrected"
 msgstr "Internal(pretty()): 范围太大，纠正了"
 
@@ -583,76 +583,77 @@ msgid "problem in displaying file '%ls'"
 msgstr "在显示'%s'时出了问题"
 
 #: src/gnuwin32/extra.c:114 src/gnuwin32/extra.c:156 src/gnuwin32/extra.c:346
-#: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597
+#: src/gnuwin32/extra.c:591 src/gnuwin32/extra.c:616
 #: src/gnuwin32/sys-win32.c:221 src/main/agrep.c:132 src/main/agrep.c:136
 #: src/main/agrep.c:773 src/main/agrep.c:778 src/main/apply.c:329
 #: src/main/apply.c:331 src/main/apply.c:334 src/main/array.c:93
 #: src/main/array.c:1730 src/main/array.c:1869 src/main/array.c:1871
-#: src/main/array.c:1872 src/main/array.c:2250 src/main/array.c:2252
-#: src/main/array.c:2254 src/main/attrib.c:194 src/main/builtin.c:89
+#: src/main/array.c:1872 src/main/array.c:2252 src/main/array.c:2254
+#: src/main/array.c:2256 src/main/attrib.c:194 src/main/builtin.c:89
 #: src/main/builtin.c:98 src/main/builtin.c:117 src/main/builtin.c:119
-#: src/main/builtin.c:150 src/main/builtin.c:579 src/main/builtin.c:595
-#: src/main/builtin.c:781 src/main/builtin.c:783 src/main/builtin.c:785
-#: src/main/character.c:243 src/main/character.c:246 src/main/character.c:251
-#: src/main/character.c:792 src/main/character.c:795 src/main/character.c:1291
-#: src/main/character.c:1295 src/main/character.c:1298
-#: src/main/character.c:1532 src/main/character.c:1536
-#: src/main/character.c:1598 src/main/character.c:1601 src/main/coerce.c:1453
-#: src/main/coerce.c:1505 src/main/coerce.c:1943 src/main/connections.c:1357
-#: src/main/connections.c:1363 src/main/connections.c:1366
-#: src/main/connections.c:1370 src/main/connections.c:1519
-#: src/main/connections.c:1535 src/main/connections.c:1540
-#: src/main/connections.c:2153 src/main/connections.c:2159
-#: src/main/connections.c:2163 src/main/connections.c:2167
-#: src/main/connections.c:2172 src/main/connections.c:2832
-#: src/main/connections.c:2837 src/main/connections.c:2840
-#: src/main/connections.c:2843 src/main/connections.c:3233
-#: src/main/connections.c:3238 src/main/connections.c:3244
-#: src/main/connections.c:3247 src/main/connections.c:3251
-#: src/main/connections.c:3266 src/main/connections.c:3315
-#: src/main/connections.c:3320 src/main/connections.c:3324
-#: src/main/connections.c:3328 src/main/connections.c:3332
-#: src/main/connections.c:3338 src/main/connections.c:3383
-#: src/main/connections.c:3389 src/main/connections.c:3393
-#: src/main/connections.c:3444 src/main/connections.c:3447
-#: src/main/connections.c:3770 src/main/connections.c:3773
-#: src/main/connections.c:3776 src/main/connections.c:3782
-#: src/main/connections.c:3889 src/main/connections.c:3895
-#: src/main/connections.c:3898 src/main/connections.c:4053
-#: src/main/connections.c:4056 src/main/connections.c:4060
-#: src/main/connections.c:4063 src/main/connections.c:4184
-#: src/main/connections.c:4315 src/main/connections.c:4318
-#: src/main/connections.c:4658 src/main/connections.c:4683
-#: src/main/connections.c:4718 src/main/connections.c:4733
-#: src/main/connections.c:4741 src/main/connections.c:4767
-#: src/main/connections.c:4916 src/main/connections.c:4920
-#: src/main/connections.c:5050 src/main/connections.c:5052
-#: src/main/connections.c:5054 src/main/connections.c:5082
-#: src/main/connections.c:5216 src/main/connections.c:5255
-#: src/main/connections.c:5260 src/main/connections.c:5265
-#: src/main/connections.c:5289 src/main/context.c:627 src/main/context.c:636
-#: src/main/context.c:640 src/main/datetime.c:780 src/main/datetime.c:869
+#: src/main/builtin.c:154 src/main/builtin.c:159 src/main/builtin.c:583
+#: src/main/builtin.c:599 src/main/builtin.c:785 src/main/builtin.c:787
+#: src/main/builtin.c:789 src/main/character.c:243 src/main/character.c:246
+#: src/main/character.c:251 src/main/character.c:792 src/main/character.c:795
+#: src/main/character.c:1291 src/main/character.c:1295
+#: src/main/character.c:1298 src/main/character.c:1532
+#: src/main/character.c:1536 src/main/character.c:1598
+#: src/main/character.c:1601 src/main/coerce.c:1453 src/main/coerce.c:1505
+#: src/main/coerce.c:1943 src/main/connections.c:1363
+#: src/main/connections.c:1369 src/main/connections.c:1372
+#: src/main/connections.c:1376 src/main/connections.c:1525
+#: src/main/connections.c:1541 src/main/connections.c:1546
+#: src/main/connections.c:2159 src/main/connections.c:2165
+#: src/main/connections.c:2169 src/main/connections.c:2173
+#: src/main/connections.c:2178 src/main/connections.c:2838
+#: src/main/connections.c:2843 src/main/connections.c:2846
+#: src/main/connections.c:2849 src/main/connections.c:3239
+#: src/main/connections.c:3244 src/main/connections.c:3250
+#: src/main/connections.c:3253 src/main/connections.c:3257
+#: src/main/connections.c:3272 src/main/connections.c:3321
+#: src/main/connections.c:3326 src/main/connections.c:3330
+#: src/main/connections.c:3334 src/main/connections.c:3338
+#: src/main/connections.c:3344 src/main/connections.c:3389
+#: src/main/connections.c:3395 src/main/connections.c:3399
+#: src/main/connections.c:3450 src/main/connections.c:3453
+#: src/main/connections.c:3776 src/main/connections.c:3779
+#: src/main/connections.c:3782 src/main/connections.c:3788
+#: src/main/connections.c:3895 src/main/connections.c:3901
+#: src/main/connections.c:3904 src/main/connections.c:4059
+#: src/main/connections.c:4062 src/main/connections.c:4066
+#: src/main/connections.c:4069 src/main/connections.c:4190
+#: src/main/connections.c:4321 src/main/connections.c:4324
+#: src/main/connections.c:4664 src/main/connections.c:4689
+#: src/main/connections.c:4724 src/main/connections.c:4739
+#: src/main/connections.c:4747 src/main/connections.c:4773
+#: src/main/connections.c:4922 src/main/connections.c:4926
+#: src/main/connections.c:5056 src/main/connections.c:5058
+#: src/main/connections.c:5060 src/main/connections.c:5088
+#: src/main/connections.c:5222 src/main/connections.c:5261
+#: src/main/connections.c:5266 src/main/connections.c:5271
+#: src/main/connections.c:5295 src/main/context.c:640 src/main/context.c:649
+#: src/main/context.c:653 src/main/datetime.c:780 src/main/datetime.c:869
 #: src/main/datetime.c:872 src/main/datetime.c:876 src/main/datetime.c:1047
 #: src/main/datetime.c:1049 src/main/datetime.c:1254 src/main/debug.c:245
-#: src/main/deparse.c:418 src/main/dotcode.c:479 src/main/dotcode.c:483
+#: src/main/deparse.c:411 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
-#: src/main/dounzip.c:354 src/main/envir.c:1851 src/main/envir.c:1854
-#: src/main/envir.c:1975 src/main/envir.c:1980 src/main/envir.c:2044
-#: src/main/envir.c:2060 src/main/envir.c:2066 src/main/envir.c:2178
-#: src/main/envir.c:2186 src/main/envir.c:2193 src/main/envir.c:2204
-#: src/main/envir.c:2436 src/main/envir.c:2557 src/main/envir.c:2854
-#: src/main/envir.c:3116 src/main/envir.c:3130 src/main/envir.c:3137
-#: src/main/envir.c:3153 src/main/envir.c:3734 src/main/errors.c:1075
+#: src/main/dounzip.c:354 src/main/envir.c:1852 src/main/envir.c:1855
+#: src/main/envir.c:1976 src/main/envir.c:1981 src/main/envir.c:2045
+#: src/main/envir.c:2061 src/main/envir.c:2067 src/main/envir.c:2179
+#: src/main/envir.c:2187 src/main/envir.c:2194 src/main/envir.c:2205
+#: src/main/envir.c:2440 src/main/envir.c:2561 src/main/envir.c:2858
+#: src/main/envir.c:3120 src/main/envir.c:3134 src/main/envir.c:3141
+#: src/main/envir.c:3157 src/main/envir.c:3738 src/main/errors.c:1075
 #: src/main/eval.c:454 src/main/eval.c:463 src/main/eval.c:466
-#: src/main/grep.c:929 src/main/grep.c:934 src/main/grep.c:1256
-#: src/main/grep.c:1258 src/main/grep.c:1260 src/main/grep.c:1705
-#: src/main/grep.c:1709 src/main/grep.c:1714 src/main/grep.c:2551
-#: src/main/grep.c:2556 src/main/grep.c:2879 src/main/grep.c:2884
+#: src/main/grep.c:928 src/main/grep.c:933 src/main/grep.c:1255
+#: src/main/grep.c:1257 src/main/grep.c:1259 src/main/grep.c:1704
+#: src/main/grep.c:1708 src/main/grep.c:1713 src/main/grep.c:2550
+#: src/main/grep.c:2555 src/main/grep.c:2878 src/main/grep.c:2883
 #: src/main/internet.c:202 src/main/internet.c:216 src/main/internet.c:236
 #: src/main/internet.c:249 src/main/internet.c:261 src/main/internet.c:280
-#: src/main/memory.c:3868 src/main/names.c:1318 src/main/names.c:1321
-#: src/main/objects.c:1635 src/main/objects.c:1637 src/main/paste.c:96
+#: src/main/memory.c:3966 src/main/names.c:1322 src/main/names.c:1325
+#: src/main/objects.c:1638 src/main/objects.c:1640 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
@@ -671,33 +672,33 @@ msgstr "在显示'%s'时出了问题"
 #: src/main/platform.c:1727 src/main/platform.c:1799 src/main/platform.c:1883
 #: src/main/platform.c:2130 src/main/platform.c:2189 src/main/platform.c:2377
 #: src/main/platform.c:2380 src/main/platform.c:2383 src/main/platform.c:2386
-#: src/main/platform.c:2389 src/main/platform.c:2392 src/main/platform.c:2608
-#: src/main/platform.c:2611 src/main/platform.c:2614 src/main/platform.c:2617
-#: src/main/platform.c:2620 src/main/platform.c:2623 src/main/platform.c:2701
-#: src/main/platform.c:2709 src/main/platform.c:2745 src/main/platform.c:2795
+#: src/main/platform.c:2389 src/main/platform.c:2392 src/main/platform.c:2614
+#: src/main/platform.c:2617 src/main/platform.c:2620 src/main/platform.c:2623
+#: src/main/platform.c:2626 src/main/platform.c:2629 src/main/platform.c:2707
+#: src/main/platform.c:2715 src/main/platform.c:2751 src/main/platform.c:2801
 #: src/main/print.c:245 src/main/print.c:251 src/main/print.c:273
 #: src/main/print.c:279 src/main/print.c:286 src/main/random.c:464
 #: src/main/random.c:468 src/main/random.c:475 src/main/random.c:503
-#: src/main/saveload.c:1949 src/main/saveload.c:1952 src/main/saveload.c:1955
-#: src/main/saveload.c:2067 src/main/saveload.c:2246 src/main/saveload.c:2251
-#: src/main/saveload.c:2254 src/main/saveload.c:2358 src/main/scan.c:684
-#: src/main/scan.c:853 src/main/scan.c:867 src/main/scan.c:871
-#: src/main/scan.c:873 src/main/scan.c:884 src/main/scan.c:911
-#: src/main/scan.c:914 src/main/scan.c:917 src/main/scan.c:972
-#: src/main/seq.c:649 src/main/seq.c:656 src/main/seq.c:665 src/main/seq.c:671
-#: src/main/seq.c:715 src/main/seq.c:720 src/main/seq.c:723 src/main/seq.c:727
-#: src/main/seq.c:732 src/main/seq.c:739 src/main/seq.c:743 src/main/seq.c:749
-#: src/main/sort.c:176 src/main/sysutils.c:605 src/main/sysutils.c:609
-#: src/main/sysutils.c:613 src/main/sysutils.c:619 src/main/sysutils.c:623
-#: src/main/sysutils.c:1816 src/main/sysutils.c:1820 src/main/unique.c:1040
-#: src/main/unique.c:1346 src/main/unique.c:1350 src/main/unique.c:1360
-#: src/main/unique.c:1745 src/main/util.c:654 src/main/util.c:657
-#: src/main/util.c:1431 src/main/util.c:1445 src/main/util.c:2036
-#: src/main/util.c:2259 src/main/util.c:2260 src/main/util.c:2261
-#: src/main/util.c:2277 src/main/util.c:2319 src/main/util.c:2323
-#: src/main/util.c:2325 src/main/util.c:2351 src/main/util.c:2353
-#: src/main/util.c:2355 src/main/util.c:2358 src/main/util.c:2361
-#: src/main/util.c:2365 src/main/util.c:2367
+#: src/main/Rdynload.c:1350 src/main/saveload.c:1949 src/main/saveload.c:1952
+#: src/main/saveload.c:1955 src/main/saveload.c:2067 src/main/saveload.c:2246
+#: src/main/saveload.c:2251 src/main/saveload.c:2254 src/main/saveload.c:2358
+#: src/main/scan.c:684 src/main/scan.c:853 src/main/scan.c:867
+#: src/main/scan.c:871 src/main/scan.c:873 src/main/scan.c:884
+#: src/main/scan.c:911 src/main/scan.c:914 src/main/scan.c:917
+#: src/main/scan.c:972 src/main/seq.c:649 src/main/seq.c:656 src/main/seq.c:665
+#: src/main/seq.c:671 src/main/seq.c:715 src/main/seq.c:720 src/main/seq.c:723
+#: src/main/seq.c:727 src/main/seq.c:732 src/main/seq.c:739 src/main/seq.c:743
+#: src/main/seq.c:749 src/main/sort.c:176 src/main/sysutils.c:605
+#: src/main/sysutils.c:609 src/main/sysutils.c:613 src/main/sysutils.c:619
+#: src/main/sysutils.c:623 src/main/sysutils.c:1836 src/main/sysutils.c:1840
+#: src/main/unique.c:1040 src/main/unique.c:1346 src/main/unique.c:1350
+#: src/main/unique.c:1360 src/main/unique.c:1745 src/main/util.c:654
+#: src/main/util.c:657 src/main/util.c:1451 src/main/util.c:1465
+#: src/main/util.c:2056 src/main/util.c:2279 src/main/util.c:2280
+#: src/main/util.c:2281 src/main/util.c:2297 src/main/util.c:2339
+#: src/main/util.c:2343 src/main/util.c:2345 src/main/util.c:2371
+#: src/main/util.c:2373 src/main/util.c:2375 src/main/util.c:2378
+#: src/main/util.c:2381 src/main/util.c:2385 src/main/util.c:2387
 #: src/modules/internet/internet.c:457 src/modules/internet/internet.c:463
 #: src/modules/internet/internet.c:469 src/modules/internet/internet.c:472
 #: src/modules/internet/internet.c:476 src/modules/internet/internet.c:481
@@ -710,7 +711,7 @@ msgstr "在显示'%s'时出了问题"
 #: src/modules/lapack/Lapack.c:895 src/modules/lapack/Lapack.c:1218
 #: src/modules/X11/devX11.c:3246 src/modules/X11/devX11.c:3249
 #: src/modules/X11/devX11.c:3252 src/modules/X11/devX11.c:3276
-#: src/unix/sys-std.c:1309 src/unix/sys-std.c:1332 src/unix/sys-unix.c:617
+#: src/unix/sys-std.c:1325 src/unix/sys-std.c:1348 src/unix/sys-unix.c:645
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s'参数不对"
@@ -731,14 +732,14 @@ msgstr "不要愚蠢!: 你的机器有4Gb的地址上限"
 msgid "cannot decrease memory limit: ignored"
 msgstr "无法减少内存极限：忽视不用"
 
-#: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:880
-#: src/main/sysutils.c:650 src/main/unique.c:1643 src/main/util.c:979
+#: src/gnuwin32/extra.c:444 src/gnuwin32/extra.c:545 src/main/objects.c:880
+#: src/main/sysutils.c:651 src/main/unique.c:1643 src/main/util.c:979
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "第一参数必需是字符矢量"
 
-#: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1077
-#: src/main/errors.c:1079 src/main/objects.c:420 src/main/objects.c:1191
+#: src/gnuwin32/extra.c:448 src/main/edit.c:142 src/main/errors.c:1077
+#: src/main/errors.c:1079 src/main/objects.c:420 src/main/objects.c:1194
 #: src/main/options.c:372 src/main/raw.c:155 src/main/Renviron.c:311
 #: src/main/unique.c:1647 src/modules/lapack/Lapack.c:101
 #: src/modules/lapack/Lapack.c:343 src/modules/lapack/Lapack.c:373
@@ -748,105 +749,119 @@ msgstr "第一参数必需是字符矢量"
 msgid "'%s' argument must be a character string"
 msgstr "'norm'必需是字符串"
 
-#: src/gnuwin32/extra.c:432
+#: src/gnuwin32/extra.c:451
 #, fuzzy
 msgid "'winslash' argument must be '/' or '\\\\'"
 msgstr "第一参数必需是矢量"
 
-#: src/gnuwin32/extra.c:574 src/gnuwin32/extra.c:576 src/gnuwin32/extra.c:599
-#: src/gnuwin32/extra.c:601 src/gnuwin32/extra.c:636 src/main/gevents.c:64
+#: src/gnuwin32/extra.c:593 src/gnuwin32/extra.c:595 src/gnuwin32/extra.c:618
+#: src/gnuwin32/extra.c:620 src/gnuwin32/extra.c:655 src/main/gevents.c:64
 #: src/main/gevents.c:106
 msgid "invalid device"
 msgstr "设备不对"
 
-#: src/gnuwin32/extra.c:577
+#: src/gnuwin32/extra.c:596
 msgid "SDI mode is required"
 msgstr ""
 
-#: src/gnuwin32/extra.c:630 src/main/gevents.c:61 src/main/gevents.c:100
+#: src/gnuwin32/extra.c:649 src/main/gevents.c:61 src/main/gevents.c:100
 #: src/main/gevents.c:103
 msgid "invalid graphical device number"
 msgstr "图形设备号不对"
 
-#: src/gnuwin32/extra.c:640
+#: src/gnuwin32/extra.c:659
 msgid "bad device"
 msgstr "设备有错"
 
-#: src/gnuwin32/extra.c:794 src/gnuwin32/extra.c:802
+#: src/gnuwin32/extra.c:813 src/gnuwin32/extra.c:821
 #, fuzzy, c-format
 msgid "invalid input in '%s' function"
 msgstr "Rmbstowcs里的输入不对"
 
-#: src/gnuwin32/extra.c:825 src/main/platform.c:1374
+#: src/gnuwin32/extra.c:844 src/main/platform.c:1374
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "撤消文件选择"
 
-#: src/gnuwin32/run.c:245
+#: src/gnuwin32/run.c:67
+msgid "A \" is missing (expandcmd)"
+msgstr ""
+
+#: src/gnuwin32/run.c:76
+#, fuzzy
+msgid "Insufficient memory (expandcmd)"
+msgstr "内存不够(rpipeOpen)"
+
+#: src/gnuwin32/run.c:111
+#, c-format
+msgid "'%s' not found"
+msgstr "找不到'%s'"
+
+#: src/gnuwin32/run.c:246
 #, fuzzy, c-format
 msgid "'CreateProcess' failed to run '%s'"
 msgstr "CreateProcess调用'%s'失败"
 
-#: src/gnuwin32/run.c:352
+#: src/gnuwin32/run.c:353
 msgid "Child process not responding.  R will terminate it."
 msgstr "子进程没有反应。R将终止它。"
 
-#: src/gnuwin32/run.c:405 src/gnuwin32/sys-win32.c:223 src/unix/sys-unix.c:636
+#: src/gnuwin32/run.c:406 src/gnuwin32/sys-win32.c:223 src/unix/sys-unix.c:664
 msgid "Timeout with background running processes is not supported."
 msgstr ""
 
-#: src/gnuwin32/run.c:437
+#: src/gnuwin32/run.c:438
 #, c-format
 msgid "Exit code was %d"
 msgstr "退出代码是%d"
 
-#: src/gnuwin32/run.c:470
+#: src/gnuwin32/run.c:471
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "内存不够(rpipeOpen)"
 
-#: src/gnuwin32/run.c:688 src/main/dounzip.c:482
+#: src/gnuwin32/run.c:689 src/main/dounzip.c:482
 msgid "seek not enabled for this connection"
 msgstr "读取在这个链结无效"
 
-#: src/gnuwin32/run.c:694
+#: src/gnuwin32/run.c:695
 msgid "truncate not enabled for this connection"
 msgstr "不能缩短这个链结"
 
-#: src/gnuwin32/run.c:737
+#: src/gnuwin32/run.c:738
 msgid "broken Windows pipe"
 msgstr ""
 
-#: src/gnuwin32/run.c:755 src/main/connections.c:435 src/main/connections.c:452
-#: src/main/connections.c:3086 src/main/printutils.c:886
+#: src/gnuwin32/run.c:756 src/main/connections.c:435 src/main/connections.c:452
+#: src/main/connections.c:3092 src/main/printutils.c:886
 #: src/main/printutils.c:900
 msgid "printing of extremely long output is truncated"
 msgstr "缩短了极长输出的打印"
 
-#: src/gnuwin32/run.c:769 src/gnuwin32/run.c:773 src/gnuwin32/run.c:786
-#: src/gnuwin32/run.c:814 src/main/connections.c:1471
-#: src/main/connections.c:1475 src/main/connections.c:1482
-#: src/main/connections.c:1497
+#: src/gnuwin32/run.c:770 src/gnuwin32/run.c:774 src/gnuwin32/run.c:787
+#: src/gnuwin32/run.c:815 src/main/connections.c:1477
+#: src/main/connections.c:1481 src/main/connections.c:1488
+#: src/main/connections.c:1503
 msgid "allocation of pipe connection failed"
 msgstr "管道链结分配失败"
 
-#: src/gnuwin32/run.c:828 src/main/sprintf.c:106 src/main/util.c:1838
+#: src/gnuwin32/run.c:829 src/main/sprintf.c:106 src/main/util.c:1858
 #, fuzzy, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt'必需是字符矢量"
 
-#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:839
+#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:867
 msgid "reached session elapsed time limit"
 msgstr "到达了对话流逝时间限制"
 
-#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:841
+#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:869
 msgid "reached elapsed time limit"
 msgstr "到达了流逝时间限制"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:847
+#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:875
 msgid "reached session CPU time limit"
 msgstr "到达了对话CPU时间限制"
 
-#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:849
+#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:877
 msgid "reached CPU time limit"
 msgstr "到达了CPU时间限制"
 
@@ -855,21 +870,21 @@ msgstr "到达了CPU时间限制"
 msgid "Fatal error: %s\n"
 msgstr "致命错误:%s\n"
 
-#: src/gnuwin32/system.c:334 src/unix/sys-std.c:946
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:950
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "编码'%s'不存在"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:952
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:956
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<错误: 无法将编码'%s'重新进行编码>\n"
 
 #: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1072
-#: src/gnuwin32/system.c:1084 src/main/connections.c:708
-#: src/main/connections.c:713 src/main/dounzip.c:179 src/main/saveload.c:1960
-#: src/main/serialize.c:2605 src/main/serialize.c:2610
-#: src/main/serialize.c:2695 src/main/serialize.c:2740 src/unix/sys-std.c:1251
+#: src/gnuwin32/system.c:1084 src/main/connections.c:714
+#: src/main/connections.c:719 src/main/dounzip.c:179 src/main/saveload.c:1960
+#: src/main/serialize.c:2633 src/main/serialize.c:2638
+#: src/main/serialize.c:2723 src/main/serialize.c:2768 src/unix/sys-std.c:1267
 #: src/unix/system.c:405
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -959,12 +974,12 @@ msgstr "第一个参数应当是字符串"
 msgid "character string expected as third argument"
 msgstr "第三个参数应当是字符串"
 
-#: src/gnuwin32/sys-win32.c:286 src/unix/sys-unix.c:700 src/unix/sys-unix.c:734
+#: src/gnuwin32/sys-win32.c:286 src/unix/sys-unix.c:728 src/unix/sys-unix.c:762
 #, fuzzy, c-format
 msgid "command '%s' timed out after %ds"
 msgstr "运行命令'%s'的状态是%d"
 
-#: src/gnuwin32/sys-win32.c:290 src/unix/sys-unix.c:598
+#: src/gnuwin32/sys-win32.c:290 src/unix/sys-unix.c:626
 #, c-format
 msgid "running command '%s' had status %d"
 msgstr "运行命令'%s'的状态是%d"
@@ -1023,7 +1038,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:7382 src/main/eval.c:7403
+#: src/main/edit.c:122 src/main/eval.c:7454 src/main/eval.c:7475
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1074,13 +1089,59 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:727
+#: src/include/Rinlinedfuns.h:95
+#, fuzzy, c-format
+msgid "cannot get data pointer of '%s' objects"
+msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
+
+#: src/include/Rinlinedfuns.h:200
+msgid "bad standard LGLSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:204
+msgid "bad standard INTSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:208
+msgid "bad standard REALSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:212
+msgid "bad standard CPLXSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:216
+msgid "bad standard RAWSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:221
+msgid "bad LGLSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:225
+msgid "bad INTSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:229
+msgid "bad REALSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:237
+msgid "bad RAWSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:242
+#, fuzzy
+msgid "subscript out of bounds"
+msgstr "下标出界"
+
+#: src/include/Rinlinedfuns.h:1044
 msgid "cycle detected"
 msgstr ""
 
 #: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1293
-#: src/main/character.c:1297 src/main/grep.c:931 src/main/grep.c:1707
-#: src/main/grep.c:1711 src/main/grep.c:2553 src/main/grep.c:2881
+#: src/main/character.c:1297 src/main/grep.c:930 src/main/grep.c:1706
+#: src/main/grep.c:1710 src/main/grep.c:2552 src/main/grep.c:2880
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "变数'%s'的长度大于一，因此只能用其第一元素"
@@ -1091,29 +1152,29 @@ msgstr "变数'%s'的长度大于一，因此只能用其第一元素"
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern'必需为非空字符串"
 
-#: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:1002
-#: src/main/grep.c:2611 src/main/grep.c:2934
+#: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:1001
+#: src/main/grep.c:2610 src/main/grep.c:2933
 msgid "regular expression is invalid in this locale"
 msgstr "正规表现不适用于此语言环境"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:832
-#: src/main/grep.c:2940
+#: src/main/grep.c:2939
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "regcomp出错：'%s'"
 
-#: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:354
-#: src/main/grep.c:444 src/main/grep.c:570 src/main/grep.c:731
-#: src/main/grep.c:1072 src/main/grep.c:1858 src/main/grep.c:2732
-#: src/main/grep.c:2806 src/main/grep.c:2971
+#: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:353
+#: src/main/grep.c:443 src/main/grep.c:569 src/main/grep.c:730
+#: src/main/grep.c:1071 src/main/grep.c:1857 src/main/grep.c:2731
+#: src/main/grep.c:2805 src/main/grep.c:2970
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "输入的字符串%d不适用于此语言环境"
 
-#: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:280
-#: src/main/grep.c:922 src/main/grep.c:924 src/main/grep.c:1242
-#: src/main/grep.c:1250 src/main/grep.c:1698 src/main/grep.c:1700
-#: src/main/grep.c:2543 src/main/grep.c:2545 src/main/grep.c:2869
+#: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:279
+#: src/main/grep.c:921 src/main/grep.c:923 src/main/grep.c:1241
+#: src/main/grep.c:1249 src/main/grep.c:1697 src/main/grep.c:1699
+#: src/main/grep.c:2542 src/main/grep.c:2544 src/main/grep.c:2868
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "略过'%s'参数值"
@@ -1128,26 +1189,26 @@ msgstr "输入的字符串x[%d]不适用于此语言环境"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "输入的字符串y[%d]不适用于此语言环境"
 
-#: src/main/apply.c:99 src/main/util.c:2398
+#: src/main/apply.c:99 src/main/util.c:2418
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector"
 msgstr "第一参数必需是矢量"
 
 #: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:851
-#: src/main/character.c:1661 src/main/connections.c:3778 src/main/context.c:673
-#: src/main/context.c:692 src/main/datetime.c:680 src/main/datetime.c:782
+#: src/main/character.c:1661 src/main/connections.c:3784 src/main/context.c:691
+#: src/main/context.c:710 src/main/datetime.c:680 src/main/datetime.c:782
 #: src/main/datetime.c:1051 src/main/dotcode.c:220 src/main/errors.c:975
 #: src/main/errors.c:1007 src/main/errors.c:1113 src/main/errors.c:1138
 #: src/main/errors.c:1143 src/main/errors.c:1421 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
-#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3139
+#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3145
 #: src/main/seq.c:259 src/main/seq.c:266 src/main/seq.c:270 src/main/seq.c:367
 #: src/main/seq.c:374 src/main/seq.c:377 src/main/seq.c:379 src/main/seq.c:418
 #: src/main/seq.c:422 src/main/seq.c:426 src/main/sort.c:1245
 #: src/main/sort.c:1328 src/main/sort.c:1332 src/main/sort.c:1339
-#: src/main/source.c:223 src/main/summary.c:957 src/main/sysutils.c:258
-#: src/main/util.c:1068 src/main/util.c:1073 src/main/util.c:1080
-#: src/main/util.c:1083 src/main/util.c:2096 src/modules/lapack/Lapack.c:955
+#: src/main/source.c:223 src/main/summary.c:1013 src/main/sysutils.c:258
+#: src/main/util.c:1088 src/main/util.c:1093 src/main/util.c:1100
+#: src/main/util.c:1103 src/main/util.c:2116 src/modules/lapack/Lapack.c:955
 #: src/modules/X11/devX11.c:3148 src/modules/X11/devX11.c:3174
 #: src/modules/X11/devX11.c:3179 src/modules/X11/devX11.c:3184
 #: src/modules/X11/devX11.c:3194 src/modules/X11/devX11.c:3199
@@ -1188,7 +1249,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>)的值不是NULL也不是长度为%d的串列 "
 
-#: src/main/arithmetic.c:43 src/main/eval.c:4081
+#: src/main/arithmetic.c:43 src/main/eval.c:4107
 #, fuzzy
 msgid "NaN values produced"
 msgstr "产生了NA"
@@ -1207,85 +1268,84 @@ msgstr "系数精确度很可能完全损失"
 msgid "NA values produced by integer overflow"
 msgstr "整数上溢产生了NA"
 
-#: src/main/arithmetic.c:498
+#: src/main/arithmetic.c:496
 msgid "operator needs one or two arguments"
 msgstr "运算符需要一个或两个参数"
 
-#: src/main/arithmetic.c:514
+#: src/main/arithmetic.c:512
 #, fuzzy
 msgid "non-numeric argument passed to binary operator"
 msgstr "二进列运算符中有非数值参数"
 
-#: src/main/arithmetic.c:569
+#: src/main/arithmetic.c:567
 msgid ""
 "Recycling array of length 1 in array-vector arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead.\n"
 msgstr ""
 
-#: src/main/arithmetic.c:577
+#: src/main/arithmetic.c:575
 msgid ""
 "Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead.\n"
 msgstr ""
 
-#: src/main/arithmetic.c:591 src/main/logic.c:94 src/main/relop.c:207
+#: src/main/arithmetic.c:589 src/main/logic.c:94 src/main/relop.c:180
 msgid "non-conformable arrays"
 msgstr "非整合陈列"
 
-#: src/main/arithmetic.c:630 src/main/relop.c:231
+#: src/main/arithmetic.c:628 src/main/relop.c:204
 msgid "non-conformable time-series"
 msgstr "非整合时间系列"
 
-#: src/main/arithmetic.c:652 src/main/logic.c:138 src/main/relop.c:154
-#: src/main/relop.c:252
+#: src/main/arithmetic.c:650 src/main/logic.c:138 src/main/relop.c:225
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "长的对象长度不是短的对象长度的整倍数"
 
-#: src/main/arithmetic.c:718
+#: src/main/arithmetic.c:716
 #, fuzzy
 msgid "invalid argument passed to unary operator"
 msgstr "一进列运算符的参数不对"
 
-#: src/main/arithmetic.c:747 src/main/arithmetic.c:772
-#: src/main/arithmetic.c:791
+#: src/main/arithmetic.c:748 src/main/arithmetic.c:775
+#: src/main/arithmetic.c:797
 msgid "invalid unary operator"
 msgstr "一进列运算符不对"
 
-#: src/main/arithmetic.c:1197 src/main/arithmetic.c:1493
-#: src/main/arithmetic.c:1884 src/main/arithmetic.c:2055
-#: src/main/arithmetic.c:2157
+#: src/main/arithmetic.c:1294 src/main/arithmetic.c:1594
+#: src/main/arithmetic.c:1985 src/main/arithmetic.c:2156
+#: src/main/arithmetic.c:2258
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
 msgstr[0] "%d数值参数的实数函数目前没有实现"
 
-#: src/main/arithmetic.c:1211 src/main/complex.c:610 src/main/complex.c:680
+#: src/main/arithmetic.c:1308 src/main/complex.c:610 src/main/complex.c:680
 msgid "unimplemented complex function"
 msgstr "目前没有实现复数功能"
 
-#: src/main/arithmetic.c:1520
+#: src/main/arithmetic.c:1621
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
 "%d arguments passed to '%s' function which requires 1 or 2 arguments"
 msgstr[0] "%d个参数给'%s'，但它只需要%d个"
 
-#: src/main/arithmetic.c:1538
+#: src/main/arithmetic.c:1639
 msgid "invalid second argument of length 0"
 msgstr "第二参数长度为零是不对的"
 
-#: src/main/arithmetic.c:1633 src/main/arithmetic.c:1651 src/main/envir.c:1561
-#: src/main/envir.c:2071 src/main/eval.c:634 src/main/eval.c:635
-#: src/main/eval.c:4715 src/main/eval.c:4716 src/main/RNG.c:353
+#: src/main/arithmetic.c:1734 src/main/arithmetic.c:1752 src/main/envir.c:1562
+#: src/main/envir.c:2072 src/main/eval.c:634 src/main/eval.c:635
+#: src/main/eval.c:4760 src/main/eval.c:4761 src/main/RNG.c:353
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "缺少参数, 也没有缺省值"
 
-#: src/main/arithmetic.c:1657
+#: src/main/arithmetic.c:1758
 msgid "invalid argument 'base' of length 0"
 msgstr "不能有长度为零的'base'参数"
 
-#: src/main/arithmetic.c:2174
+#: src/main/arithmetic.c:2275
 #, fuzzy
 msgid "bad arithmetic function index"
 msgstr "函数不对"
@@ -1299,14 +1359,14 @@ msgstr "'data'的种类必需为矢量"
 msgid "non-numeric matrix extent"
 msgstr "非数值的矩阵范围"
 
-#: src/main/array.c:103 src/main/array.c:111 src/main/array.c:2152
-#: src/main/array.c:2157
+#: src/main/array.c:103 src/main/array.c:111 src/main/array.c:2154
+#: src/main/array.c:2159
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "'nrow'值不对(要么是太大，要么是含NA)"
 
-#: src/main/array.c:105 src/main/array.c:113 src/main/array.c:2154
-#: src/main/array.c:2159
+#: src/main/array.c:105 src/main/array.c:113 src/main/array.c:2156
+#: src/main/array.c:2161
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "'nrow'值不对(< 0)"
@@ -1341,7 +1401,7 @@ msgstr "数据长度[%d]不是矩阵列数[%d]的整倍数"
 msgid "data length exceeds size of matrix"
 msgstr "数据长度超过了矩阵的大小"
 
-#: src/main/array.c:153 src/main/array.c:2060 src/main/array.c:2166
+#: src/main/array.c:153 src/main/array.c:2060 src/main/array.c:2168
 msgid "too many elements specified"
 msgstr "设定了太多的元素"
 
@@ -1417,9 +1477,9 @@ msgstr "perm[%d]和维度名字不相配"
 msgid "value is out of range in 'perm' argument"
 msgstr "'perm'里的值在范围外"
 
-#: src/main/array.c:1810 src/main/connections.c:5736
-#: src/main/connections.c:5739 src/main/debug.c:112 src/main/objects.c:1059
-#: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
+#: src/main/array.c:1810 src/main/connections.c:5742
+#: src/main/connections.c:5745 src/main/debug.c:112 src/main/objects.c:1062
+#: src/main/raw.c:56 src/main/raw.c:307 src/main/sort.c:326
 #: src/main/sort.c:1249 src/main/unique.c:681 src/main/unique.c:1456
 #: src/main/unique.c:1528 src/main/util.c:659 src/main/util.c:661
 #, fuzzy, c-format
@@ -1441,19 +1501,19 @@ msgstr "'file'参数太长"
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj'的长度必需为一"
 
-#: src/main/array.c:2162
+#: src/main/array.c:2164
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value'的长度必需是正数"
 
-#: src/main/array.c:2263
+#: src/main/array.c:2265
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
 
 #: src/main/attrib.c:41 src/main/attrib.c:235 src/main/attrib.c:269
-#: src/main/attrib.c:291 src/main/attrib.c:407 src/main/attrib.c:454
-#: src/main/attrib.c:505
+#: src/main/attrib.c:291 src/main/attrib.c:409 src/main/attrib.c:456
+#: src/main/attrib.c:507
 msgid "attempt to set an attribute on NULL"
 msgstr "NULL是不能有属性的"
 
@@ -1475,212 +1535,217 @@ msgstr ""
 msgid "cannot have attributes on a 'CHARSXP'"
 msgstr ""
 
-#: src/main/attrib.c:336 src/main/attrib.c:361
+#: src/main/attrib.c:336 src/main/attrib.c:363
 msgid "cannot set attribute on a 'CHARSXP'"
 msgstr ""
 
-#: src/main/attrib.c:381
+#: src/main/attrib.c:338
+#, fuzzy
+msgid "cannot set attribute on a symbol"
+msgstr "无法为本系统设时差区"
+
+#: src/main/attrib.c:383
 #, c-format
 msgid "invalid type (%s) for 'names': must be vector"
 msgstr "'names'的种类(%s)不对: 必需是矢量"
 
-#: src/main/attrib.c:384
+#: src/main/attrib.c:386
 #, c-format
 msgid "'names' attribute [%d] must be the same length as the vector [%d]"
 msgstr "'names'属性的长度[%d]必需和矢量的长度[%d]一样"
 
-#: src/main/attrib.c:389
+#: src/main/attrib.c:391
 #, fuzzy
 msgid "'names()' function applied to a non-vector"
 msgstr "names()不能用于非矢量"
 
-#: src/main/attrib.c:397
+#: src/main/attrib.c:399
 msgid "invalid time series parameters specified"
 msgstr "时间系列参数设定不对"
 
-#: src/main/attrib.c:411
+#: src/main/attrib.c:413
 #, fuzzy, c-format
 msgid "'%s' attribute must be numeric"
 msgstr "'tsp'属性必需为数值"
 
-#: src/main/attrib.c:417
+#: src/main/attrib.c:419
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "'tsp'属性值的长度必需是三"
 
-#: src/main/attrib.c:434
+#: src/main/attrib.c:436
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "零长度矢量不能设成'tsp'"
 
-#: src/main/attrib.c:465
+#: src/main/attrib.c:467
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "无法设定'comment'属性"
 
-#: src/main/attrib.c:514
+#: src/main/attrib.c:516
 msgid "adding class \"factor\" to an invalid object"
 msgstr "无法为不适当的对象加\"factor\" 类别"
 
-#: src/main/attrib.c:545
+#: src/main/attrib.c:547
 msgid "attempt to set invalid 'class' attribute"
 msgstr "无法设非适当'class'属性"
 
-#: src/main/attrib.c:846
+#: src/main/attrib.c:848
 #, fuzzy
 msgid "invalid class argument passed to internal '.class_cache'"
 msgstr "call_R的参数数目不对"
 
-#: src/main/attrib.c:873
+#: src/main/attrib.c:875
 #, fuzzy, c-format
 msgid "invalid to use 'names()<-' on an S4 object of class \"%s\""
 msgstr "在矢量类别('%s')里不能用names()<- 来设'names'槽"
 
-#: src/main/attrib.c:906
+#: src/main/attrib.c:908
 msgid "incompatible 'names' argument"
 msgstr "非兼容'names'参数"
 
-#: src/main/attrib.c:961
+#: src/main/attrib.c:963
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "设'names'属性时种类(%s)出错"
 
-#: src/main/attrib.c:1033
+#: src/main/attrib.c:1035
 #, fuzzy
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames'只能用于陈列"
 
-#: src/main/attrib.c:1038 src/main/coerce.c:2476 src/main/engine.c:3090
+#: src/main/attrib.c:1040 src/main/coerce.c:2476 src/main/engine.c:3089
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'list'参数必需是串列"
 
-#: src/main/attrib.c:1041 src/main/attrib.c:1068
+#: src/main/attrib.c:1043 src/main/attrib.c:1070
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames'的长度[%d]必需同'dims'的长度[%d]相等"
 
-#: src/main/attrib.c:1074
+#: src/main/attrib.c:1076
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "设'dimnames'时的种类(%s)不对(必需为矢量)"
 
-#: src/main/attrib.c:1076
+#: src/main/attrib.c:1078
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames'的长度[%d]必需与陈列范围相等"
 
-#: src/main/attrib.c:1152 src/main/builtin.c:76 src/main/builtin.c:113
-#: src/main/envir.c:1839 src/main/envir.c:1967 src/main/envir.c:2027
-#: src/main/envir.c:2164 src/main/paste.c:74 src/main/paste.c:293
+#: src/main/attrib.c:1154 src/main/builtin.c:76 src/main/builtin.c:113
+#: src/main/envir.c:1840 src/main/envir.c:1968 src/main/envir.c:2028
+#: src/main/envir.c:2165 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1744
 msgid "invalid first argument"
 msgstr "第一个参数不对"
 
-#: src/main/attrib.c:1155
+#: src/main/attrib.c:1157
 msgid "invalid second argument"
 msgstr "第二个参数不对"
 
-#: src/main/attrib.c:1163
+#: src/main/attrib.c:1165
 msgid "length-0 dimension vector is invalid"
 msgstr "不能有零长度的大小矢量"
 
-#: src/main/attrib.c:1168
+#: src/main/attrib.c:1170
 #, fuzzy
 msgid "the dimensions contain missing values"
 msgstr "dims不能包含缺少值"
 
-#: src/main/attrib.c:1170
+#: src/main/attrib.c:1172
 #, fuzzy
 msgid "the dimensions contain negative values"
 msgstr "dims不能包含负值级"
 
-#: src/main/attrib.c:1175
+#: src/main/attrib.c:1177
 #, fuzzy
 msgid "dimensions do not match the length of object"
 msgstr "dims [product %d]与对象长度[%d]不匹配"
 
-#: src/main/attrib.c:1177
+#: src/main/attrib.c:1179
 #, fuzzy, c-format
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr "dims [product %d]与对象长度[%d]不匹配"
 
-#: src/main/attrib.c:1254
+#: src/main/attrib.c:1256
 #, c-format
 msgid "factor level [%d] is duplicated"
 msgstr ""
 
-#: src/main/attrib.c:1284
+#: src/main/attrib.c:1286
 msgid "attributes must be a list or NULL"
 msgstr "属性必需是串列或NULL值"
 
-#: src/main/attrib.c:1289
+#: src/main/attrib.c:1291
 msgid "attributes must be named"
 msgstr "属性必需取名"
 
-#: src/main/attrib.c:1293
+#: src/main/attrib.c:1295
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "所有的属性都必需有名字[%d没有]"
 
-#: src/main/attrib.c:1387
+#: src/main/attrib.c:1389
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "需要字符串参数"
 
-#: src/main/attrib.c:1394
+#: src/main/attrib.c:1396
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr "'which'属性的状态必需是字符"
 
-#: src/main/attrib.c:1396
+#: src/main/attrib.c:1398
 msgid "exactly one attribute 'which' must be given"
 msgstr "只能给一个'which'属性"
 
-#: src/main/attrib.c:1457 src/main/attrib.c:1480 src/main/subscript.c:246
-#: src/main/subscript.c:250 src/main/subset.c:1274 src/main/subset.c:1328
+#: src/main/attrib.c:1459 src/main/attrib.c:1482 src/main/subscript.c:246
+#: src/main/subscript.c:250 src/main/subset.c:1258 src/main/subset.c:1312
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "'%s'部分匹配到'%s'"
 
-#: src/main/attrib.c:1525
+#: src/main/attrib.c:1527
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "名字槽的类别或长度不对"
 
-#: src/main/attrib.c:1562
+#: src/main/attrib.c:1564
 #, fuzzy, c-format
 msgid "'%s' argument must be non-null character string"
 msgstr "'norm'必需是字符串"
 
-#: src/main/attrib.c:1687 src/main/attrib.c:1758 src/main/attrib.c:1796
+#: src/main/attrib.c:1689 src/main/attrib.c:1760 src/main/attrib.c:1798
 msgid "invalid type or length for slot name"
 msgstr "名字槽的类别或长度不对"
 
-#: src/main/attrib.c:1721
+#: src/main/attrib.c:1723
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "类别\"%2$s\"的对象中没有\"%1$s\"这样一个槽"
 
-#: src/main/attrib.c:1732
+#: src/main/attrib.c:1734
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "\"%1$s\"槽名不存在于\"%2$s\"类别对象中"
 
-#: src/main/attrib.c:1749
+#: src/main/attrib.c:1751
 msgid "attempt to set slot on NULL object"
 msgstr "不能为NULL目标对象设属性"
 
-#: src/main/attrib.c:1791
+#: src/main/attrib.c:1793
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "一定要有方法程序包才能用正式类别"
 
-#: src/main/attrib.c:1803
+#: src/main/attrib.c:1805
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
 "slots"
 msgstr "无法从没有槽的基本类别(\"%2$s\") 的对象中取得\"%1$s\"槽"
 
-#: src/main/attrib.c:1807
+#: src/main/attrib.c:1809
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -1708,8 +1773,8 @@ msgstr "不能有重复的正式参数'recursive' "
 msgid "'%s' argument is not a list"
 msgstr "参数不是串列"
 
-#: src/main/bind.c:1079 src/main/names.c:1284 src/main/names.c:1289
-#: src/main/names.c:1294 src/main/names.c:1299
+#: src/main/bind.c:1079 src/main/names.c:1288 src/main/names.c:1293
+#: src/main/names.c:1298 src/main/names.c:1303
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "'%s'里的类别名字太长"
@@ -1753,145 +1818,145 @@ msgstr "矢量大小不能是NA/NaN值"
 msgid "vector size cannot be infinite"
 msgstr "矢量大小不能是无限值"
 
-#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:953
+#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:957
 #: src/main/sort.c:1326
 msgid "vector size specified is too large"
 msgstr "矢量size设得太大了"
 
-#: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:314
-#: src/main/builtin.c:347 src/main/builtin.c:404 src/main/builtin.c:418
-#: src/main/coerce.c:1540 src/main/connections.c:3242 src/main/engine.c:3092
-#: src/main/envir.c:1071 src/main/envir.c:1124 src/main/envir.c:1280
-#: src/main/envir.c:1848 src/main/envir.c:1972 src/main/envir.c:2038
-#: src/main/envir.c:2171 src/main/envir.c:2890 src/main/envir.c:2977
-#: src/main/envir.c:3276 src/main/envir.c:3305 src/main/envir.c:3326
-#: src/main/envir.c:3349 src/main/envir.c:3383 src/main/envir.c:3403
-#: src/main/envir.c:3724 src/main/envir.c:3729 src/main/eval.c:7295
+#: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:318
+#: src/main/builtin.c:351 src/main/builtin.c:408 src/main/builtin.c:422
+#: src/main/coerce.c:1540 src/main/connections.c:3248 src/main/engine.c:3091
+#: src/main/envir.c:1072 src/main/envir.c:1125 src/main/envir.c:1281
+#: src/main/envir.c:1849 src/main/envir.c:1973 src/main/envir.c:2039
+#: src/main/envir.c:2172 src/main/envir.c:2894 src/main/envir.c:2981
+#: src/main/envir.c:3280 src/main/envir.c:3309 src/main/envir.c:3330
+#: src/main/envir.c:3353 src/main/envir.c:3387 src/main/envir.c:3407
+#: src/main/envir.c:3728 src/main/envir.c:3733 src/main/eval.c:7367
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
-#: src/main/saveload.c:2356 src/main/serialize.c:2762
+#: src/main/saveload.c:2356 src/main/serialize.c:2790
 msgid "use of NULL environment is defunct"
 msgstr "NULL环境不再有用"
 
-#: src/main/builtin.c:254 src/main/builtin.c:270 src/main/envir.c:3347
+#: src/main/builtin.c:258 src/main/builtin.c:274 src/main/envir.c:3351
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "参数必需为函数"
 
-#: src/main/builtin.c:327
+#: src/main/builtin.c:331
 msgid "replacement object is not an environment"
 msgstr "替换对象不是环境"
 
-#: src/main/builtin.c:352 src/main/builtin.c:373 src/main/builtin.c:409
-#: src/main/builtin.c:423 src/main/envir.c:3251 src/main/envir.c:3279
-#: src/main/envir.c:3308 src/main/envir.c:3329 src/main/envir.c:3351
-#: src/main/envir.c:3385 src/main/envir.c:3405
+#: src/main/builtin.c:356 src/main/builtin.c:377 src/main/builtin.c:413
+#: src/main/builtin.c:427 src/main/envir.c:3255 src/main/envir.c:3283
+#: src/main/envir.c:3312 src/main/envir.c:3333 src/main/envir.c:3355
+#: src/main/envir.c:3389 src/main/envir.c:3409
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "参数不是环境"
 
-#: src/main/builtin.c:375
+#: src/main/builtin.c:379
 msgid "the empty environment has no parent"
 msgstr "空环境没有父母环境"
 
-#: src/main/builtin.c:411
+#: src/main/builtin.c:415
 msgid "can not set parent of the empty environment"
 msgstr "无法为空环境设父母环境"
 
-#: src/main/builtin.c:413
+#: src/main/builtin.c:417
 #, fuzzy
 msgid "can not set the parent environment of a namespace"
 msgstr "无法为空环境设父母环境"
 
-#: src/main/builtin.c:415
+#: src/main/builtin.c:419
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "无法为空环境设父母环境"
 
-#: src/main/builtin.c:566 src/main/connections.c:3914
-#: src/main/connections.c:4309 src/main/connections.c:4343
-#: src/main/connections.c:4724 src/main/connections.c:4794
-#: src/main/connections.c:5008 src/main/connections.c:5012
-#: src/main/connections.c:5439 src/main/deparse.c:379 src/main/deparse.c:468
-#: src/main/serialize.c:2052
+#: src/main/builtin.c:570 src/main/connections.c:3920
+#: src/main/connections.c:4315 src/main/connections.c:4349
+#: src/main/connections.c:4730 src/main/connections.c:4800
+#: src/main/connections.c:5014 src/main/connections.c:5018
+#: src/main/connections.c:5445 src/main/deparse.c:370 src/main/deparse.c:462
+#: src/main/serialize.c:2080
 msgid "cannot write to this connection"
 msgstr "无法写入此链结"
 
-#: src/main/builtin.c:571 src/main/builtin.c:601 src/main/platform.c:308
+#: src/main/builtin.c:575 src/main/builtin.c:605 src/main/platform.c:308
 #: src/main/platform.c:326 src/main/print.c:144 src/main/print.c:257
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s'设定不对"
 
-#: src/main/builtin.c:588
+#: src/main/builtin.c:592
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "略过负的'fill'参数值"
 
-#: src/main/builtin.c:662
+#: src/main/builtin.c:666
 #, fuzzy, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat()' function"
 msgstr "cat目前还不能处理%d(种类为'%s')参数"
 
-#: src/main/builtin.c:801
+#: src/main/builtin.c:805
 msgid "too long for a pairlist"
 msgstr ""
 
-#: src/main/builtin.c:805
+#: src/main/builtin.c:809
 #, fuzzy, c-format
 msgid "'vector()': cannot make a vector of mode '%s'."
 msgstr "矢量: 无法建立状态为\"%s\"的矢量."
 
-#: src/main/builtin.c:831
+#: src/main/builtin.c:835
 #, fuzzy
 msgid "cannot set length of non-(vector or list)"
 msgstr "不能设非矢量的长度"
 
-#: src/main/builtin.c:832 src/main/character.c:529 src/main/coerce.c:2839
+#: src/main/builtin.c:836 src/main/character.c:529 src/main/coerce.c:2839
 msgid "invalid value"
 msgstr "值不对"
 
-#: src/main/builtin.c:834
+#: src/main/builtin.c:838
 msgid "length of NULL cannot be changed"
 msgstr ""
 
-#: src/main/builtin.c:943 src/main/envir.c:2181 src/main/envir.c:2189
+#: src/main/builtin.c:947 src/main/envir.c:2182 src/main/envir.c:2190
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s'参数的长度不对"
 
-#: src/main/builtin.c:979 src/main/coerce.c:2546 src/main/coerce.c:2589
-#: src/main/eval.c:624 src/main/eval.c:750 src/main/eval.c:2674
-#: src/main/eval.c:2756 src/main/eval.c:2820 src/main/eval.c:3161
-#: src/main/eval.c:6406 src/main/eval.c:6537
+#: src/main/builtin.c:983 src/main/coerce.c:2546 src/main/coerce.c:2589
+#: src/main/eval.c:624 src/main/eval.c:750 src/main/eval.c:2691
+#: src/main/eval.c:2773 src/main/eval.c:2837 src/main/eval.c:3178
+#: src/main/eval.c:6469 src/main/eval.c:6600
 msgid "'...' used in an incorrect context"
 msgstr "'...'用在的上下文不对"
 
-#: src/main/builtin.c:1001
+#: src/main/builtin.c:1005
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重复开关默认值：'%s'和'%s'"
 
-#: src/main/builtin.c:1034 src/main/coerce.c:2430
+#: src/main/builtin.c:1038 src/main/coerce.c:2430
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "%d元素是空的"
 
-#: src/main/builtin.c:1038 src/main/eval.c:6893
+#: src/main/builtin.c:1042 src/main/eval.c:6965
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "'hostname'必需是长度为一的字符矢量"
 
-#: src/main/builtin.c:1041
+#: src/main/builtin.c:1045
 #, c-format
 msgid ""
 "'EXPR' is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/builtin.c:1088
+#: src/main/builtin.c:1092
 msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1097 src/main/eval.c:6905 src/main/eval.c:6933
+#: src/main/builtin.c:1101 src/main/eval.c:6977 src/main/eval.c:7005
 #, fuzzy
 msgid "'switch()' function with no alternatives"
 msgstr "没有名字替代的开关需要数值EXPR"
@@ -1959,7 +2024,7 @@ msgstr "不能有非字符名字"
 msgid "invalid multibyte input string %d"
 msgstr "多字节输入字符串不对"
 
-#: src/main/character.c:952 src/main/grep.c:284
+#: src/main/character.c:952 src/main/grep.c:283
 msgid "non-character argument"
 msgstr "非字符参数"
 
@@ -1987,7 +2052,7 @@ msgstr "'%s'多字节字符串有错"
 msgid "'old' is longer than 'new'"
 msgstr "'old'比'new'要长"
 
-#: src/main/character.c:1669 src/main/envir.c:3799 src/main/envir.c:3813
+#: src/main/character.c:1669 src/main/envir.c:3803 src/main/envir.c:3817
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "变量名限制于%d字节"
@@ -2045,7 +2110,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr "需要串列参数"
 
-#: src/main/coerce.c:1544 src/main/eval.c:7299
+#: src/main/coerce.c:1544 src/main/eval.c:7371
 msgid "invalid environment"
 msgstr "环境不对"
 
@@ -2114,8 +2179,8 @@ msgstr "'what'必需是字符串或函数"
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr'参数必需是表达式"
 
-#: src/main/coerce.c:2480 src/main/engine.c:3096 src/main/envir.c:1882
-#: src/main/envir.c:2897 src/main/envir.c:2979 src/main/unique.c:1354
+#: src/main/coerce.c:2480 src/main/engine.c:3095 src/main/envir.c:1883
+#: src/main/envir.c:2901 src/main/envir.c:2983 src/main/unique.c:1354
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'env'参数必需是环境"
@@ -2251,7 +2316,7 @@ msgstr "所有链结都已在运行"
 msgid "connection was not found"
 msgstr "找不到链结"
 
-#: src/main/connections.c:174 src/main/connections.c:5453
+#: src/main/connections.c:174 src/main/connections.c:5459
 msgid "invalid connection"
 msgstr "链结不对"
 
@@ -2260,9 +2325,9 @@ msgstr "链结不对"
 msgid "closing unused connection %d (%s)"
 msgstr "关闭不再使用的链结%d(%s)\n"
 
-#: src/main/connections.c:230 src/main/sysutils.c:638 src/main/sysutils.c:846
-#: src/main/sysutils.c:861 src/main/sysutils.c:992 src/main/sysutils.c:1065
-#: src/main/sysutils.c:1075 src/main/sysutils.c:1088 src/main/sysutils.c:1489
+#: src/main/connections.c:230 src/main/sysutils.c:638 src/main/sysutils.c:850
+#: src/main/sysutils.c:865 src/main/sysutils.c:996 src/main/sysutils.c:1070
+#: src/main/sysutils.c:1080 src/main/sysutils.c:1093 src/main/sysutils.c:1509
 #, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "不支持'%s'到'%s'的这种转换"
@@ -2289,746 +2354,746 @@ msgstr "输入链结'%s'内的输入不对"
 msgid "cannot open file '%ls': %s"
 msgstr "无法打开文件'%s': %s"
 
-#: src/main/connections.c:709
+#: src/main/connections.c:715
 #, fuzzy
 msgid "'fdopen' is not supported on this platform"
 msgstr "本平台不支持nsl()"
 
-#: src/main/connections.c:824 src/main/saveload.c:2351
-#: src/main/serialize.c:2282
+#: src/main/connections.c:830 src/main/saveload.c:2351
+#: src/main/serialize.c:2310
 msgid "connection is not open for reading"
 msgstr "链结没有打开，不能读"
 
-#: src/main/connections.c:829 src/main/saveload.c:2271
-#: src/main/serialize.c:2234
+#: src/main/connections.c:835 src/main/saveload.c:2271
+#: src/main/serialize.c:2262
 msgid "connection is not open for writing"
 msgstr "链结没有打开，不能写"
 
-#: src/main/connections.c:867 src/main/connections.c:2388
+#: src/main/connections.c:873 src/main/connections.c:2394
 msgid "can only truncate connections open for writing"
 msgstr "只能缩短已经打开了的可以写的链结"
 
-#: src/main/connections.c:871 src/main/connections.c:873
+#: src/main/connections.c:877 src/main/connections.c:879
 msgid "file truncation failed"
 msgstr "未能缩短文件"
 
-#: src/main/connections.c:875
+#: src/main/connections.c:881
 #, fuzzy
 msgid "file truncation is unavailable on this platform"
 msgstr "本平台上没有文件缩短功能"
 
-#: src/main/connections.c:921 src/main/connections.c:925
-#: src/main/connections.c:932 src/main/connections.c:950
+#: src/main/connections.c:927 src/main/connections.c:931
+#: src/main/connections.c:938 src/main/connections.c:956
 msgid "allocation of file connection failed"
 msgstr "文件链结分配失败"
 
-#: src/main/connections.c:1005
+#: src/main/connections.c:1011
 #, fuzzy, c-format
 msgid "cannot create fifo connection '%s', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立先进先出'%1$s'"
 
-#: src/main/connections.c:1010
+#: src/main/connections.c:1016
 #, fuzzy, c-format
 msgid "'%s' exists but is not a fifo connection"
 msgstr "'%s'存在但不是先进先出"
 
-#: src/main/connections.c:1024
+#: src/main/connections.c:1030
 #, fuzzy, c-format
 msgid "fifo connection '%s' is not ready"
 msgstr "先进先出'%s'还没有准备好"
 
-#: src/main/connections.c:1025
+#: src/main/connections.c:1031
 #, fuzzy, c-format
 msgid "cannot open fifo connection '%s'"
 msgstr "无法打开链结"
 
-#: src/main/connections.c:1067 src/main/connections.c:1078
-#: src/main/connections.c:1241 src/main/connections.c:1260
-#: src/main/connections.c:1677 src/main/connections.c:1687
-#: src/main/connections.c:1810 src/main/connections.c:1870
-#: src/main/connections.c:2405 src/main/connections.c:2422
-#: src/main/connections.c:2736 src/main/connections.c:5625
-#: src/main/connections.c:5689
+#: src/main/connections.c:1073 src/main/connections.c:1084
+#: src/main/connections.c:1247 src/main/connections.c:1266
+#: src/main/connections.c:1683 src/main/connections.c:1693
+#: src/main/connections.c:1816 src/main/connections.c:1876
+#: src/main/connections.c:2411 src/main/connections.c:2428
+#: src/main/connections.c:2742 src/main/connections.c:5631
+#: src/main/connections.c:5695
 #, fuzzy
 msgid "specified block is too large"
 msgstr "矢量size设得太大了"
 
-#: src/main/connections.c:1136 src/main/connections.c:1142
+#: src/main/connections.c:1142 src/main/connections.c:1148
 #, fuzzy
 msgid "allocation of fifo name failed"
 msgstr "先进先出链结分配失败"
 
-#: src/main/connections.c:1182
+#: src/main/connections.c:1188
 #, fuzzy, c-format
 msgid "cannot create fifo '%s', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立'%1$s'文件"
 
-#: src/main/connections.c:1203
+#: src/main/connections.c:1209
 #, fuzzy, c-format
 msgid "cannot open fifo '%s', reason '%s'"
 msgstr "无法打开URL'%s'，原因是'%s'"
 
-#: src/main/connections.c:1244 src/main/connections.c:1268
+#: src/main/connections.c:1250 src/main/connections.c:1274
 #, fuzzy
 msgid "allocation of fifo buffer failed"
 msgstr "先进先出链结分配失败"
 
-#: src/main/connections.c:1276
+#: src/main/connections.c:1282
 #, fuzzy, c-format
 msgid "cannot write FIFO '%s'"
 msgstr "无法打开URL'%s'"
 
-#: src/main/connections.c:1312 src/main/connections.c:1316
-#: src/main/connections.c:1323 src/main/connections.c:1340
+#: src/main/connections.c:1318 src/main/connections.c:1322
+#: src/main/connections.c:1329 src/main/connections.c:1346
 msgid "allocation of fifo connection failed"
 msgstr "先进先出链结分配失败"
 
-#: src/main/connections.c:1359 src/main/connections.c:1521
-#: src/main/connections.c:2155 src/main/connections.c:3385
-#: src/main/connections.c:5218 src/modules/internet/internet.c:459
+#: src/main/connections.c:1365 src/main/connections.c:1527
+#: src/main/connections.c:2161 src/main/connections.c:3391
+#: src/main/connections.c:5224 src/modules/internet/internet.c:459
 #: src/modules/internet/internet.c:465
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "只用了'description'参数的第一个元素"
 
-#: src/main/connections.c:1376 src/main/connections.c:5342
+#: src/main/connections.c:1382 src/main/connections.c:5348
 #, fuzzy, c-format
 msgid ""
 "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
 msgstr "fifo(\"\")只支持open = \"w+\"和open = \"w+b\"这两种模式：现在使用前者"
 
-#: src/main/connections.c:1391 src/main/connections.c:1559
-#: src/main/connections.c:2222 src/main/connections.c:3355
-#: src/main/connections.c:3406 src/main/connections.c:3454
-#: src/main/connections.c:3790 src/main/connections.c:3906
-#: src/main/connections.c:4071 src/main/connections.c:4336
-#: src/main/connections.c:4667 src/main/connections.c:4787
-#: src/main/connections.c:5004 src/main/connections.c:5420 src/main/dcf.c:94
-#: src/main/deparse.c:371 src/main/deparse.c:460 src/main/saveload.c:2261
-#: src/main/saveload.c:2342 src/main/scan.c:933 src/main/serialize.c:2223
-#: src/main/serialize.c:2274 src/main/source.c:268
+#: src/main/connections.c:1397 src/main/connections.c:1565
+#: src/main/connections.c:2228 src/main/connections.c:3361
+#: src/main/connections.c:3412 src/main/connections.c:3460
+#: src/main/connections.c:3796 src/main/connections.c:3912
+#: src/main/connections.c:4077 src/main/connections.c:4342
+#: src/main/connections.c:4673 src/main/connections.c:4793
+#: src/main/connections.c:5010 src/main/connections.c:5426 src/main/dcf.c:94
+#: src/main/deparse.c:362 src/main/deparse.c:454 src/main/saveload.c:2261
+#: src/main/saveload.c:2342 src/main/scan.c:933 src/main/serialize.c:2251
+#: src/main/serialize.c:2302 src/main/source.c:268
 msgid "cannot open the connection"
 msgstr "无法打开链结"
 
-#: src/main/connections.c:1406
+#: src/main/connections.c:1412
 msgid "fifo connections are not available on this system"
 msgstr "本系统没有先进先出链结这个功能"
 
-#: src/main/connections.c:1436
+#: src/main/connections.c:1442
 #, fuzzy, c-format
 msgid "cannot open 'pipe()' command '%ls': %s"
 msgstr "无法打开pipe()命令'%s': %s"
 
-#: src/main/connections.c:1443
+#: src/main/connections.c:1449
 #, fuzzy, c-format
 msgid "cannot open 'pipe()' command '%s': %s"
 msgstr "无法打开pipe()命令'%s': %s"
 
-#: src/main/connections.c:1616 src/main/connections.c:1944
+#: src/main/connections.c:1622 src/main/connections.c:1950
 #, c-format
 msgid "cannot open compressed file '%s', probable reason '%s'"
 msgstr "无法打开压缩文件'%s'，可能是因为'%s'"
 
-#: src/main/connections.c:1657
+#: src/main/connections.c:1663
 #, fuzzy
 msgid "'whence = \"end\"' option is not implemented for gzfile connections"
 msgstr "whence = \"end\"不适用于gz文件链结"
 
-#: src/main/connections.c:1662
+#: src/main/connections.c:1668
 msgid "seek on a gzfile connection returned an internal error"
 msgstr "读取gz文件链结时内部出错"
 
-#: src/main/connections.c:1696 src/main/connections.c:1700
-#: src/main/connections.c:1707 src/main/connections.c:1725
+#: src/main/connections.c:1702 src/main/connections.c:1706
+#: src/main/connections.c:1713 src/main/connections.c:1731
 msgid "allocation of gzfile connection failed"
 msgstr "分配gz文件链结失败"
 
-#: src/main/connections.c:1755
+#: src/main/connections.c:1761
 #, c-format
 msgid "cannot open bzip2-ed file '%s', probable reason '%s'"
 msgstr "无法打开bzip2压缩文件'%s'，原因可能是'%s'"
 
-#: src/main/connections.c:1764
+#: src/main/connections.c:1770
 #, c-format
 msgid "file '%s' appears not to be compressed by bzip2"
 msgstr "文件'%s'看起来不象是bzip2类"
 
-#: src/main/connections.c:1773
+#: src/main/connections.c:1779
 #, c-format
 msgid "initializing bzip2 compression for file '%s' failed"
 msgstr "在开始给'%s'文件进行bzip2压缩时出现了错误"
 
-#: src/main/connections.c:1828
+#: src/main/connections.c:1834
 msgid "allocation of overflow buffer for bzfile failed"
 msgstr "为bzfile分配溢出缓冲区失败"
 
-#: src/main/connections.c:1835
+#: src/main/connections.c:1841
 #, c-format
 msgid ""
 "file '%s' has trailing content that appears not to be compressed by bzip2"
 msgstr "文件'%s'结尾的内容看起来不是由bzip2压缩的"
 
-#: src/main/connections.c:1881 src/main/connections.c:1885
-#: src/main/connections.c:1892 src/main/connections.c:1910
+#: src/main/connections.c:1887 src/main/connections.c:1891
+#: src/main/connections.c:1898 src/main/connections.c:1916
 msgid "allocation of bzfile connection failed"
 msgstr "分配bz文件链结失败"
 
-#: src/main/connections.c:1957 src/main/connections.c:6288
+#: src/main/connections.c:1963 src/main/connections.c:6294
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "无法为lzma译码器进行初始化，错误是%d"
 
-#: src/main/connections.c:1966 src/main/connections.c:6014
-#: src/main/connections.c:6181
+#: src/main/connections.c:1972 src/main/connections.c:6020
+#: src/main/connections.c:6187
 #, fuzzy
 msgid "problem with setting presets"
 msgstr "设定时区时出了问题"
 
-#: src/main/connections.c:1973
+#: src/main/connections.c:1979
 #, c-format
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "无法为lzma编码器进行初始化，错误是%d "
 
-#: src/main/connections.c:1999 src/main/connections.c:2092
+#: src/main/connections.c:2005 src/main/connections.c:2098
 #, fuzzy
 msgid "'fwrite' error"
 msgstr "读取错误"
 
-#: src/main/connections.c:2034
+#: src/main/connections.c:2040
 msgid "lzma decoder needed more memory"
 msgstr ""
 
-#: src/main/connections.c:2037
+#: src/main/connections.c:2043
 msgid "lzma decoder format error"
 msgstr ""
 
-#: src/main/connections.c:2040
+#: src/main/connections.c:2046
 msgid "lzma decoder corrupt data"
 msgstr ""
 
-#: src/main/connections.c:2043
+#: src/main/connections.c:2049
 #, c-format
 msgid "lzma decoding result %d"
 msgstr ""
 
-#: src/main/connections.c:2083
+#: src/main/connections.c:2089
 msgid "lzma encoder needed more memory"
 msgstr ""
 
-#: src/main/connections.c:2086
+#: src/main/connections.c:2092
 #, c-format
 msgid "lzma encoding result %d"
 msgstr ""
 
-#: src/main/connections.c:2102 src/main/connections.c:2106
-#: src/main/connections.c:2113 src/main/connections.c:2132
+#: src/main/connections.c:2108 src/main/connections.c:2112
+#: src/main/connections.c:2119 src/main/connections.c:2138
 msgid "allocation of xzfile connection failed"
 msgstr "分配xzfile文件链结失败"
 
-#: src/main/connections.c:2192
+#: src/main/connections.c:2198
 #, fuzzy, c-format
 msgid ""
 "this is a file compressed using '%s' which this build of R does not support"
 msgstr "这一版本的R不支持%s-压缩文件"
 
-#: src/main/connections.c:2288 src/modules/X11/devX11.c:3380
+#: src/main/connections.c:2294 src/modules/X11/devX11.c:3380
 msgid "memory allocation to copy clipboard failed"
 msgstr "抄写裁剪板时内存分配失败"
 
-#: src/main/connections.c:2293 src/modules/X11/devX11.c:3359
+#: src/main/connections.c:2299 src/modules/X11/devX11.c:3359
 #: src/modules/X11/devX11.c:3364
 msgid "clipboard cannot be opened or contains no text"
 msgstr "打不开裁剪板，或是裁剪板不含文字"
 
-#: src/main/connections.c:2304
+#: src/main/connections.c:2310
 msgid "memory allocation to open clipboard failed"
 msgstr "打开裁剪板时内存分配失败"
 
-#: src/main/connections.c:2333
+#: src/main/connections.c:2339
 #, fuzzy
 msgid "unable to open the clipboard"
 msgstr "无法打开裁剪板"
 
-#: src/main/connections.c:2337
+#: src/main/connections.c:2343
 #, fuzzy
 msgid "unable to write to the clipboard"
 msgstr "无法写入裁剪板"
 
-#: src/main/connections.c:2377
+#: src/main/connections.c:2383
 msgid "attempt to seek outside the range of the clipboard"
 msgstr "无法读取裁剪板范围外的内容"
 
-#: src/main/connections.c:2420
+#: src/main/connections.c:2426
 msgid "clipboard connection is open for reading only"
 msgstr "打开了只读裁剪板链结"
 
-#: src/main/connections.c:2440
+#: src/main/connections.c:2446
 msgid "clipboard buffer is full and output lost"
 msgstr "裁剪板缓冲区已满，丢失了输出"
 
-#: src/main/connections.c:2461
+#: src/main/connections.c:2467
 msgid "'mode' for the clipboard must be 'r' or 'w'"
 msgstr "裁剪板'mode'必需是'r'或'w'"
 
-#: src/main/connections.c:2464
+#: src/main/connections.c:2470
 msgid "'mode' for the clipboard must be 'r' on Unix"
 msgstr "Unix操作系统上裁剪板'mode'必需是'r'"
 
-#: src/main/connections.c:2467 src/main/connections.c:2473
-#: src/main/connections.c:2480 src/main/connections.c:2498
+#: src/main/connections.c:2473 src/main/connections.c:2479
+#: src/main/connections.c:2486 src/main/connections.c:2504
 msgid "allocation of clipboard connection failed"
 msgstr "裁剪板链结分配失败"
 
-#: src/main/connections.c:2568 src/main/connections.c:2572
-#: src/main/connections.c:2579
+#: src/main/connections.c:2574 src/main/connections.c:2578
+#: src/main/connections.c:2585
 msgid "allocation of terminal connection failed"
 msgstr "终端链结分配失败"
 
-#: src/main/connections.c:2713
+#: src/main/connections.c:2719
 msgid "attempting to add too many elements to raw vector"
 msgstr "不能给原始矢量加大多元素"
 
-#: src/main/connections.c:2765
+#: src/main/connections.c:2771
 msgid "attempt to seek outside the range of the raw connection"
 msgstr "无法读取原始链结范围外的内容"
 
-#: src/main/connections.c:2776 src/main/connections.c:2780
-#: src/main/connections.c:2787 src/main/connections.c:2814
+#: src/main/connections.c:2782 src/main/connections.c:2786
+#: src/main/connections.c:2793 src/main/connections.c:2820
 msgid "allocation of raw connection failed"
 msgstr "原始链结分配失败"
 
-#: src/main/connections.c:2868 src/main/connections.c:3291
-#: src/main/connections.c:3434 src/main/connections.c:3483
-#: src/main/connections.c:3494 src/main/connections.c:3577
-#: src/main/connections.c:3607 src/main/connections.c:3630
-#: src/main/connections.c:3642 src/main/connections.c:3766
-#: src/main/connections.c:3891 src/main/connections.c:5729
+#: src/main/connections.c:2874 src/main/connections.c:3297
+#: src/main/connections.c:3440 src/main/connections.c:3489
+#: src/main/connections.c:3500 src/main/connections.c:3583
+#: src/main/connections.c:3613 src/main/connections.c:3636
+#: src/main/connections.c:3648 src/main/connections.c:3772
+#: src/main/connections.c:3897 src/main/connections.c:5735
 #, fuzzy, c-format
 msgid "'%s' argument is not an object of class %s"
 msgstr "'con'不是输出链结rawConnection"
 
-#: src/main/connections.c:2871 src/main/connections.c:3294
+#: src/main/connections.c:2877 src/main/connections.c:3300
 #, fuzzy, c-format
 msgid "'%s' is not an output of class %s"
 msgstr "'con'不是输出链结"
 
-#: src/main/connections.c:2909
+#: src/main/connections.c:2915
 #, fuzzy
 msgid "too many characters for text connection"
 msgstr "无法给文字链结分配内存"
 
-#: src/main/connections.c:2914
+#: src/main/connections.c:2920
 msgid "cannot allocate memory for text connection"
 msgstr "无法给文字链结分配内存"
 
-#: src/main/connections.c:2963
+#: src/main/connections.c:2969
 msgid "seek is not relevant for text connection"
 msgstr "读取不适用于文字链结"
 
-#: src/main/connections.c:2971 src/main/connections.c:2975
-#: src/main/connections.c:2982 src/main/connections.c:2996
-#: src/main/connections.c:3184 src/main/connections.c:3188
-#: src/main/connections.c:3195 src/main/connections.c:3209
-#: src/main/connections.c:3216
+#: src/main/connections.c:2977 src/main/connections.c:2981
+#: src/main/connections.c:2988 src/main/connections.c:3002
+#: src/main/connections.c:3190 src/main/connections.c:3194
+#: src/main/connections.c:3201 src/main/connections.c:3215
+#: src/main/connections.c:3222
 msgid "allocation of text connection failed"
 msgstr "文字链结分配失败"
 
-#: src/main/connections.c:3115
+#: src/main/connections.c:3121
 #, fuzzy
 msgid "last line is too long"
 msgstr "格式字符串太长"
 
-#: src/main/connections.c:3121
+#: src/main/connections.c:3127
 #, fuzzy
 msgid "allocation problem for last line"
 msgstr "为bzfile分配溢出缓冲区失败"
 
-#: src/main/connections.c:3159
+#: src/main/connections.c:3165
 msgid "text connection: appending to a non-existent char vector"
 msgstr "文字链结: 不能符加给不存在的字符矢量"
 
-#: src/main/connections.c:3269
+#: src/main/connections.c:3275
 msgid "unsupported mode"
 msgstr "不支持此状态"
 
-#: src/main/connections.c:3437
+#: src/main/connections.c:3443
 msgid "cannot open standard connections"
 msgstr "无法打开标准链结"
 
-#: src/main/connections.c:3439
+#: src/main/connections.c:3445
 msgid "connection is already open"
 msgstr "链结已打开"
 
-#: src/main/connections.c:3472
+#: src/main/connections.c:3478
 msgid "unknown 'rw' value"
 msgstr "没有这样的'rw'值"
 
-#: src/main/connections.c:3507
+#: src/main/connections.c:3513
 #, fuzzy, c-format
 msgid "Problem closing connection:  %s"
 msgstr "关闭不再使用的链结%d(%s)\n"
 
-#: src/main/connections.c:3509
+#: src/main/connections.c:3515
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "写入链结有问题"
 
-#: src/main/connections.c:3579
+#: src/main/connections.c:3585
 msgid "cannot close standard connections"
 msgstr "无法关闭标准链结"
 
-#: src/main/connections.c:3582
+#: src/main/connections.c:3588
 #, fuzzy
 msgid "cannot close 'output' sink connection"
 msgstr "无法关闭外输汇集链结"
 
-#: src/main/connections.c:3584
+#: src/main/connections.c:3590
 #, fuzzy
 msgid "cannot close 'message' sink connection"
 msgstr "无法关闭信息汇集链结"
 
-#: src/main/connections.c:3609 src/main/connections.c:5438
-#: src/main/connections.c:5446 src/main/serialize.c:2042
-#: src/main/serialize.c:2050
+#: src/main/connections.c:3615 src/main/connections.c:5444
+#: src/main/connections.c:5452 src/main/serialize.c:2070
+#: src/main/serialize.c:2078
 msgid "connection is not open"
 msgstr "链结没有打开"
 
-#: src/main/connections.c:3706 src/main/connections.c:3718
+#: src/main/connections.c:3712 src/main/connections.c:3724
 #, fuzzy, c-format
 msgid "line is longer than buffer size %lu"
 msgstr "行要比缓冲区大"
 
-#: src/main/connections.c:3736
+#: src/main/connections.c:3742
 #, fuzzy, c-format
 msgid "Error writing to connection:  %s"
 msgstr "链结书写发生了错误"
 
-#: src/main/connections.c:3738
+#: src/main/connections.c:3744
 #, fuzzy
 msgid "Error writing to connection"
 msgstr "链结书写发生了错误"
 
-#: src/main/connections.c:3797 src/main/connections.c:3799
-#: src/main/connections.c:4079 src/main/connections.c:4650
-#: src/main/connections.c:4675 src/main/connections.c:5447 src/main/dcf.c:101
-#: src/main/scan.c:936 src/main/scan.c:940 src/main/serialize.c:2044
+#: src/main/connections.c:3803 src/main/connections.c:3805
+#: src/main/connections.c:4085 src/main/connections.c:4656
+#: src/main/connections.c:4681 src/main/connections.c:5453 src/main/dcf.c:101
+#: src/main/scan.c:936 src/main/scan.c:940 src/main/serialize.c:2072
 #: src/main/source.c:275
 msgid "cannot read from this connection"
 msgstr "无法从此链结读取"
 
-#: src/main/connections.c:3811 src/main/connections.c:3833
+#: src/main/connections.c:3817 src/main/connections.c:3839
 #, fuzzy
 msgid "cannot allocate buffer in 'readLines()'"
 msgstr "无法给readLines分配缓冲区"
 
-#: src/main/connections.c:3818 src/main/scan.c:585 src/main/scan.c:735
+#: src/main/connections.c:3824 src/main/scan.c:585 src/main/scan.c:735
 #, fuzzy
 msgid "too many items"
 msgstr "参数太多"
 
-#: src/main/connections.c:3846
+#: src/main/connections.c:3852
 #, c-format
 msgid "line %d appears to contain an embedded nul"
 msgstr ""
 
-#: src/main/connections.c:3864
+#: src/main/connections.c:3870
 #, c-format
 msgid "incomplete final line found on '%s'"
 msgstr "读'%s'时最后一行未遂"
 
-#: src/main/connections.c:3869
+#: src/main/connections.c:3875
 #, fuzzy
 msgid "too few lines read in 'readLines()'"
 msgstr "readLines读的行数不够"
 
-#: src/main/connections.c:3973 src/main/connections.c:4108
-#: src/main/connections.c:4199 src/main/connections.c:4228
-#: src/main/connections.c:4261
+#: src/main/connections.c:3979 src/main/connections.c:4114
+#: src/main/connections.c:4205 src/main/connections.c:4234
+#: src/main/connections.c:4267
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "读取链结时发生了错误"
 
-#: src/main/connections.c:3976
+#: src/main/connections.c:3982
 msgid "incomplete string at end of file has been discarded"
 msgstr "略过文件末不完整的字符串"
 
-#: src/main/connections.c:3982
+#: src/main/connections.c:3988
 #, fuzzy
 msgid "null terminator was not found: breaking string at 10000 bytes"
 msgstr "没有null终止符: 字符串截断于10000个字节"
 
-#: src/main/connections.c:4047
+#: src/main/connections.c:4053
 msgid "can only read from a binary connection"
 msgstr "无法读二进列链结"
 
-#: src/main/connections.c:4096 src/main/connections.c:4417
+#: src/main/connections.c:4102 src/main/connections.c:4423
 msgid "size changing is not supported for complex vectors"
 msgstr "不支持复数矢量大小的改变"
 
-#: src/main/connections.c:4135 src/main/connections.c:4153
-#: src/main/connections.c:4179 src/main/connections.c:4223
-#: src/main/connections.c:4254 src/main/connections.c:4274
-#: src/main/connections.c:4398 src/main/connections.c:4411
-#: src/main/connections.c:4470 src/main/connections.c:4502
+#: src/main/connections.c:4141 src/main/connections.c:4159
+#: src/main/connections.c:4185 src/main/connections.c:4229
+#: src/main/connections.c:4260 src/main/connections.c:4280
+#: src/main/connections.c:4404 src/main/connections.c:4417
+#: src/main/connections.c:4476 src/main/connections.c:4508
 #, c-format
 msgid "size %d is unknown on this machine"
 msgstr "本系统没有%d这样大小的值"
 
-#: src/main/connections.c:4164
+#: src/main/connections.c:4170
 msgid "raw is always of size 1"
 msgstr "raw的大小只能是一"
 
-#: src/main/connections.c:4187
+#: src/main/connections.c:4193
 msgid "'signed = FALSE' is only valid for integers of sizes 1 and 2"
 msgstr "'signed = FALSE'唯一有效的尺寸是1和2"
 
-#: src/main/connections.c:4301
+#: src/main/connections.c:4307
 #, fuzzy
 msgid "'x' argument is not an atomic vector type"
 msgstr "'x'非基元矢量种类"
 
-#: src/main/connections.c:4307
+#: src/main/connections.c:4313
 msgid "can only write to a binary connection"
 msgstr "只能写入二进列链结"
 
-#: src/main/connections.c:4326
+#: src/main/connections.c:4332
 msgid "only 2^31-1 bytes can be written to a raw vector"
 msgstr "写原始矢量最多只能用2^31-1字节"
 
-#: src/main/connections.c:4328
+#: src/main/connections.c:4334
 #, fuzzy
 msgid "only 2^31-1 bytes can be written in a single 'writeBin()' call"
 msgstr "单次调用writeBin()的话最多只能写2^31-1字节"
 
-#: src/main/connections.c:4377 src/main/connections.c:4530
-#: src/main/connections.c:4814 src/main/connections.c:4854
+#: src/main/connections.c:4383 src/main/connections.c:4536
+#: src/main/connections.c:4820 src/main/connections.c:4860
 #, fuzzy
 msgid "problem with writing to connection"
 msgstr "写入链结有问题"
 
-#: src/main/connections.c:4422
+#: src/main/connections.c:4428
 msgid "size changing is not supported for raw vectors"
 msgstr "不支持原始矢量大小的改变"
 
-#: src/main/connections.c:4568 src/main/connections.c:4572
-#: src/main/connections.c:4611
+#: src/main/connections.c:4574 src/main/connections.c:4578
+#: src/main/connections.c:4617
 #, fuzzy
 msgid "invalid UTF-8 input in 'readChar()'"
 msgstr "readChar()的UTF-8输入有错"
 
-#: src/main/connections.c:4678
+#: src/main/connections.c:4684
 msgid "can only read in bytes in a non-UTF-8 MBCS locale"
 msgstr "在non-UTF-8 MBCS语言环境里只能读取字节"
 
-#: src/main/connections.c:4750
+#: src/main/connections.c:4756
 #, fuzzy
 msgid "'object' argument is too short"
 msgstr "'object'太短"
 
-#: src/main/connections.c:4776
+#: src/main/connections.c:4782
 msgid "too much data for a raw vector on this platform"
 msgstr ""
 
-#: src/main/connections.c:4803
+#: src/main/connections.c:4809
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
 msgstr "writeChar：字符串的长度比需要的字节数目短-用零来补上"
 
-#: src/main/connections.c:4828
+#: src/main/connections.c:4834
 msgid ""
 "writeChar: more characters requested than are in the string - will zero-pad"
 msgstr "writeChar：字符串的长度比需要的字节数目短-用零来补上"
 
-#: src/main/connections.c:4885
+#: src/main/connections.c:4891
 #, fuzzy
 msgid "maximum number of pushback lines exceeded"
 msgstr "颜色的数目已超过最大值"
 
-#: src/main/connections.c:4891 src/main/connections.c:4895
-#: src/main/connections.c:4932 src/main/connections.c:4940
-#: src/main/Rdynload.c:615 src/main/Rdynload.c:657
+#: src/main/connections.c:4897 src/main/connections.c:4901
+#: src/main/connections.c:4938 src/main/connections.c:4946
+#: src/main/Rdynload.c:616 src/main/Rdynload.c:658
 #, fuzzy, c-format
 msgid "could not allocate space for '%s'"
 msgstr "无法为'path'分配空间"
 
-#: src/main/connections.c:4923
+#: src/main/connections.c:4929
 msgid "can only push back on open readable connections"
 msgstr "只能推回已打开的可读链结"
 
-#: src/main/connections.c:4925
+#: src/main/connections.c:4931
 msgid "can only push back on text-mode connections"
 msgstr "只能推回文字状态的链结"
 
-#: src/main/connections.c:4989 src/main/connections.c:5059
+#: src/main/connections.c:4995 src/main/connections.c:5065
 msgid "sink stack is full"
 msgstr "汇集堆叠满了"
 
-#: src/main/connections.c:4992
+#: src/main/connections.c:4998
 #, fuzzy
 msgid "cannot switch output to 'stdin'"
 msgstr "无法将输出转到stdin"
 
-#: src/main/connections.c:5019
+#: src/main/connections.c:5025
 msgid "no sink to remove"
 msgstr "没有可以除去的汇集"
 
-#: src/main/connections.c:5139
+#: src/main/connections.c:5145
 #, fuzzy
 msgid "there is no connection NA"
 msgstr "没有%d链结"
 
-#: src/main/connections.c:5141
+#: src/main/connections.c:5147
 #, c-format
 msgid "there is no connection %d"
 msgstr "没有%d链结"
 
-#: src/main/connections.c:5278
+#: src/main/connections.c:5284
 #, fuzzy
 msgid "'method = \"wininet\"' is only supported on Windows"
 msgstr "本平台不支持'dirmark = TRUE'"
 
-#: src/main/connections.c:5297
+#: src/main/connections.c:5303
 #, fuzzy
 msgid "ftps:// URLs are not supported by this method"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/connections.c:5304
+#: src/main/connections.c:5310
 #, fuzzy
 msgid "https:// URLs are not supported by this method"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/connections.c:5310
+#: src/main/connections.c:5316
 #, fuzzy
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/connections.c:5330 src/modules/internet/libcurl.c:916
+#: src/main/connections.c:5336 src/modules/internet/libcurl.c:916
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "本平台不支持'dirmark = TRUE'"
 
-#: src/main/connections.c:5396
+#: src/main/connections.c:5402
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "本平台不支持ICU"
 
-#: src/main/connections.c:5493
+#: src/main/connections.c:5499
 msgid "file stream does not have gzip magic number"
 msgstr "文件串流没有gzip幻数"
 
-#: src/main/connections.c:5504
+#: src/main/connections.c:5510
 msgid "file stream does not have valid gzip header"
 msgstr "文件串流的gzip表头有错"
 
-#: src/main/connections.c:5569
+#: src/main/connections.c:5575
 #, fuzzy
 msgid "writing error while flushing gzcon connection"
 msgstr "清除'gzcon'链结时书写出错"
 
-#: src/main/connections.c:5671
+#: src/main/connections.c:5677
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "crc错误%x%x\n"
 
-#: src/main/connections.c:5698
+#: src/main/connections.c:5704
 #, fuzzy
 msgid "write error on gzcon connection"
 msgstr "'gzcon'链结书写出错"
 
-#: src/main/connections.c:5733
+#: src/main/connections.c:5739
 #, fuzzy
 msgid "'level' argument must be one of 0 ... 9"
 msgstr "'level’必需是0 ... 9之一"
 
-#: src/main/connections.c:5742
+#: src/main/connections.c:5748
 #, fuzzy
 msgid "this is already a gzcon connection"
 msgstr "这已经是gzcon链结"
 
-#: src/main/connections.c:5748
+#: src/main/connections.c:5754
 msgid "can only use read- or write- binary connections"
 msgstr "只用读或写的二进列链结"
 
-#: src/main/connections.c:5751
+#: src/main/connections.c:5757
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "文字方式的'file'联结有可能会出错"
 
-#: src/main/connections.c:5754
+#: src/main/connections.c:5760
 #, fuzzy
 msgid ""
 "cannot create a gzcon connection from a writable textConnection; maybe use "
 "rawConnection"
 msgstr "不能创建一个可写的textConnection的gzcon连接；试用rawConnection一下"
 
-#: src/main/connections.c:5757 src/main/connections.c:5761
-#: src/main/connections.c:5769
+#: src/main/connections.c:5763 src/main/connections.c:5767
+#: src/main/connections.c:5775
 #, fuzzy
 msgid "allocation of gzcon connection failed"
 msgstr "分配'gzcon'链结失败"
 
-#: src/main/connections.c:5784
+#: src/main/connections.c:5790
 #, fuzzy
 msgid "allocation of 'gzcon' connection failed"
 msgstr "分配'gzcon'链结失败"
 
-#: src/main/connections.c:5842 src/main/connections.c:5867
-#: src/main/connections.c:5893 src/main/connections.c:5926
-#: src/main/connections.c:6036 src/main/connections.c:6076
+#: src/main/connections.c:5848 src/main/connections.c:5873
+#: src/main/connections.c:5899 src/main/connections.c:5932
+#: src/main/connections.c:6042 src/main/connections.c:6082
 #, fuzzy, c-format
 msgid "'%s' function requires a raw vector"
 msgstr "'%s'需要字符矢量"
 
-#: src/main/connections.c:5849 src/main/connections.c:5873
-#: src/main/connections.c:5903 src/main/connections.c:5934
-#: src/main/connections.c:5943 src/main/connections.c:6046
-#: src/main/connections.c:6053 src/main/connections.c:6087
-#: src/main/connections.c:6107 src/main/connections.c:6115
-#: src/main/connections.c:6152 src/main/connections.c:6165
-#: src/main/connections.c:6187 src/main/connections.c:6197
+#: src/main/connections.c:5855 src/main/connections.c:5879
+#: src/main/connections.c:5909 src/main/connections.c:5940
+#: src/main/connections.c:5949 src/main/connections.c:6052
+#: src/main/connections.c:6059 src/main/connections.c:6093
+#: src/main/connections.c:6113 src/main/connections.c:6121
+#: src/main/connections.c:6158 src/main/connections.c:6171
+#: src/main/connections.c:6193 src/main/connections.c:6203
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function"
 msgstr "'do_sys'里发生了内部错误"
 
-#: src/main/connections.c:5950 src/main/connections.c:6122
+#: src/main/connections.c:5956 src/main/connections.c:6128
 #, fuzzy, c-format
 msgid "unknown type in '%s' function"
 msgstr "没有cumxxx这个功能"
 
-#: src/main/connections.c:5972
+#: src/main/connections.c:5978
 #, fuzzy, c-format
 msgid "'%s' argument is not a list of sockets"
 msgstr "非插坐串列"
 
-#: src/main/connections.c:5977
+#: src/main/connections.c:5983
 msgid "bad write indicators"
 msgstr "书写指示器有错"
 
-#: src/main/connections.c:5988
+#: src/main/connections.c:5994
 #, fuzzy
 msgid "this is not a socket connection"
 msgstr "非插坐链结"
 
-#: src/main/connections.c:6097 src/main/connections.c:6251
-#: src/main/connections.c:6267
+#: src/main/connections.c:6103 src/main/connections.c:6257
+#: src/main/connections.c:6273
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d)"
 msgstr "'do_sys'里发生了内部错误"
 
-#: src/main/connections.c:6140 src/main/connections.c:6220
+#: src/main/connections.c:6146 src/main/connections.c:6226
 #, fuzzy
 msgid "'from' argument must be raw or character"
 msgstr "'norm'必需是字符串"
 
-#: src/main/connections.c:6232
+#: src/main/connections.c:6238
 msgid "unknown compression, assuming none"
 msgstr "不知道这种压缩格式，因此假设没有压缩"
 
-#: src/main/connections.c:6313
+#: src/main/connections.c:6319
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d) at %d"
 msgstr "do_random1产生了内部错误"
 
-#: src/main/connections.c:6349 src/main/connections.c:6353
-#: src/main/connections.c:6360
+#: src/main/connections.c:6355 src/main/connections.c:6359
+#: src/main/connections.c:6366
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "原始链结分配失败"
@@ -3040,57 +3105,57 @@ msgstr ""
 "目标上下文出了错，这是不应该发生的\n"
 "请用bug.report() [R_run_onexits]"
 
-#: src/main/context.c:323
+#: src/main/context.c:336
 msgid "no loop for break/next, jumping to top level"
 msgstr "没有可中断/下一步骤的循环, 跳到最高层"
 
-#: src/main/context.c:331 src/main/errors.c:1336
+#: src/main/context.c:344 src/main/errors.c:1336
 msgid "no function to return from, jumping to top level"
 msgstr "没有可回归的函数, 跳到最高层"
 
-#: src/main/context.c:346
+#: src/main/context.c:359
 msgid "target context is not on the stack"
 msgstr "目标上下文不在堆叠上"
 
-#: src/main/context.c:361
+#: src/main/context.c:374
 #, fuzzy
 msgid "NA argument is invalid"
 msgstr "参数不是串列"
 
-#: src/main/context.c:369 src/main/context.c:384 src/main/context.c:466
-#: src/main/context.c:478 src/main/context.c:489 src/main/context.c:501
+#: src/main/context.c:382 src/main/context.c:397 src/main/context.c:479
+#: src/main/context.c:491 src/main/context.c:502 src/main/context.c:514
 msgid "not that many frames on the stack"
 msgstr "堆叠上没有这么多的环境框"
 
-#: src/main/context.c:400
+#: src/main/context.c:413
 msgid "only positive values of 'n' are allowed"
 msgstr "'n'只允许是正数"
 
-#: src/main/context.c:539
+#: src/main/context.c:552
 msgid "number of contexts must be positive"
 msgstr "上下文数目必需是正数"
 
-#: src/main/context.c:552
+#: src/main/context.c:565
 msgid "no browser context to query"
 msgstr "询问缺乏浏览器上下文"
 
-#: src/main/context.c:570
+#: src/main/context.c:583
 msgid "not that many calls to browser are active"
 msgstr "没有么多浏览器得指令"
 
-#: src/main/context.c:585
+#: src/main/context.c:598
 msgid "not that many functions on the call stack"
 msgstr "堆叠上没有这么多函数"
 
-#: src/main/context.c:589
+#: src/main/context.c:602
 msgid "debug flag in compiled function has no effect"
 msgstr ""
 
-#: src/main/context.c:591
+#: src/main/context.c:604
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.c:676 src/main/random.c:110 src/main/random.c:202
+#: src/main/context.c:694 src/main/random.c:110 src/main/random.c:202
 #: src/main/random.c:289
 #, fuzzy, c-format
 msgid "internal error in '%s' function"
@@ -3101,8 +3166,8 @@ msgstr "'do_sys'里发生了内部错误"
 msgid "k = %d, should be 2 or 4"
 msgstr ""
 
-#: src/main/cum.c:49 src/main/summary.c:69 src/main/summary.c:81
-#: src/main/summary.c:106 src/main/summary.c:639
+#: src/main/cum.c:49 src/main/summary.c:88 src/main/summary.c:117
+#: src/main/summary.c:694
 #, fuzzy, c-format
 msgid "integer overflow in '%s' function; use '%s'"
 msgstr "'do_sys'里发生了内部错误"
@@ -3199,66 +3264,57 @@ msgstr "'tracemem'对弱引用或外指针对象没有作用"
 msgid "R was not compiled with support for memory profiling"
 msgstr "在编译R程序时没有建立存储轮廓这一功能"
 
-#: src/main/deparse.c:157 src/main/sprintf.c:217 src/main/sprintf.c:249
-msgid "too few arguments"
-msgstr "参数数目太少"
-
-#: src/main/deparse.c:164
+#: src/main/deparse.c:162
 #, fuzzy, c-format
 msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr "反向分析的'cutoff'值不对, 用缺省值"
 
 #: src/main/deparse.c:264
-#, fuzzy
-msgid "deparse of an S4 object will not be sourceable by 'source()'"
-msgstr "反向分析S4目标对象是不能被source()"
-
-#: src/main/deparse.c:266
 msgid "deparse may be incomplete"
 msgstr "反向分析可能不完全"
 
-#: src/main/deparse.c:268
+#: src/main/deparse.c:267
 #, fuzzy
 msgid ""
 "deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr "在R < 2.7.0的版本里deparse可能不可以被source()"
 
-#: src/main/deparse.c:360
+#: src/main/deparse.c:352
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or connection"
 msgstr "'what'必需是字符串或函数"
 
-#: src/main/deparse.c:388 src/main/deparse.c:483 src/main/deparse.c:489
+#: src/main/deparse.c:376 src/main/deparse.c:478 src/main/deparse.c:484
 msgid "wrote too few characters"
 msgstr "写了的字符数目太小"
 
-#: src/main/deparse.c:410 src/main/source.c:204
+#: src/main/deparse.c:403 src/main/source.c:204
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "'what'必需是字符串或函数"
 
-#: src/main/deparse.c:412
+#: src/main/deparse.c:405
 msgid "character arguments expected"
 msgstr "需要字符参数"
 
-#: src/main/deparse.c:415
+#: src/main/deparse.c:408
 #, fuzzy
 msgid "zero-length argument"
 msgstr "参数长度为零"
 
-#: src/main/deparse.c:422
+#: src/main/deparse.c:415
 #, fuzzy
 msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts'必需是小的非负整数"
 
-#: src/main/deparse.c:432 src/main/envir.c:1997 src/main/envir.c:2082
-#: src/main/eval.c:630 src/main/eval.c:1788 src/main/eval.c:4729
-#: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2780
+#: src/main/deparse.c:425 src/main/envir.c:1998 src/main/envir.c:2083
+#: src/main/eval.c:630 src/main/eval.c:1791 src/main/eval.c:4774
+#: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2808
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "找不到对象'%s'"
 
-#: src/main/deparse.c:1602
+#: src/main/deparse.c:1680
 msgid "badly formed function expression"
 msgstr "函数表达式形式不对"
 
@@ -3302,7 +3358,7 @@ msgstr "第一个参数必需是带名字的串列"
 msgid "NULL value passed as symbol address"
 msgstr "NULL值不能当作符号地址用"
 
-#: src/main/dotcode.c:147 src/main/Rdynload.c:1233
+#: src/main/dotcode.c:147 src/main/Rdynload.c:1234
 #, fuzzy, c-format
 msgid "unimplemented type %d in '%s' function"
 msgstr "(%d)种类目前没有在'%s'里实现\n"
@@ -3358,7 +3414,7 @@ msgstr "载入表里没有\"%1$s\"字符名\"%2$s\""
 msgid "'%s' argument was used more than once"
 msgstr "DUP只能用一次"
 
-#: src/main/dotcode.c:360 src/main/Rdynload.c:627
+#: src/main/dotcode.c:360 src/main/Rdynload.c:628
 #, fuzzy, c-format
 msgid "DLL name '%s' is too long"
 msgstr "DLLname '%s'太长"
@@ -3375,7 +3431,7 @@ msgstr "'norm'必需是字符串"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:825
 #: src/main/util.c:859 src/main/util.c:901 src/main/util.c:942
-#: src/unix/sys-std.c:1312 src/unix/sys-std.c:1335
+#: src/unix/sys-std.c:1328 src/unix/sys-std.c:1351
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "'file'参数太长"
@@ -3390,7 +3446,7 @@ msgid "no arguments supplied"
 msgstr "没有提供参数"
 
 #: src/main/dotcode.c:513 src/main/dotcode.c:1215 src/main/dotcode.c:1439
-#: src/main/eval.c:2693
+#: src/main/eval.c:2710
 #, c-format
 msgid "'%s' is missing"
 msgstr "缺少'%s'"
@@ -3411,7 +3467,7 @@ msgstr ""
 msgid "compiler constants were modified (in '.Call'?)!\n"
 msgstr ""
 
-#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3118
+#: src/main/dotcode.c:1304 src/main/dotcode.c:1321 src/main/engine.c:3117
 msgid "invalid graphics state"
 msgstr "图形狀態不对"
 
@@ -3621,7 +3677,7 @@ msgstr "’function’的正式参数不对"
 msgid "invalid body argument for 'function'"
 msgstr "’function’的函数体定义不对"
 
-#: src/main/duplicate.c:371
+#: src/main/duplicate.c:377
 msgid "vector types do not match in 'copyVector()'"
 msgstr ""
 
@@ -3754,64 +3810,64 @@ msgstr "座标范围不对[GEPretty(.,.,n=%d)"
 msgid "infinite axis extents '[GEPretty(%g,%g,%d)]'"
 msgstr "座标范围不能是无限值[GEPretty(%g,%g,%d)]"
 
-#: src/main/engine.c:2380
+#: src/main/engine.c:2379
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *lo = %g < %g = x1"
 msgstr " .. GEPretty(.): new *lo =%g <%g = x1"
 
-#: src/main/engine.c:2382
+#: src/main/engine.c:2381
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr " .. GEPretty(.): new *up =%g >%g = x2"
 
-#: src/main/engine.c:2889
+#: src/main/engine.c:2888
 #, fuzzy
 msgid "display list redraw incomplete"
 msgstr "显示串列没有完全被刷新"
 
-#: src/main/engine.c:2893
+#: src/main/engine.c:2892
 #, fuzzy
 msgid "invalid display list"
 msgstr "参数串列不对"
 
-#: src/main/engine.c:3005
+#: src/main/engine.c:3004
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:3009
+#: src/main/engine.c:3008
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:3088
+#: src/main/engine.c:3087
 #, fuzzy, c-format
 msgid "'%s' argument must be an expression"
 msgstr "'expr'参数必需是表达式"
 
-#: src/main/engine.c:3180 src/main/engine.c:3188
+#: src/main/engine.c:3179 src/main/engine.c:3187
 #, fuzzy
 msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr "pch=\"c\"里的多字节字元不对"
 
-#: src/main/engine.c:3235
+#: src/main/engine.c:3234
 #, fuzzy
 msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr "十六进制'color'设定或lty设定不对"
 
-#: src/main/engine.c:3258
+#: src/main/engine.c:3257
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr "行类不对: 长度必需是2, 4, 6或8"
 
-#: src/main/engine.c:3262
+#: src/main/engine.c:3261
 msgid "invalid line type: zeroes are not allowed"
 msgstr "排类别不对：不能有零值"
 
-#: src/main/engine.c:3271 src/main/engine.c:3279 src/main/engine.c:3286
+#: src/main/engine.c:3270 src/main/engine.c:3278 src/main/engine.c:3285
 msgid "invalid line type"
 msgstr "行类不对"
 
@@ -3820,299 +3876,299 @@ msgstr "行类不对"
 msgid "cannot change value of locked binding for '%s'"
 msgstr "无法改变被锁定的联编'%s'的值"
 
-#: src/main/envir.c:308 src/main/envir.c:1630
+#: src/main/envir.c:309 src/main/envir.c:1631
 msgid "cannot add bindings to a locked environment"
 msgstr "无法为被锁定的环境添加联编"
 
-#: src/main/envir.c:477 src/main/envir.c:534 src/main/envir.c:561
+#: src/main/envir.c:478 src/main/envir.c:535 src/main/envir.c:562
 #, fuzzy, c-format
 msgid "first argument ('table') is not of type '%s', from '%s'"
 msgstr "'%s'部分匹配为'%s'"
 
-#: src/main/envir.c:845
+#: src/main/envir.c:846
 #, fuzzy
 msgid "invalid cached value in 'R_GetGlobalCache()' function"
 msgstr "R_GetGlobalCache里的高速缓存值不对"
 
-#: src/main/envir.c:906
+#: src/main/envir.c:907
 msgid "cannot unbind in the base namespace"
 msgstr "无法在基本名字空间里切断联编"
 
-#: src/main/envir.c:908
+#: src/main/envir.c:909
 msgid "unbind in the base environment is unimplemented"
 msgstr "在基本环境里切断联编这功能还没有被实现"
 
-#: src/main/envir.c:910 src/main/envir.c:1917
+#: src/main/envir.c:911 src/main/envir.c:1918
 msgid "cannot remove bindings from a locked environment"
 msgstr "无法从锁定的环境中删除联编"
 
-#: src/main/envir.c:957
+#: src/main/envir.c:958
 #, fuzzy
 msgid "'findVarLocInFrame()' function cannot be used on the base environment"
 msgstr "无法从基本环境中删除变数"
 
-#: src/main/envir.c:1283
+#: src/main/envir.c:1284
 #, fuzzy, c-format
 msgid "argument passed to '%s' function is not an environment"
 msgstr "参数'%s'不是环境"
 
-#: src/main/envir.c:1434
+#: src/main/envir.c:1435
 #, c-format
 msgid "indexing '...' with non-positive index %d"
 msgstr ""
 
-#: src/main/envir.c:1443
+#: src/main/envir.c:1444
 #, fuzzy, c-format
 msgid "the ... list does not contain any (%d) elements"
 msgid_plural "the ... list does not contain %d elements"
 msgstr[0] "... 串列不包含%d元素"
 
-#: src/main/envir.c:1446
+#: src/main/envir.c:1447
 #, fuzzy, c-format
 msgid "'..%d' used in an incorrect context, no ... to look in"
 msgstr "..%d所在的上下文出了错, 没有可以搜索的..."
 
-#: src/main/envir.c:1472
+#: src/main/envir.c:1473
 #, fuzzy
 msgid "incorrect context: the current call has no '...' to look in"
 msgstr "..%d所在的上下文出了错, 没有可以搜索的..."
 
-#: src/main/envir.c:1565
+#: src/main/envir.c:1566
 #, fuzzy, c-format
 msgid "could not find function '%s'"
 msgstr "没有\"%s\"这个函数"
 
-#: src/main/envir.c:1592
+#: src/main/envir.c:1593
 msgid "cannot assign values in the empty environment"
 msgstr "无法在空环境里分派数值"
 
-#: src/main/envir.c:1598 src/main/envir.c:1727
+#: src/main/envir.c:1599 src/main/envir.c:1728
 msgid "cannot assign variables to this database"
 msgstr "无法给这个数据库指定变数"
 
-#: src/main/envir.c:1670
+#: src/main/envir.c:1671
 msgid "additional variables should now be passed as a list, not an environment"
 msgstr ""
 
-#: src/main/envir.c:1811
+#: src/main/envir.c:1812
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr "无法在基本环境里加联编'%s' "
 
-#: src/main/envir.c:1842
+#: src/main/envir.c:1843
 msgid "only the first element is used as variable name"
 msgstr "只用了第一个元素作为变数名"
 
-#: src/main/envir.c:1874
+#: src/main/envir.c:1875
 msgid "first argument must be a named list"
 msgstr "第一个参数必需是带名字的串列"
 
-#: src/main/envir.c:1879
+#: src/main/envir.c:1880
 #, fuzzy
 msgid "'names(x)' must be a character vector of the same length as 'x'"
 msgstr "name(x)必需是长度与x一样的字符矢量"
 
-#: src/main/envir.c:1911
+#: src/main/envir.c:1912
 msgid "cannot remove variables from base namespace"
 msgstr "无法从基本名字空间里删除变数"
 
-#: src/main/envir.c:1913
+#: src/main/envir.c:1914
 msgid "cannot remove variables from the base environment"
 msgstr "无法从基本环境中删除变数"
 
-#: src/main/envir.c:1915
+#: src/main/envir.c:1916
 msgid "cannot remove variables from the empty environment"
 msgstr "无法从空环境中删除变数"
 
-#: src/main/envir.c:1923
+#: src/main/envir.c:1924
 msgid "cannot remove variables from this database"
 msgstr "无法从这个数据库中删除变数"
 
-#: src/main/envir.c:2084
+#: src/main/envir.c:2085
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "没有状态为\"%2$s\"的\"%1$s\"目标对象"
 
-#: src/main/envir.c:2167
+#: src/main/envir.c:2168
 #, c-format
 msgid "invalid name in position %d"
 msgstr "在%d位置的名字不对"
 
-#: src/main/envir.c:2173
+#: src/main/envir.c:2174
 msgid "second argument must be an environment"
 msgstr "第二参数必需是环境"
 
-#: src/main/envir.c:2320
+#: src/main/envir.c:2324
 msgid "invalid use of 'missing'"
 msgstr "’missing'的用法不对"
 
-#: src/main/envir.c:2346
+#: src/main/envir.c:2350
 msgid "'missing' can only be used for arguments"
 msgstr "'missing'只能用于这些参数"
 
-#: src/main/envir.c:2432
+#: src/main/envir.c:2436
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer"
 msgstr "'list'参数必需是串列"
 
-#: src/main/envir.c:2446
+#: src/main/envir.c:2450
 msgid "all elements of a list must be named"
 msgstr "所有的串列都必需带名字"
 
-#: src/main/envir.c:2469
+#: src/main/envir.c:2473
 #, fuzzy
 msgid "'attach()' function only works for lists, data frames and environments"
 msgstr "'attach'只适用于串列，数据框和环境"
 
-#: src/main/envir.c:2552
+#: src/main/envir.c:2556
 msgid "detaching \"package:base\" is not allowed"
 msgstr "\"package:base\"不能被拆离"
 
-#: src/main/envir.c:2701
+#: src/main/envir.c:2705
 #, fuzzy
 msgid "bad hash table contents"
 msgstr "变数名字不对"
 
-#: src/main/envir.c:2983
+#: src/main/envir.c:2987
 msgid "arguments must be symbolic"
 msgstr "参数必需为符号"
 
-#: src/main/envir.c:3126
+#: src/main/envir.c:3130
 msgid "no enclosing environment"
 msgstr "没有封闭环境"
 
-#: src/main/envir.c:3179
+#: src/main/envir.c:3183
 #, fuzzy, c-format
 msgid "no item called '%s' on the search list"
 msgstr "寻找串列里没有\"%s\"这样一个项目"
 
-#: src/main/envir.c:3204
+#: src/main/envir.c:3208
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "'as.environment(NULL)'不再有用"
 
-#: src/main/envir.c:3210
+#: src/main/envir.c:3214
 msgid "S4 object does not extend class \"environment\""
 msgstr "替换对象不是环境"
 
-#: src/main/envir.c:3225
+#: src/main/envir.c:3229
 #, fuzzy
 msgid "invalid object for 'as.environment()' function"
 msgstr "as.environment的对象不对"
 
-#: src/main/envir.c:3303 src/main/envir.c:3324 src/main/envir.c:3345
-#: src/main/envir.c:3381 src/main/envir.c:3401 src/main/envir.c:3500
+#: src/main/envir.c:3307 src/main/envir.c:3328 src/main/envir.c:3349
+#: src/main/envir.c:3385 src/main/envir.c:3405 src/main/envir.c:3504
 #, fuzzy, c-format
 msgid "'%s' argument is not a symbol"
 msgstr "不是符号"
 
-#: src/main/envir.c:3316 src/main/envir.c:3337 src/main/envir.c:3393
-#: src/main/envir.c:3413
+#: src/main/envir.c:3320 src/main/envir.c:3341 src/main/envir.c:3397
+#: src/main/envir.c:3417
 #, fuzzy, c-format
 msgid "no binding for '%s'"
 msgstr "\"%s\"没有联编"
 
-#: src/main/envir.c:3354 src/main/envir.c:3370
+#: src/main/envir.c:3358 src/main/envir.c:3374
 msgid "symbol already has a regular binding"
 msgstr "符号已经有了正式联编"
 
-#: src/main/envir.c:3356 src/main/envir.c:3372
+#: src/main/envir.c:3360 src/main/envir.c:3376
 msgid "cannot change active binding if binding is locked"
 msgstr "无法改变被锁定的联编"
 
-#: src/main/envir.c:3458 src/main/envir.c:3696
+#: src/main/envir.c:3462 src/main/envir.c:3700
 msgid "unknown op"
 msgstr "没有这种运算符"
 
-#: src/main/envir.c:3504
+#: src/main/envir.c:3508
 msgid "cannot unbind a locked binding"
 msgstr "无法切斷已经锁定了的联编"
 
-#: src/main/envir.c:3506
+#: src/main/envir.c:3510
 msgid "cannot unbind an active binding"
 msgstr "无法切斷正在使用中的联编"
 
-#: src/main/envir.c:3647
+#: src/main/envir.c:3651
 msgid "bad namespace name"
 msgstr "名字空间名字不对"
 
-#: src/main/envir.c:3659
+#: src/main/envir.c:3663
 #, fuzzy
 msgid "namespace is already registered"
 msgstr "名字空间已经注册了"
 
-#: src/main/envir.c:3671
+#: src/main/envir.c:3675
 #, fuzzy
 msgid "namespace is not registered"
 msgstr "名字空间没有注册"
 
-#: src/main/envir.c:3727
+#: src/main/envir.c:3731
 msgid "bad import environment argument"
 msgstr "引进环境参数不对"
 
-#: src/main/envir.c:3732
+#: src/main/envir.c:3736
 msgid "bad export environment argument"
 msgstr "引出环境参数不对"
 
-#: src/main/envir.c:3736
+#: src/main/envir.c:3740
 msgid "length of import and export names must match"
 msgstr "引进和引出名字的长度必需相等"
 
-#: src/main/envir.c:3759
+#: src/main/envir.c:3763
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "引出的符号’%s'没有值"
 
-#: src/main/envir.c:3791
+#: src/main/envir.c:3795
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr "参数必需是环境"
 
-#: src/main/envir.c:3897
+#: src/main/envir.c:3901
 #, c-format
 msgid "Resized: size %d => %d\tpri %d => %d\n"
 msgstr ""
 
-#: src/main/envir.c:3924
+#: src/main/envir.c:3928
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "不支持'%d'这个编码"
 
-#: src/main/envir.c:3944
+#: src/main/envir.c:3948
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "字符串里嵌入了nul：'%s'"
 
-#: src/main/envir.c:3987
+#: src/main/envir.c:3991
 #, fuzzy, c-format
 msgid "unknown encoding mask: %d"
 msgstr "不支持'%d'这个编码"
 
-#: src/main/envir.c:4023 src/main/envir.c:4050
+#: src/main/envir.c:4027 src/main/envir.c:4054
 #, c-format
 msgid "Cache size: %d\n"
 msgstr ""
 
-#: src/main/envir.c:4024 src/main/envir.c:4051
+#: src/main/envir.c:4028 src/main/envir.c:4055
 #, c-format
 msgid "Cache pri:  %d\n"
 msgstr ""
 
-#: src/main/envir.c:4028 src/main/envir.c:4055
+#: src/main/envir.c:4032 src/main/envir.c:4059
 #, c-format
 msgid "Line %d: "
 msgstr ""
 
-#: src/main/envir.c:4118
+#: src/main/envir.c:4122
 #, fuzzy, c-format
 msgid "'%s' argument is not a namespace"
 msgstr "参数不是矩阵"
 
-#: src/main/envir.c:4134
+#: src/main/envir.c:4138
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.c:4152
+#: src/main/envir.c:4156
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -4316,7 +4372,7 @@ msgstr "Rprof: 无法打开程序概要分析文件'%s'"
 msgid "unable to create profiling thread"
 msgstr "无法建立像映"
 
-#: src/main/eval.c:435 src/main/eval.c:7583
+#: src/main/eval.c:435 src/main/eval.c:7655
 msgid "setting profile timer failed"
 msgstr "程序概要分析计时器设制失败"
 
@@ -4363,8 +4419,8 @@ msgid ""
 "evaluation is nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "评估嵌套太深：无穷递归/ options(expressions=)?"
 
-#: src/main/eval.c:687 src/main/eval.c:6295 src/main/eval.c:6310
-#: src/main/eval.c:6328 src/main/eval.c:6491
+#: src/main/eval.c:687 src/main/eval.c:6358 src/main/eval.c:6373
+#: src/main/eval.c:6391 src/main/eval.c:6554
 msgid "trace: "
 msgstr ""
 
@@ -4378,7 +4434,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:746 src/main/eval.c:1672 src/main/eval.c:6350
+#: src/main/eval.c:746 src/main/eval.c:1675 src/main/eval.c:6413
 msgid "attempt to apply non-function"
 msgstr "不适用于非函数"
 
@@ -4391,340 +4447,340 @@ msgstr "%s在%s#%d: "
 msgid "debugging in: "
 msgstr ""
 
-#: src/main/eval.c:1611
+#: src/main/eval.c:1614
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1664 src/main/eval.c:2679 src/main/eval.c:5596
+#: src/main/eval.c:1667 src/main/eval.c:2696 src/main/eval.c:5648
 #, c-format
 msgid "argument %d is empty"
 msgstr "%d元素是空的"
 
-#: src/main/eval.c:1665
+#: src/main/eval.c:1668
 #, fuzzy
 msgid "something weird happened"
 msgstr "没有可以追加的文件"
 
-#: src/main/eval.c:1716
+#: src/main/eval.c:1719
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "类属函数环境里没有这个\"%s\"符号"
 
-#: src/main/eval.c:1733
+#: src/main/eval.c:1736
 #, fuzzy, c-format
 msgid "symbol \"%s\" is not in environment of method"
 msgstr "方法环境里没有\"%s\"这个符号"
 
-#: src/main/eval.c:1847
+#: src/main/eval.c:1863
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.c:1850
+#: src/main/eval.c:1866
 msgid "the condition has length > 1 and only the first element will be used"
 msgstr "条件的长度大于一，因此只能用其第一元素"
 
-#: src/main/eval.c:1869
+#: src/main/eval.c:1885
 msgid "missing value where TRUE/FALSE needed"
 msgstr "需要TRUE/FALSE值的地方不可以用缺少值"
 
-#: src/main/eval.c:1870
+#: src/main/eval.c:1886
 msgid "argument is not interpretable as logical"
 msgstr "参数不能作为逻辑值来用"
 
-#: src/main/eval.c:1871 src/main/seq.c:161
+#: src/main/eval.c:1887 src/main/seq.c:161
 #, fuzzy
 msgid "argument is of length 0"
 msgstr "参数长度为零"
 
-#: src/main/eval.c:1970
+#: src/main/eval.c:1986
 msgid "non-symbol loop variable"
 msgstr "非符号循环变数"
 
-#: src/main/eval.c:2063 src/main/eval.c:6114
+#: src/main/eval.c:2080 src/main/eval.c:6177
 #, fuzzy
 msgid "invalid 'for()' loop sequence"
 msgstr "for()循环顺序不对"
 
-#: src/main/eval.c:2208
+#: src/main/eval.c:2225
 msgid "multi-argument returns are not permitted"
 msgstr "不允许多参数回覆值"
 
-#: src/main/eval.c:2255
+#: src/main/eval.c:2272
 msgid "invalid (NULL) left side of assignment"
 msgstr "赋值公式左手不能是(NULL)值"
 
-#: src/main/eval.c:2289
+#: src/main/eval.c:2306
 msgid "target of assignment expands to non-language object"
 msgstr "赋值目标擴充到非语言对象"
 
-#: src/main/eval.c:2389
+#: src/main/eval.c:2406
 #, fuzzy, c-format
 msgid "over-long name in '%s' function"
 msgstr "'%s'中的名字太长"
 
-#: src/main/eval.c:2479
+#: src/main/eval.c:2496
 msgid "cannot do complex assignments in base namespace"
 msgstr "无法在基本名字空间里赋复数值"
 
-#: src/main/eval.c:2481
+#: src/main/eval.c:2498
 msgid "cannot do complex assignments in base environment"
 msgstr "无法在基本环境里赋复数值"
 
-#: src/main/eval.c:2520 src/main/eval.c:2547
+#: src/main/eval.c:2537 src/main/eval.c:2564
 msgid "invalid function in complex assignment"
 msgstr "复数赋值里的函数不对"
 
-#: src/main/eval.c:2607
+#: src/main/eval.c:2624
 #, fuzzy
 msgid "invalid ('do_set()' function) left-hand side to assignment"
 msgstr "(do_set)赋值公式左手不对"
 
-#: src/main/eval.c:2852
+#: src/main/eval.c:2869
 msgid "invalid formal argument list for \"function\""
 msgstr "\"function\"正式参数串列不对"
 
-#: src/main/eval.c:2913 src/main/eval.c:2943 src/main/eval.c:2947
+#: src/main/eval.c:2930 src/main/eval.c:2960 src/main/eval.c:2964
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "'%s'参数不对"
 
-#: src/main/eval.c:2940
+#: src/main/eval.c:2957
 #, fuzzy
 msgid "numeric 'envir' argument is not of length one"
 msgstr "数值'envir'参数的长度不是一"
 
-#: src/main/eval.c:2963 src/main/eval.c:2988
+#: src/main/eval.c:2980 src/main/eval.c:3005
 #, fuzzy
 msgid "restarts are not supported in 'eval()' function"
 msgstr "'eval'不支持重新启动"
 
-#: src/main/eval.c:3047 src/main/eval.c:3060
+#: src/main/eval.c:3064 src/main/eval.c:3077
 #, fuzzy
 msgid "'Recall()' function called from outside a closure"
 msgstr "'Recall'在封閉包外调用"
 
-#: src/main/eval.c:3154
+#: src/main/eval.c:3171
 msgid "value in '...' is not a promise"
 msgstr "'... '里的值不是允諾"
 
-#: src/main/eval.c:3415
+#: src/main/eval.c:3432
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "不可兼容的方法(\"%s\", \"%s\")和\"%s\""
 
-#: src/main/eval.c:3463
+#: src/main/eval.c:3480
 msgid "dispatch error in group dispatch"
 msgstr "组分派错误"
 
-#: src/main/eval.c:3982 src/main/eval.c:6462 src/main/seq.c:1009
+#: src/main/eval.c:4004 src/main/eval.c:6525 src/main/seq.c:1009
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "\"%s\"不是%s函数"
 
-#: src/main/eval.c:4498
+#: src/main/eval.c:4543
 msgid "node stack overflow"
 msgstr "节点堆叠上溢"
 
-#: src/main/eval.c:4504
+#: src/main/eval.c:4549
 msgid "integer stack overflow"
 msgstr "整数堆叠上溢"
 
-#: src/main/eval.c:4598
+#: src/main/eval.c:4643
 #, fuzzy
 msgid "bad operation code"
 msgstr "op代码不对"
 
-#: src/main/eval.c:5580 src/main/logic.c:263 src/main/logic.c:269
+#: src/main/eval.c:5632 src/main/logic.c:284 src/main/logic.c:290
 #, fuzzy, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr "'x %2$s y'中%1$s种类不对"
 
-#: src/main/eval.c:5610
+#: src/main/eval.c:5662
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr "%d元素是空的"
 
-#: src/main/eval.c:5959
+#: src/main/eval.c:6021
 msgid "bytecode version mismatch; using eval"
 msgstr "位元組碼版本不配; 用eval"
 
-#: src/main/eval.c:5965
+#: src/main/eval.c:6027
 msgid "bytecode version is too old"
 msgstr "位元組碼版本太旧"
 
-#: src/main/eval.c:5966
+#: src/main/eval.c:6028
 msgid "bytecode version is too new"
 msgstr "位元組碼版本太新"
 
-#: src/main/eval.c:6004
+#: src/main/eval.c:6066
 msgid "byte code version mismatch"
 msgstr "位元組碼版本不配"
 
-#: src/main/eval.c:6197
+#: src/main/eval.c:6260
 #, fuzzy
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "循环里的顺序参数不对"
 
-#: src/main/eval.c:6324
+#: src/main/eval.c:6387
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:6340 src/main/names.c:1323
+#: src/main/eval.c:6403 src/main/names.c:1327
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "没有\"%s\"这个内部函数"
 
-#: src/main/eval.c:6449 src/main/eval.c:6804 src/main/eval.c:6845
+#: src/main/eval.c:6512 src/main/eval.c:6876 src/main/eval.c:6917
 msgid "bad function"
 msgstr "函数不对"
 
-#: src/main/eval.c:6896
+#: src/main/eval.c:6968
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6902 src/main/eval.c:6927
+#: src/main/eval.c:6974 src/main/eval.c:6999
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "数字开关偏移设定不对"
 
-#: src/main/eval.c:6908
+#: src/main/eval.c:6980
 #, fuzzy
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr "没有名字替代的开关需要数值EXPR"
 
-#: src/main/eval.c:6911
+#: src/main/eval.c:6983
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr "字符开关偏移不对"
 
-#: src/main/eval.c:6913
+#: src/main/eval.c:6985
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr "开关名字不对"
 
-#: src/main/eval.c:7020
+#: src/main/eval.c:7092
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "没有这种输入格式"
 
-#: src/main/eval.c:7036
+#: src/main/eval.c:7108
 msgid "cannot find index for threaded code address"
 msgstr "找不到线程代码地址的索引"
 
-#: src/main/eval.c:7080
+#: src/main/eval.c:7152
 #, fuzzy
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
 msgstr "'match'需要矢量参数"
 
-#: src/main/eval.c:7082
+#: src/main/eval.c:7154
 #, fuzzy
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
 msgstr "'match'需要矢量参数"
 
-#: src/main/eval.c:7163
+#: src/main/eval.c:7235
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7165
+#: src/main/eval.c:7237
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7167
+#: src/main/eval.c:7239
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.c:7168
+#: src/main/eval.c:7240
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7171
+#: src/main/eval.c:7243
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7173
+#: src/main/eval.c:7245
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.c:7203 src/main/eval.c:7214
+#: src/main/eval.c:7275 src/main/eval.c:7286
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.c:7228
+#: src/main/eval.c:7300
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.c:7292
+#: src/main/eval.c:7364
 msgid "invalid body"
 msgstr "函数体不对"
 
-#: src/main/eval.c:7312
+#: src/main/eval.c:7384
 msgid "invalid symbol"
 msgstr "符号不对"
 
-#: src/main/eval.c:7356
+#: src/main/eval.c:7428
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr "参数不是位元组码对象"
 
-#: src/main/eval.c:7378
+#: src/main/eval.c:7450
 msgid "bad file name"
 msgstr "文件名字不对"
 
-#: src/main/eval.c:7397
+#: src/main/eval.c:7469
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr "'pattern'必需为非空字符串"
 
-#: src/main/eval.c:7399 src/main/saveload.c:1943 src/main/saveload.c:2238
-#: src/main/serialize.c:2196 src/modules/lapack/Lapack.c:1250
+#: src/main/eval.c:7471 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/serialize.c:2224 src/modules/lapack/Lapack.c:1250
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'ascii’必需是逻辑值"
 
-#: src/main/eval.c:7429 src/main/eval.c:7436
+#: src/main/eval.c:7501 src/main/eval.c:7508
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr "R_CompiledFileName: 缓冲区太小"
 
-#: src/main/eval.c:7470 src/main/eval.c:7489 src/main/eval.c:7523
+#: src/main/eval.c:7542 src/main/eval.c:7561 src/main/eval.c:7595
 msgid "constant buffer must be a generic vector"
 msgstr "常量缓冲区必须是矢量类属"
 
-#: src/main/eval.c:7493
+#: src/main/eval.c:7565
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr "'%s'值不对"
 
-#: src/main/eval.c:7525
+#: src/main/eval.c:7597
 msgid "bad constant count"
 msgstr "常量数目不对"
 
-#: src/main/eval.c:7563
+#: src/main/eval.c:7635
 #, fuzzy
 msgid "profile timer is in use"
 msgstr "程序概要分析计时器在运行中"
 
-#: src/main/eval.c:7565
+#: src/main/eval.c:7637
 msgid "already byte code profiling"
 msgstr "已经在进行位元组码程序概要分析"
 
-#: src/main/eval.c:7601
+#: src/main/eval.c:7673
 #, fuzzy
 msgid "no byte code profiling"
 msgstr "非位元组码程序概要分析"
 
-#: src/main/eval.c:7617 src/main/eval.c:7621 src/main/eval.c:7625
+#: src/main/eval.c:7689 src/main/eval.c:7693 src/main/eval.c:7697
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "本平台不支持ICU"
 
-#: src/main/eval.c:7675
+#: src/main/eval.c:7747
 #, fuzzy
 msgid "parse error"
 msgstr "读取错误"
@@ -4933,70 +4989,70 @@ msgstr "%d行输入缓冲区上溢"
 msgid "relative range of values =%4.0f * EPS, is small (axis %d)"
 msgstr "相对范围值=%4.0f * EPS太小(座标%d)"
 
-#: src/main/grep.c:106
+#: src/main/grep.c:105
 msgid "R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"
 msgstr ""
 
-#: src/main/grep.c:128
+#: src/main/grep.c:127
 #, c-format
 msgid "invalid regular expression '%s', reason '%s'"
 msgstr "正规表现’%s'不对，原因是'%s'"
 
-#: src/main/grep.c:130
+#: src/main/grep.c:129
 #, c-format
 msgid "invalid regular expression, reason '%s'"
 msgstr "正规表现不对, 原因是'%s'"
 
-#: src/main/grep.c:166
+#: src/main/grep.c:165
 #, c-format
 msgid "JIT stack limit reached in PCRE for element %d"
 msgstr ""
 
-#: src/main/grep.c:171
+#: src/main/grep.c:170
 #, c-format
 msgid "back-tracking limit reached in PCRE for element %d"
 msgstr ""
 
-#: src/main/grep.c:175
+#: src/main/grep.c:174
 #, c-format
 msgid ""
 "recursion limit reached in PCRE for element %d\n"
 "  consider increasing the C stack size for the R process"
 msgstr ""
 
-#: src/main/grep.c:180
+#: src/main/grep.c:179
 #, fuzzy, c-format
 msgid "unexpected internal error in PCRE for element %d"
 msgstr "do_random1产生了内部错误"
 
-#: src/main/grep.c:185
+#: src/main/grep.c:184
 #, c-format
 msgid "PCRE detected a recursive loop in the pattern for element %d"
 msgstr ""
 
-#: src/main/grep.c:238
+#: src/main/grep.c:237
 #, fuzzy
 msgid "allocation failure in set_pcre_recursion_limit"
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/grep.c:346 src/main/grep.c:436 src/main/grep.c:562
-#: src/main/grep.c:1065 src/main/grep.c:1854 src/main/grep.c:2724
+#: src/main/grep.c:345 src/main/grep.c:435 src/main/grep.c:561
+#: src/main/grep.c:1064 src/main/grep.c:1853 src/main/grep.c:2723
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "输入的字符串%d不是UTF-8"
 
-#: src/main/grep.c:413 src/main/grep.c:512
+#: src/main/grep.c:412 src/main/grep.c:511
 #, c-format
 msgid "'split' string %d is invalid UTF-8"
 msgstr "'split'字符串%d不是UTF-8"
 
-#: src/main/grep.c:417 src/main/grep.c:516 src/main/grep.c:712
+#: src/main/grep.c:416 src/main/grep.c:515 src/main/grep.c:711
 #, c-format
 msgid "'split' string %d is invalid in this locale"
 msgstr "在目前的语言环境中'split'字符串%d不是UTF-8"
 
-#: src/main/grep.c:525 src/main/grep.c:1017 src/main/grep.c:1799
-#: src/main/grep.c:2626
+#: src/main/grep.c:524 src/main/grep.c:1016 src/main/grep.c:1798
+#: src/main/grep.c:2625
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -5007,13 +5063,13 @@ msgstr ""
 "\t'%s'\n"
 "\t在'%s'\n"
 
-#: src/main/grep.c:527
+#: src/main/grep.c:526
 #, c-format
 msgid "invalid split pattern '%s'"
 msgstr "split的式样'%s'不对"
 
-#: src/main/grep.c:533 src/main/grep.c:1026 src/main/grep.c:1808
-#: src/main/grep.c:2635
+#: src/main/grep.c:532 src/main/grep.c:1025 src/main/grep.c:1807
+#: src/main/grep.c:2634
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -5022,57 +5078,57 @@ msgstr ""
 "PCRE模式研究错误\n"
 "\t'%s'\n"
 
-#: src/main/grep.c:749 src/main/grep.c:761 src/main/grep.c:1096
-#: src/main/grep.c:2022 src/main/grep.c:2208 src/main/grep.c:2782
-#: src/main/grep.c:2997
+#: src/main/grep.c:748 src/main/grep.c:760 src/main/grep.c:1095
+#: src/main/grep.c:2021 src/main/grep.c:2207 src/main/grep.c:2781
+#: src/main/grep.c:2996
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
 
-#: src/main/grep.c:998 src/main/grep.c:2607
+#: src/main/grep.c:997 src/main/grep.c:2606
 msgid "regular expression is invalid UTF-8"
 msgstr "正规表现不是UTF-8"
 
-#: src/main/grep.c:1019 src/main/grep.c:1801 src/main/grep.c:2628
+#: src/main/grep.c:1018 src/main/grep.c:1800 src/main/grep.c:2627
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "正规表现’%s'不对"
 
-#: src/main/grep.c:1459
+#: src/main/grep.c:1458
 msgid "pattern matches an empty string infinitely, returning first match only"
 msgstr "模式无限匹配了一个空字符串，因此只返回第一个匹配"
 
-#: src/main/grep.c:1772
+#: src/main/grep.c:1771
 msgid "'pattern' is invalid UTF-8"
 msgstr "'pattern'不是UTF-8"
 
-#: src/main/grep.c:1774
+#: src/main/grep.c:1773
 msgid "'replacement' is invalid UTF-8"
 msgstr "'replacement'不是UTF-8"
 
-#: src/main/grep.c:1778
+#: src/main/grep.c:1777
 msgid "'pattern' is invalid in this locale"
 msgstr "'pattern'在本语言环境下不适用"
 
-#: src/main/grep.c:1781
+#: src/main/grep.c:1780
 msgid "'replacement' is invalid in this locale"
 msgstr "'replacement'在本语言环境下不适用"
 
-#: src/main/grep.c:1786
+#: src/main/grep.c:1785
 msgid "zero-length pattern"
 msgstr "式样长度为零"
 
-#: src/main/grep.c:1946 src/main/grep.c:1963 src/main/grep.c:2012
-#: src/main/grep.c:2033 src/main/grep.c:2080 src/main/grep.c:2096
+#: src/main/grep.c:1945 src/main/grep.c:1962 src/main/grep.c:2011
+#: src/main/grep.c:2032 src/main/grep.c:2079 src/main/grep.c:2095
 msgid "result string is too long"
 msgstr "结果字符串太长"
 
-#: src/main/grep.c:2658
+#: src/main/grep.c:2657
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "pcre_fullinfo返回了'%d'"
 
-#: src/main/grep.c:2692
+#: src/main/grep.c:2691
 #, fuzzy
 msgid "vector is too long"
 msgstr "矢量size设得太大了"
@@ -5102,7 +5158,7 @@ msgstr ""
 msgid "Unknown Type: %s (%x)\n"
 msgstr ""
 
-#: src/main/inspect.c:135
+#: src/main/inspect.c:151
 #, fuzzy, c-format
 msgid "\"%s\" (has value)"
 msgstr "值不对"
@@ -5153,21 +5209,21 @@ msgstr "此运算只适用于数值，逻辑值或复数值种类"
 msgid "non-conformable time series"
 msgstr "非整合时间系列"
 
-#: src/main/logic.c:257
+#: src/main/logic.c:278
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "'%s'运算符需要两个参数"
 
-#: src/main/logic.c:342
+#: src/main/logic.c:367
 #, fuzzy
 msgid "Unary operator '!' called with two arguments"
 msgstr "单进列运算`!'不能有两个参数"
 
-#: src/main/logic.c:405
+#: src/main/logic.c:433
 msgid "bad operator value for 'do_logic3()' function"
 msgstr ""
 
-#: src/main/logic.c:447
+#: src/main/logic.c:475
 #, c-format
 msgid "coercing argument of type '%s' to logical"
 msgstr "将种类为'%s'的参数强迫转化为逻辑值"
@@ -5486,371 +5542,395 @@ msgstr[0] "参数(%s) 没有用"
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:758
+#: src/main/memory.c:769
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "非微弱引用"
 
-#: src/main/memory.c:767
+#: src/main/memory.c:778
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:774 src/main/memory.c:784 src/main/memory.c:794
+#: src/main/memory.c:785 src/main/memory.c:795 src/main/memory.c:805
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:786 src/main/memory.c:796
+#: src/main/memory.c:797 src/main/memory.c:807
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:799
+#: src/main/memory.c:810
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:829
+#: src/main/memory.c:840
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:834
+#: src/main/memory.c:845
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:835
+#: src/main/memory.c:846
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:846
+#: src/main/memory.c:857
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:850
+#: src/main/memory.c:861
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1140 src/main/memory.c:1562
+#: src/main/memory.c:1137 src/main/memory.c:1571
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1257
+#: src/main/memory.c:1254
 msgid "can only weakly reference/finalize reference objects"
 msgstr "只能微弱引用或定局引用对象"
 
-#: src/main/memory.c:1291
+#: src/main/memory.c:1288
 msgid "finalizer must be a function or NULL"
 msgstr "定局器必需是函数或NULL"
 
-#: src/main/memory.c:1347 src/main/memory.c:1355 src/main/memory.c:1366
+#: src/main/memory.c:1344 src/main/memory.c:1352 src/main/memory.c:1363
 msgid "not a weak reference"
 msgstr "非微弱引用"
 
-#: src/main/memory.c:1500
+#: src/main/memory.c:1509
 msgid "first argument must be environment or external pointer"
 msgstr "第一参数必需是环境或外部指针"
 
-#: src/main/memory.c:1502
+#: src/main/memory.c:1511
 msgid "second argument must be a function"
 msgstr "第二参数必需是函数"
 
-#: src/main/memory.c:1506
+#: src/main/memory.c:1515
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr "第三个的值要么是TRUE要么是FALSE"
 
-#: src/main/memory.c:1858
+#: src/main/memory.c:1872
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1861
+#: src/main/memory.c:1875
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:2015
+#: src/main/memory.c:2027
 msgid "vector memory exhausted (limit reached?)"
 msgstr "矢量内存用完了(达到了极限?)"
 
-#: src/main/memory.c:2021
+#: src/main/memory.c:2033
 msgid "cons memory exhausted (limit reached?)"
 msgstr "cons内存用完了(达到了极限?)"
 
-#: src/main/memory.c:2026
+#: src/main/memory.c:2038
 msgid "memory exhausted (limit reached?)"
 msgstr "内存用完了(达到了极限?)"
 
-#: src/main/memory.c:2047
+#: src/main/memory.c:2059
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr "无法为'read.dcf'分配内存"
 
-#: src/main/memory.c:2104
+#: src/main/memory.c:2116
 #, fuzzy
 msgid "couldn't allocate node stack"
 msgstr "无法为pushBack分配空间"
 
-#: src/main/memory.c:2109
+#: src/main/memory.c:2121
 #, fuzzy
 msgid "couldn't allocate integer stack"
 msgstr "无法为pushBack分配空间"
 
-#: src/main/memory.c:2162
+#: src/main/memory.c:2174
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr "无法分配大小为%0.1f Gb的内存块"
 
-#: src/main/memory.c:2167
+#: src/main/memory.c:2179
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr "无法分配大小为%0.1f Gb的内存块"
 
-#: src/main/memory.c:2529
+#: src/main/memory.c:2544
 #, fuzzy
 msgid "vector is too large"
 msgstr "矢量size设得太大了"
 
-#: src/main/memory.c:2531
+#: src/main/memory.c:2546
 msgid "negative length vectors are not allowed"
 msgstr "不能有负长度矢量"
 
-#: src/main/memory.c:2543
+#: src/main/memory.c:2558
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2557 src/main/memory.c:2569 src/main/memory.c:2581
-#: src/main/memory.c:2595
+#: src/main/memory.c:2572 src/main/memory.c:2584 src/main/memory.c:2596
+#: src/main/memory.c:2610
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr "无法分配长度为%d的矢量"
 
-#: src/main/memory.c:2605 src/main/memory.c:2612
+#: src/main/memory.c:2620 src/main/memory.c:2627
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "长度为零的参数是不对的"
 
-#: src/main/memory.c:2616
+#: src/main/memory.c:2631
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "矢量分配的种类/长度(%s/%d)不对"
 
-#: src/main/memory.c:2715
+#: src/main/memory.c:2718
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr "无法分配大小为%0.1f Gb的矢量"
 
-#: src/main/memory.c:2719
+#: src/main/memory.c:2722
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr "无法分配大小为%0.1f Mb的矢量"
 
-#: src/main/memory.c:2723
+#: src/main/memory.c:2726
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "无法分配大小为%0.f Kb的矢量"
 
-#: src/main/memory.c:2979
+#: src/main/memory.c:2989
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2984
+#: src/main/memory.c:2994
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:3007
+#: src/main/memory.c:3017
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:3012 src/main/memory.c:3017
+#: src/main/memory.c:3022 src/main/memory.c:3027
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:3027
+#: src/main/memory.c:3037
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3031
+#: src/main/memory.c:3041
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3036
+#: src/main/memory.c:3046
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3109
+#: src/main/memory.c:3119
 msgid "protect(): protection stack overflow"
 msgstr "protect()：防护堆叠上溢"
 
-#: src/main/memory.c:3116
+#: src/main/memory.c:3126
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] "unprotect():只有%d个保护项"
 
-#: src/main/memory.c:3151
+#: src/main/memory.c:3161
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: 找不到指针"
 
-#: src/main/memory.c:3189
+#: src/main/memory.c:3199
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] "unprotect():只有%d个保护项"
 
-#: src/main/memory.c:3241
+#: src/main/memory.c:3251
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc无法分配(%2$u的%1$.0f)内存"
 
-#: src/main/memory.c:3251
+#: src/main/memory.c:3261
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc 无法重新分配(大小为%.0f)的内存"
 
-#: src/main/memory.c:3383
+#: src/main/memory.c:3395
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3432
+#: src/main/memory.c:3446
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3447
+#: src/main/memory.c:3468
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a charecter, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3454 src/main/memory.c:3514
+#: src/main/memory.c:3475 src/main/memory.c:3576
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a character vector, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3464 src/main/memory.c:3531
+#: src/main/memory.c:3488 src/main/memory.c:3596
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a list, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3471
+#: src/main/memory.c:3513
+msgid "cannot get STDVEC_DATAPTR from ALTREP object"
+msgstr ""
+
+#: src/main/memory.c:3515
+#, fuzzy, c-format
+msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
+msgstr "nsl()无法分辨主机'%s'"
+
+#: src/main/memory.c:3523
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a logical, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3479
+#: src/main/memory.c:3532
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a integer, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3486
+#: src/main/memory.c:3540
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3493
+#: src/main/memory.c:3548
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a numeric, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3500
+#: src/main/memory.c:3555
 #, fuzzy, c-format
 msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr "nsl()无法分辨主机'%s'"
 
-#: src/main/memory.c:3509
+#: src/main/memory.c:3563
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a character, not a '%s'"
+msgstr "nsl()无法分辨主机'%s'"
+
+#: src/main/memory.c:3571
 msgid "not safe to return vector pointer"
 msgstr "回覆矢量指针不是安全的做法"
 
-#: src/main/memory.c:3517
+#: src/main/memory.c:3579
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3520
+#: src/main/memory.c:3582
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3535
+#: src/main/memory.c:3600
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3560 src/main/memory.c:3570 src/main/memory.c:3582
-#: src/main/memory.c:3596 src/main/memory.c:3611 src/main/memory.c:3629
+#: src/main/memory.c:3624
+#, c-format
+msgid "CAR/CDR/TAG or similar applied to %s object"
+msgstr ""
+
+#: src/main/memory.c:3649
+#, fuzzy
+msgid "incorrect value"
+msgstr "参数不对"
+
+#: src/main/memory.c:3658 src/main/memory.c:3668 src/main/memory.c:3680
+#: src/main/memory.c:3694 src/main/memory.c:3709 src/main/memory.c:3727
 msgid "bad value"
 msgstr "值不对"
 
-#: src/main/memory.c:3711
+#: src/main/memory.c:3809
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3792
+#: src/main/memory.c:3890
 msgid "memory profiling is not available on this system"
 msgstr "本系统没有记忆概要分析这个功能"
 
-#: src/main/memory.c:3855
+#: src/main/memory.c:3953
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: 无法输出文件'%s'"
 
-#: src/main/memory.c:3891
+#: src/main/memory.c:3989
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3908
+#: src/main/memory.c:4006
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "无法为'read.dcf'分配内存"
 
-#: src/main/memory.c:3960
+#: src/main/memory.c:4058
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1027
+#: src/main/names.c:1030
 msgid "string argument required"
 msgstr "需要字符串参数"
 
-#: src/main/names.c:1030
+#: src/main/names.c:1033
 msgid "no such primitive function"
 msgstr "没有这种原始函数"
 
-#: src/main/names.c:1162
+#: src/main/names.c:1165
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "无法为'read.dcf'分配内存"
 
-#: src/main/names.c:1220 src/main/names.c:1253
+#: src/main/names.c:1224 src/main/names.c:1257
 msgid "attempt to use zero-length variable name"
 msgstr "不能用零长度变数名"
 
-#: src/main/names.c:1222 src/main/names.c:1255
+#: src/main/names.c:1226 src/main/names.c:1259
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "变量名限制于%d字节"
 
-#: src/main/names.c:1344
+#: src/main/names.c:1348
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "无法从基本名字空间里删除变数"
 
-#: src/main/names.c:1351
+#: src/main/names.c:1355
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "无法从基本名字空间里删除变数"
@@ -5954,43 +6034,43 @@ msgstr "无法取消外部指针的类别"
 msgid "'%s' argument must be a logical vector of length 1"
 msgstr "'hostname'必需是长度为一的字符矢量"
 
-#: src/main/objects.c:1012
+#: src/main/objects.c:1015
 msgid "could not find correct environment; please report!"
 msgstr "找不到正确的环境；请报告!"
 
-#: src/main/objects.c:1066
+#: src/main/objects.c:1069
 msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
 msgstr ""
 
-#: src/main/objects.c:1124
+#: src/main/objects.c:1127
 #, fuzzy, c-format
 msgid "unable to find a non-generic version of function '%s'"
 msgstr "无法找到函数\"%s\"非类属的版本"
 
-#: src/main/objects.c:1154
+#: src/main/objects.c:1157
 #, fuzzy
 msgid ""
 "'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"
 msgstr "方法分派没有激活，因此不能调用standardGeneric(略过不用)"
 
-#: src/main/objects.c:1162
+#: src/main/objects.c:1165
 #, fuzzy, c-format
 msgid "argument passed to '%s' function must be a non-empty character string"
 msgstr "standardGeneric的参数必需是非空字符串"
 
-#: src/main/objects.c:1167
+#: src/main/objects.c:1170
 #, c-format
 msgid ""
 "call to standardGeneric(\"%s\") apparently not from the body of that generic "
 "function"
 msgstr "不能从非泛型函数体内调用standardGeneric(\"%s\") "
 
-#: src/main/objects.c:1211
+#: src/main/objects.c:1214
 #, fuzzy, c-format
 msgid "'internal' slot does not name an internal function: %s"
 msgstr "没有\"%s\"这个内部函数"
 
-#: src/main/objects.c:1266
+#: src/main/objects.c:1269
 #, c-format
 msgid ""
 "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", "
@@ -5998,66 +6078,66 @@ msgid ""
 msgstr ""
 "原始方法代码(\"%s\")有错：应该是\"clear\", \"reset\", \"set\", 或\"suppress\""
 
-#: src/main/objects.c:1274
+#: src/main/objects.c:1277
 msgid "invalid object: must be a primitive function"
 msgstr "对象不对: 必需是原始函数"
 
-#: src/main/objects.c:1321
+#: src/main/objects.c:1324
 #, c-format
 msgid ""
 "the formal definition of a primitive generic must be a function object (got "
 "type '%s')"
 msgstr "原始同属函数的正式定义必需是函数对象(不能是'%s'类)"
 
-#: src/main/objects.c:1350
+#: src/main/objects.c:1353
 #, fuzzy, c-format
 msgid "object returned as generic function '%s' does not appear to be one"
 msgstr "回归为同属函数的目标对象\"%s\"看起来不象"
 
-#: src/main/objects.c:1455
+#: src/main/objects.c:1458
 msgid "invalid primitive operation given for dispatch"
 msgstr "不能分派原始运算"
 
-#: src/main/objects.c:1486 src/main/objects.c:1507
+#: src/main/objects.c:1489 src/main/objects.c:1510
 msgid "dispatch error"
 msgstr "分派错误"
 
-#: src/main/objects.c:1502
+#: src/main/objects.c:1505
 #, fuzzy, c-format
 msgid ""
 "primitive function '%s' has been set for methods but no generic function "
 "supplied"
 msgstr "原始函数\"%s\"有了设定的方法，但却没有同属函数 "
 
-#: src/main/objects.c:1526
+#: src/main/objects.c:1529
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr "调用C层的MAKE_TYPE宏时不能用NULL字符串指针"
 
-#: src/main/objects.c:1542
+#: src/main/objects.c:1545
 #, fuzzy
 msgid "'methods' package not yet loaded"
 msgstr "无法载入Hershey字形"
 
-#: src/main/objects.c:1552
+#: src/main/objects.c:1555
 #, fuzzy
 msgid "'R_getClassDef(.)' called with NULL string pointer"
 msgstr "调用R_getClassDef(.) 时不能用NULL字符串指针"
 
-#: src/main/objects.c:1597
+#: src/main/objects.c:1600
 msgid "C level NEW macro called with null class definition pointer"
 msgstr "调用C级的NEW宏时不能用null类别定义指针"
 
-#: src/main/objects.c:1601
+#: src/main/objects.c:1604
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "无法从虚拟类别(\"%s\")中产生对象"
 
-#: src/main/objects.c:1649
+#: src/main/objects.c:1652
 #, fuzzy
 msgid "'R_get_primname()' called on a non-primitive"
 msgstr "'R_get_primname'不能调用于非原始函数"
 
-#: src/main/objects.c:1685
+#: src/main/objects.c:1688
 #, fuzzy, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "类别为\"%s\"的目标对象没有对应于有效的S3目标对象"
@@ -6262,7 +6342,7 @@ msgstr "文件名太长"
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立先进先出'%1$s'"
 
-#: src/main/platform.c:1452 src/main/platform.c:2931
+#: src/main/platform.c:1452 src/main/platform.c:2937
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "无法打开目的文件'%s'，原因是'%s'"
@@ -6272,12 +6352,12 @@ msgstr "无法打开目的文件'%s'，原因是'%s'"
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
 
-#: src/main/platform.c:1621 src/main/platform.c:1668 src/main/sysutils.c:1835
-#: src/main/sysutils.c:1849
+#: src/main/platform.c:1621 src/main/platform.c:1668 src/main/sysutils.c:1855
+#: src/main/sysutils.c:1869
 msgid "internal out-of-memory condition"
 msgstr "内部出现了内存不够情况"
 
-#: src/main/platform.c:1664 src/main/sysutils.c:1845
+#: src/main/platform.c:1664 src/main/sysutils.c:1865
 #, c-format
 msgid "read error on '%s'"
 msgstr "读取'%s'时出了错"
@@ -6320,13 +6400,13 @@ msgstr "'%s'已存在"
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
 
-#: src/main/platform.c:2266 src/main/platform.c:2489
+#: src/main/platform.c:2266 src/main/platform.c:2495
 msgid "too deep nesting"
 msgstr ""
 
 #: src/main/platform.c:2274 src/main/platform.c:2287 src/main/platform.c:2305
-#: src/main/platform.c:2325 src/main/platform.c:2505 src/main/platform.c:2518
-#: src/main/platform.c:2537 src/main/platform.c:2559
+#: src/main/platform.c:2325 src/main/platform.c:2511 src/main/platform.c:2524
+#: src/main/platform.c:2543 src/main/platform.c:2565
 #, fuzzy
 msgid "path is too long"
 msgstr "路径太长"
@@ -6346,31 +6426,31 @@ msgstr "读取文件目录%s时出了问题：%s"
 msgid "problem with copying %ls to %ls: %s"
 msgstr "拷贝%ls到%ls时出了问题：%s "
 
-#: src/main/platform.c:2527
+#: src/main/platform.c:2533
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr "建立文件目录%s时出了问题：%s"
 
-#: src/main/platform.c:2547
+#: src/main/platform.c:2553
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr "读取文件目录%s时出了问题：%s"
 
-#: src/main/platform.c:2568
+#: src/main/platform.c:2574
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr "拷贝%s到%s出了问题: %s "
 
-#: src/main/platform.c:2706
+#: src/main/platform.c:2712
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr "'mode'的长度至少需要是一"
 
-#: src/main/platform.c:2747 src/main/platform.c:2773
+#: src/main/platform.c:2753 src/main/platform.c:2779
 msgid "insufficient OS support on this platform"
 msgstr "本平台操作系统支持不够"
 
-#: src/main/platform.c:2952
+#: src/main/platform.c:2958
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
@@ -6697,32 +6777,32 @@ msgstr "本平台不支持nsl()"
 msgid "'%s' argument is not a numeric vector"
 msgstr "参数不是数值矢量"
 
-#: src/main/radixsort.c:69
+#: src/main/radixsort.c:72
 #, c-format
 msgid "Internal error: 'savetl_init()' checks failed (%d %d %p %p)."
 msgstr ""
 
-#: src/main/radixsort.c:75 src/main/radixsort.c:79
+#: src/main/radixsort.c:78 src/main/radixsort.c:82
 #, fuzzy, c-format
 msgid "Could not allocate '%s' variable in '%s' function"
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/radixsort.c:107 src/main/radixsort.c:113
+#: src/main/radixsort.c:110 src/main/radixsort.c:116
 #, fuzzy, c-format
 msgid "Could not reallocate '%s' variable in '%s' function"
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/radixsort.c:138
+#: src/main/radixsort.c:141
 #, c-format
 msgid "Failed to reallocate working memory stack to %d*4bytes (flip=%d)"
 msgstr ""
 
-#: src/main/radixsort.c:263
+#: src/main/radixsort.c:266
 #, fuzzy, c-format
 msgid "Internal error: range = %d; isorted cannot handle range > %d"
 msgstr "do_random1产生了内部错误"
 
-#: src/main/radixsort.c:405 src/main/radixsort.c:421 src/main/radixsort.c:1122
+#: src/main/radixsort.c:408 src/main/radixsort.c:424 src/main/radixsort.c:1125
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6730,150 +6810,150 @@ msgid_plural ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes"
 msgstr[0] ""
 
-#: src/main/radixsort.c:507
+#: src/main/radixsort.c:510
 #, fuzzy, c-format
 msgid ""
 "Failed to reallocate working memory %d*8bytes (xsub in 'iradix()' function), "
 "radix=%d"
 msgstr "无法分配内存(GEregister)"
 
-#: src/main/radixsort.c:520
+#: src/main/radixsort.c:523
 #, c-format
 msgid ""
 "Internal error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:595 src/main/radixsort.c:876
+#: src/main/radixsort.c:598 src/main/radixsort.c:879
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. radix="
 "%d"
 msgstr ""
 
-#: src/main/radixsort.c:738
+#: src/main/radixsort.c:741
 #, c-format
 msgid ""
 "Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:750
+#: src/main/radixsort.c:753
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:762 src/main/radixsort.c:850
+#: src/main/radixsort.c:765 src/main/radixsort.c:853
 msgid "Not yet used, still using iradix instead"
 msgstr ""
 
-#: src/main/radixsort.c:939
+#: src/main/radixsort.c:942
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr ""
 
-#: src/main/radixsort.c:1027
+#: src/main/radixsort.c:1030
 #, c-format
 msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1061
+#: src/main/radixsort.c:1064
 #, c-format
 msgid ""
 "Internal error. 'ustr' variable isn't empty when starting 'cgroup()' "
 "function: ustr_n=%d, ustr_alloc=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1086
+#: src/main/radixsort.c:1089
 #, fuzzy, c-format
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "无法分配内存(GEregister)"
 
-#: src/main/radixsort.c:1165
+#: src/main/radixsort.c:1168
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
-#: src/main/radixsort.c:1213
+#: src/main/radixsort.c:1216
 #, fuzzy, c-format
 msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
 msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
 msgstr[0] "分配R_tmpnam2失败"
 
-#: src/main/radixsort.c:1238 src/main/radixsort.c:1246
+#: src/main/radixsort.c:1241 src/main/radixsort.c:1249
 #, fuzzy, c-format
 msgid "Failed to allocate '%s' variable"
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/radixsort.c:1471
+#: src/main/radixsort.c:1474
 #, c-format
 msgid ""
 "Internal error: 'isort()' function received n=%d. 'isorted()' function "
 "should have dealt with this (e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1494
+#: src/main/radixsort.c:1497
 msgid ""
 "Internal error: 'isort()' passed all-NA. isorted should have caught this "
 "before this point"
 msgstr ""
 
-#: src/main/radixsort.c:1525
+#: src/main/radixsort.c:1528
 #, c-format
 msgid ""
 "Internal error: 'dsort()' received n=%d. dsorted should have dealt with this "
 "(e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1549
+#: src/main/radixsort.c:1552
 msgid "radix sort assumes sizeof(int) == 4"
 msgstr ""
 
-#: src/main/radixsort.c:1552
+#: src/main/radixsort.c:1555
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.c:1581 src/main/sort.c:1258
+#: src/main/radixsort.c:1584 src/main/sort.c:1258
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "参数%d不是矢量"
 
-#: src/main/radixsort.c:1584 src/main/sort.c:1260
+#: src/main/radixsort.c:1587 src/main/sort.c:1260
 msgid "argument lengths differ"
 msgstr "参数长度不同"
 
-#: src/main/radixsort.c:1588
+#: src/main/radixsort.c:1591
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.c:1591
+#: src/main/radixsort.c:1594
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'increasing'必需是TRUE或是FALSE"
 
-#: src/main/radixsort.c:1600
+#: src/main/radixsort.c:1603
 #, fuzzy
 msgid "long vectors are not supported"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/radixsort.c:1685 src/main/radixsort.c:1778
+#: src/main/radixsort.c:1689 src/main/radixsort.c:1782
 msgid "Internal error: previous default should have caught unsupported type"
 msgstr ""
 
-#: src/main/radixsort.c:1698 src/main/radixsort.c:1703
+#: src/main/radixsort.c:1702 src/main/radixsort.c:1707
 #, fuzzy, c-format
 msgid "Couldn't allocate '%s' variable in forder, requested %d * %d bytes."
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/radixsort.c:1742
+#: src/main/radixsort.c:1746
 #, fuzzy, c-format
 msgid "Arg %d is type '%s', not yet supported"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/radixsort.c:1849
+#: src/main/radixsort.c:1853
 #, c-format
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
@@ -6917,12 +6997,12 @@ msgstr "机率数目不对"
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr "本平台不支持'dirmark = TRUE'"
 
-#: src/main/raw.c:37 src/main/raw.c:277
+#: src/main/raw.c:37 src/main/raw.c:249
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr "'hostname'必需是长度为一的字符矢量"
 
-#: src/main/raw.c:39 src/main/raw.c:279
+#: src/main/raw.c:39 src/main/raw.c:251
 #, fuzzy
 msgid ""
 "argument should be a character vector of length 1.\n"
@@ -6939,7 +7019,7 @@ msgstr "第一参数必需是矢量"
 msgid "argument 'shift' must be a small integer"
 msgstr "'size'参数必需是正整数"
 
-#: src/main/raw.c:133 src/main/raw.c:333
+#: src/main/raw.c:133 src/main/raw.c:304
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer vector"
 msgstr "'list'参数必需是串列"
@@ -6959,10 +7039,21 @@ msgstr "参数必需为函数"
 msgid "argument 'x' must not contain NA values"
 msgstr "参数不能是函数"
 
-#: src/main/raw.c:291
+#: src/main/raw.c:263
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "UTF-8字符串'old'有错"
+
+#: src/main/raw.c:310
+#, fuzzy
+msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
+msgstr "'resize'的值必需是TRUE或是FALSE"
+
+#: src/main/raw.c:313
+msgid ""
+"allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will "
+"be ignored"
+msgstr ""
 
 #: src/main/Rdynload.c:172
 msgid "DLL table corruption detected"
@@ -6977,12 +7068,12 @@ msgid "R_MAX_NUM_DLLS must be at least 100"
 msgstr ""
 
 #: src/main/Rdynload.c:199
-msgid "MAX_NUM_DLLS cannot be bigger than 1000"
+msgid "R_MAX_NUM_DLLS cannot be bigger than 1000"
 msgstr ""
 
 #: src/main/Rdynload.c:203
 #, c-format
-msgid "MAX_NUM_DLLS bigger than %d may exhaust open files limit"
+msgid "R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"
 msgstr ""
 
 #: src/main/Rdynload.c:214
@@ -6995,21 +7086,21 @@ msgstr "无法为'name'分配空间"
 msgid "'R_RegisterRoutines()' called with invalid DllInfo object."
 msgstr "在调用R_RegisterRoutines时DllInfo对象出了错."
 
-#: src/main/Rdynload.c:362 src/main/sysutils.c:1696
+#: src/main/Rdynload.c:362 src/main/sysutils.c:1716
 #, fuzzy, c-format
 msgid "allocation failure in '%s' function"
 msgstr "分配R_tmpnam2失败"
 
-#: src/main/Rdynload.c:565
+#: src/main/Rdynload.c:566
 #, fuzzy
 msgid "maximal number of DLL files reached..."
 msgstr "已达到了DLL数目的上限..."
 
-#: src/main/Rdynload.c:915 src/main/Rdynload.c:931 src/main/util.c:780
+#: src/main/Rdynload.c:916 src/main/Rdynload.c:932 src/main/util.c:780
 msgid "character argument expected"
 msgstr "需要字符参数"
 
-#: src/main/Rdynload.c:921 src/main/Rdynload.c:953 src/main/Rdynload.c:973
+#: src/main/Rdynload.c:922 src/main/Rdynload.c:954 src/main/Rdynload.c:974
 #, c-format
 msgid ""
 "unable to load shared object '%s':\n"
@@ -7018,62 +7109,62 @@ msgstr ""
 "无法载入共享目标对象‘%s’：:\n"
 "  %s"
 
-#: src/main/Rdynload.c:934
+#: src/main/Rdynload.c:935
 #, c-format
 msgid "shared object '%s' was not loaded"
 msgstr "没有载入共享目标对象'%s'"
 
-#: src/main/Rdynload.c:1013
+#: src/main/Rdynload.c:1014
 #, fuzzy, c-format
 msgid "cannot allocate memory for registered native symbol (%d byte)"
 msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
 msgstr[0] "无法给注册了的原始符号分配内存(%d字节)"
 
-#: src/main/Rdynload.c:1136 src/main/Rdynload.c:1357
+#: src/main/Rdynload.c:1137 src/main/Rdynload.c:1360
 msgid "must pass package name or DllInfo reference"
 msgstr "必需传给程序包名字或DllInfo引用"
 
-#: src/main/Rdynload.c:1315 src/main/Rdynload.c:1409
+#: src/main/Rdynload.c:1316 src/main/Rdynload.c:1412
 #, fuzzy
 msgid "'R_getRegisteredRoutines()' expects a DllInfo reference"
 msgstr " R_getRegisteredRoutines()需要DllInfo引用"
 
-#: src/main/Rdynload.c:1318 src/main/Rdynload.c:1412
+#: src/main/Rdynload.c:1319 src/main/Rdynload.c:1415
 msgid "NULL value passed for DllInfo"
 msgstr "给DllInfo了一个NULL值"
 
-#: src/main/Rdynload.c:1475
+#: src/main/Rdynload.c:1478
 #, c-format
 msgid "function '%s' not provided by package '%s'"
 msgstr "程序包'%s'不提供'%s'这样的函数"
 
-#: src/main/Rdynload.c:1477
+#: src/main/Rdynload.c:1480
 msgid "table entry must be an external pointer"
 msgstr "桌项必需是外部指针"
 
-#: src/main/relop.c:72 src/main/relop.c:106
+#: src/main/relop.c:73
 #, fuzzy
 msgid "operator needs two arguments"
 msgstr "运算符需要一个或两个参数"
 
-#: src/main/relop.c:190
+#: src/main/relop.c:163
 #, c-format
 msgid "comparison (%d) is possible only for atomic and list types"
 msgstr "只能比较(%d)基元或串列种类"
 
-#: src/main/relop.c:194
+#: src/main/relop.c:167
 msgid "comparison is not allowed for expressions"
 msgstr "不能比较表达式"
 
-#: src/main/relop.c:286
+#: src/main/relop.c:259
 msgid "comparison of these types is not implemented"
 msgstr "这些种类的比较方法还没有实现"
 
-#: src/main/relop.c:420
+#: src/main/relop.c:362
 msgid "invalid comparison with complex values"
 msgstr "不能比较复数值"
 
-#: src/main/relop.c:677
+#: src/main/relop.c:628
 #, fuzzy
 msgid "'A' and 'B' must have the same type"
 msgstr "'data'的种类必需为矢量"
@@ -7235,7 +7326,7 @@ msgstr "多字节格式字符串不对"
 #: src/main/saveload.c:1385 src/main/saveload.c:1429 src/main/saveload.c:1497
 #: src/main/saveload.c:1506 src/main/serialize.c:356 src/main/serialize.c:363
 #: src/main/serialize.c:376 src/main/serialize.c:380 src/main/serialize.c:407
-#: src/main/serialize.c:423 src/main/serialize.c:2436 src/main/serialize.c:2444
+#: src/main/serialize.c:423 src/main/serialize.c:2464 src/main/serialize.c:2472
 msgid "read error"
 msgstr "读取错误"
 
@@ -7282,7 +7373,7 @@ msgstr "数据文件里SEXP种类出错"
 msgid "mismatch on types"
 msgstr "种类不相配"
 
-#: src/main/saveload.c:609 src/main/saveload.c:1269 src/main/serialize.c:1678
+#: src/main/saveload.c:609 src/main/saveload.c:1269 src/main/serialize.c:1706
 #, fuzzy, c-format
 msgid "unrecognized internal function name '%s'"
 msgstr "没有\"%s\"这个函数"
@@ -7390,7 +7481,7 @@ msgstr "xdr复数数据书写错误"
 msgid "an xdr complex data read error occurred"
 msgstr "xdr复数数据读取错误"
 
-#: src/main/saveload.c:1782 src/main/serialize.c:2004 src/main/serialize.c:2621
+#: src/main/saveload.c:1782 src/main/serialize.c:2032 src/main/serialize.c:2649
 #: src/modules/internet/internet.c:516 src/modules/internet/internet.c:591
 #: src/modules/internet/internet.c:702
 msgid "write failed"
@@ -7430,13 +7521,13 @@ msgstr "载入数据没有成双串列形式"
 msgid "first argument must be a file name"
 msgstr "第一参数必需是文件名字"
 
-#: src/main/saveload.c:2103 src/main/saveload.c:2129 src/main/serialize.c:865
-#: src/main/serialize.c:902 src/main/serialize.c:940
+#: src/main/saveload.c:2103 src/main/saveload.c:2129 src/main/serialize.c:866
+#: src/main/serialize.c:903 src/main/serialize.c:941
 msgid "XDR write failed"
 msgstr "XDR书写失败"
 
-#: src/main/saveload.c:2116 src/main/saveload.c:2141 src/main/serialize.c:1403
-#: src/main/serialize.c:1439 src/main/serialize.c:1477
+#: src/main/saveload.c:2116 src/main/saveload.c:2141 src/main/serialize.c:1420
+#: src/main/serialize.c:1456 src/main/serialize.c:1494
 msgid "XDR read failed"
 msgstr "XDR读取失败"
 
@@ -7451,7 +7542,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main/saveload.c:2248 src/main/serialize.c:2209
+#: src/main/saveload.c:2248 src/main/serialize.c:2237
 #, c-format
 msgid "cannot save to connections in version %d format"
 msgstr "无法用%d版本的格式来保存链结"
@@ -7460,8 +7551,8 @@ msgstr "无法用%d版本的格式来保存链结"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "不能将XDR格式保存到文字状态链结"
 
-#: src/main/saveload.c:2290 src/main/serialize.c:2112 src/main/serialize.c:2126
-#: src/main/serialize.c:2310 src/main/serialize.c:2332
+#: src/main/saveload.c:2290 src/main/serialize.c:2140 src/main/serialize.c:2154
+#: src/main/serialize.c:2338 src/main/serialize.c:2360
 msgid "error writing to connection"
 msgstr "链结书写发生了错误"
 
@@ -7664,71 +7755,71 @@ msgstr "没有这种输入格式"
 msgid "input format does not match specified format"
 msgstr "输入格式同设定的格式不相配"
 
-#: src/main/serialize.c:792
+#: src/main/serialize.c:793
 msgid "no restore method available"
 msgstr "没有復原的方法"
 
-#: src/main/serialize.c:834
+#: src/main/serialize.c:835
 msgid "names in persistent strings are currently ignored"
 msgstr "持续字符串里的名字现在不用"
 
-#: src/main/serialize.c:1004
+#: src/main/serialize.c:1021
 #, c-format
 msgid "'%s' may not be available when loading"
 msgstr "载入时'%s'可能无用"
 
-#: src/main/serialize.c:1011
+#: src/main/serialize.c:1028
 msgid "namespaces may not be available when loading"
 msgstr "载入时名字空间可能无用"
 
-#: src/main/serialize.c:1139
+#: src/main/serialize.c:1156
 #, c-format
 msgid "WriteItem: unknown type %i"
 msgstr "WriteItem不对: 没有这一种类%i"
 
-#: src/main/serialize.c:1315
+#: src/main/serialize.c:1332
 #, c-format
 msgid "version %d not supported"
 msgstr "不支持版本%d"
 
-#: src/main/serialize.c:1346
+#: src/main/serialize.c:1363
 msgid "reference index out of range"
 msgstr "引用索引在范围外"
 
-#: src/main/serialize.c:1376
+#: src/main/serialize.c:1393
 msgid "names in persistent strings are not supported yet"
 msgstr "目前不支持持续字符串里的名字"
 
-#: src/main/serialize.c:1504
+#: src/main/serialize.c:1521
 #, fuzzy
 msgid "negative serialized length for vector"
 msgstr "不能设非矢量的长度"
 
-#: src/main/serialize.c:1512
+#: src/main/serialize.c:1529
 #, fuzzy
 msgid "invalid upper part of serialized vector length"
 msgstr "参数长度不对"
 
-#: src/main/serialize.c:1517
+#: src/main/serialize.c:1534
 msgid ""
 "negative serialized vector length:\n"
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
-#: src/main/serialize.c:1749
+#: src/main/serialize.c:1777
 msgid "this version of R cannot read class references"
 msgstr "本R版本无法读取类别引用"
 
-#: src/main/serialize.c:1751
+#: src/main/serialize.c:1779
 msgid "this version of R cannot read generic function references"
 msgstr "本R版本无法读取类属功能引用"
 
-#: src/main/serialize.c:1768
+#: src/main/serialize.c:1796
 #, c-format
 msgid "ReadItem: unknown type %i, perhaps written by later version of R"
 msgstr "ReadItem: 不存在%i 这一种类，可能是因为由新的R版本所写的"
 
-#: src/main/serialize.c:1928
+#: src/main/serialize.c:1956
 #, c-format
 msgid ""
 "cannot read unreleased workspace version %d written by experimental R %d.%d."
@@ -7736,7 +7827,7 @@ msgid ""
 msgstr ""
 "无法从由R实验版本%2$d.%3$d.%4$d写的还未被释放的工作空间版本%1$d中读取数据"
 
-#: src/main/serialize.c:1932
+#: src/main/serialize.c:1960
 #, c-format
 msgid ""
 "cannot read workspace version %d written by R %d.%d.%d; need R %d.%d.%d or "
@@ -7745,97 +7836,97 @@ msgstr ""
 "无法从由R版本%2$d.%3$d.%4$d写的工作空间版本%1$d中读取数据；需要R版本%5$d."
 "%6$d.%7$d以后的版本"
 
-#: src/main/serialize.c:2011
+#: src/main/serialize.c:2039
 msgid "read failed"
 msgstr "读取失败"
 
-#: src/main/serialize.c:2074
+#: src/main/serialize.c:2102
 msgid "error reading from ascii connection"
 msgstr "读取ascii链结时发生了错误"
 
-#: src/main/serialize.c:2076
+#: src/main/serialize.c:2104
 msgid "unexpected format in ascii connection"
 msgstr "ascii链结里出现了意外格式"
 
-#: src/main/serialize.c:2081 src/main/serialize.c:2095
+#: src/main/serialize.c:2109 src/main/serialize.c:2123
 msgid "error reading from connection"
 msgstr "读取链结时发生了错误"
 
-#: src/main/serialize.c:2137
+#: src/main/serialize.c:2165
 msgid "only ascii format can be written to text mode connections"
 msgstr "只能用ascii格式书写文字状态的链结"
 
-#: src/main/serialize.c:2151
+#: src/main/serialize.c:2179
 msgid "only ascii format can be read from text mode connections"
 msgstr "只能用ascii格式读取文字状态的链结"
 
-#: src/main/serialize.c:2207 src/main/serialize.c:2360
-#: src/main/serialize.c:2509
+#: src/main/serialize.c:2235 src/main/serialize.c:2388
+#: src/main/serialize.c:2537
 msgid "bad version value"
 msgstr "版本值不对"
 
-#: src/main/serialize.c:2232
+#: src/main/serialize.c:2260
 msgid "binary-mode connection required for ascii=FALSE"
 msgstr "二进列链结需要设定ascii=FALSE"
 
-#: src/main/serialize.c:2388 src/main/serialize.c:2425
-#: src/main/serialize.c:2488
+#: src/main/serialize.c:2416 src/main/serialize.c:2453
+#: src/main/serialize.c:2516
 msgid "serialization is too large to store in a raw vector"
 msgstr "串行太大，无法存储于原始矢量中"
 
-#: src/main/serialize.c:2405
+#: src/main/serialize.c:2433
 msgid "cannot allocate buffer"
 msgstr "无法分配缓冲区"
 
-#: src/main/serialize.c:2563
+#: src/main/serialize.c:2591
 #, fuzzy
 msgid "character vectors are no longer accepted by 'unserialize()' function"
 msgstr "'eval'不支持重新启动"
 
-#: src/main/serialize.c:2599
+#: src/main/serialize.c:2627
 #, fuzzy, c-format
 msgid "'%s' argument is not a proper file name"
 msgstr "文件名字有错"
 
-#: src/main/serialize.c:2601
+#: src/main/serialize.c:2629
 #, fuzzy, c-format
 msgid "'%s' argument is not a proper raw vector"
 msgstr "'fmt'必需是字符矢量"
 
-#: src/main/serialize.c:2622
+#: src/main/serialize.c:2650
 msgid "could not determine file position"
 msgstr "无法确定文件位置"
 
-#: src/main/serialize.c:2672
+#: src/main/serialize.c:2700
 msgid "not a proper file name"
 msgstr "文件名字有错"
 
-#: src/main/serialize.c:2674
+#: src/main/serialize.c:2702
 msgid "bad offset/length argument"
 msgstr "位移/长度参数不对"
 
-#: src/main/serialize.c:2698 src/main/serialize.c:2711
-#: src/main/serialize.c:2720 src/main/serialize.c:2730
-#: src/main/serialize.c:2743
+#: src/main/serialize.c:2726 src/main/serialize.c:2739
+#: src/main/serialize.c:2748 src/main/serialize.c:2758
+#: src/main/serialize.c:2771
 #, c-format
 msgid "seek failed on %s"
 msgstr "读取%s失败"
 
-#: src/main/serialize.c:2715 src/main/serialize.c:2724
-#: src/main/serialize.c:2734 src/main/serialize.c:2747
+#: src/main/serialize.c:2743 src/main/serialize.c:2752
+#: src/main/serialize.c:2762 src/main/serialize.c:2775
 #, c-format
 msgid "read failed on %s"
 msgstr "读取%s失败"
 
-#: src/main/serialize.c:2766
+#: src/main/serialize.c:2794
 msgid "bad environment"
 msgstr "环境有错"
 
-#: src/main/serialize.c:2768
+#: src/main/serialize.c:2796
 msgid "bad variable names"
 msgstr "变数名字不对"
 
-#: src/main/serialize.c:2858
+#: src/main/serialize.c:2886
 #, c-format
 msgid "lazy-load database '%s' is corrupt"
 msgstr ""
@@ -7960,6 +8051,10 @@ msgstr "没有'%s'这样的格式设定"
 msgid "reference to non-existent argument %d"
 msgstr "不能引用不存在的参数%d"
 
+#: src/main/sprintf.c:217 src/main/sprintf.c:249
+msgid "too few arguments"
+msgstr "参数数目太少"
+
 #: src/main/sprintf.c:222
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每个轉換規格里最多只支持一个'*'号"
@@ -8003,7 +8098,7 @@ msgstr "字符对象使用的格式应该是%s"
 msgid "likely truncation of character string to %d characters"
 msgstr "字符串很可能被缩短到%d个字符"
 
-#: src/main/sprintf.c:434 src/main/util.c:2417
+#: src/main/sprintf.c:434 src/main/util.c:2437
 msgid "unsupported type"
 msgstr "不支持这一种类"
 
@@ -8059,138 +8154,138 @@ msgid ""
 "WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"
 msgstr ""
 
-#: src/main/subassign.c:140
+#: src/main/subassign.c:150
 msgid "attempt to enlarge non-vector"
 msgstr "不能把非矢量变大"
 
-#: src/main/subassign.c:145
+#: src/main/subassign.c:155
 #, c-format
 msgid "assignment outside vector/list limits (extending from %d to %d)"
 msgstr "不能在矢量/串列极限外赋值(%d加大到%d)"
 
-#: src/main/subassign.c:173
+#: src/main/subassign.c:183
 #, fuzzy
 msgid "bad expand value"
 msgstr "版本值不对"
 
-#: src/main/subassign.c:256
+#: src/main/subassign.c:273
 #, fuzzy
 msgid "bad names attribute"
 msgstr "名字空间名字不对"
 
-#: src/main/subassign.c:270
+#: src/main/subassign.c:287
 msgid "implicit list embedding of S4 objects is deprecated"
 msgstr ""
 
-#: src/main/subassign.c:465
+#: src/main/subassign.c:482
 #, c-format
 msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr "下赋值fix种类里有不可兼容的种类(从%s到%s)"
 
-#: src/main/subassign.c:624 src/main/subassign.c:904 src/main/subassign.c:907
-#: src/main/subassign.c:1207
+#: src/main/subassign.c:640 src/main/subassign.c:920 src/main/subassign.c:923
+#: src/main/subassign.c:1222
 #, fuzzy
 msgid "NA values are not allowed in subscripted assignments"
 msgstr "下标赋值里不允许NA"
 
-#: src/main/subassign.c:642 src/main/subassign.c:918 src/main/subassign.c:1199
-#: src/main/subassign.c:1779
+#: src/main/subassign.c:658 src/main/subassign.c:934 src/main/subassign.c:1214
+#: src/main/subassign.c:1794
 msgid "replacement has length zero"
 msgstr "更换参数长度为零"
 
-#: src/main/subassign.c:644 src/main/subassign.c:920 src/main/subassign.c:1201
+#: src/main/subassign.c:660 src/main/subassign.c:936 src/main/subassign.c:1216
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "被替换的项目不是替换值长度的倍数"
 
-#: src/main/subassign.c:840
+#: src/main/subassign.c:856
 msgid "sub assignment (*[*] <- *) not done; __bug?__"
 msgstr ""
 
-#: src/main/subassign.c:888
+#: src/main/subassign.c:904
 msgid "incorrect number of subscripts on matrix"
 msgstr "矩阵里的下标数目不对"
 
-#: src/main/subassign.c:1153
+#: src/main/subassign.c:1168
 #, c-format
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr "矩阵子集赋值里有不可兼容的种类(从%s到%s)"
 
-#: src/main/subassign.c:1169 src/main/subset.c:959
+#: src/main/subassign.c:1184 src/main/subset.c:941
 msgid "incorrect number of subscripts"
 msgstr "下标数目不对"
 
-#: src/main/subassign.c:1346
+#: src/main/subassign.c:1361
 #, c-format
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr "陈列子集赋值有不可兼容的种类(从%s到%s)"
 
-#: src/main/subassign.c:1369
+#: src/main/subassign.c:1384
 #, fuzzy, c-format
 msgid "internal error: index %d from length %d"
 msgstr "do_random1产生了内部错误"
 
-#: src/main/subassign.c:1382 src/main/subassign.c:1403
+#: src/main/subassign.c:1397 src/main/subassign.c:1418
 msgid "invalid subscript in list assign"
 msgstr "串列赋值里的下标不对"
 
-#: src/main/subassign.c:1396
+#: src/main/subassign.c:1411
 msgid "invalid number of subscripts to list assign"
 msgstr "串列赋值里的下标数目不对"
 
-#: src/main/subassign.c:1495
+#: src/main/subassign.c:1510
 #, fuzzy
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs: 参数数目不对"
 
-#: src/main/subassign.c:1640
+#: src/main/subassign.c:1655
 msgid "result is zero-length and so cannot be a language object"
 msgstr "计算结果的长度为零，因此不可能是语言目标对象"
 
-#: src/main/subassign.c:1739
+#: src/main/subassign.c:1754
 #, fuzzy
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
 msgstr "给\"S4\"类型的对象所定义的[[<-只能在环境子类内有用"
 
-#: src/main/subassign.c:1751
+#: src/main/subassign.c:1766
 #, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "环境下赋值的参数不对"
 
-#: src/main/subassign.c:1781
+#: src/main/subassign.c:1796
 msgid "more elements supplied than there are to replace"
 msgstr "用来替换的元素比所要替换的值多"
 
-#: src/main/subassign.c:1783
+#: src/main/subassign.c:1798
 #, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]] 缺少下标"
 
-#: src/main/subassign.c:1801
+#: src/main/subassign.c:1816
 #, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "[[ ]] 下标在界限外"
 
-#: src/main/subassign.c:1807 src/main/subassign.c:1988
+#: src/main/subassign.c:1822 src/main/subassign.c:2003
 #, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "[[ ]] 下标数目不对"
 
-#: src/main/subassign.c:1819 src/main/subassign.c:1999
+#: src/main/subassign.c:1834 src/main/subassign.c:2014
 #, fuzzy, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "[[ ]] 下标(%d)在界限外"
 
-#: src/main/subassign.c:1953
+#: src/main/subassign.c:1968
 #, fuzzy, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr " [[ 赋值里有不可兼容的种类(从%s到%s)"
 
-#: src/main/subassign.c:2087
+#: src/main/subassign.c:2102
 msgid "no method for assigning subsets of this S4 class"
 msgstr "不存在给这个S4类别分配子集的方法"
 
-#: src/main/subassign.c:2145
+#: src/main/subassign.c:2160
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr "把公式左手强迫变成串列"
@@ -8208,7 +8303,7 @@ msgid "attempt to select more than one element in %s"
 msgstr "最多只能选择一个元素"
 
 #: src/main/subscript.c:152 src/main/subscript.c:280 src/main/subscript.c:909
-#: src/main/subscript.c:1002 src/main/subset.c:1175
+#: src/main/subscript.c:1002 src/main/subset.c:1159
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "类别为'%s'的下标不对"
@@ -8236,7 +8331,7 @@ msgstr "递回索引在%d层失败\n"
 msgid "no such index at level %d\n"
 msgstr "在%d层没有这一索引\n"
 
-#: src/main/subscript.c:319 src/main/subset.c:133 src/main/subset.c:1065
+#: src/main/subscript.c:319 src/main/subset.c:1047
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr "串列赋值里的下标不对"
@@ -8269,44 +8364,44 @@ msgstr "陈列中没有'dimnames'这一属性"
 msgid "subscripting on non-vector"
 msgstr "非矢量不能有下标"
 
-#: src/main/subset.c:261
+#: src/main/subset.c:250
 msgid "dimensions would exceed maximum size of array"
 msgstr "尺寸会超过阵列最大大小"
 
-#: src/main/subset.c:305 src/main/subset.c:335
+#: src/main/subset.c:294 src/main/subset.c:324
 msgid "matrix subscripting not handled for this type"
 msgstr "这一种类不能有矩阵下标"
 
-#: src/main/subset.c:494
+#: src/main/subset.c:479
 msgid "array subscripting not handled for this type"
 msgstr "这一种类不能有阵列下标"
 
-#: src/main/subset.c:857
+#: src/main/subset.c:839
 msgid "incorrect number of dimensions"
 msgstr "量度数目不对"
 
-#: src/main/subset.c:955
+#: src/main/subset.c:937
 msgid "no index specified"
 msgstr "没有索引设定"
 
-#: src/main/subset.c:965
+#: src/main/subset.c:947
 msgid "this S4 class is not subsettable"
 msgstr "S4对象不可以取子集"
 
-#: src/main/subset.c:972
+#: src/main/subset.c:954
 msgid "wrong arguments for subsetting an environment"
 msgstr "取子集环境时的参数不对"
 
-#: src/main/subset.c:1006
+#: src/main/subset.c:988
 #, fuzzy
 msgid "getter call used outside of a complex assignment"
 msgstr "复数赋值里的函数不对"
 
-#: src/main/subset.c:1236
+#: src/main/subset.c:1220
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1357
+#: src/main/subset.c:1341
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -8315,44 +8410,49 @@ msgstr ""
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type'(%s)参数不对"
 
-#: src/main/summary.c:476
+#: src/main/summary.c:63
+#, fuzzy
+msgid "integer overflow - use sum(as.numeric(.))"
+msgstr "整数上溢；请用sum(as.numeric(.))"
+
+#: src/main/summary.c:533
 #, c-format
 msgid "C do_summary(op%s, *): did NOT dispatch\n"
 msgstr ""
 
-#: src/main/summary.c:526
+#: src/main/summary.c:583
 #, c-format
 msgid "internal error ('op = %d' in do_summary).\t Call a Guru"
 msgstr "内部错误(do_summary里的'op = %d').\t 请向专家请教"
 
-#: src/main/summary.c:752
+#: src/main/summary.c:807
 msgid "no non-missing arguments, returning NA"
 msgstr "所有的参数都不存在; 回覆NA"
 
-#: src/main/summary.c:755
+#: src/main/summary.c:810
 #, fuzzy
 msgid "no non-missing arguments passed to 'min()' function; returning Inf"
 msgstr "min里所有的参数都不存在; 回覆Inf"
 
-#: src/main/summary.c:757
+#: src/main/summary.c:812
 #, fuzzy
 msgid "no non-missing arguments passed to 'max()' function; returning -Inf"
 msgstr "max里所有的参数都不存在；回覆-Inf"
 
-#: src/main/summary.c:916
+#: src/main/summary.c:971
 #, fuzzy
 msgid "argument passed to 'which()' function is not logical"
 msgstr "参数'which'必需是逻辑值"
 
-#: src/main/summary.c:960
+#: src/main/summary.c:1016
 msgid "no arguments"
 msgstr "没有参数"
 
-#: src/main/summary.c:971 src/main/summary.c:988
+#: src/main/summary.c:1027 src/main/summary.c:1044
 msgid "invalid input type"
 msgstr "输入种类不对"
 
-#: src/main/summary.c:1005
+#: src/main/summary.c:1061
 msgid "an argument will be fractionally recycled"
 msgstr "参数值将数据略微回收"
 
@@ -8365,8 +8465,8 @@ msgstr "无法确定文件'%s'的修改时间"
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "编码的文件名不能是'bytes'"
 
-#: src/main/sysutils.c:173 src/main/sysutils.c:843 src/main/sysutils.c:858
-#: src/main/sysutils.c:989
+#: src/main/sysutils.c:173 src/main/sysutils.c:847 src/main/sysutils.c:862
+#: src/main/sysutils.c:993
 #, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "不支持代码页%2$d里由'%1$s'来这种转换"
@@ -8392,7 +8492,7 @@ msgstr "文件扩展名不对"
 msgid "no '%s' argument"
 msgstr "'%s'参数不对"
 
-#: src/main/sysutils.c:336 src/unix/sys-unix.c:569
+#: src/main/sysutils.c:336 src/unix/sys-unix.c:597
 #, fuzzy, c-format
 msgid "system call failed: %s"
 msgstr "读取%s失败"
@@ -8420,71 +8520,71 @@ msgstr "本系统无法復原环境变量：设成\"\""
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "不支持代码页%3$d里从'%1$s'到'%2$s'的这种转换"
 
-#: src/main/sysutils.c:665
+#: src/main/sysutils.c:668
 #, fuzzy
 msgid ""
 "'x' argument must be a character vector or a list of NULL or raw vectors"
 msgstr "参数必需是长度为一的字符矢量或原始矢量"
 
-#: src/main/sysutils.c:743 src/main/sysutils.c:946 src/main/sysutils.c:963
-#: src/main/sysutils.c:979 src/main/sysutils.c:1056
+#: src/main/sysutils.c:747 src/main/sysutils.c:950 src/main/sysutils.c:967
+#: src/main/sysutils.c:983 src/main/sysutils.c:1061
 #, c-format
 msgid "'%s' must be called on a CHARSXP"
 msgstr "'%s'只能调用在CHARSXP上"
 
-#: src/main/sysutils.c:817 src/main/sysutils.c:984 src/main/sysutils.c:1059
+#: src/main/sysutils.c:821 src/main/sysutils.c:988 src/main/sysutils.c:1064
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "不允许用\"bytes\"编码进行字符翻译”"
 
-#: src/main/sysutils.c:830
+#: src/main/sysutils.c:834
 #, fuzzy
 msgid "internal error: no translation needed"
 msgstr "do_random1产生了内部错误"
 
-#: src/main/sysutils.c:928
+#: src/main/sysutils.c:932
 #, fuzzy, c-format
 msgid "'%s' function must be called on a CHARSXP"
 msgstr "'%s'只能调用在CHARSXP上"
 
-#: src/main/sysutils.c:1085
+#: src/main/sysutils.c:1090
 #, c-format
 msgid "unsupported conversion to '%s' from codepage %d"
 msgstr "不支持从代码页%2$d里到'%1$s'的转换"
 
-#: src/main/sysutils.c:1351
+#: src/main/sysutils.c:1356
 #, fuzzy
 msgid "converted string is too long for buffer"
 msgstr "格式字符串太长"
 
-#: src/main/sysutils.c:1503
+#: src/main/sysutils.c:1523
 #, fuzzy, c-format
 msgid "invalid Unicode point %u"
 msgstr "行接合出错"
 
-#: src/main/sysutils.c:1612
+#: src/main/sysutils.c:1632
 #, fuzzy
 msgid "cannot create 'R_TempDir'"
 msgstr "无法分配R_TempDir"
 
-#: src/main/sysutils.c:1617 src/main/sysutils.c:1625 src/main/sysutils.c:1628
+#: src/main/sysutils.c:1637 src/main/sysutils.c:1645 src/main/sysutils.c:1648
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "无法设制R_SESSION_TMPDIR "
 
-#: src/main/sysutils.c:1637
+#: src/main/sysutils.c:1657
 #, fuzzy
 msgid "cannot allocate 'R_TempDir'"
 msgstr "无法分配R_TempDir"
 
-#: src/main/sysutils.c:1678
+#: src/main/sysutils.c:1698
 #, fuzzy
 msgid "temporary name is too long"
 msgstr "临时文件名太长"
 
-#: src/main/sysutils.c:1693
+#: src/main/sysutils.c:1713
 msgid "cannot find unused tempfile name"
 msgstr "临时文件名都用完了"
 
-#: src/main/sysutils.c:1823
+#: src/main/sysutils.c:1843
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr "本平台不支持'dirmark = TRUE'"
 
@@ -8617,8 +8717,8 @@ msgid "cannot change working directory"
 msgstr "无法改变工作目录"
 
 #: src/main/util.c:818 src/main/util.c:851 src/main/util.c:892
-#: src/main/util.c:934 src/main/util.c:1063 src/main/util.c:1122
-#: src/main/util.c:1145
+#: src/main/util.c:934 src/main/util.c:1083 src/main/util.c:1142
+#: src/main/util.c:1165
 msgid "a character vector argument expected"
 msgstr "需要字符矢量参数"
 
@@ -8627,122 +8727,122 @@ msgid ""
 "this platform does not have realpath so the results may not be canonical"
 msgstr ""
 
-#: src/main/util.c:1044
+#: src/main/util.c:1064
 #, fuzzy
 msgid "system timezone name is unknown: set environment variable TZ"
 msgstr "本系统无法復原环境变量：设成\"\""
 
-#: src/main/util.c:1077
+#: src/main/util.c:1097
 #, fuzzy
 msgid "only the first character of 'quote' argument will be used"
 msgstr "只用了'quote'的第一个字符"
 
-#: src/main/util.c:1147
+#: src/main/util.c:1167
 msgid "a character vector 'value' expected"
 msgstr "需要字符矢量'value'"
 
-#: src/main/util.c:1150
+#: src/main/util.c:1170
 #, fuzzy
 msgid "'value' argument must be of positive length"
 msgstr "'value'的长度必需是正数"
 
-#: src/main/util.c:1305 src/main/util.c:1318
+#: src/main/util.c:1325 src/main/util.c:1338
 #, fuzzy, c-format
 msgid "invalid input '%s' in 'utf8towcs()' function"
 msgstr "'utf8towcs'里的输入'%s'不对"
 
-#: src/main/util.c:1407
+#: src/main/util.c:1427
 #, c-format
 msgid "invalid multibyte string at '%s'"
 msgstr "'%s'多字节字符串有错"
 
-#: src/main/util.c:1549
+#: src/main/util.c:1569
 msgid "error message truncated to 255 chars"
 msgstr "错误信息缩短到255个字节"
 
-#: src/main/util.c:1562
+#: src/main/util.c:1582
 msgid "warning message truncated to 255 chars"
 msgstr "警告信息缩短到255个字节"
 
-#: src/main/util.c:1711
+#: src/main/util.c:1731
 #, c-format
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr ""
 
-#: src/main/util.c:2030
+#: src/main/util.c:2050
 #, fuzzy
 msgid "all arguments must be named"
 msgstr "属性必需取名"
 
-#: src/main/util.c:2051
+#: src/main/util.c:2071
 #, fuzzy, c-format
 msgid "failed to set ICU locale %s (%d)"
 msgstr "无法设非适当'class'属性"
 
-#: src/main/util.c:2055 src/main/util.c:2127
+#: src/main/util.c:2075 src/main/util.c:2147
 #, fuzzy, c-format
 msgid "failed to open ICU collator (%d)"
 msgstr "连接通訊埠失败"
 
-#: src/main/util.c:2077
+#: src/main/util.c:2097
 #, fuzzy
 msgid "failed to set ICU collator attribute"
 msgstr "无法设非适当'class'属性"
 
-#: src/main/util.c:2102 src/main/util.c:2159
+#: src/main/util.c:2122 src/main/util.c:2179
 msgid "ICU not in use"
 msgstr ""
 
-#: src/main/util.c:2123
+#: src/main/util.c:2143
 #, fuzzy, c-format
 msgid "failed to set ICU locale (%d)"
 msgstr "无法设非适当'class'属性"
 
-#: src/main/util.c:2144
+#: src/main/util.c:2164
 #, fuzzy
 msgid "could not collate using ICU"
 msgstr "无法打开文件'%s'"
 
-#: src/main/util.c:2152
+#: src/main/util.c:2172
 msgid "ICU is not supported on this build"
 msgstr "本平台不支持ICU"
 
-#: src/main/util.c:2201
+#: src/main/util.c:2221
 #, fuzzy
 msgid "input must be a character string"
 msgstr "'title'必需为字符串"
 
-#: src/main/util.c:2219
+#: src/main/util.c:2239
 #, fuzzy
 msgid "'breaks' argument is not sorted"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/util.c:2253 src/main/util.c:2316
+#: src/main/util.c:2273 src/main/util.c:2336
 #, fuzzy, c-format
 msgid "long vector '%s' is not supported"
 msgstr "不支持'%s'这一种类"
 
-#: src/main/util.c:2273 src/main/util.c:2313
+#: src/main/util.c:2293 src/main/util.c:2333
 #, fuzzy
 msgid "invalid input"
 msgstr "输入种类不对"
 
-#: src/main/util.c:2370
+#: src/main/util.c:2390
 #, fuzzy, c-format
 msgid "'%s' argument must be 0, 1, or 2"
 msgstr "第一参数必需是矢量"
 
-#: src/main/util.c:2502
+#: src/main/util.c:2522
 #, fuzzy
 msgid "width cannot be zero"
 msgstr ".C(..): 宽度不能为0"
 
-#: src/main/util.c:2517
+#: src/main/util.c:2537
 #, fuzzy
 msgid "'type' argument must be \"integer\" for \"d\"-format"
 msgstr ".C(..):’type’如果用作\"d\"格式的话必需为\"integer\""
 
-#: src/main/util.c:2598
+#: src/main/util.c:2618
 #, fuzzy
 msgid "'type' argument must be \"real\" for this format"
 msgstr ".C(..):’type’必需为\"real\"才能用这种格式"
@@ -10062,33 +10162,33 @@ msgid ""
 "report using bug.report()"
 msgstr "读行输入嵌套出了不寻常的错，请用bug.report()"
 
-#: src/unix/sys-std.c:1142
+#: src/unix/sys-std.c:1158
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1175 src/unix/sys-std.c:1341
+#: src/unix/sys-std.c:1191 src/unix/sys-std.c:1357
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "在保存履历文件'%s'时出了问题"
 
-#: src/unix/sys-std.c:1277
+#: src/unix/sys-std.c:1293
 #, fuzzy
 msgid "Enter file name: "
 msgstr "文件名字有错"
 
-#: src/unix/sys-std.c:1318 src/unix/sys-std.c:1320
+#: src/unix/sys-std.c:1334 src/unix/sys-std.c:1336
 msgid "no history mechanism available"
 msgstr "没有历史功能"
 
-#: src/unix/sys-std.c:1347
+#: src/unix/sys-std.c:1363
 msgid "problem in truncating the history file"
 msgstr "截短履历文件时出了问题"
 
-#: src/unix/sys-std.c:1349 src/unix/sys-std.c:1351
+#: src/unix/sys-std.c:1365 src/unix/sys-std.c:1367
 msgid "no history available to save"
 msgstr "没有可以保存的历史"
 
-#: src/unix/sys-std.c:1363
+#: src/unix/sys-std.c:1379
 msgid "invalid timestamp"
 msgstr "时间标签不对"
 
@@ -10143,44 +10243,44 @@ msgstr "抽取zip文件时出现了书写错误"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "警告: 只修改文件串列中的第一个元素"
 
-#: src/unix/sys-unix.c:464
+#: src/unix/sys-unix.c:492
 #, fuzzy
 msgid "Cannot open /dev/null for reading:"
 msgstr "链结没有打开，不能读"
 
-#: src/unix/sys-unix.c:495
+#: src/unix/sys-unix.c:523
 #, fuzzy
 msgid "Invalid file pointer in pclose"
 msgstr "文件名字式样不对"
 
-#: src/unix/sys-unix.c:593
+#: src/unix/sys-unix.c:621
 #, c-format
 msgid "running command '%s' had status %d and error message '%s'"
 msgstr "运行命令'%s'的状态是%d：错误消息是'%s'"
 
-#: src/unix/sys-unix.c:611
+#: src/unix/sys-unix.c:639
 msgid "non-empty character argument expected"
 msgstr "需要非空字符参数"
 
-#: src/unix/sys-unix.c:614
+#: src/unix/sys-unix.c:642
 msgid "'intern' must be logical and not NA"
 msgstr "'intern’必需是逻辑值而不是NA"
 
-#: src/unix/sys-unix.c:658
+#: src/unix/sys-unix.c:686
 #, c-format
 msgid "cannot popen '%s', probable reason '%s'"
 msgstr "无法popen'%s'，原因可能是'%s'"
 
-#: src/unix/sys-unix.c:668
+#: src/unix/sys-unix.c:696
 #, c-format
 msgid "line %d may be truncated in call to system(, intern = TRUE)"
 msgstr "调用system(, intern = TRUE)时%d行可能会被截断"
 
-#: src/unix/sys-unix.c:693 src/unix/sys-unix.c:695
+#: src/unix/sys-unix.c:721 src/unix/sys-unix.c:723
 msgid "error in running command"
 msgstr "调用命令时发生了错误"
 
-#: src/unix/sys-unix.c:811
+#: src/unix/sys-unix.c:839
 msgid "Sys.info() is not implemented on this system"
 msgstr "本系统没有实现Sys.info()这一功能"
 
@@ -10199,6 +10299,10 @@ msgstr "无法载入X11模块"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
+
+#, fuzzy
+#~ msgid "deparse of an S4 object will not be sourceable by 'source()'"
+#~ msgstr "反向分析S4目标对象是不能被source()"
 
 #, fuzzy
 #~ msgid "class \"%s\" has no 'names' slot"
@@ -10428,10 +10532,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "'%ls' already exists"
 #~ msgstr "'%ls'已存在"
-
-#, fuzzy
-#~ msgid "integer overflow - use sum(as.numeric(.))"
-#~ msgstr "整数上溢；请用sum(as.numeric(.))"
 
 #, fuzzy
 #~ msgid "integer overflow - use 'sum(as.numeric(.))'"
@@ -11070,10 +11170,6 @@ msgstr "没有X11平台这一功能"
 #~ msgstr "'hostname'必需是长度为一的字符矢量"
 
 #, fuzzy
-#~ msgid "argument 'multiple' must be TRUE or FALSE"
-#~ msgstr "'resize'的值必需是TRUE或是FALSE"
-
-#, fuzzy
 #~ msgid "argument 'x' must be a character string"
 #~ msgstr "参数'code'必需是字符串"
 
@@ -11130,9 +11226,6 @@ msgstr "没有X11平台这一功能"
 #, fuzzy
 #~ msgid "'norm' argument must be a character string"
 #~ msgstr "'generic'参数必需是字符串"
-
-#~ msgid "'%s' not found"
-#~ msgstr "找不到'%s'"
 
 #~ msgid "'%ls' not found"
 #~ msgstr "找不到'%ls'"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2017-10-07 19:12\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2904,6 +2904,11 @@ msgstr ""
 #. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))
 #: R/windows/install.packages.R:0
 msgid "there is no 'libs' directory in package %s"
+msgstr ""
+
+#. R/packages2.R: warning("timeouts for parallel installs require the 'timeout' command")
+#: R/packages2.R:0
+msgid "timeouts for parallel installs require the 'timeout' command"
 msgstr ""
 
 #. R/format.R: gettextf("too many list items (at most up to %d)", 26L)
