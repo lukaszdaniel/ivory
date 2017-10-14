@@ -181,6 +181,10 @@
 
       \item \code{intToUtf8(multiple = FALSE)} gains an argument to
       allow surrogate pairs to be interpreted.
+
+      \item The maximum number of DLLs that can be loaded into R
+      e.g.\sspace{}\emph{via} \code{dyn.load()} has been increased up to 614
+      when the OS limit on the number of open files allows.
     }
   }
 
@@ -202,6 +206,14 @@
     }
   }
 
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item Support for a system Java on macOS has been
+      removed --- install a fairly recent Oracle Java (see \sQuote{R
+	Installation and Administration} §C.3.2).
+    }
+  }
+  
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item \sQuote{Writing R Extensions} documents macros
@@ -358,8 +370,12 @@
       default time zone is deduced correctly from the system setting
       when \R is configured with \option{--with-internal-tzcode} (the
       default on macOS).
+
+      \item \command{R CMD javareconf} has been updated to recognize the
+      use of a Java 9 SDK on macOS.
     }
   }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{raw(0) & raw(0)} and \code{raw(0) | raw(0)}

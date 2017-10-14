@@ -1864,7 +1864,7 @@ case "${host_os}" in
 esac
 ## Windows has neither setenv nor unsetenv
 R_CHECK_FUNCS([setenv unsetenv], [#include <stdlib.h>])
-R_CHECK_FUNCS([getrlimit getrusage getpriority], [#include <sys/resource.h>])
+R_CHECK_FUNCS([getrlimit setrlimit getrusage getpriority], [#include <sys/resource.h>])
 R_CHECK_FUNCS([chmod mkfifo stat umask], [#include <sys/stat.h>])
 if test "${ac_cv_have_decl_stat}" = "no"; then
    AC_MSG_ERROR([Building R requires the 'stat' system call])
@@ -2417,10 +2417,18 @@ custom_JAVA_HOME="${JAVA_HOME}"
 custom_JAVA_LIBS="${JAVA_LIBS}"
 custom_JAVA_CPPFLAGS="${JAVA_CPPFLAGS}"
 custom_JAVA_LD_LIBRARY_PATH="${JAVA_LD_LIBRARY_PATH}"
+custom_JAVA="${JAVA}"
+custom_JAVAC="${JAVAC}"
+custom_JAVAH="${JAVAH}"
+custom_JAR="${JAR}"
 AC_SUBST(custom_JAVA_HOME)
 AC_SUBST(custom_JAVA_CPPFLAGS)
 AC_SUBST(custom_JAVA_LIBS)
 AC_SUBST(custom_JAVA_LD_LIBRARY_PATH)
+AC_SUBST(custom_JAVA)
+AC_SUBST(custom_JAVAC)
+AC_SUBST(custom_JAVAH)
+AC_SUBST(custom_JAR)
 JAVA_LD_LIBRARY_PATH=
 AC_SUBST(JAVA)
 AC_SUBST(JAVAC)
