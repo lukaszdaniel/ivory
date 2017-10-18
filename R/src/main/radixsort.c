@@ -26,6 +26,7 @@
 
 #include <Defn.h>
 #include <Internal.h>
+#include <Localization.h>
 
 /* It would be better to find a way to avoid abusing TRUELENGTH, but
    in the meantime replace TRUELENGTH/SET_TRUELENGTH with
