@@ -36,8 +36,10 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 `$cmd reg-IO.Rout		reg-IO.Rout.save`
 `$cmd reg-IO2.Rout		reg-IO2.Rout.save`
 `$cmd reg-plot.Rout		reg-plot.Rout.save`
-#`$cmd reg-plot.pdf		reg-plot.pdf.save`
-#`$cmd reg-plot-latin1.pdf	reg-plot-latin1.pdf.save`
+ if [[ "$2" == "cp" ]]; then
+ `$cmd reg-plot.pdf		reg-plot.pdf.save`
+ `$cmd reg-plot-latin1.pdf	reg-plot-latin1.pdf.save`
+ fi;
 `$cmd reg-S4.Rout		reg-S4.Rout.save`
 `$cmd reg-tests-2.Rout		reg-tests-2.Rout.save`
 `$cmd reg-tests-3.Rout		reg-tests-3.Rout.save`
