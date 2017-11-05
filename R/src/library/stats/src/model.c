@@ -1631,7 +1631,7 @@ static int TermCode(SEXP termlist, SEXP thisterm, int whichbit, SEXP term)
     }
     return 2;
 }
-
+
 
 /* Internal code for the ``terms'' function */
 /* The value is a formula with an assortment */

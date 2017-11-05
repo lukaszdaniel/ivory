@@ -386,7 +386,7 @@ int REAL_NO_NA(SEXP x)
     return ALTREP(x) ? ALTREAL_DISPATCH(No_NA, x) : 0;
 }
 
-SEXP attribute_hidden ALTSTRING_ELT(SEXP x, R_xlen_t i)
+SEXP /*attribute_hidden*/ ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
     SEXP val = NULL;
 
@@ -438,6 +438,11 @@ int attribute_hidden ALTLOGICAL_ELT(SEXP x, R_xlen_t i)
 Rcomplex attribute_hidden ALTCOMPLEX_ELT(SEXP x, R_xlen_t i)
 {
     error(_("unknown ALTCOMPLEX type")); /* dispatch here */
+}
+
+Rbyte attribute_hidden ALTRAW_ELT(SEXP x, R_xlen_t i)
+{
+    error(_("unknown ALTRAW type")); /* dispatch here */
 }
 
 

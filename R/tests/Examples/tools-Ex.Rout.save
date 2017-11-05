@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-10-18 r994) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-10-18 r995) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-10-18 r73557) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-10-18 r73670) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -51,7 +51,7 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: HTMLheader
-> ### Title: Generate a standard HTML header for R help
+> ### Title: Generate a Standard HTML Header for R Help
 > ### Aliases: HTMLheader
 > ### Keywords: utilities documentation
 > 
@@ -93,7 +93,7 @@ Type 'q()' to quit R.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: Rd2txt_options
-> ### Title: Set formatting options for text help
+> ### Title: Set Formatting Options for Text Help
 > ### Aliases: Rd2txt_options
 > ### Keywords: documentation
 > 
@@ -180,7 +180,7 @@ Error in command 'assertWarning(ff())':
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: bibstyle
-> ### Title: Select or define a bibliography style.
+> ### Title: Select or Define a Bibliography Style
 > ### Aliases: bibstyle getBibstyle
 > ### Keywords: utilties documentation
 > 
@@ -209,7 +209,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x20dd8b0>
+<environment: 0x1ee80a8>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -414,7 +414,7 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: checkPoFiles
-> ### Title: Check translation files for inconsistent format strings.
+> ### Title: Check Translation Files for Inconsistent Format Strings
 > ### Aliases: checkPoFile checkPoFiles
 > ### Keywords: utilities
 > 
@@ -619,7 +619,7 @@ attr(,"match.length")
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: getVignetteInfo
-> ### Title: Get information on installed vignettes.
+> ### Title: Get Information on Installed Vignettes
 > ### Aliases: getVignetteInfo
 > ### Keywords: utilities documentation
 > 
@@ -635,7 +635,7 @@ attr(,"match.length")
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: loadRdMacros
-> ### Title: Load user-defined Rd help system macros.
+> ### Title: Load User-defined Rd Help System Macros
 > ### Aliases: loadRdMacros loadPkgRdMacros
 > ### Keywords: utilities documentation
 > 
@@ -750,7 +750,7 @@ attr(,"match.length")
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: parseLatex
-> ### Title: These experimental functions work with a subset of LaTeX code.
+> ### Title: Experimental Functions to Work with LaTeX Code
 > ### Aliases: parseLatex deparseLatex latexToUtf8
 > ### Keywords: utilities documentation
 > 
@@ -840,7 +840,7 @@ function (x, ...)
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: toHTML
-> ### Title: Display an object in HTML.
+> ### Title: Display an Object in HTML
 > ### Aliases: toHTML toHTML.packageIQR toHTML.news_db
 > ### Keywords: utilities documentation
 > 
@@ -969,7 +969,7 @@ List of 6 components
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: write_PACKAGES
-> ### Title: Generate PACKAGES files
+> ### Title: Generate PACKAGES Files
 > ### Aliases: write_PACKAGES
 > ### Keywords: file utilities
 > 
@@ -1004,7 +1004,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.296 0 0.299 0 0 
+Time elapsed:  0.36 0 0.361 0 0 
 > grDevices::dev.off()
 null device 
           1 

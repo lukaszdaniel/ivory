@@ -21,6 +21,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef STATS_STUBS_H
+#define STATS_STUBS_H
+
 #include <Rconfig.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
@@ -82,3 +85,4 @@ S_rcont2(int nrow[], int ncol[], int nrowt[], int ncolt[],
 	    R_GetCCallable("stats", "rcont2");
     fun(nrow, ncol, nrowt, ncolt, ntotal, fact, jwork, matrix);
 }
+#endif /* STATS_STUBS_H */

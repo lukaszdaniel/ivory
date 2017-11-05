@@ -36,7 +36,7 @@ typedef struct {
 } Rcomplex;
 
 #ifdef  __cplusplus
-}
-#endif
+}  // extern "C"
+#endif // __cplusplus
 
 #endif /* R_COMPLEX_H */

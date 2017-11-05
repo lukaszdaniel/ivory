@@ -1112,8 +1112,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 	for(int j = 0; j < nc; j++) {
 	    xj = VECTOR_ELT(x, j);
 	    if(LENGTH(xj) != nr)
-		error(_("corrupt data frame -- length of column %d does not not match nrows"),
-		      j+1);
+		error(_("corrupt data frame -- length of column %d does not not match nrows"), j+1);
 	    if(inherits(xj, "factor")) {
 		levels[j] = getAttrib(xj, R_LevelsSymbol);
 	    } else levels[j] = R_NilValue;
@@ -1123,8 +1122,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(i % 1000 == 999) R_CheckUserInterrupt();
 	    if(!isNull(rnames))
 		Rconn_printf(con, "%s%s",
-			     EncodeElement2(rnames, i, quote_rn, qmethod,
-					    &strBuf, sdec), csep);
+			     EncodeElement2(rnames, i, quote_rn, qmethod, &strBuf, sdec), csep);
 	    for(int j = 0; j < nc; j++) {
 		xj = VECTOR_ELT(x, j);
 		if(j > 0) Rconn_printf(con, "%s", csep);
@@ -1135,16 +1133,14 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 			   although they should. */
 			if(TYPEOF(xj) == INTSXP)
 			    tmp = EncodeElement2(levels[j], INTEGER(xj)[i] - 1,
-						 quote_col[j], qmethod,
-						 &strBuf, sdec);
+						 quote_col[j], qmethod, &strBuf, sdec);
 			else if(TYPEOF(xj) == REALSXP)
 			    tmp = EncodeElement2(levels[j],
 						 (int) (REAL(xj)[i] - 1),
 						 quote_col[j], qmethod,
 						 &strBuf, sdec);
 			else
-			    error(_("column %s claims to be a factor but does not have numeric codes"),
-				  j+1);
+			    error(_("column %s claims to be a factor but does not have numeric codes"), j+1);
 		    } else {
 			tmp = EncodeElement2(xj, i, quote_col[j], qmethod,
 					     &strBuf, sdec);

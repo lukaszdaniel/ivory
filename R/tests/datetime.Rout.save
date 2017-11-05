@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-10-18 r994) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-10-18 r995) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-10-18 r73557) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-10-18 r73670) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -51,9 +51,9 @@ Type 'q()' to quit R.
 > c(unclass(z))
 [1] 2209032000
 > (z <- as.POSIXct("2040-07-01 12:00"))
-[1] "2040-07-01 12:00:00 BST"
+[1] "2040-07-01 12:00:00 GMT"
 > c(unclass(z))
-[1] 2224753200
+[1] 2224756800
 > 
 > Sys.setenv(TZ = "EST5EDT")
 > (z <- as.POSIXct("1848-01-01 12:00"))
@@ -65,9 +65,9 @@ Type 'q()' to quit R.
 > c(unclass(z))
 [1] 2209050000
 > (z <- as.POSIXct("2040-07-01 12:00"))
-[1] "2040-07-01 12:00:00 EDT"
+[1] "2040-07-01 12:00:00 EST"
 > c(unclass(z))
-[1] 2224771200
+[1] 2224774800
 > 
 > ## PR15613: had day as > 24hrs.
 > as.POSIXlt(ISOdate(2071,1,13,0,0,tz="Etc/GMT-1"))$wday

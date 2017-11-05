@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-10-18 r994) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-10-18 r995) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-10-18 r73557) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-10-18 r73670) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -574,17 +574,7 @@ pckgDs>
 > ## lattice may not be installed
 > ## Avoid possibly large list from R_HOME/site-library, which --vanilla includes.
 > dependsOnPkgs("lattice", lib.loc = .Library)
- [1] "Hmisc"           "Matrix"          "ape"             "coda"           
- [5] "cvTools"         "flexmix"         "hexbin"          "latticeExtra"   
- [9] "lme4"            "maptools"        "mice"            "nlme"           
-[13] "rms"             "rrcov"           "sp"              "zoo"            
-[17] "MatrixModels"    "RcppEigen"       "VIM"             "akima"          
-[21] "expm"            "fpc"             "igraph"          "irlba"          
-[25] "lmtest"          "mgcv"            "pbkrtest"        "quantreg"       
-[29] "rgdal"           "rgeos"           "robCompositions" "sandwich"       
-[33] "spdep"           "survival"        "tables"          "TH.data"        
-[37] "car"             "coin"            "multcomp"        "mvoutlier"      
-[41] "vcd"            
+[1] "Matrix"   "nlme"     "mgcv"     "survival"
 > 
 > ## This may not be installed
 > gridEx <- system.file("doc", "grid.Rnw", package = "grid")

@@ -18,7 +18,8 @@
 
 .Defunct <- function(new, package=NULL, msg) {
     if (missing(msg)) {
-	msg <- gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
+        fname <- as.character(sys.call(sys.parent())[[1L]])
+	msg <- gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 	if(!missing(new))
 	    msg <- gettextf("Function %s is defunct.\nUse function %s instead.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])), sQuote(new))
 	msg <- c(msg,
