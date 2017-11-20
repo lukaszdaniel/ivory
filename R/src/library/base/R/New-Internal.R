@@ -103,7 +103,7 @@ rbind <- function(..., deparse.level = 1)
       "keepInteger", "quoteExpressions", "showAttributes", # 2,3,4
       "useSource", "warnIncomplete", "delayPromises",      # 5,6,7
       "keepNA", "S_compatible", "hexNumeric",              # 8,9,10
-      "digits17", "nice_names")                            # 11,12
+      "digits17", "niceNames")                             # 11,12
 
 .deparseOpts <- function(control) {
     if(!length(control)) return(0) # fast exit
@@ -124,7 +124,7 @@ rbind <- function(..., deparse.level = 1)
 deparse <-
     function(expr, width.cutoff = getOption("width"),
 	     backtick = mode(expr) %in% c("call", "expression", "(", "function"),
-	     control = c("keepInteger", "showAttributes", "keepNA"),
+	     control = c("keepNA", "keepInteger", "niceNames", "showAttributes"),
              nlines = -1L)
     .Internal(deparse(expr, width.cutoff, backtick,
                       .deparseOpts(control), nlines))
@@ -143,9 +143,9 @@ drop <- function(x) .Internal(drop(x))
 format.info <- function(x, digits = NULL, nsmall = 0L)
     .Internal(format.info(x, digits, nsmall))
 
-gc <- function(verbose = getOption("verbose"),	reset=FALSE)
+gc <- function(verbose = getOption("verbose"),	reset=FALSE, full=TRUE)
 {
-    res <- .Internal(gc(verbose, reset))
+    res <- .Internal(gc(verbose, reset, full))
     res <- matrix(res, 2L, 7L,
 		  dimnames = list(c("Ncells","Vcells"),
 		  c("used", "(Mb)", "gc trigger", "(Mb)",

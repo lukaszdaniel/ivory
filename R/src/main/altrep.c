@@ -293,7 +293,7 @@ R_xlen_t /*attribute_hidden*/ ALTREP_TRUELENGTH(SEXP x) { return 0; }
  * Generic ALTVEC support
  */
 
-void /*attribute_hidden*/ *ALTVEC_DATAPTR(SEXP x, Rboolean writeable)
+static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writeable)
 {
     /**** move GC disabling into methods? */
     if (R_in_gc)
@@ -307,9 +307,19 @@ void /*attribute_hidden*/ *ALTVEC_DATAPTR(SEXP x, Rboolean writeable)
     return val;
 }
 
-void /*attribute_hidden*/ *ALTVEC_DATAPTR_OR_NULL(SEXP x, Rboolean writeable)
+void /*attribute_hidden*/ *ALTVEC_DATAPTR(SEXP x)
 {
-    return ALTVEC_DISPATCH(Dataptr_or_null, x, writeable);
+    return ALTVEC_DATAPTR_EX(x, TRUE);
+}
+
+const void /*attribute_hidden*/ *ALTVEC_DATAPTR_RO(SEXP x)
+{
+    return ALTVEC_DATAPTR_EX(x, FALSE);
+}
+
+const void /*attribute_hidden*/ *ALTVEC_DATAPTR_OR_NULL(SEXP x)
+{
+    return ALTVEC_DISPATCH(Dataptr_or_null, x);
 }
 
 SEXP attribute_hidden ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call)
@@ -323,7 +333,7 @@ SEXP attribute_hidden ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call)
  */
 
 #define CHECK_NOT_EXPANDED(x)					\
-    if (DATAPTR_OR_NULL(x, FALSE) != NULL)			\
+    if (DATAPTR_OR_NULL(x) != NULL)				\
 	error(_("method should only handle unexpanded vectors"))
 
 int attribute_hidden ALTINTEGER_ELT(SEXP x, R_xlen_t i)
@@ -333,7 +343,7 @@ int attribute_hidden ALTINTEGER_ELT(SEXP x, R_xlen_t i)
 
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    int *x = INTEGER_OR_NULL(sx, FALSE);
+    const int *x = INTEGER_OR_NULL(sx);
     if (x != NULL) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
@@ -363,7 +373,7 @@ double attribute_hidden ALTREAL_ELT(SEXP x, R_xlen_t i)
 
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
-    double *x = REAL_OR_NULL(sx, FALSE);
+    const double *x = REAL_OR_NULL(sx);
     if (x != NULL) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
@@ -512,7 +522,7 @@ static void *altvec_Dataptr_default(SEXP x, Rboolean writeable)
     error(_("cannot access data pointer for this ALTVEC object"));
 }
 
-static void *altvec_Dataptr_or_null_default(SEXP x, Rboolean writeable)
+static const void *altvec_Dataptr_or_null_default(SEXP x)
 {
     return NULL;
 }
@@ -889,7 +899,7 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
     return DATAPTR(COMPACT_SEQ_EXPANDED(x));
 }
 
-static void *compact_intseq_Dataptr_or_null(SEXP x, Rboolean writeable)
+static const void *compact_intseq_Dataptr_or_null(SEXP x)
 {
     SEXP val = COMPACT_SEQ_EXPANDED(x);
     return val == R_NilValue ? NULL : DATAPTR(val);
@@ -1109,7 +1119,7 @@ static void *compact_realseq_Dataptr(SEXP x, Rboolean writeable)
     return DATAPTR(COMPACT_SEQ_EXPANDED(x));
 }
 
-static void *compact_realseq_Dataptr_or_null(SEXP x, Rboolean writeable)
+static const void *compact_realseq_Dataptr_or_null(SEXP x)
 {
     SEXP val = COMPACT_SEQ_EXPANDED(x);
     return val == R_NilValue ? NULL : DATAPTR(val);
@@ -1376,7 +1386,7 @@ static void *deferred_string_Dataptr(SEXP x, Rboolean writeable)
     return DATAPTR(DEFERRED_STRING_EXPANDED(x));
 }
 
-static void *deferred_string_Dataptr_or_null(SEXP x, Rboolean writeable)
+static const void *deferred_string_Dataptr_or_null(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
     return state != R_NilValue ? NULL : DATAPTR(DEFERRED_STRING_EXPANDED(x));
@@ -1759,7 +1769,7 @@ static void *mmap_Dataptr(SEXP x, Rboolean writeable)
 	error(_("cannot access data pointer for this mmaped vector"));
 }
 
-static void *mmap_Dataptr_or_null(SEXP x, Rboolean writeable)
+static const void *mmap_Dataptr_or_null(SEXP x)
 {
     return MMAP_PTROK(x) ? MMAP_ADDR(x) : NULL;
 }
@@ -2123,18 +2133,13 @@ static void *wrapper_Dataptr(SEXP x, Rboolean writeable)
 	return DATAPTR(WRAPPER_WRAPPED(x));
     }
     else
-	return DATAPTR_RO(WRAPPER_WRAPPED(x));
+	/**** avoid the cast by having separate methods */
+	return (void *) DATAPTR_RO(WRAPPER_WRAPPED(x));
 }
 
-static void *wrapper_Dataptr_or_null(SEXP x, Rboolean writeable)
+static const void *wrapper_Dataptr_or_null(SEXP x)
 {
-    if (writeable)
-	/* To keep things simple, return NULL if a writeable pointer
-	   is requested and let the caller decide whether to call
-	   DATAPTR or proceed in some other way. */
-	return NULL;
-    else
-	return DATAPTR_OR_NULL(WRAPPER_WRAPPED(x), FALSE);
+    return DATAPTR_OR_NULL(WRAPPER_WRAPPED(x));
 }
 
 

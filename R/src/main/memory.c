@@ -253,7 +253,8 @@ static void R_ReportNewPage();
 }  while(0)
 
 static void R_gc_internal(R_size_t size_needed);
-static void R_gc_full(R_size_t size_needed);
+static void R_gc_no_finalizers(R_size_t size_needed);
+static void R_gc_lite();
 static void mem_err_heap(R_size_t size);
 static void mem_err_malloc(R_size_t size);
 
@@ -890,7 +891,7 @@ static void GetNewPage(int node_class)
 
     page = malloc(R_PAGE_SIZE);
     if (page == NULL) {
-	R_gc_full(0);
+	R_gc_no_finalizers(0);
 	page = malloc(R_PAGE_SIZE);
 	if (page == NULL)
 	    mem_err_malloc((R_size_t) R_PAGE_SIZE);
@@ -1079,7 +1080,25 @@ static void AdjustHeapSize(R_size_t size_needed)
     double vect_occup =	((double) VNeeded) / R_VSize;
 
     if (node_occup > R_NGrowFrac) {
-	R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
+	R_size_t change =
+	    (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
+
+	/* for early andjustments grow more agressively */
+	static R_size_t last_in_use = 0;
+	static int adjust_count = 1;
+	if (adjust_count < 50) {
+	    adjust_count++;
+
+	    /* estimate next in-use count by assuming linear growth */
+	    R_size_t next_in_use = R_NodesInUse + (R_NodesInUse - last_in_use);
+	    last_in_use = R_NodesInUse;
+
+	    /* try to achieve and occupancy rate of R_NGrowFrac */
+	    R_size_t next_nsize = (R_size_t) (next_in_use / R_NGrowFrac);
+	    if (next_nsize > R_NSize + change)
+		change = next_nsize - R_NSize;
+	}
+
 	if (R_MaxNSize >= R_NSize + change)
 	    R_NSize += change;
     }
@@ -1984,15 +2003,18 @@ void attribute_hidden get_current_mem(size_t *smallvsize,
 SEXP attribute_hidden do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
-    int ogc, reset_max;
+    int ogc, reset_max, full;
     R_size_t onsize = R_NSize /* can change during collection */;
 
     checkArity(op, args);
     ogc = gc_reporting;
     gc_reporting = asLogical(CAR(args));
     reset_max = asLogical(CADR(args));
-    num_old_gens_to_collect = NUM_OLD_GENERATIONS;
-    R_gc();
+    full = asLogical(CADDR(args));
+    if (full)
+	R_gc();
+    else
+	R_gc_lite();
 
     gc_reporting = ogc;
     /*- now return the [used , gc trigger size] for cells and heap */
@@ -2695,7 +2717,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
-		    R_gc_full(alloc_size);
+		    R_gc_no_finalizers(alloc_size);
 		    mem = allocator ?
 			custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
 			malloc(hdrsize + size * sizeof(VECREC));
@@ -2870,13 +2892,22 @@ SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 
 void R_gc(void)
 {
+    num_old_gens_to_collect = NUM_OLD_GENERATIONS;
     R_gc_internal(0);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
 }
 
-static void R_gc_full(R_size_t size_needed)
+void R_gc_lite(void)
+{
+    R_gc_internal(0);
+#ifndef IMMEDIATE_FINALIZERS
+    R_RunPendingFinalizers();
+#endif
+}
+
+static void R_gc_no_finalizers(R_size_t size_needed)
 {
     num_old_gens_to_collect = NUM_OLD_GENERATIONS;
     R_gc_internal(size_needed);
@@ -3068,7 +3099,6 @@ SEXP attribute_hidden do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       int gen;
 
       /* run a full GC to make sure that all stuff in use is in Old space */
-      num_old_gens_to_collect = NUM_OLD_GENERATIONS;
       R_gc();
       for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	for (i = 0; i < NUM_NODE_CLASSES; i++) {
@@ -3529,19 +3559,43 @@ int *(LOGICAL)(SEXP x) {
     return LOGICAL(x);
 }
 
+const int *(LOGICAL_RO)(SEXP x) {
+    if(TYPEOF(x) != LGLSXP)
+	error(_("'%s' function can only be applied to a logical, not a '%s'"),
+	      "LOGICAL()", type2char(TYPEOF(x)));
+    CHKZLN(x);
+    return LOGICAL_RO(x);
+}
+
 /* Maybe this should exclude logicals, but it is widely used */
 int *(INTEGER)(SEXP x) {
     if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error(_("'%s' function can only be applied to a integer, not a '%s'"), "INTEGER()",
+	error(_("'%s' function can only be applied to an integer, not a '%s'"), "INTEGER()",
 	      type2char(TYPEOF(x)));
     CHKZLN(x);
     return INTEGER(x);
+}
+
+const int *(INTEGER_RO)(SEXP x) {
+    if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
+	error(_("'%s' function can only be applied to an integer, not a '%s'"),
+	      "INTEGER()", type2char(TYPEOF(x)));
+    CHKZLN(x);
+    return INTEGER_RO(x);
 }
 
 Rbyte *(RAW)(SEXP x) {
     if(TYPEOF(x) != RAWSXP)
 	error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
 	      type2char(TYPEOF(x)));
+    CHKZLN(x);
+    return RAW(x);
+}
+
+const Rbyte *(RAW_RO)(SEXP x) {
+    if(TYPEOF(x) != RAWSXP)
+	error(_("'%s' function can only be applied to a raw, not a '%s'"),
+	      "RAW()", type2char(TYPEOF(x)));
     CHKZLN(x);
     return RAW(x);
 }
@@ -3553,6 +3607,13 @@ double *(REAL)(SEXP x) {
     return REAL(x);
 }
 
+const double *(REAL_RO)(SEXP x) {
+    if(TYPEOF(x) != REALSXP)
+	error(_("'%s' function can only be applied to a numeric, not a '%s'"),
+	      "REAL()", type2char(TYPEOF(x)));
+    return REAL_RO(x);
+}
+
 Rcomplex *(COMPLEX)(SEXP x) {
     if(TYPEOF(x) != CPLXSXP)
 	error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
@@ -3561,12 +3622,28 @@ Rcomplex *(COMPLEX)(SEXP x) {
     return COMPLEX(x);
 }
 
+const Rcomplex *(COMPLEX_RO)(SEXP x) {
+    if(TYPEOF(x) != CPLXSXP)
+	error(_("'%s' function can only be applied to a complex, not a '%s'"),
+	      "COMPLEX()", "complex", type2char(TYPEOF(x)));
+    CHKZLN(x);
+    return COMPLEX_RO(x);
+}
+
 SEXP *(STRING_PTR)(SEXP x) {
     if(TYPEOF(x) != STRSXP)
 	error(_("'%s' function can only be applied to a character, not a '%s'"),
 	      "STRING_PTR()", type2char(TYPEOF(x)));
     CHKZLN(x);
     return STRING_PTR(x);
+}
+
+const SEXP *(STRING_PTR_RO)(SEXP x) {
+    if(TYPEOF(x) != STRSXP)
+	error(_("'%s' function can only be applied to a character, not a '%s'"),
+	      "STRING_PTR_RO()", type2char(TYPEOF(x)));
+    CHKZLN(x);
+    return STRING_PTR_RO(x);
 }
 
 SEXP * NORET (VECTOR_PTR)(SEXP x)

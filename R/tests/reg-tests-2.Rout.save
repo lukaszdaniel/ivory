@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-10-18 r995) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-11-06 r997) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-10-18 r73670) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-11-06 r73757) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -5715,14 +5715,13 @@ $y
 +          i = as.character(NA), j = c("foo", NA, "bar")
 +          )
 > dput(x, control=NULL)
-list(a = NA, b = NA, c = NA, d = NA, e = 1, f = 1, g = 1:3, h = c(NA, 1, 2, 3), i = NA, 
-    j = c("foo", NA, "bar"))
+list(NA, NA, NA, NA, 1, 1, 1:3, c(NA, 1, 2, 3), NA, c("foo", NA, "bar"))
 > dput(x, control="keepInteger")
-list(a = NA, b = NA_integer_, c = NA, d = NA, e = 1, f = 1L, g = 1:3, h = c(NA, 1L, 
-2L, 3L), i = NA, j = c("foo", NA, "bar"))
+list(NA, NA_integer_, NA, NA, 1, 1L, 1:3, c(NA, 1L, 2L, 3L), NA, c("foo", NA, "bar"
+))
 > dput(x, control="keepNA")
-list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, e = 1, f = 1, g = 1:3, 
-    h = c(NA, 1, 2, 3), i = NA_character_, j = c("foo", NA, "bar"))
+list(NA, NA_integer_, NA_real_, NA_complex_, 1, 1, 1:3, c(NA, 1, 2, 3), NA_character_, 
+    c("foo", NA, "bar"))
 > dput(x)
 list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, e = 1, f = 1L, g = 1:3, 
     h = c(NA, 1L, 2L, 3L), i = NA_character_, j = c("foo", NA, "bar"))
@@ -6368,7 +6367,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2568570>
+<bytecode: 0x10b9368>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6379,7 +6378,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2568570>
+<bytecode: 0x10b9368>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6391,7 +6390,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2568570>
+<bytecode: 0x10b9368>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6413,15 +6412,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x2197880> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x40f76b8> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x23811f8> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x40ecd18> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x23811f8> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x40ecd18> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7859,9 +7858,10 @@ logical       1
  AsIs [1:2, 1:2] 3.14 6.28 9.42 12.57
 > ## did look ugly (because of toString() for numbers) in R <= 3.3.1
 > 
-> ## check automatic coercions from double to integer
 > 
-> # these should work due to coercion
+> ## check automatic coercions from double to integer
+> ##
+> ## these should work due to coercion
 > sprintf("%d", 1)
 [1] "1"
 > sprintf("%d", NA_real_)
@@ -7872,8 +7872,8 @@ logical       1
 [1] "1"  "NA"
 > sprintf("%d", c(NA,1))
 [1] "NA" "1" 
-> 
-> # these should fail
+> ##
+> ## these should fail
 > sprintf("%d", 1.1)
 Error in command 'sprintf("%d", 1.1)': 
   invalid format '%d'; use format %f, %e, %g or %a for numeric objects
@@ -7889,4 +7889,13 @@ Error in command 'sprintf("%d", NaN)':
 > sprintf("%d", c(1,NaN))
 Error in command 'sprintf("%d", c(1, NaN))': 
   invalid format '%d'; use format %f, %e, %g or %a for numeric objects
+> 
+> 
+> ## formatting of named raws:
+> setNames(as.raw(1:3), c("a", "bbbb", "c"))
+   a bbbb    c 
+  01   02   03 
+> ## was quite ugly for R <= 3.4.2
+> 
+> 
 > 

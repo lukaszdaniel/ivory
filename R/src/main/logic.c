@@ -207,7 +207,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     case LGLSXP:
 	{
 	    int *px = LOGICAL(x);
-	    int *parg = LOGICAL(arg);
+	    const int *parg = LOGICAL_RO(arg);
 	    for (i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		int v = parg[i];
@@ -218,7 +218,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     case INTSXP:
 	{
 	    int *px = LOGICAL(x);
-	    int *parg = INTEGER(arg);
+	    const int *parg = INTEGER_RO(arg);
 	    for (i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		int v = parg[i];
@@ -229,7 +229,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     case REALSXP:
 	{
 	    int *px = LOGICAL(x);
-	    double *parg = REAL(arg);
+	    const double *parg = REAL_RO(arg);
 	    for (i = 0; i < len; i++){
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		double v = parg[i];
@@ -240,7 +240,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     case CPLXSXP:
 	{
 	    int *px = LOGICAL(x);
-	    Rcomplex *parg = COMPLEX(arg);
+	    const Rcomplex *parg = COMPLEX_RO(arg);
 	    for (i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		Rcomplex v = parg[i];
@@ -252,7 +252,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     case RAWSXP:
 	{
 	    Rbyte *px = RAW(x);
-	    Rbyte *parg = RAW(arg);
+	    const Rbyte *parg = RAW_RO(arg);
 	    for (i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		px[i] = 0xFF ^ parg[i];

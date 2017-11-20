@@ -801,7 +801,8 @@ function(x, ...)
             s <- paste(deparse(s), collapse = "")
             s <- gsub(" = ([,\\)])", "\\1", s)
             s <- gsub("<unescaped bksl>", "\\", s, fixed = TRUE)
-            gsub("^pairlist", "function", s)
+            s <- gsub("^pairlist", "function", s)
+            gsub("^as.pairlist\\(alist\\((.*)\\)\\)$", "function(\\1)", s)
         }
     }
 
@@ -3392,7 +3393,7 @@ function(aar, strict = FALSE)
                                utils:::MARC_relator_db_codes_used_with_R)
                     ind <- lengths(non_standard_roles) > 0L
                     if(any(ind)) {
-                        out$bad_authors_at_R_field_has_persons_with_nonstandard_roles <-
+                        out$authors_at_R_field_has_persons_with_nonstandard_roles <-
                             sprintf("%s: %s",
                                     format(aar[ind]),
                                     sapply(non_standard_roles[ind], paste,
@@ -3466,11 +3467,11 @@ function(x)
       if(length(x[["bad_authors_at_R_field_has_no_author_roles"]])) {
           gettext("Authors@R field gives no person with name and author role", domain = "R-tools")
       },
-      if(length(bad <-
-                x[["bad_authors_at_R_field_has_persons_with_nonstandard_roles"]])) {
-          c(gettext("Authors@R field gives persons with non-standard roles:", domain = "R-tools"),
-            paste0("  ", bad))
-      },
+      ## if(length(bad <-
+      ##           x[["authors_at_R_field_has_persons_with_nonstandard_roles"]])) {
+      ##     c(gettext("Authors@R field gives persons with non-standard roles:", domain = "R-tools"),
+      ##       paste0("  ", bad))
+      ## },
       if(length(bad <- x[["bad_authors_at_R_field_for_maintainer"]])) {
           c(gettext("Cannot extract Maintainer field from Authors@R field:", domain = "R-tools"), paste(" ", bad))
       },
@@ -6412,7 +6413,15 @@ function(dir, localOnly = FALSE)
     nms <- names(meta)
     stdNms <- .get_standard_DESCRIPTION_fields()
     nms <- nms[is.na(match(nms, stdNms)) &
-               !grepl("^(X-CRAN|Repository/R-Forge|VCS/|Config/)", nms)]
+               !grepl(paste0("^(",
+                             paste(c("X-CRAN",
+                                     "X-schema.org",
+                                     "Repository/R-Forge",
+                                     "VCS/",
+                                     "Config/"),
+                                   collapse = "|"),
+                             ")"),
+                      nms)]
     if(length(nms) && ## Allow maintainer notes  <stdName>Note :
        length(nms <- nms[is.na(match(nms, paste0(stdNms,"Note")))]))
         out$fields <- nms

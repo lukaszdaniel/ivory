@@ -362,7 +362,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
     R_xlen_t NR = nrs;
     SEXP rvec;
     int ndim = LENGTH(dims);
-    int *pdims = INTEGER(dims);
+    const int *pdims = INTEGER_RO(dims);
 
     if (ncols(s) != ndim) {
 	ECALL(call, _("incorrect number of columns in matrix subscript"));
@@ -380,7 +380,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
 	if (TYPEOF(s) == REALSXP) {
 	    for (int i = 0; i < nrs; i++) {
 		R_xlen_t tdim = 1;
-		double *ps = REAL(s);
+		const double *ps = REAL_RO(s);
 		for (int j = 0; j < ndim; j++) {
 		    double k = ps[i + j * NR];
 		    if(ISNAN(k)) {rv[i] = NA_REAL; break;}
@@ -397,7 +397,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
 	    }
 	} else {
 	    s = coerceVector(s, INTSXP);
-	    int *ps = INTEGER(s);
+	    const int *ps = INTEGER_RO(s);
 	    for (int i = 0; i < nrs; i++) {
 		R_xlen_t tdim = 1;
 		for (int j = 0; j < ndim; j++) {
@@ -516,11 +516,11 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
     nmax = (ns > nx) ? ns : nx;
     *stretch = (ns > nx) ? ns : 0;
     if (ns == 0) return(allocVector(INTSXP, 0));
-    int *ps = LOGICAL(s);    /* Calling LOCICAL here may force a large
-				allocation, but no larger than the one
-				made by R_alloc below. This could use
-				rewriting to better handle a sparse
-				logical index. */
+    const int *ps = LOGICAL_RO(s);    /* Calling LOCICAL_RO here may force a
+					 large allocation, but no larger than
+					 the one made by R_alloc below. This
+					 could use rewriting to better handle
+					 a sparse logical index. */
 #ifdef LONG_VECTOR_SUPPORT
     if (nmax > R_SHORT_LEN_MAX) {
 	if (ns == nmax) { /* no recycling - use fast single-index code */
@@ -634,7 +634,7 @@ static SEXP negativeSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP call)
     int *pindx = LOGICAL(indx);
     for (i = 0; i < nx; i++)
 	pindx[i] = 1;
-    int *ps = INTEGER(s);
+    const int *ps = INTEGER_RO(s);
     for (i = 0; i < ns; i++) {
 	int ix = ps[i];
 	if (ix != 0 && ix != NA_INTEGER && -ix <= nx)
@@ -649,7 +649,7 @@ static SEXP positiveSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx)
 {
     SEXP indx;
     R_xlen_t i, zct = 0;
-    int *ps = INTEGER(s);
+    const int *ps = INTEGER_RO(s);
     for (i = 0; i < ns; i++) if (ps[i] == 0) zct++;
     if (zct) {
 	indx = allocVector(INTSXP, (ns - zct));
@@ -666,21 +666,23 @@ static SEXP
 integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 {
     R_xlen_t i;
-    int ii, min, max, canstretch;
+    int ii, neg, max, canstretch;
     Rboolean isna = FALSE;
     canstretch = *stretch > 0;
     *stretch = 0;
-    min = 0;
+    neg = FALSE;
     max = 0;
-    int *ps = INTEGER(s);
+    const int *ps = INTEGER_RO(s);
     for (i = 0; i < ns; i++) {
 	ii = ps[i];
-	if (ii != NA_INTEGER) {
-	    if (ii < min)
-		min = ii;
-	    if (ii > max)
-		max = ii;
-	} else isna = TRUE;
+	if (ii < 0) {
+	    if (ii == NA_INTEGER)
+		isna = TRUE;
+	    else
+		neg = TRUE;
+	}
+	else if (ii > max)
+	    max = ii;
     }
     if (max > nx) {
 	if(canstretch) *stretch = max;
@@ -688,7 +690,7 @@ integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 	    ECALL(call, _("subscript is out of bounds"));
 	}
     }
-    if (min < 0) {
+    if (neg) {
 	if (max == 0 && !isna) return negativeSubscript(s, ns, nx, call);
 	else {
 	    ECALL(call, _("only 0's may be mixed with negative subscripts"));
@@ -709,7 +711,7 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
     *stretch = 0;
     min = 0;
     max = 0;
-    double *ps = REAL(s);
+    const double *ps = REAL_RO(s);
     for (i = 0; i < ns; i++) {
 	ii = ps[i];
 	if (R_FINITE(ii)) {
@@ -834,7 +836,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 	/* must be internal, so names contains a character vector */
 	/* NB: this does not behave in the same way with respect to ""
 	   and NA names: they will match */
-	PROTECT(indx = match(names, s, 0));
+	PROTECT(indx = match(names, s, 0)); /**** guaranteed to be fresh???*/
 	/* second pass to correct this */
 	int *pindx = INTEGER(indx);
 	for (i = 0; i < ns; i++)
@@ -996,24 +998,16 @@ makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
 	ans = logicalSubscript(s, ns, nx, stretch, call);
 	break;
     case INTSXP:
-	PROTECT(s = duplicate(s));
-	SET_ATTRIB(s, R_NilValue);
-	SET_OBJECT(s, 0);
 	ans = integerSubscript(s, ns, nx, stretch, call);
-	UNPROTECT(1);
 	break;
     case REALSXP:
 	ans = realSubscript(s, ns, nx, stretch, call);
 	break;
     case STRSXP:
     {
-	PROTECT(s = duplicate(s));
-	SET_ATTRIB(s, R_NilValue);
-	SET_OBJECT(s, 0);
 	SEXP names = getAttrib(x, R_NamesSymbol);
 	/* *stretch = 0; */
 	ans = stringSubscript(s, ns, nx, names, stretch, call);
-	UNPROTECT(1);
 	break;
     }
     case SYMSXP:
