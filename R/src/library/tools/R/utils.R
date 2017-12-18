@@ -601,10 +601,10 @@ function(x)
 .canonicalize_quotes <-
 function(txt)
 {
-    txt <- gsub("(\xe2\x80\x98|\xe2\x80\x99)", "'", txt,
-                perl = TRUE, useBytes = TRUE)
-    txt <- gsub("(\xe2\x80\x9c|\xe2\x80\x9d)", '"', txt,
-                perl = TRUE, useBytes = TRUE)
+    txt <- gsub(paste0("(", intToUtf8(0x2018), "|", intToUtf8(0x2019), ")"),
+                "'", txt, perl = TRUE, useBytes = TRUE)
+    txt <- gsub(paste0("(", intToUtf8(0x201c), "|", intToUtf8(0x201d), ")"),
+                "'", txt, perl = TRUE, useBytes = TRUE)
     txt
 }
 
@@ -1282,8 +1282,8 @@ function(x)
 {
     ## Determine whether the strings in a character vector could be in
     ## some ISO 8859 character set or not.
-    raw_ub <- charToRaw("\x7f")
-    raw_lb <- charToRaw("\xa0")
+    raw_ub <- as.raw(0x7f)
+    raw_lb <- as.raw(0xa0)
     vapply(as.character(x), function(txt) {
         raw <- charToRaw(txt)
         all(raw <= raw_ub | raw >= raw_lb)
@@ -2142,19 +2142,19 @@ path_and_libPath <- function(...)
 ### ** str_parse_logic
 
 ##' @param otherwise: can be call, such as quote(errmesg(...))
-str_parse_logic <- function(ch, default = TRUE, otherwise = default) {
+str_parse_logic <- function(ch, default = TRUE, otherwise = default, n = 1L) {
     if (is.na(ch)) default
     else switch(ch,
                 "yes"=, "Yes" =, "true" =, "True" =, "TRUE" = TRUE,
                 "no" =, "No" =, "false" =, "False" =, "FALSE" = FALSE,
-                eval(otherwise))
+                eval.parent(otherwise, n=n))
 }
 
 ### ** str_parse
 
-str_parse <- function(ch, default = TRUE, logical = TRUE, otherwise = default) {
+str_parse <- function(ch, default = TRUE, logical = TRUE, otherwise = default, n = 2L) {
     if(logical)
-        str_parse_logic(ch, default=default, otherwise=otherwise)
+        str_parse_logic(ch, default=default, otherwise=otherwise, n = n)
     else if(is.na(ch))
         default
     else

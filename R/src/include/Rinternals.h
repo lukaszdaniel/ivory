@@ -621,14 +621,17 @@ const void *ALTVEC_DATAPTR_RO(SEXP x);
 const void *ALTVEC_DATAPTR_OR_NULL(SEXP x);
 SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call);
 int ALTINTEGER_ELT(SEXP x, R_xlen_t i);
-int ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v);
+void ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v);
 int ALTLOGICAL_ELT(SEXP x, R_xlen_t i);
+void ALTLOGICAL_SET_ELT(SEXP x, R_xlen_t i, int v);
 double ALTREAL_ELT(SEXP x, R_xlen_t i);
-double ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v);
+void ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v);
 SEXP ALTSTRING_ELT(SEXP, R_xlen_t);
 void ALTSTRING_SET_ELT(SEXP, R_xlen_t, SEXP);
 Rcomplex ALTCOMPLEX_ELT(SEXP x, R_xlen_t i);
+void ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v);
 Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i);
+void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, int v);
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
 int INTEGER_IS_SORTED(SEXP x);
 int INTEGER_NO_NA(SEXP x);
@@ -1067,6 +1070,11 @@ SEXP R_tryCatch(SEXP (*)(void *), void *,       /* body closure*/
 		void (*)(void *), void *);      /* finally closure */
 SEXP R_tryCatchError(SEXP (*)(void *), void *,        /* body closure*/
 		     SEXP (*)(SEXP, void *), void *); /* handler closure */
+SEXP R_MakeUnwindCont();
+void NORET R_ContinueUnwind(SEXP cont);
+SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
+                     void (*cleanfun)(void *data, Rboolean jump),
+                     void *cleandata, SEXP cont);
 
 /* Environment and Binding Features */
 void R_RestoreHashCount(SEXP rho);
@@ -1127,6 +1135,7 @@ struct R_outpstream_st {
 };
 
 typedef struct R_inpstream_st *R_inpstream_t;
+#define R_CODESET_MAX 63
 struct R_inpstream_st {
     R_pstream_data_t data;
     R_pstream_format_t type;
@@ -1134,6 +1143,9 @@ struct R_inpstream_st {
     void (*InBytes)(R_inpstream_t, void *, int);
     SEXP (*InPersistHookFunc)(SEXP, SEXP);
     SEXP InPersistHookData;
+    char native_encoding[R_CODESET_MAX + 1];
+    void *nat2nat_obj;
+    void *nat2utf8_obj;
 };
 
 void R_InitInPStream(R_inpstream_t stream, R_pstream_data_t data,

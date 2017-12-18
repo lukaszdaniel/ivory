@@ -230,12 +230,21 @@ str.default <-
     has.class <- S4 || !is.null(cl) # S3 or S4
     mod <- ""; char.like <- FALSE
     if(give.attr) a <- attributes(object)#-- save for later...
-    dCtrl <- unique(c(eval(formals(deparse)$control), "niceNames"))
+    dCtrl <- eval(formals(deparse)$control)
     if(drop.deparse.attr) dCtrl <- dCtrl[dCtrl != "showAttributes"]
     deParse <- function(.) deparse(., width.cutoff = min(500L, max(20L, width-10L)),
 				   control = dCtrl)
     n.of. <- function(n, singl, plural) paste(n, ngettext(n, singl, plural))
     n.of <- function(n, noun) n.of.(n, noun, paste0(noun,"s"))
+    arrLenstr <- function(obj) {
+	rnk <- length(di. <- dim(obj))
+	di <- paste0(ifelse(di. > 1, "1:",""), di.,
+		     ifelse(di. > 0, "" ," "))
+	pDi <- function(...) paste(c("[", ..., "]"), collapse = "")
+	if(rnk == 1)
+	     pDi(di[1L], "(1d)")
+	else pDi(paste0(di[-rnk], ", "), di[rnk])
+    }
     if(is.ts <- stats::is.ts(object))
         str1.ts <- function(o, lestr) {
             tsp.a <- stats::tsp(o)
@@ -348,72 +357,8 @@ str.default <-
 		    cat(indent.str, gettext("[list output truncated]", domain = "R-utils"), "\n", sep = "")
 	    }
 	}
-    } else { #- not function, not list
-	if(is.vector(object)
-	   || (is.array(object) && is.atomic(object))
-	   ##f fails for formula:
-	   ##f typeof(object) in {"symbol", "language"} =: is.symbolic(.):
-	   ##f || (is.language(object) && !is.expression(object))
-	   || (is.language(object) && !is.expression(object) && !any(cl == "formula"))
-	   ) { ##-- Splus: FALSE for 'named vectors'
-	    if(is.atomic(object)) {
-		##-- atomic:   numeric{dbl|int} complex character logical raw
-		mod <- substr(mode(object), 1, 4)
-		if(mod == "nume" && is.integer(object)) mod <- gettext("integer", domain = "R-utils")
-		else if(mod == "nume" && has.class) mod <- cl[1L]
-		else if(mod == "nume" && !is.integer(object) && !has.class) mod <- gettext("numeric", domain = "R-utils")
-		else if(mod == "char") { mod <- gettext("character", domain = "R-utils"); char.like <- TRUE }
-		else if(mod == "comp") mod <- gettext("complex", domain = "R-utils")
-		else if(mod == "logi") mod <- gettext("logical", domain = "R-utils") #- else: keep 'logi'
-		if(is.array(object)) {
-		    rnk <- length(di. <- dim(object))
-		    di <- paste0(ifelse(di. > 1, "1:",""), di.,
-				 ifelse(di. > 0, "" ," "))
-		    pDi <- function(...) paste(c("[", ..., "]"), collapse = "")
-		    le.str <- (if(rnk == 1) pDi(di[1L], "(1d)") else
-			       pDi(paste0(di[-rnk], ", "), di[rnk]))
-		    if(m <- match("AsIs", cl, 0L)) ## workaround bad format.AsIs()
-			oldClass(object) <- cl[-m]
-                    std.attr <- c("dim", if(is.ts) c("tsp", "class"))
-		} else if(!is.null(names(object))) {
-		    if(mod == gettext("integer", domain = "R-utils") && is.integer(object)) mod <- gettext("Named integer", domain = "R-utils")
-		    else if(mod == gettext("numeric", domain = "R-utils") && !is.integer(object) && !has.class) mod <- gettext("Named numeric", domain = "R-utils")
-		    else if(mod == gettext("numeric", domain = "R-utils") && has.class) mod <- gettext("Named numeric", domain = "R-utils")
-		    else if(mod == gettext("character", domain = "R-utils")) mod <- gettext("Named character", domain = "R-utils")
-		    else if(mod == gettext("complex", domain = "R-utils"))  mod <- gettext("Named complex", domain = "R-utils")
-		    else if(mod == gettext("logical", domain = "R-utils"))  mod <- gettext("Named logical", domain = "R-utils")
-		    std.attr <- std.attr[std.attr != "names"]
-		}
-		if(has.class) {
-		    cl <- cl[1L] # and "forget" potential other classes
-		    if(cl != mod && substr(cl, 1L, nchar(mod)) != mod)
-			mod <- paste0("'",cl,"' ", mod)
-		    ## don't show the class *twice*
-		    std.attr <- c(std.attr, "class")
-		}
-		str1 <-
-		    if(is.ts) str1.ts(object, le.str)
-		    else if(le == 1 && !is.array(object)) paste(NULL, mod)
-		    else paste0(" ", mod, if(le>0)" ", le.str)
-	    } else { ##-- not atomic, but vector: #
-		mod <- typeof(object)#-- typeof(.) is more precise than mode!
-		str1 <- switch(mod,
-			       call = " call",
-			       language = " language",
-			       symbol = " symbol",
-			       expression = " ",# "expression(..)" by deParse(.)
-			       name = " name",
-			       ##not in R:argument = "",# .Argument(.) by deParse(.)
-			       ## in R (once):	comment.expression
-
-			       ## default :
-			       paste("		#>#>", mod, NULL)
-			       )
-	    }
-	} else if(is.ts) {
-	    str1 <- str1.ts(object, le.str)
-	    std.attr <- c("tsp","class") #- "names"
-	} else if (is.factor(object)) {
+    } else { # not  NULL, S4, function, or list
+	if (is.factor(object)) {
 	    nl <- length(lev.att <- levels(object))
 	    if(!is.character(lev.att)) {# should not happen..
 		warning("'object' does not have valid levels()")
@@ -437,27 +382,72 @@ str.default <-
 		ml <- length(lev.att <- "")
 
 	    lsep <- if(ord) "<" else ","
-	    if(ord && nl)
-	      str1 <- cat(sprintf(ngettext(nl,
-				" Ord.factor w/ %d level %s%s:",
-				" Ord.factor w/ %d levels %s%s:", domain = "R-utils"),
-				nl, paste0(lev.att, collapse = lsep), if(ml < nl) paste0(lsep, "..") else ""))
-	    else if(ord && !nl)
-	      str1 <- cat(sprintf(ngettext(nl,
-				" Ord.factor w/ %d level",
-				" Ord.factor w/ %d levels", domain = "R-utils"),
-				nl))
-	    else if(!ord && nl)
-	      str1 <- cat(sprintf(ngettext(nl,
-				" Factor w/ %d level %s%s:",
-				" Factor w/ %d levels %s%s:", domain = "R-utils"),
-				nl, paste0(lev.att, collapse = lsep), if(ml < nl) paste0(lsep, "..") else ""))
-	    else
-	      str1 <- cat(sprintf(ngettext(nl,
-				" Factor w/ %d level",
-				" Factor w/ %d levels", domain = "R-utils"),
-				nl))
-	    std.attr <- c("levels", "class")
+	    str1 <-
+		paste0(if(ord)" Ord.f" else " F", "actor",
+                       if(is.array(object)) arrLenstr(object),
+		       " w/ ", nl, " level", if(nl != 1) "s",
+		       if(nl) " ",
+		       if(nl) paste0(lev.att, collapse = lsep),
+		       if(ml < nl) paste0(lsep, ".."), ":")
+
+	    std.attr <- c("levels", "class", if(is.array(object)) "dim")
+	} else if(is.ts) {
+	    str1 <- str1.ts(object,
+                            if(isA <- is.array(object)) arrLenstr(object) else le.str)
+	    std.attr <- c("tsp", "class", if(isA) "dim")
+        } else if(is.vector(object)
+	       || is.atomic(object)
+               ##f fails for formula:
+               ##f typeof(object) in {"symbol", "language"} =: is.symbolic(.):
+               ##f || (is.language(object) && !is.expression(object))
+               || (is.language(object) && !is.expression(object) && !any(cl == "formula")) ) {
+	    if(is.atomic(object)) {
+		##-- atomic:   numeric{dbl|int} complex character logical raw
+		mod <- substr(mode(object), 1, 4)
+		if(mod == "nume" && is.integer(object)) mod <- gettext("integer", domain = "R-utils")
+		else if(mod == "nume") mod <- gettext("numeric", domain = "R-utils")
+		else if(mod == "char") { mod <- gettext("character", domain = "R-utils"); char.like <- TRUE }
+		else if(mod == "comp") mod <- gettext("complex", domain = "R-utils")
+		else if(mod == "logi") mod <- gettext("logical", domain = "R-utils") #- else: keep 'logi'
+		if(is.array(object)) {
+		    le.str <- arrLenstr(object)
+		    if(m <- match("AsIs", cl, 0L)) ## workaround bad format.AsIs()
+			oldClass(object) <- cl[-m]
+                    std.attr <- "dim"
+		} else if(!is.null(names(object))) {
+		    if(mod == gettext("integer", domain = "R-utils") && is.integer(object)) mod <- gettext("Named integer", domain = "R-utils")
+		    else if(mod == gettext("numeric", domain = "R-utils") && !is.integer(object) && !has.class) mod <- gettext("Named numeric", domain = "R-utils")
+		    else if(mod == gettext("numeric", domain = "R-utils") && has.class) mod <- gettext("Named numeric", domain = "R-utils")
+		    else if(mod == gettext("character", domain = "R-utils")) mod <- gettext("Named character", domain = "R-utils")
+		    else if(mod == gettext("complex", domain = "R-utils"))  mod <- gettext("Named complex", domain = "R-utils")
+		    else if(mod == gettext("logical", domain = "R-utils"))  mod <- gettext("Named logical", domain = "R-utils")
+		    std.attr <- std.attr[std.attr != "names"]
+		}
+		if(has.class) {
+		    cl <- cl[1L] # and "forget" potential other classes
+		    if(cl != mod && substr(cl, 1L, nchar(mod)) != mod)
+			mod <- paste0("'",cl,"' ", mod)
+		    ## don't show the class *twice*
+		    std.attr <- c(std.attr, "class")
+		}
+		str1 <-
+		    if(le == 1 && !is.array(object)) paste(NULL, mod)
+		    else paste0(" ", mod, if(le>0)" ", le.str)
+	    } else { ##-- not atomic, but vector: #
+		mod <- typeof(object)#-- typeof(.) is more precise than mode!
+		str1 <- switch(mod,
+			       call = " call",
+			       language = " language",
+			       symbol = " symbol",
+			       expression = " ",# "expression(..)" by deParse(.)
+			       name = " name",
+			       ##not in R:argument = "",# .Argument(.) by deParse(.)
+			       ## in R (once):	comment.expression
+
+			       ## default :
+			       paste("		#>#>", mod, NULL)
+			       )
+	    }
 	} else if(typeof(object) %in%
 		  c("externalptr", "weakref", "environment", "bytecode")) {
 	    ## Careful here, we don't want to change pointer objects
@@ -553,13 +543,15 @@ str.default <-
 	    int.surv <- iSurv || is.integer(object)
 	    if(!int.surv) {
 		ob <- if(le > iv.len) object[seq_len(iv.len)] else object
-		ao <- abs(ob <- ob[!is.na(ob)])
+		ao <- abs(ob <- unclass(ob[!is.na(ob)]))
 	    }
-	    else if(iSurv)
+	    else if(iSurv) {
+		nc <- ncol(object)
 		le <- length(object <- as.character(object))
+	    }
 	    if(int.surv || (all(ao > 1e-10 | ao==0) && all(ao < 1e10| ao==0) &&
 			    all(abs(ob - signif(ob, digits.d)) <= 9e-16*ao))) {
-		if(!iSurv || di.[2L] == 2) # "Surv" : implemented as matrix
+		if(!iSurv || nc == 2L) # "Surv" : implemented as matrix
 		    ## use integer-like length
 		    v.len <- iv.len
 		format.fun <- formatNum

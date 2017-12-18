@@ -15,7 +15,7 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 `$cmd any-all.Rout		any-all.Rout.save`
 `$cmd arith.Rout		arith.Rout.save`
 `$cmd arith-true.Rout		arith-true.Rout.save`
-`$cmd array-subset.Rout		array-subset.Rout.save`
+#`$cmd array-subset.Rout		array-subset.Rout.save`
 `$cmd complex.Rout		complex.Rout.save`
 `$cmd datasets.Rout		datasets.Rout.save`
 `$cmd datetime.Rout		datetime.Rout.save`
@@ -35,7 +35,7 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 `$cmd reg-examples3.Rout	reg-examples3.Rout.save`
 `$cmd reg-IO.Rout		reg-IO.Rout.save`
 `$cmd reg-IO2.Rout		reg-IO2.Rout.save`
-`$cmd reg-plot.Rout		reg-plot.Rout.save`
+#`$cmd reg-plot.Rout		reg-plot.Rout.save`
  if [[ "$2" == "cp" ]]; then
  `$cmd reg-plot.pdf		reg-plot.pdf.save`
  `$cmd reg-plot-latin1.pdf	reg-plot-latin1.pdf.save`

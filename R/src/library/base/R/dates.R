@@ -194,7 +194,7 @@ Summary.Date <- function (..., na.rm)
 {
     ok <- switch(.Generic, max = , min = , range = TRUE, FALSE)
     if (!ok) stop(gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date")), domain = "R-base")
-   val <- NextMethod(.Generic)
+    val <- NextMethod(.Generic)
     class(val) <- oldClass(list(...)[[1L]])
     val
 }
@@ -202,7 +202,6 @@ Summary.Date <- function (..., na.rm)
 `[.Date` <- function(x, ..., drop = TRUE)
 {
     cl <- oldClass(x)
-    class(x) <- NULL
     val <- NextMethod("[")
     class(val) <- cl
     val
@@ -211,7 +210,6 @@ Summary.Date <- function (..., na.rm)
 `[[.Date` <- function(x, ..., drop = TRUE)
 {
     cl <- oldClass(x)
-    class(x) <- NULL
     val <- NextMethod("[[")
     class(val) <- cl
     val
@@ -222,7 +220,6 @@ Summary.Date <- function (..., na.rm)
     if(!length(value)) return(x)
     value <- unclass(as.Date(value))
     cl <- oldClass(x)
-    class(x) <- NULL
     x <- NextMethod(.Generic)
     class(x) <- cl
     x
@@ -431,7 +428,6 @@ quarters.Date <- function(x, ...)
 round.Date <- function(x, ...)
 {
     cl <- oldClass(x)
-    class(x) <- NULL
     val <- NextMethod()
     class(val) <- cl
     val
@@ -443,7 +439,7 @@ trunc.Date <- function(x, ...) round(x - 0.4999999)
 rep.Date <- function(x, ...)
 {
     y <- NextMethod()
-    structure(y, class="Date")
+    structure(y, class=oldClass(x))
 }
 
 diff.Date <- function (x, lag = 1L, differences = 1L, ...)

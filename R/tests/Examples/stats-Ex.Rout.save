@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-11-06 r997) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-11-20 r998) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-11-06 r73757) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-11-20 r73921) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -30,6 +30,7 @@ Type 'q()' to quit R.
 > library('stats')
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("AIC")
 > ### * AIC
@@ -3818,7 +3819,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x4d542c8>
+<environment: 0x1fd1df0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4816,7 +4817,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x5b5a420>
+<bytecode: 0x792deb8>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -5795,12 +5796,12 @@ dendrogram with 2 branches and 50 members total, at height 152.314
 > str(d3[2][[1]]) ## or the full
 List of 2 components
  $ :List of 2 components
-  ..$ :atomic [1:1] 13
+  ..$ : integer 13
   .. ..- attr(*, "label")= character "Illinois"
   .. ..- attr(*, "members")= integer 1
   .. ..- attr(*, "height")= numeric 0
   .. ..- attr(*, "leaf")= logical TRUE
-  ..$ :atomic [1:1] 32
+  ..$ : integer 32
   .. ..- attr(*, "label")= character "New York"
   .. ..- attr(*, "members")= integer 1
   .. ..- attr(*, "height")= numeric 0
@@ -5809,12 +5810,12 @@ List of 2 components
   ..- attr(*, "midpoint")= numeric 0.5
   ..- attr(*, "height")= numeric 6.24
  $ :List of 2 components
-  ..$ :atomic [1:1] 22
+  ..$ : integer 22
   .. ..- attr(*, "label")= character "Michigan"
   .. ..- attr(*, "members")= integer 1
   .. ..- attr(*, "height")= numeric 0
   .. ..- attr(*, "leaf")= logical TRUE
-  ..$ :atomic [1:1] 28
+  ..$ : integer 28
   .. ..- attr(*, "label")= character "Nevada"
   .. ..- attr(*, "members")= integer 1
   .. ..- attr(*, "height")= numeric 0
@@ -5828,18 +5829,18 @@ List of 2 components
 > str(d3[])
 List of 2 components
  $ :List of 2 components
-  ..$ :atomic [1:1] 8
+  ..$ : integer 8
   .. ..- attr(*, "members")= integer 1
   .. ..- attr(*, "height")= numeric 0
   .. ..- attr(*, "label")= character "Delaware"
   .. ..- attr(*, "leaf")= logical TRUE
   ..$ :List of 2 components
-  .. ..$ :atomic [1:1] 1
+  .. ..$ : integer 1
   .. .. ..- attr(*, "label")= character "Alabama"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
   .. .. ..- attr(*, "leaf")= logical TRUE
-  .. ..$ :atomic [1:1] 18
+  .. ..$ : integer 18
   .. .. ..- attr(*, "label")= character "Louisiana"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
@@ -5852,12 +5853,12 @@ List of 2 components
   ..- attr(*, "height")= numeric 16.9
  $ :List of 2 components
   ..$ :List of 2 components
-  .. ..$ :atomic [1:1] 13
+  .. ..$ : integer 13
   .. .. ..- attr(*, "label")= character "Illinois"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
   .. .. ..- attr(*, "leaf")= logical TRUE
-  .. ..$ :atomic [1:1] 32
+  .. ..$ : integer 32
   .. .. ..- attr(*, "label")= character "New York"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
@@ -5866,12 +5867,12 @@ List of 2 components
   .. ..- attr(*, "midpoint")= numeric 0.5
   .. ..- attr(*, "height")= numeric 6.24
   ..$ :List of 2 components
-  .. ..$ :atomic [1:1] 22
+  .. ..$ : integer 22
   .. .. ..- attr(*, "label")= character "Michigan"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
   .. .. ..- attr(*, "leaf")= logical TRUE
-  .. ..$ :atomic [1:1] 28
+  .. ..$ : integer 28
   .. .. ..- attr(*, "label")= character "Nevada"
   .. .. ..- attr(*, "members")= integer 1
   .. .. ..- attr(*, "height")= numeric 0
@@ -7397,7 +7398,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x57a8110>
+<environment: 0x4bd9fd0>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12048,14 +12049,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x189d9c8>
-<environment: 0x188e030>
+<bytecode: 0x2a151a8>
+<environment: 0x29d81d0>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x189db18>
-<environment: 0x188e030>
+<bytecode: 0x2a15330>
+<environment: 0x29d81d0>
 
 > 
 > 
@@ -12205,6 +12206,37 @@ NOTE: n is number in *each* group
 NOTE: n is number in *each* group
 
 >                                                  ## => n = 10451937
+> try(
++  power.prop.test(n=30, p1=0.90, p2=NULL, power=0.8)
++ ) # a warning  (which may become an error)
+Warning in command 'power.prop.test(n = 30, p1 = 0.9, p2 = NULL, power = 0.8)':
+  No p2 in in [p1, 1] can be found to achieve the desired power
+
+     Two-sample comparison of proportions power calculation 
+
+              n = 30
+             p1 = 0.9
+             p2 = 1.030182
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
+> ## Reason:
+> power.prop.test(      p1=0.90, p2= 1.0, power=0.8) ##-> n = 73.37
+
+     Two-sample comparison of proportions power calculation 
+
+              n = 73.37427
+             p1 = 0.9
+             p2 = 1
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
 > 
 > 
 > 
@@ -16131,8 +16163,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x2342240>
-<environment: 0x61b33a0>
+<bytecode: 0x58e2ef0>
+<environment: 0x690b3d8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18454,9 +18486,10 @@ Number of Fisher Scoring iterations: 6
 > base::options(contrasts = c(unordered = "contr.treatment",ordered = "contr.poly"))
 > ### * <FOOTER>
 > ###
+> cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.122 0.068 4.19 0 0 
+Time elapsed:  4.1 0.1 4.201 0 0 
 > grDevices::dev.off()
 null device 
           1 

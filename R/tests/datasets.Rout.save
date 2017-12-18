@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2017-11-06 r997) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2017-11-20 r998) -- "Internationalized Version of R"
 Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-11-06 r73757) -- "Unsuffered Consequences"
+R Under development (unstable) (2017-11-20 r73921) -- "Unsuffered Consequences"
 Copyright (C) 2017 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -107,7 +107,7 @@ Classes 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':	176 o
  $ optden: numeric  0.086 0.269 0.446 0.538 0.626 0.782
 
 ** structure of dataset HairEyeColor
- table [1:4, 1:4, 1:2] 32 53 10 3 11 50 10 30 10 25 ...
+ 'table' numeric [1:4, 1:4, 1:2] 32 53 10 3 11 50 10 30 10 25 ...
  - attr(*, "dimnames")=List of 3 components
   ..$ Hair: character [1:4] "Black" "Brown" "Red" "Blond"
   ..$ Eye : character [1:4] "Brown" "Blue" "Hazel" "Green"
@@ -237,7 +237,7 @@ Classes 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':	132 o
   ..$ y: character "(mg/l)"
 
 ** structure of dataset Titanic
- table [1:4, 1:2, 1:2, 1:2] 0 0 35 0 0 0 17 0 118 154 ...
+ 'table' numeric [1:4, 1:2, 1:2, 1:2] 0 0 35 0 0 0 17 0 118 154 ...
  - attr(*, "dimnames")=List of 4 components
   ..$ Class   : character [1:4] "1st" "2nd" "3rd" "Crew"
   ..$ Sex     : character [1:2] "Male" "Female"
@@ -251,7 +251,7 @@ Classes 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':	132 o
  $ dose: numeric  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
 
 ** structure of dataset UCBAdmissions
- table [1:2, 1:2, 1:6] 512 313 89 19 353 207 17 8 120 205 ...
+ 'table' numeric [1:2, 1:2, 1:6] 512 313 89 19 353 207 17 8 120 205 ...
  - attr(*, "dimnames")=List of 3 components
   ..$ Admit : character [1:2] "Admitted" "Rejected"
   ..$ Gender: character [1:2] "Male" "Female"
@@ -295,12 +295,12 @@ Classes 'nfnGroupedData', 'nfGroupedData', 'groupedData' and 'data.frame':	132 o
   ..$ : character [1:5] "1940" "1945" "1950" "1955" ...
 
 ** structure of dataset UScitiesD
-Class 'dist' atomic [1:45] 587 1212 701 1936 604 748 2139 2182 543 920 ...
-  ..- attr(*, "Labels")= character [1:10] "Atlanta" "Chicago" "Denver" "Houston" ...
-  ..- attr(*, "Size")= integer 10
-  ..- attr(*, "call")= language as.dist.default(m = t(cities.mat))
-  ..- attr(*, "Diag")= logical FALSE
-  ..- attr(*, "Upper")= logical FALSE
+ 'dist' integer [1:45] 587 1212 701 1936 604 748 2139 2182 543 920 ...
+ - attr(*, "Labels")= character [1:10] "Atlanta" "Chicago" "Denver" "Houston" ...
+ - attr(*, "Size")= integer 10
+ - attr(*, "call")= language as.dist.default(m = t(cities.mat))
+ - attr(*, "Diag")= logical FALSE
+ - attr(*, "Upper")= logical FALSE
 
 ** structure of dataset VADeaths
  numeric [1:5, 1:4] 11.7 18.1 26.9 41 66 8.7 11.7 20.3 30.9 54.3 ...
@@ -425,9 +425,9 @@ List of 3 components
   ..$ : character [1:11] "ATS" "BEF" "DEM" "ESP" ...
 
 ** structure of dataset eurodist
-Class 'dist' atomic [1:210] 3313 2963 3175 3339 2762 ...
-  ..- attr(*, "Size")= numeric 21
-  ..- attr(*, "Labels")= character [1:21] "Athens" "Barcelona" "Brussels" "Calais" ...
+ 'dist' numeric [1:210] 3313 2963 3175 3339 2762 ...
+ - attr(*, "Size")= numeric 21
+ - attr(*, "Labels")= character [1:21] "Athens" "Barcelona" "Brussels" "Calais" ...
 
 ** structure of dataset faithful
 'data.frame':	272 observations of 2 variables:

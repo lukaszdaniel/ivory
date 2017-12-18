@@ -16,8 +16,8 @@ e158337bb4c5753bee08025bb45c9901 *man/read.arff.Rd
 3488df6faab757f05c8c4967d77b2100 *man/write.foreign.Rd
 f12b27b4608118b61146fab29f4ba101 *man/write.dbf.Rd
 23230f6ef6d4252d57567773a3f09154 *BUGS
-700c3ecacf72b4ef40bb0daab8796039 *ChangeLog
-036ed4a1107e7441d07a5b5ee6701cf0 *DESCRIPTION
+11f63077bf5e3dfa6c725694fef48cfe *ChangeLog
+20a74d10a94b77709a4464b0013923ef *DESCRIPTION
 2cffbd4d8725236fffc140e6021c66d5 *po/R-fr.po
 6b7588b188eca8dcf39fa96c5ce564f8 *po/R-de.po
 20c601aa843f0056831a9fc2767c7e30 *po/R-pl.po
@@ -42,7 +42,7 @@ efd25b6076bba3a05fcc2af925e92a80 *inst/COPYRIGHTS
 3335f0e1dd6812968776cc757a22ea78 *inst/files/Iris.syd
 46e22eae53d3ab8456a97675f435cb61 *inst/files/testdata.sav
 7528d02f1dc494b8518dde030e27f2cd *tests/stata8mac.dta
-0481d31703c00306afb2fe074d996386 *tests/spss.Rout.save
+a241227dcb01494f60af92cc85f426c5 *tests/spss.Rout.save
 4913d4bc9f14ed510c17ce93ff8de409 *tests/pbc.por
 8c6bf83b7d02fca6e8532350b36d18b7 *tests/octave.Rout.save
 859e5cbbd74fd94775c2c7f111ae2d71 *tests/ex1-51.mtp

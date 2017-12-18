@@ -28,7 +28,26 @@
 ## be what commandArgs(TRUE) would return, that is a character vector
 ## of (space-delimited) terms that would be passed to R CMD INSTALL.  E.g.
 ##
-## tools:::.install_packages(c("--preclean", "--no-multiarch", "tree"))
+if(FALSE) {
+    tools:::.install_packages(c("--preclean", "--no-multiarch",
+				"tree"))
+    ## or
+
+    status <- tryCatch(
+	tools:::.install_packages(c("--no-clean-on-error", "--no-multiarch",
+				    "tree"), no.q = TRUE)
+      , error = function(e) as.numeric(sub(".* exit status *", "",
+					   conditionMessage(e))))
+    ## or
+
+    debugonce(tools:::.install_packages)
+    tools:::.install_packages(c("-c", "--debug", "--no-clean-on-error", "--no-multiarch",
+                                "tree"))
+    ## and then (after about 40 x [Enter]) when do_install is defined:
+    debug(do_install) ## and 'c'
+}
+
+
 
 ##' @return ...
 .install_packages <- function(args = NULL, no.q = interactive())
@@ -226,7 +245,7 @@
     }
 
     ## used for LazyData, KeepSource, ByteCompile, Biarch
-    parse_description_field <- function(desc, field, default = TRUE)
+    parse_description_field <- function(desc, field, default)
     {
         tmp <- desc[field]
         if (is.na(tmp)) default

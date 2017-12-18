@@ -469,12 +469,6 @@ stopifnot(
 ## length 0 and seg.faulted in R <= 3.3.2
 
 
-## PR#17186 - Sys.timezone() on some Debian-derived platforms
-(S.t <- Sys.timezone())
-if(is.na(S.t) || !nzchar(S.t)) stop("could not get timezone")
-## has been NA_character_  in Ubuntu 14.04.5 LTS
-
-
 ## format()ing invalid hand-constructed  POSIXlt  objects
 d <- as.POSIXlt("2016-12-06"); d$zone <- 1
 tools::assertError(format(d))
@@ -531,8 +525,8 @@ for(ob0 in list(I(character()), I(0[0]), I(0L[0]),
                 structure(character(), class="CH"))) {
     stopifnot(identical(ob0, pmax(ob0, ob0)),
               identical(ob0, pmin(ob0, ob0)),
-              identical(ob0, pmin(ob0, "")),
-              identical(ob0, pmax(ob0, "")))
+              identical(ob0, pmin(ob0, FALSE)),
+              identical(ob0, pmax(ob0, FALSE)))
 }
 ## pmin()/pmax() of matching numeric data frames
 mUSJ <- data.matrix(dUSJ <- USJudgeRatings)
@@ -1284,6 +1278,101 @@ stopifnot(identical(2, x[[quote(a)]]),
 ## range(<non-numeric>, finite = TRUE)
 stopifnot(identical(0:1, range(c(NA,TRUE,FALSE), finite=TRUE)))
 ## gave NA's in R <= 3.4.2
+
+
+## `[<-` : coercion should happen also in 0-length case:
+x1 <- x0 <- x <- n0 <- numeric(); x0[] <- character(); x1[1[0]] <- character()
+x[] <- numeric()
+stopifnot(identical(x0, character()), identical(x1, x0), identical(x, n0))
+## x0, x1 had remained 'numeric()' in  R <= 3.4.x
+x[1] <- numeric(); stopifnot(identical(x, n0))
+## had always worked; just checking
+NUL <- NULL
+NUL[3] <- integer(0); NUL[,2] <- character() ; NUL[3,4,5] <- list()
+stopifnot(is.null(NUL))
+## above had failed for one day in R-devel; next one always worked
+NUL <- NULL; NUL[character()] <- "A"
+stopifnot(identical(NUL, character()))
+## 0-0-length subassignment should not change atomic to list:
+ec <- e0 <- matrix(, 0, 4) # a  0 x 4  matrix
+ec[,1:2] <- list()
+x <- 1[0]; x[1:2] <- list()
+a <- a0 <- array("", 0:2); a[,1,] <- expression()
+stopifnot(identical(ec, e0)
+        , identical(x, 1[0])
+        , identical(a, a0)
+)## failed for a couple of days in R-devel
+
+
+## as.character(<list>) should keep names in some nested cases
+cl <-     'list(list(a = 1, "B", ch = "CH", L = list(f = 7)))'
+E <- expression(list(a = 1, "B", ch = "CH", L = list(f = 7)))
+str(ll <- eval(parse(text = cl)))
+stopifnot(
+    identical(eval(E), ll[[1]])
+  , identical(as.character(E), as.character(ll) -> cll)
+  , grepl(cll, cl, fixed=TRUE) # currently, cl == paste0("list(", cll, ")")
+)
+## the last two have failed in R-devel for a while
+stopifnot(
+    identical(as.character(list(list(one = 1))), "list(one = 1)")
+  , identical(as.character(list(  c (one = 1))),    "c(one = 1)")
+)## the last gave "1" in all previous versions of R
+
+
+## as.matrix( <data.frame in d.fr.> ) -- prompted by Patrick Perry, R-devel 2017-11-30
+dm <- dd <- d1 <- data.frame(n = 1:3)
+dd[[1]] <- d1            # -> 'dd' has "n" twice
+dm[[1]] <- as.matrix(d1) #    (ditto)
+d. <- structure(list(d1), class = "data.frame", row.names = c(NA, -3L))
+d2. <- data.frame(ch = c("A","b"), m = 10:11)
+d2  <- data.frame(V = 1:2); d2$V <- d2.; d2
+d3 <- structure(list(A = 1:2, HH = cbind(c(.5, 1))),
+                class = "data.frame", row.names=c(NA,-2L))
+d3.2 <- d3; d3.2 $HH <- diag(2)
+d3.2.<- d3; d3.2.$HH <- matrix(1:4, 2,2, dimnames=list(NULL,c("x","y")))
+d0 <- as.data.frame(m0 <- matrix(,2,0))
+d3.0 <- d3; d3.0 $HH <- m0
+d3.d0<- d3; d3.d0$HH <- d0
+stopifnot(identical(unname(as.matrix(d0)), m0)
+	, identical(capture.output(dd),
+		    capture.output(d.))
+	, identical(as.matrix(d3.0 ), array(1:2, dim = 2:1, dimnames = list(NULL, "A")) -> m21)
+	, identical(as.matrix(d3.d0), m21)
+	, identical(as.matrix(dd), (cbind(n = 1:3) -> m.))
+	, identical(as.matrix(d.), m.)
+	, identical(as.matrix(d2), array(c("A", "b", "10", "11"), c(2L, 2L),
+					 dimnames = list(NULL, c("V.ch", "V.m"))))
+	, identical(as.matrix(dm), m.)
+	, identical(as.matrix(d1), m.)
+	, identical(colnames(m2 <- as.matrix(d2)), c("V.ch", "V.m"))
+	, identical(colnames(as.matrix(d3   )), colnames(d3   )) # failed a few days
+	, identical(colnames(as.matrix(d3.2 )), colnames(format(d3.2 )))
+	, identical(colnames(as.matrix(d3.2 )), c("A", paste("HH",1:2,sep=".")))
+	, identical(colnames(as.matrix(d3.2.)), colnames(format(d3.2.)))
+	, identical(colnames(as.matrix(d3.2.)), c("A", "HH.x", "HH.y"))
+)
+## the first  5  as.matrix() have failed at least since R-1.9.1, 2004
+
+
+## Impossible conditions should at least give a warning - PR#17345
+tools::assertWarning(
+           power.prop.test(n=30, p1=0.90, p2=NULL, power=0.8)
+       ) ## may give error in future
+## silently gave p2 = 1.03 > 1 in R versions v, 3.1.3 <= v <= 3.4.3
+
+
+## removeSource() [for a function w/ body containing NULL]:
+op <- options(keep.source=TRUE)
+bod <- quote( foo(x, NULL) )
+testf  <- function(x) { }; body(testf)[[2]] <- bod
+testf
+testfN <- removeSource(testf)
+stopifnot(identical(body(testf )[[2]], bod)
+        , identical(body(testfN)[[2]], bod)
+)
+options(op)
+## erronously changed  '(x, NULL)'  to  '(x)'  in R version <= 3.4.3
 
 
 
