@@ -522,6 +522,16 @@ pckgDs> ##D
 pckgDs> ##D if(packageVersion("MASS") < "7.3.29")
 pckgDs> ##D   message("you need to update 'MASS'")
 pckgDs> ## End (Don't test)
+pckgDs> pu <- packageDate("utils")
+
+pckgDs> ## Don't test: 
+pckgDs> ##D str(pu)
+pckgDs> ## End (Don't test)
+pckgDs> stopifnot(identical(pu, packageDate(desc = packageDescription("utils"))),
+pckgDs+           identical(pu, packageDate("stats"))) # as "utils" and "stats" are
+
+pckgDs>                                    # both 'base R' and "Built" at same time
+pckgDs> 
 pckgDs> 
 pckgDs> 
 > 

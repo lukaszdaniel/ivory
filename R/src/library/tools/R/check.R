@@ -2415,41 +2415,57 @@ setRlibs <-
             }
             if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
+
+        ## Check include directives for use of R_HOME which may contain
+        ## spaces for which there is no portable way to quote/escape.
+        all_files <- dir(".", pattern = "^Makefile*", recursive = TRUE)
+        all_files <- unique(sort(all_files))
+        if(length(all_files)) {
+            checkingLog(Log, gettext("Checking for include directives in Makefiles ...", domain = "R-tools"))
+            bad_lines <-
+                lapply(all_files,
+                       function(f) {
+                           s <- readLines(f, warn = FALSE)
+                           grep("^include .*R_HOME", s, value = TRUE)
+                       })
+            bad_files <- all_files[lengths(bad_lines) > 0L]
+            if(length(bad_files)) {
+                noteLog(Log,
+                        gettext("Found the following Makefile(s) with an include directive with a pathname using R_HOME:", domain = "R-tools"))
+                printLog0(Log, .format_lines_with_indent(bad_files),
+                          "\n")
+                msg <-
+                    gettext("Even though not recommended, variable R_HOME may contain spaces.\nMakefile directives use space as a separator and there is no portable\nway to quote/escape the space in Make rules and directives.  However,\none can and should quote pathnames when passed from Makefile to the\nshell, and this can be done specifically when invoking Make recursively.\nIt is therefore recommended to use the Make '-f' option to include files\nin directories specified using R_HOME. This option can be specified\nmultiple times to include multiple Makefiles.  Note that 'Makeconf' is\nincluded automatically into top-level makefile of a package.\nMore information can be found in 'Writing R Extensions'.", domain = "R-tools")
+                printLog0(Log, paste(msg, collapse = "\n"), "\n")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+        }
+
     }
 
     check_src <- function() {
         Check_pragmas <- Sys.getenv("_R_CHECK_PRAGMAS_", "FALSE")
         if(config_val_to_logical(Check_pragmas) &&
-           any(dir.exists(c("src", "inst/include")))) { #LUKI
-            checkingLog(Log, "pragmas in C/C++ headers and code")
+           any(dir.exists(c("src", "inst/include")))) {
+            checkingLog(Log, gettext("checking for pragmas in C/C++ headers and code ...", domain = "R-tools"))
             ans <- .check_pragmas('.')
             if(length(ans)) {
                 if(length(warn <- attr(ans, "warn")))
                     {
                         warningLog(Log)
-                        msg <- if(length(warn) == 1L) #LUKI
-                            "File which contains pragma(s) suppressing important diagnostics:"
-                        else
-                            "Files which contain pragma(s) suppressing important diagnostics:"
+                        msg <- ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics:", "Files which contain pragma(s) suppressing important diagnostics:", domain = "R-tools")
                         msg <- c(msg, .pretty_format(warn))
                         rest <- setdiff(ans, warn)
                         if(length(rest)) {
-                            msg <- c(msg, if(length(rest) == 1L) #LUKI
-                                     "File which contains pragma(s) suppressing diagnostics:"
-                            else
-                                     "Files which contain pragma(s) suppressing diagnostics:")
+                            msg <- c(msg, ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools"))
                             msg <- c(msg, .pretty_format(rest))
                         }
                    } else {
                         noteLog(Log)
-                        msg <- if(length(ans) == 1L) #LUKI
-                            "File which contains pragma(s) suppressing diagnostics:"
-                        else
-                            "Files which contain pragma(s) suppressing diagnostics:"
+                        msg <- ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
                         msg <- c(msg, .pretty_format(ans))
                     }
                 printLog0(Log, paste(c(msg,""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         Check_flags <- Sys.getenv("_R_CHECK_COMPILATION_FLAGS_", "FALSE")
@@ -2458,8 +2474,8 @@ setRlibs <-
                 substr(install, 7L, 1000L)
             else
                 file.path(pkgoutdir, "00install.out")
-            if (file.exists(instlog) && dir.exists('src')) {#LUKI
-                checkingLog(Log, "compilation flags used")
+            if (file.exists(instlog) && dir.exists('src')) {
+                checkingLog(Log, "Checking for compilation flags used ...")
                 lines <- readLines(instlog, warn = FALSE)
                 poss <- grep(" -W", lines,  useBytes = TRUE, value = TRUE)
                 tokens <- unlist(strsplit(poss, " ", perl = TRUE,
@@ -2481,9 +2497,9 @@ setRlibs <-
                              .pretty_format(sort(warns)),
                              "including flag(s) suppressing warnings")
                     printLog0(Log, paste(c(msg,""), collapse = "\n"))
-                } else if(length(warns)) { #LUKI
+                } else if(length(warns)) {
                     warningLog(Log)  # might consider NOTE instead
-                    msg <- c("Compilation used the following non-portable flag(s):",
+                    msg <- c(gettext("Compilation used the following non-portable flag(s):", domain = "R-tools"),
                              .pretty_format(sort(warns)))
                     printLog0(Log, paste(c(msg,""), collapse = "\n"))
                 } else

@@ -236,6 +236,12 @@
       prints \code{"atomic"}.  This is a slight non-back-compatible
       change producing typically both more informative and shorter
       output.
+
+      \item \code{write.dcf()} gets optional argument \code{useBytes}.
+
+      \item New function \code{packageDate()} which tries to get a valid
+      \code{"Date"} object from a package \file{DESCRIPTION} file,
+      thanks to suggestions in \PR{17324}.
     }
   }
 

@@ -8316,10 +8316,7 @@ function(x)
 print.check_pragmas <- function(x, ...)
 {
     if(length(x)) {
-        if(length(x) == 1L) #LUKI
-            writeLines("File which contain pragma(s) suppressing diagnostics:")
-        else
-            writeLines("Files which contain pragma(s) suppressing diagnostics:")
+        writeLines(ngettext(length(x), "File which contain pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools" ))
         .pretty_print(x)
     }
     x
