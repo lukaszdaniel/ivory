@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-27 22:34+0200\n"
+"POT-Creation-Date: 2017-12-20 10:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,162 +17,168 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: fork.c:80
+#: fork.c:181
 #, c-format
-msgid "removing child %d\n"
+msgid "unable to terminate child process: %s"
 msgstr ""
 
-#: fork.c:98
+#: fork.c:208
+#, c-format
+msgid "unable to terminate child: %s"
+msgstr ""
+
+#: fork.c:238
 #, c-format
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.c:152
+#: fork.c:287 fork.c:555
+msgid "memory allocation error"
+msgstr ""
+
+#: fork.c:337 fork.c:341 fork.c:345
+#, c-format
+msgid "invalid '%s' argument"
+msgstr ""
+
+#: fork.c:401
+msgid ""
+"Error while shutting down parallel: unable to terminate some child "
+"processes\n"
+msgstr ""
+
+#: fork.c:433
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr ""
 
-#: fork.c:167 fork.c:202
-#, c-format
-msgid "child %d terminated with %d\n"
-msgstr ""
-
-#: fork.c:169 fork.c:204
-#, c-format
-msgid "child %d terminated by signal %d\n"
-msgstr ""
-
-#: fork.c:249 fork.c:252
+#: fork.c:489 fork.c:492
 msgid "unable to create a pipe"
 msgstr ""
 
-#: fork.c:255
+#: fork.c:495
 #, c-format
 msgid "parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"
 msgstr ""
 
-#: fork.c:270
+#: fork.c:514
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr ""
 
-#: fork.c:297
+#: fork.c:549
 #, c-format
 msgid "child process %d started\n"
 msgstr ""
 
-#: fork.c:312
-#, c-format
-msgid "parent registers new child %d\n"
-msgstr ""
-
-#: fork.c:316
-msgid "memory allocation error"
-msgstr ""
-
-#: fork.c:357
+#: fork.c:618
 msgid "descriptors must be integers"
 msgstr ""
 
-#: fork.c:371
+#: fork.c:682
 msgid "only children can send data to the master process"
 msgstr ""
 
-#: fork.c:373
+#: fork.c:684
 msgid "there is no pipe to the master process"
 msgstr ""
 
-#: fork.c:375
+#: fork.c:686
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 
-#: fork.c:379
+#: fork.c:690
 #, c-format
-msgid "child %d: send_master (%d bytes)\n"
+msgid "child %d: send_master (%lld bytes)\n"
 msgstr ""
 
-#: fork.c:384 fork.c:392 fork.c:717
+#: fork.c:695 fork.c:703 fork.c:1079
 msgid "write error, closing pipe to the master"
 msgstr ""
 
-#: fork.c:402
+#: fork.c:713
 msgid "only the master process can send data to a child process"
 msgstr ""
 
-#: fork.c:403
+#: fork.c:714
 msgid "what must be a raw vector"
-msgstr ""
-
-#: fork.c:409
-#, c-format
-msgid "child %d does not exist"
-msgstr ""
-
-#: fork.c:415
-msgid "write error"
-msgstr ""
-
-#: fork.c:483 fork.c:607
-#, c-format
-msgid "error '%s' in select"
-msgstr ""
-
-#: fork.c:497
-#, c-format
-msgid " - read select %d children: "
-msgstr ""
-
-#: fork.c:520
-#, c-format
-msgid " read_child_ci(%d) - read length returned %d\n"
-msgstr ""
-
-#: fork.c:535
-#, c-format
-msgid " read_child_ci(%d) - read %d at %d returned %d\n"
-msgstr ""
-
-#: fork.c:568
-#, c-format
-msgid "read_child(%d) - pid is not in the list of children\n"
-msgstr ""
-
-#: fork.c:699
-msgid "'mckill' failed"
-msgstr ""
-
-#: fork.c:707
-#, c-format
-msgid "child %d: 'mcexit' called\n"
-msgstr ""
-
-#: fork.c:709
-msgid "'mcexit' can only be used in a child process"
 msgstr ""
 
 #: fork.c:721
 #, c-format
-msgid "child %d is waiting for permission to exit\n"
+msgid "child %d does not exist"
 msgstr ""
 
 #: fork.c:727
+msgid "write error"
+msgstr ""
+
+#: fork.c:780
+#, c-format
+msgid "cannot wait for child %d as it does not exist"
+msgstr ""
+
+#: fork.c:847 fork.c:970
+#, c-format
+msgid "error '%s' in select"
+msgstr ""
+
+#: fork.c:853
+#, c-format
+msgid " - read select %d children: "
+msgstr ""
+
+#: fork.c:883
+#, c-format
+msgid " read_child_ci(%d) - read length returned %lld\n"
+msgstr ""
+
+#: fork.c:896
+#, c-format
+msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
+msgstr ""
+
+#: fork.c:927
+#, c-format
+msgid "read_child(%d) - pid is not in the list of children\n"
+msgstr ""
+
+#: fork.c:1061
+msgid "'mckill' failed"
+msgstr ""
+
+#: fork.c:1069
+#, c-format
+msgid "child %d: 'mcexit' called\n"
+msgstr ""
+
+#: fork.c:1071
+msgid "'mcexit' can only be used in a child process"
+msgstr ""
+
+#: fork.c:1083
+#, c-format
+msgid "child %d is waiting for permission to exit\n"
+msgstr ""
+
+#: fork.c:1090
 #, c-format
 msgid "child %d: exiting\n"
 msgstr ""
 
-#: fork.c:730
+#: fork.c:1093
 msgid "'mcexit()' function failed"
 msgstr ""
 
-#: fork.c:759 fork.c:768
+#: fork.c:1122 fork.c:1131
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:779
+#: fork.c:1142
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:802
+#: fork.c:1165
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

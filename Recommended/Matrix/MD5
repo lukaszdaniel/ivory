@@ -289,7 +289,7 @@ d5e42272817bc3082d5860d296abba02 *R/nnzero.R
 7586556183d8d0a3c7979702254f93c1 *data/KNex.R
 10b959df8869ec28b992f2ff6dad2991 *data/USCounties.R
 d3528bc0cd82f248821809f253bffe35 *data/CAex.R
-a34f7059c88db13c0786aa761e09418b *Changes
+d1f207e35696eb927ce9ef4afcd70a21 *Changes
 68c429cbb92387ef9ce70dac75a6e934 *src/sparseQR.h
 b6ea652eed1988974dec16b9cb9a35c1 *src/chm_common.h
 1936bcd15e8986e60f7f8c325a4414dd *src/scripts/0get-SuiteSparse.sh

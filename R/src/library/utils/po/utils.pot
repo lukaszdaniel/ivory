@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46+0200\n"
+"POT-Creation-Date: 2017-12-20 10:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,12 +107,12 @@ msgstr ""
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr ""
 
-#: io.c:1146
+#: io.c:1143
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.c:1164
+#: io.c:1160
 msgid "corrupt matrix -- dims not not match length"
 msgstr ""
 

@@ -1432,21 +1432,17 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    stop("survfitTurnbull not appropriate for counting process data")
 ---
 > 	    stop("'survfitTurnbull()' is not appropriate for counting process data")
-207,209c206,207
+194,196c193,194
 <                 cat("\n Iteration = ", iter, "\n")
 < 		cat("survival=",
 < 		    format(round(tfit$surv[tfit$n.event>0],3)),  "\n")
 ---
 >                 cat("\n ", gettextf("Iteration = %d", iter, domain = "R-survival"), "\n", sep = "")
 > 		cat("survival=", format(round(tfit$surv[tfit$n.event>0],3)),  "\n")
-245c243
+231c229
 <     for (i in 1:nstrat) {
 ---
 >     for (i in seq_len(nstrat)) {
-248c246
-< 	time[[i]]   <- approx(1:length(fnumeric), fnumeric, tfit$time)$y
----
-> 	time[[i]]   <- approx(seq_len(length(fnumeric)), fnumeric, tfit$time)$y
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfitms.R Recommended/survival/R/survfitms.R
 20c20
 <             stop("summary.survfit can only be used for survfit objects")
@@ -1456,116 +1452,116 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-80c80
+81c81
 <                 sindx <- rep(1:nstrat, fit$strata)
 ---
 >                 sindx <- rep(seq_len(nstrat), fit$strata)
-83c83
+84c84
 <                         fit[[i]] <- unlist(sapply(1:nstrat, function(j) 
 ---
 >                         fit[[i]] <- unlist(sapply(seq_len(nstrat), function(j) 
-88c88
+89c89
 <                 fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
 ---
 >                 fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
-176c176
+177c177
 <             for (i in 1:nstrat) 
 ---
 >             for (i in seq_len(nstrat)) 
-192c192
+193c193
 <         fit$strata <- factor(rep(1:nstrat, fit$strata), 1:nstrat,
 ---
 >         fit$strata <- factor(rep(seq_len(nstrat), fit$strata), seq_len(nstrat),
-203c203
+204c204
 <             stop("summary.survfitms can only be used for survfitms objects")
 ---
 >             stop("'summary.survfitms()' can only be used for objects of class \"survfitms\"")
-218c218
+219c219
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-226c226
+227c227
 <         if (!is.numeric(times)) stop ("times must be numeric")
 ---
 >         if (!is.numeric(times)) stop(gettextf("'%s' argument must be numeric", "times"))
-232c232
+233c233
 <         sindx <- rep(1:nstrat, fit$strata)
 ---
 >         sindx <- rep(seq_len(nstrat), fit$strata)
-267c267
+269c269
 <                 sindx <- rep(1:nstrat, fit$strata)
 ---
 >                 sindx <- rep(seq_len(nstrat), fit$strata)
-270c270
+272c272
 <                         fit[[i]] <- unlist(sapply(1:nstrat, function(j) 
 ---
 >                         fit[[i]] <- unlist(sapply(seq_len(nstrat), function(j) 
-275c275
+277c277
 <                 fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
 ---
 >                 fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
-363c363
+365c365
 <             for (i in 1:nstrat) 
 ---
 >             for (i in seq_len(nstrat)) 
-383c383
+385c385
 <         cat("Call: ")
 ---
 >         cat(gettext("Call:", domain = "R-survival"))
-401c401
+403c403
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-415,417c415,416
+417,419c417,418
 <              cat("   *mean time in state, restricted (max time =", 
 <                  format(etime, ...), ")\n")
 <         else cat("   *mean time in state, restricted (per curve cutoff)\n")
 ---
 >              cat(gettextf("   *mean time in state, restricted (max time = %s)\n", format(etime, ...), domain = "R-survival"))
 >         else cat(gettextf("   *mean time in state, restricted (per curve cutoff)\n", domain = "R-survival"))
-425c424
+427c426
 <         igrp <- rep(1:ngrp, x$strata)
 ---
 >         igrp <- rep(seq_len(ngrp), x$strata)
-438c437
+440c439
 <         dimnames(nevent) <- list(rname, x$states[1:nc])
 ---
 >         dimnames(nevent) <- list(rname, x$states[seq_len(nc)])
-447c446
+449c448
 <     outmat[1:length(nevent), 2] <- c(nevent)
 ---
 >     outmat[seq_along(nevent), 2] <- c(nevent)
-462c461
+464c463
 <         for (i in 1:ngrp) {
 ---
 >         for (i in seq_len(ngrp)) {
-472c471
+474c473
 <             if (length(delta) > nrow(temp)) delta <- delta[1:nrow(temp)]
 ---
 >             if (length(delta) > nrow(temp)) delta <- delta[seq_len(nrow(temp))]
-506c505
+508c507
 <         temp <- 1:length(target)
 ---
 >         temp <- seq_along(target)
-527c526
+529c528
 <         i2 <- 1:n
 ---
 >         i2 <- seq_len(n)
-533c532
+535c534
 <             stop("subscript out of bounds")
 ---
 >             stop("subscript is out of bounds")
-536,538c535
+538,540c537
 <             stop(paste("strata", 
 <                        paste(i[is.na(indx)], collapse=' '),
 <                        'not matched'))
 ---
 >             stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse=' ')))
-542c539
+544c541
 <         temp <- rep(1:length(x$strata), x$strata)
 ---
 >         temp <- rep(seq_along(x$strata), x$strata)
-552c549
+554c551
 <             stop("subscript out of bounds", j[is.na(indx)])
 ---
 >             stop("subscript is out of bounds")
@@ -1837,18 +1833,18 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             for (j in 1:nfix) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
 ---
 >             for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/inst/NEWS.Rd Recommended/survival/inst/NEWS.Rd
-460c460
-< 2    \item Change code in the coxpenal.fit routine: the use of a vector of
----
->     \item Change code in the coxpenal.fit routine: the use of a vector of
 Only in Recommended/survival/inst: po
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/agreg.Rnw Recommended/survival/noweb/agreg.Rnw
 74c74
 < 	x <- matrix(as.double(1:n), ncol=1)  #keep the .C call happy
 ---
 > 	x <- matrix(as.double(seq_len(n)), ncol=1)  #keep the .C call happy
-139,141c139,140
+134,135c134
+<         stop("routine failed due to numeric overflow.",
+<              "This should never happen.  Please contact the author.")   
+---
+>         stop("routine failed due to numeric overflow. This should never happen. Please contact the author.")
+142,144c141,142
 <             warning(paste("Loglik converged before variable ",
 <                           paste((1:nvar)[infs],collapse=","),
 < 				      "; beta may be infinite. "))
@@ -2328,78 +2324,78 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-212c210
+213c211
 <             for (i in 1:nstrat) 
 ---
 >             for (i in seq_len(nstrat)) 
-228c226
+229c227
 <         fit$strata <- factor(rep(1:nstrat, fit$strata), 1:nstrat,
 ---
 >         fit$strata <- factor(rep(seq_len(nstrat), fit$strata), seq_len(nstrat),
-257c255
+258c256
 <         sindx <- rep(1:nstrat, fit$strata)
 ---
 >         sindx <- rep(seq_len(nstrat), fit$strata)
-260c258
+261c259
 <                 fit[[i]] <- unlist(sapply(1:nstrat, function(j) 
 ---
 >                 fit[[i]] <- unlist(sapply(seq_len(nstrat), function(j) 
-265c263
+266c264
 <         fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
 ---
 >         fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
-391c389
+392c390
 < 	    stop("summary.survfitms can only be used for survfitms objects")
 ---
 > 	    stop("'summary.survfitms()' can only be used for objects of class \"survfitms\"")
-406c404
+407c405
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-414c412
+415c413
 <         if (!is.numeric(times)) stop ("times must be numeric")
 ---
 >         if (!is.numeric(times)) stop(gettextf("'%s' argument must be numeric", "times"))
-420c418
+421c419
 <         sindx <- rep(1:nstrat, fit$strata)
 ---
 >         sindx <- rep(seq_len(nstrat), fit$strata)
-443c441
+445c443
 <             for (i in 1:nstrat) 
 ---
 >             for (i in seq_len(nstrat)) 
-478c476
+480c478
 < 	cat("Call: ")
 ---
 > 	cat(gettext("Call:", domain = "R-survival"))
-496c494
+498c496
 <         if (length(rmean)==0) stop("Invalid value for rmean option")
 ---
 >         if (length(rmean)==0) stop("Invalid value for 'rmean' option")
-510,512c508,509
+512,514c510,511
 <              cat("   *mean time in state, restricted (max time =", 
 <                  format(etime, ...), ")\n")
 <         else cat("   *mean time in state, restricted (per curve cutoff)\n")
 ---
 >              cat(gettextf("   *mean time in state, restricted (max time = %s)\n", format(etime, ...), domain = "R-survival"))
 >         else cat(gettextf("   *mean time in state, restricted (per curve cutoff)\n", domain = "R-survival"))
-525c522
+527c524
 <         igrp <- rep(1:ngrp, x$strata)
 ---
 >         igrp <- rep(seq_len(ngrp), x$strata)
-538c535
+540c537
 <         dimnames(nevent) <- list(rname, x$states[1:nc])
 ---
 >         dimnames(nevent) <- list(rname, x$states[seq_len(nc)])
-547c544
+549c546
 <     outmat[1:length(nevent), 2] <- c(nevent)
 ---
 >     outmat[seq_along(nevent), 2] <- c(nevent)
-562c559
+564c561
 <         for (i in 1:ngrp) {
 ---
 >         for (i in seq_len(ngrp)) {
-572c569
+574c571
 <             if (length(delta) > nrow(temp)) delta <- delta[1:nrow(temp)]
 ---
 >             if (length(delta) > nrow(temp)) delta <- delta[seq_len(nrow(temp))]

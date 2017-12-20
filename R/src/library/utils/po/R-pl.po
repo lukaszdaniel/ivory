@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -876,6 +876,11 @@ msgstr "Jeżeli pakiet jest częścią pracy magisterskiej, użyj dla promotora.
 #: R/packageStatus.R:0
 msgid "Installed packages:"
 msgstr "Zainstalowane pakiety:"
+
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+#: R/indices.R:0
+msgid "Invalid \"Built\":"
+msgstr ""
 
 #. R/package.skeleton.R: gettextf("Invalid file name(s) for R code in %s:\n%s\n are now renamed to 'z<name>.R'",     code_dir, strwrap(paste(sQuote(wrong), collapse = ", "), indent = 2), domain = "R-utils")
 #: R/package.skeleton.R:0
@@ -3194,38 +3199,6 @@ msgstr ""
 msgid "| __truncated__"
 msgstr "| __przycięte__"
 
-#. R/str.R: ngettext(nl, " Factor w/ %d level", " Factor w/ %d levels", domain = "R-utils")
-#: R/str.R:0
-msgid " Factor w/ %d level"
-msgid_plural " Factor w/ %d levels"
-msgstr[0] " Czynnik z %d poziomem"
-msgstr[1] " Czynnik z %d poziomami"
-msgstr[2] " Czynnik z %d poziomami"
-
-#. R/str.R: ngettext(nl, " Factor w/ %d level %s%s:", " Factor w/ %d levels %s%s:", domain = "R-utils")
-#: R/str.R:0
-msgid " Factor w/ %d level %s%s:"
-msgid_plural " Factor w/ %d levels %s%s:"
-msgstr[0] " Czynnik z %d poziomem %s%s:"
-msgstr[1] " Czynnik z %d poziomami %s%s:"
-msgstr[2] " Czynnik z %d poziomami %s%s:"
-
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level", " Ord.factor w/ %d levels", domain = "R-utils")
-#: R/str.R:0
-msgid " Ord.factor w/ %d level"
-msgid_plural " Ord.factor w/ %d levels"
-msgstr[0] " Uporządkowany czynnik z %d poziomem"
-msgstr[1] " Uporządkowany czynnik z %d poziomami"
-msgstr[2] " Uporządkowany czynnik z %d poziomami"
-
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level %s%s:", " Ord.factor w/ %d levels %s%s:", domain = "R-utils")
-#: R/str.R:0
-msgid " Ord.factor w/ %d level %s%s:"
-msgid_plural " Ord.factor w/ %d levels %s%s:"
-msgstr[0] " Uporządkowany czynnik z %d poziomem %s%s:"
-msgstr[1] " Uporządkowany czynnik z %d poziomami %s%s:"
-msgstr[2] " Uporządkowany czynnik z %d poziomami %s%s:"
-
 #. R/str.R: ngettext(length(sNms), " and %d slot", " and %d slots", domain = "R-utils")
 #: R/str.R:0
 msgid " and %d slot"
@@ -3663,6 +3636,30 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "pakiet %s nie jest dostępny (dla '%s')"
 msgstr[1] "pakiety %s nie są dostępne (dla %s)"
 msgstr[2] "pakiety %s nie są dostępne (dla %s)"
+
+#~ msgid " Factor w/ %d level"
+#~ msgid_plural " Factor w/ %d levels"
+#~ msgstr[0] " Czynnik z %d poziomem"
+#~ msgstr[1] " Czynnik z %d poziomami"
+#~ msgstr[2] " Czynnik z %d poziomami"
+
+#~ msgid " Factor w/ %d level %s%s:"
+#~ msgid_plural " Factor w/ %d levels %s%s:"
+#~ msgstr[0] " Czynnik z %d poziomem %s%s:"
+#~ msgstr[1] " Czynnik z %d poziomami %s%s:"
+#~ msgstr[2] " Czynnik z %d poziomami %s%s:"
+
+#~ msgid " Ord.factor w/ %d level"
+#~ msgid_plural " Ord.factor w/ %d levels"
+#~ msgstr[0] " Uporządkowany czynnik z %d poziomem"
+#~ msgstr[1] " Uporządkowany czynnik z %d poziomami"
+#~ msgstr[2] " Uporządkowany czynnik z %d poziomami"
+
+#~ msgid " Ord.factor w/ %d level %s%s:"
+#~ msgid_plural " Ord.factor w/ %d levels %s%s:"
+#~ msgstr[0] " Uporządkowany czynnik z %d poziomem %s%s:"
+#~ msgstr[1] " Uporządkowany czynnik z %d poziomami %s%s:"
+#~ msgstr[2] " Uporządkowany czynnik z %d poziomami %s%s:"
 
 #~ msgid "number of matches does not always match ncol(proto)"
 #~ msgstr "liczba dopasowań nie zawsze pasuje do 'ncol(proto)'"

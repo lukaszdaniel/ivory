@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:11\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -57,6 +57,12 @@ msgstr ""
 "%s failed in %s() for '%s', details:\n"
 "call: %s\n"
 "error: %s"
+
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("timedatectl"),     sQuote(tz), domain = "R-base")
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("/etc/timezone"),     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s file indicates the non-existent timezone name %s"
+msgstr ""
 
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
@@ -931,6 +937,12 @@ msgstr "'origin'는 'start', current' 또는 'end' 중 하나이어야 합니다
 msgid "'partial' sorting is not supported by 'radix()' method"
 msgstr ""
 
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+#, fuzzy
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr "*** 'pos=1'는 불가능합니다. 임시적으로 'pos=2' 로 설정합니다 "
+
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -1114,16 +1126,6 @@ msgstr "(loaded the methods namespace)"
 #, fuzzy
 msgid "** No title available **"
 msgstr "이용 할수 있는 트레이스백이 없습니다 "
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** 'pos=1' is not possible; setting 'pos=2' for now."
-msgstr "*** 'pos=1'는 불가능합니다. 임시적으로 'pos=2' 로 설정합니다 "
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** Note that 'pos=1' will give an error in the future"
-msgstr "*** 'pos=1' 는 에러를 보여줄 것입니다 "
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1349,7 +1351,7 @@ msgstr "FALSE 대신에 F 가 사용되었습니다 "
 msgid "Failed with error:  %s"
 msgstr "'%s' 실행은 에러 코드 %d 와 함께 실패했습니다 "
 
-#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
+#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
 msgid "Function %s is defunct."
@@ -2555,12 +2557,6 @@ msgstr "'by' 의 문자가 잘못되었습니다. "
 msgid "invalid version specification %s"
 msgstr "버전정보가 잘 못되었습니다 "
 
-#. R/../../../../share/R/examples-header.R: gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", "))
-#: R/../../../../share/R/examples-header.R:0
-#, fuzzy
-msgid "items %s have been removed from the search path"
-msgstr "탐색경로로부터 삭제되었습니다 "
-
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "center", "x")
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "scale", "x")
 #: R/scale.R:0
@@ -3128,8 +3124,8 @@ msgstr ""
 "여러개의 패키지 %s 가 검색되었습니다.\n"
 "%s 에 검색된 것을 사용합니다"
 
-#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
+#: R/namespace.R:0
 msgid ""
 "package %s was installed by an R version with different internals; it needs "
 "to be reinstalled for use with this R version"
@@ -3326,6 +3322,11 @@ msgstr "triangular matrix should be square"
 msgid "trimmed means are not defined for complex data"
 msgstr "복소수 데이터에 대한 절사평균은 정의되지 않았습니다 "
 
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr ""
+
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
 msgid "unable to find a plausible encoding"
@@ -3430,6 +3431,11 @@ msgstr "'breaks' 가 고유하지 않습니다 "
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd), domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
 msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
@@ -3740,6 +3746,13 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#~ msgid "*** Note that 'pos=1' will give an error in the future"
+#~ msgstr "*** 'pos=1' 는 에러를 보여줄 것입니다 "
+
+#, fuzzy
+#~ msgid "items %s have been removed from the search path"
+#~ msgstr "탐색경로로부터 삭제되었습니다 "
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"

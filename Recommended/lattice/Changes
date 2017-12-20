@@ -17,19 +17,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         else col.regions[floor(1+(1:numcol-1)*(numcol.r-1)/(numcol-1))]
 ---
 >         else col.regions[floor(1+(seq_len(numcol)-1)*(numcol.r-1)/(numcol-1))]
-511c511
+510c510
 <             grid.polygon(x = pol.x[1:(count * 3)], y = pol.y[1:(count * 3)],
 ---
 >             grid.polygon(x = pol.x[seq_len(count * 3)], y = pol.y[seq_len(count * 3)],
-625c625
+624c624
 <             grid.polygon(x = pol.x[1:(count * 4)], y = pol.y[1:(count * 4)],
 ---
 >             grid.polygon(x = pol.x[seq_len(count * 4)], y = pol.y[seq_len(count * 4)],
-1013c1013
+1012c1012
 <         for (face in 1:6)
 ---
 >         for (face in seq_len(6))
-1017c1017
+1016c1016
 <         #for (j in 1:12)
 ---
 >         #for (j in seq_len(12))
@@ -148,7 +148,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                     else stop(gettextf("invalid '%s' value", "label.style"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/R/miscellaneous.R Recommended/lattice/R/miscellaneous.R
-628,631c628,631
+635,638c635,638
 <                    xx[2*1:n-1] <- x[ord]
 <                    yy[2*1:n-1] <- y[ord]
 <                    xx[2*1:(n-1)] <- x[ord][if (type=="s") -1 else -n]
@@ -159,13 +159,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                    xx[2*seq_len(n-1)] <- x[ord][if (type=="s") -1 else -n]
 >                    yy[2*seq_len(n-1)] <- y[ord][if (type=="s") -n else -1]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/R/panels.R Recommended/lattice/R/panels.R
-355,356c355,356
+356,357c356,357
 <         grid.segments(y0 = 1:h / (h+1),
 <                       y1 = 1:h / (h+1),
 ---
 >         grid.segments(y0 = seq_len(h) / (h+1),
 >                       y1 = seq_len(h) / (h+1),
-363,364c363,364
+364,365c364,365
 <         grid.segments(x0 = 1:v / (v+1),
 <                       x1 = 1:v / (v+1),
 ---

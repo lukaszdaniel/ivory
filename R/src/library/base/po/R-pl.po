@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:11\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -54,6 +54,12 @@ msgstr ""
 "%s nie powiodło się w funkcji %s dla pakietu %s, szczegóły:\n"
 "  wywołanie: %s\n"
 "  błąd:  %s"
+
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("timedatectl"),     sQuote(tz), domain = "R-base")
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("/etc/timezone"),     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s file indicates the non-existent timezone name %s"
+msgstr ""
 
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
@@ -840,6 +846,12 @@ msgstr "argument 'origin' musi być jednym ze 'start', 'current' lub 'end'"
 msgid "'partial' sorting is not supported by 'radix()' method"
 msgstr "sortowanie 'partial' nie jest wspierane przez funkcję 'radix()'"
 
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+#, fuzzy
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr "*** 'pos=1' nie jest możliwe; na chwilę obecną ustawianie 'pos=2'."
+
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -1017,16 +1029,6 @@ msgstr "(załadowano przestrzeń nazw metod)"
 #: R/library.R:0
 msgid "** No title available **"
 msgstr "** Brak dostępnego tytułu **"
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** 'pos=1' is not possible; setting 'pos=2' for now."
-msgstr "*** 'pos=1' nie jest możliwe; na chwilę obecną ustawianie 'pos=2'."
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** Note that 'pos=1' will give an error in the future"
-msgstr "*** Zwróć uwagę, że 'pos=1' będzie zwracało błąd w przyszłości"
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1243,7 +1245,7 @@ msgstr "użyto F zamiast FALSE"
 msgid "Failed with error:  %s"
 msgstr "Niepowodzenie z błędem: %s"
 
-#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
+#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 msgid "Function %s is defunct."
 msgstr "Funkcja %s została zlikwidowana."
@@ -2407,11 +2409,6 @@ msgstr "błędny łańcuch dla argumentu 'by'"
 msgid "invalid version specification %s"
 msgstr "niepoprawne określenie wersji %s"
 
-#. R/../../../../share/R/examples-header.R: gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", "))
-#: R/../../../../share/R/examples-header.R:0
-msgid "items %s have been removed from the search path"
-msgstr "pozycje %s zostały usunięte ze ścieżki przeszukiwania"
-
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "center", "x")
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "scale", "x")
 #: R/scale.R:0
@@ -2959,8 +2956,8 @@ msgid "package %s was found more than once. Using the one found in %s"
 msgstr ""
 "pakiet %s został znaleziony więcej niż raz. Używanie tego znalezionego w %s"
 
-#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
+#: R/namespace.R:0
 msgid ""
 "package %s was installed by an R version with different internals; it needs "
 "to be reinstalled for use with this R version"
@@ -3153,6 +3150,11 @@ msgstr "macierz trójkątna powinna mieć równą liczbę wierszy i kolumn"
 msgid "trimmed means are not defined for complex data"
 msgstr "przycięte średnie nie są zdefiniowane dla danych złożonych"
 
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr ""
+
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
 msgid "unable to find a plausible encoding"
@@ -3252,6 +3254,11 @@ msgstr "wartosci w argumencie 'breaks' nie są unikalne"
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
 msgstr "wersja %s pakietu %s zasłonięta przez %s w %s"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd), domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
 #: R/seq.R:0
@@ -3656,6 +3663,12 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "*** Note that 'pos=1' will give an error in the future"
+#~ msgstr "*** Zwróć uwagę, że 'pos=1' będzie zwracało błąd w przyszłości"
+
+#~ msgid "items %s have been removed from the search path"
+#~ msgstr "pozycje %s zostały usunięte ze ścieżki przeszukiwania"
 
 #~ msgid "Error in '%s':"
 #~ msgstr "Błąd w poleceniu '%s':"

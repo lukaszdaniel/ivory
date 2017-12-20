@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46+0200\n"
+"POT-Creation-Date: 2017-12-20 10:19+0100\n"
 "PO-Revision-Date: 2016-04-05 23:04+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -108,13 +108,13 @@ msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr ""
 "uszkodzona ramka danych -- długość kolumny %d nie zgadza się z liczbą wierszy"
 
-#: io.c:1146
+#: io.c:1143
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr ""
 "kolumna %s twierdzi, że jest czynnikiem, ale nie posiada kodów liczbowych"
 
-#: io.c:1164
+#: io.c:1160
 msgid "corrupt matrix -- dims not not match length"
 msgstr "macierz jest uszkodzona -- wymiary nie zgadzają się z długością"
 

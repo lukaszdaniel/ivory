@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -567,11 +567,6 @@ msgstr ""
 msgid "Authors@R field gives persons with no role:"
 msgstr ""
 
-#. R/QC.R: gettext("Authors@R field gives persons with non-standard roles:", domain = "R-tools")
-#: R/QC.R:0
-msgid "Authors@R field gives persons with non-standard roles:"
-msgstr ""
-
 #. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Authors@R field should be a call to person(), or combine such calls."
@@ -763,6 +758,12 @@ msgstr ""
 msgid "Checking URLs requires 'libcurl' support in the R build"
 msgstr ""
 
+#. R/check.R: gettext("Checking for include directives in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Checking for include directives in Makefiles ..."
+msgstr "Argumentnavne i kode men ikke i dokumenter:"
+
 #. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -803,6 +804,12 @@ msgstr "Forskellige codoc fra dokumentationsobjekt »%s«:"
 #: R/testing.R:0
 msgid "Comparing %s to %s ..."
 msgstr ""
+
+#. R/check.R: gettext("Compilation used the following non-portable flag(s):", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Compilation used the following non-portable flag(s):"
+msgstr "Felter med ikke-ASCII-værdier:"
 
 #. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -963,6 +970,11 @@ msgstr "mappe »%s« indeholder ikke R-kode"
 #, fuzzy
 msgid "Demos with non-ASCII characters:"
 msgstr "Felter med ikke-ASCII-værdier:"
+
+#. R/check.R: gettextf("Dependence on R version %s not with patchlevel 0\n", sQuote(format(Rver[[1L]]$version)),     domain = "R-tools")
+#: R/check.R:0
+msgid "Dependence on R version %s not with patchlevel 0"
+msgstr ""
 
 #. R/QC.R: gettext("Depends: includes the non-default packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -1358,6 +1370,21 @@ msgid ""
 "%s"
 msgstr ""
 
+#. R/check.R: gettext("Even though not recommended, variable R_HOME may contain spaces.\nMakefile directives use space as a separator and there is no portable\nway to quote/escape the space in Make rules and directives.  However,\none can and should quote pathnames when passed from Makefile to the\nshell, and this can be done specifically when invoking Make recursively.\nIt is therefore recommended to use the Make '-f' option to include files\nin directories specified using R_HOME. This option can be specified\nmultiple times to include multiple Makefiles.  Note that 'Makeconf' is\nincluded automatically into top-level makefile of a package.\nMore information can be found in 'Writing R Extensions'.",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Even though not recommended, variable R_HOME may contain spaces.\n"
+"Makefile directives use space as a separator and there is no portable\n"
+"way to quote/escape the space in Make rules and directives.  However,\n"
+"one can and should quote pathnames when passed from Makefile to the\n"
+"shell, and this can be done specifically when invoking Make recursively.\n"
+"It is therefore recommended to use the Make '-f' option to include files\n"
+"in directories specified using R_HOME. This option can be specified\n"
+"multiple times to include multiple Makefiles.  Note that 'Makeconf' is\n"
+"included automatically into top-level makefile of a package.\n"
+"More information can be found in 'Writing R Extensions'."
+msgstr ""
+
 #. R/checktools.R: gettextf("Example timings for package %s:", sQuote(x), domain = "R-tools")
 #: R/checktools.R:0
 msgid "Example timings for package %s:"
@@ -1590,6 +1617,14 @@ msgid ""
 "Most likely, this should be 'R'."
 msgstr ""
 
+#. R/check.R: gettext("Found the following Makefile(s) with an include directive with a pathname using R_HOME:",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"Found the following Makefile(s) with an include directive with a pathname "
+"using R_HOME:"
+msgstr "Felter med ikke-ASCII-værdier:"
+
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -1670,6 +1705,8 @@ msgid "Found the following shell script(s) with CR or CRLF line endings:"
 msgstr "Felter med ikke-ASCII-værdier:"
 
 #. R/check.R: gettext("Found the following significant warnings:\n", domain = "R-tools")
+#. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
+#. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
@@ -2365,6 +2402,9 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -4435,6 +4475,11 @@ msgstr ""
 msgid "checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ..."
 msgstr ""
 
+#. R/check.R: gettext("checking for pragmas in C/C++ headers and code ...", domain = "R-tools")
+#: R/check.R:0
+msgid "checking for pragmas in C/C++ headers and code ..."
+msgstr ""
+
 #. R/check.R: gettext("checking for sufficient/correct file permissions ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for sufficient/correct file permissions ..."
@@ -6308,6 +6353,28 @@ msgstr[1] ""
 #: R/check.R:0
 msgid "File %s is not mentioned in the DESCRIPTION file.\n"
 msgid_plural "Files %s are not mentioned in the DESCRIPTION file.\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/QC.R: ngettext(length(x), "File which contain pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "File which contain pragma(s) suppressing diagnostics:"
+msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/check.R: ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
+#. R/check.R: ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
+#: R/check.R:0
+msgid "File which contains pragma(s) suppressing diagnostics:"
+msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/check.R: ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics:",     "Files which contain pragma(s) suppressing important diagnostics:", domain = "R-tools")
+#: R/check.R:0
+msgid "File which contains pragma(s) suppressing important diagnostics:"
+msgid_plural "Files which contain pragma(s) suppressing important diagnostics:"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -130,72 +130,72 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         gettext("'i' and 'x' differ in length", domain = "R-Matrix")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/Auxiliaries.R Recommended/Matrix/R/Auxiliaries.R
-32c32
+35c35
 < 	   "complex"= 1+0i, stop(gettextf("invalid 'mod': %s", mod), domain = NA))
 ---
 > 	   "complex"= 1+0i, stop(gettextf("invalid 'mod': %s", mod), domain = "R-Matrix"))
-35c35
+38c38
 < 	   "complex"= 0+0i, stop(gettextf("invalid 'mod': %s", mod), domain = NA))
 ---
 > 	   "complex"= 0+0i, stop(gettextf("invalid 'mod': %s", mod), domain = "R-Matrix"))
-86,88c86
+92,94c92
 <     stop(gettextf(
 <      'not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.',
 < 		  fun, cl[1L]), call. = FALSE, domain=NA)
 ---
 >     stop(gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl[1L]), call. = FALSE, domain = "R-Matrix")
-91,93c89
+97,99c95
 <     stop(gettextf(
 <      'not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.',
 < 		  fun, cl1[1L], cl2[1L]), call. = FALSE, domain=NA)
 ---
 >     stop(gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.", fun, cl1[1L], cl2[1L]), call. = FALSE, domain = "R-Matrix")
-176c172
+184c180
 < 	list(c(if(!isTRUE(msg)) msg, paste0("class(target) is ", c1, ", current is ", c2)))
 ---
 > 	list(c(if(!isTRUE(msg)) msg, gettextf("class(target) is %s, current is %s", c1, c2, domain = "R-Matrix")))
-281,283c277
+289,291c285
 < 	stop(gettextf("Matrices must have same dimensions in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same dimensions in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-308,310c302
+316,318c310
 < 	stop(gettextf("non-conformable matrix dimensions in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("non-conformable matrix dimensions in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-349c341
+357c349
 <                                 call. = FALSE, domain=NA)
 ---
 >                                 call. = FALSE, domain = "R-Matrix")
-396,398c388
+404,406c396
 < 	stop(gettextf("Matrices must have same number of rows in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same number of rows in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-407,409c397
+415,417c405
 < 	stop(gettextf("Matrices must have same number of columns in %s",
 < 		      deparse(sys.call(sys.parent()))),
 < 	     call. = FALSE, domain=NA)
 ---
 > 	stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
-467,469c455,456
+475,477c463,464
 < 	message(if(lc > 3)
 < 		gettextf("   [[ suppressing %d column names %s ... ]]", nc,
 < 			 paste(sQuote(cn[1:3]), collapse = ", "))
 ---
 > 	if(lc > 3)
 > 	message(sprintf(gettext("   [[ suppressing %d column names %s ... ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:3]), collapse = ", ")), domain = NA)
-471,473c458
+479,481c466
 < 		gettextf("   [[ suppressing %d column names %s ]]", nc,
 < 			 paste(sQuote(cn[1:lc]), collapse = ", ")),
 < 		domain=NA)
 ---
 > 	message(sprintf(gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:lc]), collapse = ", ")), domain = NA)
-565,567c550,553
+573,575c558,561
 <     xtra <- if(tri && x@diag == "U") " (unitriangular)" else ""
 <     cat(sprintf('%d x %d Matrix of class "%s"%s\n',
 < 		d[1], d[2], cl, xtra))
@@ -204,38 +204,38 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettextf("%d x %d Matrix of class \"%s\" (unitriangular)", d[1], d[2], cl, domain = "R-Matrix"), "\n", sep = "")
 >     else
 >     cat(gettextf("%d x %d Matrix of class \"%s\"", d[1], d[2], cl, domain = "R-Matrix"), "\n", sep = "")
-619c605
+627c613
 <     else stop(gettext("'x' must be \"sparseMatrix\""), domain=NA)
 ---
 >     else stop(gettext("'x' must be \"sparseMatrix\""), domain = "R-Matrix")
-755c741
+763c749
 < 	     domain = NA)
 ---
 > 	     domain = "R-Matrix")
-968,969c954
+976,977c962
 < 	else stop(gettextf("not yet implemented for matrix with typeof %s",
 < 			   typeof(x)), domain = NA)
 ---
 > 	else stop(gettextf("not yet implemented for matrix with typeof %s", typeof(x)), domain = "R-Matrix")
-982,983c967
+990,991c975
 < 	else stop(gettextf("not yet implemented for matrix with typeof %s",
 < 			   typeof(x)), domain = NA)
 ---
 > 	else stop(gettextf("not yet implemented for matrix with typeof %s", typeof(x)), domain = "R-Matrix")
-999c983
+1007c991
 < 		  domain = NA)
 ---
 > 		  domain = "R-Matrix")
-1008c992
+1016c1000
 < 	      domain = NA)
 ---
 > 	      domain = "R-Matrix")
-1065,1066c1049
+1073,1074c1057
 <     else stop(gettextf("general Matrix class not yet implemented for %s",
 < 		       dQuote(class(x))), domain = NA)
 ---
 >     else stop(gettextf("general Matrix class not yet implemented for %s", dQuote(class(x))), domain = "R-Matrix")
-1553c1536
+1563c1546
 <                                  "extra arguments %s will be disregarded in\n %s"),
 ---
 >                                  "extra arguments %s will be disregarded in\n %s", domain = "R-Matrix"),
@@ -307,46 +307,51 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	stop(sprintf(gettext("'%s()' is not yet implemented for representation '%s'", domain = "R-Matrix"), "readMM", repr), domain = NA)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/Matrix.R Recommended/Matrix/R/Matrix.R
-157,158c157
+35,36c35
+<             warning("as.matrix(<Matrix>) is deprecated (to become a no-op in the future).
+< Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+---
+>             warning("as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+173,174c172
 < 	stop(gettextf("invalid dimnames given for %s object", dQuote(class(x))),
 < 	     domain=NA)
 ---
 > 	stop(gettextf("invalid dimnames given for %s object", dQuote(class(x))), domain = "R-Matrix")
-358,359c357
+374,375c372
 < 	  stop(gettextf("Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead",
 < 			class(A)), call. = FALSE, domain=NA))
 ---
 > 	  stop(gettextf("Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead", class(A)), call. = FALSE, domain = "R-Matrix"))
-434c432
+450c447
 < 	      for (i in 1:differences)
 ---
 > 	      for (i in seq_len(differences))
-530,532c528
+546,548c543
 <     } else stop(gettextf(
 < 		"nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?",
 < 			 nA), domain=NA)
 ---
 >     } else stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?", nA), domain = "R-Matrix")
-604,605c600
+620,621c615
 <         stop(domain=NA, gettextf(
 <             "nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?", nA))
 ---
 >         stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?", nA), domain = "R-Matrix")
-669,671c664
+685,687c679
 <     } else stop(gettextf(
 < 		"nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?",
 < 			 nA), domain=NA)
 ---
 >     } else stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?", nA), domain = "R-Matrix")
-721c714
+737c729
 <     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain=NA)
 ---
 >     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain = "R-Matrix")
-733c726
+749c741
 <     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain=NA)
 ---
 >     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain = "R-Matrix")
-748,750c741
+764,766c756
 < 		  stop(gettextf(
 < 		"RHS 'value' (class %s) matches 'ANY', but must match matrix class %s",
 < 			       class(value), class(x)), domain=NA)
@@ -632,40 +637,40 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 			    Matrix.msg(gettextf("rectangle size %s [pixels];  --> lwd :%s", paste(round(pSize,1), collapse=" x "), formatC(lwd), domain = "R-Matrix"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/diagMatrix.R Recommended/Matrix/R/diagMatrix.R
-235,236c235
+238,239c238
 < 		       stop(gettextf("%s kind not yet implemented",
 < 				     sQuote(kind)), domain=NA)),
 ---
 > 		       stop(gettextf("%s kind not yet implemented", sQuote(kind)), domain = "R-Matrix")),
-432,433c431
+435,436c434
 < 	else stop(gettextf("Internal bug: nargs()=%d; please report",
 < 			   na), domain=NA)
 ---
 > 	else stop(gettextf("Internal bug: nargs()=%d; please report", na), domain = "R-Matrix")
-984,985c982
+987,988c985
 < 	else stop(gettextf("intermediate 'r' is of type %s",
 < 			   typeof(r)), domain=NA)
 ---
 > 	else stop(gettextf("intermediate 'r' is of type %s", typeof(r)), domain = "R-Matrix")
-993c990
+996c993
 <         Matrix.msg("exploding <diag> o <diag> into dense matrix", .M.level = 2)
 ---
 >         Matrix.msg(gettext("exploding <diag> o <diag> into dense matrix", domain = "R-Matrix"), .M.level = 2)
-1364,1365d1360
+1367,1368d1363
 < 	      cat(sprintf('%d x %d diagonal matrix of class "%s"',
 < 			  d[1L], d[2L], cl))
-1366a1362
+1369a1365
 > 	      cat(gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"))
-1370c1366
+1373c1369
 < 		  cat(", with diagonal entries\n")
 ---
 > 	      cat(gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"), "\n", sep = "")
-1384,1385c1380
+1387,1388c1383
 < 		  sprintf('%d x %d diagonal Matrix of class "%s"',
 < 			  d[1L], d[2L], class(object))
 ---
 > 		  gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(class(object)), domain = "R-Matrix")
-1392c1387
+1395c1390
 <     cat(attr(x, "header"),"\n")
 ---
 >     cat(attr(x, "header"), "\n", sep = "")
@@ -743,22 +748,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	      Matrix.msg(gettextf(
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/rankMatrix.R Recommended/Matrix/R/rankMatrix.R
-60,62c60
+65,67c65
 < 		    warning(gettextf(
 <  "rankMatrix(<large sparse Matrix>, method = '%s') coerces to dense matrix.
 <  Probably should rather use method = 'qr' !?",
 ---
 > 		    warning(gettextf("rankMatrix(<large sparse Matrix>, method = '%s') coerces to dense matrix. Probably should rather use method = 'qr' !?",
-64c62
+69c67
 < 			    immediate.=TRUE, domain=NA)
 ---
 > 			    immediate.=TRUE, domain = "R-Matrix")
-76,77c74
+81,82c79
 < 		      warning(gettextf(
 < 			"rankMatrix(x, method='qr'): computing t(x) as nrow(x) < ncol(x)"))
 ---
 > 		      warning(gettextf("rankMatrix(x, method='qr'): computing t(x) as nrow(x) < ncol(x)"))
-99c96
+104c101
 < 		  ##           domain=NA)
 ---
 > 		  ##           domain = "R-Matrix")
@@ -800,12 +805,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	    stop(gettextf("Class %s is not yet implemented", dQuote(cNam)), domain = "R-Matrix")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/zzz.R Recommended/Matrix/R/zzz.R
-27,28c27
+38,39c38
 <                     .Deprecated(msg = "'cBind' is deprecated.
 <  Since R version 3.2.0, base's cbind() should work fine with S4 objects")
 ---
 > 	.Deprecated(msg = gettext("'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects"))
-39,40c38
+50,51c49
 < 	.Deprecated(msg = "'rBind' is deprecated.
 <  Since R version 3.2.0, base's rbind() should work fine with S4 objects")
 ---
@@ -847,73 +852,73 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/Mutils.c Recommended/Matrix/src/Mutils.c
 3a4
 > #include "localization.h"
-314c315
+317c318
 < 	return mkString(_("length of x slot != prod(Dim)"));
 ---
 > 	return mkString(_("length of 'x' slot is not equal to 'prod(Dim)'"));
-320c321
+323c324
 < 	return mkString(_("Dim slot must have length 2"));
 ---
 > 	return mkString(_("'Dim' slot must have length 2"));
-325c326
+328c329
 <     	return mkString(_("Dim slot is not integer"));
 ---
 > 	return mkString(_("'Dim' slot is not integer"));
-330,332c331,332
+333,335c334,335
 < 	return mkString(dngettext(name,
 < 				  "Negative value in Dim",
 < 				  "Negative values in Dim",
 ---
 > 	return mkString(n_("Negative value in 'Dim' slot",
 > 				  "Negative values in 'Dim' slot",
-348c348
+351c351
 < 	return mkString(_("Dimnames slot is not a list"));
 ---
 > 	return mkString(_("'Dimnames' slot is not a list"));
-350c350
+353c353
 < 	return mkString(_("Dimnames slot is a list, but not of length 2"));
 ---
 > 	return mkString(_("'Dimnames' slot is a list, but not of length 2"));
-355c355
+358c358
 < 		sprintf(buf, _("Dimnames[%d] is not a character vector"), j+1);
 ---
 > 		sprintf(buf, _("'Dimnames[%d]' is not a character vector"), j+1);
-683c683
+691c691
 < 	    error(_("invalid class '%s' to dup_mMatrix_as_geMatrix"),
 ---
 > 	    error(_("invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"),
-813c813
+820c820
 < 	    error(_("unexpected ctype = %d in dup_mMatrix_as_geMatrix"), ctype);
 ---
 > 	    error(_("unexpected ctype = %d in 'dup_mMatrix_as_geMatrix' function"), ctype);
-841c841
+846c846
 < 		error(_("invalid class '%s' to dup_mMatrix_as_dgeMatrix"),
 ---
 > 		error(_("invalid class \"%s\" passed to 'dup_mMatrix_as_dgeMatrix()' function"),
-891c891
+896c896
 < 	error(_("Argument ij must be 2-column integer matrix"));
 ---
 > 	error(_("Argument 'ij' must be 2-column integer matrix"));
-956c956
+961c961
 < 	error(_("i and j must be integer vectors of the same length"));
 ---
 > 	error(_("'i' and 'j' arguments must be integer vectors of the same length"));
-1031c1031
+1036c1036
 < 	if (lendat > INT_MAX) error("data is too long");
 ---
 > 	if (lendat > INT_MAX) error(_("data is too long"));
-1034c1034
+1039c1039
 < 	if (lendat > (double) nc * INT_MAX) error("data is too long");
 ---
 > 	if (lendat > (double) nc * INT_MAX) error(_("data is too long"));
-1037c1037
+1042c1042
 < 	if (lendat > (double) nr * INT_MAX) error("data is too long");
 ---
 > 	if (lendat > (double) nr * INT_MAX) error(_("data is too long"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/Mutils.h Recommended/Matrix/src/Mutils.h
-14a15
+15a16
 > #include "localization.h"
-28,35d28
+29,36d29
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
 < #define _(String) dgettext ("Matrix", String)
@@ -1017,31 +1022,31 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	error(_("code for cholmod_dense with holes not yet written"));	\
 ---
 > 	error(_("code for 'cholmod_dense()' functionwith holes not yet written"));	\
-1038c1037
+1036c1035
 <     if (ctype < 0) error(_("invalid class of object to as_cholmod_factor"));
 ---
 >     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_factor' function"));
-1052c1051
+1050c1049
 < 	error(_("Supernodal LDL' decomposition not available"));
 ---
 > 	error(_("Supernodal LDL decomposition not available"));
-1054c1053
+1052c1051
 < 	error(_("Supernodal/simplicial class inconsistent with type flags"));
 ---
 > 	error(_("Supernodal/simplicial class inconsistent with 'type' flags"));
-1072c1071
+1070c1069
 < 	    error(_("Number of supernodes must be positive when is_super is TRUE"));
 ---
 > 	    error(_("Number of supernodes must be positive when 'is_super' argument is TRUE"));
-1075c1074
+1073c1072
 < 	    error(_("Lengths of super and pi must be equal"));
 ---
 > 	    error(_("Lengths of 'super' and 'pi' arguments must be equal"));
-1079c1078
+1077c1076
 < 	    error(_("Lengths of super and px must be equal"));
 ---
 > 	    error(_("Lengths of 'super' and 'px' arguments must be equal"));
-1092c1091
+1090c1089
 < 	error(_("failure in as_cholmod_factor"));
 ---
 > 	error(_("failure in 'as_cholmod_factor' function"));
@@ -1322,7 +1327,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	    error(_("Lapack routine '%s' returned error code %d"), "dpptrf", info);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/dsCMatrix.c Recommended/Matrix/src/dsCMatrix.c
-250c250
+253c253
 < 	error(_("Non-symmetric matrix passed to dsCMatrix_to_dgTMatrix"));
 ---
 > 	error(_("Non-symmetric matrix passed to 'dsCMatrix_to_dgTMatrix' function"));
@@ -1338,7 +1343,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	return mkString(_("'Dim' slot has length less than two"));
 ---
 > 	return mkString(_("'dim' slot has length less than two"));
-164c164
+162c162
 <     if (info) error(_("Lapack routine dsytrf returned error code %d"), info);
 ---
 >     if (info) error(_("Lapack routine 'dsytrf' returned error code %d"), info);

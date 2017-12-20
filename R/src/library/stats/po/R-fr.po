@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -2543,6 +2543,21 @@ msgstr ""
 #, fuzzy
 msgid "No error degrees of freedom"
 msgstr "contrastes indéfinis pour %d degrés de liberté"
+
+#. R/power.R: warning("No p1 in in [0, p2] can be found to achieve the desired power")
+#: R/power.R:0
+msgid "No p1 in in [0, p2] can be found to achieve the desired power"
+msgstr ""
+
+#. R/power.R: warning("No p2 in in [p1, 1] can be found to achieve the desired power")
+#: R/power.R:0
+msgid "No p2 in in [p1, 1] can be found to achieve the desired power"
+msgstr ""
+
+#. R/power.R: warning("No significance level [0, 1] can be found to achieve the desired power")
+#: R/power.R:0
+msgid "No significance level [0, 1] can be found to achieve the desired power"
+msgstr ""
 
 #. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 #: R/nls.R:0

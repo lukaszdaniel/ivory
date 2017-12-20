@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:11\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -51,6 +51,12 @@ msgstr ""
 " %sは%s()（%sに対する）の中で失敗しました、詳細は: \n"
 " call: %s \n"
 " error: %s "
+
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("timedatectl"),     sQuote(tz), domain = "R-base")
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("/etc/timezone"),     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s file indicates the non-existent timezone name %s"
+msgstr ""
 
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
@@ -930,6 +936,12 @@ msgstr ""
 msgid "'partial' sorting is not supported by 'radix()' method"
 msgstr ""
 
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+#, fuzzy
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr " *** 'pos=1' は不可能です。今は 'pos=2' と設定します "
+
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -1114,16 +1126,6 @@ msgstr " (メソッドの名前空間をロードしました) "
 #, fuzzy
 msgid "** No title available **"
 msgstr " 利用できる traceback がありません "
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** 'pos=1' is not possible; setting 'pos=2' for now."
-msgstr " *** 'pos=1' は不可能です。今は 'pos=2' と設定します "
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** Note that 'pos=1' will give an error in the future"
-msgstr " *** 'pos=1' はいずれエラーを与えることを注意して下さい "
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1351,7 +1353,7 @@ msgstr " FALSE の代わりに F が使われました "
 msgid "Failed with error:  %s"
 msgstr " '%s' の実行は失敗しました(エラーコード %d) "
 
-#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
+#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
 msgid "Function %s is defunct."
@@ -2556,12 +2558,6 @@ msgstr " 'by' に対する無効な文字列です "
 msgid "invalid version specification %s"
 msgstr " 無効なバージョンの指定です "
 
-#. R/../../../../share/R/examples-header.R: gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", "))
-#: R/../../../../share/R/examples-header.R:0
-#, fuzzy
-msgid "items %s have been removed from the search path"
-msgstr " 検索パスから抹消されています "
-
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "center", "x")
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "scale", "x")
 #: R/scale.R:0
@@ -3148,8 +3144,8 @@ msgstr ""
 " パッケージ '%s' が複数見つかりました。 \n"
 " '%s' 中に見つかったものを使います "
 
-#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
+#: R/namespace.R:0
 msgid ""
 "package %s was installed by an R version with different internals; it needs "
 "to be reinstalled for use with this R version"
@@ -3347,6 +3343,11 @@ msgstr " 三角行列は正方行列であるべきです "
 msgid "trimmed means are not defined for complex data"
 msgstr " 複素数データに対しては刈込み平均は定義されません "
 
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr ""
+
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
 msgid "unable to find a plausible encoding"
@@ -3451,6 +3452,11 @@ msgstr " 'breaks' が一意的ではありません "
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd), domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
 msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
@@ -3764,6 +3770,13 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#~ msgid "*** Note that 'pos=1' will give an error in the future"
+#~ msgstr " *** 'pos=1' はいずれエラーを与えることを注意して下さい "
+
+#, fuzzy
+#~ msgid "items %s have been removed from the search path"
+#~ msgstr " 検索パスから抹消されています "
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"

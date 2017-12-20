@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1085,6 +1085,13 @@ msgstr ""
 #. R/packageStatus.R: gettext("Installed packages:", domain = "R-utils")
 
 msgid "Installed packages:"
+msgstr ""
+
+
+#: R/indices.R: 0
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+
+msgid "Invalid \"Built\":"
 msgstr ""
 
 
@@ -4014,42 +4021,6 @@ msgstr ""
 
 msgid "| __truncated__"
 msgstr ""
-
-
-#: R/str.R: 0
-#. R/str.R: ngettext(nl, " Factor w/ %d level", " Factor w/ %d levels", domain = "R-utils")
-
-msgid        " Factor w/ %d level"
-msgid_plural " Factor w/ %d levels"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/str.R: 0
-#. R/str.R: ngettext(nl, " Factor w/ %d level %s%s:", " Factor w/ %d levels %s%s:", domain = "R-utils")
-
-msgid        " Factor w/ %d level %s%s:"
-msgid_plural " Factor w/ %d levels %s%s:"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/str.R: 0
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level", " Ord.factor w/ %d levels", domain = "R-utils")
-
-msgid        " Ord.factor w/ %d level"
-msgid_plural " Ord.factor w/ %d levels"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/str.R: 0
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level %s%s:", " Ord.factor w/ %d levels %s%s:", domain = "R-utils")
-
-msgid        " Ord.factor w/ %d level %s%s:"
-msgid_plural " Ord.factor w/ %d levels %s%s:"
-msgstr[0]    ""
-msgstr[1]    ""
 
 
 #: R/str.R: 0

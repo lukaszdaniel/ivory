@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-07 19:12+0200\n"
+"POT-Creation-Date: 2017-12-20 10:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "approx(): attempted to interpolate NA values"
 msgstr ""
 
-#: arima.c:77 arima.c:188 arima.c:373 arima.c:604
+#: arima.c:77 arima.c:188 arima.c:373 arima.c:604 optim.c:33
 msgid "invalid argument type"
 msgstr ""
 
@@ -389,7 +389,7 @@ msgstr ""
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:352 loessc.c:353 optim.c:364 optimize.c:255 optimize.c:262
+#: loessc.c:352 loessc.c:353 optim.c:366 optimize.c:255 optimize.c:262
 #: optimize.c:271 optimize.c:345 optimize.c:350 optimize.c:366 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
@@ -578,7 +578,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr ""
 
-#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
+#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:193
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -793,42 +793,42 @@ msgstr ""
 msgid "variable '%s' is not numeric"
 msgstr ""
 
-#: optim.c:74 optim.c:101
+#: optim.c:76 optim.c:103
 msgid "non-finite value supplied by 'optim' argument"
 msgstr ""
 
-#: optim.c:81
+#: optim.c:83
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr ""
 
-#: optim.c:108
+#: optim.c:110
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr ""
 
-#: optim.c:132 optim.c:159
+#: optim.c:134 optim.c:161
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr ""
 
-#: optim.c:187 optim.c:256 optim.c:273 optim.c:298 optim.c:328 optim.c:393
-#: optim.c:407
+#: optim.c:189 optim.c:258 optim.c:275 optim.c:300 optim.c:330 optim.c:395
+#: optim.c:409
 #, c-format
 msgid "'%s' argument is not a function"
 msgstr ""
 
-#: optim.c:205 optim.c:279 optim.c:304 optim.c:334 optim.c:399 optim.c:413
+#: optim.c:207 optim.c:281 optim.c:306 optim.c:336 optim.c:401 optim.c:415
 #, c-format
 msgid "'%s' argument is of the wrong length"
 msgstr ""
 
-#: optim.c:234
+#: optim.c:236
 #, c-format
 msgid "'%s' argument is not an integer"
 msgstr ""
 
-#: optim.c:254
+#: optim.c:256
 #, c-format
 msgid "'%s' argument is not a positive integer"
 msgstr ""

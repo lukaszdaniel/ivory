@@ -1,16 +1,12 @@
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/R/VarCorr.R Recommended/nlme/R/VarCorr.R
-49c49
-<   trows <- 1 + c(0, cumsum(1 + nrows))[1:Q]
+48c48
+<   trows <- 1L + c(0L, cumsum(1L + nrows))[1:Q]
 ---
->   trows <- 1 + c(0, cumsum(1 + nrows))[seq_len(Q)]
-67c67
-<     rownames[ rr + (1:nrows[i]) ] <- dimnames( m[[i]] )[[1]]
----
->     rownames[ rr + seq_len(nrows[i]) ] <- dimnames( m[[i]] )[[1]]
+>   trows <- 1L + c(0L, cumsum(1L + nrows))[seq_len(Q)]
 69c69
-<       v[ rr + (1:nrows[i]), 2 + (1:ncol(corr[[i]])) ] <- corr[[i]]
+<       v[ri, 2L + (1:ncol(corr[[i]])) ] <- corr[[i]]
 ---
->       v[ rr + seq_len(nrows[i]), 2 + seq_len(ncol(corr[[i]])) ] <- corr[[i]]
+>       v[ri, 2L + seq_len(ncol(corr[[i]])) ] <- corr[[i]]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/R/VarCov.R Recommended/nlme/R/VarCov.R
 28c28
 <         stop("not implemented for \"nlme\" objects")
@@ -747,53 +743,81 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             cat("GLS step: Objective:", format(optRes$value))
 ---
 >             cat(gettext("GLS step: Objective: ", domain = "R-nlme"), format(optRes$value), sep = "")
-424,426c424,426
-<       cat("\nNLS step: RSS = ", format(work$set[6]), "\n model parameters:")
-<       for (i in 1:pLen) cat(format(signif(spar[i]))," ")
-<       cat("\n iterations:",work$set[5],"\n")
+406c406
+< 	       NAOK = TRUE)[c("thetaNLS", "settings", "additional")]
 ---
->       cat("\n", gettextf("NLS step: RSS = %s", format(work$set[6]), domain = "R-nlme"), "\n ", gettext("model parameters:", domain = "R-nlme"), sep = "")
+> 	       NAOK = TRUE)
+409c409
+<       msg <- "step halving factor reduced below minimum in NLS step"
+---
+>       msg <- gettext("step halving factor reduced below minimum in NLS step", domain = "R-nlme")
+411c411
+<         warning(msg)
+---
+>         warning(msg, domain = NA)
+413c413
+<       } else stop(msg)
+---
+>       } else stop(msg, domain = NA)
+423,425c423,425
+<       cat("\nNLS step: RSS = ", format(work$settings[6]), "\n model parameters:")
+<       for (i in 1:pLen) cat(format(signif(spar[i]))," ")
+<       cat("\n iterations:",work$settings[5],"\n")
+---
+>       cat("\n", gettextf("NLS step: RSS = %s", format(work$settings[6]), domain = "R-nlme"), "\n ", gettext("model parameters:", domain = "R-nlme"), sep = "")
 >       for (i in seq_len(pLen)) cat(format(signif(spar[i]))," ")
->       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$set[5], "\n", sep = "")
-432c432
+>       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$settings[5], "\n", sep = "")
+431c431
 <     aConv <- c(max(conv[1:pLen]))
 ---
 >     aConv <- c(max(conv[seq_len(pLen)]))
-435c435
+434c434
 <       conv <- conv[-(1:pLen)]
 ---
 >       conv <- conv[-(seq_len(pLen))]
-445c445
+444c444
 <       cat("\nConvergence:\n")
 ---
 >       cat("\n", gettext("Convergence:", domain = "R-nlme"), "\n", sep = "")
-467c467
+455c455
+<       msg <- "maximum number of iterations reached without convergence"
+---
+>       msg <- gettext("maximum number of iterations reached without convergence", domain = "R-nlme")
+457c457
+< 	warning(msg)
+---
+> 	warning(msg, domain = NA)
+459c459
+<       } else stop(msg)
+---
+>       } else stop(msg, domain = NA)
+465c465
 <   auxRes <- ww[NReal * pLen + (1:NReal)]
 ---
 >   auxRes <- ww[NReal * pLen + seq_len(NReal)]
-481c481
+479c479
 <   varBeta <- qr(c.L$Xy[ , 1:pLen, drop = FALSE])
 ---
 >   varBeta <- qr(c.L$Xy[ , seq_len(pLen), drop = FALSE])
-513c513
+511c511
 <     else "Approximate variance-covariance matrix not available"
 ---
 >     else gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
-612c612
+610c610
 <       "Non-positive definite approximate variance-covariance"
 ---
 >       gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
-721,722c721,722
+719,720c719,720
 <                                 "level %s not allowed for %s",
 <                                 "levels %s not allowed for %s"),
 ---
 >                                 "level %s is not allowed for %s",
 >                                 "levels %s are not allowed for %s", domain = "R-nlme"),
-779c779
+776c776
 <   lab <- "Predicted values"
 ---
 >   lab <- gettext("Predicted values", domain = "R-nlme")
-793c793
+790c790
 < 	stop("need an object with call component")
 ---
 > 	stop("an object with 'call' component is required")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-07 20:46+0200\n"
+"POT-Creation-Date: 2017-12-20 10:19+0100\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -109,12 +109,12 @@ msgstr "'dec' muss ein einzelnes Zeichen sein"
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr "korrupter Datafram -- Länge der Spalte %d entspricht nicht nrows"
 
-#: io.c:1146
+#: io.c:1143
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "Spalte %s behauptet Faktor zu sein, hat aber keine numerischen Kodes"
 
-#: io.c:1164
+#: io.c:1160
 msgid "corrupt matrix -- dims not not match length"
 msgstr "korrupte Matrix -- Dimensionen entsprechen nicht der Länge"
 

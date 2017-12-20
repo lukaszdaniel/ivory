@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -901,6 +901,11 @@ msgstr ""
 #, fuzzy
 msgid "Installed packages:"
 msgstr "kann keine Pakete installieren"
+
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+#: R/indices.R:0
+msgid "Invalid \"Built\":"
+msgstr ""
 
 #. R/package.skeleton.R: gettextf("Invalid file name(s) for R code in %s:\n%s\n are now renamed to 'z<name>.R'",     code_dir, strwrap(paste(sQuote(wrong), collapse = ", "), indent = 2), domain = "R-utils")
 #: R/package.skeleton.R:0
@@ -3227,34 +3232,6 @@ msgstr ""
 #: R/str.R:0
 msgid "| __truncated__"
 msgstr ""
-
-#. R/str.R: ngettext(nl, " Factor w/ %d level", " Factor w/ %d levels", domain = "R-utils")
-#: R/str.R:0
-msgid " Factor w/ %d level"
-msgid_plural " Factor w/ %d levels"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/str.R: ngettext(nl, " Factor w/ %d level %s%s:", " Factor w/ %d levels %s%s:", domain = "R-utils")
-#: R/str.R:0
-msgid " Factor w/ %d level %s%s:"
-msgid_plural " Factor w/ %d levels %s%s:"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level", " Ord.factor w/ %d levels", domain = "R-utils")
-#: R/str.R:0
-msgid " Ord.factor w/ %d level"
-msgid_plural " Ord.factor w/ %d levels"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/str.R: ngettext(nl, " Ord.factor w/ %d level %s%s:", " Ord.factor w/ %d levels %s%s:", domain = "R-utils")
-#: R/str.R:0
-msgid " Ord.factor w/ %d level %s%s:"
-msgid_plural " Ord.factor w/ %d levels %s%s:"
-msgstr[0] ""
-msgstr[1] ""
 
 #. R/str.R: ngettext(length(sNms), " and %d slot", " and %d slots", domain = "R-utils")
 #: R/str.R:0

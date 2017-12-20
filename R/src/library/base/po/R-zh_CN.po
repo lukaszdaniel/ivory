@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:11\n"
+"POT-Creation-Date: 2017-12-20 10:19\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -57,6 +57,12 @@ msgstr ""
 "%2$s()里算'%3$s'时%1$s失败了，详细内容：\n"
 "  调用: %s\n"
 "  错误: %s"
+
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("timedatectl"),     sQuote(tz), domain = "R-base")
+#. R/datetime.R: gettextf("%s file indicates the non-existent timezone name %s", sQuote("/etc/timezone"),     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s file indicates the non-existent timezone name %s"
+msgstr ""
 
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
@@ -923,6 +929,12 @@ msgstr "'origin'参数的值必需是'start'，'current'或'end'中的一个"
 msgid "'partial' sorting is not supported by 'radix()' method"
 msgstr ""
 
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+#, fuzzy
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr "*** 'pos=1'不可能对；以'pos=2'代而用之。"
+
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -1103,16 +1115,6 @@ msgstr "(载入了methods名字空间)"
 #, fuzzy
 msgid "** No title available **"
 msgstr "无traceback"
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** 'pos=1' is not possible; setting 'pos=2' for now."
-msgstr "*** 'pos=1'不可能对；以'pos=2'代而用之。"
-
-#. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
-#: R/attach.R:0
-msgid "*** Note that 'pos=1' will give an error in the future"
-msgstr "*** 请注意将来再用'pos=1'的话会引起错误信条"
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1338,7 +1340,7 @@ msgstr "用F代替FALSE "
 msgid "Failed with error:  %s"
 msgstr "'%s'运行失败，错误码为%d"
 
-#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
+#. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
 msgid "Function %s is defunct."
@@ -2533,12 +2535,6 @@ msgstr "'by'的字符串有错"
 msgid "invalid version specification %s"
 msgstr "版本设定不对"
 
-#. R/../../../../share/R/examples-header.R: gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", "))
-#: R/../../../../share/R/examples-header.R:0
-#, fuzzy
-msgid "items %s have been removed from the search path"
-msgstr "在搜索路径上被删除"
-
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "center", "x")
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "scale", "x")
 #: R/scale.R:0
@@ -3102,8 +3098,8 @@ msgstr ""
 "找到多个叫%s的程辑包，\n"
 "载入'%s'里找到的那一个"
 
-#. R/library.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(pkgname))
-#: R/library.R:0
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
+#: R/namespace.R:0
 msgid ""
 "package %s was installed by an R version with different internals; it needs "
 "to be reinstalled for use with this R version"
@@ -3298,6 +3294,11 @@ msgstr "三角矩阵必需的正方形的"
 msgid "trimmed means are not defined for complex data"
 msgstr "复数数据不能算切尾平均值"
 
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr ""
+
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
 msgid "unable to find a plausible encoding"
@@ -3402,6 +3403,11 @@ msgstr "'breaks' 的值有重复"
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd), domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
 msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
@@ -3707,6 +3713,13 @@ msgstr[0] "不存在叫%s这个名字的程辑包"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
+
+#~ msgid "*** Note that 'pos=1' will give an error in the future"
+#~ msgstr "*** 请注意将来再用'pos=1'的话会引起错误信条"
+
+#, fuzzy
+#~ msgid "items %s have been removed from the search path"
+#~ msgstr "在搜索路径上被删除"
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"
