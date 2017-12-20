@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -387,15 +387,13 @@ msgstr "... niekompletne wyjście.  Nagłe przerwanie?"
 
 #. R/testing.R: gettextf(".Rdiff() exit status %s", status)
 #: R/testing.R:0
-#, fuzzy
 msgid ".Rdiff() exit status %s"
-msgstr "Status wyjścia %s dla funkcji '.build_packages()'"
+msgstr "Status wyjścia %s dla funkcji '.Rdiff()'"
 
 #. R/Rprof.R: gettextf(".Rprof() exit status %s", status)
 #: R/Rprof.R:0
-#, fuzzy
 msgid ".Rprof() exit status %s"
-msgstr "Status wyjścia %s dla funkcji '.build_packages()'"
+msgstr "Status wyjścia %s dla funkcji '.Rprof()'"
 
 #. R/install.R: stop(".install_packages() exit status ", status)
 #: R/install.R:0
@@ -674,22 +672,22 @@ msgstr ""
 #. R/install.R: stop("C++11 standard requested but CXX11 is not defined")
 #: R/install.R:0
 msgid "C++11 standard requested but CXX11 is not defined"
-msgstr ""
+msgstr "Zażądano standardu C++11 ale CXX11 nie jest zdefiniowany"
 
 #. R/install.R: stop("C++14 standard requested but CXX14 is not defined")
 #: R/install.R:0
 msgid "C++14 standard requested but CXX14 is not defined"
-msgstr ""
+msgstr "Zażądano standardu C++14 ale CXX14 nie jest zdefiniowany"
 
 #. R/install.R: stop("C++17 standard requested but CXX17 is not defined")
 #: R/install.R:0
 msgid "C++17 standard requested but CXX17 is not defined"
-msgstr ""
+msgstr "Zażądano standardu C++17 ale CXX17 nie jest zdefiniowany"
 
 #. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
 #: R/install.R:0
 msgid "C++98 standard requested but CXX98 is not defined"
-msgstr ""
+msgstr "Zażądano standardu C++98 ale CXX98 nie jest zdefiniowany"
 
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
 #: R/QC.R:0
@@ -1088,7 +1086,7 @@ msgstr "Powtórzone wpisy '\\argument' w obiekcie dokumentacji %s:"
 #. R/pdftools.R: stop("EOF marker was not found")
 #: R/pdftools.R:0
 msgid "EOF marker was not found"
-msgstr "nie znaleziono znacznika EOF"
+msgstr "Nie znaleziono znacznika EOF"
 
 #. R/build.R: gettext("ERROR", domain = "R-tools")
 #. R/build.R: gettext("ERROR", domain = "R-tools")
@@ -1773,10 +1771,8 @@ msgstr "Znaleziono następujące prawdopodobnie niebezpieczne wywołania:"
 
 #. R/check.R: gettext("Found the following shell script(s) with CR or CRLF line endings:", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Found the following shell script(s) with CR or CRLF line endings:"
-msgstr ""
-"Znaleziono poniższe pliki 'Makefile' z zakończeniami linii CR lub CRLF."
+msgstr "Znaleziono poniższe skrypty powłoki z zakończeniami linii CR lub CRLF:"
 
 #. R/check.R: gettext("Found the following significant warnings:\n", domain = "R-tools")
 #. R/check.R: gettext("Found the following significant warnings:", domain = "R-tools")
@@ -2095,9 +2091,9 @@ msgstr ""
 
 #. R/check.R: gettextf("Looks like %s is a package bundle -- they are defunct", sQuote(pkgname0),     domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Looks like %s is a package bundle -- they are defunct"
-msgstr "wygląda na to, że %s jest paczką pakietów - a one zostały zlikwidowane"
+msgstr ""
+"Wygląda na to, że %s jest paczką pakietów -- a one zostały zlikwidowane"
 
 #. R/install.R: gettext("MD5 sums")
 #: R/install.R:0
@@ -3052,9 +3048,8 @@ msgstr "Pliki Rd z powtórzoną nazwą %s:"
 
 #. R/Rd.R: gettextf("Rd macro package %s is not installed.", sQuote(p))
 #: R/Rd.R:0
-#, fuzzy
 msgid "Rd macro package %s is not installed."
-msgstr "Instalator dodatkowych pakietów R:"
+msgstr "Pakiet %s dla makr Rd nie jest zainstalowany."
 
 #. R/Rd.R: stop("Rd object is required")
 #: R/Rd.R:0
@@ -5936,9 +5931,8 @@ msgstr "uruchamianie testowych dem z pakietów 'base' oraz 'stats'"
 
 #. R/testing.R: message("running tests of CRAN tools", domain = "R-tools")
 #: R/testing.R:0
-#, fuzzy
 msgid "running tests of CRAN tools"
-msgstr "uruchamianie testów funkcji elementarnych"
+msgstr "uruchamianie testów narzędzi CRAN"
 
 #. R/testing.R: message("running tests of Internet functions", domain = "R-tools")
 #: R/testing.R:0
@@ -6228,9 +6222,8 @@ msgstr "niezaimplementowana strona kodowa"
 
 #. R/toHTML.R: warning("unknown header specification")
 #: R/toHTML.R:0
-#, fuzzy
 msgid "unknown header specification"
-msgstr "Nierozpoznany format: %s"
+msgstr "nieznana specyfikacja nagłówka"
 
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0

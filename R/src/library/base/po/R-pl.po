@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -308,9 +308,9 @@ msgstr "argument '%s' musi być łańcuchem tekstowym lub połączeniem"
 
 #. R/warnings.R: gettextf("'%s' argument must be a character vector of the same length as '%s'", "tags",     "x")
 #: R/warnings.R:0
-#, fuzzy
 msgid "'%s' argument must be a character vector of the same length as '%s'"
-msgstr "argument '%s' musi być łańcuchem tekstowym o długości 1"
+msgstr ""
+"argument '%s' musi być łańcuchem tekstowym o tej samej długości co '%s'"
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
@@ -1514,7 +1514,7 @@ msgstr "Śledzenie nie jest dostepne"
 #. R/warnings.R: gettext("No warnings", domain = "R-base")
 #: R/warnings.R:0
 msgid "No warnings"
-msgstr ""
+msgstr "Brak ostrzeżeń"
 
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
@@ -3513,12 +3513,11 @@ msgstr[2] "biblioteki %s nie zawierają pakietów"
 
 #. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric variable in data frame: ", "non-numeric variables in data frame: ",     domain = "R-base")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "non-numeric variable in data frame: "
 msgid_plural "non-numeric variables in data frame: "
 msgstr[0] "zmienna nieliczbowa w ramce danych:"
-msgstr[1] "zmienna nieliczbowa w ramce danych:"
-msgstr[2] "zmienna nieliczbowa w ramce danych:"
+msgstr[1] "zmienne nieliczbowe w ramce danych:"
+msgstr[2] "zmienne nieliczbowe w ramce danych:"
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
 #: R/dataframe.R:0

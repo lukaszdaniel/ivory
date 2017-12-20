@@ -3855,7 +3855,9 @@ setRlibs <-
                              ": warning: .* \\[-Wformat-truncation=\\]",
                              ": warning: .* \\[-Wnonull",
                              ": warning: .* \\[-Walloc-size-larger-than=\\]",
-                             ": warning: .* \\[-Wterminate\\]"
+                             ": warning: .* \\[-Wterminate\\]",
+                             ": warning: .* \\[-Wstringop", # mainly gcc8
+                             ": warning: .* \\[-Wclass-memaccess\\]" # gcc8
                              )
 
                 ## clang warnings
