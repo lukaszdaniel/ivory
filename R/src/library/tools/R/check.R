@@ -3886,6 +3886,10 @@ setRlibs <-
 
                 lines <- grep(warn_re, lines, value = TRUE, useBytes = TRUE)
 
+                ## gcc seems not to know the size of pointers, so skip
+                ## some from -Walloc-size-larger-than= and -Wstringop-overflow=
+                lines <- grep("exceeds maximum object size.*-W(alloc-size-larger-than|stringop-overflow)", lines,
+                              value = TRUE, useBytes = TRUE, invert = TRUE)
                 ## skip for now some c++11-long-long warnings.
                 ex_re <- "(/BH/include/boost/|/RcppParallel/include/|/usr/include/|/usr/local/include/|/opt/X11/include/|/usr/X11/include/).*\\[-Wc[+][+]11-long-long\\]"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
@@ -4828,7 +4832,7 @@ setRlibs <-
         Sys.setenv("_R_CHECK_PRAGMAS_" = "TRUE")
         Sys.setenv("_R_CHECK_COMPILATION_FLAGS_" = "TRUE")
         if(!nzchar(Sys.getenv("_R_CHECK_R_DEPENDS_")))
-            Sys.setenv("_R_CHECK_R_DEPENDS_" = "TRUE")
+            Sys.setenv("_R_CHECK_R_DEPENDS_" = "warn")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

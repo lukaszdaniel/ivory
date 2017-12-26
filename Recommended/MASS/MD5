@@ -1,4 +1,4 @@
-026d810db3c67bd78387f8f0be8465f4 *NAMESPACE
+0ac7b30ad35a4c19ea69d76a6a366b02 *NAMESPACE
 df9ff3b3ed9842a6c2d767dfb14233d8 *man/eqscplot.Rd
 d59fb4bdaf0c58b26c3443c7c8c5af70 *man/Sitka.Rd
 9f038cc848d026bf00945399111bbc62 *man/beav2.Rd
@@ -29,7 +29,7 @@ f10d097bc2a4fbb9a4904db9fa2d512e *man/predict.glmmPQL.Rd
 a81ca88a2a39298dd099c015fdd3c167 *man/gilgais.Rd
 dfa3b68ec958f14f2335f12ce1677d0b *man/quine.Rd
 e1cc4debb9ba4982b2a78864d03bf5d7 *man/Cushings.Rd
-40690361e6659cafeb323cdbe911a218 *man/nlschools.Rd
+3d7a650e22ac09fbe68065d37c673aa9 *man/nlschools.Rd
 141fe74de34fe57d4753d8628f386437 *man/housing.Rd
 a7ba31f8b57db3cbb58b636ec45ad19d *man/Rabbit.Rd
 1f0a67c1a950722b94bcf83f72b3a932 *man/muscle.Rd
@@ -75,7 +75,7 @@ f484f91e53e72fc672f2d5edd507a768 *man/ginv.Rd
 7d46e561298348eafcb2464adcfa66b2 *man/fgl.Rd
 61fbfe12f436f23b478400e0c085731d *man/beav1.Rd
 be8257b0890c6c52c5faf72cdf1781b5 *man/kde2d.Rd
-c12990f5bc41e993e1eec645f451b2a6 *man/glmmPQL.Rd
+704eb4028483dc8fe035bcece0ba9d8c *man/glmmPQL.Rd
 007bf68c391f1085d20270d42b22fba4 *man/Cars93.Rd
 b70f43a1c1766f0e3dc2ed66bebabd1c *man/summary.rlm.Rd
 1ce122787e058327f52bd789e3a12dc9 *man/chem.Rd
@@ -155,7 +155,7 @@ fe390cf0437098a11251b103a0788822 *man/fitdistr.Rd
 e65737579ca1cd2810198d72f0260e21 *man/hills.Rd
 cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 2a0b5dd4c71cf01dfc1894be0e8f759b *man/mammals.Rd
-fdf8a08b02bf26e3b507a8ec325be3ec *DESCRIPTION
+d9cfcb43e225cc127df2814b853a634f *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
@@ -231,7 +231,7 @@ a317b028c0068a3fe27c2d27219f13b6 *R/sammon.R
 2011c48c78d52c192eee3464b443b5ff *R/qda.R
 4f74ab00a8fd8a8eaf56957b1e13aa52 *R/zzz.R
 45c46807b405d054cf4c0d431a87f1f0 *R/logtrans.R
-c1db018ec3e8d5ff63fd1930e6895ded *R/stepAIC.R
+9a938ecbf4331095aeab645a3155f170 *R/stepAIC.R
 71e9df198186c176784b5838e2f0142e *R/dose.p.R
 cc376ea8a9786c2fa9c01cf6cb1241d0 *R/fitdistr.R
 581cf2b527e658419254a98486b6d450 *R/enlist.R
