@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -987,7 +987,12 @@ msgstr ""
 msgid "'order.dendrogram' requires a dendrogram"
 msgstr "'order.dendrogram'는 덴드로그램을 필요로 합니다"
 
-#. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
+#. R/ar.R: stop("'order.max' argument must be < 'n.obs' argument")
+#: R/ar.R:0
+#, fuzzy
+msgid "'order.max' argument must be < 'n.obs' argument"
+msgstr "'order.max'는 반드시 'n.used'보다 작아야 합니다"
+
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")

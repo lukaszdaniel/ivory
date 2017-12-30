@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -586,6 +586,14 @@ msgstr ""
 #: R/QC.R:0
 #, fuzzy
 msgid "Authors@R field gives no person with name and roles."
+msgstr ""
+"Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
+"을 수 없습니다."
+
+#. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with deprecated elements:"
 msgstr ""
 "Authors@R 항목에서 유지보수의 역할을 담당하고 이메일 주소를 가진 개발자를 찾"
 "을 수 없습니다."
@@ -1670,6 +1678,11 @@ msgstr ""
 msgid "Found directory 'R' with no source files."
 msgstr ""
 
+#. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found file(s) with version 3 serialization:"
+msgstr ""
+
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 #: R/sotools.R:0
 msgid "Found non-API call to R: %s"
@@ -2501,6 +2514,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3411,6 +3425,14 @@ msgstr "디렉토리 '%s'는 R 코드를 포함하지 않습니다"
 #, fuzzy
 msgid "Subdirectory 'src' contains no source files."
 msgstr "디렉토리 '%s'는 존재하지 않습니다"
+
+#. R/check.R: gettext("Such files are only readable in R >= 3.5.0.\nRecreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as appropriate",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Such files are only readable in R >= 3.5.0.\n"
+"Recreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as "
+"appropriate"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0

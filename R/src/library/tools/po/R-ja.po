@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -586,6 +586,12 @@ msgstr "Authors@Rフィールドに役割が明示された人がいません "
 #: R/QC.R:0
 #, fuzzy
 msgid "Authors@R field gives no person with name and roles."
+msgstr "Authors@Rフィールドに役割が明示された人がいません "
+
+#. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with deprecated elements:"
 msgstr "Authors@Rフィールドに役割が明示された人がいません "
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")
@@ -1688,6 +1694,12 @@ msgstr ""
 msgid "Found directory 'R' with no source files."
 msgstr ""
 
+#. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found file(s) with version 3 serialization:"
+msgstr " 未知のセクションを含む Rd ファイル： "
+
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 #: R/sotools.R:0
 msgid "Found non-API call to R: %s"
@@ -2627,6 +2639,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -3492,6 +3505,14 @@ msgstr " ディレクトリ '%s' が存在しません "
 #, fuzzy
 msgid "Subdirectory 'src' contains no source files."
 msgstr " ディレクトリ '%s' は Rd ソースを含んでいません "
+
+#. R/check.R: gettext("Such files are only readable in R >= 3.5.0.\nRecreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as appropriate",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Such files are only readable in R >= 3.5.0.\n"
+"Recreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as "
+"appropriate"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
@@ -7972,9 +7993,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
 #~ msgid "These entries are required in an Rd file."
 #~ msgstr " Rd ファイルにはこれらの項目が必要です。 "
-
-#~ msgid "Rd files with unknown sections:"
-#~ msgstr " 未知のセクションを含む Rd ファイル： "
 
 #~ msgid "Rd files with non-standard keywords:"
 #~ msgstr " 非標準的なキーワードを持つ Rd ファイル： "

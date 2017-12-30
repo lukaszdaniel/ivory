@@ -291,6 +291,12 @@
       \item Support for a system Java on macOS has been
       removed --- install a fairly recent Oracle Java (see \sQuote{R
 	Installation and Administration} §C.3.2).
+
+      \item \code{configure} will use \command{pkg-config} to find the
+      flags to link to \code{jpeg} if available (as it should be for
+      \code{jpeg-9c} and \code{libjpeg-turbo}).  (This amends the code
+      added in \R 3.3.0 as module name in \code{jpeg-9c} is not what
+      that tested for.)
     }
   }
 
@@ -477,7 +483,7 @@
       avoid the search.
 
       \item The version of LAPACK included in the sources has been
-      updated to 3.8.0 (for the routines used by \R a very minor bug-fix
+      updated to 3.8.0 (for the routines used by \R, a very minor bug-fix
       change).
     }
   }
@@ -486,7 +492,10 @@
     \itemize{
       \item \code{Sys.timezone(location = FALSE)} (which was a stop-gap
       measure for Windows long ago) is deprecated.  It no longer returns
-      the value of environment variable \env{TZ} (a location).
+      the value of environment variable \env{TZ} (usually a location).
+
+      \item Legacy support of \command{make} macros such as \samp{CXX1X}
+      is formally deprecated: use the \samp{CXX11} forms instead.
     }
   }
 
@@ -497,6 +506,9 @@
 
       \item \code{removeSource()} no longer erroneously removes
       \code{NULL} in certain cases, thanks to Dénes Tóth.
+
+      \item \code{nls(`NO [mol/l]` ~ f(t))} and \code{nls(y ~ a)} now
+      work.  (partly from \PR{17367})
     }
   }
 }

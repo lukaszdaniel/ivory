@@ -261,12 +261,14 @@ struct promsxp_struct {
    fields used to maintain the collector's linked list structures. */
 
 /* Define SWITH_TO_REFCNT to use reference counting instead of the
-   'NAMED' mechanism. This uses the R-devel binary layout. The two
-   'named' field bits are used for the REFCNT, so REFCNTMAX is 3. */
+   'NAMED' mechanism. */
 //#define SWITCH_TO_REFCNT
 
 #if defined(SWITCH_TO_REFCNT) && ! defined(COMPUTE_REFCNT_VALUES)
 # define COMPUTE_REFCNT_VALUES
+#endif
+#if defined(SWITCH_TO_REFCNT) && ! defined(ADJUST_ENVIR_REFCNTS)
+# define ADJUST_ENVIR_REFCNTS
 #endif
 #define REFCNTMAX ((1 << NAMED_BITS) - 1)
 
@@ -1193,6 +1195,7 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 
 void R_Serialize(SEXP s, R_outpstream_t ops);
 SEXP R_Unserialize(R_inpstream_t ips);
+SEXP R_SerializeInfo(R_inpstream_t ips);
 
 /* slot management (in attrib.c) */
 SEXP R_do_slot(SEXP obj, SEXP name);

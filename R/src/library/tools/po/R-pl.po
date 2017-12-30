@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -585,6 +585,12 @@ msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
 #, fuzzy
 msgid "Authors@R field gives no person with name and roles."
 msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
+
+#. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with deprecated elements:"
+msgstr "Pole 'Authors@R' wskazuje na osoby z niepoprawnymi rolami:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")
 #: R/QC.R:0
@@ -1651,6 +1657,11 @@ msgstr "Znaleziono Makefile z zakończeniami linii CR lub CRLF:"
 msgid "Found directory 'R' with no source files."
 msgstr "Znaleziono katalog 'R' nie zawierajacy plików źródłowych."
 
+#. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found file(s) with version 3 serialization:"
+msgstr ""
+
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 #: R/sotools.R:0
 msgid "Found non-API call to R: %s"
@@ -2594,6 +2605,7 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -3430,6 +3442,14 @@ msgstr "Podkatalog 'demo' nie zawiera dema."
 #: R/check.R:0
 msgid "Subdirectory 'src' contains no source files."
 msgstr "Podkatalog 'src' nie zawiera żadnych plików źródłowych."
+
+#. R/check.R: gettext("Such files are only readable in R >= 3.5.0.\nRecreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as appropriate",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Such files are only readable in R >= 3.5.0.\n"
+"Recreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as "
+"appropriate"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0

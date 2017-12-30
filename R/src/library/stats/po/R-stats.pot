@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.5.0\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1275,7 +1275,13 @@ msgstr ""
 
 
 #: R/ar.R: 0
-#. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
+#. R/ar.R: stop("'order.max' argument must be < 'n.obs' argument")
+
+msgid "'order.max' argument must be < 'n.obs' argument"
+msgstr ""
+
+
+#: R/ar.R: 0
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")

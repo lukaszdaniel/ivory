@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.5.0\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -692,6 +692,13 @@ msgstr ""
 #. R/QC.R: gettext("Authors@R field gives no person with name and roles.", domain = "R-tools")
 
 msgid "Authors@R field gives no person with name and roles."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
+
+msgid "Authors@R field gives persons with deprecated elements:"
 msgstr ""
 
 
@@ -2009,6 +2016,13 @@ msgid "Found directory 'R' with no source files."
 msgstr ""
 
 
+#: R/check.R: 0
+#. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
+
+msgid "Found file(s) with version 3 serialization:"
+msgstr ""
+
+
 #: R/sotools.R: 0
 #. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
 
@@ -3096,6 +3110,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3109,6 +3124,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -4156,6 +4172,13 @@ msgstr ""
 #. R/check.R: gettext("Subdirectory 'src' contains no source files.\n", domain = "R-tools")
 
 msgid "Subdirectory 'src' contains no source files."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Such files are only readable in R >= 3.5.0.\nRecreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as appropriate",     domain = "R-tools")
+
+msgid "Such files are only readable in R >= 3.5.0.\nRecreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as appropriate"
 msgstr ""
 
 

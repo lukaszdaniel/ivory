@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2017-12-30 15:30\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -984,7 +984,12 @@ msgstr "'order' deve ser um vetor numérico não-negativo de comprimento 3"
 msgid "'order.dendrogram' requires a dendrogram"
 msgstr "'order.dendrogram' requer um dendrograma"
 
-#. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
+#. R/ar.R: stop("'order.max' argument must be < 'n.obs' argument")
+#: R/ar.R:0
+#, fuzzy
+msgid "'order.max' argument must be < 'n.obs' argument"
+msgstr "'order.max' deve ser < 'n.used'"
+
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
