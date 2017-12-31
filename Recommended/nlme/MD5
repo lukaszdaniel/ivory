@@ -284,8 +284,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-de5974ebff48cb535e2940a2619d8185 *ChangeLog
-a1a5e53224ed87f90597c4d76a9af991 *DESCRIPTION
+788d91ecb84569ee28a328a83333fc64 *ChangeLog
+d61657744bae34e15be69dc0dd915c0b *DESCRIPTION
 32e8c9fe310a42f7f0da0885eb90cd30 *po/R-fr.po
 0c4edcc4b0694baae2b58e4f8cc9d13a *po/R-ko.po
 13ec49d2aebb2ecf797a08afe50684c5 *po/R-de.po
@@ -341,7 +341,7 @@ dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 1dcb40c8ec95980cb02af27cd02a6c8b *tests/predict.lme.R
 25b8e8f450032e18daaa9937ccb85b30 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
-743614ba47af2cfd64c7f15b06d8ede9 *tests/anova.gls.R
+677ca93ed4c318d7aeafb7ec35dbf241 *tests/anova.gls.R
 77b63276dbc5d725dc834b6f0dda73d6 *tests/coef.Rout.save
 974993dc01e65bbab91f69d4faf4e2ea *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
