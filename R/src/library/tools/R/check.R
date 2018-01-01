@@ -1,7 +1,7 @@
 #  File src/library/tools/R/check.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2017 The R Core Team
+#  Copyright (C) 1995-2018 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -95,7 +95,8 @@ R_runR <- function(cmd = NULL, Ropts = "", env = "",
 
 setRlibs <-
     function(lib0 = "", pkgdir = ".", suggests = FALSE, libdir = NULL,
-             self = FALSE, self2 = TRUE, quote = FALSE, LinkingTo = FALSE)
+             self = FALSE, self2 = TRUE, quote = FALSE, LinkingTo = FALSE,
+             tests = FALSE)
 {
     WINDOWS <- .Platform$OS.type == "windows"
     useJunctions <- WINDOWS && !nzchar(Sys.getenv("R_WIN_NO_JUNCTIONS"))
@@ -151,11 +152,17 @@ setRlibs <-
     else {
         ## we always need to be able to recognise 'vignettes'
         VB <- unname(pi$DESCRIPTION["VignetteBuilder"])
-        if(is.na(VB)) character()
+        sug <- if(is.na(VB)) character()
         else {
             VB <- unlist(strsplit(VB, ","))
-            unique(gsub('[[:space:]]', '', VB))
+            sug <- unique(gsub('[[:space:]]', '', VB))
+            ## too many people forgot this.
+            if("knitr" %in% VB) sug <- c(sug, "rmarkdown")
+            sug
         }
+        if(tests) ## we need the test-suite package available
+            c(sug, intersect(names(pi$Suggests), c("RUnit", "testthat")))
+        else sug
     }
     deps <- unique(c(names(pi$Depends), names(pi$Imports),
                      if(LinkingTo) names(pi$LinkingTo),
@@ -2580,9 +2587,9 @@ setRlibs <-
             nBad <- length(grep(", possibly from ", out))
             msg <- if (nBad) {
                 if(haveObjs)
-                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.\n", domain = "R-tools")
+                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console, nor use Fortran I/O nor system RNGs.\n", domain = "R-tools")
                 else
-                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.  The detected symbols are linked into the code but might come from libraries and not actually be called.\n", domain = "R-tools")
+                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console, nor use Fortran I/O nor system RNGs. The detected symbols are linked into the code but might come from libraries and not actually be called.\n", domain = "R-tools")
             } else character()
             if(nAPIs)
                 msg <- c(msg, gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools"))
@@ -3055,7 +3062,7 @@ setRlibs <-
                               if(nzchar(arch)) R_opts4 else R_opts2,
                               env = c("LANGUAGE=en",
                                      "_R_CHECK_INTERNALS2_=1",
-                              if(nzchar(arch)) env0, jitstr, elibs),
+                              if(nzchar(arch)) env0, jitstr, elibs_tests),
                               stdout = "", stderr = "", arch = arch,
                               timeout = tlim)
             t2 <- proc.time()
@@ -3464,7 +3471,7 @@ setRlibs <-
                                     Sys.getenv("_R_CHECK_ELAPSED_TIMEOUT_")))
                 t1 <- proc.time()
                 outfile <- file.path(pkgoutdir, "build_vignettes.log")
-                status <- R_runR0(Rcmd, R_opts2, jitstr,
+                status <- R_runR0(Rcmd, R_opts2, c(jitstr, elibs),
                                   stdout = outfile, stderr = outfile,
                                   timeout = tlim)
                 t2 <- proc.time()
@@ -5233,6 +5240,13 @@ setRlibs <-
         elibs <- if(is_base_pkg) character()
         else if(R_check_depends_only)
             setRlibs(pkgdir = pkgdir, libdir = libdir)
+        else if(R_check_suggests_only)
+            setRlibs(pkgdir = pkgdir, libdir = libdir, suggests = TRUE)
+        else character()
+
+        elibs_tests <- if(is_base_pkg) character()
+        else if(R_check_depends_only)
+            setRlibs(pkgdir = pkgdir, libdir = libdir, tests = TRUE)
         else if(R_check_suggests_only)
             setRlibs(pkgdir = pkgdir, libdir = libdir, suggests = TRUE)
         else character()
