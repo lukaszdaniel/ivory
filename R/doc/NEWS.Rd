@@ -263,6 +263,8 @@
       Krivitsky in \PR{17366}.   The \code{ar.yw.default()}'s AIC
       computations have become more efficient by using
       \code{determinant()}.
+
+      \item New \code{warnErrList()} utility (from package \pkg{nlme}, improved).
     }
   }
 
@@ -283,7 +285,11 @@
       Bioconductor 3.6 and later has been removed from
       \code{setRepositories()}.  This changes the mapping for 6--8 used
       by \code{setRepositories(ind=)}.
-      
+
+      \item \command{R CMD check} now also applies the settings of
+      environment variables \env{_R_CHECK_SUGGESTS_ONLY_} and
+      \env{_R_CHECK_DEPENDS_ONLY_} to the re-building of vignettes.
+
       \item \command{R CMD check} with environment variable
       \env{_R_CHECK_DEPENDS_ONLY_} set to a true value makes
       test-suite-management packages available and (for the time being)
@@ -298,11 +304,18 @@
       removed --- install a fairly recent Oracle Java (see \sQuote{R
 	Installation and Administration} §C.3.2).
 
-      \item \code{configure} will use \command{pkg-config} to find the
+      \item \command{configure} will use \command{pkg-config} to find the
       flags to link to \code{jpeg} if available (as it should be for
       \code{jpeg-9c} and \code{libjpeg-turbo}).  (This amends the code
       added in \R 3.3.0 as the module name in \code{jpeg-9c} is not what
       that tested for.)
+
+      \item \command{configure} works harder to set additional flags in
+      \samp{SAFE_FFLAGS} only where necessary, and to use flags which
+      have little or no effect on performance.
+
+      In rare circumstances it may be necessary to override the
+      setting of \samp{SAFE_FFLAGS}.
     }
   }
 
@@ -514,7 +527,11 @@
       \code{NULL} in certain cases, thanks to Dénes Tóth.
 
       \item \code{nls(`NO [mol/l]` ~ f(t))} and \code{nls(y ~ a)} now
-      work.  (partly from \PR{17367})
+      work.  (Partly from \PR{17367})
+
+      \item \command{R CMD build} checks for GNU \command{cp} rather
+      than assuming Linux has it.  (\PR{17370} says \sQuote{Alpine
+	Linux} does not.)
     }
   }
 }

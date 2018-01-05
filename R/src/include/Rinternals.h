@@ -340,6 +340,23 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 	if (NAMED(__enm_v__) < NAMEDMAX)	\
 	    SET_NAMED( __enm_v__, NAMEDMAX);	\
     } while (0)
+#define ENSURE_NAMED(v) do { if (NAMED(v) == 0) SET_NAMED(v, 1); } while (0)
+#define SETTER_CLEAR_NAMED(x) do {				\
+	SEXP __x__ = (x);				\
+	if (NAMED(__x__) == 1) SET_NAMED(__x__, 0);	\
+    } while (0)
+#define RAISE_NAMED(x, n) do {			\
+	SEXP __x__ = (x);			\
+	int __n__ = (n);			\
+	if (NAMED(__x__) < __n__)		\
+	    SET_NAMED(__x__, __n__);		\
+    } while (0)
+#define DECREMENT_NAMED(x) do {				    \
+	SEXP __x__ = (x);				    \
+	int __n__ = NAMED(__x__);			    \
+	if (__n__ > 0 && __n__ < NAMEDMAX)		    \
+	    SET_NAMED(__x__, __n__ - 1);		    \
+    } while (0)
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
@@ -549,6 +566,7 @@ int  (MARK)(SEXP x);
 int  (TYPEOF)(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
+int  (TRACKREFS)(SEXP x);
 void (SET_OBJECT)(SEXP x, int v);
 void (SET_TYPEOF)(SEXP x, int v);
 void (SET_NAMED)(SEXP x, int v);
@@ -556,6 +574,9 @@ void SET_ATTRIB(SEXP x, SEXP v);
 void DUPLICATE_ATTRIB(SEXP to, SEXP from);
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
 void (ENSURE_NAMEDMAX)(SEXP x);
+void (ENSURE_NAMED)(SEXP x);
+void (SETTER_CLEAR_NAMED)(SEXP x);
+void (RAISE_NAMED)(SEXP x, int n);
 
 /* S4 object testing */
 int (IS_S4_OBJECT)(SEXP x);
@@ -962,6 +983,7 @@ SEXP Rf_stringSuffix(SEXP, int);
 SEXPTYPE Rf_str2type(const char *);
 Rboolean Rf_StringBlank(SEXP);
 SEXP Rf_substitute(SEXP,SEXP);
+SEXP Rf_topenv(SEXP, SEXP);
 const char * Rf_translateChar(SEXP);
 const char * Rf_translateChar0(SEXP);
 const char * Rf_translateCharUTF8(SEXP);

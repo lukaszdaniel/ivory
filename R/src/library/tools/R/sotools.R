@@ -226,6 +226,9 @@ so_symbol_names_table <-
       ## only in .o, positions hard-coded in check_so_symbols
       "windows, C++, g++, std::cout, _ZSt4cout",
       "windows, C++, g++, std::cerr, _ZSt4cerr",
+      "windows, Fortran, gfortran, open, _gfortran_st_open",
+      "windows, Fortran, gfortran, close, _gfortran_st_close",
+      "windows, Fortran, gfortran, rewind, _gfortran_st_rewind",
       "windows, Fortran, gfortran, write, _gfortran_st_write",
       "windows, Fortran, gfortran, print, _gfortran_st_write",
       ## in DLL
@@ -473,20 +476,23 @@ function(x, ...)
     names(objects) <- names(entries)
     if(length(objs <- attr(x, "objects")))
         objects[names(objs)] <- objs
-    c(gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools"),
+    c(gettextf("File %s:", sQuote(attr(x, "file"))),
       unlist(Map(function(u, v, w)
                  c(strwrap(gettextf("Found %s, possibly from %s",
                                     sQuote(v),
                                     paste(sprintf("%s (%s)",
                                                   sQuote(u[, "ssname"]),
                                                   u[, "language"]),
-                                          collapse = ", "), domain = "R-tools"),
+                                          collapse = ", ")),
                            indent = 2L, exdent = 4L),
                    if(length(w) > 1L) {
-                       strwrap(gettextf("Objects: %s",
-                                       paste(sQuote(w), collapse = ", "), domain = "R-tools"), indent = 4L, exdent = 6L)
+                       strwrap(sprintf("Objects: %s",
+                                       paste(sQuote(w), collapse =
+                                             ", ")),
+                               indent = 4L, exdent = 6L)
                    } else if(length(w)) {
-                       strwrap(gettextf("Object: %s", sQuote(w), domain = "R-tools"), indent = 4L, exdent = 6L)
+                       strwrap(sprintf("Object: %s", sQuote(w)),
+                               indent = 4L, exdent = 6L)
                    }),
                  entries, names(entries), objects)))
 }
@@ -538,7 +544,7 @@ if(.Platform$OS.type == "windows") {
                 Filter(length, lapply(bad, compare, strip_ = TRUE))
             } else {
                 if(useST)
-                    cat(gettext("Note: information on .o files for i386 is not available", domain = "R-tools"), "\n", sep = "")
+                    cat("Note: information on .o files for i386 is not available\n")
                 Filter(length, lapply(so_files, check_so_symbols, rarch="i386"))
             }
         } else NULL
@@ -574,7 +580,7 @@ if(.Platform$OS.type == "windows") {
                 Filter(length, lapply(bad2, compare))
             } else {
                 if(useST)
-                    cat(gettext("Note: information on .o files for x64 is not available", domain = "R-tools"), "\n", sep = "")
+                    cat("Note: information on .o files for x64 is not available\n")
                 Filter(length, lapply(so_files, check_so_symbols, rarch="x64"))
             }
         } else NULL
@@ -653,7 +659,7 @@ if(.Platform$OS.type == "windows") {
             tables <- readRDS(objects_symbol_tables_file)
             bad <- Filter(length, lapply(bad, compare))
         } else if(useST)
-            cat(gettext("Note: information on .o files is not available", domain = "R-tools"), "\n", sep = "")
+            cat("Note: information on .o files is not available\n")
         nAPIs <- lapply(lapply(so_files, check_so_symbols),
                         function(x) if(length(z <- attr(x, "nonAPI")))
                         structure(z,
@@ -691,10 +697,12 @@ format.check_nonAPI_calls <-
 function(x, ...)
 {
     if(length(x))
-        c(gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools"),
+        c(gettextf("File %s:", sQuote(attr(x, "file"))),
           if (length(x) > 1L) {
-              strwrap(gettextf("Found non-API calls to R: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools"), indent = 2L, exdent = 4L)
-          } else gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
+              strwrap(paste("Found non-API calls to R:",
+                            paste(sQuote(x), collapse = ", ")),
+                      indent = 2L, exdent = 4L)
+          } else paste("  Found non-API call to R:", sQuote(x))
           )
     else character()
 }
@@ -704,7 +712,11 @@ function(x, ...)
 {
     if(length(x))
         c(gettextf("File %s:", sQuote(attr(x, "file"))),
-              strwrap(sprintf(ngettext(length(x), "Found no call to: %s", "Found no calls to: %s", domain = "R-tools"), paste(sQuote(x), collapse = ", ")), indent = 2L, exdent = 4L)
+          if (length(x) > 1L) {
+              strwrap(paste("Found no calls to:",
+                            paste(sQuote(x), collapse = ", ")),
+                      indent = 2L, exdent = 4L)
+          } else paste("  Found no call to:", sQuote(x))
           )
     else character()
 }
