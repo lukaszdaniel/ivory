@@ -248,7 +248,7 @@ for(L in c(FALSE,TRUE))
 
 ## Log norm
 stopifnot(All.eq(pz, plnorm(exp(z))))
-
+
 
 ###==========  p <-> q	Inversion consistency =====================
 ok <- 1e-5 < pz & pz < 1 - 1e-5
@@ -1034,6 +1034,16 @@ stopifnot(all.equal(qbet[[1]], 0.047206901483498, tol=1e-12),
 	  -3.2e-8 > d3qb, d3qb > -3.1e-6,
 	  diff(d3qb) > 1e-9)
 ## had discontinuity (from wrong jump out of Newton) in R <= 3.3.2
+
+
+## rt() [PR#17306];  rf() and rbeta() [PR#17375] with non-scalar 'ncp'
+nc <- c(NA, 1); iN <- is.na(rep_len(nc, 3))
+## each gives warning  "NAs produced":
+assertWarning(T <- rt   (3, 4,   ncp = nc))
+assertWarning(F <- rf   (3, 4,5, ncp = nc))
+assertWarning(B <- rbeta(3, 4,5, ncp = nc))
+stopifnot(identical(iN, is.na(T)), identical(iN, is.na(F)), identical(iN, is.na(B)))
+## was not handled correctly, notably with NA's in ncp, in R <= 3.4.(2|3)
 
 
 

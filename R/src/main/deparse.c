@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2017  The R Core Team
+ *  Copyright (C) 1997--2018  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -20,12 +20,25 @@
  *
  *  IMPLEMENTATION NOTES:
  *
- *  Deparsing has 3 layers.  The user interface, do_deparse, should
- *  not be called from an internal function, the actual deparsing needs
- *  to be done twice, once to count things up and a second time to put
- *  them into the string vector for return.  Printing this to a file
- *  is handled by the calling routine.
+ *  Deparsing has 3 layers.
+ *  - The user interfaces, do_deparse(), do_dput(), and do_dump() should
+ *    not be called from an internal function.
+ *  - unless nlines > 0, the actual deparsing via deparse2() needs
+ *    to be done twice, once to count things up and a second time to put
+ *    them into the string vector for return.
+ *  - Printing this to a file is handled by the calling routine.
  *
+ *  Current call paths:
+ *
+ *    do_deparse() ------------> deparse1WithCutoff()
+ *    do_dput() -> deparse1() -> deparse1WithCutoff()
+ *    do_dump() -> deparse1() -> deparse1WithCutoff()
+ *  ---------
+ *  Workhorse: deparse1WithCutoff() -> deparse2() -> deparse2buff() --> {<itself>, ...}
+ *  ---------
+ *  ./errors.c: PrintWarnings() | warningcall_dflt() ... -> deparse1s() -> deparse1WithCutoff()
+ *  ./print.c : Print[Language|Closure|Expression]()    --> deparse1w() -> deparse1WithCutoff()
+ *  bind.c,match.c,..: c|rbind(), match(), switch()...-> deparse1line() -> deparse1WithCutoff()
  *
  *  INDENTATION:
  *
@@ -34,7 +47,7 @@
  *  options.
  *
  *
- *  GLOBAL VARIABLES:
+ *  LocalParseData VARIABLES  (historically GLOBALs):
  *
  *  linenumber:	 counts the number of lines that have been written,
  *		 this is used to setup storage for deparsing.
@@ -62,7 +75,7 @@
  *		 itself.
  */
 
-/*
+/* DTL ('duncan'):
 * The code here used to use static variables to share values
 * across the different routines. These have now been collected
 * into a struct named  LocalParseData and this is explicitly
@@ -825,8 +838,71 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 
     if (!d->active) return;
 
-    if (IS_S4_OBJECT(s)) d->isS4 = TRUE;
+    Rboolean hasS4_t = TYPEOF(s) == S4SXP;
+    if (IS_S4_OBJECT(s) || hasS4_t) {
+	d->isS4 = TRUE;
+	/* const void *vmax = vmaxget(); */
+	SEXP class = getAttrib(s, R_ClassSymbol),
+	    cl_def = TYPEOF(class) == STRSXP ? STRING_ELT(class, 0) : R_NilValue;
+	if(TYPEOF(cl_def) == CHARSXP) { // regular S4 objects
+	    print2buff("new(\"", d);
+	    print2buff(translateChar(cl_def), d);
+	    print2buff("\", ", d);
+	    SEXP slotNms; // ---- slotNms := methods::.slotNames(s)  ---------
+	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
+	    static SEXP R_getClassDef = NULL, R_slots = NULL, R_asS3 = NULL;
+	    if(R_getClassDef == NULL)
+		R_getClassDef = findFun(install("getClassDef"), R_MethodsNamespace);
+	    if(R_slots == NULL) R_slots = install("slots");
+	    if(R_asS3  == NULL) R_asS3  = install("asS3");
+	    SEXP e = PROTECT(lang2(R_getClassDef, class));
+	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
+	    slotNms = // names( cl_def@slots ) :
+		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
+	    UNPROTECT(2); // (e, cl_def)
+	    int n;
+	    Rboolean has_Data = FALSE;// does it have ".Data" slot?
+	    if(TYPEOF(slotNms) == STRSXP && (n = LENGTH(slotNms))) {
+		PROTECT(slotNms);
+		SEXP slotlist = PROTECT(allocVector(VECSXP, n));
+		// := structure(lapply(slotNms, slot, object=s), names=slotNms)
+		for(int i=0; i < n; i++) {
+		    SEXP slot_i = STRING_ELT(slotNms, i);
+		    SET_VECTOR_ELT(slotlist, i, R_do_slot(s, installTrChar(slot_i)));
+		    if(!hasS4_t && !has_Data)
+			has_Data = (strcmp(CHAR(slot_i), ".Data") == 0);
+		}
+		setAttrib(slotlist, R_NamesSymbol, slotNms);
+		vec2buff(slotlist, d, TRUE);
+		/*-----------------*/
+		UNPROTECT(2); // (slotNms, slotlist)
+	    }
+	    if(!hasS4_t && !has_Data) {
+		// may have *non*-slot contents, (i.e., not in .Data)
+		// ==> additionally deparse asS3(s) :
+		e = PROTECT(lang2(R_asS3, s)); // = asS3(s)
+		SEXP S3_s = PROTECT(eval(e, R_BaseEnv)); // correct env?
+		print2buff(", ", d);
+		deparse2buff(S3_s, d);
+		UNPROTECT(2); // (e, S3_s)
+	    }
+	    print2buff(")", d);
+	}
+	else { // exception: class is not CHARSXP
+	    if(isNull(cl_def) && isNull(ATTRIB(s))) // special
+		print2buff("getClass(\"S4\")@prototype", d);
+	    else { // irregular S4 ((does this ever trigger ??))
+		d->sourceable = FALSE;
+		print2buff("<S4 object of class ", d);
+		deparse2buff(class, d);
+		print2buff(">", d);
+	    }
+	}
+	/* vmaxset(vmax); */
+	return;
+    } // if( S4 )
 
+    // non-S4 cases:
     switch (TYPEOF(s)) {
     case NILSXP:
 	print2buff("NULL", d);
@@ -974,13 +1050,22 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	printcomment(s, d);
 	if (!isNull(ATTRIB(s)))
 	    d->sourceable = FALSE;
-	if (d_opts_in & QUOTEEXPRESSIONS) {
-	    print2buff("quote(", d);
-	    d->opts &= SIMPLE_OPTS;
+	SEXP op = CAR(s);
+        Rboolean doquote, maybe_quote = d_opts_in & QUOTEEXPRESSIONS;
+	if (maybe_quote) {
+	    // do *not* quote() formulas:
+	    doquote = // := op is not `~` (tilde) :
+		!((TYPEOF(op) == SYMSXP) &&
+		  !strcmp(CHAR(PRINTNAME(op)), "~"));
+	    if (doquote) {
+		print2buff("quote(", d);
+		d->opts &= SIMPLE_OPTS;
+	    } else { // `~`
+		d->opts &= ~QUOTEEXPRESSIONS;
+	    }
 	}
-	if (TYPEOF(CAR(s)) == SYMSXP) {
+	if (TYPEOF(op) == SYMSXP) {
 	    int userbinop = 0;
-	    SEXP op = CAR(s);
 	    if ((TYPEOF(SYMVALUE(op)) == BUILTINSXP) ||
 		(TYPEOF(SYMVALUE(op)) == SPECIALSXP) ||
 		(userbinop = isUserBinop(op))) {
@@ -1284,33 +1369,34 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    print2buff(")", d);
 		}
 	    }
-	} // end{CAR(s) : SYMSXP }
-	else if (TYPEOF(CAR(s)) == CLOSXP || TYPEOF(CAR(s)) == SPECIALSXP
-		 || TYPEOF(CAR(s)) == BUILTINSXP) {
-	    if (parenthesizeCaller(CAR(s))) {
+	} // end{op : SYMSXP }
+	else if (TYPEOF(op) == CLOSXP || TYPEOF(op) == SPECIALSXP
+		 || TYPEOF(op) == BUILTINSXP) {
+	    if (parenthesizeCaller(op)) {
 		print2buff("(", d);
-		deparse2buff(CAR(s), d);
+		deparse2buff(op, d);
 		print2buff(")", d);
 	    } else
-		deparse2buff(CAR(s), d);
+		deparse2buff(op, d);
 	    print2buff("(", d);
 	    args2buff(CDR(s), 0, 0, d);
 	    print2buff(")", d);
 	}
 	else { /* we have a lambda expression */
-	    if (parenthesizeCaller(CAR(s))) {
+	    if (parenthesizeCaller(op)) {
 		print2buff("(", d);
-		deparse2buff(CAR(s), d);
+		deparse2buff(op, d);
 		print2buff(")", d);
 	    } else
-		deparse2buff(CAR(s), d);
+		deparse2buff(op, d);
 	    print2buff("(", d);
 	    args2buff(CDR(s), 0, 0, d);
 	    print2buff(")", d);
 	}
-	if (d_opts_in & QUOTEEXPRESSIONS) {
+	if (maybe_quote) {
 	    d->opts = d_opts_in;
-	    print2buff(")", d);
+	    if(doquote)
+		print2buff(")", d);
 	}
 	break; // case LANGSXP --------------------------------------------------
     case STRSXP:
@@ -1339,62 +1425,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	print2buff("<weak reference>", d);
 	break;
     case S4SXP: {
-	/* const void *vmax = vmaxget(); */
-	SEXP class = getAttrib(s, R_ClassSymbol);
-	d->isS4 = TRUE;
-
-#ifdef _pre_R_350__
-	d->sourceable = FALSE;
-	print2buff("<S4 object of class ", d);
-	deparse2buff(class, d);
-	print2buff(">", d);
-#else
-/* Try to do what  dput() has been doing (in R, not C): */
-	SEXP cl_def = TYPEOF(class) == STRSXP ?
-	    STRING_ELT(class, 0) : R_NilValue;
-	if(TYPEOF(cl_def) == CHARSXP) { // regular S4 objects
-	    print2buff("new(\"", d);
-	    print2buff(translateChar(cl_def), d);
-	    print2buff("\",\n", d);
-	    SEXP slotNms; // ---- slotNms := methods::.slotNames(s)  ---------
-	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
-	    static SEXP R_getClassDef = NULL, R_slots = NULL;
-	    if(R_getClassDef == NULL)
-		R_getClassDef = findFun(install("getClassDef"), R_MethodsNamespace);
-	    if(R_slots == NULL) R_slots = install("slots");
-	    SEXP e = PROTECT(lang2(R_getClassDef, class));
-	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
-	    slotNms = // names( cl_def@slots ) :
-		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
-	    UNPROTECT(2); // (e, cl_def)
-	    int n;
-	    if(TYPEOF(slotNms) == STRSXP && (n = LENGTH(slotNms))) {
-		PROTECT(slotNms);
-		SEXP slotlist = PROTECT(allocVector(VECSXP, n));
-		// := structure(lapply(slotNms, slot, object=s), names=slotNms)
-		for(int i=0; i < n; i++) {
-		    SET_VECTOR_ELT(slotlist, i,
-				   R_do_slot(s, installTrChar(STRING_ELT(slotNms, i))));
-		}
-		setAttrib(slotlist, R_NamesSymbol, slotNms);
-		vec2buff(slotlist, d, TRUE);
-		/*-----------------*/
-		UNPROTECT(2); // (slotNms, slotlist)
-	    }
-	    print2buff(")", d);
-	}
-	else { // exception: class is not CHARSXP
-	    if(isNull(cl_def) && isNull(ATTRIB(s))) // special
-		print2buff("getClass(\"S4\")@prototype", d);
-	    else { // irregular S4 ((does this ever trigger ??))
-		d->sourceable = FALSE;
-		print2buff("<S4 object of class ", d);
-		deparse2buff(class, d);
-		print2buff(">", d);
-	    }
-	}
-	/* vmaxset(vmax); */
-#endif
+	error(_("'S4SXP': should not happen - please report"));
       break;
     }
     default:

@@ -27,12 +27,11 @@ e10820a2b12993e29d07ffc9020ac04b *man/text.rpart.Rd
 d7c54409916adaf84d994c6ae9dce40a *man/plotcp.Rd
 f3139570e979fb0b403f92970f1c2a2f *man/snip.rpart.Rd
 602b5f41491ff93e3bf46897eb9359ac *man/labels.rpart.Rd
-63fbade7d5b393e3107669ae0b1bd8b0 *PORTING
 d59df045075a1735e6d1bf2510b6a90a *vignettes/longintro.Rnw
 cc52160d413d59a2967d5d201adf9319 *vignettes/usercode.Rnw
 39192a8870332037a2402ca7857001a6 *vignettes/refer.bib
-88ebeff71081efec2e63ed7a7eda505d *ChangeLog
-2c2428091fb6f3a256971ca317caeef2 *DESCRIPTION
+a2ab960d43519a6f7f188c01af695799 *ChangeLog
+b0077e3e0e7f366bcdbb276a00f6197b *DESCRIPTION
 def0e4eb86394e1fc8da6dad289badc8 *po/R-fr.po
 72830d6d60ca7c55fb584af88cd4f60d *po/R-ko.po
 f139a7922704ed742263482a8f164d5b *po/R-de.po
@@ -61,9 +60,9 @@ fe7e32078b9528ec8a3488790815759b *inst/po/pl/LC_MESSAGES/R-rpart.mo
 e5598bd99b989df58f9fc60e19de4cd3 *inst/doc/usercode.R
 826935d99a3cb923990d55b0e9454f18 *inst/doc/longintro.R
 d59df045075a1735e6d1bf2510b6a90a *inst/doc/longintro.Rnw
-1ab8c4b78b81dedafba74869c5ddca8e *inst/doc/longintro.pdf
+300c25cf411f7d88718e139ef18621c0 *inst/doc/longintro.pdf
 cc52160d413d59a2967d5d201adf9319 *inst/doc/usercode.Rnw
-7fd45e47f67482c2958f164ee06b42a8 *inst/doc/usercode.pdf
+b86249daa10666c05d0a52c53227c008 *inst/doc/usercode.pdf
 4956cb0af45f1934ac665210ed13d325 *tests/rescale.R
 6db68bbe44f4ff6420c076d7cda7c40f *tests/priors.Rout.save
 45fcb65fa9a878dd1283752ee9364701 *tests/treble4.R
@@ -134,7 +133,6 @@ df645fee4bd6e992addee08c8be8207d *data/car.test.frame.csv.gz
 c074ec48b3561a633f13dfd4bfbcccd6 *data/car90.rda
 94bd043381c6584b0d5ddcccc8d65317 *data/stagec.rda
 818c4f591087a4c13cb23b2399f3e754 *data/kyphosis.tab.gz
-c3a78d906ce7e11764be494ca072ab85 *Changelog.TMT
 db65d73cef0532f31c05a33149aa58ed *Changes
 bf9f91b6ba6185e36819ffa8efdfd9e7 *src/print_tree.c
 ef5dd57de1f62c9ab3d9e4cd5fc06e36 *src/anovapred.c
@@ -172,4 +170,4 @@ bb8f4ee78a32b9f2184317979d1f3057 *src/node.h
 6e73f8fe81249bf8e7fa66e2c33c573d *src/rundown2.c
 7460fe434811e51b80cb9f7e08ef7153 *src/rpmatrix.c
 f654ccbd64dc018f81486d2db997da32 *src/usersplit.c
-7045bdec2ef4f9821f9800c67a1c6d4a *build/vignette.rds
+727534d3fa0e71043acdaf5fd9462cc0 *build/vignette.rds

@@ -351,12 +351,6 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 	if (NAMED(__x__) < __n__)		\
 	    SET_NAMED(__x__, __n__);		\
     } while (0)
-#define DECREMENT_NAMED(x) do {				    \
-	SEXP __x__ = (x);				    \
-	int __n__ = NAMED(__x__);			    \
-	if (__n__ > 0 && __n__ < NAMEDMAX)		    \
-	    SET_NAMED(__x__, __n__ - 1);		    \
-    } while (0)
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
@@ -501,11 +495,28 @@ Rboolean (Rf_isObject)(SEXP s);
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
 
-#define NAMEDMAX 2
+#define NAMEDMAX 3
 #define INCREMENT_NAMED(x) do {				\
 	SEXP __x__ = (x);				\
 	if (NAMED(__x__) != NAMEDMAX)			\
 	    SET_NAMED(__x__, NAMED(__x__) + 1);		\
+    } while (0)
+#define DECREMENT_NAMED(x) do {				    \
+	SEXP __x__ = (x);				    \
+	int __n__ = NAMED(__x__);			    \
+	if (__n__ > 0 && __n__ < NAMEDMAX)		    \
+	    SET_NAMED(__x__, __n__ - 1);		    \
+    } while (0)
+
+#define INCREMENT_LINKS(x) do {			\
+	SEXP il__x__ = (x);			\
+	INCREMENT_NAMED(il__x__);		\
+	INCREMENT_REFCNT(il__x__);		\
+    } while (0)
+#define DECREMENT_LINKS(x) do {			\
+	SEXP dl__x__ = (x);			\
+	DECREMENT_NAMED(dl__x__);		\
+	DECREMENT_REFCNT(dl__x__);		\
     } while (0)
 
 #if defined(COMPUTE_REFCNT_VALUES)
@@ -658,17 +669,16 @@ void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, int v);
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
 int INTEGER_IS_SORTED(SEXP x);
 int INTEGER_NO_NA(SEXP x);
-int ALTINTEGER_SUM(SEXP x, Rboolean narm);
-double ALTREAL_SUM(SEXP x, Rboolean narm);
-int ALTINTEGER_MAX(SEXP x, Rboolean narm);
-int ALTINTEGER_MAX(SEXP x, Rboolean narm);
+SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
+SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
+SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
+SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
+SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
+SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
 SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
 SEXP INTEGER_IS_NA(SEXP x);
 SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
 	
-double ALTREAL_MIN(SEXP x, Rboolean narm);
-int ALTINTEGER_MAX(SEXP x, Rboolean narm);
-double ALTREAL_MAX(SEXP x, Rboolean narm);
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
 int REAL_IS_SORTED(SEXP x);
 int REAL_NO_NA(SEXP x);
@@ -942,6 +952,7 @@ SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP Rf_install(const char *);
 SEXP Rf_installChar(SEXP);
+SEXP Rf_installNoTrChar(SEXP);
 SEXP Rf_installDDVAL(int i);
 SEXP Rf_installS3Signature(const char *, const char *);
 Rboolean Rf_isFree(SEXP);
@@ -1344,6 +1355,7 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 #define inherits		Rf_inherits
 #define install			Rf_install
 #define installChar		Rf_installChar
+#define installNoTrChar		Rf_installNoTrChar
 #define installDDVAL		Rf_installDDVAL
 #define installS3Signature	Rf_installS3Signature
 #define isArray			Rf_isArray

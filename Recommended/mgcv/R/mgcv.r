@@ -159,7 +159,7 @@ all.vars1 <- function(form) {
   if ("[["%in%vn) stop("can't handle '[[' in formula")
   ii <- which(vn%in%"$") ## index of '$'
   if (length(ii)) { ## assemble variable names
-    vn1 <- if (ii[1]>1) vn[1:(ii[1]-1)]
+    vn1 <- if (ii[1]>1) vn[seq_len(ii[1]-1)]
     go <- TRUE
     k <- 1
     while (go) {
@@ -239,7 +239,8 @@ interpret.gam0 <- function(gf,textra=NULL,extra.special=NULL)
   ns <- len.sp + len.tp + len.tip + len.t2p + len.zp# number of smooths
   pav <- av <- rep("",0)
   smooth.spec <- list()
-  mgcvat <- "package:mgcv" %in% search() ## is mgcv in search path?
+  #mgcvat <- "package:mgcv" %in% search() ## is mgcv in search path?
+  mgcvns <- loadNamespace('mgcv')
   if (nt) for (i in seq_len(nt)) { # work through all terms
     if (k <= ns&&((ks<=len.sp&&sp[ks]==i)||(kt<=len.tp&&tp[kt]==i)||(kz<=len.zp&&zp[kz]==i)||
                   (kti<=len.tip&&tip[kti]==i)||(kt2<=len.t2p&&t2p[kt2]==i))) { # it's a smooth
@@ -249,11 +250,12 @@ interpret.gam0 <- function(gf,textra=NULL,extra.special=NULL)
       ## loadNamespace('mgcv'); k <- 10; mgcv::interpret.gam(y~s(x,k=k)) fails (can't find s)
       ## eval(parse(text=terms[i]),envir=p.env,enclos=loadNamespace('mgcv')) fails??
       ## following may supply namespace of mgcv explicitly if not on search path...
-      if (mgcvat) st <- eval(parse(text=terms[i]),envir=p.env) else {
+      ## If 's' etc are masked then we can fail even if mgcv on search path
+      #if (mgcvat) st <- eval(parse(text=terms[i]),envir=p.env) else {
          st <- try(eval(parse(text=terms[i]),envir=p.env),silent=TRUE)
          if (inherits(st,"try-error")) st <- 
-            eval(parse(text=terms[i]),enclos=p.env,envir=loadNamespace('mgcv'))
-      }
+            eval(parse(text=terms[i]),enclos=p.env,envir=mgcvns)
+      #}
       if (!is.null(textra)) { ## modify the labels on smooths with textra
         pos <- regexpr("(",st$lab,fixed=TRUE)[1]
         st$label <- paste(substr(st$label,start=1,stop=pos-1),textra,
@@ -1232,7 +1234,7 @@ gam.setup <- function(formula,pterms,
       ok <- FALSE
     }
   } else ok <- FALSE
-  G$sp <- if (ok) sp[1:ncol(L)] else rep(-1,ncol(L))
+  G$sp <- if (ok) sp[seq_len(ncol(L))] else rep(-1,ncol(L))
   
   names(G$sp) <- sp.names
 
@@ -1984,8 +1986,6 @@ gam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
    
     if ((is.list(formula)&&(is.null(family$nlp)||family$nlp!=gp$nlp))||
         (!is.list(formula)&&!is.null(family$npl)&&(family$npl>1))) stop("incorrect number of linear predictors for family")
-
-    if (ncol(G$X)>nrow(G$X)) stop("Model has more coefficients than data") 
        
     G$terms<-terms;
     G$mf<-mf;G$cl<-cl;
@@ -2002,7 +2002,9 @@ gam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
   }
 
   if (!fit) return(G)
-  
+
+  if (ncol(G$X)>nrow(G$X)) stop("Model has more coefficients than data") 
+
   G$conv.tol <- control$mgcv.tol      # tolerence for mgcv
   G$max.half <- control$mgcv.half # max step halving in Newton update mgcv
 
@@ -2750,7 +2752,7 @@ predict.gam <- function(object,newdata,type="link",se.fit=FALSE,terms=NULL,exclu
     drop.intercept <- rep(FALSE, length(Terms))
   } else {
     ## make sure intercept explicitly included, so it can be cleanly dropped...
-    for (i in 1:length(Terms)) {
+    for (i in seq_along(Terms)) {
       if (drop.intercept[i] == TRUE) attr(Terms[[i]],"intercept") <- 1 
     }
   }
@@ -3458,7 +3460,7 @@ testStat <- function(p,X,V,rank=NULL,type=0,res.df= -1) {
 
 
 
-summary.gam <- function (object, dispersion = NULL, freq = FALSE, ...) {
+summary.gam <- function (object, dispersion = NULL, freq = FALSE,re.test = TRUE, ...) {
 ## summary method for gam object - provides approximate p values 
 ## for terms + other diagnostics
 ## Improved by Henric Nilsson
@@ -3598,7 +3600,7 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, ...) {
         kind <- RNGkind(NULL)
         RNGkind("default","default")
         set.seed(11) ## ensure repeatability
-        ind <- sample(1:nrow(object$model),sub.samp,replace=FALSE)  ## sample these rows from X
+        ind <- sample(seq_len(nrow(object$model)),sub.samp,replace=FALSE)  ## sample these rows from X
         X <- predict(object,object$model[ind,],type="lpmatrix")
         RNGkind(kind[1],kind[2])
         assign(".Random.seed",seed,envir=.GlobalEnv) ## RNG behaves as if it had not been used
@@ -3607,7 +3609,7 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, ...) {
       }
       X <- X[!is.na(rowSums(X)),] ## exclude NA's (possible under na.exclude)    
     } ## end if (m>0)
-
+    ii <- 0
     for (i in seq_len(m)) { ## loop through smooths
 
       start <- object$smooth[[i]]$first.para;stop <- object$smooth[[i]]$last.para
@@ -3615,27 +3617,32 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, ...) {
       V <- object$Vp[start:stop,start:stop,drop=FALSE] ## Bayesian
       
       p <- object$coefficients[start:stop]  # params for smooth
-
-      edf1[i] <- edf[i] <- sum(object$edf[start:stop]) # edf for this smooth
+      edf1i <- edfi <- sum(object$edf[start:stop]) # edf for this smooth
       ## extract alternative edf estimate for this smooth, if possible...
-      if (!is.null(object$edf1)) edf1[i] <-  sum(object$edf1[start:stop]) 
- 
+      if (!is.null(object$edf1)) edf1i <-  sum(object$edf1[start:stop])
       Xt <- X[,start:stop,drop=FALSE]  
       fx <- if (inherits(object$smooth[[i]],"tensor.smooth")&&
                 !is.null(object$smooth[[i]]$fx)) all(object$smooth[[i]]$fx) else object$smooth[[i]]$fixed
       if (!fx&&object$smooth[[i]]$null.space.dim==0&&!is.null(object$R)) { ## random effect or fully penalized term
-        res <- reTest(object,i)
+        res <- if (re.test) reTest(object,i) else NULL
       } else { ## Inverted Nychka interval statistics
-        df[i] <- min(ncol(Xt),edf1[i])
+       
         if (est.disp) rdf <- residual.df else rdf <- -1
-        res <- testStat(p,Xt,V,df[i],type=0,res.df = rdf)
+        res <- testStat(p,Xt,V,min(ncol(Xt),edf1i),type=0,res.df = rdf)
       }
-      df[i] <- res$rank
-      chi.sq[i] <- res$stat
-      s.pv[i] <- res$pval 
-      
-      names(chi.sq)[i]<- object$smooth[[i]]$label
-      
+      if (!is.null(res)) {
+        ii <- ii + 1
+        df[ii] <- res$rank
+        chi.sq[ii] <- res$stat
+        s.pv[ii] <- res$pval 
+        edf1[ii] <- edf1i 
+        edf[ii] <- edfi 
+        names(chi.sq)[ii]<- object$smooth[[i]]$label
+      }
+    } 
+    if (ii==0) df <- edf1 <- edf <- s.pv <- chi.sq <- array(0, 0) else {
+      df <- df[seq_len(ii)];chi.sq <- chi.sq[seq_len(ii)];edf1 <- edf1[seq_len(ii)]
+      edf <- edf[seq_len(ii)];s.pv <- s.pv[seq_len(ii)]
     }
     if (!est.disp) {
       s.table <- cbind(edf, df, chi.sq, s.pv)      
@@ -4116,7 +4123,11 @@ initial.spg <- function(x,y,weights,family,S,rank,off,offset=NULL,L=NULL,lsp0=NU
     if (inherits(family,"extended.family")) {
       theta <- family$getTheta()
       ## use 'as.numeric' - 'drop' can leave result as 1D array...
-      w <- .5 * as.numeric(family$Dd(y,mustart,theta,weights)$EDmu2*family$mu.eta(family$linkfun(mustart))^2)  
+      Ddo <- family$Dd(y,mustart,theta,weights)
+      mu.eta2 <-family$mu.eta(family$linkfun(mustart))^2 
+      w <- .5 * as.numeric(Ddo$Dmu2 * mu.eta2)
+      if (any(w<0)) w <- .5 * as.numeric(Ddo$EDmu2 * mu.eta2) 
+      #w <- .5 * as.numeric(family$Dd(y,mustart,theta,weights)$EDmu2*family$mu.eta(family$linkfun(mustart))^2)  
     } else w <- as.numeric(weights*family$mu.eta(family$linkfun(mustart))^2/family$variance(mustart))
     w <- sqrt(w)
     if (type==1) { ## what PI would have used

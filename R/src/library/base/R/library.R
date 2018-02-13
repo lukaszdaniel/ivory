@@ -1,7 +1,7 @@
 #  File src/library/base/R/library.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2017 The R Core Team
+#  Copyright (C) 1995-2018 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -682,9 +682,12 @@ function(package = NULL, lib.loc = NULL, quiet = FALSE,
         }
         if(length(paths) > 1L) {
             ## If a package was found more than once ...
-            paths <- paths[1L]
 	    if(verbose)
-                warning(gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg), sQuote(paths)), domain = "R-base")
+		warning(gettextf("package %s was found more than once. Using the first from\n  %s",
+				 sQuote(pkg),
+				 paste(dQuote(paths), collapse=",\n  ")),
+			domain = "R-base")
+            paths <- paths[1L]
         }
         out <- c(out, paths)
     }

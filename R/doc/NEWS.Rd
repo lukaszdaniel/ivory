@@ -7,16 +7,16 @@
 
 \section{\Rlogo CHANGES IN R-devel}{
 
-  \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
-    \itemize{
-      \item The default version for \code{save()}, \code{saveRDS()},
-      \code{serialize()} and similar has been changed to \samp{3}.
-      Objects saved with version 3 are not readable by earlier versions
-      of \R.
+%%   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
+%%     \itemize{
+%%       \item The default version for \code{save()}, \code{saveRDS()},
+%%       \code{serialize()} and similar has been changed to \samp{3}.
+%%       Objects saved with version 3 are not readable by earlier versions
+%%       of \R.
 
-      This includes saved workspaces.
-    }
-  }
+%%       This includes saved workspaces.
+%%     }
+%%   }
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -131,9 +131,11 @@
       \code{approxfun()} also work for long vectors.
 
       %% one item with several paragraphs
-      \item \code{deparse()} (and \code{dump()}) are more useful for S4
-      objects; \code{dput()} now using the same internal C code instead
-      of its previous imperfect workaround R code.
+      \item \code{deparse()} and \code{dump()} are more useful for S4
+      objects, \code{dput()} now using the same internal C code instead
+      of its previous imperfect workaround R code.  S4 objects now
+      typically deparse perfectly, i.e., can be recreated identically
+      from deparsed code.
 
       \code{dput()}, \code{deparse()} and \code{dump()} now print the
       \code{names()} information only once, using the more readable
@@ -145,17 +147,21 @@
       the \code{(tag = value)} syntax for atomic vectors.  On the other
       hand, without deparse options \code{"showAttributes"} and
       \code{"niceNames"}, names are no longer shown also for lists.
-      \code{as.character(list( c (one = 1)))} now includes the name, as
+      \code{as.character(list(  c (one = 1)))} now includes the name, as
       \code{as.character(list(list(one = 1)))} has always done.
 
       \code{m:n} now also deparses nicely when \eqn{m > n}.
+
+      The \code{"quoteExpressions"} option, also part of \code{"all"},
+      no longer \code{quote()}s formulas as that may not re-parse
+      identically.  (\PR{17378})
 
       \item If the option \code{setWidthOnResize} is set and \code{TRUE},
       \R run in a terminal using a recent \code{readline} library will
       set the \code{width} option when the terminal is
       resized.  Suggested by Ralf Goertz.
 
-      \item If multiple \code{on.exit} expressions are set using
+      \item If multiple \code{on.exit()} expressions are set using
       \code{add = TRUE} then all expressions will now be run even if one
       signals an error.
 
@@ -264,7 +270,55 @@
       computations have become more efficient by using
       \code{determinant()}.
 
-      \item New \code{warnErrList()} utility (from package \pkg{nlme}, improved).
+      \item New \code{warnErrList()} utility (from package \pkg{nlme},
+      improved).
+
+      \item By default the (arbitrary) signs of the loadings from
+      \code{princomp()} are chosen so the first element is non-negative.
+
+      \item If \option{--default-packages} is not used, then
+      \command{Rscript} now checks the environment variable
+      \env{R_SCRIPT_DEFAULT_PACKAGES}. If this is set, then it takes
+      precedence over \env{R_DEFAULT_PACKAGES}. If default packages are
+      not specified on the command line or by one of these environment
+      variables, then \command{Rscript} now uses the same default
+      packages as \command{R}. For now, the previous behavior of
+      dropping \pkg{methods} can be restored by setting the environment
+      variable \env{R_SCRIPT_LEGACY} to \samp{yes}.
+
+      \item When a package is found more than once, the warning from
+      \code{find.package(*, verbose=TRUE)} lists all library locations.
+
+      \item POSIXt objects can now also be rounded or truncated to month
+      or year.
+
+      \item \code{stopifnot()} can be used alternatively via new argument
+      \code{exprs} which is nicer and useful when testing several
+      expressions in one call.
+
+      \item The environment variable \env{R_MAX_VZISE} can now be used
+      to specify the maximal vector heap size. On macOS, unless specified
+      by this environment variable, the maximal vector heap size is set to
+      the maximum on 16GB and the available physical memory. This is to
+      avoid having the \command{R} process killed when macOS over-commits
+      memory.
+
+      \item \code{sum(x)} and \code{sum(x1,x2,..,x<N>)} with many or
+      long logical and integer vectors no longer overflows (and returns
+      \code{NA} with a warning), but returns \code{double} numbers now
+      in such cases.
+
+      \item Single components of POSIXlt objects can now be extracted
+      and replaced via \code{[} indexing with 2 indices.
+
+      \item S3 method lookup now searches the namespace registry after
+      the top level environment of the calling environment.
+
+      \item Arithmetic sequences created by \code{1:n},
+      \code{seq_along}, and the like now use compact internal
+      representations via the \code{ALTREP} framework.  Coercing Integer
+      and numeric vectors to character also now uses the \code{ALTREP}
+      framework to defer the actual conversion until first use.
     }
   }
 
@@ -298,17 +352,17 @@
     }
   }
 
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item By default, packages are now byte-compiled on installation.
+    }
+  }
+
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
       \item Support for a system Java on macOS has been
       removed --- install a fairly recent Oracle Java (see \sQuote{R
 	Installation and Administration} §C.3.2).
-
-      \item \command{configure} will use \command{pkg-config} to find the
-      flags to link to \code{jpeg} if available (as it should be for
-      \code{jpeg-9c} and \code{libjpeg-turbo}).  (This amends the code
-      added in \R 3.3.0 as the module name in \code{jpeg-9c} is not what
-      that tested for.)
 
       \item \command{configure} works harder to set additional flags in
       \samp{SAFE_FFLAGS} only where necessary, and to use flags which
@@ -336,6 +390,12 @@
     \itemize{
       \item \code{Sys.timezone(location = FALSE)} is defunct, and is
       ignored (with a warning).
+
+      \item \code{methods:::bind_activation()} is defunct now; it
+      typically has been unneeded for years.
+
+      \item the undocumented "hidden" \code{.__H__.cbind} and
+      \code{.__H__.rbind} are deprecated, correspondingly.
     }
   }
 
@@ -488,6 +548,30 @@
       \item \code{as.matrix(dd)} now works when the data frame \code{dd}
       contains a column which is a data frame or matrix, including a
       0-column matrix/d.f. .
+
+      \item \code{NAMEDMAX} has been raised to 3 to allow protection of
+      intermediate results from (usually ill-advised) assignments in
+      arguments to \code{BUILTIN} functions. Package \code{C} code using
+      \code{SET_NAMED} may need to be revised.
+
+      \item \code{mclapply(X, mc.cores)} now follows its documentation
+      and calls \code{lapply()} in case \code{mc.cores = 1} also in the
+      case \code{mc.preschedule} is false.  (\PR{17373})
+
+      \item \code{aggregate(<data.frame>, drop=FALSE)} no longer calls
+      the function on <empty> parts, and rather sets corresponding
+      results to \code{NA}, thanks to Suharto Anggono's patches in
+      \PR{17280}.
+
+      \item The \code{duplicated()} method for data frames is now based
+      on \code{list}s (instead of string coercion).  Consequently
+      \code{unique()} is better distinguishing data frame rows, fixing
+      \PR{17369} and \PR{17381}.  The methods for matrices and arrays
+      are changed accordingly.
+
+      \item Calling \code{names()} on an S4 object derived from
+      \code{"environment"} behaves (by default) like calling
+      \code{names()} on an ordinary environment.
     }
   }
 }
@@ -504,6 +588,20 @@
       \item The version of LAPACK included in the sources has been
       updated to 3.8.0 (for the routines used by \R, a very minor bug-fix
       change).
+
+      \item \code{parallel::detectCores(logical = FALSE)} is ignored on
+      Linux systems, since the information is not available with
+      virtualized OSes.
+    }
+  }
+
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item \command{configure} will use \command{pkg-config} to find the
+      flags to link to \code{jpeg} if available (as it should be for the
+      recently-released \code{jpeg-9c} and \code{libjpeg-turbo}).  (This
+      amends the code added in \R 3.3.0 as the module name in
+      \code{jpeg-9c} is not what that tested for.)
     }
   }
 
@@ -532,6 +630,18 @@
       \item \command{R CMD build} checks for GNU \command{cp} rather
       than assuming Linux has it.  (\PR{17370} says \sQuote{Alpine
 	Linux} does not.)
+
+      \item Non-UTF-8 multibyte character handling fixed more
+      permanently (\PR{16732}).
+
+      \item \code{sum(<large ints>, <stuff>)} is more consistent.
+      (\PR{17372})
+
+      \item \code{rf()} and \code{rbeta()} now also work correctly when
+      \code{ncp} is not scalar, notably when (partly) \code{NA}.
+      (\PR{17375})
+
+      \item \code{is.na(NULL)} no longer warns.  (\PR{16107})
     }
   }
 }
@@ -3082,7 +3192,7 @@
       returns class \code{"poly"} just like \code{poly()} which gets a
       new \code{simple=FALSE} option.  They now lead to correct
       \code{predict()}ions, e.g., on subsets of the original data.
-      %% see https://stat.ethz.ch/pipermail/r-devel/2015-July/071532.html
+      (\PR{16239})
 
       \item \code{rhyper(nn, <large>)} now works correctly. (\PR{16489})
 

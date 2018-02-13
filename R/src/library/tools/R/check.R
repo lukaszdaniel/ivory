@@ -56,6 +56,45 @@ report_timeout <- function(tlim)
                 domain = "R-tools", call. = FALSE)
 }
 
+## Find serialized objects (for load() and for readRDS()) in "allfiles" and
+## report serialization versions (0 means not a serialized object,
+## 1 means either version-1 or not a serialized object, 2 and more means
+## serialized object of that version).
+##
+## These are most commonly data/*.{Rdata,rda}, R/sysdata.rda files,
+## and build/vignette.rds
+## But packages have other .rds files in many places.
+## Despite its name, build/partial.rdb is created by saveRDS.
+##
+get_serialization_version <- function(allfiles)
+{
+    getVerLoad <- function(file)
+    {
+        ## This could look at the magic number, but for a short
+        ## while version 3 files were produced with a version-2
+        ## magic number. loadInfoFromConn2 checks if the magic number
+        ## is sensible.
+        con <- gzfile(file, "rb"); on.exit(close(con))
+        ## The .Internal gives an error on version-1 files
+        ## (and on non-serialized files)
+        tryCatch(.Internal(loadInfoFromConn2(con))$version,
+                 error = function(e) 1L)
+    }
+    getVerSer <- function(file)
+    {
+        con <- gzfile(file, "rb"); on.exit(close(con))
+        ## In case this is not a serialized object
+        tryCatch(.Internal(serializeInfoFromConn(con))$version,
+                 error = function(e) 0L)
+    }
+    loadfiles <- grep("[.](rda|RData|rdata|Rda|bam|Rbin)$", allfiles, value = TRUE)
+    serfiles <- c(grep("[.](rds|RDS|Rds|rdx)$", allfiles, value = TRUE),
+                  grep("build/partial[.]rdb$", allfiles, value = TRUE))
+    vers1 <- sapply(loadfiles, getVerLoad)
+    vers2 <- sapply(serfiles, getVerSer)
+    c(vers1, vers2)
+}
+
 ## Used for INSTALL and Rd2pdf
 run_Rcmd <- function(args, out = "", env = "", timeout = 0)
 {
@@ -231,21 +270,21 @@ add_dummies <- function(dir, Log)
     }
     Sys.setenv(PATH = env_path(dir1, Sys.getenv("PATH")))
     if(.Platform$OS.type != "windows") {
-        writeLines(c('echo "\'R\' should not be used without a path -- see §1.6 of the manual"',
+        writeLines(c('echo "\'R\' should not be used without a path -- see par. 1.6 of the manual"',
                      'exit 1'),
                    p1 <- file.path(dir1, "R"))
-        writeLines(c('echo "\'Rscript\' should not be used without a path -- see §1.6 of the manual"',
+        writeLines(c('echo "\'Rscript\' should not be used without a path -- see par. 1.6 of the manual"',
                      'exit 1'),
                    p2 <- file.path(dir1, "Rscript"))
         Sys.chmod(c(p1, p2), "0755")
     } else {
         ## currently untested
         writeLines(c('@ECHO OFF',
-                     'echo "\'R\' should not be used without a path -- see §1.6 of the manual"',
+                     'echo "\'R\' should not be used without a path -- see par. 1.6 of the manual"',
                      'exit /b 1'),
                    p1 <- file.path(dir1, "R.bat"))
         writeLines(c('@ECHO OFF',
-                     'echo "\'Rscript\' should not be used without a path -- see §1.6 of the manual"',
+                     'echo "\'Rscript\' should not be used without a path -- see par. 1.6 of the manual"',
                      'exit /b 1'),
                    p2 <- file.path(dir1, "Rscript.bat"))
    }
@@ -366,6 +405,9 @@ add_dummies <- function(dir, Log)
     check_pkg <- function(pkg, pkgname, pkgoutdir, startdir, libdir, desc,
                           is_base_pkg, is_rec_pkg, subdirs, extra_arch)
     {
+        Sys.setenv("_R_CHECK_PACKAGE_NAME_" = pkgname)
+        on.exit(Sys.unsetenv("_R_CHECK_PACKAGE_NAME_"))
+
         ## pkg is the argument we received from the main loop.
         ## pkgdir is the corresponding absolute path,
 
@@ -696,37 +738,11 @@ add_dummies <- function(dir, Log)
 
     ## Look for serialized objects, and check their version
 
-    ## These are most commonly data/*.{Rdata,rda}, R/sysdata.rda files,
-    ## and build/vignette.rds
-    ## But packages have other .rds files in many places.
-    ##
     ## We need to so this before installation, which may create
     ## src/symbols.rds in the sources.
     check_serialization <- function(allfiles)
     {
-        getVerLoad <- function(file)
-        {
-            ## This could look at the magic number, but for a short
-            ## while version 3 files were produced with a version-2
-            ## magic number.
-            con <- gzfile(file, "rb"); on.exit(close(con))
-            ## The .Internal gives an errror on version-1 files
-            tryCatch(.Internal(loadInfoFromConn2(con))$version,
-                     error = function(e) 1L)
-        }
-        getVerSer <- function(file)
-        {
-            con <- gzfile(file, "rb"); on.exit(close(con))
-            ## In case this is not a serialized object
-            tryCatch(.Internal(serializeInfoFromConn(con))$version,
-                     error = function(e) 0L)
-        }
-        checkingLog(Log, "Checking for serialized R objects in the sources ...")
-        loadfiles <- grep("[.](rda|RData)$", allfiles, value = TRUE)
-        serfiles <- grep("[.]rds$", allfiles, value = TRUE)
-        vers1 <- sapply(loadfiles, getVerLoad)
-        vers2 <- sapply(serfiles, getVerSer)
-        bad <- c(vers1, vers2)
+        bad <- get_serialization_version(allfiles) 
         bad <- names(bad[bad >= 3L])
         if(length(bad)) {
             msg <- gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
@@ -2482,19 +2498,24 @@ add_dummies <- function(dir, Log)
                     lines <- unlist(lapply(split(lines, ind), paste,
                                            collapse = " "))
                 }
+                ## Truncate at first comment char
+                lines <- sub("#.*", "", lines)
                 c1 <- grepl("^[[:space:]]*PKG_LIBS", lines, useBytes = TRUE)
                 c2l <- grepl("\\$[{(]{0,1}LAPACK_LIBS", lines, useBytes = TRUE)
                 c2b <- grepl("\\$[{(]{0,1}BLAS_LIBS", lines, useBytes = TRUE)
-                c3 <- grepl("\\$[{(]{0,1}FLIBS", lines, useBytes = TRUE)
-                if (any(c1 & c2l & !c2b)) {
+                c2lb <- grepl("\\$[{(]{0,1}LAPACK_LIBS.*\\$[{(]{0,1}BLAS_LIBS",
+                              lines, useBytes = TRUE)
+                c2bf <- grepl("\\$[{(]{0,1}BLAS_LIBS.*\\$[{(]{0,1}FLIBS",
+                              lines, useBytes = TRUE)
+                if (any(c1 & c2l & !c2lb)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log, gettextf("  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s\n", sQuote(f), domain = "R-tools"))
+                    printLog(Log, gettextf("  apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s\n", sQuote(f), domain = "R-tools"))
                 }
-                if (any(c1 & (c2b | c2l) & !c3)) {
+                if (any(c1 & c2b & !c2bf)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log, gettextf("  apparently PKG_LIBS is missing $(FLIBS) in %s\n", sQuote(f), domain = "R-tools"))
+                    printLog(Log, gettextf("  apparently using $(BLAS_LIBS) without following $(FLIBS) in %s\n", sQuote(f), domain = "R-tools"))
                 }
             }
             if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
@@ -2558,7 +2579,7 @@ add_dummies <- function(dir, Log)
         Check_flags <- Sys.getenv("_R_CHECK_COMPILATION_FLAGS_", "FALSE")
         if(config_val_to_logical(Check_flags)) {
             instlog <- if (startsWith(install, "check"))
-                substr(install, 7L, 1000L)
+                install_log_path
             else
                 file.path(pkgoutdir, "00install.out")
             if (file.exists(instlog) && dir.exists('src')) {
@@ -2572,8 +2593,10 @@ add_dummies <- function(dir, Log)
                 ## Not sure -Wextra and -Weverything are portable, though
                 ## -Werror is not compiler independent
                 ##   (as what is a warning is not)
+                except <- Sys.getenv("_R_CHECK_COMPILATION_FLAGS_KNOWN_", "")
+                except <- unlist(strsplit(except, "\\s", perl = TRUE))
                 warns <- setdiff(warns,
-                                 c("-Wall", "-Wextra", "-Weverything"))
+                                 c(except, "-Wall", "-Wextra", "-Weverything"))
                 warns <- warns[!startsWith(warns, "-Wl,")] # linker flags
                 diags <- grep(" -fno-diagnostics-show-option", tokens,
                               useBytes = TRUE, value = TRUE)
@@ -2773,7 +2796,7 @@ add_dummies <- function(dir, Log)
             }
             if(check_S3reg) {
                 checkingLog(Log, gettext("checking use of S3 registration ...", domain = "R-tools"))
-                Rcmd <- sprintf("suppressPackageStartupMessages(loadNamespace('%s', lib.loc = '%s'))",
+                Rcmd <- sprintf("suppressWarnings(suppressPackageStartupMessages(loadNamespace('%s', lib.loc = '%s')))",
                                 pkgname, libdir)
                 opts <- if(nzchar(arch)) R_opts4 else R_opts2
                 env <- Sys.getenv("_R_LOAD_CHECK_OVERWRITE_S3_METHODS_",
@@ -3843,15 +3866,13 @@ add_dummies <- function(dir, Log)
                 if (startsWith(install, "check")) {
                     if (!nzchar(arg_libdir))
                         printLog(Log, gettext("\nWarning: --install=check... specified without --library\n", domain = "R-tools"))
-                    thislog <- substr(install, 7L, 1000L)
-                                        #owd <- setwd(startdir)
-                    if (!file.exists(thislog)) {
+                    thislog <- install_log_path
+                    if(!nzchar(thislog)) {
                         errorLog(Log, gettextf("install log %s does not exist", sQuote(thislog), domain = "R-tools"))
                         summaryLog(Log)
                         do_exit(2L)
                     }
                     file.copy(thislog, outfile)
-                                        #setwd(owd)
                     install <- "check"
                     lines <- readLines(outfile, warn = FALSE)
                     ## <NOTE>
@@ -3961,8 +3982,10 @@ add_dummies <- function(dir, Log)
                              ## Solaris warns on this next one. Also clang
                              ": warning: .* \\[-Wint-conversion\\]",
                              ": warning: .* \\[-Wstringop", # mainly gcc8
-                             ": warning: .* \\[-Wclass-memaccess\\]" # gcc8
-                             )
+                             ": warning: .* \\[-Wclass-memaccess\\]", # gcc8
+                             ## Fatal on clang and Solaris ODS
+                             ": warning: .* with a value, in function returning void"
+                            )
 
                 ## clang warnings
                 warn_re <- c(warn_re,
@@ -4788,6 +4811,14 @@ add_dummies <- function(dir, Log)
         multiarch <- FALSE
     }
 
+    install_log_path <- ""
+    if(startsWith(install, "check")) {
+        ## Expand relative to absolute if possible.
+        install_log_path <-
+            tryCatch(file_path_as_absolute(substr(install, 7L, 1000L)),
+                     error = function(e) "")
+    }
+
     if (!identical(multiarch, FALSE)) {
         ## see if there are multiple installed architectures, and if they work
         if (WINDOWS) {
@@ -4841,7 +4872,8 @@ add_dummies <- function(dir, Log)
         config_val_to_logical(Sys.getenv("_R_CHECK_RD_XREFS_", "TRUE"))
     R_check_use_codetools <-
         config_val_to_logical(Sys.getenv("_R_CHECK_USE_CODETOOLS_", "TRUE"))
-    ## Howver, we cannot use this if we did not install the recommended packages
+    ## However, we cannot use this if we did not install the recommended
+    ## packages.
     if(R_check_use_codetools) {
         tmp <- tryCatch(find.package('codetools'), error = identity)
         if(inherits(tmp, "error")) R_check_use_codetools <- FALSE
