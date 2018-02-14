@@ -87,7 +87,8 @@ get_serialization_version <- function(allfiles)
         tryCatch(.Internal(serializeInfoFromConn(con))$version,
                  error = function(e) 0L)
     }
-    loadfiles <- grep("[.](rda|RData|rdata|Rda|bam|Rbin)$", allfiles, value = TRUE)
+    loadfiles <- grep("[.](rda|RData|Rdata|rdata|Rda|bam|Rbin)$",
+                      allfiles, value = TRUE)
     serfiles <- c(grep("[.](rds|RDS|Rds|rdx)$", allfiles, value = TRUE),
                   grep("build/partial[.]rdb$", allfiles, value = TRUE))
     vers1 <- sapply(loadfiles, getVerLoad)
@@ -742,7 +743,8 @@ add_dummies <- function(dir, Log)
     ## src/symbols.rds in the sources.
     check_serialization <- function(allfiles)
     {
-        bad <- get_serialization_version(allfiles) 
+        checkingLog(Log, "serialization versions")
+        bad <- get_serialization_version(allfiles)
         bad <- names(bad[bad >= 3L])
         if(length(bad)) {
             msg <- gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
