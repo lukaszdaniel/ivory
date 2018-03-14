@@ -57,6 +57,10 @@
 \alias{.fixupGFortranStdout}
 #endif
 
+\alias{SORT_ENUM}
+\alias{isWrappable}
+\alias{.makeSortEnum}
+\alias{.doWrap}
 \title{Internal Objects in Package \pkg{base}}
 \description{% 'most': see e.g., .mapply
   Internal objects in the base package most of which are only user-visible
@@ -94,9 +98,9 @@ lazyLoadDBfetch(key, file, compressed, hook)
 .primUntrace(obj)
 
 .Date(xx, cl = "Date")
-.POSIXct(xx, tz = NULL)
-.POSIXlt(xx, tz = NULL)
-.difftime(xx, units)
+.POSIXct(xx, tz = NULL, cl = c("POSIXct", "POSIXt"))
+.POSIXlt(xx, tz = NULL, cl = c("POSIXlt", "POSIXt"))
+.difftime(xx, units, cl = "difftime")
 
 .cache_class(class, extends)
 

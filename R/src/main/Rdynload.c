@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2017 The R Core Team
+ *  Copyright (C) 1997-2018 The R Core Team
  *  Copyright (C) 1995-1996 Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -184,9 +184,9 @@ static void initLoadedDLL()
        that matches the fd limit. R attempts to increase the limit if it
        is too small. The goal for maximum number of DLLs is currently 614.
 
-       The limit receives increased attention with 'workflow' documents
-       which load increasingly more packages, hitting the fd limit of 256
-       on macOS systems.
+       The limit receives increased attention with 'workflow'
+       documents which load increasingly more packages, hitting the
+       default fd limit of 256 on macOS systems.
     */
 
     char *req = getenv("R_MAX_NUM_DLLS");
@@ -205,7 +205,7 @@ static void initLoadedDLL()
 	      _("R_MAX_NUM_DLLS cannot be bigger than %d"), 1000);
 	    R_Suicide(msg);
 	}
-	int needed_fds = (int)(1.67 * reqlimit);
+	int needed_fds = (int)ceil(reqlimit / 0.6);
 	int fdlimit = R_EnsureFDLimit(needed_fds);
 	if (fdlimit < 0 && reqlimit > 100) {
 	    /* this is very unlikely */
@@ -214,13 +214,18 @@ static void initLoadedDLL()
 	      _("R_MAX_NUM_DLLS cannot be bigger than %d when fd limit is not known"),
 	      100);
 	    R_Suicide(msg);
-	} else if (fdlimit != needed_fds) {
+	} else if (fdlimit >= 0 && fdlimit < needed_fds) {
+	    int maxdlllimit = (int) (0.6 * fdlimit);
+	    if (maxdlllimit < 100)
+		R_Suicide(_("the limit on the number of open files is too low"));
 	    char msg[128];
 	    snprintf(msg, 128,
 	      _("R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"),
-	      (int) (0.6 * fdlimit));
+	      maxdlllimit);
 	    R_Suicide(msg);
 	}
+	/* when fdlimit == -1 (not known), currently only reqlimit of 100 is
+	   allowed */
 	MaxNumDLLs = reqlimit;
     } else {
 	/* set a reasonable default limit */
@@ -672,8 +677,6 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 	return info;
     } else
 	return NULL;
-
-    return(info);
 }
 
 static int

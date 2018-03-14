@@ -149,13 +149,13 @@ a5f53921ca9d0b1553c030db03ddfe65 *man/anorexia.Rd
 324d874e6ba7480e047d8b35055a9494 *man/rational.Rd
 2e75c8fdef2a130e04d3700ddeea9fd5 *man/rotifer.Rd
 5472d70fb96f35a995e891ad9ef9a777 *man/bandwidth.nrd.Rd
-fe390cf0437098a11251b103a0788822 *man/fitdistr.Rd
+c9354f03af7c5806071ad7554b0e5306 *man/fitdistr.Rd
 7cb24fac3e55b03ac894c3be943287bf *man/hubers.Rd
 782206216efe4e320c87191ecdccfc73 *man/accdeaths.Rd
 e65737579ca1cd2810198d72f0260e21 *man/hills.Rd
 cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 2a0b5dd4c71cf01dfc1894be0e8f759b *man/mammals.Rd
-d9cfcb43e225cc127df2814b853a634f *DESCRIPTION
+b351836b42cff882d767ca100d42970c *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
@@ -191,7 +191,7 @@ cfe49768ecb548ac7f483e75ce75d0e0 *inst/NEWS
 262eff8ec621dc11543b9f680879249d *tests/rlm.R
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
-8d87026da3c153e0fa65eb33c150d072 *tests/lme.R
+80c50d5c299f0d0a4dbbb457a235faba *tests/lme.R
 2a57c779c422eb108417f4af034724ad *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R

@@ -32,7 +32,7 @@ testVirtual <-
         ## does the class extend a known non-virtual class?
         for(what in en) {
             enDef <- getClassDef(what, package=packageSlot(extends[[what]]))
-            if(!is.null(enDef) && identical(enDef@virtual, FALSE))
+            if(!is.null(enDef) && isFALSE(enDef@virtual))
                 return(FALSE)
         }
     }
@@ -79,7 +79,7 @@ makePrototypeFromClassDef <-
     for(i in seq_along(extends)) {
         what <- el(supers, i)
         exti <- extends[[i]]
-        if(identical(exti@simple, FALSE))
+        if(isFALSE(exti@simple))
             next ## only simple contains rel'ns give slots
         if(identical(what, "VIRTUAL")) {
             ## the class is virtual, and the prototype usually NULL
@@ -144,7 +144,7 @@ makePrototypeFromClassDef <-
             }
             else
                 OK <- FALSE
-            if(identical(OK, FALSE))
+            if(isFALSE(OK))
                 stop(gettextf("in constructing the prototype for class %s: prototype has class %s, but the data part specifies class %s",
                               dQuote(className),
                               dQuote(.class1(prototype)),
@@ -724,7 +724,7 @@ reconcilePropertiesAndPrototype <-
               }
               else {
                   if(extends(prototypeClass, "classPrototypeDef")) {
-                      hasDataPart <- identical(prototype@dataPart, TRUE)
+                      hasDataPart <- isTRUE(prototype@dataPart)
                       if(!hasDataPart) {
                           if(!dataPartValue) # didn't get a .Data object
                             newObject <- new(dataPartClass)
@@ -852,7 +852,7 @@ tryNew <-
     ClassDef <- getClassDef(Class, where)
     if(is.null(ClassDef))
         return(NULL)
-    else if(identical(ClassDef@virtual, TRUE))
+    else if(isTRUE(ClassDef@virtual))
         ClassDef@prototype
     else tryCatch(new(ClassDef),
                   error = function(e) {
@@ -880,17 +880,17 @@ showClass <-
     else
         ClassDef <- getClassDef(Class)
      pkg <- ClassDef@package
-    if(identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg != ".GlobalEnv")
+    if(isTRUE(ClassDef@virtual) && nzchar(pkg) && pkg != ".GlobalEnv")
      cat(gettextf("Virtual Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
-    else if(!identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg != ".GlobalEnv")
+    else if(!isTRUE(ClassDef@virtual) && nzchar(pkg) && pkg != ".GlobalEnv")
      cat(gettextf("Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
-    else if(identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg == ".GlobalEnv")
+    else if(isTRUE(ClassDef@virtual) && nzchar(pkg) && pkg == ".GlobalEnv")
      cat(gettextf("Virtual Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
-    else if(!identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg == ".GlobalEnv")
+    else if(!isTRUE(ClassDef@virtual) && nzchar(pkg) && pkg == ".GlobalEnv")
      cat(gettextf("Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
-    else if(identical(ClassDef@virtual, TRUE) && !nzchar(pkg))
+    else if(isTRUE(ClassDef@virtual) && !nzchar(pkg))
      cat(gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods"))
-    else if(!identical(ClassDef@virtual, TRUE) && !nzchar(pkg))
+    else if(!isTRUE(ClassDef@virtual) && !nzchar(pkg))
      cat(gettextf("Class %s", .dQ(Class), domain = "R-methods"))
     cat("\n") 
     x <- ClassDef@slots
@@ -934,34 +934,34 @@ showExtends <-
     for(i in seq_along(ext)) {
         eli <- el(ext, i)
         if(is(eli, "SClassExtension")) {
-	   if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce) && length(eli@by)) { #1
+	   if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && is.function(eli@coerce) && length(eli@by)) { #1
 		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
 		how[i] <- gettextf("Class %s, by class %s, with explicit test and coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
-	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #2
+	   } else if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && is.function(eli@coerce) && isTRUE(eli@dataPart)) { #2
 		how[i] <- gettextf("Class %s, from data part, with explicit test and coerce", dQuote(what[i]), domain = "R-methods")
-	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce)) { #3
+	   } else if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && is.function(eli@coerce)) { #3
 		how[i] <- gettextf("Class %s, directly, with explicit test and coerce", dQuote(what[i]), domain = "R-methods");
 		directly[i] <- TRUE
-	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce) && length(eli@by)) { #4
+	   } else if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && !is.function(eli@coerce) && length(eli@by)) { #4
 		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
 		how[i] <- gettextf("Class %s, by class %s, with explicit test", dQuote(what[i]), tmp_N, domain = "R-methods")
-	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #5
+	   } else if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && !is.function(eli@coerce) && isTRUE(eli@dataPart)) { #5
 		how[i] <- gettextf("Class %s, from data part, with explicit test", dQuote(what[i]), domain = "R-methods")
-	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce)) { #6
+	   } else if(!eli@simple && is.function(eli@test) && !isTRUE(body(eli@test)) && !is.function(eli@coerce)) { #6
 		how[i] <- gettextf("Class %s, directly, with explicit test", dQuote(what[i]), domain = "R-methods");
 		directly[i] <- TRUE
-	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce) && length(eli@by)) { #7
+	   } else if(!eli@simple && !(is.function(eli@test) && !isTRUE(body(eli@test))) && is.function(eli@coerce) && length(eli@by)) { #7
 		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
 		how[i] <- gettextf("Class %s, by class %s, with explicit coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
-	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #8
+	   } else if(!eli@simple && !(is.function(eli@test) && !isTRUE(body(eli@test))) && is.function(eli@coerce) && isTRUE(eli@dataPart)) { #8
 		how[i] <- gettextf("Class %s, from data part, with explicit coerce", dQuote(what[i]), domain = "R-methods")
-	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce)) { #9
+	   } else if(!eli@simple && !(is.function(eli@test) && !isTRUE(body(eli@test))) && is.function(eli@coerce)) { #9
 		how[i] <- gettextf("Class %s, directly, with explicit coerce", dQuote(what[i]), domain = "R-methods");
 		directly[i] <- TRUE
 	   } else if(length(eli@by)) { #12
 		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
                 how[i] <- gettextf("Class %s, by class %s", dQuote(what[i]), tmp_N, domain = "R-methods")
-	   } else if(identical(eli@dataPart, TRUE)) { #11
+	   } else if(isTRUE(eli@dataPart)) { #11
 		how[i] <- gettextf("Class %s, from data part", dQuote(what[i]), domain = "R-methods")
 	   } else { # 10
 		how[i] <- gettextf("Class %s, directly", dQuote(what[i]), domain = "R-methods");
@@ -969,7 +969,7 @@ showExtends <-
 	   }
         }
     }
-    if(identical(printTo, FALSE))
+    if(isFALSE(printTo))
         list(what = what, how = how)
     else if(all(!nzchar(how)) ||  all(directly == TRUE)) {
         what <- dQuote(what)
@@ -1454,7 +1454,7 @@ setDataPart <- function(object, value, check = TRUE) {
             value <- cl
         else if(extends(cl, "oldClass") && isVirtualClass(cl)) {
         }
-        else if(identical(ClassDef@virtual, TRUE) &&
+        else if(isTRUE(ClassDef@virtual) &&
                length(ClassDef@slots) == 0L &&
                length(ClassDef@subclasses) ) {
                 ## look for a union of basic classes
@@ -1578,8 +1578,8 @@ setDataPart <- function(object, value, check = TRUE) {
         toExpr <- body(f)
         byExpr <- body(byExt@test)
         ## process the test code
-        if(!identical(byExpr, TRUE)) {
-            if(!identical(toExpr, TRUE))
+        if(!isTRUE(byExpr)) {
+            if(!isTRUE(toExpr))
                 body(f, envir = environment(f)) <- substitute((BY) && (TO),
                               list(BY = byExpr, TO = toExpr))
             else
@@ -1954,7 +1954,7 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
 }
 
 .cacheClass <- function(name, def, doSubclasses = FALSE, env) {
-    if(!identical(doSubclasses, FALSE))
+    if(!isFALSE(doSubclasses))
       .recacheSubclasses(def@className, def, doSubclasses, env)
     if(!is.null(prev <- .classTable[[name]])) {
 	newpkg <- def@package

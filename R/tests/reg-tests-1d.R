@@ -688,7 +688,7 @@ assert({
               as_A(c(120, 17, -17, 207, NA, 0, -327, 0, 0), xtN))
 })
 ## 'sparse = TRUE requires recommended package Matrix
-if(requireNamespace('Matrix')) {
+if(requireNamespace('Matrix', lib.loc=.Library)) {
     xtS <- xtabs(Freq ~ Gender + Admit, DN, na.action = na.pass, sparse = TRUE)# error in R <= 3.3.2
     xtNS <- xtabs(Freq ~ Gender + Admit, DN, addNA = TRUE, sparse = TRUE)
     stopifnot(
@@ -1594,6 +1594,102 @@ assert({
     identical(anyDuplicated(dMb), 0L)
 }) # both differing in R <= 3.4.x
 
+
+## when sep is given, an opening quote may be preceded by non-space
+stopifnot(  ncol(read.table(              text="=\"Total\t\"\t1\n",sep="\t")) == 2)
+stopifnot(length(scan(what=list("foo",1), text="=\"Total\t\"\t1\n",sep="\t")) == 2)
+##
+## in 3.4.x, read.table failed on this
+stopifnot(  ncol(read.table(              text="=\"CJ01 \"\t550\n",sep="\t")) == 2)
+stopifnot(length(scan(what=list("foo",1), text="=\"CJ01 \"\t550\n",sep="\t")) == 2)
+##
+## when no sep is given, quotes preceded by non-space have no special
+## meaning and are retained (related to PR#15245)
+stopifnot(read.table(                 text="HO5\'\'\tH")[1,1] == "HO5\'\'")
+stopifnot(read.table(                 text="HO5\'\tH")[1,1]   == "HO5\'")
+stopifnot(scan(what=list("foo","foo"),text="HO5\'\'\tH")[[1]] == "HO5\'\'")
+stopifnot(scan(what=list("foo","foo"),text="HO5\'\tH")[[1]]   == "HO5\'")
+##
+## when no sep is given, there does not have to be a separator between
+## quoted entries; testing here to ensure read.table and scan agree,
+## but without claiming this particular behavior is needed
+stopifnot(read.table(                 text="\"A\"\" B \"")$V2   == " B ")
+stopifnot(scan(what=list("foo","foo"),text="\"A\"\" B \"")[[2]] == " B ")
+
+
+## merge() names when by.y
+parents <- data.frame(name = c("Sarah", "Max", "Qin", "Lex"),
+                      sex = c("F", "M", "F", "M"), age = c(41, 43, 36, 51))
+children <- data.frame(parent = c("Sarah", "Max", "Qin"),
+                       name = c("Oliver", "Sebastian", "Kai-lee"),
+                       sex = c("M", "M", "F"), age = c(5,8,7))
+# merge.data.frame() no longer creating a duplicated col.names
+(m   <- merge(parents, children, by.x = "name", by.y = "parent"))
+ m._ <- merge(parents, children, by.x = "name", by.y = "parent", all.x=TRUE)
+(m_. <- merge(parents, children, by.x = "name", by.y = "parent", all.y=TRUE))
+ m__ <- merge(parents, children, by.x = "name", by.y = "parent", all = TRUE)
+## all four gave duplicate column 'name' with a warning in R <= 3.4.x
+assert({
+    identical(m,   m_.)
+    identical(m._, m__)
+    ## not identical(m, m__[-1,]) : row.names differ
+    identical(names(m), names(m__))
+    all(m == m__[-1,])
+    identical(dim(m),   c(3L, 6L))
+    identical(dim(m__), c(4L, 6L))
+})
+
+
+## scale(*, <non-numeric>)
+if(requireNamespace('Matrix', lib.loc=.Library)) {
+    de <- data.frame(Type = structure(c(1L, 1L, 4L, 1L, 4L, 2L, 2L, 2L, 4L, 1L),
+				      .Label = paste0("T", 1:4), class = "factor"),
+		     Subj = structure(c(9L, 5L, 8L, 3L, 3L, 4L, 3L, 6L, 6L, 1L),
+				      .Label = as.character(1:9), class = "factor"))
+    show(SM <- xtabs(~ Type + Subj, data = de, sparse=TRUE))
+    assert({
+	inherits(SM, "sparseMatrix")
+	all.equal(scale(SM, Matrix::colMeans(SM)),
+		  scale(SM, Matrix::colMeans(SM, sparse=TRUE)),
+		  check.attributes=FALSE)
+    })
+}
+## 2nd scale() gave wrong error "length of 'center' must equal [..] columns of 'x'"
+## in R <= 3.4.x
+
+
+## as.data.frame.matrix() method not eliminating duplicated rownames
+(m <- rbind(x = 1:3, x = 2:4, z = 0)) # matrix with duplicated rownams
+rownames(d <- as.data.frame(m)) # --> fixed up to  "x" "x.1" "z"
+## new feature -- 'make.names = *'  with '*' in non-defaults :
+dN <- as.data.frame(m, make.names=NA)
+tools::assertError( dF <- as.data.frame(m, make.names=FALSE) )
+assert({
+    !anyDuplicated(rownames(d))
+    identical(colnames(d), paste0("V", 1:3))
+    ## dN has correct automatic row names:
+    identical(.row_names_info(dN, 0), .set_row_names(3L))
+})
+## as.data.frame(m)  kept the duplicated row names in R 3.4.x
+
+
+## check that sorting preserves names and no other attributes
+v <- sort(c(1,2,3))
+names(v) <- letters[1:3]
+assert(identical(sort(v), v))
+vv <- sort(c(1,2,3))
+names(vv) <- names(v)
+attr(vv, "foo") <- "bar"
+assert(identical(sort(vv), v))
+## failed initially in ALTREP
+
+
+## check that "TRUE", "FALSE" work in order, sort.int
+order(1:3, decreasing = "TRUE")
+order(1:3, decreasing = "FALSE")
+sort.int(1:3, decreasing = "TRUE")
+sort.int(1:3, decreasing = "FALSE")
+## failed initially in ALTREP
 
 
 ## keep at end

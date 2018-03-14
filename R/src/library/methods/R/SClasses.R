@@ -238,7 +238,7 @@ getClassDef <-
                      value <- .resolveClassList(value, where, package)
     } else
         value <- NULL
-    
+
     if(is.null(value)) {
 	cname <- classMetaName(if(length(Class) > 1L)
 			  ## S3 class; almost certainly has no packageSlot,
@@ -316,11 +316,11 @@ checkSlotAssignment <- function(obj, name, value)
     ## the class environment of obj (change validObject too if a better way is found)
     ok <- possibleExtends(valueClass, slotClass,
                           ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
-    if(identical(ok, FALSE))
+    if(isFALSE(ok))
        stop(gettextf("assignment of an object of class %s is not valid for slot %s in an object of class %s; is(value, \"%s\") is not TRUE",
 		     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass),
             domain = "R-methods")
-    else if(identical(ok, TRUE))
+    else if(isTRUE(ok))
         value
     else
        as(value, slotClass, strict=FALSE, ext = ok)
@@ -341,7 +341,7 @@ checkAtAssignment <- function(cl, name, valueClass)
     ## the class environment of obj (change validObject too if a better way is found)
     ok <- possibleExtends(valueClass, slotClass,
                           ClassDef2 = getClassDef(slotClass, where = .classEnv(ClassDef)))
-    if(identical(ok, FALSE))
+    if(isFALSE(ok))
        stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE",
 		     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass),
             domain = "R-methods")
@@ -461,7 +461,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
     Class <- class(object)
     classDef <- getClassDef(Class)
     where <- .classEnv(classDef)
-    anyStrings <- function(x) if(identical(x, TRUE)) character() else x
+    anyStrings <- function(x) if(isTRUE(x)) character() else x
     ## perform, from bottom up, the default and any explicit validity tests
     ## First, validate the slots.
     errors <- character()
@@ -498,7 +498,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	## note that the use of possibleExtends is shared with checkSlotAssignment(), in case a
 	## future revision improves on it!
 	ok <- possibleExtends(class(sloti), classi, ClassDef2 = classDefi)
-	if(identical(ok, FALSE)) {
+	if(isFALSE(ok)) {
 	    errors <- c(errors,
 			gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"", slotNames[[i]],
 			       Class, class(sloti), classi))

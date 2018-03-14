@@ -210,15 +210,14 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x365e020>
+<environment: 0x557e11d54340>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
 <URL: https://www.R-project.org>.
 
-[2] Box GEP and Cox DR (1964). "An Analysis of Transformations."
-_Journal of the Royal Statistical Society, Series B_, *26*, pp.
-211-252.
+[2] Box GEP, Cox DR (1964). "An Analysis of Transformations." _Journal
+of the Royal Statistical Society, Series B_, *26*, 211-252.
 > 
 > 
 > 

@@ -1,6 +1,6 @@
 ###            Fit a general linear mixed effects model
 ###
-### Copyright 2005-2017  The R Core team
+### Copyright 2005-2018  The R Core team
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
 ###
@@ -321,7 +321,7 @@ lme.formula <-
         control <- c(control, controlvals[names(controlvals) %in% keep])
         nlminb(c(coef(lmeSt)), function(lmePars) -logLik(lmeSt, lmePars),
                control = control)
-      } else {
+      } else { ## "optim"
         reltol <- controlvals$reltol
         if(is.null(reltol))  reltol <- 100*.Machine$double.eps
         control <- list(trace = controlvals$msVerbose,
@@ -340,7 +340,8 @@ lme.formula <-
     if (!needUpdate(lmeSt)) {
       if (optRes$convergence) {
         msg <- gettextf("%s problem, convergence error code = %s\n  message = %s",
-                        controlvals$opt, optRes$convergence, paste(optRes$message, collapse = ""))
+                        controlvals$opt, optRes$convergence,
+                        paste(optRes$message, collapse = ""))
         if(!controlvals$returnObject)
           stop(msg, domain = "R-nlme")
         else

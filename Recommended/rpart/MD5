@@ -31,7 +31,7 @@ d59df045075a1735e6d1bf2510b6a90a *vignettes/longintro.Rnw
 cc52160d413d59a2967d5d201adf9319 *vignettes/usercode.Rnw
 39192a8870332037a2402ca7857001a6 *vignettes/refer.bib
 a2ab960d43519a6f7f188c01af695799 *ChangeLog
-b0077e3e0e7f366bcdbb276a00f6197b *DESCRIPTION
+60592dbea9e5551254f7ba193d118f3c *DESCRIPTION
 def0e4eb86394e1fc8da6dad289badc8 *po/R-fr.po
 72830d6d60ca7c55fb584af88cd4f60d *po/R-ko.po
 f139a7922704ed742263482a8f164d5b *po/R-de.po
@@ -60,9 +60,9 @@ fe7e32078b9528ec8a3488790815759b *inst/po/pl/LC_MESSAGES/R-rpart.mo
 e5598bd99b989df58f9fc60e19de4cd3 *inst/doc/usercode.R
 826935d99a3cb923990d55b0e9454f18 *inst/doc/longintro.R
 d59df045075a1735e6d1bf2510b6a90a *inst/doc/longintro.Rnw
-300c25cf411f7d88718e139ef18621c0 *inst/doc/longintro.pdf
+7681ad877ba64c7539288bf0682c5727 *inst/doc/longintro.pdf
 cc52160d413d59a2967d5d201adf9319 *inst/doc/usercode.Rnw
-b86249daa10666c05d0a52c53227c008 *inst/doc/usercode.pdf
+79737df9c79d08161827212633a030ba *inst/doc/usercode.pdf
 4956cb0af45f1934ac665210ed13d325 *tests/rescale.R
 6db68bbe44f4ff6420c076d7cda7c40f *tests/priors.Rout.save
 45fcb65fa9a878dd1283752ee9364701 *tests/treble4.R

@@ -1772,6 +1772,8 @@ if(FALSE) {
             ext <- sub(paste0(base, "."),  "", a, fixed = TRUE)
             nobj <- ""
             if (nzchar(ext)) {
+                ## This will not work if there are no source files in
+                ## the top-level directory
                 if (ext %in% c("cc", "cpp")) {
                     with_cxx <- TRUE
                     nobj <- base
@@ -1841,6 +1843,7 @@ if(FALSE) {
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
             }
+            with_cxx <- TRUE
         }
     } else if (file.exists("Makevars")) {
         makefiles <- c("Makevars", makefiles)
@@ -1863,6 +1866,7 @@ if(FALSE) {
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
             }
+            with_cxx <- TRUE
         }
     }
     if (!use_cxx11 && !use_cxx14 && !use_cxx17 && !use_cxx98) {
@@ -1897,6 +1901,7 @@ if(FALSE) {
                 use_cxx98 <- TRUE
             }
         }
+        with_cxx <- TRUE
     }
 
     if (with_cxx) {

@@ -5,7 +5,7 @@ library(nlme)
 data(Ovary)
 ## stolen from example(anova.gls)
 # AR(1) errors within each Mare
-## tolerance increased for flang (was 6e-6)q
+## tolerance increased for flang (was 6e-6)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
 (int1 <- intervals(fm1))

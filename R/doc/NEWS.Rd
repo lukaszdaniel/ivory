@@ -25,7 +25,7 @@
       support custom vector-like objects if methods for the appropriate
       generics are defined.  It has the side effect of making
       \code{factor()} succeed on empty or length-one non-atomic
-      vector(-like) types (e.g., \code{list}), where it failed before.
+      vector(-like) types (e.g., \code{"list"}), where it failed before.
 
       \item \code{diag()} gets an optional \code{names} argument: this
       may require updates to packages defining S4 methods for it.
@@ -41,9 +41,9 @@
       registered as a global variable when registering a reference class
       method.
 
-      \item \code{tempdir(check = TRUE)} recreates the \code{tempdir()} if
-      it is no longer valid (e.g.\sspace{}because some other process has
-      cleaned up the \file{/tmp} directory).
+      \item \code{tempdir(check = TRUE)} recreates the \code{tempdir()}
+      directory if it is no longer valid (e.g.\sspace{}because some
+      other process has cleaned up the \file{/tmp} directory).
 
       \item New \code{askYesNo()} function and \code{"askYesNo"} option
       to ask the user binary response questions in a customizable but
@@ -191,7 +191,7 @@
       and so will be used rather than the default deduced from the OS
       if \env{TZ} is subsequently unset.
 
-      \item There is now a \code{`[`} method for class \code{"DLLInfoList"}.
+      \item There is now a \code{[} method for class \code{"DLLInfoList"}.
 
       \item \code{glm()} and \code{glm.fit} get the same
       \code{singular.ok = TRUE} argument that \code{lm()} has had
@@ -282,8 +282,8 @@
       precedence over \env{R_DEFAULT_PACKAGES}. If default packages are
       not specified on the command line or by one of these environment
       variables, then \command{Rscript} now uses the same default
-      packages as \command{R}. For now, the previous behavior of
-      dropping \pkg{methods} can be restored by setting the environment
+      packages as \command{R}. For now, the previous behavior of not
+      including \pkg{methods} can be restored by setting the environment
       variable \env{R_SCRIPT_LEGACY} to \samp{yes}.
 
       \item When a package is found more than once, the warning from
@@ -296,7 +296,7 @@
       \code{exprs} which is nicer and useful when testing several
       expressions in one call.
 
-      \item The environment variable \env{R_MAX_VZISE} can now be used
+      \item The environment variable \env{R_MAX_VSIZE} can now be used
       to specify the maximal vector heap size. On macOS, unless specified
       by this environment variable, the maximal vector heap size is set to
       the maximum on 16GB and the available physical memory. This is to
@@ -304,21 +304,45 @@
       memory.
 
       \item \code{sum(x)} and \code{sum(x1,x2,..,x<N>)} with many or
-      long logical and integer vectors no longer overflows (and returns
-      \code{NA} with a warning), but returns \code{double} numbers now
-      in such cases.
+      long logical or integer vectors no longer overflows (and returns
+      \code{NA} with a warning), but returns \code{double} numbers in
+      such cases.
 
-      \item Single components of POSIXlt objects can now be extracted
-      and replaced via \code{[} indexing with 2 indices.
+      \item Single components of \code{"POSIXlt"} objects can now be
+      extracted and replaced via \code{[} indexing with 2 indices.
 
       \item S3 method lookup now searches the namespace registry after
       the top level environment of the calling environment.
 
       \item Arithmetic sequences created by \code{1:n},
       \code{seq_along}, and the like now use compact internal
-      representations via the \code{ALTREP} framework.  Coercing Integer
+      representations via the \code{ALTREP} framework.  Coercing integer
       and numeric vectors to character also now uses the \code{ALTREP}
       framework to defer the actual conversion until first use.
+
+      \item Finalizers are now run with interrupts suspended.
+
+      \item \code{merge()} gains new option \code{no.dups} and by
+      default suffixes the second of two duplicated column names,
+      thanks to a proposal by Scott Ritchie (and Gabe Becker).
+
+      \item \code{scale.default(x, center, scale)} now also allows
+      \code{center} or \code{scale} to be \dQuote{numeric-alike}, i.e.,
+      such that \code{as.numeric(.)} coerces them correctly.  This also
+      eliminates a wrong error message in such cases.
+
+      \item \code{par*apply} and \code{par*applyLB} gain an optional
+      argument \code{chunk.size} which allows to specify the granularity of
+      scheduling.
+
+      \item Some \code{as.data.frame()} methods, notably the
+      \code{matrix} one, are now more careful in not accepting
+      duplicated or \code{NA} row names, and by default produce unique
+      non-NA row names.  This is based on new function
+      \code{.rowNamesDF(x, make.names = *) <- rNms} where the logical
+      argument \code{make.names} allows to specify \emph{how} invalid
+      row names \code{rNms} are handled.  \code{.rowNamesDF()} is a
+      \dQuote{workaround} compatible default.
     }
   }
 
@@ -370,6 +394,9 @@
 
       In rare circumstances it may be necessary to override the
       setting of \samp{SAFE_FFLAGS}.
+
+      \item C99 functions \code{expm1}, \code{hypot}, \code{log1p} and
+      \code{nearbyint} are now required.
     }
   }
 
@@ -383,6 +410,15 @@
       \item The object header layout has been changed to support merging
       the \code{ALTREP} branch. This requires re-installing packages
       that use compiled code.
+
+      \item \sQuote{Writing R Extensions} now documents the
+      \code{R_tryCatch}, \code{R_tryCatchError}, and
+      \code{R_UnwindProtect} functions.
+
+      \item \code{NAMEDMAX} has been raised to 3 to allow protection of
+      intermediate results from (usually ill-advised) assignments in
+      arguments to \code{BUILTIN} functions. Package \code{C} code using
+      \code{SET_NAMED} may need to be revised.
     }
   }
 
@@ -394,8 +430,13 @@
       \item \code{methods:::bind_activation()} is defunct now; it
       typically has been unneeded for years.
 
-      \item the undocumented "hidden" \code{.__H__.cbind} and
-      \code{.__H__.rbind} are deprecated, correspondingly.
+      The undocumented \sQuote{hidden} objects \code{.__H__.cbind} and
+      \code{.__H__.rbind} in package \pkg{base} are deprecated (in
+      favour of \code{cbind} and \code{rbind}).
+
+      \item The declaration of \code{pythag()} in \file{Rmath.h} has
+      been removed --- it has not been provided since \R 2.14.0.
+      [Deferred until \CRANpkg{Rcpp} catches up.]
     }
   }
 
@@ -487,13 +528,13 @@
       \item Arithmetic with zero-column data frames now works more
       consistently; issue raised by Bill Dunlap.
 
-      Arithmetic with data frames gives a data frame now also for
-      \code{^} which previously gave a numeric matrix.
+      Arithmetic with data frames gives a data frame for \code{^} (which
+      previously gave a numeric matrix).
 
       \item \code{pretty(x, n)} for large \code{n} or large
       \code{diff(range(x))} now works better (though
       it was never meant for large \code{n}); internally it uses the
-      same rounding fuzz (1e-10) as \code{seq.default()} - as it did up
+      same rounding fuzz (1e-10) as \code{seq.default()} --- as it did up
       to 2010-02-03 when both were 1e-7.
 
       \item Internal C-level \code{R_check_class_and_super()} and hence
@@ -549,19 +590,13 @@
       contains a column which is a data frame or matrix, including a
       0-column matrix/d.f. .
 
-      \item \code{NAMEDMAX} has been raised to 3 to allow protection of
-      intermediate results from (usually ill-advised) assignments in
-      arguments to \code{BUILTIN} functions. Package \code{C} code using
-      \code{SET_NAMED} may need to be revised.
-
       \item \code{mclapply(X, mc.cores)} now follows its documentation
       and calls \code{lapply()} in case \code{mc.cores = 1} also in the
       case \code{mc.preschedule} is false.  (\PR{17373})
 
       \item \code{aggregate(<data.frame>, drop=FALSE)} no longer calls
-      the function on <empty> parts, and rather sets corresponding
-      results to \code{NA}, thanks to Suharto Anggono's patches in
-      \PR{17280}.
+      the function on <empty> parts but sets corresponding results to
+      \code{NA}.  (Thanks to Suharto Anggono's patches in \PR{17280}).
 
       \item The \code{duplicated()} method for data frames is now based
       on \code{list}s (instead of string coercion).  Consequently
@@ -572,11 +607,23 @@
       \item Calling \code{names()} on an S4 object derived from
       \code{"environment"} behaves (by default) like calling
       \code{names()} on an ordinary environment.
+
+      \item \code{read.table()} with a non-default separator now
+      supports quotes following a non-whitespace character, matching the
+      behavior of \code{scan()}.
+
+      \item \code{parLapplyLB} and \code{parSapplyLB} have been fixed to do
+      load balancing (dynamic scheduling).  This also means that results of
+      computations depending on random number generators will now really be
+      non-reproducible, as documented.
+
+      \item Indexing a list using dollar and empty string (\code{l$""})
+      returns NULL.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.4.3 patched}{
+\section{\Rlogo CHANGES IN R 3.4.4}{
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -642,6 +689,9 @@
       (\PR{17375})
 
       \item \code{is.na(NULL)} no longer warns.  (\PR{16107})
+
+      \item \command{R CMD INSTALL} now correctly sets C++ compiler flags
+      when all source files are in sub-directories of \file{src}.
     }
   }
 }
@@ -1403,7 +1453,7 @@
 
       \item An alternative compiler for C++11 is now specified with
       \samp{CXX11}, not \samp{CXX1X}. Likewise C++11 flags are specified
-      with \samp{CXX11FLAGS} and the standard (e.g., \samp{-std=gnu++11}
+      with \samp{CXX11FLAGS} and the standard (e.g., \samp{-std=gnu++11})
       is specified with \samp{CXX11STD}.
 
       \item \command{configure} now tests for a C++14-compliant compiler
