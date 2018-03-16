@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-2-2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-14 22:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2014-03-27 14:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -862,6 +862,11 @@ msgstr "[[ zmniejszanie %d nazw kolumn %s ... ]]"
 msgid "[[ suppressing %d column names %s ]]"
 msgstr "[[ zmniejszanie %d nazw kolumn %s ]]"
 
+#. R/sparseMatrix.R: warning("a sparseMatrix should rarely be centered: will not be sparse anymore")
+#: R/sparseMatrix.R:0
+msgid "a sparseMatrix should rarely be centered: will not be sparse anymore"
+msgstr ""
+
 #. R/abIndex.R: gettextf("abIndex: lengths (%d, %d) differ", lt, lc, domain = "R-Matrix")
 #: R/abIndex.R:0
 msgid "abIndex: lengths (%d, %d) differ"
@@ -884,6 +889,20 @@ msgid ""
 msgstr ""
 "'as(.,\"dsCMatrix\")' jest przestarzałe (0d 2008); używaj 'as(., "
 "\"symmetricMatrix\")'"
+
+#. R/Matrix.R: warning("as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+#: R/Matrix.R:0
+msgid ""
+"as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) "
+"instead."
+msgstr ""
+
+#. R/Matrix.R: warning("as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+#: R/Matrix.R:0
+msgid ""
+"as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  "
+"as(x, \"matrix\")  or .asmatrix(x) instead."
+msgstr ""
 
 # Matrix/R/abIndex.R: 286
 # warning("c(<abIndex>,..) of different kinds, coercing all to 'rleDiff'")
@@ -1356,6 +1375,16 @@ msgstr "metoda kroneckera musi użyć domyślnej 'FUN'"
 msgid "length must be non-negative number"
 msgstr "długość musi być nieujemną liczbą"
 
+# Matrix/R/bind2.R: 395
+# stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
+# Matrix/R/Auxiliaries.R: 314
+# stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
+#. R/sparseMatrix.R: stop("length of 'center' must equal the number of columns of 'x'")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr "Macierze muszą mieć tę samą liczbę kolumn w %s"
+
 #. R/AllClass.R: gettextf("length of 'perm' slot must be %d", n)
 #: R/AllClass.R:0
 msgid "length of 'perm' slot must be %d"
@@ -1365,6 +1394,16 @@ msgstr ""
 #: R/AllClass.R:0
 msgid "length of 'perm' slot must be %s"
 msgstr ""
+
+# Matrix/R/bind2.R: 395
+# stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
+# Matrix/R/Auxiliaries.R: 314
+# stop(gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent()))), call. = FALSE, domain = "R-Matrix")
+#. R/sparseMatrix.R: stop("length of 'scale' must equal the number of columns of 'x'")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "length of 'scale' must equal the number of columns of 'x'"
+msgstr "Macierze muszą mieć tę samą liczbę kolumn w %s"
 
 # Matrix/R/Ops.R: 461
 # stop ("length of 1st arg does not match dimension of 2nd")
@@ -2011,6 +2050,11 @@ msgstr ""
 #: R/HBMM.R:0
 msgid "representation '%s' not recognized"
 msgstr "reprezentacja '%s' nie została rozpoznana"
+
+#. R/indMatrix.R: stop("resulting matrix dimension would be too large")
+#: R/indMatrix.R:0
+msgid "resulting matrix dimension would be too large"
+msgstr ""
 
 #. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
 #. R/bind2.R: stop("resulting x-slot has different type than x's or y's")

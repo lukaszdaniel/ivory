@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -90,15 +90,6 @@ msgstr ""
 msgid "%s is not an existing file"
 msgstr "'%s' 는 존재하는 파일이 아닙니다 "
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-#, fuzzy
-msgid "%s is not an object of class %s"
-msgstr "Date 객체들에 대해서 정의되어 질 수 없습니다 "
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
@@ -159,13 +150,6 @@ msgstr "'input' 과 'target' 은 반드시 문자벡터이어야 합니다 "
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-#, fuzzy
-msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr "Date 객체들에 대해서 정의되어 질 수 없습니다 "
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
@@ -901,6 +885,12 @@ msgstr "'%s' 실행은 에러 코드 %d 와 함께 실패했습니다 "
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr "'local' 은 만드시 TRUE, FLASE, 혹은 환경 값을 가집니다 "
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+#, fuzzy
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "'local' 은 만드시 TRUE, FLASE, 혹은 환경 값을 가집니다 "
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 #, fuzzy
@@ -1110,6 +1100,18 @@ msgid ""
 msgstr ""
 "'x' 는 'sort.list' 에 대한 atomic 입니다 \n"
 "list 에서 'sort' 라고 사용한 적이 있나요? "
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1575,6 +1577,11 @@ msgstr "목표는 %s 입니다, 현재는 %s 입니다"
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
 msgid "Modes:"
+msgstr ""
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
 
 #. R/summary.R: gettext("NA's")
@@ -2393,6 +2400,9 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2402,11 +2412,17 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "'time' 이 잘못되었습니다 "
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
+msgstr "'n' 값이 잘 못되었습니다 "
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2468,7 +2484,6 @@ msgstr "잘못된 라벨입니다; 길이 %d 는 반드시 1 또는 %d 이어야
 msgid "invalid 'rle' structure"
 msgstr "'rle' 구조가 잘못되었습니다 "
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -3116,10 +3131,12 @@ msgstr "패키지 %s 는 %s 를 위해 위해 작성되었습니다 "
 msgid "package %s was built under R version %s"
 msgstr "패키지 %s 는 R 버전 %s 에서 작성되었습니다 "
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
 #, fuzzy
-msgid "package %s was found more than once. Using the one found in %s"
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 "여러개의 패키지 %s 가 검색되었습니다.\n"
 "%s 에 검색된 것을 사용합니다"
@@ -3747,6 +3764,14 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
+#, fuzzy
+#~ msgid "%s is not an object of class %s"
+#~ msgstr "Date 객체들에 대해서 정의되어 질 수 없습니다 "
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be coerced to an object of class %s"
+#~ msgstr "Date 객체들에 대해서 정의되어 질 수 없습니다 "
+
 #~ msgid "*** Note that 'pos=1' will give an error in the future"
 #~ msgstr "*** 'pos=1' 는 에러를 보여줄 것입니다 "
 
@@ -4076,10 +4101,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
 #~ msgid "shared object '%s' not found"
 #~ msgstr "공유 객체 '%s' 를 찾을 수 없습니다 "
-
-#, fuzzy
-#~ msgid "'x' cannot be coerced to class \"hexmode\""
-#~ msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
 
 #~ msgid "'intern' must be TRUE or FALSE"
 #~ msgstr "'intern' 은 반드시 TRUE 혹은 FALSE 이어야 합니다 "

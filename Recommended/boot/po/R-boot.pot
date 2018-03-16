@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: boot 1.3-19\n"
-"POT-Creation-Date: 2017-03-14 22:24\n"
+"Project-Id-Version: boot 1.3-20\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1275,6 +1275,13 @@ msgstr ""
 #. R/bootfuns.q: stop("unable to find range")
 
 msgid "unable to find range"
+msgstr ""
+
+
+#: R/bootfuns.q: 0
+#. R/bootfuns.q: warning("unknown type of \"boot\" object")
+
+msgid "unknown type of \"boot\" object"
 msgstr ""
 
 

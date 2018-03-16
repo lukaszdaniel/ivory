@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,13 @@ msgstr ""
 #. R/windows/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
 
 msgid "# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s"
+msgstr ""
+
+
+#: R/modifyList.R: 0
+#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
+
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
 
@@ -4055,6 +4062,15 @@ msgstr[1]    ""
 
 msgid        "%d differing object matching %s was found\nin the following places:"
 msgid_plural "%d differing objects matching %s were found\nin the following places:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/modifyList.R: 0
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+
+msgid        "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0]    ""
 msgstr[1]    ""
 

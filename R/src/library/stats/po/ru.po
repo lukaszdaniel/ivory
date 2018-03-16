@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-03-16 18:51+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -181,12 +181,12 @@ msgstr "distance(): неправильный p"
 msgid "'distance()': invalid distance"
 msgstr "distance(): неправильное расстояние"
 
-#: distn.c:36
+#: distn.c:39
 #, fuzzy
 msgid "NaN values produced"
 msgstr "созданы NaN"
 
-#: distn.c:37
+#: distn.c:40
 #, fuzzy
 msgid "Non-numeric argument passed to mathematical function"
 msgstr "Нечисловой аргумент для математической функции"

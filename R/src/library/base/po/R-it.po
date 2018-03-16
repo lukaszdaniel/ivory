@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -82,15 +82,6 @@ msgstr ""
 msgid "%s is not an existing file"
 msgstr "'%s' non è un file esistente"
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-#, fuzzy
-msgid "%s is not an object of class %s"
-msgstr "non definito per oggetti di tipo Date"
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
@@ -151,13 +142,6 @@ msgstr "'input' e 'target' devono essere vettori di caratteri"
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "tutti gli argomenti devono avere la stessa lunghezza"
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-#, fuzzy
-msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr "non definito per oggetti di tipo Date"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
@@ -872,6 +856,12 @@ msgstr "l'esecuzione di 'cmd' non è fallita con errore"
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr "'from' deve avere lunghezza 1"
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+#, fuzzy
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "'from' deve avere lunghezza 1"
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 #, fuzzy
@@ -1071,6 +1061,18 @@ msgid ""
 "'x' argument must be atomic for 'sort.list()' function.\n"
 "Have you called 'sort()' function on a list?"
 msgstr ""
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "non posso trasformarlo in una table"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "non posso trasformarlo in una table"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1529,6 +1531,11 @@ msgstr "valori non corretti per 'indent' e 'width'"
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
 msgid "Modes:"
+msgstr ""
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
 
 #. R/summary.R: gettext("NA's")
@@ -2346,6 +2353,9 @@ msgstr "l'input è stato danneggiato, LF sostituiti da CR"
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2355,11 +2365,17 @@ msgstr "l'input è stato danneggiato, LF sostituiti da CR"
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "argomento 'category' non valido"
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
+msgstr "valore 'n' non valido"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2421,7 +2437,6 @@ msgstr "'labels' non valide; lunghezza %d dovrebbe essere 1 o %d"
 msgid "invalid 'rle' structure"
 msgstr "'struttura 'rle' non valida"
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -3088,10 +3103,12 @@ msgstr "il pacchetto '%s' è stato creato per %s"
 msgid "package %s was built under R version %s"
 msgstr "il pacchetto '%s' è stato creato con R versione %s"
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
 #, fuzzy
-msgid "package %s was found more than once. Using the one found in %s"
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 "il pacchetto '%s' è stato trovato più volte,\n"
 "uso quello trovato in '%s'"
@@ -3762,6 +3779,14 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "non è"
 msgstr[1] "non è"
 
+#, fuzzy
+#~ msgid "%s is not an object of class %s"
+#~ msgstr "non definito per oggetti di tipo Date"
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be coerced to an object of class %s"
+#~ msgstr "non definito per oggetti di tipo Date"
+
 #~ msgid "*** Note that 'pos=1' will give an error in the future"
 #~ msgstr "*** Si noti che 'pos=1' produrrà un errore in seguito"
 
@@ -4081,10 +4106,6 @@ msgstr[1] "non è"
 #, fuzzy
 #~ msgid "shared object '%s' not found"
 #~ msgstr "%s non trovato"
-
-#, fuzzy
-#~ msgid "'x' cannot be coerced to class \"hexmode\""
-#~ msgstr "non posso trasformarlo in una table"
 
 #, fuzzy
 #~ msgid "'stdout' must be of length 1"

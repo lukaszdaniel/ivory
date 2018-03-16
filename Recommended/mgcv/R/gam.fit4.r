@@ -142,7 +142,8 @@ fmud.test <- function(y,mu,wt,theta,fam,eps = 1e-7) {
   dev1 <- fam$dev.resids(y, mu+eps, wt,theta)
   Dmu.fd <- (dev1-dev)/eps
   cat(gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu-Dmu.fd), collapse = " "), cor(dd$Dmu,Dmu.fd), domain = "R-mgcv"), "\n", sep = "")
-  for (i in seq_along(theta)) {
+  nt <- length(theta)
+  for (i in seq_len(nt)) {
     th1 <- theta;th1[i] <- th1[i] + eps
     dev1 <- fam$dev.resids(y, mu, wt,th1)
     Dth.fd <- (dev1-dev)/eps

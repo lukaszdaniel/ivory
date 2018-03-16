@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-07 19:12+0200\n"
+"POT-Creation-Date: 2018-03-16 18:51+0100\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -367,7 +367,7 @@ msgstr "'a' und 'b' müssen endlich sein"
 #: plot.c:2926 plot.c:4023 plot.c:4026 plot.c:4029 plot.c:4032 plot.c:4052
 #: plot.c:4056 plot.c:4059 plot.c:4079 plot.c:4083 plot.c:4086 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
-#: stem.c:157 stem.c:158 stem.c:160 stem.c:161 stem.c:207 stem.c:208
+#: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
@@ -554,13 +554,13 @@ msgstr "alle z Werte sind gleich"
 msgid "all 'z' values are NA"
 msgstr "alle z Werte sind NA"
 
-#: stem.c:107
+#: stem.c:102
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
 msgstr ""
 
-#: stem.c:111
+#: stem.c:106
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -571,7 +571,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.c:113
+#: stem.c:108
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -582,17 +582,17 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.c:151
+#: stem.c:146
 #, fuzzy
 msgid "invalid input"
 msgstr "ungültige Einheiten"
 
-#: stem.c:154
+#: stem.c:149
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr ""
 
-#: stem.c:193
+#: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 

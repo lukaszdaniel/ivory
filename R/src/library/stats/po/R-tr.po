@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2449,13 +2449,6 @@ msgstr "'x' de NAs"
 #, fuzzy
 msgid "NA values in 'x'"
 msgstr "'x' de NAs"
-
-#. R/distn.R: warning("NA values produced")
-#. R/distn.R: warning("NA values produced")
-#: R/distn.R:0
-#, fuzzy
-msgid "NA values produced"
-msgstr "NAs'lara izin verilmiyor"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -6929,6 +6922,10 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "NA values produced"
+#~ msgstr "NAs'lara izin verilmiyor"
 
 #, fuzzy
 #~ msgid "requested 'conf.level' not achievable"

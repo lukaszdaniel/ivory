@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2460,13 +2460,6 @@ msgstr "NAs em 'x'"
 #, fuzzy
 msgid "NA values in 'x'"
 msgstr "NAs em 'x'"
-
-#. R/distn.R: warning("NA values produced")
-#. R/distn.R: warning("NA values produced")
-#: R/distn.R:0
-#, fuzzy
-msgid "NA values produced"
-msgstr "NAs não são permitidos"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -7028,6 +7021,10 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a %d/%d linhas de um ajuste combinado"
 msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
+
+#, fuzzy
+#~ msgid "NA values produced"
+#~ msgstr "NAs não são permitidos"
 
 #, fuzzy
 #~ msgid "Rotation:"

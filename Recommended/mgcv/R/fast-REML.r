@@ -480,7 +480,7 @@ Sl.addS <- function(Sl,A,rho) {
       ## diag(A)[ind] <-  diag(A)[ind] + exp(rho[k]) ## penalty is identity times sp
       k <- k + 1
     } else {
-      for (j in seq_alongh(Sl[[b]]$S)) {
+      for (j in seq_along(Sl[[b]]$S)) {
         B <- exp(rho[k]) * Sl[[b]]$S[[j]]; diag <- 0
         .Call(C_mgcv_madi,A,B,ind,diag)
         ## A[ind,ind] <- A[ind,ind] + exp(rho[k]) * Sl[[b]]$S[[j]]

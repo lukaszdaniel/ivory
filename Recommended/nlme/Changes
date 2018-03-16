@@ -873,11 +873,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     stop("'asTable()' function can only be used with balanced object of class \"groupedData\"")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/R/lmList.R Recommended/nlme/R/lmList.R
-38c38
+39c39
 <                          "%d times caught the same error in %s: %s"),
 ---
 >                          "%d times caught the same error in %s: %s", domain = "R-nlme"),
-41,44c41,44
+42,45c42,45
 <         paste(gettextf(
 <           "%d errors caught in %s.  The error messages and their frequencies are",
 <           sum(tt), e.call),
@@ -887,230 +887,230 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >           "%d errors caught in %s. The error messages and their frequencies are\n%s",
 >           sum(tt), e.call,
 >           paste(capture.output(sort(tt)), collapse="\n"), domain = "R-nlme")
-94c94
+96c96
 <       stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
 ---
 >       stop(gettextf("'%s' argument must be an object of class %s if 'groups' argument is missing", "data", dQuote("groupedData")))
-135,136c135
+137,138c137
 <       stop(gettextf("'data' in %s call must evaluate to a data frame",
 <                      sQuote(substitute(object))), domain = NA)
 ---
 >       stop(gettextf("'data' in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
-140,141c139
+142,143c141
 <         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
 <                       sys.call()[[1]]), domain = NA)
 ---
 >         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1]]), domain = "R-nlme")
-255c253
+257c255
 <         stop("nonexistent groups requested in 'subset'")
 ---
 >         stop("nonexistent groups requested in 'subset' argument")
-260c258
+262c260
 <           stop("nonexistent groups requested in 'subset'")
 ---
 >           stop("nonexistent groups requested in 'subset' argument")
-263c261
+265c263
 <         stop("'subset' can only be character or integer")
 ---
 >         stop(gettextf("'%s' argument can only be character or integer", "subset"))
-285c283
+287c285
 <   lab <- "Fitted values"
 ---
 >   lab <- gettext("Fitted values", domain = "R-nlme")
-402c400
+404c402
 <     stop("'form' must be a formula")
 ---
 >     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
-405c403
+407c405
 <     stop("'form' must be a one-sided formula")
 ---
 >     stop(gettextf("'%s' argument must be a one-sided formula", "form"))
-421,422c419,420
+423,424c421,422
 <                               "%s not found in data",
 <                               "%s not found in data"),
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-486c484
+488c486
 < 		 stop("'id' must be between 0 and 1")
 ---
 > 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-494c492
+496c494
 < 	     stop("'id' can only be a formula or numeric")
 ---
 >              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-509c507
+511c509
 < 	  stop("'idLabels' of incorrect length")
 ---
 >           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-513c511
+515c513
 < 	stop("'idLabels' can only be a formula or a vector")
 ---
 > 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-661c659
+663c661
 <     stop("'form' must be a formula")
 ---
 >     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
-678,679c676,677
+680,681c678,679
 <                               "%s not found in data",
 <                               "%s not found in data"),
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-756c754
+758c756
 < 		 stop("'id' must be between 0 and 1")
 ---
 > 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-761c759
+763c761
 < 	     stop("'id' can only be a formula or numeric")
 ---
 >              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-773c771
+775c773
 < 	  stop("'idLabels' of incorrect length")
 ---
 >           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-777c775
+779c777
 < 	stop("'idLabels' can only be a formula or a vector")
 ---
 > 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-881c879
+883c881
 <       stop("nonexistent group requested in 'subset'")
 ---
 >       stop("nonexistent groups requested in 'subset' argument")
-967c965
+969c967
 <       attr(val, "label") <- "Predicted values"
 ---
 >       attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
-989c987
+991c989
 <   cat("Call:\n")
 ---
 >   cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
-991,993c989
+993,995c991
 <   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
 <       "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
 <       deparse(getGroupsFormula(x)[[2]]), "\n")
 ---
 >   cat(gettext("  Model: ", domain = "R-nlme"), deparse(getResponseFormula(form)[[2]]), " ~ ", c_deparse(getCovariateFormula(form)[[2]]), " | ", deparse(getGroupsFormula(x)[[2]]), "\n", sep = "")
-995c991
+997c993
 <     cat(" Level:", mCall$level, "\n")
 ---
 >     cat(gettext(" Level: ", domain = "R-nlme"), mCall$level, "\n", sep = "")
-997,998c993,994
+999,1000c995,996
 <   cat("   Data:", deparse(mCall$data),"\n\n")
 <   cat("Coefficients:\n")
 ---
 >   cat(gettext("   Data: ", domain = "R-nlme"), deparse(mCall$data), "\n\n", sep = "")
 >   cat(gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
-1005,1007c1001,1002
+1007,1009c1003,1004
 <     cat("Degrees of freedom: ", length(unlist(lapply(x, fitted))),
 < 	" total; ", dfRes, " residual\n", sep = "")
 <     cat("Residual standard error:", format(RSE))
 ---
 >     cat(gettextf("Degrees of freedom: %s total; %s residual", length(unlist(lapply(x, fitted))), dfRes, domain = "R-nlme"), "\n", sep = "")
 >     cat(gettext("Residual standard error: ", domain = "R-nlme"), format(RSE), sep = "")
-1015c1010
+1017c1012
 <   cat("Call:\n")
 ---
 >   cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
-1017,1019c1012,1013
+1019,1021c1014,1015
 <   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
 <       "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
 <       deparse(attr(x, "groupsForm")[[2]]), "\n")
 ---
 >   cat(gettext("  Model: ", domain = "R-nlme"), deparse(getResponseFormula(form)[[2]]),
 >       " ~ ", c_deparse(getCovariateFormula(form)[[2]]), " | ", deparse(attr(x, "groupsForm")[[2]]), "\n", sep = "")
-1021c1015
+1023c1017
 <     cat(" Level:", x$call$level, "\n")
 ---
 >     cat(gettext(" Level: ", domain = "R-nlme"), x$call$level, "\n", sep = "")
-1023,1024c1017,1018
+1025,1026c1019,1020
 <   cat("   Data:", deparse(x$call$data),"\n\n")
 <   cat("Coefficients:\n")
 ---
 >   cat(gettext("   Data: ", domain = "R-nlme"), deparse(x$call$data), "\n\n", sep = "")
 >   cat(gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
-1031,1032c1025
+1033,1034c1027
 <     cat("Residual standard error:", format(x$RSE), "on",
 < 	x$df.residual, "degrees of freedom\n")
 ---
 >     cat(gettextf("Residual standard error: %s on %s degrees of freedom", format(x$RSE), x$df.residual, domain = "R-nlme"), "\n", sep = "")
-1045c1038
+1047c1040
 <     stop("'form' must be a formula")
 ---
 >     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
-1060,1061c1053,1054
+1062,1063c1055,1056
 <                               "%s not found in data",
 <                               "%s not found in data"),
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-1078,1079c1071,1072
+1080,1081c1073,1074
 <     else if (!is.null(labs) && ((labs == "Standardized residuals") ||
 <                                 (substr(labs, 1, 9) == "Residuals")))
 ---
 >     else if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
 >                            (labs == gettext("Residuals", domain = "R-nlme"))))
-1084c1077
+1086c1079
 <   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
 ---
 >   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
-1098c1091
+1100c1093
 <                    stop("'id' must be between 0 and 1")
 ---
 > 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-1104c1097
+1106c1099
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-1116c1109
+1118c1111
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-1120c1113
+1122c1115
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 > 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-1151c1144
+1153c1146
 <                    stop("'id' must be between 0 and 1")
 ---
 > 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-1157c1150
+1159c1152
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-1172c1165
+1174c1167
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-1176c1169
+1178c1171
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 > 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-1251c1244
+1253c1246
 <     attr(val, "label") <- "Standardized random effects"
 ---
 >     attr(val, "label") <- gettext("Standardized random effects", domain = "R-nlme")
-1253c1246
+1255c1248
 <     attr(val, "label") <- "Random effects"
 ---
 >     attr(val, "label") <- gettext("Random effects", domain = "R-nlme")
-1272c1265
-<         stop("nonexistent groups requested in 'subset'")
----
->         stop("nonexistent groups requested in 'subset' argument")
-1275c1268
+1274c1267
 <         stop("nonexistent groups requested in 'subset'")
 ---
 >         stop("nonexistent groups requested in 'subset' argument")
 1277c1270
+<         stop("nonexistent groups requested in 'subset'")
+---
+>         stop("nonexistent groups requested in 'subset' argument")
+1279c1272
 <         stop("'subset' can only be character or integer")
 ---
 >         stop(gettextf("'%s' argument can only be character or integer", "subset"))
-1313c1306
+1315c1308
 <       lab <- "Residuals"
 ---
 >       lab <- gettext("Residuals", domain = "R-nlme")
-1316c1309
+1318c1311
 <     else "Standardized residuals"
 ---
 >     else lab <- gettext("Standardized residuals", domain = "R-nlme")
@@ -1151,155 +1151,156 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("incompatible formulas for groups in 'random' and 'correlation'")
 ---
 >         stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
-292,293c292
-<     warning(gettextf("fewer observations than random effects in all level %s groups",
+292,294c292
+<     warning(gettextf(
+<       "fewer observations than random effects in all level %s groups",
 <                      Q), domain = NA)
 ---
 >     warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
-346c345
+348c346
 <           stop(msg, domain = NA)
 ---
 >           stop(msg, domain = "R-nlme")
-348c347
+350c348
 <           warning(msg, domain = NA)
 ---
 >           warning(msg, domain = "R-nlme")
-372c371
+374c372
 <         warning(msg, domain = NA)
 ---
 >         warning(msg, domain = "R-nlme")
-375c374
+377c375
 <         stop(msg, domain = NA)
 ---
 >         stop(msg, domain = "R-nlme")
-416c415
+418c416
 <       "Approximate variance-covariance matrix not available"
 ---
 >       gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
-617c616
+619c617
 <     "Non-positive definite approximate variance-covariance"
 ---
 >     gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
-766c765
+768c766
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-788c787
+790c788
 <   for(i in 1:Q) lastBlock[[i]] <- c(strSizes[i, -N], strRows)
 ---
 >   for(i in seq_len(Q)) lastBlock[[i]] <- c(strSizes[i, -N], strRows)
-790c789
+792c790
 <   for(i in 1:Q) lastBlock[[i]] <- maxStr[as.logical(lastBlock[[i]])]
 ---
 >   for(i in seq_len(Q)) lastBlock[[i]] <- maxStr[as.logical(lastBlock[[i]])]
-802c801
+804c802
 <        DmOff = c(0, cumsum(ncols^2))[1:(Q+2)],# offsets into DmHalf array by level
 ---
 >        DmOff = c(0, cumsum(ncols^2))[seq_len(Q+2)],# offsets into DmHalf array by level
-835c834
+837c835
 <                   nn[1:N] <- n + 1L - 1:N
 ---
 >                   nn[seq_len(N)] <- n + 1L - seq_len(N)
-837,838c836,837
+839,840c837,838
 <                   for(i in 1:N) {
 <                     tt[i] <- sum(el[1:(n-i+1)] * el[i:n])
 ---
 >                   for(i in seq_len(N)) {
 >                     tt[i] <- sum(el[seq_len(n-i+1)] * el[i:n])
-864c863
+866c864
 <       stop("object must inherit from class \"lme\" ")
 ---
 >       stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme")))
-879c878
+881c879
 <       for(i in 1:nTerms) {
 ---
 >       for(i in seq_len(nTerms)) {
-901,902c900
+903,904c901
 <             stop(gettextf("'Terms' must be between 1 and %d", nTerms),
 <                  domain = NA)
 ---
 >             stop(gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms), domain = "R-nlme")
-908,909c906,907
+910,911c907,908
 <                                     "term %s not matched",
 <                                     "terms %s not matched"),
 ---
 >                                     "term %s was not matched",
 >                                     "terms %s were not matched", domain = "R-nlme"),
-922c920
+924c921
 <           paste("F-test for:",paste(names(assign[Terms]),collapse=", "),"\n")
 ---
 >           paste(gettext("F-test for: ", domain = "R-nlme"), paste(names(assign[Terms]), collapse = ", "), "\n", sep = "")
-932c930
+934c931
 <                                 "'L' must have at most %d columns"),
 ---
 >                                 "'L' must have at most %d columns", domain = "R-nlme"),
-939c937
+941c938
 <           L0[, 1:ncolL] <- L
 ---
 >           L0[, seq_len(ncolL)] <- L
-943,944c941,942
+945,946c942,943
 <                                   "effect %s not matched",
 <                                   "effects %s not matched"),
 ---
 >                                   "effect %s was not matched",
 >                                   "effects %s were not matched", domain = "R-nlme"),
-952c950
+954c951
 <         rownames(L) <- if(is.null(dmsL1)) 1:nrowL else dmsL1[noZeroRowL]
 ---
 >         rownames(L) <- if(is.null(dmsL1)) seq_len(nrowL) else dmsL1[noZeroRowL]
-959c957
+961c958
 <         lab <- "F-test for linear combination(s)\n"
 ---
 >         lab <- paste(gettext("F-test for linear combinations", domain = "R-nlme"), "\n", sep = "")
-991c989
+993c990
 <            domain=NA)
 ---
 >            domain="R-nlme")
-1041c1039
+1043c1040
 <                       Model = 1:rt,
 ---
 >                       Model = seq_len(rt),
-1084c1082
+1086c1083
 <                   sQuote(substitute(object))), domain = NA)
 ---
 >                   sQuote(substitute(object))), domain = "R-nlme")
-1187c1185
+1189c1186
 <   for (i in 1:level) {
 ---
 >   for (i in seq_len(level)) {
-1208c1206
+1210c1207
 <   attr(effs, "label") <- "Coefficients"
 ---
 >   attr(effs, "label") <- gettext("Coefficients", domain = "R-nlme")
-1226c1224
+1228c1225
 <                             "nonexistent levels %s"),
 ---
 >                             "nonexistent levels %s", domain = "R-nlme"),
-1242c1240
+1244c1241
 <     lab <- "Fitted values"
 ---
 >     lab <- gettext("Fitted values", domain = "R-nlme")
-1297c1295
+1299c1296
 <     attr(vfix, "label") <- "Fixed effects:"
 ---
 >     attr(vfix, "label") <- gettext("Fixed effects:", domain = "R-nlme")
-1303c1301
+1305c1302
 <                     aV, "which = \"fixed\""), domain = NA)
 ---
 >                     aV, "which = \"fixed\""), domain = "R-nlme")
-1334c1332
+1336c1333
 <     attr(vsig, "label") <- "Within-group standard error:"
 ---
 >     attr(vsig, "label") <- gettext("Within-group standard error:", domain = "R-nlme")
-1348c1346
+1350c1347
 <       attr(vsig, "label") <- "Within-group standard error:"
 ---
 >       attr(vsig, "label") <- gettext("Within-group standard error:", domain = "R-nmle")
-1368c1366
+1370c1367
 <     for(i in 1:3) {                     # re-express intervals in constrained pars
 ---
 >     for(i in seq_len(3)) {                     # re-express intervals in constrained pars
-1394,1397c1392,1395
+1396,1399c1393,1396
 <                reStruct = "Random Effects:",
 <                corStruct = "Correlation structure:",
 <                varStruct = "Variance function:",
@@ -1309,104 +1310,104 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                corStruct = gettext("Correlation structure:", domain = "R-nlme"),
 >                varStruct = gettext("Variance function:", domain = "R-nlme"),
 >                paste(i,":",sep=""))
-1442c1440
+1444c1441
 <     stop("'form' must be a formula")
 ---
 >     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
-1445c1443
+1447c1444
 <     stop("'form' must be a one-sided formula")
 ---
 >     stop(gettextf("'%s' argument must be a one-sided formula", "form"))
-1461,1462c1459,1460
+1463,1464c1460,1461
 <                               "%s not found in data",
 <                               "%s not found in data"),
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-1525c1523
+1527c1524
 <                  stop("'id' must be between 0 and 1")
 ---
 >                  stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-1537c1535
+1539c1536
 <              stop("'id' can only be a formula or numeric")
 ---
 >              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-1542c1540
+1544c1541
 <         stop("covariate must have a level attribute when 'id' is a formula")
 ---
 >         stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "id"))
-1555c1553
+1557c1554
 <           stop("'idLabels' of incorrect length")
 ---
 >           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-1559c1557
+1561c1558
 <         stop("'idLabels' can only be a formula or a vector")
 ---
 >         stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-1565c1563
+1567c1564
 <         stop("covariate must have a level attribute when 'idLabels' is a formula")
 ---
 >         stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "idLabels"))
-1698,1699c1696,1697
+1700,1701c1697,1698
 <                               "%s not available for plotting",
 <                               "%s not available for plotting"),
 ---
 >                               "%s is not available for plotting",
 >                               "%s are not available for plotting", domain = "R-nlme"),
-1737c1735
+1739c1736
 <       stop("'form' must be a formula when not NULL")
 ---
 >       stop(gettextf("'%s' argument must be a formula when not NULL", "form"))
-1747,1748c1745
+1749,1750c1746
 <       stop(gettextf("%s is not a valid effect name", sQuote(reName)),
 <            domain = NA)
 ---
 >       stop(gettextf("%s is not a valid effect name", sQuote(reName)), domain = "R-nlme")
-1756,1757c1753,1754
+1758,1759c1754,1755
 <                             "%s not available for plotting",
 <                             "%s not available for plotting"),
 ---
 >                             "%s is not available for plotting",
 >                             "%s are not available for plotting", domain = "R-nlme"),
-1770c1767
+1772c1768
 <     for(i in 1:nV) {
 ---
 >     for(i in seq_len(nV)) {
-1947,1948c1944,1945
+1949,1950c1945,1946
 <                               "level %s not allowed for %s",
 <                               "levels %s not allowed for %s"),
 ---
 >                               "level %s is not allowed for %s",
 >                               "levels %s are not allowed for %s", domain = "R-nlme"),
-1979c1976
+1981c1977
 <     attr(val, "label") <- "Predicted values"
 ---
 >     attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
-2021c2018
+2023c2019
 <     lab <- "Predicted values"
 ---
 >     lab <- gettext("Predicted values", domain = "R-nlme")
-2049c2046
+2051c2047
 <       cat("Call:\n")
 ---
 >       cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
-2051c2048
+2053c2049
 <       for(i in 1:rt) {
 ---
 >       for(i in seq_len(rt)) {
-2053c2050
+2055c2051
 <         cat(" ",as.character(x[i,"call"]),"\n")
 ---
 >         cat(" ", as.character(x[i,"call"]), "\n", sep = "")
-2084c2081
+2086c2082
 <   cat(paste0("Approximate ", attr(x,"level") *100, "% confidence intervals\n"))
 ---
 >   cat(gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100,  domain = "R-nlme"), "\n", sep = "")
-2090c2087
+2092c2088
 <         cat("  Level:", j, "\n")
 ---
 >         cat(gettext("  Level: ",  domain = "R-nlme"), j, "\n", sep = "")
-2105,2107c2102,2107
+2107,2109c2103,2108
 <     cat( "Nonlinear mixed-effects model fit by " )
 <     cat( if(x$method == "REML") "REML\n" else "maximum likelihood\n")
 <     cat("  Model:", deparse(x$call$model),"\n")
@@ -1417,7 +1418,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >      cat(gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
 >     }
 >     cat(gettext("  Model: ", domain = "R-nlme"), deparse(x$call$model), "\n", sep = "")
-2109,2110c2109,2113
+2111,2112c2110,2114
 <     cat( "Linear mixed-effects model fit by " )
 <     cat( if(x$method == "REML") "REML\n" else "maximum likelihood\n")
 ---
@@ -1426,11 +1427,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     } else {
 >      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
 >     }
-2112c2115
+2114c2116
 <   cat("  Data:", deparse( x$call$data ), "\n")
 ---
 >   cat(gettext("  Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
-2114c2117,2122
+2116c2118,2123
 <     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")
 ---
 >     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")
@@ -1439,24 +1440,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >    cat(gettext("  Log-restricted-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
 >   } else {
 >    cat(gettext("  Log-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
-2116,2117d2123
+2118,2119d2124
 <   cat("  Log-", if(x$method == "REML") "restricted-" else "",
 <       "likelihood: ", format(x$logLik), "\n", sep = "")
-2119c2125
+2121c2126
 <   cat("  Fixed:",
 ---
 >   cat(gettext("  Fixed: ", domain = "R-nlme"),
-2128,2129c2134,2135
+2130,2131c2135,2136
 <   cat("Number of Observations:", dd[["N"]])
 <   cat("\nNumber of Groups: ")
 ---
 >   cat(gettext("Number of Observations: ", domain = "R-nlme"), dd[["N"]], "\n", sep = "")
 >   cat(gettext("Number of Groups: ", domain = "R-nlme"))
-2151c2157
+2153c2158
 <       cat("Level:", attr(x, "grpNames")[i],"\n")
 ---
 >       cat(gettext("Level: ", domain = "R-nlme"), attr(x, "grpNames")[i], "\n", sep = "")
-2164,2166c2170,2175
+2166,2168c2171,2176
 <     cat( "Nonlinear mixed-effects model fit by " )
 <     cat( if(x$method == "REML") "REML\n" else "maximum likelihood\n")
 <     cat("  Model:", deparse(x$call$model),"\n")
@@ -1467,7 +1468,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >      cat(gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
 >     }
 >     cat(gettext("  Model: ", domain = "R-nlme"), deparse(x$call$model), "\n", sep = "")
-2168,2169c2177,2181
+2170,2171c2178,2182
 <     cat( "Linear mixed-effects model fit by " )
 <     cat( if(x$method == "REML") "REML\n" else "maximum likelihood\n")
 ---
@@ -1476,38 +1477,38 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     } else {
 >      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
 >     }
-2172c2184
+2174c2185
 <   cat(" Data:", deparse( x$call$data ), "\n")
 ---
 >   cat(gettext(" Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
-2174c2186
+2176c2187
 <     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")
 ---
 >     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")
-2176,2178c2188,2189
+2178,2180c2189,2190
 <   print(data.frame(AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik),
 <                    row.names = " "), ...)
 <   if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
 ---
 >   print(data.frame(AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik), row.names = " "), ...)
 >   if (verbose) { cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "") }
-2182c2193
+2184c2194
 <   cat("Fixed effects: ")
 ---
 >   cat(gettext("Fixed effects: ", domain = "R-nlme"))
-2185c2196
+2187c2197
 <     cat(deparse(x$call$fixed), "\n")
 ---
 >     cat(deparse(x$call$fixed), "\n", sep = "")
-2204c2215
+2206c2216
 <     print(corr, title = " Correlation:", ...)
 ---
 >     print(corr, title = gettext(" Correlation:", domain = "R-nlme"), ...)
-2206c2217
+2208c2218
 <   cat("\nStandardized Within-Group Residuals:\n")
 ---
 >   cat("\n", gettext("Standardized Within-Group Residuals:", domain = "R-nlme"), "\n", sep = "")
-2208,2210c2219,2221
+2210,2212c2220,2222
 <   cat("\nNumber of Observations:",x$dims[["N"]])
 <   cat("\nNumber of Groups: ")
 <   Ngrps <- dd$ngrps[1:dd$Q]
@@ -1515,21 +1516,21 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   cat("\n", gettext("Number of Observations: ", domain = "R-nlme"), x$dims[["N"]], sep = "")
 >   cat("\n", gettext("Number of Groups: ", domain = "R-nlme"), sep = "")
 >   Ngrps <- dd$ngrps[seq_len(dd$Q)]
-2214c2225
+2216c2226
 <     sNgrps <- 1:lNgrps
 ---
 >     sNgrps <- seq_len(lNgrps)
-2233c2244
+2235c2245
 <   if (!inherits(form, "formula")) stop("'form' must be a formula")
 ---
 >   if (!inherits(form, "formula")) stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
-2249,2250c2260,2261
+2251,2252c2261,2262
 <                               "%s not found in data",
 <                               "%s not found in data"),
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-2264,2271c2275,2281
+2266,2273c2276,2282
 <   type <-
 <     if (inherits(.x, "ranef.lme"))
 <       "reff" # random effects
@@ -1546,41 +1547,41 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                                 (labs == gettext("Residuals", domain = "R-nlme")))) {
 >     type <- "res" # residuals
 >   } else
-2275c2285
+2277c2286
 <   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
 ---
 >   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
-2290c2300
+2292c2301
 <                    stop("'Id' must be between 0 and 1")
 ---
 >                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-2292c2302
+2294c2303
 <                  if (labs == "Normalized residuals") {
 ---
 >                  if (labs == gettext("Normalized residuals", domain = "R-nlme")) {
-2301c2311
+2303c2312
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-2313c2323
+2315c2324
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-2317c2327
+2319c2328
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 >           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-2348c2358
+2350c2359
 <                    stop("'id' must be between 0 and 1")
 ---
 >                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-2354c2364
+2356c2365
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-2361d2370
+2363d2371
 <       idLabels <-
-2363,2364c2372,2375
+2365,2366c2373,2376
 <           rep(row.names(.x), nc)
 <         } else if (mode(idLabels) == "call") {
 ---
@@ -1588,7 +1589,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       } else {
 >         if (mode(idLabels) == "call") {
 >           idLabels <-
-2367,2371c2378,2385
+2369,2373c2379,2386
 <           if (length(idLabels <- unlist(idLabels)) != N)
 <             stop("'idLabels' of incorrect length")
 <           as.character(idLabels)
@@ -1603,27 +1604,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
 >         }
 >       }
-2450,2451c2464
+2452,2453c2465
 <         t(t(effects[[i]]) /
 <           (object$sigma *
 ---
 > 	t(t(effects[[i]]) / (object$sigma *
-2466,2467c2479,2480
+2468,2469c2480,2481
 <     subset <- if (is.null(subset)) {  # nlme case
 <                 eval(object$call[["naPattern"]])
 ---
 >     if (is.null(subset)) {              # nlme case
 >       subset <- eval(object$call[["naPattern"]])
-2469c2482
+2471c2483
 <                 asOneSidedFormula(as.list(match.call())[["subset"]])
 ---
 >       subset <- asOneSidedFormula(as.list(match.call())[["subset"]])
-2482,2483c2495
+2484,2485c2496
 <         data[, is.na(match(names(data), names(object$modelStruct$reStruct))),
 <              drop = FALSE]
 ---
 > 	data[, is.na(match(names(data), names(object$modelStruct$reStruct))), drop = FALSE]
-2497,2504c2509,2519
+2499,2506c2510,2520
 <   structure(effects, class = c("ranef.lme", class(effects)),
 <             label= if (standard)
 <                      "Standardized random effects"
@@ -1644,11 +1645,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   attr(effects, "grpNames") <- grpNames
 >   class(effects) <- c("ranef.lme", class(effects))
 >   effects
-2520c2535
+2522c2536
 <                             "nonexistent levels %s"),
 ---
 >                               "nonexistent levels %s", domain = "R-nlme"),
-2553,2555c2568,2572
+2555,2557c2569,2573
 <                if (!is.null(aux <- attr(object, "units")$y))
 <                  paste("Residuals", aux)
 <                else "Residuals"
@@ -1658,32 +1659,32 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                  lab <- paste(lab, aux)
 >                }
 >                lab
-2557,2558c2574,2575
+2559,2560c2575,2576
 <              pearson = "Standardized residuals",
 <              normalized = "Normalized residuals"
 ---
 >              pearson = gettext("Standardized residuals", domain = "R-nlme"),
 >              normalized = gettext("Normalized residuals", domain = "R-nlme")
-2605c2622
+2607c2623
 <     stop("need an object with call component")
 ---
 >     stop("an object with 'call' component is required")
-2731c2748
+2733c2749
 <         stop("'nint' is not consistent with 'breaks'")
 ---
 >         stop(gettextf("'%s' is not consistent with '%s'", "nint", "breaks"))
-2769,2770c2786,2788
+2771,2772c2787,2789
 <   structure(val, class = c("Variogram", "data.frame"),
 <             collapse = (collapse != "none"))
 ---
 >   attr(val, "collapse") <- collapse != "none"
 >   class(val) <- c("Variogram", "data.frame")
 >   val
-2816c2834
+2818c2835
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-2881,2882c2899,2900
+2883,2884c2900,2901
 <   attr(val, "gradient") <- -aux[1 + (1:q)]
 <   attr(val, "hessian") <- -array(aux[-(1:(q+1))], c(q, q))
 ---
@@ -2019,7 +2020,29 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     for(i in seq_len(Q)) {
 >       w <- w + as.vector((ZX[, startRan + seq_len(ncols[i]), drop = FALSE] *
-826,828c819,821
+815c808
+<         warning(paste(sprintf(
+---
+>         warning(paste(gettextf(
+817,819c810,812
+<           numIter, optRes$convergence),
+<           if(convIter >= control$iter.max) "Do increase 'msMaxIter'!"
+<           else if(!is.null(msg <- optRes$message)) paste("PORT message:", msg)))
+---
+>           numIter, optRes$convergence, domain = "R-nlme"),
+>           if(convIter >= control$iter.max) gettext("Do increase 'msMaxIter'!", domain = "R-nlme")
+>           else if(!is.null(msg <- optRes$message)) paste(gettext("PORT message:", domain = "R-nlme"), msg)), domain = NA)
+831c824
+<         warning(paste(sprintf(
+---
+>         warning(paste(gettextf(
+833,834c826,827
+<           numIter, aNlm$code),
+<           if(aNlm$code == 4) "Do increase 'msMaxIter'!"))
+---
+>           numIter, aNlm$code, domain = "R-nlme"),
+>           if(aNlm$code == 4) gettext("Do increase 'msMaxIter'!", domain = "R-nlme")), domain = NA)
+838,840c831,833
 <       cat("\n**Iteration", numIter)
 <       cat(sprintf("\nLME step: Loglik: %s, %s iterations: %d\n",
 <                   format(nlmeFit$logLik), controlvals$opt, convIter))
@@ -2027,15 +2050,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       cat("\n**", gettextf("Iteration %d", numIter, domain = "R-nlme"), sep = "")
 >       cat("\n")
 >       cat(gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt, convIter, domain = "R-nlme"), "\n", sep = "")
-861c854
+854c847
+<     if (verbose) cat(" Beginning PNLS step: .. ")
+---
+>     if (verbose) cat(gettext(" Beginning PNLS step: .. ", domain = "R-nlme"))
+872c865
+<     if (verbose) cat(" completed fit_nlme() step.\n")
+---
+>     if (verbose) cat(gettext(" completed fit_nlme() step.\n", domain = "R-nlme"))
+875c868
 <       msg <- "step halving factor reduced below minimum in PNLS step"
 ---
 >       msg <- gettext("step halving factor reduced below minimum in PNLS step", domain = "R-nlme")
-879c872
+893c886
 <     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
 ---
 >     for(i in seq_len(Q)) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
-882,884c875,877
+896,898c889,891
 <       cat("PNLS step: RSS = ", format(work$settings[6]), "\n fixed effects: ")
 <       for (i in 1:fLen) cat(format(sfix[i])," ")
 <       cat("\n iterations:", work$settings[5],"\n")
@@ -2043,7 +2074,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       cat("\n", gettextf("PNLS step: RSS = %s", format(work$set[6]), domain = "R-nlme"), "\n ", gettext("Fixed effects:", domain = "R-nlme"), sep = "")
 >       for (i in seq_len(fLen)) cat(format(sfix[i])," ")
 >       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$settings[5], "\n", sep = "")
-887,889c880,882
+901,903c894,896
 <     w[] <- work$additional[(NReal * pLen) + 1:NReal]
 <     ZX[] <- work$additional[1:(NReal * pLen)]
 <     w <- w + as.vector(ZX[, rLen + (1:fLen), drop = FALSE] %*% sfix)
@@ -2051,45 +2082,47 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     w[] <- work$additional[(NReal * pLen) + seq_len(NReal)]
 >     ZX[] <- work$additional[seq_len(NReal * pLen)]
 >     w <- w + as.vector(ZX[, rLen + seq_len(fLen), drop = FALSE] %*% sfix)
-891,892c884,885
+905c898
 <     for(i in 1:Q) {
-<       w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
 ---
 >     for(i in seq_len(Q)) {
+907c900
+<       w <- w + as.vector((ZX[, startRan + 1:ncols[i], drop = FALSE] *
+---
 >       w <- w + as.vector((ZX[, startRan + seq_len(ncols[i]), drop = FALSE] *
-907,908c900,901
+922,923c915,916
 <     aConv <- c(fixed = max(conv[1:fLen]))
 <     conv <- conv[-(1:fLen)]
 ---
 >     aConv <- c(fixed = max(conv[seq_len(fLen)]))
 >     conv <- conv[-seq_len(fLen)]
-917,918c910,911
+932,933c925,926
 <       cat(sprintf("Convergence crit. (must all become <= tolerance = %g):\n",
 <                   controlvals$tolerance))
 ---
 >       cat(gettextf("Convergence crit. (must all become <= tolerance = %g):",
 >                   controlvals$tolerance, domain = "R-nlme"), "\n", sep = "")
-931c924
+946c939
 < 	controlvals$maxIter)
 ---
 > 	controlvals$maxIter, domain = "R-nlme")
-933c926
-< 	warning(msg, domain=NA)
+948c941
+< 	warning(msg, domain=NA) ; break
 ---
-> 	warning("maximum number of iterations reached without convergence")
-936c929
+> 	warning("maximum number of iterations reached without convergence"); break
+950c943
 < 	stop(msg, domain=NA)
 ---
 > 	stop("maximum number of iterations reached without convergence")
-948c941
+961c954
 <   fixDF <- getFixDF(ZX[, rLen + (1:fLen), drop = FALSE],
 ---
 >   fixDF <- getFixDF(ZX[, rLen + seq_len(fLen), drop = FALSE],
-981c974
+994c987
 <       "Approximate variance-covariance matrix not available"
 ---
 >       gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
-1172,1175c1165,1167
+1185,1188c1178,1180
 <                               "level %s not allowed for %s",
 <                               "levels %s not allowed for %s"),
 <                      paste(levs[wch], collapse = ",")),
@@ -2098,15 +2131,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                               "level %s is not allowed for %s",
 >                               "levels %s ares not allowed for %s", domain = "R-nlme"),
 >                      paste(levs[wch], collapse = ", ")), domain = NA)
-1265c1257
+1278c1270
 <   for(i in 1:nlev) {
 ---
 >   for(i in seq_len(nlev)) {
-1299c1291
+1312c1304
 <     lab <- "Predicted values"
 ---
 >     lab <- gettext("Predicted values", domain = "R-nlme")
-1315c1307
+1328c1320
 <     stop("need an object with call component")
 ---
 >     stop("an object with 'call' component is required")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2469,13 +2469,6 @@ msgstr " 'x' 中に NA 値があります "
 #, fuzzy
 msgid "NA values in 'x'"
 msgstr " 'x' 中に NA 値があります "
-
-#. R/distn.R: warning("NA values produced")
-#. R/distn.R: warning("NA values produced")
-#: R/distn.R:0
-#, fuzzy
-msgid "NA values produced"
-msgstr " NA は許されません "
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -6991,6 +6984,10 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#, fuzzy
+#~ msgid "NA values produced"
+#~ msgstr " NA は許されません "
 
 #, fuzzy
 #~ msgid "requested 'conf.level' not achievable"

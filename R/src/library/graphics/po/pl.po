@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-07 19:12+0200\n"
+"POT-Creation-Date: 2018-03-16 18:51+0100\n"
 "PO-Revision-Date: 2016-04-26 22:56+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -354,7 +354,7 @@ msgstr "argumenty 'a' oraz 'b' muszą być skończone"
 #: plot.c:2926 plot.c:4023 plot.c:4026 plot.c:4029 plot.c:4032 plot.c:4052
 #: plot.c:4056 plot.c:4059 plot.c:4079 plot.c:4083 plot.c:4086 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
-#: stem.c:157 stem.c:158 stem.c:160 stem.c:161 stem.c:207 stem.c:208
+#: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -533,7 +533,7 @@ msgstr "wszystkie wartości 'z' są równe"
 msgid "all 'z' values are NA"
 msgstr "wszystkie wartości 'z' to NA"
 
-#: stem.c:107
+#: stem.c:102
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
@@ -541,7 +541,7 @@ msgstr ""
 "  Kropka dziesiętna jest na znaku |\n"
 "\n"
 
-#: stem.c:111
+#: stem.c:106
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -559,7 +559,7 @@ msgstr[2] ""
 "  Kropka dziesiętna jest %d cyfr na prawo od znaku |\n"
 "\n"
 
-#: stem.c:113
+#: stem.c:108
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -577,16 +577,16 @@ msgstr[2] ""
 "  Kropka dziesiętna jest %d cyfr na lewo od znaku |\n"
 "\n"
 
-#: stem.c:151
+#: stem.c:146
 msgid "invalid input"
 msgstr "niepoprawne wejście"
 
-#: stem.c:154
+#: stem.c:149
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "długi wektor '%s' nie jest wspierany"
 
-#: stem.c:193
+#: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr "zliczenia dla przedziałów przekraczają INT_MAX"
 

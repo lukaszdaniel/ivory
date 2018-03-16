@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-03-16 18:52+0100\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-#: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:831 io.c:835
-#: io.c:841 io.c:842 io.c:1075 io.c:1076 io.c:1078 io.c:1079 io.c:1080
-#: io.c:1081 io.c:1082 io.c:1083 stubs.c:39 stubs.c:59 windows/dialogs.c:169
+#: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:832 io.c:836
+#: io.c:842 io.c:843 io.c:1089 io.c:1090 io.c:1092 io.c:1093 io.c:1094
+#: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
 #: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
@@ -28,11 +28,11 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
 
-#: io.c:344 io.c:828
+#: io.c:344 io.c:829
 msgid "invalid quote symbol set"
 msgstr "ungültiges Symbol für Quotatinen gesetzt"
 
-#: io.c:356 io.c:851 io.c:1063
+#: io.c:356 io.c:852 io.c:1077
 msgid "cannot open the connection"
 msgstr "kann die Verbindung nicht öffnen"
 
@@ -59,62 +59,62 @@ msgstr ""
 msgid "Selection: "
 msgstr "Auswahl: "
 
-#: io.c:860 io.c:874
+#: io.c:862 io.c:878
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "kann Buffer in 'readTableHead' nicht allokieren"
 
-#: io.c:885
+#: io.c:892
 msgid "\\ followed by EOF"
 msgstr "\\\\ gefolgt von EOF"
 
-#: io.c:920
+#: io.c:931
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.c:934 io.c:937
+#: io.c:945 io.c:950
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "unvollstädige letzte Zeile von readTableHeader in '%s' gefunden"
 
-#: io.c:994
+#: io.c:1008
 msgid "index out of range"
 msgstr "Index außerhalb der Grenzen"
 
-#: io.c:1031
+#: io.c:1045
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.c:1033
+#: io.c:1047
 msgid "Problem closing connection"
 msgstr ""
 
-#: io.c:1056
+#: io.c:1070
 #, fuzzy
 msgid "'file' argument is not a connection"
 msgstr "'file' ist keine Verbindung"
 
-#: io.c:1059
+#: io.c:1073
 msgid "cannot write to this connection"
 msgstr "kann in diese Verbindung nicht schreiben"
 
-#: io.c:1089
+#: io.c:1103
 #, fuzzy
 msgid "'dec' argument must be a single character"
 msgstr "'dec' muss ein einzelnes Zeichen sein"
 
-#: io.c:1115
+#: io.c:1129
 #, c-format
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr "korrupter Datafram -- Länge der Spalte %d entspricht nicht nrows"
 
-#: io.c:1143
+#: io.c:1157
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "Spalte %s behauptet Faktor zu sein, hat aber keine numerischen Kodes"
 
-#: io.c:1160
+#: io.c:1174
 msgid "corrupt matrix -- dims not not match length"
 msgstr "korrupte Matrix -- Dimensionen entsprechen nicht der Länge"
 

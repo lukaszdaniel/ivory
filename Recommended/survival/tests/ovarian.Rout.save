@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2017-08-15 r987) -- "Internationalized Version of R"
-Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2018-03-14 r1010) -- "Internationalized Version of R"
+Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2018-03-14 r74418) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -319,4 +319,4 @@ Call: survfit(formula = fit, newdata = list(age = c(30, 70), ecog.ps = c(2, 3)))
 > 
 > proc.time()
    user  system elapsed 
-  0.984   0.020   0.999 
+  0.878   0.059   0.929 

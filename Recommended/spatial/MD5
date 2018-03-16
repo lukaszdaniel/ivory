@@ -30,11 +30,11 @@ c11ec6f7d0be22408133ed4fd4b7e960 *po/R-spatial.pot
 f5b5986eb68459dea8b9e9b3f38e8d76 *po/pl.po
 182f00cf50a61e570797768992be4db6 *LICENCE.note
 7112a4d219f74c9ecd9eedbc9c586290 *inst/CITATION
-8d7bfb068f64460a0aae598a08a0df04 *inst/po/fr/LC_MESSAGES/R-spatial.mo
-9e9bf40d22b529f37994074bac3231a7 *inst/po/en@quot/LC_MESSAGES/R-spatial.mo
-e227098640b892bc3305538c405db7e9 *inst/po/de/LC_MESSAGES/R-spatial.mo
-f39f935778dd7cadd220d1a7303f5742 *inst/po/pl/LC_MESSAGES/R-spatial.mo
-f2eede10f9dbd00af317eb5a06db29a9 *inst/po/ko/LC_MESSAGES/R-spatial.mo
+ddd1e8e52385bd99a52eaeb865fd430a *inst/po/fr/LC_MESSAGES/R-spatial.mo
+dc6b27bf427fc553d69adafe58fcf87c *inst/po/en@quot/LC_MESSAGES/R-spatial.mo
+8a1e18d1d5be2216ab842a12dca39d68 *inst/po/de/LC_MESSAGES/R-spatial.mo
+75baf10a5fd9e3e8d13da1f350cce512 *inst/po/pl/LC_MESSAGES/R-spatial.mo
+3a05a08449fb1924d0308ae90b4ee94a *inst/po/ko/LC_MESSAGES/R-spatial.mo
 5193d9a4c94db175d7a3faea4c87dd94 *inst/NEWS
 7e12726c0a5f9abf7de8b68735d73750 *inst/PP.files
 4c3bc2a73ddce9bb6b7a9dcb5322930a *inst/ppdata/fig3b.dat

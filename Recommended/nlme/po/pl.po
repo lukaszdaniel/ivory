@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-125\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2018-03-16 18:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -28,7 +28,7 @@ msgstr "Macierz współczynników nie jest odwracalna"
 msgid "Unknown spatial correlation class"
 msgstr "Nieznana klasa przestrzennej korelacji"
 
-#: nlme.c:460
+#: nlme.c:465
 msgid "First observation on an individual must have a dose"
 msgstr "Pierwsza obserwacja jednostki musi mieć zamknięcie"
 
@@ -42,26 +42,30 @@ msgstr "Macierz pojedynczej precyzji w poziomie %ld, blok %ld"
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Osobliwość w 'backsolve' na poziomie %ld, blok %ld"
 
-#: nlmefit.c:555 nlmefit.c:735
+#: nlmefit.c:557 nlmefit.c:737
 msgid "Overfitted model!"
 msgstr "Zbyt dopasowany model!"
 
-#: nlmefit.c:581
+#: nlmefit.c:583
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "gradient analityczny nie jest dostępny z algorytmem macierzowym"
 
-#: nlmefit.c:604
+#: nlmefit.c:606
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
-#: nlmefit.c:896
-msgid "Unable to form eigenvalue-eigenvector decomposition"
+#: nlmefit.c:898
+#, fuzzy, c-format
+msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr "Nie można uformować dekompozycji wartość własna-wektor własny"
 
-#: nlmefit.c:928
-msgid "Unable to form Cholesky decomposition"
+#: nlmefit.c:930
+#, fuzzy, c-format
+msgid ""
+"Unable to form Cholesky decomposition: the leading minor of order %d is not "
+"pos.def."
 msgstr "Nie można uformować dekompozycji Cholesky'ego"
 
-#: nlmefit.c:959
+#: nlmefit.c:962
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Jak na razie nie została napisany przypadek dla tej złożonej symetrii"

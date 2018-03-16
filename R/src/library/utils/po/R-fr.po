@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -28,6 +28,11 @@ msgid ""
 "# your favorite email program and send it to\n"
 "#\n"
 "#       %s"
+msgstr ""
+
+#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
+#: R/modifyList.R:0
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
 #. R/packages2.R: gettextf("%d): succeeded '%s'", i, cmd)
@@ -3295,6 +3300,13 @@ msgid_plural ""
 "in the following places:"
 msgstr[0] "L'aide sur le thème %s a été trouvée dans les packages suivants :"
 msgstr[1] "L'aide sur le thème %s a été trouvée dans les packages suivants :"
+
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+#: R/modifyList.R:0
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s", domain = "R-utils")
 #: R/apropos.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-9\n"
-"POT-Creation-Date: 2017-03-14 22:25\n"
+"Project-Id-Version: Matrix 1.2-12\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -864,6 +864,13 @@ msgid "[[ suppressing %d column names %s ]]"
 msgstr ""
 
 
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: warning("a sparseMatrix should rarely be centered: will not be sparse anymore")
+
+msgid "a sparseMatrix should rarely be centered: will not be sparse anymore"
+msgstr ""
+
+
 #: R/abIndex.R: 0
 #. R/abIndex.R: gettextf("abIndex: lengths (%d, %d) differ", lt, lc, domain = "R-Matrix")
 
@@ -882,6 +889,20 @@ msgstr ""
 #. R/dsCMatrix.R: warning("as(.,\"dsCMatrix\") is deprecated (since 2008); do use as(., \"symmetricMatrix\")")
 
 msgid "as(.,\"dsCMatrix\") is deprecated (since 2008); do use as(., \"symmetricMatrix\")"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+
+msgid "as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) instead."
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+
+msgid "as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  as(x, \"matrix\")  or .asmatrix(x) instead."
 msgstr ""
 
 
@@ -1320,6 +1341,13 @@ msgid "length must be non-negative number"
 msgstr ""
 
 
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("length of 'center' must equal the number of columns of 'x'")
+
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr ""
+
+
 #: R/AllClass.R: 0
 #. R/AllClass.R: gettextf("length of 'perm' slot must be %d", n)
 
@@ -1331,6 +1359,13 @@ msgstr ""
 #. R/AllClass.R: gettextf("length of 'perm' slot must be %s", n, domain = "R-Matrix")
 
 msgid "length of 'perm' slot must be %s"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("length of 'scale' must equal the number of columns of 'x'")
+
+msgid "length of 'scale' must equal the number of columns of 'x'"
 msgstr ""
 
 
@@ -1914,6 +1949,13 @@ msgstr ""
 #. R/HBMM.R: gettextf("representation '%s' not recognized", repr)
 
 msgid "representation '%s' not recognized"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#. R/indMatrix.R: stop("resulting matrix dimension would be too large")
+
+msgid "resulting matrix dimension would be too large"
 msgstr ""
 
 

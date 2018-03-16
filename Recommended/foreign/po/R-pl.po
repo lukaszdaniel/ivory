@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-50\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -38,6 +38,17 @@ msgstr "argument '%s' musi być łańcuchem tekstowym lub połączeniem"
 msgid "'missing.type' only applicable to version >= 8 files"
 msgstr "'missing.type' ma zastosowanie tylko dla plików w wersji>= 8"
 
+#. R/spss.R: paste(addlevels, collapse = ", ")
+#. R/spss.R: paste(newlabels[dupnewlabels], collapse = ", ")
+#: R/spss.R:0
+msgid ","
+msgstr ""
+
+#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
+#: R/spss.R:0
+msgid ":"
+msgstr ""
+
 #. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
 #: R/Sread.R:0
 msgid "Argument %s is missing"
@@ -47,11 +58,6 @@ msgstr "Brakuje argumentu %s"
 #: R/Sread.R:0
 msgid "Argument is missing"
 msgstr "Brakuje argumentu"
-
-#. R/writeForeignCode.R: stop("Cannot handle character variables longer than 255")
-#: R/writeForeignCode.R:0
-msgid "Cannot handle character variables longer than 255"
-msgstr "Nie można obsłużyć zmiennych tekstowych dłuższych niż 255 znaków"
 
 #. R/writeForeignSAS.R: stop("Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit")
 #: R/writeForeignSAS.R:0
@@ -67,14 +73,20 @@ msgstr ""
 msgid "Cannot uniquely abbreviate the variable names to %d or fewer characters"
 msgstr "Nie można jednoznacznie skrócić nazw zmiennych do %d lub mniej znaków"
 
+#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
+#: R/spss.R:0
+msgid "Duplicated levels in factor"
+msgstr ""
+
 #. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
 #: R/dbf.R:0
 msgid "Field name: %s changed to: %s"
 msgstr "Nazwa pola: %s została zamieniona na: %s"
 
-#. R/writeForeignCode.R: stop("I cannot abbreviate the variable names to eight or fewer letters")
+#. R/writeForeignCode.R: stop("I cannot abbreviate the variable names to 'maxchars' or fewer chars")
 #: R/writeForeignCode.R:0
-msgid "I cannot abbreviate the variable names to eight or fewer letters"
+#, fuzzy
+msgid "I cannot abbreviate the variable names to 'maxchars' or fewer chars"
 msgstr "Nie mogę skrócić nazw zmiennych do ośmiu lub mniej liter"
 
 #. R/arff.R: stop("Invalid attribute specification.")
@@ -137,6 +149,11 @@ msgstr "Plik dziennika zdarzeń będzie %s w bieżącym katalogu"
 msgid "Type 'relational' currently not implemented."
 msgstr "Typ 'relational' na chwilę obecną nie jest zaimplementowany."
 
+#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
+#: R/spss.R:0
+msgid "Undeclared level(s)"
+msgstr ""
+
 #. R/Sread.R: gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign")
 #: R/Sread.R:0
 msgid "Unrecognized S mode %s is not supported"
@@ -162,6 +179,11 @@ msgstr ""
 #: R/read.dta.R:0
 msgid "abbreviating variable names"
 msgstr "skracanie nazw zmiennych"
+
+#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
+#: R/spss.R:0
+msgid "added in variable:"
+msgstr ""
 
 #. R/dbf.R: stop("cannot handle matrix/array columns")
 #: R/dbf.R:0
@@ -262,6 +284,9 @@ msgid_plural "data frame contains columns of unsupported classes %s"
 msgstr[0] "ramka zawiera kolumny niewspieranej klasy %s"
 msgstr[1] "ramka zawiera kolumny niewspieranych klasach %s"
 msgstr[2] "ramka zawiera kolumny niewspieranych klasach %s"
+
+#~ msgid "Cannot handle character variables longer than 255"
+#~ msgstr "Nie można obsłużyć zmiennych tekstowych dłuższych niż 255 znaków"
 
 #~ msgid "The object \"dataframe\" must have class data.frame"
 #~ msgstr "Obiekt \"dataframe\" musi posiadać klasę \"data.frame\""

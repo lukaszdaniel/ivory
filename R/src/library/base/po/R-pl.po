@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -85,14 +85,6 @@ msgstr "%s w %s: %s"
 msgid "%s is not an existing file"
 msgstr "%s nie jest istniejącym plikiem"
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-msgid "%s is not an object of class %s"
-msgstr "%s nie jest obiektem klasy %s"
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 msgid "%s is not defined for objects of class %s"
@@ -145,12 +137,6 @@ msgstr "argumenty '%s' oraz '%s' muszą być wektorami tekstowymi"
 #: R/grep.R:0 R/strwrap.R:0
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "argumenty '%s' oraz '%s' muszą mieć tę samą długość"
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr "argument '%s' nie może zostać przekształcony na obiekt klasy %s"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
@@ -813,6 +799,12 @@ msgstr "niepowodzenie funkcji 'library()' z błędem: %s"
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+#, fuzzy
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 msgid "'method = \"quick\"' option is only for numeric 'x'"
@@ -1014,6 +1006,18 @@ msgid ""
 msgstr ""
 "argument 'x' musi być typem atomowym dla funkcji 'sort.list()'\n"
 "Czy wywołano funkcję 'sort()' na liście?"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "argument '%s' nie może zostać przekształcony na klasę %s"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "argument '%s' nie może zostać przekształcony na klasę %s"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1468,6 +1472,11 @@ msgstr "Tryby argumentów 'target' oraz 'current':"
 #: R/all.equal.R:0
 msgid "Modes:"
 msgstr "Tryby:"
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
+msgstr ""
 
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -2257,6 +2266,9 @@ msgstr "wejście zostało uszkodzone z LF zastąpionym przez CR"
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2266,10 +2278,16 @@ msgstr "wejście zostało uszkodzone z LF zastąpionym przez CR"
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
+msgstr "niepoprawna wartość '%s'"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2327,7 +2345,6 @@ msgstr "nieprawidłowe 'labels'; długość %d powinna wynosić 1 lub %d"
 msgid "invalid 'rle' structure"
 msgstr "niepoprawna struktura 'rle'"
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -2950,9 +2967,12 @@ msgstr "pakiet %s został zbudowany dla platformy %s"
 msgid "package %s was built under R version %s"
 msgstr "pakiet %s został zbudowany w wersji R %s"
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
-msgid "package %s was found more than once. Using the one found in %s"
+#, fuzzy
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 "pakiet %s został znaleziony więcej niż raz. Używanie tego znalezionego w %s"
 
@@ -3663,6 +3683,12 @@ msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
 
+#~ msgid "%s is not an object of class %s"
+#~ msgstr "%s nie jest obiektem klasy %s"
+
+#~ msgid "'%s' argument cannot be coerced to an object of class %s"
+#~ msgstr "argument '%s' nie może zostać przekształcony na obiekt klasy %s"
+
 #~ msgid "*** Note that 'pos=1' will give an error in the future"
 #~ msgstr "*** Zwróć uwagę, że 'pos=1' będzie zwracało błąd w przyszłości"
 
@@ -3798,9 +3824,6 @@ msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
 
 #~ msgid "%s should be one of %s"
 #~ msgstr "argument %s powininen być jednym z %s"
-
-#~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "argument '%s' nie może zostać przekształcony na klasę %s"
 
 #~ msgid "'from' argument cannot be NA, NaN or infinite"
 #~ msgstr "argument 'from' nie może mieć wartości NA, NaN lub nieskończoność"

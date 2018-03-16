@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2018-03-16 18:52+0100\n"
 "PO-Revision-Date: 2005-12-08 01:00+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -29,7 +29,7 @@ msgstr "Matrice de coefficient non inversible"
 msgid "Unknown spatial correlation class"
 msgstr "Classes de corrélation spatiale inconnues"
 
-#: nlme.c:460
+#: nlme.c:465
 msgid "First observation on an individual must have a dose"
 msgstr "La première observation sur un individu doit avoir une dose"
 
@@ -43,28 +43,32 @@ msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularité rencontrée en résolution inverse au niveau %ld, bloc %ld"
 
-#: nlmefit.c:555 nlmefit.c:735
+#: nlmefit.c:557 nlmefit.c:737
 msgid "Overfitted model!"
 msgstr ""
 
-#: nlmefit.c:581
+#: nlmefit.c:583
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 "un gradient analytique n'est pas disponible avec une matrice logarithmique"
 
-#: nlmefit.c:604
+#: nlmefit.c:606
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "un gradient analytique n'est pas disponible avec une symétrie composée"
 
-#: nlmefit.c:896
-msgid "Unable to form eigenvalue-eigenvector decomposition"
+#: nlmefit.c:898
+#, fuzzy, c-format
+msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
 "Incapable de former la décomposition valeurs propres - vecteurs propres"
 
-#: nlmefit.c:928
-msgid "Unable to form Cholesky decomposition"
+#: nlmefit.c:930
+#, fuzzy, c-format
+msgid ""
+"Unable to form Cholesky decomposition: the leading minor of order %d is not "
+"pos.def."
 msgstr "Incapable de former la décomposition de Cholesky"
 
-#: nlmefit.c:959
+#: nlmefit.c:962
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Les cas de symétrie composée n'ont pas encore été écrits"

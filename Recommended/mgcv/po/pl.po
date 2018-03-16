@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-04 22:47+0200\n"
+"POT-Creation-Date: 2018-03-16 18:52+0100\n"
 "PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -42,117 +42,83 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:2604
+#: mat.c:2691
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:2609
+#: mat.c:2696
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
 
-#: matrix.c:81
+#: matrix.c:83
 msgid "Failed to initialize memory for matrix."
 msgstr "Nie udało się zainicjalizować pamięci dla macierzy."
 
-#: matrix.c:143 matrix.c:201
+#: matrix.c:145 matrix.c:203
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Nastąpił zapis poza zakresem macierzy!"
 
-#: matrix.c:149
+#: matrix.c:151
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEM SPÓJNOŚCI w istniejącej liście macierzy."
 
-#: matrix.c:181
+#: matrix.c:183
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr "Próbujesz sprawdzić integralność macierzy bez określania 'RANGECHECK'"
 
-#: matrix.c:239
+#: matrix.c:241
 msgid "Target matrix too small in mcopy"
 msgstr "Docelowa macierz jest zbyt mała, aby wykonać 'mcopy'"
 
-#: matrix.c:259 matrix.c:267 matrix.c:280 matrix.c:288
+#: matrix.c:261 matrix.c:269 matrix.c:282 matrix.c:290
 msgid "Incompatible matrices in matmult."
 msgstr "Niespójne macierze w 'matmult'."
 
-#: matrix.c:375
+#: matrix.c:314
 msgid "Attempt to invert() non-square matrix"
 msgstr "Próba odwrócenia metodą 'invert()' niekwadratowej macierzy"
 
-#: matrix.c:397
+#: matrix.c:336
 msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
 
-#: matrix.c:1317
+#: qp.c:57
 #, fuzzy
-msgid "svd() not converged"
-msgstr "'svd()' nie uzbieżnił się"
-
-#: matrix.c:1393
-#, c-format
-msgid "svdroot matrix not +ve semi def. %g"
-msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
-
-#: matrix.c:1421
-msgid "Sort failed"
-msgstr "Sortowanie nie powiodło się"
-
-#: qp.c:63
-msgid "ERROR in 'addconQT()'"
+msgid "ERROR in addconQT."
 msgstr "BŁĄD w 'addconQT()'."
 
-#: qp.c:566
+#: qp.c:463
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Niedobór rang w modelu"
 
-#: sparse-smooth.c:143
+#: sparse-smooth.c:158
 msgid "More than 2 points in a box!!\n"
 msgstr "Więcej niż 2 punkty w pudełku!!\n"
 
-#: sparse-smooth.c:148
+#: sparse-smooth.c:163
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr "punkt %d w %d pudełkach!\n"
 
-#: sparse-smooth.c:150
+#: sparse-smooth.c:165
 msgid "kd tree sanity checks\n"
 msgstr "sprawdzanie drzewa 'kd'\n"
 
-#: sparse-smooth.c:310 sparse-smooth.c:326
+#: sparse-smooth.c:325 sparse-smooth.c:341
 msgid "too many boxes!!"
 msgstr "zbyt dużo pudełek!!"
 
-#: sparse-smooth.c:342
+#: sparse-smooth.c:357
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr "'bi' nie jest równe 'nb-1' %d %d\n"
 
-#: sparse-smooth.c:551
-msgid ""
-"\n"
-" 'star()' function is useful only in 2D\n"
-msgstr ""
-"\n"
-"funkcja 'star()' jest przydatna jedynie w 2D\n"
-
-#: sparse-smooth.c:608
+#: sparse-smooth.c:667
 #, fuzzy
 msgid "indexing error in p_area!\n"
 msgstr "indeksowanie błędu w funkcji 'p_area()'!\n"
-
-#: sparse-smooth.c:1055
-msgid "hello\n"
-msgstr "witaj\n"
-
-#: sparse-smooth.c:1087
-#, c-format
-msgid "%d upper neighbour claimed to be self d=%d!\n"
-msgstr "%d górny sąsiad twierdzi, że jest samym sobą d=%d!\n"
-
-#: sparse-smooth.c:1150
-msgid "lower neighbour claimed to be self!\n"
-msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
 
 #: tprs.c:41
 msgid "You must have 2m>d for a thin plate spline."
@@ -165,6 +131,32 @@ msgid ""
 msgstr ""
 "Człon posiada mniej unikalnych kombinacji zmiennych niezależnych niż "
 "określona maksymalna liczba stopni swobody"
+
+#, fuzzy
+#~ msgid "svd() not converged"
+#~ msgstr "'svd()' nie uzbieżnił się"
+
+#~ msgid "svdroot matrix not +ve semi def. %g"
+#~ msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
+
+#~ msgid "Sort failed"
+#~ msgstr "Sortowanie nie powiodło się"
+
+#~ msgid ""
+#~ "\n"
+#~ " 'star()' function is useful only in 2D\n"
+#~ msgstr ""
+#~ "\n"
+#~ "funkcja 'star()' jest przydatna jedynie w 2D\n"
+
+#~ msgid "hello\n"
+#~ msgstr "witaj\n"
+
+#~ msgid "%d upper neighbour claimed to be self d=%d!\n"
+#~ msgstr "%d górny sąsiad twierdzi, że jest samym sobą d=%d!\n"
+
+#~ msgid "lower neighbour claimed to be self!\n"
+#~ msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
 
 #~ msgid "child boundary problem\n"
 #~ msgstr "problem brzegu dziecka\n"

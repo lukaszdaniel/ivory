@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -132,7 +132,7 @@ msgstr "'x' doit être une chaîne de caractères unique"
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
-#. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
+#. R/QC.R: gettextf("'%s' argument must be of length 1", "dir")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
@@ -882,19 +882,21 @@ msgstr ""
 "L'utilisation globale possible de 'T' ou 'F' est trouvées dans l'exemple du "
 "fichier Rd suivant :"
 
-#. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.\n",     domain = "R-tools")
+#. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console, nor use Fortran I/O nor system RNGs.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "Compiled code should not call entry points which might terminate R nor write "
-"to stdout/stderr instead of to the console."
+"to stdout/stderr instead of to the console, nor use Fortran I/O nor system "
+"RNGs."
 msgstr ""
 
-#. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.  The detected symbols are linked into the code but might come from libraries and not actually be called.\n",     domain = "R-tools")
+#. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console, nor use Fortran I/O nor system RNGs. The detected symbols are linked into the code but might come from libraries and not actually be called.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "Compiled code should not call entry points which might terminate R nor write "
-"to stdout/stderr instead of to the console.  The detected symbols are linked "
-"into the code but might come from libraries and not actually be called."
+"to stdout/stderr instead of to the console, nor use Fortran I/O nor system "
+"RNGs. The detected symbols are linked into the code but might come from "
+"libraries and not actually be called."
 msgstr ""
 
 #. R/check.R: gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools")
@@ -1570,8 +1572,8 @@ msgstr "Champs comportant des valeurs non ASCII :"
 #. R/QC.R: gettextf("File %s:", sQuote(e[1L]), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/Vignettes.R: gettextf("File %s:", names(y)[k], domain = "R-tools")
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #: R/QC.R:0 R/Vignettes.R:0 R/sotools.R:0
 msgid "File %s:"
@@ -1673,7 +1675,7 @@ msgstr "expansion de '%s'"
 msgid "Flavor: %s"
 msgstr ""
 
-#. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)", sQuote(u[,     "ssname"]), u[, "language"]), collapse = ", "), domain = "R-tools")
+#. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)", sQuote(u[,     "ssname"]), u[, "language"]), collapse = ", "))
 #: R/sotools.R:0
 msgid "Found %s, possibly from %s"
 msgstr "%s est trouvé, sans doute depuis %s"
@@ -1706,16 +1708,6 @@ msgstr ""
 #. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found file(s) with version 3 serialization:"
-msgstr ""
-
-#. R/sotools.R: gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found non-API call to R: %s"
-msgstr ""
-
-#. R/sotools.R: gettextf("Found non-API calls to R: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found non-API calls to R: %s"
 msgstr ""
 
 #. R/check.R: gettext("Found subdirectory 'DATA'.\nMost likely, this should be 'data'.\n", domain = "R-tools")
@@ -1962,6 +1954,14 @@ msgstr "Nombre d'arguments incohérent pour"
 #. R/check.R: gettext("Incorrect (un)loading of package shared object.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Incorrect (un)loading of package shared object."
+msgstr ""
+
+#. R/check.R: gettext("Information on the location(s) of code generating the 'Note's can be obtained by re-running with environment variable R_KEEP_PKG_SOURCE set to 'yes'.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Information on the location(s) of code generating the 'Note's can be "
+"obtained by re-running with environment variable R_KEEP_PKG_SOURCE set to "
+"'yes'."
 msgstr ""
 
 #. R/check.R: gettext("Installation failed.", domain = "R-tools")
@@ -2558,24 +2558,6 @@ msgid ""
 "during their checks."
 msgstr ""
 
-#. R/sotools.R: gettext("Note: information on .o files for i386 is not available", domain = "R-tools")
-#: R/sotools.R:0
-#, fuzzy
-msgid "Note: information on .o files for i386 is not available"
-msgstr "le test '%s' n'est pas disponible"
-
-#. R/sotools.R: gettext("Note: information on .o files for x64 is not available", domain = "R-tools")
-#: R/sotools.R:0
-#, fuzzy
-msgid "Note: information on .o files for x64 is not available"
-msgstr "le test '%s' n'est pas disponible"
-
-#. R/sotools.R: gettext("Note: information on .o files is not available", domain = "R-tools")
-#: R/sotools.R:0
-#, fuzzy
-msgid "Note: information on .o files is not available"
-msgstr "le test '%s' n'est pas disponible"
-
 #. R/QC.R: gettext("Note: significantly better compression could be obtained by using R CMD build --resave-data",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -2683,23 +2665,12 @@ msgstr "OK"
 msgid "Object files/libraries should not be included in a source package."
 msgstr ""
 
-#. R/sotools.R: gettextf("Object: %s", sQuote(w), domain = "R-tools")
-#: R/sotools.R:0
-msgid "Object: %s"
-msgstr ""
-
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in documentation object %s:", sQuote(nm),     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Objects in \\usage without \\alias in documentation object %s:"
 msgstr ""
 "Objets dans \\usage sans \\alias dans la documentation de l'objet '%s' :"
-
-#. R/sotools.R: gettextf("Objects: %s", paste(sQuote(w), collapse = ", "), domain = "R-tools")
-#: R/sotools.R:0
-#, fuzzy
-msgid "Objects: %s"
-msgstr "Docs : %s"
 
 #. R/QC.R: gettext("Offending entries:", domain = "R-tools")
 #: R/QC.R:0
@@ -4169,6 +4140,16 @@ msgstr "Vignettes :"
 msgid "WARNING"
 msgstr ""
 
+#. R/build.R: gettextf("WARNING: Added dependency on R >= 3.5.0 because\nserialized objects in serialize/load version 3\ncannot be read in older versions of R. File(s)\ncontaining such objects:\n%s\n",     .pretty_format(sort(toonew)), domain = "R-tools")
+#: R/build.R:0
+msgid ""
+"WARNING: Added dependency on R >= 3.5.0 because\n"
+"serialized objects in serialize/load version 3\n"
+"cannot be read in older versions of R. File(s)\n"
+"containing such objects:\n"
+"%s"
+msgstr ""
+
 #. R/build.R: gettextf("WARNING: Removing directory %s which should only occur in an installed package",     sQuote(d), domain = "R-tools")
 #: R/build.R:0
 msgid ""
@@ -4332,14 +4313,14 @@ msgstr "le chargement a échoué"
 msgid "all packages should have a 'NAMESPACE' file"
 msgstr "tous les packages devraient avoir un NAMESPACE"
 
-#. R/check.R: gettextf("  apparently PKG_LIBS is missing $(FLIBS) in %s\n", sQuote(f), domain = "R-tools")
+#. R/check.R: gettextf("  apparently using $(BLAS_LIBS) without following $(FLIBS) in %s\n", sQuote(f),     domain = "R-tools")
 #: R/check.R:0
-msgid "apparently PKG_LIBS is missing $(FLIBS) in %s"
+msgid "apparently using $(BLAS_LIBS) without following $(FLIBS) in %s"
 msgstr ""
 
-#. R/check.R: gettextf("  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s\n", sQuote(f),     domain = "R-tools")
+#. R/check.R: gettextf("  apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s\n",     sQuote(f), domain = "R-tools")
 #: R/check.R:0
-msgid "apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s"
+msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
 
 #. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
@@ -5136,6 +5117,12 @@ msgstr "création"
 #: R/testing.R:0
 #, fuzzy
 msgid "creation of %s failed"
+msgstr "le test '%s' a échoué"
+
+#. R/check.R: gettextf("creation of directory %s failed", sQuote(dir1), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "creation of directory %s failed"
 msgstr "le test '%s' a échoué"
 
 #. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
@@ -6918,13 +6905,6 @@ msgid_plural ""
 msgstr[0] "Appel .Internal trouvé dans la fonction suivante :"
 msgstr[1] "Appels .Internal trouvés dans les fonctions suivantes :"
 
-#. R/sotools.R: ngettext(length(x), "Found no call to: %s", "Found no calls to: %s", domain = "R-tools")
-#: R/sotools.R:0
-msgid "Found no call to: %s"
-msgid_plural "Found no calls to: %s"
-msgstr[0] ""
-msgstr[1] ""
-
 #. R/QC.R: ngettext(length(x$bad_examples), "Found possibly global 'T' or 'F' in the examples of the following Rd file:",     "Found possibly global 'T' or 'F' in the examples of the following Rd files:",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -7608,6 +7588,22 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
+
+#, fuzzy
+#~ msgid "Note: information on .o files for i386 is not available"
+#~ msgstr "le test '%s' n'est pas disponible"
+
+#, fuzzy
+#~ msgid "Note: information on .o files for x64 is not available"
+#~ msgstr "le test '%s' n'est pas disponible"
+
+#, fuzzy
+#~ msgid "Note: information on .o files is not available"
+#~ msgstr "le test '%s' n'est pas disponible"
+
+#, fuzzy
+#~ msgid "Objects: %s"
+#~ msgstr "Docs : %s"
 
 #, fuzzy
 #~ msgid "Authors@R field gives persons with non-standard roles:"

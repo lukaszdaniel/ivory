@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2370,12 +2370,6 @@ msgstr "wartości NA w '%s'"
 #: R/acf.R:0 R/ar.R:0
 msgid "NA values in 'x'"
 msgstr "wartości NA w 'x'"
-
-#. R/distn.R: warning("NA values produced")
-#. R/distn.R: warning("NA values produced")
-#: R/distn.R:0
-msgid "NA values produced"
-msgstr "wyprodukowano wartości NA"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -6880,6 +6874,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "NA values produced"
+#~ msgstr "wyprodukowano wartości NA"
 
 #~ msgid "requested 'conf.level' not achievable"
 #~ msgstr "żądana wartość 'conf.level' nie jest osiągalna"

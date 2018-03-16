@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boot 1.2-23\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2012-10-03 15:35+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -945,6 +945,12 @@ msgstr "impossible de trouver un multiplicateur pour %f"
 #: R/bootfuns.q:0
 msgid "unable to find range"
 msgstr "impossible de trouver l'étendue des valeurs"
+
+#. R/bootfuns.q: warning("unknown type of \"boot\" object")
+#: R/bootfuns.q:0
+#, fuzzy
+msgid "unknown type of \"boot\" object"
+msgstr "les arguments ne sont pas tous du même type pour l'objet \"boot\""
 
 #. R/bootfuns.q: stop("unknown value of 'sim'")
 #: R/bootfuns.q:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-125\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2017-03-14 22:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2016-03-03 20:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -444,6 +444,11 @@ msgstr "Przybliżona macierz wariancji-kowiariancji nie jest dostępna"
 msgid "Autocorrelation"
 msgstr "Autokorelacja"
 
+#. R/nlme.R: gettext(" Beginning PNLS step: .. ", domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Beginning PNLS step: .."
+msgstr ""
+
 #. R/lmList.R: gettext("Call:", domain = "R-nlme")
 #. R/lmList.R: gettext("Call:", domain = "R-nlme")
 #. R/lme.R: gettext("Call:", domain = "R-nlme")
@@ -576,6 +581,12 @@ msgstr "Różne odchylenia standardowe per warstwa"
 msgid "Distance"
 msgstr "Odległość"
 
+#. R/nlme.R: gettext("Do increase 'msMaxIter'!", domain = "R-nlme")
+#. R/nlme.R: gettext("Do increase 'msMaxIter'!", domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Do increase 'msMaxIter'!"
+msgstr ""
+
 #. R/corStruct.R: gettext("Exponential spatial correlation", domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "Exponential spatial correlation"
@@ -685,6 +696,16 @@ msgstr "Niezależna"
 msgid "Iteration %d"
 msgstr "Iteracja %d"
 
+#. R/nlme.R: gettextf("Iteration %d, LME step: nlm() did not converge (code = %d).", numIter,     aNlm$code, domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Iteration %d, LME step: nlm() did not converge (code = %d)."
+msgstr ""
+
+#. R/nlme.R: gettextf("Iteration %d, LME step: nlminb() did not converge (code = %d).", numIter,     optRes$convergence, domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Iteration %d, LME step: nlminb() did not converge (code = %d)."
+msgstr ""
+
 #. R/gls.R: gettext("Iteration: ", domain = "R-nlme")
 #: R/gls.R:0
 msgid "Iteration:"
@@ -769,7 +790,7 @@ msgstr "Logarytm ograniczonej funkcji wiarygodności:"
 msgid "Model:"
 msgstr "Model:"
 
-#. R/gnls.R: gettextf("NLS step: RSS = %s", format(work$set[6]), domain = "R-nlme")
+#. R/gnls.R: gettextf("NLS step: RSS = %s", format(work$settings[6]), domain = "R-nlme")
 #: R/gnls.R:0
 msgid "NLS step: RSS = %s"
 msgstr "krok NLS: RSS = %s"
@@ -826,6 +847,11 @@ msgstr "Funkcja celu:"
 #: R/nlme.R:0
 msgid "PNLS step: RSS = %s"
 msgstr "krok PNLS: RSS = %s"
+
+#. R/nlme.R: gettext("PORT message:", domain = "R-nlme")
+#: R/nlme.R:0
+msgid "PORT message:"
+msgstr ""
 
 #. R/zzMethods.R: gettextf("Package %s installed with old R version %s should not be used with R version %s\n  Rather re-install it with this version of R.",     dQuote(pkgname), built.R.ver, getRversion(), domain = "R-nlme")
 #: R/zzMethods.R:0
@@ -1405,6 +1431,11 @@ msgstr ""
 "poziom zapadania nie może być mniejszy niż poziom wyświetlania; ustawianie "
 "go do poziomu wyświetlania"
 
+#. R/nlme.R: gettext(" completed fit_nlme() step.\n", domain = "R-nlme")
+#: R/nlme.R:0
+msgid "completed fit_nlme() step."
+msgstr ""
+
 #. R/gls.R: gettextf("computed \"gls\" fit is singular, rank %s", rnk)
 #: R/gls.R:0
 msgid "computed \"gls\" fit is singular, rank %s"
@@ -1766,8 +1797,7 @@ msgstr ""
 "zbieżności"
 
 #. R/gls.R: stop("maximum number of iterations reached without convergence")
-#. R/gnls.R: warning("maximum number of iterations reached without convergence")
-#. R/gnls.R: stop("maximum number of iterations reached without convergence")
+#. R/gnls.R: gettext("maximum number of iterations reached without convergence", domain = "R-nlme")
 #. R/nlme.R: warning("maximum number of iterations reached without convergence")
 #. R/nlme.R: stop("maximum number of iterations reached without convergence")
 #: R/gls.R:0 R/gnls.R:0 R/nlme.R:0
@@ -2163,8 +2193,7 @@ msgid "starting values for the random components should be a list of matrices"
 msgstr ""
 "wartości początkowe dla losowych komponentów powinny być listą macierzy"
 
-#. R/gnls.R: warning("step halving factor reduced below minimum in NLS step")
-#. R/gnls.R: stop("step halving factor reduced below minimum in NLS step")
+#. R/gnls.R: gettext("step halving factor reduced below minimum in NLS step", domain = "R-nlme")
 #: R/gnls.R:0
 msgid "step halving factor reduced below minimum in NLS step"
 msgstr "czynnik skracający krok został zredukowany poniżej minimum w kroku NLS"

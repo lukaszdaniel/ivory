@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-30 15:30\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2463,13 +2463,6 @@ msgstr "'x'里不能有NA"
 #, fuzzy
 msgid "NA values in 'x'"
 msgstr "'x'里不能有NA"
-
-#. R/distn.R: warning("NA values produced")
-#. R/distn.R: warning("NA values produced")
-#: R/distn.R:0
-#, fuzzy
-msgid "NA values produced"
-msgstr "不能有NA"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -6940,6 +6933,10 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#, fuzzy
+#~ msgid "NA values produced"
+#~ msgstr "不能有NA"
 
 #, fuzzy
 #~ msgid "requested 'conf.level' not achievable"

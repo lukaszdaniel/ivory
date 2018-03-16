@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -81,14 +81,6 @@ msgstr ""
 msgid "%s is not an existing file"
 msgstr ""
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-msgid "%s is not an object of class %s"
-msgstr ""
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 msgid "%s is not defined for objects of class %s"
@@ -143,13 +135,6 @@ msgstr "isim alanı"
 #: R/grep.R:0 R/strwrap.R:0
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
-msgstr "isim alanı"
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-#, fuzzy
-msgid "'%s' argument cannot be coerced to an object of class %s"
 msgstr "isim alanı"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
@@ -830,6 +815,11 @@ msgstr ""
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr ""
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr ""
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 msgid "'method = \"quick\"' option is only for numeric 'x'"
@@ -1011,6 +1001,18 @@ msgid ""
 "'x' argument must be atomic for 'sort.list()' function.\n"
 "Have you called 'sort()' function on a list?"
 msgstr ""
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "isim alanı"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "isim alanı"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1456,6 +1458,11 @@ msgstr " 'MARGIN' için geçersiz değer"
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
 msgid "Modes:"
+msgstr ""
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
 
 #. R/summary.R: gettext("NA's")
@@ -2215,6 +2222,9 @@ msgstr ""
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2224,10 +2234,16 @@ msgstr ""
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
+msgstr "geçersiz paket ismi"
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
 msgstr "geçersiz paket ismi"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2288,7 +2304,6 @@ msgstr ""
 msgid "invalid 'rle' structure"
 msgstr ""
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -2893,9 +2908,11 @@ msgstr ""
 msgid "package %s was built under R version %s"
 msgstr ""
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
-msgid "package %s was found more than once. Using the one found in %s"
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 
 #. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")

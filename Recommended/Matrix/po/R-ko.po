@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-3\n"
-"POT-Creation-Date: 2017-03-14 22:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2015-07-15 17:14-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -713,6 +713,11 @@ msgstr "[[ %d개의 열이름 %s ...를 제거합니다 ]]"
 msgid "[[ suppressing %d column names %s ]]"
 msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
 
+#. R/sparseMatrix.R: warning("a sparseMatrix should rarely be centered: will not be sparse anymore")
+#: R/sparseMatrix.R:0
+msgid "a sparseMatrix should rarely be centered: will not be sparse anymore"
+msgstr ""
+
 #. R/abIndex.R: gettextf("abIndex: lengths (%d, %d) differ", lt, lc, domain = "R-Matrix")
 #: R/abIndex.R:0
 msgid "abIndex: lengths (%d, %d) differ"
@@ -731,6 +736,20 @@ msgid ""
 msgstr ""
 "as(.,\"dsCMatrix\")은 2008년 이후로 지원되지 않으므로 as(., \"symmetricMatrix"
 "\")를 이용해 주시길 바랍니다."
+
+#. R/Matrix.R: warning("as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+#: R/Matrix.R:0
+msgid ""
+"as.array(<Matrix>) is deprecated. Use  as(x, \"matrix\")  or .asmatrix(x) "
+"instead."
+msgstr ""
+
+#. R/Matrix.R: warning("as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  as(x, \"matrix\")  or .asmatrix(x) instead.")
+#: R/Matrix.R:0
+msgid ""
+"as.matrix(<Matrix>) is deprecated (to become a no-op in the future). Use  "
+"as(x, \"matrix\")  or .asmatrix(x) instead."
+msgstr ""
 
 #. R/abIndex.R: warning("c(<abIndex>,..) of different kinds, coercing all to 'rleDiff'")
 #: R/abIndex.R:0
@@ -1091,6 +1110,12 @@ msgstr ""
 msgid "length must be non-negative number"
 msgstr "길이(length)는 반드시 음이 아닌 수이어야 합니다."
 
+#. R/sparseMatrix.R: stop("length of 'center' must equal the number of columns of 'x'")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr "%s에 사용된 각 행렬이 가지는 열의 개수는 서로 같아야 합니다."
+
 #. R/AllClass.R: gettextf("length of 'perm' slot must be %d", n)
 #: R/AllClass.R:0
 msgid "length of 'perm' slot must be %d"
@@ -1100,6 +1125,12 @@ msgstr ""
 #: R/AllClass.R:0
 msgid "length of 'perm' slot must be %s"
 msgstr ""
+
+#. R/sparseMatrix.R: stop("length of 'scale' must equal the number of columns of 'x'")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "length of 'scale' must equal the number of columns of 'x'"
+msgstr "%s에 사용된 각 행렬이 가지는 열의 개수는 서로 같아야 합니다."
 
 #. R/Ops.R: stop("length of 1st arg does not match dimension of 2nd")
 #. R/Ops.R: stop("length of 1st arg does not match dimension of 2nd")
@@ -1565,6 +1596,11 @@ msgstr ""
 #: R/HBMM.R:0
 msgid "representation '%s' not recognized"
 msgstr "'%s'는 사용가능한 표현(representation)이 아닙니다."
+
+#. R/indMatrix.R: stop("resulting matrix dimension would be too large")
+#: R/indMatrix.R:0
+msgid "resulting matrix dimension would be too large"
+msgstr ""
 
 #. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
 #. R/bind2.R: stop("resulting x-slot has different type than x's or y's")

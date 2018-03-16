@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R /3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2016-01-09 18:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -31,9 +31,9 @@ msgstr ""
 msgid "%s may be used in an incorrect context"
 msgstr ""
 
-#. R/cmp.R: gettextf("%s may be used in wrong context: no loop is visible", fun)
+#. R/cmp.R: gettextf("%s used in wrong context: no loop is visible", fun)
 #: R/cmp.R:0
-msgid "%s may be used in wrong context: no loop is visible"
+msgid "%s used in wrong context: no loop is visible"
 msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -93,15 +93,6 @@ msgstr ""
 msgid "%s is not an existing file"
 msgstr "'%s' не является существующим файлом"
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-#, fuzzy
-msgid "%s is not an object of class %s"
-msgstr "не определено для объектов 'Date'"
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
@@ -162,13 +153,6 @@ msgstr "'input' и 'target' должны быть текстовыми вект�
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "все аргументы должны иметь одинаковую длину"
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-#, fuzzy
-msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr "не определено для объектов 'Date'"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
@@ -903,6 +887,12 @@ msgstr "выполнение '%s' прекращено: ошибка с кодо
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr "'local' должен быть TRUE, FALSE, или environment"
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+#, fuzzy
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "'local' должен быть TRUE, FALSE, или environment"
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 #, fuzzy
@@ -1112,6 +1102,18 @@ msgid ""
 msgstr ""
 "'x' для 'sort.list' должен быть атомарным\n"
 "Вы вызывали 'sort' на этот список?"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "'x' нельзя преобразовать в 'hexmode'"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "'x' нельзя преобразовать в 'hexmode'"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1576,6 +1578,11 @@ msgstr "цель %s, текущая %s"
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
 msgid "Modes:"
+msgstr ""
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
 
 #. R/summary.R: gettext("NA's")
@@ -2388,6 +2395,9 @@ msgstr "ввод поврежден, LF заменен на CR"
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2397,11 +2407,17 @@ msgstr "ввод поврежден, LF заменен на CR"
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент 'time'"
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
+msgstr "неправильное значение 'n'"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2463,7 +2479,6 @@ msgstr "неправильные метки; длина %d должна быть
 msgid "invalid 'rle' structure"
 msgstr "неправильная структура 'rle'"
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -3112,10 +3127,12 @@ msgstr "пакет %s был собран для %s"
 msgid "package %s was built under R version %s"
 msgstr "пакет %s был собран под R версии %s"
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
 #, fuzzy
-msgid "package %s was found more than once. Using the one found in %s"
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 "пакет %s найден больше одного раза,\n"
 "использую тот, который найден в %s"
@@ -3821,6 +3838,14 @@ msgstr[0] "T использовано вместо TRUE"
 msgstr[1] "T использовано вместо TRUE"
 msgstr[2] "T использовано вместо TRUE"
 
+#, fuzzy
+#~ msgid "%s is not an object of class %s"
+#~ msgstr "не определено для объектов 'Date'"
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be coerced to an object of class %s"
+#~ msgstr "не определено для объектов 'Date'"
+
 #~ msgid "*** Note that 'pos=1' will give an error in the future"
 #~ msgstr "*** Заметьте, что в будущем 'pos=1' будет приводить к ошибке"
 
@@ -4153,10 +4178,6 @@ msgstr[2] "T использовано вместо TRUE"
 
 #~ msgid "shared object '%s' not found"
 #~ msgstr "разделяемый объект '%s' не найден"
-
-#, fuzzy
-#~ msgid "'x' cannot be coerced to class \"hexmode\""
-#~ msgstr "'x' нельзя преобразовать в 'hexmode'"
 
 #~ msgid "'intern' must be TRUE or FALSE"
 #~ msgstr "'intern' должен быть TRUE или FALSE"

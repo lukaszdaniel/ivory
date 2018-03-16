@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2017-08-15 r987) -- "Internationalized Version of R"
-Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2018-03-14 r1010) -- "Internationalized Version of R"
+Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2018-03-14 r74418) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -217,7 +217,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time elapsed:  0.108 0.012 0.121 
+Time elapsed:  0.094 0.012 0.106 
 > 
 > ### --- Diagonal / Sparse - had bugs
 > 
@@ -248,7 +248,7 @@ Time elapsed:  0.108 0.012 0.121
 + 	  identical(t(d4), cBind(Diagonal(4),     0:3)),
 + 	  identical(t(m4), rBind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time elapsed:  0.052 0 0.05 
+Time elapsed:  0.049 0 0.049 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -295,10 +295,10 @@ cBind (m, v= 0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rBind (m, v= 0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 cBind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rBind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
-cBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
-rBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
+cBind (m, v= 1:0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
+rBind (m, v= 1:0 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 > showProc.time()
-Time elapsed:  0.132 0 0.133 
+Time elapsed:  0.046 0.004 0.05 
 > 
 > cBind(0, mC); cBind(mC, 0)
 4 x 7 sparse Matrix of class "dgCMatrix"
@@ -541,8 +541,8 @@ v5    .    |    .    |    .
 > 
 > options(op)
 > showProc.time()
-Time elapsed:  0.148 0.004 0.153 
+Time elapsed:  0.132 0 0.132 
 > 
 > proc.time()
    user  system elapsed 
-  1.440   0.040   1.479 
+  1.001   0.064   1.058 

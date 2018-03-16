@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: boot 1.3-6\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -958,6 +958,12 @@ msgstr "%f에 대한 계수(multiplier)를 찾을 수 없습니다."
 #: R/bootfuns.q:0
 msgid "unable to find range"
 msgstr "범위(range)를 구할 수 없습니다."
+
+#. R/bootfuns.q: warning("unknown type of \"boot\" object")
+#: R/bootfuns.q:0
+#, fuzzy
+msgid "unknown type of \"boot\" object"
+msgstr "입력된 인자들 중 적어도 하나 이상이 \"boot\" 클래스의 객체가 아닙니다."
 
 #. R/bootfuns.q: stop("unknown value of 'sim'")
 #: R/bootfuns.q:0

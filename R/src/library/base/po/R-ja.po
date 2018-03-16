@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-12-20 10:19\n"
+"POT-Creation-Date: 2018-03-16 18:51\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -84,15 +84,6 @@ msgstr ""
 msgid "%s is not an existing file"
 msgstr " '%s' は既存のファイルではありません "
 
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
-#. R/datetime.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
-#: R/dates.R:0 R/datetime.R:0
-#, fuzzy
-msgid "%s is not an object of class %s"
-msgstr " は Date オブジェクトに対しては定義されていません "
-
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
@@ -153,13 +144,6 @@ msgstr " 'input' そして 'target' は文字ベクトルでなければなり�
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr " 全ての引数は同じ長さでなければなりません "
-
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
-#. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
-#: R/octhex.R:0
-#, fuzzy
-msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr " は Date オブジェクトに対しては定義されていません "
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
@@ -897,6 +881,12 @@ msgstr " '%s' の実行は失敗しました(エラーコード %d) "
 msgid "'local' argument must be TRUE, FALSE or an environment"
 msgstr " 'local' は 'TRUE' か 'FALSE' 、または環境でなければなりません "
 
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/stop.R:0
+#, fuzzy
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr " 'local' は 'TRUE' か 'FALSE' 、または環境でなければなりません "
+
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 #, fuzzy
@@ -1110,6 +1100,18 @@ msgid ""
 msgstr ""
 " 'x' は 'sort.list' に対してはアトミックでなければなりません。 \n"
 " 'sort' をリストに対して呼び出しましたか？ "
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr " 'x' は hexmode に強制変換できません "
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr " 'x' は hexmode に強制変換できません "
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1574,6 +1576,11 @@ msgstr " 引数 target は %s、引数 current は %s です "
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
 msgid "Modes:"
+msgstr ""
+
+#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
+#: R/stop.R:0
+msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
 
 #. R/summary.R: gettext("NA's")
@@ -2394,6 +2401,9 @@ msgstr " 入力は混乱しています。LF が CR で置き換えられてい�
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
@@ -2403,11 +2413,17 @@ msgstr " 入力は混乱しています。LF が CR で置き換えられてい�
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
+#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr " 無効な 'time' 引数です "
+
+#. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid '%s' length"
+msgstr " 無効な 'n' 値です "
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2469,7 +2485,6 @@ msgstr " 無効なラベルです。長さ %d は 1 または %d であるべき
 msgid "invalid 'rle' structure"
 msgstr " 無効な 'rle' 構造です "
 
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
@@ -3136,10 +3151,12 @@ msgstr " パッケージ '%s' は %s に対して造られました "
 msgid "package %s was built under R version %s"
 msgstr " パッケージ '%s' はバージョン %s の R の下で造られました "
 
-#. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
+#. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
 #, fuzzy
-msgid "package %s was found more than once. Using the one found in %s"
+msgid ""
+"package %s was found more than once. Using the first from\n"
+"  %s"
 msgstr ""
 " パッケージ '%s' が複数見つかりました。 \n"
 " '%s' 中に見つかったものを使います "
@@ -3771,6 +3788,14 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
 
+#, fuzzy
+#~ msgid "%s is not an object of class %s"
+#~ msgstr " は Date オブジェクトに対しては定義されていません "
+
+#, fuzzy
+#~ msgid "'%s' argument cannot be coerced to an object of class %s"
+#~ msgstr " は Date オブジェクトに対しては定義されていません "
+
 #~ msgid "*** Note that 'pos=1' will give an error in the future"
 #~ msgstr " *** 'pos=1' はいずれエラーを与えることを注意して下さい "
 
@@ -4102,10 +4127,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 
 #~ msgid "shared object '%s' not found"
 #~ msgstr " 共有オブジェクト `%s` を見付けることができません "
-
-#, fuzzy
-#~ msgid "'x' cannot be coerced to class \"hexmode\""
-#~ msgstr " 'x' は hexmode に強制変換できません "
 
 #~ msgid "'intern' must be TRUE or FALSE"
 #~ msgstr " 'intern' は 'TRUE' か 'FALSE' でなければなりません "

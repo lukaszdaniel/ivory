@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-03-16 18:51+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -177,12 +177,12 @@ msgstr "distance(): p 값이 잘못되었습니다 "
 msgid "'distance()': invalid distance"
 msgstr "distance(): 거리가 잘못되었습니다 "
 
-#: distn.c:36
+#: distn.c:39
 #, fuzzy
 msgid "NaN values produced"
 msgstr "계산결과가 NaN가 생성되었습니다"
 
-#: distn.c:37
+#: distn.c:40
 #, fuzzy
 msgid "Non-numeric argument passed to mathematical function"
 msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"

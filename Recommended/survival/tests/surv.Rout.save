@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2017-08-15 r987) -- "Internationalized Version of R"
-Copyright (C) 2013-2017 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2018-03-14 r1010) -- "Internationalized Version of R"
+Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2017-08-15 r73096) -- "Unsuffered Consequences"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R Under development (unstable) (2018-03-14 r74418) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -72,4 +72,4 @@ In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), ty
 > 
 > proc.time()
    user  system elapsed 
-  0.920   0.024   0.943 
+  0.702   0.068   0.762 

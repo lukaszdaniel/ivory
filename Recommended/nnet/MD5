@@ -15,11 +15,11 @@ c32816b78cec51f96f94473eb0da9f1e *po/R-nnet.pot
 3a285393035fca379c264c724ae587c4 *po/pl.po
 5eebfdd24e8b4bbc1a0e6fbda79d194d *LICENCE.note
 aea650cb108dfd007ba5b35ad6ff7226 *inst/CITATION
-ca3e2a786a3a1f13aa512bedd38ab01b *inst/po/fr/LC_MESSAGES/R-nnet.mo
-95229ace50295724ad8beca574b4774f *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
-b9f8e5c595305995f9075b143072b150 *inst/po/de/LC_MESSAGES/R-nnet.mo
-085d3b3557ff27e2bdcfd40b727c1723 *inst/po/pl/LC_MESSAGES/R-nnet.mo
-b8c0310be0136ae7d9b479bd001dba0c *inst/po/ko/LC_MESSAGES/R-nnet.mo
+41958e145c3b18848622801c56ca4b47 *inst/po/fr/LC_MESSAGES/R-nnet.mo
+b8d9932350ebe5723ca9e9845ef4e78e *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
+15fddd7b3b877e62ded82795bced566d *inst/po/de/LC_MESSAGES/R-nnet.mo
+a584c2936183dfd009f244bf42a137c0 *inst/po/pl/LC_MESSAGES/R-nnet.mo
+42cdb16487f3366898940bcedf2f35b6 *inst/po/ko/LC_MESSAGES/R-nnet.mo
 b5835a1a06dc5a83b0465dbd6c3f39e4 *inst/NEWS
 bae3c754a31fe4669807864a2f3f9356 *R/multinom.R
 91cbc73bd6fed6d715f20cd97e7a47ac *R/zzz.R

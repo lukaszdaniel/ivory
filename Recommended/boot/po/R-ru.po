@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: 2015-01-17 16:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -955,6 +955,12 @@ msgstr "не могу найти множитель для"
 #: R/bootfuns.q:0
 msgid "unable to find range"
 msgstr "не могу найти размах"
+
+#. R/bootfuns.q: warning("unknown type of \"boot\" object")
+#: R/bootfuns.q:0
+#, fuzzy
+msgid "unknown type of \"boot\" object"
+msgstr "не все аргументы объекта \"boot\" одного типа"
 
 #. R/bootfuns.q: stop("unknown value of 'sim'")
 #: R/bootfuns.q:0
