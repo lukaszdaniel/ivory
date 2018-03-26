@@ -47,7 +47,7 @@ function(x, g, p.adjust.method = p.adjust.methods, pool.sd = !paired,
         }
     } else {
         METHOD <- if (paired) gettext("Paired t-tests", domain = "R-stats")
-        else gettext("t tests with non-pooled SD", domain = "R-stats")
+		  else gettext("t tests with non-pooled SD", domain = "R-stats")
         compare.levels <- function(i, j) {
             xi <- x[as.integer(g) == i]
             xj <- x[as.integer(g) == j]

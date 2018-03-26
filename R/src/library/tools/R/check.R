@@ -3990,6 +3990,8 @@ add_dummies <- function(dir, Log)
                              ## clang calls these 'a GNU extension'
                              ": warning: .* GCC extension",
                              ": warning: .* \\[-Wsizeof-pointer-memaccess\\]",
+                             ## usually | for ||, = for == (etc)
+                             ": warning: suggest parentheses around (comparison|assignment)",
                              ": warning: .* \\[-Wstringop", # mainly gcc8
                              ": warning: .* \\[-Wclass-memaccess\\]", # gcc8
                              ## Fatal on clang and Solaris ODS

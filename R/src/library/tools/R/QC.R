@@ -81,8 +81,8 @@ conceptual_base_code <- c("c.default")
 .haveRds <- function(dir)
 {
     ## either source package or pre-2.10.0 installed package
-    if (dir.exists(file.path(dir, "man"))) return(TRUE)
-    file.exists((file.path(dir, "help", "paths.rds")))
+    dir.exists (file.path(dir, "man")) ||
+    file.exists(file.path(dir, "help", "paths.rds"))
 }
 
 ### * undoc/F/out
@@ -309,6 +309,10 @@ function(x, ...)
 }
 
 ### * codoc
+
+##
+is_data_for_dataset <- function(e) ## trigger for data(foo) or data(foo, package="bar") and similar
+    length(e) >= 2L && e[[1L]] == quote(data) && e[[2L]] != quote(...) && length(e) <= 4L
 
 codoc <-
 function(package, dir, lib.loc = NULL,
@@ -593,9 +597,7 @@ function(package, dir, lib.loc = NULL,
                   sapply(exprs[ind], deparse))
             exprs <- exprs[!ind]
         }
-        ind <- vapply(exprs, function(e) (length(e) == 2L) &&
-                                         e[[1L]] == as.symbol("data"),
-                      NA, USE.NAMES=FALSE)
+        ind <- vapply(exprs, is_data_for_dataset, NA, USE.NAMES=FALSE)
         if(any(ind)) {
             data_sets <- sapply(exprs[ind],
                                 function(e) as.character(e[[2L]]))
@@ -610,7 +612,7 @@ function(package, dir, lib.loc = NULL,
         replace_exprs <- exprs[ind]
         exprs <- exprs[!ind]
         ## Ordinary functions.
-        functions <- sapply(exprs, function(e) as.character(e[[1L]]))
+        functions <- vapply(exprs, function(e) as.character(e[[1L]]), "")
         ## Catch assignments: checkDocFiles() will report these, so drop
         ## them here.
         ## And also unary/binary operators
@@ -1311,7 +1313,7 @@ function(package, dir, lib.loc = NULL)
                function(e) .Rd_deparse(.Rd_drop_comments(e)))
     ## </FIXME>
     db_usages <- lapply(db_usages, .parse_usage_as_much_as_possible)
-    ind <- as.logical(sapply(db_usages,
+    ind <- as.logical(lapply(db_usages,
                              function(x) !is.null(attr(x, "bad_lines"))))
     bad_lines <- lapply(db_usages[ind], attr, "bad_lines")
 
@@ -1339,15 +1341,11 @@ function(package, dir, lib.loc = NULL)
         ## Determine function names ('functions') and corresponding
         ## arguments ('arg_names_in_usage') in the \usage.  Note how we
         ## try to deal with data set documentation.
-        ind <- as.logical(sapply(exprs,
-                                 function(e)
-                                 ((length(e) > 1L) &&
-                                  !((length(e) == 2L)
-                                    && e[[1L]] == as.symbol("data")))))
+        ind <- as.logical( ## as.logical(lapply( * )) : more "defensive" than vapply() [?]
+            lapply(exprs, function(e) length(e) > 1L && !is_data_for_dataset(e)))
         exprs <- exprs[ind]
         ## Split out replacement function usages.
-        ind <- as.logical(sapply(exprs,
-                                 .is_call_from_replacement_function_usage))
+        ind <- as.logical(lapply(exprs, .is_call_from_replacement_function_usage))
         replace_exprs <- exprs[ind]
         exprs <- exprs[!ind]
         ## Ordinary functions.
@@ -7984,8 +7982,8 @@ function(env)
 function(x)
 {
     ((length(x) == 3L)
-     && (identical(x[[1L]], as.symbol("<-")))
-     && (length(x[[2L]]) > 1L)
+     && identical(x[[1L]], quote(`<-`))
+     && (length(  x[[2L]]) > 1L)
      && is.symbol(x[[3L]]))
 }
 

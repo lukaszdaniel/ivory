@@ -7,16 +7,14 @@
 
 \section{\Rlogo CHANGES IN R-devel}{
 
-%%   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
-%%     \itemize{
-%%       \item The default version for \code{save()}, \code{saveRDS()},
-%%       \code{serialize()} and similar has been changed to \samp{3}.
-%%       Objects saved with version 3 are not readable by earlier versions
-%%       of \R.
-
-%%       This includes saved workspaces.
-%%     }
-%%   }
+  \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
+    \itemize{
+      \item All packages are by default byte-compiled on installation.
+      This makes the installed packages larger (usually marginally so)
+      and may affect the format of messages and tracebacks (which often
+      exclude \code{.Cal}l and similar).
+    }
+  }
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -343,6 +341,22 @@
       argument \code{make.names} allows to specify \emph{how} invalid
       row names \code{rNms} are handled.  \code{.rowNamesDF()} is a
       \dQuote{workaround} compatible default.
+
+      \item R has new serialization format (version 3) which supports custom
+      serialization of \code{ALTREP} framework objects.  These objects can
+      still be serialized in format 2, but less efficiently.  Serialization
+      format 3 also records the current native encoding of unflagged strings
+      and converts them when de-serialized in R running under different
+      native encoding.  Format 3 comes with new serialization magic numbers
+      (RDA3, RDB3, RDX3).  Format 3 can be selected by \code{version = 3} in
+      \code{save()}, \code{serialize()} and \code{saveRDS()}, but format 2
+      remains the default for all serialization and saving of the workspace.
+      Serialized data in format 3 cannot be read in \R prior to version
+      3.5.0.
+
+      \item The \code{"Date"} and \dQuote{date-time} classes
+      \code{"POSIXlt"} and \code{"POSIXct"} now have a working
+      \code{`length<-`} method, as wished in \PR{17387}.
     }
   }
 
@@ -373,12 +387,6 @@
       test-suite-management packages available and (for the time being)
       works around a common omission of \CRANpkg{rmarkdown} from the
       \samp{VignetteBuilder} field.
-    }
-  }
-
-  \subsection{PACKAGE INSTALLATION}{
-    \itemize{
-      \item By default, packages are now byte-compiled on installation.
     }
   }
 
@@ -619,6 +627,9 @@
 
       \item Indexing a list using dollar and empty string (\code{l$""})
       returns NULL.
+
+      \item Using \code{ \\usage\{ data(<name>, package="<pkg>") \} }
+      no longer produces \command{R CMD check} warnings.
     }
   }
 }
