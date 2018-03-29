@@ -321,17 +321,16 @@ as.POSIXct.default <- function(x, tz = "", ...)
 }
 
 `length<-.POSIXct` <- function(x, value)
-    structure(NextMethod(), class = class(x), tzone = attr(x, "tzone"))
+    .POSIXct(NextMethod(), attr(x, "tzone"), oldClass(x))
 
 as.double.POSIXlt <- function(x, ...) as.double(as.POSIXct(x))
 
 ## POSIXlt is not primarily a list, but primarily an abstract vector of
 ## time stamps:
 length.POSIXlt <- function(x) length(unclass(x)[[1L]])
-`length<-.POSIXlt` <- function(x, value) {
-    structure(lapply(unclass(x), `length<-`, value),
-	      class = class(x), tzone = attr(x, "tzone"))
-}
+`length<-.POSIXlt` <- function(x, value)
+    .POSIXlt(lapply(unclass(x), `length<-`, value),
+             attr(x, "tzone"), oldClass(x))
 
 format.POSIXlt <- function(x, format = "", usetz = FALSE, ...)
 {
@@ -823,10 +822,14 @@ function(..., recursive = FALSE)
     }
 }
 
+`length<-.difftime` <- 
+function(x, value)
+    .difftime(NextMethod(), attr(x, "units"), oldClass(x))
+    
 ## ----- convenience functions -----
 
 seq.POSIXt <-
-    function(from, to, by, length.out = NULL, along.with = NULL, ...)
+function(from, to, by, length.out = NULL, along.with = NULL, ...)
 {
     if (missing(from)) stop(gettextf("'%s' argument must be specified", "from"))
     if (!inherits(from, "POSIXt")) stop(gettextf("'%s' argument must be an object of class %s", "from", dQuote("POSIXt")))
