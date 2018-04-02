@@ -340,11 +340,11 @@ fbc3578ce2cb6c7873734d6dc39f7e21 *tests/nlme.R
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 c891766c6501e010dd5f64ce00861d0e *tests/predict.lme.R
-55ff933f909fccb9404fb26c8332da72 *tests/lme.Rout.save
+c1876e338c8784b11a0db04b9ba3f7b5 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 683f1a1d208c479e7bed8df5bb420a2e *tests/anova.gls.R
-75bcbd67380921f4f71158c7dc3e9d88 *tests/coef.Rout.save
-86769f31928615401db2e20a5264fc96 *tests/missing.Rout.save
+a3fc2de01da8af143023c71f7e946e3b *tests/coef.Rout.save
+ca3c77c5d901fb2778f19074fbaa7e2f *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 983a211f5ce1f86238b827a45974bfa1 *R/varFunc.R

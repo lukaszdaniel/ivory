@@ -1690,6 +1690,13 @@ sort.int(1:3, decreasing = "TRUE")
 sort.int(1:3, decreasing = "FALSE")
 ## failed initially in ALTREP
 
+## check sort argument combinations
+sort(1:3, decreasing = TRUE, na.last = NA)
+sort(1:3, decreasing = TRUE, na.last = TRUE)
+sort(1:3, decreasing = TRUE, na.last = FALSE)
+sort(1:3, decreasing = FALSE, na.last = NA)
+sort(1:3, decreasing = FALSE, na.last = TRUE)
+sort(1:3, decreasing = FALSE, na.last = FALSE)
 
 ## match.arg()s 'choices' evaluation, PR#17401
 f <- function(x = y) {
@@ -1698,6 +1705,13 @@ f <- function(x = y) {
 }
 stopifnot(identical(f(), "a"))
 ## failed in R <= 3.4.x
+
+
+## getOption(op, def) -- where 'def' is missing (passed down):
+getO <- function(op, def) getOption(op, def)
+stopifnot(is.null(getO("foobar")))
+## failed for a few days in R-devel, when using MD's proposal of PR#17394,
+## notably "killing"  parallelMap::getParallelOptions()
 
 
 

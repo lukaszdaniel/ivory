@@ -65,7 +65,7 @@ SEXP dtrMatrix_solve(SEXP a)
 
 SEXP dtrMatrix_chol2inv(SEXP a)
 {
-    SEXP val = PROTECT(NEW_OBJECT(MAKE_CLASS("dpoMatrix")));
+    SEXP val = PROTECT(NEW_OBJECT_OF_CLASS("dpoMatrix"));
     int info, n;
 
     slot_dup(val, a, Matrix_DimSym);
@@ -191,7 +191,7 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 	/* ==> result is triangular -- "dtrMatrix" !
 	 * val := dup_mMatrix_as_dtrMatrix(b) : */
 	int sz = n * n;
-	val = PROTECT(NEW_OBJECT(MAKE_CLASS("dtrMatrix")));
+	val = PROTECT(NEW_OBJECT_OF_CLASS("dtrMatrix"));
 	SET_SLOT(val, Matrix_uploSym, duplicate(uplo_b));
 	SET_SLOT(val, Matrix_DimSym,  duplicate(d_a));
 	SET_DimNames(val, b);
@@ -319,7 +319,7 @@ SEXP dtrMatrix_addDiag(SEXP x, SEXP d) {
 
 SEXP dtrMatrix_as_dtpMatrix(SEXP from)
 {
-    SEXP val = PROTECT(NEW_OBJECT(MAKE_CLASS("dtpMatrix"))),
+    SEXP val = PROTECT(NEW_OBJECT_OF_CLASS("dtpMatrix")),
 	uplo = GET_SLOT(from, Matrix_uploSym),
 	diag = GET_SLOT(from, Matrix_diagSym),
 	dimP = GET_SLOT(from, Matrix_DimSym);
