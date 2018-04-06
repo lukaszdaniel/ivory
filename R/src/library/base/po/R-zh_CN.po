@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -701,10 +701,10 @@ msgstr "'by.x'和'by.y'设定了不同数目的列"
 msgid "'chdir = TRUE' makes no sense for a URL"
 msgstr "'chdir = TRUE'对URL来说没有意义"
 
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr "'chdir = TRUE'对联结来说没有任何意义"
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -769,12 +769,6 @@ msgstr "dim(X)的值必需是正数"
 #, fuzzy
 msgid "'drop' argument will be ignored"
 msgstr "忽略drop参数"
-
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-#: R/source.R:0
-#, fuzzy
-msgid "'encoding = \"%s\"' chosen"
-msgstr "已经选择了encoding = \"%s\""
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -2189,6 +2183,12 @@ msgstr "空的(零字节)输入文件"
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
 msgstr "NAMESPACE文件里'%s'指示中有空的名字"
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+#: R/source.R:0
+#, fuzzy
+msgid "encoding = \"%s\" chosen"
+msgstr "已经选择了encoding = \"%s\""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0

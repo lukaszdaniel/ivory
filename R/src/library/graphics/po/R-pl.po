@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
@@ -67,7 +67,7 @@ msgstr "'at' musi mieć tę samą długość co 'z$n', tzn. %d"
 #. R/hist.R: gettextf("'breaks = %g' is too large and set to 1e6", breaks)
 #: R/hist.R:0
 msgid "'breaks = %g' is too large and set to 1e6"
-msgstr ""
+msgstr "'breaks = %g' jest zbyt duże i zostało ustawione na 1e6"
 
 #. R/hist.R: stop("'breaks' are not strictly increasing")
 #: R/hist.R:0
@@ -144,6 +144,8 @@ msgid ""
 "'length', 'angle', or 'code' greater than length 1; values after the first "
 "are ignored"
 msgstr ""
+"argument 'length', 'angle', lub 'code' mają długość większą niż 1; wszystkie "
+"wartości oprócz pierwszych zostaną zignorowane"
 
 #. R/stars.R: stop("'locations' must be a 2-column matrix.")
 #: R/stars.R:0

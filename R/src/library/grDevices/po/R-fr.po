@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-26 22:11\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: 2011-10-15 15:14+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -435,6 +435,11 @@ msgstr "incohérence d'encodage pour la police '%s/%s'"
 #: R/calc.R:0
 msgid "increasing 'x' and 'y' values expected"
 msgstr "valeurs croissantes de 'x' et 'y' attendues"
+
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr ""
 
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")

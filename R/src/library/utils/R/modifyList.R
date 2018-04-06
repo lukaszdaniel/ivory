@@ -59,12 +59,10 @@ warnErrList <- function(x, warn = TRUE, errValue = NULL) {
             if(length(tt) == 1L)
                 sprintf(ngettext(tt[[1L]],
                                  "%d error caught in %s: %s",
-                                 "%d times caught the same error in %s: %s"),
+                                 "%d times caught the same error in %s: %s", domain = "R-utils"),
                         tt[[1L]], e.call, names(tt)[[1L]])
             else ## at least two different errors caught
-                paste(gettextf(
-                    "%d errors caught in %s.  The error messages and their frequencies are",
-                    sum(tt), e.call),
+                paste(sprintf(ngettext(sum(tt), "%d error caught in %s. The error message and its frequency is:", "%d errors caught in %s. The error messages and their frequencies are:", domain = "R-utils"), sum(tt), e.call),
                     paste(capture.output(sort(tt)), collapse="\n"), sep="\n")
 
         if(warn)

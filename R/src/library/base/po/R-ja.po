@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -700,10 +700,10 @@ msgstr " 'by.x' そして 'by.y' は異なった列数を指定しています "
 msgid "'chdir = TRUE' makes no sense for a URL"
 msgstr " 'chdir = TRUE' は URL に対しては意味がありません "
 
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr " 'chdir = TRUE' はコネクションに対しては意味がありません "
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -770,12 +770,6 @@ msgstr " dim(X) は正の長さを持たねばなりません "
 #, fuzzy
 msgid "'drop' argument will be ignored"
 msgstr " drop 引数は無視されます "
-
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-#: R/source.R:0
-#, fuzzy
-msgid "'encoding = \"%s\"' chosen"
-msgstr " エンコーディング %s が選択されました "
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -2202,6 +2196,12 @@ msgstr " 空の（0バイトの）入力ファイルです "
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
 msgstr " NAMESPACE ファイル中の directive '%s' 中には名前がありません "
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+#: R/source.R:0
+#, fuzzy
+msgid "encoding = \"%s\" chosen"
+msgstr " エンコーディング %s が選択されました "
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0

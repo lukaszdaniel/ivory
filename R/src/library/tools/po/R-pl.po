@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -234,9 +234,8 @@ msgstr "Pole 'NeedsCompilation' musi przyjmować wartości 'yes' lub 'no'"
 
 #. R/check.R: gettext("'NeedsCompilation' field should likely be 'yes'", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "'NeedsCompilation' field should likely be 'yes'"
-msgstr "Pole 'NeedsCompilation' musi przyjmować wartości 'yes' lub 'no'"
+msgstr "Pole 'NeedsCompilation' powinno prawdopodobnie być ustawione na 'yes'"
 
 #. R/translations.R: stop("'R CMD build' failed")
 #: R/translations.R:0
@@ -441,7 +440,7 @@ msgstr ""
 #. R/CRANtools.R: gettext("Additional issues:", domain = "R-tools")
 #: R/CRANtools.R:0
 msgid "Additional issues:"
-msgstr ""
+msgstr "Dodatkowe problemy:"
 
 #. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -576,15 +575,13 @@ msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and author role", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives no person with name and author role"
-msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
+msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolą autora."
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and roles.", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives no person with name and roles."
-msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
+msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolami."
 
 #. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
 #: R/QC.R:0
@@ -594,15 +591,13 @@ msgstr "Pole 'Authors@R' wskazuje na osoby z niepoprawnymi rolami:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with no name:"
-msgstr "Pole 'Authors@R' wskazuje na osoby z niepoprawnymi rolami:"
+msgstr "Pole 'Authors@R' wskazuje na osoby beż żadnych imion:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no role:", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with no role:"
-msgstr "Pole 'Authors@R' wskazuje na osoby z niepoprawnymi rolami:"
+msgstr "Pole 'Authors@R' wskazuje na osoby bez żadnej roli:"
 
 #. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
 #: R/QC.R:0
@@ -812,9 +807,8 @@ msgstr "sprawdzanie zakończeń linii w Makefiles ..."
 
 #. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Checking line endings in shell scripts ..."
-msgstr "sprawdzanie zakończeń linii w Makefiles ..."
+msgstr "Sprawdzanie zakończeń linii w skryptach powłoki ..."
 
 #. R/check.R: gettext("Checking should be performed on sources prepared by 'R CMD build'.", domain = "R-tools")
 #: R/check.R:0
@@ -2697,9 +2691,8 @@ msgstr "nie znaleziono nagłówka PDF"
 
 #. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
 #: R/tools-deprecated.R:0
-#, fuzzy
 msgid "Package '%s' had its dependencies reduced to a minimal set."
-msgstr "Pakiet %s swoje zależności zredukował do najmniejszego zbioru."
+msgstr "Pakiet '%s'zredukował swoje zależności do najmniejszego zbioru."
 
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
 #: R/QC.R:0
@@ -4254,13 +4247,11 @@ msgstr "wszystkie pakiety powinny mieć plik 'NAMESPACE'"
 
 #. R/check.R: gettextf("  apparently using $(BLAS_LIBS) without following $(FLIBS) in %s\n", sQuote(f),     domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "apparently using $(BLAS_LIBS) without following $(FLIBS) in %s"
-msgstr "najwyraźniej używanie '$(LAPACK_LIBS)' bez '$(BLAS_LIBS)' w %s"
+msgstr "najwyraźniej używanie '$(BLAS_LIBS)' bez '$(FLIBS)' w %s"
 
 #. R/check.R: gettextf("  apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s\n",     sQuote(f), domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr "najwyraźniej używanie '$(LAPACK_LIBS)' bez '$(BLAS_LIBS)' w %s"
 
@@ -4467,9 +4458,8 @@ msgstr "nie można odczytać strumienia obiektu"
 
 #. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 #: R/utils.R:0
-#, fuzzy
 msgid "cannot source package code:"
-msgstr "nie można wykonać kodu pakietu"
+msgstr "nie można wykonać kodu pakietu:"
 
 #. R/admin.R: warning("cannot turn off locale-specific sorting via LC_COLLATE")
 #: R/admin.R:0
@@ -5006,9 +4996,8 @@ msgstr "tworzenie '%s' nie powiodło się"
 
 #. R/check.R: gettextf("creation of directory %s failed", sQuote(dir1), domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "creation of directory %s failed"
-msgstr "tworzenie '%s' nie powiodło się"
+msgstr "tworzenie katalogu %s nie powiodło się"
 
 #. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
 #. R/Vignettes.R: stop("current working directory cannot be ascertained")
@@ -5145,7 +5134,7 @@ msgstr "powtórzone pliki w polu %s:"
 #. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process", tlim, "seconds")
 #: R/check.R:0
 msgid "elapsed-time limit of %g %s reached for sub-process"
-msgstr ""
+msgstr "granica upływu czasu o wartości %g %s został osiągnięta dla podprocesu"
 
 #. R/install.R: warning("empty 'data' directory", call. = FALSE)
 #: R/install.R:0
@@ -5424,9 +5413,8 @@ msgstr "niepoprawna wartość dla '%s' : %s"
 
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s': should be FALSE, TRUE, 2 or 3", "compress")
 #: R/makeLazyLoad.R:0
-#, fuzzy
 msgid "invalid value for '%s': should be FALSE, TRUE, 2 or 3"
-msgstr "niepoprawna wartość dla 'compress': powinno być FALSE, TRUE, 2 lub 3"
+msgstr "niepoprawna wartość dla '%s': powinno być FALSE, TRUE, 2 lub 3"
 
 #. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s", "\"qpdf\"")
 #: R/build.R:0
@@ -5551,7 +5539,7 @@ msgstr "brak wejść"
 #. R/sotools.R: message("no native symbols were extracted")
 #: R/sotools.R:0
 msgid "no native symbols were extracted"
-msgstr ""
+msgstr "żadne natywne symbole nie zostały wydobyte"
 
 #. R/checktools.R: message("no packages to check")
 #: R/checktools.R:0
@@ -5949,9 +5937,8 @@ msgstr "uruchamianie testów narzędzi CRAN"
 
 #. R/testing.R: message("running tests of Internet functions", domain = "R-tools")
 #: R/testing.R:0
-#, fuzzy
 msgid "running tests of Internet functions"
-msgstr "uruchamianie testów funkcji internetowych - oczekuj pewnych różnic"
+msgstr "uruchamianie testów funkcji internetowych"
 
 #. R/testing.R: message("running tests of consistency of as/is.*", domain = "R-tools")
 #: R/testing.R:0
@@ -6125,12 +6112,12 @@ msgstr ""
 #. R/sotools.R: warning("this requires 'nm' to be on the PATH")
 #: R/sotools.R:0
 msgid "this requires 'nm' to be on the PATH"
-msgstr ""
+msgstr "'nm' musi być określowe w ścieżce środowiskowej PATH"
 
 #. R/sotools.R: warning("this requires 'objdump.exe' to be on the PATH")
 #: R/sotools.R:0
 msgid "this requires 'objdump.exe' to be on the PATH"
-msgstr ""
+msgstr "'objdump.exe' musi być określowe w ścieżce środowiskowej PATH"
 
 #. R/xgettext.R: gettext("too few entries")
 #: R/xgettext.R:0
@@ -7284,6 +7271,14 @@ msgstr[1] ""
 "Pakiety, które ten pakiet rozszerza, ale nie są dostępne do sprawdzenia:"
 msgstr[2] ""
 "Pakiety, które ten pakiet rozszerza, ale nie są dostępne do sprawdzenia:"
+
+#. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "RdMacros package not required:"
+msgid_plural "RdMacros packages not required:"
+msgstr[0] "Pakiet RdMacros nie jest wymagany:"
+msgstr[1] "Pakiety RdMacros nie są wymagane:"
+msgstr[2] "Pakiety RdMacros nie są wymagane:"
 
 #. R/QC.R: ngettext(length(other_problem), "Registration problem:", "Registration problems:",     domain = "R-tools")
 #: R/QC.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 21:52\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -742,7 +742,7 @@ msgstr "'kernapply' nie jest dostępny dla obiektu 'x'"
 #. R/reshape.R: stop("'lengths(varying)' must all match 'length(times)'")
 #: R/reshape.R:0
 msgid "'lengths(varying)' must all match 'length(times)'"
-msgstr ""
+msgstr "'lengths(varying)' musi zgadzać się z 'length(times)'"
 
 #. R/logLik.R: gettextf("'log Lik.' %s (df=%s)", paste(format(c(x), digits = digits), collapse = ", "),     format(attr(x, "df")), domain = "R-stats")
 #: R/logLik.R:0
@@ -859,6 +859,8 @@ msgstr ""
 #: R/fisher.test.R:0
 msgid "'names(hybridPars)' should be NULL or be identical to the default's"
 msgstr ""
+"'names(hybridPars)' powinno mieć wartość NULL lub być ustawione na wartości "
+"domyślne"
 
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
@@ -929,9 +931,8 @@ msgstr "'order.dendrogram' wymaga drzewa celu"
 
 #. R/ar.R: stop("'order.max' argument must be < 'n.obs' argument")
 #: R/ar.R:0
-#, fuzzy
 msgid "'order.max' argument must be < 'n.obs' argument"
-msgstr "argument 'order.max' musi być < argument 'n.used'"
+msgstr "argument 'order.max' musi być < argument 'n.obs'"
 
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
 #. R/ar.R: stop("'order.max' argument must be < 'n.used' argument")
@@ -977,17 +978,11 @@ msgstr ""
 msgid "'ref' must be an existing level"
 msgstr "'ref' musi być istniejącym poziomem"
 
-#. R/relevel.R: stop("'relevel' only for (unordered) factors")
-#: R/relevel.R:0
-#, fuzzy
-msgid "'relevel' only for (unordered) factors"
-msgstr "'relevel' tylko dla czynników"
-
+#. R/relevel.R: stop("'relevel' only for unordered factors")
 #. R/relevel.R: stop("'relevel' only for unordered factors")
 #: R/relevel.R:0
-#, fuzzy
 msgid "'relevel' only for unordered factors"
-msgstr "'relevel' tylko dla czynników"
+msgstr "'relevel' tylko dla nieuporządkowanych czynników"
 
 #. R/dendrogram.R: stop("'reorder.dendrogram' requires a dendrogram")
 #: R/dendrogram.R:0
@@ -2417,20 +2412,24 @@ msgstr "Brak współczynników"
 msgid "No error degrees of freedom"
 msgstr "Brak stopni swobody błędów"
 
-#. R/power.R: warning("No p1 in in [0, p2] can be found to achieve the desired power")
+#. R/power.R: warning("No p1 in [0, p2] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p1 in in [0, p2] can be found to achieve the desired power"
+msgid "No p1 in [0, p2] can be found to achieve the desired power"
 msgstr ""
+"Żaden p1 w [0, p2] nie może być znaleziony celem zyskania oczekiwanej mocy"
 
-#. R/power.R: warning("No p2 in in [p1, 1] can be found to achieve the desired power")
+#. R/power.R: warning("No p2 in [p1, 1] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p2 in in [p1, 1] can be found to achieve the desired power"
+msgid "No p2 in [p1, 1] can be found to achieve the desired power"
 msgstr ""
+"Żaden p2 w [p1, 1] nie może być znaleziony celem zyskania oczekiwanej mocy"
 
 #. R/power.R: warning("No significance level [0, 1] can be found to achieve the desired power")
 #: R/power.R:0
 msgid "No significance level [0, 1] can be found to achieve the desired power"
 msgstr ""
+"Żaden poziom istotności [0, 1] nie może być znaleziony celem zyskania "
+"oczekiwanej mocy"
 
 #. R/nls.R: warning("No starting values specified for some parameters.", "\n", gettextf("Initializing %s to '1.'.",     paste(sQuote(nnn), collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
 #: R/nls.R:0
@@ -4367,7 +4366,7 @@ msgstr "niepoprawny typ zmiennej zależnej"
 #. R/loess.R: gettextf("iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",     j, wRSS, del.SS, d.rob.w, domain = "R-stats")
 #: R/loess.R:0
 msgid "iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)"
-msgstr ""
+msgstr "iter.%2d: wRSS=%#14.9g, relatywne zmiany: (SS=%#9.4g, rob.wgts=%#9.4g)"
 
 #. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
 #: R/loess.R:0
@@ -5216,6 +5215,8 @@ msgstr "liczba wag musi zgadzać się z liczbą obserwacji"
 msgid ""
 "numeric 'all.knots' argument must cover [0,1] (= the transformed data-range)"
 msgstr ""
+"liczbowe 'all.knots' musi pokryć przedział [0,1] (= przekształcony zakres "
+"danych)"
 
 #. R/ksmooth.R: stop("numeric 'y' argument must be supplied.\nFor density estimation use 'density()'")
 #: R/ksmooth.R:0
@@ -5519,7 +5520,7 @@ msgstr "wynik 'smooth.spline(keep.data = TRUE)' jest wymagany"
 #. R/loess.R: gettext("robustness weights:", domain = "R-stats")
 #: R/loess.R:0
 msgid "robustness weights:"
-msgstr ""
+msgstr "wagi odporności:"
 
 #. R/integrate.R: gettext("roundoff error is detected in the extrapolation table")
 #: R/integrate.R:0
@@ -6874,6 +6875,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "'relevel' only for (unordered) factors"
+#~ msgstr "'relevel' tylko dla nieuporządkowanych czynników"
 
 #~ msgid "NA values produced"
 #~ msgstr "wyprodukowano wartości NA"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-26 22:11\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -405,6 +405,11 @@ msgstr "niezgodność strony kodowej czcionki '%s'/'%s'"
 msgid "increasing 'x' and 'y' values expected"
 msgstr "oczekiwano rosnących wartości 'x' oraz 'y'"
 
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr "niepoprawne \"recordedplot\":"
+
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
@@ -749,10 +754,6 @@ msgstr[2] "niepoprawne nazwy argumentów %s w '%s'"
 
 #~ msgid "object is not of class `SavedPlots'"
 #~ msgstr "obiekt nie jest klasy \"SavedPlots\""
-
-#, fuzzy
-#~ msgid "invalid hsv color"
-#~ msgstr "niepoprawna wartość 'filename'"
 
 #, fuzzy
 #~ msgid "invalid hcl color"

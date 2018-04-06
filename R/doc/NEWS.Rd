@@ -9,17 +9,39 @@
 
    \subsection{NEW FEATURES}{
     \itemize{
-      \item \code{optim(*, control = list(warn.1d.NelderMead = FALSE))}
-      allows to turn off the warning when applying the default
-      \code{"Nelder-Mead"} method to 1-dimensional problems.
+      \item \code{matplot(.., panel.first = .)} etc now work, as
+      \code{log} becomes explicit argument and \code{...} is passed to
+      \code{plot()} unevaluated, as suggested by Sebastian Meyer in \PR{17386}.
+
+      \item \code{Sys.setFileTime()} has been vectorized, its arguments
+      \code{path} and \code{time} of length greater than one are now
+      supported.
     }
   }
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{match.arg()} more carefully chooses the environment
-      for constucting default \code{choices}, fixing \PR{17401} as
-      proposed by Duncan Murdoch.
+      \item \code{replayPlot(r)} now also works in the same \R session
+      when \code{r} has been \dQuote{reproduced} from serialization,
+      typically after saving to and reading from an RDS file.
+
+      \item \code{substr()} and \code{substring()} now signal error when
+      the input is invalid UTF-8.
+
+      \item Deparsing of consecutive \code{!} calls is now consistent
+      with deparsing unary \code{-} and \code{+} calls and creates
+      code that can be reparsed exactly; thanks to a patch
+      Lionel Henry in \PR{17397}.
+
+      \item \code{file.copy()} now works also when its argument \code{to} is
+      of length greater than one.
+    }
+  }
+
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item The C++ compiler defaults to the C++11 standard, if
+      suported; otherwise to the C++98 standard.
     }
   }
 }
@@ -273,9 +295,9 @@
 
       \item \code{write.dcf()} gets optional argument \code{useBytes}.
 
-      \item New function \code{packageDate()} which tries to get a valid
-      \code{"Date"} object from a package \file{DESCRIPTION} file,
-      thanks to suggestions in \PR{17324}.
+      \item New, partly experimental \code{packageDate()} which tries to
+      get a valid \code{"Date"} object from a package \file{DESCRIPTION}
+      file, thanks to suggestions in \PR{17324}.
 
       \item \code{tools::resaveRdaFiles()} gains a \code{version}
       argument, for use when packages should remain compatible with
@@ -376,6 +398,10 @@
       \item The \code{"Date"} and \dQuote{date-time} classes
       \code{"POSIXlt"} and \code{"POSIXct"} now have a working
       \code{`length<-`} method, as wished in \PR{17387}.
+
+      \item \code{optim(*, control = list(warn.1d.NelderMead = FALSE))}
+      allows to turn off the warning when applying the default
+      \code{"Nelder-Mead"} method to 1-dimensional problems.
     }
   }
 
@@ -424,6 +450,10 @@
 
       \item C99 functions \code{expm1}, \code{hypot}, \code{log1p} and
       \code{nearbyint} are now required.
+
+      \item \command{configure} sets the \option{-std} flag for the C++
+      compiler for all supported C++ standards (e.g., \option{-std=gnu++11}
+      for the C++11 compiler).
     }
   }
 
@@ -649,6 +679,10 @@
 
       \item Using \code{ \\usage\{ data(<name>, package="<pkg>") \} }
       no longer produces \command{R CMD check} warnings.
+
+      \item \code{match.arg()} more carefully chooses the environment
+      for constructing default \code{choices}, fixing \PR{17401} as
+      proposed by Duncan Murdoch.
     }
   }
 }
@@ -4390,7 +4424,7 @@
 
       \item \code{as.environment(list())} now works, and
       \code{as.list()} of such an environment is now the same as
-      \code{list()}.
+      \code{list()}. (\PR{15926})
 
       \item Several \pkg{tcltk} functions failed when run in unusual
       environments. (\PR{15970})

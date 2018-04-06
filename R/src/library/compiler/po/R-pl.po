@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/cmp.R: gettextf("%s at %s", paste(e$message, collapse = ""), paste(deparse(e$call), collapse = ""),     domain = "R-compiler")
 #. R/cmp.R: gettextf("%s at %s", paste(err$message, collapse = ""), paste(deparse(err$call),     collapse = ""), domain = "R-compiler")
 #: R/cmp.R:0
 msgid "%s at %s"
-msgstr ""
+msgstr "%s w %s"
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
 #: R/cmp.R:0
@@ -34,9 +34,8 @@ msgstr "%s może być użyte w niepoprawnym kontekście"
 
 #. R/cmp.R: gettextf("%s used in wrong context: no loop is visible", fun)
 #: R/cmp.R:0
-#, fuzzy
 msgid "%s used in wrong context: no loop is visible"
-msgstr "%s może być użyte w złym kontekście: brak widocznych pętli"
+msgstr "%s użyte w złym kontekście: brak widocznej pętli"
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0

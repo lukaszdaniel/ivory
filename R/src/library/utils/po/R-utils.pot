@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 3.5.0\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"Project-Id-Version: utils 3.6.0\n"
+"POT-Creation-Date: 2018-04-02 21:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,6 @@ msgstr ""
 #. R/windows/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
 
 msgid "# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s"
-msgstr ""
-
-
-#: R/modifyList.R: 0
-#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
 
@@ -4067,7 +4060,16 @@ msgstr[1]    ""
 
 
 #: R/modifyList.R: 0
-#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+#. R/modifyList.R: ngettext(sum(tt), "%d error caught in %s. The error message and its frequency is:",     "%d errors caught in %s. The error messages and their frequencies are:", domain = "R-utils")
+
+msgid        "%d error caught in %s. The error message and its frequency is:"
+msgid_plural "%d errors caught in %s. The error messages and their frequencies are:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/modifyList.R: 0
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s",     domain = "R-utils")
 
 msgid        "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"

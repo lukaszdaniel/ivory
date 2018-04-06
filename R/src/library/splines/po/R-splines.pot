@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: splines 3.5.0\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"Project-Id-Version: splines 3.6.0\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,13 +130,6 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
-#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
-
-msgid "must have at least 'ord'=%d points"
-msgstr ""
-
-
-#: R/splineClasses.R: 0
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 
 msgid "polynomial representation of spline"
@@ -199,5 +192,14 @@ msgstr ""
 
 msgid        "at least '%s' (=%d) knots is needed"
 msgid_plural "at least '%s' (=%d) knots are needed"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: ngettext(ord, "at least 'ord'=%d point is required", "at least 'ord'=%d points are required",     domain = "R-splines")
+
+msgid        "at least 'ord'=%d point is required"
+msgid_plural "at least 'ord'=%d points are required"
 msgstr[0]    ""
 msgstr[1]    ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 21:52\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1043,12 +1043,7 @@ msgstr "'proj'还没有为多反应实现"
 msgid "'ref' must be an existing level"
 msgstr "'ref'必需是存在的层次"
 
-#. R/relevel.R: stop("'relevel' only for (unordered) factors")
-#: R/relevel.R:0
-#, fuzzy
-msgid "'relevel' only for (unordered) factors"
-msgstr "'relevel'只适用于因子"
-
+#. R/relevel.R: stop("'relevel' only for unordered factors")
 #. R/relevel.R: stop("'relevel' only for unordered factors")
 #: R/relevel.R:0
 #, fuzzy
@@ -2511,14 +2506,14 @@ msgstr ""
 msgid "No error degrees of freedom"
 msgstr "零自由度不能设对比"
 
-#. R/power.R: warning("No p1 in in [0, p2] can be found to achieve the desired power")
+#. R/power.R: warning("No p1 in [0, p2] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p1 in in [0, p2] can be found to achieve the desired power"
+msgid "No p1 in [0, p2] can be found to achieve the desired power"
 msgstr ""
 
-#. R/power.R: warning("No p2 in in [p1, 1] can be found to achieve the desired power")
+#. R/power.R: warning("No p2 in [p1, 1] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p2 in in [p1, 1] can be found to achieve the desired power"
+msgid "No p2 in [p1, 1] can be found to achieve the desired power"
 msgstr ""
 
 #. R/power.R: warning("No significance level [0, 1] can be found to achieve the desired power")
@@ -6933,6 +6928,10 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#, fuzzy
+#~ msgid "'relevel' only for (unordered) factors"
+#~ msgstr "'relevel'只适用于因子"
 
 #, fuzzy
 #~ msgid "NA values produced"

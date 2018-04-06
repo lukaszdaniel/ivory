@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -692,9 +692,9 @@ msgstr "argumenter antyder forskelligt antal rækker:"
 msgid "'chdir = TRUE' makes no sense for a URL"
 msgstr ""
 
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr ""
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -759,11 +759,6 @@ msgstr "dim(X) skal have en positiv længde"
 #, fuzzy
 msgid "'drop' argument will be ignored"
 msgstr "drop-argumenter vil blive ignoreret"
-
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-#: R/source.R:0
-msgid "'encoding = \"%s\"' chosen"
-msgstr ""
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -2147,6 +2142,11 @@ msgstr "tom (zerobyte) inddatafil"
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
 msgstr "pakke %s er ikke indlæst"
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+#: R/source.R:0
+msgid "encoding = \"%s\" chosen"
+msgstr ""
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0

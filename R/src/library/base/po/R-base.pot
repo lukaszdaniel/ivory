@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: base 3.5.0\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"Project-Id-Version: base 3.6.0\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -819,9 +819,9 @@ msgstr ""
 
 
 #: R/source.R: 0
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr ""
 
 
@@ -893,13 +893,6 @@ msgstr ""
 #. R/dataframe.R: warning("'drop' argument will be ignored")
 
 msgid "'drop' argument will be ignored"
-msgstr ""
-
-
-#: R/source.R: 0
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-
-msgid "'encoding = \"%s\"' chosen"
 msgstr ""
 
 
@@ -2633,6 +2626,13 @@ msgstr ""
 #. R/namespace.R: gettextf("empty name in directive %s in 'NAMESPACE' file", sQuote(as.character(e[[1L]])))
 
 msgid "empty name in directive %s in 'NAMESPACE' file"
+msgstr ""
+
+
+#: R/source.R: 0
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+
+msgid "encoding = \"%s\" chosen"
 msgstr ""
 
 

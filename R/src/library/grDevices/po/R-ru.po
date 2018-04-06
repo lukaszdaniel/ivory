@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-26 22:11\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: 2015-01-17 15:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -433,6 +433,11 @@ msgstr "несоответствие кодировки шрифта '%s'/'%s'"
 #: R/calc.R:0
 msgid "increasing 'x' and 'y' values expected"
 msgstr "ожидается увеличение значений 'x' и 'y'"
+
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr ""
 
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")

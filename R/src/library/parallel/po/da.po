@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-04-06 18:33+0200\n"
 "PO-Revision-Date: 2016-01-09 19:16+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -87,11 +87,6 @@ msgstr "der er ingen datakanal til overprocessen"
 #: fork.c:686
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "indhold at sende skal være RAW (RÅ), brug serialize() hvis krævet"
-
-#: fork.c:690
-#, c-format
-msgid "child %d: send_master (%lld bytes)\n"
-msgstr ""
 
 #: fork.c:695 fork.c:703 fork.c:1079
 msgid "write error, closing pipe to the master"

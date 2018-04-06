@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -7342,6 +7342,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Packages qui seraient améliorés mais qui ne sont pas disponibles pour la "
 "vérification :"
+
+#. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "RdMacros package not required:"
+msgid_plural "RdMacros packages not required:"
+msgstr[0] "le chargement a échoué"
+msgstr[1] "le chargement a échoué"
 
 #. R/QC.R: ngettext(length(other_problem), "Registration problem:", "Registration problems:",     domain = "R-tools")
 #: R/QC.R:0

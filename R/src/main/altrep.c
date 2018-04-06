@@ -2114,7 +2114,7 @@ SEXP attribute_hidden do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     Rboolean serOK = sserOK == R_NilValue ? FALSE : asLogicalNA(sserOK, FALSE);
 
     if (TYPEOF(file) != STRSXP || LENGTH(file) != 1 || file == NA_STRING)
-	error(_("invalud 'file' argument"));
+	error(_("invalid '%s' argument"), "file");
 
     return mmap_file(file, type, ptrOK, wrtOK, serOK, FALSE);
 }

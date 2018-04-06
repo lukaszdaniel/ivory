@@ -140,7 +140,7 @@ interpSpline.default <-
     if(anyDuplicated(x))
 	stop("values of 'x' must be distinct")
     if(length(x) < ord)
-        stop(gettextf("must have at least 'ord'=%d points", ord), domain = "R-splines")
+        stop(sprintf(ngettext(ord, "at least 'ord'=%d point is required", "at least 'ord'=%d points are required", domain = "R-splines"), ord), domain = NA)
     ## 'degree' extra knots (shifted) out on each side :
     iDeg <- seq_len(degree)
     knots <- c(x[iDeg] + x[1L] - x[ord], x,

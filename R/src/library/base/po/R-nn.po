@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -699,10 +699,10 @@ msgstr "«by.x» og «by.y» må definera forskjellige tal på kolonnar"
 msgid "'chdir = TRUE' makes no sense for a URL"
 msgstr "«chdir = TRUE» gjev ikkje meining for nettadresser"
 
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr "«chdir = TRUE» gjev ikkje meining for eit samband"
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -769,12 +769,6 @@ msgstr "dim(X) må ha lengd større enn 0"
 #, fuzzy
 msgid "'drop' argument will be ignored"
 msgstr "«drop»-argumentet vert ignorert"
-
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-#: R/source.R:0
-#, fuzzy
-msgid "'encoding = \"%s\"' chosen"
-msgstr "valde «encoding = \"%s\"»"
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -2193,6 +2187,12 @@ msgstr "tom innfil (0 byte)"
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
 msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+#: R/source.R:0
+#, fuzzy
+msgid "encoding = \"%s\" chosen"
+msgstr "valde «encoding = \"%s\"»"
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0

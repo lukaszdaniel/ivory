@@ -19,7 +19,7 @@
 relevel <- function(x, ref, ...) UseMethod("relevel")
 
 relevel.default <- function(x, ref, ...)
-    stop("'relevel' only for (unordered) factors")
+    stop("'relevel' only for unordered factors")
 
 relevel.ordered <- function(x, ref, ...)
     stop("'relevel' only for unordered factors")

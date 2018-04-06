@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-04-06 18:33+0200\n"
 "PO-Revision-Date: 2015-01-17 15:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -87,11 +87,6 @@ msgstr "es gibt keine pipe zum Elternprozess"
 #: fork.c:686
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "zu schickender Inhalt muss RAW sein, nutze serialize() wenn nötig"
-
-#: fork.c:690
-#, c-format
-msgid "child %d: send_master (%lld bytes)\n"
-msgstr ""
 
 #: fork.c:695 fork.c:703 fork.c:1079
 msgid "write error, closing pipe to the master"

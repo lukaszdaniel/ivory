@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
@@ -205,9 +205,8 @@ msgid "NROW must be less than or equal to LDTABL."
 msgstr "'NROW' musi być mniejsze bądź równe 'LDTABL'."
 
 #: fexact.c:212 fexact.c:418
-#, fuzzy
 msgid "All elements of TABLE must be nonnegative."
-msgstr "Wszystkie elementy 'TABLE' nie mogą być ujemne."
+msgstr "Wszystkie elementy 'TABLE' muszą być nieujemne."
 
 #: fexact.c:217 fexact.c:426
 msgid ""
@@ -220,14 +219,13 @@ msgstr ""
 #: fexact.c:274
 #, c-format
 msgid "integer overflow would happen in 'mult * ldkey' = %g"
-msgstr ""
+msgstr "nastąpiłoby przepełnienie całkowitoliczbowe w 'mult * ldkey' = %g"
 
 #: fexact.c:395
 msgid "NCOL must be at least 2"
 msgstr "'NCOL' musi wynosić co najmniej 2"
 
 #: fexact.c:464 fexact.c:473
-#, fuzzy
 msgid ""
 "The hash table key cannot be computed because the largest key\n"
 "is larger than the largest representable int.\n"
@@ -238,22 +236,24 @@ msgstr ""
 "Klucz tablicy hashowej nie może zostać wyznaczony ponieważ największy klucz\n"
 "jest większy niż najwięsza reprezentowalna liczba całkowita.\n"
 "Alrogytm nie może kontynuować.\n"
-"Zmniejsz obszar roboczy lub użyj innego algorytmu."
+"Zmniejsz obszar roboczy, rozważ użycie 'simulate.p.value=TRUE' lub użyj "
+"innego algorytmu."
 
 #: fexact.c:653
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "FEXACT error 6.  LDKEY=%d is too small for this problem,\n"
 "  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
 "Try increasing the size of the workspace and possibly 'mult'"
 msgstr ""
-"'LDKEY' jest zbyt małe dla tego problemu.\n"
-"Spróbuj zwięszyć rozmiar obszaru roboczego."
+"FEXACT error 6.  LDKEY=%d jest zbyt małe dla tego problemu,\n"
+"  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
+"Spróbuj zwiększyć rozmiar przestrzeni roboczej oraz być może 'mult'"
 
 #: fexact.c:1033
 #, c-format
 msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
-msgstr ""
+msgstr "Błąd w fexact3, it[i=%d]=%d: ujemny klucz %d (kyy=%d)\n"
 
 #: fexact.c:1062
 #, c-format
@@ -262,15 +262,18 @@ msgid ""
 "  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
+"FEXACT błąd 30. Długość stosu przekroczona w f3xact,\n"
+"  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
+"Zwiększ przestrzeń roboczą lub rozważ użycie 'simulate.p.value=TRUE'"
 
 #: fexact.c:1395
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
 "Try increasing the size of the workspace."
 msgstr ""
-"'LDKEY' jest zbyt małe dla tego problemu.\n"
-"Spróbuj zwięszyć rozmiar obszaru roboczego."
+"FEXACT błąd 6 (f5xact). LDKEY=%d jest zbyt małe dla tego problemu: kval=%d.\n"
+"Spróbuj zwiększyć rozmiar przestrzeni roboczej."
 
 #: fexact.c:1407
 #, c-format
@@ -279,6 +282,9 @@ msgid ""
 "  (kval=%d, itop-ldstp=%d).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
+"FEXACT error 7(%s). LDSTP=%d jest zbyt małe dla tego problemu,\n"
+"  (kval=%d, itop-ldstp=%d).\n"
+"Zwiększ przestrzeń roboczą lub rozważ użycie 'simulate.p.value=TRUE'"
 
 #: fexact.c:1442
 #, c-format
@@ -287,6 +293,9 @@ msgid ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
+"FEXACT error 7(%s). LDSTP=%d jest zbyt małe dla tego problemu,\n"
+"  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
+"Zwiększ przestrzeń roboczą lub rozważ użycie 'simulate.p.value=TRUE'"
 
 #: fexact.c:1792
 #, c-format
@@ -302,9 +311,8 @@ msgid "Out of workspace."
 msgstr "Zabrakło obszaru roboczego."
 
 #: fexact.c:1906
-#, fuzzy
 msgid "This should never occur, please report!"
-msgstr "Nie nigdy nie powinno się pojawić."
+msgstr "To nigdy nie powinno się pojawić. Proszę to zgłosić!"
 
 #: filter.c:37 filter.c:40 filter.c:88 lowess.c:284 lowess.c:286
 msgid "invalid input"

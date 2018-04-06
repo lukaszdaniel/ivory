@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-04-06 18:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,17 +14,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: fork.c:181
-#, fuzzy, c-format
+#, c-format
 msgid "unable to terminate child process: %s"
-msgstr "nie można rozdzielić, prawdopodobny powód: %s"
+msgstr "nie można zakończyć potomnego procesu: %s"
 
 #: fork.c:208
-#, fuzzy, c-format
+#, c-format
 msgid "unable to terminate child: %s"
-msgstr "nie można utworzyć potoku"
+msgstr "nie można zakończyć potomnego procesu: %s"
 
 #: fork.c:238
 #, c-format
@@ -38,13 +38,15 @@ msgstr "błąd przydziału pamięci"
 #: fork.c:337 fork.c:341 fork.c:345
 #, c-format
 msgid "invalid '%s' argument"
-msgstr ""
+msgstr "niepoprawny argument '%s'"
 
 #: fork.c:401
 msgid ""
 "Error while shutting down parallel: unable to terminate some child "
 "processes\n"
 msgstr ""
+"Błąd podczas wyłączania równoległych procesów: nie można zakończyć "
+"niektórych procesów potomnych\n"
 
 #: fork.c:433
 #, c-format
@@ -87,11 +89,6 @@ msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 "zawartość do wysłania musi być PUSTA, użyj 'serialize()' jeśli konieczne"
 
-#: fork.c:690
-#, fuzzy, c-format
-msgid "child %d: send_master (%lld bytes)\n"
-msgstr "dziecko %d: send_master (%d bajtów)\n"
-
 #: fork.c:695 fork.c:703 fork.c:1079
 msgid "write error, closing pipe to the master"
 msgstr "błąd zapisu, zamykanie potoku do procesu głównego"
@@ -114,9 +111,9 @@ msgid "write error"
 msgstr "błąd zapisu"
 
 #: fork.c:780
-#, fuzzy, c-format
+#, c-format
 msgid "cannot wait for child %d as it does not exist"
-msgstr "potomny proces %d nie istnieje"
+msgstr "nie można czekać na potomny proces %d ponieważ on nie istnieje"
 
 #: fork.c:847 fork.c:970
 #, c-format
@@ -129,14 +126,14 @@ msgid " - read select %d children: "
 msgstr " - przeczytaj wybrane %d dzieci: "
 
 #: fork.c:883
-#, fuzzy, c-format
+#, c-format
 msgid " read_child_ci(%d) - read length returned %lld\n"
-msgstr " read_child_ci(%d) - przeczytana długość zwróciła %d\n"
+msgstr " read_child_ci(%d) - przeczytana długość zwróciła %lld\n"
 
 #: fork.c:896
-#, fuzzy, c-format
+#, c-format
 msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
-msgstr " read_child_ci(%d) - przeczytane %d w %d zwróciło %d\n"
+msgstr " read_child_ci(%d) - przeczytane %lld w %lld zwróciło %lld\n"
 
 #: fork.c:927
 #, c-format
@@ -194,6 +191,9 @@ msgstr "niepowodzenie przydziału"
 #, c-format
 msgid "in reading processor information, probable cause: %d"
 msgstr "podczas czytania informacji o procesorze, prawdopodobny powód: %d"
+
+#~ msgid "child %d: send_master (%lld bytes)\n"
+#~ msgstr "dziecko %d: send_master (%lld bajtów)\n"
 
 #~ msgid "removing child %d\n"
 #~ msgstr "usuwanie dziecka %d\n"

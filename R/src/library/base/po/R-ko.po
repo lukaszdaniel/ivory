@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -704,10 +704,10 @@ msgstr "'by.x' 와 'by.y' 가 지정하는 열의 개수가 다릅니다 "
 msgid "'chdir = TRUE' makes no sense for a URL"
 msgstr "'chdir = TRUE' 은 URL 이 아닙니다 "
 
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
-msgid "'chdir = TRUE' option makes no sense for a connection"
+msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr "'chdir = TRUE' 는 연결과 아무런 관계가 없습니다 "
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -774,12 +774,6 @@ msgstr "dim(x)은 양의 값을 가져야 합니다 "
 #, fuzzy
 msgid "'drop' argument will be ignored"
 msgstr "drop argument will be ignored"
-
-#. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
-#: R/source.R:0
-#, fuzzy
-msgid "'encoding = \"%s\"' chosen"
-msgstr "인코딩 \"%s\" 가 선택되었습니다 "
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -2203,6 +2197,12 @@ msgstr "empty (zero-byte) input file"
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
 msgstr "NAMESPACE 파일에는 '%s' 라는 명령어 이름이 없습니다 "
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
+#: R/source.R:0
+#, fuzzy
+msgid "encoding = \"%s\" chosen"
+msgstr "인코딩 \"%s\" 가 선택되었습니다 "
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 10:19+0100\n"
+"POT-Creation-Date: 2018-04-06 18:33+0200\n"
 "PO-Revision-Date: 2011-10-18 22:15-0600\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -88,11 +88,6 @@ msgstr "нет трубы к мастер-процессу"
 #: fork.c:686
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "посылаемый контент должен быть RAW, используйте serialize(), если надо"
-
-#: fork.c:690
-#, c-format
-msgid "child %d: send_master (%lld bytes)\n"
-msgstr ""
 
 #: fork.c:695 fork.c:703 fork.c:1079
 msgid "write error, closing pipe to the master"

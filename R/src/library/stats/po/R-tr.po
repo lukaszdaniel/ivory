@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 21:52\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1041,11 +1041,7 @@ msgstr "'model.tables' çoklu cevaplar için tanımlanmadı"
 msgid "'ref' must be an existing level"
 msgstr ""
 
-#. R/relevel.R: stop("'relevel' only for (unordered) factors")
-#: R/relevel.R:0
-msgid "'relevel' only for (unordered) factors"
-msgstr ""
-
+#. R/relevel.R: stop("'relevel' only for unordered factors")
 #. R/relevel.R: stop("'relevel' only for unordered factors")
 #: R/relevel.R:0
 #, fuzzy
@@ -2497,14 +2493,14 @@ msgstr ""
 msgid "No error degrees of freedom"
 msgstr "artıklar için serbestlik derecesi yok"
 
-#. R/power.R: warning("No p1 in in [0, p2] can be found to achieve the desired power")
+#. R/power.R: warning("No p1 in [0, p2] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p1 in in [0, p2] can be found to achieve the desired power"
+msgid "No p1 in [0, p2] can be found to achieve the desired power"
 msgstr ""
 
-#. R/power.R: warning("No p2 in in [p1, 1] can be found to achieve the desired power")
+#. R/power.R: warning("No p2 in [p1, 1] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p2 in in [p1, 1] can be found to achieve the desired power"
+msgid "No p2 in [p1, 1] can be found to achieve the desired power"
 msgstr ""
 
 #. R/power.R: warning("No significance level [0, 1] can be found to achieve the desired power")

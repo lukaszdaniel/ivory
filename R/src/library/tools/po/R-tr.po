@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -6620,6 +6620,13 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Package which this enhances but not available for checking:"
 msgid_plural "Packages which this enhances but not available for checking:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "RdMacros package not required:"
+msgid_plural "RdMacros packages not required:"
 msgstr[0] ""
 msgstr[1] ""
 

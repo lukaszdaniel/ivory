@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: methods 3.5.0\n"
+"Project-Id-Version: methods 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:51+0100\n"
+"POT-Creation-Date: 2018-04-02 20:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 
-#: methods_list_dispatch.c:527 methods_list_dispatch.c:1074
+#: methods_list_dispatch.c:527 methods_list_dispatch.c:1076
 msgid "invalid object (non-function) used as method"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgid ""
 msgstr ""
 
 #: methods_list_dispatch.c:617 methods_list_dispatch.c:629
-#: methods_list_dispatch.c:1020
+#: methods_list_dispatch.c:1022
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -165,64 +165,64 @@ msgid ""
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.c:713
+#: methods_list_dispatch.c:715
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr ""
 
-#: methods_list_dispatch.c:813
+#: methods_list_dispatch.c:815
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
 
-#: methods_list_dispatch.c:817
+#: methods_list_dispatch.c:819
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr ""
 
-#: methods_list_dispatch.c:821
+#: methods_list_dispatch.c:823
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr ""
 
-#: methods_list_dispatch.c:854
+#: methods_list_dispatch.c:856
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:856
+#: methods_list_dispatch.c:858
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.c:858
+#: methods_list_dispatch.c:860
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:898
+#: methods_list_dispatch.c:900
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
 
-#: methods_list_dispatch.c:978
+#: methods_list_dispatch.c:980
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.c:985
+#: methods_list_dispatch.c:987
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.c:997
+#: methods_list_dispatch.c:999
 #, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.c:1001
+#: methods_list_dispatch.c:1003
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

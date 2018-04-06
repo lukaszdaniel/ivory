@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: 2012-03-06 18:25+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -107,12 +107,6 @@ msgstr "'x' 와  'y' 의 길이는 일치해야 합니다 "
 msgid "lengths of 'x' and 'y' must match"
 msgstr "'x' 와 'y' 의 길이는 일치해야 합니다 "
 
-#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
-#: R/splineClasses.R:0
-#, fuzzy
-msgid "must have at least 'ord'=%d points"
-msgstr "적어도 'ord' knots 를 가져야 합니다 "
-
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -166,6 +160,13 @@ msgstr "'x' 의 값들은 반드시 단조증가해야 합니다 "
 msgid "at least '%s' (=%d) knots is needed"
 msgid_plural "at least '%s' (=%d) knots are needed"
 msgstr[0] "적어도  2*ord -1 (=%d) 개의 knots 가 필요합니다"
+
+#. R/splineClasses.R: ngettext(ord, "at least 'ord'=%d point is required", "at least 'ord'=%d points are required",     domain = "R-splines")
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "at least 'ord'=%d point is required"
+msgid_plural "at least 'ord'=%d points are required"
+msgstr[0] "적어도 'ord' knots 를 가져야 합니다 "
 
 #~ msgid "'ord' must be >= 2"
 #~ msgstr "'ord' 는 2 이상이어야 합니다 "

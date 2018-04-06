@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-04-02 21:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -34,11 +34,6 @@ msgstr ""
 "# swojego ulubionego programu pocztowego oraz wysłać go do\n"
 "#\n"
 "#       %s"
-
-#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
-#: R/modifyList.R:0
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
-msgstr ""
 
 #. R/packages2.R: gettextf("%d): succeeded '%s'", i, cmd)
 #. R/packages2.R: gettextf("%d): succeeded '%s'", i, cmd, domain = "R-utils")
@@ -885,7 +880,7 @@ msgstr "Zainstalowane pakiety:"
 #. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
-msgstr ""
+msgstr "Niepoprawne \"Built\":"
 
 #. R/package.skeleton.R: gettextf("Invalid file name(s) for R code in %s:\n%s\n are now renamed to 'z<name>.R'",     code_dir, strwrap(paste(sQuote(wrong), collapse = ", "), indent = 2), domain = "R-utils")
 #: R/package.skeleton.R:0
@@ -3038,6 +3033,7 @@ msgstr "nie ma katalogu 'libs' w pakiecie %s"
 #: R/packages2.R:0
 msgid "timeouts for parallel installs require the 'timeout' command"
 msgstr ""
+"czas oczekiwania dla równoległych instalacji wymaga polecenia 'timeout'"
 
 #. R/format.R: gettextf("too many list items (at most up to %d)", 26L)
 #. R/format.R: gettextf("too many list items (at most up to %d)", 3899L)
@@ -3243,13 +3239,28 @@ msgstr[2] ""
 "w następujących miejscach znaleziono %d różniących się obiektów pasujących "
 "do %s:"
 
-#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+#. R/modifyList.R: ngettext(sum(tt), "%d error caught in %s. The error message and its frequency is:",     "%d errors caught in %s. The error messages and their frequencies are:", domain = "R-utils")
+#: R/modifyList.R:0
+msgid "%d error caught in %s. The error message and its frequency is:"
+msgid_plural ""
+"%d errors caught in %s. The error messages and their frequencies are:"
+msgstr[0] ""
+"przechwycono %d błąd w %s. Komunikat błędu oraz jego częstotliwość "
+"występowania to:"
+msgstr[1] ""
+"przechwycono %d błędy w %s. Komunikaty błędów oraz ich częstotliwości "
+"występowania to:"
+msgstr[2] ""
+"przechwycono %d błędów w %s. Komunikaty błędów oraz ich częstotliwości "
+"występowania to:"
+
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s",     domain = "R-utils")
 #: R/modifyList.R:0
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "przechwycono %d błąd w %s: %s"
+msgstr[1] "%d razy przechwycono ten sam błąd w %s: %s"
+msgstr[2] "%d razy przechwycono ten sam błąd w %s: %s"
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s", domain = "R-utils")
 #: R/apropos.R:0

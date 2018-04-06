@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 21:52\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1046,12 +1046,7 @@ msgstr " 'proj' は多重応答に対しては実装されていません "
 msgid "'ref' must be an existing level"
 msgstr " 'ref' は既存の水準でなければなりません "
 
-#. R/relevel.R: stop("'relevel' only for (unordered) factors")
-#: R/relevel.R:0
-#, fuzzy
-msgid "'relevel' only for (unordered) factors"
-msgstr " 'relevel' は因子専用です "
-
+#. R/relevel.R: stop("'relevel' only for unordered factors")
 #. R/relevel.R: stop("'relevel' only for unordered factors")
 #: R/relevel.R:0
 #, fuzzy
@@ -2517,14 +2512,14 @@ msgstr ""
 msgid "No error degrees of freedom"
 msgstr " 対比は自由度 0 では定義されません "
 
-#. R/power.R: warning("No p1 in in [0, p2] can be found to achieve the desired power")
+#. R/power.R: warning("No p1 in [0, p2] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p1 in in [0, p2] can be found to achieve the desired power"
+msgid "No p1 in [0, p2] can be found to achieve the desired power"
 msgstr ""
 
-#. R/power.R: warning("No p2 in in [p1, 1] can be found to achieve the desired power")
+#. R/power.R: warning("No p2 in [p1, 1] can be found to achieve the desired power")
 #: R/power.R:0
-msgid "No p2 in in [p1, 1] can be found to achieve the desired power"
+msgid "No p2 in [p1, 1] can be found to achieve the desired power"
 msgstr ""
 
 #. R/power.R: warning("No significance level [0, 1] can be found to achieve the desired power")
@@ -6984,6 +6979,10 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#, fuzzy
+#~ msgid "'relevel' only for (unordered) factors"
+#~ msgstr " 'relevel' は因子専用です "
 
 #, fuzzy
 #~ msgid "NA values produced"

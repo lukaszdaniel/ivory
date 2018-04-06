@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:51\n"
+"POT-Creation-Date: 2018-04-02 20:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -138,8 +138,7 @@ msgstr ""
 "niedomyślną niejawną formę"
 
 #. R/RClassUtils.R: gettextf("%s is not eligible to be the data part of another class (must be a basic class or a virtual class with no slots)",     dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("%s is not eligible to be the data part of another class (must be a basic class or a virtual class with no slots)",     dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "%s is not eligible to be the data part of another class (must be a basic "
 "class or a virtual class with no slots)"
@@ -199,8 +198,7 @@ msgid "'%s' or '%s' argument must be supplied"
 msgstr "argument %s lub %s musi być dostarczony"
 
 #. R/RClassUtils.R: stop("'Class' argument must be a valid class definition or class")
-#. R/tmp_RClassUtils.R: stop("'Class' argument must be a valid class definition or class")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "'Class' argument must be a valid class definition or class"
 msgstr "Argument 'Class' musi być poprawną definicją klasy lub klasą"
 
@@ -247,8 +245,7 @@ msgid "'callGeneric()' function must be called from within a method body"
 msgstr "funkcja 'callGeneric()' musi być wywołana z wewnątrz metody"
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
-#. R/tmp_RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "'class' is a reserved slot name and cannot be redefined"
 msgstr ""
 "'class' jest zarezerwowaną nazwą gniazda i nie może zostać przedefiniowana"
@@ -264,8 +261,7 @@ msgid "'class2' must be the name of a class or a class definition"
 msgstr "'class2' musi być nazwą klasy albo definicją klasy"
 
 #. R/RClassUtils.R: stop("'externalptr' objects cannot be initialized from function 'new()'")
-#. R/tmp_RClassUtils.R: stop("'externalptr' objects cannot be initialized from function 'new()'")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "'externalptr' objects cannot be initialized from function 'new()'"
 msgstr "obiekty 'externalptr' nie mogą być inicjalizowane z funkcji 'new()'"
 
@@ -295,9 +291,7 @@ msgstr "(Ta funkcja ogólna wyklucza nieproste dziedziczenie; zobacz '?setIs')"
 
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(slotDefs[match(pnames[check], slotNames)]))
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
-#. R/tmp_RClassUtils.R: gettextf("(class %s)", .dQ(slotDefs[match(pnames[check], slotNames)]))
-#. R/tmp_RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "(class %s)"
 msgstr "(klasa %s)"
 
@@ -406,8 +400,7 @@ msgstr ""
 "(%s)"
 
 #. R/RClassUtils.R: gettextf("Also defined by %s", paste(sQuote(pkgs[-1]), collapse = " "))
-#. R/tmp_RClassUtils.R: gettextf("Also defined by %s", paste(sQuote(pkgs[-1]), collapse = " "))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Also defined by %s"
 msgstr "Również zdefiniowane przez %s"
 
@@ -448,16 +441,14 @@ msgstr ""
 "argument 'slots'"
 
 #. R/RClassUtils.R: gettextf("Calling function 'new()' on an undefined and non-basic class (\"%s\")",     Class)
-#. R/tmp_RClassUtils.R: gettextf("Calling function 'new()' on an undefined and non-basic class (\"%s\")",     Class)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Calling function 'new()' on an undefined and non-basic class (\"%s\")"
 msgstr ""
 "Wywoływanie funkcji 'new()' na niezdefiniowanej oraz niebazowej klasie (\"%s"
 "\")"
 
 #. R/RClassUtils.R: gettextf("Class %s", .dQ(Class), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s", .dQ(Class), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s"
 msgstr "Klasa %s"
 
@@ -472,20 +463,17 @@ msgid "Class %s (from the global environment)"
 msgstr "Klasa %s (z globalnego środowiska)"
 
 #. R/RClassUtils.R: gettextf("Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s [in %s]"
 msgstr "Klasa %s [w %s]"
 
 #. R/RClassUtils.R: gettextf("Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s [package in %s]"
 msgstr "Klasa %s [pakiet w %s]"
 
 #. R/RClassUtils.R: gettextf("Class %s consists of following classes: ", .dQ(Class), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s consists of following classes: ", .dQ(Class), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s consists of following classes:"
 msgstr "Klasa %s składa się z poniższych klas:"
 
@@ -543,74 +531,62 @@ msgid "Class %s is not one of the reference super classes for this object"
 msgstr "Klasa %s nie jest jedną z referencyjnych superklas dla tego obiektu"
 
 #. R/RClassUtils.R: gettextf("Class %s, by class %s", dQuote(what[i]), tmp_N, domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, by class %s", dQuote(what[i]), tmp_N, domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, by class %s"
 msgstr "Klasa %s, przez klasę %s"
 
 #. R/RClassUtils.R: gettextf("Class %s, by class %s, with explicit coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, by class %s, with explicit coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, by class %s, with explicit coerce"
 msgstr "Klasa %s, przez klasę %s, z jawnym przekształceniem"
 
 #. R/RClassUtils.R: gettextf("Class %s, by class %s, with explicit test", dQuote(what[i]), tmp_N, domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, by class %s, with explicit test", dQuote(what[i]), tmp_N, domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, by class %s, with explicit test"
 msgstr "Klasa %s, przez klasę %s, z jawnym testem"
 
 #. R/RClassUtils.R: gettextf("Class %s, by class %s, with explicit test and coerce", dQuote(what[i]),     tmp_N, domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, by class %s, with explicit test and coerce", dQuote(what[i]),     tmp_N, domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, by class %s, with explicit test and coerce"
 msgstr "Klasa %s, przez klasę %s, z jawnym testem oraz przekształceniem"
 
 #. R/RClassUtils.R: gettextf("Class %s, directly", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, directly", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, directly"
 msgstr "Klasa %s, bezpośrednio"
 
 #. R/RClassUtils.R: gettextf("Class %s, directly, with explicit coerce", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, directly, with explicit coerce", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, directly, with explicit coerce"
 msgstr "Klasa %s, bezpośrednio, z jawnym przekształceniem"
 
 #. R/RClassUtils.R: gettextf("Class %s, directly, with explicit test", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, directly, with explicit test", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, directly, with explicit test"
 msgstr "Klasa %s, bezpośrednio, z jawnym testem"
 
 #. R/RClassUtils.R: gettextf("Class %s, directly, with explicit test and coerce", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, directly, with explicit test and coerce", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, directly, with explicit test and coerce"
 msgstr "Klasa %s, bezpośrednio, z jawnym testem oraz przekształceniem"
 
 #. R/RClassUtils.R: gettextf("Class %s, from data part", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, from data part", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, from data part"
 msgstr "Klasa %s, z części danych"
 
 #. R/RClassUtils.R: gettextf("Class %s, from data part, with explicit coerce", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, from data part, with explicit coerce", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, from data part, with explicit coerce"
 msgstr "Klasa %s, z części danych, z jawnym przekształceniem"
 
 #. R/RClassUtils.R: gettextf("Class %s, from data part, with explicit test", dQuote(what[i]), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, from data part, with explicit test", dQuote(what[i]), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, from data part, with explicit test"
 msgstr "Klasa %s, z części danych, z jawnym testem"
 
 #. R/RClassUtils.R: gettextf("Class %s, from data part, with explicit test and coerce", dQuote(what[i]),     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Class %s, from data part, with explicit test and coerce", dQuote(what[i]),     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class %s, from data part, with explicit test and coerce"
 msgstr "Klasa %s, z części danych, z jawnym testem oraz przekształceniem"
 
@@ -640,8 +616,7 @@ msgid "Class must be an empty virtual class with NULL prototype"
 msgstr "Klasa musi być pustą wirtualną klasą z prototypem NULL"
 
 #. R/RClassUtils.R: gettext("Class:", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("Class:", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Class:"
 msgstr "Klasa:"
 
@@ -719,8 +694,7 @@ msgid "Creating a new generic function for %s in the global environment"
 msgstr "Tworzenie nowej ogólnej funkcji dla %s w globalnym środowisku"
 
 #. R/RClassUtils.R: stop("Data part ('.Data' slot) is undefined for general S4 object")
-#. R/tmp_RClassUtils.R: stop("Data part ('.Data' slot) is undefined for general S4 object")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr ""
 "Część 'Data' (gniazdo '.Data') jest niezdefiniowana dla ogólnego obiektu S4"
@@ -768,8 +742,7 @@ msgid "For package %s"
 msgstr "Dla pakietu %s"
 
 #. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
-#. R/tmp_RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
@@ -858,8 +831,7 @@ msgstr ""
 "jednoznacznej metody"
 
 #. R/RClassUtils.R: gettext("Known Subclasses: ", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("Known Subclasses: ", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Known Subclasses:"
 msgstr "Znane podklasy:"
 
@@ -917,14 +889,12 @@ msgid "Modified functions inserted through trace(): %s"
 msgstr "Zmodyfikowane funkcje wstawione poprzez 'trace()': %s"
 
 #. R/RClassUtils.R: gettext("NOTE: arguments in definition %s changed from (%s) to (%s)", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("NOTE: arguments in definition %s changed from (%s) to (%s)", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "NOTE: arguments in definition %s changed from (%s) to (%s)"
 msgstr "UWAGA: argumenty w definicji %s zmieniły się z (%s) na (%s)"
 
 #. R/RClassUtils.R: gettext("Name:", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("Name:", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Name:"
 msgstr "Nazwa:"
 
@@ -962,8 +932,7 @@ msgstr ""
 "nieprostej metody"
 
 #. R/RClassUtils.R: gettextf("No slots, prototype of class %s", dQuote(.class1(ClassDef@prototype)),     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("No slots, prototype of class %s", dQuote(.class1(ClassDef@prototype)),     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "No slots, prototype of class %s"
 msgstr "Brak gniazd, prototyp klasy %s"
 
@@ -985,8 +954,7 @@ msgstr ""
 " %s również byłaby poprawna"
 
 #. R/RClassUtils.R: gettextf("Note: some superclasses of class %s in package %s have duplicate definitions. This definition is not being treated as equivalent to that from package %s",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#. R/tmp_RClassUtils.R: gettextf("Note: some superclasses of class %s in package %s have duplicate definitions. This definition is not being treated as equivalent to that from package %s",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "Note: some superclasses of class %s in package %s have duplicate "
 "definitions. This definition is not being treated as equivalent to that from "
@@ -996,8 +964,7 @@ msgstr ""
 "definicje. Ta definicja nie jest traktowana jako równoważna tej z pakietu %s"
 
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#. R/tmp_RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "Note: the specification for class %s in package %s seems equivalent to one "
 "from package %s and is not turning on duplicate class definitions for this "
@@ -1084,14 +1051,12 @@ msgstr ""
 "tego samego pakietu:  otrzymano %s oraz %s"
 
 #. R/RClassUtils.R: gettextf("Required method %s not defined for signature %s", message, target)
-#. R/tmp_RClassUtils.R: gettextf("Required method %s not defined for signature %s", message, target)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Required method %s not defined for signature %s"
 msgstr "Wymagana metoda %s nie została zdefiniowana dla sygnatury %s"
 
 #. R/RClassUtils.R: gettextf("Required method %s not defined for signature %s, required for signature %s",     message, target, defined)
-#. R/tmp_RClassUtils.R: gettextf("Required method %s not defined for signature %s, required for signature %s",     message, target, defined)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "Required method %s not defined for signature %s, required for signature %s"
 msgstr ""
@@ -1099,8 +1064,7 @@ msgstr ""
 "sygnatury %s"
 
 #. R/RClassUtils.R: gettextf("Required method not defined: %s", message)
-#. R/tmp_RClassUtils.R: gettextf("Required method not defined: %s", message)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Required method not defined: %s"
 msgstr "Wymagana metoda nie została zdefiniowana: %s"
 
@@ -1132,8 +1096,7 @@ msgid "Slot %s:"
 msgstr "Gniazdo %s:"
 
 #. R/RClassUtils.R: gettext("Slots:", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("Slots:", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Slots:"
 msgstr "Gniazda:"
 
@@ -1171,20 +1134,17 @@ msgid "Use of the \"MethodsList\" meta data objects is deprecated."
 msgstr "Użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
 
 #. R/RClassUtils.R: gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Virtual Class %s"
 msgstr "Klasa wirtualna %s"
 
 #. R/RClassUtils.R: gettextf("Virtual Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Virtual Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Virtual Class %s [in %s]"
 msgstr "Klasa wirtualna %s [w %s]"
 
 #. R/RClassUtils.R: gettextf("Virtual Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettextf("Virtual Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "Virtual Class %s [package in %s]"
 msgstr "Klasa wirtualna %s [pakiet w %s]"
 
@@ -1229,8 +1189,7 @@ msgid "a function for argument 'f' must be a generic function"
 msgstr "funkcja dla argumentu 'f' musi być ogólną funkcją"
 
 #. R/RClassUtils.R: gettextf("a prototype object was supplied with object slot of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype@object)), dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("a prototype object was supplied with object slot of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype@object)), dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "a prototype object was supplied with object slot of class %s, but the class "
 "definition requires an object that is class %s"
@@ -1239,8 +1198,7 @@ msgstr ""
 "klasy wymaga obiektu klasy %s"
 
 #. R/RClassUtils.R: gettextf("a prototype was supplied of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype)), dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("a prototype was supplied of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype)), dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "a prototype was supplied of class %s, but the class definition requires an "
 "object that is class %s"
@@ -1258,8 +1216,7 @@ msgstr ""
 "długości %d"
 
 #. R/RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
-#. R/tmp_RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "a validity method must be a function of one argument, got an object of class "
 "%s"
@@ -1338,8 +1295,7 @@ msgid ""
 msgstr "argument 'S4Class' musi być definicją klasy: otrzymano obiekt klasy %s"
 
 #. R/RClassUtils.R: stop("argument 'abbreviate' must be 0, 1, 2, or 3")
-#. R/tmp_RClassUtils.R: stop("argument 'abbreviate' must be 0, 1, 2, or 3")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "argument 'abbreviate' must be 0, 1, 2, or 3"
 msgstr "argument 'abbreviate' musi mieć wartość 0, 1, 2, lub 3"
 
@@ -1372,8 +1328,7 @@ msgstr ""
 "otrzymano zwykłą funkcję"
 
 #. R/RClassUtils.R: stop("argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'")
-#. R/tmp_RClassUtils.R: stop("argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "argument 'includeSubclasses' must be a logical, either one value or a vector "
 "of the same length as argument 'classes'"
@@ -1445,8 +1400,7 @@ msgstr ""
 "listą"
 
 #. R/RClassUtils.R: gettextf("assigning as %s a class representation with internal name %s", dQuote(Class),     dQuote(def@className))
-#. R/tmp_RClassUtils.R: gettextf("assigning as %s a class representation with internal name %s", dQuote(Class),     dQuote(def@className))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "assigning as %s a class representation with internal name %s"
 msgstr "przypisywanie jako %s reprezentacji klasy z wewnętrzną nazwą %s"
 
@@ -1603,8 +1557,7 @@ msgid "class %s cannot extend class %s"
 msgstr "klasa %s nie może rozszerzyć klasy %s"
 
 #. R/RClassUtils.R: gettextf("class %s does not have a data part (a .Data slot) defined", dQuote(class(object)))
-#. R/tmp_RClassUtils.R: gettextf("class %s does not have a data part (a .Data slot) defined", dQuote(class(object)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "class %s does not have a data part (a .Data slot) defined"
 msgstr "klasa %s nie ma zdefiniowanej części danych (gniazdo '.Data')"
 
@@ -1618,14 +1571,12 @@ msgstr ""
 "ekwiwalentu S3"
 
 #. R/RClassUtils.R: gettextf("class %s extends an undefined class (%s)", dQuote(name), dQuote(cl))
-#. R/tmp_RClassUtils.R: gettextf("class %s extends an undefined class (%s)", dQuote(name), dQuote(cl))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "class %s extends an undefined class (%s)"
 msgstr "klasa %s rozszerza niezdefiniowaną klasę (%s)"
 
 #. R/RClassUtils.R: gettextf("class %s extends an undefined class, %s", dQuote(ClassDef@className), dQuote(what))
-#. R/tmp_RClassUtils.R: gettextf("class %s extends an undefined class, %s", dQuote(ClassDef@className), dQuote(what))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "class %s extends an undefined class, %s"
 msgstr "klasa %s rozszerza niezdefiniowaną klasę, %s"
 
@@ -1635,8 +1586,7 @@ msgid "class %s for field %s is not defined"
 msgstr "klasa %s dla pola %s nie jest zdefiniowana"
 
 #. R/RClassUtils.R: gettextf("class %s has a locked definition in package %s", dQuote(Class), sQuote(getPackageName(where)))
-#. R/tmp_RClassUtils.R: gettextf("class %s has a locked definition in package %s", dQuote(Class), sQuote(getPackageName(where)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "class %s has a locked definition in package %s"
 msgstr "klasa %s ma zablokowaną definicję w pakiecie %s"
 
@@ -1689,8 +1639,7 @@ msgstr ""
 "jej obiektu metadanych (nie wyeksportowano?)"
 
 #. R/RClassUtils.R: gettext("class %s is inheriting an inconsistent superclass structure from class %s, inconsistent with %s",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("class %s is inheriting an inconsistent superclass structure from class %s, inconsistent with %s",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "class %s is inheriting an inconsistent superclass structure from class %s, "
 "inconsistent with %s"
@@ -1717,8 +1666,7 @@ msgstr ""
 "wyjątkiem 'setClassUnion'"
 
 #. R/RClassUtils.R: gettextf("class %s may not contain itself: it contains class %s, with a circular relation back to %s",     dQuote(className), dQuote(exti@by), dQuote(className))
-#. R/tmp_RClassUtils.R: gettextf("class %s may not contain itself: it contains class %s, with a circular relation back to %s",     dQuote(className), dQuote(exti@by), dQuote(className))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "class %s may not contain itself: it contains class %s, with a circular "
 "relation back to %s"
@@ -1727,8 +1675,7 @@ msgstr ""
 "wsteczną do %s"
 
 #. R/RClassUtils.R: gettextf("class %s may not have itself as a subclass: it contains class %s, with a circular relation back to %s",     dQuote(className), dQuote(exti@by), dQuote(className))
-#. R/tmp_RClassUtils.R: gettextf("class %s may not have itself as a subclass: it contains class %s, with a circular relation back to %s",     dQuote(className), dQuote(exti@by), dQuote(className))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "class %s may not have itself as a subclass: it contains class %s, with a "
 "circular relation back to %s"
@@ -1743,8 +1690,7 @@ msgstr ""
 "klasa %s nie została znaleziona w %s; 'resetClass' nie będzie miał efektu"
 
 #. R/RClassUtils.R: stop("class cannot have both an ordinary and hidden data type")
-#. R/tmp_RClassUtils.R: stop("class cannot have both an ordinary and hidden data type")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "class cannot have both an ordinary and hidden data type"
 msgstr "klasa nie może mieć jednocześnie zwykłego oraz ukrytego typu danych"
 
@@ -1783,8 +1729,7 @@ msgstr ""
 "przypisań pól (rekomendowany pakiet %s nie jest dostępny?)"
 
 #. R/RClassUtils.R: gettextf("conflicting definition of data part: .Data = %s, superclass implies %s",     dQuote(elNamed(properties, ".Data")), dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("conflicting definition of data part: .Data = %s, superclass implies %s",     dQuote(elNamed(properties, ".Data")), dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "conflicting definition of data part: .Data = %s, superclass implies %s"
 msgstr ""
 "sprzeczne definicje części danych: '.Data = %s', superklasa sugeruje %s"
@@ -1834,11 +1779,7 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("distance %d", eli@distance)
 #. R/RClassUtils.R: gettextf("distance %d", eli@distance)
 #. R/RClassUtils.R: gettextf("distance %d", eli@distance)
-#. R/tmp_RClassUtils.R: gettextf("distance %d", eli@distance)
-#. R/tmp_RClassUtils.R: gettextf("distance %d", eli@distance)
-#. R/tmp_RClassUtils.R: gettextf("distance %d", eli@distance)
-#. R/tmp_RClassUtils.R: gettextf("distance %d", eli@distance)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "distance %d"
 msgstr "odległość %d"
 
@@ -1993,8 +1934,7 @@ msgstr ""
 "(otrzymano obiekt klasy %s)"
 
 #. R/RClassUtils.R: gettextf("for function %s: %s", f, message)
-#. R/tmp_RClassUtils.R: gettextf("for function %s: %s", f, message)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "for function %s: %s"
 msgstr "dla funkcji %s: %s"
 
@@ -2056,8 +1996,7 @@ msgid "generic names differ: %s, %s"
 msgstr "ogólne nazwy różnią się: %s, %s"
 
 #. R/RClassUtils.R: gettext("get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "get rid of variables in definition %s (%s); they conflict with the needed "
 "change to argument names (%s)"
@@ -2111,8 +2050,7 @@ msgstr ""
 "w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
 
 #. R/RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "in constructing the prototype for class %s, slots in prototype and not in "
 "class: %s"
@@ -2121,8 +2059,7 @@ msgstr ""
 "w klasie: %s"
 
 #. R/RClassUtils.R: gettextf("in constructing the prototype for class %s: prototype has class %s, but the data part specifies class %s",     dQuote(className), dQuote(.class1(prototype)), dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("in constructing the prototype for class %s: prototype has class %s, but the data part specifies class %s",     dQuote(className), dQuote(.class1(prototype)), dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "in constructing the prototype for class %s: prototype has class %s, but the "
 "data part specifies class %s"
@@ -2131,8 +2068,7 @@ msgstr ""
 "dane określają klasę %s"
 
 #. R/RClassUtils.R: gettextf("in defining class %s, the supplied data part class, %s is not valid (must be a basic class or a virtual class combining basic classes)",     dQuote(name), dQuote(dataPartClass))
-#. R/tmp_RClassUtils.R: gettextf("in defining class %s, the supplied data part class, %s is not valid (must be a basic class or a virtual class combining basic classes)",     dQuote(name), dQuote(dataPartClass))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "in defining class %s, the supplied data part class, %s is not valid (must be "
 "a basic class or a virtual class combining basic classes)"
@@ -2142,8 +2078,7 @@ msgstr ""
 "klasy)"
 
 #. R/RClassUtils.R: gettextf("in definition of class %s, information for superclass %s is of class %s (expected \"SClassExtension\")",     dQuote(ClassDef@className), dQuote(what), dQuote(class(exti)))
-#. R/tmp_RClassUtils.R: gettextf("in definition of class %s, information for superclass %s is of class %s (expected \"SClassExtension\")",     dQuote(ClassDef@className), dQuote(what), dQuote(class(exti)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "in definition of class %s, information for superclass %s is of class %s "
 "(expected \"SClassExtension\")"
@@ -2152,8 +2087,7 @@ msgstr ""
 "'SClassExtension')"
 
 #. R/RClassUtils.R: gettext("in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "in making the prototype for class %s elements of the prototype failed to "
 "match the corresponding slot class: %s"
@@ -2185,8 +2119,7 @@ msgid "initializing class and method definitions ..."
 msgstr "inicjalizowanie definicji klasy oraz metody ..."
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
-#. R/tmp_RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "initializing objects from class %s with these arguments is not supported"
 msgstr ""
@@ -2479,13 +2412,12 @@ msgstr ""
 
 #. R/Defunct.R: stop("methods:::bind_activation() is defunct;\n rather provide methods for cbind2() / rbind2()")
 #: R/Defunct.R:0
-#, fuzzy
 msgid ""
 "methods:::bind_activation() is defunct;\n"
 " rather provide methods for cbind2() / rbind2()"
 msgstr ""
-"'methods:::bind_activation(TRUE)' jest przestarzałe;\n"
-"dostarcz metody dla  'cbind2()' / 'rbind2()'"
+"'methods:::bind_activation()' jest przestarzałe;\n"
+" dostarcz raczej metody dla cbind2() / rbind2()"
 
 #. R/RMethodUtils.R: gettextf("missing function for load action: %s", what)
 #: R/RMethodUtils.R:0
@@ -2509,8 +2441,7 @@ msgstr ""
 "funkcji %s"
 
 #. R/RClassUtils.R: gettextf("more than one possible class for the data part: using %s rather than %s",     .dQ(prevDataPartClass), .dQ(value))
-#. R/tmp_RClassUtils.R: gettextf("more than one possible class for the data part: using %s rather than %s",     .dQ(prevDataPartClass), .dQ(value))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "more than one possible class for the data part: using %s rather than %s"
 msgstr ""
 "więcej niż jedna możliwa klasa dla części danych: używanie %s zamiast %s"
@@ -2587,14 +2518,12 @@ msgid "need a definition for the method here"
 msgstr "potrzeba tutaj definicji dla metody"
 
 #. R/RClassUtils.R: gettextf("needed the supplied labels vector of length %d, got %d", length(nodes),     length(short))
-#. R/tmp_RClassUtils.R: gettextf("needed the supplied labels vector of length %d, got %d", length(nodes),     length(short))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "needed the supplied labels vector of length %d, got %d"
 msgstr "potrzebowano dostarczyć wektora etykiet o długości %d, otrzymano %d"
 
 #. R/RClassUtils.R: gettextf("no '.Data' slot defined for class %s", dQuote(class(object)))
-#. R/tmp_RClassUtils.R: gettextf("no '.Data' slot defined for class %s", dQuote(class(object)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "no '.Data' slot defined for class %s"
 msgstr "nie zdefiniowano gniazda '.Data' dla klasy %s"
 
@@ -2641,8 +2570,7 @@ msgid "no definition of class %s found"
 msgstr "nie znaleziono definicji klasy %s"
 
 #. R/RClassUtils.R: gettextf("no definition of inheritance from %s to %s, though the relation was implied by the setIs() from %s",     .dQ(what), .dQ(def2@className), .dQ(class))
-#. R/tmp_RClassUtils.R: gettextf("no definition of inheritance from %s to %s, though the relation was implied by the setIs() from %s",     .dQ(what), .dQ(def2@className), .dQ(class))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "no definition of inheritance from %s to %s, though the relation was implied "
 "by the setIs() from %s"
@@ -2651,8 +2579,7 @@ msgstr ""
 "zasugerowana przez 'setIs()' z %s"
 
 #. R/RClassUtils.R: gettextf("no definition was found for superclass %s in the specification of class %s",     dQuote(cl), dQuote(name))
-#. R/tmp_RClassUtils.R: gettextf("no definition was found for superclass %s in the specification of class %s",     dQuote(cl), dQuote(name))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "no definition was found for superclass %s in the specification of class %s"
 msgstr "nie znaleziono definicji dla superklasy %s w specyfikacji klasy %s"
@@ -2959,8 +2886,7 @@ msgid "package slots  differ: %s, %s"
 msgstr "gniazda pakietów różnią się: %s, %s"
 
 #. R/RClassUtils.R: gettext("potential cycle in class inheritance: %s has duplicates in superclasses and subclasses (%s)",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("potential cycle in class inheritance: %s has duplicates in superclasses and subclasses (%s)",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "potential cycle in class inheritance: %s has duplicates in superclasses and "
 "subclasses (%s)"
@@ -2978,8 +2904,7 @@ msgstr ""
 "funkcji"
 
 #. R/RClassUtils.R: warning("prototype is a list with named elements (could be ambiguous): better to use function 'prototype()' to avoid trouble.")
-#. R/tmp_RClassUtils.R: warning("prototype is a list with named elements (could be ambiguous): better to use function 'prototype()' to avoid trouble.")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "prototype is a list with named elements (could be ambiguous): better to use "
 "function 'prototype()' to avoid trouble."
@@ -3049,8 +2974,7 @@ msgid "skipping methods list element %s of unexpected class %s"
 msgstr "pomijanie elementów listy metod %s nieoczekiwanej klasy %s"
 
 #. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#. R/tmp_RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "slot %s in class %s currently defined (or inherited) as \"%s\", conflicts "
 "with an inherited definition in class %s"
@@ -3083,8 +3007,7 @@ msgstr ""
 "(używanie największej wartości)"
 
 #. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
-#. R/tmp_RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "subclass %s of class %s is not local and cannot be updated for new "
 "inheritance information; consider setClassUnion()"
@@ -3122,8 +3045,7 @@ msgstr ""
 "obiekt klasy %s"
 
 #. R/RClassUtils.R: gettextf("the '%s' list for class %s, includes an undefined class %s", if (superClassCase) "superClass" else "subClass",     dQuote(className), dQuote(.className(by)))
-#. R/tmp_RClassUtils.R: gettextf("the '%s' list for class %s, includes an undefined class %s", if (superClassCase) "superClass" else "subClass",     dQuote(className), dQuote(.className(by)))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "the '%s' list for class %s, includes an undefined class %s"
 msgstr "lista '%s' dla klasy %s, zawiera w sobie niezdefiniowaną klasę %s"
 
@@ -3324,8 +3246,7 @@ msgid "tracing the internal function %s is not allowed"
 msgstr "śledzenie wewnętrznej funkcji %s nie jest dozwolone"
 
 #. R/RClassUtils.R: gettextf("trying to assign an object of class %s as the definition of class %s: must supply a \"classRepresentation\" object",     dQuote(class(def)), dQuote(Class))
-#. R/tmp_RClassUtils.R: gettextf("trying to assign an object of class %s as the definition of class %s: must supply a \"classRepresentation\" object",     dQuote(class(def)), dQuote(Class))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "trying to assign an object of class %s as the definition of class %s: must "
 "supply a \"classRepresentation\" object"
@@ -3334,8 +3255,7 @@ msgstr ""
 "dostarczyć obiekt 'classRepresentation'"
 
 #. R/RClassUtils.R: gettext("trying to change the argument list of %s with %d arguments to have arguments (%s)",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("trying to change the argument list of %s with %d arguments to have arguments (%s)",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "trying to change the argument list of %s with %d arguments to have arguments "
 "(%s)"
@@ -3432,8 +3352,7 @@ msgid "unable to create union class: could not set members %s"
 msgstr "nie można utworzyć uni klas:  nie można ustawić członków %s"
 
 #. R/RClassUtils.R: gettext("unable to find a consistent ordering of superclasses for class %s: order chosen is inconsistent with the superclasses of %s",     domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("unable to find a consistent ordering of superclasses for class %s: order chosen is inconsistent with the superclasses of %s",     domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid ""
 "unable to find a consistent ordering of superclasses for class %s: order "
 "chosen is inconsistent with the superclasses of %s"
@@ -3442,8 +3361,7 @@ msgstr ""
 "porządek jest niespójny z superklasami %s"
 
 #. R/RClassUtils.R: gettextf("unable to find an environment containing class %s", dQuote(Class))
-#. R/tmp_RClassUtils.R: gettextf("unable to find an environment containing class %s", dQuote(Class))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "unable to find an environment containing class %s"
 msgstr "nie można znaleźć środowiska zawierającego klasę %s"
 
@@ -3453,8 +3371,7 @@ msgid "unable to find an inherited method for function %s for signature %s"
 msgstr "nie można znaleźć dziedziczonej metody dla funkcji %s dla sygnatury %s"
 
 #. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
-#. R/tmp_RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "unable to find required package %s"
 msgstr "nie można znaleźć wymaganego pakietu %s"
 
@@ -3474,14 +3391,12 @@ msgid "undefined classes (%s) will be ignored for argument %s"
 msgstr "niezdefiniowane klasy (%s) zostaną zignorowane dla argumentu %s"
 
 #. R/RClassUtils.R: gettext("undefined slot classes in definition of %s: %s", domain = "R-methods")
-#. R/tmp_RClassUtils.R: gettext("undefined slot classes in definition of %s: %s", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "undefined slot classes in definition of %s: %s"
 msgstr "niezdefiniowane gniazda klas w definicji %s: %s"
 
 #. R/RClassUtils.R: gettextf("undefined subclass %s of class %s; definition not updated", .dQ(what),     .dQ(def@className))
-#. R/tmp_RClassUtils.R: gettextf("undefined subclass %s of class %s; definition not updated", .dQ(what),     .dQ(def@className))
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "undefined subclass %s of class %s; definition not updated"
 msgstr ""
 "niezdefiniowana podklasa %s klasy %s; definicja nie została zaktualizowana"
@@ -3534,8 +3449,7 @@ msgid "use %s instead."
 msgstr "użyj wzamian %s."
 
 #. R/RClassUtils.R: gettextf("validity method for class \"%s\"", Class)
-#. R/tmp_RClassUtils.R: gettextf("validity method for class \"%s\"", Class)
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "validity method for class \"%s\""
 msgstr "metoda walidacji dla klasy \"%s\""
 
@@ -3681,8 +3595,7 @@ msgstr[2] ""
 "   w pakiecie %s dla %s"
 
 #. R/RClassUtils.R: ngettext(sum(is.na(match(pnames, slots))), "named elements of prototype do not correspond to slot name: %s",     "named elements of prototype do not correspond to slot names: %s", domain = "R-methods")
-#. R/tmp_RClassUtils.R: ngettext(sum(is.na(match(pnames, slots))), "named elements of prototype do not correspond to slot name: %s",     "named elements of prototype do not correspond to slot names: %s", domain = "R-methods")
-#: R/RClassUtils.R:0 R/tmp_RClassUtils.R:0
+#: R/RClassUtils.R:0
 msgid "named elements of prototype do not correspond to slot name: %s"
 msgid_plural "named elements of prototype do not correspond to slot names: %s"
 msgstr[0] "nazwane elementy prototypu nie odnoszą się do nazwy gniazda: %s"

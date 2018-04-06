@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:46\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: 2015-01-17 15:38+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -111,12 +111,6 @@ msgstr "Längen von 'x' und 'y' müssen gleich sein"
 msgid "lengths of 'x' and 'y' must match"
 msgstr "Längen von 'x' und 'y' müssen übereinstimmen"
 
-#. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
-#: R/splineClasses.R:0
-#, fuzzy
-msgid "must have at least 'ord'=%d points"
-msgstr "muss zumindest 'ord' Knoten haben"
-
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -171,6 +165,14 @@ msgid "at least '%s' (=%d) knots is needed"
 msgid_plural "at least '%s' (=%d) knots are needed"
 msgstr[0] "brauche mindestens 2*ord -1 (=%d) Knoten"
 msgstr[1] "brauche mindestens 2*ord -1 (=%d) Knoten"
+
+#. R/splineClasses.R: ngettext(ord, "at least 'ord'=%d point is required", "at least 'ord'=%d points are required",     domain = "R-splines")
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "at least 'ord'=%d point is required"
+msgid_plural "at least 'ord'=%d points are required"
+msgstr[0] "muss zumindest 'ord' Knoten haben"
+msgstr[1] "muss zumindest 'ord' Knoten haben"
 
 #~ msgid "'ord' must be >= 2"
 #~ msgstr "'ord' muss >=2 sein"

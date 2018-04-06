@@ -687,7 +687,7 @@ SEXP mc_send_master(SEXP what)
     R_xlen_t len = XLENGTH(what);
     unsigned char *b = RAW(what);
 #ifdef MC_DEBUG
-    Dprintf(_("child %d: send_master (%lld bytes)\n"), getpid(), len);
+    Dprintf(n_(len, "child %d: send_master (%lld byte)\n", "child %d: send_master (%lld bytes)\n"), getpid(), len);
 #endif
     if (writerep(master_fd, &len, sizeof(len)) != sizeof(len)) {
 	close(master_fd);

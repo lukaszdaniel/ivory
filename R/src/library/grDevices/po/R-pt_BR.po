@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-05-26 22:11\n"
+"POT-Creation-Date: 2018-04-06 18:23\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -420,6 +420,11 @@ msgstr "codificação da fone não corresponde '%s'/'%s'"
 #: R/calc.R:0
 msgid "increasing 'x' and 'y' values expected"
 msgstr "valores de 'x' e 'y' crescente esperados"
+
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr ""
 
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
