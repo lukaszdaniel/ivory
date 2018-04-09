@@ -1230,8 +1230,17 @@ if(FALSE) {
                 opts <- paste(if(deps_only) "--vanilla" else "--no-save",
                               "--slave")
                 out <- R_runR(cmd, opts, env = env, timeout = tlim)
-                if(length(out))
+                if(length(out)) {
                     cat(paste(c(out, ""), collapse = "\n"))
+                    if(config_val_to_logical(Sys.getenv("_KH_DEBUG_TEST_LOAD_PROBLEM_",
+                                                        "FALSE")))
+                        writeLines(c(sprintf("lib0: %s",
+                                             paste(lib0, collapse = " ")),
+                                     sprintf("lib: %s",
+                                             paste(lib, collapse = " ")),
+                                     sprintf("env: %s",
+                                             paste(env, collapse = " "))))
+                }
                 if(length(attr(out, "status")))
                     errmsg(gettext("ERROR: loading failed")) # does not return
             }
@@ -1834,17 +1843,20 @@ if(FALSE) {
             cxxstd <- gsub(" *", "", cxxstd)
             if (cxxstd == "CXX17") {
                 use_cxx17 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX14") {
                 use_cxx14 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX11") {
                 use_cxx11 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
+                with_cxx <- TRUE
             }
-            with_cxx <- TRUE
         }
     } else if (file.exists("Makevars")) {
         makefiles <- c("Makevars", makefiles)
@@ -1857,17 +1869,20 @@ if(FALSE) {
             cxxstd <- gsub(" *", "", cxxstd)
             if (cxxstd == "CXX17") {
                 use_cxx17 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX14") {
                 use_cxx14 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX11") {
                 use_cxx11 <- TRUE
+                with_cxx <- TRUE
             }
             else if (cxxstd == "CXX98") {
                 use_cxx98 <- TRUE
+                with_cxx <- TRUE
             }
-            with_cxx <- TRUE
         }
     }
     if (!use_cxx11 && !use_cxx14 && !use_cxx17 && !use_cxx98) {
@@ -1902,7 +1917,6 @@ if(FALSE) {
                 use_cxx98 <- TRUE
             }
         }
-        with_cxx <- TRUE
     }
 
     if (with_cxx) {

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-06 r1021) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-06 r74545) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6348,7 +6348,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55f1738>
+<bytecode: 0x576c238>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6359,7 +6359,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55f1738>
+<bytecode: 0x576c238>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6371,7 +6371,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55f1738>
+<bytecode: 0x576c238>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6393,15 +6393,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")= 'srcref' integer [1:8] 1 19 1 63 19 63 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x562dac8> 
+  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x57a85c8> 
 > f
 function ()  
  - attr(*, "srcref")= 'srcref' integer [1:8] 1 17 1 28 17 28 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5626ee8> 
+  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x57a19e8> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")= 'srcref' integer [1:8] 2 24 2 48 24 48 2 2
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5626ee8> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x57a19e8> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7713,7 +7713,7 @@ a + b < c + d
 > quote(`!`(a < b))
 !a < b
 > quote(`<`(!b, !d))
-(!b) < (!d)
+(!b) < !d
 > quote(`&`(!b, !d))
 !b & !d
 > quote(`!`(a & b))
@@ -7752,6 +7752,21 @@ b = `?`(d)
 > dput(a)
 list(one = 1, two = )
 > ## deparsed two to quote()
+> 
+> ## Deparsing of repeated unary operators; the first 3 were "always" ok:
+> quote(~~x)
+~~x
+> quote(++x)
+++x
+> quote(--x)
+--x
+> quote(!!x) # was `!(!x)`
+!!x
+> quote(??x) # Suboptimal
+`?`(`?`(x))
+> quote(~+-!?x) # ditto: ....`?`(x)
+~+-!`?`(x)
+> ## `!` no longer produces parentheses now
 > 
 > 
 > ## summary.data.frame() with NAs in columns of class "Date" -- PR#16709

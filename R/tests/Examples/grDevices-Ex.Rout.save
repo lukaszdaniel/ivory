@@ -2595,6 +2595,9 @@ List of 18 components
 > ### ** Examples
 > 
 > require(graphics)
+> ## Don't show: 
+> oldwd <- setwd(tempdir())
+> ## End (Don't show)
 > 
 > pictex()
 > plot(1:11, (-5:5)^2, type = "b", main = "Simple Example Plot")
@@ -2618,6 +2621,9 @@ pdf
 > ## End (Don't run)
 > ##--------------------
 > unlink("Rplots.tex")
+> ## Don't show: 
+> setwd(oldwd)
+> ## End (Don't show)
 > 
 > 
 > 
