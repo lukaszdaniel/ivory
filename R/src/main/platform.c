@@ -2316,10 +2316,21 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	wsprintfW(dest, L"%ls%ls", to, name);
 	/* We could set the mode (only the 200 part matters) later */
 	res = _wmkdir(dest);
-	if (res && errno != EEXIST) {
-	    warning(_("problem with creating directory %ls: %s"),
-		    dest, strerror(errno));
-	    return 1;
+	if (res) {
+	    if (errno == EEXIST) {
+		struct _stati64 dsb;
+		if (over && _wstati64(dest, &dsb) == 0 &&
+		   (dsb.st_mode & S_IFDIR) == 0) {
+
+		    warning(_("cannot overwrite non-directory %ls with directory %ls"),
+		            dest, this);
+		    return 1;
+		}
+	    } else {
+		warning(_("problem with creating directory %ls: %s"),
+		          dest, strerror(errno));
+		return 1;
+	    }
 	}
 	// NB Windows' mkdir appears to require \ not /.
 	if ((dir = _wopendir(this)) != NULL) {
@@ -2557,9 +2568,21 @@ static int do_copy(const char* from, const char* name, const char* to,
 	   we will fail to create files in that directory, so defer
 	   setting mode */
 	res = mkdir(dest, 0700);
-	if (res && errno != EEXIST) {
-	    warning(_("problem with creating directory %s: %s"), this, strerror(errno));
-	    return 1;
+	if (res) {
+	    if (errno == EEXIST) {
+		struct stat dsb;
+		if (over && stat(dest, &dsb) == 0 &&
+		   (dsb.st_mode & S_IFDIR) == 0) {
+
+		    warning(_("cannot overwrite non-directory %s with directory %s"),
+		            dest, this);
+		    return 1;
+		}
+	    } else {
+		warning(_("problem with creating directory %s: %s"),
+		        this, strerror(errno));
+		return 1;
+	    }
 	}
 	strcat(dest, "/");
 	if ((dir = opendir(this)) != NULL) {
@@ -2903,7 +2926,7 @@ do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *fn;
     double ftime;
     int res;
-    R_xlen_t i, n, m;
+    R_xlen_t n, m;
     SEXP paths, times, ans;
     const void *vmax;
 

@@ -154,9 +154,8 @@ stopifnot(
 ### Checking parse(* deparse()) "inversion property" ----------------------------
 ## EPD := eval-parse-deparse :  eval(text = parse(deparse(*)))
 ## Hopefully typically the identity():
-pd0 <- function(expr, backtick = TRUE,
-                control = c("keepInteger","showAttributes","keepNA"), ...)
-    parse(text = deparse(expr, backtick=backtick, control=control, ...))
+pd0 <- function(expr, backtick = TRUE, ...)
+    parse(text = deparse(expr, backtick=backtick, ...))
 id_epd <- function(expr, control = c("all","digits17"), ...)
     eval(pd0(expr, control=control, ...))
 dPut <- function(x, control = c("all","digits17")) dput(x, control=control)
@@ -190,6 +189,8 @@ hasMissObj <- function(obj) {
     } else isMissObj(obj)
 }
 check_EPD <- function(obj, show = !hasReal(obj),
+                      ## FIXME: add  "niceNames" here:   ?!?
+                      control = c("keepInteger","showAttributes","keepNA"),
                       eq.tol = if(.Machine$sizeof.longdouble <= 8) # no long-double
                                    2*.Machine$double.eps else 0) {
     if(show) dPut(obj)
@@ -199,9 +200,9 @@ check_EPD <- function(obj, show = !hasReal(obj),
         return(invisible(obj)) # cannot parse it
     }
     ob2 <- id_epd(obj)
-    po <- tryCatch(pd0(obj),# the default deparse() *should* typically parse
+    po <- tryCatch(pd0(obj, control=control),# the default deparse() *should* typically parse
                    error = function(e) {
-                       cat("default deparse() was not parse():\n  ",
+                       cat("default parse(*, deparse(obj)) failed:\n  ",
                            conditionMessage(e),
                            "\n  but deparse(*, control='all') should work.\n")
                        pd0(obj, control = "all") })
@@ -215,11 +216,11 @@ check_EPD <- function(obj, show = !hasReal(obj),
         if(!isTRUE(ae)) stop("Not equal: ", ae.txt, " giving\n", ae)
     }
     if(!is.language(obj)) {
-	ob2. <- eval(pd0) ## almost always *NOT* identical to obj, but eval()ed
+	ob2. <- eval(obj) ## almost always *NOT* identical to obj, but eval()ed
     }
     if(show || !is.list(obj)) { ## check it works when wrapped (but do not recurse inf.!)
         cat(" --> checking list(*): ")
-        check_EPD(list(.chk = obj), show = FALSE)
+        check_EPD(list(.chk = obj), show = FALSE, eq.tol=eq.tol)
         cat("Ok\n")
     }
     invisible(obj)
@@ -228,7 +229,15 @@ check_EPD <- function(obj, show = !hasReal(obj),
 library(stats)
 ## some more "critical" cases
 nmdExp <- expression(e1 = sin(pi), e2 = cos(-pi))
-xn <- setNames(pi^(1:3), paste0("pi^",1:3))
+xn <- setNames(3.5^(1:3), paste0("3½^",1:3)) # 3.5: so have 'show'
+## "" in names :
+x0 <- xn; names(x0)[2] <- ""
+en0  <- setNames(0L, "")
+en12 <- setNames(1:2, c("",""))
+en24 <- setNames(2:4, c("two","","vier"))
+enx0  <- `storage.mode<-`(en0, "double")
+enx12 <- `storage.mode<-`(en12,"double")
+enx24 <- `storage.mode<-`(en24,"double")
 L1 <- list(c(A="Txt"))
 L2 <- list(el = c(A=2.5))
 ## "m:n" named integers and _inside list_

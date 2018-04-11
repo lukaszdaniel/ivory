@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-11 17:01\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2057,6 +2057,11 @@ msgstr "finn ikkje namnerom-omgjevnad"
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
 msgstr "kan ikkje importera til eit forsegla namnerom"
+
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr ""
 
 #. R/sink.R: stop("cannot split the message connection")
 #: R/sink.R:0

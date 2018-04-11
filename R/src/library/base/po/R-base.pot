@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-11 17:01\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2462,6 +2462,13 @@ msgstr ""
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 
 msgid "cannot import into a sealed namespace"
+msgstr ""
+
+
+#: R/files.R: 0
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+
+msgid "cannot overwrite a non-directory with a directory"
 msgstr ""
 
 

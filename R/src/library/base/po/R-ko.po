@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-11 17:01\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2066,6 +2066,11 @@ msgstr "네이스페이스 환경을 찾을 수 없습니다 "
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
 msgstr "cannot import into a sealed namespace"
+
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr ""
 
 #. R/sink.R: stop("cannot split the message connection")
 #: R/sink.R:0

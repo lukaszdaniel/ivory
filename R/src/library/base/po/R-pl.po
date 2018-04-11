@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-11 17:01\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1941,6 +1941,11 @@ msgstr "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
 msgstr "nie można zaimportować do zamkniętej przestrzeni nazw"
+
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr ""
 
 #. R/sink.R: stop("cannot split the message connection")
 #: R/sink.R:0

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-09 r1022) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-09 r74565) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -122,8 +122,8 @@ List of 2 components
 +     "\n\t starting with 'is.' :\t  ",
 +     sum(grepl("^is\\.", ls.base[base.is.f])), "\n", sep = "")
 
-Number of base objects:		1336
-Number of functions in base:	1292
+Number of base objects:		1338
+Number of functions in base:	1294
 	 starting with 'is.' :	  50
 
 > ## 0.14  : 31
@@ -1513,5 +1513,5 @@ sm     3    3    3    3    4    4    4    4    2     2     2
 > par(op)
 > 
 > cat("Time elapsed: ", proc.time() - .ptime, "\n")
-Time elapsed:  1.236 0.06 1.296 0 0 
+Time elapsed:  1.245 0.04 1.285 0 0 
 > 

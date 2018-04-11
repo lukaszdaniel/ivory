@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-09 r1022) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-09 r74565) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3819,7 +3819,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x32b0ae8>
+<environment: 0x59a1290>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4817,7 +4817,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x4e85d98>
+<bytecode: 0x6876790>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7398,7 +7398,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x62cc588>
+<environment: 0x615dab0>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12049,14 +12049,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x5241f20>
-<environment: 0x51f11a8>
+<bytecode: 0x4018660>
+<environment: 0x400fc50>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x5245340>
-<environment: 0x51f11a8>
+<bytecode: 0x4014980>
+<environment: 0x400fc50>
 
 > 
 > 
@@ -12210,7 +12210,7 @@ NOTE: n is number in *each* group
 +  power.prop.test(n=30, p1=0.90, p2=NULL, power=0.8)
 + ) # a warning  (which may become an error)
 Warning in command 'power.prop.test(n = 30, p1 = 0.9, p2 = NULL, power = 0.8)':
-  No p2 in in [p1, 1] can be found to achieve the desired power
+  No p2 in [p1, 1] can be found to achieve the desired power
 
      Two-sample comparison of proportions power calculation 
 
@@ -16166,8 +16166,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x5e77c80>
-<environment: 0x5d6a8c0>
+<bytecode: 0x389fa30>
+<environment: 0x28be190>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18492,7 +18492,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.302 0.095 4.397 0 0 
+Time elapsed:  4.694 0.1 4.797 0 0 
 > grDevices::dev.off()
 null device 
           1 
