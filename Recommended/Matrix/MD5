@@ -126,7 +126,7 @@ f64681e48c222aad57f4d43cad34d68d *vignettes/Matrix.bib
 c39a26dfe7ccaafd044e88468155b153 *vignettes/Introduction.Rnw
 5a9e99ce004c325e01fb2773e58052f5 *vignettes/Design-issues.Rnw
 675a3a48a357cb2ee05ed285387b3e85 *ChangeLog
-7604498fb09b4677c694fdf557cb5b92 *DESCRIPTION
+018eabdb29e8271407ca0befb0d3f42c *DESCRIPTION
 d16b17a760fd2798a95f9441c0b418f4 *po/R-fr.po
 321696249e1d688267bc8200230edb75 *po/R-ko.po
 27ef72cd0db862d0c1d27744208360e7 *po/R-de.po
@@ -143,7 +143,7 @@ baba25fe386d2687a8ac59131753d644 *po/pl.po
 384ad19fd9e35dfa867ff36dc6d502f4 *inst/test-tools.R
 ac3697580885d17a062ce39df01338ad *inst/Doxyfile
 9058fc5e4ffde0cb2066517ce4e050b5 *inst/test-tools-Matrix.R
-a5e4dc74427d21a8a825688e53c5d0bd *inst/NEWS.Rd
+1b0008766e40f239b33c8ed47a732c14 *inst/NEWS.Rd
 7d0229775bc2b318696739a4600cd15e *inst/test-tools-1.R
 599946ccc3c785072deb526531c04bff *inst/po/fr/LC_MESSAGES/Matrix.mo
 eb28b9eac0972030205a0c7968ee61fd *inst/po/fr/LC_MESSAGES/R-Matrix.mo
@@ -155,7 +155,7 @@ d7ddf54f0c4231c3b7a37a5a25c2c3f3 *inst/po/pl/LC_MESSAGES/Matrix.mo
 09deb0ce8c73b0c2ad0e4fdb6173b430 *inst/po/pl/LC_MESSAGES/R-Matrix.mo
 a9e8caf785c0703ee6b8155d62c725f9 *inst/po/ko/LC_MESSAGES/R-Matrix.mo
 8734f0b040c6292983d273d4251d250a *inst/Copyrights
-2f2c46d446b293ee9190573208ca4e6b *inst/doc/sparseModels.pdf
+d989d2a346a4e0ed5559cc37e5b07cb4 *inst/doc/sparseModels.pdf
 4ceb56a218c4998ee8f0084f5eb304ea *inst/doc/Intro2Matrix.R
 3624c7aab2acb44a263183a32df20eaf *inst/doc/Introduction.R
 09e13507b9832a30aa92e8aff0dc96a0 *inst/doc/Comparisons.Rnw
@@ -167,15 +167,15 @@ d75882d4bb768ba0ea352291652daaee *inst/doc/SuiteSparse/SPQR.txt
 7d60c8defc517d361513bac03d04f13b *inst/doc/SuiteSparse/AMD.txt
 e4f8cd28fc8be8ab14106630610b9c5f *inst/doc/SuiteSparse/CHOLMOD.txt
 a6d6903590a8f5ac036fdeb74b48bb89 *inst/doc/Intro2Matrix.Rnw
-6b8feb98697f5c813c5ab15df415b9f9 *inst/doc/Intro2Matrix.pdf
+0c71dc0cf55eb90ce1fac0569a136746 *inst/doc/Intro2Matrix.pdf
 491d961ca64f8da569c817b82daa9c58 *inst/doc/sparseModels.Rnw
 5b8b2e70f679fe0012c94923a23a22c0 *inst/doc/Design-issues.R
 944ed87e923b7be559a627e7bfbe7c92 *inst/doc/sparseModels.R
-acf795668ec9cba72a2e6cbf0c928a93 *inst/doc/Comparisons.pdf
-91568e80716868b2c78e10c51aac84fd *inst/doc/Introduction.pdf
+aca9011dbb00c0cf3135df995f4e2c6f *inst/doc/Comparisons.pdf
+98ac055df45aec824ba9e35f376633dc *inst/doc/Introduction.pdf
 c39a26dfe7ccaafd044e88468155b153 *inst/doc/Introduction.Rnw
 5a9e99ce004c325e01fb2773e58052f5 *inst/doc/Design-issues.Rnw
-34154ece59f39b290a0125270fec0730 *inst/doc/Design-issues.pdf
+8a7f346001a7a0021d2cab0c67972c45 *inst/doc/Design-issues.pdf
 652448c1978aa657f604a5bb1cb42644 *inst/doc/Comparisons.R
 8758e19cf3478732e62e563b638bcda7 *inst/external/symA.rda
 47bc35200e7b3fc1cdd6ab1adbeef3a0 *inst/external/lund_a.mtx
@@ -313,7 +313,7 @@ b56b67fa4e3e8bc168f5ad98d27f207a *src/COLAMD/Source/Makefile
 561ff6512783cc2af5b343ff3630267d *src/COLAMD/Source/colamd.c
 82847c501924d1d70e7cd8c89d3d3b7e *src/dgeMatrix.c
 4cb570fdeeab6cd03ba14db58efeddce *src/dppMatrix.h
-2e8eb33655e5b48e5838f691dd555f8c *src/dgCMatrix.c
+557a437ec1d93bf5c8f32f2a417e6446 *src/dgCMatrix.c
 30dc9cebc72c3cab2862a1f04209874e *src/CHMfactor.h
 ff586155b86948cc5b4eec822b8670e2 *src/SuiteSparse_config/SuiteSparse_config.h
 d41d8cd98f00b204e9800998ecf8427e *src/SuiteSparse_config/SuiteSparse_config.mk
@@ -476,4 +476,4 @@ ea6bdd1b33f38c8c2913eeef6eb21be3 *src/abIndex.h
 0eab9c4475b8630bb8f2a3ebb782530e *src/dtCMatrix.h
 dadce6c58bc388ff5f6501f4c3cafab1 *src/dsCMatrix.h
 5dfee1d8667f9553469dea08cec731e6 *src/TMatrix_as.c
-f3cd97000e2d21697cd22671aae2cad6 *build/vignette.rds
+05eb695efd305c4aa1555dc731f59dfc *build/vignette.rds

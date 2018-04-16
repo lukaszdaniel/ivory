@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-04-09 r1022) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-11 r1023) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-04-09 r74565) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-11 r74580) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6348,7 +6348,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5f719f0>
+<bytecode: 0x54abe90>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6359,7 +6359,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5f719f0>
+<bytecode: 0x54abe90>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6371,7 +6371,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5f719f0>
+<bytecode: 0x54abe90>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6393,15 +6393,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")= 'srcref' integer [1:8] 1 19 1 63 19 63 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5fada00> 
+  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x54e8220> 
 > f
 function ()  
  - attr(*, "srcref")= 'srcref' integer [1:8] 1 17 1 28 17 28 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5fa3370> 
+  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x54e1640> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")= 'srcref' integer [1:8] 2 24 2 48 24 48 2 2
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x5fa3370> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x54e1640> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 

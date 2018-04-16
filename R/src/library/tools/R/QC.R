@@ -7420,8 +7420,8 @@ function(x, ...)
                 gettext("The Title field starts with the package name.", domain = "R-tools")
             },
             if(length(y <- x$title_case)) {
-                paste(c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"),
-                        sQuote(y)),
+                paste(gettextf("The Title field should be in title case. Current version is: %s In title case that is: %s",
+                        sQuote(y[1L]), sQuote(y[2L]), domain = "R-tools"),
                       collapse = "\n")
             })),
       fmt(c(if(length(x$descr_bad_initial)) {

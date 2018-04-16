@@ -21,14 +21,17 @@
       when \code{r} has been \dQuote{reproduced} from serialization,
       typically after saving to and reading from an RDS file.
 
-      \item \code{substr()} and \code{substring()} now signal error when
-      the input is invalid UTF-8.
+      \item \code{substr()} and \code{substring()} now signal an error
+      when the input is invalid UTF-8.
 
-      \item \code{file.copy()} now works also when its argument \code{to} is
-      of length greater than one.
+      \item \code{file.copy()} now works also when its argument \code{to}
+      is of length greater than one.
 
       \item \code{mantelhaen.test()} no longer suffers from integer
       overflow in largish cases, thanks to Ben Bolker's \PR{17383}.
+
+      \item \code{dput()} and \code{dump()} are no longer truncating
+      when \code{options(deparse.max.lines = *)} is set.
     }
   }
 
@@ -401,6 +404,19 @@
       \item \code{matplot(.., panel.first = .)} etc now work, as
       \code{log} becomes explicit argument and \code{...} is passed to
       \code{plot()} unevaluated, as suggested by Sebastian Meyer in \PR{17386}.
+
+      \item Interrupts can be suspended while evaluating an expression
+      using \code{suspendInterrupts}.  Subexpression can be evaluated
+      with interrupts enabled using \code{allowInterrupts}.  These
+      functions can be used to make sure cleanup handlers cannot be
+      interrupted.
+
+      \item \R 3.5.0 includes a framework that allows packages to
+      provide alternate representations of basic \R objects
+      (\code{ALTREP}).  The framework is still experimental and may
+      undergo changes in future \R releases as more experience is
+      gained. For now, documentation is provided in
+      \url{https://svn.r-project.org/R/branches/ALTREP/ALTREP.html}.
     }
   }
 
@@ -657,7 +673,7 @@
       \code{NA}.  (Thanks to Suharto Anggono's patches in \PR{17280}).
 
       \item The \code{duplicated()} method for data frames is now based
-      on \code{list}s (instead of string coercion).  Consequently
+      on the \code{list} method (instead of string coercion).  Consequently
       \code{unique()} is better distinguishing data frame rows, fixing
       \PR{17369} and \PR{17381}.  The methods for matrices and arrays
       are changed accordingly.
