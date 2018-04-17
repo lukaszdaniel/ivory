@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-11 17:01+0200\n"
+"POT-Creation-Date: 2018-04-16 18:45+0200\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -617,7 +617,7 @@ msgstr ""
 #: src/main/context.c:656 src/main/datetime.c:780 src/main/datetime.c:869
 #: src/main/datetime.c:872 src/main/datetime.c:876 src/main/datetime.c:1047
 #: src/main/datetime.c:1049 src/main/datetime.c:1254 src/main/debug.c:245
-#: src/main/deparse.c:427 src/main/dotcode.c:479 src/main/dotcode.c:483
+#: src/main/deparse.c:439 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:326 src/main/dounzip.c:333
 #: src/main/dounzip.c:343 src/main/dounzip.c:348 src/main/dounzip.c:352
 #: src/main/dounzip.c:356 src/main/envir.c:1852 src/main/envir.c:1855
@@ -1948,7 +1948,7 @@ msgstr ""
 #: src/main/connections.c:4318 src/main/connections.c:4352
 #: src/main/connections.c:4733 src/main/connections.c:4803
 #: src/main/connections.c:5017 src/main/connections.c:5021
-#: src/main/connections.c:5451 src/main/deparse.c:392 src/main/deparse.c:478
+#: src/main/connections.c:5451 src/main/deparse.c:404 src/main/deparse.c:490
 #: src/main/serialize.c:2336
 msgid "cannot write to this connection"
 msgstr ""
@@ -2543,7 +2543,7 @@ msgstr ""
 #: src/main/connections.c:4080 src/main/connections.c:4345
 #: src/main/connections.c:4676 src/main/connections.c:4796
 #: src/main/connections.c:5013 src/main/connections.c:5432 src/main/dcf.c:94
-#: src/main/deparse.c:384 src/main/deparse.c:470 src/main/saveload.c:2301
+#: src/main/deparse.c:396 src/main/deparse.c:482 src/main/saveload.c:2301
 #: src/main/saveload.c:2386 src/main/scan.c:933 src/main/serialize.c:2507
 #: src/main/serialize.c:2556 src/main/source.c:268
 msgid "cannot open the connection"
@@ -3287,58 +3287,58 @@ msgstr ""
 msgid "R was not compiled with support for memory profiling"
 msgstr ""
 
-#: src/main/deparse.c:175
+#: src/main/deparse.c:176
 #, c-format
 msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr ""
 
-#: src/main/deparse.c:277
+#: src/main/deparse.c:293
 msgid "deparse may be incomplete"
 msgstr ""
 
-#: src/main/deparse.c:280
+#: src/main/deparse.c:296
 msgid ""
 "deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr ""
 
-#: src/main/deparse.c:374
+#: src/main/deparse.c:386
 #, c-format
 msgid "'%s' argument must be a character string or connection"
 msgstr ""
 
-#: src/main/deparse.c:398 src/main/deparse.c:494 src/main/deparse.c:500
+#: src/main/deparse.c:410 src/main/deparse.c:506 src/main/deparse.c:512
 msgid "wrote too few characters"
 msgstr ""
 
-#: src/main/deparse.c:419 src/main/source.c:204
+#: src/main/deparse.c:431 src/main/source.c:204
 #, c-format
 msgid "'%s' must be a character string or connection"
 msgstr ""
 
-#: src/main/deparse.c:421
+#: src/main/deparse.c:433
 msgid "character arguments expected"
 msgstr ""
 
-#: src/main/deparse.c:424
+#: src/main/deparse.c:436
 msgid "zero-length argument"
 msgstr ""
 
-#: src/main/deparse.c:431
+#: src/main/deparse.c:443
 msgid "'opts' argument should be small non-negative integer"
 msgstr ""
 
-#: src/main/deparse.c:441 src/main/envir.c:1998 src/main/envir.c:2083
+#: src/main/deparse.c:453 src/main/envir.c:1998 src/main/envir.c:2083
 #: src/main/eval.c:630 src/main/eval.c:1949 src/main/eval.c:4978
 #: src/main/saveload.c:2017 src/main/saveload.c:2347 src/main/serialize.c:3067
 #, c-format
 msgid "object '%s' was not found"
 msgstr ""
 
-#: src/main/deparse.c:1465
+#: src/main/deparse.c:1477
 msgid "'S4SXP': should not happen - please report"
 msgstr ""
 
-#: src/main/deparse.c:1846
+#: src/main/deparse.c:1858
 msgid "badly formed function expression"
 msgstr ""
 

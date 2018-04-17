@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-16 18:46\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -3559,10 +3559,11 @@ msgstr ""
 msgid "The Title field is just the package name: provide a real title."
 msgstr ""
 
-#. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
+#. R/QC.R: gettextf("The Title field should be in title case. Current version is: %s In title case that is: %s",     sQuote(y[1L]), sQuote(y[2L]), domain = "R-tools")
 #: R/QC.R:0
 msgid ""
-"The Title field should be in title case, current version then in title case:"
+"The Title field should be in title case. Current version is: %s In title "
+"case that is: %s"
 msgstr ""
 
 #. R/QC.R: gettext("The Title field starts with the package name.", domain = "R-tools")

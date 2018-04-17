@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2015 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -8,252 +8,277 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-24 11:52\n"
-"PO-Revision-Date: 2018-04-07 01:19-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-02 20:35+0200\n"
+"PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
-#: io.c:324 io.c:328 io.c:338 io.c:569 io.c:769 io.c:822 io.c:834 io.c:838
-#: io.c:844 io.c:845 io.c:1068 io.c:1069 io.c:1071 io.c:1072 io.c:1073
-#: io.c:1074 io.c:1075 io.c:1076 stubs.c:47 stubs.c:67 windows/dialogs.c:169
+#: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:832 io.c:836
+#: io.c:842 io.c:843 io.c:1089 io.c:1090 io.c:1092 io.c:1093 io.c:1094
+#: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:111 windows/widgets.c:78
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
 #: windows/widgets.c:81 windows/widgets.c:86
 #, c-format
 msgid "invalid '%s' argument"
-msgstr "неправильный аргумент '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ '%s'"
 
-#: io.c:347 io.c:831
+#: io.c:344 io.c:829
 msgid "invalid quote symbol set"
-msgstr "неправильная установка символа кавычек"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я┐я│я┌п╟п╫п╬п╡п╨п╟ я│п╦п╪п╡п╬п╩п╟ п╨п╟п╡я▀я┤п╣п╨"
 
-#: io.c:359 io.c:854 io.c:1056
+#: io.c:356 io.c:852 io.c:1077
 msgid "cannot open the connection"
-msgstr "не могу открыть соединение"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
-#: io.c:362 io.c:366
+#: io.c:359 io.c:363
 msgid "cannot read from this connection"
-msgstr "не могу прочитать из соединения"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©я─п╬я┤п╦я┌п╟я┌я▄ п╦п╥ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐"
 
-#: io.c:413 io.c:431
+#: io.c:410 io.c:428
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
-msgstr "закавыченная подстрока строки %d заканчивается EOF"
+msgstr "п╥п╟п╨п╟п╡я▀я┤п╣п╫п╫п╟я▐ п©п╬п╢я│я┌я─п╬п╨п╟ я│я┌я─п╬п╨п╦ %d п╥п╟п╨п╟п╫я┤п╦п╡п╟п╣я┌я│я▐ EOF"
 
-#: io.c:565
+#: io.c:562
 msgid "the first argument must be of mode character"
-msgstr "первый аргумент должен быть текстовым"
+msgstr "п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪"
 
-#: io.c:595
+#: io.c:592
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
-msgstr "неправильная строка 'numerals': \"%s\""
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ 'numerals': \"%s\""
 
-#: io.c:771
+#: io.c:768
 #, c-format
 msgid "Selection: "
-msgstr "Выбор:"
+msgstr "п▓я▀п╠п╬я─:"
 
-#: io.c:863 io.c:877
+#: io.c:862 io.c:878
 msgid "cannot allocate buffer in 'readTableHead'"
-msgstr "не могу разместить буфер в 'readTableHead'"
+msgstr "п╫п╣ п╪п╬пЁя┐ я─п╟п╥п╪п╣я│я┌п╦я┌я▄ п╠я┐я└п╣я─ п╡ 'readTableHead'"
 
-#: io.c:888
+#: io.c:892
 msgid "\\ followed by EOF"
-msgstr "\\ завершается EOF"
+msgstr "\\ п╥п╟п╡п╣я─я┬п╟п╣я┌я│я▐ EOF"
 
-#: io.c:937 io.c:940
+#: io.c:931
+#, c-format
+msgid "line %d appears to contain embedded nulls"
+msgstr ""
+
+#: io.c:945 io.c:950
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
-msgstr "readTableHeader нашел неполную последнюю строку в '%s'"
+msgstr "readTableHeader п╫п╟я┬п╣п╩ п╫п╣п©п╬п╩п╫я┐я▌ п©п╬я│п╩п╣п╢п╫я▌я▌ я│я┌я─п╬п╨я┐ п╡ '%s'"
 
-#: io.c:997
+#: io.c:1008
 msgid "index out of range"
-msgstr "индекс вне пределов"
+msgstr "п╦п╫п╢п╣п╨я│ п╡п╫п╣ п©я─п╣п╢п╣п╩п╬п╡"
 
-#: io.c:1049
-msgid "'file' is not a connection"
-msgstr "'file' -- это не соединение"
+#: io.c:1045
+#, c-format
+msgid "Problem closing connection:  %s"
+msgstr ""
 
-#: io.c:1052
+#: io.c:1047
+#, fuzzy
+msgid "Problem closing connection"
+msgstr "'file' -- я█я┌п╬ п╫п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
+
+#: io.c:1070
+msgid "'file' argument is not a connection"
+msgstr "'file' -- я█я┌п╬ п╫п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
+
+#: io.c:1073
 msgid "cannot write to this connection"
-msgstr "не могу писать в это соединение"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╦я│п╟я┌я▄ п╡ я█я┌п╬ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
-#: io.c:1082
-msgid "'dec' must be a single character"
-msgstr "'dec' должен быть одним символом"
+#: io.c:1103
+msgid "'dec' argument must be a single character"
+msgstr "'dec' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╢п╫п╦п╪ я│п╦п╪п╡п╬п╩п╬п╪"
 
-#: io.c:1108
+#: io.c:1129
 #, c-format
 msgid "corrupt data frame -- length of column %d does not not match nrows"
-msgstr "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
-
-#: io.c:1139
-#, c-format
-msgid "column %s claims to be a factor but does not have numeric codes"
-msgstr "колонка %s считает себя фактором, но у нее нет числовых кодов"
+msgstr ""
+"п©п╬п╡я─п╣п╤п╢п╣п╫п╫п╟я▐ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ -- п╢п╩п╦п╫п╟ п╨п╬п╩п╬п╫п╨п╦ %d п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ я│я┌я─п╬п╨п╟п╪"
 
 #: io.c:1157
+#, c-format
+msgid "column %s claims to be a factor but does not have numeric codes"
+msgstr "п╨п╬п╩п╬п╫п╨п╟ %s я│я┤п╦я┌п╟п╣я┌ я│п╣п╠я▐ я└п╟п╨я┌п╬я─п╬п╪, п╫п╬ я┐ п╫п╣п╣ п╫п╣я┌ я┤п╦я│п╩п╬п╡я▀я┘ п╨п╬п╢п╬п╡"
+
+#: io.c:1174
 msgid "corrupt matrix -- dims not not match length"
-msgstr "поврежденная матрица -- длины измерений не сходятся"
+msgstr "п©п╬п╡я─п╣п╤п╢п╣п╫п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ -- п╢п╩п╦п╫я▀ п╦п╥п╪п╣я─п╣п╫п╦п╧ п╫п╣ я│я┘п╬п╢я▐я┌я│я▐"
 
-#: stubs.c:56
+#: stubs.c:48
 msgid "'savehistory' can only be used in Rgui and Rterm"
-msgstr "'savehistory' можно использовать только в Rgui и Rterm"
+msgstr "'savehistory' п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╡ Rgui п╦ Rterm"
 
-#: stubs.c:73
+#: stubs.c:65
 msgid "'loadhistory' can only be used in Rgui and Rterm"
-msgstr "'loadhistory' можно использовать только Rgui и Rterm"
+msgstr "'loadhistory' п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ Rgui п╦ Rterm"
 
-#: stubs.c:85
+#: stubs.c:77
 msgid "invalid timestamp"
-msgstr "неправильная дата и время"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╟я┌п╟ п╦ п╡я─п╣п╪я▐"
 
-#: stubs.c:151 stubs.c:159
+#: stubs.c:143 stubs.c:151
 msgid "X11 dataentry cannot be loaded"
-msgstr "таблицу X11 нельзя загрузить"
+msgstr "я┌п╟п╠п╩п╦я├я┐ X11 п╫п╣п╩я▄п╥я▐ п╥п╟пЁя─я┐п╥п╦я┌я▄"
 
-#: stubs.c:155 stubs.c:184 stubs.c:190
+#: stubs.c:147 stubs.c:176 stubs.c:182
 msgid "X11 is not available"
-msgstr "X11 недоступна"
+msgstr "X11 п╫п╣п╢п╬я│я┌я┐п©п╫п╟"
 
-#: stubs.c:248 stubs.c:251
+#: stubs.c:240 stubs.c:243
 #, c-format
 msgid "invalid '%s' specification"
-msgstr "неправильное определение '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣ '%s'"
 
-#: utils.c:83
-msgid "'hostname' must be a character vector of length 1"
-msgstr "'hostname' должно быть текстовым вектором длиной 1"
-
-#: utils.c:89
+#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
 #, c-format
-msgid "nsl() was unable to resolve host '%s'"
-msgstr "nsl() не смог разрешить хост '%s'"
+msgid "'%s' argument must be a character string"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
-#: utils.c:96
-msgid "unknown format returned by 'gethostbyname'"
-msgstr "'gethostbyname' вернула неправильный формат"
+#: utils.c:86
+#, fuzzy
+msgid "'hostname' argument must be a character vector of length 1"
+msgstr "'hostname' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫п╬п╧ 1"
 
-#: utils.c:105
-msgid "nsl() is not supported on this platform"
-msgstr "nsl() не поддерживается на этой платформе"
+#: utils.c:92
+#, c-format
+msgid "'nsl()' was unable to resolve host '%s'"
+msgstr "'nsl()' п╫п╣ я│п╪п╬пЁ я─п╟п╥я─п╣я┬п╦я┌я▄ я┘п╬я│я┌ '%s'"
+
+#: utils.c:99
+#, fuzzy
+msgid "unknown format returned by 'gethostbyname()'"
+msgstr "'gethostbyname' п╡п╣я─п╫я┐п╩п╟ п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌"
+
+#: utils.c:108
+msgid "'nsl()' is not supported on this platform"
+msgstr "'nsl()' п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п╫п╟ я█я┌п╬п╧ п©п╩п╟я┌я└п╬я─п╪п╣"
 
 #: windows/dialogs.c:181
 msgid "unknown type"
-msgstr "неизвестный тип"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╦п©"
 
 #: windows/dialogs.c:213 windows/dialogs.c:237 windows/dialogs.c:275
 #: windows/dialogs.c:310
 msgid "menu functions can only be used in the GUI"
-msgstr "функции меню можно использовать только в GUI"
+msgstr "я└я┐п╫п╨я├п╦п╦ п╪п╣п╫я▌ п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╡ GUI"
 
 #: windows/dialogs.c:245
 #, c-format
-msgid "unable to retrieve items for %s (%s)"
-msgstr "не могу получить элементы для %s (%s)"
+msgid "unable to retrieve items for '%s' (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╬п╩я┐я┤п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌я▀ п╢п╩я▐ '%s' (%s)"
 
 #: windows/dialogs.c:283
 #, c-format
 msgid "unable to add menu (%s)"
-msgstr "не могу добавить меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╠п╟п╡п╦я┌я▄ п╪п╣п╫я▌ (%s)"
 
 #: windows/dialogs.c:295
 #, c-format
 msgid "unable to add menu item (%s)"
-msgstr "не могу добавить элемент меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╠п╟п╡п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌ п╪п╣п╫я▌ (%s)"
 
 #: windows/dialogs.c:318
 msgid "menu does not exist"
-msgstr "меню не существует"
+msgstr "п╪п╣п╫я▌ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: windows/dialogs.c:325
 #, c-format
 msgid "unable to delete menu item (%s)"
-msgstr "не могу удалить элемент меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ я┐п╢п╟п╩п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌ п╪п╣п╫я▌ (%s)"
 
 #: windows/registry.c:73 windows/registry.c:248 windows/registry.c:251
 #: windows/registry.c:254
 #, c-format
 msgid "invalid '%s' value"
-msgstr "неправильное значение '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ '%s'"
+
+#: windows/registry.c:177
+#, c-format
+msgid "RegQueryInfoKey error code %d: '%s'"
+msgstr ""
 
 #: windows/registry.c:266
 #, c-format
 msgid "Registry key '%ls' not found"
-msgstr "Ключ реестра '%ls' не найден"
+msgstr "п п╩я▌я┤ я─п╣п╣я│я┌я─п╟ '%ls' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
-#: windows/util.c:41
+#: windows/util.c:42
 msgid "unsupported version of Windows"
-msgstr "неподдерживаемая версия Windows"
+msgstr "п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╟я▐ п╡п╣я─я│п╦я▐ Windows"
 
-#: windows/util.c:275
-msgid "argument must be a character vector or a raw vector"
-msgstr "аргумент должен быть текстовым вектором или простым вектором"
+#: windows/util.c:281
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector or a raw vector"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╦п╩п╦ п©я─п╬я│я┌я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
-#: windows/util.c:312
+#: windows/util.c:318
 msgid "unable to open the clipboard"
-msgstr "не могу открыть буфер обмена"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
-#: windows/util.c:317
+#: windows/util.c:323
 msgid "unable to write to the clipboard"
-msgstr "не могу писать в буфер обмена"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╦я│п╟я┌я▄ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
-#: windows/util.c:396
-msgid "'title' must be a character string"
-msgstr "'title' должен быть текстовой строкой"
-
-#: windows/util.c:405
-msgid "'text' must be a character string"
-msgstr "'text' должен быть текстовой строкой"
-
-#: windows/util.c:444
+#: windows/util.c:450
 #, c-format
-msgid "'%s' must be length 1"
-msgstr "'%s' должен быть длиной 1"
+msgid "'%s' argument must be of length 1"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
-#: windows/util.c:557
+#: windows/util.c:563
 #, c-format
-msgid "'%s' must be a list"
-msgstr "'%s' должен быть списком"
+msgid "'%s' argument must be a list"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
-#: windows/util.c:561
+#: windows/util.c:567
 #, c-format
 msgid "'%s' element %d is not a window handle"
-msgstr "'%s' элемент из %d -- не дескриптор окна"
+msgstr "'%s' я█п╩п╣п╪п╣п╫я┌ п╦п╥ %d -- п╫п╣ п╢п╣я│п╨я─п╦п©я┌п╬я─ п╬п╨п╫п╟"
 
 #: windows/widgets.c:108
 msgid "Select one or more"
-msgstr "Выберите один или больше"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╬п╢п╦п╫ п╦п╩п╦ п╠п╬п╩я▄я┬п╣"
 
 #: windows/widgets.c:108
 msgid "Select one"
-msgstr "Выберите один"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╬п╢п╦п╫"
 
-#: windows/widgets.c:182 windows/widgets.c:247
-msgid "'default' must be a character string"
-msgstr "'default' должен быть текстовой строкой"
-
-#: windows/widgets.c:184 windows/widgets.c:249
-msgid "'default' is overlong"
-msgstr "'default' слишком длинный"
-
-#: windows/widgets.c:188 windows/widgets.c:253
-msgid "'caption' must be a character string"
-msgstr "'caption' должен быть текстовой строкой"
+#: windows/widgets.c:184 windows/widgets.c:252
+msgid "'default' argument is overlong"
+msgstr "'default' я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╫я▀п╧"
 
 #: windows/widgets.c:190
-msgid "'multi' must be a logical value"
-msgstr "'multi' должен быть логическим"
+msgid "'multi' argument must be a logical value"
+msgstr "'multi' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪"
 
 #: windows/widgets.c:192
-msgid "'filterindex' must be an integer value"
-msgstr "'filterindex' должен быть целочисленным"
+msgid "'filterindex' argument must be an integer value"
+msgstr "'filterindex' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я├п╣п╩п╬я┤п╦я│п╩п╣п╫п╫я▀п╪"
+
+#~ msgid "'title' must be a character string"
+#~ msgstr "'title' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
+
+#~ msgid "'default' must be a character string"
+#~ msgstr "'default' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
+
+#~ msgid "'caption' must be a character string"
+#~ msgstr "'caption' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"

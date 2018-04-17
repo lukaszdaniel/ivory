@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-04-16 18:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4273,9 +4273,9 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
+#. R/QC.R: gettextf("The Title field should be in title case. Current version is: %s In title case that is: %s",     sQuote(y[1L]), sQuote(y[2L]), domain = "R-tools")
 
-msgid "The Title field should be in title case, current version then in title case:"
+msgid "The Title field should be in title case. Current version is: %s In title case that is: %s"
 msgstr ""
 
 

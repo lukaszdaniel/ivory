@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-11 17:01+0200\n"
+"POT-Creation-Date: 2018-04-16 18:45+0200\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -642,7 +642,7 @@ msgstr "problema ao mostrar '%s'"
 #: src/main/context.c:656 src/main/datetime.c:780 src/main/datetime.c:869
 #: src/main/datetime.c:872 src/main/datetime.c:876 src/main/datetime.c:1047
 #: src/main/datetime.c:1049 src/main/datetime.c:1254 src/main/debug.c:245
-#: src/main/deparse.c:427 src/main/dotcode.c:479 src/main/dotcode.c:483
+#: src/main/deparse.c:439 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:326 src/main/dounzip.c:333
 #: src/main/dounzip.c:343 src/main/dounzip.c:348 src/main/dounzip.c:352
 #: src/main/dounzip.c:356 src/main/envir.c:1852 src/main/envir.c:1855
@@ -2035,7 +2035,7 @@ msgstr "não é possível ajustar o pai do ambiente vazio"
 #: src/main/connections.c:4318 src/main/connections.c:4352
 #: src/main/connections.c:4733 src/main/connections.c:4803
 #: src/main/connections.c:5017 src/main/connections.c:5021
-#: src/main/connections.c:5451 src/main/deparse.c:392 src/main/deparse.c:478
+#: src/main/connections.c:5451 src/main/deparse.c:404 src/main/deparse.c:490
 #: src/main/serialize.c:2336
 msgid "cannot write to this connection"
 msgstr "não é possível escrever nessa conexão"
@@ -2669,7 +2669,7 @@ msgstr ""
 #: src/main/connections.c:4080 src/main/connections.c:4345
 #: src/main/connections.c:4676 src/main/connections.c:4796
 #: src/main/connections.c:5013 src/main/connections.c:5432 src/main/dcf.c:94
-#: src/main/deparse.c:384 src/main/deparse.c:470 src/main/saveload.c:2301
+#: src/main/deparse.c:396 src/main/deparse.c:482 src/main/saveload.c:2301
 #: src/main/saveload.c:2386 src/main/scan.c:933 src/main/serialize.c:2507
 #: src/main/serialize.c:2556 src/main/source.c:268
 msgid "cannot open the connection"
@@ -3477,61 +3477,61 @@ msgstr ""
 msgid "R was not compiled with support for memory profiling"
 msgstr "R não foi compilado com suporte a perfilamento de memória"
 
-#: src/main/deparse.c:175
+#: src/main/deparse.c:176
 #, fuzzy, c-format
 msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr "'cutoff' inválido para deparse, usando o padrão"
 
-#: src/main/deparse.c:277
+#: src/main/deparse.c:293
 msgid "deparse may be incomplete"
 msgstr "deparse pode ser incompleto"
 
-#: src/main/deparse.c:280
+#: src/main/deparse.c:296
 #, fuzzy
 msgid ""
 "deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr "análise não pode ser carregada com source() no R < 2.7.0"
 
-#: src/main/deparse.c:374
+#: src/main/deparse.c:386
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or connection"
 msgstr "'what' deve ser uma cadeia de caracteres ou uma função"
 
-#: src/main/deparse.c:398 src/main/deparse.c:494 src/main/deparse.c:500
+#: src/main/deparse.c:410 src/main/deparse.c:506 src/main/deparse.c:512
 msgid "wrote too few characters"
 msgstr "muito poucos caracteres escritos"
 
-#: src/main/deparse.c:419 src/main/source.c:204
+#: src/main/deparse.c:431 src/main/source.c:204
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "'what' deve ser uma cadeia de caracteres ou uma função"
 
-#: src/main/deparse.c:421
+#: src/main/deparse.c:433
 msgid "character arguments expected"
 msgstr "argumentos do tipo caractere esperados"
 
-#: src/main/deparse.c:424
+#: src/main/deparse.c:436
 #, fuzzy
 msgid "zero-length argument"
 msgstr "argumento de comprimento zero"
 
-#: src/main/deparse.c:431
+#: src/main/deparse.c:443
 #, fuzzy
 msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts' deve ser um inteiro pequeno não negativo"
 
-#: src/main/deparse.c:441 src/main/envir.c:1998 src/main/envir.c:2083
+#: src/main/deparse.c:453 src/main/envir.c:1998 src/main/envir.c:2083
 #: src/main/eval.c:630 src/main/eval.c:1949 src/main/eval.c:4978
 #: src/main/saveload.c:2017 src/main/saveload.c:2347 src/main/serialize.c:3067
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "objeto '%s' não encontrado"
 
-#: src/main/deparse.c:1465
+#: src/main/deparse.c:1477
 msgid "'S4SXP': should not happen - please report"
 msgstr ""
 
-#: src/main/deparse.c:1846
+#: src/main/deparse.c:1858
 msgid "badly formed function expression"
 msgstr "expressão funcional mal formada"
 
