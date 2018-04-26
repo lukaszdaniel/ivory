@@ -18,7 +18,7 @@ print.survdiff <- function(x, digits = max(options()$digits - 4, 3), ...) {
 
     if (length(x$n)==1)  {
 	z <- sign(x$exp - x$obs) * sqrt(x$chisq)
-	temp <- c(x$obs, x$exp, z, signif(1-pchisq(x$chisq, 1),digits))
+	temp <- c(x$obs, x$exp, z, signif(pchisq(x$chisq, 1, lower.tail=FALSE), digits))
 	names(temp) <- c(gettext("Observed"), gettext("Expected"), "Z", "p")
 	print(temp)
 	}
@@ -36,7 +36,7 @@ print.survdiff <- function(x, digits = max(options()$digits - 4, 3), ...) {
 					 ((otmp-etmp)^2)/ diag(x$var))
 	dimnames(temp) <- list(names(x$n), c("N", gettext("Observed"), gettext("Expected"), "(O-E)^2/E", "(O-E)^2/V"))
 	print(temp)
-	cat("\n ", sprintf(gettext("Chisq= %s on %d degrees of freedom, p= %s", domain = "R-survival"), format(round(x$chisq,1)), df, format(signif(1-pchisq(x$chisq, df),digits)), domain = NA), "\n", sep = "")
+	cat("\n ", sprintf(gettext("Chisq= %s on %d degrees of freedom, p= %s", domain = "R-survival"), format(round(x$chisq,1)), df, format.pval(pchisq(x$chisq, df, lower.tail=FALSE)), domain = NA), "\n", sep = "")
        }
     invisible(x)
     }

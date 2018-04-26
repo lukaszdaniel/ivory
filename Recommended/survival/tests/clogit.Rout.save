@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -39,17 +39,11 @@ Type 'q()' to quit R.
 > 
 > #We expect two NA coefficients, so ignore the warning
 > fit1 <- clogit(y ~ occ2 + occ2:education + occ2:race + strata(id), logan2)
-Warning message:
-In command 'coxph(formula = Surv(rep(1, 4190L), y) ~ occ2 + occ2:education + occ2:race + strata(id), ':
-  X matrix deemed to be singular; variable 9 14
 > 
 > #since there is only one death per group, all methods are equal
 > dummy <- rep(1, nrow(logan2))
 > fit2 <- coxph(Surv(dummy, y) ~ occ2 + occ2:education + occ2:race + strata(id),
 +                    logan2, method='breslow')
-Warning message:
-In command 'coxph(Surv(dummy, y) ~ occ2 + occ2:education + occ2:race + strata(id), logan2, method = "breslow")':
-  X matrix deemed to be singular; variable 9 14
 > 
 > all.equal(fit1$coef, fit2$coef)
 [1] TRUE
@@ -63,4 +57,4 @@ In command 'coxph(Surv(dummy, y) ~ occ2 + occ2:education + occ2:race + strata(id
 > 
 > proc.time()
    user  system elapsed 
-  0.903   0.035   0.932 
+  0.867   0.056   0.917 

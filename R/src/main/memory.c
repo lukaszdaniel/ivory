@@ -3672,7 +3672,7 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
        error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
 	     type2char(TYPEOF(v)));
     if (i < 0 || i >= XLENGTH(x))
-	error(_("attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"), i, XLENGTH(x));
+	error(_("attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     CHECK_OLD_TO_NEW(x, v);
     if (ALTREP(x))
 	ALTSTRING_SET_ELT(x, i, v);
@@ -3692,7 +3692,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 	      type2char(TYPEOF(x)));
     }
     if (i < 0 || i >= XLENGTH(x))
-	error(_("attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"), i, XLENGTH(x));
+	error(_("attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"), (long long)i, (long long)XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
     CHECK_OLD_TO_NEW(x, v);
     return VECTOR_ELT(x, i) = v;

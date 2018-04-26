@@ -49,13 +49,14 @@ print.summary.coxph.penal <-
     if (!is.null(x$concordance)) {
         cat(gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
     }
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),  df, format(1 - pchisq(logtest, df)), domain = "R-survival"), "\n", sep = "")
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO    
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),  df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"), "\n", sep = "")
     if (!is.null(x$wald.test))
-        cat(gettextf("Wald test = %s on %s df, p=%s", format(round(x$wald.test, 2)), df, format(1 - pchisq(x$wald.test, df)), domain = "R-survival"), "\n", sep = "")
+        cat(gettextf("Wald test = %s on %s df, p=%s", format(round(x$wald.test, 2)), df, format.pval(pchisq(x$wald.test, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"), "\n", sep = "")
     if (!is.null(x$score))
-	cat("\n", gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(sctest, 2)), df, format(1 - pchisq(sctest, df)), domain = "R-survival"), sep = "")
+	cat("\n", gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(sctest, 2)), df, format.pval(pchisq(sctest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"), sep = "")
     if (is.null(x$rscore)) cat("\n")
-    else cat(",   ", gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format(1 - pchisq(x$rscore, df)), domain = "R-survival"), "\n", sep = "")
+    else cat(",   ", gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format.pval(pchisq(x$rscore, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"), "\n", sep = "")
 
     invisible()
     }

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2017-03-14 22:24\n"
-"PO-Revision-Date: 2015-07-30 09:44+0200\n"
+"PO-Revision-Date: 2018-04-17 19:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.3\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #. R/daisy.q: gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"),     pColl(which(sx == 0)))
 #: R/daisy.q:0
@@ -56,7 +56,7 @@ msgstr "%s musi zawierać nazwy kolumn lub liczby"
 #. R/daisy.q: gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x")
 #: R/daisy.q:0
 msgid "'%s' argument is not a dataframe or a numeric matrix."
-msgstr "argument '%s' nie jest ramką danych ani też macierzą liczbową"
+msgstr "argument '%s' nie jest ramką danych ani też macierzą liczbową."
 
 #. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
@@ -239,10 +239,11 @@ msgstr "Współczynnik aglomeracyjny:"
 
 #. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
 #: R/mona.q:0
-#, fuzzy
 msgid ""
 "All variables must be binary (e.g., a factor with 2 levels, both present)."
-msgstr "Wszystkie zmienne muszą być binarne (czynnik z dwoma poziomami)"
+msgstr ""
+"Wszystkie zmienne muszą być binarne (np. czynnik z dwoma poziomami; oba "
+"obecne)"
 
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
@@ -839,7 +840,7 @@ msgstr "Niepoprawne %s; musi być nazwaną listą"
 #. R/clara.q: stop("invalid 'correct.d' value")
 #: R/clara.q:0
 msgid "invalid 'correct.d' value"
-msgstr ""
+msgstr "niepoprawna wartość 'correct.d'"
 
 #. R/clara.q: gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop)
 #: R/clara.q:0
@@ -854,7 +855,7 @@ msgstr "niepoprawny obiekt 'silhouette'"
 #. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
 #: R/clusGap.R:0
 msgid "invalid 'spaceH0':"
-msgstr ""
+msgstr "niepoprawne 'spaceH0':"
 
 #. R/coef.R: stop("invalid 'twins' object")
 #: R/coef.R:0

@@ -1,7 +1,7 @@
 # Automatically generated from the noweb directory
 print.pyears <- function(x, ...) {
     if (!is.null(cl<- x$call)) {
-        cat("Call:\n") #LUKI
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }

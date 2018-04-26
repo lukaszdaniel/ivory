@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -41,9 +41,9 @@ Read 210 records
 
 Call:
 survreg(formula = Surv(time1, time2, status, type = "interval") ~ 1, data = donnell)
-             Value Std. Error      z       p
-(Intercept)  2.390      0.804  2.972 0.00295
-Log(scale)  -0.237      0.346 -0.687 0.49232
+             Value Std. Error     z     p
+(Intercept)  2.390      0.804  2.97 0.003
+Log(scale)  -0.237      0.346 -0.69 0.492
 
 Scale= 0.789
 
@@ -104,4 +104,4 @@ n= 210
 > 
 > proc.time()
    user  system elapsed 
-  1.118   0.051   1.170 
+  1.108   0.047   1.149 

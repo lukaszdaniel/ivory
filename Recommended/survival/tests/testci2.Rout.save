@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -100,7 +100,7 @@ Type 'q()' to quit R.
 > # Test the dfbetas
 > # It was a big surprise, but the epsilon where a finite difference approx to
 > #  the derivative is most accurate is around 1e-7 = approx sqrt(precision).
-> # Smaller eps makes the all.equal test worse.
+> # Smaller eps makes the approximate derivative worse.
 > # There is a now a formal test in mstate.R, not approximate.
 > dfbeta <- 0*fit$influence[,-1,] #  lose the first row
 > eps <- sqrt(.Machine$double.eps)     
@@ -145,7 +145,18 @@ Type 'q()' to quit R.
 +             id=c(1,1,1,2,2,3))
 + }
 > 
+> # Check the start.time option
+> #
+> fit2 <- survfit(Surv(time1, time2, stat2) ~1, id=id, weight=wt, tdata,
++                 start.time=20)
+> data2 <- subset(tdata, time2> 20)
+> data2$time1 <- pmax(20, data2$time1)
+> fit2x <- survfit(Surv(time1, time2, stat2) ~1, id=id, weight=wt, data2)
+> 
+> ii <- names(fit2) != "call"
+> all.equal(unclass(fit2)[ii], unclass(fit2x)[ii])
+[1] TRUE
 > 
 > proc.time()
    user  system elapsed 
-  0.907   0.057   0.955 
+  0.744   0.029   0.766 

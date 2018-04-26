@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -42,12 +42,11 @@ Type 'q()' to quit R.
 > testw1 <- data.frame(time=  c(1,1,2,2,2,2,3,4,5),
 + 		    status= c(1,0,1,1,1,0,0,1,0),
 + 		    x=      c(2,0,1,1,0,1,0,1,0),
-+ 		    wt =    c(1,2,3,4,3,2,1,2,1))
-> xx <- testw1$wt
-> testw2 <- data.frame(time=   rep(c(1,1,2,2,2,2,3,4,5), xx),
-+ 		     status= rep(c(1,0,1,1,1,0,0,1,0), xx),
-+ 		     x=      rep(c(2,0,1,1,0,1,0,1,0), xx),
-+ 		     id=     rep(1:9, xx))
++ 		    wt =    c(1,2,3,4,3,2,1,2,1),
++                     id =    1:9)
+> # Expanded data set
+> testw2 <- testw1[rep(1:9, testw1$wt), -4]
+> row.names(testw2) <- NULL
 > indx <- match(1:9, testw2$id)
 > 
 > # Breslow estimate
@@ -171,9 +170,9 @@ x     2.362     0.4233    0.5839     9.556
 
 Concordance= 0.638 (se = 0.159)
 Rsquare= 0.171  (max possible=0.999)
-Likelihood ratio test = 1.69 on 1 df, p=0.1932
-Wald test = 1.45 on 1 df, p=0.2281
-Score (logrank) test = 1.52 on 1 df, p=0.217
+Likelihood ratio test = 1.69 on 1 df, p=0.2
+Wald test = 1.45 on 1 df, p=0.2
+Score (logrank) test = 1.52 on 1 df, p=0.2
 
 > resid(fit0, type='score')
           1           2           3           4           5           6 
@@ -211,4 +210,4 @@ Score (logrank) test = 1.52 on 1 df, p=0.217
 > 
 > proc.time()
    user  system elapsed 
-  0.789   0.039   0.821 
+  0.775   0.051   0.820 

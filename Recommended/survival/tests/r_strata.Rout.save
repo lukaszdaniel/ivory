@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -65,7 +65,7 @@ Scale:
 0.8084294 0.6355816 
 
 Loglik(model)= -1147.1   Loglik(intercept only)= -1152.5
-	Chisq= 10.9 on 1 degrees of freedom, p= 0.00096
+	Chisq= 10.9 on 1 degrees of freedom, p= 0.000963
 n= 228 
 > aeq(fit2$scale, c(fit3a$scale, fit3b$scale), tolerance=tol)
 [1] TRUE
@@ -85,7 +85,7 @@ survreg(formula = Surv(time, status) ~ pspline(age, theta = 0.92) + strata(sex),
     data = lung)
 
                           coef    se(coef) se2    Chisq DF   p      
-(Intercept)                6.9036 0.8469   0.5688 66.45 1.00 3.3e-16
+(Intercept)                6.9036 0.8469   0.5688 66.45 1.00 3.6e-16
 pspline(age, theta = 0.92 -0.0124 0.0067   0.0067  3.45 1.00 6.3e-02
 pspline(age, theta = 0.92                          2.53 2.65 4.0e-01
 
@@ -96,7 +96,7 @@ sex=1 sex=2
 Iterations: 1 outer, 4 Newton-Raphson
      Theta= 0.92 
 Degrees of freedom for terms= 0.5 3.6 2.0
-Likelihood ratio test = 6.54 on 3.1 df, p=0.0937  n= 228 
+Likelihood ratio test = 6.54 on 3.1 df, p=0.09  n= 228 
 > fit2
 Call:
 survreg(formula = Surv(time, status) ~ pspline(age, theta = 0.92) + strata(sex) + 
@@ -115,7 +115,7 @@ sex=1 sex=2
 Iterations: 1 outer, 5 Newton-Raphson
      Theta= 0.92 
 Degrees of freedom for terms= 0.5 3.7 1.0 2.0
-Likelihood ratio test = 16.8 on 4.2 df, p=0.00245  n= 228 
+Likelihood ratio test = 16.8 on 4.2 df, p=0.002  n= 228 
 > 
 > age1 <- ifelse(lung$sex==1, lung$age, mean(lung$age))
 > age2 <- ifelse(lung$sex==2, lung$age, mean(lung$age))
@@ -154,4 +154,4 @@ Likelihood ratio test = 16.8 on 4.2 df, p=0.00245  n= 228
 > 
 > proc.time()
    user  system elapsed 
-  0.767   0.044   0.805 
+  0.750   0.052   0.797 

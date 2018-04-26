@@ -2,7 +2,8 @@
 #  "exact".  The most common use for this option is matched
 #   case-control data.
 coxexact.fit <- function(x, y, strata, offset, init, control,
-			  weights, method, rownames)
+			  weights, method, rownames,
+                         resid=TRUE, concordance=FALSE)
     {
     if (!is.matrix(x)) stop("'x' argument is not a matrix")
     if (!is.null(weights) && any(weights!=1))
@@ -79,7 +80,8 @@ coxexact.fit <- function(x, y, strata, offset, init, control,
         return( list(loglik = cfit$loglik[1],
                      linear.predictors = offset,
                      residuals = resid,
-                     method= c("coxph.null", "coxph")))
+                     method = method,
+                     class = c("coxph.null", "coxph")))
     }
 
     loglik <- cfit$loglik[1:2]  #these are packed into one vector
@@ -100,10 +102,7 @@ coxexact.fit <- function(x, y, strata, offset, init, control,
 		infs <- ((infs > control$eps) & 
 			 infs > control$toler.inf*abs(coef))
 		if (any(infs))
-		{
-		tmp_n <- paste((1:nvar)[infs],collapse=",")
-		warning(gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n))
-		}
+		warning(gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs], collapse = ", "), domain = "R-survival"), domain = NA)
 		}
 	}
 
@@ -111,30 +110,50 @@ coxexact.fit <- function(x, y, strata, offset, init, control,
     lp  <- newx %*% coef + offset 
     score <- as.double(exp(lp))
 
-    # Compute the residuals
-    cxres <- .C(Ccoxmart2,
-		   as.integer(n),
-		   as.double(y[,1]),
-		   as.integer(y[,2]),
-                   newstrat,
-                   score,
-                   rep(1.0, n),  #weights
-                   resid=double(n))
-    resid <- double(n)
-    resid[sorted] <- cxres$resid
-    names(resid) <- rownames
-    coef[which.sing] <- NA
-    lp.unsort <- double(n)
-    lp.unsort[sorted] <- lp
+    if (resid) {
+        # Compute the residuals
+        cxres <- .C(Ccoxmart2,
+                    as.integer(n),
+                    as.double(y[,1]),
+                    as.integer(y[,2]),
+                    newstrat,
+                    score,
+                    rep(1.0, n),  #weights
+                    resid=double(n))
+        resid <- double(n)
+        resid[sorted] <- cxres$resid
+        names(resid) <- rownames
+        coef[which.sing] <- NA
+        lp.unsort <- double(n)
+        lp.unsort[sorted] <- lp
 
-    scmat <- diag(1/rescale, nvar,nvar)
-    list(coefficients  = coef/rescale,
-		var    = scmat %*% var %*% scmat,
-		loglik = loglik,
-		score  = sctest,
-		iter   = iter,
-		linear.predictors = lp.unsort,
-		residuals = resid,
-		means = means,
-		method= 'coxph')
+        scmat <- diag(1/rescale, nvar,nvar)
+        rval <-  list(coefficients  = coef/rescale,
+                      var    = scmat %*% var %*% scmat,
+                      loglik = loglik,
+                      score  = sctest,
+                      iter   = iter,
+                      linear.predictors = lp.unsort,
+                      residuals = resid,
+                      means = means,
+                      method = method,
+                      class = 'coxph')
+    } else {
+        rval <-  list(coefficients  = coef/rescale,
+                      var    = scmat %*% var %*% scmat,
+                      loglik = loglik,
+                      score  = sctest,
+                      iter   = iter,
+                      linear.predictors = lp.unsort,
+                      means = means,
+                      method = method,
+                      class = 'coxph')
     }
+
+    if (concordance) {
+        rval$concordance <-survConcordance.fit(Surv(y[,1], y[,2]),
+                                             lp, strata)
+    }
+    
+    rval
+}

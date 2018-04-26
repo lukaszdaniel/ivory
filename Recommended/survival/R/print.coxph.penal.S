@@ -63,15 +63,15 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
 	    pname1 <- c(pname1, names(pterms)[i])
 	    temp <- coxph.wtest(x$var[kk,kk], coef[kk])$test
 	    print1 <- rbind(print1, c(NA, NA, NA,
-				      temp, x$df[i], 1-pchisq(temp, 1)))
+		    temp, x$df[i], pchisq(temp, 1, lower.tail=FALSE)))
 	    }
 	else {
 	    pname1 <- c(pname1, names(coef)[kk])
 	    tempe<- (diag(x$var))[kk]
 	    temp <- coef[kk]^2/ tempe
 	    print1 <- rbind(print1, cbind(coef[kk], sqrt(tempe),
-				      sqrt((diag(x$var2))[kk]), 
-				      temp, 1, 1-pchisq(temp, 1)))
+				  sqrt((diag(x$var2))[kk]), 
+				  temp, 1, pchisq(temp, 1, lower.tail=FALSE)))
 	    }
 	}
 
@@ -106,12 +106,13 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
     cat(gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,1)), collapse = " "), domain = "R-survival"), "\n", sep = "")
 #    cat("Cox PL (initial,final) = ", format(round(x$loglik,2)),
 #	"  Penalty = ", format(x$penalty), "\n")
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
     omit <- x$na.action
     if (length(omit)) {
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), " (", naprint(omit), ")", "\n",  sep = "")
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), " (", naprint(omit), ")", "\n",  sep = "")
     }
     else {
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), "\n", sep = "")
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), "\n", sep = "")
 	}
     invisible()
     }

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -136,7 +136,7 @@ inst=26  6  1.627074  3.542694 1.035821659 1.286365543
 inst=32  7  1.792468  2.679904 0.293869782 0.343966668
 inst=33  2  0.929177  0.416202 0.632249272 0.676682390
 
- Chisq= 15.1 on 17 degrees of freedom, p= 0.590384
+ Chisq= 15.1 on 17 degrees of freedom, p= 0.5904
 > 
 > temp <- coxph(Surv(time, status) ~ ph.ecog + ph.karno + pat.karno + wt.loss 
 + 	      + sex + age + meal.cal + strata(inst), lung)
@@ -170,9 +170,9 @@ meal.cal     0.9998     1.0002    0.9992    1.0004
 
 Concordance= 0.696 (se = 0.115)
 Rsquare= 0.167  (max possible=0.912)
-Likelihood ratio test = 30.6 on 7 df, p=7.377e-05
-Wald test = 28.15 on 7 df, p=0.0002066
-Score (logrank) test = 30.72 on 7 df, p=7e-05
+Likelihood ratio test = 30.6 on 7 df, p=2e-04
+Wald test = 28.15 on 7 df, p=2e-04
+Score (logrank) test = 30.72 on 7 df, p=2e-04
 
 > cox.zph(temp)
               rho  chisq      p
@@ -210,7 +210,7 @@ sex       -0.661253  0.516204  0.233998 -2.83 0.0047
 age        0.005092  1.005105  0.013729  0.37 0.7107
 meal.cal  -0.000240  0.999760  0.000302 -0.79 0.4270
 
-Likelihood ratio test = 30.6 on 7 df, p=7.38e-05
+Likelihood ratio test = 30.6 on 7 df, p=7e-05
 n= 167, number of events= 120
    (61 observations deleted due to missingness)
 > 
@@ -225,4 +225,4 @@ n= 167, number of events= 120
 > 
 > proc.time()
    user  system elapsed 
-  0.728   0.055   0.777 
+  0.736   0.044   0.774 

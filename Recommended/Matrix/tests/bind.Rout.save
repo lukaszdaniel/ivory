@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -217,7 +217,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time elapsed:  0.071 0.036 0.107 
+Time elapsed:  0.1 0.008 0.108 
 > 
 > ### --- Diagonal / Sparse - had bugs
 > 
@@ -248,7 +248,7 @@ Time elapsed:  0.071 0.036 0.107
 + 	  identical(t(d4), cBind(Diagonal(4),     0:3)),
 + 	  identical(t(m4), rBind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time elapsed:  0.05 0 0.05 
+Time elapsed:  0.051 0 0.051 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -541,8 +541,8 @@ v5    .    |    .    |    .
 > 
 > options(op)
 > showProc.time()
-Time elapsed:  0.133 0 0.133 
+Time elapsed:  0.135 0 0.135 
 > 
 > proc.time()
    user  system elapsed 
-  0.999   0.068   1.061 
+  1.019   0.048   1.061 

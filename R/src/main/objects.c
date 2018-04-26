@@ -402,7 +402,7 @@ SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP method,
 	SET_RSTEP(sxp, 1);
     }
 
-    SEXP newcall =  PROTECT(duplicate(cptr->call));
+    SEXP newcall =  PROTECT(shallow_duplicate(cptr->call));
     SETCAR(newcall, method);
     R_GlobalContext->callflag = CTXT_GENERIC;
     SEXP matchedarg = PROTECT(cptr->promargs); /* ? is this PROTECT needed ? */
@@ -520,19 +520,14 @@ SEXP attribute_hidden NORET do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env
 	The generic need not be a closure (Henrik Bengtsson writes
 	UseMethod("$"), although only functions are documented.)
     */
-    val = findVar1(installTrChar(STRING_ELT(generic, 0)), ENCLOS(env), FUNSXP, TRUE); /* That has evaluated promises */
-    if(TYPEOF(val) == CLOSXP) defenv = CLOENV(val);
-    else defenv = R_BaseNamespace;
-
     if(lookup_use_topenv_as_defenv) {
-	SEXP defenv2 = topenv(R_NilValue, env);
-	if(defenv2 != defenv) {
-	    Rprintf(_("*** S3 method lookup problem ***\n"));
-	    PrintValue(generic);
-	    PrintValue(defenv);
-	    PrintValue(defenv2);
-	    defenv = defenv2;
-	}
+	defenv = topenv(R_NilValue, env);
+    } else {
+	val = findVar1(installTrChar(STRING_ELT(generic, 0)),
+		       ENCLOS(env), FUNSXP, TRUE); /* That has evaluated
+						    * promises */
+	if(TYPEOF(val) == CLOSXP) defenv = CLOENV(val);
+	else defenv = R_BaseNamespace;
     }
 
     if (CADR(argList) != R_MissingArg)

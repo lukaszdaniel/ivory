@@ -1762,6 +1762,21 @@ writeLines(tail(dp.2))
 ## dp.2 and du.2  where heavily truncated in R <= 3.4.4, ending  "  ..."
 
 
+## optim() with "trivial bounds"
+flb <- function(x) { p <- length(x); sum(c(1, rep(4, p-1)) * (x - c(1, x[-p])^2)^2) }
+o1 <- optim(rep(3, 5), flb)
+o2 <- optim(rep(3, 5), flb, lower = rep(-Inf, 5))
+stopifnot(all.equal(o1,o2))
+## the 2nd optim() call gave a warning and switched to "L-BFGS-B" in R <= 3.5.0
+
+## Check that call matching doesn't mutate input
+cl <- as.call(list(quote(x[0])))
+cl[[1]][[3]] <- 1
+v <- .Internal(match.call(function(x) NULL, cl, TRUE, .GlobalEnv))
+cl[[1]][[3]] <- 2
+stopifnot(v[[1]][[3]] == 1)
+## initial patch proposal to reduce duplicating failed on this
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

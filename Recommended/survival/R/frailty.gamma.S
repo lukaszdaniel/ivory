@@ -52,7 +52,7 @@ frailty.gamma <- function(x, sparse=(nclass >5), theta, df, eps= 1e-5,
 	if (is.matrix(var)) test <- coxph.wtest(var, coef)$test
 	else 		    test <- sum(coef^2/var)
 	df2 <- max(df, .5)      # Stop silly p-values
-	list(coef=c(NA, NA, NA, test, df, 1-pchisq(test, df2)),
+	list(coef=c(NA, NA, NA, test, df, pchisq(test, df2, lower.tail=FALSE)),
 		 history=gettextf("variance of random effect= %s  I-likelihood = %s", format(theta), format(round(clog,1), digits=10)))
 	}
     # The final coxph object will contain a copy of printfun.  Stop it from

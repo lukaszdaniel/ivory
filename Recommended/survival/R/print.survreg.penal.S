@@ -63,7 +63,7 @@ print.survreg.penal <-  function(x, terms=FALSE, maxlabel=25,
 	    pname1 <- c(pname1, names(pterms)[i])
 	    temp <- coxph.wtest(x$var[kk,kk], coef[kk])$test
 	    print1 <- rbind(print1, c(NA, NA, NA,
-				      temp, x$df[i], 1-pchisq(temp, 1)))
+		  temp, x$df[i], pchisq(temp, 1, lower.tail=FALSE)))
 	    }
 	else {
 	    pname1 <- c(pname1, names(coef)[kk])
@@ -71,7 +71,7 @@ print.survreg.penal <-  function(x, terms=FALSE, maxlabel=25,
 	    temp <- coef[kk]^2/ tempe
 	    print1 <- rbind(print1, cbind(coef[kk], sqrt(tempe),
 				      sqrt((diag(x$var2))[kk]), 
-				      temp, 1, 1-pchisq(temp, 1)))
+				  temp, 1, pchisq(temp, 1, lower.tail=FALSE)))
 	    }
 	}
 
@@ -109,7 +109,9 @@ print.survreg.penal <-  function(x, terms=FALSE, maxlabel=25,
     cat(gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,1)), collapse = " "), domain = "R-survival"), "\n", sep = "")
 #    cat("Loglik (initial,final) = ", format(round(x$loglik,2)),
 #	"  Penalty = ", format(x$penalty), "\n")
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), round(df,1), format(1 - pchisq(logtest, df)), domain = "R-survival"),  sep = "")
+
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), round(df,1), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"),  sep = "")
 
     n <- length(x$linear.predictors)
     omit <- x$na.action

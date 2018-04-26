@@ -103,6 +103,7 @@ print.summary.aareg <- function(x, ...) {
     print(signif(x$table,3))
     chi <- x$chisq
     df  <- length(x$test.statistic) -1
-    cat("\n", gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi,2)), df, signif(1- pchisq(chi, df),2), x$test, domain = "R-survival"), "\n", sep = '')
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
+    cat("\n", gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi,2)), df, format.pval(pchisq(chi, df, lower.tail=FALSE), digits=pdig), x$test, domain = "R-survival"), "\n", sep = '')
     invisible(x$table)
     }

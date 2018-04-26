@@ -60,6 +60,9 @@ survreg <- function(formula, data, weights, subset, na.action,
     xlevels <- .getXlevels(newTerms, m)
     contr.save <- attr(X, 'contrasts')
     
+    if (!all(is.finite(X)))
+        stop("data contains an infinite predictor")
+        
     n <- nrow(X)
     nvar <- ncol(X)
 
@@ -200,6 +203,8 @@ survreg <- function(formula, data, weights, subset, na.action,
 	fit$loglik <- fit$loglik + logcorrect
 	}
 
+
+
     if (!score) fit$score <- NULL   #do not return the score vector
     fit$df.residual <- n - sum(fit$df)
     fit$terms <- Terms
@@ -226,6 +231,11 @@ survreg <- function(formula, data, weights, subset, na.action,
         else fit$var <- crossprod(residuals.survreg(fit, 'dfbeta'))
         if (!model) fit$model <- NULL  # take it back out
         }
+
+    # set singular coefficients to NA
+    #  this is purposely not done until the residuals, etc. are computed
+    singular <- (diag(fit$var)==0)[seq_along(fit$coef)]
+    if (any(singular)) fit$coef <- ifelse(singular, NA, fit$coef)
 
     na.action <- attr(m, "na.action")
     if (length(na.action)) fit$na.action <- na.action

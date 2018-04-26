@@ -12,6 +12,17 @@
       \item \code{Sys.setFileTime()} has been vectorized, its arguments
       \code{path} and \code{time} of length greater than one are now
       supported.
+
+      \item \code{axis()} gets new option \code{gap.axis = NA} for
+      specifying a multiplication factor for the minimal \dQuote{gap}
+      (distance) between axis labels drawn.   Its default is \code{1}
+      for labels \emph{parallel} to the axis, and \code{0.5} for
+      perpendicular ones.
+
+      These (perpendicular labels) no longer overlap, fixing bug \PR{17384}.
+
+      \item \code{removeSource()} now works not only for functions but
+      also for some language objects.
     }
   }
 
@@ -32,6 +43,14 @@
 
       \item \code{dput()} and \code{dump()} are no longer truncating
       when \code{options(deparse.max.lines = *)} is set.
+
+      \item Calls with an S3 class are no longer evaluated when printed,
+      fixing part of \PR{17398}, thanks to a patch from Lionel Henry.
+
+      \item \code{optim(*, lower = c(-Inf, -Inf))} no longer warns (and
+      switches the method), thanks to a suggestion by John Nash.
+
+      \item \code{file("stdin")} is no longer considered seekable.
     }
   }
 

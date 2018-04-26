@@ -38,8 +38,9 @@ anova.coxphlist <- function (object, test =  'Chisq' ,...) {
     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", responses[1]), sep = "")
     topnote <- paste(gettextf(" Model %s:", format(seq_len(nmodels))), variables, collapse = "\n")
     if (!is.null(test)) {
-        table[['P(>|Chi|)']] <- 1-pchisq(table$Chisq, table$Df)
+        table[['P(>|Chi|)']] <- pchisq(table$Chisq, table$Df, lower.tail=FALSE)
         }
     structure(table, heading = c(title, topnote), 
 			  class = c("anova", "data.frame"))
 } 
+

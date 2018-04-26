@@ -1232,14 +1232,6 @@ if(FALSE) {
                 out <- R_runR(cmd, opts, env = env, timeout = tlim)
                 if(length(out)) {
                     cat(paste(c(out, ""), collapse = "\n"))
-                    if(config_val_to_logical(Sys.getenv("_KH_DEBUG_TEST_LOAD_PROBLEM_",
-                                                        "FALSE")))
-                        writeLines(c(sprintf("lib0: %s",
-                                             paste(lib0, collapse = " ")),
-                                     sprintf("lib: %s",
-                                             paste(lib, collapse = " ")),
-                                     sprintf("env: %s",
-                                             paste(env, collapse = " "))))
                 }
                 if(length(attr(out, "status")))
                     errmsg(gettext("ERROR: loading failed")) # does not return

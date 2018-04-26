@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-03-29 r1019) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-03-29 r74490) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -244,7 +244,7 @@ aareg(formula = Surv(time, status) ~ age, data = lung, dfbeta = T)
 Intercept -0.000872 -0.000905 4.26e-03  4.13e-03 -0.219 0.8270
 age        0.000110  0.000142 6.96e-05  6.75e-05  2.110 0.0351
 
-Chisq= 4.44 on 1 df, p=0.035; test weights= aalen
+Chisq= 4.44 on 1 df, p=0.0351; test weights= aalen
 > 
 > afit <- aareg(Surv(time, status) ~ age, lung, dfbeta=T, test='nrisk')
 > asum <- summary(afit, maxtime=max(afit$times))
@@ -319,7 +319,7 @@ sex       -2.96e-03 -0.004020 1.25e-03  1.23e-03 -3.27 0.00109
 ph.karno  -6.77e-05 -0.000083 6.69e-05  8.30e-05 -1.00 0.31700
 pat.karno -1.01e-04 -0.000112 5.59e-05  5.70e-05 -1.96 0.05010
 
-Chisq= 23.36 on 4 df, p=0.00011; test weights= aalen
+Chisq= 23.36 on 4 df, p=0.000107; test weights= aalen
 > 
 > afit <- aareg(Surv(time, status) ~ age + sex + ph.karno + pat.karno, lung,
 + 	      dfbeta=T, test='nrisk')
@@ -386,4 +386,4 @@ attr(,"class")
 > 
 > proc.time()
    user  system elapsed 
-  0.963   0.059   1.016 
+  0.956   0.060   1.011 

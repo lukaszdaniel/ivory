@@ -23,6 +23,7 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 `$cmd demos.Rout		demos.Rout.save`
 `$cmd d-p-q-r-tests.Rout	d-p-q-r-tests.Rout.save`
 `$cmd eval-etc.Rout		eval-etc.Rout.save`
+`$cmd eval-etc-2.Rout		eval-etc-2.Rout.save`
 `$cmd iec60559.Rout		iec60559.Rout.save`
 `$cmd internet.Rout		internet.Rout.save`
 `$cmd isas-tests.Rout		isas-tests.Rout.save`
@@ -125,6 +126,7 @@ fi;
 if [[ "$1" == "MASS" ]] || [[ "$1" == "all" ]]; then
 `$cmd MASS.Rcheck/tests/fitdistr.Rout	../../$RECIVORY/MASS/tests/fitdistr.Rout.save`
 `$cmd MASS.Rcheck/tests/regression.Rout	../../$RECIVORY/MASS/tests/regression.Rout.save`
+`$cmd MASS.Rcheck/tests/MASS-Ex.Rout	../../$RECIVORY/MASS/tests/Examples/MASS-Ex.Rout.save`
 fi;
 
 if [[ "$1" == "Matrix" ]] || [[ "$1" == "all" ]]; then
@@ -201,7 +203,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/model.matrix.Rout		../../$RECIVORY/survival/tests/model.matrix.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit2.Rout		../../$RECIVORY/survival/tests/survfit2.Rout.save`
 `$cmd	survival.Rcheck/tests/coxsurv2.Rout		../../$RECIVORY/survival/tests/coxsurv2.Rout.save`
-`$cmd	survival.Rcheck/tests/mrtest.Rout		../../$RECIVORY/survival/tests/mrtest.Rout.save`
+#`$cmd	survival.Rcheck/tests/mrtest.Rout		../../$RECIVORY/survival/tests/mrtest.Rout.save`
 `$cmd	survival.Rcheck/tests/survreg2.Rout		../../$RECIVORY/survival/tests/survreg2.Rout.save`
 `$cmd	survival.Rcheck/tests/coxsurv3.Rout		../../$RECIVORY/survival/tests/coxsurv3.Rout.save`
 `$cmd	survival.Rcheck/tests/nested.Rout		../../$RECIVORY/survival/tests/nested.Rout.save`

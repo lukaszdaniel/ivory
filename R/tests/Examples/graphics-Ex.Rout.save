@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-04-11 r1023) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-04-11 r74580) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -262,6 +262,24 @@ Hair    Brown Blue Hazel Green
 > # one way to have a custom x axis
 > plot(1:10, xaxt = "n")
 > axis(1, xaxp = c(2, 9, 7))
+> 
+> ## Changing default gap between labels:
+> plot(0:100, type="n", axes=FALSE, ann=FALSE)
+> title(quote("axis(1, .., gap.axis = f)," ~~ f >= 0))
+> axis(2, at = 5*(0:20), las = 1, gap.axis = 1/4)
+> gaps <- c(4, 2, 1, 1/2, 1/4, 0.1, 0)
+> chG <- paste0(ifelse(gaps == 1, "default:  ", ""),
++               "gap.axis=", formatC(gaps))
+> jj <- seq_along(gaps)
+> linG <- -2.5*(jj-1)
+> for(j in jj) {
++     isD <- gaps[j] == 1 # is default
++     axis (1, at=5*(0:20), gap.axis = gaps[j], padj=-1, line = linG[j],
++           col.axis = if(isD) "forest green" else 1, font.axis= 1+isD)
++ }
+> mtext(chG, side=1, padj=-1, line = linG -1/2, cex=3/4,
++       col = ifelse(gaps == 1, "forest green", "blue3"))
+> ## now shrink the window (in x- and y-direction) and observe the axis labels drawn
 > 
 > 
 > 
@@ -2088,7 +2106,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x30170d0>
+<bytecode: 0x3a64940>
 <environment: namespace:graphics>
 > 
 > 
@@ -2958,7 +2976,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x35b5d68>
+<bytecode: 0x1ed79d0>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3039,7 +3057,7 @@ function (xy = 1, warn.log = TRUE)
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.977 0.032 2.007 0 0 
+Time elapsed:  1.912 0.048 1.96 0 0 
 > grDevices::dev.off()
 null device 
           1 

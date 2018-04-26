@@ -1,4 +1,3 @@
-# $Id: print.aareg.S 11250 2009-03-19 13:44:59Z tlumley $
 print.aareg <- function(x, maxtime, test=c('aalen', 'nrisk'), scale=1, ...) {
     if (!inherits(x, 'aareg')) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg")))
     if (!is.null(cl<- x$call)) {
@@ -21,6 +20,8 @@ print.aareg <- function(x, maxtime, test=c('aalen', 'nrisk'), scale=1, ...) {
     print(signif(summ$table,3))
     chi <- summ$chisq
     df <- nrow(summ$table) -1
-    cat("\n", sprintf(gettext("Chisq= %s on %d df, p=%s; test weights= %s", domain = "R-survival"), format(round(chi,2)), df, signif(1- pchisq(chi,df),2), paste(x$test, collapse = " "), domain = NA), "\n", sep="")
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
+    cat("\n", sprintf(gettext("Chisq= %s on %d df, p=%s; test weights= %s", domain = "R-survival"), format(round(chi,2)), df, format.pval(pchisq(chi,df, lower.tail=FALSE), digits=pdig), paste(x$test, collapse = " "), domain = NA), "\n", sep="")
     invisible(x)
     }
+

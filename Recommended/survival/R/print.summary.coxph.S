@@ -42,12 +42,13 @@ print.summary.coxph <-
     }
     cat(gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"],3)), format(round(x$rsq["maxrsq"],3)), domain = "R-survival"), "\n", sep = "")
 
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"], 2)),  x$logtest["df"], format(x$logtest["pvalue"]), domain = "R-survival"), "\n", sep = "")
-    cat(gettextf("Wald test = %s on %s df, p=%s", format(round(x$waldtest["test"], 2)), x$waldtest["df"], format(x$waldtest["pvalue"]), domain = "R-survival"), "\n", sep = "")
-    cat(gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(x$sctest["test"], 2)), x$sctest["df"], format(x$sctest["pvalue"]), domain = "R-survival"))
+    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"], 2)),  x$logtest["df"], format.pval(x$waldtest["pvalue"], digits=pdig), domain = "R-survival"), "\n", sep = "")
+    cat(gettextf("Wald test = %s on %s df, p=%s", format(round(x$waldtest["test"], 2)), x$waldtest["df"], format.pval(x$waldtest["pvalue"], digits=pdig), domain = "R-survival"), "\n", sep = "")
+    cat(gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(x$sctest["test"], 2)), x$sctest["df"], format.pval(x$waldtest["pvalue"], digits=pdig), domain = "R-survival"))
     if (is.null(x$robscore))
         cat("\n\n")
-    else cat(",   ", gettextf("Robust = %s p=%s", format(round(x$robscore["test"], 2)), format(x$robscore["pvalue"]), domain = "R-survival"), "\n\n", sep = "")
+    else cat(",   ", gettextf("Robust = %s p=%s", format(round(x$robscore["test"], 2)), format.pval(x$robscore["pvalue"], digits=pdig), domain = "R-survival"), "\n\n", sep = "")
 
     if (x$used.robust)
 	cat(gettext("  (Note: the likelihood ratio and score tests assume independence of\n     observations within a cluster, the Wald and robust score tests do not).", domain = "R-survival"), "\n", sep = "")
