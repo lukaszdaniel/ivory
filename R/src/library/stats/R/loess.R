@@ -142,7 +142,7 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     surf.stat <- paste(surface, statistics, sep = "/")
     do.rob <- (iterations > 1L) # will do robustness iter.
     if(!do.rob && iterTrace) {
-	warning(gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations))
+	warning(gettextf("iterTrace = %d is not obeyed since iterations = %d", iterTrace, iterations))
 	iterTrace <- FALSE
     }
     no.st <- (statistics == "none")

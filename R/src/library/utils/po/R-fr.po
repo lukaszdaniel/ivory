@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 21:21\n"
+"POT-Creation-Date: 2018-04-28 20:07\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1464,6 +1464,16 @@ msgstr ""
 msgid "The number of captures in 'pattern' != 'length(proto)'"
 msgstr ""
 
+#. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of tokens != 'length(proto)'"
+msgstr ""
+
+#. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
+#: R/strcapture.R:0
+msgid "The number of tokens is not consistent across 'x'"
+msgstr ""
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -1862,6 +1872,11 @@ msgstr "ajout du nom des colonnes dans le fichier"
 #: R/help.search.R:0
 msgid "argument 'help.db' is deprecated"
 msgstr "l'argument 'help.db' est obsolète"
+
+#. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
+#: R/sourceutils.R:0
+msgid "argument is not a function or language object:"
+msgstr ""
 
 #. R/SweaveDrivers.R: gettextf("at %s, %s", location, conditionMessage(e))
 #: R/SweaveDrivers.R:0

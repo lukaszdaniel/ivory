@@ -5367,7 +5367,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 		con = newclp(url, strlen(open) ? open : "r");
 	    else {
 		const char *efn = R_ExpandFileName(url);
-#ifndef Win32
+#ifndef _WIN32
 		if (!raw) {
 		    struct stat sb;
 		    int res = stat(efn, &sb);
@@ -5375,7 +5375,8 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 			raw = TRUE;
 			warning(_("using 'raw = TRUE' because '%s' is a fifo or pipe"),
 				url);
-		    } else if (!res && !(sb.st_mode & S_IFREG))
+		    } else if (!res && !(sb.st_mode & S_IFREG) &&
+			       strcmp(efn, "/dev/null"))
 			/* not setting 'raw' to FALSE because character devices may be
 			   seekable; unfortunately there is no reliable way to detect
 			   that without changing the device state */

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.6.0\n"
-"POT-Creation-Date: 2018-04-02 21:52\n"
+"POT-Creation-Date: 2018-04-28 20:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5905,9 +5905,9 @@ msgstr ""
 
 
 #: R/loess.R: 0
-#. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
+#. R/loess.R: gettextf("iterTrace = %d is not obeyed since iterations = %d", iterTrace, iterations)
 
-msgid "iterTrace = %s not obeyed as iterations = %d"
+msgid "iterTrace = %d is not obeyed since iterations = %d"
 msgstr ""
 
 

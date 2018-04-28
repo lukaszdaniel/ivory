@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-11 20:39+0200\n"
+"POT-Creation-Date: 2018-04-28 20:07+0200\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -42,44 +42,44 @@ msgstr ""
 msgid "attempt to plot on null device"
 msgstr "попытка чертить на нулевом устройстве"
 
-#: grid.c:1310
+#: grid.c:1398
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Нет заданного эскиза"
 
-#: grid.c:1530
+#: grid.c:1618
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Край многоугольника не найден (нулевая ширина или высота?)"
 
-#: grid.c:1539
+#: grid.c:1627
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Край многоугольника не найден"
 
-#: grid.c:1693
+#: grid.c:1781
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Надо как минимум две точки, чтобы нарисовать стрелку"
 
-#: grid.c:2009
+#: grid.c:2097
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Не-конечная контрольная точка в Xspline"
 
-#: grid.c:2874
+#: grid.c:2962
 msgid "non-finite x or y in graphics path"
 msgstr "бесконечный x или y в кривой крафика"
 
-#: grid.c:2915
+#: grid.c:3003
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3369
+#: grid.c:3457
 msgid "invalid plotting symbol"
 msgstr "неправильный символ графика"
 
-#: grid.c:3455
+#: grid.c:3543
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Не могу обрезать повернутый четырехугольник"

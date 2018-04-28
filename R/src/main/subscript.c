@@ -818,7 +818,6 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 
     PROTECT(s);
     PROTECT(names);
-    PROTECT(indexnames = allocVector(VECSXP, ns));
     nnames = nx;
     extra = nnames;
 
@@ -838,8 +837,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 	int *pindx = INTEGER(indx);
 	for (i = 0; i < ns; i++)
 	    if(STRING_ELT(s, i) == NA_STRING || !CHAR(STRING_ELT(s, i))[0])
-		pindx[i] = 0;
-	for (i = 0; i < ns; i++) SET_VECTOR_ELT(indexnames, i, R_NilValue);
+		pindx[i] = 0;	
     } else {
 	PROTECT(indx = allocVector(INTSXP, ns));
 	int *pindx = INTEGER(indx);
@@ -850,7 +848,6 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 		    SEXP names_j = STRING_ELT(names, j);
 		    if (NonNullStringMatch(STRING_ELT(s, i), names_j)) {
 			sub = j + 1;
-			SET_VECTOR_ELT(indexnames, i, R_NilValue);
 			break;
 		    }
 		}
@@ -860,15 +857,21 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     }
 
     int *pindx = INTEGER(indx);
+    SEXP sindx = NULL;
     for (i = 0; i < ns; i++) {
 	sub = pindx[i];
 	if (sub == 0) {
-	    for (j = 0 ; j < i ; j++)
-		if (NonNullStringMatch(STRING_ELT(s, i), STRING_ELT(s, j))) {
-		    sub = pindx[j];
-		    SET_VECTOR_ELT(indexnames, i, STRING_ELT(s, j));
-		    break;
-		}
+	    if (sindx == NULL) {
+		sindx = PROTECT(match(s, s, 0));
+		indexnames = PROTECT(allocVector(VECSXP, ns));
+		for (int z = 0; z < ns; z++)
+		    SET_VECTOR_ELT(indexnames, z, R_NilValue);
+	    }
+	    int j = INTEGER(sindx)[i] - 1;
+	    if(STRING_ELT(s, i) != NA_STRING && CHAR(STRING_ELT(s, i))[0]) {
+		sub = pindx[j];
+		SET_VECTOR_ELT(indexnames, i, STRING_ELT(s, j));
+	    }
 	}
 	if (sub == 0) {
 	    if (!canstretch) {
@@ -884,9 +887,12 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
        subscript vector. */
     if (extra != nnames)
 	setAttrib(indx, R_UseNamesSymbol, indexnames);
+    if (sindx != NULL) {
+	UNPROTECT(2);
+    }
     if (canstretch)
 	*stretch = extra;
-    UNPROTECT(4);
+    UNPROTECT(3);
     return indx;
 }
 

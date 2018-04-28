@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 21:21\n"
+"POT-Creation-Date: 2018-04-28 20:07\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
-"X-Poedit-Bookmarks: -1,203,-1,-1,-1,-1,-1,-1,-1,-1\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Bookmarks: -1,203,240,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
 #. R/windows/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
@@ -1431,6 +1431,16 @@ msgstr ""
 msgid "The number of captures in 'pattern' != 'length(proto)'"
 msgstr "Liczba przechwytań w 'pattern' != 'length(proto)'"
 
+#. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of tokens != 'length(proto)'"
+msgstr "Liczba tokenów != 'length(proto)'"
+
+#. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
+#: R/strcapture.R:0
+msgid "The number of tokens is not consistent across 'x'"
+msgstr "Liczba tokenów nie jest spójna w 'x'"
+
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly", domain = "R-utils")
 #: R/RSiteSearch.R:0
 msgid "The results page should open in your browser shortly"
@@ -1843,6 +1853,11 @@ msgstr "dołączanie nazw kolumn do pliku"
 #: R/help.search.R:0
 msgid "argument 'help.db' is deprecated"
 msgstr "argument 'help.db' jest przestarzały"
+
+#. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
+#: R/sourceutils.R:0
+msgid "argument is not a function or language object:"
+msgstr "argument nie jest funkcja ani obiektem języka:"
 
 #. R/SweaveDrivers.R: gettextf("at %s, %s", location, conditionMessage(e))
 #: R/SweaveDrivers.R:0
@@ -3848,10 +3863,6 @@ msgstr[2] "pakiety %s nie są dostępne (dla %s)"
 #, fuzzy
 #~ msgid "Selection: "
 #~ msgstr "Wybierz pliki"
-
-#, fuzzy
-#~ msgid "'file' argument is not a connection"
-#~ msgstr "'tarfile' musi być łańcuchem tekstowym lub połączeniem"
 
 #, fuzzy
 #~ msgid "cannot write to this connection"

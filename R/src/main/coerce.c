@@ -1618,6 +1618,9 @@ SEXP attribute_hidden do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     check1arg(args, call, "x");
 
+    if (DispatchOrEval(call, op, "as.call", args, rho, &ans, 0, 1))
+	return(ans);
+
     args = CAR(args);
     switch (TYPEOF(args)) {
     case LANGSXP:
