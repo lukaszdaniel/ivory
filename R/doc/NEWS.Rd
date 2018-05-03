@@ -67,6 +67,16 @@
 
       \item Allow \code{file} argument of \command{Rscript} to include space
       even when it is first on the command line.
+
+      \item \code{callNextMethod()} uses the generic from the
+      environment of the calling method. Reported by Hervé Pagès with
+      well documented examples.
+
+      \item \code{untar(file("<some>.tar.gz"), *)} now gives a better
+      error message, suggesting to use \code{gzfile()} instead.
+
+      \item \code{simulate.lm(glm(*, gaussian(link = <non-default>)))}
+      has been corrected, fixing \PR{17415} thanks to Alex Courtiol.
     }
   }
 
