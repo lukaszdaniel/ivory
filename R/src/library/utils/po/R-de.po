@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-05-04 18:16\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -2327,6 +2327,11 @@ msgstr "missgestaltete 'instPkgs' Matrix"
 #: R/tar.R:0
 msgid "incomplete block on file"
 msgstr "unvollständiger Block in Datei"
+
+#. R/tar.R: stop("incomplete block: rather use gzfile(.) created connection?")
+#: R/tar.R:0
+msgid "incomplete block: rather use gzfile(.) created connection?"
+msgstr ""
 
 #. R/help.search.R: stop("incorrect 'agrep' specification")
 #: R/help.search.R:0

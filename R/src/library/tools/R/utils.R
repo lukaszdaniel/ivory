@@ -323,7 +323,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(out$status &&
            file_test("-f", log) &&
            any(grepl("(Rerun to get|biblatex.*\\(re\\)run)",
-                     readLines(log, warn = FALSE)))) {
+                     readLines(log, warn = FALSE), useBytes = TRUE))) {
             out <- .system_with_capture(texi2dvi,
                                         c(opt_pdf, opt_quiet, opt_extra,
                                           shQuote(file)),
@@ -454,7 +454,9 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         ltxargs <- c("-interaction=nonstopmode", texfile)
         if(sys2(latex, ltxargs))
             stop(gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file)), domain = "R-tools")
-        nmiss <- length(grep("Warning:.*Citation.*undefined", readLines(paste0(base, ".log"))))
+        nmiss <- length(grep("Warning:.*Citation.*undefined",
+                             readLines(paste0(base, ".log")),
+                             useBytes = TRUE))
         for(iter in 1L:10L) { ## safety check
             ## This might fail as the citations have been included in the Rnw
             if(nmiss) sys2(bibtex, shQuote(base))
@@ -474,9 +476,11 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
                      domain = NA)
             }
             Log <- readLines(paste0(base, ".log"))
-            nmiss <- length(grep("Warning:.*Citation.*undefined", Log))
+            nmiss <- length(grep("Warning:.*Citation.*undefined", Log,
+                                 useBytes = TRUE))
             if(nmiss == nmiss_prev &&
-               !any(grepl("(Rerun to get|biblatex.*\\(re\\)run)", Log)) ) break
+               !any(grepl("(Rerun to get|biblatex.*\\(re\\)run)", Log,
+                          useBytes = TRUE)) ) break
         }
         do_cleanup(clean)
     }
@@ -885,7 +889,7 @@ function(nsInfo)
 
 ### ** .get_namespace_S3_methods_with_homes
 
-.get_namespace_S3_methods_with_homes <- 
+.get_namespace_S3_methods_with_homes <-
 function(package, lib.loc = NULL)
 {
     ## Get the registered S3 methods with the 'homes' of the generics
@@ -1097,7 +1101,7 @@ function(reverse = FALSE, recursive = FALSE)
 {
     names <- unlist(.get_standard_package_names())
     paths <- file.path(.Library, names, "DESCRIPTION")
-    ## Be nice ... 
+    ## Be nice ...
     paths <- paths[file.exists(paths)]
     which <- c("Depends", "Imports")
     fields <- c("Package", which)
