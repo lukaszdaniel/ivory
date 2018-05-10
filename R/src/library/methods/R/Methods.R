@@ -189,7 +189,7 @@ setGeneric <-
                     message(gettextf("Creating a new generic function for %s in the global environment", sQuote(name)), domain = "R-methods")
 		  else
                     message(gettextf("Creating a new generic function for %s in package %s", sQuote(name), sQuote(thisPackage)), domain = "R-methods")
-                    fdef@package <- attr(fdef@generic, "package") <- thisPackage
+                    fdef@package <- packageSlot(fdef@generic) <- packageSlot(environment(fdef)$.Generic) <- thisPackage
                 }
             }
             else { # generic prohibited
@@ -199,7 +199,7 @@ setGeneric <-
 	      else
                 warning(gettextf("no generic version of %s on package %s is allowed; a new generic will be assigned for package %s",
                                  sQuote(name), sQuote(package), sQuote(thisPackage)), domain = "R-methods")
-                fdef@package <- attr(fdef@generic, "package") <- thisPackage
+                fdef@package <- packageSlot(fdef@generic) <- packageSlot(environment(fdef)$.Generic) <- thisPackage
             }
         }
     }
