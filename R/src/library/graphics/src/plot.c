@@ -3111,7 +3111,7 @@ static void drawLabel(double xi, double yi, int pos, double offset,
 
 SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, x, y, l, ind, pos, Offset, draw, saveans;
+    SEXP ans, x, y, l, ind, pos, order, Offset, draw, saveans;
     double xi, yi, xp, yp, d, dmin, offset, tol;
     int atpen, i, imin, k, n, nl, npts, plot, posi, warn;
     pGEDevDesc dd = GEcurrentDevice();
@@ -3198,8 +3198,11 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	offset = GConvertXUnits(asReal(Offset), CHARS, INCHES, dd);
 	PROTECT(ind = allocVector(LGLSXP, n));
 	PROTECT(pos = allocVector(INTSXP, n));
-	for (i = 0; i < n; i++) LOGICAL(ind)[i] = 0;
-
+        PROTECT(order = allocVector(INTSXP, n));
+	for (i = 0; i < n; i++) {
+             LOGICAL(ind)[i] = 0;
+             INTEGER(order)[i] = 0;
+        }
 	k = 0;
 	GMode(2, dd);
 	PROTECT(x = duplicate(x));
@@ -3245,7 +3248,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else {
 		k++;
 		LOGICAL(ind)[imin] = 1;
-
+                INTEGER(order)[imin] = k;
 		if (atpen) {
 		    xi = xp;
 		    yi = yp;
@@ -3279,9 +3282,10 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	}
 	GMode(0, dd);
-	PROTECT(ans = allocList(2));
+	PROTECT(ans = allocList(3));
 	SETCAR(ans, ind);
 	SETCADR(ans, pos);
+	SETCADDR(ans, order);
 	if (GRecording(call, dd)) {
 	    /* If we are recording, save enough information to be able to
 	       redraw the text labels beside identified points */
@@ -3298,7 +3302,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    GErecordGraphicOperation(op, saveans, dd);
 	    UNPROTECT(1);
 	}
-	UNPROTECT(5);
+	UNPROTECT(6);
 
 	return ans;
     }
