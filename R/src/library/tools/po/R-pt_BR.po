@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-16 18:46\n"
+"POT-Creation-Date: 2018-05-24 21:00\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1722,8 +1722,9 @@ msgid ""
 "The \\usage entries must correspond to syntactically valid R code."
 msgstr ""
 
+#. R/QC.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
 #. R/check.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
-#: R/check.R:0
+#: R/QC.R:0 R/check.R:0
 msgid "GNU make is a SystemRequirements."
 msgstr ""
 
@@ -2370,6 +2371,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")

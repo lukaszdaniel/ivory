@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2018-04-16 18:46\n"
+"POT-Creation-Date: 2018-05-24 21:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2189,7 +2189,9 @@ msgid "Functions with \\usage entries need to have the appropriate \\alias entri
 msgstr ""
 
 
+#: R/QC.R: 0
 #: R/check.R: 0
+#. R/QC.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
 #. R/check.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
 
 msgid "GNU make is a SystemRequirements."
@@ -3083,6 +3085,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3096,6 +3099,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 20:35+0200\n"
+"POT-Creation-Date: 2018-05-24 21:00+0200\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -109,8 +109,8 @@ msgid "'dec' argument must be a single character"
 msgstr "'dec' должен быть одним символом"
 
 #: io.c:1129
-#, c-format
-msgid "corrupt data frame -- length of column %d does not not match nrows"
+#, fuzzy, c-format
+msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
 
@@ -120,7 +120,8 @@ msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "колонка %s считает себя фактором, но у нее нет числовых кодов"
 
 #: io.c:1174
-msgid "corrupt matrix -- dims not not match length"
+#, fuzzy
+msgid "corrupt matrix -- dims do not match length"
 msgstr "поврежденная матрица -- длины измерений не сходятся"
 
 #: stubs.c:48

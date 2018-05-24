@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-05-03 r1029) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-05-21 r1036) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-05-03 r74683) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-05-21 r74779) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -258,38 +258,6 @@ Matrix+           is(Matrix(FALSE, 1,1), "sparseMatrix"))
 > sy <- sparseMatrix(i = c(2, 4, 3:5), j = c(4, 7:5, 5), x = 1:5, dims = c(7, 
 +     7), symmetric = TRUE)
 > 
-> source(file.path(Sys.getenv("SRCDIR"), "eval-fns.R"), echo = TRUE)
-
-> pd0 <- function(expr, backtick = TRUE, ...) parse(text = deparse(expr, 
-+     backtick = backtick, ...))
-
-> id_epd <- function(expr, control = c("all", "digits17"), 
-+     ...) eval(pd0(expr, control = control, ...))
-
-> dPut <- function(x, control = c("all", "digits17")) dput(x, 
-+     control = control)
-
-> hasReal <- function(x) {
-+     if (is.double(x) || is.complex(x)) 
-+         !all((x == round(x, 3)) | is.na(x))
-+     else if (is.logical(x) || is. .... [TRUNCATED] 
-
-> isMissObj <- function(obj) identical(obj, alist(a = )[[1]])
-
-> hasMissObj <- function(obj) {
-+     if (is.recursive(obj)) {
-+         if (is.function(obj) || is.language(obj)) 
-+             FALSE
-+         else .... [TRUNCATED] 
-
-> check_EPD <- function(obj, show = !hasReal(obj), oNam = deparse(substitute(obj)), 
-+     control = c("keepInteger", "showAttributes", "keepNA"), not .... [TRUNCATED] 
-
-> runEPD_checks <- function(env = .GlobalEnv) {
-+     stopifnot(is.environment(env))
-+     for (nm in ls(envir = env)) {
-+         cat(nm, ": ", sep = .... [TRUNCATED] 
->                                         #---------
 > runEPD_checks() # Action!
 A: new("dgCMatrix", i = c(0L, 3L, 4L, 5L, 2L, 6L, 7L), p = c(0L, 0L, 1L, 1L, 1L, 1L, 
 2L, 3L, 4L, 6L, 7L), Dim = c(8L, 10L), Dimnames = list(NULL, NULL), x = c(7, 21, 
@@ -366,7 +334,8 @@ check_EPD: function (obj, show = !hasReal(obj), oNam = deparse(substitute(obj)),
                 paste("but", ae.txt), "\n")
         }
         if (!isTRUE(ae)) 
-            stop("Not equal: ", ae.txt, " giving\n", ae)
+            stop("Not equal: ", ae.txt, paste(c(" giving", head(ae, 2), if (length(ae) > 
+                2) "...."), collapse = "\n  "))
     }
     if (!is.language(obj)) {
         ob2. <- eval(obj)
@@ -404,7 +373,8 @@ quote({
                 paste("but", ae.txt), "\n")
         }
         if (!isTRUE(ae)) 
-            stop("Not equal: ", ae.txt, " giving\n", ae)
+            stop("Not equal: ", ae.txt, paste(c(" giving", head(ae, 2), if (length(ae) > 
+                2) "...."), collapse = "\n  "))
     }
     if (!is.language(obj)) {
         ob2. <- eval(obj)
@@ -624,5 +594,5 @@ Length  Class   Mode
      0   NULL   NULL 
 > ## at the very end
 > cat('Time elapsed: ', proc.time(), "\n")
-Time elapsed:  1.079 0.048 1.126 0 0 
+Time elapsed:  1.009 0.076 1.081 0 0 
 > 

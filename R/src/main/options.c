@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1998-2018   The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998-2017   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,6 +56,8 @@
  *	"verbose"
  *	"keep.source"
  *	"keep.source.pkgs"
+ *	"keep.parse.data"
+ *	"keep.parse.data.pkgs"
  *	"browserNLdisabled"
 
  *	"de.cellwidth"		../unix/X11/ & ../gnuwin32/dataentry.c
@@ -64,6 +66,8 @@
  *	"paper.size"		./devPS.c
 
  *	"timeout"		./connections.c
+
+ *      "deparse.max.lines"     ./deparse.c (& PrintCall() in ./eval.c, ./main.c
 
  *	"check.bounds"
  *	"error"
@@ -249,9 +253,9 @@ void attribute_hidden InitOptions(void)
     char *p;
 
 #ifdef HAVE_RL_COMPLETION_MATCHES
-    PROTECT(v = val = allocList(21));
+    PROTECT(v = val = allocList(23));
 #else
-    PROTECT(v = val = allocList(20));
+    PROTECT(v = val = allocList(22));
 #endif
 
     SET_TAG(v, install("prompt"));
@@ -293,12 +297,21 @@ void attribute_hidden InitOptions(void)
     p = getenv("R_KEEP_PKG_SOURCE");
     R_KeepSource = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
 
-    SET_TAG(v, install("keep.source")); /* overridden in common.R */
+    SET_TAG(v, install("keep.source")); /* overridden in Common.R */
     SETCAR(v, ScalarLogical(R_KeepSource));
     v = CDR(v);
 
     SET_TAG(v, install("keep.source.pkgs"));
     SETCAR(v, ScalarLogical(R_KeepSource));
+    v = CDR(v);
+
+    SET_TAG(v, install("keep.parse.data"));
+    SETCAR(v, ScalarLogical(TRUE));
+    v = CDR(v);
+
+    p = getenv("R_KEEP_PKG_PARSE_DATA");
+    SET_TAG(v, install("keep.parse.data.pkgs"));
+    SETCAR(v, ScalarLogical((p && (strcmp(p, "yes") == 0)) ? TRUE : FALSE));
     v = CDR(v);
 
     SET_TAG(v, install("warning.length"));
@@ -335,9 +348,9 @@ void attribute_hidden InitOptions(void)
     v = CDR(v);
 
     SET_TAG(v, install("PCRE_study"));
-    if (R_PCRE_study == -1) 
+    if (R_PCRE_study == -1)
 	SETCAR(v, ScalarLogical(TRUE));
-    else if (R_PCRE_study == -2) 
+    else if (R_PCRE_study == -2)
 	SETCAR(v, ScalarLogical(FALSE));
     else
 	SETCAR(v, ScalarInteger(R_PCRE_study));
@@ -704,28 +717,28 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) == LGLSXP) {
 		    int k = asLogical(argi) > 0;
 		    R_PCRE_study = k ? -1 : -2;
-		    SET_VECTOR_ELT(value, i, 
+		    SET_VECTOR_ELT(value, i,
 				   SetOption(tag, ScalarLogical(k)));
 		} else {
 		    R_PCRE_study = asInteger(argi);
 		    if (R_PCRE_study < 0) {
 			R_PCRE_study = -2;
-			SET_VECTOR_ELT(value, i, 
+			SET_VECTOR_ELT(value, i,
 				       SetOption(tag, ScalarLogical(-2)));
 		    } else
-			SET_VECTOR_ELT(value, i, 
+			SET_VECTOR_ELT(value, i,
 				       SetOption(tag, ScalarInteger(R_PCRE_study)));
 		}
 	    }
 	    else if (streql(CHAR(namei), "PCRE_use_JIT")) {
 		int use_JIT = asLogical(argi);
 		R_PCRE_use_JIT = (use_JIT > 0); // NA_LOGICAL is < 0
-		SET_VECTOR_ELT(value, i, 
+		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, ScalarLogical(R_PCRE_use_JIT)));
 	    }
 	    else if (streql(CHAR(namei), "PCRE_limit_recursion")) {
 		R_PCRE_limit_recursion = asLogical(argi);
-		SET_VECTOR_ELT(value, i, 
+		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, ScalarLogical(R_PCRE_limit_recursion)));
 	    }
 	    else {

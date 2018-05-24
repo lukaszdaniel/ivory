@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-11 17:01\n"
+"POT-Creation-Date: 2018-05-24 21:00\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2114,6 +2114,13 @@ msgstr " 列の名前\"\"はどの列にもマッチしません "
 msgid "complex matrices not permitted at present"
 msgstr " 複素行列は現在許可されていません "
 
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+#: R/datetime.R:0
+#, fuzzy
+msgid "component subscript must be a character string"
+msgstr " 引数 'object'' は空でない単一の文字列でなければなりません "
+
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0
 #, fuzzy
@@ -3578,6 +3585,12 @@ msgstr[0] " \"%s\" 中には要求に対するメソッドが見つかりませ�
 msgid "Registered S3 method from a standard package overwritten by '%s':"
 msgid_plural ""
 "Registered S3 methods from standard package(s) overwritten by '%s':"
+msgstr[0] ""
+
+#. R/namespace.R: ngettext(nr, "Registered S3 method overwritten by '%s':", "Registered S3 methods overwritten by '%s':",     domain = "R-base")
+#: R/namespace.R:0
+msgid "Registered S3 method overwritten by '%s':"
+msgid_plural "Registered S3 methods overwritten by '%s':"
 msgstr[0] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")

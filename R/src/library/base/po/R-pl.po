@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-11 17:01\n"
+"POT-Creation-Date: 2018-05-24 21:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1989,6 +1989,14 @@ msgstr "kolumnę o nazwie \"\" nie można dopasować do żadnej kolumny"
 msgid "complex matrices not permitted at present"
 msgstr "macierze zespolone na chwilę obecną nie są dozwolone"
 
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+#: R/datetime.R:0
+#, fuzzy
+msgid "component subscript must be a character string"
+msgstr ""
+"argument 'object' musi być konwertowalny do pojedynczego łańcucha tekstowego"
+
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0
 msgid "corrupt data frame: columns will be truncated or padded with NA values"
@@ -3414,6 +3422,18 @@ msgstr[2] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
 msgid "Registered S3 method from a standard package overwritten by '%s':"
 msgid_plural ""
 "Registered S3 methods from standard package(s) overwritten by '%s':"
+msgstr[0] ""
+"Zarejestrowana metoda S3 ze standardowego pakietu nadpisana przez '%s':"
+msgstr[1] ""
+"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
+msgstr[2] ""
+"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
+
+#. R/namespace.R: ngettext(nr, "Registered S3 method overwritten by '%s':", "Registered S3 methods overwritten by '%s':",     domain = "R-base")
+#: R/namespace.R:0
+#, fuzzy
+msgid "Registered S3 method overwritten by '%s':"
+msgid_plural "Registered S3 methods overwritten by '%s':"
 msgstr[0] ""
 "Zarejestrowana metoda S3 ze standardowego pakietu nadpisana przez '%s':"
 msgstr[1] ""

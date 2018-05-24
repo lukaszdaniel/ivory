@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 20:07+0200\n"
+"POT-Creation-Date: 2018-05-24 21:00+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -206,7 +206,7 @@ msgid "invalid '%s' specification"
 msgstr " '%s' の指定が不正です "
 
 #: plot.c:278 plot.c:292 plot.c:483 plot.c:488 plot.c:2145 plot.c:2152
-#: plot.c:3174 plot.c:3176 plot.c:3178 plot.c:3333 plot3d.c:1164 plot3d.c:1168
+#: plot.c:3174 plot.c:3176 plot.c:3178 plot.c:3337 plot3d.c:1164 plot3d.c:1168
 #: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
@@ -260,7 +260,7 @@ msgstr " 軸のラベルの型が不正です "
 
 #: plot.c:756 plot.c:1331 plot.c:1654 plot.c:1719 plot.c:1794 plot.c:1860
 #: plot.c:1934 plot.c:2029 plot.c:2105 plot.c:2383 plot.c:2557 plot.c:2773
-#: plot.c:3315 plot.c:3448 plot.c:3524 plot.c:3690 plot.c:3970 plot3d.c:1873
+#: plot.c:3319 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
 msgid "too few arguments"
 msgstr " 引数が少なすぎます "
 
@@ -373,8 +373,8 @@ msgstr " 座標が提供されていません "
 msgid "'a' and 'b' arguments must be finite"
 msgstr " 'a' と 'b'  は有限でなければなりません "
 
-#: plot.c:2958 plot.c:4061 plot.c:4064 plot.c:4067 plot.c:4070 plot.c:4090
-#: plot.c:4094 plot.c:4097 plot.c:4117 plot.c:4121 plot.c:4124 plot3d.c:1086
+#: plot.c:2958 plot.c:4065 plot.c:4068 plot.c:4071 plot.c:4074 plot.c:4094
+#: plot.c:4098 plot.c:4101 plot.c:4121 plot.c:4125 plot.c:4128 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
 #: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
@@ -399,95 +399,95 @@ msgstr " 引数の長さが違います "
 msgid "more labels than points"
 msgstr " 点の数より'labels'の数が多い "
 
-#: plot.c:3235
+#: plot.c:3238
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr " 警告：%.2f インチ内に点はありません \n"
 
-#: plot.c:3241
+#: plot.c:3244
 #, fuzzy
 msgid "warning: nearest point is already identified\n"
 msgstr " 警告：近傍点がすでに同定（identify）されています \n"
 
-#: plot.c:3326
+#: plot.c:3330
 msgid "invalid units"
 msgstr " 単位が不正です "
 
-#: plot.c:3508 plot.c:3615
+#: plot.c:3512 plot.c:3619
 msgid "invalid dendrogram input"
 msgstr " デンドログラムの入力が不正です "
 
-#: plot.c:3672
+#: plot.c:3676
 msgid "invalid symbol parameter vector"
 msgstr " シンボル記号パラメータベクトルが不正です "
 
-#: plot.c:3695
+#: plot.c:3699
 msgid "invalid symbol coordinates"
 msgstr " シンボル記号の座標が不正です "
 
-#: plot.c:3703
+#: plot.c:3707
 msgid "x/y/parameter length mismatch"
 msgstr " x/y もしくはパラメータの長さが不整合です "
 
-#: plot.c:3722
+#: plot.c:3726
 msgid "invalid circles data"
 msgstr " 円のデータが不正です "
 
-#: plot.c:3724 plot.c:3745 plot.c:3770 plot.c:3800
+#: plot.c:3728 plot.c:3749 plot.c:3774 plot.c:3804
 msgid "invalid symbol parameter"
 msgstr " シンボル記号パラメータが不正です "
 
-#: plot.c:3743
+#: plot.c:3747
 msgid "invalid squares data"
 msgstr " 正方形データが不正です "
 
-#: plot.c:3768
+#: plot.c:3772
 msgid "invalid rectangles data (need 2 columns)"
 msgstr " 長方形データが不正です（2列必要です） "
 
-#: plot.c:3798
+#: plot.c:3802
 msgid "invalid stars data"
 msgstr " 星形データが不正です "
 
-#: plot.c:3840
+#: plot.c:3844
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr " thermometers データが不正です（3または4列必要です） "
 
-#: plot.c:3843 plot.c:3849
+#: plot.c:3847 plot.c:3853
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr " thermometers [,%s] が不正です "
 
-#: plot.c:3846
+#: plot.c:3850
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "  thermometers[,%s] が [0,1] 範囲外 ‐ 奇妙に見えるかも知れません "
 
-#: plot.c:3888
+#: plot.c:3892
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr " boxplot のデータが不正です（5列必要です） "
 
-#: plot.c:3897
+#: plot.c:3901
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr " boxplots[,5] が [0,1] の範囲外にあるのは変です "
 
-#: plot.c:3899
+#: plot.c:3903
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr " boxplot[,1:4] が不正です "
 
-#: plot.c:3945
+#: plot.c:3949
 msgid "invalid symbol type"
 msgstr " シンボル記号の型が不正です "
 
-#: plot.c:3983 plot.c:3985 plot.c:3990 plot.c:3992
+#: plot.c:3987 plot.c:3989 plot.c:3994 plot.c:3996
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr " '%s' 引数の長さが不正です "
 
-#: plot.c:4009
+#: plot.c:4013
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr " メモリ確保ができません (xspline 中) "

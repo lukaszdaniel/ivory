@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:52+0100\n"
+"POT-Creation-Date: 2018-05-24 21:00+0200\n"
 "PO-Revision-Date: 2017-12-20 13:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -103,8 +103,8 @@ msgid "'dec' argument must be a single character"
 msgstr "argument 'dec' musi być pojedynczym znakiem"
 
 #: io.c:1129
-#, c-format
-msgid "corrupt data frame -- length of column %d does not not match nrows"
+#, fuzzy, c-format
+msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "uszkodzona ramka danych -- długość kolumny %d nie zgadza się z liczbą wierszy"
 
@@ -115,7 +115,8 @@ msgstr ""
 "kolumna %s twierdzi, że jest czynnikiem, ale nie posiada kodów liczbowych"
 
 #: io.c:1174
-msgid "corrupt matrix -- dims not not match length"
+#, fuzzy
+msgid "corrupt matrix -- dims do not match length"
 msgstr "macierz jest uszkodzona -- wymiary nie zgadzają się z długością"
 
 #: stubs.c:48

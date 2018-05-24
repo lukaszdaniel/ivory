@@ -579,8 +579,8 @@ anova.lm <- function(object, ...)
         asgn <- object$assign[qr.lm(object)$pivot][p1]
         nmeffects <- c(gettext("(Intercept)", domain = NA), attr(object$terms, "term.labels"))
         tlabels <- nmeffects[1 + unique(asgn)]
-        ss <- c(unlist(lapply(split(comp^2,asgn), sum)), ssr)
-        df <- c(lengths(split(asgn,  asgn)), dfr)
+        ss <- c(vapply( split(comp^2,asgn), sum, 1.0), ssr)
+        df <- c(lengths(split(asgn,  asgn)),           dfr)
     } else {
         ss <- ssr
         df <- dfr

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-04-11 17:01\n"
+"POT-Creation-Date: 2018-05-24 21:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2526,6 +2526,14 @@ msgid "complex matrices not permitted at present"
 msgstr ""
 
 
+#: R/datetime.R: 0
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+
+msgid "component subscript must be a character string"
+msgstr ""
+
+
 #: R/format.R: 0
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 
@@ -4329,6 +4337,15 @@ msgstr[1]    ""
 
 msgid        "Registered S3 method from a standard package overwritten by '%s':"
 msgid_plural "Registered S3 methods from standard package(s) overwritten by '%s':"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: ngettext(nr, "Registered S3 method overwritten by '%s':", "Registered S3 methods overwritten by '%s':",     domain = "R-base")
+
+msgid        "Registered S3 method overwritten by '%s':"
+msgid_plural "Registered S3 methods overwritten by '%s':"
 msgstr[0]    ""
 msgstr[1]    ""
 
