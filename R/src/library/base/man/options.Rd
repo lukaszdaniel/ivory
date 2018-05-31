@@ -125,7 +125,7 @@ getOption(x, default = NULL)
       and upon entry to a function whose debugging flag is set.
       Initially unset, and only used if set to a positive integer.}
 
-    \item{\code{digits}:}{controls the number of significant digits to
+    \item{\code{digits}:}{controls the number of \emph{significant} (see \code{\link{signif}}) digits to
       print when printing numeric values.  It is a suggestion only.
       Valid values are 1\dots{}22 with default 7.  See the note in
       \code{\link{print.default}} about values greater than 15.}
@@ -189,7 +189,7 @@ getOption(x, default = NULL)
       only when packages are installed.  Defaults to \code{FALSE} unless the
       environment variable \env{R_KEEP_PKG_PARSE_DATA} is set to \code{yes}. 
       The space overhead of parse data can be substantial even after
-      compression and it causes performace overhead when loading packages.}
+      compression and it causes performance overhead when loading packages.}
 
     \item{\code{keep.source}:}{When \code{TRUE}, the source code for
       functions (newly defined or loaded) is stored internally
@@ -585,9 +585,9 @@ getOption(x, default = NULL)
       \code{log} in \code{\link{plot.spec}}.}
   }
 }
-\section{Options set in package utils}{
-  These will be set when package \pkg{utils} (or its namespace)
-  is loaded if not already set.
+\section{Options set (or used) in package utils}{
+  These will be set (apart from \code{Ncpus}) when package \pkg{utils}
+  (or its namespace) is loaded if not already set.
   \describe{
     \item{\code{BioC_mirror}:}{The URL of a Bioconductor mirror
       for use by \code{\link{setRepositories}},
@@ -685,6 +685,12 @@ getOption(x, default = NULL)
       \code{\link{select.list}}, \code{\link{chooseCRANmirror}},
       \code{\link{setRepositories}} and to select from multiple (text)
       help files in \code{\link{help}}.}
+
+    \item{\code{Ncpus}:}{an integer \eqn{n \ge 1}{n >= 1}, used in
+      \code{\link{install.packages}} as default for the number of cpus
+      to use in a potentially parallel installation, as
+      \code{Ncpus = getOption("Ncpus", 1L)}, i.e., when unset is
+      equivalent to a setting of 1.}
 
     \item{\code{pkgType}:}{The default type of packages to be downloaded
       and installed -- see \code{\link{install.packages}}.

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-05-04 18:16\n"
+"POT-Creation-Date: 2018-05-31 21:11\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2739,7 +2739,6 @@ msgstr "저장소들로부터 패키지 %s 를 찾을 수 없습니다 "
 msgid "no package '%s' was found"
 msgstr "패키지 '%s' 를 찾을 수 없습니다 "
 
-#. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0

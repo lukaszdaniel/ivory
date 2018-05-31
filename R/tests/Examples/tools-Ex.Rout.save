@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-05-21 r1036) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-05-25 r1038) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-05-21 r74779) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-05-25 r74783) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -210,7 +210,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x2da7800>
+<environment: 0x325e608>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -1005,7 +1005,7 @@ List of 6 components
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.263 0.016 0.278 0 0 
+Time elapsed:  0.255 0.009 0.265 0 0 
 > grDevices::dev.off()
 null device 
           1 

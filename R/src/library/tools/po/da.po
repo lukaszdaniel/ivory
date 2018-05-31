@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 20:35+0200\n"
+"POT-Creation-Date: 2018-05-31 21:11+0200\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -59,12 +59,12 @@ msgstr ""
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.c:2370 gramRd.c:3893
+#: gramLatex.c:2370 gramRd.c:3907
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.c:2607 gramRd.c:4382 gramRd.c:4388
+#: gramLatex.c:2607 gramRd.c:4396 gramRd.c:4402
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldig argumenttype"
@@ -89,51 +89,60 @@ msgstr ""
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.c:3308 gramRd.c:3312
+#: gramRd.c:3166
+msgid "internal error: invalid argument to xxusermacro"
+msgstr ""
+
+#: gramRd.c:3180
+#, c-format
+msgid "Not enough arguments passed to user macro '%s'"
+msgstr ""
+
+#: gramRd.c:3322 gramRd.c:3326
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.c:3331
+#: gramRd.c:3345
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.c:3361
+#: gramRd.c:3375
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.c:3755
+#: gramRd.c:3769
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.c:3953
+#: gramRd.c:3967
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.c:4395
+#: gramRd.c:4409
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.c:4402
+#: gramRd.c:4416
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.c:4410
+#: gramRd.c:4424
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.c:4429
+#: gramRd.c:4443
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.c:4432
+#: gramRd.c:4446
 msgid "bad state"
 msgstr ""
 
-#: gramRd.c:4445
+#: gramRd.c:4459
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
