@@ -510,7 +510,7 @@ static void init_ata (cs *AT, const csi *post, csi *w, csi **head, csi **next)
 }
 csi *cs_counts (const cs *A, const csi *parent, const csi *post, csi ata)
 {
-    csi i, j, k, n, m, J, s, p, q, jleaf, *ATp, *ATi, *maxfirst, *prevleaf,
+    csi i, j, k, n, m, J, s, p, q, jleaf = 0, *ATp, *ATi, *maxfirst, *prevleaf,
         *ancestor, *head = NULL, *next = NULL, *colcount, *w, *first, *delta ;
     cs *AT ;
     if (!CS_CSC (A) || !parent || !post) return (NULL) ;    /* check inputs */

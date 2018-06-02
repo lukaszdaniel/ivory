@@ -304,7 +304,7 @@ fdd9e01ae6f24fc59d821db2c984da53 *src/dgeMatrix.h
 9cdd34e5956a46b0dddf28e7c658bafe *src/chm_common.c
 0f92396c76200fcdee483247ea723ca7 *src/dppMatrix.c
 1e240fe50368743af3baa91f8ec289bb *src/init.c
-aa341a37cb2afe9f54ec76e9ca1511df *src/sparseQR.c
+e9c99af73fd8f54426f2afc69aa43629 *src/sparseQR.c
 2394f5def013c7e571231935320fa6c3 *src/t_Csparse_validate.c
 e14e53d0b36e1d0647348a326e8b3b54 *src/COLAMD/Include/colamd.h
 44b5e7133f7f818d07d17637c8410c51 *src/COLAMD/Makefile
@@ -465,7 +465,7 @@ dc61a6a68eab8320a5616f4714d137d5 *src/lgCMatrix.h
 c0f6c2ddfd354d34c5e60061031734e8 *src/factorizations.c
 2392fd374cf7d259fedbef27f0a13e7f *src/dgCMatrix.h
 7844833b5930fd235b0269e56637476b *src/dsyMatrix.c
-521169cab6d253347e09cbe01700b325 *src/cs.c
+75754de666911d700f79744739fb6340 *src/cs.c
 523a6074b106dff0cb0654a110a9c274 *src/dtCMatrix.c
 ea6bdd1b33f38c8c2913eeef6eb21be3 *src/abIndex.h
 2d48f8b8f4e1eb4598302396f70e8c89 *src/cs.h

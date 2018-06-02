@@ -96,7 +96,7 @@ SEXP sparseQR_qty(SEXP qr, SEXP y, SEXP trans, SEXP keep_dimnames)
     PROTECT_INDEX ipx;                                                  \
     PROTECT_WITH_INDEX(ans = dup_mMatrix_as_dgeMatrix(y), &ipx);	\
     int *ydims = INTEGER(GET_SLOT(ans, Matrix_DimSym)),			\
-	m = ydims[0], n = ydims[1], M = V->m, *d_a;			\
+	m = ydims[0], n = ydims[1], M = V->m, *d_a = NULL;			\
     Rboolean rank_def = (m < M);					\
     if(rank_def) { /* must add 0-rows to y, i.e. ans, and remove them *before* return */ \
 	aa = PROTECT(NEW_OBJECT_OF_CLASS("dgeMatrix"));			\

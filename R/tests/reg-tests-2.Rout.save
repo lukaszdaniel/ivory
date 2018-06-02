@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-05-25 r1038) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-05-31 r1039) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-05-25 r74783) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-05-31 r74836) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -6348,7 +6348,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xd55b98>
+<bytecode: 0x1d6a670>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6359,7 +6359,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xd55b98>
+<bytecode: 0x1d6a670>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6371,15 +6371,20 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0xd55b98>
+<bytecode: 0x1d6a670>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
 attr(,"note")
 [1] "just a note"
 attr(,"yada")
-function () 
-"not the same"
+function() "not the same"
+> print(f, useSource = TRUE)
+function(){}
+attr(,"note")
+[1] "just a note"
+attr(,"yada")
+function() "not the same"
 > print(f, useSource = FALSE) # must print attributes
 function () 
 {
@@ -6389,21 +6394,60 @@ attr(,"note")
 attr(,"yada")
 function () 
 "not the same"
-> print.function <- function(x, ...) { str(x,...); invisible(x) }
-> print.function
-function (x, ...)  
- - attr(*, "srcref")= 'srcref' integer [1:8] 1 19 1 63 19 63 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3e73128> 
-> f
-function ()  
- - attr(*, "srcref")= 'srcref' integer [1:8] 1 17 1 28 17 28 1 1
-  ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ea3650> 
- - attr(*, "note")= character "just a note"
- - attr(*, "yada")=function ()  
-  ..- attr(*, "srcref")= 'srcref' integer [1:8] 2 24 2 48 24 48 2 2
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ea3650> 
-> rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
+> 
+> ## Make sure deparsing does not reset parameters
+> print(list(f, expression(foo), f, quote(foo), f, base::list, f),
++       useSource = FALSE)
+[[1]]
+function () 
+{
+}
+attr(,"note")
+[1] "just a note"
+attr(,"yada")
+function () 
+"not the same"
+
+[[2]]
+expression(foo)
+
+[[3]]
+function () 
+{
+}
+attr(,"note")
+[1] "just a note"
+attr(,"yada")
+function () 
+"not the same"
+
+[[4]]
+foo
+
+[[5]]
+function () 
+{
+}
+attr(,"note")
+[1] "just a note"
+attr(,"yada")
+function () 
+"not the same"
+
+[[6]]
+function (...)  .Primitive("list")
+
+[[7]]
+function () 
+{
+}
+attr(,"note")
+[1] "just a note"
+attr(,"yada")
+function () 
+"not the same"
+
 > 
 > printCoefmat(cbind(0,1))
      [,1] [,2]
@@ -7033,8 +7077,7 @@ x %^% (y %^% z)
 > 
 > ## Anonymous function calls were not deparsed properly
 > substitute(f(x), list(f = function(x) x + 1))
-(function (x) 
-x + 1)(x)
+(function(x) x + 1)(x)
 > substitute(f(x), list(f = quote(function(x) x + 1)))
 (function(x) x + 1)(x)
 > substitute(f(x), list(f = quote(f+g)))

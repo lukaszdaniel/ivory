@@ -70,6 +70,9 @@
       \code{keep.parse.data.pkgs} is now \code{FALSE}, which changes
       previous behavior and significantly reduces space and time overhead
       when sources are kept when installing packages.
+
+      \item In \code{rapply(x, ..)}, \code{x} can also be
+      \dQuote{list-like} and of length \eqn{\ge 2^{31}}{>= 2^{31}}.
     }
   }
 
@@ -135,6 +138,17 @@
       objects or deparsing symbols and calls.  Previously, printing
       lists containing S3 objects or expressions would reset these
       parameters.
+
+      \item Printing lists, pairlists or attributes containing
+      functions now uses \code{srcref} attributes if present.
+      %%----end{LH's patches related to print() from \PR{17398} ---------
+
+      \item Calling \code{install.packages()} with a length zero
+      \code{pkgs} argument now is a no-op (\PR{17422}).
+
+      \item \code{unlist(x)} now returns a correct \code{factor} when
+      \code{x} is a nested list with factor leaves, fixing \PR{12572}
+      and \PR{17419}.
     }
   }
 
@@ -187,6 +201,9 @@
       \item The radix sort is robust to vectors with >1 billion elements
       (but long vectors are still unsupported). Thanks to Matt Dowle for
       the fix.
+
+      \item Terminal connections (e.g., stdin) are no longer
+      buffered. Fixes \PR{17432}.
     }
   }
 }
