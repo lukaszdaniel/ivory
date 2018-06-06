@@ -73,6 +73,10 @@
 
       \item In \code{rapply(x, ..)}, \code{x} can also be
       \dQuote{list-like} and of length \eqn{\ge 2^{31}}{>= 2^{31}}.
+
+      \item \code{trimws()} gets new optional \code{whitespace}
+      argument, allowing larger definitions of \dQuote{space}, e.g.,
+      including unicode spaces as wished in \PR{17431}.
     }
   }
 
@@ -112,36 +116,34 @@
       \item \code{order(...., decreasing=c(TRUE,FALSE))} could fail in
       some cases. Reported from StackOverflow via Karl Nordström.
 
-      \item \code{deparse(x)}, \code{dput(x)} and \code{dump()} now
-      respect \code{c()}'s argument names \code{recursive} and
-      \code{use.names}, e.g., for \code{x <- setNames(0, "recursive")},
-      thanks to Suharto Anggono's \PR{17427}.
+      \item User macros in Rd files now accept empty and multi-line
+      arguments.
 
-      \item User macros in Rd files now accept empty arguments.
+      \item Changes in \code{print.*()}, thanks to Lionel Henry's
+      patches in \PR{17398}:
+      \itemize{
+	\item Printing lists, pairlists or attributes containing calls
+	with S3 class no longer evaluate those.
 
-      %% Lionel Henry's patches from \PR{17398} :
-      \item Printing lists, pairlists or attributes containing calls
-      with S3 class no longer evaluate those.
+	\item Printing S4 objects within lists and pairlists dispatches
+	with \code{show()} rather than \code{print()}, as with
+	auto-printing.
 
-      \item Printing S4 objects within lists and pairlists dispatches
-      with \code{show()} rather than \code{print()}, as with
-      auto-printing.
+	\item The indexing tags (names or \code{[[<n>]]}) of recursive
+	data structures are now printed correctly in complex cases.
 
-      \item The indexing tags (names or \code{[[<n>]]}) of recursive
-      data structures are now printed correctly in complex cases.
+	\item Arguments supplied to \code{print()} are now properly
+	forwarded to print methods when printing lists, pairlists or
+	attributes containing S3 objects.
 
-      \item Arguments supplied to \code{print()} are now properly
-      forwarded to print methods when printing lists, pairlists or
-      attributes containing S3 objects.
+	\item The print parameters are now preserved when printing S3
+	objects or deparsing symbols and calls.  Previously, printing
+	lists containing S3 objects or expressions would reset these
+	parameters.
 
-      \item The print parameters are now preserved when printing S3
-      objects or deparsing symbols and calls.  Previously, printing
-      lists containing S3 objects or expressions would reset these
-      parameters.
-
-      \item Printing lists, pairlists or attributes containing
-      functions now uses \code{srcref} attributes if present.
-      %%----end{LH's patches related to print() from \PR{17398} ---------
+	\item Printing lists, pairlists or attributes containing
+	functions now uses \code{srcref} attributes if present.
+      }
 
       \item Calling \code{install.packages()} with a length zero
       \code{pkgs} argument now is a no-op (\PR{17422}).
@@ -149,6 +151,10 @@
       \item \code{unlist(x)} now returns a correct \code{factor} when
       \code{x} is a nested list with factor leaves, fixing \PR{12572}
       and \PR{17419}.
+
+      \item \code{printCoefmat()} now also works with explicit \code{right=TRUE}.
+
+      \item \code{print.noquote()} now also works with explicit \code{quote=FALSE}.
     }
   }
 
@@ -204,6 +210,18 @@
 
       \item Terminal connections (e.g., stdin) are no longer
       buffered. Fixes \PR{17432}.
+
+      \item \code{deparse(x)}, \code{dput(x)} and \code{dump()} now
+      respect \code{c()}'s argument names \code{recursive} and
+      \code{use.names}, e.g., for \code{x <- setNames(0, "recursive")},
+      thanks to Suharto Anggono's \PR{17427}.
+
+      \item Unbuffered connections now work with encoding conversion.
+      Reported by Stephen Berman.
+
+      \item \file{.Renviron} on Windows with \command{Rgui} is again by
+      default searched for in user documents directory when invoked via the
+      launcher icon. Reported by Jeroen Ooms.
     }
   }
 }
