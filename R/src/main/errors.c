@@ -1655,7 +1655,7 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		return; /* go to default error handling; do not reset stack */
 	    else {
 		/* if we are in the process of handling a C stack
-		   overflow, treat all calling handlers ar failed */
+		   overflow, treat all calling handlers as failed */
 		if (R_OldCStackLimit)
 		    break;
 		SEXP hooksym, hcall, qcall;
@@ -1664,7 +1664,8 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		   overflow */
 		PROTECT(oldstack);
 		hooksym = install(".handleSimpleError");
-		PROTECT(qcall = LCONS(R_QuoteSymbol, LCONS(call, R_NilValue)));
+		PROTECT(qcall = LCONS(R_QuoteSymbol,
+				      LCONS(call, R_NilValue)));
 		PROTECT(hcall = LCONS(qcall, R_NilValue));
 		hcall = LCONS(mkString(buf), hcall);
 		hcall = LCONS(ENTRY_HANDLER(entry), hcall);

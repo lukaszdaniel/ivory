@@ -29,10 +29,14 @@
       \item \code{axis()} gets new option \code{gap.axis = NA} for
       specifying a multiplication factor for the minimal \dQuote{gap}
       (distance) between axis labels drawn.   Its default is \code{1}
-      for labels \emph{parallel} to the axis, and \code{0.5} for
+      for labels \emph{parallel} to the axis, and \code{0.25} for
       perpendicular ones.
 
       These (perpendicular labels) no longer overlap, fixing bug \PR{17384}.
+
+      \item \code{plot.default()} gains new arguments \code{xgap.axis = NA}
+      and \code{ygap.axis = NA} to be passed to the x-- and y--
+      \code{axis(.., gap.axis=*)} calls.
 
       \item \code{removeSource()} now works not only for functions but
       also for some language objects.
@@ -151,10 +155,6 @@
       \item \code{unlist(x)} now returns a correct \code{factor} when
       \code{x} is a nested list with factor leaves, fixing \PR{12572}
       and \PR{17419}.
-
-      \item \code{printCoefmat()} now also works with explicit \code{right=TRUE}.
-
-      \item \code{print.noquote()} now also works with explicit \code{quote=FALSE}.
     }
   }
 
@@ -222,6 +222,10 @@
       \item \file{.Renviron} on Windows with \command{Rgui} is again by
       default searched for in user documents directory when invoked via the
       launcher icon. Reported by Jeroen Ooms.
+
+      \item \code{printCoefmat()} now also works with explicit \code{right=TRUE}.
+
+      \item \code{print.noquote()} now also works with explicit \code{quote=FALSE}.
     }
   }
 }
