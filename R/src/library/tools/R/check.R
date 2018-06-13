@@ -4182,7 +4182,7 @@ add_dummies <- function(dir, Log)
                 lines <- unique(lines)
 
                 ## Can get reports like
-                ## Warning: No generic function ‘as.vector’ found corresponding to requested imported methods from package ‘Matrix’ when loading ‘MatrixModels’ (malformed exports?)
+                ## Warning: No generic function `as.vector' found corresponding to requested imported methods from package `Matrix' when loading `MatrixModels' (malformed exports?)
                 ## Exclude these unless they are about the current package.
                 load_re <- gettext("Warning: No generic function.*corresponding to requested imported methods", domain = "R-tools")
                 ex <- grepl(load_re, lines, useBytes = TRUE) &
@@ -4742,7 +4742,7 @@ add_dummies <- function(dir, Log)
                 R.version[["major"]], ".",  R.version[["minor"]],
                 " (r", R.version[["svn rev"]], ")\n", sep = "")
             cat("",
-                "Copyright (C) 1997-2017 The R Core Team.",
+                .R_copyright_msg(1997),
                 "This is free software; see the GNU General Public License version 2",
                 "or later for copying conditions.  There is NO warranty.",
                 sep="\n")
@@ -5000,7 +5000,7 @@ add_dummies <- function(dir, Log)
         if(!nzchar(Sys.getenv("_R_CHECK_R_DEPENDS_")))
             Sys.setenv("_R_CHECK_R_DEPENDS_" = "warn")
         ## until this is tested on Windows
-        Sys.setenv("_R_CHECK_R_ON_PATH_" = ifelse(WINDOWS, "FALSE", "TRUE"))
+        Sys.setenv("_R_CHECK_R_ON_PATH_" = if(WINDOWS) "FALSE" else "TRUE")
         Sys.setenv("_R_CHECK_PACKAGES_USED_IN_TESTS_USE_SUBDIRS_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
