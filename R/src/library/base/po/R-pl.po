@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-05-24 21:00\n"
+"POT-Creation-Date: 2018-06-14 20:25\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -313,8 +313,7 @@ msgstr "argument '%s' musi być skończoną liczbą"
 
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
-#. R/lapply.R: gettextf("'%s' argument must be a list", "object")
-#: R/New-Internal.R:0 R/attr.R:0 R/lapply.R:0
+#: R/New-Internal.R:0 R/attr.R:0
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
 

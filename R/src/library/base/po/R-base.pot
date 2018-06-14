@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-05-24 21:00\n"
+"POT-Creation-Date: 2018-06-14 20:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -394,10 +394,8 @@ msgstr ""
 
 #: R/New-Internal.R: 0
 #: R/attr.R: 0
-#: R/lapply.R: 0
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
-#. R/lapply.R: gettextf("'%s' argument must be a list", "object")
 
 msgid "'%s' argument must be a list"
 msgstr ""

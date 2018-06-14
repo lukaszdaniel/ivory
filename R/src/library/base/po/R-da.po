@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-05-24 21:00\n"
+"POT-Creation-Date: 2018-06-14 20:25\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -345,8 +345,7 @@ msgstr "angivet tidsudløb skal være NULL eller et tal der ikke er negativt"
 
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
-#. R/lapply.R: gettextf("'%s' argument must be a list", "object")
-#: R/New-Internal.R:0 R/attr.R:0 R/lapply.R:0
+#: R/New-Internal.R:0 R/attr.R:0
 #, fuzzy
 msgid "'%s' argument must be a list"
 msgstr "andet argument skal være en liste"
