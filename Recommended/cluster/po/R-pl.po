@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-14 22:24\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2018-04-17 19:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -830,6 +830,11 @@ msgstr ""
 #. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
 #: R/pam.q:0
 msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+#. R/clusGapGen.R: stop("index has to be a function or a list of function")
+#: R/clusGapGen.R:0
+msgid "index has to be a function or a list of function"
 msgstr ""
 
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))

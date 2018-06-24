@@ -332,7 +332,7 @@ get.var <- function(txt,data,vecMat = TRUE)
       ismat <- FALSE
     } else ismat <- TRUE
   } else ismat <- FALSE
-  if (vecMat&&is.matrix(x)) x <- as.numeric(x)
+  if (vecMat&&is.matrix(x)) x <- x[1:prod(dim(x))] ## modified from x <- as.numeric(x) to allow factors
   if (ismat) attr(x,"matrix") <- TRUE
   x
 } ## get.var
@@ -2544,7 +2544,14 @@ smooth.construct.mrf.smooth.spec <- function(object, data, knots) {
     if (is.null(object$xt$nb)) { ## no neighbour list... construct one
        if (is.null(object$xt$polys)) stop("no spatial information provided!")
        object$xt$nb <- pol2nb(object$xt$polys)$nb 
-    } ## now have a neighbour list
+    } else if (!is.numeric(object$xt$nb[[1]])) { ## user has (hopefully) supplied names not indices 
+      nb.names <- names(object$xt$nb)
+      for (i in 1:length(nb.names)) {
+        object$xt$nb[[i]] <- which(nb.names %in% object$xt$nb[[i]])
+      }
+    }
+
+    ## now have a neighbour list
     a.name <- names(object$xt$nb)
     if (all.equal(sort(a.name),sort(levels(k)))!=TRUE) 
        stop("mismatch between nb/polys supplied area names and data area names")
@@ -3655,10 +3662,10 @@ smoothCon <- function(object,data,knots=NULL,absorb.cons=FALSE,scale.penalty=TRU
           sml[[1]]$X <- as.numeric(by)*sm$X ## normal `by' handling
           ## Now do the summation stuff....
           ind <- seq_len(n)
-          X <- sml[[1]]$X[ind,]
+          X <- sml[[1]]$X[ind,,drop=FALSE]
           for (i in 2:q) {
             ind <- ind + n
-            X <- X + sml[[1]]$X[ind,]
+            X <- X + sml[[1]]$X[ind,,drop=FALSE]
           }
           sml[[1]]$X <- X
           if (!is.null(offs)) { ## deal with any term specific offset (i.e. sum it too)
@@ -3738,15 +3745,15 @@ smoothCon <- function(object,data,knots=NULL,absorb.cons=FALSE,scale.penalty=TRU
             if (length(sm$S)>0)
             for (l in seq_len(length(sm$S))) # some smooths have > 1 penalty 
             { ZSZ <- sml[[i]]$S[[l]]
-              ZSZ[indi[seq_len(nz)],]<-qr.qty(qrc,sml[[i]]$S[[l]][indi,,drop=FALSE])[(nc+1):nx,] 
+              if (nz>0) ZSZ[indi[seq_len(nz)],]<-qr.qty(qrc,sml[[i]]$S[[l]][indi,,drop=FALSE])[(nc+1):nx,] 
               ZSZ <- ZSZ[-indi[(nz+1):nx],]   
-              ZSZ[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(ZSZ[,indi,drop=FALSE]))[(nc+1):nx,])
+              if (nz>0) ZSZ[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(ZSZ[,indi,drop=FALSE]))[(nc+1):nx,])
               sml[[i]]$S[[l]] <- ZSZ[,-indi[(nz+1):nx],drop=FALSE]  ## Z'SZ
 
               ## ZSZ<-qr.qty(qrc,sm$S[[l]])[(j+1):k,]
               ## sml[[i]]$S[[l]]<-t(qr.qty(qrc,t(ZSZ))[(j+1):k,]) ## Z'SZ
             }
-            sml[[i]]$X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(sml[[i]]$X[,indi,drop=FALSE]))[(nc+1):nx,])
+            if (nz>0) sml[[i]]$X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(sml[[i]]$X[,indi,drop=FALSE]))[(nc+1):nx,])
             sml[[i]]$X <- sml[[i]]$X[,-indi[(nz+1):nx]]
             ## sml[[i]]$X<-t(qr.qty(qrc,t(sml[[i]]$X))[(j+1):k,]) ## form XZ
             attr(sml[[i]],"qrc") <- qrc
@@ -4024,11 +4031,11 @@ PredictMat <- function(object,data,n=nrow(data))
           nc <- j;nz <- nx - nc
           if (sum(is.na(X))) {
             ind <- !is.na(rowSums(X))
-            X[ind,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[ind,indi,drop=FALSE]))[(nc+1):nx,])
+            if (nz>0) X[ind,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[ind,indi,drop=FALSE]))[(nc+1):nx,])
             X <- X[,-indi[(nz+1):nx]]
             X[!ind,] <- NA 
           } else { 
-            X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
+            if (nz>0) X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
             X <- X[,-indi[(nz+1):nx]]
           }
         }

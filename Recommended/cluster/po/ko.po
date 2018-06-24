@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 22:24+0100\n"
+"POT-Creation-Date: 2018-06-24 18:55+0200\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -34,7 +34,7 @@ msgid ""
 msgstr ""
 "clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
 
-#: clara.c:347 clara.c:352
+#: clara.c:349 clara.c:354
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
 msgstr "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"

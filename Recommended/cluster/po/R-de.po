@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-14 22:24\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2015-01-17 16:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core Team <r-core@r-project.org>\n"
@@ -849,6 +849,11 @@ msgstr "die volle Silhoutte ist nur verfügbar für Resultate von"
 #. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
 #: R/pam.q:0
 msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+#. R/clusGapGen.R: stop("index has to be a function or a list of function")
+#: R/clusGapGen.R:0
+msgid "index has to be a function or a list of function"
 msgstr ""
 
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))

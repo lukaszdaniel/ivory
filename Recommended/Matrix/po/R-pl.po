@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-2-2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2014-03-27 14:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -926,6 +926,22 @@ msgstr "nie można przekształcić wartości 'NA' na 'nsparseMatrix'"
 msgid "cannot coerce 'NA's to \"nsparseVector\""
 msgstr "nie można przekształcić wartości NA na obiekt klasy \"nsparseVector\""
 
+# Matrix/R/ngTMatrix.R: 24
+# stop("cannot coerce 'NA's to \"nsparseMatrix\"")
+#. R/Csparse.R: stop("cannot coerce NA values to pattern \"ngCMatrix\"")
+#: R/Csparse.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ngCMatrix\""
+msgstr "nie można przekształcić wartości 'NA' na 'nsparseMatrix'"
+
+# Matrix/R/ngTMatrix.R: 24
+# stop("cannot coerce 'NA's to \"nsparseMatrix\"")
+#. R/ntCMatrix.R: stop("cannot coerce NA values to pattern \"ntCMatrix\"")
+#: R/ntCMatrix.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ntCMatrix\""
+msgstr "nie można przekształcić wartości 'NA' na 'nsparseMatrix'"
+
 # Matrix/R/dgTMatrix.R: 20
 # stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
 #. R/dgTMatrix.R: stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
@@ -1496,9 +1512,12 @@ msgstr "m[ <ij-matrix> ] <- v: nieefektywne traktowanie pojedynczych elementów"
 
 # Matrix/R/Matrix.R: 644
 # message("m[ <ij-matrix> ]: inefficiently indexing single elements")
-#. R/Matrix.R: message("m[ <ij-matrix> ]: inefficiently indexing single elements")
+#. R/Matrix.R: message("m[<ij-matrix>]: inefficiently indexing single elements - should not happen, please report!")
 #: R/Matrix.R:0
-msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
+#, fuzzy
+msgid ""
+"m[<ij-matrix>]: inefficiently indexing single elements - should not happen, "
+"please report!"
 msgstr "m[ <ij-matrix> ]: nieefektywne indeksowanie pojedynczych elementów"
 
 #. R/bandSparse.R: stop("matrix can only be symmetric if square, but n != m")

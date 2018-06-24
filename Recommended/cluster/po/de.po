@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 22:24+0100\n"
+"POT-Creation-Date: 2018-06-24 18:55+0200\n"
 "PO-Revision-Date: 2015-02-02 12:30+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "clara()'s C Level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) ergab 'toomany_NA'"
 
-#: clara.c:347 clara.c:352
+#: clara.c:349 clara.c:354
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
 msgstr "C Level dysta2(): nsel[%s= %d] = %d ist außerhalb von 0..n, n=%d"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.6\n"
-"POT-Creation-Date: 2017-03-14 22:24\n"
+"Project-Id-Version: cluster 2.0.7-1\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1066,6 +1066,13 @@ msgstr ""
 #. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
 
 msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+
+#: R/clusGapGen.R: 0
+#. R/clusGapGen.R: stop("index has to be a function or a list of function")
+
+msgid "index has to be a function or a list of function"
 msgstr ""
 
 

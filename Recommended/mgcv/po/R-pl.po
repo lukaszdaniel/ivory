@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2016-03-03 21:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -285,12 +285,6 @@ msgstr "zmienna `by' musi mieć ten sam wymiar co argumenty wygładzania"
 msgid "'by=.' is not allowed"
 msgstr "'by=.' nie jest dozwolone"
 
-#. R/coxph.r: stop("'cox.ph()' function does not yet handle offsets")
-#: R/coxph.r:0
-#, fuzzy
-msgid "'cox.ph()' function does not yet handle offsets"
-msgstr "funkcja 's(.)' nie jest jeszcze wspierana"
-
 #. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
 #: R/smooth.r:0
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
@@ -308,6 +302,11 @@ msgstr ""
 msgid "'family' argument seems not to be a valid family object"
 msgstr ""
 "argument 'family' wydaje się nie być poprawnym obiektem klasy \"family\""
+
+#. R/plots.r: gettext("'gamm' based fit - care required with interpretation.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "'gamm' based fit - care required with interpretation."
+msgstr ""
 
 #. R/gamm.r: stop("'gamm()' can only handle random effects defined as named lists")
 #: R/gamm.r:0
@@ -449,6 +448,11 @@ msgstr "argument 'y' musi być ściśle dodatni dla gęstości Gamma"
 #: R/mgcv.r:0
 msgid "'y' must be univariate unless binomial"
 msgstr "'y' musi zawierać jedną zmienną jeśli nie zawiera dwóch"
+
+#. R/plots.r: gettextf("(score %s & scale %s).", b$gcv.ubre, b$sig2, domain = "R-mgcv")
+#: R/plots.r:0
+msgid "(score %s & scale %s)."
+msgstr "(punktacja %s & skala %s)."
 
 #. R/gam.fit4.r: gettext("**using positive weights", domain = "R-mgcv")
 #: R/gam.fit4.r:0
@@ -610,6 +614,11 @@ msgstr "Nie można wyodrębnić macierzy z niezainicjalizowanego obiektu 'pdMAt'
 msgid "Cannot extract the matrix with uninitialized dimensions"
 msgstr "Nie można wyodrębnić macierzy z niezainicjalizowanymi wymiarami"
 
+#. R/plots.r: gettext("Checks based on working residuals may be misleading.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Checks based on working residuals may be misleading."
+msgstr ""
+
 #. R/gam.sim.r: gettext("Continuous 'by' variable example", domain = "R-mgcv")
 #: R/gam.sim.r:0
 msgid "Continuous 'by' variable example"
@@ -679,22 +688,7 @@ msgstr "Odchylenie..."
 msgid "Discrete Theta search not available with performance iteration"
 msgstr "Poszukiwania dyskretnej thety nie są dostępne z wykonywaną iteracją"
 
-#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd), collapse = " "),     cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu2: rdiff = %s cor = %s"
-msgstr "Dmu2: rdiff = %s korelacja = %s"
-
-#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd), collapse = " "),     cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu3: rdiff = %s cor = %s"
-msgstr "Dmu3: rdiff = %s korelacja = %s"
-
-#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd), collapse = " "),     cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu4: rdiff = %s cor = %s"
-msgstr "Dmu4: rdiff = %s korelacja = %s"
-
-#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd), collapse = " "),     cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", range(dd$Dmu - Dmu.fd), corb(dd$Dmu, Dmu.fd),     domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu: rdiff = %s cor = %s"
 msgstr "Dmu: rdiff = %s korelacja = %s"
@@ -714,7 +708,6 @@ msgid "Dth2[%d]: rdiff = %s cor = %s"
 msgstr "Dth2[%d]: rdiff = %s korelacja = %s"
 
 #. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um - Dth.fd), collapse = " "),     cor(um, Dth.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth - Dth.fd), collapse = " "),     cor(dd$Dth, Dth.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dth[%d]: rdiff = %s cor = %s"
 msgstr "Dth[%d]: rdiff = %s korelacja = %s"
@@ -723,12 +716,6 @@ msgstr "Dth[%d]: rdiff = %s korelacja = %s"
 #: R/mgcv.r:0
 msgid "Estimated degrees of freedom:"
 msgstr "Oszacowana liczba stopni swobody:"
-
-#. R/mgcv.r: warning("Extended Fellner Schall only implemented for general families")
-#: R/mgcv.r:0
-#, fuzzy
-msgid "Extended Fellner Schall only implemented for general families"
-msgstr "połączenie nie jest zaimplementowane dla rozszerzonych rodzin"
 
 #. R/smooth.r: stop("F is missing from cr smooth - refit model with current mgcv")
 #: R/smooth.r:0
@@ -772,6 +759,11 @@ msgstr "Formuła:"
 msgid "Gaussian quantiles"
 msgstr "Kwantyle gaussowskie"
 
+#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Gradient range [%s, %s]"
+msgstr "Zakres gradientu [%s, %s]"
+
 #. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model", domain = "R-mgcv")
 #: R/gam.sim.r:0
 msgid "Gu & Wahba 4 term additive model"
@@ -786,6 +778,12 @@ msgstr "4 członowy model addytywny Gu & Wahba + skorelowane predyktory"
 #: R/gam.sim.r:0
 msgid "Gu & Wahba 4 term additive model + random effect"
 msgstr "4 członowy model addytywny Gu & Wahba + efekt losowy"
+
+#. R/plots.r: gettext("Hessian positive definite", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "Hessian positive definite"
+msgstr "Hesjan był dodatnio okreśłony."
 
 #. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
 #: R/plots.r:0
@@ -883,6 +881,11 @@ msgstr "Macierz modelu nie ma pełnej rangi kolumny"
 #: R/plots.r:0
 msgid "Model rank = %s/%s"
 msgstr "Ranga modelu = %s/%s"
+
+#. R/plots.r: gettext("Model required no smoothing parameter selection", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Model required no smoothing parameter selection"
+msgstr "Model nie wymagał wyboru parametru wygładzania"
 
 #. R/mgcv.r: stop("Model seems to contain no terms")
 #: R/mgcv.r:0
@@ -1296,6 +1299,21 @@ msgstr ""
 msgid "Tensor product smooth term"
 msgstr "człon wygładzania produktu tensorowego"
 
+#. R/plots.r: gettext("The Hessian was not positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The Hessian was not positive definite."
+msgstr "Hesjan nie był dodatnio okreśłony."
+
+#. R/plots.r: gettext("The Hessian was positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The Hessian was positive definite."
+msgstr "Hesjan był dodatnio okreśłony."
+
+#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad,     domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The RMS %s score gradient at convergence was %s."
+msgstr "Wynik gradientu RMS %s w momencie uzbieżnienia wynosił %s."
+
 #. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "The following arguments to anova.glm(..) are invalid and dropped:"
@@ -1471,6 +1489,13 @@ msgstr "'bnd' musi być listą"
 msgid "bnd must be a list of boundary loops"
 msgstr "'bnd' musi być listą pętel granic"
 
+#. R/plots.r: gettext(" by steepest\ndescent step failure.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid ""
+"by steepest\n"
+"descent step failure."
+msgstr ""
+
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "calling gdi..."
@@ -1614,6 +1639,11 @@ msgstr ""
 msgid "effects"
 msgstr "efekty"
 
+#. R/plots.r: gettextf("eigenvalue range [%s, %s].", min(ev), max(ev), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "eigenvalue range [%s, %s]."
+msgstr "zakres wartości własnej [%s, %s]."
+
 #. R/mgcv.r: stop("elements of 'min.sp' argument must be non negative")
 #: R/mgcv.r:0
 msgid "elements of 'min.sp' argument must be non negative"
@@ -1700,6 +1730,7 @@ msgstr "wygładzania 'fs' mogą mieć tylko jeden argument czynnikowy"
 #. R/fast-REML.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 #: R/fast-REML.r:0 R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "full convergence"
@@ -1851,6 +1882,7 @@ msgstr "iteracja %d"
 
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 #: R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "iteration limit reached"
@@ -2736,11 +2768,34 @@ msgstr ""
 msgid "y must be strictly positive for a Gamma density"
 msgstr "argument 'y' musi być ściśle dodatni dla gęstości Gamma"
 
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration",     "Smoothing parameter selection converged after %d iterations", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "Smoothing parameter selection converged after %d iteration"
+msgid_plural "Smoothing parameter selection converged after %d iterations"
+msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
+msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+
+#, fuzzy
+#~ msgid "'cox.ph()' function does not yet handle offsets"
+#~ msgstr "funkcja 's(.)' nie jest jeszcze wspierana"
+
+#~ msgid "Dmu2: rdiff = %s cor = %s"
+#~ msgstr "Dmu2: rdiff = %s korelacja = %s"
+
+#~ msgid "Dmu3: rdiff = %s cor = %s"
+#~ msgstr "Dmu3: rdiff = %s korelacja = %s"
+
+#~ msgid "Dmu4: rdiff = %s cor = %s"
+#~ msgstr "Dmu4: rdiff = %s korelacja = %s"
+
+#, fuzzy
+#~ msgid "Extended Fellner Schall only implemented for general families"
+#~ msgstr "połączenie nie jest zaimplementowane dla rozszerzonych rodzin"
+
 #~ msgid "'p.type != 0' is deprecated, and liable to be removed in future"
 #~ msgstr "'p.type != 0' jest przestarzałe i zostanie usunięte w przyszłości"
-
-#~ msgid "(score %s & scale %s)."
-#~ msgstr "(punktacja %s & skala %s)."
 
 #~ msgid "Dmu2th2[%d]: rdiff = %s cor = %s"
 #~ msgstr "Dmu2th2[%d]: rdiff = %s korelacja = %s"
@@ -2754,30 +2809,12 @@ msgstr "argument 'y' musi być ściśle dodatni dla gęstości Gamma"
 #~ msgid "Dmuth[%d]: rdiff = %s cor = %s"
 #~ msgstr "Dmuth[%d]: rdiff = %s korelacja = %s"
 
-#~ msgid "Gradient range [%s, %s]"
-#~ msgstr "Zakres gradientu [%s, %s]"
-
 #~ msgid "Hessian positive definite, eigenvalue range [%s, %s]."
 #~ msgstr "Hesjan jest dodatnio określony, zakres wartości własnych [%s, %s]."
 
 #, fuzzy
 #~ msgid "Huber scale estimate not converged"
 #~ msgstr "oszacowanie skali Hubera nie uzbieżniło się"
-
-#~ msgid "Model required no smoothing parameter selection"
-#~ msgstr "Model nie wymagał wyboru parametru wygładzania"
-
-#~ msgid "The Hessian was not positive definite."
-#~ msgstr "Hesjan nie był dodatnio okreśłony."
-
-#~ msgid "The Hessian was positive definite."
-#~ msgstr "Hesjan był dodatnio okreśłony."
-
-#~ msgid "The RMS %s score gradient at convergence was %s."
-#~ msgstr "Wynik gradientu RMS %s w momencie uzbieżnienia wynosił %s."
-
-#~ msgid "eigenvalue range [%s, %s]."
-#~ msgstr "zakres wartości własnej [%s, %s]."
 
 #~ msgid "no automatic plotting for smooths of more than one variable"
 #~ msgstr ""
@@ -2823,12 +2860,6 @@ msgstr "argument 'y' musi być ściśle dodatni dla gęstości Gamma"
 #~ msgstr[2] ""
 #~ "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach poprzez "
 #~ "niepowodzenie kroku największego spadku."
-
-#~ msgid "Smoothing parameter selection converged after %d iteration."
-#~ msgid_plural "Smoothing parameter selection converged after %d iterations."
-#~ msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
-#~ msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
-#~ msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 
 #~ msgid "The estimated model rank was %s (maximum possible: %s)"
 #~ msgstr "Przybliżona ranga modelu wyniosła %s (maksymalna możliwa: %s)"

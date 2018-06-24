@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-3\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2015-07-15 17:14-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -766,6 +766,18 @@ msgstr "'NA'를 \"nsparseMatrix\"으로 강제변환(coerce)할 수 없습니다
 msgid "cannot coerce 'NA's to \"nsparseVector\""
 msgstr "'NA'를 \"nsparseVector\"로 강제변환(coerce) 할 수 없습니다."
 
+#. R/Csparse.R: stop("cannot coerce NA values to pattern \"ngCMatrix\"")
+#: R/Csparse.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ngCMatrix\""
+msgstr "'NA'를 \"nsparseMatrix\"으로 강제변환(coerce)할 수 없습니다."
+
+#. R/ntCMatrix.R: stop("cannot coerce NA values to pattern \"ntCMatrix\"")
+#: R/ntCMatrix.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ntCMatrix\""
+msgstr "'NA'를 \"nsparseMatrix\"으로 강제변환(coerce)할 수 없습니다."
+
 #. R/dgTMatrix.R: stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
 #: R/dgTMatrix.R:0
 msgid "cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class"
@@ -1191,9 +1203,12 @@ msgstr "객체의 길이(긴 것)이 다른 객체의 길이(짧은 것)의 배�
 msgid "m[ <ij-matrix> ] <- v: inefficiently treating single elements"
 msgstr "m[ <ij-matrix> ] <- v: inefficiently treating single elements"
 
-#. R/Matrix.R: message("m[ <ij-matrix> ]: inefficiently indexing single elements")
+#. R/Matrix.R: message("m[<ij-matrix>]: inefficiently indexing single elements - should not happen, please report!")
 #: R/Matrix.R:0
-msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
+#, fuzzy
+msgid ""
+"m[<ij-matrix>]: inefficiently indexing single elements - should not happen, "
+"please report!"
 msgstr "m[ <ij-matrix> ]: inefficiently indexing single elements"
 
 #. R/bandSparse.R: stop("matrix can only be symmetric if square, but n != m")

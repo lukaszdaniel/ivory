@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 22:24+0100\n"
+"POT-Creation-Date: 2018-06-24 18:55+0200\n"
 "PO-Revision-Date: 2018-04-17 19:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Lukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -30,7 +30,7 @@ msgid ""
 "clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
 msgstr ""
 
-#: clara.c:347 clara.c:352
+#: clara.c:349 clara.c:354
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
 msgstr ""

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2017-03-14 22:24\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -877,6 +877,11 @@ msgstr ""
 #. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
 #: R/pam.q:0
 msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+#. R/clusGapGen.R: stop("index has to be a function or a list of function")
+#: R/clusGapGen.R:0
+msgid "index has to be a function or a list of function"
 msgstr ""
 
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))

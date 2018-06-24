@@ -159,8 +159,8 @@ cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
-85654c781fba6b2282e2f4492938d832 *po/R-MASS.pot
-354ee1169988cbd19c9b418f16b324ae *po/MASS.pot
+9c9acd1191cbc663b0865a1207174d13 *po/R-MASS.pot
+2d7ba51e8b8d3d908eaf43786f3e0ab0 *po/MASS.pot
 156797766d5176471ed9c747be9fc2d5 *po/R-pl.po
 398807570e29aeb9f01003447a0e8cca *po/pl.po
 e0d1ab11f24f7e3ff569541429d65825 *LICENCE.note
@@ -183,7 +183,7 @@ caebd3270cdb7268117f8a5a0cddd7be *inst/scripts/ch15.R
 ea5ee8654eb44d16e07c4d8aa214ce4d *inst/scripts/ch01.R
 793b62dd2329642c3e5e9af5962a0f59 *inst/scripts/ch12.R
 eaccdbc382485cbba1a95f5cf61aa96d *inst/po/fr/LC_MESSAGES/R-MASS.mo
-6a9e9b1d23c12c5576462cb6d760f2de *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
+21f2e277fae12a88d0f1029d61fad3a9 *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
 40cf1769f25af93fcca0a72ae25b4e4e *inst/po/de/LC_MESSAGES/R-MASS.mo
 0fc9b9ccfdbeb6af10475ae31323209b *inst/po/pl/LC_MESSAGES/R-MASS.mo
 92627b58b3a02db3fa16448be38c3395 *inst/po/ko/LC_MESSAGES/R-MASS.mo

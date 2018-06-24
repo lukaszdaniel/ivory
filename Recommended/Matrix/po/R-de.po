@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0 / matrix 1.2-4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2016-04-14 12:55+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <r-core@r-project.org>\n"
@@ -743,6 +743,18 @@ msgstr "'NA's können nicht in \"nsparseMatrix\" umgewandelt werden"
 msgid "cannot coerce 'NA's to \"nsparseVector\""
 msgstr "Kann NAs nicht in 'nsparseVector' umwandeln"
 
+#. R/Csparse.R: stop("cannot coerce NA values to pattern \"ngCMatrix\"")
+#: R/Csparse.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ngCMatrix\""
+msgstr "'NA's können nicht in \"nsparseMatrix\" umgewandelt werden"
+
+#. R/ntCMatrix.R: stop("cannot coerce NA values to pattern \"ntCMatrix\"")
+#: R/ntCMatrix.R:0
+#, fuzzy
+msgid "cannot coerce NA values to pattern \"ntCMatrix\""
+msgstr "'NA's können nicht in \"nsparseMatrix\" umgewandelt werden"
+
 #. R/dgTMatrix.R: stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
 #: R/dgTMatrix.R:0
 msgid "cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class"
@@ -1146,9 +1158,12 @@ msgstr "längere Objektlänge ist kein Vielfaches der kürzeren Objektlänge"
 msgid "m[ <ij-matrix> ] <- v: inefficiently treating single elements"
 msgstr "m[ <ij-matrix> ] <- v: Einzelne Elemente ineffizient behandelt"
 
-#. R/Matrix.R: message("m[ <ij-matrix> ]: inefficiently indexing single elements")
+#. R/Matrix.R: message("m[<ij-matrix>]: inefficiently indexing single elements - should not happen, please report!")
 #: R/Matrix.R:0
-msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
+#, fuzzy
+msgid ""
+"m[<ij-matrix>]: inefficiently indexing single elements - should not happen, "
+"please report!"
 msgstr "m[ <ij-matrix> ]: ineffiziente Indexierung einzelner Elemente"
 
 #. R/bandSparse.R: stop("matrix can only be symmetric if square, but n != m")

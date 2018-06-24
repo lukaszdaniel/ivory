@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-12\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"Project-Id-Version: Matrix 1.2-14\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -927,6 +927,20 @@ msgid "cannot coerce 'NA's to \"nsparseVector\""
 msgstr ""
 
 
+#: R/Csparse.R: 0
+#. R/Csparse.R: stop("cannot coerce NA values to pattern \"ngCMatrix\"")
+
+msgid "cannot coerce NA values to pattern \"ngCMatrix\""
+msgstr ""
+
+
+#: R/ntCMatrix.R: 0
+#. R/ntCMatrix.R: stop("cannot coerce NA values to pattern \"ntCMatrix\"")
+
+msgid "cannot coerce NA values to pattern \"ntCMatrix\""
+msgstr ""
+
+
 #: R/dgTMatrix.R: 0
 #. R/dgTMatrix.R: stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
 
@@ -1439,9 +1453,9 @@ msgstr ""
 
 
 #: R/Matrix.R: 0
-#. R/Matrix.R: message("m[ <ij-matrix> ]: inefficiently indexing single elements")
+#. R/Matrix.R: message("m[<ij-matrix>]: inefficiently indexing single elements - should not happen, please report!")
 
-msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
+msgid "m[<ij-matrix>]: inefficiently indexing single elements - should not happen, please report!"
 msgstr ""
 
 

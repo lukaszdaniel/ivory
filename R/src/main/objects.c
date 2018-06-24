@@ -1262,7 +1262,7 @@ SEXP attribute_hidden do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
 {
     SEXP arg, value, fdef; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 
-    checkArity(op, args);
+    checkArity(op, args); /* set to -1 */
     check1arg(args, call, "f");
 
     if(!ptr) {
@@ -1271,7 +1271,6 @@ SEXP attribute_hidden do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
 	ptr = R_get_standardGeneric_ptr();
     }
 
-    checkArity(op, args); /* set to -1 */
     arg = CAR(args);
     if(!isValidStringF(arg))
 	errorcall(call, _("argument passed to '%s' function must be a non-empty character string"), "standardGeneric()");

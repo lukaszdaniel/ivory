@@ -380,8 +380,10 @@ inRbuildignore <- function(files, pkgdir) {
 
 		## Save the list
 		dir.create("build", showWarnings = FALSE)
+		## version = 2L for maximal back-compatibility
 		saveRDS(vignetteIndex,
-			file = vignette_index_path)
+			file = vignette_index_path,
+			version = 2L)
             }
         } else {
             fv <- file.path("build", "vignette.rds")
@@ -584,7 +586,8 @@ inRbuildignore <- function(files, pkgdir) {
 	    messageLog(Log, gettext("saving partial Rd database", domain = "R-tools"))
 	    partial <- db[containsBuildSexprs]
 	    dir.create("build", showWarnings = FALSE)
-	    saveRDS(partial, build_partial_Rd_db_path)
+	    ## version = 2L for maximal back-compatibility
+	    saveRDS(partial, build_partial_Rd_db_path, version = 2L)
 	}
 	needRefman <- manual &&
             parse_description_field(desc, "BuildManual", TRUE) &&
@@ -751,10 +754,12 @@ inRbuildignore <- function(files, pkgdir) {
             lapply(Rs, function(x){
                 envir <- new.env(hash = TRUE)
                 sys.source(x, chdir = TRUE, envir = envir)
+                ## version = 2L for maximal back-compatibility
                 save(list = ls(envir, all.names = TRUE),
                      file = sub("\\.[Rr]$", ".rda", x),
                      compress = TRUE, compression_level = 9,
-                     envir = envir)
+                     envir = envir,
+                     version = 2L)
                 resaved <<- c(resaved, x)
             })
             printLog(Log, gettextf("  NB: *.R converted to .rda: other files may need to be removed\n", domain = "R-tools"))

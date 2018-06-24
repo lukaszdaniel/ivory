@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-23\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"Project-Id-Version: mgcv 1.8-24\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -351,13 +351,6 @@ msgid "'by=.' is not allowed"
 msgstr ""
 
 
-#: R/coxph.r: 0
-#. R/coxph.r: stop("'cox.ph()' function does not yet handle offsets")
-
-msgid "'cox.ph()' function does not yet handle offsets"
-msgstr ""
-
-
 #: R/smooth.r: 0
 #. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
 
@@ -377,6 +370,13 @@ msgstr ""
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 
 msgid "'family' argument seems not to be a valid family object"
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettext("'gamm' based fit - care required with interpretation.", domain = "R-mgcv")
+
+msgid "'gamm' based fit - care required with interpretation."
 msgstr ""
 
 
@@ -561,6 +561,13 @@ msgstr ""
 #. R/mgcv.r: stop("'y' must be univariate unless binomial")
 
 msgid "'y' must be univariate unless binomial"
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettextf("(score %s & scale %s).", b$gcv.ubre, b$sig2, domain = "R-mgcv")
+
+msgid "(score %s & scale %s)."
 msgstr ""
 
 
@@ -770,6 +777,13 @@ msgid "Cannot extract the matrix with uninitialized dimensions"
 msgstr ""
 
 
+#: R/plots.r: 0
+#. R/plots.r: gettext("Checks based on working residuals may be misleading.", domain = "R-mgcv")
+
+msgid "Checks based on working residuals may be misleading."
+msgstr ""
+
+
 #: R/gam.sim.r: 0
 #. R/gam.sim.r: gettext("Continuous 'by' variable example", domain = "R-mgcv")
 
@@ -868,28 +882,7 @@ msgstr ""
 
 
 #: R/gam.fit4.r: 0
-#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd), collapse = " "),     cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
-
-msgid "Dmu2: rdiff = %s cor = %s"
-msgstr ""
-
-
-#: R/gam.fit4.r: 0
-#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd), collapse = " "),     cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
-
-msgid "Dmu3: rdiff = %s cor = %s"
-msgstr ""
-
-
-#: R/gam.fit4.r: 0
-#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd), collapse = " "),     cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
-
-msgid "Dmu4: rdiff = %s cor = %s"
-msgstr ""
-
-
-#: R/gam.fit4.r: 0
-#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd), collapse = " "),     cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", range(dd$Dmu - Dmu.fd), corb(dd$Dmu, Dmu.fd),     domain = "R-mgcv")
 
 msgid "Dmu: rdiff = %s cor = %s"
 msgstr ""
@@ -911,7 +904,6 @@ msgstr ""
 
 #: R/gam.fit4.r: 0
 #. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um - Dth.fd), collapse = " "),     cor(um, Dth.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth - Dth.fd), collapse = " "),     cor(dd$Dth, Dth.fd), domain = "R-mgcv")
 
 msgid "Dth[%d]: rdiff = %s cor = %s"
 msgstr ""
@@ -921,13 +913,6 @@ msgstr ""
 #. R/mgcv.r: gettext("Estimated degrees of freedom:", domain = "R-mgcv")
 
 msgid "Estimated degrees of freedom:"
-msgstr ""
-
-
-#: R/mgcv.r: 0
-#. R/mgcv.r: warning("Extended Fellner Schall only implemented for general families")
-
-msgid "Extended Fellner Schall only implemented for general families"
 msgstr ""
 
 
@@ -988,6 +973,13 @@ msgid "Gaussian quantiles"
 msgstr ""
 
 
+#: R/plots.r: 0
+#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad), domain = "R-mgcv")
+
+msgid "Gradient range [%s, %s]"
+msgstr ""
+
+
 #: R/gam.sim.r: 0
 #. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model", domain = "R-mgcv")
 
@@ -1006,6 +998,13 @@ msgstr ""
 #. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model + random effect", domain = "R-mgcv")
 
 msgid "Gu & Wahba 4 term additive model + random effect"
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettext("Hessian positive definite", domain = "R-mgcv")
+
+msgid "Hessian positive definite"
 msgstr ""
 
 
@@ -1129,6 +1128,13 @@ msgstr ""
 #. R/plots.r: gettextf("Model rank = %s/%s", b$rank, length(b$coefficients), domain = "R-mgcv")
 
 msgid "Model rank = %s/%s"
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettext("Model required no smoothing parameter selection", domain = "R-mgcv")
+
+msgid "Model required no smoothing parameter selection"
 msgstr ""
 
 
@@ -1674,6 +1680,27 @@ msgid "Tensor product smooth term"
 msgstr ""
 
 
+#: R/plots.r: 0
+#. R/plots.r: gettext("The Hessian was not positive definite.", domain = "R-mgcv")
+
+msgid "The Hessian was not positive definite."
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettext("The Hessian was positive definite.", domain = "R-mgcv")
+
+msgid "The Hessian was positive definite."
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad,     domain = "R-mgcv")
+
+msgid "The RMS %s score gradient at convergence was %s."
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 
@@ -1901,6 +1928,13 @@ msgid "bnd must be a list of boundary loops"
 msgstr ""
 
 
+#: R/plots.r: 0
+#. R/plots.r: gettext(" by steepest\ndescent step failure.", domain = "R-mgcv")
+
+msgid "by steepest\ndescent step failure."
+msgstr ""
+
+
 #: R/gam.fit3.r: 0
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 
@@ -2092,6 +2126,13 @@ msgid "effects"
 msgstr ""
 
 
+#: R/plots.r: 0
+#. R/plots.r: gettextf("eigenvalue range [%s, %s].", min(ev), max(ev), domain = "R-mgcv")
+
+msgid "eigenvalue range [%s, %s]."
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: stop("elements of 'min.sp' argument must be non negative")
 
@@ -2209,9 +2250,11 @@ msgstr ""
 #: R/gam.fit3.r: 0
 #: R/gam.fit3.r: 0
 #: R/gam.fit4.r: 0
+#: R/gam.fit4.r: 0
 #. R/fast-REML.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 
 msgid "full convergence"
@@ -2396,8 +2439,10 @@ msgstr ""
 
 #: R/gam.fit3.r: 0
 #: R/gam.fit4.r: 0
+#: R/gam.fit4.r: 0
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 
 msgid "iteration limit reached"
@@ -3544,3 +3589,12 @@ msgstr ""
 
 msgid "y must be strictly positive for a Gamma density"
 msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration",     "Smoothing parameter selection converged after %d iterations", domain = "R-mgcv")
+
+msgid        "Smoothing parameter selection converged after %d iteration"
+msgid_plural "Smoothing parameter selection converged after %d iterations"
+msgstr[0]    ""
+msgstr[1]    ""

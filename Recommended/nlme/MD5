@@ -290,11 +290,11 @@ e5cbc2946848be223376e91ba52f513c *DESCRIPTION
 bda630471cf4fdd1c025cd0c01a66b3f *po/R-ko.po
 636305d4662db6ac1064b246bd6a2907 *po/R-de.po
 0693ac696f00131c3ab3140c6177cead *po/R-pl.po
-58a0dc39845a7c23fd0ec5583088c29a *po/R-nlme.pot
+82dc3a153f7ce6799ffaaf35e72ffbbf *po/R-nlme.pot
 1fcd7b96077c28baca90e2c10eb36a37 *po/de.po
 6fe17acc79b162eb90848452f61f6b1b *po/fr.po
 42e2ed5fed73855c486e21ca7246e6cf *po/ko.po
-ed935d328433c3fc3b4b730d61ff9986 *po/nlme.pot
+37634a58955dda031c26bf652d70aa19 *po/nlme.pot
 82b12d3cf1c976001486853f918ea844 *po/pl.po
 4e6044fc68ab0aaff2750b36b9a37f73 *TODO
 1b861e2fac2ad8b7cfde1dafa9722618 *README
@@ -314,8 +314,8 @@ aa549206ac4749200a23760b13d742c8 *inst/scripts/sims.rda
 fd6efb34026508f27de122da7d5e712f *inst/mlbook/ch04.R
 d1015ec0f162d534e1e747598044c3e7 *inst/po/fr/LC_MESSAGES/nlme.mo
 532cfe7c73ccd9459d7f1dfca91acc2e *inst/po/fr/LC_MESSAGES/R-nlme.mo
-1073e60e20940bb8c26dd1159ed0d353 *inst/po/en@quot/LC_MESSAGES/nlme.mo
-18e43c3f4fa945376d092497d5be2646 *inst/po/en@quot/LC_MESSAGES/R-nlme.mo
+f4b00530f7002d0178659dc98852dfe5 *inst/po/en@quot/LC_MESSAGES/nlme.mo
+a30dfeec0d45b26ab50948aa015e849c *inst/po/en@quot/LC_MESSAGES/R-nlme.mo
 1a824e7c5aabe3771365ff866a6efe9a *inst/po/de/LC_MESSAGES/nlme.mo
 78b6094b17ddd38b2d5918812667cd0e *inst/po/de/LC_MESSAGES/R-nlme.mo
 86015c3add228c10a336b79d5aae08f0 *inst/po/pl/LC_MESSAGES/nlme.mo

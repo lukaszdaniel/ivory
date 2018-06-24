@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-06-24 18:55\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -283,12 +283,6 @@ msgstr ""
 msgid "'by=.' is not allowed"
 msgstr "by=. n'est pas permis"
 
-#. R/coxph.r: stop("'cox.ph()' function does not yet handle offsets")
-#: R/coxph.r:0
-#, fuzzy
-msgid "'cox.ph()' function does not yet handle offsets"
-msgstr "s(.) pas encore support"
-
 #. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
 #: R/smooth.r:0
 #, fuzzy
@@ -304,6 +298,11 @@ msgstr ""
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #: R/bam.r:0
 msgid "'family' argument seems not to be a valid family object"
+msgstr ""
+
+#. R/plots.r: gettext("'gamm' based fit - care required with interpretation.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "'gamm' based fit - care required with interpretation."
 msgstr ""
 
 #. R/gamm.r: stop("'gamm()' can only handle random effects defined as named lists")
@@ -457,6 +456,11 @@ msgstr ""
 #, fuzzy
 msgid "'y' must be univariate unless binomial"
 msgstr "y doit tre univari  moins d'tre binomial"
+
+#. R/plots.r: gettextf("(score %s & scale %s).", b$gcv.ubre, b$sig2, domain = "R-mgcv")
+#: R/plots.r:0
+msgid "(score %s & scale %s)."
+msgstr ""
 
 #. R/gam.fit4.r: gettext("**using positive weights", domain = "R-mgcv")
 #: R/gam.fit4.r:0
@@ -615,6 +619,11 @@ msgstr "Impossible d'extraire la matrice d'un objet pdMat non initialis"
 msgid "Cannot extract the matrix with uninitialized dimensions"
 msgstr "Impossible d'extraire la matrice ayant des dimensions non initialises"
 
+#. R/plots.r: gettext("Checks based on working residuals may be misleading.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Checks based on working residuals may be misleading."
+msgstr ""
+
 #. R/gam.sim.r: gettext("Continuous 'by' variable example", domain = "R-mgcv")
 #: R/gam.sim.r:0
 #, fuzzy
@@ -685,22 +694,7 @@ msgstr ""
 msgid "Discrete Theta search not available with performance iteration"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd), collapse = " "),     cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu2: rdiff = %s cor = %s"
-msgstr ""
-
-#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd), collapse = " "),     cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu3: rdiff = %s cor = %s"
-msgstr ""
-
-#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd), collapse = " "),     cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
-#: R/gam.fit4.r:0
-msgid "Dmu4: rdiff = %s cor = %s"
-msgstr ""
-
-#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd), collapse = " "),     cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", range(dd$Dmu - Dmu.fd), corb(dd$Dmu, Dmu.fd),     domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu: rdiff = %s cor = %s"
 msgstr ""
@@ -718,7 +712,6 @@ msgid "Dth2[%d]: rdiff = %s cor = %s"
 msgstr ""
 
 #. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um - Dth.fd), collapse = " "),     cor(um, Dth.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth - Dth.fd), collapse = " "),     cor(dd$Dth, Dth.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dth[%d]: rdiff = %s cor = %s"
 msgstr ""
@@ -726,11 +719,6 @@ msgstr ""
 #. R/mgcv.r: gettext("Estimated degrees of freedom:", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "Estimated degrees of freedom:"
-msgstr ""
-
-#. R/mgcv.r: warning("Extended Fellner Schall only implemented for general families")
-#: R/mgcv.r:0
-msgid "Extended Fellner Schall only implemented for general families"
 msgstr ""
 
 #. R/smooth.r: stop("F is missing from cr smooth - refit model with current mgcv")
@@ -774,6 +762,11 @@ msgstr ""
 msgid "Gaussian quantiles"
 msgstr ""
 
+#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Gradient range [%s, %s]"
+msgstr ""
+
 #. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model", domain = "R-mgcv")
 #: R/gam.sim.r:0
 msgid "Gu & Wahba 4 term additive model"
@@ -788,6 +781,12 @@ msgstr ""
 #: R/gam.sim.r:0
 msgid "Gu & Wahba 4 term additive model + random effect"
 msgstr ""
+
+#. R/plots.r: gettext("Hessian positive definite", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "Hessian positive definite"
+msgstr "]] n'est pas +ve dfinie."
 
 #. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
 #: R/plots.r:0
@@ -885,6 +884,13 @@ msgstr ""
 #: R/plots.r:0
 msgid "Model rank = %s/%s"
 msgstr ""
+
+#. R/plots.r: gettext("Model required no smoothing parameter selection", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "Model required no smoothing parameter selection"
+msgstr ""
+"Valeurs manquantes (NA) dans le vecteur de paramtres de lissage fixe - ignor."
 
 #. R/mgcv.r: stop("Model seems to contain no terms")
 #: R/mgcv.r:0
@@ -1300,6 +1306,23 @@ msgstr ""
 msgid "Tensor product smooth term"
 msgstr ""
 
+#. R/plots.r: gettext("The Hessian was not positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "The Hessian was not positive definite."
+msgstr "]] n'est pas +ve dfinie."
+
+#. R/plots.r: gettext("The Hessian was positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "The Hessian was positive definite."
+msgstr "]] n'est pas +ve dfinie."
+
+#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad,     domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The RMS %s score gradient at convergence was %s."
+msgstr ""
+
 #. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "The following arguments to anova.glm(..) are invalid and dropped:"
@@ -1474,6 +1497,13 @@ msgstr "l'argument random doit tre une liste *nomme*."
 msgid "bnd must be a list of boundary loops"
 msgstr ""
 
+#. R/plots.r: gettext(" by steepest\ndescent step failure.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid ""
+"by steepest\n"
+"descent step failure."
+msgstr ""
+
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "calling gdi..."
@@ -1620,6 +1650,11 @@ msgstr ""
 msgid "effects"
 msgstr ""
 
+#. R/plots.r: gettextf("eigenvalue range [%s, %s].", min(ev), max(ev), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "eigenvalue range [%s, %s]."
+msgstr ""
+
 #. R/mgcv.r: stop("elements of 'min.sp' argument must be non negative")
 #: R/mgcv.r:0
 #, fuzzy
@@ -1707,6 +1742,7 @@ msgstr ""
 #. R/fast-REML.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("full convergence", domain = "R-mgcv")
 #: R/fast-REML.r:0 R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "full convergence"
@@ -1854,6 +1890,7 @@ msgstr ""
 
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
+#. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 #. R/gam.fit4.r: gettext("iteration limit reached", domain = "R-mgcv")
 #: R/gam.fit3.r:0 R/gam.fit4.r:0
 msgid "iteration limit reached"
@@ -2741,11 +2778,16 @@ msgstr ""
 msgid "y must be strictly positive for a Gamma density"
 msgstr ""
 
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration",     "Smoothing parameter selection converged after %d iterations", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Smoothing parameter selection converged after %d iteration"
+msgid_plural "Smoothing parameter selection converged after %d iterations"
+msgstr[0] ""
+msgstr[1] ""
+
 #, fuzzy
-#~ msgid "Model required no smoothing parameter selection"
-#~ msgstr ""
-#~ "Valeurs manquantes (NA) dans le vecteur de paramtres de lissage fixe - "
-#~ "ignor."
+#~ msgid "'cox.ph()' function does not yet handle offsets"
+#~ msgstr "s(.) pas encore support"
 
 #~ msgid "no automatic plotting for smooths of more than one variable"
 #~ msgstr "aucun graphe automatique pour les lissages de plus d'une variable"
