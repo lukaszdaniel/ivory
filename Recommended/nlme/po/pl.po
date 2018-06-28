@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-125\n"
+"Project-Id-Version: nlme 3.1-137\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-16 18:52+0100\n"
 "PO-Revision-Date: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: corStruct.c:423
 msgid "All parameters must be less than 1 in absolute value"
@@ -55,16 +55,20 @@ msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
 #: nlmefit.c:898
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
-msgstr "Nie można uformować dekompozycji wartość własna-wektor własny"
+msgstr ""
+"Nie można uformować dekompozycji wartość własna-wektor własny [RS(.) ierr = "
+"%d]"
 
 #: nlmefit.c:930
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
 "pos.def."
-msgstr "Nie można uformować dekompozycji Cholesky'ego"
+msgstr ""
+"Nie można uformować dekompozycji Cholesky'ego: wiodący minor rzędu %d nie "
+"jest dodatnio określony."
 
 #: nlmefit.c:962
 msgid "Haven't written the compound symmetry case for this yet"

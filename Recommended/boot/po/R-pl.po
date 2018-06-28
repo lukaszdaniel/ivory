@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: boot 1.3-11\n"
+"Project-Id-Version: boot 1.3-20\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2018-03-16 18:52\n"
 "PO-Revision-Date: \n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/bootfuns.q: gettextf("%s distribution not supported: using normal instead", sQuote(qdist))
 #: R/bootfuns.q:0
@@ -942,9 +942,8 @@ msgstr "nie można znaleźć zakresu"
 
 #. R/bootfuns.q: warning("unknown type of \"boot\" object")
 #: R/bootfuns.q:0
-#, fuzzy
 msgid "unknown type of \"boot\" object"
-msgstr "argumenty nie są wszystkie tego samego typu obiektu 'boot'"
+msgstr "nieznany typ obiektu 'boot'"
 
 #. R/bootfuns.q: stop("unknown value of 'sim'")
 #: R/bootfuns.q:0

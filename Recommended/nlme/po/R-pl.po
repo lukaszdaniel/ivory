@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-125\n"
+"Project-Id-Version: nlme 3.1-137\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2018-03-16 18:52\n"
-"PO-Revision-Date: 2016-03-03 20:45+0100\n"
+"PO-Revision-Date: 2018-06-24 19:15+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,-1,-1,72,-1,-1,-1,-1,-1,-1\n"
 
 #. R/lmList.R: gettextf("%d errors caught in %s. The error messages and their frequencies are\n%s",     sum(tt), e.call, paste(capture.output(sort(tt)), collapse = "\n"), domain = "R-nlme")
@@ -1391,9 +1391,8 @@ msgstr "nie można mieć powtórzonych nazw kolumn w obiekcie klasy \"pdMat\""
 
 #. R/corStruct.R: stop("cannot have zero distances in an object of class \"corSpatial\"")
 #: R/corStruct.R:0
-#, fuzzy
 msgid "cannot have zero distances in an object of class \"corSpatial\""
-msgstr "nie można mieć zerowych odległości w \"corSpatial\""
+msgstr "nie można mieć zerowych odległości w obiekcie klasy \"corSpatial\""
 
 #. R/pdMat.R: stop("cannot obtain constrained coefficients with uninitialized dimensions")
 #: R/pdMat.R:0
@@ -1849,7 +1848,6 @@ msgstr "rząd średniej ruchomej musi być nieujemną liczbą całkowitą"
 
 #. R/nlsList.R: stop("multiple levels are not allowed")
 #: R/nlsList.R:0
-#, fuzzy
 msgid "multiple levels are not allowed"
 msgstr "wielokrotne poziomy nie są dozwolone"
 

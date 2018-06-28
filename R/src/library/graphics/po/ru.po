@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-24 21:00+0200\n"
+"POT-Creation-Date: 2018-06-28 19:47+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -267,7 +267,7 @@ msgstr "неправильный тип меток осей"
 
 #: plot.c:756 plot.c:1331 plot.c:1654 plot.c:1719 plot.c:1794 plot.c:1860
 #: plot.c:1934 plot.c:2029 plot.c:2105 plot.c:2383 plot.c:2557 plot.c:2773
-#: plot.c:3319 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
+#: plot.c:3319 plot.c:3454 plot.c:3530 plot.c:3696 plot.c:3976 plot3d.c:1873
 msgid "too few arguments"
 msgstr "слишком мало аргументов"
 
@@ -380,8 +380,8 @@ msgstr "не указаны координаты"
 msgid "'a' and 'b' arguments must be finite"
 msgstr "'a' и 'b' должны быть конечными"
 
-#: plot.c:2958 plot.c:4065 plot.c:4068 plot.c:4071 plot.c:4074 plot.c:4094
-#: plot.c:4098 plot.c:4101 plot.c:4121 plot.c:4125 plot.c:4128 plot3d.c:1086
+#: plot.c:2958 plot.c:4067 plot.c:4070 plot.c:4073 plot.c:4076 plot.c:4096
+#: plot.c:4100 plot.c:4103 plot.c:4123 plot.c:4127 plot.c:4130 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
 #: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
@@ -420,81 +420,81 @@ msgstr "предупреждение: ближайшая точка уже оп�
 msgid "invalid units"
 msgstr "неправильные единицы"
 
-#: plot.c:3512 plot.c:3619
+#: plot.c:3514 plot.c:3621
 msgid "invalid dendrogram input"
 msgstr "неправильный ввод дендрограммы"
 
-#: plot.c:3676
+#: plot.c:3678
 msgid "invalid symbol parameter vector"
 msgstr "неправильный вектор символьных параметров"
 
-#: plot.c:3699
+#: plot.c:3701
 msgid "invalid symbol coordinates"
 msgstr "неправильные символьные координаты"
 
-#: plot.c:3707
+#: plot.c:3709
 msgid "x/y/parameter length mismatch"
 msgstr "несоответствие длин x/y/параметров"
 
-#: plot.c:3726
+#: plot.c:3728
 msgid "invalid circles data"
 msgstr "неправильные данные о кругах"
 
-#: plot.c:3728 plot.c:3749 plot.c:3774 plot.c:3804
+#: plot.c:3730 plot.c:3751 plot.c:3776 plot.c:3806
 msgid "invalid symbol parameter"
 msgstr "неправильный символьный параметр"
 
-#: plot.c:3747
+#: plot.c:3749
 msgid "invalid squares data"
 msgstr "неправильные данные о квадратах"
 
-#: plot.c:3772
+#: plot.c:3774
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "неправильные данные о прямоугольниках (нужны 2 колонки)"
 
-#: plot.c:3802
+#: plot.c:3804
 msgid "invalid stars data"
 msgstr "неправильные данные о звездочках"
 
-#: plot.c:3844
+#: plot.c:3846
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "неправильные данные о градусниках (нужно 3 или 4 колонки)"
 
-#: plot.c:3847 plot.c:3853
+#: plot.c:3849 plot.c:3855
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "неправильные 'thermometers[,%s]'"
 
-#: plot.c:3850
+#: plot.c:3852
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "'thermometers[,%s]' вне [0,1] -- может странно выглядеть"
 
-#: plot.c:3892
+#: plot.c:3894
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "неправильные данные о ящиках-с-усами (нужно 5 колонок)"
 
-#: plot.c:3901
+#: plot.c:3903
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "'boxplots[,5]' вне [0,1] -- может странно выглядеть"
 
-#: plot.c:3903
+#: plot.c:3905
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "неправильные 'boxplots[, 1:4]'"
 
-#: plot.c:3949
+#: plot.c:3951
 msgid "invalid symbol type"
 msgstr "неправильный тип символа"
 
-#: plot.c:3987 plot.c:3989 plot.c:3994 plot.c:3996
+#: plot.c:3989 plot.c:3991 plot.c:3996 plot.c:3998
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
 
-#: plot.c:4013
+#: plot.c:4015
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "не могу разместить память (в xspline)"
