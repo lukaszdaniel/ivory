@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-06-13 r1043) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-06-13 r74897) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -74,40 +74,40 @@ inverse  mu      eta     eta    eta
 > ## 2. all others
 > other <- fns != "valideta"
 > str(linkO <- lapply(links, function(L) L[other]))
-List of 9
- $ logit   :List of 3
+List of 9 components
+ $ logit   :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ probit  :List of 3
+ $ probit  :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ cauchit :List of 3
+ $ cauchit :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ cloglog :List of 3
+ $ cloglog :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ identity:List of 3
+ $ identity:List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ log     :List of 3
+ $ log     :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ sqrt    :List of 3
+ $ sqrt    :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ 1/mu^2  :List of 3
+ $ 1/mu^2  :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
- $ inverse :List of 3
+ $ inverse :List of 3 components
   ..$ linkfun:function (mu)  
   ..$ linkinv:function (eta)  
   ..$ mu.eta :function (eta)  
@@ -138,7 +138,7 @@ List of 9
 Call:
 glm(formula = lot1 ~ log(u), family = Gamma, data = clotting)
 
-Deviance Residuals: 
+Deviance Residuals:
      Min        1Q    Median        3Q       Max  
 -0.04008  -0.03756  -0.02637   0.02905   0.08641  
 
@@ -162,7 +162,7 @@ Number of Fisher Scoring iterations: 3
 Call:
 glm(formula = lot2 ~ log(u), family = Gamma, data = clotting)
 
-Deviance Residuals: 
+Deviance Residuals:
      Min        1Q    Median        3Q       Max  
 -0.05574  -0.02925   0.01030   0.01714   0.06371  
 
@@ -206,4 +206,4 @@ Number of Fisher Scoring iterations: 3
 > 
 > proc.time()
    user  system elapsed 
-  0.122   0.035   0.149 
+  0.206   0.031   0.229 

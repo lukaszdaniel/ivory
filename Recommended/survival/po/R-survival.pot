@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.42-3.1\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"Project-Id-Version: survival 2.42-4\n"
+"POT-Creation-Date: 2018-07-03 22:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1232,10 +1232,18 @@ msgstr ""
 
 
 #: R/print.coxph.penal.S: 0
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
 
-msgid "Likelihood ratio test = %s on %s df, p=%s n=%d"
+msgid "Likelihood ratio test = %s on %s df, p=%s\nn=%d"
+msgstr ""
+
+
+#: R/print.coxph.penal.S: 0
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n",     format(round(logtest, 2)), format(round(df, 2)), format.pval(pchisq(logtest,         df, lower.tail = FALSE), digits = pdig), x$n, x$nevent, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n",     format(round(logtest, 2)), format(round(df, 2)), format.pval(pchisq(logtest,         df, lower.tail = FALSE), digits = pdig), x$n, x$nevent, domain = "R-survival")
+
+msgid "Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d"
 msgstr ""
 
 
@@ -1898,6 +1906,28 @@ msgid "all curves must have a consistent 'start.time' value"
 msgstr ""
 
 
+#: R/Surv.R: 0
+#. R/Surv.R: stop("all elements must be of class Surv")
+
+msgid "all elements must be of class Surv"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("all elements must be of the same Surv type")
+
+msgid "all elements must be of the same Surv type"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("all elements must have the same list of states")
+#. R/Surv.R: stop("all elements must have the same list of states")
+
+msgid "all elements must have the same list of states"
+msgstr ""
+
+
 #: R/survfitCI.R: 0
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 
@@ -2554,6 +2584,8 @@ msgstr ""
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
+#. R/Surv.R: stop("invalid operation on a survival time")
+#. R/Surv.R: stop("invalid operation on a survival time")
 
 msgid "invalid operation on a survival time"
 msgstr ""
@@ -2608,6 +2640,13 @@ msgstr ""
 #. R/Surv.R: stop("invalid status value, must be logical or numeric")
 
 msgid "invalid status value, must be logical or numeric"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("invalid survival time created")
+
+msgid "invalid survival time created"
 msgstr ""
 
 
@@ -2802,6 +2841,14 @@ msgstr ""
 #. R/cch.R: gettextf("method (%s) requires 'stratum'", method)
 
 msgid "method (%s) requires 'stratum'"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("method not defined for a Surv object")
+#. R/Surv.R: stop("method not defined for a Surv object")
+
+msgid "method not defined for a Surv object"
 msgstr ""
 
 
@@ -3019,6 +3066,20 @@ msgstr ""
 #. R/survfit.coxph.R: stop("not able to create a curve for models that contain an interaction without the lower order effect")
 
 msgid "not able to create a curve for models that contain an interaction without the lower order effect"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+
+msgid "not defined for a Surv object"
 msgstr ""
 
 
@@ -3436,13 +3497,6 @@ msgstr ""
 #. R/cch.R: warning("stratum levels and names(cohort.size) do not agree")
 
 msgid "stratum levels and names(cohort.size) do not agree"
-msgstr ""
-
-
-#: R/survfitCI.R: 0
-#. R/survfitCI.R: gettextf("subject changes to the same state, id %s", id[indx1[who]])
-
-msgid "subject changes to the same state, id %s"
 msgstr ""
 
 

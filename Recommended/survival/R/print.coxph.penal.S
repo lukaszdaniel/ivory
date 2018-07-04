@@ -109,10 +109,18 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
     pdig <- max(1, getOption("digits")-4)  # default it too high IMO
     omit <- x$na.action
     if (length(omit)) {
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), " (", naprint(omit), ")", "\n",  sep = "")
+       if (!is.null(x$nevent)) {
+      cat(gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, x$nevent, domain = "R-survival"), "  (", naprint(omit), ")", "\n",  sep = "")
+      } else {
+      cat(gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), "  (", naprint(omit), ")", "\n",  sep = "")
+      }
     }
     else {
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), "\n", sep = "")
+       if (!is.null(x$nevent)) {
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, x$nevent, domain = "R-survival"), "\n", sep = "")
+     } else {
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest, 2)), format(round(df,2)), format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), x$n, domain = "R-survival"), "\n", sep = "")
+     }
 	}
     invisible()
     }

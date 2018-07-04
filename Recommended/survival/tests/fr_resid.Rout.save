@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -269,7 +269,9 @@ frailty(id, dist = "gauss                            26.54461 14.7 0.0294
 Iterations: 6 outer, 39 Newton-Raphson
      variance of random effect= 0.569 
 Degrees of freedom for terms=  0.5  0.5 14.7
-Likelihood ratio test = 47.5 on 15.7 df, p=5e-05 n=76
+Likelihood ratio test = 47.5 on 15.7 df, p=5e-05
+n=76, number of events=58
+
 > kfitx
 Call:
 coxph(formula = Surv(time, status) ~ age + sex + offset(temp), data = kidney, init = kfit1$coef, 
@@ -359,10 +361,12 @@ frailty(id, dist = "gauss                      23 13.8 0.057
 Iterations: 7 outer, 39 Newton-Raphson
      variance of random effect= 0.458 
 Degrees of freedom for terms= 13.8
-Likelihood ratio test = 33.4 on 13.8 df, p=0.002 n=76
+Likelihood ratio test = 33.4 on 13.8 df, p=0.002
+n=76, number of events=58
+
 > 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  0.738   0.052   0.784 
+  0.965   0.063   1.021 

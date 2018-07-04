@@ -92,7 +92,7 @@ b16c33994e8ac8ec02b2e33b4588e279 *man/saddle.distn.object.Rd
 07fd6a0961fc82451044b912d4453d8c *po/R-fr.po
 d8e6e8add1b4e1ce1ccb109cc88491b7 *po/R-ko.po
 d2a79bcd017828dc23493af50a0f042b *po/R-de.po
-c5e32f4c4ea46528c4648aebb94b7907 *po/R-pl.po
+05fefac3e4e49753b8772d46b8bc0e89 *po/R-pl.po
 6b968570c4b0bd66d69dd4e83eee18a4 *po/R-ru.po
 fa5b6e64d574c572b9c9dd0590769ca6 *po/R-boot.pot
 e6929f73b03924d15f3af4a4c8549a45 *INDEX
@@ -101,10 +101,10 @@ e6929f73b03924d15f3af4a4c8549a45 *INDEX
 d3bcc9ddd9bd747d19d85a91504a7117 *inst/po/en@quot/LC_MESSAGES/R-boot.mo
 9f31992ebf8bbf570201aa791456628a *inst/po/de/LC_MESSAGES/R-boot.mo
 9fe7b8f8e6afa64002673e4cea9f1d1e *inst/po/ru/LC_MESSAGES/R-boot.mo
-6bf62991ed920c697af9bc25d6b0ee6f *inst/po/pl/LC_MESSAGES/R-boot.mo
+e5c2f0e3b9f6a16cccc4f4266a8edfe1 *inst/po/pl/LC_MESSAGES/R-boot.mo
 a7431f0d6baac9766369161ed90a9326 *inst/po/ko/LC_MESSAGES/R-boot.mo
 6e887574f4c46cddf29707098ab3fccf *inst/bd.q
-c0532344f5332d32dd4cc63dbec1546e *tests/Examples/boot-Ex.Rout.save
+c38170f1a559a7290937d4330affb2af *tests/Examples/boot-Ex.Rout.save
 167a3d2551651549fa966891802002d5 *R/bootpracs.q
 591c70055cc432c50fbff8c9fc8a2cfa *R/bootfuns.q
 5a3e04afacf5edf673d0b11aef8fe760 *data/remission.rda

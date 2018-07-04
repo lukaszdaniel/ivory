@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -70,6 +70,29 @@ In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), ty
 > aeq(temp1, temp2)
 [1] TRUE
 > 
+> # Verify sorting and order routines
+> x1 <- Surv(c(4, 6, 3, 2, 1, NA, 2), c(1,0, NA, 0,1,1,1))
+> all.equal(order(x1), c(5,7, 4, 1, 2, 3, 6))
+[1] TRUE
+> all.equal(order(x1, decreasing=TRUE), c(2,1,4,7,5, 3, 6))
+[1] TRUE
+> all.equal(sort(x1), x1[c(5,7,4,1,2)])
+[1] TRUE
+> 
+> x2 <- Surv(c(4, 6, 3, 2, 1, NA, 2), c(1,0, NA, 0,1,1,1), type='left')
+> all.equal(order(x2), c(5,4, 7, 1, 2, 3, 6))
+[1] TRUE
+> 
+> x3 <- Surv(c(1,5,NA,7, 9), c(6, 6, 4, NA, 9), type="interval2")
+> all.equal(sort(x3), x3[c(1,3,2,4,5)])
+[1] TRUE
+> 
+> x4 <- Surv(c(1,5,6,5,2, 4), c(3, 7, 7, 6, 3, NA), factor(c(1, 2, 0, 1, 1, 0)))
+> all.equal(sort(x4), x4[c(1, 5, 4, 2,3)])
+[1] TRUE
+> all.equal(sort(x4, na.last=FALSE), x4[c(6,1,5,4,2,3)])
+[1] TRUE
+> 
 > proc.time()
    user  system elapsed 
-  0.709   0.036   0.738 
+  0.867   0.040   0.901 

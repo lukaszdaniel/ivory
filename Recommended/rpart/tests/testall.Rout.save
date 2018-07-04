@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-04-17 r1025) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-04-17 r74612) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -33,6 +33,13 @@ Type 'q()' to quit R.
 > library(rpart)
 > require(survival)
 Loading required package: 'survival'
+
+Attaching package: 'survival'
+
+The following object is masked from 'package:rpart':
+
+    solder
+
 > options(digits=4)  #avoid trivial rounding changes across R versions
 > 
 > # 
@@ -944,4 +951,4 @@ Node number 23: 8 observations
 > 
 > proc.time()
    user  system elapsed 
-  0.759   0.044   0.796 
+  0.886   0.043   0.923 

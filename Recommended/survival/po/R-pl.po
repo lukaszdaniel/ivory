@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2018-07-03 22:19\n"
 "PO-Revision-Date: 2016-04-23 13:23+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -912,10 +912,23 @@ msgstr "Iteracje: %d zewnętrzna, %d Newtona-Raphsona"
 msgid "Likelihood ratio test = %s on %s df, p=%s"
 msgstr "Test stosunku funkcji wiarygodności=%s dla %s stopni swobody, p=%s"
 
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d\n", format(round(logtest,     2)), format(round(df, 2)), format.pval(pchisq(logtest, df, lower.tail = FALSE),     digits = pdig), x$n, domain = "R-survival")
 #: R/print.coxph.penal.S:0
-msgid "Likelihood ratio test = %s on %s df, p=%s n=%d"
+#, fuzzy
+msgid ""
+"Likelihood ratio test = %s on %s df, p=%s\n"
+"n=%d"
+msgstr ""
+"Test stosunku funkcji wiarygodności = %s dla %s stopni swobody, p=%s  n=%d"
+
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n",     format(round(logtest, 2)), format(round(df, 2)), format.pval(pchisq(logtest,         df, lower.tail = FALSE), digits = pdig), x$n, x$nevent, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d\n",     format(round(logtest, 2)), format(round(df, 2)), format.pval(pchisq(logtest,         df, lower.tail = FALSE), digits = pdig), x$n, x$nevent, domain = "R-survival")
+#: R/print.coxph.penal.S:0
+#, fuzzy
+msgid ""
+"Likelihood ratio test = %s on %s df, p=%s\n"
+"n=%d, number of events=%d"
 msgstr ""
 "Test stosunku funkcji wiarygodności = %s dla %s stopni swobody, p=%s  n=%d"
 
@@ -1402,6 +1415,25 @@ msgstr "wszystkie krzywe muszą być tego samego typu"
 msgid "all curves must have a consistent 'start.time' value"
 msgstr "wszystkie krzywe muszą być tego samego typu"
 
+#. R/Surv.R: stop("all elements must be of class Surv")
+#: R/Surv.R:0
+#, fuzzy
+msgid "all elements must be of class Surv"
+msgstr "wszystkie argumenty muszą być obiektami klasy %s lub %s"
+
+#. R/Surv.R: stop("all elements must be of the same Surv type")
+#: R/Surv.R:0
+#, fuzzy
+msgid "all elements must be of the same Surv type"
+msgstr "wszystkie krzywe muszą być tego samego typu"
+
+#. R/Surv.R: stop("all elements must have the same list of states")
+#. R/Surv.R: stop("all elements must have the same list of states")
+#: R/Surv.R:0
+#, fuzzy
+msgid "all elements must have the same list of states"
+msgstr "wszystkie argumenty muszą mieć tę samą długość"
+
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 #: R/survfitCI.R:0
 msgid "an observation transitions to it's starting state, transition ignored"
@@ -1885,6 +1917,8 @@ msgstr "niepoprawna wartość iteracji"
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
+#. R/Surv.R: stop("invalid operation on a survival time")
+#. R/Surv.R: stop("invalid operation on a survival time")
 #: R/Surv.R:0
 msgid "invalid operation on a survival time"
 msgstr "niepoprawna operacja na czasie przeżycia"
@@ -1926,6 +1960,12 @@ msgstr "niepoprawna wartość statusu, zamieniono na wartość NA"
 #: R/Surv.R:0
 msgid "invalid status value, must be logical or numeric"
 msgstr "niepoprawna wartość statusu, musi być wartością logiczną lub liczbą"
+
+#. R/Surv.R: stop("invalid survival time created")
+#: R/Surv.R:0
+#, fuzzy
+msgid "invalid survival time created"
+msgstr "niepoprawny typ przeżycia"
 
 #. R/survreg.S: stop("invalid survival times for this distribution")
 #: R/survreg.S:0
@@ -2070,6 +2110,13 @@ msgstr "macierz 'x' nie zgadza sę z tablicą częstości"
 #: R/cch.R:0
 msgid "method (%s) requires 'stratum'"
 msgstr "metoda (%s) wymaga argumentu 'stratum'"
+
+#. R/Surv.R: stop("method not defined for a Surv object")
+#. R/Surv.R: stop("method not defined for a Surv object")
+#: R/Surv.R:0
+#, fuzzy
+msgid "method not defined for a Surv object"
+msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #. R/survregDtest.S: gettext("missing a distribution name")
 #: R/survregDtest.S:0
@@ -2230,6 +2277,19 @@ msgid ""
 "not able to create a curve for models that contain an interaction without "
 "the lower order effect"
 msgstr ""
+
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#. R/Surv.R: stop("not defined for a Surv object")
+#: R/Surv.R:0
+#, fuzzy
+msgid "not defined for a Surv object"
+msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #. R/yates.R: stop("not found in levels data frame:", parts)
 #: R/yates.R:0
@@ -2543,12 +2603,6 @@ msgstr ""
 #: R/cch.R:0
 msgid "stratum levels and names(cohort.size) do not agree"
 msgstr "poziomy 'stratum' oraz 'names(cohort.size)' nie zgadzają się"
-
-#. R/survfitCI.R: gettextf("subject changes to the same state, id %s", id[indx1[who]])
-#: R/survfitCI.R:0
-#, fuzzy
-msgid "subject changes to the same state, id %s"
-msgstr "obiekt zmienia się do tego samego stanu, id %s"
 
 #. R/survfitCI.R: gettextf("subject is in two different groups, id %s", id[indx1[who]])
 #: R/survfitCI.R:0
@@ -2947,6 +3001,10 @@ msgstr[1] "nierozpoznane opcje: %s"
 msgstr[2] "nierozpoznane opcje: %s"
 
 #, fuzzy
+#~ msgid "subject changes to the same state, id %s"
+#~ msgstr "obiekt zmienia się do tego samego stanu, id %s"
+
+#, fuzzy
 #~ msgid "'tstart' must be > 'tstop'"
 #~ msgstr "Pierwszy argument musi być listą"
 
@@ -2972,9 +3030,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 #, fuzzy
 #~ msgid "invalid p0 vector"
 #~ msgstr "Niepoprawny obiekt"
-
-#~ msgid "invalid survival type"
-#~ msgstr "niepoprawny typ przeżycia"
 
 #, fuzzy
 #~ msgid "subject changes case weights, id %s"
@@ -3147,9 +3202,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 #~ msgstr[0] "Tabela szybkości z %d wymiarami:"
 #~ msgstr[1] "Tabela szybkości z %d wymiarami:"
 #~ msgstr[2] "Tabela szybkości z %d wymiarami:"
-
-#~ msgid "all arguments must be an object of class %s or %s"
-#~ msgstr "wszystkie argumenty muszą być obiektami klasy %s lub %s"
 
 #~ msgid "Rate table with dimension: "
 #~ msgid_plural "Rate table with dimensions: "
