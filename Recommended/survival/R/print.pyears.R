@@ -23,8 +23,7 @@ print.pyears <- function(x, ...) {
              format(x$offtable), "\n")
         }
     if (!is.null(x$summary)) {
-        cat("Matches to the chosen rate table:\n  ", 
-            x$summary)
+        cat("Matches to the chosen rate table:\n  ", x$summary)
         }
     cat("Observations in the data set:", x$observations, "\n")
     if (!is.null(x$na.action))
@@ -51,14 +50,13 @@ summary.pyears <- function(object, header=TRUE, call=header,
                "rate", "ci.r", "rr", "ci.rr", "vline", "vertical", 
                "legend", "totals")
     if (any(!temp) || length(temp) != 14 || any(is.na(temp))) {
-        stop("the ", paste(tname[!temp], collapse=", "), 
-             "argument(s) must be single logical values")
+        stop(gettextf("the %s argument(s) must be single logical values", paste(tname[!temp], collapse=", "), domain = "R-survival"), domain = NA)
     }
     if (!is.numeric(conf.level) || conf.level <=0 || conf.level >=1 |
         length(conf.level) > 1 || is.na(conf.level) > 1)
         stop("conf.level must be a single numeric between 0 and 1")
     if (is.na(scale) || !is.numeric(scale) || length(scale) !=1 || scale <=0)
-        stop("scale must be a value > 0")
+        stop(gettextf("'%s' argument must be a value > 0", "scale"))
     
     vname <- attr(terms(object), "term.labels")  #variable names
 
@@ -100,12 +98,12 @@ summary.pyears <- function(object, header=TRUE, call=header,
         cat("\n")
     }
     if (header) {
-        cat("number of observations =", object$observations)
+        cat(gettextf("number of observations = %d", object$observations, domain = "R-survival"))
         if (length(object$omit))
             cat("  (", naprint(object$omit), ")\n", sep="")
         else cat("\n")
         if (object$offtable > 0)
-            cat(" Total time lost (off table)", format(object$offtable), "\n")
+            cat(gettextf(" Total time lost (off table) %s", format(object$offtable), domain = "R-survival"), "\n", sep = "")
         cat("\n")
     }
     
@@ -159,7 +157,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
             plist <- lapply(plist, pformat, nastring, ...) # make it character
             pcol  <- sapply(plist, function(x) nchar(x[1])) #width of each one
             colwidth <- pmax(pcol, nchar(rname)) +2
-            for (i in 1:length(plist)) 
+            for (i in seq_along(plist)) 
                 plist[[i]] <- strpad(plist[[i]], colwidth[i])
 
             colwidth <- c(max(nchar(vname), nchar(cname)) +2, colwidth)
@@ -173,7 +171,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
             colwidth <- pmax(nchar(cname), apply(nchar(newmat), 1, max)) +2
             # turn the list sideways
             plist <- split(newmat, row(newmat))
-            for (i in 1:length(plist))
+            for (i in seq_along(plist))
                 plist[[i]] <- strpad(plist[[i]], colwidth[i])
 
             colwidth <- c(max(nchar(vname), nchar(rname)) +2, colwidth)
@@ -223,7 +221,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
                             nastring, ...)
             outer.label <- do.call("expand.grid", dimnames(object$n)[-(1:2)])
             temp <- names(outer.label)
-            for (i in 1:nrow(outer.label)) {
+            for (i in seq_len(nrow(outer.label))) {
                 # first the caption, then data
                 cat(paste(":", paste(temp, outer.label[i,], sep="=")), '\n')
                 pyshow(newmat[,,i,], tname, rowname, colname, vline)
@@ -320,8 +318,8 @@ pyshow <- function(dmat, labels, rowname, colname, vline) {
             "|\n", sep='')
         cat("+", paste(strpad('=', colwidth, pad='='), collapse="+"), "+\n",
             sep='')
-        for (i in 1:dd[1]) {
-            for (j in 1:dd[3]) { #one printout line per stat
+        for (i in seq_len(dd[1])) {
+            for (j in seq_len(dd[3])) { #one printout line per stat
                 if (j==rline) temp <- c(rowname[i], dmat[i,,j])
                 else temp <- c("", dmat[i,,j])
                 cat("|", paste(strpad(temp, colwidth), collapse='|'), "|\n",
@@ -338,8 +336,8 @@ pyshow <- function(dmat, labels, rowname, colname, vline) {
         cat(paste(strpad(c(labels[1], colname), colwidth), collapse=" "),
             "\n")
         cat(paste(strpad('-', colwidth, pad='-'), collapse=" "), "\n")
-        for (i in 1:dd[1]) {
-            for (j in 1:dd[3]) { #one printout line per stat
+        for (i in seq_len(dd[1])) {
+            for (j in seq_len(dd[3])) { #one printout line per stat
                 if (j==rline) temp <- c(rowname[i], dmat[i,,j])
                 else temp <- c("", dmat[i,,j])
                 cat(paste(strpad(temp, colwidth), collapse=' '), "\n")
@@ -369,7 +367,7 @@ pytot <- function(x, na=FALSE) {
     }
     else {
         # The general case
-        index <- 1:length(dd)
+        index <- seq_along(dd)
         if (na) sum1 <- sum2 <- sum3 <- NA
         else {
             sum1 <- apply(x, index[-1], sum)    # row sums
@@ -389,7 +387,7 @@ pytot <- function(x, na=FALSE) {
         #  and new[6,9,] <- sum3
         # if dim is longer, we need to add more commas
         commas <- rep(',', length(dd) -2)
-        eval(parse(text=paste("new[1:dd[1], 1:dd[2]", commas, "] <- x")))
+        eval(parse(text=paste("new[seq_len(dd[1]), seq_len(dd[2])", commas, "] <- x")))
         eval(parse(text=paste("new[ d2[1],-d2[2]", commas, "] <- sum1")))
         eval(parse(text=paste("new[-d2[1], d2[2]", commas, "] <- sum2")))
         eval(parse(text=paste("new[ d2[1], d2[2]", commas, "] <- sum3")))

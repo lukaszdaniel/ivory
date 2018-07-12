@@ -6,9 +6,9 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"), ...) {
     curves <- formula
     if (!is.matrix(curves)) 
              stop("input must be a square matrix of survival curves")
-    if (!is.list(curves)) stop("input must be a matrix of survival curves")
+    if (!is.list(curves)) stop("input must be a square matrix of survival curves")
     if (nrow(curves) != ncol(curves)) 
-            stop("input must be a square matrix survival curves")
+            stop("input must be a square matrix of survival curves")
     nstate <- nrow(curves)
 
     states <- names(p0)
@@ -22,7 +22,7 @@ survfit.matrix <- function(formula, p0, method=c("discrete", "matexp"), ...) {
     nonzero <- sapply(curves, function(x) length(x) > 0) # transitions
     curves <- curves[nonzero]  #toss away the NULLS
     if (any(sapply(curves, function(z) !inherits(z, 'survfit'))))
-            stop("input must be a square matrix survival curves")
+            stop("input must be a square matrix of survival curves")
     if (sum(nonzero) < 2)
         stop("input must have at least 2 transitions")
  

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2018-07-03 22:19\n"
-"PO-Revision-Date: 2016-04-23 13:23+0200\n"
+"POT-Creation-Date: 2018-07-09 19:41\n"
+"PO-Revision-Date: 2018-07-09 19:37+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,-1,226,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/print.aareg.S: gettextf("%d out of %d unique event times used", summ$n[2], x$n[3], domain = "R-survival")
@@ -77,18 +77,6 @@ msgstr "%s nie zostało dopasowane"
 #: R/tcut.S:0
 msgid "%s+ thru %s"
 msgstr "%s+ aż do %s"
-
-#. R/yates.R: stop("term '", temp[i], "' not found in the fit")
-#: R/yates.R:0
-#, fuzzy
-msgid "' not found in the fit"
-msgstr "zmienna nie została znaleziona w tabeli szybkości: %s"
-
-#. R/yates.R: stop("term '", contr$termname, "' not found in the model")
-#: R/yates.R:0
-#, fuzzy
-msgid "' not found in the model"
-msgstr "zmienna nie została znaleziona w tabeli szybkości: %s"
 
 #. R/Surv.R: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
 #. R/Surv.R: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
@@ -182,8 +170,12 @@ msgstr "argument '%s' ma niepoprawną długość"
 #. R/survobrien.S: gettextf("'%s' argument is required", "formula")
 #. R/survreg.S: gettextf("'%s' argument is required", "formula")
 #. R/tmerge.R: gettextf("'%s' argument is required", "id")
+#. R/yates.R: gettextf("'%s' argument is required", "fit")
+#. R/yates.R: gettextf("'%s' argument is required", "term")
+#. R/yates.R: gettextf("'%s' argument is required", "fit")
 #: R/Surv.R:0 R/clogit.R:0 R/finegray.R:0 R/neardate.R:0 R/pyears.R:0
 #: R/survSplit.R:0 R/survfit.R:0 R/survobrien.S:0 R/survreg.S:0 R/tmerge.R:0
+#: R/yates.R:0
 msgid "'%s' argument is required"
 msgstr "argument '%s' jest wymagany"
 
@@ -223,6 +215,12 @@ msgstr "argument '%s' musi być listą"
 #. R/tmerge.R: gettextf("'%s' argument must be a number >= 0", "delay")
 #: R/tmerge.R:0
 msgid "'%s' argument must be a number >= 0"
+msgstr "argument '%s' musi być liczbą >= 0"
+
+#. R/print.pyears.R: gettextf("'%s' argument must be a value > 0", "scale")
+#: R/print.pyears.R:0
+#, fuzzy
+msgid "'%s' argument must be a value > 0"
 msgstr "argument '%s' musi być liczbą >= 0"
 
 #. R/survSplit.R: gettextf("'%s' argument must be a variable name", "start")
@@ -541,11 +539,6 @@ msgstr ""
 msgid "(start, stop] data requires a subject id"
 msgstr ""
 
-#. R/ratetableold.R: paste("Aguments do not all have the same length (arg ", i, ")", sep = "")
-#: R/ratetableold.R:0
-msgid ")"
-msgstr ""
-
 #. R/print.survfit.S: gettextf("    * restricted mean with upper limit = %s", format(temp$end.time[1]),     domain = "R-survival")
 #: R/print.survfit.S:0
 msgid "* restricted mean with upper limit = %s"
@@ -566,16 +559,6 @@ msgstr ""
 msgid "*mean time in state, restricted (per curve cutoff)"
 msgstr ""
 
-#. R/print.pyears.R: paste(tname[!temp], collapse = ", ")
-#: R/print.pyears.R:0
-msgid ","
-msgstr ""
-
-#. R/yates.R: warning("no yates_setup method exists for a model of class ", class(fit)[1], " and estimate type ",     type, ", linear predictor estimate used by default")
-#: R/yates.R:0
-msgid ", linear predictor estimate used by default"
-msgstr ""
-
 #. R/coxph.R: stop("A formula argument is required")
 #: R/coxph.R:0
 msgid "A formula argument is required"
@@ -592,10 +575,10 @@ msgstr "argument 'ratetable' pojawia się dwukrotnie w danych"
 msgid "Aalen model doesn't support \"%s\" survival data"
 msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 
-#. R/ratetableold.R: paste("Aguments do not all have the same length (arg ", i, ")", sep = "")
+#. R/ratetableold.R: gettextf("Aguments do not all have the same length (arg %d)", i)
 #: R/ratetableold.R:0
 #, fuzzy
-msgid "Aguments do not all have the same length (arg"
+msgid "Aguments do not all have the same length (arg %d)"
 msgstr "Nie wszystkie argumenty mają tę samą długość (argument %d)"
 
 #. R/anova.coxph.R: gettext("Analysis of Deviance Table")
@@ -836,7 +819,7 @@ msgstr ""
 #. R/survfit.R: stop("Interaction terms are not valid for this function")
 #: R/survfit.R:0
 msgid "Interaction terms are not valid for this function"
-msgstr ""
+msgstr "człony interakcji nie są poprawne dla tej funkcji"
 
 #. R/cipoisson.R: stop("Invalid method")
 #: R/cipoisson.R:0
@@ -1202,10 +1185,10 @@ msgstr ""
 msgid "The graphical argument 'type' is not allowed"
 msgstr "argument graficzny 'type' nie jest dozwolony"
 
-#. R/survfit.coxph.R: stop("The individual option is  only valid for start-stop data")
+#. R/survfit.coxph.R: stop("The individual option is only valid for start-stop data")
 #: R/survfit.coxph.R:0
 #, fuzzy
-msgid "The individual option is  only valid for start-stop data"
+msgid "The individual option is only valid for start-stop data"
 msgstr "argument 'individual' jest poprawny tylko dla danych start:stop"
 
 #. R/survfit.coxph.R: stop("The newdata argument must be present when 'individual=TRUE'")
@@ -1268,6 +1251,11 @@ msgstr ""
 msgid "Times must be in increasing order"
 msgstr "czasy muszą być w porządku rosnącym"
 
+#. R/print.pyears.R: gettextf(" Total time lost (off table) %s", format(object$offtable), domain = "R-survival")
+#: R/print.pyears.R:0
+msgid "Total time lost (off table) %s"
+msgstr ""
+
 #. R/print.survfit.S: stop("Truncation point for the mean is < smallest survival")
 #. R/print.survfit.S: stop("Truncation point for the mean is < smallest survival")
 #. R/survfitms.R: stop("Truncation point for the mean is < smallest survival")
@@ -1290,9 +1278,8 @@ msgstr "Nie można dopasować nowych danych do starej formuły"
 #. R/plot.survfit.R: stop("Unrecognized function argument")
 #. R/plot.survfit.R: stop("Unrecognized function argument")
 #: R/plot.survfit.R:0
-#, fuzzy
 msgid "Unrecognized function argument"
-msgstr "nierozpoznany argument 'fun'"
+msgstr "nierozpoznany argument funkcji"
 
 #. R/pyears.R: gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)])
 #. R/survexp.R: gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)])
@@ -1329,13 +1316,6 @@ msgid "a 'coxme' model was found and library 'coxme' is not loaded"
 msgstr ""
 "model 'coxme' został znaleziony, ale biblioteka 'coxme' nie jest załadowana"
 
-#. R/yates.R: stop("a fit argument is required")
-#. R/yates.R: stop("a fit argument is required")
-#: R/yates.R:0
-#, fuzzy
-msgid "a fit argument is required"
-msgstr "argument 'time' jest wymagany"
-
 #. R/predict.coxph.R: stop("a name given in the 'terms' argument not found in the model")
 #: R/predict.coxph.R:0
 msgid "a name given in the 'terms' argument not found in the model"
@@ -1360,12 +1340,6 @@ msgstr ""
 #: R/finegray.R:0
 msgid "a subject has gaps in time"
 msgstr ""
-
-#. R/yates.R: stop("a term argument is required")
-#: R/yates.R:0
-#, fuzzy
-msgid "a term argument is required"
-msgstr "wymagany jest argument formuły"
 
 #. R/coxph.R: warning("a variable appears on both the left and right sides of the formula")
 #: R/coxph.R:0
@@ -1439,11 +1413,6 @@ msgstr "wszystkie argumenty muszą mieć tę samą długość"
 msgid "an observation transitions to it's starting state, transition ignored"
 msgstr ""
 
-#. R/yates.R: warning("no yates_setup method exists for a model of class ", class(fit)[1], " and estimate type ",     type, ", linear predictor estimate used by default")
-#: R/yates.R:0
-msgid "and estimate type"
-msgstr ""
-
 #. R/aeqSurv.R: stop("argument is not a Surv object")
 #: R/aeqSurv.R:0
 #, fuzzy
@@ -1460,12 +1429,6 @@ msgstr "argument nie jest tak naprawdę macierzą modelu"
 #, fuzzy
 msgid "argument(s) %s not a recognized type"
 msgstr "argument %s ma nierozpoznany typ"
-
-#. R/print.pyears.R: stop("the ", paste(tname[!temp], collapse = ", "), "argument(s) must be single logical values")
-#: R/print.pyears.R:0
-#, fuzzy
-msgid "argument(s) must be single logical values"
-msgstr "człon 'sparse' musi być pojedynczą kolumną"
 
 #. R/is.ratetable.R: gettextf("attribute type[ %d ] is continuous; cutpoint should be null", i)
 #: R/is.ratetable.R:0
@@ -1580,11 +1543,6 @@ msgstr "grupa nie może być użyta w interakcji"
 #: R/cch.R:0
 msgid "cohort size must be a scalar for unstratified analysis"
 msgstr "rozmiar kohorty musi być skalarem dla analizy bezwarstwowej"
-
-#. R/yates.R: stop("levels list should have", length(parts), "components")
-#: R/yates.R:0
-msgid "components"
-msgstr ""
 
 #. R/print.pyears.R: stop("conf.level must be a single numeric between 0 and 1")
 #: R/print.pyears.R:0
@@ -1776,7 +1734,7 @@ msgstr "niepoprawna długość w obiekcie klasy \"coxlist1\""
 #. R/survfit.matrix.R: stop("incorrect number of states in p0")
 #: R/survfit.matrix.R:0
 msgid "incorrect number of states in p0"
-msgstr ""
+msgstr "niepoprawna liczba stanów w p0"
 
 #. R/coxph.R: stop("initial values lead to overflow or underflow of the exp function")
 #: R/coxph.R:0
@@ -1796,11 +1754,6 @@ msgstr "niepowodzenie zbieżności wewnętrznej pętli dla iteracji %s "
 msgid "input is not valid"
 msgstr "wejście nie jest poprawne"
 
-#. R/survfit.matrix.R: stop("input must be a matrix of survival curves")
-#: R/survfit.matrix.R:0
-msgid "input must be a matrix of survival curves"
-msgstr ""
-
 #. R/print.pyears.R: stop("input must be a pyears object")
 #: R/print.pyears.R:0
 #, fuzzy
@@ -1808,20 +1761,17 @@ msgid "input must be a pyears object"
 msgstr "y musi być obiektem klasy \"surv\""
 
 #. R/survfit.matrix.R: stop("input must be a square matrix of survival curves")
+#. R/survfit.matrix.R: stop("input must be a square matrix of survival curves")
+#. R/survfit.matrix.R: stop("input must be a square matrix of survival curves")
+#. R/survfit.matrix.R: stop("input must be a square matrix of survival curves")
 #: R/survfit.matrix.R:0
 msgid "input must be a square matrix of survival curves"
-msgstr ""
-
-#. R/survfit.matrix.R: stop("input must be a square matrix survival curves")
-#. R/survfit.matrix.R: stop("input must be a square matrix survival curves")
-#: R/survfit.matrix.R:0
-msgid "input must be a square matrix survival curves"
-msgstr ""
+msgstr "wejście musi być kwadratową macierzą krzywych przeżycia"
 
 #. R/survfit.matrix.R: stop("input must have at least 2 transitions")
 #: R/survfit.matrix.R:0
 msgid "input must have at least 2 transitions"
-msgstr ""
+msgstr "wejście musi mieć co najmniej 2 przejścia"
 
 #. R/aareg.taper.R: gettextf("invalid '%s' argument", "taper")
 #. R/lines.survfit.coxph.S: gettextf("invalid '%s' argument", "mark.time")
@@ -1895,7 +1845,7 @@ msgstr "niepoprawny obiekt rozkładu"
 #. R/survfit.matrix.R: stop("invalid elements in p0")
 #: R/survfit.matrix.R:0
 msgid "invalid elements in p0"
-msgstr ""
+msgstr "niepoprawne elementy w p0"
 
 #. R/tmerge.R: stop("invalid increment for cumtdc or cumevent")
 #: R/tmerge.R:0
@@ -2040,7 +1990,7 @@ msgstr "lewa strona wzoru musi być wektorem liczbowym lub obiektem klasy %s"
 #. R/survSplit.R: stop("left hand side was not recognized")
 #: R/survSplit.R:0
 msgid "left hand side was not recognized"
-msgstr ""
+msgstr "lewa stronia nie została rozpoznana"
 
 #. R/coxpenal.fit.R: stop("length error in 'coxlist2' object")
 #. R/survcallback.S: stop("length error in 'coxlist2' object")
@@ -2062,7 +2012,7 @@ msgstr ""
 #. R/yates.R: stop("levels are missing for this contrast")
 #: R/yates.R:0
 msgid "levels are missing for this contrast"
-msgstr ""
+msgstr "brakuje poziomów dla tego kontrastu"
 
 #. R/yates.R: stop("levels data frame has duplicates")
 #: R/yates.R:0
@@ -2075,15 +2025,10 @@ msgstr "wymagany jest argument formuły"
 msgid "levels do not match for 'ratetable()' variable %s"
 msgstr ""
 
-#. R/yates.R: stop("levels list should have", length(parts), "components")
-#: R/yates.R:0
-msgid "levels list should have"
-msgstr ""
-
 #. R/yates.R: stop("levels matrix has duplicated rows")
 #: R/yates.R:0
 msgid "levels matrix has duplicated rows"
-msgstr ""
+msgstr "macierz poziomów ma powtórzone wiersze"
 
 #. R/yates.R: stop("levels matrix has the wrong number of columns")
 #: R/yates.R:0
@@ -2111,11 +2056,19 @@ msgstr "macierz 'x' nie zgadza sę z tablicą częstości"
 msgid "method (%s) requires 'stratum'"
 msgstr "metoda (%s) wymaga argumentu 'stratum'"
 
-#. R/Surv.R: stop("method not defined for a Surv object")
-#. R/Surv.R: stop("method not defined for a Surv object")
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
+#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
 #: R/Surv.R:0
 #, fuzzy
-msgid "method not defined for a Surv object"
+msgid "method not defined for an object of class %s"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #. R/survregDtest.S: gettext("missing a distribution name")
@@ -2256,9 +2209,11 @@ msgstr ""
 msgid "no time variable!"
 msgstr "brak zmiennej czasowej!"
 
-#. R/yates.R: warning("no yates_setup method exists for a model of class ", class(fit)[1], " and estimate type ",     type, ", linear predictor estimate used by default")
+#. R/yates.R: gettextf("no yates_setup method exists for a model of class %s and estimate type %s, linear predictor estimate used by default",     dQuote(class(fit)[1]), type)
 #: R/yates.R:0
-msgid "no yates_setup method exists for a model of class"
+msgid ""
+"no yates_setup method exists for a model of class %s and estimate type %s, "
+"linear predictor estimate used by default"
 msgstr ""
 
 #. R/statefig.R: stop("non-integer number of states in layout argument")
@@ -2278,19 +2233,6 @@ msgid ""
 "the lower order effect"
 msgstr ""
 
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#. R/Surv.R: stop("not defined for a Surv object")
-#: R/Surv.R:0
-#, fuzzy
-msgid "not defined for a Surv object"
-msgstr "argument '%s' nie jest obiektem klasy %s"
-
 #. R/yates.R: stop("not found in levels data frame:", parts)
 #: R/yates.R:0
 msgid "not found in levels data frame:"
@@ -2305,12 +2247,12 @@ msgstr "nierozpoznany typ przeżycia"
 #. R/yates.R: stop("not yet done 1")
 #: R/yates.R:0
 msgid "not yet done 1"
-msgstr ""
+msgstr "jeszcze nie zaimplementowane 1"
 
 #. R/yates.R: stop("not yet done 2")
 #: R/yates.R:0
 msgid "not yet done 2"
-msgstr ""
+msgstr "jeszcze nie zaimplementowane 2"
 
 #. R/statefig.R: stop("number of boxes != number of states")
 #: R/statefig.R:0
@@ -2339,6 +2281,12 @@ msgstr "liczba etykiet musi być o jeden mniejsza niż liczba przerw."
 #: R/tcut.S:0
 msgid "number of labels must equal number of intervals"
 msgstr "liczba etykiet musi równać się liczbie interwałów"
+
+#. R/print.pyears.R: gettextf("number of observations = %d", object$observations, domain = "R-survival")
+#: R/print.pyears.R:0
+#, fuzzy
+msgid "number of observations = %d"
+msgstr "liczba zdarzeń= %d"
 
 #. R/cch.R: stop("number of records greater than cohort size")
 #: R/cch.R:0
@@ -2381,7 +2329,7 @@ msgstr ""
 #. R/finegray.R: warning("only the first endpoint was used")
 #: R/finegray.R:0
 msgid "only the first endpoint was used"
-msgstr ""
+msgstr "tylko pierwszy punkt końcowy został użyty"
 
 #. R/is.ratetable.R: gettext("only the last dimension can be interpolated")
 #: R/is.ratetable.R:0
@@ -2518,12 +2466,6 @@ msgid ""
 "contact the author."
 msgstr ""
 
-#. R/print.pyears.R: stop("scale must be a value > 0")
-#: R/print.pyears.R:0
-#, fuzzy
-msgid "scale must be a value > 0"
-msgstr "argument '%s' musi być liczbą >= 0"
-
 #. R/yates.R: stop("sgtt method only applies if population = sas and predict = linear")
 #: R/yates.R:0
 msgid "sgtt method only applies if population = sas and predict = linear"
@@ -2618,7 +2560,6 @@ msgstr "indeks jest poza granicami"
 
 #. R/survfit.R: stop("subscript out of bounds")
 #: R/survfit.R:0
-#, fuzzy
 msgid "subscript out of bounds"
 msgstr "indeks jest poza granicami"
 
@@ -2633,16 +2574,23 @@ msgstr "obiekt klasy \"survfit\" nie ma 2 wymiarów"
 msgid "tdcstart must be a single value"
 msgstr "człon 'sparse' musi być pojedynczą kolumną"
 
-#. R/yates.R: stop("term '", temp[i], "' not found in the fit")
-#. R/yates.R: stop("term '", contr$termname, "' not found in the model")
+#. R/yates.R: gettextf("term '%s' not found in the fit", temp[i])
 #: R/yates.R:0
-msgid "term '"
-msgstr ""
+#, fuzzy
+msgid "term '%s' not found in the fit"
+msgstr "zmienna nie została znaleziona w tabeli szybkości: %s"
 
-#. R/print.pyears.R: stop("the ", paste(tname[!temp], collapse = ", "), "argument(s) must be single logical values")
+#. R/yates.R: gettextf("term '%s' not found in the model", contr$termname)
+#: R/yates.R:0
+#, fuzzy
+msgid "term '%s' not found in the model"
+msgstr "zmienna nie została znaleziona w tabeli szybkości: %s"
+
+#. R/print.pyears.R: gettextf("the %s argument(s) must be single logical values", paste(tname[!temp],     collapse = ", "), domain = "R-survival")
 #: R/print.pyears.R:0
-msgid "the"
-msgstr ""
+#, fuzzy
+msgid "the %s argument(s) must be single logical values"
+msgstr "człon 'sparse' musi być pojedynczą kolumną"
 
 #. R/cox.zph.S: stop("the are no score residuals for a Null model")
 #: R/cox.zph.S:0
@@ -2681,9 +2629,8 @@ msgstr "argument 'id' jest wymagany dla danych start:stop"
 
 #. R/survSplit.R: stop("the model must have an object of class \"Surv\" as the response")
 #: R/survSplit.R:0
-#, fuzzy
 msgid "the model must have an object of class \"Surv\" as the response"
-msgstr "argument 'y' nie jest obiektem klasy \"Surv\""
+msgstr "model musi mieć ustawiony obiekt obiekt klasy \"Surv\" jako odpowiedź"
 
 #. R/survdiff.S: stop("the offset must be a survival probability")
 #: R/survdiff.S:0
@@ -2912,9 +2859,8 @@ msgstr "niepoprawna długość dla punktów odcięcia %d"
 
 #. R/is.ratetable.R: gettext("wrong length for factor")
 #: R/is.ratetable.R:0
-#, fuzzy
 msgid "wrong length for factor"
-msgstr "niepoprawna długość argumentu 'istate'"
+msgstr "niepoprawna długość czynnika"
 
 #. R/agexact.fit.S: stop("wrong length for inital values")
 #. R/coxexact.fit.R: stop("wrong length for inital values")
@@ -2942,10 +2888,10 @@ msgstr "błędna liczba argumentów dla tego typu danych przeżycia"
 msgid "wrong number of rows for p0"
 msgstr ""
 
-#. R/yates.R: stop("xlevels attribute not found for", parts[i])
+#. R/yates.R: gettextf("xlevels attribute not found for %s", parts[i])
 #: R/yates.R:0
 #, fuzzy
-msgid "xlevels attribute not found for"
+msgid "xlevels attribute not found for %s"
 msgstr "Rozkład nie został znaleziony"
 
 #. R/yates.R: stop("yates sgtt method can only handle contr.SAS or contr.treatment")
@@ -2992,6 +2938,14 @@ msgstr[0] "Tabela szybkości z %d wymiarem:"
 msgstr[1] "Tabela szybkości z %d wymiarami:"
 msgstr[2] "Tabela szybkości z %d wymiarami:"
 
+#. R/yates.R: ngettext(length(parts), "levels list should have %d component", "levels list should have %d components",     domain = "R-survival")
+#: R/yates.R:0
+msgid "levels list should have %d component"
+msgid_plural "levels list should have %d components"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/tmerge.R: ngettext(length(extras), "unrecognized option: %s", "unrecognized options: %s", domain = "R-survival")
 #: R/tmerge.R:0
 msgid "unrecognized option: %s"
@@ -2999,6 +2953,27 @@ msgid_plural "unrecognized options: %s"
 msgstr[0] "nierozpoznana opcja: %s"
 msgstr[1] "nierozpoznane opcje: %s"
 msgstr[2] "nierozpoznane opcje: %s"
+
+#~ msgid "a fit argument is required"
+#~ msgstr "argument '%s' jest wymagany"
+
+#, fuzzy
+#~ msgid "a term argument is required"
+#~ msgstr "wymagany jest argument formuły"
+
+#~ msgid "input must be a matrix of survival curves"
+#~ msgstr "wejście musi być macierzą krzywych przeżycia"
+
+#~ msgid "input must be a square matrix survival curves"
+#~ msgstr "wejście musi być kwadratową macierzą krzywych przeżycia"
+
+#, fuzzy
+#~ msgid "scale must be a value > 0"
+#~ msgstr "argument '%s' musi być liczbą >= 0"
+
+#, fuzzy
+#~ msgid "not defined for a Surv object"
+#~ msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #, fuzzy
 #~ msgid "subject changes to the same state, id %s"

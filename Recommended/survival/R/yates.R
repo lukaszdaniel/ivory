@@ -3,7 +3,7 @@ cmatrix <- function(fit, term,
                     test =c("global", "trend", "pairwise"),
                     levels, assign) {
     # Make sure that "fit" is present and isn't missing any parts.
-    if (missing(fit)) stop("a fit argument is required")
+    if (missing(fit)) stop(gettextf("'%s' argument is required", "fit"))
     Terms <- try(terms(fit), silent=TRUE)
 
     if (inherits(Terms, "try-error"))
@@ -14,7 +14,7 @@ cmatrix <- function(fit, term,
     Tatt$dataClasses <- Tatt$dataClasses[row.names(Tatt$factors)]
     test <- match.arg(test)
 
-    if (missing(term)) stop("a term argument is required")
+    if (missing(term)) stop(gettextf("'%s' argument is required", "term"))
     if (is.character(term)) term <- formula(paste("~", term))
     else if (is.numeric(term)) {
         if (all(term == floor(term) & term >0 & term < length(Tatt$term.labels)))
@@ -35,12 +35,12 @@ cmatrix <- function(fit, term,
         temp <- fatt$term.labels
         temp2 <- Tatt$term.labels
         temp2[grepl(":", temp2)] <- ""
-        for (i in 1:length(temp)) {
+        for (i in seq_along(temp)) {
             j <- grep(temp[i], Tatt$term.labels)
             k <- grep(temp[i], temp2)
             if (length(j)==1) temp[i] <- Tatt$term.labels[j]
             else if (length(k)==1) temp[i] <- Tatt$term.labels[k]
-            else stop("term '", temp[i], "' not found in the fit")
+            else stop(gettextf("term '%s' not found in the fit", temp[i]))
             }
         fterm <- terms(formula( paste("~", paste(temp, collapse="+"))))
         fatt <- attributes(fterm)
@@ -52,7 +52,7 @@ cmatrix <- function(fit, term,
     if (missing(assign)) stop("the fit is missing an assign component")
     if (is.list(assign)) {
         # old style assign as used in Splus, and still used in coxph
-        assign <- rep(1:length(assign), sapply(assign, length))
+        assign <- rep(seq_along(assign), sapply(assign, length))
     }
     ncoef <- length(assign)
     whichcol <- which(assign %in% indx & !is.na(coef(fit)))
@@ -88,7 +88,7 @@ cmatrix <- function(fit, term,
         }
         else if (is.list(levels)) {
             if (length(levels) != length(parts))
-                stop("levels list should have", length(parts), "components")
+                stop(sprintf(ngettext(length(parts), "levels list should have %d component", "levels list should have %d components", domain = "R-survival"), length(parts)), domain = NA)
             if (!is.null(names(levels))) {
                 temp <- match(names(levels), parts)
                 if (any(is.null(temp)))
@@ -121,7 +121,7 @@ cmatrix <- function(fit, term,
     for (i in which(iscat==1)) {
         xlev <- fit$xlevels[[parts[i]]]
         if (is.null(xlev))
-            stop("xlevels attribute not found for", parts[i])
+            stop(gettextf("xlevels attribute not found for %s", parts[i]))
         temp <- match(levels[[parts[i]]], xlev)
         if (any(is.na(temp)))
             stop("invalid level for term", parts[i])
@@ -152,7 +152,7 @@ cmatrix <- function(fit, term,
             cmat <- vector("list", npair +1)
             k <- 1
             cname <- rep("", npair)
-            for (i in 1:(nlev-1)) {
+            for (i in seq_len(nlev-1)) {
                 temp <- double(nlev)
                 temp[tindex[i]] <- 1
                 for (j in (i+1):nlev) {
@@ -172,7 +172,7 @@ cmatrix <- function(fit, term,
     }
     else {
         cmat <- vector("list", 2)
-        cmat[[1]] <- matrix(1:ntest, 1, ntest)
+        cmat[[1]] <- matrix(seq_len(ntest), 1, ntest)
         cmat[[2]] <- diag(ntest)
         attr(cmat, "nested") <- TRUE
         if (is.null(levels[[1]])) {
@@ -252,7 +252,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                   predict="linear", options, nsim=200,
                   method=c("direct", "sgtt")) {
     Call <- match.call()
-    if (missing(fit)) stop("a fit argument is required")
+    if (missing(fit)) stop(gettextf("'%s' argument is required", "fit"))
     Terms <- try(terms(fit), silent=TRUE)
     if (inherits(Terms, "try-error"))
         stop("the fit does not have a terms structure")
@@ -347,7 +347,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
     if (predict == "linear" || is.null(mfun)) {
         # population averages of the simple linear predictor
         if (is.na(match(contr$termname, colnames(Tatt$factors))))
-            stop("term '", contr$termname, "' not found in the model")
+            stop(gettextf("term '%s' not found in the model", contr$termname))
 
         Cmat <- t(sapply(xmatlist, colMeans))[,!nabeta]
                   
@@ -380,7 +380,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                         stop("yates sgtt method can only handle contr.SAS or contr.treatment")
                 temp <- vector("list", length(fit$xlevels))
                 names(temp) <- names(fit$xlevels)
-                for (i in 1:length(fit$xlevels)) {
+                for (i in seq_along(fit$xlevels)) {
                     cmat <- diag(length(fit$xlevels[[i]]))
                     dimnames(cmat) <- list(fit$xlevels[[i]], fit$xlevels[[i]])
                     if (i>1 || Tatt$intercept==1) {
@@ -415,7 +415,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                 else tcat <- rep(TRUE, max(sas.assign)) # all vars are categorical
                    
                 B <- t(D)
-                dimnames(B)[[2]] <- paste0("L", 1:ncol(B))  # for the user
+                dimnames(B)[[2]] <- paste0("L", seq_len(ncol(B)))  # for the user
                 if (ncol(Tatt$factors) > 1) {
                     share <- t(Tatt$factors) %*% Tatt$factors
                     nc <- ncol(share)
@@ -473,7 +473,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         }
         else eta <- xall %*% beta
         n1 <- nrow(xmatlist[[1]])  # all of them are the same size
-        index <- rep(1:length(xmatlist), each = n1)
+        index <- rep(seq_along(xmatlist), each = n1)
         if (is.function(mfun)) predfun <- mfun
         else {  # double check the object
             if (!is.list(mfun) || 
@@ -510,7 +510,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
         if (inherits(fit, 'coxph')) offset <- bmat %*% fit$means[!nabeta]
         else offset <- rep(0., nsim)
            
-        for (i in 1:nsim)
+        for (i in seq_len(nsim))
             sims[i,,] <- rowsum(predfun(xall %*% bmat[i,] - offset[i]), index, 
                                 reorder=FALSE)/n1
         mvar <- var(sims[,,1])  # this will be used for the tests
@@ -567,10 +567,10 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
             pdata <- yates_factorial_pop(mframe, Terms, x2indx & iscat, 
                                          fit$xlevels)
             n2 <- nrow(pdata)
-            pdata <- pdata[rep(1:nrow(pdata), each=nrow(mframe)), ]
-            row.names(pdata) <- 1:nrow(pdata)
+            pdata <- pdata[rep(seq_len(nrow(pdata)), each=nrow(mframe)), ]
+            row.names(pdata) <- seq_len(nrow(pdata))
             # fill in the continuous
-            k <- rep(1:nrow(mframe), n2)
+            k <- rep(seq_len(nrow(mframe)), n2)
             for (i in which(x2indx & !iscat)) {
                 j <- names(x1indx)[i]
                 if (is.matrix(mframe[[j]])) 
@@ -586,7 +586,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
     if (is.null(contr$levels)) stop("levels are missing for this contrast")
     x1data <- as.data.frame(contr$levels)  # in case it is a list
     x1name <- names(x1indx)[x1indx]
-    for (i in 1:ncol(x1data)) {
+    for (i in seq_len(ncol(x1data))) {
         if (is.character(x1data[[i]])) {
             if (is.null(fit$xlevels[[x1name[i]]])) 
                 x1data[[i]] <- factor(x1data[[i]])
@@ -599,7 +599,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
         np <- nrow(pdata)
         k <- match(x1name, names(pdata), nomatch=0)
         if (any(k>0)) pdata <- pdata[which(k <=0)]
-        for (i in 1:nrow(x1data)) {
+        for (i in seq_len(nrow(x1data))) {
             j <- rep(i, np)
             tdata <- cbind(pdata, x1data[j,,drop=FALSE]) # new data set
             xmatlist[[i]] <- model.matrix(Terms, tdata, xlev=fit$xlevels,
@@ -614,7 +614,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
             identical(lapply(x1data, class), lapply(pdata, class)[index]) &
             identical(sapply(x1data, ncol) , sapply(pdata, ncol)[index]))
                 { # everything agrees
-            for (i in 1:nrow(x1data)) {
+            for (i in seq_len(nrow(x1data))) {
                 j <- rep(i, nrow(pdata))
                 tdata <- pdata
                 tdata[,names(x1data)] <- x1data[j,]
@@ -630,7 +630,7 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
             x1name <- names(x1indx)[x1indx]
             attr(x1term, "dataClasses") <- Tatt$dataClasses[x1name] # R bug
             x1frame <- model.frame(x1term, x1data, xlev=fit$xlevels[x1name])
-            for (i in 1:nrow(x1data)) {
+            for (i in seq_len(nrow(x1data))) {
                 j <- rep(i, nrow(pdata))
                 tdata <- pdata
                 tdata[,names(x1frame)] <- x1frame[j,]
@@ -654,11 +654,11 @@ yates_factorial_pop <- function(mframe, terms, x2indx, xlevels) {
     pdata <- mframe[rep(1, n), -1]  # toss the response
     row.names(pdata) <- NULL        # throw away funny names
     n1 <- 1
-    for (i in 1:nvar) {
-        j <- rep(rep(1:n2[i], each=n1), length=n)
+    for (i in seq_len(nvar)) {
+        j <- rep(rep(seq_len(n2[i]), each=n1), length=n)
         xx <- xlevels[[x2name[i]]]
         if (dclass[i] == "factor") 
-            pdata[[x2name[i]]] <- factor(j, 1:n2[i], labels= xx)
+            pdata[[x2name[i]]] <- factor(j, seq_len(n2[i]), labels= xx)
         else pdata[[x2name[i]]] <- xx[j]
         n1 <- n1 * n2[i]
     }
@@ -705,9 +705,7 @@ yates_setup <- function(fit, ...)
 
 yates_setup.default <- function(fit, type, ...) {
     if (!missing(type) && !(type %in% c("linear", "link")))
-        warning("no yates_setup method exists for a model of class ",
-                class(fit)[1], " and estimate type ", type,
-                ", linear predictor estimate used by default")
+        warning(gettextf("no yates_setup method exists for a model of class %s and estimate type %s, linear predictor estimate used by default", dQuote(class(fit)[1]), type))
     NULL
 }
 

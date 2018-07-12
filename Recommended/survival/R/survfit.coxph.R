@@ -123,7 +123,7 @@ survfit.coxph <-
     }
 
     if (individual && type!= 'counting')
-        stop("The individual option is  only valid for start-stop data")
+        stop("The individual option is only valid for start-stop data")
 
     if (is.null(mf)) offset <- 0
     else {
