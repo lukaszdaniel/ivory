@@ -713,54 +713,53 @@ static Rboolean writeStataValueLabel(const char *labelName,
 	if (txtlen > 0)
 		error(_("this should happen: underrun"));
 
-	return TRUE;
+    return TRUE;
 
 }
 
-void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable) {
-	int i, j, k = 0, l, nvar, nobs, charlen;
-	char datalabel[81] = "Written by R.              ", timestamp[18],
-			aname[33];
-	char format9g[50] = "%9.0g", strformat[50] = "";
-	const char *thisnamechar;
-	SEXP names, types, theselabels, orig_names, vlabels, dlabel, exp_fields,
-			exp_field, curr_val_labels, label_table, names_lt,
-			theselabelslevels;
+void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable)
+{
+    int i, j, k = 0, l, nvar, nobs, charlen;
+    char datalabel[81] = "Written by R.              ",
+	timestamp[18], aname[33];
+    char format9g[50] = "%9.0g", strformat[50] = "";
+    const char *thisnamechar;
+    SEXP names, types, theselabels, orig_names, vlabels, dlabel, 
+	exp_fields, exp_field, curr_val_labels, label_table, names_lt,
+	theselabelslevels;
 
-	int namelength = 8;
-	int fmtlist_len = 12;
+    int namelength = 8;
+    int fmtlist_len = 12;
 
-	if (version >= 7)
-		namelength = 32;
-	if (version >= 10)
-		fmtlist_len = 49;
+    if (version >= 7) namelength=32;
+    if (version >= 10) fmtlist_len = 49;
 
-	/* names are 32 characters in version 7 */
+    /* names are 32 characters in version 7 */
 
-	/** first write the header **/
-	if (version == 6)
-		OutByteBinary((char) VERSION_6, fp); /* release */
-	else if (version == 7)
-		OutByteBinary((char) VERSION_7, fp);
-	else if (version == 8) /* and also 9, mapped in R code */
-		OutByteBinary((char) VERSION_8, fp);
-	else if (version == 10) /* see comment above */
-		OutByteBinary((char) VERSION_114, fp);
-	OutByteBinary((char) CN_TYPE_NATIVE, fp);
-	OutByteBinary(1, fp); /* filetype */
-	OutByteBinary(0, fp); /* padding */
+    /** first write the header **/
+    if (version == 6)
+	OutByteBinary((char) VERSION_6, fp);            /* release */
+    else if (version == 7)
+	OutByteBinary((char) VERSION_7, fp);
+    else if (version == 8)  /* and also 9, mapped in R code */
+	OutByteBinary((char) VERSION_8, fp);
+    else if (version == 10) /* see comment above */
+	OutByteBinary((char) VERSION_114, fp);
+    OutByteBinary((char) CN_TYPE_NATIVE, fp);
+    OutByteBinary(1, fp);            /* filetype */
+    OutByteBinary(0, fp);            /* padding */
 
-	nvar = length(df);
-	OutShortIntBinary(nvar, fp);
-	nobs = length(VECTOR_ELT(df, 0));
-	OutIntegerBinary(nobs, fp, 1); /* number of cases */
+    nvar = length(df);
+    OutShortIntBinary(nvar, fp);
+    nobs = length(VECTOR_ELT(df, 0));
+    OutIntegerBinary(nobs, fp, 1);  /* number of cases */
 
-	PROTECT(dlabel = getAttrib(df, install("datalabel")));
-	if (!isNull(dlabel) && isString(dlabel) && LENGTH(dlabel) == 1)
-		strncpy(datalabel, CHAR(STRING_ELT(dlabel, 0)), 81);
-	UNPROTECT(1);
-	datalabel[80] = '\0';
-	OutStringBinary(datalabel, fp, 81);
+    PROTECT(dlabel = getAttrib(df, install("datalabel")));
+    if(!isNull(dlabel) && isString(dlabel) && LENGTH(dlabel) == 1)
+	strncpy(datalabel, CHAR(STRING_ELT(dlabel, 0)), 80);
+    UNPROTECT(1);
+    datalabel[80] = '\0';
+    OutStringBinary(datalabel, fp, 81);
 
 	/* FIXME: use a real time */
 	for (i = 0; i < 18; i++)

@@ -472,70 +472,74 @@ static int read_header(struct file_handle *h) {
 			if (trans_temp[src[i]] == -1)
 				trans_temp[src[i]] = i;
 
-		ext->trans = Calloc (256, unsigned char);
-		for (i = 0; i < 256; i++)
-			ext->trans[i] =
-					trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
+    ext->trans = Calloc (256, unsigned char);
+    for (i = 0; i < 256; i++)
+	ext->trans[i] = trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
 
-		/* Translate the input buffer. */
-		for (i = 0; i < 80; i++)
-			ext->buf[i] = ext->trans[ext->buf[i]];
-		ext->cc = ext->trans[ext->cc];
-	}
+    /* Translate the input buffer. */
+    for (i = 0; i < 80; i++)
+      ext->buf[i] = ext->trans[ext->buf[i]];
+    ext->cc = ext->trans[ext->cc];
+  }
 
-	{
-		unsigned char sig[8] = { 92, 89, 92, 92, 89, 88, 91, 93 };
-		int i;
+  {
+    unsigned char sig[8] = {92, 89, 92, 92, 89, 88, 91, 93};
+    int i;
 
-		for (i = 0; i < 8; i++)
-			if (!pfm_match(sig[i]))
-				lose((_("Missing SPSSPORT signature")));
-	}
+    for (i = 0; i < 8; i++)
+      if (!pfm_match (sig[i]))
+	lose ((_("Missing SPSSPORT signature")));
+  }
 
-	return 1;
+  return 1;
 
-	lossage: return 0;
+ lossage:
+  return 0;
 }
 
 /* Reads the version and date info record, as well as product and
- subproduct identification records if present. */
-int read_version_data(struct file_handle *h, struct pfm_read_info *inf) {
-	struct pfm_fhuser_ext *ext = h->ext;
+   subproduct identification records if present. */
+int
+read_version_data (struct file_handle *h, struct pfm_read_info *inf)
+{
+  struct pfm_fhuser_ext *ext = h->ext;
 
-	/* Version. */
-	if (!pfm_match(74 /* A */))
-		lose((_("Unrecognized version code %d"), ext->cc));
+  /* Version. */
+  if (!pfm_match (74 /* A */))
+    lose ((_("Unrecognized version code %d"), ext->cc));
 
-	/* Date. */
-	{
-		static const int map[] = { 6, 7, 8, 9, 3, 4, 0, 1 };
-		char *date = (char *) read_string(h);
-		int i;
+  /* Date. */
+  {
+    static const int map[] = {6, 7, 8, 9, 3, 4, 0, 1};
+    char *date = (char *) read_string (h);
+    int i;
 
-		if (!date)
-			return 0;
-		if (strlen(date) != 8)
-			lose((_("Bad date string length %d"), strlen (date)));
-		if (date[0] == ' ') /* the first field of date can be ' ' in some
-		 windows versions of SPSS */
-			date[0] = '0';
-		for (i = 0; i < 8; i++) {
-			if (date[i] < 64 /* 0 */|| date[i] > 73 /* 9 */)
-				lose((_("Bad character in date")));
-			if (inf)
-				inf->creation_date[map[i]] = date[i] - 64 /* 0 */+ '0';
-		}
-		if (inf) {
-			inf->creation_date[2] = inf->creation_date[5] = ' ';
-			inf->creation_date[10] = 0;
-		}
-	}
+    if (!date)
+      return 0;
+    if (strlen (date) != 8)
+      lose ((_("Bad date string length %d"), strlen (date)));
+    if (date[0] == ' ') /* the first field of date can be ' ' in some
+			   windows versions of SPSS */
+	date[0] = '0';
+    for (i = 0; i < 8; i++)
+      {
+	if (date[i] < 64 /* 0 */ || date[i] > 73 /* 9 */)
+	  lose ((_("Bad character in date")));
+	if (inf)
+	  inf->creation_date[map[i]] = date[i] - 64 /* 0 */ + '0';
+      }
+    if (inf)
+      {
+	inf->creation_date[2] = inf->creation_date[5] = ' ';
+	inf->creation_date[10] = 0;
+      }
+  }
 
-	/* Time. */
-	{
-		static const int map[] = { 0, 1, 3, 4, 6, 7 };
-		char *time = (char *) read_string(h);
-		int i;
+  /* Time. */
+  {
+    static const int map[] = {0, 1, 3, 4, 6, 7};
+    char *time = (char *) read_string (h);
+    int i;
 
 		if (!time)
 			return 0;
@@ -556,32 +560,41 @@ int read_version_data(struct file_handle *h, struct pfm_read_info *inf) {
 		}
 	}
 
-	/* Product. */
-	if (pfm_match(65 /* 1 */)) {
-		char *product;
+  /* Product. */
+  if (pfm_match (65 /* 1 */))
+    {
+      char *product;
 
-		product = (char *) read_string(h);
-		if (product == NULL)
-			return 0;
-		if (inf)
-			strncpy(inf->product, product, 61);
-	} else if (inf)
-		inf->product[0] = 0;
+      product = (char *) read_string (h);
+      if (product == NULL)
+	return 0;
+      if (inf) { // placate gcc 8
+	strncpy (inf->product, product, 60);
+	inf->product[60] = '\0';
+      }
+    }
+  else if (inf)
+    inf->product[0] = 0;
 
-	/* Subproduct. */
-	if (pfm_match(67 /* 3 */)) {
-		char *subproduct;
+  /* Subproduct. */
+  if (pfm_match (67 /* 3 */))
+    {
+      char *subproduct;
 
-		subproduct = (char *) read_string(h);
-		if (subproduct == NULL)
-			return 0;
-		if (inf)
-			strncpy(inf->subproduct, subproduct, 61);
-	} else if (inf)
-		inf->subproduct[0] = 0;
-	return 1;
+      subproduct = (char *) read_string (h);
+      if (subproduct == NULL)
+	return 0;
+      if (inf) {
+	strncpy (inf->subproduct, subproduct, 60);
+	inf->subproduct[60] = '\0';
+      }
+    }
+  else if (inf)
+    inf->subproduct[0] = 0;
+  return 1;
 
-	lossage: return 0;
+ lossage:
+  return 0;
 }
 
 static int convert_format(struct file_handle *h, int fmt[3], struct fmt_spec *v,
@@ -617,30 +630,36 @@ static int convert_format(struct file_handle *h, int fmt[3], struct fmt_spec *v,
 	}
 	return 1;
 
-	lossage: return 0;
+ lossage:
+  return 0;
 }
 
 /* Translation table from SPSS character code to this computer's
- native character code (which is probably ASCII). */
+   native character code (which is probably ASCII). */
 static const unsigned char spss2ascii[256] =
-		{
-				"                                                                "
-						"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ."
-						"<(+|&[]!$*);^-/|,%_>?`:$@'=\"      ~-   0123456789   -() {}\\     "
-						"                                                                " };
+  {
+    "                                                                "
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ."
+    "<(+|&[]!$*);^-/|,%_>?`:$@'=\"      ~-   0123456789   -() {}\\     "
+    "                                                                "
+  };
 
 /* Translate string S into ASCII. */
-static void asciify(char *s) {
-	for (; *s; s++)
-		*s = spss2ascii[(unsigned char) *s];
+static void
+asciify (char *s)
+{
+  for (; *s; s++)
+    *s = spss2ascii[(unsigned char) *s];
 }
 
-static int parse_value(struct file_handle *, union value *, struct variable *);
+static int parse_value (struct file_handle *, union value *, struct variable *);
 
 /* Read information on all the variables.  */
-static int read_variables(struct file_handle *h) {
-	struct pfm_fhuser_ext *ext = h->ext;
-	int i;
+static int
+read_variables (struct file_handle *h)
+{
+  struct pfm_fhuser_ext *ext = h->ext;
+  int i;
 
 	if (!pfm_match(68 /* 4 */))
 		lose((_("Expected variable count record")));
@@ -650,35 +669,37 @@ static int read_variables(struct file_handle *h) {
 		lose((_("Invalid number of variables %d"), ext->nvars));
 	ext->vars = Calloc (ext->nvars, int);
 
-	/* Purpose of this value is unknown.  It is typically 161. */
-	{
-		int x = read_int(h);
+  /* Purpose of this value is unknown.  It is typically 161. */
+  {
+    int x = read_int (h);
 
-		if (x == NA_INTEGER)
-			goto lossage;
+    if (x == NA_INTEGER)
+      goto lossage;
 
-		/*  According to Akio Sone, there are cases where this is 160 */
-		/*      if (x != 161) */
-		/*        warning("Unexpected flag value %d.", x); */
-	}
+/*  According to Akio Sone, there are cases where this is 160 */
+/*      if (x != 161) */
+/*        warning("Unexpected flag value %d.", x); */
+  }
 
-	ext->dict = new_dictionary(0);
+  ext->dict = new_dictionary (0);
 
-	if (pfm_match(70 /* 6 */)) {
-		char *name = (char *) read_string(h);
-		if (!name)
-			goto lossage;
+  if (pfm_match (70 /* 6 */))
+    {
+      char *name = (char *) read_string (h);
+      if (!name)
+	goto lossage;
 
-		strcpy(ext->dict->weight_var, name);
-		asciify(ext->dict->weight_var);
-	}
+      strcpy (ext->dict->weight_var, name);
+      asciify (ext->dict->weight_var);
+    }
 
-	for (i = 0; i < ext->nvars; i++) {
-		int width;
-		unsigned char *name;
-		int fmt[6];
-		struct variable *v;
-		int j;
+  for (i = 0; i < ext->nvars; i++)
+    {
+      int width;
+      unsigned char *name;
+      int fmt[6];
+      struct variable *v;
+      int j;
 
 		if (!pfm_match(71 /* 7 */))
 			lose((_("Expected variable record")));
@@ -690,16 +711,17 @@ static int read_variables(struct file_handle *h) {
 			lose((_("Invalid variable width %d"), width));
 		ext->vars[i] = width;
 
-		name = read_string(h);
-		if (name == NULL)
-			goto lossage;
-		for (j = 0; j < 6; j++) {
-			fmt[j] = read_int(h);
-			if (fmt[j] == NA_INTEGER)
-				goto lossage;
-		}
+      name = read_string (h);
+      if (name == NULL)
+	goto lossage;
+      for (j = 0; j < 6; j++)
+	{
+	  fmt[j] = read_int (h);
+	  if (fmt[j] == NA_INTEGER)
+	    goto lossage;
+	}
 
-		/* Verify first character of variable name.
+      /* Verify first character of variable name.
 
 		 Weirdly enough, there is no # character in the SPSS portable
 		 character set, so we can't check for it. */
@@ -718,9 +740,10 @@ static int read_variables(struct file_handle *h) {
 			name[0] -= 26 /* a - A */;
 		}
 
-		/* Verify remaining characters of variable name. */
-		for (j = 1; j < (int) strlen((char *) name); j++) {
-			int c = name[j];
+      /* Verify remaining characters of variable name. */
+      for (j = 1; j < (int) strlen ((char *) name); j++)
+	{
+	  int c = name[j];
 
 			if (c >= 100 /* a */&& c <= 125 /* z */) {
 				warning(
@@ -751,30 +774,41 @@ static int read_variables(struct file_handle *h) {
 		if (!convert_format(h, &fmt[3], &v->write, v))
 			goto lossage;
 
-		/* Range missing values. */
-		if (pfm_match(75 /* B */)) {
-			v->miss_type = MISSING_RANGE;
-			if (!parse_value(h, &v->missing[0], v)
-					|| !parse_value(h, &v->missing[1], v))
-				goto lossage;
-		} else if (pfm_match(74 /* A */)) {
-			v->miss_type = MISSING_HIGH;
-			if (!parse_value(h, &v->missing[0], v))
-				goto lossage;
-		} else if (pfm_match(73 /* 9 */)) {
-			v->miss_type = MISSING_LOW;
-			if (!parse_value(h, &v->missing[0], v))
-				goto lossage;
-		}
+      /* Range missing values. */
+      if (pfm_match (75 /* B */))
+	{
+	  v->miss_type = MISSING_RANGE;
+	  if (!parse_value (h, &v->missing[0], v)
+	      || !parse_value (h, &v->missing[1], v))
+	    goto lossage;
+	}
+      else if (pfm_match (74 /* A */))
+	{
+	  v->miss_type = MISSING_HIGH;
+	  if (!parse_value (h, &v->missing[0], v))
+	    goto lossage;
+	}
+      else if (pfm_match (73 /* 9 */))
+	{
+	  v->miss_type = MISSING_LOW;
+	  if (!parse_value (h, &v->missing[0], v))
+	    goto lossage;
+	}
 
-		/* Single missing values. */
-		while (pfm_match(72 /* 8 */)) {
-			static const int map_next[MISSING_COUNT] = { MISSING_1, MISSING_2,
-					MISSING_3, -1, MISSING_RANGE_1, MISSING_LOW_1,
-					MISSING_HIGH_1, -1, -1, -1, };
+      /* Single missing values. */
+      while (pfm_match (72 /* 8 */))
+	{
+	  static const int map_next[MISSING_COUNT] =
+	    {
+	      MISSING_1, MISSING_2, MISSING_3, -1,
+	      MISSING_RANGE_1, MISSING_LOW_1, MISSING_HIGH_1,
+	      -1, -1, -1,
+	    };
 
-			static const int map_ofs[MISSING_COUNT] = { -1, 0, 1, 2, -1, -1, -1,
-					2, 1, 1, };
+	  static const int map_ofs[MISSING_COUNT] =
+	    {
+	      -1, 0, 1, 2, -1, -1, -1, 2, 1, 1,
+	    };
 
 			v->miss_type = map_next[v->miss_type];
 			if (v->miss_type == -1)
@@ -786,77 +820,86 @@ static int read_variables(struct file_handle *h) {
 				goto lossage;
 		}
 
-		if (pfm_match(76 /* C */)) {
-			char *label = (char *) read_string(h);
+      if (pfm_match (76 /* C */))
+	{
+	  char *label = (char *) read_string (h);
 
-			if (label == NULL)
-				goto lossage;
+	  if (label == NULL)
+	    goto lossage;
 
-			v->label = xstrdup(label);
-			asciify(v->label);
-		}
+	  v->label = xstrdup (label);
+	  asciify (v->label);
 	}
-	ext->case_size = ext->dict->nval;
+    }
+  ext->case_size = ext->dict->nval;
 
 	if (ext->dict->weight_var[0] != 0
 			&& !find_dict_variable(ext->dict, ext->dict->weight_var))
 		lose(
 				(_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
 
-	return 1;
+  return 1;
 
-	lossage: return 0;
+ lossage:
+  return 0;
 }
 
 /* Parse a value for variable VV into value V.  Returns success. */
-static int parse_value(struct file_handle *h, union value *v,
-		struct variable *vv) {
-	if (vv->type == ALPHA) {
-		char *mv = (char *) read_string(h);
-		int j;
+static int
+parse_value (struct file_handle *h, union value *v, struct variable *vv)
+{
+  if (vv->type == ALPHA)
+    {
+      char *mv = (char *) read_string (h);
+      int j;
 
-		if (mv == NULL)
-			return 0;
+      if (mv == NULL)
+	return 0;
 
-		strncpy((char *) v->s, mv, 8);
-		for (j = 0; j < 8; j++)
-			if (v->s[j])
-				v->s[j] = spss2ascii[v->s[j]];
-			else
-				/* Value labels are always padded with spaces. */
-				v->s[j] = ' ';
-	} else {
-		v->f = read_float(h);
-		if (v->f == NA_REAL)
-			return 0;
-	}
+      strncpy ((char *) v->s, mv, 8);
+      for (j = 0; j < 8; j++)
+	if (v->s[j])
+	  v->s[j] = spss2ascii[v->s[j]];
+	else
+	  /* Value labels are always padded with spaces. */
+	  v->s[j] = ' ';
+    }
+  else
+    {
+      v->f = read_float (h);
+      if (v->f == NA_REAL)
+	return 0;
+    }
 
-	return 1;
+  return 1;
 }
 
 /* Parse a value label record and return success. */
-static int read_value_label(struct file_handle *h) {
-	struct pfm_fhuser_ext *ext = h->ext;
+static int
+read_value_label (struct file_handle *h)
+{
+  struct pfm_fhuser_ext *ext = h->ext;
 
-	/* Variables. */
-	int nv;
-	struct variable **v;
+  /* Variables. */
+  int nv;
+  struct variable **v;
 
-	/* Labels. */
-	int n_labels;
+  /* Labels. */
+  int n_labels;
 
-	int i;
+  int i;
 
-	nv = read_int(h);
-	if (nv == NA_INTEGER)
-		return 0;
+  nv = read_int (h);
+  if (nv == NA_INTEGER)
+    return 0;
 
-	v = Calloc (nv, struct variable *);
-	for (i = 0; i < nv; i++) {
-		char *name = (char *) read_string(h);
-		if (name == NULL)
-			goto lossage;
-		asciify(name);
+  v = Calloc (nv, struct variable *);
+  for (i = 0; i < nv; i++)
+    {
+      char *name = (char *) read_string (h);
+      if (name == NULL)
+	goto lossage;
+      asciify (name);
 
 		v[i] = find_dict_variable(ext->dict, name);
 		if (v[i] == NULL)
@@ -867,44 +910,46 @@ static int read_value_label(struct file_handle *h) {
 					(_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
 	}
 
-	n_labels = read_int(h);
-	if (n_labels == NA_INTEGER)
-		goto lossage;
+  n_labels = read_int (h);
+  if (n_labels == NA_INTEGER)
+    goto lossage;
 
-	for (i = 0; i < n_labels; i++) {
-		union value val;
-		char *label;
-		struct value_label *vl;
+  for (i = 0; i < n_labels; i++)
+    {
+      union value val;
+      char *label;
+      struct value_label *vl;
 
-		int j;
+      int j;
 
-		if (!parse_value(h, &val, v[0]))
-			goto lossage;
+      if (!parse_value (h, &val, v[0]))
+	goto lossage;
 
-		label = (char *) read_string(h);
-		if (label == NULL)
-			goto lossage;
-		asciify(label);
+      label = (char *) read_string (h);
+      if (label == NULL)
+	goto lossage;
+      asciify (label);
 
-		/* Create a label. */
-		vl = Calloc (1, struct value_label);
-		vl->v = val;
-		vl->s = xstrdup(label);
-		vl->ref_count = nv;
+      /* Create a label. */
+      vl = Calloc (1, struct value_label);
+      vl->v = val;
+      vl->s = xstrdup (label);
+      vl->ref_count = nv;
 
-		/* Assign the value_label's to each variable. */
-		for (j = 0; j < nv; j++) {
-			struct variable *var = v[j];
-			struct value_label *old;
-			int width = var->width;
+      /* Assign the value_label's to each variable. */
+      for (j = 0; j < nv; j++)
+	{
+	  struct variable *var = v[j];
+	  struct value_label *old;
+	  int width = var->width;
 
-			/* Create AVL tree if necessary. */
-			if (!var->val_lab)
-				var->val_lab = R_avl_create(val_lab_cmp, (void *) &width);
+	  /* Create AVL tree if necessary. */
+	  if (!var->val_lab)
+	    var->val_lab = R_avl_create (val_lab_cmp, (void *) &width);
 
-			old = R_avl_replace(var->val_lab, vl);
-			if (old == NULL)
-				continue;
+	  old = R_avl_replace (var->val_lab, vl);
+	  if (old == NULL)
+	    continue;
 
 			if (var->type == NUMERIC)
 				lose(
@@ -913,80 +958,89 @@ static int read_value_label(struct file_handle *h) {
 				lose(
 						(_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
 
-			free_value_label(old);
-		}
+	  free_value_label (old);
 	}
-	Free(v);
-	return 1;
+    }
+  Free (v);
+  return 1;
 
-	lossage: Free(v);
-	return 0;
+ lossage:
+  Free (v);
+  return 0;
 }
 
 /* Copies SRC to DEST, truncating to N characters or right-padding
- with spaces to N characters as necessary.  Does not append a null
- character.  SRC must be null-terminated. */
-static void st_bare_pad_copy(char *dest, const char *src, size_t n) {
-	size_t len = strlen(src);
-	if (len >= n)
-		memcpy(dest, src, n);
-	else {
-		memcpy(dest, src, len);
-		memset(&dest[len], ' ', n - len);
-	}
+   with spaces to N characters as necessary.  Does not append a null
+   character.  SRC must be null-terminated. */
+static void
+st_bare_pad_copy (char *dest, const char *src, size_t n)
+{
+  size_t len = strlen (src);
+  if (len >= n)
+    memcpy (dest, src, n);
+  else
+    {
+      memcpy (dest, src, len);
+      memset (&dest[len], ' ', n - len);
+    }
 }
 
 /* Reads one case from portable file H into the value array PERM
- according to the instuctions given in associated dictionary DICT,
- which must have the get.fv elements appropriately set.  Returns
- nonzero only if successful. */
-int pfm_read_case(struct file_handle *h, union value *perm,
-		struct dictionary *dict) {
-	struct pfm_fhuser_ext *ext = h->ext;
+   according to the instuctions given in associated dictionary DICT,
+   which must have the get.fv elements appropriately set.  Returns
+   nonzero only if successful. */
+int
+pfm_read_case (struct file_handle *h, union value *perm, struct dictionary *dict)
+{
+  struct pfm_fhuser_ext *ext = h->ext;
 
-	union value *temp, *tp;
-	int i;
+  union value *temp, *tp;
+  int i;
 
-	/* Check for end of file. */
-	if (ext->cc == 99 /* Z */)
-		return 0;
+  /* Check for end of file. */
+  if (ext->cc == 99 /* Z */)
+    return 0;
 
-	/* The first concern is to obtain a full case relative to the data
-	 file.  (Cases in the data file have no particular relationship to
-	 cases in the active file.) */
-	tp = temp = Calloc (ext->case_size, union value);
-	for (tp = temp, i = 0; i < ext->nvars; i++)
-		if (ext->vars[i] == 0) {
-			tp->f = read_float(h);
-			if (tp->f == NA_REAL)
-				goto unexpected_eof;
-			tp++;
-		} else {
-			char *s = (char *) read_string(h);
-			if (s == NULL)
-				goto unexpected_eof;
-			asciify(s);
+  /* The first concern is to obtain a full case relative to the data
+     file.  (Cases in the data file have no particular relationship to
+     cases in the active file.) */
+  tp = temp = Calloc (ext->case_size, union value);
+  for (tp = temp, i = 0; i < ext->nvars; i++)
+    if (ext->vars[i] == 0)
+      {
+	tp->f = read_float (h);
+	if (tp->f == NA_REAL)
+	  goto unexpected_eof;
+	tp++;
+      }
+    else
+      {
+	char *s = (char *) read_string (h);
+	if (s == NULL)
+	  goto unexpected_eof;
+	asciify (s);
 
-			st_bare_pad_copy((char *) tp->s, s, ext->vars[i]);
-			tp += DIV_RND_UP(ext->vars[i], MAX_SHORT_STRING);
-		}
+	st_bare_pad_copy ((char *) tp->s, s, ext->vars[i]);
+	tp += DIV_RND_UP (ext->vars[i], MAX_SHORT_STRING);
+      }
 
-	/* Translate a case in data file format to a case in active file
-	 format. */
-	for (i = 0; i < dict->nvar; i++) {
-		struct variable *v = dict->var[i];
+  /* Translate a case in data file format to a case in active file
+     format. */
+  for (i = 0; i < dict->nvar; i++)
+    {
+      struct variable *v = dict->var[i];
 
-		if (v->get.fv == -1)
-			continue;
+      if (v->get.fv == -1)
+	continue;
 
-		if (v->type == NUMERIC)
-			perm[v->fv].f = temp[v->get.fv].f;
-		else
-			memcpy(perm[v->fv].c, &temp[v->get.fv], v->width);
-	}
+      if (v->type == NUMERIC)
+	perm[v->fv].f = temp[v->get.fv].f;
+      else
+	memcpy (perm[v->fv].c, &temp[v->get.fv], v->width);
+    }
 
-	Free(temp);
-	return 1;
+  Free (temp);
+  return 1;
 
 	unexpected_eof:
 	lose((_("End of file midway through case")));
