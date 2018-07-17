@@ -11,7 +11,7 @@ coxph.control <- function(eps=1e-9,
     if (eps <= toler.chol) 
 	    warning("for numerical accuracy, tolerance should be < eps")
     if (toler.inf <=0) stop("'toler.inf' argument must be >0")
-    if (!is.logical(timefix)) stop("'timefix' argument must be TRUE or FALSE")
+    if (!is.logical(timefix)) stop(gettextf("'%s' argument must be TRUE or FALSE", "timefix"))
     list(eps=eps, toler.chol=toler.chol, iter.max=as.integer(iter.max), 
 	 toler.inf=toler.inf, outer.max=as.integer(outer.max), 
          timefix=timefix)

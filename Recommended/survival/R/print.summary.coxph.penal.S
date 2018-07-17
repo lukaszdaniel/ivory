@@ -47,7 +47,7 @@ print.summary.coxph.penal <-
     else  df <- round(sum(x$df),2)
     cat(gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,1)), collapse = " "), domain = "R-survival"), "\n", sep = "")
     if (!is.null(x$concordance)) {
-        cat(gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
+        cat(gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
     }
     pdig <- max(1, getOption("digits")-4)  # default it too high IMO    
     cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),  df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"), "\n", sep = "")

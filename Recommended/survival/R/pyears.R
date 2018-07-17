@@ -55,7 +55,7 @@ pyears <- function(formula, data,
             #   variable names
             varlist <- all.vars(delete.response(ratetable$terms))
             }
-        else stop("Invalid rate table")
+        else stop("invalid rate table")
 
         temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
         if (any(is.na(temp)))
@@ -127,7 +127,7 @@ pyears <- function(formula, data,
                  stop("Unable to match new data to old formula")
             R <- model.matrix.coxph(ratetable, data=rdata)
             }
-        else stop("Invalid ratetable")
+        else stop("invalid rate table")
         }
     ovars <- attr(Terms, 'term.labels')
     if (length(ovars)==0)  {

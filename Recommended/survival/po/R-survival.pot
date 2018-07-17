@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.42-4\n"
-"POT-Creation-Date: 2018-07-09 19:41\n"
+"Project-Id-Version: survival 2.42-6\n"
+"POT-Creation-Date: 2018-07-17 21:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,6 +129,7 @@ msgstr ""
 
 
 #: R/aareg.S: 0
+#: R/aeqSurv.R: 0
 #: R/anova.coxph.R: 0
 #: R/anova.coxph.penal.R: 0
 #: R/attrassign.R: 0
@@ -155,6 +156,7 @@ msgstr ""
 #: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
+#. R/aeqSurv.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("Surv"))
 #. R/anova.coxph.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/anova.coxph.penal.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
@@ -253,7 +255,9 @@ msgid "'%s' argument must be NULL or a variable name"
 msgstr ""
 
 
+#: R/coxph.control.S: 0
 #: R/tmerge.R: 0
+#. R/coxph.control.S: gettextf("'%s' argument must be TRUE or FALSE", "timefix")
 #. R/tmerge.R: gettextf("'%s' argument must be TRUE or FALSE", "na.rm")
 
 msgid "'%s' argument must be TRUE or FALSE"
@@ -418,6 +422,13 @@ msgstr ""
 #. R/residuals.coxph.null.S: gettextf("'%s' residuals are not defined for a null model", type)
 
 msgid "'%s' residuals are not defined for a null model"
+msgstr ""
+
+
+#: R/aeqSurv.R: 0
+#. R/aeqSurv.R: stop("'aeqSurv()' exception; an interval has effective length 0")
+
+msgid "'aeqSurv()' exception; an interval has effective length 0"
 msgstr ""
 
 
@@ -618,13 +629,6 @@ msgstr ""
 #. R/Surv.R: gettextf("'time2' argument (stop time) must be numeric", "time2")
 
 msgid "'time2' argument (stop time) must be numeric"
-msgstr ""
-
-
-#: R/coxph.control.S: 0
-#. R/coxph.control.S: stop("'timefix' argument must be TRUE or FALSE")
-
-msgid "'timefix' argument must be TRUE or FALSE"
 msgstr ""
 
 
@@ -970,17 +974,12 @@ msgstr ""
 
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
-#. R/print.summary.coxph.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
-
-msgid "Concordance= %s (se = %s)"
-msgstr ""
-
-
 #: R/survConcordance.R: 0
-#. R/survConcordance.R: gettextf("Concordance= %s se= %s", format(x$concordance), format(x$std.err), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/survConcordance.R: gettextf("Concordance = %s (se = %s)", format(x$concordance), format(x$std.err),     domain = "R-survival")
 
-msgid "Concordance= %s se= %s"
+msgid "Concordance = %s (se = %s)"
 msgstr ""
 
 
@@ -1116,24 +1115,6 @@ msgid "Invalid method"
 msgstr ""
 
 
-#: R/pyears.R: 0
-#: R/survexp.R: 0
-#. R/pyears.R: stop("Invalid rate table")
-#. R/survexp.R: stop("Invalid rate table")
-
-msgid "Invalid rate table"
-msgstr ""
-
-
-#: R/pyears.R: 0
-#: R/survexp.R: 0
-#. R/pyears.R: stop("Invalid ratetable")
-#. R/survexp.R: stop("Invalid ratetable")
-
-msgid "Invalid ratetable"
-msgstr ""
-
-
 #: R/survConcordance.fit.R: 0
 #. R/survConcordance.fit.R: stop("Invalid survival type for concordance")
 
@@ -1148,33 +1129,10 @@ msgid "Invalid time point requested"
 msgstr ""
 
 
-#: R/survfitms.R: 0
-#. R/survfitms.R: stop("Invalid value for 'rmean' option")
-#. R/survfitms.R: stop("Invalid value for 'rmean' option")
-#. R/survfitms.R: stop("Invalid value for 'rmean' option")
-
-msgid "Invalid value for 'rmean' option"
-msgstr ""
-
-
-#: R/print.survfit.S: 0
-#. R/print.survfit.S: stop("Invalid value for rmean option")
-
-msgid "Invalid value for rmean option"
-msgstr ""
-
-
 #: R/plot.cox.zph.S: 0
 #. R/plot.cox.zph.S: stop("Invalid variable requested")
 
 msgid "Invalid variable requested"
-msgstr ""
-
-
-#: R/agreg.fit.R: 0
-#. R/agreg.fit.R: stop("Invalid weights, must be >0")
-
-msgid "Invalid weights, must be >0"
 msgstr ""
 
 
@@ -1776,6 +1734,13 @@ msgid "a 'coxme' model was found and library 'coxme' is not loaded"
 msgstr ""
 
 
+#: R/Surv.R: 0
+#. R/Surv.R: stop("a mean method has not been defined for Surv objects")
+
+msgid "a mean method has not been defined for Surv objects"
+msgstr ""
+
+
 #: R/predict.coxph.R: 0
 #. R/predict.coxph.R: stop("a name given in the 'terms' argument not found in the model")
 
@@ -1815,13 +1780,6 @@ msgstr ""
 #. R/coxph.R: warning("a variable appears on both the left and right sides of the formula")
 
 msgid "a variable appears on both the left and right sides of the formula"
-msgstr ""
-
-
-#: R/aeqSurv.R: 0
-#. R/aeqSurv.R: stop("aeqSurv exception, an interval has effective length 0")
-
-msgid "aeqSurv exception, an interval has effective length 0"
 msgstr ""
 
 
@@ -1902,13 +1860,6 @@ msgstr ""
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 
 msgid "an observation transitions to it's starting state, transition ignored"
-msgstr ""
-
-
-#: R/aeqSurv.R: 0
-#. R/aeqSurv.R: stop("argument is not a Surv object")
-
-msgid "argument is not a Surv object"
 msgstr ""
 
 
@@ -2522,7 +2473,6 @@ msgstr ""
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
-#. R/Surv.R: stop("invalid operation on a survival time")
 
 msgid "invalid operation on a survival time"
 msgstr ""
@@ -2544,7 +2494,15 @@ msgstr ""
 
 
 #: R/match.ratetable.R: 0
+#: R/pyears.R: 0
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#: R/survexp.R: 0
 #. R/match.ratetable.R: stop("invalid rate table")
+#. R/pyears.R: stop("invalid rate table")
+#. R/pyears.R: stop("invalid rate table")
+#. R/survexp.R: stop("invalid rate table")
+#. R/survexp.R: stop("invalid rate table")
 
 msgid "invalid rate table"
 msgstr ""
@@ -2614,10 +2572,18 @@ msgid "invalid terms component of object"
 msgstr ""
 
 
+#: R/print.survfit.S: 0
 #: R/survfit.R: 0
-#. R/survfit.R: stop("invalid value for 'timefix' option")
+#: R/survfitms.R: 0
+#: R/survfitms.R: 0
+#: R/survfitms.R: 0
+#. R/print.survfit.S: gettextf("invalid value for '%s' option", "rmean")
+#. R/survfit.R: gettextf("invalid value for '%s' option", "timefix")
+#. R/survfitms.R: gettextf("invalid value for '%s' option", "rmean")
+#. R/survfitms.R: gettextf("invalid value for '%s' option", "rmean")
+#. R/survfitms.R: gettextf("invalid value for '%s' option", "rmean")
 
-msgid "invalid value for 'timefix' option"
+msgid "invalid value for '%s' option"
 msgstr ""
 
 
@@ -2642,8 +2608,10 @@ msgid "invalid value for tolerance"
 msgstr ""
 
 
+#: R/agreg.fit.R: 0
 #: R/coxpenal.fit.R: 0
 #: R/coxph.fit.S: 0
+#. R/agreg.fit.R: stop("invalid weights, must be >0")
 #. R/coxpenal.fit.R: stop("invalid weights, must be >0")
 #. R/coxph.fit.S: stop("invalid weights, must be >0")
 
@@ -2784,7 +2752,6 @@ msgstr ""
 #. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
 #. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
 #. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
-#. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
 
 msgid "method not defined for an object of class %s"
 msgstr ""
@@ -2841,6 +2808,13 @@ msgstr ""
 #. R/tmerge.R: stop("missing time value, when that variable defines the span")
 
 msgid "missing time value, when that variable defines the span"
+msgstr ""
+
+
+#: R/Surv.R: 0
+#. R/Surv.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
+
+msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
 msgstr ""
 
 
@@ -3248,6 +3222,13 @@ msgid "pyears cannot handle stratified Cox models"
 msgstr ""
 
 
+#: R/Surv.R: 0
+#. R/Surv.R: stop("quantile method not defined for multiple-endpoint Surv objects")
+
+msgid "quantile method not defined for multiple-endpoint Surv objects"
+msgstr ""
+
+
 #: R/quantile.survfit.R: 0
 #. R/quantile.survfit.R: stop("quantiles are not a well defined quantity for multi-state models")
 
@@ -3431,18 +3412,14 @@ msgid "subject is in two different groups, id %s"
 msgstr ""
 
 
+#: R/survfit.R: 0
 #: R/survfitms.R: 0
+#: R/survfitms.R: 0
+#. R/survfit.R: stop("subscript is out of bounds")
 #. R/survfitms.R: stop("subscript is out of bounds")
 #. R/survfitms.R: stop("subscript is out of bounds")
 
 msgid "subscript is out of bounds"
-msgstr ""
-
-
-#: R/survfit.R: 0
-#. R/survfit.R: stop("subscript out of bounds")
-
-msgid "subscript out of bounds"
 msgstr ""
 
 
@@ -3787,10 +3764,12 @@ msgstr ""
 
 #: R/coxph.R: 0
 #: R/model.matrix.coxph.R: 0
+#: R/pspline.R: 0
 #: R/residuals.coxph.S: 0
 #. R/coxph.R: gettextf("wrong length for '%s' argument", "tt")
 #. R/coxph.R: gettextf("wrong length for '%s' argument", "init")
 #. R/model.matrix.coxph.R: gettextf("wrong length for '%s' argument", "tt")
+#. R/pspline.R: gettextf("wrong length for '%s' argument", "combine")
 #. R/residuals.coxph.S: gettextf("wrong length for '%s' argument", "collapse")
 
 msgid "wrong length for '%s' argument"
@@ -3809,13 +3788,6 @@ msgstr ""
 #. R/is.ratetable.R: gettextf("wrong length for '%s' component, or dimnames do not have names", "dimid")
 
 msgid "wrong length for '%s' component, or dimnames do not have names"
-msgstr ""
-
-
-#: R/pspline.R: 0
-#. R/pspline.R: stop("wrong length for 'combine' argument")
-
-msgid "wrong length for 'combine' argument"
 msgstr ""
 
 

@@ -1093,7 +1093,8 @@ static int DBFWriteAttribute(DBFHandle psDBF, int hEntity, int iField,
 		nRetResult = FALSE;
 	    }
 
-	    strcpy((char *) (pabyRec+psDBF->panFieldOffset[iField]), szSField);
+	    strncpy((char *) (pabyRec+psDBF->panFieldOffset[iField]),
+		    szSField, strlen(szSField) );
 	}
 	else
 	{
@@ -1110,7 +1111,8 @@ static int DBFWriteAttribute(DBFHandle psDBF, int hEntity, int iField,
 		szSField[psDBF->panFieldSize[iField]] = '\0';
 		nRetResult = FALSE;
 	    }
-	    strcpy((char *) (pabyRec+psDBF->panFieldOffset[iField]), szSField);
+	    strncpy((char *) (pabyRec+psDBF->panFieldOffset[iField]),
+		    szSField, strlen(szSField) );
 	}
 	break;
 

@@ -21,7 +21,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
         }
     if (missing(offset) || is.null(offset)) offset <- rep(0.0, n)
     if (missing(weights)|| is.null(weights))weights<- rep(1.0, n)
-    else if (any(weights<=0)) stop("Invalid weights, must be >0")
+    else if (any(weights<=0)) stop("invalid weights, must be >0")
     else weights <- as.vector(weights)
 
     if (is.null(nvar) || nvar==0) {

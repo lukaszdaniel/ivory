@@ -76,7 +76,7 @@ pspline <- function(x, df=4, theta, nterm=2.5*df, degree=3, eps=0.1,
             stop("'combine' argument must be an increasing vector of positive integers")
         if (!intercept) combine <- c(0, combine)
         if (length(combine) != ncol(newx))
-            stop("wrong length for 'combine' argument")
+            stop(gettextf("wrong length for '%s' argument", "combine"))
         uc <- sort(unique(combine))
         tmat <- matrix(0., nrow=ncol(newx), ncol=length(uc))
         for (i in seq_along(uc)) tmat[combine==uc[i], i] <- 1

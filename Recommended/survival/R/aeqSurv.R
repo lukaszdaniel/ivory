@@ -10,7 +10,7 @@ aeqSurv <- function(x, tolerance = sqrt(.Machine$double.eps)) {
         if (tolerance <=0) return(x)  # do nothing
     }
 
-    if (!is.Surv(x)) stop("argument is not a Surv object")
+    if (!is.Surv(x)) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("Surv")))
     y <- sort(unique(c(x[, -ncol(x)])))
     y <- y[is.finite(y)]  #someone may hand us an INF
 
@@ -28,7 +28,7 @@ aeqSurv <- function(x, tolerance = sqrt(.Machine$double.eps)) {
         # We may have created zero length intervals
         zeros <- which(z[,1] == z[,2])
         if (length(zeros)>0 && any(x[zeros,1] != x[zeros,2]))
-            stop("aeqSurv exception, an interval has effective length 0")
+            stop("'aeqSurv()' exception; an interval has effective length 0")
         z <- cbind(matrix(cuts[z], ncol=2), as.integer(x[,3]))
     }
 

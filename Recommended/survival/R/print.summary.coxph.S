@@ -38,7 +38,7 @@ print.summary.coxph <-
     cat("\n")
 
     if (!is.null(x$concordance)) {
-        cat(gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
+        cat(gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
     }
     cat(gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"],3)), format(round(x$rsq["maxrsq"],3)), domain = "R-survival"), "\n", sep = "")
 

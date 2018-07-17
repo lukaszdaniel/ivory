@@ -62,7 +62,7 @@ print.survConcordance <- function(x, ...) {
     if(length(omit))
         cat("  n=", x$n, " (", naprint(omit), ")\n", sep = "")
     else cat("  n=", x$n, "\n")
-    cat(gettextf("Concordance= %s se= %s", format(x$concordance), format(x$std.err), domain = "R-survival"),
+    cat(gettextf("Concordance = %s (se = %s)", format(x$concordance), format(x$std.err), domain = "R-survival"),
         '\n', sep='')
     print(x$stats)
 

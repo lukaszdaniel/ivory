@@ -32,7 +32,7 @@ summary.survfit <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     temp <- survmean(fit, scale=scale, rmean)  
@@ -216,7 +216,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     temp <- survmean2(fit, scale=scale, rmean)  
@@ -400,7 +400,7 @@ print.survfitms <- function(x, scale=1,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     temp <- survmean2(x, scale=scale, rmean)

@@ -39,7 +39,7 @@ dim.survfit <- function(x) {
             if (!is.null(x$lower)) x$lower <- x$lower[,j,drop=drop]
             if (!is.null(x$cumhaz)) x$cumhaz <- x$cumhaz[,j,drop=drop]
         }
-        else if (j>1) stop("subscript out of bounds") # x[1] is always legal
+        else if (j>1) stop("subscript is out of bounds") # x[1] is always legal
     }
     else {
         if (is.null(i)) keep <- seq(along.with=x$time)
@@ -170,7 +170,7 @@ survfit.formula <- function(formula, data, weights, subset,
                          
     # Deal with the near-ties problem
     if (!is.logical(timefix) || length(timefix) > 1)
-        stop("invalid value for 'timefix' option")
+        stop(gettextf("invalid value for '%s' option", "timefix"))
     if (timefix) newY <- aeqSurv(Y) else newY <- Y
     
     # Call the appropriate helper function

@@ -138,7 +138,6 @@ S3method(ratetableDate, Date)
 S3method(ratetableDate, date)
 S3method(ratetableDate, chron)
 S3method(ratetableDate, default)
-S3method(rbind, Surv)
 S3method(rep, Surv)
 S3method(rep.int, Surv)
 S3method(rep_len, Surv)
@@ -175,9 +174,11 @@ S3method(yates_setup, coxph)
 S3method('[', ratetable2)
 S3method(is.na,ratetable2)
 
+# xtfrm.Surv was moved out of base into survival at one point
 if(getRversion() >= "3.6.0")
     S3method(xtfrm, Surv)
 
+# Make Surv objects have their logical length.  
 S3method(length, Surv)
 S3method(names, Surv)
 S3method("names<-", Surv)

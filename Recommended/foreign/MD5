@@ -16,7 +16,7 @@ e158337bb4c5753bee08025bb45c9901 *man/read.arff.Rd
 3488df6faab757f05c8c4967d77b2100 *man/write.foreign.Rd
 f12b27b4608118b61146fab29f4ba101 *man/write.dbf.Rd
 6df8cfab78d2288d5b66659d71bd4dab *ChangeLog
-25653dfdd5fde82d85b5cc4a3a238610 *DESCRIPTION
+691b5201f2116143f31e46f4ca557953 *DESCRIPTION
 1fb6bb3f29e256401055bcb45dad4db4 *po/R-fr.po
 be6a9073ed3b4a8945aecdf084680436 *po/R-de.po
 e31471011dbb560a9bf4b03318f6cbdc *po/R-pl.po
@@ -127,7 +127,7 @@ be4d54e19ea07a3870fa634a13dc4ff1 *src/shapefil.h
 c2ef2d7a2668fda0153c64482f1f2269 *src/Rdbfwrite.c
 c1bc225b793dc61b8e46afd50afde1a0 *src/file-handle.h
 28b25334f3080cacac43c57690686d0f *src/sfm-read.c
-9b83e86f0290af5f4f661b956355011e *src/dbfopen.c
+c2ba529f68f6b6ff797d055043995a65 *src/dbfopen.c
 5b4cb1b95f0a394ebe887d5003317440 *src/pfm.h
 2e1e966093db4d868c5d7f08bcd42410 *src/foreign.h
 22a951beb74f0121e6649b4a45262163 *src/localization.h

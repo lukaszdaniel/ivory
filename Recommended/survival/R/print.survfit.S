@@ -43,7 +43,7 @@ print.survfit <- function(x, scale=1,
         }
         else {
             rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-            if (length(rmean)==0) stop("Invalid value for rmean option")
+            if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
         }
     }
     

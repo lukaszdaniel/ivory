@@ -46,7 +46,7 @@ survexp <- function(formula, data,
         #   variable names
         varlist <- all.vars(delete.response(ratetable$terms))
         }
-    else stop("Invalid rate table")
+    else stop("invalid rate table")
 
     temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
     if (any(is.na(temp)))
@@ -144,7 +144,7 @@ survexp <- function(formula, data,
         if (any(names(m[,rate]) !=  attr(ratetable$terms, 'term.labels')))
              stop("Unable to match new data to old formula")
         }
-    else stop("Invalid ratetable")
+    else stop("invalid rate table")
     if (substring(method, 1, 10) == "individual") { #individual survival
         if (no.Y) stop("for individual survival an observation time must be given")
         if (israte)

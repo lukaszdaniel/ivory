@@ -31,7 +31,7 @@ Biarch: yes
 License: GPL (>= 2)
 BugReports: https://bugs.r-project.org
 NeedsCompilation: yes
-Packaged: 2018-07-13 07:08:56 UTC; ripley
+Packaged: 2018-07-13 17:07:13 UTC; ripley
 Author: R Core Team [aut, cph, cre],
   Roger Bivand [ctb, cph],
   Vincent J. Carey [ctb, cph],
@@ -48,4 +48,4 @@ Author: R Core Team [aut, cph, cre],
   Free Software Foundation, Inc. [cph]
 Maintainer: R Core Team <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2018-07-13 07:12:46 UTC
+Date/Publication: 2018-07-13 19:22:06

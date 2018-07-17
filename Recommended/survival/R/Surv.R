@@ -308,7 +308,7 @@ length.Surv <- function(x) nrow(x)
 names.Surv <- function(x) rownames(x)
 
 format.Surv <- function(x, ...) format(as.character.Surv(x), ...)
-as.data.frame.Surv <- as.data.frame.model.matrix
+as.data.frame.Surv <- function(x, ...) as.data.frame.model.matrix(x, ...)
 
 # all sorts of methods for Surv, caused by searching for every case of
 #  UseMethod in the standard libraries
@@ -321,6 +321,9 @@ head.Surv <- function(x, ...)
     x[head(seq_len(nrow(x)), ...)]
 
 # packge:graphics.  All try to give a nicer failure message
+plot.Surv <- function(x, ...)
+    plot(survfit(x ~1), ...)
+
 barplot.Surv <- function(height, ...)
     stop(gettextf("method not defined for an object of class %s", dQuote("Surv")))
 density.Surv <- function(x, ...)
@@ -336,8 +339,6 @@ lines.Surv <- function(x, ...)
 points.Surv <- function(x, ...)
     stop(gettextf("method not defined for an object of class %s", dQuote("Surv")))
 pairs.Surv <- function(x, ...)
-    stop(gettextf("method not defined for an object of class %s", dQuote("Surv")))
-plot.Surv <- function(x, ...)
     stop(gettextf("method not defined for an object of class %s", dQuote("Surv")))
 text.Surv <- function(x, ...)
     stop(gettextf("method not defined for an object of class %s", dQuote("Surv")))
@@ -370,7 +371,27 @@ c.Surv <- function(...) {
     attributes(new) <- c(attributes(new)[c('dim', 'dimnames')], att1)
     new
     }
-rbind.Surv <- function(...) c(...)
+
+
+# The cbind/rbind methods cause more trouble than they solve
+# The problem is when one is called with mixed arguments, e.g.
+#      cbind(Surv(1:4), data.frame(x=6:9, z=c('a', 'b', 'a', 'a'))
+# In the above cbind.Surv is never called, but the \emph{presence}
+#    of a cbind.Surv method messes up the default behavior, see the
+#    'Dispatch' section of help('cbind').  The result becomes a matrix of
+#    lists rather than a dataframe.
+#
+#rbind.Surv <- function(...) {
+#    dotlist <- list(...)
+#    if (all(sapply(dotlist, is.Surv))) do.call("c.Surv", dotlist)
+#    else do.call("rbind", lapply(dotlist, function(x)
+#        if (is.Surv(x)) as.matrix(x) else x))
+#    }
+#
+#cbind.Surv <- function(...) 
+#    do.call("cbind", lapply(list(...), 
+#                        function(x) if (is.Surv(x)) as.matrix(x) else x))
+#}
 
 rep.Surv <- function(x, ...) {
     index <- rep(1:nrow(x), ...)
@@ -401,8 +422,20 @@ as.numeric.Surv <- function(x, ...) {
     x
 }
 
-median.Surv <- function(x, ...)    
-    stop("invalid operation on a survival time")
+mean.Surv <-function(x, ...)
+    stop("a mean method has not been defined for Surv objects")
+
+median.Surv <- function(x, ...)
+    quantile(x, probs=0.5, ...)
+
+quantile.Surv <- function(x, probs, na.rm=FALSE, ...) {
+    if (!na.rm && any(is.na(x)))
+        stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
+    if (attr(x, "type") %in% c("mright", "mcounting"))
+        stop("quantile method not defined for multiple-endpoint Surv objects")
+    fit <- survfit(x~1)
+    quantile.survfit(fit, probs, ...)
+}   
 
 # these make sense but aren't S3 methods
 # sd, IQR, mad, cov, cor
