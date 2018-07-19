@@ -5838,6 +5838,7 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_PreserveObject(incon->ex_ptr);
 
     Connections[icon] = newcon;
+    // gcc 8 with sanitizers selected objects to truncation here with 99 or 100.
     strncpy(newcon->encname, incon->encname, 100);
     newcon->encname[100 - 1] = '\0';
     newcon->ex_ptr = PROTECT(R_MakeExternalPtr((void *)newcon->id, install("connection"),
