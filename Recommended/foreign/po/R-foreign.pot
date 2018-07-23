@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-70.1\n"
-"POT-Creation-Date: 2018-07-17 20:53\n"
+"Project-Id-Version: foreign 0.8-70.2\n"
+"POT-Creation-Date: 2018-07-19 19:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,21 +42,6 @@ msgid "'missing.type' only applicable to version >= 8 files"
 msgstr ""
 
 
-#: R/spss.R: 0
-#. R/spss.R: paste(addlevels, collapse = ", ")
-#. R/spss.R: paste(newlabels[dupnewlabels], collapse = ", ")
-
-msgid ","
-msgstr ""
-
-
-#: R/spss.R: 0
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
-
-msgid ":"
-msgstr ""
-
-
 #: R/Sread.R: 0
 #. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
 
@@ -86,9 +71,9 @@ msgstr ""
 
 
 #: R/spss.R: 0
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
+#. R/spss.R: gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels],     collapse = ", "))
 
-msgid "Duplicated levels in factor"
+msgid "Duplicated levels in factor %s: %s"
 msgstr ""
 
 
@@ -191,9 +176,9 @@ msgstr ""
 
 
 #: R/spss.R: 0
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
+#. R/spss.R: gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "),     nm)
 
-msgid "Undeclared level(s)"
+msgid "Undeclared level(s) %s added in variable: %s"
 msgstr ""
 
 
@@ -229,13 +214,6 @@ msgstr ""
 #. R/read.dta.R: warning("abbreviating variable names")
 
 msgid "abbreviating variable names"
-msgstr ""
-
-
-#: R/spss.R: 0
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
-
-msgid "added in variable:"
 msgstr ""
 
 

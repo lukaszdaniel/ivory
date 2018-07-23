@@ -1,7 +1,7 @@
 #  File src/library/base/R/all.equal.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2018 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ all.equal.default <- function(target, current, ...)
 
 all.equal.numeric <-
     function(target, current, tolerance = sqrt(.Machine$double.eps),
-             scale = NULL, ..., check.attributes = TRUE)
+             scale = NULL, countEQ = FALSE, ..., check.attributes = TRUE)
 {
     if (!is.numeric(tolerance))
         stop(gettextf("'%s' argument should be numeric", "tolerance"))
@@ -84,16 +84,22 @@ all.equal.numeric <-
 	msg <- c(msg, gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument", sum(is.na(current)), sum(out)))
 	return(msg)
     }
-    out <- out | target == current
+    out <- out | target == current # equal NAs _or_ numbers
     if(all(out)) return(if(is.null(msg)) TRUE else msg)
-
-    target <- target[!out]
+    if(countEQ) {
+        N <- length(out)
+        n0 <- sum(out)
+        sabst0 <- sum(abs(target[out]))
+    } else
+        sabst0 <- 0
+    target  <- target [!out]
     current <- current[!out]
+    if(!countEQ) N <- length(target)
     if(is.integer(target) && is.integer(current)) target <- as.double(target)
-    xy <- mean(abs(target - current)) ## abs(z) == Mod(z) for complex
+    xy <- sum(abs(target - current))/N ## abs(z) == Mod(z) for complex
 
 	if(is.null(scale)) {
-	    xn <- mean(abs(target))
+	    xn <- (sabst0 + sum(abs(target)))/N
 	    if(is.finite(xn) && xn > tolerance) {
 		xy <- xy/xn
 	    }

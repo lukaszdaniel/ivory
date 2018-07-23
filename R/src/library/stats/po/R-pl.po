@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3248,12 +3248,6 @@ msgstr "wszystkie wpisy argumentu 'x' muszą być nieujemne oraz skończone"
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "wszystkie wpisy 'x' muszą być nieujemne oraz skończone"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "wszystkie poziomy grup muszą być skończone"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -6875,6 +6869,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "wszystkie poziomy grup muszą być skończone"
 
 #~ msgid "'relevel' only for (unordered) factors"
 #~ msgstr "'relevel' tylko dla nieuporządkowanych czynników"

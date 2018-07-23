@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 20:35+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "tcl error.\n"
 msgstr ""
 
-#: tcltk.c:199 tcltk.c:744
+#: tcltk.c:199 tcltk.c:746
 msgid "invalid argument"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "argument is not of correct type"
 msgstr ""
 
-#: tcltk.c:703
+#: tcltk.c:704
 msgid "no DISPLAY variable so Tk is not available"
 msgstr ""
 

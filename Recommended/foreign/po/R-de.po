@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / foreign 0.8-38\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-07-19 19:14\n"
 "PO-Revision-Date: 2012-10-11 13:35+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -42,17 +42,6 @@ msgstr "Argument 'file' muss eine Zeichenkette oder Verbindung sein"
 msgid "'missing.type' only applicable to version >= 8 files"
 msgstr "'missing.type' nur auf Dateien der Version >=8 anwendbar"
 
-#. R/spss.R: paste(addlevels, collapse = ", ")
-#. R/spss.R: paste(newlabels[dupnewlabels], collapse = ", ")
-#: R/spss.R:0
-msgid ","
-msgstr ""
-
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
-#: R/spss.R:0
-msgid ":"
-msgstr ""
-
 #. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
 #: R/Sread.R:0
 msgid "Argument %s is missing"
@@ -78,9 +67,9 @@ msgstr ""
 "Variablennamen können nicht eindeutig auf %d oder weniger Zeichen abgekürzt "
 "werden auf"
 
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
+#. R/spss.R: gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels],     collapse = ", "))
 #: R/spss.R:0
-msgid "Duplicated levels in factor"
+msgid "Duplicated levels in factor %s: %s"
 msgstr ""
 
 #. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
@@ -156,9 +145,9 @@ msgstr ""
 msgid "Type 'relational' currently not implemented."
 msgstr "Typ 'relational' derzeit nicht implementiert"
 
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
+#. R/spss.R: gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "),     nm)
 #: R/spss.R:0
-msgid "Undeclared level(s)"
+msgid "Undeclared level(s) %s added in variable: %s"
 msgstr ""
 
 #. R/Sread.R: gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign")
@@ -187,11 +176,6 @@ msgstr ""
 #: R/read.dta.R:0
 msgid "abbreviating variable names"
 msgstr "Variablennamen werden abgekürzt"
-
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
-#: R/spss.R:0
-msgid "added in variable:"
-msgstr ""
 
 #. R/dbf.R: stop("cannot handle matrix/array columns")
 #: R/dbf.R:0

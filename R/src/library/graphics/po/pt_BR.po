@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 19:47+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -120,7 +120,7 @@ msgstr "informação métrica não disponível para este dispositivo"
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "parâmetro gráfico 'family' tem o comprimento máximo de 200 bytes"
 
-#: par-common.c:246
+#: par-common.c:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

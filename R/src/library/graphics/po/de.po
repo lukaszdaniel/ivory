@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 19:47+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -121,7 +121,7 @@ msgstr "Metrische Information für dieses Device nicht möglich"
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "Grafikparameter 'family' hat eine maximale Länge von 200 bytes"
 
-#: par-common.c:246
+#: par-common.c:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

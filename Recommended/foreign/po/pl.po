@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-50\n"
+"Project-Id-Version: foreign\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-17 20:53+0200\n"
-"PO-Revision-Date: 2014-01-13 07:39+0100\n"
+"POT-Creation-Date: 2018-07-19 19:14+0200\n"
+"PO-Revision-Date: 2018-07-19 19:19+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: R_systat.c:127
 #, c-format
@@ -159,8 +159,8 @@ msgstr "pierwszy argument musi być nazwą pliku"
 msgid "unable to open file"
 msgstr "nie można otworzyć pliku"
 
-#: Rdbfwrite.c:94 Rdbfwrite.c:132 stataread.c:286 stataread.c:307
-#: stataread.c:808 stataread.c:843
+#: Rdbfwrite.c:94 Rdbfwrite.c:132 stataread.c:299 stataread.c:320
+#: stataread.c:810 stataread.c:840
 msgid "unknown data type"
 msgstr "nieznany typ danych"
 
@@ -185,7 +185,7 @@ msgstr "plik transferowy SAS posiada niepoprawny nagłówek członka"
 msgid "problem accessing SAS XPORT file"
 msgstr "problem z dostępem do pliku SAS XPORT"
 
-#: SASxport.c:491 SASxport.c:581 spss.c:647 stataread.c:589
+#: SASxport.c:491 SASxport.c:581 spss.c:647 stataread.c:587
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr "nie można otworzyć pliku: '%s'"
@@ -268,7 +268,7 @@ msgstr "założenie nie powiodło się: p->bal == 1"
 msgid "binary write error"
 msgstr "nastąpił błąd zapisu danych binarnych"
 
-#: dbfopen.c:335 dbfopen.c:1026 dbfopen.c:1197 dbfopen.c:1345 dbfopen.c:1391
+#: dbfopen.c:335 dbfopen.c:1026 dbfopen.c:1195 dbfopen.c:1343 dbfopen.c:1389
 msgid "binary read error"
 msgstr "wystąpił błąd odczytu binarnego"
 
@@ -969,7 +969,7 @@ msgstr "%s: Liczba linii (%d) dokumentu musi byc większa niż 0"
 #: sfm-read.c:1424
 #, c-format
 msgid "dictionary:\n"
-msgstr ""
+msgstr "słownik:\n"
 
 #: sfm-read.c:1483
 msgid "assert failed : 0"
@@ -1009,16 +1009,16 @@ msgstr "problem podczas czytania pliku '%s'"
 msgid "file '%s' is not in any supported SPSS format"
 msgstr "plik '%s' nie jest w żadnym wspieranym formacie SPSS"
 
-#: stataread.c:94 stataread.c:103 stataread.c:110 stataread.c:133
-#: stataread.c:142 stataread.c:150 stataread.c:515
+#: stataread.c:96 stataread.c:106 stataread.c:114 stataread.c:139
+#: stataread.c:149 stataread.c:158 stataread.c:515
 msgid "a binary read error occurred"
 msgstr "wystąpił błąd odczytu binarnego"
 
-#: stataread.c:224
+#: stataread.c:236
 msgid "not a Stata version 5-12 .dta file"
 msgstr "to nie jest plik .dta Stata wersja 5-12"
 
-#: stataread.c:424
+#: stataread.c:434
 msgid ""
 "something strange in the file\n"
 " (Type 0 characteristic of nonzero length)"
@@ -1026,59 +1026,59 @@ msgstr ""
 "coś dziwnego w pliku\n"
 " (Charakterystyka typu 0 posiada niezerową długość)"
 
-#: stataread.c:455 stataread.c:492
+#: stataread.c:461 stataread.c:493
 msgid "invalid character string length -- truncating to 244 bytes"
 msgstr "niepoprawna długość łańcucha tekstowego -- przycinanie do 244 bajtów"
 
-#: stataread.c:582
+#: stataread.c:579
 msgid "can not yet read Stata .dta on this platform"
 msgstr "nie można na chwilę obecną odczytać pliku .dta Stata na tej platformie"
 
-#: stataread.c:585 stataread.c:1055
+#: stataread.c:583 stataread.c:1038
 msgid "first argument must be a file name\n"
 msgstr "pierwszy argument musi być nazwą pliku\n"
 
-#: stataread.c:601 stataread.c:607 stataread.c:612 stataread.c:626
-#: stataread.c:628 stataread.c:634 stataread.c:641
+#: stataread.c:601 stataread.c:608 stataread.c:614 stataread.c:629
+#: stataread.c:631 stataread.c:639 stataread.c:647
 msgid "a binary write error occurred"
 msgstr "nastąpił błąd zapisu danych binarnych"
 
-#: stataread.c:711
+#: stataread.c:717
 msgid "this should happen: overrun"
 msgstr "to nie powinno się zdarzyć: przeskakiwanie"
 
-#: stataread.c:714
+#: stataread.c:719
 msgid "this should happen: underrun"
 msgstr "to nie powinno się zdarzyć: przepuszczanie"
 
-#: stataread.c:800 stataread.c:835
+#: stataread.c:804 stataread.c:834
 #, c-format
 msgid "character strings of >244 bytes in column %d will be truncated"
 msgstr ""
 "łańcuchy tekstowe dłuższe niż 244 bajty w kolumnie %d zostaną przycięte"
 
-#: stataread.c:979
+#: stataread.c:971
 msgid "empty string is not valid in Stata's documented format"
 msgstr "pusty łańcuch tekstowy nie jest poprawnym formatem dokumentu 'Stata'"
 
-#: stataread.c:987
+#: stataread.c:977
 msgid "this should not happen."
 msgstr "to nie powinno się zdarzyć."
 
-#: stataread.c:1052
+#: stataread.c:1034
 msgid "cannot yet read write .dta on this platform"
 msgstr "nie można na chwilę obecną zapisać pliku .dta Stata na tej platformie"
 
-#: stataread.c:1059
+#: stataread.c:1042
 msgid "data to be saved must be in a data frame"
 msgstr "zapisywane dane muszą być w formacie ramki danych"
 
-#: stataread.c:1063
+#: stataread.c:1045
 #, c-format
 msgid "unable to open file for writing: '%s'"
 msgstr "nie można otworzyć pliku do zapisu: '%s'"
 
-#: stataread.c:1068
+#: stataread.c:1050
 msgid "can only write version 6-10 formats"
 msgstr "można zapisywać formaty w wersji 6-10"
 

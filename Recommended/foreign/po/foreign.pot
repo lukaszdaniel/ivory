@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-70.1\n"
+"Project-Id-Version: foreign 0.8-70.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-17 20:53+0200\n"
+"POT-Creation-Date: 2018-07-19 19:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,8 +161,8 @@ msgstr ""
 msgid "unable to open file"
 msgstr ""
 
-#: Rdbfwrite.c:94 Rdbfwrite.c:132 stataread.c:286 stataread.c:307
-#: stataread.c:808 stataread.c:843
+#: Rdbfwrite.c:94 Rdbfwrite.c:132 stataread.c:299 stataread.c:320
+#: stataread.c:810 stataread.c:840
 msgid "unknown data type"
 msgstr ""
 
@@ -187,7 +187,7 @@ msgstr ""
 msgid "problem accessing SAS XPORT file"
 msgstr ""
 
-#: SASxport.c:491 SASxport.c:581 spss.c:647 stataread.c:589
+#: SASxport.c:491 SASxport.c:581 spss.c:647 stataread.c:587
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr ""
@@ -270,7 +270,7 @@ msgstr ""
 msgid "binary write error"
 msgstr ""
 
-#: dbfopen.c:335 dbfopen.c:1026 dbfopen.c:1197 dbfopen.c:1345 dbfopen.c:1391
+#: dbfopen.c:335 dbfopen.c:1026 dbfopen.c:1195 dbfopen.c:1343 dbfopen.c:1389
 msgid "binary read error"
 msgstr ""
 
@@ -940,72 +940,72 @@ msgstr ""
 msgid "file '%s' is not in any supported SPSS format"
 msgstr ""
 
-#: stataread.c:94 stataread.c:103 stataread.c:110 stataread.c:133
-#: stataread.c:142 stataread.c:150 stataread.c:515
+#: stataread.c:96 stataread.c:106 stataread.c:114 stataread.c:139
+#: stataread.c:149 stataread.c:158 stataread.c:515
 msgid "a binary read error occurred"
 msgstr ""
 
-#: stataread.c:224
+#: stataread.c:236
 msgid "not a Stata version 5-12 .dta file"
 msgstr ""
 
-#: stataread.c:424
+#: stataread.c:434
 msgid ""
 "something strange in the file\n"
 " (Type 0 characteristic of nonzero length)"
 msgstr ""
 
-#: stataread.c:455 stataread.c:492
+#: stataread.c:461 stataread.c:493
 msgid "invalid character string length -- truncating to 244 bytes"
 msgstr ""
 
-#: stataread.c:582
+#: stataread.c:579
 msgid "can not yet read Stata .dta on this platform"
 msgstr ""
 
-#: stataread.c:585 stataread.c:1055
+#: stataread.c:583 stataread.c:1038
 msgid "first argument must be a file name\n"
 msgstr ""
 
-#: stataread.c:601 stataread.c:607 stataread.c:612 stataread.c:626
-#: stataread.c:628 stataread.c:634 stataread.c:641
+#: stataread.c:601 stataread.c:608 stataread.c:614 stataread.c:629
+#: stataread.c:631 stataread.c:639 stataread.c:647
 msgid "a binary write error occurred"
 msgstr ""
 
-#: stataread.c:711
+#: stataread.c:717
 msgid "this should happen: overrun"
 msgstr ""
 
-#: stataread.c:714
+#: stataread.c:719
 msgid "this should happen: underrun"
 msgstr ""
 
-#: stataread.c:800 stataread.c:835
+#: stataread.c:804 stataread.c:834
 #, c-format
 msgid "character strings of >244 bytes in column %d will be truncated"
 msgstr ""
 
-#: stataread.c:979
+#: stataread.c:971
 msgid "empty string is not valid in Stata's documented format"
 msgstr ""
 
-#: stataread.c:987
+#: stataread.c:977
 msgid "this should not happen."
 msgstr ""
 
-#: stataread.c:1052
+#: stataread.c:1034
 msgid "cannot yet read write .dta on this platform"
 msgstr ""
 
-#: stataread.c:1059
+#: stataread.c:1042
 msgid "data to be saved must be in a data frame"
 msgstr ""
 
-#: stataread.c:1063
+#: stataread.c:1045
 #, c-format
 msgid "unable to open file for writing: '%s'"
 msgstr ""
 
-#: stataread.c:1068
+#: stataread.c:1050
 msgid "can only write version 6-10 formats"
 msgstr ""

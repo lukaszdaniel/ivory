@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-6\n"
+"Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2018-06-24 18:55\n"
-"PO-Revision-Date: 2016-03-03 21:02+0100\n"
+"PO-Revision-Date: 2018-07-19 20:25+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -196,7 +196,6 @@ msgstr "funkcja '%s' wymaga 2 lub więcej danych wymiarowych"
 
 #. R/gamlss.r: gettextf("'%s' link not available for mu parameter of gaulss", link[[i]])
 #: R/gamlss.r:0
-#, fuzzy
 msgid "'%s' link not available for mu parameter of gaulss"
 msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
 
@@ -781,9 +780,8 @@ msgstr "4 członowy model addytywny Gu & Wahba + efekt losowy"
 
 #. R/plots.r: gettext("Hessian positive definite", domain = "R-mgcv")
 #: R/plots.r:0
-#, fuzzy
 msgid "Hessian positive definite"
-msgstr "Hesjan był dodatnio okreśłony."
+msgstr "Hesjan jest dodatnio określony"
 
 #. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
 #: R/plots.r:0
@@ -1330,7 +1328,7 @@ msgstr "Cel..."
 #. R/bam.r: stop("This family should not have a matrix response")
 #: R/bam.r:0
 msgid "This family should not have a matrix response"
-msgstr ""
+msgstr "Ta rodzina nie powinna mieć odpowiedzi w postaci macierzy"
 
 #. R/mgcv.r: gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'", paste(version,     collapse = ""), domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -1504,7 +1502,7 @@ msgstr "wywoływanie gdi..."
 #. R/mgcv.r: stop("can't handle '[[' in formula")
 #: R/mgcv.r:0
 msgid "can't handle '[[' in formula"
-msgstr ""
+msgstr "nie można obsłużyć '[[' w formule"
 
 #. R/soap.r: stop("can't soap smooth without a boundary")
 #. R/soap.r: stop("can't soap smooth without a boundary")
@@ -1680,7 +1678,6 @@ msgstr "'family' nie został rozpoznany"
 #. R/gam.fit3.r: stop("family was not recognized")
 #. R/gam.fit3.r: stop("family was not recognized")
 #: R/gam.fit3.r:0
-#, fuzzy
 msgid "family was not recognized"
 msgstr "'family' nie został rozpoznany"
 
@@ -1973,7 +1970,6 @@ msgstr "połączenie nie jest zaimplementowane dla rozszerzonych rodzin"
 
 #. R/gam.fit3.r: stop("link was not recognised")
 #: R/gam.fit3.r:0
-#, fuzzy
 msgid "link was not recognised"
 msgstr "połączenie nie zostało rozpoznane"
 
@@ -2182,7 +2178,7 @@ msgstr ""
 #. R/gam.fit4.r: stop("non finite values in Hessian")
 #: R/gam.fit4.r:0
 msgid "non finite values in Hessian"
-msgstr ""
+msgstr "nieskończone wartości w hesjanie"
 
 #. R/mgcv.r: warning("non-existent exclude terms requested - ignoring")
 #: R/mgcv.r:0
@@ -2299,7 +2295,6 @@ msgstr "zbyt mały 'order'"
 
 #. R/gam.fit3.r: stop("p must be in [1,2]")
 #: R/gam.fit3.r:0
-#, fuzzy
 msgid "p must be in [1,2]"
 msgstr "argument 'p' musi być w przedziale [1,2]"
 
@@ -2649,7 +2644,7 @@ msgstr "'type' musi mieć wartość \"link\" lub \"response\""
 #. R/mgcv.r: stop("un-supported test")
 #: R/mgcv.r:0
 msgid "un-supported test"
-msgstr ""
+msgstr "niewspierany test"
 
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
@@ -2683,9 +2678,8 @@ msgstr "nieznany typ tensorowego więzu"
 
 #. R/mgcv.r: stop("unrecognised na.action")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "unrecognised na.action"
-msgstr "nierozpoznane (wektorowe?) połączenie"
+msgstr "nierozpoznane 'na.action'"
 
 #. R/gam.fit3.r: stop("unrecognized (vector?) link")
 #: R/gam.fit3.r:0
@@ -2750,7 +2744,6 @@ msgstr "x oraz y muszą mieć tę samą długość"
 
 #. R/smooth.r: stop("x is null")
 #: R/smooth.r:0
-#, fuzzy
 msgid "x is null"
 msgstr "'x' ma wartość NULL"
 

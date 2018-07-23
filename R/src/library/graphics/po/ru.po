@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 19:47+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -127,7 +127,7 @@ msgstr "Метрическая информация для этого устро
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "максимальная длина графического параметра 'family' -- 200 байт"
 
-#: par-common.c:246
+#: par-common.c:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

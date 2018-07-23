@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 19:47+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -121,7 +121,7 @@ msgstr "Metrikkinformasjon ikkje tilgjengeleg for eininga"
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "den grafiske parameteren «family» har ei makslengd på 200 byte"
 
-#: par-common.c:246
+#: par-common.c:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

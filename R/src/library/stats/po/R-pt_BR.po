@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3341,12 +3341,6 @@ msgstr "todas as entradas de 'x' devem ser não negativas e finitas"
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "todas as entradas de 'x' devem ser não negativas e finitas"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "todos os níveis dos grupos devem ser finitos"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -7017,6 +7011,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a %d/%d linhas de um ajuste combinado"
 msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "todos os níveis dos grupos devem ser finitos"
 
 #, fuzzy
 #~ msgid "NA values produced"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.0\n"
-"POT-Creation-Date: 2018-05-31 21:11\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -700,16 +700,16 @@ msgstr ""
 
 
 #: R/news.R: 0
-#. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
+#. R/news.R: gettextf("Changes in %s", vstrings, domain = "R-utils")
 
-msgid "Changes in %s (%s):"
+msgid "Changes in %s"
 msgstr ""
 
 
 #: R/news.R: 0
-#. R/news.R: gettextf("Changes in %s:", vstrings, domain = "R-utils")
+#. R/news.R: gettextf("Changes in %s (%s)", vstrings, dates, domain = "R-utils")
 
-msgid "Changes in %s:"
+msgid "Changes in %s (%s)"
 msgstr ""
 
 

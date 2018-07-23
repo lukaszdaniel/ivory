@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -3344,12 +3344,6 @@ msgstr "'x'所有的值都必需是非负的有限值"
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "'x'所有的值都必需是非负的有限值"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "所有组的层次都必需是有限的"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -6928,6 +6922,9 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "所有组的层次都必需是有限的"
 
 #, fuzzy
 #~ msgid "'relevel' only for (unordered) factors"

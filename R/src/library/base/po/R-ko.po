@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-06-14 20:25\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1475,12 +1475,12 @@ msgstr "요구된 네임스페이스를 로드중입니다: %s "
 msgid "Loading required package: %s"
 msgstr "패키지 %s를 로드중입니다"
 
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
 #: R/duplicated.R:0
 #, fuzzy
-msgid "MARGIN = %d is invalid for dim = %d"
+msgid "MARGIN = %s is invalid for dim = %s"
 msgstr "은 잘못된 dim 값을 가집니다 = "
 
 #. R/summary.R: gettext("Max.")
@@ -2120,6 +2120,11 @@ msgstr "복소 행렬은 현재 허용도지 않습니다 "
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr "argument 'object' must deparse to a single character string"
+
+#. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "connections left open:"
+msgstr ""
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0

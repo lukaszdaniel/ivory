@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-06-14 20:25\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1470,12 +1470,12 @@ msgstr "Carregando pacotes exigidos: %s"
 msgid "Loading required package: %s"
 msgstr "Carregando pacotes exigidos: %s"
 
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
-#. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
 #: R/duplicated.R:0
 #, fuzzy
-msgid "MARGIN = %d is invalid for dim = %d"
+msgid "MARGIN = %s is invalid for dim = %s"
 msgstr "é inválido para dim ="
 
 #. R/summary.R: gettext("Max.")
@@ -2118,6 +2118,11 @@ msgstr "matrizes complexas não permitidas atualmente"
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr "'from' deve ser de tipo raw ou caractere"
+
+#. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "connections left open:"
+msgstr ""
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0

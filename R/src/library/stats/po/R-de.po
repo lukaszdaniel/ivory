@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -3356,12 +3356,6 @@ msgstr "alle Einträge von 'x' müssen nicht-negativ und endlich sein"
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "alle Einträge von 'x' müssen nicht-negativ und endlich sein"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "alle Gruppenlevel müssen endlich sein"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -7064,6 +7058,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "alle Gruppenlevel müssen endlich sein"
 
 #, fuzzy
 #~ msgid "'relevel' only for (unordered) factors"

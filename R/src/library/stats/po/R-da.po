@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -3243,12 +3243,6 @@ msgstr "argumentet »split« skal være en liste"
 #. R/mcnemar.test.R: stop("all entries of 'x' must be nonnegative and finite")
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
-msgstr ""
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
 msgstr ""
 
 #. R/fligner.test.R: stop("all groups must contain data")

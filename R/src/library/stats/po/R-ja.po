@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3351,12 +3351,6 @@ msgstr " 'x' の全ての項目は、非負で有限でなければなりませ�
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr " 'x' の全ての項目は、非負で有限でなければなりません "
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr " グループのレベルはすべて有限でなければなりません "
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -6979,6 +6973,9 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#~ msgid "all group levels must be finite"
+#~ msgstr " グループのレベルはすべて有限でなければなりません "
 
 #, fuzzy
 #~ msgid "'relevel' only for (unordered) factors"

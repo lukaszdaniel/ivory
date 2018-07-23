@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 19:47+0200\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -129,7 +129,7 @@ msgstr "'truncation' non disponibile per questa connessione"
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "il parametro grafico 'family' ha una lunghezza massima di 200 byte"
 
-#: par-common.c:246
+#: par-common.c:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 

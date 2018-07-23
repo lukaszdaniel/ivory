@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-24 21:00\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -850,9 +850,8 @@ msgstr "Porównywanie %s z %s ..."
 
 #. R/check.R: gettext("Compilation used the following non-portable flag(s):", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Compilation used the following non-portable flag(s):"
-msgstr "Znaleziono następującą nieprzenośną ścieżkę do pliku:\n"
+msgstr "Kompilacja użyła następujących nieprzenośnych flag:"
 
 #. R/check.R: gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console, nor use Fortran I/O nor system RNGs.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -2164,6 +2163,20 @@ msgstr ""
 "zawiera więcej niż jeden \\itemize.\n"
 "Używanie pierwszego."
 
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\item.", substring(sub("^[[:space:]]*",     "", .Rd_deparse(x)), 1L, 60L))
+#: R/news.R:0
+#, fuzzy
+msgid ""
+"Malformed NEWS.Rd file:\n"
+"Chunk starting\n"
+"  %s\n"
+"contains no \\item."
+msgstr ""
+"Uszkodzony plik NEWS.Rd:\n"
+"Fragment rozpoczynający\n"
+"  %s\n"
+"nie zawiera \\itemize."
+
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
 msgid ""
@@ -2467,9 +2480,9 @@ msgstr "Licencja pakietu (%s) niebędąca licencją FOSS"
 
 #. R/check.R: gettext("Non-Windows OSes require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Non-Windows OSes require LF line endings."
-msgstr "Niektóre kompilatory uniksowe wymagają zakończeń linii LF."
+msgstr ""
+"Dla nie-windosowych systemów operacyjnych zakończenie LF linii jest wymagane."
 
 #. R/QC.R: gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools")
 #: R/QC.R:0
@@ -3068,12 +3081,8 @@ msgstr ""
 
 #. R/QC.R: gettext("Reading CITATION file fails with:", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Reading CITATION file fails with:"
-msgstr ""
-"Odczytywanie pliku CITATION nie powiedzie się\n"
-"%s\n"
-"gdy pakiet nie jest zainstalowany."
+msgstr "Odczytywanie pliku CITATION nie powiodło się z:"
 
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0

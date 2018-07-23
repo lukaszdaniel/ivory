@@ -110,6 +110,20 @@
       initialization.  This is intended for use to circumvent errors in
       loading the package, e.g.\sspace{}with recent Linux running under
       ASAN.
+
+      \item The \code{numeric} method of \code{all.equal()} gets an
+      optional argument \code{countEQ}.  If that is true, the mean error
+      is more sensible when many entries are \bold{eq}ual.
+
+      \item \code{outer(x,y, FUN = "*")} is more efficient using
+      \code{tcrossprod(u,v)} instead of \code{u \%*\% t(v)}.
+
+      \item \code{vcov(<mlm>)} is more efficient via new optional
+      arguments in \code{summary.mlm()}.
+
+      \item The default method of \code{summary()} gets an option to
+      choose the \emph{kind} of \code{quantile()}s to use; wish of
+      \PR{17438}.
     }
   }
 
@@ -204,6 +218,29 @@
       font face (\PR{17352}).
 
       \item \code{plot(<table>, log="x")} no longer warns about \code{log}.
+
+      \item Printing of \code{t.test()} results with a small number of
+      digits now shows non-large \code{df}'s to the full precision.
+
+      \item \code{kruskal.test()} and \code{fligner.test()} no longer
+      erroneously insists on numeric \code{g} group arguments (\PR{16719}).
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 3.5.1 patched}{
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Linear multivariate empty models such as \code{lm(y ~ 0)}
+      now have a correctly dimensioned empty coefficient matrix;
+      reported by Brett Presnell.
+
+      \item \code{vcov(<empty mlm>)} and hence \code{confint()} now
+      work (via a consistency change in \code{summary.lm()}).
+
+      \item \code{confint(<multivariate lm()>)} now works correctly;
+      reported on R-devel by Steven Pav.
     }
   }
 }
@@ -531,6 +568,8 @@
       prints \code{"atomic"}.  This is a slight non-back-compatible
       change producing typically both more informative and shorter
       output.
+
+      \item \code{gc()} gets new argument \code{full}.
 
       \item \code{write.dcf()} gets optional argument \code{useBytes}.
 

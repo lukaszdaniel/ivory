@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-05-31 21:11\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -587,15 +587,16 @@ msgid ""
 "loading the methods package)"
 msgstr ""
 
-#. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
-#: R/news.R:0
-msgid "Changes in %s (%s):"
-msgstr ""
-
-#. R/news.R: gettextf("Changes in %s:", vstrings, domain = "R-utils")
+#. R/news.R: gettextf("Changes in %s", vstrings, domain = "R-utils")
 #: R/news.R:0
 #, fuzzy
-msgid "Changes in %s:"
+msgid "Changes in %s"
+msgstr "не могу найти пакет %s"
+
+#. R/news.R: gettextf("Changes in %s (%s)", vstrings, dates, domain = "R-utils")
+#: R/news.R:0
+#, fuzzy
+msgid "Changes in %s (%s)"
 msgstr "не могу найти пакет %s"
 
 #. R/help.R: gettext("Choose one")

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-50\n"
+"Project-Id-Version: foreign\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2018-07-19 19:14\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe", dQuote("data.frame"))
 #: R/read.dta.R:0
@@ -37,17 +37,6 @@ msgstr "argument '%s' musi być łańcuchem tekstowym lub połączeniem"
 #: R/read.dta.R:0
 msgid "'missing.type' only applicable to version >= 8 files"
 msgstr "'missing.type' ma zastosowanie tylko dla plików w wersji>= 8"
-
-#. R/spss.R: paste(addlevels, collapse = ", ")
-#. R/spss.R: paste(newlabels[dupnewlabels], collapse = ", ")
-#: R/spss.R:0
-msgid ","
-msgstr ""
-
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
-#: R/spss.R:0
-msgid ":"
-msgstr ""
 
 #. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
 #: R/Sread.R:0
@@ -73,10 +62,10 @@ msgstr ""
 msgid "Cannot uniquely abbreviate the variable names to %d or fewer characters"
 msgstr "Nie można jednoznacznie skrócić nazw zmiennych do %d lub mniej znaków"
 
-#. R/spss.R: warning("Duplicated levels in factor ", nm, ": ", paste(newlabels[dupnewlabels],     collapse = ", "))
+#. R/spss.R: gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels],     collapse = ", "))
 #: R/spss.R:0
-msgid "Duplicated levels in factor"
-msgstr ""
+msgid "Duplicated levels in factor %s: %s"
+msgstr "Powtórzone poziomy w czynniku %s: %s"
 
 #. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
 #: R/dbf.R:0
@@ -85,9 +74,8 @@ msgstr "Nazwa pola: %s została zamieniona na: %s"
 
 #. R/writeForeignCode.R: stop("I cannot abbreviate the variable names to 'maxchars' or fewer chars")
 #: R/writeForeignCode.R:0
-#, fuzzy
 msgid "I cannot abbreviate the variable names to 'maxchars' or fewer chars"
-msgstr "Nie mogę skrócić nazw zmiennych do ośmiu lub mniej liter"
+msgstr "Nie mogę skrócić nazw zmiennych do 'maxchars' lub mniej liter"
 
 #. R/arff.R: stop("Invalid attribute specification.")
 #: R/arff.R:0
@@ -149,10 +137,10 @@ msgstr "Plik dziennika zdarzeń będzie %s w bieżącym katalogu"
 msgid "Type 'relational' currently not implemented."
 msgstr "Typ 'relational' na chwilę obecną nie jest zaimplementowany."
 
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
+#. R/spss.R: gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "),     nm)
 #: R/spss.R:0
-msgid "Undeclared level(s)"
-msgstr ""
+msgid "Undeclared level(s) %s added in variable: %s"
+msgstr "Niezadeklarowane poziomy %s dodane w zmiennej: %s"
 
 #. R/Sread.R: gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign")
 #: R/Sread.R:0
@@ -179,11 +167,6 @@ msgstr ""
 #: R/read.dta.R:0
 msgid "abbreviating variable names"
 msgstr "skracanie nazw zmiennych"
-
-#. R/spss.R: warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ",     nm)
-#: R/spss.R:0
-msgid "added in variable:"
-msgstr ""
 
 #. R/dbf.R: stop("cannot handle matrix/array columns")
 #: R/dbf.R:0

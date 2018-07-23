@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -3344,12 +3344,6 @@ msgstr "tutti i termini di 'x' devono essere non negativi e finiti"
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "tutti i termini di 'x' devono essere non negativi e finiti"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "tutti i livelli di gruppo devono essere finiti"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -7065,6 +7059,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "uso le %d/%d righe da una stima combinata"
 msgstr[1] "uso le %d/%d righe da una stima combinata"
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "tutti i livelli di gruppo devono essere finiti"
 
 #, fuzzy
 #~ msgid "'relevel' only for (unordered) factors"

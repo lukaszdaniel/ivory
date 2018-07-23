@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:49+0100\n"
+"POT-Creation-Date: 2018-07-23 15:40+0200\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -26,7 +26,7 @@ msgstr "fortolkningsfejl i R-udtryk"
 msgid "tcl error.\n"
 msgstr "tcl-fejl.\n"
 
-#: tcltk.c:199 tcltk.c:744
+#: tcltk.c:199 tcltk.c:746
 msgid "invalid argument"
 msgstr "ugyldigt argument"
 
@@ -43,7 +43,7 @@ msgstr "argumentliste er for lang i tcltk-intern funktion 'callback_closure'"
 msgid "argument is not of correct type"
 msgstr "argument er ikke af korrekt type"
 
-#: tcltk.c:703
+#: tcltk.c:704
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "ingen DISPLAY-variabel så Tk er ikke tilgængelig"
 

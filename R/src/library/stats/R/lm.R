@@ -51,11 +51,13 @@ lm <- function (formula, data, subset, weights, na.action,
 
     if (is.empty.model(mt)) {
 	x <- NULL
-	z <- list(coefficients = if (is.matrix(y))
-                  matrix(,0,3) else numeric(), residuals = y,
+	z <- list(coefficients = if(is.matrix(y)) matrix(NA_real_, 0, ncol(y))
+				 else numeric(),
+		  residuals = y,
 		  fitted.values = 0 * y, weights = w, rank = 0L,
-		  df.residual = if(!is.null(w)) sum(w != 0) else
-                  if (is.matrix(y)) nrow(y) else length(y))
+		  df.residual = if(!is.null(w)) sum(w != 0)
+				else if(is.matrix(y)) nrow(y)
+				else length(y))
         if(!is.null(offset)) {
             z$fitted.values <- offset
             z$residuals <- y - offset
@@ -275,10 +277,12 @@ summary.lm <- function (object, correlation = FALSE, symbolic.cor = FALSE, ...)
         ans$aliased <- is.na(coef(object))  # used in print method
         ans$residuals <- r
         ans$df <- c(0L, n, length(ans$aliased))
-        ans$coefficients <- matrix(NA, 0L, 4L)
+        ans$coefficients <- matrix(NA_real_, 0L, 4L)
         dimnames(ans$coefficients) <- list(NULL, c(gettext("Estimate", domain = NA), gettext("Std. Error", domain = NA), gettext("t value", domain = NA), gettext("Pr(>|t|)", domain = NA)))
         ans$sigma <- sqrt(resvar)
         ans$r.squared <- ans$adj.r.squared <- 0
+        ans$cov.unscaled <- matrix(NA_real_, 0L, 0L)
+        if (correlation) ans$correlation <- ans$cov.unscaled
         return(ans)
     }
     if (is.null(z$terms))

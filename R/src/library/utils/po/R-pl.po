@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-31 21:11\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -557,15 +557,17 @@ msgstr ""
 "Nie można debugować funkcji prymitywnych o ile nie są one niejawnymi "
 "funkcjami ogólnymi (wymaga załadowania pakietu 'methods')"
 
-#. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
+#. R/news.R: gettextf("Changes in %s", vstrings, domain = "R-utils")
 #: R/news.R:0
-msgid "Changes in %s (%s):"
-msgstr "Zmiany w %s (%s):"
-
-#. R/news.R: gettextf("Changes in %s:", vstrings, domain = "R-utils")
-#: R/news.R:0
-msgid "Changes in %s:"
+#, fuzzy
+msgid "Changes in %s"
 msgstr "Zmiany w %s"
+
+#. R/news.R: gettextf("Changes in %s (%s)", vstrings, dates, domain = "R-utils")
+#: R/news.R:0
+#, fuzzy
+msgid "Changes in %s (%s)"
+msgstr "Zmiany w %s (%s):"
 
 #. R/help.R: gettext("Choose one")
 #: R/help.R:0

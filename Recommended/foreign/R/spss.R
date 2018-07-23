@@ -198,7 +198,7 @@ read.spss <- function(file, use.value.labels = TRUE, to.data.frame = FALSE,
                     newlevels <- newlevels[o]
                     newlabels <- newlabels[o]
                 }
-                warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ", nm)
+                warning(gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "), nm))
             }
             dupnewlabels <- duplicated(newlabels)
             ## duplicated factor labels are no longer possible for R >= 3.4.0,
@@ -207,8 +207,7 @@ read.spss <- function(file, use.value.labels = TRUE, to.data.frame = FALSE,
             ## - condense: removes additional levels with identical labels and 
             ##   condenses to the first of all duplicated levels
             if(any(dupnewlabels)) {
-              warning("Duplicated levels in factor ", nm, ": ", 
-                      paste(newlabels[dupnewlabels], collapse=", "))
+              warning(gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels], collapse=", ")))
               if(duplicated.value.labels == "append"){
                 newlabels[dupnewlabels] <- 
                     paste(newlabels[dupnewlabels], newlevels[dupnewlabels], 

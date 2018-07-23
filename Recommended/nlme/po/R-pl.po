@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-137\n"
+"Project-Id-Version: nlme\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2018-03-16 18:52\n"
-"PO-Revision-Date: 2018-06-24 19:15+0200\n"
+"PO-Revision-Date: 2018-07-19 20:36+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -414,6 +414,7 @@ msgstr ""
 #: R/corStruct.R:0
 msgid "'sumLenSq' = %g is too large (larger than maximal integer)"
 msgstr ""
+"'sumLenSq' = %g jest zbyt duże (większe niż maksymalna liczba całkowita)"
 
 #. R/pdMat.R: stop("'value' must be a square matrix")
 #: R/pdMat.R:0
@@ -447,7 +448,7 @@ msgstr "Autokorelacja"
 #. R/nlme.R: gettext(" Beginning PNLS step: .. ", domain = "R-nlme")
 #: R/nlme.R:0
 msgid "Beginning PNLS step: .."
-msgstr ""
+msgstr "Rozpoczynanie kroku PNLS: .."
 
 #. R/lmList.R: gettext("Call:", domain = "R-nlme")
 #. R/lmList.R: gettext("Call:", domain = "R-nlme")
@@ -514,7 +515,7 @@ msgstr "Zbieżność w iteracji:"
 #. R/nlme.R: gettextf("Convergence crit. (must all become <= tolerance = %g):", controlvals$tolerance,     domain = "R-nlme")
 #: R/nlme.R:0
 msgid "Convergence crit. (must all become <= tolerance = %g):"
-msgstr ""
+msgstr "Kryterium zbieżności (wszystkie muszą być <= tolerancja = %g):"
 
 #. R/gls.R: gettext("Convergence:", domain = "R-nlme")
 #. R/gnls.R: gettext("Convergence:", domain = "R-nlme")
@@ -585,7 +586,7 @@ msgstr "Odległość"
 #. R/nlme.R: gettext("Do increase 'msMaxIter'!", domain = "R-nlme")
 #: R/nlme.R:0
 msgid "Do increase 'msMaxIter'!"
-msgstr ""
+msgstr "Zwiększ 'msMaxIter'!"
 
 #. R/corStruct.R: gettext("Exponential spatial correlation", domain = "R-nlme")
 #: R/corStruct.R:0
@@ -1991,6 +1992,7 @@ msgid ""
 "not (yet) implemented.  Contributions are welcome; use intervals() instead "
 "(for now)"
 msgstr ""
+"(jeszcze) nie zaimplementowane. Kontrybucja mile widziana; użyj 'intervals()'"
 
 #. R/nlme.R: gettextf("number of columns in starting values for random component at level %s should be %d",     namGrp[i], rlength[i])
 #: R/nlme.R:0
@@ -2258,9 +2260,9 @@ msgstr "dane x-y przekazywane do funkcji 'splom()' zostały jakoś uszkodzone"
 #: R/lmList.R:0
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "przechwycono %d błąd w %s: %s"
+msgstr[1] "przechwycono %d razy ten sam błąd w %s: %s"
+msgstr[2] "przechwycono %d razy ten sam błąd w %s: %s"
 
 #. R/lme.R: ngettext(sum(whichNA), "%s is not available for plotting", "%s are not available for plotting",     domain = "R-nlme")
 #. R/lme.R: ngettext(sum(whichNA), "%s is not available for plotting", "%s are not available for plotting",     domain = "R-nlme")

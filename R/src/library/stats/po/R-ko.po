@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-28 20:07\n"
+"POT-Creation-Date: 2018-07-23 15:40\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3309,12 +3309,6 @@ msgstr "'x'의 모든 항목들은 반드시 음수가 아니어야 하고 유�
 #: R/chisq.test.R:0 R/mcnemar.test.R:0
 msgid "all entries of 'x' must be nonnegative and finite"
 msgstr "'x'의 모든 항목들은 반드시 음수가 아니어야 하고 유한해야 합니다"
-
-#. R/fligner.test.R: stop("all group levels must be finite")
-#. R/kruskal.test.R: stop("all group levels must be finite")
-#: R/fligner.test.R:0 R/kruskal.test.R:0
-msgid "all group levels must be finite"
-msgstr "모든 그룹 레벨들은 반드시 유한해야 합니다"
 
 #. R/fligner.test.R: stop("all groups must contain data")
 #. R/kruskal.test.R: stop("all groups must contain data")
@@ -6888,6 +6882,9 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#~ msgid "all group levels must be finite"
+#~ msgstr "모든 그룹 레벨들은 반드시 유한해야 합니다"
 
 #, fuzzy
 #~ msgid "NA values produced"
