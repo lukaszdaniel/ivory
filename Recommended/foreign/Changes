@@ -67,6 +67,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                             domain = NA)
 ---
 >                     warning(gettextf("missingness type %s is not handled", tp), domain = "R-foreign")
+202c201
+<                 warning("Undeclared level(s) ", paste(addlevels, collapse = ", "), " added in variable: ", nm)
+---
+>                 warning(gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "), nm))
+211,212c210
+<               warning("Duplicated levels in factor ", nm, ": ", 
+<                       paste(newlabels[dupnewlabels], collapse=", "))
+---
+>               warning(gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels], collapse=", ")))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/R/writeForeignSAS.R Recommended/foreign/R/writeForeignSAS.R
 28c28
 <       stop(gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters", nmax), domain = NA)
@@ -1036,169 +1045,40 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 276c277
 < 	error("binary write error");
 ---
-> 		error(_("binary write error"));
-278c279,280
+> 	error(_("binary write error"));
+278c279
 < 	!= psDBF->nFields) error("binary write error");
 ---
-> 			!= psDBF->nFields)
-> 		error(_("binary write error"));
-283,284c285
-<     if( psDBF->nHeaderLength > 32*psDBF->nFields + 32 )
-<     {
----
-> 	if (psDBF->nHeaderLength > 32 * psDBF->nFields + 32) {
+> 	!= psDBF->nFields) error(_("binary write error"));
 289c290
 < 	    error("binary write error");
 ---
-> 			error(_("binary write error"));
-304,305c305
-<     if( psDBF->bCurrentRecordModified && psDBF->nCurrentRecord > -1 )
-<     {
----
-> 	if (psDBF->bCurrentRecordModified && psDBF->nCurrentRecord > -1) {
-312,313c312,314
-< 	if (fwrite( psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, 
+> 	    error(_("binary write error"));
+313c314
 < 		    psDBF->fp ) != 1) error("binary write error");
 ---
-> 		if (fwrite(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
-> 				!= 1)
-> 			error(_("binary write error"));
+> 		    psDBF->fp ) != 1) error(_("binary write error"));
 334c335
 < 	error("binary read error");
 ---
 > 		error(_("binary read error"));
-339c340,341
-<     abyFileHeader[7] = (unsigned char) ((psDBF->nRecords/(256*256*256)) % 256);
----
-> 	abyFileHeader[7] = (unsigned char) ((psDBF->nRecords / (256 * 256 * 256))
-> 			% 256);
-343c345
+343c344
 < 	error("binary write error");
 ---
 > 		error(_("binary write error"));
-380,381c382
-<     if( psDBF->fp == NULL )
-<     {
----
-> 	if (psDBF->fp == NULL) {
-394,395c395
-<     if( fread( pabyBuf, 32, 1, psDBF->fp ) != 1 )
-<     {
----
-> 	if (fread(pabyBuf, 32, 1, psDBF->fp) != 1) {
-402,403c402,403
-<     psDBF->nRecords =
-<      pabyBuf[4] + pabyBuf[5]*256 + pabyBuf[6]*256*256 + pabyBuf[7]*256*256*256;
----
-> 	psDBF->nRecords = pabyBuf[4] + pabyBuf[5] * 256 + pabyBuf[6] * 256 * 256
-> 			+ pabyBuf[7] * 256 * 256 * 256;
-420,421c420
-<     if( fread( pabyBuf, nHeadLen-32, 1, psDBF->fp ) != 1 )
-<     {
----
-> 	if (fread(pabyBuf, nHeadLen - 32, 1, psDBF->fp) != 1) {
-433,434c432
-<     for( iField = 0; iField < nFields; iField++ )
-<     {
----
-> 	for (iField = 0; iField < nFields; iField++) {
-439,440c437
-< 	if( pabyFInfo[11] == 'N' || pabyFInfo[11] == 'F' )
-< 	{
----
-> 		if (pabyFInfo[11] == 'N' || pabyFInfo[11] == 'F') {
-443,445c440
-< 	}
-< 	else
-< 	{
----
-> 		} else {
-454,455c449,450
-< 	    psDBF->panFieldOffset[iField] =
-< 	      psDBF->panFieldOffset[iField-1] + psDBF->panFieldSize[iField-1];
----
-> 			psDBF->panFieldOffset[iField] = psDBF->panFieldOffset[iField - 1]
-> 					+ psDBF->panFieldSize[iField - 1];
-466,467c461
-< DBFClose(DBFHandle psDBF)
-< {
----
-> DBFClose(DBFHandle psDBF) {
-488,489c482
-<     if( psDBF->panFieldOffset != NULL )
-<     {
----
-> 	if (psDBF->panFieldOffset != NULL) {
-501,502c494
-<     if( pszStringField != NULL )
-<     {
----
-> 	if (pszStringField != NULL) {
-532,533c524,525
-< 	       && pszBasename[i] != '\\';
-< 	 i-- ) {}
----
-> 					&& pszBasename[i] != '\\'; i--) {
-> 	}
-592,593c584,585
-< DBFAddField(DBFHandle psDBF, const char * pszFieldName,
-< 	    DBFFieldType eType, int nWidth, int nDecimals )
----
-> DBFAddField(DBFHandle psDBF, const char * pszFieldName, DBFFieldType eType,
-> 		int nWidth, int nDecimals)
-620,621c612,613
-<     psDBF->panFieldOffset = (int *)
-<       SfRealloc( psDBF->panFieldOffset, sizeof(int) * psDBF->nFields );
----
-> 	psDBF->panFieldOffset = (int *) SfRealloc(psDBF->panFieldOffset,
-> 			sizeof(int) * psDBF->nFields);
-623,624c615,616
-<     psDBF->panFieldSize = (int *)
-<       SfRealloc( psDBF->panFieldSize, sizeof(int) * psDBF->nFields );
----
-> 	psDBF->panFieldSize = (int *) SfRealloc(psDBF->panFieldSize,
-> 			sizeof(int) * psDBF->nFields);
-626,627c618,619
-<     psDBF->panFieldDecimals = (int *)
-<       SfRealloc( psDBF->panFieldDecimals, sizeof(int) * psDBF->nFields );
----
-> 	psDBF->panFieldDecimals = (int *) SfRealloc(psDBF->panFieldDecimals,
-> 			sizeof(int) * psDBF->nFields);
-629,630c621,622
-<     psDBF->pachFieldType = (char *)
-<       SfRealloc( psDBF->pachFieldType, sizeof(char) * psDBF->nFields );
----
-> 	psDBF->pachFieldType = (char *) SfRealloc(psDBF->pachFieldType,
-> 			sizeof(char) * psDBF->nFields);
-655c647,648
-<     psDBF->pszHeader = (char *) SfRealloc(psDBF->pszHeader,psDBF->nFields*32);
----
-> 	psDBF->pszHeader = (char *) SfRealloc(psDBF->pszHeader,
-> 			psDBF->nFields * 32);
-669,670c662
-<     if( eType == FTString )
-<     {
----
-> 	if (eType == FTString) {
-673,675c665
-<     }
-<     else
-<     {
----
-> 	} else {
-717,718c707
+719,720c720
 <     if( psDBF->nCurrentRecord != hEntity )
 <     {
 ---
 > 	if (psDBF->nCurrentRecord != hEntity) {
-723,725c712,713
+725,727c725,726
 < 	if( fseek( psDBF->fp, nRecordOffset, 0 ) != 0 )
 < 	{
 < 	    REprintf("fseek(%d) failed on DBF file", nRecordOffset);
 ---
 > 		if (fseek(psDBF->fp, nRecordOffset, 0) != 0) {
 > 			REprintf(_("fseek(%d) failed on DBF file"), nRecordOffset);
-729,732c717,719
+731,734c730,732
 < 	if( fread( psDBF->pszCurrentRecord, psDBF->nRecordLength,
 < 		   1, psDBF->fp ) != 1 )
 < 	{
@@ -1207,239 +1087,61 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
 > 				!= 1) {
 > 			REprintf(_("fread(%d) failed on DBF file"), psDBF->nRecordLength);
-744,745c731
+746,747c744
 <     if( psDBF->panFieldSize[iField]+1 > nStringFieldLen )
 <     {
 ---
 > 	if (psDBF->panFieldSize[iField] + 1 > nStringFieldLen) {
-763,764c749
+765,766c762
 <     if( chReqType == 'N' )
 <     {
 ---
 > 	if (chReqType == 'N') {
-774,775c759
-<     else
-<     {
----
-> 	else {
-877c861,862
-<     if(pszValue == NULL) return TRUE;
----
-> 	if (pszValue == NULL)
-> 		return TRUE;
-879,880c864
-<     switch(psDBF->pachFieldType[iField])
-<     {
----
-> 	switch (psDBF->pachFieldType[iField]) {
-888c872,873
-< 	if(pszValue[0] == '*') return TRUE;
----
-> 		if (pszValue[0] == '*')
-> 			return TRUE;
-890c875,876
-<              if(pszValue[i] != ' ') return FALSE;
----
-> 			if (pszValue[i] != ' ')
-> 				return FALSE;
-940,941c926,927
+942,943c938,939
 < DBFGetFieldInfo( DBFHandle psDBF, int iField, char * pszFieldName,
 < 		 int * pnWidth, int * pnDecimals )
 ---
 > DBFGetFieldInfo(DBFHandle psDBF, int iField, char * pszFieldName, int * pnWidth,
 > 		int * pnDecimals)
-953,954c939
+955,956c951
 <     if( pszFieldName != NULL )
 <     {
 ---
 > 	if (pszFieldName != NULL) {
-974,976c959
+976,978c971
 <     }
 <     else
 <     {
 ---
 > 	} else {
-1007,1008c990
-<     if( hEntity == psDBF->nRecords )
-<     {
----
-> 	if (hEntity == psDBF->nRecords) {
-1022,1023c1004
-<     if( psDBF->nCurrentRecord != hEntity )
-<     {
----
-> 	if (psDBF->nCurrentRecord != hEntity) {
-1029,1030c1010,1012
+1031,1032c1024,1026
 < 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, 
 < 		   psDBF->fp ) != 1) error("binary read error");
 ---
 > 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
 > 				!= 1)
 > 			error(_("binary read error"));
-1045,1048c1027,1028
-<     if( pValue == NULL )
-<     {
-< 	switch(psDBF->pachFieldType[iField])
-< 	{
----
-> 	if (pValue == NULL) {
-> 		switch (psDBF->pachFieldType[iField]) {
-1080,1081c1060
-<     switch( psDBF->pachFieldType[iField] )
-<     {
----
-> 	switch (psDBF->pachFieldType[iField]) {
-1085,1086c1064
-< 	if( psDBF->panFieldDecimals[iField] == 0 )
-< 	{
----
-> 		if (psDBF->panFieldDecimals[iField] == 0) {
-1094,1095c1072
-< 	    if( (int)strlen(szSField) > psDBF->panFieldSize[iField] )
-< 	    {
----
-> 			if ((int) strlen(szSField) > psDBF->panFieldSize[iField]) {
-1102,1104c1079
-< 	}
-< 	else
-< 	{
----
-> 		} else {
-1110,1111c1085,1086
-< 	    sprintf( szFormat, "%%%d.%df",
-< 		     nWidth, psDBF->panFieldDecimals[iField] );
----
-> 			sprintf(szFormat, "%%%d.%df", nWidth,
-> 					psDBF->panFieldDecimals[iField]);
-1113,1114c1088
-< 	    if( (int) strlen(szSField) > psDBF->panFieldSize[iField] )
-< 	    {
----
-> 			if ((int) strlen(szSField) > psDBF->panFieldSize[iField]) {
-1124,1125c1098,1099
-< 	if (psDBF->panFieldSize[iField] >= 1  &&
-< 	    (*(char*)pValue == 'F' || *(char*)pValue == 'T'))
----
-> 		if (psDBF->panFieldSize[iField] >= 1
-> 				&& (*(char*) pValue == 'F' || *(char*) pValue == 'T'))
-1130,1131c1104
-< 	if( (int) strlen((char *) pValue) > psDBF->panFieldSize[iField] )
-< 	{
----
-> 		if ((int) strlen((char *) pValue) > psDBF->panFieldSize[iField]) {
-1134,1136c1107
-< 	}
-< 	else
-< 	{
----
-> 		} else {
-1177,1178c1148
-<     if( hEntity == psDBF->nRecords )
-<     {
----
-> 	if (hEntity == psDBF->nRecords) {
-1192,1193c1162
-<     if( psDBF->nCurrentRecord != hEntity )
-<     {
----
-> 	if (psDBF->nCurrentRecord != hEntity) {
-1199,1200c1168,1170
+1199,1200c1193,1195
 < 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
 > 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
 > 				!= 1)
 > 			error(_("binary read error"));
-1212,1213c1182
-<     else
-<     {
----
-> 	else {
-1219,1220c1188,1189
-<     strncpy((char *) (pabyRec+psDBF->panFieldOffset[iField]),
-< 	    (char *) pValue, j );
----
-> 	strncpy((char *) (pabyRec + psDBF->panFieldOffset[iField]), (char *) pValue,
-> 			j);
-1235,1236c1204
-< DBFWriteDoubleAttribute( DBFHandle psDBF, int iRecord, int iField,
-< 			 double dValue )
----
-> DBFWriteDoubleAttribute(DBFHandle psDBF, int iRecord, int iField, double dValue)
-1249,1250c1217
-< DBFWriteIntegerAttribute( DBFHandle psDBF, int iRecord, int iField,
-< 			  int nValue )
----
-> DBFWriteIntegerAttribute(DBFHandle psDBF, int iRecord, int iField, int nValue)
-1324,1325c1291
-<     if( hEntity == psDBF->nRecords )
-<     {
----
-> 	if (hEntity == psDBF->nRecords) {
-1339,1340c1305
-<     if( psDBF->nCurrentRecord != hEntity )
-<     {
----
-> 	if (psDBF->nCurrentRecord != hEntity) {
-1346,1347c1311,1313
+1346,1347c1341,1343
 < 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
 > 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
 > 				!= 1)
 > 			error(_("binary read error"));
-1384,1385c1350
-<     if( psDBF->nCurrentRecord != hEntity )
-<     {
----
-> 	if (psDBF->nCurrentRecord != hEntity) {
-1391,1392c1356,1358
+1391,1392c1387,1389
 < 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
 > 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
 > 				!= 1)
 > 			error(_("binary read error"));
-1416,1417c1382
-< DBFCloneEmpty(DBFHandle psDBF, const char * pszFilename )
-< {
----
-> DBFCloneEmpty(DBFHandle psDBF, const char * pszFilename) {
-1421c1386,1387
-<    if ( newDBF == NULL ) return ( NULL );
----
-> 	if (newDBF == NULL)
-> 		return ( NULL);
-1431c1397,1398
-<    memcpy ( newDBF->panFieldOffset, psDBF->panFieldOffset, sizeof(int) * psDBF->nFields );
----
-> 	memcpy(newDBF->panFieldOffset, psDBF->panFieldOffset,
-> 			sizeof(int) * psDBF->nFields);
-1433c1400,1401
-<    memcpy ( newDBF->panFieldSize, psDBF->panFieldSize, sizeof(int) * psDBF->nFields );
----
-> 	memcpy(newDBF->panFieldSize, psDBF->panFieldSize,
-> 			sizeof(int) * psDBF->nFields);
-1435c1403,1404
-<    memcpy ( newDBF->panFieldDecimals, psDBF->panFieldDecimals, sizeof(int) * psDBF->nFields );
----
-> 	memcpy(newDBF->panFieldDecimals, psDBF->panFieldDecimals,
-> 			sizeof(int) * psDBF->nFields);
-1437c1406,1407
-<    memcpy ( newDBF->pachFieldType, psDBF->pachFieldType, sizeof(int) * psDBF->nFields );
----
-> 	memcpy(newDBF->pachFieldType, psDBF->pachFieldType,
-> 			sizeof(int) * psDBF->nFields);
-1476,1477c1446
-< static void str_to_upper (char *string)
-< {
----
-> static void str_to_upper(char *string) {
-1507,1508c1476
-<     for( i = 0; i < DBFGetFieldCount(psDBF); i++ )
-<     {
----
-> 	for (i = 0; i < DBFGetFieldCount(psDBF); i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/file-handle.c Recommended/foreign/src/file-handle.c
 28a29
 > #include "localization.h"
@@ -1821,68 +1523,17 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <       {
 ---
 > 		for (i = 0; i < 256; i++) {
-509c477,478
-< 	ext->trans[i] = trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
----
-> 			ext->trans[i] =
-> 					trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
-528,529c497
-<  lossage:
-<   return 0;
----
-> 	lossage: return 0;
-534,536c502
-< int
-< read_version_data (struct file_handle *h, struct pfm_read_info *inf)
-< {
----
-> int read_version_data(struct file_handle *h, struct pfm_read_info *inf) {
-556,557c522
-<     for (i = 0; i < 8; i++)
-<       {
----
-> 		for (i = 0; i < 8; i++) {
-563,564c528
-<     if (inf)
-<       {
----
-> 		if (inf) {
-583,584c547
+583,584c551
 <     for (i = 0; i < 6; i++)
 <       {
 ---
 > 		for (i = 0; i < 6; i++) {
-590,591c553
+590,591c557
 <     if (inf)
 <       {
 ---
 > 		if (inf) {
-598,599c560
-<   if (pfm_match (65 /* 1 */))
-<     {
----
-> 	if (pfm_match(65 /* 1 */)) {
-607,608c568
-<     }
-<   else if (inf)
----
-> 	} else if (inf)
-612,613c572
-<   if (pfm_match (67 /* 3 */))
-<     {
----
-> 	if (pfm_match(67 /* 3 */)) {
-621,622c580
-<     }
-<   else if (inf)
----
-> 	} else if (inf)
-626,627c584
-<  lossage:
-<   return 0;
----
-> 	lossage: return 0;
-630,633c587,588
+634,637c600,601
 < static int
 < convert_format (struct file_handle *h, int fmt[3], struct fmt_spec *v,
 < 		struct variable *vv)
@@ -1890,7 +1541,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > static int convert_format(struct file_handle *h, int fmt[3], struct fmt_spec *v,
 > 		struct variable *vv) {
-646,651c601,617
+650,655c614,630
 <   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
 <     lose ((_("%s variable %s has %s format specifier %s"),
 < 	   vv->type == ALPHA ? "String" : "Numeric",
@@ -1915,50 +1566,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 						(_("Numeric variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
 > 		}
 > 	}
-654,655c620
-<  lossage:
-<   return 0;
----
-> 	lossage: return 0;
-665,666c630
-<     "                                                                "
-<   };
----
-> 						"                                                                " };
-669,671c633
-< static void
-< asciify (char *s)
-< {
----
-> static void asciify(char *s) {
-679,681c641
-< static int
-< read_variables (struct file_handle *h)
-< {
----
-> static int read_variables(struct file_handle *h) {
-707,708c667
-<   if (pfm_match (70 /* 6 */))
-<     {
----
-> 	if (pfm_match(70 /* 6 */)) {
-717,718c676
-<   for (i = 0; i < ext->nvars; i++)
-<     {
----
-> 	for (i = 0; i < ext->nvars; i++) {
-738,739c696
-<       for (j = 0; j < 6; j++)
-< 	{
----
-> 		for (j = 0; j < 6; j++) {
-750,751c707,708
+754,755c729,730
 < 	lose ((_("position %d: Variable name has %u characters"),
 < 	       i, strlen ((char *) name)));
 ---
 > 			lose(
 > 					(_("position %d: Variable name has %u characters"), i, strlen ((char *) name)));
-754,758c711,716
+758,762c733,738
 < 	lose ((_("position %d: Variable name begins with invalid character"),
 < 	       i));
 <       if (name[0] >= 100 /* a */ && name[0] <= 125 /* z */)
@@ -1971,12 +1585,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 			warning(
 > 					_(
 > 							"position %d: Variable name begins with lowercase letter %c"),
-764,765c722
-<       for (j = 1; j < (int) strlen ((char *) name); j++)
-< 	{
----
-> 		for (j = 1; j < (int) strlen((char *) name); j++) {
-768,770c725,728
+772,774c748,751
 < 	  if (c >= 100 /* a */ && c <= 125 /* z */)
 < 	    {
 < 	      warning(_("position %d: Variable name character %d is lowercase letter %c"),
@@ -1985,180 +1594,55 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				warning(
 > 						_(
 > 								"position %d: Variable name character %d is lowercase letter %c"),
-773,775c731,732
+777,779c754,755
 < 	    }
 < 	  else if ((c >= 64 /* 0 */ && c <= 99 /* Z */)
 < 		   || c == 127 /* . */ || c == 152 /* @ */
 ---
 > 			} else if ((c >= 64 /* 0 */&& c <= 99 /* Z */) || c == 127 /* . */
 > 					|| c == 152 /* @ */
-779,780c736,737
+783,784c759,760
 < 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"),
 < 		   i, c));
 ---
 > 				lose(
 > 						(_("position %d: character `\\%03o' is not valid in a variable name"), i, c));
-787,788c744,745
+791,792c767,768
 <       v = create_variable (ext->dict, (char *) name,
 < 			   width ? ALPHA : NUMERIC, width);
 ---
 > 		v = create_variable(ext->dict, (char *) name, width ? ALPHA : NUMERIC,
 > 				width);
-798,799c755
-<       if (pfm_match (75 /* B */))
-< 	{
----
-> 		if (pfm_match(75 /* B */)) {
-804,806c760
-< 	}
-<       else if (pfm_match (74 /* A */))
-< 	{
----
-> 		} else if (pfm_match(74 /* A */)) {
-810,812c764
-< 	}
-<       else if (pfm_match (73 /* 9 */))
-< 	{
----
-> 		} else if (pfm_match(73 /* 9 */)) {
-819,826c771,774
-<       while (pfm_match (72 /* 8 */))
-< 	{
-< 	  static const int map_next[MISSING_COUNT] =
-< 	    {
-< 	      MISSING_1, MISSING_2, MISSING_3, -1,
-< 	      MISSING_RANGE_1, MISSING_LOW_1, MISSING_HIGH_1,
-< 	      -1, -1, -1,
-< 	    };
----
-> 		while (pfm_match(72 /* 8 */)) {
-> 			static const int map_next[MISSING_COUNT] = { MISSING_1, MISSING_2,
-> 					MISSING_3, -1, MISSING_RANGE_1, MISSING_LOW_1,
-> 					MISSING_HIGH_1, -1, -1, -1, };
-828,831c776,777
-< 	  static const int map_ofs[MISSING_COUNT] =
-< 	    {
-< 	      -1, 0, 1, 2, -1, -1, -1, 2, 1, 1,
-< 	    };
----
-> 			static const int map_ofs[MISSING_COUNT] = { -1, 0, 1, 2, -1, -1, -1,
-> 					2, 1, 1, };
-843,844c789
-<       if (pfm_match (76 /* C */))
-< 	{
----
-> 		if (pfm_match(76 /* C */)) {
-858,859c803,804
+862,863c838,839
 <     lose ((_("Weighting variable %s not present in dictionary"),
 < 	   ext->dict->weight_var));
 ---
 > 		lose(
 > 				(_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
-863,864c808
-<  lossage:
-<   return 0;
----
-> 	lossage: return 0;
-868,872c812,814
-< static int
-< parse_value (struct file_handle *h, union value *v, struct variable *vv)
-< {
-<   if (vv->type == ALPHA)
-<     {
----
-> static int parse_value(struct file_handle *h, union value *v,
-> 		struct variable *vv) {
-> 	if (vv->type == ALPHA) {
-886,888c828
-<     }
-<   else
-<     {
----
-> 	} else {
-898,900c838
-< static int
-< read_value_label (struct file_handle *h)
-< {
----
-> static int read_value_label(struct file_handle *h) {
-917,918c855
-<   for (i = 0; i < nv; i++)
-<     {
----
-> 	for (i = 0; i < nv; i++) {
-929,930c866,867
+933,934c909,910
 < 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"),
 < 	       v[0]->name, v[i]->name));
 ---
 > 			lose(
 > 					(_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
-937,938c874
-<   for (i = 0; i < n_labels; i++)
-<     {
----
-> 	for (i = 0; i < n_labels; i++) {
-960,961c896
-<       for (j = 0; j < nv; j++)
-< 	{
----
-> 		for (j = 0; j < nv; j++) {
-975,976c910,911
+979,980c955,956
 < 	    lose ((_("Duplicate label for value %g for variable %s"),
 < 		   vl->v.f, var->name));
 ---
 > 				lose(
 > 						(_("Duplicate label for value %g for variable %s"), vl->v.f, var->name));
-978,979c913,914
+982,983c958,959
 < 	    lose ((_("Duplicate label for value `%.*s' for variable %s"),
 < 		   var->width, vl->v.s, var->name));
 ---
 > 				lose(
 > 						(_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
-987,988c922
-<  lossage:
-<   Free (v);
----
-> 	lossage: Free(v);
-995,997c929
-< static void
-< st_bare_pad_copy (char *dest, const char *src, size_t n)
-< {
----
-> static void st_bare_pad_copy(char *dest, const char *src, size_t n) {
-1001,1002c933
-<   else
-<     {
----
-> 	else {
-1012,1014c943,944
-< int
-< pfm_read_case (struct file_handle *h, union value *perm, struct dictionary *dict)
-< {
----
-> int pfm_read_case(struct file_handle *h, union value *perm,
-> 		struct dictionary *dict) {
-1029,1030c959
-<     if (ext->vars[i] == 0)
-<       {
----
-> 		if (ext->vars[i] == 0) {
-1035,1037c964
-<       }
-<     else
-<       {
----
-> 		} else {
-1049,1050c976
-<   for (i = 0; i < dict->nvar; i++)
-<     {
----
-> 	for (i = 0; i < dict->nvar; i++) {
-1068,1069c994
+1072,1073c1048
 <  lossage:
 <   Free (temp);
 ---
 > 	lossage: Free(temp);
-1074,1079c999,1000
+1078,1083c1053,1054
 < static struct fh_ext_class pfm_r_class =
 < {
 <   5,
@@ -2206,24 +1690,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <       ", ignoring long variable names"
 ---
 >     warning("%s: strange record info seen, size=%u, count=%u, ignoring long variable names"
-686,687c686
+687,688c687
 <         warning("%s: long variable name mapping '%s' to '%s'"
 <         "for variable which does not exist"
 ---
 >         warning("for variable which does not exist: long variable name mapping '%s' to '%s'"
-1424c1423
+1425c1424
 <   printf ("dictionary:\n");
 ---
 >   printf (_("dictionary:\n"));
-1483c1482
+1484c1483
 <           if (!(0)) warning("assert failed : 0");
 ---
 >           if (!(0)) warning(_("assert failed : 0"));
-1637c1636
+1638c1637
 <   if (!(dict->nval > 0)) error("assert failed : dict->nval > 0");
 ---
 >   if (!(dict->nval > 0)) error(_("assert failed : dict->nval > 0"));
-1693c1692
+1694c1693
 <   "reading as a system file",
 ---
 >   N_("reading as a system file"),
@@ -2320,558 +1804,29 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
 29a30
 > #include "localization.h"
-81,82c82
-< find_dict_variable (const struct dictionary *d, const char *name)
-< {
----
-> find_dict_variable(const struct dictionary *d, const char *name) {
-88,91c88,89
-< static inline void
-< common_init_stuff (struct dictionary *dict, struct variable *v,
-< 		   const char *name, int type, int width)
-< {
----
-> static inline void common_init_stuff(struct dictionary *dict,
-> 		struct variable *v, const char *name, int type, int width) {
-102,103c100
-<   if (v->type == NUMERIC)
-<     {
----
-> 	if (v->type == NUMERIC) {
-107,109c104
-<     }
-<   else
-<     {
----
-> 	} else {
-119,122c114,115
-< void
-< init_variable (struct dictionary *dict, struct variable *v, const char *name,
-< 	       int type, int width)
-< {
----
-> void init_variable(struct dictionary *dict, struct variable *v,
-> 		const char *name, int type, int width) {
-138,140c131
-< create_variable (struct dictionary *dict, const char *name,
-< 		 int type, int width)
-< {
----
-> create_variable(struct dictionary *dict, const char *name, int type, int width) {
-160,162c151
-< int
-< val_lab_cmp (const void *a, const void *b, void *param)
-< {
----
-> int val_lab_cmp(const void *a, const void *b, void *param) {
-166,169c155,156
-< 		    (char *)((struct value_label *) b)->v.s,
-< 		    width);
-<   else
-<     {
----
-> 				(char *) ((struct value_label *) b)->v.s, width);
-> 	else {
-200,201c186
-<       while (p != NULL)
-< 	{
----
-> 		while (p != NULL) {
-220,222c205
-< 
-< static SEXP getSPSSvaluelabels(struct dictionary *dict)
-< {
----
-> static SEXP getSPSSvaluelabels(struct dictionary *dict) {
-230c213,214
-<     if (nvars == 0) return R_NilValue;
----
-> 	if (nvars == 0)
-> 		return R_NilValue;
-235c219,220
-< 	if (!labelset) continue;
----
-> 		if (!labelset)
-> 			continue;
-265,266c250
-< static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss)
-< {
----
-> static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss) {
-271c255,256
-<     if (nvars == 0) return R_NilValue;
----
-> 	if (nvars == 0)
-> 		return R_NilValue;
-321c306,307
-< 	if (strcmp(type, "none")) (*have_miss)++;
----
-> 		if (strcmp(type, "none"))
-> 			(*have_miss)++;
-334c320,321
-< 		for(j = 0; j < n; j++) rx[j] = v->missing[j].f;
----
-> 				for (j = 0; j < n; j++)
-> 					rx[j] = v->missing[j].f;
-354,356c341
-< static SEXP
-< read_SPSS_PORT(const char *filename)
-< {
----
-> static SEXP read_SPSS_PORT(const char *filename) {
-370c355,356
-<     SEXP miss_labels; int have_miss = 0;
----
-> 	SEXP miss_labels;
-> 	int have_miss = 0;
-396,397c382
-< 	    case_vals[v->fv].c =
-< 		(unsigned char *) R_alloc(v->width + 1, 1);
----
-> 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
-472,474c457
-< static SEXP
-< read_SPSS_SAVE(const char *filename)
-< {
----
-> static SEXP read_SPSS_SAVE(const char *filename) {
-486c469,470
-<     SEXP miss_labels; int have_miss = 0;
----
-> 	SEXP miss_labels;
-> 	int have_miss = 0;
-518,519c502
-< 	    case_vals[v->fv].c =
-< 		(unsigned char *) R_alloc(v->width + 1, 1);
----
-> 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
-582,584c565
-< static size_t
-< fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream)
-< {
----
-> static size_t fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream) {
-610,612c591
-< static int
-< is_PORT(FILE *fp)
-< {
----
-> static int is_PORT(FILE *fp) {
-661,663c640
-< SEXP
-< do_read_SPSS(SEXP file)
-< {
----
-> SEXP do_read_SPSS(SEXP file) {
-683,684c660
-< 	    error(_("file '%s' is not in any supported SPSS format"),
-< 		  filename);
----
-> 			error(_("file '%s' is not in any supported SPSS format"), filename);
-693,695c669
-< void
-< spss_init(void)
-< {
----
-> void spss_init(void) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/stataread.c Recommended/foreign/src/stataread.c
 46a47
 > #include "localization.h"
-91,92c91
-< static int InIntegerBinary(FILE * fp, int naok, int swapends)
-< {
----
-> static int InIntegerBinary(FILE * fp, int naok, int swapends) {
-101,102c100
-< static int InByteBinary(FILE * fp, int naok)
-< {
----
-> static int InByteBinary(FILE * fp, int naok) {
-109,110c107
-< static int RawByteBinary(FILE * fp, int naok)
-< {
----
-> static int RawByteBinary(FILE * fp, int naok) {
-117,118c114
-< static int InShortIntBinary(FILE * fp, int naok,int swapends)
-< {
----
-> static int InShortIntBinary(FILE * fp, int naok, int swapends) {
-129c125,126
-<   if (result > STATA_SHORTINT_NA) result -= 65536;
----
-> 	if (result > STATA_SHORTINT_NA)
-> 		result -= 65536;
-133,135c130
-< 
-< static double InDoubleBinary(FILE * fp, int naok, int swapends)
-< {
----
-> static double InDoubleBinary(FILE * fp, int naok, int swapends) {
-144,145c139
-< static double InFloatBinary(FILE * fp, int naok, int swapends)
-< {
----
-> static double InFloatBinary(FILE * fp, int naok, int swapends) {
-154,155c148
-< static void InStringBinary(FILE * fp, int nchar, char* buffer)
-< {
----
-> static void InStringBinary(FILE * fp, int nchar, char* buffer) {
-180,185c173,175
-< 
-< 
-< SEXP R_LoadStataData(FILE *fp)
-< {
-<     int i, j = 0, nvar, nobs, charlen, version, swapends, 
-< 	varnamelength, nlabels, totlen, res;
----
-> SEXP R_LoadStataData(FILE *fp) {
-> 	int i, j = 0, nvar, nobs, charlen, version, swapends, varnamelength,
-> 			nlabels, totlen, res;
-338c326,327
-<     for (i = 0; i < 2*(nvar+1); i++) RawByteBinary(fp, 1);
----
-> 	for (i = 0; i < 2 * (nvar + 1); i++)
-> 		RawByteBinary(fp, 1);
-422c410,411
-< 	    for (i = 0; i < charlen; i++) InByteBinary(fp, 1);
----
-> 			for (i = 0; i < charlen; i++)
-> 				InByteBinary(fp, 1);
-433,434c422,424
-< 	error(_("something strange in the file\n (Type 0 characteristic of nonzero length)"));
-< 
----
-> 		error(
-> 				_(
-> 						"something strange in the file\n (Type 0 characteristic of nonzero length)"));
-446c436,437
-< 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
----
-> 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
-> 							swapends);
-449c440,441
-< 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
----
-> 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
-> 							swapends);
-452c444,445
-< 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
----
-> 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
-> 							swapends);
-460c453,455
+460c461
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
-> 						warning(
-> 								_(
-> 										"invalid character string length -- truncating to 244 bytes"));
-478c473,474
-< 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
----
-> 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
-> 							swapends);
-481c477,478
-< 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
----
-> 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
-> 							swapends);
-484c481,482
-< 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
----
-> 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
-> 							swapends);
-492c490,492
+> 			warning(_("invalid character string length -- truncating to 244 bytes"));
+492c493
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
-> 						warning(
-> 								_(
-> 										"invalid character string length -- truncating to 244 bytes"));
-513,514c512,515
-< 	    if (feof(fp)) break;
-< 	    if (res != 1) warning(_("a binary read error occurred"));
----
-> 			if (feof(fp))
-> 				break;
-> 			if (res != 1)
-> 				warning(_("a binary read error occurred"));
-522c523,525
-< 	    RawByteBinary(fp, 1); RawByteBinary(fp, 1); RawByteBinary(fp, 1); /*padding*/
----
-> 			RawByteBinary(fp, 1);
-> 			RawByteBinary(fp, 1);
-> 			RawByteBinary(fp, 1); /*padding*/
-562,563c565,568
-< 	if(j > 0) setAttrib(df, install("label.table"), labeltable);
-< 	UNPROTECT(1); /*labeltable*/;
----
-> 		if (j > 0)
-> 			setAttrib(df, install("label.table"), labeltable);
-> 		UNPROTECT(1); /*labeltable*/
-> 		;
-572,573c577
-< SEXP do_readStata(SEXP call)
-< {
----
-> SEXP do_readStata(SEXP call) {
-596,597c598
-< static void OutIntegerBinary(int i, FILE * fp, int naok)
-< {
----
-> static void OutIntegerBinary(int i, FILE * fp, int naok) {
-604,605c605
-< static void OutByteBinary(unsigned char i, FILE * fp)
-< {
----
-> static void OutByteBinary(unsigned char i, FILE * fp) {
-609,610c609
-< static void OutDataByteBinary(int i, FILE * fp)
-< {
----
-> static void OutDataByteBinary(int i, FILE * fp) {
-616,617c615
-< static void OutShortIntBinary(int i,FILE * fp)
-< {
----
-> static void OutShortIntBinary(int i, FILE * fp) {
-633,635c631
-< 
-< static void  OutDoubleBinary(double d, FILE * fp, int naok)
-< {
----
-> static void OutDoubleBinary(double d, FILE * fp, int naok) {
-641,644c637,639
-< 
-< static void OutStringBinary(const char *buffer, FILE * fp, int nchar)
-< {
-<     if (nchar == 0) return;
----
-> static void OutStringBinary(const char *buffer, FILE * fp, int nchar) {
-> 	if (nchar == 0)
-> 		return;
-649,650c644
-< static char* nameMangleOut(char *stataname, int len)
-< {
----
-> static char* nameMangleOut(char *stataname, int len) {
-652c646,647
-<       if (stataname[i] == '.') stataname[i] = '_';
----
-> 		if (stataname[i] == '.')
-> 			stataname[i] = '_';
-660,663c655,657
-< static Rboolean 
-< writeStataValueLabel(const char *labelName, const SEXP theselabels,
-< 		     const SEXP theselevels, const int namelength, FILE *fp)
-< {
----
-> static Rboolean writeStataValueLabel(const char *labelName,
-> 		const SEXP theselabels, const SEXP theselevels, const int namelength,
-> 		FILE *fp) {
-670,672c664,666
-<     if (!isNull(theselevels) && 
-< 	((TYPEOF(theselevels)!=INTSXP && TYPEOF(theselevels)!=REALSXP)  || 
-< 	 LENGTH(theselabels) != LENGTH(theselevels)))
----
-> 	if (!isNull(theselevels)
-> 			&& ((TYPEOF(theselevels) != INTSXP && TYPEOF(theselevels) != REALSXP)
-> 					|| LENGTH(theselabels) != LENGTH(theselevels)))
-683,684c677,678
-<     OutStringBinary(nameMangleOut(labelName2, (int)strlen(labelName)),
-< 		    fp, namelength);
----
-> 	OutStringBinary(nameMangleOut(labelName2, (int) strlen(labelName)), fp,
-> 			namelength);
-686c680,682
-<     OutByteBinary(0, fp); OutByteBinary(0, fp); OutByteBinary(0, fp); /*padding*/
----
-> 	OutByteBinary(0, fp);
-> 	OutByteBinary(0, fp);
-> 	OutByteBinary(0, fp); /*padding*/
-699,700c695
-<     }
-<     else{
----
-> 	} else {
-704,705c699
-< 	}
-< 	else{
----
-> 		} else {
-716c710,711
-< 	if (txtlen < 0) error(_("this should happen: overrun"));
----
-> 		if (txtlen < 0)
-> 			error(_("this should happen: overrun"));
-718c713,714
-<     if (txtlen > 0) error(_("this should happen: underrun"));
----
-> 	if (txtlen > 0)
-> 		error(_("this should happen: underrun"));
-724,725c720
-< void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable)
-< {
----
-> void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable) {
-727,728c722,723
-<     char datalabel[81] = "Written by R.              ",
-< 	timestamp[18], aname[33];
----
-> 	char datalabel[81] = "Written by R.              ", timestamp[18],
-> 			aname[33];
-731,732c726,727
-<     SEXP names, types, theselabels, orig_names, vlabels, dlabel, 
-< 	exp_fields, exp_field, curr_val_labels, label_table, names_lt,
----
-> 	SEXP names, types, theselabels, orig_names, vlabels, dlabel, exp_fields,
-> 			exp_field, curr_val_labels, label_table, names_lt,
-738,739c733,736
-<     if (version >= 7) namelength=32;
-<     if (version >= 10) fmtlist_len = 49;
----
-> 	if (version >= 7)
-> 		namelength = 32;
-> 	if (version >= 10)
-> 		fmtlist_len = 49;
-770c766,767
-<     for(i = 0; i < 18; i++) timestamp[i] = 0;
----
-> 	for (i = 0; i < 18; i++)
-> 		timestamp[i] = 0;
-800c795,796
-< 		    if (k > charlen) charlen = k;
----
-> 					if (k > charlen)
-> 						charlen = k;
-803c799,802
+> 			warning(_("invalid character string length -- truncating to 244 bytes"));
+803c804
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
-> 					warning(
-> 							_(
-> 									"character strings of >244 bytes in column %d will be truncated"),
-> 							i + 1);
-805c804,805
-< 		OutByteBinary((unsigned char)(charlen+STATA_STRINGOFFSET), fp);
----
-> 				OutByteBinary((unsigned char) (charlen + STATA_STRINGOFFSET),
-> 						fp);
-830c830,831
-< 		    if (k > charlen) charlen = k;
----
-> 					if (k > charlen)
-> 						charlen = k;
-833c834,837
+> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
+833c834
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
-> 					warning(
-> 							_(
-> 									"character strings of >244 bytes in column %d will be truncated"),
-> 							i + 1);
-835c839,840
-< 		OutByteBinary((unsigned char)(charlen+STATA_SE_STRINGOFFSET), fp);
----
-> 				OutByteBinary((unsigned char) (charlen + STATA_SE_STRINGOFFSET),
-> 						fp);
-856c859,860
-<     for (i = 0; i < 2*(nvar+1); i++) OutByteBinary(0, fp);
----
-> 	for (i = 0; i < 2 * (nvar + 1); i++)
-> 		OutByteBinary(0, fp);
-878c882,883
-< 	    for(j = 0; j < namelength+1; j++) OutByteBinary(0, fp);
----
-> 			for (j = 0; j < namelength + 1; j++)
-> 				OutByteBinary(0, fp);
-883c888,889
-< 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
----
-> 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
-> 						namelength);
-903,904c908
-<     }
-<     else{
----
-> 	} else {
-921c924,925
-<     if(!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP && abs(version) >= 7){
----
-> 	if (!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP
-> 			&& abs(version) >= 7) {
-925c929,930
-< 	    if(!isNull(exp_field) && isString(exp_field) && LENGTH(exp_field) == 3) {
----
-> 			if (!isNull(exp_field) && isString(exp_field)
-> 					&& LENGTH(exp_field) == 3) {
-927c932,935
-< 		OutIntegerBinary(2*(namelength+1) + (length(STRING_ELT(exp_field,2))+1), fp, 1);
----
-> 				OutIntegerBinary(
-> 						2 * (namelength + 1)
-> 								+ (length(STRING_ELT(exp_field, 2)) + 1), fp,
-> 						1);
-936c944,945
-< 		OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp, length(STRING_ELT(exp_field, 2)));
----
-> 				OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp,
-> 						length(STRING_ELT(exp_field, 2)));
-970,971c978,982
+> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
+970c971
 < 		    error("empty string is not valid in Stata's documented format");
-< 		if(k > 244) k = 244;
 ---
-> 					error(
-> 							_(
-> 									"empty string is not valid in Stata's documented format"));
-> 				if (k > 244)
-> 					k = 244;
-973c984,985
-< 		for(l = INTEGER(types)[j]-k; l > 0; l--) OutByteBinary(0, fp);
----
-> 				for (l = INTEGER(types)[j] - k; l > 0; l--)
-> 					OutByteBinary(0, fp);
-989,990c1001,1004
-< 	    if(!isNull(curr_val_labels) && isString(curr_val_labels) && LENGTH(curr_val_labels) > i)
-< 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
----
-> 			if (!isNull(curr_val_labels) && isString(curr_val_labels)
-> 					&& LENGTH(curr_val_labels) > i)
-> 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
-> 						namelength);
-994c1008,1009
-< 	    writeStataValueLabel(aname, theselabels, R_NilValue, namelength, fp);
----
-> 			writeStataValueLabel(aname, theselabels, R_NilValue, namelength,
-> 					fp);
-1006c1021,1023
-< 					if(strncmp(thisnamechar, CHAR(STRING_ELT(curr_val_labels, j)), namelength) == 0)
----
-> 						if (strncmp(thisnamechar,
-> 								CHAR(STRING_ELT(curr_val_labels, j)),
-> 								namelength) == 0)
-1009c1026,1027
-< 				if(j<LENGTH(curr_val_labels)) continue;
----
-> 					if (j < LENGTH(curr_val_labels))
-> 						continue;
-1014,1015c1032,1036
-< 				PROTECT(theselabels = getAttrib(theselabelslevels, R_NamesSymbol));
-< 				writeStataValueLabel(thisnamechar, theselabels, theselabelslevels, namelength, fp);
----
-> 					PROTECT(
-> 							theselabels = getAttrib(theselabelslevels,
-> 									R_NamesSymbol));
-> 					writeStataValueLabel(thisnamechar, theselabels,
-> 							theselabelslevels, namelength, fp);
-1026,1027c1047
-< SEXP do_writeStata(SEXP call)
-< {
----
-> SEXP do_writeStata(SEXP call) {
-1044c1063,1064
-<     if (!fp) error(_("unable to open file for writing: '%s'"), strerror(errno));
----
-> 	if (!fp)
-> 		error(_("unable to open file for writing: '%s'"), strerror(errno));
+> 		    error(_("empty string is not valid in Stata's documented format"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/var.h Recommended/foreign/src/var.h
 52,53c52
 < union value

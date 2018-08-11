@@ -235,7 +235,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 		       dQuote(class(x))), domain = NA)
 ---
 >     else stop(gettextf("general Matrix class not yet implemented for %s", dQuote(class(x))), domain = "R-Matrix")
-1563c1546
+1584c1567
 <                                  "extra arguments %s will be disregarded in\n %s"),
 ---
 >                                  "extra arguments %s will be disregarded in\n %s", domain = "R-Matrix"),
@@ -246,18 +246,18 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	      message(sprintf(gettext("Quadratic matrix '%s' (=: A) is not formally symmetric. Will be treated as A A'", domain = "R-Matrix"), "parent"), domain = NA)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/Csparse.R Recommended/Matrix/R/Csparse.R
-200,202c200
+224,226c224
 <     Matrix.msg("replCmat[x,i,j,.., val] : nargs()=", na,"; ",
 < 	       if(iMi | jMi) sprintf("missing (i,j) = (%d,%d)", iMi,jMi),
 < 	       .M.level = 2)
 ---
 >     Matrix.msg("replCmat[x,i,j,.., val] : nargs()=", na,"; ", if(iMi | jMi) gettextf("missing (i,j) = (%d,%d)", iMi,jMi, domain = "R-Matrix"), .M.level = 2)
-318,319c316
+342,343c340
 < 	warning("using\"old code\" part in Csparse subassignment\n >>> please report to Matrix-authors@r-project.org",
 < 		immediate. = TRUE)
 ---
 > 	warning("using\"old code\" part in  Csparse subassignment\n >>> please report to Matrix-authors@r-project.org", immediate. = TRUE, domain = "R-Matrix")
-355c352
+379c376
 < 	Matrix.msg("wasteful C -> T -> C in replCmat(x,i,j,v) for <sparse>[i,j] <- v")
 ---
 > 	Matrix.msg(gettext("wasteful C -> T -> C in replCmat(x,i,j,v) for <sparse>[i,j] <- v", domain = "R-Matrix"))
@@ -317,41 +317,41 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	     domain=NA)
 ---
 > 	stop(gettextf("invalid dimnames given for %s object", dQuote(class(x))), domain = "R-Matrix")
-374,375c372
+371,372c369
 < 	  stop(gettextf("Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead",
 < 			class(A)), call. = FALSE, domain=NA))
 ---
 > 	  stop(gettextf("Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead", class(A)), call. = FALSE, domain = "R-Matrix"))
-450c447
+447c444
 < 	      for (i in 1:differences)
 ---
 > 	      for (i in seq_len(differences))
-546,548c543
+543,545c540
 <     } else stop(gettextf(
 < 		"nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?",
 < 			 nA), domain=NA)
 ---
 >     } else stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?", nA), domain = "R-Matrix")
-620,621c615
+617,618c612
 <         stop(domain=NA, gettextf(
 <             "nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?", nA))
 ---
 >         stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?", nA), domain = "R-Matrix")
-685,687c679
+682,684c676
 <     } else stop(gettextf(
 < 		"nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?",
 < 			 nA), domain=NA)
 ---
 >     } else stop(gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?", nA), domain = "R-Matrix")
-737c729
+734c726
 <     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain=NA)
 ---
 >     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain = "R-Matrix")
-749c741
+746c738
 <     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain=NA)
 ---
 >     ## if(nA != 3) stop(gettextf("nargs() = %d should never happen; please report.", nA), domain = "R-Matrix")
-764,766c756
+761,763c753
 < 		  stop(gettextf(
 < 		"RHS 'value' (class %s) matches 'ANY', but must match matrix class %s",
 < 			       class(value), class(x)), domain=NA)
@@ -562,7 +562,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		warning(gettextf("the %d-th (sub)-diagonal (k = %d) is too short; filling with NA's", s, kk), domain = "R-Matrix")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/bind2.R Recommended/Matrix/R/bind2.R
-418,420c418
+423,425c423
 < 		  stop(gettextf("Matrices must have same number of columns in %s",
 < 				deparse(sys.call(sys.parent()))),
 < 		       call. = FALSE, domain=NA)
@@ -637,49 +637,49 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 			    Matrix.msg(gettextf("rectangle size %s [pixels];  --> lwd :%s", paste(round(pSize,1), collapse=" x "), formatC(lwd), domain = "R-Matrix"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/diagMatrix.R Recommended/Matrix/R/diagMatrix.R
-238,239c238
+239,240c239
 < 		       stop(gettextf("%s kind not yet implemented",
 < 				     sQuote(kind)), domain=NA)),
 ---
 > 		       stop(gettextf("%s kind not yet implemented", sQuote(kind)), domain = "R-Matrix")),
-435,436c434
+436,437c435
 < 	else stop(gettextf("Internal bug: nargs()=%d; please report",
 < 			   na), domain=NA)
 ---
 > 	else stop(gettextf("Internal bug: nargs()=%d; please report", na), domain = "R-Matrix")
-987,988c985
+988,989c986
 < 	else stop(gettextf("intermediate 'r' is of type %s",
 < 			   typeof(r)), domain=NA)
 ---
 > 	else stop(gettextf("intermediate 'r' is of type %s", typeof(r)), domain = "R-Matrix")
-996c993
+997c994
 <         Matrix.msg("exploding <diag> o <diag> into dense matrix", .M.level = 2)
 ---
 >         Matrix.msg(gettext("exploding <diag> o <diag> into dense matrix", domain = "R-Matrix"), .M.level = 2)
-1367,1368d1363
+1368,1369d1364
 < 	      cat(sprintf('%d x %d diagonal matrix of class "%s"',
 < 			  d[1L], d[2L], cl))
-1369a1365
+1370a1366
 > 	      cat(gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"))
-1373c1369
+1374c1370
 < 		  cat(", with diagonal entries\n")
 ---
 > 	      cat(gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"), "\n", sep = "")
-1387,1388c1383
+1388,1389c1384
 < 		  sprintf('%d x %d diagonal Matrix of class "%s"',
 < 			  d[1L], d[2L], class(object))
 ---
 > 		  gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(class(object)), domain = "R-Matrix")
-1395c1390
+1396c1391
 <     cat(attr(x, "header"),"\n")
 ---
 >     cat(attr(x, "header"), "\n", sep = "")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/dsCMatrix.R Recommended/Matrix/R/dsCMatrix.R
-82c82
+81c81
 < 	Matrix.msg("solve.dsC.mat(): Cholmod factorization unsuccessful --> using LU(<dgC>)")
 ---
 > 	Matrix.msg(gettext("solve.dsC.mat(): Cholmod factorization unsuccessful --> using LU(<dgC>)", domain = "R-Matrix"))
-93c93
+92c92
 < 	Matrix.msg("solve.dsC.dC(): Cholmod factorization unsuccessful --> using LU(<dgC>)")
 ---
 > 	Matrix.msg(gettext("solve.dsC.dC(): Cholmod factorization unsuccessful --> using LU(<dgC>)", domain = "R-Matrix"))
@@ -799,22 +799,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	Matrix.msg(gettextf("%3g duplicated (i,j) pairs", m), .M.level = 2)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/sparseVector.R Recommended/Matrix/R/sparseVector.R
-299,300c299
+307,308c307
 < 	    stop(gettextf("Class %s is not yet implemented", dQuote(cNam)),
 < 		 domain=NA)
 ---
 > 	    stop(gettextf("Class %s is not yet implemented", dQuote(cNam)), domain = "R-Matrix")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/zzz.R Recommended/Matrix/R/zzz.R
 38,39c38
-<                     .Deprecated(msg = "'cBind' is deprecated.
+< 	    .Deprecated(msg = "'cBind' is deprecated.
 <  Since R version 3.2.0, base's cbind() should work fine with S4 objects")
 ---
-> 	.Deprecated(msg = gettext("'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects"))
+> 	    .Deprecated(msg = gettext("'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects"))
 50,51c49
-< 	.Deprecated(msg = "'rBind' is deprecated.
+< 	    .Deprecated(msg = "'rBind' is deprecated.
 <  Since R version 3.2.0, base's rbind() should work fine with S4 objects")
 ---
-> 	.Deprecated(msg = gettext("'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work fine with S4 objects"))
+> 	    .Deprecated(msg = gettext("'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work fine with S4 objects"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/inst/test-tools-1.R Recommended/Matrix/inst/test-tools-1.R
 42,43c42,43
 < 	stop(d.expr, "\n\t did not give an error", call. = FALSE)
@@ -826,6 +826,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	stop(sprintf("%s is not of class \"%s\"",
 ---
 > 	stop(gettextf("%s is not of class \"%s\"",
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/man/condest.Rd Recommended/Matrix/man/condest.Rd
+69c69
+<   \url{http://dx.doi.org/10.1137/S0895479899356080}
+---
+>   \url{https://doi.org/10.1137/S0895479899356080}
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/man/image-methods.Rd Recommended/Matrix/man/image-methods.Rd
 30,31c30,31
 <       sub = sprintf("Dimensions: \%d x \%d", di[1], di[2]),
@@ -834,21 +839,42 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       sub = gettextf("Dimensions: \%d x \%d", di[1], di[2]),
 >       xlab = gettext("Column"), ylab = gettext("Row"), cuts = 15,
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/Csparse.c Recommended/Matrix/src/Csparse.c
-8a9
+8a9,10
 > #include "localization.h"
-214c215
+> #include <R_ext/Minmax.h>
+214c216
 < 	warning(_("Csparse_to_nz_pattern(x, tri = NA): 'tri' is taken as TRUE"));
 ---
 > 	warning(_("'Csparse_to_nz_pattern(x, tri = NA)': 'tri' is taken as TRUE"));
-237c238
+237c239
 < 	    error(_("not a 'n.CMatrix'"));
 ---
 > 	    error(_("'x' argument is not an object of class \"n.CMatrix\""));
-267,268c268
+267,268c269
 < 	error(_("nz2Csparse(): invalid/non-implemented r_kind = %d"),
 < 	      r_kind);
 ---
 > 	error(_("nz2Csparse(): invalid/non-implemented r_kind = %d"), r_kind);
+1296c1297
+< 	error(_("%s must be (traditional R) matrix"), "'x'");
+---
+> 	error(_("'%s' argument must be (traditional R) matrix"), "x");
+1303c1304
+< 	error(_("%s must be character string"), "'cls'");
+---
+> 	error(_("'%s' argument must be character string"), "cls");
+1311c1312
+< 	error(_("strlen of cls argument = %d, should be 9"), strlen(ccls));
+---
+> 	error(_("strlen of 'cls' argument = %d, should be 9"), strlen(ccls));
+1335c1336
+< 	nnz = imax2(256, imax2(nr,nc));/* nnz := final number of nonzero entries, yet unknown;
+---
+> 	nnz = max(256, max(nr,nc));/* nnz := final number of nonzero entries, yet unknown;
+1381c1382
+< 	error(_("%s must be a logical or double vector"), "'x'");
+---
+> 	error(_("'%s' argument must be a logical or double vector"), "x");
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/Mutils.c Recommended/Matrix/src/Mutils.c
 3a4
 > #include "localization.h"
@@ -871,54 +897,59 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	return mkString(n_("Negative value in 'Dim' slot",
 > 				  "Negative values in 'Dim' slot",
-351c351
-< 	return mkString(_("Dimnames slot is not a list"));
+360c360
+< 	sprintf(buf, _("%s is not a list"), obj_name);
 ---
-> 	return mkString(_("'Dimnames' slot is not a list"));
-353c353
-< 	return mkString(_("Dimnames slot is a list, but not of length 2"));
+> 	sprintf(buf, _("'%s' is not a list"), obj_name);
+364c364
+< 	sprintf(buf, _("%s is a list, but not of length 2"), obj_name);
 ---
-> 	return mkString(_("'Dimnames' slot is a list, but not of length 2"));
-358c358
+> 	sprintf(buf, _("'%s' is a list, but not of length 2"), obj_name);
+370c370
 < 		sprintf(buf, _("Dimnames[%d] is not a character vector"), j+1);
 ---
 > 		sprintf(buf, _("'Dimnames[%d]' is not a character vector"), j+1);
-691c691
+721c721
 < 	    error(_("invalid class '%s' to dup_mMatrix_as_geMatrix"),
 ---
 > 	    error(_("invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"),
-820c820
+850c850
 < 	    error(_("unexpected ctype = %d in dup_mMatrix_as_geMatrix"), ctype);
 ---
 > 	    error(_("unexpected ctype = %d in 'dup_mMatrix_as_geMatrix' function"), ctype);
-846c846
+877c877
 < 		error(_("invalid class '%s' to dup_mMatrix_as_dgeMatrix"),
 ---
 > 		error(_("invalid class \"%s\" passed to 'dup_mMatrix_as_dgeMatrix()' function"),
-896c896
+927c927
 < 	error(_("Argument ij must be 2-column integer matrix"));
 ---
 > 	error(_("Argument 'ij' must be 2-column integer matrix"));
-961c961
+992c992
 < 	error(_("i and j must be integer vectors of the same length"));
 ---
 > 	error(_("'i' and 'j' arguments must be integer vectors of the same length"));
-1036c1036
+1067c1067
 < 	if (lendat > INT_MAX) error("data is too long");
 ---
 > 	if (lendat > INT_MAX) error(_("data is too long"));
-1039c1039
+1070c1070
 < 	if (lendat > (double) nc * INT_MAX) error("data is too long");
 ---
 > 	if (lendat > (double) nc * INT_MAX) error(_("data is too long"));
-1042c1042
+1073c1073
 < 	if (lendat > (double) nr * INT_MAX) error("data is too long");
 ---
 > 	if (lendat > (double) nr * INT_MAX) error(_("data is too long"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/Mutils.h Recommended/Matrix/src/Mutils.h
-15a16
+16,19c16
+< 
+< #define imax2(x, y) ((x < y) ? y : x)
+< #define imin2(x, y) ((x < y) ? x : y)
+< 
+---
 > #include "localization.h"
-29,36d29
+33,40d29
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
 < #define _(String) dgettext ("Matrix", String)
@@ -969,90 +1000,94 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	Rprintf("Note: as_cholmod_sparse(<ctype=%d>) - diagU2N\n", ctype);
 ---
 > 	Rprintf(_("Note: as_cholmod_sparse(<ctype=%d>) - diagU2N\n"), ctype);
-378c378
+385c385
 < 	error(_("unknown xtype in cholmod_sparse object"));
 ---
 > 	error(_("unknown 'xtype' in \"cholmod_sparse\" object"));
-412c412
+419c419
 < 	if (a->stype) error(_("Symmetric and triangular both set"));
 ---
 > 	if (a->stype) error(_("'symmetric' and 'triangular' both set"));
-488c488
+495c495
 <     if (ctype < 0) error(_("invalid class of object to as_cholmod_triplet"));
 ---
 >     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_triplet' function"));
-512,513c512
+519,520c519
 < 	    error(_("as_cholmod_triplet(): could not reallocate for internal diagU2N()"
 < 		      ));
 ---
 > 	    error(_("as_cholmod_triplet(): could not reallocate for internal 'diagU2N()' function"));
-610c609
+617c616
 < 	error(_("unknown xtype in cholmod_triplet object"));
 ---
 > 	error(_("unknown 'xtype' in \"cholmod_triplet\" object"));
-643c642
+650c649
 < 	if (a->stype) error(_("Symmetric and triangular both set"));
 ---
 > 	if (a->stype) error(_("'symmetric' and 'triangular' both set"));
-689c688
+696c695
 <     if (ctype < 0) error(_("invalid class of object to as_cholmod_dense")); \
 ---
 >     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_dense()' function")); \
-757c756
+764c763
 < 	error(_("chm_transpose_dense(ans, x) not yet implemented for %s different from %s"),
 ---
 > 	error(_("'chm_transpose_dense(ans, x)' not yet implemented for %s different from %s"),
-814c813
+821c820
 < 	error(_("Unable to initialize cholmod: error code %d"), res);
 ---
 > 	error(_("Unable to initialize 'cholmod' function: error code %d"), res);
-867c866
+874c873
 < 	error(_("unknown xtype"));
 ---
 > 	error(_("unknown 'xtype'"));
-922c921
+929c928
 < 	error(_("code for cholmod_dense with holes not yet written"));
 ---
 > 	error(_("code for 'cholmod_dense()' function with holes not yet written"));
-952c951
+959c958
 < 	error(_("unknown xtype"));				\
 ---
 > 	error(_("unknown 'xtype'"));				\
-975c974
+982c981
 < 	error(_("code for cholmod_dense with holes not yet written"));	\
 ---
 > 	error(_("code for 'cholmod_dense()' functionwith holes not yet written"));	\
-1036c1035
+1043c1042
 <     if (ctype < 0) error(_("invalid class of object to as_cholmod_factor"));
 ---
 >     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_factor' function"));
-1050c1049
+1057c1056
 < 	error(_("Supernodal LDL' decomposition not available"));
 ---
 > 	error(_("Supernodal LDL decomposition not available"));
-1052c1051
+1059c1058
 < 	error(_("Supernodal/simplicial class inconsistent with type flags"));
 ---
 > 	error(_("Supernodal/simplicial class inconsistent with 'type' flags"));
-1070c1069
+1077c1076
 < 	    error(_("Number of supernodes must be positive when is_super is TRUE"));
 ---
 > 	    error(_("Number of supernodes must be positive when 'is_super' argument is TRUE"));
-1073c1072
+1080c1079
 < 	    error(_("Lengths of super and pi must be equal"));
 ---
 > 	    error(_("Lengths of 'super' and 'pi' arguments must be equal"));
-1077c1076
+1084c1083
 < 	    error(_("Lengths of super and px must be equal"));
 ---
 > 	    error(_("Lengths of 'super' and 'px' arguments must be equal"));
-1090c1089
+1097c1096
 < 	error(_("failure in as_cholmod_factor"));
 ---
 > 	error(_("failure in 'as_cholmod_factor' function"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/cs.c Recommended/Matrix/src/cs.c
 1a2
 > #include "localization.h"
+512c513
+<     csi i, j, k, n, m, J, s, p, q, jleaf, *ATp, *ATi, *maxfirst, *prevleaf,
+---
+>     csi i, j, k, n, m, J, s, p, q, jleaf = 0, *ATp, *ATi, *maxfirst, *prevleaf,
 1900c1901
 <             warning("cs_usolve(U, x): U is not invertible (j=%d)", j);
 ---
@@ -1149,7 +1184,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 		error(_("Lapack routine dtrcon returned error code %d"), info);
 ---
 > 		error(_("Lapack routine 'dtrcon' returned error code %d"), info);
-287c281
+314c308
 < 	error(_("Lower band %d > upper band %d"), k1, k2);
 ---
 > 	error(_("Lower band %d is greater than upper band %d"), k1, k2);
@@ -1204,23 +1239,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    error(_("cs_lu(A) failed: near-singular A (or out of memory)"));
 ---
 > 	    error(_("cs_lu(A) failed: near-singular 'A' (or out of memory)"));
-547c548
+548c549
 < 	error(_("dgCMatrix_cholsol requires a 'short, wide' rectangular matrix"));
 ---
 > 	error(_("'dgCMatrix_cholsol' function requires a 'short, wide' rectangular matrix"));
-555c556
+556c557
 < 	error(_("cholmod_sdmult error (rhs)"));
 ---
 > 	error(_("'cholmod_sdmult' function error (rhs)"));
-558c559
+559c560
 < 	error(_("cholmod_factorize failed: status %d, minor %d from ncol %d"),
 ---
 > 	error(_("'cholmod_factorize' function failed: status %d, minor %d from ncol %d"),
-562c563
+563c564
 < 	error(_("cholmod_solve (CHOLMOD_A) failed: status %d, minor %d from ncol %d"),
 ---
 > 	error(_("'cholmod_solve' function (CHOLMOD_A) failed: status %d, minor %d from ncol %d"),
-579c580
+580c581
 < 	error(_("cholmod_sdmult error (resid)"));
 ---
 > 	error(_("'cholmod_sdmult' function error (resid)"));
@@ -1405,6 +1440,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	return mkString(_("length(q) must be zero or ncol(R)"));
 ---
 > 	return mkString(_("'length(q)' must be zero or 'ncol(R)'"));
+99c99
+< 	m = ydims[0], n = ydims[1], M = V->m, *d_a;			\
+---
+> 	m = ydims[0], n = ydims[1], M = V->m, *d_a = NULL;			\
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/t_Csparse_subassign.c Recommended/Matrix/src/t_Csparse_subassign.c
 68c68
 < #  error "no valid  _[dilnz]gC_ option"
@@ -1470,6 +1509,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #  error "invalid macro logic"
 ---
 > #  error _("invalid macro logic")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/t_matrix_to_Csp.c Recommended/Matrix/src/t_matrix_to_Csp.c
+85c85
+< 		    nnz = imax2(nnz+256, imax2(5*nnz/4, (nz * n) / ii));
+---
+> 		    nnz = max(nnz+256, max(5*nnz/4, (nz * n) / ii));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/src/t_sparseVector.c Recommended/Matrix/src/t_sparseVector.c
 48c48
 < #  error "no valid  _[dilnz]spV_ option"

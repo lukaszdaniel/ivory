@@ -289,7 +289,7 @@ e5cbc2946848be223376e91ba52f513c *DESCRIPTION
 3a3e7996c933c14ba264758f51cfba2e *po/R-fr.po
 bda630471cf4fdd1c025cd0c01a66b3f *po/R-ko.po
 636305d4662db6ac1064b246bd6a2907 *po/R-de.po
-2c46fd0d1a45cad26bf2b8e975f4cd68 *po/R-pl.po
+fe0f9a8c22c6f7851cdf446d46fb7edc *po/R-pl.po
 82dc3a153f7ce6799ffaaf35e72ffbbf *po/R-nlme.pot
 1fcd7b96077c28baca90e2c10eb36a37 *po/de.po
 6fe17acc79b162eb90848452f61f6b1b *po/fr.po
@@ -319,7 +319,7 @@ a30dfeec0d45b26ab50948aa015e849c *inst/po/en@quot/LC_MESSAGES/R-nlme.mo
 1a824e7c5aabe3771365ff866a6efe9a *inst/po/de/LC_MESSAGES/nlme.mo
 78b6094b17ddd38b2d5918812667cd0e *inst/po/de/LC_MESSAGES/R-nlme.mo
 96a06dc548b4e433ddb3f08d8c1c4162 *inst/po/pl/LC_MESSAGES/nlme.mo
-e460fb20ed418d57b9f244bba1e5cf84 *inst/po/pl/LC_MESSAGES/R-nlme.mo
+dd46d3f52fc63a696164eb23cb7bf932 *inst/po/pl/LC_MESSAGES/R-nlme.mo
 ba0dd5d00369b21b40a661864683998b *inst/po/ko/LC_MESSAGES/nlme.mo
 24b7a2ee5265d7f099ee30c1ef9992d4 *inst/po/ko/LC_MESSAGES/R-nlme.mo
 f0a206bb1886e769376cd5b0f306e364 *tests/deparse.R

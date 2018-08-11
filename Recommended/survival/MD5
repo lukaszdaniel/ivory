@@ -172,7 +172,7 @@ b75ba40c947031f3285135bf83218664 *noweb/rates/usdecennial.dat
 b6991f4124dcc3bef51e7340d91beb64 *inst/CITATION
 34516049e8d56f58b9e9a7ac4e0b4dff *inst/NEWS.Rd
 68655d1aba04bac98ca91a144c6bd1e3 *inst/po/en@quot/LC_MESSAGES/R-survival.mo
-1165078569d80989eb320b0775ae0846 *inst/po/pl/LC_MESSAGES/R-survival.mo
+b47ed87b2563b9b7b06ad918bd2c1ecd *inst/po/pl/LC_MESSAGES/R-survival.mo
 3e8ebae349953a3b7a665eecce562802 *inst/COPYRIGHTS
 e5e28360d2f5718b176951da04d5e24b *inst/doc/population.Rnw
 0e77de0fc20c9bac1479c06dcbb04286 *inst/doc/timedep.pdf
@@ -527,7 +527,7 @@ ba8f4bf4656d05f12e3e66649318f52d *data/bladder.rda
 7b14acde4513dba5ddf30bf676500a1d *data/logan.rda
 81cbcf099abf5f0cbea248e0012b483c *data/colon.rda
 b75bf4f19a344d7defddeed1a48cbc1c *data/stanford2.rda
-0614aea95915fc61b4aee9273a3fcd9a *Changes
+90a69cc2edacbd352afdbcac483968f0 *Changes
 3feb3dcdeecc7d4f1760c0692a0f83f8 *src/survdiff2.c
 2d65bb25cd9c6cc2dab433f4cd0f433f *src/coxfit6.c
 fc32e83bc93cdefa0426d16f33a75720 *src/chsolve5.c

@@ -144,14 +144,14 @@ c3ebcf3c3ee052794c3b0c7a4d5b84b5 *DESCRIPTION
 9056f07fd699736d11cd5e3c23efc446 *po/R-mgcv.pot
 91cd969cf1b7fde1ee7996ad7102edbd *po/R-ko.po
 e14174d4c798a30255370c2aee78223b *po/R-de.po
-42e76d3983ef1373397153f308aedacb *po/R-pl.po
+2af5f57a5e522ae6a7cccc04ae1a205b *po/R-pl.po
 e2920428f749367f7d84cebc30db25f5 *po/mgcv.pot
 4bb947c31234d5cda3b6f48290cb1d66 *po/de.po
 534114e6f5cfd396f53f08e2191fa8d0 *po/fr.po
 30e20876f011bd7675a506c98b887e6c *po/ko.po
 0bdfcf98961b0d52b60f806dc1dba77e *po/R-en@quot.po
 93f72334356fe6f05a64e567efd35c8e *po/en@quot.po
-b5b0544500b9d8cf1edbd47e7ec0fce6 *po/pl.po
+0b4b12e8564de57f3289eb4090b21443 *po/pl.po
 e70536903ca327ade1496529ab817b60 *inst/CITATION
 dd963ef33ebac1c9a1902a2b37f6ef29 *inst/po/fr/LC_MESSAGES/R-mgcv.mo
 aa2bb376697a2c6c58a8482f4277aee9 *inst/po/fr/LC_MESSAGES/mgcv.mo
@@ -159,7 +159,7 @@ aa2bb376697a2c6c58a8482f4277aee9 *inst/po/fr/LC_MESSAGES/mgcv.mo
 4ae59109cfb1ca894a29ef699e5d609f *inst/po/en@quot/LC_MESSAGES/mgcv.mo
 8c32c986cc8666240269b5d35086fa44 *inst/po/de/LC_MESSAGES/R-mgcv.mo
 0c4b8d4b3adf7f5af3f873d65f6f13fe *inst/po/de/LC_MESSAGES/mgcv.mo
-8df8eb86159526ed913e4c8ce2d98dc2 *inst/po/pl/LC_MESSAGES/mgcv.mo
+ef15591e2a178ea722e3e486c31d05e0 *inst/po/pl/LC_MESSAGES/mgcv.mo
 fa2508c443bdc759a734df0d00ed735e *tests/mgcv-parallel.R
 38e593a85a6fd0bb4fbed836f3361406 *tests/bam.R
 501f5e62e0f51516b8cf61b6aff5901b *tests/single.index.R
@@ -187,7 +187,7 @@ ca991f9b335c8b5ef9d8fb40f6785f84 *R/gamlss.r
 40874e3ced720a596750f499ded8a60a *data/columb.rda
 e468195a83fab90da8e760c2c3884bd3 *data/columb.polys.rda
 eb723b61539feef013de476e68b5c50a *GPL-2
-72715c92360d24ff5a53a21e03ba053c *Changes
+504a9c7ebb94981e2a1a8436830c2d79 *Changes
 a9c2b46094a4b8426e1dc629fcf4c206 *src/tprs.c
 2a049d4a776ae2d109fe6f61eaa44d96 *src/init.c
 84dcc6a896a45bdfdb892984a79b1170 *src/magic.c

@@ -50,59 +50,59 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/R/clara.q Recommended/cluster/R/clara.q
-9a10
+11a12
 >     dataname <- sQuote(deparse(substitute(x)))
-12c13
+14c15
 < 	stop("'x' is a \"dist\" object, but should be a data matrix or frame")
 ---
 > 	stop(gettextf("%s is a \"dist\" object, but should be a data matrix or frame", dataname))
-14c15
+16c17
 <     if(!is.numeric(x)) stop("x is not a numeric dataframe or matrix.")
 ---
 >     if(!is.numeric(x)) stop(gettextf("%s is not a numeric dataframe or matrix.", dataname))
-19,20c20
+21,22c22
 < 	stop(gettextf("'sampsize' should be at least %d = max(2, 1+ number of clusters)",
 <                       max(2,k+1)), domain=NA)
 ---
 > 	stop(gettextf("'sampsize' should be at least %d = max(2, 1+ number of clusters)", max(2,k+1)), domain = "R-cluster")
-22,23c22
+24,25c24
 < 	stop(gettextf("'sampsize' = %d should not be larger than the number of objects, %d",
 <                       sampsize, n), domain=NA)
 ---
 > 	stop(gettextf("'sampsize' = %d should not be larger than the number of objects, %d", sampsize, n), domain = "R-cluster")
-48,50c47
+51,53c50
 < 	    warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula.
 < Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly
 < to suppress this warning.")
 ---
 > 	    warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
-52c49
+55c52
 < 	    stop("invalid 'correct.d'")
 ---
 > 	    stop("invalid 'correct.d' value")
-101,104c98
+104,107c101
 < 		stop(sprintf(ngettext(nNA,
 < 			      "Observation %s has *only* NAs --> omit it for clustering",
 < 			      "Observations %s have *only* NAs --> omit them for clustering!"),
 < 			     pasteC(i)), domain = NA)
 ---
 > 	     stop(sprintf(ngettext(nNA, "Observation %s has *only* NAs --> omit it for clustering", "Observations %s have *only* NAs --> omit them for clustering!", domain = "R-cluster"), pasteC(i)), domain = NA)
-106,109c100
+109,112c103
 < 		stop(sprintf(ngettext(nNA,
 < 			      "%d observation (%s) has *only* NAs --> omit them for clustering!",
 < 			      "%d observations (%s ...) have *only* NAs --> omit them for clustering!"),
 < 			     nNA, pasteC(i[1:12])), domain = NA)
 ---
 > 	     stop(sprintf(ngettext(nNA, "%d observation (%s) has *only* NAs --> omit them for clustering!", "%d observations (%s ...) have *only* NAs --> omit them for clustering!", domain = "R-cluster"), nNA, pasteC(i[1:12])), domain = NA)
-116c107
+119c110
 < 	stop("invalid 'jstop' from .C(cl_clara,.): ", res$jstop)
 ---
 > 	stop(gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop))
-119c110
+122c113
 <     res$clu <- as.integer(res$clu[1:n])
 ---
 >     res$clu <- as.integer(res$clu[seq_len(n)])
-157,163c148,154
+160,166c151,157
 <     cat("Call:	", deparse(x$call),
 < 	"\nMedoids:\n");		print(x$medoids, ...)
 <     cat("Objective function:\t ", format(x$objective, ...),"\n",
@@ -118,7 +118,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("Cluster sizes:", domain = "R-cluster"), "	    \t", x$clusinfo[,1], "\n", sep = "")
 > 	cat(gettext("Best sample:", domain = "R-cluster"), "\n", sep = "");		print(x$sample, quote = FALSE, ...)
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-175,178c166,169
+178,181c169,172
 <     cat("Object of class 'clara' from call:\n", deparse(x$call),
 < 	"\nMedoids:\n");		print(x$medoids, ...)
 <     cat("Objective function:\t ", format(x$objective, ...),
@@ -128,27 +128,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	cat(gettext("Medoids:", domain = "R-cluster"), "\n", sep = "");		print(x$medoids, ...)
 >     cat(gettext("Objective function:", domain = "R-cluster"), "\t", format(x$objective, ...), "\n", sep = "")
 > 	cat(gettext("Numerical information per cluster:", domain = "R-cluster"), "\n", sep = "")
-181c172
+184c175
 < 	cat("Average silhouette width per cluster:\n")
 ---
 > 	cat(gettext("Average silhouette width per cluster:", domain = "R-cluster"), "\n", sep = "")
-183,184c174,175
+186,187c177,178
 < 	cat("Average silhouette width of best sample:",
 < 	    format(x$silinfo[[3]], ...), "\n")
 ---
 > 	cat(gettext("Average silhouette width of best sample: ", domain = "R-cluster"),
 > 	    format(x$silinfo[[3]], ...), "\n", sep = "")
-186,187c177,178
+189,190c180,181
 <     cat("\nBest sample:\n");		print(x$sample, quote = FALSE, ...)
 <     cat("Clustering vector:\n");	print(x$clustering, ...)
 ---
 >     cat("\n", gettext("Best sample:", domain = "R-cluster"), "\n");		print(x$sample, quote = FALSE, ...)
 >     cat(gettext("Clustering vector:", domain = "R-cluster"), "\n");	print(x$clustering, ...)
-189c180
+192c183
 < 	cat("\nSilhouette plot information for best sample:\n")
 ---
 > 	cat("\n", gettext("Silhouette plot information for best sample:", domain = "R-cluster"), "\n")
-195c186
+198c189
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
@@ -443,33 +443,33 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/R/pam.q Recommended/cluster/R/pam.q
-21c21
+22c22
 < 		    stop("'x' is not and cannot be converted to class \"dissimilarity\"")
 ---
 > 		    stop(gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"", "x"))
-45c45
+46c46
 < 	if(!is.numeric(x)) stop("x is not a numeric dataframe or matrix.")
 ---
 > 	if(!is.numeric(x)) stop(gettextf("'%s' argument is not a numeric dataframe or matrix.", "x"))
-72,74c72
+74,76c74
 < 	    stop(gettextf(
 < 		"'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d",
 < 		k, n))
 ---
 > 	    stop(gettextf("'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d", k, n))
-93c91
+95c93
 < 	stop("No clustering performed, NAs in the computed dissimilarity matrix.")
 ---
 > 	stop("No clustering performed, NA values in the computed dissimilarity matrix.")
-135c133
+137c135
 <     names(r.isol) <- 1:k
 ---
 >     names(r.isol) <- seq_len(k)
-149c147
+151c149
 < 		      clus.avg.widths = res$avsil[1:k],
 ---
 > 		      clus.avg.widths = res$avsil[seq_len(k)],
-164,166c162,164
+166,168c164,166
 <     cat("Medoids:\n");		print(cbind(ID = x$id.med, x$medoids), ...)
 <     cat("Clustering vector:\n");	print(x$clustering, ...)
 <     cat("Objective function:\n");	print(x$objective, ...)
@@ -477,33 +477,33 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("Medoids:", domain = "R-cluster"), "\n", sep = "");		print(cbind(ID = x$id.med, x$medoids), ...)
 >     cat(gettext("Clustering vector:", domain = "R-cluster"), "\n", sep = "");	print(x$clustering, ...)
 >     cat(gettext("Objective function:", domain = "R-cluster"), "\n", sep = "");	print(x$objective, ...)
-172c170
+174c172
 <     cat("\nAvailable components:\n")
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "")
-186,187c184,185
+188,189c186,187
 <     cat("\nNumerical information per cluster:\n"); print(x$clusinfo, ...)
 <     cat("\nIsolated clusters:\n L-clusters: ")
 ---
 >     cat("\n", gettext("Numerical information per cluster:", domain = "R-cluster"), "\n", sep = ""); print(x$clusinfo, ...)
 >     cat("\n", gettext("Isolated clusters:", domain = "R-cluster"), "\n ", gettext("L-clusters: ", domain = "R-cluster"), sep = "")
-189c187
+191c189
 <     cat(" L*-clusters: ")
 ---
 >     cat(gettext(" L*-clusters: ", domain = "R-cluster"))
-192c190
+194c192
 < 	cat("\nSilhouette plot information:\n")
 ---
 > 	cat("\n", gettext("Silhouette plot information:", domain = "R-cluster"), "\n", sep = "")
-194c192
+196c194
 < 	cat("Average silhouette width per cluster:\n")
 ---
 > 	cat(gettext("Average silhouette width per cluster:", domain = "R-cluster"), "\n", sep = "")
-196c194
+198c196
 < 	cat("Average silhouette width of total data set:\n")
 ---
 > 	cat(gettext("Average silhouette width of total data set:", domain = "R-cluster"), "\n", sep = "")
-202c200
+204c202
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
@@ -716,6 +716,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <            main=NULL, sub=NULL, xlab = "Height",  adj = 0,
 ---
 >            main=NULL, sub=NULL, xlab = gettext("Height", domain = "R-cluster"),  adj = 0,
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/man/pam.Rd Recommended/cluster/man/pam.Rd
+152c152
+<   475--504 (\url{http://dx.doi.org/10.1007/s10852-005-9022-1}).
+---
+>   475--504 (\url{https://doi.org/10.1007/s10852-005-9022-1}).
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/man/pltree.Rd Recommended/cluster/man/pltree.Rd
 13,14c13,14
 < \method{pltree}{twins}(x, main = paste("Dendrogram of ", deparse(x$call)),
