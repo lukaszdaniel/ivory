@@ -275,7 +275,7 @@ if(FALSE) {
     ## 'pkg' is the absolute path to package sources.
     do_install <- function(pkg)
     {
-        if (WINDOWS && grepl("\\.zip$", pkg)) {
+        if (WINDOWS && endsWith(pkg, ".zip")) {
             pkg_name <- basename(pkg)
             pkg_name <- sub("\\.zip$", "", pkg_name)
             pkg_name <- sub("_[0-9.-]+$", "", pkg_name)
@@ -1419,7 +1419,7 @@ if(FALSE) {
             dsym <- TRUE
         } else if (substr(a, 1, 18) == "--built-timestamp=") {
             built_stamp <- substr(a, 19, 1000)
-        } else if (substr(a, 1, 1) == "-") {
+        } else if (startsWith(a, "-")) {
             message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-tools")
         } else pkgs <- c(pkgs, a)
         args <- args[-1L]
@@ -1508,7 +1508,7 @@ if(FALSE) {
     for(pkg in pkgs) {
         if (debug) message(gettextf("processing package %s", sQuote(pkg)), domain = "R-tools")
         if (file_test("-f", pkg)) {
-            if (WINDOWS && grepl("\\.zip$", pkg)) {
+            if (WINDOWS && endsWith(pkg, ".zip")) {
                 if (debug) message("a zip file", domain = "R-tools")
                 pkgname <- basename(pkg)
                 pkgname <- sub("\\.zip$", "", pkgname)
@@ -2058,7 +2058,7 @@ if(FALSE) {
 
     firstLetterCategory <- function(x)
     {
-        x[grep("-package$", x)] <- " "
+        x[endsWith(x, "-package")] <- " "
         x <- toupper(substr(x, 1, 1))
         x[x > "Z"] <- "misc"
         x[x < "A" & x != " "] <- "misc"

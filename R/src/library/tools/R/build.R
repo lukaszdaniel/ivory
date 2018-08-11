@@ -873,7 +873,7 @@ inRbuildignore <- function(files, pkgdir) {
             with_md5 <- TRUE
         } else if (a == "--log") {
             with_log <- TRUE
-        } else if (substr(a, 1, 1) == "-") {
+        } else if (startsWith(a, "-")) {
             message(gettextf("Warning: unknown option %s", sQuote(a)))
         } else pkgs <- c(pkgs, a)
         args <- args[-1L]

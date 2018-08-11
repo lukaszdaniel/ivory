@@ -1458,7 +1458,7 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
 
 print.data.frame <-
     function(x, ..., digits = NULL, quote = FALSE, right = TRUE,
-	     row.names = TRUE)
+	     row.names = TRUE, max = NULL)
 {
     n <- length(row.names(x))
     if(length(x) == 0L) {
@@ -1470,12 +1470,20 @@ print.data.frame <-
 	print.default(names(x), quote = FALSE)
 	cat(gettext("<0 rows> (or 0-length row.names)", domain = "R-base"), "\n", sep = "")
     } else {
+	if(is.null(max)) max <- getOption("max.print", 99999L)
+        if(!is.finite(max)) stop(gettextf("invalid 'max' / getOption(\"max.print\"): %s", max))
 	## format.<*>() : avoiding picking up e.g. format.AsIs
-	m <- as.matrix(format.data.frame(x, digits = digits, na.encode = FALSE))
+	omit <- (n0 <- max %/% length(x)) < n
+	m <- as.matrix(
+	    format.data.frame(if(omit) x[seq_len(n0), , drop=FALSE] else x,
+			      digits = digits, na.encode = FALSE))
 	if(!isTRUE(row.names))
 	    dimnames(m)[[1L]] <-
-		if(isFALSE(row.names)) rep.int("", n) else row.names
-	print(m, ..., quote = quote, right = right)
+		if(isFALSE(row.names)) rep.int("", if(omit) n0 else n)
+		else row.names
+	print(m, ..., quote = quote, right = right, max = max)
+	if(omit)
+	    cat(sprintf(ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n", " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base"), n - n0))
     }
     invisible(x)
 }
@@ -1621,7 +1629,7 @@ Ops.data.frame <- function(e1, e2 = NULL)
 	}
     }
     for(j in seq_along(cn)) {
-	left <- if(!lscalar) e1[[j]] else e1
+	left  <- if(!lscalar) e1[[j]] else e1
 	right <- if(!rscalar) e2[[j]] else e2
 	value[[j]] <- eval(f)
     }

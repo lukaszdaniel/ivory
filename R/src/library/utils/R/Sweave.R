@@ -482,7 +482,7 @@ SweaveHooks <- function(options, run = FALSE, envir = .GlobalEnv)
             compact <- substr(a, 11, 1000)
         } else if (a == "--compact") {
             compact <- "qpdf"
-        } else if (substr(a, 1, 1) == "-") {
+        } else if (startsWith(a, "-")) {
             message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-utils")
         } else file <- c(file, a)
        args <- args[-1L]
@@ -586,7 +586,7 @@ SweaveHooks <- function(options, run = FALSE, envir = .GlobalEnv)
             encoding <- substr(a, 12, 1000)
         } else if (substr(a, 1, 10) == "--options=") {
             options <- substr(a, 11, 1000)
-        } else if (substr(a, 1, 1) == "-") {
+        } else if (startsWith(a, "-")) {
             message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-utils")
         } else file <- c(file, a)
         args <- args[-1L]

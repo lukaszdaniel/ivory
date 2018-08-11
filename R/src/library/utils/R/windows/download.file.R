@@ -34,7 +34,7 @@ download.file <-
         if(length(url) != 1L || typeof(url) != "character")
             stop(gettextf("'%s' argument must be a length-one character vector", "url"));
 	method <-
-            if(grepl("^ftps:", url) && capabilities("libcurl")) "libcurl"
+            if(startsWith(url, "ftps:") && capabilities("libcurl")) "libcurl"
             else "wininet"
     }
 

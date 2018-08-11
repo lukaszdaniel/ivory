@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-23 r1053) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-23 r75000) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3709,7 +3709,7 @@ data: c(800, 10)
 number of successes = 800, number of trials = 810, p-value < 2.2e-16
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
- 0.9774134 0.9940643
+ 0.9774134 0.9940643  
 sample estimates:
 probability of success 
              0.9876543 
@@ -6348,7 +6348,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x10a4390>
+<bytecode: 0x1f6f980>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6359,7 +6359,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x10a4390>
+<bytecode: 0x1f6f980>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6371,7 +6371,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x10a4390>
+<bytecode: 0x1f6f980>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6724,7 +6724,7 @@ data: Nitrous
 S = 57, p-value = 0.1959
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
- 0.000000 1.388197
+ 0.000000 1.388197  
 sample estimates:
 common odds ratio 
         0.6652418 
@@ -6737,7 +6737,7 @@ data: Nitrous
 Mantel-Haenszel X-squared = 0.71432, df = 1, p-value = 0.199
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
- 0.000000 1.260053
+ 0.000000 1.260053  
 sample estimates:
 common odds ratio 
         0.6645374 
@@ -7994,4 +7994,20 @@ Error in command 'try(stopifnot(exprs = 1 > 2))': variable 1 > 2 is not TRUE
 Error:  variable 0 == 1 is not TRUE 
 > ## was partly not ok for many weeks in R-devel, early 2018
 > 
+> 
+> ## print.htest() with small 'digits'
+> print(t.test(1:28), digits = 3)
+
+	One Sample t-test
+
+data: 1:28
+t = 9, df = 27, p-value = 6e-10
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 11.3 17.7  
+sample estimates:
+mean of x 
+     14.5 
+
+> ## showed 'df = 30' from signif(*, digits=1) and too many digits for CI, in R <= 3.5.1
 > 

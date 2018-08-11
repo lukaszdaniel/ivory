@@ -1925,11 +1925,60 @@ stopifnot(identical(confint(mlm0),
 ## failed inside vcov.mlm() because summary.lm()$cov.unscaled was NULL
 
 
-## kruskal.test(<non-numeric g>>), PR#16719
+## kruskal.test(<non-numeric g>), PR#16719
 data(mtcars)
 mtcars$type <- rep(letters[1:2], c(16, 16))
 kruskal.test(mpg ~ type, mtcars)
 ## gave 'Error: all group levels must be finite'
+
+
+## Multivariate lm() with matrix offset, PR#17407
+ss <- list(s1 = summary(fm1 <- lm(cbind(mpg,qsec) ~ 1, data=mtcars, offset=cbind(wt,wt*2))),
+           s2 = summary(fm2 <- lm(cbind(mpg,qsec) ~ offset(cbind(wt,wt*2)), data=mtcars)))
+## drop "call" and "terms" parts which differ; rest must match:
+ss[] <- lapply(ss, function(s) lapply(s, function(R) R[setdiff(names(R), c("call","terms"))]))
+stopifnot(all.equal(ss[["s1"]], ss[["s2"]], tolerance = 1e-15))
+## lm() calls gave error 'number of offsets is 64, should equal 32 ...' in R <= 3.5.1
+
+
+## print.data.frame(<non-small>)
+USJ   <- USJudgeRatings
+USJe6 <- USJudgeRatings[rep_len(seq_len(nrow(USJ)), 1e6),]
+op <- options(max.print=500)
+t1 <- max(0.001, system.time(r1 <- print(USJ))[[1]]) # baseline > 0
+t2 <- system.time(r2 <- print(USJe6))[[1]]
+      system.time(r3 <- print(USJe6, row.names=FALSE))
+out <- capture.output(print(USJe6, max = 600)) # max > getOption("max.print")
+stopifnot(exprs = {
+    identical(r1, USJ  )# print() must return its arg
+    identical(r2, USJe6)
+    identical(r3, USJe6)
+    print(t2 / t1) < 9 # now typically in [1,2]
+    length(out) == 52
+    grepl("CALLAHAN", out[51], fixed=TRUE)
+    identical(2L, grep("omitted", out[51:52], fixed=TRUE))
+})
+options(op); rm(USJe6)# reset
+## had t2/t1 > 4000 in R <= 3.5.1, because the whole data frame was formatted.
+
+
+## hist.default() in rare cases
+hh <- hist(seq(1e6, 2e6, by=20), plot=FALSE)
+hd <- hh$density*1e6
+stopifnot(0.999 <= hd, hd <= 1.001)
+## in R <= 3.5.1: warning 'In n * h : NAs produced by integer overflow' and then NA's
+
+
+## some things boken by sort.int optimization for sorted integer vectors
+sort.int(integer(0))  ## would segfault with barrier testing
+stopifnot(identical(sort.int(NA_integer_), integer(0)))
+
+
+## attribute handling in the fastpass was not quite right
+x <- sort.int(c(1,2))
+dim(x) <- 2
+dimnames(x) <- list(c("a", "b"))
+stopifnot(! is.null(names(sort.int(x))))
 
 
 ## keep at end

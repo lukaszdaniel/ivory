@@ -109,7 +109,7 @@
       environment variable \env{R_DONT_USE_TK} which if set disables Tk
       initialization.  This is intended for use to circumvent errors in
       loading the package, e.g.\sspace{}with recent Linux running under
-      ASAN.
+      an address sanitizer.
 
       \item The \code{numeric} method of \code{all.equal()} gets an
       optional argument \code{countEQ}.  If that is true, the mean error
@@ -124,6 +124,26 @@
       \item The default method of \code{summary()} gets an option to
       choose the \emph{kind} of \code{quantile()}s to use; wish of
       \PR{17438}.
+
+      \item Multivariate linear models, \code{lm()} now do work with
+      \emph{matrix} offsets, as suggested in \PR{17407}.
+
+      \item The a new functions \code{mem.maxVSize()} and
+      \code{mem.maxMSize()} allow the maximal size of the vector heap
+      and the maximal number of nodes allowed in the current \command{R}
+      process to be queried and set.
+
+      \item \code{news()} gains support for \file{NEWS.md} files.
+
+      \item An effort has been started to have our reference manuals,
+      i.e., all help pages show platform independent information (rather
+      than Windows or unix-alike specifics visible only on that platform).
+
+      \item \code{sessionInfo()$running} has been factored out in a new
+      variable \code{osVersion}. % precomputed at utils namespace load time
+
+      \item \code{slice.index()} now also works for multi-dimensional
+      margins.
     }
   }
 
@@ -131,6 +151,21 @@
     \itemize{
       \item The C++ compiler defaults to the C++11 standard if
       supported, otherwise to the C++98 standard.
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} now optionally checks makefiles for
+      correct and portable use of the \samp{SHLIB_OPENMP_*FLAGS} macros.
+    }
+  }
+
+  \subsection{TESTING}{
+    \itemize{
+      \item The random number generator tests in
+      \file{tests/p-r-random-tests.R} no longer fail occasionally as
+      they now randomly sample from \dQuote{certified} random seeds.
     }
   }
 
@@ -219,11 +254,17 @@
 
       \item \code{plot(<table>, log="x")} no longer warns about \code{log}.
 
-      \item Printing of \code{t.test()} results with a small number of
-      digits now shows non-large \code{df}'s to the full precision.
+      \item The \code{print()} method for \code{"htest"} objects now
+      formats the test statistic and parameter directly and hence no
+      longer rounds to units \emph{before} the decimal point.  Consequently,
+      printing of \code{t.test()} results with a small number of digits
+      now shows non-large \code{df}'s to the full precision (\PR{17444}).
 
       \item \code{kruskal.test()} and \code{fligner.test()} no longer
       erroneously insists on numeric \code{g} group arguments (\PR{16719}).
+
+      \item Printing a news db via the browser now does a much better
+      job (\PR{17433}).
     }
   }
 }
@@ -241,6 +282,21 @@
 
       \item \code{confint(<multivariate lm()>)} now works correctly;
       reported on R-devel by Steven Pav.
+
+      \item \code{quade.test()} now also works correctly when its
+      arguments are not yet sorted along \code{groups}, fixing \PR{15842}.
+
+      \item Installation on a Unix-alike tries harder to link to the
+      \samp{pthread} library where required (rather than relying on
+      OpenMP to provide it: configuring with \option{--disable-openmp}
+      was failing on some Linux systems).
+
+      \item The \code{data.frame} method for \code{print(x)} is fast now
+      also for large data frames \code{x} and got an optional argument
+      \code{max}, thanks to suggestions by Juan Telleria.
+
+      \item \code{hist()} no longer integer overflows in very rare
+      cases, fixing \PR{17450}.
     }
   }
 }

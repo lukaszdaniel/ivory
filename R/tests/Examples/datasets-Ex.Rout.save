@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-07-23 r1053) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-07-23 r75000) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2909,7 +2909,7 @@ data: extra[group == 1] and extra[group == 2]
 t = -4.0621, df = 9, p-value = 0.002833
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -2.4598858 -0.7001142
+ -2.4598858 -0.7001142  
 sample estimates:
 mean of the differences 
                   -1.58 
@@ -3262,7 +3262,7 @@ F-statistic: 19.76 on 5 and 41 DF,  p-value: 5.594e-10
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: trees
-> ### Title: Girth, Height and Volume for Black Cherry Trees
+> ### Title: Diameter, Height and Volume for Black Cherry Trees
 > ### Aliases: trees
 > ### Keywords: datasets
 > 
@@ -3518,7 +3518,7 @@ c0   -5.14
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.581 0.08 1.662 0 0 
+Time elapsed:  1.924 0.048 1.973 0 0 
 > grDevices::dev.off()
 null device 
           1 

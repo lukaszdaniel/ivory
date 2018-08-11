@@ -43,21 +43,22 @@ lm <- function (formula, data, subset, weights, na.action,
     w <- as.vector(model.weights(mf))
     if(!is.null(w) && !is.numeric(w))
         stop(gettextf("'%s' argument must be a numeric vector", "weights"))
-    offset <- as.vector(model.offset(mf))
+    offset <- model.offset(mf)
+    mlm <- is.matrix(y)
+    ny <- if(mlm) nrow(y) else length(y)
     if(!is.null(offset)) {
-        if(length(offset) != NROW(y))
-	    stop(gettextf("number of offsets (%d) should be equal to number of observations (%d)", length(offset), NROW(y)), domain = "R-stats")
+        if(!mlm) offset <- as.vector(offset)
+        if(NROW(offset) != ny)
+            stop(gettextf("number of offsets (%d) should be equal to the number of observations (%d)", NROW(offset), ny), domain = "R-stats")
     }
 
     if (is.empty.model(mt)) {
 	x <- NULL
-	z <- list(coefficients = if(is.matrix(y)) matrix(NA_real_, 0, ncol(y))
+	z <- list(coefficients = if(mlm) matrix(NA_real_, 0, ncol(y))
 				 else numeric(),
 		  residuals = y,
 		  fitted.values = 0 * y, weights = w, rank = 0L,
-		  df.residual = if(!is.null(w)) sum(w != 0)
-				else if(is.matrix(y)) nrow(y)
-				else length(y))
+		  df.residual = if(!is.null(w)) sum(w != 0) else ny)
         if(!is.null(offset)) {
             z$fitted.values <- offset
             z$residuals <- y - offset
@@ -69,7 +70,7 @@ lm <- function (formula, data, subset, weights, na.action,
                                    singular.ok=singular.ok, ...)
 	else lm.wfit(x, y, w, offset = offset, singular.ok=singular.ok, ...)
     }
-    class(z) <- c(if(is.matrix(y)) "mlm", "lm")
+    class(z) <- c(if(mlm) "mlm", "lm")
     z$na.action <- attr(mf, "na.action")
     z$offset <- offset
     z$contrasts <- attr(x, "contrasts")

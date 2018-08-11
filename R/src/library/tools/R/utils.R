@@ -532,8 +532,9 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
 
 ### ** filtergrep
 
-filtergrep <- function(pattern, x, ...) grep(pattern, x, invert = TRUE, value = TRUE, ...)
-
+filtergrep <-
+function(pattern, x, ...)
+    grep(pattern, x, invert = TRUE, value = TRUE, ...)
 
 ### ** %notin%
 
@@ -706,7 +707,7 @@ function(file1, file2)
 .file_path_relative_to_dir <-
 function(x, dir, add = FALSE)
 {
-    if(any(ind <- (substring(x, 1L, nchar(dir)) == dir))) {
+    if(any(ind <- startsWith(x, dir))) {
         ## Assume .Platform$file.sep is a single character.
         x[ind] <- if(add)
             file.path(basename(dir), substring(x[ind], nchar(dir) + 2L))
@@ -884,14 +885,15 @@ function(nsInfo)
     ## Get the registered S3 methods for an 'nsInfo' object returned by
     ## parseNamespaceFile(), as a 3-column character matrix with the
     ## names of the generic, class and method (as a function).
-    S3_methods_list <- nsInfo$S3methods
-    if(!length(S3_methods_list)) return(matrix(character(), ncol = 3L))
-    idx <- is.na(S3_methods_list[, 3L])
-    S3_methods_list[idx, 3L] <-
-        paste(S3_methods_list[idx, 1L],
-              S3_methods_list[idx, 2L],
+    S3_methods_db <- nsInfo$S3methods
+    if(!length(S3_methods_db))
+        return(matrix(character(), ncol = 3L))
+    idx <- is.na(S3_methods_db[, 3L])
+    S3_methods_db[idx, 3L] <-
+        paste(S3_methods_db[idx, 1L],
+              S3_methods_db[idx, 2L],
               sep = ".")
-    S3_methods_list
+    S3_methods_db
 }
 
 ### ** .get_namespace_S3_methods_with_homes
@@ -1050,15 +1052,21 @@ function(dir, installed = TRUE, primitive = FALSE)
     ## some BioC packages warn here
     suppressWarnings(
     unique(c(.get_internal_S3_generics(primitive),
-             unlist(lapply(env_list,
-                           function(env) {
-                               nms <- sort(names(env))
-                               if(".no_S3_generics" %in% nms)
-                                   character()
-                               else Filter(function(f)
-                                           .is_S3_generic(f, envir = env),
-                                           nms)
-                           })))))
+             unlist(lapply(env_list, .get_S3_generics_in_env))))
+    )
+}
+
+### ** .get_S3_generics_in_env
+
+.get_S3_generics_in_env <-
+function(env, nms = NULL)
+{
+    if(is.null(nms))
+        nms <- sort(names(env))
+    if(".no_S3_generics" %in% nms)
+        character()
+    else
+        Filter(function(f) .is_S3_generic(f, envir = env), nms)
 }
 
 ### ** .get_S3_group_generics
@@ -1343,8 +1351,9 @@ function(x)
 {
     ## Determine whether the strings in a character vector are ASCII or
     ## not.
-    vapply(as.character(x), function(txt)
-           all(charToRaw(txt) <= as.raw(127)), NA)
+    vapply(as.character(x),
+           function(txt) all(charToRaw(txt) <= as.raw(127)),
+           NA)
 }
 
 ### ** .is_ISO_8859
@@ -1356,10 +1365,12 @@ function(x)
     ## some ISO 8859 character set or not.
     raw_ub <- as.raw(0x7f)
     raw_lb <- as.raw(0xa0)
-    vapply(as.character(x), function(txt) {
-        raw <- charToRaw(txt)
-        all(raw <= raw_ub | raw >= raw_lb)
-    }, NA)
+    vapply(as.character(x),
+           function(txt) {
+               raw <- charToRaw(txt)
+               all(raw <= raw_ub | raw >= raw_lb)
+           },
+           NA)
 }
 
 ### ** .is_primitive_in_base
@@ -2050,31 +2061,6 @@ function(x)
     } else list(name = x1)
 }
 
-## <FIXME>
-## We now have base::trimws(), so this is no longer needed.
-## Remove eventually.
-
-### ** .strip_whitespace
-
-## <NOTE>
-## Other languages have this as strtrim() (or variants for left or right
-## trimming only), but R has a different strtrim().
-## So perhaps strstrip()?
-## Could more generally do
-##   strstrip(x, pattern, which = c("both", "left", "right"))
-## </NOTE>
-
-.strip_whitespace <-
-function(x)
-{
-    ## Strip leading and trailing whitespace.
-    x <- sub("^[[:space:]]+", "", x)
-    x <- sub("[[:space:]]+$", "", x)
-    x
-}
-
-## </FIXME>
-
 ### ** .system_with_capture
 
 .system_with_capture <-
@@ -2171,7 +2157,8 @@ function(args, msg)
 
 ### ** Rcmd
 
-Rcmd <- function(args, ...)
+Rcmd <-
+function(args, ...)
 {
     if(.Platform$OS.type == "windows")
         system2(file.path(R.home("bin"), "Rcmd.exe"), args, ...)
@@ -2181,12 +2168,14 @@ Rcmd <- function(args, ...)
 
 ### ** pskill
 
-pskill <- function(pid, signal = SIGTERM)
+pskill <-
+function(pid, signal = SIGTERM)
     invisible(.Call(C_ps_kill, pid, signal))
 
 ### ** psnice
 
-psnice <- function(pid = Sys.getpid(), value = NA_integer_)
+psnice <-
+function(pid = Sys.getpid(), value = NA_integer_)
 {
     res <- .Call(C_ps_priority, pid, value)
     if(is.na(value)) res else invisible(res)
@@ -2196,7 +2185,8 @@ psnice <- function(pid = Sys.getpid(), value = NA_integer_)
 
 ## original version based on http://daringfireball.net/2008/05/title_case
 ## but much altered before release.
-toTitleCase <- function(text)
+toTitleCase <-
+function(text)
 {
     ## leave these alone: the internal caps rule would do that
     ## in some cases.  We could insist on this exact capitalization.
@@ -2250,7 +2240,8 @@ toTitleCase <- function(text)
 ### ** path_and_libPath
 
 ##' Typically the union of R_LIBS and current .libPaths(); may differ e.g. via R_PROFILE
-path_and_libPath <- function(...)
+path_and_libPath <-
+function(...)
 {
     lP <- .libPaths()
     ## don't call normalizePath on paths which do not exist: allowed in R_LIBS!
@@ -2262,7 +2253,9 @@ path_and_libPath <- function(...)
 ### ** str_parse_logic
 
 ##' @param otherwise: can be call, such as quote(errmesg(...))
-str_parse_logic <- function(ch, default = TRUE, otherwise = default, n = 1L) {
+str_parse_logic <-
+function(ch, default = TRUE, otherwise = default, n = 1L)
+{
     if (is.na(ch)) default
     else switch(ch,
                 "yes"=, "Yes" =, "true" =, "True" =, "TRUE" = TRUE,
@@ -2272,7 +2265,9 @@ str_parse_logic <- function(ch, default = TRUE, otherwise = default, n = 1L) {
 
 ### ** str_parse
 
-str_parse <- function(ch, default = TRUE, logical = TRUE, otherwise = default, n = 2L) {
+str_parse <-
+function(ch, default = TRUE, logical = TRUE, otherwise = default, n = 2L)
+{
     if(logical)
         str_parse_logic(ch, default=default, otherwise=otherwise, n = n)
     else if(is.na(ch))
