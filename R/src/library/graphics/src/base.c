@@ -389,7 +389,7 @@ GPar* dpptr(pGEDevDesc dd) {
 }
 
 /* called in GNewPlot to mark device as 'dirty' */
-void Rf_setBaseDevice(Rboolean val, pGEDevDesc dd) {
+void setBaseDevice(Rboolean val, pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
     baseSystemState *bss = dd->gesd[baseRegisterIndex]->systemSpecific;

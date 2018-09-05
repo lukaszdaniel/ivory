@@ -1849,7 +1849,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
 	 * This is used when checking whether the device is
 	 * "valid" with respect to base graphics
 	 */
-	Rf_setBaseDevice(TRUE, dd);
+	setBaseDevice(TRUE, dd);
 	GEdirtyDevice(dd);
     }
 

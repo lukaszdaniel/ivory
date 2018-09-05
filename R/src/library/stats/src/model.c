@@ -1324,7 +1324,7 @@ static SEXP TrimRepeats(SEXP list)
 }
 
 
-
+
 /*==========================================================================*/
 
 /* Model Formula Manipulation */

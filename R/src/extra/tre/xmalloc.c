@@ -16,6 +16,7 @@
 #include <config.h>
 #endif /* HAVE_CONFIG_H */
 
+#include <Localization.h>
 #include <stdlib.h>
 //#include <assert.h>
 #include <stdio.h>
@@ -29,10 +30,10 @@ extern void Rf_error(const char *str);
 static void assert(int expr)
 {
     if(expr == 0)
-	Rf_error("internal allocation error in TRE");
+	Rf_error(_("internal allocation error in TRE"));
 }
 
-
+
 /*
   Internal stuff.
 */

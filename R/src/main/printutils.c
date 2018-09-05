@@ -313,7 +313,7 @@ const char *EncodeReal2(double x, int w, int d, int e)
     return buff;
 }
 
-void z_prec_r(Rcomplex *r, Rcomplex *x, double digits);
+void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
 
 #define NB3 NB+3
 const char

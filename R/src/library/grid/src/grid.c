@@ -3579,7 +3579,7 @@ SEXP L_pretty(SEXP scale) {
     /* FIXME:  "log" flag hard-coded to FALSE because we do not
      * have log scales yet
      */
-    return Rf_CreateAtVector(axp, usr, n, FALSE);
+    return CreateAtVector(axp, usr, n, FALSE);
 }
 
 /* 

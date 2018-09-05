@@ -1645,7 +1645,7 @@ SEXP attribute_hidden do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	tmp = csorted(xd, n);
 	break;
     default :
-        Error("First argument is type '%s', not yet supported",
+        Error(_("First argument is type '%s', not yet supported"),
               type2char(TYPEOF(x)));
     }
     if (tmp) {

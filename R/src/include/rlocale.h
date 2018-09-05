@@ -44,11 +44,11 @@
  * it is an unsigned int instead.
  */
  
-#ifdef Win32
+#ifdef _WIN32
 typedef unsigned int Rwchar_t;
 #else
 typedef wchar_t Rwchar_t;
-#endif 
+#endif
 
 /*
  * Windows CJK
@@ -78,7 +78,7 @@ typedef wchar_t Rwchar_t;
  * Unicode 'East Asian Ambiguous' class.
  *
  */
- 
+
 extern int Ri18n_wcwidth(Rwchar_t);
 extern int Ri18n_wcswidth (const wchar_t *, size_t);
 
