@@ -1033,6 +1033,9 @@ visible (and if it is, it need not be the one from that namespace:
 give an error if the suggested package is not available, simply use
 e.g.@: @code{rgl::plot3d}.
 
+If the conditional code produces @code{print} output, function
+@code{withAutoprint} can be useful.
+
 Note that the recommendation to use suggested packages conditionally in
 tests does also apply to packages used to manage test suites: a
 notorious example was @CRANpkg{testthat} which in version 1.0.0 contained
@@ -3768,6 +3771,21 @@ S3method(print, check_so_symbols, .print.via.format)
 @noindent
 when @code{print.check_so_symbols} is not needed.
 
+As of @R{} version 3.6.0, one can also use @code{S3method()} directives
+to perform @emph{delayed} registration.  With
+@example
+if(getRversion() >= "3.6.0") @{
+    S3method(pkg::gen, cls)
+@}
+@end example
+@noindent
+function @code{gen.cls} will get registered as an S3 method for class
+@code{cls} and generic @code{gen} from package @code{pkg} only when the
+namespace of @code{pkg} is loaded.  This can be employed to deal with
+situations where the method is not ``immediately'' needed, and having to
+pre-load the namespace of @code{pkg} (and all its strong dependencies)
+in order to perform immediate registration is considered too ``costly''.
+
 @node Load hooks, useDynLib, Registering S3 methods, Package namespaces
 @subsection Load hooks
 
@@ -4618,9 +4636,10 @@ if(substr(jv, 1L, 2L) == "1.") @{
 @noindent
 Java 9 changed the format of this string (which used to be something
 like @samp{1.8.0_162-b12}); Java 10 gives @code{jv} as @samp{10+46}:
-whereas Java 10.0.1 gives
-@samp{10.0.1+10}. (@uref{http://openjdk.java.net/jeps/322} details the
-current scheme.)
+whereas Java 10.0.2 gives
+@samp{10.0.2+10}. (@uref{http://openjdk.java.net/jeps/322} details the
+current scheme.  Note that it is necessary to allow for pre-releases
+like @samp{11-ea+22}.)
 
 Note too that the compiler used to produce a @code{jar} can impose a minimum
 Java version, often resulting in an arcane message like
@@ -4741,6 +4760,12 @@ if(interactive()) View(obj) else str(obj)
 @end example
 
 @item
+Be careful when comparing file paths.  There can be multiple paths to a
+single file, and some of these can be very long character strings.  If
+possible canonicalize paths before comparisons, but study
+@code{?normalizePath} to be aware of the pitfalls.
+
+@item
 Only test the accuracy of results if you have done a formal error
 analysis.  Things such as checking that probabilities numerically sum to
 one are silly: numerical tests should always have a tolerance.  That the
@@ -4783,16 +4808,18 @@ viewer and take many minutes to print (if they can be printed at all).
 @command{qpdf} (@uref{http://qpdf.sourceforge.net/}) can compress
 losslessly.  It is fairly readily available (e.g.@: it has binaries for
 Windows and packages in Debian/Ubuntu/Fedora, and is installed as part
-of the @acronym{CRAN} macOS distribution of @R{}).  @command{R CMD build}
-has an option to run @command{qpdf} over PDF files under @file{inst/doc}
-and replace them if at least 10Kb and 10% is saved.  The full path to
-the @command{qpdf} command can be supplied as environment variable
-@env{R_QPDF} (and is on the @acronym{CRAN} binary of @R{} for macOS).  It seems
-MiKTeX does not use PDF object compression and so @command{qpdf} can
-reduce considerably the files it outputs: MiKTeX can be overridden by
-code in the preamble of an Sweave or @LaTeX{} file --- see how this is
-done for the @R{} reference manual at
+of the @acronym{CRAN} macOS distribution of @R{}).  @command{R CMD
+build} has an option to run @command{qpdf} over PDF files under
+@file{inst/doc} and replace them if at least 10Kb and 10% is saved.  The
+full path to the @command{qpdf} command can be supplied as environment
+variable @env{R_QPDF} (and is on the @acronym{CRAN} binary of @R{} for
+macOS).  It seems MiKTeX does not use PDF object compression and so
+@command{qpdf} can reduce considerably the files it outputs: MiKTeX's
+defaults can be overridden by code in the preamble of an Sweave or
+@LaTeX{} file --- see how this is done for the @R{} reference manual at
 @uref{https://svn.r-project.org/@/R/@/trunk/@/doc/@/manual/@/refman.top}.
+(Although earlier versions of @command{qpdf} are supported, versions
+6.0.0 and later in some cases achieve considerably better compression.)
 
 Other tools can reduce the size of PDFs containing bitmap images at
 excessively high resolution.  These are often best re-generated (for
@@ -4818,8 +4845,8 @@ and suitable options might be
 @noindent
 ; see @uref{http://www.ghostscript.com/@/doc/@/current/@/Ps2pdf.htm} for
 more such and consider all the options for image downsampling).  There
-have been examples in @acronym{CRAN} packages for which Ghostscript 9.06
-and later produced much better reductions than 9.05 or earlier.
+have been examples in @acronym{CRAN} packages for which current versions
+of Ghostscript  produced much better reductions than earlier ones.
 
 We come across occasionally large PDF files containing excessively
 complicated figures using PDF vector graphics: such figures are often
@@ -5276,6 +5303,31 @@ Inclusion by such headers of C-style headers such as @file{math.h} (see above).
 @noindent
 The most portable way to interface to other software with a C API is to
 use C code (which can normally be mixed with C++ code in a package).
+
+@item
+Avoid platform-specific code if at all possible, but if you need to test
+for a platform ensure that all platforms are covered.  For example,
+@code{__unix__} is not defined on all Unix-alikes, in particular not on
+macOS.  A reasonably portable way to condition code for a Unix-alike is
+@example
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
+#endif
+@end example
+@noindent
+but
+@example
+#ifdef _WIN32
+// Windows-specific code
+#else
+// Unix-alike code
+#endif
+@end example
+@noindent
+would be better.  For a Unix-alike it is much better to use
+@command{configure} to test for the functionality needed than make
+assumptions about OSes (and people all too frequently forget @R{} is
+used on platforms other than Linux, Windows and macOS --- and some
+forget macOS).
 
 @end itemize
 

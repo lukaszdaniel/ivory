@@ -1,7 +1,7 @@
 #  File src/library/tools/R/Vignettes.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2017 The R Core Team
+#  Copyright (C) 1995-2018 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -736,8 +736,7 @@ function(lines, tag)
     trimws(gsub(meta_RE, "\\1", meta))
 }
 
-vignetteInfo <-
-function(file)
+vignetteInfo <- function(file)
 {
     lines <- readLines(file, warn = FALSE)
 
@@ -901,23 +900,6 @@ function(pkg, con, vignetteIndex = NULL)
     }
     html <- c(html, "</body></html>")
     writeLines(html, con=con)
-}
-
-vignetteDepends <-
-    function(vignette, recursive = TRUE, reduce = TRUE,
-             local = TRUE, lib.loc = NULL)
-{
-    if (length(vignette) != 1L)
-        stop(gettextf("'%s' argument must be of length 1", "vignette"))
-    if (!nzchar(vignette)) return(invisible()) # lets examples work.
-    if (!file.exists(vignette))
-        stop(gettextf("%s file was not found", sQuote(vignette)), domain = "R-tools")
-
-    vigDeps <- vignetteInfo(vignette)$depends
-
-    depMtrx <- getVigDepMtrx(vigDeps)
-    instPkgs <- utils::installed.packages(lib.loc=lib.loc)
-    getDepList(depMtrx, instPkgs, recursive, local, reduce)
 }
 
 getVigDepMtrx <-
@@ -1146,11 +1128,13 @@ function(pkgdir, mustwork = TRUE)
 
 getVignetteInfo <- function(package = NULL, lib.loc = NULL, all = TRUE)
 {
-    if (is.null(package)) {
-        package <- .packages(all.available = all, lib.loc)
-        ## allow for misnamed dirs
-        paths <- find.package(package, lib.loc, quiet = TRUE)
-    } else paths <- find.package(package, lib.loc)
+    paths <-
+        if (is.null(package)) {
+            package <- .packages(all.available = all, lib.loc)
+            ## allow for misnamed dirs
+            find.package(package, lib.loc, quiet = TRUE)
+        } else
+            find.package(package, lib.loc)
 
     ## Find the directories with a 'doc' subdirectory *possibly*
     ## containing vignettes.

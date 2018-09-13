@@ -1175,8 +1175,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
         auto_was_meta <- FALSE
         dir <- system.file(package = package, lib.loc = lib.loc)
         if(dir == "")
-            stop(gettextf("package %s not found", sQuote(package)),
-                 domain = "R-utils")
+            stop(packageNotFoundError(package, lib.loc, sys.call()))
         meta <- packageDescription(pkg = package,
                                    lib.loc = dirname(dir))
         ## if(is.null(auto)): Use default auto-citation if no CITATION

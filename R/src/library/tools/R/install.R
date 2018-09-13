@@ -50,7 +50,7 @@ if(FALSE) {
 
 
 ##' @return ...
-.install_packages <- function(args = NULL, no.q = interactive())
+.install_packages <- function(args = NULL, no.q = interactive(), warnOption = 1)
 {
     ## calls system() on Windows for
     ## sh (configure.win/cleanup.win) make zip
@@ -146,7 +146,10 @@ if(FALSE) {
         sub(".*= ", "", grep("^SHLIB_EXT", readLines(mconf), value = TRUE, perl = TRUE))
     }
 
-    options(warn = 1)
+    if(getOption("warn") < warnOption) {
+        op <- options(warn = warnOption)
+        on.exit(options(op), add=TRUE)
+    }
     invisible(Sys.setlocale("LC_COLLATE", "C")) # discard output
 
     if (WINDOWS) {

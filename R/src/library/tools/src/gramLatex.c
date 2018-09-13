@@ -89,6 +89,7 @@
 #include <config.h>
 #endif
 
+#define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Parse.h>
 #define STRICT_R_HEADERS
@@ -587,9 +588,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   160,   160,   161,   162,   165,   166,   167,   168,   170,
-     171,   173,   174,   175,   176,   177,   178,   180,   180,   184,
-     186,   187
+       0,   161,   161,   162,   163,   166,   167,   168,   169,   171,
+     172,   174,   175,   176,   177,   178,   179,   181,   181,   185,
+     187,   188
 };
 #endif
 

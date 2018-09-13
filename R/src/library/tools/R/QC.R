@@ -1425,7 +1425,7 @@ function(package, dir, lib.loc = NULL)
         ## Also test whether the objects we found from the \usage all
         ## have aliases, provided that there is no alias which ends in
         ## '-deprecated' (see e.g. base-deprecated.Rd).
-        if(!length(grep("-deprecated$", aliases))) {
+        if(!any(endsWith(aliases, "-deprecated"))) {
             ## Argh.  There are good reasons for keeping \S4method{}{}
             ## as is, but of course this is not what the aliases use ...
             ## <FIXME>
@@ -2365,7 +2365,7 @@ function(package, dir, lib.loc = NULL)
         ## If m is a formula method, its first argument *may* be called
         ## formula.  (Note that any argument name mismatch throws an
         ## error in current S-PLUS versions.)
-        if(length(grep("\\.formula$", m))) {
+        if(endsWith(m, ".formula")) {
             if(gArgs[1L] != "...") gArgs <- gArgs[-1L]
             mArgs <- mArgs[-1L]
         }
@@ -2458,7 +2458,7 @@ function(package, dir, lib.loc = NULL)
         for(m in methods)
             ## Both all() and all.equal() are generic.
             bad_methods <- if(g == "all") {
-                m1 <- m[-grep("^all\\.equal", m)]
+                m1 <- m[!startsWith(m, "all.equal")]
                 c(bad_methods, if(length(m1)) checkArgs(g, m1))
             } else c(bad_methods, checkArgs(g, m))
     }
@@ -3407,6 +3407,8 @@ function(aar, strict = FALSE)
                                   is.na(match("aut", e$role)),
                                   NA)))
                         out$bad_authors_at_R_field_has_no_author_roles <- TRUE
+                }
+                if(strict >= 3L) {
                     non_standard_roles <-
                         lapply(aar$role, setdiff,
                                utils:::MARC_relator_db_codes_used_with_R)
@@ -3780,6 +3782,8 @@ function(x, ...)
   , quartzFont = function(family) {}
   , quartzFonts = function(...) {}
   , quartz.options = function(..., reset = TRUE) {}
+  , quartz.save = function(file, type = "png", device = dev.cur(),
+                           dpi = 100, ...) {}
 ))
 
 .windows_only_proto_objects <- as.environment(list(
@@ -4313,7 +4317,7 @@ function(pkgDir, thorough = FALSE)
         files <- Sys.glob(c(file.path(pkgDir, "data", "*.rda"),
                             file.path(pkgDir, "data", "*.RData")))
         ## Exclude .RData, which this may or may not match
-        files <- filtergrep("/[.]RData$", files)
+        files <- files[!endsWith(files, "/.RData")]
         if (length(files)) {
             cpdir <- tempfile('cp')
             dir.create(cpdir)
@@ -4456,7 +4460,7 @@ function(dir, doDelete = FALSE)
                                           OS_subdirs = OS_subdirs))
         wrong <- setdiff(all_files, R_files)
         ## now configure might generate files in this directory
-        generated <- grep("\\.in$", wrong)
+        generated <- which(endsWith(wrong, ".in"))
         if(length(generated)) wrong <- wrong[-generated]
         if(length(wrong)) {
             wrong_things$R <- wrong
@@ -4676,10 +4680,11 @@ function(dir)
 {
     predicate <- function(e) {
         ((length(e) > 1L)
-         && (as.character(e[[1L]]) %in%
-             c("library.dynam", "library.dynam.unload"))
-         && is.character(e[[2L]])
-         && grepl("\\.(so|sl|dll)$", e[[2L]]))
+            && (length(x <- as.character(e[[1L]])) == 1L)
+            && (x %in% c("library.dynam", "library.dynam.unload"))
+            && (length(y <- e[[2L]]) == 1L)
+            && is.character(y)
+            && grepl("\\.(so|sl|dll)$", y))
     }
 
     x <- Filter(length, .find_calls_in_package_code(dir, predicate, recursive = TRUE))
@@ -4830,10 +4835,9 @@ function(file, encoding = NA)
     for(e in exprs) {
         if((length(e) > 2L) &&
 	   (is.name(x <- e[[1L]])) &&
-           (as.character(x) %in%
-            c("<-", "=")) &&
-           (as.character(y <- e[[2L]]) %in%
-            c(".First.lib", ".onAttach", ".onLoad")) &&
+           (as.character(x) %in% c("<-", "=")) &&
+           (length(y <- as.character(e[[2L]])) == 1L) &&
+           (y %in% c(".First.lib", ".onAttach", ".onLoad")) &&
 	   (is.call(z <- e[[3L]])) &&
            (as.character(z[[1L]]) == "function")) {
             new <- list(z)
@@ -4962,10 +4966,9 @@ function(file, encoding = NA)
     for(e in exprs) {
         if((length(e) > 2L) &&
 	   (is.name(x <- e[[1L]])) &&
-           (as.character(x) %in%
-            c("<-", "=")) &&
-           (as.character(y <- e[[2L]]) %in%
-            c(".Last.lib", ".onDetach")) &&
+           (as.character(x) %in% c("<-", "=")) &&
+           (length(y <- as.character(e[[2L]])) == 1L) &&           
+           (y %in% c(".Last.lib", ".onDetach")) &&
 	   (is.call(z <- e[[3L]])) &&
            (as.character(z[[1L]]) == "function")) {
             new <- list(z)
@@ -5021,7 +5024,9 @@ function(dir)
 function(dir)
 {
     predicate <- function(e) {
-        if(!is.call(e) || as.character(e[[1L]]) != "assign")
+        if(!is.call(e) ||
+           (length(x <- as.character(e[[1L]])) != 1L) ||
+           (x != "assign"))
             return(FALSE)
         e <- e[as.character(e) != "..."]
         ## Capture assignments to global env unless to .Random.seed.
@@ -5065,7 +5070,8 @@ function(x, ...)
 function(dir)
 {
     predicate <- function(e)
-        as.character(e[[1L]]) == "attach"
+    ((length(x <- as.character(e[[1L]])) == 1L) &&
+     (x == "attach"))
 
     calls <- Filter(length,
                     .find_calls_in_package_code(dir, predicate,
@@ -5089,7 +5095,9 @@ function(x, ...)
 function(dir)
 {
     predicate <- function(e) {
-        if(!is.call(e) || as.character(e[[1L]]) != "data")
+        if(!is.call(e) ||
+           (length(x <- as.character(e[[1L]])) != 1L) ||
+           (x != "data"))
             return(FALSE)
         ## As data() has usage
         ##   data(..., list = character(), package = NULL, lib.loc = NULL,

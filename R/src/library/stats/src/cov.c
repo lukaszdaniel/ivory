@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995-2017	The R Core Team
+ *  Copyright (C) 1995-2018	The R Core Team
  *  Copyright (C) 2003		The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -633,15 +633,23 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
     Rboolean ansmat, kendall, pair, na_fail, everything, sd_0, empty_err;
     int i, method, n, ncx, ncy, nprotect = 2;
 
+#define DEFUNCT_VAR_FACTOR
+#ifdef DEFUNCT_VAR_FACTOR
+# define VAR_FACTOR_MSG _("Calling var(x) on a factor x is defunct.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
+#else
+# define VAR_FACTOR_MSG _("Calling var(x) on a factor x is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
+#endif
+
     /* Arg.1: x */
     if(isNull(x)) /* never allowed */
 	error(_("'%s' argument is NULL"), "x");
-#ifdef _R_in_2017_
-    if(isFactor(x)) error(_("'%s' argument is a factor"), "x");
+    if(isFactor(x))
+#ifdef DEFUNCT_VAR_FACTOR
+	error(_(VAR_FACTOR_MSG));
 #else
-# define VAR_FACTOR_MSG _("Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
-    if(isFactor(x)) warning(VAR_FACTOR_MSG);
+ 	warning(_(VAR_FACTOR_MSG));
 #endif
+
     /* length check of x -- only if(empty_err) --> below */
     x = PROTECT(coerceVector(x, REALSXP));
     if ((ansmat = isMatrix(x))) {
@@ -656,10 +664,11 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
     if (isNull(y)) {/* y = x  : var() */
 	ncy = ncx;
     } else {
-#ifdef _R_in_2017_
-	if(isFactor(y)) error(_("'%s' argument is a factor"), "y");
+	if(isFactor(y))
+#ifdef DEFUNCT_VAR_FACTOR
+	    error(_(VAR_FACTOR_MSG));
 #else
-	if(isFactor(y)) warning(VAR_FACTOR_MSG);
+	    warning(_(VAR_FACTOR_MSG));
 #endif
 	y = PROTECT(coerceVector(y, REALSXP));
 	nprotect++;

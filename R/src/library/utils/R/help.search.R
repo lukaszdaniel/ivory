@@ -455,7 +455,7 @@ function(package = NULL, lib.loc = NULL,
 	    else find.package(p, lib.loc, quiet = TRUE)
 	    if(length(path) == 0L) {
                 if(is.null(package)) next
-		else stop(gettextf("could not find package %s", sQuote(p)), domain = "R-utils")
+		else stop(packageNotFoundError(p, lib.loc, sys.call()))
             }
 	    ## Hsearch 'Meta/hsearch.rds' indices were introduced in
 	    ## R 1.8.0.	 If they are missing, we really cannot use

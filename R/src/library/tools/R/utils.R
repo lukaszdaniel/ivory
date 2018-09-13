@@ -613,10 +613,13 @@ function(x)
 .canonicalize_quotes <-
 function(txt)
 {
+    txt <- as.character(txt)
+    enc <- Encoding(txt)
     txt <- gsub(paste0("(", intToUtf8(0x2018), "|", intToUtf8(0x2019), ")"),
-                "'", txt, perl = TRUE)
+                "'", txt, perl = TRUE, useBytes = TRUE)
     txt <- gsub(paste0("(", intToUtf8(0x201c), "|", intToUtf8(0x201d), ")"),
-                "'", txt, perl = TRUE)
+                '"', txt, perl = TRUE, useBytes = TRUE)
+    Encoding(txt) <- enc
     txt
 }
 
@@ -801,7 +804,7 @@ function(con)
     ## How can we find out for sure that there were errors?  Try
     ## guessing ... and peeking at tex-buf.el from AUCTeX.
     really_has_errors <-
-        (length(grep("^---", lines)) ||
+        (any(startsWith(lines, "---")) ||
          regexpr("There (was|were) ([0123456789]+) error messages?", lines[length(lines)]) > -1L)
     ## (Note that warnings are ignored for now.)
     ## MiKTeX does not give usage, so '(There were n error messages)' is
@@ -1643,6 +1646,7 @@ nonS3methods <- function(package)
                       "dim.inq.ncdf", "dim.same.ncdf"),
              quadprog = c("solve.QP", "solve.QP.compact"),
              reposTools = "update.packages2",
+             reshape = "all.vars.character",
              rgeos = "scale.poly",
              sac = "cumsum.test",
              sfsmisc = "cumsum.test",
@@ -1712,7 +1716,8 @@ function()
 ### ** .package_apply
 
 .package_apply <-
-function(packages = NULL, FUN, ...)
+function(packages = NULL, FUN, ...,
+         Ncpus = getOption("Ncpus", 1L))
 {
     ## Apply FUN and extra '...' args to all given packages.
     ## The default corresponds to all installed packages with high
@@ -1720,12 +1725,28 @@ function(packages = NULL, FUN, ...)
     if(is.null(packages))
         packages <-
             unique(utils::installed.packages(priority = "high")[ , 1L])
-    out <- lapply(packages, function(p)
-                  tryCatch(FUN(p, ...),
-                           error = function(e)
-                           noquote(paste("Error:",
-                                         conditionMessage(e)))))
+
+    one <- function(p)
+        tryCatch(FUN(p, ...),
+                 error = function(e)
+                     noquote(paste("Error:",
+                                   conditionMessage(e))))
     ## (Just don't throw the error ...)
+
+    ## Would be good to have a common wrapper ...
+    if(Ncpus > 1L) {
+        if(.Platform$OS.type != "windows") {
+            out <- parallel::mclapply(packages, one, mc.cores = Ncpus)
+        } else {
+            cl <- parallel::makeCluster(Ncpus)
+            args <- list(FUN, ...)      # Eval promises.
+            out <- parallel::parLapply(cl, packages, one)
+            parallel::stopCluster(cl)
+        }
+    } else {
+        out <- lapply(packages, one)
+    }
+    
     names(out) <- packages
     out
 }
@@ -1776,7 +1797,7 @@ function(con)
     ## Read lines from a connection to an Rd file, trying to suppress
     ## "incomplete final line found by readLines" warnings.
     if(is.character(con)) {
-        con <- if(length(grep("\\.gz$", con))) gzfile(con, "r") else file(con, "r")
+        con <- if(endsWith(con, ".gz")) gzfile(con, "r") else file(con, "r")
         on.exit(close(con))
     }
     .try_quietly(readLines(con, warn=FALSE))
@@ -2124,21 +2145,36 @@ function(expr)
 ### ** .unpacked_source_repository_apply
 
 .unpacked_source_repository_apply <-
-function(dir, fun, ..., pattern = "*", verbose = FALSE)
+function(dir, FUN, ..., pattern = "*", verbose = FALSE,
+         Ncpus = getOption("Ncpus", 1L))
 {
     dir <- file_path_as_absolute(dir)
 
     dfiles <- Sys.glob(file.path(dir, pattern, "DESCRIPTION"))
+    paths <- dirname(dfiles)
 
-    results <-
-        lapply(dirname(dfiles),
-               function(dir) {
-                   if(verbose)
-                       message(gettextf("processing directory %s", sQuote(basename(dir))))
-                   fun(dir, ...)
-               })
-    names(results) <- basename(dirname(dfiles))
-    results
+    one <- function(p) {
+        if(verbose)
+            message(gettextf("processing directory %s", sQuote(basename(dir))))
+        FUN(p, ...)
+    }
+
+    ## Would be good to have a common wrapper ...
+    if(Ncpus > 1L) {
+        if(.Platform$OS.type != "windows") {
+            out <- parallel::mclapply(paths, one, mc.cores = Ncpus)
+        } else {
+            cl <- parallel::makeCluster(Ncpus)
+            args <- list(FUN, ...)      # Eval promises.
+            out <- parallel::parLapply(cl, paths, one)
+            parallel::stopCluster(cl)
+        }
+    } else {
+        out <- lapply(paths, one)
+    }
+
+    names(out) <- basename(paths)
+    out
 }
 
 ### ** .wrong_args

@@ -693,14 +693,26 @@ function(package = NULL, lib.loc = NULL, quiet = FALSE,
     }
 
     if(!quiet && length(bad)) {
-        if(length(out) == 0L) {
-	    stop(sprintf(ngettext(length(bad), "there is no package called %s", "there are no packages called %s", domain = "R-base"), paste(sQuote(bad), collapse = ", ")), domain = NA)
-        }
+        if(length(out) == 0L)
+            stop(packageNotFoundError(bad, lib.loc, sys.call()))
         for(pkg in bad)
-	    warning(sprintf(ngettext(1L, "there is no package called %s", "there are no packages called %s", domain = "R-base"), paste(sQuote(pkg), collapse = ", ")), domain = NA)
+            warning(sprintf(ngettext(1L, "there is no package called %s", "there are no packages called %s", domain = "R-base"), paste(sQuote(pkg), collapse = ", ")), domain = NA)
     }
 
     out
+}
+
+packageNotFoundError <-
+function(package, lib.loc, call = NULL) {
+    if(length(package) == 1L)
+        msg <- gettextf("there is no package called %s", sQuote(package))
+    else
+        msg <- sprintf(ngettext(length(package),
+                               "there is no package called %s",
+                               "there are no packages called %s", domain = "R-base"),
+                      paste(sQuote(package), collapse = ", "))
+    errorCondition(msg, package = package, lib.loc = lib.loc, call = call,
+                   "packageNotFoundError")
 }
 
 format.packageInfo <-

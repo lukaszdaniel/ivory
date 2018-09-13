@@ -2,7 +2,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996, 1997  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2017  The R Core Team
+ *  Copyright (C) 1997--2018  The R Core Team
  *  Copyright (C) 2009--2011  Romain Francois
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#define R_USE_SIGNALS 1
 #include "IOStuff.h"		/*-> Defn.h */
 #include "Fileio.h"
 #include "Parse.h"
@@ -134,12 +135,14 @@ static void setId( SEXP expr, yyltype loc){
 	    incrementId( ) ; 						\
 	    (Current).id = identifier ; 				\
 	    _current_token = yyr1[yyn] ; 				\
-	    yyltype childs[N] ;						\
-	    int ii = 0; 						\
-	    for( ii=0; ii<N; ii++){ 					\
+	    if (ParseState.keepSrcRefs && ParseState.keepParseData) {	\
+	        yyltype childs[N];					\
+	        int ii = 0; 						\
+	        for(ii=0; ii<N; ii++){					\
 		      childs[ii] = YYRHSLOC (Rhs, (ii+1) ) ; 		\
-	    } 								\
-	    recordParents( identifier, childs, N) ; 			\
+	        } 							\
+	        recordParents( identifier, childs, N) ; 		\
+	    }								\
 	} else	{							\
 	  (Current).first_line   = (Current).last_line   =		\
 	    YYRHSLOC (Rhs, 0).last_line;				\
@@ -248,7 +251,6 @@ static int mbcs_get_next(int c, wchar_t *wc)
 
 void		R_SetInput(int);
 int		R_fgetc(FILE*);
-static int colon ;
 
 /* Routines used to build the parse tree */
 
@@ -305,7 +307,7 @@ static int	xxvalue(SEXP, int, YYLTYPE *);
 %token		EQ_SUB SYMBOL_SUB
 %token		SYMBOL_FUNCTION_CALL
 %token		SYMBOL_PACKAGE
-%token		COLON_ASSIGN
+/* no longer used: %token COLON_ASSIGN */
 %token		SLOT
 
 /* This is the precedence table, low to high */
@@ -1166,20 +1168,34 @@ void InitParser(void)
 {
     ParseState.data = NULL;
     ParseState.ids = NULL;
+    ParseState.SrcFileProt = NA_INTEGER;
+    ParseState.OriginalProt = NA_INTEGER;
+}
+
+static void FinalizeSrcRefStateOnError(void *dummy)
+{
+    R_FinalizeSrcRefState();
 }
 
 /* This is called each time a new parse sequence begins */
 attribute_hidden
-void R_InitSrcRefState(void)
+void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
     	SrcRefState *prev = malloc(sizeof(SrcRefState));
+	if (prev == NULL)
+	    error(_("allocation of source reference state failed"));
     	PutSrcRefState(prev);
 	ParseState.prevState = prev;
 	ParseState.data = NULL;
 	ParseState.ids = NULL;
     } else
         ParseState.prevState = NULL;
+    /* set up context _after_ PutSrcRefState */
+    begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cptr->cend = &FinalizeSrcRefStateOnError;
+    cptr->cenddata = NULL;
     ParseState.keepSrcRefs = FALSE;
     ParseState.keepParseData = TRUE;
     ParseState.didAttach = FALSE;
@@ -1196,8 +1212,16 @@ void R_InitSrcRefState(void)
 attribute_hidden
 void R_FinalizeSrcRefState(void)
 {
-    UNPROTECT_PTR(ParseState.SrcFile);
-    UNPROTECT_PTR(ParseState.Original);
+    if (ParseState.SrcFileProt != NA_INTEGER) {
+	UNPROTECT_PTR(ParseState.SrcFile);
+	ParseState.SrcFile = NULL;
+	ParseState.SrcFileProt = NA_INTEGER;
+    }
+    if (ParseState.OriginalProt != NA_INTEGER) {
+	UNPROTECT_PTR(ParseState.Original);
+	ParseState.Original = NULL;
+	ParseState.OriginalProt = NA_INTEGER;
+    }
     /* Free the data, text and ids if we are restoring a previous state,
        or if they have grown too large */
     if (ParseState.data) {
@@ -1205,6 +1229,7 @@ void R_FinalizeSrcRefState(void)
 	    R_ReleaseObject(ParseState.data);
 	    R_ReleaseObject(ParseState.text);
 	    ParseState.data = NULL;
+	    ParseState.text = NULL;
 	} else /* Remove all the strings from the text vector so they don't take up memory, and clean up data */
 	    for (int i=0; i < ParseState.data_count; i++) {
 	    	SET_STRING_ELT(ParseState.text, i, R_BlankString);
@@ -1217,12 +1242,12 @@ void R_FinalizeSrcRefState(void)
 	    ParseState.ids = NULL;
         } else {/* Remove the parent records */
             if (identifier > ID_COUNT) identifier = ID_COUNT;
-            for (int i=0; i < identifier; i++)
+            for (int i=0; i < identifier; i++) {
+		ID_ID(i) = 0;
 	        ID_PARENT(i) = 0;
+	    }
 	}
     }
-    ParseState.SrcFileProt = NA_INTEGER;
-    ParseState.OriginalProt = NA_INTEGER;
     ParseState.data_count = NA_INTEGER;
     if (ParseState.prevState) {
         SrcRefState *prev = ParseState.prevState;
@@ -1254,24 +1279,21 @@ static void UseSrcRefState(SrcRefState *state)
 
 static void PutSrcRefState(SrcRefState *state)
 {
-    if (state) {
-	state->keepSrcRefs = ParseState.keepSrcRefs;
-	state->keepParseData = ParseState.keepParseData;
-	state->SrcFile = ParseState.SrcFile;
-	state->Original = ParseState.Original;
-	state->SrcFileProt = ParseState.SrcFileProt;
-	state->OriginalProt = ParseState.OriginalProt;
-	state->data = ParseState.data;
-	state->text = ParseState.text;
-	state->ids = ParseState.ids;
-	state->data_count = ParseState.data_count;
-	state->xxlineno = ParseState.xxlineno;
-	state->xxcolno = ParseState.xxcolno;
-	state->xxbyteno = ParseState.xxbyteno;
-	state->xxparseno = ParseState.xxparseno;
-	state->prevState = ParseState.prevState;
-    } else 
-    	R_FinalizeSrcRefState();
+    state->keepSrcRefs = ParseState.keepSrcRefs;
+    state->keepParseData = ParseState.keepParseData;
+    state->SrcFile = ParseState.SrcFile;
+    state->Original = ParseState.Original;
+    state->SrcFileProt = ParseState.SrcFileProt;
+    state->OriginalProt = ParseState.OriginalProt;
+    state->data = ParseState.data;
+    state->text = ParseState.text;
+    state->ids = ParseState.ids;
+    state->data_count = ParseState.data_count;
+    state->xxlineno = ParseState.xxlineno;
+    state->xxcolno = ParseState.xxcolno;
+    state->xxbyteno = ParseState.xxbyteno;
+    state->xxparseno = ParseState.xxparseno;
+    state->prevState = ParseState.prevState;
 }
 
 static void ParseInit(void)
@@ -1289,8 +1311,6 @@ static void ParseInit(void)
 static void initData(void)
 {
     ParseState.data_count = 0 ;
-    for (int i = 1; i <= ID_COUNT; i++)
-	ID_ID( i ) = 0;
 }
 
 
@@ -1299,11 +1319,8 @@ static void ParseContextInit(void)
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
     
-    colon = 0 ;
-
     /* starts the identifier counter*/
     initId();
-
     initData();
 }
 
@@ -1364,10 +1381,11 @@ attribute_hidden
 SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     Rboolean keepSource = FALSE; 
-    int savestack;    
+    int savestack;
+    RCNTXT cntxt;
 
-    R_InitSrcRefState();
-    savestack = R_PPStackTop;       
+    R_InitSrcRefState(&cntxt);
+    savestack = R_PPStackTop;
     if (gencode) {
     	keepSource = asLogical(GetOption1(install("keep.source")));
     	if (keepSource) {
@@ -1407,6 +1425,7 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	}
     }
     R_PPStackTop = savestack;
+    endcontext(&cntxt);
     R_FinalizeSrcRefState();
     return R_CurrentExpr;
 }
@@ -1423,8 +1442,9 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
     int savestack;
     int i;
     SEXP t, rval;
+    RCNTXT cntxt;
 
-    R_InitSrcRefState();
+    R_InitSrcRefState(&cntxt);
     savestack = R_PPStackTop;
     
     ParseContextInit();
@@ -1456,6 +1476,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData)
 	        finalizeData();
 	    R_PPStackTop = savestack;
+	    endcontext(&cntxt);
 	    R_FinalizeSrcRefState();	    
 	    return R_NilValue;
 	    break;
@@ -1477,6 +1498,7 @@ finish:
 	rval = attachSrcrefs(rval);
     }
     R_PPStackTop = savestack;    /* UNPROTECT lots! */
+    endcontext(&cntxt);
     R_FinalizeSrcRefState();
     *status = PARSE_OK;
     return rval;
@@ -1553,12 +1575,14 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     char *bufp, buf[CONSOLE_BUFFER_SIZE];
     int c, i, prompt_type = 1;
     int savestack;
+    RCNTXT cntxt;
 
     R_IoBufferWriteReset(buffer);
     buf[0] = '\0';
     bufp = buf;
-    R_InitSrcRefState();    
+    R_InitSrcRefState(&cntxt);
     savestack = R_PPStackTop;
+    ParseContextInit();
     PROTECT(t = NewList());
     
     GenerateCode = 1;
@@ -1591,7 +1615,8 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	/* Was a call to R_Parse1Buffer, but we don't want to reset
 	   xxlineno and xxcolno */
 	ParseInit();
-	ParseContextInit();
+	/* Not calling ParseContextInit() as it resets parse data, and
+	   to be consistent with R_Parse */
 	R_Parse1(status);
 	rval = R_CurrentExpr;
 
@@ -1606,6 +1631,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	case PARSE_ERROR:
 	    R_IoBufferWriteReset(buffer);
 	    R_PPStackTop = savestack;
+	    endcontext(&cntxt);
 	    R_FinalizeSrcRefState();
 	    return R_NilValue;
 	    break;
@@ -1626,6 +1652,7 @@ finish:
 	rval = attachSrcrefs(rval);
     }
     R_PPStackTop = savestack; /* UNPROTECT lots! */
+    endcontext(&cntxt);
     R_FinalizeSrcRefState();    
     *status = PARSE_OK;
     return rval;
@@ -3073,7 +3100,10 @@ static int yylex(void)
 		xxparsesave = yylloc.first_parsed;
 		SavedLval = yylval;
 		setlastloc();
-		if (yytext[0]) /* unrecord the pushed back token if not null */
+		if (ParseState.keepSrcRefs && ParseState.keepParseData &&
+		    yytext[0])
+
+		    /* unrecord the pushed back token if not null */
 		    ParseState.data_count--;
 		return '\n';
 	    }
@@ -3222,12 +3252,6 @@ static int yylex(void)
  */
 static void record_( int first_parsed, int first_column, int last_parsed, int last_column,
 	int token, int id, char* text_in ){
-       
-	
-	if( token == LEFT_ASSIGN && colon == 1){
-		token = COLON_ASSIGN ;
-		colon = 0 ;
-	}
 	
 	if (!ParseState.keepSrcRefs || !ParseState.keepParseData
 	    || id == NA_INTEGER) return;
@@ -3250,9 +3274,9 @@ static void record_( int first_parsed, int first_column, int last_parsed, int la
 	else
 	    SET_STRING_ELT(ParseState.text, ParseState.data_count, mkChar(""));
 	
-	if( id > ID_COUNT ){
-		growID(id) ;
-	}
+	if( id > ID_COUNT )
+	    growID(id) ;
+
 	ID_ID( id ) = ParseState.data_count ; 
 	
 	ParseState.data_count++ ;
@@ -3285,7 +3309,7 @@ static void recordParents( int parent, yyltype * childs, int nchilds){
 		if (loc.id < 0 || loc.id > identifier) {
 		    error(_("internal parser error at line %d"),  ParseState.xxlineno);
 		}
-		ID_PARENT( (childs[ii]).id ) = parent  ;
+		ID_PARENT( loc.id ) = parent;
 	}
 	
 }

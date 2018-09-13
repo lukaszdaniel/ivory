@@ -60,7 +60,7 @@ getNativeSymbolInfo <- function(name, PACKAGE, unlist = TRUE,
 	    if(length(pkgName) && nzchar(pkgName))
 		stop(gettextf("no such symbol %s in package %s", id, pkgName), domain = "R-base")
 	}
-	names(v) <- c("name", "address", "package", "numParameters")[seq_along(v)]
+	names(v) <- c("name", "address", "dll", "numParameters")[seq_along(v)]
 	v
     })
 
@@ -121,9 +121,13 @@ getDLLRegisteredRoutines.DLLInfo <- function(dll, addNames = TRUE)
 print.NativeRoutineList <-
 function(x, ...)
 {
-    m <- data.frame(numParameters = sapply(x, function(x) x$numParameters),
-                    row.names = sapply(x, function(x) x$name))
-    print(m, ...)
+    if(length(x)) {    
+        m <- data.frame(numParameters =
+                            sapply(x, function(x) x$numParameters),
+                        row.names =
+                            sapply(x, function(x) x$name))
+        print(m, ...)
+    }
     invisible(x)
 }
 
@@ -206,7 +210,3 @@ print.DLLInfoList <- function(x, ...)
 
 `$.DLLInfo` <- function(x, name)
     getNativeSymbolInfo(as.character(name), PACKAGE = x)
-
-
-
-

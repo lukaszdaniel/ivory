@@ -49,6 +49,7 @@
 extern void R_ProcessEvents(void);
 
 #ifdef _WIN32
+#define FD_SETSIZE 1024
 #include <io.h>
 #include <winsock2.h>
 #ifndef EWOULDBLOCK
