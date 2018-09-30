@@ -1712,7 +1712,7 @@ build systems: a 64-bit build is selected in file @file{MkRules.local}.
 The Windows installer contains a set of test files used when building
 @R{}.
 
-The @code{Rtools} are not needed to run these tests. but more
+The @code{Rtools} are not needed to run these tests, but more
 comprehensive analysis of errors will be given if @command{diff} is in
 the path (and @code{errorsAreFatal = FALSE} is then not needed below).
 
@@ -3784,6 +3784,13 @@ The URIs for several of these BLAS have been subject to frequent
 gratuitous changes, so you will need to search for their current
 locations.
 
+BLAS (and LAPACK) routines may be used inside threaded code, for example
+in OpenMP sections in packages such as @pkg{mgcv}.  The reference
+implementations are thread-safe but external ones may not be (even
+single-threaded ones): this can lead to hard-to-track-down incorrect
+results or segfaults.
+@c Seen for OpenBLAS 3.2 in 2018.
+
 @menu
 * ATLAS::                       
 * Goto and OpenBLAS::           
@@ -5001,7 +5008,20 @@ To build @R{} you need Apple's `Command Line Tools': these can be
 fresh OS installation, running e.g.@: @command{make} in a terminal will
 offer the installation of the command-line tools.  If you have installed
 Xcode, this provides the command-line tools.  The tools will need to be
-reinstalled when macOS is upgraded, as upgrading partially removes them.)
+reinstalled when macOS is upgraded, as upgrading partially removes
+them.)  As from macOS 10.14 (`Mojave') an additional step is needed to
+install the headers to @file{/usr/include}: from a Terminal run
+@c https://developer.apple.com/documentation/xcode_release_notes/xcode_10_release_notes
+@example
+sudo installer -pkg \
+/Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg \
+-target /
+@end example
+@noindent
+Alternatively, change the include path @emph{via}
+@example
+CPPFLAGS="-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+@end example
 
 You need GNU @code{readline}.@footnote{Apple provides a partial emulation
 of GNU readline 4.2 based on the NetBSD @code{editline} library.  That
@@ -5088,8 +5108,8 @@ Current @acronym{CRAN} binary distributions use the build of
 Other recent distributions of @command{clang} are often available from
 @uref{http://llvm.org/releases/}: for example at the time of
 writing@footnote{It is unstated what the minimum OS requirement is for
-these: the distribution of 5.0.0 required Sierra or later.} of 5.0.1 and
-6.0.0.  In particular, all of these include support for OpenMP which
+these: the distribution of 5.0.0 required Sierra or later.} of 6.0.1 and
+7.0.0.  In particular, all of these include support for OpenMP which
 Apple builds of @command{clang} do not.  Suppose one of these
 distributions is installed under @file{/usr/local/clang6}.  Then @R{}
 could be configured by something like
@@ -5304,7 +5324,7 @@ JAVA_LIBS="-L/$@{JAVA_HOME@}/jre/lib/server -ljvm"
 @noindent
 in @file{config.site}.
 
-To use the builds of OpenJDK (taballs) from @uref{http://jdk.java.net/},
+To use the builds of OpenJDK (tarballs) from @uref{http://jdk.java.net/},
 set @env{JAVA_HOME}:
 @example
 JAVA_HOME=@var{/path/to/JDK}/jdk-11.jdk/Contents/Home

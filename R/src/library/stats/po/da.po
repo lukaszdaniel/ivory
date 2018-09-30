@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:51+0100\n"
+"POT-Creation-Date: 2018-09-30 17:28+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -86,38 +86,39 @@ msgid "missing observations in cov/cor"
 msgstr ""
 
 #: cov.c:638
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.c:640
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.c:645
 #, fuzzy, c-format
 msgid "'%s' argument is NULL"
 msgstr "spænd er for lille"
 
-#: cov.c:640 cov.c:660
-#, fuzzy, c-format
-msgid "'%s' argument is a factor"
-msgstr "spænd er for lille"
-
-#: cov.c:642
-msgid ""
-"Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n"
-"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
-msgstr ""
-
-#: cov.c:668 cov.c:674
+#: cov.c:677 cov.c:683
 msgid "incompatible dimensions"
 msgstr ""
 
-#: cov.c:693 cov.c:734 cov.c:767
+#: cov.c:702 cov.c:743 cov.c:776
 msgid "no complete element pairs"
 msgstr ""
 
-#: cov.c:706
+#: cov.c:715
 msgid "invalid 'use' (computational method)"
 msgstr ""
 
-#: cov.c:709
+#: cov.c:718
 msgid "'x' is empty"
 msgstr ""
 
-#: cov.c:803
+#: cov.c:812
 msgid "the standard deviation is zero"
 msgstr ""
 
@@ -298,30 +299,57 @@ msgstr ""
 msgid "invalid input"
 msgstr "ugyldig argumenttype"
 
-#: fourier.c:58 fourier.c:153
+#: fourier.c:61 fourier.c:156
 msgid "non-numeric argument"
 msgstr ""
 
-#: fourier.c:76 fourier.c:94 fourier.c:167
+#: fourier.c:79 fourier.c:97 fourier.c:170
 msgid "fft factorization error"
 msgstr ""
 
-#: fourier.c:79 fourier.c:103 fourier.c:170
+#: fourier.c:82 fourier.c:106 fourier.c:173
 msgid "fft is too large"
 msgstr ""
 
-#: fourier.c:139
+#: fourier.c:142
 msgid "vector-valued (multivariate) series required"
 msgstr ""
 
-#: fourier.c:215
+#: fourier.c:212
+#, c-format
+msgid ""
+"nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' "
+"instead of 'n'"
+msgstr ""
+
+#: fourier.c:223
+#, c-format
+msgid "nextn<64>() found no solution < %ld = UINT64_MAX (the maximal integer)"
+msgstr ""
+
+#: fourier.c:239
 msgid "no factors"
 msgstr ""
 
-#: fourier.c:218
+#: fourier.c:240
+msgid "too many factors"
+msgstr ""
+
+#: fourier.c:243
 #, fuzzy
 msgid "invalid factors"
 msgstr "Ugyldig vmethod"
+
+#: fourier.c:247
+msgid "'n' must have typeof(.) \"integer\" or \"double\""
+msgstr ""
+
+#: fourier.c:285
+#, c-format
+msgid ""
+"nextn() = %<PRIu64> > 2^53 may not be exactly representable in R (as \"double"
+"\")"
+msgstr ""
 
 #: integrate.c:54
 msgid "evaluation of function gave a result of wrong length"
@@ -713,20 +741,20 @@ msgstr "ugyldig værdi for lag.max"
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr ""
 
-#: model.c:1673
+#: model.c:1674
 msgid "argument is not a valid model"
 msgstr ""
 
-#: model.c:1683
+#: model.c:1684
 #, fuzzy
 msgid "'specials' must be NULL or a character vector"
 msgstr "'path' skal være en tegnvektor"
 
-#: model.c:1695
+#: model.c:1696
 msgid "'data' argument is of the wrong type"
 msgstr ""
 
-#: model.c:1966
+#: model.c:1967
 msgid "'.' in formula and no 'data' argument"
 msgstr ""
 
@@ -1183,6 +1211,10 @@ msgstr "manglende værdi i sidste %d observationer"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument is a factor"
+#~ msgstr "spænd er for lille"
 
 #, fuzzy
 #~ msgid "'%s' argument must be an expression or call"

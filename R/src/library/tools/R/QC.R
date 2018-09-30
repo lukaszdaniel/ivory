@@ -4967,7 +4967,7 @@ function(file, encoding = NA)
         if((length(e) > 2L) &&
 	   (is.name(x <- e[[1L]])) &&
            (as.character(x) %in% c("<-", "=")) &&
-           (length(y <- as.character(e[[2L]])) == 1L) &&           
+           (length(y <- as.character(e[[2L]])) == 1L) &&
            (y %in% c(".Last.lib", ".onDetach")) &&
 	   (is.call(z <- e[[3L]])) &&
            (as.character(z[[1L]]) == "function")) {
@@ -6168,8 +6168,14 @@ function(dir, silent = FALSE, def_enc = FALSE, minlevel = -1)
         else def_enc <- TRUE
     } else enc <- "ASCII"
     macros <- loadPkgRdMacros(dir)
+    ## UGLY! FIXME: add (something like) 'dir' as argument to checkRd() below!
+    oenv <- Sys.getenv("_R_RD_MACROS_PACKAGE_DIR_", unset = NA)
+    on.exit(if (!is.na(oenv)) Sys.setenv("_R_RD_MACROS_PACKAGE_DIR_" = oenv) 
+    	    else Sys.unsetenv("_R_RD_MACROS_PACKAGE_DIR_"))
+    Sys.setenv("_R_RD_MACROS_PACKAGE_DIR_" = normalizePath(dir))
     owd <- setwd(file.path(dir, "man"))
-    on.exit(setwd(owd))
+    on.exit(setwd(owd), add = TRUE)
+    
     pg <- c(Sys.glob("*.Rd"), Sys.glob("*.rd"),
             Sys.glob(file.path("*", "*.Rd")),
             Sys.glob(file.path("*", "*.rd")))
@@ -6182,7 +6188,8 @@ function(dir, silent = FALSE, def_enc = FALSE, minlevel = -1)
         if(basename(f) %in% c("iconv.Rd", "showNonASCII.Rd")) def_enc <- TRUE
 	tmp <- tryCatch(suppressMessages(checkRd(f, encoding = enc,
 						 def_enc = def_enc,
-                                                 macros = macros)),
+                                                 macros = macros,
+                                                 stages = c("build", "install", "render"))),
 			error = identity)
 	if(inherits(tmp, "error")) {
 	    bad <- c(bad, f)
@@ -8210,27 +8217,29 @@ function(x)
 
 ### ** .pretty_format
 
+.strwrap22 <- function(x, collapse = " ")
+    strwrap(paste(x, collapse=collapse), indent = 2L, exdent = 2L)
+
 .pretty_format <-
-function(x)
-{
-    strwrap(paste(sQuote(x), collapse = " "), indent = 2L, exdent = 2L)
-}
+function(x, collapse = " ", q = getOption("useFancyQuotes"))
+    .strwrap22(sQuote(x, q=q), collapse=collapse)
+
 .pretty_format2 <-
-function(msg, x)
+function(msg, x, collapse = ", ", useFancyQuotes = FALSE)
 {
-    xx <- strwrap(paste(sQuote(x), collapse = " "), exdent = 2L)
+    xx <- strwrap(paste(sQuote(x, q=q), collapse=collapse), exdent = 2L)
     if (length(xx) > 1L || nchar(msg) + nchar(xx) + 1L > options("width")$width)
-        c(msg, .pretty_format(x))
+        ## trash 'xx', instead wrap w/ 'indent' :
+        c(msg, .pretty_format(x, collapse=collapse, q=q))
     else paste(msg, xx)
 }
 
 ### ** .pretty_print
 
 .pretty_print <-
-function(x)
-{
-    writeLines(strwrap(paste(x, collapse = " "), indent = 2L, exdent = 2L))
-}
+function(x, collapse = " ")
+    writeLines(.strwrap22(x, collapse=collapse))
+
 
 ### ** .strip_backticks
 
@@ -8516,6 +8525,18 @@ function(package, lib.loc = NULL)
     functions_in_code <-
         Filter(function(f) is.function(code_env[[f]]),
                objects_in_code)
+
+    ## Look only at the *additional* generics in suggests.
+    generics <-
+        setdiff(generics,
+                c(Filter(function(f) .is_S3_generic(f, code_env),
+                         functions_in_code),
+                  .get_S3_generics_as_seen_from_package(dir,
+                                                        TRUE,
+                                                        TRUE),
+                  .get_S3_group_generics(),
+                  .get_S3_primitive_generics()))
+                        
     methods_stop_list <- nonS3methods(basename(dir))
     methods <- lapply(generics,
                       function(g) {

@@ -1934,6 +1934,22 @@ stopifnot(identical(confint(mlm0),
                     matrix(numeric(0), 0L, 2L, dimnames = list(NULL, c("2.5 %", "97.5 %")))))
 ## failed inside vcov.mlm() because summary.lm()$cov.unscaled was NULL
 
+## cooks.distance.(<mlm>), rstandard(<mlm>) :
+fm1 <- lm(y1 ~ x1 + x2, data=datf)
+fm2 <- lm(y2 ~ x1 + x2, data=datf)
+stopifnot(exprs = {
+    all.equal(cooks.distance(fitm),
+              cbind(y1 = cooks.distance(fm1),
+                    y2 = cooks.distance(fm2)))
+    all.equal(rstandard(fitm),
+              cbind(y1 = rstandard(fm1),
+                    y2 = rstandard(fm2)))
+    all.equal(rstudent(fitm),
+              cbind(y1 = rstudent(fm1),
+                    y2 = rstudent(fm2)))
+})
+## were silently wrong in R <= 3.5.1
+
 
 ## kruskal.test(<non-numeric g>), PR#16719
 data(mtcars)
@@ -2050,6 +2066,29 @@ if(is.na(oEV)) { # (by default)
     2 && 0:1 # should not even warn
 } else Sys.setenv("_R_CHECK_LENGTH_1_LOGIC2_" = oEV)
 
+
+## polym() in "vector" case PR#17474
+fm <- lm(Petal.Length ~ poly(cbind(Petal.Width, Sepal.Length), 2),
+         data = iris)
+p1 <- predict(fm, newdata = data.frame(Petal.Width = 1, Sepal.Length = 1))
+stopifnot(all.equal(p1, c("1" = 4.70107678)))
+## predict() calling polym() failed in R <= 3.5.1
+
+
+## sample.int(<fractional>, k, replace=TRUE) :
+(tt <- table(sample.int(2.9, 1e6, replace=TRUE)))
+stopifnot(length(tt) == 2)
+## did "fractionally" sample '3' as well in 3.0.0 <= R <= 3.5.1
+
+
+## lm.influence() for simple regression through 0:
+x <- 1:7
+y <- c(1.1, 1.9, 2.8, 4, 4.9, 6.1, 7)
+f0 <- lm(y ~ 0+x)
+mi <- lm.influence(f0)
+stopifnot(identical(dim(cf <- mi$coefficients), c(7L, 1L)),
+          all.equal(range(cf), c(-0.0042857143, 0.0072527473)))
+## gave an error for a few days in R-devel
 
 
 ## keep at end

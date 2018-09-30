@@ -194,6 +194,13 @@
       \item \code{getOption()} is more efficient notably for the rare
       case when called with two arguments, from several contributors in
       \PR{17394}.
+
+      \item In \code{.col(dim)} and \code{.row(dim)}, \code{dim} now may
+      also be an integer valued \code{"double"}.
+
+      \item \code{sQuote()} and \code{dQuote()} get an explicit \code{q}
+      argument with obvious default instead of using
+      \code{getOption("fancyQuotes")} implicitly and unconditionally.
     }
   }
 
@@ -356,8 +363,30 @@
 
       \item \code{as(1L, "double")} now does coerce (\PR{17457}).
 
-      \item \code{nextn(n)} now also works for larger \code{n} and no
-      longer loops infinitely for e.g, \code{n <- 214e7}.
+      \item Buffering is disabled for \code{file()} connections to
+      irregular files (like sockets), as well as \code{fifo()} and
+      \code{pipe()} connections. Fixes \PR{17470}, reported by Chris
+      Culnane.
+
+      \item \code{lm.influence()}, \code{influence.measures()},
+      \code{rstudent()} etc now work (more) correctly for multivariate
+      models (\code{"mlm"}), thanks to (anonymous) stackoverflow remarks.
+
+      \item \code{sample.int(2.9, *, replace=TRUE)} again behaves as
+      documented and as in R < 3.0.0, namely identically to
+      \code{sample.int(2, ..)}.% consider back porting to 3.5.x !
+
+      \item \code{download.file(*, method = "curl", cacheOK = FALSE)}
+      should work now on Windows, thanks to Kevin Ushey's patch in
+      \PR{17323}.
+
+      \item Fixes to \code{convertColor()} for chromatic adaptation;
+      thanks to Brodie Gaslam \PR{17473}.
+
+      \item Using \code{\\Sexpr[stage=install]{..}} to create an
+      \file{Rd} section no longer gives a warning in \command{R CMD
+	check}; problem originally posted by Gábor Csárdi, then reported
+      as \PR{17479} with a careful patch by Duncan Murdoch.
     }
   }
 }
@@ -405,6 +434,11 @@
       \code{options(warn = warnOption)} when that increases the warning
       level (\PR{17453}).
 
+      \item Analogously, the tools-internal function called from \command{R CMD
+	check} gets a \code{warnOption = 1} argument and uses the larger
+      of that and \code{getOption("warn")}, also allowing to be run with
+      increased warning level.
+
       \item Parse data now have deterministic parent nodes (\PR{16041}).
 
       \item Calling \code{match()} with length one \code{x} and POSIXlt
@@ -412,6 +446,19 @@
 
       \item Fork cluster could hang due to a race condition in cluster
       initialization (\code{makeCluster()}).
+
+      \item \code{nextn(n)} now also works for larger \code{n} and no
+      longer loops infinitely for e.g, \code{n <- 214e7}.
+
+      \item \code{cooks.distance()} and \code{rstandard()} now work
+      correctly for multivariate models (\code{"mlm"}).
+
+      \item \code{polym()} and corresponding \code{lm()} prediction now
+      also work for a boundary "vector" case fixing \PR{17474},
+      reported by Alexandre Courtiol.
+
+      \item With a very large number of variables \code{terms()} could
+      segfault (\PR{17480}).
     }
   }
 }

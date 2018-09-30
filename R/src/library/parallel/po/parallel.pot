@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 18:33+0200\n"
+"POT-Creation-Date: 2018-09-18 18:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,160 +32,160 @@ msgstr ""
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.c:287 fork.c:555
+#: fork.c:287 fork.c:557
 msgid "memory allocation error"
 msgstr ""
 
-#: fork.c:337 fork.c:341 fork.c:345
+#: fork.c:339 fork.c:343 fork.c:347
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: fork.c:401
+#: fork.c:403
 msgid ""
 "Error while shutting down parallel: unable to terminate some child "
 "processes\n"
 msgstr ""
 
-#: fork.c:433
+#: fork.c:435
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr ""
 
-#: fork.c:489 fork.c:492
+#: fork.c:491 fork.c:494
 msgid "unable to create a pipe"
 msgstr ""
 
-#: fork.c:495
+#: fork.c:497
 #, c-format
 msgid "parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"
 msgstr ""
 
-#: fork.c:514
+#: fork.c:516
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr ""
 
-#: fork.c:549
+#: fork.c:551
 #, c-format
 msgid "child process %d started\n"
 msgstr ""
 
-#: fork.c:618
+#: fork.c:620
 msgid "descriptors must be integers"
 msgstr ""
 
-#: fork.c:682
+#: fork.c:684
 msgid "only children can send data to the master process"
 msgstr ""
 
-#: fork.c:684
+#: fork.c:686
 msgid "there is no pipe to the master process"
 msgstr ""
 
-#: fork.c:686
+#: fork.c:688
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 
-#: fork.c:695 fork.c:703 fork.c:1079
+#: fork.c:697 fork.c:705 fork.c:1081
 msgid "write error, closing pipe to the master"
 msgstr ""
 
-#: fork.c:713
+#: fork.c:715
 msgid "only the master process can send data to a child process"
 msgstr ""
 
-#: fork.c:714
+#: fork.c:716
 msgid "what must be a raw vector"
 msgstr ""
 
-#: fork.c:721
+#: fork.c:723
 #, c-format
 msgid "child %d does not exist"
 msgstr ""
 
-#: fork.c:727
+#: fork.c:729
 msgid "write error"
 msgstr ""
 
-#: fork.c:780
+#: fork.c:782
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr ""
 
-#: fork.c:847 fork.c:970
+#: fork.c:849 fork.c:972
 #, c-format
 msgid "error '%s' in select"
 msgstr ""
 
-#: fork.c:853
+#: fork.c:855
 #, c-format
 msgid " - read select %d children: "
 msgstr ""
 
-#: fork.c:883
+#: fork.c:885
 #, c-format
 msgid " read_child_ci(%d) - read length returned %lld\n"
 msgstr ""
 
-#: fork.c:896
+#: fork.c:898
 #, c-format
 msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
 msgstr ""
 
-#: fork.c:927
+#: fork.c:929
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.c:1061
+#: fork.c:1063
 msgid "'mckill' failed"
 msgstr ""
 
-#: fork.c:1069
+#: fork.c:1071
 #, c-format
 msgid "child %d: 'mcexit' called\n"
 msgstr ""
 
-#: fork.c:1071
+#: fork.c:1073
 msgid "'mcexit' can only be used in a child process"
 msgstr ""
 
-#: fork.c:1083
+#: fork.c:1085
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.c:1090
+#: fork.c:1092
 #, c-format
 msgid "child %d: exiting\n"
 msgstr ""
 
-#: fork.c:1093
+#: fork.c:1095
 msgid "'mcexit()' function failed"
 msgstr ""
 
-#: fork.c:1122 fork.c:1131
+#: fork.c:1124 fork.c:1133
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:1142
+#: fork.c:1144
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:1165
+#: fork.c:1167
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 
-#: ncpus.c:77
+#: ncpus.c:93 ncpus.c:192
+#, c-format
+msgid "in reading processor information, probable cause: %d"
+msgstr ""
+
+#: ncpus.c:178
 msgid "GetLogicalProcessorInformation is not supported on this OS."
 msgstr ""
 
-#: ncpus.c:87
+#: ncpus.c:191
 msgid "allocation failure"
-msgstr ""
-
-#: ncpus.c:88
-#, c-format
-msgid "in reading processor information, probable cause: %d"
 msgstr ""

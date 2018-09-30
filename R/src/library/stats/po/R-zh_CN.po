@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -5278,10 +5278,16 @@ msgid "number of observations in each group must be at least 2"
 msgstr "每组的观察量数目至少为2"
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 #, fuzzy
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr "偏置的个数是%d，应该同观察量的个数%d相等"
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "偏置的个数是%d，应该同观察量的个数%d相等"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6063,9 +6069,10 @@ msgstr "時間序列的周期不能小于二"
 msgid "times to be replaced do not match"
 msgstr "需要替换的时间不相符"
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+#, fuzzy
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr "案例不够, n小于k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

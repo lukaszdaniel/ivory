@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 20:07+0200\n"
+"POT-Creation-Date: 2018-09-30 17:28+0200\n"
 "PO-Revision-Date: 2015-01-17 15:11+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <R-core@r-project.org>\n"
@@ -84,7 +84,7 @@ msgstr "unzulässiges Plotsymbol"
 msgid "unable to clip to rotated rectangle"
 msgstr "Kann nicht auf das rotierte Rechteck zurechtschneiden"
 
-#: layout.c:590 layout.c:594 unit.c:1899
+#: layout.c:601 layout.c:605 unit.c:1903
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "Ungültige Einheit"
@@ -102,35 +102,39 @@ msgstr "Kann den Gridstatus nicht speichern. Zu viele geöffnete Geräte"
 msgid "unit attribute 'data' is of incorrect type"
 msgstr ""
 
-#: unit.c:261 unit.c:411 unit.c:1211 unit.c:1291 unit.c:1371 unit.c:1451
+#: unit.c:166
+msgid "object is not a unit, unit.list, or unitArithmetic object"
+msgstr ""
+
+#: unit.c:265 unit.c:415 unit.c:1215 unit.c:1295 unit.c:1375 unit.c:1455
 #, fuzzy
 msgid "unimplemented unit function"
 msgstr "Nicht implementierte Einheitenfunktion"
 
-#: unit.c:894 unit.c:1646
+#: unit.c:898 unit.c:1650
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "Unzulässige Einheit oder Einheit nicht implementiert"
 
-#: unit.c:1703 unit.c:1734
+#: unit.c:1707 unit.c:1738
 msgid "Viewport has zero dimensions"
 msgstr ""
 
-#: unit.c:1766 unit.c:1781 unit.c:1796 unit.c:1811
+#: unit.c:1770 unit.c:1785 unit.c:1800 unit.c:1815
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1915
+#: unit.c:1919
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "Einheiten müssen Zeichenketten sein"
 
-#: unit.c:1918
+#: unit.c:1922
 #, fuzzy, c-format
 msgid "'%s' argument must be of length > 0"
 msgstr "Einheiten müssen positive Länge haben"
 
-#: util.c:273 util.c:285
+#: util.c:274 util.c:286
 msgid "grid grob object is empty"
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -5312,10 +5312,17 @@ msgid "number of observations in each group must be at least 2"
 msgstr " 各グループ中の観測値の数は少なくとも 2 でなければなりません "
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 #, fuzzy
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr ""
+" オフセットの数は %d ですが、%d (観測値の数)に等しくなければなりません "
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr ""
 " オフセットの数は %d ですが、%d (観測値の数)に等しくなければなりません "
 
@@ -6111,9 +6118,10 @@ msgstr " 時系列の期間が無いか、2未満です "
 msgid "times to be replaced do not match"
 msgstr " 置き換えるべき時間が不整合です "
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+#, fuzzy
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr " ケースが少なすぎます、n < k "
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

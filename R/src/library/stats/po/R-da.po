@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -5101,10 +5101,16 @@ msgid "number of observations in each group must be at least 2"
 msgstr "argumenter skal have samme længde"
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
 msgstr ""
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
+msgstr "modeller er ikke alle egnede til det samme antal observationer"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -5859,9 +5865,9 @@ msgstr "tidsserier har ingen eller mindre end 2 perioder"
 msgid "times to be replaced do not match"
 msgstr ""
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr ""
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

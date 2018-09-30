@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 15:40+0200\n"
+"POT-Creation-Date: 2018-09-18 18:21+0200\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: axis_scales.c:38 axis_scales.c:39 axis_scales.c:56
+#: axis_scales.c:38 axis_scales.c:39 axis_scales.c:57
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr ""

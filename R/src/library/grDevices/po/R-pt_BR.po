@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-06 18:23\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -178,6 +178,11 @@ msgid ""
 "Available devices are:\n"
 "%s"
 msgstr "dispositivos disponíveis são %s"
+
+#. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'", "x11(w, h)",     "x11(width=w, height=h)")
+#: R/windows/windows.R:0
+msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
+msgstr ""
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
 #: R/convertColor.R:0

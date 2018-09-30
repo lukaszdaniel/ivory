@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-28 20:07+0200\n"
+"POT-Creation-Date: 2018-09-30 17:28+0200\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -82,7 +82,7 @@ msgstr "플랏 기호가 잘못되었습니다 "
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형에 고정시킬 수 없습니다 "
 
-#: layout.c:590 layout.c:594 unit.c:1899
+#: layout.c:601 layout.c:605 unit.c:1903
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "unit 이 잘못되었습니다 "
@@ -101,35 +101,39 @@ msgstr ""
 msgid "unit attribute 'data' is of incorrect type"
 msgstr ""
 
-#: unit.c:261 unit.c:411 unit.c:1211 unit.c:1291 unit.c:1371 unit.c:1451
+#: unit.c:166
+msgid "object is not a unit, unit.list, or unitArithmetic object"
+msgstr ""
+
+#: unit.c:265 unit.c:415 unit.c:1215 unit.c:1295 unit.c:1375 unit.c:1455
 #, fuzzy
 msgid "unimplemented unit function"
 msgstr "구현되지 않은 unit 함수  "
 
-#: unit.c:894 unit.c:1646
+#: unit.c:898 unit.c:1650
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "unit 의 잘못된 사용이거나, 구현되지 않은 unit 입니다 "
 
-#: unit.c:1703 unit.c:1734
+#: unit.c:1707 unit.c:1738
 msgid "Viewport has zero dimensions"
 msgstr ""
 
-#: unit.c:1766 unit.c:1781 unit.c:1796 unit.c:1811
+#: unit.c:1770 unit.c:1785 unit.c:1800 unit.c:1815
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1915
+#: unit.c:1919
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "unit 이 문자형일 필요는 없습니다 "
 
-#: unit.c:1918
+#: unit.c:1922
 #, fuzzy, c-format
 msgid "'%s' argument must be of length > 0"
 msgstr "unit 의 길이는 0 보다 커야 합니다 "
 
-#: util.c:273 util.c:285
+#: util.c:274 util.c:286
 msgid "grid grob object is empty"
 msgstr ""
 

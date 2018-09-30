@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -5303,10 +5303,16 @@ msgid "number of observations in each group must be at least 2"
 msgstr "comprimentos de 'x' e 'xreg' não correspondem"
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 #, fuzzy
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr "número de offsets é %d e deve igualar %d (número de observações)"
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "número de offsets é %d e deve igualar %d (número de observações)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6102,9 +6108,10 @@ msgstr "série temporal não tem período, ou tem menos de 2"
 msgid "times to be replaced do not match"
 msgstr ""
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+#, fuzzy
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr "demasiado poucos casos, n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

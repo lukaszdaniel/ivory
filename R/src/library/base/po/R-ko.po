@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -151,7 +151,7 @@ msgstr "'input' 과 'target' 은 반드시 문자벡터이어야 합니다 "
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
 
-#. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
+#. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
 #, fuzzy
 msgid "'%s' argument cannot be of length 0"
@@ -1105,6 +1105,12 @@ msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
 #, fuzzy
 msgid "'x' cannot be coerced to class \"octmode\""
 msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
+
+#. R/array.R: stop("'x' must have named dimnames")
+#: R/array.R:0
+#, fuzzy
+msgid "'x' must have named dimnames"
+msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -2144,6 +2150,22 @@ msgid ""
 "loading %s"
 msgstr ""
 
+#. R/Defunct.R: errorCondition(msg, old = fname, new = new, package = package, class = "defunctError")
+#: R/Defunct.R:0
+msgid "defunctError"
+msgstr ""
+
+#. R/Deprecated.R: warningCondition(msg, old = old, new = new, package = package, class = "deprecatedWarning")
+#: R/Deprecated.R:0
+msgid "deprecatedWarning"
+msgstr ""
+
+#. R/array.R: stop("dim(x) must have a positive length")
+#: R/array.R:0
+#, fuzzy
+msgid "dim(x) must have a positive length"
+msgstr "dim(x)은 양의 값을 가져야 합니다 "
+
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXct"))
@@ -2494,6 +2516,11 @@ msgstr "데이터 프레임에 잘못된 'dimnames' 가 주어졌습니다 "
 #, fuzzy
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "잘못된 라벨입니다; 길이 %d 는 반드시 1 또는 %d 이어야 합니다 "
+
+#. R/dataframe.R: gettextf("invalid 'max' / getOption(\"max.print\"): %s", max)
+#: R/dataframe.R:0
+msgid "invalid 'max' / getOption(\"max.print\"): %s"
+msgstr ""
 
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
@@ -2949,7 +2976,8 @@ msgid "norm '%s' currently always uses 'exact = FALSE' option"
 msgstr "norm '%s' currently always uses exact = FALSE"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
-#: R/apply.R:0
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "not all elements of 'MARGIN' are names of dimensions"
 
@@ -3488,6 +3516,13 @@ msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0] ""
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base")
+#: R/dataframe.R:0
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural ""
+" [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] ""
+
 #. R/all.equal.R: ngettext(sum(ne), "%d element mismatch", "%d element mismatches")
 #: R/all.equal.R:0
 msgid "%d element mismatch"
@@ -3770,10 +3805,9 @@ msgid_plural "supplied %d row names for %d rows"
 msgstr[0] "%d 개의 행에 %d 개의 이름이 지정되었습니다 "
 
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#. R/library.R: ngettext(length(bad), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#. R/namespace.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#: R/library.R:0 R/namespace.R:0
+#. R/library.R: ngettext(length(package), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
+#: R/library.R:0
 #, fuzzy
 msgid "there is no package called %s"
 msgid_plural "there are no packages called %s"

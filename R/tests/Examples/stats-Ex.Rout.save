@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-09-05 r1056) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-09-13 r1057) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-09-05 r75298) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-09-13 r75298) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3819,7 +3819,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x489cab0>
+<environment: 0x4aaea60>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4817,7 +4817,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x5590dc8>
+<bytecode: 0x579f520>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7430,7 +7430,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5726df0>
+<environment: 0x5930f18>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -8376,7 +8376,7 @@ Error in command 'integrate(f, 0, 1)':
 + ## "silently" gave  integrate(dnorm, 0, 20)  in earlier versions of R
 + ## Don't show: 
 +  , verbose=TRUE)
-Asserted error: 'lower' argument must be of length one
+Asserted error: variable length(lower) == 1 is not TRUE
 > ## End (Don't show)
 > 
 > 
@@ -12100,14 +12100,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x4f86440>
-<environment: 0x4f94fd8>
+<bytecode: 0x5322e10>
+<environment: 0x532fde0>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x4f8a0e8>
-<environment: 0x4f94fd8>
+<bytecode: 0x5322cc0>
+<environment: 0x532fde0>
 
 > 
 > 
@@ -16231,8 +16231,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x2870008>
-<environment: 0x50bd5e8>
+<bytecode: 0x2a26550>
+<environment: 0x5b147a8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18557,7 +18557,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.245 0.16 4.405 0 0 
+Time elapsed:  4.675 0.128 4.812 0 0 
 > grDevices::dev.off()
 null device 
           1 

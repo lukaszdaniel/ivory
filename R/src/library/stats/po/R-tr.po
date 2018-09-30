@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -5237,10 +5237,16 @@ msgid "number of observations in each group must be at least 2"
 msgstr "'x' ve 'y' deki gözlem sayıları eşleşmeli"
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 #, fuzzy
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr "sıklıkların sayısı ile gözlemlerin sayısı eşleşmeli"
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "sıklıkların sayısı ile gözlemlerin sayısı eşleşmeli"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6012,9 +6018,10 @@ msgstr "zaman serisi 2'den az veya hiç dönem içermiyor"
 msgid "times to be replaced do not match"
 msgstr "değiştirme sayısı eşleşmiyor"
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+#, fuzzy
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr "çok az durum, n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

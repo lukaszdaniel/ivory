@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.6.0\n"
-"POT-Creation-Date: 2018-04-06 18:23\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,6 +223,13 @@ msgstr ""
 #. R/windows/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
 
 msgid "Available devices are:\n%s"
+msgstr ""
+
+
+#: R/windows/windows.R: 0
+#. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'", "x11(w, h)",     "x11(width=w, height=h)")
+
+msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
 msgstr ""
 
 

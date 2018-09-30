@@ -2127,7 +2127,7 @@ SEXP R_Unserialize(R_inpstream_t stream)
     /* Read the version numbers */
     version = InInteger(stream);
     writer_version = InInteger(stream);
-    min_reader_version = InInteger(stream); 
+    min_reader_version = InInteger(stream);
     switch (version) {
     case 2: break;
     case 3:

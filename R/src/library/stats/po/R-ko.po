@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -5260,10 +5260,16 @@ msgid "number of observations in each group must be at least 2"
 msgstr "각 그룹에 있는 관측치의 수는 반드시 적어도 2이어야 합니다"
 
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
-#: R/glm.R:0 R/lm.R:0
+#: R/glm.R:0
 #, fuzzy
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr "offsets의 개수 %1$d는 관측치의 개수 %2$d와 같아야 합니다"
+
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+#: R/lm.R:0
+#, fuzzy
+msgid ""
+"number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "offsets의 개수 %1$d는 관측치의 개수 %2$d와 같아야 합니다"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6041,9 +6047,10 @@ msgstr "시계열이 없거나 2 주기보다 적습니다"
 msgid "times to be replaced do not match"
 msgstr ""
 
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases, n < k"
+#, fuzzy
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr "관측치의 수가 너무 적습니다, 즉, n < k 입니다"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

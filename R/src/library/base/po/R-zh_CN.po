@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -151,7 +151,7 @@ msgstr "'input'和'target'一定都得是字符串"
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "所有参数的长度都应一致"
 
-#. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
+#. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
 #, fuzzy
 msgid "'%s' argument cannot be of length 0"
@@ -1094,6 +1094,12 @@ msgstr "不能强迫把'x'改变成'hexmode'"
 #, fuzzy
 msgid "'x' cannot be coerced to class \"octmode\""
 msgstr "不能强迫把'x'改变成'hexmode'"
+
+#. R/array.R: stop("'x' must have named dimnames")
+#: R/array.R:0
+#, fuzzy
+msgid "'x' must have named dimnames"
+msgstr "'X'必需有带名字的维名"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -2131,6 +2137,22 @@ msgid ""
 "loading %s"
 msgstr ""
 
+#. R/Defunct.R: errorCondition(msg, old = fname, new = new, package = package, class = "defunctError")
+#: R/Defunct.R:0
+msgid "defunctError"
+msgstr ""
+
+#. R/Deprecated.R: warningCondition(msg, old = old, new = new, package = package, class = "deprecatedWarning")
+#: R/Deprecated.R:0
+msgid "deprecatedWarning"
+msgstr ""
+
+#. R/array.R: stop("dim(x) must have a positive length")
+#: R/array.R:0
+#, fuzzy
+msgid "dim(x) must have a positive length"
+msgstr "dim(X)的值必需是正数"
+
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXct"))
@@ -2472,6 +2494,11 @@ msgstr "数据框的'dimnames'给得不对"
 #, fuzzy
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "标记不对；长度%d应该是一或%d"
+
+#. R/dataframe.R: gettextf("invalid 'max' / getOption(\"max.print\"): %s", max)
+#: R/dataframe.R:0
+msgid "invalid 'max' / getOption(\"max.print\"): %s"
+msgstr ""
 
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
@@ -2926,7 +2953,8 @@ msgid "norm '%s' currently always uses 'exact = FALSE' option"
 msgstr "范数'%s'现在总是用exact = FALSE"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
-#: R/apply.R:0
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "所有'MARGIN'的元素都必需是维的名字不是'缘'的所有元素都是尺寸名称"
 
@@ -3460,6 +3488,13 @@ msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0] ""
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base")
+#: R/dataframe.R:0
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural ""
+" [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] ""
+
 #. R/all.equal.R: ngettext(sum(ne), "%d element mismatch", "%d element mismatches")
 #: R/all.equal.R:0
 msgid "%d element mismatch"
@@ -3737,10 +3772,9 @@ msgid_plural "supplied %d row names for %d rows"
 msgstr[0] "%d行名与%d行不相配"
 
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#. R/library.R: ngettext(length(bad), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#. R/namespace.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
-#: R/library.R:0 R/namespace.R:0
+#. R/library.R: ngettext(length(package), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
+#: R/library.R:0
 #, fuzzy
 msgid "there is no package called %s"
 msgid_plural "there are no packages called %s"

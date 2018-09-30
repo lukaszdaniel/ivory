@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-09-05 r1056) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-09-13 r1057) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-09-05 r75298) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-09-13 r75298) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -46,28 +46,22 @@ Type 'q()' to quit R.
 [1] "1848-01-01 12:00:00 GMT"
 > c(unclass(z))
 [1] -3849940800
-> (z <- as.POSIXct("2040-01-01 12:00"))
+> ## We don't know the operation of timezones next year let alone in 1940
+> ## but these should at least round-trip
+> as.POSIXct("2040-01-01 12:00")
 [1] "2040-01-01 12:00:00 GMT"
-> c(unclass(z))
-[1] 2209032000
-> (z <- as.POSIXct("2040-07-01 12:00"))
+> as.POSIXct("2040-07-01 12:00")
 [1] "2040-07-01 12:00:00 GMT"
-> c(unclass(z))
-[1] 2224756800
 > 
-> Sys.setenv(TZ = "EST5EDT")
+> Sys.setenv(TZ = "EST5EDT")  # also pretty much portable.
 > (z <- as.POSIXct("1848-01-01 12:00"))
 [1] "1848-01-01 12:00:00 EST"
 > c(unclass(z))
 [1] -3849922800
-> (z <- as.POSIXct("2040-01-01 12:00"))
+> as.POSIXct("2040-01-01 12:00")
 [1] "2040-01-01 12:00:00 EST"
-> c(unclass(z))
-[1] 2209050000
-> (z <- as.POSIXct("2040-07-01 12:00"))
+> as.POSIXct("2040-07-01 12:00")
 [1] "2040-07-01 12:00:00 EST"
-> c(unclass(z))
-[1] 2224774800
 > 
 > ## PR15613: had day as > 24hrs.
 > as.POSIXlt(ISOdate(2071,1,13,0,0,tz="Etc/GMT-1"))$wday
@@ -76,7 +70,7 @@ Type 'q()' to quit R.
 [1] 2
 > 
 > 
-> ## Incorrect use of %d should work even though abbreviation does match
+> ## Incorrect use of %b should work even though abbreviation does match
 > old <- Sys.setlocale("LC_TIME", "C") # to be sure
 > stopifnot(!is.na(strptime("11-August-1903", "%d-%b-%Y")))
 > 

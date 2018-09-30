@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-06 18:23\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2015-01-17 15:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -184,6 +184,11 @@ msgid ""
 "Available devices are:\n"
 "%s"
 msgstr "可用的装置是%s"
+
+#. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'", "x11(w, h)",     "x11(width=w, height=h)")
+#: R/windows/windows.R:0
+msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
+msgstr ""
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
 #: R/convertColor.R:0

@@ -704,9 +704,6 @@ function(package = NULL, lib.loc = NULL, quiet = FALSE,
 
 packageNotFoundError <-
 function(package, lib.loc, call = NULL) {
-    if(length(package) == 1L)
-        msg <- gettextf("there is no package called %s", sQuote(package))
-    else
         msg <- sprintf(ngettext(length(package),
                                "there is no package called %s",
                                "there are no packages called %s", domain = "R-base"),

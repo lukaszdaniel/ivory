@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 15:40+0200\n"
+"POT-Creation-Date: 2018-09-18 18:21+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -42,77 +42,72 @@ msgstr "for mange grafikksystem registrerte"
 msgid "bad units specified in '%s'"
 msgstr "ugyldige einingar gjevne i «%s»"
 
-#: graphics.c:1784 graphics.c:1806
+#: graphics.c:1811 graphics.c:1833
 msgid "attempt to plot on null device"
 msgstr "forsøk på å plotta på nulleininga"
 
-#: graphics.c:1836
+#: graphics.c:1863
 #, fuzzy
 msgid "outer margins are too large (figure region is too small)"
 msgstr "ytremargane er for store (figurområdet vert for lite)"
 
-#: graphics.c:1838
+#: graphics.c:1865
 #, fuzzy
 msgid "figure region is too large"
 msgstr "figurområdet er for stort"
 
-#: graphics.c:1840
+#: graphics.c:1867
 #, fuzzy
 msgid "figure margins are too large"
 msgstr "figurmargane er for store"
 
-#: graphics.c:1842
+#: graphics.c:1869
 #, fuzzy
 msgid "plot region is too large"
 msgstr "plotteområdet er for stort"
 
-#: graphics.c:1889
-#, fuzzy, c-format
-msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
-msgstr "relativt verdiområde = %4.0f × EPS er lite (akse %d)"
-
-#: graphics.c:1941
+#: graphics.c:1925
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "uendelege aksegrenser [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.c:1971
+#: graphics.c:1955
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "aksestilen «%c» er ikkje implementert"
 
-#: graphics.c:2209 graphics.c:2607
+#: graphics.c:2193 graphics.c:2591
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Inga verksam grafikkeining"
 
-#: graphics.c:2404
+#: graphics.c:2388
 msgid "plot.new has not been called yet"
 msgstr "plot.new er ikkje kalla enno"
 
-#: graphics.c:2406
+#: graphics.c:2390
 msgid "invalid graphics state"
 msgstr "ugyldig grafikktilstand"
 
-#: graphics.c:2557
+#: graphics.c:2541
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3066
+#: graphics.c:3049
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "pil av lengd null har ikkje-unik vinkel, og vert derfor ikkje teikna"
 
-#: graphics.c:3147
+#: graphics.c:3130
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "ugyldig par(\"bty\") = '%c' (ingen box() teikna)"
 
-#: graphics.c:3164 par.c:1121
+#: graphics.c:3147 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "ugyldig argument sendt til par()"
 
-#: graphics.c:3409
+#: graphics.c:3354
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Metrikkinformasjon ikkje tilgjengeleg for eininga"
@@ -201,13 +196,13 @@ msgstr "berre NA-verdiar er tillatne i logisk plottesymbol"
 msgid "invalid plotting symbol"
 msgstr "ugyldig plottesymbol"
 
-#: plot.c:219 plot.c:2814 plot3d.c:1180 plot3d.c:1184
+#: plot.c:219 plot.c:2812 plot3d.c:1180 plot3d.c:1184
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "ugyldig «%s»-format"
 
-#: plot.c:278 plot.c:292 plot.c:483 plot.c:488 plot.c:2145 plot.c:2152
-#: plot.c:3174 plot.c:3176 plot.c:3178 plot.c:3337 plot3d.c:1164 plot3d.c:1168
+#: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
+#: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
 #: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
@@ -227,268 +222,268 @@ msgstr "gyldig «vfont»-verdi [typeface = %d, fontindex = %d]"
 msgid "invalid graphics parameter"
 msgstr "ugyldig grafikkparameter"
 
-#: plot.c:479
+#: plot.c:475
 #, fuzzy
 msgid "at least 3 arguments are required"
 msgstr "må ha minst 3 argument"
 
-#: plot.c:494
+#: plot.c:489
 msgid "\"log=\" specification must be character"
 msgstr "«log»-valet må vera eit teikn"
 
-#: plot.c:505
+#: plot.c:502
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "ugyldig «log=%s»-val"
 
-#: plot.c:520 plot.c:532
+#: plot.c:518 plot.c:530
 #, fuzzy, c-format
 msgid "NA values are not allowed in '%s'"
 msgstr "kan ikkje ha NA-verdiar i «xlim»"
 
-#: plot.c:526 plot.c:538
+#: plot.c:524 plot.c:536
 #, fuzzy, c-format
 msgid "'%s' needs finite values"
 msgstr "må ha endelege «xlim»-verdiar"
 
-#: plot.c:544
+#: plot.c:542
 msgid "Logarithmic axis must have positive limits"
 msgstr "Logaritmisk akse må ha positive grenser"
 
-#: plot.c:668
+#: plot.c:666
 msgid "invalid type for axis labels"
 msgstr "ugyldig type for aksenamn"
 
-#: plot.c:756 plot.c:1331 plot.c:1654 plot.c:1719 plot.c:1794 plot.c:1860
-#: plot.c:1934 plot.c:2029 plot.c:2105 plot.c:2383 plot.c:2557 plot.c:2773
-#: plot.c:3319 plot.c:3454 plot.c:3530 plot.c:3696 plot.c:3976 plot3d.c:1873
+#: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
+#: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
 msgid "too few arguments"
 msgstr "for få argument"
 
-#: plot.c:767
+#: plot.c:765
 #, c-format
 msgid "invalid axis number %d"
 msgstr "ugyldig aksetal %d"
 
-#: plot.c:854
+#: plot.c:852
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "«hadj» må ha lengd 1"
 
-#: plot.c:861 plot.c:2117 plot.c:2394 plot.c:2400 plot.c:2407 plot.c:2415
-#: plot.c:2422 plot.c:2429 plot.c:2436 plot.c:2443 plot.c:2451 plot.c:2458
-#: plot.c:3181
+#: plot.c:859 plot.c:2115 plot.c:2392 plot.c:2398 plot.c:2405 plot.c:2413
+#: plot.c:2420 plot.c:2427 plot.c:2434 plot.c:2441 plot.c:2449 plot.c:2456
+#: plot.c:3179
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "«side» av lengd null oppgjeven"
 
-#: plot.c:866
+#: plot.c:864
 #, fuzzy, c-format
 msgid "'%s' argument must be of length one"
 msgstr "«hadj» må ha lengd 1"
 
-#: plot.c:896
+#: plot.c:894
 #, fuzzy, c-format
 msgid "'%s' argument must be NA or a finite number"
 msgstr "«hadj» må ha lengd 1"
 
-#: plot.c:948
+#: plot.c:946
 #, fuzzy
 msgid "'labels' argument is supplied and not 'at' argument"
 msgstr "«labels» oppgjeven men ikkje «at»"
 
-#: plot.c:952
+#: plot.c:950
 #, fuzzy, c-format
 msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr "lengda på «at» (%d) og «labels» (%d) er forskjellig"
 
-#: plot.c:971
+#: plot.c:969
 msgid "no locations are finite"
 msgstr "ingen plasseringar er endelege"
 
-#: plot.c:1347
+#: plot.c:1345
 msgid "invalid plotting structure"
 msgstr "ugyldig plottestruktur"
 
-#: plot.c:1349
+#: plot.c:1347
 #, fuzzy, c-format
 msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "«x» og «y»-lengdene er forskjellig i %s()"
 
-#: plot.c:1360
+#: plot.c:1358
 #, c-format
 msgid "plot type '%s' will be truncated to first character"
 msgstr "plottetypen «%s» vert trunkert til det første teiknet"
 
-#: plot.c:1364 plot.c:3035
+#: plot.c:1362 plot.c:3033
 msgid "invalid plot type"
 msgstr "ugyldig plottetype"
 
-#: plot.c:1566
+#: plot.c:1564
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "ugyldig plottetype «%c»"
 
-#: plot.c:1609
+#: plot.c:1607
 msgid "invalid first argument"
 msgstr "ugyldig førsteargument"
 
-#: plot.c:1616
+#: plot.c:1614
 msgid "invalid second argument"
 msgstr "ugyldig andreargument"
 
-#: plot.c:1624
+#: plot.c:1622
 msgid "invalid third argument"
 msgstr "ugyldig tredjeargument"
 
-#: plot.c:1632
+#: plot.c:1630
 msgid "invalid fourth argument"
 msgstr "ugyldig fjerdeargument"
 
-#: plot.c:1640
+#: plot.c:1638
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "kan ikkje blanda koordinatar av lengd null og lengd ulik null"
 
-#: plot.c:1865
+#: plot.c:1863
 msgid "Empty raster"
 msgstr ""
 
-#: plot.c:1947
+#: plot.c:1945
 msgid "invalid arrow head length"
 msgstr "ugyldig lengd på pilhovud"
 
-#: plot.c:1952
+#: plot.c:1950
 msgid "invalid arrow head angle"
 msgstr "ugyldig vinkel på pilhovud"
 
-#: plot.c:1957
+#: plot.c:1955
 msgid "invalid arrow head specification"
 msgstr "ugyldig pilhovud-val"
 
-#: plot.c:2191
+#: plot.c:2189
 msgid "no coordinates were supplied"
 msgstr "ingen koordinatar oppgjevne"
 
-#: plot.c:2823
+#: plot.c:2821
 #, fuzzy
 msgid "'a' and 'b' arguments must be finite"
 msgstr "«a» og «b» må vera endelege"
 
-#: plot.c:2958 plot.c:4067 plot.c:4070 plot.c:4073 plot.c:4076 plot.c:4096
-#: plot.c:4100 plot.c:4103 plot.c:4123 plot.c:4127 plot.c:4130 plot3d.c:1086
+#: plot.c:2956 plot.c:4065 plot.c:4068 plot.c:4071 plot.c:4074 plot.c:4094
+#: plot.c:4098 plot.c:4101 plot.c:4121 plot.c:4125 plot.c:4128 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
 #: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ugyldig «%s»-argument"
 
-#: plot.c:3030 plot.c:3170
+#: plot.c:3028 plot.c:3168
 #, fuzzy, c-format
 msgid "invalid number of points in '%s' function"
 msgstr "ugyldig tal på punkt i locator()"
 
-#: plot.c:3172
+#: plot.c:3170
 msgid "incorrect argument type"
 msgstr "ugyldig argumenttype"
 
-#: plot.c:3184
+#: plot.c:3182
 msgid "different argument lengths"
 msgstr "forskjellige argumentlengder"
 
-#: plot.c:3186
+#: plot.c:3184
 #, fuzzy
 msgid "more labels than points"
 msgstr "fleire «labels»-verdiar enn punkt"
 
-#: plot.c:3238
+#: plot.c:3236
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "åtvaring: ingen punkt innan %.2f tommar\n"
 
-#: plot.c:3244
+#: plot.c:3242
 #, fuzzy
 msgid "warning: nearest point is already identified\n"
 msgstr "åtvaring: det næraste punktet er alt identifisert\n"
 
-#: plot.c:3330
+#: plot.c:3328
 msgid "invalid units"
 msgstr "ugyldige einingar"
 
-#: plot.c:3514 plot.c:3621
+#: plot.c:3512 plot.c:3619
 msgid "invalid dendrogram input"
 msgstr "ugyldig dendrogram-inndata"
 
-#: plot.c:3678
+#: plot.c:3676
 msgid "invalid symbol parameter vector"
 msgstr "ugyldig symbol-parametervektor"
 
-#: plot.c:3701
+#: plot.c:3699
 msgid "invalid symbol coordinates"
 msgstr "ugyldige symbolkoordinator"
 
-#: plot.c:3709
+#: plot.c:3707
 msgid "x/y/parameter length mismatch"
 msgstr "ulike lengder på x/y/parameter"
 
-#: plot.c:3728
+#: plot.c:3726
 msgid "invalid circles data"
 msgstr "ugyldige sirkeldata"
 
-#: plot.c:3730 plot.c:3751 plot.c:3776 plot.c:3806
+#: plot.c:3728 plot.c:3749 plot.c:3774 plot.c:3804
 msgid "invalid symbol parameter"
 msgstr "ugyldig symbolparameter"
 
-#: plot.c:3749
+#: plot.c:3747
 msgid "invalid squares data"
 msgstr "ugyldige kvadratdata"
 
-#: plot.c:3774
+#: plot.c:3772
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "ugyldige rektangeldata (treng 2 kolonnar)"
 
-#: plot.c:3804
+#: plot.c:3802
 msgid "invalid stars data"
 msgstr "ugyldige stjernedata"
 
-#: plot.c:3846
+#: plot.c:3844
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "ugyldige termometerdata (treng 3 eller 4 kolonnar)"
 
-#: plot.c:3849 plot.c:3855
+#: plot.c:3847 plot.c:3853
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "ugyldige termometer[,%s]"
 
-#: plot.c:3852
+#: plot.c:3850
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "termometer[,%s] ikkje i området [0,1] – kan sjå rart ut"
 
-#: plot.c:3894
+#: plot.c:3892
 #, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "ugyldige boksplott-data (treng 5 kolonnar)"
 
-#: plot.c:3903
+#: plot.c:3901
 #, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "boksplott[,5] utanfor området [0,1] – kan sjå rart ut"
 
-#: plot.c:3905
+#: plot.c:3903
 #, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "ugyldige boksplott[, 1:4]"
 
-#: plot.c:3951
+#: plot.c:3949
 msgid "invalid symbol type"
 msgstr "ugyldig symboltype"
 
-#: plot.c:3989 plot.c:3991 plot.c:3996 plot.c:3998
+#: plot.c:3987 plot.c:3989 plot.c:3994 plot.c:3996
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "ugyldig lengd på «%s»-argument"
 
-#: plot.c:4015
+#: plot.c:4013
 #, fuzzy
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "klarte ikkje reservera minne (i xspline)"
@@ -605,6 +600,10 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
+#~ msgstr "relativt verdiområde = %4.0f × EPS er lite (akse %d)"
 
 #, fuzzy
 #~ msgid "invalid argument passed to '%s'function"

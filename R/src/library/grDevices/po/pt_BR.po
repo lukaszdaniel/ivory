@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 15:40+0200\n"
+"POT-Creation-Date: 2018-09-18 18:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: axis_scales.c:38 axis_scales.c:39 axis_scales.c:56
+#: axis_scales.c:38 axis_scales.c:39 axis_scales.c:57
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr ""

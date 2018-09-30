@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -970,6 +970,13 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
+#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#: R/tar.R:0
+msgid "No %s command found"
+msgstr ""
+
 #. R/read.DIF.R: stop("No DIF data on clipboard")
 #: R/read.DIF.R:0
 msgid "No DIF data on clipboard"
@@ -1711,6 +1718,11 @@ msgstr ""
 msgid "appending column names to file"
 msgstr ""
 
+#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
+#: R/tar.R:0
+msgid "argument 'compressed' is ignored for the internal method"
+msgstr ""
+
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0
 msgid "argument 'help.db' is deprecated"
@@ -1755,6 +1767,11 @@ msgstr ""
 #. R/bug.report.R: gettext("bug report")
 #: R/bug.report.R:0
 msgid "bug report"
+msgstr ""
+
+#. R/tar.R: sQuote("bzip2")
+#: R/tar.R:0
+msgid "bzip2"
 msgstr ""
 
 #. R/edit.R: stop("can only handle vector and factor elements")
@@ -1908,11 +1925,6 @@ msgstr ""
 #. R/citation.R: gettextf("could not determine year for %s from package DESCRIPTION file", sQuote(package))
 #: R/citation.R:0
 msgid "could not determine year for %s from package DESCRIPTION file"
-msgstr ""
-
-#. R/help.search.R: gettextf("could not find package %s", sQuote(p))
-#: R/help.search.R:0
-msgid "could not find package %s"
 msgstr ""
 
 #. R/de.R: warning("could not restore type information")
@@ -2134,6 +2146,11 @@ msgstr ""
 msgid ""
 "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use "
 "the 'code_files' argument"
+msgstr ""
+
+#. R/tar.R: sQuote("gzip")
+#: R/tar.R:0
+msgid "gzip"
 msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
@@ -2657,12 +2674,6 @@ msgstr ""
 msgid "package %s in library %s will not be updated"
 msgstr ""
 
-#. R/citation.R: gettextf("package %s not found", sQuote(package))
-#. R/indices.R: gettextf("package %s not found", sQuote(pkg), domain = "R-utils")
-#: R/citation.R:0 R/indices.R:0
-msgid "package %s not found"
-msgstr ""
-
 #. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname),     domain = "R-utils")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
@@ -3013,6 +3024,11 @@ msgstr ""
 #. R/databrowser.R: stop("wrong number of table row entries")
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
+msgstr ""
+
+#. R/tar.R: sQuote("xz")
+#: R/tar.R:0
+msgid "xz"
 msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))

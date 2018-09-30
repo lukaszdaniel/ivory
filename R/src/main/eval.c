@@ -1560,6 +1560,13 @@ static R_INLINE void cleanupEnvVector(SEXP v)
        local variable. It would be cheaper to just use
        DECREMENT_REFCNT. It might also make sense to max out at len =
        10 or so. But this may still be too expensive. */
+
+    /* FIXME: Disabled for now since a BUILTIN that saves its (NR)
+       list can cause problems. .External.graphics does this for
+       recording. Probably the best option is to not have the args go
+       down as NR. */
+    return;
+
     R_xlen_t len = LENGTH(v);
     for (R_xlen_t i = 0; i < len; i++)
 	SET_VECTOR_ELT(v, i, R_NilValue);
@@ -5868,7 +5875,7 @@ static R_INLINE void SUBASSIGN_N_PTR(R_bcstack_t *sx, int rank,
 		errorcall(VECTOR_ELT(constants, callidx),		\
 			  _("invalid '%s' type in 'x %s y'"), arg, op);	\
 	    SETSTACK(-1, ScalarLogical(asLogical2(			\
-					   val, warn_level,		\
+					   val, /*checking*/ 1,		\
 					   VECTOR_ELT(constants, callidx)))); \
 	}								\
     } while(0)
@@ -7016,8 +7023,6 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     OP(AND1ST, 2): {
 	int callidx = GETOP();
 	int label = GETOP();
-	char *check = getenv("_R_CHECK_LENGTH_1_LOGIC2_");
-	int warn_lev = (check) ? (StringTrue(check) ? 2 : 1) : 0;
 	FIXUP_SCALAR_LOGICAL(callidx, "'x'", "&&", warn_lev);
 	SEXP value = GETSTACK(-1);
 	if (SCALAR_LVAL(value) == FALSE)
@@ -7027,8 +7032,6 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     }
     OP(AND2ND, 1): {
 	int callidx = GETOP();
-	char *check = getenv("_R_CHECK_LENGTH_1_LOGIC2_");
-	int warn_lev = (check) ? (StringTrue(check) ? 2 : 1) : 0;
 	FIXUP_SCALAR_LOGICAL(callidx, "'y'", "&&", warn_lev);
 	SEXP value = GETSTACK(-1);
 	/* The first argument is TRUE or NA. If the second argument is
@@ -7045,8 +7048,6 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     OP(OR1ST, 2):  {
 	int callidx = GETOP();
 	int label = GETOP();
-	char *check = getenv("_R_CHECK_LENGTH_1_LOGIC2_");
-	int warn_lev = (check) ? (StringTrue(check) ? 2 : 1) : 0;
 	FIXUP_SCALAR_LOGICAL(callidx, "'x'", "||", warn_lev);
 	SEXP value = GETSTACK(-1);
 	Rboolean val = SCALAR_LVAL(value);
@@ -7058,8 +7059,6 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     }
     OP(OR2ND, 1):  {
 	int callidx = GETOP();
-	char *check = getenv("_R_CHECK_LENGTH_1_LOGIC2_");
-	int warn_lev = (check) ? (StringTrue(check) ? 2 : 1) : 0;
 	FIXUP_SCALAR_LOGICAL(callidx, "'y'", "||", warn_lev);
 	SEXP value = GETSTACK(-1);
 	/* The first argument is FALSE or NA. If the second argument is

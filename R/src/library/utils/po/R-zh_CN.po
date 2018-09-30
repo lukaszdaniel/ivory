@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1040,6 +1040,14 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
+#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#: R/tar.R:0
+#, fuzzy
+msgid "No %s command found"
+msgstr "找不到"
+
 #. R/read.DIF.R: stop("No DIF data on clipboard")
 #: R/read.DIF.R:0
 msgid "No DIF data on clipboard"
@@ -1835,6 +1843,11 @@ msgstr "所有的项都必需有名字"
 msgid "appending column names to file"
 msgstr "给文件加列名"
 
+#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
+#: R/tar.R:0
+msgid "argument 'compressed' is ignored for the internal method"
+msgstr ""
+
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0
 msgid "argument 'help.db' is deprecated"
@@ -1881,6 +1894,11 @@ msgstr "无法安装程序包"
 #. R/bug.report.R: gettext("bug report")
 #: R/bug.report.R:0
 msgid "bug report"
+msgstr ""
+
+#. R/tar.R: sQuote("bzip2")
+#: R/tar.R:0
+msgid "bzip2"
 msgstr ""
 
 #. R/edit.R: stop("can only handle vector and factor elements")
@@ -2043,11 +2061,6 @@ msgstr ""
 #: R/citation.R:0
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "无法从程序包的DESCRIPTION文件中为%s确定年份"
-
-#. R/help.search.R: gettextf("could not find package %s", sQuote(p))
-#: R/help.search.R:0
-msgid "could not find package %s"
-msgstr "找不到程序包%s"
 
 #. R/de.R: warning("could not restore type information")
 #: R/de.R:0
@@ -2276,6 +2289,11 @@ msgid ""
 "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use "
 "the 'code_files' argument"
 msgstr "泛型函数和其他S4对象（例如'%s'）不能被转储出来；用code_files=参数"
+
+#. R/tar.R: sQuote("gzip")
+#: R/tar.R:0
+msgid "gzip"
+msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
@@ -2821,12 +2839,6 @@ msgstr "程序包%s的hsearch数据是空的-很奇怪"
 msgid "package %s in library %s will not be updated"
 msgstr "正在使用%s这个程序包，因此不会被安装"
 
-#. R/citation.R: gettextf("package %s not found", sQuote(package))
-#. R/indices.R: gettextf("package %s not found", sQuote(pkg), domain = "R-utils")
-#: R/citation.R:0 R/indices.R:0
-msgid "package %s not found"
-msgstr "没有%s这一个程序包"
-
 #. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkgname),     domain = "R-utils")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
@@ -3196,6 +3208,11 @@ msgstr "'dataentry'的参数不对"
 msgid "wrong number of table row entries"
 msgstr "表中的行数不对"
 
+#. R/tar.R: sQuote("xz")
+#: R/tar.R:0
+msgid "xz"
+msgstr ""
+
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0
 #, fuzzy
@@ -3541,6 +3558,12 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "没有%s这个程序包(给%s用)"
+
+#~ msgid "could not find package %s"
+#~ msgstr "找不到程序包%s"
+
+#~ msgid "package %s not found"
+#~ msgstr "没有%s这一个程序包"
 
 #, fuzzy
 #~ msgid "mirror non-interactively"

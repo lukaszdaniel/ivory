@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-17 22:25\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -45,7 +45,6 @@ msgid "%s command is not available"
 msgstr "le test '%s' n'est pas disponible"
 
 #. R/Vignettes.R: gettextf("%s file was not found", sQuote(file))
-#. R/Vignettes.R: gettextf("%s file was not found", sQuote(vignette))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
 #. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
@@ -122,6 +121,12 @@ msgstr "l'argument 'x' doit être un vecteur de chaînes de caractères"
 msgid "'%s' argument must be a single character string"
 msgstr "'x' doit être une chaîne de caractères unique"
 
+#. R/QC.R: gettextf("'%s' argument must be of length %d", "package", 1)
+#: R/QC.R:0
+#, fuzzy
+msgid "'%s' argument must be of length %d"
+msgstr "l'argument 'pkg' doit être de longueur 1"
+
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
@@ -143,7 +148,6 @@ msgstr "'x' doit être une chaîne de caractères unique"
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Rd.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "package")
-#. R/Vignettes.R: gettextf("'%s' argument must be of length 1", "vignette")
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
@@ -489,6 +493,11 @@ msgstr ""
 msgid "All user-level objects in a package should have documentation entries."
 msgstr ""
 
+#. R/QC.R: gettext("Apparent S3 methods needing delayed registration:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Apparent S3 methods needing delayed registration:"
+msgstr ""
+
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
@@ -750,6 +759,7 @@ msgid "Cannot extract Maintainer field from Authors@R field:"
 msgstr "Impossible d'extraire le champ 'Maintainer' du champ 'Authors@R' :"
 
 #. R/news.R: warning("Cannot extract version info from the following section titles:\n", paste(unique(nms[!ind]),     collapse = "  "))
+#. R/news.R: gettext("Cannot extract version info from the following section titles:\n", domain = "R-tools")
 #: R/news.R:0
 msgid "Cannot extract version info from the following section titles:"
 msgstr "Impossible d'extraire la version des titres de sections suivants :"
@@ -777,6 +787,12 @@ msgstr ""
 #: R/QC.R:0
 msgid "Change to non-FOSS package license."
 msgstr ""
+
+#. R/news.R: gettextf("Changes in version %s%s", names(vchunks), ifelse(is.na(dates), "", sprintf(" (%s)",     dates)), domain = "R-tools")
+#: R/news.R:0
+#, fuzzy
+msgid "Changes in version %s%s"
+msgstr "aucun package nommé '%s' n'existe"
 
 #. R/bibstyle.R: stop("Changes require specified 'style'")
 #: R/bibstyle.R:0
@@ -2772,6 +2788,13 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "Entête PDF introuvable"
 
+#. R/check.R: gettext("PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it for these macros.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it "
+"for these macros."
+msgstr ""
+
 #. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
 #: R/tools-deprecated.R:0
 #, fuzzy
@@ -3237,6 +3260,28 @@ msgstr ""
 msgid "S4 class codoc mismatches from documentation object %s:"
 msgstr "Erreurs 'codoc' de class S4 pour la documentation de l'objet '%s' :"
 
+#. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_%s but no OPENMP macro in PKG_LIBS\n",     this, this, domain = "R-tools")
+#: R/check.R:0
+msgid "SHLIB_OPENMP_%s is included in PKG_%s but no OPENMP macro in PKG_LIBS"
+msgstr ""
+
+#. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS\n", this, this,     domain = "R-tools")
+#: R/check.R:0
+msgid "SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS"
+msgstr ""
+
+#. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but not in PKG_%s\n", this, this,     domain = "R-tools")
+#: R/check.R:0
+msgid "SHLIB_OPENMP_%s is included in PKG_LIBS but not in PKG_%s"
+msgstr ""
+
+#. R/check.R: gettext("SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_CFLAGS in PKG_LIBS\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_CFLAGS in "
+"PKG_LIBS"
+msgstr ""
+
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
@@ -3522,6 +3567,12 @@ msgid ""
 "Recreate them with R < 3.5.0 or save(version = 2) or saveRDS(version = 2) as "
 "appropriate"
 msgstr ""
+
+#. R/QC.R: gettext("Suggested packages not available for checking:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Suggested packages not available for checking:"
+msgstr "Packages suggérés mais non disponibles pour la vérification :"
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
@@ -3890,6 +3941,11 @@ msgstr ""
 "Ce nom était utilisé par un package de base et est réattribué "
 "automatiquement par library()."
 
+#. R/check.R: gettext("This system is set to the wrong time: please correct", domain = "R-tools")
+#: R/check.R:0
+msgid "This system is set to the wrong time: please correct"
+msgstr ""
+
 #. R/Rprof.R: gettextf("Total run time: %s seconds.", format(res$sampling.time), domain = "R-tools")
 #: R/Rprof.R:0
 msgid "Total run time: %s seconds."
@@ -4020,9 +4076,25 @@ msgstr ""
 msgid "Use 'summary(full = TRUE)' for details."
 msgstr ""
 
+#. R/check.R: gettextf("Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for different languages may differ so the matching macro must be used in PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for F77: see the manual).\n",     sQuote("Writing R Extensions"), domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for "
+"different languages may differ so the matching macro must be used in "
+"PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for F77: see the "
+"manual)."
+msgstr ""
+
 #. R/QC.R: gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Using 'Additional_repositories specification' failed with packages:"
+msgstr ""
+
+#. R/check.R: gettext("Using a SHLIB_OPENMP_ macro for compilation but none in PKG_LIBS is not portable and may result in installation errors.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Using a SHLIB_OPENMP_ macro for compilation but none in PKG_LIBS is not "
+"portable and may result in installation errors."
 msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame %s", sQuote(docObj[["name"]]), domain = "R-tools")
@@ -4344,6 +4416,11 @@ msgstr ""
 #: R/tools-deprecated.R:0
 msgid "argument 'pkg' must be of length 1"
 msgstr "l'argument 'pkg' doit être de longueur 1"
+
+#. R/tools-deprecated.R: stop("argument 'vignette' must be of length 1")
+#: R/tools-deprecated.R:0
+msgid "argument 'vignette' must be of length 1"
+msgstr "l'argument 'vignette' doit être de longueur 1"
 
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
@@ -4972,6 +5049,11 @@ msgstr "création de la DLL ..."
 msgid "checking use of S3 registration ..."
 msgstr "création de la DLL ..."
 
+#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles", domain = "R-tools")
+#: R/check.R:0
+msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles"
+msgstr ""
+
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -5405,6 +5487,12 @@ msgstr ""
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
+#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "file '%s' not found"
+msgstr "le fichier '%s' est introuvable"
+
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -5471,6 +5559,11 @@ msgstr "génération des symboles de débogage (dSYM)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "serveur http arrêté par R_DISABLE_HTTPD"
+
+#. R/check.R: gettextf("incorrect macro SHLIB_OPENMP_%s included in PKG_%s\n", found, this, domain = "R-tools")
+#: R/check.R:0
+msgid "incorrect macro SHLIB_OPENMP_%s included in PKG_%s"
+msgstr ""
 
 #. R/install.R: gettextf("install for architecture %s", arch)
 #. R/install.R: gettextf("install for architecture %s", arch)
@@ -5561,6 +5654,11 @@ msgstr "installation dans"
 msgid "internal error"
 msgstr "erreur interne"
 
+#. R/QC.R: gettextf("invalid 'OS.type' \"%s\". Should not happen", .Platform$OS.type)
+#: R/QC.R:0
+msgid "invalid 'OS.type' \"%s\". Should not happen"
+msgstr ""
+
 #. R/build.R: gettext("invalid 'Package' field", domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -5599,6 +5697,17 @@ msgstr "valeur incorrecte pour 'compress' : utilisez FALSE, TRUE, 2 ou 3"
 #, fuzzy
 msgid "invalid value for '--compact-vignettes', assuming %s"
 msgstr "valeur incorrecte pour --compact-vignettes, \"qpdf\" sera utilisée"
+
+#. R/check.R: gettext("it is not portable to include SHLIB_OPENMP_*' macros in PKG_CPPFLAGS\n",     domain = "R-tools")
+#: R/check.R:0
+msgid "it is not portable to include SHLIB_OPENMP_*' macros in PKG_CPPFLAGS"
+msgstr ""
+
+#. R/check.R: gettext("it is not portable to include multiple SHLIB_OPENMP_*' macros in PKG_LIBS\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"it is not portable to include multiple SHLIB_OPENMP_*' macros in PKG_LIBS"
+msgstr ""
 
 #. R/admin.R: stop("loading package failed", call. = FALSE)
 #: R/admin.R:0
@@ -5794,11 +5903,6 @@ msgstr "package %s correctement décompressé et sommes MD5 vérifiées"
 #: R/install.R:0
 msgid "package %s was already a binary package and will not be rebuilt"
 msgstr ""
-
-#. R/tools-deprecated.R: gettextf("package '%s' was not found", pkg)
-#: R/tools-deprecated.R:0
-msgid "package '%s' was not found"
-msgstr "le package '%s' est introuvable"
 
 #. R/QC.R: gettext("package 'methods' is used but not declared", domain = "R-tools")
 #: R/QC.R:0
@@ -6297,15 +6401,6 @@ msgstr "le test '%s' a échoué"
 msgid "the 'lib.loc' argument has always been unused and is deprecated now"
 msgstr ""
 
-#. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
-#. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
-#. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
-#. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
-#: R/makeLazyLoad.R:0
-#, fuzzy
-msgid "there is no package called %s"
-msgstr "aucun package nommé '%s' n'existe"
-
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
 msgid "this cannot be used for package 'base'"
@@ -6445,6 +6540,12 @@ msgstr "impossible d'exécuter %s sur '%s'"
 #, fuzzy
 msgid "unable to run 'make clean' in 'src'"
 msgstr "impossible d'exécuter '%s' sur '%s'"
+
+#. R/check.R: gettext("unable to verify current time", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "unable to verify current time"
+msgstr "impossible de créer"
 
 #. R/QC.R: stop("unable to write code files", domain = "R-tools")
 #. R/QC.R: stop("unable to write code files")
@@ -7614,6 +7715,13 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 
+#~ msgid "package '%s' was not found"
+#~ msgstr "le package '%s' est introuvable"
+
+#, fuzzy
+#~ msgid "there is no package called %s"
+#~ msgstr "aucun package nommé '%s' n'existe"
+
 #, fuzzy
 #~ msgid "Note: information on .o files for i386 is not available"
 #~ msgstr "le test '%s' n'est pas disponible"
@@ -7650,10 +7758,6 @@ msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 #, fuzzy
 #~ msgid "Subdirectory 'exec' contains no files."
 #~ msgstr "le répertoire '%s' n'existe pas"
-
-#, fuzzy
-#~ msgid "file %s was not found"
-#~ msgstr "le fichier '%s' est introuvable"
 
 #, fuzzy
 #~ msgid "you must specify 'package' or 'dir' argument"
@@ -7840,9 +7944,6 @@ msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 #~ msgid "unable to run '%s' on '%s'"
 #~ msgstr "impossible d'exécuter '%s' sur '%s'"
 
-#~ msgid "unable to create"
-#~ msgstr "impossible de créer"
-
 #~ msgid "parsing '%s'"
 #~ msgstr "analyse de '%s'"
 
@@ -7869,9 +7970,6 @@ msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 
 #~ msgid "directory '%s' does not exist"
 #~ msgstr "le répertoire '%s' n'existe pas"
-
-#~ msgid "argument 'vignette' must be of length 1"
-#~ msgstr "l'argument 'vignette' doit être de longueur 1"
 
 #~ msgid "file '%s' does not exist"
 #~ msgstr "le fichier '%s' n'existe pas"

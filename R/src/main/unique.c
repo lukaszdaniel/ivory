@@ -969,6 +969,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		  val = i + 1; break;
 	      }
 	  break; }
+	default: error(_("invalid type")); break;
       }
       PROTECT(ans = ScalarInteger(val)); nprot++;
     }

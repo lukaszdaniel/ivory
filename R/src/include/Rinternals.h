@@ -11,7 +11,7 @@
  *  This file is part of R. R is distributed under the terms of the
  *  GNU General Public License, either Version 2, June 1991 or Version 3,
  *  June 2007. See doc/COPYRIGHTS for details of the copyright status of R.
- *  
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -184,6 +184,19 @@ typedef enum {
 
 typedef struct SEXPREC *SEXP;
 
+
+/* Define SWITH_TO_REFCNT to use reference counting instead of the
+   'NAMED' mechanism. */
+//#define SWITCH_TO_REFCNT
+
+#if defined(SWITCH_TO_REFCNT) && ! defined(COMPUTE_REFCNT_VALUES)
+# define COMPUTE_REFCNT_VALUES
+#endif
+#if defined(SWITCH_TO_REFCNT) && ! defined(ADJUST_ENVIR_REFCNTS)
+# define ADJUST_ENVIR_REFCNTS
+#endif
+
+
 // ======================= USE_RINTERNALS section
 #ifdef USE_RINTERNALS
 /* This is intended for use only within R itself.
@@ -260,17 +273,9 @@ struct promsxp_struct {
    field. Under the generational collector these are followed by the
    fields used to maintain the collector's linked list structures. */
 
-/* Define SWITH_TO_REFCNT to use reference counting instead of the
-   'NAMED' mechanism. */
-//#define SWITCH_TO_REFCNT
-
-#if defined(SWITCH_TO_REFCNT) && ! defined(COMPUTE_REFCNT_VALUES)
-# define COMPUTE_REFCNT_VALUES
+#ifdef SWITCH_TO_REFCNT
+# define REFCNTMAX ((1 << NAMED_BITS) - 1)
 #endif
-#if defined(SWITCH_TO_REFCNT) && ! defined(ADJUST_ENVIR_REFCNTS)
-# define ADJUST_ENVIR_REFCNTS
-#endif
-#define REFCNTMAX ((1 << NAMED_BITS) - 1)
 
 #define SEXPREC_HEADER \
     struct sxpinfo_struct sxpinfo; \
@@ -327,6 +332,33 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 # define REFCNT(x) 0
 # define TRACKREFS(x) FALSE
 #endif
+
+#if defined(COMPUTE_REFCNT_VALUES)
+# define SET_REFCNT(x,v) (REFCNT(x) = (v))
+# if defined(EXTRA_REFCNT_FIELDS)
+#  define SET_TRACKREFS(x,v) (TRACKREFS(x) = (v))
+# else
+#  define SET_TRACKREFS(x,v) ((x)->sxpinfo.spare = ! (v))
+# endif
+# define DECREMENT_REFCNT(x) do {					\
+	SEXP drc__x__ = (x);						\
+	if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX)	\
+	    SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);			\
+    } while (0)
+# define INCREMENT_REFCNT(x) do {			      \
+	SEXP irc__x__ = (x);				      \
+	if (REFCNT(irc__x__) < REFCNTMAX)		      \
+	    SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1);	      \
+    } while (0)
+#else
+# define SET_REFCNT(x,v) do {} while(0)
+# define SET_TRACKREFS(x,v) do {} while(0)
+# define DECREMENT_REFCNT(x) do {} while(0)
+# define INCREMENT_REFCNT(x) do {} while(0)
+#endif
+
+#define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
+#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
 
 #ifdef SWITCH_TO_REFCNT
 # undef NAMED
@@ -519,42 +551,19 @@ Rboolean (Rf_isObject)(SEXP s);
 	DECREMENT_REFCNT(dl__x__);		\
     } while (0)
 
-#if defined(COMPUTE_REFCNT_VALUES)
-# define SET_REFCNT(x,v) (REFCNT(x) = (v))
-# if defined(EXTRA_REFCNT_FIELDS)
-#  define SET_TRACKREFS(x,v) (TRACKREFS(x) = (v))
-# else
-#  define SET_TRACKREFS(x,v) ((x)->sxpinfo.spare = ! (v))
-# endif
-# define DECREMENT_REFCNT(x) do {					\
-	SEXP drc__x__ = (x);						\
-	if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX)	\
-	    SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);			\
-    } while (0)
-# define INCREMENT_REFCNT(x) do {			      \
-	SEXP irc__x__ = (x);				      \
-	if (REFCNT(irc__x__) < REFCNTMAX)		      \
-	    SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1);	      \
-    } while (0)
-#else
-# define SET_REFCNT(x,v) DO_NOTHING
-# define SET_TRACKREFS(x,v) DO_NOTHING
-# define DECREMENT_REFCNT(x) DO_NOTHING
-# define INCREMENT_REFCNT(x) DO_NOTHING
-#endif
-
-#define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
-#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
-
 /* Macros for some common idioms. */
 #ifdef SWITCH_TO_REFCNT
 # define MAYBE_SHARED(x) (REFCNT(x) > 1)
 # define NO_REFERENCES(x) (REFCNT(x) == 0)
-# define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
+# ifdef USE_RINTERNALS
+#  define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
+# endif
 #else
 # define MAYBE_SHARED(x) (NAMED(x) > 1)
 # define NO_REFERENCES(x) (NAMED(x) == 0)
-# define MARK_NOT_MUTABLE(x) SET_NAMED(x, NAMEDMAX)
+# ifdef USE_RINTERNALS
+#  define MARK_NOT_MUTABLE(x) SET_NAMED(x, NAMEDMAX)
+# endif
 #endif
 #define MAYBE_REFERENCED(x) (! NO_REFERENCES(x))
 #define NOT_SHARED(x) (! MAYBE_SHARED(x))
@@ -609,6 +618,11 @@ void (ENSURE_NAMEDMAX)(SEXP x);
 void (ENSURE_NAMED)(SEXP x);
 void (SETTER_CLEAR_NAMED)(SEXP x);
 void (RAISE_NAMED)(SEXP x, int n);
+void (DECREMENT_REFCNT)(SEXP x);
+void (INCREMENT_REFCNT)(SEXP x);
+void (DISABLE_REFCNT)(SEXP x);
+void (ENABLE_REFCNT)(SEXP x);
+void (MARK_NOT_MUTABLE)(SEXP x);
 
 /* S4 object testing */
 int (IS_S4_OBJECT)(SEXP x);
@@ -903,7 +917,7 @@ SEXP Rf_PairToVectorList(SEXP x);
 SEXP Rf_VectorToPairList(SEXP x);
 SEXP Rf_asCharacterFactor(SEXP x);
 int Rf_asLogical(SEXP x);
-int Rf_asLogical2(SEXP x, int warn_level, SEXP call);
+int Rf_asLogical2(SEXP x, int checking, SEXP call);
 int Rf_asInteger(SEXP x);
 double Rf_asReal(SEXP x);
 Rcomplex Rf_asComplex(SEXP x);

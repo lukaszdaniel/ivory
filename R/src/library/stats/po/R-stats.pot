@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.6.0\n"
-"POT-Creation-Date: 2018-07-23 15:40\n"
+"POT-Creation-Date: 2018-09-30 17:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6950,11 +6950,16 @@ msgstr ""
 
 
 #: R/glm.R: 0
-#: R/lm.R: 0
 #. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#. R/lm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(y))
 
 msgid "number of offsets (%d) should be equal to number of observations (%d)"
+msgstr ""
+
+
+#: R/lm.R: 0
+#. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
+
+msgid "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr ""
 
 
@@ -7970,9 +7975,9 @@ msgstr ""
 
 
 #: R/lm.influence.R: 0
-#. R/lm.influence.R: stop("too few cases, n < k")
+#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 
-msgid "too few cases, n < k"
+msgid "too few cases i with h_ii > 0), n < k"
 msgstr ""
 
 

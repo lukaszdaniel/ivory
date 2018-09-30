@@ -112,10 +112,6 @@ static void setup_jit(pcre_extra *re_pe)
 
 
 
-#ifndef MAX
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
-#endif
-
 
 /* we allow pat == NULL if the regex cannot be safely expressed
    as a string (e.g., when using grepRaw) */
