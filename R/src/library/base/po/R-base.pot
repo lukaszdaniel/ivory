@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-10-02 11:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2564,20 +2564,6 @@ msgstr ""
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 
 msgid "cyclic namespace dependency detected when loading package %s, already loading %s"
-msgstr ""
-
-
-#: R/Defunct.R: 0
-#. R/Defunct.R: errorCondition(msg, old = fname, new = new, package = package, class = "defunctError")
-
-msgid "defunctError"
-msgstr ""
-
-
-#: R/Deprecated.R: 0
-#. R/Deprecated.R: warningCondition(msg, old = old, new = new, package = package, class = "deprecatedWarning")
-
-msgid "deprecatedWarning"
 msgstr ""
 
 

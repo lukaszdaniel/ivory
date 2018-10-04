@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-10-02 11:58\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2139,16 +2139,6 @@ msgstr "kostnadskomponentane må vera ikkje-negative"
 msgid ""
 "cyclic namespace dependency detected when loading package %s, already "
 "loading %s"
-msgstr ""
-
-#. R/Defunct.R: errorCondition(msg, old = fname, new = new, package = package, class = "defunctError")
-#: R/Defunct.R:0
-msgid "defunctError"
-msgstr ""
-
-#. R/Deprecated.R: warningCondition(msg, old = old, new = new, package = package, class = "deprecatedWarning")
-#: R/Deprecated.R:0
-msgid "deprecatedWarning"
 msgstr ""
 
 #. R/array.R: stop("dim(x) must have a positive length")

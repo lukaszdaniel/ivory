@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-09-30 19:08+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -264,7 +264,7 @@ msgstr " 引数が少なすぎます "
 msgid "invalid axis number %d"
 msgstr " 軸の番号 %d が不正です "
 
-#: plot.c:852
+#: plot.c:852 plot.c:864
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr " 'hadj' は長さ1でなくてはなりません "
@@ -275,11 +275,6 @@ msgstr " 'hadj' は長さ1でなくてはなりません "
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr " 長さゼロの 'side' が指定されています "
-
-#: plot.c:864
-#, fuzzy, c-format
-msgid "'%s' argument must be of length one"
-msgstr " 'hadj' は長さ1でなくてはなりません "
 
 #: plot.c:894
 #, fuzzy, c-format
@@ -597,6 +592,10 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be of length one"
+#~ msgstr " 'hadj' は長さ1でなくてはなりません "
 
 #, fuzzy
 #~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"

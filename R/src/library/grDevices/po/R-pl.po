@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -177,6 +177,8 @@ msgstr ""
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
 msgstr ""
+"Wywołania takie jak '%s' nie są bezpieczne i powinny być zastąpione przez "
+"'%s'"
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
 #: R/convertColor.R:0

@@ -1699,7 +1699,7 @@ ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
 	if (ans != R_NilValue)
 	    return ans;
 	char *from = native_fromcode(stream);
-	warning(_("input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"),
+	warning(_("input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"),
 	        buf, from);
     }
     /* no translation possible */

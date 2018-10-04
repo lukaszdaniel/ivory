@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: Rmd5.c:37
 #, c-format
@@ -94,13 +94,12 @@ msgstr "Brak makra zdefiniowanego dla '%s'"
 #: gramRd.c:3180 gramRd.c:3196
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
+"błąd wewnętrzny: niepoprawny argument przekazany do funkcji 'xxusermacro()'"
 
 #: gramRd.c:3225
-#, fuzzy, c-format
+#, c-format
 msgid "Not enough arguments passed to user macro '%s'"
-msgstr ""
-"Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez "
-"użytkownika."
+msgstr "Zbyt mało argumentów przekazanych do makra użytkownika '%s'"
 
 #: gramRd.c:3367 gramRd.c:3371
 #, c-format

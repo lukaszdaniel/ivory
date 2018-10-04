@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-10-02 11:58\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -329,7 +329,6 @@ msgstr "argument '%s' musi być macierzą kwadratową"
 
 #. R/format.R: gettextf("'%s' argument must be a string, i.e., of length 1", "flag")
 #: R/format.R:0
-#, fuzzy
 msgid "'%s' argument must be a string, i.e., of length 1"
 msgstr "argument '%s' musi być łańcuchem tekstowym o długości 1"
 
@@ -633,7 +632,6 @@ msgstr "opcja 'chdir = TRUE' nie ma sensu dla adresu URL"
 
 #. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
-#, fuzzy
 msgid "'chdir = TRUE' makes no sense for a connection"
 msgstr "opcja 'chdir = TRUE' nie ma sensu dla połączenia"
 
@@ -796,7 +794,6 @@ msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
 
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/stop.R:0
-#, fuzzy
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
 
@@ -1016,7 +1013,6 @@ msgstr "argument '%s' nie może zostać przekształcony na klasę %s"
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
-#, fuzzy
 msgid "'x' must have named dimnames"
 msgstr "'X' musi mieć nazwane wymiary"
 
@@ -1383,9 +1379,8 @@ msgstr "Ładowanie wymaganego pakietu: %s"
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN, collapse = ","), paste(dx,     collapse = ","))
 #: R/duplicated.R:0
-#, fuzzy
 msgid "MARGIN = %s is invalid for dim = %s"
-msgstr "MARGIN = %d jest niepoprawny dla dim =%d"
+msgstr "MARGIN = %s jest niepoprawny dla dim =%s"
 
 #. R/summary.R: gettext("Max.")
 #. R/summary.R: gettext("Max.")
@@ -2028,21 +2023,10 @@ msgstr ""
 "wykryto cykliczną zależność przestrzeni nazw podczas ładowania pakietu %s, "
 "już załadowano %s"
 
-#. R/Defunct.R: errorCondition(msg, old = fname, new = new, package = package, class = "defunctError")
-#: R/Defunct.R:0
-msgid "defunctError"
-msgstr ""
-
-#. R/Deprecated.R: warningCondition(msg, old = old, new = new, package = package, class = "deprecatedWarning")
-#: R/Deprecated.R:0
-msgid "deprecatedWarning"
-msgstr ""
-
 #. R/array.R: stop("dim(x) must have a positive length")
 #: R/array.R:0
-#, fuzzy
 msgid "dim(x) must have a positive length"
-msgstr "wartość 'dim(X)' musi mieć dodatnią długość"
+msgstr "wartość 'dim(x)' musi mieć dodatnią długość"
 
 #. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
 #. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
@@ -2109,7 +2093,6 @@ msgstr "pusta nazwa w dyrektywie %s w pliku 'NAMESPACE'"
 
 #. R/source.R: gettextf("encoding = \"%s\" chosen", encoding, domain = "R-base")
 #: R/source.R:0
-#, fuzzy
 msgid "encoding = \"%s\" chosen"
 msgstr "wybrano 'encoding = \"%s\"'"
 
@@ -2327,9 +2310,8 @@ msgstr "niepoprawny argument '%s'"
 
 #. R/dataframe.R: gettextf("invalid '%s' length", "row.names")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "invalid '%s' length"
-msgstr "niepoprawna wartość '%s'"
+msgstr "niepoprawna długość '%s'"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -3017,7 +2999,6 @@ msgstr "pakiet %s został zbudowany w wersji R %s"
 
 #. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "package %s was found more than once. Using the first from\n"
 "  %s"
@@ -3349,13 +3330,15 @@ msgstr[2] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpisów ]
 
 #. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base")
 #: R/dataframe.R:0
-#, fuzzy
 msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
 msgid_plural ""
 " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
-msgstr[0] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpis ]"
-msgstr[1] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpisy ]"
-msgstr[2] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpisów ]"
+msgstr[0] ""
+" [ osiągnięto 'max' / 'getOption(\"max.print\")' -- pominięto %d wpis ]\n"
+msgstr[1] ""
+" [ osiągnięto 'max' / 'getOption(\"max.print\")' -- pominięto %d wpisy ]\n"
+msgstr[2] ""
+" [ osiągnięto 'max' / 'getOption(\"max.print\")' -- pominięto %d wpisów ]\n"
 
 #. R/all.equal.R: ngettext(sum(ne), "%d element mismatch", "%d element mismatches")
 #: R/all.equal.R:0
@@ -3452,13 +3435,15 @@ msgstr[2] ""
 
 #. R/namespace.R: ngettext(sum(!found), "No methods were found in package %s for request: %s when loading %s",     "No methods were found in package %s for requests: %s when loading %s", domain = "R-base")
 #: R/namespace.R:0
-#, fuzzy
 msgid "No methods were found in package %s for request: %s when loading %s"
 msgid_plural ""
 "No methods were found in package %s for requests: %s when loading %s"
-msgstr[0] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
-msgstr[1] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
-msgstr[2] "Nie znaleziono metod w pakiecie %s dla żądań: %s"
+msgstr[0] ""
+"Nie znaleziono metod w pakiecie %s dla żądania: %s podczas ładowania %s"
+msgstr[1] ""
+"Nie znaleziono metod w pakiecie %s dla żądań: %s podczas ładowania %s"
+msgstr[2] ""
+"Nie znaleziono metod w pakiecie %s dla żądań: %s podczas ładowania %s"
 
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
@@ -3474,15 +3459,11 @@ msgstr[2] ""
 
 #. R/namespace.R: ngettext(nr, "Registered S3 method overwritten by '%s':", "Registered S3 methods overwritten by '%s':",     domain = "R-base")
 #: R/namespace.R:0
-#, fuzzy
 msgid "Registered S3 method overwritten by '%s':"
 msgid_plural "Registered S3 methods overwritten by '%s':"
-msgstr[0] ""
-"Zarejestrowana metoda S3 ze standardowego pakietu nadpisana przez '%s':"
-msgstr[1] ""
-"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
-msgstr[2] ""
-"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
+msgstr[0] "Zarejestrowana metoda S3 nadpisana przez '%s':"
+msgstr[1] "Zarejestrowane metody S3 nadpisane przez '%s':"
+msgstr[2] "Zarejestrowane metody S3 nadpisane przez '%s':"
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
 #: R/namespace.R:0
@@ -3716,15 +3697,20 @@ msgstr[2] "zamiana ma %d wierszy, dane mają %d"
 
 #. R/namespace.R: ngettext(sum(!found), "requested method was not found in environment/package %s: %s when loading %s",     "requested methods were not found in environment/package %s: %s when loading %s",     domain = "R-base")
 #: R/namespace.R:0
-#, fuzzy
 msgid ""
 "requested method was not found in environment/package %s: %s when loading %s"
 msgid_plural ""
 "requested methods were not found in environment/package %s: %s when loading "
 "%s"
-msgstr[0] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
-msgstr[1] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
-msgstr[2] "zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s"
+msgstr[0] ""
+"zażądana metoda nie została znaleziona w środowisku/pakiecie %s: %s podczas "
+"ładowania %s"
+msgstr[1] ""
+"zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s podczas "
+"ładowania %s"
+msgstr[2] ""
+"zażądane metody nie zostały znalezione w środowisku/pakiecie %s: %s podczas "
+"ładowania %s"
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0

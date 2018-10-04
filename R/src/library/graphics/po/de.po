@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-09-30 19:08+0200\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -265,7 +265,7 @@ msgstr "zu wenig Argumente"
 msgid "invalid axis number %d"
 msgstr "ungültige Achsnummer %d"
 
-#: plot.c:852
+#: plot.c:852 plot.c:864
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'hadj' muss Länge 1 haben"
@@ -276,11 +276,6 @@ msgstr "'hadj' muss Länge 1 haben"
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "'side' mit Länge 0 angegeben"
-
-#: plot.c:864
-#, fuzzy, c-format
-msgid "'%s' argument must be of length one"
-msgstr "'hadj' muss Länge 1 haben"
 
 #: plot.c:894
 #, fuzzy, c-format
@@ -600,6 +595,10 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be of length one"
+#~ msgstr "'hadj' muss Länge 1 haben"
 
 #, fuzzy
 #~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"

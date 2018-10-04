@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -47,6 +47,12 @@ msgstr "polecenie %s nie jest dostępne"
 #. R/testing.R: gettextf("%s file was not found", sQuote(f))
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 msgid "%s file was not found"
+msgstr "plik %s nie został znaleziony"
+
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "%s file wast not found"
 msgstr "plik %s nie został znaleziony"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -110,9 +116,8 @@ msgstr "argument '%s' musi być pojedynczym łańcuchem tekstowym"
 
 #. R/QC.R: gettextf("'%s' argument must be of length %d", "package", 1)
 #: R/QC.R:0
-#, fuzzy
 msgid "'%s' argument must be of length %d"
-msgstr "argument '%s' musi być długości 1"
+msgstr "argument '%s' musi być długości %d"
 
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
 #. R/QC.R: gettextf("'%s' argument must be of length 1", "package")
@@ -772,9 +777,8 @@ msgstr "Zminana na nie-FOSS'ową licencję pakietu."
 
 #. R/news.R: gettextf("Changes in version %s%s", names(vchunks), ifelse(is.na(dates), "", sprintf(" (%s)",     dates)), domain = "R-tools")
 #: R/news.R:0
-#, fuzzy
 msgid "Changes in version %s%s"
-msgstr "%s w wersji %s"
+msgstr "Zmiany w wersji %s%s"
 
 #. R/bibstyle.R: stop("Changes require specified 'style'")
 #: R/bibstyle.R:0
@@ -5341,12 +5345,6 @@ msgstr "plik %s: wielokrotne linie '\\encoding', używanie pierwszej"
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr "plik %s: wejście nie-ASCII, a brak zadeklarowanego kodowania"
 
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "file '%s' not found"
-msgstr "plik %s nie został znaleziony"
-
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -6318,9 +6316,8 @@ msgstr "nie można uruchomić 'make clean' w 'src'"
 
 #. R/check.R: gettext("unable to verify current time", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "unable to verify current time"
-msgstr "nie można utworzyć"
+msgstr "nie można zweryfikować bieżącego czasu"
 
 #. R/QC.R: stop("unable to write code files", domain = "R-tools")
 #. R/QC.R: stop("unable to write code files")
@@ -7695,6 +7692,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "file '%s' not found"
+#~ msgstr "plik '%s' nie został znaleziony"
 
 #~ msgid "package '%s' was not found"
 #~ msgstr "pakiet '%s' nie został znaleziony"

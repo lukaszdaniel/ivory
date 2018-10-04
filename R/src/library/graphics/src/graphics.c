@@ -1876,7 +1876,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
 	 * This is used when checking whether the device is
 	 * "valid" with respect to base graphics
 	 */
-	setBaseDevice(TRUE, dd);
+	Rf_setBaseDevice(TRUE, dd);
 	GEdirtyDevice(dd);
     }
 
@@ -2520,7 +2520,7 @@ void GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd
    when inside a call to locator (it should raise
    an error and return).  PR#15253
 
-   This assume that locator is running on only one device at a time, 
+   This assume that locator is running on only one device at a time,
    which is currently safe.
 */
 static void (*old_close)(pDevDesc) = NULL;

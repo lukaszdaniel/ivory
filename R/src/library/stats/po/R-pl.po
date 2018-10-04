@@ -5164,7 +5164,6 @@ msgstr "liczba przesunięć (%d) powinna być równa liczbie obserwacji (%d)"
 
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 #: R/lm.R:0
-#, fuzzy
 msgid ""
 "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "liczba przesunięć (%d) powinna być równa liczbie obserwacji (%d)"
@@ -5960,9 +5959,8 @@ msgstr "czasy do zastąpienia nie zgadzają się"
 
 #. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-#, fuzzy
 msgid "too few cases i with h_ii > 0), n < k"
-msgstr "zbyt mało przypadków, n < k"
+msgstr "zbyt mało przypadków i z h_ii > 0), n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
 #: R/zzModels.R:0

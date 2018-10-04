@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: grid.c:213
 msgid "cannot clip to rotated viewport"
@@ -91,7 +91,7 @@ msgstr "atrybut 'data' klasy \"unit\" ma niepoprawny typ"
 
 #: unit.c:166
 msgid "object is not a unit, unit.list, or unitArithmetic object"
-msgstr ""
+msgstr "obiekt nie jest jednostką, 'unit.list' ani obiektem \"unitArithmetic\""
 
 #: unit.c:265 unit.c:415 unit.c:1215 unit.c:1295 unit.c:1375 unit.c:1455
 msgid "unimplemented unit function"

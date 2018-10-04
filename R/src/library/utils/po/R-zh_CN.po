@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1040,9 +1040,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
 #: R/tar.R:0
 #, fuzzy
 msgid "No %s command found"
@@ -1896,11 +1896,6 @@ msgstr "无法安装程序包"
 msgid "bug report"
 msgstr ""
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -2289,11 +2284,6 @@ msgid ""
 "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use "
 "the 'code_files' argument"
 msgstr "泛型函数和其他S4对象（例如'%s'）不能被转储出来；用code_files=参数"
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
-msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
@@ -3207,11 +3197,6 @@ msgstr "'dataentry'的参数不对"
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "表中的行数不对"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0

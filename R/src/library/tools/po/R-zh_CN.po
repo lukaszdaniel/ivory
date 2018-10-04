@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -53,6 +53,12 @@ msgstr "不存在'%s'这个测试"
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
+msgstr "找不到'%s'这个文件"
+
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "%s file wast not found"
 msgstr "找不到'%s'这个文件"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -5356,12 +5362,6 @@ msgstr ""
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "file '%s' not found"
-msgstr "找不到'%s'这个文件"
-
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -7411,6 +7411,10 @@ msgstr[0] "%s里不能有T/F这样的值"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码'%s'%s行"
+
+#, fuzzy
+#~ msgid "file '%s' not found"
+#~ msgstr "找不到'%s'这个文件"
 
 #~ msgid "package '%s' was not found"
 #~ msgstr "找不到程辑包'%s'"

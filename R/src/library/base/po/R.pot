@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2018-10-02 11:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7655,7 +7655,7 @@ msgstr ""
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr ""
 
-#: src/main/serialize.c:1681
+#: src/main/serialize.c:1681 src/main/serialize.c:1702
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
@@ -7667,11 +7667,6 @@ msgstr ""
 #: src/main/serialize.c:1695
 msgid ""
 "strings not representable in native encoding will be translated to UTF-8"
-msgstr ""
-
-#: src/main/serialize.c:1702
-#, c-format
-msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
 msgstr ""
 
 #: src/main/serialize.c:1714

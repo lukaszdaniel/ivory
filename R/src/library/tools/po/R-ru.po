@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -56,6 +56,12 @@ msgstr "тест '%s' недоступен"
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
+msgstr "файл '%s' не найден"
+
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "%s file wast not found"
 msgstr "файл '%s' не найден"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -5425,12 +5431,6 @@ msgstr "несколько \\строк кодировок в файле"
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "file '%s' not found"
-msgstr "файл '%s' не найден"
-
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -7714,6 +7714,10 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать '%s' строк(и) %s"
 msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
+
+#, fuzzy
+#~ msgid "file '%s' not found"
+#~ msgstr "файл '%s' не найден"
 
 #~ msgid "package '%s' was not found"
 #~ msgstr "пакет '%s' не найден"

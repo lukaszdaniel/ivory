@@ -36,7 +36,7 @@
 
     if (missing(new)) new <- NULL
     warning(warningCondition(msg, old = old, new = new, package = package,
-                             class = "deprecatedWarning"))
+                             class = "deprecatedWarning"), domain = NA)
 }
 
 ## consider keeping one (commented) entry here, for easier additions

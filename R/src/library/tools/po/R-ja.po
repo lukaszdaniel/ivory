@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -48,6 +48,12 @@ msgstr " テスト '%s' は利用出来ません "
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
+msgstr " ファイル '%s' が見つかりません "
+
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "%s file wast not found"
 msgstr " ファイル '%s' が見つかりません "
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -5465,12 +5471,6 @@ msgstr " 以下のファイル中に重複した \\encoding 行 "
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "file '%s' not found"
-msgstr " ファイル '%s' が見つかりません "
-
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -7547,6 +7547,10 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#, fuzzy
+#~ msgid "file '%s' not found"
+#~ msgstr " ファイル '%s' が見つかりません "
 
 #~ msgid "package '%s' was not found"
 #~ msgstr " パッケージ '%s' は見つかりませんでした "

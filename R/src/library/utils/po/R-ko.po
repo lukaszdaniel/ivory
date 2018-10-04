@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1049,9 +1049,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
 #: R/tar.R:0
 #, fuzzy
 msgid "No %s command found"
@@ -1901,11 +1901,6 @@ msgstr "패키지를 설치할 수 없습니다 "
 msgid "bug report"
 msgstr ""
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -2297,11 +2292,6 @@ msgid ""
 msgstr ""
 "제네릭 함수들과 다른 S4 객체들 (즉, '%s')는 버려질 수 없습니다; 다음을 이용하"
 "세요the code_files= argument "
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
-msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
@@ -3227,11 +3217,6 @@ msgstr "'dataentry' 에 잘못된 인수입니다 "
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "테이블 열의 개수가 잘못되었습니다 "
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0

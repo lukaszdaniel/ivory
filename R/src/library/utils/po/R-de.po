@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1056,9 +1056,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
 #: R/tar.R:0
 #, fuzzy
 msgid "No %s command found"
@@ -1918,11 +1918,6 @@ msgstr "kann keine Pakete installieren"
 msgid "bug report"
 msgstr ""
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -2316,11 +2311,6 @@ msgid ""
 msgstr ""
 "Generische Funktionen und andere S4 Objekte (z.B. '%s') können nicht "
 "gedumped werden: nutze code_files= Argument"
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
-msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
@@ -3246,11 +3236,6 @@ msgstr "falsches Argument für 'dataentry'"
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "falsche Zahl von Tabellenzeileneinträgen"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0

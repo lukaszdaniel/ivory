@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2018-10-02 11:59+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -8054,7 +8054,7 @@ msgstr "namn i faste strengar er ikkje støtta enno"
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr "ugyldig UTF-8-streng: «old»"
 
-#: src/main/serialize.c:1681
+#: src/main/serialize.c:1681 src/main/serialize.c:1702
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
@@ -8066,11 +8066,6 @@ msgstr ""
 #: src/main/serialize.c:1695
 msgid ""
 "strings not representable in native encoding will be translated to UTF-8"
-msgstr ""
-
-#: src/main/serialize.c:1702
-#, c-format
-msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
 msgstr ""
 
 #: src/main/serialize.c:1714

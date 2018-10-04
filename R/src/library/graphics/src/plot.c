@@ -861,7 +861,7 @@ SEXP C_axis(SEXP args)
 
     /* Optional argument: "gap.axis" */
     if (length(CAR(args)) != 1)
-	error(_("'%s' argument must be of length one"), "gap.axis");
+	error(_("'%s' argument must be of length 1"), "gap.axis");
     double gap = asReal(CAR(args));
 
     /* Now we process all the remaining inline par values:

@@ -1095,7 +1095,7 @@ void mainloop(void)
 /*this functionality now appears in 3
   places-jump_to_toplevel/profile/here */
 
-static void printwhere(void)
+void attribute_hidden printwhere(void)
 {
   RCNTXT *cptr;
   int lct = 1;

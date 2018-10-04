@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -54,6 +54,12 @@ msgstr "테스트 '%s'는 사용가능하지 않습니다"
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
+msgstr "파일 '%s'를 찾을 수 없습니다"
+
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+#: R/tools-deprecated.R:0
+#, fuzzy
+msgid "%s file wast not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -5339,12 +5345,6 @@ msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 "미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
 
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "file '%s' not found"
-msgstr "파일 '%s'를 찾을 수 없습니다"
-
 #. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 #: R/build.R:0
 msgid "file EXISTS but is not of correct format"
@@ -7379,6 +7379,10 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "file '%s' not found"
+#~ msgstr "파일 '%s'를 찾을 수 없습니다"
 
 #~ msgid "package '%s' was not found"
 #~ msgstr "패키지 '%s'를 찾을 수 없습니다"

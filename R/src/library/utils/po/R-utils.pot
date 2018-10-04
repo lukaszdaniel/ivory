@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.0\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1286,9 +1286,9 @@ msgstr ""
 
 
 #: R/tar.R: 0
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
 
 msgid "No %s command found"
 msgstr ""
@@ -2314,13 +2314,6 @@ msgid "bug report"
 msgstr ""
 
 
-#: R/tar.R: 0
-#. R/tar.R: sQuote("bzip2")
-
-msgid "bzip2"
-msgstr ""
-
-
 #: R/edit.R: 0
 #. R/edit.R: stop("can only handle vector and factor elements")
 
@@ -2829,13 +2822,6 @@ msgstr ""
 #. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
 
 msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: sQuote("gzip")
-
-msgid "gzip"
 msgstr ""
 
 
@@ -4040,13 +4026,6 @@ msgstr ""
 #. R/databrowser.R: stop("wrong number of table row entries")
 
 msgid "wrong number of table row entries"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: sQuote("xz")
-
-msgid "xz"
 msgstr ""
 
 

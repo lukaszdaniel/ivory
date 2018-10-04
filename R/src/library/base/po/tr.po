@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2018-10-02 11:59+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -8011,7 +8011,7 @@ msgstr "sürekli dizelerde isimler henüz desteklenmiyor"
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr "geçersiz UTF-8 dizesi 'old'"
 
-#: src/main/serialize.c:1681
+#: src/main/serialize.c:1681 src/main/serialize.c:1702
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
@@ -8023,11 +8023,6 @@ msgstr ""
 #: src/main/serialize.c:1695
 msgid ""
 "strings not representable in native encoding will be translated to UTF-8"
-msgstr ""
-
-#: src/main/serialize.c:1702
-#, c-format
-msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
 msgstr ""
 
 #: src/main/serialize.c:1714

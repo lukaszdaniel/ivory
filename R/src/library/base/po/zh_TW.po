@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2018-10-02 11:59+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -7941,7 +7941,7 @@ msgstr "目前不支援固有字串中的名稱"
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr "無效的 UTF-8 字串 'old'"
 
-#: src/main/serialize.c:1681
+#: src/main/serialize.c:1681 src/main/serialize.c:1702
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
@@ -7953,11 +7953,6 @@ msgstr ""
 #: src/main/serialize.c:1695
 msgid ""
 "strings not representable in native encoding will be translated to UTF-8"
-msgstr ""
-
-#: src/main/serialize.c:1702
-#, c-format
-msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
 msgstr ""
 
 #: src/main/serialize.c:1714

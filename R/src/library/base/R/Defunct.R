@@ -33,7 +33,7 @@
 
     if (missing(new)) new <- NULL
     stop(errorCondition(msg, old = fname, new = new, package = package,
-                        class = "defunctError"))
+                        class = "defunctError"), domain = NA)
 }
 
 ## Version <- function() .Defunct("R.Version")

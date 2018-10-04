@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2018-10-02 11:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,1307,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
@@ -798,9 +798,8 @@ msgid "A \" is missing (expandcmd)"
 msgstr ""
 
 #: src/gnuwin32/run.c:76
-#, fuzzy
 msgid "Insufficient memory (expandcmd)"
-msgstr "Niewystarczająca ilość pamięci (rpipeOpen)"
+msgstr "Niewystarczająca ilość pamięci (expandcmd)"
 
 #: src/gnuwin32/run.c:111
 #, c-format
@@ -1265,9 +1264,8 @@ msgid "ALTSTRING classes must provide a Set_elt method"
 msgstr ""
 
 #: src/main/altrep.c:743 src/main/altrep.c:770
-#, fuzzy
 msgid "unsupported ALTREP class"
-msgstr "niewspierany schemat adresu URL"
+msgstr "niewspierana klasa ALTREP"
 
 #: src/main/apply.c:99 src/main/util.c:2408
 #, c-format
@@ -1870,9 +1868,9 @@ msgstr ""
 "liczba wierszy wyniku nie jest wielokrotnością długości wektora (argument %d)"
 
 #: src/main/bind.c:1395
-#, fuzzy, c-format
+#, c-format
 msgid "cannot create a matrix of type '%s'"
-msgstr "nie można utworzyć macierzy z type '%s'"
+msgstr "nie można utworzyć macierzy typu '%s'"
 
 #: src/main/bind.c:1496
 #, c-format
@@ -2075,7 +2073,7 @@ msgstr "szerokość nie jest obliczalna dla %s w kodowaniu \"bytes\""
 #: src/main/character.c:266
 #, c-format
 msgid "element %ld"
-msgstr ""
+msgstr "element %ld"
 
 #: src/main/character.c:290 src/main/character.c:481
 #, fuzzy, c-format
@@ -4000,17 +3998,17 @@ msgid "indexing '...' with non-positive index %d"
 msgstr "indeksowanie '...' używając niedodatniego indeksu %d"
 
 #: src/main/envir.c:1444
-#, fuzzy, c-format
+#, c-format
 msgid "the ... list contains fewer than %d element"
 msgid_plural "the ... list contains fewer than %d elements"
-msgstr[0] "lista '...' nie zawiera żadnych (%d) elementów"
-msgstr[1] "lista '...' nie zawiera %d elementów"
-msgstr[2] "lista '...' nie zawiera %d elementów"
+msgstr[0] "lista '...' zawiera mniej niż %d element"
+msgstr[1] "lista '...' zawiera mniej niż %d elementy"
+msgstr[2] "lista '...' zawiera mniej niż %d elementów"
 
 #: src/main/envir.c:1448
-#, fuzzy, c-format
+#, c-format
 msgid "'..%d' used in an incorrect context, no ... to look in"
-msgstr "'..%d' użyte w niepoprawnym znaczeniu, brak '...' do szukania"
+msgstr "..%d użyte w niepoprawnym znaczeniu, brak '...' do szukania"
 
 #: src/main/envir.c:1474
 msgid "incorrect context: the current call has no '...' to look in"
@@ -5955,14 +5953,14 @@ msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr "wartość funkcji 'SET_STRING_ELT()' musi być 'CHARSXP', nie '%s'"
 
 #: src/main/memory.c:3750
-#, fuzzy, c-format
+#, c-format
 msgid "attempt to set index %ld/%ld in 'SET_STRING_ELT()' function"
-msgstr "próba ustawienia indeksu %lu/%lu w funkcji 'SET_STRING_ELT()'"
+msgstr "próba ustawienia indeksu %ld/%ld w funkcji 'SET_STRING_ELT()'"
 
 #: src/main/memory.c:3770
-#, fuzzy, c-format
+#, c-format
 msgid "attempt to set index %ld/%ld in 'SET_VECTOR_ELT()' function"
-msgstr "próba ustawienia indeksu %lu/%lu w funkcji 'SET_VECTOR_ELT()'"
+msgstr "próba ustawienia indeksu %ld/%ld w funkcji 'SET_VECTOR_ELT()'"
 
 #: src/main/memory.c:3794
 #, fuzzy, c-format
@@ -6570,14 +6568,14 @@ msgid "insufficient OS support on this platform"
 msgstr "niewystarczające wsparcie OS na tej platformie"
 
 #: src/main/platform.c:2864
-#, fuzzy, c-format
+#, c-format
 msgid "possible truncation of value for element %d"
-msgstr "prawdopodobne przycięcie pliku >= 4GB"
+msgstr "prawdopodobne przycięcie wartości dla elementu %d"
 
 #: src/main/platform.c:2946
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' must be of length at least one"
-msgstr "argument 'mode' musi mieć długość co najmniej 1"
+msgstr "argument '%s' musi mieć długość co najmniej 1"
 
 #: src/main/platform.c:3036
 #, c-format
@@ -7802,33 +7800,33 @@ msgid "scan() expected a raw, got '%s'"
 msgstr "'scan()' oczekiwał zmiennej surowej, otrzymał '%s'"
 
 #: src/main/scan.c:616
-#, fuzzy, c-format
+#, c-format
 msgid "Read %lld item\n"
 msgid_plural "Read %lld items\n"
-msgstr[0] "Przeczytano %d pozycję\n"
-msgstr[1] "Przeczytano %d pozycje\n"
-msgstr[2] "Przeczytano %d pozycji\n"
+msgstr[0] "Przeczytano %lld pozycję\n"
+msgstr[1] "Przeczytano %lld pozycje\n"
+msgstr[2] "Przeczytano %lld pozycji\n"
 
 #: src/main/scan.c:675
 msgid "empty 'what' specified"
 msgstr "określono pusty 'what'"
 
 #: src/main/scan.c:729
-#, fuzzy, c-format
+#, c-format
 msgid "line %lld did not have %lld elements"
-msgstr "linia %d nie miała %d elementów"
+msgstr "linia %lld nie miała %lld elementów"
 
 #: src/main/scan.c:780
 msgid "number of items read is not a multiple of the number of columns"
 msgstr "ilość odczytanych pozycji nie jest wielokrotnością liczby kolumn"
 
 #: src/main/scan.c:788
-#, fuzzy, c-format
+#, c-format
 msgid "Read %lld record\n"
 msgid_plural "Read %lld records\n"
-msgstr[0] "Przeczytano %d wiersz\n"
-msgstr[1] "Przeczytano %d wiersze\n"
-msgstr[2] "Przeczytano %d wierszy\n"
+msgstr[0] "Przeczytano %lld wiersz\n"
+msgstr[1] "Przeczytano %lld wiersze\n"
+msgstr[2] "Przeczytano %lld wierszy\n"
 
 #: src/main/scan.c:875
 msgid "invalid 'strip.white' length"
@@ -7999,10 +7997,12 @@ msgstr "nazwy w persystentnych łańcuchach nie są jeszcze wspierane"
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr "deserializowanie niepoprawnego łańcucha UTF-8 '%s'"
 
-#: src/main/serialize.c:1681
+#: src/main/serialize.c:1681 src/main/serialize.c:1702
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
+"łańcuch wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on "
+"poprawny w '%s'?"
 
 #: src/main/serialize.c:1693
 msgid "strings not representable in native encoding will not be translated"
@@ -8014,11 +8014,6 @@ msgid ""
 "strings not representable in native encoding will be translated to UTF-8"
 msgstr ""
 "tekst niereprezentowalny w natywnym kodowaniu będzie przetłumaczony na UTF-8"
-
-#: src/main/serialize.c:1702
-#, c-format
-msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
-msgstr ""
 
 #: src/main/serialize.c:1714
 msgid "negative serialized length for vector"
@@ -8341,16 +8336,15 @@ msgid "R_LibraryFileName: buffer too small"
 msgstr "'R_LibraryFileName': bufor jest zbyt mały"
 
 #: src/main/startup.c:187
-#, fuzzy
 msgid "WARNING: invalid R_VSIZE ignored\n"
 msgstr "OSTRZEŻENIE: niepoprawna wartość 'R_VSIZE' została zignorowana\n"
 
 #: src/main/startup.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: R_MAX_VSIZE smaller than Min_Vsize = %lu is ignored\n"
 msgstr ""
-"OSTRZEŻENIE: wartość R_VSIZE mniejsza niż Min_Vsize = %lu zostanie "
-"zignorowana\n"
+"OSTRZEŻENIE: wartość R_MAX_VSIZE mniejsza niż Min_Vsize = %lu jest "
+"ignorowana\n"
 
 #: src/main/startup.c:213
 msgid "WARNING: invalid 'R_VSIZE' ignored\n"
@@ -8502,9 +8496,8 @@ msgstr ""
 "'[[<-' zdefiniowane dla obiektów typu \"S4\" tylko dla podklas środowiska"
 
 #: src/main/subassign.c:1780
-#, fuzzy
 msgid "improper dimensions"
-msgstr "wymiary nie będące liczbami całkowitymi"
+msgstr "niepoprawne wymiary"
 
 #: src/main/subassign.c:1786
 msgid "wrong arguments for environment subassignment"
@@ -8798,9 +8791,9 @@ msgid "'%s' function must be called on a CHARSXP, but got '%s'"
 msgstr "funkcja '%s' musi być wywołana na 'CHARSXP', ale otrzymano '%s'"
 
 #: src/main/sysutils.c:962 src/main/sysutils.c:1002
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' must be called on a CHARSXP, but got '%s'"
-msgstr "'%s' musi być wywołany w 'CHARSXP'"
+msgstr "'%s' musi być wywołany na 'CHARSXP', ale otrzymano '%s'"
 
 #: src/main/sysutils.c:1121
 #, c-format
@@ -8865,9 +8858,8 @@ msgid "'%s' argument must be positive"
 msgstr "argument '%s' musi być dodatni"
 
 #: src/main/unique.c:972
-#, fuzzy
 msgid "invalid type"
-msgstr "niepoprawny typ linii"
+msgstr "niepoprawny typ"
 
 #: src/main/unique.c:1048
 msgid "'match()' function requires vector arguments"
@@ -9417,7 +9409,7 @@ msgstr "nie można określić adresu hosta"
 
 #: src/modules/internet/nanoftp.c:830
 msgid "Malformed address resolved"
-msgstr ""
+msgstr "Nieprawidłowy adres został rozwiązany"
 
 #: src/modules/internet/nanoftp.c:853
 msgid "failed to connect to server"
@@ -10537,6 +10529,12 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#~ msgid ""
+#~ "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
+#~ msgstr ""
+#~ "łańcuch wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on "
+#~ "poprawny w '%s'?"
 
 #~ msgid "CreateAtVector \"log\"(from axis()): axp[0] = %g !"
 #~ msgstr "CreateAtVector \"log\"(z axis()): axp[0] = %g !"

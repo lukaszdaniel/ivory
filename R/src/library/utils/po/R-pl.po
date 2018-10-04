@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -559,15 +559,13 @@ msgstr ""
 
 #. R/news.R: gettextf("Changes in %s", vstrings, domain = "R-utils")
 #: R/news.R:0
-#, fuzzy
 msgid "Changes in %s"
 msgstr "Zmiany w %s"
 
 #. R/news.R: gettextf("Changes in %s (%s)", vstrings, dates, domain = "R-utils")
 #: R/news.R:0
-#, fuzzy
 msgid "Changes in %s (%s)"
-msgstr "Zmiany w %s (%s):"
+msgstr "Zmiany w %s (%s)"
 
 #. R/help.R: gettext("Choose one")
 #: R/help.R:0
@@ -1032,13 +1030,12 @@ msgstr "Nazwany wektor %s"
 msgid "No"
 msgstr "Nie"
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"), domain = "R-utils")
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"), domain = "R-utils")
 #: R/tar.R:0
-#, fuzzy
 msgid "No %s command found"
-msgstr "%s nie został znaleziony"
+msgstr "Polecenie %s nie zostało odnalezione"
 
 #. R/read.DIF.R: stop("No DIF data on clipboard")
 #: R/read.DIF.R:0
@@ -1862,7 +1859,7 @@ msgstr "dołączanie nazw kolumn do pliku"
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
-msgstr ""
+msgstr "argument 'compressed' jest ignorowany dla metody wewnętrznej"
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0
@@ -1909,11 +1906,6 @@ msgstr "rozpoczęcie instalowania pakietu %s"
 #: R/bug.report.R:0
 msgid "bug report"
 msgstr "raport błędu"
-
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
 
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
@@ -2301,11 +2293,6 @@ msgstr ""
 "ogólne funkcje oraz inne obiekty S4 (na przykład, '%s') nie mogą zostać "
 "zrzucone; użyj argumentu 'code_files'"
 
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
-msgstr ""
-
 #. R/read.DIF.R: warning("header and 'col.names' argument are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' argument are of different lengths")
 #: R/read.DIF.R:0 R/readtable.R:0
@@ -2333,6 +2320,7 @@ msgstr "niekompletny blok w pliku"
 #: R/tar.R:0
 msgid "incomplete block: rather use gzfile(.) created connection?"
 msgstr ""
+"niekompletny blok: użyj raczej połączenia utworzonego przez 'gzfile(.)'"
 
 #. R/help.search.R: stop("incorrect 'agrep' specification")
 #: R/help.search.R:0
@@ -3211,11 +3199,6 @@ msgstr "niepoprawny argument przekazany do 'dataentry'"
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "błędna liczba wpisów w wierszach tabeli"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0

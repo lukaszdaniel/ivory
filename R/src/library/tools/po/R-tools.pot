@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2018-09-30 19:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,13 @@ msgstr ""
 #. R/testing.R: gettextf("%s file was not found", sQuote(f))
 
 msgid "%s file was not found"
+msgstr ""
+
+
+#: R/tools-deprecated.R: 0
+#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
+
+msgid "%s file wast not found"
 msgstr ""
 
 
@@ -6562,13 +6569,6 @@ msgstr ""
 #. R/parseRd.R: gettextf("file %s: non-ASCII input and no declared encoding", sQuote(file0))
 
 msgid "file %s: non-ASCII input and no declared encoding"
-msgstr ""
-
-
-#: R/tools-deprecated.R: 0
-#. R/tools-deprecated.R: gettextf("file '%s' not found", vignette)
-
-msgid "file '%s' not found"
 msgstr ""
 
 

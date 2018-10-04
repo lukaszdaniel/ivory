@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-09-30 19:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -253,7 +253,7 @@ msgstr ""
 msgid "invalid axis number %d"
 msgstr ""
 
-#: plot.c:852
+#: plot.c:852 plot.c:864
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr ""
@@ -263,11 +263,6 @@ msgstr ""
 #: plot.c:3179
 #, c-format
 msgid "zero-length '%s' specified"
-msgstr ""
-
-#: plot.c:864
-#, c-format
-msgid "'%s' argument must be of length one"
 msgstr ""
 
 #: plot.c:894

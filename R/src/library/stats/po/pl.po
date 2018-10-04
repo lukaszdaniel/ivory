@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
@@ -83,18 +83,15 @@ msgid "missing observations in cov/cor"
 msgstr "brakujące obserwacje w macierzy kowariancji/korelacji"
 
 #: cov.c:638
-#, fuzzy
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
-"Wywoływanie 'var(x)' na czynniku 'x' jest przestarzałe i w przyszłości "
-"będzie błędem.\n"
+"Wywoływanie 'var(x)' na czynniku 'x' jest przestarzałe.\n"
 "  Użyj czegoś w stylu 'all(duplicated(x)[-1L])' aby wykonać test stałości "
 "wektora."
 
 #: cov.c:640
-#, fuzzy
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
@@ -347,20 +344,23 @@ msgid ""
 "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' "
 "instead of 'n'"
 msgstr ""
+"nextn() nie znalazł rozwiązania < %d = INT_MAX (maksymalna liczba "
+"całkowita); przekaż '0+ n' zamiast 'n'"
 
 #: fourier.c:223
 #, c-format
 msgid "nextn<64>() found no solution < %ld = UINT64_MAX (the maximal integer)"
 msgstr ""
+"nextn<64>() nie znalazł rozwiązania < %ld = UINT64_MAX (maksymalna liczba "
+"całkowita)"
 
 #: fourier.c:239
 msgid "no factors"
 msgstr "brak czynników"
 
 #: fourier.c:240
-#, fuzzy
 msgid "too many factors"
-msgstr "brak czynników"
+msgstr "zbyt wiele czynników"
 
 #: fourier.c:243
 msgid "invalid factors"
@@ -369,6 +369,7 @@ msgstr "niepoprawne czynniki"
 #: fourier.c:247
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
+"'n' musi mieć 'typeof(.)' zwracający wartość \"integer\" lub \"double\""
 
 #: fourier.c:285
 #, c-format
@@ -376,6 +377,8 @@ msgid ""
 "nextn() = %<PRIu64> > 2^53 may not be exactly representable in R (as \"double"
 "\")"
 msgstr ""
+"nextn() = %<PRIu64> > 2^53 może nie być poprawnie reprezentowany w R (jako "
+"\"double\")"
 
 #: integrate.c:54
 msgid "evaluation of function gave a result of wrong length"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-09-30 19:08+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -265,7 +265,7 @@ msgstr "引數數目太少"
 msgid "invalid axis number %d"
 msgstr "座標數目 %d 不正確"
 
-#: plot.c:852
+#: plot.c:852 plot.c:864
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'hadj' 的長度必須是 1"
@@ -276,11 +276,6 @@ msgstr "'hadj' 的長度必須是 1"
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "'side' 長度不能設成零"
-
-#: plot.c:864
-#, fuzzy, c-format
-msgid "'%s' argument must be of length one"
-msgstr "'hadj' 的長度必須是 1"
 
 #: plot.c:894
 #, fuzzy, c-format
@@ -598,6 +593,10 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument must be of length one"
+#~ msgstr "'hadj' 的長度必須是 1"
 
 #, fuzzy
 #~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"

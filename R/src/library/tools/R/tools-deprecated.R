@@ -406,7 +406,7 @@ vignetteDepends <-
         stop("argument 'vignette' must be of length 1")
     if (!nzchar(vignette)) return(invisible()) # lets examples work.
     if (!file.exists(vignette))
-        stop(gettextf("file '%s' not found", vignette), domain = "R-tools")
+        stop(gettextf("%s file wast not found", sQuote(vignette)), domain = "R-tools")
 
     vigDeps <- vignetteInfo(vignette)$depends
 
