@@ -402,8 +402,11 @@
 
       \item \code{split.default()} no longer relies on \code{[[<-()}, so
       it behaves as expected when splitting an object by a factor with
-      the empty string as one of its levels. Thanks to Brad Friedman for
+      the empty string as one of its levels.  Thanks to Brad Friedman for
       the report.
+      
+      \item Line numbers in messages about \file{.Rd} files are now more
+      reliable, thanks to a patch from Duncan Murdoch.
     }
   }
 }
@@ -476,6 +479,9 @@
 
       \item With a very large number of variables \code{terms()} could
       segfault (\PR{17480}).
+
+      \item \code{cut(rep(0, 7))} now works, thanks to Joey Reid and
+      Benjamin Tyner (\PR{16802}).
     }
   }
 }
