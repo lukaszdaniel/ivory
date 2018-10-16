@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-10-16 20:46\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -498,16 +498,32 @@ msgid "Apparent S3 methods needing delayed registration:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Apparent non-ASCII contents in second part of \\enc"
 msgstr ""
 
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr ""
+"nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
+
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 #, fuzzy
 msgid "Apparent non-ASCII contents without declared encoding"
+msgstr ""
+"nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
+
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr ""
 "nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
 
@@ -2504,16 +2520,32 @@ msgid "No vignettes available"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Non-ASCII contents in second part of \\enc"
 msgstr ""
 
-#. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr ""
+"nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
+
 #. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 #, fuzzy
 msgid "Non-ASCII contents without declared encoding"
+msgstr ""
+"nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
+
+#. R/RdConv2.R: gettextf("Non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr ""
 "nicht-ASCII Zeichen in CITATION Datei, ohne eine Zeichenkodierung anzugeben"
 

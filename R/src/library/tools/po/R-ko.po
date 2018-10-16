@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-10-16 20:46\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -494,16 +494,32 @@ msgid "Apparent S3 methods needing delayed registration:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Apparent non-ASCII contents in second part of \\enc"
 msgstr ""
 
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
+
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 #, fuzzy
 msgid "Apparent non-ASCII contents without declared encoding"
+msgstr ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
+
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr ""
 "미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
 
@@ -2468,16 +2484,32 @@ msgid "No vignettes available"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Non-ASCII contents in second part of \\enc"
 msgstr ""
 
-#. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
+
 #. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 #, fuzzy
 msgid "Non-ASCII contents without declared encoding"
+msgstr ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
+
+#. R/RdConv2.R: gettextf("Non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr ""
 "미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-10-16 20:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -593,17 +593,29 @@ msgstr ""
 
 #: R/RdConv2.R: 0
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 
 msgid "Apparent non-ASCII contents in second part of \\enc"
 msgstr ""
 
 
 #: R/RdConv2.R: 0
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+
+msgid "Apparent non-ASCII contents in second part of \\enc:\n  %s"
+msgstr ""
+
+
+#: R/RdConv2.R: 0
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
 
 msgid "Apparent non-ASCII contents without declared encoding"
+msgstr ""
+
+
+#: R/RdConv2.R: 0
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+
+msgid "Apparent non-ASCII contents without declared encoding:\n  %s"
 msgstr ""
 
 
@@ -2975,17 +2987,29 @@ msgstr ""
 
 #: R/RdConv2.R: 0
 #. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
 
 msgid "Non-ASCII contents in second part of \\enc"
 msgstr ""
 
 
 #: R/RdConv2.R: 0
-#. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+
+msgid "Non-ASCII contents in second part of \\enc:\n  %s"
+msgstr ""
+
+
+#: R/RdConv2.R: 0
 #. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
 
 msgid "Non-ASCII contents without declared encoding"
+msgstr ""
+
+
+#: R/RdConv2.R: 0
+#. R/RdConv2.R: gettextf("Non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+
+msgid "Non-ASCII contents without declared encoding:\n  %s"
 msgstr ""
 
 

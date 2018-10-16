@@ -90,7 +90,6 @@ all.equal.numeric <-
     if(all(out)) return(if(is.null(msg)) TRUE else msg)
     if(countEQ) {
         N <- length(out)
-        n0 <- sum(out)
         sabst0 <- sum(abs(target[out]))
     } else
         sabst0 <- 0
@@ -106,6 +105,7 @@ all.equal.numeric <-
 		xy <- xy/xn
 	    }
 	} else {
+	    stopifnot(all(scale > 0))
 	    xy <- xy/scale
 
 	}
@@ -117,7 +117,7 @@ all.equal.numeric <-
         msg <- c(msg, paste(gettext("Mean relative Mod difference:", domain = "R-base"), formatFUN(xy, what)))
 	  } else if(is.null(scale)) {
 	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy, what)))
-	  } else if(scale == 1) {
+	  } else if(all(abs(scale - 1) < 1e-7)) {
 	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy, what)))
 	 } else {
         msg <- c(msg, paste(gettext("Mean scaled Mod difference:", domain = "R-base"), formatFUN(xy, what)))
@@ -127,7 +127,7 @@ all.equal.numeric <-
         msg <- c(msg, paste(gettext("Mean relative difference:", domain = "R-base"), formatFUN(xy, what)))
 	  } else if(is.null(scale)) {
 	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), formatFUN(xy, what)))
-	  } else if(scale == 1) {
+	  } else if(all(abs(scale - 1) < 1e-7)) {
 	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), format(xy)))
       } else {
 	    msg <- c(msg, paste(gettext("Mean scaled difference:", domain = "R-base"), formatFUN(xy, what)))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-10-16 20:46\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -500,16 +500,33 @@ msgid "Apparent S3 methods needing delayed registration:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Apparent non-ASCII contents in second part of \\enc"
 msgstr ""
 "Najwyraźniej są zawartości nie będące w formacie ASCII w drugiej części \\enc"
 
-#. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr ""
+"Najwyraźniej są zawartości nie będące w formacie ASCII w drugiej części \\enc"
+
 #. R/RdConv2.R: gettext("Apparent non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 msgid "Apparent non-ASCII contents without declared encoding"
+msgstr ""
+"Najwyraźniej zawartości nie będące w formacie ASCII bez zadeklarowanego "
+"kodowania"
+
+#. R/RdConv2.R: gettextf("Apparent non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Apparent non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr ""
 "Najwyraźniej zawartości nie będące w formacie ASCII bez zadeklarowanego "
 "kodowania"
@@ -2482,15 +2499,29 @@ msgid "No vignettes available"
 msgstr "Brak dostępnych ilustracji"
 
 #. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
-#. R/RdConv2.R: gettext("Non-ASCII contents in second part of \\enc")
 #: R/RdConv2.R:0
 msgid "Non-ASCII contents in second part of \\enc"
 msgstr "Zawartości nie będące w formacie ASCII w drugiej części \\enc"
 
-#. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
+#. R/RdConv2.R: gettextf("Non-ASCII contents in second part of \\enc:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents in second part of \\enc:\n"
+"  %s"
+msgstr "Zawartości nie będące w formacie ASCII w drugiej części \\enc"
+
 #. R/RdConv2.R: gettext("Non-ASCII contents without declared encoding")
 #: R/RdConv2.R:0
 msgid "Non-ASCII contents without declared encoding"
+msgstr "Zawartości nie będące w formacie ASCII bez zadeklarowanego kodowania"
+
+#. R/RdConv2.R: gettextf("Non-ASCII contents without declared encoding:\n  %s", sQuote(txt))
+#: R/RdConv2.R:0
+#, fuzzy
+msgid ""
+"Non-ASCII contents without declared encoding:\n"
+"  %s"
 msgstr "Zawartości nie będące w formacie ASCII bez zadeklarowanego kodowania"
 
 #. R/QC.R: gettextf("\nNon-FOSS package license (%s)", y, domain = "R-tools")
