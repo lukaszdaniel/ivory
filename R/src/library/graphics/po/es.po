@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 19:08+0200\n"
+"POT-Creation-Date: 2018-11-28 21:49+0100\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -202,7 +202,7 @@ msgstr "especificación '%s' inválida"
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
 #: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1904
+#: plot3d.c:1170 plot3d.c:1897
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor de '%s' no válido"
@@ -255,7 +255,7 @@ msgstr "tipo inválido para rótulos de ejes"
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1866
 msgid "too few arguments"
 msgstr "muy pocos argumentos"
 
@@ -483,15 +483,15 @@ msgstr "longitud incorrecta para el argumento 'mode'"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "imposible asignar memoria (en xspline)"
 
-#: plot3d.c:182 plot3d.c:1930
+#: plot3d.c:182 plot3d.c:1923
 msgid "insufficient 'x' or 'y' values"
 msgstr "valores insuficientes de 'x' o 'y'"
 
-#: plot3d.c:186 plot3d.c:1933
+#: plot3d.c:186 plot3d.c:1926
 msgid "dimension mismatch"
 msgstr "dimensión no compatible"
 
-#: plot3d.c:194 plot3d.c:1936
+#: plot3d.c:194 plot3d.c:1929
 msgid "no contour values"
 msgstr "no hay valores de contorno"
 
@@ -526,31 +526,31 @@ msgid "invalid viewing parameters"
 msgstr "parámetros de visualización inválidos"
 
 # Parece raro pero... por favor fijate
-#: plot3d.c:1530
+#: plot3d.c:1522
 #, fuzzy, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): tipo circular/largo -- bug.report()!"
 
-#: plot3d.c:1940 plot3d.c:1947
+#: plot3d.c:1933 plot3d.c:1940
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "valores de 'x' perdidos"
 
-#: plot3d.c:1942 plot3d.c:1949
+#: plot3d.c:1935 plot3d.c:1942
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "se esperan valores de 'x' crecientes"
 
-#: plot3d.c:1954
+#: plot3d.c:1947
 msgid "invalid NA contour values"
 msgstr "valores de contorno NA no válidos"
 
-#: plot3d.c:1966
+#: plot3d.c:1959
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "todos los valores de z son iguales"
 
-#: plot3d.c:1968
+#: plot3d.c:1961
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "todos los valore de z son NA"

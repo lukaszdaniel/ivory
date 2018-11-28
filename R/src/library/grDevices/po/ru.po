@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-11-28 21:49+0100\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -97,7 +97,7 @@ msgstr "неправильный аргумент 'file'"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8292 devPS.c:8455 devPS.c:8458 devWindows.c:3645
+#: colors.c:551 devPS.c:8295 devPS.c:8458 devPS.c:8461 devWindows.c:3645
 #: devWindows.c:3649 devWindows.c:3657 devWindows.c:3668 devWindows.c:3674
 #: devWindows.c:3681 devWindows.c:3688 devWindows.c:3692
 #, fuzzy, c-format
@@ -170,7 +170,7 @@ msgstr "CharInfo не разбирается"
 msgid "unknown AFM entity encountered"
 msgstr "встречен неизвестный раздел AFM"
 
-#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7961 devPicTeX.c:466
+#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7964 devPicTeX.c:466
 #: devPicTeX.c:468
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
@@ -289,12 +289,12 @@ msgstr "Не вышло записать кодировку устройства
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "Объект .ps.prolog не является символьным вектором"
 
-#: devPS.c:2659 devPS.c:6455 devWindows.c:790
+#: devPS.c:2659 devPS.c:6458 devWindows.c:790
 #, fuzzy
 msgid "invalid line end"
 msgstr "Неправильный конец строки"
 
-#: devPS.c:2678 devPS.c:6474 devWindows.c:803
+#: devPS.c:2678 devPS.c:6477 devWindows.c:803
 #, fuzzy
 msgid "invalid line join"
 msgstr "Неправильное соединение линий"
@@ -305,7 +305,7 @@ msgid "invalid line mitre"
 msgstr "Неправильный конец линии"
 
 #: devPS.c:2895 devPS.c:3801 devPS.c:4249 devPS.c:4276 devPS.c:5289
-#: devPS.c:7811 devPS.c:7856
+#: devPS.c:7814 devPS.c:7859
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "попытка использования неправильного шрифта %d; заменил шрифтом 1"
@@ -321,7 +321,7 @@ msgstr "слишком длинное имя файла в вызове %s()"
 msgid "memory allocation problem in '%s' function"
 msgstr "проблема с выделением памяти в %s()"
 
-#: devPS.c:3141 devPS.c:5937
+#: devPS.c:3141 devPS.c:5940
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "путь к кодировке слишком длинный в %s()"
@@ -331,7 +331,7 @@ msgstr "путь к кодировке слишком длинный в %s()"
 msgid "failed to load encoding file in '%s' function"
 msgstr "не могу загрузить файл кодировки '%s'"
 
-#: devPS.c:3200 devPS.c:3263 devPS.c:5996 devPS.c:6052 devPS.c:7691
+#: devPS.c:3200 devPS.c:3263 devPS.c:5999 devPS.c:6055 devPS.c:7694
 #, fuzzy
 msgid "invalid font type"
 msgstr "Неправильный тип шрифта"
@@ -377,7 +377,7 @@ msgstr ""
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "не могу открыть канал 'postscript' в '%s'"
 
-#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7110 qdPDF.c:98
+#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7113 qdPDF.c:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "не могу открыть файл '%s'"
@@ -416,7 +416,7 @@ msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': точка з�
 msgid "failed open converter to encoding '%s'"
 msgstr "не удалась конверсия в кодировку '%s'"
 
-#: devPS.c:4437 devPS.c:5334 devPS.c:7946
+#: devPS.c:4437 devPS.c:5334 devPS.c:7949
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "не удалась конверсия текста в кодировку '%s'"
@@ -464,7 +464,7 @@ msgstr "xfig(%s, onefile=FALSE) вернет только последний г�
 msgid "empty file name"
 msgstr "пустое имя файла"
 
-#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7170
+#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7173
 msgid "write failed"
 msgstr "запись не удалась"
 
@@ -492,71 +492,71 @@ msgstr "Повреждены загруженные кодировки; шриф
 msgid "failed to record device encoding; font not added"
 msgstr "Не могу записать кодировку устройства; шрифт не добавлен"
 
-#: devPS.c:5923 devPS.c:6328 devPS.c:6965
+#: devPS.c:5926 devPS.c:6331 devPS.c:6968
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr "увеличиваю версию PDF до 1.2"
 
-#: devPS.c:5953
+#: devPS.c:5956
 msgid "failed to load default encoding"
 msgstr "не могу загрузить кодировку по умолчанию"
 
-#: devPS.c:6020
+#: devPS.c:6023
 #, fuzzy
 msgid "failed to initialise default PDF font"
 msgstr "Не удалось инициализировать шрифт PDF по умолчанию"
 
-#: devPS.c:6075
+#: devPS.c:6078
 #, fuzzy
 msgid "failed to initialise additional PDF fonts"
 msgstr "Не удалось инициализировать дополнительные шрифты PDF"
 
-#: devPS.c:6088
+#: devPS.c:6091
 msgid "failed to allocate rasters"
 msgstr "не могу разместить растры"
 
-#: devPS.c:6095
+#: devPS.c:6098
 msgid "failed to allocate masks"
 msgstr "не могу разместить маски"
 
-#: devPS.c:6160
+#: devPS.c:6163
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "неправильный тип бумаги '%s' (pdf)"
 
-#: devPS.c:6184
+#: devPS.c:6187
 msgid "invalid foreground/background color (pdf)"
 msgstr "неправильный цвет переднего/заднего плана (pdf)"
 
-#: devPS.c:6303
+#: devPS.c:6306
 #, fuzzy
 msgid "invalid 'alpha' value in PDF"
 msgstr "Неправильное alpha-значение в PDF"
 
-#: devPS.c:6379 devPS.c:6426
+#: devPS.c:6382 devPS.c:6429
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "неизвестная 'colormodel', использую 'srgb'"
 
-#: devPS.c:6620
+#: devPS.c:6623
 #, fuzzy
 msgid "failed to load sRGB colorspace file"
 msgstr "Не удалось загрузить файл цветового пространства sRGB"
 
-#: devPS.c:6884
+#: devPS.c:6887
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Поврежденные кодировки в устройстве PDF"
 
-#: devPS.c:7094
+#: devPS.c:7097
 #, fuzzy, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "не могу открыть 'pdf'-файл в аргументе '%s'"
 
-#: devPS.c:7100
+#: devPS.c:7103
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" предполагает 'onefile = TRUE'"
 
-#: devPS.c:7243
+#: devPS.c:7246
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -565,30 +565,30 @@ msgstr ""
 "не могу открыть 'pdf'-файл аргумента '%s'\n"
 "  пожалуйста, выключите PDFdevice"
 
-#: devPS.c:7262
+#: devPS.c:7265
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.c:7716 devPS.c:8078 devPS.c:8125
+#: devPS.c:7719 devPS.c:8081 devPS.c:8128
 #, fuzzy
 msgid "failed to find or load PDF font"
 msgstr "Не удалось найти или загрузить шрифт PDF"
 
-#: devPS.c:7900 devPS.c:8033
+#: devPS.c:7903 devPS.c:8036
 #, fuzzy
 msgid "failed to find or load PDF CID font"
 msgstr "Не удалось найти или загрузить CID-шрифт PDF"
 
-#: devPS.c:8264 devPS.c:8268 devPS.c:8286 devPS.c:8429 devPS.c:8433
-#: devPS.c:8445
+#: devPS.c:8267 devPS.c:8271 devPS.c:8289 devPS.c:8432 devPS.c:8436
+#: devPS.c:8448
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "неправильный параметр 'fonts' в %s"
 
-#: devPS.c:8305 devPS.c:8372 devPS.c:8472
+#: devPS.c:8308 devPS.c:8375 devPS.c:8475
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr "не могу запустить устройство %s()"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -850,6 +850,20 @@ msgstr " クラス %s に対する定義はありません "
 msgid "Group generics:"
 msgstr ""
 
+#. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "In command %s: use of \"MethodsList\" metadata objects is defunct."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
+
+#. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "In command %s: use of \"MethodsList\" metadata objects is deprecated."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
+
 #. R/RMethodUtils.R: gettextf("In method for %s with signature %s: ", sQuote(f), msig, domain = "R-methods")
 #: R/RMethodUtils.R:0
 #, fuzzy
@@ -1135,6 +1149,16 @@ msgstr " 値のクラスが異なります： %s, %s "
 msgid "Restoring default function definition of %s"
 msgstr " \"%s\" の既定の関数定義を回復しています "
 
+#. R/MethodsList.R: gettext("See ?MethodsList.", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "See ?MethodsList."
+msgstr ""
+
+#. R/MethodsList.R: gettext("See ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "See ?MethodsList. (This warning is shown once per session.)"
+msgstr ""
+
 #. R/show.R: gettext("Signatures:", domain = "R-methods")
 #: R/show.R:0
 msgid "Signatures:"
@@ -1185,6 +1209,13 @@ msgstr ""
 msgid ""
 "Usage:  $help(topic) where topic is the name of a method (quoted or not)"
 msgstr ""
+
+#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
+#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use %s instead."
+msgstr " %s を代わりに使ってください． "
 
 #. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
 #: R/MethodsList.R:0
@@ -2169,20 +2200,6 @@ msgstr ""
 " %s 中の形式的引数を変更しようとしましたが、古い名前の幾つかは実際は引数では"
 "ありません：%s "
 
-#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
-#: R/MethodsList.R:0
-#, fuzzy
-msgid "in command %s: use of \"MethodsList\" metadata objects is defunct."
-msgstr ""
-" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
-
-#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
-#: R/MethodsList.R:0
-#, fuzzy
-msgid "in command %s: use of \"MethodsList\" metadata objects is deprecated."
-msgstr ""
-" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
-
 #. R/RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
 #: R/RClassUtils.R:0
 msgid ""
@@ -3141,16 +3158,6 @@ msgstr ""
 msgid "restoring definition of class %s"
 msgstr " クラス”%s”の定義を回復しています "
 
-#. R/MethodsList.R: gettext("see ?MethodsList.", domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "see ?MethodsList."
-msgstr ""
-
-#. R/MethodsList.R: gettext("see ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "see ?MethodsList. (This warning is shown once per session.)"
-msgstr ""
-
 #. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
@@ -3696,13 +3703,6 @@ msgid ""
 msgstr ""
 " $new() 関数への名前なし引数は参照クラスからのオブジェクトである必要がありま"
 "す ；クラス\"%s\" のオブジェクトを得ました "
-
-#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead))
-#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead), domain = "R-methods")
-#: R/MethodsList.R:0
-#, fuzzy
-msgid "use %s instead."
-msgstr " %s を代わりに使ってください． "
 
 #. R/RClassUtils.R: gettextf("validity method for class \"%s\"", Class)
 #: R/RClassUtils.R:0

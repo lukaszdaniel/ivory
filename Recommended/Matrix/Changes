@@ -624,13 +624,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		stop(gettextf("RHS 'b' has wrong length %d", length(b)))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/R/dgTMatrix.R Recommended/Matrix/R/dgTMatrix.R
-69,70c69,70
+71,72c71,72
 <                    sub = sprintf("Dimensions: %d x %d", di[1], di[2]),
 < 		   xlab = "Column", ylab = "Row", cuts = 15,
 ---
 >                    sub = gettextf("Dimensions: %d x %d", di[1], di[2]),
 > 		   xlab = gettext("Column"), ylab = gettext("Row"), cuts = 15,
-152,154c152
+160,162c160
 < 			    Matrix.msg("rectangle size ",
 < 				       paste(round(pSize,1), collapse=" x "),
 < 				       " [pixels];  --> lwd :", formatC(lwd))
@@ -826,11 +826,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	stop(sprintf("%s is not of class \"%s\"",
 ---
 > 	stop(gettextf("%s is not of class \"%s\"",
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/man/condest.Rd Recommended/Matrix/man/condest.Rd
-69c69
-<   \url{http://dx.doi.org/10.1137/S0895479899356080}
----
->   \url{https://doi.org/10.1137/S0895479899356080}
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/Matrix/man/image-methods.Rd Recommended/Matrix/man/image-methods.Rd
 30,31c30,31
 <       sub = sprintf("Dimensions: \%d x \%d", di[1], di[2]),

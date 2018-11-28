@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2016-04-16 r709) -- "Internationalized Version of R"
-Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2018-10-16 r1062) -- "Internationalized Version of R"
+Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-04-16 r70497) -- "Unsuffered Consequences"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R Under development (unstable) (2018-10-16 r75673) -- "Unsuffered Consequences"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -173,6 +173,8 @@ Type 'q()' to quit R.
 > mfit2b$call <- mfit2$call <- NULL
 > all.equal(mfit2b, mfit2) 
 [1] TRUE
+> aeq(mfit2$transitions, c(0,1,0,2,2,0,0,0, 1,1,0,1, 0,0,0,0))
+[1] TRUE
 > 
 > # Now the harder one, where subjects change weights
 > mtest3 <- tfun(1:10)  
@@ -294,4 +296,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  1.192   0.068   1.257 
+  0.792   0.049   0.834 

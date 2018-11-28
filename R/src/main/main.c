@@ -509,6 +509,11 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	if(diff > 0 && diff < upper) {
 	    REprintf(_("Error: segfault from C stack overflow"));
 	    REprintf("\n");
+#if defined(linux) || defined(__linux__) || defined(__sun) || defined(sun)
+	    sigset_t ss;
+	    sigaddset(&ss, signum);
+	    sigprocmask(SIG_UNBLOCK, &ss, NULL);
+#endif
 	    jump_to_toplevel();
 	}
     }
@@ -841,12 +846,12 @@ void setup_Rmainloop(void)
     srand(TimeToSeed());
 
     InitArithmetic();
-    InitParser();
     InitTempDir(); /* must be before InitEd */
     InitMemory();
     InitStringHash(); /* must be before InitNames */
     InitBaseEnv();
     InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
+    InitParser();  /* must be after InitMemory, InitNames */
     InitGlobalEnv();
     InitDynload();
     InitOptions();
@@ -1617,7 +1622,7 @@ R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     SETCAR(e, VECTOR_ELT(f, 0));
     cur = CDR(e);
     SETCAR(cur, tmp = allocVector(LANGSXP, 2));
-	SETCAR(tmp, R_QuoteSymbol);
+	SETCAR(tmp, lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol));
 	SETCAR(CDR(tmp), expr);
     cur = CDR(cur);
     SETCAR(cur, value);

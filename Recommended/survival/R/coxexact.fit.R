@@ -3,7 +3,7 @@
 #   case-control data.
 coxexact.fit <- function(x, y, strata, offset, init, control,
 			  weights, method, rownames,
-                         resid=TRUE, concordance=FALSE)
+                         resid=TRUE)
     {
     if (!is.matrix(x)) stop("'x' argument is not a matrix")
     if (!is.null(weights) && any(weights!=1))
@@ -149,11 +149,5 @@ coxexact.fit <- function(x, y, strata, offset, init, control,
                       method = method,
                       class = 'coxph')
     }
-
-    if (concordance) {
-        rval$concordance <-survConcordance.fit(Surv(y[,1], y[,2]),
-                                             lp, strata)
-    }
-    
     rval
 }

@@ -9,7 +9,7 @@
 
 # @configure_input@
 
-dnl # serial 4179 ltversion.m4
+# serial 4179 ltversion.m4
 # This file is part of GNU Libtool
 
 m4_define([LT_PACKAGE_VERSION], [2.4.6])

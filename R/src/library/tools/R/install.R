@@ -1952,10 +1952,7 @@ if(FALSE) {
     }
 
     makeargs <- paste0("SHLIB=", shQuote(shlib))
-    if (with_f9x) {
-        makeargs <- c("SHLIB_LDFLAGS='$(SHLIB_FCLDFLAGS)'",
-                      "SHLIB_LD='$(SHLIB_FCLD)'", makeargs)
-    } else if (with_cxx) {
+    if (with_cxx) {
         makeargs <- if (use_cxx17)
             c("CXX='$(CXX17) $(CXX17STD)'",
               "CXXFLAGS='$(CXX17FLAGS)'",
@@ -1986,7 +1983,7 @@ if(FALSE) {
     }
     if (with_objc) shlib_libadd <- c(shlib_libadd, "$(OBJC_LIBS)")
     if (with_f77) shlib_libadd <- c(shlib_libadd, "$(FLIBS)")
-    if (with_f9x) shlib_libadd <- c(shlib_libadd, "$(FCLIBS)")
+    if (with_f9x) shlib_libadd <- c(shlib_libadd, "$(FLIBS) $(FCLIBS)")
 
     if (length(pkg_libs))
         makeargs <- c(makeargs,

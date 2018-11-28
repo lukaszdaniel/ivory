@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-10-02 11:58\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -451,6 +451,13 @@ msgid "'%s' argument must be atomic"
 msgstr ""
 
 
+#: R/taskCallback.R: 0
+#. R/taskCallback.R: gettextf("'%s' argument must be character or numeric", "which")
+
+msgid "'%s' argument must be character or numeric"
+msgstr ""
+
+
 #: R/format.R: 0
 #. R/format.R: gettextf("'%s' argument must be character, logical or NULL", "zero.print")
 
@@ -528,6 +535,7 @@ msgstr ""
 #: R/seq.R: 0
 #: R/seq.R: 0
 #: R/seq.R: 0
+#: R/taskCallback.R: 0
 #: R/unix/system.unix.R: 0
 #: R/unix/system.unix.R: 0
 #: R/windows/system.R: 0
@@ -550,6 +558,7 @@ msgstr ""
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' argument must be of length 1", "which")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
@@ -1264,6 +1273,13 @@ msgstr ""
 #. R/array.R: stop("'x' must have named dimnames")
 
 msgid "'x' must have named dimnames"
+msgstr ""
+
+
+#: R/format.R: 0
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+
+msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
 msgstr ""
 
 
@@ -2913,6 +2929,7 @@ msgstr ""
 #: R/locales.R: 0
 #: R/serialize.R: 0
 #: R/serialize.R: 0
+#: R/taskCallback.R: 0
 #: R/zapsmall.R: 0
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
@@ -2930,6 +2947,7 @@ msgstr ""
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 
 msgid "invalid '%s' argument"
@@ -3835,7 +3853,6 @@ msgstr ""
 
 #: R/library.R: 0
 #. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
-#. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
 
 msgid "package %s was built for platform %s"
 msgstr ""
@@ -4260,11 +4277,11 @@ msgstr ""
 
 #: R/dates.R: 0
 #: R/datetime.R: 0
-#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 
-msgid        " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgid        " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]"
+msgid_plural " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0]    ""
 msgstr[1]    ""
 

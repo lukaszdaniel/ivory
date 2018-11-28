@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-10-16 r1062) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-10-16 r75673) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -36,13 +36,13 @@ Type 'q()' to quit R.
 > names(rfit)
  [1] "coefficients"      "var"               "var2"             
  [4] "loglik"            "iter"              "linear.predictors"
- [7] "residuals"         "means"             "concordance"      
-[10] "method"            "frail"             "fvar"             
-[13] "df"                "df2"               "penalty"          
-[16] "pterms"            "assign2"           "history"          
-[19] "coxlist1"          "printfun"          "n"                
-[22] "nevent"            "terms"             "assign"           
-[25] "wald.test"         "y"                 "formula"          
+ [7] "residuals"         "means"             "method"           
+[10] "frail"             "fvar"              "df"               
+[13] "df2"               "penalty"           "pterms"           
+[16] "assign2"           "history"           "coxlist1"         
+[19] "printfun"          "n"                 "nevent"           
+[22] "terms"             "assign"            "wald.test"        
+[25] "concordance"       "y"                 "formula"          
 [28] "call"             
 > rfit
 Call:
@@ -121,4 +121,4 @@ n=150, number of events=40
 > 
 > proc.time()
    user  system elapsed 
-  0.869   0.052   0.915 
+  0.740   0.035   0.768 

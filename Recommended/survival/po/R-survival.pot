@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.42-6\n"
-"POT-Creation-Date: 2018-07-17 21:21\n"
+"Project-Id-Version: survival 2.43-1\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -537,6 +537,13 @@ msgid "'istate' argument should be a vector of positive integers or a factor"
 msgstr ""
 
 
+#: R/coxph.R: 0
+#. R/coxph.R: stop("'model=TRUE' not supported for models with tt terms")
+
+msgid "'model=TRUE' not supported for models with tt terms"
+msgstr ""
+
+
 #: R/pspline.R: 0
 #. R/pspline.R: gettextf("'nterm' argument is too small for df=%s", df)
 
@@ -683,12 +690,12 @@ msgid "'var' argument is not a square matrix"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
+#: R/agexact.fit.R: 0
 #: R/coxexact.fit.R: 0
 #: R/survexp.fit.R: 0
 #: R/survpenal.fit.S: 0
 #: R/survreg.fit.S: 0
-#. R/agexact.fit.S: stop("'x' argument is not a matrix")
+#. R/agexact.fit.R: stop("'x' argument is not a matrix")
 #. R/coxexact.fit.R: stop("'x' argument is not a matrix")
 #. R/survexp.fit.R: stop("'x' argument is not a matrix")
 #. R/survpenal.fit.S: stop("'x' argument is not a matrix")
@@ -709,6 +716,13 @@ msgstr ""
 #. R/neardate.R: stop("'y1' and 'y2' arguments must be sortable")
 
 msgid "'y1' and 'y2' arguments must be sortable"
+msgstr ""
+
+
+#: R/survSplit.R: 0
+#. R/survSplit.R: stop("'zero' parameter must be less than any observed times")
+
+msgid "'zero' parameter must be less than any observed times"
 msgstr ""
 
 
@@ -941,7 +955,9 @@ msgid "Chisq= %s on %d df, p=%s; test weights= %s"
 msgstr ""
 
 
+#: R/concordance.R: 0
 #: R/coxph.R: 0
+#. R/concordance.R: stop("Cluster can not be used in an interaction")
 #. R/coxph.R: stop("Cluster can not be used in an interaction")
 
 msgid "Cluster can not be used in an interaction"
@@ -1158,7 +1174,7 @@ msgstr ""
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #: R/print.survreg.penal.S: 0
-#. R/print.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format.pval(pchisq(logtest, df, lower.tail = FALSE), digits = pdig), domain = "R-survival")
+#. R/print.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format.pval(pchisq(logtest, df, lower.tail = FALSE), digits = digits), domain = "R-survival")
 #. R/print.summary.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"],     2)), x$logtest["df"], format.pval(x$waldtest["pvalue"], digits = pdig), domain = "R-survival")
 #. R/print.summary.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format.pval(pchisq(logtest, df, lower.tail = FALSE), digits = pdig), domain = "R-survival")
 #. R/print.survreg.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     round(df, 1), format.pval(pchisq(logtest, df, lower.tail = FALSE), digits = pdig),     domain = "R-survival")
@@ -1183,14 +1199,14 @@ msgid "Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
+#: R/agexact.fit.R: 0
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
-#: R/coxph.fit.S: 0
-#. R/agexact.fit.S: gettextf("Loglik converged before variable %s; beta may be infinite.", paste((seq_len(nvar))[infs],     collapse = ", "), domain = "R-survival")
+#: R/coxph.fit.R: 0
+#. R/agexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste((seq_len(nvar))[infs],     collapse = ", "), domain = "R-survival")
 #. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "))
 #. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "), domain = "R-survival")
-#. R/coxph.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
+#. R/coxph.fit.R: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
 
 msgid "Loglik converged before variable %s; beta may be infinite."
 msgstr ""
@@ -1263,6 +1279,13 @@ msgid "Newdata cannot be used when a model has frailty terms"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("No (non-missing) observations")
+
+msgid "No (non-missing) observations"
+msgstr ""
+
+
 #: R/pyears.R: 0
 #. R/pyears.R: stop("No rate table specified")
 
@@ -1316,14 +1339,18 @@ msgid "Offset term ignored"
 msgstr ""
 
 
+#: R/concordance.R: 0
 #: R/survConcordance.R: 0
+#. R/concordance.R: stop("Offset terms not allowed")
 #. R/survConcordance.R: stop("Offset terms not allowed")
 
 msgid "Offset terms not allowed"
 msgstr ""
 
 
+#: R/concordance.R: 0
 #: R/survConcordance.R: 0
+#. R/concordance.R: stop("Only one predictor variable allowed")
 #. R/survConcordance.R: stop("Only one predictor variable allowed")
 
 msgid "Only one predictor variable allowed"
@@ -1365,23 +1392,23 @@ msgid "Pyears cannot have interaction terms"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
+#: R/agexact.fit.R: 0
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
-#: R/coxph.fit.S: 0
+#: R/coxph.fit.R: 0
 #: R/survreg.fit.S: 0
-#. R/agexact.fit.S: warning("Ran out of iterations and did not converge")
+#. R/agexact.fit.R: warning("Ran out of iterations and did not converge")
 #. R/agreg.fit.R: warning("Ran out of iterations and did not converge")
 #. R/coxexact.fit.R: warning("Ran out of iterations and did not converge")
-#. R/coxph.fit.S: warning("Ran out of iterations and did not converge")
+#. R/coxph.fit.R: warning("Ran out of iterations and did not converge")
 #. R/survreg.fit.S: warning("Ran out of iterations and did not converge")
 
 msgid "Ran out of iterations and did not converge"
 msgstr ""
 
 
-#: R/residuals.survreg.penal.S: 0
-#. R/residuals.survreg.penal.S: stop("Residuals are not available for sparse models")
+#: R/residuals.survreg.penal.R: 0
+#. R/residuals.survreg.penal.R: stop("Residuals are not available for sparse models")
 
 msgid "Residuals are not available for sparse models"
 msgstr ""
@@ -1626,13 +1653,6 @@ msgid "Time"
 msgstr ""
 
 
-#: R/coxph.R: 0
-#. R/coxph.R: stop("Time transform + model frame: code incomplete")
-
-msgid "Time transform + model frame: code incomplete"
-msgstr ""
-
-
 #: R/survexp.R: 0
 #. R/survexp.R: stop("Times must be in increasing order")
 
@@ -1856,10 +1876,40 @@ msgid "all elements must have the same list of states"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("all models must have the exact same response vector")
+
+msgid "all models must have the exact same response vector"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("all models must have the same sample size")
+
+msgid "all models must have the same sample size"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("all models must have the same weight vector")
+
+msgid "all models must have the same weight vector"
+msgstr ""
+
+
 #: R/survfitCI.R: 0
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 
 msgid "an observation transitions to it's starting state, transition ignored"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop(temp, " argument is not an appropriate fit object")
+#. R/concordance.R: stop(temp, " argument is not an appropriate fit object")
+#. R/concordance.R: stop(temp, " argument is not an appropriate fit object")
+
+msgid "argument is not an appropriate fit object"
 msgstr ""
 
 
@@ -1874,6 +1924,27 @@ msgstr ""
 #. R/tmerge.R: gettextf("argument(s) %s not a recognized type", argname[is.na(check)])
 
 msgid "argument(s) %s not a recognized type"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("attemp to update an event variable and levels do not match")
+
+msgid "attemp to update an event variable and levels do not match"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("attempt to turn event variable", argname[[ii]], "into a tdc")
+
+msgid "attempt to turn event variable"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("attempt to update an event variable with a different type")
+
+msgid "attempt to update an event variable with a different type"
 msgstr ""
 
 
@@ -1959,8 +2030,8 @@ msgid "cannot give both a 'df' and 'theta' argument"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
-#. R/agexact.fit.S: stop("cannot handle a null model + exact calculation (yet)")
+#: R/agexact.fit.R: 0
+#. R/agexact.fit.R: stop("cannot handle a null model + exact calculation (yet)")
 
 msgid "cannot handle a null model + exact calculation (yet)"
 msgstr ""
@@ -2010,9 +2081,16 @@ msgid "cannot use both the 'etype' argument and 'mstate' survival type"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
+#: R/concordance.R: 0
+#. R/concordance.R: stop("cannot yet handle models with tt terms")
+
+msgid "cannot yet handle models with tt terms"
+msgstr ""
+
+
+#: R/agexact.fit.R: 0
 #: R/coxexact.fit.R: 0
-#. R/agexact.fit.S: stop("case weights are not supported for the exact method")
+#. R/agexact.fit.R: stop("case weights are not supported for the exact method")
 #. R/coxexact.fit.R: stop("case weights are not supported for the exact method")
 
 msgid "case weights are not supported for the exact method"
@@ -2070,7 +2148,15 @@ msgid "cox model doesn't support \"%s\" survival data"
 msgstr ""
 
 
+#: R/survfit.matrix.R: 0
+#. R/survfit.matrix.R: warning("curves have a larger start.time than the parameter, start.time parameter value was ignored")
+
+msgid "curves have a larger start.time than the parameter, start.time parameter value was ignored"
+msgstr ""
+
+
 #: R/tmerge.R: 0
+#. R/tmerge.R: stop("data and options$tdcstart do not agree on data type")
 #. R/tmerge.R: stop("data and options$tdcstart do not agree on data type")
 
 msgid "data and options$tdcstart do not agree on data type"
@@ -2172,6 +2258,13 @@ msgstr ""
 #. R/survexp.R: stop("either a 'times' argument or a 'response' is needed")
 
 msgid "either a 'times' argument or a 'response' is needed"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("first call has created overlapping or duplicated time intervals")
+
+msgid "first call has created overlapping or duplicated time intervals"
 msgstr ""
 
 
@@ -2301,11 +2394,11 @@ msgstr ""
 
 
 #: R/print.coxph.S: 0
-#: R/summary.coxph.S: 0
-#: R/summary.coxph.penal.S: 0
+#: R/summary.coxph.R: 0
+#: R/summary.coxph.penal.R: 0
 #. R/print.coxph.S: stop("input is not valid")
-#. R/summary.coxph.S: stop("input is not valid")
-#. R/summary.coxph.penal.S: stop("input is not valid")
+#. R/summary.coxph.R: stop("input is not valid")
+#. R/summary.coxph.penal.R: stop("input is not valid")
 
 msgid "input is not valid"
 msgstr ""
@@ -2332,6 +2425,13 @@ msgstr ""
 #. R/survfit.matrix.R: stop("input must have at least 2 transitions")
 
 msgid "input must have at least 2 transitions"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("attempt to turn event variable", argname[[ii]], "into a tdc")
+
+msgid "into a tdc"
 msgstr ""
 
 
@@ -2601,6 +2701,13 @@ msgid "invalid value for iterations"
 msgstr ""
 
 
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("invalid value for timefix option")
+
+msgid "invalid value for timefix option"
+msgstr ""
+
+
 #: R/aeqSurv.R: 0
 #. R/aeqSurv.R: stop("invalid value for tolerance")
 
@@ -2610,10 +2717,10 @@ msgstr ""
 
 #: R/agreg.fit.R: 0
 #: R/coxpenal.fit.R: 0
-#: R/coxph.fit.S: 0
+#: R/coxph.fit.R: 0
 #. R/agreg.fit.R: stop("invalid weights, must be >0")
 #. R/coxpenal.fit.R: stop("invalid weights, must be >0")
-#. R/coxph.fit.S: stop("invalid weights, must be >0")
+#. R/coxph.fit.R: stop("invalid weights, must be >0")
 
 msgid "invalid weights, must be >0"
 msgstr ""
@@ -2647,10 +2754,25 @@ msgid "left hand side of the formula  must be a numeric vector or a surival"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("left hand side of the formula  must be a numeric vector or a survival object")
+#. R/concordance.R: stop("left hand side of the formula  must be a numeric vector or a survival object")
+
+msgid "left hand side of the formula  must be a numeric vector or a survival object"
+msgstr ""
+
+
 #: R/survSplit.R: 0
 #. R/survSplit.R: stop("left hand side was not recognized")
 
 msgid "left hand side was not recognized"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("left or interval censored data is not supported")
+
+msgid "left or interval censored data is not supported"
 msgstr ""
 
 
@@ -2818,6 +2940,13 @@ msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("models must have identical clustering")
+
+msgid "models must have identical clustering"
+msgstr ""
+
+
 #: R/anova.coxphlist.S: 0
 #. R/anova.coxphlist.S: stop("models were not all fitted to the same size of dataset")
 
@@ -2864,6 +2993,13 @@ msgstr ""
 #. R/cch.R: stop("multiple records per id not allowed")
 
 msgid "multiple records per id not allowed"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("multiple state survival is not supported")
+
+msgid "multiple state survival is not supported"
 msgstr ""
 
 
@@ -3136,6 +3272,13 @@ msgid "overwriting data1 variables %s"
 msgstr ""
 
 
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("p0 must be a numeric vector that adds to 1")
+
+msgid "p0 must be a numeric vector that adds to 1"
+msgstr ""
+
+
 #: R/yates.R: 0
 #. R/yates.R: stop("pairwise tests must be for a single term")
 
@@ -3157,8 +3300,8 @@ msgid "penalized fits must have an intercept!"
 msgstr ""
 
 
-#: R/summary.coxph.penal.S: 0
-#. R/summary.coxph.penal.S: stop("penalized summary function can't be used for a null model")
+#: R/summary.coxph.penal.R: 0
+#. R/summary.coxph.penal.R: stop("penalized summary function can't be used for a null model")
 
 msgid "penalized summary function can't be used for a null model"
 msgstr ""
@@ -3353,8 +3496,10 @@ msgstr ""
 
 
 #: R/survfit.coxph.R: 0
+#: R/survfit.matrix.R: 0
 #: R/survfitCI.R: 0
 #. R/survfit.coxph.R: stop("start.time must be a single numeric value")
+#. R/survfit.matrix.R: stop("start.time must be a single numeric value")
 #. R/survfitCI.R: stop("start.time must be a single numeric value")
 
 msgid "start.time must be a single numeric value"
@@ -3529,6 +3674,13 @@ msgid "the prediction should be a function, or a list with two functions"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("the reverse argument must be TRUE/FALSE")
+
+msgid "the reverse argument must be TRUE/FALSE"
+msgstr ""
+
+
 #: R/survreg.S: 0
 #. R/survreg.S: stop("the scale argument is not valid with multiple strata")
 
@@ -3576,13 +3728,6 @@ msgstr ""
 #. R/print.summary.survexp.R: stop("there are no observations to print.")
 
 msgid "there are no observations to print."
-msgstr ""
-
-
-#: R/tmerge.R: 0
-#. R/tmerge.R: stop("there are overlapping time intervals")
-
-msgid "there are overlapping time intervals"
 msgstr ""
 
 
@@ -3812,15 +3957,15 @@ msgid "wrong length for factor"
 msgstr ""
 
 
-#: R/agexact.fit.S: 0
+#: R/agexact.fit.R: 0
 #: R/coxexact.fit.R: 0
 #: R/coxpenal.fit.R: 0
-#: R/coxph.fit.S: 0
+#: R/coxph.fit.R: 0
 #: R/survpenal.fit.S: 0
-#. R/agexact.fit.S: stop("wrong length for inital values")
+#. R/agexact.fit.R: stop("wrong length for inital values")
 #. R/coxexact.fit.R: stop("wrong length for inital values")
 #. R/coxpenal.fit.R: stop("wrong length for inital values")
-#. R/coxph.fit.S: stop("wrong length for inital values")
+#. R/coxph.fit.R: stop("wrong length for inital values")
 #. R/survpenal.fit.S: stop("wrong length for inital values")
 
 msgid "wrong length for inital values"
@@ -3831,6 +3976,13 @@ msgstr ""
 #. R/survreg.fit.S: stop("wrong length for initial parameters")
 
 msgid "wrong length for initial parameters"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("wrong length for p0")
+
+msgid "wrong length for p0"
 msgstr ""
 
 
@@ -3849,6 +4001,13 @@ msgid "wrong number of rows for p0"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("x and y are not the same length")
+
+msgid "x and y are not the same length"
+msgstr ""
+
+
 #: R/yates.R: 0
 #. R/yates.R: gettextf("xlevels attribute not found for %s", parts[i])
 
@@ -3856,10 +4015,38 @@ msgid "xlevels attribute not found for %s"
 msgstr ""
 
 
+#: R/concordance.R: 0
+#. R/concordance.R: stop("y and strata are not the same length")
+
+msgid "y and strata are not the same length"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("y and weights are not the same length")
+
+msgid "y and weights are not the same length"
+msgstr ""
+
+
 #: R/yates.R: 0
 #. R/yates.R: stop("yates sgtt method can only handle contr.SAS or contr.treatment")
 
 msgid "yates sgtt method can only handle contr.SAS or contr.treatment"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("ymax must be a single number")
+
+msgid "ymax must be a single number"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("ymin must be a single number")
+
+msgid "ymin must be a single number"
 msgstr ""
 
 

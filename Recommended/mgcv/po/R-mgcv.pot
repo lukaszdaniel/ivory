@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-24\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"Project-Id-Version: mgcv 1.8-26\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2793,6 +2793,13 @@ msgid "no free coefs in sf smooth"
 msgstr ""
 
 
+#: R/gam.fit4.r: 0
+#. R/gam.fit4.r: stop("no good data in iteration")
+
+msgid "no good data in iteration"
+msgstr ""
+
+
 #: R/bam.r: 0
 #. R/bam.r: warning("no smooths, ignoring 'discrete=TRUE'")
 
@@ -2850,6 +2857,13 @@ msgstr ""
 #. R/efam.r: stop("not an extended family")
 
 msgid "not an extended family"
+msgstr ""
+
+
+#: R/gam.fit4.r: 0
+#. R/gam.fit4.r: stop("not enough finite derivatives")
+
+msgid "not enough finite derivatives"
 msgstr ""
 
 

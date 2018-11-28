@@ -528,14 +528,14 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	    break
 	}
 	validityMethod <- superDef@validity
-	if(is(validityMethod, "function")) {
+	if(is.function(validityMethod)) {
 	    errors <- c(errors, anyStrings(validityMethod(as(object, superClass))))
 	    if(length(errors))
 		break
 	}
     }
     validityMethod <- classDef@validity
-    if(length(errors) == 0L && is(validityMethod, "function")) {
+    if(length(errors) == 0L && is.function(validityMethod)) {
 	errors <- c(errors, anyStrings(validityMethod(object)))
     }
     if(length(errors)) {
@@ -563,7 +563,7 @@ setValidity <- function(Class, method, where = topenv(parent.frame())) {
     }
     method <- .makeValidityMethod(Class, method)
     if(is.null(method) ||
-       (is(method, "function") && length(formalArgs(method)) == 1L))
+       (is.function(method) && length(formalArgs(method)) == 1L))
 	ClassDef@validity <- method
     else
 	stop("validity method must be NULL or a function of one argument")
@@ -696,7 +696,8 @@ initialize <- function(.Object, ...) {
             for(i in seq_along(snames)) {
                 slotName <- snames[[i]]
                 slotClass <- slotDefs[[slotName]]
-                slotClassDef <- getClassDef(slotClass, package = ClassDef@package)
+                slotClassDef <- getClassDef(slotClass,
+                                            package = packageSlot(slotClass))
                 slotVal <- elements[[i]]
                 ## perform non-strict coercion, but leave the error messages for
                 ## values not conforming to the slot definitions to validObject(),

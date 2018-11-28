@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-16 20:46\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3237,15 +3237,21 @@ msgstr ""
 msgid "SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS"
 msgstr ""
 
+#. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but linking is by %s\n", this,     if (have_cxx) "C++" else "C", domain = "R-tools")
+#. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but linking is by %s\n", this,     if (have_cxx) "C++" else "C", domain = "R-tools")
+#: R/check.R:0
+msgid "SHLIB_OPENMP_%s is included in PKG_LIBS but linking is by %s"
+msgstr ""
+
 #. R/check.R: gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but not in PKG_%s\n", this, this,     domain = "R-tools")
 #: R/check.R:0
 msgid "SHLIB_OPENMP_%s is included in PKG_LIBS but not in PKG_%s"
 msgstr ""
 
-#. R/check.R: gettext("SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_CFLAGS in PKG_LIBS\n",     domain = "R-tools")
+#. R/check.R: gettextf("SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n",     c_or_cxx, domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_CFLAGS in "
+"SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in "
 "PKG_LIBS"
 msgstr ""
 
@@ -4044,13 +4050,13 @@ msgstr "Użyj 'summary()' aby uzyskać dodatkowe informacje."
 msgid "Use 'summary(full = TRUE)' for details."
 msgstr "Użyj 'summary(full = TRUE)' aby uzyskać szczegółowe informacje."
 
-#. R/check.R: gettextf("Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for different languages may differ so the matching macro must be used in PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for F77: see the manual).\n",     sQuote("Writing R Extensions"), domain = "R-tools")
+#. R/check.R: gettextf("Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for different languages may differ so the matching macro must be used in PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for Fortran: see the manual).\n",     sQuote("Writing R Extensions"), domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for "
 "different languages may differ so the matching macro must be used in "
-"PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for F77: see the "
-"manual)."
+"PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for Fortran: see "
+"the manual)."
 msgstr ""
 
 #. R/QC.R: gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools")
@@ -4669,6 +4675,12 @@ msgstr "sprawdzanie krzyżowych referencji Rd ..."
 msgid "checking Rd files ..."
 msgstr "sprawdzanie plików Rd ..."
 
+#. R/check.R: gettext("checking Rd line widths", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking Rd line widths"
+msgstr "sprawdzanie plików Rd ..."
+
 #. R/check.R: gettext("checking Rd metadata ..", domain = "R-tools")
 #: R/check.R:0
 msgid "checking Rd metadata .."
@@ -4763,6 +4775,12 @@ msgstr "szukanie kodu sprawdzającego pakiet ..."
 msgid "checking for code/documentation mismatches ..."
 msgstr "szukanie niezgodności kodu/dokumentacji ..."
 
+#. R/check.R: gettext("checking for compilation flags used ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for compilation flags used ..."
+msgstr "sprawdzanie flag kompilacji w Makevars"
+
 #. R/build.R: gettext("checking for empty or unneeded directories", domain = "R-tools")
 #: R/build.R:0
 msgid "checking for empty or unneeded directories"
@@ -4778,6 +4796,12 @@ msgstr "szukanie plików wykonywalnych ..."
 #: R/build.R:0 R/check.R:0
 msgid "checking for file %s ..."
 msgstr "sprawdzanie pliku %s ..."
+
+#. R/check.R: gettext("checking for future file timestamps", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for future file timestamps"
+msgstr "szukanie nazw plików przenośnych ..."
 
 #. R/check.R: gettext("checking for hidden files and directories ...", domain = "R-tools")
 #: R/check.R:0
@@ -4941,6 +4965,12 @@ msgstr "sprawdzanie funkcji zastępujących ..."
 #: R/check.R:0
 msgid "checking running R code from vignettes ..."
 msgstr "sprawdzanie uruchamiania kodu R z ilustracji ..."
+
+#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking serialization versions"
+msgstr "sprawdzanie flag kompilacji w Makevars"
 
 #. R/check.R: gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools")
 #: R/check.R:0

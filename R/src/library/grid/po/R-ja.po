@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -841,11 +841,12 @@ msgstr " 単位ではないオペランド(operand)は数値でなければな�
 msgid "nrow * ncol < #{legend labels}"
 msgstr ""
 
-#. R/grab.R: warning("one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')")
+#. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
 #: R/grab.R:0
 #, fuzzy
 msgid ""
-"one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
+"one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = "
+"TRUE')"
 msgstr ""
 " grob(s) が上書きされました（おそらく grab は信用できるものではありません; "
 "'wrap=TRUE' を試してください） "

@@ -184,7 +184,7 @@ void R_SizeFromEnv(Rstart Rp)
     if ((p = getenv("R_MAX_VSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Vsize)
-	    R_ShowMessage(_("WARNING: invalid R_VSIZE ignored\n"));
+	    R_ShowMessage(_("WARNING: invalid R_MAX_VSIZE ignored\n"));
 	else if(value < Min_Vsize) {
 	    snprintf(msg, 256,
 		     _("WARNING: R_MAX_VSIZE smaller than Min_Vsize = %lu is ignored\n"),

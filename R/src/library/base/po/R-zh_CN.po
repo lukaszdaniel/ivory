@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-10-02 11:58\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -396,6 +396,12 @@ msgstr "对Date对象不适用"
 msgid "'%s' argument must be atomic"
 msgstr "'arg'的长度必需为一"
 
+#. R/taskCallback.R: gettextf("'%s' argument must be character or numeric", "which")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' argument must be character or numeric"
+msgstr "'tim'不是字符，也不是数值"
+
 #. R/format.R: gettextf("'%s' argument must be character, logical or NULL", "zero.print")
 #: R/format.R:0
 #, fuzzy
@@ -464,12 +470,13 @@ msgstr "'arg'的长度必需为一"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' argument must be of length 1", "which")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "'arg'的长度必需为一"
@@ -1100,6 +1107,13 @@ msgstr "不能强迫把'x'改变成'hexmode'"
 #, fuzzy
 msgid "'x' must have named dimnames"
 msgstr "'X'必需有带名字的维名"
+
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+#: R/format.R:0
+msgid ""
+"'zero.print' is truncated to fit into formatted zeros; consider "
+"'replace=TRUE'"
+msgstr ""
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -2417,9 +2431,10 @@ msgstr "输入有破损，LF被CR取代"
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 #: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
-#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
+#: R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "'time'参数不对"
@@ -3128,7 +3143,6 @@ msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr "程辑包%s是在R版本2.10.0之前建的：你得重新安装"
 
 #. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
-#. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
 #: R/library.R:0
 #, fuzzy
 msgid "package %s was built for platform %s"
@@ -3471,11 +3485,12 @@ msgstr "'by'参数的正負號不对"
 msgid "you cannot be serious"
 msgstr "你是不是在耍我？"
 
-#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
-msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgid " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]"
+msgid_plural ""
+" [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0] ""
 
 #. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base")

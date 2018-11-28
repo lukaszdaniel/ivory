@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:52+0100\n"
+"POT-Creation-Date: 2018-11-28 21:50+0100\n"
 "PO-Revision-Date: 2018-07-19 20:21+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -26,7 +26,7 @@ msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "'magic', omptymalizator gcv/ubre, nie zdodał uzbieżnić się po 400 iteracjach."
 
-#: mat.c:48 mat.c:70
+#: mat.c:88 mat.c:110
 msgid ""
 "\n"
 "Failed to open file\n"
@@ -34,7 +34,7 @@ msgstr ""
 "\n"
 "Nie udało się otworzyć pliku\n"
 
-#: mat.c:78
+#: mat.c:118
 msgid ""
 "\n"
 "file dim problem\n"
@@ -42,12 +42,12 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:2691
+#: mat.c:3211
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:2696
+#: mat.c:3216
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
@@ -83,6 +83,11 @@ msgstr "Próba odwrócenia metodą 'invert()' niekwadratowej macierzy"
 #: matrix.c:336
 msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
+
+#: misc.c:32
+#, c-format
+msgid "adjusting %d memory allocation\n"
+msgstr ""
 
 #: qp.c:57
 msgid "ERROR in addconQT."

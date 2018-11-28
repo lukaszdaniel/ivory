@@ -689,6 +689,8 @@ void *ALTVEC_DATAPTR(SEXP x);
 const void *ALTVEC_DATAPTR_RO(SEXP x);
 const void *ALTVEC_DATAPTR_OR_NULL(SEXP x);
 SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call);
+
+/* data access */
 int ALTINTEGER_ELT(SEXP x, R_xlen_t i);
 void ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v);
 int ALTLOGICAL_ELT(SEXP x, R_xlen_t i);
@@ -700,32 +702,57 @@ void ALTSTRING_SET_ELT(SEXP, R_xlen_t, SEXP);
 Rcomplex ALTCOMPLEX_ELT(SEXP x, R_xlen_t i);
 void ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v);
 Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i);
-void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, int v);
+void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v);
+
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
+R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
+R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
+R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf);
+R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf);
+
+/* metadata access */
 int INTEGER_IS_SORTED(SEXP x);
 int INTEGER_NO_NA(SEXP x);
-SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
-SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
-SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
-SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
-SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
-SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
-SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-SEXP INTEGER_IS_NA(SEXP x);
-SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-
-R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
 int REAL_IS_SORTED(SEXP x);
 int REAL_NO_NA(SEXP x);
-SEXP REAL_IS_NA(SEXP x);
+int LOGICAL_IS_SORTED(SEXP x);
+int LOGICAL_NO_NA(SEXP x);
 int STRING_IS_SORTED(SEXP x);
 int STRING_NO_NA(SEXP x);
+
+/* invoking ALTREP class methods */
+SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
+SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
+SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
+SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+SEXP INTEGER_IS_NA(SEXP x);
+SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
+SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
+SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
+SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+SEXP REAL_IS_NA(SEXP x);
+SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
+
+/* constructors for internal ALTREP classes */
 SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
 SEXP R_deferred_coerceToString(SEXP v, SEXP info);
 SEXP R_virtrep_vec(SEXP, SEXP);
+SEXP R_tryWrap(SEXP);
+SEXP R_tryUnwrap(SEXP);
 
 #ifdef LONG_VECTOR_SUPPORT
     R_len_t NORET R_BadLongVector(SEXP, const char *, int);
+#endif
+
+/* checking for mis-use of multi-threading */
+#ifdef TESTING_WRITE_BARRIER
+# define THREADCHECK
+#endif
+#ifdef THREADCHECK
+void R_check_thread(const char *s);
+# define R_CHECK_THREAD R_check_thread(__func__)
+#else
+# define R_CHECK_THREAD do {} while (0)
 #endif
 
 /* List Access Functions */
@@ -964,6 +991,8 @@ SEXP Rf_dimnamesgets(SEXP, SEXP);
 SEXP Rf_DropDims(SEXP);
 SEXP Rf_duplicate(SEXP);
 SEXP Rf_shallow_duplicate(SEXP);
+SEXP R_duplicate_attr(SEXP);
+SEXP R_shallow_duplicate_attr(SEXP);
 SEXP Rf_lazy_duplicate(SEXP);
 /* the next really should not be here and is also in Defn.h */
 SEXP Rf_duplicated(SEXP, Rboolean);
@@ -1289,6 +1318,11 @@ int R_check_class_etc      (SEXP x, const char **valid);
 /* preserve objects across GCs */
 void R_PreserveObject(SEXP);
 void R_ReleaseObject(SEXP);
+
+SEXP R_NewPreciousMSet(int);
+void R_PreserveInMSet(SEXP x, SEXP mset);
+void R_ReleaseFromMSet(SEXP x, SEXP mset);
+void R_ReleaseMSet(SEXP mset, int keepSize);
 
 /* Shutdown actions */
 void R_dot_Last(void);		/* in main.c */
@@ -1651,12 +1685,11 @@ void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 	if(R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \
 	    R_SignalCStackOverflow(usage);				\
     } while (FALSE)
+#endif
 
 void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
         const char *errmsg, const char *warnmsg, const char *varname,
         Rboolean warnByDefault);
-
-#endif
 
 #ifdef __cplusplus
 }

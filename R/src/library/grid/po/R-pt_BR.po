@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -836,11 +836,12 @@ msgstr "Operando não-unitário deve ser numérico"
 msgid "nrow * ncol < #{legend labels}"
 msgstr ""
 
-#. R/grab.R: warning("one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')")
+#. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
 #: R/grab.R:0
 #, fuzzy
 msgid ""
-"one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
+"one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = "
+"TRUE')"
 msgstr "grob(s) sobrescrito(s) (captura NÃO será fiel; tente 'wrap=TRUE')"
 
 #. R/grob.R: stop("only 'grobs' allowed in \"gList\"")

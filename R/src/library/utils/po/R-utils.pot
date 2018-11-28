@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.0\n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1392,6 +1392,13 @@ msgid "No vignettes found with %s fields matching %s using regular expression ma
 msgstr ""
 
 
+#: R/str.R: 0
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+
+msgid "Not a validObject():"
+msgstr ""
+
+
 #: R/citation.R: 0
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
@@ -2091,13 +2098,6 @@ msgstr ""
 #. R/help.R: gettext("\nUsing the first match ...")
 
 msgid "Using the first match ..."
-msgstr ""
-
-
-#: R/indices.R: 0
-#. R/indices.R: gettext("Version")
-
-msgid "Version"
 msgstr ""
 
 
@@ -4249,7 +4249,7 @@ msgstr[1]    ""
 
 
 #: R/str.R: 0
-#. R/str.R: ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
+#. R/str.R: ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
 
 msgid        "Formal class %s [package %s] with %d slot"
 msgid_plural "Formal class %s [package %s] with %d slots"

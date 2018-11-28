@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999--2017  The R Core Team.
+ *  Copyright (C) 1999--2018  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -111,8 +111,9 @@ static SEXP getActiveValue(SEXP fun)
 
 static void setActiveValue(SEXP fun, SEXP val)
 {
-    SEXP arg = LCONS(R_QuoteSymbol, LCONS(val, R_NilValue));
-    SEXP expr = LCONS(fun, LCONS(arg, R_NilValue));
+    SEXP qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
+    SEXP arg = lang2(qfun, val);
+    SEXP expr = lang2(fun, arg);
     PROTECT(expr);
     eval(expr, R_GlobalEnv);
     UNPROTECT(1);
@@ -158,9 +159,11 @@ static R_INLINE Rboolean SYMBOL_HAS_BINDING(SEXP s) {
   if (BINDING_IS_LOCKED(__b__)) \
     error(_("cannot change value of locked binding for '%s'"), \
 	  CHAR(PRINTNAME(TAG(__b__)))); \
-  if (IS_ACTIVE_BINDING(__b__)) \
+  if (IS_ACTIVE_BINDING(__b__)) { \
+    PROTECT(__val__); \
     setActiveValue(CAR(__b__), __val__); \
-  else \
+    UNPROTECT(1); \
+   } else \
     SETCAR(__b__, __val__); \
 } while (0)
 */
@@ -181,12 +184,15 @@ static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
   if (BINDING_IS_LOCKED(__sym__)) \
     error(_("cannot change value of locked binding for '%s'"), \
 	  CHAR(PRINTNAME(__sym__))); \
-  if (IS_ACTIVE_BINDING(__sym__)) \
+  if (IS_ACTIVE_BINDING(__sym__)) { \
+    PROTECT(__val__); \
     setActiveValue(SYMVALUE(__sym__), __val__); \
-  else \
+    UNPROTECT(1); \
+  } else \
     SET_SYMVALUE(__sym__, __val__); \
 } while (0)
 */
+
 static R_INLINE void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
   if (BINDING_IS_LOCKED(sym)) 
     error(_("cannot change value of locked binding for '%s'"), 
@@ -983,8 +989,11 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	    SET_TAG(tmp, symbol);
 	    /* If the database has a canCache method, then call that.
 	       Otherwise, we believe the setting for canCache. */
-	    if(canCache && table->canCache)
+	    if(canCache && table->canCache) {
+		PROTECT(tmp);
 		*canCache = table->canCache(CHAR(PRINTNAME(symbol)), table);
+		UNPROTECT(1);
+	    }
 	}
 	return(tmp);
     }
@@ -2987,11 +2996,13 @@ SEXP attribute_hidden do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("arguments must be symbolic"));
 
     /* 'all.names' : */
-    all = asLogical(eval(CADDR(args), rho));
+    all = asLogical(PROTECT(eval(CADDR(args), rho)));
+    UNPROTECT(1);
     if (all == NA_LOGICAL) all = 0;
 
     /* 'USE.NAMES' : */
-    useNms = asLogical(eval(CADDDR(args), rho));
+    useNms = asLogical(PROTECT(eval(CADDDR(args), rho)));
+    UNPROTECT(1);
     if (useNms == NA_LOGICAL) useNms = 0;
 
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3685,7 +3696,8 @@ SEXP attribute_hidden do_getRegNS(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP name, val;
     checkArity(op, args);
-    name = checkNSname(call, coerceVector(CAR(args), SYMSXP));
+    name = checkNSname(call, PROTECT(coerceVector(CAR(args), SYMSXP)));
+    UNPROTECT(1);
     val = findVarInFrame(R_NamespaceRegistry, name);
 
     switch(PRIMVAL(op)) {

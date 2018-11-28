@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: 2018-07-19 20:25+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2155,6 +2155,11 @@ msgstr "Nie dostarczono danych do funkcji '%s'"
 msgid "no free coefs in sf smooth"
 msgstr "brak wolnych współczynników w wygładzaniu sf"
 
+#. R/gam.fit4.r: stop("no good data in iteration")
+#: R/gam.fit4.r:0
+msgid "no good data in iteration"
+msgstr ""
+
 #. R/bam.r: warning("no smooths, ignoring 'discrete=TRUE'")
 #: R/bam.r:0
 msgid "no smooths, ignoring 'discrete=TRUE'"
@@ -2200,6 +2205,12 @@ msgstr "nie wszystkie wymagane zmienne zostały dostarczone w \"newdata\"!"
 #: R/efam.r:0
 msgid "not an extended family"
 msgstr ""
+
+#. R/gam.fit4.r: stop("not enough finite derivatives")
+#: R/gam.fit4.r:0
+#, fuzzy
+msgid "not enough finite derivatives"
+msgstr "Zbyt mało informacyjnych obserwacji"
 
 #. R/sparse.r: stop("not enough unique values to find k nearest")
 #: R/sparse.r:0

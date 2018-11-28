@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-11-28 21:49+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -89,7 +89,7 @@ msgstr "niepoprawny wektor 'names'"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
-#: colors.c:551 devPS.c:8292 devPS.c:8455 devPS.c:8458 devWindows.c:3645
+#: colors.c:551 devPS.c:8295 devPS.c:8458 devPS.c:8461 devWindows.c:3645
 #: devWindows.c:3649 devWindows.c:3657 devWindows.c:3668 devWindows.c:3674
 #: devWindows.c:3681 devWindows.c:3688 devWindows.c:3692
 #, c-format
@@ -157,7 +157,7 @@ msgstr "'CharInfo' nie mógł zostać przetworzony"
 msgid "unknown AFM entity encountered"
 msgstr "napotkano nieznany obiekt AFM"
 
-#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7961 devPicTeX.c:466
+#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7964 devPicTeX.c:466
 #: devPicTeX.c:468
 #, c-format
 msgid "invalid string in '%s' function"
@@ -277,11 +277,11 @@ msgstr "nie udało się zapisać kodowania urządzenia"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "obiekt '.ps.prolog' nie jest wektorem tekstowym"
 
-#: devPS.c:2659 devPS.c:6455 devWindows.c:790
+#: devPS.c:2659 devPS.c:6458 devWindows.c:790
 msgid "invalid line end"
 msgstr "błędny koniec linii"
 
-#: devPS.c:2678 devPS.c:6474 devWindows.c:803
+#: devPS.c:2678 devPS.c:6477 devWindows.c:803
 msgid "invalid line join"
 msgstr "błędny łącznik linii"
 
@@ -290,7 +290,7 @@ msgid "invalid line mitre"
 msgstr "niepoprawny ukośnik linii"
 
 #: devPS.c:2895 devPS.c:3801 devPS.c:4249 devPS.c:4276 devPS.c:5289
-#: devPS.c:7811 devPS.c:7856
+#: devPS.c:7814 devPS.c:7859
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "próba użycia niepoprawnej czcionki %d zastąpionej przez czcionkę 1"
@@ -306,7 +306,7 @@ msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 msgid "memory allocation problem in '%s' function"
 msgstr "problem przydziału pamięci w funkcji '%s'"
 
-#: devPS.c:3141 devPS.c:5937
+#: devPS.c:3141 devPS.c:5940
 #, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
@@ -316,7 +316,7 @@ msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
 msgid "failed to load encoding file in '%s' function"
 msgstr "nie udało się załadować pliku strony kodowej funkcji '%s'"
 
-#: devPS.c:3200 devPS.c:3263 devPS.c:5996 devPS.c:6052 devPS.c:7691
+#: devPS.c:3200 devPS.c:3263 devPS.c:5999 devPS.c:6055 devPS.c:7694
 msgid "invalid font type"
 msgstr "niepoprawny typ czcionki"
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "nie można otworzyć kanału 'postscript' w '%s'"
 
-#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7110 qdPDF.c:98
+#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7113 qdPDF.c:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "nie można otworzyć pliku '%s'"
@@ -397,7 +397,7 @@ msgstr "niepowodzenie konwersji z %s na %s w '%s' w funkcji '%s'"
 msgid "failed open converter to encoding '%s'"
 msgstr "nie udało się otworzyć konwertera dla kodowania '%s'"
 
-#: devPS.c:4437 devPS.c:5334 devPS.c:7946
+#: devPS.c:4437 devPS.c:5334 devPS.c:7949
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "konwersja tesktu dla kodowania '%s' nie powiodła się"
@@ -442,7 +442,7 @@ msgstr "'xfig(%s, onefile=FALSE)' zwróci tylko ostatni wykres"
 msgid "empty file name"
 msgstr "pusta nazwa pliku"
 
-#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7170
+#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7173
 msgid "write failed"
 msgstr "zapis nie powiódł się"
 
@@ -468,66 +468,66 @@ msgid "failed to record device encoding; font not added"
 msgstr ""
 "nie udało się zarejestrować kodowania urządzenia; czcionka nie została dodana"
 
-#: devPS.c:5923 devPS.c:6328 devPS.c:6965
+#: devPS.c:5926 devPS.c:6331 devPS.c:6968
 #, c-format
 msgid "increasing the PDF version to %s"
 msgstr "zwiększanie wersji PDF do %s"
 
-#: devPS.c:5953
+#: devPS.c:5956
 msgid "failed to load default encoding"
 msgstr "nie udało się załadować domyślnej strony kodowej"
 
-#: devPS.c:6020
+#: devPS.c:6023
 msgid "failed to initialise default PDF font"
 msgstr "nie udało się zainicjalizować domyślnej czcionki PDF"
 
-#: devPS.c:6075
+#: devPS.c:6078
 msgid "failed to initialise additional PDF fonts"
 msgstr "nie udało się zainicjalizować dodatkowych czcionek PDF"
 
-#: devPS.c:6088
+#: devPS.c:6091
 msgid "failed to allocate rasters"
 msgstr "nie udało się przydzielić rastrów"
 
-#: devPS.c:6095
+#: devPS.c:6098
 msgid "failed to allocate masks"
 msgstr "nie udało się przydzielić masek"
 
-#: devPS.c:6160
+#: devPS.c:6163
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "niepoprawny typ '%s' papieru (pdf)"
 
-#: devPS.c:6184
+#: devPS.c:6187
 msgid "invalid foreground/background color (pdf)"
 msgstr "niepoprawny kolor pierwszego planu/tła (pdf)"
 
-#: devPS.c:6303
+#: devPS.c:6306
 msgid "invalid 'alpha' value in PDF"
 msgstr "niepoprawna wartość 'alpha' w PDF"
 
-#: devPS.c:6379 devPS.c:6426
+#: devPS.c:6382 devPS.c:6429
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "nieznany 'colormodel', używanie 'srgb'"
 
-#: devPS.c:6620
+#: devPS.c:6623
 msgid "failed to load sRGB colorspace file"
 msgstr "nie udało się załadować pliku przestrzeni kolorów sRGB"
 
-#: devPS.c:6884
+#: devPS.c:6887
 msgid "corrupt encodings in PDF device"
 msgstr "uszkodzone kodowania w urządzeniu PDF"
 
-#: devPS.c:7094
+#: devPS.c:7097
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "nie można otworzyć kanału 'pdf' w '%s'"
 
-#: devPS.c:7100
+#: devPS.c:7103
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" sugeruje, że 'onefile = TRUE'"
 
-#: devPS.c:7243
+#: devPS.c:7246
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -536,7 +536,7 @@ msgstr ""
 "nie można otworzyć argumentu pliku 'pdf' '%s'\n"
 "  proszę wyłączyć urządzenie PDF"
 
-#: devPS.c:7262
+#: devPS.c:7265
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
@@ -545,21 +545,21 @@ msgstr ""
 "nie można otworzyć tymczasowego pliku '%s' do kompresji (powód: %s); "
 "kompresja została wyłączona dla tego urządzenia"
 
-#: devPS.c:7716 devPS.c:8078 devPS.c:8125
+#: devPS.c:7719 devPS.c:8081 devPS.c:8128
 msgid "failed to find or load PDF font"
 msgstr "nie udało się znaleźć lub załadować czcionkę PDF"
 
-#: devPS.c:7900 devPS.c:8033
+#: devPS.c:7903 devPS.c:8036
 msgid "failed to find or load PDF CID font"
 msgstr "nie udało się znaleźć lub załadować czcionkę CID PDF"
 
-#: devPS.c:8264 devPS.c:8268 devPS.c:8286 devPS.c:8429 devPS.c:8433
-#: devPS.c:8445
+#: devPS.c:8267 devPS.c:8271 devPS.c:8289 devPS.c:8432 devPS.c:8436
+#: devPS.c:8448
 #, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "niepoprawny parametr '%s' w '%s'"
 
-#: devPS.c:8305 devPS.c:8372 devPS.c:8472
+#: devPS.c:8308 devPS.c:8375 devPS.c:8475
 #, c-format
 msgid "unable to start '%s' device"
 msgstr "nie można uruchomić urządzenia '%s'"

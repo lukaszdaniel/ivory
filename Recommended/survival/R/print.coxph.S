@@ -1,5 +1,5 @@
 print.coxph <-
- function(x, digits=max(3L, getOption("digits") - 3L), signif.stars=FALSE, ...)
+ function(x, digits=max(1L, getOption("digits") - 3L), signif.stars=FALSE, ...)
     {
     if (!is.null(cl<- x$call)) {
 	cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
@@ -32,15 +32,14 @@ print.coxph <-
 	    "se(coef)", "robust se", "z", "p"))
 	}
 
-    pdig <- max(1, getOption("digits")-4)  # default it too high IMO
-    printCoefmat(tmp, P.values=TRUE, has.Pvalue=TRUE,
+    printCoefmat(tmp, digits=digits, P.values=TRUE, has.Pvalue=TRUE,
                  signif.stars = signif.stars, ...)
 
     logtest <- -2 * (x$loglik[1] - x$loglik[2])
     if (is.null(x$df)) df <- sum(!is.na(coef))
     else  df <- round(sum(x$df),2)
     cat("\n")
-    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"))
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=digits), domain = "R-survival"))
     cat("\n")
     omit <- x$na.action
     cat("n=", x$n)

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1137,6 +1137,11 @@ msgid ""
 "matching."
 msgstr ""
 
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+#: R/str.R:0
+msgid "Not a validObject():"
+msgstr ""
+
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -1731,11 +1736,6 @@ msgstr "mailto:URI 를 열기 위해 브라우저를 이용합니다 "
 #, fuzzy
 msgid "Using the first match ..."
 msgstr "첫번째로 일치하는 항목을 사용하여 ..."
-
-#. R/indices.R: gettext("Version")
-#: R/indices.R:0
-msgid "Version"
-msgstr ""
 
 #. R/help.search.R: gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
@@ -3401,7 +3401,7 @@ msgid_plural ""
 " %d files recorded."
 msgstr[0] ""
 
-#. R/str.R: ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
+#. R/str.R: ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
 #: R/str.R:0
 msgid "Formal class %s [package %s] with %d slot"
 msgid_plural "Formal class %s [package %s] with %d slots"

@@ -385,21 +385,22 @@ format.POSIXct <- function(x, format = "", tz = "", usetz = FALSE, ...)
               names = names(x))
 }
 
-## could handle arrays for max.print \\ keep in sync with  print.Date() in ./dates.R
+## keep in sync with  print.Date()  in ./dates.R
 print.POSIXct <-
-print.POSIXlt <- function(x, tz = "", usetz = TRUE, ...)
+print.POSIXlt <- function(x, tz = "", usetz = TRUE, max = NULL, ...)
 {
-    max.print <- getOption("max.print", 9999L)
-    FORM <- if(missing(tz)) function(z) format(x, usetz = usetz)
-	    else function(z) format(x, tz = tz, usetz = usetz)
-    if(max.print < length(x)) {
-	print(FORM(x[seq_len(max.print)]), ...)
-        cat(sprintf(ngettext(as.integer(length(x) - max.print),
-	" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
-	" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
-            length(x) - max.print), "\n", sep = "")
+    if(is.null(max)) max <- getOption("max.print", 9999L)
+    FORM <- if(missing(tz))
+		 function(z) format(z,          usetz = usetz)
+	    else function(z) format(z, tz = tz, usetz = usetz)
+    if(max < length(x)) {
+	print(FORM(x[seq_len(max)]), max=max+1, ...)
+	cat(sprintf(ngettext(as.integer(length(x) - max),
+	" [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",
+	" [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
+	    length(x) - max), "\n", sep = "")
     } else if(length(x))
-	print(FORM(x), max = max.print, ...)
+	print(FORM(x), max = max, ...)
     else
 	cat(gettextf("class %s of length 0", dQuote(class(x)[1L]), domain = "R-base"), "\n", sep = "", collapse = "")
     invisible(x)
@@ -822,10 +823,10 @@ function(..., recursive = FALSE)
     }
 }
 
-`length<-.difftime` <- 
+`length<-.difftime` <-
 function(x, value)
     .difftime(NextMethod(), attr(x, "units"), oldClass(x))
-    
+
 ## ----- convenience functions -----
 
 seq.POSIXt <-
@@ -1176,7 +1177,7 @@ function(x, units = c("secs", "mins", "hours", "days", "months", "years"))
         if(!is.character(j) || (length(j) != 1L))
             stop("component subscript must be a character string")
 
-    if(!length(value)) 
+    if(!length(value))
         return(x)
     cl <- oldClass(x)
     class(x) <- NULL
@@ -1204,7 +1205,7 @@ function(x, units = c("secs", "mins", "hours", "days", "months", "years"))
             x[[j]][i] <- value
         }
     }
-    
+
     class(x) <- cl
     x
 }
@@ -1381,7 +1382,7 @@ as.list.POSIXlt <- function(x, ...)
 {
     nms <- names(x)
     names(x) <- NULL
-    y <- lapply(X = do.call(Map, c(list(list), unclass(x))),
+    y <- lapply(X = do.call(Map, c(list, unclass(x))),
                 FUN = .POSIXlt, attr(x, "tzone"), oldClass(x))
     names(y) <- nms
     y
@@ -1393,7 +1394,7 @@ as.list.POSIXlt <- function(x, ...)
 {
     cl <- oldClass(x)
     class(x) <- NULL
-    
+
     if(!missing(i) && is.character(i)) {
         nms <- names(x$year)
         for(n in names(x))

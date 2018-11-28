@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-10-02 11:58\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -391,6 +391,12 @@ msgstr "ikke defineret for Date-objekter"
 msgid "'%s' argument must be atomic"
 msgstr "'to' skal være af længde 1"
 
+#. R/taskCallback.R: gettextf("'%s' argument must be character or numeric", "which")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' argument must be character or numeric"
+msgstr "'tim' er ikke et tegn eller numerisk"
+
 #. R/format.R: gettextf("'%s' argument must be character, logical or NULL", "zero.print")
 #: R/format.R:0
 #, fuzzy
@@ -459,12 +465,13 @@ msgstr "'to' skal være af længde 1"
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' argument must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' argument must be of length 1", "which")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' argument must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
 msgstr "'to' skal være af længde 1"
@@ -1077,6 +1084,13 @@ msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
 #, fuzzy
 msgid "'x' must have named dimnames"
 msgstr "'X' skal have navngivne dimnavne"
+
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+#: R/format.R:0
+msgid ""
+"'zero.print' is truncated to fit into formatted zeros; consider "
+"'replace=TRUE'"
+msgstr ""
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -2374,9 +2388,10 @@ msgstr "inddata er blevet ødelagt, med LF erstattet af CR"
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 #: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
-#: R/locales.R:0 R/serialize.R:0 R/zapsmall.R:0
+#: R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ugyldigt 'time'-argument"
@@ -3080,7 +3095,6 @@ msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr "pakke %s blev bygget før R 2.10.0: geninstaller den venligst"
 
 #. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
-#. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
 #: R/library.R:0
 #, fuzzy
 msgid "package %s was built for platform %s"
@@ -3417,11 +3431,12 @@ msgstr ""
 msgid "you cannot be serious"
 msgstr "det mener du ikke"
 
-#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
+#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
-msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgid " [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entry ]"
+msgid_plural ""
+" [ reached 'max' / 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0] ""
 msgstr[1] ""
 

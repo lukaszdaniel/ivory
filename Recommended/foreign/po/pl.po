@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-19 19:14+0200\n"
+"POT-Creation-Date: 2018-11-28 21:50+0100\n"
 "PO-Revision-Date: 2018-07-19 19:19+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -185,7 +185,7 @@ msgstr "plik transferowy SAS posiada niepoprawny nagłówek członka"
 msgid "problem accessing SAS XPORT file"
 msgstr "problem z dostępem do pliku SAS XPORT"
 
-#: SASxport.c:491 SASxport.c:581 spss.c:647 stataread.c:587
+#: SASxport.c:491 SASxport.c:581 spss.c:671 stataread.c:587
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr "nie można otworzyć pliku: '%s'"
@@ -995,16 +995,16 @@ msgstr "założenie nie powiodło się: dict->nval > 0"
 msgid "%s: Partial record at end of system file"
 msgstr "%s: Częściowy rekord na końcu pliku systemowego"
 
-#: spss.c:368 spss.c:488
+#: spss.c:383 spss.c:505
 msgid "nval is 0"
 msgstr "'nval' jest równe 0"
 
-#: spss.c:650
+#: spss.c:674
 #, c-format
 msgid "problem in reading file '%s'"
 msgstr "problem podczas czytania pliku '%s'"
 
-#: spss.c:660
+#: spss.c:684
 #, c-format
 msgid "file '%s' is not in any supported SPSS format"
 msgstr "plik '%s' nie jest w żadnym wspieranym formacie SPSS"

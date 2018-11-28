@@ -944,10 +944,10 @@ environment variable @env{TZ}.
 @node OpenMP Support, C++ Support, Other Options, Other Options
 @subsection OpenMP Support
 
-By default @command{configure} searches for suitable
-options@footnote{for example, @option{-fopenmp}, @option{-xopenmp} or
-@option{-qopenmp}.  This includes for @command{clang} and the Intel C
-compiler.} for OpenMP support for the C, C++98, FORTRAN 77 and Fortran
+By default @command{configure} searches for suitable flags@footnote{for
+example, @option{-fopenmp}, @option{-xopenmp} or @option{-qopenmp}.
+This includes for @command{clang} and the Intel and Oracle compilers.}
+for OpenMP support for the C, C++ (default standard) and Fortran
 compilers.
 
 Only the C result is currently used for @R{} itself, and only if
@@ -958,19 +958,18 @@ R_OPENMP_CFLAGS
 @end example
 
 Use for packages has similar restrictions (involving @code{SHLIB_LD} and
-similar: note that as FORTRAN 77 code is normally linked by the C
-compiler, both need to support OpenMP) and can be overridden by
-specifying some of
+similar: note that as Fortran code is linked by the C (or C++) compiler,
+both need to support OpenMP) and can be overridden by specifying some of
 @example
 SHLIB_OPENMP_CFLAGS
 SHLIB_OPENMP_CXXFLAGS
-SHLIB_OPENMP_FCFLAGS
 SHLIB_OPENMP_FFLAGS
+SHLIB_OPENMP_FCFLAGS
 @end example
 
 @noindent
-Setting to an empty value will disable OpenMP for that compiler (and
-configuring with @option{--disable-openmp} will disable all
+Setting these to an empty value will disable OpenMP for that compiler
+(and configuring with @option{--disable-openmp} will disable all
 detection@footnote{This does not necessarily disable @emph{use} of
 OpenMP -- the @command{configure} code allows for platforms where OpenMP
 is used without a flag. For the @command{flang} compiler in late 2017,
@@ -1021,24 +1020,24 @@ support. Similarly, configure will if possible choose for
 @command{g++} 5 and later and 2016 versions of the Intel and Solaris
 compilers.  For earlier versions of @command{g++} one could try
 @option{-std=c++1y}.} such as @option{-std=c++14} for C++14 support and
-@option{-std=c++1z} for support for the forthcoming C++17 standard. The
-inferred values can be overridden in file @file{config.site} or on the
-@command{configure} command line: user-supplied values will be tested
-compiling some C++11/14/17 code.
+@option{-std=c++17} or @option{-std=c++1z} for support for the C++17
+standard.  The inferred values can be overridden in file
+@file{config.site} or on the @command{configure} command line:
+user-supplied values will be tested by compiling some C++11/14/17 code.
 
-@R{} versions 3.1.0 to 3.3.3 used @code{CXX1X} rather than @code{CXX11},
-and these forms are deprecated but still accepted.
+@R{} versions 3.1.0 to 3.3.3 used @code{CXX1X} rather than @code{CXX11}:
+these forms were deprecated in 3.4.4 and removed in 3.6.0.
 
-It may be@footnote{This is true for earlier versions of @command{g++} such
-as 4.2.1, and also for commonly-used versions of the Solaris compiler
-@code{CC}.} that there is no suitable flag for C++11 support, in which
-case a different compiler could be selected for @code{CXX11} and its
-corresponding flags.  Likewise, a different compiler can be specified for
-C++14 support with @code{CXX14} and for C++17 support with @code{CXX17}.
-Some compilers@footnote{Currently only
-GCC 6 and later, but this has been mooted for others.} by default assume
-a later standard than C++98 whereas the latter is assumed by some
-packages.  So users of GCC 6 might like to specify
+It may be@footnote{This is true for earlier versions of @command{g++}
+such as 4.2.1, and also for commonly-used versions of the Solaris
+compiler @code{CC}.} that there is no suitable flag for C++11 support,
+in which case a different compiler could be selected for @code{CXX11}
+and its corresponding flags.  Likewise, a different compiler can be
+specified for C++14 support with @code{CXX14} and for C++17 support with
+@code{CXX17}.  Some compilers@footnote{Currently only GCC and
+@command{clang++} versions 6 and later.} by default assume a later
+standard than C++98 whereas the latter has been assumed by some packages.  So
+users of GCC 6 might like to specify
 @example
 CXX='g++ -std=gnu++98'
 CXX11=g++
@@ -1047,11 +1046,11 @@ CXX14=g++
 CXX14STD='-std=c++14'
 @end example
 
-The @option{-std} flag is supported by the GCC, @command{clang}, Intel
+The @option{-std} flag is supported by the GCC, @command{clang++}, Intel
 and Solaris compilers (the latter from version 12.4).  Currently
 accepted values are (plus some synonyms)
 @example
-g++:     c++98 gnu++98 c++11 gnu+11 c++14 gnu++14 c++1z gnu++1z
+g++:     c++98 gnu++98 c++11 gnu+11 c++14 gnu++14 c++17 gnu++17
 Intel:   gnu+98 c++11 c++14 (from 16.0) c++17 (from 17.0)
 Solaris: c++03 c++11 c++14 (from 12.5)
 @end example
@@ -1076,7 +1075,9 @@ support to be picked by @command{configure}.)  Option
 extensions': what those are is hard to track down.
 
 For the use of C++11 and later in @R{} packages see the `Writing R
-Extensions' manual.
+Extensions' manual.  Prior to @R{} 3.6.0 the default C++ standard was
+that of the compiler used: currently it is C++11 if supported by the
+compiler.
 
 @node Testing a Unix-alike Installation,  , Other Options, Installing R under Unix-alikes
 @section Testing an Installation
@@ -2339,14 +2340,13 @@ the @samp{CXX11}, @samp{CXX14} and @samp{CXX17} variants
 So for example you could select a specific build of @command{clang} for
 both C and C++ with extensive checking by having in @file{~/.R/Makevars}
 @example
-CC = /usr/local/clang4/bin/clang
-CXX = /usr/local/clang4/bin/clang++
+CC = /usr/local/clang7/bin/clang
+CXX = /usr/local/clang7/bin/clang++
 CFLAGS = -g -O2 -Wall -pedantic -Wconversion -Wno-sign-conversion
 CXXFLAGS = -g -O2 -Wall -pedantic -Wconversion -Wno-sign-conversion
 CXX11 = $CXX
 CXX14 = $CXX
 CXX17 = $CXX
-CXX1X = $CXX
 @end example
 @noindent
 and the Sierra build of @command{gfortran} by
@@ -2359,7 +2359,7 @@ FLIBS = -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin16/6.3.0
 @noindent
 (line split for legibility here).
 
-If using the C/C++ compilers from the Command Line Tools (which does not
+If using the C/C++ compilers from the Command Line Tools (which do not
 have OpenMP support) one will need to include
 @example
 SHLIB_OPENMP_CFLAGS =
@@ -2408,9 +2408,9 @@ the optimization level for a particular package.  For example
 CFLAGS=-g -O -mtune=native
 ## @r{for C++ code}
 CXXFLAGS=-g -O -mtune=native
-## @r{for Fortran code}
+## @r{for fixed-form Fortran code}
 FFLAGS=-g -O -mtune=native
-## @r{for Fortran 9x code}
+## @r{for free-form Fortran code}
 FCFLAGS=-g -O -mtune=native
 @end example
 
@@ -3022,7 +3022,7 @@ distributions.)
 
 Even on 64-bit builds of @R{} there are limits on the size of @R{}
 objects (see @code{help("Memory-limits")}), some of which stem from the
-use of 32-bit integers (especially in FORTRAN code).  For example, the
+use of 32-bit integers (especially in Fortran code).  For example, the
 dimensions of an array are limited to @math{2^{31} - 1}.
 
 @node The standalone Rmath library, Essential and useful other programs under a Unix-alike, Choosing between 32- and 64-bit builds, Top
@@ -3260,8 +3260,8 @@ versions installed.
 @node Essential programs and libraries, Useful libraries and programs, Essential and useful other programs under a Unix-alike, Essential and useful other programs under a Unix-alike
 @section Essential programs and libraries
 
-You need a means of compiling C and FORTRAN 90 (see @ref{Using
-FORTRAN}).  Your C compiler should be
+You need a means of compiling C and Fortran 90 (see @ref{Using
+Fortran}).  Your C compiler should be
 @acronym{ISO}/@acronym{IEC}@tie{}60059@footnote{also known as
 @acronym{IEEE}@tie{}754}, POSIX 1003.1 and C99-compliant.@footnote{Note
 that C11 compilers need not be C99-compliant: @R{} requires support for
@@ -3616,7 +3616,7 @@ a sub-architecture-specific version).  A typical setting for
 @cputype{x86_64} Linux is
 
 @example
-JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-1.b13.fc28.x86_64/jre
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191-1.b12.fc28.x86_64/jre
 R_JAVA_LD_LIBRARY_PATH=$@{JAVA_HOME@}/lib/that/server
 @end example
 
@@ -3685,15 +3685,14 @@ find a suitable value for @code{CXX11STD} if the compiler given by
 @code{CXX} is capable of compiling C++11 code, but it is possible that a
 completely different compiler will be needed.
 
-Other packages need full Fortran 90 (or later) support.  For source
-files with extension @file{.f90} or @file{.f95}, the compiler defined by
-the macro @code{FC} is used by @command{R CMD INSTALL}.  This is found
-when @R{} is configured and is often the same as @code{F77}: note that
-it is detected by the name of the command without a test that it can
-actually compile Fortran 90 code.  Set the configure variable @code{FC}
-to override this if necessary: variables @code{FCFLAGS},
-@code{FCPICFLAGS}, @code{FCLIBS}, @code{SHLIB_FCLD} and
-@code{SHLIB_FCLDFLAGS} might also need to be set.
+For source files with extension @file{.f90} or @file{.f95} containing
+free-form Fortran, the compiler defined by the macro @code{FC} is used
+by @command{R CMD INSTALL}.  This is found when @R{} is configured and
+is often the same as @code{F77}: note that it is detected by the name of
+the command without a test that it can actually compile Fortran 90 code.
+Set the configure variable @code{FC} to override this if necessary:
+variables @code{FCFLAGS}, @code{FCPICFLAGS} and @code{FCLIBS} might also
+need to be set.
 
 See file @file{config.site} in the @R{} source for more details about
 these variables.
@@ -4131,21 +4130,6 @@ We rely on limited support in LAPACK for matrices with @math{2^{31}} or
 more elements: it is possible that an external LAPACK will not have that
 support.
 
-If you have a pure FORTRAN 77 compiler which cannot compile LAPACK it
-may be possible to use CLAPACK from
-@uref{http://www.netlib.org/@/clapack/} by something like
-@example
--with-lapack="-lclapack -lf2c"
-@end example
-@noindent
-provided these were built with position-independent code and the calling
-conventions for double complex function return values match those in the
-BLAS used, so it may be simpler to use CLAPACK built to use CBLAS and
-@example
--with-lapack="-lclapack -lcblas -lf2c"
-@end example
-
-
 
 @node Caveats,  , LAPACK, Linear algebra
 @subsection Caveats
@@ -4156,7 +4140,7 @@ meant that on Sun Sparc using the native compilers the flag
 @option{-dalign} is needed if @code{sunperf} is to be used.
 
 On some systems it has been necessary that an external
-@acronym{BLAS}/LAPACK was built with the same FORTRAN compiler used to
+@acronym{BLAS}/LAPACK was built with the same Fortran compiler used to
 build @R{}.
 
 
@@ -4170,7 +4154,7 @@ build @R{}.
 * Configuration variables::     
 * Setting the shell::           
 * Using make::                  
-* Using FORTRAN::               
+* Using Fortran::               
 * Compile and load flags::      
 * Maintainer mode::             
 @end menu
@@ -4400,7 +4384,7 @@ Bourne shell or clone, and the shell to be used can be changed by
 setting the configure variable @env{R_SHELL} to a suitable value (a full
 path to a shell, e.g.@: @file{/usr/local/bin/bash}).
 
-@node Using make, Using FORTRAN, Setting the shell, Configuration on a Unix-alike
+@node Using make, Using Fortran, Setting the shell, Configuration on a Unix-alike
 @section Using make
 @findex make
 
@@ -4423,83 +4407,50 @@ variable @code{MAKE} at configure time, for example
 ./configure MAKE=gmake
 @end example
 
-@node Using FORTRAN, Compile and load flags, Using make, Configuration on a Unix-alike
-@section Using FORTRAN
-@cindex FORTRAN
+@node Using Fortran, Compile and load flags, Using make, Configuration on a Unix-alike
+@section Using Fortran
+@cindex Fortran
 
-To compile @R{}, you need a FORTRAN compiler.  The default
+To compile @R{}, you need a Fortran 90 compiler.  The current default
 is to search for
 @c F95_compilers in m4/R.m4:
-@command{f95}, @command{fort}, @command{xlf95},
-@command{ifort}, @command{ifc}, @command{efc}, @command{pgf95}
-@command{lf95}, @command{gfortran}, @command{ftn}, @command{g95},
+@command{gfortran}, @command{g95}, @command{xlf95} @command{f95},
+@command{fort}, @command{ifort}, @command{ifc}, @command{efc},
+@command{pgfortran}, @command{pgf95} @command{lf95}, @command{ftn},
+@command{nagfor},
 @c F90 compilers in m4/R.m4:
-@command{f90}, @command{xlf90}, @command{pghpf}, @command{pgf90},
-@command{epcf90},
-@c F77 compilers in m4/R.m4:
-@command{g77}, @command{f77}, @command{xlf}, @command{frt},
-@command{pgf77}, @command{cf77}, @command{fort77}, @command{fl32},
-@command{af77} (in that order)@footnote{On HP-UX @command{fort77} is the
-@acronym{POSIX} compliant FORTRAN compiler, and comes after
-@command{g77}.}, and use whichever is found first; if none is found,
-@R{} cannot be compiled.
-@c GCC_Fortran_compiler in m4/R.m4:
-However, if @command{CC} is @command{gcc}, the matching FORTRAN compiler
-(@command{g77} for @command{gcc}@tie{}3 and @code{gfortran} for
-@command{gcc}@tie{}4) is used if available.
+@command{xlf90}, @command{f90}, @command{pgf90}, @command{pghpf},
+@command{epcf90}.
+(Note that these are searched for by name, without checking the standard
+of Fortran they support.)
 
 The search mechanism can be changed using the configure variable
-@code{F77} which specifies the command that runs the FORTRAN 77
-compiler.  If your FORTRAN compiler is in a non-standard location, you
+@code{F77} which specifies the command that runs the (fixed-form) Fortran
+compiler.  If your Fortran compiler is in a non-standard location, you
 @enindex PATH
 should set the environment variable @env{PATH} accordingly before
 running @command{configure}, or use the configure variable @code{F77} to
 specify its full path.
 
-If your FORTRAN libraries are in slightly peculiar places, you should
+If your Fortran libraries are in slightly peculiar places, you should
 @enindex LD_LIBRARY_PATH
 also look at @env{LD_LIBRARY_PATH} or your system's equivalent to make
 sure that all libraries are on this path.
 
-Note that only FORTRAN compilers which convert identifiers to lower case
+Note that only Fortran compilers which convert identifiers to lower case
 are supported.
 
 You must set whatever compilation flags (if any) are needed to ensure
-that FORTRAN @code{integer} is equivalent to a C @code{int} pointer and
-FORTRAN @code{double precision} is equivalent to a C @code{double}
+that Fortran @code{integer} is equivalent to a C @code{int} pointer and
+Fortran @code{double precision} is equivalent to a C @code{double}
 pointer.  This is checked during the configuration process.
 
-Some of the FORTRAN code makes use of @code{COMPLEX*16} variables, which
-is a Fortran 90 extension.  This is checked for at configure
-time@footnote{as well as its equivalence to the @code{Rcomplex}
-structure defined in @file{R_ext/Complex.h}.}, but you may need to avoid
-compiler flags asserting FORTRAN 77 compliance.
+Some of the Fortran code makes use of @code{DOUBLE COMPLEX} and
+@code{COMPLEX*16} variables.  This is checked for at configure time, as
+well as its equivalence to the @code{Rcomplex} C structure defined in
+@file{R_ext/Complex.h}.
 
-Compiling the version of LAPACK in the @R{} sources also requires some
-Fortran 90 extensions, but these are not needed if an external LAPACK is
-used.
-
-It might be possible to use @command{f2c}, the FORTRAN-to-C converter
-(@uref{http://www.netlib.org/@/f2c}), via a script.  (An example script
-is given in @file{scripts/f77_f2c}: this can be customized by setting
-@enindex F2C
-@enindex F2CLIBS
-@enindex CC
-the environment variables @env{F2C}, @env{F2CLIBS}, @env{CC} and
-@enindex CPP
-@env{CPP}.)  You will need to ensure that the FORTRAN type
-@code{integer} is translated to the C type @code{int}.  Normally
-@file{f2c.h} contains @samp{typedef long int integer;}, which will work
-on a 32-bit platform but needs to be changed to @samp{typedef int
-integer;} on a 64-bit platform.  If your compiler is not @command{gcc}
-you will need to set
-@enindex FPICFLAGS
-@env{FPICFLAGS} appropriately.  Also, the included LAPACK sources
-contain constructs that @command{f2c} is unlikely to be able to process,
-so you would need to use an external LAPACK library (such as CLAPACK
-from @uref{http://www.netlib.org/@/clapack/}).
-
-@node Compile and load flags, Maintainer mode, Using FORTRAN, Configuration on a Unix-alike
+@node Compile and load flags, Maintainer mode, Using Fortran, Configuration on a Unix-alike
 @section Compile and load flags
 
 A wide range of flags can be set in the file @file{config.site} or as
@@ -4525,7 +4476,7 @@ ditto, for compiling the main program
 @item SHLIB_CFLAGS
 for shared objects
 @item FFLAGS
-debugging and optimization flags, FORTRAN
+debugging and optimization flags, fixed-form Fortran
 @item SAFE_FFLAGS
 ditto for source files which need exact floating point behaviour
 @item MAIN_FFLAGS
@@ -4541,11 +4492,13 @@ the primary library directory, @file{lib} or @file{lib64}
 @item CPICFLAGS
 special flags for compiling C code to be turned into a shared object
 @item FPICFLAGS
-special flags for compiling Fortran code to be turned into a shared object
+special flags for compiling fixed-form Fortran code to be turned into a
+shared object
 @item CXXPICFLAGS
 special flags for compiling C++ code to be turned into a shared object
 @item FCPICFLAGS
-special flags for compiling Fortran 95 code to be turned into a shared object
+special flags for compiling free-form Fortran code to be turned into a
+shared object
 @item DEFS
 defines to be used when compiling C code in @R{} itself
 @end table
@@ -4785,7 +4738,7 @@ see in the @command{configure} summary
 @end example
 
 When @R{} has been installed from a binary distribution there are
-sometimes problems with missing components such as the FORTRAN
+sometimes problems with missing components such as the Fortran
 compiler.  Searching the @samp{R-help} archives will normally reveal
 what is needed.
 
@@ -4871,7 +4824,7 @@ the additional flags being needed to resolve problems linking against
 The setting of the macro @samp{SAFE_FFLAGS} may need some help.  It
 should not need additional flags on platforms other than @cputype{68000}
 (not likely to be encountered) and @cputype{ix86}.  For the latter, if
-the FORTRAN compiler is GNU (@command{gfortran} or possibly
+the Fortran compiler is GNU (@command{gfortran} or possibly
 @command{g77}) the flags
 @example
 -msse2 -mfpmath=sse
@@ -5209,7 +5162,7 @@ The @TeX{} implementation used by the developers is MacTeX
 (@uref{https://www.tug.org/mactex/}): the full installation is about
 5GB, but a smaller version (`Basic TeX') is available at
 @uref{https://www.tug.org/mactex/morepackages.html} to which you will
-need to add some packages, e.g.@: for the 2017 version we needed to
+need to add some packages, e.g.@: for the 2018 version we needed to
 add@footnote{E.g.@: @emph{via} @command{tlmgr install cm-super helvetic
 inconsolata texinfo} .}  @pkg{cm-super}, @pkg{helvetic},
 @pkg{inconsolata} and @pkg{texinfo} which brought this to about 310MB.
@@ -5325,7 +5278,7 @@ JAVA_LIBS="-L/$@{JAVA_HOME@}/lib/server -ljvm"
 @noindent
 or
 @example
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home
 JAVA_CPPFLAGS="-I/$@{JAVA_HOME@}/include -I/$@{JAVA_HOME@}/include/darwin"
 JAVA_LD_LIBRARY_PATH="$@{JAVA_HOME@}/jre/lib/server"
 JAVA_LIBS="-L/$@{JAVA_HOME@}/jre/lib/server -ljvm" 
@@ -5419,8 +5372,11 @@ Oracle Developer Studio@footnote{Oracle Solaris Studio prior to 2016,
 and previously Sun Studio.} compilers: there has been some success with
 @command{gcc}/@command{gfortran}.  (Recent Sun machines are AMD Opterons
 or Intel Xeons (@cputype{amd64}) rather than @cputype{x86}, but 32-bit
-@cputype{x86} executables are the default.)  How these compilers
-identify@footnote{using the @option{-V} flag.} themselves is slightly
+@cputype{x86} executables are the default. As from @R{}
+3.6.0@footnote{Earlier versions looked at the compiler default and so
+reported @samp{i386-pc-solaris2.10}.}  @command{configure} reports the
+triplet @samp{x86_64-pc-solaris2.10}.)  How these compilers
+identify@footnote{using the @option{-V} flag.}  themselves is slightly
 confusing: Solaris Studio versions 12.3 and 12.4 report C++ 5.12 and
 5.13, and Developer Studio 12.5 reports C++ 5.14.  We will only consider
 12.5 (May 2016): instructions for 12.3 can be found in versions of this
@@ -5716,7 +5672,7 @@ compilers has caused @R{}'s @code{NaN} to be set incorrectly, and
 across platforms on what needs to be done to build shared objects.
 there are many different combinations of flags for the compilers and
 loaders.  @acronym{GNU} libtool cannot be used (yet), as it currently
-does not fully support FORTRAN: one would need a shell wrapper for
+does not fully support Fortran: one would need a shell wrapper for
 this).  The technique we use is to first interrogate the X window system
 about what it does (using @command{xmkmf}), and then override this in
 situations where we know better (for tools from the @acronym{GNU}

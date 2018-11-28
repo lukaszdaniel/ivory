@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -2182,6 +2182,11 @@ msgstr "Keine Daten für gam.setup bereitgestellt"
 msgid "no free coefs in sf smooth"
 msgstr ""
 
+#. R/gam.fit4.r: stop("no good data in iteration")
+#: R/gam.fit4.r:0
+msgid "no good data in iteration"
+msgstr ""
+
 #. R/bam.r: warning("no smooths, ignoring 'discrete=TRUE'")
 #: R/bam.r:0
 msgid "no smooths, ignoring 'discrete=TRUE'"
@@ -2227,6 +2232,12 @@ msgstr "nicht alle benötigten Variablen wurden in newdata angegeben!"
 #: R/efam.r:0
 msgid "not an extended family"
 msgstr ""
+
+#. R/gam.fit4.r: stop("not enough finite derivatives")
+#: R/gam.fit4.r:0
+#, fuzzy
+msgid "not enough finite derivatives"
+msgstr "Nicht genug informative Beobachtungen."
 
 #. R/sparse.r: stop("not enough unique values to find k nearest")
 #: R/sparse.r:0

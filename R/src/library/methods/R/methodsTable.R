@@ -573,7 +573,7 @@
             condAction <- getOption("ambiguousMethodSelection")
             if(is.null(condAction))
               condAction <- .ambiguousMethodMessage
-            else if(!is(condAction, "function"))
+            else if(!is.function(condAction))
               stop(gettextf("the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s",
                             dQuote(class(condAction))),
                    domain = "R-methods")
@@ -601,8 +601,7 @@
         if(is(m, "MethodDefinition"))  { # else, a primitive
             m@target <- .newSignature(classes, fdef@signature)
             ## if any of the inheritance is not simple, must insert coerce's in method body
-            coerce <- .inheritedArgsExpression(m@target, m@defined, body(m),
-                                               where)
+            coerce <- .inheritedArgsExpression(m@target, m@defined, body(m))
             if(!is.null(coerce))
               body(m) <- coerce
             methods[[1L]] <- m
@@ -684,13 +683,14 @@
     ## a corresponding set of package names
     ## <FIXME> There should be a "<unknown>" package name instead of "methods"
     ## but this requires a way to deal with that generally </FIXME>
-    pkgs <- c(packageSlot(classes), rep("methods", n))[i]
+    pkgs <- lapply(classes[i], packageSlot)
+    pkgs[vapply(pkgs, is.null, logical(1L))] <- "methods"
 
   ## Simplified version ...
   .asS4(structure(as.character(classes)[i],
             class = .signatureClassName,
             names = as.character(names)[i],
-            package = pkgs ))
+            package = as.character(pkgs) ))
  }
 
 .findNextFromTable <- function(method, f, optional, envir, prev = character())
@@ -1080,7 +1080,7 @@
                 cf(sprintf(ngettext(length(pkgs), "  (%d methods defined for this signature, with different packages)\n",
 				 "  (%d methods defined for this signature, with different packages)\n", domain = "R-methods"), length(pkgs)))
 	}
-	if(includeDefs && is(m, "function")) {
+	if(includeDefs && is.function(m)) {
 	    if(is(m, "MethodDefinition"))
 		m <- m@.Data
 	    cat(deparse(m), sep="\n", "\n", file = printTo)
@@ -1459,12 +1459,17 @@ listFromMethods <- function(generic, where, table) {
            domain = "R-methods")
 }
 
-.inheritedArgsExpression <- function(target, defined, body, where) {
+setPackageSlot <- function(x, value) {
+    packageSlot(x) <- value
+    x
+}
+
+.inheritedArgsExpression <- function(target, defined, body) {
     expr <- substitute({}, list(DUMMY = "")) # bug if you use quote({})--is overwritten!!
     args <- names(defined)
     for(i in seq_along(defined)) {
-        ei <- extends(getClass(target[[i]], where=where, .Force=TRUE),
-                      getClass(defined[[i]], where=where, .Force=TRUE),
+        ei <- extends(setPackageSlot(target[[i]], packageSlot(target)[[i]]),
+                      setPackageSlot(defined[[i]], packageSlot(defined)),
                       fullInfo = TRUE)
         if(is(ei, "SClassExtension")  && !ei@simple)
           expr[[length(expr) + 1L]] <-
@@ -1578,7 +1583,7 @@ testInheritedMethods <- function(f, signatures, test = TRUE,  virtual = FALSE,
     ## now split the individual labels back into signatures
     signatures <- strsplit(sigLabels, "#", fixed = TRUE)
   } ## end of missing(signatures) case
-  else if(is(signatures, "matrix") && identical(typeof(signatures), "character")
+  else if(is(signatures, "matrix") && typeof(signatures) == "character"
        && ncol(signatures) <= length(f@signature)) {
       ## turn signatures back into a list
       siglist <- vector("list", nrow(signatures))

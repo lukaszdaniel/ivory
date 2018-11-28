@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.20-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-23 12:09\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: 2015-02-25 19:25+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -101,11 +101,6 @@ msgstr "'nrpoints' powinno być skalarem liczbowym z wartością >= 0."
 #: R/bwplot.R:0
 msgid "'origin' forced to 0 for stacked bars"
 msgstr "'origin' wymuszone aby być zerem dla ułożonych pasków"
-
-#. R/qqmath.R: stop("'probs' outside [0,1]")
-#: R/qqmath.R:0
-msgid "'probs' outside [0,1]"
-msgstr "wartości 'probs' poza przedziałem [0,1]"
 
 #. R/settings.R: warning("'trellis.device' has changed, 'bg' may not be doing what you think it is")
 #: R/settings.R:0
@@ -561,13 +556,6 @@ msgstr "średnia"
 msgid "mismatch in number of packets"
 msgstr "niezgodność w liczbie pakietów"
 
-#. R/qqmath.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
-#: R/qqmath.R:0
-msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
-msgstr ""
-"brakujące wartości oraz wartości NaN nie są dozwolone jeśli 'na.rm' ma "
-"wartość FALSE"
-
 #. R/common.R: stop("model must be a formula object")
 #: R/common.R:0
 msgid "model must be a formula object"
@@ -699,6 +687,14 @@ msgstr "'x' musi być czynnikiem (musi być przekształcalne w czynnik)"
 #: R/qq.R:0
 msgid "y must have exactly 2 levels"
 msgstr "'y' musi mieć dokładnie 2 poziomy"
+
+#~ msgid "'probs' outside [0,1]"
+#~ msgstr "wartości 'probs' poza przedziałem [0,1]"
+
+#~ msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
+#~ msgstr ""
+#~ "brakujące wartości oraz wartości NaN nie są dozwolone jeśli 'na.rm' ma "
+#~ "wartość FALSE"
 
 #~ msgid "regression coefficients"
 #~ msgstr "współczynników regresji"

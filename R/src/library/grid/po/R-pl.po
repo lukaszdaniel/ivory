@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-14 11:23\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -757,10 +757,12 @@ msgstr "niejednostkowy operator musi być liczbą"
 msgid "nrow * ncol < #{legend labels}"
 msgstr "nrow * ncol < liczba etykiet legendy"
 
-#. R/grab.R: warning("one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')")
+#. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
 #: R/grab.R:0
+#, fuzzy
 msgid ""
-"one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
+"one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = "
+"TRUE')"
 msgstr ""
 "jeden lub więcej 'grob' nadpisane ('grab' NIE BĘDZIE wiarygodne; spróbuj "
 "'wrap=TRUE')"

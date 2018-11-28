@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2014  The R Core Team
+ *  Copyright (C) 1998--2018  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1407,22 +1407,12 @@ int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
 	return n;
 }
 
-/* labelList, label1, and label2 are all SEXPs rather than being allocated
-   using R_alloc because they need to persist across calls to contour().
-   In do_contour() there is a vmaxget() ... vmaxset() around each call to
-   contour() to release all of the memory used in the drawing of the
-   contour _lines_ at each contour level.  We need to keep track of the
-   contour _labels_ for _all_ contour levels, hence we have to use a
-   different memory allocation mechanism.
-*/
-
 static
 double distFromEdge(double *xxx, double *yyy, int iii, pGEDevDesc dd) {
     return fmin2(fmin2(xxx[iii]-gpptr(dd)->usr[0], gpptr(dd)->usr[1]-xxx[iii]),
 		 fmin2(yyy[iii]-gpptr(dd)->usr[2], gpptr(dd)->usr[3]-yyy[iii]));
 }
 
-static SEXP labelList;
 static SEGP *ctr_SegDB;
 
 static
@@ -1434,11 +1424,12 @@ Rboolean useStart(double *xxx, double *yyy, int ns, pGEDevDesc dd) {
 }
 
 
-static void contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
+static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		    double zc,
 		    SEXP labels, int cnum,
 		    Rboolean drawLabels, int method,
-		    double atom, pGEDevDesc dd)
+		    double atom, pGEDevDesc dd,
+		    SEXP labelList)
 {
 /* draw a contour for one given contour level 'zc' */
 
@@ -1468,6 +1459,7 @@ static void contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     Rboolean gotLabel = FALSE;
     Rboolean ddl;/* Don't draw label -- currently unused, i.e. always FALSE*/
 
+    PROTECT(labelList);
 #ifdef DEBUG_contour
     Rprintf("contour(lev = %g):\n", zc);
 #endif
@@ -1576,7 +1568,7 @@ static void contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		    REAL(lab)[0] = zc;
 		    lab = labelformat(lab);
 		    strcpy(&buffer[1], CHAR(STRING_ELT(lab, 0))); /* ASCII */
-		    UNPROTECT(1);
+		    UNPROTECT(1); /* lab */
 		}
 		buffer[strlen(buffer)+1] = '\0';
 		buffer[strlen(buffer)] = ' ';
@@ -1754,8 +1746,9 @@ static void contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 			    FindCorners(labelDistance, labelHeight, label2,
 					xxx[indx], yyy[indx],
 					xxx[indx+range], yyy[indx+range], dd);
-			    UNPROTECT_PTR(labelList);
-			    labelList = PROTECT(CONS(label2, labelList));
+			    labelList = CONS(label2, labelList);
+			    UNPROTECT(1); /* labelList */
+			    PROTECT(labelList);
 
 			    ddl = FALSE;
 			    /* draw an extra bit of segment if the label
@@ -1837,9 +1830,8 @@ static void contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 	} /* while */
       } /* for(i .. )  for(j ..) */
     vmaxset(vmax); /* now we are done with ctr_SegDB */
-    UNPROTECT_PTR(label1); /* pwwwargh! This is messy, but last thing
-			      protected is likely labelList, and that needs
-			      to be preserved across calls */
+    UNPROTECT(2);  /* label1, labelList */
+    return labelList;
 }
 
 
@@ -1866,6 +1858,7 @@ SEXP C_contour(SEXP args)
     double labcex;
     pGEDevDesc dd = GEcurrentDevice();
     SEXP result = R_NilValue;
+    SEXP labelList;
 
     GCheckState(dd);
 
@@ -2013,8 +2006,10 @@ SEXP C_contour(SEXP args)
 	if (!R_FINITE(gpptr(dd)->lwd))
 	    gpptr(dd)->lwd = lwdsave;
 	gpptr(dd)->cex = labcex;
-	contour(x, nx, y, ny, z, REAL(c)[i], labels, i,
-		drawLabels, method - 1, atom, dd);
+	labelList = contour(x, nx, y, ny, z, REAL(c)[i], labels, i,
+			    drawLabels, method - 1, atom, dd, labelList);
+	UNPROTECT(1); /* labelList */
+	PROTECT(labelList);
 	vmaxset(vmax);
     }
     GMode(0, dd);
@@ -2027,6 +2022,6 @@ SEXP C_contour(SEXP args)
 	strncpy(gpptr(dd)->family, familysave, 201);
 	gpptr(dd)->font = fontsave;
     }
-    UNPROTECT(9); /* x y z c vfont col lty lwd labellist */
+    UNPROTECT(9); /* x y z c vfont col lty lwd labelList */
     return result;
 }

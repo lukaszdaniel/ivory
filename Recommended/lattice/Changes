@@ -148,7 +148,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                     else stop(gettextf("invalid '%s' value", "label.style"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/R/miscellaneous.R Recommended/lattice/R/miscellaneous.R
-635,638c635,638
+634,637c634,637
 <                    xx[2*1:n-1] <- x[ord]
 <                    yy[2*1:n-1] <- y[ord]
 <                    xx[2*1:(n-1)] <- x[ord][if (type=="s") -1 else -n]
@@ -159,13 +159,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                    xx[2*seq_len(n-1)] <- x[ord][if (type=="s") -1 else -n]
 >                    yy[2*seq_len(n-1)] <- y[ord][if (type=="s") -n else -1]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/R/panels.R Recommended/lattice/R/panels.R
-356,357c356,357
+358,359c358,359
 <         grid.segments(y0 = 1:h / (h+1),
 <                       y1 = 1:h / (h+1),
 ---
 >         grid.segments(y0 = seq_len(h) / (h+1),
 >                       y1 = seq_len(h) / (h+1),
-364,365c364,365
+366,367c366,367
 <         grid.segments(x0 = 1:v / (v+1),
 <                       x1 = 1:v / (v+1),
 ---

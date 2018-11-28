@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 19:08+0200\n"
+"POT-Creation-Date: 2018-11-28 21:49+0100\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -203,7 +203,7 @@ msgstr "ungültige '%s' Spezifikation"
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
 #: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1904
+#: plot3d.c:1170 plot3d.c:1897
 #, c-format
 msgid "invalid '%s' value"
 msgstr "ungültiger '%s' Wert"
@@ -256,7 +256,7 @@ msgstr "ungültiger Typ für die Achsen-Label"
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1866
 msgid "too few arguments"
 msgstr "zu wenig Argumente"
 
@@ -483,15 +483,15 @@ msgstr "falsche Länge für das '%s' Argument"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "kann keinen Speicher zuteilen (in xspline)"
 
-#: plot3d.c:182 plot3d.c:1930
+#: plot3d.c:182 plot3d.c:1923
 msgid "insufficient 'x' or 'y' values"
 msgstr "zu wenig 'x' oder 'y' Werte"
 
-#: plot3d.c:186 plot3d.c:1933
+#: plot3d.c:186 plot3d.c:1926
 msgid "dimension mismatch"
 msgstr "Dimensionen passen nicht"
 
-#: plot3d.c:194 plot3d.c:1936
+#: plot3d.c:194 plot3d.c:1929
 msgid "no contour values"
 msgstr "keine Konturwerte"
 
@@ -525,31 +525,31 @@ msgstr "'xlab' muss ein Charktervektor der Länge 1 sein"
 msgid "invalid viewing parameters"
 msgstr "ungültige Parameter für Ansicht"
 
-#: plot3d.c:1530
+#: plot3d.c:1522
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): zirkuläre/lange Segmentliste -- festgelegtes %s > %d?"
 
-#: plot3d.c:1940 plot3d.c:1947
+#: plot3d.c:1933 plot3d.c:1940
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "fehlende 'x' Werte"
 
-#: plot3d.c:1942 plot3d.c:1949
+#: plot3d.c:1935 plot3d.c:1942
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "'x' Werte aufsteigend erwartet"
 
-#: plot3d.c:1954
+#: plot3d.c:1947
 msgid "invalid NA contour values"
 msgstr "ungültige NA Werte für Kontur"
 
-#: plot3d.c:1966
+#: plot3d.c:1959
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "alle z Werte sind gleich"
 
-#: plot3d.c:1968
+#: plot3d.c:1961
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "alle z Werte sind NA"

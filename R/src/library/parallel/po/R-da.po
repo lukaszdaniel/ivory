@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: 2016-01-09 19:16+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -205,12 +205,42 @@ msgid_plural "%d nodes produced errors; first error: %s"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result", "%d parallel function calls did not deliver results",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
+msgid "%d parallel function call did not deliver a result"
+msgid_plural "%d parallel function calls did not deliver results"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results",     domain = "R-parallel")
+#: R/unix/mcparallel.R:0
+msgid "%d parallel job did not deliver a result"
+msgid_plural "%d parallel jobs did not deliver results"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/detectCores.R: ngettext(nc, "%d simultaneous process spawned", "%d simultaneous processes spawned",     domain = "R-parallel")
 #: R/detectCores.R:0
 msgid "%d simultaneous process spawned"
 msgid_plural "%d simultaneous processes spawned"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid ""
+"scheduled core %s did not deliver a result, all values of the job will be "
+"affected"
+msgid_plural ""
+"scheduled cores %s did not deliver results, all values of the jobs will be "
+"affected"
+msgstr[0] ""
+"planlagt kerne %d mødte fejl i brugerkode, alle værdier for jobbet vil blive "
+"påvirket"
+msgstr[1] ""
+"planlagte kerner %s mødte fejl i brugerkode, alle værdier for jobbet vil "
+"blive påvirket"
 
 #. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0

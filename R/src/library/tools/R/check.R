@@ -429,7 +429,7 @@ add_dummies <- function(dir, Log)
                                              "FALSE"))) {
             now_local <- Sys.time()
             any <- FALSE
-            checkingLog(Log, "for future file timestanps")
+            checkingLog(Log, gettext("checking for future file timestamps", domain = "R-tools"))
             ## allow skipping clock check on CRAN incoming systems
             if(config_val_to_logical(Sys.getenv("_R_CHECK_SYSTEM_CLOCK_", "TRUE"))) {
                 ## First check time on system running 'check',
@@ -800,7 +800,7 @@ add_dummies <- function(dir, Log)
     ## src/symbols.rds in the sources.
     check_serialization <- function(allfiles)
     {
-        checkingLog(Log, "serialization versions")
+        checkingLog(Log, gettext("checking serialization versions", domain = "R-tools"))
         bad <- get_serialization_version(allfiles)
         bad <- names(bad[bad >= 3L])
         if(length(bad)) {
@@ -1894,7 +1894,7 @@ add_dummies <- function(dir, Log)
 
         ## Check Rd line widths.
         if(dir.exists("man") && R_check_Rd_line_widths) {
-            checkingLog(Log, "Rd line widths")
+            checkingLog(Log, gettext("checking Rd line widths", domain = "R-tools"))
             Rcmd <- paste(opWarn_string, "\n",
                           if(do_install)
                           sprintf("tools:::.check_Rd_line_widths(\"%s\", installed = TRUE)\n",
@@ -2623,26 +2623,63 @@ add_dummies <- function(dir, Log)
 
                 c1 <- grepl("^[[:space:]]*PKG_LIBS", lines, useBytes = TRUE)
                 anyInLIBS <- any(grepl("SHLIB_OPENMP_", lines[c1], useBytes = TRUE))
+
+                ## Now see what sort of files we have
+                have_c <- length(dir('src', patt = "[.]c$")) > 0L
+                have_cxx <- length(dir('src', patt = "[.](cc|cpp)$")) > 0L
+                have_f <- length(dir('src', patt = "[.]f$")) > 0L
+                have_f9x <- length(dir('src', patt = "[.]f9[05]$")) > 0L
                 used <- character()
                 for (f in c("C", "CXX", "F", "FC"))  {
                     this <- paste0(f, "FLAGS")
                     pat <- paste0("^[[:space:]]*PKG_", this, ".*SHLIB_OPENMP_", this)
                     if(any(grepl(pat, lines, useBytes = TRUE))) {
                         used <- c(used, this)
-                        ## The recommendation is to use _FFLAGS to compile
-                        ## and _CFLAGS to link with F77 code (which is linked
-                        ## by the C compiler)
-                        this2 <- if (f == "F") "CFLAGS" else this
+                        if(f == "C" && !have_c) {
+                            if (!any) noteLog(Log)
+                            any <- TRUE
+                            msg <- "SHLIB_OPENMP_CFLAGS is included in PKG_CFLAGS without any C files\n"
+                            printLog(Log, "  ", m, ": ", msg)
+                            next
+                        }
+                        if(f == "F" && !have_f) {
+                            if (!any) noteLog(Log)
+                            any <- TRUE
+                            msg <- "SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS without any fixed-form Fortran files\n"
+                            printLog(Log, "  ", m, ": ", msg)
+                            next
+                        }
+                        if(f == "FC" && !have_f9x) {
+                            if (!any) noteLog(Log)
+                            any <- TRUE
+                            msg <- "SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS without any free-form Fortran files\n"
+                            printLog(Log, "  ", m, ": ", msg)
+                            next
+                        }
+                        if(f == "CXX" && !have_cxx) {
+                            if (!any) noteLog(Log)
+                            any <- TRUE
+                            msg <- "SHLIB_OPENMP_CXXFLAGS is included in PKG_CXXFLAGS without any C++ files\n"
+                            printLog(Log, "  ", m, ": ", msg)
+                            next
+                        }
+                        ## The recommendation is to use _F[C]FLAGS to
+                        ## compile and _CFLAGS or _CXXFLAGS to link with Fortran
+                        ## code (which is linked by the C or C++ compiler)
+                        c_or_cxx <- if(have_cxx) "CXXFLAGS" else "CFLAGS"
+                        this2 <- if (f %in% c("F", "FC")) c_or_cxx else this
                         pat2 <- paste0("SHLIB_OPENMP_", this2)
                         if(!any(grepl(pat2, lines[c1], useBytes = TRUE))) {
                             if (!any) noteLog(Log)
                             any <- TRUE
                             msg <- if(anyInLIBS) {
                                 if (f == "F")
-                                gettext("SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_CFLAGS in PKG_LIBS\n", domain = "R-tools")
-                            else
-                                gettextf("SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS\n",
-                                           this, this, domain = "R-tools")
+                                    sprintf("SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n", c_or_cxx)
+                                 else if (f == "FC")
+                                     gettextf("SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n", c_or_cxx, domain = "R-tools")
+                               else
+                                    gettextf("SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS\n",
+                                            this, this, domain = "R-tools")
                             } else {
                                 msg3 <- TRUE
                                 gettextf("SHLIB_OPENMP_%s is included in PKG_%s but no OPENMP macro in PKG_LIBS\n",
@@ -2674,9 +2711,29 @@ add_dummies <- function(dir, Log)
                     pat2 <- paste0("SHLIB_OPENMP_", this)
                     res <- any(grepl(pat2 , lines[c1], useBytes = TRUE))
                     cnt <- cnt + res
+                    if (res && f %in% c( "F", "FC"))  {
+                        if (!any) noteLog(Log)
+                        any <- TRUE
+                        printLog(Log,"  ", m, ": ",
+                                 gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but linking is by %s\n",
+                                         this,
+                                         if(have_cxx) "C++" else "C", domain = "R-tools"))
+                         next
+                    }
+                     if (res &&
+                         ((!have_cxx && f == "CXX") || (have_cxx && f == "C"))) {
+                        if (!any) noteLog(Log)
+                        any <- TRUE
+                        printLog(Log,"  ", m, ": ",
+                                 gettextf("SHLIB_OPENMP_%s is included in PKG_LIBS but linking is by %s\n",
+                                         this,
+                                         if(have_cxx) "C++" else "C", domain = "R-tools"))
+                         next
+                    }
                     if (this %in% used) next
-                    ## it is recommended to include _CFLAGS if _FFLAGS is used.
-                    if (f == "C" && "FFLAGS" %in% used) next
+                    ## Fortran exceptions
+                    if (((!have_cxx && f == "C") || (have_cxx && f == "CXX"))
+                        && any(c("FFLAGS", "FCFLAGS") %in% used)) next
                     if (res) {
                         if (!any) noteLog(Log)
                         any <- TRUE
@@ -2706,7 +2763,7 @@ add_dummies <- function(dir, Log)
             }
             if (!any) resultLog(Log, "OK")
             else {
-                wrapLog(gettextf("Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for different languages may differ so the matching macro must be used in PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for F77: see the manual).\n", sQuote("Writing R Extensions"), domain = "R-tools"))
+                wrapLog(gettextf("Use of these macros is discussed in sect 1.2.1.1 of %s. The macros for different languages may differ so the matching macro must be used in PKG_CXXFLAGS (etc) and match that used in PKG_LIBS (except for Fortran: see the manual).\n", sQuote("Writing R Extensions"), domain = "R-tools"))
                 if (msg2)
                     wrapLog(gettext("PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it for these macros.\n", domain = "R-tools"))
                 if (msg3)
@@ -2776,13 +2833,17 @@ add_dummies <- function(dir, Log)
             else
                 file.path(pkgoutdir, "00install.out")
             if (file.exists(instlog) && dir.exists('src')) {
-                checkingLog(Log, "Checking for compilation flags used ...")
+                checkingLog(Log, gettext("checking for compilation flags used ...", domain = "R-tools"))
                 lines <- readLines(instlog, warn = FALSE)
                 poss <- grep(" -W", lines,  useBytes = TRUE, value = TRUE)
                 tokens <- unique(unlist(strsplit(poss, " ", perl = TRUE,
                                                  useBytes = TRUE)))
                 warns <- grep("^[-]W", tokens,
                               value = TRUE, perl = TRUE, useBytes = TRUE)
+                ## qtbase uses something like
+                ## cmake ../src -DR_CXX="g++" -DCMAKE_CXX_FLAGS="-std=gnu++11 -g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-deprecated-declarations" ...
+                ## which reports trailing " on last token
+                warns <- gsub('["\']$', "", warns, perl = TRUE, useBytes = TRUE)
                 ## Not sure -Wextra and -Weverything are portable, though
                 ## -Werror is not compiler independent
                 ##   (as what is a warning is not)
@@ -3037,7 +3098,7 @@ add_dummies <- function(dir, Log)
                 env <- c(env, "R_DEFAULT_PACKAGES=NULL")
                 out <- R_runR0(Rcmd, opts, env, arch = arch)
                 ## </FIXME>
-                if (any(grepl("^Registered S3 method.*standard package.*overwritten", out))) {
+                if (any(grepl("^Registered S3 method.*standard package.*overwritten", out, useBytes = TRUE))) {
                     out <- out[!startsWith(out, "<environment: namespace:")]
                     warningLog(Log)
                     printLog0(Log, paste(out, collapse = "\n"), "\n")
@@ -4207,12 +4268,19 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wdeprecated\\]",
                              ": warning: .* \\[-Waligned-new",
                              ## new in gcc 8
-                             ": warning: .* \\[-Wcatch-value=\\]",                             ## new in gcc 9
+                             ": warning: .* \\[-Wcatch-value=\\]",
                              # warns on code deprecated in C++11
-                              ": warning: .* \\[-Wdeprecated-copy\\]",
                             ## Fatal, not warning, for clang and Solaris ODS
                              ": warning: .* with a value, in function returning void"
                             )
+
+                ## gcc 9 warns on code deprecated in C++11
+                ## rather too frequently,
+                ## so suppressable (undocumented) for now.
+                check_gcc9 <- Sys.getenv("_R_CHECK_GCC9_WARNINGS_", "TRUE")
+                if (config_val_to_logical(check_gcc9))
+                     warn_re <- c(warn_re,
+                                  ": warning: .* \\[-Wdeprecated-copy\\]")
 
                 ## clang warnings
                 warn_re <- c(warn_re,
@@ -4241,7 +4309,7 @@ add_dummies <- function(dir, Log)
 
                 lines <- grep(warn_re, lines, value = TRUE, useBytes = TRUE)
 
-                ## gcc seems not to know the size of pointers, so skip
+                ## gcc (even 9) seems not to know the size of pointers, so skip
                 ## some from -Walloc-size-larger-than= and -Wstringop-overflow=
                 lines <- grep("exceeds maximum object size.*-W(alloc-size-larger-than|stringop-overflow)", lines,
                               value = TRUE, useBytes = TRUE, invert = TRUE)

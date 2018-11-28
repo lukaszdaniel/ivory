@@ -60,7 +60,7 @@ latex_canonical_encoding  <- function(encoding)
 ## 'encoding' is passed to parse_Rd, as the input encoding
 Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
                      stages = "render",
-		     outputEncoding = "ASCII", fragment = FALSE, ...,
+		     outputEncoding = "UTF-8", fragment = FALSE, ...,
                      writeEncoding = TRUE)
 {
     encode_warn <- FALSE
@@ -154,7 +154,7 @@ Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
 		## So fix up for now
 		x <- fsub1('"\\{"', '"{"', x)
 	    } else if (inPre) {
-		BSL = '@BSL@';
+		BSL <- '@BSL@'
 		x <- fsub("\\", BSL, x)
 		x <- psub("(?<!\\\\)\\{", "\\\\{", x)
 		x <- psub("(?<!\\\\)}", "\\\\}", x)
@@ -162,7 +162,7 @@ Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
 		x <- psub("\\\\\\\\var\\\\\\{([^\\\\]*)\\\\}", "\\\\var{\\1}", x)
 	    } else {
 		## cat(sprintf("\ntexify in: '%s'\n", x))
-		BSL = '@BSL@';
+		BSL <- '@BSL@'
 		x <- fsub("\\", BSL, x)
 		x <- psub("(?<!\\\\)\\{", "\\\\{", x)
 		x <- psub("(?<!\\\\)}", "\\\\}", x)

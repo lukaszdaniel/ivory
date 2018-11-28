@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -793,6 +793,20 @@ msgstr "Generator dla klasy"
 msgid "Group generics:"
 msgstr "Grupy ogólne:"
 
+#. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "In command %s: use of \"MethodsList\" metadata objects is defunct."
+msgstr ""
+"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
+
+#. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "In command %s: use of \"MethodsList\" metadata objects is deprecated."
+msgstr ""
+"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
+
 #. R/RMethodUtils.R: gettextf("In method for %s with signature %s: ", sQuote(f), msig, domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "In method for %s with signature %s:"
@@ -1073,6 +1087,18 @@ msgstr "Wymagana metoda nie została zdefiniowana: %s"
 msgid "Restoring default function definition of %s"
 msgstr "Przywracanie domyślnej definicji funkcji %s"
 
+#. R/MethodsList.R: gettext("See ?MethodsList.", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "See ?MethodsList."
+msgstr "zobacz '?MethodsList'."
+
+#. R/MethodsList.R: gettext("See ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "See ?MethodsList. (This warning is shown once per session.)"
+msgstr "zobacz '?MethodsList'. (To ostrzeżenie jest pokazane raz na sesję.)"
+
 #. R/show.R: gettext("Signatures:", domain = "R-methods")
 #: R/show.R:0
 msgid "Signatures:"
@@ -1122,6 +1148,13 @@ msgid ""
 msgstr ""
 "Użycie:  $help(temat), gdzie 'temat' jest nazwą metody (w cudzysłowiu lub "
 "bez)"
+
+#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
+#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use %s instead."
+msgstr "użyj wzamian %s."
 
 #. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
 #: R/MethodsList.R:0
@@ -2037,18 +2070,6 @@ msgstr ""
 "podczas zmiany formalnych argumentów w %s, niektóre ze starych nazw nie są "
 "tak naprawdę argumentami: %s"
 
-#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "in command %s: use of \"MethodsList\" metadata objects is defunct."
-msgstr ""
-"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
-
-#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "in command %s: use of \"MethodsList\" metadata objects is deprecated."
-msgstr ""
-"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
-
 #. R/RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
 #: R/RClassUtils.R:0
 msgid ""
@@ -2927,16 +2948,6 @@ msgstr "wartość zastępcza musi rozszerzać klasę %s, otrzymano %s"
 msgid "restoring definition of class %s"
 msgstr "przywracanie definicji klasy %s"
 
-#. R/MethodsList.R: gettext("see ?MethodsList.", domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "see ?MethodsList."
-msgstr "zobacz '?MethodsList'."
-
-#. R/MethodsList.R: gettext("see ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "see ?MethodsList. (This warning is shown once per session.)"
-msgstr "zobacz '?MethodsList'. (To ostrzeżenie jest pokazane raz na sesję.)"
-
 #. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 msgid ""
@@ -3441,12 +3452,6 @@ msgid ""
 msgstr ""
 "nienazwane argumenty przekazane do '$new()' muszą być obiektami z klasy "
 "referencyjnej; otrzymano obiekt klasy %s"
-
-#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead))
-#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead), domain = "R-methods")
-#: R/MethodsList.R:0
-msgid "use %s instead."
-msgstr "użyj wzamian %s."
 
 #. R/RClassUtils.R: gettextf("validity method for class \"%s\"", Class)
 #: R/RClassUtils.R:0

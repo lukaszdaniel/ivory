@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 18:21+0200\n"
+"POT-Creation-Date: 2018-11-28 21:49+0100\n"
 "PO-Revision-Date: 2015-01-17 15:46+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -89,7 +89,7 @@ msgstr "有没可以接到主进程的管道"
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "发送的内容必须是原始的，如果需要的话请用serialize（）"
 
-#: fork.c:697 fork.c:705 fork.c:1081
+#: fork.c:697 fork.c:705 fork.c:1106
 msgid "write error, closing pipe to the master"
 msgstr "书写错误，请关闭通往主进程的管道"
 
@@ -110,75 +110,79 @@ msgstr "不存在%d这个子进程"
 msgid "write error"
 msgstr "书写错误"
 
-#: fork.c:782
+#: fork.c:771 fork.c:784
+msgid "file descriptor is too large for select()"
+msgstr ""
+
+#: fork.c:815
 #, fuzzy, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "不存在%d这个子进程"
 
-#: fork.c:849 fork.c:972
+#: fork.c:874 fork.c:997
 #, c-format
 msgid "error '%s' in select"
 msgstr "选择时出了'%s'这样一个错"
 
-#: fork.c:855
+#: fork.c:880
 #, c-format
 msgid " - read select %d children: "
 msgstr ""
 
-#: fork.c:885
+#: fork.c:910
 #, c-format
 msgid " read_child_ci(%d) - read length returned %lld\n"
 msgstr ""
 
-#: fork.c:898
+#: fork.c:923
 #, c-format
 msgid "read_child_ci(%d) - read %lld at %lld returned %lld\n"
 msgstr ""
 
-#: fork.c:929
+#: fork.c:954
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.c:1063
+#: fork.c:1088
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill失败"
 
-#: fork.c:1071
+#: fork.c:1096
 #, fuzzy, c-format
 msgid "child %d: 'mcexit' called\n"
 msgstr "mcexit失败"
 
-#: fork.c:1073
+#: fork.c:1098
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit只能用于子进程"
 
-#: fork.c:1085
+#: fork.c:1110
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.c:1092
+#: fork.c:1117
 #, fuzzy, c-format
 msgid "child %d: exiting\n"
 msgstr "不存在%d这个子进程"
 
-#: fork.c:1095
+#: fork.c:1120
 #, fuzzy
 msgid "'mcexit()' function failed"
 msgstr "mcexit失败"
 
-#: fork.c:1124 fork.c:1133
+#: fork.c:1149 fork.c:1158
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:1144
+#: fork.c:1169
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:1167
+#: fork.c:1192
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

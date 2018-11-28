@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.6.0\n"
-"POT-Creation-Date: 2018-04-02 20:35\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,11 +260,38 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result", "%d parallel function calls did not deliver results",     domain = "R-parallel")
+
+msgid        "%d parallel function call did not deliver a result"
+msgid_plural "%d parallel function calls did not deliver results"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/unix/mcparallel.R: 0
+#. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results",     domain = "R-parallel")
+
+msgid        "%d parallel job did not deliver a result"
+msgid_plural "%d parallel jobs did not deliver results"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/detectCores.R: 0
 #. R/detectCores.R: ngettext(nc, "%d simultaneous process spawned", "%d simultaneous processes spawned",     domain = "R-parallel")
 
 msgid        "%d simultaneous process spawned"
 msgid_plural "%d simultaneous processes spawned"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected",     domain = "R-parallel")
+
+msgid        "scheduled core %s did not deliver a result, all values of the job will be affected"
+msgid_plural "scheduled cores %s did not deliver results, all values of the jobs will be affected"
 msgstr[0]    ""
 msgstr[1]    ""
 

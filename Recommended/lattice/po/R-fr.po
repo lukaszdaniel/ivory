@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.13-1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-23 12:09\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: 2007-03-23 10:18+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -103,11 +103,6 @@ msgstr ""
 #: R/bwplot.R:0
 msgid "'origin' forced to 0 for stacked bars"
 msgstr "'origin' replacée à 0 pour les diagrammes en barre empilées"
-
-#. R/qqmath.R: stop("'probs' outside [0,1]")
-#: R/qqmath.R:0
-msgid "'probs' outside [0,1]"
-msgstr "'probs' en dehors de [0,1]"
 
 #. R/settings.R: warning("'trellis.device' has changed, 'bg' may not be doing what you think it is")
 #: R/settings.R:0
@@ -572,13 +567,6 @@ msgstr "moyenne"
 msgid "mismatch in number of packets"
 msgstr "incohérence dans le nombre de paquets"
 
-#. R/qqmath.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
-#: R/qqmath.R:0
-msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
-msgstr ""
-"les valeurs manquantes et les NaN's ne sont pas permis lorsque 'na.rm = "
-"FALSE'"
-
 #. R/common.R: stop("model must be a formula object")
 #: R/common.R:0
 msgid "model must be a formula object"
@@ -714,6 +702,14 @@ msgstr ""
 #: R/qq.R:0
 msgid "y must have exactly 2 levels"
 msgstr "'y' doit avoir exactement 2 niveaux"
+
+#~ msgid "'probs' outside [0,1]"
+#~ msgstr "'probs' en dehors de [0,1]"
+
+#~ msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
+#~ msgstr ""
+#~ "les valeurs manquantes et les NaN's ne sont pas permis lorsque 'na.rm = "
+#~ "FALSE'"
 
 #~ msgid "x must be a shingle"
 #~ msgstr "'x' soit être une latte ('shingle')"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-07 19:12\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -206,6 +206,22 @@ msgstr[0] "%d węzeł wyprodukował błąd: %s"
 msgstr[1] "%d węzły wyprodukowały błąd: %s"
 msgstr[2] "%d węzłów wyprodukowało błąd: %s"
 
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result", "%d parallel function calls did not deliver results",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
+msgid "%d parallel function call did not deliver a result"
+msgid_plural "%d parallel function calls did not deliver results"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results",     domain = "R-parallel")
+#: R/unix/mcparallel.R:0
+msgid "%d parallel job did not deliver a result"
+msgid_plural "%d parallel jobs did not deliver results"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/detectCores.R: ngettext(nc, "%d simultaneous process spawned", "%d simultaneous processes spawned",     domain = "R-parallel")
 #: R/detectCores.R:0
 msgid "%d simultaneous process spawned"
@@ -213,6 +229,25 @@ msgid_plural "%d simultaneous processes spawned"
 msgstr[0] "%d równoległy proces został rozłożony"
 msgstr[1] "%d równoległe procesy zostały rozłożone"
 msgstr[2] "%d równoległych procesów zostało rozłożonych"
+
+#. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid ""
+"scheduled core %s did not deliver a result, all values of the job will be "
+"affected"
+msgid_plural ""
+"scheduled cores %s did not deliver results, all values of the jobs will be "
+"affected"
+msgstr[0] ""
+"zaplanowane jądro '%s' napotkało błąd w kodzie użytkownika, wpłynie to na "
+"wszystkie wartości zadania"
+msgstr[1] ""
+"zaplanowane jądra '%s' napotkały błędy w kodzie użytkownika, wpłynie to na "
+"wszystkie wartości zadań"
+msgstr[2] ""
+"zaplanowane jądra '%s' napotkały błędy w kodzie użytkownika, wpłynie to na "
+"wszystkie wartości zadań"
 
 #. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0

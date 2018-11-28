@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 19:08\n"
+"POT-Creation-Date: 2018-11-28 21:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1127,6 +1127,11 @@ msgstr ""
 "Nie znaleziono ilustracji dopasowując pola %s do %s używając dopasowania "
 "regularnego wyrażenia."
 
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+#: R/str.R:0
+msgid "Not a validObject():"
+msgstr ""
+
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -1738,11 +1743,6 @@ msgstr "Używanie przeglądarki do otwarcia 'mailto': URI"
 #: R/help.R:0
 msgid "Using the first match ..."
 msgstr "Używanie pierwszego dopasowania ..."
-
-#. R/indices.R: gettext("Version")
-#: R/indices.R:0
-msgid "Version"
-msgstr "Wersja"
 
 #. R/help.search.R: gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
@@ -3460,7 +3460,7 @@ msgstr[2] ""
 " argumenty = %s\n"
 "odnotowano %d plików."
 
-#. R/str.R: ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
+#. R/str.R: ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots",     domain = "R-utils")
 #: R/str.R:0
 msgid "Formal class %s [package %s] with %d slot"
 msgid_plural "Formal class %s [package %s] with %d slots"
@@ -3680,6 +3680,9 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "pakiet %s nie jest dostępny (dla '%s')"
 msgstr[1] "pakiety %s nie są dostępne (dla %s)"
 msgstr[2] "pakiety %s nie są dostępne (dla %s)"
+
+#~ msgid "Version"
+#~ msgstr "Wersja"
 
 #~ msgid "could not find package %s"
 #~ msgstr "nie można było znaleźć pakietu %s"

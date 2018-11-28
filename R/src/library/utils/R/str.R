@@ -263,6 +263,20 @@ str.default <-
     if (is.null(object))
 	cat(" NULL\n")
     else if(S4) {
+	trygetSlots <- function(x, nms) {
+	    r <- tryCatch(sapply(nms, methods::slot, object=x, simplify = FALSE),
+			  error = conditionMessage)
+	    if(is.list(r))
+		r
+	    else {
+		warning("Not a validObject(): ", r, call.=FALSE) # instead of error
+		r <- attributes(x) ## "FIXME" low-level assumption about S4 slots
+		r <- r[names(r) != "class"]
+		dp <- list(methods::getDataPart(x, NULL.for.none=TRUE))
+		if(!is.null(dp)) names(dp) <- methods:::.dataSlot(nms)
+		c(r, dp)
+	    }
+	}
 	if(methods::is(object,"envRefClass")) {
 	    cld <- tryCatch(object$getClass(), error=function(e)e)
 	    if(inherits(cld, "error")) {
@@ -291,17 +305,16 @@ str.default <-
 		cat(sprintf(ngettext(length(meths), "%s and %d method,", "%s and %d methods,", domain = "R-utils"), indent.str, length(meths)))
 	    }
 	    if(length(sNms <- sNms[sNms != ".xData"])) {
-		sls <- sapply(sNms, methods::slot,
-			      object=object, simplify = FALSE)
 		cat(sprintf(ngettext(length(sNms), " and %d slot", " and %d slots", domain = "R-utils"), length(sNms)), "\n", sep = "")
+		sls <- trygetSlots(object, sNms)
 		strSub(sls, comp.str = "@ ", no.list=TRUE, give.length=give.length,
 		       indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	    }
 
 	} else { ## S4 non-envRefClass
-	    a <- sapply(methods::.slotNames(object), methods::slot,
-			object=object, simplify = FALSE)
-	    cat(sprintf(ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")),  length(a)), "\n", sep = "")
+	    sNms <- methods::.slotNames(object)
+	    cat(sprintf(ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")),  length(sNms)), "\n", sep = "")
+	    a <- trygetSlots(object, sNms)
 	    strSub(a, comp.str = "@ ", no.list=TRUE, give.length=give.length, indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	}
 	return(invisible())
@@ -638,8 +651,7 @@ ls.str <-
     if(missing(envir)) ## [for "lazy" reasons, this fails as default]
         envir <- as.environment(pos)
     nms <- ls(name, envir = envir, all.names=all.names, pattern=pattern)
-    r <- unlist(lapply(nms, function(n)
-                       exists(n, envir= envir, mode= mode, inherits=FALSE)))
+    r <- vapply(nms, exists, NA, envir=envir, mode=mode, inherits=FALSE)
     structure(nms[r], envir = envir, mode = mode, class = "ls_str")
 }
 

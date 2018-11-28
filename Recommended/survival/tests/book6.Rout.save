@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-10-16 r1062) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-10-16 r75673) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -140,8 +140,8 @@ Type 'q()' to quit R.
 Call:
 coxph(formula = Surv(time, status) ~ x, data = testw1, weights = wt, iter = 0)
 
-   coef exp(coef) se(coef) z p
-x 0.000     1.000    0.584 0 1
+    coef exp(coef) se(coef) z p
+x 0.0000    1.0000   0.5843 0 1
 
 Likelihood ratio test = 0 on 1 df, p=1
 n= 9, number of events= 5
@@ -157,7 +157,7 @@ x 0.8726    2.3931   0.7126 1.225    0.221
   exp(coef) exp(-coef) lower .95 upper .95
 x     2.393     0.4179    0.5921     9.672
 
-Concordance= 0.638 (se = 0.159)
+Concordance = 0.638 (se = 0.161)
 Rsquare= 0.177  (max possible=0.999)
 Likelihood ratio test = 1.75 on 1 df, p=0.2
 Wald test = 1.5 on 1 df, p=0.2
@@ -194,4 +194,4 @@ Score (logrank) test = 1.58 on 1 df, p=0.2
 > 
 > proc.time()
    user  system elapsed 
-  0.968   0.063   1.026 
+  0.788   0.061   0.842 

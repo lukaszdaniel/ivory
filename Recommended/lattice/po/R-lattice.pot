@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: lattice 0.20-35\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"Project-Id-Version: lattice 0.20-38\n"
+"POT-Creation-Date: 2018-11-28 21:50\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,13 +130,6 @@ msgstr ""
 #. R/bwplot.R: warning("'origin' forced to 0 for stacked bars")
 
 msgid "'origin' forced to 0 for stacked bars"
-msgstr ""
-
-
-#: R/qqmath.R: 0
-#. R/qqmath.R: stop("'probs' outside [0,1]")
-
-msgid "'probs' outside [0,1]"
 msgstr ""
 
 
@@ -746,13 +739,6 @@ msgstr ""
 #. R/xyplot.R: stop("mismatch in number of packets")
 
 msgid "mismatch in number of packets"
-msgstr ""
-
-
-#: R/qqmath.R: 0
-#. R/qqmath.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
-
-msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
 msgstr ""
 
 

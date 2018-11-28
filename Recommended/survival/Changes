@@ -452,11 +452,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         if (length(init) != ncol(X)) stop("wrong length for init argument")
 ---
 >         if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
-267c266
+288c287
 <         else stop(paste ("Unknown method", method))
 ---
 >         else stop(gettextf("unknown '%s' method", method))
-278,280c277,278
+299,301c298,299
 <            vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
 <            msg <-paste("X matrix deemed to be singular; variable",
 <                            paste(vars, collapse=" "))
@@ -896,19 +896,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("Input is not valid")
 ---
 >         stop("input is not valid")
-43,46c43,44
+42,45c42,43
 <     cat("Likelihood ratio test=", format(round(logtest, 2)), "  on ",
 < 	df, " df,", " p=", 
-<         format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), 
+<         format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=digits), 
 <         "\n",  sep="")
 ---
->     cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=pdig), domain = "R-survival"))
+>     cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), df, format.pval(pchisq(logtest, df, lower.tail=FALSE), digits=digits), domain = "R-survival"))
 >     cat("\n")
-49c47
+48c46
 <     if (!is.null(x$nevent)) cat(", number of events=", x$nevent, "\n")
 ---
 >     if (!is.null(x$nevent)) cat(", ", gettextf("number of events= %d", x$nevent, domain = "R-survival"), "\n", sep = "")
-52c50
+51c49
 < 	cat("\   (", naprint(omit), ")\n", sep="")
 ---
 > 	cat("   (", naprint(omit), ")\n", sep="")
@@ -1094,7 +1094,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         argname <- words[1:nterms]
 ---
 >         argname <- words[seq_len(nterms)]
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/summary.coxph.S Recommended/survival/R/summary.coxph.S
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/summary.coxph.R Recommended/survival/R/summary.coxph.R
 10c10
 <          stop("Input is not valid")
 ---
@@ -1197,19 +1197,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop(paste("not valid for", attr(Y, "type"), "censored survival data"))
 ---
 >         stop(gettextf("not valid for %s censored survival data", attr(Y, "type")))
-59c59
+63c63
 <         stop("cut must be a vector of finite numbers")
 ---
 >         stop("'cut' argument must be a vector of finite numbers")
-65c65
+69c69
 <         if (!is.character(id)) stop("id must be a variable name")
 ---
 >         if (!is.character(id)) stop(gettextf("'%s' argument must be a variable name", "id"))
-119c119
+123c123
 <             stop("left hand side not recognized")
 ---
 >             stop("left hand side was not recognized")
-125c125
+129c129
 <         if (!is.character(episode)) stop("episode must be a character string")
 ---
 >         if (!is.character(episode)) stop(gettextf("'%s' argument must be a character string", "episode"))
@@ -1257,15 +1257,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     if (!inherits(y, "Surv")) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
 >     if (attr(y, 'type') != 'right') stop("right censored data only")
-26c26
+31c31
 < 		stop("Cannot have both an offset and groups")
 ---
 > 		stop("cannot have both an offset and groups")
-28c28
+33c33
 < 	    stop("The offset must be a survival probability")
 ---
 > 	    stop("the offset must be a survival probability")
-58c58
+63c63
 < 	if (length(ll) == 0) stop("No groups to test")
 ---
 > 	if (length(ll) == 0) stop("no groups to test")
@@ -1426,16 +1426,16 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     result <- c(result[seq_len(indx)], type=attr(y, 'type'), result[-seq_len(indx)])
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfitCI.R Recommended/survival/R/survfitCI.R
-32c32
+34c34
 <         for (j in 1:nstate) 
 ---
 >         for (j in seq_len(nstate)) 
-97,98c97
+99,100c99
 <          stop(paste("multi-state computation doesn't support \"", type,
 <                           "\" survival data", sep=''))
 ---
 >          stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
-108c107
+110c109
 <             if (length(toss)==n) stop("start.time has removed all observations")
 ---
 >             if (length(toss)==n) stop("'start.time' has removed all observations")
@@ -1451,21 +1451,17 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (length(istate) !=n) stop ("wrong length for istate")
 ---
 >     if (length(istate) !=n) stop(gettextf("'%s' argument is of the wrong length", "istate"))
-153c152
-<     states <- unique(c(1:nstate, istate))
----
->     states <- unique(c(seq_len(nstate), istate))
-169,170c168,169
+176,177c175,176
 <         transitions <- table(factor(istate, 1:nst), factor(Y[,2], 1:nstate))
 <         dimnames(transitions) <-list(from=state.names, to=state.names[1:nstate])
 ---
 >         transitions <- table(factor(istate, seq_len(nst)), factor(Y[,2], seq_len(nstate)))
 >         dimnames(transitions) <-list(from=state.names, to=state.names[seq_len(nstate)])
-193c192
+200c199
 <             stop("subject is in two different groups, id ", id[indx1[who]])
 ---
 >             stop(gettextf("subject is in two different groups, id %s", id[indx1[who]]))
-197c196
+204c203
 <             stop("gap in follow-up, id ", id[indx1[who]])
 ---
 >             stop(gettextf("gap in follow-up, id %s", id[indx1[who]]))
@@ -1700,49 +1696,49 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (!survregDtest(dlist)) stop("Invalid distribution object")
 ---
 >     if (!survregDtest(dlist)) stop("invalid distribution object")
-111c111
+112c112
 < 	    stop("Invalid survival times for this distribution")
 ---
 > 	    stop("invalid survival times for this distribution")
-119,120c119
+120,121c120
 <         if (!missing(scale)) warning(paste(dlist$name, 
 <                            "has a fixed scale, user specified value ignored"))
 ---
 >         if (!missing(scale)) warning(gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name)))
-131,132c130
+132,133c131
 <         if (!is.null(parms)) stop(paste(dlist$name, 
 <                               "distribution has no optional parameters"))
 ---
 >         if (!is.null(parms)) stop(gettextf("%s distribution has no optional parameters", sQuote(dlist$name)))
-136c134
+137c135
 <             stop("Default parameters must be a numeric vector")
 ---
 >             stop("default parameters must be a numeric vector")
-140c138
+141c139
 <             if (any(is.na(indx))) stop("Invalid parameter names")
 ---
 >             if (any(is.na(indx))) stop("invalid parameter names")
-157c155
+158c156
 <     if (any(scale < 0)) stop("Invalid scale value")
 ---
 >     if (any(scale < 0)) stop("invalid scale value")
-159c157
+160c158
 < 	    stop("The scale argument is not valid with multiple strata")
 ---
 > 	    stop("the scale argument is not valid with multiple strata")
-174c172
+175c173
 < 	if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 > 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
-195c193
+196c194
 < 	    fit$scale <- exp(fit$coefficients[-(1:nvar)])
 ---
 > 	    fit$scale <- exp(fit$coefficients[-seq_len(nvar)])
-198c196
+199c197
 < 	    fit$coefficients  <- fit$coefficients[1:nvar]
 ---
 > 	    fit$coefficients  <- fit$coefficients[seq_len(nvar)]
-239c237
+240c238
 <     singular <- (diag(fit$var)==0)[1:length(fit$coef)]
 ---
 >     singular <- (diag(fit$var)==0)[seq_along(fit$coef)]
@@ -2040,23 +2036,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >             warning(gettextf("Loglik converged before variable %s; beta may be infinite.",
 >                           paste(seq_len(nvar)[infs], collapse = ", ")))
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/concordance.Rnw Recommended/survival/noweb/concordance.Rnw
-108c108
-<     yet.to.do <- 1:n
----
->     yet.to.do <- seq_len(n)
-653c653
-<         cat("Call:\n")
----
->         cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
-661c661
-<     cat("Concordance= ", format(x$concordance), " se= ", format(x$std.err),
----
->     cat(gettextf("Concordance= %s se= %s", format(x$concordance), format(x$std.err), domain = "R-survival"),
-731c731
-<         for (i in 1:length(ustrat)) {
----
->         for (i in seq_along(ustrat)) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/coxph.Rnw Recommended/survival/noweb/coxph.Rnw
 33c33
 <                           names(extraArgs)[indx==0L]), domain = NA)
@@ -2067,31 +2046,31 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 			  "\" survival data", sep=''))
 ---
 > 	stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
-114c113
+115c114
 < if (nrow(mf) ==0) stop("No (non-missing) observations")
 ---
 > if (nrow(mf) ==0) stop("no (non-missing) observations")
-166c165
+167c166
 <         stop("The tt argument must contain function or list of functions")
 ---
 >         stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-170c169
+171c170
 <             for (i in 1:ntrans) temp[[i]] <- tt[[1]]
 ---
 >             for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
-173c172
+174c173
 <         else stop("Wrong length for tt argument")
 ---
 >         else stop(gettextf("wrong length for '%s' argument", "tt"))
-176c175
+177c176
 < else stop("The tt argument must contain a function or list of functions")
 ---
 > else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
-246c245
+247c246
 < strats <- rep(1:length(counts$nrisk), counts$nrisk)
 ---
 > strats <- rep(seq_along(counts$nrisk), counts$nrisk)
-254c253
+255c254
 < for (i in 1:ntrans) {
 ---
 > for (i in seq_len(ntrans)) {
@@ -2099,51 +2078,51 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (length(init) != ncol(X)) stop("wrong length for init argument")
 ---
 >     if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
-615c614
+649c648
 <     else stop(paste ("Unknown method", method))
 ---
 >     else stop(gettextf("unknown '%s' method", method))
-629,631c628,629
+663,665c662,663
 <        vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
 <        msg <-paste("X matrix deemed to be singular; variable",
 <     		   paste(vars, collapse=" "))
 ---
 >        vars <- seq_along(fit$coefficients)[is.na(fit$coefficients)]
 >        msg <- gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
-676c674
+711c709
 <     		  init[1:length(fit$coefficients)])[nabeta]
 ---
 >     		  init[seq_along(fit$coefficients)])[nabeta]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/noweb/coxsurv.Rnw Recommended/survival/noweb/coxsurv.Rnw
-218c218
+217c217
 <     stop("Cannot handle \"", type, "\" type survival data")
 ---
 >     stop(gettextf("Cannot handle \"%s\" type survival data", type))
-402c402
+401c401
 <     if (individual) stop("newdata must be a data frame")
 ---
 >     if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
-404c404
+403c403
 <         stop("Newdata argument must be a data frame")
 ---
 >         stop(gettextf("'%s' argument must be a data frame", "newdata"))
-515c515
+514c514
 <         stop("The newdata argument must be present when individual=TRUE")
 ---
 >         stop("The newdata argument must be present when 'individual=TRUE'")
-518c518
+517c517
 <         if (is.null(id)) stop("id=NULL is an invalid argument")
 ---
 >         if (is.null(id)) stop("'id=NULL' is an invalid argument")
-534c534
+533c533
 <         stop("Individual=TRUE is only valid for counting process data")
 ---
 >         stop("'individual=TRUE' is only valid for counting process data")
-584c584
+583c583
 < indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
 ---
 > indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
-640c640
+639c639
 < result <- c(result[1:indx], type=attr(y, 'type'), result[-(1:indx)])
 ---
 > result <- c(result[seq_len(indx)], type=attr(y, 'type'), result[-seq_len(indx)])
@@ -2398,43 +2377,39 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             if (length(toss)==n) stop("start.time has removed all observations")
 ---
 >             if (length(toss)==n) stop("'start.time' has removed all observations")
-117c116
+115c114
 <                 stop("istate should be a vector of positive integers or a factor")
 ---
 >                 stop("'istate' argument should be a vector of positive integers or a factor")
-122c121
+120c119
 <     if (length(id) ==0) id <- 1:n
 ---
 >     if (length(id) ==0) id <- seq_len(n)
-126c125
+124c123
 <     if (length(istate) !=n) stop ("wrong length for istate")
 ---
 >     if (length(istate) !=n) stop(gettextf("'%s' argument is of the wrong length", "istate"))
-130c129
-<     states <- unique(c(1:nstate, istate))
----
->     states <- unique(c(seq_len(nstate), istate))
-150,151c149,150
+155,156c154,155
 <         transitions <- table(factor(istate, 1:nst), factor(Y[,2], 1:nstate))
 <         dimnames(transitions) <-list(from=state.names, to=state.names[1:nstate])
 ---
 >         transitions <- table(factor(istate, seq_len(nst)), factor(Y[,2], seq_len(nstate)))
 >         dimnames(transitions) <-list(from=state.names, to=state.names[seq_len(nstate)])
-277c276
+282c281
 <     stop("subject is in two different groups, id ", id[indx1[who]])
 ---
 >     stop(gettextf("subject is in two different groups, id %s", id[indx1[who]]))
-281c280
+286c285
 <     stop("gap in follow-up, id ", id[indx1[who]])
 ---
 >     stop(gettextf("gap in follow-up, id %s", id[indx1[who]]))
-326,327c325,326
+331,332c330,331
 < transitions <- table(factor(istate[indx[first]], 1:nst), 
 <                      factor(status[indx[first]], 1:nstate))
 ---
 > transitions <- table(factor(istate[indx[first]], seq_len(nst)), 
 >                      factor(status[indx[first]], seq_len(nstate)))
-467c466
+475c474
 <         for (j in 1:nstate) 
 ---
 >         for (j in seq_len(nstate)) 
@@ -3091,40 +3066,30 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 		if (se == 1)
 > 			vsurv[ic][itime] = totvar / (nn * nn);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/cox_Rcallback.c Recommended/survival/src/cox_Rcallback.c
-8c8
+7c7
 < 
 ---
 > #include "localization.h"
-22,27c22,23
-< int which;
-< double *coef, *first, *second;
-< double *penalty;
-< int *flag,p; 
-< SEXP fexpr,rho;
-< {
----
-> 	int which;double *coef, *first, *second;double *penalty;int *flag, p;SEXP
-> 			fexpr, rho; {
-53c49
+52c52
 <                 error("coef:invalid type\n");
 ---
-> 		error(_("coef: invalid type\n"));
-62c58
+>                 error(_("coef: invalid type\n"));
+61c61
 <                 error("first: invalid type\n");
 ---
-> 		error(_("first: invalid type\n"));
-72c68
+>                 error(_("first: invalid type\n"));
+71c71
 <                 error("second: invalid type\n");
 ---
-> 		error(_("second: invalid type\n"));
-81c77
+>                 error(_("second: invalid type\n"));
+80c80
 <                 error("flag:invalid type\n");
 ---
-> 		error(_("flag: invalid type\n"));
-90c86
+>                 error(_("flag: invalid type\n"));
+89c89
 <                 error("penalty: invalid type\n");
 ---
-> 		error(_("penalty: invalid type\n"));
+>                 error(_("penalty: invalid type\n"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxmart2.c Recommended/survival/src/coxmart2.c
 20,24c20,22
 < void coxmart2(Sint   *sn,     double *time, 

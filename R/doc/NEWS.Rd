@@ -196,14 +196,41 @@
       \PR{17394}.
 
       \item In \code{.col(dim)} and \code{.row(dim)}, \code{dim} now may
-      also be an integer valued \code{"double"}.
+      also be an integer-valued \code{"double"}.
 
       \item \code{sQuote()} and \code{dQuote()} get an explicit \code{q}
       argument with obvious default instead of using
       \code{getOption("fancyQuotes")} implicitly and unconditionally.
 
       \item \code{unzip()} can list archives with comments and with
-      spaces in file names even using external \command{unzip} command.
+      spaces in file names even using an external \command{unzip} command.
+
+      \item Command line completion has a new setting
+      \code{rc.settings(dots = FALSE)} to remove \code{...} from the
+      list of possible function arguments.
+
+      \item \code{library()} no longer checks packages with compiled
+      code match \samp{R.version$platform}.  \code{loadNamespace()}
+      never has, and increasingly the \sQuote{canonical name} does not
+      reflect the important characteristics of compiled code.
+      %% E.g. 32/64-bit compiler settings
+
+      \item The primitive functions \code{drop()} and \code{unclass()}
+      now avoid duplicating their data for atomic vectors that are large
+      enough by returning \code{ALTREP} wrapper objects with adjusted
+      attributes.  R-level assignments to change attributes will also
+      use wrapper objects to avoid duplicating data for larger atomic
+      vectors. R functions like \code{structure()} and \code{unname()}
+      will therefore not duplicate data in these settings.  Generic
+      vectors as produced by \code{list()} are not yet covered by this
+      optimization but may be in due course.
+
+      \item In \code{formals()}, \code{envir} becomes an optional
+      argument instead of being hardwired.
+
+      \item Instead of signalling an error for an invalid S4 object
+      \code{x}, \code{str(x)} now gives a warning and subsequently still
+      shows most parts of \code{x}, e.g., when slots are missing.
     }
   }
 
@@ -211,6 +238,50 @@
     \itemize{
       \item The C++ compiler defaults to the C++11 standard if
       supported, otherwise to the C++98 standard.
+
+      \item The list of compilers searched for \samp{F95} has been
+      modernized, and that chosen for \samp{FC} will be used as the
+      default.  in particular, \command{gfortran} is now the first
+      choice, not \command{f95}: set \samp{FC} in \file{config.site} to
+      override this if necessary.
+
+      \item Visibility macros such as \samp{C_VISIBILITY} can now be
+      user-set  (including to empty), e.g.\sspace{}in \file{config.site}.
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item \strong{N.B.}: The handling of Fortran is \strong{work in
+	progress}, with further changes under test.  Code and
+      documentation may not be in sync.
+
+      \item The interpretation of source code with extension \file{.f}
+      is changing.  Previously this denoted FORTRAN 77 code, but current
+      compilers no longer have a FORTRAN 77 mode and interpret it as
+      \sQuote{fixed-form} Fortran 90 (or later where supported) code.
+      Extensions \file{.f90} and \file{.f95} continue to indicate
+      \sQuote{free-form} Fortran code.
+
+      Legal FORTRAN 77 code is also legal fixed-form Fortran 9x; however
+      this change legitimizes the use of later features, in particular
+      to replace features marked \sQuote{obsolescent} in Fortran 95
+      which \command{gfortran} 8.x has started to warn about.
+
+      \item Packages with code in \file{src} with extensions \file{.f90}
+      or \file{.f95} are now linked using the C or C++ compiler rather
+      than the Fortran 9x compiler.  This is consistent with fixed-form
+      Fortran code and allows mixing of C++ and free-form Fortran on
+      most platforms.
+
+      Consequentially, packages including free-form Fortran 9x which
+      uses OpenMP should include \samp{SHLIB_OPENMP_CFLAGS} (or the
+      \samp{CXXFLAGS} version) in \samp{PKG_LIBS} rather than
+      \samp{SHLIB_OPENMP_FCFLAGS} --- fortunately on current platforms
+      they are the same flag.
+
+      \item The new make macro \samp{F_VISIBILITY} is now preferred for
+      both fixed-form and free-form Fortran.
     }
   }
 
@@ -228,6 +299,9 @@
       by commas and with regular quotes such as to be useful as argument
       in calling \code{install.packages(c(..))}; from a suggestion by
       Marcel Ramos.
+
+      \item \code{tools::Rd2latex()} now uses UTF-8 as its default
+      output encoding.
     }
   }
 
@@ -247,12 +321,22 @@
       ignore their \option{zjJ} flags.
 
       \item \code{var(f)} and hence \code{sd(f)} now give an error for
-      \code{factor} arguments; they gave a warning since R 3.2.3,
-      \PR{16564}.
+      \code{factor} arguments; they gave a deprecation warning since \R
+      3.2.3, \PR{16564}.
 
       \item \pkg{tools}' \code{vignetteDepends()} has been deprecated
       (it called a function deprecated since Feb 2016), partly replaced
       by newly exported \code{vignetteInfo()}.
+
+      \item The \command{f77_f2c} script has been removed: it
+      no longer sufficed to compile the \file{.f} files in \R.
+      
+      \item The deprecated legacy support of \command{make} macros such
+      as \samp{CXX1X} has been removed: use the \samp{CXX11} forms
+      instead.
+
+      \item Make macro \samp{F77_VISIBILITY} is deprecated in favour of
+      \samp{F_VISIBILITY}.
     }
   }
 
@@ -283,12 +367,12 @@
 
       \item The documentation for \code{identify()} incorrectly claimed
       that the indices of identified points were returned in the order
-      that the points were selected..  \code{identify()} now has a new
+      that the points were selected.  \code{identify()} now has a new
       argument \code{order} to allow the return value to include the
       order in which points were identified; the documentation has been
       updated.  Reported by Richard Rowe and Samuel Granjeaud.
 
-      \item \code{order(...., decreasing=c(TRUE,FALSE))} could fail in
+      \item \code{order(...., decreasing=c(TRUE, FALSE))} could fail in
       some cases. Reported from StackOverflow via Karl Nordström.
 
       \item User macros in Rd files now accept empty and multi-line
@@ -362,8 +446,8 @@
       \item \code{format.POSIXlt()} now also recycles the \code{zone}
       and \code{gmtoff} list components to full length when needed,
       and its internal C code detects \code{have_zone} in more cases.
-      In some cases, this changes its output to become
-      \code{format.POSIXct} compatible.
+      In some cases, this changes its output to become compatible with
+      \code{format.POSIXct()}.
 
       \item On Windows, \code{detectCores()} now detects processors in all
       processor groups, not just the group \R is running in (impacts
@@ -389,10 +473,6 @@
       documented and as in R < 3.0.0, namely identically to
       \code{sample.int(2, ..)}.% consider back porting to 3.5.x !
 
-      \item \code{download.file(*, method = "curl", cacheOK = FALSE)}
-      should work now on Windows, thanks to Kevin Ushey's patch in
-      \PR{17323}.
-
       \item Fixes to \code{convertColor()} for chromatic adaptation;
       thanks to Brodie Gaslam \PR{17473}.
 
@@ -413,20 +493,54 @@
 
       \item In the \code{numeric} method for \code{all.equal()}, a
       numeric \code{scale} argument is now checked to be positive and
-      allowed to be of length > 1 (which was working originally and with
-      a warning in recent years).
+      allowed to be of length > 1. (The latter worked originally and
+      with a warning in recent years).
 
       \item Deferred string conversions now record the \code{OutDec}
-      option setting when not equal to the default. Reported by Michael
+      option setting when not equal to the default.  Reported by Michael
       Sannella.
+
+      \item When \code{y} is numeric and \code{f} a \code{factor},
+      \code{plot(y ~ f)} nicely uses "y" and "f" as y- and x-labels.
+      The more direct \code{boxplot(y ~ f)} now does too.  The new
+      argument \code{ann = FALSE} may be used to suppress these.
+
+      \item Subassignment to no/empty rows of a data frame is more
+      consistent and typically a no-op in all cases instead of sometimes
+      an error; part of Emil Bode's \PR{17483}.
+
+      \item Calls like \code{formatC(*, zero.print = "< 0.001")} no
+      longer give an error and are further improved via new optional
+      argument \code{replace.zero}.  Reported by David Hugh-Jones.
+
+      \item \code{methods::formalArgs("<fn>")} now finds the same
+      function as \code{formals("<fn>")}, fixing Emil Bode's \PR{17499}.
+
+      \item The methods package better handles duplicated class names
+      across packages.
+
+      \item \code{seq.default()} now avoids integer overflow, thanks to
+      the report and "cumsum" patch of Suharto Anggono's \PR{17497}.
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 3.5.1 patched}{
 
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item New macro \samp{CXX_VISIBILITY} analogous to
+      \samp{C_VISIBILITY} (which several packages have been misusing for
+      C++ code) for the default C++ compiler (but not necessarily one used
+      for non-default C++ dialects like C++14).
+    }
+  }
+  
   \subsection{BUG FIXES}{
     \itemize{
+      \item \code{drop1.glm} miscalculated the score test (\code{test="Rao"})
+      when the model contained an offset.
+
       \item Linear multiple empty models such as \code{lm(y ~ 0)}
       now have a correctly dimensioned empty coefficient matrix;
       reported by Brett Presnell.
@@ -495,7 +609,31 @@
       \item \code{cut(rep(0, 7))} now works, thanks to Joey Reid and
       Benjamin Tyner (\PR{16802}).
 
+      \item \code{download.file(*, method = "curl", cacheOK = FALSE)}
+      should work now on Windows, thanks to Kevin Ushey's patch in
+      \PR{17323}.
+
+      \item \code{duplicated(<dataframe with 'f'>)} now works, too,
+      thanks to Andreas Kersting's \PR{17485}; ditto for
+      \code{anyDuplicated()}.
+
       \item \code{legend(*, cex = 1:2)} now works less badly.
+
+      \item The \code{print()} method for \code{POSIXct} and
+      \code{POSIXlt} now correctly obeys \code{getOption("max.print")},
+      fixing a long-standing typo, and it also gets a corresponding
+      optional \code{max} argument.
+
+      \item Unserialization of raw vectors serialized in ASCII
+      representation now works correctly.
+
+      \item \code{<data frame>[TRUE, <new>] <- list(c1, c2)} now works
+      correctly, thanks to Suharto Anggono's \PR{15362} and Emil Bode's
+      patch in \PR{17504}.
+
+      \item \code{seq.int(*, by=by, length=n)} no longer wrongly
+      \dQuote{drops fractional parts} when \code{by} is integer, thanks
+      to Suharto Anggono's report \PR{17506}.
     }
   }
 }

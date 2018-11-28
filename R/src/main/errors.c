@@ -32,6 +32,7 @@
 #include <R_ext/GraphicsEngine.h> /* for GEonExit */
 #include <R_ext/Minmax.h>
 #include <R_ext/Print.h>
+#include <stdarg.h>
 
 
 /* Total line length, in chars, before splitting in warnings/errors */
@@ -245,7 +246,8 @@ static void setupwarnings(void)
     setAttrib(R_Warnings, R_NamesSymbol, allocVector(STRSXP, R_nwarnings));
 }
 
-/* Rvsnprintf: like vsnprintf, but guaranteed to null-terminate. */
+/* Rvsnprintf: like vsnprintf, but guaranteed to null-terminate and not to
+   split multi-byte characters */
 #ifdef _WIN32
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
@@ -255,6 +257,8 @@ static int Rvsnprintf(char *buf, size_t size, const char  *format, va_list ap)
     int val;
     val = trio_vsnprintf(buf, size, format, ap);
     buf[size-1] = '\0';
+    if (val >= size)
+	mbcsTruncateToValid(buf);
     return val;
 }
 #else
@@ -263,14 +267,61 @@ static int Rvsnprintf(char *buf, size_t size, const char  *format, va_list ap)
     int val;
     val = vsnprintf(buf, size, format, ap);
     buf[size-1] = '\0';
+    if (val >= size)
+	mbcsTruncateToValid(buf);
     return val;
 }
 #endif
 
-#define BUFSIZE 8192
-static R_INLINE void RprintTrunc(char *buf)
+/* Rsnprintf: like snprintf, but guaranteed to null-terminate and not to
+   split multi-byte characters */
+static int Rsnprintf(char *str, size_t size, const char *format, ...)
 {
-    if(R_WarnLength < BUFSIZE - 20 && strlen(buf) == R_WarnLength) {
+    int val;
+    va_list ap;
+
+    va_start(ap, format);
+    val = Rvsnprintf(str, size, format, ap);
+    va_end(ap);
+
+    return val;
+}
+
+/* Rstrncat: like strncat, but guaranteed not to split multi-byte characters */
+static char *Rstrncat(char *dest, const char *src, size_t n)
+{
+    size_t after;
+    size_t before = strlen(dest);
+
+    strncat(dest, src, n);
+    
+    after = strlen(dest);
+    if (after - before == n)
+	/* the string may have been truncated, but we cannot know for sure
+	   because str may not be null terminated */
+	mbcsTruncateToValid(dest + before);
+
+    return dest;
+}
+
+/* Rstrncat: like strncpy, but guaranteed to null-terminate and not to
+   split multi-byte characters */
+static char *Rstrncpy(char *dest, const char *src, size_t n)
+{
+    strncpy(dest, src, n);
+    if (dest[n-1] != '\0') {
+	dest[n-1] = '\0';
+	mbcsTruncateToValid(dest);
+    }
+    return dest;
+}
+
+#define BUFSIZE 8192
+static R_INLINE void RprintTrunc(char *buf, int truncated)
+{
+    if(R_WarnLength < BUFSIZE - 20 &&
+      (truncated || strlen(buf) == R_WarnLength)) {
+
 	strcat(buf, " ");
 	strcat(buf, _("[... truncated]"));
     }
@@ -296,11 +347,15 @@ void warning(const char *format, ...)
 
     va_list(ap);
     va_start(ap, format);
-    Rvsnprintf(buf, min(BUFSIZE, R_WarnLength+1), format, ap);
+    size_t psize;
+    int pval;
+    
+    psize = min(BUFSIZE, R_WarnLength+1);
+    pval = Rvsnprintf(buf, psize, format, ap);
     va_end(ap);
     p = buf + strlen(buf) - 1;
     if(strlen(buf) > 0 && *p == '\n') *p = '\0';
-    RprintTrunc(buf);
+    RprintTrunc(buf, pval >= psize);
     warningcall(getCurrentCall(), "%s", buf);
 }
 
@@ -337,6 +392,8 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     char buf[BUFSIZE];
     RCNTXT *cptr;
     RCNTXT cntxt;
+    size_t psize;
+    int pval;
 
     if (inWarning)
 	return;
@@ -370,8 +427,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     inWarning = 1;
 
     if(w >= 2) { /* make it an error */
-	Rvsnprintf(buf, min(BUFSIZE, R_WarnLength), format, ap);
-	RprintTrunc(buf);
+	psize = min(BUFSIZE, R_WarnLength+1);
+	pval = Rvsnprintf(buf, psize, format, ap);
+	RprintTrunc(buf, pval >= psize);
 	inWarning = 0; /* PR#1570 */
 	errorcall(call, _("(converted from warning) %s"), buf);
     }
@@ -380,8 +438,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	if( call != R_NilValue ) {
 	    dcall = CHAR(STRING_ELT(deparse1s(call), 0));
 	} else dcall = "";
-	Rvsnprintf(buf, min(BUFSIZE, R_WarnLength+1), format, ap);
-	RprintTrunc(buf);
+	psize = min(BUFSIZE, R_WarnLength+1);
+	pval = Rvsnprintf(buf, psize, format, ap);
+	RprintTrunc(buf, pval >= psize);
 
 	if(dcall[0] == '\0') REprintf(_("Warning:"));
 	else {
@@ -401,8 +460,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	if(!R_CollectWarnings) setupwarnings();
 	if(R_CollectWarnings < R_nwarnings) {
 	    SET_VECTOR_ELT(R_Warnings, R_CollectWarnings, call);
-	    Rvsnprintf(buf, min(BUFSIZE, R_WarnLength+1), format, ap);
-	    RprintTrunc(buf);
+	    psize = min(BUFSIZE, R_WarnLength+1);
+	    pval = Rvsnprintf(buf, psize, format, ap);
+	    RprintTrunc(buf, pval >= psize);
 	    if(R_ShowWarnCalls && call != R_NilValue) {
 		char *tr =  R_ConciseTraceback(call, 0);
 		size_t nc = strlen(tr);
@@ -602,7 +662,7 @@ static SEXP GetSrcLoc(SEXP srcref)
 
 static char errbuf[BUFSIZE];
 
-#define ERRBUFCAT(txt) strncat(errbuf, txt, BUFSIZE - strlen(errbuf))
+#define ERRBUFCAT(txt) Rstrncat(errbuf, txt, BUFSIZE - strlen(errbuf))
 
 const char *R_curErrorBuf() {
     return (const char *)errbuf;
@@ -681,22 +741,22 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	}
 
 	const char *dcall = CHAR(STRING_ELT(deparse1s(call), 0));
-	snprintf(tmp2, BUFSIZE,  _("Error in command '%s': "), dcall); 
+	Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s': "), dcall); 
 	if (skip != NA_INTEGER) {
 	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(skip)));
 	    protected++;
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
-		snprintf(tmp2, BUFSIZE,  _("Error in command '%s' (from %s): "), 
+		Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s' (from %s): "), 
 			 dcall, CHAR(STRING_ELT(srcloc, 0)));
 	}
 
 	Rvsnprintf(tmp, min(BUFSIZE, R_WarnLength) - strlen(head), format, ap);
 	if (strlen(tmp2) + strlen(tail) + strlen(tmp) < BUFSIZE) {
-	    if(len) snprintf(errbuf, BUFSIZE,  
+	    if(len) Rsnprintf(errbuf, BUFSIZE,  
 			     _("Error in command '%s' (from %s): "),
 			     dcall, CHAR(STRING_ELT(srcloc, 0)));
-	    else snprintf(errbuf, BUFSIZE,  _("Error in command '%s': "), dcall);
+	    else Rsnprintf(errbuf, BUFSIZE,  _("Error in command '%s': "), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		char *p = strchr(tmp, '\n');
@@ -719,13 +779,13 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    }
 	    ERRBUFCAT(tmp);
 	} else {
-	    snprintf(errbuf, BUFSIZE, _("Error: "));
+	    Rsnprintf(errbuf, BUFSIZE, _("Error: "));
 	    ERRBUFCAT(tmp); // FIXME
 	}
 	UNPROTECT(protected);
     }
     else {
-	snprintf(errbuf, BUFSIZE, _("Error: "));
+	Rsnprintf(errbuf, BUFSIZE, _("Error: "));
 	p = errbuf + strlen(errbuf);
 	Rvsnprintf(p, min(BUFSIZE, R_WarnLength) - strlen(errbuf), format, ap);
     }
@@ -1009,7 +1069,7 @@ SEXP attribute_hidden do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t len = strlen(domain)+3;
 	    R_CheckStack2(len);
 	    buf = (char *) alloca(len);
-	    snprintf(buf, len, "R-%s", domain);
+	    Rsnprintf(buf, len, "R-%s", domain);
 	    domain = buf;
 	}
     } else if(isString(CAR(args)))
@@ -1034,8 +1094,7 @@ SEXP attribute_hidden do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(ihead > 0) {
 		R_CheckStack2(ihead + 1);
 		head = (char *) alloca(ihead + 1);
-		strncpy(head, tmp, ihead);
-		head[ihead] = '\0';
+		Rstrncpy(head, tmp, ihead + 1);
 		tmp += ihead;
 		}
 	    if(strlen(tmp))
@@ -1115,7 +1174,7 @@ SEXP attribute_hidden do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t len = strlen(domain)+3;
 	    R_CheckStack2(len);
 	    buf = (char *) alloca(len);
-	    snprintf(buf, len, "R-%s", domain);
+	    Rsnprintf(buf, len, "R-%s", domain);
 	    domain = buf;
 	}
     } else if(isString(sdom))
@@ -1368,8 +1427,7 @@ void NORET R_JumpToToplevel(Rboolean restart)
 
 static void R_SetErrmessage(const char *s)
 {
-    strncpy(errbuf, s, sizeof(errbuf));
-    errbuf[sizeof(errbuf) - 1] = 0;
+    Rstrncpy(errbuf, s, sizeof(errbuf));
 }
 
 static void R_PrintDeferredWarnings(void)
@@ -1613,18 +1671,20 @@ static SEXP findSimpleErrorHandler(void)
 static void vsignalWarning(SEXP call, const char *format, va_list ap)
 {
     char buf[BUFSIZE];
-    SEXP hooksym, hcall, qcall;
+    SEXP hooksym, hcall, qcall, qfun;
 
     hooksym = install(".signalSimpleWarning");
     if (SYMVALUE(hooksym) != R_UnboundValue &&
 	SYMVALUE(R_QuoteSymbol) != R_UnboundValue) {
-	PROTECT(qcall = LCONS(R_QuoteSymbol, LCONS(call, R_NilValue)));
+	qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
+	PROTECT(qfun);
+	PROTECT(qcall = LCONS(qfun, LCONS(call, R_NilValue)));
 	PROTECT(hcall = LCONS(qcall, R_NilValue));
 	Rvsnprintf(buf, BUFSIZE - 1, format, ap);
 	hcall = LCONS(mkString(buf), hcall);
 	PROTECT(hcall = LCONS(hooksym, hcall));
 	eval(hcall, R_GlobalEnv);
-	UNPROTECT(3);
+	UNPROTECT(4);
     }
     else vwarningcall_dflt(call, format, ap);
 }
@@ -1650,9 +1710,8 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 	char *buf = errbuf;
 	SEXP entry = CAR(list);
 	R_HandlerStack = CDR(list);
-	strncpy(buf, localbuf, BUFSIZE);
+	Rstrncpy(buf, localbuf, BUFSIZE);
 	/*	Rvsnprintf(buf, BUFSIZE - 1, format, ap);*/
-	buf[BUFSIZE - 1] = 0;
 	if (IS_CALLING_ENTRY(entry)) {
 	    if (ENTRY_HANDLER(entry) == R_RestartToken)
 		return; /* go to default error handling; do not reset stack */
@@ -1661,20 +1720,22 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		   overflow, treat all calling handlers as failed */
 		if (R_OldCStackLimit)
 		    break;
-		SEXP hooksym, hcall, qcall;
+		SEXP hooksym, hcall, qcall, qfun;
 		/* protect oldstack here, not outside loop, so handler
 		   stack gets unwound in case error is protect stack
 		   overflow */
 		PROTECT(oldstack);
 		hooksym = install(".handleSimpleError");
-		PROTECT(qcall = LCONS(R_QuoteSymbol,
+		qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol,
+		             R_QuoteSymbol);
+		PROTECT(qcall = LCONS(qfun,
 				      LCONS(call, R_NilValue)));
 		PROTECT(hcall = LCONS(qcall, R_NilValue));
 		hcall = LCONS(mkString(buf), hcall);
 		hcall = LCONS(ENTRY_HANDLER(entry), hcall);
 		PROTECT(hcall = LCONS(hooksym, hcall));
 		eval(hcall, R_GlobalEnv);
-		UNPROTECT(4);
+		UNPROTECT(5);
 	    }
 	}
 	else gotoExitingHandler(R_NilValue, call, entry);
@@ -1973,6 +2034,12 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
                   const char *errmsg, const char *warnmsg,
                   const char *varname, Rboolean warnByDefault)
 {
+    /* disable GC so that use of this temporary checking code does not
+       introduce new PROTECT errors e.g. in asLogical() use */
+    R_CHECK_THREAD;
+    int enabled = R_GCEnabled;
+    R_GCEnabled = FALSE;
+    int nprotect = 0;
     char *check = getenv(varname);
     const void *vmax = vmaxget();
     Rboolean err = check && StringTrue(check);
@@ -1996,11 +2063,16 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 	Rboolean ignore = FALSE;
 
 	SEXP spkg = R_NilValue;
-	for(; spkg == R_NilValue && rho != R_EmptyEnv; rho = ENCLOS(rho))
-	    if (R_IsPackageEnv(rho))
-		spkg = R_PackageEnvName(rho);
-	    else if (R_IsNamespaceEnv(rho))
-		spkg = R_NamespaceEnvSpec(rho);
+	for(; rho != R_EmptyEnv; rho = ENCLOS(rho))
+	    if (R_IsPackageEnv(rho)) {
+		PROTECT(spkg = R_PackageEnvName(rho));
+		nprotect++;
+		break;
+	    } else if (R_IsNamespaceEnv(rho)) {
+		PROTECT(spkg = R_NamespaceEnvSpec(rho));
+		nprotect++;
+		break;
+	    }
 	if (spkg != R_NilValue)
 	    pkgname = translateChar(STRING_ELT(spkg, 0));
 
@@ -2092,6 +2164,8 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
     else if (warn || warnByDefault)
 	warningcall(call, warnmsg);
     vmaxset(vmax);
+    UNPROTECT(nprotect);
+    R_GCEnabled = enabled;
 }
 
 

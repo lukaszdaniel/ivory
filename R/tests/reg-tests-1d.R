@@ -1046,6 +1046,7 @@ myM <- setClass("myMatrix", contains="matrix")
 T <- rbind(1:2, c=2, "a+"=10, myM(4:1,2), deparse.level=0)
 stopifnot(identical(rownames(T), c("", "c", "a+", "", "")))
 ## rownames(.) wrongly were NULL in R <= 3.4.1
+proc.time() - .pt; .pt <- proc.time()
 
 
 ## qr.coef(qr(X, LAPACK=TRUE)) when X has column names, etc
@@ -1903,6 +1904,7 @@ lms <- list(m0 = lm(y ~ 0), m1 = lm(y ~ 1), m2 = lm(y ~ exp(y[,1]^2)))
 dcf <- sapply(lms, function(fm) dim(coef(fm)))
 stopifnot(dcf[1,] == 0:2, dcf[2,] == 5)
 ## coef(lm(y ~ 0)) had 3 instead of 5 columns in R <= 3.5.1
+proc.time() - .pt; .pt <- proc.time()
 
 
 ## confint(<mlm>)
@@ -2107,10 +2109,15 @@ stopifnot(identical(xx, "1,23456e+02"))
 
 ## parseRd() and Rd2HTML() with some \Sexpr{} in *.Rd:
 x <- tools::Rd_db("base")
-y <- lapply(x, function(e) tryCatch(tools::Rd2HTML(e, out = nullfile()),
-                                    error = identity))
-stopifnot(!vapply(y, inherits, NA, "error"))
-## Gave error when "running" \Sexpr{.} DateTimeClasses.Rd
+## Now check that \Sexpr{}  "installed" correctly:
+of <- textConnection("DThtml", "w")
+tools::Rd2HTML(x$DateTimeClasses.Rd, out = of, stages = "install"); close(of)
+(iLeap <- grep("leap seconds", DThtml)[[1]])
+stopifnot(exprs = {
+        grepl("[0-9]+ days",     DThtml[iLeap+ 1])
+    any(grepl("20[1-9][0-9]-01", DThtml[iLeap+ 2:4]))
+})
+
 
 
 ## if( "length > 1" )  buglet in plot.data.frame()
@@ -2120,6 +2127,187 @@ plot(data.frame(.leap.seconds))
 if(!is.na(oEV)) Sys.setenv("_R_CHECK_LENGTH_1_CONDITION_" = oEV)
 ## gave Error in ... the condition has length > 1,  in R <= 3.5.1
 
+
+## duplicated(<dataframe with 'f' col>) -- PR#17485
+d <- data.frame(f=gl(3,5), i=1:3)
+stopifnot(exprs = {
+    identical(which(duplicated(d)), c(4:5, 9:10, 14:15))
+    identical(anyDuplicated(d), 4L)
+    identical(anyDuplicated(d[1:3,]), 0L)
+})
+## gave error from do.call(Map, ..) as Map()'s first arg. is 'f'
+
+
+## print.POSIX[cl]t() - not correctly obeying "max.print" option
+op <- options(max.print = 50, width = 85)
+cc <- capture.output(print(dt <- .POSIXct(154e7 + (0:200)*60)))
+c2 <- capture.output(print(dt, max = 6))
+writeLines(tail(cc, 4))
+writeLines(c2)
+stopifnot(expr = {
+    grepl("omitted 151 entries", tail(cc, 1))
+                  !anyDuplicated(tail(cc, 2))
+    grepl("omitted 195 entries", tail(c2, 1))
+}); options(op)
+## the omission had been reported twice because of a typo in R <= 3.5.1
+
+
+## <data.frame>[ <empty>, ] <- v                    should be a no-op and
+## <data.frame>[ <empty>, <existing column>] <- v   a no-op, too
+df <- d0 <- data.frame(i=1:6, p=pi)
+n <- nrow(df)
+as1NA <- function(x) `is.na<-`(rep_len(unlist(x), 1L), TRUE)
+for(i in list(FALSE, integer(), -seq_len(n)))
+  for(value in list(numeric(), 7, "foo", list(1))) {
+    df[i ,  ] <- value
+    df[i , 1] <- value # had failed after svn c75474
+    stopifnot(identical(df, d0))
+    ## "expand": new column created even for empty <i>; some packages rely on this
+    df[i, "new"] <- value ## -> produces new column of .. NA
+    stopifnot(identical(df[,"new"], rep(as1NA(value), n)))
+    df <- d0
+  }
+## gave error in R <= 3.5.1
+df[7:12,] <- d0 + 1L
+stopifnot(exprs = {
+    is.data.frame(df)
+    identical(dim(df), c(12L, 2L))
+    identical(df[1:6,], d0)
+})
+## had failed after svn c75474
+
+
+## Check that active binding uses primitive quote() and doesn't pick
+## up `quote` binding on the search path
+quote <- function(...) stop("shouldn't be called")
+if (exists("foo", inherits = FALSE)) rm(foo)
+makeActiveBinding("foo", identity, environment())
+x <- (foo <- "foo")
+stopifnot(identical(x, "foo"))
+rm(quote, foo, x)
+
+
+## .format.zeros() when zero.print is "wide":
+x <- c(outer(c(1,3,6),10^(-5:0)))
+(fx <- formatC(x))
+stopifnot(identical(nchar(fx), rep(c(5L, 6:3, 1L), each=3)))
+x3 <- round(x, 3)
+tools::assertWarning(
+  fz1. <- formatC(x3,          zero.print="< 0.001",   replace.zero=FALSE))# old default
+ (fz1  <- formatC(x3,          zero.print="< 0.001"))#,replace.zero=TRUE  :  new default
+ (fzw7 <- formatC(x3, width=7, zero.print="< 0.001"))
+for(fz in list(fz1, fz1., fzw7)) stopifnot(identical(grepl("<", fz), x3 == 0))
+## fz1, fzw7 gave error (for 2 bugs) in R <= 3.5.x
+
+
+## Attempting to modify an object in a locked binding could succeed
+## before signaling an error:
+foo <- function() {
+    zero <- 0           ## to fool constant folding
+    x <- 1 + zero       ## value of 'x' has one reference
+    lockBinding("x", environment())
+    tryCatch(x[1] <- 2, ## would modify the value, then signal an error
+             error = identity)
+    stopifnot(identical(x, 1))
+}
+foo()
+
+
+## formalArgs()  should conform to names(formals()) also in looking up fun: PR#17499
+by <- function(a, b, c) "Bye!" # Overwrites base::by, as an example
+foo <- function() {
+  f1 <- function(a, ...) {}
+  list(nf = names(formals("f1")),
+       fA = formalArgs   ("f1"))
+}
+stopifnot(exprs = {
+    identical(names(formals("by")), letters[1:3])
+    identical(formalArgs   ("by") , letters[1:3])
+    { r <- foo(); identical(r$nf, r$fA) }
+})
+## gave "wrong" result and error in R <= 3.5.x
+
+
+
+## Subassigning multiple new data.frame columns (with specified row), PR#15362, 17504
+z0 <- z1 <- data.frame(a=1, s=1)
+z0[2, c("a","r","e")] <- data.frame(a=1, r=8, e=9)
+z1[2, "r"] <- data.frame(r=8)
+x <- x0 <- data.frame(a=1:3, s=1:3)
+x[2, 3:4] <- data.frame(r=8, e=9)
+stopifnot(exprs = {
+    identical(z0, data.frame(a = c(1, 1), s = c(1, NA), r = c(NA, 8), e = c(NA, 9)))
+    identical(z1, data.frame(a = c(1,NA), s = c(1, NA), r = c(NA, 8)))
+    identical(x, cbind(x0,
+                       data.frame(r = c(NA, 8, NA), e = c(NA, 9, NA))))
+})
+d0 <- d1 <- d2 <- d3 <- d4 <- d5 <- d6 <- d7 <- data.frame(n=1:4)
+##
+d0[, 2] <- c2 <- 5:8
+d0[, 3] <- c3 <- 9:12
+d1[, 2:3] <- list(c2, c3)
+d2[  2:3] <- list(c2, c3)
+d3[TRUE, 2] <- c2 ; d3[TRUE, 3] <- c3
+d4[TRUE, 2:3] <- list(c2, c3)
+d5[1:4,  2:3] <- list(c2, c3)
+d6[TRUE, 1:2] <- list(c2, c3)
+d7[    , 1:2] <- list(c2, c3)
+stopifnot(exprs = {
+    identical(d0, d1)
+    identical(d0, d2)
+    identical(d0, d3)
+    identical(d0, d4)
+    identical(d0, d5)
+    ##
+    identical(d6, d7)
+    identical(d6, structure(list(n = c2, V2 = c3),
+                            row.names = c(NA, -4L), class = "data.frame"))
+})
+## d4, d5 --> 'Error in `*tmp*`[[j]] : subscript out of bounds'
+## d6     --> 'Error in x[[j]] <- `*vtmp*` :
+##				more elements supplied than there are to replace
+## in R <= 3.5.1
+
+
+## str() now even works with invalid objects:
+moS <- mo <- findMethods("isSymmetric")
+attr(mo, "arguments") <- NULL
+validObject(mo, TRUE)# shows what's wrong
+tools::assertError(capture.output( mo ))
+op <- options(warn = 1)# warning:
+str(mo, max.level = 2)
+options(op)# revert
+## in R <= 3.5.x, str() gave error instead of the warning
+
+
+## seq.default() w/ integer overflow in border cases: -- PR#17497, Suharto Anggono
+stopifnot(is.integer(iMax <- .Machine$integer.max), iMax == 2^31-1,
+          is.integer(iM2 <- iMax-1L), # = 2^31 - 2
+          (t30 <- 1073741824L) == 2^30 ,
+          is.integer(i3t30 <- c(-t30, 0L, t30)))
+for(seq in c(seq, seq.int)) # seq() -> seq.default() to behave as seq.int() :
+  stopifnot(exprs = {
+    seq(iM2, length=2L) == iM2:(iM2+1L) # overflow warning and NA
+    seq(iM2, length=3L) == iM2:(iM2+2 ) # Error in if (from == to) ....
+              seq(-t30, t30, length=3) == i3t30 # overflow warning and NA
+    ## Next two ok for the "seq.cumsum-patch" (for "seq.double-patch", give "double"):
+    identical(seq(-t30, t30, length=3L),  i3t30)# Error in if(is.integer(del <- to - from)
+    identical(seq(-t30, t30, t30)      ,  i3t30)# Error .. invalid '(to-from)/by'+NA warn.
+  })
+## each of these gave integer overflows  errors  or  NA's + warning in  R <= 3.5.x
+
+
+## seq.int(*, by=<int.>, length = n) for non-integer 'from' or 'to'
+stopifnot(exprs = {
+    identical(seq.int(from = 1.5, by = 2, length = 3),
+              s <- seq(from = 1.5, by = 2, length = 3))
+    s == c(1.5, 3.5, 5.5)
+    identical(seq.int(to = -0.1, by = -2, length = 2),
+              s <- seq(to = -0.1, by = -2, length = 2))
+    all.equal(s, c(1.9, -0.1))
+    identical(seq.int(to = pi, by = 0, length = 1), pi)
+})
+## returned integer sequences in all R versions <= 3.5.1
 
 
 
