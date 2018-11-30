@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-07-01 r1047) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-11-28 r1063) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-07-01 r74950) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-11-28 r75712) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -136,7 +136,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical(a.m, array(v, dim=dim(mn), dimnames=dimnames(mn)))
 + 	  )
 > showProc.time()
-Time elapsed:  0.53 0.005 0.534 
+Time elapsed:  0.367 0.016 0.384 
 > 
 > ## Bug found thanks to Timothy Mak, Feb 3, 2017:
 > ## sparseMatrix logical indexing with (partial) NA:
@@ -235,7 +235,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical3(m[!sel],  m[!ssel], .asmatrix(m)[.asmatrix(!ssel)])
 + 	  )
 > showProc.time()
-Time elapsed:  0.209 0 0.211 
+Time elapsed:  0.174 0.012 0.186 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -571,7 +571,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time elapsed:  1.155 0 1.158 
+Time elapsed:  0.734 0.004 0.738 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -729,7 +729,7 @@ Time elapsed:  1.155 0 1.158
 +     assert.EQ.mat(T[i,i], ss[i,i])
 + }
 > showProc.time()
-Time elapsed:  0.286 0 0.285 
+Time elapsed:  0.237 0.004 0.241 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -939,7 +939,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  all(sm[,-(1:3)] == 0)
 + 	  )
 > showProc.time()
-Time elapsed:  0.234 0 0.234 
+Time elapsed:  0.208 0 0.208 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -996,7 +996,7 @@ Time elapsed:  0.234 0 0.234
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.> showProc.time()
-Time elapsed:  0.212 0 0.212 
+Time elapsed:  0.166 0.004 0.17 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -1174,7 +1174,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 > stopifnot(is(T, "dtCMatrix"), identical(T[,3], c(10,10,10,0,0)),
 + 	  Qidentical(as(Z, "matrix"), z))
 > showProc.time()
-Time elapsed:  0.692 0.003 0.697 
+Time elapsed:  0.542 0 0.542 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -1383,7 +1383,7 @@ Warning in command '`[<-`(`*tmp*`, i, value = 1:7)':
 > ## mixing of negative and positive must give error
 > assertError(mT[-1:1,])
 > showProc.time()
-Time elapsed:  0.311 0 0.31 
+Time elapsed:  0.296 0 0.296 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -1491,7 +1491,7 @@ r5   .   2  4   .  6  .  .
 r2  2
 r4  .
 > showProc.time()
-Time elapsed:  0.288 0 0.289 
+Time elapsed:  0.254 0 0.254 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -1712,7 +1712,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time elapsed:  0.824 0 0.823 
+Time elapsed:  0.596 0 0.596 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -1855,7 +1855,7 @@ r5  TRUE TRUE FALSE TRUE TRUE TRUE TRUE
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time elapsed:  0.504 0.008 0.513 
+Time elapsed:  0.366 0.008 0.374 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -1929,7 +1929,7 @@ M[m,i,m] : nargs()=3
 Csp[m,i,l] : nargs()=4
 > 
 > showProc.time()
-Time elapsed:  1.374 0.255 1.688 
+Time elapsed:  1.36 0.176 1.536 
 > options(op)# revert
 > ##
 > if(doExtras) {#-----------------------------------------------------------------
@@ -2020,10 +2020,10 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 > 
 > 
 > showProc.time()
-Time elapsed:  0.089 0 0.089 
+Time elapsed:  0.074 0 0.074 
 > 
 > if(!interactive()) warnings()
 > 
 > proc.time()
    user  system elapsed 
-  7.645   0.326   8.028 
+  6.098   0.239   6.331 

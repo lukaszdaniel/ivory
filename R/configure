@@ -681,7 +681,7 @@ SHLIB_OPENMP_FFLAGS
 SHLIB_OPENMP_FCFLAGS
 SHLIB_OPENMP_CXXFLAGS
 SHLIB_OPENMP_CFLAGS
-FCLIBS
+FCLIBS_XTRA
 OPENMP_FCFLAGS
 FCFLAGS_f95
 FCFLAGS_f90
@@ -45518,7 +45518,7 @@ fi
 
 
 ## x86 Solaris' f95 needs additional libs when building a DSO
-FCLIBS=${FCLIBS}
+FCLIBS_XTRA=${FCLIBS_XTRA}
 
 
 ## OpenMP package stuff (needs to come *after* configuration of all

@@ -247,6 +247,9 @@
 
       \item Visibility macros such as \samp{C_VISIBILITY} can now be
       user-set  (including to empty), e.g.\sspace{}in \file{config.site}.
+
+      \item Macro \samp{FCLIBS} which has sometimes been needed on
+      Solaris has been renamed to \samp{FCLIBS_XTRA}.
     }
   }
 
@@ -634,6 +637,11 @@
       \item \code{seq.int(*, by=by, length=n)} no longer wrongly
       \dQuote{drops fractional parts} when \code{by} is integer, thanks
       to Suharto Anggono's report \PR{17506}.
+      
+      \item Buffering is disabled for \code{file()} connections to
+      irregular files (like sockets), as well as \code{fifo()} and
+      \code{pipe()} connections.  Fixes \PR{17470}, reported by Chris
+      Culnane.
     }
   }
 }

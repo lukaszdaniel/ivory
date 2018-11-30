@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-10-16 r1062) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-11-28 r1063) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-10-16 r75673) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-11-28 r75712) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3385,6 +3385,62 @@ List of 18 components
 > 
 > 
 > cleanEx()
+> nameEx("quartz")
+> ### * quartz
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: quartz
+> ### Title: macOS Quartz Device
+> ### Aliases: quartz quartz.options quartz.save
+> ### Keywords: device
+> 
+> ### ** Examples
+> ## Don't run: 
+> ##D ## Only on a Mac,
+> ##D ## put something like this is your .Rprofile to customize the defaults
+> ##D setHook(packageEvent("grDevices", "onLoad"),
+> ##D         function(...) grDevices::quartz.options(width = 8, height = 6,
+> ##D                                                 pointsize = 10))
+> ## End (Don't run)
+> 
+> 
+> cleanEx()
+> nameEx("quartzFonts")
+> ### * quartzFonts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: quartzFonts
+> ### Title: Quartz Fonts Setup
+> ### Aliases: quartzFont quartzFonts
+> ### Keywords: device
+> 
+> ### ** Examples
+> 
+> if(.Platform$OS.type == "unix") { # includes Mac
++ 
++  utils::str( quartzFonts() ) # a list(serif = .., sans = .., mono = ..)
++  quartzFonts("mono") # the list(mono = ..) sublist of quartzFonts()
++ ## Don't run: 
++ ##D   ## for East Asian locales you can use something like
++ ##D   quartzFonts(sans = quartzFont(rep("AppleGothic", 4)),
++ ##D 	      serif = quartzFont(rep("AppleMyungjp", 4)))
++ ##D   ## since the default fonts may well not have the glyphs needed
++ ## End (Don't run)
++ }
+List of 3 components
+ $ serif: character [1:4] "Times-Roman" "Times-Bold" "Times-Italic" "Times-BoldItalic"
+ $ sans : character [1:4] "Helvetica" "Helvetica-Bold" "Helvetica-Oblique" "Helvetica-BoldOblique"
+ $ mono : character [1:4] "Courier" "Courier-Bold" "Courier-Oblique" "Courier-BoldOblique"
+$mono
+[1] "Courier"             "Courier-Bold"        "Courier-Oblique"    
+[4] "Courier-BoldOblique"
+
+> 
+> 
+> 
+> cleanEx()
 > nameEx("recordGraphics")
 > ### * recordGraphics
 > 
@@ -3560,6 +3616,81 @@ v 0.98039216 0.7647059 0.4588235 0.8549020 0.9960784
 > ## See  help(persp) {after attaching the 'graphics' package}
 > ##      -----------
 > 
+> 
+> 
+> cleanEx()
+> nameEx("windows")
+> ### * windows
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: windows
+> ### Title: Windows Graphics Devices
+> ### Aliases: windows win.graph win.metafile win.print print.SavedPlots
+> ###   [.SavedPlots
+> ### Keywords: device
+> 
+> ### ** Examples
+> ## Don't run: 
+> ##D ## A series of plots written to a sequence of metafiles
+> ##D if(.Platform$OS.type == "windows")
+> ##D    win.metafile("Rplot%02d.wmf", pointsize = 10)
+> ## End (Don't run)
+> 
+> 
+> cleanEx()
+> nameEx("windows.options")
+> ### * windows.options
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: windows.options
+> ### Title: Auxiliary Function to Set/View Defaults for Arguments of
+> ###   windows()
+> ### Aliases: windows.options
+> ### Keywords: device
+> 
+> ### ** Examples
+> ## Don't run: 
+> ##D ## put something like this is your .Rprofile to customize the defaults
+> ##D setHook(packageEvent("grDevices", "onLoad"),
+> ##D         function(...)
+> ##D             grDevices::windows.options(width = 8, height = 6,
+> ##D                                        xpos = 0, pointsize = 10,
+> ##D                                        bitmap.aa.win = "cleartype"))
+> ## End (Don't run)
+> 
+> 
+> cleanEx()
+> nameEx("windowsFonts")
+> ### * windowsFonts
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: windowsFonts
+> ### Title: Windows Fonts
+> ### Aliases: windowsFont windowsFonts
+> ### Keywords: device
+> 
+> ### ** Examples
+> 
+> if(.Platform$OS.type == "windows") withAutoprint({
++   windowsFonts()
++   windowsFonts("mono")
++ })
+> ## Don't run: 
+> ##D ## set up for Japanese: needs the fonts installed
+> ##D windows()  # make sure we have the right device type (available on Windows only)
+> ##D Sys.setlocale("LC_ALL", "ja")
+> ##D windowsFonts(JP1 = windowsFont("MS Mincho"),
+> ##D              JP2 = windowsFont("MS Gothic"),
+> ##D              JP3 = windowsFont("Arial Unicode MS"))
+> ##D plot(1:10)
+> ##D text(5, 2, "\u{4E10}\u{4E00}\u{4E01}", family = "JP1")
+> ##D text(7, 2, "\u{4E10}\u{4E00}\u{4E01}", family = "JP1", font = 2)
+> ##D text(5, 1.5, "\u{4E10}\u{4E00}\u{4E01}", family = "JP2")
+> ##D text(9, 2, "\u{5100}", family = "JP3")
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -3897,7 +4028,7 @@ $zlab
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  9.022 0.268 9.291 0 0 
+Time elapsed:  8.884 0.228 9.114 0 0 
 > grDevices::dev.off()
 null device 
           1 

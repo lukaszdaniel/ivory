@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2018-10-16 r1062) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2018-11-28 r1063) -- "Internationalized Version of R"
 Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-10-16 r75673) -- "Unsuffered Consequences"
+R Under development (unstable) (2018-11-28 r75712) -- "Unsuffered Consequences"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -210,7 +210,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x3ab4040>
+<environment: 0x3b8c060>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -919,23 +919,7 @@ An illustration of lexical scoping.
 > ### ** Examples
 > 
 > undoc("tools")                  # Undocumented objects in 'tools'
-Undocumented code objects:
-  'vignetteInfo'
 > 
-> 
-> 
-> cleanEx()
-> nameEx("vignetteDepends")
-> ### * vignetteDepends
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: vignetteDepends
-> ### Title: Retrieve Dependency Information for a Vignette
-> ### Aliases: vignetteDepends
-> ### Keywords: utilities
-> 
-> ### ** Examples
 > 
 > 
 > cleanEx()
@@ -962,6 +946,20 @@ List of 6 components
   ..$ filter : character "Sweave"
   ..$ control: character "-t"
 > 
+> 
+> 
+> cleanEx()
+> nameEx("vignetteInfo")
+> ### * vignetteInfo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vignetteInfo
+> ### Title: Basic Information about a Vignette
+> ### Aliases: vignetteInfo
+> ### Keywords: utilities
+> 
+> ### ** Examples
 > 
 > 
 > cleanEx()
@@ -1007,7 +1005,7 @@ List of 6 components
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.308 0.02 0.328 0 0 
+Time elapsed:  0.288 0 0.288 0 0 
 > grDevices::dev.off()
 null device 
           1 
