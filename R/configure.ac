@@ -497,10 +497,7 @@ AC_ARG_VAR([CPICFLAGS],
            [special flags for compiling C code to be turned into a
             shared object.])
 AC_ARG_VAR([FPICFLAGS],
-           [special flags for compiling fixed-form Fortran code to be 
-	    turned into a shared object.])
-AC_ARG_VAR([FCPICFLAGS],
-           [special flags for compiling free-form Fortran code to be
+           [special flags for compiling Fortran code to be 
 	    turned into a shared object.])
 AC_ARG_VAR([SHLIB_LD],
            [command for linking shared objects which contain object
@@ -644,13 +641,17 @@ AC_GNU_SOURCE ## see note above
 AC_PROG_CPP
 R_PROG_CPP_CPPFLAGS
 
-## As from R 3.6.0, prefer the modern Fortran compiler for .f files
-echo "looking for a modern Fortran compiler for FC and F77"
-AC_PROG_FC()
-: ${F77=${FC}}
-## see if the user set FFLAGS: used for Intel compilers below
-userFFLAGS=${FFLAGS}
-R_PROG_F77
+## As from R 3.6.0, use the modern Fortran compiler for .f files
+echo "looking for a modern Fortran compiler"
+AC_PROG_FC
+if test -z "${FC}"; then
+  AC_MSG_ERROR([No Fortran compiler found])
+fi
+F77=${FC}
+## see if the user set FFLAGS, otherwise use what AC_PROG_FC chose
+if test "${FFLAGS+set}" != set; then
+  FFLAGS=${FCFLAGS}
+fi
 
 AC_PROG_CXX
 ## check this actually compiles
@@ -680,8 +681,8 @@ R_DEFS=${DEFS}
 AC_SUBST(R_DEFS)
 
 ## Libtool.
-## (Run this after R_PROG_F77, as AC_PROG_LIBTOOL checks for a
-## Fortran 77 compiler and sets F77 accordingly.)
+## (Run this after selecting the Fortan compiler as AC_PROG_LIBTOOL
+## checks for a Fortran 77 compiler and sets F77 accordingly.)
 AC_DISABLE_STATIC
 LT_INIT
 AC_SUBST(LIBTOOL_DEPS)
@@ -929,26 +930,27 @@ fi
 R_PROG_CC_MAKEFRAG
 R_PROG_CC_LO_MAKEFRAG
 
+## for C compiler
 R_OPENMP
 
-### *** fixed-form Fortran compiler.
+### *** Fortran compiler.
 
-R_PROG_F77_FLIBS
+R_PROG_FC_FLIBS
 if test -z "$FLIBS_IN_SO"; then
   FLIBS_IN_SO=${FLIBS}
 fi
 AC_SUBST(FLIBS_IN_SO)
-R_PROG_F77_APPEND_UNDERSCORE
-R_PROG_F77_CAN_RUN
-R_PROG_F77_CC_COMPAT
-R_PROG_F77_CC_COMPAT_COMPLEX
+R_PROG_FC_APPEND_UNDERSCORE
+R_PROG_FC_CAN_RUN
+R_PROG_FC_CC_COMPAT
+R_PROG_FC_CC_COMPAT_COMPLEX
 
 AM_CONDITIONAL(COMPILE_FORTRAN_DOUBLE_COMPLEX,
                [test "x${HAVE_FORTRAN_DOUBLE_COMPLEX}" != x])
 
-AC_LANG_PUSH(Fortran 77)
+AC_LANG_PUSH(Fortran)
 R_OPENMP
-AC_LANG_POP(Fortran 77)
+AC_LANG_POP(Fortran)
 
 
 ### *** C++ compiler
@@ -1019,90 +1021,8 @@ case "${host_os}" in
     esac
     AC_CHECK_LIB(dld, shl_load, [R_XTRA_LIBS="-ldld ${R_XTRA_LIBS}"])
     ;;
-  linux*)
-    case  "${CC}" in
-      ## Intel compiler
-      *icc*)
-	## icc declares __GNUC__, so it picks up CFLAGS intended for gcc.
-	if test "$ac_test_CFLAGS" != set; then
-          if test $ac_cv_prog_cc_g = yes; then
-	    case "${host_cpu}" in
-	      x86_64)
-	        CFLAGS="-g -O2 -std=c99"
-		;;
-	      *)
-	        ## on ix86 optimization fails
-                CFLAGS="-g -std=c99"
-		;;
-	    esac
-          else
-	    case "${host_cpu}" in
-	      x86_64)
-	        CFLAGS="-O2 -std=c99"
-		;;
-	      *)
-                CFLAGS="-std=c99"
-		;;
-	    esac
-          fi
-        fi
-	## used to set IEEE flag, but this is version-dependent.
-        ;;
-    esac
-    case  "${F77}" in
-      ## Intel compilers
-      *ifc|*ifort)
-	if test "x$userFFLAGS" = x; then
-          if test $ac_cv_prog_f77_g = yes; then
-	    case "${host_cpu}" in
-	      x86_64)
-	        FFLAGS="-g -O2"
-		;;
-	      *)
-                FFLAGS="-g"
-		;;
-	    esac
-          else
-	    case "${host_cpu}" in
-	      x86_64)
-	        FFLAGS="-O2"
-		;;
-	      *)
-	        ## on ix86 optimization of dlamc.f fails
-                FFLAGS=
-		;;
-	    esac
-          fi
-        fi
-        ;;
-    esac
-    case  "${CXX}" in
-      ## Intel compilers
-      *icpc|*icc)
-	if test "$ac_test_CXXFLAGS" != set; then
-          if test $ac_cv_prog_cxx_g = yes; then
-	    case "${host_cpu}" in
-	      x86_64)
-	        CXXFLAGS="-g -O2"
-		;;
-	      *)
-                CXXFLAGS="-g"
-		;;
-	    esac
-          else
-	    case "${host_cpu}" in
-	      x86_64)
-	        CXXFLAGS="-O2"
-		;;
-	      *)
-                CXXFLAGS=
-		;;
-	    esac
-          fi
-        fi
-        ;;
-    esac
-    ;;
+  ## We no longer special-case Intel compilers on Linux:
+  ## what we had dated from Nov 2005.
   mingw*|windows*|winnt)
     AC_DEFINE(HAVE_NO_SYMBOL_UNDERSCORE)
     ;;
@@ -1113,11 +1033,11 @@ case "${host_os}" in
     ;;
 esac
 
-## This was -ffloat-store on all gfortran/g77 platforms prior to 3.5.0
+## This was -ffloat-store on all gfortran/g77 platforms prior to R 3.5.0
 ## Suggestion adopted from https://gcc.gnu.org/wiki/FloatingPointMath
 ## It was already the default on 32-bit macOS
 if test "${SAFE_FFLAGS+set}" != set; then
-  if test "x${ac_cv_f77_compiler_gnu}" = xyes; then
+  if test "x${ac_cv_fc_compiler_gnu}" = xyes; then
     case "${host_cpu}" in
       i*86|x86_64)
       SAFE_FFLAGS="${FFLAGS} -msse2 -mfpmath=sse"
@@ -1165,7 +1085,7 @@ R_ABI
 ## MAIN_LD, MAIN_LDFLAGS
 ##   command and flags for loading the main binary so that it will load
 ##   shared objects (DLLs) at runtime, also for profiling.
-## CPICFLAGS, CXXPICFLAGS, FPICFLAGS, FCPICFLAGS
+## CPICFLAGS, CXXPICFLAGS, FPICFLAGS
 ##   flags for compiling C, C++, and Fortran library code.
 ## SHLIB_LD, SHLIB_LDFLAGS
 ##   command and flags for creating DLLs (which contain object files
@@ -1259,8 +1179,7 @@ if test "${GCC}" = yes; then
   esac
   shlib_ldflags="-shared"
 fi
-## G77 includes gfortran
-if test "${G77}" = yes; then
+if test "${ac_cv_fc_compiler_gnu}" = yes; then
   case "${host_cpu}" in
     sparc*|ppc64*|powerpc64*|s390*)
       fpicflags="-fPIC"
@@ -1271,7 +1190,7 @@ if test "${G77}" = yes; then
   esac
 fi
 ## Assume flang is the same as clang (it is a modified front end)
-case "${F77}" in
+case "${FC}" in
   *flang)
     fpicflags=${cpicflags}
     ;;
@@ -1368,7 +1287,8 @@ rm -f libconftest${DYLIB_EXT} conftest.c
     ## * libRblas must be 2-level, dyn lookup because of xerbla which is undefined
     cpicflags="${darwin_pic}"
     cxxpicflags="${darwin_pic}"
-    ## macOS does not have a Fortran compiler, so this is speculative
+    ## macOS does not have a Fortran compiler, so this is speculative,
+    ## but works for clang/gfortran combination
     fpicflags="${darwin_pic}"
     shlib_cxxldflags="${shlib_ldflags}"
     ;;
@@ -1390,7 +1310,7 @@ rm -f libconftest${DYLIB_EXT} conftest.c
         cpicflags="+Z"
         ;;
     esac
-    case "${F77}" in
+    case "${FC}" in
       f77|fort77|f90)
         fpicflags="+Z"
         ;;
@@ -1425,7 +1345,7 @@ rm -f libconftest${DYLIB_EXT} conftest.c
         cpicflags="-fpic"
 	;;
     esac
-    case  "${F77}" in
+    case  "${FC}" in
       ## Intel compilers
       *ifc|*ifort)
         fpicflags="-fpic"
@@ -1485,8 +1405,7 @@ rm -f libconftest${DYLIB_EXT} conftest.c
         if test "${GCC}" = yes; then
           cpicflags="-fPIC"
         fi  
-	## G77 includes gfortran
-        if test "${G77}" = yes; then
+	if test "${ac_cv_fc_compiler_gnu}" = yes; then
           fpicflags="-fPIC"
         fi
         if test "${GXX}" = yes; then
@@ -1523,8 +1442,8 @@ rm -f libconftest${DYLIB_EXT} conftest.c
         fi
       fi
     fi
-    ## G77 includes gfortran
-    if test "${G77}" != yes; then
+    if test "${ac_cv_fc_compiler_gnu}" != yes; then
+      ## Oracle compiler
       fpicflags="-PIC"
     else
       fpicflags="-fPIC"
@@ -1701,7 +1620,6 @@ AC_SUBST(CPICFLAGS)
 AC_SUBST(CXXPICFLAGS)
 AC_SUBST(DYLIB_LD)
 AC_SUBST(DYLIB_LDFLAGS)
-AC_SUBST(FCPICFLAGS)
 AC_SUBST(FPICFLAGS)
 AC_SUBST(SHLIB_CXXLD)
 AC_SUBST(SHLIB_CXXLDFLAGS)
@@ -1767,7 +1685,7 @@ AC_LANG_POP(C++)
 ##    If both MAIN_LD and DYLIB_LD were not specified by the user and
 ##    equal CC and this was determined to support OpenMP, then we (try
 ##    to) provide OpenMP support by adding OPENMP_CFLAGS to the linker
-##    flags and OPENMP_CFLAGS and OPENMP_FFLAGS to the C and Fortran 77
+##    flags and OPENMP_CFLAGS and OPENMP_FFLAGS to the C and Fortran
 ##    compiler flags, and defining HAVE_OPENMP.
 ##
 ## (The fixed-form Fortran compiler is never used for linking by default.)
@@ -1790,8 +1708,8 @@ else
 fi
 ## Currently unused: see comment in Makeconf.in
 if test -z "${R_OPENMP_FFLAGS+set}" -a \
-        "x${ac_cv_prog_f77_openmp}" != "xunsupported"; then
-  R_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
+        "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
+  R_OPENMP_FFLAGS="${OPENMP_FCFLAGS}"
 fi
 AC_SUBST(R_OPENMP_CFLAGS)
 AC_SUBST(R_OPENMP_FFLAGS)
@@ -2497,6 +2415,8 @@ AC_FC_SRCEXT(f95, [dummy=1], [dummy=0])
 ## We could call AC_FC_FIXEDFORM: adds to FCFLAGS
 R_OPENMP
 AC_LANG_POP()
+
+## SHLIB_FCLD and {SHLIB_FCLDFLAGS are legacy
 if test -z "${SHLIB_FCLD}"; then
   shlib_fcld_was_given=no
   SHLIB_FCLD="\$(FC)"
@@ -2504,6 +2424,7 @@ fi
 : ${SHLIB_FCLDFLAGS="${SHLIB_LDFLAGS}"}
 AC_SUBST(SHLIB_FCLD)
 AC_SUBST(SHLIB_FCLDFLAGS)
+
 ## x86 Solaris' f95 needs additional libs when building a DSO
 FCLIBS_XTRA=${FCLIBS_XTRA}
 AC_SUBST(FCLIBS_XTRA)
@@ -2525,7 +2446,7 @@ if test "x${shlib_ld_was_given}" = xno -a \
   AC_DEFINE(SUPPORT_OPENMP, 1,
             [Define if you have C/C++/Fortran OpenMP support for package code.])
 fi
-## This assumes that OpenMP support in the C compiler includes compilation by F77
+## This assumes that OpenMP support in the C compiler includes compilation by FC
 if test -z "${SHLIB_OPENMP_CFLAGS+set}" -a \
         "x${shlib_ld_was_given}" = xno -a \
         "${SHLIB_LD}" = "\$(CC)" -a \
@@ -2533,8 +2454,8 @@ if test -z "${SHLIB_OPENMP_CFLAGS+set}" -a \
         "x${ac_cv_prog_c_openmp}" != "x"; then
   SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
   if test -z "${SHLIB_OPENMP_FFLAGS+set}" -a \
-          "x${ac_cv_prog_f77_openmp}" != "xunsupported"; then
-    SHLIB_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
+          "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
+    SHLIB_OPENMP_FFLAGS="${OPENMP_FCFLAGS}"
   fi
 fi
 if test -z "${SHLIB_OPENMP_CXXFLAGS+set}" -a \
@@ -2543,77 +2464,10 @@ if test -z "${SHLIB_OPENMP_CXXFLAGS+set}" -a \
         "x${ac_cv_prog_cxx_openmp}" != "xunsupported"; then
   SHLIB_OPENMP_CXXFLAGS="${OPENMP_CXXFLAGS}"
 fi
-if test -z "${SHLIB_OPENMP_FCFLAGS+set}" -a \
-        "x${shlib_fcld_was_given}" = xno -a \
-        "${SHLIB_FCLD}" = "\$(FC)" -a \
-        "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
-  SHLIB_OPENMP_FCFLAGS="${OPENMP_FCFLAGS}"
-fi
 
 AC_SUBST(SHLIB_OPENMP_CFLAGS)
 AC_SUBST(SHLIB_OPENMP_CXXFLAGS)
-AC_SUBST(SHLIB_OPENMP_FCFLAGS)
 AC_SUBST(SHLIB_OPENMP_FFLAGS)
-
-
-## Look for FCPICFLAGS
-## Debian in their wisdom have f95 as a link to gfortran, so
-## use this to pick out gfortran (even though it is unreliable).
-if test "${ac_cv_fc_compiler_gnu}" = yes; then
-  case "${host_cpu}" in
-    sparc*|ppc64*|powerpc64*|s390*)
-      fcpicflags="-fPIC"
-      ;;
-    *)
-      fcpicflags="-fpic"
-      ;;
-  esac
-fi
-case "${host_os}" in
-  darwin*)
-     ## macOS does not have a Fortran compiler, so this is speculative
-    fcpicflags="${darwin_pic}"
-    ;;
-  hpux*)
-    case "${FC}" in
-      f90)
-        fcpicflags="+Z"
-        ;;
-    esac
-    ;;
-  linux*)
-    case  "${FC}" in
-      ## Intel compilers: probably get identified as GNU, but make sure.
-      *ifc|*ifort)
-        fcpicflags="-fpic"
-        ;;
-      ## Portland Group
-      *pgf95|*pgf90)
-        fcpicflags="-fpic"
-        ;;
-      *flang)
-        fcpicflags=${cpicflags}
-        ;;
-    esac
-    ;;
-  solaris*)
-    if test "${ac_cv_fc_compiler_gnu}" = yes; then
-      fcpicflags="-fPIC"
-    else
-      fcpicflags="-PIC"
-    fi
-    ;;
-esac
-: ${FCPICFLAGS="${fcpicflags}"}
-if test -z "${FCPICFLAGS}"; then
-  case "${host_os}" in
-    aix*|mingw*)
-      ;;
-    *)
-      AC_MSG_WARN([I could not determine FCPICFLAGS.])
-      ;;
-  esac
-fi
 
 
 ## Make sure -L terms come first in LIBS.
@@ -2859,7 +2713,7 @@ r_cxx98_compiler="${CXX98} ${CXX98STD} ${R_XTRA_CXXFLAGS} ${CXX98FLAGS}"
 r_cxx11_compiler="${CXX11} ${CXX11STD} ${R_XTRA_CXXFLAGS} ${CXX11FLAGS}"
 r_cxx14_compiler="${CXX14} ${CXX14STD} ${R_XTRA_CXXFLAGS} ${CXX14FLAGS}"
 r_cxx17_compiler="${CXX17} ${CXX17STD} ${R_XTRA_CXXFLAGS} ${CXX17FLAGS}"
-r_f77_compiler="${F77} ${R_XTRA_FFLAGS} ${FFLAGS}"
+r_f77_compiler="${FC} ${R_XTRA_FFLAGS} ${FFLAGS}"
 r_f95_compiler="${FC} ${FCFLAGS}"
 r_objc_compiler="${OBJC} ${OBJCFLAGS}"
 r_interfaces=

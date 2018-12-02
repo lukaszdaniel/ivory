@@ -210,7 +210,7 @@ fi
 ## ------------------------
 ## Building the R Texinfo manuals requires texinfo v5.1 or later.
 ## Set shell variable r_cv_prog_texi2any_v5 to 'yes' if a recent
-## enough Makeinfo is found, and to 'no' otherwise.
+## enough texi2any aka  makeinfo is found, and to 'no' otherwise.
 ## If you change the minimum version here, also change it in
 ## doc/manual/Makefile.in and doc/manual/R-admin.texi.
 AC_DEFUN([_R_PROG_MAKEINFO_VERSION],
@@ -646,6 +646,7 @@ fi
 
 ### * Fortran compiler and its characteristics.
 
+## Unused
 ## R_PROG_F77
 ## ----------
 ## Find a fixed-form Fortran compiler (formerly Fortran 77)
@@ -699,14 +700,15 @@ else
 fi
 ])# R_PROG_F77
 
-## R_PROG_F77_FLIBS
+## R_PROG_FC_FLIBS
 ## ----------------
-## Run AC_F77_LIBRARY_LDFLAGS, and fix some known problems with FLIBS.
+## Run AC_FC_LIBRARY_LDFLAGS rename to FLIBS, and fix some known problems with FLIBS.
 ## Only do this if the user has not already set FLIBS.
-AC_DEFUN([R_PROG_F77_FLIBS],
-[AC_BEFORE([$0], [AC_F77_LIBRARY_LDFLAGS])
+AC_DEFUN([R_PROG_FC_FLIBS],
+[AC_BEFORE([$0], [AC_FC_LIBRARY_LDFLAGS])
 if test -z "${FLIBS}"; then
 ##
+## Historic comment
 ## Currently (Autoconf 2.50 or better, it seems) FLIBS also contains all
 ## elements of LIBS when AC_F77_LIBRARY_LDFLAGS is run.  This is because
 ## _AC_PROG_F77_V_OUTPUT() uses 'eval $ac_link' for obtaining verbose
@@ -714,10 +716,11 @@ if test -z "${FLIBS}"; then
 ## LIBS.  Most likely a bug, and a nuisance in any case ...
 ## But we cannot simply eliminate the elements in FLIBS duplicated from
 ## LIBS (e.g. '-lm' should be preserved).  Hence, we try to call
-## AC_F77_LIBRARY_LDFLAGS() with LIBS temporarily set to empty.
+## AC_FC_LIBRARY_LDFLAGS() with LIBS temporarily set to empty.
 r_save_LIBS="${LIBS}"
 LIBS=
-AC_F77_LIBRARY_LDFLAGS
+AC_FC_LIBRARY_LDFLAGS
+FLIBS=${FCLIBS}
 if test -z "${MAIN_LD}" ; then
   LIBS=
   R_C_LIBRARY_LDFLAGS
@@ -725,10 +728,11 @@ else
   CLIBS=
 fi
 LIBS="${r_save_LIBS}"
+## Comments here are ancient and about F77 version ....
 ## Currently g77 on Darwin links against '-lcrt1.o' (and for GCC 3.1 or
 ## better also against '-lcrtbegin.o'), which (unlike '-lcrt0.o') are
 ## not stripped by AC_F77_LIBRARY_LDFLAGS.  This in particular causes
-## R_PROG_F77_CC_COMPAT to fail.  Hence, we make sure all -lcrt*.o are
+## R_PROG_FC_CC_COMPAT to fail.  Hence, we make sure all -lcrt*.o are
 ## removed. In Addition, -lmx and -lSystem are implicit and their
 ## manual inclusion leads to ordering problems (remove when autoconf
 ## is fixed - supposedly the CVS version is, but 2.6.0 is not).
@@ -828,78 +832,80 @@ for arg in ${FLIBS}; do
   esac
 done
 FLIBS="${flibs}"
+AC_SUBST(FLIBS)
 fi
-])# R_PROG_F77_FLIBS
+])# R_PROG_FC_FLIBS
 
-## R_PROG_F77_APPEND_UNDERSCORE
+## R_PROG_FC_APPEND_UNDERSCORE
 ## ----------------------------
-## See if the Fortran 77 compiler appends underscores.
+## See if the Fortran compiler appends underscores.
 ## What we really should do is determine how to properly mangle the
 ## names of C/C++ identifiers (potentially containing underscores) so
-## that they match the name-mangling scheme used by the Fortran 77
-## compiler.  Autoconf 2.50 or better has macros F77_FUNC(name, NAME)
-## and F77_FUNC_(name, NAME) for this.  However, the F77_* macros in
+## that they match the name-mangling scheme used by the Fortran
+## compiler.  Autoconf has macros FC_FUNC(name, NAME)
+## and FC_FUNC_(name, NAME) for this.  However, the F77_* macros in
 ## the R API have one argument only and therefore cannot deal with
-## Fortran 77 compilers which convert to upper case or add an extra
+## Fortran compilers which convert to upper case or add an extra
 ## underscore for identifiers containing underscores.  We give an error
 ## in the former case; as ISO Fortran 77 does not allow underscores in
-## function names, we do nothing about the latter.
-AC_DEFUN([R_PROG_F77_APPEND_UNDERSCORE],
-[AC_REQUIRE([AC_F77_WRAPPERS])
-## DANGER!  We really needs the results of _AC_F77_NAME_MANGLING as
-## stored in the cache var ac_cv_f77_mangling which is not documented
+## function names, we do nothing about the latter in F77_*
+## (but do in R_dlsym).
+AC_DEFUN([R_PROG_FC_APPEND_UNDERSCORE],
+[AC_REQUIRE([AC_FC_WRAPPERS])
+## DANGER!  We really need the results of _AC_FC_NAME_MANGLING as
+## stored in the cache var ac_cv_fc_mangling which is not documented
 ## and hence may change ...
-case "${ac_cv_f77_mangling}" in
+case "${ac_cv_fc_mangling}" in
   "upper "*)
     AC_MSG_WARN([Fortran compiler uses uppercase external names])
     AC_MSG_ERROR([cannot use Fortran])
     ;;
 esac
-AC_MSG_CHECKING([whether ${F77} appends underscores to external names])
-AC_CACHE_VAL([r_cv_prog_f77_append_underscore],
-[case "${ac_cv_f77_mangling}" in
+AC_MSG_CHECKING([whether ${FC} appends underscores to external names])
+AC_CACHE_VAL([r_cv_prog_fc_append_underscore],
+[case "${ac_cv_fc_mangling}" in
   *", underscore, "*)
-    r_cv_prog_f77_append_underscore=yes
+    r_cv_prog_fc_append_underscore=yes
     ;;
   *", no underscore, "*)
-    r_cv_prog_f77_append_underscore=no
+    r_cv_prog_fc_append_underscore=no
     ;;
 esac])
-if test -n "${r_cv_prog_f77_append_underscore}"; then
-  AC_MSG_RESULT([${r_cv_prog_f77_append_underscore}])
+if test -n "${r_cv_prog_fc_append_underscore}"; then
+  AC_MSG_RESULT([${r_cv_prog_fc_append_underscore}])
 else
   AC_MSG_RESULT([unknown])
   AC_MSG_ERROR([cannot use Fortran])
 fi
-if test "${r_cv_prog_f77_append_underscore}" = yes; then
+if test "${r_cv_prog_fc_append_underscore}" = yes; then
   AC_DEFINE(HAVE_F77_UNDERSCORE, 1,
             [Define if your Fortran compiler appends an underscore to
              external names.])
 fi
-AC_MSG_CHECKING([whether ${F77} appends extra underscores to external names])
-AC_CACHE_VAL([r_cv_prog_f77_append_second_underscore],
-[case "${ac_cv_f77_mangling}" in
+AC_MSG_CHECKING([whether ${FC} appends extra underscores to external names])
+AC_CACHE_VAL([r_cv_prog_fc_append_second_underscore],
+[case "${ac_cv_fc_mangling}" in
   *", extra underscore")
-    r_cv_prog_f77_append_second_underscore=yes
+    r_cv_prog_fc_append_second_underscore=yes
     ;;
   *", no extra underscore")
-    r_cv_prog_f77_append_second_underscore=no
+    r_cv_prog_fc_append_second_underscore=no
     ;;
 esac])
-if test -n "${r_cv_prog_f77_append_second_underscore}"; then
-  AC_MSG_RESULT([${r_cv_prog_f77_append_second_underscore}])
+if test -n "${r_cv_prog_fc_append_second_underscore}"; then
+  AC_MSG_RESULT([${r_cv_prog_fc_append_second_underscore}])
 else
   AC_MSG_RESULT([unknown])
   AC_MSG_ERROR([cannot use Fortran])
 fi
-if test "${r_cv_prog_f77_append_second_underscore}" = yes; then
+if test "${r_cv_prog_fc_append_second_underscore}" = yes; then
   AC_DEFINE(HAVE_F77_EXTRA_UNDERSCORE, 1,
             [Define if your Fortran compiler appends an extra_underscore to
              external names containing an underscore.])
 fi
-])# R_PROG_F77_APPEND_UNDERSCORE
+])# R_PROG_FC_APPEND_UNDERSCORE
 
-## R_PROG_F77_CAN_RUN
+## R_PROG_FC_CAN_RUN
 ## --------------------
 ## Check whether the C/Fortran set up produces runnable code, as
 ## a preliminary to the compatibility tests.
@@ -907,10 +913,10 @@ fi
 ## As from 2.4.0 use the same code as the compatibility test, as
 ## on at least one system the latter actually used -lgfortran
 ## (which was broken) and the previous test here did not.
-AC_DEFUN([R_PROG_F77_CAN_RUN],
+AC_DEFUN([R_PROG_FC_CAN_RUN],
 [AC_REQUIRE([AC_CHECK_LIBM])
 AC_MSG_CHECKING([whether mixed C/Fortran code can be run])
-AC_CACHE_VAL([r_cv_prog_f77_can_run],
+AC_CACHE_VAL([r_cv_prog_fc_can_run],
 [cat > conftestf.f <<EOF
       subroutine cftest(a, b, x, y)
       integer a(3), b(2)
@@ -923,7 +929,7 @@ AC_CACHE_VAL([r_cv_prog_f77_can_run],
       y(3) = (x(2)/x(1)) ** a(1)
       end
 EOF
-${F77} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
 ## Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
@@ -955,13 +961,13 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD; then
     ## redirect error messages to config.log
     output=`./conftest${ac_exeext} 2>&AS_MESSAGE_LOG_FD`
     if test ${?} = 0; then
-      r_cv_prog_f77_can_run=yes
+      r_cv_prog_fc_can_run=yes
     fi
   fi
 fi
 ])
 rm -Rf conftest conftest.* conftestf.* core
-if test -n "${r_cv_prog_f77_can_run}"; then
+if test -n "${r_cv_prog_fc_can_run}"; then
   AC_MSG_RESULT([yes])
 else
   if test "${cross_compiling}" = yes; then
@@ -971,15 +977,15 @@ else
     AC_MSG_ERROR([Maybe check LDFLAGS for paths to Fortran libraries?])
   fi
 fi
-])# R_PROG_F77_CAN_RUN
+])# R_PROG_FC_CAN_RUN
 
-## R_PROG_F77_CC_COMPAT
+## R_PROG_FC_CC_COMPAT
 ## --------------------
-## Check whether the Fortran 77 and C compilers agree on int and double.
-AC_DEFUN([R_PROG_F77_CC_COMPAT],
+## Check whether the Fortran and C compilers agree on int and double.
+AC_DEFUN([R_PROG_FC_CC_COMPAT],
 [AC_REQUIRE([AC_CHECK_LIBM])
-AC_MSG_CHECKING([whether ${F77} and ${CC} agree on int and double])
-AC_CACHE_VAL([r_cv_prog_f77_cc_compat],
+AC_MSG_CHECKING([whether ${FC} and ${CC} agree on int and double])
+AC_CACHE_VAL([r_cv_prog_fc_cc_compat],
 [cat > conftestf.f <<EOF
       subroutine cftest(a, b, x, y)
       integer a(3), b(2)
@@ -992,7 +998,7 @@ AC_CACHE_VAL([r_cv_prog_f77_cc_compat],
       y(3) = (x(2)/x(1)) ** a(1)
       end
 EOF
-${F77} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
 ## Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
@@ -1044,31 +1050,31 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD; then
     ## redirect error messages to config.log
     output=`./conftest${ac_exeext} 2>&AS_MESSAGE_LOG_FD`
     if test ${?} = 0; then
-      r_cv_prog_f77_cc_compat=yes
+      r_cv_prog_fc_cc_compat=yes
     fi
   fi
 fi
 ])
 rm -Rf conftest conftest.* conftestf.* core
-if test -n "${r_cv_prog_f77_cc_compat}"; then
+if test -n "${r_cv_prog_fc_cc_compat}"; then
   AC_MSG_RESULT([yes])
 else
   if test "${cross_compiling}" = yes; then
     AC_MSG_RESULT([don't know (cross-compiling)])
   else
-    AC_MSG_WARN([${F77} and ${CC} disagree on int and double])
+    AC_MSG_WARN([${FC} and ${CC} disagree on int and double])
     AC_MSG_ERROR([Maybe change CFLAGS or FFLAGS?])
   fi
 fi
-])# R_PROG_F77_CC_COMPAT
+])# R_PROG_FC_CC_COMPAT
 
-## R_PROG_F77_CC_COMPAT_COMPLEX
+## R_PROG_FC_CC_COMPAT_COMPLEX
 ## ----------------------------
-## Check whether the Fortran 77 and C compilers agree on double complex.
-AC_DEFUN([R_PROG_F77_CC_COMPAT_COMPLEX],
+## Check whether the Fortran and C compilers agree on double complex.
+AC_DEFUN([R_PROG_FC_CC_COMPAT_COMPLEX],
 [AC_REQUIRE([AC_CHECK_LIBM])
-AC_MSG_CHECKING([whether ${F77} and ${CC} agree on double complex])
-AC_CACHE_VAL([r_cv_prog_f77_cc_compat_complex],
+AC_MSG_CHECKING([whether ${FC} and ${CC} agree on double complex])
+AC_CACHE_VAL([r_cv_prog_fc_cc_compat_complex],
 [cat > conftestf.f <<EOF
       subroutine cftest(x)
       complex*16 x(3)
@@ -1079,7 +1085,7 @@ c a few tests of constructs that are sometimes missing
       x(1) = x(1)*x(2) + x(3)
       end
 EOF
-${F77} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
 ## Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
@@ -1131,50 +1137,51 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD; then
     ## redirect error messages to config.log
     output=`./conftest${ac_exeext} 2>&AS_MESSAGE_LOG_FD`
     if test ${?} = 0; then
-      r_cv_prog_f77_cc_compat_complex=yes
+      r_cv_prog_fc_cc_compat_complex=yes
     fi
   fi
 fi
 ])
 rm -Rf conftest conftest.* conftestf.* core
-if test -n "${r_cv_prog_f77_cc_compat_complex}"; then
+if test -n "${r_cv_prog_fc_cc_compat_complex}"; then
   AC_MSG_RESULT([yes])
   AC_DEFINE(HAVE_FORTRAN_DOUBLE_COMPLEX, 1,
             [Define if C's Rcomplex and Fortran's COMPLEX*16 can be
              interchanged, and can do arithmetic on the latter.])
 else
-  warn_f77_cc_double_complex="${F77} and ${CC} disagree on double complex"
-  AC_MSG_WARN([${warn_f77_cc_double_complex}])
+  warn_fc_cc_double_complex="${FC} and ${CC} disagree on double complex"
+  AC_MSG_WARN([${warn_fc_cc_double_complex}])
 fi
 AC_SUBST(HAVE_FORTRAN_DOUBLE_COMPLEX)
-])# R_PROG_F77_CC_COMPAT_COMPLEX
+])# R_PROG_FC_CC_COMPAT_COMPLEX
 
-## R_PROG_F77_FLAG(FLAG, [ACTION-IF-TRUE])
+## Unused
+## R_PROG_FC_FLAG(FLAG, [ACTION-IF-TRUE])
 ## ---------------------------------------
-## Check whether the Fortran 77 compiler handles command line option
-## FLAG, and set shell variable r_cv_prog_f77_flag_SFLAG accordingly
+## Check whether the Fortran compiler handles command line option
+## FLAG, and set shell variable r_cv_prog_fc_flag_SFLAG accordingly
 ## (where SFLAG is a shell-safe transliteration of FLAG).
 ## In addition, execute ACTION-IF-TRUE in case of success.
-AC_DEFUN([R_PROG_F77_FLAG],
+AC_DEFUN([R_PROG_FC_FLAG],
 [ac_safe=AS_TR_SH($1)
-AC_MSG_CHECKING([whether ${F77} accepts $1])
-AC_CACHE_VAL([r_cv_prog_f77_flag_${ac_safe}],
-[AC_LANG_PUSH(Fortran 77)
+AC_MSG_CHECKING([whether ${FC} accepts $1])
+AC_CACHE_VAL([r_cv_prog_fc_flag_${ac_safe}],
+[AC_LANG_PUSH(Fortran)
 r_save_FFLAGS="${FFLAGS}"
 FFLAGS="${FFLAGS} $1"
 AC_LINK_IFELSE([AC_LANG_PROGRAM()],
-               [eval "r_cv_prog_f77_flag_${ac_safe}=yes"],
-               [eval "r_cv_prog_f77_flag_${ac_safe}=no"])
+               [eval "r_cv_prog_fc_flag_${ac_safe}=yes"],
+               [eval "r_cv_prog_fc_flag_${ac_safe}=no"])
 FFLAGS="${r_save_FFLAGS}"
-AC_LANG_POP(Fortran 77)
+AC_LANG_POP(Fortran)
 ])
-if eval "test \"`echo '$r_cv_prog_f77_flag_'$ac_safe`\" = yes"; then
+if eval "test \"`echo '$r_cv_prog_fc_flag_'$ac_safe`\" = yes"; then
   AC_MSG_RESULT([yes])
   [$2]
 else
   AC_MSG_RESULT([no])
 fi
-])# R_PROG_F77_FLAG
+])# R_PROG_FC_FLAG
 
 ## R_PROG_OBJC_M
 ## -------------
@@ -2556,7 +2563,7 @@ AC_SUBST(use_tcltk)
 ## with the following changes:
 ## * We also handle HPUX .sl command line specifications.
 ## * We explictly deal with the case of f2c.  Most likely pointless.
-## * We only care about the Fortran 77 interface to Atlas, hence do not
+## * We only care about the Fortran interface to Atlas, hence do not
 ##   test for -lcblas.
 ## * We do not use BLAS libs that caused problems in the past: Alpha
 ##   CXML and DXML, and SGI SCSL and SGIMATH (marked with COMMENT tags).
@@ -2566,8 +2573,8 @@ AC_SUBST(use_tcltk)
 ## The sunperf test calls the library as now required.
 ## Based on acx_blas.m4 version 1.2 (2001-12-13)
 AC_DEFUN([R_BLAS_LIBS],
-[AC_REQUIRE([R_PROG_F77_FLIBS])
-AC_REQUIRE([R_PROG_F77_APPEND_UNDERSCORE])
+[AC_REQUIRE([R_PROG_FC_FLIBS])
+AC_REQUIRE([R_PROG_FC_APPEND_UNDERSCORE])
 
 acx_blas_ok=no
 case "${with_blas}" in
@@ -2579,7 +2586,7 @@ case "${with_blas}" in
   *) BLAS_LIBS="-l${with_blas}" ;;
 esac
 
-if test "${r_cv_prog_f77_append_underscore}" = yes; then
+if test "${r_cv_prog_fc_append_underscore}" = yes; then
   dgemm=dgemm_
   sgemm=sgemm_
   xerbla=xerbla_
@@ -2724,7 +2731,7 @@ c Goto's BLAS at least needs a XERBLA
       endif
       end
 EOF
-${F77} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
 ## Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <stdlib.h>
@@ -2939,8 +2946,8 @@ AC_SUBST(BLAS_LIBS)
 ## Test function was zgeev, changed to dpstrf which is LAPACK 3.2.
 
 AC_DEFUN([R_LAPACK_LIBS],
-[AC_REQUIRE([R_PROG_F77_FLIBS])
-AC_REQUIRE([R_PROG_F77_APPEND_UNDERSCORE])
+[AC_REQUIRE([R_PROG_FC_FLIBS])
+AC_REQUIRE([R_PROG_FC_APPEND_UNDERSCORE])
 AC_REQUIRE([R_BLAS_LIBS])
 
 acx_lapack_ok=no
@@ -2953,7 +2960,7 @@ case "${with_lapack}" in
   *) LAPACK_LIBS="-l${with_lapack}" ;;
 esac
 
-if test "${r_cv_prog_f77_append_underscore}" = yes; then
+if test "${r_cv_prog_fc_append_underscore}" = yes; then
   lapack=dpstrf_
 else
   lapack=dpstrf
@@ -3783,31 +3790,8 @@ case  "${CXX}" in
 esac
 fi
 
-if test -z "${F77_VISIBILITY+set}"; then
-AC_LANG_PUSH(Fortran 77)
-r_save_FFLAGS=$FFLAGS
-FFLAGS="$FFLAGS -fvisibility=hidden"
-AC_CACHE_CHECK(whether $F77 accepts -fvisibility, r_cv_prog_f77_vis,
-               [_AC_COMPILE_IFELSE([AC_LANG_PROGRAM()],
-               [r_cv_prog_f77_vis=yes], [r_cv_prog_f77_vis=no])])
-FFLAGS=$r_save_FFLAGS
-AC_LANG_POP(Fortran 77)
-if test "${r_cv_prog_f77_vis}" = yes; then
-  if test "${r_cv_visibility_attribute}" = yes; then
-    F77_VISIBILITY="-fvisibility=hidden"
-  fi
-fi
-## need to exclude Intel compilers.
-case  "${F77}" in
-  ## Intel compiler
-  *ifc|*ifort)
-    F77_VISIBILITY=
-    ;;
-esac
-AC_LANG_PUSH(Fortran)
-fi
-
 if test -z "${F_VISIBILITY+set}"; then
+AC_LANG_PUSH(Fortran)
 r_save_FCFLAGS=$FCFLAGS
 FCFLAGS="$FCFLAGS -fvisibility=hidden"
 AC_CACHE_CHECK(whether $FC accepts -fvisibility, r_cv_prog_fc_vis,
@@ -3832,7 +3816,6 @@ fi
 AC_SUBST(C_VISIBILITY)
 AC_SUBST(F_VISIBILITY)
 AC_SUBST(CXX_VISIBILITY)
-AC_SUBST(F77_VISIBILITY)
 ])# R_GCC4_VISIBILITY
 
 
@@ -4076,6 +4059,8 @@ fi
 
 ## R_ABI
 ## ------------
+## This gets recorded in etc/Renviron and used in tools/R/sotools.R
+## It is a comma-separated string of 5 items, OS,C,CXX,F77,F95 .
 AC_DEFUN([R_ABI],
 [## System type.
 case "${host_os}" in
@@ -4125,46 +4110,21 @@ case "${host_os}" in
   R_SYSTEM_ABI="${R_SYSTEM_ABI},?"
 esac
 fi
-## Fortran 77: AC_PROG_F77 does
-##   If using `g77' (the GNU Fortran 77 compiler), then set the shell
-##   variable `G77' to `yes' (and also seems to do so for gfortran, which
-##   is what we really need).
-##   Alternatively, could use ac_cv_f77_compiler_gnu (undocumented).
-if test "${G77}" = yes; then
-  R_SYSTEM_ABI="${R_SYSTEM_ABI},gfortran"
-else
-case "${F77}" in
-  *flang)
-    R_SYSTEM_ABI="${R_SYSTEM_ABI},flang"
-    ;;
-  *)
-    case "${host_os}" in
-      solaris*)
-      R_SYSTEM_ABI="${R_SYSTEM_ABI},solf95"
-      ;;
-      *)
-      R_SYSTEM_ABI="${R_SYSTEM_ABI},?"
-    esac
-    ;;
-esac
-fi
-## Fortran 90/95: AC_PROG_FC does not seem to set a shell variable
-##   indicating the GNU Fortran 90/95 compiler.
-##   Hence, need to use ac_cv_fc_compiler_gnu (undocumented).
+## Fortran (fixed- then free-form):
 if test "${ac_cv_fc_compiler_gnu}" = yes; then
-  R_SYSTEM_ABI="${R_SYSTEM_ABI},gfortran"
+  R_SYSTEM_ABI="${R_SYSTEM_ABI},gfortran,gfortran"
 else
-case "${F77}" in
+case "${FC}" in
   *flang)
-    R_SYSTEM_ABI="${R_SYSTEM_ABI},flang"
+    R_SYSTEM_ABI="${R_SYSTEM_ABI},flang,flang"
     ;;
   *)
     case "${host_os}" in
       solaris*)
-      R_SYSTEM_ABI="${R_SYSTEM_ABI},solf95"
+      R_SYSTEM_ABI="${R_SYSTEM_ABI},solf95,solf95"
       ;;
       *)
-      R_SYSTEM_ABI="${R_SYSTEM_ABI},?"
+      R_SYSTEM_ABI="${R_SYSTEM_ABI},?,?"
     esac
     ;;
 esac

@@ -46,15 +46,11 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 F_VISIBILITY = @F_VISIBILITY@
-## NB, set FC before F77 as on Solaris make, setting FC sets F77
-## FC is the compiler used for free-form Fortran, exts .f90/.f95
+## FC is the compiler used for all Fortran as from R 3.6.0
 FC = @FC@
 FCFLAGS = @FCFLAGS@ $(LTO)
-FCPICFLAGS = @FCPICFLAGS@
 ## additional libs needed when linking with $(FC), e.g. on some Oracle compilers
 FCLIBS_XTRA = @FCLIBS_XTRA@
-## F77 is the compiler used for fixed-form Fortran, ext .f
-F77 = @F77@
 FFLAGS = @FFLAGS@ $(LTO)
 FLIBS = @FLIBS_IN_SO@
 FPICFLAGS = @FPICFLAGS@
@@ -110,9 +106,6 @@ SHLIB_CXX14LDFLAGS = @SHLIB_CXX14LDFLAGS@
 SHLIB_CXX17LD = @SHLIB_CXX17LD@
 SHLIB_CXX17LDFLAGS = @SHLIB_CXX17LDFLAGS@
 SHLIB_EXT = @SHLIB_EXT@
-## no longer used by R as of 3.6.0 but exported by R CMD config
-SHLIB_FCLD = @SHLIB_FCLD@
-SHLIB_FCLDFLAGS = @SHLIB_FCLDFLAGS@
 SHLIB_FFLAGS = @SHLIB_FFLAGS@
 SHLIB_LD = @SHLIB_LD@
 SHLIB_LDFLAGS = @SHLIB_LDFLAGS@@BUILD_LTO_TRUE@ $(CFLAGS) $(CPICFLAGS)
@@ -122,7 +115,6 @@ SHLIB_LIBADD = @SHLIB_LIBADD@
 SHLIB_LINK = $(SHLIB_LD) $(SHLIB_LDFLAGS) $(LIBR0) $(LDFLAGS)
 SHLIB_OPENMP_CFLAGS = @SHLIB_OPENMP_CFLAGS@
 SHLIB_OPENMP_CXXFLAGS = @SHLIB_OPENMP_CXXFLAGS@
-SHLIB_OPENMP_FCFLAGS = @SHLIB_OPENMP_FCFLAGS@
 SHLIB_OPENMP_FFLAGS = @SHLIB_OPENMP_FFLAGS@
 STRIP_LIBS = @striplib@
 STRIP_STATIC_LIBS = @stripstaticlib@
@@ -131,8 +123,15 @@ TCLTK_LIBS = @TCLTK_LIBS@
 YACC = @YACC@
 
 ## Legacy settings
+## no longer used by R as of 3.6.0 but some are exported by R CMD config
+## on Solaris make, setting FC sets F77
+F77 = @FC@
+FCPICFLAGS = @FPICFLAGS@
 F77_VISIBILITY = @F_VISIBILITY@
 FC_VISIBILITY = @F_VISIBILITY@
+SHLIB_FCLD = @SHLIB_FCLD@
+SHLIB_FCLDFLAGS = @SHLIB_FCLDFLAGS@
+SHLIB_OPENMP_FCFLAGS = @SHLIB_OPENMP_FFLAGS@
 
 
 ## for linking to libR.a
@@ -165,9 +164,9 @@ ALL_LIBS = $(PKG_LIBS) $(SHLIB_LIBADD) $(LIBR)@DYLIB_UNDEFINED_ALLOWED_FALSE@ $(
 .M.o:
 	$(OBJCXX) $(ALL_CPPFLAGS) $(ALL_OBJCXXFLAGS) -c $< -o $@
 .f.o:
-	$(F77) $(ALL_FFLAGS) -c $< -o $@
+	$(FC) $(ALL_FFLAGS) -c $< -o $@
 ## @FCFLAGS_f9x@ are flags needed to recognise the extensions
 .f95.o:
-	$(FC) $(PKG_FCFLAGS) $(FCPICFLAGS) $(FCFLAGS) -c @FCFLAGS_f95@ $< -o $@
+	$(FC) $(PKG_FCFLAGS) $(FPICFLAGS) $(FCFLAGS) -c @FCFLAGS_f95@ $< -o $@
 .f90.o:
-	$(FC) $(PKG_FCFLAGS) $(FCPICFLAGS) $(FCFLAGS) -c @FCFLAGS_f90@ $< -o $@
+	$(FC) $(PKG_FCFLAGS) $(FPICFLAGS) $(FCFLAGS) -c @FCFLAGS_f90@ $< -o $@
