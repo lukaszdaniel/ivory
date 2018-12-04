@@ -2631,8 +2631,9 @@ add_dummies <- function(dir, Log)
                 have_f9x <- length(dir('src', patt = "[.]f9[05]$")) > 0L
                 used <- character()
                 for (f in c("C", "CXX", "F", "FC"))  {
-                    this <- paste0(f, "FLAGS")
-                    pat <- paste0("^[[:space:]]*PKG_", this, ".*SHLIB_OPENMP_", this)
+                    this <- this2 <- paste0(f, "FLAGS")
+                    if (f == "FC") this2 <- "(F|FC)FLAGS"
+                    pat <- paste0("^[[:space:]]*PKG_", this, ".*SHLIB_OPENMP_", this2)
                     if(any(grepl(pat, lines, useBytes = TRUE))) {
                         used <- c(used, this)
                         if(f == "C" && !have_c) {
@@ -2642,17 +2643,30 @@ add_dummies <- function(dir, Log)
                             printLog(Log, "  ", m, ": ", msg)
                             next
                         }
-                        if(f == "F" && !have_f) {
+                        ## as from R 3.6.0, PKG_FFLAGS is by default
+                        ## used for both fixed- and free-form files.
+                        if(f == "F" && !(have_f || have_f9x)) {
                             if (!any) noteLog(Log)
                             any <- TRUE
                             msg <- "SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS without any fixed-form Fortran files\n"
                             printLog(Log, "  ", m, ": ", msg)
                             next
                         }
+                        f_or_fc <- "F"
+                        if(f == "FC") {
+                            if(any(grepl("SHLIB_OPENMP_FCFLAGS",
+                                         lines, useBytes = TRUE))) {
+                                f_or_fc <- "FC"
+                                if (!any) noteLog(Log)
+                                any <- TRUE
+                                msg <- "SHLIB_OPENMP_FFLAGS is preferred to SHLIB_OPENMP_FCFLAGS in PKG_FCFLAGS\n"
+                                printLog(Log, "  ", m, ": ", msg)
+                            }
+                        }
                         if(f == "FC" && !have_f9x) {
                             if (!any) noteLog(Log)
                             any <- TRUE
-                            msg <- "SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS without any free-form Fortran files\n"
+                            msg <- sprintf("SHLIB_OPENMP_%sFLAGS is included in PKG_FCFLAGS without any free-form Fortran files\n", f_or_fc)
                             printLog(Log, "  ", m, ": ", msg)
                             next
                         }
@@ -2676,7 +2690,7 @@ add_dummies <- function(dir, Log)
                                 if (f == "F")
                                     sprintf("SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n", c_or_cxx)
                                  else if (f == "FC")
-                                     gettextf("SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n", c_or_cxx, domain = "R-tools")
+                                     gettextf("SHLIB_OPENMP_%sFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n", f_or_fc, c_or_cxx, domain = "R-tools")
                                else
                                     gettextf("SHLIB_OPENMP_%s is included in PKG_%s but not in PKG_LIBS\n",
                                             this, this, domain = "R-tools")
@@ -4273,14 +4287,6 @@ add_dummies <- function(dir, Log)
                             ## Fatal, not warning, for clang and Solaris ODS
                              ": warning: .* with a value, in function returning void"
                             )
-
-                ## gcc 9 warns on code deprecated in C++11
-                ## rather too frequently,
-                ## so suppressable (undocumented) for now.
-                check_gcc9 <- Sys.getenv("_R_CHECK_GCC9_WARNINGS_", "TRUE")
-                if (config_val_to_logical(check_gcc9))
-                     warn_re <- c(warn_re,
-                                  ": warning: .* \\[-Wdeprecated-copy\\]")
 
                 ## clang warnings
                 warn_re <- c(warn_re,

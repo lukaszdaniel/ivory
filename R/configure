@@ -25688,14 +25688,14 @@ LIBS="${r_save_LIBS}"
 ## manual inclusion leads to ordering problems (remove when autoconf
 ## is fixed - supposedly the CVS version is, but 2.6.0 is not).
 ##
-## Native f90 on HPUX 11 comes up with '-l:libF90.a' causing trouble
+## Native f90 on HP-UX 11 comes up with '-l:libF90.a' causing trouble
 ## when using gcc for linking.  The '-l:' construction is similar to
 ## plain '-l' except that search order (archive/shared) given by '-a'
 ## is not important.  We escape such flags via '-Wl,' in case of gcc.
 ## Note that the current Autoconf CVS uses _AC_LINKER_OPTION for a
 ## similar purpose when computing FLIBS: this uses '-Xlinker' escapes
 ## for gcc and does nothing otherwise.  Note also that we cannot simply
-## unconditionally escape with '${wl}' from libtool as on HPUX we need
+## unconditionally escape with '${wl}' from libtool as on HP-UX we need
 ## SHLIB_LD=ld for native C compilers (problem with non-PIC 'crt0.o',
 ## see 'Individual platform overrides' in section 'DLL stuff' in file
 ## 'configure.ac'.
@@ -26234,7 +26234,7 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&5 2>&5; then
   ## determined (and necessary additions to MAIN_LDFLAGS were made).
   ## But it seems that we currently can always use the C compiler.
   ## Also, to be defensive there should be a similar test with SHLIB_LD
-  ## and SHLIB_LDFLAGS (and note that on HPUX with native cc we have to
+  ## and SHLIB_LDFLAGS (and note that on HP-UX with native cc we have to
   ## use ld for SHLIB_LD) ...
   ## Be nice to people who put compiler architecture opts in CFLAGS
   if ${CC} ${CFLAGS} ${LDFLAGS} ${MAIN_LDFLAGS} -o conftest${ac_exeext} \
@@ -26327,7 +26327,7 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&5 2>&5; then
   ## determined (and necessary additions to MAIN_LDFLAGS were made).
   ## But it seems that we currently can always use the C compiler.
   ## Also, to be defensive there should be a similar test with SHLIB_LD
-  ## and SHLIB_LDFLAGS (and note that on HPUX with native cc we have to
+  ## and SHLIB_LDFLAGS (and note that on HP-UX with native cc we have to
   ## use ld for SHLIB_LD) ...
   if ${CC} ${CFLAGS} ${LDFLAGS} ${MAIN_LDFLAGS} -o conftest${ac_exeext} \
        conftest.${ac_objext} conftestf.${ac_objext} ${FLIBS} \
@@ -26417,7 +26417,7 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&5 2>&5; then
   ## determined (and necessary additions to MAIN_LDFLAGS were made).
   ## But it seems that we currently can always use the C compiler.
   ## Also, to be defensive there should be a similar test with SHLIB_LD
-  ## and SHLIB_LDFLAGS (and note that on HPUX with native cc we have to
+  ## and SHLIB_LDFLAGS (and note that on HP-UX with native cc we have to
   ## use ld for SHLIB_LD) ...
   if ${CC} ${CFLAGS} ${LDFLAGS} ${MAIN_LDFLAGS} -o conftest${ac_exeext} \
        conftest.${ac_objext} conftestf.${ac_objext} ${FLIBS} \
@@ -27190,6 +27190,7 @@ esac
 
 ### ** Platform-specific overrides for the C, fixed-form Fortran and C++ compilers.
 
+## This was for glibc 2.1: do we really still need it?
 case "${host_cpu}" in
   i*86|x86_64)
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C runtime needs -D__NO_MATH_INLINES" >&5
@@ -27632,7 +27633,8 @@ fi
 main_ld="${CC}"
 shlib_ld="${CC}"
 shlib_cxxld="${CXX}"
-SHLIB_EXT=".so"
+## Allow user to override this, e.g. when HP-UX is not special-cased.
+: ${SHLIB_EXT=".so"}
 SHLIB_LIBADD=
 use_exportfiles=no
 
@@ -35659,7 +35661,7 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&5 2>&5; then
   ## determined (and necessary additions to MAIN_LDFLAGS were made).
   ## But it seems that we currently can always use the C compiler.
   ## Also, to be defensive there should be a similar test with SHLIB_LD
-  ## and SHLIB_LDFLAGS (and note that on HPUX with native cc we have to
+  ## and SHLIB_LDFLAGS (and note that on HP-UX with native cc we have to
   ## use ld for SHLIB_LD) ...
   if ${CC} ${CFLAGS} ${LDFLAGS} ${MAIN_LDFLAGS} -o conftest${ac_exeext} \
        conftest.${ac_objext} conftestf.${ac_objext} ${FLIBS} \
@@ -35804,7 +35806,7 @@ if ${CC} ${CFLAGS} -c conftest.c 1>&5 2>&5; then
   ## determined (and necessary additions to MAIN_LDFLAGS were made).
   ## But it seems that we currently can always use the C compiler.
   ## Also, to be defensive there should be a similar test with SHLIB_LD
-  ## and SHLIB_LDFLAGS (and note that on HPUX with native cc we have to
+  ## and SHLIB_LDFLAGS (and note that on HP-UX with native cc we have to
   ## use ld for SHLIB_LD) ...
   if ${CC} ${CFLAGS} ${LDFLAGS} ${MAIN_LDFLAGS} -o conftest${ac_exeext} \
        conftest.${ac_objext} ${FLIBS} \
@@ -41495,7 +41497,7 @@ esac
 
 ## Printing.
 ## We look to see whether we have 'lpr' or 'lp'.  Some platforms
-## provide both (SunOS and HPUX), and in those cases we choose lpr.
+## provide both (SunOS and HP-UX), and in those cases we choose lpr.
 if test -z "${R_PRINTCMD}"; then
   for ac_prog in lpr lp
 do

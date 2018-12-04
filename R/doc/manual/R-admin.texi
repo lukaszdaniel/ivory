@@ -4409,12 +4409,11 @@ variable @code{MAKE} at configure time, for example
 
 To compile @R{}, you need a Fortran 90 compiler.  The current default
 is to search for
-@c F95_compilers in m4/R.m4:
+@c From AC_PROG_FC
 @command{gfortran}, @command{g95}, @command{xlf95} @command{f95},
 @command{fort}, @command{ifort}, @command{ifc}, @command{efc},
 @command{pgfortran}, @command{pgf95} @command{lf95}, @command{ftn},
 @command{nagfor},
-@c F90 compilers in m4/R.m4:
 @command{xlf90}, @command{f90}, @command{pgf90}, @command{pghpf},
 @command{epcf90}.
 (Note that these are searched for by name, without checking the standard
@@ -4468,9 +4467,9 @@ and others include
 @item CFLAGS
 debugging and optimization flags, C
 @item MAIN_CFLAGS
-ditto, for compiling the main program
+ditto, for compiling the main program (e.g.@: when profiling)
 @item SHLIB_CFLAGS
-for shared objects
+for shared objects (no known examples)
 @item FFLAGS
 debugging and optimization flags, fixed-form Fortran
 @item FCFLAGS
@@ -4478,9 +4477,9 @@ debugging and optimization flags, free-form Fortran
 @item SAFE_FFLAGS
 ditto for source files which need exact floating point behaviour
 @item MAIN_FFLAGS
-ditto, for compiling the main program
+ditto, for compiling the main program (e.g.@: when profiling)
 @item SHLIB_FFLAGS
-for shared objects
+for shared objects (no known examples)
 @item MAIN_LDFLAGS
 additional flags for the main link
 @item SHLIB_LDFLAGS
@@ -4511,6 +4510,11 @@ allows only a limited number of symbols in a shared object.  Since @R{}
 as a shared library has about 6200 symbols, if in doubt use the larger
 version.
 
+Other variables often set by @command{configure} include
+@samp{MAIN_LDFLAGS}, @samp{SAFE_FFLAGS}, @samp{SHLIB_LDFLAGS} and
+@samp{SHLIB_CXXLDFLAGS}: see file @file{config.site} in the sources for
+more documentation on these and others.
+
 To compile a profiling version of @R{}, one might for example want to
 use @samp{MAIN_CFLAGS=-pg}, @samp{MAIN_FFLAGS=-pg},
 @samp{MAIN_LDFLAGS=-pg} on platforms where @samp{-pg} cannot be used
@@ -4522,10 +4526,9 @@ possible issue is the alignment of doubles, another is the way
 structures are passed.
 
 On some platforms @command{configure} will select additional flags for
-@code{CFLAGS}, @code{CPPFLAGS}, @code{FFLAGS}, @code{FCFLAGS},
-@code{CXXFLAGS} and @code{LIBS} in @code{R_XTRA_CFLAGS} (and so on).
-These are for options which are always required, for example to force
-@acronym{IEC}@tie{}60559 compliance.
+@code{CFLAGS}, @code{CPPFLAGS} and @code{LIBS} in @code{R_XTRA_CFLAGS}
+(and so on).  These are for options which are always required, for
+example to force @acronym{IEC}@tie{}60559 compliance.
 
 @node Maintainer mode,  , Compile and load flags, Configuration on a Unix-alike
 @section Maintainer mode

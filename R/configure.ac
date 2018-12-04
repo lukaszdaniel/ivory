@@ -978,6 +978,7 @@ esac
 
 ### ** Platform-specific overrides for the C, fixed-form Fortran and C++ compilers.
 
+## This was for glibc 2.1: do we really still need it?
 case "${host_cpu}" in
   i*86|x86_64)
     R_PROG_CC_FLAG_D__NO_MATH_INLINES
@@ -1122,7 +1123,8 @@ R_ABI
 main_ld="${CC}"
 shlib_ld="${CC}"
 shlib_cxxld="${CXX}"
-SHLIB_EXT=".so"
+## Allow user to override this, e.g. when HP-UX is not special-cased.
+: ${SHLIB_EXT=".so"}
 SHLIB_LIBADD=
 use_exportfiles=no
 
@@ -2353,7 +2355,7 @@ esac
 
 ## Printing.
 ## We look to see whether we have 'lpr' or 'lp'.  Some platforms
-## provide both (SunOS and HPUX), and in those cases we choose lpr.
+## provide both (SunOS and HP-UX), and in those cases we choose lpr.
 if test -z "${R_PRINTCMD}"; then
   AC_CHECK_PROGS(R_PRINTCMD, [lpr lp])
 fi
