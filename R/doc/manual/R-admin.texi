@@ -3721,9 +3721,11 @@ is taken from the
 @enindex BLAS_LIBS
 environment variable @env{BLAS_LIBS}, set for example in
 @file{config.site}.  If neither the option nor the environment variable
-supply a value, a search is made for a suitable @acronym{BLAS}.  If the
-value is not obviously a linker command (starting with a dash or giving
-the path to a library), it is prefixed by @samp{-l}, so
+supply a value, a search is made for a suitable@footnote{The search
+includes OpenBLAS, ATLAS and a generic @file{libblas}, plus some
+platform-specific choices (see below).} @acronym{BLAS}.  If the value is
+not obviously a linker command (starting with a dash or giving the path
+to a library), it is prefixed by @samp{-l}, so
 
 @example
 --with-blas="foo"
@@ -4344,9 +4346,11 @@ systems @file{/usr/local/include} is regarded as a system include
 directory and so instances in that macro will be skipped) to catch the
 most common cases.  If libraries are still not found, then maybe your
 compiler/linker does not support re-ordering of @option{-L} and
-@option{-l} flags (years ago this was reported to be a problem on HP-UX
-with the native @command{cc}).  In this case, use a different compiler
-(or a front-end shell script which does the re-ordering).
+@option{-l} flags.
+@c (years ago this was reported to be a problem on HP-UX with the native
+@c @command{cc}).  
+In this case, use a different compiler (or a front-end shell script
+which does the re-ordering).
 
 These flags can also be used to build a faster-running version of @R{}.
 On most platforms using @command{gcc}, having @samp{-O3} in
@@ -4542,10 +4546,10 @@ in the rest of this section.
 File @file{configure} is created from @file{configure.ac} and the files
 under @file{m4} by @command{autoconf} and @command{aclocal} (part of the
 @pkg{automake} package).  There is a formal version requirement on
-@command{autoconf} of 2.62 or later, but it is unlikely that anything
+@command{autoconf} of 2.69 or later, but it is unlikely that anything
 other than the most recent versions@footnote{at the time of revision of
-this para in 2017, @pkg{autoconf-2.69} from 2012 and @pkg{automake-1.15}
-from 2015.} have been thoroughly tested.
+this para in late 2018, @pkg{autoconf-2.69} from 2012 and
+@pkg{automake-1.15.1} from 2017.} have been thoroughly tested.
 
 File @file{src/include/config.h} is created by @command{autoheader}
 (part of @pkg{autoconf}).
@@ -4570,11 +4574,12 @@ made available at
 sources are only re-created even in maintainer mode if
 @file{src/library/compiler/noweb/compiler.nw} has been updated.
 
-It is likely that in future creating @code{configure} will need the GNU
-`autoconf archive' installed.  This can be found at
-@url{https://www.gnu.org/software/autoconf-archive/} and as a package
-(usually called @pkg{autoconf-archive}) in most packaged distributions,
-for example Debian, Fedora, OpenCSW, Homebrew and MacPorts.
+@c It is likely that in future creating @code{configure} will need the GNU
+@c `autoconf archive' installed.  This can be found at
+@c @c and it has moved to github!
+@c @url{https://www.gnu.org/software/autoconf-archive/} and as a package
+@c (usually called @pkg{autoconf-archive}) in most packaged distributions,
+@c for example Debian, Fedora, OpenCSW, Homebrew and MacPorts.
 
 @node Platform notes, The Windows toolset, Configuration on a Unix-alike, Top
 @appendix Platform notes

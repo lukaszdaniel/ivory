@@ -18,6 +18,9 @@
 ### along with R; if not, a copy is available at
 ### https://www.r-project.org/Licenses/
 
+### Please use dnl for first-col comments within definitions, as
+### PD's autoconf leaves ## in but others (e.g. Fedora's) strip them
+
 ### * General support macros
 
 ## R_ARG_USE
@@ -104,15 +107,15 @@ case "${INSTALL}" in
     INSTALL="\$\(top_srcdir\)/tools/install-sh -c"
     ;;
 esac
-case "${host_os}" in
-  hpux*)
-    ## On some versions of HP-UX (seen on both 10.20 and 11.0) we end up
-    ## a broken install (seen in /opt/imake/bin) which has the default
-    ## permissions wrong (PR#2091).  Let's just always use install-sh on
-    ## HP-UX.
-    INSTALL="\$\(top_srcdir\)/tools/install-sh -c"
-    ;;
-esac
+dnl case "${host_os}" in
+dnl   hpux*)
+dnl     ## On some versions of HP-UX (seen on both 10.20 and 11.0) we end up
+dnl     ## a broken install (seen in /opt/imake/bin) which has the default
+dnl     ## permissions wrong (PR#2091).  Let's just always use install-sh on
+dnl     ## HP-UX.
+dnl     INSTALL="\$\(top_srcdir\)/tools/install-sh -c"
+dnl     ;;
+dnl esac
 ])# R_PROG_INSTALL
 
 ## R_PROG_PAGER
@@ -130,10 +133,10 @@ fi
 ## ------------
 AC_DEFUN([R_PROG_TEXMF],
 [
-## PDFTEX PDFLATEX MAKEINDEX TEXI2DVI are used to make manuals
-## PDFLATEX and MAKEINDEX in the emulation mode of tools::texi2dvi
-## TEXI2DVICMD sets default for R_TEXI2DVICMD, used for options('texi2dvi')
-## TEX AND LATEX are no longer used
+dnl PDFTEX PDFLATEX MAKEINDEX TEXI2DVI are used to make manuals
+dnl PDFLATEX and MAKEINDEX in the emulation mode of tools::texi2dvi
+dnl TEXI2DVICMD sets default for R_TEXI2DVICMD, used for options('texi2dvi')
+dnl TEX AND LATEX are no longer used
 AC_PATH_PROGS(TEX, [${TEX} tex], )
 AC_PATH_PROGS(PDFTEX, [${PDFTEX} pdftex], )
 if test -z "${ac_cv_path_PDFTEX}" ; then
@@ -318,15 +321,15 @@ AC_DEFUN([R_PROG_CC_M],
 AC_MSG_CHECKING([whether we can compute C Make dependencies])
 AC_CACHE_VAL([r_cv_prog_cc_m],
 [echo "#include <math.h>" > conftest.c
-## No real point in using AC_LANG_* and ${ac_ext}, as we need to create
-## hard-wired suffix rules.
-## Another obvious candidate to try is '${MAKEDEPEND-makedepend} -f-'.
-## However, this does not work out of the box when srcdir and builddir
-## are different, as it creates dependencies of the form
-##   ${srcdir}/foo.o: /path/to/bar.h
-## Could be made to work, of course ...
-## Note also that it does not create a 'conftest.o: conftest.c' line.
-## For gcc 3.2 or better, we want to use '-MM' in case this works.
+dnl No real point in using AC_LANG_* and ${ac_ext}, as we need to create
+dnl hard-wired suffix rules.
+dnl Another obvious candidate to try is '${MAKEDEPEND-makedepend} -f-'.
+dnl However, this does not work out of the box when srcdir and builddir
+dnl are different, as it creates dependencies of the form
+dnl   ${srcdir}/foo.o: /path/to/bar.h
+dnl Could be made to work, of course ...
+dnl Note also that it does not create a 'conftest.o: conftest.c' line.
+dnl For gcc 3.2 or better, we want to use '-MM' in case this works.
 cc_minus_MM=false
 if test "${GCC}" = yes; then
   case "${CC_VERSION}" in
@@ -359,8 +362,8 @@ AC_DEFUN([R_PROG_CC_C_O_LO],
                 [r_cv_prog_cc_c_o_lo],
 [test -d TMP || mkdir TMP
 echo "int some_variable = 0;" > conftest.c
-## No real point in using AC_LANG_* and ${ac_ext}, as we need to create
-## hard-wired suffix rules.
+dnl No real point in using AC_LANG_* and ${ac_ext}, as we need to create
+dnl hard-wired suffix rules.
 ac_try='${CC} ${CFLAGS} -c conftest.c -o TMP/conftest.lo 1>&AS_MESSAGE_LOG_FD'
 if AC_TRY_EVAL(ac_try) \
     && test -f TMP/conftest.lo \
@@ -452,65 +455,66 @@ else
 fi
 ])# R_PROG_CC_FLAG
 
-## R_PROG_CC_FLAG_D__NO_MATH_INLINES
-## ---------------------------
-## In glibc 2.1, inline version [x86] of exp was broken (exp(-Inf) = NaN).
-## We fix this by adding '-D__NO_MATH_INLINES' to R_XTRA_CFLAGS rather
-## than AC_DEFINE(__NO_MATH_INLINES) as the former also takes care of
-## compiling C code for add-on packages.
-AC_DEFUN([R_PROG_CC_FLAG_D__NO_MATH_INLINES],
-[AC_CACHE_CHECK([whether C runtime needs -D__NO_MATH_INLINES],
-                [r_cv_c_no_math_inlines],
-[AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <math.h>
-#if defined(__GLIBC__)
-#include <math.h>
-int main () {
-  double x, y;
-  x = -1./0.;
-  y = exp(x);
-  exit (y != 0.);
-}
-#else
-int main () {
-  exit(0);
-}
-#endif
-]])],
-              [r_cv_c_no_math_inlines=no],
-              [r_cv_c_no_math_inlines=yes],
-              [r_cv_c_no_math_inlines=no])])
-if test "${r_cv_c_no_math_inlines}" = yes; then
-  R_SH_VAR_ADD(R_XTRA_CFLAGS, [-D__NO_MATH_INLINES])
-fi
-])# R_PROG_CC_FLAG_D__NO_MATH_INLINES
+dnl ## Unused
+dnl ## R_PROG_CC_FLAG_D__NO_MATH_INLINES
+dnl ## ---------------------------
+dnl ## In glibc 2.1, inline version [x86] of exp was broken (exp(-Inf) = NaN).
+dnl ## We fix this by adding '-D__NO_MATH_INLINES' to R_XTRA_CFLAGS rather
+dnl ## than AC_DEFINE(__NO_MATH_INLINES) as the former also takes care of
+dnl ## compiling C code for add-on packages.
+dnl AC_DEFUN([R_PROG_CC_FLAG_D__NO_MATH_INLINES],
+dnl [AC_CACHE_CHECK([whether C runtime needs -D__NO_MATH_INLINES],
+dnl                 [r_cv_c_no_math_inlines],
+dnl [AC_RUN_IFELSE([AC_LANG_SOURCE([[
+dnl #include <math.h>
+dnl #if defined(__GLIBC__)
+dnl #include <math.h>
+dnl int main () {
+dnl   double x, y;
+dnl   x = -1./0.;
+dnl   y = exp(x);
+dnl   exit (y != 0.);
+dnl }
+dnl #else
+dnl int main () {
+dnl   exit(0);
+dnl }
+dnl #endif
+dnl ]])],
+dnl               [r_cv_c_no_math_inlines=no],
+dnl               [r_cv_c_no_math_inlines=yes],
+dnl               [r_cv_c_no_math_inlines=no])])
+dnl if test "${r_cv_c_no_math_inlines}" = yes; then
+dnl   R_SH_VAR_ADD(R_XTRA_CFLAGS, [-D__NO_MATH_INLINES])
+dnl fi
+dnl ])# R_PROG_CC_FLAG_D__NO_MATH_INLINES
 
-## Unused
-## R_C_OPTIEEE
-## -----------
-## Check whether the C compiler needs '-OPT:IEEE_NaN_inf=ON' to
-## correctly deal with IEEE NaN/Inf.
-## This flag is needed for the native SGI C compiler.
-## If needed, add the flag to R_XTRA_CFLAGS.
-AC_DEFUN([R_C_OPTIEEE],
-[AC_CACHE_CHECK([whether C compiler needs -OPT:IEEE_NaN_inf=ON],
-                [r_cv_c_optieee],
-[AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <math.h>
-#include <stdlib.h>
-#include <ieeefp.h>
-int main () {
-  double x = 0;
-  fpsetmask(0); x = x / x; exit (x != x);
-}
-]])],
-              [r_cv_c_optieee=yes],
-              [r_cv_c_optieee=no],
-              [r_cv_c_optieee=no])])
-if test "${r_cv_c_optieee}" = yes; then
-  R_SH_VAR_ADD(R_XTRA_CFLAGS, [-OPT:IEEE_NaN_inf=ON])
-fi
-])# R_C_OPTIEEE
+dnl ## Unused
+dnl ## R_C_OPTIEEE
+dnl ## -----------
+dnl ## Check whether the C compiler needs '-OPT:IEEE_NaN_inf=ON' to
+dnl ## correctly deal with IEEE NaN/Inf.
+dnl ## This flag is needed for the native SGI C compiler.
+dnl ## If needed, add the flag to R_XTRA_CFLAGS.
+dnl AC_DEFUN([R_C_OPTIEEE],
+dnl [AC_CACHE_CHECK([whether C compiler needs -OPT:IEEE_NaN_inf=ON],
+dnl                 [r_cv_c_optieee],
+dnl [AC_RUN_IFELSE([AC_LANG_SOURCE([[
+dnl #include <math.h>
+dnl #include <stdlib.h>
+dnl #include <ieeefp.h>
+dnl int main () {
+dnl   double x = 0;
+dnl   fpsetmask(0); x = x / x; exit (x != x);
+dnl }
+dnl ]])],
+dnl               [r_cv_c_optieee=yes],
+dnl               [r_cv_c_optieee=no],
+dnl               [r_cv_c_optieee=no])])
+dnl if test "${r_cv_c_optieee}" = yes; then
+dnl   R_SH_VAR_ADD(R_XTRA_CFLAGS, [-OPT:IEEE_NaN_inf=ON])
+dnl fi
+dnl ])# R_C_OPTIEEE
 
 ## R_C_INLINE
 ## ----------
@@ -575,9 +579,9 @@ AC_DEFUN([R_PROG_CXX_M],
 AC_CACHE_CHECK([whether ${CXX} accepts -M for generating dependencies],
                [r_cv_prog_cxx_m],
 [echo "#include <math.h>" > conftest.cc
-## No real point in using AC_LANG_* and ${ac_ext}, as we need to create
-## hard-wired suffix rules.  We could be a bit more careful as we
-## actually only test suffix '.cc'.
+dnl No real point in using AC_LANG_* and ${ac_ext}, as we need to create
+dnl hard-wired suffix rules.  We could be a bit more careful as we
+dnl actually only test suffix '.cc'.
 if test -n "`${CXX} -M conftest.cc 2>/dev/null | grep conftest`"; then
   r_cv_prog_cxx_m=yes
 else
@@ -647,59 +651,59 @@ fi
 
 ### * Fortran compiler and its characteristics.
 
-## Unused
-## R_PROG_F77
-## ----------
-## Find a fixed-form Fortran compiler (formerly Fortran 77)
-##
-## If we have not been forced to use a particular Fortran compiler (we
-## usually have been forced to use $FC), try to find one using one of
-## the several common names.  The list is based on the autoconf
-## release ca 2012  This says (removing F77 compilers)
-##
-## <QUOTE>
-## Known compilers:
-##  f77/f90/f95: generic compiler names
-##  g77: GNU Fortran 77 compiler
-##  gfortran: GNU Fortran 95+ compiler (released in gcc 4.0)
-##  g95: original gcc-based f95 compiler (gfortran is a fork)
-##  ftn: native Fortran 95 compiler on Cray X1
-##  pgf90/pghpf/pgf95/pgfortran: Portland Group F90/F95 compilers
-##  xlf90/xlf95: IBM (AIX) F90/F95 compilers
-##    Prefer xlf9x to the generic names because they do not reject files
-##    with extension `.f'.
-##  lf95: Lahey-Fujitsu F95 compiler
-##  epcf90: "Edinburgh Portable Compiler" F90
-##  fort: Compaq (now HP) Fortran 90/95 compiler for Tru64 and Linux/Alpha
-##  ifort, previously ifc: Intel Fortran 95 compiler for Linux/x86
-##  efc: Intel Fortran 95 compiler for IA64
-##  nagfor: NAGWare Fortran 77/90/95 compiler
-##
-## and uses the following lists:
-##   F95: f95 fort xlf95 ifort ifc efc pgf95 lf95 gfortran ftn
-##   F90: f90 xlf90 pgf90 pghpf epcf90
-##   F95: gfortran g95 xlf95 f95 fort ifort ifc efc pgfortran pgf95 lf95 ftn nagfor
-##   F90: xlf90 f90 pgf90 pghpf epcf90
-AC_DEFUN([R_PROG_F77],
-[AC_BEFORE([$0], [AC_PROG_LIBTOOL])
-AC_REQUIRE([R_PROG_CC_VERSION])
-if test -n "${F77}"; then
-  AC_MSG_RESULT([defining F77 to be ${F77}])
-  AC_PROG_F77
-else
-  F77=
-  F95_compilers="gfortran g95 xlf95 f95 fort ifort ifc efc pgfortran pgf95 lf95 ftn nagfor"
-  F90_compilers="xlf90 f90 pgf90 pghpf epcf90"
-  AC_CHECK_PROGS(F77, [ ${F95_compilers} ${F90_compilers} ])
-fi
-if test -n "${F77}"; then
-  ## If the above 'found' a Fortran 77 compiler, we run AC_PROG_F77 as
-  ## this does additional testing (GNU, '-g', ...).
-  AC_PROG_F77
-else
-  AC_MSG_ERROR([No F77 compiler found])
-fi
-])# R_PROG_F77
+dnl ## Unused
+dnl ## R_PROG_F77
+dnl ## ----------
+dnl ## Find a fixed-form Fortran compiler (formerly Fortran 77)
+dnl ##
+dnl ## If we have not been forced to use a particular Fortran compiler (we
+dnl ## usually have been forced to use $FC), try to find one using one of
+dnl ## the several common names.  The list is based on the autoconf
+dnl ## release ca 2012  This says (removing F77 compilers)
+dnl ##
+dnl ## <QUOTE>
+dnl ## Known compilers:
+dnl ##  f77/f90/f95: generic compiler names
+dnl ##  g77: GNU Fortran 77 compiler
+dnl ##  gfortran: GNU Fortran 95+ compiler (released in gcc 4.0)
+dnl ##  g95: original gcc-based f95 compiler (gfortran is a fork)
+dnl ##  ftn: native Fortran 95 compiler on Cray X1
+dnl ##  pgf90/pghpf/pgf95/pgfortran: Portland Group F90/F95 compilers
+dnl ##  xlf90/xlf95: IBM (AIX) F90/F95 compilers
+dnl ##    Prefer xlf9x to the generic names because they do not reject files
+dnl ##    with extension `.f'.
+dnl ##  lf95: Lahey-Fujitsu F95 compiler
+dnl ##  epcf90: "Edinburgh Portable Compiler" F90
+dnl ##  fort: Compaq (now HP) Fortran 90/95 compiler for Tru64 and Linux/Alpha
+dnl ##  ifort, previously ifc: Intel Fortran 95 compiler for Linux/x86
+dnl ##  efc: Intel Fortran 95 compiler for IA64
+dnl ##  nagfor: NAGWare Fortran 77/90/95 compiler
+dnl ##
+dnl ## and uses the following lists:
+dnl ##   F95: f95 fort xlf95 ifort ifc efc pgf95 lf95 gfortran ftn
+dnl ##   F90: f90 xlf90 pgf90 pghpf epcf90
+dnl ##   F95: gfortran g95 xlf95 f95 fort ifort ifc efc pgfortran pgf95 lf95 ftn nagfor
+dnl ##   F90: xlf90 f90 pgf90 pghpf epcf90
+dnl AC_DEFUN([R_PROG_F77],
+dnl [AC_BEFORE([$0], [AC_PROG_LIBTOOL])
+dnl AC_REQUIRE([R_PROG_CC_VERSION])
+dnl if test -n "${F77}"; then
+dnl   AC_MSG_RESULT([defining F77 to be ${F77}])
+dnl   AC_PROG_F77
+dnl else
+dnl   F77=
+dnl   F95_compilers="gfortran g95 xlf95 f95 fort ifort ifc efc pgfortran pgf95 lf95 ftn nagfor"
+dnl   F90_compilers="xlf90 f90 pgf90 pghpf epcf90"
+dnl   AC_CHECK_PROGS(F77, [ ${F95_compilers} ${F90_compilers} ])
+dnl fi
+dnl if test -n "${F77}"; then
+dnl   ## If the above 'found' a Fortran 77 compiler, we run AC_PROG_F77 as
+dnl   ## this does additional testing (GNU, '-g', ...).
+dnl   AC_PROG_F77
+dnl else
+dnl   AC_MSG_ERROR([No F77 compiler found])
+dnl fi
+dnl ])# R_PROG_F77
 
 ## R_PROG_FC_FLIBS
 ## ----------------
@@ -708,16 +712,16 @@ fi
 AC_DEFUN([R_PROG_FC_FLIBS],
 [AC_BEFORE([$0], [AC_FC_LIBRARY_LDFLAGS])
 if test -z "${FLIBS}"; then
-##
-## Historic comment
-## Currently (Autoconf 2.50 or better, it seems) FLIBS also contains all
-## elements of LIBS when AC_F77_LIBRARY_LDFLAGS is run.  This is because
-## _AC_PROG_F77_V_OUTPUT() uses 'eval $ac_link' for obtaining verbose
-## linker output, and AC_LANG(Fortran 77) sets up ac_link to contain
-## LIBS.  Most likely a bug, and a nuisance in any case ...
-## But we cannot simply eliminate the elements in FLIBS duplicated from
-## LIBS (e.g. '-lm' should be preserved).  Hence, we try to call
-## AC_FC_LIBRARY_LDFLAGS() with LIBS temporarily set to empty.
+dnl
+dnl Historical comment
+dnl Currently (Autoconf 2.50 or better, it seems) FLIBS also contains all
+dnl elements of LIBS when AC_F77_LIBRARY_LDFLAGS is run.  This is because
+dnl _AC_PROG_F77_V_OUTPUT() uses 'eval $ac_link' for obtaining verbose
+dnl linker output, and AC_LANG(Fortran 77) sets up ac_link to contain
+dnl LIBS.  Most likely a bug, and a nuisance in any case ...
+dnl But we cannot simply eliminate the elements in FLIBS duplicated from
+dnl LIBS (e.g. '-lm' should be preserved).  Hence, we try to call
+dnl AC_FC_LIBRARY_LDFLAGS() with LIBS temporarily set to empty.
 r_save_LIBS="${LIBS}"
 LIBS=
 AC_FC_LIBRARY_LDFLAGS
@@ -729,44 +733,44 @@ else
   CLIBS=
 fi
 LIBS="${r_save_LIBS}"
-## Comments here are ancient and about F77 version ....
-## Currently g77 on Darwin links against '-lcrt1.o' (and for GCC 3.1 or
-## better also against '-lcrtbegin.o'), which (unlike '-lcrt0.o') are
-## not stripped by AC_F77_LIBRARY_LDFLAGS.  This in particular causes
-## R_PROG_FC_CC_COMPAT to fail.  Hence, we make sure all -lcrt*.o are
-## removed. In Addition, -lmx and -lSystem are implicit and their
-## manual inclusion leads to ordering problems (remove when autoconf
-## is fixed - supposedly the CVS version is, but 2.6.0 is not).
-##
-## Native f90 on HP-UX 11 comes up with '-l:libF90.a' causing trouble
-## when using gcc for linking.  The '-l:' construction is similar to
-## plain '-l' except that search order (archive/shared) given by '-a'
-## is not important.  We escape such flags via '-Wl,' in case of gcc.
-## Note that the current Autoconf CVS uses _AC_LINKER_OPTION for a
-## similar purpose when computing FLIBS: this uses '-Xlinker' escapes
-## for gcc and does nothing otherwise.  Note also that we cannot simply
-## unconditionally escape with '${wl}' from libtool as on HP-UX we need
-## SHLIB_LD=ld for native C compilers (problem with non-PIC 'crt0.o',
-## see 'Individual platform overrides' in section 'DLL stuff' in file
-## 'configure.ac'.
-##
-## Using the Intel Fortran compiler (ifc) one typically gets incorrect
-## flags, as the output from _AC_PROG_F77_V_OUTPUT() contains double
-## quoted options, e.g. "-mGLOB_options_string=......", see also e.g.
-## http://www.octave.org/octave-lists/archive/octave-maintainers.2002/msg00038.html.
-## One possible solution is to change AC_F77_LIBRARY_LDFLAGS() to remove
-## double quotes for ifc, as it already does for the Cray cft90.  As we
-## prefer not to overload Autoconf code, we try to fix things here ...
-##
-## As of 2.1.0 we try to tidy this up a bit.
-## 1) -lfrtbegin and -lgfortranbegin are used by g77/gfortran only for a
-## Fortran main program, which we do not have.
-## 2) g77 also tends to duplicate paths via ../../.., so we canonicalize
-## paths and remove duplicates.
-## 3) We do not need -L/lib etc, nor those in LDFLAGS
-## 4) We exclude path with CC will include when linking.
-##
-## First try to fathom out what -Lfoo commands are unnecessary.
+dnl Comments here are ancient and about F77 version ....
+dnl Currently g77 on Darwin links against '-lcrt1.o' (and for GCC 3.1 or
+dnl better also against '-lcrtbegin.o'), which (unlike '-lcrt0.o') are
+dnl not stripped by AC_F77_LIBRARY_LDFLAGS.  This in particular causes
+dnl R_PROG_FC_CC_COMPAT to fail.  Hence, we make sure all -lcrt*.o are
+dnl removed. In Addition, -lmx and -lSystem are implicit and their
+dnl manual inclusion leads to ordering problems (remove when autoconf
+dnl is fixed - supposedly the CVS version is, but 2.6.0 is not).
+dnl
+dnl Native f90 on HP-UX 11 comes up with '-l:libF90.a' causing trouble
+dnl when using gcc for linking.  The '-l:' construction is similar to
+dnl plain '-l' except that search order (archive/shared) given by '-a'
+dnl is not important.  We escape such flags via '-Wl,' in case of gcc.
+dnl Note that the current Autoconf CVS uses _AC_LINKER_OPTION for a
+dnl similar purpose when computing FLIBS: this uses '-Xlinker' escapes
+dnl for gcc and does nothing otherwise.  Note also that we cannot simply
+dnl unconditionally escape with '${wl}' from libtool as on HP-UX we need
+dnl SHLIB_LD=ld for native C compilers (problem with non-PIC 'crt0.o',
+dnl see 'Individual platform overrides' in section 'DLL stuff' in file
+dnl 'configure.ac'.
+dnl
+dnl Using the Intel Fortran compiler (ifc) one typically gets incorrect
+dnl flags, as the output from _AC_PROG_F77_V_OUTPUT() contains double
+dnl quoted options, e.g. "-mGLOB_options_string=......", see also e.g.
+dnl http://www.octave.org/octave-lists/archive/octave-maintainers.2002/msg00038.html.
+dnl One possible solution is to change AC_F77_LIBRARY_LDFLAGS() to remove
+dnl double quotes for ifc, as it already does for the Cray cft90.  As we
+dnl prefer not to overload Autoconf code, we try to fix things here ...
+dnl
+dnl As of 2.1.0 we try to tidy this up a bit.
+dnl 1) -lfrtbegin and -lgfortranbegin are used by g77/gfortran only for a
+dnl Fortran main program, which we do not have.
+dnl 2) g77 also tends to duplicate paths via ../../.., so we canonicalize
+dnl paths and remove duplicates.
+dnl 3) We do not need -L/lib etc, nor those in LDFLAGS
+dnl 4) We exclude path with CC will include when linking.
+dnl
+dnl First try to fathom out what -Lfoo commands are unnecessary.
 case "${host_os}" in
   linux*)
     r_libpath_default="/usr/lib64 /lib64 /usr/lib /lib"
@@ -853,9 +857,9 @@ fi
 ## (but do in R_dlsym).
 AC_DEFUN([R_PROG_FC_APPEND_UNDERSCORE],
 [AC_REQUIRE([AC_FC_WRAPPERS])
-## DANGER!  We really need the results of _AC_FC_NAME_MANGLING as
-## stored in the cache var ac_cv_fc_mangling which is not documented
-## and hence may change ...
+dnl DANGER!  We really need the results of _AC_FC_NAME_MANGLING as
+dnl stored in the cache var ac_cv_fc_mangling which is not documented
+dnl and hence may change ...
 case "${ac_cv_fc_mangling}" in
   "upper "*)
     AC_MSG_WARN([Fortran compiler uses uppercase external names])
@@ -931,7 +935,7 @@ AC_CACHE_VAL([r_cv_prog_fc_can_run],
       end
 EOF
 ${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
-## Yes we need to double quote this ...
+dnl Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
 #include <stdlib.h>
@@ -1000,7 +1004,7 @@ AC_CACHE_VAL([r_cv_prog_fc_cc_compat],
       end
 EOF
 ${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
-## Yes we need to double quote this ...
+dnl Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
 #include <stdlib.h>
@@ -1087,7 +1091,7 @@ c a few tests of constructs that are sometimes missing
       end
 EOF
 ${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
-## Yes we need to double quote this ...
+dnl Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <math.h>
 #include <stdlib.h>
@@ -1156,7 +1160,7 @@ fi
 AC_SUBST(HAVE_FORTRAN_DOUBLE_COMPLEX)
 ])# R_PROG_FC_CC_COMPAT_COMPLEX
 
-## Unused
+## Unused but perhaps useful
 ## R_PROG_FC_FLAG(FLAG, [ACTION-IF-TRUE])
 ## ---------------------------------------
 ## Check whether the Fortran compiler handles command line option
@@ -1364,9 +1368,9 @@ AC_DEFUN([R_PROG_OBJC_RUNTIME],
 ## The default action on success is to set OBJCXX to $1
 AC_DEFUN([R_PROG_OBJCXX_WORKS],
 [AC_MSG_CHECKING([whether $1 can compile ObjC++])
-## we don't use AC_LANG_xx because ObjC++ is not defined as a language (yet)
-## (the test program is from the gcc test suite)
-## but it needed an #undef (PR#15107)
+dnl we don't use AC_LANG_xx because ObjC++ is not defined as a language (yet)
+dnl (the test program is from the gcc test suite)
+dnl but it needed an #undef (PR#15107)
 cat << \EOF > conftest.mm
 #undef __OBJC2__
 #include <objc/Object.h>
@@ -1640,7 +1644,7 @@ AC_CACHE_VAL([r_cv_type_socklen],
                     [r_cv_type_socklen=${t}; break],
                     [r_cv_type_socklen=])
 done])
-## size_t works on Windows but is unsigned and int is correct
+dnl size_t works on Windows but is unsigned and int is correct
 case "${host_os}" in
   cygwin*|mingw*|windows*|winnt)
     r_cv_type_socklen=int
@@ -2412,10 +2416,10 @@ if test -z "${TCLTK_CPPFLAGS}"; then
     fi
   fi
 fi
-## TK_XINCLUDES should be empty for Aqua Tk, so earlier test was wrong
-## Our code does not include any X headers, but tk.h may ....
-## That is true even on macOS, but Aqua Tk has a private version of
-## X11 headers, and we want that one and not the XQuartz one.
+dnl TK_XINCLUDES should be empty for Aqua Tk, so earlier test was wrong
+dnl Our code does not include any X headers, but tk.h may ....
+dnl That is true even on macOS, but Aqua Tk has a private version of
+dnl X11 headers, and we want that one and not the XQuartz one.
 if test "${have_tcltk}" = yes; then
   if test "${found_tk_by_config}" = yes; then
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${TK_XINCLUDES}"
@@ -2560,19 +2564,18 @@ AC_SUBST(use_tcltk)
 ##
 ## This is based on ACX_BLAS by Steven G. Johnson <stevenj@alum.mit.edu>
 ## from the Official Autoconf Macro Archive
-## (https://www.gnu.org/software/ac-archive/htmldoc/acx_blas.m4),
+## (formerly https://www.gnu.org/software/ac-archive/htmldoc/acx_blas.m4),
 ## with the following changes:
 ## * We also handle HP-UX .sl command line specifications.
-## * We explictly deal with the case of f2c.  Most likely pointless.
 ## * We only care about the Fortran interface to Atlas, hence do not
 ##   test for -lcblas.
-## * We do not use BLAS libs that caused problems in the past: Alpha
-##   CXML and DXML, and SGI SCSL and SGIMATH (marked with COMMENT tags).
+## * We do not use BLAS libs that caused problems in the past.
 ## * As we link with $BLAS_LIBS $FLIBS $LIBS (in that order), we use the
 ##   same order in the tests.
 ## * We do not use ACTION-IF-FOUND and ACTION-IF-NOT-FOUND.
 ## The sunperf test calls the library as now required.
 ## Based on acx_blas.m4 version 1.2 (2001-12-13)
+## (Since renamed to ax_blas.m4)
 AC_DEFUN([R_BLAS_LIBS],
 [AC_REQUIRE([R_PROG_FC_FLIBS])
 AC_REQUIRE([R_PROG_FC_APPEND_UNDERSCORE])
@@ -2600,7 +2603,7 @@ fi
 acx_blas_save_LIBS="${LIBS}"
 LIBS="${FLIBS} ${LIBS}"
 
-## First, check BLAS_LIBS environment variable
+dnl First, check BLAS_LIBS environment variable
 if test "${acx_blas_ok}" = no; then
   if test "x${BLAS_LIBS}" != x; then
     r_save_LIBS="${LIBS}"; LIBS="${BLAS_LIBS} ${LIBS}"
@@ -2612,12 +2615,19 @@ if test "${acx_blas_ok}" = no; then
   fi
 fi
 
-## BLAS linked to by default?  (happens on some supercomputers)
+dnl BLAS linked to by default?  (happens on some supercomputers)
 if test "${acx_blas_ok}" = no; then
   AC_CHECK_FUNC(${dgemm}, [acx_blas_ok=yes])
 fi
 
-## BLAS in ATLAS library?  (http://math-atlas.sourceforge.net/)
+dnl Taken from 2008 version of ax_blas.m4
+# BLAS in OpenBLAS library? (http://xianyi.github.com/OpenBLAS/)
+if test "${acx_blas_ok}" = no; then
+        AC_CHECK_LIB(openblas, $sgemm, [acx_blas_ok=yes
+                                        BLAS_LIBS="-lopenblas"])
+fi
+
+dnl BLAS in ATLAS library?  (http://math-atlas.sourceforge.net/)
 if test "${acx_blas_ok}" = no; then
   AC_CHECK_LIB(atlas, ATL_xerbla,
                [AC_CHECK_LIB(f77blas, ${dgemm},
@@ -2626,7 +2636,7 @@ if test "${acx_blas_ok}" = no; then
 			     [], [-latlas])])
 fi
 
-## BLAS in PhiPACK libraries?  (requires generic BLAS lib, too)
+dnl BLAS in PhiPACK libraries?  (requires generic BLAS lib, too)
 if test "${acx_blas_ok}" = no; then
   AC_CHECK_LIB(blas, ${dgemm},
 	       [AC_CHECK_LIB(dgemm, $dgemm,
@@ -2637,25 +2647,9 @@ if test "${acx_blas_ok}" = no; then
 			     [], [-lblas])])
 fi
 
-## <COMMENT>
-## ## BLAS in Alpha CXML library?
-## if test "${acx_blas_ok}" = no; then
-##   AC_CHECK_LIB(cxml, ${sgemm},
-##                [acx_blas_ok=yes; BLAS_LIBS="-lcxml"])
-## fi
-## </COMMENT>
-
-## <COMMENT>
-## # BLAS in Alpha DXML library? (now called CXML, see above)
-## if test "${acx_blas_ok}" = no; then
-##   AC_CHECK_LIB(dxml, ${sgemm},
-##                [acx_blas_ok=yes; BLAS_LIBS="-ldxml"])
-## fi
-## </COMMENT>
-
-## BLAS in Sun Performance library?
-## Some versions require -xlic_lib=sunperf: -lsunperf will not work
-## Not sure whether -lsunmath is required, but it helps anyway
+dnl BLAS in Sun Performance library?
+dnl Some versions require -xlic_lib=sunperf: -lsunperf will not work
+dnl Not sure whether -lsunmath is required, but it helps anyway
 if test "${acx_blas_ok}" = no; then
   if test "x$GCC" != xyes; then # only works with Sun CC
      AC_MSG_CHECKING([for ${dgemm} in -lsunperf])
@@ -2671,23 +2665,7 @@ if test "${acx_blas_ok}" = no; then
   fi
 fi
 
-## <COMMENT>
-## ## BLAS in SCSL library?  (SGI/Cray Scientific Library)
-## if test "${acx_blas_ok}" = no; then
-##   AC_CHECK_LIB(scs, ${sgemm},
-##                [acx_blas_ok=yes; BLAS_LIBS="-lscs"])
-## fi
-## </COMMENT>
-
-## <COMMENT>
-## ## BLAS in SGIMATH library?
-## if test "${acx_blas_ok}" = no; then
-##   AC_CHECK_LIB(complib.sgimath, ${sgemm},
-##                [acx_blas_ok=yes; BLAS_LIBS="-lcomplib.sgimath"])
-## fi
-## </COMMENT>
-
-## BLAS in IBM ESSL library? (requires generic BLAS lib, too)
+dnl BLAS in IBM ESSL library? (requires generic BLAS lib, too)
 if test "${acx_blas_ok}" = no; then
   AC_CHECK_LIB(blas, ${dgemm},
 	       [AC_CHECK_LIB(essl, ${dgemm},
@@ -2696,15 +2674,15 @@ if test "${acx_blas_ok}" = no; then
 			     [], [-lblas ${FLIBS}])])
 fi
 
-## Generic BLAS library?
+dnl Generic BLAS library?
 if test "${acx_blas_ok}" = no; then
   AC_CHECK_LIB(blas, ${dgemm},
                [acx_blas_ok=yes; BLAS_LIBS="-lblas"])
 fi
 
-## Now check if zdotu works (fails on AMD64 with the wrong compiler;
-## also fails on macOS with Accelerate/vecLib and gfortran; 
-## but in that case we have a work-around using USE_VECLIB_G95FIX)
+dnl Now check if zdotu works (fails on AMD64 with the wrong compiler;
+dnl also fails on macOS with Accelerate/vecLib and gfortran; 
+dnl but in that case we have a work-around using USE_VECLIB_G95FIX)
 
 if test "${acx_blas_ok}" = yes; then
   AC_MSG_CHECKING([whether double complex BLAS can be used])
@@ -2733,7 +2711,7 @@ c Goto's BLAS at least needs a XERBLA
       end
 EOF
 ${FC} ${FFLAGS} -c conftestf.f 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
-## Yes we need to double quote this ...
+dnl Yes we need to double quote this ...
 [cat > conftest.c <<EOF
 #include <stdlib.h>
 #include "confdefs.h"
@@ -2926,13 +2904,11 @@ AC_SUBST(BLAS_LIBS)
 ##
 ## This is roughly based on ACX_LAPACK by Steven G. Johnson
 ## <stevenj@alum.mit.edu> from the Official Autoconf Macro Archive
-## (https://www.gnu.org/software/ac-archive/htmldoc/acx_lapack.m4),
+## (formerly https://www.gnu.org/software/ac-archive/htmldoc/acx_lapack.m4),
 ## with the following changes:
 ## * We also handle HP-UX .sl command line specifications.
-## * We explictly deal with the case of f2c.  Most likely pointless.
 ## * We test for a LAPACK_LIBS environment variable after checking
 ##   whether LAPACK is already linked (see below).
-## * We do not test for the generic lapack_rs6k library (why not?).
 ## * As we link with $LAPACK_LIBS $BLAS_LIBS $FLIBS $LIBS (in that
 ##   order), we use the same order in the tests.
 ## * We do not use ACTION-IF-FOUND and ACTION-IF-NOT-FOUND.
@@ -2943,8 +2919,10 @@ AC_SUBST(BLAS_LIBS)
 ## LAPACK-containing BLAS to be used ... there are too many slow or
 ## broken LAPACKs out there.
 ## Based on acx_lapack.m4 version 1.3 (2002-03-12).
+## (Since renamed to ax_lapack.m4)
 
 ## Test function was zgeev, changed to dpstrf which is LAPACK 3.2.
+## (2009 version used cheev)
 
 AC_DEFUN([R_LAPACK_LIBS],
 [AC_REQUIRE([R_PROG_FC_FLIBS])
@@ -2975,12 +2953,12 @@ fi
 acx_lapack_save_LIBS="${LIBS}"
 LIBS="${BLAS_LIBS} ${FLIBS} ${LIBS}"
 
-## LAPACK linked to by default?  (Could be in the BLAS libs.)
+dnl LAPACK linked to by default?  (Could be in the BLAS libs.)
 if test "${acx_lapack_ok}" = no; then
   AC_CHECK_FUNC(${lapack}, [acx_lapack_ok=yes])
 fi
 
-## Next, check LAPACK_LIBS environment variable
+dnl Next, check LAPACK_LIBS environment variable
 if test "${acx_lapack_ok}" = no; then
   if test "x${LAPACK_LIBS}" != x; then
     r_save_LIBS="${LIBS}"; LIBS="${LAPACK_LIBS} ${LIBS}"
@@ -2991,10 +2969,10 @@ if test "${acx_lapack_ok}" = no; then
   fi
 fi
 
-## LAPACK in Sun Performance library?
-## No longer test here as will be picked up by the default test.
+dnl LAPACK in Sun Performance library?
+dnl No longer test here as will be picked up by the default test.
 
-## Generic LAPACK library?
+dnl Generic LAPACK library?
 if test "${acx_lapack_ok}" = no; then
   AC_CHECK_LIB(lapack, ${lapack},
                [acx_lapack_ok=yes; LAPACK_LIBS="-llapack"])
@@ -3441,7 +3419,7 @@ fi
 ## libiconv, e.g. on macOS, has iconv as a macro and needs -liconv.
 AC_DEFUN([R_ICONV],
 [AC_CHECK_HEADERS(iconv.h)
-## need to ignore cache for this as it may set LIBS
+dnl need to ignore cache for this as it may set LIBS
 unset ac_cv_func_iconv
 AC_CACHE_CHECK(for iconv, ac_cv_func_iconv, [
   ac_cv_func_iconv="no"
@@ -3587,7 +3565,7 @@ int main () {
     AC_DEFINE(HAVE_ICONV_CP1252, 1, [Define if `iconv' accepts "CP1252".])
   fi
 fi
-## if the iconv we are using was in libiconv we have already included -liconv
+dnl if the iconv we are using was in libiconv we have already included -liconv
 AC_CACHE_CHECK(for iconvlist, ac_cv_func_iconvlist, [
   ac_cv_func_iconvlist="no"
   AC_TRY_LINK([#include <stdlib.h>
@@ -3612,7 +3590,7 @@ AM_ICONV dnl from gettext.m4
 AC_DEFUN([R_MBCS],
 [
 want_mbcs_support=yes
-## Wide character support -- first test for headers (which are assumed in code)
+dnl Wide character support -- first test for headers (which are assumed in code)
 AC_CHECK_HEADERS(wchar.h wctype.h)
 for ac_header in wchar wctype; do
   as_ac_var=`echo "ac_cv_header_${ac_header}_h"`
@@ -3622,8 +3600,8 @@ for ac_header in wchar wctype; do
   fi
 done
 if test "$want_mbcs_support" = yes ; then
-## Solaris 8 is missing iswblank, but we can make it from iswctype.
-## These are all C99, but Cygwin lacks wcsftime & wcstod
+dnl Solaris 8 is missing iswblank, but we can make it from iswctype.
+dnl These are all C99, but Cygwin lacks wcsftime & wcstod
   R_CHECK_FUNCS([mbrtowc wcrtomb wcscoll wcsftime wcstod], [#include <wchar.h>])
   R_CHECK_FUNCS([mbstowcs wcstombs], [#include <stdlib.h>])
   R_CHECK_FUNCS([wctrans iswblank wctype iswctype], 
@@ -3639,9 +3617,9 @@ if test "$want_mbcs_support" = yes ; then
     fi
   done
 fi
-## it seems IRIX once had wctrans but not wctrans_t: we check this when we
-## know we have the headers and wctrans().
-## Also Solaris 2.6 (very old) seems to be missing mbstate_t
+dnl it seems IRIX once had wctrans but not wctrans_t: we check this when we
+dnl know we have the headers and wctrans().
+dnl Also Solaris 2.6 (very old) seems to be missing mbstate_t
 if test "$want_mbcs_support" = yes ; then
   AC_CHECK_TYPES([wctrans_t, mbstate_t], , , [#include <wchar.h>
        #include <wctype.h>])
@@ -3741,8 +3719,8 @@ if test $r_cv_visibility_attribute = yes; then
   AC_DEFINE(HAVE_VISIBILITY_ATTRIBUTE, 1,
            [Define to 1 if __attribute__((visibility())) is supported])
 fi
-## test if visibility flag is accepted: NB Solaris compilers do and ignore,
-## so only make use of this if HAVE_VISIBILITY_ATTRIBUTE is true.
+dnl test if visibility flag is accepted: NB Solaris compilers do and ignore,
+dnl so only make use of this if HAVE_VISIBILITY_ATTRIBUTE is true.
 if test -z "${C_VISIBILITY+set}"; then
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS -fvisibility=hidden"
@@ -3755,9 +3733,9 @@ if test "${r_cv_prog_cc_vis}" = yes; then
     C_VISIBILITY="-fvisibility=hidden"
   fi
 fi
-## Need to exclude Intel compilers, where this does not work correctly.
-## The flag is documented and is effective, but also hides
-## unsatisfied references. We cannot test for GCC, as icc passes that test.
+dnl Need to exclude Intel compilers, where this does not work correctly.
+dnl The flag is documented and is effective, but also hides
+dnl unsatisfied references. We cannot test for GCC, as icc passes that test.
 case  "${CC}" in
   ## Intel compiler: note that -c99 may have been appended
   *icc*)
@@ -3780,9 +3758,9 @@ if test "${r_cv_prog_cxx_vis}" = yes; then
     CXX_VISIBILITY="-fvisibility=hidden"
   fi
 fi
-## Need to exclude Intel compilers, where this does not work correctly.
-## The flag is documented and is effective, but also hides
-## unsatisfied references. We cannot test for GCC, as icc passes that test.
+dnl Need to exclude Intel compilers, where this does not work correctly.
+dnl The flag is documented and is effective, but also hides
+dnl unsatisfied references. We cannot test for GCC, as icc passes that test.
 case  "${CXX}" in
   ## Intel compiler
   *icc*|*icpc*)
@@ -3805,7 +3783,7 @@ if test "${r_cv_prog_fc_vis}" = yes; then
     F_VISIBILITY="-fvisibility=hidden"
   fi
 fi
-## need to exclude Intel compilers.
+dnl need to exclude Intel compilers.
 case  "${FC}" in
   ## Intel compiler
   *ifc|*ifort)
@@ -4081,10 +4059,10 @@ case "${host_os}" in
     R_SYSTEM_ABI="?"
     ;;
 esac
-## Compiler types
-## C: AC_PROG_CC does
-##   If using the GNU C compiler, set shell variable `GCC' to `yes'.
-##   Alternatively, could use ac_cv_c_compiler_gnu (undocumented).
+dnl Compiler types
+dnl C: AC_PROG_CC does
+dnl   If using the GNU C compiler, set shell variable `GCC' to `yes'.
+dnl   Alternatively, could use ac_cv_c_compiler_gnu (undocumented).
 if test "${GCC}" = yes; then
   R_SYSTEM_ABI="${R_SYSTEM_ABI},gcc"
 else
@@ -4097,9 +4075,9 @@ case "${host_os}" in
   R_SYSTEM_ABI="${R_SYSTEM_ABI},?"
 esac
 fi
-## C++: AC_PROG_CXX does
-##   If using the GNU C++ compiler, set shell variable `GXX' to `yes'.
-##   Alternatively, could use ac_cv_cxx_compiler_gnu (undocumented).
+dnl C++: AC_PROG_CXX does
+dnl   If using the GNU C++ compiler, set shell variable `GXX' to `yes'.
+dnl   Alternatively, could use ac_cv_cxx_compiler_gnu (undocumented).
 if test "${GXX}" = yes; then
   R_SYSTEM_ABI="${R_SYSTEM_ABI},gxx"
 else
@@ -4111,7 +4089,7 @@ case "${host_os}" in
   R_SYSTEM_ABI="${R_SYSTEM_ABI},?"
 esac
 fi
-## Fortran (fixed- then free-form):
+dnl Fortran (fixed- then free-form):
 if test "${ac_cv_fc_compiler_gnu}" = yes; then
   R_SYSTEM_ABI="${R_SYSTEM_ABI},gfortran,gfortran"
 else
@@ -4234,9 +4212,10 @@ AC_ARG_VAR([SHLIB_$2LDFLAGS], [special flags used by SHLIB_$2LD])
 ## R_LIBCURL
 ## ----------------
 AC_DEFUN([R_LIBCURL],
-[## curl-config might not match the installed libcurl,
-## so we allow the user to set CURL_CPPFLAGS, CURL_LIBS
-## and check the version directly rather than by curl-config --checkfor
+[
+dnl curl-config might not match the installed libcurl,
+dnl so we allow the user to set CURL_CPPFLAGS, CURL_LIBS
+dnl and check the version directly rather than by curl-config --checkfor
 AC_PATH_PROG(CURL_CONFIG, curl-config)
 if test -n "${CURL_CONFIG}"; then
   echo "checking libcurl version ..." \
