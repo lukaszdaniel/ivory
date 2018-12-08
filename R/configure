@@ -829,10 +829,6 @@ stripstaticlib
 striplib
 Rshlibpath_var
 shlibpath_var
-CROSS_COMPILING_FALSE
-CROSS_COMPILING_TRUE
-BUILD_R
-BUILD_CC
 LIBTOOL_DEPS
 LT_SYS_LIBRARY_PATH
 OTOOL64
@@ -22623,55 +22619,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-## cross-compiling: added May 2007, not actually used
-
-if test "${cross_compiling}" = yes; then
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for build C compiler" >&5
-$as_echo_n "checking for build C compiler... " >&6; }
-  build_cc_works=no
-  echo "int main(void) { return 0; }" > conftest.c
-  if test -n "${BUILD_CC}" && "${BUILD_CC}" conftest.c -o conftest && ./conftest; then
-      build_cc_works=yes;
-  fi
-  if test "${build_cc_works}" = no; then
-    for prog in gcc cc; do
-      if "${prog}" conftest.c -o conftest >/dev/null 2>&1 && ./conftest; then
-        BUILD_CC="${prog}"; build_cc_works=yes; break
-      fi
-    done
-  fi
-  rm -Rf conftest conftest.* core
-  if test "${build_cc_works}" = no; then
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: none" >&5
-$as_echo "none" >&6; }
-    as_fn_error $? "Build C compiler doesn't work. Set BUILD_CC to a compiler capable of creating a binary native to the build machine." "$LINENO" 5
-  fi
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${BUILD_CC}" >&5
-$as_echo "${BUILD_CC}" >&6; }
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for build R" >&5
-$as_echo_n "checking for build R... " >&6; }
-  : ${BUILD_R=R}
-  if echo 'cat(R.home())'|"${BUILD_R}" --vanilla --slave >/dev/null 2>&1; then
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${BUILD_R}" >&5
-$as_echo "${BUILD_R}" >&6; }
-  else
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: none" >&5
-$as_echo "none" >&6; }
-    as_fn_error $? "Build R doesn't work. Set BUILD_R to a native build of the same R version that you want to cross-compile." "$LINENO" 5
-  fi
-fi
-
-
-
- if test "${cross_compiling}" = yes; then
-  CROSS_COMPILING_TRUE=
-  CROSS_COMPILING_FALSE='#'
-else
-  CROSS_COMPILING_TRUE='#'
-  CROSS_COMPILING_FALSE=
-fi
-
-
 ### * Checks for libraries.
 
 ## Set up LD_LIBRARY_PATH or equivalent.
@@ -22924,23 +22871,7 @@ _ACEOF
 
 fi
 
-case "${host_os}" in
-  darwin*)
-    ## macOS >= 10.3 include dlcompat in libSystem
-    ## This is ancient history
-    ## SI says we want '-lcc_dynamic' on Darwin, although currently
-    ## https://developer.apple.com/documentation/MacOSX/ has nothing
-    ## official.  Bill Northcott <w.northcott@unsw.edu.au> points out
-    ## that it is only needed for GCC 3.x (and earlier) ...
-    if test "${GCC}" = yes; then
-      case "${CC_VERSION}" in
-        2.*|3.*)
-	  as_fn_error $? "Your gcc is too old." "$LINENO" 5
-      esac
-    fi
-    ;;
-  *)
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen in -ldl" >&5
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen in -ldl" >&5
 $as_echo_n "checking for dlopen in -ldl... " >&6; }
 if ${ac_cv_lib_dl_dlopen+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -22985,8 +22916,6 @@ _ACEOF
 
 fi
 
-    ;;
-esac
 
 ## Readline.
 if test "${use_readline}" = yes; then
@@ -23631,13 +23560,11 @@ fi
 
 done
 
-## dl.h was used in src/unix/hpdlfcn.c included from src/unix/dynload.c on HP-UX
-## (It is tested for in Rdynload.c and dynload.c)
 ## features.h is used by date-time code on Linux and in extra/tzone
 ## floatingpoint.h is used for fpsetmask on FreeBSD.
 ## sys/param.h is one way to get PATH_MAX.
 ## elf.h is used for fallback for HAVE_NO_SYMBOL_UNDERSCORE
-for ac_header in arpa/inet.h dl.h elf.h features.h floatingpoint.h \
+for ac_header in arpa/inet.h elf.h features.h floatingpoint.h \
   langinfo.h netdb.h netinet/in.h sys/param.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
@@ -25381,7 +25308,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:25384: \"$ac_link\") >&5
+(eval echo $as_me:25311: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -25456,7 +25383,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:25459: \"$ac_link\") >&5
+(eval echo $as_me:25386: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -27415,16 +27342,12 @@ fi
 main_ld="${CC}"
 shlib_ld="${CC}"
 shlib_cxxld="${CXX}"
-## Allow user to override this, e.g. when HP-UX is not special-cased.
+## Allow user to override this, e.g. HP-UX uses .sl
 : ${SHLIB_EXT=".so"}
 SHLIB_LIBADD=
 use_exportfiles=no
 
 ## Step 1.  Ask imake.
-## <NOTE>
-## Earlier versions had fpicflags=${cpicflags}.  As this really amounts
-## to hoping rather than knowing, we no longer do this.
-## </NOTE>
 r_xtra_path="${PATH}"
 for dir in /usr/bin/X11 /usr/X11R6/bin /usr/openwin/bin; do
   r_xtra_path="${r_xtra_path}${PATH_SEPARATOR}${dir}"
@@ -46203,10 +46126,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${BYTE_COMPILE_PACKAGES_TRUE}" && test -z "${BYTE_COMPILE_PACKAGES_FALSE}"; then
   as_fn_error $? "conditional \"BYTE_COMPILE_PACKAGES\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${CROSS_COMPILING_TRUE}" && test -z "${CROSS_COMPILING_FALSE}"; then
-  as_fn_error $? "conditional \"CROSS_COMPILING\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${COMPILE_FORTRAN_DOUBLE_COMPLEX_TRUE}" && test -z "${COMPILE_FORTRAN_DOUBLE_COMPLEX_FALSE}"; then
