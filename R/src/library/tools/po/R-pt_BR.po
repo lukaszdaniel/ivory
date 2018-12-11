@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2018-12-09 08:51\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3061,10 +3061,10 @@ msgstr ""
 msgid "SHLIB_OPENMP_%s is included in PKG_LIBS but not in PKG_%s"
 msgstr ""
 
-#. R/check.R: gettextf("SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n",     c_or_cxx, domain = "R-tools")
+#. R/check.R: gettextf("SHLIB_OPENMP_%sFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in PKG_LIBS\n",     f_or_fc, c_or_cxx, domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"SHLIB_OPENMP_FCFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in "
+"SHLIB_OPENMP_%sFLAGS is included in PKG_FCFLAGS but not SHLIB_OPENMP_%s in "
 "PKG_LIBS"
 msgstr ""
 

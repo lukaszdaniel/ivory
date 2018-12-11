@@ -268,11 +268,14 @@
       If necessary, override the defaults on the \command{configure}
       command line or in file \file{config.site}.
 
-      \item Long-untested \command{configure} support for HP-UX and old
-      versions of Linux has been or will be removed.
+      \item Long-untested \command{configure} support for HP-UX and very
+      old versions of Linux has been removed.
 
       \item \command{configure --with-blas} (without specifying a value)
       includes OpenBLAS in its search (before ATLAS and a generic BLAS).
+      
+      \item The \command{configure} macro \samp{MAKEINFO} has been
+      updated to \samp{TEXI2ANY}.
     }
   }
 
@@ -483,11 +486,6 @@
 
       \item \code{as(1L, "double")} now does coerce (\PR{17457}).
 
-      \item Buffering is disabled for \code{file()} connections to
-      irregular files (like sockets), as well as \code{fifo()} and
-      \code{pipe()} connections.  Fixes \PR{17470}, reported by Chris
-      Culnane.
-
       \item \code{lm.influence()}, \code{influence.measures()},
       \code{rstudent()} etc now work (more) correctly for multivariate
       models (\code{"mlm"}), thanks to (anonymous) stackoverflow remarks.
@@ -549,7 +547,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.5.1 patched}{
+\section{\Rlogo CHANGES IN R 3.5.2}{
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
@@ -668,7 +666,7 @@
       to Suharto Anggono's report \PR{17506}.
 
       \item Buffering is disabled for \code{file()} connections to
-      irregular files (like sockets), as well as \code{fifo()} and
+      non-regular files (like sockets), as well as \code{fifo()} and
       \code{pipe()} connections.  Fixes \PR{17470}, reported by Chris
       Culnane.
     }
