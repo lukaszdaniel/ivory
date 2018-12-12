@@ -2395,10 +2395,35 @@ x <- 1 + 0
 v <- eval(compiler::compile(quote(round(x, {x[] <- 2; 0}))))
 stopifnot(v == 1)
 
+f <- function() {
+    x <- numeric(1)
+    y <- 0
+    rm("y")
+    makeActiveBinding("y", function() { x[] <<- 1; 0}, environment())
+    x + y
+}
+stopifnot(f() == 0)
+stopifnot(compiler::cmpfun(f)() == 0)
+
+f <- function(y = {x[] <- 1; 0}) { x <- numeric(1); x + y }
+stopifnot(f() == 0)
+stopifnot(compiler::cmpfun(f)() == 0)
+
 
 ## This failed under REFCNT:
 for (i in 1:2) { if (i == 1) { x <- i; rm(i) }}
 stopifnot(x == 1)
+
+
+## gamma & lgamma should not warn for correct limit cases:
+stopifnot(exprs = {
+    lgamma(0:-10) == Inf
+    gamma(-180.5) == 0
+    gamma(c(200,Inf)) == Inf
+    lgamma(c(10^(306:310), Inf)) == Inf
+})
+## had  "Warning message:  value out of range in 'lgamma' "  for ever
+
 
 
 ## keep at end

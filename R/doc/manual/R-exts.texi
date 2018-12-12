@@ -5202,14 +5202,17 @@ and can cause problems.
 @c http://lists.x.org/archives/xorg-devel/2013-November/038808.html
 The most common issue involves the names of the Intel CPU registers such
 as @code{CS}, @code{DS}, @code{ES}, @code{FS}, @code{GS} and @code{SS}
-(and more with longer abbreviations) defined on i586/x64 Solaris in
+(and more with longer abbreviations@footnote{including @code{EAX},
+@code{EBP}, @code{EBX}, @code{ECX}, @code{EDI},@code{EDX}, @code{EFL},
+@code{EIP}, @code{ESI} and @code{ESP} .}) defined on i586/x64 Solaris in
 @file{<sys/regset.h>} and often included indirectly by @file{<stdlib.h>}
 and other core headers.  Further examples are @code{ERR},
 @code{LITTLE_ENDIAN}, @code{zero} and @code{I} (which is defined in
 Solaris' @file{<complex.h>} as a compiler intrinsic for the imaginary
 unit).  Some of these can be avoided by defining @code{_POSIX_C_SOURCE}
 before including any system headers, but it is better to only use
-all-upper-case names which have a unique prefix such as the package name.
+all-upper-case names which have a unique prefix such as the package
+name.
 
 @item
 @code{typedef}s in OS headers can conflict with those in the package:
@@ -10883,12 +10886,22 @@ automatically protects them) or unprotect them immediately after use.
 Protection is not needed for objects which @R{} already knows are in
 use.  In particular, this applies to function arguments.
 
-There is a less-used macro @code{UNPROTECT_PTR(@var{s})} that unprotects
-the object pointed to by the @code{SEXP} @var{s}, even if it is not the
-top item on the pointer protection stack. This is rarely needed outside
-the parser (the @R{} sources currently have three examples, one in
-@file{src/main/plot3d.c}).
+There is a less-used macro @code{UNPROTECT_PTR(@var{s})} that unprotects the
+object pointed to by the @code{SEXP} @var{s}, even if it is not the top item
+on the pointer protection stack.  This macro was introduced for use in the
+parser, where the code interfacing with the R heap is generated and the
+generator cannot be configured to insert proper calls to @code{PROTECT} and
+@code{UNPROTECT}.  However, @code{UNPROTECT_PTR} is dangerous to use in
+combination with @code{UNPROTECT} when the same object has been protected
+multiple times.  It has been superseeded by multi-set based functions
+@code{R_PreserveInMSet} and @code{R_ReleaseFromMSet}, which protect objects
+in a multi-set created by @code{R_NewPreciousMSet} and typically itself
+protected using @code{PROTECT}.  These functions should not be needed
+outside parsers.
 @findex UNPROTECT_PTR
+@findex R_PreserveInMSet
+@findex R_ReleaseFromMSet
+@findex R_NewPreciousMSet
 
 Sometimes an object is changed (for example duplicated, coerced or
 grown) yet the current value needs to be protected.  For these cases
@@ -10906,7 +10919,7 @@ For example (from the internal code for @code{optim})
     REPROTECT(s = coerceVector(s, REALSXP), ipx);
 @end example
 
-Note that it is dangerous to mix @code{UNPROTECT_PTR} with
+Note that it is dangerous to mix @code{UNPROTECT_PTR} also with
 @code{PROTECT_WITH_INDEX}, as the former changes the protection
 locations of objects that were protected after the one being
 unprotected.

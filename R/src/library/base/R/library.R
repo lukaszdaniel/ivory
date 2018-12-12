@@ -198,6 +198,8 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
 	    pkgpath <- find.package(package, lib.loc, quiet = TRUE,
                                     verbose = verbose)
             if(length(pkgpath) == 0L) {
+                if(length(lib.loc) && !logical.return)
+                    stop(packageNotFoundError(package, lib.loc, sys.call()))
                 txt <- if(length(lib.loc))
 	            sprintf(ngettext(1L, "there is no package called %s", "there are no packages called %s", domain = "R-base"), paste(sQuote(package), collapse = ", "))
                 else

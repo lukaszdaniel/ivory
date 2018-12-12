@@ -231,6 +231,16 @@
       \item Instead of signalling an error for an invalid S4 object
       \code{x}, \code{str(x)} now gives a warning and subsequently still
       shows most parts of \code{x}, e.g., when slots are missing.
+
+      \item New pointer protection C functions \code{R_PreserveInMSet} and
+      \code{R_ReleaseFromMSet} have been introduced to replace
+      \code{UNPROTECT_PTR}, which is not safe to mix with \code{UNPROTECT}
+      (and with \code{PROTECT_WITH_INDEX}). Intended for use in parsers
+      only.
+
+      \item \code{gamma(x)} and \code{lgamma(x)} no longer warn when
+      correctly returning \code{Inf} or underflowing to zero.  This
+      helps maximum likelihood and similar computations.
     }
   }
 
@@ -273,7 +283,7 @@
 
       \item \command{configure --with-blas} (without specifying a value)
       includes OpenBLAS in its search (before ATLAS and a generic BLAS).
-      
+
       \item The \command{configure} macro \samp{MAKEINFO} has been
       updated to \samp{TEXI2ANY}.
     }
