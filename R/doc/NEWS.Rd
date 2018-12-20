@@ -241,6 +241,11 @@
       \item \code{gamma(x)} and \code{lgamma(x)} no longer warn when
       correctly returning \code{Inf} or underflowing to zero.  This
       helps maximum likelihood and similar computations.
+
+      \item \code{convertColor()} is now vectorized, so a whole lot
+      faster for converting many colours at once.  New \code{vectorized}
+      argument to \code{colorConverter()} ensures that non-vectorized
+      colour converters still work.  Thanks to Brodie Gaslam.
     }
   }
 
@@ -342,6 +347,15 @@
 
       \item \code{tools::Rd2latex()} now uses UTF-8 as its default
       output encoding.
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item \code{NAMEDMAX} has been raised to 7 to allow further
+      protection of intermediate results from (usually ill-advised)
+      assignments in arguments to \code{BUILTIN} functions. Properly
+      written package code should not be affected.
     }
   }
 
@@ -556,6 +570,9 @@
 
       \item \code{sub()} no longer loses encodings for non-ASCII
       replacements (\PR{17509}).
+
+      \item Fix for rotated raster image on X11 device.  (Partial
+      fix for \PR{17148};  thanks to Mikko Korpela).
     }
   }
 }
