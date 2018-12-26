@@ -266,6 +266,12 @@ convertColor <-
              from.ref.white = NULL, to.ref.white = NULL,
              scale.in = 1, scale.out = 1, clip = TRUE)
 {
+  ## short-term fix
+  if (is.data.frame(color)) {
+      warning("convertColor requires a matrix argument, not a data frame")
+      color <- as.matrix(color)
+  }
+
   if (is.character(from))
       from <- colorspaces[[match.arg(from, names(colorspaces))]]
   if (!inherits(from,"colorConverter"))

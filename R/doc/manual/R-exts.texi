@@ -1378,8 +1378,19 @@ Preferably there should be no such references in data files, and in any
 case they should only be to packages listed in the @code{Depends} and
 @code{Imports} fields, as otherwise it may be impossible to install the
 package.  To check for such references, load all the images into a
-vanilla @R{} session, and look at the output of
-@code{loadedNamespaces()}.
+vanilla @R{} session, run @code{str()} on all the datasets, and look at
+the output of @code{loadedNamespaces()}.
+
+Particular care is needed where a dataset or one of its components is of
+an S4 class, especially if the class is defined in a different package.
+First, the package containing the class definition has to be available
+to do useful things with the dataset, so that package must be listed in
+@code{Imports} or @code{Depends} (even if this gives a check warning
+about unused imports).  Second, the definition of an S4 class can
+change, and often has unnoticed when in a package with a different
+author.  So it may be wiser to use the @file{.R} form and use that to
+create the dataset object when needed (loading package namespaces but
+not attaching them).
 
 If your data files are large and you are not using @samp{LazyData} you
 can speed up installation by providing a file @file{datalist} in the
@@ -1419,13 +1430,13 @@ field in the @file{DESCRIPTION} file.  Useful values are @code{bzip2},
 is best is to try them all and look at the size of the
 @file{@var{pkgname}/data/Rdata.rdb} file.
 
-Lazy-loading is not supported for very large datasets (those which when
-serialized exceed 2GB, the limit for the format on 32-bit platforms).
-
 @c DESCRIPTION field SysDataCompression
 The analogue for @file{sysdata.rda} is field @samp{SysDataCompression}:
 the default is @code{xz} for files bigger than 1MB otherwise
 @code{gzip}.
+
+Lazy-loading is not supported for very large datasets (those which when
+serialized exceed 2GB, the limit for the format on 32-bit platforms).
 
 @node Non-R scripts in packages, Specifying URLs, Data in packages, Package structure
 @subsection Non-R scripts in packages
@@ -1652,7 +1663,7 @@ both the command and the appropriate flags, so that for example
 linked into a shared library) @samp{CPICFLAGS}.  For Fortran, be careful
 to use @samp{FC FFLAGS FPICFLAGS} for fixed-form Fortran and 
 @samp{FC FCFLAGS FPICFLAGS} for free-form Fortran.  (Packages intended to
-be ued with @R{} versions before 3.6.0 should use the legacy forms
+be used with @R{} versions before 3.6.0 should use the legacy forms
 @samp{F77 FFLAGS FPICFLAGS} and @samp{FC FCFLAGS FCPICFLAGS}, which are
 still accepted.)
 
@@ -4988,8 +4999,17 @@ so it is strongly recommended to check in a UTF-8 locale.
 @subsection Portable C and C++ code
 
 Writing portable C and C++ code is mainly a matter of observing the
-standards (C99, C++98 or where declared C++11/14/17) and testing that
+standards (C99, C++11 or where declared C++98/14/17) and testing that
 extensions (such as POSIX functions) are supported.
+
+@strong{C++ standards}: As from version 3.6.0, @R{} defaults to C++11
+where available@footnote{which it is on all known platforms}.  However,
+in earlier versions the default standard was that of the compiler used,
+often C++98 or C++14.  Thus for portability it is desirable to specify
+the C++ standard@footnote{For C++98 this is only possible since @R{}
+3.5.0, for C++11 since @R{} 3.1.0.} assumed for a package.  Because most
+packages will be made available for earlier versions on @R{}, comments
+below about C++98 have been retained.
 
 Note that the `TR1' C++ extensions are not part of any of these
 standards and the @code{<tr1/@var{name}>} headers are not supplied by some of
@@ -5047,7 +5067,7 @@ with versions for types @code{float}, @code{double}, @code{long double}
 and possibly more.  This means that calling @code{sqrt} on an integer
 type may have `overloading ambiguity' as it could be promoted to any of
 the supported floating-point types: this is commonly seen on Solaris,
-but for @code{pow} also seen on macOS.  (C++98 has an overload for
+but for @code{pow} also seen on macOS.  (C++ has an overload for
 @code{std::pow(<double>, <int>)}, but this may not be visible from the
 main namespace.  C++11 requires additional overloads for integer types,
 and ambiguous overloads are more common in C++11 (and later) compiler
@@ -5067,7 +5087,7 @@ should be the constant @code{1e-3}.
 Function @code{fabs} is defined only for floating-point types, except in
 C++11 which has overloads for @code{std::fabs} in @file{<cmath>} for
 integer types.  Function @code{abs} is defined in C99's
-@file{<stdlib.h>} for @code{int} and in C++98's @file{<cstdlib>} for
+@file{<stdlib.h>} for @code{int} and in C++'s @file{<cstdlib>} for
 integer types, overloaded in @file{<cmath>} for floating-point types.
 C++11 has additional overloads for @code{std::abs} in @file{<cmath>} for
 integer types.  The effect of calling @code{abs} with a floating-point
@@ -5078,7 +5098,7 @@ Functions/macros such as @code{isnan}, @code{isinf} and @code{isfinite}
 are not required by C++98: where compilers support them they may be only
 in the @code{std} namespace or only in the main namespace.  There is no
 way to make use of these functions which works with all C++ compilers
-currently in use on @R{} platforms: use @R{}'s versions such as
+which have been used on @R{} platforms: use @R{}'s versions such as
 @code{ISNAN} and @code{R_FINITE} instead.
 
 If you must use them in C++11, beware that some
@@ -5099,11 +5119,12 @@ error.
 
 @item
 The GNU C/C++ compilers support a large number of non-portable
-extensions.  For example, @code{INFINITY} (which is in C99 but not
-C++98), for which @R{} provides the portable @code{R_PosInf} (and
-@code{R_NegInf} for @code{-INFINITY}).  And @code{NAN} is just one NaN
-value: in @R{} code @code{NA_REAL} is usually what is intended, but
-@code{R_NaN} is also available.
+extensions.  For example, @code{INFINITY} (which is a @emph{float} value
+in C99 and C++11 but not C++98), for which @R{} provides the portable
+double value @code{R_PosInf} (and @code{R_NegInf} for @code{-INFINITY}).
+And @code{NAN}@footnote{also part of C++11 and later.} is just one NaN
+@emph{float} value: for use with @R{}, @code{NA_REAL} is usually what
+is intended, but @code{R_NaN} is also available.
 
 Some (but not all) extensions are listed at
 @uref{https://gcc.gnu.org/@/onlinedocs/@/gcc/@/C-Extensions.html} and
@@ -5140,8 +5161,7 @@ first used to be a sufficient workaround but for some 2016 compilers
 only one could be included.
 
 @item
-Variable-length arrays are C99, not supported by C++98 nor by the C++
-compilers in use with @R{} on some platforms.
+Variable-length arrays are C99, not supported by C++98.
 
 @item
 Be careful to include the headers which define the functions you use.
@@ -7330,7 +7350,7 @@ People have also used @LaTeX{} mode in a editor, as @file{.Rd} files are
 rather similar to @LaTeX{} files.
 
 Some @R{} front-ends provide editing support for  @file{.Rd} files, for
-example RStudio (@uref{https://rstudio.org/}).
+example RStudio (@uref{https://www.rstudio.com/}).
 
 @node Tidying and profiling R code, Debugging, Writing R documentation files, Top
 @chapter Tidying and profiling R code
@@ -13485,9 +13505,6 @@ provide a @code{round} function but C++98 need not.)
 @deftypefun double ftrunc (double @var{x})
 Returns the value of @var{x} truncated (to an integer value) towards
 zero.
-
-(Note that C99/C++11 provide a @code{round} function but C++98 need
-not.)
 @end deftypefun
 
 @node Mathematical constants,  , Numerical Utilities, Numerical analysis subroutines
