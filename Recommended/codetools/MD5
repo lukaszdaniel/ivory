@@ -1,13 +1,13 @@
 d7d4587719d6cbb3083123501ec23dd3 *NAMESPACE
 2af77179b93b37abb2717ba0dacd60a3 *man/checkUsage.Rd
 7915e973bb95db1197db9152d339f2c8 *man/showTree.Rd
-31aabac379a9264e4ce819755b95b601 *man/findGlobals.Rd
-215ca204e6c7206111e585206cee095c *man/codetools.Rd
-dfa8498b455155a5b2fc59c318c55f3f *DESCRIPTION
+29fbed23cf38b444df2df0ce0389946b *man/findGlobals.Rd
+722f473fac8f4c14d9fc199953daab44 *man/codetools.Rd
+e48906bf15c7ce12219499d2ef9a442a *DESCRIPTION
 ecfdfce9918eeccddc2df4614c82658a *po/R-pl.po
 b1af3fdbb2bf986f87bffcad602d8d24 *po/R-codetools.pot
 36023f2dcaae4749c8369bb3c7ca0b6c *inst/po/en@quot/LC_MESSAGES/R-codetools.mo
 4bd07f5432e35ca7d652c4b4714d49d9 *inst/po/pl/LC_MESSAGES/R-codetools.mo
 838118aa4116e6b2d66e393dae8e4073 *tests/tests.R
-a53e193880333acf2b361dd0eaf3a5eb *R/codetools.R
+c59673f443e1a000708651cbdb50eea3 *R/codetools.R
 41581dc4956caf6fc5eae9becbab8285 *Changes

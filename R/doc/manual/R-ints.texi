@@ -3824,8 +3824,8 @@ interactively.
 Default: true.
 @item _R_CHECK_VIGNETTES_NLINES_
 Maximum number of lines to show from the bottom of the output when
-reporting errors in running or re-building vignettes. (As from @R{}
-3.4.0, @code{0} means all lines will be shown.)
+reporting errors in running or re-building vignettes. ( Value @code{0}
+means all lines will be shown.)
 Default: 10 for running, 25 for re-building.
 @item _R_CHECK_CODOC_S4_METHODS_
 Control whether @code{codoc()} testing is also performed on S4 methods.
@@ -4254,6 +4254,13 @@ Optionally check if either argument of the binary operators @code{&&} and
 _R_CHECK_LENGTH_1_CONDITION_.
 Default: unset (nothing is reported)
 
+@item _R_CHECK_BUILD_VIGNETTES_SEPARATELY_
+By default re-building the vignette outputs is done in a single @R{}
+session: if this is set to a true value, the output for each vignette
+is created in a separate session.  The default is more efficient but
+allows accidental reliance of one vignette on another (for example, in
+the loading of packages).
+Default: false
 
 @end vtable
 

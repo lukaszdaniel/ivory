@@ -355,13 +355,22 @@
 
       \item \code{tools::Rd2latex()} now uses UTF-8 as its default
       output encoding.
-      
+
       \item \command{R CMD check} now checks line endings of files with
       extension \file{.hpp} and those under \file{inst/include}.  The
       check now includes that a non-empty file is terminated with a
       newline.
 
       \command{R CMD build} will correct line endings in such files.
+
+      \item \command{R CMD check} now tries re-building all vignettes
+      rather than stopping at the first error.  Whilst doing so it adds
+      \sQuote{bookmarks} to the log.  Optionally (see \sQuote{R
+	Internals}) it can re-build each vignette in a separate process.
+
+      It now checks for duplicated vignette titles (also known as
+      \sQuote{index entries}): they are used as hyperlinks on
+      \acronym{CRAN} package pages and so do need to be unique.
     }
   }
 
@@ -590,7 +599,8 @@
       fix for \PR{17148};  thanks to Mikko Korpela).
 
       \item \code{formula(model.frame(frml, ..))} now returns \code{frml}
-      in all cases, thanks to Bill Dunlap.
+      in all cases, thanks to Bill Dunlap.   The previous behavior is
+      available as \code{DF2formula(<model.frame>)}.
     }
   }
 }
@@ -604,7 +614,7 @@
       \R 3.6.0.
     }
   }
-  
+
 }
 
 \section{\Rlogo CHANGES IN R 3.5.2}{
