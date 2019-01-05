@@ -14,7 +14,7 @@ e70f2c5c23ddf839b5e3b1457fc6fdbd *man/lvqinit.Rd
 396eec671f1bddd185fa79831dd47ee3 *man/lvq3.Rd
 e8e077536af8608b6d5d366410bae87a *man/lvqtest.Rd
 4c659dd015ed95b15223d1a62c39a745 *man/multiedit.Rd
-60f3add6a9fb4f7b0e580b9b702f823c *DESCRIPTION
+a2458bf8d86b669a7656fc5ace1bbefa *DESCRIPTION
 a90e18606f5d74d5d7877bac601293c3 *po/R-fr.po
 cff1dc6b069d8e9e72f79ff7b5b3d4f4 *po/R-class.pot
 132b8aade86ce1c1a9ee83d7806e6ec3 *po/R-ko.po
@@ -37,4 +37,4 @@ dec31ffc0e9a73c8117dd85cb18453d7 *R/knn.R
 ff5ef05ff4bc09abeca6fe0000416d05 *R/SOM.R
 b158af6030c6986e879c2e55a77d2041 *Changes
 e4553dea0e4862d80ac13fa87b70465c *src/localization.h
-decb43de052e0f9dc1259d853f737435 *src/class.c
+8dce70f16f14076c690022831cff5a2d *src/class.c
