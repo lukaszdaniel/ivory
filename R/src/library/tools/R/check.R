@@ -1,7 +1,7 @@
 #  File src/library/tools/R/check.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2018 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -2545,7 +2545,8 @@ add_dummies <- function(dir, Log)
                 contents <- filtergrep("^ *#", contents)
                 ## Things like $(SUBDIRS:=.a)
                 contents <- filtergrep("[$][(].+:=.+[)]", contents)
-                if (any(grepl("([+]=|:=|[$][(]wildcard|[$][(]shell|[$][(]eval|[$][(]call|[$][(]patsubst|^ifeq|^ifneq|^ifdef|^ifndef|^endif)", contents)))
+                if (any(grepl("([+]=|:=|[$][(]wildcard|[$][(]shell|[$][(]eval|[$][(]call|[$][(]patsubst|^ifeq|^ifneq|^ifdef|^ifndef|^endifi|[.]NOTPARALLEL)",
+                              contents)))
                     bad_files <- c(bad_files, f)
             }
             SysReq <- desc["SystemRequirements"]
@@ -2557,7 +2558,7 @@ add_dummies <- function(dir, Log)
                 } else {
                     warningLog(Log, ngettext(length(bad_files), "Found the following file containing GNU extensions:", "Found the following files containing GNU extensions:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-                    wrapLog(gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+                    wrapLog(gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
                 }
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
@@ -3849,7 +3850,8 @@ add_dummies <- function(dir, Log)
                                 file.path(pkgoutdir, "vign_test", pkgname0))
                     else {
                         ## serialize elibs to avoid quotation hell
-                        tf <- tempfile(fileext = ".rds")
+                        tf <- gsub("\\", "/", tempfile(fileext = ".rds"),
+                                   fixed=TRUE)
                         saveRDS(c(jitstr, elibs), tf)
                         sprintf("%s\ntools:::buildVignettes(dir = '%s', ser_elibs = '%s')",
                                 opWarn_string,

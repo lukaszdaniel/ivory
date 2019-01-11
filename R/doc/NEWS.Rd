@@ -251,6 +251,10 @@
       \code{headers} for custom HTTP headers, e.g., allowing to perform
       basic http authentication, thanks to a patch contributed by Gábor
       Csárdi.
+
+      \item File-based connection functions \code{file()}, \code{gzfile()},
+      \code{bzfile()}, \code{xzfile()} now signal an error when used on a
+      directory.
     }
   }
 
@@ -601,11 +605,28 @@
       \item \code{formula(model.frame(frml, ..))} now returns \code{frml}
       in all cases, thanks to Bill Dunlap.   The previous behavior is
       available as \code{DF2formula(<model.frame>)}.
+
+      \item \code{ar.ols()} also returns scalar \code{var.pred} in
+      univariate case (\PR{17517}).
+
+      \item \code{normalizePath()} now treats \code{NA} path as non-existent
+      and normalizes it to \code{NA}.  \code{file.access()} treats \code{NA}
+      file name as non-existent.  \code{file.edit()} and connection
+      functions such as \code{file()} now treat \code{NA} file names as
+      errors.
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 3.5.2 patched}{
+
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item Detection of flags for C++98/11/14/17 has been improved: in
+      particular if CXX??STD is set, it is tried first with no
+      additional flags.
+    }
+  }
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
@@ -614,11 +635,10 @@
       \R 3.6.0.
     }
   }
-
 }
 
 \section{\Rlogo CHANGES IN R 3.5.2}{
-
+  
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
       \item New macro \samp{CXX_VISIBILITY} analogous to
