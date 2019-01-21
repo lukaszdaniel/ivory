@@ -6753,6 +6753,13 @@ function(dir, localOnly = FALSE)
         }
     }
 
+    ## Check Author field.
+    auth <- trimws(as.vector(meta["Author"]))
+    if(grepl("^Author *:", auth))
+        out$author_starts_with_Author <- TRUE
+    if(grepl("^(Authors@R *:|person *\\(|c *\\()", auth))
+        out$author_should_be_authors_at_R <- auth
+
     ## Check Title field.
     title <- trimws(as.vector(meta["Title"]))
     title <- gsub("[\n\t]", " ", title)
@@ -7460,6 +7467,14 @@ function(x, ...)
       if(length(y <- x$authors_at_R_message)) {
           paste(c(gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools"),
                   paste0("  ", y)),
+                collapse = "\n")
+      },
+      if(length(y <- x$author_starts_with_Author)) {
+          gettext("Author field starts with 'Author:'.", domain = "R-tools")
+      },
+      if(length(y <- x$author_should_be_authors_at_R)) {
+          paste(c(gettext("Author field should be Authors@R.  Current value is:", domain = "R-tools"),
+                  paste0("  ", gsub("\n", "\n  ", y))),
                 collapse = "\n")
       },
       if(length(y <- x$vignette_sources_only_in_inst_doc)) {

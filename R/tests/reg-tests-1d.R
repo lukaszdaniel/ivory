@@ -2461,23 +2461,43 @@ stopifnot(exprs = {
 })
 ## .$var.pred had been a 1x1 matrix in R <= 3.5.2
 
+
 ## check that parse lines are properly initialized in the parser
-## failed in 3.5 and earlier
 d <- getParseData(parse(text="{;}", keep.source=TRUE))
 l <- d[ d[,"token"] == "exprlist", "line1" ]
 stopifnot(identical(l, 1L))
+## failed in 3.5 and earlier
+
 
 ## check that NA is treated as non-existent file (not file named "NA")
-tools::assertError(normalizePath(c(NA_character_,getwd()),mustWork=TRUE))
-tools::assertWarning(normalizePath(c(NA_character_,getwd()),mustWork=NA))
-stopifnot(
-    identical(normalizePath(c(NA_character_,getwd()),mustWork=FALSE)[1], NA_character_)
-)
+tools::assertError  (normalizePath(c(NA_character_,getwd()), mustWork=TRUE))
+tools::assertWarning(normalizePath(c(NA_character_,getwd()), mustWork=NA))
+stopifnot(identical (normalizePath(c(NA_character_,getwd()), mustWork=FALSE)[1],
+                     NA_character_))
 stopifnot(identical(unname(file.access(NA_character_)), -1L))
-
 ## NA treated as error
 tools::assertError(file.edit(NA_character_))
 tools::assertError(file(NA_character_))
+
+
+## strtoi("") :
+stopifnot(is.na(strtoi("")),
+          is.na(strtoi("", 2L)))
+## was platform dependent [libC strtol()] in R <= 3.5.x
+
+
+## formula.data.frame() thinko at modularization [r75911]:
+f <- function(df) {
+    stopifnot(is.data.frame(df))
+    d <- 4
+    f2(formula(df))
+}
+f2 <- function(form) eval(quote(d), envir = environment(form))
+rf <- f(data.frame(x=1, f="b")) ## gave error inside f2() in R-devel
+stopifnot(identical(rf, 4))
+## as after 75911 a wrong parent.frame() was used.
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

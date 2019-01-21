@@ -4269,7 +4269,9 @@ add_dummies <- function(dir, Log)
                              "missing links?:",
                              ## From the byte compiler's 'warn' methods
                              "^Note: possible error in",
-                             "^Note: (break|next) used in wrong context: no loop is visible"
+                             "^Note: (break|next) used in wrong context: no loop is visible",
+                             ## Warnings about S4 classes
+                             "^  The prototype for class.*undefined slot"
                              )
                 ## Warnings spotted by gcc with
                 ##   '-Wimplicit-function-declaration'
@@ -5148,6 +5150,8 @@ add_dummies <- function(dir, Log)
     if (install == "no") {
         opts <- c(opts, "--install=no")
         do_install_arg <- FALSE
+        ## If we do not install, then we cannot *run* any code.
+        do_examples <- do_tests <- do_vignettes <- do_build_vignettes <- 0
     }
     if (run_dontrun) opts <- c(opts, "--run-dontrun")
     if (run_donttest) opts <- c(opts, "--run-donttest")

@@ -624,6 +624,12 @@
       are ties and the caller did not specify \code{ties}.  Further, it no
       longer duplicates \code{x} and \code{y} unnecessarily when \code{x}
       is already sorted (\PR{17515}).
+
+      \item \code{strtoi("", base)} now gives \code{NA} on all platforms,
+      following its documentation.  Reported by Michael Chirico.
+
+      \item Prototype elements are now checked to match the slots of the
+      class. Reported by Bill Dunlap.
     }
   }
 }
