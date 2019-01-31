@@ -2838,15 +2838,24 @@ add_dummies <- function(dir, Log)
             checkingLog(Log, gettext("checking for pragmas in C/C++ headers and code ...", domain = "R-tools"))
             ans <- .check_pragmas('.')
             if(length(ans)) {
-                if(length(warn <- attr(ans, "warn")))
+                if(length(warn <- attr(ans, "warn"))  ||
+                   length(port <- attr(ans, "port")))
                     {
                         warningLog(Log)
-                        msg <- ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics:", "Files which contain pragma(s) suppressing important diagnostics:", domain = "R-tools")
-                        msg <- c(msg, .pretty_format(warn))
-                        rest <- setdiff(ans, warn)
+                        msg <- character()
+                        rest <- ans
+                        if(length(warn)) {
+                            msg <- c(msg, ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics", "Files which contain pragma(s) suppressing important diagnostics", domain = "R-tools"),
+                            .pretty_format(warn))
+                            rest <- setdiff(ans, warn)
+                        }
+                        if(length(port)) {
+                            msg <- c(msg, ngettext(length(port), "File which contains non-portable pragma(s)", "Files which contain non-portable pragma(s)", domain = "R-tools"),
+                           .pretty_format(port))
+                        }
                         if(length(rest)) {
-                            msg <- c(msg, ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools"))
-                            msg <- c(msg, .pretty_format(rest))
+                            msg <- c(msg, ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools"),
+                            .pretty_format(rest))
                         }
                    } else {
                         noteLog(Log)
@@ -3552,21 +3561,26 @@ add_dummies <- function(dir, Log)
         if (!is_base_pkg) {
             dir <- file.path(pkgdir, "inst", "doc")
             outputs <- character(length(vigns$docs))
+	    .msg <- character()
             for (i in seq_along(vigns$docs)) {
                 file <- vigns$docs[i]
                 name <- vigns$names[i]
                 engine <- vignetteEngine(vigns$engines[i])
                 outputs[i] <- tryCatch({
                     find_vignette_product(name, what="weave", final=TRUE, dir=dir, engine = engine)
-                }, error = function(ex) NA)
+                }, error = function(e) {
+		    .msg <<- c(.msg, conditionMessage(e))
+	            NA}
+		)
             }
             bad_vignettes <- vigns$docs[is.na(outputs)]
             if (nb <- length(bad_vignettes)) {
                 any <- TRUE
                 warningLog(Log)
+		if (length(.msg)) printLog0(Log, .msg, "\n")
                 msg <- ngettext(nb,
-                                "Package vignette without corresponding PDF/HTML:\n",
-                                "Package vignettes without corresponding PDF/HTML:\n", domain = "R-tools")
+                                "Package vignette without corresponding single PDF/HTML:\n",
+                                "Package vignettes without corresponding single PDF/HTML:\n", domain = "R-tools")
                 printLog(Log, msg)
                 printLog(Log, paste(c(paste("  ", sQuote(basename(bad_vignettes))), "", ""), collapse = "\n"))
             }
@@ -5331,6 +5345,7 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_CONNECTIONS_LEFT_OPEN_" = "TRUE")
         Sys.setenv("_R_CHECK_SHLIB_OPENMP_FLAGS_" = "TRUE")
         Sys.setenv("_R_CHECK_FUTURE_FILE_TIMESTAMPS_" = "TRUE")
+        Sys.setenv("_R_CHECK_RD_CONTENTS_KEYWORDS_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE
