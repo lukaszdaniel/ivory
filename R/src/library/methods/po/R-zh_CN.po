@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -722,6 +722,28 @@ msgstr "为%2$s里的%1$s建立新的泛型函数"
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "没有定义一般S4对象的数据部分"
 
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
+"force=TRUE);"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid ""
+"Definition of slot %s, in class %s, as %s conflicts with definition, "
+"inherited from class %s, as %s"
+msgstr ""
+"类别%s里的槽\"%s\"目前被定义为(或继承于)\"%s\"，这与类别%s里所继承的定义相互"
+"有矛盾"
+
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid "E := environment(): %s; parent.env(E): %s"
+msgstr ""
+
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "Empty function name in .getGeneric"
@@ -1153,6 +1175,12 @@ msgstr ""
 msgid "The definition of class %s follows."
 msgstr "类别%s的定义不存在"
 
+#. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "The prototype for class %s has undefined slot(s): %s"
+msgstr "类别为%s的'%s'串列包含不存在的类别%s"
+
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 #: R/trace.R:0
 msgid "Tracing"
@@ -1203,6 +1231,11 @@ msgstr "不是程輯包名: %s"
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
+msgstr ""
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -1963,6 +1996,11 @@ msgstr "第一个参数应当为泛型函数的名称(现在却是类别为%s的
 #, fuzzy
 msgid "for function %s: %s"
 msgstr "找不到%s这一函数"
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "for new inheritance information currently;"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -2966,16 +3004,6 @@ msgstr "单独字符串：不该是类别为%s的对象"
 msgid "skipping methods list element %s of unexpected class %s"
 msgstr "因为其类别%2$s没有定义，忽略%1$s这一方法串列單元"
 
-#. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"slot %s in class %s currently defined (or inherited) as \"%s\", conflicts "
-"with an inherited definition in class %s"
-msgstr ""
-"类别%s里的槽\"%s\"目前被定义为(或继承于)\"%s\"，这与类别%s里所继承的定义相互"
-"有矛盾"
-
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
@@ -3000,14 +3028,11 @@ msgid ""
 "(using the largest value)"
 msgstr "好象有点不对：方法表字符里参数数目有矛盾"
 
-#. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
-msgid ""
-"subclass %s of class %s is not local and cannot be updated for new "
-"inheritance information; consider setClassUnion()"
-msgstr ""
-"%2$s类别的%1$s子类别不是局部的，因此无法按新的繼承信息进行更新；考虑用"
-"setClassUnion()"
+#, fuzzy
+msgid "subclass %s of class %s is not local and is not updated"
+msgstr "%2$s类别的子类别%1$s没有定义；因此没有更新"
 
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
@@ -3584,6 +3609,13 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#~ msgid ""
+#~ "subclass %s of class %s is not local and cannot be updated for new "
+#~ "inheritance information; consider setClassUnion()"
+#~ msgstr ""
+#~ "%2$s类别的%1$s子类别不是局部的，因此无法按新的繼承信息进行更新；考虑用"
+#~ "setClassUnion()"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "不应该产生**!"

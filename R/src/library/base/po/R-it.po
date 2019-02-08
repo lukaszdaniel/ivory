@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -812,6 +812,12 @@ msgstr ""
 msgid "'from' argument must be raw or character"
 msgstr "'normal.kind' deve essere una stringa di caratteri di lunghezza 1"
 
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+#, fuzzy
+msgid "'headers' must have names and must not be NA"
+msgstr "'input' deve avere lunghezza 1"
+
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #: R/New-Internal.R:0
@@ -1326,6 +1332,11 @@ msgstr "non è"
 msgid "Failed with error:  %s"
 msgstr "l'esecuzione di 'cmd' non è fallita con errore"
 
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
@@ -1628,12 +1639,6 @@ msgstr "pacchetto %s non caricato"
 #, fuzzy
 msgid "Packages in library %s:"
 msgstr "%sPacchetti nella libreria '%s':"
-
-#. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
-#: R/dataframe.R:0
-#, fuzzy
-msgid "Partial match of '%s' to '%s' in data frame"
-msgstr "variabile non numerica nel data frame:"
 
 #. R/files.R: gettext("R Information", domain = "R-base")
 #: R/files.R:0
@@ -1993,6 +1998,12 @@ msgstr "Posso solo sottrarre da oggetti di tipo Date"
 #, fuzzy
 msgid "can only subtract numbers from objects of class %s"
 msgstr "posso solo sottrarre numeri da oggetti di tipo Date"
+
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+#, fuzzy
+msgid "can only write character objects"
+msgstr "si possono scrivere solo oggetti di tipo vector"
 
 #. R/connections.R: stop("can only write vector objects")
 #: R/connections.R:0
@@ -3253,6 +3264,12 @@ msgstr ""
 "row.names ricavati da una variabile con pochi elementi e quindi non "
 "utlizzabili"
 
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
+msgid "running command '%s' had status %d"
+msgstr ""
+
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
 #, fuzzy
@@ -3841,6 +3858,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "non è"
 msgstr[1] "non è"
+
+#, fuzzy
+#~ msgid "Partial match of '%s' to '%s' in data frame"
+#~ msgstr "variabile non numerica nel data frame:"
 
 #, fuzzy
 #~ msgid "%s is not an object of class %s"

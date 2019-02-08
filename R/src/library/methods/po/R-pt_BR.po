@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -729,6 +729,28 @@ msgstr "Criando uma nova função genérica para \"%s\" em \"%s\""
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr ""
 
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
+"force=TRUE);"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid ""
+"Definition of slot %s, in class %s, as %s conflicts with definition, "
+"inherited from class %s, as %s"
+msgstr ""
+"slot \"%s\" na classe \"%s\" definido atualmente (ou herdado) como \"%s\", "
+"conflita com uma definição herdada na classe \"%s\""
+
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid "E := environment(): %s; parent.env(E): %s"
+msgstr ""
+
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "Empty function name in .getGeneric"
@@ -1162,6 +1184,13 @@ msgstr ""
 msgid "The definition of class %s follows."
 msgstr "nenhuma definição existente para função '%s'"
 
+#. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "The prototype for class %s has undefined slot(s): %s"
+msgstr ""
+"a lista '%s' para a classe \"%s\", incluí uma classe não definida \"%s\""
+
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 #: R/trace.R:0
 msgid "Tracing"
@@ -1215,6 +1244,11 @@ msgstr "Argumento inválido  \"name\": %s"
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
+msgstr ""
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2006,6 +2040,11 @@ msgstr ""
 #, fuzzy
 msgid "for function %s: %s"
 msgstr "nenhuma função genérica '%s' encontrada"
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "for new inheritance information currently;"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -3067,16 +3106,6 @@ msgid "skipping methods list element %s of unexpected class %s"
 msgstr ""
 "pulando o elemento %s da lista de métodos por ser de classe inesperada \"%s\""
 
-#. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"slot %s in class %s currently defined (or inherited) as \"%s\", conflicts "
-"with an inherited definition in class %s"
-msgstr ""
-"slot \"%s\" na classe \"%s\" definido atualmente (ou herdado) como \"%s\", "
-"conflita com uma definição herdada na classe \"%s\""
-
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
@@ -3101,12 +3130,11 @@ msgid ""
 "(using the largest value)"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
-msgid ""
-"subclass %s of class %s is not local and cannot be updated for new "
-"inheritance information; consider setClassUnion()"
-msgstr ""
+#, fuzzy
+msgid "subclass %s of class %s is not local and is not updated"
+msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0

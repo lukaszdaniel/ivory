@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 17:28\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1180,6 +1180,11 @@ msgstr ""
 #: R/models.R:0
 msgid "'termlabels' must be a character vector of length at least one"
 msgstr "'termlabels' doit être un vecteur de caractères de longueur >= 1"
+
+#. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
+#: R/approx.R:0
+msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
+msgstr ""
 
 #. R/smspline.R: stop("'tol' must be strictly positive and finite")
 #: R/smspline.R:0

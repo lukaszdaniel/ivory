@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -833,6 +833,12 @@ msgstr ""
 msgid "'from' argument must be raw or character"
 msgstr " 'from'はrawまたは文字でなければなりません "
 
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+#, fuzzy
+msgid "'headers' must have names and must not be NA"
+msgstr " 'x' は名前付きの次元名でなければなりません "
+
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #: R/New-Internal.R:0
@@ -1368,6 +1374,11 @@ msgstr " FALSE の代わりに F が使われました "
 msgid "Failed with error:  %s"
 msgstr " '%s' の実行は失敗しました(エラーコード %d) "
 
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
@@ -1675,12 +1686,6 @@ msgstr " パッケージ %s はロードされません "
 #, fuzzy
 msgid "Packages in library %s:"
 msgstr " %s パッケージ （ライブラリ '%s' 中): "
-
-#. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
-#: R/dataframe.R:0
-#, fuzzy
-msgid "Partial match of '%s' to '%s' in data frame"
-msgstr " 以下のデータフレーム中に数値でない変数があります： "
 
 #. R/files.R: gettext("R Information", domain = "R-base")
 #: R/files.R:0
@@ -2039,6 +2044,12 @@ msgstr " Date オブジェクトからしか引くことはできません "
 #, fuzzy
 msgid "can only subtract numbers from objects of class %s"
 msgstr " Date オブジェクトからは数値しか引けません "
+
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+#, fuzzy
+msgid "can only write character objects"
+msgstr " ベクトルオブジェクトしか書き込めません "
 
 #. R/connections.R: stop("can only write vector objects")
 #: R/connections.R:0
@@ -3300,6 +3311,12 @@ msgstr " 与えられた列名は誤った長さです "
 msgid "row names were found from a short variable and have been discarded"
 msgstr " 列名は短い変数から見つけられ、捨て去られました "
 
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
+msgid "running command '%s' had status %d"
+msgstr ""
+
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
 #, fuzzy
@@ -3848,6 +3865,10 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#, fuzzy
+#~ msgid "Partial match of '%s' to '%s' in data frame"
+#~ msgstr " 以下のデータフレーム中に数値でない変数があります： "
 
 #, fuzzy
 #~ msgid "%s is not an object of class %s"

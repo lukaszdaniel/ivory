@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -752,6 +752,28 @@ msgstr " 新しい総称関数 %s を %s 中に生成します "
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr " 一般的な S4 クラスオブジェクトに対してデータ部分が未定義です "
 
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
+"force=TRUE);"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid ""
+"Definition of slot %s, in class %s, as %s conflicts with definition, "
+"inherited from class %s, as %s"
+msgstr ""
+" スロット \"%s\" (クラス \"%s\" 中の)は現在  \"%s\" として定義(もしくは継承)"
+"されていますが, クラス %s 中の継承された定義と相克します "
+
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid "E := environment(): %s; parent.env(E): %s"
+msgstr ""
+
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "Empty function name in .getGeneric"
@@ -1199,6 +1221,12 @@ msgstr ""
 msgid "The definition of class %s follows."
 msgstr " クラス \"%s\" の定義はありません "
 
+#. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "The prototype for class %s has undefined slot(s): %s"
+msgstr " \"%s\" リスト(クラス %s に対する)は未定義のクラス %s を含みます "
+
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 #: R/trace.R:0
 msgid "Tracing"
@@ -1251,6 +1279,11 @@ msgstr " パッケージ名ではありません: %s "
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
+msgstr ""
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2095,6 +2128,11 @@ msgstr ""
 #, fuzzy
 msgid "for function %s: %s"
 msgstr " 関数 %s が見付かりません "
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "for new inheritance information currently;"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -3199,16 +3237,6 @@ msgstr " 一つのストリング;クラス \"%s\" のオブジェクトを得�
 msgid "skipping methods list element %s of unexpected class %s"
 msgstr " メソッドリスト要素 %s をスキップします(予期しないクラス %s でした) "
 
-#. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"slot %s in class %s currently defined (or inherited) as \"%s\", conflicts "
-"with an inherited definition in class %s"
-msgstr ""
-" スロット \"%s\" (クラス \"%s\" 中の)は現在  \"%s\" として定義(もしくは継承)"
-"されていますが, クラス %s 中の継承された定義と相克します "
-
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
@@ -3235,14 +3263,11 @@ msgid ""
 msgstr ""
 " なにかおかしい: メソッドテーブル文字列中に矛盾した数の引数があります: "
 
-#. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
-msgid ""
-"subclass %s of class %s is not local and cannot be updated for new "
-"inheritance information; consider setClassUnion()"
-msgstr ""
-" サブクラス \"%s\" (クラスは \"%s\") は局所的でなく、新しい継承情報のために更"
-"新できません; setClassUnion() の使用を考えてください "
+#, fuzzy
+msgid "subclass %s of class %s is not local and is not updated"
+msgstr " 未定義のサブクラス %s (クラスは %s)です； 定義は更新されません "
 
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
@@ -3879,6 +3904,13 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
+
+#~ msgid ""
+#~ "subclass %s of class %s is not local and cannot be updated for new "
+#~ "inheritance information; consider setClassUnion()"
+#~ msgstr ""
+#~ " サブクラス \"%s\" (クラスは \"%s\") は局所的でなく、新しい継承情報のため"
+#~ "に更新できません; setClassUnion() の使用を考えてください "
 
 #~ msgid "** should no longer happen!"
 #~ msgstr " **は、もはや起こってはいけません！ "

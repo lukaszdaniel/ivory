@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 17:28\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1159,6 +1159,11 @@ msgstr "sum(weights) != 1 이므로 이것으로부터 확률밀도를 얻을 �
 #: R/models.R:0
 msgid "'termlabels' must be a character vector of length at least one"
 msgstr "'termlabels'는 반드시 적어도 길이가 1인 문자형 벡터이어야 합니다"
+
+#. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
+#: R/approx.R:0
+msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
+msgstr ""
 
 #. R/smspline.R: stop("'tol' must be strictly positive and finite")
 #: R/smspline.R:0

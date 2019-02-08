@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -837,6 +837,12 @@ msgstr ""
 msgid "'from' argument must be raw or character"
 msgstr "'from' 은 반드시 raw 이거나 문자이어야 합니다 "
 
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+#, fuzzy
+msgid "'headers' must have names and must not be NA"
+msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
+
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #: R/New-Internal.R:0
@@ -1366,6 +1372,11 @@ msgstr "FALSE 대신에 F 가 사용되었습니다 "
 msgid "Failed with error:  %s"
 msgstr "'%s' 실행은 에러 코드 %d 와 함께 실패했습니다 "
 
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 #, fuzzy
@@ -1676,12 +1687,6 @@ msgstr "패키지 %s 는 로드되지 않았습니다 "
 #, fuzzy
 msgid "Packages in library %s:"
 msgstr "라이브러리 '%s 내의 패키지 %s패키지:"
-
-#. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
-#: R/dataframe.R:0
-#, fuzzy
-msgid "Partial match of '%s' to '%s' in data frame"
-msgstr "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
 
 #. R/files.R: gettext("R Information", domain = "R-base")
 #: R/files.R:0
@@ -2040,6 +2045,12 @@ msgstr "Can only subtract from Date objects"
 #, fuzzy
 msgid "can only subtract numbers from objects of class %s"
 msgstr "Date 객체로부터 수자정보만 빼낼 수 있습니다 "
+
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+#, fuzzy
+msgid "can only write character objects"
+msgstr "벡터개체들만 기록이 가능합니다 "
 
 #. R/connections.R: stop("can only write vector objects")
 #: R/connections.R:0
@@ -3280,6 +3291,12 @@ msgstr "row names supplied are of the wrong length"
 msgid "row names were found from a short variable and have been discarded"
 msgstr "row names were found from a short variable and have been discarded"
 
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
+msgid "running command '%s' had status %d"
+msgstr ""
+
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
 #, fuzzy
@@ -3824,6 +3841,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "Partial match of '%s' to '%s' in data frame"
+#~ msgstr "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
 
 #, fuzzy
 #~ msgid "%s is not an object of class %s"

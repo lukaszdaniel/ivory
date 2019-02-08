@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -966,6 +966,13 @@ msgid "'from' argument must be raw or character"
 msgstr ""
 
 
+#: R/connections.R: 0
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+
+msgid "'headers' must have names and must not be NA"
+msgstr ""
+
+
 #: R/New-Internal.R: 0
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
@@ -1598,6 +1605,13 @@ msgid "Failed with error:  %s"
 msgstr ""
 
 
+#: R/format.R: 0
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
+
 #: R/Defunct.R: 0
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 
@@ -1959,13 +1973,6 @@ msgstr ""
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
 
 msgid "Packages in library %s:"
-msgstr ""
-
-
-#: R/dataframe.R: 0
-#. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
-
-msgid "Partial match of '%s' to '%s' in data frame"
 msgstr ""
 
 
@@ -2426,6 +2433,13 @@ msgstr ""
 #. R/datetime.R: gettextf("can only subtract numbers from objects of class %s", dQuote("POSIXt"))
 
 msgid "can only subtract numbers from objects of class %s"
+msgstr ""
+
+
+#: R/connections.R: 0
+#. R/connections.R: stop("can only write character objects")
+
+msgid "can only write character objects"
 msgstr ""
 
 
@@ -3977,6 +3991,14 @@ msgstr ""
 #. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
 
 msgid "row names were found from a short variable and have been discarded"
+msgstr ""
+
+
+#: R/windows/system.R: 0
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+
+msgid "running command '%s' had status %d"
 msgstr ""
 
 

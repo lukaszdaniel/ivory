@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.6.0\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -815,6 +815,27 @@ msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr ""
 
 
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+
+msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
+
+msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+
+msgid "E := environment(): %s; parent.env(E): %s"
+msgstr ""
+
+
 #: R/RMethodUtils.R: 0
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 
@@ -1309,6 +1330,13 @@ msgid "The definition of class %s follows."
 msgstr ""
 
 
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
+
+msgid "The prototype for class %s has undefined slot(s): %s"
+msgstr ""
+
+
 #: R/trace.R: 0
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 
@@ -1370,6 +1398,13 @@ msgstr ""
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+
+msgid "[where=%s, where2=%s]"
 msgstr ""
 
 
@@ -2174,6 +2209,13 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("for function %s: %s", f, message)
 
 msgid "for function %s: %s"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+
+msgid "for new inheritance information currently;"
 msgstr ""
 
 
@@ -3249,13 +3291,6 @@ msgid "skipping methods list element %s of unexpected class %s"
 msgstr ""
 
 
-#: R/RClassUtils.R: 0
-#. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-
-msgid "slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s"
-msgstr ""
-
-
 #: R/oldClass.R: 0
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 
@@ -3285,9 +3320,9 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 
-msgid "subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()"
+msgid "subclass %s of class %s is not local and is not updated"
 msgstr ""
 
 

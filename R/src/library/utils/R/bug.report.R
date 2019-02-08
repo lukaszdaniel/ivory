@@ -109,7 +109,7 @@ bug.report <- function(subject = "", address,
         address <- findEmail(DESC$Maintainer)
     }
 
-    create.post(instructions = c("", gettext("<<insert bug report here>>"), rep("", 3)),
+    create.post(instructions = c("", gettext("<<insert bug report here>>"), rep.int("", 3)),
                 description = gettext("bug report"),
                 subject = subject, address = address,
                 filename = file, info = info, ...)

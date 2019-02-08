@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2019-02-08 18:34+0100\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -67,19 +67,19 @@ msgstr "Надо как минимум две точки, чтобы нарис�
 msgid "non-finite control point in Xspline"
 msgstr "Не-конечная контрольная точка в Xspline"
 
-#: grid.c:2962
+#: grid.c:2967
 msgid "non-finite x or y in graphics path"
 msgstr "бесконечный x или y в кривой крафика"
 
-#: grid.c:3003
+#: grid.c:3009
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3457
+#: grid.c:3463
 msgid "invalid plotting symbol"
 msgstr "неправильный символ графика"
 
-#: grid.c:3543
+#: grid.c:3549
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Не могу обрезать повернутый четырехугольник"

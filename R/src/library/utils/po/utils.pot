@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-24 21:00+0200\n"
+"POT-Creation-Date: 2019-02-08 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,6 +139,11 @@ msgstr ""
 #: stubs.c:240 stubs.c:243
 #, c-format
 msgid "invalid '%s' specification"
+msgstr ""
+
+#: stubs.c:246
+#, c-format
+msgid "'%s' contains missing values"
 msgstr ""
 
 #: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182

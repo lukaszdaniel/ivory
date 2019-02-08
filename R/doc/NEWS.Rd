@@ -258,6 +258,13 @@
       \item \code{format(x)} gives a more user friendly error message in
       the case where no method is defined. Additionally, a minimal method
       is provided in \code{format.default(x)} when \code{isS4(x)} is true.
+
+      \item \code{which(x)} now also works when \code{x} is a long vector,
+      thanks to Suharto Anggono's \PR{17201}.
+
+      \item \code{seq.default()} is more careful to return an \code{integer}
+      (as opposed to \code{double}) stored result when its arguments are
+      large and/or objects; see comment #9 of Suharto Anggono's \PR{17497}.
     }
   }
 
@@ -308,6 +315,20 @@
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
+      \item Source package installation can be \sQuote{staged}: this is
+      currently optional but intended to become the default before
+      release.  In a staged install the package is installed into a
+      temporary location under the final library directory and moved
+      into place once the installation is complete.  The benefit is that
+      partially-installed packages are hidden from the view of other \R
+      sessions.
+      
+      The overall default is set by environment variable
+      \env{R_INSTALL_STAGED}.  \command{R CMD INSTALL} has new options
+      \option{--staged-install} and \option{--no-staged-install}, and
+      packages can use the \samp{StagedInstall} field in their
+      \file{DESCRIPTION} file to opt in or (more likely) out.
+
       \item The interpretation of source code with extension \file{.f}
       is changing.  Previously this denoted FORTRAN 77 code, but current
       compilers no longer have a FORTRAN 77 mode and interpret it as
@@ -397,6 +418,10 @@
 
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
+      \item \code{$.data.frame} had become an expensive version of
+      the default method, so has been removed. (Thanks to Radford Neal
+      for picking this up and Duncan Murdoch for providing a patch.)
+
       \item Argument \code{compressed} of \code{untar()} is
       deprecated --- it is only used for external \code{tar} commands
       which increasingly for extraction auto-detect compression and
@@ -634,6 +659,15 @@
 
       \item In the definition of an S4 class, prototype elements are now
       checked to match the slots of the class.  Reported by Bill Dunlap.
+
+      \item From \code{setClassUnion()}, if environment variable
+      \env{_R_METHODS_SHOW_CHECKSUBCLASSES} is set
+      to true, the internal \code{.checkSubclasses()} utility prints
+      debugging info to see if it is used at all after the \pkg{methods}
+      package has been built.  On the other hand, setting
+      \env{_R_METHODS_DONT_CHECKSUBCLASSES} to true, replaces
+      \code{.checkSubclasses()} by a no-op, experimentally, as it may be
+      unneeded (after \pkg{methods} building).
     }
   }
 }
@@ -653,6 +687,16 @@
       \item New macro \samp{F_VISIBILITY} as an alternative to
       \samp{F77_VISIBILITY}.  This will become the preferred form in
       \R 3.6.0.
+    }
+  }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{writeLines(readLines(fnam), fnam)} now works as expected,
+      thanks to Peter Meissner's \PR{17528}.
+
+      \item \code{setClassUnion()} no longer warns, but uses \code{message()}
+      for now, when encountering \dQuote{non local} subclasses of class members.
     }
   }
 }

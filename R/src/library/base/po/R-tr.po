@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -773,6 +773,11 @@ msgstr ""
 msgid "'from' argument must be raw or character"
 msgstr ""
 
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr ""
+
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #: R/New-Internal.R:0
@@ -1260,6 +1265,11 @@ msgstr ""
 msgid "Failed with error:  %s"
 msgstr ""
 
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(fname[length(fname)]))
 #: R/Defunct.R:0
 msgid "Function %s is defunct."
@@ -1548,11 +1558,6 @@ msgstr ""
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
 #: R/library.R:0
 msgid "Packages in library %s:"
-msgstr ""
-
-#. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
-#: R/dataframe.R:0
-msgid "Partial match of '%s' to '%s' in data frame"
 msgstr ""
 
 #. R/files.R: gettext("R Information", domain = "R-base")
@@ -1891,6 +1896,11 @@ msgstr ""
 #. R/datetime.R: gettextf("can only subtract numbers from objects of class %s", dQuote("POSIXt"))
 #: R/dates.R:0 R/datetime.R:0
 msgid "can only subtract numbers from objects of class %s"
+msgstr ""
+
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+msgid "can only write character objects"
 msgstr ""
 
 #. R/connections.R: stop("can only write vector objects")
@@ -3043,6 +3053,12 @@ msgstr ""
 #. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
 #: R/dataframe.R:0
 msgid "row names were found from a short variable and have been discarded"
+msgstr ""
+
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
+msgid "running command '%s' had status %d"
 msgstr ""
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))

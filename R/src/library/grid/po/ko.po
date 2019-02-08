@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-30 17:28+0200\n"
+"POT-Creation-Date: 2019-02-08 18:34+0100\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -65,19 +65,19 @@ msgstr "화살표를 그리기 위해서는 최소한 2개의 점이 필요합�
 msgid "non-finite control point in Xspline"
 msgstr "Xspline 에서 유한하지 않은 컨트롤 포인트입니다 "
 
-#: grid.c:2962
+#: grid.c:2967
 msgid "non-finite x or y in graphics path"
 msgstr "그래픽 경로에 x 혹은 y 가 유한하지 않습니다 "
 
-#: grid.c:3003
+#: grid.c:3009
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3457
+#: grid.c:3463
 msgid "invalid plotting symbol"
 msgstr "플랏 기호가 잘못되었습니다 "
 
-#: grid.c:3543
+#: grid.c:3549
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형에 고정시킬 수 없습니다 "

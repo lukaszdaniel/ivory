@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-24 21:00+0200\n"
+"POT-Creation-Date: 2019-02-08 18:34+0100\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -148,6 +148,11 @@ msgstr "X11 недоступна"
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "неправильное определение '%s'"
+
+#: stubs.c:246
+#, c-format
+msgid "'%s' contains missing values"
+msgstr ""
 
 #: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256

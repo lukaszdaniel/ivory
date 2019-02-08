@@ -4058,7 +4058,7 @@ function(package, dir, lib.loc = NULL)
     }
 
     ## Flatten the xref db into one big matrix.
-    db <- cbind(do.call("rbind", db), rep(names(db), sapply(db, NROW)))
+    db <- cbind(do.call("rbind", db), rep.int(names(db), sapply(db, NROW)))
     if(nrow(db) == 0L) return(structure(list(), class = "check_Rd_xrefs"))
 
     ## fixup \link[=dest] form
@@ -6435,7 +6435,8 @@ function(dir, localOnly = FALSE)
                                   pos <- grep("[^[:blank:]]", lines,
                                               useBytes = TRUE)
                                   c(p, if(len <- length(pos)) {
-                                      lines[seq(from = pos[1L], to = pos[len])]
+                                           lines[seq.int(from = pos[1L],
+                                                         to = pos[len])]
                                   })
                               } else NULL
                           }))

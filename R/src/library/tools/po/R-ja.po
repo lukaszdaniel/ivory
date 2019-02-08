@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-12-09 08:51\n"
+"POT-Creation-Date: 2019-02-08 18:41\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -18,13 +18,6 @@ msgstr ""
 #, fuzzy
 msgid "## package without R code %s"
 msgstr " パッケージにRコードが含まれていません "
-
-#. R/pdftools.R: gettextf("%s argument must be a character string or a file/raw connection", sQuote("file"))
-#: R/pdftools.R:0
-#, fuzzy
-msgid "%s argument must be a character string or a file/raw connection"
-msgstr ""
-" %s は文字列ベクトルかファイル、もしくはコネクションでなければなりません "
 
 #. R/QC.R: gettextf("  %s calls:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("  %s calls:", sQuote(f), domain = "R-tools")
@@ -153,19 +146,6 @@ msgstr " 引数 'pkg' は長さ1でなければなりません "
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
-msgstr " 引数 'pkg' は長さ1でなければなりません "
-
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#: R/pdftools.R:0
-#, fuzzy
-msgid "'%s' argument should be an object of class %s"
 msgstr " 引数 'pkg' は長さ1でなければなりません "
 
 #. R/install.R: gettextf("'%s' directory", "libs")
@@ -381,6 +361,30 @@ msgstr ""
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr " *** 誰かがパッケージ '%s' 中の Built 欄を壊しました *** "
 
+#. R/Vignettes.R: message("+-+", output)
+#: R/Vignettes.R:0
+msgid "+-+"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "--- failed re-building %s"
+msgstr " 実行中 "
+
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+msgid "--- finished re-building %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#: R/Vignettes.R:0
+msgid "--- re-building %s using %s"
+msgstr ""
+
 #. R/check.R: stop("-l option without value", call. = FALSE)
 #. R/install.R: stop("-l option without value", call. = FALSE)
 #: R/check.R:0 R/install.R:0
@@ -399,6 +403,11 @@ msgstr " 値のない -o オプションです "
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
 msgstr " 値のない -t オプション "
+
+#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
+#: R/QC.R:0
+msgid "..."
+msgstr " ... "
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
 #: R/QC.R:0
@@ -579,6 +588,17 @@ msgstr " ドキュメントオブジェクト '%s' 中の \\usage 中の代入�
 msgid "Author field differs from that derived from Authors@R"
 msgstr ""
 
+#. R/QC.R: gettext("Author field should be Authors@R.  Current value is:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Author field should be Authors@R.  Current value is:"
+msgstr ""
+
+#. R/QC.R: gettext("Author field starts with 'Author:'.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Author field starts with 'Author:'."
+msgstr "Authors@Rフィールドに役割が明示された人がいません "
+
 #. R/check.R: gettext("  Author:    ", domain = "R-tools")
 #: R/check.R:0
 msgid "Author:"
@@ -748,8 +768,9 @@ msgid "CRAN-pack knows about all of these files and directories"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
+#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/utils.R:0
+#: R/QC.R:0 R/utils.R:0
 msgid "Call sequence:"
 msgstr " 呼び出しシーケンス： "
 
@@ -1101,11 +1122,11 @@ msgstr ""
 msgid "Deprecated license: %s"
 msgstr " ドキュメント: %s "
 
-#. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each others output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names), collapse = ", "))
+#. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names), collapse = ", "))
 #: R/Vignettes.R:0
 msgid ""
 "Detected vignette source files (%s) with shared names (%s) and therefore "
-"risking overwriting each others output files"
+"risking overwriting each other's output files"
 msgstr ""
 
 #. R/QC.R: gettextf("Docs: %s", format_args(ffd), domain = "R-tools")
@@ -1138,12 +1159,6 @@ msgstr " 以下のセクション '%s'  "
 #, fuzzy
 msgid "Duplicated \\argument entries in documentation object %s:"
 msgstr " ドキュメントオブジェクト '%s' 中に重複した \\argument 項目： "
-
-#. R/pdftools.R: stop("EOF marker was not found")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "EOF marker was not found"
-msgstr "EOFマーカーが見つかりませんでした "
 
 #. R/build.R: gettext("ERROR", domain = "R-tools")
 #. R/build.R: gettext("ERROR", domain = "R-tools")
@@ -1467,23 +1482,36 @@ msgstr " 作成中 "
 msgid "Error in file %s:"
 msgstr " 作成中 "
 
-#. R/check.R: gettext("Error in re-building vignettes:", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Error in re-building vignettes:"
-msgstr " 以下の中にあるコードを実行中 "
-
 #. R/Rd2pdf.R: message("Error in running tools::texi2pdf()")
 #: R/Rd2pdf.R:0
 #, fuzzy
 msgid "Error in running tools::texi2pdf()"
 msgstr " tools::texi2pdf の実行時にエラーがありました "
 
+#. R/QC.R: gettextf("Error loading dataset %s: ", sQuote(f), domain = "R-tools")
+#. R/QC.R: gettextf("Error loading dataset %s:\n ", sQuote(ds), domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Error loading dataset %s:"
+msgstr " 作成中 "
+
+#. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
+#. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Error(s) in re-building vignettes:"
+msgstr " 以下の中にあるコードを実行中 "
+
 #. R/QC.R: gettext("Error: ", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Error:"
 msgstr " 作成中 "
+
+#. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding", file)
+#: R/Vignettes.R:0
+msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
+msgstr ""
 
 #. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
 #: R/build.R:0
@@ -1495,6 +1523,25 @@ msgstr " エラー：ディレクトリの名前を以下に変更できませ�
 #: R/check.R:0
 msgid "Error: no packages were specified"
 msgstr " エラー：パッケージが指定されていません "
+
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s", file, conditionMessage(e))
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s", file, conditionMessage(e))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid ""
+"Error: processing vignette '%s' failed with diagnostics:\n"
+"%s"
+msgstr ""
+" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
+" %s "
+
+#. R/Vignettes.R: gettextf("Error: tangling vignette %s failed with diagnostics:", sQuote(file))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Error: tangling vignette %s failed with diagnostics:"
+msgstr ""
+" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
+" %s "
 
 #. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tool")
 #. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tools")
@@ -1874,7 +1921,14 @@ msgid "Found the following significant warnings:"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
-#. R/check.R: gettext("Found the following sources/headers with CR or CRLF line endings:", domain = "R-tools")
+#. R/check.R: gettext("Found the following sources/headers not terminated with a newline:\n", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following sources/headers not terminated with a newline:"
+msgstr ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
+
+#. R/check.R: gettext("Found the following sources/headers with CR or CRLF line endings:\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following sources/headers with CR or CRLF line endings:"
 msgstr ""
@@ -2400,6 +2454,24 @@ msgstr ""
 msgid "NOTE: Quitting check on first error."
 msgstr ""
 
+#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
+#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
+#: R/install.R:0
+msgid "NOTE: fixed library path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed path ", old_paths[i])
+#: R/install.R:0
+msgid "NOTE: fixed path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed rpath ", old_paths[i])
+#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
+#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
+#: R/install.R:0
+msgid "NOTE: fixed rpath"
+msgstr ""
+
 #. R/QC.R: gettextf("    Name: %s\n    Code: %s\n    Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -2683,7 +2755,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2783,17 +2854,6 @@ msgstr ""
 #: R/utils.R:0
 msgid "Output:"
 msgstr ""
-
-#. R/pdftools.R: gettextf("PDF document (file %s, %d bytes, %d objects)", dQuote(x$file), x$size,     x$length)
-#: R/pdftools.R:0
-msgid "PDF document (file %s, %d bytes, %d objects)"
-msgstr ""
-
-#. R/pdftools.R: stop("PDF header was not found")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "PDF header was not found"
-msgstr "PDFヘッダが見つかりませんでした "
 
 #. R/check.R: gettext("PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it for these macros.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -3012,12 +3072,12 @@ msgstr ""
 msgid "Please write arXiv ids as <arXiv:YYMM.NNNNN>."
 msgstr ""
 
-#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), "
-"$(wildcard), ifeq ... endif. See section 'Writing portable packages' in the "
-"'Writing R Extensions' manual."
+"$(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable "
+"packages' in the 'Writing R Extensions' manual."
 msgstr ""
 
 #. R/check.R: gettext("Portable packages must use only ASCII characters in their R code,\nexcept perhaps in comments.\nUse \\uxxxx escapes for other characters.\n",     domain = "R-tools")
@@ -3472,6 +3532,11 @@ msgstr ""
 msgid "Some Unix compilers require LF line endings."
 msgstr ""
 
+#. R/check.R: gettext("Some compilers warn on such files.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Some compilers warn on such files."
+msgstr ""
+
 #. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
 #: R/Rd2latex.R:0
 msgid "Some input could not be re-encoded to %s"
@@ -3741,6 +3806,12 @@ msgid ""
 "The canonical URL of the CRAN page for a task view is: https://CRAN.R-"
 "project.org/view=viewname"
 msgstr ""
+
+#. R/check.R: gettext("  The dataset(s) may use package(s) not declared in the DESCRIPTION file.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "The dataset(s) may use package(s) not declared in the DESCRIPTION file."
+msgstr " 不正な DESCRIPTION ファイルです "
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
@@ -4156,7 +4227,6 @@ msgid "Vignette %s overwrites the following %s output by vignette %s:"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
-#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", file)
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
 #: R/Vignettes.R:0
 msgid "Vignette '%s' is non-ASCII but has no declared encoding"
@@ -4278,6 +4348,11 @@ msgstr " 警告：'DESCRIPTION' 中に混乱した 'Depends' 欄 "
 msgid ""
 "WARNING: omitting pointless dependence on 'R' without a version requirement"
 msgstr " 警告： バージョン必要性がない無意味な 'R' への依存性を取り去ります "
+
+#. R/install.R: message("WARNING: shared objects with hard-coded temporary installation paths")
+#: R/install.R:0
+msgid "WARNING: shared objects with hard-coded temporary installation paths"
+msgstr ""
 
 #. R/install.R: gettext("   WARNING: this package has a configure script\n         It probably needs manual configuration\n",     domain = "R-tools")
 #: R/install.R:0
@@ -4409,6 +4484,13 @@ msgstr " 以下のファイル中 "
 msgid "about to run command %s"
 msgstr " %s を '%s' に対して実行出来ません "
 
+#. R/install.R: gettextf("absolute paths in shared object %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(basename(l)), sQuote("--no-staged-install"))
+#: R/install.R:0
+msgid ""
+"absolute paths in shared object %s include the temporary installation "
+"directory: please report to the package maintainer and use %s"
+msgstr ""
+
 #. R/build.R: gettext("adding MD5 file", domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -4456,16 +4538,6 @@ msgstr ""
 #: R/assertCondition.R:0
 msgid "assertConditon: Successfully caught a condition"
 msgstr ""
-
-#. R/pdftools.R: stop("attempting to select less than one element")
-#: R/pdftools.R:0
-msgid "attempting to select less than one element"
-msgstr " 1個未満の要素を選択しようとしました "
-
-#. R/pdftools.R: stop("attempting to select more than one element")
-#: R/pdftools.R:0
-msgid "attempting to select more than one element"
-msgstr " 2個以上の要素を選択しようとしました "
 
 #. R/install.R: gettext("backing up earlier installation")
 #: R/install.R:0
@@ -4560,24 +4632,6 @@ msgstr " ディレクトリ '%s' を生成することが出来ません "
 msgid "cannot deal with Rd objects with missing/empty names"
 msgstr " 欠損もしくは空の名前を持つ Rd オブジェクトは扱えません "
 
-#. R/pdftools.R: stop("cannot find 'startxref' keyword")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "cannot find 'startxref' keyword"
-msgstr " startxref が見つかりません "
-
-#. R/pdftools.R: stop("cannot find 'xref' table")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "cannot find 'xref' table"
-msgstr " xref テーブルが見つかりません "
-
-#. R/pdftools.R: gettextf("cannot find object header at 'xrefed' position %d", pos)
-#: R/pdftools.R:0
-#, fuzzy
-msgid "cannot find object header at 'xrefed' position %d"
-msgstr " クロスリファレンスされた位置 %d にオブジェクトヘッダが見つかりません "
-
 #. R/check.R: gettextf("cannot link from %s", sQuote(from))
 #: R/check.R:0
 #, fuzzy
@@ -4596,60 +4650,11 @@ msgstr " ディレクトリ '%s' を開くことが出来ません "
 msgid "cannot open directory %s"
 msgstr " ディレクトリ '%s' を開くことが出来ません "
 
-#. R/pdftools.R: stop("cannot read 'xref' table")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "cannot read 'xref' table"
-msgstr " xref テーブルを読み込めません "
-
-#. R/pdftools.R: stop("cannot read array object")
-#: R/pdftools.R:0
-msgid "cannot read array object"
-msgstr " 配列オブジェクトを読めません "
-
-#. R/pdftools.R: stop("cannot read dictionary object")
-#: R/pdftools.R:0
-msgid "cannot read dictionary object"
-msgstr " ディレクトリオブジェクトを読めません "
-
-#. R/pdftools.R: stop("cannot read hexadecimal string object")
-#: R/pdftools.R:0
-msgid "cannot read hexadecimal string object"
-msgstr " 16進数文字列オブジェクトを読めません "
-
 #. R/index.R: gettextf("cannot read index information in file '%s'", INDEX)
 #. R/index.R: gettextf("cannot read index information in file '%s'", file.path(demoDir, "00Index"))
 #: R/index.R:0
 msgid "cannot read index information in file '%s'"
 msgstr " ファイル '%s' 中のインデックス情報を読み取ることが出来ません "
-
-#. R/pdftools.R: stop("cannot read indirect reference object")
-#: R/pdftools.R:0
-msgid "cannot read indirect reference object"
-msgstr " 間接参照オブジェクトを読めません "
-
-#. R/pdftools.R: stop("cannot read literal string object")
-#: R/pdftools.R:0
-msgid "cannot read literal string object"
-msgstr " 文字列リテラルオブジェクトを読めません "
-
-#. R/pdftools.R: stop("cannot read name object")
-#: R/pdftools.R:0
-msgid "cannot read name object"
-msgstr " 名前オブジェクトを読めません "
-
-#. R/pdftools.R: stop("cannot read stream data")
-#. R/pdftools.R: stop("cannot read stream data")
-#: R/pdftools.R:0
-msgid "cannot read stream data"
-msgstr " ストリームデータを読めません "
-
-#. R/pdftools.R: stop("cannot read stream object")
-#. R/pdftools.R: stop("cannot read stream object")
-#. R/pdftools.R: stop("cannot read stream object")
-#: R/pdftools.R:0
-msgid "cannot read stream object"
-msgstr " ストリームオブジェクトを読めません "
 
 #. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
 #: R/utils.R:0
@@ -4765,6 +4770,11 @@ msgstr ""
 #. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
 #: R/check.R:0
 msgid "checking a package with encoding %s in an ASCII locale"
+msgstr ""
+
+#. R/install.R: gettext("checking absolute paths in shared objects")
+#: R/install.R:0
+msgid "checking absolute paths in shared objects"
 msgstr ""
 
 #. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")
@@ -5442,11 +5452,6 @@ msgstr " 正確に1つのRdファイルは指定されなければなりませ�
 msgid "excluding invalid files"
 msgstr ""
 
-#. R/pdftools.R: gettextf("expanding %s", sQuote(format(kid)))
-#: R/pdftools.R:0
-msgid "expanding %s"
-msgstr " %s を展開中 "
-
 #. R/testing.R: message("  expect failure or some differences if not in a Latin or UTF-8 locale",     domain = "R-tools")
 #: R/testing.R:0
 #, fuzzy
@@ -5696,11 +5701,6 @@ msgstr ""
 msgid "invalid 'Package' field"
 msgstr " 不正なパッケージです "
 
-#. R/pdftools.R: stop("invalid index in object stream lookup")
-#: R/pdftools.R:0
-msgid "invalid index in object stream lookup"
-msgstr " オブジェクトストリームの検索で不正なインデックスがあります "
-
 #. R/install.R: gettextf("invalid package %s", sQuote(pkg))
 #: R/install.R:0
 #, fuzzy
@@ -5748,11 +5748,6 @@ msgstr ""
 msgid "loading package failed"
 msgstr " '%s' のロードに失敗しました "
 
-#. R/pdftools.R: sprintf("looking at %s", sQuote(deparse(intToUtf8(bytes))))
-#: R/pdftools.R:0
-msgid "looking at %s"
-msgstr " %s を見ています "
-
 #. R/build.R: gettext("looking to see if a 'data/datalist' file should be added", domain = "R-tools")
 #: R/build.R:0
 msgid "looking to see if a 'data/datalist' file should be added"
@@ -5772,16 +5767,6 @@ msgid ""
 "\n"
 "make would use:"
 msgstr ""
-
-#. R/pdftools.R: gettextf("mismatch in generation numbers (given: %d, found: %d)", gen, hdr["gen"])
-#: R/pdftools.R:0
-msgid "mismatch in generation numbers (given: %d, found: %d)"
-msgstr " 生成数に不一致があります (%d のはずが, %d 見つかりました) "
-
-#. R/pdftools.R: gettextf("mismatch in object numbers (given: %d, found: %d)", num, hdr["num"])
-#: R/pdftools.R:0
-msgid "mismatch in object numbers (given: %d, found: %d)"
-msgstr " オブジェクト数に不一致があります( %d のはずが, %d 見つかりました ) "
 
 #. R/Rd2HTML.R: gettextf("missing file link %s", sQuote(parts$targetfile))
 #: R/Rd2HTML.R:0
@@ -6046,18 +6031,12 @@ msgstr " '%s' を構文解析中 "
 msgid "preparing %s:"
 msgstr " 作成中 "
 
-#. R/install.R: gettext("preparing package for lazy loading")
-#: R/install.R:0
-msgid "preparing package for lazy loading"
-msgstr ""
-
-#. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/urltools.R: gettextf("processing %s", u)
-#: R/pdftools.R:0 R/urltools.R:0
+#: R/urltools.R:0
 msgid "processing %s"
 msgstr " %s を処理中 "
 
@@ -6085,14 +6064,6 @@ msgstr " %s を処理中 "
 #, fuzzy
 msgid "processing package %s"
 msgstr " パッケージを処理中： "
-
-#. R/Vignettes.R: gettextf("processing vignette %s failed with diagnostics:", sQuote(file))
-#: R/Vignettes.R:0
-#, fuzzy
-msgid "processing vignette %s failed with diagnostics:"
-msgstr ""
-" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
-" %s "
 
 #. R/build.R: gettext("re-saving .R files as .rda", domain = "R-tools")
 #: R/build.R:0
@@ -6379,6 +6350,11 @@ msgstr " ソースリストには全ての要素の名前が含まれていな�
 msgid "source must be an environment or a list"
 msgstr " ソースは環境またはリストでなければなりません "
 
+#. R/install.R: stop("staged install is only possible with locking")
+#: R/install.R:0
+msgid "staged install is only possible with locking"
+msgstr ""
+
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
 #: R/dynamicHelp.R:0
 msgid "starting httpd help server ..."
@@ -6399,14 +6375,6 @@ msgstr ""
 msgid "symbol %s not in namespace"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("tangling vignette %s failed with diagnostics:", sQuote(file))
-#: R/Vignettes.R:0
-#, fuzzy
-msgid "tangling vignette %s failed with diagnostics:"
-msgstr ""
-" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
-" %s "
-
 #. R/utils.R: gettextf("test %s is not available", sQuote(op))
 #: R/utils.R:0
 #, fuzzy
@@ -6422,6 +6390,18 @@ msgstr " '%s' のテストに失敗しました "
 #: R/install.R:0
 #, fuzzy
 msgid "testing if installed package can be loaded"
+msgstr " リンク %s （パッケージ %s 中の）は所在不明です "
+
+#. R/install.R: gettextf("testing if installed package can be loaded from final location")
+#: R/install.R:0
+#, fuzzy
+msgid "testing if installed package can be loaded from final location"
+msgstr " リンク %s （パッケージ %s 中の）は所在不明です "
+
+#. R/install.R: gettext("testing if installed package can be loaded from temporary location")
+#: R/install.R:0
+#, fuzzy
+msgid "testing if installed package can be loaded from temporary location"
 msgstr " リンク %s （パッケージ %s 中の）は所在不明です "
 
 #. R/testing.R: gettextf("testing package %s failed", sQuote(pkg))
@@ -6600,26 +6580,10 @@ msgstr " 実装されていないエンコード "
 msgid "unknown header specification"
 msgstr " 標準ではないライセンス指定: "
 
-#. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
-#: R/pdftools.R:0
-#, fuzzy
-msgid "unsupported %s predictor %d"
-msgstr " 未サポートの flatedecode predictor %d "
-
-#. R/pdftools.R: gettextf("unsupported PNG filter %d", fb)
-#: R/pdftools.R:0
-msgid "unsupported PNG filter %d"
-msgstr " 未サポートのPNGフィルタ %d "
-
 #. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
 #: R/dynamicHelp.R:0
 msgid "unsupported URL %s"
 msgstr " 未サポートのURL %s "
-
-#. R/pdftools.R: gettextf("unsupported filter %s", sQuote(filter))
-#: R/pdftools.R:0
-msgid "unsupported filter %s"
-msgstr " 未サポートのフィルタ %s "
 
 #. R/build.R: gettextf("use '--force' to remove the existing %s", sQuote(oldindex), domain = "R-tools")
 #: R/build.R:0
@@ -6769,13 +6733,6 @@ msgid "%d WARNING"
 msgid_plural "%d WARNINGS"
 msgstr[0] ""
 
-#. R/pdftools.R: ngettext(doc$size, "%d byte", "%d bytes", domain = "R-tools")
-#. R/pdftools.R: ngettext(length(bytes), "%d byte", "%d bytes")
-#: R/pdftools.R:0
-msgid "%d byte"
-msgid_plural "%d bytes"
-msgstr[0] ""
-
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
 #, fuzzy
@@ -6907,6 +6864,12 @@ msgid "File which contain pragma(s) suppressing diagnostics:"
 msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 
+#. R/check.R: ngettext(length(port), "File which contains non-portable pragma(s)", "Files which contain non-portable pragma(s)",     domain = "R-tools")
+#: R/check.R:0
+msgid "File which contains non-portable pragma(s)"
+msgid_plural "Files which contain non-portable pragma(s)"
+msgstr[0] ""
+
 #. R/check.R: ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
 #. R/check.R: ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
 #: R/check.R:0
@@ -6914,10 +6877,10 @@ msgid "File which contains pragma(s) suppressing diagnostics:"
 msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 
-#. R/check.R: ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics:",     "Files which contain pragma(s) suppressing important diagnostics:", domain = "R-tools")
+#. R/check.R: ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics",     "Files which contain pragma(s) suppressing important diagnostics", domain = "R-tools")
 #: R/check.R:0
-msgid "File which contains pragma(s) suppressing important diagnostics:"
-msgid_plural "Files which contain pragma(s) suppressing important diagnostics:"
+msgid "File which contains pragma(s) suppressing important diagnostics"
+msgid_plural "Files which contain pragma(s) suppressing important diagnostics"
 msgstr[0] ""
 
 #. R/QC.R: ngettext(length(xx), "Foreign function call to a base package:", "Foreign function calls to a base package:",     domain = "R-tools")
@@ -7362,10 +7325,10 @@ msgid "Package vignette which is not in its specified encoding:\n"
 msgid_plural "Package vignettes which are not in their specified encoding:\n"
 msgstr[0] ""
 
-#. R/check.R: ngettext(nb, "Package vignette without corresponding PDF/HTML:\n", "Package vignettes without corresponding PDF/HTML:\n",     domain = "R-tools")
+#. R/check.R: ngettext(nb, "Package vignette without corresponding single PDF/HTML:\n", "Package vignettes without corresponding single PDF/HTML:\n",     domain = "R-tools")
 #: R/check.R:0
-msgid "Package vignette without corresponding PDF/HTML:\n"
-msgid_plural "Package vignettes without corresponding PDF/HTML:\n"
+msgid "Package vignette without corresponding single PDF/HTML:\n"
+msgid_plural "Package vignettes without corresponding single PDF/HTML:\n"
 msgstr[0] ""
 
 #. R/QC.R: ngettext(length(bad), "Package which this enhances but not available for checking:",     "Packages which this enhances but not available for checking:", domain = "R-tools")
@@ -7394,6 +7357,14 @@ msgstr[0] ""
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] " 必要なフィールドは見当たりません． "
+
+#. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "SUMMARY: processing the following file failed:"
+msgid_plural "SUMMARY: processing the following files failed:"
+msgstr[0] ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
 #. R/QC.R: ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools")
 #: R/QC.R:0
@@ -7555,6 +7526,13 @@ msgid "difference in entry %s"
 msgid_plural "differences in entries %s"
 msgstr[0] " 好ましくないエントリー： "
 
+#. R/Vignettes.R: ngettext(length(dups), "duplicated vignette title:", "duplicated vignette titles:",     domain = "R-tools")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "duplicated vignette title:"
+msgid_plural "duplicated vignette titles:"
+msgstr[0] " '%s' フィールド中に重複したファイルがあります： "
+
 #. R/md5.R: ngettext(length(files), "file %s has the wrong MD5 checksums", "files %s have the wrong MD5 checksums",     domain = "R-tools")
 #: R/md5.R:0
 msgid "file %s has the wrong MD5 checksums"
@@ -7600,6 +7578,96 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#, fuzzy
+#~ msgid "%s argument must be a character string or a file/raw connection"
+#~ msgstr ""
+#~ " %s は文字列ベクトルかファイル、もしくはコネクションでなければなりません "
+
+#, fuzzy
+#~ msgid "'%s' argument should be an object of class %s"
+#~ msgstr " 引数 'pkg' は長さ1でなければなりません "
+
+#, fuzzy
+#~ msgid "EOF marker was not found"
+#~ msgstr "EOFマーカーが見つかりませんでした "
+
+#, fuzzy
+#~ msgid "PDF header was not found"
+#~ msgstr "PDFヘッダが見つかりませんでした "
+
+#~ msgid "attempting to select less than one element"
+#~ msgstr " 1個未満の要素を選択しようとしました "
+
+#~ msgid "attempting to select more than one element"
+#~ msgstr " 2個以上の要素を選択しようとしました "
+
+#, fuzzy
+#~ msgid "cannot find 'startxref' keyword"
+#~ msgstr " startxref が見つかりません "
+
+#, fuzzy
+#~ msgid "cannot find 'xref' table"
+#~ msgstr " xref テーブルが見つかりません "
+
+#, fuzzy
+#~ msgid "cannot find object header at 'xrefed' position %d"
+#~ msgstr ""
+#~ " クロスリファレンスされた位置 %d にオブジェクトヘッダが見つかりません "
+
+#, fuzzy
+#~ msgid "cannot read 'xref' table"
+#~ msgstr " xref テーブルを読み込めません "
+
+#~ msgid "cannot read array object"
+#~ msgstr " 配列オブジェクトを読めません "
+
+#~ msgid "cannot read dictionary object"
+#~ msgstr " ディレクトリオブジェクトを読めません "
+
+#~ msgid "cannot read hexadecimal string object"
+#~ msgstr " 16進数文字列オブジェクトを読めません "
+
+#~ msgid "cannot read indirect reference object"
+#~ msgstr " 間接参照オブジェクトを読めません "
+
+#~ msgid "cannot read literal string object"
+#~ msgstr " 文字列リテラルオブジェクトを読めません "
+
+#~ msgid "cannot read name object"
+#~ msgstr " 名前オブジェクトを読めません "
+
+#~ msgid "cannot read stream data"
+#~ msgstr " ストリームデータを読めません "
+
+#~ msgid "cannot read stream object"
+#~ msgstr " ストリームオブジェクトを読めません "
+
+#~ msgid "expanding %s"
+#~ msgstr " %s を展開中 "
+
+#~ msgid "invalid index in object stream lookup"
+#~ msgstr " オブジェクトストリームの検索で不正なインデックスがあります "
+
+#~ msgid "looking at %s"
+#~ msgstr " %s を見ています "
+
+#~ msgid "mismatch in generation numbers (given: %d, found: %d)"
+#~ msgstr " 生成数に不一致があります (%d のはずが, %d 見つかりました) "
+
+#~ msgid "mismatch in object numbers (given: %d, found: %d)"
+#~ msgstr ""
+#~ " オブジェクト数に不一致があります( %d のはずが, %d 見つかりました ) "
+
+#, fuzzy
+#~ msgid "unsupported %s predictor %d"
+#~ msgstr " 未サポートの flatedecode predictor %d "
+
+#~ msgid "unsupported PNG filter %d"
+#~ msgstr " 未サポートのPNGフィルタ %d "
+
+#~ msgid "unsupported filter %s"
+#~ msgstr " 未サポートのフィルタ %s "
 
 #, fuzzy
 #~ msgid "file '%s' not found"
@@ -8003,9 +8071,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
 #~ msgid "to"
 #~ msgstr " へ "
-
-#~ msgid "..."
-#~ msgstr " ... "
 
 #~ msgid "Comparing"
 #~ msgstr " 比較中 "

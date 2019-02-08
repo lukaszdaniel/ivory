@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-30 17:28\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1162,6 +1162,11 @@ msgstr " sum(weights) != 1，因此无法取得真密度函数"
 #: R/models.R:0
 msgid "'termlabels' must be a character vector of length at least one"
 msgstr "'termlabels'必需是长度至少为一的字节矢量"
+
+#. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
+#: R/approx.R:0
+msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
+msgstr ""
 
 #. R/smspline.R: stop("'tol' must be strictly positive and finite")
 #: R/smspline.R:0

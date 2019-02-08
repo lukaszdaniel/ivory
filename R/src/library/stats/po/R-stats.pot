@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.6.0\n"
-"POT-Creation-Date: 2018-09-30 17:28\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1480,6 +1480,13 @@ msgstr ""
 #. R/models.R: stop("'termlabels' must be a character vector of length at least one")
 
 msgid "'termlabels' must be a character vector of length at least one"
+msgstr ""
+
+
+#: R/approx.R: 0
+#. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
+
+msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
 msgstr ""
 
 

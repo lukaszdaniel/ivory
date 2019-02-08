@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-12-09 08:51\n"
+"POT-Creation-Date: 2019-02-08 18:41\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -17,11 +17,6 @@ msgstr ""
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
 #: R/install.R:0
 msgid "## package without R code %s"
-msgstr ""
-
-#. R/pdftools.R: gettextf("%s argument must be a character string or a file/raw connection", sQuote("file"))
-#: R/pdftools.R:0
-msgid "%s argument must be a character string or a file/raw connection"
 msgstr ""
 
 #. R/QC.R: gettextf("  %s calls:", sQuote(f), domain = "R-tools")
@@ -148,19 +143,6 @@ msgstr "argument »package« skal være af længde 1"
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
-msgstr "argument »package« skal være af længde 1"
-
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#. R/pdftools.R: gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc"))
-#: R/pdftools.R:0
-#, fuzzy
-msgid "'%s' argument should be an object of class %s"
 msgstr "argument »package« skal være af længde 1"
 
 #. R/install.R: gettextf("'%s' directory", "libs")
@@ -356,6 +338,29 @@ msgstr ""
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr ""
 
+#. R/Vignettes.R: message("+-+", output)
+#: R/Vignettes.R:0
+msgid "+-+"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+msgid "--- failed re-building %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+msgid "--- finished re-building %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#: R/Vignettes.R:0
+msgid "--- re-building %s using %s"
+msgstr ""
+
 #. R/check.R: stop("-l option without value", call. = FALSE)
 #. R/install.R: stop("-l option without value", call. = FALSE)
 #: R/check.R:0 R/install.R:0
@@ -373,6 +378,11 @@ msgstr ""
 #. R/Rd2pdf.R: stop("-t option without value", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
+msgstr ""
+
+#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
+#: R/QC.R:0
+msgid "..."
 msgstr ""
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
@@ -552,6 +562,16 @@ msgstr "Tildelinger i \\usage i dokumentationsobjekt »%s«:"
 msgid "Author field differs from that derived from Authors@R"
 msgstr ""
 
+#. R/QC.R: gettext("Author field should be Authors@R.  Current value is:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Author field should be Authors@R.  Current value is:"
+msgstr ""
+
+#. R/QC.R: gettext("Author field starts with 'Author:'.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Author field starts with 'Author:'."
+msgstr ""
+
 #. R/check.R: gettext("  Author:    ", domain = "R-tools")
 #: R/check.R:0
 msgid "Author:"
@@ -707,8 +727,9 @@ msgstr ""
 msgid "CRAN-pack knows about all of these files and directories"
 msgstr ""
 
+#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/utils.R:0
+#: R/QC.R:0 R/utils.R:0
 msgid "Call sequence:"
 msgstr ""
 
@@ -1035,11 +1056,11 @@ msgstr ""
 msgid "Deprecated license: %s"
 msgstr "Dokumenter: %s"
 
-#. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each others output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names), collapse = ", "))
+#. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names), collapse = ", "))
 #: R/Vignettes.R:0
 msgid ""
 "Detected vignette source files (%s) with shared names (%s) and therefore "
-"risking overwriting each others output files"
+"risking overwriting each other's output files"
 msgstr ""
 
 #. R/QC.R: gettextf("Docs: %s", format_args(ffd), domain = "R-tools")
@@ -1070,12 +1091,6 @@ msgstr "Argumentnavne i kode men ikke i dokumenter:"
 #, fuzzy
 msgid "Duplicated \\argument entries in documentation object %s:"
 msgstr "Duplikerede \\argument-punkter i dokumentationsobjekt »%s«:"
-
-#. R/pdftools.R: stop("EOF marker was not found")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "EOF marker was not found"
-msgstr "Vignette afhængigheder ikke krævet:"
 
 #. R/build.R: gettext("ERROR", domain = "R-tools")
 #. R/build.R: gettext("ERROR", domain = "R-tools")
@@ -1369,22 +1384,35 @@ msgstr "fortolkningsfejl i fil »%s«:"
 msgid "Error in file %s:"
 msgstr "fortolkningsfejl i fil »%s«:"
 
-#. R/check.R: gettext("Error in re-building vignettes:", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Error in re-building vignettes:"
-msgstr "Argumentnavne i kode men ikke i dokumenter:"
-
 #. R/Rd2pdf.R: message("Error in running tools::texi2pdf()")
 #: R/Rd2pdf.R:0
 msgid "Error in running tools::texi2pdf()"
 msgstr ""
+
+#. R/QC.R: gettextf("Error loading dataset %s: ", sQuote(f), domain = "R-tools")
+#. R/QC.R: gettextf("Error loading dataset %s:\n ", sQuote(ds), domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Error loading dataset %s:"
+msgstr "fortolkningsfejl i fil »%s«:"
+
+#. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
+#. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Error(s) in re-building vignettes:"
+msgstr "Argumentnavne i kode men ikke i dokumenter:"
 
 #. R/QC.R: gettext("Error: ", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Error:"
 msgstr "fortolkningsfejl i fil »%s«:"
+
+#. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding", file)
+#: R/Vignettes.R:0
+msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
+msgstr ""
 
 #. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
 #: R/build.R:0
@@ -1394,6 +1422,19 @@ msgstr ""
 #. R/check.R: message("Error: no packages were specified")
 #: R/check.R:0
 msgid "Error: no packages were specified"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s", file, conditionMessage(e))
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s", file, conditionMessage(e))
+#: R/Vignettes.R:0
+msgid ""
+"Error: processing vignette '%s' failed with diagnostics:\n"
+"%s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("Error: tangling vignette %s failed with diagnostics:", sQuote(file))
+#: R/Vignettes.R:0
+msgid "Error: tangling vignette %s failed with diagnostics:"
 msgstr ""
 
 #. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tool")
@@ -1749,7 +1790,13 @@ msgstr "Felter med ikke-ASCII-værdier:"
 msgid "Found the following significant warnings:"
 msgstr ""
 
-#. R/check.R: gettext("Found the following sources/headers with CR or CRLF line endings:", domain = "R-tools")
+#. R/check.R: gettext("Found the following sources/headers not terminated with a newline:\n", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following sources/headers not terminated with a newline:"
+msgstr "Felter med ikke-ASCII-værdier:"
+
+#. R/check.R: gettext("Found the following sources/headers with CR or CRLF line endings:\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following sources/headers with CR or CRLF line endings:"
 msgstr ""
@@ -2248,6 +2295,24 @@ msgstr ""
 msgid "NOTE: Quitting check on first error."
 msgstr ""
 
+#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
+#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
+#: R/install.R:0
+msgid "NOTE: fixed library path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed path ", old_paths[i])
+#: R/install.R:0
+msgid "NOTE: fixed path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed rpath ", old_paths[i])
+#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
+#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
+#: R/install.R:0
+msgid "NOTE: fixed rpath"
+msgstr ""
+
 #. R/QC.R: gettextf("    Name: %s\n    Code: %s\n    Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -2524,7 +2589,6 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2615,17 +2679,6 @@ msgstr ""
 #: R/utils.R:0
 msgid "Output:"
 msgstr ""
-
-#. R/pdftools.R: gettextf("PDF document (file %s, %d bytes, %d objects)", dQuote(x$file), x$size,     x$length)
-#: R/pdftools.R:0
-msgid "PDF document (file %s, %d bytes, %d objects)"
-msgstr ""
-
-#. R/pdftools.R: stop("PDF header was not found")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "PDF header was not found"
-msgstr "Vignette afhængigheder ikke krævet:"
 
 #. R/check.R: gettext("PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it for these macros.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -2828,12 +2881,12 @@ msgstr ""
 msgid "Please write arXiv ids as <arXiv:YYMM.NNNNN>."
 msgstr ""
 
-#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), "
-"$(wildcard), ifeq ... endif. See section 'Writing portable packages' in the "
-"'Writing R Extensions' manual."
+"$(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable "
+"packages' in the 'Writing R Extensions' manual."
 msgstr ""
 
 #. R/check.R: gettext("Portable packages must use only ASCII characters in their R code,\nexcept perhaps in comments.\nUse \\uxxxx escapes for other characters.\n",     domain = "R-tools")
@@ -3240,6 +3293,11 @@ msgstr ""
 msgid "Some Unix compilers require LF line endings."
 msgstr ""
 
+#. R/check.R: gettext("Some compilers warn on such files.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Some compilers warn on such files."
+msgstr ""
+
 #. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
 #: R/Rd2latex.R:0
 msgid "Some input could not be re-encoded to %s"
@@ -3501,6 +3559,11 @@ msgstr ""
 msgid ""
 "The canonical URL of the CRAN page for a task view is: https://CRAN.R-"
 "project.org/view=viewname"
+msgstr ""
+
+#. R/check.R: gettext("  The dataset(s) may use package(s) not declared in the DESCRIPTION file.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid "The dataset(s) may use package(s) not declared in the DESCRIPTION file."
 msgstr ""
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
@@ -3891,7 +3954,6 @@ msgid "Vignette %s overwrites the following %s output by vignette %s:"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
-#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", file)
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
 #: R/Vignettes.R:0
 msgid "Vignette '%s' is non-ASCII but has no declared encoding"
@@ -4008,6 +4070,11 @@ msgstr ""
 #: R/admin.R:0
 msgid ""
 "WARNING: omitting pointless dependence on 'R' without a version requirement"
+msgstr ""
+
+#. R/install.R: message("WARNING: shared objects with hard-coded temporary installation paths")
+#: R/install.R:0
+msgid "WARNING: shared objects with hard-coded temporary installation paths"
 msgstr ""
 
 #. R/install.R: gettext("   WARNING: this package has a configure script\n         It probably needs manual configuration\n",     domain = "R-tools")
@@ -4134,6 +4201,13 @@ msgstr ""
 msgid "about to run command %s"
 msgstr ""
 
+#. R/install.R: gettextf("absolute paths in shared object %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(basename(l)), sQuote("--no-staged-install"))
+#: R/install.R:0
+msgid ""
+"absolute paths in shared object %s include the temporary installation "
+"directory: please report to the package maintainer and use %s"
+msgstr ""
+
 #. R/build.R: gettext("adding MD5 file", domain = "R-tools")
 #: R/build.R:0
 msgid "adding MD5 file"
@@ -4180,16 +4254,6 @@ msgstr ""
 #. R/assertCondition.R: message("assertConditon: Successfully caught a condition\n")
 #: R/assertCondition.R:0
 msgid "assertConditon: Successfully caught a condition"
-msgstr ""
-
-#. R/pdftools.R: stop("attempting to select less than one element")
-#: R/pdftools.R:0
-msgid "attempting to select less than one element"
-msgstr ""
-
-#. R/pdftools.R: stop("attempting to select more than one element")
-#: R/pdftools.R:0
-msgid "attempting to select more than one element"
 msgstr ""
 
 #. R/install.R: gettext("backing up earlier installation")
@@ -4282,21 +4346,6 @@ msgstr "kan ikke oprette"
 msgid "cannot deal with Rd objects with missing/empty names"
 msgstr ""
 
-#. R/pdftools.R: stop("cannot find 'startxref' keyword")
-#: R/pdftools.R:0
-msgid "cannot find 'startxref' keyword"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot find 'xref' table")
-#: R/pdftools.R:0
-msgid "cannot find 'xref' table"
-msgstr ""
-
-#. R/pdftools.R: gettextf("cannot find object header at 'xrefed' position %d", pos)
-#: R/pdftools.R:0
-msgid "cannot find object header at 'xrefed' position %d"
-msgstr ""
-
 #. R/check.R: gettextf("cannot link from %s", sQuote(from))
 #: R/check.R:0
 msgid "cannot link from %s"
@@ -4314,59 +4363,10 @@ msgstr ""
 msgid "cannot open directory %s"
 msgstr "kan ikke oprette"
 
-#. R/pdftools.R: stop("cannot read 'xref' table")
-#: R/pdftools.R:0
-#, fuzzy
-msgid "cannot read 'xref' table"
-msgstr "kan ikke oprette"
-
-#. R/pdftools.R: stop("cannot read array object")
-#: R/pdftools.R:0
-msgid "cannot read array object"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read dictionary object")
-#: R/pdftools.R:0
-msgid "cannot read dictionary object"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read hexadecimal string object")
-#: R/pdftools.R:0
-msgid "cannot read hexadecimal string object"
-msgstr ""
-
 #. R/index.R: gettextf("cannot read index information in file '%s'", INDEX)
 #. R/index.R: gettextf("cannot read index information in file '%s'", file.path(demoDir, "00Index"))
 #: R/index.R:0
 msgid "cannot read index information in file '%s'"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read indirect reference object")
-#: R/pdftools.R:0
-msgid "cannot read indirect reference object"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read literal string object")
-#: R/pdftools.R:0
-msgid "cannot read literal string object"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read name object")
-#: R/pdftools.R:0
-msgid "cannot read name object"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read stream data")
-#. R/pdftools.R: stop("cannot read stream data")
-#: R/pdftools.R:0
-msgid "cannot read stream data"
-msgstr ""
-
-#. R/pdftools.R: stop("cannot read stream object")
-#. R/pdftools.R: stop("cannot read stream object")
-#. R/pdftools.R: stop("cannot read stream object")
-#: R/pdftools.R:0
-msgid "cannot read stream object"
 msgstr ""
 
 #. R/utils.R: stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE)
@@ -4474,6 +4474,11 @@ msgstr ""
 #. R/check.R: gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools")
 #: R/check.R:0
 msgid "checking a package with encoding %s in an ASCII locale"
+msgstr ""
+
+#. R/install.R: gettext("checking absolute paths in shared objects")
+#: R/install.R:0
+msgid "checking absolute paths in shared objects"
 msgstr ""
 
 #. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")
@@ -5125,11 +5130,6 @@ msgstr ""
 msgid "excluding invalid files"
 msgstr ""
 
-#. R/pdftools.R: gettextf("expanding %s", sQuote(format(kid)))
-#: R/pdftools.R:0
-msgid "expanding %s"
-msgstr ""
-
 #. R/testing.R: message("  expect failure or some differences if not in a Latin or UTF-8 locale",     domain = "R-tools")
 #: R/testing.R:0
 msgid "expect failure or some differences if not in a Latin or UTF-8 locale"
@@ -5359,11 +5359,6 @@ msgstr ""
 msgid "invalid 'Package' field"
 msgstr "Ugyldigt pakkenavn."
 
-#. R/pdftools.R: stop("invalid index in object stream lookup")
-#: R/pdftools.R:0
-msgid "invalid index in object stream lookup"
-msgstr ""
-
 #. R/install.R: gettextf("invalid package %s", sQuote(pkg))
 #: R/install.R:0
 #, fuzzy
@@ -5407,11 +5402,6 @@ msgstr ""
 msgid "loading package failed"
 msgstr "Forkert udformet pakkenavn"
 
-#. R/pdftools.R: sprintf("looking at %s", sQuote(deparse(intToUtf8(bytes))))
-#: R/pdftools.R:0
-msgid "looking at %s"
-msgstr ""
-
 #. R/build.R: gettext("looking to see if a 'data/datalist' file should be added", domain = "R-tools")
 #: R/build.R:0
 msgid "looking to see if a 'data/datalist' file should be added"
@@ -5430,16 +5420,6 @@ msgid ""
 "  %s\n"
 "\n"
 "make would use:"
-msgstr ""
-
-#. R/pdftools.R: gettextf("mismatch in generation numbers (given: %d, found: %d)", gen, hdr["gen"])
-#: R/pdftools.R:0
-msgid "mismatch in generation numbers (given: %d, found: %d)"
-msgstr ""
-
-#. R/pdftools.R: gettextf("mismatch in object numbers (given: %d, found: %d)", num, hdr["num"])
-#: R/pdftools.R:0
-msgid "mismatch in object numbers (given: %d, found: %d)"
 msgstr ""
 
 #. R/Rd2HTML.R: gettextf("missing file link %s", sQuote(parts$targetfile))
@@ -5692,18 +5672,12 @@ msgstr "fortolkningsfejl i fil »%s«:"
 msgid "preparing %s:"
 msgstr ""
 
-#. R/install.R: gettext("preparing package for lazy loading")
-#: R/install.R:0
-msgid "preparing package for lazy loading"
-msgstr ""
-
-#. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: gettextf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/urltools.R: gettextf("processing %s", u)
-#: R/pdftools.R:0 R/urltools.R:0
+#: R/urltools.R:0
 msgid "processing %s"
 msgstr ""
 
@@ -5731,11 +5705,6 @@ msgstr "fortolkningsfejl i fil »%s«:"
 #, fuzzy
 msgid "processing package %s"
 msgstr "fortolkningsfejl i fil »%s«:"
-
-#. R/Vignettes.R: gettextf("processing vignette %s failed with diagnostics:", sQuote(file))
-#: R/Vignettes.R:0
-msgid "processing vignette %s failed with diagnostics:"
-msgstr ""
 
 #. R/build.R: gettext("re-saving .R files as .rda", domain = "R-tools")
 #: R/build.R:0
@@ -6010,6 +5979,11 @@ msgstr ""
 msgid "source must be an environment or a list"
 msgstr ""
 
+#. R/install.R: stop("staged install is only possible with locking")
+#: R/install.R:0
+msgid "staged install is only possible with locking"
+msgstr ""
+
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
 #: R/dynamicHelp.R:0
 msgid "starting httpd help server ..."
@@ -6030,11 +6004,6 @@ msgstr ""
 msgid "symbol %s not in namespace"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("tangling vignette %s failed with diagnostics:", sQuote(file))
-#: R/Vignettes.R:0
-msgid "tangling vignette %s failed with diagnostics:"
-msgstr ""
-
 #. R/utils.R: gettextf("test %s is not available", sQuote(op))
 #: R/utils.R:0
 #, fuzzy
@@ -6049,6 +6018,16 @@ msgstr ""
 #. R/install.R: gettext("testing if installed package can be loaded")
 #: R/install.R:0
 msgid "testing if installed package can be loaded"
+msgstr ""
+
+#. R/install.R: gettextf("testing if installed package can be loaded from final location")
+#: R/install.R:0
+msgid "testing if installed package can be loaded from final location"
+msgstr ""
+
+#. R/install.R: gettext("testing if installed package can be loaded from temporary location")
+#: R/install.R:0
+msgid "testing if installed package can be loaded from temporary location"
 msgstr ""
 
 #. R/testing.R: gettextf("testing package %s failed", sQuote(pkg))
@@ -6225,24 +6204,9 @@ msgstr ""
 msgid "unknown header specification"
 msgstr ""
 
-#. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
-#: R/pdftools.R:0
-msgid "unsupported %s predictor %d"
-msgstr ""
-
-#. R/pdftools.R: gettextf("unsupported PNG filter %d", fb)
-#: R/pdftools.R:0
-msgid "unsupported PNG filter %d"
-msgstr ""
-
 #. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
 #: R/dynamicHelp.R:0
 msgid "unsupported URL %s"
-msgstr ""
-
-#. R/pdftools.R: gettextf("unsupported filter %s", sQuote(filter))
-#: R/pdftools.R:0
-msgid "unsupported filter %s"
 msgstr ""
 
 #. R/build.R: gettextf("use '--force' to remove the existing %s", sQuote(oldindex), domain = "R-tools")
@@ -6394,14 +6358,6 @@ msgid_plural "%d WARNINGS"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/pdftools.R: ngettext(doc$size, "%d byte", "%d bytes", domain = "R-tools")
-#. R/pdftools.R: ngettext(length(bytes), "%d byte", "%d bytes")
-#: R/pdftools.R:0
-msgid "%d byte"
-msgid_plural "%d bytes"
-msgstr[0] ""
-msgstr[1] ""
-
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
 #, fuzzy
@@ -6537,6 +6493,13 @@ msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/check.R: ngettext(length(port), "File which contains non-portable pragma(s)", "Files which contain non-portable pragma(s)",     domain = "R-tools")
+#: R/check.R:0
+msgid "File which contains non-portable pragma(s)"
+msgid_plural "Files which contain non-portable pragma(s)"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/check.R: ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
 #. R/check.R: ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
 #: R/check.R:0
@@ -6545,10 +6508,10 @@ msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/check.R: ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics:",     "Files which contain pragma(s) suppressing important diagnostics:", domain = "R-tools")
+#. R/check.R: ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics",     "Files which contain pragma(s) suppressing important diagnostics", domain = "R-tools")
 #: R/check.R:0
-msgid "File which contains pragma(s) suppressing important diagnostics:"
-msgid_plural "Files which contain pragma(s) suppressing important diagnostics:"
+msgid "File which contains pragma(s) suppressing important diagnostics"
+msgid_plural "Files which contain pragma(s) suppressing important diagnostics"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -7023,10 +6986,10 @@ msgid_plural "Package vignettes which are not in their specified encoding:\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/check.R: ngettext(nb, "Package vignette without corresponding PDF/HTML:\n", "Package vignettes without corresponding PDF/HTML:\n",     domain = "R-tools")
+#. R/check.R: ngettext(nb, "Package vignette without corresponding single PDF/HTML:\n", "Package vignettes without corresponding single PDF/HTML:\n",     domain = "R-tools")
 #: R/check.R:0
-msgid "Package vignette without corresponding PDF/HTML:\n"
-msgid_plural "Package vignettes without corresponding PDF/HTML:\n"
+msgid "Package vignette without corresponding single PDF/HTML:\n"
+msgid_plural "Package vignettes without corresponding single PDF/HTML:\n"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -7060,6 +7023,14 @@ msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] "Krævede felter mangler:"
 msgstr[1] "Krævede felter mangler:"
+
+#. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "SUMMARY: processing the following file failed:"
+msgid_plural "SUMMARY: processing the following files failed:"
+msgstr[0] "Felter med ikke-ASCII-værdier:"
+msgstr[1] "Felter med ikke-ASCII-værdier:"
 
 #. R/QC.R: ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools")
 #: R/QC.R:0
@@ -7239,6 +7210,14 @@ msgid_plural "differences in entries %s"
 msgstr[0] "Stødende punkter:"
 msgstr[1] "Stødende punkter:"
 
+#. R/Vignettes.R: ngettext(length(dups), "duplicated vignette title:", "duplicated vignette titles:",     domain = "R-tools")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "duplicated vignette title:"
+msgid_plural "duplicated vignette titles:"
+msgstr[0] "fortolkningsfejl i fil »%s«:"
+msgstr[1] "fortolkningsfejl i fil »%s«:"
+
 #. R/md5.R: ngettext(length(files), "file %s has the wrong MD5 checksums", "files %s have the wrong MD5 checksums",     domain = "R-tools")
 #: R/md5.R:0
 msgid "file %s has the wrong MD5 checksums"
@@ -7287,6 +7266,22 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kan ikke skrive kodefiler"
 msgstr[1] "kan ikke skrive kodefiler"
+
+#, fuzzy
+#~ msgid "'%s' argument should be an object of class %s"
+#~ msgstr "argument »package« skal være af længde 1"
+
+#, fuzzy
+#~ msgid "EOF marker was not found"
+#~ msgstr "Vignette afhængigheder ikke krævet:"
+
+#, fuzzy
+#~ msgid "PDF header was not found"
+#~ msgstr "Vignette afhængigheder ikke krævet:"
+
+#, fuzzy
+#~ msgid "cannot read 'xref' table"
+#~ msgstr "kan ikke oprette"
 
 #, fuzzy
 #~ msgid "file '%s' not found"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2019-02-08 18:34\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -722,6 +722,28 @@ msgstr "%2$s내에서 %1$s를 위한 새로운 제네릭 함수를 생성합니�
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "데이터 부분은 일반적인 S4 객체에 대하여 정의되지 않았습니다"
 
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
+"force=TRUE);"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid ""
+"Definition of slot %s, in class %s, as %s conflicts with definition, "
+"inherited from class %s, as %s"
+msgstr ""
+"클래스 %2$s내에 있는 슬롯 %1$s은 \"%3$s\"으로서 정의 (또는 상속)되었습니다, "
+"그러나 이는 클래스 %4$s내의 상속된 정의와 일치하지 않습니다"
+
+#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#: R/RClassUtils.R:0
+msgid "E := environment(): %s; parent.env(E): %s"
+msgstr ""
+
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "Empty function name in .getGeneric"
@@ -1152,6 +1174,11 @@ msgstr ""
 msgid "The definition of class %s follows."
 msgstr "클래스 %s의 정의를 찾을 수 없습니다"
 
+#. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
+#: R/RClassUtils.R:0
+msgid "The prototype for class %s has undefined slot(s): %s"
+msgstr ""
+
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 #: R/trace.R:0
 msgid "Tracing"
@@ -1202,6 +1229,11 @@ msgstr ""
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
+msgstr ""
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -1985,6 +2017,11 @@ msgstr ""
 #, fuzzy
 msgid "for function %s: %s"
 msgstr "함수 %s를 찾을 수 없습니다"
+
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "for new inheritance information currently;"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -2967,15 +3004,6 @@ msgstr "단일 문자열입니다; 클래스 %s 객체를 가집니다"
 msgid "skipping methods list element %s of unexpected class %s"
 msgstr "예기치 못한 클래스 %2$s의 메소드 리스트 구성요소 %1$s를 스킵합니다"
 
-#. R/RClassUtils.R: gettextf("slot %s in class %s currently defined (or inherited) as \"%s\", conflicts with an inherited definition in class %s",     sQuote(dup), dQuote(name), elNamed(allProps, dup), dQuote(cl))
-#: R/RClassUtils.R:0
-msgid ""
-"slot %s in class %s currently defined (or inherited) as \"%s\", conflicts "
-"with an inherited definition in class %s"
-msgstr ""
-"클래스 %2$s내에 있는 슬롯 %1$s은 \"%3$s\"으로서 정의 (또는 상속)되었습니다, "
-"그러나 이는 클래스 %4$s내의 상속된 정의와 일치하지 않습니다"
-
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 msgid "slot %s: class %s should extend class %s"
@@ -2998,14 +3026,13 @@ msgid ""
 "(using the largest value)"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
+#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
-msgid ""
-"subclass %s of class %s is not local and cannot be updated for new "
-"inheritance information; consider setClassUnion()"
+#, fuzzy
+msgid "subclass %s of class %s is not local and is not updated"
 msgstr ""
-"클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해서 "
-"갱신될 수 없습니다; setClassUnion()를 이용해보세요"
+"클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙"
+"니다"
 
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
@@ -3594,6 +3621,13 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid ""
+#~ "subclass %s of class %s is not local and cannot be updated for new "
+#~ "inheritance information; consider setClassUnion()"
+#~ msgstr ""
+#~ "클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해"
+#~ "서 갱신될 수 없습니다; setClassUnion()를 이용해보세요"
 
 #~ msgid ""
 #~ "Note: the specification for S3 class %s in package %s seems equivalent to "
