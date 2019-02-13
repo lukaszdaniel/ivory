@@ -1451,9 +1451,10 @@ add_dummies <- function(dir, Log)
             if (any(suspect)) {
                 ## check they are non-empty
                 suspect <- alldirs[suspect]
-                suspect <- suspect[sapply(suspect, function(x) {
+                suspect <- suspect[vapply(suspect, function(x) {
                     length(dir(x, all.files = TRUE)) > 2L
-                })]
+                    },
+                    NA)]
                 if (length(suspect)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
@@ -2104,6 +2105,7 @@ add_dummies <- function(dir, Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 # wrapLog(msg_DESCRIPTION)
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
+
         } ## FIXME, what if no install?
     }
 
@@ -2111,6 +2113,7 @@ add_dummies <- function(dir, Log)
     {
         ## Check contents of 'data'
         if (!is_base_pkg && dir.exists("data")) {
+            any <- FALSE
             checkingLog(Log, gettext("checking contents of 'data' directory ...", domain = "R-tools"))
             fi <- list.files("data")
             if (!any(grepl("\\.[Rr]$", fi))) { # code files can do anything
@@ -2118,10 +2121,31 @@ add_dummies <- function(dir, Log)
                 odd <- fi %w/o% c(dataFiles, "datalist")
                 if (length(odd)) {
                     warningLog(Log)
+                    any <- TRUE
                     msg <- gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n", .pretty_format(odd), domain = "R-tools")
                     printLog(Log, msg)
-                } else resultLog(Log, gettext("OK", domain = "R-tools"))
-            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                }
+            }
+            ans <- suppressMessages(list_data_in_pkg(dataDir = file.path(pkgdir, "data")))
+            if (length(ans)) {
+                bad <-
+                    names(ans)[sapply(ans, function(x) ".Random.seed" %in% x)]
+                if (length(bad)) {
+                    if (!any)  warningLog(Log)
+                    any <- TRUE
+                    msg <- if (length(bad) > 1L) #LUKI
+                         c(sprintf("Object named %s found in datasets:\n",
+                                  sQuote(".Random.seed")),
+                          paste0(.pretty_format(bad), "\n"),
+                          "Please remove it.\n")
+                    else
+                        c(sprintf("Object named %s found in dataset: ",
+                                  sQuote(".Random.seed")),
+                          sQuote(bad), "\nPlease remove it.\n")
+                    printLog0(Log, msg)
+                }
+            }
+            if (!any) resultLog(Log, "OK")
         }
 
         ## Check for non-ASCII characters in 'data'
@@ -4607,7 +4631,9 @@ add_dummies <- function(dir, Log)
             }
             mandatory <- c("Package", "Version", "License", "Description",
                            "Title", "Author", "Maintainer")
-            OK <- sapply(desc[mandatory], function(x) !is.na(x) && nzchar(x))
+            OK <- vapply(desc[mandatory],
+                         function(x) !is.na(x) && nzchar(x),
+                         NA)
             if(!all(OK)) {
                 fail <- mandatory[!OK]
                 msg <- ngettext(length(fail),
@@ -4742,7 +4768,7 @@ add_dummies <- function(dir, Log)
             lens <- lengths(imp)
             imp <- imp[lens == 2L]
             nm <- sapply(imp, "[[", 1)
-            lens <- sapply(imp, function(x) length(x[[2]]))
+            lens <- vapply(imp, function(x) length(x[[2L]]), 0L)
             bad <- nm[lens == 0L]
             if(length(bad)) {
                 OK <- FALSE

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2019-02-08 18:41\n"
+"POT-Creation-Date: 2019-02-13 20:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3228,8 +3228,6 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
-#: R/check.R: 0
-#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3243,8 +3241,6 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -5138,9 +5134,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("WARNING: shared objects with hard-coded temporary installation paths")
+#. R/install.R: message("WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths")
 
-msgid "WARNING: shared objects with hard-coded temporary installation paths"
+msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths"
 msgstr ""
 
 
@@ -5308,9 +5304,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettextf("absolute paths in shared object %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(basename(l)), sQuote("--no-staged-install"))
+#. R/install.R: gettextf("absolute paths in %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(ll), sQuote("--no-staged-install"))
 
-msgid "absolute paths in shared object %s include the temporary installation directory: please report to the package maintainer and use %s"
+msgid "absolute paths in %s include the temporary installation directory: please report to the package maintainer and use %s"
 msgstr ""
 
 
@@ -5674,9 +5670,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettext("checking absolute paths in shared objects")
+#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries")
 
-msgid "checking absolute paths in shared objects"
+msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
 
 

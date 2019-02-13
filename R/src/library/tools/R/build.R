@@ -591,7 +591,10 @@ inRbuildignore <- function(files, pkgdir) {
 	}
 	needRefman <- manual &&
             parse_description_field(desc, "BuildManual", TRUE) &&
-            any(sapply(db, function(Rd) any(getDynamicFlags(Rd)[c("install", "render")])))
+            any(vapply(db,
+                       function(Rd)
+                           any(getDynamicFlags(Rd)[c("install", "render")]),
+                       NA))
 	if (needRefman) {
 	    messageLog(Log, gettext("building the PDF package manual", domain = "R-tools"))
 	    dir.create("build", showWarnings = FALSE)

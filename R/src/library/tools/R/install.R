@@ -883,29 +883,19 @@ if(FALSE) {
             dir.create(instdir, recursive = TRUE, showWarnings = FALSE)
         }
 
-        pkg_staged_install <- staged_install
-        if (is.na(pkg_staged_install))
-            pkg_staged_install <-
-                parse_description_field(desc, "StagedInstall", default = FALSE)
-        # environment variable intended as temporary
-        rsi <- Sys.getenv("R_INSTALL_STAGED")
-        if (!nzchar(rsi))
-            ## older name of the variable, to be removed
-            rsi <- Sys.getenv("R_STAGED_INSTALL")
-        rsi <- switch(rsi,
-                      "TRUE"=, "true"=, "True"=, "yes"=, "Yes"= 1,
-                      "FALSE"=,"false"=,"False"=, "no"=, "No" = 0,
-                      as.numeric(rsi))
-        if (!is.na(rsi))
-            pkg_staged_install <- (rsi > 0)
+        pkg_staged_install <-
+            parse_description_field(desc, "StagedInstall",
+                                    default = staged_install)
         if (pkg_staged_install) {
+            if (!lock)
+                stop("staged install is only possible with locking")
             final_instdir <- instdir
             final_lib <- lib
             final_rpackagedir <- Sys.getenv("R_PACKAGE_DIR")
             final_rlibs <- Sys.getenv("R_LIBS")
             final_libpaths <- .libPaths()
 
-            instdir <- file.path(lockdir, "00new", pkgname)
+            instdir <- file.path(lockdir, "00new", pkg_name)
             Sys.setenv(R_PACKAGE_DIR = instdir)
             dir.create(instdir, recursive = TRUE, showWarnings = FALSE)
             lib <- file.path(lockdir, "00new")
@@ -1409,11 +1399,17 @@ if(FALSE) {
             env <- paste(env, "R_TESTS=")
             cmd <- append(cmd,
                 "suppressPackageStartupMessages(.getRequiredPackages(quietly = TRUE))")
+            if (pkg_staged_install)
+                set.install.dir <- paste0(", set.install.dir = ", 
+                                          quote_path(final_instdir))
+            else
+                set.install.dir <- ""
             cmd <- append(cmd,
                 paste0("tools:::makeLazyLoading(\"", pkg_name, "\", ",
                                                     "\"", lib, "\", ",
                                 "keep.source = ", keep.source, ", ",
-                        "keep.parse.data = ", keep.parse.data, ")"))
+                        "keep.parse.data = ", keep.parse.data,
+                                              set.install.dir, ")"))
             opts <- paste(if(deps_only) "--vanilla" else "--no-save",
                           "--slave")
             cmd <- paste(cmd, collapse="\n")
@@ -1572,8 +1568,8 @@ if(FALSE) {
                 serf <- tempfile()
                 cmd <- paste0("f <- base::file(\"", serf, "\", \"wb\")")
                 cmd <- append(cmd, paste0("base::invisible(base::serialize(",
-                    "base::as.list(base::getNamespace(\"", pkgname, "\"), all.names=TRUE), f))"))
-                cmd <- append(cmd, "close(f)")
+                    "base::as.list(base::getNamespace(\"", pkg_name, "\"), all.names=TRUE), f))"))
+                cmd <- append(cmd, "base::close(f)")
                 do_test_load(extra_cmd = paste(cmd, collapse = "\n"))
                 starsmsg(stars,
                     "testing if installed package keeps a record of temporary installation path")
@@ -1616,7 +1612,7 @@ if(FALSE) {
 ##    lazy <- TRUE
     lazy_data <- FALSE
     byte_compile <- NA # means take from DESCRIPTION file.
-    staged_install <- NA # means take from DESCRIPTION file.
+    staged_install <- NA # means not given by command line argument
     ## Next is not very useful unless R CMD INSTALL reads a startup file
     lock <- getOption("install.lock", NA) # set for overall or per-package
     pkglock <- FALSE  # set for per-package locking
@@ -1971,9 +1967,21 @@ if(FALSE) {
         lockdir <- file.path(lib, "00LOCK")
         mk_lockdir(lockdir)
     }
-    if (!identical(staged_install, FALSE) && !lock)
-        stop("staged install is only possible with locking")
-
+    if (is.na(staged_install)) {
+        # environment variable intended as temporary
+        rsi <- Sys.getenv("R_INSTALL_STAGED")
+        if (!nzchar(rsi))
+            ## older name of the variable, to be removed
+            rsi <- Sys.getenv("R_STAGED_INSTALL")
+        rsi <- switch(rsi,
+                      "TRUE"=, "true"=, "True"=, "yes"=, "Yes"= 1,
+                      "FALSE"=,"false"=,"False"=, "no"=, "No" = 0,
+                      as.numeric(rsi))
+        if (!is.na(rsi))
+            staged_install <- (rsi > 0)
+        else
+            staged_install <- FALSE # R version default
+    }
     if  ((tar_up || zip_up) && fake)
         stop("building a fake installation is disallowed")
 
@@ -2449,7 +2457,9 @@ if(FALSE) {
     } else {
         lens <- lengths(topics)
         files <- sub("\\.[Rr]d$", "", Rd$File)
-        internal <- sapply(Rd$Keywords, function(x) "internal" %in% x)
+        internal <- (vapply(Rd$Keywords,
+                            function(x) match("internal", x, 0L),
+                            0L) > 0L)
         data.frame(Topic = unlist(topics),
                    File = rep.int(files, lens),
                    Title = rep.int(Rd$Title, lens),

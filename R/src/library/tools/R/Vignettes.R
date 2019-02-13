@@ -265,7 +265,7 @@ function(package, dir, lib.loc = NULL,
           else
               NULL
         })
-        resultsT <- resultsT[!sapply(resultsT, FUN = is.null)]
+        resultsT <- resultsT[!vapply(resultsT, is.null, NA)]
         result[[name]] <- resultsT
     }
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:41\n"
+"POT-Creation-Date: 2019-02-13 20:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2722,8 +2722,6 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -4313,9 +4311,11 @@ msgid ""
 msgstr ""
 "Ostrzeżenie: pomijanie bezsensownej zależności od 'R' bez wymogu wersji"
 
-#. R/install.R: message("WARNING: shared objects with hard-coded temporary installation paths")
+#. R/install.R: message("WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths")
 #: R/install.R:0
-msgid "WARNING: shared objects with hard-coded temporary installation paths"
+msgid ""
+"WARNING: shared objects/dynamic libraries with hard-coded temporary "
+"installation paths"
 msgstr ""
 
 #. R/install.R: gettext("   WARNING: this package has a configure script\n         It probably needs manual configuration\n",     domain = "R-tools")
@@ -4440,11 +4440,11 @@ msgstr "plik zip"
 msgid "about to run command %s"
 msgstr "przygotowanie do uruchomienia polecenia %s"
 
-#. R/install.R: gettextf("absolute paths in shared object %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(basename(l)), sQuote("--no-staged-install"))
+#. R/install.R: gettextf("absolute paths in %s include the temporary installation directory: please report to the package maintainer and use %s",     sQuote(ll), sQuote("--no-staged-install"))
 #: R/install.R:0
 msgid ""
-"absolute paths in shared object %s include the temporary installation "
-"directory: please report to the package maintainer and use %s"
+"absolute paths in %s include the temporary installation directory: please "
+"report to the package maintainer and use %s"
 msgstr ""
 
 #. R/build.R: gettext("adding MD5 file", domain = "R-tools")
@@ -4709,9 +4709,9 @@ msgstr "sprawdzanie spójności funkcji ogólnych S3/metod ..."
 msgid "checking a package with encoding %s in an ASCII locale"
 msgstr "sprawdzanie pakietu z kodowaniem %s w lokalizacji ASCII"
 
-#. R/install.R: gettext("checking absolute paths in shared objects")
+#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries")
 #: R/install.R:0
-msgid "checking absolute paths in shared objects"
+msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
 
 #. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")

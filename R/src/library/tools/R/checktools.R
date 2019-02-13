@@ -98,9 +98,9 @@ function(dir,
                        function(e)
                        scan(text = e, what = character(), quiet = TRUE))
         pnames_using_install_no <-
-            nms[sapply(args, function(e) any(e == "--install=no"))]
+            nms[vapply(args, function(e) any(e == "--install=no"), NA)]
         pnames_using_install_fake <-
-            nms[sapply(args, function(e) any(e == "--install=fake"))]
+            nms[vapply(args, function(e) any(e == "--install=fake"), NA)]
     } else {
         ## If check_args_db has no names it is useless.
         ## Perhaps complain?
@@ -601,7 +601,7 @@ function(dir, all = FALSE, full = FALSE)
                                               format)),
                          rep.int(sub("\\.Rcheck$", "",
                                      basename(dirname(tfiles))),
-                                 sapply(timings, nrow)))
+                                 vapply(timings, nrow, 0L)))
         invisible(Map(function(x, y) {
             writeLines(gettextf("Example timings for package %s:", sQuote(x), domain = "R-tools"))
             cat(rbind(" ", t(as.matrix(y))),
