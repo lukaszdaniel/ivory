@@ -792,7 +792,7 @@ buildVignette <-
         q("no", status = 9L)
     }
 
-    message("+-+", output)
+    message("+-+", output, domain = NA)
     invisible(output)
 }
 

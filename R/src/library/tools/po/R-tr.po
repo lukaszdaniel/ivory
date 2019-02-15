@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-13 20:37\n"
+"POT-Creation-Date: 2019-02-15 17:48\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -58,6 +58,11 @@ msgstr ""
 #. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
 #: R/QC.R:0
 msgid "%s in object %s"
+msgstr ""
+
+#. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
+#: R/check.R:0
+msgid "%s is a directory"
 msgstr ""
 
 #. R/check.R: gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg))
@@ -328,11 +333,6 @@ msgstr ""
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr ""
 
-#. R/Vignettes.R: message("+-+", output)
-#: R/Vignettes.R:0
-msgid "+-+"
-msgstr ""
-
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -368,11 +368,6 @@ msgstr ""
 #. R/Rd2pdf.R: stop("-t option without value", call. = FALSE)
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
-msgstr ""
-
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-#: R/QC.R:0
-msgid "..."
 msgstr ""
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
@@ -710,9 +705,8 @@ msgstr ""
 msgid "CRAN-pack knows about all of these files and directories"
 msgstr ""
 
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/QC.R:0 R/utils.R:0
+#: R/utils.R:0
 msgid "Call sequence:"
 msgstr ""
 
@@ -1484,6 +1478,11 @@ msgstr ""
 msgid "Fields with non-ASCII values:"
 msgstr ""
 
+#. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
+#: R/check.R:0
+msgid "File %s contains malformed line(s):"
+msgstr ""
+
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
@@ -1565,12 +1564,9 @@ msgid ""
 "(Is a VignetteBuilder field missing?)"
 msgstr ""
 
-#. R/check.R: gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n",     .pretty_format(odd), domain = "R-tools")
+#. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 #: R/check.R:0
-msgid ""
-"Files not of a type allowed in a 'data' directory:\n"
-"%s\n"
-"Please use e.g. 'inst/extdata' for non-R data files"
+msgid "Files not of a type allowed in a %s directory:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
@@ -2273,6 +2269,11 @@ msgstr ""
 msgid "No Rd macros in package %s"
 msgstr ""
 
+#. R/QC.R: message("No dataset created in 'envir'")
+#: R/QC.R:0
+msgid "No dataset created in 'envir'"
+msgstr ""
+
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
@@ -2513,6 +2514,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2590,6 +2592,11 @@ msgstr ""
 #. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
+msgstr ""
+
+#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#: R/check.R:0
+msgid "Output for data(\"%s\"):"
 msgstr ""
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -2789,6 +2796,11 @@ msgstr ""
 msgid ""
 "Please remove or rename the files.\n"
 "See section 'Package subdirectories' in the 'Writing R Extensions' manual."
+msgstr ""
+
+#. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
+#: R/check.R:0
+msgid "Please use e.g. %s for non-R data files"
 msgstr ""
 
 #. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
@@ -3072,6 +3084,11 @@ msgstr ""
 #. R/Rd2pdf.R: gettextf("Saving output to %s ...", sQuote(output), domain = "R-tools")
 #: R/Rd2pdf.R:0
 msgid "Saving output to %s ..."
+msgstr ""
+
+#. R/QC.R: message("Search path was changed")
+#: R/QC.R:0
+msgid "Search path was changed"
 msgstr ""
 
 #. R/RdConv2.R: gettextf("Section %s is unrecognized and will be dropped", sections[s])
@@ -4937,7 +4954,7 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr ""
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

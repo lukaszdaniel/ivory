@@ -1368,7 +1368,7 @@ function(package, dir, lib.loc = NULL)
         ## (Note that as.character(sapply(exprs, "[[", 1L)) does not do
         ## what we want due to backquotifying.)
         arg_names_in_usage <-
-            unlist(sapply(exprs,
+            unlist(lapply(exprs,
                           function(e) .arg_names_from_call(e[-1L])))
         ## Replacement functions.
         if(length(replace_exprs)) {
@@ -1379,7 +1379,7 @@ function(package, dir, lib.loc = NULL)
             functions <- c(functions, replace_funs)
             arg_names_in_usage <-
                 c(arg_names_in_usage,
-                  unlist(sapply(replace_exprs,
+                  unlist(lapply(replace_exprs,
                                 function(e)
                                 c(.arg_names_from_call(e[[2L]][-1L]),
                                   .arg_names_from_call(e[[3L]])))))
@@ -2885,7 +2885,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
             if(length(reqs[m]))
                 bad_depends$required_but_stub <- reqs[m]
             ## now check versions
-            have_ver <- unlist(lapply(lreqs, function(x) length(x) == 3L))
+            have_ver <- vapply(lreqs, function(x) length(x) == 3L, NA)
             lreqs3 <- lreqs[have_ver]
             if(length(lreqs3)) {
                 bad <- character()
@@ -3422,8 +3422,9 @@ function(aar, strict = FALSE)
                         out$authors_at_R_field_has_persons_with_nonstandard_roles <-
                             sprintf("%s: %s",
                                     format(aar[ind]),
-                                    sapply(non_standard_roles[ind], paste,
-                                           collapse = ", "))
+                                    vapply(non_standard_roles[ind], paste,
+                                           collapse = ", ",
+                                           FUN.VALUE = ""))
                     }
                 }
             }
@@ -4260,7 +4261,7 @@ function(pkgDir)
                     paste(c(utils::head(.eval_with_capture(traceback(tb))$output, 5),
 			    "  ..."),
                           collapse = "\n"),
-                    "\n")
+                    "\n", domain = NA)
         }), error = identity, finally = {
             sink(type = "message")
             sink(type = "output")
@@ -4332,7 +4333,20 @@ function(x, ...)
       })
 }
 
-### * .check_package_datasets
+### * .check_package_datasets2
+
+.check_package_datasets2 <-
+function(fileName, pkgname)
+{
+    oldSearch <- search()
+    dataEnv <- new.env(hash = TRUE);
+    utils::data(list = fileName, package = pkgname, envir = dataEnv);
+    if (!length((ls(dataEnv)))) message("No dataset created in 'envir'")
+    if (!identical(search(), oldSearch)) message("Search path was changed")
+    invisible(NULL)
+}
+
+### * .check_package_compact_datasets
 
 .check_package_compact_datasets <-
 function(pkgDir, thorough = FALSE)
@@ -4416,6 +4430,8 @@ function(x, ...)
     }
     invisible(x)
 }
+
+### * .check_package_compact_sysdata
 
 .check_package_compact_sysdata <-
 function(pkgDir, thorough = FALSE)
@@ -6199,8 +6215,12 @@ function(cfile, dir = NULL)
         writeLines(strwrap(gettextf("entry %d (%s): missing required field(s) %s",
                                    pos,
                                    db$Entry[pos],
-                                   paste(sQuote(bad[pos]), collapse = ", ") #sapply(bad[pos], function(s) paste(sQuote(s), collapse = ", "))
-				, domain = "R-tools"), indent = 0L, exdent = 2L))
+                                   vapply(bad[pos],
+                                          function(s)
+                                          paste(sQuote(s),
+                                                collapse = ", "),
+                                          ""), domain = "R-tools"),
+                           indent = 0L, exdent = 2L))
     }
 }
 
@@ -7603,7 +7623,7 @@ function(x, ...)
       if(length(y <- x$R_files_non_ASCII)) {
           paste(c(gettext("No package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
                   paste0("  ", names(y), "\n    ",
-                         sapply(y, paste, collapse = "\n    "),
+                         vapply(y, paste, "", collapse = "\n    "),
                          collapse = "\n")),
                 collapse = "\n")
       },
@@ -7948,7 +7968,7 @@ function(x)
     else
         which(names(y) == "")
     if(length(ind)) {
-        names(y)[ind] <- sapply(y[ind], paste, collapse = " ")
+        names(y)[ind] <- vapply(y[ind], paste, "", collapse = " ")
         y[ind] <- rep.int(list(alist(irrelevant = )[[1L]]), length(ind))
     }
     y

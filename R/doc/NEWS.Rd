@@ -405,6 +405,10 @@
       It now checks for duplicated vignette titles (also known as
       \sQuote{index entries}): they are used as hyperlinks on
       \acronym{CRAN} package pages and so do need to be unique.
+      
+      \item \command{R CMD check} has more comprehensive checks on the
+      \file{data} directory and the functioning of \code{data()} in a
+      package.
     }
   }
 
@@ -675,6 +679,9 @@
       \env{_R_METHODS_DONT_CHECKSUBCLASSES} to true, replaces
       \code{.checkSubclasses()} by a no-op, experimentally, as it may be
       unneeded (after \pkg{methods} building).
+
+      \item \code{zip()} passes the list of files to compress via standard
+      input to the external command when too large for the command line.
     }
   }
 }

@@ -654,8 +654,9 @@ add_dummies <- function(dir, Log)
         bad_files <- allfiles[grepl("[[:cntrl:]\"*/:<>?\\|]",
                                     basename(allfiles))]
         is_man <- endsWith(dirname(allfiles), "man")
-        bad <- sapply(strsplit(basename(allfiles[is_man]), ""),
-                      function(x) any(grepl("[^ -~]|%", x)))
+        bad <- vapply(strsplit(basename(allfiles[is_man]), ""),
+                      function(x) any(grepl("[^ -~]|%", x)),
+                      NA)
         if (length(bad))
             bad_files <- c(bad_files, (allfiles[is_man])[bad])
         bad <- tolower(basename(allfiles))
@@ -2113,26 +2114,52 @@ add_dummies <- function(dir, Log)
     {
         ## Check contents of 'data'
         if (!is_base_pkg && dir.exists("data")) {
-            any <- FALSE
             checkingLog(Log, gettext("checking contents of 'data' directory ...", domain = "R-tools"))
+            warn <- FALSE
+            msgs <- character()
             fi <- list.files("data")
+            dataFiles <- basename(list_files_with_type("data", "data"))
             if (!any(grepl("\\.[Rr]$", fi))) { # code files can do anything
-                dataFiles <- basename(list_files_with_type("data", "data"))
                 odd <- fi %w/o% c(dataFiles, "datalist")
                 if (length(odd)) {
-                    warningLog(Log)
-                    any <- TRUE
-                    msg <- gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n", .pretty_format(odd), domain = "R-tools")
-                    printLog(Log, msg)
+                    warn <-TRUE
+                    msgs <-
+                        c(gettextf("Files not of a type allowed in a %s directory:\n",
+                                  sQuote("data")),
+                          paste0(.pretty_format(odd), "\n"),
+                          gettextf("Please use e.g. %s for non-R data files\n",
+                                  sQuote("inst/extdata")),
+                          "\n")
                 }
             }
-            ans <- suppressMessages(list_data_in_pkg(dataDir = file.path(pkgdir, "data")))
+            if ("datalist" %in% fi) {
+                if(file.info(sv <- file.path("data", "datalist"))$isdir) {
+                    warn <- TRUE
+                    msgs <- c(msgs, gettextf("%s is a directory\n",
+                                            sQuote("data/datalist"), "\n"))
+                }  else {
+                    ## Now check it has the right format:
+                    ## it is read in list_data_in_pkg()
+                    ## Allowed lines are
+                    ## foo
+                    ## foo: bar ...
+                    ## where bar ... and standalone foo are object names
+                    dl <- readLines(sv, warn = FALSE)
+                    if (any(bad <- !grepl("^[^ :]*($|: +[[:alpha:].])", dl))) {
+                        warn <- TRUE
+                        msgs <- c(msgs,
+                                  gettextf("File %s contains malformed line(s):\n",
+                                          sQuote("data/datalist")),
+                                 paste0(.pretty_format(dl[bad]), "\n"))
+                    }
+                }
+            }
+            ans <- list_data_in_pkg(dataDir = file.path(pkgdir, "data"))
             if (length(ans)) {
                 bad <-
                     names(ans)[sapply(ans, function(x) ".Random.seed" %in% x)]
                 if (length(bad)) {
-                    if (!any)  warningLog(Log)
-                    any <- TRUE
+                    warn <- TRUE
                     msg <- if (length(bad) > 1L) #LUKI
                          c(sprintf("Object named %s found in datasets:\n",
                                   sQuote(".Random.seed")),
@@ -2142,10 +2169,35 @@ add_dummies <- function(dir, Log)
                         c(sprintf("Object named %s found in dataset: ",
                                   sQuote(".Random.seed")),
                           sQuote(bad), "\nPlease remove it.\n")
-                    printLog0(Log, msg)
+                    msgs <- c(msgs, msg)
                 }
             }
-            if (!any) resultLog(Log, "OK")
+            if (do_install) {
+                ## check that all the datasets can be loaded cleanly by data()
+                ## except for LazyData.
+                instdir <- file.path(libdir, pkgname)
+                if (!file.exists(file.path(instdir, "data", "Rdata.rdb"))) {
+                    files <- basename(list_files_with_type("data", "data"))
+                    files <- unique(basename(file_path_sans_ext(files, TRUE)))
+                    for (f in files) {
+                        cmd <- sprintf('tools:::.check_package_datasets2("%s", "%s")',
+                                       f, pkgname)
+                        out <- R_runR(cmd, R_opts2)
+                        if (length(out)) {
+                            if (any(grepl("^(Warning|Error|No dataset created|Search path was changed)", out)))
+                                warn <- TRUE
+                            msgs <- c(msgs,
+                                     gettextf('Output for data("%s"):\n', f),
+                                     paste(c(paste0("  ",out), ""),
+                                           collapse = "\n"))
+                        }
+                    }
+                }
+            }
+            if (length(msgs)) {
+                if (warn) warningLog(Log) else noteLog(Log)
+                printLog0(Log, msgs)
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check for non-ASCII characters in 'data'

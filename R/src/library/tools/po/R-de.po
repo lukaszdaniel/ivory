@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-13 20:37\n"
+"POT-Creation-Date: 2019-02-15 17:48\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -66,6 +66,12 @@ msgstr "%s hat falsche Argumentliste %s"
 #, fuzzy
 msgid "%s in object %s"
 msgstr "Doku: %s"
+
+#. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
+#: R/check.R:0
+#, fuzzy
+msgid "%s is a directory"
+msgstr "leeres 'data' Verzeichnis"
 
 #. R/check.R: gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg))
 #: R/check.R:0
@@ -359,11 +365,6 @@ msgstr ""
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** jemand hat das 'Built' Feld im Paket '%s' beschädigt ***"
 
-#. R/Vignettes.R: message("+-+", output)
-#: R/Vignettes.R:0
-msgid "+-+"
-msgstr ""
-
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -401,11 +402,6 @@ msgstr "-o Option ohne Wert"
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
 msgstr "-t Option ohne Wert"
-
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-#: R/QC.R:0
-msgid "..."
-msgstr "..."
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
 #: R/QC.R:0
@@ -770,9 +766,8 @@ msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 msgid "CRAN-pack knows about all of these files and directories"
 msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/QC.R:0 R/utils.R:0
+#: R/utils.R:0
 msgid "Call sequence:"
 msgstr "Aufrufsequenz:"
 
@@ -1639,6 +1634,12 @@ msgstr "Felder mit nicht-ASCII Marken:"
 msgid "Fields with non-ASCII values:"
 msgstr "Felder mit nicht-ASCII Werten:"
 
+#. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
+#: R/check.R:0
+#, fuzzy
+msgid "File %s contains malformed line(s):"
+msgstr "enthält Leerzeile"
+
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
@@ -1724,12 +1725,9 @@ msgid ""
 "(Is a VignetteBuilder field missing?)"
 msgstr ""
 
-#. R/check.R: gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n",     .pretty_format(odd), domain = "R-tools")
+#. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 #: R/check.R:0
-msgid ""
-"Files not of a type allowed in a 'data' directory:\n"
-"%s\n"
-"Please use e.g. 'inst/extdata' for non-R data files"
+msgid "Files not of a type allowed in a %s directory:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
@@ -2490,6 +2488,11 @@ msgstr ""
 msgid "No Rd macros in package %s"
 msgstr "Keine Dokumente zu Paket %s gefunden"
 
+#. R/QC.R: message("No dataset created in 'envir'")
+#: R/QC.R:0
+msgid "No dataset created in 'envir'"
+msgstr ""
+
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
@@ -2743,6 +2746,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2830,6 +2834,11 @@ msgstr "Nur ein Rd Abschnitt pro \\Sepr wird unterstützt"
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Nur die Operatoren '<=' und '>=' sind zulässig."
+
+#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#: R/check.R:0
+msgid "Output for data(\"%s\"):"
+msgstr ""
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
 #. R/check.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -3046,6 +3055,11 @@ msgid ""
 msgstr ""
 "Bitte im 'Writing R Extensions' Handbuch im Abschnitt über Kreuzreferenzen "
 "nachsehen!"
+
+#. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
+#: R/check.R:0
+msgid "Please use e.g. %s for non-R data files"
+msgstr ""
 
 #. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
 #: R/QC.R:0
@@ -3353,6 +3367,11 @@ msgstr ""
 #. R/Rd2pdf.R: gettextf("Saving output to %s ...", sQuote(output), domain = "R-tools")
 #: R/Rd2pdf.R:0
 msgid "Saving output to %s ..."
+msgstr ""
+
+#. R/QC.R: message("Search path was changed")
+#: R/QC.R:0
+msgid "Search path was changed"
 msgstr ""
 
 #. R/RdConv2.R: gettextf("Section %s is unrecognized and will be dropped", sections[s])
@@ -5399,7 +5418,7 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr "leeres 'data' Verzeichnis"
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""
@@ -7668,6 +7687,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
+
+#~ msgid "..."
+#~ msgstr "..."
 
 #, fuzzy
 #~ msgid "%s argument must be a character string or a file/raw connection"

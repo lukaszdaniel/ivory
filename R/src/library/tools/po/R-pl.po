@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-13 20:37\n"
+"POT-Creation-Date: 2019-02-15 17:48\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -59,6 +59,12 @@ msgstr "%s ma błędną listę argumentów %s"
 #: R/QC.R:0
 msgid "%s in object %s"
 msgstr "%s w obiekcie %s"
+
+#. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
+#: R/check.R:0
+#, fuzzy
+msgid "%s is a directory"
+msgstr "katalog"
 
 #. R/check.R: gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg))
 #: R/check.R:0
@@ -346,11 +352,6 @@ msgstr "*** Błędy Weave ***"
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** ktoś uszkodził pole 'Built' w pakiecie %s ***"
 
-#. R/Vignettes.R: message("+-+", output)
-#: R/Vignettes.R:0
-msgid "+-+"
-msgstr ""
-
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -388,11 +389,6 @@ msgstr "opcja '-o' bez wartości"
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
 msgstr "opcja '-t' bez wartości"
-
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-#: R/QC.R:0
-msgid "..."
-msgstr "..."
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
 #: R/QC.R:0
@@ -763,9 +759,8 @@ msgstr "CRAN nic nie wie o następujących plikach i katalogach:"
 msgid "CRAN-pack knows about all of these files and directories"
 msgstr "CRAN wie o wszystkich tych plikach i katalogach"
 
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/QC.R:0 R/utils.R:0
+#: R/utils.R:0
 msgid "Call sequence:"
 msgstr "Sekwencja wywołania:"
 
@@ -1588,6 +1583,12 @@ msgstr "Pola ze znacznikami innymi niż ASCII:"
 msgid "Fields with non-ASCII values:"
 msgstr "Pola z wartościami innymi niż ASCII:"
 
+#. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
+#: R/check.R:0
+#, fuzzy
+msgid "File %s contains malformed line(s):"
+msgstr "plik %s zawiera pustą linię"
+
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
@@ -1681,16 +1682,10 @@ msgstr ""
 "Pliki nazwane jako ilustracje, ale bez rozpoznanego silnika ilustracji: %s\n"
 "(Czy brakuje pola 'VignetteBuilder'?)"
 
-#. R/check.R: gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n",     .pretty_format(odd), domain = "R-tools")
+#. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 #: R/check.R:0
-msgid ""
-"Files not of a type allowed in a 'data' directory:\n"
-"%s\n"
-"Please use e.g. 'inst/extdata' for non-R data files"
+msgid "Files not of a type allowed in a %s directory:"
 msgstr ""
-"Pliki nie posiadają typu dozwolonego w katalogu 'data':\n"
-"%s\n"
-"Proszę użyć np. 'inst/extdata' dla plików danych nie pochodzących z R"
 
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
 #: R/RdConv2.R:0
@@ -2469,6 +2464,11 @@ msgstr "Nowe wprowadzenie"
 msgid "No Rd macros in package %s"
 msgstr "Brak makr Rd w pakiecie %s"
 
+#. R/QC.R: message("No dataset created in 'envir'")
+#: R/QC.R:0
+msgid "No dataset created in 'envir'"
+msgstr ""
+
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
@@ -2722,6 +2722,7 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2803,6 +2804,11 @@ msgstr "Tylko jeden znacznik %s jest dozwolony"
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Jedynie operatory '<=' oraz '>=' są możliwe."
+
+#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#: R/check.R:0
+msgid "Output for data(\"%s\"):"
+msgstr ""
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
 #. R/check.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -3032,6 +3038,11 @@ msgid ""
 msgstr ""
 "Proszę usunąć pliki lub zmienić ich nazwę.\n"
 "Zobacz sekcję 'Packages subdirectories' w podręczniku 'Writing R Extensions'."
+
+#. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
+#: R/check.R:0
+msgid "Please use e.g. %s for non-R data files"
+msgstr ""
 
 #. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
 #: R/QC.R:0
@@ -3333,6 +3344,11 @@ msgstr "POMINIĘTO"
 #: R/Rd2pdf.R:0
 msgid "Saving output to %s ..."
 msgstr "Zapisywanie wyjścia do %s ..."
+
+#. R/QC.R: message("Search path was changed")
+#: R/QC.R:0
+msgid "Search path was changed"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Section %s is unrecognized and will be dropped", sections[s])
 #: R/RdConv2.R:0
@@ -5319,7 +5335,7 @@ msgstr "granica upływu czasu o wartości %g %s został osiągnięta dla podproc
 msgid "empty 'data' directory"
 msgstr "pusty katalog 'data'"
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr "wpis %d (%s): brakuje wymaganych pól %s"
@@ -7750,6 +7766,18 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid ""
+#~ "Files not of a type allowed in a 'data' directory:\n"
+#~ "%s\n"
+#~ "Please use e.g. 'inst/extdata' for non-R data files"
+#~ msgstr ""
+#~ "Pliki nie posiadają typu dozwolonego w katalogu 'data':\n"
+#~ "%s\n"
+#~ "Proszę użyć np. 'inst/extdata' dla plików danych nie pochodzących z R"
 
 #~ msgid "%s argument must be a character string or a file/raw connection"
 #~ msgstr ""

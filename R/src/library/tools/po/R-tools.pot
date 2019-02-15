@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2019-02-13 20:37\n"
+"POT-Creation-Date: 2019-02-15 17:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,13 @@ msgstr ""
 #. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
 
 msgid "%s in object %s"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
+
+msgid "%s is a directory"
 msgstr ""
 
 
@@ -423,13 +430,6 @@ msgstr ""
 
 
 #: R/Vignettes.R: 0
-#. R/Vignettes.R: message("+-+", output)
-
-msgid "+-+"
-msgstr ""
-
-
-#: R/Vignettes.R: 0
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 
@@ -478,13 +478,6 @@ msgstr ""
 #. R/Rd2pdf.R: stop("-t option without value", call. = FALSE)
 
 msgid "-t option without value"
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-
-msgid "..."
 msgstr ""
 
 
@@ -919,9 +912,7 @@ msgid "CRAN-pack knows about all of these files and directories"
 msgstr ""
 
 
-#: R/QC.R: 0
 #: R/utils.R: 0
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
 
 msgid "Call sequence:"
@@ -1937,6 +1928,13 @@ msgid "Fields with non-ASCII values:"
 msgstr ""
 
 
+#: R/check.R: 0
+#. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
+
+msgid "File %s contains malformed line(s):"
+msgstr ""
+
+
 #: R/QC.R: 0
 #: R/Vignettes.R: 0
 #: R/sotools.R: 0
@@ -2042,9 +2040,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n",     .pretty_format(odd), domain = "R-tools")
+#. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 
-msgid "Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files"
+msgid "Files not of a type allowed in a %s directory:"
 msgstr ""
 
 
@@ -2938,6 +2936,13 @@ msgid "No Rd macros in package %s"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: message("No dataset created in 'envir'")
+
+msgid "No dataset created in 'envir'"
+msgstr ""
+
+
 #: R/dynamicHelp.R: 0
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 
@@ -3228,6 +3233,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3241,6 +3247,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3413,6 +3420,13 @@ msgstr ""
 #. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
 
 msgid "Only operators '<=' and '>=' are possible."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+
+msgid "Output for data(\"%s\"):"
 msgstr ""
 
 
@@ -3654,6 +3668,13 @@ msgstr ""
 #. R/check.R: gettext("Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
+
+msgid "Please use e.g. %s for non-R data files"
 msgstr ""
 
 
@@ -4026,6 +4047,13 @@ msgstr ""
 #. R/Rd2pdf.R: gettextf("Saving output to %s ...", sQuote(output), domain = "R-tools")
 
 msgid "Saving output to %s ..."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: message("Search path was changed")
+
+msgid "Search path was changed"
 msgstr ""
 
 
@@ -6489,7 +6517,7 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

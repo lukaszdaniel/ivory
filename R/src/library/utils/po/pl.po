@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-08 18:34+0100\n"
-"PO-Revision-Date: 2018-09-30 19:04+0200\n"
+"PO-Revision-Date: 2019-02-15 17:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -146,7 +146,7 @@ msgstr "niepoprawne określenie '%s'"
 #: stubs.c:246
 #, c-format
 msgid "'%s' contains missing values"
-msgstr ""
+msgstr "'%s' zawiera brakujące wartości"
 
 #: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256

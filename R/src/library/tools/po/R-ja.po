@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-13 20:37\n"
+"POT-Creation-Date: 2019-02-15 17:48\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -61,6 +61,12 @@ msgstr " %sは誤った引数リスト%sを持っています "
 #, fuzzy
 msgid "%s in object %s"
 msgstr " ドキュメント: %s "
+
+#. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
+#: R/check.R:0
+#, fuzzy
+msgid "%s is a directory"
+msgstr " 'data' ディレクトリが空です "
 
 #. R/check.R: gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg))
 #: R/check.R:0
@@ -361,11 +367,6 @@ msgstr ""
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr " *** 誰かがパッケージ '%s' 中の Built 欄を壊しました *** "
 
-#. R/Vignettes.R: message("+-+", output)
-#: R/Vignettes.R:0
-msgid "+-+"
-msgstr ""
-
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -403,11 +404,6 @@ msgstr " 値のない -o オプションです "
 #: R/Rd2pdf.R:0
 msgid "-t option without value"
 msgstr " 値のない -t オプション "
-
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-#: R/QC.R:0
-msgid "..."
-msgstr " ... "
 
 #. R/QC.R: gettext("... [TRUNCATED]", domain = "R-tools")
 #: R/QC.R:0
@@ -768,9 +764,8 @@ msgid "CRAN-pack knows about all of these files and directories"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: gettext("Call sequence:", domain = "R-tools")
-#: R/QC.R:0 R/utils.R:0
+#: R/utils.R:0
 msgid "Call sequence:"
 msgstr " 呼び出しシーケンス： "
 
@@ -1638,6 +1633,12 @@ msgstr " ASCIIタグのないフィールドです： "
 msgid "Fields with non-ASCII values:"
 msgstr " ASCII値でないフィールドです： "
 
+#. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
+#: R/check.R:0
+#, fuzzy
+msgid "File %s contains malformed line(s):"
+msgstr " ディレクトリ '%s' が存在しません "
+
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
@@ -1723,12 +1724,9 @@ msgid ""
 "(Is a VignetteBuilder field missing?)"
 msgstr ""
 
-#. R/check.R: gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n",     .pretty_format(odd), domain = "R-tools")
+#. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 #: R/check.R:0
-msgid ""
-"Files not of a type allowed in a 'data' directory:\n"
-"%s\n"
-"Please use e.g. 'inst/extdata' for non-R data files"
+msgid "Files not of a type allowed in a %s directory:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
@@ -2506,6 +2504,11 @@ msgstr ""
 msgid "No Rd macros in package %s"
 msgstr " package %s にドキュメントは見つけられませんでした "
 
+#. R/QC.R: message("No dataset created in 'envir'")
+#: R/QC.R:0
+msgid "No dataset created in 'envir'"
+msgstr ""
+
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
@@ -2753,6 +2756,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -2841,6 +2845,11 @@ msgstr " \\SexprはRdセクションを1つしか持てません。 "
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr " 演算子 '<=' 及び '>=' のみ有効です. "
+
+#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#: R/check.R:0
+msgid "Output for data(\"%s\"):"
+msgstr ""
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
 #. R/check.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -3059,6 +3068,11 @@ msgid ""
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
+
+#. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
+#: R/check.R:0
+msgid "Please use e.g. %s for non-R data files"
+msgstr ""
 
 #. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
 #: R/QC.R:0
@@ -3369,6 +3383,11 @@ msgstr ""
 #. R/Rd2pdf.R: gettextf("Saving output to %s ...", sQuote(output), domain = "R-tools")
 #: R/Rd2pdf.R:0
 msgid "Saving output to %s ..."
+msgstr ""
+
+#. R/QC.R: message("Search path was changed")
+#: R/QC.R:0
+msgid "Search path was changed"
 msgstr ""
 
 #. R/RdConv2.R: gettextf("Section %s is unrecognized and will be dropped", sections[s])
@@ -5419,7 +5438,7 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr " 'data' ディレクトリが空です "
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""
@@ -7578,6 +7597,9 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#~ msgid "..."
+#~ msgstr " ... "
 
 #, fuzzy
 #~ msgid "%s argument must be a character string or a file/raw connection"
