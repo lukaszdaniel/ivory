@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2018-11-28 r1063) -- "Internationalized Version of R"
-Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-11-28 r75712) -- "Unsuffered Consequences"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -410,4 +410,4 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
 > q()
 > proc.time()
    user  system elapsed 
-  0.250   0.011   0.256 
+  0.240   0.027   0.261 

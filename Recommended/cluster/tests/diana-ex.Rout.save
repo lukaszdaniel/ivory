@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2018-11-28 r1063) -- "Internationalized Version of R"
-Copyright (C) 2013-2018 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2018-11-28 r75712) -- "Unsuffered Consequences"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -189,7 +189,7 @@ Available components:
 [1] "order"     "height"    "dc"        "merge"     "diss"      "call"     
 [7] "order.lab"
 > cat('Time elapsed: ', proc.time() - .p00,'\n')
-Time elapsed:  0.003 0.006 0.008 0 0 
+Time elapsed:  0.005 0.004 0.008 0 0 
 > 
 > data(agriculture)
 > data(ruspini)
@@ -453,7 +453,7 @@ List of 8 components
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0 0 0.001 0 0 
+Time elapsed:  0 0 0 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
 --[dendrogram with 2 branches and 47 members at height 127]
   |--[dendrogram with 2 branches and 31 members at height 99.2]
@@ -551,4 +551,4 @@ Time elapsed:  0 0 0.001 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.129   0.037   0.160 
+  0.137   0.031   0.162 

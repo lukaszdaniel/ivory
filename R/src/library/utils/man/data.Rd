@@ -12,7 +12,8 @@
 }
 \usage{
 data(\dots, list = character(), package = NULL, lib.loc = NULL,
-     verbose = getOption("verbose"), envir = .GlobalEnv)
+     verbose = getOption("verbose"), envir = .GlobalEnv,
+     overwrite = TRUE)
 }
 \arguments{
   \item{\dots}{literal character strings or names.}
@@ -31,6 +32,8 @@ data(\dots, list = character(), package = NULL, lib.loc = NULL,
   \item{verbose}{a logical.  If \code{TRUE}, additional diagnostics are
     printed.}
   \item{envir}{the \link{environment} where the data should be loaded.}
+  \item{overwrite}{logical: should existing objects of the same name in
+    \env{envir} be replaced?}
 }
 \details{
   Currently, four formats of data files are supported:
@@ -102,15 +105,20 @@ data(\dots, list = character(), package = NULL, lib.loc = NULL,
   (and \code{lib.loc = NULL}, the default).
 }
 \value{
-  A character vector of all data sets specified, or information about
-  all available data sets in an object of class \code{"packageIQR"} if
-  none were specified.
+  A character vector of all data sets specified (whether found or not),
+  or information about all available data sets in an object of class
+  \code{"packageIQR"} if none were specified.
 }
 \section{Good practice}{
+  There is no requirement for \code{data(\var{foo})} to create an object
+  named \code{\var{foo}} (nor to create one object), although it much
+  reduces confusion if this convention is followed (and it is enforced
+  if datasets are lazy-loaded).
+  
   \code{data()} was originally intended to allow users to load datasets
   from packages for use in their examples, and as such it loaded the
   datasets into the workspace \code{\link{.GlobalEnv}}.  This avoided
-  having large datasets in memory when not in use.  That need has been
+  having large datasets in memory when not in use: that need has been
   almost entirely superseded by lazy-loading of datasets.
 
   The ability to specify a dataset by name (without quotes) is a

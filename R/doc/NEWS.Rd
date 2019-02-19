@@ -232,6 +232,7 @@
       \code{x}, \code{str(x)} now gives a warning and subsequently still
       shows most parts of \code{x}, e.g., when slots are missing.
 
+      
       \item \code{gamma(x)} and \code{lgamma(x)} no longer warn when
       correctly returning \code{Inf} or underflowing to zero.  This
       helps maximum likelihood and similar computations.
@@ -264,14 +265,21 @@
       may return a double result, breaking the previous guarantee of an
       integer result.
 
-      \item \code{seq.default()} is more careful to return an \code{integer}
-      (as opposed to \code{double}) stored result when its arguments are
-      large and/or objects; see comment #9 of Suharto Anggono's \PR{17497}.
+      \item \code{seq.default()} is more careful to return an
+      \code{integer} (as opposed to \code{double}) result when its
+      arguments are large and/or classed objects; see comment #9 of
+      Suharto Anggono's \PR{17497}.
 
       \item The \code{plot()} method for \code{lm} and \code{glm} fits,
-      \code{plot.lm()}, gets a new option \code{iter.smooth} with a
-      default of \code{0} for binomial fits, no longer downweighting when
-      smoothing the residuals.
+      \code{plot.lm()}, gains a new option \code{iter.smooth} with a
+      default of \code{0} for binomial fits, no longer down-weighting
+      when smoothing the residuals.
+
+      \item \code{zip()} passes its list of files \emph{via} standard
+      input to the external command when too long for the command line
+      (on some platforms).
+      
+      \item \code{data()} gains an \code{overwrite} argument.
     }
   }
 
@@ -668,8 +676,10 @@
       \item \code{strtoi("", base)} now gives \code{NA} on all platforms,
       following its documentation.  Reported by Michael Chirico.
 
-      \item In the definition of an S4 class, prototype elements are now
-      checked to match the slots of the class.  Reported by Bill Dunlap.
+      \item In the definition of an S4 class, prototype elements are
+      checked against the slots of the class, with giving a prototype
+      for an undefined slot now being an error.  (Reported by Bill
+      Dunlap.)
 
       \item From \code{setClassUnion()}, if environment variable
       \env{_R_METHODS_SHOW_CHECKSUBCLASSES} is set
@@ -679,9 +689,6 @@
       \env{_R_METHODS_DONT_CHECKSUBCLASSES} to true, replaces
       \code{.checkSubclasses()} by a no-op, experimentally, as it may be
       unneeded (after \pkg{methods} building).
-
-      \item \code{zip()} passes the list of files to compress via standard
-      input to the external command when too large for the command line.
     }
   }
 }
