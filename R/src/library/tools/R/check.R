@@ -378,9 +378,9 @@ add_dummies <- function(dir, Log)
                 out <- R_runR(cmd, R_opts2, env, timeout = timeout)
                 ## htmltools produced non-UTF-8 output in Dec 2015
                 if (R_check_suppress_RandR_message)
-                    filtergrep('^Xlib: *extension "RANDR" missing on display',
-                               out, useBytes = TRUE)
-                else out
+                    out <- filtergrep('^Xlib: *extension "RANDR" missing on display',
+                                      out, useBytes = TRUE)
+                filtergrep("^OMP:", out)  ## LLVM's OpenMP with limits set
             }
 
     td0 <- Inf # updated below
@@ -1568,34 +1568,32 @@ add_dummies <- function(dir, Log)
 
     check_R_code <- function()
     {
-        ## if (!is_base_pkg) {
-            checkingLog(Log, gettext("checking dependencies in R code ...", domain = "R-tools"))
-            if (do_install) {
-                Rcmd <- paste(opW_shE_F_str,
-                              sprintf("tools:::.check_packages_used(package = \"%s\")\n", pkgname))
+        checkingLog(Log, gettext("checking dependencies in R code ...", domain = "R-tools"))
+        if (do_install) {
+            Rcmd <- paste(opW_shE_F_str,
+                          sprintf("tools:::.check_packages_used(package = \"%s\")\n", pkgname))
 
-                out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
-                if (length(out)) {
-                    if(any(grepl("(not declared from|Including base/recommended)", out))) warningLog(Log)
-                    else noteLog(Log)
-                    printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                    ## wrapLog(msg_DESCRIPTION)
-                } else resultLog(Log, gettext("OK", domain = "R-tools"))
-            } else {
-                ## this needs to read the package code, and will fail on
-                ## syntax errors such as non-ASCII code.
-                Rcmd <- paste(opW_shE_F_str,
-                              sprintf("tools:::.check_packages_used(dir = \"%s\")\n", pkgdir))
+            out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
+            if (length(out)) {
+                if(any(grepl("(not declared from|Including base/recommended)", out))) warningLog(Log)
+                else noteLog(Log)
+                printLog0(Log, paste(c(out, ""), collapse = "\n"))
+                ## wrapLog(msg_DESCRIPTION)
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+        } else {
+            ## this needs to read the package code, and will fail on
+            ## syntax errors such as non-ASCII code.
+            Rcmd <- paste(opW_shE_F_str,
+                          sprintf("tools:::.check_packages_used(dir = \"%s\")\n", pkgdir))
 
-                out <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
-                if (length(out)) {
-                    if(any(grepl("not declared from", out))) warningLog(Log)
-                    else noteLog(Log)
-                    printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                    ## wrapLog(msg_DESCRIPTION)
-                } else resultLog(Log, gettext("OK", domain = "R-tools"))
-            }
-        ## }
+            out <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
+            if (length(out)) {
+                if(any(grepl("not declared from", out))) warningLog(Log)
+                else noteLog(Log)
+                printLog0(Log, paste(c(out, ""), collapse = "\n"))
+                ## wrapLog(msg_DESCRIPTION)
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+        }
 
         ## Check whether methods have all arguments of the corresponding
         ## generic.
@@ -2187,7 +2185,7 @@ add_dummies <- function(dir, Log)
                             if (any(grepl("^(Warning|Error|No dataset created|Search path was changed)", out)))
                                 warn <- TRUE
                             msgs <- c(msgs,
-                                     gettextf('Output for data("%s"):\n', f),
+                                     gettextf('Output for data("%s", package = "%s"):\n', f, pkgname),
                                      paste(c(paste0("  ",out), ""),
                                            collapse = "\n"))
                         }
@@ -5437,6 +5435,8 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_SHLIB_OPENMP_FLAGS_" = "TRUE")
         Sys.setenv("_R_CHECK_FUTURE_FILE_TIMESTAMPS_" = "TRUE")
         Sys.setenv("_R_CHECK_RD_CONTENTS_KEYWORDS_" = "TRUE")
+        Sys.setenv("_R_CHECK_LENGTH_1_LOGIC2_" =
+                       "package:_R_CHECK_PACKAGE_NAME_,abort,verbose")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

@@ -1,7 +1,7 @@
 #  File src/library/stats/R/t.test.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -124,13 +124,14 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                            greater = gettextf("true mean is greater than %s", mu, domain = "R-stats"))
    }
 
-    RVAL <- list(statistic = STATISTIC, parameter = df, p.value = PVAL,
+    rval <- list(statistic = STATISTIC, parameter = df, p.value = PVAL,
 	       conf.int = CINT, estimate = ESTIMATE, null.value = mu,
+	       stderr = stderr,
 	       alternative = alternative,
 	       alt.name = alt.name,
 	       method = METHOD, data.name = DNAME)
-    class(RVAL) <- "htest"
-    return(RVAL)
+    class(rval) <- "htest"
+    rval
 }
 
 t.test.formula <-
