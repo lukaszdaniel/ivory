@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -408,6 +408,12 @@ msgstr "argument '%s' musi być w przedziale {1,..,%d}"
 #: R/ts.R:0
 msgid "'%s' argument must be logical or character"
 msgstr "argument '%s' musi być zmienną logiczną lub tekstem"
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
+msgstr "argument '%s' musi być liczbą"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -4199,7 +4205,6 @@ msgstr "błąd wewnętrzny"
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -4987,6 +4992,12 @@ msgstr "nieprzecinające się szeregi"
 #: R/dendrogram.R:0
 msgid "non-leaf subtree of length 0"
 msgstr "bezlistne poddrzewo o długości 0"
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr "niepoprawny argument 'contrasts.arg'"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7834,9 +7845,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "if 'x' is not an array, 'z' must be given"
 #~ msgstr "jeśli 'x' nie jest tablicą, 'z' musi być podany"
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr "niepoprawny argument 'contrasts.arg'"
 
 #~ msgid "invalid argument 'omit'"
 #~ msgstr "niepoprawny argument 'omit'"

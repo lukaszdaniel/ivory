@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.6.0\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -582,6 +582,13 @@ msgstr ""
 #. R/ts.R: gettextf("'%s' argument must be logical or character", "xy.labels", domain = "R-stats")
 
 msgid "'%s' argument must be logical or character"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+
+msgid "'%s' argument must be named"
 msgstr ""
 
 
@@ -5635,7 +5642,6 @@ msgstr ""
 #: R/loess.R: 0
 #: R/loess.R: 0
 #: R/models.R: 0
-#: R/models.R: 0
 #: R/nafns.R: 0
 #: R/r2dtable.R: 0
 #: R/r2dtable.R: 0
@@ -5655,7 +5661,6 @@ msgstr ""
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -6709,6 +6714,13 @@ msgstr ""
 #. R/dendrogram.R: stop("non-leaf subtree of length 0")
 
 msgid "non-leaf subtree of length 0"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: warning("non-list contrasts argument ignored")
+
+msgid "non-list contrasts argument ignored"
 msgstr ""
 
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.6.0\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -892,6 +892,13 @@ msgid "Found more than one class %s in cache; using the first, from namespace '%
 msgstr ""
 
 
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+
+msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgstr ""
+
+
 #: R/trace.R: 0
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 
@@ -1402,7 +1409,7 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 
 msgid "[where=%s, where2=%s]"
 msgstr ""
@@ -2212,13 +2219,6 @@ msgid "for function %s: %s"
 msgstr ""
 
 
-#: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-
-msgid "for new inheritance information currently;"
-msgstr ""
-
-
 #: R/RMethodUtils.R: 0
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 
@@ -2624,6 +2624,13 @@ msgstr ""
 #. R/RMethodUtils.R: gettextf("invalid value from generic function %s, class %s, expected one of %s",     sQuote(fname), dQuote(class(object)), paste(dQuote(classes), collapse = ", "))
 
 msgid "invalid value from generic function %s, class %s, expected one of %s"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+
+msgid "is not updated for new inheritance information currently;"
 msgstr ""
 
 
@@ -3316,13 +3323,6 @@ msgstr ""
 #. R/methodsTable.R: gettextf("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     paste(nargs, collapse = ", "), domain = "R-methods")
 
 msgid "something weird: inconsistent number of args in methods table strings: %s (using the largest value)"
-msgstr ""
-
-
-#: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-
-msgid "subclass %s of class %s is not local and is not updated"
 msgstr ""
 
 

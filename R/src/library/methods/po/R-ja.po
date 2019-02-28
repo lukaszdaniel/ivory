@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -825,6 +825,12 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgstr " 未定義のサブクラス %s (クラスは %s)です； 定義は更新されません "
+
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
 msgid "From source file %s"
@@ -1281,7 +1287,7 @@ msgstr " パッケージ名ではありません: %s "
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
 msgid "[where=%s, where2=%s]"
 msgstr ""
@@ -2129,11 +2135,6 @@ msgstr ""
 msgid "for function %s: %s"
 msgstr " 関数 %s が見付かりません "
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "for new inheritance information currently;"
-msgstr ""
-
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2562,6 +2563,14 @@ msgstr ""
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
 " 総称的関数 \"%s\" からの不正な値,クラス \"%s\" ですが %s が期待されます "
+
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "is not updated for new inheritance information currently;"
+msgstr ""
+" サブクラス \"%s\" (クラスは \"%s\") は局所的でなく、新しい継承情報のために更"
+"新できません; setClassUnion() の使用を考えてください "
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3263,12 +3272,6 @@ msgid ""
 msgstr ""
 " なにかおかしい: メソッドテーブル文字列中に矛盾した数の引数があります: "
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "subclass %s of class %s is not local and is not updated"
-msgstr " 未定義のサブクラス %s (クラスは %s)です； 定義は更新されません "
-
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
 #, fuzzy
@@ -3904,13 +3907,6 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
-
-#~ msgid ""
-#~ "subclass %s of class %s is not local and cannot be updated for new "
-#~ "inheritance information; consider setClassUnion()"
-#~ msgstr ""
-#~ " サブクラス \"%s\" (クラスは \"%s\") は局所的でなく、新しい継承情報のため"
-#~ "に更新できません; setClassUnion() の使用を考えてください "
 
 #~ msgid "** should no longer happen!"
 #~ msgstr " **は、もはや起こってはいけません！ "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -560,6 +560,13 @@ msgstr "l'esecuzione di 'cmd' non è fallita con errore"
 msgid "'%s' function is not defined for objects of class %s"
 msgstr "non definito per oggetti \"POSIXt\""
 
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+#, fuzzy
+msgid "'%s' is not a valid choice"
+msgstr "'%s' non è una scelta valida"
+
 #. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
 #: R/namespace.R:0
 #, fuzzy
@@ -955,6 +962,13 @@ msgstr ""
 #, fuzzy
 msgid "'row.names' argument should specify one of the variables"
 msgstr "row.names deve specificare una delle variabili"
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+#, fuzzy
+msgid "'sample.kind' must be a character string of length 1"
+msgstr "'normal.kind' deve essere una stringa di caratteri di lunghezza 1"
 
 #. R/solve.R: warning("'solve.default()' function called with an object of class \"qr\": use 'qr.solve()' function")
 #: R/solve.R:0
@@ -3938,10 +3952,6 @@ msgstr[1] "non è"
 
 #~ msgid "'index.return' only for 'na.last = NA'"
 #~ msgstr "'index.return' solo per 'na.last = NA'"
-
-#, fuzzy
-#~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "'normal.kind' deve essere una stringa di caratteri di lunghezza 1"
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "'subset' deve essere di tipo logico"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -445,6 +445,12 @@ msgstr "o argumento  'split' deve ser uma lista"
 #: R/ts.R:0
 #, fuzzy
 msgid "'%s' argument must be logical or character"
+msgstr "argumento 'x ' deve ser numérico"
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
 msgstr "argumento 'x ' deve ser numérico"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
@@ -4299,7 +4305,6 @@ msgstr ""
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -5127,6 +5132,12 @@ msgstr ""
 #, fuzzy
 msgid "non-leaf subtree of length 0"
 msgstr "subárvore de comprimento 0 não é uma folha"
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr "argumento 'contrasts.arg' inválido"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7411,9 +7422,6 @@ msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
 
 #~ msgid "if 'x' is not an array, 'z' must be given"
 #~ msgstr "se 'x' não é um array, 'z' deve ser fornecido"
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr "argumento 'contrasts.arg' inválido"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "argumento 'data' inválido"

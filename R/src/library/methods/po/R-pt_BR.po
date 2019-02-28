@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -799,6 +799,12 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgstr "subclasse %s da classe %s não definida; definição não atualizada"
+
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
 msgid "From source file %s"
@@ -1246,7 +1252,7 @@ msgstr "Argumento inválido  \"name\": %s"
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
 msgid "[where=%s, where2=%s]"
 msgstr ""
@@ -2041,11 +2047,6 @@ msgstr ""
 msgid "for function %s: %s"
 msgstr "nenhuma função genérica '%s' encontrada"
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "for new inheritance information currently;"
-msgstr ""
-
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2474,6 +2475,11 @@ msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
 "'%f' não é uma função genérica válida: lista de métodos era um objeto de "
 "classe \"%s\""
+
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+msgid "is not updated for new inheritance information currently;"
+msgstr ""
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3129,12 +3135,6 @@ msgid ""
 "something weird: inconsistent number of args in methods table strings: %s "
 "(using the largest value)"
 msgstr ""
-
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "subclass %s of class %s is not local and is not updated"
-msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0

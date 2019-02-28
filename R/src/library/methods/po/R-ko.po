@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -793,6 +793,14 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgstr ""
+"클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙"
+"니다"
+
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
 msgid "From source file %s"
@@ -1231,7 +1239,7 @@ msgstr ""
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
 msgid "[where=%s, where2=%s]"
 msgstr ""
@@ -2018,11 +2026,6 @@ msgstr ""
 msgid "for function %s: %s"
 msgstr "함수 %s를 찾을 수 없습니다"
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "for new inheritance information currently;"
-msgstr ""
-
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2404,6 +2407,14 @@ msgstr ""
 #: R/RMethodUtils.R:0
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
+
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "is not updated for new inheritance information currently;"
+msgstr ""
+"클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해서 "
+"갱신될 수 없습니다; setClassUnion()를 이용해보세요"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3026,14 +3037,6 @@ msgid ""
 "(using the largest value)"
 msgstr ""
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "subclass %s of class %s is not local and is not updated"
-msgstr ""
-"클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙"
-"니다"
-
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
 #, fuzzy
@@ -3621,13 +3624,6 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid ""
-#~ "subclass %s of class %s is not local and cannot be updated for new "
-#~ "inheritance information; consider setClassUnion()"
-#~ msgstr ""
-#~ "클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해"
-#~ "서 갱신될 수 없습니다; setClassUnion()를 이용해보세요"
 
 #~ msgid ""
 #~ "Note: the specification for S3 class %s in package %s seems equivalent to "

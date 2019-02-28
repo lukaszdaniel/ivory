@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -444,6 +444,12 @@ msgstr " 'id.n' は {1,..,%d} 中になければなりません "
 #, fuzzy
 msgid "'%s' argument must be logical or character"
 msgstr " 'xy.labels' は論理値もしくは文字です "
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
+msgstr " 引数 'x' は数値でなければなりません "
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -4304,7 +4310,6 @@ msgstr " 内部エラーです "
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -5134,6 +5139,12 @@ msgstr " 共通部分の無い系列です "
 #, fuzzy
 msgid "non-leaf subtree of length 0"
 msgstr " 長さ 0 の葉ではないサブツリーです "
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr " 無効な 'contrasts.arg' 引数です "
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7401,9 +7412,6 @@ msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
 
 #~ msgid "if 'x' is not an array, 'z' must be given"
 #~ msgstr " 'x' が配列でなければ, 'z' が与えられなければなりません "
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr " 無効な 'contrasts.arg' 引数です "
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr " 無効な 'data' 引数です "

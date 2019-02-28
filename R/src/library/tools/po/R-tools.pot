@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2019-02-15 17:48\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2871,6 +2871,13 @@ msgstr ""
 
 
 #: R/install.R: 0
+#. R/install.R: message("NOTE: fixed library identification name ", oldid)
+
+msgid "NOTE: fixed library identification name"
+msgstr ""
+
+
+#: R/install.R: 0
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 
@@ -3117,6 +3124,13 @@ msgstr ""
 #. R/check.R: gettext("Non-Windows OSes require LF line endings.\n", domain = "R-tools")
 
 msgid "Non-Windows OSes require LF line endings."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
+
+msgid "Non-portable flags in file '%s':"
 msgstr ""
 
 
@@ -3424,9 +3438,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#. R/check.R: gettextf("Output for data(\"%s\", package = \"%s\"):\n", f, pkgname)
 
-msgid "Output for data(\"%s\"):"
+msgid "Output for data(\"%s\", package = \"%s\"):"
 msgstr ""
 
 
@@ -5151,6 +5165,13 @@ msgstr ""
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 
 msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: message("WARNING: moving package to final location failed, copying instead")
+
+msgid "WARNING: moving package to final location failed, copying instead"
 msgstr ""
 
 

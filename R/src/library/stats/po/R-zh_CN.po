@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -448,6 +448,12 @@ msgstr "'id.n'必需在{1,..,%d}中"
 #, fuzzy
 msgid "'%s' argument must be logical or character"
 msgstr "'xy.labels'必需是逻辑值或是字符"
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
+msgstr "参数'x'必需是数值"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -4291,7 +4297,6 @@ msgstr "内部错误"
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -5101,6 +5106,12 @@ msgstr "非相叉序列"
 #, fuzzy
 msgid "non-leaf subtree of length 0"
 msgstr "长度为零的非叶子树"
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr "'contrasts.arg'参数不对"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7345,9 +7356,6 @@ msgstr[0] "在组合拟合中用%d/%d行"
 
 #~ msgid "if 'x' is not an array, 'z' must be given"
 #~ msgstr "如果'x'不是陣列的话, 必需提供'z'值"
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr "'contrasts.arg'参数不对"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data'参数不对"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-02-28 15:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: gpar.c:474
+msgid "updateGContext must only be called after initGContext"
+msgstr ""
 
 #: grid.c:213
 msgid "cannot clip to rotated viewport"
@@ -62,11 +66,11 @@ msgstr ""
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3463
+#: grid.c:3482
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.c:3549
+#: grid.c:3570
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 

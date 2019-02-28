@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1717,6 +1717,11 @@ msgstr ""
 #. R/citation.R: stop("all fields have to be named")
 #: R/citation.R:0
 msgid "all fields have to be named"
+msgstr ""
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
 msgstr ""
 
 #. R/write.table.R: warning("appending column names to file")

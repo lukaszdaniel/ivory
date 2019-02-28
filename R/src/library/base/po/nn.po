@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-02-28 16:29+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -178,7 +178,7 @@ msgid ""
 "evaluations"
 msgstr ""
 
-#: src/appl/maxcol.c:91
+#: src/appl/maxcol.c:92
 #, fuzzy, c-format
 msgid "invalid '%s' argument {should not happen}"
 msgstr "ugyldig ties.method for rank() [skal aldri skje]"
@@ -598,7 +598,7 @@ msgid "problem in displaying file '%ls'"
 msgstr "feil ved vising av «%s»"
 
 #: src/gnuwin32/extra.c:114 src/gnuwin32/extra.c:156 src/gnuwin32/extra.c:346
-#: src/gnuwin32/extra.c:597 src/gnuwin32/extra.c:622
+#: src/gnuwin32/extra.c:600 src/gnuwin32/extra.c:625
 #: src/gnuwin32/sys-win32.c:250 src/gnuwin32/sys-win32.c:292
 #: src/main/agrep.c:132 src/main/agrep.c:136 src/main/agrep.c:773
 #: src/main/agrep.c:778 src/main/altclasses.c:1353 src/main/apply.c:330
@@ -610,11 +610,11 @@ msgstr "feil ved vising av «%s»"
 #: src/main/builtin.c:155 src/main/builtin.c:161 src/main/builtin.c:586
 #: src/main/builtin.c:602 src/main/builtin.c:789 src/main/builtin.c:791
 #: src/main/builtin.c:793 src/main/character.c:245 src/main/character.c:248
-#: src/main/character.c:253 src/main/character.c:811 src/main/character.c:814
-#: src/main/character.c:1301 src/main/character.c:1305
-#: src/main/character.c:1308 src/main/character.c:1542
-#: src/main/character.c:1546 src/main/character.c:1607
-#: src/main/character.c:1610 src/main/coerce.c:1488 src/main/coerce.c:1540
+#: src/main/character.c:253 src/main/character.c:834 src/main/character.c:837
+#: src/main/character.c:1324 src/main/character.c:1328
+#: src/main/character.c:1331 src/main/character.c:1565
+#: src/main/character.c:1569 src/main/character.c:1630
+#: src/main/character.c:1633 src/main/coerce.c:1488 src/main/coerce.c:1540
 #: src/main/coerce.c:2034 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
@@ -664,8 +664,8 @@ msgstr "feil ved vising av «%s»"
 #: src/main/eval.c:450 src/main/eval.c:459 src/main/eval.c:462
 #: src/main/grep.c:924 src/main/grep.c:929 src/main/grep.c:1251
 #: src/main/grep.c:1253 src/main/grep.c:1255 src/main/grep.c:1700
-#: src/main/grep.c:1704 src/main/grep.c:1709 src/main/grep.c:2554
-#: src/main/grep.c:2559 src/main/grep.c:2887 src/main/grep.c:2892
+#: src/main/grep.c:1704 src/main/grep.c:1709 src/main/grep.c:2555
+#: src/main/grep.c:2560 src/main/grep.c:2888 src/main/grep.c:2893
 #: src/main/internet.c:202 src/main/internet.c:216 src/main/internet.c:236
 #: src/main/internet.c:249 src/main/internet.c:261 src/main/internet.c:280
 #: src/main/memory.c:4289 src/main/names.c:1332 src/main/names.c:1335
@@ -750,13 +750,13 @@ msgstr "Ikkje ver tåpeleg! Maskina di har ei adressegrense på 4 GiB."
 msgid "cannot decrease memory limit: ignored"
 msgstr "kan ikkje redusera minnegrensa: ignorert"
 
-#: src/gnuwin32/extra.c:444 src/gnuwin32/extra.c:551 src/main/objects.c:995
+#: src/gnuwin32/extra.c:447 src/gnuwin32/extra.c:554 src/main/objects.c:995
 #: src/main/sysutils.c:656 src/main/unique.c:1701 src/main/util.c:964
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "det første argumentet må vera ein teiknvektor"
 
-#: src/gnuwin32/extra.c:448 src/main/edit.c:143 src/main/errors.c:1147
+#: src/gnuwin32/extra.c:451 src/main/edit.c:143 src/main/errors.c:1147
 #: src/main/errors.c:1149 src/main/objects.c:524 src/main/objects.c:1308
 #: src/main/options.c:391 src/main/raw.c:155 src/main/Renviron.c:311
 #: src/main/unique.c:1705 src/modules/lapack/Lapack.c:101
@@ -767,36 +767,36 @@ msgstr "det første argumentet må vera ein teiknvektor"
 msgid "'%s' argument must be a character string"
 msgstr "«norm» må vera ein teiknstreng"
 
-#: src/gnuwin32/extra.c:451
+#: src/gnuwin32/extra.c:454
 #, fuzzy
 msgid "'winslash' argument must be '/' or '\\\\'"
 msgstr "det første argumentet må vera ein vektor"
 
-#: src/gnuwin32/extra.c:599 src/gnuwin32/extra.c:601 src/gnuwin32/extra.c:624
-#: src/gnuwin32/extra.c:626 src/gnuwin32/extra.c:661 src/main/gevents.c:64
+#: src/gnuwin32/extra.c:602 src/gnuwin32/extra.c:604 src/gnuwin32/extra.c:627
+#: src/gnuwin32/extra.c:629 src/gnuwin32/extra.c:664 src/main/gevents.c:64
 #: src/main/gevents.c:106
 msgid "invalid device"
 msgstr "ugyldig eining"
 
-#: src/gnuwin32/extra.c:602
+#: src/gnuwin32/extra.c:605
 msgid "SDI mode is required"
 msgstr ""
 
-#: src/gnuwin32/extra.c:655 src/main/gevents.c:61 src/main/gevents.c:100
+#: src/gnuwin32/extra.c:658 src/main/gevents.c:61 src/main/gevents.c:100
 #: src/main/gevents.c:103
 msgid "invalid graphical device number"
 msgstr "ugyldig nummer på grafisk eining"
 
-#: src/gnuwin32/extra.c:665
+#: src/gnuwin32/extra.c:668
 msgid "bad device"
 msgstr "ubrukbar eining"
 
-#: src/gnuwin32/extra.c:837 src/gnuwin32/extra.c:845
+#: src/gnuwin32/extra.c:840 src/gnuwin32/extra.c:848
 #, fuzzy, c-format
 msgid "invalid input in '%s' function"
 msgstr "ugyldig inndata i «Rmbstowcs»"
 
-#: src/gnuwin32/extra.c:868 src/main/platform.c:1396
+#: src/gnuwin32/extra.c:871 src/main/platform.c:1396
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "filval avbrote"
@@ -1161,9 +1161,9 @@ msgstr "indeksen ligg utanfor grensene"
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1303
-#: src/main/character.c:1307 src/main/grep.c:926 src/main/grep.c:1702
-#: src/main/grep.c:1706 src/main/grep.c:2556 src/main/grep.c:2889
+#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1326
+#: src/main/character.c:1330 src/main/grep.c:926 src/main/grep.c:1702
+#: src/main/grep.c:1706 src/main/grep.c:2557 src/main/grep.c:2890
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
@@ -1176,20 +1176,20 @@ msgid "'%s' argument must be a non-empty character string"
 msgstr "«title» må vera ein teiknstreng"
 
 #: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:997
-#: src/main/grep.c:2616 src/main/grep.c:2944
+#: src/main/grep.c:2617 src/main/grep.c:2945
 msgid "regular expression is invalid in this locale"
 msgstr "det regulære uttrykket er ugyldig i dette lokalet"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:832
-#: src/main/grep.c:2950
+#: src/main/grep.c:2951
 #, fuzzy, c-format
 msgid "regcomp error: '%s'"
 msgstr "regcomp-feil: «%s»"
 
 #: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:349
 #: src/main/grep.c:439 src/main/grep.c:565 src/main/grep.c:726
-#: src/main/grep.c:1067 src/main/grep.c:1857 src/main/grep.c:2738
-#: src/main/grep.c:2812 src/main/grep.c:2981
+#: src/main/grep.c:1067 src/main/grep.c:1857 src/main/grep.c:2739
+#: src/main/grep.c:2813 src/main/grep.c:2982
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "innteksten «%d» er ugyldig i dette lokalet"
@@ -1197,7 +1197,7 @@ msgstr "innteksten «%d» er ugyldig i dette lokalet"
 #: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:275
 #: src/main/grep.c:917 src/main/grep.c:919 src/main/grep.c:1237
 #: src/main/grep.c:1245 src/main/grep.c:1693 src/main/grep.c:1695
-#: src/main/grep.c:2546 src/main/grep.c:2548 src/main/grep.c:2877
+#: src/main/grep.c:2547 src/main/grep.c:2549 src/main/grep.c:2878
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "argumentet «%s» vert ikkje brukt"
@@ -1366,8 +1366,8 @@ msgstr "ikkje-støtta URL-skjema"
 msgid "'%s' argument must be a vector"
 msgstr "det første argumentet må vera ein vektor"
 
-#: src/main/apply.c:102 src/main/array.c:520 src/main/character.c:870
-#: src/main/character.c:1670 src/main/connections.c:3868 src/main/context.c:688
+#: src/main/apply.c:102 src/main/array.c:520 src/main/character.c:893
+#: src/main/character.c:1693 src/main/connections.c:3868 src/main/context.c:688
 #: src/main/context.c:707 src/main/datetime.c:681 src/main/datetime.c:783
 #: src/main/datetime.c:1054 src/main/dotcode.c:220 src/main/errors.c:1046
 #: src/main/errors.c:1078 src/main/errors.c:1183 src/main/errors.c:1208
@@ -1508,7 +1508,7 @@ msgstr "ugyldig andreargument av lengd 0"
 
 #: src/main/arithmetic.c:1735 src/main/arithmetic.c:1753 src/main/envir.c:1610
 #: src/main/envir.c:2120 src/main/eval.c:630 src/main/eval.c:631
-#: src/main/eval.c:4891 src/main/eval.c:4892 src/main/RNG.c:353
+#: src/main/eval.c:4891 src/main/eval.c:4892 src/main/RNG.c:356
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "argumentet manglar (og har ikkje nokon standardverdi)"
@@ -2098,7 +2098,7 @@ msgstr "vector: kan ikkje laga vektor av modus «%s»"
 msgid "cannot set length of non-(vector or list)"
 msgstr "kan ikkje setja lengda til ikkje-vektor"
 
-#: src/main/builtin.c:840 src/main/character.c:548 src/main/coerce.c:2937
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2937
 msgid "invalid value"
 msgstr "ugyldig verdi"
 
@@ -2157,7 +2157,7 @@ msgstr[0] "%d argument sende til «%s», som tek 1 eller 2 argument"
 msgstr[1] "%d argument sende til «%s», som tek 1 eller 2 argument"
 
 #: src/main/character.c:112 src/main/character.c:115 src/main/character.c:238
-#: src/main/character.c:241 src/main/character.c:1535
+#: src/main/character.c:241 src/main/character.c:1558
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr "«%s» tek berre ein teiknvektor"
@@ -2183,80 +2183,80 @@ msgstr ""
 msgid "element %ld"
 msgstr ""
 
-#: src/main/character.c:290 src/main/character.c:481
+#: src/main/character.c:299 src/main/character.c:504
 #, fuzzy, c-format
 msgid "invalid multibyte string, element %ld"
 msgstr "ugyldig multibyte-streng: %d"
 
-#: src/main/character.c:323
+#: src/main/character.c:340
 msgid "extracting substrings from a non-character object"
 msgstr "hentar ut delstrengar frå ikkjeteikn-objekt"
 
-#: src/main/character.c:333 src/main/character.c:545
+#: src/main/character.c:351 src/main/character.c:568
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr "ugyldig(e) delstreng-argument"
 
-#: src/main/character.c:373
+#: src/main/character.c:396
 #, fuzzy
 msgid "non-character object(s)"
 msgstr "ikkjeteikn-namn"
 
-#: src/main/character.c:486
+#: src/main/character.c:509
 #, fuzzy, c-format
 msgid "invalid multibyte string, value element %ld"
 msgstr "ugyldig multibyte-streng i «%s»"
 
-#: src/main/character.c:540
+#: src/main/character.c:563
 msgid "replacing substrings in a non-character object"
 msgstr "byt ut delstrengar i ikkjeteikn-objekt"
 
-#: src/main/character.c:808
+#: src/main/character.c:831
 msgid "the first argument must be a character vector"
 msgstr "det første argumentet må vera ein teiknvektor"
 
-#: src/main/character.c:845
+#: src/main/character.c:868
 msgid "abbreviate used with non-ASCII chars"
 msgstr "abbreviate() brukt på ikkje-ASCII-data"
 
-#: src/main/character.c:866
+#: src/main/character.c:889
 msgid "non-character names"
 msgstr "ikkjeteikn-namn"
 
-#: src/main/character.c:919 src/main/character.c:1016 src/main/character.c:1428
+#: src/main/character.c:942 src/main/character.c:1039 src/main/character.c:1451
 #, fuzzy, c-format
 msgid "invalid multibyte input string %d"
 msgstr "ugyldig multibyte-inntekst"
 
-#: src/main/character.c:962 src/main/grep.c:279
+#: src/main/character.c:985 src/main/grep.c:279
 msgid "non-character argument"
 msgstr "ikkjeteikn-argument"
 
-#: src/main/character.c:1071
+#: src/main/character.c:1094
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "minkande område valt («%lc-%lc»)"
 
-#: src/main/character.c:1156
+#: src/main/character.c:1179
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "minkande område valt («%c-%c»)"
 
-#: src/main/character.c:1343 src/main/character.c:1362
+#: src/main/character.c:1366 src/main/character.c:1385
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr "ugyldig UTF-8-streng: «old»"
 
-#: src/main/character.c:1349 src/main/character.c:1368 src/main/plotmath.c:981
+#: src/main/character.c:1372 src/main/character.c:1391 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "ugyldig multibyte-streng i «%s»"
 
-#: src/main/character.c:1396 src/main/character.c:1485
+#: src/main/character.c:1419 src/main/character.c:1508
 msgid "'old' is longer than 'new'"
 msgstr "«old» er lengre enn «new»"
 
-#: src/main/character.c:1678 src/main/envir.c:3853 src/main/envir.c:3867
+#: src/main/character.c:1701 src/main/envir.c:3853 src/main/envir.c:3867
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "variabelnamn må vera mindre enn %d byte"
@@ -3215,7 +3215,7 @@ msgstr "typen «%s» er ikkje støtta"
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "typen «%s» er ikkje støtta"
 
-#: src/main/connections.c:5443 src/modules/internet/libcurl.c:952
+#: src/main/connections.c:5443 src/modules/internet/libcurl.c:948
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "«dirmark = TRUE» er ikkje støtta på denne plattforma"
@@ -5306,7 +5306,7 @@ msgid "allocation failure in set_pcre_recursion_limit"
 msgstr "reserveringsfeil i «R_tmpnam»"
 
 #: src/main/grep.c:341 src/main/grep.c:431 src/main/grep.c:557
-#: src/main/grep.c:1060 src/main/grep.c:1853 src/main/grep.c:2730
+#: src/main/grep.c:1060 src/main/grep.c:1853 src/main/grep.c:2731
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "innteksten «%d» er ugyldig UTF-8"
@@ -5322,7 +5322,7 @@ msgid "'split' string %d is invalid in this locale"
 msgstr "«split»-teksten «%d» er ugyldig i dette lokalet"
 
 #: src/main/grep.c:520 src/main/grep.c:1012 src/main/grep.c:1798
-#: src/main/grep.c:2631
+#: src/main/grep.c:2632
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -5339,7 +5339,7 @@ msgid "invalid split pattern '%s'"
 msgstr "ugyldig oppdelingsmønster: %s"
 
 #: src/main/grep.c:528 src/main/grep.c:1021 src/main/grep.c:1807
-#: src/main/grep.c:2640
+#: src/main/grep.c:2641
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -5349,17 +5349,17 @@ msgstr ""
 "\t«%s»\n"
 
 #: src/main/grep.c:744 src/main/grep.c:756 src/main/grep.c:1091
-#: src/main/grep.c:2021 src/main/grep.c:2207 src/main/grep.c:2788
-#: src/main/grep.c:3008
+#: src/main/grep.c:2021 src/main/grep.c:2207 src/main/grep.c:2789
+#: src/main/grep.c:3009
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
 
-#: src/main/grep.c:993 src/main/grep.c:2612
+#: src/main/grep.c:993 src/main/grep.c:2613
 msgid "regular expression is invalid UTF-8"
 msgstr "det regulære uttrykket er ugyldig UTF-8"
 
-#: src/main/grep.c:1014 src/main/grep.c:1800 src/main/grep.c:2633
+#: src/main/grep.c:1014 src/main/grep.c:1800 src/main/grep.c:2634
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "ugyldig regulært uttrykk: %s"
@@ -5393,12 +5393,12 @@ msgstr "mønster av lengd 0"
 msgid "result string is too long"
 msgstr "resultatteksten er for lang"
 
-#: src/main/grep.c:2663
+#: src/main/grep.c:2664
 #, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr ""
 
-#: src/main/grep.c:2698
+#: src/main/grep.c:2699
 #, fuzzy
 msgid "vector is too long"
 msgstr "den oppgjevne vektorstorleiken er for stor"
@@ -7547,89 +7547,94 @@ msgstr ""
 msgid "file '%s' cannot be opened for reading"
 msgstr "zip-fila «%s» kan ikkje opnast"
 
-#: src/main/RNG.c:178
+#: src/main/RNG.c:181
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: RND-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:263
+#: src/main/RNG.c:266
 #, c-format
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds: RNG-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:303 src/main/RNG.c:491
+#: src/main/RNG.c:306 src/main/RNG.c:496
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "%s symbolnamnet «%s» finst ikkje i lastetabellen"
 
-#: src/main/RNG.c:311
+#: src/main/RNG.c:314
 msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
 msgstr "kan ikkje lesa frø med mindre «user_unif_nseed» er oppgjeven"
 
-#: src/main/RNG.c:316
+#: src/main/RNG.c:319
 msgid "seed length must be in 0...625; ignored"
 msgstr ""
 "frølengda må vera mellom 0 og 625, inklusiv (oppgjeven verdi vert ikkje "
 "brukt)"
 
-#: src/main/RNG.c:324
+#: src/main/RNG.c:327
 #, c-format
 msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init: RNG-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:354
+#: src/main/RNG.c:357
 #, fuzzy, c-format
 msgid "'.Random.seed' is not an integer vector but of type '%s'"
 msgstr ".Random.seed er ikkje ein heiltalsvektor, men av typen «%s»"
 
-#: src/main/RNG.c:362
+#: src/main/RNG.c:365
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ".Random.seed[1] er ikkje eit gyldig heiltal"
 
-#: src/main/RNG.c:368
+#: src/main/RNG.c:372
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid Normal type, so ignored"
 msgstr ".Random.seed[0] er ikkje ein gyldig «Normal»-type"
 
-#: src/main/RNG.c:382
+#: src/main/RNG.c:386
 #, fuzzy
 msgid "'.Random.seed[1] = 5' but no user-supplied generator, so ignored"
 msgstr ".Random.seed[1] er 5, men ingen generator er oppgjeven"
 
-#: src/main/RNG.c:387
+#: src/main/RNG.c:391
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] er ikkje ein gyldig RNG-type (kode)"
 
-#: src/main/RNG.c:415
+#: src/main/RNG.c:420
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed har feil lengd"
 
-#: src/main/RNG.c:434
+#: src/main/RNG.c:439
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:468
+#: src/main/RNG.c:473
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: RNG-typen «%d» er ikkje implementert"
 
-#: src/main/RNG.c:474
+#: src/main/RNG.c:479
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:488
+#: src/main/RNG.c:493
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "ugyldig «Normal»-type i RNGkind"
 
-#: src/main/RNG.c:535
+#: src/main/RNG.c:511
+#, fuzzy
+msgid "invalid sample type in 'RNGkind'"
+msgstr "ugyldig «Normal»-type i RNGkind"
+
+#: src/main/RNG.c:557
 msgid "supplied seed is not a valid integer"
 msgstr "det oppgjevne frøet er ikkje eit gyldig heiltal"
 
-#: src/main/RNG.c:790
+#: src/main/RNG.c:812
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -8579,7 +8584,7 @@ msgid "NA values are not allowed in subscripted assignments"
 msgstr "NA-verdiar er ikkje tillatne i indeks-tildelingar"
 
 #: src/main/subassign.c:685 src/main/subassign.c:980 src/main/subassign.c:1205
-#: src/main/subassign.c:1814
+#: src/main/subassign.c:1816
 msgid "replacement has length zero"
 msgstr "«replacement» har lengd null"
 
@@ -8627,60 +8632,60 @@ msgstr "ugyldig tal på indeks i listetildeling"
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs: ugyldig tal på argument"
 
-#: src/main/subassign.c:1667
+#: src/main/subassign.c:1668
 msgid "result is zero-length and so cannot be a language object"
 msgstr "resultatet har lengd null, og kan derfor ikkje vera eit språkobjekt"
 
-#: src/main/subassign.c:1766
+#: src/main/subassign.c:1768
 #, fuzzy
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
 msgstr "[[<- for S4-objekt er berre definert for underklassar av omgjevnad"
 
-#: src/main/subassign.c:1780
+#: src/main/subassign.c:1782
 #, fuzzy
 msgid "improper dimensions"
 msgstr "feil tal på dimensjonar"
 
-#: src/main/subassign.c:1786
+#: src/main/subassign.c:1788
 #, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "feil argument for omgjevnads-deltildeling"
 
-#: src/main/subassign.c:1816
+#: src/main/subassign.c:1818
 msgid "more elements supplied than there are to replace"
 msgstr "fleire element oppgjevne enn det er element å byta ut"
 
-#: src/main/subassign.c:1818
+#: src/main/subassign.c:1820
 #, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]] med manglande indeks"
 
-#: src/main/subassign.c:1836
+#: src/main/subassign.c:1838
 #, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "[[ ]] indeks utanfor gyldig verdiområde"
 
-#: src/main/subassign.c:1842 src/main/subassign.c:2024
+#: src/main/subassign.c:1844 src/main/subassign.c:2026
 #, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "[[ ]] feil tal på indeksar"
 
-#: src/main/subassign.c:1855 src/main/subassign.c:2036
+#: src/main/subassign.c:1857 src/main/subassign.c:2038
 #, fuzzy, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "[[ ]] indeks (%d) utanfor gyldig verdiområde"
 
-#: src/main/subassign.c:1989
+#: src/main/subassign.c:1991
 #, fuzzy, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "ikkje-kompatible typar (frå %s til %s) i [[-tildeling"
 
-#: src/main/subassign.c:2124
+#: src/main/subassign.c:2126
 msgid "no method for assigning subsets of this S4 class"
 msgstr "ingen metode for tildeling av delmengder av denne S4-klassen"
 
-#: src/main/subassign.c:2182
+#: src/main/subassign.c:2184
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr "Gjer om venstresida til ei liste"
@@ -9306,7 +9311,7 @@ msgid "there must be at least three control points"
 msgstr "Det må vera minst tre kontrollpunkt"
 
 #: src/modules/internet/internet.c:109 src/modules/internet/internet.c:240
-#: src/modules/internet/libcurl.c:842
+#: src/modules/internet/libcurl.c:838
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "samband ikkje ope for lesing"
@@ -9324,10 +9329,10 @@ msgstr "klarte ikkje opna adressa «%s»"
 
 #: src/modules/internet/internet.c:354 src/modules/internet/internet.c:358
 #: src/modules/internet/internet.c:365 src/modules/internet/internet.c:388
-#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:901
-#: src/modules/internet/libcurl.c:905 src/modules/internet/libcurl.c:912
-#: src/modules/internet/libcurl.c:926 src/modules/internet/libcurl.c:935
-#: src/modules/internet/libcurl.c:945
+#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:897
+#: src/modules/internet/libcurl.c:901 src/modules/internet/libcurl.c:908
+#: src/modules/internet/libcurl.c:922 src/modules/internet/libcurl.c:931
+#: src/modules/internet/libcurl.c:941
 msgid "allocation of url connection failed"
 msgstr "klarte ikkje reservera url-samband"
 
@@ -9387,7 +9392,7 @@ msgid "downloaded length %0.f != reported length %0.f"
 msgstr "nedlastingslengda %d var ikkje lik den rapporterte lengda %d"
 
 #: src/modules/internet/internet.c:665 src/modules/internet/internet.c:778
-#: src/modules/internet/libcurl.c:691
+#: src/modules/internet/libcurl.c:687
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "klarte ikkje opna adressa «%s»"
@@ -9516,32 +9521,32 @@ msgstr ""
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "klarte ikkje opna målfila «%s», av grunnen «%s»"
 
-#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:777
+#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:773
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:687
+#: src/modules/internet/libcurl.c:683
 #, fuzzy
 msgid "cannot download any files"
 msgstr "klarte ikkje opna fila «%s»"
 
-#: src/modules/internet/libcurl.c:688
+#: src/modules/internet/libcurl.c:684
 #, fuzzy
 msgid "some files were not downloaded"
 msgstr "gjenopprettingsfila kan vera tom – ingen data lasta"
 
-#: src/modules/internet/libcurl.c:693
+#: src/modules/internet/libcurl.c:689
 #, c-format
 msgid "download from '%s' failed"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:831
+#: src/modules/internet/libcurl.c:827
 #, fuzzy
 msgid "cannot read from connection"
 msgstr "klarte ikkje lesa frå dette sambandet"
 
-#: src/modules/internet/libcurl.c:872
+#: src/modules/internet/libcurl.c:868
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "klarte ikkje opna sambandet"
@@ -10329,12 +10334,11 @@ msgstr "inga PNG-støtte i denne R-versjonen"
 msgid "Problems writing to 'bmp' file"
 msgstr "feil ved skriving til samband"
 
-#: src/nmath/bessel_i.c:68 src/nmath/standalone/bessel_i.c:68
+#: src/nmath/bessel_i.c:68
 msgid "bessel_i allocation error"
 msgstr "bessel_i-reserveringsfeil"
 
 #: src/nmath/bessel_i.c:76 src/nmath/bessel_i.c:119
-#: src/nmath/standalone/bessel_i.c:76 src/nmath/standalone/bessel_i.c:119
 #, fuzzy, c-format
 msgid "bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10342,23 +10346,20 @@ msgstr ""
 "verdiområde?\n"
 
 #: src/nmath/bessel_i.c:78 src/nmath/bessel_i.c:121
-#: src/nmath/standalone/bessel_i.c:78 src/nmath/standalone/bessel_i.c:121
 #, fuzzy, c-format
 msgid "bessel_i(%g,nu=%g): precision lost in result"
 msgstr "bessel_i(%g,nu=%g): tapt presisjon i resultatet\n"
 
 #: src/nmath/bessel_j.c:63 src/nmath/bessel_j.c:114
-#: src/nmath/standalone/bessel_j.c:63 src/nmath/standalone/bessel_j.c:114
 #, c-format
 msgid "besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"
 msgstr ""
 
-#: src/nmath/bessel_j.c:70 src/nmath/standalone/bessel_j.c:70
+#: src/nmath/bessel_j.c:70
 msgid "bessel_j allocation error"
 msgstr "bessel_j-reserveringsfeil"
 
 #: src/nmath/bessel_j.c:78 src/nmath/bessel_j.c:122
-#: src/nmath/standalone/bessel_j.c:78 src/nmath/standalone/bessel_j.c:122
 #, fuzzy, c-format
 msgid "bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10366,17 +10367,15 @@ msgstr ""
 "verdiområde?\n"
 
 #: src/nmath/bessel_j.c:80 src/nmath/bessel_j.c:124
-#: src/nmath/standalone/bessel_j.c:80 src/nmath/standalone/bessel_j.c:124
 #, fuzzy, c-format
 msgid "bessel_j(%g,nu=%g): precision lost in result"
 msgstr "bessel_j(%g,nu=%g): tapt presisjon i resultat\n"
 
-#: src/nmath/bessel_k.c:61 src/nmath/standalone/bessel_k.c:61
+#: src/nmath/bessel_k.c:61
 msgid "bessel_k allocation error"
 msgstr "bessel_k-reserveringsfeil"
 
 #: src/nmath/bessel_k.c:69 src/nmath/bessel_k.c:104
-#: src/nmath/standalone/bessel_k.c:69 src/nmath/standalone/bessel_k.c:104
 #, fuzzy, c-format
 msgid "bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10384,23 +10383,20 @@ msgstr ""
 "verdiområde?\n"
 
 #: src/nmath/bessel_k.c:71 src/nmath/bessel_k.c:106
-#: src/nmath/standalone/bessel_k.c:71 src/nmath/standalone/bessel_k.c:106
 #, fuzzy, c-format
 msgid "bessel_k(%g,nu=%g): precision lost in result"
 msgstr "bessel_k(%g,nu=%g): tapt presisjon i resultat\n"
 
 #: src/nmath/bessel_y.c:62 src/nmath/bessel_y.c:123
-#: src/nmath/standalone/bessel_y.c:62 src/nmath/standalone/bessel_y.c:123
 #, c-format
 msgid "besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"
 msgstr ""
 
-#: src/nmath/bessel_y.c:69 src/nmath/standalone/bessel_y.c:69
+#: src/nmath/bessel_y.c:69
 msgid "bessel_y allocation error"
 msgstr "bessel_y-reserveringsfeil"
 
 #: src/nmath/bessel_y.c:85 src/nmath/bessel_y.c:133
-#: src/nmath/standalone/bessel_y.c:85 src/nmath/standalone/bessel_y.c:133
 #, fuzzy, c-format
 msgid "bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10408,13 +10404,11 @@ msgstr ""
 "verdiområde?\n"
 
 #: src/nmath/bessel_y.c:88 src/nmath/bessel_y.c:136
-#: src/nmath/standalone/bessel_y.c:88 src/nmath/standalone/bessel_y.c:136
 #, fuzzy, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result"
 msgstr "bessel_y(%g,nu=%g): tapt presisjon i resultat\n"
 
 #: src/nmath/choose.c:79 src/nmath/choose.c:122
-#: src/nmath/standalone/choose.c:79 src/nmath/standalone/choose.c:122
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
 msgstr ""
@@ -10449,54 +10443,52 @@ msgstr "full presisjon vart kanskje ikkje oppnådd i «%s»\n"
 msgid "underflow occurred in '%s' function"
 msgstr "det oppstod underflyt i «%s»\n"
 
-#: src/nmath/pbeta.c:64 src/nmath/standalone/pbeta.c:64
+#: src/nmath/pbeta.c:64
 #, c-format
 msgid "pbeta_raw(%g, a=%g, b=%g, ..) -> bratio() gave error code %d"
 msgstr ""
 
-#: src/nmath/pbinom.c:37 src/nmath/standalone/pbinom.c:37
+#: src/nmath/pbinom.c:37
 #, fuzzy, c-format
 msgid "non-integer n = %f"
 msgstr "feil tal på dimensjonar"
 
-#: src/nmath/pnbinom.c:82 src/nmath/standalone/pnbinom.c:82
+#: src/nmath/pnbinom.c:82
 #, c-format
 msgid "pnbinom_mu() -> bratio() gave error code %d"
 msgstr ""
 
-#: src/nmath/pnchisq.c:295 src/nmath/standalone/pnchisq.c:295
+#: src/nmath/pnchisq.c:295
 #, c-format
 msgid "pnchisq(x=%g, ..): not converged in %d iter."
 msgstr "pnchisq(x=%g, ..): ikkje konvergert etter %d iterasjonar."
 
-#: src/nmath/polygamma.c:499 src/nmath/standalone/polygamma.c:499
+#: src/nmath/polygamma.c:499
 #, c-format
 msgid "deriv = %d > %d (= n_max)\n"
 msgstr "deriv = %d > %d (= n_max)\n"
 
-#: src/nmath/qgamma.c:153 src/nmath/standalone/qgamma.c:153
+#: src/nmath/qgamma.c:153
 #, c-format
 msgid "value of shape (%g) is extremely small: results may be unreliable"
 msgstr ""
 
-#: src/nmath/rmultinom.c:78 src/nmath/standalone/rmultinom.c:78
+#: src/nmath/rmultinom.c:78
 #, c-format
 msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: summen av sannsyna skal vera 1, men er %g"
 
-#: src/nmath/signrank.c:77 src/nmath/standalone/signrank.c:77
+#: src/nmath/signrank.c:77
 msgid "signrank allocation error"
 msgstr "signrank-reserveringsfeil"
 
-#: src/nmath/snorm.c:326 src/nmath/standalone/snorm.c:326
+#: src/nmath/snorm.c:326
 #, c-format
 msgid "norm_rand(): invalid N01_kind: %d\n"
 msgstr "norm_rand(): ugyldig N01_kind: %d\n"
 
 #: src/nmath/wilcox.c:85 src/nmath/wilcox.c:95 src/nmath/wilcox.c:148
-#: src/nmath/wilcox.c:313 src/nmath/standalone/wilcox.c:85
-#: src/nmath/standalone/wilcox.c:95 src/nmath/standalone/wilcox.c:148
-#: src/nmath/standalone/wilcox.c:313
+#: src/nmath/wilcox.c:313
 #, c-format
 msgid "wilcox allocation error %d"
 msgstr "wilcox-reserveringsfeil %d"

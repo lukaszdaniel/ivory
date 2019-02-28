@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -566,6 +566,13 @@ msgstr "'%s' 실행은 에러 코드 %d 와 함께 실패했습니다 "
 msgid "'%s' function is not defined for objects of class %s"
 msgstr "'%s' 는 \"POSIXt\" 객체들에 대해서 정의 되어 있지 않습니다"
 
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+#, fuzzy
+msgid "'%s' is not a valid choice"
+msgstr "'%s' 는 올바른 선택이 아닙니다 "
+
 #. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
 #: R/namespace.R:0
 #, fuzzy
@@ -984,6 +991,13 @@ msgstr "'kind'는 길이 1의 문자열 이어야 합니다 (사용하게 될 RN
 #, fuzzy
 msgid "'row.names' argument should specify one of the variables"
 msgstr "row.names 는 변수들 중 하나를 지정해야합니다 "
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+#, fuzzy
+msgid "'sample.kind' must be a character string of length 1"
+msgstr "'normal.kind' 는 길이1의 문자열이어야 합니다 "
 
 #. R/solve.R: warning("'solve.default()' function called with an object of class \"qr\": use 'qr.solve()' function")
 #: R/solve.R:0
@@ -3924,9 +3938,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
 #~ msgid "'index.return' only for 'na.last = NA'"
 #~ msgstr "'index.return' 는 오로지 'na.last = NA' 인 경우입니다 "
-
-#~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "'normal.kind' 는 길이1의 문자열이어야 합니다 "
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "'subset' 는 반드시 논리값이어야 합니다"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.6.0\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2242,6 +2242,13 @@ msgstr ""
 #. R/citation.R: stop("all fields have to be named")
 
 msgid "all fields have to be named"
+msgstr ""
+
+
+#: R/data.R: 0
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+
+msgid "an object named %s already exists and will not be overwritten"
 msgstr ""
 
 

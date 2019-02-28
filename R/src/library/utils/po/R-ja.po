@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1864,6 +1864,11 @@ msgstr " 全ての引数がクラス \"person\" でなければなりません "
 #: R/citation.R:0
 msgid "all fields have to be named"
 msgstr " すべての欄は名前を持つ必要があります "
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
+msgstr ""
 
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0

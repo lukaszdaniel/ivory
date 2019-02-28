@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1726,6 +1726,11 @@ msgstr ""
 #. R/citation.R: stop("all fields have to be named")
 #: R/citation.R:0
 msgid "all fields have to be named"
+msgstr ""
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
 msgstr ""
 
 #. R/write.table.R: warning("appending column names to file")

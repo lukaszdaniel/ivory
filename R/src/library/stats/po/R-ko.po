@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -445,6 +445,12 @@ msgstr "'id.n'는 반드시 {1,..,%d}내에 있어야 합니다"
 #, fuzzy
 msgid "'%s' argument must be logical or character"
 msgstr "'xy.labels'는 반드시 논리값 또는 문자이어야 합니다"
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
+msgstr "인자 'x'는 반드시 수치형이어야 합니다"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -4267,7 +4273,6 @@ msgstr ""
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -5087,6 +5092,12 @@ msgstr ""
 #, fuzzy
 msgid "non-leaf subtree of length 0"
 msgstr "'ref'는 반드시 길이가 1이어야 합니다"
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr "유효하지 않은 'contrasts.arg' 인자입니다"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7193,9 +7204,6 @@ msgstr[0] ""
 
 #~ msgid "'offset' must be numeric"
 #~ msgstr "'offset'은 반드시 수치형이어야 합니다"
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr "유효하지 않은 'contrasts.arg' 인자입니다"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data' 인자가 유효하지 않습니다"

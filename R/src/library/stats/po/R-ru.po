@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -453,6 +453,12 @@ msgstr "'id.n' должен быть в пределах {1,..,%d}"
 #, fuzzy
 msgid "'%s' argument must be logical or character"
 msgstr "'xy.labels' должны быть символами или логическими"
+
+#. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
+#: R/models.R:0
+#, fuzzy
+msgid "'%s' argument must be named"
+msgstr "аргумент 'x' должен быть числовым"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -4325,7 +4331,6 @@ msgstr "внутренняя ошибка"
 #. R/loess.R: gettextf("invalid '%s' argument", "span")
 #. R/loess.R: gettextf("invalid '%s' argument", "cell")
 #. R/loess.R: gettextf("invalid '%s' argument", "degree")
-#. R/models.R: gettextf("invalid '%s' argument", "contrasts.arg")
 #. R/models.R: gettextf("invalid '%s' argument", "data")
 #. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
@@ -5153,6 +5158,12 @@ msgstr "непересекающиеся серии"
 #, fuzzy
 msgid "non-leaf subtree of length 0"
 msgstr "безлистное дерево нулевой длины"
+
+#. R/models.R: warning("non-list contrasts argument ignored")
+#: R/models.R:0
+#, fuzzy
+msgid "non-list contrasts argument ignored"
+msgstr "неправильный аргумент 'contrasts.arg'"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
@@ -7554,9 +7565,6 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #~ msgid "if 'x' is not an array, 'z' must be given"
 #~ msgstr "если 'x' -- не матрица, нужно задать 'z'"
-
-#~ msgid "invalid 'contrasts.arg' argument"
-#~ msgstr "неправильный аргумент 'contrasts.arg'"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "недопустимый аргумент 'data'"

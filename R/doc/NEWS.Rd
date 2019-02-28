@@ -295,6 +295,9 @@
 
       \item \code{model.matrix(*, contrasts.arg = CC)} now warns about
       invalid \code{contrasts.arg}s.
+
+      \item Performance of \code{substr()} and \code{substring()} has been
+      improved.
     }
   }
 
@@ -707,7 +710,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.5.2 patched}{
+\section{\Rlogo CHANGES IN R 3.5.3}{
 
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -669,6 +669,14 @@ msgid "'%s' function is not defined for objects of class %s"
 msgstr ""
 
 
+#: R/RNG.R: 0
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+
+msgid "'%s' is not a valid choice"
+msgstr ""
+
+
 #: R/namespace.R: 0
 #. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
 
@@ -1130,6 +1138,14 @@ msgstr ""
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 
 msgid "'row.names' argument should specify one of the variables"
+msgstr ""
+
+
+#: R/RNG.R: 0
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+
+msgid "'sample.kind' must be a character string of length 1"
 msgstr ""
 
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1848,6 +1848,11 @@ msgstr "모든 인수는 \"person\" 이라는 클래스 내에 정의되어 있�
 #: R/citation.R:0
 msgid "all fields have to be named"
 msgstr "모든 항목들에 이름이 주어져야 합니다 "
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
+msgstr ""
 
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0

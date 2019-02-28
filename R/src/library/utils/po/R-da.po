@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1766,6 +1766,11 @@ msgstr "alle argumenter skal være af klasse »person«"
 #: R/citation.R:0
 msgid "all fields have to be named"
 msgstr "alle felter skal navngives"
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
+msgstr ""
 
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0

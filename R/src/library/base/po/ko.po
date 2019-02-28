@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-02-28 16:29+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -175,7 +175,7 @@ msgid ""
 "evaluations"
 msgstr ""
 
-#: src/appl/maxcol.c:91
+#: src/appl/maxcol.c:92
 #, fuzzy, c-format
 msgid "invalid '%s' argument {should not happen}"
 msgstr "rank()데 대한 ties.method가 잘못되었습니다 [결코 일어나선 안 됩니다]"
@@ -593,7 +593,7 @@ msgid "problem in displaying file '%ls'"
 msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 
 #: src/gnuwin32/extra.c:114 src/gnuwin32/extra.c:156 src/gnuwin32/extra.c:346
-#: src/gnuwin32/extra.c:597 src/gnuwin32/extra.c:622
+#: src/gnuwin32/extra.c:600 src/gnuwin32/extra.c:625
 #: src/gnuwin32/sys-win32.c:250 src/gnuwin32/sys-win32.c:292
 #: src/main/agrep.c:132 src/main/agrep.c:136 src/main/agrep.c:773
 #: src/main/agrep.c:778 src/main/altclasses.c:1353 src/main/apply.c:330
@@ -605,11 +605,11 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/builtin.c:155 src/main/builtin.c:161 src/main/builtin.c:586
 #: src/main/builtin.c:602 src/main/builtin.c:789 src/main/builtin.c:791
 #: src/main/builtin.c:793 src/main/character.c:245 src/main/character.c:248
-#: src/main/character.c:253 src/main/character.c:811 src/main/character.c:814
-#: src/main/character.c:1301 src/main/character.c:1305
-#: src/main/character.c:1308 src/main/character.c:1542
-#: src/main/character.c:1546 src/main/character.c:1607
-#: src/main/character.c:1610 src/main/coerce.c:1488 src/main/coerce.c:1540
+#: src/main/character.c:253 src/main/character.c:834 src/main/character.c:837
+#: src/main/character.c:1324 src/main/character.c:1328
+#: src/main/character.c:1331 src/main/character.c:1565
+#: src/main/character.c:1569 src/main/character.c:1630
+#: src/main/character.c:1633 src/main/coerce.c:1488 src/main/coerce.c:1540
 #: src/main/coerce.c:2034 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
@@ -659,8 +659,8 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/eval.c:450 src/main/eval.c:459 src/main/eval.c:462
 #: src/main/grep.c:924 src/main/grep.c:929 src/main/grep.c:1251
 #: src/main/grep.c:1253 src/main/grep.c:1255 src/main/grep.c:1700
-#: src/main/grep.c:1704 src/main/grep.c:1709 src/main/grep.c:2554
-#: src/main/grep.c:2559 src/main/grep.c:2887 src/main/grep.c:2892
+#: src/main/grep.c:1704 src/main/grep.c:1709 src/main/grep.c:2555
+#: src/main/grep.c:2560 src/main/grep.c:2888 src/main/grep.c:2893
 #: src/main/internet.c:202 src/main/internet.c:216 src/main/internet.c:236
 #: src/main/internet.c:249 src/main/internet.c:261 src/main/internet.c:280
 #: src/main/memory.c:4289 src/main/names.c:1332 src/main/names.c:1335
@@ -745,13 +745,13 @@ msgstr "사용자의 컴퓨터의 주소공간의 한계는 4Gb 입니다"
 msgid "cannot decrease memory limit: ignored"
 msgstr "메모리 한계를 줄일 수 없습니다. 무시했습니다 "
 
-#: src/gnuwin32/extra.c:444 src/gnuwin32/extra.c:551 src/main/objects.c:995
+#: src/gnuwin32/extra.c:447 src/gnuwin32/extra.c:554 src/main/objects.c:995
 #: src/main/sysutils.c:656 src/main/unique.c:1701 src/main/util.c:964
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "첫번째 인수는 문자열 벡터여야 합니다"
 
-#: src/gnuwin32/extra.c:448 src/main/edit.c:143 src/main/errors.c:1147
+#: src/gnuwin32/extra.c:451 src/main/edit.c:143 src/main/errors.c:1147
 #: src/main/errors.c:1149 src/main/objects.c:524 src/main/objects.c:1308
 #: src/main/options.c:391 src/main/raw.c:155 src/main/Renviron.c:311
 #: src/main/unique.c:1705 src/modules/lapack/Lapack.c:101
@@ -762,36 +762,36 @@ msgstr "첫번째 인수는 문자열 벡터여야 합니다"
 msgid "'%s' argument must be a character string"
 msgstr "'norm'는 문자열이어야 합니다"
 
-#: src/gnuwin32/extra.c:451
+#: src/gnuwin32/extra.c:454
 #, fuzzy
 msgid "'winslash' argument must be '/' or '\\\\'"
 msgstr "첫번째 인수는 벡터여야 합니다"
 
-#: src/gnuwin32/extra.c:599 src/gnuwin32/extra.c:601 src/gnuwin32/extra.c:624
-#: src/gnuwin32/extra.c:626 src/gnuwin32/extra.c:661 src/main/gevents.c:64
+#: src/gnuwin32/extra.c:602 src/gnuwin32/extra.c:604 src/gnuwin32/extra.c:627
+#: src/gnuwin32/extra.c:629 src/gnuwin32/extra.c:664 src/main/gevents.c:64
 #: src/main/gevents.c:106
 msgid "invalid device"
 msgstr "올바른 장치가 아닙니다 "
 
-#: src/gnuwin32/extra.c:602
+#: src/gnuwin32/extra.c:605
 msgid "SDI mode is required"
 msgstr ""
 
-#: src/gnuwin32/extra.c:655 src/main/gevents.c:61 src/main/gevents.c:100
+#: src/gnuwin32/extra.c:658 src/main/gevents.c:61 src/main/gevents.c:100
 #: src/main/gevents.c:103
 msgid "invalid graphical device number"
 msgstr "그래픽 장치번호가 잘못되었습니다 "
 
-#: src/gnuwin32/extra.c:665
+#: src/gnuwin32/extra.c:668
 msgid "bad device"
 msgstr "잘못된 장치입니다 "
 
-#: src/gnuwin32/extra.c:837 src/gnuwin32/extra.c:845
+#: src/gnuwin32/extra.c:840 src/gnuwin32/extra.c:848
 #, fuzzy, c-format
 msgid "invalid input in '%s' function"
 msgstr "Rmbstowcs 에 입력이 잘못되엇습니다 "
 
-#: src/gnuwin32/extra.c:868 src/main/platform.c:1396
+#: src/gnuwin32/extra.c:871 src/main/platform.c:1396
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "파일 선택이 취소되었습니다 "
@@ -1153,9 +1153,9 @@ msgstr "첨자가 허용되는 범위를 벗어났습니다"
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1303
-#: src/main/character.c:1307 src/main/grep.c:926 src/main/grep.c:1702
-#: src/main/grep.c:1706 src/main/grep.c:2556 src/main/grep.c:2889
+#: src/main/agrep.c:134 src/main/agrep.c:775 src/main/character.c:1326
+#: src/main/character.c:1330 src/main/grep.c:926 src/main/grep.c:1702
+#: src/main/grep.c:1706 src/main/grep.c:2557 src/main/grep.c:2890
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "인수 '%s'는 2 이상 길이이므로 첫 번째 요소만이 사용됩니다"
@@ -1167,20 +1167,20 @@ msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' 은 반드시 문자열이어야 합니다 "
 
 #: src/main/agrep.c:202 src/main/agrep.c:826 src/main/grep.c:997
-#: src/main/grep.c:2616 src/main/grep.c:2944
+#: src/main/grep.c:2617 src/main/grep.c:2945
 msgid "regular expression is invalid in this locale"
 msgstr "정규표현식이 이 로케일에서는 잘못되었습니다"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:832
-#: src/main/grep.c:2950
+#: src/main/grep.c:2951
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "regcomp 오류 : '%s'"
 
 #: src/main/agrep.c:240 src/main/agrep.c:871 src/main/grep.c:349
 #: src/main/grep.c:439 src/main/grep.c:565 src/main/grep.c:726
-#: src/main/grep.c:1067 src/main/grep.c:1857 src/main/grep.c:2738
-#: src/main/grep.c:2812 src/main/grep.c:2981
+#: src/main/grep.c:1067 src/main/grep.c:1857 src/main/grep.c:2739
+#: src/main/grep.c:2813 src/main/grep.c:2982
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "입력 문자열 %d는 이 로케일에서 잘못되었습니다"
@@ -1188,7 +1188,7 @@ msgstr "입력 문자열 %d는 이 로케일에서 잘못되었습니다"
 #: src/main/agrep.c:527 src/main/agrep.c:764 src/main/grep.c:275
 #: src/main/grep.c:917 src/main/grep.c:919 src/main/grep.c:1237
 #: src/main/grep.c:1245 src/main/grep.c:1693 src/main/grep.c:1695
-#: src/main/grep.c:2546 src/main/grep.c:2548 src/main/grep.c:2877
+#: src/main/grep.c:2547 src/main/grep.c:2549 src/main/grep.c:2878
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "인자 '%s' 는 무시되어질 것입니다 "
@@ -1357,8 +1357,8 @@ msgstr "지원되지 않는 URL 체계입니다"
 msgid "'%s' argument must be a vector"
 msgstr "첫번째 인수는 벡터여야 합니다"
 
-#: src/main/apply.c:102 src/main/array.c:520 src/main/character.c:870
-#: src/main/character.c:1670 src/main/connections.c:3868 src/main/context.c:688
+#: src/main/apply.c:102 src/main/array.c:520 src/main/character.c:893
+#: src/main/character.c:1693 src/main/connections.c:3868 src/main/context.c:688
 #: src/main/context.c:707 src/main/datetime.c:681 src/main/datetime.c:783
 #: src/main/datetime.c:1054 src/main/dotcode.c:220 src/main/errors.c:1046
 #: src/main/errors.c:1078 src/main/errors.c:1183 src/main/errors.c:1208
@@ -1495,7 +1495,7 @@ msgstr "길이 0인 두번째 인수가 잘못되었습니다"
 
 #: src/main/arithmetic.c:1735 src/main/arithmetic.c:1753 src/main/envir.c:1610
 #: src/main/envir.c:2120 src/main/eval.c:630 src/main/eval.c:631
-#: src/main/eval.c:4891 src/main/eval.c:4892 src/main/RNG.c:353
+#: src/main/eval.c:4891 src/main/eval.c:4892 src/main/RNG.c:356
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "인수에 값이 없고 기본값도 없습니다"
@@ -2081,7 +2081,7 @@ msgstr "vector: cannot make a vector of mode '%s'."
 msgid "cannot set length of non-(vector or list)"
 msgstr "벡터 아닌 것은 길이를 설정할 수 없습니다"
 
-#: src/main/builtin.c:840 src/main/character.c:548 src/main/coerce.c:2937
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2937
 msgid "invalid value"
 msgstr "값이 잘못되었습니다"
 
@@ -2139,7 +2139,7 @@ msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] "'%d'개의 인수가 '%s' 에 건네졌으나，1개나 2개만 필요합니다"
 
 #: src/main/character.c:112 src/main/character.c:115 src/main/character.c:238
-#: src/main/character.c:241 src/main/character.c:1535
+#: src/main/character.c:241 src/main/character.c:1558
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr "'%s'는 문자벡터여야 합니다"
@@ -2166,80 +2166,80 @@ msgstr "\"bytes\"로 인코딩된 요소  %d에 대한 폭은 계산될 수 없�
 msgid "element %ld"
 msgstr ""
 
-#: src/main/character.c:290 src/main/character.c:481
+#: src/main/character.c:299 src/main/character.c:504
 #, fuzzy, c-format
 msgid "invalid multibyte string, element %ld"
 msgstr "%d는 잘못된 멀티 바이트 문자입니다"
 
-#: src/main/character.c:323
+#: src/main/character.c:340
 msgid "extracting substrings from a non-character object"
 msgstr "문자열이 아닌 객체에서 부분 문자열을 추출하려고 했습니다"
 
-#: src/main/character.c:333 src/main/character.c:545
+#: src/main/character.c:351 src/main/character.c:568
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr "부분문자열 인수가 잘못되었습니다"
 
-#: src/main/character.c:373
+#: src/main/character.c:396
 #, fuzzy
 msgid "non-character object(s)"
 msgstr "문자열이 아닌 이름입니다"
 
-#: src/main/character.c:486
+#: src/main/character.c:509
 #, fuzzy, c-format
 msgid "invalid multibyte string, value element %ld"
 msgstr "'%s'에 잘못된 멀티 바이트 문자가 있습니다"
 
-#: src/main/character.c:540
+#: src/main/character.c:563
 msgid "replacing substrings in a non-character object"
 msgstr "문자열이 아닌 개체의 부분 문자열을 대체합니다"
 
-#: src/main/character.c:808
+#: src/main/character.c:831
 msgid "the first argument must be a character vector"
 msgstr "최초의 인수는 문자열 벡터여야 합니다"
 
-#: src/main/character.c:845
+#: src/main/character.c:868
 msgid "abbreviate used with non-ASCII chars"
 msgstr "ASCII 문자가 아닌 것이 약어로 사용되었습니다"
 
-#: src/main/character.c:866
+#: src/main/character.c:889
 msgid "non-character names"
 msgstr "문자열이 아닌 이름입니다"
 
-#: src/main/character.c:919 src/main/character.c:1016 src/main/character.c:1428
+#: src/main/character.c:942 src/main/character.c:1039 src/main/character.c:1451
 #, fuzzy, c-format
 msgid "invalid multibyte input string %d"
 msgstr "멀티 바이트 문자열이 잘못되었습니다"
 
-#: src/main/character.c:962 src/main/grep.c:279
+#: src/main/character.c:985 src/main/grep.c:279
 msgid "non-character argument"
 msgstr "문자열이 아닌 인수입니다"
 
-#: src/main/character.c:1071
+#: src/main/character.c:1094
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "범위 지정을 축소합니다 ('%lc-%lc')"
 
-#: src/main/character.c:1156
+#: src/main/character.c:1179
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "범위 지정을 축소합니다 ('%c-%c')"
 
-#: src/main/character.c:1343 src/main/character.c:1362
+#: src/main/character.c:1366 src/main/character.c:1385
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr "'old'는 잘못된 UTF-8 문자입니다"
 
-#: src/main/character.c:1349 src/main/character.c:1368 src/main/plotmath.c:981
+#: src/main/character.c:1372 src/main/character.c:1391 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "'%s'에 잘못된 멀티 바이트 문자가 있습니다"
 
-#: src/main/character.c:1396 src/main/character.c:1485
+#: src/main/character.c:1419 src/main/character.c:1508
 msgid "'old' is longer than 'new'"
 msgstr "'old'가  'new'보다 깁니다"
 
-#: src/main/character.c:1678 src/main/envir.c:3853 src/main/envir.c:3867
+#: src/main/character.c:1701 src/main/envir.c:3853 src/main/envir.c:3867
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "변수 이름은 %d 바이트가 상한입니다"
@@ -3192,7 +3192,7 @@ msgstr "'%s'라는 형식이 지원되지 않습니다"
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "'%s'라는 형식이 지원되지 않습니다"
 
-#: src/main/connections.c:5443 src/modules/internet/libcurl.c:952
+#: src/main/connections.c:5443 src/modules/internet/libcurl.c:948
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "'dirmark  = TRUE'은 이 플랫폼에서 지원되지 않습니다"
@@ -5272,7 +5272,7 @@ msgid "allocation failure in set_pcre_recursion_limit"
 msgstr "R_tmpnam2에서 메모리 할당이 실패했습니다"
 
 #: src/main/grep.c:341 src/main/grep.c:431 src/main/grep.c:557
-#: src/main/grep.c:1060 src/main/grep.c:1853 src/main/grep.c:2730
+#: src/main/grep.c:1060 src/main/grep.c:1853 src/main/grep.c:2731
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "입력 문자열 %d는 잘못된 UTF-8 입니다"
@@ -5288,7 +5288,7 @@ msgid "'split' string %d is invalid in this locale"
 msgstr "'split' 문자열 %d는 현재 로케일에서 잘못된 UTF-8 입니다"
 
 #: src/main/grep.c:520 src/main/grep.c:1012 src/main/grep.c:1798
-#: src/main/grep.c:2631
+#: src/main/grep.c:2632
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -5305,7 +5305,7 @@ msgid "invalid split pattern '%s'"
 msgstr "분할 패턴 '%s'이 잘못되었습니다"
 
 #: src/main/grep.c:528 src/main/grep.c:1021 src/main/grep.c:1807
-#: src/main/grep.c:2640
+#: src/main/grep.c:2641
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -5315,17 +5315,17 @@ msgstr ""
 "\t'%s'\n"
 
 #: src/main/grep.c:744 src/main/grep.c:756 src/main/grep.c:1091
-#: src/main/grep.c:2021 src/main/grep.c:2207 src/main/grep.c:2788
-#: src/main/grep.c:3008
+#: src/main/grep.c:2021 src/main/grep.c:2207 src/main/grep.c:2789
+#: src/main/grep.c:3009
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
 
-#: src/main/grep.c:993 src/main/grep.c:2612
+#: src/main/grep.c:993 src/main/grep.c:2613
 msgid "regular expression is invalid UTF-8"
 msgstr "정규표현식이 잘못된 UTF-8 문자열입니다"
 
-#: src/main/grep.c:1014 src/main/grep.c:1800 src/main/grep.c:2633
+#: src/main/grep.c:1014 src/main/grep.c:1800 src/main/grep.c:2634
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "'%s'의 정규표현식이 잘못되었습니다"
@@ -5359,12 +5359,12 @@ msgstr "길이가 0의 패턴입니다"
 msgid "result string is too long"
 msgstr "결과 문자열이 너무 깁니다"
 
-#: src/main/grep.c:2663
+#: src/main/grep.c:2664
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "pcre_fullinfo returned '%d'"
 
-#: src/main/grep.c:2698
+#: src/main/grep.c:2699
 #, fuzzy
 msgid "vector is too long"
 msgstr "지정된 벡터의 크기가 너무 큽니다"
@@ -7493,87 +7493,92 @@ msgstr ""
 msgid "file '%s' cannot be opened for reading"
 msgstr "zip 파일 '%s'를 열 수 없습니다"
 
-#: src/main/RNG.c:178
+#: src/main/RNG.c:181
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand :  RNG 종류 %d 는 구현되지 않았습니다"
 
-#: src/main/RNG.c:263
+#: src/main/RNG.c:266
 #, c-format
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds : RNG 종류 %d 는 구현되지 않았습니다"
 
-#: src/main/RNG.c:303 src/main/RNG.c:491
+#: src/main/RNG.c:306 src/main/RNG.c:496
 #, fuzzy, c-format
 msgid "'%s' is not in load table"
 msgstr "%s 심볼명 \"%s\" 가 로드 테이블에 없습니다"
 
-#: src/main/RNG.c:311
+#: src/main/RNG.c:314
 msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
 msgstr "'user_unif_nseed' 이 제공되어야한 시드를 읽을 수 있습니다"
 
-#: src/main/RNG.c:316
+#: src/main/RNG.c:319
 msgid "seed length must be in 0...625; ignored"
 msgstr "난수 시드 길이는 0에서 625 사이의 값이어야 하므로 무시되었습니다 "
 
-#: src/main/RNG.c:324
+#: src/main/RNG.c:327
 #, c-format
 msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init : RNG 종류 %d는 구현되지 않았습니다"
 
-#: src/main/RNG.c:354
+#: src/main/RNG.c:357
 #, fuzzy, c-format
 msgid "'.Random.seed' is not an integer vector but of type '%s'"
 msgstr ".Random.seed 는 정수 벡터가 아니라 타입 '%s' 입니다"
 
-#: src/main/RNG.c:362
+#: src/main/RNG.c:365
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ".Random.seed [1]이 유효한 정수가 아닙니다"
 
-#: src/main/RNG.c:368
+#: src/main/RNG.c:372
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid Normal type, so ignored"
 msgstr ".Random.seed [0]이 유효한 정규형이 아닙니다"
 
-#: src/main/RNG.c:382
+#: src/main/RNG.c:386
 #, fuzzy
 msgid "'.Random.seed[1] = 5' but no user-supplied generator, so ignored"
 msgstr ".Random.seed[1] = 5 지만 사용자로부터 제공된 생성기가 아닙니다"
 
-#: src/main/RNG.c:387
+#: src/main/RNG.c:391
 #, fuzzy
 msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] 는 유효한 RNG 종류(코드)가 아닙니다"
 
-#: src/main/RNG.c:415
+#: src/main/RNG.c:420
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed 은 길이가 잘못되었습니다"
 
-#: src/main/RNG.c:434
+#: src/main/RNG.c:439
 msgid "Internal .Random.seed is corrupt: not saving"
 msgstr ""
 
-#: src/main/RNG.c:468
+#: src/main/RNG.c:473
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind : RNG 종류 %d는 구현되지 않았습니다"
 
-#: src/main/RNG.c:474
+#: src/main/RNG.c:479
 msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
-#: src/main/RNG.c:488
+#: src/main/RNG.c:493
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "RNGkind의 정규형이 잘못되었습니다"
 
-#: src/main/RNG.c:535
+#: src/main/RNG.c:511
+#, fuzzy
+msgid "invalid sample type in 'RNGkind'"
+msgstr "RNGkind의 정규형이 잘못되었습니다"
+
+#: src/main/RNG.c:557
 msgid "supplied seed is not a valid integer"
 msgstr "주어진 seed는 유효한 정수가 아닙니다"
 
-#: src/main/RNG.c:790
+#: src/main/RNG.c:812
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -8518,7 +8523,7 @@ msgid "NA values are not allowed in subscripted assignments"
 msgstr "첨자 할당에 NA는 허용되지 않습니다"
 
 #: src/main/subassign.c:685 src/main/subassign.c:980 src/main/subassign.c:1205
-#: src/main/subassign.c:1814
+#: src/main/subassign.c:1816
 msgid "replacement has length zero"
 msgstr "replacement(대체)의 길이가 0입니다"
 
@@ -8566,61 +8571,61 @@ msgstr "리스트에 부르는 값인 첨자의 개수가 잘못되었습니다"
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs: 인수의 개수가 다릅니다"
 
-#: src/main/subassign.c:1667
+#: src/main/subassign.c:1668
 msgid "result is zero-length and so cannot be a language object"
 msgstr "결과는 0의 길이이므로, 언어 객체일 수 없습니다"
 
-#: src/main/subassign.c:1766
+#: src/main/subassign.c:1768
 #, fuzzy
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
 msgstr ""
 "[[<- defined for objects of type \"S4\" only for subclasses of environment"
 
-#: src/main/subassign.c:1780
+#: src/main/subassign.c:1782
 #, fuzzy
 msgid "improper dimensions"
 msgstr "차원수가 올바르지는 않습니다"
 
-#: src/main/subassign.c:1786
+#: src/main/subassign.c:1788
 #, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "subassignment 환경에 대한 잘못된 인수입니다"
 
-#: src/main/subassign.c:1816
+#: src/main/subassign.c:1818
 msgid "more elements supplied than there are to replace"
 msgstr "대체 개수보다 더 많은 요소가 주어졌습니다"
 
-#: src/main/subassign.c:1818
+#: src/main/subassign.c:1820
 #, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]]의 첨자가 없습니다"
 
-#: src/main/subassign.c:1836
+#: src/main/subassign.c:1838
 #, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "[[ ]]의 첨자가 범위외입니다"
 
-#: src/main/subassign.c:1842 src/main/subassign.c:2024
+#: src/main/subassign.c:1844 src/main/subassign.c:2026
 #, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "[[ ]]의 첨자의 개수가 잘못되었습니다 "
 
-#: src/main/subassign.c:1855 src/main/subassign.c:2036
+#: src/main/subassign.c:1857 src/main/subassign.c:2038
 #, fuzzy, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "[[ ]]의 첨자(%d)가 범위외입니다"
 
-#: src/main/subassign.c:1989
+#: src/main/subassign.c:1991
 #, fuzzy, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "incompatible types (from %s to %s) in [[ assignment"
 
-#: src/main/subassign.c:2124
+#: src/main/subassign.c:2126
 msgid "no method for assigning subsets of this S4 class"
 msgstr "이 S4 클래스의 하위 집합을 할당하는 메소드는 없습니다"
 
-#: src/main/subassign.c:2182
+#: src/main/subassign.c:2184
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr "좌변을 리스트로 변화했습니다"
@@ -9246,7 +9251,7 @@ msgid "there must be at least three control points"
 msgstr "적어도 세 개의 제어점이 필요합니다"
 
 #: src/modules/internet/internet.c:109 src/modules/internet/internet.c:240
-#: src/modules/internet/libcurl.c:842
+#: src/modules/internet/libcurl.c:838
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "연결이 읽기 위해 열리지 않습니다"
@@ -9264,10 +9269,10 @@ msgstr "URL '%s'를 열 수 없습니다"
 
 #: src/modules/internet/internet.c:354 src/modules/internet/internet.c:358
 #: src/modules/internet/internet.c:365 src/modules/internet/internet.c:388
-#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:901
-#: src/modules/internet/libcurl.c:905 src/modules/internet/libcurl.c:912
-#: src/modules/internet/libcurl.c:926 src/modules/internet/libcurl.c:935
-#: src/modules/internet/libcurl.c:945
+#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:897
+#: src/modules/internet/libcurl.c:901 src/modules/internet/libcurl.c:908
+#: src/modules/internet/libcurl.c:922 src/modules/internet/libcurl.c:931
+#: src/modules/internet/libcurl.c:941
 msgid "allocation of url connection failed"
 msgstr "url 연결의 할당에 실패했습니다"
 
@@ -9326,7 +9331,7 @@ msgid "downloaded length %0.f != reported length %0.f"
 msgstr "다운로드한 길이 %d가 보고된 길이 %d와 다릅니다"
 
 #: src/modules/internet/internet.c:665 src/modules/internet/internet.c:778
-#: src/modules/internet/libcurl.c:691
+#: src/modules/internet/libcurl.c:687
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "URL '%s'를 열 수 없습니다"
@@ -9449,32 +9454,32 @@ msgstr ""
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "파일 '%s'를 열 수 없습니다, 이유는 '%s'입니다"
 
-#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:777
+#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:773
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:687
+#: src/modules/internet/libcurl.c:683
 #, fuzzy
 msgid "cannot download any files"
 msgstr "파일 '%s'를 열수가 없습니다"
 
-#: src/modules/internet/libcurl.c:688
+#: src/modules/internet/libcurl.c:684
 #, fuzzy
 msgid "some files were not downloaded"
 msgstr "복원하려는 파일이 비어 있는 것 같습니다 -- 로드된 데이터가 없습니다"
 
-#: src/modules/internet/libcurl.c:693
+#: src/modules/internet/libcurl.c:689
 #, c-format
 msgid "download from '%s' failed"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:831
+#: src/modules/internet/libcurl.c:827
 #, fuzzy
 msgid "cannot read from connection"
 msgstr "이 연결로부터 열수가 없습니다"
 
-#: src/modules/internet/libcurl.c:872
+#: src/modules/internet/libcurl.c:868
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "연결로부터 열수가 없습니다"
@@ -10265,12 +10270,11 @@ msgstr "이 R의 버전에는 png를 지원하지 않습니다"
 msgid "Problems writing to 'bmp' file"
 msgstr "연결에 쓰기에 문제가 있습니다"
 
-#: src/nmath/bessel_i.c:68 src/nmath/standalone/bessel_i.c:68
+#: src/nmath/bessel_i.c:68
 msgid "bessel_i allocation error"
 msgstr "bessel_i 할당에 오류가 있습니다"
 
 #: src/nmath/bessel_i.c:76 src/nmath/bessel_i.c:119
-#: src/nmath/standalone/bessel_i.c:76 src/nmath/standalone/bessel_i.c:119
 #, fuzzy, c-format
 msgid "bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10278,23 +10282,20 @@ msgstr ""
 "요？\n"
 
 #: src/nmath/bessel_i.c:78 src/nmath/bessel_i.c:121
-#: src/nmath/standalone/bessel_i.c:78 src/nmath/standalone/bessel_i.c:121
 #, fuzzy, c-format
 msgid "bessel_i(%g,nu=%g): precision lost in result"
 msgstr "bessel_i(%g,nu=%g): 결과의 정밀도가 손실되었습니다\n"
 
 #: src/nmath/bessel_j.c:63 src/nmath/bessel_j.c:114
-#: src/nmath/standalone/bessel_j.c:63 src/nmath/standalone/bessel_j.c:114
 #, c-format
 msgid "besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"
 msgstr ""
 
-#: src/nmath/bessel_j.c:70 src/nmath/standalone/bessel_j.c:70
+#: src/nmath/bessel_j.c:70
 msgid "bessel_j allocation error"
 msgstr "bessel_j 할당에 오류가 있습니다"
 
 #: src/nmath/bessel_j.c:78 src/nmath/bessel_j.c:122
-#: src/nmath/standalone/bessel_j.c:78 src/nmath/standalone/bessel_j.c:122
 #, fuzzy, c-format
 msgid "bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10302,17 +10303,15 @@ msgstr ""
 "요？\n"
 
 #: src/nmath/bessel_j.c:80 src/nmath/bessel_j.c:124
-#: src/nmath/standalone/bessel_j.c:80 src/nmath/standalone/bessel_j.c:124
 #, fuzzy, c-format
 msgid "bessel_j(%g,nu=%g): precision lost in result"
 msgstr "bessel_j(%g,nu=%g): 결과의 정밀도가 손실되었습니다\n"
 
-#: src/nmath/bessel_k.c:61 src/nmath/standalone/bessel_k.c:61
+#: src/nmath/bessel_k.c:61
 msgid "bessel_k allocation error"
 msgstr "bessel_k 할당에 오류가 있습니다"
 
 #: src/nmath/bessel_k.c:69 src/nmath/bessel_k.c:104
-#: src/nmath/standalone/bessel_k.c:69 src/nmath/standalone/bessel_k.c:104
 #, fuzzy, c-format
 msgid "bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10320,23 +10319,20 @@ msgstr ""
 "요？\n"
 
 #: src/nmath/bessel_k.c:71 src/nmath/bessel_k.c:106
-#: src/nmath/standalone/bessel_k.c:71 src/nmath/standalone/bessel_k.c:106
 #, fuzzy, c-format
 msgid "bessel_k(%g,nu=%g): precision lost in result"
 msgstr "bessel_k(%g,nu=%g): 결과의 정밀도가 손실되었습니다\n"
 
 #: src/nmath/bessel_y.c:62 src/nmath/bessel_y.c:123
-#: src/nmath/standalone/bessel_y.c:62 src/nmath/standalone/bessel_y.c:123
 #, c-format
 msgid "besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"
 msgstr ""
 
-#: src/nmath/bessel_y.c:69 src/nmath/standalone/bessel_y.c:69
+#: src/nmath/bessel_y.c:69
 msgid "bessel_y allocation error"
 msgstr "bessel_y 할당에 오류가 있습니다"
 
 #: src/nmath/bessel_y.c:85 src/nmath/bessel_y.c:133
-#: src/nmath/standalone/bessel_y.c:85 src/nmath/standalone/bessel_y.c:133
 #, fuzzy, c-format
 msgid "bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
@@ -10344,13 +10340,11 @@ msgstr ""
 "요？\n"
 
 #: src/nmath/bessel_y.c:88 src/nmath/bessel_y.c:136
-#: src/nmath/standalone/bessel_y.c:88 src/nmath/standalone/bessel_y.c:136
 #, fuzzy, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result"
 msgstr "bessel_y (%g, nu = %g) : 결과의 정밀도가 손실되었습니다\n"
 
 #: src/nmath/choose.c:79 src/nmath/choose.c:122
-#: src/nmath/standalone/choose.c:79 src/nmath/standalone/choose.c:122
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
 msgstr ""
@@ -10385,54 +10379,52 @@ msgstr "'%s'에서 최대정밀도는 충족되지 않을 것입니다\n"
 msgid "underflow occurred in '%s' function"
 msgstr "'%s'에서 언더 플로가 발생했습니다\n"
 
-#: src/nmath/pbeta.c:64 src/nmath/standalone/pbeta.c:64
+#: src/nmath/pbeta.c:64
 #, c-format
 msgid "pbeta_raw(%g, a=%g, b=%g, ..) -> bratio() gave error code %d"
 msgstr ""
 
-#: src/nmath/pbinom.c:37 src/nmath/standalone/pbinom.c:37
+#: src/nmath/pbinom.c:37
 #, fuzzy, c-format
 msgid "non-integer n = %f"
 msgstr "차원수가 올바르지는 않습니다"
 
-#: src/nmath/pnbinom.c:82 src/nmath/standalone/pnbinom.c:82
+#: src/nmath/pnbinom.c:82
 #, c-format
 msgid "pnbinom_mu() -> bratio() gave error code %d"
 msgstr ""
 
-#: src/nmath/pnchisq.c:295 src/nmath/standalone/pnchisq.c:295
+#: src/nmath/pnchisq.c:295
 #, c-format
 msgid "pnchisq(x=%g, ..): not converged in %d iter."
 msgstr "pnchisq(x=%g, ..): %d회의 반복 계산에서 수렴하지 못했습니다"
 
-#: src/nmath/polygamma.c:499 src/nmath/standalone/polygamma.c:499
+#: src/nmath/polygamma.c:499
 #, c-format
 msgid "deriv = %d > %d (= n_max)\n"
 msgstr "deriv = %d > %d (= n_max)\n"
 
-#: src/nmath/qgamma.c:153 src/nmath/standalone/qgamma.c:153
+#: src/nmath/qgamma.c:153
 #, c-format
 msgid "value of shape (%g) is extremely small: results may be unreliable"
 msgstr ""
 
-#: src/nmath/rmultinom.c:78 src/nmath/standalone/rmultinom.c:78
+#: src/nmath/rmultinom.c:78
 #, c-format
 msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom : 확률의 총계는 1이 되어야 하지만, %g 되어 있습니다"
 
-#: src/nmath/signrank.c:77 src/nmath/standalone/signrank.c:77
+#: src/nmath/signrank.c:77
 msgid "signrank allocation error"
 msgstr "signrank 할당 오류"
 
-#: src/nmath/snorm.c:326 src/nmath/standalone/snorm.c:326
+#: src/nmath/snorm.c:326
 #, c-format
 msgid "norm_rand(): invalid N01_kind: %d\n"
 msgstr "norm_rand () : N01_kind : %d는 올바르지 않습니다 \n"
 
 #: src/nmath/wilcox.c:85 src/nmath/wilcox.c:95 src/nmath/wilcox.c:148
-#: src/nmath/wilcox.c:313 src/nmath/standalone/wilcox.c:85
-#: src/nmath/standalone/wilcox.c:95 src/nmath/standalone/wilcox.c:148
-#: src/nmath/standalone/wilcox.c:313
+#: src/nmath/wilcox.c:313
 #, c-format
 msgid "wilcox allocation error %d"
 msgstr "wilcox 메모리 할당 오류 %d"

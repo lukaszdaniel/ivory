@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -504,6 +504,13 @@ msgstr "wykonywanie polecenia '%s' nie powiodło się zwracając kod błędu %d"
 msgid "'%s' function is not defined for objects of class %s"
 msgstr "funkcja '%s' nie jest określona dla obiektów klasy %s"
 
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+#, fuzzy
+msgid "'%s' is not a valid choice"
+msgstr "wartość '%s' nie jest poprawnym wyborem"
+
 #. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
 #: R/namespace.R:0
 msgid "'%s' is not an exported object from 'namespace:%s'"
@@ -893,6 +900,13 @@ msgstr ""
 #: R/dataframe.R:0
 msgid "'row.names' argument should specify one of the variables"
 msgstr "argument 'row.names' powinien określać jedną ze zmiennych"
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+#, fuzzy
+msgid "'sample.kind' must be a character string of length 1"
+msgstr "'normal.kind' musi być łańcuchem tekstowym o długości 1"
 
 #. R/solve.R: warning("'solve.default()' function called with an object of class \"qr\": use 'qr.solve()' function")
 #: R/solve.R:0
@@ -3876,9 +3890,6 @@ msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
 
 #~ msgid "'index.return' only for 'na.last = NA'"
 #~ msgstr "'index.return' dostępne jest jedynie dla 'na.last = NA'"
-
-#~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "'normal.kind' musi być łańcuchem tekstowym o długości 1"
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "argument 'subset' musi być zmienną logiczną"

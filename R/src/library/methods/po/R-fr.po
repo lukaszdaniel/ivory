@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -840,6 +840,14 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgstr ""
+"Sous-classe indéfinie, %s, de la classe %s ; la définition n'est pas mise à "
+"jour "
+
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
 msgid "From source file %s"
@@ -1305,7 +1313,7 @@ msgstr "ceci n'est pas un nom de package : %s"
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
 #: R/RClassUtils.R:0
 msgid "[where=%s, where2=%s]"
 msgstr ""
@@ -2187,11 +2195,6 @@ msgstr ""
 msgid "for function %s: %s"
 msgstr "fonction %s introuvable"
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "for new inheritance information currently;"
-msgstr ""
-
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2633,6 +2636,14 @@ msgstr ""
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
 "valeur incorrecte pour la fonction générique %s, classe %s, mais attendu %s"
+
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#: R/RClassUtils.R:0
+#, fuzzy
+msgid "is not updated for new inheritance information currently;"
+msgstr ""
+"La sous-classe %s de la classe %s n'est pas locale et ne peut être mise à "
+"jour pour une nouvelle information d'héritage ; considérez setClassUnion()"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3352,14 +3363,6 @@ msgstr ""
 "Quelque chose d'étrange s'est produit : nombre d'arguments inconsistent pour "
 "args dans la table des méthodes"
 
-#. R/RClassUtils.R: paste("subclass %s of class %s is not local and is not updated", "for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "subclass %s of class %s is not local and is not updated"
-msgstr ""
-"Sous-classe indéfinie, %s, de la classe %s ; la définition n'est pas mise à "
-"jour "
-
 #. R/SClasses.R: gettextf("superclass \"%s\" not defined in the environment of the object's class",     superClass)
 #: R/SClasses.R:0
 #, fuzzy
@@ -4048,13 +4051,6 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments formels de la fonction générique pour \"%s\" (%s) diffèrent de "
 "ceux de la fonction non générique à utiliser par défaut (%s)"
-
-#~ msgid ""
-#~ "subclass %s of class %s is not local and cannot be updated for new "
-#~ "inheritance information; consider setClassUnion()"
-#~ msgstr ""
-#~ "La sous-classe %s de la classe %s n'est pas locale et ne peut être mise à "
-#~ "jour pour une nouvelle information d'héritage ; considérez setClassUnion()"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "** ne devrait plus se produire !"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-15 17:48\n"
+"POT-Creation-Date: 2019-02-28 15:56\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -2436,6 +2436,11 @@ msgstr ""
 msgid "NOTE: Quitting check on first error."
 msgstr ""
 
+#. R/install.R: message("NOTE: fixed library identification name ", oldid)
+#: R/install.R:0
+msgid "NOTE: fixed library identification name"
+msgstr ""
+
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 #: R/install.R:0
@@ -2636,6 +2641,12 @@ msgstr ""
 msgid "Non-Windows OSes require LF line endings."
 msgstr ""
 
+#. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-portable flags in file '%s':"
+msgstr "Nicht portierbare Flags in der Variablen '%s'"
+
 #. R/QC.R: gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -2835,9 +2846,9 @@ msgstr "Nur ein Rd Abschnitt pro \\Sepr wird unterstützt"
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Nur die Operatoren '<=' und '>=' sind zulässig."
 
-#. R/check.R: gettextf("Output for data(\"%s\"):\n", f)
+#. R/check.R: gettextf("Output for data(\"%s\", package = \"%s\"):\n", f, pkgname)
 #: R/check.R:0
-msgid "Output for data(\"%s\"):"
+msgid "Output for data(\"%s\", package = \"%s\"):"
 msgstr ""
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -4338,6 +4349,11 @@ msgstr ""
 #: R/admin.R:0
 msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
 msgstr "Warnung: 'Depends' Feld in 'DESCRIPTION' falsch gebildet"
+
+#. R/install.R: message("WARNING: moving package to final location failed, copying instead")
+#: R/install.R:0
+msgid "WARNING: moving package to final location failed, copying instead"
+msgstr ""
 
 #. R/admin.R: message("WARNING: omitting pointless dependence on 'R' without a version requirement")
 #: R/admin.R:0
