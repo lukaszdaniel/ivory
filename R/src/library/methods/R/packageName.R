@@ -76,7 +76,6 @@ getPackageName <- function(where = topenv(parent.frame()), create = TRUE) {
         warning(gettextf("Created a package name, %s, when none found",
                          sQuote(pkg)),
                 domain = "R-methods")
-        assign(pkg, env, envir = .PackageEnvironments)
 	if(!saved && !environmentIsLocked(env))
             setPackageName(pkg, env)
     }
