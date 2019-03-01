@@ -325,6 +325,7 @@ msgstr "argument 'full.names' musi mieć wartość TRUE dla wielu ścieżek"
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'headers' must have names and must not be NA"
 msgstr ""
+"argument 'headers' musi zawierać nazwy i nie mogą być one wartościami NA"
 
 #. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
 #: R/packages2.R:0
@@ -1136,7 +1137,7 @@ msgstr ""
 #. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
 #: R/str.R:0
 msgid "Not a validObject():"
-msgstr ""
+msgstr "Niepoprawny obiekt:"
 
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
@@ -1860,7 +1861,7 @@ msgstr "wszystkie pola muszą być nazwane"
 #. R/data.R: gettextf("an object named %s already exists and will not be overwritten", sQuote(o))
 #: R/data.R:0
 msgid "an object named %s already exists and will not be overwritten"
-msgstr ""
+msgstr "obiekt o nazwie %s już istnieje i nie będzie nadpisany"
 
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0

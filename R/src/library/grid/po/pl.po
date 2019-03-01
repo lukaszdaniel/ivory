@@ -18,7 +18,7 @@ msgstr ""
 
 #: gpar.c:474
 msgid "updateGContext must only be called after initGContext"
-msgstr ""
+msgstr "funkcja 'updateGContext()' musi być wywołana po 'initGContext()'"
 
 #: grid.c:213
 msgid "cannot clip to rotated viewport"

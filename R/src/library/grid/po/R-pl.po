@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
@@ -760,13 +760,12 @@ msgstr "nrow * ncol < liczba etykiet legendy"
 
 #. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
 #: R/grab.R:0
-#, fuzzy
 msgid ""
 "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = "
 "TRUE')"
 msgstr ""
 "jeden lub więcej 'grob' nadpisane ('grab' NIE BĘDZIE wiarygodne; spróbuj "
-"'wrap=TRUE')"
+"'wrap.grobs=TRUE')"
 
 #. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
 #: R/grob.R:0

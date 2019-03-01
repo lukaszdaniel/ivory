@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-02-28 18:17\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -722,13 +722,6 @@ msgstr "为%2$s里的%1$s建立新的泛型函数"
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "没有定义一般S4对象的数据部分"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid ""
-"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
-"force=TRUE);"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -738,11 +731,6 @@ msgid ""
 msgstr ""
 "类别%s里的槽\"%s\"目前被定义为(或继承于)\"%s\"，这与类别%s里所继承的定义相互"
 "有矛盾"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -792,10 +780,13 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
 #, fuzzy
-msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgid ""
+"From .checkSubclasses(): subclass %s of class %s is not local and is not "
+"updated for new inheritance information currently;\n"
+"[where=%s, where2=%s]"
 msgstr "%2$s类别的子类别%1$s没有定义；因此没有更新"
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
@@ -1237,11 +1228,6 @@ msgstr "不是程輯包名: %s"
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
-msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2391,14 +2377,6 @@ msgstr ""
 #, fuzzy
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr "类别为%2$s的泛型函数'%1$s'的值不对, 所要求的是%3$s"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "is not updated for new inheritance information currently;"
-msgstr ""
-"%2$s类别的%1$s子类别不是局部的，因此无法按新的繼承信息进行更新；考虑用"
-"setClassUnion()"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3612,6 +3590,12 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#, fuzzy
+#~ msgid "is not updated for new inheritance information currently;"
+#~ msgstr ""
+#~ "%2$s类别的%1$s子类别不是局部的，因此无法按新的繼承信息进行更新；考虑用"
+#~ "setClassUnion()"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "不应该产生**!"

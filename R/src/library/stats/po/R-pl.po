@@ -411,9 +411,8 @@ msgstr "argument '%s' musi być zmienną logiczną lub tekstem"
 
 #. R/models.R: gettextf("'%s' argument must be named", "contrasts.arg")
 #: R/models.R:0
-#, fuzzy
 msgid "'%s' argument must be named"
-msgstr "argument '%s' musi być liczbą"
+msgstr "argument '%s' musi być nazwany"
 
 #. R/StructTS.R: gettextf("'%s' argument must be numeric", "x")
 #. R/acf.R: gettextf("'%s' argument must be numeric", "x")
@@ -1101,6 +1100,7 @@ msgstr ""
 #: R/approx.R:0
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
 msgstr ""
+"'ties' nie jest \"ordered\", funkcją lub listą postaci(<tekst>, <funkcja>)"
 
 #. R/smspline.R: stop("'tol' must be strictly positive and finite")
 #: R/smspline.R:0
@@ -4995,9 +4995,8 @@ msgstr "bezlistne poddrzewo o długości 0"
 
 #. R/models.R: warning("non-list contrasts argument ignored")
 #: R/models.R:0
-#, fuzzy
 msgid "non-list contrasts argument ignored"
-msgstr "niepoprawny argument 'contrasts.arg'"
+msgstr "argumenty kontrastu niebędące listą zostały zignorowane"
 
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0

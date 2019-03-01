@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-02-28 18:17\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -699,13 +699,6 @@ msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr ""
 "Część 'Data' (gniazdo '.Data') jest niezdefiniowana dla ogólnego obiektu S4"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid ""
-"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
-"force=TRUE);"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -715,11 +708,6 @@ msgid ""
 msgstr ""
 "gniazdo %s w klasie %s aktualnie zdefiniowane (lub odziedziczone) jako %s, "
 "jest w konflikcie z odziedziczoną definicją w klasie %s"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -771,10 +759,13 @@ msgstr ""
 "Znaleziono więcej niż jedną klasę %s w cache; używanie pierwszej z "
 "przestrzeni nazw '%s'"
 
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
 #, fuzzy
-msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgid ""
+"From .checkSubclasses(): subclass %s of class %s is not local and is not "
+"updated for new inheritance information currently;\n"
+"[where=%s, where2=%s]"
 msgstr ""
 "niezdefiniowana podklasa %s klasy %s; definicja nie została zaktualizowana"
 
@@ -824,17 +815,15 @@ msgstr "Grupy ogólne:"
 
 #. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "In command %s: use of \"MethodsList\" metadata objects is defunct."
 msgstr ""
-"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
+"W poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
 
 #. R/MethodsList.R: gettextf("In command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "In command %s: use of \"MethodsList\" metadata objects is deprecated."
 msgstr ""
-"w poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
+"W poleceniu %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
 
 #. R/RMethodUtils.R: gettextf("In method for %s with signature %s: ", sQuote(f), msig, domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -1118,15 +1107,13 @@ msgstr "Przywracanie domyślnej definicji funkcji %s"
 
 #. R/MethodsList.R: gettext("See ?MethodsList.", domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "See ?MethodsList."
-msgstr "zobacz '?MethodsList'."
+msgstr "Zobacz '?MethodsList'."
 
 #. R/MethodsList.R: gettext("See ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "See ?MethodsList. (This warning is shown once per session.)"
-msgstr "zobacz '?MethodsList'. (To ostrzeżenie jest pokazane raz na sesję.)"
+msgstr "Zobacz '?MethodsList'. (To ostrzeżenie jest pokazane raz na sesję.)"
 
 #. R/show.R: gettext("Signatures:", domain = "R-methods")
 #: R/show.R:0
@@ -1187,9 +1174,8 @@ msgstr ""
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead), domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "Use %s instead."
-msgstr "użyj wzamian %s."
+msgstr "Użyj w zamian %s."
 
 #. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
 #: R/MethodsList.R:0
@@ -1222,11 +1208,6 @@ msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 "Ostrzeżenie: Śledzenie tylko w przestrzeni nazw; aby przestać śledzić "
 "będziesz potrzebować:"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "[where=%s, where2=%s]"
-msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
@@ -2414,14 +2395,6 @@ msgstr "niepoprawna zamiana: pole %s klasy referencyjnej jest tylko do odczytu"
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
 "niepoprawna wartość z ogólnej funkcji %s, klasa %s, oczekiwano jednego z %s"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "is not updated for new inheritance information currently;"
-msgstr ""
-"podklasa %s klasy %s nie jest lokalna i nie może być zaktualizowana dla "
-"nowych dziedziczonych informacji; rozważ 'setClassUnion()'"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3697,6 +3670,12 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#, fuzzy
+#~ msgid "is not updated for new inheritance information currently;"
+#~ msgstr ""
+#~ "podklasa %s klasy %s nie jest lokalna i nie może być zaktualizowana dla "
+#~ "nowych dziedziczonych informacji; rozważ 'setClassUnion()'"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "** nie powinno się więcej wydarzyć!"

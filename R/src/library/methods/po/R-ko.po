@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-02-28 18:17\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -722,13 +722,6 @@ msgstr "%2$s내에서 %1$s를 위한 새로운 제네릭 함수를 생성합니�
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "데이터 부분은 일반적인 S4 객체에 대하여 정의되지 않았습니다"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid ""
-"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
-"force=TRUE);"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -738,11 +731,6 @@ msgid ""
 msgstr ""
 "클래스 %2$s내에 있는 슬롯 %1$s은 \"%3$s\"으로서 정의 (또는 상속)되었습니다, "
 "그러나 이는 클래스 %4$s내의 상속된 정의와 일치하지 않습니다"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -793,10 +781,13 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
 #, fuzzy
-msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgid ""
+"From .checkSubclasses(): subclass %s of class %s is not local and is not "
+"updated for new inheritance information currently;\n"
+"[where=%s, where2=%s]"
 msgstr ""
 "클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙"
 "니다"
@@ -1237,11 +1228,6 @@ msgstr ""
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
-msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2407,14 +2393,6 @@ msgstr ""
 #: R/RMethodUtils.R:0
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "is not updated for new inheritance information currently;"
-msgstr ""
-"클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해서 "
-"갱신될 수 없습니다; setClassUnion()를 이용해보세요"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3624,6 +3602,12 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "is not updated for new inheritance information currently;"
+#~ msgstr ""
+#~ "클래스 %2$s의 서브클래스 %1$s는 지역적이지 않으므로 새로운 상속정보에 대해"
+#~ "서 갱신될 수 없습니다; setClassUnion()를 이용해보세요"
 
 #~ msgid ""
 #~ "Note: the specification for S3 class %s in package %s seems equivalent to "

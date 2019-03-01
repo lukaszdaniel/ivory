@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-02-28 18:17\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -766,13 +766,6 @@ msgstr "Une nouvelle fonction générique est créée pour %s dans %s"
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "La partie 'data' n'est pas définie pour un objet général S4"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid ""
-"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
-"force=TRUE);"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -782,11 +775,6 @@ msgid ""
 msgstr ""
 "le slot \"%s\" de la classe %s est actuellement défini (ou hérité) comme \"%s"
 "\", conflits avec une définition héritée de la classe %s"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -840,10 +828,13 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
 #, fuzzy
-msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgid ""
+"From .checkSubclasses(): subclass %s of class %s is not local and is not "
+"updated for new inheritance information currently;\n"
+"[where=%s, where2=%s]"
 msgstr ""
 "Sous-classe indéfinie, %s, de la classe %s ; la définition n'est pas mise à "
 "jour "
@@ -1311,11 +1302,6 @@ msgstr "ceci n'est pas un nom de package : %s"
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
-msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2636,14 +2622,6 @@ msgstr ""
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr ""
 "valeur incorrecte pour la fonction générique %s, classe %s, mais attendu %s"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "is not updated for new inheritance information currently;"
-msgstr ""
-"La sous-classe %s de la classe %s n'est pas locale et ne peut être mise à "
-"jour pour une nouvelle information d'héritage ; considérez setClassUnion()"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -4051,6 +4029,12 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments formels de la fonction générique pour \"%s\" (%s) diffèrent de "
 "ceux de la fonction non générique à utiliser par défaut (%s)"
+
+#, fuzzy
+#~ msgid "is not updated for new inheritance information currently;"
+#~ msgstr ""
+#~ "La sous-classe %s de la classe %s n'est pas locale et ne peut être mise à "
+#~ "jour pour une nouvelle information d'héritage ; considérez setClassUnion()"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "** ne devrait plus se produire !"

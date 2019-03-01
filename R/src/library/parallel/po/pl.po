@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: fork.c:181
 #, c-format
@@ -112,7 +112,7 @@ msgstr "błąd zapisu"
 
 #: fork.c:771 fork.c:784
 msgid "file descriptor is too large for select()"
-msgstr ""
+msgstr "opis pliku jest zbyt duży dla funkcji 'select()'"
 
 #: fork.c:815
 #, c-format

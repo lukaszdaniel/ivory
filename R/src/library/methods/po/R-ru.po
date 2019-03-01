@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-02-28 18:17\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -753,13 +753,6 @@ msgstr "Создание новой общей функции для %s в %s"
 msgid "Data part ('.Data' slot) is undefined for general S4 object"
 msgstr "У общего S4 объекта не определена компонента данных"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid ""
-"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, "
-"force=TRUE);"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -769,11 +762,6 @@ msgid ""
 msgstr ""
 "слот %s в классе %s в данный момент определен (или наследован) как %s, "
 "конфликтуя с наследованным определением в классе %s"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -825,10 +813,13 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
+#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
 #, fuzzy
-msgid "From .checkSubclasses(): subclass %s of class %s is not local and"
+msgid ""
+"From .checkSubclasses(): subclass %s of class %s is not local and is not "
+"updated for new inheritance information currently;\n"
+"[where=%s, where2=%s]"
 msgstr "неопределенный подкласс %s класса \"%s\"; определение не обновлено"
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
@@ -1288,11 +1279,6 @@ msgstr "не является именем пакета: %s"
 #. R/trace.R: gettext("Warning: Tracing only in the namespace; to untrace you will need:", domain = "R-methods")
 #: R/trace.R:0
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
-msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-msgid "[where=%s, where2=%s]"
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
@@ -2553,14 +2539,6 @@ msgstr ""
 #, fuzzy
 msgid "invalid value from generic function %s, class %s, expected one of %s"
 msgstr "неверное значение из общей функции %s, класс %s, ожидалось %s"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s of class %s is not local and", "is not updated for new inheritance information currently;",     "\n[where=%s, where2=%s]")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid "is not updated for new inheritance information currently;"
-msgstr ""
-"подкласс %s класса %s не является локальным и не может быть обновлен; "
-"рассмотрите setClassUnion()"
 
 #. R/refClass.R: gettextf("local assignment to field name will not change the field:\n    %s\n Did you mean to use \"<<-\"? ( in method %s for class %s)",     paste(unlist(assigned$locals)[localsAreFields], collapse = "; "), methodName,     className)
 #: R/refClass.R:0
@@ -3929,6 +3907,12 @@ msgstr[1] ""
 msgstr[2] ""
 "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, "
 "используемых по умолчанию (%s)"
+
+#, fuzzy
+#~ msgid "is not updated for new inheritance information currently;"
+#~ msgstr ""
+#~ "подкласс %s класса %s не является локальным и не может быть обновлен; "
+#~ "рассмотрите setClassUnion()"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "** больше не должно случаться!"
