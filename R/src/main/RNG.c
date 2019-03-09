@@ -828,7 +828,7 @@ static R_INLINE double ru()
     return (floor(U*unif_rand()) + unif_rand())/U;
 }
 
-double R_unif_index_0(double dn)
+static double R_unif_index_0(double dn)
 {
     double cut = INT_MAX;
 
@@ -854,8 +854,9 @@ static double rbits(int bits)
 	int v1 = (int) floor(unif_rand() * 65536);
 	v = 65536 * v + v1;
     }
+    const int_least64_t one64 = 1L;
     // mask out the bits in the result that are not needed
-    return (double) (v & ((1L << bits) - 1));
+    return (double) (v & ((one64 << bits) - 1));
 }
 
 double R_unif_index(double dn)
@@ -871,3 +872,6 @@ double R_unif_index(double dn)
     do { dv = rbits(bits); } while (dn <= dv);
     return dv;
 }
+
+Sampletype R_sample_kind() { return Sample_kind; }
+

@@ -2930,14 +2930,14 @@ final value 2.338839
 > table(Iris$Sp[train])
 
  c  s  v 
-28 26 21 
+20 28 27 
 > ## your answer may differ
 > ##  c  s  v
 > ## 22 23 30
 > z <- lda(Sp ~ ., Iris, prior = c(1,1,1)/3, subset = train)
 > predict(z, Iris[-train, ])$class
- [1] s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c c c c c
-[39] c c c c c c c c v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+ [1] s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c c c c c c v
+[39] c c c c c c c c c c c c c c v v v v v v v v v v v v v v c v v v v v v v v
 Levels: c s v
 > ##  [1] s s s s s s s s s s s s s s s s s s s s s s s s s s s c c c
 > ## [31] c c c c c c c v c c c c v c c c c c c c c c c c c v v v v v
@@ -2952,19 +2952,19 @@ Prior probabilities of groups:
 
 Group means:
   Sepal.L. Sepal.W. Petal.L.
-c 5.878571 2.785714 4.278571
-s 4.950000 3.338462 1.457692
-v 6.504762 2.957143 5.500000
+c 5.975000 2.810000 4.395000
+s 4.978571 3.432143 1.460714
+v 6.748148 2.988889 5.637037
 
 Coefficients of linear discriminants:
                 LD1        LD2
-Sepal.L.  1.2555097 -0.2975141
-Sepal.W.  0.9085695  2.8401071
-Petal.L. -3.5502485  0.4380715
+Sepal.L.  1.1643015 0.68235619
+Sepal.W.  0.7945307 2.23093702
+Petal.L. -3.0421425 0.01236265
 
 Proportion of trace:
    LD1    LD2 
-0.9957 0.0043 
+0.9929 0.0071 
 > 
 > 
 > 
@@ -4256,8 +4256,8 @@ attr(,"label")
 > cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
 > z <- lda(train, cl)
 > predict(z, test)$class
- [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c v c c
-[39] c c c c c c c c c c c c v v v v v v v v v c v v v v v v v v v v v v v v v
+ [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c c c c
+[39] c c c c c c c c c c c c v v v v v v v v v v v v v v v v v c v v v v v v v
 Levels: c s v
 > 
 > 
@@ -4306,7 +4306,7 @@ Levels: c s v
 > cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
 > zq <- qda(train, cl)
 > predict(zq, test)$class
- [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c v c c
+ [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c v c c c c c
 [39] c c c c c c c c c c c c v v v v v v v v v v v v v v v v v v v v v v v v v
 Levels: c s v
 > 
@@ -4358,7 +4358,7 @@ Levels: c s v
 > cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
 > z <- qda(train, cl)
 > predict(z,test)$class
- [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c c c c v c c
+ [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c v c c c c c
 [39] c c c c c c c c c c c c v v v v v v v v v v v v v v v v v v v v v v v v v
 Levels: c s v
 > 
@@ -4602,14 +4602,13 @@ Initial Model:
 log10(perf) ~ syct + mmin + mmax + cach + chmin + chmax
 
 Final Model:
-log10(perf) ~ mmax + cach + chmax
+log10(perf) ~ syct + mmax + cach + chmax
 
 
-     Step Df  Deviance Resid. Df Resid. Dev       AIC
-1                             82   3.362324 -303.2538
-2  - syct  3 0.0445369        85   3.406861 -307.9379
-3  - mmin  3 0.1947053        88   3.601566 -308.3801
-4 - chmin  3 0.1924133        91   3.793980 -309.1755
+     Step Df   Deviance Resid. Df Resid. Dev       AIC
+1                              82   3.458189 -300.4425
+2 - chmin  3 0.02548983        85   3.483679 -305.7081
+3  - mmin  3 0.12039102        88   3.604070 -308.3106
 > 
 > example(birthwt)
 

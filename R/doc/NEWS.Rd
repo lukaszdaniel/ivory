@@ -298,6 +298,15 @@
 
       \item Performance of \code{substr()} and \code{substring()} has been
       improved.
+
+      \item \code{stopifnot()} has been simplified thanks to Suharto
+      Anggono's proposals to become considerably faster for cheap
+      expressions.
+
+      \item The default \sQuote{user agent} has been changed when
+      accessing \samp{http://} and \samp{https://} sites using
+      \samp{libcurl}.  (A site was found which caused \samp{libcurl} to
+      infinite-loop with the previous default.)
     }
   }
 
@@ -433,6 +442,11 @@
       \item \command{R CMD check} has more comprehensive checks on the
       \file{data} directory and the functioning of \code{data()} in a
       package.
+
+      \item \command{R CMD check} now checks
+      \command{autoconf}-generated \file{configure} files have their
+      corresponding source files, including optionally attempting to
+      regenerate them on platforms with \command{autoconf}.
     }
   }
 
@@ -737,6 +751,8 @@
 
       \item \code{setClassUnion()} no longer warns, but uses \code{message()}
       for now, when encountering \dQuote{non local} subclasses of class members.
+
+      \item \code{stopifnot(exprs = T)} no longer fails.
     }
   }
 }
