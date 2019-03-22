@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -115,6 +115,11 @@ msgstr " 'figs' はベクトルか 4 列の行列でなければなりません 
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr " 'figs' は少なくとも一つのスクリーンを指定しなければなりません "
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr " 'formula' が無いか不正確です "
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -431,6 +436,11 @@ msgstr " 従属変数は因子でなければなりません "
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr " z の次元が length(x)(-1) × length(y)(-1) ではありません "
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -442,6 +452,18 @@ msgstr " 丁度一つのシンボルタイプを指定しなければなりま�
 #: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr " formulaが無いか不正確です "
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr " 'formula' は丁度二つの変数を特定すべきです "
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula with cbind() must specify 1 categorical variable"
+msgstr " 'formula' は丁度二つの変数を特定すべきです "
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -822,9 +844,6 @@ msgstr[0] " 外れ値 (%s) は描かれません 箱型図 %d 中では "
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] " 引数 %s は使用されていません "
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr " 'formula' が無いか不正確です "
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

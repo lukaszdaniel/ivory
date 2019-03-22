@@ -307,6 +307,19 @@
       accessing \samp{http://} and \samp{https://} sites using
       \samp{libcurl}.  (A site was found which caused \samp{libcurl} to
       infinite-loop with the previous default.)
+
+      \item \code{sessionInfo()} now also contains \code{RNGkind()} and
+      prints it when it differs from the default; based on a proposal and
+      patch by Gabe Becker in \PR{17535}.
+      Also, \code{RNGversion(getRversion())} works directly.
+
+      \item \code{library()} and \code{require()} now allow more control
+      over handling search path conflicts when packages are
+      attached. The policy is controlled by the new
+      \code{conflicts.policy} option.
+
+      \item \code{barplot()} gets a formula method, thanks to a patch
+      proposal by Arni Magnusson in \PR{17521}.
     }
   }
 
@@ -367,7 +380,11 @@
       \env{R_INSTALL_STAGED}.  \command{R CMD INSTALL} has new options
       \option{--staged-install} and \option{--no-staged-install}, and
       packages can use the \samp{StagedInstall} field in their
-      \file{DESCRIPTION} file to opt out.
+      \file{DESCRIPTION} file to opt out.  (That opt-out is a temporary
+      measure which may be withdrawn in future.)
+
+      Staged installation requires either \option{--pkglock} or
+      \option{--lock}, one of which is used by default.
 
       \item The interpretation of source code with extension \file{.f}
       is changing.  Previously this denoted FORTRAN 77 code, but current
@@ -722,6 +739,19 @@
       \item \code{axTicks()} no longer returns small \dQuote{almost zero}
       numbers (in exponential format) instead of zero, fixing Ilario
       Gelmetti's \PR{17534}.
+
+      \item \code{isSymmetric(matrix(0, dimnames=list("A","b")))} is
+      \code{FALSE} again, as always documented.
+
+      \item The \code{cairo_pdf} graphics device (and other Cairo-based
+      devices) now clip correctly to the right and bottom border.
+
+      There was an off-by-one-pixel bug, reported by Lee Kelvin.
+
+      \item \code{as.roman(3) <= 2:4} and all other comparisons now work,
+      as do group \code{"Summary"} function calls such as
+      \code{max(as.roman(sample(20)))} and \code{as.roman(NA)}.  (Parly reported
+      by Bill Dunlap in \PR{17542}.)
     }
   }
 }
@@ -1258,7 +1288,7 @@
       avoid having the \command{R} process killed when macOS over-commits
       memory.
 
-      \item \code{sum(x)} and \code{sum(x1,x2,..,x<N>)} with many or
+      \item \code{sum(x)} and \code{sum(x1, x2, .., x<N>)} with many or
       long logical or integer vectors no longer overflows (and returns
       \code{NA} with a warning), but returns \code{double} numbers in
       such cases.
@@ -3332,7 +3362,7 @@
       variable \env{R_INTERACTIVE_DEVICE}.
 
       \item On Unix-like platforms which support the \command{getline} C
-      library function, \code{system(*,intern = TRUE)} no longer
+      library function, \code{system(*, intern = TRUE)} no longer
       truncates (output) lines longer than 8192 characters, thanks to
       Karl Millar. (\PR{16544})
 
@@ -3397,7 +3427,7 @@
 
       \item New string utilities \code{startsWith(x, prefix)} and
       \code{endsWith(x, suffix)}.  Also provide speedups for some
-      \code{grepl("^...",*)} uses (related to proposals in \PR{16490}).
+      \code{grepl("^...", *)} uses (related to proposals in \PR{16490}).
 
       \item Reference class finalizers run at exit, as well as on
       garbage collection.
@@ -3741,7 +3771,7 @@
     \itemize{
       \item \code{format.POSIXlt()} behaved incorrectly in \R 3.2.4.
       E.g.\sspace{}the output of
-      \code{format(as.POSIXlt(paste0(1940:2000,"-01-01"), tz = "CET"),
+      \code{format(as.POSIXlt(paste0(1940:2000, "-01-01"), tz = "CET"),
 	usetz = TRUE)} ended in two \code{"CEST"} time formats.
     }
   }

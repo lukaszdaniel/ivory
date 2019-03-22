@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1225,7 +1225,7 @@ msgstr ""
 msgid "A connection, specifically, %s, but invalid."
 msgstr ""
 
-#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid "Attaching package: %s"
@@ -1294,6 +1294,14 @@ msgstr "длины аргументов различаются"
 #: R/print.R:0
 msgid "Component %d"
 msgstr ""
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package), emsg, domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"Conflicts attaching package %s:\n"
+"%s"
+msgstr "Присоединяю пакет: %s"
 
 #. R/library.R: gettextf("DLL %s is already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -3008,6 +3016,15 @@ msgstr "norm '%s' сейчас всегда использует exact = FALSE"
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "не все элементы 'MARGIN' есть имена измерений"
 
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)
+#: R/namespace.R:0
+#, fuzzy
+msgid ""
+"not found in namespace %s: \n"
+"\n"
+"%s"
+msgstr "не загружаю пространство имен"
+
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
@@ -3066,6 +3083,11 @@ msgstr "только одиночный элемент можно заменит
 #: R/diag.R:0
 msgid "only matrix diagonals can be replaced"
 msgstr "только диагонали матрицы могут быть заменены"
+
+#. R/library.R: gettext("only one of 'include.only' and 'exclude' can be used")
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
+msgstr ""
 
 #. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
@@ -3232,6 +3254,11 @@ msgid ""
 "package or namespace load failed for %s:\n"
 " %s"
 msgstr "не удалась загрузка пакета/пространства имен для %s"
+
+#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
+#: R/library.R:0
+msgid "packageConflictError"
+msgstr ""
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
@@ -3454,6 +3481,11 @@ msgstr "выбраны не определенные колонки"
 #, fuzzy
 msgid "undefined exports: %s"
 msgstr "неопределенные экспорты:"
+
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
+msgstr ""
 
 #. R/grep.R: warning("unknown cost components ignored")
 #: R/grep.R:0

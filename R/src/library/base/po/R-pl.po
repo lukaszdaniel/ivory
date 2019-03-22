@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1125,7 +1125,7 @@ msgstr ""
 msgid "A connection, specifically, %s, but invalid."
 msgstr ""
 
-#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package), domain = "R-base")
 #: R/library.R:0
 msgid "Attaching package: %s"
 msgstr "Dołączanie pakietu: %s"
@@ -1192,6 +1192,14 @@ msgstr "Liczba zespolona: długości (%d, %d) różnią się"
 #: R/print.R:0
 msgid "Component %d"
 msgstr "Komponent %d:"
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package), emsg, domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"Conflicts attaching package %s:\n"
+"%s"
+msgstr "Dołączanie pakietu: %s"
 
 #. R/library.R: gettextf("DLL %s is already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -2850,6 +2858,15 @@ msgstr "norma '%s' aktualnie zawsze używa opcji 'exact = FALSE'"
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "nie wszystkie elementy 'MARGIN' są nazwami wymiarów"
 
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)
+#: R/namespace.R:0
+#, fuzzy
+msgid ""
+"not found in namespace %s: \n"
+"\n"
+"%s"
+msgstr "nie ładuję przestrzeni nazw"
+
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
@@ -2906,6 +2923,11 @@ msgstr "tylko pojedynczy element powinień być zamieniany"
 #: R/diag.R:0
 msgid "only matrix diagonals can be replaced"
 msgstr "tylko elementy diagonalne macierzy mogą zostać zastąpione"
+
+#. R/library.R: gettext("only one of 'include.only' and 'exclude' can be used")
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
+msgstr ""
 
 #. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
@@ -3070,6 +3092,11 @@ msgid ""
 msgstr ""
 "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s:\n"
 " %s"
+
+#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
+#: R/library.R:0
+msgid "packageConflictError"
+msgstr ""
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
@@ -3284,6 +3311,11 @@ msgstr "nie wybrano kolumn"
 #: R/namespace.R:0
 msgid "undefined exports: %s"
 msgstr "niezdefiniowane eksporty: %s"
+
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
+msgstr ""
 
 #. R/grep.R: warning("unknown cost components ignored")
 #: R/grep.R:0

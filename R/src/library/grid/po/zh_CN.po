@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 15:56+0100\n"
+"POT-Creation-Date: 2019-03-22 18:19+0100\n"
 "PO-Revision-Date: 2015-01-17 15:13+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -42,44 +42,44 @@ msgstr "无法弹到最上层的視窗(栅格和图像输出有混合？)"
 msgid "attempt to plot on null device"
 msgstr "不能在无效装置上画图"
 
-#: grid.c:1398
+#: grid.c:1400
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "需要设定布局"
 
-#: grid.c:1618
+#: grid.c:1620
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "找不到多边形的边(零宽度或是零高度？)"
 
-#: grid.c:1627
+#: grid.c:1629
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "找不到多边形的边"
 
-#: grid.c:1781
+#: grid.c:1783
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "至少需要两点才能画一个箭头"
 
-#: grid.c:2097
+#: grid.c:2102
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "用Xspline时不能有无限值的控制点"
 
-#: grid.c:2967
+#: grid.c:2982
 msgid "non-finite x or y in graphics path"
 msgstr "图形路径里x或y的值非限定"
 
-#: grid.c:3009
+#: grid.c:3026
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3482
+#: grid.c:3509
 msgid "invalid plotting symbol"
 msgstr "图画符号值不对"
 
-#: grid.c:3570
+#: grid.c:3597
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "无法修剪到旋转了的长方形上"

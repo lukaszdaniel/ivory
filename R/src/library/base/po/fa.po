@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 16:29+0100\n"
+"POT-Creation-Date: 2019-03-22 18:19+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -669,8 +669,8 @@ msgstr ""
 #: src/main/platform.c:2766 src/main/platform.c:2774 src/main/platform.c:2810
 #: src/main/platform.c:2852 src/main/platform.c:2942 src/main/print.c:242
 #: src/main/print.c:248 src/main/print.c:271 src/main/print.c:278
-#: src/main/print.c:285 src/main/random.c:464 src/main/random.c:468
-#: src/main/random.c:475 src/main/random.c:503 src/main/Rdynload.c:1368
+#: src/main/print.c:285 src/main/random.c:471 src/main/random.c:475
+#: src/main/random.c:482 src/main/random.c:510 src/main/Rdynload.c:1368
 #: src/main/saveload.c:2001 src/main/saveload.c:2043 src/main/saveload.c:2046
 #: src/main/saveload.c:2049 src/main/saveload.c:2161 src/main/saveload.c:2340
 #: src/main/saveload.c:2345 src/main/saveload.c:2348 src/main/saveload.c:2457
@@ -694,11 +694,11 @@ msgstr ""
 #: src/modules/internet/internet.c:470 src/modules/internet/internet.c:476
 #: src/modules/internet/internet.c:482 src/modules/internet/internet.c:485
 #: src/modules/internet/internet.c:489 src/modules/internet/internet.c:493
-#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:300
-#: src/modules/internet/libcurl.c:305 src/modules/internet/libcurl.c:308
-#: src/modules/internet/libcurl.c:480 src/modules/internet/libcurl.c:484
-#: src/modules/internet/libcurl.c:489 src/modules/internet/libcurl.c:492
-#: src/modules/internet/libcurl.c:496 src/modules/internet/libcurl.c:499
+#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:319
+#: src/modules/internet/libcurl.c:324 src/modules/internet/libcurl.c:327
+#: src/modules/internet/libcurl.c:499 src/modules/internet/libcurl.c:503
+#: src/modules/internet/libcurl.c:508 src/modules/internet/libcurl.c:511
+#: src/modules/internet/libcurl.c:515 src/modules/internet/libcurl.c:518
 #: src/modules/lapack/Lapack.c:171 src/modules/lapack/Lapack.c:276
 #: src/modules/lapack/Lapack.c:723 src/modules/lapack/Lapack.c:832
 #: src/modules/lapack/Lapack.c:894 src/modules/lapack/Lapack.c:1217
@@ -1735,7 +1735,7 @@ msgstr ""
 #: src/main/attrib.c:1175 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1888 src/main/envir.c:2016 src/main/envir.c:2076
 #: src/main/envir.c:2212 src/main/paste.c:74 src/main/paste.c:293
-#: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1802
+#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1802
 msgid "invalid first argument"
 msgstr ""
 
@@ -1931,7 +1931,7 @@ msgstr ""
 #: src/main/envir.c:3028 src/main/envir.c:3329 src/main/envir.c:3358
 #: src/main/envir.c:3379 src/main/envir.c:3402 src/main/envir.c:3436
 #: src/main/envir.c:3456 src/main/envir.c:3778 src/main/envir.c:3783
-#: src/main/eval.c:7667 src/main/objects.c:244 src/main/objects.c:252
+#: src/main/eval.c:7661 src/main/objects.c:244 src/main/objects.c:252
 #: src/main/saveload.c:2159 src/main/saveload.c:2455 src/main/serialize.c:3075
 msgid "use of NULL environment is defunct"
 msgstr ""
@@ -2022,7 +2022,7 @@ msgstr ""
 #: src/main/builtin.c:982 src/main/coerce.c:2648 src/main/coerce.c:2691
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
-#: src/main/eval.c:6733 src/main/eval.c:6880
+#: src/main/eval.c:6727 src/main/eval.c:6874
 msgid "'...' used in an incorrect context"
 msgstr ""
 
@@ -2036,7 +2036,7 @@ msgstr ""
 msgid "'%s' argument is missing"
 msgstr ""
 
-#: src/main/builtin.c:1041 src/main/eval.c:7258
+#: src/main/builtin.c:1041 src/main/eval.c:7252
 #, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr ""
@@ -2052,7 +2052,7 @@ msgstr ""
 msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1100 src/main/eval.c:7270 src/main/eval.c:7298
+#: src/main/builtin.c:1100 src/main/eval.c:7264 src/main/eval.c:7292
 msgid "'switch()' function with no alternatives"
 msgstr ""
 
@@ -2216,7 +2216,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr ""
 
-#: src/main/coerce.c:1579 src/main/eval.c:7671
+#: src/main/coerce.c:1579 src/main/eval.c:7665
 msgid "invalid environment"
 msgstr ""
 
@@ -3056,7 +3056,7 @@ msgstr ""
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr ""
 
-#: src/main/connections.c:5443 src/modules/internet/libcurl.c:948
+#: src/main/connections.c:5443 src/modules/internet/libcurl.c:967
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr ""
 
@@ -4419,7 +4419,7 @@ msgstr ""
 msgid "profiling requires 'pthread' support"
 msgstr ""
 
-#: src/main/eval.c:431 src/main/eval.c:7912
+#: src/main/eval.c:431 src/main/eval.c:7906
 msgid "setting profile timer failed"
 msgstr ""
 
@@ -4463,8 +4463,8 @@ msgid ""
 "evaluation is nested too deeply: infinite recursion / options(expressions=)?"
 msgstr ""
 
-#: src/main/eval.c:682 src/main/eval.c:6617 src/main/eval.c:6632
-#: src/main/eval.c:6650 src/main/eval.c:6821
+#: src/main/eval.c:682 src/main/eval.c:6611 src/main/eval.c:6626
+#: src/main/eval.c:6644 src/main/eval.c:6815
 msgid "trace: "
 msgstr ""
 
@@ -4478,7 +4478,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:745 src/main/eval.c:1846 src/main/eval.c:6672
+#: src/main/eval.c:745 src/main/eval.c:1846 src/main/eval.c:6666
 msgid "attempt to apply non-function"
 msgstr ""
 
@@ -4495,7 +4495,7 @@ msgstr ""
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1834 src/main/eval.c:2904 src/main/eval.c:5868
+#: src/main/eval.c:1834 src/main/eval.c:2904 src/main/eval.c:5862
 #, c-format
 msgid "argument %d is empty"
 msgstr ""
@@ -4538,7 +4538,7 @@ msgstr ""
 msgid "non-symbol loop variable"
 msgstr ""
 
-#: src/main/eval.c:2253 src/main/eval.c:6413
+#: src/main/eval.c:2253 src/main/eval.c:6407
 msgid "invalid 'for()' loop sequence"
 msgstr ""
 
@@ -4609,7 +4609,7 @@ msgstr ""
 msgid "dispatch error in group dispatch"
 msgstr ""
 
-#: src/main/eval.c:4179 src/main/eval.c:6792 src/main/seq.c:1012
+#: src/main/eval.c:4179 src/main/eval.c:6786 src/main/seq.c:1012
 #, c-format
 msgid "'%s' is not a '%s' function"
 msgstr ""
@@ -4622,169 +4622,169 @@ msgstr ""
 msgid "bad operation code"
 msgstr ""
 
-#: src/main/eval.c:5849 src/main/logic.c:283 src/main/logic.c:291
+#: src/main/eval.c:5843 src/main/logic.c:283 src/main/logic.c:291
 #, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr ""
 
-#: src/main/eval.c:5882
+#: src/main/eval.c:5876
 #, c-format
 msgid "argument %d is missing"
 msgstr ""
 
-#: src/main/eval.c:6255
+#: src/main/eval.c:6249
 msgid "bytecode version mismatch; using eval"
 msgstr ""
 
-#: src/main/eval.c:6261
+#: src/main/eval.c:6255
 msgid "bytecode version is too old"
 msgstr ""
 
-#: src/main/eval.c:6262
+#: src/main/eval.c:6256
 msgid "bytecode version is too new"
 msgstr ""
 
-#: src/main/eval.c:6302
+#: src/main/eval.c:6296
 msgid "byte code version mismatch"
 msgstr ""
 
-#: src/main/eval.c:6529
+#: src/main/eval.c:6523
 msgid "invalid sequence argument in 'for()' loop"
 msgstr ""
 
-#: src/main/eval.c:6646
+#: src/main/eval.c:6640
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:6662 src/main/names.c:1337
+#: src/main/eval.c:6656 src/main/names.c:1337
 #, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr ""
 
-#: src/main/eval.c:6779 src/main/eval.c:7165 src/main/eval.c:7209
+#: src/main/eval.c:6773 src/main/eval.c:7159 src/main/eval.c:7203
 msgid "bad function"
 msgstr ""
 
-#: src/main/eval.c:7261
+#: src/main/eval.c:7255
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:7267 src/main/eval.c:7292
+#: src/main/eval.c:7261 src/main/eval.c:7286
 msgid "bad numeric 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:7273
+#: src/main/eval.c:7267
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 
-#: src/main/eval.c:7276
+#: src/main/eval.c:7270
 msgid "bad character 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:7278
+#: src/main/eval.c:7272
 msgid "bad 'switch()' names"
 msgstr ""
 
-#: src/main/eval.c:7392
+#: src/main/eval.c:7386
 msgid "unknown instruction code"
 msgstr ""
 
-#: src/main/eval.c:7408
+#: src/main/eval.c:7402
 msgid "cannot find index for threaded code address"
 msgstr ""
 
-#: src/main/eval.c:7452
+#: src/main/eval.c:7446
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
 msgstr ""
 
-#: src/main/eval.c:7454
+#: src/main/eval.c:7448
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
 msgstr ""
 
-#: src/main/eval.c:7535
+#: src/main/eval.c:7529
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7537
+#: src/main/eval.c:7531
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7539
+#: src/main/eval.c:7533
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.c:7540
+#: src/main/eval.c:7534
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7543
+#: src/main/eval.c:7537
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7545
+#: src/main/eval.c:7539
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.c:7575 src/main/eval.c:7586
+#: src/main/eval.c:7569 src/main/eval.c:7580
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.c:7600
+#: src/main/eval.c:7594
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.c:7664
+#: src/main/eval.c:7658
 msgid "invalid body"
 msgstr ""
 
-#: src/main/eval.c:7684
+#: src/main/eval.c:7678
 msgid "invalid symbol"
 msgstr ""
 
-#: src/main/eval.c:7728
+#: src/main/eval.c:7722
 msgid "'code' argument is not a byte code object"
 msgstr ""
 
-#: src/main/eval.c:7758 src/main/eval.c:7765
+#: src/main/eval.c:7752 src/main/eval.c:7759
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr ""
 
-#: src/main/eval.c:7799 src/main/eval.c:7818 src/main/eval.c:7852
+#: src/main/eval.c:7793 src/main/eval.c:7812 src/main/eval.c:7846
 msgid "constant buffer must be a generic vector"
 msgstr ""
 
-#: src/main/eval.c:7822
+#: src/main/eval.c:7816
 #, c-format
 msgid "bad '%s' value"
 msgstr ""
 
-#: src/main/eval.c:7854
+#: src/main/eval.c:7848
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.c:7892
+#: src/main/eval.c:7886
 msgid "profile timer is in use"
 msgstr ""
 
-#: src/main/eval.c:7894
+#: src/main/eval.c:7888
 msgid "already byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:7930
+#: src/main/eval.c:7924
 msgid "no byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:7946 src/main/eval.c:7950 src/main/eval.c:7954
+#: src/main/eval.c:7940 src/main/eval.c:7944 src/main/eval.c:7948
 msgid "byte code profiling is not supported in this build"
 msgstr ""
 
-#: src/main/eval.c:8004
+#: src/main/eval.c:7998
 msgid "parse error"
 msgstr ""
 
@@ -6935,27 +6935,27 @@ msgstr ""
 msgid "NA values produced"
 msgstr ""
 
-#: src/main/random.c:439
+#: src/main/random.c:446
 msgid "NA values in probability vector"
 msgstr ""
 
-#: src/main/random.c:441
+#: src/main/random.c:448
 msgid "negative probability"
 msgstr ""
 
-#: src/main/random.c:448
+#: src/main/random.c:455
 msgid "too few positive probabilities"
 msgstr ""
 
-#: src/main/random.c:477 src/main/random.c:505
+#: src/main/random.c:484 src/main/random.c:512
 msgid "cannot take a sample larger than the population when 'replace = FALSE'"
 msgstr ""
 
-#: src/main/random.c:484
+#: src/main/random.c:491
 msgid "incorrect number of probabilities"
 msgstr ""
 
-#: src/main/random.c:523
+#: src/main/random.c:530
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr ""
 
@@ -8840,7 +8840,7 @@ msgid "there must be at least three control points"
 msgstr ""
 
 #: src/modules/internet/internet.c:109 src/modules/internet/internet.c:240
-#: src/modules/internet/libcurl.c:838
+#: src/modules/internet/libcurl.c:857
 msgid "can only open URLs for reading"
 msgstr ""
 
@@ -8856,16 +8856,16 @@ msgstr ""
 
 #: src/modules/internet/internet.c:354 src/modules/internet/internet.c:358
 #: src/modules/internet/internet.c:365 src/modules/internet/internet.c:388
-#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:897
-#: src/modules/internet/libcurl.c:901 src/modules/internet/libcurl.c:908
-#: src/modules/internet/libcurl.c:922 src/modules/internet/libcurl.c:931
-#: src/modules/internet/libcurl.c:941
+#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:916
+#: src/modules/internet/libcurl.c:920 src/modules/internet/libcurl.c:927
+#: src/modules/internet/libcurl.c:941 src/modules/internet/libcurl.c:950
+#: src/modules/internet/libcurl.c:960
 msgid "allocation of url connection failed"
 msgstr ""
 
 #: src/modules/internet/internet.c:500 src/modules/internet/internet.c:598
-#: src/modules/internet/internet.c:708 src/modules/internet/libcurl.c:570
-#: src/modules/internet/libcurl.c:583
+#: src/modules/internet/internet.c:708 src/modules/internet/libcurl.c:589
+#: src/modules/internet/libcurl.c:602
 msgid "Download progress"
 msgstr ""
 
@@ -8881,31 +8881,31 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr ""
 
 #: src/modules/internet/internet.c:558 src/modules/internet/internet.c:686
-#: src/modules/internet/libcurl.c:601
+#: src/modules/internet/libcurl.c:620
 #, c-format
 msgid "Trying URL '%s'\n"
 msgstr ""
 
 #: src/modules/internet/internet.c:624 src/modules/internet/internet.c:735
-#: src/modules/internet/libcurl.c:416
+#: src/modules/internet/libcurl.c:435
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
 #: src/modules/internet/internet.c:645 src/modules/internet/internet.c:756
-#: src/modules/internet/libcurl.c:651
+#: src/modules/internet/libcurl.c:670
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr ""
 
 #: src/modules/internet/internet.c:647 src/modules/internet/internet.c:759
-#: src/modules/internet/libcurl.c:653
+#: src/modules/internet/libcurl.c:672
 #, c-format
 msgid "Downloaded %d KB"
 msgstr ""
 
 #: src/modules/internet/internet.c:649 src/modules/internet/internet.c:761
-#: src/modules/internet/libcurl.c:655
+#: src/modules/internet/libcurl.c:674
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
@@ -8913,13 +8913,13 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/modules/internet/internet.c:660 src/modules/internet/internet.c:772
-#: src/modules/internet/libcurl.c:660
+#: src/modules/internet/libcurl.c:679
 #, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr ""
 
 #: src/modules/internet/internet.c:665 src/modules/internet/internet.c:778
-#: src/modules/internet/libcurl.c:687
+#: src/modules/internet/libcurl.c:706
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr ""
@@ -8935,7 +8935,7 @@ msgid "cannot open URL '%s': %s status was '%d %s'"
 msgstr ""
 
 #: src/modules/internet/internet.c:825 src/modules/internet/internet.c:1001
-#: src/modules/internet/libcurl.c:446
+#: src/modules/internet/libcurl.c:465
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
@@ -8943,7 +8943,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/modules/internet/internet.c:829 src/modules/internet/internet.c:1003
-#: src/modules/internet/libcurl.c:449
+#: src/modules/internet/libcurl.c:468
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
 msgid_plural "Content type '%s' length %d bytes (%d KB)"
@@ -8951,7 +8951,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/modules/internet/internet.c:833 src/modules/internet/internet.c:1005
-#: src/modules/internet/libcurl.c:452
+#: src/modules/internet/libcurl.c:471
 #, c-format
 msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
@@ -8983,90 +8983,90 @@ msgstr ""
 msgid "URL '%s': status was '%s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:296
+#: src/modules/internet/libcurl.c:315
 msgid "'curlGetHeaders()' function is not supported on this platform"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:328
+#: src/modules/internet/libcurl.c:347
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:330
+#: src/modules/internet/libcurl.c:349
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
 "\tunable to access SSL/TLS CA certificates\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:332
+#: src/modules/internet/libcurl.c:351
 #, c-format
 msgid "libcurl error code %d\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:395
+#: src/modules/internet/libcurl.c:414
 #, c-format
 msgid "Content length %0.0f byte (%0.1f MB)"
 msgid_plural "Content length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:398
+#: src/modules/internet/libcurl.c:417
 #, c-format
 msgid "Content length %d byte (%d KB)"
 msgid_plural "Content length %d bytes (%d KB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:401
+#: src/modules/internet/libcurl.c:420
 #, c-format
 msgid "Content length %d byte"
 msgid_plural "Content length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:470
+#: src/modules/internet/libcurl.c:489
 msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:486
+#: src/modules/internet/libcurl.c:505
 msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:506 src/modules/internet/libcurl.c:524
+#: src/modules/internet/libcurl.c:525 src/modules/internet/libcurl.c:543
 msgid "out of memory"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:552
+#: src/modules/internet/libcurl.c:571
 #, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:773
+#: src/modules/internet/libcurl.c:636 src/modules/internet/libcurl.c:792
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:683
+#: src/modules/internet/libcurl.c:702
 msgid "cannot download any files"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:684
+#: src/modules/internet/libcurl.c:703
 msgid "some files were not downloaded"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:689
+#: src/modules/internet/libcurl.c:708
 #, c-format
 msgid "download from '%s' failed"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:827
+#: src/modules/internet/libcurl.c:846
 msgid "cannot read from connection"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:868
+#: src/modules/internet/libcurl.c:887
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr ""

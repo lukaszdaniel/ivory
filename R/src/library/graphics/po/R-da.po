@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -106,6 +106,11 @@ msgstr ""
 #. R/screen.R: stop("'figs' must specify at least one screen")
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
+msgstr ""
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
 msgstr ""
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
@@ -416,6 +421,11 @@ msgstr ""
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr ""
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -426,6 +436,16 @@ msgstr ""
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
 #: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
+msgstr ""
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr ""
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+msgid "formula with cbind() must specify 1 categorical variable"
 msgstr ""
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))

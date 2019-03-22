@@ -758,7 +758,7 @@ function(x, ...)
     if(length(functions_in_usages_not_in_code)) {
         for(fname in names(functions_in_usages_not_in_code)) {
             writeLines(gettextf("Functions or methods with usage in documentation object %s but not in code:", sQuote(fname), domain = "R-tools"))
-            .pretty_print(unique(functions_in_usages_not_in_code[[fname]]))
+            .pretty_print(sQuote(unique(functions_in_usages_not_in_code[[fname]])))
             writeLines("")
         }
     }
@@ -768,7 +768,7 @@ function(x, ...)
     if(length(data_sets_in_usages_not_in_code)) {
         for(fname in names(data_sets_in_usages_not_in_code)) {
             writeLines(gettextf("Data with usage in documentation object %s but not in code:", sQuote(fname), domain = "R-tools"))
-            .pretty_print(unique(data_sets_in_usages_not_in_code[[fname]]))
+            .pretty_print(sQuote(unique(data_sets_in_usages_not_in_code[[fname]])))
             writeLines("")
         }
     }
@@ -2496,7 +2496,7 @@ function(x, ...)
 
     report_S3_methods_not_registered <-
         config_val_to_logical(Sys.getenv("_R_CHECK_S3_METHODS_NOT_REGISTERED_",
-                                         "FALSE"))
+                                         "TRUE"))
 
     c(as.character(unlist(lapply(x, .fmt))),
       if(report_S3_methods_not_registered &&
@@ -2596,6 +2596,11 @@ function(package, dir, lib.loc = NULL)
 
     replace_funs <-
         c(replace_funs, grep("<-", objects_in_code, value = TRUE))
+    ## Drop %xxx% binops.
+    ## Spotted by Hugh Parsonage <hugh.parsonage@gmail.com>.
+    replace_funs <-
+        replace_funs[!(startsWith(replace_funs, "%") &
+                       endsWith(replace_funs, "%"))]
 
     .check_last_formal_arg <- function(f) {
         arg_names <- names(formals(f))

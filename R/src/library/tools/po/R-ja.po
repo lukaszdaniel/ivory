@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:20\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1823,10 +1823,10 @@ msgstr ""
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
 
-#. R/check.R: gettext("Found the following additional warnings:\n", domain = "R-tools")
+#. R/check.R: gettext("Found the following additional notes/warnings:\n", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "Found the following additional warnings:"
+msgid "Found the following additional notes/warnings:"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
@@ -1893,6 +1893,13 @@ msgid "Found the following non-empty subdirectories of 'inst' also used by R:"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
+#. R/check.R: gettext("Found the following notes/warnings:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following notes/warnings:"
+msgstr ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
+
 #. R/check.R: gettext("Found the following possibly unsafe calls:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -1930,13 +1937,6 @@ msgstr ""
 #: R/check.R:0
 msgid "Found the following sources/headers with CR or CRLF line endings:"
 msgstr ""
-
-#. R/check.R: gettext("Found the following warnings:", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Found the following warnings:"
-msgstr ""
-" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
@@ -2662,6 +2662,12 @@ msgstr " 変数 '%s' 中に non-portable フラグ: "
 #, fuzzy
 msgid "Non-portable flags in variable %s:"
 msgstr " 変数 '%s' 中に non-portable フラグ: "
+
+#. R/check.R: gettext("Non-staged installation was used", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Non-staged installation was used"
+msgstr " パッケージが特定できません "
 
 #. R/QC.R: gettext("Non-standard license specification:", domain = "R-tools")
 #: R/QC.R:0
@@ -5932,6 +5938,11 @@ msgstr ""
 msgid "not installing file %s"
 msgstr " 以下にインストール中: "
 
+#. R/install.R: message("not using staged install with --libs-only")
+#: R/install.R:0
+msgid "not using staged install with --libs-only"
+msgstr ""
+
 #. R/install.R: message("only one architecture so ignoring '--merge-multiarch'", domain = "R-tools")
 #: R/install.R:0
 msgid "only one architecture so ignoring '--merge-multiarch'"
@@ -6154,6 +6165,12 @@ msgstr ""
 #: R/install.R:0
 msgid "resaving rda files"
 msgstr ""
+
+#. R/install.R: message("  restoration failed\n")
+#: R/install.R:0
+#, fuzzy
+msgid "restoration failed"
+msgstr " '%s' のロードに失敗しました "
 
 #. R/install.R: gettextf("restoring previous package directory %s", sQuote(pkgdir))
 #: R/install.R:0
@@ -6385,9 +6402,9 @@ msgstr " ソースリストには全ての要素の名前が含まれていな�
 msgid "source must be an environment or a list"
 msgstr " ソースは環境またはリストでなければなりません "
 
-#. R/install.R: stop("staged install is only possible with locking")
+#. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
-msgid "staged install is only possible with locking"
+msgid "staged installation is only possible with locking"
 msgstr ""
 
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
@@ -6648,6 +6665,18 @@ msgstr " 実行中 "
 msgid "using log directory %s"
 msgstr " ディレクトリ '%s' を生成することが出来ません "
 
+#. R/install.R: gettext("using non-staged installation", domain = "R-tools")
+#: R/install.R:0
+#, fuzzy
+msgid "using non-staged installation"
+msgstr " 以下のパッケージ化されたインストール "
+
+#. R/install.R: gettext("using non-staged installation via StagedInstall field", domain = "R-tools")
+#: R/install.R:0
+#, fuzzy
+msgid "using non-staged installation via StagedInstall field"
+msgstr " まがい物(fake)インストールの構築は許されていません "
+
 #. R/check.R: gettextf("using option %s", sQuote(opts), domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -6670,6 +6699,12 @@ msgstr ""
 #, fuzzy
 msgid "using session charset: %s"
 msgstr " 回帰テストを実行中 "
+
+#. R/install.R: gettext("using staged installation", domain = "R-tools")
+#: R/install.R:0
+#, fuzzy
+msgid "using staged installation"
+msgstr " 以下のパッケージ化されたインストール "
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "A connection, specifically, %s, but invalid."
 msgstr ""
 
-#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package), domain = "R-base")
 #: R/library.R:0
 msgid "Attaching package: %s"
 msgstr ""
@@ -1124,6 +1124,13 @@ msgstr ""
 #. R/print.R: gettextf("Component %d", seq.int(ll), domain = "R-base")
 #: R/print.R:0
 msgid "Component %d"
+msgstr ""
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package), emsg, domain = "R-base")
+#: R/library.R:0
+msgid ""
+"Conflicts attaching package %s:\n"
+"%s"
 msgstr ""
 
 #. R/library.R: gettextf("DLL %s is already loaded", sQuote(chname1))
@@ -2715,6 +2722,14 @@ msgstr ""
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr ""
 
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)
+#: R/namespace.R:0
+msgid ""
+"not found in namespace %s: \n"
+"\n"
+"%s"
+msgstr ""
+
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
@@ -2769,6 +2784,11 @@ msgstr ""
 #. R/diag.R: stop("only matrix diagonals can be replaced")
 #: R/diag.R:0
 msgid "only matrix diagonals can be replaced"
+msgstr ""
+
+#. R/library.R: gettext("only one of 'include.only' and 'exclude' can be used")
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr ""
 
 #. R/solve.R: stop("only square matrices can be inverted")
@@ -2913,6 +2933,11 @@ msgstr ""
 msgid ""
 "package or namespace load failed for %s:\n"
 " %s"
+msgstr ""
+
+#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
+#: R/library.R:0
+msgid "packageConflictError"
 msgstr ""
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
@@ -3115,6 +3140,11 @@ msgstr ""
 #. R/namespace.R: gettextf("undefined exports: %s", undef)
 #: R/namespace.R:0
 msgid "undefined exports: %s"
+msgstr ""
+
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
 msgstr ""
 
 #. R/grep.R: warning("unknown cost components ignored")

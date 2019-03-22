@@ -338,7 +338,8 @@ inRbuildignore <- function(files, pkgdir) {
                 if (basename(vigns$dir) == "vignettes") {
                     ## inst may not yet exist
                     dir.create(doc_dir, recursive = TRUE, showWarnings = FALSE)
-                    tocopy <- c(vigns$docs, vigns$outputs, unlist(vigns$sources))
+                    tocopy <- unique(c(vigns$docs, vigns$outputs,
+                                       unlist(vigns$sources)))
                     copied <- file.copy(tocopy, doc_dir, copy.date = TRUE)
                     if (!all(copied)) {
 			warning(sprintf(ngettext(sum(!copied),"%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.","%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.", domain = "R-tools"), sQuote("inst/doc"), strwrap(paste(sQuote(basename(tocopy[!copied])), collapse=", "), indent = 4, exdent = 2)), call. = FALSE, domain = NA)

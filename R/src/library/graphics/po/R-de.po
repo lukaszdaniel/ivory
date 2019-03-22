@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -120,6 +120,11 @@ msgstr "'figs' muss ein Vektor oder eine Matrix mit 4 Spalten sein"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs' muss zumindet einen Screen angeben"
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' fehlt oder fehlerhaft"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -438,6 +443,11 @@ msgstr "abhängige Variable sollte ein Faktor sein"
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr "Dimensionen von z sind nicht length(x)(-1) mal length(y)(-1)"
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -449,6 +459,18 @@ msgstr "genau ein Symboltyp muss angegeben werden"
 #: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr "'formula' fehlt oder fehlerhaft"
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr "'formula' sollte genau zwei Variablen spezifizieren"
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula with cbind() must specify 1 categorical variable"
+msgstr "'formula' sollte genau zwei Variablen spezifizieren"
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -832,9 +854,6 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "Argument (%s) wird nicht benutzt"
 msgstr[1] "Argumente (%s) werden nicht benutzt"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula' fehlt oder fehlerhaft"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

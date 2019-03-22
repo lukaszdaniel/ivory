@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 15:56+0100\n"
+"POT-Creation-Date: 2019-03-22 18:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,39 +38,39 @@ msgstr ""
 msgid "attempt to plot on null device"
 msgstr ""
 
-#: grid.c:1398
+#: grid.c:1400
 msgid "there is no layout defined"
 msgstr ""
 
-#: grid.c:1618
+#: grid.c:1620
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 
-#: grid.c:1627
+#: grid.c:1629
 msgid "polygon edge not found"
 msgstr ""
 
-#: grid.c:1781
+#: grid.c:1783
 msgid "require at least two points to draw arrow"
 msgstr ""
 
-#: grid.c:2097
+#: grid.c:2102
 msgid "non-finite control point in Xspline"
 msgstr ""
 
-#: grid.c:2967
+#: grid.c:2982
 msgid "non-finite x or y in graphics path"
 msgstr ""
 
-#: grid.c:3009
+#: grid.c:3026
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3482
+#: grid.c:3509
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.c:3570
+#: grid.c:3597
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 16:29+0100\n"
+"POT-Creation-Date: 2019-03-22 18:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -700,8 +700,8 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/platform.c:2766 src/main/platform.c:2774 src/main/platform.c:2810
 #: src/main/platform.c:2852 src/main/platform.c:2942 src/main/print.c:242
 #: src/main/print.c:248 src/main/print.c:271 src/main/print.c:278
-#: src/main/print.c:285 src/main/random.c:464 src/main/random.c:468
-#: src/main/random.c:475 src/main/random.c:503 src/main/Rdynload.c:1368
+#: src/main/print.c:285 src/main/random.c:471 src/main/random.c:475
+#: src/main/random.c:482 src/main/random.c:510 src/main/Rdynload.c:1368
 #: src/main/saveload.c:2001 src/main/saveload.c:2043 src/main/saveload.c:2046
 #: src/main/saveload.c:2049 src/main/saveload.c:2161 src/main/saveload.c:2340
 #: src/main/saveload.c:2345 src/main/saveload.c:2348 src/main/saveload.c:2457
@@ -725,11 +725,11 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/modules/internet/internet.c:470 src/modules/internet/internet.c:476
 #: src/modules/internet/internet.c:482 src/modules/internet/internet.c:485
 #: src/modules/internet/internet.c:489 src/modules/internet/internet.c:493
-#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:300
-#: src/modules/internet/libcurl.c:305 src/modules/internet/libcurl.c:308
-#: src/modules/internet/libcurl.c:480 src/modules/internet/libcurl.c:484
-#: src/modules/internet/libcurl.c:489 src/modules/internet/libcurl.c:492
-#: src/modules/internet/libcurl.c:496 src/modules/internet/libcurl.c:499
+#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:319
+#: src/modules/internet/libcurl.c:324 src/modules/internet/libcurl.c:327
+#: src/modules/internet/libcurl.c:499 src/modules/internet/libcurl.c:503
+#: src/modules/internet/libcurl.c:508 src/modules/internet/libcurl.c:511
+#: src/modules/internet/libcurl.c:515 src/modules/internet/libcurl.c:518
 #: src/modules/lapack/Lapack.c:171 src/modules/lapack/Lapack.c:276
 #: src/modules/lapack/Lapack.c:723 src/modules/lapack/Lapack.c:832
 #: src/modules/lapack/Lapack.c:894 src/modules/lapack/Lapack.c:1217
@@ -1812,7 +1812,7 @@ msgstr "długość 'dimnames' [%d] nie jest równa stopniowi tablicy"
 #: src/main/attrib.c:1175 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1888 src/main/envir.c:2016 src/main/envir.c:2076
 #: src/main/envir.c:2212 src/main/paste.c:74 src/main/paste.c:293
-#: src/main/random.c:473 src/main/random.c:502 src/main/unique.c:1802
+#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1802
 msgid "invalid first argument"
 msgstr "niepoprawny pierwszy argument"
 
@@ -2013,7 +2013,7 @@ msgstr "podany rozmiar wektora jest zbyt duży"
 #: src/main/envir.c:3028 src/main/envir.c:3329 src/main/envir.c:3358
 #: src/main/envir.c:3379 src/main/envir.c:3402 src/main/envir.c:3436
 #: src/main/envir.c:3456 src/main/envir.c:3778 src/main/envir.c:3783
-#: src/main/eval.c:7667 src/main/objects.c:244 src/main/objects.c:252
+#: src/main/eval.c:7661 src/main/objects.c:244 src/main/objects.c:252
 #: src/main/saveload.c:2159 src/main/saveload.c:2455 src/main/serialize.c:3075
 msgid "use of NULL environment is defunct"
 msgstr "użycie środowiska NULL jest przestarzałe"
@@ -2104,7 +2104,7 @@ msgstr "błędna długość dla argumentu '%s'"
 #: src/main/builtin.c:982 src/main/coerce.c:2648 src/main/coerce.c:2691
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
-#: src/main/eval.c:6733 src/main/eval.c:6880
+#: src/main/eval.c:6727 src/main/eval.c:6874
 msgid "'...' used in an incorrect context"
 msgstr "'...' użyte w złym kontekście"
 
@@ -2118,7 +2118,7 @@ msgstr "powtórzone wartości domyślne w 'switch': '%s' oraz '%s'"
 msgid "'%s' argument is missing"
 msgstr "brakuje argumentu '%s'"
 
-#: src/main/builtin.c:1041 src/main/eval.c:7258
+#: src/main/builtin.c:1041 src/main/eval.c:7252
 #, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "argument '%s' musi być wektorem o długości 1"
@@ -2136,7 +2136,7 @@ msgstr ""
 msgid "empty alternative in numeric 'switch()' function"
 msgstr "pusta alternatywa w liczbowej operacji 'switch()'"
 
-#: src/main/builtin.c:1100 src/main/eval.c:7270 src/main/eval.c:7298
+#: src/main/builtin.c:1100 src/main/eval.c:7264 src/main/eval.c:7292
 msgid "'switch()' function with no alternatives"
 msgstr "funkcja 'switch()' nie posiada alternatyw"
 
@@ -2307,7 +2307,7 @@ msgstr "uszkodzony czynnik"
 msgid "list argument expected"
 msgstr "oczekiwano listy argumentów"
 
-#: src/main/coerce.c:1579 src/main/eval.c:7671
+#: src/main/coerce.c:1579 src/main/eval.c:7665
 msgid "invalid environment"
 msgstr "niepoprawne środowisko"
 
@@ -3167,7 +3167,7 @@ msgstr "adresy https:// nie są wspierane przez tę metodę"
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "adresy https:// nie są wspierane przez metodę \"internal\""
 
-#: src/main/connections.c:5443 src/modules/internet/libcurl.c:948
+#: src/main/connections.c:5443 src/modules/internet/libcurl.c:967
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr ""
 "funkcja 'url(method = \"libcurl\")' nie jest wspierana na tej platformie"
@@ -4569,7 +4569,7 @@ msgstr "nie można utworzyć wątku optymalizacji"
 msgid "profiling requires 'pthread' support"
 msgstr ""
 
-#: src/main/eval.c:431 src/main/eval.c:7912
+#: src/main/eval.c:431 src/main/eval.c:7906
 msgid "setting profile timer failed"
 msgstr "ustawienie czasomierza profilu nie powiodło się"
 
@@ -4621,8 +4621,8 @@ msgstr ""
 "obliczanie jest zagnieżdżone zbyt głęboko: nieskończona rekurencja / "
 "options(expressions=)?"
 
-#: src/main/eval.c:682 src/main/eval.c:6617 src/main/eval.c:6632
-#: src/main/eval.c:6650 src/main/eval.c:6821
+#: src/main/eval.c:682 src/main/eval.c:6611 src/main/eval.c:6626
+#: src/main/eval.c:6644 src/main/eval.c:6815
 msgid "trace: "
 msgstr "ślad:"
 
@@ -4636,7 +4636,7 @@ msgstr "vis: specjalny %s\n"
 msgid "vis: builtin %s\n"
 msgstr "vis: wbudowany %s\n"
 
-#: src/main/eval.c:745 src/main/eval.c:1846 src/main/eval.c:6672
+#: src/main/eval.c:745 src/main/eval.c:1846 src/main/eval.c:6666
 msgid "attempt to apply non-function"
 msgstr "próba zastosowania nie-funkcji"
 
@@ -4653,7 +4653,7 @@ msgstr "debugowanie w:"
 msgid "exiting from: "
 msgstr "wychodzenie z:"
 
-#: src/main/eval.c:1834 src/main/eval.c:2904 src/main/eval.c:5868
+#: src/main/eval.c:1834 src/main/eval.c:2904 src/main/eval.c:5862
 #, c-format
 msgid "argument %d is empty"
 msgstr "argument %d jest pusty"
@@ -4696,7 +4696,7 @@ msgstr "argument ma długość 0"
 msgid "non-symbol loop variable"
 msgstr "niesymboliczna zmienna pętli"
 
-#: src/main/eval.c:2253 src/main/eval.c:6413
+#: src/main/eval.c:2253 src/main/eval.c:6407
 msgid "invalid 'for()' loop sequence"
 msgstr "niepoprawna sekwencja pętli 'for()'"
 
@@ -4767,7 +4767,7 @@ msgstr "Niezgodne metody (\"%s\", \"%s\") w \"%s\""
 msgid "dispatch error in group dispatch"
 msgstr "błąd wysyłania w grupowej wysyłce"
 
-#: src/main/eval.c:4179 src/main/eval.c:6792 src/main/seq.c:1012
+#: src/main/eval.c:4179 src/main/eval.c:6786 src/main/seq.c:1012
 #, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "'%s' nie jest funkcją '%s'"
@@ -4780,51 +4780,51 @@ msgstr "przepełnienie stosu strony"
 msgid "bad operation code"
 msgstr "błędny kod operacji"
 
-#: src/main/eval.c:5849 src/main/logic.c:283 src/main/logic.c:291
+#: src/main/eval.c:5843 src/main/logic.c:283 src/main/logic.c:291
 #, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr "błędny typ '%s' w 'x %s y'"
 
-#: src/main/eval.c:5882
+#: src/main/eval.c:5876
 #, c-format
 msgid "argument %d is missing"
 msgstr "brakuje %d argumentu"
 
-#: src/main/eval.c:6255
+#: src/main/eval.c:6249
 msgid "bytecode version mismatch; using eval"
 msgstr "niezgodność wersji kodu bajtowego; używanie 'eval'"
 
-#: src/main/eval.c:6261
+#: src/main/eval.c:6255
 msgid "bytecode version is too old"
 msgstr "wersja kodu bajtowego jest zbyt stara"
 
-#: src/main/eval.c:6262
+#: src/main/eval.c:6256
 msgid "bytecode version is too new"
 msgstr "wersja kodu bajtowego jest zbyt nowa"
 
-#: src/main/eval.c:6302
+#: src/main/eval.c:6296
 msgid "byte code version mismatch"
 msgstr "niezgodność wersji kodu bajtowego"
 
-#: src/main/eval.c:6529
+#: src/main/eval.c:6523
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "niepoprawny argument sekwencji w pętli 'for()'"
 
-#: src/main/eval.c:6646
+#: src/main/eval.c:6640
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:6662 src/main/names.c:1337
+#: src/main/eval.c:6656 src/main/names.c:1337
 #, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "brak wewnętrznej (.Internal) funkcji '%s'"
 
-#: src/main/eval.c:6779 src/main/eval.c:7165 src/main/eval.c:7209
+#: src/main/eval.c:6773 src/main/eval.c:7159 src/main/eval.c:7203
 msgid "bad function"
 msgstr "zła funkcja"
 
-#: src/main/eval.c:7261
+#: src/main/eval.c:7255
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
@@ -4833,123 +4833,123 @@ msgstr ""
 "'EXPR' jest obiektem klasy \"factor\", traktowanym jako liczba całkowita.\n"
 " Rozważ użycie '%s' w zamian."
 
-#: src/main/eval.c:7267 src/main/eval.c:7292
+#: src/main/eval.c:7261 src/main/eval.c:7286
 msgid "bad numeric 'switch()' offsets"
 msgstr "błędne przesunięcia liczbowe w funkcji 'switch()'"
 
-#: src/main/eval.c:7273
+#: src/main/eval.c:7267
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 "wyrażenie regularne 'EXPR' wymagane przez 'switch()' bez nazwanych alternatyw"
 
-#: src/main/eval.c:7276
+#: src/main/eval.c:7270
 msgid "bad character 'switch()' offsets"
 msgstr "błędne przesunięcia znakowe 'switch()'"
 
-#: src/main/eval.c:7278
+#: src/main/eval.c:7272
 msgid "bad 'switch()' names"
 msgstr "niepoprawne nazwy 'switch()'"
 
-#: src/main/eval.c:7392
+#: src/main/eval.c:7386
 msgid "unknown instruction code"
 msgstr "nieznany kod instrukcji"
 
-#: src/main/eval.c:7408
+#: src/main/eval.c:7402
 msgid "cannot find index for threaded code address"
 msgstr "nie można znaleźć indeksu dla wątkowego adresu kodu"
 
-#: src/main/eval.c:7452
+#: src/main/eval.c:7446
 msgid "'registerBC()' function requires integer vector as 'bcBytes' argument"
 msgstr ""
 "funkcja 'registerBC()' wymaga wektora liczb całkowitych jako argumentu "
 "'bcBytes'"
 
-#: src/main/eval.c:7454
+#: src/main/eval.c:7448
 msgid "'registerBC()' function requires BCODESXP object as 'bcode' argument"
 msgstr ""
 "funkcja 'registerBC()' wymaga obiektu klasy \"BCODESXP\" jako argumentu "
 "'bcode'"
 
-#: src/main/eval.c:7535
+#: src/main/eval.c:7529
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7537
+#: src/main/eval.c:7531
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.c:7539
+#: src/main/eval.c:7533
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.c:7540
+#: src/main/eval.c:7534
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7543
+#: src/main/eval.c:7537
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.c:7545
+#: src/main/eval.c:7539
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.c:7575 src/main/eval.c:7586
+#: src/main/eval.c:7569 src/main/eval.c:7580
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.c:7600
+#: src/main/eval.c:7594
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.c:7664
+#: src/main/eval.c:7658
 msgid "invalid body"
 msgstr "niepoprawne ciało"
 
-#: src/main/eval.c:7684
+#: src/main/eval.c:7678
 msgid "invalid symbol"
 msgstr "niepoprawny symbol"
 
-#: src/main/eval.c:7728
+#: src/main/eval.c:7722
 msgid "'code' argument is not a byte code object"
 msgstr "argument 'code' nie jest obiektem kodu bajtowego"
 
-#: src/main/eval.c:7758 src/main/eval.c:7765
+#: src/main/eval.c:7752 src/main/eval.c:7759
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr "'R_CompiledFileName()': bufor jest zbyt mały"
 
-#: src/main/eval.c:7799 src/main/eval.c:7818 src/main/eval.c:7852
+#: src/main/eval.c:7793 src/main/eval.c:7812 src/main/eval.c:7846
 msgid "constant buffer must be a generic vector"
 msgstr "stały bufor musi być ogólnym wektorem"
 
-#: src/main/eval.c:7822
+#: src/main/eval.c:7816
 #, c-format
 msgid "bad '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: src/main/eval.c:7854
+#: src/main/eval.c:7848
 msgid "bad constant count"
 msgstr "zła liczba stałych"
 
-#: src/main/eval.c:7892
+#: src/main/eval.c:7886
 msgid "profile timer is in use"
 msgstr "czasomierza profilu jest w użyciu"
 
-#: src/main/eval.c:7894
+#: src/main/eval.c:7888
 msgid "already byte code profiling"
 msgstr "profilowanie kodu bajtowego jest w trakcie"
 
-#: src/main/eval.c:7930
+#: src/main/eval.c:7924
 msgid "no byte code profiling"
 msgstr "brak profilowania kodu bajtowego"
 
-#: src/main/eval.c:7946 src/main/eval.c:7950 src/main/eval.c:7954
+#: src/main/eval.c:7940 src/main/eval.c:7944 src/main/eval.c:7948
 msgid "byte code profiling is not supported in this build"
 msgstr "profilowanie kodu bajtowego nie jest wspierane w tej kompilacji"
 
-#: src/main/eval.c:8004
+#: src/main/eval.c:7998
 #, fuzzy
 msgid "parse error"
 msgstr "błąd odczytu"
@@ -7242,28 +7242,28 @@ msgstr "niepoprawne argumenty"
 msgid "NA values produced"
 msgstr "wyprodukowano wartości NA"
 
-#: src/main/random.c:439
+#: src/main/random.c:446
 msgid "NA values in probability vector"
 msgstr "wartość NA w wektorze prawdopodobieństwa"
 
-#: src/main/random.c:441
+#: src/main/random.c:448
 msgid "negative probability"
 msgstr "ujemne prawdopodobieństwo"
 
-#: src/main/random.c:448
+#: src/main/random.c:455
 msgid "too few positive probabilities"
 msgstr "zbyt mało dodatnich prawdopodobieństw"
 
-#: src/main/random.c:477 src/main/random.c:505
+#: src/main/random.c:484 src/main/random.c:512
 msgid "cannot take a sample larger than the population when 'replace = FALSE'"
 msgstr ""
 "nie można wziąć próby większej niż rozmiar populacji gdy 'replace = FALSE'"
 
-#: src/main/random.c:484
+#: src/main/random.c:491
 msgid "incorrect number of probabilities"
 msgstr "niepoprawna liczba prawdopodobieństw"
 
-#: src/main/random.c:523
+#: src/main/random.c:530
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr ""
 "n >= 2^31, replace = FALSE jest wspierane jedynie na platformach 64-bitowych"
@@ -9238,7 +9238,7 @@ msgid "there must be at least three control points"
 msgstr "muszą być przynajmniej trzy punkty kontrolne"
 
 #: src/modules/internet/internet.c:109 src/modules/internet/internet.c:240
-#: src/modules/internet/libcurl.c:838
+#: src/modules/internet/libcurl.c:857
 msgid "can only open URLs for reading"
 msgstr "można jedynie otworzyć adresy URL do odczytu"
 
@@ -9254,16 +9254,16 @@ msgstr "schemat nie jest wspierany w URL '%s'"
 
 #: src/modules/internet/internet.c:354 src/modules/internet/internet.c:358
 #: src/modules/internet/internet.c:365 src/modules/internet/internet.c:388
-#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:897
-#: src/modules/internet/libcurl.c:901 src/modules/internet/libcurl.c:908
-#: src/modules/internet/libcurl.c:922 src/modules/internet/libcurl.c:931
-#: src/modules/internet/libcurl.c:941
+#: src/modules/internet/internet.c:396 src/modules/internet/libcurl.c:916
+#: src/modules/internet/libcurl.c:920 src/modules/internet/libcurl.c:927
+#: src/modules/internet/libcurl.c:941 src/modules/internet/libcurl.c:950
+#: src/modules/internet/libcurl.c:960
 msgid "allocation of url connection failed"
 msgstr "przydział połączenia url nie powiódł się"
 
 #: src/modules/internet/internet.c:500 src/modules/internet/internet.c:598
-#: src/modules/internet/internet.c:708 src/modules/internet/libcurl.c:570
-#: src/modules/internet/libcurl.c:583
+#: src/modules/internet/internet.c:708 src/modules/internet/libcurl.c:589
+#: src/modules/internet/libcurl.c:602
 msgid "Download progress"
 msgstr "Postęp pobierania"
 
@@ -9279,31 +9279,31 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "nie można otworzyć docelowego pliku '%s', powód '%s'"
 
 #: src/modules/internet/internet.c:558 src/modules/internet/internet.c:686
-#: src/modules/internet/libcurl.c:601
+#: src/modules/internet/libcurl.c:620
 #, c-format
 msgid "Trying URL '%s'\n"
 msgstr "Sprawdzanie adresu URL '%s'\n"
 
 #: src/modules/internet/internet.c:624 src/modules/internet/internet.c:735
-#: src/modules/internet/libcurl.c:416
+#: src/modules/internet/libcurl.c:435
 #, c-format
 msgid "%d%% downloaded"
 msgstr "Pobrano %d%%"
 
 #: src/modules/internet/internet.c:645 src/modules/internet/internet.c:756
-#: src/modules/internet/libcurl.c:651
+#: src/modules/internet/libcurl.c:670
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr "Pobrano %0.1f MB"
 
 #: src/modules/internet/internet.c:647 src/modules/internet/internet.c:759
-#: src/modules/internet/libcurl.c:653
+#: src/modules/internet/libcurl.c:672
 #, c-format
 msgid "Downloaded %d KB"
 msgstr "Pobrano %d KB"
 
 #: src/modules/internet/internet.c:649 src/modules/internet/internet.c:761
-#: src/modules/internet/libcurl.c:655
+#: src/modules/internet/libcurl.c:674
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
@@ -9312,13 +9312,13 @@ msgstr[1] "Pobrano %d bajty"
 msgstr[2] "Pobrano %d bajtów"
 
 #: src/modules/internet/internet.c:660 src/modules/internet/internet.c:772
-#: src/modules/internet/libcurl.c:660
+#: src/modules/internet/libcurl.c:679
 #, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "pobrana długość %0.f != zgłoszona długość %0.f"
 
 #: src/modules/internet/internet.c:665 src/modules/internet/internet.c:778
-#: src/modules/internet/libcurl.c:687
+#: src/modules/internet/libcurl.c:706
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "nie można otworzyć adresu URL '%s'"
@@ -9335,7 +9335,7 @@ msgid "cannot open URL '%s': %s status was '%d %s'"
 msgstr "nie można otworzyć adresu URL '%s': status %s '%d %s'"
 
 #: src/modules/internet/internet.c:825 src/modules/internet/internet.c:1001
-#: src/modules/internet/libcurl.c:446
+#: src/modules/internet/libcurl.c:465
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
@@ -9344,7 +9344,7 @@ msgstr[1] "Typ zawartości '%s' długość %0.0f bajty (%0.1f MB)"
 msgstr[2] "Typ zawartości '%s' długość %0.0f bajtów (%0.1f MB)"
 
 #: src/modules/internet/internet.c:829 src/modules/internet/internet.c:1003
-#: src/modules/internet/libcurl.c:449
+#: src/modules/internet/libcurl.c:468
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
 msgid_plural "Content type '%s' length %d bytes (%d KB)"
@@ -9353,7 +9353,7 @@ msgstr[1] "Typ zawartości '%s' długość %d bajty (%d KB)"
 msgstr[2] "Typ zawartości '%s' długość %d bajtów (%d KB)"
 
 #: src/modules/internet/internet.c:833 src/modules/internet/internet.c:1005
-#: src/modules/internet/libcurl.c:452
+#: src/modules/internet/libcurl.c:471
 #, c-format
 msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
@@ -9386,11 +9386,11 @@ msgstr "'InternetOpenUrl' nie powiódł się: '%s'"
 msgid "URL '%s': status was '%s'"
 msgstr "Adres URL '%s': status '%s'"
 
-#: src/modules/internet/libcurl.c:296
+#: src/modules/internet/libcurl.c:315
 msgid "'curlGetHeaders()' function is not supported on this platform"
 msgstr "funkcja 'curlGetHeaders()' nie jest obsługiwana na tej platformie"
 
-#: src/modules/internet/libcurl.c:328
+#: src/modules/internet/libcurl.c:347
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
@@ -9399,19 +9399,19 @@ msgstr ""
 "kod %d błędu libcurl:\n"
 "\t%s\n"
 
-#: src/modules/internet/libcurl.c:330
+#: src/modules/internet/libcurl.c:349
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
 "\tunable to access SSL/TLS CA certificates\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:332
+#: src/modules/internet/libcurl.c:351
 #, c-format
 msgid "libcurl error code %d\n"
 msgstr "kod błędu libcurl %d\n"
 
-#: src/modules/internet/libcurl.c:395
+#: src/modules/internet/libcurl.c:414
 #, c-format
 msgid "Content length %0.0f byte (%0.1f MB)"
 msgid_plural "Content length %0.0f bytes (%0.1f MB)"
@@ -9419,7 +9419,7 @@ msgstr[0] "Zawartość długości %0.0f bajta (%0.1f MB)"
 msgstr[1] "Zawartość długości %0.0f bajtów (%0.1f MB)"
 msgstr[2] "Zawartość długości %0.0f bajtów (%0.1f MB)"
 
-#: src/modules/internet/libcurl.c:398
+#: src/modules/internet/libcurl.c:417
 #, c-format
 msgid "Content length %d byte (%d KB)"
 msgid_plural "Content length %d bytes (%d KB)"
@@ -9427,7 +9427,7 @@ msgstr[0] "Zawartość długości %d bajta (%d KB)"
 msgstr[1] "Zawartość długości %d bajtów (%d KB)"
 msgstr[2] "Zawartość długości %d bajtów (%d KB)"
 
-#: src/modules/internet/libcurl.c:401
+#: src/modules/internet/libcurl.c:420
 #, c-format
 msgid "Content length %d byte"
 msgid_plural "Content length %d bytes"
@@ -9435,49 +9435,49 @@ msgstr[0] "Zawartość długości %d bajta"
 msgstr[1] "Zawartość długości %d bajtów"
 msgstr[2] "Zawartość długości %d bajtów"
 
-#: src/modules/internet/libcurl.c:470
+#: src/modules/internet/libcurl.c:489
 msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr ""
 "funkcja 'download.file(method = \"libcurl\")' nie jest wspierana na tej "
 "platformie"
 
-#: src/modules/internet/libcurl.c:486
+#: src/modules/internet/libcurl.c:505
 msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
-#: src/modules/internet/libcurl.c:506 src/modules/internet/libcurl.c:524
+#: src/modules/internet/libcurl.c:525 src/modules/internet/libcurl.c:543
 #, fuzzy
 msgid "out of memory"
 msgstr "Zabrakło pamięci"
 
-#: src/modules/internet/libcurl.c:552
+#: src/modules/internet/libcurl.c:571
 #, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "Adres URL %s: nie można otworzyć docelowego pliku '%s', powód '%s'"
 
-#: src/modules/internet/libcurl.c:617 src/modules/internet/libcurl.c:773
+#: src/modules/internet/libcurl.c:636 src/modules/internet/libcurl.c:792
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr "funkcja 'curl_multi_wait()' nie powiodła się, kod %d"
 
-#: src/modules/internet/libcurl.c:683
+#: src/modules/internet/libcurl.c:702
 msgid "cannot download any files"
 msgstr "nie można pobrać żanych plików"
 
-#: src/modules/internet/libcurl.c:684
+#: src/modules/internet/libcurl.c:703
 msgid "some files were not downloaded"
 msgstr "niektóre pliki nie zostały pobrane"
 
-#: src/modules/internet/libcurl.c:689
+#: src/modules/internet/libcurl.c:708
 #, c-format
 msgid "download from '%s' failed"
 msgstr "pobieranie z '%s' nie powiodło się"
 
-#: src/modules/internet/libcurl.c:827
+#: src/modules/internet/libcurl.c:846
 msgid "cannot read from connection"
 msgstr "nie można czytać z połączenia"
 
-#: src/modules/internet/libcurl.c:868
+#: src/modules/internet/libcurl.c:887
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "nie można otworzyć połączenia do '%s'"

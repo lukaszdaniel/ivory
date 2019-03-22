@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:20\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2159,9 +2159,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("Found the following additional warnings:\n", domain = "R-tools")
+#. R/check.R: gettext("Found the following additional notes/warnings:\n", domain = "R-tools")
 
-msgid "Found the following additional warnings:"
+msgid "Found the following additional notes/warnings:"
 msgstr ""
 
 
@@ -2229,6 +2229,13 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("Found the following notes/warnings:", domain = "R-tools")
+
+msgid "Found the following notes/warnings:"
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("Found the following possibly unsafe calls:", domain = "R-tools")
 
 msgid "Found the following possibly unsafe calls:"
@@ -2265,13 +2272,6 @@ msgstr ""
 #. R/check.R: gettext("Found the following sources/headers with CR or CRLF line endings:\n", domain = "R-tools")
 
 msgid "Found the following sources/headers with CR or CRLF line endings:"
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettext("Found the following warnings:", domain = "R-tools")
-
-msgid "Found the following warnings:"
 msgstr ""
 
 
@@ -3138,6 +3138,13 @@ msgstr ""
 #. R/QC.R: gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools")
 
 msgid "Non-portable flags in variable %s:"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Non-staged installation was used", domain = "R-tools")
+
+msgid "Non-staged installation was used"
 msgstr ""
 
 
@@ -7129,6 +7136,13 @@ msgstr ""
 
 
 #: R/install.R: 0
+#. R/install.R: message("not using staged install with --libs-only")
+
+msgid "not using staged install with --libs-only"
+msgstr ""
+
+
+#: R/install.R: 0
 #. R/install.R: message("only one architecture so ignoring '--merge-multiarch'", domain = "R-tools")
 
 msgid "only one architecture so ignoring '--merge-multiarch'"
@@ -7389,6 +7403,13 @@ msgstr ""
 #. R/install.R: gettext("resaving rda files")
 
 msgid "resaving rda files"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: message("  restoration failed\n")
+
+msgid "restoration failed"
 msgstr ""
 
 
@@ -7672,9 +7693,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("staged install is only possible with locking")
+#. R/install.R: message("staged installation is only possible with locking")
 
-msgid "staged install is only possible with locking"
+msgid "staged installation is only possible with locking"
 msgstr ""
 
 
@@ -8007,6 +8028,20 @@ msgid "using log directory %s"
 msgstr ""
 
 
+#: R/install.R: 0
+#. R/install.R: gettext("using non-staged installation", domain = "R-tools")
+
+msgid "using non-staged installation"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("using non-staged installation via StagedInstall field", domain = "R-tools")
+
+msgid "using non-staged installation via StagedInstall field"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettextf("using option %s", sQuote(opts), domain = "R-tools")
 
@@ -8032,6 +8067,13 @@ msgstr ""
 #. R/check.R: gettextf("using session charset: %s", charset, domain = "R-tools")
 
 msgid "using session charset: %s"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("using staged installation", domain = "R-tools")
+
+msgid "using staged installation"
 msgstr ""
 
 

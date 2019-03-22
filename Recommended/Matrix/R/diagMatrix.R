@@ -1110,6 +1110,8 @@ for(arg2 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = "ddiMatrix", e2 = arg2),
 	  function(e1,e2) {
 	      n <- e1@Dim[1L]
+	      if(length(e2) == 0L)
+		  return(if(n) numeric() else e1)
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1132,6 +1134,8 @@ for(arg1 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = arg1, e2 = "ddiMatrix"),
 	  function(e1,e2) {
 	      n <- e2@Dim[1L]
+	      if(length(e1) == 0L)
+		  return(if(n) numeric() else e2)
 	      f0 <- callGeneric(e1, 0)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e1)) == 1L
@@ -1155,6 +1159,9 @@ for(arg2 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = "ldiMatrix", e2 = arg2),
 	  function(e1,e2) {
 	      n <- e1@Dim[1L]
+	      if(length(e2) == 0L)
+		  return(if(n) numeric()
+			 else copyClass(e1, "ddiMatrix", c("diag", "Dim", "Dimnames"), check=FALSE))
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1179,6 +1186,9 @@ for(arg1 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = arg1, e2 = "ldiMatrix"),
 	  function(e1,e2) {
 	      n <- e2@Dim[1L]
+	      if(length(e1) == 0L)
+		  return(if(n) numeric()
+			 else copyClass(e2, "ddiMatrix", c("diag", "Dim", "Dimnames"), check=FALSE))
 	      f0 <- callGeneric(e1, 0)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e1)) == 1L
@@ -1211,6 +1221,9 @@ for(arg2 in c("numeric","logical"))
 setMethod("Ops", signature(e1 = "ddiMatrix", e2 = arg2),
 	  function(e1,e2) {
 	      n <- e1@Dim[1L]
+	      if(length(e2) == 0L)
+		  return(if(n) logical()
+			 else copyClass(e1, "ldiMatrix", c("diag", "Dim", "Dimnames"), check=FALSE))
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1236,6 +1249,8 @@ for(arg2 in c("numeric","logical"))
 setMethod("Ops", signature(e1 = "ldiMatrix", e2 = arg2),
 	  function(e1,e2) {
 	      n <- e1@Dim[1L]
+	      if(length(e2) == 0L)
+                  return(if(n) logical() else e1)
 	      f0 <- callGeneric(FALSE, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L

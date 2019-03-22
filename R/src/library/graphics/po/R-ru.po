@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -122,6 +122,11 @@ msgstr "'figs' должен быть вектором или матрицей с
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs' должен определять по меньшей мере один экран"
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' пропущена или неправильная"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -441,6 +446,11 @@ msgstr "зависимая переменная должна быть факто
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr "размерность z не является произведением length(x)(-1) на length(y)(-1)"
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -452,6 +462,18 @@ msgstr "должен быть указан в точности один тип �
 #: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr "формула пропущена или неправильная"
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr "'formula' должна определять в точности две переменные"
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula with cbind() must specify 1 categorical variable"
+msgstr "'formula' должна определять в точности две переменные"
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -836,9 +858,6 @@ msgid_plural "arguments %s are not made use of"
 msgstr[0] "аргумент %s не для использования"
 msgstr[1] "аргументы %s не для использования"
 msgstr[2] "аргументы %s не для использования"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula' пропущена или неправильная"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

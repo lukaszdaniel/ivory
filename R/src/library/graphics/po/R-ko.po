@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2005-05-25 15:04+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -117,6 +117,11 @@ msgstr "'figs'는 벡터 또는 4열의 행렬이 아니면 되지 않습니다"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs'는 적어도 하나의 screen을 지정하지 않으면 되지 않습니다"
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula'가 없거나 부적절합니다"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -434,6 +439,11 @@ msgstr ""
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr "z의 차원이 length(x)(+1) x length(y)(+1)가 아닙니다"
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -446,6 +456,16 @@ msgstr "반드시 하나의 심벌 유형을 지정하지 않으면 되지 않�
 #, fuzzy
 msgid "formula missing or incorrect"
 msgstr "'formula'가 없거나 부적절합니다"
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr ""
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+msgid "formula with cbind() must specify 1 categorical variable"
+msgstr ""
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -822,9 +842,6 @@ msgstr[0] "하나가 어긋나고 값(%s)이 boxplot %d로부터 제외해졌습
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula'가 없거나 부적절합니다"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

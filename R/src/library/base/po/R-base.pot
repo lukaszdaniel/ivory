@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1408,7 +1408,7 @@ msgstr ""
 
 
 #: R/library.R: 0
-#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package), domain = "R-base")
 
 msgid "Attaching package: %s"
 msgstr ""
@@ -1496,6 +1496,13 @@ msgstr ""
 #. R/print.R: gettextf("Component %d", seq.int(ll), domain = "R-base")
 
 msgid "Component %d"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package), emsg, domain = "R-base")
+
+msgid "Conflicts attaching package %s:\n%s"
 msgstr ""
 
 
@@ -3666,6 +3673,13 @@ msgstr ""
 
 
 #: R/namespace.R: 0
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)
+
+msgid "not found in namespace %s: \n\n%s"
+msgstr ""
+
+
+#: R/namespace.R: 0
 #. R/namespace.R: stop("not loading a namespace")
 
 msgid "not loading a namespace"
@@ -3740,6 +3754,13 @@ msgstr ""
 #. R/diag.R: stop("only matrix diagonals can be replaced")
 
 msgid "only matrix diagonals can be replaced"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettext("only one of 'include.only' and 'exclude' can be used")
+
+msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr ""
 
 
@@ -3920,6 +3941,13 @@ msgstr ""
 #. R/library.R: gettextf("package or namespace load failed for %s:\n %s", sQuote(package), conditionMessage(e),     domain = "R-base")
 
 msgid "package or namespace load failed for %s:\n %s"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
+
+msgid "packageConflictError"
 msgstr ""
 
 
@@ -4198,6 +4226,13 @@ msgstr ""
 #. R/namespace.R: gettextf("undefined exports: %s", undef)
 
 msgid "undefined exports: %s"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+
+msgid "unknown conflict policy: %s"
 msgstr ""
 
 

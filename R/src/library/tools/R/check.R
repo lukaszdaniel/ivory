@@ -4691,13 +4691,15 @@ add_dummies <- function(dir, Log)
 
                 notes <- grep(note_re, lines0, value = TRUE, useBytes = TRUE)
                 notes <- unique(notes)
-
+                if (any(grepl("using non-staged installation", lines0,
+                               useBytes = TRUE)))
+                    notes <- c(gettext("Non-staged installation was used", domain = "R-tools"), notes)
                 if (length(lines)) {
                     warningLog(Log, gettext("Found the following significant warnings:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(lines), "\n")
                     if(length(notes)) {
                         printLog(Log,
-                                 gettext("Found the following additional warnings:\n", domain = "R-tools"))
+                                 gettext("Found the following additional notes/warnings:\n", domain = "R-tools"))
                         printLog0(Log, .format_lines_with_indent(notes),
                                   "\n")
                     }
@@ -4707,7 +4709,7 @@ add_dummies <- function(dir, Log)
                         wrapLog(gettext("Information on the location(s) of code generating the 'Note's can be obtained by re-running with environment variable R_KEEP_PKG_SOURCE set to 'yes'.\n", domain = "R-tools"))
 
                 } else if(length(notes)) {
-                    noteLog(Log, gettext("Found the following warnings:", domain = "R-tools"))
+                    noteLog(Log, gettext("Found the following notes/warnings:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(notes), "\n")
                     printLog0(Log, gettextf("See %s for details.\n", sQuote(outfile), domain = "R-tools"))
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))

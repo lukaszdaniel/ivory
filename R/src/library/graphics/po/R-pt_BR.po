@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-08-07 20:45\n"
+"POT-Creation-Date: 2019-03-22 18:19\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -113,6 +113,11 @@ msgstr "'figs' deve ser um vetor ou uma matriz com 4 colunas"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs' deve especificar ao menos uma tela"
+
+#. R/barplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' faltando ou incorreta"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -431,6 +436,11 @@ msgstr "variável dependente deve ser um fator"
 msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
 msgstr "dimensões de z não são length(x)(-1) vezes length(y)(-1)"
 
+#. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
+#: R/barplot.R:0
+msgid "duplicated categorical values - try another formula or subset"
+msgstr ""
+
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
 msgid "exactly one symbol type must be specified"
@@ -442,6 +452,18 @@ msgstr "exatamente um tipo de símbolo deve ser especificado"
 #: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr "formula faltando ou incorreta"
+
+#. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula must specify 1 or 2 categorical variables"
+msgstr "'formula' deve especificar exatamente duas variáveis"
+
+#. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
+#: R/barplot.R:0
+#, fuzzy
+msgid "formula with cbind() must specify 1 categorical variable"
+msgstr "'formula' deve especificar exatamente duas variáveis"
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -826,9 +848,6 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "argumento %s não está sendo utilizado"
 msgstr[1] "argumentos %s não estão sendo utilizados"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula' faltando ou incorreta"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"
