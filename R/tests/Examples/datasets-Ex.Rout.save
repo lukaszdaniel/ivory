@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-03-22 r1098) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-03-22 r76261) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2111,9 +2111,8 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > 
 > # 6) Replace infinite values by +/- 6 as in Student's paper:
 > 
-> zobs[infZ <- is.infinite(zobs)] # 3 of them
-  73  312  674 
--Inf  Inf -Inf 
+> zobs[infZ <- is.infinite(zobs)] # none of them 
+named numeric(0)
 > zobs[infZ] <- 6 * sign(zobs[infZ])
 > 
 > # 7) Plot the distribution:
@@ -3518,7 +3517,7 @@ c0   -5.14
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.356 0.04 1.396 0 0 
+Time elapsed:  1.422 0.036 1.459 0 0 
 > grDevices::dev.off()
 null device 
           1 
