@@ -1,7 +1,7 @@
 #  File src/library/tools/R/QC.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2018 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -5812,8 +5812,11 @@ function(package, dir, lib.loc = NULL)
     enc <- db["Encoding"]
     if(!is.na(enc) &&
        (Sys.getlocale("LC_CTYPE") %notin% c("C", "POSIX"))) {
-        ## FIXME: what if conversion fails on e.g. UTF-8 comments
-        con <- file(file, encoding = enc)
+        ## Avoid conversion failing on e.g. UTF-8 comments
+        ## con <- file(file, encoding = enc)
+        lines <- iconv(readLines(file, warn = FALSE),
+                       from = "UTF-8", to = "", sub = "byte")
+        con <- textConnection(lines)
         on.exit(close(con), add = TRUE)
     } else con <- file
 
@@ -7959,7 +7962,8 @@ function(x, limit = NULL)
         zz <- textConnection("out", "w", local = TRUE)
         on.exit(close(zz))
         pos <- which(RdTags(x) == s)
-        Rd2txt(x[pos[1L]], out = zz, fragment = TRUE)
+        ## measure length in chars, not in bytes after substitutions
+        Rd2txt(x[pos[1L]], out = zz, fragment = TRUE, outputEncoding = "UTF-8")
         nc <- nchar(out)
         if(length(l) > 1L) {
             ind_warn <- (nc > max(l))

@@ -6,6 +6,26 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+   \subsection{NEW FEATURES}{
+     \itemize{
+       \item Placeholder.
+     }
+
+     \subsection{DEPRECATED AND DEFUNCT}{
+       \itemize{
+	 \item Make macro \samp{F77_VISIBILITY} will be removed in
+	 favour of \samp{F_VISIBILITY}.
+
+	 \item Make macros \samp{F77}, \samp{FCPIFCPLAGS} and
+	 \samp{SHLIB_OPENMP_FCFLAGS} will be removed in favour of
+	 \samp{FC}, \samp{FPICFLAGS} and \samp{SHLIB_OPENMP_FFLAGS}
+	 respectively.
+       }
+     }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 3.6.0}{
 
    \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
      \itemize{
@@ -320,6 +340,27 @@
 
       \item \code{barplot()} gets a formula method, thanks to a patch
       proposal by Arni Magnusson in \PR{17521}.
+
+      \item \code{pmax()} and \code{pmin(x)} now also work for long
+      vectors, thanks to Suharto Anggono's \PR{17533}.
+
+      \item \code{bxp()} now warns when omitting duplicated arguments.
+
+      \item New \code{hcl.colors()} function to provide wide range of
+      HCL-based colour palettes with much better perceptual properties than
+      existing RGB/HSV-based palettes like \code{rainbow()}.
+
+      Also new \code{hcl.pals()} function to list available palette
+      names for \code{hcl.colors()}.
+
+      Contributed by Achim Zeileis.
+
+      \item Default colours for \code{image()} and
+      \code{filled.contour()} are now based on \code{hcl.colors()}.
+
+      \item Palette-generating functions \code{rainbow()},
+      \code{gray.colors()}, etc. get new \code{rev} argument
+      to facilitate reversing the order of colors.
     }
   }
 
@@ -365,6 +406,8 @@
 
       \item The \command{configure} macro \samp{MAKEINFO} has been
       updated to \samp{TEXI2ANY}.
+
+      \item Support for \command{make install} has been enhanced.
     }
   }
 
@@ -418,6 +461,21 @@
 
       \item The make macro \samp{F_VISIBILITY} is now preferred for
       both fixed-form and free-form Fortran.
+
+      \item \command{R CMD INSTALL} gains a new option \option{--strip}
+      which strips installed shared object(s): this can also be achieved
+      by setting the environment variable \env{_R_SHLIB_STRIP_} to a
+      true value.
+
+      The new option \option{--strip-lib} attempts stripping of
+      static and shared libraries installed under \file{lib}.
+
+      These are most useful on platforms using GNU \code{binutils} (such
+      as Linux) and compiling with \option{-g} flags.
+      
+      \item There is more support for installing UTF-8-encoded packages
+      in a strict Latin-1 locale (and probably for other Latin locales):
+      non-ASCII comments in \R code are worked around better.
     }
   }
 
@@ -463,7 +521,10 @@
       \item \command{R CMD check} now checks
       \command{autoconf}-generated \file{configure} files have their
       corresponding source files, including optionally attempting to
-      regenerate them on platforms with \command{autoconf}.
+      regenerate them on platforms with \command{autoreconf}.
+
+      \item \command{R CMD build} has a new option
+      \option{--compression} to select the compression used for the tarball.
     }
   }
 
@@ -750,8 +811,23 @@
 
       \item \code{as.roman(3) <= 2:4} and all other comparisons now work,
       as do group \code{"Summary"} function calls such as
-      \code{max(as.roman(sample(20)))} and \code{as.roman(NA)}.  (Parly reported
-      by Bill Dunlap in \PR{17542}.)
+      \code{max(as.roman(sample(20)))} and \code{as.roman(NA)}.
+      (Partly reported by Bill Dunlap in \PR{17542}.)
+
+      \item \code{reformulate("x", response = "sin(y)")} no longer produces
+      extra back quotes, \PR{17359}, and gains new optional argument
+      \code{env}.
+      
+      \item When Reading console input from \file{stdin} with re-encoding
+      (\command{R --encoding=enc < input}) the code on a Unix-alike now
+      ensures that each converted input line is terminated with a
+      newline even if re-encoding fails.
+
+      \item Class unions are unloaded when their namespace is
+      unloaded (\PR{17531}, adapted from a patch by Brodie Gasla).
+
+      \item \code{selectMethod()} is robust to ANY-truncation of method
+      signatures (thanks to Herve Pages for the report).
     }
   }
 }

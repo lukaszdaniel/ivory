@@ -1750,7 +1750,7 @@ stopifnot(is.null(getO("foobar")))
 
 
 ## Mantel-Haenszel test in "large" case, PR#17383:
-set.seed(101); n = 500000
+set.seed(101); n <- 500000
 aTab <- table(
     educ = factor(sample(1:3, replace=TRUE, size=n)),
     score= factor(sample(1:5, replace=TRUE, size=n)),
@@ -2574,6 +2574,27 @@ stopifnot(exprs = {
       isSymmetric(matrix(,0,0, dimnames=list(NULL, NULL)))
       isSymmetric(matrix(,0,0))
 })
+
+
+## bxp() did not signal anything about duplicate actual arguments:
+set.seed(3); bx.p <- boxplot(split(rt(100, 4), gl(5, 20)), plot=FALSE)
+tools::assertWarning(bxp(bx.p, ylab = "Y LAB", ylab = "two"))
+w <- tryCatch(bxp(bx.p, ylab = "Y LAB", ylab = "two", xlab = "i", xlab = "INDEX"),
+              warning = conditionMessage)
+stopifnot(is.character(w), grepl('ylab = "two"', w), grepl('xlab = "INDEX"', w))
+
+
+## reformulate() bug  PR#17359
+(form <- reformulate(c("u", "log(x)"), response = "log(y)"))
+stopifnot(identical(form, log(y) ~ u + log(x)))
+## had *symbol*  `log(y)`  instead of call in R <= 3.5.1
+newf <- function(terms, resp)
+    list(e   = environment(),
+         form= reformulate(terms, resp))
+ef <- newf("x", "log(y)")
+stopifnot( identical(ef$e, environment(ef$form)),
+	  !identical(ef$e, .GlobalEnv),
+	  identical(format(ef$form), "log(y) ~ x"))
 
 
 

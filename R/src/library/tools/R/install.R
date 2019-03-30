@@ -223,6 +223,8 @@ if(FALSE) {
             "			set arguments for the configure scripts (if any)",
             "      --configure-vars=VARS",
             "			set variables for the configure scripts (if any)",
+            "      --strip           strip shared object(s)",
+            "      --strip-lib       strip static/dynamic libraries under lib/",
             "      --dsym            (macOS only) generate dSYM directory",
             "      --built-timestamp=STAMP",
             "                   set timestamp for Built: entry in DESCRIPTION",
@@ -513,10 +515,10 @@ if(FALSE) {
                 message(gettextf("installing to directory %s", sQuote(dest)), domain = "R-tools")
                 dir.create(dest, recursive = TRUE, showWarnings = FALSE)
                 file.copy(files, dest, overwrite = TRUE)
-                if(config_val_to_logical(Sys.getenv("_R_SHLIB_STRIP_",
-                                                    "false")) &&
-                   nzchar(strip <- Sys.getenv("R_STRIP_SHARED_LIB"))) {
-                    system(paste(c(strip,
+                if((do_strip || config_val_to_logical(Sys.getenv("_R_SHLIB_STRIP_",
+                                                                 "false"))) &&
+                   nzchar(strip_cmd <- Sys.getenv("R_STRIP_SHARED_LIB"))) {
+                    system(paste(c(strip_cmd,
                                    shQuote(file.path(dest, files))),
                                  collapse = " "))
                 }
@@ -529,9 +531,9 @@ if(FALSE) {
 		## is no way to create it later.
 
 		if (dsym && startsWith(R.version$os, "darwin")) {
-		    message(gettextf("generating debug symbols (%s)", "dSYM"), domain = "R-tools")
+		    starsmsg(stars, gettextf("generating debug symbols (%s)", "dSYM"), domain = "R-tools")
 		    dylib <- Sys.glob(paste0(dest, "/*", SHLIB_EXT))
-                    for (file in dylib) system(paste0("dsymutil ", file))
+                    for (d in dylib) system(paste0("dsymutil ", d))
 		}
 
                 if(config_val_to_logical(Sys.getenv("_R_SHLIB_BUILD_OBJECTS_SYMBOL_TABLES_", "TRUE"))
@@ -1647,6 +1649,27 @@ if(FALSE) {
                            sQuote("--no-staged-install"))
             }
         }
+
+        if (do_strip_lib &&
+            nzchar(strip_cmd <- Sys.getenv("R_STRIP_STATIC_LIB")) &&
+            length(a_s <- Sys.glob(file.path(file.path(lib, curPkg),
+                                             "lib", "*.a")))) {
+            if(length(a_s) > 1L)
+                starsmsg(stars, gettext("stripping static libraries under lib"))
+            else
+                starsmsg(stars, gettext("stripping static library under lib"))
+            system(paste(c(strip_cmd, shQuote(a_s)), collapse = " "))
+        }
+        if (do_strip_lib &&
+            nzchar(strip_cmd <- Sys.getenv("R_STRIP_SHARED_LIB")) &&
+            length(so_s <- Sys.glob(file.path(file.path(lib, curPkg), "lib",
+                                              paste0("*", SHLIB_EXT))))) {
+            if(length(so_s) > 1L)
+                starsmsg(stars, gettext("stripping dynamic libraries under lib"))
+            else
+                starsmsg(stars, gettext("stripping dynamic library under lib"))
+            system(paste(c(strip_cmd, shQuote(so_s)), collapse = " "))
+        }
     }
 
     options(showErrorCalls = FALSE)
@@ -1706,6 +1729,7 @@ if(FALSE) {
     install_inst <- TRUE
     install_help <- TRUE
     install_tests <- FALSE
+    do_strip <- do_strip_lib <- FALSE
 
     while(length(args)) {
         a <- args[1L]
@@ -1828,6 +1852,10 @@ if(FALSE) {
             staged_install <- FALSE
         } else if (a == "--dsym") {
             dsym <- TRUE
+        } else if (a == "--strip") {
+            do_strip <- TRUE
+        } else if (a == "--strip-lib") {
+            do_strip_lib <- TRUE
         } else if (substr(a, 1, 18) == "--built-timestamp=") {
             built_stamp <- substr(a, 19, 1000)
         } else if (startsWith(a, "-")) {

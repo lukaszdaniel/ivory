@@ -148,22 +148,24 @@ delete.response <- function (termobj)
     termobj
 }
 
-reformulate <- function (termlabels, response=NULL, intercept = TRUE)
+reformulate <- function (termlabels, response=NULL, intercept = TRUE, env = parent.frame())
 {
+    ## an extension of formula.character()
+    str2code <- function(s) parse(text = s, keep.source = FALSE)[[1L]]
     if(!is.character(termlabels) || !length(termlabels))
         stop("'termlabels' must be a character vector of length at least one")
-    has.resp <- !is.null(response)
-    termtext <- paste(if(has.resp) "response", "~",
-		      paste(termlabels, collapse = "+"),
-		      collapse = "")
+    termtext <- paste(termlabels, collapse = "+")
     if(!intercept) termtext <- paste(termtext, "- 1")
-    ## basically formula.character() :
-    rval <- eval(parse(text = termtext, keep.source = FALSE)[[1L]])
-    if(has.resp) rval[[2L]] <-
-        if(is.character(response)) as.symbol(response) else response
-    ## response can be a symbol or call as  Surv(ftime, case)
-    environment(rval) <- parent.frame()
-    rval
+    terms <- str2code(termtext)
+    fexpr <-
+	as.call(if(is.null(response))
+		    list(quote(`~`), terms)
+		else
+		    list(quote(`~`),
+			 ## response can be a symbol or call as  Surv(ftime, case)
+			 if(is.character(response)) str2code(response) else response,
+			 terms))
+    formula(fexpr, env)
 }
 
 drop.terms <- function(termobj, dropx = NULL, keep.response = FALSE)
@@ -173,20 +175,20 @@ drop.terms <- function(termobj, dropx = NULL, keep.response = FALSE)
     else {
         if(!inherits(termobj, "terms"))
             stop(gettextf("'%s' argument must be an object of class %s", "termobj", dQuote("terms")), domain = "R-stats")
-	newformula <- reformulate(attr(termobj, "term.labels")[-dropx],
-				  if (keep.response) termobj[[2L]],
-                                  attr(termobj, "intercept"))
-        environment(newformula) <- environment(termobj)
+	newformula <-
+	    reformulate(attr(termobj, "term.labels")[-dropx],
+			response = if(keep.response) termobj[[2L]],
+			intercept = attr(termobj, "intercept"),
+			env = environment(termobj))
 	result <- terms(newformula, specials=names(attr(termobj, "specials")))
 
 	# Edit the optional attributes
 
 	response <- attr(termobj, "response")
-	if (response && !keep.response)
-	    # we have a response in termobj, but not in the result
-	    dropOpt <- c(response, dropx + length(response))
-	else
-	    dropOpt <- dropx + max(response)
+	dropOpt <- if(response && !keep.response) # we have a response in termobj, but not in the result
+		       c(response, dropx + length(response))
+		   else
+		       dropx + max(response)
 
 	if (!is.null(predvars <- attr(termobj, "predvars"))) {
 	    # predvars is a language expression giving a list of
@@ -209,8 +211,7 @@ drop.terms <- function(termobj, dropx = NULL, keep.response = FALSE)
     resp <- if (attr(termobj, "response")) termobj[[2L]]
     newformula <- attr(termobj, "term.labels")[i]
     if (length(newformula) == 0L) newformula <- "1"
-    newformula <- reformulate(newformula, resp, attr(termobj, "intercept"))
-    environment(newformula) <- environment(termobj)
+    newformula <- reformulate(newformula, resp, attr(termobj, "intercept"), environment(termobj))
     result <- terms(newformula, specials = names(attr(termobj, "specials")))
 
     # Edit the optional attributes
@@ -341,7 +342,8 @@ offset <- function(object) object
     ## when called from predict.nls, vars not match.
     new <- vapply(m, .MFclass, "")
     new <- new[names(new) %in% names(cl)]
-     if(length(new) == 0L) return()
+    if(length(new) == 0L) return(invisible())
+    ## else
     old <- cl[names(new)]
     if(!ordNotOK) {
         old[old == "ordered"] <- "factor"
@@ -366,6 +368,7 @@ offset <- function(object) object
                  paste(sQuote(names(old)[wrong]), collapse=", ")),
                  call. = FALSE, domain = "R-stats") }
     }
+    else invisible()
 }
 
 ##' Model Frame Class
