@@ -6,22 +6,27 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
-   \subsection{NEW FEATURES}{
-     \itemize{
-       \item Placeholder.
-     }
-
-     \subsection{DEPRECATED AND DEFUNCT}{
-       \itemize{
-	 \item Make macro \samp{F77_VISIBILITY} have been removed
-	 and replaced by \samp{F_VISIBILITY}.
-
-	 \item Make macros \samp{F77}, \samp{FCPIFCPLAGS} and
-	 \samp{SHLIB_OPENMP_FCFLAGS} have been removed and replaced by
-	 \samp{FC}, \samp{FPICFLAGS} and \samp{SHLIB_OPENMP_FFLAGS}
-	 respectively.
-       }
-     }
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Placeholder.
+    }
+  }
+   
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Make macro \samp{F77_VISIBILITY} has been removed
+      and replaced by \samp{F_VISIBILITY}.
+       
+      \item Make macros \samp{F77}, \samp{FCPIFCPLAGS} and
+      \samp{SHLIB_OPENMP_FCFLAGS} have been removed and replaced by
+      \samp{FC}, \samp{FPICFLAGS} and \samp{SHLIB_OPENMP_FFLAGS}
+      respectively.  (Most \command{make} programs will set \samp{F77}
+      to the value of \samp{FC}, which is set for package compilation.
+      But portable code should not rely on this.)
+      
+      \item \command{R CMD config} no longer knows about the
+      unused settings \samp{F77} and \samp{FCPIFCPLAGS}.
+    }
   }
 }
 
@@ -347,26 +352,31 @@
       \item \code{bxp()} now warns when omitting duplicated arguments.
 
       \item New \code{hcl.colors()} function to provide wide range of
-      HCL-based colour palettes with much better perceptual properties than
-      existing RGB/HSV-based palettes like \code{rainbow()}.
+      HCL-based colour palettes with much better perceptual properties
+      than the existing RGB/HSV-based palettes like \code{rainbow()}.
 
-      Also new \code{hcl.pals()} function to list available palette
+      Also a new \code{hcl.pals()} function to list available palette
       names for \code{hcl.colors()}.
 
       Contributed by Achim Zeileis.
 
-      \item Default colours for \code{image()} and
+      \item The default colours for \code{image()} and
       \code{filled.contour()} are now based on \code{hcl.colors()}.
 
-      \item Palette-generating functions \code{rainbow()},
-      \code{gray.colors()}, etc. get new \code{rev} argument
+      \item The palette-generating functions \code{rainbow()},
+      \code{gray.colors()}, etc.\sspace{}get a new \code{rev} argument
       to facilitate reversing the order of colors.
+
+      \item New \code{str2lang()} and \code{str2expression()} as streamlined
+      versions of \code{parse(text=., keep.source=FALSE)} allow to abstract
+      typical call constructions, e.g., in \code{formula} manipulations.
+      (Somewhat experimental) % << TO DO
     }
   }
 
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
-      \item The  options selected  for the C++ compiler default to the
+      \item The options selected for the C++ compiler default to the
       C++11 standard if supported, otherwise to the C++98 standard.
 
       \item Visibility macros such as \samp{C_VISIBILITY} can now be
@@ -407,7 +417,7 @@
       \item The \command{configure} macro \samp{MAKEINFO} has been
       updated to \samp{TEXI2ANY}.
 
-      \item Support for \command{make install} has been enhanced.
+      \item Support for \command{make install-strip} has been enhanced.
     }
   }
 
@@ -438,8 +448,9 @@
 
       Legal FORTRAN 77 code is also legal fixed-form Fortran 9x; however
       this change legitimizes the use of later features, in particular
-      to replace features marked \sQuote{obsolescent} in Fortran 95
-      which \command{gfortran} 8.x warns about.
+      to replace features marked \sQuote{obsolescent} in Fortran 90 and
+      \sQuote{deleted} in Fortran 2018 which \command{gfortran} 8.x and
+      later warn about.
 
       \item Packages containing files in the \file{src} directory with
       extensions \file{.f90} or \file{.f95} are now linked using the C
@@ -460,22 +471,24 @@
       \file{src/Makevars.win}).
 
       \item The make macro \samp{F_VISIBILITY} is now preferred for
-      both fixed-form and free-form Fortran.
+      both fixed-form and free-form Fortran, for use in
+      \file{src/Makevars} and similar.
 
       \item \command{R CMD INSTALL} gains a new option \option{--strip}
-      which strips installed shared object(s): this can also be achieved
-      by setting the environment variable \env{_R_SHLIB_STRIP_} to a
-      true value.
+      which (where supported) strips installed shared object(s): this
+      can also be achieved by setting the environment variable
+      \env{_R_SHLIB_STRIP_} to a true value.
 
       The new option \option{--strip-lib} attempts stripping of
       static and shared libraries installed under \file{lib}.
 
       These are most useful on platforms using GNU \code{binutils} (such
       as Linux) and compiling with \option{-g} flags.
-      
+
       \item There is more support for installing UTF-8-encoded packages
       in a strict Latin-1 locale (and probably for other Latin locales):
-      non-ASCII comments in \R code are worked around better.
+      non-ASCII comments in \R code (and \file{NAMESPACE} files) are
+      worked around better.
     }
   }
 
@@ -525,6 +538,9 @@
 
       \item \command{R CMD build} has a new option
       \option{--compression} to select the compression used for the tarball.
+
+      \item \command{R CMD build} now removes \file{src/*.mod} files on
+      all platforms.
     }
   }
 
@@ -540,6 +556,8 @@
       protection of intermediate results from (usually ill-advised)
       assignments in arguments to \code{BUILTIN} functions. Properly
       written package code should not be affected.
+
+      \item \code{R_unif_index} is now considered to be part of the C API.
     }
   }
 
@@ -817,8 +835,8 @@
       \item \code{reformulate("x", response = "sin(y)")} no longer produces
       extra back quotes, \PR{17359}, and gains new optional argument
       \code{env}.
-      
-      \item When Reading console input from \file{stdin} with re-encoding
+
+      \item When reading console input from \file{stdin} with re-encoding
       (\command{R --encoding=enc < input}) the code on a Unix-alike now
       ensures that each converted input line is terminated with a
       newline even if re-encoding fails.
@@ -828,6 +846,9 @@
 
       \item \code{selectMethod()} is robust to ANY-truncation of method
       signatures (thanks to Herve Pages for the report).
+
+      \item \code{as.matrix.data.frame()} now produces better strings from
+      logicals, thanks to \PR{17548} from Gabe Becker.
     }
   }
 }

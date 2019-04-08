@@ -40,7 +40,7 @@ print.summary.coxph <-
     if (!is.null(x$concordance)) {
         cat(gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1],3)), format(round(x$concordance[2], 3)), domain = "R-survival"), "\n", sep = "")
     }
-    cat(gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"],3)), format(round(x$rsq["maxrsq"],3)), domain = "R-survival"), "\n", sep = "")
+#    cat(gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"],3)), format(round(x$rsq["maxrsq"],3)), domain = "R-survival"), "\n", sep = "")
 
     pdig <- max(1, getOption("digits")-4)  # default it too high IMO
     cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"], 2)),  x$logtest["df"], format.pval(x$waldtest["pvalue"], digits=pdig), domain = "R-survival"), "\n", sep = "")

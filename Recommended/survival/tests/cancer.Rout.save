@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -99,8 +99,8 @@ ph.ecog=2  50     44    199     156     288
 > temp <- survfit(Surv(time, status)~1, lung, type='fleming',
 + 		   conf.int=.9, conf.type='log-log', error='tsiatis')
 > summary(temp, times=30 *1:5)
-Call: survfit(formula = Surv(time, status) ~ 1, data = lung, type = "fleming", conf.int = 0.9, 
-    conf.type = "log-log", error = "tsiatis")
+Call: survfit(formula = Surv(time, status) ~ 1, data = lung, error = "tsiatis", type = "fleming", 
+    conf.int = 0.9, conf.type = "log-log")
 
  time n.risk n.event survival std.err lower 90% CI upper 90% CI
    30    219      10    0.956  0.0135        0.928        0.974
@@ -169,7 +169,6 @@ age          1.0051     0.9949    0.9784    1.0325
 meal.cal     0.9998     1.0002    0.9992    1.0004
 
 Concordance = 0.696 (se = 0.041)
-Rsquare= 0.167  (max possible=0.912)
 Likelihood ratio test = 30.6 on 7 df, p=2e-04
 Wald test = 28.15 on 7 df, p=2e-04
 Score (logrank) test = 30.72 on 7 df, p=2e-04
@@ -225,4 +224,4 @@ n= 167, number of events= 120
 > 
 > proc.time()
    user  system elapsed 
-  0.833   0.037   0.864 
+  0.984   0.080   1.068 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -153,7 +153,7 @@ boot(data = city, statistic = ratio, R = 999, stype = "w")
 
 
 Bootstrap Statistics:
-    original  bias    std. error
+    original   bias    std. error
 t1*   1.5203 0.049024     0.21583
 > 
 > 
@@ -390,12 +390,12 @@ boot.ci(boot.out = city.boot, conf = c(0.9, 0.95), type = c("norm", "basic", "pe
 
 Intervals:
  Level      Normal              Basic         
-90%   ( 1.124,   1.837 )   ( 1.059,   1.740 )   
-95%   ( 1.056,   1.905 )   ( 0.932,   1.799 )  
+90%   ( 1.116,   1.826 )   ( 1.054,   1.742 )   
+95%   ( 1.048,   1.894 )   ( 0.956,   1.775 )  
 
  Level     Percentile            BCa          
-90%   ( 1.301,   1.982 )   ( 1.301,   1.984 )   
-95%   ( 1.242,   2.109 )   ( 1.243,   2.110 )  
+90%   ( 1.299,   1.987 )   ( 1.292,   1.957 )   
+95%   ( 1.266,   2.085 )   ( 1.254,   2.058 )  
 Calculations and Intervals on Original Scale
 > 
 > # studentized confidence interval for the two sample 
@@ -422,7 +422,7 @@ boot.ci(boot.out = grav1.boot, type = c("stud", "norm"))
 
 Intervals:
  Level      Normal            Studentized     
-95%   (-5.880,   0.183 )   (-7.059,  -0.101 )  
+95%   (-5.897,   0.190 )   (-7.370,  -0.052 )  
 Calculations and Intervals on Original Scale
 > 
 > # Nonparametric confidence intervals for mean failure time 
@@ -444,10 +444,10 @@ boot.ci(boot.out = air.boot, type = c("norm", "basic", "perc", "stud"))
 
 Intervals:
  Level      Normal              Basic         
-95%   ( 35.5,  181.9 )   ( 26.0,  170.6 )  
+95%   ( 32.2,  184.5 )   ( 21.2,  169.4 )  
 
  Level    Studentized          Percentile     
-95%   ( 47.9,  294.5 )   ( 45.6,  190.2 )  
+95%   ( 45.6,  295.8 )   ( 46.8,  195.0 )  
 Calculations and Intervals on Original Scale
 > 
 > # Now using the log transformation
@@ -466,10 +466,10 @@ boot.ci(boot.out = air.boot, type = c("norm", "basic", "perc", "stud"), h = log,
 
 Intervals:
  Level      Normal              Basic         
-95%   ( 4.035,   5.469 )   ( 4.118,   5.546 )  
+95%   ( 4.015,   5.491 )   ( 4.093,   5.521 )  
 
  Level    Studentized          Percentile     
-95%   ( 3.959,   5.808 )   ( 3.820,   5.248 )  
+95%   ( 3.922,   5.808 )   ( 3.845,   5.273 )  
 Calculations and Intervals on Transformed Scale
 > 
 > # Method 2
@@ -487,10 +487,10 @@ boot.ci(boot.out = air.boot, type = c("norm", "basic", "perc", "stud"), var.t0 =
 
 Intervals:
  Level      Normal              Basic         
-95%   ( 4.069,   5.435 )   ( 4.118,   5.546 )  
+95%   ( 4.070,   5.435 )   ( 4.093,   5.521 )  
 
  Level    Studentized          Percentile     
-95%   ( 3.959,   5.808 )   ( 3.820,   5.248 )  
+95%   ( 3.922,   5.808 )   ( 3.845,   5.273 )  
 Calculations and Intervals on Original Scale
 > 
 > 
@@ -535,16 +535,6 @@ The following object is masked from ‘package:boot’:
 +      out
 + }
 > aml.case <- censboot(aml, aml.fun, R = 499, strata = aml$group)
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
   no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
@@ -635,24 +625,6 @@ Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
   no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
   no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
 > 
 > 
 > # For the weird bootstrap we must redefine our function slightly since
@@ -671,14 +643,6 @@ Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
 + }
 > aml.wei <- censboot(cbind(aml$time, aml$cens), aml.fun1, R = 499,
 +      strata = aml$group,  F.surv = aml.s1, sim = "weird")
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
-Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
   no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
@@ -755,7 +719,7 @@ detaching ‘package:splines’, ‘package:survival’
 + }
 > air.boot <- boot(aircondit, mean.fun, R = 999)
 > control(air.boot, index = 2, bias.adj = TRUE)
-[1] -6.298101
+[1] -11.25369
 > air.cont <- control(air.boot, index = 2)
 > # Now let us try the variance on the log scale.
 > air.cont1 <- control(air.boot, t0 = log(air.boot$t0[2]),
@@ -783,7 +747,7 @@ detaching ‘package:splines’, ‘package:survival’
 > (cv.err <- cv.glm(mammals, mammals.glm)$delta)
 [1] 0.4918650 0.4916571
 > (cv.err.6 <- cv.glm(mammals, mammals.glm, K = 6)$delta)
-[1] 0.4851491 0.4834641
+[1] 0.4911574 0.4887828
 > 
 > # As this is a linear model we could calculate the leave-one-out 
 > # cross-validation estimate without any extra model-fitting.
@@ -802,7 +766,7 @@ detaching ‘package:splines’, ‘package:survival’
 > (cv.err <- cv.glm(nodal, nodal.glm, cost, K = nrow(nodal))$delta)
 [1] 0.1886792 0.1886792
 > (cv.11.err <- cv.glm(nodal, nodal.glm, cost, K = 11)$delta)
-[1] 0.2264151 0.2217871
+[1] 0.2075472 0.2057672
 > 
 > 
 > 
@@ -827,10 +791,10 @@ detaching ‘package:splines’, ‘package:survival’
  [7]  0.09236345  0.20365074  1.02178280  0.73381132
 > city.boot <- boot(city, ratio, 499, stype="w")
 > empinf(boot.out = city.boot, type = "reg")
-          1           1           1           1           1           1 
--1.13619987 -0.69728210 -0.45301061 -0.27615882  0.02108999  0.14896336 
-          1           1           1           1 
- 0.09746429  0.20622340  1.18798956  0.90092079 
+           1            1            1            1            1            1 
+-1.188052737 -0.702204565 -0.447209091 -0.378938644  0.007498044  0.162261064 
+           1            1            1            1 
+ 0.116272627  0.242543405  1.166357773  1.021472124 
 > 
 > # A statistic that may be of interest in the difference of means
 > # problem is the t-statistic for testing equality of means.  In
@@ -858,13 +822,13 @@ detaching ‘package:splines’, ‘package:survival’
 > grav.z <- (grav.boot$t[,1]-grav.boot$t0[1])/sqrt(grav.boot$t[,2])
 > empinf(boot.out = grav.boot, t = grav.z)
          1          1          1          1          1          1          1 
--2.9326019 -1.3760327 -2.4400720 -1.2175846  0.2795352 -0.8258764 -0.8156286 
+-2.7187022 -0.9515832 -2.4507504 -1.3409041  0.6167772 -1.2768844 -1.3438236 
          1          1          1          1          1          1          2 
--0.5573332 -1.1275252 -3.1603140  1.2840693  3.5434781  9.3458860  2.6692589 
+-0.2313133 -1.0504975 -3.1949223  1.2809344  3.7306567  8.9310126  2.7195701 
          2          2          2          2          2          2          2 
- 4.4496570  3.6948000  0.9929002 -3.0100985 -3.2237464 -2.5493305 -0.6551745 
+ 4.1111581  3.1632367  1.1507436 -2.2930450 -2.7667452 -2.3645554 -0.2002981 
          2          2          2          2          2 
- 1.9065308  0.4980530 -1.6219628 -1.6980508 -1.4528364 
+ 2.0526618  0.3615873 -1.9421623 -2.1031282 -1.8890234 
 > 
 > 
 > 
@@ -1820,19 +1784,19 @@ The optimal value of the objective function is 41400.
 > 
 > # Estimated p-values can be found from these as follows
 > mean(grav.boot$t[, 3] >= grav.z0[3])
-[1] 0.01402806
+[1] 0.0240481
 > imp.prob(grav.boot2, t0 = -grav.z0[3], t = -grav.boot2$t[, 3])
 $t0
 [1] -1.840118
 
 $raw
-[1] 0.02163715
+[1] 0.02254379
 
 $rat
-[1] 0.02099078
+[1] 0.02409135
 
 $reg
-[1] 0.02174393
+[1] 0.02224027
 
 > 
 > 
@@ -1841,7 +1805,7 @@ $reg
 > # probability.  Raw resampling is not reliable for probabilities
 > # greater than 0.5. Thus
 > 1 - imp.prob(grav.boot2, index = 3, t0 = grav.z0[3])$raw
-[1] -0.009155757
+[1] 0.08678105
 > # can give very strange results (negative probabilities).
 > 
 > 
@@ -1881,8 +1845,8 @@ TILTED BOOTSTRAP
 
 Exponential tilting used
 First 249 replicates untilted,
-Next 375 replicates tilted to -2.821,
-Next 375 replicates tilted to 1.636.
+Next 375 replicates tilted to -2.648,
+Next 375 replicates tilted to 1.879.
 
 Call:
 tilt.boot(data = grav1, statistic = grav.fun, R = c(249, 375, 375), stype = "w", 
@@ -1891,9 +1855,9 @@ tilt.boot(data = grav1, statistic = grav.fun, R = c(249, 375, 375), stype = "w",
 
 Bootstrap Statistics:
     original     bias    std. error
-t1* 2.846154 -0.4487564    2.500644
-t2* 2.392353 -0.3221155    1.187574
-t3* 0.000000 -0.8862944    2.208945
+t1* 2.846154 -0.2728113    2.513218
+t2* 2.392353 -0.2450416    1.187570
+t3* 0.000000 -0.7305799    2.152173
 > 
 > 
 > #  Example 9.10 of Davison and Hinkley (1997) requires a balanced 
@@ -1984,24 +1948,24 @@ t3* 0.000000 -0.8862944    2.208945
 > # proceed as follows.
 > table(lynx.1$t[, 1])
 
- 2  3  4  5  7  8 10 11 12 13 14 
-16 19 38  4  6  3  1  9  1  1  1 
+ 2  3  4  5  6  7  8 10 11 13 14 
+16 21 41  4  3  5  3  1  3  1  1 
 > table(lynx.1b$t[, 1])
 
- 2  3  4  5  6  7  8 11 12 14 15 
- 6  2 22  6  4  6  3 40  7  1  2 
+ 2  3  4  5  6  7  9 10 11 12 13 15 16 
+ 2  5 24  3  2  8  2  3 38  8  2  1  1 
 > table(lynx.2$t[, 1])
 
- 2  3  4  5  6  7  8 10 11 13 
-12 18 51  5  2  3  1  2  4  1 
+ 2  3  4  5  6  7  9 11 12 13 15 17 24 
+18 20 41  3  4  1  1  4  1  3  1  1  1 
 > table(lynx.2b$t[, 1])
 
- 2  3  4  5  6  7  8  9 10 11 12 13 15 21 
- 2  1 21  4  1 10  4  1  3 45  3  1  2  1 
+ 2  3  4  5  6  7  8 10 11 12 14 15 
+ 1  3 31  7  1  6  4  3 35  4  3  1 
 > table(lynx.3$t[, 1])
 
- 2  3  4  5  6  7  8  9 10 11 12 13 14 15 
- 4  8 11  2  1  4  2  2  2 54  6  1  1  1 
+ 2  3  4  5  6  7  8  9 10 11 12 13 14 16 
+ 4  2 11  1  3  6  3  2  2 50  7  6  1  1 
 > # Notice that the post-blackened and model-based bootstraps preserve
 > # the true order of the model (11) in many more cases than the others.
 > 
@@ -2032,7 +1996,7 @@ t3* 0.000000 -0.8862944    2.208945
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  14.005 0.048 14.054 0 0 
+Time elapsed:  12.46 0.068 12.529 0 0 
 > grDevices::dev.off()
 null device 
           1 

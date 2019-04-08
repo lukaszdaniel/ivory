@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -107,6 +107,8 @@ Type 'q()' to quit R.
 > aeq(sfit$std.err^2, truth0$var)
 [1] TRUE
 > aeq(sfit$surv, truth0$surv)
+[1] TRUE
+> aeq(fit0$score, truth0$u^2/truth0$imat)
 [1] TRUE
 > 
 > beta1 <- truth0$u/truth0$imat
@@ -306,4 +308,4 @@ Call: survfit(formula = fit, newdata = list(x = 2))
 > 
 > proc.time()
    user  system elapsed 
-  0.857   0.055   0.905 
+  1.019   0.080   1.092 

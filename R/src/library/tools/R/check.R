@@ -220,10 +220,13 @@ setRlibs <-
                 if (pkg %in% recommended) unlink(file.path(tmplib, pkg), TRUE)
                 ## hard-code dependencies for now.
                 if (pkg == "mgcv")
-                    unlink(file.path(tmplib, c("Matrix", "lattice", "nlme")), TRUE)
-                if (pkg == "Matrix") unlink(file.path(tmplib, "lattice"), TRUE)
-                if (pkg == "class") unlink(file.path(tmplib, "MASS"), TRUE)
-                if (pkg == "nlme") unlink(file.path(tmplib, "lattice"), TRUE)
+                    unlink(file.path(tmplib, c("Matrix", "lattice", "nlme") %w/o% thispkg), TRUE)
+                if (pkg == "Matrix")
+                    unlink(file.path(tmplib, "lattice" %w/o% thispkg), TRUE)
+                if (pkg == "class")
+                    unlink(file.path(tmplib, "MASS" %w/o% thispkg), TRUE)
+                if (pkg == "nlme")
+                    unlink(file.path(tmplib, "lattice" %w/o% thispkg), TRUE)
             }
             where <- find.package(pkg, quiet = TRUE)
             if(length(where)) {
@@ -2802,6 +2805,17 @@ add_dummies <- function(dir, Log)
                     pat <- paste0("^[[:space:]]*PKG_", this, ".*SHLIB_OPENMP_", this2)
                     if(any(grepl(pat, lines, useBytes = TRUE))) {
                         used <- c(used, this)
+                        f_or_fc <- "F"
+                        if(f == "FC") {
+                            if(any(grepl("SHLIB_OPENMP_FCFLAGS",
+                                         lines, useBytes = TRUE))) {
+                                f_or_fc <- "FC"
+                                if (!any) warningLog(Log)
+                                any <- TRUE
+                                msg <- "SHLIB_OPENMP_FCFLAGS is defunct (used in PKG_FCFLAGS)\n"
+                                printLog(Log, "  ", m, ": ", msg)
+                            }
+                        }
                         if(f == "C" && !have_c) {
                             if (!any) noteLog(Log)
                             any <- TRUE
@@ -2814,25 +2828,7 @@ add_dummies <- function(dir, Log)
                         if(f == "F" && !(have_f || have_f9x)) {
                             if (!any) noteLog(Log)
                             any <- TRUE
-                            msg <- "SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS without any fixed-form Fortran files\n"
-                            printLog(Log, "  ", m, ": ", msg)
-                            next
-                        }
-                        f_or_fc <- "F"
-                        if(f == "FC") {
-                            if(any(grepl("SHLIB_OPENMP_FCFLAGS",
-                                         lines, useBytes = TRUE))) {
-                                f_or_fc <- "FC"
-                                if (!any) noteLog(Log)
-                                any <- TRUE
-                                msg <- "SHLIB_OPENMP_FFLAGS is preferred to SHLIB_OPENMP_FCFLAGS in PKG_FCFLAGS\n"
-                                printLog(Log, "  ", m, ": ", msg)
-                            }
-                        }
-                        if(f == "FC" && !have_f9x) {
-                            if (!any) noteLog(Log)
-                            any <- TRUE
-                            msg <- sprintf("SHLIB_OPENMP_%sFLAGS is included in PKG_FCFLAGS without any free-form Fortran files\n", f_or_fc)
+                            msg <- "SHLIB_OPENMP_FFLAGS is included in PKG_FFLAGS without any Fortran files\n"
                             printLog(Log, "  ", m, ": ", msg)
                             next
                         }

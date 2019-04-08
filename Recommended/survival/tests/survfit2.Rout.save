@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -32,11 +32,11 @@ Type 'q()' to quit R.
 > fit1 <- survfit(Surv(time, status) ~1, tdata, conf.lower='modified')
 > fit2 <- survfit(Surv(time, status) ~1, tdata)
 > 
-> stdlow <- fit2$std * sqrt(c(1, 10/9, 1, 8/7, 1, 6/5, 6/4, 6/3, 1, 2/1))
+> stdlow <- fit2$std.err * sqrt(c(1, 10/9, 1, 8/7, 1, 6/5, 6/4, 6/3, 1, 2/1))
 > lower <- exp(log(fit2$surv) - qnorm(.975)*stdlow)
 > all.equal(fit1$lower, lower, check.attributes=FALSE)
 [1] TRUE
 > 
 > proc.time()
    user  system elapsed 
-  0.727   0.027   0.748 
+  0.787   0.049   0.830 

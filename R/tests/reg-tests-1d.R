@@ -2596,12 +2596,25 @@ ef <- newf("x", "log(y)")
 stopifnot( identical(ef$e, environment(ef$form)),
 	  !identical(ef$e, .GlobalEnv),
 	  identical(format(ef$form), "log(y) ~ x"))
+## Back compatibility + deprecation warning:
+notC <- "Model[no 4]"
+form <- `Model[no 4]` ~ .
+stopifnot(exprs = {
+    identical(form, suppressWarnings(reformulate(".", notC))) # << will STOP working!
+    identical(form, reformulate(".", as.name(notC)))
+    identical(form, reformulate(".", paste0("`", notC, "`")))
+    inherits(tt <- tryCatch(reformulate(".", notC), warning=identity),
+             "deprecatedWarning")
+    inherits(tt, "warning")
+    conditionCall(tt)[[1]] == quote(reformulate)
+})
+writeLines(conditionMessage(tt))
 
 
 ## stopifnot() now works *nicely* with expression object (with 'exprs' name):
 ee <- expression(exprs=all.equal(pi, 3.1415927), 2 < 2, stop("foo!"))
 te <- tryCatch(stopifnot(exprs = ee), error=identity)
-stopifnot(conditionMessage(te) == "2 < 2 is not TRUE")
+#stopifnot(conditionMessage(te) == "2 < 2 is not TRUE")
 ## conditionMessage(te) was  "ee are not all TRUE" in R 3.5.x
 ##
 ## Empty 'exprs' should work in almost all cases:
@@ -2612,6 +2625,14 @@ stopifnot(exprs = e0)
 do.call(stopifnot, list(exprs = expression()))
 do.call(stopifnot, list(exprs = e0))
 ## the last three failed in R 3.5.x
+
+
+## as.matrix.data.frame() w/ character result and logical column, PR#17548
+cx <- as.character(x <- c(TRUE, NA, FALSE))
+stopifnot(exprs = {
+    identical(cx, as.matrix(data.frame(x, y="chr"))[,"x"])
+    identical(x, as.logical(cx))
+})
 
 
 

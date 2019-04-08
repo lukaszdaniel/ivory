@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-02-17 r1089) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-02-17 r76112) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -96,7 +96,6 @@ x 0.8596    2.3621   0.7131 1.205    0.228
 x     2.362     0.4233    0.5839     9.556
 
 Concordance = 0.638 (se = 0.161)
-Rsquare= 0.171  (max possible=0.999)
 Likelihood ratio test = 1.69 on 1 df, p=0.2
 Wald test = 1.45 on 1 df, p=0.2
 Score (logrank) test = 1.52 on 1 df, p=0.2
@@ -206,7 +205,6 @@ x 0.8596    2.3621   0.7131 1.205    0.228
 x     2.362     0.4233    0.5839     9.556
 
 Concordance = 0.638 (se = 0.172)
-Rsquare= 0.114  (max possible=0.991)
 Likelihood ratio test = 1.69 on 1 df, p=0.2
 Wald test = 1.45 on 1 df, p=0.2
 Score (logrank) test = 1.52 on 1 df, p=0.2
@@ -427,4 +425,4 @@ TRUE
 > 
 > proc.time()
    user  system elapsed 
-  0.878   0.052   0.923 
+  0.966   0.057   1.014 

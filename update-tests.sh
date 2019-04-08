@@ -209,7 +209,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/pyear.Rout		../../$RECIVORY/survival/tests/pyear.Rout.save`
 `$cmd	survival.Rcheck/tests/quantile.Rout		../../$RECIVORY/survival/tests/quantile.Rout.save`
 `$cmd	survival.Rcheck/tests/ratetable.Rout		../../$RECIVORY/survival/tests/ratetable.Rout.save`
-`$cmd	survival.Rcheck/tests/r_capacitor.Rout		../../$RECIVORY/survival/tests/r_capacitor.Rout.save`
+#`$cmd	survival.Rcheck/tests/r_capacitor.Rout		../../$RECIVORY/survival/tests/r_capacitor.Rout.save`
 `$cmd	survival.Rcheck/tests/r_donnell.Rout		../../$RECIVORY/survival/tests/r_donnell.Rout.save`
 `$cmd	survival.Rcheck/tests/r_lung.Rout		../../$RECIVORY/survival/tests/r_lung.Rout.save`
 `$cmd	survival.Rcheck/tests/r_peterson.Rout		../../$RECIVORY/survival/tests/r_peterson.Rout.save`
@@ -239,7 +239,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/tmerge.Rout		../../$RECIVORY/survival/tests/tmerge.Rout.save`
 `$cmd	survival.Rcheck/tests/tt.Rout			../../$RECIVORY/survival/tests/tt.Rout.save`
 `$cmd	survival.Rcheck/tests/turnbull.Rout		../../$RECIVORY/survival/tests/turnbull.Rout.save`
-`$cmd	survival.Rcheck/tests/yates0.Rout		../../$RECIVORY/survival/tests/yates0.Rout.save`
+#`$cmd	survival.Rcheck/tests/yates0.Rout		../../$RECIVORY/survival/tests/yates0.Rout.save`
 #`$cmd	survival.Rcheck/tests/rounding.Rout		../../$RECIVORY/survival/tests/rounding.Rout.save`
 #`$cmd	survival.Rcheck/tests/mrtest.Rout		../../$RECIVORY/survival/tests/mrtest.Rout.save`
 fi;
