@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.43-1\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"Project-Id-Version: survival 2.44-1.1\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,26 +18,26 @@ msgid "%d out of %d unique event times used"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name))
+#: R/survreg.R: 0
+#. R/survreg.R: gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name))
 
 msgid "%s distribution has a fixed scale, user specified value ignored"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: gettextf("%s distribution has no optional parameters", sQuote(dlist$name))
+#: R/survreg.R: 0
+#. R/survreg.R: gettextf("%s distribution has no optional parameters", sQuote(dlist$name))
 
 msgid "%s distribution has no optional parameters"
 msgstr ""
 
 
 #: R/dsurvreg.S: 0
-#: R/survreg.S: 0
+#: R/survreg.R: 0
 #. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
 #. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
 #. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
-#. R/survreg.S: gettextf("%s distribution was not found", sQuote(dist))
+#. R/survreg.R: gettextf("%s distribution was not found", sQuote(dist))
 
 msgid "%s distribution was not found"
 msgstr ""
@@ -153,7 +153,7 @@ msgstr ""
 #: R/summary.survexp.R: 0
 #: R/survfit.R: 0
 #: R/survfit.R: 0
-#: R/survfitKM.S: 0
+#: R/survfitKM.R: 0
 #: R/survfitTurnbull.S: 0
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/aeqSurv.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("Surv"))
@@ -180,7 +180,7 @@ msgstr ""
 #. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
-#. R/survfitKM.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
+#. R/survfitKM.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 
 msgid "'%s' argument is not an object of class %s"
@@ -222,7 +222,7 @@ msgstr ""
 #: R/survSplit.R: 0
 #: R/survfit.R: 0
 #: R/survobrien.S: 0
-#: R/survreg.S: 0
+#: R/survreg.R: 0
 #: R/tmerge.R: 0
 #: R/yates.R: 0
 #: R/yates.R: 0
@@ -238,7 +238,7 @@ msgstr ""
 #. R/survSplit.R: gettextf("'%s' argument is required", "data")
 #. R/survfit.R: gettextf("'%s' argument is required", "formula")
 #. R/survobrien.S: gettextf("'%s' argument is required", "formula")
-#. R/survreg.S: gettextf("'%s' argument is required", "formula")
+#. R/survreg.R: gettextf("'%s' argument is required", "formula")
 #. R/tmerge.R: gettextf("'%s' argument is required", "id")
 #. R/yates.R: gettextf("'%s' argument is required", "fit")
 #. R/yates.R: gettextf("'%s' argument is required", "term")
@@ -281,9 +281,7 @@ msgid "'%s' argument must be a data frame"
 msgstr ""
 
 
-#: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
-#. R/survfitKM.S: gettextf("'%s' argument must be a factor", "x")
 #. R/survfitTurnbull.S: gettextf("'%s' argument must be a factor", "x")
 
 msgid "'%s' argument must be a factor"
@@ -332,16 +330,12 @@ msgstr ""
 
 
 #: R/Surv.R: 0
-#: R/plot.survfit.R: 0
-#: R/plot.survfit.R: 0
 #: R/survfitms.R: 0
 #. R/Surv.R: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.R: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.R: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.R: gettextf("'%s' argument must be numeric", "time2")
 #. R/Surv.R: gettextf("'%s' argument must be numeric", "time2")
-#. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
-#. R/plot.survfit.R: gettextf("'%s' argument must be numeric", "conf.times")
 #. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
 
 msgid "'%s' argument must be numeric"
@@ -499,13 +493,6 @@ msgstr ""
 #. R/survdiff.S: stop("'formula' argument is not a formula")
 
 msgid "'formula' argument is not a formula"
-msgstr ""
-
-
-#: R/finegray.R: 0
-#. R/finegray.R: stop("'id' argument and a 'cluster()' term are redundant")
-
-msgid "'id' argument and a 'cluster()' term are redundant"
 msgstr ""
 
 
@@ -694,12 +681,12 @@ msgstr ""
 #: R/coxexact.fit.R: 0
 #: R/survexp.fit.R: 0
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/agexact.fit.R: stop("'x' argument is not a matrix")
 #. R/coxexact.fit.R: stop("'x' argument is not a matrix")
 #. R/survexp.fit.R: stop("'x' argument is not a matrix")
 #. R/survpenal.fit.S: stop("'x' argument is not a matrix")
-#. R/survreg.fit.S: stop("'x' argument is not a matrix")
+#. R/survreg.fit.R: stop("'x' argument is not a matrix")
 
 msgid "'x' argument is not a matrix"
 msgstr ""
@@ -772,6 +759,22 @@ msgstr ""
 #. R/survfitms.R: gettextf("   *mean time in state, restricted (per curve cutoff)\n", domain = "R-survival")
 
 msgid "*mean time in state, restricted (per curve cutoff)"
+msgstr ""
+
+
+#: R/coxph.fit.R: 0
+#: R/parsecovar.R: 0
+#. R/coxph.fit.R: paste((1:nvar)[infs], collapse = ",")
+#. R/parsecovar.R: paste(ff[is.na(index)], collapse = ", ")
+
+msgid ","
+msgstr ""
+
+
+#: R/coxph.fit.R: 0
+#. R/coxph.fit.R: paste("Loglik converged before variable ", paste((1:nvar)[infs], collapse = ","),     "; coefficient may be infinite. ")
+
+msgid "; coefficient may be infinite."
 msgstr ""
 
 
@@ -1199,14 +1202,19 @@ msgid "Likelihood ratio test = %s on %s df, p=%s\nn=%d, number of events=%d"
 msgstr ""
 
 
+#: R/coxph.fit.R: 0
+#. R/coxph.fit.R: paste("Loglik converged before variable ", paste((1:nvar)[infs], collapse = ","),     "; coefficient may be infinite. ")
+
+msgid "Loglik converged before variable"
+msgstr ""
+
+
 #: R/agexact.fit.R: 0
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
-#: R/coxph.fit.R: 0
 #. R/agexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste((seq_len(nvar))[infs],     collapse = ", "), domain = "R-survival")
 #. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "))
 #. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "), domain = "R-survival")
-#. R/coxph.fit.R: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
 
 msgid "Loglik converged before variable %s; beta may be infinite."
 msgstr ""
@@ -1396,12 +1404,12 @@ msgstr ""
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
 #: R/coxph.fit.R: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/agexact.fit.R: warning("Ran out of iterations and did not converge")
 #. R/agreg.fit.R: warning("Ran out of iterations and did not converge")
 #. R/coxexact.fit.R: warning("Ran out of iterations and did not converge")
 #. R/coxph.fit.R: warning("Ran out of iterations and did not converge")
-#. R/survreg.fit.S: warning("Ran out of iterations and did not converge")
+#. R/survreg.fit.R: warning("Ran out of iterations and did not converge")
 
 msgid "Ran out of iterations and did not converge"
 msgstr ""
@@ -1436,13 +1444,6 @@ msgstr ""
 #. R/print.summary.coxph.penal.S: gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format.pval(pchisq(x$rscore,     df, lower.tail = FALSE), digits = pdig), domain = "R-survival")
 
 msgid "Robust = %s p=%s"
-msgstr ""
-
-
-#: R/print.summary.coxph.S: 0
-#. R/print.summary.coxph.S: gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"], 3)), format(round(x$rsq["maxrsq"],     3)), domain = "R-survival")
-
-msgid "Rsquare= %s  (max possible=%s)"
 msgstr ""
 
 
@@ -1754,6 +1755,13 @@ msgid "a 'coxme' model was found and library 'coxme' is not loaded"
 msgstr ""
 
 
+#: R/finegray.R: 0
+#. R/finegray.R: stop("a cluster() term is not valid")
+
+msgid "a cluster() term is not valid"
+msgstr ""
+
+
 #: R/Surv.R: 0
 #. R/Surv.R: stop("a mean method has not been defined for Surv objects")
 
@@ -1876,6 +1884,13 @@ msgid "all elements must have the same list of states"
 msgstr ""
 
 
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("all formulas must have a left and right side")
+
+msgid "all formulas must have a left and right side"
+msgstr ""
+
+
 #: R/concordance.R: 0
 #. R/concordance.R: stop("all models must have the exact same response vector")
 
@@ -1894,6 +1909,15 @@ msgstr ""
 #. R/concordance.R: stop("all models must have the same weight vector")
 
 msgid "all models must have the same weight vector"
+msgstr ""
+
+
+#: R/plot.survfit.R: 0
+#. R/plot.survfit.R: stop("all points are > xmax")
+#. R/plot.survfit.R: stop("all points are > xmax")
+#. R/plot.survfit.R: stop("all points are > xmax")
+
+msgid "all points are > xmax"
 msgstr ""
 
 
@@ -1977,21 +2001,14 @@ msgstr ""
 
 
 #: R/survfit.R: 0
-#. R/survfit.R: stop("can not have both a cluster term and an id variable")
-
-msgid "can not have both a cluster term and an id variable"
-msgstr ""
-
-
-#: R/survfit.R: 0
 #. R/survfit.R: stop("can not have two cluster terms")
 
 msgid "can not have two cluster terms"
 msgstr ""
 
 
-#: R/survfitKM.S: 0
-#. R/survfitKM.S: stop("can only handle right censored or counting data")
+#: R/survfitKM.R: 0
+#. R/survfitKM.R: stop("can only handle right censored or counting data")
 
 msgid "can only handle right censored or counting data"
 msgstr ""
@@ -2038,9 +2055,9 @@ msgstr ""
 
 
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/survpenal.fit.S: stop("cannot have both a fixed scale and strata")
-#. R/survreg.fit.S: stop("cannot have both a fixed scale and strata")
+#. R/survreg.fit.R: stop("cannot have both a fixed scale and strata")
 
 msgid "cannot have both a fixed scale and strata"
 msgstr ""
@@ -2097,12 +2114,28 @@ msgid "case weights are not supported for the exact method"
 msgstr ""
 
 
+#: R/survfit.R: 0
+#. R/survfit.R: stop("cluster appears as both an argument and a model term")
+
+msgid "cluster appears as both an argument and a model term"
+msgstr ""
+
+
 #: R/aareg.S: 0
-#: R/survreg.S: 0
+#: R/survreg.R: 0
 #. R/aareg.S: stop("cluster cannot be used in an interaction")
-#. R/survreg.S: stop("cluster cannot be used in an interaction")
+#. R/survreg.R: stop("cluster cannot be used in an interaction")
 
 msgid "cluster cannot be used in an interaction"
+msgstr ""
+
+
+#: R/plot.survfit.R: 0
+#. R/plot.survfit.R: stop("code error with xmax")
+#. R/plot.survfit.R: stop("code error with xmax")
+#. R/plot.survfit.R: stop("code error with xmax")
+
+msgid "code error with xmax"
 msgstr ""
 
 
@@ -2117,6 +2150,22 @@ msgstr ""
 #. R/print.pyears.R: stop("conf.level must be a single numeric between 0 and 1")
 
 msgid "conf.level must be a single numeric between 0 and 1"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: warning("conf.lower is ignored for multi-state data")
+
+msgid "conf.lower is ignored for multi-state data"
+msgstr ""
+
+
+#: R/plot.survfit.R: 0
+#. R/plot.survfit.R: stop("conf.times must be numeric")
+#. R/plot.survfit.R: stop("conf.times must be numeric")
+#. R/plot.survfit.R: stop("conf.times must be numeric")
+
+msgid "conf.times must be numeric"
 msgstr ""
 
 
@@ -2148,6 +2197,15 @@ msgid "cox model doesn't support \"%s\" survival data"
 msgstr ""
 
 
+#: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("ctype must be 1 or 2")
+#. R/survfitKM.R: stop("ctype must be 1 or 2")
+
+msgid "ctype must be 1 or 2"
+msgstr ""
+
+
 #: R/survfit.matrix.R: 0
 #. R/survfit.matrix.R: warning("curves have a larger start.time than the parameter, start.time parameter value was ignored")
 
@@ -2165,10 +2223,10 @@ msgstr ""
 
 #: R/coxph.R: 0
 #: R/model.matrix.coxph.R: 0
-#: R/survreg.S: 0
+#: R/survreg.R: 0
 #. R/coxph.R: stop("data contains an infinite predictor")
 #. R/model.matrix.coxph.R: stop("data contains an infinite predictor")
-#. R/survreg.S: stop("data contains an infinite predictor")
+#. R/survreg.R: stop("data contains an infinite predictor")
 
 msgid "data contains an infinite predictor"
 msgstr ""
@@ -2203,8 +2261,8 @@ msgid "data set has 0 rows"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("default parameters must be a numeric vector")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("default parameters must be a numeric vector")
 
 msgid "default parameters must be a numeric vector"
 msgstr ""
@@ -2218,9 +2276,9 @@ msgstr ""
 
 
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/survpenal.fit.S: stop("density function returned an invalid matrix")
-#. R/survreg.fit.S: stop("density function returned an invalid matrix")
+#. R/survreg.fit.R: stop("density function returned an invalid matrix")
 
 msgid "density function returned an invalid matrix"
 msgstr ""
@@ -2247,6 +2305,13 @@ msgid "don't know how to do a linear contrast for this term"
 msgstr ""
 
 
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("dterm mismatch bug 2")
+
+msgid "dterm mismatch bug 2"
+msgstr ""
+
+
 #: R/Surv.R: 0
 #. R/Surv.R: stop("each state must have a non-blank name")
 
@@ -2265,6 +2330,13 @@ msgstr ""
 #. R/tmerge.R: stop("first call has created overlapping or duplicated time intervals")
 
 msgid "first call has created overlapping or duplicated time intervals"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("flist must be a list of formulas")
+
+msgid "flist must be a list of formulas"
 msgstr ""
 
 
@@ -2307,6 +2379,13 @@ msgstr ""
 #. R/frailty.S: gettextf("function %s was not found", sQuote(temp))
 
 msgid "function %s was not found"
+msgstr ""
+
+
+#: R/survfit23.R: 0
+#. R/survfit23.R: stop("function requires a survfit object")
+
+msgid "function requires a survfit object"
 msgstr ""
 
 
@@ -2374,6 +2453,24 @@ msgstr ""
 #. R/survfit.matrix.R: stop("incorrect number of states in p0")
 
 msgid "incorrect number of states in p0"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("influence argument must be 0, 1, 2, or 3")
+#. R/survfitKM.R: stop("influence argument must be 0, 1, 2, or 3")
+
+msgid "influence argument must be 0, 1, 2, or 3"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("influence argument must be numeric or logical")
+#. R/survfitKM.R: stop("influence argument must be numeric or logical")
+
+msgid "influence argument must be numeric or logical"
 msgstr ""
 
 
@@ -2449,8 +2546,8 @@ msgstr ""
 #: R/survexp.R: 0
 #: R/survexp.fit.R: 0
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
+#: R/survreg.fit.R: 0
 #. R/aareg.taper.R: gettextf("invalid '%s' argument", "taper")
 #. R/lines.survfit.coxph.S: gettextf("invalid '%s' argument", "mark.time")
 #. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
@@ -2465,8 +2562,8 @@ msgstr ""
 #. R/survexp.R: gettextf("invalid '%s' argument", "rcall")
 #. R/survexp.fit.R: gettextf("invalid '%s' argument", "death")
 #. R/survpenal.fit.S: gettextf("invalid '%s' argument", "scale")
-#. R/survreg.fit.S: gettextf("invalid '%s' argument", "scale")
-#. R/survreg.fit.S: gettextf("invalid '%s' argument", "strata")
+#. R/survreg.fit.R: gettextf("invalid '%s' argument", "scale")
+#. R/survreg.fit.R: gettextf("invalid '%s' argument", "strata")
 
 msgid "invalid '%s' argument"
 msgstr ""
@@ -2502,9 +2599,9 @@ msgstr ""
 
 
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/survpenal.fit.S: stop("invalid 'weights' argument, must be >0")
-#. R/survreg.fit.S: stop("invalid 'weights' argument, must be >0")
+#. R/survreg.fit.R: stop("invalid 'weights' argument, must be >0")
 
 msgid "invalid 'weights' argument, must be >0"
 msgstr ""
@@ -2531,9 +2628,9 @@ msgid "invalid distribution name"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("invalid distribution object")
-#. R/survreg.S: stop("invalid distribution object")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("invalid distribution object")
+#. R/survreg.R: stop("invalid distribution object")
 
 msgid "invalid distribution object"
 msgstr ""
@@ -2578,8 +2675,8 @@ msgid "invalid operation on a survival time"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("invalid parameter names")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("invalid parameter names")
 
 msgid "invalid parameter names"
 msgstr ""
@@ -2608,8 +2705,8 @@ msgid "invalid rate table"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("invalid scale value")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("invalid scale value")
 
 msgid "invalid scale value"
 msgstr ""
@@ -2645,10 +2742,17 @@ msgid "invalid survival time created"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("invalid survival times for this distribution")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("invalid survival times for this distribution")
 
 msgid "invalid survival times for this distribution"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("invalid term: ", deparse(z))
+
+msgid "invalid term:"
 msgstr ""
 
 
@@ -2684,6 +2788,15 @@ msgstr ""
 #. R/survfitms.R: gettextf("invalid value for '%s' option", "rmean")
 
 msgid "invalid value for '%s' option"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("invalid value for 'type'")
+#. R/survfitKM.R: stop("invalid value for 'type'")
+
+msgid "invalid value for 'type'"
 msgstr ""
 
 
@@ -2756,9 +2869,16 @@ msgstr ""
 
 #: R/concordance.R: 0
 #. R/concordance.R: stop("left hand side of the formula  must be a numeric vector or a survival object")
-#. R/concordance.R: stop("left hand side of the formula  must be a numeric vector or a survival object")
 
 msgid "left hand side of the formula  must be a numeric vector or a survival object"
+msgstr ""
+
+
+#: R/concordance.R: 0
+#. R/concordance.R: stop("left hand side of the formula must be a numeric vector,\n survival object, or an orderable factor")
+#. R/concordance.R: stop("left hand side of the formula must be a numeric vector,\n survival object, or an orderable factor")
+
+msgid "left hand side of the formula must be a numeric vector,\n survival object, or an orderable factor"
 msgstr ""
 
 
@@ -2791,13 +2911,6 @@ msgstr ""
 #. R/is.ratetable.R: gettext("length of the data does not match 'prod(dim)'")
 
 msgid "length of the data does not match 'prod(dim)'"
-msgstr ""
-
-
-#: R/survfitCI.R: 0
-#. R/survfitCI.R: stop("length of the influence matrix is > the maximum integer")
-
-msgid "length of the influence matrix is > the maximum integer"
 msgstr ""
 
 
@@ -2893,8 +3006,8 @@ msgid "missing attribute:"
 msgstr ""
 
 
-#: R/survreg.fit.S: 0
-#. R/survreg.fit.S: stop("missing density function in the definition of the distribution")
+#: R/survreg.fit.R: 0
+#. R/survreg.fit.R: stop("missing density function in the definition of the distribution")
 
 msgid "missing density function in the definition of the distribution"
 msgstr ""
@@ -2982,8 +3095,8 @@ msgid "multi-state curves are not a valid input"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("multi-state survival is not supported")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("multi-state survival is not supported")
 
 msgid "multi-state survival is not supported"
 msgstr ""
@@ -3198,10 +3311,17 @@ msgid "number of records greater than cohort size"
 msgstr ""
 
 
-#: R/coxph.R: 0
-#. R/coxph.R: stop("offsets must be finite")
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("number of rows for the influence matrix is > the maximum integer")
 
-msgid "offsets must be finite"
+msgid "number of rows for the influence matrix is > the maximum integer"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: stop("offsets must lead to a finite risk score")
+
+msgid "offsets must lead to a finite risk score"
 msgstr ""
 
 
@@ -3216,6 +3336,13 @@ msgstr ""
 #. R/is.ratetable.R: gettext("one of the dimnames identifiers is blank")
 
 msgid "one of the dimnames identifiers is blank"
+msgstr ""
+
+
+#: R/coxph.fit.R: 0
+#. R/coxph.fit.R: warning("one or more coefficients may be infinite")
+
+msgid "one or more coefficients may be infinite"
 msgstr ""
 
 
@@ -3255,6 +3382,13 @@ msgstr ""
 #. R/is.ratetable.R: gettext("only the last dimension can be interpolated")
 
 msgid "only the last dimension can be interpolated"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("option not recognized in a covariates formula: ", paste(ff[is.na(index)], collapse = ", "))
+
+msgid "option not recognized in a covariates formula:"
 msgstr ""
 
 
@@ -3307,8 +3441,8 @@ msgid "penalized summary function can't be used for a null model"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("penalty terms cannot be in an interaction")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("penalty terms cannot be in an interaction")
 
 msgid "penalty terms cannot be in an interaction"
 msgstr ""
@@ -3400,13 +3534,13 @@ msgstr ""
 #: R/cch.R: 0
 #: R/survdiff.S: 0
 #: R/survobrien.S: 0
-#: R/survreg.S: 0
+#: R/survreg.R: 0
 #. R/aareg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/anova.survreg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/cch.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/survdiff.S: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/survobrien.S: gettextf("response is not an object of class %s", dQuote("Surv"))
-#. R/survreg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survreg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 
 msgid "response is not an object of class %s"
 msgstr ""
@@ -3472,16 +3606,14 @@ msgid "start time must be < stop time"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("start-stop type Surv objects are not supported")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("start-stop type Surv objects are not supported")
 
 msgid "start-stop type Surv objects are not supported"
 msgstr ""
 
 
-#: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
-#. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
 #. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
 
 msgid "start.time = %s is greater than all time points."
@@ -3503,6 +3635,21 @@ msgstr ""
 #. R/survfitCI.R: stop("start.time must be a single numeric value")
 
 msgid "start.time must be a single numeric value"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("state variable with no list of values: ", x$left$stateid)
+#. R/parsecovar.R: stop("state variable with no list of values: ", x$right$stateid)
+
+msgid "state variable with no list of values:"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("statedata does not contain all the possible states: ", states[indx1 == 0])
+
+msgid "statedata does not contain all the possible states:"
 msgstr ""
 
 
@@ -3551,6 +3698,15 @@ msgstr ""
 
 
 #: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("stype must be 1 or 2")
+#. R/survfitKM.R: stop("stype must be 1 or 2")
+
+msgid "stype must be 1 or 2"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
 #. R/survfitCI.R: gettextf("subject is in two different groups, id %s", id[indx1[who]])
 
 msgid "subject is in two different groups, id %s"
@@ -3593,6 +3749,13 @@ msgstr ""
 #. R/yates.R: gettextf("term '%s' not found in the model", contr$termname)
 
 msgid "term '%s' not found in the model"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("term found without a :", x)
+
+msgid "term found without a :"
 msgstr ""
 
 
@@ -3681,8 +3844,8 @@ msgid "the reverse argument must be TRUE/FALSE"
 msgstr ""
 
 
-#: R/survreg.S: 0
-#. R/survreg.S: stop("the scale argument is not valid with multiple strata")
+#: R/survreg.R: 0
+#. R/survreg.R: stop("the scale argument is not valid with multiple strata")
 
 msgid "the scale argument is not valid with multiple strata"
 msgstr ""
@@ -3692,6 +3855,13 @@ msgstr ""
 #. R/tmerge.R: stop("the second argument of tdc must be numeric, character, or factor")
 
 msgid "the second argument of tdc must be numeric, character, or factor"
+msgstr ""
+
+
+#: R/parsecovar.R: 0
+#. R/parsecovar.R: stop("the statedata data set must contain a variable 'state'")
+
+msgid "the statedata data set must contain a variable 'state'"
 msgstr ""
 
 
@@ -3774,6 +3944,15 @@ msgid "two dimenesions idenitied as US ratetable years"
 msgstr ""
 
 
+#: R/survfitCI.R: 0
+#: R/survfitKM.R: 0
+#. R/survfitCI.R: stop("type argument must be character")
+#. R/survfitKM.R: stop("type argument must be character")
+
+msgid "type argument must be character"
+msgstr ""
+
+
 #: R/yates.R: 0
 #. R/yates.R: stop("type expected is not supported")
 
@@ -3817,9 +3996,9 @@ msgstr ""
 
 
 #: R/survpenal.fit.S: 0
-#: R/survreg.fit.S: 0
+#: R/survreg.fit.R: 0
 #. R/survpenal.fit.S: stop("unrecognized distribution")
-#. R/survreg.fit.S: stop("unrecognized distribution")
+#. R/survreg.fit.R: stop("unrecognized distribution")
 
 msgid "unrecognized distribution"
 msgstr ""
@@ -3899,11 +4078,27 @@ msgstr ""
 
 #: R/coxph.R: 0
 #: R/model.matrix.coxph.R: 0
+#: R/survfit.R: 0
 #. R/coxph.R: stop("weights must be finite")
 #. R/coxph.R: stop("weights must be finite")
 #. R/model.matrix.coxph.R: stop("weights must be finite")
+#. R/survfit.R: stop("weights must be finite")
 
 msgid "weights must be finite"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("weights must be non-negative")
+
+msgid "weights must be non-negative"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("weights must be numeric")
+
+msgid "weights must be numeric"
 msgstr ""
 
 
@@ -3972,8 +4167,8 @@ msgid "wrong length for inital values"
 msgstr ""
 
 
-#: R/survreg.fit.S: 0
-#. R/survreg.fit.S: stop("wrong length for initial parameters")
+#: R/survreg.fit.R: 0
+#. R/survreg.fit.R: stop("wrong length for initial parameters")
 
 msgid "wrong length for initial parameters"
 msgstr ""
@@ -4005,6 +4200,13 @@ msgstr ""
 #. R/concordance.R: stop("x and y are not the same length")
 
 msgid "x and y are not the same length"
+msgstr ""
+
+
+#: R/survfitKM.R: 0
+#. R/survfitKM.R: stop("x must be a factor")
+
+msgid "x must be a factor"
 msgstr ""
 
 

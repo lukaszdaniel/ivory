@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:19\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2011-10-15 15:12+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -846,6 +846,14 @@ msgstr ""
 msgid "y log scale:  yinch() is nonsense"
 msgstr "l'échelle des y est logarithmique : yinch() n'a pas de sens"
 
+#. R/boxplot.R: ngettext(sum(iD), "Duplicated argument %s is disregarded", "Duplicated arguments %s are disregarded",     domain = "R-graphics")
+#: R/boxplot.R:0
+#, fuzzy
+msgid "Duplicated argument %s is disregarded"
+msgid_plural "Duplicated arguments %s are disregarded"
+msgstr[0] "les argument(s) supplémentaires %s seront ignorés"
+msgstr[1] "les argument(s) supplémentaires %s seront ignorés"
+
 #. R/boxplot.R: ngettext(length(unique(out[inf])), "Outlier (%s) in boxplot %d is not drawn", "Outliers (%s) in boxplot %d are not drawn",     domain = "R-graphics")
 #: R/boxplot.R:0
 msgid "Outlier (%s) in boxplot %d is not drawn"
@@ -862,12 +870,6 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "l'argument %s n'est pas utilisé par"
 msgstr[1] "les arguments %s ne sont pas utilisés par"
-
-#, fuzzy
-#~ msgid "extra argument %s will be disregarded"
-#~ msgid_plural "extra arguments %s will be disregarded"
-#~ msgstr[0] "les argument(s) supplémentaires %s seront ignorés"
-#~ msgstr[1] "les argument(s) supplémentaires %s seront ignorés"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

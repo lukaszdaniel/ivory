@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-2-2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: 2014-03-27 14:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -40,13 +40,6 @@ msgstr ""
 #: R/diagMatrix.R:0
 msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
 msgstr ""
-
-# Matrix/R/Ops.R: 1165
-# stop(sprintf(gettext("%s %s <Matrix> is undefined", domain = "R-Matrix"), paste0(class(e2),"(0)"), .Generic), domain = NA)
-#. R/Ops.R: gettext("%s %s <Matrix> is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "%s %s <Matrix> is undefined"
-msgstr "%s %s <Matrix> nie jest określone"
 
 # Matrix/R/diagMatrix.R: 225
 # stop(gettextf("%s kind not yet implemented", sQuote(kind)), domain = "R-Matrix")
@@ -530,17 +523,6 @@ msgstr ".M.repl.i.2col(): zrzuć przypadek 'matrix' ..."
 #, fuzzy
 msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
 msgstr ".M.repl.i.2col(): zrzuć przypadek 'matrix' ..."
-
-# Matrix/R/Ops.R: 134
-# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
-# Matrix/R/Ops.R: 634
-# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
-# Matrix/R/Ops.R: 1126
-# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "<Matrix> %s %s is undefined"
-msgstr "<Matrix> %s %s nie jest określone"
 
 # Matrix/R/abIndex.R: 693
 # stop("<abIndex>  -->  <seqMat> is not yet implemented")
@@ -2149,24 +2131,27 @@ msgstr "'sum(<abIndex>)' nie jest jeszcze zaimplementowane"
 
 # Matrix/R/Auxiliaries.R: 375
 # message(sprintf(gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:lc]), collapse = ", ")), domain = NA)
-#. R/sparseMatrix.R: gettext("suppressing columns")
+#. R/sparseMatrix.R: gettextf("suppressing %d columns", d[2] - nc)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns"
+msgid "suppressing %d columns"
 msgstr "[[ zmniejszanie %d nazw kolumn %s ]]"
 
 # Matrix/R/Auxiliaries.R: 375
 # message(sprintf(gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:lc]), collapse = ", ")), domain = NA)
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d columns and %d rows", d[2] - nc, d[1] - nr)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns and rows"
+msgid "suppressing %d columns and %d rows"
 msgstr "[[ zmniejszanie %d nazw kolumn %s ]]"
 
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+# Matrix/R/Auxiliaries.R: 375
+# message(sprintf(gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix"), nc, paste(sQuote(cn[1:lc]), collapse = ", ")), domain = NA)
+#. R/sparseMatrix.R: gettextf("suppressing %d rows", d[1] - nr)
 #: R/sparseMatrix.R:0
-msgid "suppressing rows"
-msgstr ""
+#, fuzzy
+msgid "suppressing %d rows"
+msgstr "[[ zmniejszanie %d nazw kolumn %s ]]"
 
 # Matrix/R/sparseMatrix.R: 67
 # stop("symmetric matrix must be square")
@@ -2484,6 +2469,20 @@ msgstr[1] ""
 msgstr[2] ""
 "argumenty %s zostały odrzucone w\n"
 " %s"
+
+# Matrix/R/Ops.R: 1165
+# stop(sprintf(gettext("%s %s <Matrix> is undefined", domain = "R-Matrix"), paste0(class(e2),"(0)"), .Generic), domain = NA)
+#~ msgid "%s %s <Matrix> is undefined"
+#~ msgstr "%s %s <Matrix> nie jest określone"
+
+# Matrix/R/Ops.R: 134
+# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
+# Matrix/R/Ops.R: 634
+# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
+# Matrix/R/Ops.R: 1126
+# stop(sprintf(gettext("<Matrix> %s %s is undefined", domain = "R-Matrix"), .Generic, paste0(class(e2),"(0)")), domain = NA)
+#~ msgid "<Matrix> %s %s is undefined"
+#~ msgstr "<Matrix> %s %s nie jest określone"
 
 # Matrix/R/spModels.R: 125
 # warning(gettextf("variable '%s' converted to a factor", i), domain = "R-Matrix")

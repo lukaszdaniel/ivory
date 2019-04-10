@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -1155,6 +1155,12 @@ msgstr ""
 msgid "Repeated variables as arguments of a smooth are not permitted"
 msgstr "Wiederholte Variablen als Argumente einer Glättung sind nicht erlaubt"
 
+#. R/inla.r: stop("Requires a gam or bam prefit object")
+#. R/inla.r: stop("Requires a gam or bam prefit object")
+#: R/inla.r:0
+msgid "Requires a gam or bam prefit object"
+msgstr ""
+
 #. R/mgcv.r: warning("Reset optimizer to outer/newton")
 #: R/mgcv.r:0
 msgid "Reset optimizer to outer/newton"
@@ -1358,6 +1364,11 @@ msgstr ""
 msgid "Total model degrees of freedom %s"
 msgstr ""
 
+#. R/gam.fit3.r: warning("Tweedie density may be unreliable - series not fully converged")
+#: R/gam.fit3.r:0
+msgid "Tweedie density may be unreliable - series not fully converged"
+msgstr ""
+
 #. R/efam.r: stop("Tweedie p must be in interval (a,b)")
 #: R/efam.r:0
 msgid "Tweedie p must be in interval (a,b)"
@@ -1459,6 +1470,11 @@ msgstr ""
 #. R/bam.r: stop("bam can not discretize with this nesting structure")
 #: R/bam.r:0
 msgid "bam can not discretize with this nesting structure"
+msgstr ""
+
+#. R/inla.r: stop("bam fits only supported with discrete==TRUE")
+#: R/inla.r:0
+msgid "bam fits only supported with discrete==TRUE"
 msgstr ""
 
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
@@ -1675,6 +1691,11 @@ msgstr "Elemente von min.sp dürfen nicht negativ sein."
 msgid "empty models are not available"
 msgstr ""
 
+#. R/efam.r: stop("erroneous call to estimate.theta - no free parameters")
+#: R/efam.r:0
+msgid "erroneous call to estimate.theta - no free parameters"
+msgstr ""
+
 #. R/smooth.r: stop("factor 'by' variables can not be used with matrix arguments")
 #: R/smooth.r:0
 #, fuzzy
@@ -1806,6 +1827,7 @@ msgid "general families not supported by bam"
 msgstr "Argument test ignoriert"
 
 #. R/gamlss.r: stop("gevlss requires 3 links specified as character strings")
+#. R/gamlss.r: stop("gevlss requires 3 links specified as character strings")
 #: R/gamlss.r:0
 msgid "gevlss requires 3 links specified as character strings"
 msgstr ""
@@ -1884,6 +1906,11 @@ msgstr "innere Gruppierungen nicht in äußeren verschachtelt!"
 msgid "inner loop %d; can't correct step size"
 msgstr "innere Schleife 1; Schrittweite kann nicht korrigiert werden"
 
+#. R/inla.r: warning("integration not available with this family - insufficient derivatives")
+#: R/inla.r:0
+msgid "integration not available with this family - insufficient derivatives"
+msgstr ""
+
 #. R/misc.r: stop("internal error in vcorr, please report to simon.wood@r-project.org")
 #: R/misc.r:0
 msgid "internal error in vcorr, please report to simon.wood@r-project.org"
@@ -1955,6 +1982,13 @@ msgstr ""
 msgid "length of sp incorrect in t2: ignored"
 msgstr ""
 
+#. R/bam.r: stop("length of sp must be number of free smoothing parameters in original model")
+#. R/mgcv.r: stop("length of sp must be number of free smoothing parameters in original model")
+#: R/bam.r:0 R/mgcv.r:0
+msgid ""
+"length of sp must be number of free smoothing parameters in original model"
+msgstr ""
+
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
@@ -1991,6 +2025,11 @@ msgstr ""
 #. R/gam.fit3.r: stop("link is not implemented for extended families")
 #: R/gam.fit3.r:0
 msgid "link is not implemented for extended families"
+msgstr ""
+
+#. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of twlss")
+#: R/gamlss.r:0
+msgid "link not available for mu parameter of twlss"
 msgstr ""
 
 #. R/gam.fit3.r: stop("link was not recognised")
@@ -2046,6 +2085,11 @@ msgstr ""
 #. R/smooth.r: stop("mismatch between nb/polys supplied area names and data area names")
 #: R/smooth.r:0
 msgid "mismatch between nb/polys supplied area names and data area names"
+msgstr ""
+
+#. R/inla.r: warning("modal weight <=0 in integration step!!")
+#: R/inla.r:0
+msgid "modal weight <=0 in integration step!!"
 msgstr ""
 
 #. R/mgcv.r: warning("model has repeated 1-d smooths of same variable")
@@ -2223,6 +2267,11 @@ msgstr "nicht existierende Terme angefordert - wird ignoriert"
 msgid "non-existent terms requested - ignoring"
 msgstr "nicht existierende Terme angefordert - wird ignoriert"
 
+#. R/plots.r: warning("non-integer binomial denominator: quantiles incorrect")
+#: R/plots.r:0
+msgid "non-integer binomial denominator: quantiles incorrect"
+msgstr ""
+
 #. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
 #: R/mgcv.r:0
 msgid "not all required variables have been supplied in  newdata!"
@@ -2398,6 +2447,12 @@ msgstr "random-Argument muss eine *benannte* Liste sein."
 msgid "random effects don't work with ids"
 msgstr ""
 
+#. R/inla.r: stop("rank deficient re-parameterization")
+#. R/inla.r: stop("rank deficient re-parameterization")
+#: R/inla.r:0
+msgid "rank deficient re-parameterization"
+msgstr ""
+
 #. R/smooth.r: warning("reparameterization unstable for margin: not done")
 #: R/smooth.r:0
 msgid "reparameterization unstable for margin: not done"
@@ -2494,6 +2549,11 @@ msgstr "Ungültige lineare Prognosewerte in leerem Modell"
 msgid "singular values not returned in order"
 msgstr "Singulärwerte wurden nicht sortiert zurückgeliefert"
 
+#. R/inla.r: stop("size must be in [1,120]")
+#: R/inla.r:0
+msgid "size must be in [1,120]"
+msgstr ""
+
 #. R/smooth.r: warning("smooth objects should not have a qrc attribute")
 #: R/smooth.r:0
 #, fuzzy
@@ -2511,6 +2571,12 @@ msgstr ""
 #: R/soap.r:0
 msgid "soap films are bivariate only"
 msgstr ""
+
+#. R/inla.r: stop("something wrong with A index vector")
+#: R/inla.r:0
+#, fuzzy
+msgid "something wrong with A index vector"
+msgstr "etwas stimmt nicht mit Argument d."
 
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #. R/smooth.r: warning("something wrong with argument 'd'")
@@ -2736,6 +2802,12 @@ msgstr ""
 #: R/bam.r:0
 msgid "unsupported smoothness selection method"
 msgstr ""
+
+#. R/misc.r: stop("update not positive definite")
+#: R/misc.r:0
+#, fuzzy
+msgid "update not positive definite"
+msgstr "]] Matrix ist nicht +ve definit."
 
 #. R/bam.r: warning("value of 'samfrac' argument is too small - ignored")
 #: R/bam.r:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:20\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -6053,10 +6053,11 @@ msgstr "ERREUR : aucun package spécifié"
 msgid "packaging into %s failed"
 msgstr "le test '%s' a échoué"
 
-#. R/build.R: gettext("packaging into .tar.gz failed", domain = "R-tools")
+#. R/build.R: gettext("packaging into tarball failed", domain = "R-tools")
 #: R/build.R:0
-msgid "packaging into .tar.gz failed"
-msgstr ""
+#, fuzzy
+msgid "packaging into tarball failed"
+msgstr "le test '%s' a échoué"
 
 #. R/QC.R: gettextf("parse error in examples from file %s:\n", sQuote(file), conditionMessage(e))
 #: R/QC.R:0
@@ -6432,6 +6433,26 @@ msgstr ""
 #: R/dynamicHelp.R:0
 msgid "starting httpd help server ..."
 msgstr "démarrage du serveur d'aide httpd ..."
+
+#. R/install.R: gettext("stripping dynamic libraries under lib")
+#: R/install.R:0
+msgid "stripping dynamic libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping dynamic library under lib")
+#: R/install.R:0
+msgid "stripping dynamic library under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static libraries under lib")
+#: R/install.R:0
+msgid "stripping static libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static library under lib")
+#: R/install.R:0
+msgid "stripping static library under lib"
+msgstr ""
 
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 #: R/check.R:0
@@ -7815,7 +7836,7 @@ msgid_plural "problems found in %s"
 msgstr[0] "T/F trouvé(s) dans %s"
 msgstr[1] "T/F trouvé(s) dans %s"
 
-#. R/admin.R: ngettext(length(bad), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
+#. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0
 #, fuzzy
 msgid "unable to re-encode %s line %s"

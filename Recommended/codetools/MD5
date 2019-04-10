@@ -4,10 +4,10 @@ d7d4587719d6cbb3083123501ec23dd3 *NAMESPACE
 29fbed23cf38b444df2df0ce0389946b *man/findGlobals.Rd
 722f473fac8f4c14d9fc199953daab44 *man/codetools.Rd
 e48906bf15c7ce12219499d2ef9a442a *DESCRIPTION
-ecfdfce9918eeccddc2df4614c82658a *po/R-pl.po
-b1af3fdbb2bf986f87bffcad602d8d24 *po/R-codetools.pot
-36023f2dcaae4749c8369bb3c7ca0b6c *inst/po/en@quot/LC_MESSAGES/R-codetools.mo
-4bd07f5432e35ca7d652c4b4714d49d9 *inst/po/pl/LC_MESSAGES/R-codetools.mo
+acdd2ec3f07ae7a2b1266ec93e0e81a2 *po/R-pl.po
+b89f75a4d26032dfd02fde86ee36d146 *po/R-codetools.pot
+1c80793dc7e532ed2325b80cf71c8a85 *inst/po/en@quot/LC_MESSAGES/R-codetools.mo
+a513ab79971045a2c98ee0ab619236c7 *inst/po/pl/LC_MESSAGES/R-codetools.mo
 838118aa4116e6b2d66e393dae8e4073 *tests/tests.R
 c59673f443e1a000708651cbdb50eea3 *R/codetools.R
 41581dc4956caf6fc5eae9becbab8285 *Changes

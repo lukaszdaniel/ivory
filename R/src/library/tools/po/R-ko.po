@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:20\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -5910,10 +5910,11 @@ msgstr "패키지 %s에 대한 패키지 인덱스를 찾을 수 없습니다"
 msgid "packaging into %s failed"
 msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
-#. R/build.R: gettext("packaging into .tar.gz failed", domain = "R-tools")
+#. R/build.R: gettext("packaging into tarball failed", domain = "R-tools")
 #: R/build.R:0
-msgid "packaging into .tar.gz failed"
-msgstr ""
+#, fuzzy
+msgid "packaging into tarball failed"
+msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
 #. R/QC.R: gettextf("parse error in examples from file %s:\n", sQuote(file), conditionMessage(e))
 #: R/QC.R:0
@@ -6285,6 +6286,26 @@ msgstr ""
 #: R/dynamicHelp.R:0
 msgid "starting httpd help server ..."
 msgstr "httpd 도움말 서버를 시작합니다 ..."
+
+#. R/install.R: gettext("stripping dynamic libraries under lib")
+#: R/install.R:0
+msgid "stripping dynamic libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping dynamic library under lib")
+#: R/install.R:0
+msgid "stripping dynamic library under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static libraries under lib")
+#: R/install.R:0
+msgid "stripping static libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static library under lib")
+#: R/install.R:0
+msgid "stripping static library under lib"
+msgstr ""
 
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 #: R/check.R:0
@@ -7489,7 +7510,7 @@ msgid "problem found in %s"
 msgid_plural "problems found in %s"
 msgstr[0] "%s 내에서 T/F를 찾았습니다"
 
-#. R/admin.R: ngettext(length(bad), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
+#. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0
 #, fuzzy
 msgid "unable to re-encode %s line %s"

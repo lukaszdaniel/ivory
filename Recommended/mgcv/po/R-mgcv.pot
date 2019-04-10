@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-26\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"Project-Id-Version: mgcv 1.8-28\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1464,6 +1464,14 @@ msgid "Repeated variables as arguments of a smooth are not permitted"
 msgstr ""
 
 
+#: R/inla.r: 0
+#. R/inla.r: stop("Requires a gam or bam prefit object")
+#. R/inla.r: stop("Requires a gam or bam prefit object")
+
+msgid "Requires a gam or bam prefit object"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: warning("Reset optimizer to outer/newton")
 
@@ -1737,6 +1745,13 @@ msgid "Total model degrees of freedom %s"
 msgstr ""
 
 
+#: R/gam.fit3.r: 0
+#. R/gam.fit3.r: warning("Tweedie density may be unreliable - series not fully converged")
+
+msgid "Tweedie density may be unreliable - series not fully converged"
+msgstr ""
+
+
 #: R/efam.r: 0
 #. R/efam.r: stop("Tweedie p must be in interval (a,b)")
 
@@ -1868,6 +1883,13 @@ msgstr ""
 #. R/bam.r: stop("bam can not discretize with this nesting structure")
 
 msgid "bam can not discretize with this nesting structure"
+msgstr ""
+
+
+#: R/inla.r: 0
+#. R/inla.r: stop("bam fits only supported with discrete==TRUE")
+
+msgid "bam fits only supported with discrete==TRUE"
 msgstr ""
 
 
@@ -2147,6 +2169,13 @@ msgid "empty models are not available"
 msgstr ""
 
 
+#: R/efam.r: 0
+#. R/efam.r: stop("erroneous call to estimate.theta - no free parameters")
+
+msgid "erroneous call to estimate.theta - no free parameters"
+msgstr ""
+
+
 #: R/smooth.r: 0
 #. R/smooth.r: stop("factor 'by' variables can not be used with matrix arguments")
 
@@ -2312,6 +2341,7 @@ msgstr ""
 
 #: R/gamlss.r: 0
 #. R/gamlss.r: stop("gevlss requires 3 links specified as character strings")
+#. R/gamlss.r: stop("gevlss requires 3 links specified as character strings")
 
 msgid "gevlss requires 3 links specified as character strings"
 msgstr ""
@@ -2414,6 +2444,13 @@ msgid "inner loop %d; can't correct step size"
 msgstr ""
 
 
+#: R/inla.r: 0
+#. R/inla.r: warning("integration not available with this family - insufficient derivatives")
+
+msgid "integration not available with this family - insufficient derivatives"
+msgstr ""
+
+
 #: R/misc.r: 0
 #. R/misc.r: stop("internal error in vcorr, please report to simon.wood@r-project.org")
 
@@ -2502,6 +2539,15 @@ msgid "length of sp incorrect in t2: ignored"
 msgstr ""
 
 
+#: R/bam.r: 0
+#: R/mgcv.r: 0
+#. R/bam.r: stop("length of sp must be number of free smoothing parameters in original model")
+#. R/mgcv.r: stop("length of sp must be number of free smoothing parameters in original model")
+
+msgid "length of sp must be number of free smoothing parameters in original model"
+msgstr ""
+
+
 #: R/soap.r: 0
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
@@ -2546,6 +2592,13 @@ msgstr ""
 #. R/gam.fit3.r: stop("link is not implemented for extended families")
 
 msgid "link is not implemented for extended families"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of twlss")
+
+msgid "link not available for mu parameter of twlss"
 msgstr ""
 
 
@@ -2617,6 +2670,13 @@ msgstr ""
 #. R/smooth.r: stop("mismatch between nb/polys supplied area names and data area names")
 
 msgid "mismatch between nb/polys supplied area names and data area names"
+msgstr ""
+
+
+#: R/inla.r: 0
+#. R/inla.r: warning("modal weight <=0 in integration step!!")
+
+msgid "modal weight <=0 in integration step!!"
 msgstr ""
 
 
@@ -2843,6 +2903,13 @@ msgstr ""
 #. R/mgcv.r: warning("non-existent terms requested - ignoring")
 
 msgid "non-existent terms requested - ignoring"
+msgstr ""
+
+
+#: R/plots.r: 0
+#. R/plots.r: warning("non-integer binomial denominator: quantiles incorrect")
+
+msgid "non-integer binomial denominator: quantiles incorrect"
 msgstr ""
 
 
@@ -3077,6 +3144,14 @@ msgid "random effects don't work with ids"
 msgstr ""
 
 
+#: R/inla.r: 0
+#. R/inla.r: stop("rank deficient re-parameterization")
+#. R/inla.r: stop("rank deficient re-parameterization")
+
+msgid "rank deficient re-parameterization"
+msgstr ""
+
+
 #: R/smooth.r: 0
 #. R/smooth.r: warning("reparameterization unstable for margin: not done")
 
@@ -3203,6 +3278,13 @@ msgid "singular values not returned in order"
 msgstr ""
 
 
+#: R/inla.r: 0
+#. R/inla.r: stop("size must be in [1,120]")
+
+msgid "size must be in [1,120]"
+msgstr ""
+
+
 #: R/smooth.r: 0
 #. R/smooth.r: warning("smooth objects should not have a qrc attribute")
 
@@ -3223,6 +3305,13 @@ msgstr ""
 #. R/soap.r: stop("soap films are bivariate only")
 
 msgid "soap films are bivariate only"
+msgstr ""
+
+
+#: R/inla.r: 0
+#. R/inla.r: stop("something wrong with A index vector")
+
+msgid "something wrong with A index vector"
 msgstr ""
 
 
@@ -3517,6 +3606,13 @@ msgstr ""
 #. R/bam.r: stop("unsupported smoothness selection method")
 
 msgid "unsupported smoothness selection method"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("update not positive definite")
+
+msgid "update not positive definite"
 msgstr ""
 
 

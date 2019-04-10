@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: codetools 0.2-15\n"
-"POT-Creation-Date: 2016-12-23 19:40\n"
+"Project-Id-Version: codetools 0.2-16\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,13 +32,6 @@ msgstr ""
 #. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools")
 
 msgid "%s may be used in an incorrect context: %s"
-msgstr ""
-
-
-#: R/codetools.R: 0
-#. R/codetools.R: stop("'makeUsageCollector()' function only works for closures")
-
-msgid "'makeUsageCollector()' function only works for closures"
 msgstr ""
 
 

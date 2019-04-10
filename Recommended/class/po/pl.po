@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: class 7.3-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2019-04-08 21:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,6 +16,6 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: class.c:131
+#: class.c:138
 msgid "too many ties in knn"
 msgstr "zbyt wiele powtórzonych wartości w 'knn'"

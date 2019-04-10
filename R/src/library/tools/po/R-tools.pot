@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tools 3.6.0\n"
-"POT-Creation-Date: 2019-03-22 18:20\n"
+"Project-Id-Version: tools 3.7.0\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7255,9 +7255,9 @@ msgstr ""
 
 
 #: R/build.R: 0
-#. R/build.R: gettext("packaging into .tar.gz failed", domain = "R-tools")
+#. R/build.R: gettext("packaging into tarball failed", domain = "R-tools")
 
-msgid "packaging into .tar.gz failed"
+msgid "packaging into tarball failed"
 msgstr ""
 
 
@@ -7703,6 +7703,34 @@ msgstr ""
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
 
 msgid "starting httpd help server ..."
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("stripping dynamic libraries under lib")
+
+msgid "stripping dynamic libraries under lib"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("stripping dynamic library under lib")
+
+msgid "stripping dynamic library under lib"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("stripping static libraries under lib")
+
+msgid "stripping static libraries under lib"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("stripping static library under lib")
+
+msgid "stripping static library under lib"
 msgstr ""
 
 
@@ -9155,7 +9183,7 @@ msgstr[1]    ""
 
 
 #: R/admin.R: 0
-#. R/admin.R: ngettext(length(bad), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
+#. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 
 msgid        "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"

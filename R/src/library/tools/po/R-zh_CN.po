@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:20\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -5916,10 +5916,11 @@ msgstr "错误：没有设定程序包"
 msgid "packaging into %s failed"
 msgstr "试用'%s'失败了"
 
-#. R/build.R: gettext("packaging into .tar.gz failed", domain = "R-tools")
+#. R/build.R: gettext("packaging into tarball failed", domain = "R-tools")
 #: R/build.R:0
-msgid "packaging into .tar.gz failed"
-msgstr ""
+#, fuzzy
+msgid "packaging into tarball failed"
+msgstr "试用'%s'失败了"
 
 #. R/QC.R: gettextf("parse error in examples from file %s:\n", sQuote(file), conditionMessage(e))
 #: R/QC.R:0
@@ -6292,6 +6293,26 @@ msgstr ""
 #: R/dynamicHelp.R:0
 msgid "starting httpd help server ..."
 msgstr "打开httpd帮助服务器…"
+
+#. R/install.R: gettext("stripping dynamic libraries under lib")
+#: R/install.R:0
+msgid "stripping dynamic libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping dynamic library under lib")
+#: R/install.R:0
+msgid "stripping dynamic library under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static libraries under lib")
+#: R/install.R:0
+msgid "stripping static libraries under lib"
+msgstr ""
+
+#. R/install.R: gettext("stripping static library under lib")
+#: R/install.R:0
+msgid "stripping static library under lib"
+msgstr ""
 
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 #: R/check.R:0
@@ -7505,7 +7526,7 @@ msgid "problem found in %s"
 msgid_plural "problems found in %s"
 msgstr[0] "%s里不能有T/F这样的值"
 
-#. R/admin.R: ngettext(length(bad), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
+#. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0
 #, fuzzy
 msgid "unable to re-encode %s line %s"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: codetools 0.2-8\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: 2014-11-28 19:30+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -31,11 +31,6 @@ msgstr "%s może być użyte w niepoprawnym kontekście"
 #: R/codetools.R:0
 msgid "%s may be used in an incorrect context: %s"
 msgstr "%s może być użyte w niepoprawnym kontekście: %s"
-
-#. R/codetools.R: stop("'makeUsageCollector()' function only works for closures")
-#: R/codetools.R:0
-msgid "'makeUsageCollector()' function only works for closures"
-msgstr "funkcja 'makeUsageCollector()' działa tylko dla zamknięć"
 
 #. R/codetools.R: gettextf("Error while checking: ", domain = "R-codetools")
 #: R/codetools.R:0
@@ -172,6 +167,9 @@ msgstr "błędna liczba argumentów przekazanych do %s"
 #: R/codetools.R:0
 msgid "wrong number of arguments to %s:"
 msgstr "błędna liczba argumentów przekazanych do %s:"
+
+#~ msgid "'makeUsageCollector()' function only works for closures"
+#~ msgstr "funkcja 'makeUsageCollector()' działa tylko dla zamknięć"
 
 #~ msgid "only works for closures"
 #~ msgstr "działa tylko dla zamknięć"

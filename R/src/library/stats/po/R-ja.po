@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3199,6 +3199,11 @@ msgstr ""
 msgid "Uniquenesses:"
 msgstr ""
 
+#. R/models.R: paste("Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!",     conditionMessage(e), sep = "\n")
+#: R/models.R:0
+msgid "Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!"
+msgstr ""
+
 #. R/selfStart.R: stop("old-style self-starting model functions are no longer supported.\n", "New selfStart functions are available.\n",     "Use\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\n",     "If writing your own selfStart model, see \"help(selfStart)\" for the new form of the \"initial\" attribute.",     domain = "R-stats")
 #: R/selfStart.R:0
 msgid ""
@@ -3891,6 +3896,11 @@ msgstr ""
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
 #: R/var.test.R:0
 msgid "denom df"
+msgstr ""
+
+#. R/models.R: c("reformulate", "deprecatedWarning")
+#: R/models.R:0
+msgid "deprecatedWarning"
 msgstr ""
 
 #. R/model.tables.R: stop("design is unbalanced so cannot proceed")
@@ -5644,6 +5654,11 @@ msgstr " 'trace' に対する解説をより注意深く読んでください "
 #: R/relevel.R:0
 msgid "ref = %d must be in 1L:%d"
 msgstr " ref = %d は 1L:%d 中になければなりません: "
+
+#. R/models.R: c("reformulate", "deprecatedWarning")
+#: R/models.R:0
+msgid "reformulate"
+msgstr ""
 
 #. R/nlminb.R: gettext("relative convergence (4)")
 #: R/nlminb.R:0

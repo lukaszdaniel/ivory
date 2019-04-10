@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: base 3.6.0\n"
-"POT-Creation-Date: 2019-03-22 18:19\n"
+"Project-Id-Version: base 3.7.0\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2231,6 +2231,13 @@ msgid "Use of save versions prior to 2 is deprecated"
 msgstr ""
 
 
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\nMaybe package installed with version of R newer than %s ?",     package, "S3methods", p1, p2, getRversion())
+
+msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\nMaybe package installed with version of R newer than %s ?"
+msgstr ""
+
+
 #: R/load.R: 0
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
 
@@ -4192,6 +4199,13 @@ msgstr ""
 #. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 
 msgid "unable to load R code in package %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
+
+msgid "unable to re-encode some lines in NAMESPACE file"
 msgstr ""
 
 

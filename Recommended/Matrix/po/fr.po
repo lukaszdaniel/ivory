@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:55+0200\n"
+"POT-Creation-Date: 2019-04-08 21:35+0200\n"
 "PO-Revision-Date: 2014-03-30 09:05+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -466,66 +466,66 @@ msgstr ""
 "tous les indices de colonnes (slot 'j') doivent être compris entre 0 et "
 "ncol-1 dans une TsparseMatrix"
 
-#: chm_common.c:76
+#: chm_common.c:82
 #, fuzzy
 msgid "Argument 'rho' must be an environment"
 msgstr "L'argument rho doit être un environnement"
 
-#: chm_common.c:253
+#: chm_common.c:259
 #, fuzzy
 msgid "invalid class of object passed to 'as_cholmod_sparse' function"
 msgstr "classe d'objet incorrecte pour as_cholmod_sparse"
 
-#: chm_common.c:255
+#: chm_common.c:261
 #, fuzzy
 msgid "invalid object passed to 'as_cholmod_sparse' function"
 msgstr "objet incorrect passé à as_cholmod_sparse"
 
-#: chm_common.c:282
+#: chm_common.c:288
 #, fuzzy
 msgid "'in_place' 'cholmod_sort' returned an error code"
 msgstr "in_place cholmod_sort a renvoyé le code d'erreur"
 
-#: chm_common.c:288
+#: chm_common.c:294
 #, fuzzy
 msgid "'cholmod_sort' function returned an error code"
 msgstr "cholmod_sort a renvoyé le code d'erreur"
 
-#: chm_common.c:293
+#: chm_common.c:299
 msgid ""
 "Note: 'as_cholmod_sparse()' function needed sorting using 'cholmod_sort()' "
 "function\n"
 msgstr ""
 
-#: chm_common.c:307
+#: chm_common.c:313
 #, c-format
 msgid "Note: as_cholmod_sparse(<ctype=%d>) - diagU2N\n"
 msgstr ""
 
-#: chm_common.c:377
+#: chm_common.c:383
 msgid "chm_sparse_to_SEXP(<real>, *): invalid 'Rkind' (real kind code)"
 msgstr "chm_sparse_to_SEXP(<real>, *) : 'Rkind' incorrect (real kind code)"
 
-#: chm_common.c:385
+#: chm_common.c:391
 #, fuzzy
 msgid "unknown 'xtype' in \"cholmod_sparse\" object"
 msgstr "xtype inconnu dans cholmod_sparse object"
 
-#: chm_common.c:414 chm_common.c:644 chm_common.c:922 chm_common.c:972
+#: chm_common.c:420 chm_common.c:650 chm_common.c:928 chm_common.c:978
 msgid "complex sparse matrix code not yet written"
 msgstr "le code n'est pas encore écrit pour les matrices éparses complexes"
 
-#: chm_common.c:419 chm_common.c:649
+#: chm_common.c:425 chm_common.c:655
 #, fuzzy
 msgid "'symmetric' and 'triangular' both set"
 msgstr "Symmetric et triangular sont tous deux sélectionnés"
 
-#: chm_common.c:495
+#: chm_common.c:501
 #, fuzzy
 msgid "invalid class of object passed to 'as_cholmod_triplet' function"
 msgstr "objet de classe incorrecte pour as_cholmod_triplet"
 
-#: chm_common.c:519
+#: chm_common.c:525
 #, fuzzy
 msgid ""
 "as_cholmod_triplet(): could not reallocate for internal 'diagU2N()' function"
@@ -533,110 +533,110 @@ msgstr ""
 "as_cholmod_triplet() : impossible de réallouer de la mémoire pour la "
 "fonction interne diagU2N()"
 
-#: chm_common.c:616
+#: chm_common.c:622
 #, fuzzy
 msgid "unknown 'xtype' in \"cholmod_triplet\" object"
 msgstr "xtype inconnu pour cholmod_triplet object"
 
-#: chm_common.c:695
+#: chm_common.c:701
 #, fuzzy
 msgid "invalid class of object passed to 'as_cholmod_dense()' function"
 msgstr "classe d'objet incorrecte pour as_cholmod_dense"
 
-#: chm_common.c:763
+#: chm_common.c:769
 #, c-format
 msgid ""
 "'chm_transpose_dense(ans, x)' not yet implemented for %s different from %s"
 msgstr ""
 
-#: chm_common.c:787
+#: chm_common.c:793
 #, c-format
 msgid "Cholmod error '%s' at file %s, line %d"
 msgstr "Erreur Cholmod '%s' dans le fichier %s, ligne %d"
 
-#: chm_common.c:791
+#: chm_common.c:797
 #, c-format
 msgid "Cholmod warning '%s' at file %s, line %d"
 msgstr "Avertissement Cholmod '%s' dans le fichier %s, ligne %d"
 
-#: chm_common.c:820
+#: chm_common.c:826
 #, fuzzy, c-format
 msgid "Unable to initialize 'cholmod' function: error code %d"
 msgstr "Impossible d'initialiser cholmod : code d'erreur %d"
 
-#: chm_common.c:866
+#: chm_common.c:872
 msgid "unknown 'Rkind'"
 msgstr "'Rkind' inconnu"
 
-#: chm_common.c:873 chm_common.c:958
+#: chm_common.c:879 chm_common.c:964
 #, fuzzy
 msgid "unknown 'xtype'"
 msgstr "xtype inconnu"
 
-#: chm_common.c:928
+#: chm_common.c:934
 #, fuzzy
 msgid "code for 'cholmod_dense()' function with holes not yet written"
 msgstr "le code pour cholmod_dense en présence de trous n'est pas encore écrit"
 
-#: chm_common.c:977
+#: chm_common.c:983
 msgid "don't know if a dense pattern matrix makes sense"
 msgstr "je ne sais pas si une matrice pattern dense a un sens"
 
-#: chm_common.c:981
+#: chm_common.c:987
 #, fuzzy
 msgid "code for 'cholmod_dense()' functionwith holes not yet written"
 msgstr "le code pour cholmod_dense en présence de trous n'est pas encore écrit"
 
-#: chm_common.c:1042
+#: chm_common.c:1048
 #, fuzzy
 msgid "invalid class of object passed to 'as_cholmod_factor' function"
 msgstr "class d'objet incorrecte pour as_cholmod_factor"
 
-#: chm_common.c:1056
+#: chm_common.c:1062
 #, fuzzy
 msgid "Supernodal LDL decomposition not available"
 msgstr "La décomposition 'supernodal LDL' n'est pas disponible"
 
-#: chm_common.c:1058
+#: chm_common.c:1064
 #, fuzzy
 msgid "Supernodal/simplicial class inconsistent with 'type' flags"
 msgstr "Classe supernodal/simplicial incohérente avec le drapeau de type"
 
-#: chm_common.c:1076
+#: chm_common.c:1082
 #, fuzzy
 msgid "Number of supernodes must be positive when 'is_super' argument is TRUE"
 msgstr "Le nombre de supernoeuds doit être positif losque is_super est TRUE"
 
-#: chm_common.c:1079
+#: chm_common.c:1085
 #, fuzzy
 msgid "Lengths of 'super' and 'pi' arguments must be equal"
 msgstr "Les longueurs de super et pi doivent être égales"
 
-#: chm_common.c:1083
+#: chm_common.c:1089
 #, fuzzy
 msgid "Lengths of 'super' and 'px' arguments must be equal"
 msgstr "Les longueurs de super et px doivent être égales"
 
-#: chm_common.c:1096
+#: chm_common.c:1102
 #, fuzzy
 msgid "failure in 'as_cholmod_factor' function"
 msgstr "erreur dans as_cholmod_factor"
 
-#: chm_common.c:1142
+#: chm_common.c:1148
 msgid "CHOLMOD factorization was unsuccessful"
 msgstr "la factorisation CHOLMOD a échoué"
 
-#: chm_common.c:1155
+#: chm_common.c:1161
 #, c-format
 msgid "f->xtype of %d not recognized"
 msgstr "f->xtype de %d non reconnu"
 
-#: chm_common.c:1220
+#: chm_common.c:1226
 #, c-format
 msgid "chm_diagN2U(<non-square matrix>): nrow=%d, ncol=%d"
 msgstr "chm_diagN2U(<matrice non carrée>): nrow=%d, ncol=%d"
 
-#: chm_common.c:1263
+#: chm_common.c:1269
 #, c-format
 msgid "chm_diagN2U(x, uploT = %d): uploT should be +- 1"
 msgstr "chm_diagN2U(x, uploT = %d): uploT doit être +- 1"
@@ -686,120 +686,120 @@ msgstr "Classe inappropriée cl='%s' dans Matrix_css_to_SEXP(S, cl, ..)"
 msgid "Inappropriate class cl='%s' in Matrix_csn_to_SEXP(S, cl, ..)"
 msgstr "Classe inappropriée cl='%s' dans Matrix_csn_to_SEXP(S, cl, ..)"
 
-#: dense.c:29
+#: dense.c:26
 #, c-format
 msgid "incorrect left cyclic shift, j (%d) >= k (%d)"
 msgstr "décalage cyclique à gauche incorrect, j (%d) >= k (%d)"
 
-#: dense.c:31
+#: dense.c:28
 #, c-format
 msgid "incorrect left cyclic shift, j (%d) < 0"
 msgstr "décalage cyclique à gauche incorrect, j (%d) < 0"
 
-#: dense.c:33
+#: dense.c:30
 #, c-format
 msgid "incorrect left cyclic shift, k (%d) > ldx (%d)"
 msgstr "décalage cyclique à gauche incorrect, k (%d) > ldx (%d)"
 
-#: dense.c:78
+#: dense.c:77
 #, fuzzy
 msgid "Unknown error in 'getGivens' function"
 msgstr "Erreur inconnue dans getGivens"
 
-#: dense.c:90 dense.c:106 dense.c:137
+#: dense.c:89 dense.c:104 dense.c:132
 #, fuzzy
 msgid "'X' argument must be a numeric (double precision) matrix"
 msgstr "X doit être une matrice numérique (double précision)"
 
-#: dense.c:111 dense.c:142
+#: dense.c:109 dense.c:137
 #, fuzzy
 msgid "'y' argument must be a numeric (double precision) matrix"
 msgstr "y doit être une matrice numérique (double précision)"
 
-#: dense.c:114 dense.c:145
+#: dense.c:112 dense.c:140
 #, fuzzy, c-format
 msgid "number of rows in 'y' (%d) does not match number of rows in 'X' (%d)"
 msgstr ""
 "le nombre de lignes de y (%d) ne correspond pas au nombre de lignes de X (%d)"
 
-#: dense.c:124
+#: dense.c:123
 #, fuzzy, c-format
 msgid "Lapack routine 'dposv' returned error code %d"
 msgstr "La routine Lapack dposv a renvoyé le code d'erreur %d"
 
-#: dense.c:154
+#: dense.c:149
 #, fuzzy, c-format
 msgid "First call to Lapack routine 'dgels' returned error code %d"
 msgstr ""
 "Le premier appel à la routine Lapack dgels a renvoyé le code d'erreur %d"
 
-#: dense.c:160
+#: dense.c:155
 #, fuzzy, c-format
 msgid "Second call to Lapack routine 'dgels' returned error code %d"
 msgstr ""
 "Le second appel à la routine Lapack dgels a renvoyé le code d'erreur %d"
 
-#: dense.c:172
+#: dense.c:167
 #, fuzzy
 msgid "'X' must be a real (numeric) matrix"
 msgstr "X doit être une matrice (numérique) de réels"
 
-#: dense.c:173
+#: dense.c:168
 #, fuzzy, c-format
 msgid "'tol' argument, given as %g, must be non-negative"
 msgstr "tol, donné comme %g, doit être non négatif"
 
-#: dense.c:174
+#: dense.c:169
 #, fuzzy, c-format
 msgid "'tol' argument, given as %g, must be less or equal to 1"
 msgstr "tol, donné comme %g, doit être <= 1"
 
-#: dense.c:198
+#: dense.c:193
 #, fuzzy, c-format
 msgid "First call to 'dgeqrf' returned error code %d"
 msgstr "Le premier appel à dgeqrf a renvoyé le code d'erreur %d"
 
-#: dense.c:204
+#: dense.c:199
 #, fuzzy, c-format
 msgid "Second call to 'dgeqrf' returned error code %d"
 msgstr "Le second appel à dgeqrf a renvoyé le code d'erreur %d"
 
-#: dense.c:209 dense.c:229
+#: dense.c:204 dense.c:224
 #, fuzzy, c-format
 msgid "Lapack routine 'dtrcon' returned error code %d"
 msgstr "La routine Lapack dtrcon a renvoyé le code d'erreur %d"
 
-#: dense.c:276
+#: dense.c:271
 #, c-format
 msgid "dense_to_Csparse(<LARGE>): cholmod_l_dense_to_sparse failure status=%d"
 msgstr ""
 
-#: dense.c:279
+#: dense.c:274
 #, c-format
 msgid ""
 "Matrix dimension %d x %d (= %g) too large [FIXME calling "
 "cholmod_l_dense_to_sparse]"
 msgstr ""
 
-#: dense.c:308
+#: dense.c:303
 #, fuzzy, c-format
 msgid "Lower band %d is greater than upper band %d"
 msgstr "La bande basse %d > la bande haute %d"
 
-#: dense.c:378
+#: dense.c:373
 msgid "ddense_to_symmetric(): matrix is not square!"
 msgstr "ddense_to_symmetric() : la matrice n'est pas carrée !"
 
-#: dense.c:389
+#: dense.c:384
 #, c-format
 msgid "matrix is not symmetric [%d,%d]"
 msgstr "la matrice n'est pas symétrique [%d,%d]"
 
-#: dense.c:449
+#: dense.c:444
 msgid "matrix is not square! (symmetric part)"
 msgstr "la matrice n'est pas carrée ! (partie symétrique)"
 
-#: dense.c:508
+#: dense.c:502
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr "la matrice n'est pas carrée ! (partie 'skew-symetric')"
 
@@ -825,7 +825,7 @@ msgstr "class(x) incorrecte '%s' dans R_to_CMatrix(x)"
 msgid "dgCMatrix_lusol requires a square, non-empty matrix"
 msgstr "dgCMatrix_lusol nécessite une matrice carrée non vide"
 
-#: dgCMatrix.c:167 dgCMatrix.c:194 dgCMatrix.c:509 dgCMatrix.c:551
+#: dgCMatrix.c:167 dgCMatrix.c:194 dgCMatrix.c:510 dgCMatrix.c:552
 #: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81 dspMatrix.c:79
 #: dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
 msgid "Dimensions of system to be solved are inconsistent"
@@ -878,51 +878,51 @@ msgstr ""
 msgid "'cs_qr' function failed"
 msgstr "cs_qr a échoué"
 
-#: dgCMatrix.c:330
+#: dgCMatrix.c:331
 #, fuzzy
 msgid "'SuiteSparseQR_C_QR' function returned an error code"
 msgstr "SuiteSparseQR_C_QR a renvoyé un code d'erreur"
 
-#: dgCMatrix.c:374
+#: dgCMatrix.c:375
 msgid "LU decomposition applies only to square matrices"
 msgstr "la décomposition LU n'est utilisable que pour des matrices carrées"
 
-#: dgCMatrix.c:383
+#: dgCMatrix.c:384
 #, fuzzy
 msgid "cs_lu(A) failed: near-singular 'A' (or out of memory)"
 msgstr "cs_lu(A) a échoué : A pratiquement singulière (ou manque de mémoire)"
 
-#: dgCMatrix.c:469
+#: dgCMatrix.c:470
 msgid "dgcMatrix_LU(*, keep_dimnames = NA): NA taken as TRUE"
 msgstr ""
 
-#: dgCMatrix.c:481
+#: dgCMatrix.c:482
 msgid "dgCMatrix_matrix_solve(.., sparse=TRUE) not yet implemented"
 msgstr "dgCMatrix_matrix_solve(.., sparse=TRUE) pas encore implémenté"
 
-#: dgCMatrix.c:549
+#: dgCMatrix.c:550
 #, fuzzy
 msgid ""
 "'dgCMatrix_cholsol' function requires a 'short, wide' rectangular matrix"
 msgstr "dgCMatrix_cholsol nécessite une matrice rectangulaire en longueur"
 
-#: dgCMatrix.c:557
+#: dgCMatrix.c:558
 #, fuzzy
 msgid "'cholmod_sdmult' function error (rhs)"
 msgstr "erreur cholmod_sdmult (partie droite de l'équation)"
 
-#: dgCMatrix.c:560
+#: dgCMatrix.c:561
 #, fuzzy, c-format
 msgid "'cholmod_factorize' function failed: status %d, minor %d from ncol %d"
 msgstr "cholmod_factorize a échoué : statut %d, mineur %d pour ncol %d"
 
-#: dgCMatrix.c:564
+#: dgCMatrix.c:565
 #, fuzzy, c-format
 msgid ""
 "'cholmod_solve' function (CHOLMOD_A) failed: status %d, minor %d from ncol %d"
 msgstr "cholmod_solve (CHOLMOD_A) a échoué : statut %d, mineur %d pour ncol %d"
 
-#: dgCMatrix.c:581
+#: dgCMatrix.c:582
 #, fuzzy
 msgid "'cholmod_sdmult' function error (resid)"
 msgstr "erreur cholmod_sdmult (resid)"
@@ -1168,11 +1168,11 @@ msgstr "le slot x doit être un nombre \"double\""
 msgid "'x' slot is not of correct length"
 msgstr "le slot '%s' doit avoir une longueur de 1"
 
-#: init.c:372
+#: init.c:375
 msgid "missing 'Matrix' namespace: should never happen"
 msgstr "espace de nom 'Matrix' manquant : ceci ne devrait jamais se produire"
 
-#: init.c:383
+#: init.c:386
 msgid "Matrix namespace not determined correctly"
 msgstr "l'espace de nom Matrix n'est pas correctement déterminé"
 

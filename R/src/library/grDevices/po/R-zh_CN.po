@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-09-17 22:25\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2015-01-17 15:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -127,6 +127,16 @@ msgstr "'name.opt'的值必需是字符串，当前存在的串列的名字"
 #, fuzzy
 msgid "'nbin' argument must be numeric of length 1 or 2"
 msgstr "'nbin'的值应该是长度1或2的数值"
+
+#. R/hcl.colors.R: stop("'palette' does not match any given palette")
+#: R/hcl.colors.R:0
+msgid "'palette' does not match any given palette"
+msgstr ""
+
+#. R/hcl.colors.R: stop("'palette' is ambiguous")
+#: R/hcl.colors.R:0
+msgid "'palette' is ambiguous"
+msgstr ""
 
 #. R/utils.R: stop("'r' must be a 'range()' result, hence of length 2")
 #: R/utils.R:0

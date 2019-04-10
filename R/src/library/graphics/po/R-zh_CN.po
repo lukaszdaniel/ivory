@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:19\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -827,6 +827,13 @@ msgstr "因为y轴的尺度为累计概率, 'ylim'的值必需在[0,1] 之间"
 msgid "y log scale:  yinch() is nonsense"
 msgstr "y对数尺度：yinch()没有意义"
 
+#. R/boxplot.R: ngettext(sum(iD), "Duplicated argument %s is disregarded", "Duplicated arguments %s are disregarded",     domain = "R-graphics")
+#: R/boxplot.R:0
+#, fuzzy
+msgid "Duplicated argument %s is disregarded"
+msgid_plural "Duplicated arguments %s are disregarded"
+msgstr[0] "多余的参数%s略过不用"
+
 #. R/boxplot.R: ngettext(length(unique(out[inf])), "Outlier (%s) in boxplot %d is not drawn", "Outliers (%s) in boxplot %d are not drawn",     domain = "R-graphics")
 #: R/boxplot.R:0
 msgid "Outlier (%s) in boxplot %d is not drawn"
@@ -838,11 +845,6 @@ msgstr[0] "boxplot%2$d里没有画离群值(%1$s)"
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "没有用%s这个参数"
-
-#, fuzzy
-#~ msgid "extra argument %s will be disregarded"
-#~ msgid_plural "extra arguments %s will be disregarded"
-#~ msgstr[0] "多余的参数%s略过不用"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

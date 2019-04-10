@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-15\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"Project-Id-Version: Matrix 1.2-17\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,13 +44,6 @@ msgstr ""
 #. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1L], d[2L],     dQuote(cl), domain = "R-Matrix")
 
 msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
-msgstr ""
-
-
-#: R/Ops.R: 0
-#. R/Ops.R: gettext("%s %s <Matrix> is undefined", domain = "R-Matrix")
-
-msgid "%s %s <Matrix> is undefined"
 msgstr ""
 
 
@@ -549,13 +542,6 @@ msgstr ""
 #. R/Tsparse.R: gettext(".TM.repl.i.mat(): drop 'matrix' case ...", domain = "R-Matrix")
 
 msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
-msgstr ""
-
-
-#: R/Ops.R: 0
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-
-msgid "<Matrix> %s %s is undefined"
 msgstr ""
 
 
@@ -2051,23 +2037,23 @@ msgstr ""
 
 
 #: R/sparseMatrix.R: 0
-#. R/sparseMatrix.R: gettext("suppressing columns")
+#. R/sparseMatrix.R: gettextf("suppressing %d columns", d[2] - nc)
 
-msgid "suppressing columns"
+msgid "suppressing %d columns"
 msgstr ""
 
 
 #: R/sparseMatrix.R: 0
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d columns and %d rows", d[2] - nc, d[1] - nr)
 
-msgid "suppressing columns and rows"
+msgid "suppressing %d columns and %d rows"
 msgstr ""
 
 
 #: R/sparseMatrix.R: 0
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d rows", d[1] - nr)
 
-msgid "suppressing rows"
+msgid "suppressing %d rows"
 msgstr ""
 
 

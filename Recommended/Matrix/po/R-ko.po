@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-3\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: 2015-07-15 17:14-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -49,11 +49,6 @@ msgstr ""
 #: R/diagMatrix.R:0
 msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
 msgstr ""
-
-#. R/Ops.R: gettext("%s %s <Matrix> is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "%s %s <Matrix> is undefined"
-msgstr "%s %s <Matrix>은 정의되지 않았습니다."
 
 #. R/diagMatrix.R: gettextf("%s kind not yet implemented", sQuote(kind))
 #: R/diagMatrix.R:0
@@ -449,11 +444,6 @@ msgstr ".M.repl.i.2col(): drop 'matrix' case ..."
 #, fuzzy
 msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
 msgstr ".M.repl.i.2col(): drop 'matrix' case ..."
-
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "<Matrix> %s %s is undefined"
-msgstr "<Matrix> %1$s %2$s는 정의되지 않았습니다."
 
 #. R/abIndex.R: stop("<abIndex>  -->  <seqMat> is not yet implemented")
 #: R/abIndex.R:0
@@ -1675,22 +1665,23 @@ msgstr ""
 msgid "sum(<abIndex>) is not yet implemented"
 msgstr "sum(<abIndex>)는 아직 구현되지 않았습니다."
 
-#. R/sparseMatrix.R: gettext("suppressing columns")
+#. R/sparseMatrix.R: gettextf("suppressing %d columns", d[2] - nc)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns"
+msgid "suppressing %d columns"
 msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
 
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d columns and %d rows", d[2] - nc, d[1] - nr)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns and rows"
+msgid "suppressing %d columns and %d rows"
 msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
 
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d rows", d[1] - nr)
 #: R/sparseMatrix.R:0
-msgid "suppressing rows"
-msgstr ""
+#, fuzzy
+msgid "suppressing %d rows"
+msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
 
 #. R/sparseMatrix.R: stop("symmetric matrix must be square")
 #: R/sparseMatrix.R:0
@@ -1906,6 +1897,12 @@ msgid_plural ""
 "extra arguments %s will be disregarded in\n"
 " %s"
 msgstr[0] "추가 인자들(extra arguments) %s는 %s에서 사용되지 않을 것입니다."
+
+#~ msgid "%s %s <Matrix> is undefined"
+#~ msgstr "%s %s <Matrix>은 정의되지 않았습니다."
+
+#~ msgid "<Matrix> %s %s is undefined"
+#~ msgstr "<Matrix> %1$s %2$s는 정의되지 않았습니다."
 
 #~ msgid "variable '%s' converted to a factor"
 #~ msgstr "변수 '%s'가 요인(factor)로 변환되었습니다."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2019-04-08 21:35\n"
 "PO-Revision-Date: 2014-03-30 09:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -37,11 +37,6 @@ msgstr ""
 #: R/diagMatrix.R:0
 msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
 msgstr ""
-
-#. R/Ops.R: gettext("%s %s <Matrix> is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "%s %s <Matrix> is undefined"
-msgstr "%s %s <Matrix> est indéfini"
 
 #. R/diagMatrix.R: gettextf("%s kind not yet implemented", sQuote(kind))
 #: R/diagMatrix.R:0
@@ -429,11 +424,6 @@ msgstr ".M.repl.i.2col() : le cas 'matrix' est laissé tombé ..."
 #, fuzzy
 msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
 msgstr ".M.repl.i.2col() : le cas 'matrix' est laissé tombé ..."
-
-#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
-#: R/Ops.R:0
-msgid "<Matrix> %s %s is undefined"
-msgstr "<Matrix> %s %s est indéfini"
 
 #. R/abIndex.R: stop("<abIndex>  -->  <seqMat> is not yet implemented")
 #: R/abIndex.R:0
@@ -1645,22 +1635,23 @@ msgstr ""
 msgid "sum(<abIndex>) is not yet implemented"
 msgstr "sum(<abIndex>) n'est pas encore implémenté"
 
-#. R/sparseMatrix.R: gettext("suppressing columns")
+#. R/sparseMatrix.R: gettextf("suppressing %d columns", d[2] - nc)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns"
+msgid "suppressing %d columns"
 msgstr "[[ suppression de %d noms de colonnes %s ]]"
 
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d columns and %d rows", d[2] - nc, d[1] - nr)
 #: R/sparseMatrix.R:0
 #, fuzzy
-msgid "suppressing columns and rows"
+msgid "suppressing %d columns and %d rows"
 msgstr "[[ suppression de %d noms de colonnes %s ]]"
 
-#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#. R/sparseMatrix.R: gettextf("suppressing %d rows", d[1] - nr)
 #: R/sparseMatrix.R:0
-msgid "suppressing rows"
-msgstr ""
+#, fuzzy
+msgid "suppressing %d rows"
+msgstr "[[ suppression de %d noms de colonnes %s ]]"
 
 #. R/sparseMatrix.R: stop("symmetric matrix must be square")
 #: R/sparseMatrix.R:0
@@ -1886,6 +1877,12 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments %s ne sont pas utilisés dans\n"
 " %s"
+
+#~ msgid "%s %s <Matrix> is undefined"
+#~ msgstr "%s %s <Matrix> est indéfini"
+
+#~ msgid "<Matrix> %s %s is undefined"
+#~ msgstr "<Matrix> %s %s est indéfini"
 
 #~ msgid "variable '%s' converted to a factor"
 #~ msgstr "variable '%s' converti en facteur"

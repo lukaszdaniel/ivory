@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:50+0100\n"
+"POT-Creation-Date: 2019-04-08 21:35+0200\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -38,12 +38,12 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:3211
+#: mat.c:3314
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:3216
+#: mat.c:3319
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-04-04 r1101) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-08 r1102) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-04-04 r76312) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-08 r76360) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -640,15 +640,16 @@ In command 'clara(x, 2, samples = 12, trace = 3)':
   Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.
 > 
 > data(xclara)
+> suppressWarnings(RNGversion("3.5.0")) # back compatibility of results
 > set.seed(123)
 > xclara[sample(nrow(xclara), 50),] <- NA
 > try( clara(xclara, k = 3) ) #-> "nice" error message depicting first 12 missing obs
 Error in command 'clara(xclara, k = 3)': 
-  50 observations (166, 195, 211, 217, 309, 348, 373, 526, 555, 588, 665, 905 ...) have *only* NAs --> omit them for clustering!
+  50 observations (74, 126, 137, 308, 411, 423, 438, 451, 642, 686, 689, 735 ...) have *only* NAs --> omit them for clustering!
 Additional warning message:
 In command 'clara(xclara, k = 3)':
   Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.
 > 
 > proc.time()
    user  system elapsed 
-  0.125   0.034   0.152 
+  0.135   0.019   0.147 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: stats 3.6.0\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"Project-Id-Version: stats 3.7.0\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4177,6 +4177,13 @@ msgid "Uniquenesses:"
 msgstr ""
 
 
+#: R/models.R: 0
+#. R/models.R: paste("Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!",     conditionMessage(e), sep = "\n")
+
+msgid "Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!"
+msgstr ""
+
+
 #: R/selfStart.R: 0
 #. R/selfStart.R: stop("old-style self-starting model functions are no longer supported.\n", "New selfStart functions are available.\n",     "Use\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\n",     "If writing your own selfStart model, see \"help(selfStart)\" for the new form of the \"initial\" attribute.",     domain = "R-stats")
 
@@ -5100,6 +5107,13 @@ msgstr ""
 #. R/var.test.R: gettext("denom df", domain = "R-stats")
 
 msgid "denom df"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: c("reformulate", "deprecatedWarning")
+
+msgid "deprecatedWarning"
 msgstr ""
 
 
@@ -7351,6 +7365,13 @@ msgstr ""
 #. R/relevel.R: gettextf("ref = %d must be in 1L:%d", ref, nlev)
 
 msgid "ref = %d must be in 1L:%d"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: c("reformulate", "deprecatedWarning")
+
+msgid "reformulate"
 msgstr ""
 
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-03-22 18:19\n"
+"POT-Creation-Date: 2019-04-08 21:34\n"
 "PO-Revision-Date: 2015-01-17 13:31+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -1891,6 +1891,13 @@ msgstr ""
 msgid "Use of save versions prior to 2 is deprecated"
 msgstr "Sicherungen älter als Version 2 sind veraltet"
 
+#. R/namespace.R: gettextf("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\nMaybe package installed with version of R newer than %s ?",     package, "S3methods", p1, p2, getRversion())
+#: R/namespace.R:0
+msgid ""
+"While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
+"Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
 #: R/load.R:0
 msgid "[Previously saved workspace restored]"
@@ -3473,6 +3480,12 @@ msgstr "kann keine plausible Kodierung finden"
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr "kann R Programmkode in Paket %s nicht laden"
+
+#. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
+#: R/namespace.R:0
+#, fuzzy
+msgid "unable to re-encode some lines in NAMESPACE file"
+msgstr "leerer Name in der Direktive  '%s' in der NAMESPACE Datei"
 
 #. R/dates.R: gettextf("unary '%s' operator is not defined for objects of class %s", "-", dQuote("Date"))
 #. R/dates.R: gettextf("unary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
