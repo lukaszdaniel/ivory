@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-12 17:48\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3158,9 +3158,10 @@ msgstr ""
 msgid "Uniquenesses:"
 msgstr ""
 
-#. R/models.R: paste("Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!",     conditionMessage(e), sep = "\n")
+#. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
-msgid "Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!"
+msgid ""
+"Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
 msgstr ""
 
 #. R/selfStart.R: stop("old-style self-starting model functions are no longer supported.\n", "New selfStart functions are available.\n",     "Use\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\n",     "If writing your own selfStart model, see \"help(selfStart)\" for the new form of the \"initial\" attribute.",     domain = "R-stats")

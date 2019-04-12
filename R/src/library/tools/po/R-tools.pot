@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-12 17:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -429,6 +429,13 @@ msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+
+msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
+msgstr ""
+
+
 #: R/Vignettes.R: 0
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -555,6 +562,13 @@ msgstr ""
 #. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
 
 msgid "Additional repositories with no packages:"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
+
+msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
 
@@ -1862,6 +1876,13 @@ msgid "Examples with CPU time > %g times elapsed time"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("Existing PACKAGES file contained no rows and/or no columns")
+
+msgid "Existing PACKAGES file contained no rows and/or no columns"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettextf("Extensions with Type %s cannot be checked.", sQuote(desc["Type"]), domain = "R-tools")
 
@@ -2064,6 +2085,13 @@ msgstr ""
 #. R/checktools.R: gettextf("Flavor: %s\n", flavor, domain = "R-tools")
 
 msgid "Flavor: %s"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
+
+msgid "Found"
 msgstr ""
 
 
@@ -2971,6 +2999,13 @@ msgid "No examples, no tests, no vignettes"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+
+msgid "No existing PACKAGES file found at"
+msgstr ""
+
+
 #: R/dynamicHelp.R: 0
 #. R/dynamicHelp.R: gettext("No files in this directory")
 
@@ -3010,6 +3045,13 @@ msgstr ""
 #. R/install.R: gettextf("No man pages found in package %s", sQuote(pkg_name), domain = "R-tools")
 
 msgid "No man pages found in package %s"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("No new packages or updated package versions detected")
+
+msgid "No new packages or updated package versions detected"
 msgstr ""
 
 
@@ -3183,6 +3225,13 @@ msgid "Number of updates in past 6 months: %d"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: if (strict) "ON" else "OFF"
+
+msgid "OFF"
+msgstr ""
+
+
 #: R/build.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
@@ -3352,6 +3401,13 @@ msgid "OK"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: if (strict) "ON" else "OFF"
+
+msgid "ON"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("\nObject files/libraries should not be included in a source package.\n",     domain = "R-tools")
 #. R/check.R: gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools")
@@ -3464,6 +3520,13 @@ msgstr ""
 #. R/utils.R: gettext("Output:")
 
 msgid "Output:"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+
+msgid "PACKAGES files do not include MD5 sums in the win.binary case"
 msgstr ""
 
 
@@ -4262,6 +4325,13 @@ msgid "Spaces in an http[s] URL should probably be replaced by %20"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ", paste(setdiff(fields,     okfields), collapse = " "))
+
+msgid "Specified fields no present in existing PACKAGES file:"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("Standardizable: FALSE", domain = "R-tools")
 
@@ -4824,6 +4894,13 @@ msgid "Unable to find GhostScript executable to run checks on size reduction"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
+
+msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("Undefined global functions or variables:", domain = "R-tools")
 
@@ -4944,6 +5021,13 @@ msgstr ""
 #. R/Vignettes.R: gettextf("Unsupported engine name %s", sQuote(name))
 
 msgid "Unsupported engine name %s"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+
+msgid "Updating existing repository [strict mode:"
 msgstr ""
 
 
@@ -5274,10 +5358,24 @@ msgid "When tangling %s:"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Writing final updated PACKAGES files.")
+
+msgid "Writing final updated PACKAGES files."
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("[TRUNCATED]", domain = "R-tools")
 
 msgid "[TRUNCATED]"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("[dryrun mode] Dryrun complete.")
+
+msgid "[dryrun mode] Dryrun complete."
 msgstr ""
 
 
@@ -5319,6 +5417,13 @@ msgstr ""
 #. R/RdConv2.R: gettext("\\tabular format must be simple text")
 
 msgid "\\tabular format must be simple text"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+
+msgid "]\nDetected PACKAGES file with"
 msgstr ""
 
 
@@ -6406,6 +6511,13 @@ msgid "differences from %s"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+
+msgid "directly."
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
@@ -6541,6 +6653,13 @@ msgstr ""
 #. R/install.R: warning("empty 'data' directory", call. = FALSE)
 
 msgid "empty 'data' directory"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+
+msgid "entries at"
 msgstr ""
 
 
@@ -7230,6 +7349,13 @@ msgstr ""
 #. R/makeLazyLoad.R: warning("package seems to be using lazy loading for data already")
 
 msgid "package seems to be using lazy loading for data already"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
+
+msgid "package versions to process."
 msgstr ""
 
 
@@ -7964,6 +8090,13 @@ msgid "unable to create temp directory %s"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+
+msgid "unable to find any package tarballs in"
+msgstr ""
+
+
 #: R/utils.R: 0
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
@@ -8018,6 +8151,13 @@ msgstr ""
 #. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
 
 msgid "unsupported URL %s"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("update_PACKAGES complete.")
+
+msgid "update_PACKAGES complete."
 msgstr ""
 
 

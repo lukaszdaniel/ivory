@@ -195,7 +195,7 @@ predict.ar <- function(object, newdata, n.ahead = 1L, se.fit = TRUE, ...)
 {
     if (n.ahead < 1L) stop(gettextf("'%s' argument must be at least %d", "n.ahead", 1))
     if(missing(newdata)) {
-        newdata <- eval.parent(parse(text=object$series))
+        newdata <- eval.parent(str2lang(object$series))
         if (!is.null(nas <- object$call$na.action))
             newdata <- eval.parent(call(nas, newdata))
     }

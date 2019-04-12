@@ -54,10 +54,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 spontaneous     7.285     0.1373     3.651    14.536
 induced         4.092     0.2444     2.018     8.298
 
-Concordance = 0.776 (se = 0.044)
-Likelihood ratio test = 53.15 on 2 df, p=1e-07
-Wald test = 31.84 on 2 df, p=1e-07
-Score (logrank) test = 48.44 on 2 df, p=1e-07
+Concordance= 0.776  (se = 0.044 )
+Likelihood ratio test= 53.15  on 2 df,   p=3e-12
+Wald test            = 31.84  on 2 df,   p=1e-07
+Score (logrank) test = 48.44  on 2 df,   p=3e-11
 
 > 
 > 

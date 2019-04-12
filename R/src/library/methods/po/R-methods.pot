@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-12 17:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2684,7 +2684,7 @@ msgstr ""
 
 
 #: R/MethodsList.R: 0
-#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(which), length(anames), sQuote(fun@generic))
+#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(signature), length(anames), sQuote(fun@generic))
 
 msgid "more elements in the method signature (%d) than in the generic signature (%d) for function %s"
 msgstr ""
@@ -3479,6 +3479,20 @@ msgstr ""
 #. R/refClass.R: gettextf("the overriding class (\"%s\") of field %s is not a subclass of the existing field definition (\"%s\")",     value[[field]], sQuote(field), fieldList[[field]])
 
 msgid "the overriding class (\"%s\") of field %s is not a subclass of the existing field definition (\"%s\")"
+msgstr ""
+
+
+#: R/MethodsList.R: 0
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that ambiguously match the generic signature, for function %s",     paste(sQuote(names(sigList)[ambig]), collapse = ", "), sQuote(fun@generic), domain = "R-methods")
+
+msgid "there are named arguments (%s) in the method signature that ambiguously match the generic signature, for function %s"
+msgstr ""
+
+
+#: R/MethodsList.R: 0
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that are missing from the generic signature, for function %s",     paste(sQuote(names(sigList)[is.na(argmatches)]), collapse = ", "), sQuote(fun@generic),     domain = "R-methods")
+
+msgid "there are named arguments (%s) in the method signature that are missing from the generic signature, for function %s"
 msgstr ""
 
 

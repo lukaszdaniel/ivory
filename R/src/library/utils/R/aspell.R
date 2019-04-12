@@ -525,7 +525,7 @@ function(dir, drop = c("\\author", "\\references"),
     }
 
     macros <- tools::loadPkgRdMacros(dir,
-                                     macros = file.path(R.home("share"), 
+                                     macros = file.path(R.home("share"),
                                                         "Rd", "macros",
                                                         "system.Rd"))
 
@@ -787,7 +787,7 @@ function(file, encoding = "unknown")
         ##   ... used in a situation where it doesn't exist
         ## so eliminate these.
         ## (Note that we also drop "..." strings.)
-        call <- parse(text = call)[[1L]]
+        call <- str2lang(call)
         call <- call[ as.character(call) != "..." ]
         mc <- as.list(match.call(get(fun, envir = .BaseNamespaceEnv),
                                  call))
@@ -803,7 +803,7 @@ function(file, encoding = "unknown")
         strings <- as.character(args[vapply(args, is.character, TRUE)])
         ## Need to canonicalize to match string constants before and
         ## after parsing ...
-        texts <- vapply(parse(text = table$text), as.character, "")
+        texts <- vapply(str2expression(table$text), as.character, "")
         pos <- which(!is.na(match(texts, strings)))
         cbind(table[pos, ], caller = rep.int(fun, length(pos)))
     }
@@ -1075,7 +1075,7 @@ function(dir, ignore = character(),
                 aspell_find_dictionaries(d, file.path(dir, ".aspell"))
         }
     }
-    
+
     program <- aspell_find_program(program)
 
     aspell(files,
@@ -1128,7 +1128,7 @@ function(ifile, encoding = "UTF-8")
     }
     y
 }
-    
+
 ## For spell checking packages.
 
 aspell_package <-

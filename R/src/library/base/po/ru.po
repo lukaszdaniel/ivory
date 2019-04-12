@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 21:34+0200\n"
+"POT-Creation-Date: 2019-04-12 17:47+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -496,7 +496,7 @@ msgstr "внутренняя ошибка в 'do_random1'"
 msgid "End of file"
 msgstr "конец строки"
 
-#: src/extra/trio/trio.c:7618 src/main/options.c:780
+#: src/extra/trio/trio.c:7618 src/main/options.c:806
 #: src/modules/X11/dataentry.c:315 src/modules/X11/dataentry.c:470
 #: src/modules/X11/dataentry.c:473 src/modules/X11/dataentry.c:503
 msgid "invalid argument"
@@ -542,7 +542,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2091 src/gnuwin32/editor.c:259
+#: src/gnuwin32/console.c:2101 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -720,9 +720,9 @@ msgstr "проблема при отображении '%s'"
 #: src/main/seq.c:729 src/main/seq.c:734 src/main/seq.c:741 src/main/seq.c:745
 #: src/main/seq.c:751 src/main/sort.c:252 src/main/sysutils.c:610
 #: src/main/sysutils.c:614 src/main/sysutils.c:618 src/main/sysutils.c:624
-#: src/main/sysutils.c:628 src/main/sysutils.c:1867 src/main/sysutils.c:1871
-#: src/main/unique.c:1091 src/main/unique.c:1397 src/main/unique.c:1401
-#: src/main/unique.c:1411 src/main/unique.c:1803 src/main/util.c:639
+#: src/main/sysutils.c:628 src/main/sysutils.c:1935 src/main/sysutils.c:1939
+#: src/main/unique.c:1086 src/main/unique.c:1392 src/main/unique.c:1396
+#: src/main/unique.c:1406 src/main/unique.c:1798 src/main/util.c:639
 #: src/main/util.c:642 src/main/util.c:1470 src/main/util.c:1484
 #: src/main/util.c:2075 src/main/util.c:2314 src/main/util.c:2315
 #: src/main/util.c:2316 src/main/util.c:2332 src/main/util.c:2374
@@ -764,15 +764,15 @@ msgid "cannot decrease memory limit: ignored"
 msgstr "не могу уменьшить предел памяти: пропущено"
 
 #: src/gnuwin32/extra.c:447 src/gnuwin32/extra.c:554 src/main/objects.c:995
-#: src/main/sysutils.c:656 src/main/unique.c:1701 src/main/util.c:964
+#: src/main/sysutils.c:656 src/main/unique.c:1696 src/main/util.c:964
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "первый аргумент должен быть текстовым вектором"
 
 #: src/gnuwin32/extra.c:451 src/main/edit.c:143 src/main/errors.c:1147
 #: src/main/errors.c:1149 src/main/objects.c:524 src/main/objects.c:1308
-#: src/main/options.c:393 src/main/raw.c:155 src/main/Renviron.c:311
-#: src/main/unique.c:1705 src/modules/lapack/Lapack.c:101
+#: src/main/options.c:403 src/main/raw.c:155 src/main/Renviron.c:311
+#: src/main/unique.c:1700 src/modules/lapack/Lapack.c:101
 #: src/modules/lapack/Lapack.c:342 src/modules/lapack/Lapack.c:372
 #: src/modules/lapack/Lapack.c:420 src/modules/lapack/Lapack.c:456
 #: src/modules/lapack/Lapack.c:513 src/modules/lapack/Lapack.c:757
@@ -1662,8 +1662,8 @@ msgstr "'perm': значение за пределами"
 #: src/main/array.c:1818 src/main/connections.c:5867
 #: src/main/connections.c:5870 src/main/debug.c:112 src/main/objects.c:1177
 #: src/main/raw.c:56 src/main/raw.c:307 src/main/sort.c:396
-#: src/main/sort.c:1408 src/main/unique.c:694 src/main/unique.c:1507
-#: src/main/unique.c:1582 src/main/util.c:644 src/main/util.c:646
+#: src/main/sort.c:1408 src/main/unique.c:694 src/main/unique.c:1502
+#: src/main/unique.c:1577 src/main/util.c:644 src/main/util.c:646
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' должен быть TRUE или FALSE"
@@ -1819,7 +1819,7 @@ msgstr "длина 'dimnames' [%d] не равна протяженности м
 #: src/main/attrib.c:1175 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1888 src/main/envir.c:2016 src/main/envir.c:2076
 #: src/main/envir.c:2212 src/main/paste.c:74 src/main/paste.c:293
-#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1802
+#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1797
 msgid "invalid first argument"
 msgstr "неправильный первый аргумент"
 
@@ -2413,7 +2413,7 @@ msgid "'%s' argument must be a character string or a function"
 msgstr "'what' должен быть текстовой строкой или функцией"
 
 #: src/main/coerce.c:2609 src/main/engine.c:3094 src/main/envir.c:1931
-#: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1405
+#: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1400
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "аргумент 'env' должен быть окружением"
@@ -2570,9 +2570,9 @@ msgid "closing unused connection %d (%s)"
 msgstr "закрываю неиспользованное соединение %d (%s)\n"
 
 #: src/main/connections.c:234 src/main/serialize.c:1670
-#: src/main/serialize.c:1693 src/main/sysutils.c:643 src/main/sysutils.c:860
-#: src/main/sysutils.c:875 src/main/sysutils.c:1022 src/main/sysutils.c:1101
-#: src/main/sysutils.c:1111 src/main/sysutils.c:1124 src/main/sysutils.c:1540
+#: src/main/serialize.c:1693 src/main/sysutils.c:643 src/main/sysutils.c:928
+#: src/main/sysutils.c:943 src/main/sysutils.c:1090 src/main/sysutils.c:1169
+#: src/main/sysutils.c:1179 src/main/sysutils.c:1192 src/main/sysutils.c:1608
 #, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "неподдерживаемая конвертация из '%s' в '%s'"
@@ -6496,54 +6496,54 @@ msgstr ""
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr "неправильное значение для \"device.ask.default\", использую FALSE"
 
-#: src/main/options.c:470
+#: src/main/options.c:480
 msgid "list argument has no valid names"
 msgstr "у аргумента списка нет правильных имен"
 
-#: src/main/options.c:515
+#: src/main/options.c:525
 #, fuzzy, c-format
 msgid "option '%s' cannot be deleted"
 msgstr "zip файл '%s' не может быть открыт"
 
-#: src/main/options.c:520
+#: src/main/options.c:530
 #, c-format
 msgid "invalid 'width' parameter, allowed %d...%d"
 msgstr "неправильный параметр 'width', разрешается %d...%d"
 
-#: src/main/options.c:531
+#: src/main/options.c:541
 #, c-format
 msgid "invalid 'digits' parameter, allowed %d...%d"
 msgstr "неправильный параметр 'digits', разрешается %d...%d"
 
-#: src/main/options.c:538
+#: src/main/options.c:548
 #, c-format
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr "неправильный параметр 'expressions', разрешается %d...%d"
 
-#: src/main/options.c:545 src/main/options.c:553 src/main/options.c:559
-#: src/main/options.c:567 src/main/options.c:574 src/main/options.c:579
-#: src/main/options.c:586 src/main/options.c:592 src/main/options.c:598
-#: src/main/options.c:603 src/main/options.c:608 src/main/options.c:617
-#: src/main/options.c:623 src/main/options.c:629 src/main/options.c:639
-#: src/main/options.c:653 src/main/options.c:659 src/main/options.c:667
-#: src/main/options.c:674 src/main/options.c:681 src/main/options.c:688
-#: src/main/options.c:695 src/main/options.c:703 src/main/options.c:712
-#: src/main/options.c:715 src/main/options.c:721 src/main/options.c:729
-#: src/main/options.c:742
+#: src/main/options.c:555 src/main/options.c:563 src/main/options.c:569
+#: src/main/options.c:577 src/main/options.c:584 src/main/options.c:589
+#: src/main/options.c:596 src/main/options.c:602 src/main/options.c:608
+#: src/main/options.c:613 src/main/options.c:618 src/main/options.c:627
+#: src/main/options.c:633 src/main/options.c:639 src/main/options.c:649
+#: src/main/options.c:663 src/main/options.c:669 src/main/options.c:677
+#: src/main/options.c:684 src/main/options.c:691 src/main/options.c:698
+#: src/main/options.c:705 src/main/options.c:713 src/main/options.c:722
+#: src/main/options.c:725 src/main/options.c:731 src/main/options.c:739
+#: src/main/options.c:752 src/main/options.c:786 src/main/options.c:796
 #, c-format
 msgid "invalid value for '%s'"
 msgstr "неправильное значение '%s'"
 
-#: src/main/options.c:644 src/main/paste.c:448
+#: src/main/options.c:654 src/main/paste.c:448
 #, fuzzy, c-format
 msgid "'%s' argument must be a string of one character"
 msgstr "'norm' должен быть текстовой строкой"
 
-#: src/main/options.c:708 src/main/options.c:783
+#: src/main/options.c:718 src/main/options.c:809
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" заменен на \"device.ask.default\""
 
-#: src/main/options.c:739
+#: src/main/options.c:749
 #, fuzzy
 msgid "OpenMP SIMD is not supported in this build of R"
 msgstr "ICU не поддерживается в этой сборке"
@@ -6691,12 +6691,12 @@ msgstr "не могу открыть файл назначения '%s' по п�
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "не могу создать каталог '%ls' по причине '%s'"
 
-#: src/main/platform.c:1643 src/main/platform.c:1690 src/main/sysutils.c:1886
-#: src/main/sysutils.c:1900
+#: src/main/platform.c:1643 src/main/platform.c:1690 src/main/sysutils.c:1954
+#: src/main/sysutils.c:1968
 msgid "internal out-of-memory condition"
 msgstr "внутренняя нехватка памяти"
 
-#: src/main/platform.c:1686 src/main/sysutils.c:1896
+#: src/main/platform.c:1686 src/main/sysutils.c:1964
 #, c-format
 msgid "read error on '%s'"
 msgstr "ошибка чтения в '%s'"
@@ -7468,7 +7468,7 @@ msgstr "не могу выделить место под 'имя'"
 msgid "'R_RegisterRoutines()' called with invalid DllInfo object."
 msgstr "R_RegisterRoutines вызваны с неправильным объектом DllInfo."
 
-#: src/main/Rdynload.c:382 src/main/sysutils.c:1747
+#: src/main/Rdynload.c:382 src/main/sysutils.c:1815
 #, fuzzy, c-format
 msgid "allocation failure in '%s' function"
 msgstr "размещение в R_tmpnam2 не удалось"
@@ -8920,8 +8920,8 @@ msgstr "не могу определить время изменения фай�
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "кодировка для имени файла не может быть 'bytes'"
 
-#: src/main/sysutils.c:178 src/main/sysutils.c:857 src/main/sysutils.c:872
-#: src/main/sysutils.c:1019
+#: src/main/sysutils.c:178 src/main/sysutils.c:925 src/main/sysutils.c:940
+#: src/main/sysutils.c:1087
 #, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "неподдерживаемая конвертация из '%s' в кодовой странице '%d'"
@@ -8982,69 +8982,69 @@ msgid ""
 "'x' argument must be a character vector or a list of NULL or raw vectors"
 msgstr "аргумент должен быть текстовым вектором или простым вектором"
 
-#: src/main/sysutils.c:752 src/main/sysutils.c:986 src/main/sysutils.c:1087
+#: src/main/sysutils.c:752 src/main/sysutils.c:1054 src/main/sysutils.c:1155
 #, c-format
 msgid "'%s' must be called on a CHARSXP"
 msgstr "'%s' должен быть вызван на CHARSXP"
 
-#: src/main/sysutils.c:826 src/main/sysutils.c:1008 src/main/sysutils.c:1090
+#: src/main/sysutils.c:894 src/main/sysutils.c:1076 src/main/sysutils.c:1158
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "перевод строк с кодировкой \"bytes\" запрещено"
 
-#: src/main/sysutils.c:839
+#: src/main/sysutils.c:907
 #, fuzzy
 msgid "internal error: no translation needed"
 msgstr "внутренняя ошибка в 'do_random1'"
 
-#: src/main/sysutils.c:943
+#: src/main/sysutils.c:1011
 #, fuzzy, c-format
 msgid "'%s' function must be called on a CHARSXP, but got '%s'"
 msgstr "'%s' должен быть вызван на CHARSXP"
 
-#: src/main/sysutils.c:962 src/main/sysutils.c:1002
+#: src/main/sysutils.c:1030 src/main/sysutils.c:1070
 #, fuzzy, c-format
 msgid "'%s' must be called on a CHARSXP, but got '%s'"
 msgstr "'%s' должен быть вызван на CHARSXP"
 
-#: src/main/sysutils.c:1121
+#: src/main/sysutils.c:1189
 #, c-format
 msgid "unsupported conversion to '%s' from codepage %d"
 msgstr "неподдерживаемая конвертация в '%s' из кодовой страницы %d"
 
-#: src/main/sysutils.c:1387
+#: src/main/sysutils.c:1455
 #, fuzzy
 msgid "converted string is too long for buffer"
 msgstr "форматированная строка слишком длинна"
 
-#: src/main/sysutils.c:1554
+#: src/main/sysutils.c:1622
 #, fuzzy, c-format
 msgid "invalid Unicode point %u"
 msgstr "неправильное объединение строк"
 
-#: src/main/sysutils.c:1663
+#: src/main/sysutils.c:1731
 #, fuzzy
 msgid "cannot create 'R_TempDir'"
 msgstr "не могу разместить 'R_TempDir'"
 
-#: src/main/sysutils.c:1668 src/main/sysutils.c:1676 src/main/sysutils.c:1679
+#: src/main/sysutils.c:1736 src/main/sysutils.c:1744 src/main/sysutils.c:1747
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "не могу установить R_SESSION_TMPDIR"
 
-#: src/main/sysutils.c:1688
+#: src/main/sysutils.c:1756
 #, fuzzy
 msgid "cannot allocate 'R_TempDir'"
 msgstr "не могу разместить 'R_TempDir'"
 
-#: src/main/sysutils.c:1729
+#: src/main/sysutils.c:1797
 #, fuzzy
 msgid "temporary name is too long"
 msgstr "временное имя слишком длинное"
 
-#: src/main/sysutils.c:1744
+#: src/main/sysutils.c:1812
 msgid "cannot find unused tempfile name"
 msgstr "не могу найти неиспользованное имя временного файла"
 
-#: src/main/sysutils.c:1874
+#: src/main/sysutils.c:1942
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr "'dirmarke = TRUE' не поддерживается на этой платформе"
 
@@ -9073,55 +9073,55 @@ msgstr "any_duplicated3(., <0-length incomp>)"
 msgid "'%s' argument must be positive"
 msgstr "'to' должен быть конечным"
 
-#: src/main/unique.c:970
+#: src/main/unique.c:965
 #, fuzzy
 msgid "invalid type"
 msgstr "неправильный тип линии"
 
-#: src/main/unique.c:1046
+#: src/main/unique.c:1041
 #, fuzzy
 msgid "'match()' function requires vector arguments"
 msgstr "'match' требует векторных аргументов"
 
-#: src/main/unique.c:1095 src/main/unique.c:1233
+#: src/main/unique.c:1090 src/main/unique.c:1228
 msgid "argument is not of mode character"
 msgstr "аргумент не является текстом"
 
-#: src/main/unique.c:1356
+#: src/main/unique.c:1351
 #, fuzzy
 msgid "'...' used in a situation where it does not exist"
 msgstr "... используется в ситуации, где его не существует"
 
-#: src/main/unique.c:1362
+#: src/main/unique.c:1357
 #, fuzzy
 msgid "'...' is not a pairlist"
 msgstr "значение в '...' не является перспективным"
 
-#: src/main/unique.c:1556
+#: src/main/unique.c:1551
 #, fuzzy
 msgid "non-numeric matrix in 'rowsum()': this should not happen"
 msgstr "нечисловая матрица в 'rowsum()': это не должно происходить"
 
-#: src/main/unique.c:1558 src/main/unique.c:1634
+#: src/main/unique.c:1553 src/main/unique.c:1629
 #, fuzzy
 msgid "row names are not character"
 msgstr "'fmt' не является текстовым вектором"
 
-#: src/main/unique.c:1595
+#: src/main/unique.c:1590
 #, fuzzy
 msgid "non-numeric data frame in 'rowsum()'"
 msgstr "нечисловая таблица данных в 'rowsum'"
 
-#: src/main/unique.c:1630
+#: src/main/unique.c:1625
 msgid "this cannot happen"
 msgstr "это не может произойти"
 
-#: src/main/unique.c:1778
+#: src/main/unique.c:1773
 #, fuzzy
 msgid "'csduplicated()' function was not called on a STRSXP"
 msgstr "'csduplicated' не вызван на 'STRSXP'"
 
-#: src/main/unique.c:1804
+#: src/main/unique.c:1799
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 

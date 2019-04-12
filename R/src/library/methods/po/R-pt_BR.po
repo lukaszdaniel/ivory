@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 18:17\n"
+"POT-Creation-Date: 2019-04-12 17:47\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2533,7 +2533,7 @@ msgstr ""
 "faltando slot do pacote (%s) em objeto de classe \"%s\" (informações do "
 "pacote acrescentadas)"
 
-#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(which), length(anames), sQuote(fun@generic))
+#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(signature), length(anames), sQuote(fun@generic))
 #: R/MethodsList.R:0
 #, fuzzy
 msgid ""
@@ -3331,6 +3331,26 @@ msgid ""
 "the overriding class (\"%s\") of field %s is not a subclass of the existing "
 "field definition (\"%s\")"
 msgstr ""
+
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that ambiguously match the generic signature, for function %s",     paste(sQuote(names(sigList)[ambig]), collapse = ", "), sQuote(fun@generic), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"there are named arguments (%s) in the method signature that ambiguously "
+"match the generic signature, for function %s"
+msgstr ""
+"mais elementos na assinatura do método (%d) do que na assinatura genérica "
+"(%d)"
+
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that are missing from the generic signature, for function %s",     paste(sQuote(names(sigList)[is.na(argmatches)]), collapse = ", "), sQuote(fun@generic),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"there are named arguments (%s) in the method signature that are missing from "
+"the generic signature, for function %s"
+msgstr ""
+"mais elementos na assinatura do método (%d) do que na assinatura genérica "
+"(%d)"
 
 #. R/ClassExtensions.R: gettextf("there is no automatic definition for 'as(object, \"%s\") <- value' when object has class %s and no 'replace' argument was supplied; replacement will be an error",     to, dQuote(Class))
 #: R/ClassExtensions.R:0

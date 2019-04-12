@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 18:17\n"
+"POT-Creation-Date: 2019-04-12 17:47\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2466,7 +2466,7 @@ msgid "missing package slot (%s) in object of class %s (package info added)"
 msgstr ""
 "클래스 %2$s (추가된 패키지 정보)의 객체내에 패키지 슬롯 (%1$s)이 빠져있습니다"
 
-#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(which), length(anames), sQuote(fun@generic))
+#. R/MethodsList.R: gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",     length(signature), length(anames), sQuote(fun@generic))
 #: R/MethodsList.R:0
 msgid ""
 "more elements in the method signature (%d) than in the generic signature "
@@ -3215,6 +3215,26 @@ msgid ""
 msgstr ""
 "항목 %2$s의 오버라이딩 클라스 (\"%1$s\")는 존재하는 항목 정의 (\"%3$s\")의 슈"
 "퍼클래스가 아닙니다"
+
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that ambiguously match the generic signature, for function %s",     paste(sQuote(names(sigList)[ambig]), collapse = ", "), sQuote(fun@generic), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"there are named arguments (%s) in the method signature that ambiguously "
+"match the generic signature, for function %s"
+msgstr ""
+"함수 %3$s에 대하여  메소드 서명 (%1$d)내에 있는 구성요소의 개수가 제네릭 서"
+"명 (%2$d)내에 있는 개수보다 더 많습니다"
+
+#. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that are missing from the generic signature, for function %s",     paste(sQuote(names(sigList)[is.na(argmatches)]), collapse = ", "), sQuote(fun@generic),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"there are named arguments (%s) in the method signature that are missing from "
+"the generic signature, for function %s"
+msgstr ""
+"함수 %3$s에 대하여  메소드 서명 (%1$d)내에 있는 구성요소의 개수가 제네릭 서"
+"명 (%2$d)내에 있는 개수보다 더 많습니다"
 
 #. R/ClassExtensions.R: gettextf("there is no automatic definition for 'as(object, \"%s\") <- value' when object has class %s and no 'replace' argument was supplied; replacement will be an error",     to, dQuote(Class))
 #: R/ClassExtensions.R:0

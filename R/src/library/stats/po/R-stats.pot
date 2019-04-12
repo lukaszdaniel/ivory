@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-12 17:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4178,9 +4178,9 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: paste("Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!",     conditionMessage(e), sep = "\n")
+#. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 
-msgid "Unparseable 'response' strings are deprecated.  Use as.name(.) or `..`!"
+msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
 msgstr ""
 
 
