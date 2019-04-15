@@ -54,13 +54,11 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     calldown <- FALSE
     retdat <- NULL
     if(type == "win.binary" && strict) {
-        warning("PACKAGES files do not include MD5 sums in the win.binary case",
-                ", so strict checking is impossible. Calling down to write_PACKAGES ",
-                "directly.")
+        warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
         calldown <- TRUE
     } else if (!file.exists(PKGSfile)) {
         ## no PACKAGES file to update
-        warning("No existing PACKAGES file found at ", PKGSfile)
+        warning("No existing PACKAGES file found at ", PKGSfile) #LUKI
         calldown <- TRUE
     } else if (!all(dim(retdat <- as.data.frame(read.dcf(PKGSfile),
                                          stringsAsFactors = FALSE)) > 0L)) {
@@ -76,7 +74,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     
     ## can't update PACKAGES file if existing entries don't have all
     ## the required fields
-    if(!calldown && !is.null(fields) && !all(fields %in% okfields)) {
+    if(!calldown && !is.null(fields) && !all(fields %in% okfields)) { #LUKI
         warning("Specified fields no present in existing PACKAGES file: ",
                 paste(setdiff(fields, okfields), collapse = " "))
         calldown <- TRUE
@@ -98,10 +96,11 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     ## we know file exists by this point
     pmtime <- file.info(PKGSfile)$mtime
     if(verbose.level > 0L) {
-        message("Updating existing repository [strict mode: ",
-                if(strict) "ON" else "OFF",
-                "]\nDetected PACKAGES file with ", nrow(retdat),
-                " entries at ", PKGSfile)
+	    if(strict) { #LUKI
+        message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+	    } else {
+        message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+	    }
     }
     
     if(!is.null(fields))
@@ -134,9 +133,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     ## is ok without an explicit NA check
     keeprows <- file.exists(retdat$tarball)
     if(verbose.level > 0L) {
-        msg <- paste("Tarballs found for", sum(keeprows), " of ",
-                     nrow(retdat), "existing PACKAGES entries.")
-        message(msg)
+        message(sprintf(ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.", domain = "R-tools"), sum(keeprows), nrow(retdat)), domain = NA)
     }
     retdat <- retdat[keeprows,]
 
@@ -147,9 +144,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     toonew <- which(tbmtimes > pmtime)
     if(length(toonew) > 0L) {
         if(verbose.level > 0L){
-            msg <- paste(length(toonew), " tarball(s) matching existing entries are ",
-                         "newer than PACKAGES file and must be reprocessed.")
-            message(msg)
+            message(sprintf(ngettext(length(toonew), "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed.", "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed.", domain = "R-tools"), length(toonew)), domain = NA)
         }
         retdat <- retdat[-toonew, ]
     }
@@ -170,18 +165,14 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     ## type != win.binary.
     if(strict && NROW(retdat) > 0L) {
         if(verbose.level > 0L) {
-            msg <- paste("[strict mode] Checking if MD5sums match ",
-                         "for existing tarballs")
-            message(msg)
+            message("[strict mode] Checking if MD5sums match for existing tarballs")
         }
         curMD5sums <- md5sum(normalizePath(retdat$tarball))
         ## There are no NAs in retdat$MD5sum here, as the only data in
         ## there now is from the existing PACKAGES file.
         notokinds <- which(retdat$MD5sum != curMD5sums)
         if(length(notokinds) > 0L) {
-            msg <- paste0("Detected ", length(notokinds), " MD5sum mismatches",
-                          " between existing PACKAGES file and tarballs")
-            warning(msg)
+            warning(sprintf(ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs", "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs", domain = "R-tools"), length(notokinds)), domain = NA)
         } else if(verbose.level > 0L) {
             message("All existing entry MD5sums match tarballs.") 
         }
@@ -241,7 +232,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     numnew <- length(newpkgfiles)
     if(numnew > 0L) {
         if(verbose.level > 0L) {
-            message("Found ", numnew, " package versions to process.")
+            message(sprintf(ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.", domain = "R-tools"), numnew), domain = NA)
         }
         
         ## returns a list of character vectors suitable for construction
@@ -271,9 +262,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         }
         
         if(verbose.level > 0L) {
-            msg <- paste("Processed", nrow(newpkgdf), "entries from ",
-                         "package tarballs.")
-            message(msg)
+            message(sprintf(ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.", domain = "R-tools"), nrow(newpkgdf)), domain = NA)
         }
         
         ## just for accounting purposes
@@ -286,9 +275,9 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
             retdat <- .remove_stale_dups(retdat)
         }
         if(verbose.level > 0L) {
-            msg <- paste(sum(retdat$IsNew), "entries added or updated, ",
-                         sum(!retdat$IsNew), " entries retained unchanged.")
-            message(msg)
+            msg <- paste(sprintf(ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated", domain = "R-tools"), sum(retdat$IsNew)), ", ",
+                         sprintf(ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.", "%d entries retained unchanged.", domain = "R-tools"), sum(!retdat$IsNew)), sep = "")
+            message(msg, domain = NA)
         }
         
     } else if (verbose.level > 0L) {
@@ -296,9 +285,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     }
     
     if(verbose.level > 0L) {
-        msg <- paste("Final updated PACKAGES db contains ",
-                     nrow(retdat), " entries.")
-        message(msg)
+        message(sprinf(ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry" , "Final updated PACKAGES db contains %d entries", domain = "R-tools"), nrow(retdat)), domain = NA)
     }
 
     ## write_PACKAGES docs don't define an order of entries, but I

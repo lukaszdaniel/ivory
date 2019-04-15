@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-04-08 r1102) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-04-14 r1106) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-04-08 r76360) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-04-14 r76391) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1499,5 +1499,5 @@ rweibull (4, ..): 1 2  [Ok]
 > 
 > 
 > cat("Time elapsed: ", proc.time() - .ptime,"\n")
-Time elapsed:  0.986 0.012 0.998 0 0 
+Time elapsed:  0.88 0.024 0.904 0 0 
 > 

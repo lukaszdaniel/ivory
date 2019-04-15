@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 17:47+0200\n"
+"POT-Creation-Date: 2019-04-15 19:34+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -7598,7 +7598,7 @@ msgstr "RNGkind의 정규형이 잘못되었습니다"
 msgid "supplied seed is not a valid integer"
 msgstr "주어진 seed는 유효한 정수가 아닙니다"
 
-#: src/main/RNG.c:812
+#: src/main/RNG.c:814
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 

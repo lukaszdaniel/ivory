@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-12 17:48\n"
+"POT-Creation-Date: 2019-04-15 21:01\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -361,11 +361,6 @@ msgstr ""
 #, fuzzy
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** 패키지 '%s'내에 있는 Built 항목을 손상되었습니다 ***"
-
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-#: R/update_packages.R:0
-msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
-msgstr ""
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -1756,11 +1751,6 @@ msgstr ""
 msgid "Flavor: %s"
 msgstr ""
 
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-#: R/update_packages.R:0
-msgid "Found"
-msgstr ""
-
 #. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)", sQuote(u[,     "ssname"]), u[, "language"]), collapse = ", "))
 #: R/sotools.R:0
 msgid "Found %s, possibly from %s"
@@ -2688,11 +2678,6 @@ msgstr ""
 msgid "Number of updates in past 6 months: %d"
 msgstr ""
 
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-#: R/update_packages.R:0
-msgid "OFF"
-msgstr ""
-
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK")
@@ -2780,11 +2765,6 @@ msgstr ""
 #: R/build.R:0 R/check.R:0 R/testing.R:0
 msgid "OK"
 msgstr "OK"
-
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-#: R/update_packages.R:0
-msgid "ON"
-msgstr ""
 
 #. R/check.R: gettext("\nObject files/libraries should not be included in a source package.\n",     domain = "R-tools")
 #. R/check.R: gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools")
@@ -2875,9 +2855,11 @@ msgstr ""
 msgid "Output:"
 msgstr ""
 
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
 #: R/update_packages.R:0
-msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+msgid ""
+"PACKAGES files do not include MD5 sums in the win.binary case, so strict "
+"checking is impossible. Calling down to write_PACKAGES directly."
 msgstr ""
 
 #. R/check.R: gettext("PKG_CPPFLAGS is used for both C and C++ code so it is not portable to use it for these macros.\n",     domain = "R-tools")
@@ -4162,9 +4144,18 @@ msgstr ""
 msgid "Unsupported engine name %s"
 msgstr "지원되지 않는 엔진명입니다"
 
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
 #: R/update_packages.R:0
-msgid "Updating existing repository [strict mode:"
+msgid ""
+"Updating existing repository [strict mode: OFF]\n"
+"Detected PACKAGES file with"
+msgstr ""
+
+#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
+#: R/update_packages.R:0
+msgid ""
+"Updating existing repository [strict mode: ON]\n"
+"Detected PACKAGES file with"
 msgstr ""
 
 #. R/checktools.R: gettext("Use 'summary()' for more information.", domain = "R-tools")
@@ -4456,6 +4447,11 @@ msgstr ""
 msgid "[dryrun mode] Dryrun complete."
 msgstr ""
 
+#. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
+#: R/update_packages.R:0
+msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
 #. R/QC.R: gettextf("\\arguments, description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools")
 #: R/QC.R:0
 msgid "\\arguments, description of item %s"
@@ -4482,13 +4478,6 @@ msgstr ""
 #. R/RdConv2.R: gettext("\\tabular format must be simple text")
 #: R/Rd2HTML.R:0 R/Rd2latex.R:0 R/Rd2txt.R:0 R/RdConv2.R:0
 msgid "\\tabular format must be simple text"
-msgstr ""
-
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
-#: R/update_packages.R:0
-msgid ""
-"]\n"
-"Detected PACKAGES file with"
 msgstr ""
 
 #. R/Rd2pdf.R: gettext("_not_ indexing 'base' package", domain = "R-tools")
@@ -5326,12 +5315,6 @@ msgstr ""
 msgid "differences from %s"
 msgstr ""
 
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-#: R/update_packages.R:0
-#, fuzzy
-msgid "directly."
-msgstr "비어있는 'data' 디렉토리입니다"
-
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
@@ -5439,7 +5422,8 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr "비어있는 'data' 디렉토리입니다"
 
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
 #: R/update_packages.R:0
 msgid "entries at"
 msgstr ""
@@ -5981,11 +5965,6 @@ msgstr "패키지는 이미 레이지 로딩을 이용하고 있는 것 같습�
 #: R/makeLazyLoad.R:0
 msgid "package seems to be using lazy loading for data already"
 msgstr "패키지는 이미 데이터에 대해서 레이지 로딩을 이용하고 있는 것 같습니다"
-
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-#: R/update_packages.R:0
-msgid "package versions to process."
-msgstr ""
 
 #. R/install.R: gettextf("packaged installation of %s as %s", sQuote(pkg_name), sQuote(paste0(filename,     ".gz")))
 #: R/install.R:0
@@ -6795,12 +6774,34 @@ msgid "%d WARNING"
 msgid_plural "%d WARNINGS"
 msgstr[0] ""
 
+#. R/update_packages.R: ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "%d entry added or updated"
+msgid_plural "%d entries added or updated"
+msgstr[0] ""
+
+#. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.", "%d entries retained unchanged.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "%d entry retained unchanged."
+msgid_plural "%d entries retained unchanged."
+msgstr[0] ""
+
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
 #, fuzzy
 msgid "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
 msgstr[0] "'%s'를 테스팅하는 것은 실패했습니다"
+
+#. R/update_packages.R: ngettext(length(toonew), "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed.",     "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid ""
+"%d tarball matching existing entries are newer than PACKAGES file and must "
+"be reprocessed."
+msgid_plural ""
+"%d tarball(s) matching existing entries are newer than PACKAGES file and "
+"must be reprocessed."
+msgstr[0] ""
 
 #. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
@@ -6893,6 +6894,13 @@ msgid "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
 msgstr[0] ""
 
+#. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
+msgid_plural ""
+"Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0] ""
+
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
@@ -6944,6 +6952,12 @@ msgid "File which contains pragma(s) suppressing important diagnostics"
 msgid_plural "Files which contain pragma(s) suppressing important diagnostics"
 msgstr[0] ""
 
+#. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry", "Final updated PACKAGES db contains %d entries",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Final updated PACKAGES db contains %d entry"
+msgid_plural "Final updated PACKAGES db contains %d entries"
+msgstr[0] ""
+
 #. R/QC.R: ngettext(length(xx), "Foreign function call to a base package:", "Foreign function calls to a base package:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Foreign function call to a base package:"
@@ -6973,6 +6987,13 @@ msgstr[0] ""
 msgid "Former standard package required but now defunct:"
 msgid_plural "Former standard packages required but now defunct:"
 msgstr[0] ""
+
+#. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
+#: R/update_packages.R:0
+#, fuzzy
+msgid "Found %d package version to process."
+msgid_plural "Found %d package versions to process."
+msgstr[0] "잘못된 패키지 버전입니다."
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:", domain = "R-tools")
 #: R/QC.R:0
@@ -7385,6 +7406,12 @@ msgid "Package which this enhances but not available for checking:"
 msgid_plural "Packages which this enhances but not available for checking:"
 msgstr[0] ""
 
+#. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Processed %d entry from package tarballs."
+msgid_plural "Processed %d entries from package tarballs."
+msgstr[0] ""
+
 #. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -7415,6 +7442,12 @@ msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 #: R/QC.R:0
 msgid "Size of tarball: %d byte"
 msgid_plural "Size of tarball: %d bytes"
+msgstr[0] ""
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Tarballs found for %d of %d existing PACKAGES entry."
+msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 
 #. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
@@ -7620,6 +7653,10 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "directly."
+#~ msgstr "비어있는 'data' 디렉토리입니다"
 
 #, fuzzy
 #~ msgid "%s argument must be a character string or a file/raw connection"

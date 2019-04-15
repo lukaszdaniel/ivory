@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.7.0\n"
-"POT-Creation-Date: 2019-04-12 17:48\n"
+"POT-Creation-Date: 2019-04-15 20:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1958,6 +1958,13 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 
 msgid "(x,y) ordering: %s"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
+
+msgid "*assignment* is deprecated"
 msgstr ""
 
 
@@ -4178,7 +4185,7 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
+#. R/models.R: gettextf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response, domain = "R-stats")
 
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
 msgstr ""
@@ -5110,13 +5117,6 @@ msgid "denom df"
 msgstr ""
 
 
-#: R/models.R: 0
-#. R/models.R: c("reformulate", "deprecatedWarning")
-
-msgid "deprecatedWarning"
-msgstr ""
-
-
 #: R/model.tables.R: 0
 #. R/model.tables.R: stop("design is unbalanced so cannot proceed")
 
@@ -5857,6 +5857,13 @@ msgstr ""
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 
 msgid "invalid formula in 'deriv()'"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+
+msgid "invalid formula: %s"
 msgstr ""
 
 
@@ -7365,13 +7372,6 @@ msgstr ""
 #. R/relevel.R: gettextf("ref = %d must be in 1L:%d", ref, nlev)
 
 msgid "ref = %d must be in 1L:%d"
-msgstr ""
-
-
-#: R/models.R: 0
-#. R/models.R: c("reformulate", "deprecatedWarning")
-
-msgid "reformulate"
 msgstr ""
 
 

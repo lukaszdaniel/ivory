@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
@@ -433,7 +433,7 @@ msgstr "wymiary 'z' nie są równe 'length(x)(-1) * length(y)(-1)'"
 #. R/barplot.R: stop("duplicated categorical values - try another formula or subset")
 #: R/barplot.R:0
 msgid "duplicated categorical values - try another formula or subset"
-msgstr ""
+msgstr "powtórzone wartości kategoryczne - spróbuj innej formuły lub podzbioru"
 
 #. R/symbols.R: stop("exactly one symbol type must be specified")
 #: R/symbols.R:0
@@ -449,15 +449,13 @@ msgstr "brakuje formuły lub jest ona niepoprawna"
 
 #. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
 #: R/barplot.R:0
-#, fuzzy
 msgid "formula must specify 1 or 2 categorical variables"
-msgstr "'formula' powinna określać dokładnie dwie zmienne"
+msgstr "formuła musi określać 1 lub 2 zmienne kategoryczne"
 
 #. R/barplot.R: stop("formula with cbind() must specify 1 categorical variable")
 #: R/barplot.R:0
-#, fuzzy
 msgid "formula with cbind() must specify 1 categorical variable"
-msgstr "'formula' powinna określać dokładnie dwie zmienne"
+msgstr "formuła z 'cbind()' musi określać 1 zmienną kategoryczną"
 
 #. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
 #: R/hist.R:0
@@ -816,12 +814,11 @@ msgstr "skala logarytmiczna y:  'yinch()' nie ma sensu"
 
 #. R/boxplot.R: ngettext(sum(iD), "Duplicated argument %s is disregarded", "Duplicated arguments %s are disregarded",     domain = "R-graphics")
 #: R/boxplot.R:0
-#, fuzzy
 msgid "Duplicated argument %s is disregarded"
 msgid_plural "Duplicated arguments %s are disregarded"
-msgstr[0] "dodatkowy argument %s zostanie odrzucony"
-msgstr[1] "dodatkowe argumenty %s zostaną odrzucone"
-msgstr[2] "dodatkowe argumenty %s zostaną odrzucone"
+msgstr[0] "Powtórzony argument %s zostanie odrzucony"
+msgstr[1] "Powtórzone argumenty %s zostaną odrzucone"
+msgstr[2] "Powtórzone argumenty %s zostaną odrzucone"
 
 #. R/boxplot.R: ngettext(length(unique(out[inf])), "Outlier (%s) in boxplot %d is not drawn", "Outliers (%s) in boxplot %d are not drawn",     domain = "R-graphics")
 #: R/boxplot.R:0

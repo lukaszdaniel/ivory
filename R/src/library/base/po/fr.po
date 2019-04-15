@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 17:47+0200\n"
+"POT-Creation-Date: 2019-04-15 19:34+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -7784,7 +7784,7 @@ msgstr "type Normal incorrect dans RNGkind"
 msgid "supplied seed is not a valid integer"
 msgstr "la valeur d'initialisation fournie n'est pas un entier correct"
 
-#: src/main/RNG.c:812
+#: src/main/RNG.c:814
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 

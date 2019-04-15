@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-12 17:48\n"
+"POT-Creation-Date: 2019-04-15 21:01\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -426,13 +426,6 @@ msgstr ""
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"]))
 
 msgid "*** someone has corrupted the Built field in package %s ***"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-
-msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
 msgstr ""
 
 
@@ -2088,13 +2081,6 @@ msgid "Flavor: %s"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-
-msgid "Found"
-msgstr ""
-
-
 #: R/sotools.R: 0
 #. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)", sQuote(u[,     "ssname"]), u[, "language"]), collapse = ", "))
 
@@ -3225,13 +3211,6 @@ msgid "Number of updates in past 6 months: %d"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-
-msgid "OFF"
-msgstr ""
-
-
 #: R/build.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
@@ -3401,13 +3380,6 @@ msgid "OK"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-
-msgid "ON"
-msgstr ""
-
-
 #: R/check.R: 0
 #. R/check.R: gettext("\nObject files/libraries should not be included in a source package.\n",     domain = "R-tools")
 #. R/check.R: gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools")
@@ -3524,9 +3496,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
 
-msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+msgid "PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly."
 msgstr ""
 
 
@@ -5025,9 +4997,16 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
 
-msgid "Updating existing repository [strict mode:"
+msgid "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
+
+msgid "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with"
 msgstr ""
 
 
@@ -5379,6 +5358,13 @@ msgid "[dryrun mode] Dryrun complete."
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
+
+msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("\\arguments, description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools")
 
@@ -5417,13 +5403,6 @@ msgstr ""
 #. R/RdConv2.R: gettext("\\tabular format must be simple text")
 
 msgid "\\tabular format must be simple text"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
-
-msgid "]\nDetected PACKAGES file with"
 msgstr ""
 
 
@@ -6511,13 +6490,6 @@ msgid "differences from %s"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case", ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-
-msgid "directly."
-msgstr ""
-
-
 #: R/QC.R: 0
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
 #. R/QC.R: gettextf("directory %s does not contain R code", sQuote(dir))
@@ -6657,7 +6629,8 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
+#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
 
 msgid "entries at"
 msgstr ""
@@ -7349,13 +7322,6 @@ msgstr ""
 #. R/makeLazyLoad.R: warning("package seems to be using lazy loading for data already")
 
 msgid "package seems to be using lazy loading for data already"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-
-msgid "package versions to process."
 msgstr ""
 
 
@@ -8372,11 +8338,38 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated",     domain = "R-tools")
+
+msgid        "%d entry added or updated"
+msgid_plural "%d entries added or updated"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.", "%d entries retained unchanged.",     domain = "R-tools")
+
+msgid        "%d entry retained unchanged."
+msgid_plural "%d entries retained unchanged."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/testing.R: 0
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 
 msgid        "%d of the package tests failed"
 msgid_plural "%d of the package tests failed"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(length(toonew), "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed.",     "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed.",     domain = "R-tools")
+
+msgid        "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed."
+msgid_plural "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed."
 msgstr[0]    ""
 msgstr[1]    ""
 
@@ -8471,6 +8464,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
+
+msgid        "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
+msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/install.R: 0
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
 
@@ -8535,6 +8537,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry", "Final updated PACKAGES db contains %d entries",     domain = "R-tools")
+
+msgid        "Final updated PACKAGES db contains %d entry"
+msgid_plural "Final updated PACKAGES db contains %d entries"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: ngettext(length(xx), "Foreign function call to a base package:", "Foreign function calls to a base package:",     domain = "R-tools")
 
@@ -8576,6 +8587,15 @@ msgstr[1]    ""
 
 msgid        "Former standard package required but now defunct:"
 msgid_plural "Former standard packages required but now defunct:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
+
+msgid        "Found %d package version to process."
+msgid_plural "Found %d package versions to process."
 msgstr[0]    ""
 msgstr[1]    ""
 
@@ -9042,6 +9062,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.", "Processed %d entries from package tarballs.",     domain = "R-tools")
+
+msgid        "Processed %d entry from package tarballs."
+msgid_plural "Processed %d entries from package tarballs."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:",     domain = "R-tools")
 
@@ -9083,6 +9112,15 @@ msgstr[1]    ""
 
 msgid        "Size of tarball: %d byte"
 msgid_plural "Size of tarball: %d bytes"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
+
+msgid        "Tarballs found for %d of %d existing PACKAGES entry."
+msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0]    ""
 msgstr[1]    ""
 

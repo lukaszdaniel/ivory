@@ -69,8 +69,14 @@ formula.data.frame <- function (x, ...)
 formula.character <- function(x, env = parent.frame(), ...)
 {
     ff <- str2expression(x)[[1L]]
-    if(!is.symbol(c. <- ff[[1L]]) || c. != quote(`~`))
-	stop(gettextf('invalid formula: "%s"', x), domain=NA)
+    if(!(is.call(ff) && is.symbol(c. <- ff[[1L]]) && c. == quote(`~`))) {
+        msg <- gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+        if(is.call(ff) && is.symbol(c. <- ff[[1L]]) && c. == quote(`=`)) {
+            .Deprecated(msg = c(msg, gettext(" *assignment* is deprecated", domain = "R-stats")))
+            ff <- ff[[3L]] # the RHS of "v = <form>" (pkgs 'GeNetIt', 'KMgene')
+        }
+        else stop(msg, domain=NA)
+    }
     class(ff) <- "formula"
     environment(ff) <- env
     ff
@@ -171,12 +177,12 @@ reformulate <- function (termlabels, response=NULL, intercept = TRUE, env = pare
                                   sc1 <- lapply(sc, `[[`, 1L)
                                   isF <- function(cl) is.symbol(cl) && cl == quote(reformulate)
                                   reformCall <- sc[[match(TRUE, vapply(sc1, isF, NA))]]
-                                  warning(warningCondition(message = paste(sprintf(
+                                  warning(warningCondition(message = paste(gettextf(
 		"Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",
-									response),
+									response, domain = "R-stats"),
 						conditionMessage(e), sep="\n"),
                                       class = c("reformulate", "deprecatedWarning"),
-                                      call = reformCall)) # , domain=NA
+                                      call = reformCall), domain = NA)
                                   as.symbol(response)
                               })
                  else response,

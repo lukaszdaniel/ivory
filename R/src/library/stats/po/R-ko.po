@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-12 17:48\n"
+"POT-Creation-Date: 2019-04-15 20:54\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1522,6 +1522,11 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
+msgstr ""
+
+#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
+#: R/models.R:0
+msgid "*assignment* is deprecated"
 msgstr ""
 
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -3158,7 +3163,7 @@ msgstr ""
 msgid "Uniquenesses:"
 msgstr ""
 
-#. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
+#. R/models.R: gettextf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response, domain = "R-stats")
 #: R/models.R:0
 msgid ""
 "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -3862,11 +3867,6 @@ msgstr ""
 msgid "denom df"
 msgstr ""
 
-#. R/models.R: c("reformulate", "deprecatedWarning")
-#: R/models.R:0
-msgid "deprecatedWarning"
-msgstr ""
-
 #. R/model.tables.R: stop("design is unbalanced so cannot proceed")
 #: R/model.tables.R:0
 msgid "design is unbalanced so cannot proceed"
@@ -4414,6 +4414,12 @@ msgstr "유효하지 않은 formula입니다"
 #, fuzzy
 msgid "invalid formula in 'deriv()'"
 msgstr "deriv에 유효하지 않은 formula입니다"
+
+#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula: %s"
+msgstr "유효하지 않은 formula입니다"
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
@@ -5588,11 +5594,6 @@ msgstr "'trace'에 대하여 문서를 좀 더 자세히 읽어보세요"
 #: R/relevel.R:0
 msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d은 반드시 1L:%d 내에 있어야 합니다"
-
-#. R/models.R: c("reformulate", "deprecatedWarning")
-#: R/models.R:0
-msgid "reformulate"
-msgstr ""
 
 #. R/nlminb.R: gettext("relative convergence (4)")
 #: R/nlminb.R:0

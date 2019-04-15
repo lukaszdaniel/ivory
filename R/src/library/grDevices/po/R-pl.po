@@ -118,12 +118,12 @@ msgstr "argument 'nbin' musi być liczbą o długości 1 lub 2"
 #. R/hcl.colors.R: stop("'palette' does not match any given palette")
 #: R/hcl.colors.R:0
 msgid "'palette' does not match any given palette"
-msgstr ""
+msgstr "argument 'palette' nie pasuje do żadnej palety"
 
 #. R/hcl.colors.R: stop("'palette' is ambiguous")
 #: R/hcl.colors.R:0
 msgid "'palette' is ambiguous"
-msgstr ""
+msgstr "argument 'palette' jest niejednoznaczny"
 
 #. R/utils.R: stop("'r' must be a 'range()' result, hence of length 2")
 #: R/utils.R:0

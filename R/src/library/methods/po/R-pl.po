@@ -1154,9 +1154,8 @@ msgstr "Definicja klasy %s jest następująca."
 
 #. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s", dQuote(name), paste0("'",     undefinedPrototypeSlots, "'", collapse = ", "))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "The prototype for class %s has undefined slot(s): %s"
-msgstr "lista '%s' dla klasy %s, zawiera w sobie niezdefiniowaną klasę %s"
+msgstr "Prototyp dla klasy %s ma niezdefiniowane gniazda: %s"
 
 #. R/trace.R: gettext("Tracing ", domain = "R-methods")
 #: R/trace.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-12 17:48\n"
+"POT-Creation-Date: 2019-04-15 20:54\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1528,6 +1528,11 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
+msgstr ""
+
+#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
+#: R/models.R:0
+msgid "*assignment* is deprecated"
 msgstr ""
 
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -3191,7 +3196,7 @@ msgstr ""
 msgid "Uniquenesses:"
 msgstr ""
 
-#. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
+#. R/models.R: gettextf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response, domain = "R-stats")
 #: R/models.R:0
 msgid ""
 "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -3905,11 +3910,6 @@ msgstr ""
 msgid "denom df"
 msgstr ""
 
-#. R/models.R: c("reformulate", "deprecatedWarning")
-#: R/models.R:0
-msgid "deprecatedWarning"
-msgstr ""
-
 #. R/model.tables.R: stop("design is unbalanced so cannot proceed")
 #: R/model.tables.R:0
 #, fuzzy
@@ -4466,6 +4466,12 @@ msgstr "formula sbagliata"
 #, fuzzy
 msgid "invalid formula in 'deriv()'"
 msgstr "formula non valida in deriv"
+
+#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula: %s"
+msgstr "formula sbagliata"
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
@@ -5682,11 +5688,6 @@ msgstr "leggere la documentazione di 'trace' più attentamente"
 #, fuzzy
 msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d deve essere in 1:%d"
-
-#. R/models.R: c("reformulate", "deprecatedWarning")
-#: R/models.R:0
-msgid "reformulate"
-msgstr ""
 
 #. R/nlminb.R: gettext("relative convergence (4)")
 #: R/nlminb.R:0
