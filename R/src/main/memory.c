@@ -3138,14 +3138,14 @@ static void R_gc_internal(R_size_t size_needed)
 		  sexptype2char(first_bad_sexp_type_old_type),
 		  first_bad_sexp_type_line);
 	else
-	    error(_("GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"),
+	    error(_("GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"),
 		  first_bad_sexp_type_sexp,
-		  sexptype2char(first_bad_sexp_type),
+		  first_bad_sexp_type,
 		  first_bad_sexp_type_line);
 #else
-	error(_("GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"),
+	error(_("GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"),
 	      first_bad_sexp_type_sexp,
-	      sexptype2char(first_bad_sexp_type),
+	      first_bad_sexp_type,
 	      first_bad_sexp_type_line);
 #endif
     }

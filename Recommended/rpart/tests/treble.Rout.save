@@ -33,13 +33,7 @@ Type 'q()' to quit R.
 > library(rpart)
 > require(survival)
 Loading required package: 'survival'
-
-Attaching package: 'survival'
-
-The following object is masked from 'package:rpart':
-
-    solder
-
+> set.seed(10)
 > 
 > tempc <- rpart.control(maxsurrogate=0, cp=0, xval=0)
 > fit1 <- rpart(Surv(pgtime, pgstat) ~ age + eet + g2+grade+gleason +ploidy,

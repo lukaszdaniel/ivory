@@ -25,15 +25,9 @@ Type 'q()' to quit R.
 > library(rpart)
 > require(survival)
 Loading required package: 'survival'
-
-Attaching package: 'survival'
-
-The following object is masked from 'package:rpart':
-
-    solder
-
 > aeq <- function(x,y, ...) all.equal(as.vector(x), as.vector(y), ...)
 > 
+> set.seed(10)
 > #
 > # Check out using costs
 > #
