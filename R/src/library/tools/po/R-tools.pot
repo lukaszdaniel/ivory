@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-15 21:01\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2117,6 +2117,27 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettextf("Found a %s file without source file %s or %s. An Open Source package must include its autoconf sources.\n",     sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in"))
+
+msgid "Found a %s file without source file %s or %s. An Open Source package must include its autoconf sources."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Found a %s file without source file %s or %s. It is good practice to include autoconf sources.\n",     sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in"))
+
+msgid "Found a %s file without source file %s or %s. It is good practice to include autoconf sources."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Found a %s file: %s has long been preferred.\n", sQuote("configure.in"),     sQuote("configure.ac"))
+
+msgid "Found a %s file: %s has long been preferred."
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("Found directory 'R' with no source files.", domain = "R-tools")
 
 msgid "Found directory 'R' with no source files."
@@ -2986,9 +3007,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+#. R/update_packages.R: gettextf("No existing PACKAGES file found at %s", PKGSfile)
 
-msgid "No existing PACKAGES file found at"
+msgid "No existing PACKAGES file found at %s"
 msgstr ""
 
 
@@ -4298,9 +4319,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ", paste(setdiff(fields,     okfields), collapse = " "))
+#. R/update_packages.R: warning("Specified fields not present in existing PACKAGES file: ", paste(setdiff(fields,     okfields), collapse = " "))
 
-msgid "Specified fields no present in existing PACKAGES file:"
+msgid "Specified fields not present in existing PACKAGES file:"
 msgstr ""
 
 
@@ -4993,20 +5014,6 @@ msgstr ""
 #. R/Vignettes.R: gettextf("Unsupported engine name %s", sQuote(name))
 
 msgid "Unsupported engine name %s"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-
-msgid "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-
-msgid "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with"
 msgstr ""
 
 
@@ -6625,14 +6632,6 @@ msgstr ""
 #. R/install.R: warning("empty 'data' directory", call. = FALSE)
 
 msgid "empty 'data' directory"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-
-msgid "entries at"
 msgstr ""
 
 
@@ -9175,6 +9174,24 @@ msgstr[1]    ""
 
 msgid        "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+
+msgid        "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s"
+msgid_plural "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+
+msgid        "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s"
+msgid_plural "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s"
 msgstr[0]    ""
 msgstr[1]    ""
 

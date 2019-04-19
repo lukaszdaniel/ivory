@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -140,6 +140,12 @@ msgstr "argument '%s' musi być wartością logiczną lub znakiem"
 #: R/de.R:0
 msgid "'%s' argument ignored"
 msgstr "argument '%s' został zignorowany"
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr "argument 'compressed' jest ignorowany dla metody wewnętrznej"
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0
@@ -1867,11 +1873,6 @@ msgstr "obiekt o nazwie %s już istnieje i nie będzie nadpisany"
 #: R/write.table.R:0
 msgid "appending column names to file"
 msgstr "dołączanie nazw kolumn do pliku"
-
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-#: R/tar.R:0
-msgid "argument 'compressed' is ignored for the internal method"
-msgstr "argument 'compressed' jest ignorowany dla metody wewnętrznej"
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0

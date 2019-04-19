@@ -23,8 +23,8 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                   tar = Sys.getenv("TAR"))
 {
     if (inherits(tarfile, "connection") || identical(tar, "internal")) {
-        if (!missing(compressed)) #LUKI
-            warning("argument 'compressed' is ignored for the internal method")
+        if (!missing(compressed))
+            warning(gettextf("'%s' argument is ignored for the internal method", "compressed"))
         return(untar2(tarfile, files, list, exdir, restore_times))
     }
 
@@ -47,8 +47,8 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
     ## But as all commonly-used tars do (some commercial Unix do not,
     ## but GNU tar is commonly used there).
     cflag <- ""
-    if (!missing(compressed)) #LUKI
-        warning("untar(compressed=) is deprecated", call. = FALSE, domain = NA)
+    if (!missing(compressed))
+        warning("'untar(compressed=)' is deprecated", call. = FALSE, domain = NA)
     if (is.character(compressed)) {
         cflag <- switch(match.arg(compressed, c("gzip", "bzip2", "xz")),
                         "gzip" = "z", "bzip2" = "j", "xz" = "J")
@@ -68,7 +68,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             if (nzchar(ZIP <- Sys.getenv("R_GZIPCMD"))) {
                 TAR <- paste(ZIP, "-dc", shQuote(tarfile), "|", TAR)
                 tarfile <- "-"
-                cflag <- "" #LUKI
+                cflag <- ""
             } else stop(gettextf("No %s command found", sQuote("gzip"), domain = "R-utils"), domain = NA)
         if (cflag == "j")
             if (nzchar(ZIP <- Sys.getenv("R_BZIPCMD"))) {

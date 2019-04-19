@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -137,6 +137,12 @@ msgstr " 'compress'は論理値か文字でなければなりません "
 #, fuzzy
 msgid "'%s' argument ignored"
 msgstr " 'modes' 引数は無視されます "
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr " 'url' は空でない文字列でなければなりません "
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0
@@ -1874,11 +1880,6 @@ msgstr ""
 #: R/write.table.R:0
 msgid "appending column names to file"
 msgstr " ファイルに列名を加えます "
-
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-#: R/tar.R:0
-msgid "argument 'compressed' is ignored for the internal method"
-msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0

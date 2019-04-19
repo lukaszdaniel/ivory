@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 19:34+0200\n"
+"POT-Creation-Date: 2019-04-19 19:06+0200\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -621,7 +621,7 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/character.c:1331 src/main/character.c:1565
 #: src/main/character.c:1569 src/main/character.c:1630
 #: src/main/character.c:1633 src/main/coerce.c:1487 src/main/coerce.c:1539
-#: src/main/coerce.c:2061 src/main/connections.c:1419
+#: src/main/coerce.c:2065 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
 #: src/main/connections.c:1597 src/main/connections.c:1602
@@ -1172,7 +1172,7 @@ msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
 "Argument '%s' hat einen Länge > 1 und nur das erste Element wird benutzt"
 
-#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2955
+#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2959
 #: src/main/saveload.c:2035
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1420,7 +1420,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>) ist weder NULL noch Liste der Länge %d"
 
-#: src/main/apply.c:328 src/main/coerce.c:2602
+#: src/main/apply.c:328 src/main/coerce.c:2606
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr' Argument muss ein Ausdruck sein"
@@ -1792,7 +1792,7 @@ msgstr "Ungültiger Typ (%s) um Attribut 'names' zu setzen"
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' angewendet auf Nicht-Array"
 
-#: src/main/attrib.c:1061 src/main/coerce.c:2605 src/main/engine.c:3088
+#: src/main/attrib.c:1061 src/main/coerce.c:2609 src/main/engine.c:3088
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'list' Argument muss eine Liste sein"
@@ -2102,7 +2102,7 @@ msgstr "vector: kann keinen Vektor vom Mode '%s' erzeugen."
 msgid "cannot set length of non-(vector or list)"
 msgstr "kann Länge eines Nicht-Vektors nicht setzen"
 
-#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2964
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2968
 msgid "invalid value"
 msgstr "ungültiger Wert"
 
@@ -2115,7 +2115,7 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr "falsche Länge für das '%s' Argument"
 
-#: src/main/builtin.c:982 src/main/coerce.c:2675 src/main/coerce.c:2718
+#: src/main/builtin.c:982 src/main/coerce.c:2679 src/main/coerce.c:2722
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
 #: src/main/eval.c:6727 src/main/eval.c:6874
@@ -2127,7 +2127,7 @@ msgstr "'...' in falschem Kontext benutzt"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "doppelter Default für switch: '%s' und '%s'"
 
-#: src/main/builtin.c:1037 src/main/coerce.c:2559
+#: src/main/builtin.c:1037 src/main/coerce.c:2563
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "Argument %d ist leer"
@@ -2348,92 +2348,92 @@ msgstr "Argument 'code' muss Zeichenkette sein"
 msgid "argument must be a character string"
 msgstr "Argument 'code' muss Zeichenkette sein"
 
-#: src/main/coerce.c:1631
+#: src/main/coerce.c:1635
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.c:1657
+#: src/main/coerce.c:1661
 #, fuzzy
 msgid "invalid argument of length 0"
 msgstr "ungültiges zweites Argument der Länge 0"
 
-#: src/main/coerce.c:1673
+#: src/main/coerce.c:1677
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.c:1676
+#: src/main/coerce.c:1680
 msgid "invalid argument list"
 msgstr "ungültige Argumentenliste"
 
-#: src/main/coerce.c:1697
+#: src/main/coerce.c:1701
 #, c-format
 msgid "'length(x) = %lld > 1' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.c:1700
+#: src/main/coerce.c:1704
 msgid "length > 1 in coercion to logical"
 msgstr ""
 
-#: src/main/coerce.c:2038
+#: src/main/coerce.c:2042
 #, fuzzy
 msgid "type \"single\" is unimplemented in R"
 msgstr "Typ \"single\" nicht in R implementiert"
 
-#: src/main/coerce.c:2040
+#: src/main/coerce.c:2044
 msgid "unimplemented predicate"
 msgstr "nicht implementiertes Prädikat"
 
-#: src/main/coerce.c:2139 src/main/coerce.c:2380 src/main/coerce.c:2426
-#: src/main/coerce.c:2493
+#: src/main/coerce.c:2143 src/main/coerce.c:2384 src/main/coerce.c:2430
+#: src/main/coerce.c:2497
 #, fuzzy, c-format
 msgid "'%s' function applies only to lists and vectors"
 msgstr "kann nur auf Listen und Vektoren angewendet werden"
 
-#: src/main/coerce.c:2216 src/main/coerce.c:2331
+#: src/main/coerce.c:2220 src/main/coerce.c:2335
 #, fuzzy, c-format
 msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() auf nicht-(Liste oder Vektor) des Typs '%s' angewendet"
 
-#: src/main/coerce.c:2342
+#: src/main/coerce.c:2346
 #, fuzzy
 msgid "'anyNA()' function takes 1 or 2 arguments"
 msgstr "falscher Typ für Argument"
 
-#: src/main/coerce.c:2406 src/main/coerce.c:2463 src/main/coerce.c:2537
+#: src/main/coerce.c:2410 src/main/coerce.c:2467 src/main/coerce.c:2541
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "nicht implementierte Standardmethode für Typ '%s'"
 
-#: src/main/coerce.c:2566
+#: src/main/coerce.c:2570
 msgid "first argument must be a character string"
 msgstr "erstes Argument muss eine Zeichenkette sein"
 
-#: src/main/coerce.c:2568 src/main/coerce.c:2618 src/main/coerce.c:2622
+#: src/main/coerce.c:2572 src/main/coerce.c:2622 src/main/coerce.c:2626
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2598
+#: src/main/coerce.c:2602
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "'what' muss eine Zeichenkette oder eine Funktion sein"
 
-#: src/main/coerce.c:2609 src/main/engine.c:3094 src/main/envir.c:1931
+#: src/main/coerce.c:2613 src/main/engine.c:3094 src/main/envir.c:1931
 #: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1400
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'env' Argument muss eine Umgebung sein"
 
-#: src/main/coerce.c:2768
+#: src/main/coerce.c:2772
 msgid "invalid environment specified"
 msgstr "ungültige Umgebung spezifiziert"
 
-#: src/main/coerce.c:2834
+#: src/main/coerce.c:2838
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr "Setze class(x) auf NULL;  das Ergebnis ist keine S4 Objekt mehr"
 
-#: src/main/coerce.c:2837
+#: src/main/coerce.c:2841
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
@@ -2442,7 +2442,7 @@ msgstr ""
 "Setze class(x) auf mehrere Zeichenketten(\"%s\", \"%s\", ...); das Ergebnis "
 "ist kein S4 Objekt mehr"
 
-#: src/main/coerce.c:2840
+#: src/main/coerce.c:2844
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
@@ -2451,11 +2451,11 @@ msgstr ""
 "class(x) auf \"%s\" zu setzen, setzt Attribut auf NULL; das Ergebnis ist "
 "kein S4 Objekt mehr"
 
-#: src/main/coerce.c:2871
+#: src/main/coerce.c:2875
 msgid "invalid replacement object to be a class string"
 msgstr "Ungültiges Ersetzungsobjekt als Klassenzeichenkette"
 
-#: src/main/coerce.c:2889
+#: src/main/coerce.c:2893
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
@@ -2463,7 +2463,7 @@ msgstr ""
 "\"%s\" kann nur als Klasse gesetzt werden, wenn das Objekt diesen Typ hat; "
 "gefunden wurde \"%s\""
 
-#: src/main/coerce.c:2907
+#: src/main/coerce.c:2911
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2472,22 +2472,22 @@ msgstr ""
 "ungültig die Klasse auf Matrix zu setzen, außer das Dimensionsattribut hat "
 "Länge 2 (war %d)"
 
-#: src/main/coerce.c:2915
+#: src/main/coerce.c:2919
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
 "Kann Klasse nicht auf \"array\" setzen, außer das Dimensionsattribut hat "
 "eine Länge > 0"
 
-#: src/main/coerce.c:2960
+#: src/main/coerce.c:2964
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2962
+#: src/main/coerce.c:2966
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2968
+#: src/main/coerce.c:2972
 msgid "invalid to change the storage mode of a factor"
 msgstr "unzulässig den Speichermodus eines Faktors zu ändern"
 
@@ -6034,7 +6034,7 @@ msgstr ""
 
 #: src/main/memory.c:3141 src/main/memory.c:3146
 #, c-format
-msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
+msgid "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"
 msgstr ""
 
 #: src/main/memory.c:3156

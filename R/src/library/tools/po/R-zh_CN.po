@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-15 21:01\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1758,6 +1758,25 @@ msgstr ""
 msgid "Found Makefile with CR or CRLF line endings:"
 msgstr ""
 
+#. R/check.R: gettextf("Found a %s file without source file %s or %s. An Open Source package must include its autoconf sources.\n",     sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in"))
+#: R/check.R:0
+msgid ""
+"Found a %s file without source file %s or %s. An Open Source package must "
+"include its autoconf sources."
+msgstr ""
+
+#. R/check.R: gettextf("Found a %s file without source file %s or %s. It is good practice to include autoconf sources.\n",     sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in"))
+#: R/check.R:0
+msgid ""
+"Found a %s file without source file %s or %s. It is good practice to include "
+"autoconf sources."
+msgstr ""
+
+#. R/check.R: gettextf("Found a %s file: %s has long been preferred.\n", sQuote("configure.in"),     sQuote("configure.ac"))
+#: R/check.R:0
+msgid "Found a %s file: %s has long been preferred."
+msgstr ""
+
 #. R/check.R: gettext("Found directory 'R' with no source files.", domain = "R-tools")
 #: R/check.R:0
 msgid "Found directory 'R' with no source files."
@@ -2495,9 +2514,9 @@ msgstr ""
 msgid "No examples, no tests, no vignettes"
 msgstr ""
 
-#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+#. R/update_packages.R: gettextf("No existing PACKAGES file found at %s", PKGSfile)
 #: R/update_packages.R:0
-msgid "No existing PACKAGES file found at"
+msgid "No existing PACKAGES file found at %s"
 msgstr ""
 
 #. R/dynamicHelp.R: gettext("No files in this directory")
@@ -3529,9 +3548,9 @@ msgstr ""
 msgid "Spaces in an http[s] URL should probably be replaced by %20"
 msgstr ""
 
-#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ", paste(setdiff(fields,     okfields), collapse = " "))
+#. R/update_packages.R: warning("Specified fields not present in existing PACKAGES file: ", paste(setdiff(fields,     okfields), collapse = " "))
 #: R/update_packages.R:0
-msgid "Specified fields no present in existing PACKAGES file:"
+msgid "Specified fields not present in existing PACKAGES file:"
 msgstr ""
 
 #. R/QC.R: gettext("Standardizable: FALSE", domain = "R-tools")
@@ -4118,20 +4137,6 @@ msgstr "无法识别这个搜索字段："
 #, fuzzy
 msgid "Unsupported engine name %s"
 msgstr "不支持%s过滤器"
-
-#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-#: R/update_packages.R:0
-msgid ""
-"Updating existing repository [strict mode: OFF]\n"
-"Detected PACKAGES file with"
-msgstr ""
-
-#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-#: R/update_packages.R:0
-msgid ""
-"Updating existing repository [strict mode: ON]\n"
-"Detected PACKAGES file with"
-msgstr ""
 
 #. R/checktools.R: gettext("Use 'summary()' for more information.", domain = "R-tools")
 #: R/checktools.R:0
@@ -5420,12 +5425,6 @@ msgstr ""
 #: R/install.R:0
 msgid "empty 'data' directory"
 msgstr "空的'data'目录"
-
-#. R/update_packages.R: message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-#. R/update_packages.R: message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ",     nrow(retdat), " entries at ", PKGSfile)
-#: R/update_packages.R:0
-msgid "entries at"
-msgstr ""
 
 #. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], vapply(bad[pos],     function(s) paste(sQuote(s), collapse = ", "), ""), domain = "R-tools")
 #: R/QC.R:0
@@ -7521,6 +7520,26 @@ msgstr[0] ""
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
 msgstr[0] "Rd xrefs里包含了不知来源的程序包%s"
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid ""
+"Updating existing repository [strict mode: OFF]\n"
+"Detected PACKAGES file with %d entry at %s"
+msgid_plural ""
+"Updating existing repository [strict mode: OFF]\n"
+"Detected PACKAGES file with %d entries at %s"
+msgstr[0] ""
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid ""
+"Updating existing repository [strict mode: ON]\n"
+"Detected PACKAGES file with %d entry at %s"
+msgid_plural ""
+"Updating existing repository [strict mode: ON]\n"
+"Detected PACKAGES file with %d entries at %s"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(y), "Uses the non-portable package:", "Uses the non-portable packages:",     domain = "R-tools")
 #: R/QC.R:0

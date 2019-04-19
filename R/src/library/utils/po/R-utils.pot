@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,6 +158,13 @@ msgstr ""
 #. R/de.R: gettextf("'%s' argument ignored", "modes")
 
 msgid "'%s' argument ignored"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+
+msgid "'%s' argument is ignored for the internal method"
 msgstr ""
 
 
@@ -2256,13 +2263,6 @@ msgstr ""
 #. R/write.table.R: warning("appending column names to file")
 
 msgid "appending column names to file"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-
-msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
 

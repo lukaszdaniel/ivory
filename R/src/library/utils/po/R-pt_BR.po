@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -127,6 +127,12 @@ msgstr ""
 #: R/de.R:0
 msgid "'%s' argument ignored"
 msgstr ""
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr "sintaxe alvo não é da classe \"SweaveSyntax\""
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0
@@ -1736,11 +1742,6 @@ msgstr ""
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0
 msgid "appending column names to file"
-msgstr ""
-
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-#: R/tar.R:0
-msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")

@@ -1109,29 +1109,18 @@ add_dummies <- function(dir, Log)
                         !is.na(val) && isTRUE(analyze_license(val)$is_FOSS)
                 }
                 if (is_FOSS) {
-                    if (!any) warningLog(Log) #LUKI
-                    wrapLog("Found a", sQuote("configure"),
-                            "file without source file",
-                            sQuote("configure.ac"), "or",
-                            sQuote("configure.in"), ".",
-                            "An Open Source package must include its",
-                            "autoconf sources.\n")
+                    if (!any) warningLog(Log)
+                    wrapLog(gettextf("Found a %s file without source file %s or %s. An Open Source package must include its autoconf sources.\n", sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in")))
                 } else {
                     if (!any) noteLog(Log)
-                    wrapLog("Found a", sQuote("configure"),
-                            "file without source file",
-                            sQuote("configure.ac"), "or",
-                            sQuote("configure.in"), ".",
-                            "It is good practice to include autoconf sources.\n")
+                    wrapLog(gettextf("Found a %s file without source file %s or %s. It is good practice to include autoconf sources.\n", sQuote("configure"), sQuote("configure.ac"), sQuote("configure.in")))
                 }
                 any <- TRUE
             } else {
                 if (file.exists("configure.in")) {
                     any <- TRUE
-                    noteLog(Log) #LUKI
-                    wrapLog("Found a", sQuote("configure.in"),
-                            "file:", sQuote("configure.ac"),
-                            "has long been preferred.\n")
+                    noteLog(Log)
+                    wrapLog(gettextf("Found a %s file: %s has long been preferred.\n", sQuote("configure.in"), sQuote("configure.ac")))
                 }
                 check_autoconf <- check_incoming ||
                     config_val_to_logical(Sys.getenv("_R_CHECK_AUTOCONF_", "FALSE"))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 19:34+0200\n"
+"POT-Creation-Date: 2019-04-19 19:06+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -615,7 +615,7 @@ msgstr "feil ved vising av «%s»"
 #: src/main/character.c:1331 src/main/character.c:1565
 #: src/main/character.c:1569 src/main/character.c:1630
 #: src/main/character.c:1633 src/main/coerce.c:1487 src/main/coerce.c:1539
-#: src/main/coerce.c:2061 src/main/connections.c:1419
+#: src/main/coerce.c:2065 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
 #: src/main/connections.c:1597 src/main/connections.c:1602
@@ -1169,7 +1169,7 @@ msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
 "argumentet «%s» har lengd større enn 1 (berre første elementet vert brukt)"
 
-#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2955
+#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2959
 #: src/main/saveload.c:2035
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1416,7 +1416,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr ""
 
-#: src/main/apply.c:328 src/main/coerce.c:2602
+#: src/main/apply.c:328 src/main/coerce.c:2606
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "«expr»-argumentet må vera eit uttrykk"
@@ -1790,7 +1790,7 @@ msgstr "ugyldig type (%s) for å setja «names»-attributt"
 msgid "'dimnames()' applied to non-array"
 msgstr "«dimnames» brukt på ikkje-array"
 
-#: src/main/attrib.c:1061 src/main/coerce.c:2605 src/main/engine.c:3088
+#: src/main/attrib.c:1061 src/main/coerce.c:2609 src/main/engine.c:3088
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "«list»-argumentet må vera ei liste"
@@ -2098,7 +2098,7 @@ msgstr "vector: kan ikkje laga vektor av modus «%s»"
 msgid "cannot set length of non-(vector or list)"
 msgstr "kan ikkje setja lengda til ikkje-vektor"
 
-#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2964
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2968
 msgid "invalid value"
 msgstr "ugyldig verdi"
 
@@ -2111,7 +2111,7 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr "feil lengd på «%s»-argumentet"
 
-#: src/main/builtin.c:982 src/main/coerce.c:2675 src/main/coerce.c:2718
+#: src/main/builtin.c:982 src/main/coerce.c:2679 src/main/coerce.c:2722
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
 #: src/main/eval.c:6727 src/main/eval.c:6874
@@ -2123,7 +2123,7 @@ msgstr "«...» brukt i feil samanheng"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "duplikat standardverdi i «switch»: «%s» og «%s»"
 
-#: src/main/builtin.c:1037 src/main/coerce.c:2559
+#: src/main/builtin.c:1037 src/main/coerce.c:2563
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "argumentet %d er tomt"
@@ -2336,92 +2336,92 @@ msgstr "argumentet «code» må vera ein teiknstreng"
 msgid "argument must be a character string"
 msgstr "argumentet «code» må vera ein teiknstreng"
 
-#: src/main/coerce.c:1631
+#: src/main/coerce.c:1635
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.c:1657
+#: src/main/coerce.c:1661
 #, fuzzy
 msgid "invalid argument of length 0"
 msgstr "ugyldig andreargument av lengd 0"
 
-#: src/main/coerce.c:1673
+#: src/main/coerce.c:1677
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.c:1676
+#: src/main/coerce.c:1680
 msgid "invalid argument list"
 msgstr "ugyldig argumentliste"
 
-#: src/main/coerce.c:1697
+#: src/main/coerce.c:1701
 #, c-format
 msgid "'length(x) = %lld > 1' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.c:1700
+#: src/main/coerce.c:1704
 msgid "length > 1 in coercion to logical"
 msgstr ""
 
-#: src/main/coerce.c:2038
+#: src/main/coerce.c:2042
 #, fuzzy
 msgid "type \"single\" is unimplemented in R"
 msgstr "typen «single» er ikkje implementert i R"
 
-#: src/main/coerce.c:2040
+#: src/main/coerce.c:2044
 msgid "unimplemented predicate"
 msgstr "ikkje-implementert predikat"
 
-#: src/main/coerce.c:2139 src/main/coerce.c:2380 src/main/coerce.c:2426
-#: src/main/coerce.c:2493
+#: src/main/coerce.c:2143 src/main/coerce.c:2384 src/main/coerce.c:2430
+#: src/main/coerce.c:2497
 #, fuzzy, c-format
 msgid "'%s' function applies only to lists and vectors"
 msgstr "kan berre brukast på lister og vektorar"
 
-#: src/main/coerce.c:2216 src/main/coerce.c:2331
+#: src/main/coerce.c:2220 src/main/coerce.c:2335
 #, fuzzy, c-format
 msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
 
-#: src/main/coerce.c:2342
+#: src/main/coerce.c:2346
 #, fuzzy
 msgid "'anyNA()' function takes 1 or 2 arguments"
 msgstr "feil type for argument"
 
-#: src/main/coerce.c:2406 src/main/coerce.c:2463 src/main/coerce.c:2537
+#: src/main/coerce.c:2410 src/main/coerce.c:2467 src/main/coerce.c:2541
 #, fuzzy, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "ikkje-implementert type «%s» i «%s»\n"
 
-#: src/main/coerce.c:2566
+#: src/main/coerce.c:2570
 msgid "first argument must be a character string"
 msgstr "det første argumentet må vera ein teiknstreng"
 
-#: src/main/coerce.c:2568 src/main/coerce.c:2618 src/main/coerce.c:2622
+#: src/main/coerce.c:2572 src/main/coerce.c:2622 src/main/coerce.c:2626
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2598
+#: src/main/coerce.c:2602
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "«what» må vera ein teiknstreng eller ein funksjon"
 
-#: src/main/coerce.c:2609 src/main/engine.c:3094 src/main/envir.c:1931
+#: src/main/coerce.c:2613 src/main/engine.c:3094 src/main/envir.c:1931
 #: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1400
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "«env»-argumentet må vera ein omgjevnad"
 
-#: src/main/coerce.c:2768
+#: src/main/coerce.c:2772
 msgid "invalid environment specified"
 msgstr "ugyldig omgjevnad oppgjeven"
 
-#: src/main/coerce.c:2834
+#: src/main/coerce.c:2838
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr "Set class(x) til NULL. Resultatet vil ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.c:2837
+#: src/main/coerce.c:2841
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
@@ -2430,7 +2430,7 @@ msgstr ""
 "Set class(x) til fleire teiknstrengar («%s», «%s», ...). Resultatet vil "
 "ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.c:2840
+#: src/main/coerce.c:2844
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
@@ -2439,18 +2439,18 @@ msgstr ""
 "Ved å setja class(x) til «%s», vert attributtet sett til NULL. Resultatet "
 "vil ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.c:2871
+#: src/main/coerce.c:2875
 msgid "invalid replacement object to be a class string"
 msgstr "ugyldig erstattingsobjekt for å vera ein klassestreng"
 
-#: src/main/coerce.c:2889
+#: src/main/coerce.c:2893
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr ""
 "«%s» kan berre setjast som klasse viss objektet har denne typen (fann «%s»)"
 
-#: src/main/coerce.c:2907
+#: src/main/coerce.c:2911
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2459,22 +2459,22 @@ msgstr ""
 "kan ikkje setja klassen til «matrix» med mindre dimensjonsattributtet er av "
 "lengd 2 (var %d)"
 
-#: src/main/coerce.c:2915
+#: src/main/coerce.c:2919
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
 "kan ikkje setja klassen til «array» med mindre dimensjonsattributtet har "
 "lengd > 0"
 
-#: src/main/coerce.c:2960
+#: src/main/coerce.c:2964
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2962
+#: src/main/coerce.c:2966
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2968
+#: src/main/coerce.c:2972
 msgid "invalid to change the storage mode of a factor"
 msgstr "kan ikkje endra lagringsmodus til ein faktor"
 
@@ -6014,7 +6014,7 @@ msgstr ""
 
 #: src/main/memory.c:3141 src/main/memory.c:3146
 #, c-format
-msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
+msgid "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"
 msgstr ""
 
 #: src/main/memory.c:3156

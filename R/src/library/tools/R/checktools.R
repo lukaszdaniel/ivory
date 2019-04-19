@@ -957,7 +957,7 @@ function(dir, logs = NULL, drop_ok = TRUE, ...)
     rqa <- paste0("'|", intToUtf8(0x2019))
     ## Group when used ...
 
-    checks <- db[, "Check"] #LUKI
+    checks <- db[, "Check"]
     checks <- sub(sprintf("checking whether package (%s).*(%s) can be installed",
                           lqa, rqa),
                   "checking whether package can be installed",

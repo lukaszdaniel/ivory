@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -145,6 +145,12 @@ msgstr "'commpressed' muss Boole'sch oder ein Charakter sein"
 #, fuzzy
 msgid "'%s' argument ignored"
 msgstr "'modes' Argument ignoriert"
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr "'url' muss eine nicht-leere Zeichenkette sein"
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0
@@ -1875,11 +1881,6 @@ msgstr ""
 #: R/write.table.R:0
 msgid "appending column names to file"
 msgstr "hänge Spaltennamen an Datei an"
-
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-#: R/tar.R:0
-msgid "argument 'compressed' is ignored for the internal method"
-msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0

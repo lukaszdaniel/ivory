@@ -58,7 +58,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
         calldown <- TRUE
     } else if (!file.exists(PKGSfile)) {
         ## no PACKAGES file to update
-        warning("No existing PACKAGES file found at ", PKGSfile) #LUKI
+        warning(gettextf("No existing PACKAGES file found at %s", PKGSfile))
         calldown <- TRUE
     } else if (!all(dim(retdat <- as.data.frame(read.dcf(PKGSfile),
                                          stringsAsFactors = FALSE)) > 0L)) {
@@ -74,8 +74,8 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     
     ## can't update PACKAGES file if existing entries don't have all
     ## the required fields
-    if(!calldown && !is.null(fields) && !all(fields %in% okfields)) { #LUKI
-        warning("Specified fields no present in existing PACKAGES file: ",
+    if(!calldown && !is.null(fields) && !all(fields %in% okfields)) {
+        warning("Specified fields not present in existing PACKAGES file: ",
                 paste(setdiff(fields, okfields), collapse = " "))
         calldown <- TRUE
     }
@@ -96,10 +96,10 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     ## we know file exists by this point
     pmtime <- file.info(PKGSfile)$mtime
     if(verbose.level > 0L) {
-	    if(strict) { #LUKI
-        message("Updating existing repository [strict mode: ON]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+	    if(strict) {
+        message(sprintf(ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s", "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s", domain = "R-tools"), nrow(retdat), PKGSfile), domain = NA)
 	    } else {
-        message("Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with ", nrow(retdat), " entries at ", PKGSfile)
+        message(sprintf(ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s", "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s", domain = "R-tools"), nrow(retdat), PKGSfile), domain = NA)
 	    }
     }
     

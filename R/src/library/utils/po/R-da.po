@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-28 15:56\n"
+"POT-Creation-Date: 2019-04-19 19:06\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -131,6 +131,12 @@ msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
 #: R/de.R:0
 msgid "'%s' argument ignored"
 msgstr ""
+
+#. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
+#: R/tar.R:0
+#, fuzzy
+msgid "'%s' argument is ignored for the internal method"
+msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0
@@ -1775,11 +1781,6 @@ msgstr ""
 #. R/write.table.R: warning("appending column names to file")
 #: R/write.table.R:0
 msgid "appending column names to file"
-msgstr ""
-
-#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
-#: R/tar.R:0
-msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")

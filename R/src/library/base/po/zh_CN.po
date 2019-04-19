@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 19:34+0200\n"
+"POT-Creation-Date: 2019-04-19 19:06+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -609,7 +609,7 @@ msgstr "在显示'%s'时出了问题"
 #: src/main/character.c:1331 src/main/character.c:1565
 #: src/main/character.c:1569 src/main/character.c:1630
 #: src/main/character.c:1633 src/main/coerce.c:1487 src/main/coerce.c:1539
-#: src/main/coerce.c:2061 src/main/connections.c:1419
+#: src/main/coerce.c:2065 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
 #: src/main/connections.c:1597 src/main/connections.c:1602
@@ -1157,7 +1157,7 @@ msgstr ""
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "变数'%s'的长度大于一，因此只能用其第一元素"
 
-#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2955
+#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2959
 #: src/main/saveload.c:2035
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1404,7 +1404,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>)的值不是NULL也不是长度为%d的串列 "
 
-#: src/main/apply.c:328 src/main/coerce.c:2602
+#: src/main/apply.c:328 src/main/coerce.c:2606
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr'参数必需是表达式"
@@ -1768,7 +1768,7 @@ msgstr "设'names'属性时种类(%s)出错"
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames'只能用于陈列"
 
-#: src/main/attrib.c:1061 src/main/coerce.c:2605 src/main/engine.c:3088
+#: src/main/attrib.c:1061 src/main/coerce.c:2609 src/main/engine.c:3088
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'list'参数必需是串列"
@@ -2071,7 +2071,7 @@ msgstr "矢量: 无法建立状态为\"%s\"的矢量."
 msgid "cannot set length of non-(vector or list)"
 msgstr "不能设非矢量的长度"
 
-#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2964
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2968
 msgid "invalid value"
 msgstr "值不对"
 
@@ -2084,7 +2084,7 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr "'%s'参数的长度不对"
 
-#: src/main/builtin.c:982 src/main/coerce.c:2675 src/main/coerce.c:2718
+#: src/main/builtin.c:982 src/main/coerce.c:2679 src/main/coerce.c:2722
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
 #: src/main/eval.c:6727 src/main/eval.c:6874
@@ -2096,7 +2096,7 @@ msgstr "'...'用在的上下文不对"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重复开关默认值：'%s'和'%s'"
 
-#: src/main/builtin.c:1037 src/main/coerce.c:2559
+#: src/main/builtin.c:1037 src/main/coerce.c:2563
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "%d元素是空的"
@@ -2308,136 +2308,136 @@ msgstr "参数'code'必需是字符串"
 msgid "argument must be a character string"
 msgstr "参数'code'必需是字符串"
 
-#: src/main/coerce.c:1631
+#: src/main/coerce.c:1635
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.c:1657
+#: src/main/coerce.c:1661
 #, fuzzy
 msgid "invalid argument of length 0"
 msgstr "第二参数长度为零是不对的"
 
-#: src/main/coerce.c:1673
+#: src/main/coerce.c:1677
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.c:1676
+#: src/main/coerce.c:1680
 msgid "invalid argument list"
 msgstr "参数串列不对"
 
-#: src/main/coerce.c:1697
+#: src/main/coerce.c:1701
 #, c-format
 msgid "'length(x) = %lld > 1' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.c:1700
+#: src/main/coerce.c:1704
 msgid "length > 1 in coercion to logical"
 msgstr ""
 
-#: src/main/coerce.c:2038
+#: src/main/coerce.c:2042
 #, fuzzy
 msgid "type \"single\" is unimplemented in R"
 msgstr "\"single\"种类目前在R里还没有实现"
 
-#: src/main/coerce.c:2040
+#: src/main/coerce.c:2044
 msgid "unimplemented predicate"
 msgstr "没有实现的谓词"
 
-#: src/main/coerce.c:2139 src/main/coerce.c:2380 src/main/coerce.c:2426
-#: src/main/coerce.c:2493
+#: src/main/coerce.c:2143 src/main/coerce.c:2384 src/main/coerce.c:2430
+#: src/main/coerce.c:2497
 #, fuzzy, c-format
 msgid "'%s' function applies only to lists and vectors"
 msgstr "只能用于串列和矢量"
 
-#: src/main/coerce.c:2216 src/main/coerce.c:2331
+#: src/main/coerce.c:2220 src/main/coerce.c:2335
 #, fuzzy, c-format
 msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s()不适用于类别为'%s'的非串列或非矢量"
 
-#: src/main/coerce.c:2342
+#: src/main/coerce.c:2346
 #, fuzzy
 msgid "'anyNA()' function takes 1 or 2 arguments"
 msgstr "参数种类不对"
 
-#: src/main/coerce.c:2406 src/main/coerce.c:2463 src/main/coerce.c:2537
+#: src/main/coerce.c:2410 src/main/coerce.c:2467 src/main/coerce.c:2541
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "没有为'%s'类型实现默认的方法"
 
-#: src/main/coerce.c:2566
+#: src/main/coerce.c:2570
 msgid "first argument must be a character string"
 msgstr "第一个参数必需是字符串"
 
-#: src/main/coerce.c:2568 src/main/coerce.c:2618 src/main/coerce.c:2622
+#: src/main/coerce.c:2572 src/main/coerce.c:2622 src/main/coerce.c:2626
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2598
+#: src/main/coerce.c:2602
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "'what'必需是字符串或函数"
 
-#: src/main/coerce.c:2609 src/main/engine.c:3094 src/main/envir.c:1931
+#: src/main/coerce.c:2613 src/main/engine.c:3094 src/main/envir.c:1931
 #: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1400
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'env'参数必需是环境"
 
-#: src/main/coerce.c:2768
+#: src/main/coerce.c:2772
 msgid "invalid environment specified"
 msgstr "环境设定有错"
 
-#: src/main/coerce.c:2834
+#: src/main/coerce.c:2838
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr "把class(x)设成NULL；其结果不再是S4目标对象"
 
-#: src/main/coerce.c:2837
+#: src/main/coerce.c:2841
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
 "longer be an S4 object"
 msgstr "把class(x)设成多结字符串(\"%s\", \"%s\", ...); 其结果不再是S4目标对象"
 
-#: src/main/coerce.c:2840
+#: src/main/coerce.c:2844
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
 "be an S4 object"
 msgstr "把class(x)设成\"%s\"集空属性; 其结果不再是S4目标对象"
 
-#: src/main/coerce.c:2871
+#: src/main/coerce.c:2875
 msgid "invalid replacement object to be a class string"
 msgstr "字符串类别的替换对象不对"
 
-#: src/main/coerce.c:2889
+#: src/main/coerce.c:2893
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr "只有在对象有这一类别的情况下才能设\"%s\"；不应该有\"%s\""
 
-#: src/main/coerce.c:2907
+#: src/main/coerce.c:2911
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
 "length 2 (was %d)"
 msgstr "除非维度的长度为二(目前是%d)，否则不能设为矩阵类别"
 
-#: src/main/coerce.c:2915
+#: src/main/coerce.c:2919
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr "除非维度的长度大于零，否则不能设为\"array\"类别"
 
-#: src/main/coerce.c:2960
+#: src/main/coerce.c:2964
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2962
+#: src/main/coerce.c:2966
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2968
+#: src/main/coerce.c:2972
 msgid "invalid to change the storage mode of a factor"
 msgstr "不能改变因子的存储方式"
 
@@ -5935,7 +5935,7 @@ msgstr ""
 
 #: src/main/memory.c:3141 src/main/memory.c:3146
 #, c-format
-msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
+msgid "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"
 msgstr ""
 
 #: src/main/memory.c:3156

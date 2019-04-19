@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 19:34+0200\n"
+"POT-Creation-Date: 2019-04-19 19:06+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -610,7 +610,7 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/character.c:1331 src/main/character.c:1565
 #: src/main/character.c:1569 src/main/character.c:1630
 #: src/main/character.c:1633 src/main/coerce.c:1487 src/main/coerce.c:1539
-#: src/main/coerce.c:2061 src/main/connections.c:1419
+#: src/main/coerce.c:2065 src/main/connections.c:1419
 #: src/main/connections.c:1425 src/main/connections.c:1428
 #: src/main/connections.c:1432 src/main/connections.c:1581
 #: src/main/connections.c:1597 src/main/connections.c:1602
@@ -1160,7 +1160,7 @@ msgstr ""
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "인수 '%s'는 2 이상 길이이므로 첫 번째 요소만이 사용됩니다"
 
-#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2955
+#: src/main/agrep.c:191 src/main/agrep.c:817 src/main/coerce.c:2959
 #: src/main/saveload.c:2035
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1407,7 +1407,7 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames (<value>)는 NULL도 아니고 길이 %d의 목록도 아닙니다"
 
-#: src/main/apply.c:328 src/main/coerce.c:2602
+#: src/main/apply.c:328 src/main/coerce.c:2606
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr' 인수는 식이 아니면 안됩니다"
@@ -1776,7 +1776,7 @@ msgstr "'names' 속성으로 설정하기 부적절한 타입 (%s)입니다"
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' applied to non-array"
 
-#: src/main/attrib.c:1061 src/main/coerce.c:2605 src/main/engine.c:3088
+#: src/main/attrib.c:1061 src/main/coerce.c:2609 src/main/engine.c:3088
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'list' 인수는 리스트가 아니면 안됩니다"
@@ -2081,7 +2081,7 @@ msgstr "vector: cannot make a vector of mode '%s'."
 msgid "cannot set length of non-(vector or list)"
 msgstr "벡터 아닌 것은 길이를 설정할 수 없습니다"
 
-#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2964
+#: src/main/builtin.c:840 src/main/character.c:571 src/main/coerce.c:2968
 msgid "invalid value"
 msgstr "값이 잘못되었습니다"
 
@@ -2094,7 +2094,7 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr "'%s'인수의 길이가 잘못되었습니다"
 
-#: src/main/builtin.c:982 src/main/coerce.c:2675 src/main/coerce.c:2718
+#: src/main/builtin.c:982 src/main/coerce.c:2679 src/main/coerce.c:2722
 #: src/main/eval.c:620 src/main/eval.c:749 src/main/eval.c:2899
 #: src/main/eval.c:2991 src/main/eval.c:3062 src/main/eval.c:3404
 #: src/main/eval.c:6727 src/main/eval.c:6874
@@ -2106,7 +2106,7 @@ msgstr "'...' 가 잘못된 맥락에서 사용되었습니다"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "duplicate switch defaults: '%s' and '%s'"
 
-#: src/main/builtin.c:1037 src/main/coerce.c:2559
+#: src/main/builtin.c:1037 src/main/coerce.c:2563
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "인수 %d가 비어 있습니다"
@@ -2319,93 +2319,93 @@ msgstr "인수 'code'는 문자열이어야 합니다"
 msgid "argument must be a character string"
 msgstr "인수 'code'는 문자열이어야 합니다"
 
-#: src/main/coerce.c:1631
+#: src/main/coerce.c:1635
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.c:1657
+#: src/main/coerce.c:1661
 #, fuzzy
 msgid "invalid argument of length 0"
 msgstr "길이 0인 두번째 인수가 잘못되었습니다"
 
-#: src/main/coerce.c:1673
+#: src/main/coerce.c:1677
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.c:1676
+#: src/main/coerce.c:1680
 msgid "invalid argument list"
 msgstr "인수 목록이 잘못되었습니다"
 
-#: src/main/coerce.c:1697
+#: src/main/coerce.c:1701
 #, c-format
 msgid "'length(x) = %lld > 1' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.c:1700
+#: src/main/coerce.c:1704
 msgid "length > 1 in coercion to logical"
 msgstr ""
 
-#: src/main/coerce.c:2038
+#: src/main/coerce.c:2042
 #, fuzzy
 msgid "type \"single\" is unimplemented in R"
 msgstr "\"single\"형은 R에 구현되지 않았습니다"
 
-#: src/main/coerce.c:2040
+#: src/main/coerce.c:2044
 msgid "unimplemented predicate"
 msgstr "unimplemented predicate"
 
-#: src/main/coerce.c:2139 src/main/coerce.c:2380 src/main/coerce.c:2426
-#: src/main/coerce.c:2493
+#: src/main/coerce.c:2143 src/main/coerce.c:2384 src/main/coerce.c:2430
+#: src/main/coerce.c:2497
 #, fuzzy, c-format
 msgid "'%s' function applies only to lists and vectors"
 msgstr "리스트 그리고 벡터에만 적용이 될수 있습니다"
 
-#: src/main/coerce.c:2216 src/main/coerce.c:2331
+#: src/main/coerce.c:2220 src/main/coerce.c:2335
 #, fuzzy, c-format
 msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() applied to non-(list or vector) of type '%s'"
 
-#: src/main/coerce.c:2342
+#: src/main/coerce.c:2346
 #, fuzzy
 msgid "'anyNA()' function takes 1 or 2 arguments"
 msgstr "인수의 형식이 잘못되었습니다"
 
-#: src/main/coerce.c:2406 src/main/coerce.c:2463 src/main/coerce.c:2537
+#: src/main/coerce.c:2410 src/main/coerce.c:2467 src/main/coerce.c:2541
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "default method not implemented for type '%s'"
 
-#: src/main/coerce.c:2566
+#: src/main/coerce.c:2570
 msgid "first argument must be a character string"
 msgstr "최초의 인수는 문자열이어야 합니다"
 
-#: src/main/coerce.c:2568 src/main/coerce.c:2618 src/main/coerce.c:2622
+#: src/main/coerce.c:2572 src/main/coerce.c:2622 src/main/coerce.c:2626
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2598
+#: src/main/coerce.c:2602
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "'what'는 문자열 또는 함수여야 합니다"
 
-#: src/main/coerce.c:2609 src/main/engine.c:3094 src/main/envir.c:1931
+#: src/main/coerce.c:2613 src/main/engine.c:3094 src/main/envir.c:1931
 #: src/main/envir.c:2948 src/main/envir.c:3030 src/main/unique.c:1400
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'env' 인수는 환경이 아니면 안됩니다"
 
-#: src/main/coerce.c:2768
+#: src/main/coerce.c:2772
 msgid "invalid environment specified"
 msgstr "잘못된 환경 지정입니다"
 
-#: src/main/coerce.c:2834
+#: src/main/coerce.c:2838
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr ""
 "class(x)를 NULL로 설정하였습니다; 결과는 더 이상 S4 개체가 아닐 것입니다"
 
-#: src/main/coerce.c:2837
+#: src/main/coerce.c:2841
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
@@ -2414,7 +2414,7 @@ msgstr ""
 "class(x)를 다중문자열(\"%s\", \"%s\", ...)로 설정하였습니다; 결과는 더 이상 "
 "S4 개체가 아닐 것입니다"
 
-#: src/main/coerce.c:2840
+#: src/main/coerce.c:2844
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
@@ -2423,11 +2423,11 @@ msgstr ""
 "class(x)를  \"%s\"에 설정하면 속성이 NULL이 됩니다; 결과는 더 이상 S4 개체가 "
 "아닐 것입니다"
 
-#: src/main/coerce.c:2871
+#: src/main/coerce.c:2875
 msgid "invalid replacement object to be a class string"
 msgstr "클래스 문자열에 대한 잘못된 대체 개체입니다"
 
-#: src/main/coerce.c:2889
+#: src/main/coerce.c:2893
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
@@ -2435,7 +2435,7 @@ msgstr ""
 "\"%s\" 은 개체가 이 형태를 가지고 있을 때 클래스로서 설정됩니다; \"%s\"가 발"
 "견되었습니다"
 
-#: src/main/coerce.c:2907
+#: src/main/coerce.c:2911
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2443,20 +2443,20 @@ msgid ""
 msgstr ""
 "차원속성이 길이 2가 아닌 한 (%d였습니다)、행렬에 클래스를 설정할 수 없습니다"
 
-#: src/main/coerce.c:2915
+#: src/main/coerce.c:2919
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr "차원 속성이 길이> 0이 아닌 한, 배열 클래스를 설정할 수 없습니다"
 
-#: src/main/coerce.c:2960
+#: src/main/coerce.c:2964
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2962
+#: src/main/coerce.c:2966
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2968
+#: src/main/coerce.c:2972
 msgid "invalid to change the storage mode of a factor"
 msgstr "invalid to change the storage mode of a factor"
 
@@ -5975,7 +5975,7 @@ msgstr ""
 
 #: src/main/memory.c:3141 src/main/memory.c:3146
 #, c-format
-msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
+msgid "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d"
 msgstr ""
 
 #: src/main/memory.c:3156
