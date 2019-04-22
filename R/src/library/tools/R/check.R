@@ -1164,10 +1164,9 @@ add_dummies <- function(dir, Log)
                         out <- .pandoc_md_for_CRAN(ifile, ofile)
                         if(out$status) {
                             if(!any) warningLog(Log)
-                            any <- TRUE #LUKI
+                            any <- TRUE
                             printLog(Log,
-                                     sprintf("Conversion of '%s' failed:\n",
-                                             ifile),
+                                     gettextf("Conversion of '%s' failed:\n", ifile, domain = "R-tools"),
                                      paste(out$stderr, collapse = "\n"),
                                      "\n")
                         }
@@ -2223,9 +2222,9 @@ add_dummies <- function(dir, Log)
                     names(ans)[sapply(ans, function(x) ".Random.seed" %in% x)]
                 if (length(bad)) {
                     warn <- TRUE
-                    msg <- if (length(bad) > 1L) #LUKI
-                         c(sprintf("Object named %s found in datasets:\n",
-                                  sQuote(".Random.seed")),
+                    msg <- if (length(bad) > 1L)
+                         c(gettextf("Object named %s found in datasets:\n",
+                                  sQuote(".Random.seed"), domain = "R-tools"),
                           paste0(.pretty_format(bad), "\n"),
                           "Please remove it.\n")
                     else

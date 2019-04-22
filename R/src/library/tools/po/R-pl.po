@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 19:06\n"
+"POT-Creation-Date: 2019-04-22 18:54\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -45,7 +45,6 @@ msgstr "plik %s nie został znaleziony"
 
 #. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
 #: R/tools-deprecated.R:0
-#, fuzzy
 msgid "%s file wast not found"
 msgstr "plik %s nie został znaleziony"
 
@@ -62,9 +61,8 @@ msgstr "%s w obiekcie %s"
 
 #. R/check.R: gettextf("%s is a directory\n", sQuote("data/datalist"), "\n")
 #: R/check.R:0
-#, fuzzy
 msgid "%s is a directory"
-msgstr "katalog"
+msgstr "%s jest katalogiem"
 
 #. R/check.R: gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg))
 #: R/check.R:0
@@ -981,6 +979,12 @@ msgid ""
 msgstr ""
 "Rozważ użycie pliku '.Rinstignore': zobacz %s,\n"
 "albo przenieś źródła ilustracji z %s do %s."
+
+#. R/check.R: gettextf("Conversion of '%s' failed:\n", ifile, domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Conversion of '%s' failed:"
+msgstr "tworzenie '%s' nie powiodło się"
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ", appendLF = FALSE, domain = "R-tools")
 #: R/Rd2pdf.R:0
@@ -2799,6 +2803,11 @@ msgstr "OK"
 msgid "Object files/libraries should not be included in a source package."
 msgstr ""
 "Pliki/biblioteki obiektu nie powinny być dołączone do pakietu źródłowego."
+
+#. R/check.R: gettextf("Object named %s found in datasets:\n", sQuote(".Random.seed"), domain = "R-tools")
+#: R/check.R:0
+msgid "Object named %s found in datasets:"
+msgstr ""
 
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in documentation object %s:", sQuote(nm),     domain = "R-tools")
 #: R/QC.R:0

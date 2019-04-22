@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-15 20:54\n"
+"POT-Creation-Date: 2019-04-22 18:54\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3179,6 +3179,13 @@ msgid ""
 "  SSlogis instead of logistic."
 msgstr ""
 
+#. R/models.R: gettext("Using formula(x) is deprecated when x is a character vector of length > 1. Consider 'formula(paste(x, collapse = \" \"))' instead.",     domain = "R-stats")
+#: R/models.R:0
+msgid ""
+"Using formula(x) is deprecated when x is a character vector of length > 1. "
+"Consider 'formula(paste(x, collapse = \" \"))' instead."
+msgstr ""
+
 #. R/nlminb.R: gettextf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)", iv1, v[iv1])
 #: R/nlminb.R:0
 msgid "V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)"
@@ -4415,6 +4422,7 @@ msgstr "유효하지 않은 formula입니다"
 msgid "invalid formula in 'deriv()'"
 msgstr "deriv에 유효하지 않은 formula입니다"
 
+#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
 #. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
 #: R/models.R:0
 #, fuzzy

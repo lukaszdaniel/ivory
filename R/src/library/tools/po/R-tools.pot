@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-19 19:06\n"
+"POT-Creation-Date: 2019-04-22 18:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1165,6 +1165,13 @@ msgstr ""
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")
 
 msgid "Consider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Conversion of '%s' failed:\n", ifile, domain = "R-tools")
+
+msgid "Conversion of '%s' failed:"
 msgstr ""
 
 
@@ -3406,6 +3413,13 @@ msgstr ""
 #. R/check.R: gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools")
 
 msgid "Object files/libraries should not be included in a source package."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Object named %s found in datasets:\n", sQuote(".Random.seed"), domain = "R-tools")
+
+msgid "Object named %s found in datasets:"
 msgstr ""
 
 

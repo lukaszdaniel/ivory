@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-19 19:06\n"
+"POT-Creation-Date: 2019-04-22 18:54\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -934,6 +934,12 @@ msgid ""
 "Consider the use of a .Rinstignore file: see %s,\n"
 "or move the vignette sources from %s to %s."
 msgstr ""
+
+#. R/check.R: gettextf("Conversion of '%s' failed:\n", ifile, domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Conversion of '%s' failed:"
+msgstr "esecuzione di make fallita"
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ", appendLF = FALSE, domain = "R-tools")
 #: R/Rd2pdf.R:0
@@ -2701,6 +2707,11 @@ msgstr ""
 #. R/check.R: gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Object files/libraries should not be included in a source package."
+msgstr ""
+
+#. R/check.R: gettextf("Object named %s found in datasets:\n", sQuote(".Random.seed"), domain = "R-tools")
+#: R/check.R:0
+msgid "Object named %s found in datasets:"
 msgstr ""
 
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in documentation object %s:", sQuote(nm),     domain = "R-tools")
