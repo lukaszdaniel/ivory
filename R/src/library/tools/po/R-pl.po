@@ -2448,18 +2448,18 @@ msgstr "UWAGA: Pomijanie sprawdzania przy pierwszym błędzie."
 #. R/install.R: message("NOTE: fixed library identification name ", oldid)
 #: R/install.R:0
 msgid "NOTE: fixed library identification name"
-msgstr ""
+msgstr "UWAGA: poprawiona nazwa identyfikacyjna biblioteki"
 
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 #. R/install.R: message("NOTE: fixed library path ", old_paths[i])
 #: R/install.R:0
 msgid "NOTE: fixed library path"
-msgstr ""
+msgstr "UWAGA: poprawiona ścieżka do biblioteki"
 
 #. R/install.R: message("NOTE: fixed path ", old_paths[i])
 #: R/install.R:0
 msgid "NOTE: fixed path"
-msgstr ""
+msgstr "UWAGA: poprawiona ścieżka"
 
 #. R/install.R: message("NOTE: fixed rpath ", old_paths[i])
 #. R/install.R: message("NOTE: fixed rpath ", old_rpath)
@@ -2507,7 +2507,7 @@ msgstr "Brak makr Rd w pakiecie %s"
 #. R/QC.R: message("No dataset created in 'envir'")
 #: R/QC.R:0
 msgid "No dataset created in 'envir'"
-msgstr ""
+msgstr "Brak zbioru danych utworzonego w 'envir'"
 
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
@@ -6728,17 +6728,17 @@ msgstr[2] "%d OSTRZEŻEŃ"
 #: R/update_packages.R:0
 msgid "%d entry added or updated"
 msgid_plural "%d entries added or updated"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d wpis dodany lub zaktualizowany"
+msgstr[1] "%d wpisy dodane lub zaktualizowane"
+msgstr[2] "%d wpisów dodanych lub zaktualizowanych"
 
 #. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.", "%d entries retained unchanged.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "%d entry retained unchanged."
 msgid_plural "%d entries retained unchanged."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d wpis pozostał niezmieniony"
+msgstr[1] "%d wpisy pozostały niezmienione"
+msgstr[2] "%d wpisów pozostało niezmienionych"
 
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
