@@ -963,16 +963,12 @@ stopifnot(exprs = {
 
 ## write.csv did not signal an error if the disk was full PR#17243
 if (file.access("/dev/full", mode = 2) == 0) { # Not on all systems...
+    cat("Using  /dev/full  checking write errors... ")
     # Large writes should fail mid-write
-    stopifnot(inherits(tryCatch(write.table(data.frame(x=1:1000000),
-                                            file = "/dev/full"),
-                                error = identity),
-                       "error"))
+    tools::assertError(write.table(data.frame(x=1:1000000), file = "/dev/full"))
     # Small writes should fail on closing
-    stopifnot(inherits(tryCatch(write.table(data.frame(x=1),
-                                                file = "/dev/full"),
-                                    warning = identity),
-                       "warning"))
+    tools::assertWarning(write.table(data.frame(x=1), file = "/dev/full"))
+    cat("[Ok]\n")
 }
 ## Silently failed up to 3.4.1
 
@@ -1115,9 +1111,10 @@ pL  <- vapply(fLrg, function(f)length(pretty(c(-f,f), n = 100,  min.n = 1)), 1L)
 pL
 pL3 <- vapply(fLrg, function(f)length(pretty(c(-f,f), n = 10^3, min.n = 1)), 1L)
 pL3
-stopifnot(71 <= pL, pL <= 141, 81 <= pL[-7], # not on Win-64: pL[-15] <= 121,
+stopifnot(71 <= pL, pL <= 141, # 81 <= pL[-7], # not on Win-64: pL[-15] <= 121,
           701 <= pL3, pL3 <= 1401) # <= 1201 usually
 ## in R < 3.5.0, both had values as low as 17
+## without long doubles, min(pl[-7]) is 71.
 
 
 ### Several returnValue() fixes (r 73111) --------------------------
@@ -2274,15 +2271,18 @@ stopifnot(exprs = {
 ## in R <= 3.5.1
 
 
-## str() now even works with invalid objects:
+## str() now even works with invalid S4  objects:
+## this needs Matrix loaded to be an S4 generic
+if(requireNamespace('Matrix', lib.loc = .Library)) {
 moS <- mo <- findMethods("isSymmetric")
 attr(mo, "arguments") <- NULL
-validObject(mo, TRUE)# shows what's wrong
+print(validObject(mo, TRUE)) # shows what's wrong
 tools::assertError(capture.output( mo ))
 op <- options(warn = 1)# warning:
 str(mo, max.level = 2)
 options(op)# revert
 ## in R <= 3.5.x, str() gave error instead of the warning
+}
 
 
 ## seq.default() w/ integer overflow in border cases: -- PR#17497, Suharto Anggono
@@ -2579,7 +2579,7 @@ stopifnot(exprs = {
 
 ## bxp() did not signal anything about duplicate actual arguments:
 set.seed(3); bx.p <- boxplot(split(rt(100, 4), gl(5, 20)), plot=FALSE)
-tools::assertWarning(bxp(bx.p, ylab = "Y LAB", ylab = "two"))
+tools::assertWarning(bxp(bx.p, ylab = "Y LAB", ylab = "two"), verbose=TRUE)
 w <- tryCatch(bxp(bx.p, ylab = "Y LAB", ylab = "two", xlab = "i", xlab = "INDEX"),
               warning = conditionMessage)
 stopifnot(is.character(w), grepl('ylab = "two"', w), grepl('xlab = "INDEX"', w))
@@ -2642,7 +2642,7 @@ stopifnot(exprs = {
 
 
 ## Failed to work after r76382--8:
-tools::assertError(formula("3"))
+tools::assertError(formula("3"), verbose=TRUE)
 stopifnot(exprs = {
     inherits(ff <- tryCatch(formula("random = ~ 1|G"),
                             warning=identity), "deprecatedWarning")
@@ -2653,9 +2653,8 @@ stopifnot(exprs = {
     identical(formula(c("y", "~", "x + (1 | G)")), y ~ x + (1 | G))
     identical(formula(c("~", "x",   "+ (1 | G)")),   ~ x + (1 | G))
     is.list(options(op))
-    inherits(tryCatch(formula(c("~", "x")), warning=identity),
-             "deprecatedWarning")
 })
+tools::assertWarning(formula(c("~", "x")), "deprecatedWarning", verbose=TRUE)
 
 
 ## str2expression(<empty>) :

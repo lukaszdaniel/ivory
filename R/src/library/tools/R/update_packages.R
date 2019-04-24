@@ -285,7 +285,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     }
     
     if(verbose.level > 0L) {
-        message(sprinf(ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry" , "Final updated PACKAGES db contains %d entries", domain = "R-tools"), nrow(retdat)), domain = NA)
+        message(sprintf(ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry" , "Final updated PACKAGES db contains %d entries", domain = "R-tools"), nrow(retdat)), domain = NA)
     }
 
     ## write_PACKAGES docs don't define an order of entries, but I
