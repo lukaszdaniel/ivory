@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-04-26 08:21\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -95,6 +95,13 @@ msgstr ""
 #: R/QC.R:0
 msgid "%s registered as %s, but called with %s"
 msgstr ""
+
+#. R/check.R: gettextf("%s set in %s without any corresponding files\n", this2, sQuote(m), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "%s set in %s without any corresponding files"
+msgstr ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
 
 #. R/license.R: gettextf("%s version %s", lab[pos], versions[ind], domain = "R-tools")
 #: R/license.R:0
@@ -878,12 +885,6 @@ msgstr ""
 msgid "Checking URLs requires 'libcurl' support in the R build"
 msgstr ""
 
-#. R/check.R: gettext("Checking for include directives in Makefiles ...", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Checking for include directives in Makefiles ..."
-msgstr "%s를 확인합니다 ..."
-
 #. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
 #: R/check.R:0
 msgid "Checking line endings in shell scripts ..."
@@ -1346,7 +1347,7 @@ msgstr "패키지 %s의 예제를 테스트합니다"
 msgid "ERROR: lazydata failed for package %s"
 msgstr "패키지 %s에 관한 도움말을 찾을 수 없습니다"
 
-#. R/install.R: gettext("ERROR: loading failed")
+#. R/install.R: gettext("ERROR: loading failed", domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
 msgid "ERROR: loading failed"
@@ -1725,9 +1726,9 @@ msgstr ""
 msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
 msgstr ""
 
-#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than some files in 'inst/doc':",     domain = "R-tools")
 #: R/check.R:0
-msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
+msgid "Files in the 'vignettes' directory newer than some files in 'inst/doc':"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
@@ -4789,16 +4790,16 @@ msgstr ""
 msgid "checking Rd files ..."
 msgstr "%s를 확인합니다 ..."
 
-#. R/check.R: gettext("checking Rd line widths", domain = "R-tools")
+#. R/check.R: gettext("checking Rd line widths ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "checking Rd line widths"
+msgid "checking Rd line widths ..."
 msgstr "%s를 확인합니다 ..."
 
-#. R/check.R: gettext("checking Rd metadata ..", domain = "R-tools")
+#. R/check.R: gettext("checking Rd metadata ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "checking Rd metadata .."
+msgid "checking Rd metadata ..."
 msgstr "%s를 확인합니다 ..."
 
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
@@ -4811,15 +4812,16 @@ msgstr ""
 msgid "checking a package with encoding %s in an ASCII locale"
 msgstr ""
 
-#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries")
+#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
 #: R/install.R:0
 msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
 
-#. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")
+#. R/check.R: gettext("checking compilation flags in Makevars ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking compilation flags in Makevars"
-msgstr ""
+#, fuzzy
+msgid "checking compilation flags in Makevars ..."
+msgstr "%s를 확인합니다 ..."
 
 #. R/check.R: gettext("checking compiled code ...", domain = "R-tools")
 #: R/check.R:0
@@ -4920,16 +4922,22 @@ msgstr ""
 msgid "checking for file %s ..."
 msgstr "%s를 확인합니다 ..."
 
-#. R/check.R: gettext("checking for future file timestamps", domain = "R-tools")
+#. R/check.R: gettext("checking for future file timestamps ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "checking for future file timestamps"
+msgid "checking for future file timestamps ..."
 msgstr "%s를 확인합니다 ..."
 
 #. R/check.R: gettext("checking for hidden files and directories ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for hidden files and directories ..."
 msgstr ""
+
+#. R/check.R: gettext("checking for include directives in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for include directives in Makefiles ..."
+msgstr "%s를 확인합니다 ..."
 
 #. R/check.R: gettext("checking for left-over files ...", domain = "R-tools")
 #: R/check.R:0
@@ -5118,16 +5126,23 @@ msgstr "비어있는 'data' 디렉토리입니다"
 msgid "checking top-level files ..."
 msgstr "%s를 확인합니다 ..."
 
+#. R/check.R: gettext("checking use of PKG_*FLAGS in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking use of PKG_*FLAGS in Makefiles ..."
+msgstr "%s를 확인합니다 ..."
+
 #. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "checking use of S3 registration ..."
 msgstr "%s를 확인합니다 ..."
 
-#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles", domain = "R-tools")
+#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles"
-msgstr ""
+#, fuzzy
+msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles ..."
+msgstr "%s를 확인합니다 ..."
 
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")
 #: R/build.R:0
@@ -5603,6 +5618,13 @@ msgstr "%s 내에서 T/F를 찾았습니다"
 #: R/install.R:0
 msgid "generating debug symbols (%s)"
 msgstr "디버그 기호 %s를 생성합니다"
+
+#. R/install.R: gettextf("hard-coded installation path: please report to the package maintainer and use %s",     sQuote("--no-staged-install"), domain = "R-tools")
+#: R/install.R:0
+msgid ""
+"hard-coded installation path: please report to the package maintainer and "
+"use %s"
+msgstr ""
 
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 #: R/dynamicHelp.R:0
@@ -6370,26 +6392,6 @@ msgstr ""
 msgid "starting httpd help server ..."
 msgstr "httpd 도움말 서버를 시작합니다 ..."
 
-#. R/install.R: gettext("stripping dynamic libraries under lib")
-#: R/install.R:0
-msgid "stripping dynamic libraries under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping dynamic library under lib")
-#: R/install.R:0
-msgid "stripping dynamic library under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping static libraries under lib")
-#: R/install.R:0
-msgid "stripping static libraries under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping static library under lib")
-#: R/install.R:0
-msgid "stripping static library under lib"
-msgstr ""
-
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 #: R/check.R:0
 msgid "sub-directories of 1Mb or more:"
@@ -6416,22 +6418,29 @@ msgstr "테스트 '%s'는 사용가능하지 않습니다"
 msgid "testing '%s' failed"
 msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
-#. R/install.R: gettext("testing if installed package can be loaded")
+#. R/install.R: gettext("testing if installed package can be loaded", domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
 msgid "testing if installed package can be loaded"
 msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없습니다"
 
-#. R/install.R: gettextf("testing if installed package can be loaded from final location")
+#. R/install.R: gettextf("testing if installed package can be loaded from final location", domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
 msgid "testing if installed package can be loaded from final location"
 msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없습니다"
 
-#. R/install.R: gettext("testing if installed package can be loaded from temporary location")
+#. R/install.R: gettext("testing if installed package can be loaded from temporary location", domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
 msgid "testing if installed package can be loaded from temporary location"
+msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없습니다"
+
+#. R/install.R: gettext("testing if installed package keeps a record of temporary installation path",     domain = "R-tools")
+#: R/install.R:0
+#, fuzzy
+msgid ""
+"testing if installed package keeps a record of temporary installation path"
 msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없습니다"
 
 #. R/testing.R: gettextf("testing package %s failed", sQuote(pkg))
@@ -6569,9 +6578,9 @@ msgstr "'%s'을 생성할 수 없습니다"
 msgid "unable to create temp directory %s"
 msgstr "임시디렉토리 %s를 생성하지 못했습니다"
 
-#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 #: R/update_packages.R:0
-msgid "unable to find any package tarballs in"
+msgid "unable to find any package tarballs in %s"
 msgstr ""
 
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
@@ -7676,6 +7685,18 @@ msgstr[0] "객체 %s는 하나 이상의 데이터 호출로부터 생성되었�
 msgid "problem found in %s"
 msgid_plural "problems found in %s"
 msgstr[0] "%s 내에서 T/F를 찾았습니다"
+
+#. R/install.R: ngettext(length(so_s), "stripping dynamic library under lib", "stripping dynamic libraries under lib",     domain = "R-tools")
+#: R/install.R:0
+msgid "stripping dynamic library under lib"
+msgid_plural "stripping dynamic libraries under lib"
+msgstr[0] ""
+
+#. R/install.R: ngettext(length(a_s), "stripping static library under lib", "stripping static libraries under lib",     domain = "R-tools")
+#: R/install.R:0
+msgid "stripping static library under lib"
+msgid_plural "stripping static libraries under lib"
+msgstr[0] ""
 
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0

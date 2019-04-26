@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -153,6 +153,13 @@ msgstr "'input' и 'target' должны быть текстовыми вект�
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "все аргументы должны иметь одинаковую длину"
+
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+#: R/octhex.R:0
+#, fuzzy
+msgid "'%s' argument cannot be coerced to class %s"
+msgstr "'x' нельзя преобразовать в 'octmode'"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
@@ -310,6 +317,7 @@ msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'wait' должен быть TRUE или FALSE"
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
@@ -997,7 +1005,6 @@ msgid "'row.names' argument should specify one of the variables"
 msgstr "'row.names' должны определять одну из переменных"
 
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
@@ -1122,18 +1129,6 @@ msgid ""
 msgstr ""
 "'x' для 'sort.list' должен быть атомарным\n"
 "Вы вызывали 'sort' на этот список?"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "'x' нельзя преобразовать в 'hexmode'"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "'x' нельзя преобразовать в 'hexmode'"
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
@@ -3980,6 +3975,14 @@ msgstr[1] "T использовано вместо TRUE"
 msgstr[2] "T использовано вместо TRUE"
 
 #, fuzzy
+#~ msgid "'x' cannot be coerced to class \"hexmode\""
+#~ msgstr "'x' нельзя преобразовать в 'hexmode'"
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"octmode\""
+#~ msgstr "'x' нельзя преобразовать в 'hexmode'"
+
+#, fuzzy
 #~ msgid "Partial match of '%s' to '%s' in data frame"
 #~ msgstr "нечисловая переменная переменная в таблице данных:"
 
@@ -4100,10 +4103,6 @@ msgstr[2] "T использовано вместо TRUE"
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg' должен быть одним из %s"
-
-#, fuzzy
-#~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "'x' нельзя преобразовать в 'octmode'"
 
 #, fuzzy
 #~ msgid "object %s is not a QR decomposition"

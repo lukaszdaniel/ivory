@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-04-26 08:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -84,6 +84,11 @@ msgstr "%s używa kodowania %s"
 #: R/QC.R:0
 msgid "%s registered as %s, but called with %s"
 msgstr "%s zarejestrowane jako %s, ale wywołane z %s"
+
+#. R/check.R: gettextf("%s set in %s without any corresponding files\n", this2, sQuote(m), domain = "R-tools")
+#: R/check.R:0
+msgid "%s set in %s without any corresponding files"
+msgstr "%s ustawiony w %s bez żadnych powiązanych plików"
 
 #. R/license.R: gettextf("%s version %s", lab[pos], versions[ind], domain = "R-tools")
 #: R/license.R:0
@@ -597,9 +602,8 @@ msgstr ""
 
 #. R/QC.R: gettext("Author field starts with 'Author:'.", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Author field starts with 'Author:'."
-msgstr "Pole 'Authors@R' wskazuje na osoby bez żadnej roli:"
+msgstr "Pole autora rozpoczyna się od 'Author:'."
 
 #. R/check.R: gettext("  Author:    ", domain = "R-tools")
 #: R/check.R:0
@@ -857,12 +861,6 @@ msgstr ""
 "Sprawdzanie adresów URL wymaga wsparcia przez bibliotekę 'libcurl' w "
 "dystrybucji R"
 
-#. R/check.R: gettext("Checking for include directives in Makefiles ...", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Checking for include directives in Makefiles ..."
-msgstr "sprawdzanie zakończeń linii w Makefiles ..."
-
 #. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
 #: R/check.R:0
 msgid "Checking line endings in shell scripts ..."
@@ -982,9 +980,8 @@ msgstr ""
 
 #. R/check.R: gettextf("Conversion of '%s' failed:\n", ifile, domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Conversion of '%s' failed:"
-msgstr "tworzenie '%s' nie powiodło się"
+msgstr "Konwersja pliku '%s' nie powiodło się:"
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ", appendLF = FALSE, domain = "R-tools")
 #: R/Rd2pdf.R:0
@@ -1314,7 +1311,7 @@ msgstr "BŁĄD: leniwe ładowanie nie powiodło się dla pakietu %s"
 msgid "ERROR: lazydata failed for package %s"
 msgstr "BŁĄD: leniwe dane nie powiodły się dla pakietu %s"
 
-#. R/install.R: gettext("ERROR: loading failed")
+#. R/install.R: gettext("ERROR: loading failed", domain = "R-tools")
 #: R/install.R:0
 msgid "ERROR: loading failed"
 msgstr "BŁĄD: ładowanie nie powiodło się"
@@ -1446,14 +1443,12 @@ msgstr "Błąd w uruchomieniu 'tools::texi2pdf()'"
 #. R/QC.R: gettextf("Error loading dataset %s: ", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("Error loading dataset %s:\n ", sQuote(ds), domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Error loading dataset %s:"
-msgstr "Błąd w pliku %s:"
+msgstr "Błąd podczas ładowania zbioru danych %s:"
 
 #. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
 #. R/check.R: gettext("Error(s) in re-building vignettes:", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "Error(s) in re-building vignettes:"
 msgstr "Błąd podczas ponownego tworzenia ilustracji:"
 
@@ -1599,9 +1594,8 @@ msgstr "Pola z wartościami innymi niż ASCII:"
 
 #. R/check.R: gettextf("File %s contains malformed line(s):\n", sQuote("data/datalist"))
 #: R/check.R:0
-#, fuzzy
 msgid "File %s contains malformed line(s):"
-msgstr "plik %s zawiera pustą linię"
+msgstr "Plik %s zawiera uszkodzone linie:"
 
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
@@ -1675,17 +1669,19 @@ msgstr ""
 #. R/check.R: gettext("Files in the 'vignettes' directory but no files in 'inst/doc':", domain = "R-tools")
 #: R/check.R:0
 msgid "Files in the 'vignettes' directory but no files in 'inst/doc':"
-msgstr ""
+msgstr "Pliki w katalogu 'Vignettes' ale brak plików w 'inst/doc':"
 
 #. R/check.R: gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':",     domain = "R-tools")
 #: R/check.R:0
 msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
 msgstr ""
+"Pliki w katalogu 'Vignettes' są nowsze niż wszystkie pliki w 'inst/doc':"
 
-#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than some files in 'inst/doc':",     domain = "R-tools")
 #: R/check.R:0
-msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
+msgid "Files in the 'vignettes' directory newer than some files in 'inst/doc':"
 msgstr ""
+"Pliki w katalogu 'Vignettes' są nowsze niż niektóre pliki w 'inst/doc':"
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
 #: R/Vignettes.R:0
@@ -2661,9 +2657,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-portable flags in file '%s':"
-msgstr "Nieprzenośne flagi w zmiennej %s:"
+msgstr "Nieprzenośne flagi w pliku '%s':"
 
 #. R/QC.R: gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools")
 #: R/QC.R:0
@@ -3422,7 +3417,7 @@ msgstr "Zapisywanie wyjścia do %s ..."
 #. R/QC.R: message("Search path was changed")
 #: R/QC.R:0
 msgid "Search path was changed"
-msgstr ""
+msgstr "Ścieżka wyszukiwania została zmieniona"
 
 #. R/RdConv2.R: gettextf("Section %s is unrecognized and will be dropped", sections[s])
 #: R/RdConv2.R:0
@@ -3570,7 +3565,7 @@ msgstr "Niektóre kompilatory uniksowe wymagają zakończeń linii LF."
 #. R/check.R: gettext("Some compilers warn on such files.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Some compilers warn on such files."
-msgstr ""
+msgstr "Niektóre kompilatory ostrzegają przed takimi plikami."
 
 #. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
 #: R/Rd2latex.R:0
@@ -3680,9 +3675,8 @@ msgstr ""
 
 #. R/QC.R: gettext("Suggested packages not available for checking:", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Suggested packages not available for checking:"
-msgstr "Pakiet jest sugerowany, ale nie jest dostępny do sprawdzenia:"
+msgstr "Sugerowane pakiety niedostępne do sprawdzenia:"
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
@@ -3772,6 +3766,8 @@ msgid ""
 "The Description field contains\n"
 "%s"
 msgstr ""
+"Pole 'Description' zawiera\n"
+"%s"
 
 #. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
@@ -4809,15 +4805,14 @@ msgstr "sprawdzanie krzyżowych referencji Rd ..."
 msgid "checking Rd files ..."
 msgstr "sprawdzanie plików Rd ..."
 
-#. R/check.R: gettext("checking Rd line widths", domain = "R-tools")
+#. R/check.R: gettext("checking Rd line widths ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
-msgid "checking Rd line widths"
-msgstr "sprawdzanie plików Rd ..."
+msgid "checking Rd line widths ..."
+msgstr "sprawdzanie szerokości linii Rd ..."
 
-#. R/check.R: gettext("checking Rd metadata ..", domain = "R-tools")
+#. R/check.R: gettext("checking Rd metadata ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking Rd metadata .."
+msgid "checking Rd metadata ..."
 msgstr "sprawdzanie metadanych Rd ..."
 
 #. R/check.R: gettext("checking S3 generic/method consistency ...", domain = "R-tools")
@@ -4830,14 +4825,15 @@ msgstr "sprawdzanie spójności funkcji ogólnych S3/metod ..."
 msgid "checking a package with encoding %s in an ASCII locale"
 msgstr "sprawdzanie pakietu z kodowaniem %s w lokalizacji ASCII"
 
-#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries")
+#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
 #: R/install.R:0
 msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
 
-#. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")
+#. R/check.R: gettext("checking compilation flags in Makevars ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking compilation flags in Makevars"
+#, fuzzy
+msgid "checking compilation flags in Makevars ..."
 msgstr "sprawdzanie flag kompilacji w Makevars"
 
 #. R/check.R: gettext("checking compiled code ...", domain = "R-tools")
@@ -4900,9 +4896,10 @@ msgstr "szukanie rozszerzeń GNU w plikach Makefile ..."
 
 #. R/build.R: gettext("checking for LF line-endings in source and make files and shell scripts",     domain = "R-tools")
 #: R/build.R:0
-#, fuzzy
 msgid "checking for LF line-endings in source and make files and shell scripts"
-msgstr "szukanie zakończeń linii LF w plikach źródłowych oraz make"
+msgstr ""
+"szukanie zakończeń linii LF w plikach źródłowych oraz make oraz skryptach "
+"powłoki"
 
 #. R/check.R: gettext("checking for code which exercises the package ...", domain = "R-tools")
 #: R/check.R:0
@@ -4936,16 +4933,22 @@ msgstr "szukanie plików wykonywalnych ..."
 msgid "checking for file %s ..."
 msgstr "sprawdzanie pliku %s ..."
 
-#. R/check.R: gettext("checking for future file timestamps", domain = "R-tools")
+#. R/check.R: gettext("checking for future file timestamps ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "checking for future file timestamps"
+msgid "checking for future file timestamps ..."
 msgstr "szukanie nazw plików przenośnych ..."
 
 #. R/check.R: gettext("checking for hidden files and directories ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for hidden files and directories ..."
 msgstr "szukanie ukrytych plików oraz katalogów ..."
+
+#. R/check.R: gettext("checking for include directives in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for include directives in Makefiles ..."
+msgstr "sprawdzanie zakończeń linii w Makefiles ..."
 
 #. R/check.R: gettext("checking for left-over files ...", domain = "R-tools")
 #: R/check.R:0
@@ -5131,15 +5134,22 @@ msgstr "sprawdzanie testów w katalogu %s ..."
 msgid "checking top-level files ..."
 msgstr "sprawdzanie plików najwyższego poziomu ..."
 
+#. R/check.R: gettext("checking use of PKG_*FLAGS in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking use of PKG_*FLAGS in Makefiles ..."
+msgstr "sprawdzanie zakończeń linii w Makefiles ..."
+
 #. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking use of S3 registration ..."
 msgstr "sprawdzanie użycia rejestracji S3 ..."
 
-#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles", domain = "R-tools")
+#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles"
-msgstr ""
+#, fuzzy
+msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles ..."
+msgstr "sprawdzanie zakończeń linii w Makefiles ..."
 
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")
 #: R/build.R:0
@@ -5598,6 +5608,13 @@ msgstr "znaleziono kodowanie %s"
 msgid "generating debug symbols (%s)"
 msgstr "tworzenie symboli debugowania (%s)"
 
+#. R/install.R: gettextf("hard-coded installation path: please report to the package maintainer and use %s",     sQuote("--no-staged-install"), domain = "R-tools")
+#: R/install.R:0
+msgid ""
+"hard-coded installation path: please report to the package maintainer and "
+"use %s"
+msgstr ""
+
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
@@ -5688,7 +5705,7 @@ msgstr "błąd wewnętrzny"
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\". Should not happen", .Platform$OS.type)
 #: R/QC.R:0
 msgid "invalid 'OS.type' \"%s\". Should not happen"
-msgstr ""
+msgstr "niepoprawny 'OS.type' \"%s\". Nie powinno się wydarzyć"
 
 #. R/build.R: gettext("invalid 'Package' field", domain = "R-tools")
 #: R/build.R:0
@@ -5972,9 +5989,8 @@ msgstr "pakowanie do %s nie powiodło się"
 
 #. R/build.R: gettext("packaging into tarball failed", domain = "R-tools")
 #: R/build.R:0
-#, fuzzy
 msgid "packaging into tarball failed"
-msgstr "pakowanie do .tar.gz nie powiodło się"
+msgstr "pakowanie do pliku tarball nie powiodło się"
 
 #. R/QC.R: gettextf("parse error in examples from file %s:\n", sQuote(file), conditionMessage(e))
 #: R/QC.R:0
@@ -6093,9 +6109,8 @@ msgstr "ponowne zapisywanie plików rda"
 
 #. R/install.R: message("  restoration failed\n")
 #: R/install.R:0
-#, fuzzy
 msgid "restoration failed"
-msgstr "Instalacja nie powiodła się."
+msgstr "przywrócenie nie powiodło się"
 
 #. R/install.R: gettextf("restoring previous package directory %s", sQuote(pkgdir))
 #: R/install.R:0
@@ -6317,26 +6332,6 @@ msgstr ""
 msgid "starting httpd help server ..."
 msgstr "uruchamianie serwera httpd dla pomocy ..."
 
-#. R/install.R: gettext("stripping dynamic libraries under lib")
-#: R/install.R:0
-msgid "stripping dynamic libraries under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping dynamic library under lib")
-#: R/install.R:0
-msgid "stripping dynamic library under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping static libraries under lib")
-#: R/install.R:0
-msgid "stripping static libraries under lib"
-msgstr ""
-
-#. R/install.R: gettext("stripping static library under lib")
-#: R/install.R:0
-msgid "stripping static library under lib"
-msgstr ""
-
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 #: R/check.R:0
 msgid "sub-directories of 1Mb or more:"
@@ -6362,22 +6357,32 @@ msgstr "test %s nie jest dostępny"
 msgid "testing '%s' failed"
 msgstr "testowanie '%s' nie powiodło się"
 
-#. R/install.R: gettext("testing if installed package can be loaded")
+#. R/install.R: gettext("testing if installed package can be loaded", domain = "R-tools")
 #: R/install.R:0
 msgid "testing if installed package can be loaded"
 msgstr "sprawdzanie czy zainstalowany pakiet może zostać załadowany"
 
-#. R/install.R: gettextf("testing if installed package can be loaded from final location")
+#. R/install.R: gettextf("testing if installed package can be loaded from final location", domain = "R-tools")
 #: R/install.R:0
-#, fuzzy
 msgid "testing if installed package can be loaded from final location"
-msgstr "sprawdzanie czy zainstalowany pakiet może zostać załadowany"
+msgstr ""
+"sprawdzanie czy zainstalowany pakiet może zostać załadowany z docelowej "
+"lokalizacji"
 
-#. R/install.R: gettext("testing if installed package can be loaded from temporary location")
+#. R/install.R: gettext("testing if installed package can be loaded from temporary location", domain = "R-tools")
 #: R/install.R:0
-#, fuzzy
 msgid "testing if installed package can be loaded from temporary location"
-msgstr "sprawdzanie czy zainstalowany pakiet może zostać załadowany"
+msgstr ""
+"sprawdzanie czy zainstalowany pakiet może zostać załadowany z tymczasowej "
+"lokalizacji"
+
+#. R/install.R: gettext("testing if installed package keeps a record of temporary installation path",     domain = "R-tools")
+#: R/install.R:0
+msgid ""
+"testing if installed package keeps a record of temporary installation path"
+msgstr ""
+"sprawdzanie czy zainstalowany pakiet zachowuje wpis o ścieżce tymczasowej "
+"instalacji"
 
 #. R/testing.R: gettextf("testing package %s failed", sQuote(pkg))
 #: R/testing.R:0
@@ -6509,10 +6514,10 @@ msgstr "nie można utworzyć pliku %s"
 msgid "unable to create temp directory %s"
 msgstr "nie można utworzyć katalogu tymczasowego %s"
 
-#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 #: R/update_packages.R:0
-msgid "unable to find any package tarballs in"
-msgstr ""
+msgid "unable to find any package tarballs in %s"
+msgstr "nie można znaleźć żadnych plików tarball pakietu w katalogu %s"
 
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
@@ -6558,7 +6563,7 @@ msgstr "niewspierany adres URL %s"
 #. R/update_packages.R: message("update_PACKAGES complete.")
 #: R/update_packages.R:0
 msgid "update_PACKAGES complete."
-msgstr ""
+msgstr "'update_PACKAGES' zakończyło się."
 
 #. R/build.R: gettextf("use '--force' to remove the existing %s", sQuote(oldindex), domain = "R-tools")
 #: R/build.R:0
@@ -7961,12 +7966,11 @@ msgstr[2] "różnice we wpisach %s"
 
 #. R/Vignettes.R: ngettext(length(dups), "duplicated vignette title:", "duplicated vignette titles:",     domain = "R-tools")
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "duplicated vignette title:"
 msgid_plural "duplicated vignette titles:"
-msgstr[0] "powtórzone pliki w polu %s:"
-msgstr[1] "powtórzone pliki w polu %s:"
-msgstr[2] "powtórzone pliki w polu %s:"
+msgstr[0] "powtórzone tytuł ilustracji:"
+msgstr[1] "powtórzone tytuły ilustracji:"
+msgstr[2] "powtórzone tytuły ilustracji:"
 
 #. R/md5.R: ngettext(length(files), "file %s has the wrong MD5 checksums", "files %s have the wrong MD5 checksums",     domain = "R-tools")
 #: R/md5.R:0
@@ -8017,6 +8021,22 @@ msgid_plural "problems found in %s"
 msgstr[0] "znaleziono problem w %s"
 msgstr[1] "znaleziono problemy w %s"
 msgstr[2] "znaleziono problemy w %s"
+
+#. R/install.R: ngettext(length(so_s), "stripping dynamic library under lib", "stripping dynamic libraries under lib",     domain = "R-tools")
+#: R/install.R:0
+msgid "stripping dynamic library under lib"
+msgid_plural "stripping dynamic libraries under lib"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/install.R: ngettext(length(a_s), "stripping static library under lib", "stripping static libraries under lib",     domain = "R-tools")
+#: R/install.R:0
+msgid "stripping static library under lib"
+msgid_plural "stripping static libraries under lib"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0

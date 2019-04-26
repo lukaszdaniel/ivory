@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -150,6 +150,13 @@ msgstr "'input'和'target'一定都得是字符串"
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "所有参数的长度都应一致"
+
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+#: R/octhex.R:0
+#, fuzzy
+msgid "'%s' argument cannot be coerced to class %s"
+msgstr "不能强迫把'x'改变成'octmode'"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
@@ -307,6 +314,7 @@ msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'wait'的值必需是'TRUE'或'FALSE'值"
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
@@ -985,7 +993,6 @@ msgid "'row.names' argument should specify one of the variables"
 msgstr "row.names必需指定一个变数"
 
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
@@ -1109,18 +1116,6 @@ msgid ""
 msgstr ""
 "'sort.list'的'x'必需为原子值\n"
 "你是不是在串列上调用了'sort'函数？"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "不能强迫把'x'改变成'hexmode'"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "不能强迫把'x'改变成'hexmode'"
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
@@ -3869,6 +3864,14 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
 
 #, fuzzy
+#~ msgid "'x' cannot be coerced to class \"hexmode\""
+#~ msgstr "不能强迫把'x'改变成'hexmode'"
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"octmode\""
+#~ msgstr "不能强迫把'x'改变成'hexmode'"
+
+#, fuzzy
 #~ msgid "Partial match of '%s' to '%s' in data frame"
 #~ msgstr "数据框里有非数值的参数"
 
@@ -3988,10 +3991,6 @@ msgstr[0] "用T代替TRUE"
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg'应当是%s其中的一个"
-
-#, fuzzy
-#~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "不能强迫把'x'改变成'octmode'"
 
 #, fuzzy
 #~ msgid "object %s is not a QR decomposition"

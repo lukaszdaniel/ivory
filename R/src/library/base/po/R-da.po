@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -145,6 +145,13 @@ msgstr "%s og %s skal have den samme længde"
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "%s og %s skal have den samme længde"
+
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+#: R/octhex.R:0
+#, fuzzy
+msgid "'%s' argument cannot be coerced to class %s"
+msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
@@ -302,6 +309,7 @@ msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'to' skal være af længde 1"
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
@@ -968,7 +976,6 @@ msgid "'row.names' argument should specify one of the variables"
 msgstr "row.names skal angive en af variablerne"
 
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
@@ -1086,18 +1093,6 @@ msgid ""
 "'x' argument must be atomic for 'sort.list()' function.\n"
 "Have you called 'sort()' function on a list?"
 msgstr ""
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
@@ -3853,6 +3848,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, fuzzy
+#~ msgid "'x' cannot be coerced to class \"hexmode\""
+#~ msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"octmode\""
+#~ msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
+
+#, fuzzy
 #~ msgid "Partial match of '%s' to '%s' in data frame"
 #~ msgstr "variabel der ikke er numerisk i dataramme:"
 
@@ -3955,10 +3958,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'to' skal være af længde 1"
-
-#, fuzzy
-#~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "kan ikke tvinge klasse '%s' ind i en data.frame"
 
 #, fuzzy
 #~ msgid "'from' argument cannot be NA, NaN or infinite"

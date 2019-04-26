@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -701,13 +701,12 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)), dQuote(cl), dQuote(elNamed(theseProperties,         dup)))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid ""
 "Definition of slot %s, in class %s, as %s conflicts with definition, "
 "inherited from class %s, as %s"
 msgstr ""
-"gniazdo %s w klasie %s aktualnie zdefiniowane (lub odziedziczone) jako %s, "
-"jest w konflikcie z odziedziczoną definicją w klasie %s"
+"Definicja gniazda %s, w klasie %s, jako %s koliduje z definicją "
+"odziedziczoną z klasy %s jako %s"
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric", domain = "R-methods")
 #: R/RMethodUtils.R:0
@@ -761,13 +760,14 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid ""
 "From .checkSubclasses(): subclass %s of class %s is not local and is not "
 "updated for new inheritance information currently;\n"
 "[where=%s, where2=%s]"
 msgstr ""
-"niezdefiniowana podklasa %s klasy %s; definicja nie została zaktualizowana"
+"Z '.checkSubclasses()': podklaza %s klasy %s nie jest lokalna oraz aktualnie "
+"nie jest zaktualizowana dla nowej dziedziczonej informacji;\n"
+"[where=%s, where2=%s]"
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
@@ -3235,23 +3235,21 @@ msgstr ""
 
 #. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that ambiguously match the generic signature, for function %s",     paste(sQuote(names(sigList)[ambig]), collapse = ", "), sQuote(fun@generic), domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid ""
 "there are named arguments (%s) in the method signature that ambiguously "
 "match the generic signature, for function %s"
 msgstr ""
-"więcej elementów w sygnaturze metody (%d) niż w ogólnej sygnaturze (%d) dla "
-"funkcji %s"
+"istnieją nazwane argumenty (%s) w sygnaturze metody, które niejednoznacznie "
+"pasują do ogólnej sygnatury dla funkcji %s"
 
 #. R/MethodsList.R: gettextf("there are named arguments (%s) in the method signature that are missing from the generic signature, for function %s",     paste(sQuote(names(sigList)[is.na(argmatches)]), collapse = ", "), sQuote(fun@generic),     domain = "R-methods")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid ""
 "there are named arguments (%s) in the method signature that are missing from "
 "the generic signature, for function %s"
 msgstr ""
-"więcej elementów w sygnaturze metody (%d) niż w ogólnej sygnaturze (%d) dla "
-"funkcji %s"
+"istnieją nazwane argumenty (%s) w sygnaturze metody, których brakuje w "
+"ogólnej sygnaturze dla funkcji %s"
 
 #. R/ClassExtensions.R: gettextf("there is no automatic definition for 'as(object, \"%s\") <- value' when object has class %s and no 'replace' argument was supplied; replacement will be an error",     to, dQuote(Class))
 #: R/ClassExtensions.R:0

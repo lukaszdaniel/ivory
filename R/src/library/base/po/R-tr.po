@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -135,6 +135,13 @@ msgstr "isim alanı"
 #: R/grep.R:0 R/strwrap.R:0
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
+msgstr "isim alanı"
+
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+#: R/octhex.R:0
+#, fuzzy
+msgid "'%s' argument cannot be coerced to class %s"
 msgstr "isim alanı"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
@@ -291,6 +298,7 @@ msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
@@ -912,7 +920,6 @@ msgid "'row.names' argument should specify one of the variables"
 msgstr ""
 
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
@@ -1021,18 +1028,6 @@ msgid ""
 "'x' argument must be atomic for 'sort.list()' function.\n"
 "Have you called 'sort()' function on a list?"
 msgstr ""
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "isim alanı"
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "isim alanı"
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
@@ -3623,6 +3618,14 @@ msgstr[0] "Zorunlu paket yükleniyor: %s"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] ""
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"hexmode\""
+#~ msgstr "isim alanı"
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"octmode\""
+#~ msgstr "isim alanı"
 
 #, fuzzy
 #~ msgid "'exprs' argument must be an unevaluated call, 'expression' or 'list'"

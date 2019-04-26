@@ -55,7 +55,7 @@ RNGkind <- function(kind = NULL, normal.kind = NULL, sample.kind = NULL)
 
     if(!is.null(sample.kind)) {
         if(!is.character(sample.kind) || length(sample.kind) != 1L)
-            stop("'sample.kind' must be a character string of length 1")
+            stop(gettextf("'%s' argument must be a character string of length 1", "sample.kind"))
         sample.kind <- pmatch(sample.kind, s.kinds) - 1L
         if(is.na(sample.kind))
             stop(gettextf("'%s' is not a valid choice", sample.kind),

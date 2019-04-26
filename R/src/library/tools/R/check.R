@@ -432,7 +432,7 @@ add_dummies <- function(dir, Log)
                                              "FALSE"))) {
             now_local <- Sys.time()
             any <- FALSE
-            checkingLog(Log, gettext("checking for future file timestamps", domain = "R-tools"))
+            checkingLog(Log, gettext("checking for future file timestamps ...", domain = "R-tools"))
             ## allow skipping clock check on CRAN incoming systems
             if(config_val_to_logical(Sys.getenv("_R_CHECK_SYSTEM_CLOCK_", "TRUE"))) {
                 ## First check time on system running 'check',
@@ -1943,7 +1943,7 @@ add_dummies <- function(dir, Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-            checkingLog(Log, gettext("checking Rd metadata ..", domain = "R-tools"))
+            checkingLog(Log, gettext("checking Rd metadata ...", domain = "R-tools"))
             Rcmd <- paste(opWarn_string, "\n",
                           if (do_install)
                           sprintf("tools:::.check_Rd_metadata(package = \"%s\")\n", pkgname)
@@ -1958,7 +1958,7 @@ add_dummies <- function(dir, Log)
 
         ## Check Rd line widths.
         if(dir.exists("man") && R_check_Rd_line_widths) {
-            checkingLog(Log, gettext("checking Rd line widths", domain = "R-tools"))
+            checkingLog(Log, gettext("checking Rd line widths ...", domain = "R-tools"))
             Rcmd <- paste(opWarn_string, "\n",
                           if(do_install)
                           sprintf("tools:::.check_Rd_line_widths(\"%s\", installed = TRUE)\n",
@@ -2447,7 +2447,8 @@ add_dummies <- function(dir, Log)
                 if (any(newer)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    msg <- c(gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':", domain = "R-tools"),
+                    msg <- c(gettext("Files in the 'vignettes' directory newer than some files in 'inst/doc':", domain = "R-tools"),
+
                              strwrap(paste(sQuote(vignette_files[newer]),
                                            collapse = ", "),
                                      indent = 2L, exdent = 4L),
@@ -2665,7 +2666,7 @@ add_dummies <- function(dir, Log)
         }
         ## Check src/Makevars[.in] compilation flags.
         if (length(makevars)) {
-            checkingLog(Log, gettext("checking compilation flags in Makevars", domain = "R-tools"))
+            checkingLog(Log, gettext("checking compilation flags in Makevars ...", domain = "R-tools"))
 
             Rcmd <- sprintf("tools:::.check_make_vars(\"src\", %s)\n",
                             deparse(makevars))
@@ -2748,15 +2749,44 @@ add_dummies <- function(dir, Log)
             if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
-        test_omp <-
-            config_val_to_logical(Sys.getenv("_R_CHECK_SHLIB_OPENMP_FLAGS_", "FALSE"))
         makefiles <- Sys.glob(file.path("src",
                                         c("Makevars", "Makevars.in",
                                           "Makevars.win",
                                           "Makefile", "Makefile.win")))
 
+        if(length(makefiles)) {
+            checkingLog(Log, gettext("checking use of PKG_*FLAGS in Makefiles ...", domain = "R-tools"))
+            any <- msg <- character()
+            for (m in makefiles) {
+                lines <- readLines(m, warn = FALSE)
+                have_c <- length(dir('src', patt = "[.]c$", recursive = TRUE)) > 0L
+                have_cxx <- length(dir('src', patt = "[.](cc|cpp)$", recursive = TRUE)) > 0L
+                have_f <- length(dir('src', patt = "[.]f$", recursive = TRUE)) > 0L
+                have_f9x <- length(dir('src', patt = "[.]f9[05]$", recursive = TRUE)) > 0L
+                for (f in c("C", "CXX", "F", "FC", "CPP"))  {
+                    this <- paste0(f, "FLAGS")
+                    this2 <- paste0("PKG_", this)
+                    pat <- paste0("^[[:space:]]*", this2)
+                    if(any(grepl(pat, lines, useBytes = TRUE))) {
+                        if(!switch(f, C = have_c, CXX = have_cxx,
+                                   F = have_f | have_f9x, FC =  have_f9x,
+                                   CPP = have_c | have_cxx)) {
+                            msg <- c(msg,
+                                     paste("  ", gettextf("%s set in %s without any corresponding files\n",this2, sQuote(m), domain = "R-tools")))
+                        }
+                    }
+                }
+            }
+            if (length(msg)) {
+                noteLog(Log)
+                printLog0(Log, msg)
+            } else resultLog(Log, "OK")
+        }
+
+        test_omp <-
+            config_val_to_logical(Sys.getenv("_R_CHECK_SHLIB_OPENMP_FLAGS_", "FALSE"))
         if(length(makefiles) && test_omp) {
-            checkingLog(Log, gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles", domain = "R-tools"))
+            checkingLog(Log, gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles ...", domain = "R-tools"))
             ## If any of these flags are included in PKG_*FLAGS, it
             ## should also be included in PKG_LIBS.  And it is
             ## not portable to use more than one of these in one package.
@@ -2782,10 +2812,10 @@ add_dummies <- function(dir, Log)
                 anyInLIBS <- any(grepl("SHLIB_OPENMP_", lines[c1], useBytes = TRUE))
 
                 ## Now see what sort of files we have
-                have_c <- length(dir('src', patt = "[.]c$")) > 0L
-                have_cxx <- length(dir('src', patt = "[.](cc|cpp)$")) > 0L
-                have_f <- length(dir('src', patt = "[.]f$")) > 0L
-                have_f9x <- length(dir('src', patt = "[.]f9[05]$")) > 0L
+                have_c <- length(dir('src', patt = "[.]c$", recursive = TRUE)) > 0L
+                have_cxx <- length(dir('src', patt = "[.](cc|cpp)$", recursive = TRUE)) > 0L
+                have_f <- length(dir('src', patt = "[.]f$", recursive = TRUE)) > 0L
+                have_f9x <- length(dir('src', patt = "[.]f9[05]$", recursive = TRUE)) > 0L
                 used <- character()
                 for (f in c("C", "CXX", "F", "FC"))  {
                     this <- this2 <- paste0(f, "FLAGS")
@@ -2943,7 +2973,7 @@ add_dummies <- function(dir, Log)
                 recursive = TRUE)
         all_files <- unique(sort(all_files))
         if(length(all_files)) {
-            checkingLog(Log, gettext("Checking for include directives in Makefiles ...", domain = "R-tools"))
+            checkingLog(Log, gettext("checking for include directives in Makefiles ...", domain = "R-tools"))
             bad_lines <-
                 lapply(all_files,
                        function(f) {

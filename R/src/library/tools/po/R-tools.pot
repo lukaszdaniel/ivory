@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-04-26 08:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,6 +104,13 @@ msgstr ""
 #. R/QC.R: gettextf("%s registered as %s, but called with %s", sQuote(name), sQuote(".External"),     sQuote(FF_fun), domain = "R-tools")
 
 msgid "%s registered as %s, but called with %s"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("%s set in %s without any corresponding files\n", this2, sQuote(m), domain = "R-tools")
+
+msgid "%s set in %s without any corresponding files"
 msgstr ""
 
 
@@ -1041,13 +1048,6 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("Checking for include directives in Makefiles ...", domain = "R-tools")
-
-msgid "Checking for include directives in Makefiles ..."
-msgstr ""
-
-
-#: R/check.R: 0
 #. R/check.R: gettext("Checking line endings in shell scripts ...", domain = "R-tools")
 
 msgid "Checking line endings in shell scripts ..."
@@ -1600,7 +1600,7 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettext("ERROR: loading failed")
+#. R/install.R: gettext("ERROR: loading failed", domain = "R-tools")
 
 msgid "ERROR: loading failed"
 msgstr ""
@@ -2047,9 +2047,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("Files in the 'vignettes' directory newer than same file in 'inst/doc':",     domain = "R-tools")
+#. R/check.R: gettext("Files in the 'vignettes' directory newer than some files in 'inst/doc':",     domain = "R-tools")
 
-msgid "Files in the 'vignettes' directory newer than same file in 'inst/doc':"
+msgid "Files in the 'vignettes' directory newer than some files in 'inst/doc':"
 msgstr ""
 
 
@@ -5803,16 +5803,16 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking Rd line widths", domain = "R-tools")
+#. R/check.R: gettext("checking Rd line widths ...", domain = "R-tools")
 
-msgid "checking Rd line widths"
+msgid "checking Rd line widths ..."
 msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking Rd metadata ..", domain = "R-tools")
+#. R/check.R: gettext("checking Rd metadata ...", domain = "R-tools")
 
-msgid "checking Rd metadata .."
+msgid "checking Rd metadata ..."
 msgstr ""
 
 
@@ -5831,16 +5831,16 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries")
+#. R/install.R: gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools")
 
 msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking compilation flags in Makevars", domain = "R-tools")
+#. R/check.R: gettext("checking compilation flags in Makevars ...", domain = "R-tools")
 
-msgid "checking compilation flags in Makevars"
+msgid "checking compilation flags in Makevars ..."
 msgstr ""
 
 
@@ -5974,9 +5974,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking for future file timestamps", domain = "R-tools")
+#. R/check.R: gettext("checking for future file timestamps ...", domain = "R-tools")
 
-msgid "checking for future file timestamps"
+msgid "checking for future file timestamps ..."
 msgstr ""
 
 
@@ -5984,6 +5984,13 @@ msgstr ""
 #. R/check.R: gettext("checking for hidden files and directories ...", domain = "R-tools")
 
 msgid "checking for hidden files and directories ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("checking for include directives in Makefiles ...", domain = "R-tools")
+
+msgid "checking for include directives in Makefiles ..."
 msgstr ""
 
 
@@ -6237,6 +6244,13 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("checking use of PKG_*FLAGS in Makefiles ...", domain = "R-tools")
+
+msgid "checking use of PKG_*FLAGS in Makefiles ..."
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
 
 msgid "checking use of S3 registration ..."
@@ -6244,9 +6258,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles", domain = "R-tools")
+#. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles ...", domain = "R-tools")
 
-msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles"
+msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles ..."
 msgstr ""
 
 
@@ -6861,6 +6875,13 @@ msgstr ""
 #. R/install.R: gettextf("generating debug symbols (%s)", "dSYM")
 
 msgid "generating debug symbols (%s)"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettextf("hard-coded installation path: please report to the package maintainer and use %s",     sQuote("--no-staged-install"), domain = "R-tools")
+
+msgid "hard-coded installation path: please report to the package maintainer and use %s"
 msgstr ""
 
 
@@ -7811,34 +7832,6 @@ msgid "starting httpd help server ..."
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: gettext("stripping dynamic libraries under lib")
-
-msgid "stripping dynamic libraries under lib"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: gettext("stripping dynamic library under lib")
-
-msgid "stripping dynamic library under lib"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: gettext("stripping static libraries under lib")
-
-msgid "stripping static libraries under lib"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: gettext("stripping static library under lib")
-
-msgid "stripping static library under lib"
-msgstr ""
-
-
 #: R/check.R: 0
 #. R/check.R: gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools")
 
@@ -7875,23 +7868,30 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettext("testing if installed package can be loaded")
+#. R/install.R: gettext("testing if installed package can be loaded", domain = "R-tools")
 
 msgid "testing if installed package can be loaded"
 msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettextf("testing if installed package can be loaded from final location")
+#. R/install.R: gettextf("testing if installed package can be loaded from final location", domain = "R-tools")
 
 msgid "testing if installed package can be loaded from final location"
 msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettext("testing if installed package can be loaded from temporary location")
+#. R/install.R: gettext("testing if installed package can be loaded from temporary location", domain = "R-tools")
 
 msgid "testing if installed package can be loaded from temporary location"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettext("testing if installed package keeps a record of temporary installation path",     domain = "R-tools")
+
+msgid "testing if installed package keeps a record of temporary installation path"
 msgstr ""
 
 
@@ -8070,9 +8070,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 
-msgid "unable to find any package tarballs in"
+msgid "unable to find any package tarballs in %s"
 msgstr ""
 
 
@@ -9387,6 +9387,24 @@ msgstr[1]    ""
 
 msgid        "problem found in %s"
 msgid_plural "problems found in %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/install.R: 0
+#. R/install.R: ngettext(length(so_s), "stripping dynamic library under lib", "stripping dynamic libraries under lib",     domain = "R-tools")
+
+msgid        "stripping dynamic library under lib"
+msgid_plural "stripping dynamic libraries under lib"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/install.R: 0
+#. R/install.R: ngettext(length(a_s), "stripping static library under lib", "stripping static libraries under lib",     domain = "R-tools")
+
+msgid        "stripping static library under lib"
+msgid_plural "stripping static libraries under lib"
 msgstr[0]    ""
 msgstr[1]    ""
 

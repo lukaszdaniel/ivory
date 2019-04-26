@@ -109,7 +109,7 @@ update_PACKAGES <- function(dir = ".", fields = NULL,
     pkgfiles <- list.files(dir, pattern = .get_pkg_file_pattern(type),
                            full.names = TRUE)
     if(length(pkgfiles) == 0L)
-        stop("unable to find any package tarballs in ", dir)
+        stop(gettextf("unable to find any package tarballs in %s", dir))
     
     if(is.null(retdat$File)) {
         tbmatches <- match(paste(retdat$Package,

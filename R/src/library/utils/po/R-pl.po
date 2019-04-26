@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Bookmarks: -1,203,240,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
@@ -143,9 +143,8 @@ msgstr "argument '%s' został zignorowany"
 
 #. R/tar.R: gettextf("'%s' argument is ignored for the internal method", "compressed")
 #: R/tar.R:0
-#, fuzzy
 msgid "'%s' argument is ignored for the internal method"
-msgstr "argument 'compressed' jest ignorowany dla metody wewnętrznej"
+msgstr "argument '%s' jest ignorowany dla metody wewnętrznej"
 
 #. R/debugger.R: gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"),     domain = "R-utils")
 #: R/debugger.R:0

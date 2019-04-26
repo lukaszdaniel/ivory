@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -150,6 +150,13 @@ msgstr "'input' 과 'target' 은 반드시 문자벡터이어야 합니다 "
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
 msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
+
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+#: R/octhex.R:0
+#, fuzzy
+msgid "'%s' argument cannot be coerced to class %s"
+msgstr "'x' 는 'octmode' 로 강제변환 할 수 없습니다 "
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dim")
 #: R/array.R:0
@@ -307,6 +314,7 @@ msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'wait' 은 반드시 TRUE 또는 FALSE 이어야 합니다 "
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
@@ -993,7 +1001,6 @@ msgid "'row.names' argument should specify one of the variables"
 msgstr "row.names 는 변수들 중 하나를 지정해야합니다 "
 
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
@@ -1120,18 +1127,6 @@ msgid ""
 msgstr ""
 "'x' 는 'sort.list' 에 대한 atomic 입니다 \n"
 "list 에서 'sort' 라고 사용한 적이 있나요? "
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
-
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-#: R/octhex.R:0
-#, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
 
 #. R/array.R: stop("'x' must have named dimnames")
 #: R/array.R:0
@@ -3902,6 +3897,14 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
 #, fuzzy
+#~ msgid "'x' cannot be coerced to class \"hexmode\""
+#~ msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
+
+#, fuzzy
+#~ msgid "'x' cannot be coerced to class \"octmode\""
+#~ msgstr "'x' 는 hexmode 로 강제변환 할 수 없습니다 "
+
+#, fuzzy
 #~ msgid "Partial match of '%s' to '%s' in data frame"
 #~ msgstr "다음 데이터 프레임에 수치가 아닌 변수가 있습니다: "
 
@@ -4021,10 +4024,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg' 는 %s 중에 하나 이어야 합니다 "
-
-#, fuzzy
-#~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "'x' 는 'octmode' 로 강제변환 할 수 없습니다 "
 
 #, fuzzy
 #~ msgid "object %s is not a QR decomposition"

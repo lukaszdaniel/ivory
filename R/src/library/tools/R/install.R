@@ -589,7 +589,7 @@ if(FALSE) {
                 if (!length(slibs)) return()
             }
 
-            starsmsg(stars, gettext("checking absolute paths in shared objects and dynamic libraries"))
+            starsmsg(stars, gettext("checking absolute paths in shared objects and dynamic libraries", domain = "R-tools"))
 
             uname <- system("uname -a", intern = TRUE)
             os <- sub(" .*", "", uname)
@@ -1583,16 +1583,16 @@ if(FALSE) {
                     cat(paste(c(out, ""), collapse = "\n"))
                 }
                 if(length(attr(out, "status")))
-                    errmsg(gettext("ERROR: loading failed")) # does not return
+                    errmsg(gettext("ERROR: loading failed", domain = "R-tools")) # does not return
             }
         }
 
         if (test_load) {
             if (pkg_staged_install)
 	        starsmsg(stars,
-                    gettext("testing if installed package can be loaded from temporary location"))
+                    gettext("testing if installed package can be loaded from temporary location", domain = "R-tools"))
             else
-	        starsmsg(stars, gettext("testing if installed package can be loaded"))
+	        starsmsg(stars, gettext("testing if installed package can be loaded", domain = "R-tools"))
             do_test_load()
         }
 
@@ -1623,7 +1623,7 @@ if(FALSE) {
 
             if (test_load) {
                 starsmsg(stars,
-                    gettextf("testing if installed package can be loaded from final location"))
+                    gettextf("testing if installed package can be loaded from final location", domain = "R-tools"))
 
                 # The test for hard-coded installation path is done together
                 # with test loading to save time. The test is intentionally
@@ -1639,14 +1639,12 @@ if(FALSE) {
                 cmd <- append(cmd, "base::close(f)")
                 do_test_load(extra_cmd = paste(cmd, collapse = "\n"))
                 starsmsg(stars,
-                    "testing if installed package keeps a record of temporary installation path")
+                    gettext("testing if installed package keeps a record of temporary installation path", domain = "R-tools"))
                 r <- readBin(serf, "raw", n=file.size(serf))
                 unlink(serf)
                 if (length(grepRaw("00new", r, fixed = TRUE, all = FALSE,
                                    value = FALSE)))
-                    errmsg("hard-coded installation path: ",
-                           "please report to the package maintainer and use ",
-                           sQuote("--no-staged-install"))
+                    errmsg(gettextf("hard-coded installation path: please report to the package maintainer and use %s", sQuote("--no-staged-install"), domain = "R-tools"))
             }
         }
 
@@ -1654,20 +1652,14 @@ if(FALSE) {
             nzchar(strip_cmd <- Sys.getenv("R_STRIP_STATIC_LIB")) &&
             length(a_s <- Sys.glob(file.path(file.path(lib, curPkg),
                                              "lib", "*.a")))) {
-            if(length(a_s) > 1L)
-                starsmsg(stars, gettext("stripping static libraries under lib"))
-            else
-                starsmsg(stars, gettext("stripping static library under lib"))
+            starsmsg(stars, ngettext(length(a_s), "stripping static library under lib", "stripping static libraries under lib", domain = "R-tools"))
             system(paste(c(strip_cmd, shQuote(a_s)), collapse = " "))
         }
         if (do_strip_lib &&
             nzchar(strip_cmd <- Sys.getenv("R_STRIP_SHARED_LIB")) &&
             length(so_s <- Sys.glob(file.path(file.path(lib, curPkg), "lib",
                                               paste0("*", SHLIB_EXT))))) {
-            if(length(so_s) > 1L)
-                starsmsg(stars, gettext("stripping dynamic libraries under lib"))
-            else
-                starsmsg(stars, gettext("stripping dynamic library under lib"))
+            starsmsg(stars, ngettext(length(so_s), "stripping dynamic library under lib", "stripping dynamic libraries under lib", domain = "R-tools"))
             system(paste(c(strip_cmd, shQuote(so_s)), collapse = " "))
         }
     }

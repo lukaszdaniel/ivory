@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-04-26 09:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,6 +151,14 @@ msgstr ""
 #. R/strwrap.R: gettextf("'%s' and '%s' arguments must have the same length", "x", "y")
 
 msgid "'%s' and '%s' arguments must have the same length"
+msgstr ""
+
+
+#: R/octhex.R: 0
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("octmode"))
+#. R/octhex.R: gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hexmode"))
+
+msgid "'%s' argument cannot be coerced to class %s"
 msgstr ""
 
 
@@ -346,6 +354,7 @@ msgstr ""
 
 #: R/RNG.R: 0
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
+#. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "sample.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 
 msgid "'%s' argument must be a character string of length 1"
@@ -1143,7 +1152,6 @@ msgstr ""
 
 #: R/RNG.R: 0
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 
 msgid "'sample.kind' must be a character string of length 1"
 msgstr ""
@@ -1275,20 +1283,6 @@ msgstr ""
 #. R/sort.R: stop("'x' argument must be atomic for 'sort.list()' function.\nHave you called 'sort()' function on a list?")
 
 msgid "'x' argument must be atomic for 'sort.list()' function.\nHave you called 'sort()' function on a list?"
-msgstr ""
-
-
-#: R/octhex.R: 0
-#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
-
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr ""
-
-
-#: R/octhex.R: 0
-#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
-
-msgid "'x' cannot be coerced to class \"octmode\""
 msgstr ""
 
 
