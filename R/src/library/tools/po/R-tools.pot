@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-04-26 08:21\n"
+"POT-Creation-Date: 2019-04-28 18:16\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6209,9 +6209,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#. R/check.R: gettext("checking serialization versions ...", domain = "R-tools")
 
-msgid "checking serialization versions"
+msgid "checking serialization versions ..."
 msgstr ""
 
 

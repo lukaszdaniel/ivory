@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -89,6 +89,11 @@ msgstr " '%s' は既存のファイルではありません "
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
 msgstr " は Date オブジェクトに対しては定義されていません "
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -506,6 +511,13 @@ msgstr " 'width' は正でなければなりません "
 msgid "'%s' argument must be specified"
 msgstr " 'from' を指定しなければなりません "
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+#, fuzzy
+msgid "'%s' argument must have named dimnames"
+msgstr " 'x' は名前付きの次元名でなければなりません "
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -668,11 +680,6 @@ msgstr "STATS は MARGIN に渡って正確にリサイクルされません "
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "STATS は 'dim(x)[MARGIN]' の大きさより長いです "
-
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr " 'x' は名前付きの次元名でなければなりません "
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -1128,12 +1135,6 @@ msgstr ""
 " 'x' は 'sort.list' に対してはアトミックでなければなりません。 \n"
 " 'sort' をリストに対して呼び出しましたか？ "
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr " 'x' は名前付きの次元名でなければなりません "
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1468,6 +1469,13 @@ msgid ""
 msgstr ""
 " 無効なDCF形式です。正規の行にはタグが必要です。不正な行は次の場所で始まって"
 "います:%s "
+
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
 
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
@@ -1888,6 +1896,11 @@ msgstr " 二回以前の保存バージョンの使用は廃止予定です "
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -3281,11 +3294,6 @@ msgid ""
 " %s"
 msgstr " '%s' に対するパッケージもしくは名前空間のロードが失敗しました "
 
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
-
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
 msgid "press RETURN to view license"
@@ -3468,10 +3476,11 @@ msgstr " 三角行列は正方行列であるべきです "
 msgid "trimmed means are not defined for complex data"
 msgstr " 複素数データに対しては刈込み平均は定義されません "
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+#, fuzzy
+msgid "unable to deduce timezone name from %s"
+msgstr " パッケージ '%s' 中の R コードをロードできません "
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3919,6 +3928,10 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#, fuzzy
+#~ msgid "'x' must have named dimnames"
+#~ msgstr " 'x' は名前付きの次元名でなければなりません "
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

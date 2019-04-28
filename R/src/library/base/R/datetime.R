@@ -162,7 +162,7 @@ Sys.timezone <- function(location = TRUE)
             cacheIt(tz)
             return(tz)
         } else
-            message("unable to deduce timezone name from ", sQuote(lt))
+            message(gettextf("unable to deduce timezone name from %s", sQuote(lt)))
     }
 
     ## Last-gasp (slow, several seconds) fallback: compare a
@@ -170,8 +170,8 @@ Sys.timezone <- function(location = TRUE)
     ## This may match more than one tz file: we don't care which.
     if (nzchar(tzdir) && # we already found lt0
          (is.na(lt <- Sys.readlink(lt0)) || !nzchar(lt))) {
-        warning(sprintf("Your system is mis-configured: %s is not a symlink",
-                        sQuote(lt0)),
+        warning(gettextf("Your system is mis-configured: %s is not a symlink",
+                        sQuote(lt0), domain = "R-base"),
                 call. = FALSE, immediate. = TRUE, domain = NA)
         if(nzchar(Sys.which("cmp"))) {
             known <- dir(tzdir, recursive = TRUE)
@@ -179,14 +179,14 @@ Sys.timezone <- function(location = TRUE)
                 status <- system2("cmp", c("-s", lt0, file.path(tzdir, tz)))
                 if (status == 0L) {
                     cacheIt(tz)
-                    warning(sprintf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",
-                                    sQuote(tz)),
+                    warning(gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",
+                                    sQuote(tz), domain = "R-base"),
                             call. = FALSE, immediate. = TRUE, domain = NA)
                     return(tz)
                 }
             }
-            warning(sprintf("%s is not identical to any known timezone file",
-                            sQuote(lt0)),
+            warning(gettextf("%s is not identical to any known timezone file",
+                            sQuote(lt0), domain = "R-base"),
                     call. = FALSE, immediate. = TRUE, domain = NA)
         }
     }

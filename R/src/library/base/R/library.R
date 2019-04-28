@@ -245,7 +245,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                     stop(errorCondition(msg,
                                         package = package,
                                         conflicts = conflicts,
-                                        class = "packageConflictError"))
+                                        class = "packageConflictError"), domain = NA)
                 }
             }
             if (warn.conflicts) {

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -90,6 +90,11 @@ msgstr "«%s» er ikkje ei fil som finst"
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
 msgstr "ikkje definert for «Date»-objekt"
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -509,6 +514,13 @@ msgstr "«width» må vera positiv"
 msgid "'%s' argument must be specified"
 msgstr "«from» må oppgjevast"
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+#, fuzzy
+msgid "'%s' argument must have named dimnames"
+msgstr "«X» må namn namngjevne «dimnames»"
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -667,11 +679,6 @@ msgstr "STATS kan ikkje resirkulerast fullstendig over MARGIN"
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "STATS er lengre enn storleiken til «dim(x)[MARGIN]»"
-
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr "«X» må namn namngjevne «dimnames»"
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -1121,12 +1128,6 @@ msgstr ""
 "«x» må vera atomsk for «sort.list».\n"
 "Har du kalla «sort» på ei liste?"
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr "«X» må namn namngjevne «dimnames»"
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1461,6 +1462,13 @@ msgstr ""
 "Vanlege linjer må ha ein tagg.\n"
 "Ugyldige linjer begynner med:\n"
 "%s"
+
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
 
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
@@ -1881,6 +1889,11 @@ msgstr "Bruk av «save»-versjonar under 2 er forelda"
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -3251,11 +3264,6 @@ msgid ""
 " %s"
 msgstr "feil ved lasting av pakke/namnerom for «%s»"
 
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
-
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
 msgid "press RETURN to view license"
@@ -3437,10 +3445,11 @@ msgstr "trekantmatrise må vera kvadratisk"
 msgid "trimmed means are not defined for complex data"
 msgstr "trimma snitt er ikkje definerte for komplekse tal"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+#, fuzzy
+msgid "unable to deduce timezone name from %s"
+msgstr "klarte ikkje lasta R-kode i pakken «%s»"
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3925,6 +3934,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T brukt i staden for TRUE"
 msgstr[1] "T brukt i staden for TRUE"
+
+#, fuzzy
+#~ msgid "'x' must have named dimnames"
+#~ msgstr "«X» må namn namngjevne «dimnames»"
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 08:21\n"
+"POT-Creation-Date: 2019-04-28 18:16\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -5087,10 +5087,11 @@ msgstr ""
 msgid "checking running R code from vignettes ..."
 msgstr "调用程序于"
 
-#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#. R/check.R: gettext("checking serialization versions ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking serialization versions"
-msgstr ""
+#, fuzzy
+msgid "checking serialization versions ..."
+msgstr "制造DLL…"
 
 #. R/check.R: gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools")
 #: R/check.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 08:21\n"
+"POT-Creation-Date: 2019-04-28 18:16\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -4836,10 +4836,11 @@ msgstr ""
 msgid "checking running R code from vignettes ..."
 msgstr "Nomes de argumentos no código que não estão nos documentos:"
 
-#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#. R/check.R: gettext("checking serialization versions ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking serialization versions"
-msgstr ""
+#, fuzzy
+msgid "checking serialization versions ..."
+msgstr "Nomes de argumentos no código que não estão nos documentos:"
 
 #. R/check.R: gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools")
 #: R/check.R:0

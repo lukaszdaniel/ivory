@@ -120,8 +120,8 @@ inRbuildignore <- function(files, pkgdir) {
 
     do_exit <-
 	if(no.q) {
-	    function(status) (if(status) stop else message)
-		gettextf("'.build_packages()' exit status %s", status, domain = "R-tools")
+	    function(status) (if(status) stop else message)(
+		gettextf("'.build_packages()' exit status %s", status, domain = "R-tools"))
 	} else
 	    function(status) q("no", status = status, runLast = FALSE)
 

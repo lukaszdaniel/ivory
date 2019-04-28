@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 08:21\n"
+"POT-Creation-Date: 2019-04-28 18:16\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -5193,10 +5193,11 @@ msgstr ""
 msgid "checking running R code from vignettes ..."
 msgstr " 以下の中にあるコードを実行中 "
 
-#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#. R/check.R: gettext("checking serialization versions ...", domain = "R-tools")
 #: R/check.R:0
-msgid "checking serialization versions"
-msgstr ""
+#, fuzzy
+msgid "checking serialization versions ..."
+msgstr "DLLの作成中... "
 
 #. R/check.R: gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools")
 #: R/check.R:0

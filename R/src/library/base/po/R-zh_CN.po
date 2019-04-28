@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -95,6 +95,11 @@ msgstr "'%s'不存在"
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
 msgstr "对Date对象不适用"
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -512,6 +517,13 @@ msgstr "'width'必需为正数"
 msgid "'%s' argument must be specified"
 msgstr "'from'一定得给值"
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+#, fuzzy
+msgid "'%s' argument must have named dimnames"
+msgstr "'X'必需有带名字的维名"
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -669,11 +681,6 @@ msgstr "STATS 没有確切地再利用于界限"
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "STATS大于'dim(x)[MARGIN]'的范围"
-
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr "'X'必需有带名字的维名"
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -1117,12 +1124,6 @@ msgstr ""
 "'sort.list'的'x'必需为原子值\n"
 "你是不是在串列上调用了'sort'函数？"
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr "'X'必需有带名字的维名"
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1457,6 +1458,13 @@ msgstr ""
 "正则行必需含标签。\n"
 "不对行的开头为：\n"
 "%s"
+
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
 
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
@@ -1877,6 +1885,11 @@ msgstr "在R版本2号之前的保存功能不再有用"
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -3235,11 +3248,6 @@ msgid ""
 " %s"
 msgstr "%s程辑包/名字空间载入失败，"
 
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
-
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
 msgid "press RETURN to view license"
@@ -3419,10 +3427,11 @@ msgstr "三角矩阵必需的正方形的"
 msgid "trimmed means are not defined for complex data"
 msgstr "复数数据不能算切尾平均值"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+#, fuzzy
+msgid "unable to deduce timezone name from %s"
+msgstr "程辑包%s里的R写碼载入失败"
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3862,6 +3871,10 @@ msgstr[0] "不存在叫%s这个名字的程辑包"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
+
+#, fuzzy
+#~ msgid "'x' must have named dimnames"
+#~ msgstr "'X'必需有带名字的维名"
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

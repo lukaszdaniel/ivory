@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-26 08:21\n"
+"POT-Creation-Date: 2019-04-28 18:16\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -805,7 +805,7 @@ msgstr ""
 #. R/QC.R: gettext("  Canonical CRAN.R-project.org URLs use https.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Canonical CRAN.R-project.org URLs use https."
-msgstr ""
+msgstr "Kanoniczne adresy URL CRAN.R-project.org używają https."
 
 #. R/news.R: gettext("Category")
 #: R/news.R:0
@@ -1695,7 +1695,7 @@ msgstr ""
 #. R/check.R: gettextf("Files not of a type allowed in a %s directory:\n", sQuote("data"))
 #: R/check.R:0
 msgid "Files not of a type allowed in a %s directory:"
-msgstr ""
+msgstr "Pliki o niedozwolonym typie w katalogu %s:"
 
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
 #: R/RdConv2.R:0
@@ -1768,7 +1768,7 @@ msgstr "Znaleziono katalog 'R' nie zawierajacy plików źródłowych."
 #. R/check.R: gettext("Found file(s) with version 3 serialization:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found file(s) with version 3 serialization:"
-msgstr ""
+msgstr "Znaleziono pliki(i) z serializacją w wersji 3:"
 
 #. R/check.R: gettext("Found subdirectory 'DATA'.\nMost likely, this should be 'data'.\n", domain = "R-tools")
 #: R/check.R:0
@@ -1799,11 +1799,12 @@ msgstr ""
 
 #. R/check.R: gettext("Found the following Makefile(s) with an include directive with a pathname using R_HOME:",     domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid ""
 "Found the following Makefile(s) with an include directive with a pathname "
 "using R_HOME:"
-msgstr "Znaleziono poniższe pliki Makefile bez końcowego LF:"
+msgstr ""
+"Znaleziono poniższe pliki Makefile z dyrektywą include z nazwą ścieżki "
+"zawierającą R_HOME."
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -2802,7 +2803,7 @@ msgstr ""
 #. R/check.R: gettextf("Object named %s found in datasets:\n", sQuote(".Random.seed"), domain = "R-tools")
 #: R/check.R:0
 msgid "Object named %s found in datasets:"
-msgstr ""
+msgstr "Obiekt o nazwie %s znaleziony w zbiorze danych:"
 
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in documentation object %s:", sQuote(nm),     domain = "R-tools")
 #: R/QC.R:0
@@ -2870,7 +2871,7 @@ msgstr "Jedynie operatory '<=' oraz '>=' są możliwe."
 #. R/check.R: gettextf("Output for data(\"%s\", package = \"%s\"):\n", f, pkgname)
 #: R/check.R:0
 msgid "Output for data(\"%s\", package = \"%s\"):"
-msgstr ""
+msgstr "Wyjście dla 'data(\"%s\", package = \"%s\")':"
 
 #. R/build.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
 #. R/check.R: gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools")
@@ -3092,7 +3093,7 @@ msgstr ""
 #. R/QC.R: gettext("Please enclose URLs in angle brackets (<...>).", domain = "R-tools")
 #: R/QC.R:0
 msgid "Please enclose URLs in angle brackets (<...>)."
-msgstr ""
+msgstr "Proszę umieszczać adresy URL w trójkątnych nawiasach (<...>)."
 
 #. R/check.R: gettext("Please fix their permissions\n", domain = "R-tools")
 #: R/check.R:0
@@ -3111,17 +3112,17 @@ msgstr ""
 #. R/check.R: gettextf("Please use e.g. %s for non-R data files\n", sQuote("inst/extdata"))
 #: R/check.R:0
 msgid "Please use e.g. %s for non-R data files"
-msgstr ""
+msgstr "Proszę używać np. %s dla plików będących danymi w formacie R"
 
 #. R/QC.R: gettext("Please write DOIs as <doi:10.prefix/suffix>.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Please write DOIs as <doi:10.prefix/suffix>."
-msgstr ""
+msgstr "Proszę zapisywać DOI jako <doi:10.prefix/suffix>."
 
 #. R/QC.R: gettext("Please write arXiv ids as <arXiv:YYMM.NNNNN>.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Please write arXiv ids as <arXiv:YYMM.NNNNN>."
-msgstr ""
+msgstr "Proszę zapisywać identyfikatory arXiv jako <arXiv:YYMM.NNNNN>."
 
 #. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif, .NOTPARALLEL. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -4829,12 +4830,13 @@ msgstr "sprawdzanie pakietu z kodowaniem %s w lokalizacji ASCII"
 #: R/install.R:0
 msgid "checking absolute paths in shared objects and dynamic libraries"
 msgstr ""
+"sprawdzanie ścieżek bezwzględnych we współdzielonych obiektach i "
+"dynamicznych bibliotekach"
 
 #. R/check.R: gettext("checking compilation flags in Makevars ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking compilation flags in Makevars ..."
-msgstr "sprawdzanie flag kompilacji w Makevars"
+msgstr "sprawdzanie flag kompilacji w Makevars ..."
 
 #. R/check.R: gettext("checking compiled code ...", domain = "R-tools")
 #: R/check.R:0
@@ -4913,9 +4915,8 @@ msgstr "szukanie niezgodności kodu/dokumentacji ..."
 
 #. R/check.R: gettext("checking for compilation flags used ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking for compilation flags used ..."
-msgstr "sprawdzanie flag kompilacji w Makevars"
+msgstr "sprawdzanie używanych flag kompilacji ..."
 
 #. R/build.R: gettext("checking for empty or unneeded directories", domain = "R-tools")
 #: R/build.R:0
@@ -4946,9 +4947,8 @@ msgstr "szukanie ukrytych plików oraz katalogów ..."
 
 #. R/check.R: gettext("checking for include directives in Makefiles ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking for include directives in Makefiles ..."
-msgstr "sprawdzanie zakończeń linii w Makefiles ..."
+msgstr "sprawdzanie dyrektyw include w plikach Makefile ..."
 
 #. R/check.R: gettext("checking for left-over files ...", domain = "R-tools")
 #: R/check.R:0
@@ -5108,11 +5108,10 @@ msgstr "sprawdzanie funkcji zastępujących ..."
 msgid "checking running R code from vignettes ..."
 msgstr "sprawdzanie uruchamiania kodu R z ilustracji ..."
 
-#. R/check.R: gettext("checking serialization versions", domain = "R-tools")
+#. R/check.R: gettext("checking serialization versions ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
-msgid "checking serialization versions"
-msgstr "sprawdzanie flag kompilacji w Makevars"
+msgid "checking serialization versions ..."
+msgstr "sprawdzanie wersji serializacji ..."
 
 #. R/check.R: gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools")
 #: R/check.R:0
@@ -5136,9 +5135,8 @@ msgstr "sprawdzanie plików najwyższego poziomu ..."
 
 #. R/check.R: gettext("checking use of PKG_*FLAGS in Makefiles ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking use of PKG_*FLAGS in Makefiles ..."
-msgstr "sprawdzanie zakończeń linii w Makefiles ..."
+msgstr "sprawdzanie użycia PKG_*FLAGS w plikach Makefile ..."
 
 #. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
 #: R/check.R:0
@@ -5147,9 +5145,8 @@ msgstr "sprawdzanie użycia rejestracji S3 ..."
 
 #. R/check.R: gettext("checking use of SHLIB_OPENMP_*FLAGS in Makefiles ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking use of SHLIB_OPENMP_*FLAGS in Makefiles ..."
-msgstr "sprawdzanie zakończeń linii w Makefiles ..."
+msgstr "sprawdzanie użycia SHLIB_OPENMP_*FLAGS w plikach Makefile ..."
 
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")
 #: R/build.R:0
@@ -7032,12 +7029,11 @@ msgstr[2] ""
 
 #. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
 #: R/update_packages.R:0
-#, fuzzy
 msgid "Found %d package version to process."
 msgid_plural "Found %d package versions to process."
-msgstr[0] "Źle sformatowana wersja pakietu."
-msgstr[1] "Źle sformatowana wersja pakietu."
-msgstr[2] "Źle sformatowana wersja pakietu."
+msgstr[0] "Znaleziono %d wersję pakietu do przeprocesowania."
+msgstr[1] "Znaleziono %d wersje pakietu do przeprocesowania."
+msgstr[2] "Znaleziono %d wersji pakietu do przeprocesowania."
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:", domain = "R-tools")
 #: R/QC.R:0
@@ -7698,12 +7694,11 @@ msgstr[2] "Brakuje wymaganych pól lub są puste:"
 
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
-msgstr[0] "Znaleziono następujący plik wykonywalny:"
-msgstr[1] "Znaleziono następujące pliki wykonywalne:"
-msgstr[2] "Znaleziono następujące pliki wykonywalne:"
+msgstr[0] "PODSUMOWANIE: przetwarzanie poniższego pliku nie powiodło się:"
+msgstr[1] "PODSUMOWANIE: przetwarzanie poniższych plików nie powiodło się:"
+msgstr[2] "PODSUMOWANIE: przetwarzanie poniższych plików nie powiodło się:"
 
 #. R/QC.R: ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools")
 #: R/QC.R:0
@@ -8026,17 +8021,17 @@ msgstr[2] "znaleziono problemy w %s"
 #: R/install.R:0
 msgid "stripping dynamic library under lib"
 msgid_plural "stripping dynamic libraries under lib"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "rozdzielanie dynamicznej biblioteki z katalog 'lib'"
+msgstr[1] "rozdzielanie dynamicznych bibliotek z katalog 'lib'"
+msgstr[2] "rozdzielanie dynamicznych bibliotek z katalog 'lib'"
 
 #. R/install.R: ngettext(length(a_s), "stripping static library under lib", "stripping static libraries under lib",     domain = "R-tools")
 #: R/install.R:0
 msgid "stripping static library under lib"
 msgid_plural "stripping static libraries under lib"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "rozdzielanie statycznej biblioteki z katalog 'lib'"
+msgstr[1] "rozdzielanie statycznych bibliotek z katalog 'lib'"
+msgstr[2] "rozdzielanie statycznych bibliotek z katalog 'lib'"
 
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s",     domain = "R-tools")
 #: R/admin.R:0

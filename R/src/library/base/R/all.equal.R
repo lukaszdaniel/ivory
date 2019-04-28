@@ -47,7 +47,7 @@ all.equal.default <- function(target, current, ...)
 all.equal.numeric <-
     function(target, current, tolerance = sqrt(.Machine$double.eps),
              scale = NULL, countEQ = FALSE,
-             formatFUN = function(err, what) format(err),
+             formatFUN = function(err) format(err),
              ..., check.attributes = TRUE)
 {
     if (!is.numeric(tolerance))
@@ -114,23 +114,23 @@ all.equal.numeric <-
     if(is.na(xy) || xy > tolerance) {
 	 if(cplx) {# PR#10575
 	  if(is.null(scale) && is.finite(xn) && xn > tolerance) {
-        msg <- c(msg, paste(gettext("Mean relative Mod difference:", domain = "R-base"), formatFUN(xy, what)))
+        msg <- c(msg, paste(gettext("Mean relative Mod difference:", domain = "R-base"), formatFUN(xy)))
 	  } else if(is.null(scale)) {
-	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy, what)))
+	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy)))
 	  } else if(all(abs(scale - 1) < 1e-7)) {
-	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy, what)))
+	    msg <- c(msg, paste(gettext("Mean absolute Mod difference:", domain = "R-base"), formatFUN(xy)))
 	 } else {
-        msg <- c(msg, paste(gettext("Mean scaled Mod difference:", domain = "R-base"), formatFUN(xy, what)))
+        msg <- c(msg, paste(gettext("Mean scaled Mod difference:", domain = "R-base"), formatFUN(xy)))
 	 }
 } else {
 	  if(is.null(scale) && is.finite(xn) && xn > tolerance) {
-        msg <- c(msg, paste(gettext("Mean relative difference:", domain = "R-base"), formatFUN(xy, what)))
+        msg <- c(msg, paste(gettext("Mean relative difference:", domain = "R-base"), formatFUN(xy)))
 	  } else if(is.null(scale)) {
-	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), formatFUN(xy, what)))
+	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), formatFUN(xy)))
 	  } else if(all(abs(scale - 1) < 1e-7)) {
-	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), format(xy)))
+	    msg <- c(msg, paste(gettext("Mean absolute difference:", domain = "R-base"), formatFUN(xy)))
       } else {
-	    msg <- c(msg, paste(gettext("Mean scaled difference:", domain = "R-base"), formatFUN(xy, what)))
+	    msg <- c(msg, paste(gettext("Mean scaled difference:", domain = "R-base"), formatFUN(xy)))
 	}
 	} }
     if(is.null(msg)) TRUE else msg

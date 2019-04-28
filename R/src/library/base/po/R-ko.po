@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -95,6 +95,11 @@ msgstr "'%s' 는 존재하는 파일이 아닙니다 "
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
 msgstr "Date 객체들에 대해서 정의되어 질 수 없습니다 "
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -512,6 +517,13 @@ msgstr "'width' 는 반드시 양수이어야 합니다 "
 msgid "'%s' argument must be specified"
 msgstr "'from' 이 지정되야 합니다 "
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+#, fuzzy
+msgid "'%s' argument must have named dimnames"
+msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -672,11 +684,6 @@ msgstr "STATS does not recycle exactly across MARGIN"
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "STATS 는 'dim(x)[MARGIN]' 의 길이보다 깁니다 "
-
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -1128,12 +1135,6 @@ msgstr ""
 "'x' 는 'sort.list' 에 대한 atomic 입니다 \n"
 "list 에서 'sort' 라고 사용한 적이 있나요? "
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1469,6 +1470,13 @@ msgstr ""
 "Regular lines must have a tag.\n"
 "Offending lines start with:\n"
 "%s"
+
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
 
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
@@ -1889,6 +1897,11 @@ msgstr "Use of save versions prior to 2 is deprecated"
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -3261,11 +3274,6 @@ msgid ""
 " %s"
 msgstr "'%s' 에 대한 패키지/네임스페이스 로드가 실패했습니다 "
 
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
-
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
 msgid "press RETURN to view license"
@@ -3447,10 +3455,11 @@ msgstr "triangular matrix should be square"
 msgid "trimmed means are not defined for complex data"
 msgstr "복소수 데이터에 대한 절사평균은 정의되지 않았습니다 "
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+#, fuzzy
+msgid "unable to deduce timezone name from %s"
+msgstr "패키지 %s 에서 R 코드를 로드할 수 없습니다 "
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3895,6 +3904,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "'x' must have named dimnames"
+#~ msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

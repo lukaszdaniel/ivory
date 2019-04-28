@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.7.0\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,13 @@ msgstr ""
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 
 msgid "%s is not defined for objects of class %s"
+msgstr ""
+
+
+#: R/datetime.R: 0
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+
+msgid "%s is not identical to any known timezone file"
 msgstr ""
 
 
@@ -607,6 +614,15 @@ msgid "'%s' argument must be specified"
 msgstr ""
 
 
+#: R/apply.R: 0
+#: R/array.R: 0
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+
+msgid "'%s' argument must have named dimnames"
+msgstr ""
+
+
 #: R/table.R: 0
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
@@ -782,13 +798,6 @@ msgstr ""
 #. R/sweep.R: warning("'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'")
 
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
-msgstr ""
-
-
-#: R/apply.R: 0
-#. R/apply.R: stop("'X' must have named dimnames")
-
-msgid "'X' must have named dimnames"
 msgstr ""
 
 
@@ -1286,13 +1295,6 @@ msgid "'x' argument must be atomic for 'sort.list()' function.\nHave you called 
 msgstr ""
 
 
-#: R/array.R: 0
-#. R/array.R: stop("'x' must have named dimnames")
-
-msgid "'x' must have named dimnames"
-msgstr ""
-
-
 #: R/format.R: 0
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 
@@ -1696,6 +1698,13 @@ msgstr ""
 #. R/dcf.R: gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
 
 msgid "Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s"
+msgstr ""
+
+
+#: R/datetime.R: 0
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+
+msgid "It is strongly recommended to set envionment variable TZ to %s (or equivalent)"
 msgstr ""
 
 
@@ -2229,6 +2238,13 @@ msgstr ""
 #. R/namespace.R: gettextf("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\nMaybe package installed with version of R newer than %s ?",     package, "S3methods", p1, p2, getRversion())
 
 msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\nMaybe package installed with version of R newer than %s ?"
+msgstr ""
+
+
+#: R/datetime.R: 0
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 
@@ -3945,13 +3961,6 @@ msgid "package or namespace load failed for %s:\n %s"
 msgstr ""
 
 
-#: R/library.R: 0
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-
-msgid "packageConflictError"
-msgstr ""
-
-
 #: R/namespace.R: 0
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 
@@ -4176,9 +4185,9 @@ msgstr ""
 
 
 #: R/datetime.R: 0
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 
-msgid "unable to deduce timezone name from"
+msgid "unable to deduce timezone name from %s"
 msgstr ""
 
 

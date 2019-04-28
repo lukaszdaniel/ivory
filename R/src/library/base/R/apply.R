@@ -35,7 +35,7 @@ apply <- function(X, MARGIN, FUN, ...)
 
     if (is.character(MARGIN)) {
         if(is.null(dnn <- names(dn))) # names(NULL) is NULL
-           stop("'X' must have named dimnames")
+           stop(gettextf("'%s' argument must have named dimnames", "X"))
         MARGIN <- match(MARGIN, dnn)
         if (anyNA(MARGIN))
             stop("not all elements of 'MARGIN' are names of dimensions")

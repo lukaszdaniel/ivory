@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -94,6 +94,11 @@ msgstr "'%s' n'est pas un fichier existant"
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
 msgstr "pas défini pour des objets \"Date\""
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -513,6 +518,13 @@ msgstr "'width' doit être postif"
 msgid "'%s' argument must be specified"
 msgstr "'from' doit être spécifié"
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+#, fuzzy
+msgid "'%s' argument must have named dimnames"
+msgstr "'x' doit avoir des dimensions nommées"
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -673,11 +685,6 @@ msgstr "STATS ne se recycle pas complètement le long de MARGIN"
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "STATS est plus long que l'étendue de 'dim(x)[MARGIN]'"
-
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr "'x' doit avoir des dimensions nommées"
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -1136,12 +1143,6 @@ msgstr ""
 "'x' doit être atomique pour 'sort.list'\n"
 "Avez-vous appelé 'sort' sur une liste ?"
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr "'x' doit avoir des dimensions nommées"
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1482,6 +1483,13 @@ msgstr ""
 "Des lignes normales doivent avoir un attribut.\n"
 "Les lignes litigieuses commencent par:\n"
 "%s"
+
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
 
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
@@ -1902,6 +1910,11 @@ msgstr "L'utilisation d'une version antérieure à 2 est obsolète"
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -3304,11 +3317,6 @@ msgid ""
 " %s"
 msgstr "le chargement du package / espace de noms a échoué pour %s"
 
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
-
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
 msgid "press RETURN to view license"
@@ -3493,10 +3501,11 @@ msgstr "la matrice triangulaire doit être carrée"
 msgid "trimmed means are not defined for complex data"
 msgstr "les moyennes tronquées ne sont pas définies pour des données complexes"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+#, fuzzy
+msgid "unable to deduce timezone name from %s"
+msgstr "impossible de charger le code R depuis le package %s"
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3992,6 +4001,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T utilisé à la place de TRUE"
 msgstr[1] "T utilisé à la place de TRUE"
+
+#, fuzzy
+#~ msgid "'x' must have named dimnames"
+#~ msgstr "'x' doit avoir des dimensions nommées"
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-26 09:08\n"
+"POT-Creation-Date: 2019-04-28 20:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -89,6 +89,11 @@ msgstr "%s nie jest istniejącym plikiem"
 #: R/version.R:0
 msgid "%s is not defined for objects of class %s"
 msgstr "%s nie jest określony dla obiektów klasy %s"
+
+#. R/datetime.R: gettextf("%s is not identical to any known timezone file", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "%s is not identical to any known timezone file"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
@@ -457,6 +462,12 @@ msgstr "argument '%s' musi być dodatni"
 msgid "'%s' argument must be specified"
 msgstr "argument '%s' musi być określony"
 
+#. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0
+msgid "'%s' argument must have named dimnames"
+msgstr "argument '%s' musi mieć nazwane wymiary"
+
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
@@ -597,11 +608,6 @@ msgstr ""
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
 msgstr "argument 'STATS' jest dłuższy niż rozmiar 'dim(x)[MARGIN]'"
 
-#. R/apply.R: stop("'X' must have named dimnames")
-#: R/apply.R:0
-msgid "'X' must have named dimnames"
-msgstr "'X' musi mieć nazwane wymiary"
-
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
 msgid ""
@@ -722,6 +728,8 @@ msgstr "wybrane 'envir':"
 #: R/table.R:0
 msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
 msgstr ""
+"argument 'exclude' zawierający wartość NA oraz argument 'useNA' != \"no\"' "
+"są sprzeczne"
 
 #. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' file but no matching classes in package %s",     sQuote(package))
 #: R/namespace.R:0
@@ -767,9 +775,9 @@ msgstr "argument 'from' musi być typem pustym lub tekstem"
 
 #. R/connections.R: stop("'headers' must have names and must not be NA")
 #: R/connections.R:0
-#, fuzzy
 msgid "'headers' must have names and must not be NA"
-msgstr "'X' musi mieć nazwane wymiary"
+msgstr ""
+"argument 'headers' musi zawierać nazwy i nie mogą być one wartościami NA"
 
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
@@ -857,9 +865,8 @@ msgstr "sortowanie 'partial' nie jest wspierane przez funkcję 'radix()'"
 
 #. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
 #: R/attach.R:0
-#, fuzzy
 msgid "'pos=1' is not possible and has been warned about for years"
-msgstr "*** 'pos=1' nie jest możliwe; na chwilę obecną ustawianie 'pos=2'."
+msgstr "'pos=1' nie jest możliwe co było już przez lata wskazywane"
 
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -1029,11 +1036,6 @@ msgstr ""
 "argument 'x' musi być typem atomowym dla funkcji 'sort.list()'\n"
 "Czy wywołano funkcję 'sort()' na liście?"
 
-#. R/array.R: stop("'x' must have named dimnames")
-#: R/array.R:0
-msgid "'x' must have named dimnames"
-msgstr "'X' musi mieć nazwane wymiary"
-
 #. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
 #: R/format.R:0
 msgid ""
@@ -1186,11 +1188,12 @@ msgstr "Komponent %d:"
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package), emsg, domain = "R-base")
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "Conflicts attaching package %s:\n"
 "%s"
-msgstr "Dołączanie pakietu: %s"
+msgstr ""
+"Konflikty podczas dołączania pakietu %s:\n"
+"%s"
 
 #. R/library.R: gettextf("DLL %s is already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -1360,6 +1363,13 @@ msgstr ""
 "Przeszkadzające linie rozpoczynają się od:\n"
 "%s"
 
+#. R/datetime.R: gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",     sQuote(tz), domain = "R-base")
+#: R/datetime.R:0
+msgid ""
+"It is strongly recommended to set envionment variable TZ to %s (or "
+"equivalent)"
+msgstr ""
+
 #. R/summary.R: gettext("Length", domain = "R-base")
 #. R/summary.R: gettext("Length")
 #: R/summary.R:0
@@ -1512,6 +1522,7 @@ msgstr "Tryby:"
 #: R/stop.R:0
 msgid "Must use 'exprs' or unnamed expressions, but not both"
 msgstr ""
+"Konieczne jest użycie 'exprs' lub nienazwanych wyrażeń, ale nie oba naraz"
 
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1668,7 +1679,7 @@ msgstr ""
 #. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
 #: R/warnings.R:0
 msgid "Summary of (a total of %d) warning messages:"
-msgstr ""
+msgstr "Podsumowanie (całości z %d) komunikatów ostrzegawczych:"
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -1771,6 +1782,11 @@ msgstr "Użycie wersji zapisu wcześniejszej niż 2 jest przestarzałe"
 msgid ""
 "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.\n"
 "Maybe package installed with version of R newer than %s ?"
+msgstr ""
+
+#. R/datetime.R: gettextf("Your system is mis-configured: %s is not a symlink", sQuote(lt0), domain = "R-base")
+#: R/datetime.R:0
+msgid "Your system is mis-configured: %s is not a symlink"
 msgstr ""
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
@@ -1944,7 +1960,6 @@ msgstr "można odejmować jedynie liczby od obiektów klasy %s"
 
 #. R/connections.R: stop("can only write character objects")
 #: R/connections.R:0
-#, fuzzy
 msgid "can only write character objects"
 msgstr "można zapisać jedynie obiekty wektorowe"
 
@@ -2047,7 +2062,7 @@ msgstr ""
 #. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
 msgid "connections left open:"
-msgstr ""
+msgstr "połączenia, które pozostały otwarte:"
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0
@@ -2858,12 +2873,14 @@ msgstr "nie wszystkie elementy 'MARGIN' są nazwami wymiarów"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)
 #: R/namespace.R:0
-#, fuzzy
 msgid ""
 "not found in namespace %s: \n"
 "\n"
 "%s"
-msgstr "nie ładuję przestrzeni nazw"
+msgstr ""
+"nie znaleziono w przestrzeni nazw %s: \n"
+"\n"
+"%s"
 
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
@@ -3071,6 +3088,8 @@ msgid ""
 "package %s was installed by an R version with different internals; it needs "
 "to be reinstalled for use with this R version"
 msgstr ""
+"pakiet %s był zainstalowany przez wersję R z innymi metodami wewnętrznymi; "
+"musi być przeinstalowany aby móc użyć go z tą wersją R"
 
 #. R/library.R: gettextf("package or namespace load failed for %s in %s:\n %s", sQuote(package),     paste(deparse(cc)[1L], collapse = "", sep = ""), conditionMessage(e), domain = "R-base")
 #: R/library.R:0
@@ -3090,11 +3109,6 @@ msgid ""
 msgstr ""
 "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla pakietu %s:\n"
 " %s"
-
-#. R/library.R: errorCondition(msg, package = package, conflicts = conflicts, class = "packageConflictError")
-#: R/library.R:0
-msgid "packageConflictError"
-msgstr ""
 
 #. R/namespace.R: gettext("press RETURN to view license", domain = "R-base")
 #: R/namespace.R:0
@@ -3170,7 +3184,7 @@ msgstr ""
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
-msgstr ""
+msgstr "uruchomienie polecenia '%s' miało status %d"
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
@@ -3214,7 +3228,7 @@ msgstr ""
 #. R/source.R: stop("specify either 'file' or 'exprs' argument but not both")
 #: R/source.R:0
 msgid "specify either 'file' or 'exprs' argument but not both"
-msgstr ""
+msgstr "określ argument 'file' albo 'exprs', ale nie oba"
 
 #. R/time.R: gettext("system")
 #: R/time.R:0
@@ -3270,10 +3284,10 @@ msgstr "macierz trójkątna powinna mieć równą liczbę wierszy i kolumn"
 msgid "trimmed means are not defined for complex data"
 msgstr "przycięte średnie nie są zdefiniowane dla danych złożonych"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#. R/datetime.R: gettextf("unable to deduce timezone name from %s", sQuote(lt))
 #: R/datetime.R:0
-msgid "unable to deduce timezone name from"
-msgstr ""
+msgid "unable to deduce timezone name from %s"
+msgstr "nie można wywnioskować nazwy strefy czasowej z %s"
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
@@ -3389,7 +3403,7 @@ msgstr "wersja %s pakietu %s zasłonięta przez %s w %s"
 #. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd), domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
 msgid "working directory was changed to %s, resetting"
-msgstr ""
+msgstr "katalog roboczy został zmieniony na %s; resetowanie"
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
 #: R/seq.R:0
@@ -3823,6 +3837,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "'x' must have named dimnames"
+#~ msgstr "'X' musi mieć nazwane wymiary"
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""

@@ -136,20 +136,20 @@ INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
 
 #ifdef STRICT_TYPECHECK
 # define CHECK_VECTOR_LGL(x) do {				\
-	if (TYPEOF(x) != LGLSXP) error("bad LGLSXP vector");	\
+	if (TYPEOF(x) != LGLSXP) error(_("bad %s vector"), "LGLSXP");	\
     } while (0)
 # define CHECK_VECTOR_INT(x) do {				\
 	if (! (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP))	\
-	    error("bad INTSXP vector");				\
+	    error(_("bad %s vector"), "INTSXP");				\
     } while (0)
 # define CHECK_VECTOR_REAL(x) do {				\
-	if (TYPEOF(x) != REALSXP) error("bad REALSXP vector");	\
+	if (TYPEOF(x) != REALSXP) error(_("bad %s vector"), "REALSXP");	\
     } while (0)
 # define CHECK_VECTOR_CPLX(x) do {				\
-	if (TYPEOF(x) != CPLXSXP) error("bad CPLXSXP vector");	\
+	if (TYPEOF(x) != CPLXSXP) error(_("bad %s vector"), "CPLXSXP");	\
     } while (0)
 # define CHECK_VECTOR_RAW(x) do {				\
-	if (TYPEOF(x) != RAWSXP) error("bad RAWSXP vector");	\
+	if (TYPEOF(x) != RAWSXP) error(_("bad %s vector"), "RAWSXP");	\
     } while (0)
 #else
 # define CHECK_VECTOR_LGL(x) do { } while(0)
@@ -208,44 +208,44 @@ INLINE_FUN int LENGTH_EX(SEXP x, const char *file, int line)
 #ifdef STRICT_TYPECHECK
 # define CHECK_STDVEC_LGL(x) do {				\
 	CHECK_VECTOR_LGL(x);					\
-	if (ALTREP(x)) error(_("bad standard LGLSXP vector"));	\
+	if (ALTREP(x)) error(_("bad standard %s vector"), "LGLSXP");	\
     } while (0)
 # define CHECK_STDVEC_INT(x) do {				\
 	CHECK_VECTOR_INT(x);					\
-	if (ALTREP(x)) error(_("bad standard INTSXP vector"));	\
+	if (ALTREP(x)) error(_("bad standard %s vector"), "INTSXP");	\
     } while (0)
 # define CHECK_STDVEC_REAL(x) do {				\
 	CHECK_VECTOR_REAL(x);					\
-	if (ALTREP(x)) error(_("bad standard REALSXP vector"));	\
+	if (ALTREP(x)) error(_("bad standard %s vector"), "REALSXP");	\
     } while (0)
 # define CHECK_STDVEC_CPLX(x) do {				\
 	CHECK_VECTOR_CPLX(x);					\
-	if (ALTREP(x)) error(_("bad standard CPLXSXP vector"));	\
+	if (ALTREP(x)) error(_("bad standard %s vector"), "CPLXSXP");	\
     } while (0)
 # define CHECK_STDVEC_RAW(x) do {				\
 	CHECK_VECTOR_RAW(x);					\
-	if (ALTREP(x)) error(_("bad standard RAWSXP vector"));	\
+	if (ALTREP(x)) error(_("bad standard %s vector"), "RAWSXP");	\
     } while (0)
 
 # define CHECK_SCALAR_LGL(x) do {				\
 	CHECK_STDVEC_LGL(x);					\
-	if (XLENGTH(x) != 1) error(_("bad LGLSXP scalar"));	\
+	if (XLENGTH(x) != 1) error(_("bad %s scalar"), "LGLSXP");	\
     } while (0)
 # define CHECK_SCALAR_INT(x) do {				\
 	CHECK_STDVEC_INT(x);					\
-	if (XLENGTH(x) != 1) error(_("bad INTSXP scalar"));	\
+	if (XLENGTH(x) != 1) error(_("bad %s scalar"), "INTSXP");	\
     } while (0)
 # define CHECK_SCALAR_REAL(x) do {				\
 	CHECK_STDVEC_REAL(x);					\
-	if (XLENGTH(x) != 1) error(_("bad REALSXP scalar"));	\
+	if (XLENGTH(x) != 1) error(_("bad %s scalar"), "REALSXP");	\
     } while (0)
 # define CHECK_SCALAR_CPLX(x) do {				\
 	CHECK_STDVEC_CPLX(x);					\
-	if (XLENGTH(x) != 1) error("bad CPLXSXP scalar");	\
+	if (XLENGTH(x) != 1) error(_("bad %s scalar"), "CPLXSXP");	\
     } while (0)
 # define CHECK_SCALAR_RAW(x) do {				\
 	CHECK_STDVEC_RAW(x);					\
-	if (XLENGTH(x) != 1) error(_("bad RAWSXP scalar"));	\
+	if (XLENGTH(x) != 1) error(_("bad %s scalar"), "RAWSXP");	\
     } while (0)
 
 # define CHECK_BOUNDS_ELT(x, i) do {			\

@@ -814,7 +814,7 @@ add_dummies <- function(dir, Log)
     ## src/symbols.rds in the sources.
     check_serialization <- function(allfiles)
     {
-        checkingLog(Log, gettext("checking serialization versions", domain = "R-tools"))
+        checkingLog(Log, gettext("checking serialization versions ...", domain = "R-tools"))
         bad <- get_serialization_version(allfiles)
         bad <- names(bad[bad >= 3L])
         if(length(bad)) {

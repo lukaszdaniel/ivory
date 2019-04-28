@@ -116,7 +116,7 @@ function(x, MARGIN)
 
     if (is.character(MARGIN)) {
         if(is.null(dnn <- names(dn))) # names(NULL) is NULL
-           stop("'x' must have named dimnames")
+           stop(gettextf("'%s' argument must have named dimnames", "x"))
         MARGIN <- match(MARGIN, dnn)
         if (anyNA(MARGIN))
             stop("not all elements of 'MARGIN' are names of dimensions")

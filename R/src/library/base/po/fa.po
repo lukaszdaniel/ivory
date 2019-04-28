@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 19:06+0200\n"
+"POT-Creation-Date: 2019-04-27 18:34+0200\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1080,40 +1080,25 @@ msgstr ""
 msgid "cannot get data pointer of '%s' objects"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:211
-msgid "bad standard LGLSXP vector"
+#: src/include/Rinlinedfuns.h:139 src/include/Rinlinedfuns.h:143
+#: src/include/Rinlinedfuns.h:146 src/include/Rinlinedfuns.h:149
+#: src/include/Rinlinedfuns.h:152
+#, c-format
+msgid "bad %s vector"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:215
-msgid "bad standard INTSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:219
-msgid "bad standard REALSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:223
-msgid "bad standard CPLXSXP vector"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:211 src/include/Rinlinedfuns.h:215
+#: src/include/Rinlinedfuns.h:219 src/include/Rinlinedfuns.h:223
 #: src/include/Rinlinedfuns.h:227
-msgid "bad standard RAWSXP vector"
+#, c-format
+msgid "bad standard %s vector"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:232
-msgid "bad LGLSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:236
-msgid "bad INTSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:240
-msgid "bad REALSXP scalar"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
+#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
-msgid "bad RAWSXP scalar"
+#, c-format
+msgid "bad %s scalar"
 msgstr ""
 
 #: src/include/Rinlinedfuns.h:253

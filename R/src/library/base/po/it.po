@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 19:06+0200\n"
+"POT-Creation-Date: 2019-04-27 18:34+0200\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1127,41 +1127,26 @@ msgstr ""
 msgid "cannot get data pointer of '%s' objects"
 msgstr "impossibile creare fifo '%s' perché '%s'"
 
-#: src/include/Rinlinedfuns.h:211
-msgid "bad standard LGLSXP vector"
-msgstr ""
+#: src/include/Rinlinedfuns.h:139 src/include/Rinlinedfuns.h:143
+#: src/include/Rinlinedfuns.h:146 src/include/Rinlinedfuns.h:149
+#: src/include/Rinlinedfuns.h:152
+#, fuzzy, c-format
+msgid "bad %s vector"
+msgstr "valore '%s' non valido"
 
-#: src/include/Rinlinedfuns.h:215
-msgid "bad standard INTSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:219
-msgid "bad standard REALSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:223
-msgid "bad standard CPLXSXP vector"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:211 src/include/Rinlinedfuns.h:215
+#: src/include/Rinlinedfuns.h:219 src/include/Rinlinedfuns.h:223
 #: src/include/Rinlinedfuns.h:227
-msgid "bad standard RAWSXP vector"
+#, c-format
+msgid "bad standard %s vector"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:232
-msgid "bad LGLSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:236
-msgid "bad INTSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:240
-msgid "bad REALSXP scalar"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
+#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
-msgid "bad RAWSXP scalar"
-msgstr ""
+#, fuzzy, c-format
+msgid "bad %s scalar"
+msgstr "valore '%s' non valido"
 
 #: src/include/Rinlinedfuns.h:253
 #, fuzzy

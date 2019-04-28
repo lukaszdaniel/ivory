@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 19:06+0200\n"
+"POT-Creation-Date: 2019-04-27 18:34+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Bookmarks: -1,1307,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
@@ -1133,41 +1133,26 @@ msgstr "'value' pustego obiektu nie jest zdefiniowane"
 msgid "cannot get data pointer of '%s' objects"
 msgstr "nie można ustawić punktu ponownego przetwarzania '%ls', powód '%s'"
 
-#: src/include/Rinlinedfuns.h:211
-msgid "bad standard LGLSXP vector"
-msgstr ""
+#: src/include/Rinlinedfuns.h:139 src/include/Rinlinedfuns.h:143
+#: src/include/Rinlinedfuns.h:146 src/include/Rinlinedfuns.h:149
+#: src/include/Rinlinedfuns.h:152
+#, c-format
+msgid "bad %s vector"
+msgstr "niepoprawny wektor %s"
 
-#: src/include/Rinlinedfuns.h:215
-msgid "bad standard INTSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:219
-msgid "bad standard REALSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:223
-msgid "bad standard CPLXSXP vector"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:211 src/include/Rinlinedfuns.h:215
+#: src/include/Rinlinedfuns.h:219 src/include/Rinlinedfuns.h:223
 #: src/include/Rinlinedfuns.h:227
-msgid "bad standard RAWSXP vector"
-msgstr ""
+#, c-format
+msgid "bad standard %s vector"
+msgstr "niepoprawny standardowy wektor %s"
 
-#: src/include/Rinlinedfuns.h:232
-msgid "bad LGLSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:236
-msgid "bad INTSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:240
-msgid "bad REALSXP scalar"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
+#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
-msgid "bad RAWSXP scalar"
-msgstr ""
+#, c-format
+msgid "bad %s scalar"
+msgstr "niepoprawny skalar %s"
 
 #: src/include/Rinlinedfuns.h:253
 msgid "subscript out of bounds"
@@ -1287,9 +1272,9 @@ msgid "mmop objects not supported on Windows yet"
 msgstr "Rscript nie jest obsługiwany w tym systemie"
 
 #: src/main/altclasses.c:1299
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a regular file"
-msgstr "'%s' nie jest w tablicy startowej"
+msgstr "'%s' nie jest zwyczajnym plikiem"
 
 #: src/main/altclasses.c:1304
 #, fuzzy, c-format
@@ -2320,14 +2305,12 @@ msgid "invalid body for function"
 msgstr "niepoprawne ciało dla funkcji"
 
 #: src/main/coerce.c:1618
-#, fuzzy
 msgid "argument must be character"
-msgstr "argument 'x' musi być łańcuchem tekstowym"
+msgstr "argument musi być tekstem"
 
 #: src/main/coerce.c:1623
-#, fuzzy
 msgid "argument must be a character string"
-msgstr "argument 'x' musi być łańcuchem tekstowym"
+msgstr "argument musi być łańcuchem tekstowym"
 
 #: src/main/coerce.c:1635
 #, c-format
@@ -2585,9 +2568,9 @@ msgid "cannot open file '%ls': %s"
 msgstr "nie można otworzyć pliku '%ls': %s"
 
 #: src/main/connections.c:747
-#, fuzzy, c-format
+#, c-format
 msgid "cannot open file '%ls': it is a directory"
-msgstr "nie można otworzyć pliku '%ls': %s"
+msgstr "nie można otworzyć pliku '%ls': to jest katalog"
 
 #: src/main/connections.c:769
 msgid "'fdopen' is not supported on this platform"
@@ -2595,9 +2578,9 @@ msgstr "'fdopen' nie jest obsługiwane na tej platformie"
 
 #: src/main/connections.c:777 src/main/connections.c:1681
 #: src/main/connections.c:1832 src/main/connections.c:2028
-#, fuzzy, c-format
+#, c-format
 msgid "cannot open file '%s': it is a directory"
-msgstr "nie można otworzyć pliku '%s': %s"
+msgstr "nie można otworzyć pliku '%s': to jest katalog"
 
 #: src/main/connections.c:890 src/main/saveload.c:2449
 #: src/main/serialize.c:2590
@@ -4117,9 +4100,9 @@ msgid "argument passed to '%s' function is not an environment"
 msgstr "argument przekazywany do funkcji '%s' nie jest środowiskiem"
 
 #: src/main/envir.c:1319
-#, fuzzy, c-format
+#, c-format
 msgid "argument to '%s' is not an environment"
-msgstr "argument nie jest środowiskiem"
+msgstr "argument przekazywany do '%s' nie jest środowiskiem"
 
 #: src/main/envir.c:1477
 #, c-format
@@ -4552,9 +4535,9 @@ msgid "not in a try context"
 msgstr "to nie jest w kontekście 'try'"
 
 #: src/main/errors.c:2116
-#, fuzzy, c-format
+#, c-format
 msgid "invalid value of %s"
-msgstr "niepoprawna wartość w '%s'"
+msgstr "niepoprawna wartość %s"
 
 #: src/main/errors.c:2287
 #, fuzzy
@@ -5177,9 +5160,9 @@ msgid "internal parser error at line %d"
 msgstr "wewnętrzny błąd parsera w linii %d"
 
 #: src/main/graphics.c:69
-#, fuzzy, c-format
+#, c-format
 msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
-msgstr "względny zakres wartości =%4.0f * EPS jest mały (oś %d)"
+msgstr "względny zakres wartości (%4.0f * EPS) jest mały (oś %d)"
 
 #: src/main/grep.c:105
 msgid "R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"
@@ -6404,9 +6387,9 @@ msgid "list argument has no valid names"
 msgstr "argument listy nie ma poprawnych nazw"
 
 #: src/main/options.c:525
-#, fuzzy, c-format
+#, c-format
 msgid "option '%s' cannot be deleted"
-msgstr "plik zip '%s' nie może zostać otwarty"
+msgstr "opcja '%s' nie może być usunięta"
 
 #: src/main/options.c:530
 #, c-format
@@ -8005,9 +7988,9 @@ msgid "NA/NaN argument"
 msgstr "argument o wartości NA/NaN"
 
 #: src/main/seq.c:355
-#, fuzzy, c-format
+#, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
-msgstr "niepoprawny typ (%s) dla 'dimnames' (musi być wektor)"
+msgstr "niepoprawny typ (%s) dla '%s' (musi być wektor)"
 
 #: src/main/seq.c:359 src/main/seq.c:690
 #, c-format
@@ -8464,9 +8447,8 @@ msgid "R_LibraryFileName: buffer too small"
 msgstr "'R_LibraryFileName': bufor jest zbyt mały"
 
 #: src/main/startup.c:187
-#, fuzzy
 msgid "WARNING: invalid R_MAX_VSIZE ignored\n"
-msgstr "OSTRZEŻENIE: niepoprawna wartość 'R_VSIZE' została zignorowana\n"
+msgstr "OSTRZEŻENIE: niepoprawna wartość 'R_MAX_VSIZE ' została zignorowana\n"
 
 #: src/main/startup.c:190
 #, c-format
@@ -9466,9 +9448,8 @@ msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
 #: src/modules/internet/libcurl.c:525 src/modules/internet/libcurl.c:543
-#, fuzzy
 msgid "out of memory"
-msgstr "Zabrakło pamięci"
+msgstr "brakło pamięci"
 
 #: src/modules/internet/libcurl.c:571
 #, c-format
@@ -10606,9 +10587,8 @@ msgid "Cannot open /dev/null for reading:"
 msgstr "można jedynie otworzyć adresy URL do odczytu"
 
 #: src/unix/sys-unix.c:542
-#, fuzzy
 msgid "Invalid file pointer in pclose"
-msgstr "niepoprawny wzorzec nazwy pliku"
+msgstr "niepoprawny wskaźnik do pliku w pclose"
 
 #: src/unix/sys-unix.c:639
 #, c-format
@@ -10654,6 +10634,9 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#~ msgid "bad INTSXP scalar"
+#~ msgstr "niepoprawny skalar INTSXP"
 
 #~ msgid "invalid cached value in 'R_GetGlobalCache()' function"
 #~ msgstr "niepoprawna wartość cache w funkcji 'R_GetGlobalCache()'"
