@@ -163,7 +163,10 @@ aa2bb376697a2c6c58a8482f4277aee9 *inst/po/fr/LC_MESSAGES/mgcv.mo
 546fe0929c0b0d9a1291cc8daf8e1a13 *inst/po/en@quot/LC_MESSAGES/mgcv.mo
 8c32c986cc8666240269b5d35086fa44 *inst/po/de/LC_MESSAGES/R-mgcv.mo
 0c4b8d4b3adf7f5af3f873d65f6f13fe *inst/po/de/LC_MESSAGES/mgcv.mo
+0ef2f55186b25c5649ccf0db46279c1d *inst/po/pl/LC_MESSAGES/R-mgcv.mo
 ef15591e2a178ea722e3e486c31d05e0 *inst/po/pl/LC_MESSAGES/mgcv.mo
+2b59cdd09fcab7b9522c6d0bfff9fa53 *inst/po/ko/LC_MESSAGES/R-mgcv.mo
+23d8c19aa497a16e1044804eacfef499 *inst/po/ko/LC_MESSAGES/mgcv.mo
 fa2508c443bdc759a734df0d00ed735e *tests/mgcv-parallel.R
 38e593a85a6fd0bb4fbed836f3361406 *tests/bam.R
 501f5e62e0f51516b8cf61b6aff5901b *tests/single.index.R

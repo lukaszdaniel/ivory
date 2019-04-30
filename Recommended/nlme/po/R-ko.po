@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-105\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2019-04-30 08:05\n"
 "PO-Revision-Date: 2013-08-16 18:52-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
@@ -140,7 +140,6 @@ msgstr ""
 
 #. R/gls.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls"))
 #. R/gnls.R: gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lme.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme"))
@@ -339,6 +338,11 @@ msgstr ""
 msgid "'asTable()' function cannot be used with multilevel grouped data"
 msgstr ""
 
+#. R/lmList.R: message("'data' argument not used, but taken from groupedData object")
+#: R/lmList.R:0
+msgid "'data' argument not used, but taken from groupedData object"
+msgstr ""
+
 #. R/newMethods.R: stop("'data' argument passed to \"data.frame\" method for 'getGroups()' does not make sense")
 #: R/newMethods.R:0
 msgid ""
@@ -357,6 +361,12 @@ msgid ""
 "'data' must inherit from \"groupedData\" class if 'random' does not define "
 "groups"
 msgstr ""
+
+#. R/lmList.R: stop("'form' must be a formula")
+#: R/lmList.R:0
+#, fuzzy
+msgid "'form' must be a formula"
+msgstr "'object'는 반드시 formula이어야 합니다"
 
 #. R/lme.R: warning("'lme.lmList()' function will redefine 'data' argument")
 #: R/lme.R:0
@@ -1029,7 +1039,6 @@ msgstr ""
 msgid "Variance function:"
 msgstr ""
 
-#. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 #: R/lme.R:0
 msgid "Within-group standard error:"
@@ -1499,7 +1508,7 @@ msgid ""
 "elements in 'object' argument must be formulae or objects of class \"pdMat\""
 msgstr ""
 
-#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
+#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q, domain = "R-nlme")
 #. R/nlme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
 #: R/lme.R:0 R/nlme.R:0
 msgid "fewer observations than random effects in all level %s groups"
@@ -1507,10 +1516,15 @@ msgstr ""
 
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()"))
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()"))
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()"))
 #: R/groupedData.R:0
 msgid "first argument passed to %s function must be a two-sided formula"
 msgstr ""
+
+#. R/groupedData.R: stop("first argument to 'nmGroupedData' must be a two-sided formula")
+#: R/groupedData.R:0
+#, fuzzy
+msgid "first argument to 'nmGroupedData' must be a two-sided formula"
+msgstr "'form'은 반드시 formula 이어야 합니다"
 
 #. R/lme.R: stop("first model has a different response from the rest")
 #: R/lme.R:0
@@ -2075,6 +2089,11 @@ msgid ""
 "frame\""
 msgstr ""
 
+#. R/groupedData.R: stop("single group not supported -- use groupedData()")
+#: R/groupedData.R:0
+msgid "single group not supported -- use groupedData()"
+msgstr ""
+
 #. R/lme.R: warning("some fitted objects deleted because response differs from the first model")
 #: R/lme.R:0
 msgid ""
@@ -2273,9 +2292,6 @@ msgstr[0] ""
 
 #~ msgid "need data to calculate covariate"
 #~ msgstr "공변량을 계산할 데이터가 필요합니다"
-
-#~ msgid "'object' must be a formula"
-#~ msgstr "'object'는 반드시 formula이어야 합니다"
 
 #~ msgid "'id' must be between 0 and 1"
 #~ msgstr "'id'는 반드시 0과 1 사이에 있어야 합니다"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:55+0200\n"
+"POT-Creation-Date: 2019-04-30 08:05+0200\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -82,12 +82,12 @@ msgid ""
 "  and min.dist dysma[1:n] are\n"
 msgstr ""
 
-#: pam.c:560
+#: pam.c:733
 #, c-format
 msgid "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"
 msgstr ""
 
-#: pam.c:655
+#: pam.c:888
 #, c-format
 msgid "pam(): Bug in C level cstat(), k=%d: ntt=0"
 msgstr "pam(): Bug in C level cstat(), k=%d: ntt=0"

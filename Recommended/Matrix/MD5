@@ -137,6 +137,8 @@ f61728e1fb76058c88f135d1fc52dfc3 *po/de.po
 e23ab5be4fd03f0085929c32bcf59b46 *po/update-me.sh
 5e9675b5f5cf7c0a0a03662df4b73467 *po/fr.po
 0729149c05e094fd7b75fd35df2bf5b7 *po/ko.po
+0fcc87da49f23ddccefa2a887aa68c8a *po/R-en@quot.po
+57680b9c8d9a9e8cd4fe5329ce92d7fe *po/en@quot.po
 473bdfe538016b666b515915d2962b70 *po/pl.po
 f3b1b137d928891510363a3a18f9cfa6 *TODO
 2bc7011a55296b4463fe903a39b32684 *.Rinstignore
@@ -208,8 +210,8 @@ c97e1324fa0cacc27329e49f77248125 *tests/factorizing.R
 92213c349590000081de59b1fb21bebe *tests/Class+Meth.R
 4966b9ac5a23de46814439a84174973b *tests/abIndex-tsts.R
 7723c00eb9f4ef3b3b2149da6b1a9621 *tests/validObj.R
-759ed31839862e7af0c9aa0bdf9889f9 *tests/indexing.Rout.save
-a3ff1fbb90e1c33076c6160055b82279 *tests/bind.Rout.save
+871f6f797d2a4a3000af1eb409c066c5 *tests/indexing.Rout.save
+63bc66bff9efe46fe39d1698bd31fec4 *tests/bind.Rout.save
 f2ad5375e270deeb7b041272dd095032 *cleanup
 cac2aed2748ce92e00d6a59c1120619d *R/eigen.R
 9e951ea43c78973451a605670fc2a2de *R/dgTMatrix.R

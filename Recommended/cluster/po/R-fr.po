@@ -1,0 +1,1090 @@
+# Translation of src/library/Recommended/cluster/po/R-cluster.pot to German
+# Copyright (C) 2013 The R Foundation
+# This file is distributed under the same license as the R package.
+# Philippe.Grosjean@umons.ac.be, 2014--
+msgid ""
+msgstr ""
+"Project-Id-Version: cluster 1.14.5\n"
+"POT-Creation-Date: 2019-04-30 08:05\n"
+"PO-Revision-Date: 2014-03-30 09:03+0100\n"
+"Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. R/daisy.q: gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"),     pColl(which(sx == 0)))
+#: R/daisy.q:0
+msgid "%s has constant columns %s; these are standardized to 0"
+msgstr "%s à des colonnes constantes %s ; elles sont standardisées à 0"
+
+#. R/daisy.q: gettextf("%s has invalid column names", ct)
+#: R/daisy.q:0
+msgid "%s has invalid column names"
+msgstr "%s a des noms de colonnes incorrects"
+
+#. R/clara.q: gettextf("%s is a \"dist\" object, but should be a data matrix or frame", dataname)
+#: R/clara.q:0
+#, fuzzy
+msgid "%s is a \"dist\" object, but should be a data matrix or frame"
+msgstr ""
+"'x' est un objet \"dist\", mais il faut une matrice ou un tableau de données"
+
+#. R/agnes.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
+#. R/clara.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
+#: R/agnes.q:0 R/clara.q:0
+#, fuzzy
+msgid "%s is not a numeric dataframe or matrix."
+msgstr ""
+"x n'est pas un tableau de données (data frame) ou une matrice numérique."
+
+#. R/agnes.q: gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname)
+#: R/agnes.q:0
+#, fuzzy
+msgid "%s is not and cannot be converted to class \"dissimilarity\""
+msgstr ""
+"'x' n'est pas et ne peux pas être converti en un objet de classe "
+"\"dissimilarity\""
+
+#. R/daisy.q: gettextf("%s must be in 1:ncol(x)", ct)
+#: R/daisy.q:0
+msgid "%s must be in 1:ncol(x)"
+msgstr "%s doit être compris dans 1:ncol(x)"
+
+#. R/daisy.q: gettextf("%s must contain column names or numbers", ct)
+#: R/daisy.q:0
+msgid "%s must contain column names or numbers"
+msgstr "%s doit contenir des noms de colonnes ou des nombres"
+
+#. R/daisy.q: gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x")
+#: R/daisy.q:0
+#, fuzzy
+msgid "'%s' argument is not a dataframe or a numeric matrix."
+msgstr ""
+"x n'est pas un tableau de données (data frame) ou une matrice numérique."
+
+#. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#: R/diana.q:0 R/fanny.q:0 R/pam.q:0
+#, fuzzy
+msgid "'%s' argument is not a numeric dataframe or matrix."
+msgstr ""
+"x n'est pas un tableau de données (data frame) ou une matrice numérique."
+
+#. R/diana.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
+#. R/fanny.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
+#. R/pam.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
+#: R/diana.q:0 R/fanny.q:0 R/pam.q:0
+#, fuzzy
+msgid "'%s' argument is not and cannot be converted to class \"dissimilarity\""
+msgstr ""
+"'x' n'est pas et ne peux pas être converti en un objet de classe "
+"\"dissimilarity\""
+
+#. R/ellipsoidhull.R: stop("'A' must be p x p  cov-matrix defining an ellipsoid")
+#: R/ellipsoidhull.R:0
+msgid "'A' must be p x p  cov-matrix defining an ellipsoid"
+msgstr "'A doit être une matrice de covariance p x p définissant un ellipsoïde"
+
+#. R/clusGap.R: stop("'B' has to be a positive integer")
+#: R/clusGap.R:0
+msgid "'B' has to be a positive integer"
+msgstr "'B' doit être un entier positif"
+
+#. R/plotpart.q: stop("'col.clus' argument should have length 4 when color is TRUE")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "'col.clus' argument should have length 4 when color is TRUE"
+msgstr "'col.clus' doit avoir une longueur de 4 lorsque color est TRUE"
+
+#. R/silhouette.R: stop("'dmatrix' is not a dissimilarity matrix compatible to 'x'")
+#. R/silhouette.R: stop("'dmatrix' is not a dissimilarity matrix compatible to 'x'")
+#: R/silhouette.R:0
+msgid "'dmatrix' is not a dissimilarity matrix compatible to 'x'"
+msgstr "'dmatrix' n'est pas une matrice de dissimilarité compatible avec 'x'"
+
+#. R/fanny.q: stop("'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1")
+#: R/fanny.q:0
+msgid "'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1"
+msgstr "'iniMem.p' doit être une matrice n * k non négative avec rowSums == 1"
+
+#. R/fanny.q: stop("'k' (number of clusters) must be in {1,2, .., n/2 -1}")
+#: R/fanny.q:0
+msgid "'k' (number of clusters) must be in {1,2, .., n/2 -1}"
+msgstr "'k' (nombre de groupes) doit être {1,2,…, n/2 -1}"
+
+#. R/fanny.q: stop("'m', a membership matrix, must be nonnegative with rowSums == 1")
+#: R/fanny.q:0
+msgid "'m', a membership matrix, must be nonnegative with rowSums == 1"
+msgstr ""
+"'m', une matrice d'appartenance, doit être non négative avec rowSums == 1"
+
+#. R/fanny.q: stop("'maxit' must be non-negative integer")
+#: R/fanny.q:0
+msgid "'maxit' must be non-negative integer"
+msgstr "'maxit' doit être un entier non négatif"
+
+#. R/pam.q: gettextf("'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d",     k, n)
+#: R/pam.q:0
+msgid ""
+"'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d"
+msgstr ""
+"'medoids' doit être NULL ou un vecteur de %d valeurs d'indice distinctes "
+"dans {1, 2, …, n}, n=%d"
+
+#. R/fanny.q: stop("'memb.exp' must be a finite number > 1")
+#: R/fanny.q:0
+msgid "'memb.exp' must be a finite number > 1"
+msgstr "'memb.exp' doit être un nombre fini > 1"
+
+#. R/mona.q: stop("'mona()' needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "'mona()' needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
+#. R/internal.R: stop("'n' argument must be >= 2")
+#. R/internal.R: stop("'n' argument must be >= 2")
+#: R/internal.R:0
+#, fuzzy
+msgid "'n' argument must be >= 2"
+msgstr "'n\" doit être >= 2"
+
+#. R/agnes.q: stop("'par.method' must be of length 1, 3, or 4")
+#. R/agnes.q: stop("'par.method' must be of length 1, 3, or 4")
+#: R/agnes.q:0
+msgid "'par.method' must be of length 1, 3, or 4"
+msgstr "'par.method' doit être de longueur 1, 3 ou 4"
+
+#. R/clara.q: stop("'samples' should be at least 1")
+#: R/clara.q:0
+msgid "'samples' should be at least 1"
+msgstr "'samples' doit valoir au moins 1"
+
+#. R/clara.q: gettextf("'sampsize' = %d should not be larger than the number of objects, %d", sampsize,     n)
+#: R/clara.q:0
+msgid "'sampsize' = %d should not be larger than the number of objects, %d"
+msgstr "'sampsize' = %d ne peut être plus grand que le nombre d'objets, %d"
+
+#. R/clara.q: gettextf("'sampsize' should be at least %d = max(2, 1+ number of clusters)", max(2,     k + 1))
+#: R/clara.q:0
+msgid "'sampsize' should be at least %d = max(2, 1+ number of clusters)"
+msgstr "'sampsize' doit être au minimum %d = max(2, 1+ nombre de groupes)"
+
+#. R/daisy.q: stop("'weights' must be of length p (or 1)")
+#: R/daisy.q:0
+msgid "'weights' must be of length p (or 1)"
+msgstr "'weights' doit être de longueur p (ou 1)"
+
+#. R/plotpart.q: stop("'x' is not a data matrix")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "'x' is not a data matrix"
+msgstr "x n'est pas une matrice de données"
+
+#. R/plotpart.q: stop("'x' is not numeric")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "'x' is not numeric"
+msgstr "x n'est pas numérique"
+
+#. R/mona.q: stop("'x' must be a matrix or data frame.")
+#: R/mona.q:0
+#, fuzzy
+msgid "'x' must be a matrix or data frame."
+msgstr "x doit être une matrice ou un tableau de données (data frame)."
+
+#. R/ellipsoidhull.R: stop("'x' must be numeric  n x p matrix")
+#: R/ellipsoidhull.R:0
+msgid "'x' must be numeric  n x p matrix"
+msgstr "'x' doit être une matrice numérique n x p"
+
+#. R/silhouette.R: stop("'x' must only have integer codes")
+#. R/silhouette.R: stop("'x' must only have integer codes")
+#: R/silhouette.R:0
+msgid "'x' must only have integer codes"
+msgstr "'x' doit n'avoir que des codes entiers"
+
+#. R/ellipsoidhull.R: gettext("** Warning: ** the algorithm did not terminate reliably!\n  (in the available number of iterations)",     domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+msgid ""
+"** Warning: ** the algorithm did not terminate reliably!\n"
+"  (in the available number of iterations)"
+msgstr ""
+
+#. R/ellipsoidhull.R: gettext("** Warning: ** the algorithm did not terminate reliably!\n  most probably because of collinear data",     domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+msgid ""
+"** Warning: ** the algorithm did not terminate reliably!\n"
+"  most probably because of collinear data"
+msgstr ""
+
+#. R/clusGap.R: gettextf(" --> Number of clusters (method '%s'): %d", method, nc, domain = "R-cluster")
+#: R/clusGap.R:0
+msgid "--> Number of clusters (method '%s'): %d"
+msgstr ""
+
+#. R/clusGap.R: gettextf(" --> Number of clusters (method '%s', SE.factor=%g): %d", method, SE.factor,     nc, domain = "R-cluster")
+#: R/clusGap.R:0
+msgid "--> Number of clusters (method '%s', SE.factor=%g): %d"
+msgstr ""
+
+#. R/plotpart.q: warning(">>>>> funny case in clusplot.default() -- please report!\n")
+#: R/plotpart.q:0
+msgid ">>>>> funny case in clusplot.default() -- please report!"
+msgstr ""
+">>>>> cas pathologique dans clusplot.default() -- veuillez envoyer un "
+"rapport de bug !"
+
+#. R/plothier.q: gettextf("Agglomerative Coefficient = %s", round(x$ac, digits = 2), domain = "R-cluster")
+#: R/plothier.q:0
+msgid "Agglomerative Coefficient = %s"
+msgstr ""
+
+#. R/agnes.q: gettext("Agglomerative coefficient: ", domain = "R-cluster")
+#. R/agnes.q: gettext("Agglomerative coefficient: ", domain = "R-cluster")
+#: R/agnes.q:0
+msgid "Agglomerative coefficient:"
+msgstr ""
+
+#. R/mona.q: stop("All variables must be binary (e.g., a factor with 2 levels, both present).")
+#: R/mona.q:0
+#, fuzzy
+msgid ""
+"All variables must be binary (e.g., a factor with 2 levels, both present)."
+msgstr ""
+"Toutes les variables doivent être binaires (c'est-à-dire, des variables "
+"facteur à 2 niveaux)."
+
+#. R/agnes.q: gettext("Available components:", domain = "R-cluster")
+#. R/agnes.q: gettext("Available components:", domain = "R-cluster")
+#. R/clara.q: gettext("Available components:", domain = "R-cluster")
+#. R/clara.q: gettext("Available components:", domain = "R-cluster")
+#. R/diana.q: gettext("Available components:", domain = "R-cluster")
+#. R/diana.q: gettext("Available components:", domain = "R-cluster")
+#. R/fanny.q: gettext("Available components:", domain = "R-cluster")
+#. R/fanny.q: gettext("Available components:", domain = "R-cluster")
+#. R/mona.q: gettext("Available components:", domain = "R-cluster")
+#. R/pam.q: gettext("Available components:", domain = "R-cluster")
+#. R/pam.q: gettext("Available components:", domain = "R-cluster")
+#: R/agnes.q:0 R/clara.q:0 R/diana.q:0 R/fanny.q:0 R/mona.q:0 R/pam.q:0
+msgid "Available components:"
+msgstr ""
+
+#. R/clara.q: gettext("Average silhouette width of best sample: ", domain = "R-cluster")
+#: R/clara.q:0
+msgid "Average silhouette width of best sample:"
+msgstr ""
+
+#. R/fanny.q: gettext("Average silhouette width of total data set:", domain = "R-cluster")
+#. R/pam.q: gettext("Average silhouette width of total data set:", domain = "R-cluster")
+#: R/fanny.q:0 R/pam.q:0
+msgid "Average silhouette width of total data set:"
+msgstr ""
+
+#. R/clara.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
+#. R/fanny.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
+#. R/pam.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
+#: R/clara.q:0 R/fanny.q:0 R/pam.q:0
+msgid "Average silhouette width per cluster:"
+msgstr ""
+
+#. R/silhouette.R: gettext("Average silhouette width:", domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Average silhouette width:"
+msgstr ""
+
+#. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
+#. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
+#. R/plothier.q: gettextf("Banner of %s", deparse(x$call), domain = "R-cluster")
+#: R/plothier.q:0
+msgid "Banner of %s"
+msgstr ""
+
+#. R/clara.q: gettext("Best sample:", domain = "R-cluster")
+#. R/clara.q: gettext("Best sample:", domain = "R-cluster")
+#: R/clara.q:0
+msgid "Best sample:"
+msgstr ""
+
+#. R/clusGap.R: gettextf("Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:", B, domain = "R-cluster")
+#: R/clusGap.R:0
+msgid "Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:"
+msgstr ""
+
+#. R/plotpart.q: gettextf("CLUSPLOT(%s)", deparse(substitute(x)))
+#: R/plotpart.q:0
+msgid "CLUSPLOT(%s)"
+msgstr ""
+
+#. R/agnes.q: gettext("Call: ", domain = "R-cluster")
+#. R/clara.q: gettext("Call: ", domain = "R-cluster")
+#: R/agnes.q:0 R/clara.q:0
+msgid "Call:"
+msgstr ""
+
+#. R/pam.q: stop("Cannot keep data when 'x' is a dissimilarity!")
+#: R/pam.q:0
+msgid "Cannot keep data when 'x' is a dissimilarity!"
+msgstr ""
+
+#. R/fanny.q: gettext("Closest hard clustering:", domain = "R-cluster")
+#: R/fanny.q:0
+msgid "Closest hard clustering:"
+msgstr ""
+
+#. R/silhouette.R: gettextf("Cluster sizes and average silhouette widths:", domain = "R-cluster")
+#. R/silhouette.R: gettext("Cluster sizes and average silhouette widths:", domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Cluster sizes and average silhouette widths:"
+msgstr ""
+
+#. R/silhouette.R: gettextf("Cluster sizes, ids = (%s), and average silhouette widths:", paste(x$codes,     collapse = ", "), domain = "R-cluster")
+#. R/silhouette.R: gettextf("Cluster sizes, ids = (%s), and average silhouette widths:", paste(x$codes,     collapse = ", "), domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Cluster sizes, ids = (%s), and average silhouette widths:"
+msgstr ""
+
+#. R/clara.q: gettext("Cluster sizes:", domain = "R-cluster")
+#: R/clara.q:0
+msgid "Cluster sizes:"
+msgstr ""
+
+#. R/clusGap.R: gettextf("Clustering Gap statistic [\"clusGap\"] from call:\n%s\nB=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\"\n",     paste(deparse(x$call), sep = "", collapse = ""), x$B, K, x$spaceH0, domain = "R-cluster")
+#: R/clusGap.R:0
+msgid ""
+"Clustering Gap statistic [\"clusGap\"] from call:\n"
+"%s\n"
+"B=%d simulated reference sets, k = 1..%d; spaceH0=\"%s\""
+msgstr ""
+
+#. R/clusGap.R: gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster")
+#: R/clusGap.R:0
+msgid "Clustering k = 1,2,..., K.max (= %d): .."
+msgstr ""
+
+#. R/clara.q: gettext("Clustering vector:", domain = "R-cluster")
+#. R/clara.q: gettext("Clustering vector:", domain = "R-cluster")
+#. R/pam.q: gettext("Clustering vector:", domain = "R-cluster")
+#: R/clara.q:0 R/pam.q:0
+#, fuzzy
+msgid "Clustering vector:"
+msgstr "méthode d'agrégation incorrecte"
+
+#. R/plotpart.q: gettext("Component 1", domain = "R-cluster")
+#: R/plotpart.q:0
+msgid "Component 1"
+msgstr ""
+
+#. R/plotpart.q: gettext("Component 2", domain = "R-cluster")
+#: R/plotpart.q:0
+msgid "Component 2"
+msgstr ""
+
+#. R/plothier.q: gettextf("Dendrogram of %s", paste(deparse(x$call), collapse = ""), domain = "R-cluster")
+#. R/plothier.q: gettextf("Dendrogram of %s", cl, domain = "R-cluster")
+#. R/plothier.q: gettextf("Dendrogram of %s", cl, domain = "R-cluster")
+#: R/plothier.q:0
+msgid "Dendrogram of %s"
+msgstr ""
+
+#. R/daisy.q: gettext("Dissimilarities:", domain = "R-cluster")
+#: R/daisy.q:0
+msgid "Dissimilarities:"
+msgstr ""
+
+#. R/clara.q: warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
+#: R/clara.q:0
+msgid ""
+"Distance computations with NAs: using correct instead of pre-2016 wrong "
+"formula. Use  'correct.d=FALSE'  to get previous results or set 'correct."
+"d=TRUE' explicitly to suppress this warning."
+msgstr ""
+
+#. R/plotpart.q: stop("Distances must be result of dist or a square matrix.")
+#: R/plotpart.q:0
+msgid "Distances must be result of dist or a square matrix."
+msgstr ""
+"Les distances doivent résulter d'un objet dist ou d'une matrice carrée."
+
+#. R/plothier.q: gettextf("Divisive Coefficient = %s", round(x$dc, digits = 2), domain = "R-cluster")
+#: R/plothier.q:0
+msgid "Divisive Coefficient = %s"
+msgstr ""
+
+#. R/diana.q: gettext("Divisive coefficient:", domain = "R-cluster")
+#. R/diana.q: gettext("Divisive coefficient:", domain = "R-cluster")
+#: R/diana.q:0
+msgid "Divisive coefficient:"
+msgstr ""
+
+#. R/clara.q: stop("Each of the random samples contains objects between which no distance can be computed.")
+#: R/clara.q:0
+msgid ""
+"Each of the random samples contains objects between which no distance can be "
+"computed."
+msgstr ""
+"Chacun des échantillons aléatoires contient des objets entre lesquels la "
+"distance ne peut être calculée."
+
+#. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+#, fuzzy
+msgid ""
+"Error in Fortran routine computing the spanning ellipsoid. Probably "
+"collinear data"
+msgstr ""
+"Erreur dans la routine Fortran pour obtenir l'ellipsoïde de dispersion,\n"
+" problème de rang??"
+
+#. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
+#: R/plotpart.q:0
+msgid ""
+"Error in Fortran routine for the spanning ellipsoid,\n"
+" rank problem??"
+msgstr ""
+"Erreur dans la routine Fortran pour obtenir l'ellipsoïde de dispersion,\n"
+" problème de rang??"
+
+#. R/fanny.q: gettextf("FANNY algorithm has not converged in 'maxit' = %d iterations", maxit)
+#: R/fanny.q:0
+msgid "FANNY algorithm has not converged in 'maxit' = %d iterations"
+msgstr "l'algorithme FANNY n'a pas convergé en 'maxit' = %d itérations"
+
+#. R/clara.q: gettextf("For each of the %d samples, at least one object was found which could not be assigned to a cluster (because of missing values).",     samples)
+#: R/clara.q:0
+msgid ""
+"For each of the %d samples, at least one object was found which could not be "
+"assigned to a cluster (because of missing values)."
+msgstr ""
+"Dans chacun des %d échantillons, au moins un objet ne peut être assigné à un "
+"groupe (parce qu'il contient des valeurs manquantes)"
+
+#. R/fanny.q: gettext("Fuzzy Clustering object of class 'fanny': ", domain = "R-cluster")
+#: R/fanny.q:0
+msgid "Fuzzy Clustering object of class 'fanny':"
+msgstr ""
+
+#. R/fanny.q: gettext("Fuzzyness coefficients:", domain = "R-cluster")
+#: R/fanny.q:0
+msgid "Fuzzyness coefficients:"
+msgstr ""
+
+#. R/plothier.q: gettext("Height", domain = "R-cluster")
+#. R/plothier.q: gettext("Height", domain = "R-cluster")
+#: R/plothier.q:0
+msgid "Height"
+msgstr ""
+
+#. R/agnes.q: gettext("Height (summary):", domain = "R-cluster")
+#: R/agnes.q:0
+msgid "Height (summary):"
+msgstr ""
+
+#. R/agnes.q: gettext("Height:", domain = "R-cluster")
+#. R/diana.q: gettext("Height:", domain = "R-cluster")
+#. R/diana.q: gettext("Height:", domain = "R-cluster")
+#: R/agnes.q:0 R/diana.q:0
+msgid "Height:"
+msgstr ""
+
+#. R/silhouette.R: gettext("Individual silhouette widths:", domain = "R-cluster")
+#: R/silhouette.R:0
+#, fuzzy
+msgid "Individual silhouette widths:"
+msgstr "objet 'silhouette' incorrect"
+
+#. R/pam.q: gettext("Isolated clusters:", domain = "R-cluster")
+#: R/pam.q:0
+msgid "Isolated clusters:"
+msgstr ""
+
+#. R/pam.q: gettext(" L*-clusters: ", domain = "R-cluster")
+#: R/pam.q:0
+msgid "L*-clusters:"
+msgstr ""
+
+#. R/pam.q: gettext("L-clusters: ", domain = "R-cluster")
+#: R/pam.q:0
+msgid "L-clusters:"
+msgstr ""
+
+#. R/plothier.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
+#. R/plothier.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
+#. R/plotpart.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
+#: R/plothier.q:0 R/plotpart.q:0
+msgid "Make a plot selection (or 0 to exit):"
+msgstr ""
+
+#. R/clara.q: gettext("Medoids:", domain = "R-cluster")
+#. R/clara.q: gettext("Medoids:", domain = "R-cluster")
+#. R/pam.q: gettext("Medoids:", domain = "R-cluster")
+#: R/clara.q:0 R/pam.q:0
+msgid "Medoids:"
+msgstr ""
+
+#. R/fanny.q: gettext("Membership coefficients (in percent, rounded):", domain = "R-cluster")
+#: R/fanny.q:0
+msgid "Membership coefficients (in percent, rounded):"
+msgstr ""
+
+#. R/agnes.q: gettext("Merge:", domain = "R-cluster")
+#. R/diana.q: gettext("Merge:", domain = "R-cluster")
+#. R/diana.q: gettext("Merge:", domain = "R-cluster")
+#: R/agnes.q:0 R/diana.q:0
+msgid "Merge:"
+msgstr ""
+
+#. R/daisy.q: gettext("Metric: ", domain = "R-cluster")
+#. R/daisy.q: gettext("Metric: ", domain = "R-cluster")
+#: R/daisy.q:0
+msgid "Metric:"
+msgstr ""
+
+#. R/plotpart.q: message("Missing values were displaced by the median of the corresponding variable(s)")
+#: R/plotpart.q:0
+msgid ""
+"Missing values were displaced by the median of the corresponding variable(s)"
+msgstr ""
+"Les valeurs manquantes ont été remplacées par la médiane de la ou des "
+"variables correspondantes"
+
+#. R/plotpart.q: stop("NA values are not allowed in clustering vector")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "NA values are not allowed in clustering vector"
+msgstr ""
+"Les valeurs manquantes NA ne sont pas autorisées dans le vecteur d'agrégation"
+
+#. R/plotpart.q: stop("NA values are not allowed in dist-like 'x'.")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "NA values are not allowed in dist-like 'x'."
+msgstr ""
+"des valeurs manquantes NA ne sont pas autorisées dans 'x' de type dist."
+
+#. R/agnes.q: stop("NA values in the dissimilarity matrix not allowed.")
+#. R/diana.q: stop("NA values in the dissimilarity matrix not allowed.")
+#. R/fanny.q: stop("NA values in the dissimilarity matrix not allowed.")
+#. R/pam.q: stop("NA values in the dissimilarity matrix not allowed.")
+#: R/agnes.q:0 R/diana.q:0 R/fanny.q:0 R/pam.q:0
+msgid "NA values in the dissimilarity matrix not allowed."
+msgstr ""
+"les valeurs manquantes (NA) ne sont pas admises dans la matrice de "
+"dissimilarité."
+
+#. R/daisy.q: gettext("NA values in the dissimilarity matrix!")
+#: R/daisy.q:0
+#, fuzzy
+msgid "NA values in the dissimilarity matrix!"
+msgstr ""
+"les valeurs manquantes (NA) ne sont pas admises dans la matrice de "
+"dissimilarité."
+
+#. R/silhouette.R: stop("Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'")
+#. R/silhouette.R: stop("Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'")
+#: R/silhouette.R:0
+msgid "Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'"
+msgstr ""
+"Il faut soit un objet 'dist' de dissimilarité ou une matrice de "
+"dissimilarité 'dmatrix'"
+
+#. R/pam.q: stop("No clustering performed, NA values in the computed dissimilarity matrix.")
+#: R/pam.q:0
+#, fuzzy
+msgid ""
+"No clustering performed, NA values in the computed dissimilarity matrix."
+msgstr ""
+"Aucune agrégation n'a été effectuée, NAs dans la matrice de dissimilarité "
+"calculée."
+
+#. R/agnes.q: stop("No clustering performed, NA values in the dissimilarity matrix.", "\n", sep = "")
+#. R/fanny.q: stop("No clustering performed, NA values in the dissimilarity matrix.")
+#: R/agnes.q:0 R/fanny.q:0
+#, fuzzy
+msgid "No clustering performed, NA values in the dissimilarity matrix."
+msgstr ""
+"Aucune agrégation n'est réalisée, présence de NAs dans la matrice de "
+"dissimilarité."
+
+#. R/diana.q: stop("No clustering performed, NA's in dissimilarity matrix.\n")
+#: R/diana.q:0
+msgid "No clustering performed, NA's in dissimilarity matrix."
+msgstr ""
+"Aucune agrégation n'est réalisée, NAs dans la matrice de dissimilarité."
+
+#. R/mona.q: stop("No clustering performed, a variable was found with all non missing values identical.")
+#: R/mona.q:0
+msgid ""
+"No clustering performed, a variable was found with all non missing values "
+"identical."
+msgstr ""
+"Aucune agrégation n'a été effectuée, une variable a toutes ses valeurs non "
+"manquantes."
+
+#. R/mona.q: stop("No clustering performed, all variables have at least one missing value.")
+#: R/mona.q:0
+msgid "No clustering performed, all variables have at least one missing value."
+msgstr ""
+"Aucune agrégation n'a été effectuée, toutes les variables ont au moins une "
+"valeur manquante."
+
+#. R/mona.q: stop("No clustering performed, an object was found with all values missing.")
+#: R/mona.q:0
+msgid "No clustering performed, an object was found with all values missing."
+msgstr ""
+"Aucune agrégation n'a été effectuée, un objet a toutes ses valeurs "
+"manquantes."
+
+#. R/mona.q: stop("No clustering performed, found variable with more than half values missing.")
+#: R/mona.q:0
+msgid ""
+"No clustering performed, found variable with more than half values missing."
+msgstr ""
+"Aucune agrégation n'a été effectuée, une variable a plus de la moitié de ses "
+"valeurs manquantes."
+
+#. R/silhouette.R: stop("No valid silhouette information (#{clusters} =? 1)")
+#: R/silhouette.R:0
+msgid "No valid silhouette information (#{clusters} =? 1)"
+msgstr "Aucune valeur de silhouette n'est correcte (#{groupes} =? 1)"
+
+#. R/pam.q: stop("Number of clusters 'k' must be in {1,2, .., n-1}; hence n >= 2")
+#: R/pam.q:0
+msgid "Number of clusters 'k' must be in {1,2, .., n-1}; hence n >= 2"
+msgstr "Le nombre de groupes 'k' doit être dans {1,2, …, n-1} ; où n >= 2"
+
+#. R/daisy.q: gettext("Number of objects:", domain = "R-cluster")
+#. R/daisy.q: gettext("Number of objects:", domain = "R-cluster")
+#: R/daisy.q:0
+msgid "Number of objects:"
+msgstr ""
+
+#. R/clara.q: gettext("Numerical information per cluster:", domain = "R-cluster")
+#. R/pam.q: gettext("Numerical information per cluster:", domain = "R-cluster")
+#: R/clara.q:0 R/pam.q:0
+msgid "Numerical information per cluster:"
+msgstr ""
+
+#. R/agnes.q: gettext("Object of class 'agnes' from call:", domain = "R-cluster")
+#: R/agnes.q:0
+msgid "Object of class 'agnes' from call:"
+msgstr ""
+
+#. R/clara.q: gettext("Object of class 'clara' from call:", domain = "R-cluster")
+#: R/clara.q:0
+msgid "Object of class 'clara' from call:"
+msgstr ""
+
+#. R/clara.q: gettext("Objective function:", domain = "R-cluster")
+#. R/clara.q: gettext("Objective function:", domain = "R-cluster")
+#. R/pam.q: gettext("Objective function:", domain = "R-cluster")
+#: R/clara.q:0 R/pam.q:0
+msgid "Objective function:"
+msgstr ""
+
+#. R/agnes.q: gettext("Order of objects:", domain = "R-cluster")
+#. R/agnes.q: gettext("Order of objects:", domain = "R-cluster")
+#. R/diana.q: gettext("Order of objects:", domain = "R-cluster")
+#. R/diana.q: gettext("Order of objects:", domain = "R-cluster")
+#. R/mona.q: gettext("Order of objects:", domain = "R-cluster")
+#: R/agnes.q:0 R/diana.q:0 R/mona.q:0
+msgid "Order of objects:"
+msgstr ""
+
+#. R/plothier.q: gettext("Separation step", domain = "R-cluster")
+#: R/plothier.q:0
+#, fuzzy
+msgid "Separation step"
+msgstr "itérations"
+
+#. R/mona.q: gettext("Separation step:", domain = "R-cluster")
+#: R/mona.q:0
+#, fuzzy
+msgid "Separation step:"
+msgstr "itérations"
+
+#. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
+#. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Silhouette of %d units in %d clusters from %s:"
+msgstr ""
+
+#. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters:", sum(csiz), k, domain = "R-cluster")
+#. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters:", sum(csiz), k, domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Silhouette of %d units in %d clusters:"
+msgstr ""
+
+#. R/silhouette.R: gettext("Silhouette plot", domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Silhouette plot"
+msgstr ""
+
+#. R/clara.q: gettext("Silhouette plot information for best sample:", domain = "R-cluster")
+#: R/clara.q:0
+msgid "Silhouette plot information for best sample:"
+msgstr ""
+
+#. R/fanny.q: gettext("Silhouette plot information:", domain = "R-cluster")
+#. R/pam.q: gettext("Silhouette plot information:", domain = "R-cluster")
+#: R/fanny.q:0 R/pam.q:0
+msgid "Silhouette plot information:"
+msgstr ""
+
+#. R/silhouette.R: gettextf("Silhouette plot of %s", sub("^FF", "", deparse(cll)), domain = "R-cluster")
+#: R/silhouette.R:0
+msgid "Silhouette plot of %s"
+msgstr ""
+
+#. R/plotpart.q: stop("The clustering vector is of incorrect length")
+#: R/plotpart.q:0
+msgid "The clustering vector is of incorrect length"
+msgstr "Le vecteur d'agrégation est de longueur incorrecte"
+
+#. R/clara.q: stop("The number of cluster should be at least 1 and at most n-1.")
+#: R/clara.q:0
+msgid "The number of cluster should be at least 1 and at most n-1."
+msgstr "Le nombre de groupes doit être compris entre 1 et n-1."
+
+#. R/plotpart.q: gettextf("These two components explain %s percent of the point variability.", round(100 *     var.dec, digits = 2))
+#: R/plotpart.q:0
+msgid "These two components explain %s percent of the point variability."
+msgstr ""
+
+#. R/daisy.q: gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster")
+#. R/daisy.q: gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster")
+#: R/daisy.q:0
+msgid "Types = %s"
+msgstr ""
+
+#. R/mona.q: gettext("Variable used:", domain = "R-cluster")
+#: R/mona.q:0
+msgid "Variable used:"
+msgstr ""
+
+#. R/daisy.q: gettext("Warning: ", domain = "R-cluster")
+#. R/daisy.q: gettext("Warning: ", domain = "R-cluster")
+#: R/daisy.q:0
+msgid "Warning:"
+msgstr ""
+
+#. R/ellipsoidhull.R: gettextf("algorithm possibly not converged in %d iterations", maxit)
+#: R/ellipsoidhull.R:0
+msgid "algorithm possibly not converged in %d iterations"
+msgstr "l'algorithme n'a vraisemblablement pas convergé en %d itérations"
+
+#. R/agnes.q: stop("ambiguous clustering method")
+#: R/agnes.q:0
+msgid "ambiguous clustering method"
+msgstr "méthode d'agrégation ambigüe"
+
+#. R/daisy.q: stop("at least one binary variable has more than 2 levels.")
+#: R/daisy.q:0
+msgid "at least one binary variable has more than 2 levels."
+msgstr "au moins une des variables binaires a plus de deux niveaux."
+
+#. R/daisy.q: warning("at least one binary variable has not 2 different levels.")
+#: R/daisy.q:0
+msgid "at least one binary variable has not 2 different levels."
+msgstr "au moins une variable binaire n'a pas deux nivea\tux."
+
+#. R/daisy.q: stop("at least one binary variable has values not in {0,1,NA}")
+#: R/daisy.q:0
+msgid "at least one binary variable has values not in {0,1,NA}"
+msgstr "au moins une variable binaire a des valeurs autres que {0,1,NA}"
+
+#. R/daisy.q: gettextf("binary variable(s) %s treated as interval scaled", pColl(which(tI)[iBin]))
+#: R/daisy.q:0
+msgid "binary variable(s) %s treated as interval scaled"
+msgstr ""
+"la ou les variables binaires %s sont traitées comme intervalles standardisés"
+
+#. R/plotpart.q: gettextf("cluster %d  has only one observation ..", i, domain = "R-cluster")
+#: R/plotpart.q:0
+msgid "cluster %d  has only one observation .."
+msgstr ""
+
+#. R/silhouette.R: stop("clustering 'x' and dissimilarity 'dist' are incompatible")
+#. R/silhouette.R: stop("clustering 'x' and dissimilarity 'dist' are incompatible")
+#: R/silhouette.R:0
+msgid "clustering 'x' and dissimilarity 'dist' are incompatible"
+msgstr ""
+"l'agrégation 'x' et la matrice de dissimilarité 'dist' sont incompatibles"
+
+#. R/ellipsoidhull.R: stop("computed some negative or all 0 probabilities")
+#: R/ellipsoidhull.R:0
+msgid "computed some negative or all 0 probabilities"
+msgstr "des probabilités négatives ou égales à zéro ont été calculées"
+
+#. R/clusGap.R: gettext("done", domain = "R-cluster")
+#: R/clusGap.R:0
+msgid "done"
+msgstr ""
+
+#. R/ellipsoidhull.R: gettextf("ellipsoid in %d dimensions:\n center = (%s); squared ave.radius d^2 = %s\n and shape matrix =\n",     d, paste(format(x$loc, digits = digits), collapse = " "), format(x$d2, digits = digits),     domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+msgid ""
+"ellipsoid in %d dimensions:\n"
+" center = (%s); squared ave.radius d^2 = %s\n"
+" and shape matrix ="
+msgstr ""
+
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+msgid "ellipsoid's area = %s"
+msgstr ""
+
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#: R/ellipsoidhull.R:0
+msgid "ellipsoid's volume = %s"
+msgstr ""
+
+#. R/ellipsoidhull.R: stop("ellipsoidPoints() not yet implemented for p >= 3 dim.")
+#: R/ellipsoidhull.R:0
+msgid "ellipsoidPoints() not yet implemented for p >= 3 dim."
+msgstr "ellipsoidPoints() non implémenté pour p >= 3 dim."
+
+#. R/pam.q: stop("error from .C(cl_pam, *): invalid medID's")
+#: R/pam.q:0
+msgid "error from .C(cl_pam, *): invalid medID's"
+msgstr "erreur depuis .C(cl_pam, *) : medIDs incorrects"
+
+#. R/silhouette.R: stop("full silhouette is only available for results of 'clara(*, keep.data = TRUE)'")
+#: R/silhouette.R:0
+msgid ""
+"full silhouette is only available for results of 'clara(*, keep.data = TRUE)'"
+msgstr ""
+"la silhouette complète n'est disponible que pour les résultats de 'clara(*, "
+"keep.data = TRUE)'"
+
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#. R/pam.q: gettextf("have %d observations, but not more than %d are allowed", n, nMax)
+#: R/pam.q:0
+msgid "have %d observations, but not more than %d are allowed"
+msgstr ""
+
+#. R/clusGapGen.R: stop("index has to be a function or a list of function")
+#: R/clusGapGen.R:0
+msgid "index has to be a function or a list of function"
+msgstr ""
+
+#. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
+#: R/daisy.q:0
+msgid "invalid %s; must be named list"
+msgstr "%s incorrect ; doit être une liste nommée"
+
+#. R/clara.q: stop("invalid 'correct.d' value")
+#: R/clara.q:0
+#, fuzzy
+msgid "invalid 'correct.d' value"
+msgstr "objet 'twins' incorrect"
+
+#. R/clara.q: gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop)
+#: R/clara.q:0
+#, fuzzy
+msgid "invalid 'jstop' from .C(cl_clara,.): %s"
+msgstr "'jstop' incorrect obtenu de .C(cl_clara,.) :"
+
+#. R/silhouette.R: stop("invalid 'silhouette' object")
+#: R/silhouette.R:0
+msgid "invalid 'silhouette' object"
+msgstr "objet 'silhouette' incorrect"
+
+#. R/clusGap.R: stop("invalid 'spaceH0':", spaceH0)
+#: R/clusGap.R:0
+#, fuzzy
+msgid "invalid 'spaceH0':"
+msgstr "type incorrect"
+
+#. R/coef.R: stop("invalid 'twins' object")
+#: R/coef.R:0
+msgid "invalid 'twins' object"
+msgstr "objet 'twins' incorrect"
+
+#. R/agnes.q: stop("invalid clustering method")
+#: R/agnes.q:0
+msgid "invalid clustering method"
+msgstr "méthode d'agrégation incorrecte"
+
+#. R/silhouette.R: stop("invalid partition object")
+#: R/silhouette.R:0
+msgid "invalid partition object"
+msgstr "objet de partitionnement incorrect"
+
+#. R/silhouette.R: stop("invalid silhouette structure")
+#: R/silhouette.R:0
+msgid "invalid silhouette structure"
+msgstr "structure de silhouette incorrecte"
+
+#. R/daisy.q: gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(ina)))
+#: R/daisy.q:0
+msgid "invalid type %s for column numbers %s"
+msgstr "type inadéquat %s pour les numéros de colonnes %s"
+
+#. R/fanny.q: gettextf("k_crisp (= %d) < k !!", x$k.crisp, domain = "R-cluster")
+#: R/fanny.q:0
+msgid "k_crisp (= %d) < k !!"
+msgstr ""
+
+#. R/mona.q: stop("mona() needs at least p >= 2 variables (in current implementation)")
+#: R/mona.q:0
+msgid "mona() needs at least p >= 2 variables (in current implementation)"
+msgstr ""
+
+#. R/agnes.q: stop("need at least 2 objects to cluster")
+#: R/agnes.q:0
+msgid "need at least 2 objects to cluster"
+msgstr "au moins deux objets sont nécessaires pour effectuer une agrégation"
+
+#. R/plotpart.q: stop("no diss nor data found for 'clusplot()' function")
+#: R/plotpart.q:0
+#, fuzzy
+msgid "no diss nor data found for 'clusplot()' function"
+msgstr "pas de diss ou de données trouvées pour clusplot()'"
+
+#. R/plotpart.q: gettextf("no diss nor data found, nor the original argument of %s", deparse(x$call))
+#: R/plotpart.q:0
+msgid "no diss nor data found, nor the original argument of %s"
+msgstr "pas de diss ou de données trouvées, même pas l'argument original de %s"
+
+#. R/ellipsoidhull.R: stop("no points without missing values")
+#: R/ellipsoidhull.R:0
+msgid "no points without missing values"
+msgstr "aucun point sans valeurs manquantes"
+
+#. R/ellipsoidhull.R: warning("omitting NAs")
+#: R/ellipsoidhull.R:0
+msgid "omitting NAs"
+msgstr "valeurs NAs ignorées"
+
+#. R/plotpart.q: stop("one or more objects contain only missing values")
+#: R/plotpart.q:0
+msgid "one or more objects contain only missing values"
+msgstr "un ou plusieurs objets ne contiennent que des valeurs manquantes"
+
+#. R/plotpart.q: stop("one or more variables contain only missing values")
+#: R/plotpart.q:0
+msgid "one or more variables contain only missing values"
+msgstr "une ou plusieurs variables ne contiennent que des valeurs manquantes"
+
+#. R/plotpart.q: gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster")
+#: R/plotpart.q:0
+msgid "span & rank2 : calling \"spannel\" .."
+msgstr ""
+
+#. R/fanny.q: warning("the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?")
+#: R/fanny.q:0
+msgid "the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?"
+msgstr ""
+"les appartenances sont toutes très proches de 1/k. Essayez en diminuant "
+"'memb.exp' ?"
+
+#. R/plotpart.q: stop("the square matrix is not symmetric.")
+#: R/plotpart.q:0
+msgid "the square matrix is not symmetric."
+msgstr "la matrice carrée n'est pas symétrique."
+
+#. R/clara.q: stop("when 'medoids.x' is FALSE, 'keep.data' must be too")
+#: R/clara.q:0
+msgid "when 'medoids.x' is FALSE, 'keep.data' must be too"
+msgstr "lorsque 'medoids.x' est FALSE, 'keep.data' doit l'être aussi"
+
+#. R/daisy.q: warning("with mixed variables, metric \"gower\" is used automatically")
+#: R/daisy.q:0
+msgid "with mixed variables, metric \"gower\" is used automatically"
+msgstr ""
+"avec des variables mélangées, la métrique \"gower\" est utilisée "
+"automatiquement"
+
+#. R/daisy.q: ngettext(x$n, "%d dissimilarity, summarized:", "%d dissimilarities, summarized:",     domain = "R-cluster")
+#: R/daisy.q:0
+msgid "%d dissimilarity, summarized:"
+msgid_plural "%d dissimilarities, summarized:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/clara.q: ngettext(nNA, "%d observation (%s) has *only* NAs --> omit them for clustering!",     "%d observations (%s ...) have *only* NAs --> omit them for clustering!", domain = "R-cluster")
+#: R/clara.q:0
+msgid "%d observation (%s) has *only* NAs --> omit them for clustering!"
+msgid_plural ""
+"%d observations (%s ...) have *only* NAs --> omit them for clustering!"
+msgstr[0] ""
+"%d observation (%s) n'a *que* des NAs --> ignorée pour le regroupement!"
+msgstr[1] ""
+"%d observations (%s) n'ont *que* des NAs --> ignorées pour le regroupement!"
+
+#. R/clara.q: ngettext(nNA, "Observation %s has *only* NAs --> omit it for clustering", "Observations %s have *only* NAs --> omit them for clustering!",     domain = "R-cluster")
+#: R/clara.q:0
+msgid "Observation %s has *only* NAs --> omit it for clustering"
+msgid_plural "Observations %s have *only* NAs --> omit them for clustering!"
+msgstr[0] "L'observation %s n'a *que* des NAs --> ignorée pour le regroupement"
+msgstr[1] ""
+"Les observations %s n'ont *que* des NAs --> ignorées pour le regroupement!"
+
+#. R/daisy.q: ngettext(sum(ilog), "setting 'logical' variable %s to type 'asymm'", "setting 'logical' variables %s to type 'asymm'",     domain = "R-cluster")
+#: R/daisy.q:0
+msgid "setting 'logical' variable %s to type 'asymm'"
+msgid_plural "setting 'logical' variables %s to type 'asymm'"
+msgstr[0] "la variable 'logical' %s est transformée en type 'asymm'"
+msgstr[1] "les variable 'logical' %s sont transformées en type 'asymm'"
+
+#~ msgid "NA-values in the dissimilarity matrix not allowed."
+#~ msgstr ""
+#~ "les valeurs manquantes (NA) ne sont pas autorisées dans la matrice de "
+#~ "dissimilarité."
+
+#~ msgid "NAdiss"
+#~ msgstr "NAdiss"
+
+#~ msgid "non.diss"
+#~ msgstr "non.diss"
+
+#~ msgid "no distance can be computed."
+#~ msgstr "aucune distance n'a été calculée."
+
+#~ msgid "For each of the"
+#~ msgstr "Pour chacun des"
+
+#~ msgid ""
+#~ "samples, at least one object was found which\n"
+#~ " could not"
+#~ msgstr ""
+#~ "échantillons, au moins un objet a été trouvé qui\n"
+#~ " ne peut"
+
+#~ msgid "be assigned to a cluster (because of missing values)."
+#~ msgstr "être assigné à un groupe (à cause de valeurs manquantes)."
+
+#~ msgid "invalid"
+#~ msgstr "incorrect"
+
+#~ msgid "type"
+#~ msgstr "type"
+
+#~ msgid "type$"
+#~ msgstr "type$"
+
+#~ msgid "binary variable(s)"
+#~ msgstr "variable(s) binaire(s)"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "has constant columns"
+#~ msgstr "a des colonnes constantes"
+
+#~ msgid "possibly not converged in"
+#~ msgstr "probablement pas de convergence en"
+
+#~ msgid "'medoids' must be NULL or vector of"
+#~ msgstr "'medoids' doit être NULL ou un vecteur de"
+
+#~ msgid "rank problem??"
+#~ msgstr "problème de rang ??"
+
+#~ msgid "'clara(*, keep.data = TRUE)'"
+#~ msgstr "'clara(*, keep.data = TRUE)'"

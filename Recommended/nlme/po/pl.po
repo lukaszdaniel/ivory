@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-137\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 18:52+0100\n"
+"POT-Creation-Date: 2019-04-30 08:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -32,36 +32,42 @@ msgstr "Nieznana klasa przestrzennej korelacji"
 msgid "First observation on an individual must have a dose"
 msgstr "Pierwsza obserwacja jednostki musi mieć zamknięcie"
 
-#: nlmefit.c:369
+#: nlmefit.c:370
 #, c-format
 msgid "Singular precision matrix in level %ld, block %ld"
 msgstr "Macierz pojedynczej precyzji w poziomie %ld, blok %ld"
 
-#: nlmefit.c:413
+#: nlmefit.c:414
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Osobliwość w 'backsolve' na poziomie %ld, blok %ld"
 
-#: nlmefit.c:557 nlmefit.c:737
+#: nlmefit.c:454
+#, c-format
+msgid ""
+"Too many parameters for finite-difference Hessian; npar = %d, nTot = %g."
+msgstr ""
+
+#: nlmefit.c:565 nlmefit.c:746
 msgid "Overfitted model!"
 msgstr "Zbyt dopasowany model!"
 
-#: nlmefit.c:583
+#: nlmefit.c:591
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "gradient analityczny nie jest dostępny z algorytmem macierzowym"
 
-#: nlmefit.c:606
+#: nlmefit.c:614
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
-#: nlmefit.c:898
+#: nlmefit.c:907
 #, c-format
 msgid "Unable to form eigenvalue-eigenvector decomposition [RS(.) ierr = %d]"
 msgstr ""
 "Nie można uformować dekompozycji wartość własna-wektor własny [RS(.) ierr = "
 "%d]"
 
-#: nlmefit.c:930
+#: nlmefit.c:939
 #, c-format
 msgid ""
 "Unable to form Cholesky decomposition: the leading minor of order %d is not "
@@ -70,6 +76,6 @@ msgstr ""
 "Nie można uformować dekompozycji Cholesky'ego: wiodący minor rzędu %d nie "
 "jest dodatnio określony."
 
-#: nlmefit.c:962
+#: nlmefit.c:971
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Jak na razie nie została napisany przypadek dla tej złożonej symetrii"

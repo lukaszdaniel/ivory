@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-137\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"Project-Id-Version: nlme 3.1-139\n"
+"POT-Creation-Date: 2019-04-30 08:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,7 +175,6 @@ msgstr ""
 #: R/gnls.R: 0
 #: R/lmList.R: 0
 #: R/lmList.R: 0
-#: R/lmList.R: 0
 #: R/lme.R: 0
 #: R/lme.R: 0
 #: R/lme.R: 0
@@ -193,7 +192,6 @@ msgstr ""
 #: R/varFunc.R: 0
 #. R/gls.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls"))
 #. R/gnls.R: gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lme.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme"))
@@ -443,6 +441,13 @@ msgid "'asTable()' function cannot be used with multilevel grouped data"
 msgstr ""
 
 
+#: R/lmList.R: 0
+#. R/lmList.R: message("'data' argument not used, but taken from groupedData object")
+
+msgid "'data' argument not used, but taken from groupedData object"
+msgstr ""
+
+
 #: R/newMethods.R: 0
 #. R/newMethods.R: stop("'data' argument passed to \"data.frame\" method for 'getGroups()' does not make sense")
 
@@ -461,6 +466,13 @@ msgstr ""
 #. R/simulate.R: stop("'data' must inherit from \"groupedData\" class if 'random' does not define groups")
 
 msgid "'data' must inherit from \"groupedData\" class if 'random' does not define groups"
+msgstr ""
+
+
+#: R/lmList.R: 0
+#. R/lmList.R: stop("'form' must be a formula")
+
+msgid "'form' must be a formula"
 msgstr ""
 
 
@@ -1416,7 +1428,6 @@ msgstr ""
 
 
 #: R/lme.R: 0
-#. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 
 msgid "Within-group standard error:"
@@ -2039,7 +2050,7 @@ msgstr ""
 
 #: R/lme.R: 0
 #: R/nlme.R: 0
-#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
+#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q, domain = "R-nlme")
 #. R/nlme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
 
 msgid "fewer observations than random effects in all level %s groups"
@@ -2049,9 +2060,15 @@ msgstr ""
 #: R/groupedData.R: 0
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()"))
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()"))
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()"))
 
 msgid "first argument passed to %s function must be a two-sided formula"
+msgstr ""
+
+
+#: R/groupedData.R: 0
+#. R/groupedData.R: stop("first argument to 'nmGroupedData' must be a two-sided formula")
+
+msgid "first argument to 'nmGroupedData' must be a two-sided formula"
 msgstr ""
 
 
@@ -2762,6 +2779,13 @@ msgstr ""
 #. R/groupedData.R: stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
 
 msgid "second argument passed to 'groupedData()' function must inherit from \"data.frame\""
+msgstr ""
+
+
+#: R/groupedData.R: 0
+#. R/groupedData.R: stop("single group not supported -- use groupedData()")
+
+msgid "single group not supported -- use groupedData()"
 msgstr ""
 
 

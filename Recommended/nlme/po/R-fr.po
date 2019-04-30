@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-03-16 18:52\n"
+"POT-Creation-Date: 2019-04-30 08:05\n"
 "PO-Revision-Date: 2012-10-03 16:45+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -143,7 +143,6 @@ msgstr ""
 
 #. R/gls.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls"))
 #. R/gnls.R: gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
 #. R/lme.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme"))
@@ -365,6 +364,12 @@ msgid "'asTable()' function cannot be used with multilevel grouped data"
 msgstr ""
 "'asTable' ne peut être utilisé avec des données à groupements multiniveaux"
 
+#. R/lmList.R: message("'data' argument not used, but taken from groupedData object")
+#: R/lmList.R:0
+#, fuzzy
+msgid "'data' argument not used, but taken from groupedData object"
+msgstr "le second argument doit être un objet 'groupedData'"
+
 #. R/newMethods.R: stop("'data' argument passed to \"data.frame\" method for 'getGroups()' does not make sense")
 #: R/newMethods.R:0
 #, fuzzy
@@ -388,6 +393,11 @@ msgid ""
 msgstr ""
 "'data' doit hériter de la classe \"groupedData\" si 'random' ne définit pas "
 "les groupes"
+
+#. R/lmList.R: stop("'form' must be a formula")
+#: R/lmList.R:0
+msgid "'form' must be a formula"
+msgstr "'form' doit être une formule"
 
 #. R/lme.R: warning("'lme.lmList()' function will redefine 'data' argument")
 #: R/lme.R:0
@@ -1085,7 +1095,6 @@ msgstr ""
 msgid "Variance function:"
 msgstr ""
 
-#. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 #: R/lme.R:0
 msgid "Within-group standard error:"
@@ -1620,7 +1629,7 @@ msgid ""
 msgstr ""
 "les éléments dans 'object' doivent être des formules ou des objets \"pdMat\""
 
-#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
+#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q, domain = "R-nlme")
 #. R/nlme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
 #: R/lme.R:0 R/nlme.R:0
 msgid "fewer observations than random effects in all level %s groups"
@@ -1630,12 +1639,17 @@ msgstr ""
 
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()"))
 #. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()"))
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()"))
 #: R/groupedData.R:0
 #, fuzzy
 msgid "first argument passed to %s function must be a two-sided formula"
 msgstr ""
 "le premier argument de 'nfGroupedData' doit être une formule à deux membres"
+
+#. R/groupedData.R: stop("first argument to 'nmGroupedData' must be a two-sided formula")
+#: R/groupedData.R:0
+msgid "first argument to 'nmGroupedData' must be a two-sided formula"
+msgstr ""
+"le premier argument de 'nmGroupedData' doit être une formule à deux membres"
 
 #. R/lme.R: stop("first model has a different response from the rest")
 #: R/lme.R:0
@@ -2259,6 +2273,11 @@ msgid ""
 "frame\""
 msgstr "le second argument de 'groupedData' doit hériter d'un data.frame"
 
+#. R/groupedData.R: stop("single group not supported -- use groupedData()")
+#: R/groupedData.R:0
+msgid "single group not supported -- use groupedData()"
+msgstr ""
+
 #. R/lme.R: warning("some fitted objects deleted because response differs from the first model")
 #: R/lme.R:0
 msgid ""
@@ -2518,9 +2537,6 @@ msgstr[1] "les termes %s sont incohérents"
 #~ msgid "nonexistent group requested in 'subset'"
 #~ msgstr "groupe inexistant mais requis dans 'subset'"
 
-#~ msgid "second argument must be a groupedData object"
-#~ msgstr "le second argument doit être un objet 'groupedData'"
-
 #~ msgid "cannot extract the matrix from an uninitialized object"
 #~ msgstr "impossible d'extraire la matrice d'un objet non initialisé"
 
@@ -2775,11 +2791,6 @@ msgstr[1] "les termes %s sont incohérents"
 #~ "la covariable doit avoir des valeurs uniques pour les intragroupes des "
 #~ "objets \"corARMA\""
 
-#~ msgid "first argument to 'nmGroupedData' must be a two-sided formula"
-#~ msgstr ""
-#~ "le premier argument de 'nmGroupedData' doit être une formule à deux "
-#~ "membres"
-
 #~ msgid "covariate must have a level attribute when 'idLabels' is a formula"
 #~ msgstr ""
 #~ "la covariable doit avoir un attribut 'level', lorsque 'idLabels' est une "
@@ -2951,9 +2962,6 @@ msgstr[1] "les termes %s sont incohérents"
 
 #~ msgid "'which' must be between 1 and %d"
 #~ msgstr "'which' doit être compris entre 1 et %d"
-
-#~ msgid "'form' must be a formula"
-#~ msgstr "'form' doit être une formule"
 
 #~ msgid "object must inherit from \"data.frame\""
 #~ msgstr "l'objet doit hériter de la classe \"data.frame\""

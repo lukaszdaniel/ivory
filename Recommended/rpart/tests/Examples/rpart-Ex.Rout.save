@@ -1,7 +1,14 @@
 
-R version 3.0.0 alpha (2013-03-18 r62313) -- "Unsuffered Consequences"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin12.3.0 (64-bit)
+Ivory Under development (unstable) (2019-04-28 r1115) -- "Internationalized Version of R"
+Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2019-04-28 r76433) -- "Unsuffered Consequences"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+Ivory is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -256,7 +263,7 @@ node number: 22
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D z.auto <- rpart(Mileage ~ Weight, car.test.frame)
 > ##D post(z.auto, file = "")   # display tree on active device
 > ##D    # now construct postscript version on file "pretty.ps"
@@ -264,7 +271,7 @@ node number: 22
 > ##D post(z.auto, file = "pretty.ps", title = " ")
 > ##D z.hp <- rpart(Mileage ~ Weight + HP, car.test.frame)
 > ##D post(z.hp)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -815,7 +822,7 @@ n= 60
 > ### ** Examples
 > 
 > require(survival)
-Loading required package: survival
+Loading required package: ‘survival’
 > rpart(Surv(pgtime, pgstat) ~ ., stagec)
 n= 146 
 
@@ -1066,8 +1073,8 @@ n= 60
 > ###
 > cleanEx()
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.674 0.029 0.712 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.797 0.04 0.838 0 0 
 > grDevices::dev.off()
 null device 
           1 

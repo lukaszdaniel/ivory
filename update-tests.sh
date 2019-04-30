@@ -148,6 +148,7 @@ if [[ "$1" == "rpart" ]] || [[ "$1" == "all" ]]; then
 `$cmd	rpart.Rcheck/tests/cptest.Rout		../../$RECIVORY/rpart/tests/cptest.Rout.save`
 `$cmd	rpart.Rcheck/tests/priors.Rout		../../$RECIVORY/rpart/tests/priors.Rout.save`
 `$cmd	rpart.Rcheck/tests/rescale.Rout		../../$RECIVORY/rpart/tests/rescale.Rout.save`
+`$cmd	rpart.Rcheck/rpart-Ex.Rout		../../$RECIVORY/rpart/tests/Examples/rpart-Ex.Rout.save`
 `$cmd	rpart.Rcheck/tests/testall.Rout		../../$RECIVORY/rpart/tests/testall.Rout.save`
 `$cmd	rpart.Rcheck/tests/treble2.Rout		../../$RECIVORY/rpart/tests/treble2.Rout.save`
 `$cmd	rpart.Rcheck/tests/treble3.Rout		../../$RECIVORY/rpart/tests/treble3.Rout.save`
@@ -225,6 +226,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/strata2.Rout		../../$RECIVORY/survival/tests/strata2.Rout.save`
 `$cmd	survival.Rcheck/tests/stratatest.Rout		../../$RECIVORY/survival/tests/stratatest.Rout.save`
 `$cmd	survival.Rcheck/tests/summary_survfit.Rout	../../$RECIVORY/survival/tests/summary_survfit.Rout.save`
+`$cmd	survival.Rcheck/tests/survfit1.Rout		../../$RECIVORY/survival/tests/survfit1.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit2.Rout		../../$RECIVORY/survival/tests/survfit2.Rout.save`
 `$cmd	survival.Rcheck/tests/survreg2.Rout		../../$RECIVORY/survival/tests/survreg2.Rout.save`
 `$cmd	survival.Rcheck/tests/surv.Rout			../../$RECIVORY/survival/tests/surv.Rout.save`
@@ -240,7 +242,8 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/tmerge.Rout		../../$RECIVORY/survival/tests/tmerge.Rout.save`
 `$cmd	survival.Rcheck/tests/tt.Rout			../../$RECIVORY/survival/tests/tt.Rout.save`
 `$cmd	survival.Rcheck/tests/turnbull.Rout		../../$RECIVORY/survival/tests/turnbull.Rout.save`
-#`$cmd	survival.Rcheck/tests/yates0.Rout		../../$RECIVORY/survival/tests/yates0.Rout.save`
+`$cmd	survival.Rcheck/tests/yates0.Rout		../../$RECIVORY/survival/tests/yates0.Rout.save`
+`$cmd	survival.Rcheck/tests/yates1.Rout		../../$RECIVORY/survival/tests/yates1.Rout.save`
 #`$cmd	survival.Rcheck/tests/rounding.Rout		../../$RECIVORY/survival/tests/rounding.Rout.save`
 #`$cmd	survival.Rcheck/tests/mrtest.Rout		../../$RECIVORY/survival/tests/mrtest.Rout.save`
 fi;

@@ -80,20 +80,32 @@ formula.character <- function(x, env = parent.frame(), ...)
 ## Active version helping to move towards future version:
 formula.character <- function(x, env = parent.frame(), ...)
 {
-    ## Next lines upto 'ff <- str2lang(x)' instead of  'ff <- str2expression(x)[[1L]]'
-    if(length(x) > 1L) {
-        .Deprecated(msg=
+    ff <- if(length(x) > 1L) {
+              .Deprecated(msg=
  gettext("Using formula(x) is deprecated when x is a character vector of length > 1. Consider 'formula(paste(x, collapse = \" \"))' instead.", domain = "R-stats"))
-        x <- paste(x, collapse = " ")
-    }
-    ff <- str2lang(x)
-    if(!(is.call(ff) && is.symbol(c. <- ff[[1L]]) && c. == quote(`~`))) {
-        msg <- gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-        if(is.call(ff) && is.symbol(c. <- ff[[1L]]) && c. == quote(`=`)) {
-            .Deprecated(msg = c(msg, gettext(" *assignment* is deprecated", domain = "R-stats")))
-            ff <- ff[[3L]] # the RHS of "v = <form>" (pkgs 'GeNetIt', 'KMgene')
-        }
-        else stop(msg, domain=NA)
+              str2expression(x)[[1L]]
+          } else {
+              str2lang(x)
+          }
+    if(!is.call(ff))
+        stop(gettextf("invalid formula \"%s\": not a call", deparse2(x)), domain="R-stats")
+    ## else
+    if(is.symbol(c. <- ff[[1L]]) && c. == quote(`~`)) {
+        ## perfect
+    } else {
+        if(is.symbol(c.)) { ## back compatibility
+            ff <- if(c. == quote(`=`)) {
+                      .Deprecated(msg = gettextf(
+				"invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats"))
+                      ff[[3L]] # RHS of "v = <form>" (pkgs 'GeNetIt', 'KMgene')
+                  } else if(c. == quote(`(`) || c. == quote(`{`)) {
+                      .Deprecated(msg = gettextf(
+			"invalid formula %s: extraneous call to `%s` is deprecated",
+			deparse2(x), as.character(c.), domain = "R-stats"))
+                      eval(ff)
+                  }
+        } else
+            stop(gettextf("invalid formula %s", deparse2(x)), domain = "R-stats")
     }
     class(ff) <- "formula"
     environment(ff) <- env

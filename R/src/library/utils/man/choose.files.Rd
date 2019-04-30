@@ -12,7 +12,7 @@
 interactively.
 }
 \usage{
-choose.files(default = "", caption = "Select files",
+choose.files(default = "", caption = gettext("Select files", domain = "R-utils"),
              multi = TRUE, filters = Filters,
              index = nrow(Filters))
 
