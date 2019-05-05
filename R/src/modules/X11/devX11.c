@@ -2812,10 +2812,6 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 			      first newpage does set whitecolor
 			      if par("bg") is not transparent */
 
-#if BUG
-    R_ProcessX11Events((void*) NULL);
-#endif
-
     return TRUE;
 }
 
@@ -3118,6 +3114,10 @@ Rf_addX11Device(const char *display, double width, double height, double ps,
 	}
 	dd = GEcreateDevDesc(dev);
 	GEaddDevice2(dd, devname);
+
+	/* Requires dd to be set up first. */
+	R_ProcessX11Events((void*) NULL);
+
     } END_SUSPEND_INTERRUPTS;
 }
 

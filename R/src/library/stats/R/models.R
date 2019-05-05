@@ -45,16 +45,14 @@ formula.terms <- function(x, ...) {
 }
 
 DF2formula <- function(x, env = parent.frame()) {
-    nm <- unlist(lapply(names(x), as.name))
-    if (length(nm) > 1L) {
-        rhs <- nm[-1L]
-        lhs <- nm[1L]
-    } else if (length(nm) == 1L) {
-        rhs <- nm[1L]
-        lhs <- NULL
-    } else stop("cannot create a formula from a zero-column data frame")
-    ff <- str2lang(paste(lhs, paste(rhs, collapse = "+"), sep = "~"))
-    ff <- eval(ff)
+    nm <- lapply(names(x), as.name)
+    mkRHS <- function(nms) Reduce(function(x, y) call("+", x, y), nms)
+    ff <- if (length(nm) > 1L)
+              call("~", nm[[1L]], mkRHS(nm[-1L]))
+          else if (length(nm) == 1L)
+              call("~", mkRHS(nm[1L]))
+          else stop("cannot create a formula from a zero-column data frame")
+    class(ff) <- "formula" # was ff <- eval(ff)
     environment(ff) <- env
     ff
 }
@@ -71,7 +69,7 @@ formula.character <- function(x, env = parent.frame(), ...)
 {
     ff <- str2lang(x)
     if(!(is.call(ff) && is.symbol(c. <- ff[[1L]]) && c. == quote(`~`)))
-        stop(gettextf("invalid formula: %s", deparse(x, 500L)[[1]]), domain="R-stats")
+        stop(gettextf("invalid formula: %s", deparse2(x)), domain="R-stats")
     class(ff) <- "formula"
     environment(ff) <- env
     ff

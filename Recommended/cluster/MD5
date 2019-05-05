@@ -54,7 +54,7 @@ aa9c2fe350e02eb23f211a44e40c8a90 *man/dissimilarity.object.Rd
 cafab0f87fd2443f14e672d325243990 *man/partition.object.Rd
 8de82c7d42bd4a27c27c25462ae2a307 *PORTING
 5c39297262dda844d10fd3109a36e2de *ChangeLog
-ca647c68b10acd71e270c512f7fb28c7 *DESCRIPTION
+f3179ab6c10cdfe21763dba64b4b8056 *DESCRIPTION
 5902a015a750752f796122f4f9c025d0 *po/R-fr.po
 2e507f09aec698577d35182d76181f57 *po/R-ko.po
 91e88226a6a569adb20078f3c83121ea *po/R-cluster.pot
@@ -95,7 +95,7 @@ f21e11b8d426840d72a35aeb1c9f2c5c *tests/clara-NAs.R
 bfd6bb81ad19948dc6e91d46ab5ff30f *tests/ellipsoid-ex.R
 9246795a7a0042f200c7f74a33dce902 *tests/pam.Rout.save
 255c65bce3503b3b2ffe0ab0e2dcc2bc *tests/withAutoprint.R
-f172f6cc125bc97b0bf75539d8830dd2 *tests/mona.Rout.save
+7d747c9d8c5805b20e851ab381c2b555 *tests/mona.Rout.save
 477cd7fd12117a6cbcdfc9d5944fbd39 *tests/silhouette-default.R
 52b341bc06eb5692a73dec2be2cd7e5a *tests/fanny-ex.R
 d9cdce1776e344a6f4f2574cee6ef487 *tests/sweep-ex.R
@@ -137,11 +137,11 @@ d1b66d40049abd7161731a0a02e1a381 *src/init.c
 073a7eb5d16aa0f452d85e3de14a0f03 *src/daisy.f
 daaf2cbb0eaadf52ad912f273365484e *src/pam.c
 f42f05132aaf001ddd333e3e109692e0 *src/spannel.c
-068aa8f2dad76a3adafbdf2848986139 *src/mona.c
+93dff342c334fec621bda03dd76abc6f *src/mona.c
 cd894c93517e6850d027ff5d7c0dd2e6 *src/twins.c
 6f11dc74b1636e3ac848563d570f0030 *src/sildist.c
 5b3506c5fd25a19d8a2eda13f208dd93 *src/localization.h
 23cea00d2feab57a92e8c2393c7f4b8a *src/ind_2.h
 8a153309d9fa9da52f698ab05c151836 *src/clara.c
-3fbfeeb03e11feed8af596a683e17def *src/cluster.h
-64bde82168da2dd316d4937c852ca47b *build/partial.rdb
+f95e7862c55c5372c25160bb556bd07a *src/cluster.h
+7f3f4f98c4bce1782c57d3ef74aace1c *build/partial.rdb

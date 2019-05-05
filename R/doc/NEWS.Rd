@@ -12,6 +12,10 @@
       \pkg{tools}) now can check for \emph{specific} error or warning
       classes via new optional 2nd argument \code{classes} (which is not
       back compatible with previous use of unnamed 2nd arg.)
+
+      \item \code{Df2formula()}, the utility for the data frame method of
+      \code{formula()}, now works without parsing and explicit evaluation,
+      starting from Suharto Anggono's suggestion in \PR{17555}.
     }
   }
 
@@ -38,6 +42,9 @@
       is deprecated now.  Such use has been rare, and has \sQuote{worked}
       as expected in some cases only.  In other cases, wrong \code{x} have
       silently been truncated, not detecting previous errors.
+
+      \item Long-standing issue where the X11 device could lose events
+      shortly after startup has been addressed \PR{16702}.
     }
   }
 }
@@ -47,6 +54,9 @@
     \itemize{
       \item On Windows, GUI package installation via \code{menuInstallPkgs()}
       works again, thanks to Len Weil's and Duncan Murdoch's \PR{17556}.
+
+      \item \command{R CMD check} on \code{data()} fixing \PR{17558}
+      thanks to Duncan Murdoch.
     }
   }
 }

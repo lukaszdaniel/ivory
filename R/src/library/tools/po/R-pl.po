@@ -1674,14 +1674,12 @@ msgstr "Pliki w katalogu 'Vignettes' ale brak plików w 'inst/doc':"
 #. R/check.R: gettext("Files in the 'vignettes' directory newer than all files in 'inst/doc':",     domain = "R-tools")
 #: R/check.R:0
 msgid "Files in the 'vignettes' directory newer than all files in 'inst/doc':"
-msgstr ""
-"Pliki w katalogu 'Vignettes' są nowsze niż wszystkie pliki w 'inst/doc':"
+msgstr "Pliki w katalogu 'Vignettes' nowsze niż wszystkie pliki w 'inst/doc':"
 
 #. R/check.R: gettext("Files in the 'vignettes' directory newer than some files in 'inst/doc':",     domain = "R-tools")
 #: R/check.R:0
 msgid "Files in the 'vignettes' directory newer than some files in 'inst/doc':"
-msgstr ""
-"Pliki w katalogu 'Vignettes' są nowsze niż niektóre pliki w 'inst/doc':"
+msgstr "Pliki w katalogu 'Vignettes' nowsze niż niektóre pliki w 'inst/doc':"
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
 #: R/Vignettes.R:0

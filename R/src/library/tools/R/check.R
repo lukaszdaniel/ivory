@@ -364,7 +364,7 @@ add_dummies <- function(dir, Log)
     ## .get_S3_generics_as_seen_from_package needs utils,graphics,stats
     ##  Used by checkDocStyle (which needs the generic visible) and checkS3methods.
     R_runR2 <-
-        status <- if(WINDOWS) {
+        if(WINDOWS) {
             function(cmd,
                      env = "R_DEFAULT_PACKAGES=utils,grDevices,graphics,stats",
                      timeout = 0)
@@ -498,7 +498,7 @@ add_dummies <- function(dir, Log)
 
         if (!extra_arch) {
             if(dir.exists("build")) check_build()
-            db <- check_meta()  # Check DESCRIPTION meta-information.
+            check_meta()  # Check DESCRIPTION meta-information.
             check_top_level()
             check_detritus()
             check_indices()
@@ -908,7 +908,7 @@ add_dummies <- function(dir, Log)
             ## and there might be stale Authors and Maintainer fields
             yorig <- db[c("Author", "Maintainer")]
             if(check_incoming && any(!is.na(yorig))) {
-                enc <- db["Encoding"]
+                ## enc <- db["Encoding"]
                 aar <- utils:::.read_authors_at_R_field(aar)
                 y <- c(Author =
                        utils:::.format_authors_at_R_field_for_author(aar),
@@ -1048,8 +1048,9 @@ add_dummies <- function(dir, Log)
             }
         }
         if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
-        return(db)
-    }
+        ## return (<never used in caller>):
+        db
+    } # check_meta()
 
     check_build <- function()
     {
@@ -3100,7 +3101,7 @@ add_dummies <- function(dir, Log)
                       sprintf("tools:::check_compiled_code(\"%s\")",
                               file.path(libdir, pkgname)))
         out <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
-        if(length(out) == 1L && startsWith(out,"Note:")) {
+        if(length(out) == 1L && startsWith(out, "Note:")) {
             ## This will be a note about symbols.rds not being available
             if(!is_base_pkg) {
                 noteLog(Log)
