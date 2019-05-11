@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-05-11 21:02+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -40,17 +40,21 @@ msgstr ""
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "qunsari() 내에 확률이 [0,1] 범위외입니다"
 
-#: approx.c:108
+#: approx.c:109
 msgid "approx(): invalid f value"
 msgstr "approx(): f 값이 잘못되었습니다 "
 
-#: approx.c:111
+#: approx.c:112
 msgid "approx(): invalid interpolation method"
 msgstr "approx(): 잘못된 보간법입니다 "
 
-#: approx.c:117
+#: approx.c:119
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx(): NA 값들을 보간하려고 했습니다 "
+
+#: approx.c:123
+msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
+msgstr ""
 
 #: arima.c:77 arima.c:188 arima.c:373 arima.c:604 optim.c:33
 msgid "invalid argument type"

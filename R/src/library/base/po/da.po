@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r-2-15-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 18:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:01+0200\n"
 "PO-Revision-Date: 2011-11-29 21:34+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -9990,7 +9990,7 @@ msgstr ""
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
 
-#: src/modules/X11/devX11.c:3117
+#: src/modules/X11/devX11.c:3113
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "kan ikke tilføje menupunkt (%s)"

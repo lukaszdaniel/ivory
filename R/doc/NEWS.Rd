@@ -16,6 +16,10 @@
       \item \code{Df2formula()}, the utility for the data frame method of
       \code{formula()}, now works without parsing and explicit evaluation,
       starting from Suharto Anggono's suggestion in \PR{17555}.
+
+      \item \code{approxfun()} and \code{approx()} gain option \code{na.rm
+	= TRUE}.  If set to false, missing y values now propagate into
+      interpolated values.
     }
   }
 
@@ -60,6 +64,13 @@
 
       \item \code{quasi(*, variance = list(..))} now works more
       efficiently, and should work in all cases fixing \PR{17560}.
+      Further, \code{quasi(var = mu(1-mu))} and \code{quasi(var = "mu ^ 3")}
+      now work, and \code{quasi(variance = "log(mu)")} now gives a correct
+      error message.
+
+      \item Creation of lazy loading database during package installation is
+      again robust to Rprofile changing the current working directory
+      (\PR{17559}).
     }
   }
 }

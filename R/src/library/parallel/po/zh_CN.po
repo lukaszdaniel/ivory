@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:49+0100\n"
+"POT-Creation-Date: 2019-05-11 21:02+0200\n"
 "PO-Revision-Date: 2015-01-17 15:46+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -89,7 +89,7 @@ msgstr "有没可以接到主进程的管道"
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "发送的内容必须是原始的，如果需要的话请用serialize（）"
 
-#: fork.c:697 fork.c:705 fork.c:1106
+#: fork.c:697 fork.c:705 fork.c:1118
 msgid "write error, closing pipe to the master"
 msgstr "书写错误，请关闭通往主进程的管道"
 
@@ -144,45 +144,35 @@ msgstr ""
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.c:1088
+#: fork.c:1087
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill失败"
 
-#: fork.c:1096
-#, fuzzy, c-format
-msgid "child %d: 'mcexit' called\n"
-msgstr "mcexit失败"
-
-#: fork.c:1098
+#: fork.c:1100
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit只能用于子进程"
 
-#: fork.c:1110
+#: fork.c:1122
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.c:1117
-#, fuzzy, c-format
-msgid "child %d: exiting\n"
-msgstr "不存在%d这个子进程"
-
-#: fork.c:1120
+#: fork.c:1132
 #, fuzzy
 msgid "'mcexit()' function failed"
 msgstr "mcexit失败"
 
-#: fork.c:1149 fork.c:1158
+#: fork.c:1161 fork.c:1170
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:1169
+#: fork.c:1181
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:1192
+#: fork.c:1204
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 
@@ -198,6 +188,14 @@ msgstr ""
 #: ncpus.c:191
 msgid "allocation failure"
 msgstr ""
+
+#, fuzzy
+#~ msgid "child %d: 'mcexit' called\n"
+#~ msgstr "mcexit失败"
+
+#, fuzzy
+#~ msgid "child %d: exiting\n"
+#~ msgstr "不存在%d这个子进程"
 
 #, fuzzy
 #~ msgid "child %d terminated with %d\n"

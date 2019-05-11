@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.7.0\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1533,7 +1533,7 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
+#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 
 msgid "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\""
 msgstr ""
@@ -1958,13 +1958,6 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 
 msgid "(x,y) ordering: %s"
-msgstr ""
-
-
-#: R/models.R: 0
-#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
-
-msgid "*assignment* is deprecated"
 msgstr ""
 
 
@@ -5398,10 +5391,9 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("binomial"))
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("quasibinomial"))
+#. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 
-msgid "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures"
+msgid "for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
 msgstr ""
 
 
@@ -5859,6 +5851,34 @@ msgid "invalid formula"
 msgstr ""
 
 
+#: R/models.R: 0
+#. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
+
+msgid "invalid formula \"%s\": not a call"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("invalid formula %s", deparse2(x))
+
+msgid "invalid formula %s"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
+
+msgid "invalid formula %s: assignment is deprecated"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated", deparse2(x),     as.character(c.), domain = "R-stats")
+
+msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgstr ""
+
+
 #: R/deriv.R: 0
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
@@ -5868,8 +5888,7 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 
 msgid "invalid formula: %s"
 msgstr ""
@@ -6719,16 +6738,16 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: warning("non-integer counts in a binomial glm!")
+#. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 
-msgid "non-integer counts in a binomial glm!"
+msgid "non-integer #successes in a %s glm!"
 msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: warning("non-integer number of successes in a binomial glm!")
+#. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
 
-msgid "non-integer number of successes in a binomial glm!"
+msgid "non-integer counts in a %s glm!"
 msgstr ""
 
 
@@ -6754,9 +6773,9 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
+#. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 
-msgid "non-positive values not allowed for the 'gamma' family"
+msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr ""
 
 
@@ -8686,7 +8705,6 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: stop("y values must be 0 <= y <= 1")
 #. R/family.R: stop("y values must be 0 <= y <= 1")
 
 msgid "y values must be 0 <= y <= 1"

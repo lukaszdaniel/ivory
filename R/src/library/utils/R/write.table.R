@@ -1,7 +1,7 @@
 #  File src/library/utils/R/write.table.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -116,12 +116,14 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
         stop(gettextf("'%s' argument must be a character string or connection", "file"))
 
     qstring <-                          # quoted embedded quote string
-        switch(qmethod, "escape" = '\\\\"', "double" = '""')
+        switch(qmethod,
+               "escape" = '\\"',
+               "double" = '""')
     if(!is.null(col.names)) {
 	if(append)
 	    warning("appending column names to file")
 	if(quoteC)
-	    col.names <- paste0("\"", gsub('"', qstring, col.names),
+	    col.names <- paste0("\"", gsub('"', qstring, col.names, fixed=TRUE),
                                 "\"")
         writeLines(paste(col.names, collapse = sep), file, sep = eol)
     }

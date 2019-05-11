@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 18:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:01+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -10198,7 +10198,7 @@ msgstr "이 플랫폼에서 nsl() 는 지원되지 않습니다"
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr "이 빌드에서는 ICU가 지원되지 않습니다"
 
-#: src/modules/X11/devX11.c:3117
+#: src/modules/X11/devX11.c:3113
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "디바이스'%s'를 개시 할수가 없습니다"

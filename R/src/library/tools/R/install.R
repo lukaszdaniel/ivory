@@ -128,7 +128,7 @@ if(FALSE) {
     # command sent to another R process.  Currently it only fixes backslashes;
     # more extensive escaping might be a good idea
     quote_path <- function(path, quote = "'")
-    	paste0(quote, gsub("\\\\", "\\\\\\\\", path), quote)
+    	paste0(quote, gsub("\\", "\\\\", path, fixed=TRUE), quote)
 
     on.exit(do_exit_on_error())
     WINDOWS <- .Platform$OS.type == "windows"
@@ -584,7 +584,7 @@ if(FALSE) {
                 ## Solaris' "file" does not use 'shared'.
                 are_shared <- sapply(slibs,
                     function(l) grepl("(shared|dynamically linked)",
-                                      system(paste("file", l), intern = TRUE)))
+                                      system(paste("file", shQuote(l)), intern = TRUE)))
                 slibs <- slibs[are_shared]
                 if (!length(slibs)) return()
             }
@@ -605,12 +605,16 @@ if(FALSE) {
             hardcoded_paths <- FALSE
             failed_fix <- FALSE
 
+            # paths below are protected from the shell, but special
+            # characters/spaces should not be used, because they cannot be
+            # reproduced correctly in the outputs from external tools
+
             if (have_solaris_elfedit) {
                 ## Solaris only
                 ## changes both rpath and DT_NEEDED paths
                 for (l in slibs) {
                     out <- suppressWarnings(
-                        system(paste("elfedit -re dyn:value", l), intern = TRUE))
+                        system(paste("elfedit -re dyn:value", shQuote(l)), intern = TRUE))
                     out <- grep("^[ \t]*\\[[0-9]+\\]", out, value = TRUE)
                     re <- "^[ \t]*\\[([0-9]+)\\][ \t]+([^ \t]+)[ \t]+([^ \t]+)[ \t]*(.*)"
                     paths <- gsub(re, "\\4", out)
@@ -624,15 +628,17 @@ if(FALSE) {
                     idxs <- idxs[changed]
                     for (i in seq_along(paths)) {
                         hardcoded_paths <- TRUE
-                        cmd <- paste("elfedit -e \"dyn:value -dynndx -s",
-                                     idxs[i], paths[i], "\"", l)
+                        qp <- gsub('([" \\])', "\\\\\\1", paths[i])
+                        qp <- gsub("'", "\\\\'", qp)
+                        cmd <- paste0("elfedit -e \"dyn:value -dynndx -s ",
+                                     idxs[i], " ", qp, "\" ", shQuote(l))
                         message(cmd)
                         ret <- suppressWarnings(system(cmd, intern = FALSE))
                         if (ret == 0)
-                            message("NOTE: fixed path ", old_paths[i])
+                            message("NOTE: fixed path ", sQuote(old_paths[i]))
                     }
                     out <- suppressWarnings(
-                        system(paste("elfedit -re dyn:value", l), intern = TRUE))
+                        system(paste("elfedit -re dyn:value", shQuote(l)), intern = TRUE))
                     out <- grep("^[ \t]*\\[", out, value = TRUE)
                     paths <- gsub(re, "\\4", out)
                     if (any(grepl(instdir, paths, fixed = TRUE)))
@@ -643,7 +649,7 @@ if(FALSE) {
                 for (l in slibs) {
                     ## change identification name of the library
                     out <- suppressWarnings(
-                        system(paste("otool -D", l), intern = TRUE))
+                        system(paste("otool -D", shQuote(l)), intern = TRUE))
                     out <- out[-1L] # first line is l (includes instdir)
                     oldid <- out
                     if (length(oldid) == 1 &&
@@ -652,19 +658,20 @@ if(FALSE) {
                         hardcoded_paths <- TRUE
                         newid <- gsub(instdir, final_instdir, oldid,
                                       fixed = TRUE)
-                        cmd <- paste("install_name_tool -id", newid, l)
+                        cmd <- paste("install_name_tool -id", shQuote(newid),
+                                     shQuote(l))
                         message(cmd)
                         ret <- suppressWarnings(system(cmd, intern = FALSE))
                         if (ret == 0)
                             ## NOTE: install_name does not signal an error in
                             ## some cases
                             message("NOTE: fixed library identification name ",
-                                    oldid)
+                                    sQuote(oldid))
                     }
 
                     ## change paths to other libraries
                     out <- suppressWarnings(
-                        system(paste("otool -L", l), intern = TRUE))
+                        system(paste("otool -L", shQuote(l)), intern = TRUE))
                     paths <- grep("\\(compatibility", out, value = TRUE)
                     paths <- gsub("^[ \t]*(.*) \\(compatibility.*", "\\1",
                                   paths)
@@ -678,23 +685,25 @@ if(FALSE) {
                     for(i in seq_along(paths)) {
                         hardcoded_paths <- TRUE
                         cmd <- paste("install_name_tool -change",
-                                         old_paths[i], paths[i], l)
+                                     shQuote(old_paths[i]), shQuote(paths[i]),
+                                     shQuote(l))
                         message(cmd)
                         ret <- suppressWarnings(system(cmd, intern = FALSE))
                         if (ret == 0)
                             ## NOTE: install_name does not signal an error in
                             ## some cases
-                            message("NOTE: fixed library path ", old_paths[i])
+                            message("NOTE: fixed library path ",
+                                    sQuote(old_paths[i]))
                     }
                     out <- suppressWarnings(
-                        system(paste("otool -L", l), intern = TRUE))
+                        system(paste("otool -L", shQuote(l)), intern = TRUE))
                     out <- grep("\\(compatibility", out, value = TRUE)
                     if (any(grepl(instdir, out, fixed = TRUE)))
                         failed_fix <- TRUE
 
                     ## change rpath entries
                     out <- suppressWarnings(
-                        system(paste("otool -l", l), intern = TRUE))
+                        system(paste("otool -l", shQuote(l)), intern = TRUE))
                     out <- grep("(^[ \t]*cmd )|(^[ \t]*path )", out,
                                 value = TRUE)
                     rpidx <- grep("cmd LC_RPATH$", out)
@@ -711,17 +720,20 @@ if(FALSE) {
                         for(i in seq_along(paths)) {
                             hardcoded_paths <- TRUE
                             cmd <- paste("install_name_tool -rpath",
-                                             old_paths[i], paths[i], l)
+                                         shQuote(old_paths[i]),
+                                         shQuote(paths[i]),
+                                         shQuote(l))
                             message(cmd)
                             ret <- suppressWarnings(system(cmd))
                             if (ret == 0)
-                                message("NOTE: fixed rpath ", old_paths[i])
+                                message("NOTE: fixed rpath ",
+                                        sQuote(old_paths[i]))
                         }
                     }
 
                     ## check no hard-coded paths are left
                     out <- suppressWarnings(
-                        system(paste("otool -l", l), intern = TRUE))
+                        system(paste("otool -l", shQuote(l)), intern = TRUE))
                     out <- out[-1L] # first line is l (includes instdir)
                     if (any(grepl(instdir, out, fixed = TRUE)))
                         failed_fix <- TRUE
@@ -731,7 +743,7 @@ if(FALSE) {
                 for(l in slibs) {
                     # fix rpath
                     rpath <- suppressWarnings(
-                        system(paste("patchelf --print-rpath", l),
+                        system(paste("patchelf --print-rpath", shQuote(l)),
                                intern = TRUE))
                     old_rpath <- rpath
                     # "\\$ORIGIN/.."
@@ -739,21 +751,22 @@ if(FALSE) {
                                   fixed = TRUE)
                     if (length(rpath) && nzchar(rpath) && old_rpath != rpath) {
                         hardcoded_paths <- TRUE
-                        cmd <- paste("patchelf", "--set-rpath", rpath, l)
+                        cmd <- paste("patchelf", "--set-rpath",
+                                         shQuote(rpath), shQuote(l))
                         message(cmd)
                         ret <- suppressWarnings(system(cmd))
                         if (ret == 0)
-                            message("NOTE: fixed rpath ", old_rpath)
+                            message("NOTE: fixed rpath ", sQuote(old_rpath))
                         rpath <- suppressWarnings(
-                            system(paste("patchelf --print-rpath", l),
-                                   intern = TRUE))
+                            system(paste("patchelf --print-rpath",
+                                         shQuote(l)), intern = TRUE))
                         if (any(grepl(instdir, rpath, fixed = TRUE)))
                             failed_fix <- TRUE
                     }
                     # fix DT_NEEDED
                     if (have_readelf) {
                         out <- suppressWarnings(
-                            system(paste("readelf -d", l), intern = TRUE))
+                            system(paste("readelf -d", shQuote(l)), intern = TRUE))
                         re0 <- "0x.*\\(NEEDED\\).*Shared library:"
                         out <- grep(re0, out, value = TRUE)
                         re <- "^[ \t]*0x[0-9]+[ \t]+\\(NEEDED\\)[ \t]+Shared library:[ \t]*\\[(.*)\\]"
@@ -767,14 +780,17 @@ if(FALSE) {
                         old_paths <- old_paths[changed]
                         for(i in seq_along(paths)) {
                             cmd <- paste("patchelf --replace-needed",
-                                         old_paths[i], paths[i], l)
+                                         shQuote(old_paths[i]),
+                                         shQuote(paths[i]),
+                                         shQuote(l))
                             message(cmd)
                             ret <- suppressWarnings(system(cmd))
                             if (ret == 0)
-                                message("NOTE: fixed library path ", old_paths[i])
+                                message("NOTE: fixed library path ",
+                                        sQuote(old_paths[i]))
                         }
                         out <- suppressWarnings(
-                            system(paste("readelf -d", l), intern = TRUE))
+                            system(paste("readelf -d", shQuote(l)), intern = TRUE))
                         out <- grep(re0, out, value = TRUE)
                         if (any(grepl(instdir, out, fixed = TRUE)))
                             failed_fix <- TRUE
@@ -785,7 +801,7 @@ if(FALSE) {
                 ## available, instead); only fixes rpaths, not DT_NEEDED
                 for(l in slibs) {
                     out <- suppressWarnings(
-                        system(paste("chrpath", l), intern = TRUE))
+                        system(paste("chrpath", shQuote(l)), intern = TRUE))
 
                     # when multiple rpaths are present, there is a single
                     # RUNPATH= line with the paths separated by :
@@ -796,13 +812,14 @@ if(FALSE) {
                     rpath <- gsub(instdir, final_instdir, rpath, fixed = TRUE)
                     if (length(rpath) && nzchar(rpath) && old_rpath != rpath) {
                         hardcoded_paths <- TRUE
-                        cmd <- paste("chrpath", "-r", rpath, l)
+                        cmd <- paste("chrpath", "-r", shQuote(rpath),
+                                     shQuote(l))
                         message(cmd)
                         ret <- suppressWarnings(system(cmd))
                         if (ret == 0)
-                            message("NOTE: fixed rpath ", old_rpath)
+                            message("NOTE: fixed rpath ", sQuote(old_rpath))
                         out <- suppressWarnings(
-                            system(paste("chrpath", l), intern = TRUE))
+                            system(paste("chrpath", shQuote(l)), intern = TRUE))
                         rpath <- grep(".*PATH=", out, value = TRUE)
                         rpath <- gsub(".*PATH=", "", rpath)
                         if (any(grepl(instdir, rpath, fixed = TRUE)))
@@ -821,7 +838,7 @@ if(FALSE) {
                 ## paths); ldd is not suitable because it interprets $ORIGIN
                 for(l in slibs) {
                     out <- suppressWarnings(
-                        system(paste("readelf -d", l), intern = TRUE))
+                        system(paste("readelf -d", shQuote(l)), intern = TRUE))
                     out <- grep("^[ \t]*0x", out, value = TRUE)
                     if (any(grepl(instdir, out, fixed = TRUE))) {
                         ## give path relative to installation dir
@@ -1612,6 +1629,10 @@ if(FALSE) {
             } else {
                 patch_rpaths()
 
+                unlink(final_instdir, recursive = TRUE)
+		  # needed for mv on some file systems, even though
+		  # according to POSIX mv should work when the target is an
+		  # empty directory
                 owd <- setwd(startdir)
                 status <- system(paste("mv -f",
                                        shQuote(instdir),
@@ -2610,11 +2631,11 @@ if(FALSE) {
     htmlize <- function(x, backtick)
     {
         x <- gsub("&", "&amp;", x, fixed = TRUE)
-        x <- gsub("<", "&lt;", x, fixed = TRUE)
-        x <- gsub(">", "&gt;", x, fixed = TRUE)
+        x <- gsub("<", "&lt;",  x, fixed = TRUE)
+        x <- gsub(">", "&gt;",  x, fixed = TRUE)
         if (backtick) {
             x <- gsub("---", "-", x, fixed = TRUE)
-            x <- gsub("--", "-", x, fixed = TRUE)
+            x <- gsub("--",  "-", x, fixed = TRUE)
             ## these have been changed in the Rd parser
             #x <- gsub("``", "&ldquo;", x, fixed = TRUE)
             #x <- gsub("''", "&rdquo;", x, fixed = TRUE)
@@ -2624,7 +2645,7 @@ if(FALSE) {
         x
     }
     M$HTopic <- htmlize(M$Topic, FALSE)
-    M$Title <- htmlize(M$Title, TRUE)
+    M$ Title <- htmlize(M$Title, TRUE)
 
     ## No need to handle encodings: everything is in UTF-8
 
@@ -2789,21 +2810,21 @@ if(FALSE) {
     if ("html" %in% types) {
         type <- "html"
         have <- list.files(file.path(outDir, dirname[type]))
-        have2 <- sub("\\.html", "", basename(have))
+        have2 <- sub(".html", "", basename(have), fixed=TRUE)
         drop <- have[have2 %notin% c(bfs, "00Index", "R.css")]
         unlink(file.path(outDir, dirname[type], drop))
     }
     if ("latex" %in% types) {
         type <- "latex"
         have <- list.files(file.path(outDir, dirname[type]))
-        have2 <- sub("\\.tex", "", basename(have))
+        have2 <- sub(".tex", "", basename(have), fixed=TRUE)
         drop <- have[have2 %notin% bfs]
         unlink(file.path(outDir, dirname[type], drop))
     }
     if ("example" %in% types) {
         type <- "example"
         have <- list.files(file.path(outDir, dirname[type]))
-        have2 <- sub("\\.R", "", basename(have))
+        have2 <- sub(".R", "", basename(have), fixed=TRUE)
         drop <- have[have2 %notin% bfs]
         unlink(file.path(outDir, dirname[type], drop))
     }

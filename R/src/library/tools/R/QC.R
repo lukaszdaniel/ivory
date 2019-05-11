@@ -1441,7 +1441,7 @@ function(package, dir, lib.loc = NULL)
                            "\\\\S4method{\\1}{\\2}",
                            aliases)
             ## </FIXME>
-            aliases <- gsub("\\\\%", "%", aliases)
+            aliases <- gsub("\\%", "%", aliases, fixed=TRUE)
             functions_not_in_aliases <- setdiff(functions, aliases)
         }
         else
@@ -6547,7 +6547,7 @@ function(dir, localOnly = FALSE)
         ## display-name which we already do separately.)
     }
     ## NOTE: perhaps whitespace should be canonicalized further above?
-    maintainer <- gsub("\n", " ", meta["Maintainer"])
+    maintainer <- gsub("\n", " ", meta["Maintainer"], fixed=TRUE)
     out$Maintainer_invalid_or_multi_person <-
         ((maintainer != "ORPHANED") &&
          !check_maintainer_address(maintainer))
@@ -7394,10 +7394,7 @@ function(x, ...)
 
     c(character(),
       if(length(x$Maintainer))
-          gettextf("Maintainer: %s",
-                  sQuote(trimws(gsub("\n", " ",
-                                     paste(x$Maintainer,
-                                           collapse = " ")))), domain = "R-tools")
+          gettextf("Maintainer: %s", sQuote(lines2str(x$Maintainer, " ")), domain = "R-tools")
       else
           gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
       fmt(c(if(x$Maintainer_invalid_or_multi_person)
@@ -7548,7 +7545,7 @@ function(x, ...)
       },
       if(length(y <- x$author_should_be_authors_at_R)) {
           paste(c(gettext("Author field should be Authors@R.  Current value is:", domain = "R-tools"),
-                  paste0("  ", gsub("\n", "\n  ", y))),
+                  paste0("  ", gsub("\n", "\n  ", y, fixed=TRUE))),
                 collapse = "\n")
       },
       if(length(y <- x$vignette_sources_only_in_inst_doc)) {
@@ -7606,7 +7603,7 @@ function(x, ...)
                           collapse = "\n")
                 else
                     paste(c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
-                            paste(" ", gsub("\n", "\n    ", format(y)))),
+                            paste(" ", gsub("\n", "\n    ", format(y), fixed=TRUE))),
                           collapse = "\n")
             },
             if(length(y) && any(nzchar(z <- y$CRAN))) {
@@ -7648,7 +7645,7 @@ function(x, ...)
                         collapse = "\n")
               else
                   paste(c(ngettext(length(y), "Found the following (possibly) invalid DOI:", "Found the following (possibly) invalid DOIs:", domain = "R-tools"),
-                          paste(" ", gsub("\n", "\n    ", format(y)))),
+                          paste(" ", gsub("\n", "\n    ", format(y), fixed=TRUE))),
                         collapse = "\n")
           }),
       if(length(y <- x$R_files_non_ASCII)) {
@@ -8374,7 +8371,7 @@ function(x, collapse = " ")
 
 .strip_backticks <-
 function(x)
-    gsub("`", "", x)
+    gsub("`", "", x, fixed=TRUE)
 
 ### ** .transform_S3_method_markup
 

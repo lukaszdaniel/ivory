@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1128,7 +1128,7 @@ msgid "'type' argument must be 1 or 3 for ordered factors"
 msgstr ""
 "argument 'type' musi mieć wartość 1 lub 3 dla uporządkowanych czynników"
 
-#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
+#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0
 msgid ""
 "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", "
@@ -1434,11 +1434,6 @@ msgstr "(wagi)"
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
 msgstr "uporządkowanie (x,y): %s"
-
-#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
-#: R/models.R:0
-msgid "*assignment* is deprecated"
-msgstr "*przypisanie* jest przestarzałe"
 
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -4020,17 +4015,16 @@ msgstr ""
 msgid "fn cannot be computed at initial par (63)"
 msgstr "fn nie może być obliczone w parametrze początkowym (63)"
 
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("binomial"))
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("quasibinomial"))
+#. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 #: R/family.R:0
+#, fuzzy
 msgid ""
-"for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column "
-"matrix where first column is the number of successes and second column is "
-"the number of failures"
+"for the '%s' family, y must be a vector of 0 and 1's\n"
+"or a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
 msgstr ""
-"dla rodziny %s, argument 'y' musi być wektorem zer i jedynek lub 2 kolumnową "
-"macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a druga kolumna jest "
-"liczbą porażek"
+"dla rodziny 'quasibinomial', 'y' musi być wektorem zer i jedynek\n"
+"lub 2 kolumnową macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a "
+"druga kolumna jest liczbą porażek"
 
 #. R/nlsFunc.R: gettextf("formula '%s' must be of the form '~expr'", deparse(as.vector(object)))
 #: R/nlsFunc.R:0
@@ -4345,14 +4339,36 @@ msgstr "niepoprawnie dopasowane średnie w pustym modelu"
 msgid "invalid formula"
 msgstr "niepoprawna formuła"
 
+#. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula \"%s\": not a call"
+msgstr "niepoprawna formuła: %s"
+
+#. R/models.R: gettextf("invalid formula %s", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s"
+msgstr "niepoprawna formuła: %s"
+
+#. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s: assignment is deprecated"
+msgstr "*przypisanie* jest przestarzałe"
+
+#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated", deparse2(x),     as.character(c.), domain = "R-stats")
+#: R/models.R:0
+msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgstr ""
+
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #: R/deriv.R:0
 msgid "invalid formula in 'deriv()'"
 msgstr "niepoprawna formuła w 'deriv()'"
 
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
 msgid "invalid formula: %s"
 msgstr "niepoprawna formuła: %s"
@@ -5000,16 +5016,18 @@ msgstr "nieskończony argument '%s'"
 msgid "non-finite coefficients at iteration %d"
 msgstr "nieskończone współczynniki w %d iteracji"
 
-#. R/family.R: warning("non-integer counts in a binomial glm!")
+#. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
-msgid "non-integer counts in a binomial glm!"
-msgstr "niecałkowita liczba zliczeń w rozkładzie Bernoulliego w 'glm'!"
-
-#. R/family.R: warning("non-integer number of successes in a binomial glm!")
-#: R/family.R:0
-msgid "non-integer number of successes in a binomial glm!"
+#, fuzzy
+msgid "non-integer #successes in a %s glm!"
 msgstr ""
 "niecałkowita liczba sukcesów w rozkładzie Bernoulliego w funkcji 'glm()'!"
+
+#. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
+#: R/family.R:0
+#, fuzzy
+msgid "non-integer counts in a %s glm!"
+msgstr "niecałkowita liczba zliczeń w rozkładzie Bernoulliego w 'glm'!"
 
 #. R/ts.R: warning("non-intersecting series")
 #: R/ts.R:0
@@ -5026,9 +5044,10 @@ msgstr "bezlistne poddrzewo o długości 0"
 msgid "non-list contrasts argument ignored"
 msgstr "argumenty kontrastu niebędące listą zostały zignorowane"
 
-#. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
+#. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
-msgid "non-positive values not allowed for the 'gamma' family"
+#, fuzzy
+msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr "niedodatnie wartości nie są dozwolone dla rodziny 'gamma'"
 
 #. R/arima.R: stop("non-stationary AR part")
@@ -6486,7 +6505,6 @@ msgid "x is not a vector or univariate time series"
 msgstr "'x' nie jest wektorem ani jednowymiarowym szeregiem czasowym"
 
 #. R/family.R: stop("y values must be 0 <= y <= 1")
-#. R/family.R: stop("y values must be 0 <= y <= 1")
 #: R/family.R:0
 msgid "y values must be 0 <= y <= 1"
 msgstr "wartości 'y' muszą być z przedziału 0 <= y <= 1"
@@ -6917,6 +6935,15 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid ""
+#~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
+#~ "column matrix where first column is the number of successes and second "
+#~ "column is the number of failures"
+#~ msgstr ""
+#~ "dla rodziny %s, argument 'y' musi być wektorem zer i jedynek lub 2 "
+#~ "kolumnową macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a druga "
+#~ "kolumna jest liczbą porażek"
 
 #, fuzzy
 #~ msgid "reformulate"
@@ -7789,15 +7816,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "length of choices must be 2"
 #~ msgstr "długość 'choices' musi wynosić 2"
-
-#~ msgid ""
-#~ "for the 'quasibinomial' family, y must be a vector of 0 and 1's\n"
-#~ "or a 2 column matrix where col 1 is no. successes and col 2 is no. "
-#~ "failures"
-#~ msgstr ""
-#~ "dla rodziny 'quasibinomial', 'y' musi być wektorem zer i jedynek\n"
-#~ "lub 2 kolumnową macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a "
-#~ "druga kolumna jest liczbą porażek"
 
 #~ msgid "'x' and 'y' must have at least 2 levels"
 #~ msgstr "'x' oraz 'y' muszą mieć co najmniej 2 poziomy"

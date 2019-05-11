@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1201,7 +1201,7 @@ msgstr "还没有实现type=\"partial\"的算法"
 msgid "'type' argument must be 1 or 3 for ordered factors"
 msgstr "'xy.labels'必需是逻辑值或是字符"
 
-#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
+#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0
 msgid ""
 "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", "
@@ -1526,11 +1526,6 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
-msgstr ""
-
-#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
-#: R/models.R:0
-msgid "*assignment* is deprecated"
 msgstr ""
 
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -4111,14 +4106,12 @@ msgstr ""
 msgid "fn cannot be computed at initial par (63)"
 msgstr ""
 
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("binomial"))
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("quasibinomial"))
+#. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 #: R/family.R:0
 #, fuzzy
 msgid ""
-"for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column "
-"matrix where first column is the number of successes and second column is "
-"the number of failures"
+"for the '%s' family, y must be a vector of 0 and 1's\n"
+"or a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
 msgstr "或是有两个列的矩阵，第一列是成功的计数，第二列是失败的计数"
 
 #. R/nlsFunc.R: gettextf("formula '%s' must be of the form '~expr'", deparse(as.vector(object)))
@@ -4440,6 +4433,29 @@ msgstr "空模型的拟合平均值不对"
 msgid "invalid formula"
 msgstr "公式不对"
 
+#. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula \"%s\": not a call"
+msgstr "公式不对"
+
+#. R/models.R: gettextf("invalid formula %s", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s"
+msgstr "公式不对"
+
+#. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s: assignment is deprecated"
+msgstr "deriv里的公式不对"
+
+#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated", deparse2(x),     as.character(c.), domain = "R-stats")
+#: R/models.R:0
+msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgstr ""
+
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #: R/deriv.R:0
@@ -4447,8 +4463,7 @@ msgstr "公式不对"
 msgid "invalid formula in 'deriv()'"
 msgstr "deriv里的公式不对"
 
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
 #, fuzzy
 msgid "invalid formula: %s"
@@ -5110,16 +5125,17 @@ msgstr "'use'参数不对"
 msgid "non-finite coefficients at iteration %d"
 msgstr "迭代%d时出现了无限大的係數值"
 
-#. R/family.R: warning("non-integer counts in a binomial glm!")
-#: R/family.R:0
-msgid "non-integer counts in a binomial glm!"
-msgstr "二项通用线性模型里出现了非整数的计数!"
-
-#. R/family.R: warning("non-integer number of successes in a binomial glm!")
+#. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
 #, fuzzy
-msgid "non-integer number of successes in a binomial glm!"
+msgid "non-integer #successes in a %s glm!"
 msgstr "二项通用线性模型里出现了非整数的#成功!"
+
+#. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
+#: R/family.R:0
+#, fuzzy
+msgid "non-integer counts in a %s glm!"
+msgstr "二项通用线性模型里出现了非整数的计数!"
 
 #. R/ts.R: warning("non-intersecting series")
 #: R/ts.R:0
@@ -5138,10 +5154,10 @@ msgstr "长度为零的非叶子树"
 msgid "non-list contrasts argument ignored"
 msgstr "'contrasts.arg'参数不对"
 
-#. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
+#. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
 #, fuzzy
-msgid "non-positive values not allowed for the 'gamma' family"
+msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr "gamma分布族不允许有负值"
 
 #. R/arima.R: stop("non-stationary AR part")
@@ -6609,7 +6625,6 @@ msgid "x is not a vector or univariate time series"
 msgstr "x不是矢量或单变量时间序列"
 
 #. R/family.R: stop("y values must be 0 <= y <= 1")
-#. R/family.R: stop("y values must be 0 <= y <= 1")
 #: R/family.R:0
 #, fuzzy
 msgid "y values must be 0 <= y <= 1"
@@ -6971,6 +6986,13 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
 
+#, fuzzy
+#~ msgid ""
+#~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
+#~ "column matrix where first column is the number of successes and second "
+#~ "column is the number of failures"
+#~ msgstr "或是有两个列的矩阵，第一列是成功的计数，第二列是失败的计数"
+
 #~ msgid "all group levels must be finite"
 #~ msgstr "所有组的层次都必需是有限的"
 
@@ -7274,13 +7296,6 @@ msgstr[0] "在组合拟合中用%d/%d行"
 
 #~ msgid "length of choices must be 2"
 #~ msgstr "选择长度必需为二"
-
-#, fuzzy
-#~ msgid ""
-#~ "for the 'quasibinomial' family, y must be a vector of 0 and 1's\n"
-#~ "or a 2 column matrix where col 1 is no. successes and col 2 is no. "
-#~ "failures"
-#~ msgstr "或是有两个列的矩阵，第一列是成功的计数，第二列是失败的计数"
 
 #~ msgid "'x' and 'y' must have at least 2 levels"
 #~ msgstr "'x'和'y'至少有两个层次"

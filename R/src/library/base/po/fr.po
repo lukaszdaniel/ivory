@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 18:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:01+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -10445,7 +10445,7 @@ msgstr "nsl() ne fonctionne pas sur cette architecture"
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr "ICU ne fonctionne pas dans cette compilation"
 
-#: src/modules/X11/devX11.c:3117
+#: src/modules/X11/devX11.c:3113
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "inpossible de démarrer le périphérique %s"

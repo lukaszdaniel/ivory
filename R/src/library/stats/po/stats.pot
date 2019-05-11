@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 21:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,16 +37,20 @@ msgstr ""
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr ""
 
-#: approx.c:108
+#: approx.c:109
 msgid "approx(): invalid f value"
 msgstr ""
 
-#: approx.c:111
+#: approx.c:112
 msgid "approx(): invalid interpolation method"
 msgstr ""
 
-#: approx.c:117
+#: approx.c:119
 msgid "approx(): attempted to interpolate NA values"
+msgstr ""
+
+#: approx.c:123
+msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
 #: arima.c:77 arima.c:188 arima.c:373 arima.c:604 optim.c:33

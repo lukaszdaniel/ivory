@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1198,7 +1198,7 @@ msgstr "type에 \"partial\" 옵션은 아직 구현되지 않았습니다"
 msgid "'type' argument must be 1 or 3 for ordered factors"
 msgstr "'xy.labels'는 반드시 논리값 또는 문자이어야 합니다"
 
-#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
+#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0
 msgid ""
 "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", "
@@ -1522,11 +1522,6 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
-msgstr ""
-
-#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
-#: R/models.R:0
-msgid "*assignment* is deprecated"
 msgstr ""
 
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -4086,17 +4081,15 @@ msgstr ""
 msgid "fn cannot be computed at initial par (63)"
 msgstr ""
 
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("binomial"))
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("quasibinomial"))
+#. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 #: R/family.R:0
 #, fuzzy
 msgid ""
-"for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column "
-"matrix where first column is the number of successes and second column is "
-"the number of failures"
+"for the '%s' family, y must be a vector of 0 and 1's\n"
+"or a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
 msgstr ""
-"'binomial' 페밀리에서 y는 반드시 0과 1로만 구성된 벡터이어야 합니다\n"
-"또는 첫번째 열은 성공의 수, 두번째 열은 실패의 수를 나타내은 2개의 열로된 행"
+"'quasibinomial' 페밀리에서 y는 반드시 0과 1로만 구성된 벡터이어야 합니다\n"
+"또는 첫번째 열은 성공의 수, 두번째 열은 실패의 수를 나타내는 2개의 열로된 행"
 "렬이어야 합니다"
 
 #. R/nlsFunc.R: gettextf("formula '%s' must be of the form '~expr'", deparse(as.vector(object)))
@@ -4415,6 +4408,29 @@ msgstr "유효하지 않은 fitted means가 empty 모델에 있습니다"
 msgid "invalid formula"
 msgstr "유효하지 않은 formula입니다"
 
+#. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula \"%s\": not a call"
+msgstr "유효하지 않은 formula입니다"
+
+#. R/models.R: gettextf("invalid formula %s", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s"
+msgstr "유효하지 않은 formula입니다"
+
+#. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s: assignment is deprecated"
+msgstr "deriv에 유효하지 않은 formula입니다"
+
+#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated", deparse2(x),     as.character(c.), domain = "R-stats")
+#: R/models.R:0
+msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgstr ""
+
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #: R/deriv.R:0
@@ -4422,8 +4438,7 @@ msgstr "유효하지 않은 formula입니다"
 msgid "invalid formula in 'deriv()'"
 msgstr "deriv에 유효하지 않은 formula입니다"
 
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
 #, fuzzy
 msgid "invalid formula: %s"
@@ -5096,16 +5111,17 @@ msgstr "유효하지 않은 'use' 인자입니다"
 msgid "non-finite coefficients at iteration %d"
 msgstr "iteration %d에서 얻어진 계수의 값은 유한하지 않습니다"
 
-#. R/family.R: warning("non-integer counts in a binomial glm!")
-#: R/family.R:0
-msgid "non-integer counts in a binomial glm!"
-msgstr "binomial glm에서 정수가 아닌 count가 있습니다"
-
-#. R/family.R: warning("non-integer number of successes in a binomial glm!")
+#. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
 #, fuzzy
-msgid "non-integer number of successes in a binomial glm!"
+msgid "non-integer #successes in a %s glm!"
 msgstr "binomial glm에서 number of success가 정수가 아닙니다"
+
+#. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
+#: R/family.R:0
+#, fuzzy
+msgid "non-integer counts in a %s glm!"
+msgstr "binomial glm에서 정수가 아닌 count가 있습니다"
 
 #. R/ts.R: warning("non-intersecting series")
 #: R/ts.R:0
@@ -5124,9 +5140,10 @@ msgstr "'ref'는 반드시 길이가 1이어야 합니다"
 msgid "non-list contrasts argument ignored"
 msgstr "유효하지 않은 'contrasts.arg' 인자입니다"
 
-#. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
+#. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
-msgid "non-positive values not allowed for the 'gamma' family"
+#, fuzzy
+msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr "'gamma' 페밀리에서는 양수가 아닌 값들은 사용할 수없습니다"
 
 #. R/arima.R: stop("non-stationary AR part")
@@ -6593,7 +6610,6 @@ msgid "x is not a vector or univariate time series"
 msgstr "x는 벡터 또는 단변량 시계열이 아닙니다"
 
 #. R/family.R: stop("y values must be 0 <= y <= 1")
-#. R/family.R: stop("y values must be 0 <= y <= 1")
 #: R/family.R:0
 #, fuzzy
 msgid "y values must be 0 <= y <= 1"
@@ -6931,6 +6947,16 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 
+#, fuzzy
+#~ msgid ""
+#~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
+#~ "column matrix where first column is the number of successes and second "
+#~ "column is the number of failures"
+#~ msgstr ""
+#~ "'binomial' 페밀리에서 y는 반드시 0과 1로만 구성된 벡터이어야 합니다\n"
+#~ "또는 첫번째 열은 성공의 수, 두번째 열은 실패의 수를 나타내은 2개의 열로된 "
+#~ "행렬이어야 합니다"
+
 #~ msgid "all group levels must be finite"
 #~ msgstr "모든 그룹 레벨들은 반드시 유한해야 합니다"
 
@@ -7123,15 +7149,6 @@ msgstr[0] ""
 
 #~ msgid "negative values not allowed for the 'quasiPoisson' family"
 #~ msgstr "'quasiPoisson' 페밀리에서 음의 값들은 허용되지 않습니다"
-
-#~ msgid ""
-#~ "for the 'quasibinomial' family, y must be a vector of 0 and 1's\n"
-#~ "or a 2 column matrix where col 1 is no. successes and col 2 is no. "
-#~ "failures"
-#~ msgstr ""
-#~ "'quasibinomial' 페밀리에서 y는 반드시 0과 1로만 구성된 벡터이어야 합니다\n"
-#~ "또는 첫번째 열은 성공의 수, 두번째 열은 실패의 수를 나타내는 2개의 열로된 "
-#~ "행렬이어야 합니다"
 
 #~ msgid "'x' must have at least 2 rows and columns"
 #~ msgstr "'x'는 반드시 적어도 2개의 행과 열을 가져야 합니다"

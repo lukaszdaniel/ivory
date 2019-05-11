@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-05-11 21:02+0200\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -38,16 +38,20 @@ msgstr ""
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "probabilità esterne a [0,1] in qansari()"
 
-#: approx.c:108
+#: approx.c:109
 msgid "approx(): invalid f value"
 msgstr ""
 
-#: approx.c:111
+#: approx.c:112
 msgid "approx(): invalid interpolation method"
 msgstr ""
 
-#: approx.c:117
+#: approx.c:119
 msgid "approx(): attempted to interpolate NA values"
+msgstr ""
+
+#: approx.c:123
+msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
 #: arima.c:77 arima.c:188 arima.c:373 arima.c:604 optim.c:33

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 18:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:01+0200\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -10363,7 +10363,7 @@ msgstr "nls() non è supportato in questa piattaforma"
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr "nls() non è supportato in questa piattaforma"
 
-#: src/modules/X11/devX11.c:3117
+#: src/modules/X11/devX11.c:3113
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "impossibile aprire dispositivo %s"

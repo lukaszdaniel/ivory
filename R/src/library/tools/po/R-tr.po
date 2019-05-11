@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-28 18:16\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2073,7 +2073,7 @@ msgstr ""
 msgid "Maintainer:"
 msgstr ""
 
-#. R/QC.R: gettextf("Maintainer: %s", sQuote(trimws(gsub("\n", " ", paste(x$Maintainer, collapse = " ")))),     domain = "R-tools")
+#. R/QC.R: gettextf("Maintainer: %s", sQuote(lines2str(x$Maintainer, " ")), domain = "R-tools")
 #: R/QC.R:0
 msgid "Maintainer: %s"
 msgstr ""
@@ -2252,25 +2252,25 @@ msgstr ""
 msgid "NOTE: Quitting check on first error."
 msgstr ""
 
-#. R/install.R: message("NOTE: fixed library identification name ", oldid)
+#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
 #: R/install.R:0
 msgid "NOTE: fixed library identification name"
 msgstr ""
 
-#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
-#. R/install.R: message("NOTE: fixed library path ", old_paths[i])
+#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
+#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed library path"
 msgstr ""
 
-#. R/install.R: message("NOTE: fixed path ", old_paths[i])
+#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed path"
 msgstr ""
 
-#. R/install.R: message("NOTE: fixed rpath ", old_paths[i])
-#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
-#. R/install.R: message("NOTE: fixed rpath ", old_rpath)
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #: R/install.R:0
 msgid "NOTE: fixed rpath"
 msgstr ""

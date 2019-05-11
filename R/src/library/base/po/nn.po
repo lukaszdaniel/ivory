@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-27 18:34+0200\n"
+"POT-Creation-Date: 2019-05-11 21:01+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -10262,7 +10262,7 @@ msgstr "nsl() er ikkje støtta på denne plattforma"
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr "ICU er ikkje støtte på dette bygget"
 
-#: src/modules/X11/devX11.c:3117
+#: src/modules/X11/devX11.c:3113
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "klarte ikkje starta eininga %s"

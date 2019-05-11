@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-22 18:54\n"
+"POT-Creation-Date: 2019-05-11 21:02\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1199,7 +1199,7 @@ msgstr "type = \"partial\" henüz tanımlanmadı"
 msgid "'type' argument must be 1 or 3 for ordered factors"
 msgstr "'xy.labels' karakter veya mantıksal olmalı"
 
-#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     variance_nm)
+#. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0
 msgid ""
 "'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", "
@@ -1523,11 +1523,6 @@ msgstr ""
 #. R/isoreg.R: gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")
 #: R/isoreg.R:0
 msgid "(x,y) ordering: %s"
-msgstr ""
-
-#. R/models.R: gettext(" *assignment* is deprecated", domain = "R-stats")
-#: R/models.R:0
-msgid "*assignment* is deprecated"
 msgstr ""
 
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -4077,14 +4072,12 @@ msgstr ""
 msgid "fn cannot be computed at initial par (63)"
 msgstr ""
 
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("binomial"))
-#. R/family.R: gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures",     sQuote("quasibinomial"))
+#. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 #: R/family.R:0
 #, fuzzy
 msgid ""
-"for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column "
-"matrix where first column is the number of successes and second column is "
-"the number of failures"
+"for the '%s' family, y must be a vector of 0 and 1's\n"
+"or a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
 msgstr "quasibinomial ailesi için, y 0 ve 1'lerin olduğu bir vektör olmalı"
 
 #. R/nlsFunc.R: gettextf("formula '%s' must be of the form '~expr'", deparse(as.vector(object)))
@@ -4407,6 +4400,29 @@ msgstr ""
 msgid "invalid formula"
 msgstr "geçersiz formül"
 
+#. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula \"%s\": not a call"
+msgstr "geçersiz formül"
+
+#. R/models.R: gettextf("invalid formula %s", deparse2(x))
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s"
+msgstr "geçersiz formül"
+
+#. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "invalid formula %s: assignment is deprecated"
+msgstr "geçersiz formül"
+
+#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated", deparse2(x),     as.character(c.), domain = "R-stats")
+#: R/models.R:0
+msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgstr ""
+
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #. R/deriv.R: stop("invalid formula in 'deriv()'")
 #: R/deriv.R:0
@@ -4414,8 +4430,7 @@ msgstr "geçersiz formül"
 msgid "invalid formula in 'deriv()'"
 msgstr "geçersiz formül"
 
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
-#. R/models.R: gettextf("invalid formula: %s", deparse(x, 500L)[[1]])
+#. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
 #, fuzzy
 msgid "invalid formula: %s"
@@ -5071,14 +5086,14 @@ msgstr "geçersiz 'use' argümanı"
 msgid "non-finite coefficients at iteration %d"
 msgstr ""
 
-#. R/family.R: warning("non-integer counts in a binomial glm!")
+#. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
-msgid "non-integer counts in a binomial glm!"
+msgid "non-integer #successes in a %s glm!"
 msgstr ""
 
-#. R/family.R: warning("non-integer number of successes in a binomial glm!")
+#. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
 #: R/family.R:0
-msgid "non-integer number of successes in a binomial glm!"
+msgid "non-integer counts in a %s glm!"
 msgstr ""
 
 #. R/ts.R: warning("non-intersecting series")
@@ -5098,10 +5113,10 @@ msgstr "'model$order' 3 uzunluğunda olmalı"
 msgid "non-list contrasts argument ignored"
 msgstr "geçersiz 'contrasts.arg' argümanı"
 
-#. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
+#. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
 #, fuzzy
-msgid "non-positive values not allowed for the 'gamma' family"
+msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr "gama ailesi için pozitif olmayan değerlere izin verilmiyor"
 
 #. R/arima.R: stop("non-stationary AR part")
@@ -6556,7 +6571,6 @@ msgid "x is not a vector or univariate time series"
 msgstr ""
 
 #. R/family.R: stop("y values must be 0 <= y <= 1")
-#. R/family.R: stop("y values must be 0 <= y <= 1")
 #: R/family.R:0
 #, fuzzy
 msgid "y values must be 0 <= y <= 1"
@@ -6961,6 +6975,13 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
 
+#, fuzzy
+#~ msgid ""
+#~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
+#~ "column matrix where first column is the number of successes and second "
+#~ "column is the number of failures"
+#~ msgstr "quasibinomial ailesi için, y 0 ve 1'lerin olduğu bir vektör olmalı"
+
 #~ msgid "all group levels must be finite"
 #~ msgstr "tüm grup seviyeleri sonlu olmalı"
 
@@ -7226,13 +7247,6 @@ msgstr[1] ""
 
 #~ msgid "length of choices must be 2"
 #~ msgstr "seçeneklerin uzunluğu 2 olmalı"
-
-#, fuzzy
-#~ msgid ""
-#~ "for the 'quasibinomial' family, y must be a vector of 0 and 1's\n"
-#~ "or a 2 column matrix where col 1 is no. successes and col 2 is no. "
-#~ "failures"
-#~ msgstr "quasibinomial ailesi için, y 0 ve 1'lerin olduğu bir vektör olmalı"
 
 #~ msgid "'x' and 'y' must have at least 2 levels"
 #~ msgstr "'x' ve 'y' en az 2 seviyeye sahip olmalı"

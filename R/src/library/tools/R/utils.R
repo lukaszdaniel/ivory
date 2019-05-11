@@ -191,7 +191,6 @@ env_path <- function(...) file.path(..., fsep = .Platform$path.sep)
 ### * Text utilities.
 
 ### ** delimMatch
-
 delimMatch <-
 function(x, delim = c("{", "}"), syntax = "Rd")
 {
@@ -205,6 +204,12 @@ function(x, delim = c("{", "}"), syntax = "Rd")
 
     .Call(C_delim_match, x, delim)
 }
+
+### ** lines2str
+lines2str <-
+function(txt, sep = "")
+    trimws(gsub("\n", sep, paste(txt, collapse = sep),
+                fixed = TRUE, useBytes = TRUE))
 
 
 ### * LaTeX utilities
@@ -551,11 +556,8 @@ function(x, y)
 
 ### ** .OStype
 
-.OStype <-
-function()
-{
-    OS <- Sys.getenv("R_OSTYPE")
-    if(nzchar(OS)) OS else .Platform$OS.type
+.OStype <- function() {
+    Sys.getenv("R_OSTYPE", unset = .Platform$OS.type, names = FALSE)
 }
 
 ### ** .R_copyright_msg
@@ -1835,7 +1837,7 @@ function(txt)
     ## separated by white space, possibly quoted.  Note that we could
     ## have newlines in DCF entries but do not allow them in file names,
     ## hence we gsub() them out.
-    con <- textConnection(gsub("\n", " ", txt))
+    con <- textConnection(gsub("\n", " ", txt, fixed=TRUE))
     on.exit(close(con))
     scan(con, what = character(), strip.white = TRUE, quiet = TRUE)
 }
@@ -1916,20 +1918,34 @@ function(x, dfile)
             x[ind] <- iconv(x[ind], "latin1", "ASCII", sub = "byte")
         }
     }
-    ## <FIXME>
-    ## ## Avoid declared encodings when writing out.
-    ##   Encoding(x) <- "unknown"
-    ## This may also yield byte subs when formatting non-keep-white
-    ## fields via strwrap() (PR#17550).
-    ## Remove eventually ...
-    ## </FIXME>
     ## Avoid folding for fields where we keep whitespace when reading,
-    ## plus two where legacy code does not strip whitespace and so
-    ## we should not wrap the field.
-    write.dcf(rbind(x), dfile,
-              keep.white = c(.keep_white_description_fields,
-                             "Maintainer", "BugReports"),
-              useBytes = TRUE)
+    ## plus two more fields where legacy code does not strip whitespace
+    ## and so we should not wrap.
+    ## Unfortunately, wrapping may destroy declared encodings: for the
+    ## fields where we do not keep whitespace, write.dcf() calls
+    ## formatDL() which in turn calls paste() on the results of
+    ## strwrap(), and paste() may change the (common) encoding.
+    ## In particular, pasting a latin1 string comes out in UTF-8 in a
+    ## UTF-8 locale, and with unknown encoding in a C locale.
+    ## Hence, when we have a declared non-UTF-8 encoding, we convert
+    ## to UTF-8 before formatting, and convert back to the declared
+    ## encoding when writing out.
+    if(!is.na(encoding) && (encoding != "UTF-8")) {
+        x <- iconv(x, from = encoding, to = "UTF-8")
+        tfile <- tempfile()
+        write.dcf(rbind(x), tfile,
+                  keep.white = c(.keep_white_description_fields,
+                                 "Maintainer", "BugReports"),
+                  useBytes = TRUE)
+        writeLines(iconv(readLines(tfile),
+                         from = "UTF-8", to = encoding),
+                   dfile, useBytes = TRUE)
+    } else {
+        write.dcf(rbind(x), dfile,
+                  keep.white = c(.keep_white_description_fields,
+                                 "Maintainer", "BugReports"),
+                  useBytes = TRUE)
+    }
 }
 
 ### ** .read_repositories
