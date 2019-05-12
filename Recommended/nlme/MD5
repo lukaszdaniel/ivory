@@ -284,8 +284,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-0ee38bb9e35aacac94403db16d07d230 *ChangeLog
-b7c358361c757f49d18301540b07caa5 *DESCRIPTION
+cc29819d2dc4aee9eb4b7f8d41dcdcf3 *ChangeLog
+03af4b1b1f77b36b72610f17629c6aaf *DESCRIPTION
 3ca8715986b6bea70610e4cadb339fb0 *po/R-fr.po
 e3419ef4249ee866f3bcc092a096746e *po/R-ko.po
 c9c286a5731db93724b9f0e7b259f702 *po/R-de.po
@@ -340,12 +340,12 @@ fbc3578ce2cb6c7873734d6dc39f7e21 *tests/nlme.R
 4c68332d00c3e3f1818fcb8aa60e0d9b *tests/updateLme.R
 dea84bf6c5e3f953ea2c523ef749bfae *tests/fitted.R
 c891766c6501e010dd5f64ce00861d0e *tests/predict.lme.R
-946438a97ebe003c99bff1c15eaa5f6c *tests/lme.Rout.save
+5cb0b3ce893be3b62deb5c9bc29242d6 *tests/lme.Rout.save
 cdced2c0665ee6e3f80188b92267e8c8 *tests/augPredmissing.R
 683f1a1d208c479e7bed8df5bb420a2e *tests/anova.gls.R
-f0da87ac5cc109d11e6422f0782adb63 *tests/coef.Rout.save
+83bb8e158d66e2e2adc9c9f813a5f649 *tests/coef.Rout.save
 8c6c3eb850ed8c354ba02b1cbbc560bf *tests/gnls-ch8.R
-2e0e9399a6d604aeb205727f74ae6127 *tests/missing.Rout.save
+06a39b62fd58625f3c07b2900bd36f4c *tests/missing.Rout.save
 4191899f37fc372e70793b9c71d72304 *tests/missing.R
 8ff37dbadc319edc1c2c0a737ab2f845 *tests/contrMat.R
 983a211f5ce1f86238b827a45974bfa1 *R/varFunc.R
@@ -410,8 +410,8 @@ c9d999719eb82ea836bb47b863fd6561 *data/Soybean.rda
 c6f5ef1b5d08f6621389253b526ab55c *data/Oxide.rda
 f75a266ee9d05d92f3d6a6fdb4165c51 *Changes
 716000afd0baf90c06b6b4c209654ccc *src/nlmefit.h
-63f3ad3bd535666192eefaa5cdcba919 *src/nlmefit.c
-8e8bdb86bdb919557b6415a1042bae2f *src/init.c
+d3298995c468dddc799eb41b95db8bd7 *src/nlmefit.c
+ee1ee57435cd51e17eff7cfcb765d89b *src/init.c
 87f59f283d5378beccb42f205be507cf *src/pdMat.h
 4a6ee9d66b62b2838b5d54e20f04f8b0 *src/Makevars
 bdb2a20b9e6c1597229accc9a817d725 *src/matrix.h

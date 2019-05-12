@@ -201,7 +201,7 @@ a9c2b46094a4b8426e1dc629fcf4c206 *src/tprs.c
 84dcc6a896a45bdfdb892984a79b1170 *src/magic.c
 e16c691700bbb44215597c6b0c7e6d2e *src/coxph.c
 4801447cdbc0638d0aaf8ff723ba4b6b *src/discrete.c
-2d11b1a12ab358ffe87758a50fa26d60 *src/misc.c
+229c38794b96b446eb838acc40ab7f0d *src/misc.c
 03972284b3400cf82cacd5d2dc4b8cb3 *src/Makevars
 de37b0972199b796654405efc007f25b *src/matrix.h
 c3686b62a57e7d2d2719b305a4142a40 *src/sparse-smooth.c

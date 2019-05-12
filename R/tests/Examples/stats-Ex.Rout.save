@@ -6708,15 +6708,15 @@ and	9 plateau levels (y) with summary
 > 
 > ## Advanced: What's inside the function closure?
 > ls(environment(Fn12))
-[1] "f"      "method" "na.rm"  "nobs"   "noNA"   "x"      "y"      "yleft" 
+[1] "f"      "method" "na.rm"  "noNA"   "nobs"   "x"      "y"      "yleft" 
 [9] "yright"
 > ## "f"     "method" "na.rm"  "nobs"   "x"     "y"    "yleft"  "yright"
 > utils::ls.str(environment(Fn12))
 f :  numeric 0
 method :  integer 2
 na.rm :  logical TRUE
-nobs :  integer 12
 noNA :  logical TRUE
+nobs :  integer 12
 x :  numeric [1:8] -2.2 -2 -0.6 0 0.1 0.6 0.8 0.9
 y :  numeric [1:8] 0.0833 0.1667 0.3333 0.5 0.5833 ...
 yleft :  numeric 0
