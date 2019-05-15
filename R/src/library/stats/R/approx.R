@@ -123,8 +123,7 @@ approxfun <- function(x, y = NULL, method = "linear",
     if(lenR == 1) rule <- rule[c(1,1)]
     x <- regularize.values(x, y, ties, missing(ties), na.rm=na.rm)
                                         # -> (x,y) numeric of same length
-    noNA <- na.rm || !x$keptNA
-    nx <- if(noNA)
+    nx <- if(na.rm || !x$keptNA)
               length(x$x) # large vectors ==> non-integer
           else
               sum(x$notNA)
@@ -151,5 +150,6 @@ approxfun <- function(x, y = NULL, method = "linear",
 }
 
 ## avoid capturing internal calls
-.approxfun <- function(x, y, v,  method, yleft, yright, f, na.rm)
+## default for 'na.rm': for old saved approxfun() {incl ecdf()} results
+.approxfun <- function(x, y, v,  method, yleft, yright, f, na.rm=TRUE)
     .Call(C_Approx, x, y, v, method, yleft, yright, f, na.rm)
