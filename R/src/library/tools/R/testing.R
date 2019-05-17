@@ -413,7 +413,7 @@ testInstalledPackage <-
 
     if ("vignettes" %in% types && dir.exists(file.path(pkgdir, "doc"))) {
         message(gettextf("Running vignettes for package %s", sQuote(pkg)), domain = "R-tools")
-        checkVignettes(pkg, lib.loc, latex = FALSE, weave =TRUE)
+        checkVignettes(pkg, lib.loc = lib.loc, latex = FALSE, weave = TRUE)
     }
 
     invisible(0L)

@@ -402,6 +402,20 @@ add_dummies <- function(dir, Log)
         cat(td2)
         if (!is.null(Log) && Log$con > 0L) cat(td2, file = Log$con)
     }
+    print_time0 <- function(t1, t2)
+    {
+        td <- t2 - t1
+        if(td[3L] < td0) return(character())
+        td2 <- if (td[3L] > 600) {
+            td <- td/60
+            if(WINDOWS) sprintf(" [%dm]", round(td[3L]))
+            else sprintf(" [%dm/%dm]", round(sum(td[-3L])), round(td[3L]))
+        } else {
+            if(WINDOWS) sprintf(" [%ds]", round(td[3L]))
+            else sprintf(" [%ds/%ds]", round(sum(td[-3L])), round(td[3L]))
+        }
+        td2
+    }
 
     parse_description_field <- function(desc, field, default)
         str_parse_logic(desc[field], default=default)
@@ -3887,20 +3901,22 @@ add_dummies <- function(dir, Log)
             if(!skip_run_maybe || any(file.exists(savefiles))) {
                 checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
                 res <- character()
-                printLog0(Log, "\n")
                 def_enc <- desc["Encoding"]
                 if( (is.na(def_enc))) def_enc <- ""
                 t1 <- proc.time()
                 iseq <- seq_along(savefiles)
                 if(skip_run_maybe)
                     iseq <- iseq[file.exists(savefiles)]
+                out0 <- character()
+                anyNOTE <- FALSE
+                cat("\n")
                 for (i in iseq) {
                     file <- vigns$docs[i]
                     name <- vigns$names[i]
                     enc <- vigns$encodings[i]
-                    printLog0(Log, "  ", sQuote(basename(file)),
+                    out1 <- c("   ", sQuote(basename(file)),
                               if(nzchar(enc)) paste("using", sQuote(enc)),
-                              "...")
+                              " ...")
                     Rcmd <- paste0(opWarn_string, "\ntools:::.run_one_vignette('",
                                    basename(file), "', '", vigns$dir, "'",
                                    if (nzchar(enc))
@@ -3925,7 +3941,7 @@ add_dummies <- function(dir, Log)
                     savefile <- savefiles[i]
                     if(length(grep("^  When (running|tangling|sourcing)", out,
                                    useBytes = TRUE))) {
-                        cat(" ", gettext("failed", domain = "R-tools"), "\n", sep ="")
+                        out1 <- c(out1, " ", gettext("failed", domain = "R-tools"), "\n", sep ="")
                         keep <- as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_",
                                                       "10"))
                         res <- if (keep > 0)
@@ -3939,8 +3955,9 @@ add_dummies <- function(dir, Log)
 
                     } else if(status || " *** Run successfully completed ***" %notin% out) {
                         ## (Need not be the final line if running under valgrind)
-
-                        cat(" ", gettext("failed to complete the test", domain = "R-tools"), "\n", sep = "")
+                        keep <- as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_",
+                                                      "10"))
+                        out1 <- c(out1, " ", gettext("failed to complete the test", domain = "R-tools"), "\n")
                         out <- c(out, "", gettext("... incomplete output.  Crash?", domain = "R-tools"))
                         res <- if (keep > 0)
                             c(res,
@@ -3955,23 +3972,26 @@ add_dummies <- function(dir, Log)
                                       outfile, "', '", savefile, "',TRUE,TRUE))")
                         out2 <- R_runR0(cmd, R_opts2)
                         if(length(out2)) {
-                            print_time(t1b, t2b, NULL)
-                            noteLog(Log)
-                            printLog0(Log, ettextf("differences from %s", sQuote(basename(savefile)), domain = "R-tools"))
-                            printLog0(Log,
+                            out1 <- c(out1, print_time0(t1b, t2b))
+                            anyNOTE <- TRUE
+                            out1 <- c(out1, " ", gettext("NOTE", domain = "R-tools"), "\n")
+                            out1 <- c(out1, gettextf("differences from %s", sQuote(basename(savefile)), domain = "R-tools"))
+                            out1 <- c(out1,
                                       paste(c("", out2, ""), collapse = "\n"))
                         } else {
-                            print_time(t1b, t2b, NULL)
-                            resultLog(Log, gettext("OK", domain = "R-tools"))
+                            out1 <- c(out1, print_time0(t1b, t2b))
+                            out1 <- c(out1, " ", gettext("OK", domain = "R-tools"), "\n")
                             if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                                 unlink(outfile)
                         }
                     } else {
-                        print_time(t1b, t2b, NULL)
-                        resultLog(Log, gettext("OK", domain = "R-tools"))
+                        out1 <- c(out1, print_time0(t1b, t2b))
+                        out1 <- c(out1, " ", gettext("OK", domain = "R-tools"), "\n")
                         if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                             unlink(outfile)
                     }
+                    out0 <- c(out0, out1)
+                    cat(out1, sep = "")
                     if(!WINDOWS && !is.na(theta)) {
                         td <- t2b - t1b
                         cpu <- sum(td[-3L])
@@ -3984,7 +4004,11 @@ add_dummies <- function(dir, Log)
                 }
                 t2 <- proc.time()
                 if(!ran) {
+                    print_time(t1, t2, Log)
                     resultLog(Log, gettext("NONE", domain = "R-tools"))
+                    ## printLog0(Log, out0)
+                    if (!is.null(Log) && Log$con > 0L)
+                        cat(out0, sep ="", file = Log$con)
                 } else {
                     print_time(t1, t2, Log)
                     if(R_check_suppress_RandR_message)
@@ -4000,7 +4024,11 @@ add_dummies <- function(dir, Log)
                             printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
                             maybe_exit(1L)
                         }
-                    } else resultLog(Log, gettext("OK", domain = "R-tools"))
+                    } else if(anyNOTE) noteLog(Log)
+                    else resultLog(Log, gettext("OK", domain = "R-tools"))
+##                    printLog0(Log, out0)
+                    if (!is.null(Log) && Log$con > 0L)
+                        cat(out0, sep = "", file = Log$con)
                     if(!WINDOWS && !is.na(theta)) {
                         td <- t2 - t1
                         cpu <- sum(td[-3L])

@@ -20,6 +20,8 @@
       \item \code{approxfun()} and \code{approx()} gain option \code{na.rm
 	= TRUE}.  If set to false, missing y values now propagate into
       interpolated values.
+
+      \item Long vectors are now supported in \code{for} loops.
     }
   }
 
@@ -74,6 +76,9 @@
 
       \item \code{boxplot(y ~ f, horizontal=TRUE)} now produces correct x-
       and y-labels.
+
+      \item \code{rbind.data.frame()} no longer drops \code{<NA>} levels
+      from factor columns (\PR{17562}).
     }
   }
 }
