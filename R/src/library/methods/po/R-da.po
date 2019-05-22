@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-12 17:47\n"
+"POT-Creation-Date: 2019-05-22 19:40\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -375,7 +375,7 @@ msgstr ""
 
 #. R/BasicClasses.R: gettextf("An object of class %s", dQuote(cl), domain = "R-methods")
 #. R/BasicClasses.R: gettextf("An object of class %s", dQuote(class(object)), domain = "R-methods")
-#. R/show.R: gettextf("An object of class %s", cl, domain = "R-methods")
+#. R/show.R: gettextf("An object of class %s", classLabel(cl), domain = "R-methods")
 #. R/show.R: gettextf("An object of class %s", dQuote(class(object)))
 #. R/trace.R: gettextf("An object of class %s", dQuote(class(object)), domain = "R-methods")
 #: R/BasicClasses.R:0 R/show.R:0 R/trace.R:0
@@ -2769,6 +2769,12 @@ msgid ""
 "of class %s"
 msgstr ""
 "S3Class-argumentet skal være en overklasse af %s: gælder ikke for klasse %s"
+
+#. R/show.R: gettext("the 'oldMethods' argument is deprecated, as it has been unused since R 1.7.0",     domain = "R-methods")
+#: R/show.R:0
+msgid ""
+"the 'oldMethods' argument is deprecated, as it has been unused since R 1.7.0"
+msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s",     dQuote(class(replace)))
 #: R/ClassExtensions.R:0

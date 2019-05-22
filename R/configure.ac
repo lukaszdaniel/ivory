@@ -2,7 +2,7 @@
 ###
 ### Process this file with autoconf to produce a configure script.
 ###
-### Copyright (C) 1998-2018 R Core Team
+### Copyright (C) 1998-2019 R Core Team
 ###
 ### This file is part of R.
 ###
@@ -886,6 +886,19 @@ AC_CHECK_SIZEOF(long)
 AC_CHECK_SIZEOF(long long)
 AC_CHECK_SIZEOF(double)
 AC_CHECK_SIZEOF(size_t)
+
+R_CSTACK_DIRECTION
+
+if test "${r_cv_cstack_direction}" = "up"; then
+  cstack_dir=-1
+else
+  cstack_dir=1
+fi
+AC_DEFINE_UNQUOTED([C_STACK_DIRECTION], ${cstack_dir}, 
+                    [C stack direction: 1 (down) or -1 (up)])
+
+
+
 AC_ARG_ENABLE([long-double],
 [AS_HELP_STRING([--enable-long-double],[use long double type @<:@yes@:>@])],
 [if test "${enableval}" = no; then
@@ -1042,6 +1055,7 @@ fi
 ## -fno-optimize-sibling-calls to avoid recent gfortran optimizations
 ## that break with LAPACK/BLAS-style passing of length-1 strings
 ## (without hidden arguments giving their lengths).
+AC_MSG_CHECKING([if need -fno-optimize-sibling-calls for gfortran])
 AC_CACHE_VAL([r_cv_have_gfortran7],
 [r_cv_have_gfortran7=no
 if test "x${GFC}" = xyes; then
@@ -1052,8 +1066,42 @@ if test "x${GFC}" = xyes; then
 fi])
 
 if test "x${r_cv_have_gfortran7}" = xyes; then
+  AC_MSG_RESULT([yes])
   R_XTRA_FFLAGS="-fno-optimize-sibling-calls"
+else
+  AC_MSG_RESULT([no])
 fi
+
+### type for Fortran 'hidden' character lengths. We have already
+### tested for gfortran >= 7
+
+AC_MSG_CHECKING([for type of 'hidden' Fortran character lengths])
+if test "x${FC_LEN_T}" != "x"; then
+  fc_len_t=${FC_LEN_T}
+else
+  fc_len_t="unknown"
+  AC_CACHE_VAL([r_cv_have_gfortran8],
+  [r_cv_have_gfortran8=no
+  if test "x${GFC}" = xyes; then
+    gfortran_version_maj=`echo "__GNUC__" | ${FC} -E -P - | ${SED} 's/ //g'`
+    if test ${gfortran_version_maj} -ge 8; then
+      r_cv_have_gfortran8=yes
+    fi
+  fi])
+
+  if test "x${r_cv_have_gfortran8}" = xyes; then
+    fc_len_t="size_t"
+  elif test "x${GFC}" = xyes; then
+    fc_len_t="int"
+  fi
+fi
+AC_MSG_RESULT([${fc_len_t}])
+
+if test "x${fc_len_t}" != "xunknown"; then
+   AC_DEFINE_UNQUOTED([FC_LEN_T], ${fc_len_t}, 
+                      [C type used for Fortran character lengths])
+fi
+
 
 AC_SUBST(CFLAGS)
 AC_SUBST(MAIN_CFLAGS)
@@ -1191,7 +1239,7 @@ if test "${ac_cv_fc_compiler_gnu}" = yes; then
 fi
 ## Assume flang is the same as clang (it is a modified front end)
 case "${FC}" in
-  *flang)
+  *flang|flang-*)
     fpicflags=${cpicflags}
     ;;
 esac

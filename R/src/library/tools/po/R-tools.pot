@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-05-11 21:02\n"
+"POT-Creation-Date: 2019-05-22 19:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2894,9 +2894,11 @@ msgid "NONE"
 msgstr ""
 
 
+#: R/check.R: 0
 #: R/logging.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
+#. R/check.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
 #. R/testing.R: gettext(" NOTE", domain = "R-tools")
@@ -8532,7 +8534,7 @@ msgstr[1]    ""
 
 
 #: R/check.R: 0
-#. R/check.R: ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
+#. R/check.R: ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
 #. R/check.R: ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:",     domain = "R-tools")
 
 msgid        "File which contains pragma(s) suppressing diagnostics:"

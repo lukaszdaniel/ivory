@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 21:02+0200\n"
+"POT-Creation-Date: 2019-05-22 19:40+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -398,186 +398,186 @@ msgstr ""
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
 
-#: loessc.c:230 loessc.c:351
+#: loessc.c:243 loessc.c:364
 #, fuzzy, c-format
 msgid "'%s' argument is too small"
 msgstr "vão é muito pequeno"
 
-#: loessc.c:236
+#: loessc.c:249
 msgid "workspace required is too large"
 msgstr ""
 
-#: loessc.c:345
+#: loessc.c:358
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 
-#: loessc.c:346
+#: loessc.c:359
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:347 loessc.c:348
+#: loessc.c:360 loessc.c:361
 #, fuzzy, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "'fn' não é uma função"
 
-#: loessc.c:349
+#: loessc.c:362
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 
-#: loessc.c:350
+#: loessc.c:363
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:352 loessc.c:353 optim.c:366 optimize.c:255 optimize.c:262
+#: loessc.c:365 loessc.c:366 optim.c:394 optimize.c:255 optimize.c:262
 #: optimize.c:271 optimize.c:345 optimize.c:350 optimize.c:366 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor de '%s' inválido"
 
-#: loessc.c:354
+#: loessc.c:367
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr ""
 
-#: loessc.c:355
+#: loessc.c:368
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 
-#: loessc.c:356
+#: loessc.c:369
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:357
+#: loessc.c:370
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:358
+#: loessc.c:371
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr ""
 
-#: loessc.c:359
+#: loessc.c:372
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 
-#: loessc.c:360
+#: loessc.c:373
 #, fuzzy, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "m deve ser uma lista"
 
-#: loessc.c:361
+#: loessc.c:374
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
 "lowesl."
 msgstr ""
 
-#: loessc.c:362
+#: loessc.c:375
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 
-#: loessc.c:363
+#: loessc.c:376
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr ""
 
-#: loessc.c:364
+#: loessc.c:377
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr ""
 
-#: loessc.c:365
+#: loessc.c:378
 #, fuzzy, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "Matriz singular em ldet"
 
-#: loessc.c:366
+#: loessc.c:379
 #, fuzzy, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "Matriz singular em ldet"
 
-#: loessc.c:367
+#: loessc.c:380
 #, fuzzy, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "Matriz singular em ldet"
 
-#: loessc.c:368
+#: loessc.c:381
 #, fuzzy, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "Matriz singular em ldet"
 
-#: loessc.c:369
+#: loessc.c:382
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:370
+#: loessc.c:383
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:371
+#: loessc.c:384
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr ""
 
-#: loessc.c:372
+#: loessc.c:385
 #, c-format
 msgid "insufficient stack space"
 msgstr ""
 
-#: loessc.c:373
+#: loessc.c:386
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr ""
 
-#: loessc.c:374
+#: loessc.c:387
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:375
+#: loessc.c:388
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:376
+#: loessc.c:389
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr ""
 
-#: loessc.c:377
+#: loessc.c:390
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr ""
 
-#: loessc.c:378
+#: loessc.c:391
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr ""
 
-#: loessc.c:379
+#: loessc.c:392
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr ""
 
-#: loessc.c:380
+#: loessc.c:393
 #, c-format
 msgid "not yet implemented"
 msgstr ""
 
-#: loessc.c:382
+#: loessc.c:395
 #, fuzzy, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "erro starma código %d"
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "Matriz singular em ldet"
 
-#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:193
+#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:221
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' inválido"
@@ -856,28 +856,28 @@ msgstr "função alvo em optim retorna um objeto de comprimento %d ao invés de 
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "gradiente em optim retorna um objeto de comprimento %d ao invés de %d"
 
-#: optim.c:134 optim.c:161
+#: optim.c:146 optim.c:185
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr ""
 
-#: optim.c:189 optim.c:258 optim.c:275 optim.c:300 optim.c:330 optim.c:395
-#: optim.c:409
+#: optim.c:217 optim.c:286 optim.c:303 optim.c:328 optim.c:358 optim.c:423
+#: optim.c:437
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr "'fn' não é uma função"
 
-#: optim.c:207 optim.c:281 optim.c:306 optim.c:336 optim.c:401 optim.c:415
+#: optim.c:235 optim.c:309 optim.c:334 optim.c:364 optim.c:429 optim.c:443
 #, fuzzy, c-format
 msgid "'%s' argument is of the wrong length"
 msgstr "argumento 'data' é do tipo errado"
 
-#: optim.c:236
+#: optim.c:264
 #, fuzzy, c-format
 msgid "'%s' argument is not an integer"
 msgstr "'maxit' não é um inteiro"
 
-#: optim.c:256
+#: optim.c:284
 #, fuzzy, c-format
 msgid "'%s' argument is not a positive integer"
 msgstr "'maxit' não é um inteiro"

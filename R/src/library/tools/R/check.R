@@ -3016,30 +3016,31 @@ add_dummies <- function(dir, Log)
             checkingLog(Log, gettext("checking for pragmas in C/C++ headers and code ...", domain = "R-tools"))
             ans <- .check_pragmas('.')
             if(length(ans)) {
-                if(length(warn <- attr(ans, "warn"))  ||
-                   length(port <- attr(ans, "port")))
-                    {
-                        warningLog(Log)
-                        msg <- character()
-                        rest <- ans
-                        if(length(warn)) {
-                            msg <- c(msg, ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics", "Files which contain pragma(s) suppressing important diagnostics", domain = "R-tools"),
+                warn <- attr(ans, "warn")
+                port <- attr(ans, "port")
+                if(length(warn) || length(port))
+                {
+                    warningLog(Log)
+                    msg <- character()
+                    rest <- ans
+                    if(length(warn)) {
+                        msg <- c(msg, ngettext(length(warn), "File which contains pragma(s) suppressing important diagnostics", "Files which contain pragma(s) suppressing important diagnostics", domain = "R-tools"),
                             .pretty_format(warn))
-                            rest <- setdiff(ans, warn)
-                        }
-                        if(length(port)) {
+                        rest <- setdiff(ans, warn)
+                    }
+                    if(length(port)) {
                             msg <- c(msg, ngettext(length(port), "File which contains non-portable pragma(s)", "Files which contain non-portable pragma(s)", domain = "R-tools"),
                            .pretty_format(port))
-                        }
-                        if(length(rest)) {
-                            msg <- c(msg, ngettext(length(rest), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools"),
-                            .pretty_format(rest))
-                        }
-                   } else {
-                        noteLog(Log)
-                        msg <- ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
-                        msg <- c(msg, .pretty_format(ans))
+                    }	
+                    if(length(rest)) {
+                        msg <- c(msg, ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools"),
+                                 .pretty_format(rest))
                     }
+                } else {
+                    noteLog(Log)
+                    msg <- ngettext(length(ans), "File which contains pragma(s) suppressing diagnostics:", "Files which contain pragma(s) suppressing diagnostics:", domain = "R-tools")
+                    msg <- c(msg, .pretty_format(ans))
+                }
                 printLog0(Log, paste(c(msg,""), collapse = "\n"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
@@ -3047,9 +3048,9 @@ add_dummies <- function(dir, Log)
         Check_flags <- Sys.getenv("_R_CHECK_COMPILATION_FLAGS_", "FALSE")
         if(config_val_to_logical(Check_flags)) {
             instlog <- if (startsWith(install, "check"))
-                install_log_path
-            else
-                file.path(pkgoutdir, "00install.out")
+                           install_log_path
+                       else
+                           file.path(pkgoutdir, "00install.out")
             if (file.exists(instlog) && dir.exists('src')) {
                 checkingLog(Log, gettext("checking for compilation flags used ...", domain = "R-tools"))
                 lines <- readLines(instlog, warn = FALSE)
@@ -3195,7 +3196,8 @@ add_dummies <- function(dir, Log)
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         checkingLog(Log, gettext("checking whether the package can be unloaded cleanly ...", domain = "R-tools"))
-        Rcmd <- sprintf("suppressMessages(library(%s)); cat('\n---- unloading\n'); detach(\"package:%s\")", pkgname, pkgname)
+        Rcmd <- sprintf("suppressMessages(library(%s)); cat('\n---- unloading\n'); detach(\"package:%s\")",
+                        pkgname, pkgname)
         out <- R_runR0(Rcmd, opts, c(env, env1), arch = arch)
         if (any(grepl("^(Error|\\.Last\\.lib failed)", out)) ||
             length(attr(out, "status"))) {
@@ -3901,8 +3903,6 @@ add_dummies <- function(dir, Log)
             if(!skip_run_maybe || any(file.exists(savefiles))) {
                 checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
                 res <- character()
-                def_enc <- desc["Encoding"]
-                if( (is.na(def_enc))) def_enc <- ""
                 t1 <- proc.time()
                 iseq <- seq_along(savefiles)
                 if(skip_run_maybe)
@@ -3915,7 +3915,7 @@ add_dummies <- function(dir, Log)
                     name <- vigns$names[i]
                     enc <- vigns$encodings[i]
                     out1 <- c("   ", sQuote(basename(file)),
-                              if(nzchar(enc)) paste("using", sQuote(enc)),
+                              if(nzchar(enc)) paste(" using", sQuote(enc)),
                               " ...")
                     Rcmd <- paste0(opWarn_string, "\ntools:::.run_one_vignette('",
                                    basename(file), "', '", vigns$dir, "'",

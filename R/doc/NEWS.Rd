@@ -8,20 +8,21 @@
 \section{\Rlogo CHANGES IN R-devel}{
   \subsection{NEW FEATURES}{
     \itemize{
-      \item \code{assertError()} and \code{assertWarning()} (package
-      \pkg{tools}) now can check for \emph{specific} error or warning
-      classes via new optional 2nd argument \code{classes} (which is not
-      back compatible with previous use of unnamed 2nd arg.)
+      \item \code{assertError()} and \code{assertWarning()} (in package
+      \pkg{tools}) can now check for \emph{specific} error or warning
+      classes \emph{via} the new optional second argument \code{classes}
+      (which is not back compatible with previous use of an unnamed second
+      argument.)
 
       \item \code{Df2formula()}, the utility for the data frame method of
       \code{formula()}, now works without parsing and explicit evaluation,
       starting from Suharto Anggono's suggestion in \PR{17555}.
 
-      \item \code{approxfun()} and \code{approx()} gain option \code{na.rm
-	= TRUE}.  If set to false, missing y values now propagate into
-      interpolated values.
+      \item \code{approxfun()} and \code{approx()} gain a new argument
+      \code{na.rm} defaulting to true.  If set to false, missing
+      \code{y} values now propagate into the interpolated values.
 
-      \item Long vectors are now supported in \code{for} loops.
+      \item Long vectors are now supported in \code{for()} loops.
     }
   }
 
@@ -42,6 +43,17 @@
     }
   }
 
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item Detection of the C stack direction has been moved from
+      run-time to \command{configure}: this is safer with LTO builds and
+      allows the detection to be overridden -- see file \file{config.site}.
+      
+      \item User-set \samp{DEFS} (e.g., in \file{config.site} is now
+      used for compiling packages (including base packages).
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{formula(x)} with \code{length(x) > 1} character vectors,
@@ -51,11 +63,26 @@
 
       \item Long-standing issue where the X11 device could lose events
       shortly after startup has been addressed \PR{16702}.
+
+      \item \code{rbind.data.frame()} no longer drops \code{<NA>} levels
+      from factor columns by default, \PR{17562}.
+
+      \item \code{available.packages()} and hence \code{install.packages()}
+      now pass their \code{...} to \code{download.file()}, fulfilling the
+      wish of \PR{17532}.
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 3.6.0 patched}{
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item The use of a character vector with \code{.Fortran()} is
+      formally deprecated and gives a non-portability warning.  (It has
+      long been strongly discouraged in \sQuote{Writing R Extensions}.)
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item On Windows, GUI package installation via \code{menuInstallPkgs()}
@@ -77,8 +104,15 @@
       \item \code{boxplot(y ~ f, horizontal=TRUE)} now produces correct x-
       and y-labels.
 
-      \item \code{rbind.data.frame()} no longer drops \code{<NA>} levels
-      from factor columns (\PR{17562}).
+      \item \code{rbind.data.frame()} allows to keep \code{<NA>} levels
+      from factor columns (\PR{17562}) via new option \code{factor.exclude}.
+
+      \item Correct messaging in C++ pragma checks in \pkg{tools} code for
+      \command{R CMD check}, fixing \PR{17566} thanks to Xavier Robin.
+
+      \item{print()}ing and auto-printing no longer differs for
+      \code{function}s with a user defined \code{print.function}, thanks to
+      Bill Dunlap's report.
     }
   }
 }
