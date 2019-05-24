@@ -979,7 +979,7 @@ if(FALSE) {
             if(isFALSE(SI))
                 starsmsg(stars,
                          gettext("using non-staged installation via StagedInstall field", domain = "R-tools"))
-            else
+            else if (Sys.getenv("_R_INSTALL_SUPPRESS_NO_STAGED_MESSAGE_") != "yes")
                 starsmsg(stars, gettext("using non-staged installation", domain = "R-tools"))
         }
 
@@ -1916,6 +1916,10 @@ if(FALSE) {
                                                "Rcmd.exe")),
                              "INSTALL", shQuote(args), "--no-multiarch")
                     if (arch == "x64") {
+                        ## this will suppress stars message "using
+                        ## non-staged installation", which could otherwise
+                        ## be turned into R CMD check note
+                        Sys.setenv("_R_INSTALL_SUPPRESS_NO_STAGED_MESSAGE_" = "yes")
                         cmd <- c(cmd, "--libs-only --no-staged-install",
                                  if(zip_up) "--build")
                         Sys.unsetenv("_R_INSTALL_NO_DONE_")
@@ -1924,6 +1928,8 @@ if(FALSE) {
                     if (debug) message(gettextf("about to run command %s", sQuote(cmd)), domain = "R-tools")
                     message("\n", gettextf("install for architecture %s", arch), "\n", sep = "", domain = "R-tools")
                     res <- system(cmd)
+                    if (arch == "x64")
+                        Sys.unsetenv("_R_INSTALL_SUPPRESS_NO_STAGED_MESSAGE_")
                     if(res) break
                 }
             }
@@ -1940,8 +1946,13 @@ if(FALSE) {
                     cmd <- c(shQuote(file.path(R.home("bin"), "R")),
                              "--arch", arch, "CMD",
                              "INSTALL", shQuote(args), "--no-multiarch")
-                    if (arch != archs[1L])
+                    if (arch != archs[1L]) {
+                        ## this will suppress stars message "using
+                        ## non-staged installation", which could otherwise
+                        ## be turned into R CMD check note
+                        Sys.setenv("_R_INSTALL_SUPPRESS_NO_STAGED_MESSAGE_" = "yes")
                         cmd <- c(cmd, "--libs-only --no-staged-install")
+                    }
                     if (arch == last) {
                         Sys.unsetenv("_R_INSTALL_NO_DONE_")
                         if(tar_up) cmd <- c(cmd, "--build")
@@ -1950,6 +1961,8 @@ if(FALSE) {
                     if (debug) message(gettextf("about to run command %s", sQuote(cmd)), domain = "R-tools")
                     message("\n", gettextf("install for architecture %s", arch), "\n", sep = "", domain = "R-tools")
                     res <- system(cmd)
+                    if (arch != archs[1L])
+                        Sys.unsetenv("_R_INSTALL_SUPPRESS_NO_STAGED_MESSAGE_")
                     if(res) break
                 }
             }

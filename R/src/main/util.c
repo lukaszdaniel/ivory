@@ -1068,6 +1068,13 @@ const char *getTZinfo(void)
 #endif // not Win32
 
 
+#ifdef _WIN32
+static void encode_cleanup(void *data)
+{
+    WinUTF8out = TRUE;
+}
+#endif
+
 /* encodeString(x, w, quote, justify) */
 SEXP attribute_hidden do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -1112,6 +1119,20 @@ SEXP attribute_hidden do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(quote) w +=2; /* for surrounding quotes */
     }
     PROTECT(ans = duplicate(x));
+#ifdef _WIN32
+    RCNTXT cntxt;
+    Rboolean havecontext = FALSE;
+    /* do_encodeString is not printing, but returning a string, it therefore
+       must not produce Rgui escapes (do_encodeString may get called as part
+       of print dispatch with WinUTF8out being already set to TRUE). */
+    if (WinUTF8out) {
+	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	             R_NilValue, R_NilValue);
+	cntxt.cend = &encode_cleanup;
+	havecontext = TRUE;
+	WinUTF8out = FALSE;
+    }
+#endif
     for(i = 0; i < len; i++) {
 	s = STRING_ELT(x, i);
 	if(na || s != NA_STRING) {
@@ -1126,6 +1147,12 @@ SEXP attribute_hidden do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	}
     }
+#ifdef _WIN32
+    if (havecontext) {
+	encode_cleanup(NULL);
+	endcontext(&cntxt);
+    }
+#endif
     UNPROTECT(1);
     return ans;
 }

@@ -1237,7 +1237,8 @@ cbind.data.frame <- function(..., deparse.level = 1)
     data.frame(..., check.names = FALSE)
 
 rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
-                             stringsAsFactors = default.stringsAsFactors(), factor.exclude = NULL)
+                             stringsAsFactors = default.stringsAsFactors(),
+                             factor.exclude = TRUE)
 {
     match.names <- function(clabs, nmi)
     {
@@ -1260,8 +1261,10 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
                      else if(is.list(x)) length(x[[1L]])
 					# mismatched lists are checked later
                      else length(x), 1L)
-        if(any(nr > 0L)) allargs <- allargs[nr > 0L]
-        else return(allargs[[1L]]) # pretty arbitrary
+	if(any(n0 <- nr == 0L)) {
+	    if(all(n0)) return(allargs[[1L]]) # pretty arbitrary
+	    allargs <- allargs[!n0]
+	}
     }
     n <- length(allargs)
     if(n == 0L)
@@ -1293,11 +1296,13 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
 	    }
 	}
     }
+    smartX <- isTRUE(factor.exclude)
+
+    ## check the arguments, develop row and column labels
     nrow <- 0L
     value <- clabs <- NULL
     all.levs <- list()
-    for(i in seq_len(n)) {
-	## check the arguments, develop row and column labels
+    for(i in seq_len(n)) { ## check and treat arg [[ i ]]  -- part 1
 	xi <- allargs[[i]]
 	nmi <- nms[i]
         ## coerce matrix to data frame
@@ -1324,6 +1329,7 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
 		nvar <- length(value)
 		all.levs <- vector("list", nvar)
 		has.dim <- facCol <- ordCol <- logical(nvar)
+		if(smartX) NA.lev <- ordCol
 		for(j in seq_len(nvar)) {
 		    xj <- value[[j]]
                     facCol[j] <-
@@ -1342,7 +1348,10 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
                 if(facCol[jj]) {
                     if(length(lij <- levels(xij))) {
                         all.levs[[jj]] <- unique(c(all.levs[[jj]], lij))
-                        ordCol[jj] <- ordCol[jj] & is.ordered(xij)
+			if(ordCol[jj])
+			    ordCol[jj] <- is.ordered(xij)
+			if(smartX && !NA.lev[jj])
+			    NA.lev[jj] <- anyNA(lij)
                     } else if(is.character(xij))
                         all.levs[[jj]] <- unique(c(all.levs[[jj]], xij))
                 }
@@ -1373,7 +1382,8 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
             if(make.row.names)
 		rlabs[[i]] <- if(nzchar(nmi)) nmi else as.integer(nrow)
 	}
-    }
+    } # for(i .)
+
     nvar <- length(clabs)
     if(nvar == 0L)
 	nvar <- max(lengths(allargs)) # only vector args
@@ -1386,13 +1396,17 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
 	value[pseq] <- list(logical(nrow)) # OK for coercion except to raw.
         all.levs <- vector("list", nvar)
 	has.dim <- facCol <- ordCol <- logical(nvar)
+	if(smartX) NA.lev <- ordCol
     }
     names(value) <- clabs
     for(j in pseq)
 	if(length(lij <- all.levs[[j]]))
             value[[j]] <-
 		factor(as.vector(value[[j]]), levels = lij,
-		       exclude = factor.exclude, ordered = ordCol[j])
+		       exclude = if(smartX) {
+				     if(!NA.lev[j]) NA # else NULL
+				 } else factor.exclude,
+		       ordered = ordCol[j])
     if(any(has.dim)) {
 	rmax <- max(unlist(rows))
 	for(i in pseq[has.dim])
@@ -1405,7 +1419,8 @@ rbind.data.frame <- function(..., deparse.level = 1, make.row.names = TRUE,
 		value[[i]] <- array(xi, c(rmax, pi), list(rn, dn[[2L]]))
 	    }
     }
-    for(i in seq_len(n)) {
+
+    for(i in seq_len(n)) { ## add arg [[i]] to result
 	xi <- unclass(allargs[[i]])
 	if(!is.list(xi))
 	    if(length(xi) != nvar)
