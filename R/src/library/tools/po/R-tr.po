@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-05-26 14:13\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1511,6 +1511,11 @@ msgstr ""
 msgid "File %s:"
 msgstr ""
 
+#. R/QC.R: gettextf("File '%s' sets .Random.seed.", file.path("R", y), domain = "R-tools")
+#: R/QC.R:0
+msgid "File '%s' sets .Random.seed."
+msgstr ""
+
 #. R/utils.R: stop("File 'DESCRIPTION' is missing.")
 #: R/utils.R:0
 msgid "File 'DESCRIPTION' is missing."
@@ -1689,6 +1694,18 @@ msgstr ""
 #. R/check.R: gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following Makefiles with CR or CRLF line endings:"
+msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Found the following \\keyword or \\concept entries which likely give several "
+"index terms:"
+msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries with Rd markup:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following \\keyword or \\concept entries with Rd markup:"
 msgstr ""
 
 #. R/check.R: gettext("Found the following additional notes/warnings:\n", domain = "R-tools")
@@ -3738,6 +3755,11 @@ msgstr ""
 #. R/QC.R: gettext("This is the name of a base package.", domain = "R-tools")
 #: R/QC.R:0
 msgid "This is the name of a base package."
+msgstr ""
+
+#. R/QC.R: gettext("This is usually neither needed nor wanted.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This is usually neither needed nor wanted."
 msgstr ""
 
 #. R/QC.R: gettext("This name was used for a base package and is remapped by library().", domain = "R-tools")
@@ -6649,6 +6671,13 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Found the following (possibly) invalid URL:"
 msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid file URI:", "Found the following (possibly) invalid file URIs:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following (possibly) invalid file URI:"
+msgid_plural "Found the following (possibly) invalid file URIs:"
 msgstr[0] ""
 msgstr[1] ""
 

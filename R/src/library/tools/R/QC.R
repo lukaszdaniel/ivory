@@ -6659,6 +6659,52 @@ function(dir, localOnly = FALSE)
            !file.exists(file.path(dir, "build",
                                   paste0( meta[["Package"]], ".pdf"))))
             out$missing_manual_pdf <- TRUE
+        ## Also check for \keyword and \concept entries which use Rd
+        ## markup or (likely) give multiple index terms.
+        ## This could be moved to .check_Rd_metadata() ...
+        .fmt <- function(x) {
+            Map(function(f, e) {
+                    e <- vapply(e, .Rd_deparse, "")
+                    c(paste0("  File ", sQuote(f), ":"),
+                      paste0("    ",
+                             gsub("\n",
+                                  "\n      ",
+                                  ifelse(nchar(e) < 50L,
+                                         e,
+                                         paste(substring(e, 1L, 50L),
+                                               "[TRUNCATED]")))))
+                },
+                names(x), x)
+        }
+        bad <- lapply(Rdb,
+                      function(Rd) {
+                          Rd <- Rd[!is.na(match(RdTags(Rd),
+                                                c("\\keyword",
+                                                  "\\concept")))]
+                          Rd[vapply(Rd,
+                                    function(e)
+                                        any(unlist(RdTags(e)) != "TEXT"),
+                                    NA)]
+                      })
+        bad <- Filter(length, bad)
+        if(length(bad))
+            out$Rd_keywords_or_concepts_with_Rd_markup <- .fmt(bad)
+        bad <- lapply(Rdb,
+                      function(Rd) {
+                          Rd <- Rd[!is.na(match(RdTags(Rd),
+                                                c("\\keyword",
+                                                  "\\concept")))]
+                          Rd[grepl("[,\n]",
+                                   trimws(vapply(Rd, paste, "",
+                                                 collapse = "\n"))) &
+                             !vapply(Rd,
+                                     function(e)
+                                         any(unlist(RdTags(e)) != "TEXT"),
+                                     NA)]
+                  })
+        bad <- Filter(length, bad)
+        if(length(bad))
+            out$Rd_keywords_or_concepts_more_than_one <- .fmt(bad)
     }
 
 
@@ -6941,6 +6987,21 @@ function(dir, localOnly = FALSE)
             out$R_files_non_ASCII <- lines
     }
 
+    if(file.exists(fp <- file.path(dir, "R",
+                                   paste0(basename(dir),
+                                          "-internal.R")))) {
+        exprs <- parse(fp)
+        tst <- function(e) {
+            is.call(e) &&
+                (length(s <- as.character(e[[1L]])) == 1L) &&
+                (s == "<-") &&
+                (length(s <- as.character(e[[2L]])) == 1L) &&
+                (s == ".Random.seed")
+        }
+        if(any(vapply(exprs, tst, NA)))
+            out$R_files_set_random_seed <- basename(fp)
+    }
+    
     size <- Sys.getenv("_R_CHECK_SIZE_OF_TARBALL_",
                        unset = NA_character_)
     if(!is.na(size) && (as.integer(size) > 5000000))
@@ -6954,8 +7015,8 @@ function(dir, localOnly = FALSE)
     if(!capabilities("libcurl") && remote)
         out$no_url_checks <- TRUE
     else {
-        bad <- tryCatch(check_url_db(url_db_from_package_sources(dir),
-                                     remote = remote),
+        udb <- url_db_from_package_sources(dir)
+        bad <- tryCatch(check_url_db(udb, remote = remote),
                         error = identity)
         if(inherits(bad, "error")) {
             out$bad_urls <- bad
@@ -6977,6 +7038,29 @@ function(dir, localOnly = FALSE)
                 bad[ind, c("Status", "Message")] <- ""
             if(NROW(bad))
                 out$bad_urls <- bad
+        }
+        if(config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_",
+                                            "FALSE"))) {
+            ## Also check file URIs in packages.
+            ## These only make sense relative to their parent.
+            ## We could integrate this check into check_url_db() by e.g.
+            ## passing the top-level package dir via a suitable env var,
+            ## but this is not quite straightforward as the check code
+            ## aggregates parents according to URI.
+            urls <- udb$URL
+            parts <- parse_URI_reference(urls)
+            ind <- (parts[, "scheme"] %in% c("", "file"))
+            fpaths <- parts[ind, "path"]
+            parents <- udb[ind, "Parent"]
+            ppaths <- dirname(parents)
+            pos <- which(!file.exists(file.path(ifelse(nzchar(ppaths),
+                                                       file.path(dir,
+                                                                 ppaths),
+                                                       dir),
+                                                fpaths)))
+            if(length(pos))
+                out$bad_file_URIs <-
+                    cbind(fpaths[pos], parents[pos])
         }
     }
 
@@ -7638,6 +7722,11 @@ function(x, ...)
             if(length(y <- x$no_url_checks) && y) {
                 c(gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
             })),
+      if(length(y <- x$bad_file_URIs)) {
+          paste(c(ngettext(NROW(y), "Found the following (possibly) invalid file URI:", "Found the following (possibly) invalid file URIs:", domain = "R-tools"),
+                  sprintf("  URI: %s\n    From: %s", y[, 1L], y[, 2L])),
+                collapse = "\n")
+      },
       fmt(if(length(y <- x$bad_dois)) {
               if(inherits(y, "error"))
                   paste(c(gettext("Checking DOIs failed with message:", domain = "R-tools"),
@@ -7653,6 +7742,10 @@ function(x, ...)
                   paste0("  ", names(y), "\n    ",
                          vapply(y, paste, "", collapse = "\n    "),
                          collapse = "\n")),
+                collapse = "\n")
+      },
+      if(length(y <- x$R_files_set_random_seed)) {
+          paste(c(gettextf("File '%s' sets .Random.seed.", file.path("R", y), domain = "R-tools"), gettext("This is usually neither needed nor wanted.", domain = "R-tools")),
                 collapse = "\n")
       },
       fmt(c(if(length(x$title_is_name)) {
@@ -7699,7 +7792,15 @@ function(x, ...)
             })),
       if(length(y <- x$build_time_stamp_msg)) y,
       if(length(y <- x$size_of_tarball))
-          sprintf(ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools"), y)
+          sprintf(ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools"), y),
+      fmt(c(if(length(y <- x$Rd_keywords_or_concepts_with_Rd_markup))
+                paste(c(gettext("Found the following \\keyword or \\concept entries with Rd markup:", domain = "R-tools"),
+                        unlist(y)),
+                      collapse = "\n"),
+            if(length(y <- x$Rd_keywords_or_concepts_more_than_one))
+                paste(c(gettext("Found the following \\keyword or \\concept entries which likely give several index terms:", domain = "R-tools"),
+                        unlist(y)),
+                      collapse = "\n")))
       )
 }
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-05-26 14:13\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1666,6 +1666,11 @@ msgstr "папка '%s' не существует"
 msgid "File %s:"
 msgstr "Файл %s:"
 
+#. R/QC.R: gettextf("File '%s' sets .Random.seed.", file.path("R", y), domain = "R-tools")
+#: R/QC.R:0
+msgid "File '%s' sets .Random.seed."
+msgstr ""
+
 #. R/utils.R: stop("File 'DESCRIPTION' is missing.")
 #: R/utils.R:0
 msgid "File 'DESCRIPTION' is missing."
@@ -1853,6 +1858,19 @@ msgstr "Найдены возможные глобальные T или F в с�
 #: R/check.R:0
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Found the following \\keyword or \\concept entries which likely give several "
+"index terms:"
+msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries with Rd markup:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following \\keyword or \\concept entries with Rd markup:"
+msgstr "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
 
 #. R/check.R: gettext("Found the following additional notes/warnings:\n", domain = "R-tools")
 #: R/check.R:0
@@ -4074,6 +4092,11 @@ msgstr ""
 #, fuzzy
 msgid "This is the name of a base package."
 msgstr "Это имя базового пакета."
+
+#. R/QC.R: gettext("This is usually neither needed nor wanted.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This is usually neither needed nor wanted."
+msgstr ""
 
 #. R/QC.R: gettext("This name was used for a base package and is remapped by library().", domain = "R-tools")
 #: R/QC.R:0
@@ -7313,6 +7336,15 @@ msgstr[2] "Найдены возможные глобальные T или F в 
 #, fuzzy
 msgid "Found the following (possibly) invalid URL:"
 msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+msgstr[1] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+msgstr[2] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid file URI:", "Found the following (possibly) invalid file URIs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid file URI:"
+msgid_plural "Found the following (possibly) invalid file URIs:"
 msgstr[0] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
 msgstr[1] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
 msgstr[2] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"

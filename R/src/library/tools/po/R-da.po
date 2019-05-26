@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-05-26 14:13\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1560,6 +1560,11 @@ msgstr "mappe »%s« findes ikke"
 msgid "File %s:"
 msgstr ""
 
+#. R/QC.R: gettextf("File '%s' sets .Random.seed.", file.path("R", y), domain = "R-tools")
+#: R/QC.R:0
+msgid "File '%s' sets .Random.seed."
+msgstr ""
+
 #. R/utils.R: stop("File 'DESCRIPTION' is missing.")
 #: R/utils.R:0
 msgid "File 'DESCRIPTION' is missing."
@@ -1743,6 +1748,19 @@ msgstr "Felter med ikke-ASCII-værdier:"
 #: R/check.R:0
 msgid "Found the following Makefiles with CR or CRLF line endings:"
 msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries which likely give several index terms:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Found the following \\keyword or \\concept entries which likely give several "
+"index terms:"
+msgstr ""
+
+#. R/QC.R: gettext("Found the following \\keyword or \\concept entries with Rd markup:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following \\keyword or \\concept entries with Rd markup:"
+msgstr "Felter med ikke-ASCII-værdier:"
 
 #. R/check.R: gettext("Found the following additional notes/warnings:\n", domain = "R-tools")
 #: R/check.R:0
@@ -3851,6 +3869,11 @@ msgstr ""
 #, fuzzy
 msgid "This is the name of a base package."
 msgstr "Dette er navnet på en basispakke."
+
+#. R/QC.R: gettext("This is usually neither needed nor wanted.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This is usually neither needed nor wanted."
+msgstr ""
 
 #. R/QC.R: gettext("This name was used for a base package and is remapped by library().", domain = "R-tools")
 #: R/QC.R:0
@@ -6905,6 +6928,14 @@ msgstr[1] "Felter med ikke-ASCII-værdier:"
 #, fuzzy
 msgid "Found the following (possibly) invalid URL:"
 msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] "Felter med ikke-ASCII-værdier:"
+msgstr[1] "Felter med ikke-ASCII-værdier:"
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid file URI:", "Found the following (possibly) invalid file URIs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid file URI:"
+msgid_plural "Found the following (possibly) invalid file URIs:"
 msgstr[0] "Felter med ikke-ASCII-værdier:"
 msgstr[1] "Felter med ikke-ASCII-værdier:"
 
