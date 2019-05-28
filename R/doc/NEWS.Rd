@@ -48,9 +48,13 @@
       \item Detection of the C stack direction has been moved from
       run-time to \command{configure}: this is safer with LTO builds and
       allows the detection to be overridden -- see file \file{config.site}.
-      
-      \item User-set \samp{DEFS} (e.g., in \file{config.site} is now
+
+      \item User-set \samp{DEFS} (e.g., in \file{config.site}) is now
       used for compiling packages (including base packages).
+      
+      \item There is a new variant option \option{--enable-lto=check}
+      for checking consistency of BLAS/LAPACK calls --- see
+      \sQuote{Writing R Extensions}.
     }
   }
 
@@ -68,8 +72,8 @@
       from factor columns by default, \PR{17562}.
 
       \item \code{available.packages()} and hence \code{install.packages()}
-      now pass their \code{...} to \code{download.file()}, fulfilling the
-      wish of \PR{17532}.
+      now pass their \code{...} argument to \code{download.file()},
+      fulfilling the wish of \PR{17532}.
     }
   }
 }
@@ -107,12 +111,19 @@
       \item \code{rbind.data.frame()} allows to keep \code{<NA>} levels
       from factor columns (\PR{17562}) via new option \code{factor.exclude}.
 
+      Additionally, it works in one more case with matrix-columns which
+      had been reported on 2017-01-16 by Krzysztof Banas.
+
       \item Correct messaging in C++ pragma checks in \pkg{tools} code for
       \command{R CMD check}, fixing \PR{17566} thanks to Xavier Robin.
 
       \item{print()}ing and auto-printing no longer differs for
       \code{function}s with a user defined \code{print.function}, thanks to
       Bill Dunlap's report.
+
+      \item [On Windows only], \code{writeClipboard(.., format = <n>)} now
+      does correctly pass \code{format} to the underlying C code, thanks to
+      a bug report (with patch) by Jenny Bryan.
     }
   }
 }
