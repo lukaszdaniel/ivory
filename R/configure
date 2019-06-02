@@ -3705,7 +3705,8 @@ case "${host_os}" in
     ## Allow for ppc64le (Debian calls ppc64el), powerpc64le ...
     case "${host_cpu}" in
       x86_64|mips64|ppc64*|powerpc64*|sparc64|s390x)
-        if test -d /usr/lib64; then
+        ## Debian/Ubuntu has "lib64", but the primary location is "lib"
+        if test -d /usr/lib64 && test ! -f /etc/debian_version; then
           libnn=lib64
 	fi
       ;;
@@ -25405,7 +25406,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:25408: \"$ac_link\") >&5
+(eval echo $as_me:25409: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -25480,7 +25481,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:25483: \"$ac_link\") >&5
+(eval echo $as_me:25484: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
