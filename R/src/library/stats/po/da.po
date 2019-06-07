@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-22 19:40+0200\n"
+"POT-Creation-Date: 2019-06-07 08:14+0200\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr ""
 
-#: Trunmed.c:373
+#: Trunmed.c:372
 msgid "After inittree():\n"
 msgstr ""
 

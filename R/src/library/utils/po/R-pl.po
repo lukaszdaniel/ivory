@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-19 19:06\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3019,6 +3019,11 @@ msgstr "indeks poza granicami"
 #: R/packages2.R:0
 msgid "system (cmd0): %s"
 msgstr "system (cmd0): %s"
+
+#. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "system code page:"
+msgstr ""
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
 #: R/Sweave.R:0

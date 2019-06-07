@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-26 14:13\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1915,6 +1915,12 @@ msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
 msgid "Found the following files with insufficient permissions:"
 msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
 
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following files/directories:"
+msgstr "다음의 함수로부터 .Internal 호출을 찾았습니다:"
+
 #. R/check.R: gettext("Found the following hidden files and directories:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following hidden files and directories:"
@@ -2799,6 +2805,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -3368,6 +3375,11 @@ msgstr "패키지 %s에 대한 비니에트를 실행중입니다"
 msgid "S3 methods shown with full name in documentation object %s:"
 msgstr ""
 "다큐멘테이션 객체 '%s' 내에 전체이름과 함께 보여지는 S3 메소드들입니다:"
+
+#. R/QC.R: gettext("S3 methods using delayed registration:", domain = "R-tools")
+#: R/QC.R:0
+msgid "S3 methods using delayed registration:"
+msgstr ""
 
 #. R/QC.R: gettextf("S4 class codoc mismatches from documentation object %s:", sQuote(nm), domain = "R-tools")
 #: R/QC.R:0
@@ -4977,6 +4989,12 @@ msgstr ""
 #: R/check.R:0
 msgid "checking for missing documentation entries ..."
 msgstr ""
+
+#. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for non-standard things in the check directory ..."
+msgstr "비어있는 'data' 디렉토리입니다"
 
 #. R/check.R: gettext("checking for old-style vignette sources ...", domain = "R-tools")
 #: R/check.R:0

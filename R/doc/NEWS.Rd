@@ -52,16 +52,10 @@
 
       \item User-set \samp{DEFS} (e.g., in \file{config.site}) is now
       used for compiling packages (including base packages).
-      
-      \item There is a new variant option \option{--enable-lto=check}
-      for checking consistency of BLAS/LAPACK calls --- see
-      \sQuote{Writing R Extensions}.
 
-      \item The default detection of the shell variable \code{libNN} is
-      overridden for derivatives of Debian Linux, some of which have
-      started to have a \file{/usr/lib64} directory.
-      (E.g.\sspace{}Ubuntu 19.04.)  As before, it can be specified in
-      \file{config.site}.
+      \item There is a new variant option \option{--enable-lto=check}
+      for checking consistency of BLAS/LAPACK/LINPACK calls --- see
+      \sQuote{Writing R Extensions}.
     }
   }
 
@@ -69,10 +63,10 @@
     \itemize{
       \item Header \file{Rconfig.h} contains the value of
 	\code{FC_LEN_T} deduced at installation which is used by the
-	propotypes in headers \file{BLAS.h} and \file{Lapack.h} but to
+	prototypes in headers \file{BLAS.h} and \file{Lapack.h} but to
 	avoid extensive breakage this is only exposed when
 	\code{USE_FC_LEN_T} is defined.
-	   
+
 	If a package's C/C++ calls to BLAS/LAPACK allow for the
 	\sQuote{hidden} arguments use by most Fortran compilers to pass
 	the lengths of Fortran character arguments, define
@@ -103,6 +97,23 @@
 }
 
 \section{\Rlogo CHANGES IN R 3.6.0 patched}{
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item The default detection of the shell variable \code{libNN} is
+      overridden for derivatives of Debian Linux, some of which have
+      started to have a \file{/usr/lib64} directory.
+      (E.g.\sspace{}Ubuntu 19.04.)  As before, it can be specified in
+      \file{config.site}.
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD config} knows the values of \code{AR} and
+      \code{RANLIB}, often set for LTO builds.
+    }
+  }
+
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item The use of a character vector with \code{.Fortran()} is
@@ -148,6 +159,14 @@
       \item [On Windows only], \code{writeClipboard(.., format = <n>)} now
       does correctly pass \code{format} to the underlying C code, thanks to
       a bug report (with patch) by Jenny Bryan.
+
+      \item \code{as.data.frame()} treats 1D arrays the same as vectors,
+      \PR{17570}.
+
+      \item \code{runmed(x, *)} when \code{x} contains missing values
+      now works for \code{algorithm="Stuetzle"}, also based on
+      \code{smoothEnds(y)} working with NA's, and no longer segfaults
+      for the \code{"Turlach"} algorithm; reported by Hilmar Berger.
     }
   }
 }

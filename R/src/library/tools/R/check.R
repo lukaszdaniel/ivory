@@ -4544,7 +4544,8 @@ add_dummies <- function(dir, Log)
                              ## new in gcc 8
                              ": warning: .* \\[-Wcatch-value=\\]",
                              # warns on code deprecated in C++11
-                            ## Fatal, not warning, for clang and Solaris ODS
+                             ": warning: .* \\[-Wlto-type-mismatch\\]",
+                             ## Fatal, not warning, for clang and Solaris ODS
                              ": warning: .* with a value, in function returning void"
                             )
 
@@ -5523,6 +5524,9 @@ add_dummies <- function(dir, Log)
                                          "FALSE"))
     R_check_serialization <-
         config_val_to_logical(Sys.getenv("_R_CHECK_SERIALIZATION_", "FALSE"))
+    R_check_things_in_check_dir <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_THINGS_IN_CHECK_DIR_",
+                                         "FALSE"))
 
     if (!nzchar(check_subdirs)) check_subdirs <- R_check_subdirs_strict
 
@@ -5575,6 +5579,7 @@ add_dummies <- function(dir, Log)
         R_check_toplevel_files <- TRUE
         R_check_vignettes_skip_run_maybe <- TRUE
         R_check_serialization <- TRUE
+        R_check_things_in_check_dir <- TRUE
     } else {
         ## do it this way so that INSTALL produces symbols.rds
         ## when called from check but not in general.
@@ -5960,6 +5965,41 @@ add_dummies <- function(dir, Log)
                 }
             }
         }
+
+        if(R_check_things_in_check_dir) {
+            checkingLog(Log,
+                        gettext("checking for non-standard things in the check directory ...", domain = "R-tools"))
+            things <-
+                setdiff(list.files(pkgoutdir, all.files = TRUE,
+                                   include.dirs = TRUE, no.. = TRUE),
+                        c("00check.log",
+                          "00install.out",
+                          "00package.dcf",
+                          "00_pkg_src",
+                          pkgname,
+                          sprintf("%s-Ex.%s",
+                                  pkgname,
+                                  c("R", "Rout", "pdf", "timings")),
+                          sprintf("%s-manual.%s",
+                                  pkgname,
+                                  c("log", "pdf")),
+                          "Rdlatex.log",
+                          "R_check_bin",
+                          "build_vignettes.log",
+                          "tests", "vign_test"))
+            ## Examples calling dev.new() give files Rplots*.pdf,
+            ## building vignettes give *.log files: be nice ...
+            things <- things[!grepl("^Rplots.*[.]pdf$|[.]log$", things)]
+            if(length(things)) {
+                noteLog(Log)
+                msg <- c(gettext("Found the following files/directories:", domain = "R-tools"),
+                         strwrap(paste(sQuote(things), collapse = " "),
+                                 indent = 2L, exdent = 2L))
+                printLog0(Log, paste(msg, collapse = "\n"), "\n")
+            } else
+                resultLog(Log, gettext("OK", domain = "R-tools"))
+        }
+
         summaryLog(Log)
 
         if(config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_STATUS_SUMMARY_",

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-06-07 08:14+0200\n"
 "PO-Revision-Date: 2019-02-15 17:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -148,7 +148,7 @@ msgstr "niepoprawne określenie '%s'"
 msgid "'%s' contains missing values"
 msgstr "'%s' zawiera brakujące wartości"
 
-#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
 #, c-format
 msgid "'%s' argument must be a character string"
@@ -229,25 +229,29 @@ msgstr "niewspierana wersja systemu Windows"
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "argument '%s' musi być wektorem tekstowym lub pustym wektorem"
 
-#: windows/util.c:318
+#: windows/util.c:294
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
+
+#: windows/util.c:320
 msgid "unable to open the clipboard"
 msgstr "nie można otworzyć schowka"
 
-#: windows/util.c:323
+#: windows/util.c:325
 msgid "unable to write to the clipboard"
 msgstr "nie można zapisać do schowka"
 
-#: windows/util.c:450
+#: windows/util.c:452
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "argument '%s' musi mieć długość równą 1"
 
-#: windows/util.c:563
+#: windows/util.c:565
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
 
-#: windows/util.c:567
+#: windows/util.c:569
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "element %2$d '%1$s' nie jest uchwytem okna"

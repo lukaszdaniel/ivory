@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 18:34+0100\n"
+"POT-Creation-Date: 2019-06-07 08:14+0200\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -155,7 +155,7 @@ msgstr "유효하지 않은 '%s' 지정입니다"
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
@@ -239,25 +239,29 @@ msgstr "지원되지 않는 버전의 윈도우즈입니다"
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "인자는 반드시 문자형 벡터 또는  raw 벡터이어야 합니다"
 
-#: windows/util.c:318
+#: windows/util.c:294
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
+
+#: windows/util.c:320
 msgid "unable to open the clipboard"
 msgstr "클립보드를 열 수 없습니다"
 
-#: windows/util.c:323
+#: windows/util.c:325
 msgid "unable to write to the clipboard"
 msgstr "클립보드에 쓸 수 없습니다"
 
-#: windows/util.c:450
+#: windows/util.c:452
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'%s'는 반드시 길이가 1이어야 합니다"
 
-#: windows/util.c:563
+#: windows/util.c:565
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'%s'은 반드시 리스트이어야 합니다"
 
-#: windows/util.c:567
+#: windows/util.c:569
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s'의 구성요소 %d는 윈도우 핸들이 아닙니다"

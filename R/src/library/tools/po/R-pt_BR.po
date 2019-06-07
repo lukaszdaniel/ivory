@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-26 14:13\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1788,6 +1788,11 @@ msgstr ""
 msgid "Found the following files with insufficient permissions:"
 msgstr ""
 
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found the following files/directories:"
+msgstr ""
+
 #. R/check.R: gettext("Found the following hidden files and directories:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following hidden files and directories:"
@@ -2641,6 +2646,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -3186,6 +3192,11 @@ msgstr ""
 msgid "S3 methods shown with full name in documentation object %s:"
 msgstr ""
 "Arquivos de dados com uso no objeto de documentação '%s' mas não no código:"
+
+#. R/QC.R: gettext("S3 methods using delayed registration:", domain = "R-tools")
+#: R/QC.R:0
+msgid "S3 methods using delayed registration:"
+msgstr ""
 
 #. R/QC.R: gettextf("S4 class codoc mismatches from documentation object %s:", sQuote(nm), domain = "R-tools")
 #: R/QC.R:0
@@ -4712,6 +4723,12 @@ msgstr ""
 #: R/check.R:0
 msgid "checking for missing documentation entries ..."
 msgstr ""
+
+#. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for non-standard things in the check directory ..."
+msgstr "Nomes de argumentos no código que não estão nos documentos:"
 
 #. R/check.R: gettext("checking for old-style vignette sources ...", domain = "R-tools")
 #: R/check.R:0

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.7.0\n"
-"POT-Creation-Date: 2019-04-19 19:06\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3788,6 +3788,13 @@ msgstr ""
 #. R/packages2.R: gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " "))
 
 msgid "system (cmd0): %s"
+msgstr ""
+
+
+#: R/sessionInfo.R: 0
+#. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
+
+msgid "system code page:"
 msgstr ""
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-26 14:13+0200\n"
+"POT-Creation-Date: 2019-06-07 08:13+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -668,26 +668,26 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
-#: src/main/paste.c:619 src/main/paste.c:624 src/main/platform.c:332
-#: src/main/platform.c:334 src/main/platform.c:336 src/main/platform.c:352
-#: src/main/platform.c:363 src/main/platform.c:416 src/main/platform.c:418
-#: src/main/platform.c:733 src/main/platform.c:735 src/main/platform.c:821
-#: src/main/platform.c:824 src/main/platform.c:1039 src/main/platform.c:1198
-#: src/main/platform.c:1204 src/main/platform.c:1207 src/main/platform.c:1210
-#: src/main/platform.c:1213 src/main/platform.c:1216 src/main/platform.c:1219
-#: src/main/platform.c:1222 src/main/platform.c:1319 src/main/platform.c:1322
-#: src/main/platform.c:1325 src/main/platform.c:1363 src/main/platform.c:1421
-#: src/main/platform.c:1424 src/main/platform.c:1630 src/main/platform.c:1633
-#: src/main/platform.c:1636 src/main/platform.c:1672 src/main/platform.c:1675
-#: src/main/platform.c:1678 src/main/platform.c:1714 src/main/platform.c:1747
-#: src/main/platform.c:1749 src/main/platform.c:1828 src/main/platform.c:1912
-#: src/main/platform.c:2159 src/main/platform.c:2218 src/main/platform.c:2423
-#: src/main/platform.c:2426 src/main/platform.c:2429 src/main/platform.c:2432
-#: src/main/platform.c:2435 src/main/platform.c:2438 src/main/platform.c:2672
-#: src/main/platform.c:2675 src/main/platform.c:2678 src/main/platform.c:2681
-#: src/main/platform.c:2684 src/main/platform.c:2687 src/main/platform.c:2690
-#: src/main/platform.c:2766 src/main/platform.c:2774 src/main/platform.c:2810
-#: src/main/platform.c:2852 src/main/platform.c:2942 src/main/print.c:242
+#: src/main/paste.c:619 src/main/paste.c:624 src/main/platform.c:362
+#: src/main/platform.c:364 src/main/platform.c:366 src/main/platform.c:382
+#: src/main/platform.c:393 src/main/platform.c:446 src/main/platform.c:448
+#: src/main/platform.c:734 src/main/platform.c:736 src/main/platform.c:822
+#: src/main/platform.c:825 src/main/platform.c:1040 src/main/platform.c:1199
+#: src/main/platform.c:1205 src/main/platform.c:1208 src/main/platform.c:1211
+#: src/main/platform.c:1214 src/main/platform.c:1217 src/main/platform.c:1220
+#: src/main/platform.c:1223 src/main/platform.c:1320 src/main/platform.c:1323
+#: src/main/platform.c:1326 src/main/platform.c:1364 src/main/platform.c:1422
+#: src/main/platform.c:1425 src/main/platform.c:1631 src/main/platform.c:1634
+#: src/main/platform.c:1637 src/main/platform.c:1673 src/main/platform.c:1676
+#: src/main/platform.c:1679 src/main/platform.c:1715 src/main/platform.c:1748
+#: src/main/platform.c:1750 src/main/platform.c:1829 src/main/platform.c:1913
+#: src/main/platform.c:2160 src/main/platform.c:2219 src/main/platform.c:2424
+#: src/main/platform.c:2427 src/main/platform.c:2430 src/main/platform.c:2433
+#: src/main/platform.c:2436 src/main/platform.c:2439 src/main/platform.c:2673
+#: src/main/platform.c:2676 src/main/platform.c:2679 src/main/platform.c:2682
+#: src/main/platform.c:2685 src/main/platform.c:2688 src/main/platform.c:2691
+#: src/main/platform.c:2769 src/main/platform.c:2777 src/main/platform.c:2813
+#: src/main/platform.c:2855 src/main/platform.c:2945 src/main/print.c:242
 #: src/main/print.c:248 src/main/print.c:271 src/main/print.c:278
 #: src/main/print.c:285 src/main/random.c:471 src/main/random.c:475
 #: src/main/random.c:482 src/main/random.c:510 src/main/Rdynload.c:1368
@@ -791,7 +791,7 @@ msgstr "잘못된 장치입니다 "
 msgid "invalid input in '%s' function"
 msgstr "Rmbstowcs 에 입력이 잘못되엇습니다 "
 
-#: src/gnuwin32/extra.c:871 src/main/platform.c:1396
+#: src/gnuwin32/extra.c:871 src/main/platform.c:1397
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "파일 선택이 취소되었습니다 "
@@ -1349,7 +1349,7 @@ msgstr "첫번째 인수는 벡터여야 합니다"
 #: src/main/errors.c:1078 src/main/errors.c:1183 src/main/errors.c:1208
 #: src/main/errors.c:1213 src/main/errors.c:1490 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
-#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3223
+#: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3226
 #: src/main/seq.c:254 src/main/seq.c:261 src/main/seq.c:265 src/main/seq.c:365
 #: src/main/seq.c:372 src/main/seq.c:375 src/main/seq.c:377 src/main/seq.c:420
 #: src/main/seq.c:424 src/main/seq.c:428 src/main/sort.c:1404
@@ -2037,8 +2037,8 @@ msgstr "빈 환경의 모체를 설정할 수 없습니다"
 msgid "cannot write to this connection"
 msgstr "이 연결에 쓸 수 없습니다"
 
-#: src/main/builtin.c:578 src/main/builtin.c:608 src/main/platform.c:330
-#: src/main/platform.c:348 src/main/print.c:147 src/main/print.c:254
+#: src/main/builtin.c:578 src/main/builtin.c:608 src/main/platform.c:360
+#: src/main/platform.c:378 src/main/print.c:147 src/main/print.c:254
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s' 의 지정이 잘못되었습니다"
@@ -2560,7 +2560,7 @@ msgstr "출력 변환하는 동안 잘못된 char 문자열이 있습니다"
 msgid "invalid input found on input connection '%s'"
 msgstr "입력 연결 '%s'에 잘못된 입력이있었습니다"
 
-#: src/main/connections.c:743 src/main/platform.c:928
+#: src/main/connections.c:743 src/main/platform.c:929
 #, fuzzy, c-format
 msgid "cannot open file '%ls': %s"
 msgstr "파일 '%s'를 열수없습니다:%s"
@@ -6503,243 +6503,243 @@ msgstr "불가능한 모드(x)입니다"
 msgid "atomic vector arguments only"
 msgstr "벡터 인수들만 허용됩니다"
 
-#: src/main/platform.c:401 src/main/platform.c:446
+#: src/main/platform.c:431 src/main/platform.c:476
 msgid "write error during file append"
 msgstr "파일에 추가 중에 쓰기 오류가 발생했습니다"
 
-#: src/main/platform.c:421
+#: src/main/platform.c:451
 msgid "nothing to append to"
 msgstr "추가 해야 할 것이 없습니다 "
 
-#: src/main/platform.c:475
+#: src/main/platform.c:505
 msgid "invalid filename argument"
 msgstr "파일 이름 인수가 잘못되었습니다"
 
-#: src/main/platform.c:487
+#: src/main/platform.c:517
 #, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr "파일 '%s'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:501 src/main/platform.c:570 src/main/platform.c:654
+#: src/main/platform.c:531 src/main/platform.c:571 src/main/platform.c:655
 msgid "invalid first filename"
 msgstr "첫번째 파일명이 잘못되었습니다"
 
-#: src/main/platform.c:513
+#: src/main/platform.c:543
 #, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr "파일 '%s'를 지울 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:572 src/main/platform.c:656
+#: src/main/platform.c:573 src/main/platform.c:657
 msgid "invalid second filename"
 msgstr "두번째 파일명이 부적절합니다"
 
-#: src/main/platform.c:575 src/main/platform.c:659
+#: src/main/platform.c:576 src/main/platform.c:660
 msgid "nothing to link"
 msgstr "링크할 것이 없습니다"
 
-#: src/main/platform.c:585
+#: src/main/platform.c:586
 msgid "symbolic links are not supported on this version of Windows"
 msgstr "symbolic links are not supported on this version of Windows"
 
-#: src/main/platform.c:601 src/main/platform.c:674 src/main/platform.c:2441
-#: src/main/platform.c:2450
+#: src/main/platform.c:602 src/main/platform.c:675 src/main/platform.c:2442
+#: src/main/platform.c:2451
 #, fuzzy, c-format
 msgid "'%s' path is too long"
 msgstr "경로가 너무 깁니다"
 
-#: src/main/platform.c:610
+#: src/main/platform.c:611
 #, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr "'%ls'에 대한 심볼릭 링크 '%ls'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:629
+#: src/main/platform.c:630
 #, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr "'%s'에 대한 심볼릭 링크 '%s'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:636
+#: src/main/platform.c:637
 #, fuzzy
 msgid "symbolic links are not supported on this platform"
 msgstr "이 플랫폼에서는 심볼릭 링크는 지원되지 않습니다"
 
-#: src/main/platform.c:679
+#: src/main/platform.c:680
 #, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr "'%ls'을 '%ls'에 연결할 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:698
+#: src/main/platform.c:699
 #, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr "'%s'를 '%s'에 연결할 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:706
+#: src/main/platform.c:707
 msgid "(hard) links are not supported on this platform"
 msgstr "이 플랫폼에서는 (하드) 링크는 지원되지 않습니다"
 
-#: src/main/platform.c:738
+#: src/main/platform.c:739
 #, fuzzy
 msgid "'from' and 'to' arguments are of different lengths"
 msgstr "'from'과 'to'의 길이가 다릅니다"
 
-#: src/main/platform.c:749 src/main/platform.c:753 src/main/platform.c:759
-#: src/main/platform.c:763
+#: src/main/platform.c:750 src/main/platform.c:754 src/main/platform.c:760
+#: src/main/platform.c:764
 #, fuzzy, c-format
 msgid "expanded '%s' name is too long"
 msgstr "전개된 'to'이름이 너무 깁니다"
 
-#: src/main/platform.c:767
+#: src/main/platform.c:768
 #, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "파일 이름을 '%s'에서 '%s'에 변경할 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:1228
+#: src/main/platform.c:1229
 msgid "invalid 'pattern' regular expression"
 msgstr "정규표현식의 'pattern'이 잘못되었습니다"
 
-#: src/main/platform.c:1345
+#: src/main/platform.c:1346
 msgid "unable to determine R home location"
 msgstr "R의 홈 위치를 확인할 수 없습니다"
 
-#: src/main/platform.c:1398 src/unix/Rscript.c:291
+#: src/main/platform.c:1399 src/unix/Rscript.c:291
 #, fuzzy
 msgid "file name is too long"
 msgstr "파일명이 너무 깁니다"
 
-#: src/main/platform.c:1460
+#: src/main/platform.c:1461
 #, fuzzy, c-format
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr "fifo '%s'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:1474 src/main/platform.c:3015
+#: src/main/platform.c:1475 src/main/platform.c:3018
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "파일 '%s'를 열 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:1485
+#: src/main/platform.c:1486
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "디렉토리 '%ls'을 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:1643 src/main/platform.c:1690 src/main/sysutils.c:1886
+#: src/main/platform.c:1644 src/main/platform.c:1691 src/main/sysutils.c:1886
 #: src/main/sysutils.c:1900
 msgid "internal out-of-memory condition"
 msgstr "내부에서 메모리 부족이 발생합니다"
 
-#: src/main/platform.c:1686 src/main/sysutils.c:1896
+#: src/main/platform.c:1687 src/main/sysutils.c:1896
 #, c-format
 msgid "read error on '%s'"
 msgstr "'%s' 읽기 오류"
 
-#: src/main/platform.c:1793
+#: src/main/platform.c:1794
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr "'LC_NUMERIC'를 설정하면 R이 이상하게 기능할 지도 모릅니다"
 
-#: src/main/platform.c:1807
+#: src/main/platform.c:1808
 msgid "LC_MESSAGES exists on Windows but is not operational"
 msgstr "LC_MESSAGES exists on Windows but is not operational"
 
-#: src/main/platform.c:1834
+#: src/main/platform.c:1835
 #, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr ""
 "OS는 로케일을 \"%s\"로 설정하기위한 요청이 수용될 수 없다고 보고하고 있습니다"
 
-#: src/main/platform.c:2201
+#: src/main/platform.c:2202
 #, fuzzy, c-format
 msgid "directory '%s' already exists"
 msgstr "'%s'는 이미 존재합니다"
 
-#: src/main/platform.c:2204
+#: src/main/platform.c:2205
 #, fuzzy, c-format
 msgid "cannot create directory '%s', reason '%s'"
 msgstr "디렉토리 '%s'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:2226
+#: src/main/platform.c:2227
 #, fuzzy, c-format
 msgid "'%s' is too long"
 msgstr "기호 '%s'가 너무 깁니다"
 
-#: src/main/platform.c:2257
+#: src/main/platform.c:2258
 #, fuzzy, c-format
 msgid "directory '%ls' already exists"
 msgstr "'%s'는 이미 존재합니다"
 
-#: src/main/platform.c:2259 src/main/platform.c:2265
+#: src/main/platform.c:2260 src/main/platform.c:2266
 #, fuzzy, c-format
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr "디렉토리 '%ls'을 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:2299 src/main/platform.c:2541
+#: src/main/platform.c:2300 src/main/platform.c:2542
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.c:2307 src/main/platform.c:2320 src/main/platform.c:2349
-#: src/main/platform.c:2369 src/main/platform.c:2557 src/main/platform.c:2570
-#: src/main/platform.c:2601 src/main/platform.c:2623
+#: src/main/platform.c:2308 src/main/platform.c:2321 src/main/platform.c:2350
+#: src/main/platform.c:2370 src/main/platform.c:2558 src/main/platform.c:2571
+#: src/main/platform.c:2602 src/main/platform.c:2624
 #, fuzzy
 msgid "path is too long"
 msgstr "경로가 너무 깁니다"
 
-#: src/main/platform.c:2332
+#: src/main/platform.c:2333
 #, fuzzy, c-format
 msgid "cannot overwrite non-directory %ls with directory %ls"
 msgstr "디렉토리 '%ls'을 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:2337
+#: src/main/platform.c:2338
 #, fuzzy, c-format
 msgid "problem with creating directory %ls: %s"
 msgstr "디렉토리 %ls를 만드는 데 문제가 있습니다 : %s\\"
 
-#: src/main/platform.c:2358
+#: src/main/platform.c:2359
 #, fuzzy, c-format
 msgid "problem with reading directory %ls: %s"
 msgstr "디렉토리 %s를 읽는 데 문제가 있습니다 : %s"
 
-#: src/main/platform.c:2377
+#: src/main/platform.c:2378
 #, fuzzy, c-format
 msgid "problem with copying %ls to %ls: %s"
 msgstr "%ls 를 %ls에 복사하는 데 문제가 있습니다 : %s"
 
-#: src/main/platform.c:2584
+#: src/main/platform.c:2585
 #, fuzzy, c-format
 msgid "cannot overwrite non-directory %s with directory %s"
 msgstr "디렉토리 '%s'를 만들 수 없습니다, 이유는 '%s'입니다"
 
-#: src/main/platform.c:2589
+#: src/main/platform.c:2590
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr "디렉토리 %s를 만드는 데 문제가 있습니다 : %s"
 
-#: src/main/platform.c:2611
+#: src/main/platform.c:2612
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr "디렉토리 %s를 읽는 데 문제가 있습니다 : %s"
 
-#: src/main/platform.c:2632
+#: src/main/platform.c:2633
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr "%s 를 %s에 복사하는 데 문제가 있습니다 : %s"
 
-#: src/main/platform.c:2771
+#: src/main/platform.c:2774
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr "'mode'의 길이는 1 이상이어야 합니다"
 
-#: src/main/platform.c:2812 src/main/platform.c:2838
+#: src/main/platform.c:2815 src/main/platform.c:2841
 msgid "insufficient OS support on this platform"
 msgstr "이 플랫폼에서는 OS지원이 불충분합니다"
 
-#: src/main/platform.c:2864
+#: src/main/platform.c:2867
 #, fuzzy, c-format
 msgid "possible truncation of value for element %d"
 msgstr "파일 truncation이 실패했습니다"
 
-#: src/main/platform.c:2946
+#: src/main/platform.c:2949
 #, fuzzy, c-format
 msgid "'%s' must be of length at least one"
 msgstr "'mode'의 길이는 1 이상이어야 합니다"
 
-#: src/main/platform.c:3036
+#: src/main/platform.c:3039
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "디렉토리 '%ls'을 만들 수 없습니다, 이유는 '%s'입니다"

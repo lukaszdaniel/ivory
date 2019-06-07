@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-05-26 14:13\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2278,6 +2278,13 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+
+msgid "Found the following files/directories:"
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("Found the following hidden files and directories:", domain = "R-tools")
 
 msgid "Found the following hidden files and directories:"
@@ -3334,6 +3341,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3347,6 +3355,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -4097,6 +4106,13 @@ msgstr ""
 #. R/QC.R: gettextf("S3 methods shown with full name in documentation object %s:", sQuote(nm),     domain = "R-tools")
 
 msgid "S3 methods shown with full name in documentation object %s:"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("S3 methods using delayed registration:", domain = "R-tools")
+
+msgid "S3 methods using delayed registration:"
 msgstr ""
 
 
@@ -6042,6 +6058,13 @@ msgstr ""
 #. R/check.R: gettext("checking for missing documentation entries ...", domain = "R-tools")
 
 msgid "checking for missing documentation entries ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
+
+msgid "checking for non-standard things in the check directory ..."
 msgstr ""
 
 

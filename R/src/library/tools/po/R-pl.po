@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-26 14:13\n"
+"POT-Creation-Date: 2019-06-07 08:14\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1880,6 +1880,12 @@ msgstr "Znaleziono następujące pliki z powtórzonymi nazwami plików:"
 msgid "Found the following files with insufficient permissions:"
 msgstr "Znaleziono następujące pliki z niewystarczającymi uprawnieniami:"
 
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following files/directories:"
+msgstr "Znaleziono następujące ukryte pliki oraz katalogi:"
+
 #. R/check.R: gettext("Found the following hidden files and directories:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following hidden files and directories:"
@@ -2798,6 +2804,7 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: gettext(" OK", domain = "R-tools")
 #. R/testing.R: message(" OK")
@@ -3381,6 +3388,11 @@ msgstr "Uruchamianie ilustracji dla pakietu %s"
 #: R/QC.R:0
 msgid "S3 methods shown with full name in documentation object %s:"
 msgstr "Metody S3 pokazane z pełną nazwą w obiekcie dokumentacji %s:"
+
+#. R/QC.R: gettext("S3 methods using delayed registration:", domain = "R-tools")
+#: R/QC.R:0
+msgid "S3 methods using delayed registration:"
+msgstr ""
 
 #. R/QC.R: gettextf("S4 class codoc mismatches from documentation object %s:", sQuote(nm), domain = "R-tools")
 #: R/QC.R:0
@@ -4986,6 +4998,12 @@ msgstr "sprawdzanie czy są jakieś pozostałości po generowaniu ilustracji ...
 #: R/check.R:0
 msgid "checking for missing documentation entries ..."
 msgstr "szukanie brakujących wpisów dokumentacji ..."
+
+#. R/check.R: gettext("checking for non-standard things in the check directory ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for non-standard things in the check directory ..."
+msgstr "szukanie niezadeklarowanych zależności w katalogu %s ..."
 
 #. R/check.R: gettext("checking for old-style vignette sources ...", domain = "R-tools")
 #: R/check.R:0

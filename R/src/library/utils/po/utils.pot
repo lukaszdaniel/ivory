@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 21:34+0200\n"
+"POT-Creation-Date: 2019-06-07 08:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,7 +146,7 @@ msgstr ""
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
 #, c-format
 msgid "'%s' argument must be a character string"
@@ -227,25 +227,29 @@ msgstr ""
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr ""
 
-#: windows/util.c:318
+#: windows/util.c:294
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
+
+#: windows/util.c:320
 msgid "unable to open the clipboard"
 msgstr ""
 
-#: windows/util.c:323
+#: windows/util.c:325
 msgid "unable to write to the clipboard"
 msgstr ""
 
-#: windows/util.c:450
+#: windows/util.c:452
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr ""
 
-#: windows/util.c:563
+#: windows/util.c:565
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr ""
 
-#: windows/util.c:567
+#: windows/util.c:569
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr ""
