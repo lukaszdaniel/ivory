@@ -92,6 +92,10 @@
       \item \code{available.packages()} and hence \code{install.packages()}
       now pass their \code{...} argument to \code{download.file()},
       fulfilling the wish of \PR{17532}.
+
+      \item \code{stopifnot()} gets new argument \code{exprObject} to allow
+      an \R object of class \code{expression} (or other \sQuote{language})
+      to work more consistently, thanks to suggestions by Suharto Anggono.
     }
   }
 }
@@ -167,6 +171,9 @@
       now works for \code{algorithm="Stuetzle"}, also based on
       \code{smoothEnds(y)} working with NA's, and no longer segfaults
       for the \code{"Turlach"} algorithm; reported by Hilmar Berger.
+
+      \item \code{vcov(glm(<quasi>), dispersion = *)} works correctly
+      again, fixing \PR{17571} thanks to Pavel Krivitsky.
     }
   }
 }

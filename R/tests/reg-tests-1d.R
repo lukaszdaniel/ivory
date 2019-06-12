@@ -2619,19 +2619,31 @@ writeLines(conditionMessage(tt))
 
 
 ## stopifnot() now works *nicely* with expression object (with 'exprs' name):
-ee <- expression(exprs=all.equal(pi, 3.1415927), 2 < 2, stop("foo!"))
-te <- tryCatch(stopifnot(exprs = ee), error=identity)
+ee <- expression(xpr=all.equal(pi, 3.1415927), 2 < 2, stop("foo!"))
+te <- tryCatch(stopifnot(exprObject = ee), error=identity)
 #stopifnot(conditionMessage(te) == "2 < 2 is not TRUE")
 ## conditionMessage(te) was  "ee are not all TRUE" in R 3.5.x
+t2 <- tryCatch(stopifnot(exprs = { T }, exprObject = ee), error=identity)
+t3 <- tryCatch(stopifnot(TRUE, 2 < 3,   exprObject = ee), error=identity)
+f <- function(ex) stopifnot(exprObject = ex)
+t4 <- tryCatch(f(ee), error=identity)
+stopifnot(grepl("one of 'exprs', 'exprObject' ", conditionMessage(t2)),
+          conditionMessage(t2) == conditionMessage(t3),
+          conditionMessage(t4) == conditionMessage(te)
+          )
+(function(e) stopifnot(exprObject = e))(expression(1 < 2, 2 <= 2:4))
+## the latter (with 'exprs = e') gave  Error in eval(exprs) : object 'e' not found
+
+
 ##
 ## Empty 'exprs' should work in almost all cases:
 stopifnot()
 stopifnot(exprs = {})
 e0 <- expression()
-stopifnot(exprs = e0)
-do.call(stopifnot, list(exprs = expression()))
-do.call(stopifnot, list(exprs = e0))
-## the last three failed in R 3.5.x
+stopifnot(exprObject = e0)
+do.call(stopifnot, list(exprObject = expression()))
+do.call(stopifnot, list(exprObject = e0))
+## the last three (w 'exprs = ')  failed in R 3.5.x
 
 
 ## as.matrix.data.frame() w/ character result and logical column, PR#17548
@@ -2772,6 +2784,29 @@ stopifnot(exprs = {
 str(x2 <- as.data.frame(array(1:2)))
 stopifnot(identical(x2[[1]], 1:2))
 ## still was "array" in R <= 3.6.0
+
+
+## vcov(<quasi>, dispersion = *) -- PR#17571
+counts <- c(18,17,15,20,10,20,25,13,12)
+treatment <- gl(3,3)
+outcome <- gl(3,1,9)
+## Poisson and Quasipoisson
+ poisfit <- glm(counts ~ outcome + treatment, family = poisson())
+qpoisfit <- glm(counts ~ outcome + treatment, family = quasipoisson())
+spois     <- summary( poisfit)
+sqpois    <- summary(qpoisfit)
+sqpois.d1 <- summary(qpoisfit, dispersion=1)
+SE1 <- sqrt(diag(V <- vcov(poisfit)))
+stopifnot(exprs = { ## Same variances and same as V
+    all.equal(vcov(spois), V)
+    all.equal(vcov(qpoisfit, dispersion=1), V) ## << was wrong
+    all.equal(vcov(sqpois.d1), V)
+    all.equal(spois    $coefficients[,"Std. Error"], SE1)
+    all.equal(sqpois.d1$coefficients[,"Std. Error"], SE1)
+    all.equal(sqpois   $coefficients[,"Std. Error"],
+              sqrt(sqpois$dispersion) * SE1)
+})
+## vcov(. , dispersion=*) was wrong on R versions 3.5.0 -- 3.6.0
 
 
 
