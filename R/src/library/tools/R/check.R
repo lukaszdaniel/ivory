@@ -3867,6 +3867,26 @@ add_dummies <- function(dir, Log)
             }
         }
 
+        if(R_check_vignette_titles) {
+            bad_vignettes <- character()
+            for(v in vigns$docs) {
+                if(trimws(vignetteInfo(v)$title == "Vignette Title"))
+                    bad_vignettes <- c(bad_vignettes, v)
+            }
+            if(nb <- length(bad_vignettes)) {
+                if(!any) noteLog(Log)
+                any <- TRUE
+                msg <- ngettext(nb,
+                                "Package vignette with placeholder title 'Vignette Title':\n",
+                                "Package vignettes with placeholder title 'Vignette Title':\n",
+                                domain = "R-tools")
+                wrapLog(msg)
+                printLog0(Log,
+                          .format_lines_with_indent(sQuote(basename(bad_vignettes))),
+                          "\n")
+            }
+        }
+
         if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
 
         if (do_install && do_vignettes) {
@@ -5527,6 +5547,9 @@ add_dummies <- function(dir, Log)
     R_check_things_in_check_dir <-
         config_val_to_logical(Sys.getenv("_R_CHECK_THINGS_IN_CHECK_DIR_",
                                          "FALSE"))
+    R_check_vignette_titles <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_VIGNETTE_TITLES_",
+                                         "FALSE"))
 
     if (!nzchar(check_subdirs)) check_subdirs <- R_check_subdirs_strict
 
@@ -5580,6 +5603,7 @@ add_dummies <- function(dir, Log)
         R_check_vignettes_skip_run_maybe <- TRUE
         R_check_serialization <- TRUE
         R_check_things_in_check_dir <- TRUE
+        R_check_vignette_titles <- TRUE
     } else {
         ## do it this way so that INSTALL produces symbols.rds
         ## when called from check but not in general.
