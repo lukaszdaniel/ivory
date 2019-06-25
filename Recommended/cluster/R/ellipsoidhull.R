@@ -56,18 +56,23 @@ ellipsoidhull <-
                 maxit= maxit,
                 ierr = res$ierr,
                 conv = conv)
-
     class(res) <- "ellipsoid"
     res
 }
+
 
 print.ellipsoid <- function(x, digits = max(1, getOption("digits") - 2), ...)
 {
     d <- length(x$loc)
     cat(gettextf("ellipsoid in %d dimensions:\n center = (%s); squared ave.radius d^2 = %s\n and shape matrix =\n", d, paste(format(x$loc, digits=digits), collapse = " "), format(x$d2, digits=digits), domain = "R-cluster"))
     print(x$cov, digits = digits, ...)
-    if(d==2) cat(gettextf("  ellipsoid's area = %s", format(volume(x), digits=digits), domain = "R-cluster"), "\n", sep = "")
-	else cat(gettextf("  ellipsoid's volume = %s", format(volume(x), digits=digits), domain = "R-cluster"), "\n", sep = "")
+    Vx <- volume(x)
+    chV <- if(!is.finite(Vx))
+        paste0("exp(", format(volume(x, log=TRUE), digits=digits),")")
+    else
+        format(Vx, digits=digits)
+    if(d==2) cat(gettextf("  ellipsoid's area = %s", chV, domain = "R-cluster"), "\n", sep = "")
+	else cat(gettextf("  ellipsoid's volume = %s", chV, domain = "R-cluster"), "\n", sep = "")
     if(!is.null(x$conv) && !x$conv) {
         if(x$ierr)
           cat("\n", gettext("** Warning: ** the algorithm did not terminate reliably!\n  most probably because of collinear data", domain = "R-cluster"), "\n", sep = "")
@@ -77,11 +82,22 @@ print.ellipsoid <- function(x, digits = max(1, getOption("digits") - 2), ...)
     invisible(x)
 }
 
-volume <- function(object) UseMethod("volume")
+volume <- function(object, ...) UseMethod("volume")
+
+if(FALSE) ## correct only for dimension d = 2  -- was used up to May 2019 :
 volume.ellipsoid <- function(object) {
     A <- object$cov
     pi * object$d2 * sqrt(det(A))
 }
+
+## modified MM from a proposal by Keefe Murphy, e-mail 2019-05-15
+volume.ellipsoid <- function(object, log=FALSE, ...) {
+    stopifnot((p <- length(object$loc)) >= 1)
+    lDet2 <- as.numeric(determinant(object$cov)$modulus) / 2 # = log(sqrt(det(.)))
+    lV <- p/2 * log(pi * object$d2) + lDet2 - lgamma(p/2 + 1)
+    if(log) lV else exp(lV)
+}
+
 
 ## For p = 2 :
 ##   Return (x[i],y[i]) points, i = seq_len(n), on boundary of ellipse, given
