@@ -56,7 +56,8 @@ MkRules: MkRules.rules
 endif
 
 CFLAGS = -O3 -Wall -pedantic $(EOPTS)
-FFLAGS = -O3 $(EOPTS)
+FFLAGS = -O3 $(EOPTS) $(GF7OPTS)
+
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
  FFLAGS += $(G_FLAG)
