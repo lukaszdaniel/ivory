@@ -55,7 +55,7 @@ runmed(x, k, endrule = c("median", "keep", "constant"),
       \item{\code{"+Big_alternate"}}{Here, all the NAs in \code{x} are
 	first replaced by alternating \eqn{\pm B}{+/- B} where \eqn{B} is a
 	\dQuote{Big} number (with \eqn{2B < M*}, where
-	\eqn{M*=}\code{\link{.Machine $ double.xmax}}).  The replacement
+	\eqn{M*=}\code{\link{.Machine} $ double.xmax}).  The replacement
 	values are \dQuote{from left} \eqn{(+B, -B, +B, \ldots)},
 	i.e. start with \code{"+"}.}
       \item{\code{"-Big_alternate"}}{almost the same as
@@ -182,7 +182,8 @@ matplot(y = cbind(x15, rT15), type = "b", ylim = c(1,9), pch=1:5, xlab = NA,
         main = "runmed(x15, k, algo = \"Turlach\")")
 mtext(paste("x15 <-", deparse(x15)))
 points(x15, cex=2)
-legend("bottomleft", legend=c("data", paste("k = ", c(3,7,9,11))), bty="n", col=1:5, lty=1:5, pch=1:5)
+legend("bottomleft", legend=c("data", paste("k = ", c(3,7,9,11))),
+       bty="n", col=1:5, lty=1:5, pch=1:5)
 }
 \keyword{smooth}
 \keyword{robust}

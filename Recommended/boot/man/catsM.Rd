@@ -13,14 +13,15 @@ the male cats.  The full data are in dataset \code{\link{cats}}
 in package \code{MASS}.
 }
 \usage{
-cats
+catsM
 }
 \format{
-This data frames contain the following columns:
+This data frame contains the following columns:
 
 \describe{
 \item{\code{Sex}}{
-A factor for the sex of the cat (levels are \code{F} and \code{M}).
+A factor for the sex of the cat (levels are \code{F} and \code{M}: all
+cases are \code{M} in this subset).
 }
 \item{\code{Bwt}}{
 Body weight in kg.
@@ -46,4 +47,3 @@ Venables, W.N. and Ripley, B.D. (1994)
 \emph{Modern Applied Statistics with S-Plus}. Springer-Verlag.
 }
 \keyword{datasets}
-% Converted by Sd2Rd version 1.15.
