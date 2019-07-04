@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-05-05 r1117) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-07-04 r1137) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-05-05 r76458) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-07-04 r76779) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -210,8 +210,8 @@ x   17.8372    87.0277    8.3389   2607.9   49.117
 [1] 4.999915 5.000005 5.000010 5.000088 5.001444 5.009849
 > 
 > (e5.1e77 <- ellipsoidhull(1e77*d5))
-'ellipsoid' in 5 dimensions:
- center = ( -3.2451e+76  9.8548e+78  3.7336e+78  1.9739e+80 -1.0819e+78 ); squared ave.radius d^2 =  5 
+ellipsoid in 5 dimensions:
+ center = (-3.2451e+76  9.8548e+78  3.7336e+78  1.9739e+80 -1.0819e+78); squared ave.radius d^2 = 5
  and shape matrix =
             x                                                  
 x 1.7837e+155  8.7028e+155  8.3389e+154 2.6079e+157 4.9117e+155
@@ -219,7 +219,7 @@ x 1.7837e+155  8.7028e+155  8.3389e+154 2.6079e+157 4.9117e+155
   8.3389e+154 -2.0502e+154  1.1928e+157 2.4478e+157 2.4458e+155
   2.6079e+157  1.2745e+158  2.4478e+157 3.8447e+159 7.1792e+157
   4.9117e+155  2.3947e+156  2.4458e+155 7.1792e+157 1.3526e+156
-  hence, volume  =  exp(898.66) 
+  ellipsoid's volume = exp(898.66)
 > stopifnot(# proof correct scaling c^5
 +     all.equal(volume(e5.1e77, log=TRUE) - volume(e5, log=TRUE),
 +               ncol(d5) *  77* log(10))
@@ -227,4 +227,4 @@ x 1.7837e+155  8.7028e+155  8.3389e+154 2.6079e+157 4.9117e+155
 > 
 > proc.time()
    user  system elapsed 
-  0.144   0.007   0.146 
+  0.172   0.013   0.176 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.7.0\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3871,8 +3871,8 @@ msgstr[1]    ""
 
 
 #: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
 
 msgid        "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"

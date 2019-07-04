@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-06-07 08:14\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -4253,6 +4253,14 @@ msgstr "데이터 프레임 '%s'내의 변수들"
 msgid "Variables overriding user/site settings:"
 msgstr ""
 
+#. R/QC.R: gettextf("Variables with usage in documentation object '%s' but not in code:", fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Variables with usage in documentation object '%s' but not in code:"
+msgstr ""
+"객체 '%s'에 대한 데이터셋의 사용법은 문서로부터 찾을 수 있으나, 코드에는 없습"
+"니다:"
+
 #. R/news.R: gettext("Version")
 #: R/news.R:0
 msgid "Version"
@@ -7458,6 +7466,14 @@ msgstr[0] "다음은 Rd xrefs를 확인할 수 없는 패키지들입니다: %s"
 #, fuzzy
 msgid "Package vignette which is not in its specified encoding:\n"
 msgid_plural "Package vignettes which are not in their specified encoding:\n"
+msgstr[0] ""
+"미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
+
+#. R/check.R: ngettext(nb, "Package vignette with placeholder title 'Vignette Title':\n", "Package vignettes with placeholder title 'Vignette Title':\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Package vignette with placeholder title 'Vignette Title':\n"
+msgid_plural "Package vignettes with placeholder title 'Vignette Title':\n"
 msgstr[0] ""
 "미리 선언된 인코딩없이 ASCII가 아닌 입력이 CITATION 파일에 사용되었습니다"
 

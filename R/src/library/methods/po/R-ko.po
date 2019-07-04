@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3602,8 +3602,8 @@ msgid_plural ""
 msgstr[0] ""
 "클래스 %2$s의 상세정의에서 슈퍼클래스 %1$s에 대한 정의를 찾을 수 없습니다"
 
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"

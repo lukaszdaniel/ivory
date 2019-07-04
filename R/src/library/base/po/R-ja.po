@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-28 20:02\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1627,11 +1627,6 @@ msgstr " 引数 target は %s、引数 current は %s です "
 msgid "Modes:"
 msgstr ""
 
-#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
-#: R/stop.R:0
-msgid "Must use 'exprs' or unnamed expressions, but not both"
-msgstr ""
-
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1697,6 +1692,11 @@ msgstr ""
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr " 引数の長さが異なります "
+
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgstr ""
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-28 20:02\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1628,11 +1628,6 @@ msgstr "목표는 %s 입니다, 현재는 %s 입니다"
 msgid "Modes:"
 msgstr ""
 
-#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
-#: R/stop.R:0
-msgid "Must use 'exprs' or unnamed expressions, but not both"
-msgstr ""
-
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1698,6 +1693,11 @@ msgstr ""
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "인수의 길이가 다릅니다"
+
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgstr ""
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0

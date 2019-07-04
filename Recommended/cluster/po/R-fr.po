@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.5\n"
-"POT-Creation-Date: 2019-04-30 08:05\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2014-03-30 09:03+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -430,21 +430,22 @@ msgstr ""
 "Chacun des échantillons aléatoires contient des objets entre lesquels la "
 "distance ne peut être calculée."
 
+#. R/plotpart.q: warning("Error in C routine for the spanning ellipsoid,\n rank problem??")
+#: R/plotpart.q:0
+#, fuzzy
+msgid ""
+"Error in C routine for the spanning ellipsoid,\n"
+" rank problem??"
+msgstr ""
+"Erreur dans la routine Fortran pour obtenir l'ellipsoïde de dispersion,\n"
+" problème de rang??"
+
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 #, fuzzy
 msgid ""
 "Error in Fortran routine computing the spanning ellipsoid. Probably "
 "collinear data"
-msgstr ""
-"Erreur dans la routine Fortran pour obtenir l'ellipsoïde de dispersion,\n"
-" problème de rang??"
-
-#. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
-#: R/plotpart.q:0
-msgid ""
-"Error in Fortran routine for the spanning ellipsoid,\n"
-" rank problem??"
 msgstr ""
 "Erreur dans la routine Fortran pour obtenir l'ellipsoïde de dispersion,\n"
 " problème de rang??"
@@ -833,12 +834,12 @@ msgid ""
 " and shape matrix ="
 msgstr ""
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's area = %s"
 msgstr ""
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's volume = %s"
 msgstr ""

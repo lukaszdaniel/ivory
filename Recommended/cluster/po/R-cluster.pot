@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.8\n"
-"POT-Creation-Date: 2019-04-30 08:05\n"
+"Project-Id-Version: cluster 2.1.0\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -533,17 +533,17 @@ msgid "Each of the random samples contains objects between which no distance can
 msgstr ""
 
 
+#: R/plotpart.q: 0
+#. R/plotpart.q: warning("Error in C routine for the spanning ellipsoid,\n rank problem??")
+
+msgid "Error in C routine for the spanning ellipsoid,\n rank problem??"
+msgstr ""
+
+
 #: R/ellipsoidhull.R: 0
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
 
 msgid "Error in Fortran routine computing the spanning ellipsoid. Probably collinear data"
-msgstr ""
-
-
-#: R/plotpart.q: 0
-#. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
-
-msgid "Error in Fortran routine for the spanning ellipsoid,\n rank problem??"
 msgstr ""
 
 
@@ -1027,14 +1027,14 @@ msgstr ""
 
 
 #: R/ellipsoidhull.R: 0
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", chV, domain = "R-cluster")
 
 msgid "ellipsoid's area = %s"
 msgstr ""
 
 
 #: R/ellipsoidhull.R: 0
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", chV, domain = "R-cluster")
 
 msgid "ellipsoid's volume = %s"
 msgstr ""

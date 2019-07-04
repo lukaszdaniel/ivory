@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-28 20:02\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1518,12 +1518,6 @@ msgstr "Tryby argumentów 'target' oraz 'current':"
 msgid "Modes:"
 msgstr "Tryby:"
 
-#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
-#: R/stop.R:0
-msgid "Must use 'exprs' or unnamed expressions, but not both"
-msgstr ""
-"Konieczne jest użycie 'exprs' lub nienazwanych wyrażeń, ale nie oba naraz"
-
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1585,6 +1579,13 @@ msgstr "Liczba czynników:"
 #: R/all.equal.R:0
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "Liczba: długości (%d, %d) różnią się"
+
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#: R/stop.R:0
+#, fuzzy
+msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgstr ""
+"Konieczne jest użycie 'exprs' lub nienazwanych wyrażeń, ale nie oba naraz"
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -445,22 +445,23 @@ msgstr ""
 "각각의 무작위 표본은 서로간의 거리를 계산할 수 없는 객체들을 포함하고 있습니"
 "다."
 
+#. R/plotpart.q: warning("Error in C routine for the spanning ellipsoid,\n rank problem??")
+#: R/plotpart.q:0
+#, fuzzy
+msgid ""
+"Error in C routine for the spanning ellipsoid,\n"
+" rank problem??"
+msgstr ""
+"스패닝 타원(spanning ellipsoid)를 생성하는 포트란 루틴(Fortran routine)에서 "
+"에러가 발생했습니다. \n"
+" 위수(rank) 문제인가요??"
+
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 #, fuzzy
 msgid ""
 "Error in Fortran routine computing the spanning ellipsoid. Probably "
 "collinear data"
-msgstr ""
-"스패닝 타원(spanning ellipsoid)를 생성하는 포트란 루틴(Fortran routine)에서 "
-"에러가 발생했습니다. \n"
-" 위수(rank) 문제인가요??"
-
-#. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
-#: R/plotpart.q:0
-msgid ""
-"Error in Fortran routine for the spanning ellipsoid,\n"
-" rank problem??"
 msgstr ""
 "스패닝 타원(spanning ellipsoid)를 생성하는 포트란 루틴(Fortran routine)에서 "
 "에러가 발생했습니다. \n"
@@ -845,12 +846,12 @@ msgid ""
 " and shape matrix ="
 msgstr ""
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's area = %s"
 msgstr ""
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's volume = %s"
 msgstr ""

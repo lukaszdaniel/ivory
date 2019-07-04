@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-06-24 18:55\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2018-04-17 19:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -415,6 +415,16 @@ msgstr ""
 "Każda z losowych próbek zawiera obiekty pomiędzy którymi nie można obliczyć "
 "odległości."
 
+#. R/plotpart.q: warning("Error in C routine for the spanning ellipsoid,\n rank problem??")
+#: R/plotpart.q:0
+#, fuzzy
+msgid ""
+"Error in C routine for the spanning ellipsoid,\n"
+" rank problem??"
+msgstr ""
+"Błąd w procedurze Fortran dla elipsoidy obejmującej,\n"
+"problem rang?"
+
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid ""
@@ -423,15 +433,6 @@ msgid ""
 msgstr ""
 "Błąd w procedurze Fortran dla elipsoidy obejmującej, prawdopodobnie "
 "współliniowe dane"
-
-#. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
-#: R/plotpart.q:0
-msgid ""
-"Error in Fortran routine for the spanning ellipsoid,\n"
-" rank problem??"
-msgstr ""
-"Błąd w procedurze Fortran dla elipsoidy obejmującej,\n"
-"problem rang?"
 
 #. R/fanny.q: gettextf("FANNY algorithm has not converged in 'maxit' = %d iterations", maxit)
 #: R/fanny.q:0
@@ -798,12 +799,12 @@ msgstr ""
 " centrum = (%s); kwadrat przeciętnego promienia d^2 = %s\n"
 " oraz macierz kształtu ="
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's area = %s"
 msgstr "powierzchnia elipsoidy = %s"
 
-#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
+#. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", chV, domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's volume = %s"
 msgstr "objętość elipsoidy = %s"

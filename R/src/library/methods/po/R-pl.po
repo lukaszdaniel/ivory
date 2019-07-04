@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3651,8 +3651,8 @@ msgstr[0] "brak definicji klasy %s we wskazanym położeniu, %s, definicja: %s"
 msgstr[1] "brak definicji klasy %s we wskazanym położeniu, %s, definicje: %s"
 msgstr[2] "brak definicji klasy %s we wskazanym położeniu, %s, definicje: %s"
 
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-06-07 08:14\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5126,6 +5126,13 @@ msgid "Variables overriding user/site settings:"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettextf("Variables with usage in documentation object '%s' but not in code:", fname)
+
+msgid "Variables with usage in documentation object '%s' but not in code:"
+msgstr ""
+
+
 #: R/news.R: 0
 #. R/news.R: gettext("Version")
 
@@ -9115,6 +9122,15 @@ msgstr[1]    ""
 
 msgid        "Package vignette which is not in its specified encoding:\n"
 msgid_plural "Package vignettes which are not in their specified encoding:\n"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/check.R: 0
+#. R/check.R: ngettext(nb, "Package vignette with placeholder title 'Vignette Title':\n", "Package vignettes with placeholder title 'Vignette Title':\n",     domain = "R-tools")
+
+msgid        "Package vignette with placeholder title 'Vignette Title':\n"
+msgid_plural "Package vignettes with placeholder title 'Vignette Title':\n"
 msgstr[0]    ""
 msgstr[1]    ""
 

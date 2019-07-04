@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-28 20:02\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -1620,11 +1620,6 @@ msgstr "målet er «%s» og gjeldande er «%s»"
 msgid "Modes:"
 msgstr ""
 
-#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
-#: R/stop.R:0
-msgid "Must use 'exprs' or unnamed expressions, but not both"
-msgstr ""
-
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1690,6 +1685,11 @@ msgstr ""
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "argumentlengda er forskjellige"
+
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgstr ""
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")
 #: R/library.R:0

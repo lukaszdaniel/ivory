@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-22 19:40\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -3583,8 +3583,8 @@ msgid_plural ""
 "no definition of class %s in the specified position, %s, definitions on : %s"
 msgstr[0] "在指定的%2$s这个位置不存在类别%1$s的定义, 定义在: %3$s"
 
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
-#. R/RMethodUtils.R: ngettext(sum(is.na(match(signature, args))), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s", domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
+#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s", "non-arguments found in the signature: %s",     domain = "R-methods")
 #: R/RMethodUtils.R:0
 #, fuzzy
 msgid "non-argument found in the signature: %s"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.7.0\n"
-"POT-Creation-Date: 2019-04-28 20:02\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1903,13 +1903,6 @@ msgid "Modes:"
 msgstr ""
 
 
-#: R/stop.R: 0
-#. R/stop.R: stop("Must use 'exprs' or unnamed expressions, but not both")
-
-msgid "Must use 'exprs' or unnamed expressions, but not both"
-msgstr ""
-
-
 #: R/summary.R: 0
 #. R/summary.R: gettext("NA's")
 #. R/summary.R: gettext("NA's")
@@ -1985,6 +1978,13 @@ msgstr ""
 #. R/all.equal.R: gettextf("Numeric: lengths (%d, %d) differ", lt, lc)
 
 msgid "Numeric: lengths (%d, %d) differ"
+msgstr ""
+
+
+#: R/stop.R: 0
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+
+msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
 msgstr ""
 
 

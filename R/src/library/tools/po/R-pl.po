@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -4288,6 +4288,12 @@ msgstr "Zmienne w ramce danych %s"
 msgid "Variables overriding user/site settings:"
 msgstr "Zmienne omijające ustawienia użytkownika/strony:"
 
+#. R/QC.R: gettextf("Variables with usage in documentation object '%s' but not in code:", fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Variables with usage in documentation object '%s' but not in code:"
+msgstr "Dane z użyciem w obiekcie dokumentacji %s, ale nie w kodzie:"
+
 #. R/news.R: gettext("Version")
 #: R/news.R:0
 msgid "Version"
@@ -7688,6 +7694,15 @@ msgid_plural "Package vignettes which are not in their specified encoding:\n"
 msgstr[0] "Ilustracja pakietu, która nie jest w jej określonym kodowaniu:\n"
 msgstr[1] "Ilustracje pakietu, która nie są w ich określonym kodowaniu:\n"
 msgstr[2] "Ilustracje pakietu, która nie są w ich określonym kodowaniu:\n"
+
+#. R/check.R: ngettext(nb, "Package vignette with placeholder title 'Vignette Title':\n", "Package vignettes with placeholder title 'Vignette Title':\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Package vignette with placeholder title 'Vignette Title':\n"
+msgid_plural "Package vignettes with placeholder title 'Vignette Title':\n"
+msgstr[0] "Ilustracja pakietu bez odpowiadającego jej pliku PDF/HTML:\n"
+msgstr[1] "Ilustracje pakietu bez odpowiadających im plików PDF/HTML:\n"
+msgstr[2] "Ilustracje pakietu bez odpowiadających im plików PDF/HTML:\n"
 
 #. R/check.R: ngettext(nb, "Package vignette without corresponding single PDF/HTML:\n", "Package vignettes without corresponding single PDF/HTML:\n",     domain = "R-tools")
 #: R/check.R:0

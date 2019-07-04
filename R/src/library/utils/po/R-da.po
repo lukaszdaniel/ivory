@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-06-07 08:14\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -3454,8 +3454,8 @@ msgid_plural "packages %s are available as source packages but not as binaries"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/windows/install.packages.R: ngettext(sum(inuse), "package %s is in use and will not be installed", "packages %s are in use and will not be installed",     domain = "R-utils")
-#: R/windows/install.packages.R:0
+#. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed", "packages %s are in use and will not be installed",     domain = "R-utils")
+#: R/packages2.R:0
 #, fuzzy
 msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"

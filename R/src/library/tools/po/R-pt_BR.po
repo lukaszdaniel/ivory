@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-06-07 08:14\n"
+"POT-Creation-Date: 2019-07-04 21:09\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -4020,6 +4020,13 @@ msgstr "Variáveis no quadro de dados '%s'"
 msgid "Variables overriding user/site settings:"
 msgstr ""
 
+#. R/QC.R: gettextf("Variables with usage in documentation object '%s' but not in code:", fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Variables with usage in documentation object '%s' but not in code:"
+msgstr ""
+"Arquivos de dados com uso no objeto de documentação '%s' mas não no código:"
+
 #. R/news.R: gettext("Version")
 #: R/news.R:0
 msgid "Version"
@@ -7163,6 +7170,13 @@ msgstr[1] ""
 #: R/check.R:0
 msgid "Package vignette which is not in its specified encoding:\n"
 msgid_plural "Package vignettes which are not in their specified encoding:\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/check.R: ngettext(nb, "Package vignette with placeholder title 'Vignette Title':\n", "Package vignettes with placeholder title 'Vignette Title':\n",     domain = "R-tools")
+#: R/check.R:0
+msgid "Package vignette with placeholder title 'Vignette Title':\n"
+msgid_plural "Package vignettes with placeholder title 'Vignette Title':\n"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14+0200\n"
+"POT-Creation-Date: 2019-07-04 21:09+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -19,20 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: Srunmed.c:54
+#: Srunmed.c:63
 msgid "bandwidth/span of running medians is larger than n"
 msgstr " 移動中央値のバンド幅・バンド範囲(span)が n より大きくなっています "
 
-#: Srunmed.c:197
+#: Srunmed.c:216
 msgid "numeric 'x' required"
 msgstr ""
 
-#: Srunmed.c:204
+#: Srunmed.c:262
+#, c-format
+msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%ld]"
+msgstr ""
+
+#: Srunmed.c:265
+msgid "runmed(): invalid 'na.action'"
+msgstr ""
+
+#: Srunmed.c:276
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr ""
 
-#: Trunmed.c:372
-msgid "After inittree():\n"
+#: Srunmed.c:315
+#, c-format
+msgid "na_action logic error (%d), please report!"
 msgstr ""
 
 #: ansari.c:119
@@ -197,7 +207,7 @@ msgstr " 数学関数に非数値引数が渡されました "
 msgid "Value %g out of range (0, 1)"
 msgstr " 値 %g は範囲 (0, 1) 外です "
 
-#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
+#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr " 引数 %s は空でない数値ベクトルでなければなりません  "
@@ -778,7 +788,7 @@ msgstr " length(m) は少なくとも２でなければなりません "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr " 引数 Sx は長さが m[] より 1 だけ短い数値ベクトルでなければなりません "
 
-#: nls.c:96 nls.c:98 port.c:555
+#: nls.c:96 nls.c:98 port.c:557
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr " 'm' はリストでなければなりません "
@@ -812,7 +822,7 @@ msgstr " 収束しました "
 msgid "'%s' argument should be of type character"
 msgstr " 'theta' は文字型でなければなりません "
 
-#: nls.c:288 port.c:377
+#: nls.c:288 port.c:379
 msgid "use of NULL environment is defunct"
 msgstr " NULL 環境の使用は廃止されました "
 
@@ -1095,61 +1105,61 @@ msgstr " ヘッシアン関数は次数 %d の正方数値行列を返さなけ�
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:381
+#: port.c:383
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr " 'rho' は環境(environment)でなければなりません "
 
-#: port.c:385
+#: port.c:387
 msgid "When Hessian defined must also have gradient defined"
 msgstr " ヘッシアンを定義した際は、グラディエントも定義しなければなりません "
 
-#: port.c:388
+#: port.c:390
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr " 環境 `rho' は長さが %d の数値ベクトル `.par' を含まねばなりません "
 
-#: port.c:402
+#: port.c:404
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr " lower' と 'upper' は数値ベクトルでなければなりません "
 
-#: port.c:417
+#: port.c:419
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr " 'zeroin' における関数値が不正です "
 
-#: port.c:461
+#: port.c:463
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr " 'getElement' は名前つきリストにだけ適用されます "
 
-#: port.c:487
+#: port.c:489
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr " %s$%s() が見つかりません "
 
-#: port.c:501
+#: port.c:503
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr " 'gradient' は次元 (%d,%d) の数値行列でなければなりません "
 
-#: port.c:521
+#: port.c:523
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 " モード %d, 長さ %d の fcn が作られました - モード %d, 長さ %d が必要でした "
 
-#: port.c:534
+#: port.c:536
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr " eval_check_store に対する不正なタイプです "
 
-#: port.c:575
+#: port.c:577
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr " lowerb と upperb は数値ベクトルでなければなりません "
 
-#: port.c:598
+#: port.c:600
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

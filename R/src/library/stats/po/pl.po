@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14+0200\n"
+"POT-Creation-Date: 2019-07-04 21:09+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,21 +16,31 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: Srunmed.c:54
+#: Srunmed.c:63
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "pasmo/rozpiętość ruchomych median jest większe niż 'n'"
 
-#: Srunmed.c:197
+#: Srunmed.c:216
 msgid "numeric 'x' required"
 msgstr "wymagana jest liczba 'x'"
 
-#: Srunmed.c:204
+#: Srunmed.c:262
+#, c-format
+msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%ld]"
+msgstr ""
+
+#: Srunmed.c:265
+msgid "runmed(): invalid 'na.action'"
+msgstr ""
+
+#: Srunmed.c:276
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr "długie wektory nie są wspierane dla 'algorithm = \"Turlach\"'"
 
-#: Trunmed.c:372
-msgid "After inittree():\n"
-msgstr "Po funkcji 'inittree()':\n"
+#: Srunmed.c:315
+#, c-format
+msgid "na_action logic error (%d), please report!"
+msgstr ""
 
 #: ansari.c:119
 msgid "probabilities outside [0,1] in 'qansari()' function"
@@ -198,7 +208,7 @@ msgstr "Argument nieliczbowy przekazany do funkcji matematycznej"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wartość %g jest poza zakresem (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
+#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
@@ -818,7 +828,7 @@ msgstr "'length(m)' musi wynosić co najmniej dwa"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.c:96 nls.c:98 port.c:555
+#: nls.c:96 nls.c:98 port.c:557
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
@@ -852,7 +862,7 @@ msgstr "zbiegł się"
 msgid "'%s' argument should be of type character"
 msgstr "argument '%s' powinien być typu tekstowego"
 
-#: nls.c:288 port.c:377
+#: nls.c:288 port.c:379
 msgid "use of NULL environment is defunct"
 msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
 
@@ -1134,58 +1144,58 @@ msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 msgid "NA/NaN Hessian evaluation"
 msgstr "wyliczenie wartości NA/NaN hesjanu"
 
-#: port.c:381
+#: port.c:383
 #, c-format
 msgid "'%s' argument must be an environment"
 msgstr "argument '%s' musi być środowiskiem"
 
-#: port.c:385
+#: port.c:387
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
-#: port.c:388
+#: port.c:390
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 
-#: port.c:402
+#: port.c:404
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.c:417
+#: port.c:419
 msgid "NA/NaN function evaluation"
 msgstr "wynik NA/NaN funkcji"
 
-#: port.c:461
+#: port.c:463
 msgid "'getElement()' function applies only to named lists"
 msgstr "funkcja 'getElement()' ma zastosowanie jedynie dla nazwanych list"
 
-#: port.c:487
+#: port.c:489
 #, c-format
 msgid "'%s' was not found"
 msgstr "'%s' nie zostało znalezione"
 
-#: port.c:501
+#: port.c:503
 #, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "argument 'gradient' musi być macierzą liczbową o wymiarze (%d,%d)"
 
-#: port.c:521
+#: port.c:523
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długość %d"
 
-#: port.c:534
+#: port.c:536
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.c:575
+#: port.c:577
 #, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "argumenty '%s' oraz '%s' muszą być wektorami liczbowymi"
 
-#: port.c:598
+#: port.c:600
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr "funkcja 'nlsb_iterate()' zwróciła %d"
@@ -1259,6 +1269,9 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
+
+#~ msgid "After inittree():\n"
+#~ msgstr "Po funkcji 'inittree()':\n"
 
 #~ msgid "'%s' argument is a factor"
 #~ msgstr "argument '%s' jest czynnikiem"
