@@ -3023,7 +3023,7 @@ msgstr "system (cmd0): %s"
 #. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
 #: R/sessionInfo.R:0
 msgid "system code page:"
-msgstr ""
+msgstr "systemowa strona kodowa:"
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
 #: R/Sweave.R:0

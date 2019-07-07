@@ -6,6 +6,7 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{assertError()} and \code{assertWarning()} (in package

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-08 21:35+0200\n"
-"PO-Revision-Date: 2018-07-19 20:21+0200\n"
+"PO-Revision-Date: 2019-07-05 14:32+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: magic.c:445
 msgid "magic requires smoothing parameter starting values if L supplied"
@@ -87,7 +87,7 @@ msgstr "Przekazano osobliwą macierz do 'invert()'"
 #: misc.c:32
 #, c-format
 msgid "adjusting %d memory allocation\n"
-msgstr ""
+msgstr "ustawianie alokacji pamięci %d\n"
 
 #: qp.c:57
 msgid "ERROR in addconQT."

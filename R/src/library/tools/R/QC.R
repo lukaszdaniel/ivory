@@ -6994,6 +6994,25 @@ function(dir, localOnly = FALSE)
         }
     }
 
+    ## Check DESCRIPTION placeholders
+    placeholders <-
+        c(if(!is.na(x <- tolower(meta["Title"])) &&
+             startsWith(x, "what the package does"))
+              x,
+          if(!is.na(x <- meta["Author"]) &&
+             (x == "Who wrote it"))
+              x,
+          if(!is.na(x <- meta["Maintainer"]) &&
+             (startsWith(x, "Who to complain to") ||
+              startsWith(x, "The package maintainer")))
+              x,
+          if(!is.na(x <- tolower(meta["Description"])) &&
+             (startsWith(x, "what the package does") ||
+              startsWith(x, "more about what it does")))
+              x)
+    if(length(placeholders))
+        out$placeholders <- placeholders
+
     ## Are there non-ASCII characters in the R source code without a
     ## package encoding in DESCRIPTION?
     ## Note that checking always runs .check_package_ASCII_code() which
@@ -7855,6 +7874,15 @@ function(x, ...)
                 gettext("The Date field is over a month old.", domain = "R-tools")
             })),
       if(length(y <- x$build_time_stamp_msg)) y,
+      if(length(y <- x$placeholders)) {
+          paste(c(gettext("DESCRIPTION fields with placeholder content:", domain = "R-tools"),
+                  paste0("  ",
+                         unlist(strsplit(formatDL(y,
+                                                  style = "list",
+                                                  indent = 2L),
+                                         "\n", fixed = TRUE)))),
+                collapse = "\n")
+      },
       if(length(y <- x$size_of_tarball))
           sprintf(ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools"), y),
       fmt(c(if(length(y <- x$Rd_keywords_or_concepts_with_Rd_markup))

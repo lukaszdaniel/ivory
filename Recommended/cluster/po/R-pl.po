@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2019-07-04 21:09\n"
-"PO-Revision-Date: 2018-04-17 19:45+0200\n"
+"PO-Revision-Date: 2019-07-05 14:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #. R/daisy.q: gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"),     pColl(which(sx == 0)))
 #: R/daisy.q:0
@@ -417,12 +417,11 @@ msgstr ""
 
 #. R/plotpart.q: warning("Error in C routine for the spanning ellipsoid,\n rank problem??")
 #: R/plotpart.q:0
-#, fuzzy
 msgid ""
 "Error in C routine for the spanning ellipsoid,\n"
 " rank problem??"
 msgstr ""
-"Błąd w procedurze Fortran dla elipsoidy obejmującej,\n"
+"Błąd w procedurze C dla elipsoidy obejmującej,\n"
 "problem rang?"
 
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
