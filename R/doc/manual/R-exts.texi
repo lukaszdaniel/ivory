@@ -2784,7 +2784,7 @@ The webpage
 @uref{http://en.cppreference.com/@/w/@/cpp/@/compiler_support} gives
 some information on which compilers are known to support recent C++
 features.  Note that @command{g++} 4.9.x (as used for @R{} on Windows at
-the time of writing) has only partial C++14 support, and the flag to
+least up to 3.6.x) has only partial C++14 support, and the flag to
 obtain that support is not included in the default Windows build of @R{}
 --- one could try something like
 
@@ -10146,10 +10146,10 @@ void F77_NAME(supsmu)(int *n, double *x, double *y,
 @end example
 
 @noindent
-@command{gfortran} 9.2@footnote{This was added just after release as
-9.1.} and later can help generate such prototypes with its flag
-@option{-fc-prototypes-external} (although one will need to replace the
-hard-coded trailing underscore with the @code{F77_NAME} macro).
+@command{gfortran} 9.2@footnote{This was added on 2019-05-09, just after
+release as 9.1.} and later can help generate such prototypes with its
+flag @option{-fc-prototypes-external} (although one will need to replace
+the hard-coded trailing underscore with the @code{F77_NAME} macro).
 
 One can get away with inaccurate argument lists in the declarations: it
 is easy to specify the arguments for @code{.Call} (all @code{SEXP}) and
@@ -13366,8 +13366,9 @@ would be
       end
 @end example
 @noindent
-in file @file{rmsg.f}. Using @command{gfortran} 9.2 and later we can
-extract the C view by
+in file @file{rmsg.f}. Using @command{gfortran} 9.2 and
+later@footnote{or 9.1 patched up to 2019-05-23.} we can extract the C
+view by
 @example
 gfortran -c -fc-prototypes-external rmsg.f
 @end example
@@ -13422,21 +13423,21 @@ be implemented in compilers @emph{ca} 2007, e.g.@: in @command{gfortran}
 4.3.} to set up the Fortran routine to pass a C-compatible character
 string.  We could use something like
 @example
-module cfuncs
-  use iso_c_binding, only: c_char, c_null_char
-  interface
-    subroutine cmsg(msg) bind(C, name = 'cmsg')
-      use iso_c_binding, only: c_char
-      character(kind = c_char):: msg(*)
-    end subroutine cmsg
-  end interface
-end module
+      module cfuncs
+        use iso_c_binding, only: c_char, c_null_char
+        interface
+          subroutine cmsg(msg) bind(C, name = 'cmsg')
+            use iso_c_binding, only: c_char
+            character(kind = c_char):: msg(*)
+          end subroutine cmsg
+        end interface
+      end module
 
-subroutine rmsg(msg)
-  use cfuncs
-  character(*) msg
-  call cmsg(msg//c_null_char) ! need to concatenate a nul terminator
-end subroutine rmsg
+      subroutine rmsg(msg)
+        use cfuncs
+        character(*) msg
+        call cmsg(msg//c_null_char) ! need to concatenate a nul terminator
+      end subroutine rmsg
 @end example
 @noindent
 where the C side is simply
@@ -13459,8 +13460,7 @@ along the lines of
         use iso_c_binding, only : c_char, c_int, c_double
         character(c_char):: transa, transb
         integer(c_int):: m, n, k, lda, ldb, ldc
-        real(c_double):: alpha, beta, a(lda, *), b(ldb, *)
-        real(c_double):: c(ldc, *)
+        real(c_double):: alpha, beta, a(lda,*), b(ldb,*), c(ldc,*)
         call dgemm(transa, transb, m, n, k, alpha,
      +             a, lda, b, ldb, beta, c, ldc)
       end subroutine c_dgemm
@@ -13468,6 +13468,7 @@ along the lines of
 @noindent
 which is then called from C with declaration
 @example
+void
 Cdgemm(const char *transa, const char *transb, const int *m,
        const int *n, const int *k, const double *alpha,
        const double *a, const int *lda, const double *b, const int *ldb,

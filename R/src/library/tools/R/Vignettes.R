@@ -274,25 +274,24 @@ function(package, dir, lib.loc = NULL,
     result
 }
 
-print.checkVignettes <-
+format.checkVignettes <-
 function(x, ...)
 {
-    mycat <- function(y, title) {
-        if(length(y)){
-            cat("\n", title, "\n\n", sep = "")
-            for(k in seq_along(y)) {
-                cat(gettextf("File %s:", names(y)[k], domain = "R-tools"), "\n", sep = "")
-                cat(as.character(y[[k]]), "\n")
-            }
+    myfmt <- function(y, title) {
+        if(length(y)) {
+            paste(c(paste0("\n", title, "\n"),
+                    unlist(Map(c,
+                               gettextf("File %s:", names(y), domain = "R-tools"),
+                               lapply(y, as.character)),
+                           use.names = FALSE)),
+                  collapse = "\n")
         }
     }
-
-    mycat(x$tangle, gettext("*** Tangle Errors ***", domain = "R-tools"))
-    mycat(x$source, gettext("*** Source Errors ***", domain = "R-tools"))
-    mycat(x$weave,  gettext("*** Weave Errors ***", domain = "R-tools"))
-    mycat(x$latex,  gettext("*** PDFLaTeX Errors ***", domain = "R-tools"))
-
-    invisible(x)
+    c(character(),
+      myfmt(x$tangle, gettext("*** Tangle Errors ***", domain = "R-tools")),
+      myfmt(x$source, ettext("*** Source Errors ***", domain = "R-tools")),
+      myfmt(x$weave,  gettext("*** Weave Errors ***", domain = "R-tools")),
+      myfmt(x$latex,  gettext("*** PDFLaTeX Errors ***", domain = "R-tools")))
 }
 
 ### get the engine from a file
