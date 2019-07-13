@@ -289,7 +289,7 @@ function(x, ...)
     }
     c(character(),
       myfmt(x$tangle, gettext("*** Tangle Errors ***", domain = "R-tools")),
-      myfmt(x$source, ettext("*** Source Errors ***", domain = "R-tools")),
+      myfmt(x$source, gettext("*** Source Errors ***", domain = "R-tools")),
       myfmt(x$weave,  gettext("*** Weave Errors ***", domain = "R-tools")),
       myfmt(x$latex,  gettext("*** PDFLaTeX Errors ***", domain = "R-tools")))
 }

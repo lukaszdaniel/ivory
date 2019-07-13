@@ -2159,10 +2159,11 @@ optional libraries.
 
 Some care is needed when compilers are from different families which may
 use different OpenMP runtimes (e.g.@: @command{clang} @emph{vs} GCC
-including @command{gfortran}, although it is currently possible to use
-the @command{clang} runtime with GCC but not @emph{vice versa}).  For a
-package with fixed-form Fortran code using OpenMP the appropriate lines
-are
+including @command{gfortran}, although it is often possible to use the
+@command{clang} runtime with GCC but not @emph{vice versa}: however
+@command{gfortran} 9.x may generate calls not in the @command{clang}
+runtime).  For a package with Fortran code using OpenMP the appropriate
+lines are
 
 @example
 PKG_FFLAGS = $(SHLIB_OPENMP_FFLAGS)
@@ -2170,12 +2171,8 @@ PKG_LIBS = $(SHLIB_OPENMP_CFLAGS)
 @end example
 
 @noindent
-as the C compiler will be used to link the package code (and there is no
-guarantee that this will work everywhere).  Packages which include C++
-code should use @code{SHLIB_OPENMP_CXXFLAGS} in @code{PKG_LIBS}. (As
-from @R{} 3.6.0 this applies also to free-form Fortran code, where
-@code{SHLIB_OPENMP_FFLAGS} should be used in @code{PKG_FFLAGS} or
-@code{PKG_FCFLAGS}.)
+as the C compiler will be used to link the package code (and there are
+platforms on which this does not work.
 
 It is not portable to use OpenMP with more than one of C, C++ and
 Fortran in a single package since it is not uncommon that the compilers
@@ -13367,7 +13364,7 @@ would be
 @end example
 @noindent
 in file @file{rmsg.f}. Using @command{gfortran} 9.2 and
-later@footnote{or 9.1 patched up to 2019-05-23.} we can extract the C
+later@footnote{or 9.1-patched since 2019-05-09.} we can extract the C
 view by
 @example
 gfortran -c -fc-prototypes-external rmsg.f
@@ -13388,12 +13385,12 @@ void F77_NAME(rmsg)(char *msg, FC_LEN_T msg_len)
 @{
     char cmsg[msg_len+1];
     strncpy(cmsg, msg, msg_len);
-    cmsg[msg_len] = '\0';
+    cmsg[msg_len] = '\0'; // nul-terminate the string, to be sure
     // do something with 'cmsg' 
 @}
 @end example
 @noindent
-in code depending on @code{R(>= 3.7)}.  For earlier versions of @R{} we
+in code depending on @code{R(>= 3.6.2)}.  For earlier versions of @R{} we
 could just assume that @code{msg} is nul-terminated (not guaranteed, but
 people have been getting away with it for many years), so the complete C
 side might be
@@ -13451,7 +13448,7 @@ void cmsg(const char *msg)
 Passing a variable-length string from C to Fortran is trickier, but
 @uref{https://software.intel.com/en-us/fortran-compiler-developer-guide-and-reference-bind}
 provides a recipe.  However, all the uses in BLAS and LAPACK are of a
-single character, and for this we can write a wrapper in Fortran
+single character, and for these we can write a wrapper in Fortran
 along the lines of
 @example
       subroutine c_dgemm(transa, transb, m, n, k, alpha,

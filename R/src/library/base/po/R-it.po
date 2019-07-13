@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-07-13 10:50\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -661,6 +661,11 @@ msgstr "'file' deve essere NULL, una connessione o una stringa di caratteri"
 #: R/library.R:0
 msgid ""
 "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
+msgstr ""
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0
+msgid "'MARGIN' does not match dim(X)"
 msgstr ""
 
 #. R/sweep.R: warning("'STATS' argument does not recycle exactly across 'MARGIN' argument")

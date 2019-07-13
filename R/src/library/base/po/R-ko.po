@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-07-13 10:50\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -672,6 +672,11 @@ msgid ""
 "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
 msgstr ""
 "'DESCRIPTION' 는 'Encoding' 필드를 가지고 있으며, 재인코딩은 불가능합니다 "
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0
+msgid "'MARGIN' does not match dim(X)"
+msgstr ""
 
 #. R/sweep.R: warning("'STATS' argument does not recycle exactly across 'MARGIN' argument")
 #: R/sweep.R:0

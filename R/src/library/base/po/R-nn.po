@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-07-13 10:50\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -667,6 +667,11 @@ msgstr "… må innehalda namn eller teiknstrengar"
 msgid ""
 "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
 msgstr "«DESCRIPTION» har eit «Encoding»-felt, og omkoding er ikkje mogleg"
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0
+msgid "'MARGIN' does not match dim(X)"
+msgstr ""
 
 #. R/sweep.R: warning("'STATS' argument does not recycle exactly across 'MARGIN' argument")
 #: R/sweep.R:0

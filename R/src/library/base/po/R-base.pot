@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.7.0\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-07-13 10:50\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -784,6 +784,13 @@ msgstr ""
 #. R/library.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 
 msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
+msgstr ""
+
+
+#: R/apply.R: 0
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+
+msgid "'MARGIN' does not match dim(X)"
 msgstr ""
 
 

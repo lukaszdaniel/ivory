@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-07-13 10:50\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1051,6 +1051,11 @@ msgstr ""
 msgid "DBG: 'R CMD INSTALL' now doing do_install()"
 msgstr ""
 
+#. R/QC.R: gettext("DESCRIPTION fields with placeholder content:", domain = "R-tools")
+#: R/QC.R:0
+msgid "DESCRIPTION fields with placeholder content:"
+msgstr ""
+
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"], pkg)
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"], pkg)
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"], pkg)
@@ -1669,7 +1674,7 @@ msgstr "le répertoire '%s' n'existe pas"
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(e[1L]), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
-#. R/Vignettes.R: gettextf("File %s:", names(y)[k], domain = "R-tools")
+#. R/Vignettes.R: gettextf("File %s:", names(y), domain = "R-tools")
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))

@@ -56,23 +56,6 @@
     }
   }
 
-  \subsection{PACKAGE INSTALLATION}{
-    \itemize{
-      \item Header \file{Rconfig.h} contains the value of
-	\code{FC_LEN_T} deduced at installation which is used by the
-	prototypes in headers \file{BLAS.h} and \file{Lapack.h} but to
-	avoid extensive breakage this is only exposed when
-	\code{USE_FC_LEN_T} is defined.
-
-	If a package's C/C++ calls to BLAS/LAPACK allow for the
-	\sQuote{hidden} arguments use by most Fortran compilers to pass
-	the lengths of Fortran character arguments, define
-	\code{USE_FC_LEN_T} and include \file{Rconfig.h} (possibly
-	\emph{via} \file{R.h}) before including \file{BLAS.h} or
-	\file{Lapack.h}.
-    }
-  }
-
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{formula(x)} with \code{length(x) > 1} character vectors,
@@ -99,7 +82,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.6.1 patched}{% to port in future
+\section{\Rlogo CHANGES IN R 3.6.1 patched}{
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -117,6 +100,23 @@
     }
   }
 
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item Header \file{Rconfig.h} contains the value of
+	\code{FC_LEN_T} deduced at installation which is used by the
+	prototypes in headers \file{BLAS.h} and \file{Lapack.h} but to
+	avoid extensive breakage this is only exposed when
+	\code{USE_FC_LEN_T} is defined.
+
+	If a package's C/C++ calls to BLAS/LAPACK allow for the
+	\sQuote{hidden} arguments used by most Fortran compilers to pass
+	the lengths of Fortran character arguments, define
+	\code{USE_FC_LEN_T} and include \file{Rconfig.h} (possibly
+	\emph{via} \file{R.h}) before including \file{BLAS.h} or
+	\file{Lapack.h}.
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{runmed(x, *)} when \code{x} contains missing values
@@ -129,6 +129,8 @@
       creates methods with \code{"missing"} entries in the signature.
       Consequently, \code{rematchDefinition()} is amended to use
       appropriate \code{.local()} calls with named arguments where needed.
+
+      \item \code{apply(diag(3), 2:3, mean)} now gives a helpful error message.
     }
   }
 }
