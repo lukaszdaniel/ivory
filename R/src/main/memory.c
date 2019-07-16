@@ -3063,7 +3063,7 @@ static void R_gc_internal(R_size_t size_needed)
 #endif
     SEXP first_bad_sexp_type_sexp = NULL;
     int first_bad_sexp_type_line = 0;
-    int i, gens_collected = 0;
+    int gens_collected = 0;
 
 #ifdef IMMEDIATE_FINALIZERS
     Rboolean first = TRUE;
@@ -3089,7 +3089,7 @@ static void R_gc_internal(R_size_t size_needed)
 
     if (gc_reporting) {
 	REprintf(_("Garbage collection %d = %d"), gc_count, gen_gc_counts[0]);
-	for (i = 0; i < NUM_OLD_GENERATIONS; i++)
+	for (int i = 0; i < NUM_OLD_GENERATIONS; i++)
 	    REprintf("+%d", gen_gc_counts[i + 1]);
 	REprintf(_(" (level %d) ... "), gens_collected);
 	DEBUG_GC_SUMMARY(gens_collected == NUM_OLD_GENERATIONS);
