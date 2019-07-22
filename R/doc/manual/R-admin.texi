@@ -3905,6 +3905,11 @@ single-threaded ones): this can lead to hard-to-track-down incorrect
 results or segfaults.
 @c Seen for OpenBLAS 3.2 in 2018.
 
+@strong{NOTE:} BLAS libraries built with @command{gfortran}@tie{}9 (and
+future versions 8.4, 7.5 and later) require calls from C/C++ to handle
+`hidden' character lengths --- @R{} itself does so but many packages do
+not and some segfault. (This applies also to external LAPACK libraries.)
+
 @menu
 * ATLAS::                       
 * OpenBLAS::                    
@@ -5936,7 +5941,8 @@ install @LaTeX{} packages on first use.
 
 To make the installer package (@file{@value{RWVERSION}-win.exe}) we
 currently require the Unicode version of Inno Setup 5.3.7 or later from
-@uref{http://jrsoftware.org/}. This is @emph{not} included in
+@uref{http://jrsoftware.org/} (starting from 6.0, Inno Setup provides only
+one version, which supports Unicode). This is @emph{not} included in
 @file{Rtools*.exe}.
 
 Copy file @file{src/gnuwin32/MkRules.dist} to
