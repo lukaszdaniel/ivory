@@ -718,13 +718,13 @@ SEXP attribute_hidden do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2, ans;
     int i, n1, n2;
+    int res;
 #ifdef _WIN32
     wchar_t from[PATH_MAX], to[PATH_MAX];
     const wchar_t *w;
 #else
     char from[PATH_MAX], to[PATH_MAX];
     const char *p;
-    int res;
 #endif
 
     checkArity(op, args);
@@ -753,7 +753,12 @@ SEXP attribute_hidden do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (wcslen(w) >= PATH_MAX - 1)
 	    error(_("expanded '%s' name is too long"), "to");
 	wcsncpy(to, w, PATH_MAX - 1);
-	LOGICAL(ans)[i] = (Rwin_wrename(from, to) == 0);
+	res = Rwin_wrename(from, to);
+	if(res) {
+	    warning(_("cannot rename file '%ls' to '%ls', reason '%s'"),
+		    from, to, formatError(GetLastError()));
+	}
+	LOGICAL(ans)[i] = (res == 0);
 #else
 	p = R_ExpandFileName(translateChar(STRING_ELT(f1, i)));
 	if (strlen(p) >= PATH_MAX - 1)
