@@ -1393,11 +1393,11 @@ SEXP attribute_hidden do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     b = CAR(args);
     if (TYPEOF(b) != CLOSXP)
-    error(_("invalid '%s' argument"), "definition");
+	error(_("invalid '%s' argument"), "definition");
 
     sysp = CAR(CDDDR(args));
     if (!isEnvironment(sysp))
-    error(_("'%s' argument must be an environment"), "envir");
+	error(_("'%s' argument must be an environment"), "envir");
 
     /* Do we expand ... ? */
 
@@ -1408,7 +1408,7 @@ SEXP attribute_hidden do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Get the formals and match the actual args */
 
     formals = FORMALS(b);
-    PROTECT(actuals = duplicate(CDR(funcall)));
+    PROTECT(actuals = shallow_duplicate(CDR(funcall)));
 
     /* If there is a ... symbol then expand it out in the sysp env
        We need to take some care since the ... might be in the middle

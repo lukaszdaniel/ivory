@@ -33,7 +33,7 @@
       signalled (\code{.Traceback}), now contains the \code{call}s rather
       than the \emph{\code{deparse()}d} calls, deferring the deparsing to
       the user level functions \code{.traceback()} and \code{traceback()},
-      fulfilling the whish of \PR{17580}, reported (incl. patch proposal)
+      fulfilling the wish of \PR{17580}, reported (incl. patch proposal)
       by Brodie Gaslam.
     }
   }
@@ -158,6 +158,10 @@
 
       \item Printing \code{ls.str()} no longer wrongly shows
       \code{"<missing>"} in rare cases.
+
+      \item Auto-printing S4 objects no longer duplicates the object,
+      for faster speed and reduced memory consumption. Reported by Aaron
+      Lun.
     }
   }
 }
