@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-07-17 r1144) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-07-31 r1153) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-07-17 r76847) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-07-31 r76907) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -934,19 +934,19 @@ NULL
 > o <- options(max.print = 5)
 > 1:10
 [1] 1 2 3 4 5
- [ reached getOption("max.print") -- omitted 5 entries ]
+ [ reached 'getOption("max.print")' -- omitted 5 entries ]
 > as.numeric(1:10)
 [1] 1 2 3 4 5
- [ reached getOption("max.print") -- omitted 5 entries ]
+ [ reached 'getOption("max.print")' -- omitted 5 entries ]
 > as.character(1:10)
 [1] "1" "2" "3" "4" "5"
- [ reached getOption("max.print") -- omitted 5 entries ]
+ [ reached 'getOption("max.print")' -- omitted 5 entries ]
 > as.complex(1:10)
 [1] 1+0i 2+0i 3+0i 4+0i 5+0i
- [ reached getOption("max.print") -- omitted 5 entries ]
+ [ reached 'getOption("max.print")' -- omitted 5 entries ]
 > as.raw(1:10)
 [1] 01 02 03 04 05
- [ reached getOption("max.print") -- omitted 5 entries ]
+ [ reached 'getOption("max.print")' -- omitted 5 entries ]
 > options(o)
 > 
 > ## Cleanup

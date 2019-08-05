@@ -1177,7 +1177,7 @@ static SEXP La_qr(SEXP Ain)
 /* Real case of qr.coef */
 static SEXP qr_coef_real(SEXP Q, SEXP Bin)
 {
-     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
+    if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
 
     SEXP B = PROTECT(isReal(Bin) ? duplicate(Bin) : coerceVector(Bin, REALSXP)),
 	qr  = VECTOR_ELT(Q, 0), // qr$qr
