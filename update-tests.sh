@@ -31,7 +31,7 @@ if [[ "$1" == "core" ]] || [[ "$1" == "all" ]]; then
 `$cmd lm-tests.Rout		lm-tests.Rout.save`
 `$cmd method-dispatch.Rout	method-dispatch.Rout.save`
 `$cmd ok-errors.Rout		ok-errors.Rout.save`
-`$cmd packages.Rout		packages.Rout.save`
+#`$cmd packages.Rout		packages.Rout.save`
 `$cmd print-tests.Rout		print-tests.Rout.save`
 `$cmd p-r-random-tests.Rout	p-r-random-tests.Rout.save`
 `$cmd reg-examples3.Rout	reg-examples3.Rout.save`
