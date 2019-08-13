@@ -968,6 +968,7 @@ const char *translateChar(SEXP x)
 }
 
 /* Variant which must work, used for file paths */
+attribute_hidden
 const char *translateCharFP(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
@@ -1094,6 +1095,7 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
+attribute_hidden
 const char *trCharUTF8(SEXP x)
 {
     void *obj;
