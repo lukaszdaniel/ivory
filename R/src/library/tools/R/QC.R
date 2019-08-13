@@ -4844,7 +4844,7 @@ function(dir)
         ## length two with names starting with lib and pkg, respectively.
         if(is.na(match("...", nms)) &&
            ((length(nms) != 2L) ||
-            any(substring(nms, 1L, 3L) != c("lib", "pkg"))))
+            any(substr(nms, 1L, 3L) != c("lib", "pkg"))))
             out$bad_arg_names <- nms
         ## Look at all calls (not only at top level).
         calls <- .find_calls(fcode[[3L]], recursive = TRUE)
@@ -4999,7 +4999,7 @@ function(dir)
         ## Allow anything containing ... (for now); otherwise, insist on
         ## length one with names starting with lib.
         if(is.na(match("...", nms)) &&
-           (length(nms) != 1L || substring(nms, 1L, 3L) != "lib"))
+           (length(nms) != 1L || !startsWith(nms, "lib")))
             out$bad_arg_names <- nms
         ## Look at all calls (not only at top level).
         calls <- .find_calls(fcode[[3L]], recursive = TRUE)
@@ -6280,7 +6280,7 @@ function(cfile, dir = NULL)
         entries <-
             ifelse(nchar(entries) < 20L,
                    entries,
-                   paste(substring(entries, 1L, 20L), gettext("[TRUNCATED]", domain = "R-tools")))
+                   paste(substr(entries, 1L, 20L), gettext("[TRUNCATED]", domain = "R-tools")))
         writeLines(gettextf("entry %d: invalid type %s", pos, sQuote(entries), domain = "R-tools"))
     }
     pos <- which(!ind & (lengths(bad) > 0L))
@@ -6711,7 +6711,7 @@ function(dir, localOnly = FALSE)
                                   "\n      ",
                                   ifelse(nchar(e) < 50L,
                                          e,
-                                         paste(substring(e, 1L, 50L),
+                                         paste(substr(e, 1L, 50L),
                                                "[TRUNCATED]")))))
                 },
                 names(x), x)
@@ -8096,7 +8096,7 @@ function(x, ...)
 
     .truncate <- function(s) {
         ifelse(nchar(s) > 140L,
-               paste(substring(s, 1, 140L),
+               paste(substr(s, 1, 140L),
                      gettext("... [TRUNCATED]", domain = "R-tools")),
                s)
     }
@@ -8996,6 +8996,52 @@ function(ns)
     .get_S3_generics_in_env(env, nms)
 }
 
+### ** .check_package_datalist
+
+.check_package_datalist <-
+function(package, lib.loc = NULL)
+{
+    out <- list()
+    ans1 <- list_data_in_pkg(package, lib.loc)
+    ans2 <- list_data_in_pkg(package, lib.loc, use_datalist = FALSE)
+    ## Canonicalize.
+    ans1 <- lapply(ans1, sort)
+    ans1 <- ans1[order(names(ans1))]
+    ans2 <- lapply(ans2, sort)
+    ans2 <- ans2[order(names(ans2))]
+    if(!identical(ans1, ans2)) {
+        nx1 <- names(ans1)
+        nx2 <- names(ans2)
+        ex1 <- unlist(ans1)
+        ex2 <- unlist(ans2)
+        out <- Filter(length,
+                      list(n12 = setdiff(nx1, nx2),
+                           n21 = setdiff(nx2, nx1),
+                           e12 = setdiff(ex1, ex2),
+                           e21 = setdiff(ex2, ex1)))
+    }
+    class(out) <- "check_package_datalist"
+    out
+}
+
+format.check_package_datalist <-
+function(x, ...)
+{
+    fmt <- function(s) .strwrap22(s, " ")
+    c(character(),
+      if(length(y <- x$n12))
+          c("Data files in 'datalist' not in 'data' directory:",
+            fmt(y)),
+      if(length(y <- x$n21))
+          c("Data files in 'data' directory not in 'datalist':",
+            fmt(y)),
+      if(length(y <- x$e12))
+          c("Data objects in 'datalist' not in 'data' directory:",
+            fmt(y)),
+      if(length(y <- x$e21))
+          c("Data objects in 'data' directory not in 'datalist':",
+            fmt(y)))
+}
 
 ### Local variables: ***
 ### mode: outline-minor ***

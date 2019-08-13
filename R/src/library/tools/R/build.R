@@ -1066,8 +1066,9 @@ inRbuildignore <- function(files, pkgdir) {
                recursive = TRUE)
 
         ## work on 'data' directory if present
-        if(dir.exists(file.path(pkgname, "data")) ||
-           file_test("-f", file.path(pkgname, "R", "sysdata.rda"))) {
+        if(!str_parse_logic(desc["LazyData"], FALSE) &&
+           (dir.exists(file.path(pkgname, "data")) ||
+            file_test("-f", file.path(pkgname, "R", "sysdata.rda")))) {
             messageLog(Log, gettext("looking to see if a 'data/datalist' file should be added", domain = "R-tools"))
             ## in some cases data() needs the package installed as
             ## there are links to the package's namespace

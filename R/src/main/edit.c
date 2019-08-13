@@ -112,7 +112,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid argument passed to 'edit()' function"));
 
     if (LENGTH(STRING_ELT(fn, 0)) > 0) {
-	const char *ss = translateChar(STRING_ELT(fn, 0));
+	const char *ss = translateCharFP(STRING_ELT(fn, 0));
 	filename = R_alloc(strlen(ss), sizeof(char));
 	strcpy(filename, ss);
     }
@@ -134,7 +134,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
     ed = CAR(args);
     if (!isString(ed)) errorcall(call, _("argument 'editor' type not valid"));
-    cmd = translateChar(STRING_ELT(ed, 0));
+    cmd = translateCharFP(STRING_ELT(ed, 0));
     if (strlen(cmd) == 0) errorcall(call, _("argument 'editor' is not set"));
     editcmd = R_alloc(strlen(cmd) + strlen(filename) + 6, sizeof(char));
 #ifdef _WIN32

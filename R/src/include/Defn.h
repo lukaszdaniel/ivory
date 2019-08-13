@@ -72,6 +72,10 @@ Rcomplex Rf_ComplexFromReal(double, int*);
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
 				  Memory.h, PrtUtil.h, Utils.h */
 #undef CALLED_FROM_DEFN_H
+
+const char * Rf_translateCharFP(SEXP);
+const char * Rf_trCharUTF8(SEXP);
+
 extern0 SEXP	R_CommentSymbol;    /* "comment" */
 extern0 SEXP	R_DotEnvSymbol;     /* ".Environment" */
 extern0 SEXP	R_ExactSymbol;	    /* "exact" */
@@ -937,7 +941,7 @@ extern0 int R_PCRE_limit_recursion;
 # define IntegerFromString	Rf_IntegerFromString
 # define internalTypeCheck	Rf_internalTypeCheck
 # define isValidName		Rf_isValidName
-# define installTrChar		Rf_installTrChar
+//# define installTrChar		Rf_installTrChar
 # define ItemName		Rf_ItemName
 # define jump_to_toplevel	Rf_jump_to_toplevel
 # define KillAllDevices		Rf_KillAllDevices
@@ -1002,6 +1006,8 @@ extern0 int R_PCRE_limit_recursion;
 # define strmat2intmat		Rf_strmat2intmat
 # define substituteList		Rf_substituteList
 # define TimeToSeed		Rf_TimeToSeed
+# define translateCharFP	Rf_translateCharFP
+# define trCharUTF8      	Rf_trCharUTF8
 # define tspgets		Rf_tspgets
 # define type2symbol		Rf_type2symbol
 # define unbindVar		Rf_unbindVar
