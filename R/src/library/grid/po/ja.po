@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 18:19+0100\n"
+"POT-Creation-Date: 2019-08-15 11:58+0200\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -40,48 +40,48 @@ msgstr ""
 " トップレベルの viewport は pop することが出来ません（grid と グラフィックス"
 "出力を混同していませんか？） "
 
-#: grid.c:978
+#: grid.c:980
 msgid "attempt to plot on null device"
 msgstr " ヌルデバイスに作図を試みる "
 
-#: grid.c:1400
+#: grid.c:1402
 #, fuzzy
 msgid "there is no layout defined"
 msgstr " layout が定義されていません "
 
-#: grid.c:1620
+#: grid.c:1622
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr " 多角形頂点が見付かりません(幅もしくは高さがゼロ？) "
 
-#: grid.c:1629
+#: grid.c:1631
 #, fuzzy
 msgid "polygon edge not found"
 msgstr " 多角形の頂点が見付かりません "
 
-#: grid.c:1783
+#: grid.c:1785
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr " 矢印を書くためには少なくとも二つの点が必要です "
 
-#: grid.c:2102
+#: grid.c:2104
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr " Xspline 中に有限でない制御点 "
 
-#: grid.c:2982
+#: grid.c:2984
 msgid "non-finite x or y in graphics path"
 msgstr " グラフィックパスに有限でない x か y があります "
 
-#: grid.c:3026
+#: grid.c:3028
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3509
+#: grid.c:3511
 msgid "invalid plotting symbol"
 msgstr " 不正なプロット記号です "
 
-#: grid.c:3597
+#: grid.c:3599
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr " 回転矩形へクリップ出来ません "

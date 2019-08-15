@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 21:09+0200\n"
+"POT-Creation-Date: 2019-08-15 11:59+0200\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -207,7 +207,7 @@ msgstr "数学函数中用了非数值参数"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g值出界在(0, 1)外"
 
-#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
+#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "参数%s必需为非空数字向量"
@@ -787,7 +787,7 @@ msgstr "length(m)的值必需为二"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "参数Sx必需是长度比m[]小一的数值向量"
 
-#: nls.c:96 nls.c:98 port.c:557
+#: nls.c:96 nls.c:98 port.c:559
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m'的值必需是串列"
@@ -821,7 +821,7 @@ msgstr "收敛了"
 msgid "'%s' argument should be of type character"
 msgstr "'theta'的种类必需是字符"
 
-#: nls.c:288 port.c:379
+#: nls.c:288 port.c:381
 msgid "use of NULL environment is defunct"
 msgstr "NULL环境不再有用了"
 
@@ -1081,78 +1081,78 @@ msgstr "Rf_divset: alg = %d其值应该是1, 2, 3, 或4"
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.c:314
+#: port.c:316
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "梯度函数必需回覆长度为%d的数字向量"
 
-#: port.c:317
+#: port.c:319
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.c:326
+#: port.c:328
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian函数必需回覆一个度数为%d的正方形数值矩阵"
 
-#: port.c:331
+#: port.c:333
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:383
+#: port.c:385
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'rho'必需为环境"
 
-#: port.c:387
+#: port.c:389
 msgid "When Hessian defined must also have gradient defined"
 msgstr "如果Hessian有定义的话梯度也必需有定义"
 
-#: port.c:390
+#: port.c:392
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "'rho'环境必包含长度为%d的数字向量'.par'"
 
-#: port.c:404
+#: port.c:406
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower'和'upper'必需为数字向量"
 
-#: port.c:419
+#: port.c:421
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'函数值不对"
 
-#: port.c:463
+#: port.c:465
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement'只适用于带名串列"
 
-#: port.c:489
+#: port.c:491
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s()不存在"
 
-#: port.c:503
+#: port.c:505
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient'必需是一个维数为(%d,%d)的数值矩阵"
 
-#: port.c:523
+#: port.c:525
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn运行结果的模式为%d , 长度为%d - 但正确的模式应该是%d，长度为%d"
 
-#: port.c:536
+#: port.c:538
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store的种类不对"
 
-#: port.c:577
+#: port.c:579
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb'和'upperb'必需为数字向量"
 
-#: port.c:600
+#: port.c:602
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

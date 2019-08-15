@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 21:09+0200\n"
+"POT-Creation-Date: 2019-08-15 11:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -208,7 +208,7 @@ msgstr "Argument nieliczbowy przekazany do funkcji matematycznej"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wartość %g jest poza zakresem (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
+#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
@@ -828,7 +828,7 @@ msgstr "'length(m)' musi wynosić co najmniej dwa"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.c:96 nls.c:98 port.c:557
+#: nls.c:96 nls.c:98 port.c:559
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
@@ -862,7 +862,7 @@ msgstr "zbiegł się"
 msgid "'%s' argument should be of type character"
 msgstr "argument '%s' powinien być typu tekstowego"
 
-#: nls.c:288 port.c:379
+#: nls.c:288 port.c:381
 msgid "use of NULL environment is defunct"
 msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
 
@@ -1126,76 +1126,76 @@ msgstr "Rf_divset: 'alg = %d' musi wynosić 1, 2, 3, lub 4"
 msgid "port algorithms 3 or higher are not supported"
 msgstr "algorytmy portu 3 lub wyższe nie są wspierane"
 
-#: port.c:314
+#: port.c:316
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "funkcja gradientu musi zwrócić wektor liczbowy o długości %d"
 
-#: port.c:317
+#: port.c:319
 msgid "NA/NaN gradient evaluation"
 msgstr "wyliczenie wartości NA/NaN gradientu"
 
-#: port.c:326
+#: port.c:328
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 
-#: port.c:331
+#: port.c:333
 msgid "NA/NaN Hessian evaluation"
 msgstr "wyliczenie wartości NA/NaN hesjanu"
 
-#: port.c:383
+#: port.c:385
 #, c-format
 msgid "'%s' argument must be an environment"
 msgstr "argument '%s' musi być środowiskiem"
 
-#: port.c:387
+#: port.c:389
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
-#: port.c:390
+#: port.c:392
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 
-#: port.c:404
+#: port.c:406
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.c:419
+#: port.c:421
 msgid "NA/NaN function evaluation"
 msgstr "wynik NA/NaN funkcji"
 
-#: port.c:463
+#: port.c:465
 msgid "'getElement()' function applies only to named lists"
 msgstr "funkcja 'getElement()' ma zastosowanie jedynie dla nazwanych list"
 
-#: port.c:489
+#: port.c:491
 #, c-format
 msgid "'%s' was not found"
 msgstr "'%s' nie zostało znalezione"
 
-#: port.c:503
+#: port.c:505
 #, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "argument 'gradient' musi być macierzą liczbową o wymiarze (%d,%d)"
 
-#: port.c:523
+#: port.c:525
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długość %d"
 
-#: port.c:536
+#: port.c:538
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.c:577
+#: port.c:579
 #, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "argumenty '%s' oraz '%s' muszą być wektorami liczbowymi"
 
-#: port.c:600
+#: port.c:602
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr "funkcja 'nlsb_iterate()' zwróciła %d"

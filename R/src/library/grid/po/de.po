@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 18:19+0100\n"
+"POT-Creation-Date: 2019-08-15 11:58+0200\n"
 "PO-Revision-Date: 2015-01-17 15:11+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <R-core@r-project.org>\n"
@@ -42,48 +42,48 @@ msgstr ""
 "Kann den obersten viewport nicht vom Stack werfen (grid und graphics "
 "Ausgaben gemischt?)"
 
-#: grid.c:978
+#: grid.c:980
 msgid "attempt to plot on null device"
 msgstr "Versuch in das NUll-Gerät zu zeichnen"
 
-#: grid.c:1400
+#: grid.c:1402
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Kein Layout definiert"
 
-#: grid.c:1620
+#: grid.c:1622
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Polygonkante nicht gefunden (Nullbreite oder Nulllänge?)"
 
-#: grid.c:1629
+#: grid.c:1631
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Polygonkante nicht gefunden"
 
-#: grid.c:1783
+#: grid.c:1785
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Mindestens zwei Punkte nötig, um einen Pfeil zu zeichnen"
 
-#: grid.c:2102
+#: grid.c:2104
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Nicht-endlicher Kontrollpunkt in Xspline"
 
-#: grid.c:2982
+#: grid.c:2984
 msgid "non-finite x or y in graphics path"
 msgstr "unendliches x oder y im Grafikpfad"
 
-#: grid.c:3026
+#: grid.c:3028
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3509
+#: grid.c:3511
 msgid "invalid plotting symbol"
 msgstr "unzulässiges Plotsymbol"
 
-#: grid.c:3597
+#: grid.c:3599
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Kann nicht auf das rotierte Rechteck zurechtschneiden"

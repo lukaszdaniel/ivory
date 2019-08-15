@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-13 10:50\n"
+"POT-Creation-Date: 2019-08-15 11:59\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1692,6 +1692,11 @@ msgstr ""
 msgid "File 'DESCRIPTION' is missing."
 msgstr "Le fichier 'DESCRIPTION' est manquant."
 
+#. R/check.R: gettext("File 'data/datalist' is out-of-date:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "File 'data/datalist' is out-of-date:"
+msgstr ""
+
 #. R/check.R: gettext("File DESCRIPTION does not exist", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2359,7 +2364,7 @@ msgid ""
 "Malformed Description field: should contain one or more complete sentences."
 msgstr ""
 
-#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
 msgid ""
 "Malformed NEWS.Rd file:\n"
@@ -2374,7 +2379,7 @@ msgstr ""
 "contiennent plus d'un \\itemsize.\n"
 "Le premier est utilisé."
 
-#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\item.", substring(sub("^[[:space:]]*",     "", .Rd_deparse(x)), 1L, 60L))
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\item.", substr(sub("^[[:space:]]*",     "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
 #, fuzzy
 msgid ""
@@ -2388,7 +2393,7 @@ msgstr ""
 "  %s\n"
 "contiennent no \\itemsize."
 
-#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
 msgid ""
 "Malformed NEWS.Rd file:\n"
@@ -2972,7 +2977,7 @@ msgstr "Seulement une section par \\Sexpr est supportée."
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Seuls les opérateurs '<=' et '>=' sont acceptés."
 
-#. R/check.R: gettextf("Output for data(\"%s\", package = \"%s\"):\n", f, pkgname)
+#. R/check.R: gettextf("Output for data(\"%s\", package = \"%s\"):\n", f, pkgname, domain = "R-tools")
 #: R/check.R:0
 msgid "Output for data(\"%s\", package = \"%s\"):"
 msgstr ""
@@ -3190,6 +3195,11 @@ msgstr ""
 #. R/check.R: gettext("Please fix their permissions\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Please fix their permissions"
+msgstr ""
+
+#. R/check.R: gettext("Please re-create using tools::add_datalist(force = TRUE).\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Please re-create using tools::add_datalist(force = TRUE)."
 msgstr ""
 
 #. R/check.R: gettext("Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")

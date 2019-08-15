@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-08-15 11:59\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -703,11 +703,6 @@ msgstr ""
 #. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
 #: R/databrowser.R:0
 msgid "Empty environment, nothing to do!"
-msgstr ""
-
-#. R/SweaveDrivers.R: gettextf("Encoding: %s", localeToCharset()[1L], domain = "R-utils")
-#: R/SweaveDrivers.R:0
-msgid "Encoding: %s"
 msgstr ""
 
 #. R/windows/choose.files.R: gettext("Enhanced metafiles (*.emf)", domain = "R-utils")
@@ -1875,11 +1870,6 @@ msgstr ""
 msgid "cannot set repositories non-interactively"
 msgstr ""
 
-#. R/package.skeleton.R: warning("cannot turn off locale-specific chars via LC_CTYPE", domain = "R-utils")
-#: R/package.skeleton.R:0
-msgid "cannot turn off locale-specific chars via LC_CTYPE"
-msgstr ""
-
 #. R/linkhtml.R: warning("cannot update HTML package index")
 #: R/linkhtml.R:0
 msgid "cannot update HTML package index"
@@ -2944,6 +2934,11 @@ msgstr ""
 msgid "unable to access index for repository %s"
 msgstr ""
 
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to copy temporary installation %s to %s"
+msgstr ""
+
 #. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
 #. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
 #: R/packages2.R:0
@@ -2970,9 +2965,14 @@ msgstr ""
 
 #. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
-#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname), mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "unable to move temporary installation %s to %s"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr ""
 
 #. R/tar.R: gettextf("unsupported entry type %s", sQuote(ctype))

@@ -832,8 +832,8 @@ static void *latin1_obj = NULL, *utf8_obj=NULL, *ucsmb_obj=NULL,
 
 /* Translates string in "ans" to native encoding returning it in string
    buffer "cbuff" */
-static void translateToNative(const char *ans, R_StringBuffer *cbuff,
-			      nttype_t ttype, int mustWork)
+static int translateToNative(const char *ans, R_StringBuffer *cbuff,
+			     nttype_t ttype, int mustWork)
 {
 
     if (ttype == NT_NONE)
@@ -936,13 +936,15 @@ next_char:
     }
     *outbuf = '\0';
     if (mustWork && failed) {
-	if (mustWork == 2) 
-	    warning(_("used escapes to translate '%s' to native encoding"), 
+	if (mustWork == 2) {
+	    warning(_("unable to translate '%s' to native encoding"), 
 		    cbuff->data);
-	else
+	    return 1;
+	} else
 	    error(_("unable to translate '%s' to native encoding"),
 		  cbuff->data);
     }
+    return 0;
 }
 
 
@@ -988,11 +990,32 @@ const char *translateCharFP(SEXP x)
     return p;
 }
 
+/* Variant which may return NULL, used for file paths */
+attribute_hidden
+const char *translateCharFP2(SEXP x)
+{
+    if(TYPEOF(x) != CHARSXP)
+	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
+	      "translateChar()", type2char(TYPEOF(x)));
+    nttype_t t = needsTranslation(x);
+    const char *ans = CHAR(x);
+    if (t == NT_NONE) return ans;
+
+    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    if (translateToNative(ans, &cbuff, t, 2)) return NULL;
+
+    size_t res = strlen(cbuff.data) + 1;
+    char *p = R_alloc(res, 1);
+    memcpy(p, cbuff.data, res);
+    R_FreeStringBuffer(&cbuff);
+    return p;
+}
+
 SEXP installTrChar(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
-	error(_("'%s' must be called on a CHARSXP, but got '%s'"),
-	      "installTrChar", type2char(TYPEOF(x)));
+	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
+	      "installTrChar()", type2char(TYPEOF(x)));
     nttype_t t = needsTranslation(x);
     if (t == NT_NONE) return installNoTrChar(x);
 

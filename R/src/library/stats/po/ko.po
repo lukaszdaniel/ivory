@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 21:09+0200\n"
+"POT-Creation-Date: 2019-08-15 11:59+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -207,7 +207,7 @@ msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g 값이 (0,1) 범위 외입니다 "
 
-#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
+#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
@@ -788,7 +788,7 @@ msgstr "length(m) 은 반드시 2 이상이어야 합니다 "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Sx 인자는 반드시 수치형 벡터이어야 하며, m[] 보다 짧아야합니다 "
 
-#: nls.c:96 nls.c:98 port.c:557
+#: nls.c:96 nls.c:98 port.c:559
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
@@ -822,7 +822,7 @@ msgstr "수렴합니다 "
 msgid "'%s' argument should be of type character"
 msgstr "'theta' 는 반드시 문자형 이어야 합니다 "
 
-#: nls.c:288 port.c:379
+#: nls.c:288 port.c:381
 msgid "use of NULL environment is defunct"
 msgstr "use of NULL environment is defunct"
 
@@ -1088,80 +1088,80 @@ msgstr "Rf_divset: alg=%d 는 1,2,3, 혹은 4 의 값을 가져야 합니다 "
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.c:314
+#: port.c:316
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "기울기 함수는 길이가 %d 인 수치형 벡터를 반환해야 합니다  "
 
-#: port.c:317
+#: port.c:319
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.c:326
+#: port.c:328
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr ""
 "Hessian 함수는 반드시 order 가 %d 인 수치형 정방행렬을 반환해야 합니다 "
 
-#: port.c:331
+#: port.c:333
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:383
+#: port.c:385
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'rho' 는 반드시 환경이어야 합니다 "
 
-#: port.c:387
+#: port.c:389
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Hessian 이 정의되었다면 기울기도 정의되어야 합니다 "
 
-#: port.c:390
+#: port.c:392
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr ""
 "환경 'rho' 은 반드시 길이가 %d 인 수치형 벡터 '.par' 를 포함해야 합니다  "
 
-#: port.c:404
+#: port.c:406
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' 와 'upper' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:419
+#: port.c:421
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
 
-#: port.c:463
+#: port.c:465
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' 는 명명된 list 에만 적용됩니다 "
 
-#: port.c:489
+#: port.c:491
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() 를 찾을 수 없습니다 "
 
-#: port.c:503
+#: port.c:505
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' 는 반드시 (%d,%d) 인 수치형 행렬이어야 합니다 "
 
-#: port.c:523
+#: port.c:525
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn 은 모드 %d, 길이 %d 를 생성했고, 모드 %d, 길이 %d 를 요구합니다 "
 
-#: port.c:536
+#: port.c:538
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store 에 대한 유형이 잘못되었습니다 "
 
-#: port.c:577
+#: port.c:579
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:600
+#: port.c:602
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

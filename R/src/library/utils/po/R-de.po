@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-08-15 11:59\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -772,11 +772,6 @@ msgstr ""
 #. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
 #: R/databrowser.R:0
 msgid "Empty environment, nothing to do!"
-msgstr ""
-
-#. R/SweaveDrivers.R: gettextf("Encoding: %s", localeToCharset()[1L], domain = "R-utils")
-#: R/SweaveDrivers.R:0
-msgid "Encoding: %s"
 msgstr ""
 
 #. R/windows/choose.files.R: gettext("Enhanced metafiles (*.emf)", domain = "R-utils")
@@ -2022,12 +2017,6 @@ msgstr "kann alte Installation von Paket %s nicht entfernen"
 msgid "cannot set repositories non-interactively"
 msgstr "kann keine Repositories nicht-interaktiv setzen"
 
-#. R/package.skeleton.R: warning("cannot turn off locale-specific chars via LC_CTYPE", domain = "R-utils")
-#: R/package.skeleton.R:0
-msgid "cannot turn off locale-specific chars via LC_CTYPE"
-msgstr ""
-"kann die lokalisierungs-spezifischen Zeichen nicht via LC_CTYPE abschalten"
-
 #. R/linkhtml.R: warning("cannot update HTML package index")
 #: R/linkhtml.R:0
 msgid "cannot update HTML package index"
@@ -3135,6 +3124,12 @@ msgstr "type == \"both\" kann nicht mit 'repos = NULL' benutzt werden"
 msgid "unable to access index for repository %s"
 msgstr "kann nicht auf den Index für das Repository %s zugreifen"
 
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to copy temporary installation %s to %s"
+msgstr "kann temporäre Installation %s nicht nach %s verschieben"
+
 #. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
 #. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
 #: R/packages2.R:0
@@ -3162,9 +3157,15 @@ msgstr "kann keine Pakete installieren"
 
 #. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
-#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname), mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "unable to move temporary installation %s to %s"
+msgstr "kann temporäre Installation %s nicht nach %s verschieben"
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr "kann temporäre Installation %s nicht nach %s verschieben"
 
 #. R/tar.R: gettextf("unsupported entry type %s", sQuote(ctype))
@@ -3657,6 +3658,10 @@ msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "Paket %s ist nicht verfügbar (für %s)"
 msgstr[1] "Pakete %s sind nicht verfügbar (für %s)"
+
+#~ msgid "cannot turn off locale-specific chars via LC_CTYPE"
+#~ msgstr ""
+#~ "kann die lokalisierungs-spezifischen Zeichen nicht via LC_CTYPE abschalten"
 
 #~ msgid "could not find package %s"
 #~ msgstr "konnte Paket %s nicht finden"

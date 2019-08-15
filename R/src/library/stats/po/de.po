@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 21:09+0200\n"
+"POT-Creation-Date: 2019-08-15 11:59+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -206,7 +206,7 @@ msgstr "Nicht-numerisches Argument für mathematische Funktion"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wert %g liegt außerhalb des Bereichs (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99 port.c:385 port.c:556
+#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Argument %s muss ein nichtleerer numerischer Vektor sein"
@@ -787,7 +787,7 @@ msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr ""
 "Argument Sx muss ein numerischer Vektor einen Eintrag kürzer als m[] sein"
 
-#: nls.c:96 nls.c:98 port.c:557
+#: nls.c:96 nls.c:98 port.c:559
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' muss eine Liste sein"
@@ -821,7 +821,7 @@ msgstr "konvergiert"
 msgid "'%s' argument should be of type character"
 msgstr "'theta' sollte vom Typ character sein"
 
-#: nls.c:288 port.c:379
+#: nls.c:288 port.c:381
 msgid "use of NULL environment is defunct"
 msgstr "NULL Umgebung kann nicht genutzt werden"
 
@@ -1091,84 +1091,84 @@ msgstr "RF_divset: alg = %d muss 1, 2, 3 oder 4 sein"
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.c:314
+#: port.c:316
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr ""
 "Gradientenfunktion muss einen numerischen Vektor der Länge %d zurückgeben"
 
-#: port.c:317
+#: port.c:319
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.c:326
+#: port.c:328
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr ""
 "Hessematrixfunktion muss eine quadratische numerische Matrix mit Rang %d "
 "zurückgeben"
 
-#: port.c:331
+#: port.c:333
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:383
+#: port.c:385
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'rho' sollte eine Umgebung sein"
 
-#: port.c:387
+#: port.c:389
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
 "Wird eine Hesse-Funktion angegeben, so muss auch ein Gradient angegeben "
 "werden"
 
-#: port.c:390
+#: port.c:392
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr ""
 "Umgebung 'rho' muss einen numerischen Vektor '.par' der Länge %d enthalten"
 
-#: port.c:404
+#: port.c:406
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' und 'upper' müssen numerische Vektoren sein"
 
-#: port.c:419
+#: port.c:421
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "ungültiger Funktionswert in 'zeroin'"
 
-#: port.c:463
+#: port.c:465
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' nur für benannte Listen anwendbar"
 
-#: port.c:489
+#: port.c:491
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() nicht gefunden"
 
-#: port.c:503
+#: port.c:505
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' muss eine numerische Matrix der Dimension (%d,%d) sein"
 
-#: port.c:523
+#: port.c:525
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn erzeugte Modus %d, Länge %d - gewünscht Modus %d, Länge %d"
 
-#: port.c:536
+#: port.c:538
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "unzulässiger Typ für eval_check_source"
 
-#: port.c:577
+#: port.c:579
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' und 'upperb' muss ein numerischer Vektor sein"
 
-#: port.c:600
+#: port.c:602
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

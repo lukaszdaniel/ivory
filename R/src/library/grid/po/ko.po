@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 18:19+0100\n"
+"POT-Creation-Date: 2019-08-15 11:58+0200\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -40,48 +40,48 @@ msgstr ""
 "최상단의 보임창에 띄울 수 없습니다 (그리드와 그래픽 출력을 혼용하고 있지 않습"
 "니까?) "
 
-#: grid.c:978
+#: grid.c:980
 msgid "attempt to plot on null device"
 msgstr "널 디바이스에 플랏을 시도합니다 "
 
-#: grid.c:1400
+#: grid.c:1402
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "정의된 레이아웃이 없습니다 "
 
-#: grid.c:1620
+#: grid.c:1622
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "다각형의 끝점을 찾을 수 없습니다 (높이 혹은 너비가 0 인가요?)"
 
-#: grid.c:1629
+#: grid.c:1631
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "다각형의 끝점을 찾을 수 없습니다 "
 
-#: grid.c:1783
+#: grid.c:1785
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "화살표를 그리기 위해서는 최소한 2개의 점이 필요합니다 "
 
-#: grid.c:2102
+#: grid.c:2104
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Xspline 에서 유한하지 않은 컨트롤 포인트입니다 "
 
-#: grid.c:2982
+#: grid.c:2984
 msgid "non-finite x or y in graphics path"
 msgstr "그래픽 경로에 x 혹은 y 가 유한하지 않습니다 "
 
-#: grid.c:3026
+#: grid.c:3028
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3509
+#: grid.c:3511
 msgid "invalid plotting symbol"
 msgstr "플랏 기호가 잘못되었습니다 "
 
-#: grid.c:3597
+#: grid.c:3599
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형에 고정시킬 수 없습니다 "

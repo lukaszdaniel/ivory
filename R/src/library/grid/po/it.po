@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 18:19+0100\n"
+"POT-Creation-Date: 2019-08-15 11:58+0200\n"
 "PO-Revision-Date: 2005-04-17 17:30+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -38,45 +38,45 @@ msgstr ""
 "Non posso mostrare la view-port di livello massimo (grid e graphics output "
 "mischiato?)"
 
-#: grid.c:978
+#: grid.c:980
 msgid "attempt to plot on null device"
 msgstr "tentativo di scrivere sul dispositivo null"
 
-#: grid.c:1400
+#: grid.c:1402
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Il layout non è definito"
 
-#: grid.c:1620
+#: grid.c:1622
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 
-#: grid.c:1629
+#: grid.c:1631
 msgid "polygon edge not found"
 msgstr ""
 
-#: grid.c:1783
+#: grid.c:1785
 msgid "require at least two points to draw arrow"
 msgstr ""
 
-#: grid.c:2102
+#: grid.c:2104
 msgid "non-finite control point in Xspline"
 msgstr ""
 
-#: grid.c:2982
+#: grid.c:2984
 msgid "non-finite x or y in graphics path"
 msgstr ""
 
-#: grid.c:3026
+#: grid.c:3028
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3509
+#: grid.c:3511
 #, fuzzy
 msgid "invalid plotting symbol"
 msgstr "layout.pos.col non valido"
 
-#: grid.c:3597
+#: grid.c:3599
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Impossibile tagliare su una viewport ruotata"

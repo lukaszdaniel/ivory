@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2019-08-15 11:59\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -774,11 +774,6 @@ msgstr ""
 #. R/databrowser.R: gettext("Empty environment, nothing to do!", domain = "R-utils")
 #: R/databrowser.R:0
 msgid "Empty environment, nothing to do!"
-msgstr ""
-
-#. R/SweaveDrivers.R: gettextf("Encoding: %s", localeToCharset()[1L], domain = "R-utils")
-#: R/SweaveDrivers.R:0
-msgid "Encoding: %s"
 msgstr ""
 
 #. R/windows/choose.files.R: gettext("Enhanced metafiles (*.emf)", domain = "R-utils")
@@ -2029,11 +2024,6 @@ msgstr "не могу удалить прежнюю установку паке�
 msgid "cannot set repositories non-interactively"
 msgstr "не могу установить хранилища неинтерактивно"
 
-#. R/package.skeleton.R: warning("cannot turn off locale-specific chars via LC_CTYPE", domain = "R-utils")
-#: R/package.skeleton.R:0
-msgid "cannot turn off locale-specific chars via LC_CTYPE"
-msgstr "не могу выключить специфичные для локали символы через LC_CTYPE"
-
 #. R/linkhtml.R: warning("cannot update HTML package index")
 #: R/linkhtml.R:0
 msgid "cannot update HTML package index"
@@ -3137,6 +3127,12 @@ msgstr "type == \"both\" нельзя использовать вместе с '
 msgid "unable to access index for repository %s"
 msgstr "недоступен индекс для хранилища %s"
 
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to copy temporary installation %s to %s"
+msgstr "не могу перенести временную установку из %s в %s"
+
 #. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
 #. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
 #: R/packages2.R:0
@@ -3164,9 +3160,15 @@ msgstr "не могу установить пакеты"
 
 #. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
-#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname), mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "unable to move temporary installation %s to %s"
+msgstr "не могу перенести временную установку из %s в %s"
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr "не могу перенести временную установку из %s в %s"
 
 #. R/tar.R: gettextf("unsupported entry type %s", sQuote(ctype))
@@ -3698,6 +3700,9 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "пакет '%s' недоступен (для %s)"
 msgstr[1] "пакеты %s недоступны (для %s)"
 msgstr[2] "пакеты %s недоступны (для %s)"
+
+#~ msgid "cannot turn off locale-specific chars via LC_CTYPE"
+#~ msgstr "не могу выключить специфичные для локали символы через LC_CTYPE"
 
 #~ msgid "could not find package %s"
 #~ msgstr "не могу найти пакет %s"
