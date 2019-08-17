@@ -4591,10 +4591,19 @@ add_dummies <- function(dir, Log)
                              ": warning: .* with a value, in function returning void"
                             )
 
+                ## warning most seen with -D_FORTIFY_SOURCE
+                warn_re <- c(warn_re,
+                             ": warning: .* \\[-Wunused-result\\]", # also clang
+                             ": warning: .* \\[-Warray-bounds\\]",
+                             ": warning: .* \\[-Wrestrict\\]"
+                             )
+
                 ## clang warnings
                 warn_re <- c(warn_re,
                              ": warning: .* GNU extension",
                              ": warning: .* \\[-Wdeprecated-register\\]",
+                             ## skip some of these below
+                             ": warning: .* \\[-Wdeprecated-declarations\\]",
                              ": warning: .* \\[-Wformat-extra-args\\]", # also gcc
                              ": warning: .* \\[-Wformat-security\\]",
                              ": warning: .* \\[-Wheader-guard\\]",
@@ -4610,7 +4619,6 @@ add_dummies <- function(dir, Log)
                              ": warning: format string contains '[\\]0'",
                              ": warning: .* \\[-Wc[+][+]11-long-long\\]",
                              ": warning: empty macro arguments are a C99 feature",
-                             ": warning: .* \\[-Wunused-result\\]",  # also gcc
                              ## for non-portable flags (seen in sub-Makefiles)
                              "warning: .* \\[-Wunknown-warning-option\\]"
                              )
@@ -4637,6 +4645,10 @@ add_dummies <- function(dir, Log)
 
                 ## and gfortran 9 warnings about F2018
                 ex_re <- "^Warning: Fortran 2018 deleted feature:"
+                lines <- filtergrep(ex_re, lines, useBytes = TRUE)
+
+                ## and deprecated declarations in Eigen and boost
+                ex_re <- "include/(Eigen|boost).* warning: .* \\[-Wdeprecated-declarations\\]"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
 
                 ## Ignore install-time readLines() warnings about
