@@ -82,9 +82,9 @@ SEXP attribute_hidden do_version(SEXP call, SEXP op, SEXP args, SEXP env)
 
     snprintf(buf, 128, "%d", R_SVN_BASEREVISION);
     SET_VECTOR_ELT(value, 10, mkString(buf));
-    SET_STRING_ELT(names, 11, mkChar("svn rev ivory"));
+    SET_STRING_ELT(names, 11, mkChar("git rev"));
 
-    snprintf(buf, 128, "%d", R_SVN_REVISION);
+    snprintf(buf, 128, "%s", R_GIT_REVISION);
     SET_VECTOR_ELT(value, 11, mkString(buf));
     SET_STRING_ELT(names, 12, mkChar("language"));
     SET_VECTOR_ELT(value, 12, mkString("R"));
@@ -114,7 +114,7 @@ void attribute_hidden PrintVersion(char *s, size_t len)
 
 void attribute_hidden PrintVersionString(char *s, size_t len)
 {
-    if(R_SVN_BASEREVISION <= 0) {// 'svn info' failed in ../../Makefile.in
+    if(R_SVN_BASEREVISION <= 0) {// 'git log' failed in ../../Makefile.in
 	snprintf(s, len, "R version %s.%s %s (%s-%s-%s)",
 		R_MAJOR, R_MINOR, R_STATUS, R_BASEYEAR, R_BASEMONTH, R_BASEDAY);
     } else if(strlen(R_STATUS) == 0) {
@@ -132,19 +132,19 @@ void attribute_hidden PrintVersionString(char *s, size_t len)
 
 void attribute_hidden PrintIvoryVersionString(char *s, size_t len)
 {
-    if(R_SVN_REVISION <= 0) {// 'svn info' failed in ../../Makefile.in
+    if(R_GIT_REVISION <= 0) {// 'git log' failed in ../../Makefile.in
         snprintf(s, len, "Ivory version %s.%s %s (%s-%s-%s)",
                 R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY);
     } else if(strlen(R_STATUS) == 0) {
         snprintf(s, len, "Ivory version %s.%s (%s-%s-%s)",
                 R_MAJOR, R_MINOR, R_YEAR, R_MONTH, R_DAY);
     } else if(strcmp(R_STATUS, "Under development (unstable)") == 0) {
-        snprintf(s, len, "Ivory %s (%s-%s-%s r%d)",
-                R_STATUS, R_YEAR, R_MONTH, R_DAY, R_SVN_REVISION);
+        snprintf(s, len, "Ivory %s (%s-%s-%s r%s)",
+                R_STATUS, R_YEAR, R_MONTH, R_DAY, R_GIT_REVISION);
     } else {
-        snprintf(s, len, "Ivory version %s.%s %s (%s-%s-%s r%d)",
+        snprintf(s, len, "Ivory version %s.%s %s (%s-%s-%s r%s)",
                 R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY,
-                R_SVN_REVISION);
+                R_GIT_REVISION);
     }
 }
 

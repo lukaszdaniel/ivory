@@ -53,17 +53,28 @@
       error if a file-path input in a marked encoding cannot be
       translated (to the native encoding or in some cases on Windows to
       UTF-8), rather than translate to a different file path using
-      escapes.  Some (such as \code{dir.exists()},
-      \code{file.exists()}, \code{file.access()}, \code{file.info()},
+      escapes.  Some (such as \code{dir.exists()}, \code{file.exists()},
+      \code{file.access()}, \code{file.info()}, \code{list.files},
       \code{normalizePath()} and \code{path.expand()}) treat this like
-      any other non-existent file, with a warning.
+      any other non-existent file, often with a warning.
 
-      \item \command{Rterm} now works also when invoked from MSYS2
-      terminals.  Line editing is possible when \command{winpty} is
-      installed.
+      \item (Windows) \command{Rterm} now works also when invoked from
+      MSYS2 terminals.  Line editing is possible when \command{winpty}
+      is installed.
 
       \item New function \code{list2DF()} for creating data frames from
       lists of variables.
+
+      \item \code{iconv()} has a new option \code{sub = "Unicode"} to
+      translate UTF-8 input invalid in the \samp{to} encoding using
+      \samp{<U+xxxx>} escapes.
+
+      \item There is a new help document accessed by
+      \code{help("file path encoding")}
+      detailing how file paths with marked encodings are handled.
+
+      \item There is a new function \code{infoRDS()} providing information
+      about serialization format of a serialized object.
     }
   }
 

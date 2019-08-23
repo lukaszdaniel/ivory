@@ -31,7 +31,7 @@ function(given = NULL, family = NULL, middle = NULL,
                  email = email, role = role, comment = comment,
 		 first = first, last = last)
     if(all(vapply(args, is.null, NA)))
-        return(structure(list(), class = "person"))
+        return(.person())
 
     args <- lapply(args, .listify)
     args_length <- lengths(args)
@@ -142,8 +142,14 @@ function(given = NULL, family = NULL, middle = NULL,
     ## </COMMENT>
     ## Yes!
 
-    structure(rval[!vapply(rval, is.null, NA)],
-              class = "person")
+    .person(rval[!vapply(rval, is.null, NA)])
+}
+
+.person <-
+function(x = list())
+{
+    class(x) <- "person"
+    x
 }
 
 .canonicalize_person_role <-
@@ -513,7 +519,7 @@ function(bibtype, textVersion = NULL, header = NULL, footer = NULL, key = NULL,
 
     args <- c(list(...), other)
     if(!length(args))
-        return(structure(list(), class = "bibentry"))
+        return(.bibentry())
     if(any(vapply(names(args), .is_not_nonempty_text, NA)))
         stop("all fields have to be named")
 
@@ -593,8 +599,14 @@ function(bibtype, textVersion = NULL, header = NULL, footer = NULL, key = NULL,
     if(!.is_not_nonempty_text(mfooter))
         attr(rval, "mfooter") <- paste(mfooter, collapse = "\n")
 
-    class(rval) <- "bibentry"
-    rval
+    .bibentry(rval)
+}
+
+.bibentry <-
+function(x = list())
+{
+    class(x) <- "bibentry"
+    x
 }
 
 .bibentry_check_bibentry1 <-
@@ -819,8 +831,7 @@ function(x, more = list())
         }
     }
 
-    class(x) <- "bibentry"
-    x
+    .bibentry(x)
 }
 
 print.bibentry <-
@@ -1017,8 +1028,7 @@ function(x, name, value)
     ## check whether all elements still have their required fields
     for(i in seq_along(x)) .bibentry_check_bibentry1(x[[i]])
 
-    class(x) <- "bibentry"
-    x
+    .bibentry(x)
 }
 
 c.bibentry <-
@@ -1029,8 +1039,7 @@ function(..., recursive = FALSE)
         warning(gettextf("method is only applicable to %s objects", sQuote("bibentry")), domain = "R-utils")
     args <- lapply(args, unclass)
     rval <- do.call("c", args)
-    class(rval) <- "bibentry"
-    rval
+    .bibentry(rval)
 }
 
 toBibtex.bibentry <-
@@ -1318,7 +1327,11 @@ function(package = "base", lib.loc = NULL, auto = NULL)
 
 .citation <-
 function(x, package = NULL)
-    structure(x, package = package, class = c("citation", "bibentry"))
+{
+    class(x) <- c("citation", "bibentry")
+    attr(x, "package") <- package
+    x
+}
 
 .read_authors_at_R_field <-
 function(x)

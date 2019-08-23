@@ -328,7 +328,6 @@ loadNamespace <- function (package, lib.loc = NULL,
                                       }
                                   })
                        })
-
             }
 
             symNames <- nativeRoutines$symbolNames
@@ -362,7 +361,7 @@ loadNamespace <- function (package, lib.loc = NULL,
 
             names(symnames) <- varnames
             symnames
-        }
+        } ## end{assignNativeRoutines}
 
         ## find package, allowing a calling handler to retry if not found.
         ## could move the retry functionality into find.package.
@@ -396,9 +395,10 @@ loadNamespace <- function (package, lib.loc = NULL,
         ## No, not during builds of standard packages
         ## stats4 depends on methods, but exports do not matter
         ## whilst it is being built
+        iniStdPkgs <- c("methods", "stats", "stats4", "tools", "utils")
         nsInfoFilePath <- file.path(pkgpath, "Meta", "nsInfo.rds")
         nsInfo <- if(file.exists(nsInfoFilePath)) readRDS(nsInfoFilePath)
-        else parseNamespaceFile(package, package.lib, mustExist = FALSE)
+                  else parseNamespaceFile(package, package.lib, mustExist = FALSE)
 
         pkgInfoFP <- file.path(pkgpath, "Meta", "package.rds")
         if(file.exists(pkgInfoFP)) {
@@ -406,11 +406,11 @@ loadNamespace <- function (package, lib.loc = NULL,
             version <- pkgInfo$DESCRIPTION["Version"]
             vI <- pkgInfo$Imports
             if(is.null(built <- pkgInfo$Built))
-                stop(gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath))),
+                stop(gettextf("package %s has not been installed properly\n", sQuote(package)), # == basename(pkgpath)
                      call. = FALSE, domain = "R-base")
             R_version_built_under <- as.numeric_version(built$R)
             if(R_version_built_under < "3.0.0")
-                stop(gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath))), call. = FALSE, domain = "R-base")
+                stop(gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package)), call. = FALSE, domain = "R-base")
             ## we need to ensure that S4 dispatch is on now if the package
             ## will require it, or the exports will be incomplete.
             dependsMethods <- "methods" %in% names(pkgInfo$Depends)
@@ -419,6 +419,12 @@ loadNamespace <- function (package, lib.loc = NULL,
                !is.null(zversion <- versionCheck[["version"]]) &&
                !do.call(zop, list(as.numeric_version(version), zversion)))
                 stop(gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package), version, zop, zversion), domain = "R-base")
+        } else {
+            if(!any(package == iniStdPkgs))
+                warning(gettextf("package %s has no 'package.rds' in Meta/",
+                                 sQuote(package)),
+                        domain = "R-base")
+            vI <- NULL
         }
 
         ## moved from library in R 3.4.0
@@ -467,8 +473,8 @@ loadNamespace <- function (package, lib.loc = NULL,
         }
 
         ## avoid any bootstrapping issues by these exemptions
-        if(!package %in% c("datasets", "grDevices", "graphics", "methods",
-                           "stats", "tools", "utils") &&
+        if(!package %in% c("datasets", "grDevices", "graphics", # <- ??
+                           iniStdPkgs) &&
            isTRUE(getOption("checkPackageLicense", FALSE)))
             checkLicense(package, pkgInfo, pkgpath)
 

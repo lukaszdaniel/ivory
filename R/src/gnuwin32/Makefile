@@ -13,8 +13,8 @@ MK = $(MAKE) --no-print-directory
 
 all:
 	@$(MK) MkRules
-	@if test -f  ../../SVN-REVISION ; then \
-	  cp ../../SVN-REVISION ../../SVN-REVISION.bak ; \
+	@if test -f  ../../GIT-REVISION ; then \
+	  cp ../../GIT-REVISION ../../GIT-REVISION.bak ; \
 	fi
 	@$(MK) rbuild
 	@$(MK) -C ../library -f Makefile.win all WIN=$(WIN)
@@ -26,8 +26,8 @@ bytecode: bytecode-base bytecode-recommended
 
 bytecode-base:
 	@$(MK) MkRules
-	@if test -f  ../../SVN-REVISION ; then \
-	  cp ../../SVN-REVISION ../../SVN-REVISION.bak ; \
+	@if test -f  ../../GIT-REVISION ; then \
+	  cp ../../GIT-REVISION ../../GIT-REVISION.bak ; \
 	fi
 	@$(MK) rbuild
 	@$(MK) -C ../library -f Makefile.win bytecode WIN=$(WIN)
@@ -297,7 +297,7 @@ distclean: clean
 	@for pkg in $(R_PKGS_BASE) translations; do \
 	  $(RM) ../library/$${pkg}/DESCRIPTION; \
 	done
-	$(RM) ../../SVN-REVISION.bak
+	$(RM) ../../GIT-REVISION.bak
 	$(RM) ../../doc/manual/rw-FAQ
 	$(MAKE) -C cran clean
 	$(RM) -R ../library/.vignettes # it gets left behind if there is an error
@@ -307,7 +307,7 @@ distclean: clean
 veryclean: distclean
 	$(RM) ../../doc/FAQ ../../doc/RESOURCES ../../doc/NEWS.rds \
 	  ../../doc/html/resources.html ../../doc/html/NEWS.html \
-	  ../../SVN-REVISION # not in SVN sources
+	  ../../GIT-REVISION # not in GIT sources
 
 cleanwin: MkRules fixfiles
 	$(RM) *.o *.dll *.a *~ \#*\# .RData .Rhistory Makedeps *.d
@@ -350,7 +350,7 @@ rsync-recommended:
 	  rsync --timeout=60 -rcvpC --delete \
 	    --exclude=Makefile.in --exclude=Makefile.win --exclude=.cvsignore \
 	    --include=*.tar.gz --exclude=*.tgz --exclude=*.ts \
-	    --exclude=".svn" $(CRANREC) . )
+	    --exclude=".svn" --exclude=".git" $(CRANREC) . )
 	@$(RM) ../library/Recommended/*.tgz
 	@(cd ../library/Recommended; for i in ${R_PKGS_RECOMMENDED}; do cp -p $${i}*.tar.gz $${i}.tgz ; done)
 
@@ -401,7 +401,7 @@ distribution:
 	@$(MK) manuals
 	@$(MK) rinstaller
 	@$(MK) crandir
-	@$(RM) -f ../../SVN-REVISION.bak
+	@$(RM) -f ../../GIT-REVISION.bak
 
 ## Builds what is needed in a 32-bit build to copy to 64/32-bit installer
 32-bit:

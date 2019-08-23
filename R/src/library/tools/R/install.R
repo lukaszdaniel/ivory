@@ -67,6 +67,21 @@ if(FALSE) {
     tmpdir <- ""
     clean_on_error <- TRUE
 
+    R_runR_deps_only <- function(cmd, deps_only_env, ...) {
+        deps_only <-
+            config_val_to_logical(Sys.getenv("_R_CHECK_INSTALL_DEPENDS_",
+                                             "FALSE"))
+        env <- if (deps_only) deps_only_env
+               else ""
+        ## needed for some packages (AnnotationDbi) that install other
+        ## packages during their tests (otherwise system profile fails
+        ## because it cannot find the tests startup file)
+        env <- paste(env, "R_TESTS=")
+        opts <- paste(if(deps_only) "--vanilla" else "--no-save",
+                      "--slave")
+        R_runR(cmd = cmd, Ropts = opts, env = env, ...)
+    }
+
     do_exit <-
 	if(no.q)
 	    function(status) stop(".install_packages() exit status ", status)
@@ -1486,15 +1501,6 @@ if(FALSE) {
             cmd <- append(cmd,
                 paste0("if (isNamespaceLoaded(\"",pkg_name, "\"))",
                            " unloadNamespace(\"", pkg_name, "\")"))
-            deps_only <-
-                config_val_to_logical(Sys.getenv("_R_CHECK_INSTALL_DEPENDS_", "FALSE"))
-            env <- if (deps_only) setRlibs(LinkingTo = TRUE, quote = TRUE)
-                   else ""
-
-            ## needed for some packages (AnnotationDbi) that install other
-            ## packages during their tests (otherwise system profile fails
-            ## because it cannot find the tests startup file)
-            env <- paste(env, "R_TESTS=")
             cmd <- append(cmd,
                 "suppressPackageStartupMessages(.getRequiredPackages(quietly = TRUE))")
             if (pkg_staged_install)
@@ -1508,10 +1514,9 @@ if(FALSE) {
                                 "keep.source = ", keep.source, ", ",
                         "keep.parse.data = ", keep.parse.data,
                                               set.install.dir, ")"))
-            opts <- paste(if(deps_only) "--vanilla" else "--no-save",
-                          "--slave")
             cmd <- paste(cmd, collapse="\n")
-            out <- R_runR(cmd, opts, env = env)
+            out <- R_runR_deps_only(cmd,
+                                    setRlibs(LinkingTo = TRUE, quote = TRUE))
             if(length(out))
                 cat(paste(c(out, ""), collapse = "\n"))
             if(length(attr(out, "status")))
@@ -1555,17 +1560,11 @@ if(FALSE) {
 	## pkg indices: this also tangles the vignettes (if installed)
 	if (install_inst || install_demo || install_help) {
 	    starsmsg(stars, gettext("building package indices"))
-            ## FIXME: add custom runR function
-            deps_only <-
-                config_val_to_logical(Sys.getenv("_R_CHECK_INSTALL_DEPENDS_", "FALSE"))
-            env <- if (deps_only) setRlibs(LinkingTo = TRUE, quote = TRUE)
-                   else ""
             cmd <- c("tools:::.install_package_indices(\".\",",
                      quote_path(instdir), ")")
             cmd <- paste(cmd, collapse="\n")
-            opts <- paste(if(deps_only) "--vanilla" else "--no-save",
-                          "--slave")
-            out <- R_runR(cmd, opts, env = env)
+            out <- R_runR_deps_only(cmd,
+                                    setRlibs(LinkingTo = TRUE, quote = TRUE))
             if(length(out))
                 cat(paste(c(out, ""), collapse = "\n"))
             if (length(attr(out, "status")))
@@ -1606,19 +1605,14 @@ if(FALSE) {
             if (!is.null(extra_cmd))
               cmd <- paste0(cmd, "\n", extra_cmd)
             ## R_LIBS was set already, but Rprofile/Renviron may change it
-            ## R_runR is in check.R
-            deps_only <-
-                config_val_to_logical(Sys.getenv("_R_CHECK_INSTALL_DEPENDS_", "FALSE"))
-            env <- if (deps_only) setRlibs(lib0, self = TRUE, quote = TRUE) else ""
-            ## FIXME: clear R_TESTS?
             tlim <- get_timeout(Sys.getenv("_R_INSTALL_TEST_LOAD_ELAPSED_TIMEOUT_"))
             if (length(test_archs) > 1L) {
                 msgs <- character()
-                opts <- "--no-save --slave"
                 for (arch in test_archs) {
                     starsmsg("***", "arch - ", arch)
-                    out <- R_runR(cmd, opts, env = env, arch = arch,
-                                  timeout = tlim)
+                    out <- R_runR_deps_only(cmd,
+                        deps_only_env = setRlibs(lib0, self = TRUE, quote = TRUE),
+                        arch = arch, timeout = tlim)
                     if(length(attr(out, "status")))
                         msgs <- c(msgs, arch)
                     if(length(out))
@@ -1628,9 +1622,9 @@ if(FALSE) {
                     errmsg(gettextf("ERROR: loading failed for %s", paste(sQuote(msgs), collapse = ", "))) # does not return
                 }
             } else {
-                opts <- paste(if(deps_only) "--vanilla" else "--no-save",
-                              "--slave")
-                out <- R_runR(cmd, opts, env = env, timeout = tlim)
+                out <- R_runR_deps_only(cmd,
+                    deps_only_env = setRlibs(lib0, self = TRUE, quote = TRUE),
+                    timeout = tlim)
                 if(length(out)) {
                     cat(paste(c(out, ""), collapse = "\n"))
                 }
