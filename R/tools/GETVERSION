@@ -52,7 +52,7 @@ TOOLS_DIR=`echo ${0} | sed 's%/[^/][^/]*$%%'`
   echo "#define R_SVN_BASEREVISION ${svn_baserev}"
 ## Using 1-digit year stops problems with leading zeros
 #  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${y1}${m}${d},0"
-  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${git_rev},0"
+  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${svn_baserev},0"
   echo
   echo '#ifdef __cplusplus'
   echo '}'
