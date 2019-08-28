@@ -2544,7 +2544,7 @@ to include @option{-std=f2003}, @option{-std=f2008} or (from version 8)
 default is `GNU Fortran', Fortran 95 with non-standard extensions.  The
 Oracle @command{f95} compiler `accepts some Fortran 2003/8 features'
 (search for `Oracle Developer Studio 12.6: Fortran User's Guide' and
-look for §4.6).  Intel Fortran has full Fortran 2008 suppport from
+look for §4.6).  Intel Fortran has full Fortran 2008 support from
 version 17.0, and some 2018 support in version 16.0 and more in version
 19.0.
 
@@ -4285,6 +4285,7 @@ similar, and the use of @code{+=}@footnote{This was apparently
 introduced in SunOS 4, and is available elsewhere @emph{provided} it is
 surrounded by spaces.} and @code{:=}.  Also, the use of @code{$<} other
 than in implicit rules is a GNU extension, as is the @code{$^} macro.
+As is the use of  @code{.PHONY} (some other makes ignore it).
 Unfortunately makefiles which use GNU extensions often run on other
 platforms but do not have the intended results.
 
@@ -4858,7 +4859,7 @@ in other ways, for example by Automator.}  and Ghostscript (which
 converts PDF to PDF by
 
 @example
-ps2pdf @var{options} -dAutoRotatePages=/None @var{in}.pdf @var{out}.pdf
+ps2pdf @var{options} -dAutoRotatePages=/None -dPrinted=false @var{in}.pdf @var{out}.pdf
 @end example
 
 @noindent
@@ -4932,8 +4933,8 @@ rendered incorrectly, or cause your @R{} code to give an error.  For
 set of characters which is commonly supported is wider than it used to
 be around 2000, but non-Latin alphabets (Greek, Russian, Georgian,
 @dots{}) are still often problematic and those with double-width
-characters (Chinese, Japanese, Korean) often need specialist fonts to
-render correctly.
+characters (Chinese, Japanese, Korean, emoji) often need specialist
+fonts to render correctly.
 
 Several @acronym{CRAN} packages have messages in their @R{} code in French (and a
 few in German).  A better way to tackle this is to use the
@@ -5002,7 +5003,7 @@ required as from @R{} 3.7.0}.  However, in earlier versions the default
 standard was that of the compiler used, often C++98 or C++14.  Packages
 which are for use only with @R{} 3.6.0 or later can assume C++11 or
 specify a later standard.  However, those which may be used in earlier
-versions need to specify C++11 expicitly (@pxref{Using C++11 code}) or
+versions need to specify C++11 explicitly (@pxref{Using C++11 code}) or
 be tested under all of C++11, C++98 and C++14.
 
 Note that the `TR1' C++ extensions are not part of any of these
@@ -5173,10 +5174,13 @@ but it is usually preferable to use explicit namespace prefixes in the code.
 
 Examples seen in @acronym{CRAN} packages include
 @example
-abs acos atan calloc ceil div exp fabs floor fmod free log malloc memcpy
-memset pow printf qsort round sin sprintf sqrt strcmp strcpy strerror
-strlen strncmp strtol tan trunc
+abs acos atan bind calloc ceil div exp fabs floor fmod free log malloc
+memcpy memset pow printf qsort round sin sprintf sqrt strcmp strcpy
+strerror strlen strncmp strtol tan trunc
 @end example
+@noindent
+This problem is less common than it used to be, but in 2019
+@command{clang} did not have @code{bind} in the main namespace.
 
 @item
 @c including clang as from 4.0.0
@@ -5292,7 +5296,8 @@ removed in C++17.
 
 There are quite a lot of other C++98 features deprecated in C++11 and
 removed in C++17, and @command{clang} 9 has started to warn about
-them. Examples include @code{bind1st}/@code{bind2nd} (use @code{bind} or
+them. Examples include @code{bind1st}/@code{bind2nd} (use
+@code{std::bind} or
 lambdas@footnote{@uref{https://stackoverflow.com/questions/32739018/a-replacement-for-stdbind2nd}})
 @code{std::auto_ptr} (replaced by @code{std::unique_ptr}),
 @code{std:;mem_fun_ref} and @code{std::ptr_fun}.

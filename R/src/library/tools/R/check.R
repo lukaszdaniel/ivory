@@ -3496,7 +3496,7 @@ add_dummies <- function(dir, Log)
                         any <- TRUE
                     }
                     printLog(Log,
-                             gettextf("Examples with CPU or elapsed time > %gs\n",
+                             gettextf("Examples with CPU (user + system) or elapsed time > %gs\n",
                                      theta, domain = "R-tools"))
                     out <- utils::capture.output(format(times[keep, ]))
                     printLog0(Log, paste(out, collapse = "\n"), "\n")
@@ -4587,6 +4587,8 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wcatch-value=\\]",
                              ": warning: .* \\[-Wlto-type-mismatch\\]",
                              ": warning: .* \\[-Wunused-value\\]",
+                             ## warning in g++, fatal in clang.
+                             ": warning: .* \\[-Wnarrowing\\]",
                              ## Fatal, not warning, for clang and Solaris ODS
                              ": warning: .* with a value, in function returning void"
                             )
@@ -6082,6 +6084,9 @@ add_dummies <- function(dir, Log)
             dir <- file.info(ff)$isdir
             poss <- grepl("^Rtmp[A-Za-z0-9.]{6}$", ff, useBytes = TRUE)
             ff <- ff[!(poss & dir)]
+            patt <- Sys.getenv("_R_CHECK_THINGS_IN_TEMP_DIR_EXCLUDE_")
+            if (length(patt)) ff <- ff[!grepl(patt, ff, useBytes = TRUE)]
+	    ff <- ff[!is.na(ff)]
             if (length(ff)) {
                 noteLog(Log)
                 msg <- c(gettext("Found the following files/directories:", domain = "R-tools"),

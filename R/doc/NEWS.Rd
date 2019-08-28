@@ -44,7 +44,7 @@
 
       \item New function \code{.S3method()} to register S3 methods in R
       scripts.
-      
+
       \item \code{file.path()} has some support for file paths not in
       the session encoding, e.g.\sspace{}with UTF-8 inputs in a
       non-UTF-8 locale the output is marked as UTF-8.
@@ -113,7 +113,7 @@
       \item There is a new variant option \option{--enable-lto=check}
       for checking consistency of BLAS/LAPACK/LINPACK calls --- see
       \sQuote{Writing R Extensions}.
-      
+
       \item A C++ compiler default is set only if the C++11 standard is
       supported: it no longer falls back to C++98.
     }
@@ -145,6 +145,11 @@
       \item \code{format.default(*, scientific = FALSE)} now corresponds to
       a practically most extreme \code{options(scipen = n)} setting rather
       than arbitrary \code{n = 100}.
+
+      \item \code{format(as.symbol("foo"))} now works (returning \code{"foo"}).
+
+      \item allow \code{add_datalist(*, small.size=0)} to create a
+      \file{data/datalist} file also in case the data sets are small.
     }
   }
 }
@@ -178,20 +183,28 @@
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
       \item Header \file{Rconfig.h} contains the value of
-	\code{FC_LEN_T} deduced at installation which is used by the
-	prototypes in headers \file{BLAS.h} and \file{Lapack.h} but to
-	avoid extensive breakage this is only exposed when
-	\code{USE_FC_LEN_T} is defined.
+      \code{FC_LEN_T} deduced at installation which is used by the
+      prototypes in headers \file{R_ext/BLAS.h} and
+      \file{R_ext/Lapack.h} but to avoid extensive breakage this is
+      only exposed when \code{USE_FC_LEN_T} is defined.
 
-	If a package's C/C++ calls to BLAS/LAPACK allow for the
-	\sQuote{hidden} arguments used by most Fortran compilers to pass
-	the lengths of Fortran character arguments, define
-	\code{USE_FC_LEN_T} and include \file{Rconfig.h} (possibly
-	\emph{via} \file{R.h}) before including \file{BLAS.h} or
-	\file{Lapack.h}.
+      If a package's C/C++ calls to BLAS/LAPACK allow for the
+      \sQuote{hidden} arguments used by most Fortran compilers to pass
+      the lengths of Fortran character arguments, define
+      \code{USE_FC_LEN_T} and include \file{Rconfig.h} (possibly
+      \emph{via} \file{R.h}) before including \file{R_ext/BLAS.h} or
+      \file{R_ext/Lapack.h}.
     }
   }
 
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} has a new option to mitigate checks
+      leaving files/directories in \file{/tmp}.  See the \sQuote{R
+	Internals} manual -- this is part of \code{--as-cran}.
+    }
+  }
+  
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item Support for specifying C++98 in package installation is
