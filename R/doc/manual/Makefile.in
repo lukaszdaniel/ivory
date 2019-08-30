@@ -68,7 +68,7 @@ texinputs_BASE = $(R_PKGS_BASE:=-pkg.tex)
 texinputs_RECOMMENDED = $(R_PKGS_RECOMMENDED:=-pkg.tex)
 refman_DEPENDENCIES = version.tex $(top_srcdir)/share/texmf/tex/latex/Rd.sty
 fullrefman_TEXINPUTS = $(texinputs_BASE) @USE_RECOMMENDED_PACKAGES_TRUE@ $(texinputs_RECOMMENDED)
-GIT_REV = $(top_builddir)/GIT-REVISION
+SVN_REV = $(top_builddir)/SVN-REVISION
 
 texiincludes = version.texi $(srcdir)/R-defs.texi
 
@@ -174,10 +174,10 @@ R-FAQ.html: $(srcdir)/R-FAQ.texi
 	fi
 
 
-version.tex: Makefile $(top_srcdir)/VERSION $(GIT_REV)
+version.tex: Makefile $(top_srcdir)/VERSION $(SVN_REV)
 	@$(ECHO) "creating $(subdir)/$@"
 	@(v=`cat $(top_srcdir)/VERSION`; \
-	  v="$${v} (`sed -e 1d -e 's/^Last Changed Date: //' $(GIT_REV)`)"; \
+	  v="$${v} (`sed -e 1d -e 's/^Last Changed Date: //' $(SVN_REV)`)"; \
 	  $(ECHO) "$${v}") > $@
 
 R_EXE = $(top_builddir)/bin/R --slave --vanilla
@@ -201,11 +201,11 @@ $(texinputs_RECOMMENDED): FORCE
 	    | LC_ALL=C $(R_EXE) ; \
 	fi)
 
-version.texi: Makefile $(top_srcdir)/VERSION $(GIT_REV)
+version.texi: Makefile $(top_srcdir)/VERSION $(SVN_REV)
 	@$(ECHO) "creating $(subdir)/$@"
 	@(vv=`sed 's/ *(.*//' $(top_srcdir)/VERSION`;v=`echo $${vv}| sed 's/\([^ ]*\).*/\1/'`; \
 	  $(ECHO) "@set VERSIONno $${v}" > $@; \
-	  v="$${vv} (`sed -e 1d -e 's/^Last Changed Date: //' $(GIT_REV)`)"; \
+	  v="$${vv} (`sed -e 1d -e 's/^Last Changed Date: //' $(SVN_REV)`)"; \
 	  $(ECHO) "@set VERSION $${v}" >> $@; \
 	  rwv=`$(R_EXE) -f $(top_srcdir)/src/gnuwin32/fixed/rwver.R`; \
 	  $(ECHO) "@set RWVERSION $${rwv}" >> $@ )
@@ -438,7 +438,7 @@ ${top_builddir}/doc/FAQ: $(srcdir)/R-FAQ.texi
 	  $(TEXI2TEXT) $(srcdir)/R-FAQ.texi -o $@; \
 	fi
 
-html-non-git: ../html/resources.html
+html-non-svn: ../html/resources.html
 
 ../html/resources.html: $(srcdir)/resources.texi
 	@if test -z "$(TEXI2ANY)"; then \

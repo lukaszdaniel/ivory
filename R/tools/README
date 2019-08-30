@@ -31,7 +31,7 @@ The files are as follows.
 	get the value of a Make variable from a Makefile [this needs to
 	be improved].  Used by configure.
   GETVERSION
-	create API 'Rversion.h' from 'VERSION' and 'GIT-REVISION'.
+	create API 'Rversion.h' from 'VERSION' and 'SVN-REVISION'.
   
   copy-if-change
 	copy a file if changed; otherwise, do nothing.

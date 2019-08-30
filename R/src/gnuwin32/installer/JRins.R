@@ -28,9 +28,8 @@
 
     Rver <- readLines("../../../VERSION")[1L]
     Rver <- sub("Under .*$", "Pre-release", Rver)
-    ## This is now over 2^16, so truncate
-    GIT <- sub("Revision: ", "", readLines("../../../GIT-REVISION"))[1L]
-    Rver0 <- paste(sub(" .*$", "", Rver), GIT, sep = ".")
+    SVN <- sub("Revision: ", "", readLines("../../../SVN-REVISION"))[1L]
+    Rver0 <- paste(sub(" .*$", "", Rver), SVN, sep = ".")
 
 
     con <- file("R.iss", "w")

@@ -52,7 +52,7 @@ iconv.h: ../gnuwin32/fixed/h/iconv.h
 psignal.h: ../gnuwin32/fixed/h/psignal.h
 	@cp $< $@
 
-Rversion.h: $(R_HOME)/VERSION $(R_HOME)/GIT-REVISION $(R_HOME)/tools/GETVERSION
+Rversion.h: $(R_HOME)/VERSION $(R_HOME)/SVN-REVISION $(R_HOME)/tools/GETVERSION
 	@sh $(R_HOME)/tools/GETVERSION > $@
 
 Rmath.h0: Rmath.h0.in $(R_HOME)/VERSION Makefile.win
@@ -66,28 +66,28 @@ Rmath.h: Rmath.h0
 trioremap.h: ../gnuwin32/fixed/h/trioremap.h
 	@cp $< $@
 
-## If we do not have svn, get the old file from GIT-REVISION.bak (if poss).
+## If we do not have svn, get the old file from SVN-REVISION.bak (if poss).
 ## This needs to be copy-on-change.
 ## The date from svn info is not in GMT, but we have decided to live
 ## with that as they changed the format in svn 1.4.x
 ## <FIXME> USE_SVNVERSION does not work if there is no 'svnversion'
 FORCE:
-$(R_HOME)/GIT-REVISION: FORCE
-	@if test -f  $(R_HOME)/GIT-REVISION ; then \
-	  cp -p $(R_HOME)/GIT-REVISION $(R_HOME)/GIT-REVISION.bak ; \
+$(R_HOME)/SVN-REVISION: FORCE
+	@if test -f  $(R_HOME)/SVN-REVISION ; then \
+	  cp -p $(R_HOME)/SVN-REVISION $(R_HOME)/SVN-REVISION.bak ; \
 	fi
 ifdef USE_SVNVERSION
 	@LC_ALL=C svnversion ../.. | sed -n 's/^/Revision: /p' > svn-tmp || rm -f svn-tmp
 	@grep -v exported svn-tmp > /dev/null || rm -f svn-tmp
 else
-	@(cd ../..; LC_ALL=C $(GIT) svn info || echo "Revision: unknown") 2> /dev/null \
+	@(cd ../..; LC_ALL=C git rev-list --count HEAD | sed -e 's/\<[[:digit:]]*\>/Revision: &/' || echo "Revision: unknown") 2> /dev/null \
 	  | sed -n '/^Revision/p' > svn-tmp
 	@if grep unknown svn-tmp > /dev/null ; then \
 	  rm svn-tmp; \
 	fi
 endif
 	@if test -f svn-tmp ; then \
-	  (cd ../..; LC_ALL=C TZ=GMT $(GIT) svn info || echo "Last Changed Date: unknown") 2> /dev/null \
+	  (cd ../..; LC_ALL=C TZ=GMT git log -n1 --date=short --format="Last Changed Date: %cd" || echo "Last Changed Date: unknown") 2> /dev/null \
 	    | sed -n '/^Last Changed Date:/p' | sed 's/[0-9][0-9]:.*//' \
 	    >> svn-tmp ; \
 	else \
@@ -98,11 +98,11 @@ endif
 	    cp svn-tmp $@; \
 	  fi ; \
 	else \
-	  cp -p $(R_HOME)/GIT-REVISION.bak $@ 2> /dev/null || \
+	  cp -p $(R_HOME)/SVN-REVISION.bak $@ 2> /dev/null || \
 	  (echo "Revision: 00000" > $@; \
 	   echo "Last Changed Date: 2006-00-00" >> $@) ; \
 	fi 
-	@rm -f svn-tmp $(R_HOME)/GIT-REVISION.bak
+	@rm -f svn-tmp $(R_HOME)/SVN-REVISION.bak
 
 distclean:
 	$(RM) -f Rmath.h0 fixh

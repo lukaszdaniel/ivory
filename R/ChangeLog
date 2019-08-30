@@ -42002,7 +42002,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     y=2013
 25a26,30
->     basedat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../GIT-REVISION`
+>     basedat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../SVN-REVISION`
 >     basey=`echo ${basedat} | cut -d- -f1`
 >     basem=`echo ${basedat} | cut -d- -f2`
 >     based=`echo ${basedat} | cut -d- -f3`

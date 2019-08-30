@@ -9,21 +9,21 @@ TOOLS_DIR=`echo ${0} | sed 's%/[^/][^/]*$%%'`
   pl=`echo ${min} | sed 's/\..*//'`
   sl=`echo ${min} | sed 's/.*\.//'`
   ver=`expr ${maj} \\* 65536 + ${pl} \\* 256 + ${sl}`
-  if test -f ../../GIT-REVISION ; then
-    dat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../GIT-REVISION`
+  if test -f ../../SVN-REVISION ; then
+    dat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../SVN-REVISION`
     y=`echo ${dat} | cut -d- -f1`
     m=`echo ${dat} | cut -d- -f2`
     d=`echo ${dat} | cut -d- -f3`
     y1=`expr ${y} - 2000`
-    git_rev=`sed -n -e 's/^Revision: //' -e '1p' < ../../GIT-REVISION`
+    svn_rev=`sed -n -e 's/^Revision: //' -e '1p' < ../../SVN-REVISION`
   else
     y=2013
     m=01
     d=01
     y1=6
-    git_rev=unknown
+    svn_rev=unknown
   fi
-    basedat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../GIT-REVISION`
+    basedat=`sed  -e 1d -e 's/^Last Changed Date: //' ../../SVN-REVISION`
     basey=`echo ${basedat} | cut -d- -f1`
     basem=`echo ${basedat} | cut -d- -f2`
     based=`echo ${basedat} | cut -d- -f3`
@@ -45,14 +45,14 @@ TOOLS_DIR=`echo ${0} | sed 's%/[^/][^/]*$%%'`
   echo "#define R_YEAR   \"${y}\""
   echo "#define R_MONTH  \"${m}\""
   echo "#define R_DAY    \"${d}\""
-  echo "#define R_GIT_REVISION \"${git_rev}\""
+  echo "#define R_SVN_REVISION ${svn_rev}"
   echo "#define R_BASEYEAR   \"${basey}\""
   echo "#define R_BASEMONTH  \"${basem}\""
   echo "#define R_BASEDAY    \"${based}\""
   echo "#define R_SVN_BASEREVISION ${svn_baserev}"
 ## Using 1-digit year stops problems with leading zeros
 #  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${y1}${m}${d},0"
-  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${svn_baserev},0"
+  echo "#define R_FILEVERSION    ${maj},${pl}${sl},${svn_rev},0"
   echo
   echo '#ifdef __cplusplus'
   echo '}'

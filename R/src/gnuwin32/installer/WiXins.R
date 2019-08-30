@@ -49,8 +49,8 @@
 
     Rver <- readLines("../../../VERSION")[1L]
     Rver <- sub("Under .*$", "Pre-release", Rver)
-    GIT <- sub("Revision: ", "", readLines("../../../GIT-REVISION"))[1L]
-    Rver0 <- paste(sub(" .*$", "", Rver), GIT, sep = ".")
+    SVN <- sub("Revision: ", "", readLines("../../../SVN-REVISION"))[1L]
+    Rver0 <- paste(sub(" .*$", "", Rver), SVN, sep = ".")
 
     uuids <- readLines("uuids")
     nc <- 1

@@ -166,7 +166,7 @@ extras:
 
 R.iss: JRins.R header1.iss types3264.iss types32.iss code.iss \
    CustomMsg.iss imagedir fixups 32bit extras md5sums \
-  ../../../VERSION ../../../GIT-REVISION
+  ../../../VERSION ../../../SVN-REVISION
 	../../../bin$(R_ARCH)/Rscript JRins.R \
 	  $(RPREFIX) $(RPREFIX) $(MDISDI) \
 	  $(HelpStyle) $(Producer) "$(ISDIR)"
