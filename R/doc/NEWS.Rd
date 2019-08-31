@@ -209,6 +209,10 @@
     \itemize{
       \item Support for specifying C++98 in package installation is
       deprecated.
+ 
+      \item Support in \command{R CMD config} for \samp{F77},
+      \samp{FCPIFCPLAGS}, \samp{CXXCPP} and \samp{CXX98} and similar is
+      deprecated.
     }
   }
 

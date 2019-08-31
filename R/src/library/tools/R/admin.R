@@ -1035,6 +1035,7 @@ compactPDF <-
                              sprintf("-dPDFSETTINGS=/%s", gs_quality),
                              "-dCompatibilityLevel=1.5",
                              "-dAutoRotatePages=/None",
+                             "-dPrinted=false",
                              sprintf("-sOutputFile=%s", tf),
                              gs_extras, shQuote(p)), FALSE, FALSE)
             if(!res && use_qpdf) {

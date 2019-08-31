@@ -1010,11 +1010,11 @@ add_dummies <- function(dir, Log)
                     }
                     msg <- if (is.na(findEmail(BR))) {
                         if (grepl("(^|.* )[^ ]+@[[:alnum:]._]+", BR))
-                            gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >", domain = "R-tools")
+                            gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >\n   use the Contact field instead", domain = "R-tools")
                         else
                             gettext("BugReports field should be the URL of a single webpage", domain = "R-tools")
                     } else
-                        gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0", domain = "R-tools")
+                        gettext("BugReports field is not a suitable URL but contains an email address:\n   use the Contact field instead", domain = "R-tools")
                 }
             } else {
                 msg <- gettext("BugReports field should not be empty", domain = "R-tools")
@@ -4622,7 +4622,8 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wc[+][+]11-long-long\\]",
                              ": warning: empty macro arguments are a C99 feature",
                              ": warning: .* \\[-Winvalid-source-encoding\\]",
-                             ## for non-portable flags (seen in sub-Makefiles)
+                             ": warning: .* \\[-Wunused-command-line-argument\\]",
+                             ## For non-portable flags (seen in sub-Makefiles)
                              "warning: .* \\[-Wunknown-warning-option\\]"
                              )
 
