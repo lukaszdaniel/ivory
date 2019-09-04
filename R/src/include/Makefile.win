@@ -80,14 +80,14 @@ ifdef USE_SVNVERSION
 	@LC_ALL=C svnversion ../.. | sed -n 's/^/Revision: /p' > svn-tmp || rm -f svn-tmp
 	@grep -v exported svn-tmp > /dev/null || rm -f svn-tmp
 else
-	@(cd ../..; LC_ALL=C git rev-list --count HEAD | sed -e 's/\<[[:digit:]]*\>/Revision: &/' || echo "Revision: unknown") 2> /dev/null \
+	@(cd ../..; LC_ALL=C git rev-list -count HEAD 2> /dev/null || echo "Revision: unknown" |  sed -e 's/\(Revision: \)?\(.*\)/Revision: \1/') \
 	  | sed -n '/^Revision/p' > svn-tmp
 	@if grep unknown svn-tmp > /dev/null ; then \
 	  rm svn-tmp; \
 	fi
 endif
 	@if test -f svn-tmp ; then \
-	  (cd ../..; LC_ALL=C TZ=GMT git log -n1 --date=short --format="Last Changed Date: %cd" || echo "Last Changed Date: unknown") 2> /dev/null \
+	  (cd ../..; LC_ALL=C TZ=GMT git log -n1 --date=short --format="Last Changed Date: %cd" 2> /dev/null || echo "Last Changed Date: unknown") \
 	    | sed -n '/^Last Changed Date:/p' | sed 's/[0-9][0-9]:.*//' \
 	    >> svn-tmp ; \
 	else \

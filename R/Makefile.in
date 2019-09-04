@@ -108,11 +108,10 @@ svnonly:
 	@if test ! -f "$(srcdir)/doc/FAQ" || test -f non-tarball ; then \
 	  (cd doc/manual && $(MAKE) front-matter html-non-svn) ; \
 	  touch non-tarball ; \
-	  (cd $(srcdir); LC_ALL=C TZ=GMT \
-	git rev-list --count HEAD | sed -e 's/\<[[:digit:]]*\>/Revision: &/' &&\
-       	git log -n1 --date=short --format="Last Changed Date: %cd") \
-	      2> /dev/null > SVN-REVISION-tmp; \
-	  if test ! -s SVN-REVISION-tmp; then \
+	  (cd $(srcdir); LC_ALL=C TZ=GMT git rev-list --count HEAD 2> /dev/null | sed -e 's/\(.*\)/Revision: \1/' && git log -n1 --date=short --format="Last Changed Date: %cd" 2> /dev/null || echo "Revision: -99") \
+	    | sed -n -e '/^Revision/p' -e '/^Last Changed Date/'p \
+	    | cut -d' ' -f1,2,3,4 > SVN-REVISION-tmp ; \
+	  if test "`cat SVN-REVISION-tmp`" = "Revision: -99"; then \
 	    $(ECHO) "ERROR: not a git checkout"; \
 	    exit 1; \
 	  fi; \
