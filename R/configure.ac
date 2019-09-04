@@ -1689,7 +1689,6 @@ AC_SUBST(STATICR2)
 AC_SUBST(R_DYLIB_EXT)
 
 ## Test support for C++ standards
-R_STDCXX([98], [CXX98], [CXX])
 R_STDCXX([11], [CXX11], [CXX])
 R_STDCXX([14], [CXX14], [CXX11])
 R_STDCXX([17], [CXX17], [CXX14])
@@ -2459,7 +2458,7 @@ AC_FC_SRCEXT(f95, [dummy=1], [dummy=0])
 R_OPENMP
 AC_LANG_POP()
 
-## SHLIB_FCLD and {SHLIB_FCLDFLAGS are legacy
+## SHLIB_FCLD and {SHLIB_FCLDFLAGS are legacy, but might be used in a Makefile
 if test -z "${SHLIB_FCLD}"; then
   shlib_fcld_was_given=no
   SHLIB_FCLD="\$(FC)"

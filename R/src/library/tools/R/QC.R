@@ -6561,9 +6561,11 @@ function(dir, localOnly = FALSE)
                    useBytes = TRUE)
     ## RFC 5322 allows '.' in the display name, but 2822 did not.
     ## ',' separates email addresses.
-    out$Maintainer_needs_quotes <-
-        grepl("[,]", display, useBytes = TRUE) && !grepl('^".*"$', display, useBytes = TRUE)
-    out$empty_Maintainer_name <- !nzchar(display)
+    if(grepl("[,]", display, useBytes = TRUE) &&
+       !grepl('^".*"$', display, useBytes = TRUE))
+        out$Maintainer_needs_quotes <- TRUE
+    if(!nzchar(display))
+        out$empty_Maintainer_name <- TRUE
     ## Try to catch bad maintainer fields which give more than one
     ## person.  In principle, the field should be of the form
     ##   DISPLAY-NAME <ANGLE-ADDR>
@@ -6587,10 +6589,10 @@ function(dir, localOnly = FALSE)
         ## display-name which we already do separately.)
     }
     ## NOTE: perhaps whitespace should be canonicalized further above?
-    maintainer <- gsub("\n", " ", meta["Maintainer"], fixed=TRUE)
-    out$Maintainer_invalid_or_multi_person <-
-        ((maintainer != "ORPHANED") &&
+    maintainer <- gsub("\n", " ", meta["Maintainer"], fixed = TRUE)
+    if((maintainer != "ORPHANED") &&
          !check_maintainer_address(maintainer))
+        out$Maintainer_invalid_or_multi_person <- TRUE
 
     ver <- meta["Version"]
     if(is.na(ver))
@@ -7567,11 +7569,11 @@ function(x, ...)
           gettextf("Maintainer: %s", sQuote(lines2str(x$Maintainer, " ")), domain = "R-tools")
       else
           gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
-      fmt(c(if(x$Maintainer_invalid_or_multi_person)
+      fmt(c(if(isTRUE(x$Maintainer_invalid_or_multi_person))
                 gettext("The maintainer field is invalid or specifies more than one person", domain = "R-tools"),
-            if(x$empty_Maintainer_name)
+            if(isTRUE(x$empty_Maintainer_name))
                 gettext("The maintainer field lacks a name", domain = "R-tools"),
-            if(x$Maintainer_needs_quotes)
+            if(isTRUE(x$Maintainer_needs_quotes))
                 gettext("The display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools"))
           ),
       if(length(x$new_submission))

@@ -75,6 +75,9 @@
 
       \item There is a new function \code{infoRDS()} providing information
       about serialization format of a serialized object.
+
+      \item S3 method lookup now by default skips the elements of the
+      search path between the global and base environments.
     }
   }
 
@@ -90,6 +93,9 @@
       to the value of \samp{FC}, which is set for package compilation.
       But portable code should not rely on this.)
 
+      \item Support for specifying C++98 in package installation has
+      been removed.
+      
       \item \command{R CMD config} no longer knows about the
       unused settings \samp{F77} and \samp{FCPIFCPLAGS}, nor
       \samp{CXX98} and similar.
@@ -204,15 +210,19 @@
 	Internals} manual -- this is part of \code{--as-cran}.
     }
   }
-  
+
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item Support for specifying C++98 in package installation is
       deprecated.
  
       \item Support in \command{R CMD config} for \samp{F77},
-      \samp{FCPIFCPLAGS}, \samp{CXXCPP} and \samp{CXX98} and similar is
-      deprecated.
+      \samp{FCPIFCPLAGS}, \samp{CPP}, \samp{CXXCPP} and \samp{CXX98} and
+      similar is deprecated.  (\samp{CPP} is found from the system
+      \command{make} and may well not be set.)
+
+      Use \samp{$CC -E} and \samp{$CXX -E} instead of \samp{CPP} and
+      \samp{CXXCPP}.
     }
   }
 
@@ -251,6 +261,10 @@
       \item Auto-printing S4 objects no longer duplicates the object,
       for faster speed and reduced memory consumption. Reported by Aaron
       Lun.
+
+      \item \code{pchisq(<LRG>, <LRG>, ncp=100)} no longer takes
+      practically forever in some cases.  Hence ditto for corresponding
+      \code{qchisq()} calls.
     }
   }
 }

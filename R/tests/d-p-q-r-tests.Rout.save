@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-08-30 r1170) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-09-04 r1172) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-08-30 r77100) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-09-04 r77144) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -118,10 +118,10 @@ Type 'q()' to quit R.
 > n1 <- 20; n2 <- 16
 > for(lambda in rexp(n1))
 +     for(k in rpois(n2, lambda))
-+ 	stopifnot(all.equal(1 - pchisq(2*lambda, 2*(1+ 0:k)),
++ 	stopifnot(all.equal(pchisq(2*lambda, 2*(1+ 0:k), lower.tail = FALSE),
 + 			    pp <- cumsum(dpois(0:k, lambda=lambda)),
 + 			    tolerance = 100*Meps),
-+ 		  all.equal(pp, ppois(0:k, lambda=lambda), tolerance = 100*Meps),
++ 		  all.equal(    pp, ppois(0:k, lambda=lambda), tolerance = 100*Meps),
 + 		  all.equal(1 - pp, ppois(0:k, lambda=lambda, lower.tail = FALSE)))
 > 
 > 
@@ -303,7 +303,7 @@ Type 'q()' to quit R.
 > 
 > ## Log norm
 > stopifnot(All.eq(pz, plnorm(exp(z))))
-> 
+> 
 > 
 > ###==========  p <-> q	Inversion consistency =====================
 > ok <- 1e-5 < pz & pz < 1 - 1e-5
@@ -1500,7 +1500,10 @@ rweibull (4, ..): 1 2  [Ok]
 > ## The PR#17577 bug fix for dgamma() is currently "optimized away" on Windows 32-bit (8087 proc).
 > ## --> check in ./reg-tests-1d.R (with no *.Rout.save) currently
 > 
+> ## Ditto for  pchisq(<LRG>, <LRG>, ..)
+> 
+> 
 > 
 > cat("Time elapsed: ", proc.time() - .ptime,"\n")
-Time elapsed:  0.808 0.017 0.824 0 0 
+Time elapsed:  0.823 0.02 0.845 0 0 
 > 

@@ -379,8 +379,8 @@ if(FALSE) {
                 }
                 else if(any(grepl("^[[:space:]]*C[+][+]98[[:space:]]*$",
                                   sys_requires, ignore.case=TRUE))) {
-                    Sys.setenv("R_PKG_CXX_STD"="CXX98")
-                    on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
+                    stop("C++98 standard requested but unsupported",
+                         call. = FALSE, domain = "R-tools")
                 }
             }
         }
@@ -1789,7 +1789,7 @@ if(FALSE) {
                 R.version[["major"]], ".",  R.version[["minor"]],
                 " (r", R.version[["svn rev"]], ")\n", sep = "")
             cat("",
-                "Copyright (C) 2000-2016 The R Core Team.",
+                "Copyright (C) 2000-2019 The R Core Team.",
                 "This is free software; see the GNU General Public License version 2 or later for copying conditions. There is NO warranty.",
                 sep = "\n")
 	    do_exit(0)
@@ -2262,7 +2262,6 @@ if(FALSE) {
     with_f77 <- FALSE
     with_f9x <- FALSE
     with_objc <- FALSE
-    use_cxx98 <- FALSE
     use_cxx11 <- FALSE
     use_cxx14 <- FALSE
     use_cxx17 <- FALSE
@@ -2283,7 +2282,7 @@ if(FALSE) {
                 R.version[["major"]], ".",  R.version[["minor"]],
                 " (r", R.version[["svn rev"]], ")\n", sep = "")
             cat("",
-                "Copyright (C) 2000-2013 The R Core Team.",
+                "Copyright (C) 2000-2019 The R Core Team.",
                 "This is free software; see the GNU General Public License version 2 or later for copying conditions. There is NO warranty.",
                 sep = "\n")
             return(0L)
@@ -2377,10 +2376,9 @@ if(FALSE) {
                 use_cxx11 <- TRUE
                 with_cxx <- TRUE
             }
-            else if (cxxstd == "CXX98") {
-                use_cxx98 <- TRUE
-                with_cxx <- TRUE
-            }
+            else if (cxxstd == "CXX98")
+                stop("C++98 standard requested but unsupported",
+                     call. = FALSE, domain = "R-tools")
         }
     } else if (file.exists("Makevars")) {
         makefiles <- c("Makevars", makefiles)
@@ -2403,17 +2401,18 @@ if(FALSE) {
                 use_cxx11 <- TRUE
                 with_cxx <- TRUE
             }
-            else if (cxxstd == "CXX98") {
-                use_cxx98 <- TRUE
-                with_cxx <- TRUE
-            }
+            else if (cxxstd == "CXX98")
+                stop("C++98 standard requested but unsupported",
+                     call. = FALSE, domain = "R-tools")
         }
     }
-    if (!use_cxx11 && !use_cxx14 && !use_cxx17 && !use_cxx98) {
+    if (!is.na(Sys.getenv("USE_CXX98", NA_character_)))
+        stop("C++98 standard requested but unsupported",
+             call. = FALSE, domain = "R-tools")
+    if (!use_cxx11 && !use_cxx14 && !use_cxx17) {
         val17 <- Sys.getenv("USE_CXX17", NA_character_)
         val14 <- Sys.getenv("USE_CXX14", NA_character_)
         val11 <- Sys.getenv("USE_CXX11", NA_character_)
-        val98 <- Sys.getenv("USE_CXX98", NA_character_)
         if (!is.na(val17)) {
             use_cxx17 <- TRUE
         }
@@ -2422,9 +2421,6 @@ if(FALSE) {
         }
         else if (!is.na(val11)) {
             use_cxx11 <- TRUE
-        }
-        else if (!is.na(val98)) {
-            use_cxx98 <- TRUE
         }
         else {
             val <- Sys.getenv("R_PKG_CXX_STD")
@@ -2436,9 +2432,6 @@ if(FALSE) {
             }
             else if (val == "CXX11") {
                 use_cxx11 <- TRUE
-            }
-            else if (val == "CXX98") {
-                use_cxx98 <- TRUE
             }
         }
     }
@@ -2458,19 +2451,16 @@ if(FALSE) {
             return(FALSE)
         }
         if (use_cxx17 && !checkCXX("CXX17")) {
-            stop("C++17 standard requested but CXX17 is not defined")
+            stop("C++17 standard requested but CXX17 is not defined",
+                 call. = FALSE, domain = "R-tools")
         }
         if (use_cxx14 && !checkCXX("CXX14")) {
-            stop("C++14 standard requested but CXX14 is not defined")
+            stop("C++14 standard requested but CXX14 is not defined",
+                 call. = FALSE, domain = "R-tools")
         }
         if (use_cxx11 && !checkCXX("CXX11")) {
-            stop("C++11 standard requested but CXX11 is not defined")
-        }
-        if (use_cxx98 && !checkCXX("CXX98")) {
-            stop("C++98 standard requested but CXX98 is not defined")
-        }
-        if (use_cxx98) {
-            warning("Support for C++98 is deprecated", call. = FALSE)
+            stop("C++11 standard requested but CXX11 is not defined",
+                 call. = FALSE, domain = "R-tools")
         }
     }
 
@@ -2494,12 +2484,6 @@ if(FALSE) {
               "CXXPICFLAGS='$(CXX11PICFLAGS)'",
               "SHLIB_LDFLAGS='$(SHLIB_CXX11LDFLAGS)'",
               "SHLIB_LD='$(SHLIB_CXX11LD)'", makeargs)
-        else if (use_cxx98)
-            c("CXX='$(CXX98) $(CXX98STD)'",
-              "CXXFLAGS='$(CXX98FLAGS)'",
-              "CXXPICFLAGS='$(CXX98PICFLAGS)'",
-              "SHLIB_LDFLAGS='$(SHLIB_CXX98LDFLAGS)'",
-              "SHLIB_LD='$(SHLIB_CXX98LD)'", makeargs)
         else
             c("SHLIB_LDFLAGS='$(SHLIB_CXXLDFLAGS)'",
               "SHLIB_LD='$(SHLIB_CXXLD)'", makeargs)

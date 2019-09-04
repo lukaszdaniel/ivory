@@ -1656,13 +1656,18 @@ and packages written with C++ need to pick up the details for the C++
 compiler and switch the current language to C++ by something like
 @example
 CXX=`"$@{R_HOME@}/bin/R" CMD config CXX`
+if test -z "$CXX"; then
+  AC_MSG_ERROR([No C++ compiler is available])
+fi
 CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXXFLAGS`
 AC_LANG(C++)
 @end example
 
 @noindent
 The latter is important, as for example C headers may not be available
-to C++ programs or may not be written to avoid C++ name-mangling.
+to C++ programs or may not be written to avoid C++ name-mangling.  Note
+that an @R{} installation is not required to have a C++ compiler so
+@samp{CXX} may be empty.
 
 @findex R CMD config
 You can use @code{R CMD config} to get the value of the basic
@@ -2173,15 +2178,30 @@ PKG_LIBS = $(SHLIB_OPENMP_CFLAGS)
 @end example
 
 @noindent
-as the C compiler will be used to link the package code (and there are
-platforms on which this does not work.
+as the C compiler will be used to link the package code. There are
+platforms on which this does not work @emph{for some OpenMP-using code}
+and installation will fail, so portable packages wanting to use Fortran
+code with OpenMP need to test their usage for themselves.  An
+alternative for a package with only Fortran sources is to use a file
+@file{src/Makefile} (and @file{src/Makefile.win}) something like
+@example
+PKG_FFLAGS = $(SHLIB_OPENMP_FFLAGS)
+PKG_LIBS = $(SHLIB_OPENMP_FFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+SHLIB_LD = $(SHLIB_FCLD)
+SHLIB_LDFLAGS = $(SHLIB_FCLDFLAGS)
+SHLIB = pkgname$(SHLIB_EXT)
+
+all: $(SHLIB)
+
+$(SHLIB): $(OBJECTS)
+        $(SHLIB_LINK) -o $@ $(OBJECTS) $(ALL_LIBS)
+@end example
 
 It is not portable to use OpenMP with more than one of C, C++ and
 Fortran in a single package since it is not uncommon that the compilers
 are of different families: using C and Fortran is most widely supported
-(but only fortuitously works on macOS).
-@c Where an alternative compiler is used for C++11 or later, its OpenMP
-@c runtime may be incompatible even with C.
+(but only fortuitously currently works on macOS).
+@c It probably will not work with gfortran 9 on macOS.
 
 For portability, any C/C++ code using the @code{omp_*} functions should
 include the @file{omp.h} header: some compilers (but not all) include it
@@ -2446,12 +2466,8 @@ if test -z "$@{R_HOME@}"; then
   exit 1
 fi
 CC=`"$@{R_HOME@}/bin/R" CMD config CC`
-CPP=`"$@{R_HOME@}/bin/R" CMD config CPP`
 CFLAGS=`"$@{R_HOME@}/bin/R" CMD config CFLAGS`
 CPPFLAGS=`"$@{R_HOME@}/bin/R" CMD config CPPFLAGS`
-AC_PROG_CC
-AC_PROG_CPP
-
 
 if test -n "$@{ODBC_CONFIG@}"; then
   RODBC_CPPFLAGS=`odbc_config --cflags`
@@ -2631,6 +2647,9 @@ essential that it selects the correct compiler, @emph{via} something like
 
 @example
 CXX11=`"$@{R_HOME@}/bin/R" CMD config CXX11`
+if test -z "$CXX11"; then
+  AC_MSG_ERROR([No C++11 compiler is available])
+fi
 CXX11STD=`"$@{R_HOME@}/bin/R" CMD config CXX11STD`
 CXX="$@{CXX11@} $@{CXX11STD@}"
 CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXX11FLAGS`
@@ -13245,7 +13264,13 @@ typically stored as an array of bytes and a length.  This matters when
 passing strings from C to Fortran or @emph{vice versa}: in many cases
 one has been able to get away with passing the string but not the
 length.  However, in 2019 this changed for @command{gfortran}, starting
-with version 9 but backported to versions 7 and 8.
+with version 9 but backported to versions 7 and 8.  Several months
+later, @command{gfortran} 9.2 introduced an option
+@example
+-ftail-call-workaround
+@end example
+@noindent
+and made it the current default but said it might be withdrawn in future.
 
 Suppose we want a function to report a message from Fortran to @R{}'s
 console (one could use @code{intpr} with dummy data, but it might be the
@@ -13371,7 +13396,7 @@ Cdgemm(const char *transa, const char *transb, const int *m,
 Alternatively, do as @R{} does as from version 3.6.1-patched and pass
 the character length(s) from C to Fortran. A portable way to do this is
 @example
-// before any R headers
+// before any R headers, or define in PKG_CPPFLAGS
 #define USE_FC_LEN_T
 #include <Rconfig.h>
 #include <R_ext/BLAS.h>
@@ -13384,6 +13409,8 @@ the character length(s) from C to Fortran. A portable way to do this is
 @end example
 @noindent
 (Note there is no comma before or between the @code{FCONE} invocations.)
+It is strongly recommended that packages which call from C/C++
+BLAS/LAPACK routines with character arguments adopt this approach.
 
 @node Numerical analysis subroutines, Optimization, Calling C from Fortran and vice versa, The R API
 @section Numerical analysis subroutines
