@@ -78,6 +78,10 @@
 
       \item S3 method lookup now by default skips the elements of the
       search path between the global and base environments.
+
+      \item Add an arguemnt \code{add_datalist(*, small.size = 0)} to
+      allow the creation of a \file{data/datalist} file even when the
+      total size of the data sets is small.
     }
   }
 
@@ -108,6 +112,10 @@
       \code{installTrChar}, of which it has been a wrapper since
       \R\sspace{}3.6.0.  Neither are part of the API, but packages using
       \code{installChar} can replace it if they depend on \samp{R >= 3.6.2}.
+
+      \item Header \file{R_ext/Print.h} defines \samp{R_USE_C99_IN_CXX}
+      and hence exposes \code{Rvprintf} and \code{REprintf} if used with
+      a C++11 compiler.
     }
   }
 
@@ -153,9 +161,6 @@
       than arbitrary \code{n = 100}.
 
       \item \code{format(as.symbol("foo"))} now works (returning \code{"foo"}).
-
-      \item allow \code{add_datalist(*, small.size=0)} to create a
-      \file{data/datalist} file also in case the data sets are small.
     }
   }
 }
