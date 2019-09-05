@@ -8,5 +8,5 @@ do
   if test `echo ${filemine[$ix]} | grep "@"`; then
    filemine[$ix]=`echo ${filemine[$ix]} | sed  -e 's/$/@/'`
   fi;
-  svn --force delete ${filemine[$ix]}
+  git rm --force ${filemine[$ix]}
 done;
