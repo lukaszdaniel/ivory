@@ -1,7 +1,7 @@
 #  File src/library/grDevices/R/postscript.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -97,15 +97,16 @@ ps.options <- function(..., reset = FALSE, override.check = FALSE)
                get(".PostScript.Options.default", envir = .PSenv),
                envir = .PSenv)
     }
-    l... <- length(new <- list(...))
+    new <- list(...)
     if(m <- match("append", names(new), 0L)) {
         warning("argument 'append' is for back-compatibility and will be ignored",
                 immediate. = TRUE)
         new <- new[-m]
     }
+    assign <- length(new) > 0
     check.options(new, name.opt = ".PostScript.Options", envir = .PSenv,
-                  assign.opt = l... > 0, override.check = override.check)
-    if(reset || l... > 0) invisible(old) else old
+                  assign.opt = assign, override.check = override.check)
+    if(reset || assign) invisible(old) else old
 }
 
 setEPS <- function(...)
@@ -255,6 +256,10 @@ postscript <- function(file = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
             stop(gettextf("invalid '%s' argument", "family"))
         old$family <- family
     }
+    if(grepl("[\n\r\f\127]", old$title))
+        ## title with these characters generates corrupt postscript file
+        stop(gettextf("'title' argument \"%s\" contains invalid characters",
+                      old$title), domain = "R-grDevices")
 
     onefile <- old$onefile # for 'file'
     if(!checkIntFormat(file)) stop(gettextf("invalid 'file' argument '%s'", file))
