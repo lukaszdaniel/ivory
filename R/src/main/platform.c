@@ -3062,10 +3062,16 @@ SEXP attribute_hidden do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 #include <zlib.h>
 #include <bzlib.h>
 #include <lzma.h>
-#ifdef HAVE_PCRE_PCRE_H
-# include <pcre/pcre.h>
+
+#ifdef HAVE_PCRE2
+  /* PCRE2_CODE_UNIT_WIDTH is defined to 8 via config.h */
+# include<pcre2.h>
 #else
-# include <pcre.h>
+# ifdef HAVE_PCRE_PCRE_H
+#  include <pcre/pcre.h>
+# else
+#  include <pcre.h>
+# endif
 #endif
 
 #ifdef USE_ICU
@@ -3128,7 +3134,11 @@ do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     snprintf(p, 256, "%s", lzma_version_string());
     SET_STRING_ELT(ans, i, mkChar(p));
     SET_STRING_ELT(nms, i++, mkChar("xz"));
+#ifdef HAVE_PCRE2
+    pcre2_config(PCRE2_CONFIG_VERSION, p);
+#else
     snprintf(p, 256, "%s", pcre_version());
+#endif
     SET_STRING_ELT(ans, i, mkChar(p));
     SET_STRING_ELT(nms, i++, mkChar("PCRE"));
 #ifdef USE_ICU

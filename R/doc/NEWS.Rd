@@ -6,6 +6,27 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+  \subsection{USER-VISIBLE CHANGES}{
+      \itemize{
+       \item \R now builds by default against PCRE2 library for Perl-like
+       regular expressions if available at build time on non-Windows
+       platforms (otherwise PCRE1 is used as in older versions of \R).
+       
+       PCRE2 is stricter in some cases and reports errors for some
+       regular expressions that were accepted by PCRE1.  A hyphen now
+       has to be escaped in a character class to be interpreted as a
+       literal (unless first or last in the class definition).
+       \samp{\\R}, \samp{\\B} and \samp{\\X} are no longer allowed in
+       character classes (PCRE1 treated these as literals).
+
+       Option \code{PCRE_study} is no longer used, and reported as
+       \code{FALSE}.
+
+       The version of PCRE used can be obtained via
+       \code{extSoftVersion()}, PCRE1 has versions < 10, PCRE2 versions
+       >= 10.
+    }
+  }
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -79,7 +100,7 @@
       \item S3 method lookup now by default skips the elements of the
       search path between the global and base environments.
 
-      \item Add an arguemnt \code{add_datalist(*, small.size = 0)} to
+      \item Add an argument \code{add_datalist(*, small.size = 0)} to
       allow the creation of a \file{data/datalist} file even when the
       total size of the data sets is small.
     }
@@ -103,6 +124,9 @@
       \item \command{R CMD config} no longer knows about the
       unused settings \samp{F77} and \samp{FCPIFCPLAGS}, nor
       \samp{CXX98} and similar.
+
+      \item PCRE >= 8.32 (Nov 2012) is required: the deprecated
+      provision for 8.20--8.31 has been removed.
     }
   }
 
@@ -130,6 +154,10 @@
 
       \item A C++ compiler default is set only if the C++11 standard is
       supported: it no longer falls back to C++98.
+      
+      \item PCRE2 is used if available: this is strongly recommended as
+      PCRE1 is no longer developed (it only receives bug fixes and has
+      outdated Unicode tables).
     }
   }
 
