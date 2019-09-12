@@ -224,6 +224,15 @@ static const char *to_native(const char *str, Rboolean use_UTF8)
     return use_UTF8 ? reEnc(str, CE_UTF8, CE_NATIVE, 1) : str;
 }
 
+#ifdef HAVE_PCRE2
+# if PCRE2_MAJOR < 10 || (PCRE2_MAJOR == 10 && PCRE2_MINOR < 30)
+#  define R_PCRE_LIMIT_RECURSION
+# endif
+#else
+# define R_PCRE_LIMIT_RECURSION
+#endif
+
+#ifdef R_PCRE_LIMIT_RECURSION
 static Rboolean use_recursion_limit(SEXP subject)
 {
     Rboolean use_limit = FALSE;
@@ -261,12 +270,12 @@ static long R_pcre_max_recursions()
     const long fallback_limit = 10000;
     /* Was PCRE compiled to use stack or heap for recursion? 1=stack */
     int use_recursion;
-#ifdef HAVE_PCRE2
+# ifdef HAVE_PCRE2
     pcre2_config(PCRE2_CONFIG_STACKRECURSE, &use_recursion);
     /* from PCRE2 10.30, use_recursion is always false */
-#else
+# else
     pcre_config(PCRE_CONFIG_STACKRECURSE, &use_recursion);
-#endif
+# endif
     if (!use_recursion) return -1L;
     if (R_CStackLimit == -1) return fallback_limit;
     current_frame = (uintptr_t) &ans;
@@ -282,6 +291,7 @@ static long R_pcre_max_recursions()
     ans = (R_CStackLimit - stack_used) / recursion_size;
     return (long) ((ans <= LONG_MAX) ? ans : -1L);
 }
+#endif
 
 #ifdef HAVE_PCRE2
 static void
@@ -312,16 +322,25 @@ R_pcre2_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
     *mcontext = pcre2_match_context_create(NULL);
     if (R_PCRE_use_JIT) {
 	int rc = pcre2_jit_compile(*re, 0);
-	if (rc) {
-	    fprintf(stderr, "rc is %d\n", rc);
+	if (rc && rc != PCRE2_ERROR_JIT_BADOPTION) {
+	    /* PCRE2_ERROR_JIT_BADOPTION is returned when JIT support is not
+	       compiled in PCRE2 library */
 	    char buf[256];
 	    pcre2_get_error_message(rc, (PCRE2_UCHAR *)buf, sizeof(buf));
 	    warning(_("PCRE JIT compilation error\n\t'%s'"), buf);
 	}
-	setup_jit(*mcontext);
-    } else if (use_recursion_limit(subject))
-	/* only makes sense for PCRE2 < 10.30 */
-	pcre2_set_depth_limit(*mcontext, (uint32_t) R_pcre_max_recursions());
+	if (!rc)
+	    setup_jit(*mcontext);
+    }
+# ifdef R_PCRE_LIMIT_RECURSION
+    else if (use_recursion_limit(subject)) 
+	pcre2_set_recursion_limit(*mcontext, (uint32_t) R_pcre_max_recursions());
+
+    /* we could use set_depth_limit() in newer versions, but the memory limit
+       imposed then depends on the regular expression, and the values have
+       different meaning from those for recursion limit in versions before
+       10.30 */
+# endif
 }
 #else /* ! HAVE_PCRE2 */
 static void
@@ -352,7 +371,6 @@ R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
     int erroffset;
     const char *errorptr;
     int options = 0;
-    Rboolean use_limit = FALSE;
     R_xlen_t len = XLENGTH(subject);
     Rboolean pcre_st = always_study ||
                        (R_PCRE_study == -2 ? FALSE : len >= R_PCRE_study);

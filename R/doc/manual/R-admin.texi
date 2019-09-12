@@ -3433,43 +3433,43 @@ later are required.
 
 @c PCRE[1] 8.32 is from Nov 2012.
 @c Debian Wheezy had 8.30, Ubuntu 14.04LTS had 8.31 but both are EOL.
-@c PCRE2: Ubuntu 16.04LTS and RHEL/Centos 6 have 10.21
-PCRE@footnote{R supports both PCRE1 and PCRE2 which started at version
-10.0.} (version 8.32 or later) is required (or just its library and
-headers if packaged separately).  Only the `8-bit' interface is used
-(and only that is built by default when installing from sources).  PCRE
-must be built with UTF-8 support (not the default in PCRE1, and checked
-by @command{configure}; default in PCRE2) and support for Unicode
-properties is assumed by some @R{} packages (Unicode properties are
-automatically included in PCRE2 with Unicode/UTF-8 support).  JIT
-support (optionally available) is desirable for the best performance:
-support for this and Unicode properties can be checked at run-time by
-calling @code{pcre_config()}.  If building PCRE1 for use with @R{} a
-suitable @command{configure} command might be
+@c PCRE2: Ubuntu 16.04LTS (EOL Apr 2021) and RHEL/Centos 6 have 10.21,
+@c OpenCSW has 10.20.
+@c PCRE2 10.30 is from Aug 2017.  Ubuntu 18.04LTS has 10.31.
+Either PCRE1 (version 8.32 or later, formerly known as just PCRE) or
+PCRE2 is required: PCRE2 is preferred.  Only the 8-bit library and
+headers are needed if these are packaged separately. JIT support
+(optional) is desirable for the best performance.  If building PCRE1 for
+use with @R{} a suitable @command{configure} command might be
 @example
 ./configure --enable-utf --enable-unicode-properties --enable-jit --disable-cpp
 @end example
 @noindent  
 The @option{--enable-jit} flag is supported for most common CPUs.  (See
-also the comments for Solaris.) If building PCRE2, setting @option{--enable-jit}
-is sufficient. PCRE1 and PCRE2 have different API, so R has to be used with
-the same of the two versions it has been built with. When both PCRE1 and
-PCRE2 are available, R's @command{configure} command will use PCRE2,
-which has more recent Unicode tables.
+also the comments for Solaris.)  For PCRE2 >= 10.30 (which is desirable
+as matching has been re-written not to use recursion and the Unicode
+tables were updated to version 10)
+@example
+./configure --enable-jit
+@end example
+@noindent
+suffices.  Some packages require the `Unicode properties' which are
+optional for PCRE1: support for this and JIT can be checked at run-time
+by calling @code{pcre_config()}.
 
 @c libcurl 7.22.0 was released in Sep 2011, in Ubuntu 12.04 LTS,
 @c   end-of-life Apr 2017
 @c libcurl 7.26.0 was released in May 2012, still in Debian 7 Wheezy LTS,
 @c   end-of-life May 2018. 
 @c libcurl 7.28.0 was released in Oct 2012
-Library @code{libcurl} (version 7.22.0 or later@footnote{but not a major
+@c Ubuntu 16.04LTS has 7.47.0
+Library @code{libcurl} (version 7.28.0 or later@footnote{but not a major
 version greater than 7 should there ever be one: the major version has
-been 7 since 2000.}) is required, with at least 7.28.0 being desirable.
-Information on @code{libcurl} is found from the @command{curl-config}
-script: if that is missing or needs to be overridden@footnote{for
-example to specify static linking with a build which has both shared and
-static libraries.} there are macros to do so described in file
-@file{config.site}.
+been 7 since 2000.}) is required.  Information on @code{libcurl} is
+found from the @command{curl-config} script: if that is missing or needs
+to be overridden@footnote{for example to specify static linking with a
+build which has both shared and static libraries.} there are macros to
+do so described in file @file{config.site}.
 
 A @command{tar} program is needed to unpack the sources and packages
 (including the recommended packages).  A version@footnote{Such as
@@ -3571,7 +3571,7 @@ suitable code can be compiled.  These tests will fail if
 @file{config.site}, on the @command{configure} command line or in the
 environment.}, and are likely to fail if @code{cairo} was built
 statically (unusual).  Most systems with @code{Gtk+} 2.8 or later
-installed will have suitable libraries
+installed will have suitable libraries.
 
 For the best font experience with these devices you need suitable fonts
 installed: Linux users will want the @code{urw-fonts} package.  On
@@ -4861,7 +4861,7 @@ see in the @command{configure} summary
 
 @example
   Interfaces supported:      X11, tcltk
-  External libraries:        readline, curl
+  External libraries:        pcre2, readline, curl
   Additional capabilities:   PNG, JPEG, TIFF, NLS, cairo, ICU
 @end example
 
@@ -5288,11 +5288,11 @@ CC="/usr/local/clang8/bin/clang -isysroot /Library/Developer/CommandLineTools/SD
 CXX="/usr/local/clang8/bin/clang++ -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 @end example
 @noindent
-(The location of the SDK, which could conceivably change, can be found
-by running @command{xcrun -show-sdk-path}.)
+(The location of the SDK can be found by running @command{xcrun
+-show-sdk-path}.)
 
-This alternative approach is said to be going to be needed for future
-versions of macOS and versions 11.x of the Command Line Tools/Xcode.
+This alternative approach is needed for versions 11.x of the Command
+Line Tools/Xcode.
 
 @node Other libraries, Tcl/Tk headers and libraries, Recommended C/C++ compilers, macOS
 @subsection Other libraries
