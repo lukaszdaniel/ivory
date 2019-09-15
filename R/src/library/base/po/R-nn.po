@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-13 10:50\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2494,6 +2494,7 @@ msgstr "ugyldig inndata, men LF erstatta med CR"
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 #: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
@@ -3172,8 +3173,14 @@ msgstr ""
 msgid "package %s has no 'NAMESPACE' file"
 msgstr "pakken «%s» har inga NAMESPACE-fil"
 
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr "pakken «%s» har inga NAMESPACE-fil"
+
 #. R/library.R: gettextf("package %s has not been installed properly", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 msgid "package %s has not been installed properly"
 msgstr "pakken «%s» er ikkje skikkeleg installert"
@@ -3218,7 +3225,7 @@ msgid ""
 msgstr "fann pakken «%s %s», men «%s %s» trengst av «%s»"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-13 10:50\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -2248,6 +2248,7 @@ msgstr ""
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 #: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
@@ -2872,8 +2873,13 @@ msgstr ""
 msgid "package %s has no 'NAMESPACE' file"
 msgstr ""
 
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr ""
+
 #. R/library.R: gettextf("package %s has not been installed properly", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 msgid "package %s has not been installed properly"
 msgstr ""
@@ -2913,7 +2919,7 @@ msgid ""
 msgstr ""
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.7.0\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,6 +193,13 @@ msgstr ""
 #. R/colorstuff.R: stop("'start' and 'end' must be distinct and in [0, 1].")
 
 msgid "'start' and 'end' must be distinct and in [0, 1]."
+msgstr ""
+
+
+#: R/postscript.R: 0
+#. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters", old$title)
+
+msgid "'title' argument \"%s\" contains invalid characters"
 msgstr ""
 
 

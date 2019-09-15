@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:34\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: 2011-10-15 15:14+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -160,6 +160,12 @@ msgstr "'res' doit être spécifié à moins que 'units = \"px\""
 #: R/colorstuff.R:0
 msgid "'start' and 'end' must be distinct and in [0, 1]."
 msgstr "'start' et 'end' doivent être différents et dans [0, 1]."
+
+#. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters", old$title)
+#: R/postscript.R:0
+#, fuzzy
+msgid "'title' argument \"%s\" contains invalid characters"
+msgstr "'file' doit être une chaîne de caractère non vide"
 
 #. R/windows/windows.R: stop("'type' not applicable to the R console")
 #: R/windows/windows.R:0

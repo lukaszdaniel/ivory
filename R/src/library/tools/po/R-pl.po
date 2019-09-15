@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-09-15 22:04\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -701,19 +701,20 @@ msgstr "Znaleziono niepoprawne linie '\\usage' w obiekcie dokumentacji %s:"
 msgid "BibTeX errors:"
 msgstr "Błędy BibTeXa:"
 
-#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >\n   use the Contact field instead",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "BugReports field is not a suitable URL but appears to contain an email "
 "address\n"
-"  not specified by mailto: nor contained in < >"
+"  not specified by mailto: nor contained in < >\n"
+"   use the Contact field instead"
 msgstr ""
 
-#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address:\n   use the Contact field instead",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"BugReports field is not a suitable URL but contains an email address\n"
-"  which will be used as from R 3.4.0"
+"BugReports field is not a suitable URL but contains an email address:\n"
+"   use the Contact field instead"
 msgstr ""
 
 #. R/check.R: gettext("BugReports field should be the URL of a single webpage", domain = "R-tools")
@@ -726,24 +727,28 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined")
+#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++11 standard requested but CXX11 is not defined"
 msgstr "Zażądano standardu C++11 ale CXX11 nie jest zdefiniowany"
 
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined")
+#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++14 standard requested but CXX14 is not defined"
 msgstr "Zażądano standardu C++14 ale CXX14 nie jest zdefiniowany"
 
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined")
+#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++17 standard requested but CXX17 is not defined"
 msgstr "Zażądano standardu C++17 ale CXX17 nie jest zdefiniowany"
 
-#. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
-msgid "C++98 standard requested but CXX98 is not defined"
+#, fuzzy
+msgid "C++98 standard requested but unsupported"
 msgstr "Zażądano standardu C++98 ale CXX98 nie jest zdefiniowany"
 
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
@@ -1529,9 +1534,10 @@ msgstr ""
 msgid "Example timings for package %s:"
 msgstr "Przykładowe czasy dla pakietu %s:"
 
-#. R/check.R: gettextf("Examples with CPU or elapsed time > %gs\n", theta, domain = "R-tools")
+#. R/check.R: gettextf("Examples with CPU (user + system) or elapsed time > %gs\n", theta, domain = "R-tools")
 #: R/check.R:0
-msgid "Examples with CPU or elapsed time > %gs"
+#, fuzzy
+msgid "Examples with CPU (user + system) or elapsed time > %gs"
 msgstr "Przykłady z czasem procesora lub upływem czasu > %gs"
 
 #. R/check.R: gettextf("Examples with CPU time > %g times elapsed time\n", theta, domain = "R-tools")
@@ -1890,6 +1896,7 @@ msgstr "Znaleziono następujące pliki z powtórzonymi nazwami plików:"
 msgid "Found the following files with insufficient permissions:"
 msgstr "Znaleziono następujące pliki z niewystarczającymi uprawnieniami:"
 
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2743,6 +2750,7 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -4973,6 +4981,12 @@ msgstr "szukanie niezgodności kodu/dokumentacji ..."
 msgid "checking for compilation flags used ..."
 msgstr "sprawdzanie używanych flag kompilacji ..."
 
+#. R/check.R: gettext("checking for detritus in the temp directory ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for detritus in the temp directory ..."
+msgstr "szukanie niezadeklarowanych zależności w katalogu %s ..."
+
 #. R/build.R: gettext("checking for empty or unneeded directories", domain = "R-tools")
 #: R/build.R:0
 msgid "checking for empty or unneeded directories"
@@ -6570,6 +6584,12 @@ msgstr "nie można utworzyć pliku %s"
 #. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 msgid "unable to create temp directory %s"
+msgstr "nie można utworzyć katalogu tymczasowego %s"
+
+#. R/check.R: stop("unable to create working directory for subprocesses", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "unable to create working directory for subprocesses"
 msgstr "nie można utworzyć katalogu tymczasowego %s"
 
 #. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)

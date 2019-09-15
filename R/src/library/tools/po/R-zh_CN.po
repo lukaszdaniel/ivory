@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-09-15 22:04\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -696,19 +696,20 @@ msgstr "使用手冊对象'%s'有些\\usage不对:"
 msgid "BibTeX errors:"
 msgstr ""
 
-#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >\n   use the Contact field instead",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
 "BugReports field is not a suitable URL but appears to contain an email "
 "address\n"
-"  not specified by mailto: nor contained in < >"
+"  not specified by mailto: nor contained in < >\n"
+"   use the Contact field instead"
 msgstr ""
 
-#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address:\n   use the Contact field instead",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"BugReports field is not a suitable URL but contains an email address\n"
-"  which will be used as from R 3.4.0"
+"BugReports field is not a suitable URL but contains an email address:\n"
+"   use the Contact field instead"
 msgstr ""
 
 #. R/check.R: gettext("BugReports field should be the URL of a single webpage", domain = "R-tools")
@@ -721,24 +722,27 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined")
+#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++11 standard requested but CXX11 is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined")
+#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++14 standard requested but CXX14 is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined")
+#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++17 standard requested but CXX17 is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
-msgid "C++98 standard requested but CXX98 is not defined"
+msgid "C++98 standard requested but unsupported"
 msgstr ""
 
 #. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
@@ -1568,9 +1572,9 @@ msgstr ""
 msgid "Example timings for package %s:"
 msgstr "程序包%s没有示例"
 
-#. R/check.R: gettextf("Examples with CPU or elapsed time > %gs\n", theta, domain = "R-tools")
+#. R/check.R: gettextf("Examples with CPU (user + system) or elapsed time > %gs\n", theta, domain = "R-tools")
 #: R/check.R:0
-msgid "Examples with CPU or elapsed time > %gs"
+msgid "Examples with CPU (user + system) or elapsed time > %gs"
 msgstr ""
 
 #. R/check.R: gettextf("Examples with CPU time > %g times elapsed time\n", theta, domain = "R-tools")
@@ -1910,6 +1914,7 @@ msgstr "在下面的Rd例子文件中遇到了有可能是全局的T或F值:"
 msgid "Found the following files with insufficient permissions:"
 msgstr "在下面的Rd例子文件中遇到了有可能是全局的T或F值:"
 
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2735,6 +2740,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -4942,6 +4948,12 @@ msgstr ""
 msgid "checking for compilation flags used ..."
 msgstr "制造DLL…"
 
+#. R/check.R: gettext("checking for detritus in the temp directory ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for detritus in the temp directory ..."
+msgstr "安装至"
+
 #. R/build.R: gettext("checking for empty or unneeded directories", domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -6646,6 +6658,12 @@ msgstr "无法建立'%s'"
 #: R/Vignettes.R:0
 #, fuzzy
 msgid "unable to create temp directory %s"
+msgstr "无法建立temp目录"
+
+#. R/check.R: stop("unable to create working directory for subprocesses", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "unable to create working directory for subprocesses"
 msgstr "无法建立temp目录"
 
 #. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)

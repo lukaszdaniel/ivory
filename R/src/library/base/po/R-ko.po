@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-13 10:50\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2506,6 +2506,7 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
 #: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
@@ -3183,8 +3184,14 @@ msgstr ""
 msgid "package %s has no 'NAMESPACE' file"
 msgstr "패키지 %s 는 NAMESPACE 파일을 가지고 있지 않습니다 "
 
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr "패키지 %s 는 NAMESPACE 파일을 가지고 있지 않습니다 "
+
 #. R/library.R: gettextf("package %s has not been installed properly", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 msgid "package %s has not been installed properly"
 msgstr "패키지 '%s 는 올바르게 설치되지 않았습니다 "
@@ -3228,7 +3235,7 @@ msgid ""
 msgstr "패키지 %s %s 가 검색되었지만, %s %s 는 %s 를 필요로 합니다 "
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
 #: R/library.R:0 R/namespace.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.7.0\n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-09-15 22:04\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -843,16 +843,16 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >\n   use the Contact field instead",     domain = "R-tools")
 
-msgid "BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >"
+msgid "BugReports field is not a suitable URL but appears to contain an email address\n  not specified by mailto: nor contained in < >\n   use the Contact field instead"
 msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0",     domain = "R-tools")
+#. R/check.R: gettext("BugReports field is not a suitable URL but contains an email address:\n   use the Contact field instead",     domain = "R-tools")
 
-msgid "BugReports field is not a suitable URL but contains an email address\n  which will be used as from R 3.4.0"
+msgid "BugReports field is not a suitable URL but contains an email address:\n   use the Contact field instead"
 msgstr ""
 
 
@@ -871,30 +871,33 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined")
+#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
 
 msgid "C++11 standard requested but CXX11 is not defined"
 msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined")
+#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
 
 msgid "C++14 standard requested but CXX14 is not defined"
 msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined")
+#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
 
 msgid "C++17 standard requested but CXX17 is not defined"
 msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("C++98 standard requested but CXX98 is not defined")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
+#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 
-msgid "C++98 standard requested but CXX98 is not defined"
+msgid "C++98 standard requested but unsupported"
 msgstr ""
 
 
@@ -1870,9 +1873,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Examples with CPU or elapsed time > %gs\n", theta, domain = "R-tools")
+#. R/check.R: gettextf("Examples with CPU (user + system) or elapsed time > %gs\n", theta, domain = "R-tools")
 
-msgid "Examples with CPU or elapsed time > %gs"
+msgid "Examples with CPU (user + system) or elapsed time > %gs"
 msgstr ""
 
 
@@ -2292,6 +2295,7 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 #. R/check.R: gettext("Found the following files/directories:", domain = "R-tools")
 
 msgid "Found the following files/directories:"
@@ -3356,6 +3360,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -3369,6 +3374,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -6024,6 +6030,13 @@ msgid "checking for compilation flags used ..."
 msgstr ""
 
 
+#: R/check.R: 0
+#. R/check.R: gettext("checking for detritus in the temp directory ...", domain = "R-tools")
+
+msgid "checking for detritus in the temp directory ..."
+msgstr ""
+
+
 #: R/build.R: 0
 #. R/build.R: gettext("checking for empty or unneeded directories", domain = "R-tools")
 
@@ -8147,6 +8160,13 @@ msgstr ""
 #. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 
 msgid "unable to create temp directory %s"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: stop("unable to create working directory for subprocesses", domain = "R-tools")
+
+msgid "unable to create working directory for subprocesses"
 msgstr ""
 
 

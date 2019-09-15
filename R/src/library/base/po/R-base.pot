@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.7.0\n"
-"POT-Creation-Date: 2019-07-13 10:50\n"
+"POT-Creation-Date: 2019-09-15 22:03\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2990,6 +2990,7 @@ msgstr ""
 #: R/locales.R: 0
 #: R/serialize.R: 0
 #: R/serialize.R: 0
+#: R/serialize.R: 0
 #: R/taskCallback.R: 0
 #: R/zapsmall.R: 0
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
@@ -3006,6 +3007,7 @@ msgstr ""
 #. R/load.R: gettextf("invalid '%s' argument", "file")
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
@@ -3866,10 +3868,17 @@ msgid "package %s has no 'NAMESPACE' file"
 msgstr ""
 
 
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr ""
+
+
 #: R/library.R: 0
 #: R/namespace.R: 0
 #. R/library.R: gettextf("package %s has not been installed properly", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
 
 msgid "package %s has not been installed properly"
 msgstr ""
@@ -3920,7 +3929,7 @@ msgstr ""
 #: R/library.R: 0
 #: R/namespace.R: 0
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
+#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
 
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr ""
