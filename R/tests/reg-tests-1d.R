@@ -3063,7 +3063,10 @@ for(x in list(0:3, c(0, 0.5+0:2))) {
 ## these all returned  NaN  when L == Inf  in R <= 3.6.1
 ##
 ## Further - very basics and some large (working "since ever"):
+L <- 1e111 * c(-1,1)
 stopifnot(exprs = {
+    L %%  L == 0  # failed for a few days in R-devel
+    L %% -L == 0
     -6:17 %%  3L == 0:2
     -5:15 %% -3L == -2:0
     is.finite(x <- 2^(1:1022))
@@ -3073,6 +3076,22 @@ stopifnot(exprs = {
    -x[1:52] %% 3 == 1:2
 }) # larger x suffer from cancellation (well, warning too early now):
 tools::assertWarning(x[60:68] %% 3)
+
+
+## Hilmar Berger's on R-devel list: 'data.frame() == NULL' etc
+d0. <- data.frame(a = numeric(0)) # zero length data.frame [ 0 x 1 ]
+d0  <- unname(d0.) # zero length data.frame __without names__
+d3   <- data.frame(a=1:3) # non-empty data.frame
+d30. <- d3[,FALSE] # <3 x 0>
+d30  <- unname(d30.)
+for(DF in list(d0., d0, d30., d30))
+    for(R in list(1, NULL, logical(0)))
+	stopifnot(exprs = {
+	    is.logical(r <- DF == R)
+	    is.matrix(r) ## ~~~~~~~
+	    length(r) == 0
+	    dim(r) <= dim(DF) # sometimes r is <0 x 0> when DF is not
+	})
 
 
 

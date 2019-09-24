@@ -407,7 +407,7 @@ void tweedious(double *w,double *w1,double *w2,double *w1p,double *w2p,
         wp1 = forward_buf(wp1,&jal,0);
         wp2 = forward_buf(wp2,&jal,0);
         wpp = forward_buf(wpp,&jal,1);
-      } else { ok = buffer_run_out = 1; }} /* run out of buffer - terminate */
+	} else ok = buffer_run_out = 1;} /* run out of buffer - terminate */
     } /* finished upsweep and any buffer expansion */
   
     /* start downsweep to convergence or start of available buffered values */
@@ -491,7 +491,7 @@ void tweedious(double *w,double *w1,double *w2,double *w1p,double *w2p,
         wp1 = backward_buf(wp1,&jal,&j0,&j_lo,&j_hi,0);
         wp2 = backward_buf(wp2,&jal,&j0,&j_lo,&j_hi,0);
         wpp = backward_buf(wpp,&jal,&j0,&j_lo,&j_hi,1); /* final '1' updates jal,j0 etc. */
-      } else { ok = buffer_run_out = 1; }}
+	} else ok = buffer_run_out = 1;}
 
     } /* finished downsweep and any buffer expansion */
     /* Summation now complete: need to do final transformations */
