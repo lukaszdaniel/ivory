@@ -8,6 +8,9 @@
 \section{\Rlogo CHANGES IN R-devel}{
   \subsection{USER-VISIBLE CHANGES}{
     \itemize{
+       \item The internal version number of R-devel has been set to 4.0.0,
+       reflecting the intention that the next non-patch release should be 4.0.0.
+
        \item \R now builds by default against a PCRE2 library for Perl-like
        regular expressions if available at build time on non-Windows
        platforms (otherwise PCRE1 is used as in older versions of \R).
@@ -30,6 +33,9 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
+      \item The formula interface to \code{t.test} has been extended to
+      handle one-sample and paired tests.
+
       \item \code{assertError()} and \code{assertWarning()} (in package
       \pkg{tools}) can now check for \emph{specific} error or warning
       classes \emph{via} the new optional second argument \code{classes}
@@ -165,6 +171,14 @@
 
       \item The minimum required version of \code{libcurl} is now 7.28.0
       (Oct 2012).
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R --help} now mentions the option \command{--no-echo}
+      (renamed from \command{--slave}) and its previously undocumented
+      short form \command{-s}.
     }
   }
 
@@ -332,6 +346,13 @@
       \code{qchisq()} calls.
 
       \item \code{grepl(NA, *)} now returns \code{logical} as documented.
+
+      \item \code{options(warn=1e11)} is an error now, instead of later
+      leading to C stack overflow because of infinite recursion.
+
+      \item \code{R_tryCatch} no longer transfers control for all
+      conditions. Reported and patch provided by Linoel Henry in
+      \PR{17617}.
     }
   }
 }

@@ -1046,11 +1046,15 @@ add_dummies <- function(dir, Log)
             if(length(Rver) && Rver[[1L]]$op == ">=") {
                 ver <- unclass(Rver[[1L]]$version)[[1L]]
                 thisver <- unclass(getRversion())[[1L]]
-                ## needs updating if we ever go to 4.0
-                tv <- if(thisver[1L] == 3L) thisver[2L] - 2L else 4L
-                if (length(ver) == 3L && ver[3L] != 0 &&
-                    ((ver[1L] > 3L) ||
-                     (ver[1L] == 3L) && (ver[2L] >= tv) )) {
+                ## needs updating if we ever go to 5.0
+                notOK <- length(ver) == 3L && ver[3L] != 0
+                if (notOK && (
+                    ## report only for last two versions,
+                    ## currently 3.5, 3.6 and 4.0
+                    ((ver[1L] == 4L) && (ver[2L] >= max(0L, thisver[2L] - 2L)))
+                    ||
+                    ((ver[1L] == 3L) && (ver[2L] >= thisver[2L] + 5L))
+                    )) {
                     ## This is not quite right: may have NOTE-d above
                     if(Check_R_deps == "warn") warningLog(Log)
                     else if(!any) noteLog(Log)
@@ -4594,8 +4598,21 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wcatch-value=\\]",
                              ": warning: .* \\[-Wlto-type-mismatch\\]",
                              ": warning: .* \\[-Wunused-value\\]",
-                             ## warning in g++, fatal in clang.
+                             ## warning in g++, fatal in clang++.
                              ": warning: .* \\[-Wnarrowing\\]",
+                             ## -pedantic warning in gcc, fatal in clang and ODS
+                             ": warning: initializer element is not a constant expression",
+                             ": warning: range expressions in switch statements are non-standard",
+                             ## clang version is
+                             ": warning: use of GNU case range extension",
+                             ": warning: ordered comparison of pointer with integer zero",
+                             ## clang version is
+                             ": warning: ordered comparison between pointer and zero",
+                             ": warning: initialization of a flexible array member",
+                             ## clang version is
+                             ": warning: flexible array initialization is a GNU extension",
+                             ": warning: C[+][+] designated initializers",
+                             ": warning: designated initializers are a C99 feature",
                              ## Fatal, not warning, for clang and Solaris ODS
                              ": warning: .* with a value, in function returning void"
                             )
@@ -4630,6 +4647,7 @@ add_dummies <- function(dir, Log)
                              ": warning: empty macro arguments are a C99 feature",
                              ": warning: .* \\[-Winvalid-source-encoding\\]",
                              ": warning: .* \\[-Wunused-command-line-argument\\]",
+                             ": warning: .* \\[-Wxor-used-as-pow\\]", # clang 10
                              ## For non-portable flags (seen in sub-Makefiles)
                              "warning: .* \\[-Wunknown-warning-option\\]"
                              )
@@ -5704,14 +5722,14 @@ add_dummies <- function(dir, Log)
         setwd(startdir)
     }
 
-    ## all the analysis code is run with --slave
+    ## all the analysis code is run with --no-echo
     ## examples and tests are not.
     R_opts <- "--vanilla"
-    R_opts2 <- "--vanilla --slave"
+    R_opts2 <- "--vanilla --no-echo"
     ## do run Renviron.site for some multiarch runs
     ## We set R_ENVIRON_USER to skip .Renviron files.
     R_opts3 <- "--no-site-file --no-init-file --no-save --no-restore"
-    R_opts4 <- "--no-site-file --no-init-file --no-save --no-restore --slave"
+    R_opts4 <- "--no-site-file --no-init-file --no-save --no-restore --no-echo"
     env0 <- if(WINDOWS) "R_ENVIRON_USER='no_such_file'" else "R_ENVIRON_USER=''"
 
     msg_DESCRIPTION <- gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")

@@ -155,7 +155,7 @@ getOption(x, default = NULL)
 
     \item{\code{echo}:}{logical.  Only used in non-interactive mode,
       when it controls whether input is echoed.  Command-line option
-      \option{--slave} sets this to \code{FALSE}, but otherwise
+      \option{--no-echo} sets this to \code{FALSE}, but otherwise
       it starts the session as \code{TRUE}.}
 
     \item{\code{encoding}:}{The name of an encoding, default
@@ -421,7 +421,7 @@ getOption(x, default = NULL)
       on progress?  Set to \code{TRUE} by the command-line option
       \option{--verbose}.}
 
-    \item{\code{warn}:}{sets the handling of warning messages.  If
+    \item{\code{warn}:}{integer value to set the handling of warning messages.  If
       \code{warn} is negative all warnings are ignored.  If \code{warn}
       is zero (the default) warnings are stored until the top--level
       function returns.  If 10 or fewer warnings were signalled they
@@ -429,8 +429,8 @@ getOption(x, default = NULL)
       signalled.  An object called \code{last.warning} is
       created and can be printed through the function
       \code{\link{warnings}}.  If \code{warn} is one, warnings are
-      printed as they occur.  If \code{warn} is two or larger all
-      warnings are turned into errors.}
+      printed as they occur.  If \code{warn} is two (or larger, coercible
+      to integer), all warnings are turned into errors.}
 
     \item{\code{warnPartialMatchArgs}:}{logical.  If true, warns if
       partial matching is used in argument matching.}

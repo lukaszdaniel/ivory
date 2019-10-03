@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: stats 3.7.0\n"
-"POT-Creation-Date: 2019-05-11 21:02\n"
+"Project-Id-Version: stats 4.0.0\n"
+"POT-Creation-Date: 2019-10-03 21:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,7 +108,7 @@ msgstr ""
 #. R/fligner.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/kruskal.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
-#. R/t.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
+#. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
 #. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
 
@@ -273,6 +273,7 @@ msgstr ""
 #: R/oneway.test.R: 0
 #: R/quade.test.R: 0
 #: R/t.test.R: 0
+#: R/t.test.R: 0
 #: R/var.test.R: 0
 #: R/wilcox.test.R: 0
 #: R/xtabs.R: 0
@@ -288,6 +289,7 @@ msgstr ""
 #. R/mood.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/oneway.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/quade.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
+#. R/t.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/t.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/var.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/wilcox.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
@@ -5834,7 +5836,6 @@ msgstr ""
 #: R/models.R: 0
 #: R/mood.test.R: 0
 #: R/quade.test.R: 0
-#: R/t.test.R: 0
 #: R/var.test.R: 0
 #: R/wilcox.test.R: 0
 #. R/ansari.test.R: stop("invalid formula")
@@ -5843,7 +5844,6 @@ msgstr ""
 #. R/models.R: stop("invalid formula")
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
-#. R/t.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
 #. R/wilcox.test.R: stop("invalid formula")
 

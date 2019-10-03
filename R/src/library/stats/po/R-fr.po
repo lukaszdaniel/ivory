@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-05-11 21:02\n"
+"POT-Creation-Date: 2019-10-03 21:30\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -82,7 +82,7 @@ msgstr ""
 #. R/fligner.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/kruskal.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
-#. R/t.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
+#. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
 #. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
@@ -218,6 +218,7 @@ msgstr "l'argument 'split' doit être une liste"
 #. R/mood.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/oneway.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/quade.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
+#. R/t.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/t.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/var.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
 #. R/wilcox.test.R: gettextf("'%s' argument is missing or incorrect", "formula")
@@ -4503,12 +4504,10 @@ msgstr "moyennes ajustées incorrectes dans le modèle vide"
 #. R/models.R: stop("invalid formula")
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
-#. R/t.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
 #. R/wilcox.test.R: stop("invalid formula")
 #: R/ansari.test.R:0 R/cor.test.R:0 R/friedman.test.R:0 R/models.R:0
-#: R/mood.test.R:0 R/quade.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
 msgid "invalid formula"
 msgstr "'formula' incorrecte"
 

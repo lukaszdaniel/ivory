@@ -342,7 +342,7 @@ testInstalledPackage <-
                    cmd <-
                        sprintf("invisible(tools::Rdiff('%s','%s',TRUE,TRUE))",
                                outfile, savefile)
-                   out <- R_runR(cmd, "--vanilla --slave")
+                   out <- R_runR(cmd, "--vanilla --no-echo")
                    if(length(out)) {
                        if(strict)
                            message(gettext(" ERROR", domain = "R-tools"))
@@ -365,7 +365,7 @@ testInstalledPackage <-
                     cmd <-
                         sprintf("invisible(tools::Rdiff('%s','%s',TRUE,TRUE))",
                                 outfile, prevfile)
-                    out <- R_runR(cmd, "--vanilla --slave")
+                    out <- R_runR(cmd, "--vanilla --no-echo")
                     if(length(out)) {
                         message(gettext(" NOTE", domain = "R-tools"))
                         writeLines(paste0("  ", out))
@@ -526,7 +526,8 @@ testInstalledPackage <-
         message(gettextf("  Creating file %s", sQuote(Rfile), domain = "R-tools"))
         if (!is.null(Log))
             cat(gettextf("  Creating file %s", sQuote(Rfile), domain = "R-tools"), "\n", sep = "", file = Log)
-        cmd <- paste(shQuote(file.path(R.home("bin"), "R")), "CMD BATCH --no-timing --vanilla --slave", f)
+        cmd <- paste(shQuote(file.path(R.home("bin"), "R")),
+                     "CMD BATCH --no-timing --vanilla --no-echo", f)
         if (system(cmd)) {
             warning(gettextf("creation of %s failed", sQuote(Rfile)), domain = "R-tools")
             if (!is.null(Log))
@@ -606,7 +607,8 @@ testInstalledBasic <- function(scope = c("basic", "devel", "both", "internet"))
             if (!file.exists(fin <- paste0(f, "in")))
                 stop(gettextf("%s file was not found", sQuote(f)), domain = "R-tools")
             message(gettextf("creating file %s", sQuote(f)), domain = "R-tools")
-            cmd <- paste(shQuote(file.path(R.home("bin"), "R")), "--vanilla --slave -f", fin)
+            cmd <- paste(shQuote(file.path(R.home("bin"), "R")),
+                         "--vanilla --no-echo -f", fin)
             if (system(cmd))
                 stop(gettextf("creation of %s failed", sQuote(f)), domain = "R-tools")
             ## This needs an extra trailing space to match the .Rin.R rule

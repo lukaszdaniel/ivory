@@ -19,7 +19,8 @@ Name,Country,City,URL,Host,Maintainer,OK,CountryCode,Comment
 "Canada (MB) [https]",Canada,Winnipeg,https://muug.ca/mirror/cran/,"Manitoba Unix User Group","mirror # muug.ca",1,ca
 "Canada (NS) [https]",Canada,Halifax,https://mirror.its.dal.ca/cran/,"Dalhousie University, Halifax","mirror # lists.dal.ca",1,ca
 "Canada (ON)",Canada,Toronto,http://cran.utstat.utoronto.ca/,"University of Toronto","Dermot Whelan <wheland # utstat.utoronto.ca>",1,ca
-"Chile [https]",Chile,Santiago,https://cran.dcc.uchile.cl/,"Departamento de Ciencias de la Computación, Universidad de Chile","Mauricio Vargas <mvargas # dcc.uchile.cl>",1,cl,"secure_mirror_from_master"
+"Chile (Santiago) [https]",Chile,Santiago,https://cran.dcc.uchile.cl/,"Departamento de Ciencias de la Computación, Universidad de Chile","Mauricio Vargas <mvargas # dcc.uchile.cl>",1,cl,"secure_mirror_from_master"
+"Chile (Temuco) [https]",Chile,Temuco,https://cran.dme.ufro.cl/,"University of La Frontera","tic-dme # ufrontera.cl",1,cl
 "China (Beijing) [https]",China,Beijing,https://mirrors.tuna.tsinghua.edu.cn/CRAN/,"TUNA Team, Tsinghua University","Justin Wong <justin.w.xd # gmail.com>",1,cn
 "China (Hefei) [https]",China,Hefei,https://mirrors.ustc.edu.cn/CRAN/,"University of Science and Technology of China","mirrors # Ustc.edu.cn",1,cn
 "China (Hong Kong) [https]",China,"Hong Kong",https://mirror-hk.koddos.net/CRAN/,"KoDDoS in Hong Kong","mirror # koddos.net",1,cn,"secure_mirror_from_master"
@@ -49,7 +50,7 @@ Name,Country,City,URL,Host,Maintainer,OK,CountryCode,Comment
 "Iceland [https]",Iceland,Reykjavik,https://cran.hafro.is/,"Marine Research Institute","cran # hafro.is",1,is,"secure_mirror_from_master"
 "Indonesia (Jakarta) [https]",Indonesia,Jakarta,https://repo.bppt.go.id/cran/,"Agency for The Application and Assessment of Technology","Imam Cartealy <imam.cartealy # bppt.go.id>",1,id,"secure_mirror_from_master"
 "Iran [https]",Iran,Mashhad,https://cran.um.ac.ir/,"Ferdowsi University of Mashhad","Majid Sarmad <sarmad # um.ac.ir>",1,ir
-"Ireland [https]",Ireland,Dublin,https://ftp.heanet.ie/mirrors/cran.r-project.org/,"HEAnet,Dublin","mirrors # heanet.ie",0,ie,"secure_mirror_from_master"
+"Ireland [https]",Ireland,Dublin,https://ftp.heanet.ie/mirrors/cran.r-project.org/,"HEAnet,Dublin","mirrors # heanet.ie",1,ie,"secure_mirror_from_master"
 "Italy (Milano)",Italy,Milano,http://cran.mirror.garr.it/mirrors/CRAN/,"Garr Mirror, Milano","mirror-service # garr.it",1,it
 "Italy (Padua) [https]",Italy,Padua,https://cran.stat.unipd.it/,"University of Padua","cran # stat.unipd.it",1,it,"secure_mirror_from_master"
 "Japan (Tokyo) [https]",Japan,Tokyo,https://cran.ism.ac.jp/,"The Institute of Statistical Mathematics, Tokyo","Junji Nakano <nakanoj # ism.ac.jp>",1,jp,"secure_mirror_from_master"

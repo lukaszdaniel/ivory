@@ -418,7 +418,7 @@ R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
 }
 #endif
 
-// FIXME: Protect PCRE/PCRE2 data via contexts.
+// FIXME: Protect PCRE/PCRE2 data via contexts (as well as other data).
 // FIXME: Do not rebuild locale tables repeatedly.
 // FIXME: There is no documented way to free locale tables with PCRE2.
 //        Using free() would not work on Windows if PCRE2 is dynamically
@@ -964,6 +964,7 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     Free(pt); Free(wpt);
 #ifdef HAVE_PCRE2
     if (tables) free((void *)tables);
+    /* new PCRE2 will have pcre2_maketables_free() */
 #else
     if (tables) pcre_free((void *)tables);
 #endif
@@ -1278,6 +1279,7 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	pcre2_code_free(re);
 	pcre2_match_context_free(mcontext);
 	if (tables)
+	    /* new PCRE2 will have pcre2_maketables_free() */
 	    free((void *)tables);
 #else
 	if (re_pe) pcre_free_study(re_pe);
@@ -1615,7 +1617,8 @@ SEXP attribute_hidden do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 	if (!nmatches) eflags |= REG_NOTBOL;
 	if (res_ptr >= res_alloc) {
-	    if (res_alloc < (2^24)) res_alloc <<= 1;
+	    /* double the buffer size, but limit to 32Mb */
+	    if (res_alloc < 33554432) res_alloc <<= 1;
 	    SETCDR(res_tail, list1(allocVector(INTSXP, res_alloc)));
 	    res_tail = CDR(res_tail);
 	    res_val = INTEGER(CAR(res_tail));
@@ -1737,7 +1740,10 @@ static int count_subs(const char *repl)
     return i;
 }
 
-/* FIXME: use UCP for upper/lower conversion */
+/* FIXME: use UCP for upper/lower conversion
+          could use pcre2_substitute which will take care of that and also
+          supports \u, \l
+*/
 #ifdef HAVE_PCRE2
 static
 char *R_pcre_string_adj(char *target, const char *orig, const char *repl,
@@ -2321,6 +2327,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	pcre2_code_free(re);
 	pcre2_match_context_free(mcontext);
 	if (tables)
+	    /* new PCRE2 will have pcre2_maketables_free() */
 	    free((void *)tables);
 #else
 	if (re_pe) pcre_free_study(re_pe);
@@ -3094,6 +3101,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	pcre2_code_free(re);
 	pcre2_match_context_free(mcontext);
 	if (tables)
+	    /* new PCRE2 will have pcre2_maketables_free() */
 	    free((void *)tables);
 #else
 	if (re_pe) pcre_free_study(re_pe);
