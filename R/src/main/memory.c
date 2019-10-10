@@ -113,6 +113,20 @@ extern void *Rm_realloc(void * p, size_t n);
 static int gc_reporting = 0;
 static int gc_count = 0;
 
+/* Report error encountered during garbage collection where for detecting
+   problems it is better to abort, but for debugging (or some production runs,
+   where external validation of results is possible) it may be preferred to
+   continue. Configurable via R_GC_FAIL_ON_ERROR.
+*/
+static Rboolean gc_fail_on_error = FALSE;
+static void gc_error(const char *msg)
+{
+    if (gc_fail_on_error)
+	R_Suicide(msg);
+    else
+	REprintf(msg);
+}
+
 /* These are used in profiling to separate out time in GC */
 int R_gc_running() { return R_in_gc; }
 
@@ -804,7 +818,7 @@ static R_size_t R_NodesInUse = 0;
 static void CheckNodeGeneration(SEXP x, int g)
 {
     if (x && NODE_GENERATION(x) < g) {
-	REprintf(_("untraced old-to-new reference\n"));
+	gc_error(_("untraced old-to-new reference\n"));
     }
 }
 
@@ -820,7 +834,7 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
 	    if (i != NODE_CLASS(s))
-		REprintf(_("Inconsistent class assignment for node!\n"));
+		gc_error(_("Inconsistent class assignment for node!\n"));
 	}
 	for (gen = 0, OldCount = 0, OldToNewCount = 0;
 	     gen < NUM_OLD_GENERATIONS;
@@ -830,9 +844,9 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 		 s = NEXT_NODE(s)) {
 		OldCount++;
 		if (i != NODE_CLASS(s))
-		    REprintf(_("Inconsistent class assignment for node!\n"));
+		    gc_error(_("Inconsistent class assignment for node!\n"));
 		if (gen != NODE_GENERATION(s))
-		    REprintf(_("Inconsistent node generation\n"));
+		    gc_error(_("Inconsistent node generation\n"));
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
 	    for (s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
@@ -840,9 +854,9 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
 		if (i != NODE_CLASS(s))
-		    REprintf(_("Inconsistent class assignment for node!\n"));
+		    gc_error(_("Inconsistent class assignment for node!\n"));
 		if (gen != NODE_GENERATION(s))
-		    REprintf(_("Inconsistent node generation\n"));
+		    gc_error(_("Inconsistent node generation\n"));
 	    }
 	}
 	REprintf(_("Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"),
@@ -1190,7 +1204,7 @@ static void AgeNodeAndChildren(SEXP s, int gen)
 	s = forwarded_nodes;
 	forwarded_nodes = NEXT_NODE(forwarded_nodes);
 	if (NODE_GENERATION(s) != gen)
-	    REprintf(_("****snapping into wrong generation\n"));
+	    gc_error(_("****snapping into wrong generation\n"));
 	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].Old[gen]);
 	R_GenHeap[NODE_CLASS(s)].OldCount[gen]++;
 	DO_CHILDREN(s, AGE_NODE, gen);
@@ -1645,7 +1659,7 @@ static int RunGenCollect(R_size_t size_needed)
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		UNSNAP_NODE(s);
 		if (NODE_GENERATION(s) != gen)
-		    REprintf(_("****snapping into wrong generation\n"));
+		    gc_error(_("****snapping into wrong generation\n"));
 		SNAP_NODE(s, R_GenHeap[i].Old[gen]);
 		s = next;
 	    }
@@ -1721,7 +1735,7 @@ static int RunGenCollect(R_size_t size_needed)
 	    SEXP s;
 	    for (s = R_SymbolTable[i]; s != R_NilValue; s = CDR(s))
 		if (ATTRIB(CAR(s)) != R_NilValue)
-		    REprintf("****found a symbol with attributes\n");
+		    gc_error("****found a symbol with attributes\n");
 	}
 
     if (R_CurrentExpr != NULL)	           /* Current expression */
@@ -2113,9 +2127,16 @@ void attribute_hidden InitMemory()
 {
     int i;
     int gen;
+    char *arg;
 
     init_gctorture();
     init_gc_grow_settings();
+
+    arg = getenv("R_GC_FAIL_ON_ERROR");
+    if (arg != NULL && StringTrue(arg))
+	gc_fail_on_error = TRUE;
+    else if (arg != NULL && StringFalse(arg))
+	gc_fail_on_error = FALSE;
 
     gc_reporting = R_Verbose;
     R_StandardPPStackSize = R_PPStackSize;
@@ -3056,7 +3077,9 @@ void attribute_hidden R_check_thread(const char *s) {}
 static void R_gc_internal(R_size_t size_needed)
 {
     R_CHECK_THREAD;
-    if (!R_GCEnabled) {
+    if (!R_GCEnabled || R_in_gc) {
+      if (R_in_gc)
+        gc_error("*** recursive gc invocation\n");
       if (NO_FREE_NODES())
 	R_NSize = R_NodesInUse + 1;
 

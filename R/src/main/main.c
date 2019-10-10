@@ -204,6 +204,10 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
     SEXP value, thisExpr;
     Rboolean wasDisplayed = FALSE;
 
+    /* clear warnings that might have accumulated furing a jump to top level */
+    if (R_CollectWarnings)
+	PrintWarnings(NULL);
+
     if(!*state->bufp) {
 	    R_Busy(0);
 	    if (R_ReadConsole(R_PromptString(browselevel, state->prompt_type),
