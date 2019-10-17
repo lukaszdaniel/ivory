@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2462,6 +2462,13 @@ msgstr ""
 #. R/load.R: stop("can only save to a binary connection")
 
 msgid "can only save to a binary connection"
+msgstr ""
+
+
+#: R/backquote.R: 0
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+
+msgid "can only splice inside a call"
 msgstr ""
 
 

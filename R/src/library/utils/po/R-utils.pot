@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,6 +315,13 @@ msgstr ""
 #. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
 
 msgid "'as.is' has the wrong length %d != cols = %d"
+msgstr ""
+
+
+#: R/objects.R: 0
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+
+msgid "'class' is of length > 1; only the first element will be used"
 msgstr ""
 
 

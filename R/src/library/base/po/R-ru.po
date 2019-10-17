@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-09-15 22:03\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2075,6 +2075,11 @@ msgstr "Использована ошибочная версия генерат�
 #: R/load.R:0
 msgid "can only save to a binary connection"
 msgstr "могу сохранить только в бинарное соединение"
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr ""
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))

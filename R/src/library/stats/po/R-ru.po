@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -87,7 +87,7 @@ msgstr "xtabs(*, sparse=TRUE) применим только к двувходо�
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
 #: R/mood.test.R:0 R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
 msgid "%s by %s"
@@ -750,6 +750,11 @@ msgstr "формула '%s' должна быть в виде '~expr'"
 #, fuzzy
 msgid "'formula' has '.' in both left and right hand sides"
 msgstr "у 'formula' есть '.' и слева, и справа"
+
+#. R/wilcox.test.R: stop("'formula' missing or incorrect")
+#: R/wilcox.test.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' пропущена или неправильная"
 
 #. R/aggregate.R: stop("'formula' must have both left and right hand sides")
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
@@ -4460,9 +4465,8 @@ msgstr "неправильные подогнанные средние в пус
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
-#. R/wilcox.test.R: stop("invalid formula")
 #: R/ansari.test.R:0 R/cor.test.R:0 R/friedman.test.R:0 R/models.R:0
-#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
+#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0
 msgid "invalid formula"
 msgstr "неправильная формула"
 
@@ -5387,18 +5391,18 @@ msgstr "количество наблюдений в 'x' и 'y' должно с�
 msgid "number of observations in each group must be at least 2"
 msgstr "количество наблюдений в каждой группе должно быть как минимум 2"
 
-#. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#: R/glm.R:0
-#, fuzzy
-msgid "number of offsets (%d) should be equal to number of observations (%d)"
-msgstr "количество смещений %d, а должно быть %d (количество наблюдений)"
-
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 #: R/lm.R:0
 #, fuzzy
 msgid ""
 "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "количество смещений %d, а должно быть %d (количество наблюдений)"
+
+#. R/glm.R: gettextf("number of offsets (%d) should equal %d (number of observations)", length(offset),     NROW(Y))
+#: R/glm.R:0
+#, fuzzy
+msgid "number of offsets (%d) should equal %d (number of observations)"
+msgstr "число смещений = %d, а должно быть = %d (числу наблюдений)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -7181,6 +7185,11 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #, fuzzy
 #~ msgid ""
+#~ "number of offsets (%d) should be equal to number of observations (%d)"
+#~ msgstr "количество смещений %d, а должно быть %d (количество наблюдений)"
+
+#, fuzzy
+#~ msgid ""
 #~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
 #~ "column matrix where first column is the number of successes and second "
 #~ "column is the number of failures"
@@ -7338,9 +7347,6 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #~ msgid "negative weights not allowed"
 #~ msgstr "отрицательные веса не разрешены"
-
-#~ msgid "number of offsets is %d, should equal %d (number of observations)"
-#~ msgstr "число смещений = %d, а должно быть = %d (числу наблюдений)"
 
 #, fuzzy
 #~ msgid "observations with 0 weights were not used"
@@ -7632,9 +7638,6 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #~ msgid "'x' must be numeric"
 #~ msgstr "'x' должен быть числом"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula' пропущена или неправильная"
 
 #~ msgid "'y' must be numeric"
 #~ msgstr "'y' должен быть числом"

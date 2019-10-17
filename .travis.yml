@@ -4,13 +4,13 @@ language: c
 
 matrix:
   include:
-    # gcc 7.4 with code coverage.
     - compiler: gcc
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - gfortran
             - automake
             - perl
             - libboost-all-dev
@@ -21,8 +21,7 @@ matrix:
             - libedit-dev
             - gcc-7=7.4.*
             - g++-7=7.4.*
-            - gfortran-7=7.4.*
-      env: F77=gfortran-7 FCC=gfortran-7 C_COMPILER=gcc-7 CXX_COMPILER=g++-7 CFLAGS="-g -O1 --coverage" CXXFLAGS="${CFLAGS}" LDFLAGS="${CFLAGS}" COVERAGE=1
+      env: C_COMPILER=gcc-7 CXX_COMPILER=g++-7 CFLAGS="-g -O2" CXXFLAGS="${CFLAGS}" LDFLAGS="${CFLAGS}"
 
     - compiler: clang
       addons:

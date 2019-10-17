@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-09-15 22:03\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2073,6 +2073,11 @@ msgstr "Buggy version of Kinderman-Ramage generator used"
 #: R/load.R:0
 msgid "can only save to a binary connection"
 msgstr "이진 연결만 저장이 가능합니다 "
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr ""
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))

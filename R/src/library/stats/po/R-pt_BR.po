@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -76,7 +76,7 @@ msgstr ""
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
 #: R/mood.test.R:0 R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
 msgid "%s by %s"
@@ -737,6 +737,11 @@ msgstr "fórmula '%s' deve ser da forma '~expr'"
 #, fuzzy
 msgid "'formula' has '.' in both left and right hand sides"
 msgstr "'formula' tem '.' tanto no lado direito quanto no esquerdo"
+
+#. R/wilcox.test.R: stop("'formula' missing or incorrect")
+#: R/wilcox.test.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' com termos faltando ou incorreta"
 
 #. R/aggregate.R: stop("'formula' must have both left and right hand sides")
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
@@ -4434,9 +4439,8 @@ msgstr "médias ajustadas inválidas no modelo vazio"
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
-#. R/wilcox.test.R: stop("invalid formula")
 #: R/ansari.test.R:0 R/cor.test.R:0 R/friedman.test.R:0 R/models.R:0
-#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
+#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0
 msgid "invalid formula"
 msgstr "fórmula inválida"
 
@@ -5358,18 +5362,18 @@ msgstr "comprimentos de 'x' e 'xreg' não correspondem"
 msgid "number of observations in each group must be at least 2"
 msgstr "comprimentos de 'x' e 'xreg' não correspondem"
 
-#. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#: R/glm.R:0
-#, fuzzy
-msgid "number of offsets (%d) should be equal to number of observations (%d)"
-msgstr "número de offsets é %d e deve igualar %d (número de observações)"
-
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 #: R/lm.R:0
 #, fuzzy
 msgid ""
 "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "número de offsets é %d e deve igualar %d (número de observações)"
+
+#. R/glm.R: gettextf("number of offsets (%d) should equal %d (number of observations)", length(offset),     NROW(Y))
+#: R/glm.R:0
+#, fuzzy
+msgid "number of offsets (%d) should equal %d (number of observations)"
+msgstr "número de offsets é %d, deve igualar %d (número de observações)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -7076,6 +7080,11 @@ msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
 
 #, fuzzy
 #~ msgid ""
+#~ "number of offsets (%d) should be equal to number of observations (%d)"
+#~ msgstr "número de offsets é %d e deve igualar %d (número de observações)"
+
+#, fuzzy
+#~ msgid ""
 #~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
 #~ "column matrix where first column is the number of successes and second "
 #~ "column is the number of failures"
@@ -7214,9 +7223,6 @@ msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
 
 #~ msgid "negative weights not allowed"
 #~ msgstr "pesos negativos não são permitidos"
-
-#~ msgid "number of offsets is %d, should equal %d (number of observations)"
-#~ msgstr "número de offsets é %d, deve igualar %d (número de observações)"
 
 #, fuzzy
 #~ msgid "observations with 0 weights were not used"
@@ -7482,9 +7488,6 @@ msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
 
 #~ msgid "'x' must be numeric"
 #~ msgstr "'x' deve ser numérico"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula' com termos faltando ou incorreta"
 
 #~ msgid "'y' must be numeric"
 #~ msgstr "'y' deve ser numérico"

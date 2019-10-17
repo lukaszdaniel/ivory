@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -432,6 +432,11 @@ msgstr ""
 "Katalog 'vignettes' jest wymagany od wersji R 3.1.0 i nie będą indeksowane "
 "ani sprawdzane"
 
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#: R/check.R:0
+msgid "A complete check needs the 'checkbashisms' script"
+msgstr ""
+
 #. R/check.R: gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -644,6 +649,12 @@ msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolami."
 #, fuzzy
 msgid "Authors@R field gives persons with deprecated elements:"
 msgstr "Pole 'Authors@R' wskazuje na osoby z niepoprawnymi rolami:"
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Pole 'Authors@R' wskazuje na osoby beż żadnych imion:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")
 #: R/QC.R:0

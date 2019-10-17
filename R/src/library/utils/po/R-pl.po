@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -254,6 +254,11 @@ msgstr "argument 'FUN' musi być funkcją lub wartością NULL"
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' posiada niepoprawną długość %d != kolumny = %d"
+
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
+msgstr ""
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
 #: R/write.table.R:0

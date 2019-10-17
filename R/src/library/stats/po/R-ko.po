@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -83,7 +83,7 @@ msgstr "%s는 2차원 테이블에만 적용합니다"
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
 #: R/mood.test.R:0 R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
 msgid "%s by %s"
@@ -738,6 +738,11 @@ msgstr "'formula'는 반드시 response ~ group의 형식을 가져야 합니다
 #: R/ftable.R:0
 msgid "'formula' has '.' in both left and right hand sides"
 msgstr "'formula'의 양변 모두 '.'를 가지고 있습니다"
+
+#. R/wilcox.test.R: stop("'formula' missing or incorrect")
+#: R/wilcox.test.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula'가 누락되었거나 잘못되었습니다"
 
 #. R/aggregate.R: stop("'formula' must have both left and right hand sides")
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
@@ -4401,9 +4406,8 @@ msgstr "유효하지 않은 fitted means가 empty 모델에 있습니다"
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
-#. R/wilcox.test.R: stop("invalid formula")
 #: R/ansari.test.R:0 R/cor.test.R:0 R/friedman.test.R:0 R/models.R:0
-#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
+#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0
 msgid "invalid formula"
 msgstr "유효하지 않은 formula입니다"
 
@@ -5316,18 +5320,18 @@ msgstr "'x'와 'y'의 관측치의 개수는 반드시 일치해야 합니다"
 msgid "number of observations in each group must be at least 2"
 msgstr "각 그룹에 있는 관측치의 수는 반드시 적어도 2이어야 합니다"
 
-#. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#: R/glm.R:0
-#, fuzzy
-msgid "number of offsets (%d) should be equal to number of observations (%d)"
-msgstr "offsets의 개수 %1$d는 관측치의 개수 %2$d와 같아야 합니다"
-
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 #: R/lm.R:0
 #, fuzzy
 msgid ""
 "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "offsets의 개수 %1$d는 관측치의 개수 %2$d와 같아야 합니다"
+
+#. R/glm.R: gettextf("number of offsets (%d) should equal %d (number of observations)", length(offset),     NROW(Y))
+#: R/glm.R:0
+#, fuzzy
+msgid "number of offsets (%d) should equal %d (number of observations)"
+msgstr "offset의 개수  %1$d는 관측치의 개수 %2$d와 같아야 합니다"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6948,6 +6952,11 @@ msgstr[0] ""
 
 #, fuzzy
 #~ msgid ""
+#~ "number of offsets (%d) should be equal to number of observations (%d)"
+#~ msgstr "offsets의 개수 %1$d는 관측치의 개수 %2$d와 같아야 합니다"
+
+#, fuzzy
+#~ msgid ""
 #~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
 #~ "column matrix where first column is the number of successes and second "
 #~ "column is the number of failures"
@@ -7037,9 +7046,6 @@ msgstr[0] ""
 
 #~ msgid "'by' must be a list"
 #~ msgstr "'by'는 반드시 리스트이어야 합니다"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "'formula'가 누락되었거나 잘못되었습니다"
 
 #~ msgid "option \"show.signif.stars\" is invalid: assuming TRUE"
 #~ msgstr "옵션 \"show.signif.stars\"는 유효하지 않으므로 TRUE라고 가정합니다"
@@ -7203,9 +7209,6 @@ msgstr[0] ""
 
 #~ msgid "'iter.max' must be positive"
 #~ msgstr "'iter.max'는 반드시 양수이어야 합니다"
-
-#~ msgid "number of offsets is %d, should equal %d (number of observations)"
-#~ msgstr "offset의 개수  %1$d는 관측치의 개수 %2$d와 같아야 합니다"
 
 #~ msgid "'degree' must be 0, 1 or 2"
 #~ msgstr "'degree'는 반드시 0, 1, 또는 2이어야 합니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-09-15 22:03\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2072,6 +2072,11 @@ msgstr " Kinderman-Ramage の疑似乱数発生法のバギー版を使います
 #: R/load.R:0
 msgid "can only save to a binary connection"
 msgstr " バイナリコネクションへしかセーブできません "
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr ""
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))

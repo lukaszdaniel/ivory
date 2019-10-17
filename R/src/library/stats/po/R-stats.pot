@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr ""
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 
 msgid "%s by %s"
 msgstr ""
@@ -961,6 +961,13 @@ msgstr ""
 #. R/ftable.R: stop("'formula' has '.' in both left and right hand sides")
 
 msgid "'formula' has '.' in both left and right hand sides"
+msgstr ""
+
+
+#: R/wilcox.test.R: 0
+#. R/wilcox.test.R: stop("'formula' missing or incorrect")
+
+msgid "'formula' missing or incorrect"
 msgstr ""
 
 
@@ -5837,7 +5844,6 @@ msgstr ""
 #: R/mood.test.R: 0
 #: R/quade.test.R: 0
 #: R/var.test.R: 0
-#: R/wilcox.test.R: 0
 #. R/ansari.test.R: stop("invalid formula")
 #. R/cor.test.R: stop("invalid formula")
 #. R/friedman.test.R: stop("invalid formula")
@@ -5845,7 +5851,6 @@ msgstr ""
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
-#. R/wilcox.test.R: stop("invalid formula")
 
 msgid "invalid formula"
 msgstr ""
@@ -7016,17 +7021,17 @@ msgid "number of observations in each group must be at least 2"
 msgstr ""
 
 
-#: R/glm.R: 0
-#. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-
-msgid "number of offsets (%d) should be equal to number of observations (%d)"
-msgstr ""
-
-
 #: R/lm.R: 0
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 
 msgid "number of offsets (%d) should be equal to the number of observations (%d)"
+msgstr ""
+
+
+#: R/glm.R: 0
+#. R/glm.R: gettextf("number of offsets (%d) should equal %d (number of observations)", length(offset),     NROW(Y))
+
+msgid "number of offsets (%d) should equal %d (number of observations)"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-09-15 22:04\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -423,6 +423,11 @@ msgid ""
 "indexed nor checked"
 msgstr ""
 
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#: R/check.R:0
+msgid "A complete check needs the 'checkbashisms' script"
+msgstr ""
+
 #. R/check.R: gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -613,6 +618,11 @@ msgstr ""
 #. R/QC.R: gettext("Authors@R field gives persons with deprecated elements:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Authors@R field gives persons with deprecated elements:"
+msgstr ""
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Authors@R field gives persons with invalid ORCID identifiers:"
 msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:", domain = "R-tools")

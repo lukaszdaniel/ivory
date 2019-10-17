@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -241,6 +241,11 @@ msgstr ""
 #. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "'as.is' has the wrong length %d != cols = %d"
+msgstr ""
+
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
 msgstr ""
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")

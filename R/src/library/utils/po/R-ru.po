@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-08-15 11:59\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -275,6 +275,11 @@ msgstr "'FUN' должен быть функцией или NULL"
 #, fuzzy
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "у 'as.is' -- неправильная длина %d != cols = %d"
+
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
+msgstr ""
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
 #: R/write.table.R:0

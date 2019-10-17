@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-10-17 21:43\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -79,7 +79,7 @@ msgstr "'%s' stosuje się jedynie do dwukierunkowych tabel"
 #. R/mood.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]))
 #. R/t.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #. R/var.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s by %s ", names(mf)[1], names(mf)[2])
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
 #: R/mood.test.R:0 R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
 msgid "%s by %s"
@@ -688,6 +688,11 @@ msgstr "argument 'formula' powinien mieć formę 'zmienna zależna ~ grupa'"
 #: R/ftable.R:0
 msgid "'formula' has '.' in both left and right hand sides"
 msgstr "'formula' ma '.' po lewej oraz prawej stronie"
+
+#. R/wilcox.test.R: stop("'formula' missing or incorrect")
+#: R/wilcox.test.R:0
+msgid "'formula' missing or incorrect"
+msgstr "brak lub niepoprawna 'formula'"
 
 #. R/aggregate.R: stop("'formula' must have both left and right hand sides")
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
@@ -4332,9 +4337,8 @@ msgstr "niepoprawnie dopasowane średnie w pustym modelu"
 #. R/mood.test.R: stop("invalid formula")
 #. R/quade.test.R: stop("invalid formula")
 #. R/var.test.R: stop("invalid formula")
-#. R/wilcox.test.R: stop("invalid formula")
 #: R/ansari.test.R:0 R/cor.test.R:0 R/friedman.test.R:0 R/models.R:0
-#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
+#: R/mood.test.R:0 R/quade.test.R:0 R/var.test.R:0
 msgid "invalid formula"
 msgstr "niepoprawna formuła"
 
@@ -5218,16 +5222,18 @@ msgstr "liczba obserwacji w argumentach 'x' oraz 'y' musi się zgadzać"
 msgid "number of observations in each group must be at least 2"
 msgstr "liczba obserwacji w każdej grupie musi wynosić minimum 2"
 
-#. R/glm.R: gettextf("number of offsets (%d) should be equal to number of observations (%d)",     length(offset), NROW(Y))
-#: R/glm.R:0
-msgid "number of offsets (%d) should be equal to number of observations (%d)"
-msgstr "liczba przesunięć (%d) powinna być równa liczbie obserwacji (%d)"
-
 #. R/lm.R: gettextf("number of offsets (%d) should be equal to the number of observations (%d)",     NROW(offset), ny)
 #: R/lm.R:0
 msgid ""
 "number of offsets (%d) should be equal to the number of observations (%d)"
 msgstr "liczba przesunięć (%d) powinna być równa liczbie obserwacji (%d)"
+
+#. R/glm.R: gettextf("number of offsets (%d) should equal %d (number of observations)", length(offset),     NROW(Y))
+#: R/glm.R:0
+#, fuzzy
+msgid "number of offsets (%d) should equal %d (number of observations)"
+msgstr ""
+"liczba przesunięć wynosi %d, a powinna być równa %d (liczbie obserwacji)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
@@ -6936,6 +6942,10 @@ msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid ""
+#~ "number of offsets (%d) should be equal to number of observations (%d)"
+#~ msgstr "liczba przesunięć (%d) powinna być równa liczbie obserwacji (%d)"
+
+#~ msgid ""
 #~ "for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 "
 #~ "column matrix where first column is the number of successes and second "
 #~ "column is the number of failures"
@@ -7242,10 +7252,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "No Coefficients"
 #~ msgstr "Brak współczynników"
-
-#~ msgid "number of offsets is %d, should equal %d (number of observations)"
-#~ msgstr ""
-#~ "liczba przesunięć wynosi %d, a powinna być równa %d (liczbie obserwacji)"
 
 #~ msgid "observations with 0 weights were not used"
 #~ msgstr "obserwacje z zerowymi wagami nie zostały użyte"
@@ -7908,9 +7914,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "'x' must be numeric"
 #~ msgstr "'x' musi być liczbą"
-
-#~ msgid "'formula' missing or incorrect"
-#~ msgstr "brak lub niepoprawna 'formula'"
 
 #~ msgid "'y' must be numeric"
 #~ msgstr "'y' musi być liczbą"
