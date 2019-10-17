@@ -6,8 +6,8 @@ e7ddab232fd0c2c20b6eac503229ca89 *man/dpill.Rd
 2cdc0085930d42760d8f9ae4c0d4557f *man/dpih.Rd
 e9d58f063bb33cd05bb14a80fb6bfcbd *man/dpik.Rd
 5f6ef1beea4f7680cea94e63dd715bcb *man/bkde.Rd
-883f90cb9304886f5f18087b0df6b8f4 *PORTING
-6d6d5abd2fe18d93b340c22bf4ef888f *DESCRIPTION
+c8432d2579ea0ce016d5645adc3523e2 *PORTING
+44213e2c48ac1537d64968ff1ffa3c00 *DESCRIPTION
 ef83d24fcd60055ca8de6a7afac1a3d2 *po/R-fr.po
 f9e6460c2f691d7c75dc21b525a2a61d *po/R-ko.po
 913b82567fa9a9e11c21736de93e73f8 *po/R-de.po
@@ -24,7 +24,7 @@ d73aa41967d3cb81a5e58646fc2b42e6 *po/R-pl.po
 d41d8cd98f00b204e9800998ecf8427e *Changes
 0a954d67dd2bc16afd7fe901666b5108 *src/dgefa.f
 8b2926ed1798f467078e3bed97658367 *src/linbin2D.f
-4d37c68f063852a93ff686e654a0b4fd *src/init.c
+dea45fe1d61ccb5889527d58ced6d005 *src/init.c
 dd2dfdeab74b70230d0e6abadd1a55aa *src/sdiag.f
 ca3d59ad1312b0ab54f7a390d9d74295 *src/linbin.f
 3518477f0489855c005d4c9d9e48de5d *src/cp.f

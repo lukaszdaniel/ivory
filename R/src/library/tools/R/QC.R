@@ -3453,6 +3453,18 @@ function(aar, strict = FALSE)
                                   is.na(match("aut", e$role)),
                                   NA)))
                         out$bad_authors_at_R_field_has_no_author_roles <- TRUE
+                    has_bad_ORCID_identifiers <-
+                        vapply(aar,
+                               function(e) {
+                                   e <- e$comment
+                                   e <- e[names(e) == "ORCID"]
+                                   any(!grepl(.ORCID_iD_variants_regexp,
+                                              e))
+                               },
+                               NA)
+                    if(any(has_bad_ORCID_identifiers))
+                        out$bad_authors_at_R_field_has_persons_with_bad_ORCID_identifiers <-
+                            format(aar[has_bad_ORCID_identifiers])
                 }
                 if(strict >= 3L) {
                     non_standard_roles <-
@@ -3550,6 +3562,10 @@ function(x)
       },
       if(length(x[["bad_authors_at_R_field_has_no_valid_maintainer"]])) {
           strwrap(gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.", domain = "R-tools"))
+      },
+      if(length(bad <- x[["bad_authors_at_R_field_has_persons_with_bad_ORCID_identifiers"]])) {
+          c(gettext("Authors@R field gives persons with invalid ORCID identifiers:", domain = "R-tools"),
+            paste0("  ", bad))
       }
       )
 }

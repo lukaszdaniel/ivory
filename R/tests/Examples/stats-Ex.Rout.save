@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-09-25 r1185) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-10-10 r1187) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-09-25 r77249) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-10-10 r77274) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2118,16 +2118,6 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > ## following example(glm)
 > ## Don't show: 
 > example(glm, echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End (Don't show)
 > drop1(glm.D93, test = "Chisq")
 Single term deletions
@@ -2582,16 +2572,6 @@ Frequency = 1
 > ## Don't show: 
 > require(utils)
 > example("glm", echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End (Don't show)
 > anova(glm.D93)
 Analysis of Deviance Table
@@ -3934,7 +3914,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x5af6288>
+<environment: 0x5591f31481a8>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4971,7 +4951,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x6787cb0>
+<bytecode: 0x5591f3de1398>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7596,7 +7576,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x63ba138>
+<environment: 0x5591f3b15ea0>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -7988,7 +7968,7 @@ Crew  Child        0      0
 > counts <- c(18,17,15,20,10,20,25,13,12)
 > outcome <- gl(3,1,9)
 > treatment <- gl(3,3)
-> print(d.AD <- data.frame(treatment, outcome, counts))
+> data.frame(treatment, outcome, counts) # showing data
   treatment outcome counts
 1         1       1     18
 2         1       2     17
@@ -12286,14 +12266,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x5a88428>
-<environment: 0x5a8cc88>
+<bytecode: 0x5591f30a73e8>
+<environment: 0x5591f30ad8c8>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x5a882d8>
-<environment: 0x5a8cc88>
+<bytecode: 0x5591f30a7298>
+<environment: 0x5591f30ad8c8>
 
 > 
 > 
@@ -16411,16 +16391,6 @@ Max.     2.00  1.03072752
 > ##-- Continued from '?glm':
 > ## Don't show: 
 > utils::example("glm", echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End (Don't show)
 > print(ag <- anova(glm.D93))
 Analysis of Deviance Table
@@ -16496,8 +16466,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x3fccca0>
-<environment: 0x3dd5380>
+<bytecode: 0x5591f20a96a8>
+<environment: 0x5591f4020ce0>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18284,6 +18254,26 @@ alternative hypothesis: true location is less than 0
 
 >                                             # approximation
 > 
+> ## Formula interface to one-sample and paired tests
+> 
+> depression <- data.frame(first = x, second = y, change = y - x)
+> wilcox.test(change ~ 1, data = depression)
+
+	Wilcoxon signed rank test
+
+data: change
+V = 5, p-value = 0.03906
+alternative hypothesis: true location is not equal to 0
+
+> wilcox.test(Pair(first, second) ~ 1, data = depression)
+
+	Wilcoxon signed rank test
+
+data: Pair(first, second)
+V = 40, p-value = 0.03906
+alternative hypothesis: true location shift is not equal to 0
+
+> 
 > ## Two-sample test.
 > ## Hollander & Wolfe (1973), 69f.
 > ## Permeability constants of the human chorioamnion (a placental
@@ -18334,10 +18324,11 @@ Warning in command 'wilcox.test.default(x = c(41L, 36L, 12L, 18L, 28L, 23L, 19L,
 
 	Wilcoxon rank sum test with continuity correction
 
-data: Ozone by Month
+data: Ozone by Month 
 W = 127.5, p-value = 0.0001208
 alternative hypothesis: true location shift is not equal to 0
 
+> 
 > 
 > 
 > 
@@ -18856,7 +18847,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  4.389 0.184 4.579 0 0 
+Time elapsed:  3.777 0.152 3.932 0 0 
 > grDevices::dev.off()
 null device 
           1 

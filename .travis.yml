@@ -1,32 +1,51 @@
 sudo: required
-dist: trusty
+dist: bionic
 language: c
-compiler:
-        - clang
-matrix:
-  allow_failures:
-    - compiler: clang
-addons:
-  apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - realpath
-        - libpango1.0-dev
-        - libpcre3-dev
-        - texlive-latex-recommended
-        - texlive-fonts-extra
-        - texinfo
-        - gcc-4.9
-        - gfortran
-        - zlib1g-dev
-        - libbz2-dev
-        - liblzma-dev
-        - libpcre3-dev
-        - libedit-dev
 
+matrix:
+  include:
+    # gcc 7.4 with code coverage.
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - automake
+            - perl
+            - libboost-all-dev
+            - zlib1g-dev
+            - libbz2-dev
+            - liblzma-dev
+            - libpcre3-dev
+            - libedit-dev
+            - gcc-7=7.4.*
+            - g++-7=7.4.*
+            - gfortran-7=7.4.*
+      env: F77=gfortran-7 FCC=gfortran-7 C_COMPILER=gcc-7 CXX_COMPILER=g++-7 CFLAGS="-g -O1 --coverage" CXXFLAGS="${CFLAGS}" LDFLAGS="${CFLAGS}" COVERAGE=1
+
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - sourceline: "deb http://llvm.org/apt/bionic/ llvm-toolchain-bionic-7 main"
+          packages:
+            - gfortran
+            - automake
+            - perl
+            - libboost-all-dev
+            - zlib1g-dev
+            - libbz2-dev
+            - liblzma-dev
+            - libpcre3-dev
+            - libedit-dev
+            - libomp-dev
+            - clang-7
+            - llvm-7-dev
+            - gfortran-7=7.4.*
+      env: C_COMPILER=clang-7 CXX_COMPILER=clang++-7 LLVM_CONFIG=/usr/bin/llvm-config-7 CPPFLAGS="-DNO_CELLPOOLS" CFLAGS="-g -O2 -fsanitize=address" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
 script:
         - cd R
-        - ./configure --enable-R-shlib --with-included-gettext --enable-R-profiling --enable-memory-profiling
+        - CC=${C_COMPILER} CXX=${CXX_COMPILER} ./configure --with-included-gettext --enable-R-profiling --enable-memory-profiling
         - travis_wait 60 make
         - travis_wait 60 make check

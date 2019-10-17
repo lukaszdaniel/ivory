@@ -4,9 +4,9 @@ source conf-names.sh
 
 
 
-source svn-cleanup.sh $RECIVORY
+git clean -fdx $RECIVORY
+
 cd $RECIVORY
-svn status --no-ignore | egrep '^[?I]' | cut -c9- | xargs -d \\n rm -r &> /dev/null
 
 if test -n "$1"; then
  RECPKGS=$1
@@ -25,12 +25,12 @@ fi;
    tar -czf ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz ${pkg}
   else
    echo "Adding package '"${pkg}"' version" ${version}
-   svn delete ../${IVORY}/src/library/Recommended/${pkg}_*.tar.gz
-   svn delete ../${IVORY}/src/library/Recommended/${pkg}.tgz
+   git rm ../${IVORY}/src/library/Recommended/${pkg}_*.tar.gz
+   git rm ../${IVORY}/src/library/Recommended/${pkg}.tgz
    tar -czf ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz ${pkg}
-   svn add ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz
+   git add ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz
    ln -sf ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz ../${IVORY}/src/library/Recommended/${pkg}.tgz
-   svn add ../${IVORY}/src/library/Recommended/${pkg}.tgz
+   git add ../${IVORY}/src/library/Recommended/${pkg}.tgz
   fi;
  done
 

@@ -2202,6 +2202,7 @@ void attribute_hidden InitMemory()
 	R_Suicide(_("couldn't allocate node stack"));
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
+    R_BCProtTop = R_BCNodeStackTop;
 
     R_weak_refs = R_NilValue;
 
@@ -4000,6 +4001,12 @@ static R_INLINE SEXP CHKCONS(SEXP e)
 #else
 #define CHKCONS(e) CHK(e)
 #endif
+
+attribute_hidden
+void SET_BNDCELL(SEXP cell, SEXP val)
+{
+    SETCAR(cell, val);
+}
 
 /* List Accessors */
 SEXP (TAG)(SEXP e) { return CHK(TAG(CHKCONS(e))); }

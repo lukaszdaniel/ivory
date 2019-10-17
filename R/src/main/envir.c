@@ -138,10 +138,11 @@ static R_INLINE void LOCK_FRAME(SEXP e) {
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
 /* use the same bits (15 and 14) in symbols and bindings */
-//#define BINDING_VALUE(b) ((IS_ACTIVE_BINDING(b) ? getActiveValue(CAR(b)) : CAR(b)))
-static R_INLINE SEXP BINDING_VALUE(SEXP b) {
- return IS_ACTIVE_BINDING(b) ? getActiveValue(CAR(b)) : CAR(b);
- }
+static R_INLINE SEXP BINDING_VALUE(SEXP b)
+{
+    if (IS_ACTIVE_BINDING(b)) return getActiveValue(CAR(b));
+    else return CAR(b);
+}
 
 //#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s)))
 static R_INLINE SEXP SYMBOL_BINDING_VALUE(SEXP s) {
@@ -164,7 +165,7 @@ static R_INLINE Rboolean SYMBOL_HAS_BINDING(SEXP s) {
     setActiveValue(CAR(__b__), __val__); \
     UNPROTECT(1); \
    } else \
-    SETCAR(__b__, __val__); \
+    SET_BNDCELL(__b__, __val__); \
 } while (0)
 */
 static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
@@ -174,7 +175,7 @@ static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
   if (IS_ACTIVE_BINDING(b)) 
     setActiveValue(CAR(b), val); 
   else 
-    SETCAR(b, val); 
+    SET_BNDCELL(b, val); 
 }
 
 /*
@@ -197,9 +198,11 @@ static R_INLINE void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
   if (BINDING_IS_LOCKED(sym)) 
     error(_("cannot change value of locked binding for '%s'"), 
           CHAR(PRINTNAME(sym))); 
-  if (IS_ACTIVE_BINDING(sym)) 
-    setActiveValue(SYMVALUE(sym), val); 
-  else 
+  if (IS_ACTIVE_BINDING(sym)) {
+    PROTECT(val);
+    setActiveValue(SYMVALUE(sym), val);
+    UNPROTECT(1);
+  } else
     SET_SYMVALUE(sym, val);
 }
 
@@ -859,10 +862,10 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
     }
     else if (TAG(list) == thing) {
 	*found = 1;
-	SETCAR(list, R_UnboundValue); /* in case binding is cached */
-	LOCK_BINDING(list);           /* in case binding is cached */
+	SET_BNDCELL(list, R_UnboundValue); /* in case binding is cached */
+	LOCK_BINDING(list);                /* in case binding is cached */
 	SEXP rest = CDR(list);
-	SETCDR(list, R_NilValue);     /* to fix refcnt on 'rest' */
+	SETCDR(list, R_NilValue);          /* to fix refcnt on 'rest' */
 	return rest;
     }
     else {
@@ -2372,6 +2375,7 @@ SEXP attribute_hidden do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(t = findVarLocInFrame(rho, sym, NULL));
     rval = allocVector(LGLSXP,1);
+    LOGICAL(rval)[0] = 0;
     UNPROTECT(1);
     if (t != R_NilValue) {
 	if (DDVAL(s)) {
@@ -2713,12 +2717,31 @@ static void FrameNames(SEXP frame, int all, SEXP names, int *indx)
     }
 }
 
+/* returning the active binding function instead of the
+   value is not right, but packages are depending on it so
+   keep for now. */
+static R_INLINE SEXP BINDING_VALUE_TMP(SEXP cell)
+{
+    if (IS_ACTIVE_BINDING(cell)) {
+	static int inited = FALSE;
+	static int bugfix = FALSE;
+	if (! inited) {
+	    inited = TRUE;
+	    const char *p = getenv("_R_ENV2LIST_BUGFIX_");
+	    if (p != NULL && StringTrue(p))
+		bugfix = TRUE;
+	}
+	return bugfix ? BINDING_VALUE(cell) : CAR(cell);
+    }
+    else return BINDING_VALUE(cell);
+}
+
 static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
 {
     if (all) {
 	while (frame != R_NilValue) {
 #         define DO_FrameValues						\
-	    SEXP value = CAR(frame);					\
+	    SEXP value = BINDING_VALUE_TMP(frame);			\
 	    if (TYPEOF(value) == PROMSXP) {				\
 		PROTECT(value);						\
 		value = eval(value, R_GlobalEnv);			\

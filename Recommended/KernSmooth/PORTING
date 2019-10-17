@@ -3,7 +3,7 @@ KernSmooth/src:
 add simple Makefile.
 add LINPACK routines dgefa.f and dgesl.f
 alter blkest.f and cp.f so that the last argument of dqrsl (info)
- is a varaible not a constant as it if used on output.
+ is a variable not a constant as it is used on output.
 
 KernSmooth/data:
 
@@ -24,7 +24,7 @@ Version 2.22-5
 
 R 1.2.0 and later require BLAS_LIBS set.
 
-Add help for geyser (from package MASS).
+Add help for geyser (copied from package MASS).
 
 
 Version 2.22-7
@@ -210,7 +210,15 @@ Removed unused assignments.
 Improve DESCRIPTION file.
 Update ko translations.
 
+
 Version 2.23-15
 ===============
 
 Correct imports in NAMESPACE file.
+
+
+Version 2.23-16
+===============
+
+Incude <stddef.h> in src/init.c.
+Add credit for LINPACK routines.

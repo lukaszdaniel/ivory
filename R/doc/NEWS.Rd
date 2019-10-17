@@ -33,9 +33,6 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item The formula interface to \code{t.test} has been extended to
-      handle one-sample and paired tests.
-
       \item \code{assertError()} and \code{assertWarning()} (in package
       \pkg{tools}) can now check for \emph{specific} error or warning
       classes \emph{via} the new optional second argument \code{classes}
@@ -61,7 +58,7 @@
       rather than the \emph{\code{deparse()}d} calls, deferring the
       deparsing to the user-level functions \code{.traceback()} and
       \code{traceback()}, fulfilling the wish of \PR{17580}, reported
-      (incl.\sspace{}patch proposal) by Brodie Gaslam.
+      incl.\sspace{}two patch proposals by Brodie Gaslam.
 
       \item \code{data.matrix()} now converts character columns to
       factors and from this to integers.
@@ -113,6 +110,10 @@
       \item The backquote function \code{bquote()} has a new argument
       \code{splice} to enable splicing a computed list of values into an
       expression, like \code{,@} in LISP's backquote.
+
+      \item The formula interface to \code{t.test()} and
+      \code{wilcox.test()} has been extended to handle one-sample and
+      paired tests.
     }
   }
 
@@ -183,6 +184,10 @@
       \item \command{R --help} now mentions the option \command{--no-echo}
       (renamed from \command{--slave}) and its previously undocumented
       short form \command{-s}.
+
+      \item \command{R CMD check} now optionally checks
+      \command{configure} and \command{cleanup} scripts for
+      non-Bourne-shell code (\sQuote{bashisms}).
     }
   }
 
@@ -229,6 +234,9 @@
 
       \item Certain \code{Ops} (notably comparison such as \code{==}) now
       also work for 0-length data frames, after reports by Hilmar Berger.
+
+      \item \code{methods(class = class(glm(..)))} now warns more usefully
+      and only once.
     }
   }
 }
@@ -355,8 +363,21 @@
       leading to C stack overflow because of infinite recursion.
 
       \item \code{R_tryCatch} no longer transfers control for all
-      conditions. Reported and patch provided by Linoel Henry in
+      conditions. Reported and patch provided by Lionel Henry in
       \PR{17617}.
+
+      \item \code{format(object.size(.), digits=NULL)} now works, fixing
+      \PR{17628} reported by Jonathan Carroll.
+
+      \item \code{get_all_vars(f, d)} now also works for cases, e.g. where
+      \code{d} contains a matrix.  Reported by Simon Wood in 2009 and patch
+      provided by Ben Bolker in \PR{13624}.
+
+      \item \code{barplot()} could get spacings wrong if there were exactly two
+      bars \PR{15522}.  Patch by Michael Chirico.
+
+      \item \code{power.t.test()} works in more cases when returning values
+      of n smaller than 2.
     }
   }
 }
