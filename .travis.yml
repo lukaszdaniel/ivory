@@ -41,10 +41,9 @@ matrix:
             - libomp-dev
             - clang-7
             - llvm-7-dev
-            - gfortran-7=7.4.*
       env: C_COMPILER=clang-7 CXX_COMPILER=clang++-7 LLVM_CONFIG=/usr/bin/llvm-config-7 CPPFLAGS="-DNO_CELLPOOLS" CFLAGS="-g -O2 -fsanitize=address" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
 script:
         - cd R
         - CC=${C_COMPILER} CXX=${CXX_COMPILER} ./configure --with-included-gettext --enable-R-profiling --enable-memory-profiling
         - travis_wait 60 make
-        - travis_wait 60 make check
+          #- travis_wait 60 make check
