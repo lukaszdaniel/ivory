@@ -138,8 +138,13 @@ static R_INLINE void LOCK_FRAME(SEXP e) {
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
 /* use the same bits (15 and 14) in symbols and bindings */
+static SEXP getActiveValue(SEXP);
 static R_INLINE SEXP BINDING_VALUE(SEXP b)
 {
+    if (BNDCELL_TAG(b)) {
+	R_expand_binding_value(b);
+	return CAR0(b);
+    }
     if (IS_ACTIVE_BINDING(b)) return getActiveValue(CAR(b));
     else return CAR(b);
 }
@@ -2046,6 +2051,28 @@ SEXP attribute_hidden do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
+void R_removeVarFromFrame(SEXP name, SEXP env)
+{
+    int hashcode = -1;
+
+    if (TYPEOF(env) == NILSXP)
+	error(_("use of NULL environment is defunct"));
+
+    if (!isEnvironment(env))
+	error(_("argument to '%s' is not an environment"), "R_removeVarFromFrame");
+
+    if (TYPEOF(name) != SYMSXP)
+	error(_("not a symbol"));
+
+    if (IS_HASHED(env)) {
+	if( !HASHASH(PRINTNAME(name)))
+	    hashcode = R_Newhashpjw(CHAR(PRINTNAME(name)));
+	else
+	    hashcode = HASHVALUE(PRINTNAME(name));
+    }
+    RemoveVariable(name, hashcode, env);
+}
+
 
 /*----------------------------------------------------------------------
 
@@ -2316,9 +2343,12 @@ R_isMissing(SEXP symbol, SEXP rho)
 	    else
 		vl = nthcdr(CAR(vl), ddv-1);
 	}
-	if (MISSING(vl) == 1 || CAR(vl) == R_MissingArg)
+	if (MISSING(vl) == 1 ||
+	    (BNDCELL_TAG(vl) == 0 && CAR(vl) == R_MissingArg))
 	    return 1;
 	if (IS_ACTIVE_BINDING(vl))
+	    return 0;
+	if (BNDCELL_TAG(vl))
 	    return 0;
 	SETCAR(vl, findRootPromise(CAR(vl)));
 	if (TYPEOF(CAR(vl)) == PROMSXP &&
@@ -2386,6 +2416,7 @@ SEXP attribute_hidden do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else
 		t = nthcdr(CAR(t), ddv-1);
 	}
+	if (BNDCELL_TAG(t)) return rval;
 	if (MISSING(t) || CAR(t) == R_MissingArg) {
 	    LOGICAL(rval)[0] = 1;
 	    return rval;

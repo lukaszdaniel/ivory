@@ -30,6 +30,7 @@
 #ifndef R_INLINES_H_
 #define R_INLINES_H_
 
+#include <Localization.h>
 /* Probably not able to use C99 semantics in gcc < 4.3.0 */
 #if __GNUC__ == 4 && __GNUC_MINOR__ >= 3 && defined(__GNUC_STDC_INLINE__) && !defined(C99_INLINE_SEMANTICS)
 #define C99_INLINE_SEMANTICS 1
@@ -76,6 +77,19 @@
 #ifdef TESTING_WRITE_BARRIER
 # define STRICT_TYPECHECK
 # define CATCH_ZERO_LENGTH_ACCESS
+#endif
+
+
+#if defined(USE_RINTERNALS) || defined(COMPILING_R)
+/* inline version of CAR to support immediate bindings */
+INLINE_FUN SEXP CAR(SEXP e)
+{
+    if (BNDCELL_TAG(e))
+	error(_("bad binding access"));
+    return CAR0(e);
+}
+#else
+SEXP CAR(SEXP e);
 #endif
 
 #ifdef STRICT_TYPECHECK

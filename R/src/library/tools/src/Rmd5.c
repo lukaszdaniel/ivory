@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2003-7   The R Core Team.
+ *  Copyright (C) 2003-2019   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +19,12 @@
 
 /* <UTF8> OK since this is intended to treat chars as byte streams */
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
+#include <Defn.h>
+
 #include "tools.h"
 #include "localization.h"
 #define ROL_UNUSED
@@ -29,7 +35,11 @@ SEXP Rmd5(SEXP files)
 {
     SEXP ans;
     int i, j, nfiles = length(files), res;
+#ifdef _WIN32
+    const wchar_t *wpath;
+#else
     const char *path;
+#endif
     char out[33];
     FILE *fp;
     unsigned char resblock[16];
@@ -37,10 +47,11 @@ SEXP Rmd5(SEXP files)
     if(!isString(files)) error(_("'%s' argument must be character"), "files");
     PROTECT(ans = allocVector(STRSXP, nfiles));
     for(i = 0; i < nfiles; i++) {
-	path = translateChar(STRING_ELT(files, i));
 #ifdef _WIN32
-	fp = fopen(path, "rb");
+	wpath = filenameToWchar(STRING_ELT(files, i), FALSE);
+	fp = _wfopen(wpath, L"rb");
 #else
+	path = translateChar(STRING_ELT(files, i));
 	fp = fopen(path, "r");
 #endif
 	if(!fp) {
@@ -48,7 +59,11 @@ SEXP Rmd5(SEXP files)
 	} else {
 	    res = md5_stream(fp, &resblock);
 	    if(res) {
+#ifdef _WIN32
+		warning(_("md5 failed on file '%ls'"), wpath);
+#else
 		warning(_("md5 failed on file '%s'"), path);
+#endif
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    } else {
 		for(j = 0; j < 16; j++)
