@@ -1604,7 +1604,8 @@ SEXP attribute_hidden do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* This will duplicate more often than necessary, but saves */
     /* over always duplicating. */
 
-    if (MAYBE_SHARED(CAR(args)))
+    if (MAYBE_SHARED(CAR(args)) ||
+	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
 	x = SETCAR(args, shallow_duplicate(CAR(args)));
 
     S4 = IS_S4_OBJECT(x);
@@ -1757,7 +1758,8 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Ensure that the LHS is a local variable. */
     /* If it is not, then make a local copy. */
 
-    if (MAYBE_SHARED(x))
+    if (MAYBE_SHARED(x) ||
+	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
 	SETCAR(args, x = shallow_duplicate(x));
 
     /* code to allow classes to extend ENVSXP */
@@ -2106,7 +2108,8 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
     PROTECT_WITH_INDEX(val, &pvalidx);
     S4 = IS_S4_OBJECT(x);
 
-    if (MAYBE_SHARED(x))
+    if (MAYBE_SHARED(x) ||
+	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
 	REPROTECT(x = shallow_duplicate(x), pxidx);
 
     /* If we aren't creating a new entry and NAMED>0

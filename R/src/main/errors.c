@@ -341,7 +341,7 @@ static SEXP getCurrentCall()
 	return c ? c->call : R_NilValue;
 }
 
-void warning(const char *format, ...)
+void Rf_warning(const char *format, ...)
 {
     char buf[BUFSIZE], *p;
 
@@ -886,7 +886,7 @@ SEXP attribute_hidden do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
     return res;
 }
 
-void error(const char *format, ...)
+void Rf_error(const char *format, ...)
 {
     char buf[BUFSIZE];
 

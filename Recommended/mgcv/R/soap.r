@@ -429,6 +429,11 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
   bnd <- object$xt$bnd
   if (is.null(bnd)) stop("can't soap smooth without a boundary")
   if (!inherits(bnd,"list")) stop("bnd must be a list of boundary loops")
+
+  ## check knots within boundary...
+  kin <- in.out(bnd,cbind(knt[[1]],knt[[2]]))
+  if (any(!kin)) warning("dropping soap knots not inside boundary - use 'in.out' to investigate.")
+  knt[[1]] <- knt[[1]][kin];knt[[2]] <- knt[[2]][kin] 
   
   for (i in seq_len(length(bnd))) { ## re-lable boundary
     nm <- names(bnd[[i]])
@@ -468,26 +473,28 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
            ns.dim <- ns.dim + sd$bc[[i]]$bsm$null.space.dim
   object$null.space.dim <- ns.dim
   need.con <- TRUE
-  for (i in seq_len(length(sd$bc))) 
+  for (i in seq_along(sd$bc)) 
   if (!sd$bc[[i]]$free.bound) need.con <- FALSE
 
   ## rescale basis for nice conditioning....
   irng <- 1/as.numeric(apply(b$X,2,max)-apply(b$X,2,min))
   b$X <- t(t(b$X)*irng)  
   ## now apply rescaling
-  for (i in  seq_len(length(b$S))) {
+  for (i in  seq_along(b$S)) {
     a <- irng[b$off[i]:(b$off[i]+ncol(b$S[[i]])-1)]
     b$S[[i]] <- diag(a)%*%b$S[[i]]%*%diag(a)
   }
 
   object$irng <- irng ## the column scaling factor 
 
+  if (any(!is.finite(irng))) stop("soap basis ill-conditioned - changing 'xt$nmax' may help")
+
   object$X <- b$X ## model matrix
   attr(object$X,"offset") <- b$offset
 
   if (!object$fixed) { ## have to unpack a bit...
     S <- list();n <- ncol(object$X)
-    for (i in seq_len(length(b$S))) {
+    for (i in seq_along(b$S)) {
       S[[i]] <- matrix(0,n,n)
       m <- ncol(b$S[[i]])
       ind <- b$off[i]:(b$off[i]+m-1)

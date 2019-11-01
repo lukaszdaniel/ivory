@@ -280,7 +280,7 @@ void InitTypeTables(void) {
     }
 }
 
-SEXP type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
+SEXP Rf_type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
 {
     if (t < MAX_NUM_SEXPTYPE) { /* FIXME: branch not really needed */
 	SEXP res = Type2Table[t].rcharName;
@@ -289,7 +289,7 @@ SEXP type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
     return R_NilValue;
 }
 
-SEXP type2str(SEXPTYPE t) /* returns a CHARSXP */
+SEXP Rf_type2str(SEXPTYPE t) /* returns a CHARSXP */
 {
     SEXP s = type2str_nowarn(t);
     if (s != R_NilValue) {
@@ -311,7 +311,7 @@ SEXP type2rstr(SEXPTYPE t) /* returns a STRSXP */
     return R_NilValue; /* for -Wall */
 }
 
-const char *type2char(SEXPTYPE t) /* returns a char* */
+const char *Rf_type2char(SEXPTYPE t) /* returns a char* */
 {
     if (t < MAX_NUM_SEXPTYPE) { /* FIXME: branch not really needed */
 	const char * res = Type2Table[t].cstrName;
@@ -509,7 +509,7 @@ void attribute_hidden Rf_check1arg(SEXP arg, SEXP call, const char *formal)
 }
 
 
-SEXP nthcdr(SEXP s, int n)
+SEXP Rf_nthcdr(SEXP s, int n)
 {
     if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP ) {
 	while( n-- > 0 ) {

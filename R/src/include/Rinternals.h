@@ -399,6 +399,13 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 	else (((x)->sxpinfo.gp) &= ~ASSIGNMENT_PENDING_MASK);	\
     } while (0)
 
+/* The same bit can be used to mark calls used in complex assignments
+   to allow replacement functions to determine when they are being
+   called in an assignment context and can modify an object with one
+   refrence */
+#define MARK_ASSIGNMENT_CALL(call) SET_ASSIGNMENT_PENDING(call, TRUE)
+#define IS_ASSIGNMENT_CALL(call) ASSIGNMENT_PENDING(call)
+
 #ifdef SWITCH_TO_REFCNT
 # undef NAMED
 # undef SET_NAMED
@@ -565,7 +572,7 @@ typedef union {
 
 #define INIT_BNDCELL(cell, type) do {		\
 	if (BNDCELL_TAG(cell) == 0)		\
-	    DECREMENT_REFCNT(CAR0(cell));	\
+	    SETCAR(cell, R_NilValue);		\
 	SET_BNDCELL_TAG(cell, type);		\
 	SET_MISSING(cell, 0);			\
     } while (0)
@@ -720,6 +727,8 @@ void (MARK_NOT_MUTABLE)(SEXP x);
 
 int (ASSIGNMENT_PENDING)(SEXP x);
 void (SET_ASSIGNMENT_PENDING)(SEXP x, int v);
+int (IS_ASSIGNMENT_CALL)(SEXP x);
+void (MARK_ASSIGNMENT_CALL)(SEXP x);
 
 /* S4 object testing */
 int (IS_S4_OBJECT)(SEXP x);
@@ -1709,7 +1718,7 @@ SEXP	 Rf_listAppend(SEXP, SEXP);
 SEXP	 Rf_mkNamed(SEXPTYPE, const char **);
 SEXP	 Rf_mkString(const char *);
 int	 Rf_nlevels(SEXP);
-SEXP	 R_removeVarFromFrame(SEXP, SEXP);
+void	 R_removeVarFromFrame(SEXP, SEXP);
 int	 Rf_stringPositionTr(SEXP, const char *);
 SEXP	 Rf_ScalarComplex(Rcomplex);
 SEXP	 Rf_ScalarInteger(int);

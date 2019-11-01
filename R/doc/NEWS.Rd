@@ -118,6 +118,18 @@
       \item \code{normalizePath()} on Windows now resolves symbolic links
       and normalizes case of long names of path elements in case-insensitive
       folders (\PR{17165}).
+
+      \item The \code{palette()} function has a new default set of
+      colours (which are less saturated and have better accessibility
+      properties).  There are also some new built-in palettes, which
+      are listed by the new \code{palette.pals()} function.  These
+      include the old default palette under the name \code{"R3"}. Finally,
+      the new \code{palette.colors()} function allows a subset of
+      colours to be selected from any of the built-in palettes.
+
+      \item \code{md5sum()} on Windows supports UTF-8 file names with
+      characters that cannot be translated to the native encoding
+      (\PR{17633}).
     }
   }
 
@@ -235,6 +247,18 @@
       and only once.
 
       \item \code{write.dcf()} no longer mangles field names (\PR{17589}).
+
+      \item \code{Sys.glob()} on Windows now supports all characters from
+      the BMP, no longer corrupting (less commonly used) characters
+      (\PR{17638}).
+
+      \item Primitive replacement functions no longer mutate a
+      referenced first argument when used outsinde of a complex
+      assignment context.
+
+      \item Better error message for \code{contour(*, levels=Inf)}.
+
+      \item \code{contourLines()}' value is no longer \code{invisible()}.
     }
   }
 }
@@ -286,7 +310,8 @@
       \item A package with Fortran source code and perhaps C (but not
       C++) sources can request for its shared object/DLL to be linked by
       the Fortran compiler by including a line \code{USE_FC_TO_LINK=} in
-      \file{src/Makevars[.win]}.
+      \file{src/Makevars[.win]} and using \code{$(SHLIB_OPENMP_FFLAGS)}
+      as part of \code{PKG_LIBS}.
 
       The known reason for doing so is a package which uses Fortran
       (only) OpenMP on a platform where the Fortran OpenMP runtime is

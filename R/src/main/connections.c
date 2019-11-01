@@ -495,7 +495,12 @@ int dummy_fgetc(Rconnection con)
     Rboolean checkBOM = FALSE, checkBOM8 = FALSE;
 
     if(con->inconv) {
-	if(con->navail <= 0) {
+	while(con->navail <= 0) {
+	    /* Probably in all cases there will be at most one iteration
+	       of the loop. It could iterate multiple times only if the input
+	       encoding could have \r or \n as a part of a multi-byte coded
+	       character.
+	    */
 	    unsigned int i, inew = 0;
 	    char *p, *ob;
 	    const char *ib;
@@ -520,6 +525,13 @@ int dummy_fgetc(Rconnection con)
 		*p++ = (char) c;
 		con->inavail++;
 		inew++;
+		if(!con->buff && (c == '\n' || c == '\r'))
+		    /* Possibly a line separator: better stop filling in the
+		       encoding conversion buffer if not buffering the input
+		       anyway, as not to confuse interactive applications
+		       (PR17634).
+		    */
+		    break;
 	    }
 	    if(inew == 0) return R_EOF;
 	    if(checkBOM && con->inavail >= 2 &&
@@ -539,6 +551,8 @@ int dummy_fgetc(Rconnection con)
 	    errno = 0;
 	    res = Riconv(con->inconv, &ib, &inb, &ob, &onb);
 	    con->inavail = (short) inb;
+	    con->next = con->oconvbuff;
+	    con->navail = (short)(50 - onb);
 	    if(res == (size_t)-1) { /* an error condition */
 		if(errno == EINVAL || errno == E2BIG) {
 		    /* incomplete input char or no space in output buffer */
@@ -546,11 +560,10 @@ int dummy_fgetc(Rconnection con)
 		} else {/*  EILSEQ invalid input */
 		    warning(_("invalid input found on input connection '%s'"), con->description);
 		    con->inavail = 0;
+		    if (con->navail == 0) return R_EOF;
 		    con->EOF_signalled = TRUE;
 		}
 	    }
-	    con->next = con->oconvbuff;
-	    con->navail = (short)(50 - onb);
 	}
 	con->navail--;
 	/* the cast prevents sign extension of 0xFF to -1 (R_EOF) */

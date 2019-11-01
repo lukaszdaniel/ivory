@@ -1576,7 +1576,7 @@ SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 */
 
 attribute_hidden
-SEXP findFun3(SEXP symbol, SEXP rho, SEXP call)
+SEXP Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 {
     SEXP vl;
 
@@ -1628,7 +1628,7 @@ SEXP findFun3(SEXP symbol, SEXP rho, SEXP call)
     return R_UnboundValue;
 }
 
-SEXP findFun(SEXP symbol, SEXP rho)
+SEXP Rf_findFun(SEXP symbol, SEXP rho)
 {
     return findFun3(symbol, rho, R_CurrentExpression);
 }
@@ -1641,7 +1641,7 @@ SEXP findFun(SEXP symbol, SEXP rho)
 
 */
 
-void defineVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 {
     int hashcode;
     SEXP frame, c;
@@ -1722,7 +1722,7 @@ void defineVar(SEXP symbol, SEXP value, SEXP rho)
 */
 
 attribute_hidden
-void addMissingVarsToNewEnv(SEXP env, SEXP addVars)
+void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (addVars == R_NilValue) return;
 

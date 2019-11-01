@@ -1038,7 +1038,7 @@ const char *translateCharFP2(SEXP x)
     return p;
 }
 
-SEXP installTrChar(SEXP x)
+SEXP Rf_installTrChar(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1071,7 +1071,7 @@ SEXP Rf_installChar(SEXP x)
    Use for writeLines/Bin/Char, the first only with useBytes = TRUE.
 
 */
-const char *translateChar0(SEXP x)
+const char *Rf_translateChar0(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP"), "translateChar0");
@@ -1081,7 +1081,7 @@ const char *translateChar0(SEXP x)
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *translateCharUTF8(SEXP x)
+const char *Rf_translateCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
