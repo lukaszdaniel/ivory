@@ -502,7 +502,7 @@ SEXP attribute_hidden do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 typedef SEXP (*R_ExternalRoutine)(SEXP);
 typedef SEXP (*R_ExternalRoutine2)(SEXP, SEXP, SEXP, SEXP);
 
-static void check_retval(SEXP call, SEXP val)
+static SEXP check_retval(SEXP call, SEXP val)
 {
     static int inited = FALSE;
     static int check = FALSE;
@@ -514,8 +514,16 @@ static void check_retval(SEXP call, SEXP val)
 	    check = TRUE;
     }
 
-    if (check && val < (SEXP) 16)
-	errorcall(call, _("WEIRD RETURN VALUE: %p"), val);
+    if (check) {
+	if (val < (SEXP) 16)
+	    errorcall(call, _("WEIRD RETURN VALUE: %p"), val);
+    }
+    else if (val == NULL) {
+	warningcall(call, _("converting NULL pointer to R NULL"));
+	val = R_NilValue;
+    }
+
+    return val;
 }
     
 SEXP attribute_hidden do_External(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -547,8 +555,7 @@ SEXP attribute_hidden do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 	retval = fun(args);
     }
     vmaxset(vmax);
-    check_retval(call, retval);
-    return retval;
+    return check_retval(call, retval);
 }
 
 #ifdef __cplusplus
@@ -1215,8 +1222,7 @@ SEXP attribute_hidden R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
     default:
 	errorcall(call, _("too many arguments"));
     }
-    check_retval(call, retval);
-    return retval;
+    return check_retval(call, retval);
 }
 
 /* .Call(name, <args>) */
@@ -1323,8 +1329,7 @@ SEXP attribute_hidden do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
 	GErecordGraphicOperation(op, args, dd);
     }
     UNPROTECT(1);
-    check_retval(call, retval);
-    return retval;
+    return check_retval(call, retval);
 }
 
 SEXP attribute_hidden do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -1341,8 +1346,7 @@ SEXP attribute_hidden do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
 	GErecordGraphicOperation(op, args, dd);
     }
     UNPROTECT(1);
-    check_retval(call, retval);
-    return retval;
+    return check_retval(call, retval);
 }
 
 static SEXP
