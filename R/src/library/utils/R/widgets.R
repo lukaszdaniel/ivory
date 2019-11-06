@@ -62,7 +62,7 @@ select.list <-
 	    cat(gettext("Invalid input, please try again", domain = "R-utils"), "\n", sep = "")
 	}
         if(!length(res) || (length(res) == 1L && !res[1L])) return(character())
-        res <- sort(res[1 <= res && res <= nc])
+        res <- sort(res[1 <= res & res <= nc])
         return(choices[res])
     }
 }

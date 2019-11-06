@@ -3143,13 +3143,15 @@ SEXP attribute_hidden promiseArgs(SEXP el, SEXP rho)
 	 * Anything else bound to a ... symbol is an error
 	 */
 
-	/* Is this double promise mechanism really needed? */
+	/* double promises are needed to make sure a function argument
+	   passed via ... is marked as referenced in the caller and
+	   the callee */
 
 	if (CAR(el) == R_DotsSymbol) {
 	    PROTECT(h = findVar(CAR(el), rho));
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
-		    if (TYPEOF(CAR(h)) == PROMSXP || CAR(h) == R_MissingArg)
+		    if (CAR(h) == R_MissingArg)
 		      SETCDR(tail, CONS(CAR(h), R_NilValue));
                     else
 		      SETCDR(tail, CONS(mkPROMISE(CAR(h), rho), R_NilValue));
@@ -6989,7 +6991,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	      SEXP val;
 	      if (ftype == BUILTINSXP)
 	        val = eval(CAR(h), rho);
-	      else if (TYPEOF(CAR(h)) == PROMSXP || CAR(h) == R_MissingArg)
+	      else if (CAR(h) == R_MissingArg)
 	        val = CAR(h);
 	      else
 	        val = mkPROMISE(CAR(h), rho);
@@ -7449,7 +7451,9 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	  break;
 	case CLOSXP:
 	  /* push evaluated promise for RHS onto arguments with 'value' tag */
-	  prom = mkRHSPROMISE(vexpr, rhs);
+	  /* This need to use a standard EVPROMISE so the reference
+	     from the environment to the RHS value is counted. */
+	  prom = R_mkEVPROMISE(vexpr, rhs);
 	  PUSHCALLARG(prom);
 	  SETCALLARG_TAG_SYMBOL(R_valueSym);
 	  /* replace first argument with evaluated promise for LHS */

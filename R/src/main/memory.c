@@ -116,7 +116,7 @@ static int gc_count = 0;
 /* Report error encountered during garbage collection where for detecting
    problems it is better to abort, but for debugging (or some production runs,
    where external validation of results is possible) it may be preferred to
-   continue. Configurable via R_GC_FAIL_ON_ERROR.
+   continue. Configurable via _R_GC_FAIL_ON_ERROR_.
 */
 static Rboolean gc_fail_on_error = FALSE;
 static void gc_error(const char *msg)
@@ -2137,7 +2137,7 @@ void attribute_hidden InitMemory()
     init_gctorture();
     init_gc_grow_settings();
 
-    arg = getenv("R_GC_FAIL_ON_ERROR");
+    arg = getenv("_R_GC_FAIL_ON_ERROR_");
     if (arg != NULL && StringTrue(arg))
 	gc_fail_on_error = TRUE;
     else if (arg != NULL && StringFalse(arg))
@@ -2650,7 +2650,6 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    SET_TYPEOF(s, type);
 	    SET_STDVEC_LENGTH(s, (R_len_t) length); // is 1
 	    SET_STDVEC_TRUELENGTH(s, 0);
-	    SET_NAMED(s, 0);
 	    INIT_REFCNT(s);
 	    return(s);
 	}
@@ -2859,7 +2858,6 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
     }
     SETALTREP(s, 0);
     SET_STDVEC_TRUELENGTH(s, 0);
-    SET_NAMED(s, 0);
     INIT_REFCNT(s);
 
     /* The following prevents disaster in the case */
@@ -3716,7 +3714,12 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
 }
 void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
 void (SET_TYPEOF)(SEXP x, int v) { SET_TYPEOF(CHK(x), v); }
-void (SET_NAMED)(SEXP x, int v) { SET_NAMED(CHK(x), v); }
+void (SET_NAMED)(SEXP x, int v)
+{
+#ifndef SWITCH_TO_REFCNT
+    SET_NAMED(CHK(x), v);
+#endif
+}
 void (SET_RTRACE)(SEXP x, int v) { SET_RTRACE(CHK(x), v); }
 int (SETLEVELS)(SEXP x, int v) { return SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
