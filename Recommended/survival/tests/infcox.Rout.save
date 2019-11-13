@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -37,7 +37,7 @@ Type 'q()' to quit R.
 > #  on different machines
 > fit3 <- coxph(Surv(futime, fustat) ~ x1 + x2, test3, iter=25)
 Warning message:
-In command 'fitter(X, Y, strats, offset, init, control, weights = weights, method = method, row.names(mf))':
+In command 'fitter(X, Y, istrat, offset, init, control, weights = weights, method = method, row.names(mf))':
   Loglik converged before variable  1,2 ; coefficient may be infinite. 
 > 
 > all(fit3$coef < -22)
@@ -66,4 +66,4 @@ In command 'fitter(X, Y, strats, offset, init, control, weights = weights, metho
 > 
 > proc.time()
    user  system elapsed 
-  0.847   0.063   0.901 
+  0.756   0.047   0.796 

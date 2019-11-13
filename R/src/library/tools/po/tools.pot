@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 21:30+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: Rmd5.c:37
+#: Rmd5.c:47
 #, c-format
 msgid "'%s' argument must be character"
 msgstr ""
 
-#: Rmd5.c:51
+#: Rmd5.c:63
+#, c-format
+msgid "md5 failed on file '%ls'"
+msgstr ""
+
+#: Rmd5.c:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr ""

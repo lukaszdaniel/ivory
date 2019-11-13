@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:49+0100\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -100,44 +100,44 @@ msgstr ""
 msgid "invalid '%s' value"
 msgstr "무효의 문자열 인수입니다"
 
-#: colors.c:1343
+#: colors.c:1338
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr ""
 
-#: colors.c:1353 colors.c:1363
+#: colors.c:1348 colors.c:1358
 #, fuzzy
 msgid "invalid RGB specification"
 msgstr "무효의 font 명세입니다"
 
-#: colors.c:1396
+#: colors.c:1391
 #, fuzzy, c-format
 msgid "invalid color name '%s'"
 msgstr "무효의 문자열 인수입니다"
 
-#: colors.c:1446 colors.c:1455
+#: colors.c:1441 colors.c:1450
 #, fuzzy, c-format
 msgid "invalid color specification \"%s\""
 msgstr "무효의 font 명세입니다"
 
-#: colors.c:1483
+#: colors.c:1478
 msgid "supplied color is neither numeric nor character"
 msgstr ""
 
-#: colors.c:1487
+#: colors.c:1482
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr ""
 
-#: colors.c:1498
+#: colors.c:1493
 #, fuzzy
 msgid "invalid argument type"
 msgstr "무효의 문자열 인수입니다"
 
-#: colors.c:1509
+#: colors.c:1504
 msgid "unknown palette (need >= 2 colors)"
 msgstr ""
 
-#: colors.c:1513 colors.c:1535
+#: colors.c:1508 colors.c:1530
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr ""

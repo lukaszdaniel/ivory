@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1528,12 +1528,18 @@ msgstr ""
 msgid "Failed to get error in evaluating %s"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("Failed to locate the %s output file (by engine %s) for vignette with name %s. The following files exists in directory %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     sQuote(dir), paste(sQuote(output0), collapse = ", "))
-#. R/Vignettes.R: gettextf("Failed to locate the %s output file (by engine %s) for vignette with name %s. The following files exists in directory %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     sQuote(dir), paste(sQuote(output0), collapse = ", "))
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)), paste(sprintf("%s (%g bytes)",         sQuote(output0), file.size(output0)), collapse = ", "), domain = "R-tools")
 #: R/Vignettes.R:0
 msgid ""
-"Failed to locate the %s output file (by engine %s) for vignette with name "
-"%s. The following files exists in directory %s: %s"
+"Failed to locate %s output file %s for vignette with name %s and engine %s. "
+"The following files exist in working directory %s: %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(paste0(name, ".html")), sQuote(name),     sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(normalizePath(dir)),     paste(sprintf("%s (%g bytes)", sQuote(output0), file.size(output0)), collapse = ", "),     domain = "R-tools")
+#: R/Vignettes.R:0
+msgid ""
+"Failed to locate %s output file %s or %s for vignette with name %s and "
+"engine %s. The following files exist in working directory %s: %s"
 msgstr ""
 
 #. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
@@ -2121,18 +2127,12 @@ msgstr ""
 msgid "Loading this package had a fatal error status code %s"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sQuote(output), collapse = ", "))
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sprintf("%s (%g bytes)", sQuote(output), file.size(output)), collapse = ", "),     domain = "R-tools")
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sprintf("%s (%g bytes)", sQuote(output), file.size(output)), collapse = ", "),     domain = "R-tools")
 #: R/Vignettes.R:0
 msgid ""
 "Located more than one %s output file (by engine %s) for vignette with name "
 "%s: %s"
-msgstr ""
-
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sQuote(output), collapse = ", "))
-#: R/Vignettes.R:0
-msgid ""
-"Located more than one %s output file (by engine %s) for vignette with name: "
-"%s"
 msgstr ""
 
 #. R/check.R: gettextf("Looks like %s is a package bundle -- they are defunct", sQuote(pkgname0),     domain = "R-tools")

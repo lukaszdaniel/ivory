@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:49+0100\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -211,7 +211,7 @@ msgstr "specificazione di '%s' non valida"
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
 #: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1897
+#: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
@@ -264,7 +264,7 @@ msgstr "tipo non valido per le etichette dell'asse"
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1866
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
 msgid "too few arguments"
 msgstr "argomenti insufficienti"
 
@@ -489,15 +489,15 @@ msgstr "lunghezza sbagliata dell'argomento 'mode'"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "impossibile allocare memoria (in xspline)"
 
-#: plot3d.c:182 plot3d.c:1923
+#: plot3d.c:182 plot3d.c:1930
 msgid "insufficient 'x' or 'y' values"
 msgstr "valori di 'x' o 'y' insufficienti"
 
-#: plot3d.c:186 plot3d.c:1926
+#: plot3d.c:186 plot3d.c:1933
 msgid "dimension mismatch"
 msgstr "dimensione non compatibile"
 
-#: plot3d.c:194 plot3d.c:1929
+#: plot3d.c:194
 msgid "no contour values"
 msgstr "nessun valore di contour"
 
@@ -531,31 +531,36 @@ msgstr "'xlab' deve essere un vettore character di lunghezza 1"
 msgid "invalid viewing parameters"
 msgstr "paremetri visuale non validi"
 
-#: plot3d.c:1522
+#: plot3d.c:1527
 #, fuzzy, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): seglist circolare/lunga -- segnalare con bug.report()!"
 
-#: plot3d.c:1933 plot3d.c:1940
+#: plot3d.c:1936
+msgid "no 'levels'"
+msgstr ""
+
+#: plot3d.c:1940 plot3d.c:1947
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "valore 'x' mancante"
 
-#: plot3d.c:1935 plot3d.c:1942
+#: plot3d.c:1942 plot3d.c:1949
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "necessari valori di 'x' crescenti"
 
-#: plot3d.c:1947
-msgid "invalid NA contour values"
-msgstr "valori di contour NA non validi"
+#: plot3d.c:1954
+#, c-format
+msgid "non-finite level values: levels[%d] = %g"
+msgstr ""
 
-#: plot3d.c:1959
+#: plot3d.c:1967
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "tutti i valori di z sono uguali"
 
-#: plot3d.c:1961
+#: plot3d.c:1969
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "tutti i valori di z sono NA"
@@ -601,6 +606,9 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "invalid NA contour values"
+#~ msgstr "valori di contour NA non validi"
 
 #, fuzzy
 #~ msgid "'%s' argument must be of length one"

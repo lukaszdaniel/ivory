@@ -17,13 +17,19 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         warning(gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s", tmp_n))
 	}
     dotargs <- dotargs[!named]
+    
+    single <- (inherits(object, "coxph") || inherits(object, "coxme"))
+    if (length(dotargs) >0  || !single) {
+        # there are multiple arguments, either the object itself is a list
+        #  of models, or there were multiple arguments.
+        # paste them all together into a single list
+        if (single) object <- list(object)
+        if (length(dotargs)>0) object <- c(object, dotargs)
 
-    if (length(dotargs) >0) {
-        # Check that they are all cox or coxme models
-        is.coxmodel <-unlist(lapply(dotargs, function(x) inherits(x, "coxph")))
-        is.coxme <- unlist(lapply(dotargs, function(x) inherits(x, "coxme")))
-        if (!all(is.coxmodel | is.coxme))
-            stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
+        # coxme and coxphms models get sent elsewhere
+        is.coxme <-  sapply(object, function(x) inherits(x, "coxme"))
+        is.multi <-  sapply(object, function(x) inherits(x, "coxphms"))
+        if (any(is.multi)) return(anova.coxphms(object, test=test))
         
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme
@@ -31,9 +37,9 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
             temp <- getS3method("anova", "coxmelist", optional=TRUE)
             if (is.null(temp)) 
                 stop("a 'coxme' model was found and library 'coxme' is not loaded")
-            else return(temp(c(list(object), dotargs), test = test))
+            else return(temp(object, test = test))
         }
-        else return(anova.coxphlist(c(list(object), dotargs), test = test))
+        else return(anova.coxphlist(object, test = test))
     }
 
     #
@@ -42,10 +48,13 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
     # By tradition the sequence is main effects (in the order found in
     #  the model statement), then 2 way interactions, then 3, etc.
     #  One does this by using the "assign" attribute of the model matrix.
-    #  (This does not work for penalized terms.
+    #  (This does not work for penalized terms.)
+    # Remember to propogate any the method argument
+    mtie <- object$method
+    if (inherits(object, "coxphms")) return(anova.coxphms(object, test=test))
     if (length(object$rscore)>0)
         stop("cannot do anova tables with robust variances")
- 
+    
     has.strata <- !is.null(attr(terms(object), "specials")$strata)
     if (is.null(object[['y']]) || (has.strata && is.null(object$strata))) {
         # We need the model frame
@@ -82,14 +91,15 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         if (length(object$offset)) {
             if (has.strata) 
                 tfit <- coxph(Y ~ X[,assign <= alevels[i]] + strata(strats) +
-                              offset(object$offset))
+                              offset(object$offset), ties=mtie)
             else tfit <- coxph(Y ~ X[, assign<= alevels[i]] +
-                               offet(object$offset))
+                               offet(object$offset), ties=mtie)
         }
         else {
             if (has.strata) 
-                tfit <- coxph(Y ~ X[,assign <= alevels[i]] + strata(strats))
-            else tfit <- coxph(Y ~ X[,assign <= alevels[i]])
+                tfit <- coxph(Y ~ X[,assign <= alevels[i]] + strata(strats),
+                              ties=mtie)
+            else tfit <- coxph(Y ~ X[,assign <= alevels[i]], ties=mtie)
         }
         df[i+1] <- sum(!is.na(tfit$coefficients))
         loglik[i+1] <- tfit$loglik[2]
@@ -112,4 +122,8 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival"), "\n", 
 		   gettext("Terms added sequentially (first to last)"), "\n", sep = "")
     structure(table, heading = title, class = c("anova", "data.frame"))
+}
+
+anova.coxphms <- function(object, ..., test="chisq") {
+    stop("anova method not yet available for multi-state coxph fits")
 }

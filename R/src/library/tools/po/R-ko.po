@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1646,13 +1646,22 @@ msgstr "%2$s를 평가로부터 %1$s를 얻는데 실패했습니다"
 msgid "Failed to get error in evaluating %s"
 msgstr "%s 평가로부터 에러를 얻는데 실패했습니다"
 
-#. R/Vignettes.R: gettextf("Failed to locate the %s output file (by engine %s) for vignette with name %s. The following files exists in directory %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     sQuote(dir), paste(sQuote(output0), collapse = ", "))
-#. R/Vignettes.R: gettextf("Failed to locate the %s output file (by engine %s) for vignette with name %s. The following files exists in directory %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     sQuote(dir), paste(sQuote(output0), collapse = ", "))
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)), paste(sprintf("%s (%g bytes)",         sQuote(output0), file.size(output0)), collapse = ", "), domain = "R-tools")
 #: R/Vignettes.R:0
 #, fuzzy
 msgid ""
-"Failed to locate the %s output file (by engine %s) for vignette with name "
-"%s. The following files exists in directory %s: %s"
+"Failed to locate %s output file %s for vignette with name %s and engine %s. "
+"The following files exist in working directory %s: %s"
+msgstr ""
+"%3$s 이름을 가진 비니에트에 대해서 %1$s 출력파일 (엔진 %2$s에 의해서)을 위치"
+"시키는데 실패했습니다. 디렉토리 %4$s내에 다음과 같은 파일들이 있습니다: %5$s"
+
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(paste0(name, ".html")), sQuote(name),     sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(normalizePath(dir)),     paste(sprintf("%s (%g bytes)", sQuote(output0), file.size(output0)), collapse = ", "),     domain = "R-tools")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid ""
+"Failed to locate %s output file %s or %s for vignette with name %s and "
+"engine %s. The following files exist in working directory %s: %s"
 msgstr ""
 "%3$s 이름을 가진 비니에트에 대해서 %1$s 출력파일 (엔진 %2$s에 의해서)을 위치"
 "시키는데 실패했습니다. 디렉토리 %4$s내에 다음과 같은 파일들이 있습니다: %5$s"
@@ -2265,21 +2274,12 @@ msgstr ""
 msgid "Loading this package had a fatal error status code %s"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sQuote(output), collapse = ", "))
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sprintf("%s (%g bytes)", sQuote(output), file.size(output)), collapse = ", "),     domain = "R-tools")
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sprintf("%s (%g bytes)", sQuote(output), file.size(output)), collapse = ", "),     domain = "R-tools")
 #: R/Vignettes.R:0
 msgid ""
 "Located more than one %s output file (by engine %s) for vignette with name "
 "%s: %s"
-msgstr ""
-"이름 %3$s을 가진 비니에트에 대해서 다음과 같은 한 개이상의 %1$s 출력파일 (엔"
-"진 %2$s에 의하여)들이 놓여졌습니다: %4$s"
-
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)), sQuote(name),     paste(sQuote(output), collapse = ", "))
-#: R/Vignettes.R:0
-#, fuzzy
-msgid ""
-"Located more than one %s output file (by engine %s) for vignette with name: "
-"%s"
 msgstr ""
 "이름 %3$s을 가진 비니에트에 대해서 다음과 같은 한 개이상의 %1$s 출력파일 (엔"
 "진 %2$s에 의하여)들이 놓여졌습니다: %4$s"
@@ -7816,6 +7816,14 @@ msgstr[0] ""
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid ""
+#~ "Located more than one %s output file (by engine %s) for vignette with "
+#~ "name: %s"
+#~ msgstr ""
+#~ "이름 %3$s을 가진 비니에트에 대해서 다음과 같은 한 개이상의 %1$s 출력파일 "
+#~ "(엔진 %2$s에 의하여)들이 놓여졌습니다: %4$s"
 
 #, fuzzy
 #~ msgid "directly."

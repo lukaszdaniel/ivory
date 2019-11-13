@@ -197,21 +197,22 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/fr_lung.Rout		../../$RECIVORY/survival/tests/fr_lung.Rout.save`
 `$cmd	survival.Rcheck/tests/fr_ovarian.Rout		../../$RECIVORY/survival/tests/fr_ovarian.Rout.save`
 `$cmd	survival.Rcheck/tests/fr_rat1.Rout		../../$RECIVORY/survival/tests/fr_rat1.Rout.save`
-`$cmd	survival.Rcheck/tests/fr_rat2.Rout		../../$RECIVORY/survival/tests/fr_rat2.Rout.save`
 `$cmd	survival.Rcheck/tests/fr_resid.Rout		../../$RECIVORY/survival/tests/fr_resid.Rout.save`
 `$cmd	survival.Rcheck/tests/fr_simple.Rout		../../$RECIVORY/survival/tests/fr_simple.Rout.save`
 `$cmd	survival.Rcheck/tests/infcox.Rout		../../$RECIVORY/survival/tests/infcox.Rout.save`
 `$cmd	survival.Rcheck/tests/jasa.Rout			../../$RECIVORY/survival/tests/jasa.Rout.save`
 `$cmd	survival.Rcheck/tests/model.matrix.Rout		../../$RECIVORY/survival/tests/model.matrix.Rout.save`
-`$cmd	survival.Rcheck/tests/mstate.Rout		../../$RECIVORY/survival/tests/mstate.save`
+`$cmd	survival.Rcheck/tests/mstate.Rout		../../$RECIVORY/survival/tests/mstate.Rout.save`
+`$cmd	survival.Rcheck/tests/multi2.Rout		../../$RECIVORY/survival/tests/multi2.Rout.save`
+`$cmd	survival.Rcheck/tests/multistate.Rout		../../$RECIVORY/survival/tests/multistate.Rout.save`
 `$cmd	survival.Rcheck/tests/nested.Rout		../../$RECIVORY/survival/tests/nested.Rout.save`
 `$cmd	survival.Rcheck/tests/ovarian.Rout		../../$RECIVORY/survival/tests/ovarian.Rout.save`
+`$cmd	survival.Rcheck/tests/overlap.Rout		../../$RECIVORY/survival/tests/overlap.Rout.save`
 `$cmd	survival.Rcheck/tests/prednew.Rout		../../$RECIVORY/survival/tests/prednew.Rout.save`
 `$cmd	survival.Rcheck/tests/pspline.Rout		../../$RECIVORY/survival/tests/pspline.Rout.save`
 `$cmd	survival.Rcheck/tests/pyear.Rout		../../$RECIVORY/survival/tests/pyear.Rout.save`
 `$cmd	survival.Rcheck/tests/quantile.Rout		../../$RECIVORY/survival/tests/quantile.Rout.save`
 `$cmd	survival.Rcheck/tests/ratetable.Rout		../../$RECIVORY/survival/tests/ratetable.Rout.save`
-#`$cmd	survival.Rcheck/tests/r_capacitor.Rout		../../$RECIVORY/survival/tests/r_capacitor.Rout.save`
 `$cmd	survival.Rcheck/tests/r_donnell.Rout		../../$RECIVORY/survival/tests/r_donnell.Rout.save`
 `$cmd	survival.Rcheck/tests/r_lung.Rout		../../$RECIVORY/survival/tests/r_lung.Rout.save`
 `$cmd	survival.Rcheck/tests/r_peterson.Rout		../../$RECIVORY/survival/tests/r_peterson.Rout.save`
@@ -225,6 +226,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/singtest.Rout		../../$RECIVORY/survival/tests/singtest.Rout.save`
 `$cmd	survival.Rcheck/tests/strata2.Rout		../../$RECIVORY/survival/tests/strata2.Rout.save`
 `$cmd	survival.Rcheck/tests/stratatest.Rout		../../$RECIVORY/survival/tests/stratatest.Rout.save`
+`$cmd	survival.Rcheck/tests/summary_survfit.Rout	../../$RECIVORY/survival/tests/summary_survfit.Rout.save`
 `$cmd	survival.Rcheck/tests/summary_survfit.Rout	../../$RECIVORY/survival/tests/summary_survfit.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit1.Rout		../../$RECIVORY/survival/tests/survfit1.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit2.Rout		../../$RECIVORY/survival/tests/survfit2.Rout.save`
@@ -242,8 +244,8 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/tmerge.Rout		../../$RECIVORY/survival/tests/tmerge.Rout.save`
 `$cmd	survival.Rcheck/tests/tt.Rout			../../$RECIVORY/survival/tests/tt.Rout.save`
 `$cmd	survival.Rcheck/tests/turnbull.Rout		../../$RECIVORY/survival/tests/turnbull.Rout.save`
+`$cmd	survival.Rcheck/tests/update.Rout		../../$RECIVORY/survival/tests/update.Rout.save`
 `$cmd	survival.Rcheck/tests/yates0.Rout		../../$RECIVORY/survival/tests/yates0.Rout.save`
 `$cmd	survival.Rcheck/tests/yates1.Rout		../../$RECIVORY/survival/tests/yates1.Rout.save`
-#`$cmd	survival.Rcheck/tests/rounding.Rout		../../$RECIVORY/survival/tests/rounding.Rout.save`
-#`$cmd	survival.Rcheck/tests/mrtest.Rout		../../$RECIVORY/survival/tests/mrtest.Rout.save`
+`$cmd	survival.Rcheck/tests/zph.Rout			../../$RECIVORY/survival/tests/zph.Rout.save`
 fi;

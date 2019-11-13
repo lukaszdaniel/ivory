@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -71,6 +71,8 @@ In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), ty
 [1] TRUE
 > 
 > # Verify sorting and order routines
+> #  These fail in 3.4, succeed in 3.5 due to a system change in how
+> #  xtfrm.Surv is used.  
 > x1 <- Surv(c(4, 6, 3, 2, 1, NA, 2), c(1,0, NA, 0,1,1,1))
 > all.equal(order(x1), c(5,7, 4, 1, 2, 3, 6))
 [1] TRUE
@@ -95,4 +97,4 @@ In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), ty
 > 
 > proc.time()
    user  system elapsed 
-  0.892   0.057   0.941 
+  0.802   0.048   0.852 

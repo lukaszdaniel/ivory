@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:49+0100\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2018-09-30 18:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -193,7 +193,7 @@ msgstr "niepoprawne określenie '%s'"
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
 #: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1897
+#: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -245,7 +245,7 @@ msgstr "niepoprawny typ dla etykiet osi"
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1866
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
 msgid "too few arguments"
 msgstr "zbyt mało argumentów"
 
@@ -464,15 +464,15 @@ msgstr "niepoprawna długość dla argumentu '%s'"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "nie można przydzielić pamięci (w 'xspline()')"
 
-#: plot3d.c:182 plot3d.c:1923
+#: plot3d.c:182 plot3d.c:1930
 msgid "insufficient 'x' or 'y' values"
 msgstr "niewystarczające wartości 'x' lub 'y'"
 
-#: plot3d.c:186 plot3d.c:1926
+#: plot3d.c:186 plot3d.c:1933
 msgid "dimension mismatch"
 msgstr "niezgodność wymiaru"
 
-#: plot3d.c:194 plot3d.c:1929
+#: plot3d.c:194
 msgid "no contour values"
 msgstr "brak wartości konturu"
 
@@ -506,30 +506,35 @@ msgstr "argument '%s' musi być wektorem tekstowym o długości 1"
 msgid "invalid viewing parameters"
 msgstr "niepoprawne parametry podglądu"
 
-#: plot3d.c:1522
+#: plot3d.c:1527
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "'contour()': kołowa/długa lista segmentów -- ustawić %s > %d?"
 
-#: plot3d.c:1933 plot3d.c:1940
+#: plot3d.c:1936
+msgid "no 'levels'"
+msgstr ""
+
+#: plot3d.c:1940 plot3d.c:1947
 #, c-format
 msgid "missing '%s' values"
 msgstr "brakuje wartości '%s'"
 
-#: plot3d.c:1935 plot3d.c:1942
+#: plot3d.c:1942 plot3d.c:1949
 #, c-format
 msgid "increasing '%s' values expected"
 msgstr "oczekiwano rosnących wartości '%s'"
 
-#: plot3d.c:1947
-msgid "invalid NA contour values"
-msgstr "niepoprawne wartości NA konturu"
+#: plot3d.c:1954
+#, c-format
+msgid "non-finite level values: levels[%d] = %g"
+msgstr ""
 
-#: plot3d.c:1959
+#: plot3d.c:1967
 msgid "all 'z' values are equal"
 msgstr "wszystkie wartości 'z' są równe"
 
-#: plot3d.c:1961
+#: plot3d.c:1969
 msgid "all 'z' values are NA"
 msgstr "wszystkie wartości 'z' to NA"
 
@@ -589,6 +594,9 @@ msgstr "długi wektor '%s' nie jest wspierany"
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr "zliczenia dla przedziałów przekraczają INT_MAX"
+
+#~ msgid "invalid NA contour values"
+#~ msgstr "niepoprawne wartości NA konturu"
 
 #~ msgid "'%s' argument must be of length one"
 #~ msgstr "argument '%s' musi mieć długość 1"

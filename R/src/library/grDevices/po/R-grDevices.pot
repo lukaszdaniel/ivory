@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,13 @@ msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr ""
 
 
+#: R/colorstuff.R: 0
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+
+msgid "'n' set to %s, the maximum available for %s palette"
+msgstr ""
+
+
 #: R/device.R: 0
 #. R/device.R: stop("'name' must be a character vector")
 
@@ -152,14 +159,18 @@ msgid "'nbin' argument must be numeric of length 1 or 2"
 msgstr ""
 
 
+#: R/colorstuff.R: 0
 #: R/hcl.colors.R: 0
+#. R/colorstuff.R: stop("'palette' does not match any given palette")
 #. R/hcl.colors.R: stop("'palette' does not match any given palette")
 
 msgid "'palette' does not match any given palette"
 msgstr ""
 
 
+#: R/colorstuff.R: 0
 #: R/hcl.colors.R: 0
+#. R/colorstuff.R: stop("'palette' is ambiguous")
 #. R/hcl.colors.R: stop("'palette' is ambiguous")
 
 msgid "'palette' is ambiguous"

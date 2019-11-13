@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -19,12 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: Rmd5.c:37
+#: Rmd5.c:47
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr " 引数 'files' は文字型でなければなりません "
 
-#: Rmd5.c:51
+#: Rmd5.c:63
+#, fuzzy, c-format
+msgid "md5 failed on file '%ls'"
+msgstr " md5 はファイル '%s' で失敗しました "
+
+#: Rmd5.c:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr " md5 はファイル '%s' で失敗しました "

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -33,17 +33,6 @@ Type 'q()' to quit R.
 > 
 > rfit <- coxph(Surv(time,status) ~ rx + frailty(litter), rats,
 + 	     method='breslow', subset= (sex=='f'))
-> names(rfit)
- [1] "coefficients"      "var"               "var2"             
- [4] "loglik"            "iter"              "linear.predictors"
- [7] "residuals"         "means"             "method"           
-[10] "frail"             "fvar"              "df"               
-[13] "df2"               "penalty"           "pterms"           
-[16] "assign2"           "history"           "coxlist1"         
-[19] "printfun"          "n"                 "nevent"           
-[22] "terms"             "assign"            "wald.test"        
-[25] "concordance"       "y"                 "formula"          
-[28] "call"             
 > rfit
 Call:
 coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, subset = (sex == 
@@ -121,4 +110,4 @@ n=150, number of events=40
 > 
 > proc.time()
    user  system elapsed 
-  0.881   0.058   0.927 
+  0.741   0.043   0.779 

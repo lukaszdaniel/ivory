@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 21:30+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,23 +25,28 @@ msgstr ""
 msgid "tcl error.\n"
 msgstr ""
 
-#: tcltk.c:199 tcltk.c:746
+#: tcltk.c:199 tcltk.c:273 tcltk.c:290 tcltk.c:310 tcltk.c:330 tcltk.c:405
+#: tcltk.c:470 tcltk.c:524 tcltk.c:763
 msgid "invalid argument"
 msgstr ""
 
-#: tcltk.c:303 tcltk.c:321 tcltk.c:394 tcltk.c:457 tcltk.c:509
+#: tcltk.c:280
+msgid "no such variable"
+msgstr ""
+
+#: tcltk.c:312 tcltk.c:332 tcltk.c:407 tcltk.c:472 tcltk.c:526
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr ""
 
-#: tcltk.c:619
+#: tcltk.c:636
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr ""
 
-#: tcltk.c:652
+#: tcltk.c:669
 msgid "argument is not of correct type"
 msgstr ""
 
-#: tcltk.c:704
+#: tcltk.c:721
 msgid "no DISPLAY variable so Tk is not available"
 msgstr ""
 

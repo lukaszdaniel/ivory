@@ -28,8 +28,11 @@ summary.ratetable <- function(object, ...) {
                 cat("\t", gettextf("%s has levels of: %s", dimid[i], paste(att$dimnames[[i]], collapse = ' '), domain = "R-survival"), "\n", sep = '')
                 }
             else if (att$type[i]>2) { #date
-                if (is.numeric(att$cutpoints[[i]])) #old, numeric
+                if (is.numeric(att$cutpoints[[i]])) { #old, numeric
+                    # This format is > 5 years out of date
+                    #  but some user might keep an old rate table around
                     cat("\t", gettextf("%s ranges from %s to %s; with %d categories", dimid[i], format(as.Date(min(att$cutpoints[[i]]), origin='1960/01/01')), format(as.Date(max(att$cutpoints[[i]]), origin='1960/01/01')), att$dim[i], domain = "R-survival"), "\n", sep='')
+                    }
                 else # newer, Date
                     cat("\t", dimid[i], " ranges from " , 
                         format(min(att$cutpoints[[i]])), " to ", 

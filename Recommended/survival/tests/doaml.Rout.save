@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -122,7 +122,7 @@ aml$x=Nonmaintained 12       11     7.31      1.86       3.4
 > #
 > #  First, equal case weights- shouldn't change the survival, but will
 > #    halve the variance
-> temp2 <-survfit(Surv(aml$time, aml$status)~1, type='kaplan', weight=rep(2,23))
+> temp2 <-survfit(Surv(aml$time, aml$status)~1, weight=rep(2,23))
 > temp  <-survfit(Surv(time, status)~1, aml)
 > aeq(temp$surv, temp2$surv)
 [1] TRUE
@@ -131,12 +131,12 @@ aml$x=Nonmaintained 12       11     7.31      1.86       3.4
 > 
 > # Risk weights-- use a null Cox model
 > tfit <- coxph(Surv(aml$time, aml$status) ~ offset(log(1:23)))
-> sfit <- survfit(tfit, type='aalen', censor=FALSE)
+> sfit <- survfit(tfit, stype=2, ctype=1, censor=FALSE)
 > 
 > # Now compute it by hand.  The survfit program will produce a curve
-> #   corresponding to the mean offset.  This is a change on 7/2010,
-> #   which caused S(new) = S(old)^exp(mean(log(1:23))).
-> #  Ties are a nuisance
+> #   corresponding to the mean offset.
+> #  Ties are a nuisance, the line above forced the Nelson rather than Efron 
+> # to make it easier
 > rscore <- exp(log(1:23) - mean(log(1:23)))[order(aml$time)]
 > atime <- sort(aml$time)
 > denom <- rev(cumsum(rev(rscore)))
@@ -144,9 +144,6 @@ aml$x=Nonmaintained 12       11     7.31      1.86       3.4
 > deaths <- tapply(aml$status, aml$time, sum)
 > chaz <- cumsum(deaths/denom)
 > all.equal(sfit$surv, as.vector(exp(-chaz[deaths>0])))
-[1] TRUE
-> cvar <- cumsum(deaths/denom^2)
-> all.equal(sfit$std^2, as.vector(cvar[deaths>0]))
 [1] TRUE
 > 
 > # And the Efron result
@@ -186,8 +183,6 @@ n= 23, number of events= 18
 [1] TRUE
 > 
 > 
-> rm(x1, x2, atime, denom, deaths, chaz,cvar, tfit, sfit, temp, temp2, fit)
-> 
 > proc.time()
    user  system elapsed 
-  0.935   0.039   0.966 
+  0.772   0.068   0.834 

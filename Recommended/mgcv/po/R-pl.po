@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:35\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2018-07-19 20:25+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -101,11 +101,6 @@ msgstr "człony \"fs\" nie mogą być poprawione tutaj"
 msgid "%s has insufficient unique values to support %d knots: reduce k"
 msgstr ""
 "%s ma niewystarczające unikalne wartości aby wspierać %d węzłów: zredukuj 'k'"
-
-#. R/mgcv.r: gettextf("%s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
-#: R/mgcv.r:0
-msgid "%s not in original fit"
-msgstr "%s nie ma w oryginalnym dopasowaniu"
 
 #. R/mgcv.r: gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -289,11 +284,6 @@ msgstr "'by=.' nie jest dozwolone"
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
 msgstr ""
 "'d' nie może być ujemne w wywołaniu przekazywanym do 'null.space.dimension()'"
-
-#. R/bam.r: warning("'exclude' argument ignored by discrete prediction at present")
-#: R/bam.r:0
-msgid "'exclude' argument ignored by discrete prediction at present"
-msgstr ""
 
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
@@ -527,6 +517,11 @@ msgstr "Przybliżona istotność członów wygładzania:"
 msgid "At least three knots required in call passed to 'mono.con()'"
 msgstr ""
 "Co najmniej trzy węzły są wymagane w wywołaniu przekazywanym do 'mono.con()'"
+
+#. R/misc.r: gettextf("BLAS thread safety problem at iteration %d", i, domain = "R-mgcv")
+#: R/misc.r:0
+msgid "BLAS thread safety problem at iteration %d"
+msgstr ""
 
 #. R/plots.r: gettext("Basis dimension (k) checking results. Low p-value (k-index<1) may\nindicate that k is too low, especially if edf is close to k.",     domain = "R-mgcv")
 #: R/plots.r:0
@@ -976,6 +971,12 @@ msgstr "Nie dostarczono danych do funkcji '%s'"
 #: R/gam.fit3.r:0 R/mgcv.r:0
 msgid "No observations informative at iteration %d"
 msgstr "Brak informacyjnych obserwacji w iteracji %d"
+
+#. R/misc.r: gettextf("No problem encountered in %d iterations", i, domain = "R-mgcv")
+#: R/misc.r:0
+#, fuzzy
+msgid "No problem encountered in %d iterations"
+msgstr "brak zbieżności w 200 iteracjach"
 
 #. R/smooth.r: stop("No suitable s (i.e. m[2]) try increasing m[1]")
 #: R/smooth.r:0
@@ -1565,6 +1566,12 @@ msgstr ""
 "komponenty węzłów odwołujące się do pojedynczego wygładzenia muszą być tej "
 "samej długości"
 
+#. R/gam.fit4.r: gettextf("cor d2b[%d] = %s", i, cor(b$b2[, i], fd.br2[, i]), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+#, fuzzy
+msgid "cor d2b[%d] = %s"
+msgstr "korelacja db/drho[%d] = %s"
+
 #. R/gam.fit4.r: gettextf("cor dH/drho[%d] = %s", i, cor(as.numeric(b$dH[[i]]), as.numeric(fd.dH[[i]])),     domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "cor dH/drho[%d] = %s"
@@ -1637,6 +1644,11 @@ msgstr "nie bądź niemądry"
 msgid "done!"
 msgstr "wykonano!"
 
+#. R/soap.r: warning("dropping soap knots not inside boundary - use 'in.out' to investigate.")
+#: R/soap.r:0
+msgid "dropping soap knots not inside boundary - use 'in.out' to investigate."
+msgstr ""
+
 #. R/mgcv.r: warning("dropping unidentifiable parametric terms from model", call. = FALSE)
 #: R/mgcv.r:0
 #, fuzzy
@@ -1668,6 +1680,11 @@ msgstr "elementy argumentu 'min.sp' muszą być nieujemne"
 msgid "empty models are not available"
 msgstr "puste modele nie są dostępne"
 
+#. R/gamlss.r: stop("er... no discrete methods for higher derivatives")
+#: R/gamlss.r:0
+msgid "er... no discrete methods for higher derivatives"
+msgstr ""
+
 #. R/efam.r: stop("erroneous call to estimate.theta - no free parameters")
 #: R/efam.r:0
 msgid "erroneous call to estimate.theta - no free parameters"
@@ -1677,6 +1694,12 @@ msgstr ""
 #: R/smooth.r:0
 msgid "factor 'by' variables can not be used with matrix arguments"
 msgstr "faktoryzacja zmiennych 'by' nie może być użyta z argumentami macierzy"
+
+#. R/mgcv.r: gettextf("factor levels %s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "factor levels %s not in original fit"
+msgstr "%s nie ma w oryginalnym dopasowaniu"
 
 #. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
 #: R/gamm.r:0
@@ -1792,6 +1815,13 @@ msgstr ""
 #: R/gamm.r:0
 msgid "gamm not converged, try increasing niterPQL"
 msgstr "'gamm' nie uzbieżnił się, spróbuj zwiększyć 'niterPQL'"
+
+#. R/gamlss.r: stop("gammals requires 2 links specified as character strings")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "gammals requires 2 links specified as character strings"
+msgstr ""
+"funkcja 'ziplss()' wymaga dwóch połączeń określonych jako łańcuchy tekstowe"
 
 #. R/bam.r: stop("general families not supported by bam")
 #: R/bam.r:0
@@ -2003,6 +2033,12 @@ msgstr "połączenie \"%s\" nie jest dostępne dla rozkładów z rodziny Tweedie
 #: R/gam.fit3.r:0
 msgid "link is not implemented for extended families"
 msgstr "połączenie nie jest zaimplementowane dla rozszerzonych rodzin"
+
+#. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of gammals")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "link not available for mu parameter of gammals"
+msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'mu' 'gaulss'"
 
 #. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of twlss")
 #: R/gamlss.r:0
@@ -2545,6 +2581,11 @@ msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
 "pierwotnie wybrany parametr wygładzający nie został rozpoznany, przywracanie "
 "wartości 'gamma'"
+
+#. R/soap.r: stop("soap basis ill-conditioned - changing 'xt$nmax' may help")
+#: R/soap.r:0
+msgid "soap basis ill-conditioned - changing 'xt$nmax' may help"
+msgstr ""
 
 #. R/soap.r: stop("soap films are bivariate only")
 #. R/soap.r: stop("soap films are bivariate only")

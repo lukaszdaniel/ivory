@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-28 21:49+0100\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -204,7 +204,7 @@ msgstr "'%s'设定不对"
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
 #: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1897
+#: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'值不对"
@@ -257,7 +257,7 @@ msgstr "座标標記种类不对"
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1866
+#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
 msgid "too few arguments"
 msgstr "参数数目太少"
 
@@ -484,15 +484,15 @@ msgstr "'%s'参数的长度不对"
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr "无法分配内存(xspline)"
 
-#: plot3d.c:182 plot3d.c:1923
+#: plot3d.c:182 plot3d.c:1930
 msgid "insufficient 'x' or 'y' values"
 msgstr "'x'或'y'值的大小不够"
 
-#: plot3d.c:186 plot3d.c:1926
+#: plot3d.c:186 plot3d.c:1933
 msgid "dimension mismatch"
 msgstr "量度不相符"
 
-#: plot3d.c:194 plot3d.c:1929
+#: plot3d.c:194
 msgid "no contour values"
 msgstr "无等高值"
 
@@ -526,31 +526,36 @@ msgstr "'xlab'必需是长度为一的字符矢量"
 msgid "invalid viewing parameters"
 msgstr "视见参数不对"
 
-#: plot3d.c:1522
+#: plot3d.c:1527
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour():圆的/长的seglist – 是不是应该把%s设成大于%d?"
 
-#: plot3d.c:1933 plot3d.c:1940
+#: plot3d.c:1936
+msgid "no 'levels'"
+msgstr ""
+
+#: plot3d.c:1940 plot3d.c:1947
 #, fuzzy, c-format
 msgid "missing '%s' values"
 msgstr "缺少'x'值"
 
-#: plot3d.c:1935 plot3d.c:1942
+#: plot3d.c:1942 plot3d.c:1949
 #, fuzzy, c-format
 msgid "increasing '%s' values expected"
 msgstr "'x'值应加大"
 
-#: plot3d.c:1947
-msgid "invalid NA contour values"
-msgstr "NA等高值不对"
+#: plot3d.c:1954
+#, c-format
+msgid "non-finite level values: levels[%d] = %g"
+msgstr ""
 
-#: plot3d.c:1959
+#: plot3d.c:1967
 #, fuzzy
 msgid "all 'z' values are equal"
 msgstr "所有的z值是一样的"
 
-#: plot3d.c:1961
+#: plot3d.c:1969
 #, fuzzy
 msgid "all 'z' values are NA"
 msgstr "所有的z值都是NA"
@@ -594,6 +599,9 @@ msgstr ""
 #: stem.c:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "invalid NA contour values"
+#~ msgstr "NA等高值不对"
 
 #, fuzzy
 #~ msgid "'%s' argument must be of length one"

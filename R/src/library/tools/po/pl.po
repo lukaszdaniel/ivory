@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,12 +16,17 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: Rmd5.c:37
+#: Rmd5.c:47
 #, c-format
 msgid "'%s' argument must be character"
 msgstr "argument '%s' musi być tekstem"
 
-#: Rmd5.c:51
+#: Rmd5.c:63
+#, fuzzy, c-format
+msgid "md5 failed on file '%ls'"
+msgstr "md5 nie powiodło się na pliku '%s'"
+
+#: Rmd5.c:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 nie powiodło się na pliku '%s'"

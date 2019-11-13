@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -730,10 +730,10 @@ msgstr ""
 msgid "Enter an item from the menu, or 0 to exit"
 msgstr ""
 
-#. R/widgets.R: gettext("Enter one or more numbers separated by spaces, or an empty line to cancel",     domain = "R-utils")
+#. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel",     domain = "R-utils")
 #: R/widgets.R:0
 msgid ""
-"Enter one or more numbers separated by spaces, or an empty line to cancel"
+"Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr ""
 
 #. R/aspell.R: gettextf("File '%s':", nms[i])

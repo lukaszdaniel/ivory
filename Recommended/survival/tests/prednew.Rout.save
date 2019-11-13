@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -26,7 +26,7 @@ Type 'q()' to quit R.
 > # Make sure that the newdata argument works for various
 > #   predictions
 > # We purposely use a subset of the lung data that has only some
-> #   of the levels of the ph.ecog
+> #   of the levels of ph.ecog
 > library(survival)
 > options(na.action=na.exclude, contrasts=c('contr.treatment', 'contr.poly'))
 > aeq <- function(x,y) all.equal(as.vector(x), as.vector(y))
@@ -120,4 +120,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.913   0.086   0.990 
+  0.812   0.047   0.852 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-08 21:35+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2005-12-08 00:40+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr "magic, l'optimisateur gcv/ubre, n'a pas convergé après 400 itérations."
 
-#: mat.c:88 mat.c:110
+#: mat.c:86 mat.c:108
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 
-#: mat.c:118
+#: mat.c:116
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:3314
+#: mat.c:3325
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:3319
+#: mat.c:3330
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""
@@ -125,7 +125,7 @@ msgstr ""
 msgid "You must have 2m>d for a thin plate spline."
 msgstr "Vous devez avoir 2m > d pour une 'thin plate spline'"
 
-#: tprs.c:461 tprs.c:477
+#: tprs.c:376 tprs.c:384
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"

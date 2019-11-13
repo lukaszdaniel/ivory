@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-09-15 22:03\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -105,6 +105,11 @@ msgstr "'file' deve ser uma cadeia de caracteres não-vazia"
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr "'gamma' deve ser um escalar ou 'sRGB'"
 
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#: R/colorstuff.R:0
+msgid "'n' set to %s, the maximum available for %s palette"
+msgstr ""
+
 #. R/device.R: stop("'name' must be a character vector")
 #: R/device.R:0
 msgid "'name' must be a character vector"
@@ -122,13 +127,15 @@ msgstr "'name.opt' deve ser caractere, nome de uma lista existente"
 msgid "'nbin' argument must be numeric of length 1 or 2"
 msgstr "'nbin' deve ser numérico de comprimento 1 ou 2"
 
+#. R/colorstuff.R: stop("'palette' does not match any given palette")
 #. R/hcl.colors.R: stop("'palette' does not match any given palette")
-#: R/hcl.colors.R:0
+#: R/colorstuff.R:0 R/hcl.colors.R:0
 msgid "'palette' does not match any given palette"
 msgstr ""
 
+#. R/colorstuff.R: stop("'palette' is ambiguous")
 #. R/hcl.colors.R: stop("'palette' is ambiguous")
-#: R/hcl.colors.R:0
+#: R/colorstuff.R:0 R/hcl.colors.R:0
 msgid "'palette' is ambiguous"
 msgstr ""
 

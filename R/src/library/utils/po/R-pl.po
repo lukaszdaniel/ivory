@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -770,10 +770,11 @@ msgstr "Wpisz numer środowiska, lub 0 aby wyjść"
 msgid "Enter an item from the menu, or 0 to exit"
 msgstr "Wprowadź pozycję z menu lub 0 aby wyjść"
 
-#. R/widgets.R: gettext("Enter one or more numbers separated by spaces, or an empty line to cancel",     domain = "R-utils")
+#. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel",     domain = "R-utils")
 #: R/widgets.R:0
+#, fuzzy
 msgid ""
-"Enter one or more numbers separated by spaces, or an empty line to cancel"
+"Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr ""
 "Wprowadź jedną lub więcej liczb oddzielonych spacją, lub pustą linię aby "
 "anulować"

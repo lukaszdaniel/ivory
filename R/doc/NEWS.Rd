@@ -264,6 +264,10 @@
       \item Better error message for \code{contour(*, levels=Inf)}.
 
       \item \code{contourLines()}' value is no longer \code{invisible()}.
+
+      \item (Windows) \command{Rterm} now correctly displays multi-byte
+      coded characters representable in the current native encoding (at least
+      on Windows 10 they were sometimes omitted, \PR{17632}).
     }
   }
 }
@@ -330,6 +334,14 @@
       \item \command{R CMD check} has a new option to mitigate checks
       leaving files/directories in \file{/tmp}.  See the \sQuote{R
 	Internals} manual -- this is part of \code{--as-cran}.
+    }
+  }
+
+  \subsection{Windows}{
+    \itemize{
+      \item The default standard for C++ in package installation is C++11 (as it
+      has been on other platforms if available since \R{} 3.6.0: the
+      default toolchain on Windows was defaulting to C++98).
     }
   }
 
@@ -420,6 +432,9 @@
 
       \item \code{dotchart(*, pch=., groups=.)} now works better.  Reported
       by Robert and confirmed by Nic Rochette in \PR{16953}.
+
+      \item \code{canCoerce(obj, cl)} no longer assumes
+      \code{length(class(obj)) == 1}.
     }
   }
 }

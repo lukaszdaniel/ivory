@@ -1,7 +1,7 @@
 #  File src/library/utils/R/aspell.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2016 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -373,8 +373,7 @@ function(x, ...)
         writeLines(c(gettextf("File '%s':", nms[i]),
                      gettextf("  Line %s: \"%s\", \"%s\", \"%s\"",
                              format(e$Line),
-                             gsub("\"", "\\\"", e$Left),
-                             e$Original,
+                             gsub("\"", "\\\"", e$Left ), e$Original,
                              gsub("\"", "\\\"", e$Right)),
                      ""))
     }

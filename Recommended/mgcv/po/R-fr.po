@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2019-04-08 21:35\n"
+"POT-Creation-Date: 2019-11-12 19:56\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -87,11 +87,6 @@ msgstr ""
 #. R/smooth.r: gettextf("%s has insufficient unique values to support %d knots: reduce k", object$term,     nk)
 #: R/smooth.r:0
 msgid "%s has insufficient unique values to support %d knots: reduce k"
-msgstr ""
-
-#. R/mgcv.r: gettextf("%s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
-#: R/mgcv.r:0
-msgid "%s not in original fit"
 msgstr ""
 
 #. R/mgcv.r: gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv")
@@ -288,11 +283,6 @@ msgstr "by=. n'est pas permis"
 #, fuzzy
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
 msgstr "d ne peut tre ngatif dans l'appel  null.space.dimension()"
-
-#. R/bam.r: warning("'exclude' argument ignored by discrete prediction at present")
-#: R/bam.r:0
-msgid "'exclude' argument ignored by discrete prediction at present"
-msgstr ""
 
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
@@ -535,6 +525,11 @@ msgstr ""
 #, fuzzy
 msgid "At least three knots required in call passed to 'mono.con()'"
 msgstr "Au moins trois noeuds requis pour mono.con."
+
+#. R/misc.r: gettextf("BLAS thread safety problem at iteration %d", i, domain = "R-mgcv")
+#: R/misc.r:0
+msgid "BLAS thread safety problem at iteration %d"
+msgstr ""
 
 #. R/plots.r: gettext("Basis dimension (k) checking results. Low p-value (k-index<1) may\nindicate that k is too low, especially if edf is close to k.",     domain = "R-mgcv")
 #: R/plots.r:0
@@ -988,6 +983,11 @@ msgstr "Aucune donne fournie  gam.setup"
 #, fuzzy
 msgid "No observations informative at iteration %d"
 msgstr "Aucune observation informative  l'itration"
+
+#. R/misc.r: gettextf("No problem encountered in %d iterations", i, domain = "R-mgcv")
+#: R/misc.r:0
+msgid "No problem encountered in %d iterations"
+msgstr ""
 
 #. R/smooth.r: stop("No suitable s (i.e. m[2]) try increasing m[1]")
 #: R/smooth.r:0
@@ -1576,6 +1576,11 @@ msgstr ""
 "les composants des noeuds relatifs  un mme lissage doivent tre de mme "
 "longueur"
 
+#. R/gam.fit4.r: gettextf("cor d2b[%d] = %s", i, cor(b$b2[, i], fd.br2[, i]), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "cor d2b[%d] = %s"
+msgstr ""
+
 #. R/gam.fit4.r: gettextf("cor dH/drho[%d] = %s", i, cor(as.numeric(b$dH[[i]]), as.numeric(fd.dH[[i]])),     domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "cor dH/drho[%d] = %s"
@@ -1651,6 +1656,11 @@ msgstr ""
 msgid "done!"
 msgstr ""
 
+#. R/soap.r: warning("dropping soap knots not inside boundary - use 'in.out' to investigate.")
+#: R/soap.r:0
+msgid "dropping soap knots not inside boundary - use 'in.out' to investigate."
+msgstr ""
+
 #. R/mgcv.r: warning("dropping unidentifiable parametric terms from model", call. = FALSE)
 #: R/mgcv.r:0
 msgid "dropping unidentifiable parametric terms from model"
@@ -1682,6 +1692,11 @@ msgstr "les lments de min.sp doivent tre positifs ou nulls."
 msgid "empty models are not available"
 msgstr ""
 
+#. R/gamlss.r: stop("er... no discrete methods for higher derivatives")
+#: R/gamlss.r:0
+msgid "er... no discrete methods for higher derivatives"
+msgstr ""
+
 #. R/efam.r: stop("erroneous call to estimate.theta - no free parameters")
 #: R/efam.r:0
 msgid "erroneous call to estimate.theta - no free parameters"
@@ -1690,6 +1705,11 @@ msgstr ""
 #. R/smooth.r: stop("factor 'by' variables can not be used with matrix arguments")
 #: R/smooth.r:0
 msgid "factor 'by' variables can not be used with matrix arguments"
+msgstr ""
+
+#. R/mgcv.r: gettextf("factor levels %s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "factor levels %s not in original fit"
 msgstr ""
 
 #. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
@@ -1804,6 +1824,11 @@ msgstr ""
 #. R/gamm.r: warning("gamm not converged, try increasing niterPQL")
 #: R/gamm.r:0
 msgid "gamm not converged, try increasing niterPQL"
+msgstr ""
+
+#. R/gamlss.r: stop("gammals requires 2 links specified as character strings")
+#: R/gamlss.r:0
+msgid "gammals requires 2 links specified as character strings"
 msgstr ""
 
 #. R/bam.r: stop("general families not supported by bam")
@@ -2011,6 +2036,11 @@ msgstr ""
 #. R/gam.fit3.r: stop("link is not implemented for extended families")
 #: R/gam.fit3.r:0
 msgid "link is not implemented for extended families"
+msgstr ""
+
+#. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of gammals")
+#: R/gamlss.r:0
+msgid "link not available for mu parameter of gammals"
 msgstr ""
 
 #. R/gamlss.r: stop(link[[i]], " link not available for mu parameter of twlss")
@@ -2552,6 +2582,11 @@ msgstr "les objets lissage ne devraient pas avoir d'attribut qrc."
 #. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 #: R/jagam.r:0
 msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
+msgstr ""
+
+#. R/soap.r: stop("soap basis ill-conditioned - changing 'xt$nmax' may help")
+#: R/soap.r:0
+msgid "soap basis ill-conditioned - changing 'xt$nmax' may help"
 msgstr ""
 
 #. R/soap.r: stop("soap films are bivariate only")

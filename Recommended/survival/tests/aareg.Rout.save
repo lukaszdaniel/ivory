@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -123,8 +123,6 @@ Type 'q()' to quit R.
 > aeq(mine, afit$coef[1:9, -1])
 [1] TRUE
 > 
-> rm(tfit, afit, mine, dt1, cfit, sch1)
-> 
 > #
 > # Check out the dfbeta matrix from aareg
 > #   Note that it is kept internally in time order, not data set order
@@ -176,8 +174,6 @@ i= 54 coef= TRUE twt= TRUE dfbeta= TRUE
 i= 101 coef= TRUE twt= TRUE dfbeta= TRUE 
 i= 135 coef= TRUE twt= TRUE dfbeta= TRUE 
 > 	  
-> rm(afit, cfit, cdt, lwho, lmx, lmy, fit, rr, zz, df)
-> 
 > 
 > # Repeat it with case weights
 > ww <- rep(1:5, length=nrow(lung))/ 3.0
@@ -211,9 +207,6 @@ i= 54 coef= TRUE twt= TRUE dfbeta= TRUE
 i= 101 coef= TRUE twt= TRUE dfbeta= TRUE 
 i= 135 coef= TRUE twt= TRUE dfbeta= TRUE 
 > 	  
-> rm(afit, cfit, cdt, who, x, y, fit, rr, zz, df)
-> rm(ord, acoef)
->     
 > #
 > # Check that the test statistic computed within aareg and
 > #  the one recomputed within summary.aareg are the same.
@@ -386,4 +379,4 @@ attr(,"class")
 > 
 > proc.time()
    user  system elapsed 
-  1.222   0.076   1.288 
+  1.092   0.096   1.183 

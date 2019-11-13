@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -300,7 +300,7 @@ Likelihood ratio test = 61.2 on 20.5 df, p=6e-06
 n=76, number of events=58
 
 Warning message:
-In command 'coxpenal.fit(X, Y, strats, offset, init = init, control, weights = weights, method = method, ':
+In command 'coxpenal.fit(X, Y, istrat, offset, init = init, control, weights = weights, method = method, ':
   inner loop failed to coverge for iterations '4'
 > 
 > coxph(Surv(time, status) ~ age + sex + frailty(id, dist='t', caic=F), kidney)
@@ -322,4 +322,4 @@ n=76, number of events=58
 > 
 > proc.time()
    user  system elapsed 
-  1.044   0.061   1.096 
+  0.853   0.044   0.890 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-10-28 r1192) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-10-28 r77334) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -32,7 +32,8 @@ Type 'q()' to quit R.
 > test1 <- data.frame(time=  c(9, 3,1,1,6,6,8),
 +                     status=c(1,NA,1,0,1,1,0),
 +                     x=     c(0, 2,1,1,1,0,0),
-+                     z= factor(c('a', 'a', 'b', 'b', 'c', 'c', 'a')))
++                     z= factor(c('a', 'a', 'b', 'b', 'c', 'c', 'a')),
++                     stringsAsFactors=FALSE)
 > 
 > fit1 <- coxph(Surv(time, status) ~ z, test1, iter=1)
 > fit2 <- coxph(Surv(time, status) ~z, test1, x=T, iter=1)
@@ -43,7 +44,8 @@ Type 'q()' to quit R.
 > test2 <- data.frame(time=  c(9, 3,1,1,6,6,8),
 +                     status=c(1,NA,1,0,1,1,0),
 +                     x=     c(0, 2,1,1,1,0,0),
-+                     z= factor(c('a', 'a', 'a', 'a', 'c', 'c', 'a')))
++                     z= factor(c('a', 'a', 'a', 'a', 'c', 'c', 'a')),
++                     stringsAsFactors=FALSE)
 > 
 > ftest <- model.frame(fit1, data=test2)
 > all.equal(levels(ftest$z), levels(test1$z))
@@ -94,4 +96,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  1.053   0.078   1.121 
+  0.771   0.040   0.805 

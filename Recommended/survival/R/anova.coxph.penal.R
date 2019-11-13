@@ -15,6 +15,9 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         warning(gettext("The following arguments to anova.coxph(..) are invalid and dropped:", domain = "R-survival"), paste(deparse(dotargs[named]), collapse = ", "), domain = NA)
     dotargs <- dotargs[!named]
 
+    # frailties don't work, due to mutability.  
+     has.frailty <- function(x) any(x$pterms==2)
+
     if (length(dotargs) >0) {
         # Check that they are all cox or coxme models
         is.coxmodel <-unlist(lapply(dotargs, function(x) inherits(x, "coxph")))
@@ -22,6 +25,9 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         if (!all(is.coxmodel | is.coxme))
             stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
         
+        if (any(sapply(dotargs, has.frailty)))
+            stop("anova command does not handle frailty terms")
+
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme
             # If coxme is not loaded the line below returns NULL
@@ -46,7 +52,9 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
     #  others.
     if (length(object$rscore)>0)
         stop("cannot do anova tables with robust variances")
- 
+    if (has.frailty(object))
+        stop("anova command does not handle frailty terms")
+
     has.strata <- !is.null(attr(terms(object), "specials")$strata)
     # The following line causes pspline terms to be re-evaluated correctly
     #  The predvars attr for them does not retrieve the correct penalty

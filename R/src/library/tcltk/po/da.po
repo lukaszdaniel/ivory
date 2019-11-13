@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-23 15:40+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -26,24 +26,29 @@ msgstr "fortolkningsfejl i R-udtryk"
 msgid "tcl error.\n"
 msgstr "tcl-fejl.\n"
 
-#: tcltk.c:199 tcltk.c:746
+#: tcltk.c:199 tcltk.c:273 tcltk.c:290 tcltk.c:310 tcltk.c:330 tcltk.c:405
+#: tcltk.c:470 tcltk.c:524 tcltk.c:763
 msgid "invalid argument"
 msgstr "ugyldigt argument"
 
-#: tcltk.c:303 tcltk.c:321 tcltk.c:394 tcltk.c:457 tcltk.c:509
+#: tcltk.c:280
+msgid "no such variable"
+msgstr ""
+
+#: tcltk.c:312 tcltk.c:332 tcltk.c:407 tcltk.c:472 tcltk.c:526
 #, fuzzy
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr "ugyldigt tclObj - måske gemt fra en anden session?"
 
-#: tcltk.c:619
+#: tcltk.c:636
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "argumentliste er for lang i tcltk-intern funktion 'callback_closure'"
 
-#: tcltk.c:652
+#: tcltk.c:669
 msgid "argument is not of correct type"
 msgstr "argument er ikke af korrekt type"
 
-#: tcltk.c:704
+#: tcltk.c:721
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "ingen DISPLAY-variabel så Tk er ikke tilgængelig"
 

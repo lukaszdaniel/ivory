@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2019-11-12 19:56+0100\n"
 "PO-Revision-Date: 2011-10-15 17:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -18,12 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Language: French\n"
 
-#: Rmd5.c:37
+#: Rmd5.c:47
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "l'argument 'files' doit être une chaîne de caractères"
 
-#: Rmd5.c:51
+#: Rmd5.c:63
+#, fuzzy, c-format
+msgid "md5 failed on file '%ls'"
+msgstr "md5 a échoué sur le fichier '%s'"
+
+#: Rmd5.c:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 a échoué sur le fichier '%s'"

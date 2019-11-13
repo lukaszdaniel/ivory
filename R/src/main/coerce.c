@@ -2723,6 +2723,7 @@ SEXP attribute_hidden substituteList(SEXP el, SEXP rho)
 		error(_("'...' used in an incorrect context"));
 	} else {
 	    h = substitute(CAR(el), rho);
+	    ENSURE_NAMEDMAX(h);
 	    if (isLanguage(el))
 		h = LCONS(h, R_NilValue);
 	    else

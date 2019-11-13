@@ -11,11 +11,11 @@ c8432d2579ea0ce016d5645adc3523e2 *PORTING
 ef83d24fcd60055ca8de6a7afac1a3d2 *po/R-fr.po
 f9e6460c2f691d7c75dc21b525a2a61d *po/R-ko.po
 913b82567fa9a9e11c21736de93e73f8 *po/R-de.po
-f50e7bee805dc64af6ed6494b5f677af *po/R-KernSmooth.pot
+fed31e9200467e6def5cc519cb27e708 *po/R-KernSmooth.pot
 d73aa41967d3cb81a5e58646fc2b42e6 *po/R-pl.po
 4a39ab255fed86dd361ce9d83f876488 *LICENCE.note
 0a810d5bdfe00d033bd66bd6764d8e62 *inst/po/fr/LC_MESSAGES/R-KernSmooth.mo
-532b307ec53323c18326f186f5dc853a *inst/po/en@quot/LC_MESSAGES/R-KernSmooth.mo
+843aeaac654cc20c2dadcdb5e663e22a *inst/po/en@quot/LC_MESSAGES/R-KernSmooth.mo
 9c7599f76d7901e93a83b9827bfba9c5 *inst/po/de/LC_MESSAGES/R-KernSmooth.mo
 980feae60b474ffc8f998a6f88b5eb44 *inst/po/pl/LC_MESSAGES/R-KernSmooth.mo
 7057c98e6c623b18bbebc0c4e54def16 *inst/po/ko/LC_MESSAGES/R-KernSmooth.mo
