@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Bookmarks: -1,203,240,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
@@ -258,7 +258,7 @@ msgstr "'as.is' posiada niepoprawną długość %d != kolumny = %d"
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
 #: R/objects.R:0
 msgid "'class' is of length > 1; only the first element will be used"
-msgstr ""
+msgstr "'class' ma długość > 1; tylko pierwszy element zostanie użyty"
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
 #: R/write.table.R:0
@@ -772,12 +772,11 @@ msgstr "Wprowadź pozycję z menu lub 0 aby wyjść"
 
 #. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel",     domain = "R-utils")
 #: R/widgets.R:0
-#, fuzzy
 msgid ""
 "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr ""
-"Wprowadź jedną lub więcej liczb oddzielonych spacją, lub pustą linię aby "
-"anulować"
+"Wprowadź jedną lub więcej liczb oddzielonych spacją, po czym naciśnij ENTER "
+"albo wpisz 0 aby anulować"
 
 #. R/aspell.R: gettextf("File '%s':", nms[i])
 #: R/aspell.R:0
@@ -3101,9 +3100,8 @@ msgstr "nie można dostać się do indeksu dla repozytorium %s"
 
 #. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 #: R/windows/install.packages.R:0
-#, fuzzy
 msgid "unable to copy temporary installation %s to %s"
-msgstr "nie można usunąć tymczasowej instalacji %s w %s"
+msgstr "nie można skopiować tymczasowej instalacji %s w %s"
 
 #. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
 #. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
@@ -3138,9 +3136,9 @@ msgstr "nie można usunąć tymczasowej instalacji %s w %s"
 
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 #: R/windows/install.packages.R:0
-#, fuzzy
 msgid "unable to move temporary installation %s to %s, copying instead"
-msgstr "nie można usunąć tymczasowej instalacji %s w %s"
+msgstr ""
+"nie można przenieść tymczasowej instalacji %s w %s, zamiast tego, kopiowanie"
 
 #. R/tar.R: gettextf("unsupported entry type %s", sQuote(ctype))
 #: R/tar.R:0

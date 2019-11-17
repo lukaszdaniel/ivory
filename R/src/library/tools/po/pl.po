@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: Rmd5.c:47
 #, c-format
@@ -22,9 +22,9 @@ msgid "'%s' argument must be character"
 msgstr "argument '%s' musi być tekstem"
 
 #: Rmd5.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "md5 failed on file '%ls'"
-msgstr "md5 nie powiodło się na pliku '%s'"
+msgstr "md5 nie powiodło się na pliku '%ls'"
 
 #: Rmd5.c:65
 #, c-format

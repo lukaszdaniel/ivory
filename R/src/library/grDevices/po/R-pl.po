@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -103,7 +103,7 @@ msgstr "argument 'gamma' musi być liczbą lub wartością 'sRGB'"
 #. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
-msgstr ""
+msgstr "'n' ustawiono na %s, maksymalna wartość dostępna dla palety %s"
 
 #. R/device.R: stop("'name' must be a character vector")
 #: R/device.R:0
@@ -157,9 +157,8 @@ msgstr ""
 
 #. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters", old$title)
 #: R/postscript.R:0
-#, fuzzy
 msgid "'title' argument \"%s\" contains invalid characters"
-msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
+msgstr "argument 'title' \"%s\" zawienia niepoprawne znaki"
 
 #. R/windows/windows.R: stop("'type' not applicable to the R console")
 #: R/windows/windows.R:0

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -4344,15 +4344,13 @@ msgstr "niepoprawna formuła"
 
 #. R/models.R: gettextf("invalid formula \"%s\": not a call", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula \"%s\": not a call"
-msgstr "niepoprawna formuła: %s"
+msgstr "niepoprawna formuła \"%s\": to nie jest wywołanie"
 
 #. R/models.R: gettextf("invalid formula %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s"
-msgstr "niepoprawna formuła: %s"
+msgstr "niepoprawna formuła %s"
 
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x), domain = "R-stats")
 #: R/models.R:0
@@ -5021,16 +5019,13 @@ msgstr "nieskończone współczynniki w %d iteracji"
 
 #. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
-#, fuzzy
 msgid "non-integer #successes in a %s glm!"
-msgstr ""
-"niecałkowita liczba sukcesów w rozkładzie Bernoulliego w funkcji 'glm()'!"
+msgstr "niecałkowita liczba sukcesów w rozkładzie %s w funkcji 'glm()'!"
 
 #. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
 #: R/family.R:0
-#, fuzzy
 msgid "non-integer counts in a %s glm!"
-msgstr "niecałkowita liczba zliczeń w rozkładzie Bernoulliego w 'glm'!"
+msgstr "niecałkowita liczba zliczeń w rozkładzie %s w funkcji 'glm()'!"
 
 #. R/ts.R: warning("non-intersecting series")
 #: R/ts.R:0
@@ -5049,9 +5044,8 @@ msgstr "argumenty kontrastu niebędące listą zostały zignorowane"
 
 #. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
-#, fuzzy
 msgid "non-positive values not allowed for the 'Gamma' family"
-msgstr "niedodatnie wartości nie są dozwolone dla rodziny 'gamma'"
+msgstr "niedodatnie wartości nie są dozwolone dla rodziny 'Gamma'"
 
 #. R/arima.R: stop("non-stationary AR part")
 #. R/arma0.R: stop("non-stationary AR part")

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-13 r1197) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-13 r77410) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -2163,7 +2163,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x55e9de16f078>
+<bytecode: 0x564ea7071e48>
 <environment: namespace:graphics>
 > 
 > 
@@ -3033,7 +3033,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x55e9e011feb0>
+<bytecode: 0x564ea9027698>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3114,7 +3114,7 @@ function (xy = 1, warn.log = TRUE)
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.823 0.028 1.85 0 0 
+Time elapsed:  1.863 0.052 1.918 0 0 
 > grDevices::dev.off()
 null device 
           1 

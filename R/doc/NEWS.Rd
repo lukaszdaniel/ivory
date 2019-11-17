@@ -268,6 +268,10 @@
       \item (Windows) \command{Rterm} now correctly displays multi-byte
       coded characters representable in the current native encoding (at least
       on Windows 10 they were sometimes omitted, \PR{17632}).
+
+      \item The Fortran code for calculating the \code{coefficients} component in
+      \code{lm.influence} was very inefficient. It has (for now) been replaced with
+      much faster R code. \PR{17624}
     }
   }
 }
@@ -423,6 +427,9 @@
       \item \code{get_all_vars(f, d)} now also works for cases, e.g. where
       \code{d} contains a matrix.  Reported by Simon Wood in 2009 and patch
       provided by Ben Bolker in \PR{13624}.
+
+      Additionally, it now also works when some variables are data frames,
+      fixing \PR{14905}, reported by Patrick Breheny.
 
       \item \code{barplot()} could get spacings wrong if there were exactly two
       bars \PR{15522}.  Patch by Michael Chirico.

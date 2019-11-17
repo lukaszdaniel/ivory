@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-11-13 r1197) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-11-13 r77410) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -419,4 +419,4 @@ log(u)       0.015569 0.00033659  46.256 5.7704e-10
 > 
 > proc.time()
    user  system elapsed 
-  0.195   0.008   0.196 
+  0.201   0.013   0.206 
