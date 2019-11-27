@@ -4357,7 +4357,7 @@ expressions in Makefiles (which are passed to the shell for processing).
 Some @R{} platforms use strict@footnote{For example, @command{test}
 options @option{-a} and @option{-e} are not portable, and not supported
 in the AT&T Bourne shell used on Solaris 10/11, even though they are in
-the 2008 POSIX standard.  Nor does Solaris support @samp{$(@var{cmd})}.}
+the POSIX standard.  Nor does Solaris support @samp{$(@var{cmd})}.}
 Bourne shells: the @R{} toolset on Windows and some Unix-alike OSes use
 @command{ash} (@uref{https://en.wikipedia.org/@/wiki/@/Almquist_shell}),
 a rather minimal shell with few builtins.  Beware of assuming that all
@@ -4379,8 +4379,16 @@ export FOO=value
 @noindent
 which is bash-specific (first set the variable then export it by name).
 
-On macOS Catalina and later, which shell @file{/bin/sh} invokes is user-
-and platform-dependent: it might be @command{bash} version 3.2,
+Using @code{test -e} (or @code{[ -e ]}) in shell scripts is not
+portable: @code{-f} is normally what is intended.  Flags @option{-a} and
+@option{-o} are nowadays declared obsolescent by POSIX and should not be
+used.
+
+The @option{-o} flag for @command{set} in shell scripts is optional in
+POSIX and not supported on all the platforms @R{} is used on.
+
+On macOS Catalina which shell @file{/bin/sh} invokes is user- and
+platform-dependent: it might be @command{bash} version 3.2,
 @command{dash} or @command{zsh} (for new accounts it is @command{zsh},
 for accounts ported from earlier version it is usually @command{bash}).
 
@@ -11597,8 +11605,8 @@ The maximal value is @code{NAMEDMAX}.
 @end table
 
 @noindent
-Note the past tenses: @R{} does not do full reference counting and there
-may currently be fewer bindings.
+Note the past tenses: @R{} does not do currently do full reference
+counting and there may currently be fewer bindings.
 
 It is safe to modify the value of any @code{SEXP} for which
 @code{NAMED(foo)} is zero, and if @code{NAMED(foo)} is two or more, the
@@ -11633,7 +11641,7 @@ rebound immediately.  (Provided the remaining code in @code{"foo<-"}
 make no reference to @code{x}, and no one is going to attempt a direct
 call such as @code{y <- "foo<-"(x)}.)
 
-This mechanism is likely to be replaced in future versions of @R{}. To
+This mechanism is scheduled to be replaced in @R{} 4.0.0. To
 support future changes, package code should use the macros
 @code{MAYBE_REFERENCED}, @code{MAYBE_SHARED}, and
 @code{MARK_NOT_MUTABLE}. These currently correspond to

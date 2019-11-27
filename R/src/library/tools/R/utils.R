@@ -497,10 +497,9 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
 ### ** .BioC_version_associated_with_R_version
 
 .BioC_version_associated_with_R_version <-
-    function() numeric_version(Sys.getenv("R_BIOC_VERSION", "3.10"))
+    function() numeric_version(Sys.getenv("R_BIOC_VERSION", "3.11"))
 ## Things are more complicated from R-2.15.x with still two BioC
 ## releases a year, so we do need to set this manually.
-## Wierdly, 3.0 is the second version (after 2.14) for the 3.1.x series.
 
 ### ** .ORCID_iD_regexp
 
@@ -600,15 +599,7 @@ function() {
 ### ** config_val_to_logical
 
 config_val_to_logical <-
-function(val) {
-    v <- tolower(val)
-    if (v %in% c("1", "yes", "true")) TRUE
-    else if (v %in% c("0", "no", "false")) FALSE
-    else {
-        warning(gettextf("cannot coerce %s to logical", sQuote(val)))
-        NA
-    }
-}
+function(val) utils:::str2logical(val)
 
 ### ** .canonicalize_doi
 
@@ -2102,7 +2093,7 @@ function(dir, envir, meta = character())
                  stop("cannot source package code:", "\n", conditionMessage(e), call. = FALSE))
 }
 
-### * .split_dependencies
+### ** .split_dependencies
 
 .split_dependencies <-
 function(x)
@@ -2118,7 +2109,7 @@ function(x)
     lapply(x, .split_op_version)
 }
 
-### * .split_op_version
+### ** .split_op_version
 
 .split_op_version <-
 function(x)
@@ -2255,6 +2246,14 @@ function(args, ...)
         system2(file.path(R.home("bin"), "Rcmd.exe"), args, ...)
     else
         system2(file.path(R.home("bin"), "R"), c("CMD", args), ...)
+}
+
+### ** Sys.setenv1
+
+##' Sys.setenv() *one* variable unless it's set (to non-empty) already - export/move to base?
+Sys.setenv1 <- function(var, value) {
+    if(!nzchar(Sys.getenv(var)))
+        .Internal(Sys.setenv(var, as.character(value)))
 }
 
 ### ** pskill
