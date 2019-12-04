@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include "localization.h"
 
+Tcl_Interp *RTcl_interp;
 
 static void RTcl_dec_refcount(SEXP R_tclobj)
 {

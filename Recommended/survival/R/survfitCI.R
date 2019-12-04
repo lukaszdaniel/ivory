@@ -266,7 +266,7 @@ survfitCI <- function(X, Y, weights, id, istate, cluster,
             }
         else {
             xx <- as.vector(unlist(lapply(clist, function(x) x[element])))
-            if (class(temp)=="table") matrix(xx, byrow=T, ncol=length(temp))
+            if (inherits(temp, "table")) matrix(xx, byrow=T, ncol=length(temp))
             else xx
         }
     }
@@ -318,8 +318,9 @@ survfitCI <- function(X, Y, weights, id, istate, cluster,
      
         if (influence) kfit$influence.pstate <- 
             lapply(curves, function(x) x$influence.pstate)
-        if (!missing(start.time)) kfit$start.time <- start.time
     }                         
+
+    if (!missing(start.time)) kfit$start.time <- start.time
     kfit$transitions <- mcheck$transitions
 
     #       

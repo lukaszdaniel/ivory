@@ -35,7 +35,7 @@ neardate <- function(id1, id2, y1, y2, best=c("after", "prior"),
     y2 <- match(y2, alldate)
 
     # Throw out lines with missing y2, but remember which ones
-    rowid <- seq_len(length(y2))
+    rowid <- seq_along(y2)
     if (any(is.na(y2))) {
         toss <- is.na(y2)
         y2 <- y2[!toss]
@@ -65,13 +65,14 @@ neardate <- function(id1, id2, y1, y2, best=c("after", "prior"),
     hash1 <- match(id1, id1)*delta + y1
     hash2 <- indx1*delta + y2 
 
-    if (best=="prior")
-        indx2 <- approx(hash2, seq_len(n2), hash1, method="constant", yleft=NA,
-                        rule=2, f=0)$y
-    else 
-        indx2 <- approx(hash2, 1:n2, hash1, method="constant",
-                        yright=NA, rule=2, f=1)$y
-
+    if (best=="prior") {
+        indx2 <- findInterval(hash1, hash2)
+        indx2 <- ifelse(indx2==0, NA, indx2)
+     }
+    else {
+        indx2 <- findInterval(hash1, hash2, left.open=TRUE)
+        indx2 <- ifelse(indx2==n2, NA, indx2 + 1L)
+    }
     temp <- (!is.na(indx2) & id1== id2[indx2])
     ifelse(temp, rowid[ifelse(is.na(indx2), 1, indx2)], nomatch)
 }
