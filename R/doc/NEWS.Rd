@@ -150,9 +150,13 @@
       thanks to the patch proposal by Gabe Becker in \PR{17652}.
 
       \item New function \code{.class2()} provides the full character
-      vector of class names used for S3 or S4 method dispatch.
+      vector of class names used for S3 method dispatch.
 
       \item Printing \code{methods(..)} now uses new \code{format()} method.
+
+      \item \code{sort.list(x)} now works for non-atomic objects \code{x}
+      and \code{method="auto"} (default) or \code{"radix"} in cases
+      \code{order(x)} works.
     }
   }% end{ NEW FEATURES }
 
@@ -320,7 +324,7 @@
       \item \code{cm.colors(n)} etc no longer append the code for
       \code{alpha = 1}, \code{"FF"}, to all colors.  Hence all eight
       \code{*.colors()} functions and \code{rainbow()} behave
-      consistently (\PR{17659}).
+      consistently and have the same non-explicit default (\PR{17659}).
     }
   }
 }
@@ -492,6 +496,10 @@
 
       \item \code{plot.formula(*, subset = *)} now also works in a boundary
       case reported by Robert Schlicht (TU Dresden).
+
+      \item \code{readBin()} and \code{writeBin()} of a
+      \code{rawConnection()} now also work in large cases, thanks to a
+      report and proposal by Taeke Harkema in \PR{17665}.
     }
   }
 }
@@ -869,8 +877,13 @@
 
       \item The \code{plot()} method for \code{lm} and \code{glm} fits,
       \code{plot.lm()}, gains a new option \code{iter.smooth} with a
-      default of \code{0} for binomial fits, no longer down-weighting
-      when smoothing the residuals.
+      default of \code{0} for glm fits, no longer down-weighting "outliers"
+      when smoothing the residuals. Especially for binary observations
+      with high or low fitted probabilities, this effectively deleted
+      all observations of 1 or 0, respectively. Also, the type of
+      residuals used in the \code{glm} case has been switched to
+      \code{"pearson"} since deviance residuals do not in general have
+      approximately zero mean.
 
       \item \code{zip()} passes its list of files \emph{via} standard
       input to the external command when too long for the command line
@@ -939,6 +952,10 @@
       package repository index, instead of rebuilding the index from
       scratch. Thanks to Gabe Becker in \PR{17544} for the patch, based
       on part of his \pkg{switchr} package.
+
+      \item In \code{plot.lm}, Cook's distance was computed from unweighted
+      residuals, leading to inconsistencies. Replaced with usual weighted
+      version. (\PR{16056}) 
     }
   }
 

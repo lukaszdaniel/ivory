@@ -2807,7 +2807,7 @@ static size_t raw_write(const void *ptr, size_t size, size_t nitems,
     Rrawconn thiscon = con->private;
     size_t freespace = XLENGTH(thiscon->data) - thiscon->pos, bytes = size*nitems;
 
-    if ((double) size * (double) nitems + (double) thiscon->pos > R_LEN_T_MAX)
+    if ((double) size * (double) nitems + (double) thiscon->pos > R_XLEN_T_MAX)
 	error(_("attempting to add too many elements to raw vector"));
     /* resize may fail, when this will give an error */
     if(bytes >= freespace) raw_resize(thiscon, bytes + thiscon->pos);
@@ -2830,7 +2830,7 @@ static size_t raw_read(void *ptr, size_t size, size_t nitems,
     Rrawconn thiscon = con->private;
     size_t available = thiscon->nbytes - thiscon->pos, request = size*nitems, used;
 
-    if ((double) size * (double) nitems + (double) thiscon->pos > R_LEN_T_MAX)
+    if ((double) size * (double) nitems + (double) thiscon->pos > R_XLEN_T_MAX)
 	error(_("specified block is too large"));
     used = (request < available) ? request : available;
     memmove(ptr, RAW(thiscon->data) + thiscon->pos, used);
