@@ -30,8 +30,10 @@
        >= 10.
 
        \item For now only active when environment variable
-       \env{_R_CLASS_MATRIX_ARRAY_} is set to non-empty, but planned to be the
-       new unconditional behavior when R 4.0.0 is released:
+       \env{_R_CLASS_MATRIX_ARRAY_} is set to something true (i.e., one
+       of \samp{TRUE}, \samp{True}, \samp{true}, or \samp{T}), but
+       planned to be the new unconditional behavior when R 4.0.0 is
+       released:
 
        \code{matrix} objects now also inherit from class \code{"array"},
        namely, e.g., \code{class(diag(1))} is \code{c("matrix",
@@ -157,6 +159,9 @@
       \item \code{sort.list(x)} now works for non-atomic objects \code{x}
       and \code{method="auto"} (default) or \code{"radix"} in cases
       \code{order(x)} works.
+
+      \item Where long vectors are available (i.e., almost everywhere),
+      \code{writeBin()} now allows long vectors, i.e., of length >= 2^31.
     }
   }% end{ NEW FEATURES }
 
@@ -327,6 +332,17 @@
       consistently and have the same non-explicit default (\PR{17659}).
     }
   }
+}
+
+\section{\Rlogo CHANGES IN R 3.6.2 patched}{
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item The included LAPACK has been updated to version 3.9.0 (for
+      the included routines, just bug fixes).
+    }
+  }
+
 }
 
 \section{\Rlogo CHANGES IN R 3.6.2}{
@@ -500,6 +516,11 @@
       \item \code{readBin()} and \code{writeBin()} of a
       \code{rawConnection()} now also work in large cases, thanks to a
       report and proposal by Taeke Harkema in \PR{17665}.
+
+      \item \code{dnorm} had a problematic corner case with \code{sd == -Inf} and
+      negative \code{sd} was not flagged as error in all cases. Thanks to Stephen
+      D. Weigand for reporting and Wang Jiefei for analyzing this; similar
+      change in \code{dlnorm()}.
     }
   }
 }

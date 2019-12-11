@@ -3250,7 +3250,8 @@ y <- structure(list(), AA = 1)
 stopifnot(is.null(attr(y, exact = TRUE, "A")))
 
 
-if(nzchar(Sys.getenv("_R_CLASS_MATRIX_ARRAY_"))) {
+if(Sys.getenv("_R_CLASS_MATRIX_ARRAY_") %in%
+   c("true", "True", "TRUE", "T")) {
 ## 1) A matrix is an array, too:
 stopifnot( vapply(1:9, function(N) inherits(array(pi, dim = 1:N), "array"), NA) )
 ## was false for N=2 in R < 4.0.0
@@ -3381,6 +3382,13 @@ stopifnot(exprs = {
 df <- data.frame(x=1:3, grp=c("A","A","B"))
 plot( ~grp, data=df, subset = x > 1)
 ## failed in R <= 3.6.1
+
+
+## dnorm() etc border cases, notably sigma = -Inf
+tools::assertWarning(v0Neg  <- dnorm(0:1, sd = -Inf))
+tools::assertWarning(dlInf0 <- dlnorm(Inf,Inf, sd = 0))
+stopifnot(is.nan(v0Neg), is.nan(dlInf0))
+## in R <= 3.6.2, v0Neg was 0 w/o any warning; dlnorm(...) was +Inf
 
 
 

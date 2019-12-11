@@ -284,8 +284,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-2cd533d1c8e4a9f2ddfb20ea667ff483 *ChangeLog
-f8ad55f0c830f6352453c00835f20541 *DESCRIPTION
+05660282501071786e39977a5a8a7cb9 *ChangeLog
+4ff764e30f3cd76776685e7fdf2a6ac1 *DESCRIPTION
 3ca8715986b6bea70610e4cadb339fb0 *po/R-fr.po
 e3419ef4249ee866f3bcc092a096746e *po/R-ko.po
 c9c286a5731db93724b9f0e7b259f702 *po/R-de.po
@@ -324,7 +324,7 @@ ba0dd5d00369b21b40a661864683998b *inst/po/ko/LC_MESSAGES/nlme.mo
 24b7a2ee5265d7f099ee30c1ef9992d4 *inst/po/ko/LC_MESSAGES/R-nlme.mo
 f0a206bb1886e769376cd5b0f306e364 *tests/deparse.R
 acbc43cefb4e2ab33d47609e745d6311 *tests/lmList.R
-395bfa0ee325c0e8b45d76b851e56b23 *tests/augPred_lab.R
+c338794f58a889a3c552fdfbb9c62374 *tests/augPred_lab.R
 2e2ed18cde1ff6fdf0cd284d8073ed19 *tests/sigma-fixed-etc.R
 5d84af6fb453785dcb1d39674321dbaf *tests/data.frame.R
 ab25428328f64b827b7ff267fc84ab5e *tests/coef.R

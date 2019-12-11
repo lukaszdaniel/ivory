@@ -4389,47 +4389,43 @@ SEXP attribute_hidden do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 /* writeBin(object, con, size, swap, useBytes) */
 SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP object, ans = R_NilValue;
-    int i, j, size, swap, len, useBytes;
-    const char *s;
-    char *buf;
-    Rboolean wasopen = TRUE, isRaw = FALSE;
-    Rconnection con = NULL;
-    RCNTXT cntxt;
-
     checkArity(op, args);
-    object = CAR(args);
+    SEXP object = CAR(args);
     if(!isVectorAtomic(object))
 	error(_("'x' argument is not an atomic vector type"));
-
-    if(TYPEOF(CADR(args)) == RAWSXP) {
-	isRaw = TRUE;
-    } else {
+    Rboolean
+	isRaw = TYPEOF(CADR(args)) == RAWSXP,
+	wasopen = isRaw;
+    Rconnection con = NULL;
+    if(!isRaw) {
 	con = getConnection(asInteger(CADR(args)));
 	if(con->text) error(_("can only write to a binary connection"));
 	wasopen = con->isopen;
 	if(!con->canwrite) error(_("cannot write to this connection"));
     }
 
-    size = asInteger(CADDR(args));
-    swap = asLogical(CADDDR(args));
+    int size = asInteger(CADDR(args)),
+	swap = asLogical(CADDDR(args));
     if(swap == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "swap");
-    useBytes = asLogical(CAD4R(args));
+    int useBytes = asLogical(CAD4R(args));
     if(useBytes == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "useBytes");
-    len = LENGTH(object);
-    if(len == 0) {
-	if(isRaw) return allocVector(RAWSXP, 0); else return R_NilValue;
-    }
-    /* RAW vectors are limited to 2^31 - 1 bytes */
-    if((double)len *size > INT_MAX) {
+    R_xlen_t i, len = XLENGTH(object);
+    if(len == 0)
+	return (isRaw) ? allocVector(RAWSXP, 0) : R_NilValue;
+
+#ifndef LONG_VECTOR_SUPPORT
+    /* without long vectors RAW vectors are limited to 2^31 - 1 bytes */
+    if(len * (double)size > INT_MAX) {
 	if(isRaw)
 	    error(_("only 2^31-1 bytes can be written to a raw vector"));
 	else
 	    error(_("only 2^31-1 bytes can be written in a single 'writeBin()' call"));
     }
+#endif
 
+    RCNTXT cntxt;
     if(!wasopen) {
 	/* Documented behaviour */
 	char mode[5];
@@ -4445,7 +4441,9 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->canwrite) error(_("cannot write to this connection"));
     }
 
+    SEXP ans = R_NilValue;
     if(TYPEOF(object) == STRSXP) {
+	const char *s;
 	if(isRaw) {
 	    Rbyte *bytes;
 	    size_t np, outlen = 0;
@@ -4525,7 +4523,8 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	default:
 	    UNIMPLEMENTED_TYPE("writeBin()", object);
 	}
-	buf = R_chk_calloc(len, size);
+	char *buf = R_chk_calloc(len, size);
+	R_xlen_t j;
 	switch(TYPEOF(object)) {
 	case LGLSXP:
 	case INTSXP:
@@ -4536,9 +4535,8 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 #if SIZEOF_LONG == 8
 	    case sizeof(long):
 	    {
-		long l1;
 		for (i = 0, j = 0; i < len; i++, j += size) {
-		    l1 = (long) INTEGER(object)[i];
+		    long l1 = (long) INTEGER(object)[i];
 		    memcpy(buf + j, &l1, size);
 		}
 		break;
@@ -4546,9 +4544,8 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 #elif SIZEOF_LONG_LONG == 8
 	    case sizeof(_lli_t):
 	    {
-		_lli_t ll1;
 		for (i = 0, j = 0; i < len; i++, j += size) {
-		    ll1 = (_lli_t) INTEGER(object)[i];
+		    _lli_t ll1 = (_lli_t) INTEGER(object)[i];
 		    memcpy(buf + j, &ll1, size);
 		}
 		break;
@@ -4556,9 +4553,8 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 	    case 2:
 	    {
-		short s1;
 		for (i = 0, j = 0; i < len; i++, j += size) {
-		    s1 = (short) INTEGER(object)[i];
+		    short s1 = (short) INTEGER(object)[i];
 		    memcpy(buf + j, &s1, size);
 		}
 		break;
@@ -4578,9 +4574,8 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 		break;
 	    case sizeof(float):
 	    {
-		float f1;
 		for (i = 0, j = 0; i < len; i++, j += size) {
-		    f1 = (float) REAL(object)[i];
+		    float f1 = (float) REAL(object)[i];
 		    memcpy(buf+j, &f1, size);
 		}
 		break;
@@ -4623,7 +4618,7 @@ SEXP attribute_hidden do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
 	/* write it now */
-	if(isRaw) { /* We checked size*len < 2^31-1 above */
+	if(isRaw) { /* for non-long vectors, we checked size*len < 2^31-1 above */
 	    PROTECT(ans = allocVector(RAWSXP, size*len));
 	    memcpy(RAW(ans), buf, size*len);
 	} else {
@@ -5495,7 +5490,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 			warning(_("'raw = FALSE' but '%s' is not a regular file"),
 			        url);
 		}
-#endif		
+#endif
 		if (!raw &&
 		    (!strlen(open) || streql(open, "r") || streql(open, "rt"))) {
 		    /* check if this is a compressed file */
