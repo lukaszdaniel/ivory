@@ -21,8 +21,7 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
                          c("two.sided", "less", "greater"),
                          conf.level = 0.95)
 {
-
-    DNAME <- gettextf("%s time base: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(T)), collapse = ""), domain = "R-stats")
+    DNAME <- gettextf("%s time base: %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(T)), collapse = ""), domain = "R-stats")
     if ((l <- length(x)) != length(T))
         if (length(T) == 1L)
             T <- rep(T, l)

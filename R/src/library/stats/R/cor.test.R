@@ -25,7 +25,7 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
 {
     alternative <- match.arg(alternative)
     method <- match.arg(method)
-    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
+    DNAME <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)), collapse = ""), domain = "R-stats")
 
     if(length(x) != length(y))
 	stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))

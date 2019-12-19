@@ -1,7 +1,7 @@
 #  File src/library/stats/R/mantelhaen.test.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2018 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ function(x, y = NULL, z = NULL,
          alternative = c("two.sided", "less", "greater"),
          correct = TRUE, exact = FALSE, conf.level = 0.95)
 {
-    DNAME <- deparse(substitute(x))
+    DNAME <- deparse1(substitute(x))
     if(is.array(x)) {
         if(length(dim(x)) == 3L) {
             if(anyNA(x)) stop("NA values are not allowed")
@@ -35,7 +35,7 @@ function(x, y = NULL, z = NULL,
         if(is.null(z)) stop(gettextf("if '%s' argument is not an array, '%s' argument must be given", "x", "z"))
         if(any(diff(c(length(x), length(y), length(z))) != 0L ))
             stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z"))
-        DNAME <- gettextf("%s and %s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(z)), collapse = ""), domain = "R-stats")
+        DNAME <- gettextf("%s and %s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)), collapse = ""), paste(deparse1(substitute(z)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y, z)
         x <- factor(x[OK])
         y <- factor(y[OK])

@@ -1,7 +1,7 @@
 #  File src/library/stats/R/fligner.test.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ function(x, g, ...)
     if (is.list(x)) {
         if (length(x) < 2L)
             stop("'x' must be a list with at least 2 elements")
-        DNAME <- deparse(substitute(x))
+        DNAME <- deparse1(substitute(x))
         x <- lapply(x, function(u) u <- u[complete.cases(u)])
         k <- length(x)
         l <- lengths(x)
@@ -38,7 +38,7 @@ function(x, g, ...)
     else {
         if (length(x) != length(g))
             stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "g"))
-        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""), domain = "R-stats")
+        DNAME <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, g)
         x <- x[OK]
         g <- g[OK]
@@ -54,6 +54,8 @@ function(x, g, ...)
 
     ## Careful. This assumes that g is a factor:
     x <- x - tapply(x,g,median)[g]
+    if (all(x == 0))
+        stop("data are essentially constant")
 
     a <- qnorm((1 + rank(abs(x)) / (n + 1)) / 2)
     STATISTIC <- sum(tapply(a, g, "sum")^2 / tapply(a, g, "length"))

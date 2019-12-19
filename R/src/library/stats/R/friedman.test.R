@@ -21,7 +21,7 @@ friedman.test <- function(y, ...) UseMethod("friedman.test")
 friedman.test.default <-
 function(y, groups, blocks, ...)
 {
-    DNAME <- deparse(substitute(y))
+    DNAME <- deparse1(substitute(y))
     if (is.matrix(y)) {
         groups <- factor(c(col(y)))
         blocks <- factor(c(row(y)))
@@ -31,7 +31,7 @@ function(y, groups, blocks, ...)
             stop("NA values are not allowed in 'groups' or 'blocks' arguments")
         if (any(diff(c(length(y), length(groups), length(blocks))) != 0L))
             stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups", "blocks"))
-        DNAME <- gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)), collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
+        DNAME <- gettextf("%s and %s and %s", paste(deparse1(substitute(y)), collapse = ""), paste(deparse1(substitute(groups)), collapse = ""), paste(deparse1(substitute(blocks)), collapse = ""), domain = "R-stats")
         if (any(table(groups, blocks) != 1))
             stop("not an unreplicated complete block design")
         groups <- factor(groups)
@@ -52,10 +52,8 @@ function(y, groups, blocks, ...)
     r <- t(apply(y, 1L, rank))
     ## <FIXME split.matrix>
     TIES <- tapply(c(r), row(r), table)
-    STATISTIC <- ((12 * sum((colSums(r) - n * (k + 1) / 2)^2)) /
-                  (n * k * (k + 1)
-                   - (sum(unlist(lapply(TIES, function (u) {u^3 - u}))) /
-                      (k - 1))))
+    STATISTIC <- 12 * sum((colSums(r) - n * (k + 1) / 2)^2) /
+        (n * k * (k + 1) - sum(unlist(lapply(TIES, function(u) u^3 - u))) / (k-1))
     PARAMETER <- k - 1
     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
     names(STATISTIC) <- gettext("Friedman chi-squared", domain = "R-stats")

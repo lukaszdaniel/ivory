@@ -19,14 +19,14 @@
 interaction.plot <-
     function(x.factor, trace.factor, response, fun=mean,
 	     type = c("l", "p", "b", "o", "c"), legend = TRUE,
-             trace.label=deparse(substitute(trace.factor)), fixed=FALSE,
-             xlab = deparse(substitute(x.factor)), ylab = ylabel,
+             trace.label=deparse1(substitute(trace.factor)), fixed=FALSE,
+             xlab = deparse1(substitute(x.factor)), ylab = ylabel,
              ylim = range(cells, na.rm=TRUE),
              lty = nc:1, col = 1, pch = c(seq_len(9), 0, letters),
              xpd = NULL, leg.bg = par("bg"), leg.bty = "n",
              xtick = FALSE, xaxt = par("xaxt"), axes = TRUE, ...)
 {
-    ylabel <- gettextf("%s of %s", paste(deparse(substitute(fun)), collapse = ""), paste(deparse(substitute(response)), collapse = ""))
+    ylabel <- gettextf("%s of %s", paste(deparse1(substitute(fun)), collapse = ""), paste(deparse1(substitute(response)), collapse = ""))
     type <- match.arg(type)
     cells <- tapply(response, list(x.factor, trace.factor), fun)
     nr <- nrow(cells); nc <- ncol(cells)

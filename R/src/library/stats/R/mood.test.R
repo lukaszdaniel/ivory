@@ -22,7 +22,7 @@ mood.test.default <-
 function(x, y, alternative = c("two.sided", "less", "greater"), ...)
 {
     alternative <- match.arg(alternative)
-    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
+    DNAME <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)), collapse = ""), domain = "R-stats")
 
     x <- x[is.finite(x)]
     y <- y[is.finite(y)]

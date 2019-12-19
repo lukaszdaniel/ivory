@@ -16,7 +16,7 @@
 }
 \usage{
 cpgram(ts, taper = 0.1,
-       main = paste(gettext("Series: ", domain = "R-stats"), deparse(substitute(ts))),
+       main = paste(gettext("Series: ", domain = "R-stats"), deparse1(substitute(ts))),
        ci.col = "blue")
 }
 \arguments{

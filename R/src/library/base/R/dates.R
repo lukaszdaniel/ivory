@@ -81,7 +81,7 @@ as.Date.default <- function(x, ...)
     else if(is.logical(x) && all(is.na(x)))
 	.Date(as.numeric(x))
     else
-	stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("Date")), domain = "R-base")
+	stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))), dQuote("Date")), domain = "R-base")
 }
 
 ## ## Moved to package date
@@ -90,7 +90,7 @@ as.Date.default <- function(x, ...)
 ##     if(inherits(x, "date")) {
 ##         x <- (x - 3653) # origin 1960-01-01
 ##         return(structure(x, class = "Date"))
-##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date")))
+##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse1(substitute(x))), dQuote("Date")))
 ## }
 
 ## ## Moved to package chron
@@ -102,7 +102,7 @@ as.Date.default <- function(x, ...)
 ##         if(length(z) == 3L && is.numeric(z))
 ##             x  <- x + as.numeric(as.Date(paste(z[3L], z[1L], z[2L], sep="/")))
 ##         return(structure(x, class = "Date"))
-##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates")))
+##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse1(substitute(x))), dQuote("Dates")))
 ## }
 
 format.Date <- function(x, ...)
@@ -466,7 +466,5 @@ xtfrm.Date <- function(x) as.numeric(x)
 
 ## Added in 3.5.0.
 
-.Date <- function(xx, cl = "Date") {
-    class(xx) <- cl
-    xx
-}
+.Date <- function(xx, cl = "Date") `class<-`(xx, cl)
+

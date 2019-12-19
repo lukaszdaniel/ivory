@@ -1,7 +1,7 @@
 #  File src/library/graphics/R/plot.design.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ plot.design <-
 	plot(c(0,k+1), ylim, type = "n", axes = axes, xaxt = "n",
              xlab = xlab, ylab = ylab, main = main, adj = 0.5, ...)
 	segments(0.5, tot, k+0.5, tot, ...)
-	for(i in 1L:k) {
+	for(i in seq_len(k)) {
             si <- stats[[i]]
 	    segments(i, min(si, na.rm = TRUE),
 		     i, max(si, na.rm = TRUE), ...)
@@ -63,7 +63,7 @@ plot.design <-
     } ## .plot.des()
 
     ## 'fun' dealing
-    fname <- deparse(substitute(fun))
+    fname <- deparse1(substitute(fun))
     fun <- match.fun(fun)
     if (!(is.data.frame(x) | inherits(x,"formula")))
 	stop("'x' must be a dataframe or a formula")

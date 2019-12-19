@@ -26,7 +26,7 @@ function(x, g, ...)
             stop("'x' argument must be a list with at least 2 elements")
         if (!missing(g))
             warning("'x' argument is a list, so ignoring argument 'g'")
-        DNAME <- deparse(substitute(x))
+        DNAME <- deparse1(substitute(x))
         x <- lapply(x, function(u) u <- u[complete.cases(u)])
         if (!all(sapply(x, is.numeric)))
             warning("some elements of 'x' argument are not numeric and will be coerced to numeric")
@@ -40,7 +40,7 @@ function(x, g, ...)
     else {
         if (length(x) != length(g))
             stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "g"))
-        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""), domain = "R-stats")
+        DNAME <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, g)
         x <- x[OK]
         g <- g[OK]

@@ -26,7 +26,7 @@ medpolish <-
     r <- numeric(nr)
     c <- numeric(nc)
     oldsum <- 0
-    for(iter in 1L:maxiter) {
+    for(iter in seq_len(maxiter)) {
 	rdelta <- apply(z, 1L, median, na.rm = na.rm)
 	z <- z - matrix(rdelta, nrow = nr, ncol = nc)
 	r <- r + rdelta
@@ -55,7 +55,7 @@ medpolish <-
     names(r) <- rownames(z)
     names(c) <- colnames(z)
     ans <- list(overall = t, row = r, col = c, residuals = z,
-		name = deparse(substitute(x)))
+		name = deparse1(substitute(x)))
     class(ans) <- "medpolish"
     ans
 }

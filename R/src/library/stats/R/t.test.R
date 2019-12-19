@@ -32,7 +32,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
         conf.level < 0 || conf.level > 1))
         stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
     if( !is.null(y) ) {
-        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
+        dname <- gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)), collapse = ""), domain = "R-stats")
 	if(paired)
 	    xok <- yok <- complete.cases(x,y)
 	else {
@@ -42,7 +42,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 	y <- y[yok]
     }
     else {
-	DNAME <- deparse(substitute(x))
+	dname <- deparse1(substitute(x))
 	if (paired) stop("'y' is missing for paired test")
 	xok <- !is.na(x)
 	yok <- NULL
@@ -129,7 +129,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 	       stderr = stderr,
 	       alternative = alternative,
 	       alt.name = alt.name,
-	       method = METHOD, data.name = DNAME)
+	       method = METHOD, data.name = dname)
     class(rval) <- "htest"
     rval
 }

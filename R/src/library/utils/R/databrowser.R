@@ -166,7 +166,7 @@ browseEnv <- function(envir = .GlobalEnv, pattern,
     ItemsPerContainer <- c(ItemsPerContainer, rep.int(0, M-N))
 
     if(is.null(main))
-	main <- paste(gettextf("R objects in %s", paste(deparse(substitute(envir)), collapse = ""), domain = "R-utils"))
+	main <- paste(gettextf("R objects in %s", paste(deparse1(substitute(envir)), collapse = ""), domain = "R-utils"))
     if(is.null(properties)) {
 	properties <- as.list(c(date = format(Sys.time(), "%Y-%b-%d %H:%M"),
 				local({

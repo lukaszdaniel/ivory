@@ -1,7 +1,7 @@
 #  File src/library/base/R/datetime.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2018 The R Core Team
+#  Copyright (C) 1995-2019 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -176,7 +176,8 @@ Sys.timezone <- function(location = TRUE)
         if(nzchar(Sys.which("cmp"))) {
             known <- dir(tzdir, recursive = TRUE)
             for(tz in known) {
-                status <- system2("cmp", c("-s", lt0, file.path(tzdir, tz)))
+                status <- system2("cmp", c("-s", shQuote(lt0),
+                                  shQuote(file.path(tzdir, tz))))
                 if (status == 0L) {
                     cacheIt(tz)
                     warning(gettextf("It is strongly recommended to set envionment variable TZ to %s (or equivalent)",
@@ -263,7 +264,7 @@ as.POSIXlt.default <- function(x, tz = "", optional = FALSE, ...)
         return(as.POSIXlt(as.POSIXct.default(x), tz = tz))
     if(optional)
         as.POSIXlt.character(rep.int(NA_character_, length(x)), tz=tz)
-    else stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("POSIXlt")), domain = "R-base")
+    else stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))), dQuote("POSIXlt")), domain = "R-base")
 }
 
 
@@ -277,7 +278,7 @@ as.POSIXct.Date <- function(x, ...) .POSIXct(unclass(x)*86400)
 ##     if(inherits(x, "date")) {
 ##         x <- (x - 3653) * 86400 # origin 1960-01-01
 ##         return(.POSIXct(x))
-##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date")))
+##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse1(substitute(x))), dQuote("Date")))
 ## }
 
 ## ## Moved to package chron
@@ -289,7 +290,7 @@ as.POSIXct.Date <- function(x, ...) .POSIXct(unclass(x)*86400)
 ##         if(length(z) == 3L && is.numeric(z))
 ##             x  <- x + as.numeric(ISOdate(z[3L], z[1L], z[2L], 0))
 ##         return(.POSIXct(x))
-##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates")))
+##     } else stop(gettextf("%s is not an object of class %s", sQuote(deparse1(substitute(x))), dQuote("Dates")))
 ## }
 
 as.POSIXct.POSIXlt <- function(x, tz = "", ...)
@@ -317,7 +318,7 @@ as.POSIXct.default <- function(x, tz = "", ...)
 	return(as.POSIXct(as.POSIXlt(x, tz, ...), tz, ...))
     if(is.logical(x) && all(is.na(x)))
         return(.POSIXct(as.numeric(x)))
-    stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("POSIXct")), domain = "R-base")
+    stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))), dQuote("POSIXct")), domain = "R-base")
 }
 
 `length<-.POSIXct` <- function(x, value)
@@ -619,12 +620,12 @@ difftime <-
 ## "difftime" constructor
 ## Martin Maechler, Date: 16 Sep 2002
 ## Numeric input version Peter Dalgaard, December 2006
-as.difftime <- function(tim, format = "%X", units = "auto")
+as.difftime <- function(tim, format = "%X", units = "auto", tz = "UTC")
 {
     if (inherits(tim, "difftime")) return(tim)
     if (is.character(tim)) {
         difftime(strptime(tim, format = format),
-                 strptime("0:0:0", format = "%X"), units = units)
+                 strptime("0:0:0", format = "%X"), units = units, tz = tz)
     } else {
         if (!is.numeric(tim)) stop("'tim' argument is not character or numeric")
 	if (units == "auto") stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
@@ -1214,7 +1215,7 @@ as.data.frame.POSIXlt <- function(x, row.names = NULL, optional = FALSE, ...)
 {
     value <- as.data.frame.POSIXct(as.POSIXct(x), row.names, optional, ...)
     if (!optional)
-        names(value) <- deparse(substitute(x))[[1L]]
+        names(value) <- deparse1(substitute(x))
     value
 }
 

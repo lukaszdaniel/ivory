@@ -15,8 +15,8 @@ eb6bf5d5b1abfb706c9f8293d73d07ac *man/read.xport.Rd
 e158337bb4c5753bee08025bb45c9901 *man/read.arff.Rd
 3488df6faab757f05c8c4967d77b2100 *man/write.foreign.Rd
 f12b27b4608118b61146fab29f4ba101 *man/write.dbf.Rd
-6aa6bf6b654f3f685143a6b5c0164ab5 *ChangeLog
-aba2536f8d611d0811894bcd33e522b8 *DESCRIPTION
+2e283119131cce20bd3152df00e7accb *ChangeLog
+1cf043bd87fd291b288a5e7df503a1de *DESCRIPTION
 7417510348fcefd7a58766e37d77bb8b *po/R-fr.po
 17b7cdff7f13c9e9007b1c2562efa279 *po/R-de.po
 deb703c6ba8c1348f2449f9a66a5ecc9 *po/R-pl.po
@@ -112,7 +112,7 @@ b6e5efb98982de531eeb73469b3cbdff *R/arff.R
 e2132fb94ed9a70f5085ef6a0139d81b *Changes
 be4d54e19ea07a3870fa634a13dc4ff1 *src/shapefil.h
 0e3f54d4c8fba49a81c4e5ffe0bd746a *src/sfm.h
-71e493ecd39a44f7e2dadaccf28a2ab5 *src/R_systat.c
+c6b25f7651f0cc187b8b1e2d6d93d271 *src/R_systat.c
 913d1eacdc04e0139ed1309715e61306 *src/pspp-format-def.h
 335b694632c79438d1f7187abc1e5eb5 *src/SASxport.h
 70568ecddeaf030c7944267f36dbb4de *src/var.h

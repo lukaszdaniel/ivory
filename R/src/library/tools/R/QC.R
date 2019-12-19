@@ -6651,7 +6651,7 @@ function(dir, localOnly = FALSE)
 
     language <- meta["Language"]
     if((is.na(language) ||
-        language == "en" ||
+        (language == "en") ||
         startsWith(language, "en-")) &&
        config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_USE_ASPELL_",
                                         "FALSE"))) {
@@ -6964,7 +6964,9 @@ function(dir, localOnly = FALSE)
                         "[ :]"), title, ignore.case = TRUE))
             out$title_includes_name <- TRUE
         language <- meta["Language"]
-        if(is.na(language) || (language == "en")) {
+        if(is.na(language) ||
+           (language == "en") ||
+           startsWith(language, "en-")) {
             title2 <- toTitleCase(title)
             ## Keep single quoted elements unchanged.
             p <- "(^|(?<=[ \t[:punct:]]))'[^']*'($|(?=[ \t[:punct:]]))"
