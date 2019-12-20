@@ -117,8 +117,10 @@ Type 'q()' to quit R.
 +      sum(y[gp1, 1] * w[gp1]) - sum(y[-gp1, 1] * w[-gp1])
 + }
 > grav1 <- gravity[as.numeric(gravity[, 2]) >= 7, ]
+> ## IGNORE_RDIFF_BEGIN
 > abc.ci(grav1, mean.diff, strata = grav1$series)
 [1]  0.95000 -6.70758 -0.39394
+> ## IGNORE_RDIFF_END
 > ## Don't show: 
 > options(op)
 > ## End (Don't show)

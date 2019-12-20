@@ -48,7 +48,7 @@ a51320555e514596e7daa274dd19d7ac *man/tsboot.Rd
 956d104f3dfc94de7a01d63c4ede6869 *man/imp.weights.Rd
 46e101fae60869b1db42ebd19eed6b24 *man/polar.Rd
 a00a318f35d0e660725fc5ee921fd5d9 *man/cav.Rd
-321fa746ad4232b89044b526ea5c3b96 *man/abc.ci.Rd
+9cebe801fa9a9f5d1b8e4ac9bbdb30ea *man/abc.ci.Rd
 0c522e69df3a6b8b21e5b67c3e5d1752 *man/catsM.Rd
 79e800e09d75d9ca045cb5e8e72a4d39 *man/dogs.Rd
 7e2dff3ff232fd6cefe3bbabfbed70fd *man/acme.Rd
@@ -88,7 +88,7 @@ a0d5e8c4e705d42ac0490f121ea867b8 *man/Imp.Estimates.Rd
 11f465056ac27fe90b765b879339fb51 *man/EEF.profile.Rd
 b16c33994e8ac8ec02b2e33b4588e279 *man/saddle.distn.object.Rd
 69ad56735054de20c73f6cfa94a7bf1e *ChangeLog
-0b916b3a5acf038985284166f8cf6bf8 *DESCRIPTION
+f601392f1b225aa0c01a576d0dc3c670 *DESCRIPTION
 07fd6a0961fc82451044b912d4453d8c *po/R-fr.po
 d8e6e8add1b4e1ce1ccb109cc88491b7 *po/R-ko.po
 d2a79bcd017828dc23493af50a0f042b *po/R-de.po
@@ -104,7 +104,7 @@ e5a47378d68002589a9ab5c58620a3ab *inst/po/en@quot/LC_MESSAGES/R-boot.mo
 e5c2f0e3b9f6a16cccc4f4266a8edfe1 *inst/po/pl/LC_MESSAGES/R-boot.mo
 a7431f0d6baac9766369161ed90a9326 *inst/po/ko/LC_MESSAGES/R-boot.mo
 6e887574f4c46cddf29707098ab3fccf *inst/bd.q
-47cae1b4ac440d7dfa8b10e31f4ed1a4 *tests/Examples/boot-Ex.Rout.save
+93a9267be2dbd6813e8d55ccae969049 *tests/Examples/boot-Ex.Rout.save
 167a3d2551651549fa966891802002d5 *R/bootpracs.q
 591c70055cc432c50fbff8c9fc8a2cfa *R/bootfuns.q
 5a3e04afacf5edf673d0b11aef8fe760 *data/remission.rda

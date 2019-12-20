@@ -1,7 +1,7 @@
 0ac7b30ad35a4c19ea69d76a6a366b02 *NAMESPACE
 df9ff3b3ed9842a6c2d767dfb14233d8 *man/eqscplot.Rd
 d59fb4bdaf0c58b26c3443c7c8c5af70 *man/Sitka.Rd
-9f038cc848d026bf00945399111bbc62 *man/beav2.Rd
+9c16e1752eba19b699081c3f7f82db01 *man/beav2.Rd
 9535c4de30b076e0ba2ec4d1f868b9ac *man/Null.Rd
 0d7c0da73d17e677b7d2389ecb269642 *man/truehist.Rd
 c3051dedc5459ae1574914189d9b59f7 *man/negative.binomial.Rd
@@ -25,14 +25,14 @@ e35fa2f6ee37f213648c7ec087ce8b83 *man/confint.Rd
 3ad1c9eeebe4ea98deb2a5e9ac96f13e *man/rms.curv.Rd
 f10d097bc2a4fbb9a4904db9fa2d512e *man/predict.glmmPQL.Rd
 815f79defe5a3e762f3b45ce1da2b677 *man/plot.lda.Rd
-449c97b7a4ed9720c762773b7601d6ba *man/lqs.Rd
+1ceb94b85ebb93dd9e43792d1c0ccee5 *man/lqs.Rd
 a81ca88a2a39298dd099c015fdd3c167 *man/gilgais.Rd
 dfa3b68ec958f14f2335f12ce1677d0b *man/quine.Rd
 e1cc4debb9ba4982b2a78864d03bf5d7 *man/Cushings.Rd
-3d7a650e22ac09fbe68065d37c673aa9 *man/nlschools.Rd
-141fe74de34fe57d4753d8628f386437 *man/housing.Rd
+0d589532d9330eedf9abb57688afdab6 *man/nlschools.Rd
+4b3d83cc89b49bdbf178503b6fa33dd3 *man/housing.Rd
 a7ba31f8b57db3cbb58b636ec45ad19d *man/Rabbit.Rd
-1f0a67c1a950722b94bcf83f72b3a932 *man/muscle.Rd
+6dba6358bce7917dc3262ee2dd120636 *man/muscle.Rd
 dacb5fe1ae583a9281568436fa0fbe21 *man/ucv.Rd
 2b7e747f5cf31f4ba254a7868773c9ba *man/motors.Rd
 ba511bdea2ec00b3962296a3b6cd7cde *man/shuttle.Rd
@@ -93,7 +93,7 @@ c5683d0ee4538c54e29683c313cf4d20 *man/drivers.Rd
 fc4ebf60ca33228804e86cd08ee7b990 *man/GAGurine.Rd
 a81030efe33e0a82e2f9e3709b1273b9 *man/bacteria.Rd
 3220d80bbff1399f7435c48def2a7f01 *man/stepAIC.Rd
-b1fa7ed0af328f27abc9a63dd10334df *man/wtloss.Rd
+62acbc2ad1ace8bca9cfc5f4db22b799 *man/wtloss.Rd
 6f7df5c4aadc280d302a025110571c4b *man/fractions.Rd
 d6c9433b3ee2a9fe920dcedecbefdf06 *man/farms.Rd
 e79ea25d60ba827b71a57f7458f733d2 *man/bcv.Rd
@@ -103,7 +103,7 @@ e79ea25d60ba827b71a57f7458f733d2 *man/bcv.Rd
 1b3cede44318f5ea8feb3c3b457bdc09 *man/biopsy.Rd
 779fa15f0f138df6c47fb803217c56ff *man/lm.gls.Rd
 1d714038b6e5bc7641181331d095e989 *man/summary.negbin.Rd
-74eed02126e0277bde3ad5dd024dc3ea *man/epil.Rd
+5d544d4123e89ce9b4404630c3ae53b8 *man/epil.Rd
 f65ceb9db76de192862127a7a63daab3 *man/petrol.Rd
 760b565cac1dcc4db7b25f77950c71b8 *man/theta.md.Rd
 0cb57d432c92a5347ab51b636993047b *man/lm.ridge.Rd
@@ -116,7 +116,7 @@ a4e54a0b5a237fcde8f47b5d82daa8b4 *man/Insurance.Rd
 4cabfa1e280f74cc87b27664d417fd5b *man/Sitka89.Rd
 4480f1a975763e68c264a8fdbe30cf7b *man/contr.sdif.Rd
 1b78ed518f4fbf6ed3704b0a8463715b *man/Aids2.Rd
-0ce0e02642fe47aa920ba76a92c790e8 *man/oats.Rd
+0fb65b5e6d3e0ceaf209f50d14caf636 *man/oats.Rd
 ceefe8e558dfa70a28f54fcae1ca3df0 *man/whiteside.Rd
 5440204f0acdca119adda063b91d9e17 *man/hist.scott.Rd
 c0883959355d48f6685f2cd1d9e42ce2 *man/polr.Rd
@@ -132,7 +132,7 @@ e2971220e00d364f968079d07203da26 *man/galaxies.Rd
 f320aaa10f4cff23eff1f1414c057eae *man/deaths.Rd
 6fecb36e859210cc8e28f1d71d5c3a7b *man/snails.Rd
 2ca64d5540ffa5e91f3c8461e6e3124b *man/cabbages.Rd
-f67b61e31e47a5327233c86af12779d9 *man/npk.Rd
+d7fa0f842323e2546a258c19eb1566c1 *man/npk.Rd
 7de173c292018dc9b23aa17f5f65a41b *man/addterm.Rd
 fa4751955a3deab7d55c7c08607ce9a7 *man/cats.Rd
 00995ff596440aa4a397749326348872 *man/con2tr.Rd
@@ -155,7 +155,7 @@ c9354f03af7c5806071ad7554b0e5306 *man/fitdistr.Rd
 e65737579ca1cd2810198d72f0260e21 *man/hills.Rd
 cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 2a0b5dd4c71cf01dfc1894be0e8f759b *man/mammals.Rd
-cd846d9af9038c65eb2b8bde3fa0952f *DESCRIPTION
+e115b6652f43dd3301f0532c97d1121a *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
@@ -197,7 +197,7 @@ d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
 0ad0e7930a9888271ed0748a7405c971 *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
-ddf9ea49be85683cf9398c510a532b25 *tests/Examples/MASS-Ex.Rout.save
+528e585b9fee418ce5de7390c078eb7b *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R

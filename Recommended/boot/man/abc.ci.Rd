@@ -91,7 +91,9 @@ mean.diff <- function(y, w)
      sum(y[gp1, 1] * w[gp1]) - sum(y[-gp1, 1] * w[-gp1])
 }
 grav1 <- gravity[as.numeric(gravity[, 2]) >= 7, ]
+## IGNORE_RDIFF_BEGIN
 abc.ci(grav1, mean.diff, strata = grav1$series)
+## IGNORE_RDIFF_END
 \dontshow{options(op)}
 }
 \keyword{nonparametric}
