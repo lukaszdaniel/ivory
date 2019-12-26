@@ -1056,6 +1056,14 @@ As noted above, packages in @samp{Enhances} @emph{must} be used
 conditionally and hence objects within them should always be accessed
 @emph{via} @code{::}.
 
+On most systems, @command{R CMD check} can be run with only those
+packages declared in @samp{Depends} and @samp{Imports} by setting
+environment variable @env{_R_CHECK_DEPENDS_ONLY_=true}, whereas setting
+@env{_R_CHECK_SUGGESTS_ONLY_=true} also allows suggested packages, but
+not those in @samp{Enhances} nor those not mentioned in the
+@file{DESCRIPTION} file.  It is recommended that a package is checked
+with each of these set, as well as with neither.
+
 @node The INDEX file, Package subdirectories, Package Dependencies, Package structure
 @subsection The @file{INDEX} file
 @cindex INDEX file
@@ -1337,6 +1345,15 @@ a file @code{@var{pkg}-Ex.Rout.save}, this is compared to the output
 file for running the examples when the latter are checked.  Reference
 output should be produced without having the @option{--timings} option
 set (and note that @option{--as-cran} sets it).
+
+If reference output is included for examples, tests or vignettes do make
+sure that it is fully reproducible, as it will be compared verbatim to
+that produced in a check run, unless the @samp{IGNORE_RDIFF} markup is
+used.  Things which trip maintainers up include displayed version
+numbers from loading other packages, printing numerical results to an
+unreproducibly high precision and printing timings.  Another trap is
+small values which are in fact rounding error from zero: consider using
+@code{zapsmall}.
 
 Subdirectory @file{exec} could contain additional executable scripts the
 package needs, typically scripts for interpreters such as the shell,
@@ -4372,7 +4389,9 @@ behaviours are allowed
 (@uref{http://pubs.opengroup.org/@/onlinepubs/@/9699919799/@/utilities/@/echo.html})
 and both occur as defaults on @R{} platforms: portable applications
 should not use @option{-n} (as the first argument) nor escape
-sequences. Another common issue is the construction
+sequences.  The recommended replacment for @command{echo -n} is the
+command @command{printf}.
+Another common issue is the construction
 @example
 export FOO=value
 @end example
@@ -4383,6 +4402,13 @@ Using @code{test -e} (or @code{[ -e ]}) in shell scripts is not
 portable: @code{-f} is normally what is intended.  Flags @option{-a} and
 @option{-o} are nowadays declared obsolescent by POSIX and should not be
 used.
+
+Use of `brace expansion', e.g.,
+@example
+rm -f src/*.@{o,so,d@}
+@end example
+@noindent
+is not portable.
 
 The @option{-o} flag for @command{set} in shell scripts is optional in
 POSIX and not supported on all the platforms @R{} is used on.
@@ -4748,8 +4774,9 @@ redirecting to @samp{https://} URLs.} that vary by build but are not
 documented.
 
 Usage of external commands should always be conditional on a test for
-existence (perhaps using @code{Sys.which}), as well as declared in the
-@samp{SystemRequirements} field.
+presence (perhaps using @code{Sys.which}), as well as declared in the
+@samp{SystemRequirements} field.  A package should pass its checks
+without warnings nor errors without the external command being present.
 
 An external command can be a (possibly optional) requirement for an
 imported or suggested package but needed for examples, tests or
@@ -5416,7 +5443,20 @@ definitions cannot be merged and the linker will give an error if the
 same variable is defined in more than one object file.  To avoid this,
 all but one of the C source files should declare the variable
 @code{extern} --- which means that any such variables included in header
-files need to be declared @code{extern}.
+files need to be declared @code{extern}.  A commonly used idiom
+(including by @R{} itself) is to define all global variables as
+@code{extern} in a header, say @file{globals.h} (and nowhere else), and
+then in one (and one only) source file use
+@example
+#define extern
+# include "globals.h"
+#undef extern
+@end example
+
+A cleaner approach is not to have global variables at all, but to place
+in a single file common variables (declared @code{static}) followed by
+all the functions which make use of them: this may result in more
+efficient code.
 
 The `modern' behaviour can be seen@footnote{In principle this could
 depend on the OS, but has been checked on Linux and macOS.} by using
@@ -6331,7 +6371,8 @@ Output from code between comments
 @end example
 @noindent
 is ignored when comparing check output to reference output (a
-@file{-Ex.Rout.save} file).
+@file{-Ex.Rout.save} file).  This markup can also be used for scripts
+under @file{tests}.
 
 @findex \keyword
 @item \keyword@{@var{key}@}

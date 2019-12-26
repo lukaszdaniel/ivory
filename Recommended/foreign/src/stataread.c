@@ -104,7 +104,7 @@ static int InByteBinary(FILE * fp, int naok)
     signed char i;
     if (fread(&i, sizeof(char), 1, fp) != 1)
 	error(_("a binary read error occurred"));
-    return  ((i == STATA_BYTE_NA) & !naok ? NA_INTEGER : (int) i);
+    return  (((i == STATA_BYTE_NA) & !naok) ? NA_INTEGER : (int) i);
 }
 /* read a single byte  */
 static int RawByteBinary(FILE * fp, int naok)
@@ -112,7 +112,7 @@ static int RawByteBinary(FILE * fp, int naok)
     unsigned char i;
     if (fread(&i, sizeof(char), 1, fp) != 1)
 	error(_("a binary read error occurred"));
-    return  ((i == STATA_BYTE_NA) & !naok ? NA_INTEGER : (int) i);
+    return  (((i == STATA_BYTE_NA) & !naok) ? NA_INTEGER : (int) i);
 }
 
 static int InShortIntBinary(FILE * fp, int naok,int swapends)
@@ -128,7 +128,7 @@ static int InShortIntBinary(FILE * fp, int naok,int swapends)
     result= (second<<8) | first;
   }
   if (result > STATA_SHORTINT_NA) result -= 65536;
-  return ((result == STATA_SHORTINT_NA) & !naok ? NA_INTEGER  : result);
+  return (((result == STATA_SHORTINT_NA) & !naok) ? NA_INTEGER  : result);
 }
 
 
@@ -139,7 +139,7 @@ static double InDoubleBinary(FILE * fp, int naok, int swapends)
 	error(_("a binary read error occurred"));
     if (swapends)
 	reverse_double(i);
-    return ((i == STATA_DOUBLE_NA) & !naok ? NA_REAL : i);
+    return (((i == STATA_DOUBLE_NA) & !naok) ? NA_REAL : i);
 }
 
 static double InFloatBinary(FILE * fp, int naok, int swapends)
@@ -149,7 +149,7 @@ static double InFloatBinary(FILE * fp, int naok, int swapends)
 	error(_("a binary read error occurred"));
     if (swapends)
 	reverse_float(i);
-    return ((i == STATA_FLOAT_NA) & !naok ? NA_REAL :  (double) i);
+    return (((i == STATA_FLOAT_NA) & !naok) ? NA_REAL :  (double) i);
 }
 
 static void InStringBinary(FILE * fp, int nchar, char* buffer)
@@ -596,7 +596,7 @@ SEXP do_readStata(SEXP call)
 
 static void OutIntegerBinary(int i, FILE * fp, int naok)
 {
-    i=((i == NA_INTEGER) & !naok ? STATA_INT_NA : i);
+    i = (((i == NA_INTEGER) & !naok) ? STATA_INT_NA : i);
     if (fwrite(&i, sizeof(int), 1, fp) != 1)
 	error(_("a binary write error occurred"));
 

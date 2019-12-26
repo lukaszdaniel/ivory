@@ -457,8 +457,16 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         bibtex <- Sys.getenv("BIBTEX", "bibtex")
         makeindex <- Sys.getenv("MAKEINDEX", "makeindex")
         ltxargs <- c("-interaction=nonstopmode", texfile)
-        if(sys2(latex, ltxargs))
-            stop(gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file)), domain = "R-tools")
+        if(sys2(latex, ltxargs)) {
+            lines <- .get_LaTeX_errors_from_log_file(paste0(base, ".log"))
+            errors <- if(length(lines))
+                          paste0("LaTeX errors:\n",
+                                 paste(lines, collapse = "\n"))
+                      else character()
+            stop(paste(gettextf("unable to run %s on '%s'", latex, file),
+                       errors, sep = "\n"),
+                 domain = NA)
+        }
         nmiss <- length(grep("Warning:.*Citation.*undefined",
                              readLines(paste0(base, ".log")),
                              useBytes = TRUE))
@@ -473,8 +481,8 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
             if(sys2(latex, ltxargs)) {
                 lines <- .get_LaTeX_errors_from_log_file(paste0(base, ".log"))
                 errors <- if(length(lines))
-                    paste(gettext("LaTeX errors:", domain = "R-tools"),
-                          paste(lines, collapse = "\n"), sep = "\n")
+                              paste(gettext("LaTeX errors:", domain = "R-tools"),
+                                     paste(lines, collapse = "\n"), sep = "\n")
                 else character()
                 stop(paste(gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools"),
                            errors, sep = "\n"),
