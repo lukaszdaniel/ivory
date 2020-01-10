@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-01-10 19:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,7 +191,7 @@ msgid "invalid '%s' specification"
 msgstr ""
 
 #: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
-#: plot.c:3172 plot.c:3174 plot.c:3176 plot.c:3335 plot3d.c:1164 plot3d.c:1168
+#: plot.c:3173 plot.c:3175 plot.c:3177 plot.c:3336 plot3d.c:1164 plot3d.c:1168
 #: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
@@ -244,7 +244,7 @@ msgstr ""
 
 #: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
 #: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3317 plot.c:3452 plot.c:3528 plot.c:3694 plot.c:3974 plot3d.c:1873
+#: plot.c:3318 plot.c:3453 plot.c:3529 plot.c:3695 plot.c:3975 plot3d.c:1873
 msgid "too few arguments"
 msgstr ""
 
@@ -260,7 +260,7 @@ msgstr ""
 
 #: plot.c:859 plot.c:2115 plot.c:2392 plot.c:2398 plot.c:2405 plot.c:2413
 #: plot.c:2420 plot.c:2427 plot.c:2434 plot.c:2441 plot.c:2449 plot.c:2456
-#: plot.c:3179
+#: plot.c:3180
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr ""
@@ -297,7 +297,7 @@ msgstr ""
 msgid "plot type '%s' will be truncated to first character"
 msgstr ""
 
-#: plot.c:1362 plot.c:3033
+#: plot.c:1362 plot.c:3034
 msgid "invalid plot type"
 msgstr ""
 
@@ -350,116 +350,116 @@ msgstr ""
 msgid "'a' and 'b' arguments must be finite"
 msgstr ""
 
-#: plot.c:2956 plot.c:4065 plot.c:4068 plot.c:4071 plot.c:4074 plot.c:4094
-#: plot.c:4098 plot.c:4101 plot.c:4121 plot.c:4125 plot.c:4128 plot3d.c:1086
+#: plot.c:2957 plot.c:4066 plot.c:4069 plot.c:4072 plot.c:4075 plot.c:4095
+#: plot.c:4099 plot.c:4102 plot.c:4122 plot.c:4126 plot.c:4129 plot3d.c:1086
 #: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
 #: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: plot.c:3028 plot.c:3168
+#: plot.c:3029 plot.c:3169
 #, c-format
 msgid "invalid number of points in '%s' function"
 msgstr ""
 
-#: plot.c:3170
+#: plot.c:3171
 msgid "incorrect argument type"
 msgstr ""
 
-#: plot.c:3182
+#: plot.c:3183
 msgid "different argument lengths"
 msgstr ""
 
-#: plot.c:3184
+#: plot.c:3185
 msgid "more labels than points"
 msgstr ""
 
-#: plot.c:3236
+#: plot.c:3237
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr ""
 
-#: plot.c:3242
+#: plot.c:3243
 msgid "warning: nearest point is already identified\n"
 msgstr ""
 
-#: plot.c:3328
+#: plot.c:3329
 msgid "invalid units"
 msgstr ""
 
-#: plot.c:3512 plot.c:3619
+#: plot.c:3513 plot.c:3620
 msgid "invalid dendrogram input"
 msgstr ""
 
-#: plot.c:3676
+#: plot.c:3677
 msgid "invalid symbol parameter vector"
 msgstr ""
 
-#: plot.c:3699
+#: plot.c:3700
 msgid "invalid symbol coordinates"
 msgstr ""
 
-#: plot.c:3707
+#: plot.c:3708
 msgid "x/y/parameter length mismatch"
 msgstr ""
 
-#: plot.c:3726
+#: plot.c:3727
 msgid "invalid circles data"
 msgstr ""
 
-#: plot.c:3728 plot.c:3749 plot.c:3774 plot.c:3804
+#: plot.c:3729 plot.c:3750 plot.c:3775 plot.c:3805
 msgid "invalid symbol parameter"
 msgstr ""
 
-#: plot.c:3747
+#: plot.c:3748
 msgid "invalid squares data"
 msgstr ""
 
-#: plot.c:3772
+#: plot.c:3773
 msgid "invalid rectangles data (need 2 columns)"
 msgstr ""
 
-#: plot.c:3802
+#: plot.c:3803
 msgid "invalid stars data"
 msgstr ""
 
-#: plot.c:3844
+#: plot.c:3845
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr ""
 
-#: plot.c:3847 plot.c:3853
+#: plot.c:3848 plot.c:3854
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr ""
 
-#: plot.c:3850
+#: plot.c:3851
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3892
+#: plot.c:3893
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr ""
 
-#: plot.c:3901
+#: plot.c:3902
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3903
+#: plot.c:3904
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr ""
 
-#: plot.c:3949
+#: plot.c:3950
 msgid "invalid symbol type"
 msgstr ""
 
-#: plot.c:3987 plot.c:3989 plot.c:3994 plot.c:3996
+#: plot.c:3988 plot.c:3990 plot.c:3995 plot.c:3997
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr ""
 
-#: plot.c:4013
+#: plot.c:4014
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1419,8 +1419,8 @@ msgstr ""
 "apparemment des métadonnées erronées de classe ou de méthode sont sauvées "
 "dans l'environnement ;"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"

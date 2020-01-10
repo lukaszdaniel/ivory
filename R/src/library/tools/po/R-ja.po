@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -4793,12 +4793,6 @@ msgstr " ディレクトリ '%s' を生成することが出来ません "
 msgid "cannot check R code installed as image"
 msgstr " イメージとしてインストールされた R コードはチェックできません "
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-#, fuzzy
-msgid "cannot coerce %s to logical"
-msgstr " 強制変換できません "
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 #, fuzzy
@@ -6805,13 +6799,18 @@ msgstr " 仮ディレクトリを生成することが出来ません "
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
 msgstr " %s を '%s' に対して実行出来ません "
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
+msgstr " '%s' を '%s' に対して実行出来ません "
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
@@ -7968,6 +7967,10 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
 #, fuzzy
+#~ msgid "cannot coerce %s to logical"
+#~ msgstr " 強制変換できません "
+
+#, fuzzy
 #~ msgid "ON"
 #~ msgstr " %s (%s) "
 
@@ -8297,9 +8300,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 #, fuzzy
 #~ msgid "pdflatex is not available"
 #~ msgstr " テスト '%s' は利用出来ません "
-
-#~ msgid "unable to run '%s' on '%s'"
-#~ msgstr " '%s' を '%s' に対して実行出来ません "
 
 #~ msgid "parsing '%s'"
 #~ msgstr " '%s' を構文解析中 "

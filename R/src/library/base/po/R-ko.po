@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2228,9 +2228,9 @@ msgstr ""
 msgid "dim(x) must have a positive length"
 msgstr "dim(x)은 양의 값을 가져야 합니다 "
 
-#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXct"))
+#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXct"))
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "do not know how to convert %s to class %s"
@@ -2500,6 +2500,8 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
@@ -2514,8 +2516,8 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
-#: R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "'time' 이 잘못되었습니다 "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2073,9 +2073,9 @@ msgstr ""
 msgid "dim(x) must have a positive length"
 msgstr ""
 
-#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXct"))
+#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXct"))
 #: R/dates.R:0 R/datetime.R:0
 msgid "do not know how to convert %s to class %s"
 msgstr ""
@@ -2320,6 +2320,8 @@ msgstr ""
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
@@ -2334,8 +2336,8 @@ msgstr ""
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0
-#: R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/serialize.R:0 R/taskCallback.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "geçersiz paket ismi"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2015-01-17 15:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -244,7 +244,7 @@ msgid_plural ""
 msgstr[0] "预定内核%s的用户代码中出了错，所有作业值都将受到影响"
 msgstr[1] "预定内核%s的用户代码中出了错，所有作业值都将受到影响"
 
-#. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+#. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
 msgid ""
 "scheduled core %s encountered error in user code, all values of the job will "

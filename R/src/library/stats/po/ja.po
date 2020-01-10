@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2020-01-10 19:25+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -728,45 +728,45 @@ msgstr " モデル行列中では複素数は現在許されていません "
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr " タイプ '%s' の変数はモデル行列中では許されません "
 
-#: model.c:876
+#: model.c:879
 msgid "invalid formula in 'update'"
 msgstr " 'update' 中の式が不正です "
 
-#: model.c:910
+#: model.c:913
 msgid "formula expected"
 msgstr " 式が期待されています "
 
-#: model.c:1042
+#: model.c:1052
 msgid "invalid term in model formula"
 msgstr " モデル式に不正な項があります "
 
-#: model.c:1117 model.c:1179 model.c:1587
+#: model.c:1120 model.c:1185 model.c:1604
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr " EncodeVars 中のモデル式が不正です "
 
-#: model.c:1143 model.c:1403
+#: model.c:1147 model.c:1435
 msgid "invalid power in formula"
 msgstr " モデル式中に不正なべき乗があります "
 
-#: model.c:1526
+#: model.c:1549
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr " データフレーム中の重複した名前 '%s' を '.' を使って複製しました "
 
-#: model.c:1673
+#: model.c:1680
 msgid "argument is not a valid model"
 msgstr " 引数は有効なモデルではありません "
 
-#: model.c:1683
+#: model.c:1690
 msgid "'specials' must be NULL or a character vector"
 msgstr " 'specials' はNULLまたは文字ベクタでなくてはなりません "
 
-#: model.c:1695
+#: model.c:1701
 msgid "'data' argument is of the wrong type"
 msgstr " 'data' 引数が誤った型です "
 
-#: model.c:1973
+#: model.c:2020
 msgid "'.' in formula and no 'data' argument"
 msgstr " '.' が式中にありますが, 'data' 引数がありません "
 

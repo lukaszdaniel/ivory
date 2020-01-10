@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1488,8 +1488,8 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f2)), domain = "R-methods")
 
 msgid "argument %s is not S4"
 msgstr ""

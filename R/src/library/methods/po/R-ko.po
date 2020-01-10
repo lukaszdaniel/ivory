@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1335,8 +1335,8 @@ msgstr ""
 "저장된 환경내에서 메소드 또는 클래스 메타데이터가 올바르지 않은 것처럼 보입니"
 "다;"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"

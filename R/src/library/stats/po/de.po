@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2020-01-10 19:25+0100\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -726,45 +726,45 @@ msgstr "Komplexe Variablen sind momentan in Modellmatrizen nicht erlaubt"
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "Variablen des Typs '%s' sind in Modellmatrizen nicht erlaubt"
 
-#: model.c:876
+#: model.c:879
 msgid "invalid formula in 'update'"
 msgstr "ungültige Formel in 'update'"
 
-#: model.c:910
+#: model.c:913
 msgid "formula expected"
 msgstr "Formel wird erwartet"
 
-#: model.c:1042
+#: model.c:1052
 msgid "invalid term in model formula"
 msgstr "ungültiger Term in Modellformel"
 
-#: model.c:1117 model.c:1179 model.c:1587
+#: model.c:1120 model.c:1185 model.c:1604
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "ungültige Modellformel in EncodeVars"
 
-#: model.c:1143 model.c:1403
+#: model.c:1147 model.c:1435
 msgid "invalid power in formula"
 msgstr "ungültige Potenz in Formel"
 
-#: model.c:1526
+#: model.c:1549
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "verdoppelter Name '%s' in Data Frame bei Benutzung von '.'"
 
-#: model.c:1673
+#: model.c:1680
 msgid "argument is not a valid model"
 msgstr "Argument ist kein gültiges Modell"
 
-#: model.c:1683
+#: model.c:1690
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' muss NULL oder eine Charaktervektor sein"
 
-#: model.c:1695
+#: model.c:1701
 msgid "'data' argument is of the wrong type"
 msgstr "Argument 'data' hat falschen Typ"
 
-#: model.c:1973
+#: model.c:2020
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' erscheint in der Formel und 'data' Argument ist ungültig"
 

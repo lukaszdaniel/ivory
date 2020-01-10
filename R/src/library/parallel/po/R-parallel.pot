@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -297,7 +297,7 @@ msgstr[1]    ""
 
 
 #: R/unix/mclapply.R: 0
-#. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+#. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 
 msgid        "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"

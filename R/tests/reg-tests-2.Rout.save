@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2019-12-13 r1203) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2019-12-26 r1206) -- "Internationalized Version of R"
 Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-12-13 r77564) -- "Unsuffered Consequences"
+R Under development (unstable) (2019-12-26 r77621) -- "Unsuffered Consequences"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3092,7 +3092,9 @@ $wt.res
          j 
  0.3675473 
 
-> lm.influence(lm(y ~ 0, data=dat, weights=wt, na.action=na.exclude))
+> print(width = 99,
++ lm.influence(lm(y ~ 0, data=dat, weights=wt, na.action=na.exclude))
++ ) ; stopifnot(getOption("width") == 80)
 $hat
 b d c e f g h i j 
 0 0 0 0 0 0 0 0 0 
@@ -3110,16 +3112,12 @@ i
 j
 
 $sigma
-        b         d         c         e         f         g         h         i 
-0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 
-        j 
-0.9366289 
+        b         d         c         e         f         g         h         i         j 
+0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 0.9366289 
 
 $wt.res
-         b          d          c          e          f          g          h 
- 0.3604547  0.1146812         NA -1.1426753  0.7723744  0.6817419  0.1718693 
-         i          j 
- 2.0840918  0.3675473 
+         b          d          c          e          f          g          h          i          j 
+ 0.3604547  0.1146812         NA -1.1426753  0.7723744  0.6817419  0.1718693  2.0840918  0.3675473 
 
 > lm.influence(lm(y ~ 0 + x3, data=dat, weights=wt, na.action=na.omit))
 $hat
@@ -5460,14 +5458,17 @@ character(0)
 +                    counts = c(18,17,15,20,10,20,25,13,12))
 > fit <- glm(counts ~ outcome + treatment, family = poisson,
 +            data = d.AD, weights = c(0, rep(1,8)))
-> residuals(fit, type="working") # first was NA < 2.4.0
-          1           2           3           4           5           6 
--0.31250000  0.15546875 -0.13231383 -0.11111111 -0.20909091  0.34622824 
+> print(residuals(fit, type="working"),
++       width = 37) # first was NA < 2.4.0 //  using new 'width'
+          1           2           3 
+-0.31250000  0.15546875 -0.13231383 
+          4           5           6 
+-0.11111111 -0.20909091  0.34622824 
           7           8           9 
  0.11111111  0.02818182 -0.19226306 
 > ## working residuals were NA for zero-weight cases.
 > fit2 <- glm(counts ~ outcome + treatment, family = poisson,
-+            data = d.AD, weights = c(0, rep(1,8)), y = FALSE)
++             data = d.AD, weights = c(0, rep(1,8)), y = FALSE)
 > for(z in c("response", "working", "deviance", "pearson"))
 +     stopifnot(all.equal(residuals(fit, type=z), residuals(fit2, type=z),
 +                         scale = 1, tolerance = 1e-10))
@@ -6348,7 +6349,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5639f8a875e8>
+<bytecode: 0x55887dc1bb08>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6359,7 +6360,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5639f8a875e8>
+<bytecode: 0x55887dc1bb08>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6371,7 +6372,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x5639f8a875e8>
+<bytecode: 0x55887dc1bb08>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}

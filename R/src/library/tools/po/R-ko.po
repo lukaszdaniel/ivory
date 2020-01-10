@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -4712,12 +4712,6 @@ msgstr "디렉토리 '%s'를 생성할 수 없습니다"
 msgid "cannot check R code installed as image"
 msgstr "이미지로서 설치된 R 코드는 확인할 수 없습니다"
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-#, fuzzy
-msgid "cannot coerce %s to logical"
-msgstr "강제변환을 할 수 없습니다"
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 #, fuzzy
@@ -6680,12 +6674,17 @@ msgstr "임시디렉토리 %s를 생성하지 못했습니다"
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
+msgstr "'%2$s'에 %1$s를 실행할 수 없습니다"
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
 msgstr "'%2$s'에 %1$s를 실행할 수 없습니다"
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
@@ -7816,6 +7815,10 @@ msgstr[0] ""
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "cannot coerce %s to logical"
+#~ msgstr "강제변환을 할 수 없습니다"
 
 #, fuzzy
 #~ msgid ""

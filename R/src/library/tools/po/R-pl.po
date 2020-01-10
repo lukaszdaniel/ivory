@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -4737,11 +4737,6 @@ msgstr "nie można zmienić na katalog %s"
 msgid "cannot check R code installed as image"
 msgstr "nie można sprawdzić kodu R zainstalowanego jako obraz"
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-msgid "cannot coerce %s to logical"
-msgstr "nie można przekształcić %s na typ logiczny"
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 msgid "cannot copy file %s to directory %s"
@@ -6610,12 +6605,17 @@ msgstr "nie można utworzyć katalogu tymczasowego %s"
 msgid "unable to find any package tarballs in %s"
 msgstr "nie można znaleźć żadnych plików tarball pakietu w katalogu %s"
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 msgid "unable to run %s command on file %s"
 msgstr "nie można uruchomić polecenia %s na pliku %s"
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
+msgstr "nie można uruchomić '%s' na '%s'"
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
@@ -8153,6 +8153,9 @@ msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
 
+#~ msgid "cannot coerce %s to logical"
+#~ msgstr "nie można przekształcić %s na typ logiczny"
+
 #~ msgid ""
 #~ "Located more than one %s output file (by engine %s) for vignette with "
 #~ "name: %s"
@@ -8701,9 +8704,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 
 #~ msgid "pdflatex is not available"
 #~ msgstr "pdflatex nie jest dostępny"
-
-#~ msgid "unable to run '%s' on '%s'"
-#~ msgstr "nie można uruchomić '%s' na '%s'"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "parsowanie '%s'"

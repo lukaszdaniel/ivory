@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:26\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1139,7 +1139,7 @@ msgstr "Keine passende Rechtschreibprüfung gefunden."
 msgid "No suitable spell-checker program found"
 msgstr "Keine passende Rechtschreibprüfung gefunden."
 
-#. R/browseVignettes.R: gettextf("No vignettes found by %s", paste(deparse(attr(x, "call")), collapse = " "))
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")), domain = "R-utils")
 #: R/browseVignettes.R:0
 #, fuzzy
 msgid "No vignettes found by %s"
@@ -1304,7 +1304,7 @@ msgstr ""
 msgid "R images (*.RData,*.rda)"
 msgstr ""
 
-#. R/databrowser.R: gettextf("R objects in %s", paste(deparse(substitute(envir)), collapse = ""), domain = "R-utils")
+#. R/databrowser.R: gettextf("R objects in %s", paste(deparse1(substitute(envir)), collapse = ""), domain = "R-utils")
 #: R/databrowser.R:0
 msgid "R objects in %s"
 msgstr ""
@@ -1952,6 +1952,12 @@ msgstr ""
 msgid "cannot choose a %s mirror non-interactively"
 msgstr "kann keinen CRAN-Spiegel nicht-interaktiv nutzen"
 
+#. R/strcapture.R: gettextf("cannot coerce %s to logical", sQuote(x))
+#: R/strcapture.R:0
+#, fuzzy
+msgid "cannot coerce %s to logical"
+msgstr "kann 'x' nicht nach Roman unwandeln"
+
 #. R/roman.R: stop("cannot coerce 'x' to roman")
 #: R/roman.R:0
 msgid "cannot coerce 'x' to roman"
@@ -2419,6 +2425,21 @@ msgstr "unzulässiges %s Argument"
 msgid "invalid '%s' specification"
 msgstr "unzulässige Spezifikation für 'quote'"
 
+#. R/head.R: gettext("invalid 'n' -  must contain at least one non-missing element, got none.",     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' -  must contain at least one non-missing element, got none."
+msgstr ""
+
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d", len, length(d),     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
+msgstr ""
+
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d", len, domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
+msgstr ""
+
 #. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
 #: R/packages.R:0
 msgid ""
@@ -2732,6 +2753,13 @@ msgstr "kein Zeilen in  '%s'"
 #. R/question.R: gettextf("no method defined for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames,     sigClasses)))
 #: R/question.R:0
 msgid "no method defined for function %s and signature %s"
+msgstr "keine Methode für Funktion %s und  Signatur %s definiert"
+
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head", deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail", deparse(n), sQuote(class(x)))
+#: R/head.R:0
+#, fuzzy
+msgid "no method found for %s(., n=%s) and class %s"
 msgstr "keine Methode für Funktion %s und  Signatur %s definiert"
 
 #. R/question.R: gettextf("no methods for %s and no documentation for it as a function", sQuote(f))
@@ -3048,6 +3076,18 @@ msgstr ""
 #. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
 #: R/sessionInfo.R:0
 msgid "system code page:"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums = V) is deprecated.\n"
+"Use"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums = V) instead."
 msgstr ""
 
 #. R/Sweave.R: stop("target syntax contains no translation table")

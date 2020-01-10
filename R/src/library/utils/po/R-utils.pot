@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.0.0\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:26\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1388,7 +1388,7 @@ msgstr ""
 
 
 #: R/browseVignettes.R: 0
-#. R/browseVignettes.R: gettextf("No vignettes found by %s", paste(deparse(attr(x, "call")), collapse = " "))
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")), domain = "R-utils")
 
 msgid "No vignettes found by %s"
 msgstr ""
@@ -1607,7 +1607,7 @@ msgstr ""
 
 
 #: R/databrowser.R: 0
-#. R/databrowser.R: gettextf("R objects in %s", paste(deparse(substitute(envir)), collapse = ""), domain = "R-utils")
+#. R/databrowser.R: gettextf("R objects in %s", paste(deparse1(substitute(envir)), collapse = ""), domain = "R-utils")
 
 msgid "R objects in %s"
 msgstr ""
@@ -2358,6 +2358,13 @@ msgid "cannot choose a %s mirror non-interactively"
 msgstr ""
 
 
+#: R/strcapture.R: 0
+#. R/strcapture.R: gettextf("cannot coerce %s to logical", sQuote(x))
+
+msgid "cannot coerce %s to logical"
+msgstr ""
+
+
 #: R/roman.R: 0
 #. R/roman.R: stop("cannot coerce 'x' to roman")
 
@@ -2960,6 +2967,27 @@ msgid "invalid '%s' specification"
 msgstr ""
 
 
+#: R/head.R: 0
+#. R/head.R: gettext("invalid 'n' -  must contain at least one non-missing element, got none.",     domain = "R-utils")
+
+msgid "invalid 'n' -  must contain at least one non-missing element, got none."
+msgstr ""
+
+
+#: R/head.R: 0
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d", len, length(d),     domain = "R-utils")
+
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
+msgstr ""
+
+
+#: R/head.R: 0
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d", len, domain = "R-utils")
+
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
+msgstr ""
+
+
 #: R/packages.R: 0
 #. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
 
@@ -3381,6 +3409,14 @@ msgid "no method defined for function %s and signature %s"
 msgstr ""
 
 
+#: R/head.R: 0
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head", deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail", deparse(n), sQuote(class(x)))
+
+msgid "no method found for %s(., n=%s) and class %s"
+msgstr ""
+
+
 #: R/question.R: 0
 #. R/question.R: gettextf("no methods for %s and no documentation for it as a function", sQuote(f))
 
@@ -3788,6 +3824,20 @@ msgstr ""
 #. R/sessionInfo.R: gettext("system code page: ", domain = "R-utils")
 
 msgid "system code page:"
+msgstr ""
+
+
+#: R/head.R: 0
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+
+msgid "tail(., addrownums = V) is deprecated.\nUse"
+msgstr ""
+
+
+#: R/head.R: 0
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+
+msgid "tail(., keepnums = V) instead."
 msgstr ""
 
 

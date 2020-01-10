@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-15 22:04+0200\n"
+"POT-Creation-Date: 2020-01-10 19:25+0100\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -727,45 +727,45 @@ msgstr "模型矩阵里目前不能有复数"
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "模型矩阵里不能有种类为'%s'的参数"
 
-#: model.c:876
+#: model.c:879
 msgid "invalid formula in 'update'"
 msgstr "'update'里的公式不对"
 
-#: model.c:910
+#: model.c:913
 msgid "formula expected"
 msgstr "需要公式"
 
-#: model.c:1042
+#: model.c:1052
 msgid "invalid term in model formula"
 msgstr "模型公式里有错误的项"
 
-#: model.c:1117 model.c:1179 model.c:1587
+#: model.c:1120 model.c:1185 model.c:1604
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "EncodeVars中的模型公式不对"
 
-#: model.c:1143 model.c:1403
+#: model.c:1147 model.c:1435
 msgid "invalid power in formula"
 msgstr "公式里的幂不对"
 
-#: model.c:1526
+#: model.c:1549
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "在数据框里用'.'时不能有重复的名字’%s'"
 
-#: model.c:1673
+#: model.c:1680
 msgid "argument is not a valid model"
 msgstr "参数不是正确的模型"
 
-#: model.c:1683
+#: model.c:1690
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials'的值要么是NULL要么是字符矢量"
 
-#: model.c:1695
+#: model.c:1701
 msgid "'data' argument is of the wrong type"
 msgstr "'data'参数种类有错"
 
-#: model.c:1973
+#: model.c:2020
 msgid "'.' in formula and no 'data' argument"
 msgstr "公式里有'.'，而没有'data'这一参数"
 

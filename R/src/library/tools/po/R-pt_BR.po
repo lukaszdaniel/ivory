@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -4456,11 +4456,6 @@ msgstr ""
 msgid "cannot check R code installed as image"
 msgstr ""
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-msgid "cannot coerce %s to logical"
-msgstr ""
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 msgid "cannot copy file %s to directory %s"
@@ -6343,11 +6338,15 @@ msgstr ""
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 msgid "unable to run %s command on file %s"
+msgstr ""
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+msgid "unable to run %s on '%s'"
 msgstr ""
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -4751,12 +4751,6 @@ msgstr "Не могу создать папку '%s'"
 msgid "cannot check R code installed as image"
 msgstr "не могу проверить код R, установленный как 'image'"
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-#, fuzzy
-msgid "cannot coerce %s to logical"
-msgstr "нельзя соединить"
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 #, fuzzy
@@ -6756,13 +6750,18 @@ msgstr "не могу создать временную папку"
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
 msgstr "не могу запустить %s на '%s'"
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
+msgstr "не могу запустить '%s' на '%s'"
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
@@ -8161,6 +8160,10 @@ msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
 
 #, fuzzy
+#~ msgid "cannot coerce %s to logical"
+#~ msgstr "нельзя соединить"
+
+#, fuzzy
 #~ msgid "ON"
 #~ msgstr "%s (%s)"
 
@@ -8483,9 +8486,6 @@ msgstr[2] "не могу перекодировать '%s' строк(и) %s"
 #, fuzzy
 #~ msgid "pdflatex is not available"
 #~ msgstr "тест '%s' недоступен"
-
-#~ msgid "unable to run '%s' on '%s'"
-#~ msgstr "не могу запустить '%s' на '%s'"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "разбор '%s'"

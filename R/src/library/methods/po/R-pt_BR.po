@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1347,8 +1347,8 @@ msgid ""
 "move the file or remove the class/method"
 msgstr "assinatura deve ser um vetor de classes ou um ambiente"
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"

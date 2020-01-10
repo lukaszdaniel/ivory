@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:26\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1118,7 +1118,7 @@ msgstr "Nie znaleziono odpowiedniego programu do sprawdzania pisowni."
 msgid "No suitable spell-checker program found"
 msgstr "Nie znaleziono odpowiedniego programu do sprawdzania pisowni"
 
-#. R/browseVignettes.R: gettextf("No vignettes found by %s", paste(deparse(attr(x, "call")), collapse = " "))
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")), domain = "R-utils")
 #: R/browseVignettes.R:0
 msgid "No vignettes found by %s"
 msgstr "Nie znaleziono ilustracji poprzez %s"
@@ -1284,7 +1284,7 @@ msgstr "kod R ze źródła ilustracji '%s'"
 msgid "R images (*.RData,*.rda)"
 msgstr "Obrazy R (*.RData,*.rda)"
 
-#. R/databrowser.R: gettextf("R objects in %s", paste(deparse(substitute(envir)), collapse = ""), domain = "R-utils")
+#. R/databrowser.R: gettextf("R objects in %s", paste(deparse1(substitute(envir)), collapse = ""), domain = "R-utils")
 #: R/databrowser.R:0
 msgid "R objects in %s"
 msgstr "Obiekty R w %s"
@@ -1939,6 +1939,12 @@ msgstr "anulowane przez użytkownika"
 msgid "cannot choose a %s mirror non-interactively"
 msgstr "nie można wybrać serweru lustrzanego %s nieinteraktywnie"
 
+#. R/strcapture.R: gettextf("cannot coerce %s to logical", sQuote(x))
+#: R/strcapture.R:0
+#, fuzzy
+msgid "cannot coerce %s to logical"
+msgstr "nie można przekształcić 'x' na liczby rzymskie"
+
 #. R/roman.R: stop("cannot coerce 'x' to roman")
 #: R/roman.R:0
 msgid "cannot coerce 'x' to roman"
@@ -2394,6 +2400,21 @@ msgstr "niepoprawny argument '%s'"
 msgid "invalid '%s' specification"
 msgstr "niepoprawne określenie '%s'"
 
+#. R/head.R: gettext("invalid 'n' -  must contain at least one non-missing element, got none.",     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' -  must contain at least one non-missing element, got none."
+msgstr ""
+
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d", len, length(d),     domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
+msgstr ""
+
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d", len, domain = "R-utils")
+#: R/head.R:0
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
+msgstr ""
+
 #. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
 #: R/packages.R:0
 msgid ""
@@ -2703,6 +2724,13 @@ msgstr "nie znaleziono linii w %s"
 #. R/question.R: gettextf("no method defined for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames,     sigClasses)))
 #: R/question.R:0
 msgid "no method defined for function %s and signature %s"
+msgstr "brak zdefiniowanej metody dla funkcji %s oraz sygnatury %s"
+
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head", deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail", deparse(n), sQuote(class(x)))
+#: R/head.R:0
+#, fuzzy
+msgid "no method found for %s(., n=%s) and class %s"
 msgstr "brak zdefiniowanej metody dla funkcji %s oraz sygnatury %s"
 
 #. R/question.R: gettextf("no methods for %s and no documentation for it as a function", sQuote(f))
@@ -3018,6 +3046,18 @@ msgstr "system (cmd0): %s"
 #: R/sessionInfo.R:0
 msgid "system code page:"
 msgstr "systemowa strona kodowa:"
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums = V) is deprecated.\n"
+"Use"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums = V) instead."
+msgstr ""
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
 #: R/Sweave.R:0

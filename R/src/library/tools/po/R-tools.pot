@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.0.0\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5698,13 +5698,6 @@ msgid "cannot check R code installed as image"
 msgstr ""
 
 
-#: R/utils.R: 0
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-
-msgid "cannot coerce %s to logical"
-msgstr ""
-
-
 #: R/admin.R: 0
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 
@@ -8192,11 +8185,17 @@ msgstr ""
 
 
 #: R/utils.R: 0
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 
 msgid "unable to run %s command on file %s"
+msgstr ""
+
+
+#: R/utils.R: 0
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+
+msgid "unable to run %s on '%s'"
 msgstr ""
 
 

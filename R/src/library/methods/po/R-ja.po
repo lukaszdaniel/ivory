@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-07-04 21:09\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1390,8 +1390,8 @@ msgid ""
 msgstr ""
 " 保存された環境中に誤ったメソッドもしくはクラスメタデータがあるようです; "
 
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f1)), domain = "R-methods")
-#. R/Methods.R: gettextf("argument %s is not S4", deparse(substitute(f2)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f1)), domain = "R-methods")
+#. R/Methods.R: gettextf("argument %s is not S4", deparse1(substitute(f2)), domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
 msgid "argument %s is not S4"

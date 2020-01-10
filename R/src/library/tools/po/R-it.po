@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -4604,12 +4604,6 @@ msgstr "impossibile creare directory '%s'"
 msgid "cannot check R code installed as image"
 msgstr "impossibile verificare codice R installato come immagine"
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-#, fuzzy
-msgid "cannot coerce %s to logical"
-msgstr "impossibile copiare '%s' su '%s'"
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 #, fuzzy
@@ -6579,12 +6573,17 @@ msgstr "impossibile creare directory temporanea"
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
+msgstr "impossibile eseguire bibtext su '%s'"
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
 msgstr "impossibile eseguire bibtext su '%s'"
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
@@ -7818,6 +7817,10 @@ msgstr[0] "impossibile creare '%s'"
 msgstr[1] "impossibile creare '%s'"
 
 #, fuzzy
+#~ msgid "cannot coerce %s to logical"
+#~ msgstr "impossibile copiare '%s' su '%s'"
+
+#, fuzzy
 #~ msgid "directly."
 #~ msgstr "impossibile creare directory '%s'"
 
@@ -8015,10 +8018,6 @@ msgstr[1] "impossibile creare '%s'"
 #, fuzzy
 #~ msgid "pdflatex is not available"
 #~ msgstr "il test '%s' non è disponibile"
-
-#, fuzzy
-#~ msgid "unable to run '%s' on '%s'"
-#~ msgstr "impossibile eseguire bibtext su '%s'"
 
 #~ msgid "parsing '%s'"
 #~ msgstr "analizzo '%s'"

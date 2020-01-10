@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -36,24 +36,24 @@ msgstr ""
 msgid "%s Tukey smoother resulting from %s"
 msgstr ""
 
-#. R/ansari.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/bartlett.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
-#. R/binom.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(n)),     collapse = ""), domain = "R-stats")
+#. R/ansari.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/bartlett.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/binom.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse1(substitute(n)),     collapse = ""), domain = "R-stats")
 #. R/chisq.test.R: gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"),     domain = "R-stats")
-#. R/cor.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/cor.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/cor.test.R: gettextf("%s and %s", names(mf[1]), names(mf[2]))
-#. R/fisher.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/fligner.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
-#. R/kruskal.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
-#. R/ks.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/mcnemar.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/mood.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/fisher.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/fligner.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/kruskal.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/ks.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/mcnemar.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/mood.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/oneway.test.R: gettextf("%s and %s", dp[[2L]], dp[[3L]], domain = "R-stats")
-#. R/pairwise.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""))
-#. R/pairwise.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(g)), domain = "R-stats")
-#. R/t.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/var.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
-#. R/wilcox.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/pairwise.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(g)),     collapse = ""))
+#. R/pairwise.R: gettextf("%s and %s", deparse1(substitute(x)), deparse1(substitute(g)), domain = "R-stats")
+#. R/t.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/var.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/wilcox.test.R: gettextf("%s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), domain = "R-stats")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/binom.test.R:0 R/chisq.test.R:0
 #: R/cor.test.R:0 R/fisher.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
 #: R/ks.test.R:0 R/mcnemar.test.R:0 R/mood.test.R:0 R/oneway.test.R:0
@@ -61,10 +61,10 @@ msgstr ""
 msgid "%s and %s"
 msgstr ""
 
-#. R/friedman.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)),     collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
+#. R/friedman.test.R: gettextf("%s and %s and %s", paste(deparse1(substitute(y)), collapse = ""), paste(deparse1(substitute(groups)),     collapse = ""), paste(deparse1(substitute(blocks)), collapse = ""), domain = "R-stats")
 #. R/friedman.test.R: gettextf("%s and %s and %s", names(mf[1]), names(mf[2]), names(mf[3]))
-#. R/mantelhaen.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), paste(deparse(substitute(z)), collapse = ""), domain = "R-stats")
-#. R/quade.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)),     collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
+#. R/mantelhaen.test.R: gettextf("%s and %s and %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(y)),     collapse = ""), paste(deparse1(substitute(z)), collapse = ""), domain = "R-stats")
+#. R/quade.test.R: gettextf("%s and %s and %s", paste(deparse1(substitute(y)), collapse = ""), paste(deparse1(substitute(groups)),     collapse = ""), paste(deparse1(substitute(blocks)), collapse = ""), domain = "R-stats")
 #. R/quade.test.R: gettextf("%s and %s and %s", names(mf[1]), names(mf[2]), names(mf[3]), domain = "R-stats")
 #: R/friedman.test.R:0 R/mantelhaen.test.R:0 R/quade.test.R:0
 msgid "%s and %s and %s"
@@ -109,18 +109,18 @@ msgstr "必需是零或一"
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr "xtabs(*, sparse=TRUE) 需要正确安装的\"Matrix\"程序包"
 
-#. R/interaction.plot.R: gettextf("%s of %s", paste(deparse(substitute(fun)), collapse = ""), paste(deparse(substitute(response)),     collapse = ""))
+#. R/interaction.plot.R: gettextf("%s of %s", paste(deparse1(substitute(fun)), collapse = ""), paste(deparse1(substitute(response)),     collapse = ""))
 #: R/interaction.plot.R:0
 msgid "%s of %s"
 msgstr ""
 
-#. R/pairwise.R: gettextf("%s out of %s", deparse(substitute(x)), deparse(substitute(n)), domain = "R-stats")
-#. R/prop.test.R: gettextf("%s out of %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)),     collapse = ""), domain = "R-stats")
+#. R/pairwise.R: gettextf("%s out of %s", deparse1(substitute(x)), deparse1(substitute(n)), domain = "R-stats")
+#. R/prop.test.R: gettextf("%s out of %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(n)),     collapse = ""), domain = "R-stats")
 #: R/pairwise.R:0 R/prop.test.R:0
 msgid "%s out of %s"
 msgstr ""
 
-#. R/prop.trend.test.R: gettextf("%s out of %s,\n using scores: %s", paste(deparse(substitute(x)), collapse = ""),     paste(deparse(substitute(n)), collapse = ""), paste(score, collapse = " "), domain = "R-stats")
+#. R/prop.trend.test.R: gettextf("%s out of %s,\n using scores: %s", paste(deparse1(substitute(x)), collapse = ""),     paste(deparse1(substitute(n)), collapse = ""), paste(score, collapse = " "),     domain = "R-stats")
 #: R/prop.trend.test.R:0
 msgid ""
 "%s out of %s,\n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "%s percent confidence interval:"
 msgstr "有连结时无法計算精確的置信区间"
 
-#. R/poisson.test.R: gettextf("%s time base: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(T)),     collapse = ""), domain = "R-stats")
+#. R/poisson.test.R: gettextf("%s time base: %s", paste(deparse1(substitute(x)), collapse = ""), paste(deparse1(substitute(T)),     collapse = ""), domain = "R-stats")
 #: R/poisson.test.R:0
 msgid "%s time base: %s"
 msgstr ""
@@ -697,6 +697,12 @@ msgstr "'degree'必需小于唯一数据点的数目"
 msgid "'end' argument was not changed"
 msgstr "'end'值没有变化"
 
+#. R/ts.R: stop("'end' must be a whole number of cycles after 'start'")
+#: R/ts.R:0
+#, fuzzy
+msgid "'end' must be a whole number of cycles after 'start'"
+msgstr "'centers'必需是个数字或矩阵"
+
 #. R/nlm.R: if (doX) "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0" else "'f()' values at end points are not of opposite sign"
 #: R/nlm.R:0
 #, fuzzy
@@ -756,11 +762,11 @@ msgstr "没有'formula'或有错"
 msgid "'formula' must have both left and right hand sides"
 msgstr "'formula'的公式左右两边都必需存在"
 
-#. R/ts.R: stop("'frequency' and 'deltat' arguments are both supplied and are inconsistent")
+#. R/ts.R: stop("'frequency' and 'deltat' arguments are both not NULL and are inconsistent")
 #: R/ts.R:0
 #, fuzzy
 msgid ""
-"'frequency' and 'deltat' arguments are both supplied and are inconsistent"
+"'frequency' and 'deltat' arguments are both not NULL and are inconsistent"
 msgstr "'frequency'和'deltat'都被设定，但它们的值相互矛盾"
 
 #. R/ts.R: warning("'frequency' argument was not changed")
@@ -3030,7 +3036,6 @@ msgstr ""
 
 #. R/nls.R: gettext("Standardized residuals")
 #. R/plot.lm.R: gettext("Standardized residuals")
-#. R/plot.lm.R: gettext("Standardized residuals")
 #: R/nls.R:0 R/plot.lm.R:0
 msgid "Standardized residuals"
 msgstr ""
@@ -3040,11 +3045,6 @@ msgstr ""
 #, fuzzy
 msgid "Start:  AIC=%s"
 msgstr "开始：AIC="
-
-#. R/plot.lm.R: gettext("Std. Pearson resid.")
-#: R/plot.lm.R:0
-msgid "Std. Pearson resid."
-msgstr ""
 
 #. R/plot.lm.R: gettext("Std. deviance resid.")
 #: R/plot.lm.R:0
@@ -3269,9 +3269,8 @@ msgstr ""
 msgid "When comparing means with same levels of:"
 msgstr ""
 
-#. R/pairwise.R: gettext("Wilcoxon rank sum test", domain = "R-stats")
 #. R/wilcox.test.R: gettext("Wilcoxon rank sum test", domain = "R-stats")
-#: R/pairwise.R:0 R/wilcox.test.R:0
+#: R/wilcox.test.R:0
 msgid "Wilcoxon rank sum test"
 msgstr ""
 
@@ -3280,9 +3279,8 @@ msgstr ""
 msgid "Wilcoxon rank sum test with continuity correction"
 msgstr ""
 
-#. R/pairwise.R: gettext("Wilcoxon signed rank test", domain = "R-stats")
 #. R/wilcox.test.R: gettext("Wilcoxon signed rank test", domain = "R-stats")
-#: R/pairwise.R:0 R/wilcox.test.R:0
+#: R/wilcox.test.R:0
 msgid "Wilcoxon signed rank test"
 msgstr ""
 
@@ -3846,9 +3844,10 @@ msgstr "用有重复的'x'来做crossvalidation好象不太对"
 msgid "cutree(): k(h) ="
 msgstr ""
 
+#. R/fligner.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
-#: R/t.test.R:0
+#: R/fligner.test.R:0 R/t.test.R:0
 msgid "data are essentially constant"
 msgstr "数据是恆量"
 
@@ -5200,6 +5199,12 @@ msgstr "步驟函数不对"
 msgid "not all series have the same frequency"
 msgstr "不是所有的序列都有相同的頻率"
 
+#. R/ts.R: stop("not all series have the same phase")
+#: R/ts.R:0
+#, fuzzy
+msgid "not all series have the same phase"
+msgstr "不是所有的序列都有相同的頻率"
+
 #. R/friedman.test.R: stop("not an unreplicated complete block design")
 #. R/quade.test.R: stop("not an unreplicated complete block design")
 #: R/friedman.test.R:0 R/quade.test.R:0
@@ -5215,7 +5220,6 @@ msgstr "不是非折疊完全区组设计"
 #. R/t.test.R: gettextf("not enough '%s' observations", "y")
 #. R/var.test.R: gettextf("not enough '%s' observations", "x")
 #. R/var.test.R: gettextf("not enough '%s' observations", "y")
-#. R/wilcox.test.R: gettextf("not enough '%s' observations", "x")
 #. R/wilcox.test.R: gettextf("not enough '%s' observations", "y")
 #: R/ansari.test.R:0 R/kruskal.test.R:0 R/poisson.test.R:0 R/t.test.R:0
 #: R/var.test.R:0 R/wilcox.test.R:0
@@ -5232,6 +5236,12 @@ msgstr "'x'数据不够"
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
 msgstr "'y'数据不够"
+
+#. R/wilcox.test.R: gettextf("not enough (non-missing) '%s' observations", "x")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "not enough (non-missing) '%s' observations"
+msgstr "(有限)'x'观察量数目不够"
 
 #. R/prop.test.R: stop("not enough data")
 #: R/prop.test.R:0
@@ -5412,8 +5422,8 @@ msgstr ""
 msgid "numeric contrasts or contrast name expected"
 msgstr "需要数值对比或对比的名字"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse(substitute(x)))
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse(substitute(x)))
+#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
+#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
 msgstr "对象'%s'没有分数"
@@ -6611,7 +6621,7 @@ msgstr "尺尾不对"
 msgid "wrong number of columns in 'x'"
 msgstr "'x'里的列数不对"
 
-#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse1(substitute(...)))
 #: R/contr.poly.R:0
 #, fuzzy
 msgid "wrong number of columns in new data:"
@@ -7319,10 +7329,6 @@ msgstr[0] "在组合拟合中用%d/%d行"
 #~ msgid ""
 #~ "exactly one of 'n', 'delta', 'sd', 'power', and 'sig.level' must be NULL"
 #~ msgstr "'n', 'delta', 'sd', 'power',和'sig.level'之中只能有一个取NULL值"
-
-#, fuzzy
-#~ msgid "not enough (finite) '%s' observations"
-#~ msgstr "(有限)'x'观察量数目不够"
 
 #, fuzzy
 #~ msgid "'x' argument must be numeric"

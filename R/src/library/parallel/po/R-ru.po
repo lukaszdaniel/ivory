@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:49\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2012-03-15 11:57-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -256,7 +256,7 @@ msgstr[2] ""
 "запланированные ядра %s столкнулись с ошибкой в пользовательском коде, будут "
 "затронуты все значения работ"
 
-#. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+#. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
 msgid ""
 "scheduled core %s encountered error in user code, all values of the job will "

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.0.0\n"
-"POT-Creation-Date: 2019-10-17 21:43\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2661,9 +2661,9 @@ msgstr ""
 #: R/dates.R: 0
 #: R/datetime.R: 0
 #: R/datetime.R: 0
-#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("Date"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXlt"))
-#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))),     dQuote("POSIXct"))
+#. R/dates.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert %s to class %s", sQuote(deparse1(substitute(x))),     dQuote("POSIXct"))
 
 msgid "do not know how to convert %s to class %s"
 msgstr ""
@@ -2986,6 +2986,8 @@ msgstr ""
 #: R/colSums.R: 0
 #: R/colSums.R: 0
 #: R/colSums.R: 0
+#: R/connections.R: 0
+#: R/connections.R: 0
 #: R/dataframe.R: 0
 #: R/dataframe.R: 0
 #: R/dataframe.R: 0
@@ -3005,6 +3007,8 @@ msgstr ""
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")

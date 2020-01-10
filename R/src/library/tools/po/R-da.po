@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-01-10 19:25\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -4505,11 +4505,6 @@ msgstr "kan ikke oprette"
 msgid "cannot check R code installed as image"
 msgstr "kan ikke kontrollere R-kode installeret som aftryk"
 
-#. R/utils.R: gettextf("cannot coerce %s to logical", sQuote(val))
-#: R/utils.R:0
-msgid "cannot coerce %s to logical"
-msgstr ""
-
 #. R/admin.R: gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir))
 #: R/admin.R:0
 #, fuzzy
@@ -6427,12 +6422,17 @@ msgstr "kan ikke oprette"
 msgid "unable to find any package tarballs in %s"
 msgstr ""
 
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
+msgstr "kan ikke skrive kodefiler"
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
+#, fuzzy
+msgid "unable to run %s on '%s'"
 msgstr "kan ikke skrive kodefiler"
 
 #. R/build.R: warning("unable to run 'make clean' in 'src'", domain = "R-tools")
