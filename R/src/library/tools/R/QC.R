@@ -808,7 +808,7 @@ function(x, ...)
             writeLines("")
         }
     }
-    
+
     ## In general, functions in the code which only have an \alias but
     ## no \usage entry are not necessarily a problem---they might be
     ## mentioned in other parts of the Rd object documenting them, or be
@@ -2888,6 +2888,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
     ## VignetteBuilder packages are needed to ascertain what is a vignette.
     VB <- .get_requires_from_package_db(db, "VignetteBuilder")
 
+    ## FIXME: use vapply to get a character vector.
     depends <- sapply(ldepends, `[[`, 1L)
     imports <- sapply(limports, `[[`, 1L)
     links <- sapply(llinks, `[[`, 1L)
@@ -3030,6 +3031,28 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
                   c(depends, imports, suggests))
     if(length(RM)) bad_depends$missing_rdmacros_depends <- RM
 
+    ## (added in 4.0.0) Check for orphaned packages.
+    if (config_val_to_logical(Sys.getenv("_R_CHECK_ORPHANED_", "FALSE"))) {
+        exceptions <- c('XML', 'RJSONIO', 'RCurl')
+        ## empty fields are list().
+        strict <- setdiff(unique(c(as.character(depends),
+                                   as.character(imports),
+                                   as.character(links))),
+                          c(exceptions, bad_depends$required_but_not_installed))
+        ## This assumes the dependencies are installed.
+        ## CRAN ones should be for incoming checks (and we only care
+        ## about orphaning there) but we could consult PACKAGES as fallback.
+        ## Suggests might not exist, so we suppress warnings.
+        strict2 <- sapply(strict, function(x) suppressWarnings(maintainer(x)))
+        strict <- strict[!is.na(strict2) & strict2 == "ORPHANED"]
+        if(length(strict)) bad_depends$orphaned <- strict
+        weak <- setdiff(as.character(suggests),
+                        c(exceptions, bad_depends$suggested_but_not_installed))
+        weak2 <- sapply(weak, function(x) suppressWarnings(maintainer(x)))
+        weak <- weak[!is.na(weak2) & weak2 == "ORPHANED"]
+        if(length(weak)) bad_depends$orphaned2 <- weak
+    }
+
     class(bad_depends) <- "check_package_depends"
     bad_depends
 }
@@ -3092,6 +3115,12 @@ function(x, ...)
           c(
             c(sprintf(ngettext(length(bad), "Package in 'Depends/Imports' which should probably only be in 'LinkingTo': %s", "Packages in 'Depends/Imports' which should probably only be in 'LinkingTo': %s", domain = "R-tools"), .pretty_format(bad)), "")
            )
+      },
+      if(length(bad <- x[["orphaned"]])) {
+          c(sprintf(ngettext(length(bad), "Requires orphaned package: %s", "Requires orphaned packages: %s", domain = "R-tools"), .pretty_format(bad)), "")
+      },
+      if(length(bad <- x[["orphaned2"]])) {
+          c(sprintf(ngettext(length(bad), "Suggests orphaned package: %s", "Suggests orphaned packages: %s", domain = "R-tools"), .pretty_format(bad)), "")
       }
       )
 }
@@ -4721,7 +4750,7 @@ function(dir)
     ## so as from R 2.5.0 we try to set a locale.
     ## Any package with no declared encoding should have only ASCII R
     ## code.
-    on.exit(Sys.setlocale("LC_CTYPE", Sys.getlocale("LC_CTYPE")))    
+    on.exit(Sys.setlocale("LC_CTYPE", Sys.getlocale("LC_CTYPE")))
     if(!is.na(enc)) {  ## try to use the declared encoding
         if(.Platform$OS.type == "windows") {
             ## "C" is in fact "en", and there are no UTF-8 locales
@@ -7092,7 +7121,7 @@ function(dir, localOnly = FALSE)
         if(any(vapply(exprs, tst, NA)))
             out$R_files_set_random_seed <- basename(fp)
     }
-    
+
     size <- Sys.getenv("_R_CHECK_SIZE_OF_TARBALL_",
                        unset = NA_character_)
     if(!is.na(size) && (as.integer(size) > 5000000))
@@ -7148,7 +7177,7 @@ function(dir, localOnly = FALSE)
             ## server which handles
             ##   /doc/html /demo /library
             ## and relative paths from help system components resolving
-            ## to such. 
+            ## to such.
             ## (Note that these will not work in general, e.g. for the
             ## pdf refmans.)
             if(any(ind <- (startsWith(fpaths0, "../") &
@@ -8928,10 +8957,10 @@ function(package, lib.loc = NULL)
         stop(gettextf("'%s' argument must be of length %d", "package", 1))
 
     if(package == "base") return()
-    
+
     dir <- find.package(package, lib.loc)
     if(!dir.exists(file.path(dir, "R"))) return()
-    
+
     db <- .read_description(file.path(dir, "DESCRIPTION"))
     suggests <- unname(.get_requires_from_package_db(db, "Suggests"))
     if(!length(suggests)) return()
