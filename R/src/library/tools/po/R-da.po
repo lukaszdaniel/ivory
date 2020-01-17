@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-15 17:03\n"
 "PO-Revision-Date: 2016-10-14 11:22+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -3566,6 +3566,13 @@ msgstr ""
 #, fuzzy
 msgid "Suggested packages not available for checking:"
 msgstr "Pakker foreslået men ikke tilgængelig for kontrol:"
+
+#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Suggested packages should be used conditionally: this is particularly "
+"important for orphaned ones"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
@@ -7376,6 +7383,14 @@ msgid_plural "Required fields missing or empty:"
 msgstr[0] "Krævede felter mangler:"
 msgstr[1] "Krævede felter mangler:"
 
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package: %s", "Requires orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Requires orphaned package: %s"
+msgid_plural "Requires orphaned packages: %s"
+msgstr[0] "fortolkningsfejl i fil »%s«:"
+msgstr[1] "fortolkningsfejl i fil »%s«:"
+
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -7390,6 +7405,14 @@ msgid "Size of tarball: %d byte"
 msgid_plural "Size of tarball: %d bytes"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package: %s", "Suggests orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Suggests orphaned package: %s"
+msgid_plural "Suggests orphaned packages: %s"
+msgstr[0] "Ugyldigt pakkenavn."
+msgstr[1] "Ugyldigt pakkenavn."
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
 #: R/update_packages.R:0

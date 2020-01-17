@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-01-15 17:03+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -485,7 +485,7 @@ msgid "invalid argument"
 msgstr "인수가 잘못되었습니다"
 
 #: src/extra/trio/trio.c:7696 src/main/dotcode.c:476 src/main/dotcode.c:1227
-#: src/main/dotcode.c:2342 src/main/seq.c:993
+#: src/main/dotcode.c:2342 src/main/seq.c:994
 msgid "too many arguments"
 msgstr "인수의 수가 너무 많습니다"
 
@@ -697,9 +697,9 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/scan.c:859 src/main/scan.c:873 src/main/scan.c:877
 #: src/main/scan.c:879 src/main/scan.c:890 src/main/scan.c:917
 #: src/main/scan.c:920 src/main/scan.c:923 src/main/scan.c:978
-#: src/main/seq.c:651 src/main/seq.c:658 src/main/seq.c:667 src/main/seq.c:673
-#: src/main/seq.c:717 src/main/seq.c:722 src/main/seq.c:725 src/main/seq.c:729
-#: src/main/seq.c:734 src/main/seq.c:741 src/main/seq.c:745 src/main/seq.c:751
+#: src/main/seq.c:652 src/main/seq.c:659 src/main/seq.c:668 src/main/seq.c:674
+#: src/main/seq.c:718 src/main/seq.c:723 src/main/seq.c:726 src/main/seq.c:730
+#: src/main/seq.c:735 src/main/seq.c:742 src/main/seq.c:746 src/main/seq.c:752
 #: src/main/sort.c:252 src/main/sysutils.c:610 src/main/sysutils.c:614
 #: src/main/sysutils.c:618 src/main/sysutils.c:624 src/main/sysutils.c:628
 #: src/main/sysutils.c:2032 src/main/sysutils.c:2036 src/main/unique.c:1086
@@ -1214,7 +1214,7 @@ msgstr ""
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.c:577 src/main/seq.c:102 src/main/seq.c:1050
+#: src/main/altclasses.c:577 src/main/seq.c:102 src/main/seq.c:1051
 msgid "result would be too long a vector"
 msgstr "결과 벡터가 너무 깁니다"
 
@@ -1359,9 +1359,9 @@ msgstr "첫번째 인수는 벡터여야 합니다"
 #: src/main/errors.c:1213 src/main/errors.c:1511 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
 #: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3261
-#: src/main/seq.c:254 src/main/seq.c:261 src/main/seq.c:265 src/main/seq.c:365
-#: src/main/seq.c:372 src/main/seq.c:375 src/main/seq.c:377 src/main/seq.c:420
-#: src/main/seq.c:424 src/main/seq.c:428 src/main/sort.c:1404
+#: src/main/seq.c:253 src/main/seq.c:260 src/main/seq.c:264 src/main/seq.c:364
+#: src/main/seq.c:371 src/main/seq.c:374 src/main/seq.c:376 src/main/seq.c:419
+#: src/main/seq.c:423 src/main/seq.c:427 src/main/sort.c:1404
 #: src/main/sort.c:1487 src/main/sort.c:1491 src/main/sort.c:1498
 #: src/main/source.c:219 src/main/summary.c:1167 src/main/sysutils.c:263
 #: src/main/util.c:1099 src/main/util.c:1104 src/main/util.c:1111
@@ -4869,7 +4869,7 @@ msgstr "메소드 (\"%s\", \"%s\")는 \"%s\"과 모순됩니다"
 msgid "dispatch error in group dispatch"
 msgstr "그룹 디스패치에 발송 오류가 있습니다"
 
-#: src/main/eval.c:4320 src/main/eval.c:7074 src/main/seq.c:1012
+#: src/main/eval.c:4320 src/main/eval.c:7074 src/main/seq.c:1013
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "\"%s\" 는 %s 함수가 아닙니다"
@@ -8060,108 +8060,108 @@ msgstr[0] "수치식이 %d 요소를 가지고 있습니다: 최초 요소만 �
 msgid "NA/NaN argument"
 msgstr "인수가 NA / NaN입니다"
 
-#: src/main/seq.c:355
+#: src/main/seq.c:354
 #, fuzzy, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "'dimnames'의 형태 (%s) 가 잘못되었습니다（벡터여야 합니다）"
 
-#: src/main/seq.c:359 src/main/seq.c:690
+#: src/main/seq.c:358 src/main/seq.c:691
 #, fuzzy, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "벡터가 아닌 것을 복제하려고 했습니다"
 
-#: src/main/seq.c:416
+#: src/main/seq.c:415
 msgid "attempt to replicate non-vector"
 msgstr "벡터가 아닌 것을 복제하려고 했습니다"
 
-#: src/main/seq.c:431
+#: src/main/seq.c:430
 #, fuzzy
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "길이 %d 벡터를 할당할 수 없습니다"
 
-#: src/main/seq.c:643
+#: src/main/seq.c:644
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.c:661 src/main/seq.c:676 src/main/seq.c:834 src/main/seq.c:1043
+#: src/main/seq.c:662 src/main/seq.c:677 src/main/seq.c:835 src/main/seq.c:1044
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "'%s'인수의 최초의 요소만이 사용되었습니다"
 
-#: src/main/seq.c:681
+#: src/main/seq.c:682
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.c:814 src/main/seq.c:845 src/main/seq.c:852 src/main/seq.c:923
-#: src/main/seq.c:924 src/main/seq.c:954 src/main/seq.c:955 src/main/seq.c:975
-#: src/main/seq.c:976
+#: src/main/seq.c:815 src/main/seq.c:846 src/main/seq.c:853 src/main/seq.c:924
+#: src/main/seq.c:925 src/main/seq.c:955 src/main/seq.c:956 src/main/seq.c:976
+#: src/main/seq.c:977
 #, fuzzy, c-format
 msgid "'%s' argument must be a finite number"
 msgstr "'list' 인수는 리스트가 아니면 안됩니다"
 
-#: src/main/seq.c:832
+#: src/main/seq.c:833
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-negative number"
 msgstr "'length.out'은 음수가 아닌 숫자여야 합니다"
 
-#: src/main/seq.c:842 src/main/seq.c:849 src/main/seq.c:857
+#: src/main/seq.c:843 src/main/seq.c:850 src/main/seq.c:858
 #: src/main/unique.c:691
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'fromLast'는 길이가 1이어야 합니다"
 
-#: src/main/seq.c:870
+#: src/main/seq.c:871
 #, fuzzy
 msgid "invalid '(to - from)/by'"
 msgstr "'seq'에 '(to - from) / by'이 잘못되었습니다"
 
-#: src/main/seq.c:882
+#: src/main/seq.c:883
 msgid "'by' argument is much too small"
 msgstr "'by'인수가 너무 작습니다"
 
-#: src/main/seq.c:884
+#: src/main/seq.c:885
 msgid "wrong sign in 'by' argument"
 msgstr "'by'인수에 잘못된 부호가 있습니다"
 
-#: src/main/seq.c:1048 src/main/seq.c:1055
+#: src/main/seq.c:1049 src/main/seq.c:1056
 msgid "argument must be coercible to non-negative integer"
 msgstr "인수는 음수가 아닌 정수로 변환할 수 있어야 합니다"
 
-#: src/main/seq.c:1075
+#: src/main/seq.c:1076
 #, fuzzy
 msgid "'lengths' is not of mode integer"
 msgstr "인수가 모드 문자가 아닙니다"
 
-#: src/main/seq.c:1078
+#: src/main/seq.c:1079
 #, fuzzy
 msgid "'from' is not of mode integer"
 msgstr "인수가 모드 문자가 아닙니다"
 
-#: src/main/seq.c:1081
+#: src/main/seq.c:1082
 #, fuzzy
 msgid "'by' is not of mode integer"
 msgstr "인수가 모드 문자가 아닙니다"
 
-#: src/main/seq.c:1088
+#: src/main/seq.c:1089
 #, fuzzy
 msgid "'from' has length 0, but not 'lengths'"
 msgstr "그룹 길이가 0 인데 데이터 길이가 0보다 큽니다"
 
-#: src/main/seq.c:1090
+#: src/main/seq.c:1091
 #, fuzzy
 msgid "'by' has length 0, but not 'lengths'"
 msgstr "'%s' 는 반드시 길이가 1 이어야 합니다 "
 
-#: src/main/seq.c:1097
+#: src/main/seq.c:1098
 #, fuzzy
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr "'gap'는 음이 아닌 정수여야 합니다"
 
-#: src/main/seq.c:1112
+#: src/main/seq.c:1113
 msgid "'from' contains NAs"
 msgstr ""
 
-#: src/main/seq.c:1117
+#: src/main/seq.c:1118
 msgid "'by' contains NAs"
 msgstr ""
 

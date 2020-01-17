@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-15 17:03\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3743,6 +3743,13 @@ msgstr ""
 #: R/QC.R:0
 msgid "Suggested packages not available for checking:"
 msgstr "Sugerowane pakiety niedostępne do sprawdzenia:"
+
+#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Suggested packages should be used conditionally: this is particularly "
+"important for orphaned ones"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
@@ -7804,6 +7811,15 @@ msgstr[0] "Brakuje wymaganego pola lub jest puste:"
 msgstr[1] "Brakuje wymaganych pól lub są puste:"
 msgstr[2] "Brakuje wymaganych pól lub są puste:"
 
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package: %s", "Requires orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Requires orphaned package: %s"
+msgid_plural "Requires orphaned packages: %s"
+msgstr[0] "Uruchamianie ilustracji dla pakietu %s"
+msgstr[1] "Uruchamianie ilustracji dla pakietu %s"
+msgstr[2] "Uruchamianie ilustracji dla pakietu %s"
+
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
 #: R/Vignettes.R:0
 msgid "SUMMARY: processing the following file failed:"
@@ -7819,6 +7835,15 @@ msgid_plural "Size of tarball: %d bytes"
 msgstr[0] "Rozmiar pliku tarball: %d bajt"
 msgstr[1] "Rozmiar pliku tarball: %d bajty"
 msgstr[2] "Rozmiar pliku tarball: %d bajtów"
+
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package: %s", "Suggests orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Suggests orphaned package: %s"
+msgid_plural "Suggests orphaned packages: %s"
+msgstr[0] "Uruchamianie ilustracji dla pakietu %s"
+msgstr[1] "Uruchamianie ilustracji dla pakietu %s"
+msgstr[2] "Uruchamianie ilustracji dla pakietu %s"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
 #: R/update_packages.R:0

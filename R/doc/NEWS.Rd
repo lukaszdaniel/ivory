@@ -415,6 +415,14 @@
 
       \item \code{scan()} issues with UTF-8 data when running in DBCS locale
       have been resolved (\PR{16520},\PR{16584}).
+
+      \item \code{choose()} misbehaved in corner cases where it switched
+      \code{n - k} for \code{k} and \code{n} was only \emph{nearly} integer
+      (report from Erik Scott Wright).
+
+      \item \code{mle()} in the \code{stats} package had problems
+      combining use of box constraints and fixed starting values (in
+      particular, confidence intervals were affected).
     }
   }
 }

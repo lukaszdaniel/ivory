@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.0.0\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-15 17:03\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4529,6 +4529,13 @@ msgstr ""
 #. R/QC.R: gettext("Suggested packages not available for checking:", domain = "R-tools")
 
 msgid "Suggested packages not available for checking:"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
+
+msgid "Suggested packages should be used conditionally: this is particularly important for orphaned ones"
 msgstr ""
 
 
@@ -9243,6 +9250,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package: %s", "Requires orphaned packages: %s",     domain = "R-tools")
+
+msgid        "Requires orphaned package: %s"
+msgid_plural "Requires orphaned packages: %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/Vignettes.R: 0
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
 
@@ -9257,6 +9273,15 @@ msgstr[1]    ""
 
 msgid        "Size of tarball: %d byte"
 msgid_plural "Size of tarball: %d bytes"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package: %s", "Suggests orphaned packages: %s",     domain = "R-tools")
+
+msgid        "Suggests orphaned package: %s"
+msgid_plural "Suggests orphaned packages: %s"
 msgstr[0]    ""
 msgstr[1]    ""
 

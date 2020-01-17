@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-01-15 17:03+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -469,7 +469,7 @@ msgid "invalid argument"
 msgstr ""
 
 #: src/extra/trio/trio.c:7696 src/main/dotcode.c:476 src/main/dotcode.c:1227
-#: src/main/dotcode.c:2342 src/main/seq.c:993
+#: src/main/dotcode.c:2342 src/main/seq.c:994
 msgid "too many arguments"
 msgstr ""
 
@@ -677,9 +677,9 @@ msgstr ""
 #: src/main/scan.c:859 src/main/scan.c:873 src/main/scan.c:877
 #: src/main/scan.c:879 src/main/scan.c:890 src/main/scan.c:917
 #: src/main/scan.c:920 src/main/scan.c:923 src/main/scan.c:978
-#: src/main/seq.c:651 src/main/seq.c:658 src/main/seq.c:667 src/main/seq.c:673
-#: src/main/seq.c:717 src/main/seq.c:722 src/main/seq.c:725 src/main/seq.c:729
-#: src/main/seq.c:734 src/main/seq.c:741 src/main/seq.c:745 src/main/seq.c:751
+#: src/main/seq.c:652 src/main/seq.c:659 src/main/seq.c:668 src/main/seq.c:674
+#: src/main/seq.c:718 src/main/seq.c:723 src/main/seq.c:726 src/main/seq.c:730
+#: src/main/seq.c:735 src/main/seq.c:742 src/main/seq.c:746 src/main/seq.c:752
 #: src/main/sort.c:252 src/main/sysutils.c:610 src/main/sysutils.c:614
 #: src/main/sysutils.c:618 src/main/sysutils.c:624 src/main/sysutils.c:628
 #: src/main/sysutils.c:2032 src/main/sysutils.c:2036 src/main/unique.c:1086
@@ -1185,7 +1185,7 @@ msgstr ""
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.c:577 src/main/seq.c:102 src/main/seq.c:1050
+#: src/main/altclasses.c:577 src/main/seq.c:102 src/main/seq.c:1051
 msgid "result would be too long a vector"
 msgstr ""
 
@@ -1320,9 +1320,9 @@ msgstr ""
 #: src/main/errors.c:1213 src/main/errors.c:1511 src/main/identical.c:74
 #: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
 #: src/main/identical.c:78 src/main/identical.c:79 src/main/platform.c:3261
-#: src/main/seq.c:254 src/main/seq.c:261 src/main/seq.c:265 src/main/seq.c:365
-#: src/main/seq.c:372 src/main/seq.c:375 src/main/seq.c:377 src/main/seq.c:420
-#: src/main/seq.c:424 src/main/seq.c:428 src/main/sort.c:1404
+#: src/main/seq.c:253 src/main/seq.c:260 src/main/seq.c:264 src/main/seq.c:364
+#: src/main/seq.c:371 src/main/seq.c:374 src/main/seq.c:376 src/main/seq.c:419
+#: src/main/seq.c:423 src/main/seq.c:427 src/main/sort.c:1404
 #: src/main/sort.c:1487 src/main/sort.c:1491 src/main/sort.c:1498
 #: src/main/source.c:219 src/main/summary.c:1167 src/main/sysutils.c:263
 #: src/main/util.c:1099 src/main/util.c:1104 src/main/util.c:1111
@@ -4645,7 +4645,7 @@ msgstr ""
 msgid "dispatch error in group dispatch"
 msgstr ""
 
-#: src/main/eval.c:4320 src/main/eval.c:7074 src/main/seq.c:1012
+#: src/main/eval.c:4320 src/main/eval.c:7074 src/main/seq.c:1013
 #, c-format
 msgid "'%s' is not a '%s' function"
 msgstr ""
@@ -7706,100 +7706,100 @@ msgstr[1] ""
 msgid "NA/NaN argument"
 msgstr ""
 
-#: src/main/seq.c:355
+#: src/main/seq.c:354
 #, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr ""
 
-#: src/main/seq.c:359 src/main/seq.c:690
+#: src/main/seq.c:358 src/main/seq.c:691
 #, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr ""
 
-#: src/main/seq.c:416
+#: src/main/seq.c:415
 msgid "attempt to replicate non-vector"
 msgstr ""
 
-#: src/main/seq.c:431
+#: src/main/seq.c:430
 msgid "cannot replicate NULL to a non-zero length"
 msgstr ""
 
-#: src/main/seq.c:643
+#: src/main/seq.c:644
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.c:661 src/main/seq.c:676 src/main/seq.c:834 src/main/seq.c:1043
+#: src/main/seq.c:662 src/main/seq.c:677 src/main/seq.c:835 src/main/seq.c:1044
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr ""
 
-#: src/main/seq.c:681
+#: src/main/seq.c:682
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.c:814 src/main/seq.c:845 src/main/seq.c:852 src/main/seq.c:923
-#: src/main/seq.c:924 src/main/seq.c:954 src/main/seq.c:955 src/main/seq.c:975
-#: src/main/seq.c:976
+#: src/main/seq.c:815 src/main/seq.c:846 src/main/seq.c:853 src/main/seq.c:924
+#: src/main/seq.c:925 src/main/seq.c:955 src/main/seq.c:956 src/main/seq.c:976
+#: src/main/seq.c:977
 #, c-format
 msgid "'%s' argument must be a finite number"
 msgstr ""
 
-#: src/main/seq.c:832
+#: src/main/seq.c:833
 #, c-format
 msgid "'%s' argument must be a non-negative number"
 msgstr ""
 
-#: src/main/seq.c:842 src/main/seq.c:849 src/main/seq.c:857
+#: src/main/seq.c:843 src/main/seq.c:850 src/main/seq.c:858
 #: src/main/unique.c:691
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr ""
 
-#: src/main/seq.c:870
+#: src/main/seq.c:871
 msgid "invalid '(to - from)/by'"
 msgstr ""
 
-#: src/main/seq.c:882
+#: src/main/seq.c:883
 msgid "'by' argument is much too small"
 msgstr ""
 
-#: src/main/seq.c:884
+#: src/main/seq.c:885
 msgid "wrong sign in 'by' argument"
 msgstr ""
 
-#: src/main/seq.c:1048 src/main/seq.c:1055
+#: src/main/seq.c:1049 src/main/seq.c:1056
 msgid "argument must be coercible to non-negative integer"
 msgstr ""
 
-#: src/main/seq.c:1075
+#: src/main/seq.c:1076
 msgid "'lengths' is not of mode integer"
 msgstr ""
 
-#: src/main/seq.c:1078
+#: src/main/seq.c:1079
 msgid "'from' is not of mode integer"
 msgstr ""
 
-#: src/main/seq.c:1081
+#: src/main/seq.c:1082
 msgid "'by' is not of mode integer"
 msgstr ""
 
-#: src/main/seq.c:1088
+#: src/main/seq.c:1089
 msgid "'from' has length 0, but not 'lengths'"
 msgstr ""
 
-#: src/main/seq.c:1090
+#: src/main/seq.c:1091
 msgid "'by' has length 0, but not 'lengths'"
 msgstr ""
 
-#: src/main/seq.c:1097
+#: src/main/seq.c:1098
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr ""
 
-#: src/main/seq.c:1112
+#: src/main/seq.c:1113
 msgid "'from' contains NAs"
 msgstr ""
 
-#: src/main/seq.c:1117
+#: src/main/seq.c:1118
 msgid "'by' contains NAs"
 msgstr ""
 

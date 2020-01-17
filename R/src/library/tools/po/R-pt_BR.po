@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-15 17:03\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3529,6 +3529,13 @@ msgstr ""
 #. R/QC.R: gettext("Suggested packages not available for checking:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Suggested packages not available for checking:"
+msgstr ""
+
+#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Suggested packages should be used conditionally: this is particularly "
+"important for orphaned ones"
 msgstr ""
 
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
@@ -7264,6 +7271,14 @@ msgid_plural "Required fields missing or empty:"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package: %s", "Requires orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Requires orphaned package: %s"
+msgid_plural "Requires orphaned packages: %s"
+msgstr[0] "Nomes de argumentos no código que não estão nos documentos:"
+msgstr[1] "Nomes de argumentos no código que não estão nos documentos:"
+
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:", "SUMMARY: processing the following files failed:",     domain = "R-tools")
 #: R/Vignettes.R:0
 msgid "SUMMARY: processing the following file failed:"
@@ -7277,6 +7292,14 @@ msgid "Size of tarball: %d byte"
 msgid_plural "Size of tarball: %d bytes"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package: %s", "Suggests orphaned packages: %s",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Suggests orphaned package: %s"
+msgid_plural "Suggests orphaned packages: %s"
+msgstr[0] "Nomes de argumentos no código que não estão nos documentos:"
+msgstr[1] "Nomes de argumentos no código que não estão nos documentos:"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.", "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
 #: R/update_packages.R:0
