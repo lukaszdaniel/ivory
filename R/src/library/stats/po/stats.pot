@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-01-24 21:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1139,32 +1139,32 @@ msgstr ""
 msgid "'scal' matrix is not positive-definite"
 msgstr ""
 
-#: random.c:54 random.c:129 random.c:201 random.c:285
+#: random.c:54 random.c:138 random.c:218 random.c:308
 msgid "NA values produced"
 msgstr ""
 
-#: random.c:61 random.c:67 random.c:73 random.c:91 random.c:162 random.c:243
-#: random.c:377
+#: random.c:61 random.c:67 random.c:73 random.c:88 random.c:168 random.c:257
+#: random.c:400
 msgid "invalid arguments"
 msgstr ""
 
-#: random.c:311
+#: random.c:334
 msgid "NA value in probability vector"
 msgstr ""
 
-#: random.c:313
+#: random.c:336
 msgid "negative probability"
 msgstr ""
 
-#: random.c:319
+#: random.c:342
 msgid "no positive probabilities"
 msgstr ""
 
-#: random.c:331
+#: random.c:354
 msgid "invalid first argument 'n'"
 msgstr ""
 
-#: random.c:333
+#: random.c:356
 msgid "invalid second argument 'size'"
 msgstr ""
 

@@ -183,14 +183,37 @@
       cases.
 
       \item \code{sequence()} is now an S3 generic, with an internally
-      implemented default method, and gains arguments to
-      generate more complex sequences. Based on code from the \pkg{S4Vectors}
+      implemented default method, and gains arguments to generate more
+      complex sequences.  Based on code from the \pkg{S4Vectors}
       Bioconductor package and the advice of Hervé Pagès.
 
       \item \code{print()}'s default method and many other methods (by
-      calling the default eventually and passing \code{...}) now obey a new
-      optional \code{width} argument, the user not needing to set and unset
-      the option.
+      calling the default eventually and passing \code{...}) now make
+      use of a new optional \code{width} argument, avoiding the need for
+      the user to set and reset \code{options("width")}.
+
+      \item \code{memDecompress()} supports the RFC 1952 format
+      (e.g.\sspace{}in-memory copies of \command{gzip}-compressed files)
+      as well as RFC 1950.
+
+      \item \code{memCompress()} and \code{memDecompress()} support long
+      raw vectors for types \code{"gzip"} and \code{"zx"}.
+
+      \item \code{sweep()} and \code{slice.index()} can now use names
+      of dimnames for their \code{MARGIN} argument (\code{apply} has
+      had this for almost a decade). 
+
+      \item New function \code{proportions()} and
+      \code{marginSums()}. The intention is that these should
+      eventually replace the unfortunately named \code{prop.table()}
+      and \code{margin.table()}. They can be drop-in replacements, but
+      also adds named-margin functionality.
+
+      \item Functions \code{rbinom()}, \code{rgeom()}, \code{rhyper()},
+      \code{rpois()}, \code{rnbinom(),} \code{rsignrank()} and
+      \code{rwilcox()} which have returned integer since R 3.0.0 and hence
+      \code{NA} when the numbers would have been outside the integer range,
+      now return double vectors (without NAs, typically) in these cases.
     }
   }% end{ NEW FEATURES }
 
@@ -396,8 +419,7 @@
 
       \item \code{round()} correctly rounds \dQuote{to even} in more cases,
       thanks to a more careful algorithm prompted by the report from Adam
-      Wheeler in \PR{17668}.
-      (The current algorithm will be tweaked further before release.)
+      Wheeler and then others, in \PR{17668}.
       \cr
       \code{round(x, dig)} for \emph{negative} digits is much more rational
       now, notably for large \eqn{|dig|}.
@@ -420,7 +442,7 @@
       \code{n - k} for \code{k} and \code{n} was only \emph{nearly} integer
       (report from Erik Scott Wright).
 
-      \item \code{mle()} in the \code{stats} package had problems
+      \item \code{mle()} in the \code{stats4} package had problems
       combining use of box constraints and fixed starting values (in
       particular, confidence intervals were affected).
     }
@@ -437,6 +459,12 @@
   }
   \subsection{BUG FIXES}{
     \itemize{
+      \item Fixed a C level integer overflow in \code{rhyper()}; reported
+      by Benjamin Tyner in \PR{17694}.
+
+      \item Uses of \code{url(gzcon(.))} needing to extend buffer size
+      have failed (with HTTP/2 servers), reported by Gábor Csárdi.
+
       \item \code{update(form, new)} in the case of a long \code{new}
       formula sometimes wrongly eliminated the intercept from \code{form},
       or (more rarely) added a garbage term (or seg.faulted !); reported by Mathias Ambühl in

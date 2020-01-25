@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-15 17:03\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2047,6 +2047,20 @@ msgstr "这是基本程辑包名."
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
+#. R/QC.R: gettext("Importing from so many packages makes the package vulnerable to any of them becoming unavailable. Move as many as possible to 'Suggests' and use conditionally.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Importing from so many packages makes the package vulnerable to any of them "
+"becoming unavailable. Move as many as possible to 'Suggests' and use "
+"conditionally."
+msgstr ""
+
+#. R/QC.R: gettextf("Imports includes %d non-default packages.", ly, domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Imports includes %d non-default packages."
+msgstr "这是基本程辑包名."
+
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -3721,13 +3735,6 @@ msgstr ""
 msgid "Suggested packages not available for checking:"
 msgstr "无法检查建议用的程辑包:"
 
-#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
-#: R/check.R:0
-msgid ""
-"Suggested packages should be used conditionally: this is particularly "
-"important for orphaned ones"
-msgstr ""
-
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
 msgid "Tag %s is invalid in a %s block"
@@ -3881,6 +3888,12 @@ msgid ""
 "The canonical URL of the CRAN page for a task view is: https://CRAN.R-"
 "project.org/view=viewname"
 msgstr ""
+
+#. R/check.R: gettext("  The dataset(s) may use package(s) not declared in Depends/Imports.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "The dataset(s) may use package(s) not declared in Depends/Imports."
+msgstr "DESCRIPTION文件不对"
 
 #. R/check.R: gettext("  The dataset(s) may use package(s) not declared in the DESCRIPTION file.\n",     domain = "R-tools")
 #: R/check.R:0

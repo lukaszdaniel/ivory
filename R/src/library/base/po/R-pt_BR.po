@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -237,6 +237,7 @@ msgstr "não é um data frame"
 msgid "'%s' argument is not a namespace"
 msgstr "não é um espaço de nomes"
 
+#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
@@ -518,7 +519,9 @@ msgstr "'from' deve ser especificado"
 
 #. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
 #. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
-#: R/apply.R:0 R/array.R:0
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/sweep.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
 #, fuzzy
 msgid "'%s' argument must have named dimnames"
 msgstr "'X' deve ser dimnames nomeados"
@@ -3057,6 +3060,13 @@ msgstr "norma '%s' atualmente sempre usa exact = FALSE"
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "nem todos elementos de 'MARGIN'  são nomes de dimensões"
+
+#. R/array.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#: R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "not all elements of 'MARGIN' argument are names of dimensions"
 msgstr "nem todos elementos de 'MARGIN'  são nomes de dimensões"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-01-24 21:41+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1178,34 +1178,34 @@ msgstr "'scal' 은 반드시 실수형 정방행렬이어야 합니다 "
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' 행렬이 positive-definite 가 아닙니다 "
 
-#: random.c:54 random.c:129 random.c:201 random.c:285
+#: random.c:54 random.c:138 random.c:218 random.c:308
 #, fuzzy
 msgid "NA values produced"
 msgstr "NA가 생성되었습니다"
 
-#: random.c:61 random.c:67 random.c:73 random.c:91 random.c:162 random.c:243
-#: random.c:377
+#: random.c:61 random.c:67 random.c:73 random.c:88 random.c:168 random.c:257
+#: random.c:400
 msgid "invalid arguments"
 msgstr "invalid arguments"
 
-#: random.c:311
+#: random.c:334
 #, fuzzy
 msgid "NA value in probability vector"
 msgstr "파라미터에  잘못된 NA 값이 있습니다"
 
-#: random.c:313
+#: random.c:336
 msgid "negative probability"
 msgstr ""
 
-#: random.c:319
+#: random.c:342
 msgid "no positive probabilities"
 msgstr ""
 
-#: random.c:331
+#: random.c:354
 msgid "invalid first argument 'n'"
 msgstr "첫번째의 인수 'n'가 잘못되었습니다"
 
-#: random.c:333
+#: random.c:356
 msgid "invalid second argument 'size'"
 msgstr "두번째의 인수 'size'가 잘못되었습니다"
 

@@ -712,6 +712,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    REprintf(_("Lost warning messages"));
 	    REprintf("\n");
 	}
+	REprintf(_("Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"));
 	R_Expressions = R_Expressions_keep;
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
     }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -56,6 +56,11 @@ msgstr ""
 msgid "extra arguments discarded"
 msgstr "ekstra argumenter fjernet"
 
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
+msgid "fixed values violate constraints"
+msgstr ""
+
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
@@ -86,3 +91,8 @@ msgid ""
 msgstr ""
 "nogle navngivne argumenter i 'start' er ikke argumenter for den angivne log-"
 "likelihood"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr ""

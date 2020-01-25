@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.3.2.  */
+/* A Bison parser, made by GNU Bison 3.4.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -48,7 +48,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.3.2"
+#define YYBISON_VERSION "3.4.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -66,7 +66,6 @@
 
 
 /* First part of user prologue.  */
-
 
 /*
  *  R : A Computer Language for Statistical Data Analysis
@@ -406,6 +405,8 @@ typedef short yytype_int16;
 #endif
 
 
+#define YY_ASSERT(E) ((void) (0 && (E)))
+
 #if ! defined yyoverflow || YYERROR_VERBOSE
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
@@ -595,9 +596,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   165,   165,   166,   167,   170,   171,   172,   173,   175,
-     176,   178,   179,   180,   181,   182,   183,   185,   185,   189,
-     191,   192
+       0,   171,   171,   172,   173,   176,   177,   178,   179,   181,
+     182,   184,   185,   186,   187,   188,   189,   191,   191,   195,
+     197,   198
 };
 #endif
 
@@ -1216,33 +1217,23 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
   switch (yytype)
     {
     case 5: /* MACRO  */
-
       { RELEASE_SV((*yyvaluep)); }
-
         break;
 
     case 6: /* TEXT  */
-
       { RELEASE_SV((*yyvaluep)); }
-
         break;
 
     case 7: /* COMMENT  */
-
       { RELEASE_SV((*yyvaluep)); }
-
         break;
 
     case 8: /* BEGIN  */
-
       { RELEASE_SV((*yyvaluep)); }
-
         break;
 
     case 9: /* END  */
-
       { RELEASE_SV((*yyvaluep)); }
-
         break;
 
       default:
@@ -1358,6 +1349,8 @@ yynewstate:
 | yynewstate -- set current state (the top of the stack) to yystate.  |
 `--------------------------------------------------------------------*/
 yysetstate:
+  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
+  YY_ASSERT (0 <= yystate && yystate < YYNSTATES);
   *yyssp = (yytype_int16) yystate;
 
   if (yyss + yystacksize - 1 <= yyssp)
@@ -1424,8 +1417,6 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
-
-  YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1531,125 +1522,85 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-
+  case 2:
     { xxsavevalue(yyvsp[-1], &(yyloc)); YYACCEPT; }
-
     break;
 
   case 3:
-
     { xxsavevalue(NULL, &(yyloc)); YYACCEPT; }
-
     break;
 
   case 4:
-
     { PRESERVE_SV(parseState.Value = R_NilValue);  YYABORT; }
-
     break;
 
   case 5:
-
     { yyval = xxnewlist(yyvsp[0]); }
-
     break;
 
   case 6:
-
     { yyval = xxnewlist(yyvsp[0]); }
-
     break;
 
   case 7:
-
     { yyval = xxlist(yyvsp[-1], yyvsp[0]); }
-
     break;
 
   case 8:
-
     { yyval = xxlist(yyvsp[-1], yyvsp[0]); }
-
     break;
 
   case 9:
-
     { yyval = xxnewlist(yyvsp[0]); }
-
     break;
 
   case 10:
-
     { yyval = xxlist(yyvsp[-1], yyvsp[0]); }
-
     break;
 
   case 11:
-
     { yyval = xxtag(yyvsp[0], TEXT, &(yyloc)); }
-
     break;
 
   case 12:
-
     { yyval = xxtag(yyvsp[0], COMMENT, &(yyloc)); }
-
     break;
 
   case 13:
-
     { yyval = xxtag(yyvsp[0], MACRO, &(yyloc)); }
-
     break;
 
   case 14:
-
     { yyval = xxtag(yyvsp[0], VERB, &(yyloc)); }
-
     break;
 
   case 15:
-
     { yyval = yyvsp[0]; }
-
     break;
 
   case 16:
-
     { yyval = yyvsp[0]; }
-
     break;
 
   case 17:
-
     { xxSetInVerbEnv(yyvsp[-1]); }
-
     break;
 
   case 18:
-
     { yyval = xxenv(yyvsp[-7], yyvsp[-4], yyvsp[-1], &(yyloc));
                                                   RELEASE_SV(yyvsp[-9]); RELEASE_SV(yyvsp[-3]); }
-
     break;
 
   case 19:
-
     { yyval = xxmath(yyvsp[-1], &(yyloc)); }
-
     break;
 
   case 20:
-
     { yyval = xxblock(yyvsp[-1], &(yyloc)); }
-
     break;
 
   case 21:
-
     { yyval = xxblock(NULL, &(yyloc)); }
-
     break;
 
 
@@ -1890,7 +1841,6 @@ yyreturn:
 #endif
   return yyresult;
 }
-
 
 
 static SEXP xxnewlist(SEXP item)

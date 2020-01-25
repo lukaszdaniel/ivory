@@ -15,8 +15,8 @@ eb6bf5d5b1abfb706c9f8293d73d07ac *man/read.xport.Rd
 e158337bb4c5753bee08025bb45c9901 *man/read.arff.Rd
 3488df6faab757f05c8c4967d77b2100 *man/write.foreign.Rd
 f12b27b4608118b61146fab29f4ba101 *man/write.dbf.Rd
-428c1cf31118855e740ab8596362eeb9 *ChangeLog
-04657307e8dae4f615be64d68bda62ac *DESCRIPTION
+d5c9eaa12470938586dbddc1c150b56f *ChangeLog
+3b1a81f7c3c3511a2c5042703a88da71 *DESCRIPTION
 7417510348fcefd7a58766e37d77bb8b *po/R-fr.po
 17b7cdff7f13c9e9007b1c2562efa279 *po/R-de.po
 deb703c6ba8c1348f2449f9a66a5ecc9 *po/R-pl.po
@@ -120,14 +120,14 @@ c6b25f7651f0cc187b8b1e2d6d93d271 *src/R_systat.c
 c56d90fcadd5e45a5e5425803e479821 *src/spss.c
 54c67d8c6799f3f333108781d1edf2a4 *src/avl.c
 6f4cac1101866d96b1bc7bd04afe023e *src/format.c
-c3041a7a354800e523c404a2278d9bab *src/stataread.c
+a5bf059ab8bac0b236e6068e87222ae8 *src/stataread.c
 01c70b707ba2dc261b43e7f7bf2d9119 *src/SASxport.c
 99d6255ebd2483c1728e4f14fb1208d3 *src/Rdbfread.c
 915236a4dad83bcd90fd14b1e52da697 *src/swap_bytes.h
 c2ef2d7a2668fda0153c64482f1f2269 *src/Rdbfwrite.c
 c1bc225b793dc61b8e46afd50afde1a0 *src/file-handle.h
 28b25334f3080cacac43c57690686d0f *src/sfm-read.c
-11ccfb3633678ee69c1c9bab7d8b0d42 *src/dbfopen.c
+aeff565df3757541c439dad634871bf0 *src/dbfopen.c
 5b4cb1b95f0a394ebe887d5003317440 *src/pfm.h
 2e1e966093db4d868c5d7f08bcd42410 *src/foreign.h
 22a951beb74f0121e6649b4a45262163 *src/localization.h

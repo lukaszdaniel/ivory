@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -239,6 +239,7 @@ msgstr "데이터 프레임이 아닙니다 "
 msgid "'%s' argument is not a namespace"
 msgstr "네임스페이스가 아닙니다 "
 
+#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
@@ -519,7 +520,9 @@ msgstr "'from' 이 지정되야 합니다 "
 
 #. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
 #. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
-#: R/apply.R:0 R/array.R:0
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/sweep.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
 #, fuzzy
 msgid "'%s' argument must have named dimnames"
 msgstr "'X' 는 반드시 dimnames 를 가지고 있어야 합니다 "
@@ -3045,6 +3048,13 @@ msgstr "norm '%s' currently always uses exact = FALSE"
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "not all elements of 'MARGIN' are names of dimensions"
+
+#. R/array.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#: R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "not all elements of 'MARGIN' argument are names of dimensions"
 msgstr "not all elements of 'MARGIN' are names of dimensions"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)

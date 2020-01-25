@@ -248,8 +248,31 @@ as.table.default <- function(x, ...)
     } else stop("cannot coerce to a table")
 }
 
+marginSums <- function (x, margin = NULL) 
+{
+   if (!is.array(x)) 
+      if (is.numeric(x)) dim(x) <- length(x)
+      else stop(gettextf("'%s' argument is not an array", "x"))
+   
+      
+   if (length(margin)) {
+      z <- apply(x, margin, sum)
+      class(z) <- oldClass(x)
+      z
+   }
+   else sum(x)
+}
+
+proportions <- function (x, margin = NULL)
+{
+    if (length(margin)) 
+        sweep(x, margin, marginSums(x, margin), "/", check.margin = FALSE)
+    else x/sum(x)
+}
+
 prop.table <- function(x, margin = NULL)
 {
+###    .Deprecated("proportions")
     if(length(margin))
 	sweep(x, margin, margin.table(x, margin), "/", check.margin=FALSE)
     else
@@ -258,6 +281,7 @@ prop.table <- function(x, margin = NULL)
 
 margin.table <- function(x, margin = NULL)
 {
+###    .Deprecated("marginSums")
     if(!is.array(x)) stop(gettextf("'%s' argument is not an array", "x"))
     if (length(margin)) {
 	z <- apply(x, margin, sum)

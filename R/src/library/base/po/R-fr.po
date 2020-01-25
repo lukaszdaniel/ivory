@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -239,6 +239,7 @@ msgstr "pas un tableau de données"
 msgid "'%s' argument is not a namespace"
 msgstr "ceci n'est pas un espace de noms"
 
+#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
@@ -520,7 +521,9 @@ msgstr "'from' doit être spécifié"
 
 #. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
 #. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
-#: R/apply.R:0 R/array.R:0
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/sweep.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
 #, fuzzy
 msgid "'%s' argument must have named dimnames"
 msgstr "'x' doit avoir des dimensions nommées"
@@ -3085,6 +3088,13 @@ msgstr "norm '%s' utilise systématiquement 'exact = FALSE' pour l'instant"
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "les éléments de 'MARGIN' ne sont pas tous les noms des dimensions"
+
+#. R/array.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#: R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "not all elements of 'MARGIN' argument are names of dimensions"
 msgstr "les éléments de 'MARGIN' ne sont pas tous les noms des dimensions"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)

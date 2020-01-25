@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.0.0\n"
-"POT-Creation-Date: 2020-01-15 17:03\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2448,6 +2448,20 @@ msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("Importing from so many packages makes the package vulnerable to any of them becoming unavailable. Move as many as possible to 'Suggests' and use conditionally.",     domain = "R-tools")
+
+msgid "Importing from so many packages makes the package vulnerable to any of them becoming unavailable. Move as many as possible to 'Suggests' and use conditionally."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettextf("Imports includes %d non-default packages.", ly, domain = "R-tools")
+
+msgid "Imports includes %d non-default packages."
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
@@ -4532,13 +4546,6 @@ msgid "Suggested packages not available for checking:"
 msgstr ""
 
 
-#: R/check.R: 0
-#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
-
-msgid "Suggested packages should be used conditionally: this is particularly important for orphaned ones"
-msgstr ""
-
-
 #: R/RdConv2.R: 0
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 
@@ -4724,6 +4731,13 @@ msgstr ""
 #. R/QC.R: gettext("  The canonical URL of the CRAN page for a task view is: https://CRAN.R-project.org/view=viewname",     domain = "R-tools")
 
 msgid "The canonical URL of the CRAN page for a task view is: https://CRAN.R-project.org/view=viewname"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("  The dataset(s) may use package(s) not declared in Depends/Imports.\n",     domain = "R-tools")
+
+msgid "The dataset(s) may use package(s) not declared in Depends/Imports."
 msgstr ""
 
 

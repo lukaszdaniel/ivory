@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:11\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2015-01-17 15:51+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -61,6 +61,11 @@ msgstr ""
 msgid "extra arguments discarded"
 msgstr "多余的参数略过不用"
 
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
+msgid "fixed values violate constraints"
+msgstr ""
+
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
@@ -85,3 +90,8 @@ msgid ""
 "some named arguments in 'start' are not arguments to the supplied log-"
 "likelihood"
 msgstr "'start'里的一些带名参数不是给所提供的对数似然作为参数来用的"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr ""

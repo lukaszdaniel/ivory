@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:11\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2010-10-01 21:01+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -60,6 +60,11 @@ msgstr ""
 msgid "extra arguments discarded"
 msgstr "arguments supplémentaires éliminés"
 
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
+msgid "fixed values violate constraints"
+msgstr ""
+
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
@@ -90,3 +95,8 @@ msgid ""
 msgstr ""
 "quelques arguments nommés dans 'start' ne sont pas les arguments "
 "correspondants au maximum de vraissemblance fourni"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr ""

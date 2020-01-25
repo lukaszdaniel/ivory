@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:11\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2015-01-17 15:51+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -56,6 +56,11 @@ msgstr ""
 msgid "extra arguments discarded"
 msgstr " 余分な引数が破棄されました "
 
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
+msgid "fixed values violate constraints"
+msgstr ""
+
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
@@ -85,3 +90,8 @@ msgid ""
 "likelihood"
 msgstr ""
 " 'start' 中の名前のある引数は，与えられた対数尤度に対する引数ではありません "
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr ""

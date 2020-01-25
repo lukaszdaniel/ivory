@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -234,6 +234,7 @@ msgstr "andet argument skal være en liste"
 msgid "'%s' argument is not a namespace"
 msgstr "'from' skal angives"
 
+#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
@@ -514,7 +515,9 @@ msgstr "'from' skal angives"
 
 #. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
 #. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
-#: R/apply.R:0 R/array.R:0
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/sweep.R: gettextf("'%s' argument must have named dimnames", "x")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
 #, fuzzy
 msgid "'%s' argument must have named dimnames"
 msgstr "'X' skal have navngivne dimnavne"
@@ -2976,6 +2979,13 @@ msgstr ""
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "ikke alle elementer for 'MARGIN' er navne på dimensioner"
+
+#. R/array.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#: R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "not all elements of 'MARGIN' argument are names of dimensions"
 msgstr "ikke alle elementer for 'MARGIN' er navne på dimensioner"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname), nf)

@@ -3644,12 +3644,44 @@ for(n in Ns)
 ##
 ##--TODO: less severe now (no seg.fault / corrupt memory crashes), but still really bad ! ---
 
+
 ## Corner cases in choose(),
 ## misbehaved when n was _nearly_ int, and n - k < k
-
-## These gave 0 and 4 in R <= 3.6.x
 stopifnot(choose(4 - 1e-7, 4) == 1)
 stopifnot(choose(4 + 1e-7, 4) == 1)
+## These gave 0 and 4 in R <= 3.6.x
+
+
+## correct error message:
+tt <- tryCatch(strptime(100, pi), error=identity)
+stopifnot(inherits(tt, "error"), grepl("'format'", tt$message))
+## had 'x' instead of 'format'
+
+
+## r<integer-RV>() now return double if integer would overflow:
+set.seed(47)
+Npi <- rpois(100, 0.9999 *2^31)
+Npd <- rpois(100, 0.99999*2^31)# had 33 NA's
+Nbi <- rbinom(100, 2^31, 1/2)
+Nbd <- rbinom(100, 2^32, 1/2)# 51 NA's
+Ngi <- rgeom(999, 1e-8)
+Ngd <- rgeom(999, 1e-9) # 106 NA's
+stopifnot(is.integer(Npi), is.double(Npd), !anyNA(Npi), !anyNA(Npd),
+          is.integer(Nbi), is.double(Nbd), !anyNA(Nbi), !anyNA(Nbd),
+          is.integer(Ngi), is.double(Ngd), !anyNA(Ngi), !anyNA(Ngd),
+          TRUE)
+## had many NA's in  3.0.0 <= R <= 3.6.x
+
+
+## rhyper() for some large arguments, PR#17694
+n <- 2e9 # => .Machine$integer.max ~= 1.07 * N
+set.seed(6860); N <- rhyper(1, n,n,n)
+x <- 1.99e9; Nhi <- rhyper(256, x,x,x)
+stopifnot(identical(N, 999994112L), is.integer(Nhi),
+          all.equal(mean(Nhi), x/2, tol = 6e-6)) # ==> also: no NAs
+## NA's and warnings, incl "SHOULD NOT HAPPEN!" in R <= 3.6.2
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

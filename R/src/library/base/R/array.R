@@ -48,6 +48,18 @@ function(x, MARGIN)
         d <- length(x)
     n <- length(d)
 
+    ## Extract the margins and associated dimnames
+
+    if (is.character(MARGIN)) {
+        dn <- dimnames(x)
+        if(is.null(dnn <- names(dn))) # names(NULL) is NULL
+           stop(gettextf("'%s' argument must have named dimnames", "x"))
+        MARGIN <- match(MARGIN, dnn)
+        if (anyNA(MARGIN))
+            stop("not all elements of 'MARGIN' argument are names of dimensions")
+    }
+
+
     if(!length(MARGIN) || any(MARGIN < 1L) || any(MARGIN > n))
         stop(gettextf("incorrect value for '%s' argument", "MARGIN"))
 

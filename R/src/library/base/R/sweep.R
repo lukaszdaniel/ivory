@@ -20,6 +20,18 @@ sweep <- function(x, MARGIN, STATS, FUN = "-", check.margin = TRUE, ...)
 {
     FUN <- match.fun(FUN)
     dims <- dim(x)
+
+    ## Extract the margins and associated dimnames
+
+    if (is.character(MARGIN)) {
+        dn <- dimnames(x) # possibly NULL
+        if(is.null(dnn <- names(dn))) # names(NULL) is NULL
+           stop(gettextf("'%s' argument must have named dimnames", "x"))
+        MARGIN <- match(MARGIN, dnn)
+        if (anyNA(MARGIN))
+            stop("not all elements of 'MARGIN' argument are names of dimensions")
+    }
+
     if (check.margin) {
         dimmargin <- dims[MARGIN]
         dimstats <- dim(STATS)

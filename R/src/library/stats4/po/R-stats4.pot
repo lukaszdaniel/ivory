@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats4 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +70,13 @@ msgstr ""
 
 
 #: R/mle.R: 0
+#. R/mle.R: stop("fixed values violate constraints")
+
+msgid "fixed values violate constraints"
+msgstr ""
+
+
+#: R/mle.R: 0
 #. R/mle.R: warning("levels truncated to positive values only")
 
 msgid "levels truncated to positive values only"
@@ -94,4 +101,11 @@ msgstr ""
 #. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
 
 msgid "some named arguments in 'start' are not arguments to the supplied log-likelihood"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: warning("start values do not satisfy constraints")
+
+msgid "start values do not satisfy constraints"
 msgstr ""

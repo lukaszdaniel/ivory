@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-15 17:03\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2036,6 +2036,20 @@ msgstr "Hmm ... wygląda na to, że jest to pakiet"
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr "Hmm ... wygląda na to, że jest to pakiet z dystrybucji R"
 
+#. R/QC.R: gettext("Importing from so many packages makes the package vulnerable to any of them becoming unavailable. Move as many as possible to 'Suggests' and use conditionally.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Importing from so many packages makes the package vulnerable to any of them "
+"becoming unavailable. Move as many as possible to 'Suggests' and use "
+"conditionally."
+msgstr ""
+
+#. R/QC.R: gettextf("Imports includes %d non-default packages.", ly, domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Imports includes %d non-default packages."
+msgstr "Zależności: dołącza nie-domyślne pakiety:"
+
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -3744,13 +3758,6 @@ msgstr ""
 msgid "Suggested packages not available for checking:"
 msgstr "Sugerowane pakiety niedostępne do sprawdzenia:"
 
-#. R/check.R: gettext("Suggested packages should be used conditionally: this is particularly important for orphaned ones\n\n",     domain = "R-tools")
-#: R/check.R:0
-msgid ""
-"Suggested packages should be used conditionally: this is particularly "
-"important for orphaned ones"
-msgstr ""
-
 #. R/RdConv2.R: gettextf("Tag %s is invalid in a %s block", tag, blocktag)
 #: R/RdConv2.R:0
 msgid "Tag %s is invalid in a %s block"
@@ -3923,6 +3930,12 @@ msgid ""
 msgstr ""
 "Kanoniczny adres URL strony CRAN dla pakietu to https://cran.r-project.org/"
 "package=pkgname"
+
+#. R/check.R: gettext("  The dataset(s) may use package(s) not declared in Depends/Imports.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "The dataset(s) may use package(s) not declared in Depends/Imports."
+msgstr "Plik %s nie jest wspomniany w pliku DESCRIPTION file.\n"
 
 #. R/check.R: gettext("  The dataset(s) may use package(s) not declared in the DESCRIPTION file.\n",     domain = "R-tools")
 #: R/check.R:0

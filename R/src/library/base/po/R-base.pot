@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.0.0\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-01-24 21:41\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,6 +258,7 @@ msgstr ""
 
 
 #: R/table.R: 0
+#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 
 msgid "'%s' argument is not an array"
@@ -616,8 +617,12 @@ msgstr ""
 
 #: R/apply.R: 0
 #: R/array.R: 0
+#: R/array.R: 0
+#: R/sweep.R: 0
 #. R/apply.R: gettextf("'%s' argument must have named dimnames", "X")
 #. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/array.R: gettextf("'%s' argument must have named dimnames", "x")
+#. R/sweep.R: gettextf("'%s' argument must have named dimnames", "x")
 
 msgid "'%s' argument must have named dimnames"
 msgstr ""
@@ -3706,6 +3711,15 @@ msgstr ""
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 
 msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr ""
+
+
+#: R/array.R: 0
+#: R/sweep.R: 0
+#. R/array.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' argument are names of dimensions")
+
+msgid "not all elements of 'MARGIN' argument are names of dimensions"
 msgstr ""
 
 
