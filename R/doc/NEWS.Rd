@@ -29,15 +29,9 @@
        \code{extSoftVersion()}, PCRE1 has versions < 10, PCRE2 versions
        >= 10.
 
-       \item For now only active when environment variable
-       \env{_R_CLASS_MATRIX_ARRAY_} is set to something true (i.e., one
-       of \samp{TRUE}, \samp{True}, \samp{true}, or \samp{T}), but
-       planned to be the new unconditional behavior when R 4.0.0 is
-       released:
-
-       \code{matrix} objects now also inherit from class \code{"array"},
-       namely, e.g., \code{class(diag(1))} is \code{c("matrix",
-       "array")} which invalidates code assuming that
+       \item \code{matrix} objects now also inherit from class
+       \code{"array"}, namely, e.g., \code{class(diag(1))} is
+       \code{c("matrix", "array")} which invalidates code assuming that
        \code{length(class(obj)) == 1}, an incorrect assumption that is
        less frequently fulfilled now.
 
@@ -201,7 +195,7 @@
 
       \item \code{sweep()} and \code{slice.index()} can now use names
       of dimnames for their \code{MARGIN} argument (\code{apply} has
-      had this for almost a decade). 
+      had this for almost a decade).
 
       \item New function \code{proportions()} and
       \code{marginSums()}. The intention is that these should
@@ -417,9 +411,10 @@
       changeover days, fixing \PR{16764}, thanks to proposals and analysis
       by Johannes Ranke and Kirill Müller.
 
-      \item \code{round()} correctly rounds \dQuote{to even} in more cases,
-      thanks to a more careful algorithm prompted by the report from Adam
-      Wheeler and then others, in \PR{17668}.
+      \item \code{round()} finally rounds \emph{\dQuote{to nearest}}
+      by \emph{measuring} and \emph{\dQuote{to even}}; thanks to a
+      careful algorithm originally prompted by the report from Adam Wheeler
+      and then others, in \PR{17668}.
       \cr
       \code{round(x, dig)} for \emph{negative} digits is much more rational
       now, notably for large \eqn{|dig|}.
@@ -445,6 +440,10 @@
       \item \code{mle()} in the \code{stats4} package had problems
       combining use of box constraints and fixed starting values (in
       particular, confidence intervals were affected).
+
+      \item Operator \code{?} now has lower precedence than \code{=}
+      to work as documented and to behave like \code{<-} in help
+      expressions (\PR{16710}).
     }
   }
 }
@@ -457,6 +456,7 @@
       the included routines, just bug fixes).
     }
   }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item Fixed a C level integer overflow in \code{rhyper()}; reported
@@ -464,6 +464,13 @@
 
       \item Uses of \code{url(gzcon(.))} needing to extend buffer size
       have failed (with HTTP/2 servers), reported by Gábor Csárdi.
+
+      \item \code{predict(loess(..), se=TRUE)} now errors out (instead of
+      seg.faulting etc) for large sample sizes, thanks to a report and
+      patch by Benjamin Tyner in \PR{17121}.
+
+      \item \code{tools:assertCondition(., "error")} and hence
+      \code{assertError()} no longer return errors twice (invisibly).
 
       \item \code{update(form, new)} in the case of a long \code{new}
       formula sometimes wrongly eliminated the intercept from \code{form},

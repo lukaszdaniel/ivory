@@ -3251,8 +3251,6 @@ y <- structure(list(), AA = 1)
 stopifnot(is.null(attr(y, exact = TRUE, "A")))
 
 
-if(Sys.getenv("_R_CLASS_MATRIX_ARRAY_") %in%
-   c("true", "True", "TRUE", "T")) {
 ## 1) A matrix is an array, too:
 stopifnot( vapply(1:9, function(N) inherits(array(pi, dim = 1:N), "array"), NA) )
 ## was false for N=2 in R < 4.0.0
@@ -3263,8 +3261,6 @@ foo.array <- function(x) "made in foo.array()"
 stopifnot(
     vapply(1:9, function(N) foo(array(pi, dim = 1:N)), "chr") == foo.array())
 ## foo(array(*)) gave error for N=2 in R < 4.0.0
-} else
-    cat("not tested\n")
 
 
 ## PR#17659: Some *.colors() producers have appended (alpha=1) info even by default
@@ -3544,15 +3540,15 @@ x55 <- 55 + as.numeric(vapply(dd+1, function(k) paste0(".", strrep("5",k)), ""))
 
 rnd.x <- vapply(dd+1L, function(k) round(x55[k], dd[k]), 1.1)
 noquote(formatC(cbind(x55, dd, rnd.x), w=1, digits=15))
+signif (rnd.x - x55, 3) # look at .. but don't test (yet)
 stopifnot(exprs = {
-      print (   rnd.x - x55) > 0
-      all.equal(rnd.x - x55, 5 * 10^-(dd+1), tol = 1e-11) # see diff. of 6.8e-13
+      all.equal(abs(rnd.x - x55), 5 * 10^-(dd+1), tol = 1e-11) # see diff. of 6e-13
 })
 ## more than half of the above were rounded *down* in R <= 3.6.x
-## Some "wrong tests" cases from CRAN packages (relying on wrong R <= 3.6.x behavior)
+## Some "wrong" test cases from CRAN packages (partly relying on wrong R <= 3.6.x behavior)
 stopifnot(exprs = {
     all.equal(round(10.7775, digits=3), 10.778, tolerance = 1e-12) # even tol=0, was 10.777
-    all.equal(round(12345 / 1000,   2), 12.34 , tolerance = 1e-12) # even tol=0, was 12.35
+    all.equal(round(12345 / 1000,   2), 12.35 , tolerance = 1e-12) # even tol=0, was 12.34 in Rd
     all.equal(round(9.18665, 4),        9.1866, tolerance = 1e-12) # even tol=0, was  9.1867
 })
 ## This must work, too, the range of 'e' depending on 'd'
@@ -3604,9 +3600,10 @@ M <- .Machine$double.xmax
 rM <- round(M, -(1:400))
 stopifnot(exprs = {
     rM[(1:400) > 308] == 0
-    identical(which(rM == Inf),
-              c(if(!b64) 294L, 298L, 299L, 304:308) -> II)
-    is.finite(rM[-II])
+### platform (compiler configuration) dependent:
+    ## identical(which(rM == Inf),
+    ##           c(if(!b64) 294L, 298L, 299L, 304:308) -> II)
+    ## is.finite(rM[-II])
 })
 ## had many Inf and NaN; now looks optimal: 'Inf' are "correct" rounding up
 ##
@@ -3616,8 +3613,7 @@ dr <- diff(rmm <- round(mm, 301:500))
 (inz <- which(dr != 0))
 stopifnot(length(inz) == 1, dr[inz] == mm, dr[-inz] == 0,
           rmm[-(1:23)] == mm)
-## in R <= 3.6.x, all(rmm == 0)
-options(op)
+options(op) ## in R <= 3.6.x, all(rmm == 0)
 
 
 ## update.formula() triggering terms.formula() bug -- PR#16326
@@ -3680,6 +3676,12 @@ x <- 1.99e9; Nhi <- rhyper(256, x,x,x)
 stopifnot(identical(N, 999994112L), is.integer(Nhi),
           all.equal(mean(Nhi), x/2, tol = 6e-6)) # ==> also: no NAs
 ## NA's and warnings, incl "SHOULD NOT HAPPEN!" in R <= 3.6.2
+
+
+## assertCondition(*, "error") etc triggered errors *twice* (accidentally)
+stopifnot(identical(tools::assertError(sqrt("a")),
+                    list(     tryCatch(sqrt("a"), error=identity))))
+## The former contained the error object twice in R <= 3.6.2
 
 
 
