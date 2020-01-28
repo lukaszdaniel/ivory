@@ -3684,6 +3684,69 @@ stopifnot(identical(tools::assertError(sqrt("a")),
 ## The former contained the error object twice in R <= 3.6.2
 
 
+## Overriding encoding in parse()
+oloc <- Sys.getlocale("LC_CTYPE")
+if (.Platform$OS.type == "windows") {
+  Sys.setlocale("LC_CTYPE", "English_United States.1252")
+} else {
+  ## assumes non-Windows system already all support UTF-8
+  Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
+}
+##
+x8 <- "'\uf6'"
+(x8.2 <- substr(x8, 2,2))
+stopifnot(identical(Encoding(x8), "UTF-8"))
+f8 <- tempfile()
+writeLines(x8, f8, useBytes=TRUE) # save in UTF-8
+##
+chk_x82 <- function(x) stopifnot(identical(Encoding(x), "UTF-8"), identical(x, x8.2))
+## parse(*, encoding = "UTF-8", ..) :
+for(FF in c(function(.) parse(text=., encoding="UTF-8", keep.source=TRUE),
+            function(.) parse(text=., encoding="UTF-8", keep.source=FALSE),
+            str2lang,
+            str2expression)) {
+    x <- eval(FF(x8))
+    chk_x82(x)
+}
+for(K.S in c(TRUE, FALSE)) {
+    x <- eval(parse(file=f8, encoding="UTF-8", keep.source = K.S))
+    chk_x82(x)
+}
+## latin1 <--> UTF-8
+xl <- iconv(x8, from="UTF-8", to="latin1")
+stopifnot(identical(Encoding(xl), "latin1"))
+stopifnot(identical(x8, iconv(xl, from="latin1", to="UTF-8")))
+unlist(l10n_info()) # to see ..
+if (l10n_info()$"UTF-8") {
+    for(x in c(eval(parse(text=x8)),
+               eval(parse(text=xl, keep.source=TRUE)),
+               eval(parse(text=xl, keep.source=FALSE)),
+               eval(parse(file=f8))))
+        stopifnot(identical(x, x8.2))
+}
+if (l10n_info()$"Latin-1") {
+    for(x in c(eval(parse(text=xl)),
+               eval(parse(text=x8, keep.source=TRUE)),
+               eval(parse(text=x8, keep.source=FALSE))))
+        stopifnot(identical(x, x8.2))
+}
+Sys.setlocale("LC_CTYPE", oloc)
+## parse(text=xl) had failed w/ "EOF whilst reading MBCS char at line 2"
+
+
+## smoothEnds(<integer>, .) - PR#17693
+y1 <- as.integer(c(8,5,4,1,1,1,1))
+y2 <- y1; y2[3] <- 6L
+s1 <- smoothEnds(y1); s1.5 <- smoothEnds(y1, 5)
+s2 <- smoothEnds(y2); s2.5 <- smoothEnds(y2, 5)
+stopifnot(is.integer(y1), is.integer(y2), y1[-3] == y2[-3],
+          is.integer(s1), is.integer(s2),
+          is.integer(s1.5), is.integer(s2.5),
+          s1[1] == 7L, s1[-1] == y1[-1], identical(s1.5, s1),
+          s2[1] == 5L, s2[-1] == y2[-1], identical(s2.5, rep(c(6L, 1L), 3:4)))
+## s1, s1.5 were double in R <= 3.6.x
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,
