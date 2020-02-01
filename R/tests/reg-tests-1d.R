@@ -308,6 +308,7 @@ tryCatch(contour(matrix(rnorm(100), 10, 10), levels = 0, labels = numeric()),
 ## unique.warnings() needs better duplicated():
 invisible(warnings())
 .tmp <- lapply(list(0, 1, 0:1, 1:2, c(1,1), -1:1), function(x) wilcox.test(x))
+if(!interactive())
 stopifnot(length(print(uw <- unique(warnings()))) == 2)
 ## unique() gave only one warning in  R <= 3.3.1
 
@@ -793,6 +794,7 @@ stopifnot(length(a1) == 1, length(a2) == 2)
 ## by.data.frame() called not from toplevel w different arg names
 dby <- function(dat, ind, F) by(dat, ind, FUN=F)
 dby(warpbreaks, warpbreaks[,"tension"], summary)
+if(!interactive())
 stopifnot(is.list(r <- .Last.value), inherits(r, "by"))
 ## failed after r72531
 
@@ -3375,8 +3377,8 @@ stopifnot( identical(t3,   tail(iris3[,1,],  keepnums  = FALSE)) )
 ##
 ## 4-dim array
 ## 4th dimension failed transiently when I using switch() in keepnums logic
-adims <- c(11, 3, 3, 3)
-arr <- array(seq_len(prod(adims)) * 100, adims)
+adims <- c(11, 12, 4, 3)
+arr <- array(seq_len(prod(adims)), adims)
 headI4 <- function(M, n) {
     d <- dim(M)
     M[head(seq_len(d[1]), n[1]),
@@ -3403,8 +3405,10 @@ stopifnot(
                                          check.attributes=FALSE), NA))
 
 ## full output
-aco <- capture.output(print(arr))
+aco <- capture.output(arr)
 ## extract all dimnames from full output
+## assumes no spaces in names
+## assumes NO WRAPPING when printing rows!
 getnames <- function(txt, ndim = 4) {
     el <- which(!nzchar(txt))
     ## first handled elsewhere, last is just trailing line
@@ -3412,11 +3416,11 @@ getnames <- function(txt, ndim = 4) {
     hdln  <- c(1L, el[seq(2, length(el), by = 2)] - 1L)
     hdraw <- lapply(txt[hdln], function(tx) strsplit(tx, ", ")[[1L]])
 
-    ## 1 is higher indices, 2 is blank
+    ## line 1 is higher indices, 2 is blank, 3 is columns
     cnms <- strsplit(trimws(txt[3], which = "left"), split = "[[:space:]]+")[[1]]
     cnms <- cnms[nzchar(cnms)]
     matln <- 4:(el[1] - 1L)
-    rnms <- gsub("^([^]]+]).*", "\\1", txt[matln])
+    rnms <- gsub("^([[:space:]]*[^[:space:]]+)[[:space:]].*", "\\1", txt[matln])
     hdnms <- lapply(3:ndim, ## blank ones are left in so this is ok
                     function(i) unique(sapply(hdraw, `[`, i )))
     c(list(rnms, cnms),
@@ -3430,7 +3434,26 @@ stopifnot(
                                                 x = fpnms, ni = n, SIMPLIFY = FALSE)),
            NA)
 )
-##
+## mix named and non-named dimensions to catch bug in initial keepnums patch
+arr2 <- arr
+adnms <- lapply(seq_along(adims),
+                function(i) paste0("dim_", i, "_", seq(1L, adims[i])))
+adnms[3L] <- list(NULL)
+dimnames(arr2) <- adnms
+ii <- seq_along(adnms)
+stopifnot(
+    vapply(n.set2, function(n)
+        identical(dimnames(tail(arr2, n)),
+                  mapply(function(i, ni) {
+                            x <- adnms[[i]]
+                            if(is.null(x))
+                                x <- as.character(seq_len(adims[i]))
+                            if(ni != 0L)
+                                tail(x, ni)
+                         },
+                         i = ii, ni = n, SIMPLIFY = FALSE)),
+        NA)
+)
 ##
 ## matrix of "language" -- with expression()
 is.arr.expr <- function(x) is.array(x) && is.expression(x)
@@ -3702,9 +3725,8 @@ writeLines(x8, f8, useBytes=TRUE) # save in UTF-8
 chk_x82 <- function(x) stopifnot(identical(Encoding(x), "UTF-8"), identical(x, x8.2))
 ## parse(*, encoding = "UTF-8", ..) :
 for(FF in c(function(.) parse(text=., encoding="UTF-8", keep.source=TRUE),
-            function(.) parse(text=., encoding="UTF-8", keep.source=FALSE),
-            str2lang,
-            str2expression)) {
+            function(.) parse(text=., encoding="UTF-8", keep.source=FALSE)
+            )) {
     x <- eval(FF(x8))
     chk_x82(x)
 }
@@ -3721,13 +3743,17 @@ if (l10n_info()$"UTF-8") {
     for(x in c(eval(parse(text=x8)),
                eval(parse(text=xl, keep.source=TRUE)),
                eval(parse(text=xl, keep.source=FALSE)),
-               eval(parse(file=f8))))
+               eval(parse(file=f8)),
+               str2lang(x8),
+               str2expression(x8)))
         stopifnot(identical(x, x8.2))
 }
 if (l10n_info()$"Latin-1") {
     for(x in c(eval(parse(text=xl)),
                eval(parse(text=x8, keep.source=TRUE)),
-               eval(parse(text=x8, keep.source=FALSE))))
+               eval(parse(text=x8, keep.source=FALSE)),
+               str2lang(x8),
+               str2expression(x8)))
         stopifnot(identical(x, x8.2))
 }
 Sys.setlocale("LC_CTYPE", oloc)
@@ -3745,6 +3771,15 @@ stopifnot(is.integer(y1), is.integer(y2), y1[-3] == y2[-3],
           s1[1] == 7L, s1[-1] == y1[-1], identical(s1.5, s1),
           s2[1] == 5L, s2[-1] == y2[-1], identical(s2.5, rep(c(6L, 1L), 3:4)))
 ## s1, s1.5 were double in R <= 3.6.x
+
+
+## stopifnot() custom message now via <named> args:
+e <- tools::assertError(stopifnot("ehmm, you must be kidding!" = 1 == 0), verbose=TRUE)
+stopifnot(grepl("must be kidding!", e[[1]]$message))
+e2 <- tools::assertError(
+ stopifnot("2 is not approximately 2.1" = all.equal(2, 2.1)), verbose=TRUE)
+stopifnot(grepl("not approximately", e2[[1]]$message))
+## did not work in original stopifnot(<named>) patch
 
 
 

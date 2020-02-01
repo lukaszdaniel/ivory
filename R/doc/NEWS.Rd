@@ -208,6 +208,18 @@
       \code{rwilcox()} which have returned integer since R 3.0.0 and hence
       \code{NA} when the numbers would have been outside the integer range,
       now return double vectors (without NAs, typically) in these cases.
+
+      \item \code{matplot(x,y)} (and hence \code{matlines()} and
+      \code{matpoints()}) now call the corresponding methods of
+      \code{plot()} and \code{lines()}, e.g, when \code{x} is a
+      \code{"Date"} or \code{"POSIXct"} object; prompted by Spencer Graves'
+      suggestion.
+
+      \item \code{stopifnot()} now allows customizing error messages via
+      argument names, thanks to a patch proposal by Neal Fultz in \PR{17688}.
+
+      \item  \code{unlink()} gains a new argument \code{expand} to
+      disable wildcard and tilde expansion.
     }
   }% end{ NEW FEATURES }
 

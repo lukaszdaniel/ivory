@@ -1,7 +1,7 @@
 #  File src/library/base/R/stop.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2019 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ stopifnot <- function(..., exprs, exprObject, local = TRUE)
     n <- ...length()
     if((has.e <- !missing(exprs)) || !missing(exprObject)) {
 	if(n || (has.e && !missing(exprObject)))
-	    stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+	    stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 	envir <- if (isTRUE(local)) parent.frame()
 		 else if(isFALSE(local)) .GlobalEnv
 		 else if (is.environment(local)) local
@@ -68,7 +68,9 @@ stopifnot <- function(..., exprs, exprObject, local = TRUE)
 	r <- ...elt(i)
 	tmp <- if(FALSE) eval(quote(1)) # trick to have ...elt(i) errors *not* show call
 	if (!(is.logical(r) && !anyNA(r) && all(r))) {
-	    cl.i <- match.call()[[i+1L]]
+	  dots <- sys.call()[-1L]
+          if(is.null(msg <- names(dots)) || !nzchar(msg <- msg[i])) {
+	    cl.i <- dots[[i]]
 	    msg <- ## special case for decently written 'all.equal(*)':
 		if(is.call(cl.i) && identical(cl.i[[1]], quote(all.equal)) &&
 		   (is.null(ni <- names(cl.i)) || length(cl.i) == 3L ||
@@ -82,8 +84,9 @@ stopifnot <- function(..., exprs, exprObject, local = TRUE)
 				     "variable %s is not TRUE",
 				     "variables %s are not all TRUE", domain = "R-base"),
 			    Dparse(cl.i))
-            stop(simpleError(msg, call = if(p <- sys.parent(1L)) sys.call(p)))
-	}
+	  }
+	    stop(simpleError(msg, call = if(p <- sys.parent(1L)) sys.call(p)))
+        }
     }
     invisible()
 }
