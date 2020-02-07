@@ -4282,15 +4282,16 @@ function(package, dir, lib.loc = NULL)
     }
 
     unknown <- unique(unknown)
-    obsolete <- unknown %in% c("ctest", "eda", "lqs", "mle", "modreg", "mva", "nls", "stepfun", "ts")
-    if (any(obsolete)) {
-        message(sprintf(ngettext(sum(obsolete),
-                                 "Obsolete package %s in Rd xrefs",
-                                 "Obsolete packages %s in Rd xrefs", domain = "R-tools"),
-                        paste(sQuote(unknown[obsolete]), collapse = ", ")),
-                domain = NA)
-    }
-    unknown <- unknown[!obsolete]
+    ## Ancient history ....
+    ## obsolete <- unknown %in% c("ctest", "eda", "lqs", "mle", "modreg", "mva", "nls", "stepfun", "ts")
+    ## if (any(obsolete)) {
+    ##     message(sprintf(ngettext(sum(obsolete),
+    ##                       "Obsolete package %s in Rd xrefs",
+    ##                       "Obsolete packages %s in Rd xrefs", domain = "R-tools"),
+    ##                  paste(sQuote(unknown[obsolete]), collapse = ", ")),
+    ##             domain = NA)
+    ## }
+    ## unknown <- unknown[!obsolete]
     if (length(unknown)) {
         repos <- .get_standard_repository_URLs()
         ## Also allow for additionally specified repositories.
