@@ -1181,7 +1181,9 @@ add_dummies <- function(dir, Log)
                     any <- TRUE
                     warningLog(Log)
                 }
-                printLog0(Log, gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools"))
+                printLog0(Log,
+                          gettext("A complete check needs the 'checkbashisms' script.\n", domain = "R-tools"))
+                wrapLog(gettext("See section 'Configure and cleanup' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             } else {
                 for (f in c("configure", "cleanup")) {
                     ## /bin/bash is not portable

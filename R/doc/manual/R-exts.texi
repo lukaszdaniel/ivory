@@ -1581,7 +1581,7 @@ expansion is a known issue: see
 for this and others.  Some checks can be done by the
 @code{checkbashisms} Perl script at
 @uref{https://sourceforge.net/@/projects/@/checkbaskisms/@/files}, also
-found in some Linux distributions.})  shell script @file{configure} in
+available in most Linux distributions in a package named either @samp{devscripts} or @samp{devscripts-checkbashisms}.}) shell script @file{configure} in
 your package which (if present) is executed by @code{R CMD INSTALL}
 before any other action is performed.  This can be a script created by
 the Autoconf mechanism, but may also be a script written by yourself.
@@ -2631,9 +2631,9 @@ not necessarily installed) on all known @R{} platforms.  As from @R{}
 4.0.0 a C++ compiler will be selected only if it conforms to the 2011
 standard (`C++11').  A minor update@footnote{The changes are linked from
 @uref{https://isocpp.org/@/std/@/standing-documents/@/sd-6-sg10-feature-test-recommendations}.}
-(`C++14') was published in December 2014.  The latest standard (`C++17')
-was published in December 2017, and a further revision (`C++20') is in
-preparation.
+(`C++14') was published in December 2014.  A revision (`C++17') was
+published in December 2017, and a further revision (`C++20', with many
+new features) is scheduled for February 2020.
 
 What standard a C++ compiler aims to support can be hard to determine:
 the value@footnote{Values @code{199711}, @code{201103L} and
@@ -5085,9 +5085,9 @@ Writing portable C and C++ code is mainly a matter of observing the
 standards (C99, C++11 or where declared C++14/17) and testing that
 extensions (such as POSIX functions) are supported.
 
-@strong{C++ standards}: As from version 3.6.0, @R{} defaults to C++11
-where available@footnote{which it is on all known platforms, and is
-required as from @R{} 4.0.0} (3.6.2 on Windows).  However, in earlier
+@strong{C++ standards}: As from version 3.6.0 (3.6.2 on Windows), @R{}
+defaults to C++11 where available@footnote{which it is on all known
+platforms, and is required as from @R{} 4.0.0}. However, in earlier
 versions the default standard was that of the compiler used, often C++98
 or C++14.  Packages which are for use only with @R{} 3.6.2 or later can
 assume C++11 or specify a later standard.  However, those which may be
@@ -11729,7 +11729,7 @@ rebound immediately.  (Provided the remaining code in @code{"foo<-"}
 make no reference to @code{x}, and no one is going to attempt a direct
 call such as @code{y <- "foo<-"(x)}.)
 
-This mechanism is scheduled to be replaced in @R{} 4.0.0. To
+This mechanism is to be replaced in @R{} 4.0.0. To
 support future changes, package code should use the macros
 @code{MAYBE_REFERENCED}, @code{MAYBE_SHARED}, and
 @code{MARK_NOT_MUTABLE}. These currently correspond to
@@ -13403,9 +13403,8 @@ would be
       end
 @end example
 @noindent
-in file @file{rmsg.f}. Using @command{gfortran} 9.2 and
-later@footnote{or 9.1-patched since 2019-05-09.} we can extract the C
-view by
+in file @file{rmsg.f}. Using @command{gfortran} 9.2 and later we can
+extract the C view by
 @example
 gfortran -c -fc-prototypes-external rmsg.f
 @end example
@@ -13513,7 +13512,7 @@ Cdgemm(const char *transa, const char *transb, const int *m,
 @end example
 
 @noindent
-Alternatively, do as @R{} does as from version 3.6.1-patched and pass
+Alternatively, do as @R{} does as from version 3.6.2 and pass
 the character length(s) from C to Fortran. A portable way to do this is
 @example
 // before any R headers, or define in PKG_CPPFLAGS
