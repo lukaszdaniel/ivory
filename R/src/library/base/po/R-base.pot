@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.0.0\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,7 +258,6 @@ msgstr ""
 
 
 #: R/table.R: 0
-#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 
 msgid "'%s' argument is not an array"
@@ -1994,9 +1993,9 @@ msgstr ""
 
 
 #: R/stop.R: 0
-#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 
-msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
 msgstr ""
 
 

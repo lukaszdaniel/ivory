@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-03 r1214) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-02-13 r1216) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-03 r77764) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-02-13 r77809) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1146,9 +1146,11 @@ Loading required package: 'methods'
 > new("mySubInteger", 1L)
 An object of class "mySubInteger"
 [1] 1
-attr(,"class")
-[1] "myInteger"
 > ## caused infinite recursion in R 3.3.0
+> new("mySubInteger")
+An object of class "mySubInteger"
+integer(0)
+> ## failed due to lack of prototype in R 3.6.0
 > 
 > detach("package:methods", force=TRUE)
 > methods::setClass("test1", methods::representation(date="POSIXct"))
@@ -1313,3 +1315,37 @@ value <- new("A")
 > stopifnot( canCoerce(o3, "A") )
 > ## failed in R <= 3.6.1
 > 
+> if(require("Matrix")) withAutoprint({
++     (sci <- names(getClass("integer")@contains))
++     # These 2 classes have *nothing* to do with Matrix:
++     setClass("MyClass")
++     setClassUnion("NumOrMyClass", c("numeric", "MyClass"))
++     (nsci <- names(getClass("integer")@contains))
++     ## failed in R <= 3.6.2
++     stopifnot(sci %in% nsci)
++ 
++     setClassUnion('dMatrixOrMatrix', members = c('dMatrix', 'matrix'))
++     ## failed in R <= 3.6.2
++     stopifnot("dMatrixOrMatrix" %in% names(getClass("dgCMatrix")@contains))
++ 
++     invisible(lapply(c("NumOrMyClass", "MyClass", "dMatrixOrMatrix"),
++                      removeClass))
++ })
+> (sci <- names(getClass("integer")@contains))
+ [1] "double"              "numeric"             "vector"             
+ [4] "data.frameRowLabels" "atomicVector"        "numericVector"      
+ [7] "index"               "replValue"           "numLike"            
+[10] "number"              "Mnumeric"            "replValueSp"        
+> setClass("MyClass")
+> setClassUnion("NumOrMyClass", c("numeric", "MyClass"))
+> (nsci <- names(getClass("integer")@contains))
+ [1] "double"              "numeric"             "vector"             
+ [4] "data.frameRowLabels" "atomicVector"        "numericVector"      
+ [7] "index"               "replValue"           "numLike"            
+[10] "number"              "Mnumeric"            "NumOrMyClass"       
+[13] "replValueSp"        
+> stopifnot(sci %in% nsci)
+> setClassUnion("dMatrixOrMatrix", members = c("dMatrix", "matrix"))
+> stopifnot("dMatrixOrMatrix" %in% names(getClass("dgCMatrix")@contains))
+Error: variable "dMatrixOrMatrix" %in% names(getClass("dgCMatrix")@contains) is not TRUE
+Execution halted

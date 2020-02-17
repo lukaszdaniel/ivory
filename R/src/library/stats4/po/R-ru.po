@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2015-01-17 15:51+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -23,11 +23,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#. R/mle.R: stop("'start' must be a named list")
-#: R/mle.R:0
-msgid "'start' must be a named list"
-msgstr "'start' должен быть именованым списком"
 
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
@@ -44,6 +39,11 @@ msgstr ""
 #. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
 #: R/mle.R:0
 msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
+msgid "Mismatch in length of start values"
 msgstr ""
 
 #. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
@@ -76,6 +76,11 @@ msgstr ""
 msgid "levels truncated to positive values only"
 msgstr "уровни укорочены до только положительных значений"
 
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr ""
+
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
 msgid ""
@@ -83,25 +88,25 @@ msgid ""
 msgstr ""
 "профилирование нашло лучшее решение, и поэтому исходная подгонка не сошлась"
 
-#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-msgid ""
-"some named arguments in 'fixed' are not arguments to the supplied log-"
-"likelihood"
+#, fuzzy
+msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr ""
 "некоторые именованные аргументы в 'fixed' не являются аргументами "
-"переданного логарифма функции правдоподобия"
-
-#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
-#: R/mle.R:0
-msgid ""
-"some named arguments in 'start' are not arguments to the supplied log-"
-"likelihood"
-msgstr ""
-"некоторые именованные аргументы в 'start'  не являются аргументами "
 "переданного логарифма функции правдоподобия"
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
 msgstr ""
+
+#~ msgid "'start' must be a named list"
+#~ msgstr "'start' должен быть именованым списком"
+
+#~ msgid ""
+#~ "some named arguments in 'start' are not arguments to the supplied log-"
+#~ "likelihood"
+#~ msgstr ""
+#~ "некоторые именованные аргументы в 'start'  не являются аргументами "
+#~ "переданного логарифма функции правдоподобия"

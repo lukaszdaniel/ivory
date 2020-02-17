@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -239,7 +239,6 @@ msgstr "pas un tableau de données"
 msgid "'%s' argument is not a namespace"
 msgstr "ceci n'est pas un espace de noms"
 
-#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
@@ -1715,9 +1714,9 @@ msgstr ""
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "la longueur des arguments diffère"
 
-#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 #: R/stop.R:0
-msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
 msgstr ""
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package), oldversion,     paste0(P, conditionMessage(e), "\n"), domain = "R-base")

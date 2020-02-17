@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.0.0\n"
-"POT-Creation-Date: 2020-01-10 19:26\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1206,6 +1206,13 @@ msgstr ""
 #. R/package.skeleton.R: message("Making help files ...", domain = "R-utils")
 
 msgid "Making help files ..."
+msgstr ""
+
+
+#: R/package.skeleton.R: 0
+#. R/package.skeleton.R: stop("Malformed package name.")
+
+msgid "Malformed package name."
 msgstr ""
 
 
@@ -3831,6 +3838,13 @@ msgstr ""
 #. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
 
 msgid "tail(., addrownums = V) is deprecated.\nUse"
+msgstr ""
+
+
+#: R/head.R: 0
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
+
+msgid "tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead."
 msgstr ""
 
 

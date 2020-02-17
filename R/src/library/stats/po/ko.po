@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 21:41+0100\n"
+"POT-Creation-Date: 2020-02-16 12:17+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -207,7 +207,7 @@ msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g 값이 (0,1) 범위 외입니다 "
 
-#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
+#: family.c:67 family.c:81 family.c:99 port.c:389 port.c:560
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
@@ -408,186 +408,198 @@ msgstr ""
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
 
-#: loessc.c:235 loessc.c:356
-#, fuzzy, c-format
-msgid "'%s' argument is too small"
+#: loessc.c:239
+msgid "span is too small"
 msgstr "범위가 너무 작습니다 "
 
-#: loessc.c:241
-msgid "workspace required is too large"
+#: loessc.c:254
+#, c-format
+msgid ""
+"workspace required (%.0f) is too large probably because of setting 'se = "
+"TRUE'."
 msgstr ""
 
-#: loessc.c:350
+#: loessc.c:255
+#, c-format
+msgid "workspace required (%.0f) is too large."
+msgstr ""
+
+#: loessc.c:362
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 
-#: loessc.c:351
+#: loessc.c:363
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:352 loessc.c:353
+#: loessc.c:364 loessc.c:365
 #, fuzzy, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "'fn'은 함수가 아닙니다"
 
-#: loessc.c:354
+#: loessc.c:366
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 
-#: loessc.c:355
+#: loessc.c:367
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:357 loessc.c:358 optim.c:394 optimize.c:255 optimize.c:262
+#: loessc.c:368
+#, fuzzy, c-format
+msgid "'%s' argument is too small"
+msgstr "범위가 너무 작습니다 "
+
+#: loessc.c:369 loessc.c:370 optim.c:394 optimize.c:255 optimize.c:262
 #: optimize.c:271 optimize.c:345 optimize.c:350 optimize.c:366 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 의 값이 잘못되었습니다 "
 
-#: loessc.c:359
+#: loessc.c:371
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr ""
 
-#: loessc.c:360
+#: loessc.c:372
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 
-#: loessc.c:361
+#: loessc.c:373
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:362
+#: loessc.c:374
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:363
+#: loessc.c:375
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr ""
 
-#: loessc.c:364
+#: loessc.c:376
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 
-#: loessc.c:365
+#: loessc.c:377
 #, fuzzy, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "m 은 반드시 list 이어야 합니다 "
 
-#: loessc.c:366
+#: loessc.c:378
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
 "lowesl."
 msgstr ""
 
-#: loessc.c:367
+#: loessc.c:379
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 
-#: loessc.c:368
+#: loessc.c:380
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr ""
 
-#: loessc.c:369
+#: loessc.c:381
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr ""
 
-#: loessc.c:370
+#: loessc.c:382
 #, fuzzy, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:371
+#: loessc.c:383
 #, fuzzy, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:372
+#: loessc.c:384
 #, fuzzy, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:373
+#: loessc.c:385
 #, fuzzy, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:374
+#: loessc.c:386
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:375
+#: loessc.c:387
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:376
+#: loessc.c:388
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr ""
 
-#: loessc.c:377
+#: loessc.c:389
 #, c-format
 msgid "insufficient stack space"
 msgstr ""
 
-#: loessc.c:378
+#: loessc.c:390
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr ""
 
-#: loessc.c:379
+#: loessc.c:391
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:380
+#: loessc.c:392
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:381
+#: loessc.c:393
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr ""
 
-#: loessc.c:382
+#: loessc.c:394
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr ""
 
-#: loessc.c:383
+#: loessc.c:395
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr ""
 
-#: loessc.c:384
+#: loessc.c:396
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr ""
 
-#: loessc.c:385
+#: loessc.c:397
 #, c-format
 msgid "not yet implemented"
 msgstr ""
 
-#: loessc.c:387
+#: loessc.c:399
 #, fuzzy, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "starma 에러 코드는 %d 입니다"
@@ -736,37 +748,49 @@ msgstr "'update'의 식이 잘못되었습니다"
 msgid "formula expected"
 msgstr "식이 있어야 합니다"
 
-#: model.c:1052
+#: model.c:1081
 msgid "invalid term in model formula"
 msgstr "모델식에 잘못된 항목이 있습니다"
 
-#: model.c:1120 model.c:1185 model.c:1604
+#: model.c:1172 model.c:1253
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "EncodeVars의 모델식이 잘못되었습니다"
 
-#: model.c:1147 model.c:1435
+#: model.c:1204 model.c:1510
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
 
-#: model.c:1549
+#: model.c:1621
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "''를 사용한 데이터 프레임에서 중복된 이름 '%s'이 있습니다"
 
-#: model.c:1680
+#: model.c:1688
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "ExtractVars의 모델식이 잘못되었습니다"
+
+#: model.c:1765
 msgid "argument is not a valid model"
 msgstr "인수는 유효한 모델이 아닙니다"
 
-#: model.c:1690
+#: model.c:1775
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' must be NULL or a character vector"
 
-#: model.c:1701
+#: model.c:1786
 msgid "'data' argument is of the wrong type"
 msgstr "'data'인수가 잘못된 유형입니다"
 
-#: model.c:2020
+#: model.c:1858
+#, c-format
+msgid ""
+"'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
+"no longer happen!"
+msgstr ""
+
+#: model.c:2142
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.'가 수식에서 있습니다만, 'data'인수가 아닙니다"
 
@@ -788,7 +812,7 @@ msgstr "length(m) 은 반드시 2 이상이어야 합니다 "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Sx 인자는 반드시 수치형 벡터이어야 하며, m[] 보다 짧아야합니다 "
 
-#: nls.c:96 nls.c:98 port.c:559
+#: nls.c:96 nls.c:98 port.c:561
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
@@ -822,7 +846,7 @@ msgstr "수렴합니다 "
 msgid "'%s' argument should be of type character"
 msgstr "'theta' 는 반드시 문자형 이어야 합니다 "
 
-#: nls.c:288 port.c:381
+#: nls.c:288 port.c:383
 msgid "use of NULL environment is defunct"
 msgstr "use of NULL environment is defunct"
 
@@ -1088,80 +1112,80 @@ msgstr "Rf_divset: alg=%d 는 1,2,3, 혹은 4 의 값을 가져야 합니다 "
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.c:316
+#: port.c:318
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "기울기 함수는 길이가 %d 인 수치형 벡터를 반환해야 합니다  "
 
-#: port.c:319
+#: port.c:321
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.c:328
+#: port.c:330
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr ""
 "Hessian 함수는 반드시 order 가 %d 인 수치형 정방행렬을 반환해야 합니다 "
 
-#: port.c:333
+#: port.c:335
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:385
+#: port.c:387
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'rho' 는 반드시 환경이어야 합니다 "
 
-#: port.c:389
+#: port.c:391
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Hessian 이 정의되었다면 기울기도 정의되어야 합니다 "
 
-#: port.c:392
+#: port.c:394
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr ""
 "환경 'rho' 은 반드시 길이가 %d 인 수치형 벡터 '.par' 를 포함해야 합니다  "
 
-#: port.c:406
+#: port.c:408
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' 와 'upper' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:421
+#: port.c:423
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
 
-#: port.c:465
+#: port.c:467
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' 는 명명된 list 에만 적용됩니다 "
 
-#: port.c:491
+#: port.c:493
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() 를 찾을 수 없습니다 "
 
-#: port.c:505
+#: port.c:507
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' 는 반드시 (%d,%d) 인 수치형 행렬이어야 합니다 "
 
-#: port.c:525
+#: port.c:527
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn 은 모드 %d, 길이 %d 를 생성했고, 모드 %d, 길이 %d 를 요구합니다 "
 
-#: port.c:538
+#: port.c:540
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store 에 대한 유형이 잘못되었습니다 "
 
-#: port.c:579
+#: port.c:581
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:602
+#: port.c:604
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1292,12 +1316,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "EncodeVars의 모델식이 잘못되었습니다"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "ExtractVars의 모델식이 잘못되었습니다"
-
-#~ msgid "span is too small"
-#~ msgstr "범위가 너무 작습니다 "
 
 #~ msgid "n must be at least two"
 #~ msgstr "n 은 반드시 최소 2 이상이어야 합니다 "

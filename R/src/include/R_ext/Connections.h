@@ -48,7 +48,7 @@
 typedef struct Rconn  *Rconnection;
 #endif
 struct Rconn {
-    char* conclass;
+    char* connclass;
     char* description;
     int enc; /* the encoding of 'description' */
     char mode[5];

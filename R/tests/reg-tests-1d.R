@@ -3473,7 +3473,7 @@ stopifnot(exprs = {
 
 
 ## Forgotten 'drop=FALSE' in plot.formula()
-df <- data.frame(x=1:3, grp=c("A","A","B"))
+df <- data.frame(x=1:3, grp=c("A","A","B"), stringsAsFactors = TRUE)
 plot( ~grp, data=df, subset = x > 1)
 ## failed in R <= 3.6.1
 
@@ -3786,6 +3786,11 @@ e2 <- tryCid(CHK(1 == 1, "not possible" = 1 == 0))
 stopifnot(inherits(e , "error"), grepl("is not TRUE", e$message),
           inherits(e2, "error"), identical("not possible", e2$message))
 ## wrapping stopifnot() in this way did not work in some unreleased R-devel
+
+
+## norm(<matrix-w-NA>, "2")
+stopifnot(is.na( norm(diag(c(1, NA)), "2") ))
+## gave error from svd() in R <= 3.6.x
 
 
 

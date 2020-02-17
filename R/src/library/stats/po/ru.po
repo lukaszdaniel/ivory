@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 21:41+0100\n"
+"POT-Creation-Date: 2020-02-16 12:17+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -211,7 +211,7 @@ msgstr "Нечисловой аргумент для математическо�
 msgid "Value %g out of range (0, 1)"
 msgstr "Значение %g вне промежутка (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
+#: family.c:67 family.c:81 family.c:99 port.c:389 port.c:560
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Аргумент %s должен быть непустым числовым вектором"
@@ -412,186 +412,198 @@ msgstr ""
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
 
-#: loessc.c:235 loessc.c:356
-#, fuzzy, c-format
-msgid "'%s' argument is too small"
+#: loessc.c:239
+msgid "span is too small"
 msgstr "перекрытие слишком мало"
 
-#: loessc.c:241
-msgid "workspace required is too large"
+#: loessc.c:254
+#, c-format
+msgid ""
+"workspace required (%.0f) is too large probably because of setting 'se = "
+"TRUE'."
 msgstr ""
 
-#: loessc.c:350
+#: loessc.c:255
+#, c-format
+msgid "workspace required (%.0f) is too large."
+msgstr ""
+
+#: loessc.c:362
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 
-#: loessc.c:351
+#: loessc.c:363
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:352 loessc.c:353
+#: loessc.c:364 loessc.c:365
 #, fuzzy, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "'fn' не является функцией"
 
-#: loessc.c:354
+#: loessc.c:366
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 
-#: loessc.c:355
+#: loessc.c:367
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:357 loessc.c:358 optim.c:394 optimize.c:255 optimize.c:262
+#: loessc.c:368
+#, fuzzy, c-format
+msgid "'%s' argument is too small"
+msgstr "перекрытие слишком мало"
+
+#: loessc.c:369 loessc.c:370 optim.c:394 optimize.c:255 optimize.c:262
 #: optimize.c:271 optimize.c:345 optimize.c:350 optimize.c:366 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: loessc.c:359
+#: loessc.c:371
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr ""
 
-#: loessc.c:360
+#: loessc.c:372
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 
-#: loessc.c:361
+#: loessc.c:373
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:362
+#: loessc.c:374
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:363
+#: loessc.c:375
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr ""
 
-#: loessc.c:364
+#: loessc.c:376
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 
-#: loessc.c:365
+#: loessc.c:377
 #, fuzzy, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "m должен быть списком"
 
-#: loessc.c:366
+#: loessc.c:378
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
 "lowesl."
 msgstr ""
 
-#: loessc.c:367
+#: loessc.c:379
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 
-#: loessc.c:368
+#: loessc.c:380
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr ""
 
-#: loessc.c:369
+#: loessc.c:381
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr ""
 
-#: loessc.c:370
+#: loessc.c:382
 #, fuzzy, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "Сингулярная матрица в ldet"
 
-#: loessc.c:371
+#: loessc.c:383
 #, fuzzy, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "Сингулярная матрица в ldet"
 
-#: loessc.c:372
+#: loessc.c:384
 #, fuzzy, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "Сингулярная матрица в ldet"
 
-#: loessc.c:373
+#: loessc.c:385
 #, fuzzy, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "Сингулярная матрица в ldet"
 
-#: loessc.c:374
+#: loessc.c:386
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:375
+#: loessc.c:387
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:376
+#: loessc.c:388
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr ""
 
-#: loessc.c:377
+#: loessc.c:389
 #, c-format
 msgid "insufficient stack space"
 msgstr ""
 
-#: loessc.c:378
+#: loessc.c:390
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr ""
 
-#: loessc.c:379
+#: loessc.c:391
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:380
+#: loessc.c:392
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:381
+#: loessc.c:393
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr ""
 
-#: loessc.c:382
+#: loessc.c:394
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr ""
 
-#: loessc.c:383
+#: loessc.c:395
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr ""
 
-#: loessc.c:384
+#: loessc.c:396
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr ""
 
-#: loessc.c:385
+#: loessc.c:397
 #, c-format
 msgid "not yet implemented"
 msgstr ""
 
-#: loessc.c:387
+#: loessc.c:399
 #, fuzzy, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "ошибка 'starma' с кодом %d"
@@ -739,37 +751,49 @@ msgstr "неправильная формула в 'update'"
 msgid "formula expected"
 msgstr "ожидается формула"
 
-#: model.c:1052
+#: model.c:1081
 msgid "invalid term in model formula"
 msgstr "неправильный терм в модельной формуле"
 
-#: model.c:1120 model.c:1185 model.c:1604
+#: model.c:1172 model.c:1253
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "неправильная модельная формула в EncodeVars"
 
-#: model.c:1147 model.c:1435
+#: model.c:1204 model.c:1510
 msgid "invalid power in formula"
 msgstr "неправильная степень в формуле"
 
-#: model.c:1549
+#: model.c:1621
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "повторяющееся имя '%s' в таблице данных, использую '.'"
 
-#: model.c:1680
+#: model.c:1688
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "неправильная модельная формула в ExtractVars"
+
+#: model.c:1765
 msgid "argument is not a valid model"
 msgstr "аргумент не является правильной моделью"
 
-#: model.c:1690
+#: model.c:1775
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' должен быть NULL или текстовым вектором"
 
-#: model.c:1701
+#: model.c:1786
 msgid "'data' argument is of the wrong type"
 msgstr "аргумент 'data' неправильного типа"
 
-#: model.c:2020
+#: model.c:1858
+#, c-format
+msgid ""
+"'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
+"no longer happen!"
+msgstr ""
+
+#: model.c:2142
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' в формуле и нет аргумента 'data'"
 
@@ -791,7 +815,7 @@ msgstr "length(m) должна быть по меньшей мере 2"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Аргумент Sx должен быть числовым вектором короче m[]"
 
-#: nls.c:96 nls.c:98 port.c:559
+#: nls.c:96 nls.c:98 port.c:561
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' должен быть списком"
@@ -825,7 +849,7 @@ msgstr "сошлось"
 msgid "'%s' argument should be of type character"
 msgstr "'theta' должна быть текстового типа"
 
-#: nls.c:288 port.c:381
+#: nls.c:288 port.c:383
 msgid "use of NULL environment is defunct"
 msgstr "использование окружения NULL больше не работает"
 
@@ -1092,82 +1116,82 @@ msgstr "Rf_divset: alg = %d должен быть 1, 2, 3 или 4"
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.c:316
+#: port.c:318
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "градиентная функция должна возвращать числовой вектор длины %d"
 
-#: port.c:319
+#: port.c:321
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.c:328
+#: port.c:330
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr ""
 "функция гессиана должна возвращать квадратную числовую матрицу порядка %d"
 
-#: port.c:333
+#: port.c:335
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.c:385
+#: port.c:387
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "'rho' должно быть окружением"
 
-#: port.c:389
+#: port.c:391
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
 "Когда определяется функция, вычисляющая гессиан, должен быть определен и "
 "градиент"
 
-#: port.c:392
+#: port.c:394
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "окружение 'rho' должно содержать числовой вектор '.par' длины %d"
 
-#: port.c:406
+#: port.c:408
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' и 'upper' должны быть числовыми векторами"
 
-#: port.c:421
+#: port.c:423
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "неправильное значение функции в 'zeroin'"
 
-#: port.c:465
+#: port.c:467
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' применяется лишь к именованным спискам"
 
-#: port.c:491
+#: port.c:493
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() не найден"
 
-#: port.c:505
+#: port.c:507
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr ""
 "'gradient' должен быть числовой матрицей матрицей с измерениями (%d,%d)"
 
-#: port.c:525
+#: port.c:527
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn выдала тип %d, длину %d - нужен тип %d, длина %d"
 
-#: port.c:538
+#: port.c:540
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "неправильный тип 'eval_check_store'"
 
-#: port.c:579
+#: port.c:581
 #, fuzzy, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' и 'upperb' должны быть числовыми векторами"
 
-#: port.c:602
+#: port.c:604
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1298,12 +1322,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "неправильная модельная формула в EncodeVars"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "неправильная модельная формула в ExtractVars"
-
-#~ msgid "span is too small"
-#~ msgstr "перекрытие слишком мало"
 
 #~ msgid "n must be at least two"
 #~ msgstr "m должен быть по крайней мере 2"

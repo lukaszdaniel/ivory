@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:26\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1002,6 +1002,11 @@ msgstr "Création de packages.html ..."
 #: R/package.skeleton.R:0
 msgid "Making help files ..."
 msgstr "Création des fichiers d'aide ..."
+
+#. R/package.skeleton.R: stop("Malformed package name.")
+#: R/package.skeleton.R:0
+msgid "Malformed package name."
+msgstr ""
 
 #. R/sessionInfo.R: gettext("Matrix products: ", domain = "R-utils")
 #: R/sessionInfo.R:0
@@ -3112,6 +3117,13 @@ msgstr ""
 msgid ""
 "tail(., addrownums = V) is deprecated.\n"
 "Use"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums=.) is deprecated.\n"
+"Use tail(., keepnums=.) instead."
 msgstr ""
 
 #. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")

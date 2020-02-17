@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2012-03-06 18:03+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -18,11 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.1.6\n"
-
-#. R/mle.R: stop("'start' must be a named list")
-#: R/mle.R:0
-msgid "'start' must be a named list"
-msgstr "'start' 는 이름이 주어진 list 이어야 합니다 "
 
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
@@ -39,6 +34,11 @@ msgstr ""
 #. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
 #: R/mle.R:0
 msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
+msgid "Mismatch in length of start values"
 msgstr ""
 
 #. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
@@ -71,6 +71,11 @@ msgstr ""
 msgid "levels truncated to positive values only"
 msgstr "levels 는 양의 정수값만 가집니다 "
 
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr ""
+
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
 msgid ""
@@ -79,23 +84,23 @@ msgstr ""
 "profiling 이 더 적합한 해를 찾았으므로 초기 적합은 수렴하지 않았음을 의미합니"
 "다 "
 
-#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-msgid ""
-"some named arguments in 'fixed' are not arguments to the supplied log-"
-"likelihood"
+#, fuzzy
+msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "'fixed'에서 이름 인수는 주어졌던 대수우도에 대한 인수가 아닙니다"
-
-#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
-#: R/mle.R:0
-msgid ""
-"some named arguments in 'start' are not arguments to the supplied log-"
-"likelihood"
-msgstr ""
-"'start' 에 일부 이름이 주어진 인자들은 log-likelihood 에서 지원하는 인자들이 "
-"아닙니다 "
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
 msgstr ""
+
+#~ msgid "'start' must be a named list"
+#~ msgstr "'start' 는 이름이 주어진 list 이어야 합니다 "
+
+#~ msgid ""
+#~ "some named arguments in 'start' are not arguments to the supplied log-"
+#~ "likelihood"
+#~ msgstr ""
+#~ "'start' 에 일부 이름이 주어진 인자들은 log-likelihood 에서 지원하는 인자들"
+#~ "이 아닙니다 "

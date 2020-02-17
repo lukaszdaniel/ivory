@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2015-01-17 15:51+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -18,11 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#. R/mle.R: stop("'start' must be a named list")
-#: R/mle.R:0
-msgid "'start' must be a named list"
-msgstr "'start'必需是带名串列"
 
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
@@ -39,6 +34,11 @@ msgstr ""
 #. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
 #: R/mle.R:0
 msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
+msgid "Mismatch in length of start values"
 msgstr ""
 
 #. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
@@ -71,27 +71,32 @@ msgstr ""
 msgid "levels truncated to positive values only"
 msgstr "阶层截为正数值"
 
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr ""
+
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
 msgid ""
 "profiling has found a better solution, so original fit had not converged"
 msgstr "通过靠模切削找到了一个更好的答案，因此原来的拟合没有收敛"
 
-#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-msgid ""
-"some named arguments in 'fixed' are not arguments to the supplied log-"
-"likelihood"
+#, fuzzy
+msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "'fixed'里的一些带名参数不是给所提供的对数似然作为参数来用的"
-
-#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
-#: R/mle.R:0
-msgid ""
-"some named arguments in 'start' are not arguments to the supplied log-"
-"likelihood"
-msgstr "'start'里的一些带名参数不是给所提供的对数似然作为参数来用的"
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
 msgstr ""
+
+#~ msgid "'start' must be a named list"
+#~ msgstr "'start'必需是带名串列"
+
+#~ msgid ""
+#~ "some named arguments in 'start' are not arguments to the supplied log-"
+#~ "likelihood"
+#~ msgstr "'start'里的一些带名参数不是给所提供的对数似然作为参数来用的"

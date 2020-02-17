@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -819,13 +819,12 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
 #: R/RClassUtils.R:0
 #, fuzzy
 msgid ""
-"From .checkSubclasses(): subclass %s of class %s is not local and is not "
-"updated for new inheritance information currently;\n"
-"[where=%s, where2=%s]"
+"From .checkSubclasses(): subclass %s is not local to superclass %s, which is "
+"not a class union, so inheritance information will be lost."
 msgstr ""
 "Nicht definierte Unterklasse %s  von Klasse %s; Definition nicht aktualisiert"
 
@@ -1799,12 +1798,12 @@ msgstr ""
 "Klasse %s ist eine Klassenvereinigung; 'coerce' Relationen in eine "
 "Klassenvereinigung ergeben keinen Sinn"
 
-#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not exported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
+#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
 #: R/is.R:0
 #, fuzzy
 msgid ""
 "class %s is defined (with package slot %s) but no metadata object found to "
-"revise %s information---not exported?  Making a copy in package %s"
+"revise %s information---not imported?  Making a copy in package %s"
 msgstr ""
 "Klasse %s ist definiert (mit Paketslot %s) aber kein Metadatenobjekt "
 "gefunden, um %s Inforation zu überprüfen -- nicht exportiert? Erzeuge Kopie "

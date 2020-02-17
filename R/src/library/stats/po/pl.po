@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 21:41+0100\n"
+"POT-Creation-Date: 2020-02-16 12:17+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -208,7 +208,7 @@ msgstr "Argument nieliczbowy przekazany do funkcji matematycznej"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wartość %g jest poza zakresem (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99 port.c:387 port.c:558
+#: family.c:67 family.c:81 family.c:99 port.c:389 port.c:560
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
@@ -434,80 +434,92 @@ msgstr "wymiary 'x' (%d,%d) oraz 'y' (%d) nie zgadzają się"
 msgid "NA/NaN/Inf in '%s'"
 msgstr "wartość NA/NaN/Inf w '%s'"
 
-#: loessc.c:235 loessc.c:356
-#, c-format
-msgid "'%s' argument is too small"
-msgstr "argument '%s' jest zbyt mały"
+#: loessc.c:239
+msgid "span is too small"
+msgstr "rozpiętość jest za mała"
 
-#: loessc.c:241
-msgid "workspace required is too large"
+#: loessc.c:254
+#, c-format
+msgid ""
+"workspace required (%.0f) is too large probably because of setting 'se = "
+"TRUE'."
+msgstr ""
+
+#: loessc.c:255
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large."
 msgstr "wymagany obszar roboczy jest zbyt duży"
 
-#: loessc.c:350
+#: loessc.c:362
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 "niepoprawny numer wersji w 'lowesd()'. Prawdopodobnie literówka w wywołaniu."
 
-#: loessc.c:351
+#: loessc.c:363
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 "'d>dMAX' w funkcji 'ehg131()'. Konieczna rekompilacja ze zwiększonymi "
 "wymiarami."
 
-#: loessc.c:352 loessc.c:353
+#: loessc.c:364 loessc.c:365
 #, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "argument '%s' jest zbyt mały. (Znaleziono przez funkcję 'lowesd()')"
 
-#: loessc.c:354
+#: loessc.c:366
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 "argument 'span' jest zbyt mały. Mniej wartości danych niż stopni swobody."
 
-#: loessc.c:355
+#: loessc.c:367
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 "'k>d2MAX' w 'ehg136'. Konieczna rekompilacja ze zwiększonymi wymiarami."
 
-#: loessc.c:357 loessc.c:358 optim.c:394 optimize.c:255 optimize.c:262
+#: loessc.c:368
+#, c-format
+msgid "'%s' argument is too small"
+msgstr "argument '%s' jest zbyt mały"
+
+#: loessc.c:369 loessc.c:370 optim.c:394 optimize.c:255 optimize.c:262
 #: optimize.c:271 optimize.c:345 optimize.c:350 optimize.c:366 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: loessc.c:359
+#: loessc.c:371
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr "'lowstt' ma zastosowanie tylko gdy 'kernel=1'."
 
-#: loessc.c:360
+#: loessc.c:372
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 "niewystarczający rozmiar dodatkowej przestrzeni roboczej w kalkulacjach "
 "odpornościowych"
 
-#: loessc.c:361
+#: loessc.c:373
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr "sąsiedztwo o zerowej szerokości. Zwiększanie zakresu."
 
-#: loessc.c:362
+#: loessc.c:374
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr "wszystkie dane są na granicy sąsiedztwa. Zwiększanie zakresu"
 
-#: loessc.c:363
+#: loessc.c:375
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr "ekstrapolacja nie jest dozwolona razem z wygładzaniem"
 
-#: loessc.c:364
+#: loessc.c:376
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
@@ -515,12 +527,12 @@ msgstr ""
 "'ihat=1' (diagonala 'L') w funkcji 'l2fit()' ma sens tylko jeśli 'z=x "
 "(eval=data)'."
 
-#: loessc.c:365
+#: loessc.c:377
 #, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "funkcja 'lowesd()' musi być wywołana jako pierwsza"
 
-#: loessc.c:366
+#: loessc.c:378
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
@@ -529,104 +541,104 @@ msgstr ""
 "funkcja 'lowesf()' nie może pojawić się pomiędzy funkcjami 'lowesb()' oraz "
 "'lowese()', 'lowesr()', lub 'lowesl()'"
 
-#: loessc.c:367
+#: loessc.c:379
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 "funkcja 'lowesb()' musi być przed funkcjami 'lowese()', 'lowesr()' lub "
 "'lowesl()'"
 
-#: loessc.c:368
+#: loessc.c:380
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr "funkcja 'lowesb()' nie musi być wywoływana dwukrotnie"
 
-#: loessc.c:369
+#: loessc.c:381
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr "potrzeba 'setLf=.true.' w 'lowesl()'."
 
-#: loessc.c:370
+#: loessc.c:382
 #, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "'nv>nvmax' w funkcji 'cpvert()'."
 
-#: loessc.c:371
+#: loessc.c:383
 #, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "nt>20 w funkcji 'eval()'"
 
-#: loessc.c:372
+#: loessc.c:384
 #, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "'svddc()' niepowiodło się w funkcji 'l2fit()'."
 
-#: loessc.c:373
+#: loessc.c:385
 #, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "nie znaleziono krawędzi w funkcji 'vleaf()'"
 
-#: loessc.c:374
+#: loessc.c:386
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr "komórka o zerowej szerokości w funkcji 'vleaf()'"
 
-#: loessc.c:375
+#: loessc.c:387
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr "problem z zejściem do liścia w funkcji 'vleaf()'"
 
-#: loessc.c:376
+#: loessc.c:388
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr "niewystarczający obszar roboczy dla funkcji 'lowesf()'"
 
-#: loessc.c:377
+#: loessc.c:389
 #, c-format
 msgid "insufficient stack space"
 msgstr "niewystarczająca przestrzeń stosu"
 
-#: loessc.c:378
+#: loessc.c:390
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr "'lv' jest zbyt małe aby obliczyć jawne 'L'"
 
-#: loessc.c:379
+#: loessc.c:391
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr "obliczony ślad 'L' jest ujemny; coś jest nie tak!"
 
-#: loessc.c:380
+#: loessc.c:392
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr "obliczona delta jest ujemna; coś jest nie tak!"
 
-#: loessc.c:381
+#: loessc.c:393
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr "przestrzeń robocza w 'loread' wydaje się być uszkodzona"
 
-#: loessc.c:382
+#: loessc.c:394
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr "problemy w 'l2fit()/l2tr()'"
 
-#: loessc.c:383
+#: loessc.c:395
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr "dozwolony jest tylko stały , liniowy lub kwadratowy lokalny model"
 
-#: loessc.c:384
+#: loessc.c:396
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr "stopień musi wynosić co najmniej 1 dla macierzy wierzchołka wpływu"
 
-#: loessc.c:385
+#: loessc.c:397
 #, c-format
 msgid "not yet implemented"
 msgstr "jeszcze niezaimplementowane"
 
-#: loessc.c:387
+#: loessc.c:399
 #, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "Przydział nie powiódł się: kod błędu %d\n"
@@ -776,37 +788,49 @@ msgstr "niepoprawna formuła w 'update'"
 msgid "formula expected"
 msgstr "oczekiwano formuły"
 
-#: model.c:1052
+#: model.c:1081
 msgid "invalid term in model formula"
 msgstr "niepoprawny człon w formule modelu"
 
-#: model.c:1120 model.c:1185 model.c:1604
+#: model.c:1172 model.c:1253
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
-#: model.c:1147 model.c:1435
+#: model.c:1204 model.c:1510
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1549
+#: model.c:1621
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1680
+#: model.c:1688
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "niepoprawna formuła modelu w 'ExtractVars'"
+
+#: model.c:1765
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1690
+#: model.c:1775
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1701
+#: model.c:1786
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:2020
+#: model.c:1858
+#, c-format
+msgid ""
+"'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
+"no longer happen!"
+msgstr ""
+
+#: model.c:2142
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 
@@ -828,7 +852,7 @@ msgstr "'length(m)' musi wynosić co najmniej dwa"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.c:96 nls.c:98 port.c:559
+#: nls.c:96 nls.c:98 port.c:561
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
@@ -862,7 +886,7 @@ msgstr "zbiegł się"
 msgid "'%s' argument should be of type character"
 msgstr "argument '%s' powinien być typu tekstowego"
 
-#: nls.c:288 port.c:381
+#: nls.c:288 port.c:383
 msgid "use of NULL environment is defunct"
 msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
 
@@ -1126,76 +1150,76 @@ msgstr "Rf_divset: 'alg = %d' musi wynosić 1, 2, 3, lub 4"
 msgid "port algorithms 3 or higher are not supported"
 msgstr "algorytmy portu 3 lub wyższe nie są wspierane"
 
-#: port.c:316
+#: port.c:318
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "funkcja gradientu musi zwrócić wektor liczbowy o długości %d"
 
-#: port.c:319
+#: port.c:321
 msgid "NA/NaN gradient evaluation"
 msgstr "wyliczenie wartości NA/NaN gradientu"
 
-#: port.c:328
+#: port.c:330
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 
-#: port.c:333
+#: port.c:335
 msgid "NA/NaN Hessian evaluation"
 msgstr "wyliczenie wartości NA/NaN hesjanu"
 
-#: port.c:385
+#: port.c:387
 #, c-format
 msgid "'%s' argument must be an environment"
 msgstr "argument '%s' musi być środowiskiem"
 
-#: port.c:389
+#: port.c:391
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
-#: port.c:392
+#: port.c:394
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 
-#: port.c:406
+#: port.c:408
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.c:421
+#: port.c:423
 msgid "NA/NaN function evaluation"
 msgstr "wynik NA/NaN funkcji"
 
-#: port.c:465
+#: port.c:467
 msgid "'getElement()' function applies only to named lists"
 msgstr "funkcja 'getElement()' ma zastosowanie jedynie dla nazwanych list"
 
-#: port.c:491
+#: port.c:493
 #, c-format
 msgid "'%s' was not found"
 msgstr "'%s' nie zostało znalezione"
 
-#: port.c:505
+#: port.c:507
 #, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "argument 'gradient' musi być macierzą liczbową o wymiarze (%d,%d)"
 
-#: port.c:525
+#: port.c:527
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długość %d"
 
-#: port.c:538
+#: port.c:540
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.c:579
+#: port.c:581
 #, c-format
 msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "argumenty '%s' oraz '%s' muszą być wektorami liczbowymi"
 
-#: port.c:602
+#: port.c:604
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr "funkcja 'nlsb_iterate()' zwróciła %d"
@@ -1348,12 +1372,6 @@ msgstr "ifault=%d. To nie powinno się wydarzyć"
 
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "niepoprawna formuła modelu w funkcji '%s'"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "niepoprawna formuła modelu w 'ExtractVars'"
-
-#~ msgid "span is too small"
-#~ msgstr "rozpiętość jest za mała"
 
 #~ msgid "n must be at least two"
 #~ msgstr "'n' musi wynosić co najmniej 2"

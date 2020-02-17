@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -214,7 +214,6 @@ msgstr "argument '%s' nie jest funkcją"
 msgid "'%s' argument is not a namespace"
 msgstr "argument '%s' nie jest przestrzenią nazw"
 
-#. R/table.R: gettextf("'%s' argument is not an array", "x")
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 msgid "'%s' argument is not an array"
@@ -1588,10 +1587,10 @@ msgstr "Liczba czynników:"
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "Liczba: długości (%d, %d) różnią się"
 
-#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or unnamed expressions, not more")
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 #: R/stop.R:0
 #, fuzzy
-msgid "Only one of 'exprs', 'exprObject' or unnamed expressions, not more"
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
 msgstr ""
 "Konieczne jest użycie 'exprs' lub nienazwanych wyrażeń, ale nie oba naraz"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.0.0\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -538,9 +538,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script.\n", domain = "R-tools")
 
-msgid "A complete check needs the 'checkbashisms' script"
+msgid "A complete check needs the 'checkbashisms' script."
 msgstr ""
 
 
@@ -4314,6 +4314,13 @@ msgstr ""
 #. R/check.R: gettextf("See section %s in '%s'.", sQuote("Good practice"), "?data", domain = "R-tools")
 
 msgid "See section %s in '%s'."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("See section 'Configure and cleanup' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+
+msgid "See section 'Configure and cleanup' in the 'Writing R Extensions' manual."
 msgstr ""
 
 
@@ -9082,15 +9089,6 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
-#: R/QC.R: 0
-#. R/QC.R: ngettext(sum(obsolete), "Obsolete package %s in Rd xrefs", "Obsolete packages %s in Rd xrefs",     domain = "R-tools")
-
-msgid        "Obsolete package %s in Rd xrefs"
-msgid_plural "Obsolete packages %s in Rd xrefs"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
 #: R/Rd2HTML.R: 0
 #: R/RdConv2.R: 0
 #. R/Rd2HTML.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
@@ -9305,6 +9303,15 @@ msgstr[1]    ""
 
 msgid        "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:",     domain = "R-tools")
+
+msgid        "The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural "The Description field contains the following (possibly) invalid arXiv ids:"
 msgstr[0]    ""
 msgstr[1]    ""
 

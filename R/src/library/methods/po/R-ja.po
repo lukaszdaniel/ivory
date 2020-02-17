@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -813,13 +813,12 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
 #: R/RClassUtils.R:0
 #, fuzzy
 msgid ""
-"From .checkSubclasses(): subclass %s of class %s is not local and is not "
-"updated for new inheritance information currently;\n"
-"[where=%s, where2=%s]"
+"From .checkSubclasses(): subclass %s is not local to superclass %s, which is "
+"not a class union, so inheritance information will be lost."
 msgstr " 未定義のサブクラス %s (クラスは %s)です； 定義は更新されません "
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
@@ -1783,12 +1782,12 @@ msgstr ""
 " クラス %s はクラスのユニオンです：クラスユニオンに対する 'coerce' 関係は無意"
 "味です "
 
-#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not exported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
+#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
 #: R/is.R:0
 #, fuzzy
 msgid ""
 "class %s is defined (with package slot %s) but no metadata object found to "
-"revise %s information---not exported?  Making a copy in package %s"
+"revise %s information---not imported?  Making a copy in package %s"
 msgstr ""
 " クラス \"%s\" がパッケージスロット %s とともに)定義されていますが、%s 情報改"
 "訂するためのメタデータオブジェクトがありません。エクスポートされていないので"

@@ -495,16 +495,16 @@ R_newunz(const char *description, const char *const mode)
     Rconnection newconn;
     newconn = (Rconnection) malloc(sizeof(struct Rconn));
     if(!newconn) error(_("allocation of 'unz' connection failed"));
-    newconn->conclass = (char *) malloc(strlen("unz") + 1);
-    if(!newconn->conclass) {
+    newconn->connclass = (char *) malloc(strlen("unz") + 1);
+    if(!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ newconn = NULL;
     }
-    strcpy(newconn->conclass, "unz");
+    strcpy(newconn->connclass, "unz");
     newconn->description = (char *) malloc(strlen(description) + 1);
     if(!newconn->description) {
-	free(newconn->conclass); free(newconn);
+	free(newconn->connclass); free(newconn);
 	error(_("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ newconn = NULL;
     }
@@ -522,7 +522,7 @@ R_newunz(const char *description, const char *const mode)
     newconn->write = &null_write;
     newconn->private = (void *) malloc(sizeof(struct unzconn));
     if(!newconn->private) {
-	free(newconn->description); free(newconn->conclass); free(newconn);
+	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ newconn = NULL;
     }

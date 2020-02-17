@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -447,9 +447,9 @@ msgid ""
 "indexed nor checked"
 msgstr ""
 
-#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script.\n", domain = "R-tools")
 #: R/check.R:0
-msgid "A complete check needs the 'checkbashisms' script"
+msgid "A complete check needs the 'checkbashisms' script."
 msgstr ""
 
 #. R/check.R: gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n",     domain = "R-tools")
@@ -3599,6 +3599,15 @@ msgstr "Siehe Abschnitt %s in ?.onAttach."
 #, fuzzy
 msgid "See section %s in '%s'."
 msgstr "Siehe Abschnitt %s in ?.onAttach."
+
+#. R/check.R: gettext("See section 'Configure and cleanup' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Configure and cleanup' in the 'Writing R Extensions' manual."
+msgstr ""
+"Bitte im 'Writing R Extensions' Handbuch im Abschnitt über Kreuzreferenzen "
+"nachsehen!"
 
 #. R/QC.R: gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")
 #: R/QC.R:0
@@ -7617,14 +7626,6 @@ msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Hinweis: als \"bytes\" markierte %d Zeichenkette gefunden<"
 msgstr[1] "Hinweis: als \"bytes\" markierte %d Zeichenketten gefunden<"
 
-#. R/QC.R: ngettext(sum(obsolete), "Obsolete package %s in Rd xrefs", "Obsolete packages %s in Rd xrefs",     domain = "R-tools")
-#: R/QC.R:0
-#, fuzzy
-msgid "Obsolete package %s in Rd xrefs"
-msgid_plural "Obsolete packages %s in Rd xrefs"
-msgstr[0] "Veraltete(s) Paket(e) %s in Rd Kreusreferenzen"
-msgstr[1] "Veraltete(s) Paket(e) %s in Rd Kreusreferenzen"
-
 #. R/Rd2HTML.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #. R/RdConv2.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #: R/Rd2HTML.R:0 R/RdConv2.R:0
@@ -7837,6 +7838,16 @@ msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural ""
+"The Description field contains the following (possibly) invalid arXiv ids:"
+msgstr[0] "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
+msgstr[1] "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 
 #. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -8105,6 +8116,12 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
+
+#, fuzzy
+#~ msgid "Obsolete package %s in Rd xrefs"
+#~ msgid_plural "Obsolete packages %s in Rd xrefs"
+#~ msgstr[0] "Veraltete(s) Paket(e) %s in Rd Kreusreferenzen"
+#~ msgstr[1] "Veraltete(s) Paket(e) %s in Rd Kreusreferenzen"
 
 #, fuzzy
 #~ msgid "cannot coerce %s to logical"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats4 4.0.0\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,13 +9,6 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-
-
-#: R/mle.R: 0
-#. R/mle.R: stop("'start' must be a named list")
-
-msgid "'start' must be a named list"
-msgstr ""
 
 
 #: R/mle.R: 0
@@ -38,6 +31,13 @@ msgstr ""
 #. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
 
 msgid "Maximum likelihood estimation"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: stop("Mismatch in length of start values")
+
+msgid "Mismatch in length of start values"
 msgstr ""
 
 
@@ -84,6 +84,13 @@ msgstr ""
 
 
 #: R/mle.R: 0
+#. R/mle.R: stop("named list expected")
+
+msgid "named list expected"
+msgstr ""
+
+
+#: R/mle.R: 0
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 
 msgid "profiling has found a better solution, so original fit had not converged"
@@ -91,16 +98,9 @@ msgstr ""
 
 
 #: R/mle.R: 0
-#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 
-msgid "some named arguments in 'fixed' are not arguments to the supplied log-likelihood"
-msgstr ""
-
-
-#: R/mle.R: 0
-#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
-
-msgid "some named arguments in 'start' are not arguments to the supplied log-likelihood"
+msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr ""
 
 

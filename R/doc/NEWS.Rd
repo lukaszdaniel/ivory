@@ -45,7 +45,14 @@
        help make the internal code easier to maintain. This change is
        expected to have minimal impact on packages not using unsupported
        coding practices in their C/C++ code.
-    }
+
+       \item \R now provides a syntax for specifying raw character
+       constants similar to the one used in C++: \code{r"(...)"} with
+       \code{...} any character sequence, except that it must not
+       contain the closing sequence \samp{)"}. %}) \samp{*}: Rd-parser bug for \code{*}"
+       This makes it easier to write strings that contain backslashes or
+       both single and double quotes.  For more details see \code{?Quotes}.
+     }
   }
 
   \subsection{NEW FEATURES}{
@@ -201,7 +208,7 @@
       \code{marginSums()}. These should
       replace the unfortunately named \code{prop.table()}
       and \code{margin.table()}. They are drop-in replacements, but
-      also add named-margin functionality. The old names are retained 
+      also add named-margin functionality. The old names are retained
       as aliases for back-compatibility.
 
       \item Functions \code{rbinom()}, \code{rgeom()}, \code{rhyper()},
@@ -221,6 +228,14 @@
 
       \item  \code{unlink()} gains a new argument \code{expand} to
       disable wildcard and tilde expansion.
+
+      \item \code{mle()} in the \code{stats4} package has had its
+      interface extended so that arguments to the negative
+      log-likelihood function can be one or more vectors, with similar
+      conventions applying to bounds, start values, and parameter values
+      to be kept fixed. NB: This has required a minor extension to class
+      \code{"mle"}, so saved objects from earlier versions may need to
+      be recomputed.
     }
   }% end{ NEW FEATURES }
 
@@ -461,6 +476,11 @@
       \item \code{smoothEnds(x)} now returns \code{integer} type in
       \emph{both} cases when \code{x} is \code{integer}, thanks to report
       and proposal by Bill Dunlap \PR{17693}.
+
+      \item The \pkg{methods} package does a better job of tracking
+      inheritance relationships across packages.
+
+      \item \code{norm(diag(c(1, NA)), "2")} now works.
     }
   }
 }

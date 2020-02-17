@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -781,13 +781,12 @@ msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
-#. R/RClassUtils.R: gettextf("From .checkSubclasses(): subclass %s of class %s is not local and is not updated for new inheritance information currently;\n[where=%s, where2=%s]",     .dQ(what), .dQ(class), format(where), format(where2))
+#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
 #: R/RClassUtils.R:0
 #, fuzzy
 msgid ""
-"From .checkSubclasses(): subclass %s of class %s is not local and is not "
-"updated for new inheritance information currently;\n"
-"[where=%s, where2=%s]"
+"From .checkSubclasses(): subclass %s is not local to superclass %s, which is "
+"not a class union, so inheritance information will be lost."
 msgstr ""
 "클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙"
 "니다"
@@ -1703,11 +1702,12 @@ msgstr ""
 "클래스 %s는 클래스 유니온이 아닙니다: 클래스 유니온에 관계된 'coerce'는 아무"
 "런 의미가 없습니다"
 
-#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not exported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
+#. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
 #: R/is.R:0
+#, fuzzy
 msgid ""
 "class %s is defined (with package slot %s) but no metadata object found to "
-"revise %s information---not exported?  Making a copy in package %s"
+"revise %s information---not imported?  Making a copy in package %s"
 msgstr ""
 "클래스 %1$s는 (패키지 슬롯 %2$s와 함께) 정의되어 있으나 %3$s 정보를 변경할 "
 "수 있는 메타 데이터 객체를 찾을 수 없습니다 --- 내보내어지지 않았나요?  패키"

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2019   The R Core Team.
+ *  Copyright (C) 2000-2020   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -352,16 +352,16 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
     Rconnection newcon;
     newcon = (Rconnection) malloc(sizeof(struct Rconn));
     if(!newcon) error(_("allocation of url connection failed"));
-    newcon->conclass = (char *) malloc(strlen("url") + 1);
-    if(!newcon->conclass) {
+    newcon->connclass = (char *) malloc(strlen("url") + 1);
+    if(!newcon->connclass) {
 	free(newcon);
 	error(_("allocation of url connection failed"));
         /* for Solaris 12.5 */ newcon = NULL;
     }
-    strcpy(newcon->conclass, "url");
+    strcpy(newcon->connclass, "url");
     newcon->description = (char *) malloc(strlen(description) + 1);
     if(!newcon->description) {
-	free(newcon->conclass); free(newcon);
+	free(newcon->connclass); free(newcon);
 	error(_("allocation of url connection failed"));
         /* for Solaris 12.5 */ newcon = NULL;
     }
@@ -384,7 +384,7 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
     newcon->fgetc = &dummy_fgetc;
     struct urlconn *uc = newcon->private = (void *) malloc(sizeof(struct urlconn));
     if(!newcon->private) {
-	free(newcon->description); free(newcon->conclass); free(newcon);
+	free(newcon->description); free(newcon->connclass); free(newcon);
 	error(_("allocation of url connection failed"));
 	/* for Solaris 12.5 */ newcon = NULL;
     }
@@ -392,7 +392,7 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
     if(!isNull(headers)) {
 	uc->headers = strdup(CHAR(STRING_ELT(headers, 0)));
 	if(!uc->headers) {
-	    free(newcon->description); free(newcon->conclass); free(newcon->private); free(newcon);
+	    free(newcon->description); free(newcon->connclass); free(newcon->private); free(newcon);
 	    error(_("allocation of url connection failed"));
 	    /* for Solaris 12.5 */ newcon = NULL;
 	}
@@ -1114,6 +1114,7 @@ R_init_internet(DllInfo *info)
     tmp->download = in_do_download;
     tmp->newurl =  in_R_newurl;
     tmp->newsock = in_R_newsock;
+    tmp->newservsock = in_R_newservsock;
 
     tmp->HTTPOpen = in_R_HTTPOpen;
     tmp->HTTPRead = in_R_HTTPRead;

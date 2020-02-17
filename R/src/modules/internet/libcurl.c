@@ -918,16 +918,16 @@ in_newCurlUrl(const char *description, const char * const mode,
 #ifdef HAVE_LIBCURL
     Rconnection newcon = (Rconnection) malloc(sizeof(struct Rconn));
     if (!newcon) error(_("allocation of url connection failed"));
-    newcon->conclass = (char *) malloc(strlen("url-libcurl") + 1);
-    if (!newcon->conclass) {
+    newcon->connclass = (char *) malloc(strlen("url-libcurl") + 1);
+    if (!newcon->connclass) {
 	free(newcon);
 	error(_("allocation of url connection failed"));
 	/* for Solaris 12.5 */ newcon = NULL;
     }
-    strcpy(newcon->conclass, "url-libcurl");
+    strcpy(newcon->connclass, "url-libcurl");
     newcon->description = (char *) malloc(strlen(description) + 1);
     if (!newcon->description) {
-	free(newcon->conclass); free(newcon);
+	free(newcon->connclass); free(newcon);
 	error(_("allocation of url connection failed"));
 	/* for Solaris 12.5 */ newcon = NULL;
     }
@@ -941,7 +941,7 @@ in_newCurlUrl(const char *description, const char * const mode,
     newcon->read = &Curl_read;
     newcon->private = (void *) malloc(sizeof(struct Curlconn));
     if (!newcon->private) {
-	free(newcon->description); free(newcon->conclass); free(newcon);
+	free(newcon->description); free(newcon->connclass); free(newcon);
 	error(_("allocation of url connection failed"));
 	/* for Solaris 12.5 */ newcon = NULL;
     }
@@ -949,7 +949,7 @@ in_newCurlUrl(const char *description, const char * const mode,
     ctxt->bufsize = 16 * CURL_MAX_WRITE_SIZE;
     ctxt->buf = malloc(ctxt->bufsize);
     if (!ctxt->buf) {
-	free(newcon->description); free(newcon->conclass); free(newcon->private);
+	free(newcon->description); free(newcon->connclass); free(newcon->private);
 	free(newcon);
 	error(_("allocation of url connection failed"));
 	/* for Solaris 12.5 */ newcon = NULL;
@@ -959,7 +959,7 @@ in_newCurlUrl(const char *description, const char * const mode,
 	struct curl_slist *tmp =
 	    curl_slist_append(ctxt->headers, CHAR(STRING_ELT(headers, i)));
 	if (!tmp) {
-	    free(newcon->description); free(newcon->conclass); free(newcon->private);
+	    free(newcon->description); free(newcon->connclass); free(newcon->private);
 	    free(newcon); curl_slist_free_all(ctxt->headers);
 	    error(_("allocation of url connection failed"));
 	    /* for Solaris 12.5 */ newcon = NULL;

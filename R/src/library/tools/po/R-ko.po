@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -444,9 +444,9 @@ msgid ""
 "indexed nor checked"
 msgstr ""
 
-#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script.\n", domain = "R-tools")
 #: R/check.R:0
-msgid "A complete check needs the 'checkbashisms' script"
+msgid "A complete check needs the 'checkbashisms' script."
 msgstr ""
 
 #. R/check.R: gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n",     domain = "R-tools")
@@ -3557,6 +3557,15 @@ msgstr "'%2$s'에서 섹션 %1$s를 살펴보세요."
 #: R/check.R:0
 msgid "See section %s in '%s'."
 msgstr "'%2$s'에서 섹션 %1$s를 살펴보세요."
+
+#. R/check.R: gettext("See section 'Configure and cleanup' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Configure and cleanup' in the 'Writing R Extensions' manual."
+msgstr ""
+"'Writing R Extensions' 매뉴얼에서 'Cross-references' 섹션의 내용을 살펴보세"
+"요."
 
 #. R/QC.R: gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")
 #: R/QC.R:0
@@ -7428,12 +7437,6 @@ msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "노트: \"bytes\"로서 표시된 %d 문자열을 찾았습니다"
 
-#. R/QC.R: ngettext(sum(obsolete), "Obsolete package %s in Rd xrefs", "Obsolete packages %s in Rd xrefs",     domain = "R-tools")
-#: R/QC.R:0
-msgid "Obsolete package %s in Rd xrefs"
-msgid_plural "Obsolete packages %s in Rd xrefs"
-msgstr[0] ""
-
 #. R/Rd2HTML.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #. R/RdConv2.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #: R/Rd2HTML.R:0 R/RdConv2.R:0
@@ -7612,6 +7615,15 @@ msgstr[0] "패키지 %s에 대한 비니에트를 실행중입니다"
 msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural ""
+"The Description field contains the following (possibly) invalid arXiv ids:"
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
 #: R/check.R:0

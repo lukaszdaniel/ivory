@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 21:41\n"
+"POT-Creation-Date: 2020-02-16 12:17\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -432,9 +432,9 @@ msgstr ""
 "Katalog 'vignettes' jest wymagany od wersji R 3.1.0 i nie będą indeksowane "
 "ani sprawdzane"
 
-#. R/check.R: gettext("A complete check needs the 'checkbashisms' script\n", domain = "R-tools")
+#. R/check.R: gettext("A complete check needs the 'checkbashisms' script.\n", domain = "R-tools")
 #: R/check.R:0
-msgid "A complete check needs the 'checkbashisms' script"
+msgid "A complete check needs the 'checkbashisms' script."
 msgstr ""
 
 #. R/check.R: gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n",     domain = "R-tools")
@@ -3571,6 +3571,13 @@ msgstr "Zobacz sekcję %s w %s."
 #: R/check.R:0
 msgid "See section %s in '%s'."
 msgstr "Zobacz sekcję %s w '%s'."
+
+#. R/check.R: gettext("See section 'Configure and cleanup' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Configure and cleanup' in the 'Writing R Extensions' manual."
+msgstr "Zobacz sekcję 'Cross-references' podręcznika 'Writing R Extensions'."
 
 #. R/QC.R: gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")
 #: R/QC.R:0
@@ -7596,14 +7603,6 @@ msgstr[0] "Uwaga: znaleziono %d ciąg oznaczony jako \"bytes\""
 msgstr[1] "Uwaga: znaleziono %d ciągi oznaczone jako \"bytes\""
 msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako \"bytes\""
 
-#. R/QC.R: ngettext(sum(obsolete), "Obsolete package %s in Rd xrefs", "Obsolete packages %s in Rd xrefs",     domain = "R-tools")
-#: R/QC.R:0
-msgid "Obsolete package %s in Rd xrefs"
-msgid_plural "Obsolete packages %s in Rd xrefs"
-msgstr[0] "Przestarzały pakiet %s w krzyżowych referencjach Rd"
-msgstr[1] "Przestarzałe pakiety %s w krzyżowych referencjach Rd"
-msgstr[2] "Przestarzałe pakiety %s w krzyżowych referencjach Rd"
-
 #. R/Rd2HTML.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #. R/RdConv2.R: ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table",     domain = "R-tools")
 #: R/Rd2HTML.R:0 R/RdConv2.R:0
@@ -7865,6 +7864,17 @@ msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural ""
+"The Description field contains the following (possibly) invalid arXiv ids:"
+msgstr[0] "Znaleziono następujący (prawdopodobnie) niepoprawny adres URL:"
+msgstr[1] "Znaleziono następujące (prawdopodobnie) niepoprawne adresy URL:"
+msgstr[2] "Znaleziono następujące (prawdopodobnie) niepoprawne adresy URL:"
 
 #. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -8190,6 +8200,12 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "Obsolete package %s in Rd xrefs"
+#~ msgid_plural "Obsolete packages %s in Rd xrefs"
+#~ msgstr[0] "Przestarzały pakiet %s w krzyżowych referencjach Rd"
+#~ msgstr[1] "Przestarzałe pakiety %s w krzyżowych referencjach Rd"
+#~ msgstr[2] "Przestarzałe pakiety %s w krzyżowych referencjach Rd"
 
 #~ msgid "cannot coerce %s to logical"
 #~ msgstr "nie można przekształcić %s na typ logiczny"

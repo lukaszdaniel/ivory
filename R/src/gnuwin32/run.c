@@ -952,12 +952,12 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 
     newconn = (Rconnection) malloc(sizeof(struct Rconn));
     if(!newconn) error(_("allocation of pipe connection failed"));
-    newconn->conclass = (char *) malloc(strlen("pipe") + 1);
-    if(!newconn->conclass) {
+    newconn->connclass = (char *) malloc(strlen("pipe") + 1);
+    if(!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
-    strcpy(newconn->conclass, "pipe");
+    strcpy(newconn->connclass, "pipe");
 
     len = strlen(getenv("COMSPEC")) + strlen(description) + 5;
     command = (char *) malloc(len);
@@ -967,7 +967,7 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 	newconn->description = NULL;
 
     if(!newconn->description) {
-	free(command); free(newconn->conclass); free(newconn);
+	free(command); free(newconn->connclass); free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
 
@@ -995,7 +995,7 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     newconn->write = &Wpipe_write;
     newconn->private = (void *) malloc(sizeof(struct Wpipeconn));
     if(!newconn->private) {
-	free(newconn->description); free(newconn->conclass); free(newconn);
+	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
     return newconn;
