@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -786,14 +786,6 @@ msgstr ""
 msgid ""
 "Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"From .checkSubclasses(): subclass %s is not local to superclass %s, which is "
-"not a class union, so inheritance information will be lost."
-msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
@@ -3763,6 +3755,12 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid ""
+#~ "From .checkSubclasses(): subclass %s is not local to superclass %s, which "
+#~ "is not a class union, so inheritance information will be lost."
+#~ msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #~ msgid "** should no longer happen!"
 #~ msgstr "** não deveria mais acontecer!"

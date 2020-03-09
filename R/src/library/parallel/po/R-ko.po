@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2015-01-17 15:44+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -102,6 +102,16 @@ msgstr "'v'는 반드시 벡터이어야 합니다"
 #, fuzzy
 msgid "'what' argument must be a character or raw vector"
 msgstr "'what'은 반드시 문자 혹은 raw 벡터이어야 합니다"
+
+#. R/unix/forkCluster.R: stop("Cluster setup failed.")
+#: R/unix/forkCluster.R:0
+msgid "Cluster setup failed."
+msgstr ""
+
+#. R/snowSOCK.R: stop("Connection setup failed or timed out.")
+#: R/snowSOCK.R:0
+msgid "Connection setup failed or timed out."
+msgstr ""
 
 #. R/snowSOCK.R: gettextf("Manually start 'worker' on %s with\n    %s\n", machine, cmd, domain = "R-parallel")
 #: R/snowSOCK.R:0
@@ -228,6 +238,12 @@ msgstr[0] ""
 #: R/detectCores.R:0
 msgid "%d simultaneous process spawned"
 msgid_plural "%d simultaneous processes spawned"
+msgstr[0] ""
+
+#. R/snowSOCK.R: ngettext(failed, "Cluster setup failed. %d worker of %d failed to connect.", "Cluster setup failed. %d of %d workers failed to connect.",     domain = "R-parallel")
+#: R/snowSOCK.R:0
+msgid "Cluster setup failed. %d worker of %d failed to connect."
+msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
 msgstr[0] ""
 
 #. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected",     domain = "R-parallel")

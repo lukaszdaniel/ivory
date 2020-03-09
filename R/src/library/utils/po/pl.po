@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14+0200\n"
+"POT-Creation-Date: 2020-03-09 21:45+0100\n"
 "PO-Revision-Date: 2019-11-13 21:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -21,8 +21,8 @@ msgstr ""
 #: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
-#: windows/widgets.c:81 windows/widgets.c:86
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
+#: windows/widgets.c:82 windows/widgets.c:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -148,8 +148,8 @@ msgstr "niepoprawne określenie '%s'"
 msgid "'%s' contains missing values"
 msgstr "'%s' zawiera brakujące wartości"
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
+#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
@@ -256,22 +256,22 @@ msgstr "argument '%s' musi być listą"
 msgid "'%s' element %d is not a window handle"
 msgstr "element %2$d '%1$s' nie jest uchwytem okna"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one or more"
 msgstr "Wybierz jeden lub więcej"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one"
 msgstr "Wybierz jeden"
 
-#: windows/widgets.c:184 windows/widgets.c:252
+#: windows/widgets.c:185 windows/widgets.c:253
 msgid "'default' argument is overlong"
 msgstr "argument 'default' jest wydłużone"
 
-#: windows/widgets.c:190
+#: windows/widgets.c:191
 msgid "'multi' argument must be a logical value"
 msgstr "argument 'multi' musi być wartością logiczną"
 
-#: windows/widgets.c:192
+#: windows/widgets.c:193
 msgid "'filterindex' argument must be an integer value"
 msgstr "argument 'filterindex' musi być wartością całkowitą"

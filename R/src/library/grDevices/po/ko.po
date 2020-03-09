@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -597,7 +597,7 @@ msgstr "%s에서 무효의 'fonts' 파라미터 입니다"
 msgid "unable to start '%s' device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devPicTeX.c:737 devWindows.c:3733
+#: devPicTeX.c:737 devWindows.c:3735
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
@@ -733,7 +733,7 @@ msgstr "clipboard metafile은 단지 하나의 figure만을 저장할수가 있�
 msgid "metafile '%s' could not be created"
 msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
-#: devWindows.c:3110 devWindows.c:3757
+#: devWindows.c:3110 devWindows.c:3759
 msgid "R Graphics"
 msgstr "R Graphics"
 

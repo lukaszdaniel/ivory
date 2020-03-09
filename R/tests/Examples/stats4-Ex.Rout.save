@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-03 r1214) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-03 r77764) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -211,7 +211,7 @@ x             0.9461     0.0866   10.92  4.4e-06 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.787 on 8 degrees of freedom
-Multiple R-squared:  0.937,	Adjusted R-squared:  0.929 
+Multiple R-squared: 0.937,	Adjusted R-squared: 0.929
 F-statistic:  119 on 1 and 8 DF,  p-value: 4.39e-06
 
 > summary(mle(mll, lower=c(-Inf,-Inf, 0.01)))
@@ -291,7 +291,7 @@ Coefficients:
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.471 0 0.475 0 0 
+Time elapsed:  0.653 0.016 0.669 0 0 
 > grDevices::dev.off()
 null device 
           1 

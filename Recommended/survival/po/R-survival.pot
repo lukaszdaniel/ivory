@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 3.1-7\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"Project-Id-Version: survival 3.1-11\n"
+"POT-Creation-Date: 2020-03-09 21:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,6 @@ msgstr ""
 #: R/anova.coxph.penal.R: 0
 #: R/attrassign.R: 0
 #: R/basehaz.R: 0
-#: R/coxph.rvar.R: 0
 #: R/finegray.R: 0
 #: R/is.ratetable.R: 0
 #: R/lines.aareg.R: 0
@@ -167,7 +166,6 @@ msgstr ""
 #. R/anova.coxph.penal.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
 #. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
-#. R/coxph.rvar.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/finegray.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/is.ratetable.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
 #. R/lines.aareg.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
@@ -1547,15 +1545,10 @@ msgid "Score (logrank) test = %s on %s df, p=%s"
 msgstr ""
 
 
-#: R/plot.cox.zph.R: 0
-#. R/plot.cox.zph.R: stop("Spline fit is singular, try a smaller degrees of freedom")
-
-msgid "Spline fit is singular, try a smaller degrees of freedom"
-msgstr ""
-
-
 #: R/print.coxph.R: 0
+#: R/print.summary.coxph.R: 0
 #. R/print.coxph.R: gettext(" States: ", domain = "R-survival")
+#. R/print.summary.coxph.R: gettext("States:", domain = "R-survival")
 
 msgid "States:"
 msgstr ""
@@ -3367,6 +3360,13 @@ msgid "multi-state computation doesn't support \"%s\" survival data"
 msgstr ""
 
 
+#: R/coxph.R: 0
+#. R/coxph.R: stop("multi-state coxph does not support strata*covariate interactions")
+
+msgid "multi-state coxph does not support strata*covariate interactions"
+msgstr ""
+
+
 #: R/survfit.matrix.R: 0
 #. R/survfit.matrix.R: stop("multi-state curves are not a valid input")
 
@@ -3869,6 +3869,13 @@ msgid "reference distribution was not found"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("replacement of variable '%s'", argname[ii])
+
+msgid "replacement of variable '%s'"
+msgstr ""
+
+
 #: R/aareg.R: 0
 #: R/anova.survreg.R: 0
 #: R/cch.R: 0
@@ -3957,6 +3964,13 @@ msgstr ""
 #. R/survpenal.fit.R: stop("sparse term must be single column")
 
 msgid "sparse term must be single column"
+msgstr ""
+
+
+#: R/plot.cox.zph.R: 0
+#. R/plot.cox.zph.R: gettextf("spline fit is singular, variable %d skipped", i)
+
+msgid "spline fit is singular, variable %d skipped"
 msgstr ""
 
 

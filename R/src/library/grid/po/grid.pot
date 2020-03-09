@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 21:30+0200\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,43 +38,43 @@ msgstr ""
 msgid "attempt to plot on null device"
 msgstr ""
 
-#: grid.c:1402
+#: grid.c:1401
 msgid "there is no layout defined"
 msgstr ""
 
-#: grid.c:1622
+#: grid.c:1621
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 
-#: grid.c:1631
+#: grid.c:1630
 msgid "polygon edge not found"
 msgstr ""
 
-#: grid.c:1785
+#: grid.c:1784
 msgid "require at least two points to draw arrow"
 msgstr ""
 
-#: grid.c:2104
+#: grid.c:2103
 msgid "non-finite control point in Xspline"
 msgstr ""
 
-#: grid.c:2984
+#: grid.c:2983
 msgid "non-finite x or y in graphics path"
 msgstr ""
 
-#: grid.c:3028
+#: grid.c:3027
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3511
+#: grid.c:3510
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.c:3599
+#: grid.c:3598
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 
-#: layout.c:601 layout.c:605 unit.c:1903
+#: layout.c:601 layout.c:605 unit.c:1546
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -87,38 +87,68 @@ msgstr ""
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr ""
 
-#: unit.c:86
-msgid "unit attribute 'data' is of incorrect type"
+#: unit.c:66
+msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.c:166
-msgid "object is not a unit, unit.list, or unitArithmetic object"
-msgstr ""
-
-#: unit.c:265 unit.c:415 unit.c:1215 unit.c:1295 unit.c:1375 unit.c:1455
-msgid "unimplemented unit function"
-msgstr ""
-
-#: unit.c:898 unit.c:1650
+#: unit.c:790 unit.c:1289
 msgid "invalid unit or unit not yet implemented"
 msgstr ""
 
-#: unit.c:1707 unit.c:1738
+#: unit.c:1346 unit.c:1377
 msgid "Viewport has zero dimensions"
 msgstr ""
 
-#: unit.c:1770 unit.c:1785 unit.c:1800 unit.c:1815
+#: unit.c:1409 unit.c:1424 unit.c:1439 unit.c:1454
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1919
+#: unit.c:1561
 #, c-format
 msgid "'%s' argument must be character"
 msgstr ""
 
-#: unit.c:1922
+#: unit.c:1564
 #, c-format
 msgid "'%s' argument must be of length > 0"
+msgstr ""
+
+#: unit.c:1575
+msgid ""
+"data must be either NULL, have length 1, or match the length of the final "
+"unit vector"
+msgstr ""
+
+#: unit.c:1587
+msgid "no string supplied for 'strwidth/height' unit"
+msgstr ""
+
+#: unit.c:1591
+msgid "no 'grob' supplied for 'grobwidth/height' unit"
+msgstr ""
+
+#: unit.c:1609
+msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+msgstr ""
+
+#: unit.c:1614
+msgid "non-NULL value supplied for plain unit"
+msgstr ""
+
+#: unit.c:1667 unit.c:1701 unit.c:1750
+msgid "old version of unit class is no longer allowed"
+msgstr ""
+
+#: unit.c:1673
+msgid "object is not coercible to a unit"
+msgstr ""
+
+#: unit.c:1699
+msgid "object is not a unit"
+msgstr ""
+
+#: unit.c:1831
+msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
 #: util.c:274 util.c:286

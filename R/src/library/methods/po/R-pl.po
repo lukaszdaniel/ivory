@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -757,17 +757,6 @@ msgid ""
 msgstr ""
 "Znaleziono więcej niż jedną klasę %s w cache; używanie pierwszej z "
 "przestrzeni nazw '%s'"
-
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"From .checkSubclasses(): subclass %s is not local to superclass %s, which is "
-"not a class union, so inheritance information will be lost."
-msgstr ""
-"Z '.checkSubclasses()': podklaza %s klasy %s nie jest lokalna oraz aktualnie "
-"nie jest zaktualizowana dla nowej dziedziczonej informacji;\n"
-"[where=%s, where2=%s]"
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")
 #: R/trace.R:0
@@ -3694,6 +3683,15 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "From .checkSubclasses(): subclass %s is not local to superclass %s, which "
+#~ "is not a class union, so inheritance information will be lost."
+#~ msgstr ""
+#~ "Z '.checkSubclasses()': podklaza %s klasy %s nie jest lokalna oraz "
+#~ "aktualnie nie jest zaktualizowana dla nowej dziedziczonej informacji;\n"
+#~ "[where=%s, where2=%s]"
 
 #, fuzzy
 #~ msgid "is not updated for new inheritance information currently;"

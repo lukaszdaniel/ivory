@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -593,7 +593,7 @@ msgstr "неправильный параметр 'fonts' в %s"
 msgid "unable to start '%s' device"
 msgstr "не могу запустить устройство %s()"
 
-#: devPicTeX.c:737 devWindows.c:3733
+#: devPicTeX.c:737 devWindows.c:3735
 #, c-format
 msgid "unable to start %s() device"
 msgstr "не могу запустить устройство %s()"
@@ -728,7 +728,7 @@ msgstr "Метафайл в буфере обмена может хранить 
 msgid "metafile '%s' could not be created"
 msgstr "метафайл '%s' не получается создать"
 
-#: devWindows.c:3110 devWindows.c:3757
+#: devWindows.c:3110 devWindows.c:3759
 msgid "R Graphics"
 msgstr "R-графика"
 

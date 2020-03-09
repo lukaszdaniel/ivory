@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.0.0\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,6 +114,20 @@ msgstr ""
 #. R/unix/mcfork.R: stop("'what' argument must be a character or raw vector")
 
 msgid "'what' argument must be a character or raw vector"
+msgstr ""
+
+
+#: R/unix/forkCluster.R: 0
+#. R/unix/forkCluster.R: stop("Cluster setup failed.")
+
+msgid "Cluster setup failed."
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: stop("Connection setup failed or timed out.")
+
+msgid "Connection setup failed or timed out."
 msgstr ""
 
 
@@ -283,6 +297,15 @@ msgstr[1]    ""
 
 msgid        "%d simultaneous process spawned"
 msgid_plural "%d simultaneous processes spawned"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: ngettext(failed, "Cluster setup failed. %d worker of %d failed to connect.", "Cluster setup failed. %d of %d workers failed to connect.",     domain = "R-parallel")
+
+msgid        "Cluster setup failed. %d worker of %d failed to connect."
+msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
 msgstr[0]    ""
 msgstr[1]    ""
 

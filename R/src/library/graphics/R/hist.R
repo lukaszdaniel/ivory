@@ -22,7 +22,7 @@ hist.default <-
     function (x, breaks = "Sturges", freq = NULL,
 	      probability = !freq, include.lowest= TRUE,
 	      right = TRUE, density = NULL, angle = 45,
-	      col = NULL, border = NULL,
+	      col = "lightgray", border = NULL,
 	      main = gettextf("Histogram of %s", xname, domain = "R-graphics"),
 	      xlim = range(breaks), ylim = NULL,
 	      xlab = xname, ylab,

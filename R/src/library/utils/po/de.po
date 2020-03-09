@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14+0200\n"
+"POT-Creation-Date: 2020-03-09 21:45+0100\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 #: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
-#: windows/widgets.c:81 windows/widgets.c:86
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
+#: windows/widgets.c:82 windows/widgets.c:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
@@ -149,8 +149,8 @@ msgstr "ungültige '%s' Spezifikation"
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
+#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
@@ -260,25 +260,25 @@ msgstr "'%s' muss eine Liste sein"
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' Element %d ist keine Fensterhandle"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one or more"
 msgstr "Wähle ein oder mehrere"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one"
 msgstr "Wähle eins"
 
-#: windows/widgets.c:184 windows/widgets.c:252
+#: windows/widgets.c:185 windows/widgets.c:253
 #, fuzzy
 msgid "'default' argument is overlong"
 msgstr "'default' ist überlang"
 
-#: windows/widgets.c:190
+#: windows/widgets.c:191
 #, fuzzy
 msgid "'multi' argument must be a logical value"
 msgstr "'multi' muss ein boolescher Wert sein"
 
-#: windows/widgets.c:192
+#: windows/widgets.c:193
 #, fuzzy
 msgid "'filterindex' argument must be an integer value"
 msgstr "'filterindex' muss ganzzahlig sein"

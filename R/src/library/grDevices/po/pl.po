@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -564,7 +564,7 @@ msgstr "niepoprawny parametr '%s' w '%s'"
 msgid "unable to start '%s' device"
 msgstr "nie można uruchomić urządzenia '%s'"
 
-#: devPicTeX.c:737 devWindows.c:3733
+#: devPicTeX.c:737 devWindows.c:3735
 #, c-format
 msgid "unable to start %s() device"
 msgstr "nie można uruchomić urządzenia '%s()'"
@@ -692,7 +692,7 @@ msgstr "metaplik schowka może przechowywać tylko jeden obrazek."
 msgid "metafile '%s' could not be created"
 msgstr "metaplik '%s' nie mógł zostać utworzony"
 
-#: devWindows.c:3110 devWindows.c:3757
+#: devWindows.c:3110 devWindows.c:3759
 msgid "R Graphics"
 msgstr "R Grafika"
 

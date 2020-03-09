@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 21:30+0200\n"
+"POT-Creation-Date: 2020-03-09 21:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 #: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
-#: windows/widgets.c:81 windows/widgets.c:86
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
+#: windows/widgets.c:82 windows/widgets.c:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -146,8 +146,8 @@ msgstr ""
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
+#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr ""
@@ -254,22 +254,22 @@ msgstr ""
 msgid "'%s' element %d is not a window handle"
 msgstr ""
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one or more"
 msgstr ""
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one"
 msgstr ""
 
-#: windows/widgets.c:184 windows/widgets.c:252
+#: windows/widgets.c:185 windows/widgets.c:253
 msgid "'default' argument is overlong"
 msgstr ""
 
-#: windows/widgets.c:190
+#: windows/widgets.c:191
 msgid "'multi' argument must be a logical value"
 msgstr ""
 
-#: windows/widgets.c:192
+#: windows/widgets.c:193
 msgid "'filterindex' argument must be an integer value"
 msgstr ""

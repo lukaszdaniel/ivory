@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -604,7 +604,7 @@ msgid "unable to start '%s' device"
 msgstr "kan ikke starte %s()-enhed"
 
 # 85%
-#: devPicTeX.c:737 devWindows.c:3733
+#: devPicTeX.c:737 devWindows.c:3735
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
@@ -740,7 +740,7 @@ msgstr "En metafil for udklipsholderen kan kun lagre en figur."
 msgid "metafile '%s' could not be created"
 msgstr "metafilfil '%s' kunne ikke oprettes"
 
-#: devWindows.c:3110 devWindows.c:3757
+#: devWindows.c:3110 devWindows.c:3759
 msgid "R Graphics"
 msgstr "R-grafik"
 

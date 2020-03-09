@@ -3230,7 +3230,9 @@ stopifnot(exprs = {
 
 ## improved error message from contour():
 tt <- tryCatch(contour(volcano, levels = c(20*c(4:6, -Inf, 8:10))), error=identity)
-stopifnot(inherits(tt, "error"), grepl("non-finite level.*\\[4\\] = -inf", tt$message))
+print(tt)
+## this message is OS-dependent: gcc 5.x on Solaris has '-Inf'
+stopifnot(inherits(tt, "error"), grepl("non-finite level.*\\[4\\] = -inf", tt$message, ignore.case = TRUE))
 ## had "invalid NA contour values"
 
 
@@ -3696,7 +3698,8 @@ stopifnot(is.integer(Npi), is.double(Npd), !anyNA(Npi), !anyNA(Npd),
 n <- 2e9 # => .Machine$integer.max ~= 1.07 * N
 set.seed(6860); N <- rhyper(1, n,n,n)
 x <- 1.99e9; Nhi <- rhyper(256, x,x,x)
-stopifnot(identical(N, 999994112L), is.integer(Nhi),
+stopifnot(#identical(N, 999994112L), # (wrong) implementation detail
+          is.integer(Nhi),
           all.equal(mean(Nhi), x/2, tol = 6e-6)) # ==> also: no NAs
 ## NA's and warnings, incl "SHOULD NOT HAPPEN!" in R <= 3.6.2
 
@@ -3791,6 +3794,41 @@ stopifnot(inherits(e , "error"), grepl("is not TRUE", e$message),
 ## norm(<matrix-w-NA>, "2")
 stopifnot(is.na( norm(diag(c(1, NA)), "2") ))
 ## gave error from svd() in R <= 3.6.x
+
+
+## norm(<matrix-w-NA>, "F")
+(m <- cbind(0, c(NA, 0), 0:-1))
+nTypes <- eval(formals(base::norm)$type) # "O" "I" "F" "M" "2"
+stopifnot(is.na( print(vapply(nTypes, norm, 0., x = m)) )) # print(): show NA *or* NaN
+## "F" gave non-NA with LAPACK 3.9.0, before our patch in R-devel and R-patched
+
+
+## dimnames(<matrix>)[[.]] <- v -- inconsistency when length(v) == 1 : PR#17719
+aa <- matrix(1:2); dimnames(aa)[[1]] <- c("a", "b") # OK (always)
+ a <- matrix(1)  ; dimnames(a )[[1]] <-   "a"       # gave error: 'dimnames' must be a list
+stopifnot(exprs = {
+    identical(dimnames(a ), list(  "a",      NULL))
+    identical(dimnames(aa), list(c("a","b"), NULL))
+})
+## The above works, because now, `[[<-` is consistently returning a list:
+N <- NULL; N[["a"]] <- 1:2; stopifnot(identical(N, list(a = 1:2)))
+N <- NULL; N[["a"]] <- 1  ; stopifnot(identical(N, list(a = 1)))
+## the latter gave c(a = 1) in earlier versions of R
+
+
+## deparse(), dput(), etc :  "all" now includes "digits17"; new "exact"
+x <- 1 - 2^-51 ; dput(x, , "all")
+stopifnot(exprs = {
+    identical(deparse(x), as.character(x))
+    identical(deparse(x), "1") # default only uses 15 (= DBL_DIG) digits
+    if(!capabilities("long.double")) TRUE else
+        identical(x, as.numeric(deparse(x, control="all")))
+    identical(x, as.numeric(deparse(x, control="exact") -> dx.x))
+    identical(print(dx.x),  deparse(x, control="hexNumeric"))
+    TRUE || ## maybe not on all platforms ?
+        identical(dx.x, "0x1.ffffffffffffcp-1") # on 32-bit, too
+})
+## "all" gave "1" in R <= 3.6.z
 
 
 

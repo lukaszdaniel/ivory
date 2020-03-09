@@ -650,6 +650,7 @@ SEXP attribute_hidden do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* to the generic code below.  Note that evaluation */
     /* retains any missing argument indicators. */
 
+    /* DispatchOrEval internal generic: [ */
     if(R_DispatchOrEvalSP(call, op, "[", args, rho, &ans)) {
 /*     if(DispatchAnyOrEval(call, op, "[", args, rho, &ans, 0, 0)) */
 	if (NAMED(ans))
@@ -902,6 +903,7 @@ SEXP attribute_hidden do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* through to the generic code below.  Note that */
     /* evaluation retains any missing argument indicators. */
 
+    /* DispatchOrEval internal generic: [[ */
     if(R_DispatchOrEvalSP(call, op, "[[", args, rho, &ans)) {
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
@@ -1215,6 +1217,7 @@ SEXP attribute_hidden do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
     /* through to the generic code below.  Note that */
     /* evaluation retains any missing argument indicators. */
 
+    /* DispatchOrEval internal generic: $ */
     if(R_DispatchOrEvalSP(call, op, "$", args, env, &ans)) {
 	UNPROTECT(1); /* args */
 	if (NAMED(ans))

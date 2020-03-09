@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-07 08:14+0200\n"
+"POT-Creation-Date: 2020-03-09 21:45+0100\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -25,8 +25,8 @@ msgstr ""
 #: io.c:1095 io.c:1096 io.c:1097 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
-#: windows/widgets.c:81 windows/widgets.c:86
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
+#: windows/widgets.c:82 windows/widgets.c:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 인자가 잘못되었습니다"
@@ -155,8 +155,8 @@ msgstr "유효하지 않은 '%s' 지정입니다"
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:250 windows/widgets.c:256
+#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
+#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text'는 반드시 문자열이어야 합니다"
@@ -266,25 +266,25 @@ msgstr "'%s'은 반드시 리스트이어야 합니다"
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s'의 구성요소 %d는 윈도우 핸들이 아닙니다"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one or more"
 msgstr "하나 이상을 선택해 주세요"
 
-#: windows/widgets.c:108
+#: windows/widgets.c:109
 msgid "Select one"
 msgstr "하나를 선택해주세요"
 
-#: windows/widgets.c:184 windows/widgets.c:252
+#: windows/widgets.c:185 windows/widgets.c:253
 #, fuzzy
 msgid "'default' argument is overlong"
 msgstr "'default'가 너무 깁니다"
 
-#: windows/widgets.c:190
+#: windows/widgets.c:191
 #, fuzzy
 msgid "'multi' argument must be a logical value"
 msgstr "'multi'는 반드시 논리값이어야 합니다"
 
-#: windows/widgets.c:192
+#: windows/widgets.c:193
 #, fuzzy
 msgid "'filterindex' argument must be an integer value"
 msgstr "'filterindex'는 반드시 정수값이어야 합니다"

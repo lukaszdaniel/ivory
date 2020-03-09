@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -138,9 +138,7 @@ msgstr "'x','y' und 'id' müssen gleiche Länge haben"
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
-#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
 #: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
-#: R/unit.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
 msgstr "'x' Argument muss ein Einheiten-Objekt sein"
@@ -218,6 +216,11 @@ msgid ""
 "'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1"
 msgstr "'x', 'y', 'width' und 'height' müssen alle Einheiten der Länge 1 sein"
 
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr ""
+
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
 #: R/unit.R:0
 msgid "'Summary' function '%s' not meaningful for units"
@@ -261,11 +264,6 @@ msgstr "'gPath' (%s) nicht gefunden"
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr "'gPath' spezifiziert keine gültiges Kind"
-
-#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
-#: R/unit.R:0
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr "'gPath' muss Tiefe 1 haben in 'grobwidth/height' Einheiten"
 
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
@@ -402,9 +400,9 @@ msgstr "'x' und 'units' müssen Länge > 0 haben"
 msgid "'x0', 'y0', 'x1', and 'y1' must be units"
 msgstr "'x0', 'y0', 'x1' und 'y1' müssen Einheiten sein"
 
-#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
-msgid "Class 'unit.arithmetic' [1:%d]"
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
 #. R/grob.R: stop("Invalid force target")
@@ -424,16 +422,11 @@ msgstr "Unzulässige(r) Viewport-Name(n)"
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "Neuer 'grob' Name (%s) passt nicht auf 'gPath' (%s)"
 
-#. R/unit.R: stop("Value being assigned must be a unit")
+#. R/unit.R: stop("Not a unit object")
 #: R/unit.R:0
 #, fuzzy
-msgid "Value being assigned must be a unit"
-msgstr "x und y müssen Einheiten sein"
-
-#. R/unit.R: stop("Zero arguments where at least one expected")
-#: R/unit.R:0
-msgid "Zero arguments where at least one expected"
-msgstr "Kein Argument, wo zumindest eines erwartet"
+msgid "Not a unit object"
+msgstr "Unzulässiges Einheiten-Objekt"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -460,13 +453,10 @@ msgstr "mindestens 'width' oder 'height' müssen angegeben sein"
 msgid "both operands must be units"
 msgstr "Beide Operanden müssen Einheiten sein"
 
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
-#, fuzzy
-msgid "cannot mix signs of indices"
-msgstr "Vorzeichen von Indices können nicht gemischt werden"
+msgid "can't divide with a unit"
+msgstr ""
 
 #. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
 #: R/frames.R:0
@@ -518,23 +508,18 @@ msgstr ""
 msgid "how did we get here?"
 msgstr "Wie konnte es so weit kommen?"
 
-#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
 #: R/unit.R:0
 #, fuzzy
-msgid "index out of bounds ('unit' subsetting)"
+msgid "index must be of length 1"
+msgstr "'x' und 'y' müssen alle Einheiten der Länge 1 sein"
+
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (\"unit\" subsetting)"
 msgstr "Index außerhalb des Bereichs (Einheitenauswahl)"
-
-#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr "Index außerhalb des Bereichs (arithmetische Einheitsauswahl)"
-
-#. R/unit.R: stop("index out of bounds (unit list subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit list subsetting)"
-msgstr "Index außerhalb des Bereichs (Einheitslistenauswahl)"
 
 #. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
 #. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
@@ -546,8 +531,7 @@ msgstr "ungültige 'grob' Klasse"
 #. R/grob.R: gettextf("invalid '%s' argument", "vp")
 #. R/grob.R: gettextf("invalid '%s' argument", "result")
 #. R/ls.R: gettextf("invalid '%s' argument", "print")
-#. R/unit.R: gettextf("invalid '%s' argument", "x")
-#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#: R/grob.R:0 R/ls.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "unzulässiges 'grob' argument"
@@ -706,12 +690,6 @@ msgstr "unzulässig, die Achsenlabel anzugeben, wenn 'at' NULL ist"
 msgid "invalid vertical justification"
 msgstr "unzulässige vertikale Ausrichtung"
 
-#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
-#: R/unit.R:0
-#, fuzzy
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr "Einheiten-Objekte können nicht mit anderen Typen kombiniert werden"
-
 #. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
 #: R/grob.R:0
 #, fuzzy
@@ -795,30 +773,6 @@ msgstr "es darf nur ein gültiger 'gpar' Name angegeben werden"
 msgid "must start new page if showing leaves separately"
 msgstr "Muss eine neue Seite anfangen, um die Blätter einzeln zu zeigen"
 
-#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr "Kein 'grob' angegeben für 'grobwidth/height' Einheit"
-
-#. R/unit.R: stop("no arguments where at least one expected")
-#: R/unit.R:0
-#, fuzzy
-msgid "no arguments where at least one expected"
-msgstr "Kein Argument, wo zumindest eines erwartet"
-
-#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr "Keine Zeichenkette für 'strwidth/height' Einheit angegeben"
-
-#. R/unit.R: stop("non-NULL value supplied for plain unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "non-NULL value supplied for plain unit"
-msgstr "Nicht-NULL Wert angegeben für eine plain Einheit"
-
 #. R/unit.R: stop("non-unit operand must be numeric")
 #. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
@@ -874,6 +828,12 @@ msgstr "Nur Viewports zulässig in 'vpStack'"
 #, fuzzy
 msgid "operator '%s' not meaningful for units"
 msgstr "Operator '%s' hat für Einheiten keine Bedeutung"
+
+#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "replacement must be of length 1"
+msgstr "'x' und 'units' müssen Länge > 0 haben"
 
 #. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
 #: R/zzz.R:0
@@ -935,6 +895,48 @@ msgid_plural "invalid viewport names"
 msgstr[0] "Unzulässige(r) Viewport-Name(n)"
 msgstr[1] "Unzulässige(r) Viewport-Name(n)"
 
+#~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+#~ msgstr "'gPath' muss Tiefe 1 haben in 'grobwidth/height' Einheiten"
+
+#, fuzzy
+#~ msgid "Value being assigned must be a unit"
+#~ msgstr "x und y müssen Einheiten sein"
+
+#~ msgid "Zero arguments where at least one expected"
+#~ msgstr "Kein Argument, wo zumindest eines erwartet"
+
+#, fuzzy
+#~ msgid "cannot mix signs of indices"
+#~ msgstr "Vorzeichen von Indices können nicht gemischt werden"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit arithmetic subsetting)"
+#~ msgstr "Index außerhalb des Bereichs (arithmetische Einheitsauswahl)"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit list subsetting)"
+#~ msgstr "Index außerhalb des Bereichs (Einheitslistenauswahl)"
+
+#, fuzzy
+#~ msgid "it is invalid to combine 'unit' objects with other types"
+#~ msgstr "Einheiten-Objekte können nicht mit anderen Typen kombiniert werden"
+
+#, fuzzy
+#~ msgid "no 'grob' supplied for 'grobwidth/height' unit"
+#~ msgstr "Kein 'grob' angegeben für 'grobwidth/height' Einheit"
+
+#, fuzzy
+#~ msgid "no arguments where at least one expected"
+#~ msgstr "Kein Argument, wo zumindest eines erwartet"
+
+#, fuzzy
+#~ msgid "no string supplied for 'strwidth/height' unit"
+#~ msgstr "Keine Zeichenkette für 'strwidth/height' Einheit angegeben"
+
+#, fuzzy
+#~ msgid "non-NULL value supplied for plain unit"
+#~ msgstr "Nicht-NULL Wert angegeben für eine plain Einheit"
+
 #, fuzzy
 #~ msgid "Nothing on the display list"
 #~ msgstr "Unzulässige Modifikation der Display-Liste"
@@ -985,9 +987,6 @@ msgstr[1] "Unzulässige(r) Viewport-Name(n)"
 #, fuzzy
 #~ msgid "'length' must be a 'unit' object"
 #~ msgstr "'length' muss ein unit-Objekt sein"
-
-#~ msgid "'x' and 'y' must all be units of length 1"
-#~ msgstr "'x' und 'y' müssen alle Einheiten der Länge 1 sein"
 
 #, fuzzy
 #~ msgid "'x', 'y', 'width', and 'height' components must be units"
@@ -1175,10 +1174,6 @@ msgstr[1] "Unzulässige(r) Viewport-Name(n)"
 #, fuzzy
 #~ msgid "invalid 'rot' value"
 #~ msgstr "Unzulässiger Wert für 'rot'"
-
-#, fuzzy
-#~ msgid "invalid 'unit' object"
-#~ msgstr "Unzulässiges Einheiten-Objekt"
 
 #, fuzzy
 #~ msgid "invalid 'frame'"

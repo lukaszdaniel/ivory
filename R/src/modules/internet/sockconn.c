@@ -35,6 +35,15 @@
 #include "sock.h"
 #include <errno.h>
 
+#ifdef _WIN32
+# ifndef EINTR
+#  define EINTR                   WSAEINTR
+# endif
+# ifndef EWOULDBLOCK
+#  define EWOULDBLOCK             WSAEWOULDBLOCK
+# endif
+#endif
+
 static void listencleanup(void *data)
 {
     int *psock = data;
@@ -136,7 +145,11 @@ static ssize_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 		res = R_SockRead(thiscon->fd, thiscon->inbuf, 4096,
 				 con->blocking, thiscon->timeout);
 	    while (-res == EINTR);
+#ifdef _WIN32
 	    if (! con->blocking && -res == EAGAIN) {
+#else
+	    if (! con->blocking && (-res == EAGAIN || -res == EWOULDBLOCK)) {
+#endif
 		con->incomplete = TRUE;
 		return nread;
 	    }

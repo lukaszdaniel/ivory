@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:44+0100\n"
 "PO-Revision-Date: 2012-03-06 21:34+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -599,7 +599,7 @@ msgstr "paramètre 'fonts' incorrect dans %s"
 msgid "unable to start '%s' device"
 msgstr "impossible de démarrer le périphérique %s()"
 
-#: devPicTeX.c:737 devWindows.c:3733
+#: devPicTeX.c:737 devWindows.c:3735
 #, c-format
 msgid "unable to start %s() device"
 msgstr "impossible de démarrer le périphérique %s()"
@@ -739,7 +739,7 @@ msgstr "Un presse-papier metafile ne peut stocker qu'une seule figure"
 msgid "metafile '%s' could not be created"
 msgstr "le fichier metafile '%s' ne peut être créé"
 
-#: devWindows.c:3110 devWindows.c:3757
+#: devWindows.c:3110 devWindows.c:3759
 msgid "R Graphics"
 msgstr "R Graphes"
 

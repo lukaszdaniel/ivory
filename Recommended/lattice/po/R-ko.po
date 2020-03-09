@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"POT-Creation-Date: 2020-03-09 21:45\n"
 "PO-Revision-Date: 2015-02-09 00:06-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -302,6 +302,12 @@ msgstr ""
 #. R/miscellaneous.R: warning("Invalid value of 'pos' ignored.")
 #: R/miscellaneous.R:0
 msgid "Invalid value of 'pos' ignored."
+msgstr "'pos'의 값이 올바르지 않아 무효처리 되었습니다."
+
+#. R/legend.R: warning("Invalid value of 'tri.upper/tri.lower' ignored.")
+#: R/legend.R:0
+#, fuzzy
+msgid "Invalid value of 'tri.upper/tri.lower' ignored."
 msgstr "'pos'의 값이 올바르지 않아 무효처리 되었습니다."
 
 #. R/common.R: stop("Invalid value of index.cond")

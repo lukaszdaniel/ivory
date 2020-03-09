@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2017   The R Core Team
+ *  Copyright (C) 1997-2020   The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -293,6 +293,7 @@ static Rboolean dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
     if (op == NULL)
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
+    /* DispatchOrEval internal generic: as.vector */
     ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
     UNPROTECT(1);
     return ans;
@@ -1563,6 +1564,7 @@ SEXP attribute_hidden do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* We evaluate the first argument and attempt to dispatch on it. */
     /* If the dispatch fails, we "drop through" to the default code below. */
 
+    /* DispatchOrEval internal generic: [<- */
     if(R_DispatchOrEvalSP(call, op, "[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[<-", args, rho, &ans, 0, 0)) */
       return(ans);
@@ -1714,6 +1716,7 @@ SEXP attribute_hidden do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
+    /* DispatchOrEval internal generic: [[<- */
     if(R_DispatchOrEvalSP(call, op, "[[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[[<-", args, rho, &ans, 0, 0)) */
       return(ans);
@@ -1744,9 +1747,11 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    UNPROTECT(2); /* args, y */
 	    return x;
 	}
+#ifdef NO_LONGER_IN_R_4_x_y
 	if (length(y) == 1)
 	    x = allocVector(TYPEOF(y), 0);
 	else
+#endif
 	    x = allocVector(VECSXP, 0);
     }
 
@@ -2081,6 +2086,7 @@ SEXP attribute_hidden do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Note the RHS has already been evaluated at this point */
     PROTECT(args = fixSubset3Args(call, args, env, &nlist));
 
+    /* DispatchOrEval internal generic: $<- */
     if(R_DispatchOrEvalSP(call, op, "$<-", args, env, &ans)) {
 	UNPROTECT(1); /* args */
 	return(ans);

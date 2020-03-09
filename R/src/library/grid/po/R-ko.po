@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2005-05-25 16:34+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -145,9 +145,7 @@ msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
-#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
 #: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
-#: R/unit.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
 msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
@@ -235,6 +233,11 @@ msgstr ""
 "'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
 "않습니다"
 
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr ""
+
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
 #: R/unit.R:0
 msgid "'Summary' function '%s' not meaningful for units"
@@ -278,12 +281,6 @@ msgstr "'gPath'(%s)가 검색되지 않습니다"
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr "'gPath'는 유효한 child를 지정하고 있지 않습니다"
-
-#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
-#: R/unit.R:0
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr ""
-"'gPath'는 'grobwidth/height' units에서는 깊이 1이 나오지 않으면 되지 않습니다"
 
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
@@ -415,9 +412,9 @@ msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되�
 msgid "'x0', 'y0', 'x1', and 'y1' must be units"
 msgstr "'x0', 'y0', 'x1' 그리고 'y1'는 units가 나오지 않으면 되지 않습니다"
 
-#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
-msgid "Class 'unit.arithmetic' [1:%d]"
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
 #. R/grob.R: stop("Invalid force target")
@@ -437,16 +434,11 @@ msgstr "부적절한 viewport명입니다"
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "새로운 'grob' 이름(%s)은 'gPath'(%s)에 match하지 않습니다"
 
-#. R/unit.R: stop("Value being assigned must be a unit")
+#. R/unit.R: stop("Not a unit object")
 #: R/unit.R:0
 #, fuzzy
-msgid "Value being assigned must be a unit"
-msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
-
-#. R/unit.R: stop("Zero arguments where at least one expected")
-#: R/unit.R:0
-msgid "Zero arguments where at least one expected"
-msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
+msgid "Not a unit object"
+msgstr "부적절한 'theta' 입니다"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -476,11 +468,9 @@ msgstr ""
 msgid "both operands must be units"
 msgstr "opreand는 양쪽 모두 units가 나오지 않으면 되지 않습니다"
 
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
-msgid "cannot mix signs of indices"
+msgid "can't divide with a unit"
 msgstr ""
 
 #. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
@@ -531,23 +521,18 @@ msgstr ""
 msgid "how did we get here?"
 msgstr ""
 
-#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
 #: R/unit.R:0
 #, fuzzy
-msgid "index out of bounds ('unit' subsetting)"
+msgid "index must be of length 1"
+msgstr "'x' 그리고 'y'는 길이 1이 아니면 안됩니다"
+
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (\"unit\" subsetting)"
 msgstr "첨자가 범위를 넘고 있습니다(unit의 부분집합입니다)"
-
-#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr "첨자가 범위를 넘고 있습니다(unit 계산의 부분집합입니다)"
-
-#. R/unit.R: stop("index out of bounds (unit list subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit list subsetting)"
-msgstr "첨자가 범위를 넘고 있습니다(unit 리스트의 부분집합니다)"
 
 #. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
 #. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
@@ -559,8 +544,7 @@ msgstr "부적절한 'grob' class입니다"
 #. R/grob.R: gettextf("invalid '%s' argument", "vp")
 #. R/grob.R: gettextf("invalid '%s' argument", "result")
 #. R/ls.R: gettextf("invalid '%s' argument", "print")
-#. R/unit.R: gettextf("invalid '%s' argument", "x")
-#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#: R/grob.R:0 R/ls.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "부적절한 'rot' 값입니다"
@@ -721,12 +705,6 @@ msgstr "'at'가 NULL인경우 axis labels를 지정하는 것은 부적절합니
 msgid "invalid vertical justification"
 msgstr "부적절한 수직방향 위치의 결정지정입니다"
 
-#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
-#: R/unit.R:0
-#, fuzzy
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr "unit 오브젝트와 그 이외의 형태 오브젝트를 결합할 수 없지 않습니다"
-
 #. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
 #: R/grob.R:0
 #, fuzzy
@@ -805,29 +783,6 @@ msgstr "유효한 'gpar'의 이름만을 지정하지 않으면 안됩니다"
 msgid "must start new page if showing leaves separately"
 msgstr ""
 
-#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr "'grobiwidth/height' units를 주는 'grob'가 없습니다"
-
-#. R/unit.R: stop("no arguments where at least one expected")
-#: R/unit.R:0
-#, fuzzy
-msgid "no arguments where at least one expected"
-msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
-
-#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr "'strwidth/height' units를 주는 문자열이 없습니다"
-
-#. R/unit.R: stop("non-NULL value supplied for plain unit")
-#: R/unit.R:0
-msgid "non-NULL value supplied for plain unit"
-msgstr ""
-
 #. R/unit.R: stop("non-unit operand must be numeric")
 #. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
@@ -885,6 +840,12 @@ msgstr "viewports는 'vpStack'에서만 허용됩니다"
 #, fuzzy
 msgid "operator '%s' not meaningful for units"
 msgstr "연산자 '%s'는 units로서 의미를 작성하지 않습니다"
+
+#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "replacement must be of length 1"
+msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
 
 #. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
 #: R/zzz.R:0
@@ -944,6 +905,42 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "부적절한 viewport명입니다"
 
+#~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+#~ msgstr ""
+#~ "'gPath'는 'grobwidth/height' units에서는 깊이 1이 나오지 않으면 되지 않습"
+#~ "니다"
+
+#, fuzzy
+#~ msgid "Value being assigned must be a unit"
+#~ msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
+
+#~ msgid "Zero arguments where at least one expected"
+#~ msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit arithmetic subsetting)"
+#~ msgstr "첨자가 범위를 넘고 있습니다(unit 계산의 부분집합입니다)"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit list subsetting)"
+#~ msgstr "첨자가 범위를 넘고 있습니다(unit 리스트의 부분집합니다)"
+
+#, fuzzy
+#~ msgid "it is invalid to combine 'unit' objects with other types"
+#~ msgstr "unit 오브젝트와 그 이외의 형태 오브젝트를 결합할 수 없지 않습니다"
+
+#, fuzzy
+#~ msgid "no 'grob' supplied for 'grobwidth/height' unit"
+#~ msgstr "'grobiwidth/height' units를 주는 'grob'가 없습니다"
+
+#, fuzzy
+#~ msgid "no arguments where at least one expected"
+#~ msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
+
+#, fuzzy
+#~ msgid "no string supplied for 'strwidth/height' unit"
+#~ msgstr "'strwidth/height' units를 주는 문자열이 없습니다"
+
 #, fuzzy
 #~ msgid "Nothing on the display list"
 #~ msgstr "display 리스트에서 부적절한 요소가 있습니다"
@@ -999,10 +996,6 @@ msgstr[0] "부적절한 viewport명입니다"
 #, fuzzy
 #~ msgid "'length' must be a 'unit' object"
 #~ msgstr "'length'는 unit 오브젝트가 아니면 되지 않습니다"
-
-#, fuzzy
-#~ msgid "'x' and 'y' must all be units of length 1"
-#~ msgstr "'x' 그리고 'y'는 길이 1이 아니면 안됩니다"
 
 #, fuzzy
 #~ msgid "'x', 'y', 'width', and 'height' components must be units"
@@ -1178,10 +1171,6 @@ msgstr[0] "부적절한 viewport명입니다"
 #, fuzzy
 #~ msgid "invalid 'rot' value"
 #~ msgstr "부적절한 'rot' 값입니다"
-
-#, fuzzy
-#~ msgid "invalid 'unit' object"
-#~ msgstr "부적절한 'theta' 입니다"
 
 #, fuzzy
 #~ msgid "invalid 'frame'"

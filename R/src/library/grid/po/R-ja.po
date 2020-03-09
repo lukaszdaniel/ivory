@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -136,9 +136,7 @@ msgstr " 'x', 'y', 'id' は全て同じ長さでなければなりません "
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
-#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
 #: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
-#: R/unit.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
 msgstr " 引数 'x' は単位(units)オブジェクトでなければなりません "
@@ -221,6 +219,11 @@ msgid ""
 msgstr ""
 " 'x', 'y', 'width', 'height' は全て長さ 1 の単位(units)でなければなりません "
 
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr ""
+
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
 #: R/unit.R:0
 msgid "'Summary' function '%s' not meaningful for units"
@@ -264,12 +267,6 @@ msgstr " 'gPath'(%s) が見つかりません "
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr " 'gPath' は有効な child を指定していません "
-
-#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
-#: R/unit.R:0
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr ""
-" 'gPath' は 'grobwidth/height' 単位(units)中では深さ 1 でなければなりません "
 
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
@@ -407,9 +404,9 @@ msgstr " 'x' と 'units' は 0 より大きい長さでなければなりませ�
 msgid "'x0', 'y0', 'x1', and 'y1' must be units"
 msgstr " 'x0', 'y0', 'x1', 'y1' は単位(units)でなければなりません "
 
-#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
-msgid "Class 'unit.arithmetic' [1:%d]"
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
 #. R/grob.R: stop("Invalid force target")
@@ -429,16 +426,11 @@ msgstr " 不正な viewport 名です "
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr " 新しい 'grob' 名(%s)は 'gPath'(%s) に合致しません "
 
-#. R/unit.R: stop("Value being assigned must be a unit")
+#. R/unit.R: stop("Not a unit object")
 #: R/unit.R:0
 #, fuzzy
-msgid "Value being assigned must be a unit"
-msgstr " x と y は単位(units)でなければなりません "
-
-#. R/unit.R: stop("Zero arguments where at least one expected")
-#: R/unit.R:0
-msgid "Zero arguments where at least one expected"
-msgstr " 引数が 0 個ですが，少なくとも 1 つの引数が必要です "
+msgid "Not a unit object"
+msgstr " 不正な単位(unit)オブジェクトです "
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -467,13 +459,10 @@ msgstr " 少なくとも'width'と'height'のどちらかは指定する必要�
 msgid "both operands must be units"
 msgstr " オペランド(operand)は両方とも単位(units)でなければなりません "
 
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
-#, fuzzy
-msgid "cannot mix signs of indices"
-msgstr " 添え字の符号は混在できません "
+msgid "can't divide with a unit"
+msgstr ""
 
 #. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
 #: R/frames.R:0
@@ -525,23 +514,18 @@ msgstr ""
 msgid "how did we get here?"
 msgstr " どうしてこうなったのかな？ "
 
-#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
 #: R/unit.R:0
 #, fuzzy
-msgid "index out of bounds ('unit' subsetting)"
+msgid "index must be of length 1"
+msgstr " 'x' と 'y' は長さ 1 でなければなりません "
+
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (\"unit\" subsetting)"
 msgstr " 添え字が範囲を超えています(unit subsetting） "
-
-#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr " 添え字が範囲を超えています（unit arithmetic subsetting） "
-
-#. R/unit.R: stop("index out of bounds (unit list subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit list subsetting)"
-msgstr " 添え字が範囲を超えています（unit list subsetting) "
 
 #. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
 #. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
@@ -553,8 +537,7 @@ msgstr " 不正な 'grob' クラスです "
 #. R/grob.R: gettextf("invalid '%s' argument", "vp")
 #. R/grob.R: gettextf("invalid '%s' argument", "result")
 #. R/ls.R: gettextf("invalid '%s' argument", "print")
-#. R/unit.R: gettextf("invalid '%s' argument", "x")
-#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#: R/grob.R:0 R/ls.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr " 不正な 'grob' 引数です "
@@ -715,14 +698,6 @@ msgstr " 'at' が NULL である場合，axis ラベルを指定するのは無�
 msgid "invalid vertical justification"
 msgstr " 不正な垂直方向の位置決め指定(justification)です "
 
-#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
-#: R/unit.R:0
-#, fuzzy
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr ""
-" 単位(unit)オブジェクトとそれ以外の型のオブジェクトを結合することは出来ませ"
-"ん "
-
 #. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
 #: R/grob.R:0
 #, fuzzy
@@ -806,30 +781,6 @@ msgstr ""
 " もし提示したものが別々になったままなら、新しいページを開始する必要がありま"
 "す "
 
-#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr " 'grobwidth/height' 単位に対して 'grob' があたえられていません "
-
-#. R/unit.R: stop("no arguments where at least one expected")
-#: R/unit.R:0
-#, fuzzy
-msgid "no arguments where at least one expected"
-msgstr " 引数が 0 個ですが，少なくとも 1 つの引数が必要です "
-
-#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr " 'strwidth/height' 単位に対する文字列があたえられていません "
-
-#. R/unit.R: stop("non-NULL value supplied for plain unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "non-NULL value supplied for plain unit"
-msgstr " plain unit に対して NULL でない値が与えられました "
-
 #. R/unit.R: stop("non-unit operand must be numeric")
 #. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
@@ -887,6 +838,12 @@ msgstr " 'vpStack' 中には viewport のみが許されます "
 #, fuzzy
 msgid "operator '%s' not meaningful for units"
 msgstr " 演算子 '%s' は単位(units)として意味をなしません "
+
+#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "replacement must be of length 1"
+msgstr " 'x' と 'units' は 0 より大きい長さでなければなりません "
 
 #. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
 #: R/zzz.R:0
@@ -946,6 +903,52 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] " 不正な viewport 名です "
 
+#~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+#~ msgstr ""
+#~ " 'gPath' は 'grobwidth/height' 単位(units)中では深さ 1 でなければなりませ"
+#~ "ん "
+
+#, fuzzy
+#~ msgid "Value being assigned must be a unit"
+#~ msgstr " x と y は単位(units)でなければなりません "
+
+#~ msgid "Zero arguments where at least one expected"
+#~ msgstr " 引数が 0 個ですが，少なくとも 1 つの引数が必要です "
+
+#, fuzzy
+#~ msgid "cannot mix signs of indices"
+#~ msgstr " 添え字の符号は混在できません "
+
+#, fuzzy
+#~ msgid "index out of bounds (unit arithmetic subsetting)"
+#~ msgstr " 添え字が範囲を超えています（unit arithmetic subsetting） "
+
+#, fuzzy
+#~ msgid "index out of bounds (unit list subsetting)"
+#~ msgstr " 添え字が範囲を超えています（unit list subsetting) "
+
+#, fuzzy
+#~ msgid "it is invalid to combine 'unit' objects with other types"
+#~ msgstr ""
+#~ " 単位(unit)オブジェクトとそれ以外の型のオブジェクトを結合することは出来ま"
+#~ "せん "
+
+#, fuzzy
+#~ msgid "no 'grob' supplied for 'grobwidth/height' unit"
+#~ msgstr " 'grobwidth/height' 単位に対して 'grob' があたえられていません "
+
+#, fuzzy
+#~ msgid "no arguments where at least one expected"
+#~ msgstr " 引数が 0 個ですが，少なくとも 1 つの引数が必要です "
+
+#, fuzzy
+#~ msgid "no string supplied for 'strwidth/height' unit"
+#~ msgstr " 'strwidth/height' 単位に対する文字列があたえられていません "
+
+#, fuzzy
+#~ msgid "non-NULL value supplied for plain unit"
+#~ msgstr " plain unit に対して NULL でない値が与えられました "
+
 #, fuzzy
 #~ msgid "Nothing on the display list"
 #~ msgstr " ディスプレイリストの中に不正な要素があります "
@@ -997,9 +1000,6 @@ msgstr[0] " 不正な viewport 名です "
 #, fuzzy
 #~ msgid "'length' must be a 'unit' object"
 #~ msgstr " 'length' は単位(units)オブジェクトでなければなりません "
-
-#~ msgid "'x' and 'y' must all be units of length 1"
-#~ msgstr " 'x' と 'y' は長さ 1 でなければなりません "
 
 #, fuzzy
 #~ msgid "'x', 'y', 'width', and 'height' components must be units"
@@ -1190,10 +1190,6 @@ msgstr[0] " 不正な viewport 名です "
 #, fuzzy
 #~ msgid "invalid 'rot' value"
 #~ msgstr " 不正な 'rot' 値です "
-
-#, fuzzy
-#~ msgid "invalid 'unit' object"
-#~ msgstr " 不正な単位(unit)オブジェクトです "
 
 #, fuzzy
 #~ msgid "invalid 'frame'"

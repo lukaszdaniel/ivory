@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.0.0\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -875,13 +875,6 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(value[[1]]@className), pkgs[1])
 
 msgid "Found more than one class %s in cache; using the first, from namespace '%s'"
-msgstr ""
-
-
-#: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost.")
-
-msgid "From .checkSubclasses(): subclass %s is not local to superclass %s, which is not a class union, so inheritance information will be lost."
 msgstr ""
 
 

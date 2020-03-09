@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-72\n"
+"Project-Id-Version: foreign 0.8-76\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 19:56+0100\n"
+"POT-Creation-Date: 2020-03-09 21:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,126 +17,116 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: R_systat.c:127
+#: R_systat.c:132
 #, c-format
 msgid "not a rectangular data file (%s mtype is %d)"
 msgstr ""
 
-#: R_systat.c:133
+#: R_systat.c:138
 msgid "mismatch in numbers of variables"
 msgstr ""
 
-#: R_systat.c:173 R_systat.c:695 R_systat.c:700 R_systat.c:707 R_systat.c:710
-#: R_systat.c:728 R_systat.c:750
+#: R_systat.c:174 R_systat.c:685 R_systat.c:690 R_systat.c:696 R_systat.c:699
+#: R_systat.c:718 R_systat.c:738
 msgid "file access error"
 msgstr ""
 
-#: R_systat.c:231
+#: R_systat.c:237
 #, c-format
 msgid "cannot open file '%s'"
 msgstr ""
 
-#: R_systat.c:252
+#: R_systat.c:257
 msgid "getuse: Failure in variable unpacking"
 msgstr ""
 
-#: R_systat.c:255 R_systat.c:267 R_systat.c:270 R_systat.c:322 R_systat.c:328
-#: R_systat.c:337
+#: R_systat.c:259 R_systat.c:271 R_systat.c:274 R_systat.c:324 R_systat.c:330
+#: R_systat.c:339
 msgid "getuse: File access error"
 msgstr ""
 
-#: R_systat.c:318
+#: R_systat.c:320
 #, c-format
 msgid "getuse: byte counter %o octal"
 msgstr ""
 
-#: R_systat.c:333
-#, c-format
-msgid "Getuse: failure reading byte %d"
-msgstr ""
-
-#: R_systat.c:340
+#: R_systat.c:341
 msgid "getuse: terminal null block"
 msgstr ""
 
-#: R_systat.c:346
-#, c-format
-msgid "Getuse: last byte = %o octal"
-msgstr ""
-
-#: R_systat.c:352
+#: R_systat.c:353
 msgid "getuse: non-integer number of observations"
 msgstr ""
 
-#: R_systat.c:415
+#: R_systat.c:414
 msgid "getlab: File format unknown"
 msgstr ""
 
-#: R_systat.c:419 R_systat.c:435 R_systat.c:437 R_systat.c:439 R_systat.c:492
-#: R_systat.c:494 R_systat.c:496 R_systat.c:521
+#: R_systat.c:418 R_systat.c:432 R_systat.c:434 R_systat.c:436 R_systat.c:483
+#: R_systat.c:485 R_systat.c:487 R_systat.c:510
 msgid "getlab: File access error"
 msgstr ""
 
-#: R_systat.c:423
+#: R_systat.c:422
 #, c-format
 msgid "getlab: byte 0 = %o octal"
 msgstr ""
 
-#: R_systat.c:428
+#: R_systat.c:426
 #, c-format
 msgid "getlab: byte 1 = %o octal"
 msgstr ""
 
-#: R_systat.c:441
+#: R_systat.c:438
 #, c-format
 msgid "getlab: byte 9 = %o octal"
 msgstr ""
 
-#: R_systat.c:453
+#: R_systat.c:449
 #, c-format
 msgid "getlab: comment begin byte = %o"
 msgstr ""
 
-#: R_systat.c:460
+#: R_systat.c:455
 #, c-format
 msgid "getlab: comment = %c"
 msgstr ""
 
-#: R_systat.c:467
+#: R_systat.c:460
 #, c-format
 msgid "getlab: comment end byte = %o"
 msgstr ""
 
-#: R_systat.c:486
+#: R_systat.c:478
 #, c-format
 msgid "getlab: byte nv0 = %o octal"
 msgstr ""
 
-#: R_systat.c:498
+#: R_systat.c:489
 #, c-format
 msgid "getlab: byte nv$ = %o octal"
 msgstr ""
 
-#: R_systat.c:507
+#: R_systat.c:497
 msgid "file has more variables than this function can read"
 msgstr ""
 
-#: R_systat.c:514
+#: R_systat.c:504
 #, c-format
 msgid "getlab: byte lab[%d]0 = %o, nv=%d"
 msgstr ""
 
-#: R_systat.c:529
+#: R_systat.c:517
 #, c-format
 msgid "$ not in variable label column 9: %s"
 msgstr ""
 
-#: R_systat.c:551
+#: R_systat.c:537
 #, c-format
 msgid "getlab: byte lab[%d]$ = %o octal"
 msgstr ""
 
-#: R_systat.c:724
+#: R_systat.c:715
 msgid "string variable"
 msgstr ""
 
@@ -162,7 +152,7 @@ msgid "unable to open file"
 msgstr ""
 
 #: Rdbfwrite.c:94 Rdbfwrite.c:132 stataread.c:299 stataread.c:320
-#: stataread.c:810 stataread.c:840
+#: stataread.c:811 stataread.c:841
 msgid "unknown data type"
 msgstr ""
 
@@ -270,16 +260,16 @@ msgstr ""
 msgid "binary write error"
 msgstr ""
 
-#: dbfopen.c:335 dbfopen.c:1026 dbfopen.c:1195 dbfopen.c:1343 dbfopen.c:1389
+#: dbfopen.c:335 dbfopen.c:1036 dbfopen.c:1205 dbfopen.c:1353 dbfopen.c:1399
 msgid "binary read error"
 msgstr ""
 
-#: dbfopen.c:726
+#: dbfopen.c:736
 #, c-format
 msgid "fseek(%d) failed on DBF file"
 msgstr ""
 
-#: dbfopen.c:732
+#: dbfopen.c:742
 #, c-format
 msgid "fread(%d) failed on DBF file"
 msgstr ""
@@ -380,7 +370,7 @@ msgstr ""
 msgid "first record for entry %d is corrupt"
 msgstr ""
 
-#: pfm-read.c:102 pfm-read.c:1053
+#: pfm-read.c:102
 msgid "reading as a portable file"
 msgstr ""
 
@@ -389,197 +379,197 @@ msgstr ""
 msgid "%s: Closing portable file: %s"
 msgstr ""
 
-#: pfm-read.c:137
+#: pfm-read.c:139
 msgid "Unexpected end of file"
 msgstr ""
 
-#: pfm-read.c:145
+#: pfm-read.c:147
 msgid "Bad line end"
 msgstr ""
 
-#: pfm-read.c:214
+#: pfm-read.c:228
 #, c-format
 msgid "cannot read file %s as portable file: already opened for %s"
 msgstr ""
 
-#: pfm-read.c:231
+#: pfm-read.c:244
 #, c-format
 msgid ""
 "an error occurred while opening \"%s\" for reading as a portable file: %s"
 msgstr ""
 
-#: pfm-read.c:263
+#: pfm-read.c:276
 msgid "Data record expected"
 msgstr ""
 
-#: pfm-read.c:283
+#: pfm-read.c:296
 msgid "error reading portable-file dictionary"
 msgstr ""
 
-#: pfm-read.c:340
+#: pfm-read.c:359
 msgid "Number expected"
 msgstr ""
 
-#: pfm-read.c:366
+#: pfm-read.c:387
 msgid "Missing numeric terminator"
 msgstr ""
 
-#: pfm-read.c:398
+#: pfm-read.c:424
 msgid "Bad integer format"
 msgstr ""
 
-#: pfm-read.c:426
+#: pfm-read.c:454
 #, c-format
 msgid "Bad string length %d"
 msgstr ""
 
-#: pfm-read.c:491
+#: pfm-read.c:524
 msgid "Missing SPSSPORT signature"
 msgstr ""
 
-#: pfm-read.c:509
+#: pfm-read.c:542
 #, c-format
 msgid "Unrecognized version code %d"
 msgstr ""
 
-#: pfm-read.c:520
+#: pfm-read.c:553
 #, c-format
 msgid "Bad date string length %d"
 msgstr ""
 
-#: pfm-read.c:527
+#: pfm-read.c:560
 msgid "Bad character in date"
 msgstr ""
 
-#: pfm-read.c:547
+#: pfm-read.c:580
 #, c-format
 msgid "Bad time string length %d"
 msgstr ""
 
-#: pfm-read.c:553
+#: pfm-read.c:587
 msgid "Bad character in time"
 msgstr ""
 
-#: pfm-read.c:604
+#: pfm-read.c:641
 #, c-format
 msgid "%s: Bad format specifier byte %d"
 msgstr ""
 
-#: pfm-read.c:613 sfm-read.c:1153 sfm-read.c:1163
+#: pfm-read.c:650 sfm-read.c:1154 sfm-read.c:1164
 #, c-format
 msgid "%s: Bad format specifier byte (%d)"
 msgstr ""
 
-#: pfm-read.c:618
+#: pfm-read.c:655
 #, c-format
 msgid "String variable %s has string format specifier %s"
 msgstr ""
 
-#: pfm-read.c:621
+#: pfm-read.c:658
 #, c-format
 msgid "String variable %s has numeric format specifier %s"
 msgstr ""
 
-#: pfm-read.c:625
+#: pfm-read.c:662
 #, c-format
 msgid "Numeric variable %s has string format specifier %s"
 msgstr ""
 
-#: pfm-read.c:628
+#: pfm-read.c:665
 #, c-format
 msgid "Numeric variable %s has numeric format specifier %s"
 msgstr ""
 
-#: pfm-read.c:665
+#: pfm-read.c:702
 msgid "Expected variable count record"
 msgstr ""
 
-#: pfm-read.c:669
+#: pfm-read.c:706
 #, c-format
 msgid "Invalid number of variables %d"
 msgstr ""
 
-#: pfm-read.c:705
+#: pfm-read.c:742
 msgid "Expected variable record"
 msgstr ""
 
-#: pfm-read.c:711
+#: pfm-read.c:748
 #, c-format
 msgid "Invalid variable width %d"
 msgstr ""
 
-#: pfm-read.c:730
+#: pfm-read.c:766
 #, c-format
 msgid "position %d: Variable name has %u characters"
 msgstr ""
 
-#: pfm-read.c:734
+#: pfm-read.c:770
 #, c-format
 msgid "position %d: Variable name begins with invalid character"
 msgstr ""
 
-#: pfm-read.c:738
+#: pfm-read.c:774
 #, c-format
 msgid "position %d: Variable name begins with lowercase letter %c"
 msgstr ""
 
-#: pfm-read.c:751
+#: pfm-read.c:786
 #, c-format
 msgid "position %d: Variable name character %d is lowercase letter %c"
 msgstr ""
 
-#: pfm-read.c:760
+#: pfm-read.c:795
 #, c-format
 msgid "position %d: character `\\%03o' is not valid in a variable name"
 msgstr ""
 
-#: pfm-read.c:765
+#: pfm-read.c:801
 #, c-format
 msgid "Bad width %d for variable %s"
 msgstr ""
 
-#: pfm-read.c:771
+#: pfm-read.c:807
 #, c-format
 msgid "Duplicate variable name %s"
 msgstr ""
 
-#: pfm-read.c:815
+#: pfm-read.c:851
 #, c-format
 msgid "Bad missing values for %s"
 msgstr ""
 
-#: pfm-read.c:839
+#: pfm-read.c:874
 #, c-format
 msgid "Weighting variable %s not present in dictionary"
 msgstr ""
 
-#: pfm-read.c:906
+#: pfm-read.c:944
 #, c-format
 msgid "Unknown variable %s while parsing value labels"
 msgstr ""
 
-#: pfm-read.c:910
+#: pfm-read.c:947
 #, c-format
 msgid ""
 "Cannot assign value labels to %s and %s, which have different variable types "
 "or widths"
 msgstr ""
 
-#: pfm-read.c:956
+#: pfm-read.c:993
 #, c-format
 msgid "Duplicate label for value %g for variable %s"
 msgstr ""
 
-#: pfm-read.c:959
+#: pfm-read.c:996
 #, c-format
 msgid "Duplicate label for value '%.*s' for variable %s"
 msgstr ""
 
-#: pfm-read.c:1046
+#: pfm-read.c:1084
 msgid "End of file midway through case"
 msgstr ""
 
-#: sfm-read.c:138 sfm-read.c:1693
+#: sfm-read.c:138 sfm-read.c:1694
 msgid "reading as a system file"
 msgstr ""
 
@@ -709,219 +699,219 @@ msgid ""
 "%g; LOWEST: %g, %g"
 msgstr ""
 
-#: sfm-read.c:741
+#: sfm-read.c:742
 #, c-format
 msgid ""
 "%s: Bad magic. Proper system files begin with the four characters `$FL2'. "
 "This file will not be read"
 msgstr ""
 
-#: sfm-read.c:783
+#: sfm-read.c:784
 #, c-format
 msgid ""
 "%s: File layout code has unexpected value %d.  Value should be 2 or 3, in "
 "big-endian or little-endian format"
 msgstr ""
 
-#: sfm-read.c:798
+#: sfm-read.c:799
 #, c-format
 msgid "%s: Number of elements per case (%d) is not between 1 and %d"
 msgstr ""
 
-#: sfm-read.c:805
+#: sfm-read.c:806
 #, c-format
 msgid ""
 "%s: Index of weighting variable (%d) is not between 0 and number of elements "
 "per case (%d)"
 msgstr ""
 
-#: sfm-read.c:810
+#: sfm-read.c:811
 #, c-format
 msgid "%s: Number of cases in file (%d) is not between -1 and %d"
 msgstr ""
 
-#: sfm-read.c:815
+#: sfm-read.c:816
 #, c-format
 msgid "%s: Compression bias (%g) is not the usual value of 100"
 msgstr ""
 
-#: sfm-read.c:917
+#: sfm-read.c:918
 #, c-format
 msgid "%s: position %d: Bad record type (%d); the expected value was 2"
 msgstr ""
 
-#: sfm-read.c:926
+#: sfm-read.c:927
 #, c-format
 msgid ""
 "%s: position %d: String variable does not have proper number of continuation "
 "records"
 msgstr ""
 
-#: sfm-read.c:934
+#: sfm-read.c:935
 #, c-format
 msgid "%s: position %d: Superfluous long string continuation record"
 msgstr ""
 
-#: sfm-read.c:939
+#: sfm-read.c:940
 #, c-format
 msgid "%s: position %d: Bad variable type code %d"
 msgstr ""
 
-#: sfm-read.c:942
+#: sfm-read.c:943
 #, c-format
 msgid "%s: position %d: Variable label indicator field is not 0 or 1"
 msgstr ""
 
-#: sfm-read.c:946
+#: sfm-read.c:947
 #, c-format
 msgid ""
 "%s: position %d: Missing value indicator field is not -3, -2, 0, 1, 2, or 3"
 msgstr ""
 
-#: sfm-read.c:968
+#: sfm-read.c:969
 #, c-format
 msgid ""
 "%s: position %d: Variable name begins with octothorpe ('#').  Scratch "
 "variables should not appear in system files"
 msgstr ""
 
-#: sfm-read.c:990
+#: sfm-read.c:991
 #, c-format
 msgid ""
 "%s: position %d: character `\\%03o' (%c) is not valid in a variable name"
 msgstr ""
 
-#: sfm-read.c:1032
+#: sfm-read.c:1033
 #, c-format
 msgid "%s: Variable %s indicates variable label of invalid length %d"
 msgstr ""
 
-#: sfm-read.c:1048
+#: sfm-read.c:1049
 #, c-format
 msgid "%s: Long string variable %s may not have missing values"
 msgstr ""
 
-#: sfm-read.c:1071
+#: sfm-read.c:1072
 #, c-format
 msgid "%s: String variable %s may not have missing values specified as a range"
 msgstr ""
 
-#: sfm-read.c:1114
+#: sfm-read.c:1115
 #, c-format
 msgid "%s: Long string continuation records omitted at end of dictionary"
 msgstr ""
 
-#: sfm-read.c:1117
+#: sfm-read.c:1118
 #, c-format
 msgid ""
 "%s: System file header indicates %d variable positions but %d were read from "
 "file"
 msgstr ""
 
-#: sfm-read.c:1126
+#: sfm-read.c:1127
 #, c-format
 msgid "%s: Duplicate variable name `%s' within system file"
 msgstr ""
 
-#: sfm-read.c:1166
+#: sfm-read.c:1167
 #, c-format
 msgid "%s: %s variable %s has %s format specifier %s"
 msgstr ""
 
-#: sfm-read.c:1245
+#: sfm-read.c:1246
 #, c-format
 msgid ""
 "%s: Variable index record (type 4) does not immediately follow value label "
 "record (type 3) as it ought"
 msgstr ""
 
-#: sfm-read.c:1254
+#: sfm-read.c:1255
 #, c-format
 msgid ""
 "%s: Number of variables associated with a value label (%d) is not between 1 "
 "and the number of variables (%d)"
 msgstr ""
 
-#: sfm-read.c:1271
+#: sfm-read.c:1272
 #, c-format
 msgid ""
 "%s: Variable index associated with value label (%d) is not between 1 and the "
 "number of values (%d)"
 msgstr ""
 
-#: sfm-read.c:1277
+#: sfm-read.c:1278
 #, c-format
 msgid ""
 "%s: Variable index associated with value label (%d) refers to a continuation "
 "of a string variable, not to an actual variable"
 msgstr ""
 
-#: sfm-read.c:1280
+#: sfm-read.c:1281
 #, c-format
 msgid "%s: Value labels are not allowed on long string variables (%s)"
 msgstr ""
 
-#: sfm-read.c:1289
+#: sfm-read.c:1290
 #, c-format
 msgid ""
 "%s: Variables associated with value label are not all of identical type.  "
 "Variable %s has %s type, but variable %s has %s type"
 msgstr ""
 
-#: sfm-read.c:1331
+#: sfm-read.c:1332
 #, c-format
 msgid "%s: File contains duplicate label for value %g for variable %s"
 msgstr ""
 
-#: sfm-read.c:1334
+#: sfm-read.c:1335
 #, c-format
 msgid "%s: File contains duplicate label for value `%.*s' for variable %s"
 msgstr ""
 
-#: sfm-read.c:1374 sfm-read.c:1652
+#: sfm-read.c:1375 sfm-read.c:1653
 #, c-format
 msgid "%s: Reading system file: %s"
 msgstr ""
 
-#: sfm-read.c:1376 sfm-read.c:1560 sfm-read.c:1601
+#: sfm-read.c:1377 sfm-read.c:1561 sfm-read.c:1602
 #, c-format
 msgid "%s: Unexpected end of file"
 msgstr ""
 
-#: sfm-read.c:1393
+#: sfm-read.c:1394
 #, c-format
 msgid "%s: System file contains multiple type 6 (document) records"
 msgstr ""
 
-#: sfm-read.c:1403
+#: sfm-read.c:1404
 #, c-format
 msgid "%s: Number of document lines (%d) must be greater than 0"
 msgstr ""
 
-#: sfm-read.c:1424
+#: sfm-read.c:1425
 #, c-format
 msgid "dictionary:\n"
 msgstr ""
 
-#: sfm-read.c:1483
+#: sfm-read.c:1484
 msgid "assert failed : 0"
 msgstr ""
 
-#: sfm-read.c:1514
+#: sfm-read.c:1515
 #, c-format
 msgid "%s: Error reading file: %s"
 msgstr ""
 
-#: sfm-read.c:1552
+#: sfm-read.c:1553
 #, c-format
 msgid "%s: Compressed data is corrupted.  Data ends partway through a case"
 msgstr ""
 
-#: sfm-read.c:1637
+#: sfm-read.c:1638
 msgid "assert failed : dict->nval > 0"
 msgstr ""
 
-#: sfm-read.c:1654
+#: sfm-read.c:1655
 #, c-format
 msgid "%s: Partial record at end of system file"
 msgstr ""
@@ -963,7 +953,7 @@ msgstr ""
 msgid "can not yet read Stata .dta on this platform"
 msgstr ""
 
-#: stataread.c:583 stataread.c:1038
+#: stataread.c:583 stataread.c:1039
 msgid "first argument must be a file name\n"
 msgstr ""
 
@@ -980,32 +970,32 @@ msgstr ""
 msgid "this should happen: underrun"
 msgstr ""
 
-#: stataread.c:804 stataread.c:834
+#: stataread.c:805 stataread.c:835
 #, c-format
 msgid "character strings of >244 bytes in column %d will be truncated"
 msgstr ""
 
-#: stataread.c:971
+#: stataread.c:972
 msgid "empty string is not valid in Stata's documented format"
 msgstr ""
 
-#: stataread.c:977
+#: stataread.c:978
 msgid "this should not happen."
 msgstr ""
 
-#: stataread.c:1034
+#: stataread.c:1035
 msgid "cannot yet read write .dta on this platform"
 msgstr ""
 
-#: stataread.c:1042
+#: stataread.c:1043
 msgid "data to be saved must be in a data frame"
 msgstr ""
 
-#: stataread.c:1045
+#: stataread.c:1046
 #, c-format
 msgid "unable to open file for writing: '%s'"
 msgstr ""
 
-#: stataread.c:1050
+#: stataread.c:1051
 msgid "can only write version 6-10 formats"
 msgstr ""

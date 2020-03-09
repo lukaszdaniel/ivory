@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.20-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"POT-Creation-Date: 2020-03-09 21:45\n"
 "PO-Revision-Date: 2015-02-25 19:25+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -279,6 +279,12 @@ msgstr "Niepoprawne lub niejednoznacznie nazwy komponentów"
 #. R/miscellaneous.R: warning("Invalid value of 'pos' ignored.")
 #: R/miscellaneous.R:0
 msgid "Invalid value of 'pos' ignored."
+msgstr "Niepoprawna wartość 'pos' została zignorowana."
+
+#. R/legend.R: warning("Invalid value of 'tri.upper/tri.lower' ignored.")
+#: R/legend.R:0
+#, fuzzy
+msgid "Invalid value of 'tri.upper/tri.lower' ignored."
 msgstr "Niepoprawna wartość 'pos' została zignorowana."
 
 #. R/common.R: stop("Invalid value of index.cond")

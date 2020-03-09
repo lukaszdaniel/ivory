@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: lattice 0.20-38\n"
-"POT-Creation-Date: 2018-11-28 21:50\n"
+"Project-Id-Version: lattice 0.20-40\n"
+"POT-Creation-Date: 2020-03-09 21:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -363,6 +363,13 @@ msgstr ""
 #. R/miscellaneous.R: warning("Invalid value of 'pos' ignored.")
 
 msgid "Invalid value of 'pos' ignored."
+msgstr ""
+
+
+#: R/legend.R: 0
+#. R/legend.R: warning("Invalid value of 'tri.upper/tri.lower' ignored.")
+
+msgid "Invalid value of 'tri.upper/tri.lower' ignored."
 msgstr ""
 
 

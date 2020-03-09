@@ -67,8 +67,7 @@ setClass <-
         badContains <- character()
         for(ext in classDef@contains) {
             class2 <- ext@superClass
-            if(is(try(setIs(Class, class2, classDef = classDef, where = where,
-                            extensionObject = ext)),
+            if(is(try(setIs(Class, class2, classDef = classDef, where = where)),
                   "try-error"))
                 badContains <- c(badContains, class2)
             else { # update class definition
@@ -523,7 +522,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	superClass <- exti@superClass
 	if(!exti@simple && !is(object, superClass))
 	    next ## skip conditional relations that don't hold for this object
-	superDef <- getClassDef(superClass, package = packageSlot(exti))
+	superDef <- getClassDef(superClass)
 	if(is.null(superDef)) {
 	    errors <- c(errors,
 			gettextf("superclass \"%s\" not defined in the environment of the object's class", superClass))

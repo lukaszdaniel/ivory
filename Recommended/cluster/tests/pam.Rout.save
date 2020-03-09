@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2019-11-06 r1196) -- "Internationalized Version of R"
-Copyright (C) 2013-2019 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2019-11-06 r77378) -- "Unsuffered Consequences"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -1054,7 +1054,7 @@ Available components:
  [6] "clusinfo"   "silinfo"    "diss"       "call"       "data"      
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.624 0.023 0.649 0 0 
+Time elapsed:  0.66 0.019 0.679 0 0 
 > 
 > ## re-starting with medoids from pv6  shouldn't change:
 > pv6. <- pam(votes.repub, 6, medoids = pv6$id.med, trace = 3)
@@ -1178,7 +1178,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.701   0.008   0.709 
+Time   0.768   0.008   0.775 
 >  ## bswapPamOnce  algorithm
 > st1 <- showSys.time(pamxonce  <- pam(x, 4, pamonce=TRUE, trace.lev=2))# 6.122   0.024   6.181
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1191,7 +1191,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time    0.62    0.00    0.62 
+Time   0.639   0.000   0.639 
 > ## bswapPamOnceDistIndice
 > st2 <- showSys.time(pamxonce2 <- pam(x, 4, pamonce = 2,  trace.lev=2))# 4.101   0.024   4.151
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1204,7 +1204,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.499   0.000   0.499 
+Time   0.516   0.000   0.516 
 > ## bswapPamSchubertPlus
 > st3 <- showSys.time(pamxonce3 <- pam(x, 4, pamonce = 3,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1217,7 +1217,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.381   0.000   0.381 
+Time   0.395   0.000   0.396 
 > ## bswapPamSchubertPlusPlus
 > st4 <- showSys.time(pamxonce4 <- pam(x, 4, pamonce = 4,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1230,7 +1230,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.386   0.000   0.388 
+Time   0.394   0.000   0.394 
 > ## bswapPamSchubertPlusPlus with linearized memory access
 > st5 <- showSys.time(pamxonce5 <- pam(x, 4, pamonce = 5,  trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
@@ -1243,10 +1243,10 @@ pam()'s bswap(*, s=15.7788, pamonce=5): build 4 medoids:
    swp new 1793 <-> 1268 old; decreasing diss. 1862.37 by -129.13
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.365   0.000   0.364 
+Time   0.371   0.000   0.372 
 > show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
                  5:orig  4:orig  3:orig  2:orig  1:orig
-Time  user.self 0.52068 0.55064 0.54351 0.71184 0.88445
+Time  user.self 0.48307 0.51302 0.51432 0.67188 0.83203
 Time  sys.child     NaN     NaN     NaN     NaN     NaN
 > 
 > ## only call element is not equal
@@ -1273,7 +1273,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): medoids given
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.182   0.000   1.182 
+Time   1.309   0.000   1.310 
 > st1 <- showSys.time(pamxoncest  <- pam(x, 4, medoids = med0, pamonce=TRUE, trace.lev=2))#   8.503   0.024   8.578
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=1): medoids given
@@ -1284,7 +1284,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): medoids given
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.955   0.000   0.954 
+Time   0.965   0.000   0.965 
 > st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace.lev=2))#   5.587   0.025   5.647
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=2): medoids given
@@ -1295,7 +1295,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): medoids given
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.703   0.000   0.704 
+Time   0.677   0.004   0.681 
 > st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=3): medoids given
@@ -1306,7 +1306,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): medoids given
    swp new 2153 <-> 2001 old; decreasing diss. 1741.64 by -8.40201
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.373   0.000   0.373 
+Time   0.377   0.000   0.377 
 > st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=4): medoids given
@@ -1318,7 +1318,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.262   0.000   0.263 
+Time   0.273   0.000   0.272 
 > st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=5): medoids given
@@ -1330,11 +1330,11 @@ pam()'s bswap(*, s=15.7788, pamonce=5): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.233   0.000   0.232 
+Time   0.239   0.000   0.238 
 > show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
-                 5:orig  4:orig  3:orig  2:orig  1:orig
-Time  user.self 0.19712 0.22166 0.31557 0.59475 0.80795
-Time  sys.child     NaN     NaN     NaN     NaN     NaN
+                 5:orig  4:orig  3:orig  2:orig 1:orig
+Time  user.self 0.18258 0.20856 0.28801 0.51719 0.7372
+Time  sys.child     NaN     NaN     NaN     NaN    NaN
 > 
 > ## only call element is not equal
 > stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
@@ -1356,7 +1356,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.757   0.000   1.757 
+Time    1.59    0.00    1.59 
 > st1 <- showSys.time(pamxoncest  <- pam(x, 4, medoids = med0, pamonce=TRUE, trace.lev=2))#  8.384   0.024   8.459
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=1): medoids given
@@ -1368,7 +1368,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   1.141   0.000   1.140 
+Time   1.104   0.000   1.105 
 > st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace.lev=2))#  5.455   0.030   5.520
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=2): medoids given
@@ -1380,7 +1380,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.769   0.004   0.772 
+Time   0.765   0.000   0.766 
 > st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=3): medoids given
@@ -1392,7 +1392,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): medoids given
    swp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.435   0.000   0.435 
+Time   0.436   0.000   0.436 
 > st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=4): medoids given
@@ -1404,7 +1404,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): medoids given
    fswp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.373   0.000   0.373 
+Time   0.383   0.000   0.383 
 > st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
 C pam(): computing 3779876 dissimilarities from  2750 x 2  matrix: [Ok]
 pam()'s bswap(*, s=15.7788, pamonce=5): medoids given
@@ -1416,11 +1416,11 @@ pam()'s bswap(*, s=15.7788, pamonce=5): medoids given
    fswp new 1793 <-> 1421 old; decreasing diss. 1733.25 by -0.00639415
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.311   0.000   0.311 
+Time   0.322   0.000   0.323 
 > show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
-                 5:orig  4:orig  3:orig  2:orig 1:orig
-Time  user.self 0.17701 0.21229 0.24758 0.43768 0.6494
-Time  sys.child     NaN     NaN     NaN     NaN    NaN
+                 5:orig  4:orig  3:orig  2:orig  1:orig
+Time  user.self 0.20252 0.24088 0.27421 0.48113 0.69434
+Time  sys.child     NaN     NaN     NaN     NaN     NaN
 > 
 > ## only call element is not equal
 > stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
@@ -1450,7 +1450,7 @@ pam()'s bswap(*, s=15.7788, pamonce=0): medoids given
    swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   4.207   0.000   4.207 
+Time   4.607   0.000   4.607 
 > stopifnot(identical(med0, 1:6))
 > med0 <- (1:6)
 > st1 <- showSys.time(pamxst.1 <- pam(x, 6, medoids = med0 , pamonce=1, trace.lev=2))
@@ -1470,7 +1470,7 @@ pam()'s bswap(*, s=15.7788, pamonce=1): medoids given
    swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   3.094   0.000   3.094 
+Time   3.109   0.000   3.110 
 > stopifnot(identical(med0, 1:6))
 > med0 <- (1:6)
 > st2 <- showSys.time(pamxst.2 <- pam(x, 6, medoids = med0 , pamonce=2, trace.lev=2))
@@ -1490,7 +1490,7 @@ pam()'s bswap(*, s=15.7788, pamonce=2): medoids given
    swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   2.081   0.000   2.081 
+Time   2.101   0.000   2.101 
 > stopifnot(identical(med0, 1:6))
 > med0 <- (1:6)
 > st3 <- showSys.time(pamxst.3 <- pam(x, 6, medoids = med0 , pamonce=3, trace.lev=2))
@@ -1510,7 +1510,7 @@ pam()'s bswap(*, s=15.7788, pamonce=3): medoids given
    swp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.727   0.000   0.726 
+Time   0.768   0.000   0.768 
 > stopifnot(identical(med0, 1:6))
 > med0 <- (1:6)
 > st4 <- showSys.time(pamxst.4 <- pam(x, 6, medoids = med0 , pamonce=4, trace.lev=2))
@@ -1530,7 +1530,7 @@ pam()'s bswap(*, s=15.7788, pamonce=4): medoids given
    fswp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.537   0.000   0.538 
+Time   0.558   0.000   0.558 
 > stopifnot(identical(med0, 1:6))
 > med0 <- (1:6)
 > st5 <- showSys.time(pamxst.5 <- pam(x, 6, medoids = med0 , pamonce=5, trace.lev=2))
@@ -1550,7 +1550,7 @@ pam()'s bswap(*, s=15.7788, pamonce=5): medoids given
    fswp new 2082 <-> 2696 old; decreasing diss. 1570.26 by -0.187256
 end{bswap()}, end{cstat()}
 Time    user  system elapsed 
-Time   0.442   0.000   0.442 
+Time    0.46    0.00    0.46 
 > stopifnot(identical(med0, 1:6))
 > stopifnot(all.equal(pamxst[-icall], pamxst.1 [-icall]),
 +           all.equal(pamxst[-icall], pamxst.2 [-icall]),
@@ -1561,9 +1561,9 @@ Time   0.442   0.000   0.442
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  23.753 0.043 23.803 0 0 
+Time elapsed:  24.411 0.036 24.447 0 0 
 > 
 > 
 > proc.time()
    user  system elapsed 
- 23.852   0.071  23.923 
+ 24.526   0.057  24.577 

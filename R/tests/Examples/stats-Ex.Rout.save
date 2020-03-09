@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-03 r1214) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-03 r77764) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3916,7 +3916,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x556b572e73f0>
+<environment: 0x55fba9b60e38>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4953,7 +4953,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x556b5a9ded80>
+<bytecode: 0x55fbaca2e4e0>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7578,7 +7578,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x556b5bd7a078>
+<environment: 0x55fbaf33d470>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12268,14 +12268,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x556b5a6dfdf0>
-<environment: 0x556b5a6ecd50>
+<bytecode: 0x55fbac9171f8>
+<environment: 0x55fbac921460>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x556b5a6dfca0>
-<environment: 0x556b5a6ecd50>
+<bytecode: 0x55fbac9170a8>
+<environment: 0x55fbac921460>
 
 > 
 > 
@@ -16468,8 +16468,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x556b5b7d75c0>
-<environment: 0x556b5db63930>
+<bytecode: 0x55fbad7d94f8>
+<environment: 0x55fbacc25980>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18878,7 +18878,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.337 0.156 5.493 0 0 
+Time elapsed:  5.077 0.16 5.237 0 0 
 > grDevices::dev.off()
 null device 
           1 

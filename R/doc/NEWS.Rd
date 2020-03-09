@@ -13,7 +13,8 @@
 
        \item \R now builds by default against a PCRE2 library for Perl-like
        regular expressions if available at build time on non-Windows
-       platforms (otherwise PCRE1 is used as in older versions of \R).
+       platforms (otherwise PCRE1 is used as in older versions of \R). On
+       Windows, \R always builds against PCRE2 by default.
 
        PCRE2 is stricter in some cases and reports errors for some
        regular expressions that were accepted by PCRE1.  A hyphen now
@@ -52,8 +53,34 @@
        contain the closing sequence \samp{)"}. %}) \samp{*}: Rd-parser bug for \code{*}"
        This makes it easier to write strings that contain backslashes or
        both single and double quotes.  For more details see \code{?Quotes}.
+
+       \item \code{N <- NULL; N[[1]] <- val} now turns \code{N} into a
+       \code{list} also when \code{length(val) == 1}, consistently.  This
+       also enables \code{dimnames(r1)[[1]] <- "R1"} for a 1-row matrix
+       \code{r1}, fixing \PR{17719}, reported by Serguei Sokol.
+
+       \item \code{deparse(..)}, \code{dump(..)}, and \code{dput(x,
+	 control="all")} now include using control option \code{"digits17"}
+       which typically ensures 1:1 invertibility.  New option \code{control
+	 = "exact"} ensures numeric exact invertibility via \code{"hexDigits"}.
+
+       \item \R now uses a \samp{stringsAsFactors = FALSE} default, and
+       hence by default no longer converts strings to factors in calls
+       to \code{data.frame()} and \code{read.table()}.
+
+       \item When loading data sets via \code{read.table()},
+       \code{data()} now uses \samp{LC_COLLATE=C} to ensure locale
+       independent results for possible string to factor conversions.
+
+       \item The \code{plot()} generic function is now in package
+       \pkg{base} rather than package \pkg{graphics}, as it is
+       reasonable to have methods that do not use the \pkg{graphics}
+       package. The generic is currently re-exported from the
+       \pkg{graphics} namespace to allow packages importing it from
+       there to continue working, but this may change in future versions
+       of \R.
      }
-  }
+   }
 
   \subsection{NEW FEATURES}{
     \itemize{
@@ -236,6 +263,39 @@
       to be kept fixed. NB: This has required a minor extension to class
       \code{"mle"}, so saved objects from earlier versions may need to
       be recomputed.
+
+      \item The default for \code{pdf()} is now
+      \code{useDingbats = FALSE}.
+
+      \item The default (fill colour) for both \code{hist()} and
+      \code{boxplot()} is now \code{col = "lightgray"}.
+
+      \item The default order of the levels on the y-axis
+      for both \code{spineplot()} and \code{cdplot()}
+      has been reversed.
+
+      \item If the \env{R_ALWAYS_INSTALL_TESTS} environment variable is
+      set to a true value, \command{R CMD INSTALL} behaves as if
+      the \option{--install-tests} option is always specified. Thanks to
+      Reinhold Koch for the suggestion.
+
+      \item New function \code{R_user_dir()} in package \pkg{tools} for
+      paths appropriate for storing R-related user-specific data,
+      configuration and cache files.
+
+      \item \code{capabilities()} gains a new logical option \code{Xchk}
+      to avoid warnings about X11-related capabilities.
+
+      \item The internal implementation of \pkg{grid} units has changed,
+      but the only visible effect at user-level should be: a slightly
+      different print format for some units (especially unit
+      arithmetic); faster performance (for unit operations); and two new
+      functions \code{unitType()} and \code{unit.psum()}.  Original code
+      contributed by Thomas Lin Pedersen.
+
+      \item When internal dispatch for \code{rep.int()}
+      and \code{rep_len()} fails, there is an attempt to dispatch on the
+      equivalent call to \code{rep()}.
     }
   }% end{ NEW FEATURES }
 
@@ -296,6 +356,11 @@
       \item Header \file{R_ext/Print.h} defines \samp{R_USE_C99_IN_CXX}
       and hence exposes \code{Rvprintf} and \code{REprintf} if used with
       a C++11 compiler.
+
+      \item There are new Fortran subroutines \code{dblepr1},
+      \code{realpr1} and \code{intpr1} to print a scalar variable
+      (\command{gfortran} 10 enforces the distinction between scalars
+      and length-one arrays).  Also \code{labelpr} to print just a label.
     }
   }
 
@@ -333,6 +398,9 @@
       \item \command{R CMD check} now optionally checks
       \command{configure} and \command{cleanup} scripts for
       non-Bourne-shell code (\sQuote{bashisms}).
+
+      \item \command{R CMD check --as-cran} now uses a
+      \samp{stringsAsFactors = FALSE} default setting.
     }
   }
 
@@ -408,10 +476,10 @@
       \code{*.colors()} functions and \code{rainbow()} behave
       consistently and have the same non-explicit default (\PR{17659}).
 
-      \item \code{dnorm} had a problematic corner case with \code{sd == -Inf} and
-      negative \code{sd} was not flagged as error in all cases. Thanks to Stephen
-      D. Weigand for reporting and Wang Jiefei for analyzing this; similar
-      change in \code{dlnorm()}.
+      \item \code{dnorm} had a problematic corner case with \code{sd ==
+      -Inf} and negative \code{sd} was not flagged as error in all
+      cases. Thanks to Stephen D. Weigand for reporting and Wang Jiefei
+      for analyzing this; similar change in \code{dlnorm()}.
 
       \item The optional \code{iter.smooth} argument of \code{plot.lm()},
       i.e., the \code{plot()} method for \code{lm} and \code{glm} fits, now
@@ -426,9 +494,10 @@
       residuals, leading to inconsistencies.  Replaced with usual weighted
       version. (\PR{16056})
 
-      \item Time-series \code{ts(*, start, end, frequency)} with fractional
-      \code{frequency} are supported more consistently; thanks to a report
-      from Johann Kleinbub and analysis and patch by Duncan Murdoch in \PR{17669}.
+      \item Time-series \code{ts(*, start, end, frequency)} with
+      fractional \code{frequency} are supported more consistently;
+      thanks to a report from Johann Kleinbub and analysis and patch by
+      Duncan Murdoch in \PR{17669}.
 
       \item \code{mcmapply} in case of errors now preserves attributes of
       returned \code{"try-error"} objects and avoids simplification,
@@ -481,11 +550,19 @@
       inheritance relationships across packages.
 
       \item \code{norm(diag(c(1, NA)), "2")} now works.
+
+      \item \code{subset()} had problems with 0-col dataframe (Bill Dunlap,
+      \PR{17721})
+
+      \item Several cases of integer overflow detected by the
+      \sQuote{undefined behaviour analyser} of clang 10 have been
+      circumvented.  One in \code{rhyper()} may change the generated
+      value for large input values.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.6.2 patched}{
+\section{\Rlogo CHANGES IN R 3.6.3}{
 
   \subsection{NEW FEATURES}{
     \itemize{

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.0.0\n"
-"POT-Creation-Date: 2019-10-03 21:30\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,6 @@ msgstr ""
 #: R/ls.R: 0
 #: R/ls.R: 0
 #: R/primitives.R: 0
-#: R/unit.R: 0
 #. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edit", dQuote("gEdit"))
 #. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edits", dQuote("gEditList"))
 #. R/frames.R: gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame"))
@@ -168,7 +167,6 @@ msgstr ""
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
-#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
 
 msgid "'%s' argument is not an object of class %s"
 msgstr ""
@@ -255,6 +253,13 @@ msgstr ""
 
 
 #: R/unit.R: 0
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr ""
+
+
+#: R/unit.R: 0
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
 
 msgid "'Summary' function '%s' not meaningful for units"
@@ -304,13 +309,6 @@ msgstr ""
 #. R/grob.R: stop("'gPath' does not specify a valid child")
 
 msgid "'gPath' does not specify a valid child"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
-
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
 
@@ -466,9 +464,9 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)", call. = FALSE)
 
-msgid "Class 'unit.arithmetic' [1:%d]"
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
 
@@ -494,16 +492,9 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("Value being assigned must be a unit")
+#. R/unit.R: stop("Not a unit object")
 
-msgid "Value being assigned must be a unit"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("Zero arguments where at least one expected")
-
-msgid "Zero arguments where at least one expected"
+msgid "Not a unit object"
 msgstr ""
 
 
@@ -537,11 +528,9 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("can't divide with a unit")
 
-msgid "cannot mix signs of indices"
+msgid "can't divide with a unit"
 msgstr ""
 
 
@@ -597,23 +586,17 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
 
-msgid "index out of bounds ('unit' subsetting)"
+msgid "index must be of length 1"
 msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
 
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("index out of bounds (unit list subsetting)")
-
-msgid "index out of bounds (unit list subsetting)"
+msgid "index out of bounds (\"unit\" subsetting)"
 msgstr ""
 
 
@@ -627,11 +610,9 @@ msgstr ""
 
 #: R/grob.R: 0
 #: R/ls.R: 0
-#: R/unit.R: 0
 #. R/grob.R: gettextf("invalid '%s' argument", "vp")
 #. R/grob.R: gettextf("invalid '%s' argument", "result")
 #. R/ls.R: gettextf("invalid '%s' argument", "print")
-#. R/unit.R: gettextf("invalid '%s' argument", "x")
 
 msgid "invalid '%s' argument"
 msgstr ""
@@ -834,13 +815,6 @@ msgid "invalid vertical justification"
 msgstr ""
 
 
-#: R/unit.R: 0
-#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
-
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr ""
-
-
 #: R/grob.R: 0
 #. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
 
@@ -930,34 +904,6 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
-
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("no arguments where at least one expected")
-
-msgid "no arguments where at least one expected"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
-
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("non-NULL value supplied for plain unit")
-
-msgid "non-NULL value supplied for plain unit"
-msgstr ""
-
-
-#: R/unit.R: 0
 #. R/unit.R: stop("non-unit operand must be numeric")
 #. R/unit.R: stop("non-unit operand must be numeric")
 
@@ -1018,6 +964,13 @@ msgstr ""
 #. R/unit.R: gettextf("operator '%s' not meaningful for units", .Generic)
 
 msgid "operator '%s' not meaningful for units"
+msgstr ""
+
+
+#: R/unit.R: 0
+#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+
+msgid "replacement must be of length 1"
 msgstr ""
 
 

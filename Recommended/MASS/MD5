@@ -159,8 +159,8 @@ e115b6652f43dd3301f0532c97d1121a *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
-fa052ae3b46ed77bfaf2bdcbf35c8c69 *po/R-MASS.pot
-fbde3ebc1e003a0974f83f29367d647f *po/MASS.pot
+8d2770e9dddaa89e3ecd3ad204c5f535 *po/R-MASS.pot
+830aacb25abd40f7907d6ce0387eb2ee *po/MASS.pot
 416f9922dd5db11e3dc388715612d1e7 *po/R-pl.po
 94b6181a8553f060ca45778ded4e090b *po/pl.po
 e0d1ab11f24f7e3ff569541429d65825 *LICENCE.note
@@ -183,7 +183,7 @@ caebd3270cdb7268117f8a5a0cddd7be *inst/scripts/ch15.R
 ea5ee8654eb44d16e07c4d8aa214ce4d *inst/scripts/ch01.R
 793b62dd2329642c3e5e9af5962a0f59 *inst/scripts/ch12.R
 eaccdbc382485cbba1a95f5cf61aa96d *inst/po/fr/LC_MESSAGES/R-MASS.mo
-09eb022b499bac40bf182911a08e038a *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
+79d7f36b1c53e4b98645ca8a2b3f615f *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
 40cf1769f25af93fcca0a72ae25b4e4e *inst/po/de/LC_MESSAGES/R-MASS.mo
 7dc1a726824f014bae222e1083f1b0e0 *inst/po/pl/LC_MESSAGES/R-MASS.mo
 92627b58b3a02db3fa16448be38c3395 *inst/po/ko/LC_MESSAGES/R-MASS.mo
@@ -192,12 +192,12 @@ cfe49768ecb548ac7f483e75ce75d0e0 *inst/NEWS
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
 80c50d5c299f0d0a4dbbb457a235faba *tests/lme.R
-794d85a08349ca706dbb2226f80eccb6 *tests/fitdistr.Rout.save
+bc6250483c67b62668e56529c57bd03a *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
-0ad0e7930a9888271ed0748a7405c971 *tests/regression.Rout.save
+d2bdd25be0a09cba42824bf9aa3a7b4e *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
-528e585b9fee418ce5de7390c078eb7b *tests/Examples/MASS-Ex.Rout.save
+c899cbc1c0b09b960ccb4671be157740 *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R

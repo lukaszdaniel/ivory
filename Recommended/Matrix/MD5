@@ -130,9 +130,9 @@ f177ecccd4b5433b4d552eacbe5a9e66 *DESCRIPTION
 a5a7d548fb7cdca901551b9813363dec *po/R-fr.po
 e441b5354efe728295e546471d92e546 *po/R-ko.po
 0882c38293829441439af325f93c78b8 *po/R-de.po
-b1749849af91ab047e766396240e690e *po/R-Matrix.pot
+01bc718e13f9ab9a799c244f784a67cf *po/R-Matrix.pot
 1df51ae488fd9369307c02e9ba247463 *po/R-pl.po
-cd2d10583c3a84dd4518ef16fac03667 *po/Matrix.pot
+921f66bae61c15669e471cd0d183fa95 *po/Matrix.pot
 f61728e1fb76058c88f135d1fc52dfc3 *po/de.po
 e23ab5be4fd03f0085929c32bcf59b46 *po/update-me.sh
 5e9675b5f5cf7c0a0a03662df4b73467 *po/fr.po
@@ -149,8 +149,8 @@ f70de7d5aac587e14befeb3888a3c543 *inst/test-tools-Matrix.R
 cfedb15048003110d0b3ac95356780a9 *inst/test-tools-1.R
 599946ccc3c785072deb526531c04bff *inst/po/fr/LC_MESSAGES/Matrix.mo
 49cb70f0c46f44d849965230f969a0cd *inst/po/fr/LC_MESSAGES/R-Matrix.mo
-465dc2abce61803689e04564f3704c07 *inst/po/en@quot/LC_MESSAGES/Matrix.mo
-dcccf7299feca2b368f5fcb4e63ffdd1 *inst/po/en@quot/LC_MESSAGES/R-Matrix.mo
+1bee225e4ff0a359d2664bd44e1f2388 *inst/po/en@quot/LC_MESSAGES/Matrix.mo
+56181eb12c90fd8a0eceaaa532a0b393 *inst/po/en@quot/LC_MESSAGES/R-Matrix.mo
 208816dbc4585b909718a0bbad73c525 *inst/po/de/LC_MESSAGES/Matrix.mo
 9a3bc72546c8f945c7f99150d6f0ae73 *inst/po/de/LC_MESSAGES/R-Matrix.mo
 d7ddf54f0c4231c3b7a37a5a25c2c3f3 *inst/po/pl/LC_MESSAGES/Matrix.mo
@@ -210,8 +210,8 @@ c97e1324fa0cacc27329e49f77248125 *tests/factorizing.R
 92213c349590000081de59b1fb21bebe *tests/Class+Meth.R
 4966b9ac5a23de46814439a84174973b *tests/abIndex-tsts.R
 7723c00eb9f4ef3b3b2149da6b1a9621 *tests/validObj.R
-bd9192756875d62873651eb15cc40ba1 *tests/indexing.Rout.save
-9b2e2cd6225c67b0387b7feec2679a81 *tests/bind.Rout.save
+a210c0156b7d375624c1adc4dad1c8cd *tests/indexing.Rout.save
+30591c8ae554034a1bcd08f08c978720 *tests/bind.Rout.save
 f2ad5375e270deeb7b041272dd095032 *cleanup
 cac2aed2748ce92e00d6a59c1120619d *R/eigen.R
 89906a3cd04333869a7c68a5105f1d37 *R/dgTMatrix.R

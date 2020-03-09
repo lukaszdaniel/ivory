@@ -519,6 +519,37 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
 .ORCID_iD_variants_regexp <-
     sprintf("^<?((https?://|)orcid.org/)?(%s)>?$", .ORCID_iD_regexp)
 
+.ORCID_iD_db_from_package_sources <-
+function(dir)
+{
+    meta <- .read_description(file.path(dir, "DESCRIPTION"))
+    ids1 <- ids2 <- character()
+    if(!is.na(aar <- meta["Authors@R"])) {
+        aar <- tryCatch(utils:::.read_authors_at_R_field(aar),
+                        error = identity)
+        if(!inherits(aar, "error")) {
+            ids1 <- unlist(lapply(aar,
+                                  function(e) {
+                                      e <- e$comment
+                                      e[names(e) == "ORCID"]
+                                  }),
+                           use.names = FALSE)
+        }
+    }
+    if(file.exists(cfile <- file.path(dir, "inst", "CITATION"))) {
+        cinfo <- .read_citation_quietly(cfile, meta)
+        if(!inherits(cinfo, "error"))
+            ids2 <- unlist(lapply(cinfo$author,
+                                  function(e) {
+                                      e <- e$comment
+                                      e[names(e) == "ORCID"]
+                                  }),
+                           use.names = FALSE)
+    }
+    rbind(if(length(ids1)) cbind(ids1, "DESCRIPTION"),
+          if(length(ids2)) cbind(ids2, "inst/CITATION"))
+}
+
 ### ** .vc_dir_names
 
 ## Version control directory names: CVS, .svn (Subversion), .arch-ids
@@ -862,8 +893,9 @@ function(primitive = TRUE) # primitive means 'include primitives'
     out <-
         ## Get the names of R internal S3 generics (via DispatchOrEval(),
         ## cf. ?InternalMethods).
-        c("[", "[[", "$", "[<-", "[[<-", "$<-",
+        c("[", "[[", "$", "[<-", "[[<-", "$<-", "@<-",
           "as.vector", "cbind", "rbind", "unlist",
+          "is.unsorted", "lengths", "nchar", "rep.int", "rep_len",
           .get_S3_primitive_generics()
           ## ^^^^^^^ now contains the members of the group generics from
           ## groupGeneric.Rd.
@@ -1113,15 +1145,28 @@ function(include_group_generics = TRUE)
 {
     if(include_group_generics)
         c(base::.S3PrimitiveGenerics,
-          "abs", "sign", "sqrt", "floor", "ceiling", "trunc", "round",
-          "signif", "exp", "log", "expm1", "log1p",
-          "cos", "sin", "tan", "acos", "asin", "atan",
-          "cosh", "sinh", "tanh", "acosh", "asinh", "atanh",
+          ## Keep this in sync with ? groupGeneric:
+          ## Group 'Math':
+          "abs", "sign", "sqrt",
+          "floor", "ceiling", "trunc",
+          "round", "signif",
+          "exp", "log", "expm1", "log1p",
+          "cos", "sin", "tan",
+          "cospi", "sinpi", "tanpi",
+          "acos", "asin", "atan",
+          "cosh", "sinh", "tanh",
+          "acosh", "asinh", "atanh",
           "lgamma", "gamma", "digamma", "trigamma",
           "cumsum", "cumprod", "cummax", "cummin",
-          "+", "-", "*", "/", "^", "%%", "%/%", "&", "|", "!", "==",
-          "!=", "<", "<=", ">=", ">",
+          ## Group 'Ops':
+          "+", "-", "*", "/",
+          "^", "%%", "%/%",
+          "&", "|", "!",
+          "==", "!=",
+          "<", "<=", ">=", ">",
+          ## Group 'Summary':
           "all", "any", "sum", "prod", "max", "min", "range",
+          ## Group 'Complex':
           "Arg", "Conj", "Im", "Mod", "Re")
     else
         base::.S3PrimitiveGenerics

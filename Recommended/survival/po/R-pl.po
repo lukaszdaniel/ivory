@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2019-11-12 19:56\n"
+"POT-Creation-Date: 2020-03-09 21:45\n"
 "PO-Revision-Date: 2018-07-17 21:24+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -116,7 +116,6 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/anova.coxph.penal.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
 #. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
-#. R/coxph.rvar.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/finegray.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/is.ratetable.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
 #. R/lines.aareg.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
@@ -137,12 +136,12 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/survfitKM.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #: R/aareg.R:0 R/aeqSurv.R:0 R/anova.coxph.R:0 R/anova.coxph.penal.R:0
-#: R/attrassign.R:0 R/basehaz.R:0 R/coxph.rvar.R:0 R/finegray.R:0
-#: R/is.ratetable.R:0 R/lines.aareg.R:0 R/plot.aareg.R:0 R/predict.coxph.R:0
-#: R/print.aareg.R:0 R/print.coxph.penal.R:0 R/print.survdiff.R:0
-#: R/print.survexp.R:0 R/print.survreg.penal.R:0 R/pspline.R:0
-#: R/quantile.survfit.R:0 R/summary.aareg.R:0 R/summary.ratetable.R:0
-#: R/summary.survexp.R:0 R/survfit.R:0 R/survfitKM.R:0 R/survfitTurnbull.R:0
+#: R/attrassign.R:0 R/basehaz.R:0 R/finegray.R:0 R/is.ratetable.R:0
+#: R/lines.aareg.R:0 R/plot.aareg.R:0 R/predict.coxph.R:0 R/print.aareg.R:0
+#: R/print.coxph.penal.R:0 R/print.survdiff.R:0 R/print.survexp.R:0
+#: R/print.survreg.penal.R:0 R/pspline.R:0 R/quantile.survfit.R:0
+#: R/summary.aareg.R:0 R/summary.ratetable.R:0 R/summary.survexp.R:0
+#: R/survfit.R:0 R/survfitKM.R:0 R/survfitTurnbull.R:0
 msgid "'%s' argument is not an object of class %s"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
@@ -1139,14 +1138,9 @@ msgstr "Skala = %s"
 msgid "Score (logrank) test = %s on %s df, p=%s"
 msgstr "Test punktów (logarytm rang) = %s dla %s stopni swobody, p=%s"
 
-#. R/plot.cox.zph.R: stop("Spline fit is singular, try a smaller degrees of freedom")
-#: R/plot.cox.zph.R:0
-msgid "Spline fit is singular, try a smaller degrees of freedom"
-msgstr ""
-"Dopasowanie splajnu jest osobliwe, spróbuj mniejszej liczby stopni swobody"
-
 #. R/print.coxph.R: gettext(" States: ", domain = "R-survival")
-#: R/print.coxph.R:0
+#. R/print.summary.coxph.R: gettext("States:", domain = "R-survival")
+#: R/print.coxph.R:0 R/print.summary.coxph.R:0
 msgid "States:"
 msgstr ""
 
@@ -2523,6 +2517,12 @@ msgstr ""
 msgid "multi-state computation doesn't support \"%s\" survival data"
 msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 
+#. R/coxph.R: stop("multi-state coxph does not support strata*covariate interactions")
+#: R/coxph.R:0
+#, fuzzy
+msgid "multi-state coxph does not support strata*covariate interactions"
+msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
+
 #. R/survfit.matrix.R: stop("multi-state curves are not a valid input")
 #: R/survfit.matrix.R:0
 msgid "multi-state curves are not a valid input"
@@ -2898,6 +2898,11 @@ msgstr ""
 msgid "reference distribution was not found"
 msgstr "rozkład referencyjny nie został znaleziony"
 
+#. R/tmerge.R: gettextf("replacement of variable '%s'", argname[ii])
+#: R/tmerge.R:0
+msgid "replacement of variable '%s'"
+msgstr ""
+
 #. R/aareg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/anova.survreg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/cch.R: gettextf("response is not an object of class %s", dQuote("Surv"))
@@ -2971,6 +2976,13 @@ msgstr ""
 #: R/coxpenal.fit.R:0 R/survcallback.R:0 R/survpenal.fit.R:0
 msgid "sparse term must be single column"
 msgstr "człon 'sparse' musi być pojedynczą kolumną"
+
+#. R/plot.cox.zph.R: gettextf("spline fit is singular, variable %d skipped", i)
+#: R/plot.cox.zph.R:0
+#, fuzzy
+msgid "spline fit is singular, variable %d skipped"
+msgstr ""
+"Dopasowanie splajnu jest osobliwe, spróbuj mniejszej liczby stopni swobody"
 
 #. R/survSplit.R: stop("start time must be < stop time")
 #: R/survSplit.R:0

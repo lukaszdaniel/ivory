@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2019-02-08 18:34\n"
+"POT-Creation-Date: 2020-03-09 21:44\n"
 "PO-Revision-Date: 2015-01-17 15:11+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -139,9 +139,7 @@ msgstr "'x'，'y'和'id'的长度必需相同"
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
 #. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
-#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
 #: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
-#: R/unit.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
 msgstr "'x'参数必需是单元对象"
@@ -219,6 +217,11 @@ msgid ""
 "'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1"
 msgstr "'x', 'y', 'width'和'height'都应该是长度为一的单元值"
 
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr ""
+
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
 #: R/unit.R:0
 msgid "'Summary' function '%s' not meaningful for units"
@@ -262,11 +265,6 @@ msgstr "不存在'gPath'(%s)"
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr "'gPath'没有设定正确的子值"
-
-#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
-#: R/unit.R:0
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr "'grobwidth/height'单元值里的'gPath'其深度必需为一"
 
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
@@ -398,9 +396,9 @@ msgstr "'x'和'unit'的长度必需大于零"
 msgid "'x0', 'y0', 'x1', and 'y1' must be units"
 msgstr "'x0', 'y0', 'x1'和'y1'必需为单元值"
 
-#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
-msgid "Class 'unit.arithmetic' [1:%d]"
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
 #. R/grob.R: stop("Invalid force target")
@@ -420,16 +418,11 @@ msgstr "视口名字不对"
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "新的'grob'名(%s) 与原来的'gPath'(%s) 名不相配"
 
-#. R/unit.R: stop("Value being assigned must be a unit")
+#. R/unit.R: stop("Not a unit object")
 #: R/unit.R:0
 #, fuzzy
-msgid "Value being assigned must be a unit"
-msgstr "x和y必需为单元值"
-
-#. R/unit.R: stop("Zero arguments where at least one expected")
-#: R/unit.R:0
-msgid "Zero arguments where at least one expected"
-msgstr "不能没有参数，至少需要有一个"
+msgid "Not a unit object"
+msgstr "单元对象不对"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -456,13 +449,10 @@ msgstr "至少需要设定'width'或'height'中的一个"
 msgid "both operands must be units"
 msgstr "两个运算对象都必需为单元"
 
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
-#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
-#, fuzzy
-msgid "cannot mix signs of indices"
-msgstr "不能混用索引符号"
+msgid "can't divide with a unit"
+msgstr ""
 
 #. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
 #: R/frames.R:0
@@ -512,23 +502,18 @@ msgstr "grob推了视口，但没有将它弹起来(grab有可能不保持原状
 msgid "how did we get here?"
 msgstr "是怎么到这里的？"
 
-#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
+#. R/unit.R: stop("index must be of length 1", call = FALSE)
 #: R/unit.R:0
 #, fuzzy
-msgid "index out of bounds ('unit' subsetting)"
+msgid "index must be of length 1"
+msgstr "'x'和'y'必需是长度为一的单元"
+
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (\"unit\" subsetting)"
 msgstr "索引值出界(取单元子集时)"
-
-#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr "索引值出界(取单元数字子集时)"
-
-#. R/unit.R: stop("index out of bounds (unit list subsetting)")
-#: R/unit.R:0
-#, fuzzy
-msgid "index out of bounds (unit list subsetting)"
-msgstr "索引值出界(取单元串子集时)"
 
 #. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
 #. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
@@ -540,8 +525,7 @@ msgstr "'grob'的类别不对"
 #. R/grob.R: gettextf("invalid '%s' argument", "vp")
 #. R/grob.R: gettextf("invalid '%s' argument", "result")
 #. R/ls.R: gettextf("invalid '%s' argument", "print")
-#. R/unit.R: gettextf("invalid '%s' argument", "x")
-#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#: R/grob.R:0 R/ls.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "'grob'参数值不对"
@@ -700,12 +684,6 @@ msgstr "'at'是NULL的话不能设定轴标签"
 msgid "invalid vertical justification"
 msgstr "垂直定位不对"
 
-#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
-#: R/unit.R:0
-#, fuzzy
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr "不能将单元对象同其它类别的对象相结合"
-
 #. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
 #: R/grob.R:0
 #, fuzzy
@@ -787,30 +765,6 @@ msgstr "只能用正确的'gpar'名字"
 msgid "must start new page if showing leaves separately"
 msgstr "如果分别显示树叶的话需要重新开一页"
 
-#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr "'grobwidth/height'单元值缺少'grob'的值"
-
-#. R/unit.R: stop("no arguments where at least one expected")
-#: R/unit.R:0
-#, fuzzy
-msgid "no arguments where at least one expected"
-msgstr "不能没有参数，至少需要有一个"
-
-#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr "'strwidth/height'单元值缺少字符串"
-
-#. R/unit.R: stop("non-NULL value supplied for plain unit")
-#: R/unit.R:0
-#, fuzzy
-msgid "non-NULL value supplied for plain unit"
-msgstr "简单单元里不能有非NULL值"
-
 #. R/unit.R: stop("non-unit operand must be numeric")
 #. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
@@ -866,6 +820,12 @@ msgstr "'vpStack'里的值只能是视口"
 #, fuzzy
 msgid "operator '%s' not meaningful for units"
 msgstr "运算符号'%s'对这个单元没有意义"
+
+#. R/unit.R: stop("replacement must be of length 1", call = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "replacement must be of length 1"
+msgstr "'x'和'unit'的长度必需大于零"
 
 #. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
 #: R/zzz.R:0
@@ -924,6 +884,48 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "视口名字不对"
 
+#~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+#~ msgstr "'grobwidth/height'单元值里的'gPath'其深度必需为一"
+
+#, fuzzy
+#~ msgid "Value being assigned must be a unit"
+#~ msgstr "x和y必需为单元值"
+
+#~ msgid "Zero arguments where at least one expected"
+#~ msgstr "不能没有参数，至少需要有一个"
+
+#, fuzzy
+#~ msgid "cannot mix signs of indices"
+#~ msgstr "不能混用索引符号"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit arithmetic subsetting)"
+#~ msgstr "索引值出界(取单元数字子集时)"
+
+#, fuzzy
+#~ msgid "index out of bounds (unit list subsetting)"
+#~ msgstr "索引值出界(取单元串子集时)"
+
+#, fuzzy
+#~ msgid "it is invalid to combine 'unit' objects with other types"
+#~ msgstr "不能将单元对象同其它类别的对象相结合"
+
+#, fuzzy
+#~ msgid "no 'grob' supplied for 'grobwidth/height' unit"
+#~ msgstr "'grobwidth/height'单元值缺少'grob'的值"
+
+#, fuzzy
+#~ msgid "no arguments where at least one expected"
+#~ msgstr "不能没有参数，至少需要有一个"
+
+#, fuzzy
+#~ msgid "no string supplied for 'strwidth/height' unit"
+#~ msgstr "'strwidth/height'单元值缺少字符串"
+
+#, fuzzy
+#~ msgid "non-NULL value supplied for plain unit"
+#~ msgstr "简单单元里不能有非NULL值"
+
 #, fuzzy
 #~ msgid "Nothing on the display list"
 #~ msgstr "显示单修改得不对"
@@ -973,9 +975,6 @@ msgstr[0] "视口名字不对"
 #, fuzzy
 #~ msgid "'length' must be a 'unit' object"
 #~ msgstr "'length'的值必需是单元对象"
-
-#~ msgid "'x' and 'y' must all be units of length 1"
-#~ msgstr "'x'和'y'必需是长度为一的单元"
 
 #, fuzzy
 #~ msgid "'x', 'y', 'width', and 'height' components must be units"
@@ -1157,10 +1156,6 @@ msgstr[0] "视口名字不对"
 #, fuzzy
 #~ msgid "invalid 'rot' value"
 #~ msgstr "'rot'的值不对"
-
-#, fuzzy
-#~ msgid "invalid 'unit' object"
-#~ msgstr "单元对象不对"
 
 #, fuzzy
 #~ msgid "invalid 'frame'"
