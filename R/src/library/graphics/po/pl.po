@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-10 19:25+0100\n"
-"PO-Revision-Date: 2018-09-30 18:45+0200\n"
+"PO-Revision-Date: 2020-03-12 09:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: base.c:37
 msgid "no base graphics system is registered"
@@ -513,7 +513,7 @@ msgstr "'contour()': kołowa/długa lista segmentów -- ustawić %s > %d?"
 
 #: plot3d.c:1936
 msgid "no 'levels'"
-msgstr ""
+msgstr "brak 'levels'"
 
 #: plot3d.c:1940 plot3d.c:1947
 #, c-format
@@ -528,7 +528,7 @@ msgstr "oczekiwano rosnących wartości '%s'"
 #: plot3d.c:1954
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
-msgstr ""
+msgstr "nieskończone wartości poziomu: levels[%d] = %g"
 
 #: plot3d.c:1967
 msgid "all 'z' values are equal"

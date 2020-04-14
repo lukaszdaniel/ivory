@@ -1253,13 +1253,13 @@ static void InitMmapRealClass(DllInfo *dll)
 #ifdef Win32
 static void mmap_finalize(SEXP eptr)
 {
-    error(_("mmop objects not supported on Windows yet"));
+    error(_("mmap objects not supported on Windows yet"));
 }
 
 static SEXP mmap_file(SEXP file, int type, Rboolean ptrOK, Rboolean wrtOK,
 		      Rboolean serOK, Rboolean warn)
 {
-    error(_("mmop objects not supported on Windows yet"));
+    error(_("mmap objects not supported on Windows yet"));
 }
 #else
 /* derived from the example in
@@ -1517,6 +1517,11 @@ static const void *wrapper_Dataptr_or_null(SEXP x)
     return DATAPTR_OR_NULL(WRAPPER_WRAPPED(x));
 }
 
+static SEXP wrapper_Extract_subset(SEXP x, SEXP indx, SEXP call)
+{
+  return ExtractSubset(WRAPPER_WRAPPED(x), indx, call);
+}
+
 
 /*
  * ALTINTEGER Methods
@@ -1708,6 +1713,7 @@ static void InitWrapIntegerClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTINTEGER methods */
     R_set_altinteger_Elt_method(cls, wrapper_integer_Elt);
@@ -1732,6 +1738,7 @@ static void InitWrapLogicalClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTLOGICAL methods */
     R_set_altlogical_Elt_method(cls, wrapper_logical_Elt);
@@ -1756,6 +1763,7 @@ static void InitWrapRealClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTREAL methods */
     R_set_altreal_Elt_method(cls, wrapper_real_Elt);
@@ -1780,6 +1788,7 @@ static void InitWrapComplexClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTCOMPLEX methods */
     R_set_altcomplex_Elt_method(cls, wrapper_complex_Elt);
@@ -1802,6 +1811,7 @@ static void InitWrapRawClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTRAW methods */
     R_set_altraw_Elt_method(cls, wrapper_raw_Elt);
@@ -1824,6 +1834,7 @@ static void InitWrapStringClass(DllInfo *dll)
     /* override ALTVEC methods */
     R_set_altvec_Dataptr_method(cls, wrapper_Dataptr);
     R_set_altvec_Dataptr_or_null_method(cls, wrapper_Dataptr_or_null);
+    R_set_altvec_Extract_subset_method(cls, wrapper_Extract_subset);
 
     /* override ALTSTRING methods */
     R_set_altstring_Elt_method(cls, wrapper_string_Elt);
@@ -1951,7 +1962,7 @@ SEXP attribute_hidden do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* When a wrapper has no useful meta-data, is no longer referenced
-   anywhere, and its data is unly accessible from the wrapper, then
+   anywhere, and its data is only accessible from the wrapper, then
    the wrapper can be unwrapped to its wrapped data, and its
    attributes can be transferred to the data.
 

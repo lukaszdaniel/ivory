@@ -1529,7 +1529,7 @@ function(package)
         if(sum(.call_names(calls) == "loadNamespace") == 1L)
             signalCondition(e)
         else
-            invokeRestart("muffleWarning")
+            tryInvokeRestart("muffleWarning")
     }
     expr <- substitute(loadNamespace(package), list(package = package))
     invisible(withCallingHandlers(suppressMessages(eval(expr)),
@@ -1730,6 +1730,7 @@ nonS3methods <- function(package)
              sac = "cumsum.test",
              sfsmisc = "cumsum.test",
              sm = "print.graph",
+             spatstat = "lengths.psp",
              splusTimeDate = "sort.list",
              splusTimeSeries = "sort.list",
 	     stats = c("anova.lmlist", "expand.model.frame", "fitted.values",

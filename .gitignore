@@ -3,7 +3,7 @@
 *.o
 *.so
 *.ts
-
+*.mo
 
 .Rhistory
 R/autom4te.cache/*
@@ -125,3 +125,9 @@ R/tests/stats4.Rcheck/
 R/tests/tcltk.Rcheck/
 R/tests/tools.Rcheck/
 R/tests/utils.Rcheck
+R-devel/
+R-frozen/
+R-recommended/
+R-recommended-frozen/
+R/tests/*.Rcheck/
+R/tests/RecPackages/*/

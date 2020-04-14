@@ -259,7 +259,7 @@ d62d8d5c2c0643b47ade54dc0c12d036 *man/PBG.Rd
 cdf24b9b17c9a4057970ee1d9d4177a3 *man/getCovariate.corStruct.Rd
 ab97cb56b51d58e9905c8e6ee47da4b7 *man/nlsList.selfStart.Rd
 a29f4b3be852c55acdfc15b09c3ffca4 *man/ranef.lmList.Rd
-d844f58fda4c3ccaf533a92c88821e06 *man/Remifentanil.Rd
+3590b07df9e38bb3c145d208011decab *man/Remifentanil.Rd
 57595346850b70559bd5f5a00af2f3d1 *man/Alfalfa.Rd
 546284bab7b2c8451b6a45aaed224025 *man/IGF.Rd
 10bf2d3b61d0feb71c2def9f1c50c575 *man/Matrix.pdMat.Rd
@@ -284,8 +284,8 @@ b8bf3369965838b2dde2f82e6d8b9ba8 *man/predict.lmList.Rd
 6f56c20d173a1f99128799c5eda51873 *man/gls.Rd
 90931caface7ab83c19fba204c7ac818 *man/varComb.Rd
 967bf0c65e5a3f8c94efb6186482ade1 *LICENCE
-9d9b65f90fa13dadd97c7c8784f99e1a *ChangeLog
-8422f847a828deb1533407c9c3cf6f88 *DESCRIPTION
+455987c53b031fc69546ed30c7d462ed *ChangeLog
+6db2d8d4975ed4ce89f1331d3902d813 *DESCRIPTION
 3ca8715986b6bea70610e4cadb339fb0 *po/R-fr.po
 e3419ef4249ee866f3bcc092a096746e *po/R-ko.po
 c9c286a5731db93724b9f0e7b259f702 *po/R-de.po
@@ -410,7 +410,7 @@ c9d999719eb82ea836bb47b863fd6561 *data/Soybean.rda
 c6f5ef1b5d08f6621389253b526ab55c *data/Oxide.rda
 f75a266ee9d05d92f3d6a6fdb4165c51 *Changes
 716000afd0baf90c06b6b4c209654ccc *src/nlmefit.h
-05a1ae7a1a1aac450a8d484a90a26536 *src/nlmefit.c
+c6e060860e1ac4bdb709a2f3835ac98e *src/nlmefit.c
 ee1ee57435cd51e17eff7cfcb765d89b *src/init.c
 87f59f283d5378beccb42f205be507cf *src/pdMat.h
 4a6ee9d66b62b2838b5d54e20f04f8b0 *src/Makevars

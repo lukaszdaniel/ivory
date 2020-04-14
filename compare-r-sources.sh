@@ -6,12 +6,13 @@ source conf-names.sh
 X=$RECDEVEL
 Y=$RECBASE
 
-while getopts ":c" opt; do
+while getopts ":cs" opt; do
   case $opt in
     c)
       X=$DEVEL
       Y=$BASE
       ;;
+    s) simple="1";;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
@@ -29,7 +30,7 @@ else
    done
 fi;
 
-
+if test "${simple}" != "1"; then
 LC_ALL=C diff -qr --exclude=".svn" --exclude=".git" --exclude="translations" $X $Y | sort > $RANDSTRING
 if test `wc -l $RANDSTRING | cut -d" " -f1` -ne 0; then
    sed -n -e "s/Files \(.*\)* .*/o \1/p" $RANDSTRING | cut -d" " -f1,2
@@ -39,4 +40,6 @@ else
    echo "'"$X"' and '"$Y"' are identical"
 fi;
    rm $RANDSTRING
-# LC_ALL=C diff -qr --exclude=".svn" --exclude=".git" --exclude="translations" R-devel R-frozen | sort | sed -n -e "s/Files \(.*\)* and .*/ \1\\\\/p"
+else
+  LC_ALL=C diff -qr --exclude=".svn" --exclude=".git" --exclude="translations" $X $Y | sort | sed -n -e "s/Files \(.*\)* and .*/ \1\\\\/p"
+fi;

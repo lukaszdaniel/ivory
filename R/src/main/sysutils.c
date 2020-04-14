@@ -705,7 +705,7 @@ SEXP attribute_hidden do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			goto top_of_loop;
 		    }
 		    wchar_t wc;
-		    size_t clen = utf8toucs(&wc, inbuf);
+		    ssize_t clen = utf8toucs(&wc, inbuf);
 		    if(clen > 0 && inb >= clen) {
 			R_wchar_t ucs;
 			if (IS_HIGH_SURROGATE(wc))
@@ -933,7 +933,7 @@ next_char:
 	    /* if starting in UTF-8, use \uxxxx */
 	    /* This must be the first byte */
 	    wchar_t wc;
-	    size_t clen = utf8toucs(&wc, inbuf);
+	    ssize_t clen = utf8toucs(&wc, inbuf);
 	    if(clen > 0 && inb >= clen) {
 		R_wchar_t ucs;
 	    	if (IS_HIGH_SURROGATE(wc))
@@ -1342,7 +1342,7 @@ const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 	if(ce_out == CE_UTF8) {
 	    size_t nc = 3*strlen(x)+1; /* all in BMP */
 	    p = R_alloc(nc, 1);
-	    Rf_AdobeSymbol2utf8(p, x, nc);
+	    Rf_AdobeSymbol2utf8(p, x, nc, TRUE);
 	    return p;
 	} else return x;
     }

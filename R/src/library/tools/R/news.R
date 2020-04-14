@@ -1,7 +1,7 @@
 #  File src/library/tools/R/news.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2019 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -537,10 +537,10 @@ function(file, out = stdout(), codify = FALSE)
 }
 
 .build_news_db_from_R_NEWS_Rd <-
-function(file = NULL)
+function(file = NULL, Rfile = "NEWS.rds")
 {
     x <- if(is.null(file))
-        readRDS(file.path(R.home("doc"), "NEWS.rds"))
+        readRDS(file.path(R.home("doc"), Rfile))
     else {
         ## Expand \Sexpr et al now because this does not happen when using
         ## fragments.
@@ -549,7 +549,8 @@ function(file = NULL)
     }
 
     db <- .extract_news_from_Rd(x)
-    db <- db[db[,1L] != "CHANGES in previous versions",,drop = FALSE]
+    skip <- c("CHANGES in previous versions", "LATER NEWS", "OLDER NEWS")
+    db <- db[!(db[,1L] %in% skip),,drop = FALSE]
 
     ## Squeeze in an empty date column.
     .make_news_db(cbind(sub("^CHANGES IN (R )?(VERSION )?", "", db[, 1L]),
@@ -723,7 +724,7 @@ function(f)
     .xml_attr <- xml2::xml_attr
     .xml_name <- xml2::xml_name
     .xml_text <- xml2::xml_text
-    
+
     get_text_and_HTML <- function(sp) {
         ## Sourcepos sp already split into l1 c2 l2 c2, for legibility:
         l1 <- sp[1L]; c1 <- sp[2L]; l2 <- sp[3L]; c2 <- sp[4L]
@@ -785,7 +786,7 @@ function(f)
         } else {
             category <- ""
         }
-        
+
         if(!length(nodes))
             return(c(category, "", ""))
 
@@ -796,18 +797,18 @@ function(f)
         ## (If there is one node, nodes[c(1L, length(nodes))] would give
         ## that node only once.  Could also special case ...)
         sp <- as.integer(unlist(strsplit(sp, "[:-]"))[c(1L, 2L, 7L, 8L)])
-        
+
         c(category, get_text_and_HTML(sp))
     }
-         
+
     ind <- .xml_name(nodes) == "heading"
     pos <- which(ind)
     if(!length(pos)) return()
 
     ## Skip leading headings until we find one from which we can extract
-    ## a version number.  Then drop everything ahead of this, and take 
+    ## a version number.  Then drop everything ahead of this, and take
     ## all headings with the same level to start version chunks.
-    
+
     re_v <- sprintf("(^|.*[[:space:]]+)[vV]?(%s).*$",
                     .standard_regexps()$valid_package_version)
     while(length(pos) &&
@@ -870,7 +871,7 @@ function(x, ...)
                              decreasing = TRUE)]
     if(!length(vchunks))
         return(character())
-    
+
     dates <- sapply(vchunks, function(v) v$Date[1L])
     vheaders <-
         format(gettextf("Changes in version %s%s",
@@ -884,7 +885,7 @@ function(x, ...)
 }
 
 .news_db_has_no_bad_entries <-
-function(x)     
+function(x)
 {
     (is.null(bad <- attr(x, "bad")) ||
      (length(bad) == NROW(x)) && !any(bad))

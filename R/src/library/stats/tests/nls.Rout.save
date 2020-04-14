@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-03-09 r1218) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-03-09 r78226) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -105,12 +105,13 @@ a 1.00875 1.037847
 b 0.84138 0.914645
 c      NA 0.042807
 > 
-> ## weighted nls fit: unsupported < 2.3.0
+> ## weighted nls fit
 > set.seed(123)
 > y <- x <- 1:10
 > yeps <- y + rnorm(length(y), sd = 0.01)
 > wts <- rep(c(1, 2), length = 10); wts[5] <- 0
 > fit0 <- lm(yeps ~ x, weights = wts)
+> ## IGNORE_RDIFF_BEGIN
 > summary(fit0, cor = TRUE)
 
 Call:
@@ -135,6 +136,7 @@ Correlation of Coefficients:
   (Intercept)
 x -0.89      
 
+> ## IGNORE_RDIFF_END
 > cf0 <- coef(summary(fit0))[, 1:2]
 > fit <- nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
 +            weights = wts, trace = TRUE)
@@ -170,7 +172,6 @@ b -0.89
   1:     6.3964587:  1.34546 0.700840
   2: 0.00060639084: 0.00517053 0.999153
   3: 0.00060639084: 0.00517051 0.999153
-> ## IGNORE_RDIFF_END
 > summary(fit2, cor = TRUE)
 
 Formula: yeps ~ a + b * x
@@ -190,6 +191,7 @@ b -0.89
 
 Algorithm "port", convergence message: both X-convergence and relative convergence (5)
 
+> ## IGNORE_RDIFF_END
 > cf2 <- coef(summary(fit2))[, 1:2]
 > rownames(cf0) <- c("a", "b")
 > # expect relative errors ca 2e-08
@@ -749,4 +751,4 @@ Consider specifying 'start' or using a selfStart model
 > 
 > proc.time()
    user  system elapsed 
-  0.905   0.035   0.934 
+  1.002   0.028   1.023 

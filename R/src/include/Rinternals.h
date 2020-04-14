@@ -1032,6 +1032,7 @@ LibExtern SEXP	R_DollarSymbol;	    /* "$" */
 LibExtern SEXP	R_DotsSymbol;	    /* "..." */
 LibExtern SEXP	R_DoubleColonSymbol;// "::"
 LibExtern SEXP	R_DropSymbol;	    /* "drop" */
+LibExtern SEXP	R_EvalSymbol;	    /* "eval" */
 LibExtern SEXP	R_LastvalueSymbol;  /* ".Last.value" */
 LibExtern SEXP	R_LevelsSymbol;	    /* "levels" */
 LibExtern SEXP	R_ModeSymbol;	    /* "mode" */
@@ -1312,6 +1313,8 @@ SEXP R_tryCatch(SEXP (*)(void *), void *,       /* body closure*/
 		void (*)(void *), void *);      /* finally closure */
 SEXP R_tryCatchError(SEXP (*)(void *), void *,        /* body closure*/
 		     SEXP (*)(SEXP, void *), void *); /* handler closure */
+SEXP R_withCallingErrorHandler(SEXP (*)(void *), void *, /* body closure*/
+			       SEXP (*)(SEXP, void *), void *); /* handler closure */
 SEXP R_MakeUnwindCont();
 void NORET R_ContinueUnwind(SEXP cont);
 SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
@@ -1333,6 +1336,7 @@ void R_unLockBinding(SEXP sym, SEXP env);
 void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env);
 Rboolean R_BindingIsLocked(SEXP sym, SEXP env);
 Rboolean R_BindingIsActive(SEXP sym, SEXP env);
+SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
 Rboolean R_HasFancyBindings(SEXP rho);
 
 
@@ -1452,7 +1456,6 @@ Rboolean R_has_methods_attached(void);
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env);
 Rboolean R_extends  (SEXP class1, SEXP class2, SEXP env);
 SEXP R_do_new_object(SEXP class_def);
-SEXP R_do_new_object2(SEXP class_def);
 /* supporting  a C-level version of  is(., .) : */
 int R_check_class_and_super(SEXP x, const char **valid, SEXP rho);
 int R_check_class_etc      (SEXP x, const char **valid);

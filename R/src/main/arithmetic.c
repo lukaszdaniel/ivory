@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2019 The R Core Team.
+ *  Copyright (C) 1998--2020 The R Core Team.
  *  Copyright (C) 2003--2019 The R Foundation
  *  Copyright (C) 1995--1997 Robert Gentleman and Ross Ihaka
  *
@@ -179,8 +179,9 @@ void attribute_hidden InitArithmetic()
 
 
 #if HAVE_LONG_DOUBLE && (SIZEOF_LONG_DOUBLE > SIZEOF_DOUBLE)
-# ifdef __PPC64__
+# ifdef __powerpc__
  // PowerPC 64 (when gcc has -mlong-double-128) fails constant folding with LDOUBLE
+ // Debian Bug#946836 shows it is needed also for 32-bit ppc, not just __PPC64__
 #  define q_1_eps (1 / LDBL_EPSILON)
 # else
 static LDOUBLE q_1_eps = 1 / LDBL_EPSILON;
@@ -708,10 +709,12 @@ SEXP attribute_hidden R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 		setAttrib(val, R_DimNamesSymbol, ynames);
     }
     else {
-	if (XLENGTH(val) == xlength(xnames))
+	if (XLENGTH(val) == xlength(xnames)) {
 	    setAttrib(val, R_NamesSymbol, xnames);
-	else if (XLENGTH(val) == xlength(ynames))
+	}
+	else if (XLENGTH(val) == xlength(ynames)) {
 	    setAttrib(val, R_NamesSymbol, ynames);
+	}
     }
 
     if (xts || yts) {		/* must set *after* dims! */

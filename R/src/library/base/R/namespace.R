@@ -409,8 +409,8 @@ loadNamespace <- function (package, lib.loc = NULL,
                 stop(gettextf("package %s has not been installed properly\n", sQuote(package)), # == basename(pkgpath)
                      call. = FALSE, domain = "R-base")
             R_version_built_under <- as.numeric_version(built$R)
-            if(R_version_built_under < "3.0.0")
-                stop(gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package)), call. = FALSE, domain = "R-base")
+            if(R_version_built_under < "4.0.0")
+                stop(gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package)), call. = FALSE, domain = "R-base")
             ## we need to ensure that S4 dispatch is on now if the package
             ## will require it, or the exports will be incomplete.
             dependsMethods <- "methods" %in% names(pkgInfo$Depends)
@@ -427,7 +427,7 @@ loadNamespace <- function (package, lib.loc = NULL,
             vI <- NULL
         }
 
-        ## moved from library in R 3.4.0
+        ## moved from library() in R 3.4.0
         checkLicense <- function(pkg, pkgInfo, pkgPath)
         {
             L <- tools:::analyze_license(pkgInfo$DESCRIPTION["License"])

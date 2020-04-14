@@ -505,7 +505,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	if(isFALSE(ok)) {
 	    errors <- c(errors,
 			gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"", slotNames[[i]],
-			       Class, class(sloti), classi))
+			       Class, class(sloti)[[1L]], classi))
 	    next
 	}
 	if(!complete)

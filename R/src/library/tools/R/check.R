@@ -663,7 +663,7 @@ add_dummies <- function(dir, Log)
         ## see e.g.
         ## http://msdn.microsoft.com/library/default.asp?url=/library/en-us/fileio/fs/naming_a_file.asp
         ## http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29.aspx#naming_conventions
-        ## and http://en.wikipedia.org/wiki/Filename (which as of
+        ## and https://en.wikipedia.org/wiki/Filename (which as of
         ## 2007-04-22 is wrong about claiming that COM0 and LPT0 are
         ## disallowed):
         ##
@@ -1629,7 +1629,7 @@ add_dummies <- function(dir, Log)
                                 warning = function(e) {
                                     .warnings <<- c(.warnings,
                                                     conditionMessage(e))
-                                    invokeRestart("muffleWarning")
+                                    tryInvokeRestart("muffleWarning")
                                 })
             msg <- c(.warnings, .error)
             if(length(msg)) {
@@ -3442,7 +3442,7 @@ add_dummies <- function(dir, Log)
 
     run_examples <- function()
     {
-        run_one_arch <- function(exfile, exout, arch = "")
+        run_one_arch <- function(exfile, exout, arch = "", do_diff = TRUE)
         {
             any <- FALSE
             ## moved here to avoid WARNING + OK
@@ -3552,10 +3552,10 @@ add_dummies <- function(dir, Log)
             }
             any <- any || bad
 
-            if (!any && !(check_incoming && do_timings))
+            if (!any && !(check_incoming && do_timings && do_diff))
                 resultLog(Log, gettext("OK", domain = "R-tools"))
 
-            if (do_timings) {
+            if (do_timings && do_diff) { ## do_diff = false is for re-running
                 theta <-
                     as.numeric(Sys.getenv("_R_CHECK_EXAMPLE_TIMING_THRESHOLD_",
                                           "5"))
@@ -3611,7 +3611,7 @@ add_dummies <- function(dir, Log)
             ## a saved previous version.
             exsave <- file.path(pkgdir, test_dir, "Examples",
                                 paste0(pkgname, "-Ex.Rout.save"))
-            if (file.exists(exsave)) {
+            if (do_diff && file.exists(exsave)) {
                 checkingLog(Log, gettextf("checking differences from %s to %s ...", sQuote(basename(exout)), sQuote(basename(exsave)), domain = "R-tools"))
                 cmd <- paste0("invisible(tools::Rdiff('",
                               exout, "', '", exsave, "',TRUE,TRUE))")
@@ -3680,7 +3680,33 @@ add_dummies <- function(dir, Log)
                 cntFile <- paste0(exfile, "-cnt")
                 if (file.exists(cntFile)) {
                     unlink(cntFile)
-                    if (as_cran)
+                    x <- Sys.getenv("_R_CHECK_DONTTEST_EXAMPLES_", "NA")
+                    test_donttest <- !run_donttest &&
+                        (if (x == "NA") as_cran else config_val_to_logical(x))
+                    if (test_donttest) {
+                        checkingLog(Log, "checking examples with --run-donttest ...")
+                        cmd <- sprintf('tools:::.createExdotR("%s", "%s", silent = TRUE, use_gct = %s, addTiming = %s, commentDontrun = %s, commentDonttest = %s)',
+                                       pkgname, pkgtopdir, use_gct, do_timings,
+                                       !run_dontrun, FALSE)
+                        Rout <- tempfile("Rout")
+                        ## any arch will do here
+                        status <- R_runR0(cmd, R_opts2, "LC_ALL=C",
+                                          stdout = Rout, stderr = Rout)
+                        exfile <- paste0(pkgname, "-Ex.R")
+                        if (status) {
+                            errorLog(Log,
+                                     gettextf("Running massageExamples to create %s failed", sQuote(exfile)))
+                            printLog0(Log,
+                                      paste(readLines(Rout, warn = FALSE),
+                                            collapse = "\n"),
+                                      "\n")
+                            maybe_exit(1L)
+                        }
+                        exout <- paste0(pkgname, "-Ex.Rout")
+                        if(!run_one_arch(exfile, exout, do_diff = FALSE))
+                            maybe_exit(1L)
+                    }
+                    else if (as_cran)
                         printLog(Log, gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools"))
                 }
             } else {
@@ -4713,7 +4739,8 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wtautological",  # also gcc
                              ": warning: .* \\[-Wincompatible-pointer-types\\]",
                              ": warning: format string contains '[\\]0'",
-                             ": warning: .* \\[-Wc[+][+]11-long-long\\]",
+                             ## Apple's clang warns about this even in C++11 mode
+                             ## ": warning: .* \\[-Wc[+][+]11-long-long\\]",
                              ": warning: empty macro arguments are a C99 feature",
                              ": warning: .* \\[-Winvalid-source-encoding\\]",
                              ": warning: .* \\[-Wunused-command-line-argument\\]",

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -75,7 +75,7 @@ msgstr "%s nie jest zdefiniowaną klasą"
 #. R/refClass.R: gettextf("%s is not a defined class in this environment", dQuote(Class))
 #: R/refClass.R:0
 msgid "%s is not a defined class in this environment"
-msgstr " %s nie jest zdefiniowaną klasą w tym środowisku"
+msgstr "%s nie jest zdefiniowaną klasą w tym środowisku"
 
 #. R/refClass.R: gettextf("%s is not a field in class %s", sQuote(field), dQuote(thisClass@className))
 #. R/refClass.R: gettextf("%s is not a field in class %s", sQuote(what), dQuote(def@className))
@@ -1658,7 +1658,6 @@ msgstr "klasa %s jest unią klas: relacje 'coerce' dla uni klas nie mają sensu"
 
 #. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where, FALSE)))
 #: R/is.R:0
-#, fuzzy
 msgid ""
 "class %s is defined (with package slot %s) but no metadata object found to "
 "revise %s information---not imported?  Making a copy in package %s"
@@ -3081,6 +3080,8 @@ msgstr ""
 msgid ""
 "the 'oldMethods' argument is deprecated, as it has been unused since R 1.7.0"
 msgstr ""
+"argument 'oldMethods' jest przestarzały ponieważ był nieużywany od wersji R "
+"1.7.0"
 
 #. R/ClassExtensions.R: gettextf("the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s",     dQuote(class(replace)))
 #: R/ClassExtensions.R:0

@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2001-3 Paul Murrell
- *                2003-2016 The R Core Team
+ *                2003-2020 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1644,7 +1644,7 @@ SEXP constructUnits(SEXP amount, SEXP data, SEXP unit) {
 	int n = nAmount < nUnit ? nUnit : nAmount;
 	SEXP units = PROTECT(allocVector(VECSXP, n));
 	
-	data = validData(data, valUnits, n);
+	data = PROTECT(validData(data, valUnits, n));
 	
 	double* pAmount = REAL(amount);
 	int *pValUnits = INTEGER(valUnits);
@@ -1658,7 +1658,7 @@ SEXP constructUnits(SEXP amount, SEXP data, SEXP unit) {
 	SET_STRING_ELT(cl, 0, mkChar("unit"));
 	SET_STRING_ELT(cl, 1, mkChar("unit_v2"));
 	classgets(units, cl);
-	UNPROTECT(3);
+	UNPROTECT(4);
 	return units;
 }
 SEXP asUnit(SEXP simpleUnit) {
@@ -1756,8 +1756,8 @@ SEXP absoluteUnits(SEXP units) {
 		units = PROTECT(allocVector(REALSXP, n));
 		double *pVal = REAL(units);
 		for (int i = 0; i < n; i++) pVal[i] = 1.0;
-		makeSimpleUnit(units, Rf_ScalarInteger(5));
-		UNPROTECT(1);
+		makeSimpleUnit(units, PROTECT(Rf_ScalarInteger(5)));
+		UNPROTECT(2);
 		return units;
 	}
 	int unitIsAbsolute[n];
@@ -1922,7 +1922,10 @@ SEXP addUnits(SEXP u1, SEXP u2) {
 	return added;
 }
 SEXP flipUnits(SEXP units) {
-	return multUnits(units, Rf_ScalarReal(-1.0));
+	SEXP mone = PROTECT(Rf_ScalarReal(-1.0));
+	SEXP ans = multUnits(units, mone);
+	UNPROTECT(1); /* mone */
+	return ans;
 }
 SEXP summaryUnits(SEXP units, SEXP op_type) {
 	int n = 0;
@@ -1953,7 +1956,11 @@ SEXP summaryUnits(SEXP units, SEXP op_type) {
 				first_data = uData(unit_temp);
 			}
 			is_type[j] = current_type == type;
-			all_type = j == 0 || (current_type == first_type && R_compute_identical(uData(unit_temp), first_data, 15));
+			all_type = all_type &&
+                            (j == 0 || 
+                             (current_type == first_type && 
+                              R_compute_identical(uData(unit_temp), 
+                                                  first_data, 15)));
 			k += is_type[j] ? LENGTH(uData(unit_temp)) : 1;
 			UNPROTECT(1);
 		}

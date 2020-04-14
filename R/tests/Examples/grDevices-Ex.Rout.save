@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-03-09 r1218) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-03-09 r78226) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -550,6 +550,34 @@ $out
 17  5.00  =    13.00  =   
 > ## End (Don't show)
 > 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cairoSymbolFont")
+> ### * cairoSymbolFont
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cairoSymbolFont
+> ### Title: Specify a Symbol Font
+> ### Aliases: cairoSymbolFont
+> ### Keywords: device
+> 
+> ### ** Examples
+> 
+> ## Don't run: 
+> ##D ## If a font uses PUA, we can just specify the font name ...
+> ##D cairo_pdf(symbolfamily="OpenSymbol")
+> ##D dev.off()
+> ##D ## ... or equivalently ...
+> ##D cairo_pdf(symbolfamily=cairoSymbolFont("OpenSymbol"))
+> ##D dev.off()
+> ##D 
+> ##D ## If a font does not use PUA, we must indicate that ...
+> ##D cairo_pdf(symbolfamily=cairoSymbolFont("Nimbus Sans", usePUA=FALSE))
+> ##D dev.off()
+> ## End (Don't run)
 > 
 > 
 > 
@@ -4287,7 +4315,7 @@ $zlab
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  39.099 0.476 39.584 0 0 
+Time elapsed:  41.217 0.503 41.737 0 0 
 > grDevices::dev.off()
 null device 
           1 

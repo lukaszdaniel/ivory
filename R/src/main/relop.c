@@ -234,7 +234,7 @@ SEXP attribute_hidden do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	x = complex_relop((RELOP_TYPE) PRIMVAL(op), x, y, call);
     }
     else if ((isNumeric(x) || isLogical(x)) && (isNumeric(y) || isLogical(y))) {
-        x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
+    x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
     } // rest of cases only apply when 'x' or 'y' is raw
     else if (isReal(x) || isReal(y)) {
 	REPROTECT(x = coerceVector(x, REALSXP), xpi);

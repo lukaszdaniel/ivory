@@ -124,7 +124,7 @@ double bessel_y_ex(double x, double alpha, double *by)
 	return ML_NAN;
     }
     nb = 1 + (int)na; /* nb-1 <= alpha < nb */
-    alpha -= (double)(nb-1); // ==> alpha' in [0, 1)
+    alpha -= (double)(nb-1); // ==> alpha in [0, 1)
     Y_bessel(&x, &alpha, &nb, by, &ncalc);
     if(ncalc != nb) {/* error input */
 	if(ncalc == -1)
