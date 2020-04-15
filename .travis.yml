@@ -19,9 +19,9 @@ matrix:
             - liblzma-dev
             - libpcre3-dev
             - libedit-dev
-            - gcc-7=7.4.*
-            - g++-7=7.4.*
-      env: C_COMPILER=gcc-7 CXX_COMPILER=g++-7 CFLAGS="-g -O2" CXXFLAGS="${CFLAGS}" LDFLAGS="${CFLAGS}"
+            - gcc
+            - g++
+      env: C_COMPILER=gcc CXX_COMPILER=g++ CFLAGS="-g -O2" CXXFLAGS="${CFLAGS}" LDFLAGS="${CFLAGS}"
 
     - compiler: clang
       addons:
@@ -39,9 +39,9 @@ matrix:
             - libpcre3-dev
             - libedit-dev
             - libomp-dev
-            - clang-7
-            - llvm-7-dev
-      env: C_COMPILER=clang-7 CXX_COMPILER=clang++-7 LLVM_CONFIG=/usr/bin/llvm-config-7 CPPFLAGS="-DNO_CELLPOOLS" CFLAGS="-g -O2 -fsanitize=address" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
+            - clang
+            - llvm-dev
+      env: C_COMPILER=clang CXX_COMPILER=clang++ LLVM_CONFIG=/usr/bin/llvm-config CPPFLAGS="-DNO_CELLPOOLS" CFLAGS="-g -O2 -fsanitize=address" CXXFLAGS="${CFLAGS}" MAIN_LDFLAGS="${CFLAGS}"
 script:
         - cd R
         - CC=${C_COMPILER} CXX=${CXX_COMPILER} ./configure --with-included-gettext --enable-R-profiling --enable-memory-profiling
