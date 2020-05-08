@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-03-09 r1218) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-04-15 r1220) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-03-09 r78226) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-04-15 r78228) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -45,16 +45,16 @@ Loading required package: 'boot'
 BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
 Based on 1000 bootstrap replicates
 
-CALL:
+CALL : 
 boot.ci(boot.out = cd4.boot, conf = 0.9, type = c("norm", "basic", "perc"), h = atanh, 
     hinv = tanh)
 
-Intervals:
- Level      Normal              Basic              Percentile     
-90%   ( 0.4705,   0.8589 )   ( 0.4620,   0.8597 )   ( 0.4900,   0.8689 )  
-Calculations on Transformed Scale; Intervals on Original Scale
+Intervals : 
+Level      Normal              Basic              Percentile     
+90%   ( 0.4705,  0.8589 )   ( 0.4620,  0.8597 )   ( 0.4900,  0.8689 )  
+Calculations on Transformed Scale;  Intervals on Original Scale
 > 
 > 
 > proc.time()
    user  system elapsed 
-  0.166   0.015   0.399 
+  0.166   0.023   0.448 

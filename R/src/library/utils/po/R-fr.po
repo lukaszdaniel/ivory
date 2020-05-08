@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -2486,6 +2486,25 @@ msgstr "longueur de 'row.names' incorrecte"
 msgid "invalid 'row.names' specification"
 msgstr "spécification de 'row.names' incorrecte"
 
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "requête incorrecte"
+
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0 R/packages2.R:0
+#, fuzzy
+msgid "invalid 'type'; must be a character string"
+msgstr "'unzip' doit être une seule chaîne de caractères"
+
 #. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
 #: R/help.start.R:0
 #, fuzzy
@@ -2538,6 +2557,12 @@ msgstr "expression numérique 'as.is' incorrecte"
 #: R/tar.R:0
 msgid "invalid octal digit"
 msgstr "nombre octal incorrect"
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr "'unzip' doit être une seule chaîne de caractères"
 
 #. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
 #: R/str.R:0
@@ -3806,9 +3831,6 @@ msgstr[1] "les packages '%s' ne sont pas disponibles (pour %s)"
 #, fuzzy
 #~ msgid "'tarfile' argument must be a character string or a connection"
 #~ msgstr "'tarfile' doit être une chaîne de caractères ou une connexion"
-
-#~ msgid "'unzip' must be a single character string"
-#~ msgstr "'unzip' doit être une seule chaîne de caractères"
 
 #~ msgid "'ccaddress' must be of length 1"
 #~ msgstr "'ccaddress' doit être de longueur 1"

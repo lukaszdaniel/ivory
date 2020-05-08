@@ -3938,7 +3938,7 @@ SEXP attribute_hidden do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP mkCharCE(const char *name, cetype_t enc)
+SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
@@ -3947,12 +3947,12 @@ SEXP mkCharCE(const char *name, cetype_t enc)
 }
 
 /* no longer used in R but documented in 2.7.x */
-SEXP mkCharLen(const char *name, int len)
+SEXP Rf_mkCharLen(const char *name, int len)
 {
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
-SEXP mkChar(const char *name)
+SEXP Rf_mkChar(const char *name)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
@@ -4051,7 +4051,7 @@ static void R_StringHash_resize(unsigned int newsize)
    the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
    a new CHARSXP is created, added to the cache and then returned. */
 
-SEXP mkCharLenCE(const char *name, int len, cetype_t enc)
+SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;

@@ -9,13 +9,78 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item \code{paste()} and \code{paste0()} get new optional argument
-      \code{recycle0 = FALSE}.  When set to true, zero length arguments
-      (and all zero-length or no arguments when \code{collapse} is not
-      \code{NULL}) lead to the zero-length \code{character(0)}.
+      \item \samp{www.omegahat.net} is no longer one of the repositories
+      known to \code{setRepositories()}.   (Nowadays it only provides
+      source packages and is often unavailable.)
+
+      \item \code{package_dependencies()} (in package \pkg{tools}) can
+      now use different dependency types for direct and recursive
+      dependencies.
+
+      \item Size of tarball checking in \command{R CMD check --as-cran <pkg>}
+      may be tweaked via new \env{_R_CHECK_CRAN_INCOMING_TARBALL_THRESHOLD_},
+      as suggested in \PR{17777} by Jan Gorecki.
     }
   }
 
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Function \code{plclust()} from the package \pkg{stats}, and
+      \code{package.dependencies()}, \code{pkgDepends()},
+      \code{getDepList()}, \code{installFoundDepends()}, and
+      \code{vignetteDepends()} from \pkg{tools} are defunct.
+
+      \item Defunct functions \code{checkNEWS()} and \code{readNEWS()} from
+      package \pkg{tools} and \code{CRAN.packages()} from \pkg{utils} have
+      been removed.
+
+      \item \command{R CMD config CXXCPP} is defunct (it was deprecated
+      in \R{} 3.6.2).
+    }
+  }
+
+  %% \subsection{BUG FIXES}{
+  %%   \itemize{
+  %%   }
+  %% }
+}
+
+\section{\Rlogo CHANGES IN 4.0.0 patched}{
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{paste()} and \code{paste0()} gain a new optional
+      argument \code{recycle0}.  When set to true, zero-length
+      arguments (and all zero-length or no arguments when \code{collapse}
+      is not \code{NULL}) lead to the zero-length value
+      \code{character(0)}.
+
+      This should not be used in package code until \R 4.0.1 is
+      released, when the package should depend on \samp{R (>= 4.0.1)}.
+    }
+  }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{aov(frml, ...)} now also works in case the \code{formula}
+      deparses to more than 500 characters, thanks to a report and patch
+      proposal by Jan Hauffa.
+
+      \item Fix a dozen places (code, examples) as \code{Sys.setlocale()}
+      returns the new rather than the previous setting.
+
+      \item Fix for adding two complex \pkg{grid} units via \code{sum()}.
+      Thanks to Gu Zuguang for the report and Thomas Lin Pedersen for
+      the patch.
+
+      \item Fix \code{parallel::mclapply(..., mc.preschedule=FALSE)}
+      to handle raw vector results correctly. \PR{17779}
+
+      \item Computing the \code{base} value, i.e., 2, \dQuote{everywhere},
+      now uses \code{FLT_RADIX}, as the original \file{machar} code looped
+      indefinitely on the ppc64 architecture for the \code{longdouble} case.
+    }
+  }
 }
 
 \section{\Rlogo CHANGES IN 4.0.0}{
@@ -445,6 +510,17 @@
 
       \item Either PCRE2 or PCRE1 >= 8.32 (Nov 2012) is required: the
       deprecated provision for 8.20--8.31 has been removed.
+
+      \item Defunct functions \code{mem.limits()}, \code{.readRDS()},
+      \code{.saveRDS()},.\code{.find.package()}, and \code{.path.package()}
+      from package \pkg{base}
+      and \code{allGenerics()}, \code{getAccess()}, \code{getAllMethods()},
+      \code{getClassName()}, \code{getClassPackage()}, \code{getExtends()},
+      \code{getProperties()}, \code{getPrototype()},
+      \code{getSubclasses()}, \code{getVirtual()}, \code{mlistMetaName()},
+      \code{removeMethodsObject()}, \code{seemsS4Object()},
+      \code{traceOff()}, and \code{traceOn()} from \pkg{methods} have been
+      removed.
     }
   }
 
@@ -725,11 +801,7 @@
       \PR{17756}.  Further, \code{x[[-Inf]]} and \code{x[[-n]]} now give
       more helpful error messages.
 
-      \item \code{aov(frml, ...)} now also works in case the \code{formula}
-      deparses to more than 500 characters, thanks to a report and patch
-      proposal by Jan Hauffa.
-
-      \item (PENDING) \code{Gamma()} family sometimes had trouble storing
+      \item \code{Gamma()} family sometimes had trouble storing
       link name \PR{15891}
     }
   }
@@ -748,7 +820,7 @@
       \item \code{scan()} issues with UTF-8 data when running in a DBCS
       locale have been resolved (\PR{16520}, \PR{16584}).
 
-      \item \command{RTerm} now accepts enhanced/arrow keys also with
+      \item \command{Rterm} now accepts enhanced/arrow keys also with
       ConPTY.
 
       \item \R can can now be started \emph{via} the launcher icon in a

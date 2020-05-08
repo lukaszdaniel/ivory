@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1989,12 +1989,6 @@ msgstr "autoindlæser fandt ikke '%s' i '%s'"
 msgid "bad 'S3method' directive: %s"
 msgstr ""
 
-#. R/conditions.R: stop("bad handler specification")
-#. R/conditions.R: stop("bad handler specification")
-#: R/conditions.R:0
-msgid "bad handler specification"
-msgstr "ugyldig håndteringsspecifikation"
-
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date"))
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
 #. R/datetime.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("POSIXt"))
@@ -2032,6 +2026,12 @@ msgstr "kan kun gemme til en binær forbindelse"
 #: R/backquote.R:0
 msgid "can only splice inside a call"
 msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+#, fuzzy
+msgid "can only splice vectors"
+msgstr "kan kun skrive vektorobjekter"
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))
@@ -2150,6 +2150,19 @@ msgstr "kompleks matricer er ikke tilladt i øjeblikket"
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr "argument 'object' skal deparse til en enkel tegnstreng"
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+#, fuzzy
+msgid "condition handlers must be functions"
+msgstr "andet argument skal være en liste"
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3183,8 +3196,7 @@ msgid ""
 msgstr "pakke %s %s blev fundet, men %s %s er krævet af %s"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
-#: R/library.R:0 R/namespace.R:0
+#: R/library.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr "pakke %s blev bygget før R 2.10.0: geninstaller den venligst"
@@ -3209,6 +3221,12 @@ msgid ""
 msgstr ""
 "pakke %s fundet mere end en gang,\n"
 "bruger den fundet i %s"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr "pakke %s blev bygget før R 2.10.0: geninstaller den venligst"
 
 #. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
 #: R/namespace.R:0
@@ -3241,6 +3259,11 @@ msgstr ""
 #. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s", paste(which(is.na(lw)),     collapse = ", "))
 #: R/summary.R:0
 msgid "probably wrong encoding in 'names(.)' of column %s"
+msgstr ""
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
 msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
@@ -3887,6 +3910,9 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "bad handler specification"
+#~ msgstr "ugyldig håndteringsspecifikation"
 
 #, fuzzy
 #~ msgid "'x' must have named dimnames"

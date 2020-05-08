@@ -70,7 +70,13 @@ as.Date.character <- function(x, format,
 
 as.Date.numeric <- function(x, origin, ...)
 {
-    if(missing(origin)) stop(gettextf("'%s' argument must be specified", "origin"))
+    if(missing(origin)) {
+        if(!length(x))
+            return(.Date(numeric()))
+        if(!any(is.finite(x)))
+            return(.Date(x))
+        stop(gettextf("'%s' argument must be specified", "origin"))
+    }
     as.Date(origin, ...) + x
 }
 
@@ -78,6 +84,8 @@ as.Date.default <- function(x, ...)
 {
     if(inherits(x, "Date"))
 	x
+    else if(is.null(x))
+        .Date(numeric())
     else if(is.logical(x) && all(is.na(x)))
 	.Date(as.numeric(x))
     else
@@ -226,7 +234,8 @@ as.list.Date <- function(x, ...)
     lapply(unclass(x), .Date, oldClass(x))
 
 c.Date <- function(..., recursive = FALSE)
-    .Date(c(unlist(lapply(list(...), unclass))))# recursive=recursive << FIXME?
+    .Date(c(unlist(lapply(list(...),
+                          function(e) unclass(as.Date(e))))))
 
 mean.Date <- function (x, ...)
     .Date(mean(unclass(x), ...))

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 4.0.0\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"Project-Id-Version: utils 4.1.0\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3020,6 +3020,28 @@ msgid "invalid 'row.names' specification"
 msgstr ""
 
 
+#: R/packages.R: 0
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+
+msgid "invalid 'type'"
+msgstr ""
+
+
+#: R/packages.R: 0
+#: R/packages2.R: 0
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+
+msgid "invalid 'type'; must be a character string"
+msgstr ""
+
+
 #: R/help.start.R: 0
 #. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
 
@@ -3089,6 +3111,13 @@ msgstr ""
 #. R/tar.R: stop("invalid octal digit")
 
 msgid "invalid octal digit"
+msgstr ""
+
+
+#: R/packages.R: 0
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+
+msgid "invalid options(\"pkgType\"); must be a character string"
 msgstr ""
 
 

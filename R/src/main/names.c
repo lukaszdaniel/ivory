@@ -1228,7 +1228,7 @@ void attribute_hidden InitNames()
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-SEXP install(const char *name)
+SEXP Rf_install(const char *name)
 {
     SEXP sym;
     int i, hashcode;
@@ -1255,7 +1255,7 @@ SEXP install(const char *name)
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
 attribute_hidden
-SEXP installNoTrChar(SEXP charSXP)
+SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     SEXP sym;
     int i, hashcode;

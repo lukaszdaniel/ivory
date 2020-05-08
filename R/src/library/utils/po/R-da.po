@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2340,6 +2340,25 @@ msgstr ""
 msgid "invalid 'row.names' specification"
 msgstr ""
 
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "Ugyldigt argument for »filter«."
+
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0 R/packages2.R:0
+#, fuzzy
+msgid "invalid 'type'; must be a character string"
+msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
+
 #. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
 #: R/help.start.R:0
 msgid "invalid browser name, check 'options(\"browser\")'."
@@ -2390,6 +2409,12 @@ msgstr ""
 #: R/tar.R:0
 msgid "invalid octal digit"
 msgstr ""
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
 
 #. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
 #: R/str.R:0
@@ -3562,10 +3587,6 @@ msgstr[1] ""
 
 #~ msgid "Use either %s or %s/%s but not both."
 #~ msgstr "Brug enten %s eller %s/%s men ikke begge."
-
-#, fuzzy
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "Ugyldigt argument for »filter«."
 
 #, fuzzy
 #~ msgid "Created PDF document %s"

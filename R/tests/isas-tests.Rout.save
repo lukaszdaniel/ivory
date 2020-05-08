@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-03-09 r1218) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-04-15 r1220) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-03-09 r78226) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-04-15 r78228) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -244,10 +244,13 @@ IS: [1] TRUE
 +    } else   !isall.equal(x, res)})
 > f <- try(as.Date( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.Date( f )))
+[1] TRUE
 > f <- try(as.POSIXct( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.POSIXct( f )))
+[1] TRUE
 > f <- try(as.POSIXlt( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.POSIXlt( f )))
+[1] TRUE
 > f <- try(as.array( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.array( f )))
 [1] TRUE
@@ -558,10 +561,13 @@ Calls: report -> stopifnot
 +    } else   !isall.equal(x, res)})
 > f <- try(as.Date( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.Date( f )))
+[1] TRUE
 > f <- try(as.POSIXct( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.POSIXct( f )))
+[1] TRUE
 > f <- try(as.POSIXlt( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.POSIXlt( f )))
+[1] TRUE
 > f <- try(as.array( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.array( f )))
 > f <- try(as.call( x ), silent = TRUE)
@@ -2598,6 +2604,6 @@ In command 'as.dist.default(x)': 'm' argument is not a square matrix
 > f <- try(as.ts( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.ts( f )))
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.125 0.02 0.145 0 0 
+Time elapsed:  0.157 0.004 0.162 0 0 
 > 
 > 

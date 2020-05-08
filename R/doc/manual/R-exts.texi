@@ -280,8 +280,8 @@ For the conventions for files @file{NEWS} and @file{ChangeLog} in the
 @uref{https://www.gnu.org/@/prep/@/standards/@/standards.html#Documentation}.
 
 The package subdirectory should be given the same name as the package.
-Because some file systems (e.g., those on Windows and by default on OS
-X) are not case-sensitive, to maintain portability it is strongly
+Because some file systems (e.g., those on Windows and by default on
+macOS) are not case-sensitive, to maintain portability it is strongly
 recommended that case distinctions not be used to distinguish different
 packages.  For example, if you have a package named @file{foo}, do not
 also create a package named @file{Foo}.
@@ -1504,13 +1504,19 @@ this should be declared in the @samp{SystemRequirements} field of its
 is a version requirement on Java code in the package.)
 
 Windows and Mac users should be aware that the Tcl extensions
-@samp{BWidget} and @samp{Tktable} which are currently included with the
-@R{} for Windows (and formerly in the macOS installer) @emph{are}
-extensions and do need to be declared for users of other platforms (and
-that @samp{Tktable} is less widely available than it used to be,
-including not in the main repositories for major Linux distributions).
-@c Not in Fedora since 17, only in launchpad for Ubuntu.
+@samp{BWidget} and @samp{Tktable} (which have sometimes been included in
+the Windows@footnote{@samp{BWidget} still is on Windows but
+@samp{Tktable} was not in @R{} 4.0.0.} and macOS @R{} installers)
+@emph{are} extensions and do need to be declared (and that
+@samp{Tktable} is less widely available than it used to be, including
+not in the main repositories for major Linux distributions).
+@c Not in Fedora since 17
+@c 2008 sources at https://sourceforge.net/projects/tktable/files/tktable/2.10/
+@c In May 2020 declared by DALY PhViD RSiena RSurvey dgmb fit4NM
+@c forensim rriskDistributions tcltk2
 
+@c In May 2020 declared by FFD GGEBiplotGUI OligoSpecificitySystem
+@c PBSmodelling asbio biplotbootGUI cncaGUI dgmb dpa multibiplotGUI rpanel
 @samp{BWidget} needs to be installed by the user on other OSes.  This is
 fairly easy to do: first find the Tcl/Tk search path:
 
@@ -1580,6 +1586,7 @@ expansion is a known issue: see
 @uref{https://www.gnu.org/@/software/@/autoconf/@/manual/autoconf.html#Portable-Shell}
 for this and others.  Some checks can be done by the
 @code{checkbashisms} Perl script at
+@c 'checkbaskisms' really is the correct path
 @uref{https://sourceforge.net/@/projects/@/checkbaskisms/@/files}, also
 available in most Linux distributions in a package named either @samp{devscripts} or @samp{devscripts-checkbashisms}.}) shell script @file{configure} in
 your package which (if present) is executed by @code{R CMD INSTALL}
@@ -1797,7 +1804,7 @@ quoted in makefiles and configure scripts.
 One of the more tricky tasks can be to find the headers and libraries of
 external software.  One tool which is increasingly available on
 Unix-alikes (but not by default@footnote{but it is available on the machines
-used to produce the CRAN binary packages.} on macOS) to do this is
+used to produce the @acronym{CRAN} binary packages.} on macOS) to do this is
 @command{pkg-config}.  The @file{configure} script will need to test for
 the presence of the command itself (see for example package
 @CRANpkg{Cairo}), and if present it can be asked if the software is
@@ -2760,10 +2767,10 @@ using std::make_unique;
 #endif
 @end example
 
-Note that @command{g++} 4.9.x (as used on Windows prior to @R{} 4.0.0)
-has only partial C++14 support, and the flag to obtain that support is
-not included in the default Windows build of @R{} --- one could try
-something like
+Note that Windows builds prior to @R{} 4.0.0 used @command{g++} 4.9.x
+which had only partial C++14 support, and the flag to obtain that
+support was not included in the default Windows build of @R{} --- one
+could try something like
 
 @example
 CXX14="$(BINPREF)g++ $(M_ARCH)"
@@ -2772,9 +2779,9 @@ CXX14STD=-std=gnu1y
 @end example
 
 @noindent
-in @file{@var{HOME}/.R/Makevars.win}.  The @command{g++} version
-expected to be used from @R{} 4.0.0 supports C++14 with flag
-@option{-std=gnu14} and for back-compatibility @option{-std=gnu1y}.
+in @file{@var{HOME}/.R/Makevars.win}.  The @command{g++} version used
+from @R{} 4.0.0 supports C++14 with flag @option{-std=gnu14} and for
+back-compatibility @option{-std=gnu1y}.
 
 C++17 (as from @R{} 3.4.0) and C++20 (as from @R{} 4.0.0) can be
 specified in an analogous way (replacing @code{14} by @code{17} or
@@ -2782,8 +2789,8 @@ specified in an analogous way (replacing @code{14} by @code{17} or
 can be used (and probably should be as support is still patchy,
 especially library support).
 
-C++17 and C++20 support are available with the default build of @R{} on
-macOS, and may be on Windows.
+C++17 and C++20 support are available with the default builds of @R{} on
+macOS and Windows as from @R{} 4.0.0.
 
 
 @node Checking and building packages, Writing package vignettes, Configure and cleanup, Creating R packages
@@ -4346,39 +4353,51 @@ Since the only viable make for Windows is GNU make, it is permissible to
 use GNU extensions in files @file{Makevars.win} or @file{Makefile.win}.
 
 @item
+If your package uses a @file{src/Makefile} file to compile code to be
+linked into @R{}, ensure that it uses exactly the same compiler and flag
+settings that @R{} uses when compiling such code: people often forget
+@samp{PIC} flags.  If @code{R CMD config} is used, this needs something
+like (for C++)
+
+@example
+RBIN = `"$@{R_HOME@}/bin/R"`
+CXX = `"$@{RBIN@}" CMD config CXX`
+CXXFLAGS = `"$@{RBIN@}" CMD config CXXFLAGS` `"$@{RBIN@}" CMD config CXXPICFLAGS`
+@end example
+
+@item
 Bash extensions also need to be avoided in shell scripts, including
 expressions in Makefiles (which are passed to the shell for processing).
 Some @R{} platforms use strict@footnote{For example, @command{test}
 options @option{-a} and @option{-e} are not portable, and not supported
 in the AT&T Bourne shell used on Solaris 10/11, even though they are in
 the POSIX standard.  Nor does Solaris support @samp{$(@var{cmd})}.}
-Bourne shells: the @R{} toolset on Windows and some Unix-alike OSes use
+Bourne shells: the previous @R{} toolset on Windows@footnote{as from
+@R{} 4.0.0 the default is @command{bash}.} and some Unix-alike OSes use
 @command{ash} (@uref{https://en.wikipedia.org/@/wiki/@/Almquist_shell}),
-a rather minimal shell with few builtins.  Beware of assuming that all
-the POSIX command-line utilities are available, especially on Windows
-where only a minimal set is provided for use with @R{}.
-@ifset UseExternalXrefs
-(@xref{The command line tools, , The command line tools,
-R-admin, R Installation and Administration}.)
-@end ifset
-One particular issue is the use of @command{echo}, for which two
-behaviours are allowed
+a `slim' shell with few builtins or variants such as @command{dash}.
+Beware of assuming that all the POSIX command-line utilities are
+available, especially on Windows where only a subset (which has changed
+by version of @file{Rtools}) is provided for use with @R{}.  One
+particular issue is the use of @command{echo}, for which two behaviours
+are allowed
 (@uref{http://pubs.opengroup.org/@/onlinepubs/@/9699919799/@/utilities/@/echo.html})
-and both occur as defaults on @R{} platforms: portable applications
-should not use @option{-n} (as the first argument) nor escape
-sequences.  The recommended replacement for @command{echo -n} is the
-command @command{printf}.
-Another common issue is the construction
+and both have occurred as defaults on @R{} platforms: portable
+applications should use neither @option{-n} (as the first argument) nor
+escape sequences.  The recommended replacement for @command{echo -n} is
+the command @command{printf}.  Another common issue is the construction
 @example
 export FOO=value
 @end example
 @noindent
-which is bash-specific (first set the variable then export it by name).
+which is @command{bash}-specific (first set the variable then export it
+by name).
 
-Using @code{test -e} (or @code{[ -e ]}) in shell scripts is not
-portable: @code{-f} is normally what is intended.  Flags @option{-a} and
-@option{-o} are nowadays declared obsolescent by POSIX and should not be
-used.
+Using @code{test -e} (or @code{[ -e ]}) in shell scripts is not fully
+portable@footnote{it was not in the Bourne shell, and is not supported
+by Solaris 10.}: @code{-f} is normally what is intended.  Flags
+@option{-a} and @option{-o} are nowadays declared obsolescent by POSIX
+and should not be used.
 
 Use of `brace expansion', e.g.,
 @example
@@ -4393,7 +4412,8 @@ POSIX and not supported on all the platforms @R{} is used on.
 On macOS Catalina which shell @file{/bin/sh} invokes is user- and
 platform-dependent: it might be @command{bash} version 3.2,
 @command{dash} or @command{zsh} (for new accounts it is @command{zsh},
-for accounts ported from an earlier version it is usually @command{bash}).
+for accounts ported from an earlier version it is usually
+@command{bash}).
 
 @item
 Make use of the abilities of your compilers to check the
@@ -4690,12 +4710,13 @@ installed might not be the same as when the package is run and will not
 be for binary packages).  Java 8 is available for fewer platforms than
 Java 7, and Java 11 for fewer still (at the time of writing, only
 @cputype{x86_64} Linux, macOS, 64-bit Windows and 64-bit Solaris 11 from
-Oracle).
+Oracle and Linux on several CPUs, macOS, 32- and 64-bit Windows and AIX
+from from @uref{https://adoptopenjdk.net}).
 
 When specifying a minimum Java version please use the official version
 names, which are (confusingly)
 @example
-1.1 1.2 1.3 1.4 5.0 6 7 8 9 10 11 12 13
+1.1 1.2 1.3 1.4 5.0 6 7 8 9 10 11 12 13 14 (announced 15 16 17)
 @end example
 @noindent
 and as from 2018 a year.month scheme such as @samp{18.9} is also in use.
@@ -4774,8 +4795,12 @@ and conditional.
 Interpreters for scripting languages such as Perl, Python and Ruby need
 to be declared as system requirements and used conditionally: for
 example macOS 10.16 has been announced not to have them.  Python 2 has
-passed end-of-life and been removed from some major distributions.  This
-applies also to a Java interpreter (which macOS does not have by default).
+passed end-of-life and been removed from some major distributions.
+
+Command @command{cmake} is not commonly installed, and where it is, it
+might not be on the path.  In particular, the most common location on
+macOS is @file{/Applications/CMake.app/Contents/bin/cmake} and that
+should be looked for if it is not on the path.
 
 @item
 Be sure to use portable encoding names: none of @code{utf8}, @code{mac}
@@ -5194,6 +5219,11 @@ out-of-order declarations: in standard-conformant Fortran variables must
 be declared (explicitly or implicitly) before use in other declarations
 such as dimensions.
 
+GNU Fortran 10 gives a compilation error for the previously widespread
+practice of passing a Fortran array element where an array is expected,
+or a scalar instead of a length-one array.  See
+@uref{https://gcc.gnu.org/@/gcc-10/@/porting_to.html}.
+
 @item
 Including C-style headers in C++ code is not portable.  Including the
 legacy header@footnote{which often is the same as the header included by
@@ -5450,10 +5480,11 @@ of `tentative definitions' where global C variables are defined without
 an initializer.  Traditionally the linker resolves all tentative
 definitions of the same variable in different object files to the same
 object, or to a non-tentative definition.  However,
-@command{gcc}@tie{}10 has changed its default so that tentative
-definitions cannot be merged and the linker will give an error if the
-same variable is defined in more than one object file.  To avoid this,
-all but one of the C source files should declare the variable
+@command{gcc}@tie{}10 has changed its default@footnote{see
+@uref{https://gcc.gnu.org/@/gcc-10/@/porting_to.html}.} so that
+tentative definitions cannot be merged and the linker will give an error
+if the same variable is defined in more than one object file.  To avoid
+this, all but one of the C source files should declare the variable
 @code{extern} --- which means that any such variables included in header
 files need to be declared @code{extern}.  A commonly used idiom
 (including by @R{} itself) is to define all global variables as
@@ -5496,14 +5527,12 @@ For Windows, check what other DLLs your package's DLL depends on
 tool to do so is `Dependency Walker'
 (@uref{http://www.dependencywalker.com/}) for both 32-bit and 64-bit
 DLLs -- note that this will report as missing links to @R{}'s own DLLs
-such as @file{R.dll} and @file{Rblas.dll}.  For 32-bit DLLs only, the
-command-line tool @command{pedump.exe -i} (in @file{Rtools*.exe}) can be
-used, and for the brave, the @command{objdump} tool in the appropriate
-toolchain will also reveal what DLLs are imported from.  If you use a
-toolchain other than one provided by the @R{} developers or use your own
-makefiles, watch out in particular for dependencies on the toolchain's
-runtime DLLs such as @file{libgfortran}, @file{libstdc++} and
-@file{libgcc_s}.
+such as @file{R.dll} and @file{Rblas.dll}.  The command-line tool
+@command{objdump} in the appropriate toolchain will also reveal what
+DLLs are imported from.  If you use a toolchain other than one provided
+by the @R{} developers or use your own makefiles, watch out in
+particular for dependencies on the toolchain's runtime DLLs such as
+@file{libgfortran}, @file{libstdc++} and @file{libgcc_s}.
 
 For macOS, using @code{R CMD otool -L} on the package's shared object(s)
 in the @file{libs} directory will show what they depend on: watch for
@@ -7648,7 +7677,7 @@ particular these allow call graphs to be studied.
 Measuring memory use in @R{} code is useful either when the code takes
 more memory than is conveniently available or when memory allocation and
 copying of objects is responsible for slow code. There are three ways to
-profile memory use over time in @R{} code. The seond and third require
+profile memory use over time in @R{} code. The second and third require
 @R{} to have been compiled with @option{--enable-memory-profiling},
 which is not the default, but is currently used for the macOS and
 Windows binary distributions. All can be misleading, for different
@@ -9019,8 +9048,10 @@ Sooner or later programmers will be faced with the need to debug
 compiled code loaded into @R{}.  This section is geared to platforms
 using @command{gdb} with code compiled by @code{gcc}, but similar things
 are possible with other debuggers such as @command{lldb}
-(@uref{http://lldb.llvm.org/}, used on macOS) and Sun's @command{dbx}:
-some debuggers have graphical front-ends available.
+(@uref{http://lldb.llvm.org/}, used on macOS: however `notarized'
+executable such as distributed @acronym{CRAN} builds are not allowed to be
+debugged) and Sun's @command{dbx}: some debuggers have graphical
+front-ends available.
 
 Consider first `crashes', that is when @R{} terminated unexpectedly with
 an illegal memory access (a `segfault' or `bus error'), illegal
@@ -15485,9 +15516,9 @@ so include the header and define @code{HAVE_UINTPTR_T} before including
 
 These will be set@footnote{at least on platforms where the values are
 available, that is having @code{getrlimit} and on Linux or having
-@code{sysctl} supporting @code{KERN_USRSTACK}, including FreeBSD and OS
-X.} when @code{Rf_initialize_R} is called, to values appropriate to the
-main thread.  Stack-checking can be disabled by setting
+@code{sysctl} supporting @code{KERN_USRSTACK}, including FreeBSD and
+macOS.} when @code{Rf_initialize_R} is called, to values appropriate to
+the main thread.  Stack-checking can be disabled by setting
 @code{R_CStackLimit = (uintptr_t)-1} immediately after
 @code{Rf_initialize_R} is called, but it is better to if possible set
 appropriate values.  (What these are and how to determine them are
@@ -15542,11 +15573,11 @@ which works with @R{} packages to support transfer of data to and from
 
 Recent versions have usage restrictions.
 
-@item
-Another (D)COM server, @code{RDCOMServer}, may be available from Omegahat,
-@uref{http://www.omegahat.net/}.  Its philosophy is discussed in
-@uref{http://www.omegahat.net/@/RDCOMServer/@/Docs/@/Paradigm.html} and is
-very different from the purpose of this section.
+@c @item
+@c Another (D)COM server, @code{RDCOMServer}, may be available from Omegahat,
+@c @uref{http://www.omegahat.net/}.  Its philosophy is discussed in
+@c @uref{http://www.omegahat.net/@/RDCOMServer/@/Docs/@/Paradigm.html} and is
+@c very different from the purpose of this section.
 @end itemize
 @node Calling R.dll directly, Finding R_HOME, Using (D)COM, Embedding R under Windows
 @subsection Calling R.dll directly

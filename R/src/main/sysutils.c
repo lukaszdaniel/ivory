@@ -775,7 +775,7 @@ SEXP attribute_hidden do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-cetype_t getCharCE(SEXP x)
+cetype_t Rf_getCharCE(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP"), "getCharCE");
@@ -1146,7 +1146,7 @@ next_char:
 
 /* Variant which does not return escaped string */
 attribute_hidden
-const char *trCharUTF8(SEXP x)
+const char *Rf_trCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
@@ -1233,7 +1233,7 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
 attribute_hidden /* but not hidden on Windows, where it was used in tcltk.c */
-const wchar_t *wtransChar(SEXP x)
+const wchar_t *Rf_wtransChar(SEXP x)
 {
     void * obj;
     const char *inbuf, *ans = CHAR(x), *from;

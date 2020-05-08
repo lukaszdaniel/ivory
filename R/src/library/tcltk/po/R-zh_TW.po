@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-03 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,89 +18,160 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "cannot handle object of mode '%s'"
-msgstr "無法處理 '%s' 模式的目標物件"
-
-msgid "cannot change names on Tcl array"
-msgstr "無法在 Tcl 排列上改名"
-
-msgid "cannot set length of Tcl array"
-msgstr "無法為 Tcl 排列設定長度"
-
-msgid "Tcl package '%s' not found"
-msgstr "沒有 '%s' 這個 Tcl 程式套件"
-
-msgid "The tkGUI is not available under Windows"
-msgstr "Windows 下沒有 tkGUI 這個功能"
-
-msgid "File"
-msgstr "檔案"
-
-msgid "Demos"
-msgstr "Demos"
-
-msgid "Packages"
-msgstr "程式套件"
-
-msgid "Help"
-msgstr "求助"
-
-msgid "Source R code"
-msgstr "R 原始碼"
-
-msgid "Quit"
-msgstr "退離"
-
-msgid "Save workspace"
-msgstr "儲存工作空間"
-
-msgid "Don't save workspace"
-msgstr "不要儲存工作空間"
-
-msgid "t test"
-msgstr "t 檢驗"
-
-msgid "Density"
-msgstr "密度"
-
-msgid "Interactive linear fitting"
-msgstr "交互線性擬合"
-
-msgid "R FAQ"
-msgstr "R FAQ"
-
-msgid "Load"
-msgstr "載入"
-
-msgid "Go get them!"
-msgstr "動手吧！"
-
-msgid "Load packages"
-msgstr "載入程式套件"
-
-msgid "Install packages from CRAN"
-msgstr "用 CRAN 安裝程式套件"
-
-msgid "Help topic:"
-msgstr "求助題目："
-
-msgid "Manuals in PDF format"
-msgstr "說明書是 PDF 格式的"
-
-msgid "OK"
-msgstr "好"
-
-msgid "Cancel"
-msgstr "取消"
-
-msgid "'pb' is not from class %s"
-msgstr "'pb' 不屬 %s 此一類別"
-
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' 必須是有兩個列的字元矩陣"
 
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+msgid "'pb' is not from class %s"
+msgstr "'pb' 不屬 %s 此一類別"
+
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "取消"
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+msgid "Demos"
+msgstr "Demos"
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+msgid "Density"
+msgstr "密度"
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr "不要儲存工作空間"
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "檔案"
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+msgid "Go get them!"
+msgstr "動手吧！"
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "求助"
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+msgid "Help topic:"
+msgstr "求助題目："
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "用 CRAN 安裝程式套件"
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr "交互線性擬合"
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+msgid "Load"
+msgstr "載入"
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr "載入程式套件"
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+msgid "Manuals in PDF format"
+msgstr "說明書是 PDF 格式的"
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "好"
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "程式套件"
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr "退離"
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+msgid "R FAQ"
+msgstr "R FAQ"
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "儲存工作空間"
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "R 原始碼"
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "沒有 '%s' 這個 Tcl 程式套件"
+
+#. R/unix/zzz.R: stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer")
+#: R/unix/zzz.R:0
+msgid ""
+"Tcl/Tk libraries are missing: install the Tcl/Tk component from the R "
+"installer"
+msgstr ""
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+msgid "Tcl/Tk support files were not installed"
+msgstr "沒有安裝 Tcl/Tk 支援檔案"
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
 msgid "Tcl/Tk support is not available on this system"
 msgstr "這個系統不支援 Tcl/Tk"
 
-msgid "Tcl/Tk support files were not installed"
-msgstr "沒有安裝 Tcl/Tk 支援檔案"
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr "Windows 下沒有 tkGUI 這個功能"
+
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#: R/unix/zzz.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "無法在 Tcl 排列上改名"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "無法處理 '%s' 模式的目標物件"
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "無法為 Tcl 排列設定長度"
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr "t 檢驗"

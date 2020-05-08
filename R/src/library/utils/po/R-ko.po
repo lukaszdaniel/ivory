@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2447,6 +2447,25 @@ msgstr "'row.names'  길이가 잘못되었습니다 "
 msgid "invalid 'row.names' specification"
 msgstr "'row.names' 정보가 잘못되었습니다 "
 
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "올바르지 않은 쿼리입니다 "
+
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0 R/packages2.R:0
+#, fuzzy
+msgid "invalid 'type'; must be a character string"
+msgstr "'unzip' 은 반드시 단일 문자열이어야 합니다 "
+
 #. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
 #: R/help.start.R:0
 #, fuzzy
@@ -2500,6 +2519,12 @@ msgstr "올바른 수치형 'as.is' 표현식이 아닙니다 "
 #: R/tar.R:0
 msgid "invalid octal digit"
 msgstr "invalid octal digit"
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr "'unzip' 은 반드시 단일 문자열이어야 합니다 "
 
 #. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
 #: R/str.R:0
@@ -3705,9 +3730,6 @@ msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 #, fuzzy
 #~ msgid "'tarfile' argument must be a character string or a connection"
 #~ msgstr "'tarfile' 은 문자열이거나 커넥션이어야 합니다 "
-
-#~ msgid "'unzip' must be a single character string"
-#~ msgstr "'unzip' 은 반드시 단일 문자열이어야 합니다 "
 
 #~ msgid "'ccaddress' must be of length 1"
 #~ msgstr "'ccaddress' 는 반드시 길이가 1 이어야 합니다 "

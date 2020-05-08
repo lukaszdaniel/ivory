@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2033,12 +2033,6 @@ msgstr "autolastaren fann ikkje «%s» i «%s»"
 msgid "bad 'S3method' directive: %s"
 msgstr "ugyldig «S3method»-direktiv: %s"
 
-#. R/conditions.R: stop("bad handler specification")
-#. R/conditions.R: stop("bad handler specification")
-#: R/conditions.R:0
-msgid "bad handler specification"
-msgstr "ugyldig handsamarspesifikasjon"
-
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date"))
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
 #. R/datetime.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("POSIXt"))
@@ -2076,6 +2070,12 @@ msgstr "kan berre lagra til binærsamband"
 #: R/backquote.R:0
 msgid "can only splice inside a call"
 msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+#, fuzzy
+msgid "can only splice vectors"
+msgstr "kan berre skriva vektorobjekt"
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))
@@ -2196,6 +2196,19 @@ msgstr "komplekse matriser er førebels ikkje støtta"
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+#, fuzzy
+msgid "condition handlers must be functions"
+msgstr "handsamaren må vera ein funksjon"
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3246,8 +3259,7 @@ msgid ""
 msgstr "fann pakken «%s %s», men «%s %s» trengst av «%s»"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
-#: R/library.R:0 R/namespace.R:0
+#: R/library.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
@@ -3273,6 +3285,12 @@ msgstr ""
 "fann pakken «%s» meir enn éin gong –\n"
 "\n"
 "brukar versjonen i «%s»"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
 
 #. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
 #: R/namespace.R:0
@@ -3307,6 +3325,11 @@ msgstr ""
 #, fuzzy
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "truleg feil teiknkoding for names(.) til kolonne"
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
+msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
@@ -3967,6 +3990,9 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T brukt i staden for TRUE"
 msgstr[1] "T brukt i staden for TRUE"
+
+#~ msgid "bad handler specification"
+#~ msgstr "ugyldig handsamarspesifikasjon"
 
 #, fuzzy
 #~ msgid "'x' must have named dimnames"

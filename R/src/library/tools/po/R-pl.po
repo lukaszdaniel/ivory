@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -41,11 +41,6 @@ msgstr "polecenie %s nie jest dostępne"
 #. R/testing.R: gettextf("%s file was not found", sQuote(f))
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 msgid "%s file was not found"
-msgstr "plik %s nie został znaleziony"
-
-#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
-#: R/tools-deprecated.R:0
-msgid "%s file wast not found"
 msgstr "plik %s nie został znaleziony"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -738,24 +733,12 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
+#. R/install.R: gettextf("C++%s standard requested but CXX%s is not defined", use_cxxstd, use_cxxstd,     domain = "R-tools")
 #: R/install.R:0
-msgid "C++11 standard requested but CXX11 is not defined"
+#, fuzzy
+msgid "C++%s standard requested but CXX%s is not defined"
 msgstr "Zażądano standardu C++11 ale CXX11 nie jest zdefiniowany"
 
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++14 standard requested but CXX14 is not defined"
-msgstr "Zażądano standardu C++14 ale CXX14 nie jest zdefiniowany"
-
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++17 standard requested but CXX17 is not defined"
-msgstr "Zażądano standardu C++17 ale CXX17 nie jest zdefiniowany"
-
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 #, fuzzy
@@ -2968,11 +2951,6 @@ msgid ""
 "for these macros."
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
-#: R/tools-deprecated.R:0
-msgid "Package '%s' had its dependencies reduced to a minimal set."
-msgstr "Pakiet '%s'zredukował swoje zależności do najmniejszego zbioru."
-
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package CITATION file contains call(s) to:"
@@ -3415,6 +3393,7 @@ msgid "Running file %s"
 msgstr "Uruchamianie pliku %s"
 
 #. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile), domain = "R-tools")
+#. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile))
 #: R/check.R:0
 msgid "Running massageExamples to create %s failed"
 msgstr "Uruchamianie 'massageExamples' aby utworzyć %s nie powiodło się"
@@ -4688,16 +4667,6 @@ msgstr "najwyraźniej używanie '$(BLAS_LIBS)' bez '$(FLIBS)' w %s"
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr "najwyraźniej używanie '$(LAPACK_LIBS)' bez '$(BLAS_LIBS)' w %s"
 
-#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
-#: R/tools-deprecated.R:0
-msgid "argument 'pkg' must be of length 1"
-msgstr "argument 'pkg' musi być długości 1"
-
-#. R/tools-deprecated.R: stop("argument 'vignette' must be of length 1")
-#: R/tools-deprecated.R:0
-msgid "argument 'vignette' must be of length 1"
-msgstr "argument 'vignette' musi być długości 1"
-
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 msgid "argument for %s was not found"
@@ -4717,11 +4686,6 @@ msgstr "assertConditon: Pomyślnie przechwycono warunek"
 #: R/install.R:0
 msgid "backing up earlier installation"
 msgstr "tworzenie kopii zapasowej wcześniejszej instalacji"
-
-#. R/tools-deprecated.R: stop("bad operand")
-#: R/tools-deprecated.R:0
-msgid "bad operand"
-msgstr "zły operand"
 
 #. R/bibstyle.R: gettextf("bibtype %s is not implemented", sQuote(attr(paper, "bibtype")))
 #: R/bibstyle.R:0
@@ -6496,11 +6460,6 @@ msgstr ""
 msgid "testing package %s failed"
 msgstr "testowanie pakietu %s nie powiodło się"
 
-#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/tools-deprecated.R:0
-msgid "the 'lib.loc' argument has always been unused and is deprecated now"
-msgstr "argument 'lib.loc' nigdy nie był używany i jest obecnie przestarzały"
-
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
 msgid "this cannot be used for package 'base'"
@@ -8200,6 +8159,31 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "%s file wast not found"
+#~ msgstr "plik %s nie został znaleziony"
+
+#~ msgid "C++14 standard requested but CXX14 is not defined"
+#~ msgstr "Zażądano standardu C++14 ale CXX14 nie jest zdefiniowany"
+
+#~ msgid "C++17 standard requested but CXX17 is not defined"
+#~ msgstr "Zażądano standardu C++17 ale CXX17 nie jest zdefiniowany"
+
+#~ msgid "Package '%s' had its dependencies reduced to a minimal set."
+#~ msgstr "Pakiet '%s'zredukował swoje zależności do najmniejszego zbioru."
+
+#~ msgid "argument 'pkg' must be of length 1"
+#~ msgstr "argument 'pkg' musi być długości 1"
+
+#~ msgid "argument 'vignette' must be of length 1"
+#~ msgstr "argument 'vignette' musi być długości 1"
+
+#~ msgid "bad operand"
+#~ msgstr "zły operand"
+
+#~ msgid "the 'lib.loc' argument has always been unused and is deprecated now"
+#~ msgstr ""
+#~ "argument 'lib.loc' nigdy nie był używany i jest obecnie przestarzały"
 
 #~ msgid "Obsolete package %s in Rd xrefs"
 #~ msgid_plural "Obsolete packages %s in Rd xrefs"

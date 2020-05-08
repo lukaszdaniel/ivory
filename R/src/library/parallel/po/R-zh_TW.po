@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-24 10:13\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,111 +18,231 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "invalid value of %s"
-msgstr "'%s' 的值無效"
-
-msgid "need at least one argument"
-msgstr "至少需要一個引數"
-
-msgid "zero-length inputs cannot be mixed with those of non-zero length"
-msgstr "非零長度的輸入和長度為零的輸入不能同時混用"
-
-msgid "dim(X) must have a positive length"
-msgstr "dim(X)的長度必須是正數"
-
-msgid "'X' must have named dimnames"
-msgstr "'X' 必須具名字的 dimnames"
-
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "'MARGIN' 所有的元素都必須是尺寸的名稱"
-
-msgid "no cluster 'cl' supplied and none is registered"
-msgstr "沒有提供 'cl' 集群也沒有註冊"
-
-msgid "not a valid cluster"
-msgstr "叢集無效"
-
-msgid "unknown cluster type"
-msgstr "未知的集群類型"
-
-msgid "numeric 'names' must be >= 1"
-msgstr "數值 'names' 必須 >= 1"
-
-msgid "node of a socket cluster on host %s with pid %d"
-msgstr "pid 是 %2$d 的在主機 %1$s 上插座集群的節點"
-
-msgid "Connection setup failed or timed out."
-msgstr ""
-
-msgid "PORT must be specified"
-msgstr "必須指定 PORT"
-
-msgid "'nnodes' must be >= 1"
-msgstr "'nnodes' 必須 >= 1"
-
-msgid "Cluster setup failed."
-msgstr ""
-
-msgid "invalid 'child' argument"
-msgstr "'child' 引數無效"
-
-msgid "'children' must be a list of processes or a single process"
-msgstr "'children' 要麼是行程列表，要麼是一個單一的行程"
-
-msgid "'process' must be of class %s"
-msgstr "'process' 的類別必須是 %s"
-
-msgid "'child' must be a valid child process"
-msgstr "'child' 必須是有效的子行程"
-
-msgid "'what' must be a character or raw vector"
-msgstr "'what' 必須是一個字元或原始向量"
-
-msgid "'mc.cores' must be >= 1"
-msgstr "'mc.cores' 必須 >= 1"
-
-msgid "affinity.list and X must have the same length"
-msgstr "affinity.list 和 X 必須有同樣的長度"
-
+#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
+#: R/unix/mclapply.R:0
 msgid "%d function calls resulted in an error"
 msgstr "%d 個函式呼叫導致錯誤"
 
+#. R/unix/forkCluster.R: gettextf("'%s' argument must be >= 1", "nnodes")
+#. R/unix/mclapply.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/unix/pvec.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#: R/unix/forkCluster.R:0 R/unix/mclapply.R:0 R/unix/pvec.R:0
+#: R/windows/mcdummies.R:0
+#, fuzzy
+msgid "'%s' argument must be >= 1"
+msgstr "'nnodes' 必須 >= 1"
+
+#. R/clusterApply.R: stop("'X' must have named dimnames")
+#: R/clusterApply.R:0
+msgid "'X' must have named dimnames"
+msgstr "'X' 必須具名字的 dimnames"
+
+#. R/unix/mcfork.R: stop("'child' argument must be a valid child process")
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'child' argument must be a valid child process"
+msgstr "'child' 必須是有效的子行程"
+
+#. R/unix/mcfork.R: stop("'children' argument must be a list of processes or a single process")
+#. R/unix/mcfork.R: stop("'children' argument must be a list of processes or a single process")
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'children' argument must be a list of processes or a single process"
+msgstr "'children' 要麼是行程列表，要麼是一個單一的行程"
+
+#. R/snow.R: stop("'cl' argument is not a valid object of class \"cluster\"")
+#: R/snow.R:0
+msgid "'cl' argument is not a valid object of class \"cluster\""
+msgstr ""
+
+#. R/unix/mcfork.R: warning("'closeAll()' is a no-op in the master process", domain = "R-parallel")
+#: R/unix/mcfork.R:0
+msgid "'closeAll()' is a no-op in the master process"
+msgstr ""
+
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+#: R/windows/mcdummies.R:0
+#, fuzzy
+msgid "'mc.cores' argument > 1 is not supported on Windows"
+msgstr " Windows 不支援 'mc.cores' > 1"
+
+#. R/unix/mclapply.R: warning("'mc.preschedule' must be false if 'affinity.list' is used")
+#: R/unix/mclapply.R:0
 msgid "'mc.preschedule' must be false if 'affinity.list' is used"
 msgstr "如果使用了 'affinity.list'，'mc.preschedule' 必須為假"
 
-msgid "all scheduled cores encountered errors in user code"
-msgstr "使用者程式碼中所有預定的核心都發生錯誤"
+#. R/snowSOCK.R: stop("'port' argument must be specified")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "'port' argument must be specified"
+msgstr "必須指定 PORT"
 
+#. R/unix/mcfork.R: gettextf("'process' argument must be of class %s", dQuote("process"))
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'process' argument must be of class %s"
+msgstr "'process' 的類別必須是 %s"
+
+#. R/unix/pvec.R: stop("'v' argument must be a vector")
+#. R/windows/mcdummies.R: stop("'v' argument must be a vector")
+#: R/unix/pvec.R:0 R/windows/mcdummies.R:0
+#, fuzzy
+msgid "'v' argument must be a vector"
+msgstr "'v' 必須是一個向量"
+
+#. R/unix/mcfork.R: stop("'what' argument must be a character or raw vector")
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'what' argument must be a character or raw vector"
+msgstr "'what' 必須是一個字元或原始向量"
+
+#. R/unix/forkCluster.R: stop("Cluster setup failed.")
+#: R/unix/forkCluster.R:0
+msgid "Cluster setup failed."
+msgstr ""
+
+#. R/snowSOCK.R: stop("Connection setup failed or timed out.")
+#: R/snowSOCK.R:0
+msgid "Connection setup failed or timed out."
+msgstr ""
+
+#. R/snowSOCK.R: gettextf("Manually start 'worker' on %s with\n    %s\n", machine, cmd, domain = "R-parallel")
+#: R/snowSOCK.R:0
+msgid ""
+"Manually start 'worker' on %s with\n"
+"    %s"
+msgstr ""
+
+#. R/unix/mcmapply.R: stop("Zero-length inputs cannot be mixed with those of non-zero length")
+#: R/unix/mcmapply.R:0
 msgid "Zero-length inputs cannot be mixed with those of non-zero length"
 msgstr "非零長度的輸入和長度為零的輸入不能同時混用"
 
-msgid "invalid 'jobs' argument"
-msgstr "'jobs' 引數無效"
+#. R/unix/mclapply.R: stop("affinity.list and X must have the same length")
+#: R/unix/mclapply.R:0
+msgid "affinity.list and X must have the same length"
+msgstr "affinity.list 和 X 必須有同樣的長度"
 
-msgid "'v' must be a vector"
-msgstr "'v' 必須是一個向量"
+#. R/unix/mclapply.R: warning("all scheduled cores encountered errors in user code")
+#: R/unix/mclapply.R:0
+msgid "all scheduled cores encountered errors in user code"
+msgstr "使用者程式碼中所有預定的核心都發生錯誤"
 
-msgid "some results may be missing, folded or caused an error"
-msgstr "有些結果可能沒有，可能被折疊，也可能發生錯誤"
+#. R/clusterApply.R: stop("at least one argument is needed")
+#: R/clusterApply.R:0
+#, fuzzy
+msgid "at least one argument is needed"
+msgstr "至少需要一個引數"
 
+#. R/clusterApply.R: stop("dim(X) must have a positive length")
+#: R/clusterApply.R:0
+msgid "dim(X) must have a positive length"
+msgstr "dim(X)的長度必須是正數"
+
+#. R/unix/mclapply.R: gettext("fatal error in wrapper code")
+#. R/unix/mcparallel.R: gettext("fatal error in wrapper code")
+#: R/unix/mclapply.R:0 R/unix/mcparallel.R:0
+msgid "fatal error in wrapper code"
+msgstr ""
+
+#. R/windows/forkCluster.R: stop("fork clusters are not supported on Windows")
+#: R/windows/forkCluster.R:0
 msgid "fork clusters are not supported on Windows"
 msgstr "Windows 不支援分叉集群"
 
-msgid "'mc.cores' > 1 is not supported on Windows"
-msgstr " Windows 不支援 'mc.cores' > 1"
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
+#: R/unix/mcfork.R:0 R/unix/mcparallel.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "'jobs' 引數無效"
 
-msgid "Cluster setup failed. %d worker of %d failed to connect."
-msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#: R/RngStream.R:0
+msgid "invalid value of %s"
+msgstr "'%s' 的值無效"
+
+#. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")
+#: R/snow.R:0
+#, fuzzy
+msgid "no cluster 'cl' argument supplied and none is registered"
+msgstr "沒有提供 'cl' 集群也沒有註冊"
+
+#. R/snowSOCK.R: gettextf("node of a socket cluster on host %s with pid %d", sQuote(x[["host"]]),     pid, domain = "R-parallel")
+#: R/snowSOCK.R:0
+msgid "node of a socket cluster on host %s with pid %d"
+msgstr "pid 是 %2$d 的在主機 %1$s 上插座集群的節點"
+
+#. R/clusterApply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/clusterApply.R:0
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "'MARGIN' 所有的元素都必須是尺寸的名稱"
+
+#. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
+#: R/snowSOCK.R:0
+msgid "numeric 'names' must be >= 1"
+msgstr "數值 'names' 必須 >= 1"
+
+#. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
+#: R/unix/pvec.R:0
+msgid "some results may be missing, folded or caused an error"
+msgstr "有些結果可能沒有，可能被折疊，也可能發生錯誤"
+
+#. R/snowSOCK.R: gettextf("starting worker pid=%d on %s at %s\n", Sys.getpid(), paste(master, port,     sep = ":"), format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
+#. R/unix/forkCluster.R: gettextf("starting worker pid=%d on %s at %s\n", Sys.getpid(), paste(master, port,     sep = ":"), format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
+#: R/snowSOCK.R:0 R/unix/forkCluster.R:0
+msgid "starting worker pid=%d on %s at %s"
+msgstr ""
+
+#. R/snow.R: stop("unknown cluster type")
+#: R/snow.R:0
+msgid "unknown cluster type"
+msgstr "未知的集群類型"
+
+#. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
+#: R/clusterApply.R:0
+msgid "zero-length inputs cannot be mixed with those of non-zero length"
+msgstr "非零長度的輸入和長度為零的輸入不能同時混用"
+
+#. R/snow.R: ngettext(count, "%d node produced an error: %s", "%d nodes produced errors; first error: %s",     domain = "R-parallel")
+#: R/snow.R:0
+msgid "%d node produced an error: %s"
+msgid_plural "%d nodes produced errors; first error: %s"
 msgstr[0] ""
 
-msgid "socket cluster with %d nodes on host %s"
-msgid_plural "socket cluster with %d nodes on hosts %s"
-msgstr[0] "主機 %2$s 上 %1$d 個節點的插座集群"
-
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result", "%d parallel function calls did not deliver results",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"
 msgstr[0] ""
 
+#. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results",     domain = "R-parallel")
+#: R/unix/mcparallel.R:0
+msgid "%d parallel job did not deliver a result"
+msgid_plural "%d parallel jobs did not deliver results"
+msgstr[0] ""
+
+#. R/detectCores.R: ngettext(nc, "%d simultaneous process spawned", "%d simultaneous processes spawned",     domain = "R-parallel")
+#: R/detectCores.R:0
+msgid "%d simultaneous process spawned"
+msgid_plural "%d simultaneous processes spawned"
+msgstr[0] ""
+
+#. R/snowSOCK.R: ngettext(failed, "Cluster setup failed. %d worker of %d failed to connect.", "Cluster setup failed. %d of %d workers failed to connect.",     domain = "R-parallel")
+#: R/snowSOCK.R:0
+msgid "Cluster setup failed. %d worker of %d failed to connect."
+msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
+msgstr[0] ""
+
+#. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected",     domain = "R-parallel")
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid ""
 "scheduled core %s did not deliver a result, all values of the job will be "
@@ -132,6 +252,8 @@ msgid_plural ""
 "affected"
 msgstr[0] "預定內核 %s 的使用者程式碼中發生錯誤，所有作業值都將受到影響"
 
+#. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+#: R/unix/mclapply.R:0
 msgid ""
 "scheduled core %s encountered error in user code, all values of the job will "
 "be affected"
@@ -140,6 +262,25 @@ msgid_plural ""
 "will be affected"
 msgstr[0] "預定內核 %s 的使用者程式碼中發生錯誤，所有作業值都將受到影響"
 
-msgid "%d parallel job did not deliver a result"
-msgid_plural "%d parallel jobs did not deliver results"
-msgstr[0] ""
+#. R/snowSOCK.R: ngettext(nc, "socket cluster with %d node on host %s", "socket cluster with %d nodes on host %s",     domain = "R-parallel")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "socket cluster with %d node on host %s"
+msgid_plural "socket cluster with %d nodes on host %s"
+msgstr[0] "主機 %2$s 上 %1$d 個節點的插座集群"
+
+#. R/snowSOCK.R: ngettext(nc, "socket cluster with %d node on hosts %s", "socket cluster with %d nodes on hosts %s",     domain = "R-parallel")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "socket cluster with %d node on hosts %s"
+msgid_plural "socket cluster with %d nodes on hosts %s"
+msgstr[0] "主機 %2$s 上 %1$d 個節點的插座集群"
+
+#~ msgid "not a valid cluster"
+#~ msgstr "叢集無效"
+
+#~ msgid "invalid 'child' argument"
+#~ msgstr "'child' 引數無效"
+
+#~ msgid "'mc.cores' must be >= 1"
+#~ msgstr "'mc.cores' 必須 >= 1"

@@ -158,7 +158,7 @@ SEXP attribute_hidden getAttrib0(SEXP vec, SEXP name)
     return R_NilValue;
 }
 
-SEXP getAttrib(SEXP vec, SEXP name)
+SEXP Rf_getAttrib(SEXP vec, SEXP name)
 {
     if(TYPEOF(vec) == CHARSXP)
 	error(_("cannot have attributes on a 'CHARSXP'"));
@@ -498,7 +498,7 @@ SEXP attribute_hidden do_comment(SEXP call, SEXP op, SEXP args, SEXP env)
     return getAttrib(CAR(args), R_CommentSymbol);
 }
 
-SEXP classgets(SEXP vec, SEXP klass)
+SEXP Rf_classgets(SEXP vec, SEXP klass)
 {
     if (isNull(klass) || isString(klass)) {
 	int ncl = length(klass);
@@ -688,11 +688,11 @@ static SEXP cache_class(const char *class, SEXP klass)
 	R_S4_extends_table = R_NewHashedEnv(R_NilValue, ScalarInteger(0));
 	R_PreserveObject(R_S4_extends_table);
     }
-    if(isNull(klass)) { /* retrieve cached value */
-	SEXP val = findVarInFrame(R_S4_extends_table, install(class));
-	return (val == R_UnboundValue) ? klass : val;
+    if(isNull(klass)) {
+	R_removeVarFromFrame(install(class), R_S4_extends_table);
+    } else {
+	defineVar(install(class), klass, R_S4_extends_table);
     }
-    defineVar(install(class), klass, R_S4_extends_table);
     return klass;
 }
 
@@ -768,7 +768,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
 
 // called when R's main loop is setup :
 attribute_hidden
-void InitS3DefaultTypes()
+void Rf_InitS3DefaultTypes()
 {
     for(int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
 	SEXP part3 = R_NilValue;
@@ -937,7 +937,7 @@ SEXP attribute_hidden do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     return CAR(args);
 }
 
-SEXP namesgets(SEXP vec, SEXP val)
+SEXP Rf_namesgets(SEXP vec, SEXP val)
 {
     int i;
     SEXP s, rval, tval;
@@ -1069,7 +1069,7 @@ static SEXP dimnamesgets1(SEXP val1)
 }
 
 
-SEXP dimnamesgets(SEXP vec, SEXP val)
+SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
 {
     SEXP dims, top, newval;
     int i, k;
@@ -1195,7 +1195,7 @@ SEXP attribute_hidden do_dimgets(SEXP call, SEXP op, SEXP args, SEXP env)
     return x;
 }
 
-SEXP dimgets(SEXP vec, SEXP val)
+SEXP Rf_dimgets(SEXP vec, SEXP val)
 {
     int i, ndim;
     R_xlen_t len, total;
@@ -1637,7 +1637,7 @@ SEXP attribute_hidden do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 /* the dimnames for matrices and arrays in a standard form. */
 
 /* NB: this may return R_alloc-ed rn and dn */
-void GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
+void Rf_GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
 		       const char **rn, const char **cn)
 {
     SEXP dimnames = getAttrib(x, R_DimNamesSymbol);
@@ -1665,7 +1665,7 @@ void GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
 }
 
 
-SEXP GetArrayDimnames(SEXP x)
+SEXP Rf_GetArrayDimnames(SEXP x)
 {
     return getAttrib(x, R_DimNamesSymbol);
 }
@@ -1728,7 +1728,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     return(val);
 }
 
-SEXP S3Class(SEXP obj)
+SEXP Rf_S3Class(SEXP obj)
 {
     if(!s_dot_S3Class) init_slot_handling();
     return getAttrib(obj, s_dot_S3Class);

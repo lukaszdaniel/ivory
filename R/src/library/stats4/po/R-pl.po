@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
 #. R/mle.R: gettext("Call:", domain = "R-stats4")
@@ -36,7 +36,7 @@ msgstr "Oszacowanie maksimum funkcji wiarygodności"
 #. R/mle.R: stop("Mismatch in length of start values")
 #: R/mle.R:0
 msgid "Mismatch in length of start values"
-msgstr ""
+msgstr "Niezgodność w długości wartości startowych"
 
 #. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
 #: R/mle.R:0
@@ -61,7 +61,7 @@ msgstr "dodatkowe argumenty zostały odrzucone"
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
 msgid "fixed values violate constraints"
-msgstr ""
+msgstr "ustalone wartości naruszają więzy"
 
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
@@ -71,7 +71,7 @@ msgstr "poziomy przycięto do wartości dodatnich"
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0
 msgid "named list expected"
-msgstr ""
+msgstr "oczekiwano nazwanej listy"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
@@ -83,16 +83,15 @@ msgstr ""
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr ""
-"niektóre nazwane argumenty w funkcji 'fixed' nie są argumentami do "
-"dostarczonej logarytmicznej funkcji wiarygodności"
+"niektóre nazwane argumenty nie są argumentami do dostarczonej logarytmicznej "
+"funkcji wiarygodności"
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
-msgstr ""
+msgstr "wartości startowe nie zaspokajają więzów"
 
 #~ msgid "'start' must be a named list"
 #~ msgstr "'start' musi być nazwaną listą"

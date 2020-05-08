@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2107,7 +2107,7 @@ msgstr ""
 msgid "invalid object for formal method definition: type %s"
 msgstr ""
 
-#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti), classi)
+#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti)[[1L]], classi)
 #: R/SClasses.R:0
 msgid ""
 "invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or "

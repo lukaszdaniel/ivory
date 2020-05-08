@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:44+0100\n"
+"POT-Creation-Date: 2020-04-15 18:32+0200\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -143,7 +143,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:47 devCairo.c:56
+#: devCairo.c:51 devCairo.c:62
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr " ラスターを割り当てることができませんでした "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:44+0100\n"
+"POT-Creation-Date: 2020-04-15 18:32+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -143,7 +143,7 @@ msgid "maximum number of colors is %d"
 msgstr ""
 
 # 75%
-#: devCairo.c:47 devCairo.c:56
+#: devCairo.c:51 devCairo.c:62
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "kunne ikke allokere rastere"

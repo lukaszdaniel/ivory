@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-24 10:13\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,31 +18,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "named list expected"
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Call:"
 msgstr ""
 
-#, fuzzy
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr "'fixed' 裡的一些帶名稱引數不是給所提供的對數似然做為引數來用的"
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Coefficients:"
+msgstr ""
 
+#. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
 msgid "Mismatch in length of start values"
 msgstr ""
 
+#. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s down"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s up", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s up"
+msgstr ""
+
+#. R/mle.R: gettext("Profiling...", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Profiling..."
+msgstr ""
+
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "多餘的引數忽略不用"
+
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
 msgid "fixed values violate constraints"
 msgstr ""
 
-msgid "start values do not satisfy constraints"
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
+msgid "levels truncated to positive values only"
+msgstr "階層截為正數值"
+
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
 msgstr ""
 
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
 msgid ""
 "profiling has found a better solution, so original fit had not converged"
 msgstr "透過靠模切削找到了一個更好的答案，因此原來的擬合沒有收斂"
 
-msgid "levels truncated to positive values only"
-msgstr "階層截為正數值"
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+#, fuzzy
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr "'fixed' 裡的一些帶名稱引數不是給所提供的對數似然做為引數來用的"
 
-msgid "extra arguments discarded"
-msgstr "多餘的引數忽略不用"
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr ""
 
 #~ msgid "'start' must be a named list"
 #~ msgstr "'start' 必須是帶名稱串列"

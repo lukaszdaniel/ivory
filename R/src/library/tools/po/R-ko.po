@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -48,12 +48,6 @@ msgstr "테스트 '%s'는 사용가능하지 않습니다"
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
-msgstr "파일 '%s'를 찾을 수 없습니다"
-
-#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "%s file wast not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -760,24 +754,11 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
+#. R/install.R: gettextf("C++%s standard requested but CXX%s is not defined", use_cxxstd, use_cxxstd,     domain = "R-tools")
 #: R/install.R:0
-msgid "C++11 standard requested but CXX11 is not defined"
+msgid "C++%s standard requested but CXX%s is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++14 standard requested but CXX14 is not defined"
-msgstr ""
-
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++17 standard requested but CXX17 is not defined"
-msgstr ""
-
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++98 standard requested but unsupported"
@@ -2968,11 +2949,6 @@ msgid ""
 "for these macros."
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
-#: R/tools-deprecated.R:0
-msgid "Package '%s' had its dependencies reduced to a minimal set."
-msgstr ""
-
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package CITATION file contains call(s) to:"
@@ -3396,6 +3372,7 @@ msgid "Running file %s"
 msgstr "%s를 실행중입니다"
 
 #. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile), domain = "R-tools")
+#. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile))
 #: R/check.R:0
 msgid "Running massageExamples to create %s failed"
 msgstr ""
@@ -4661,17 +4638,6 @@ msgstr ""
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
 
-#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "argument 'pkg' must be of length 1"
-msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
-
-#. R/tools-deprecated.R: stop("argument 'vignette' must be of length 1")
-#: R/tools-deprecated.R:0
-msgid "argument 'vignette' must be of length 1"
-msgstr "인자 'vignette'는 반드시 길이가 1 이어야 합니다"
-
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 #, fuzzy
@@ -4692,11 +4658,6 @@ msgstr ""
 #: R/install.R:0
 msgid "backing up earlier installation"
 msgstr ""
-
-#. R/tools-deprecated.R: stop("bad operand")
-#: R/tools-deprecated.R:0
-msgid "bad operand"
-msgstr "잘못된 연산자입니다"
 
 #. R/bibstyle.R: gettextf("bibtype %s is not implemented", sQuote(attr(paper, "bibtype")))
 #: R/bibstyle.R:0
@@ -6562,11 +6523,6 @@ msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없�
 msgid "testing package %s failed"
 msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
-#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/tools-deprecated.R:0
-msgid "the 'lib.loc' argument has always been unused and is deprecated now"
-msgstr ""
-
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
 msgid "this cannot be used for package 'base'"
@@ -7860,6 +7816,20 @@ msgstr[0] ""
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "%s file wast not found"
+#~ msgstr "파일 '%s'를 찾을 수 없습니다"
+
+#, fuzzy
+#~ msgid "argument 'pkg' must be of length 1"
+#~ msgstr "인자 'package'는 반드시 길이가 1 이어야 합니다"
+
+#~ msgid "argument 'vignette' must be of length 1"
+#~ msgstr "인자 'vignette'는 반드시 길이가 1 이어야 합니다"
+
+#~ msgid "bad operand"
+#~ msgstr "잘못된 연산자입니다"
 
 #, fuzzy
 #~ msgid "cannot coerce %s to logical"

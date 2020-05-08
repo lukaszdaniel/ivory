@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -2490,7 +2490,7 @@ msgstr "( должен быть списком методов либо методом, имеет класс \""
 msgid "invalid object for formal method definition: type %s"
 msgstr "неверный объект для формального определения метода: тип \"%s\""
 
-#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti), classi)
+#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti)[[1L]], classi)
 #: R/SClasses.R:0
 #, fuzzy
 msgid ""

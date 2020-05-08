@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: base 4.0.0\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"Project-Id-Version: base 4.1.0\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2426,14 +2426,6 @@ msgid "bad 'S3method' directive: %s"
 msgstr ""
 
 
-#: R/conditions.R: 0
-#. R/conditions.R: stop("bad handler specification")
-#. R/conditions.R: stop("bad handler specification")
-
-msgid "bad handler specification"
-msgstr ""
-
-
 #: R/dates.R: 0
 #: R/datetime.R: 0
 #: R/datetime.R: 0
@@ -2480,6 +2472,13 @@ msgstr ""
 #. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
 
 msgid "can only splice inside a call"
+msgstr ""
+
+
+#: R/backquote.R: 0
+#. R/backquote.R: stop("can only splice vectors")
+
+msgid "can only splice vectors"
 msgstr ""
 
 
@@ -2631,6 +2630,22 @@ msgstr ""
 #. R/datetime.R: stop("component subscript must be a character string")
 
 msgid "component subscript must be a character string"
+msgstr ""
+
+
+#: R/conditions.R: 0
+#. R/conditions.R: stop("condition handlers must be functions")
+
+msgid "condition handlers must be functions"
+msgstr ""
+
+
+#: R/conditions.R: 0
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+
+msgid "condition handlers must be specified with a condition class"
 msgstr ""
 
 
@@ -3958,9 +3973,7 @@ msgstr ""
 
 
 #: R/library.R: 0
-#: R/namespace.R: 0
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
 
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr ""
@@ -3984,6 +3997,13 @@ msgstr ""
 #. R/library.R: gettextf("package %s was found more than once. Using the first from\n  %s", sQuote(pkg),     paste(dQuote(paths), collapse = ",\n  "))
 
 msgid "package %s was found more than once. Using the first from\n  %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package))
+
+msgid "package %s was installed before R 4.0.0: please re-install it"
 msgstr ""
 
 
@@ -4019,6 +4039,13 @@ msgstr ""
 #. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s", paste(which(is.na(lw)),     collapse = ", "))
 
 msgid "probably wrong encoding in 'names(.)' of column %s"
+msgstr ""
+
+
+#: R/conditions.R: 0
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
+
+msgid "pushing duplicate `%s` handler on top of the stack"
 msgstr ""
 
 

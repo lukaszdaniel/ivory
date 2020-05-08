@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-03-30 07:33\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,117 +18,260 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "namespace found within local environments"
-msgstr "在本地環境中找到命名空間"
+#. R/cmp.R: gettextf("%s at %s", paste(e$message, collapse = ""), paste(deparse(e$call), collapse = ""),     domain = "R-compiler")
+#. R/cmp.R: gettextf("%s at %s", paste(err$message, collapse = ""), paste(deparse(err$call),     collapse = ""), domain = "R-compiler")
+#: R/cmp.R:0
+msgid "%s at %s"
+msgstr ""
 
-msgid "not a proper evaluation environment"
-msgstr "不是一個正確的評估環境"
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr ""
 
-msgid "non-namespace found within namespace environments"
-msgstr "在命名空間環境中找到非命名空間"
+#. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
+#: R/cmp.R:0
+msgid "%s may be used in an incorrect context"
+msgstr ""
 
-msgid "namespace found within global environments"
-msgstr "在全域環境中找到命名空間"
+#. R/cmp.R: gettextf("%s used in wrong context: no loop is visible", fun)
+#: R/cmp.R:0
+msgid "%s used in wrong context: no loop is visible"
+msgstr ""
 
-msgid "bad assignment: %s"
-msgstr "壞的指派：%s"
-
-msgid "cannot constant fold literal promises"
-msgstr "無法對字面承諾進行不固定折疊"
-
-msgid "cannot constant fold literal bytecode objects"
-msgstr "無法對字面位元組碼物件進行不固定倍折疊"
-
-msgid "no offset recorded for label \"%s\""
-msgstr "沒有給標籤\"%s\"記錄了偏移"
-
-msgid "cannot compile byte code literals in code"
-msgstr "不能在編碼裡編譯程式碼的位元組碼字面值"
-
-msgid "cannot compile promise literals in code"
-msgstr "不能編譯程式碼中的承諾文字"
-
-msgid "possible error in '%s': %s"
-msgstr "'%s' 裡可能不正確: %s"
-
-msgid "bad namespace import frame"
-msgstr "命名空間匯入框無效"
-
-msgid "bad assignment 1"
-msgstr "1 指派發生錯誤"
-
-msgid "bad assignment 2"
-msgstr "2 指派發生錯誤"
-
-msgid "invalid function in complex assignment"
-msgstr "複雜指派裡的函式無效"
-
-msgid "missing arguments are not allowed"
-msgstr "不允許缺少參數"
-
-msgid "empty alternative in numeric switch"
-msgstr "在數字交換機裡不能有空的替代"
-
-msgid "no visible global function definition for '%s'"
-msgstr "看不到 '%s' 的全域函式定義"
-
-msgid "no visible binding for global variable '%s'"
-msgstr "看不到全域變數 '%s' 的連接"
-
-msgid "no visible binding for '<<-' assignment to '%s'"
-msgstr "看不到 '<<-' 指派到 '%s' 的連接"
-
-msgid "wrong number of arguments to '%s'"
-msgstr "給 '%s' 的參數個數無效"
-
-msgid "more than one default provided in switch() call"
-msgstr "呼叫 switch() 時只能有一個預設值"
-
-msgid "'switch' with no alternatives"
-msgstr "'switch' 沒有任何替代方案"
-
-msgid "Error: compilation failed -"
-msgstr "錯誤：編譯失敗 -"
-
-msgid "cannot compile a non-function"
-msgstr "無法編譯非函式"
-
-msgid "compiling '%s'"
-msgstr "編譯 '%s'"
-
-msgid "saving to file \"%s\" ..."
-msgstr "儲存到檔案\"%s\" … "
-
-msgid "done"
-msgstr "做完了"
-
-msgid "'env' must be a top level environment"
-msgstr "'env' 必須是頂級環境"
-
-msgid "input and output file names are the same"
-msgstr "輸入和輸出檔案的檔案名稱是一樣的"
-
-msgid "empty input file; no output written"
-msgstr "輸入檔案是空的，因此沒有寫任何輸出"
-
-msgid "file '%s' does not exist"
-msgstr "沒有 '%s' 這樣的檔案"
-
+#. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
+#: R/cmp.R:0
 msgid "'%s' is not a valid compiler option"
 msgstr "沒有 '%s' 這樣的編譯器選項"
 
-msgid "invalid environment variable value: %s==%s"
-msgstr "無效的環境變數值：%s==%s"
+#. R/cmp.R: stop("'env' must be a top level environment")
+#: R/cmp.R:0
+msgid "'env' must be a top level environment"
+msgstr "'env' 必須是頂級環境"
 
-msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
-msgstr "無效的編譯選項：optimize(==%d)<2 和 jitEnabled(==%d)>2"
+#. R/cmp.R: gettext("'switch()' function with no alternatives")
+#: R/cmp.R:0
+#, fuzzy
+msgid "'switch()' function with no alternatives"
+msgstr "'switch' 沒有任何替代方案"
 
-msgid "function is not compiled"
-msgstr "函式沒有被編制"
+#. R/cmp.R: gettext("Error: compilation failed:", domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "Error: compilation failed:"
+msgstr "錯誤：編譯失敗 -"
 
+#. R/cmp.R: gettext("Note: ", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "Note:"
+msgstr ""
+
+#. R/cmp.R: gettext("bad assignment 1")
+#: R/cmp.R:0
+msgid "bad assignment 1"
+msgstr "1 指派發生錯誤"
+
+#. R/cmp.R: gettext("bad assignment 2")
+#: R/cmp.R:0
+msgid "bad assignment 2"
+msgstr "2 指派發生錯誤"
+
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#: R/cmp.R:0
+msgid "bad assignment: %s"
+msgstr "壞的指派：%s"
+
+#. R/cmp.R: gettext("bad namespace import frame")
+#: R/cmp.R:0
+msgid "bad namespace import frame"
+msgstr "命名空間匯入框無效"
+
+#. R/cmp.R: stop("cannot compile a non-function")
+#: R/cmp.R:0
+msgid "cannot compile a non-function"
+msgstr "無法編譯非函式"
+
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#: R/cmp.R:0
+msgid "cannot compile byte code literals in code"
+msgstr "不能在編碼裡編譯程式碼的位元組碼字面值"
+
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#: R/cmp.R:0
+msgid "cannot compile promise literals in code"
+msgstr "不能編譯程式碼中的承諾文字"
+
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
 msgid "cannot compile this expression"
 msgstr "無法編譯這段運算式"
 
+#. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
+#: R/cmp.R:0
+msgid "cannot constant fold literal bytecode objects"
+msgstr "無法對字面位元組碼物件進行不固定倍折疊"
+
+#. R/cmp.R: gettext("cannot constant fold literal promises")
+#: R/cmp.R:0
+msgid "cannot constant fold literal promises"
+msgstr "無法對字面承諾進行不固定折疊"
+
+#. R/cmp.R: gettextf("compiling %s", sQuote(f), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling %s"
+msgstr "編譯 '%s'"
+
+#. R/cmp.R: gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling expression %s ..."
+msgstr "無法編譯這段運算式"
+
+#. R/cmp.R: gettextf("compiling function %s", sQuote(e[[2]]), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling function %s"
+msgstr "編譯 '%s'"
+
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "done"
+msgstr "做完了"
+
+#. R/cmp.R: stop("empty alternative in numeric 'switch()' function")
+#: R/cmp.R:0
+#, fuzzy
+msgid "empty alternative in numeric 'switch()' function"
+msgstr "在數字交換機裡不能有空的替代"
+
+#. R/cmp.R: warning("empty input file; no output written")
+#: R/cmp.R:0
+msgid "empty input file; no output written"
+msgstr "輸入檔案是空的，因此沒有寫任何輸出"
+
+#. R/cmp.R: gettextf("file '%s' does not exist", file)
+#: R/cmp.R:0
+msgid "file '%s' does not exist"
+msgstr "沒有 '%s' 這樣的檔案"
+
+#. R/cmp.R: stop("function is not compiled")
+#: R/cmp.R:0
+msgid "function is not compiled"
+msgstr "函式沒有被編制"
+
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#: R/cmp.R:0
+msgid "handler for '%s' is already defined for another package"
+msgstr ""
+
+#. R/cmp.R: stop("input and output file names are the same")
+#: R/cmp.R:0
+msgid "input and output file names are the same"
+msgstr "輸入和輸出檔案的檔案名稱是一樣的"
+
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+#: R/cmp.R:0
+#, fuzzy
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr "無效的編譯選項：optimize(==%d)<2 和 jitEnabled(==%d)>2"
+
+#. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName, value)
+#: R/cmp.R:0
+msgid "invalid environment variable value: %s==%s"
+msgstr "無效的環境變數值：%s==%s"
+
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#: R/cmp.R:0
+msgid "invalid function in complex assignment"
+msgstr "複雜指派裡的函式無效"
+
+#. R/cmp.R: gettext("missing arguments are not allowed")
+#: R/cmp.R:0
+msgid "missing arguments are not allowed"
+msgstr "不允許缺少參數"
+
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
+#: R/cmp.R:0
+#, fuzzy
+msgid "more than one default provided in 'switch()' call"
+msgstr "呼叫 switch() 時只能有一個預設值"
+
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr "在全域環境中找到命名空間"
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr "在本地環境中找到命名空間"
+
+#. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
+#: R/cmp.R:0
+msgid "no offset recorded for label \"%s\""
+msgstr "沒有給標籤\"%s\"記錄了偏移"
+
+#. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
+#: R/cmp.R:0
+msgid "no visible binding for '<<-' assignment to '%s'"
+msgstr "看不到 '<<-' 指派到 '%s' 的連接"
+
+#. R/cmp.R: gettextf("no visible binding for global variable '%s'", as.character(var))
+#: R/cmp.R:0
+msgid "no visible binding for global variable '%s'"
+msgstr "看不到全域變數 '%s' 的連接"
+
+#. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "no visible global function definition for '%s'"
+msgstr "看不到 '%s' 的全域函式定義"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+msgid "non-namespace found within namespace environments"
+msgstr "在命名空間環境中找到非命名空間"
+
+#. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
+#: R/cmp.R:0
+msgid "possible error in '%s': %s"
+msgstr "'%s' 裡可能不正確: %s"
+
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(file), domain = "R-compiler")
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "saving to file %s ..."
+msgstr "儲存到檔案\"%s\" … "
+
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#: R/cmp.R:0
+#, fuzzy
+msgid "supplied 'env' argument is not a proper evaluation environment"
+msgstr "不是一個正確的評估環境"
+
+#. R/cmp.R: gettextf("wrong number of arguments to '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "wrong number of arguments to '%s'"
+msgstr "給 '%s' 的參數個數無效"
+
+#. R/cmp.R: ngettext(length(funs), "local assignment to syntactic function: ", "local assignments to syntactic functions: ")
+#: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "為句法函式作了本地指派："

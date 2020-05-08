@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2029,12 +2029,6 @@ msgstr "自动载入器在'%2$s'找不到'%1$s' "
 msgid "bad 'S3method' directive: %s"
 msgstr "不是'S3method'指令：%s"
 
-#. R/conditions.R: stop("bad handler specification")
-#. R/conditions.R: stop("bad handler specification")
-#: R/conditions.R:0
-msgid "bad handler specification"
-msgstr "处置器柄规格不对"
-
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date"))
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
 #. R/datetime.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("POSIXt"))
@@ -2072,6 +2066,12 @@ msgstr "只能保存到二进列链结"
 #: R/backquote.R:0
 msgid "can only splice inside a call"
 msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+#, fuzzy
+msgid "can only splice vectors"
+msgstr "只能写矢量对象"
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))
@@ -2192,6 +2192,19 @@ msgstr "复数矩阵现在不能用"
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr "参数'object'必需解析成单一个字符串"
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+#, fuzzy
+msgid "condition handlers must be functions"
+msgstr "處置程式必需是函数"
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3231,8 +3244,7 @@ msgid ""
 msgstr "找到了程辑包%1$s %2$s，但%5$s需要%3$s %4$s"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
-#: R/library.R:0 R/namespace.R:0
+#: R/library.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr "程辑包%s是在R版本2.10.0之前建的：你得重新安装"
@@ -3257,6 +3269,12 @@ msgid ""
 msgstr ""
 "找到多个叫%s的程辑包，\n"
 "载入'%s'里找到的那一个"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr "程辑包%s是在R版本2.10.0之前建的：你得重新安装"
 
 #. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
 #: R/namespace.R:0
@@ -3291,6 +3309,11 @@ msgstr ""
 #, fuzzy
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "列名称的编码可能不对"
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
+msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
@@ -3904,6 +3927,9 @@ msgstr[0] "不存在叫%s这个名字的程辑包"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
+
+#~ msgid "bad handler specification"
+#~ msgstr "处置器柄规格不对"
 
 #, fuzzy
 #~ msgid "'x' must have named dimnames"

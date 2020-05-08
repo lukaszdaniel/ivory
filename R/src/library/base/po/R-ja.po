@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2041,12 +2041,6 @@ msgstr " 自動ローダーは '%s' を '%s' 中に見つけられませんで�
 msgid "bad 'S3method' directive: %s"
 msgstr " 誤った 'S3method' 指令です：%s "
 
-#. R/conditions.R: stop("bad handler specification")
-#. R/conditions.R: stop("bad handler specification")
-#: R/conditions.R:0
-msgid "bad handler specification"
-msgstr " 誤ったハンドラーの指定です "
-
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date"))
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
 #. R/datetime.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("POSIXt"))
@@ -2084,6 +2078,12 @@ msgstr " バイナリコネクションへしかセーブできません "
 #: R/backquote.R:0
 msgid "can only splice inside a call"
 msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+#, fuzzy
+msgid "can only splice vectors"
+msgstr " ベクトルオブジェクトしか書き込めません "
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))
@@ -2204,6 +2204,19 @@ msgstr " 複素行列は現在許可されていません "
 #, fuzzy
 msgid "component subscript must be a character string"
 msgstr " 引数 'object'' は空でない単一の文字列でなければなりません "
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+#, fuzzy
+msgid "condition handlers must be functions"
+msgstr " ハンドラーは関数でなければなりません "
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
 
 #. R/../../../../share/R/examples-header.R: gettext("connections left open:\n", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
@@ -3276,8 +3289,7 @@ msgstr ""
 " パッケージ '%s' %s はありましたが、%s %s が '%s' によって要求されています "
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
-#. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(package))
-#: R/library.R:0 R/namespace.R:0
+#: R/library.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"
 msgstr ""
@@ -3303,6 +3315,13 @@ msgid ""
 msgstr ""
 " パッケージ '%s' が複数見つかりました。 \n"
 " '%s' 中に見つかったものを使います "
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr ""
+" パッケージ '%s' は R 2.10.0 以前に造らました。再インストールして下さい "
 
 #. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package), domain = "R-base")
 #: R/namespace.R:0
@@ -3337,6 +3356,11 @@ msgstr ""
 #, fuzzy
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr " おそらく列の names(.) 中に間違ったエンコーディングがあります "
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack", class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
+msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
@@ -3961,6 +3985,9 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#~ msgid "bad handler specification"
+#~ msgstr " 誤ったハンドラーの指定です "
 
 #, fuzzy
 #~ msgid "'x' must have named dimnames"

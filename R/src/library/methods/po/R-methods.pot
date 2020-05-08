@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: methods 4.0.0\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"Project-Id-Version: methods 4.1.0\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2558,7 +2558,7 @@ msgstr ""
 
 
 #: R/SClasses.R: 0
-#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti), classi)
+#. R/SClasses.R: gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"",     slotNames[[i]], Class, class(sloti)[[1L]], classi)
 
 msgid "invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\""
 msgstr ""

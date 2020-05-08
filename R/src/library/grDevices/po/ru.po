@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:44+0100\n"
+"POT-Creation-Date: 2020-04-15 18:32+0200\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -146,7 +146,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:47 devCairo.c:56
+#: devCairo.c:51 devCairo.c:62
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "не могу разместить растры"

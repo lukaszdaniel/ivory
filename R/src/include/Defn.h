@@ -1192,7 +1192,7 @@ void InitTempDir(void);
 void R_reInitTempDir(int);
 void InitTypeTables(void);
 void initStack(void);
-void InitS3DefaultTypes(void);
+void Rf_InitS3DefaultTypes(void);
 void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
 Rboolean isMethodsDispatchOn(void);
 int isValidName(const char *);
@@ -1376,7 +1376,7 @@ size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
 SEXP Rf_installTrChar(SEXP);
 
-const wchar_t *wtransChar(SEXP x); /* from sysutils.c */
+const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.c */
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);

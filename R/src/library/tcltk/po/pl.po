@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: tcltk.c:62
 msgid "parse error in R expression"
@@ -31,7 +31,7 @@ msgstr "niepoprawny argument"
 
 #: tcltk.c:281
 msgid "no such variable"
-msgstr ""
+msgstr "nie ma takiej zmiennej"
 
 #: tcltk.c:313 tcltk.c:333 tcltk.c:408 tcltk.c:473 tcltk.c:527
 msgid "invalid object of type tclObj -- perhaps saved from another session?"

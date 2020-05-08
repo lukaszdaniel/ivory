@@ -1,5 +1,5 @@
 /*
- *  spatial/src/init.c by W. N. Venables and B. D. Ripley.  Copyright (C) 2002
+ *  spatial/src/init.c by W. N. Venables and B. D. Ripley.  Copyright (C) 2002-2016
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,6 +15,8 @@
  *  http://www.r-project.org/Licenses/
  *
  */
+
+#include <stdlib.h> // currently in R.h
 #include <R.h>
 #include "spatial.h"
 #include "R_ext/Rdynload.h"
@@ -45,7 +47,5 @@ void R_init_spatial(DllInfo *dll)
 {
     R_registerRoutines(dll, CEntries, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
-#if defined(R_VERSION) && R_VERSION >= R_Version(2, 16, 0)
     R_forceSymbols(dll, TRUE);
-#endif
 }

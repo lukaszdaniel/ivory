@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -46,12 +46,6 @@ msgstr "Test '%s' nicht verfügbar"
 #: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
-msgstr "Datei '%s' nicht gefunden"
-
-#. R/tools-deprecated.R: gettextf("%s file wast not found", sQuote(vignette))
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "%s file wast not found"
 msgstr "Datei '%s' nicht gefunden"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -748,24 +742,11 @@ msgstr ""
 msgid "BugReports field should not be empty"
 msgstr ""
 
-#. R/install.R: stop("C++11 standard requested but CXX11 is not defined", call. = FALSE, domain = "R-tools")
+#. R/install.R: gettextf("C++%s standard requested but CXX%s is not defined", use_cxxstd, use_cxxstd,     domain = "R-tools")
 #: R/install.R:0
-msgid "C++11 standard requested but CXX11 is not defined"
+msgid "C++%s standard requested but CXX%s is not defined"
 msgstr ""
 
-#. R/install.R: stop("C++14 standard requested but CXX14 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++14 standard requested but CXX14 is not defined"
-msgstr ""
-
-#. R/install.R: stop("C++17 standard requested but CXX17 is not defined", call. = FALSE, domain = "R-tools")
-#: R/install.R:0
-msgid "C++17 standard requested but CXX17 is not defined"
-msgstr ""
-
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
-#. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #. R/install.R: stop("C++98 standard requested but unsupported", call. = FALSE, domain = "R-tools")
 #: R/install.R:0
 msgid "C++98 standard requested but unsupported"
@@ -3000,12 +2981,6 @@ msgid ""
 "for these macros."
 msgstr ""
 
-#. R/tools-deprecated.R: gettextf("Package '%s' had its dependencies reduced to a minimal set.", pkgMtrx[1,     ])
-#: R/tools-deprecated.R:0
-#, fuzzy
-msgid "Package '%s' had its dependencies reduced to a minimal set."
-msgstr "Abhängigkeiten von Paket '%s' auf minimale Menge reduziert."
-
 #. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package CITATION file contains call(s) to:"
@@ -3436,6 +3411,7 @@ msgid "Running file %s"
 msgstr "Ausführen"
 
 #. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile), domain = "R-tools")
+#. R/check.R: gettextf("Running massageExamples to create %s failed", sQuote(exfile))
 #: R/check.R:0
 #, fuzzy
 msgid "Running massageExamples to create %s failed"
@@ -4720,16 +4696,6 @@ msgstr ""
 msgid "apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in %s"
 msgstr ""
 
-#. R/tools-deprecated.R: stop("argument 'pkg' must be of length 1")
-#: R/tools-deprecated.R:0
-msgid "argument 'pkg' must be of length 1"
-msgstr "Argument 'pkg' muss Länge 1 haben"
-
-#. R/tools-deprecated.R: stop("argument 'vignette' must be of length 1")
-#: R/tools-deprecated.R:0
-msgid "argument 'vignette' must be of length 1"
-msgstr "Argument 'vignette' muss Länge 1 haben"
-
 #. R/parseLatex.R: gettext("argument for %s was not found", sQuote(c(a)))
 #: R/parseLatex.R:0
 #, fuzzy
@@ -4751,11 +4717,6 @@ msgstr ""
 #, fuzzy
 msgid "backing up earlier installation"
 msgstr "gepackte Installation von"
-
-#. R/tools-deprecated.R: stop("bad operand")
-#: R/tools-deprecated.R:0
-msgid "bad operand"
-msgstr "ungeeigneter Operand"
 
 #. R/bibstyle.R: gettextf("bibtype %s is not implemented", sQuote(attr(paper, "bibtype")))
 #: R/bibstyle.R:0
@@ -6666,11 +6627,6 @@ msgstr "Link %s konnte im Paket %s nicht gefunden werden"
 msgid "testing package %s failed"
 msgstr "Test von '%s' fehlgeschlagen"
 
-#. R/tools-deprecated.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
-#: R/tools-deprecated.R:0
-msgid "the 'lib.loc' argument has always been unused and is deprecated now"
-msgstr ""
-
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
 msgid "this cannot be used for package 'base'"
@@ -8116,6 +8072,23 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
+
+#, fuzzy
+#~ msgid "%s file wast not found"
+#~ msgstr "Datei '%s' nicht gefunden"
+
+#, fuzzy
+#~ msgid "Package '%s' had its dependencies reduced to a minimal set."
+#~ msgstr "Abhängigkeiten von Paket '%s' auf minimale Menge reduziert."
+
+#~ msgid "argument 'pkg' must be of length 1"
+#~ msgstr "Argument 'pkg' muss Länge 1 haben"
+
+#~ msgid "argument 'vignette' must be of length 1"
+#~ msgstr "Argument 'vignette' muss Länge 1 haben"
+
+#~ msgid "bad operand"
+#~ msgstr "ungeeigneter Operand"
 
 #, fuzzy
 #~ msgid "Obsolete package %s in Rd xrefs"

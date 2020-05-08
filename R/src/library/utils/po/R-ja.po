@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-02-16 12:17\n"
+"POT-Creation-Date: 2020-04-15 18:32\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2472,6 +2472,25 @@ msgstr " 不正な長さの 'row.names' "
 msgid "invalid 'row.names' specification"
 msgstr " 不正な 'row.names' 指定 "
 
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr " 不正な問い合わせ "
+
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages2.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0 R/packages2.R:0
+#, fuzzy
+msgid "invalid 'type'; must be a character string"
+msgstr " 'unzip' は単一の文字列でなければなりません "
+
 #. R/help.start.R: stop("invalid browser name, check 'options(\"browser\")'.")
 #: R/help.start.R:0
 #, fuzzy
@@ -2524,6 +2543,12 @@ msgstr " 不正な数値の 'as.is' 表現式です  "
 #: R/tar.R:0
 msgid "invalid octal digit"
 msgstr " 不正な８進数の数字です "
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr " 'unzip' は単一の文字列でなければなりません "
 
 #. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
 #: R/str.R:0
@@ -3742,9 +3767,6 @@ msgstr[0] " パッケージ %s が利用できません "
 #, fuzzy
 #~ msgid "'tarfile' argument must be a character string or a connection"
 #~ msgstr " 'tarfile' は文字列かコネクションでなければなりません "
-
-#~ msgid "'unzip' must be a single character string"
-#~ msgstr " 'unzip' は単一の文字列でなければなりません "
 
 #~ msgid "'ccaddress' must be of length 1"
 #~ msgstr " 'ccaddress' は長さ 1 の整数でなければなりません "
