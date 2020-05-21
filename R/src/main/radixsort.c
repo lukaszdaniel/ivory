@@ -1333,7 +1333,7 @@ static int isorted(int *x, int n)
 static int dsorted(double *x, int n)
 {
     int i = 1, j = 0;
-    unsigned long long prev, this;
+    unsigned long long prev, this_;
     if (nalast == 0) {
 	// when nalast = NA,
 	// all NAs ? return special value to replace all o's values with '0'
@@ -1356,13 +1356,13 @@ static int dsorted(double *x, int n)
 	return (1);
     }
     prev = twiddle(x, 0, order);
-    this = twiddle(x, 1, order);
-    if (this < prev) {
+    this_ = twiddle(x, 1, order);
+    if (this_ < prev) {
 	i = 2;
-	prev = this;
-	while (i < n && (this = twiddle(x, i, order)) < prev) {
+	prev = this_;
+	while (i < n && (this_ = twiddle(x, i, order)) < prev) {
 	    i++;
-	    prev = this;
+	    prev = this_;
 	}
 	if (i == n) {
 	    mpush(1, n);
@@ -1380,18 +1380,18 @@ static int dsorted(double *x, int n)
 	// TO DO: once we get past -Inf, NA and NaN at the bottom, and
 	//        +Inf at the top, the middle only need be twiddled
 	//        for tolerance (worth it?)
-	this = twiddle(x, i, order);
-	if (this < prev) {
+	this_ = twiddle(x, i, order);
+	if (this_ < prev) {
 	    gsngrp[flip] = old;
 	    return (0);
 	}
-	if (this == prev)
+	if (this_ == prev)
 	    tt++;
 	else {
 	    push(tt);
 	    tt = 1;
 	}
-	prev = this;
+	prev = this_;
     }
     push(tt);
     // exactly as expected in 'order' (1=increasing, -1=decreasing),

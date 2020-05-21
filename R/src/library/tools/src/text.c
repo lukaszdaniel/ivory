@@ -122,7 +122,7 @@ delim_match(SEXP x, SEXP delims)
 		if(used == 0) break;
 		s += used;
 	    } else
-		s++; 
+		s++;
 	    pos++;
 	}
 	if(end > -1) {
@@ -219,44 +219,42 @@ SEXP check_nonASCII2(SEXP text)
 
 SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 strings only */
 {
-    int i,start, bufsize = 1024;
-    char *buffer = malloc(bufsize*sizeof(char)), *b;
-    const char *input;
-    SEXP result;
-    if (!buffer) error(_("out of memory"));
-    PROTECT(result = allocVector(STRSXP, length(strings)));
-    for (i = 0; i < length(strings); i++) {
-    	input = CHAR(STRING_ELT(strings, i));
-    	start = INTEGER(starts)[i];
-    	for (b = buffer; *input; ) {   
-    	    /* only the first byte of multi-byte chars counts */
-    	    if (0x80 <= (unsigned char)*input && (unsigned char)*input <= 0xBF)
-    		start--;
-    	    else if (*input == '\n')
-    	    	start = (int)(buffer-b-1);
-    	    if (*input == '\t') do {
-    	    	*b++ = ' ';
-    	    } while (((b-buffer+start) & 7) != 0);
-    	    else *b++ = *input;
-    	    if (b - buffer >= bufsize - 8) {
-    	    	int pos = (int)(b - buffer);
-		char *tmp;
-    	        bufsize *= 2;
-    	    	tmp = realloc(buffer, bufsize*sizeof(char));
-    	    	if (!tmp) {
-		    free(buffer); /* free original allocation */
+    int bufsize = 1024;
+    char *buffer = malloc(bufsize*sizeof(char));
+    if (buffer == NULL) error(_("out of memory"));
+    SEXP result = PROTECT(allocVector(STRSXP, length(strings)));
+    for (int i = 0; i < length(strings); i++) {
+	char *b;
+	const char *input = CHAR(STRING_ELT(strings, i));
+	int start = INTEGER(starts)[i];
+	for (b = buffer; *input; ) {
+	    /* only the first byte of multi-byte chars counts */
+	    if (0x80 <= (unsigned char)*input && (unsigned char)*input <= 0xBF)
+		start--;
+	    else if (*input == '\n')
+		start = (int)(buffer-b-1);
+	    if (*input == '\t') do {
+		    *b++ = ' ';
+		} while (((b-buffer+start) & 7) != 0);
+	    else *b++ = *input;
+	    if (b - buffer >= bufsize - 8) {
+		int pos = (int)(b - buffer);
+		bufsize *= 2;
+		char *tmp = realloc(buffer, bufsize*sizeof(char));
+		if (!tmp) {
+		    free(buffer); // free original allocation
 		    error(_("out of memory"));
-		} else buffer = tmp;
-    	    	b = buffer + pos;
-    	    }
-    	    input++;
-    	}
-    	*b = '\0';
-    	SET_STRING_ELT(result, i, mkCharCE(buffer, Rf_getCharCE(STRING_ELT(strings, i))));
+		} else buffer = tmp; // and realloc freed original buffer
+		b = buffer + pos;
+	    }
+	    input++;
+	}
+	*b = '\0';
+	SET_STRING_ELT(result, i, mkCharCE(buffer, Rf_getCharCE(STRING_ELT(strings, i))));
     }
     UNPROTECT(1);
     free(buffer);
-    return result;
+    return result; // -fanalyzer claims b leaks, but maybe it does not understand realloc
 }
 
 /* This could be done in wchar_t, but it is only used for
@@ -270,7 +268,7 @@ SEXP splitString(SEXP string, SEXP delims)
 	error(_("first arg must be a single character string"));
 
     if(STRING_ELT(string, 0) == NA_STRING)
-	return ScalarString(NA_STRING);	
+	return ScalarString(NA_STRING);
     if(STRING_ELT(delims, 0) == NA_STRING)
 	return ScalarString(NA_STRING);
 
@@ -282,19 +280,19 @@ SEXP splitString(SEXP string, SEXP delims)
     // Used for short strings, so OK to over-allocate wildly
     SEXP out = PROTECT(allocVector(STRSXP, nc));
     const char *p;
-    char tmp[nc], *this = tmp;
+    char tmp[nc], *this_ = tmp;
     int nthis = 0;
     for(p = in; *p ; p++) {
 	if(strchr(del, *p)) {
 	    // put out current string (if any)
-	    if(nthis) 
+	    if(nthis)
 		SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
 	    // put out delimiter
 	    SET_STRING_ELT(out, used++, mkCharLen(p, 1));
 	    // restart
-	    this = tmp; nthis = 0;
+	    this_ = tmp; nthis = 0;
 	} else {
-	    *this++ = *p;
+	    *this_++ = *p;
 	    nthis++;
 	}
     }

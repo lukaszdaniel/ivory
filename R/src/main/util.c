@@ -1187,7 +1187,7 @@ SEXP attribute_hidden do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x, enc, tmp;
     int m;
     R_xlen_t i, n;
-    const char *this;
+    const char *this_;
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
@@ -1202,10 +1202,10 @@ SEXP attribute_hidden do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = XLENGTH(x);
     for(i = 0; i < n; i++) {
 	cetype_t ienc = CE_NATIVE;
-	this = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
-	if(streql(this, "latin1")) ienc = CE_LATIN1;
-	else if(streql(this, "UTF-8")) ienc = CE_UTF8;
-	else if(streql(this, "bytes")) ienc = CE_BYTES;
+	this_ = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
+	if(streql(this_, "latin1")) ienc = CE_LATIN1;
+	else if(streql(this_, "UTF-8")) ienc = CE_UTF8;
+	else if(streql(this_, "bytes")) ienc = CE_BYTES;
 	tmp = STRING_ELT(x, i);
 	if(tmp == NA_STRING) continue;
 	if (! ((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
@@ -2258,14 +2258,14 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for (; args != R_NilValue; args = CDR(args)) {
 	if (isNull(TAG(args))) error(_("all arguments must be named"));
-	const char *this = CHAR(PRINTNAME(TAG(args)));
+	const char *this_ = CHAR(PRINTNAME(TAG(args)));
 	const char *s;
 
 	x = CAR(args);
 	if (!isString(x) || LENGTH(x) != 1)
-	    error(_("invalid '%s' argument"), this);
+	    error(_("invalid '%s' argument"), this_);
 	s = CHAR(STRING_ELT(x, 0));
-	if (streql(this, "locale")) {
+	if (streql(this_, "locale")) {
 	    if (collator) {
 		ucol_close(collator);
 		collator = NULL;
@@ -2290,7 +2290,7 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else {
 	    int i, at = -1, val = -1;
 	    for (i = 0; ATtable[i].str; i++)
-		if (streql(this, ATtable[i].str)) {
+		if (streql(this_, ATtable[i].str)) {
 		    at = ATtable[i].val;
 		    break;
 		}

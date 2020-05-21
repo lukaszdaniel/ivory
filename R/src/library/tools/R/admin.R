@@ -35,8 +35,10 @@ function(dir, outDir, builtStamp=character())
     ok <- .check_package_description(file.path(dir, "DESCRIPTION"))
     if(any(as.integer(lengths(ok)) > 0L)) {
         stop(paste(gettext("Invalid DESCRIPTION file") ,
-                   paste(.eval_with_capture(print(ok))$output, collapse = "\n"), sep = "\n\n"),
-             domain = "R-tools", call. = FALSE)
+                   paste(format(ok), collapse = "\n\n"),
+                   sep = "\n\n"),
+             domain = "R-tools",
+             call. = FALSE)
     }
 
     ## This reads (in C locale) byte-by-byte, declares latin1 or UTF-8

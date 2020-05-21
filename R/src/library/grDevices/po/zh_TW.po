@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-05-21 15:45+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -91,7 +91,7 @@ msgstr "'names' 向量無效"
 msgid "invalid gray level, must be in [0,1]."
 msgstr "灰色水平不對，必須在[0,1]。"
 
-#: colors.c:551 devPS.c:8295 devPS.c:8458 devPS.c:8461 devWindows.c:3645
+#: colors.c:551 devPS.c:8302 devPS.c:8465 devPS.c:8468 devWindows.c:3645
 #: devWindows.c:3649 devWindows.c:3657 devWindows.c:3668 devWindows.c:3674
 #: devWindows.c:3681 devWindows.c:3688 devWindows.c:3692
 #, c-format
@@ -162,7 +162,7 @@ msgstr "無法開啟 afm 文字 '%s'"
 msgid "unknown AFM entity encountered"
 msgstr "遇到未知 AFM 值這個錯誤"
 
-#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7964 devPicTeX.c:466
+#: devPS.c:741 devPS.c:744 devPS.c:4458 devPS.c:7971 devPicTeX.c:466
 #: devPicTeX.c:468
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
@@ -173,7 +173,7 @@ msgstr "'%s' 裡的字串無效"
 msgid "font width unknown for character 0x%x"
 msgstr "字元 0x%x 不帶字型寬度這樣的設定"
 
-#: devPS.c:833 devPS.c:4331
+#: devPS.c:833 devPS.c:4338
 #, fuzzy, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr "'mbcsToSbcs' 不存在 '%s' 這樣的編碼"
@@ -229,136 +229,136 @@ msgstr "無法指派字型列"
 msgid "failed to allocated encoding list"
 msgstr "無法指派編碼列"
 
-#: devPS.c:1311
+#: devPS.c:1312
 msgid "truncated string which was too long for copy"
 msgstr "切斷的字串太長，無法拷貝"
 
-#: devPS.c:1351
+#: devPS.c:1352
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "無法載入編碼文字 '%s'"
 
-#: devPS.c:1444 devPS.c:1477
+#: devPS.c:1451 devPS.c:1484
 msgid "invalid font name or more than one font name"
 msgstr "字型名稱不對或太多"
 
-#: devPS.c:1598 devPS.c:1633
+#: devPS.c:1605 devPS.c:1640
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "PostScript 字型資料庫裡找不到 '%s' 這個字型系列"
 
-#: devPS.c:1717 devPS.c:1799 devPS.c:1826
+#: devPS.c:1724 devPS.c:1806 devPS.c:1833
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "字型資料庫裡找不到 '%s' 字型系列的字型編碼"
 
-#: devPS.c:1744 devPS.c:1771
+#: devPS.c:1751 devPS.c:1778
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "字型資料庫裡找不到用於 '%s' 字型系列的 CMap 這個字型"
 
-#: devPS.c:1966 devPS.c:2046 devPS.c:2114
+#: devPS.c:1973 devPS.c:2053 devPS.c:2121
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "無法載入 afm 文字 '%s'"
 
-#: devPS.c:2402
+#: devPS.c:2409
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "載入的編碼損壞了 ; 沒有記錄編碼"
 
-#: devPS.c:2413
+#: devPS.c:2420
 msgid "failed to record device encoding"
 msgstr "無法記錄裝置編碼"
 
-#: devPS.c:2584
+#: devPS.c:2591
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "物件 '.ps.prolog' 不是字元向量"
 
-#: devPS.c:2659 devPS.c:6458 devWindows.c:790
+#: devPS.c:2666 devPS.c:6465 devWindows.c:790
 msgid "invalid line end"
 msgstr "列尾發生錯誤"
 
-#: devPS.c:2678 devPS.c:6477 devWindows.c:803
+#: devPS.c:2685 devPS.c:6484 devWindows.c:803
 msgid "invalid line join"
 msgstr "行接連處發生錯誤"
 
-#: devPS.c:2686
+#: devPS.c:2693
 msgid "invalid line mitre"
 msgstr "行斜接發生錯誤"
 
-#: devPS.c:2895 devPS.c:3801 devPS.c:4249 devPS.c:4276 devPS.c:5289
-#: devPS.c:7814 devPS.c:7859
+#: devPS.c:2902 devPS.c:3808 devPS.c:4256 devPS.c:4283 devPS.c:5296
+#: devPS.c:7821 devPS.c:7866
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用 %d 這個字型，代用一字型"
 
-#: devPS.c:3117 devPS.c:4751 devPS.c:5870 devWindows.c:1805 devWindows.c:1842
+#: devPS.c:3124 devPS.c:4758 devPS.c:5877 devWindows.c:1805 devWindows.c:1842
 #: devWindows.c:1872 devWindows.c:1904
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "%s()調用裡的文字名稱太長"
 
-#: devPS.c:3123 devPS.c:4757 devPS.c:5876
+#: devPS.c:3130 devPS.c:4764 devPS.c:5883
 #, fuzzy, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr "%s()記憶體指派出了問題"
 
-#: devPS.c:3141 devPS.c:5940
+#: devPS.c:3148 devPS.c:5947
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr "%s() 裡的編碼路徑太長"
 
-#: devPS.c:3155 devPS.c:4797
+#: devPS.c:3162 devPS.c:4804
 #, fuzzy, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr "無法載入編碼文字 '%s'"
 
-#: devPS.c:3200 devPS.c:3263 devPS.c:5999 devPS.c:6055 devPS.c:7694
+#: devPS.c:3207 devPS.c:3270 devPS.c:6006 devPS.c:6062 devPS.c:7701
 msgid "invalid font type"
 msgstr "字型類別發生錯誤"
 
-#: devPS.c:3224
+#: devPS.c:3231
 msgid "failed to initialise default PostScript font"
 msgstr "無法初始化 PostScript 字型的預設值"
 
-#: devPS.c:3290
+#: devPS.c:3297
 msgid "failed to initialise additional PostScript fonts"
 msgstr "無法初始化外加的 PostScript 字型"
 
-#: devPS.c:3306
+#: devPS.c:3313
 msgid "invalid foreground/background color (postscript)"
 msgstr "前景/後景顏色不對(postscript)"
 
-#: devPS.c:3311
+#: devPS.c:3318
 msgid "'command' is too long"
 msgstr "'command' 太長"
 
-#: devPS.c:3316
+#: devPS.c:3323
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "'postscript(print.it=TRUE)' 不能用在空 'print' 命令裡"
 
-#: devPS.c:3367
+#: devPS.c:3374
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "頁類別 '%s'(postscript)無效"
 
-#: devPS.c:3481 devPS.c:4601 devWindows.c:2339
+#: devPS.c:3488 devPS.c:4608 devWindows.c:2339
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
 msgstr "此裝置不支援半透明：每一頁將被報告一次"
 
-#: devPS.c:3592 devPS.c:3603
+#: devPS.c:3599 devPS.c:3610
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "無法開啟 'postscript' 管道至 '%s'"
 
-#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7113 qdPDF.c:98
+#: devPS.c:3621 devPS.c:5014 devPS.c:5027 devPS.c:7120 qdPDF.c:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "無法開啟 '%s' 檔案"
 
-#: devPS.c:3742 devPS.c:3757
+#: devPS.c:3749 devPS.c:3764
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -367,162 +367,162 @@ msgstr ""
 "postscript()發生錯誤，是在執行這個命令時發生的:\n"
 "    %s"
 
-#: devPS.c:3789
+#: devPS.c:3796
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "postscript()裝置裡沒有 CID 系列 '%s'"
 
-#: devPS.c:3807 devPS.c:3818 devPS.c:4256 devPS.c:4286 devPS.c:4391
+#: devPS.c:3814 devPS.c:3825 devPS.c:4263 devPS.c:4293 devPS.c:4398
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr " postscript()裝置裡沒有 '%s' 系列"
 
-#: devPS.c:4341
+#: devPS.c:4348
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "'mbcsToSbcs' 裡轉換 '%s' 發生錯誤：<%02x>代替了 dot"
 
-#: devPS.c:4349
+#: devPS.c:4356
 #, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr ""
 
-#: devPS.c:4419
+#: devPS.c:4426
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "編碼 '%s' 時文字轉換器發生錯誤"
 
-#: devPS.c:4437 devPS.c:5334 devPS.c:7949
+#: devPS.c:4444 devPS.c:5341 devPS.c:7956
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "文字轉換到編碼 '%s' 時發生錯誤"
 
-#: devPS.c:4615
+#: devPS.c:4622
 #, fuzzy
 msgid "ran out of colors in 'xfig()' function"
 msgstr "xfig() 裡的顏色不夠用"
 
-#: devPS.c:4644
+#: devPS.c:4651
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "沒有實作 %08x 這樣的字行結構: 用 Dash-double-dotted"
 
-#: devPS.c:4710
+#: devPS.c:4717
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "不存在 postscript 字型系列 '%s'，用 Helvetica"
 
-#: devPS.c:4782
+#: devPS.c:4789
 msgid "invalid foreground/background color (xfig)"
 msgstr "前景/後景顏色不對(xfig)"
 
-#: devPS.c:4815
+#: devPS.c:4822
 msgid "only Type 1 fonts supported for XFig"
 msgstr "XFig 只支援 Type 1 字型"
 
-#: devPS.c:4828
+#: devPS.c:4835
 msgid "failed to initialise default XFig font"
 msgstr "無法初始化 XFig 預設字型"
 
-#: devPS.c:4865
+#: devPS.c:4872
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "頁類別 '%s' 發生錯誤(xfig)"
 
-#: devPS.c:4873
+#: devPS.c:4880
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s，onefile=FALSE)只會回傳最後的一張圖"
 
-#: devPS.c:4999
+#: devPS.c:5006
 msgid "empty file name"
 msgstr "空文字名稱"
 
-#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7173
+#: devPS.c:5073 devPS.c:5125 devPS.c:5703 devPS.c:5747 devPS.c:7180
 msgid "write failed"
 msgstr "讀寫失敗"
 
-#: devPS.c:5323
+#: devPS.c:5330
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "不可使用編碼 '%s'"
 
-#: devPS.c:5584 devPS.c:5587
+#: devPS.c:5591 devPS.c:5594
 msgid "failed to increase 'maxRaster'"
 msgstr "無法增加 'maxRaster'"
 
-#: devPS.c:5599
+#: devPS.c:5606
 msgid "unable to allocate raster image"
 msgstr "無法指派光柵圖像"
 
-#: devPS.c:5800
+#: devPS.c:5807
 msgid "corrupt loaded encodings;  font not added"
 msgstr "載入的編碼壞了 ; 字型沒有加入"
 
-#: devPS.c:5810
+#: devPS.c:5817
 msgid "failed to record device encoding; font not added"
 msgstr "無法記錄裝置編碼 ; 字型沒有加入"
 
-#: devPS.c:5926 devPS.c:6331 devPS.c:6968
+#: devPS.c:5933 devPS.c:6338 devPS.c:6975
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr "增加 PDF 版本到 1.2"
 
-#: devPS.c:5956
+#: devPS.c:5963
 msgid "failed to load default encoding"
 msgstr "無法載入預設編碼"
 
-#: devPS.c:6023
+#: devPS.c:6030
 msgid "failed to initialise default PDF font"
 msgstr "無法初始化 PDF 預設字型"
 
-#: devPS.c:6078
+#: devPS.c:6085
 msgid "failed to initialise additional PDF fonts"
 msgstr "無法初始化外加的 PDF 字型"
 
-#: devPS.c:6091
+#: devPS.c:6098
 msgid "failed to allocate rasters"
 msgstr "無法指派柵格"
 
-#: devPS.c:6098
+#: devPS.c:6105
 msgid "failed to allocate masks"
 msgstr "無法指派面具"
 
-#: devPS.c:6163
+#: devPS.c:6170
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "紙張類別 '%s' 不對(pdf)"
 
-#: devPS.c:6187
+#: devPS.c:6194
 msgid "invalid foreground/background color (pdf)"
 msgstr "前景/後景顏色不對(pdf)"
 
-#: devPS.c:6306
+#: devPS.c:6313
 msgid "invalid 'alpha' value in PDF"
 msgstr "PDF 裡的 'alpha' 值無效"
 
-#: devPS.c:6382 devPS.c:6429
+#: devPS.c:6389 devPS.c:6436
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "不明的 'colormodel'，用 'srgb'"
 
-#: devPS.c:6623
+#: devPS.c:6630
 msgid "failed to load sRGB colorspace file"
 msgstr "無法載入 sRGB 色彩檔案"
 
-#: devPS.c:6887
+#: devPS.c:6894
 msgid "corrupt encodings in PDF device"
 msgstr "PDF 裝置裡的編碼壞了"
 
-#: devPS.c:7097
+#: devPS.c:7104
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "無法開啟通到 '%s' 的 'pdf' 管道"
 
-#: devPS.c:7103
+#: devPS.c:7110
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"意味着 'onefile = TRUE'"
 
-#: devPS.c:7246
+#: devPS.c:7253
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -531,28 +531,28 @@ msgstr ""
 "無法開啟 'pdf' 文字引數 '%s'\n"
 "  請關閉 PDF 裝置"
 
-#: devPS.c:7265
+#: devPS.c:7272
 #, fuzzy, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr "無法開啟暫時檔案 '%s' 以供壓縮 (原因：%s)；這個裝置上已關閉壓縮"
 
-#: devPS.c:7719 devPS.c:8081 devPS.c:8128
+#: devPS.c:7726 devPS.c:8088 devPS.c:8135
 msgid "failed to find or load PDF font"
 msgstr "沒有能夠找到或載入 PDF 字型"
 
-#: devPS.c:7903 devPS.c:8036
+#: devPS.c:7910 devPS.c:8043
 msgid "failed to find or load PDF CID font"
 msgstr "沒有能夠找到或載入 PDF CID 字型"
 
-#: devPS.c:8267 devPS.c:8271 devPS.c:8289 devPS.c:8432 devPS.c:8436
-#: devPS.c:8448
+#: devPS.c:8274 devPS.c:8278 devPS.c:8296 devPS.c:8439 devPS.c:8443
+#: devPS.c:8455
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "%s 裡的 'fonts' 引數無效"
 
-#: devPS.c:8308 devPS.c:8375 devPS.c:8475
+#: devPS.c:8315 devPS.c:8382 devPS.c:8482
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr "無法啟動 %s()裝置"
@@ -576,24 +576,36 @@ msgstr "字型家族名稱太長"
 msgid "no font could be found for family \"%s\""
 msgstr "字型家族\"%s\"沒有字型"
 
-#: devQuartz.c:1376
+#: devQuartz.c:921
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.c:945
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.c:981
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
+
+#: devQuartz.c:1377
 msgid "invalid 'file' argument"
 msgstr "'file' 引數無效"
 
-#: devQuartz.c:1403
+#: devQuartz.c:1404
 msgid "invalid quartz() device size"
 msgstr "quartz()裝置大小無效"
 
-#: devQuartz.c:1431
+#: devQuartz.c:1432
 msgid "unable to create device description"
 msgstr "無法建立裝置描述檔案"
 
-#: devQuartz.c:1481
+#: devQuartz.c:1482
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr "無法建立 quartz()裝置，可能不支援所提供的種類"
 
-#: devQuartz.c:1611
+#: devQuartz.c:1612
 msgid "Quartz device is not available on this platform"
 msgstr "這個平臺上沒有石英裝置"
 
@@ -756,6 +768,14 @@ msgstr " QuartzBitmap_Output - 打不開 '%s' 檔案"
 #: qdBitmap.c:94
 msgid "not a supported scheme, no image data written"
 msgstr "不支援這個規劃，因此沒有寫任何圖像資料"
+
+#: qdBitmap.c:150
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: qdCocoa.m:900
+msgid "allocation failure in QuartzCocoa_DeviceCreate"
+msgstr ""
 
 #: qdPDF.c:110
 msgid "Quartz R Device"

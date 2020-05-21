@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-08 22:40\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -3251,6 +3251,7 @@ msgstr "impossible de créer"
 
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))

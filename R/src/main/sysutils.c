@@ -856,8 +856,8 @@ static R_INLINE nttype_t needsTranslation(SEXP x) {
     return NT_NONE;
 }
 
-static void *latin1_obj = NULL, *utf8_obj=NULL, *ucsmb_obj=NULL,
-    *ucsutf8_obj=NULL;
+static void *latin1_obj = NULL, *utf8_obj = NULL, *ucsmb_obj = NULL,
+            *ucsutf8_obj = NULL;
 
 /* Translates string in "ans" to native encoding returning it in string
    buffer "cbuff" */
@@ -978,7 +978,7 @@ next_char:
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *translateChar(SEXP x)
+const char *Rf_translateChar(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),

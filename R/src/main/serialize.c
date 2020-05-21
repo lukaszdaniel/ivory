@@ -1983,10 +1983,10 @@ static SEXP ReadItem (SEXP ref_table, R_inpstream_t stream)
 		break;
 	    default:
 	    {
-		R_xlen_t done, this;
-		for (done = 0; done < len; done += this) {
-		    this = min(CHUNK_SIZE, len - done);
-		    stream->InBytes(stream, RAW(s) + done, (int) this);
+		R_xlen_t done, this_;
+		for (done = 0; done < len; done += this_) {
+		    this_ = min(CHUNK_SIZE, len - done);
+		    stream->InBytes(stream, RAW(s) + done, (int) this_);
 		}
 	    }
 	    }

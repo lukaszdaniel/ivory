@@ -1518,7 +1518,7 @@ not in the main repositories for major Linux distributions).
 @c In May 2020 declared by FFD GGEBiplotGUI OligoSpecificitySystem
 @c PBSmodelling asbio biplotbootGUI cncaGUI dgmb dpa multibiplotGUI rpanel
 @samp{BWidget} needs to be installed by the user on other OSes.  This is
-fairly easy to do: first find the Tcl/Tk search path:
+fairly easy to do: first find the Tcl search path:
 
 @example
 library(tcltk)
@@ -1527,8 +1527,8 @@ strsplit(tclvalue('auto_path'), " ")[[1]]
 
 @noindent
 then download the sources from
-@uref{https://sourceforge.net/@/projects/@/tcllib/@/files/@/BWidget/} and
-at the command line run something like
+@uref{https://sourceforge.net/@/projects/@/tcllib/@/files/@/BWidget/}
+and in a terminal run something like
 
 @example
 tar xf bwidget-1.9.14.tar.gz
@@ -1536,8 +1536,9 @@ sudo mv bwidget-1.9.14 /usr/local/lib
 @end example
 
 @noindent
-substituting a location on the Tcl/Tk search path for @file{/usr/local/lib} if
-needed.
+substituting a location on the Tcl search path for @file{/usr/local/lib} if
+needed.  (If no location on that search path is writeable, you will need
+to add one each time BWidget is to be used with @code{tcltk::addTclPath()}.)
 
 @node Specifying URLs,  , Non-R scripts in packages, Package structure
 @subsection Specifying URLs
@@ -2200,7 +2201,7 @@ Some care is needed when compilers are from different families which may
 use different OpenMP runtimes (e.g.@: @command{clang} @emph{vs} GCC
 including @command{gfortran}, although it is often possible to use the
 @command{clang} runtime with GCC but not @emph{vice versa}: however
-@command{gfortran} 9.x may generate calls not in the @command{clang}
+@command{gfortran} >= 9 may generate calls not in the @command{clang}
 runtime).  For a package with Fortran code using OpenMP the appropriate
 lines are
 
@@ -4961,7 +4962,7 @@ and suitable options might be
 @end example
 
 @noindent
-See @uref{http://www.ghostscript.com/@/doc/@/current/@/Ps2pdf.htm} for
+See @uref{https://www.ghostscript.com/@/doc/@/current/@/VectorDevices.htm} for
 more such and consider all the options for image downsampling).  There
 have been examples in @acronym{CRAN} packages for which current versions
 of Ghostscript produced much bigger reductions than earlier ones (e.g.@:
@@ -8515,6 +8516,7 @@ memory leaks) but others will segfault.
 * Using Address Sanitizer::
 * Using Undefined Behaviour Sanitizer::
 * Other analyses with `clang'::
+* Other analyses with `gcc'::
 * Using `Dr. Memory'::
 * Fortran array bounds checking::
 @end menu
@@ -8985,7 +8987,7 @@ It may or may not be possible to build @R{} itself with
 code with @command{gcc} but there has been success with @command{clang}.
 
 
-@node Other analyses with `clang', Using `Dr. Memory', Using Undefined Behaviour Sanitizer, Checking memory access
+@node Other analyses with `clang', Other analyses with `gcc', Using Undefined Behaviour Sanitizer, Checking memory access
 @subsection Other analyses with `clang'
 
 Recent versions of @command{clang} on @cputype{x86_64} Linux have
@@ -8996,10 +8998,26 @@ a `data race detector for C/C++ programs', and `MemorySanitizer'
 for the detection of uninitialized memory.  Both are based on and
 provide similar functionality to tools in @command{valgrind}.
 
-@command{clang} has a `Static Analyser' which can be run on the source
+@command{clang} has a `Static Analyzer' which can be run on the source
 files during compilation: see @uref{https://clang-analyzer.llvm.org/}.
 
-@node Using `Dr. Memory', Fortran array bounds checking, Other analyses with `clang', Checking memory access
+@node Other analyses with `gcc', Using `Dr. Memory', Other analyses with `clang', Checking memory access
+@subsection Other analyses with `gcc'
+
+GCC 10 introduced a new flag @option{-fanalyzer} which does static
+analysis during compilation, currently for C code.  It is regarded as
+@emph{experimental} and it may slow down computation considerably when
+problems are found (and use many GB of resident memory).  There is some
+overlap with problems detected by the Undefined Behaviour sanitizer, but
+some issues are only reported by this tool and as it is a static
+analysis, it does not rely on code paths being exercised.
+
+See
+@uref{https://gcc.gnu.org/@/onlinedocs/@/gcc-10.1.0/@/gcc/@/Static-Analyzer-Options.html}
+(or the documentation for your version of @command{gcc} if later) and
+@uref{https://developers.redhat.com/@/blog/2020/03/26/@/static-analysis-in-gcc-10/}
+
+@node Using `Dr. Memory', Fortran array bounds checking, Other analyses with `gcc', Checking memory access
 @subsection Using `Dr. Memory'
 
 `Dr. Memory' from @uref{http://www.drmemory.org/} is a memory checker
@@ -11161,14 +11179,14 @@ unprotected.
 
 @findex R_PreserveObject
 @findex R_ReleaseObject
-There is another way to avoid the affects of garbage collection: a call
+There is another way to avoid the effects of garbage collection: a call
 to @code{R_PreserveObject} adds an object to an internal list of objects
 not to be collects, and a subsequent call to @code{R_ReleaseObject}
 removes it from that list.  This provides a way for objects which are
 not returned as part of @R{} objects to be protected across calls to
 compiled code: on the other hand it becomes the user's responsibility to
 release them when they are no longer needed (and this often requires the
-use of a finalizer).  It is less efficient that the normal protection
+use of a finalizer).  It is less efficient than the normal protection
 mechanism, and should be used sparingly.
 
 @node Allocating storage, Details of R types, Garbage Collection, Handling R objects in C
@@ -12946,6 +12964,9 @@ compilers/loaders when using @R{} as a shared library) not exported.
 There are two types of memory allocation available to the C programmer,
 one in which @R{} manages the clean-up and the other in which user
 has full control (and responsibility).
+
+These functions are declared in header @file{R_exts/RS.h} which is
+included by @file{R.h}.
 
 @node Transient storage allocation, User-controlled memory, Memory allocation, Memory allocation
 @subsection Transient storage allocation

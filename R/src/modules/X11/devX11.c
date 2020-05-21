@@ -258,7 +258,7 @@ static void Cairo_update(pX11Desc xd)
    any element.  
 */
 struct xd_list {
-    pX11Desc this;
+    pX11Desc this_;
    struct xd_list *next;
 };
 
@@ -273,7 +273,7 @@ static void CairoHandler(void)
 	double current = currentTime();
 	buffer_lock = 1;
 	for(Xdl z = xdl->next; z; z = z->next) {
-	    pX11Desc xd = z->this;
+	    pX11Desc xd = z->this_;
 	    if(xd->last > xd->last_activity) continue;
 	    if((current - xd->last) < xd->update_interval) continue;
 	    Cairo_update(xd);
@@ -295,7 +295,8 @@ static int timingInstalled = 0;
 static void addBuffering(pX11Desc xd)
 {
     Xdl xdln = (Xdl) malloc(sizeof(struct xd_list));
-    xdln->this = xd;
+    if(!xdln) error(_("allocation failed in addBuffering"));
+    xdln->this_ = xd;
     xdln->next = xdl->next;
     xdl->next = xdln;
     if(timingInstalled) return;
@@ -307,7 +308,7 @@ static void addBuffering(pX11Desc xd)
 static void removeBuffering(pX11Desc xd)
 {
     for(Xdl z = xdl; z->next; z = z->next)
-	if (z->next->this == xd) {
+	if (z->next->this_ == xd) {
 	    Xdl old = z->next;
 	    z->next = z->next->next;
 	    free(old);
@@ -3325,7 +3326,7 @@ static int in_R_X11_access(void)
     }
 }
 
-static Rboolean in_R_X11readclp(Rclpconn this, char *type)
+static Rboolean in_R_X11readclp(Rclpconn this_, char *type)
 {
     Window clpwin;
     Atom sel = XA_PRIMARY, pty, pty_type;
@@ -3389,11 +3390,11 @@ static Rboolean in_R_X11readclp(Rclpconn this, char *type)
 		warning(_("clipboard cannot be read (error code %d)"), ret);
 		res = FALSE;
 	    } else {
-		this->buff = (char *)malloc(pty_items + 1);
-		this->last = this->len = (int) pty_items;
-		if(this->buff) {
+		this_->buff = (char *)malloc(pty_items + 1);
+		this_->last = this_->len = (int) pty_items;
+		if(this_->buff) {
 		    /* property always ends in 'extra' zero byte */
-		    memcpy(this->buff, buffer, pty_items + 1);
+		    memcpy(this_->buff, buffer, pty_items + 1);
 		} else {
 		    warning(_("memory allocation to copy clipboard failed"));
 		    res = FALSE;

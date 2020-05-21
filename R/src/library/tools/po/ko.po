@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:45+0100\n"
+"POT-Creation-Date: 2020-05-21 15:46+0200\n"
 "PO-Revision-Date: 2012-03-06 17:56+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -69,7 +69,11 @@ msgstr ""
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.c:2577 gramRd.c:4239 gramRd.c:4245
+#: gramLatex.c:2535 gramRd.c:4188
+msgid "unable to allocate in PushState"
+msgstr ""
+
+#: gramLatex.c:2578 gramRd.c:4240 gramRd.c:4246
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "올바르지 않은 인자의 유형 "
@@ -127,27 +131,27 @@ msgstr ""
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.c:4252
+#: gramRd.c:4253
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.c:4259
+#: gramRd.c:4260
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.c:4267
+#: gramRd.c:4268
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.c:4286
+#: gramRd.c:4287
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.c:4289
+#: gramRd.c:4290
 msgid "bad state"
 msgstr ""
 
-#: gramRd.c:4302
+#: gramRd.c:4303
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -165,6 +169,14 @@ msgstr "올바르지 않은 인자의 유형 "
 msgid "write error during file append"
 msgstr ""
 
+#: pdscan.c:68
+msgid "too many items"
+msgstr ""
+
+#: pdscan.c:116
+msgid "non-character argument"
+msgstr ""
+
 #: signals.c:43 signals.c:141
 #, fuzzy, c-format
 msgid "'%s' function is not supported on this platform"
@@ -179,11 +191,11 @@ msgstr "올바르지 않은 인자의 유형 "
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:226 text.c:248
+#: text.c:224 text.c:246
 msgid "out of memory"
 msgstr "메모리가 부족합니다 "
 
-#: text.c:268 text.c:270
+#: text.c:266 text.c:268
 msgid "first arg must be a single character string"
 msgstr ""
 

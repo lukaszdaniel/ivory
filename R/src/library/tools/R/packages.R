@@ -214,8 +214,7 @@ function(files, type, fields, verbose, validate = FALSE)
                         if(any(as.integer(lengths(ok)) > 0L)) {
                             message(paste(gettextf("Invalid DESCRIPTION file for package %s",
                                                    sQuote(basename(dirname(p)))),
-                                          paste(.eval_with_capture(print(ok))$output,
-                                                collapse = "\n"),
+                                          paste(format(ok), collapse = "\n\n"),
                                           sep = "\n\n"),
                                     domain = "R-tools")
                             next
@@ -271,8 +270,7 @@ function(dir, fields = NULL, verbose = getOption("verbose"),
                 if(any(as.integer(lengths(ok)) > 0L)) {
                     warning(paste(gettextf("Invalid DESCRIPTION file for package %s",
                                            sQuote(basename(paths[i]))),
-                                  paste(.eval_with_capture(print(ok))$output,
-                                        collapse = "\n"),
+                                  paste(format(ok), collapse = "\n\n"),
                                   sep = "\n\n"),
                             domain = "R-tools",
                             call. = FALSE)
@@ -521,15 +519,19 @@ function(x)
     ## (Could also intersect x with the possible types.)
 }
 
+## .extract_dependency_package_names <-
+## function(x)
+## {
+##     ## Assume a character *string*.
+##     if(is.na(x)) return(character())
+##     x <- strsplit(x, ",", fixed = TRUE)[[1L]]
+##     ## FIXME: The following is much faster on Linux but apparently not
+##     ## on Windows:
+##     ## x <- sub("(?s)[[:space:]]*([[:alnum:].]+).*", "\\1", x, perl = TRUE)
+##     x <- sub("[[:space:]]*([[:alnum:].]+).*", "\\1", x)
+##     x[nzchar(x) & (x != "R")]
+## }
+
 .extract_dependency_package_names <-
 function(x)
-{
-    ## Assume a character *string*.
-    if(is.na(x)) return(character())
-    x <- strsplit(x, ",", fixed = TRUE)[[1L]]
-    ## FIXME: The following is much faster on Linux but apparently not
-    ## on Windows:
-    ## x <- sub("(?s)[[:space:]]*([[:alnum:].]+).*", "\\1", x, perl = TRUE)
-    x <- sub("[[:space:]]*([[:alnum:].]+).*", "\\1", x)
-    x[nzchar(x) & (x != "R")]
-}
+    .Call(C_package_dependencies_scan, x)

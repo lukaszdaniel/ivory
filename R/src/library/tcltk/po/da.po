@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-05-21 15:46+0200\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -18,37 +18,37 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: tcltk.c:62
+#: tcltk.c:63
 msgid "parse error in R expression"
 msgstr "fortolkningsfejl i R-udtryk"
 
-#: tcltk.c:171 tcltk.c:248
+#: tcltk.c:172 tcltk.c:250
 msgid "tcl error.\n"
 msgstr "tcl-fejl.\n"
 
-#: tcltk.c:200 tcltk.c:274 tcltk.c:291 tcltk.c:311 tcltk.c:331 tcltk.c:406
-#: tcltk.c:471 tcltk.c:525 tcltk.c:764
+#: tcltk.c:201 tcltk.c:276 tcltk.c:293 tcltk.c:313 tcltk.c:333 tcltk.c:408
+#: tcltk.c:473 tcltk.c:527 tcltk.c:766
 msgid "invalid argument"
 msgstr "ugyldigt argument"
 
-#: tcltk.c:281
+#: tcltk.c:283
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.c:313 tcltk.c:333 tcltk.c:408 tcltk.c:473 tcltk.c:527
+#: tcltk.c:315 tcltk.c:335 tcltk.c:410 tcltk.c:475 tcltk.c:529
 #, fuzzy
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr "ugyldigt tclObj - måske gemt fra en anden session?"
 
-#: tcltk.c:637
+#: tcltk.c:639
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "argumentliste er for lang i tcltk-intern funktion 'callback_closure'"
 
-#: tcltk.c:670
+#: tcltk.c:672
 msgid "argument is not of correct type"
 msgstr "argument er ikke af korrekt type"
 
-#: tcltk.c:722
+#: tcltk.c:724
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "ingen DISPLAY-variabel så Tk er ikke tilgængelig"
 

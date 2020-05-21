@@ -1720,10 +1720,10 @@ SEXP attribute_hidden do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (isNull(dnna))
 		error(_("'a' does not have named dimnames"));
 	    for (i = 0; i < n; i++) {
-		const char *this = translateChar(STRING_ELT(perm, i));
+		const char *this_ = translateChar(STRING_ELT(perm, i));
 		for (j = 0; j < n; j++)
 		    if (streql(translateChar(STRING_ELT(dnna, j)),
-			       this)) {pp[i] = j; break;}
+			       this_)) {pp[i] = j; break;}
 		if (j >= n)
 		    error(_("'perm[%d]' does not match a dimension name"), i+1);
 	    }

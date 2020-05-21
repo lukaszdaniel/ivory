@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2020-03-09 21:45\n"
+"POT-Creation-Date: 2020-05-08 22:51\n"
 "PO-Revision-Date: 2018-07-17 21:24+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -133,7 +133,6 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
-#. R/survfitKM.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #: R/aareg.R:0 R/aeqSurv.R:0 R/anova.coxph.R:0 R/anova.coxph.penal.R:0
 #: R/attrassign.R:0 R/basehaz.R:0 R/finegray.R:0 R/is.ratetable.R:0
@@ -141,7 +140,7 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #: R/print.coxph.penal.R:0 R/print.survdiff.R:0 R/print.survexp.R:0
 #: R/print.survreg.penal.R:0 R/pspline.R:0 R/quantile.survfit.R:0
 #: R/summary.aareg.R:0 R/summary.ratetable.R:0 R/summary.survexp.R:0
-#: R/survfit.R:0 R/survfitKM.R:0 R/survfitTurnbull.R:0
+#: R/survfit.R:0 R/survfitTurnbull.R:0
 msgid "'%s' argument is not an object of class %s"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
@@ -680,6 +679,11 @@ msgstr "Wywołanie:"
 #, fuzzy
 msgid "Can have only 1 'ratetable()' call in a formula"
 msgstr "można mieć tylko jedno wywołanie 'ratetable()' w formule"
+
+#. R/survfitKM.R: stop("Can only handle right censored or counting data")
+#: R/survfitKM.R:0
+msgid "Can only handle right censored or counting data"
+msgstr ""
 
 #. R/anova.coxphlist.R: stop("Can't do anova tables with robust variances")
 #: R/anova.coxphlist.R:0
@@ -1353,13 +1357,15 @@ msgid "a cluster() term is not valid"
 msgstr "człony warstwy nie są dozwolone"
 
 #. R/coxph.R: stop("a formula argument is required")
-#: R/coxph.R:0
+#. R/survreg.R: stop("a formula argument is required")
+#: R/coxph.R:0 R/survreg.R:0
 #, fuzzy
 msgid "a formula argument is required"
 msgstr "Argument 'formula' jest wymagany"
 
 #. R/coxph.R: stop("a formula cannot have multiple cluster terms")
-#: R/coxph.R:0
+#. R/survreg.R: stop("a formula cannot have multiple cluster terms")
+#: R/coxph.R:0 R/survreg.R:0
 #, fuzzy
 msgid "a formula cannot have multiple cluster terms"
 msgstr "nie można mieć dwóch członów grupujących"
@@ -1603,11 +1609,6 @@ msgstr "można mieć tylko jeden człon grupy"
 msgid "can not have two cluster terms"
 msgstr "nie można mieć dwóch członów grupujących"
 
-#. R/survfitKM.R: stop("can only handle right censored or counting data")
-#: R/survfitKM.R:0
-msgid "can only handle right censored or counting data"
-msgstr ""
-
 #. R/anova.coxph.R: stop("cannot do anova tables with robust variances")
 #. R/anova.coxph.penal.R: stop("cannot do anova tables with robust variances")
 #: R/anova.coxph.R:0 R/anova.coxph.penal.R:0
@@ -1705,19 +1706,26 @@ msgid "cluster appears as both an argument and a model term"
 msgstr ""
 
 #. R/coxph.R: warning("cluster appears both in a formula and as an argument, formula term ignored")
-#: R/coxph.R:0
+#. R/survreg.R: warning("cluster appears both in a formula and as an argument, formula term ignored")
+#: R/coxph.R:0 R/survreg.R:0
 msgid ""
 "cluster appears both in a formula and as an argument, formula term ignored"
 msgstr ""
 
 #. R/aareg.R: stop("cluster cannot be used in an interaction")
-#. R/survreg.R: stop("cluster cannot be used in an interaction")
-#: R/aareg.R:0 R/survreg.R:0
+#: R/aareg.R:0
 msgid "cluster cannot be used in an interaction"
 msgstr "grupa nie może być użyta w interakcji"
 
+#. R/coxph.R: warning("cluster specified with robust=FALSE, cluster ignored")
+#. R/survfitKM.R: warning("cluster specified with robust=FALSE, cluster ignored")
+#: R/coxph.R:0 R/survfitKM.R:0
+msgid "cluster specified with robust=FALSE, cluster ignored"
+msgstr ""
+
 #. R/coxph.R: stop("cluster() cannot be in an interaction")
-#: R/coxph.R:0
+#. R/survreg.R: stop("cluster() cannot be in an interaction")
+#: R/coxph.R:0 R/survreg.R:0
 #, fuzzy
 msgid "cluster() cannot be in an interaction"
 msgstr "grupa nie może być użyta w interakcji"
@@ -1784,6 +1792,12 @@ msgstr "'x' musi być czynnikiem"
 msgid "cumhaz argument is not integer"
 msgstr "argument 'object' nie jest listą"
 
+#. R/tmerge.R: stop("cumtdc initial value must be numeric")
+#: R/tmerge.R:0
+#, fuzzy
+msgid "cumtdc initial value must be numeric"
+msgstr "argument '%s' musi być liczbą"
+
 #. R/survfit.matrix.R: warning("curves have a larger start.time than the parameter, start.time parameter value was ignored")
 #: R/survfit.matrix.R:0
 msgid ""
@@ -1791,9 +1805,9 @@ msgid ""
 "value was ignored"
 msgstr ""
 
-#. R/tmerge.R: stop("data and options$tdcstart do not agree on data type")
+#. R/tmerge.R: stop("data and starting value do not agree on data type")
 #: R/tmerge.R:0
-msgid "data and options$tdcstart do not agree on data type"
+msgid "data and starting value do not agree on data type"
 msgstr ""
 
 #. R/coxph.R: stop("data contains an infinite predictor")
@@ -1926,7 +1940,8 @@ msgid "formula is a list but the response is not multi-state"
 msgstr ""
 
 #. R/coxph.R: stop("formula must have a Surv response")
-#: R/coxph.R:0
+#. R/survreg.R: stop("formula must have a Surv response")
+#: R/coxph.R:0 R/survreg.R:0
 #, fuzzy
 msgid "formula must have a Surv response"
 msgstr "wszystkie elementy muszą mieć tę samą listę stanów"
@@ -1951,6 +1966,12 @@ msgstr "nie można mieć dwóch członów grupujących"
 #: R/survfit0.R:0
 msgid "function requires a survfit object"
 msgstr ""
+
+#. R/survfitKM.R: stop("id or cluster option required")
+#: R/survfitKM.R:0
+#, fuzzy
+msgid "id or cluster option required"
+msgstr "argument '%s' jest wymagany"
 
 #. R/tmerge.R: stop("id values were found in data2 which are not in data1")
 #: R/tmerge.R:0
@@ -2025,6 +2046,11 @@ msgstr "argument 'toler.inf' musi być  >0"
 #, fuzzy
 msgid "influence argument must be numeric or logical"
 msgstr "argument '%s' musi być liczbą"
+
+#. R/tmerge.R: stop("initial tdc value must be of length 1")
+#: R/tmerge.R:0
+msgid "initial tdc value must be of length 1"
+msgstr ""
 
 #. R/coxph.R: stop("initial values lead to overflow or underflow of the exp function")
 #: R/coxph.R:0
@@ -2528,6 +2554,11 @@ msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 msgid "multi-state curves are not a valid input"
 msgstr ""
 
+#. R/survfitCI.R: stop("multi-state survfit supports only a robust variance")
+#: R/survfitCI.R:0
+msgid "multi-state survfit supports only a robust variance"
+msgstr ""
+
 #. R/survreg.R: stop("multi-state survival is not supported")
 #: R/survreg.R:0
 msgid "multi-state survival is not supported"
@@ -2898,11 +2929,6 @@ msgstr ""
 msgid "reference distribution was not found"
 msgstr "rozkład referencyjny nie został znaleziony"
 
-#. R/tmerge.R: gettextf("replacement of variable '%s'", argname[ii])
-#: R/tmerge.R:0
-msgid "replacement of variable '%s'"
-msgstr ""
-
 #. R/aareg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/anova.survreg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/cch.R: gettextf("response is not an object of class %s", dQuote("Surv"))
@@ -2940,10 +2966,22 @@ msgstr ""
 msgid "right censored data only"
 msgstr "tylko dane cenzorowane w prawo"
 
+#. R/coxph.R: stop("robust must be TRUE/FALSE")
+#. R/survfitKM.R: stop("robust must be TRUE/FALSE")
+#: R/coxph.R:0 R/survfitKM.R:0
+#, fuzzy
+msgid "robust must be TRUE/FALSE"
+msgstr "argument 'newstrata' musi mieć wartość TRUE/FALSE"
+
 #. R/clogit.R: stop("robust variance plus the exact method is not supported")
 #: R/clogit.R:0
 msgid "robust variance plus the exact method is not supported"
 msgstr "zgrubna wariancja wraz ze ścisłym modelem nie jest wspierana"
+
+#. R/survfitKM.R: warning("robust=FALSE implies influence=FALSE")
+#: R/survfitKM.R:0
+msgid "robust=FALSE implies influence=FALSE"
+msgstr ""
 
 #. R/agreg.fit.R: stop("routine failed due to numeric overflow. This should never happen. Please contact the author.")
 #: R/agreg.fit.R:0
@@ -3104,6 +3142,11 @@ msgstr "obiekt klasy \"survfit\" nie ma 2 wymiarów"
 #, fuzzy
 msgid "survfitms object has no states component"
 msgstr "obiekt klasy \"survfit\" nie ma 2 wymiarów"
+
+#. R/tmerge.R: stop("tdc initial value must be of length 1")
+#: R/tmerge.R:0
+msgid "tdc initial value must be of length 1"
+msgstr ""
 
 #. R/tmerge.R: stop("tdcstart must be a single value")
 #: R/tmerge.R:0
@@ -3527,8 +3570,9 @@ msgstr "wszystkie argumenty muszą mieć tę samą długość"
 msgid "y and weights are not the same length"
 msgstr "wszystkie argumenty muszą mieć tę samą długość"
 
+#. R/survfitKM.R: stop("y must be a Surv object")
 #. R/xtras.R: stop("y must be a Surv object")
-#: R/xtras.R:0
+#: R/survfitKM.R:0 R/xtras.R:0
 #, fuzzy
 msgid "y must be a Surv object"
 msgstr "y musi być obiektem klasy \"surv\""
@@ -3787,14 +3831,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 
 #~ msgid "etype argument incompatable with survival type"
 #~ msgstr "argument 'etype' nie jest zgodny z typem 'survival'"
-
-#, fuzzy
-#~ msgid "na.rm option must be TRUE or FALSE"
-#~ msgstr "argument 'newstrata' musi mieć wartość TRUE/FALSE"
-
-#, fuzzy
-#~ msgid "'id' argument is required"
-#~ msgstr "argument '%s' jest wymagany"
 
 #, fuzzy
 #~ msgid "Cox model doesn't support \""

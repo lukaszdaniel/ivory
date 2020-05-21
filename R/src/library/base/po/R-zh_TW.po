@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:45\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -86,7 +86,7 @@ msgid "%s function is only defined for equally-sized data frames"
 msgstr "%s 只適用於大小相同的資料框"
 
 #. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call), msg, domain = "R-base")
-#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call)[1L], msg, domain = "R-base")
+#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call, nlines = 1L), msg, domain = "R-base")
 #: R/conditions.R:0
 msgid "%s in %s: %s"
 msgstr ""
@@ -1343,7 +1343,7 @@ msgid "Enter values for restart arguments:"
 msgstr "無效的 'compress' 引數："
 
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
-#. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
+#. R/conditions.R: gettextf("Error in command '%s':", deparse(call, nlines = 1L), domain = "R-base")
 #. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error in command '%s':"

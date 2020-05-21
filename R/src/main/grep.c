@@ -501,13 +501,13 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(ans = allocVector(VECSXP, len));
     vmax = vmaxget();
     for (itok = 0; itok < tlen; itok++) {
-	SEXP this = STRING_ELT(tok, itok);
+	SEXP this_ = STRING_ELT(tok, itok);
 
-	if (this == NA_STRING) { /* NA token doesn't split */
+	if (this_ == NA_STRING) { /* NA token doesn't split */
 	    for (i = itok; i < len; i += tlen)
 		SET_VECTOR_ELT(ans, i, ScalarString(STRING_ELT(x, i)));
 	    continue;
-	} else if (!CHAR(this)[0]) { /* empty */
+	} else if (!CHAR(this_)[0]) { /* empty */
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
 		SEXP t;

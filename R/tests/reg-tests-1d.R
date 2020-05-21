@@ -3971,6 +3971,29 @@ stopifnot(all.equal(cf1, cfL))
 stopifnot(identical(validUTF8('\ud800'), FALSE))
 
 
+## summary.warnings()  -- reported by Allison Meisner, jhmi.edu
+testf <- function(x) {
+    if(x > 30)
+        warning("A big problem (should be 20 of these)")
+    else
+        warning("Bigger problem (should be 30 of these)")
+}
+op <- options(warn=0)
+for(i in 1:50) testf(i) # -> 50 warnings ..
+options(op)# reset
+(sw <- summary(warnings()))
+stopifnot(identical(unlist(lapply(names(sw), substr, 1, 6)), c("Bigger", "A big ")),
+          identical(attr(sw, "counts"), c(30L, 20L)))
+## was wrong (mis-sorted counts) in R <= 4.0.0
+
+
+## plot.formula(..,  ylab = <call>)
+dd <- list(x = -4:4, w = 1/(1+(-4:4)^2))
+plot(w ~ x, data=dd, type = "h", xlab = quote(x[j]))                    # worked before
+plot(w ~ x, data=dd, type = "h", xlab = quote(x[j]), ylab = quote(y[j]))# *now* works
+## main, sub, xlab worked (PR#10525)  but ylab did not in R <= 4.0.0
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

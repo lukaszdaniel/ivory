@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:46\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -483,7 +483,7 @@ msgstr ""
 msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
-#. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
+#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -1467,7 +1467,7 @@ msgstr "l'encodage '%s' n'est pas portable"
 msgid "Engine name %s and package %s do not match"
 msgstr "Le lien %s dans le package %s ne peut être localisé"
 
-#. R/QC.R: gettext("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.",     domain = "R-tools")
+#. R/QC.R: gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")
 #: R/QC.R:0
 msgid ""
 "Entries must be names of packages optionally followed by '<=' or '>=', white "
@@ -1476,12 +1476,12 @@ msgstr ""
 "Les entrées doivent être des noms de packages, éventuellement suivis de '<=' "
 "ou '>=', un espace, et un numéro de version correct entre parenthèses."
 
-#. R/QC.R: gettext("Entries with infeasible comparison operator:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible comparison operator:")
 #: R/QC.R:0
 msgid "Entries with infeasible comparison operator:"
 msgstr "Entrées avec des opérateurs de comparaison inadéquats :"
 
-#. R/QC.R: gettext("Entries with infeasible version number:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible version number:")
 #: R/QC.R:0
 msgid "Entries with infeasible version number:"
 msgstr "Entrées avec des numéros de version incorrects :"
@@ -1653,13 +1653,13 @@ msgid ""
 "engine %s. The following files exist in working directory %s: %s"
 msgstr ""
 
-#. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr "Champs avec des tags non ASCII :"
 
-#. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
@@ -2190,13 +2190,20 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr "Fichier DESCRIPTION incorrect"
 
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
+#: R/packages.R:0
+#, fuzzy
+msgid "Invalid DESCRIPTION file for package %s"
+msgstr "Fichier DESCRIPTION incorrect"
+
 #. R/doitools.R: gettext("Invalid DOI")
 #: R/doitools.R:0
 #, fuzzy
 msgid "Invalid DOI"
 msgstr "Nom de package incorrect."
 
-#. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr "Champ 'Priority' incorrect."
@@ -2213,7 +2220,7 @@ msgstr "Nom de package incorrect."
 msgid "Invalid URI scheme (use \\doi for DOIs in Rd markup)"
 msgstr "Nom de package incorrect."
 
-#. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid VignetteBuilder field.")
 #: R/QC.R:0
 #, fuzzy
 msgid "Invalid VignetteBuilder field."
@@ -2364,12 +2371,12 @@ msgstr ""
 msgid "Malformed Authors@R field:"
 msgstr "Champ 'Author@R' mal orthographié."
 
-#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
 #: R/QC.R:0
 msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr "Champ 'Depends', 'Suggests', 'Imports' ou 'Enhances' incorrect."
 
-#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.")
 #: R/QC.R:0
 msgid ""
 "Malformed Description field: should contain one or more complete sentences."
@@ -2417,12 +2424,12 @@ msgstr ""
 "  %s\n"
 "contiennent no \\itemsize."
 
-#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
 msgstr ""
 
-#. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed maintainer field.")
 #: R/QC.R:0
 msgid "Malformed maintainer field."
 msgstr "Champ 'maintainer' mal orthographié."
@@ -2432,7 +2439,7 @@ msgstr "Champ 'maintainer' mal orthographié."
 msgid "Malformed package name"
 msgstr "Nom de package mal orthographié"
 
-#. R/QC.R: gettext("Malformed package version.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed package version.")
 #: R/QC.R:0
 msgid "Malformed package version."
 msgstr "Version de package mal orthographiée."
@@ -2681,13 +2688,6 @@ msgstr "Pas d'examples trouvés pour le package %s"
 msgid "No new packages or updated package versions detected"
 msgstr ""
 
-#. R/news.R: stop("No news found in given file using old-style R-like format.")
-#: R/news.R:0
-msgid "No news found in given file using old-style R-like format."
-msgstr ""
-"Pas de nouvelles trouvées dans le fichier en usant de l'ancien format de "
-"type R"
-
 #. R/news.R: stop("No news found in given file using package default format.")
 #: R/news.R:0
 msgid "No news found in given file using package default format."
@@ -2927,7 +2927,7 @@ msgid "Objects in \\usage without \\alias in documentation object %s:"
 msgstr ""
 "Objets dans \\usage sans \\alias dans la documentation de l'objet '%s' :"
 
-#. R/QC.R: gettext("Offending entries:", domain = "R-tools")
+#. R/QC.R: gettext("Offending entries:")
 #: R/QC.R:0
 msgid "Offending entries:"
 msgstr "Entrée erronées :"
@@ -2984,7 +2984,7 @@ msgstr "Seulement une section par \\Sexpr est supportée."
 msgid "Only one tag %s is allowed"
 msgstr "Seulement une section par \\Sexpr est supportée."
 
-#. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
+#. R/QC.R: gettextf("Only operators '<=' and '>=' are possible.")
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Seuls les opérateurs '<=' et '>=' sont acceptés."
@@ -3170,7 +3170,7 @@ msgid ""
 "to change without notice."
 msgstr ""
 
-#. R/QC.R: gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.",     domain = "R-tools")
+#. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
 msgid ""
 "Packages with priorities 'base' or 'recommended' or 'defunct-base' must "
@@ -3663,7 +3663,7 @@ msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
 
-#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0 R/check.R:0
@@ -4165,7 +4165,7 @@ msgstr ""
 msgid "These are unlikely file names for src files."
 msgstr ""
 
-#. R/QC.R: gettext("These fields must have ASCII values.", domain = "R-tools")
+#. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
 msgstr "Ces champs doivent avoir des valeurs ASCII."
@@ -4198,7 +4198,7 @@ msgstr ""
 msgid "This build time stamp is over a month old."
 msgstr ""
 
-#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
+#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 #: R/QC.R:0
 msgid ""
 "This field must contain one or more packages (and no version requirement)."
@@ -4295,7 +4295,7 @@ msgstr "Objets code non documentés :"
 msgid "Undocumented data sets:"
 msgstr "Jeux de données non documentés :"
 
-#. R/QC.R: gettext("Unknown encoding", domain = "R-tools")
+#. R/QC.R: gettext("Unknown encoding")
 #: R/QC.R:0
 msgid "Unknown encoding"
 msgstr "Encodage inconnu"
@@ -4423,7 +4423,7 @@ msgstr ""
 msgid "Version jumps in minor (submitted: %s, existing: %s)"
 msgstr ""
 
-#. R/QC.R: gettext("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.",     domain = "R-tools")
+#. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
 #: R/QC.R:0
 msgid ""
 "Version numbers must be sequences of at least two non-negative integers, "
@@ -8165,6 +8165,11 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
+
+#~ msgid "No news found in given file using old-style R-like format."
+#~ msgstr ""
+#~ "Pas de nouvelles trouvées dans le fichier en usant de l'ancien format de "
+#~ "type R"
 
 #, fuzzy
 #~ msgid "%s file wast not found"

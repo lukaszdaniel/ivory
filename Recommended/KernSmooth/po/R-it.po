@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KernSmooth 2.23-15\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-26 10:23\n"
+"POT-Creation-Date: 2020-05-08 22:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,29 +18,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-msgid "'bandwidth' must be strictly positive"
-msgstr "'bandwidth' dev'essere strettamente positivo"
-
-msgid ""
-"Binning grid too coarse for current (small) bandwidth: consider increasing "
-"'gridsize'"
-msgstr ""
-"Griglia di binning troppo grande per la banda corrente (piccola): si prenda "
-"in considerazione l'incremento di 'gridsize'"
-
-msgid "Level should be between 0 and 5"
-msgstr "Il livello dovrebbe essere tra 0 e 5"
-
-msgid "scale estimate is zero for input data"
-msgstr "la stima della scala è zero per i dati di input"
-
+#. R/all.R: stop("'bandwidth' must be a scalar or an array of length 'gridsize'")
+#. R/all.R: stop("'bandwidth' must be a scalar or an array of length 'gridsize'")
+#. R/all.R: stop("'bandwidth' must be a scalar or an array of length 'gridsize'")
+#: R/all.R:0
 msgid "'bandwidth' must be a scalar or an array of length 'gridsize'"
 msgstr ""
 "'bandwidth' dev'essere uno scalare o un array della lunghezza 'gridsize'"
 
+#. R/all.R: stop("'bandwidth' must be strictly positive")
+#. R/all.R: stop("'bandwidth' must be strictly positive")
+#. R/all.R: stop("'bandwidth' must be strictly positive")
+#. R/all.R: stop("'bandwidth' must be strictly positive")
+#: R/all.R:0
+msgid "'bandwidth' must be strictly positive"
+msgstr "'bandwidth' dev'essere strettamente positivo"
+
+#. R/all.R: warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+#. R/all.R: warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+#. R/all.R: warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+#. R/all.R: stop("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+#: R/all.R:0
+#, fuzzy
+msgid ""
+"Binning grid is too coarse for current (small) bandwidth: consider "
+"increasing 'gridsize'"
+msgstr ""
+"Griglia di binning troppo grande per la banda corrente (piccola): si prenda "
+"in considerazione l'incremento di 'gridsize'"
+
+#. R/all.R: packageStartupMessage("KernSmooth 2.23 loaded\nCopyright M. P. Wand 1997-2009")
+#: R/all.R:0
 msgid ""
 "KernSmooth 2.23 loaded\n"
 "Copyright M. P. Wand 1997-2009"
 msgstr ""
 "KernSmooth 2.23 caricato\n"
 "Copyright M. P. Wand 1997-2009"
+
+#. R/all.R: stop("Level should be between 0 and 5")
+#. R/all.R: stop("Level should be between 0 and 5")
+#: R/all.R:0
+msgid "Level should be between 0 and 5"
+msgstr "Il livello dovrebbe essere tra 0 e 5"
+
+#. R/all.R: stop("scale estimate is zero for input data")
+#. R/all.R: stop("scale estimate is zero for input data")
+#: R/all.R:0
+msgid "scale estimate is zero for input data"
+msgstr "la stima della scala è zero per i dati di input"

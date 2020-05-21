@@ -850,7 +850,7 @@ static void NORET errorcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-void NORET errorcall(SEXP call, const char *format,...)
+void NORET Rf_errorcall(SEXP call, const char *format,...)
 {
     va_list(ap);
 
@@ -1547,29 +1547,29 @@ static char * R_ConciseTraceback(SEXP call, int skip)
 		skip--;
 	    else {
 		SEXP fun = CAR(c->call);
-		const char *this = (TYPEOF(fun) == SYMSXP) ?
+		const char *this_ = (TYPEOF(fun) == SYMSXP) ?
 		    CHAR(PRINTNAME(fun)) : "<Anonymous>";
-		if(streql(this, "stop") ||
-		   streql(this, "warning") ||
-		   streql(this, "suppressWarnings") ||
-		   streql(this, ".signalSimpleWarning")) {
+		if(streql(this_, "stop") ||
+		   streql(this_, "warning") ||
+		   streql(this_, "suppressWarnings") ||
+		   streql(this_, ".signalSimpleWarning")) {
 		    buf[0] =  '\0'; ncalls = 0; too_many = FALSE;
 		} else {
 		    ncalls++;
 		    if(too_many) {
-			top = this;
+			top = this_;
 		    } else if(strlen(buf) > R_NShowCalls) {
 			memmove(buf+4, buf, strlen(buf)+1);
 			memcpy(buf, "... ", 4);
 			too_many = TRUE;
-			top = this;
+			top = this_;
 		    } else if(strlen(buf)) {
-			nl = strlen(this);
+			nl = strlen(this_);
 			memmove(buf+nl+4, buf, strlen(buf)+1);
-			memcpy(buf, this, strlen(this));
+			memcpy(buf, this_, strlen(this_));
 			memcpy(buf+nl, " -> ", 4);
 		    } else
-			memcpy(buf, this, strlen(this)+1);
+			memcpy(buf, this_, strlen(this_)+1);
 		}
 	    }
 	}
@@ -1583,9 +1583,9 @@ static char * R_ConciseTraceback(SEXP call, int skip)
        primitive? */
     if (ncalls == 1 && TYPEOF(call) == LANGSXP) {
 	SEXP fun = CAR(call);
-	const char *this = (TYPEOF(fun) == SYMSXP) ?
+	const char *this_ = (TYPEOF(fun) == SYMSXP) ?
 	    CHAR(PRINTNAME(fun)) : "<Anonymous>";
-	if(streql(buf, this)) return "";
+	if(streql(buf, this_)) return "";
     }
     return buf;
 }

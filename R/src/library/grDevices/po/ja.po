@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-05-21 15:45+0200\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -94,7 +94,7 @@ msgstr " 不正な 'file' 引数 "
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:551 devPS.c:8295 devPS.c:8458 devPS.c:8461 devWindows.c:3645
+#: colors.c:551 devPS.c:8302 devPS.c:8465 devPS.c:8468 devWindows.c:3645
 #: devWindows.c:3649 devWindows.c:3657 devWindows.c:3668 devWindows.c:3674
 #: devWindows.c:3681 devWindows.c:3688 devWindows.c:3692
 #, fuzzy, c-format
@@ -167,7 +167,7 @@ msgstr " CharInfo を構文解析できませんでした "
 msgid "unknown AFM entity encountered"
 msgstr " 未知の AFM 項目に出会いました "
 
-#: devPS.c:741 devPS.c:744 devPS.c:4451 devPS.c:7964 devPicTeX.c:466
+#: devPS.c:741 devPS.c:744 devPS.c:4458 devPS.c:7971 devPicTeX.c:466
 #: devPicTeX.c:468
 #, fuzzy, c-format
 msgid "invalid string in '%s' function"
@@ -178,7 +178,7 @@ msgstr " '%s' 中に不正な文字列 "
 msgid "font width unknown for character 0x%x"
 msgstr " 文字 0x%x に対する文字幅がわかりません "
 
-#: devPS.c:833 devPS.c:4331
+#: devPS.c:833 devPS.c:4338
 #, fuzzy, c-format
 msgid "unknown encoding '%s' in '%s' function"
 msgstr " 'mbcsToSbcs' 中に未知のエンコーディング '%s' があります "
@@ -238,139 +238,139 @@ msgstr " フォントリストを割り当てることができませんでし�
 msgid "failed to allocated encoding list"
 msgstr " エンコーディングリストを割り当てることができませんでした "
 
-#: devPS.c:1311
+#: devPS.c:1312
 msgid "truncated string which was too long for copy"
 msgstr " コピーするには長すぎた文字列を切り詰めました "
 
-#: devPS.c:1351
+#: devPS.c:1352
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr " エンコーディングファイル '%s' をロードできませんでした "
 
-#: devPS.c:1444 devPS.c:1477
+#: devPS.c:1451 devPS.c:1484
 #, fuzzy
 msgid "invalid font name or more than one font name"
 msgstr " 一つもしくは複数のフォント名が不正です "
 
-#: devPS.c:1598 devPS.c:1633
+#: devPS.c:1605 devPS.c:1640
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr ""
 " ポストスクリプトフォントのデータベースにフォントファミリ '%s' が見付かりませ"
 "ん "
 
-#: devPS.c:1717 devPS.c:1799 devPS.c:1826
+#: devPS.c:1724 devPS.c:1806 devPS.c:1833
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr ""
 " フォントのデータベースに \"%s\" ファミリに対するエンコーディングが見付かりま"
 "せん "
 
-#: devPS.c:1744 devPS.c:1771
+#: devPS.c:1751 devPS.c:1778
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr ""
 " フォントのデータベースに \"%s\" ファミリに対する CMap フォントが見付かりませ"
 "ん "
 
-#: devPS.c:1966 devPS.c:2046 devPS.c:2114
+#: devPS.c:1973 devPS.c:2053 devPS.c:2121
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr " afm ファイル '%s' をロードできませんでした "
 
-#: devPS.c:2402
+#: devPS.c:2409
 #, fuzzy
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr ""
 " ロードされたエンコーディングが破損しています；　　エンコーディングは記録され"
 "ませんでした "
 
-#: devPS.c:2413
+#: devPS.c:2420
 #, fuzzy
 msgid "failed to record device encoding"
 msgstr " デバイスのエンコーディングを記録することに失敗しました "
 
-#: devPS.c:2584
+#: devPS.c:2591
 #, fuzzy
 msgid "object '.ps.prolog' is not a character vector"
 msgstr " オブジェクト .ps.prolog は文字列ベクトルではありません "
 
-#: devPS.c:2659 devPS.c:6458 devWindows.c:790
+#: devPS.c:2666 devPS.c:6465 devWindows.c:790
 #, fuzzy
 msgid "invalid line end"
 msgstr " 行末が不正です "
 
-#: devPS.c:2678 devPS.c:6477 devWindows.c:803
+#: devPS.c:2685 devPS.c:6484 devWindows.c:803
 #, fuzzy
 msgid "invalid line join"
 msgstr " 行のつながりが不正です "
 
-#: devPS.c:2686
+#: devPS.c:2693
 #, fuzzy
 msgid "invalid line mitre"
 msgstr " 不正な line mitre です "
 
-#: devPS.c:2895 devPS.c:3801 devPS.c:4249 devPS.c:4276 devPS.c:5289
-#: devPS.c:7814 devPS.c:7859
+#: devPS.c:2902 devPS.c:3808 devPS.c:4256 devPS.c:4283 devPS.c:5296
+#: devPS.c:7821 devPS.c:7866
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr " 不正なフォント %d を使おうとしましたが、フォント 1 で置き換えました "
 
-#: devPS.c:3117 devPS.c:4751 devPS.c:5870 devWindows.c:1805 devWindows.c:1842
+#: devPS.c:3124 devPS.c:4758 devPS.c:5877 devWindows.c:1805 devWindows.c:1842
 #: devWindows.c:1872 devWindows.c:1904
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr " 呼出し %s() 中に長すぎるファイル名  "
 
-#: devPS.c:3123 devPS.c:4757 devPS.c:5876
+#: devPS.c:3130 devPS.c:4764 devPS.c:5883
 #, fuzzy, c-format
 msgid "memory allocation problem in '%s' function"
 msgstr " %s() 中にメモリ割り当てのトラブルがあります "
 
-#: devPS.c:3141 devPS.c:5940
+#: devPS.c:3148 devPS.c:5947
 #, fuzzy, c-format
 msgid "encoding path is too long in '%s' function"
 msgstr " %s() 中のエンコーディングのパスが長すぎます "
 
-#: devPS.c:3155 devPS.c:4797
+#: devPS.c:3162 devPS.c:4804
 #, fuzzy, c-format
 msgid "failed to load encoding file in '%s' function"
 msgstr " エンコーディングファイル '%s' をロードできませんでした "
 
-#: devPS.c:3200 devPS.c:3263 devPS.c:5999 devPS.c:6055 devPS.c:7694
+#: devPS.c:3207 devPS.c:3270 devPS.c:6006 devPS.c:6062 devPS.c:7701
 #, fuzzy
 msgid "invalid font type"
 msgstr " 不正なフォントタイプです "
 
-#: devPS.c:3224
+#: devPS.c:3231
 #, fuzzy
 msgid "failed to initialise default PostScript font"
 msgstr " 既定のポストスクリプトフォントの初期化に失敗しました "
 
-#: devPS.c:3290
+#: devPS.c:3297
 #, fuzzy
 msgid "failed to initialise additional PostScript fonts"
 msgstr " 追加のポストスクリプトフォントの初期化に失敗しました "
 
-#: devPS.c:3306
+#: devPS.c:3313
 msgid "invalid foreground/background color (postscript)"
 msgstr " 不正な前景/背景色 (ポストスクリプト) "
 
-#: devPS.c:3311
+#: devPS.c:3318
 msgid "'command' is too long"
 msgstr " 'command' が長すぎます "
 
-#: devPS.c:3316
+#: devPS.c:3323
 #, fuzzy
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr " postscript(print.it=TRUE)　が空の描画命令とともに使われました "
 
-#: devPS.c:3367
+#: devPS.c:3374
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr " 不正なページ '%s'  (ポストスクリプト) "
 
-#: devPS.c:3481 devPS.c:4601 devWindows.c:2339
+#: devPS.c:3488 devPS.c:4608 devWindows.c:2339
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -378,17 +378,17 @@ msgstr ""
 " 半透過機能はこのデバイスではサポートされていません：ページ毎に一度だけレポー"
 "トされます "
 
-#: devPS.c:3592 devPS.c:3603
+#: devPS.c:3599 devPS.c:3610
 #, fuzzy, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr " '%s' に対する 'postscript' パイプを開くことができません "
 
-#: devPS.c:3614 devPS.c:5007 devPS.c:5020 devPS.c:7113 qdPDF.c:98
+#: devPS.c:3621 devPS.c:5014 devPS.c:5027 devPS.c:7120 qdPDF.c:98
 #, c-format
 msgid "cannot open file '%s'"
 msgstr " ファイル '%s' を開けません "
 
-#: devPS.c:3742 devPS.c:3757
+#: devPS.c:3749 devPS.c:3764
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -397,175 +397,175 @@ msgstr ""
 " 実行中の postscript() からのエラー: \n"
 " %s "
 
-#: devPS.c:3789
+#: devPS.c:3796
 #, fuzzy, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr " ポストスクリプトデバイス中に CID ファミリ '%s' は含まれていません "
 
-#: devPS.c:3807 devPS.c:3818 devPS.c:4256 devPS.c:4286 devPS.c:4391
+#: devPS.c:3814 devPS.c:3825 devPS.c:4263 devPS.c:4293 devPS.c:4398
 #, fuzzy, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr " ポストスクリプトデバイス中にフォントファミリ '%s' は含まれていません "
 
-#: devPS.c:4341
+#: devPS.c:4348
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
-#: devPS.c:4349
+#: devPS.c:4356
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
-#: devPS.c:4419
+#: devPS.c:4426
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr " エンコーディング '%s' へのコンバータを開けませんでした "
 
-#: devPS.c:4437 devPS.c:5334 devPS.c:7949
+#: devPS.c:4444 devPS.c:5341 devPS.c:7956
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr " テキストをエンコーディング '%s' に変換することに失敗しました "
 
-#: devPS.c:4615
+#: devPS.c:4622
 #, fuzzy
 msgid "ran out of colors in 'xfig()' function"
 msgstr " xfig() 中で色数が多すぎました "
 
-#: devPS.c:4644
+#: devPS.c:4651
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr " 実装されていない線種 %08x: Dash-double-dotted を使います "
 
-#: devPS.c:4710
+#: devPS.c:4717
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr ""
 " 未知のポストスクリプトフォントファミリ　'%s' です。Helvetica を使います "
 
-#: devPS.c:4782
+#: devPS.c:4789
 msgid "invalid foreground/background color (xfig)"
 msgstr " 不正な前景/背景色です (xfig) "
 
-#: devPS.c:4815
+#: devPS.c:4822
 #, fuzzy
 msgid "only Type 1 fonts supported for XFig"
 msgstr " XFig に対しては Type 1 フォントだけがサポートされています "
 
-#: devPS.c:4828
+#: devPS.c:4835
 #, fuzzy
 msgid "failed to initialise default XFig font"
 msgstr " 既定の XFig フォントの初期化に失敗しました "
 
-#: devPS.c:4865
+#: devPS.c:4872
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr " 不正なページタイプ '%s' (xfig) "
 
-#: devPS.c:4873
+#: devPS.c:4880
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr " xfig(%s, onefile=FALSE) は最後のプロットだけを返します "
 
-#: devPS.c:4999
+#: devPS.c:5006
 msgid "empty file name"
 msgstr " ファイル名がありません "
 
-#: devPS.c:5066 devPS.c:5118 devPS.c:5696 devPS.c:5740 devPS.c:7173
+#: devPS.c:5073 devPS.c:5125 devPS.c:5703 devPS.c:5747 devPS.c:7180
 msgid "write failed"
 msgstr " 書き込みに失敗しました "
 
-#: devPS.c:5323
+#: devPS.c:5330
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr " エンコーディング '%s' を使うことができません "
 
-#: devPS.c:5584 devPS.c:5587
+#: devPS.c:5591 devPS.c:5594
 msgid "failed to increase 'maxRaster'"
 msgstr " 'maxRaster'を増やすことはできませんでした "
 
-#: devPS.c:5599
+#: devPS.c:5606
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr " ラスター画像を割り当てられません "
 
-#: devPS.c:5800
+#: devPS.c:5807
 #, fuzzy
 msgid "corrupt loaded encodings;  font not added"
 msgstr ""
 " ロードされたエンコーディングが破損しています；　　フォントは追加されません "
 
-#: devPS.c:5810
+#: devPS.c:5817
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr ""
 " デバイスエンコーディングの記録に失敗しました；　フォントは追加されません "
 
-#: devPS.c:5926 devPS.c:6331 devPS.c:6968
+#: devPS.c:5933 devPS.c:6338 devPS.c:6975
 #, fuzzy, c-format
 msgid "increasing the PDF version to %s"
 msgstr " PDF のバージョンを 1.2 に更新しています "
 
-#: devPS.c:5956
+#: devPS.c:5963
 msgid "failed to load default encoding"
 msgstr " 既定のエンコーディングのロードに失敗しました "
 
-#: devPS.c:6023
+#: devPS.c:6030
 #, fuzzy
 msgid "failed to initialise default PDF font"
 msgstr " 既定の PDF フォントの初期化に失敗しました "
 
-#: devPS.c:6078
+#: devPS.c:6085
 #, fuzzy
 msgid "failed to initialise additional PDF fonts"
 msgstr " 追加の PDF フォントの初期化に失敗しました "
 
-#: devPS.c:6091
+#: devPS.c:6098
 msgid "failed to allocate rasters"
 msgstr " ラスターを割り当てることができませんでした "
 
-#: devPS.c:6098
+#: devPS.c:6105
 msgid "failed to allocate masks"
 msgstr " マスクを割り当てることができませんでした "
 
-#: devPS.c:6163
+#: devPS.c:6170
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr " 不正なペーパサイズ '%s' (pdf) "
 
-#: devPS.c:6187
+#: devPS.c:6194
 msgid "invalid foreground/background color (pdf)"
 msgstr " 不正な前景/背景色 (pdf) "
 
-#: devPS.c:6306
+#: devPS.c:6313
 #, fuzzy
 msgid "invalid 'alpha' value in PDF"
 msgstr " PDF 中に不正なアルファ値 "
 
-#: devPS.c:6382 devPS.c:6429
+#: devPS.c:6389 devPS.c:6436
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr " 未知の 'colormodel'です。'srgb' を使います "
 
-#: devPS.c:6623
+#: devPS.c:6630
 #, fuzzy
 msgid "failed to load sRGB colorspace file"
 msgstr " sRGB 色空間ファイルのロードに失敗しました "
 
-#: devPS.c:6887
+#: devPS.c:6894
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr " PDF デバイス中に破損したエンコーディング "
 
-#: devPS.c:7097
+#: devPS.c:7104
 #, fuzzy, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr " 'pdf\" ファイル引数 '%s' を開くことができません "
 
-#: devPS.c:7103
+#: devPS.c:7110
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr " file = \"|cmd\" は 'onefile = TRUE' を意味します "
 
-#: devPS.c:7246
+#: devPS.c:7253
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -574,30 +574,30 @@ msgstr ""
 " 'pdf\" ファイル引数 '%s' を開くことができません \n"
 " PDF デバイスを閉じてください "
 
-#: devPS.c:7265
+#: devPS.c:7272
 #, c-format
 msgid ""
 "cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.c:7719 devPS.c:8081 devPS.c:8128
+#: devPS.c:7726 devPS.c:8088 devPS.c:8135
 #, fuzzy
 msgid "failed to find or load PDF font"
 msgstr " PDF フォントが見付からないかロードできませんでした "
 
-#: devPS.c:7903 devPS.c:8036
+#: devPS.c:7910 devPS.c:8043
 #, fuzzy
 msgid "failed to find or load PDF CID font"
 msgstr " PDF CID フォントが見付からないかロードできませんでした "
 
-#: devPS.c:8267 devPS.c:8271 devPS.c:8289 devPS.c:8432 devPS.c:8436
-#: devPS.c:8448
+#: devPS.c:8274 devPS.c:8278 devPS.c:8296 devPS.c:8439 devPS.c:8443
+#: devPS.c:8455
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr " %s 中に不正な 'fonts' パラメータ "
 
-#: devPS.c:8308 devPS.c:8375 devPS.c:8475
+#: devPS.c:8315 devPS.c:8382 devPS.c:8482
 #, fuzzy, c-format
 msgid "unable to start '%s' device"
 msgstr " デバイス %s() を開始できませんでした "
@@ -621,27 +621,39 @@ msgstr " フォントファミリーの名前が長すぎます "
 msgid "no font could be found for family \"%s\""
 msgstr " フォントファミリー'%s'に対してフォントが見つかりません "
 
-#: devQuartz.c:1376
+#: devQuartz.c:921
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.c:945
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.c:981
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
+
+#: devQuartz.c:1377
 msgid "invalid 'file' argument"
 msgstr " 不正な 'file' 引数 "
 
-#: devQuartz.c:1403
+#: devQuartz.c:1404
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr " 不正なQuarts デバイスサイズ "
 
-#: devQuartz.c:1431
+#: devQuartz.c:1432
 #, fuzzy
 msgid "unable to create device description"
 msgstr " デバイスの内容を作成できませんでした "
 
-#: devQuartz.c:1481
+#: devQuartz.c:1482
 #, fuzzy
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr "Quartzデバイスを作成できません。与えられた型はサポートされていません "
 
-#: devQuartz.c:1611
+#: devQuartz.c:1612
 msgid "Quartz device is not available on this platform"
 msgstr " Quartz デバイスはこのプラットフォームでは利用できません "
 
@@ -811,6 +823,14 @@ msgstr "QuartzBitmap_Output - ファイル'%s'を開けません "
 msgid "not a supported scheme, no image data written"
 msgstr ""
 " サポートされていないスキーム(scheme)なのでイメージデータは書き出されません "
+
+#: qdBitmap.c:150
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: qdCocoa.m:900
+msgid "allocation failure in QuartzCocoa_DeviceCreate"
+msgstr ""
 
 #: qdPDF.c:110
 msgid "Quartz R Device"

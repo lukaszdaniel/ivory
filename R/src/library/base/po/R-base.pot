@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 
 #: R/conditions.R: 0
 #. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call), msg, domain = "R-base")
-#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call)[1L], msg, domain = "R-base")
+#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call, nlines = 1L), msg, domain = "R-base")
 
 msgid "%s in %s: %s"
 msgstr ""
@@ -1587,7 +1587,7 @@ msgstr ""
 #: R/conditions.R: 0
 #: R/library.R: 0
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
-#. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
+#. R/conditions.R: gettextf("Error in command '%s':", deparse(call, nlines = 1L), domain = "R-base")
 #. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
 
 msgid "Error in command '%s':"

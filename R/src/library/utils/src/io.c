@@ -65,7 +65,7 @@ typedef struct {
     int quiet;
     int sepchar; /*  = 0 */      /* This gets compared to ints */
     char decchar; /* = '.' */    /* This only gets compared to chars */
-    char *quoteset; /* = NULL */
+    char quoteset[10]; /* = "" */
     int comchar; /* = NO_COMCHAR */
     int ttyflag; /* = 0 */
     Rconnection con; /* = NULL */
@@ -127,12 +127,10 @@ static int ConsoleGetchar(void)
 /* used by scan() */
 static int ConsoleGetcharWithPushBack(Rconnection con)
 {
-    char *curLine;
-    int c;
-
+    // -fanalyzer says this can free curLine twice.
     if(con->nPushBack > 0) {
-	curLine = con->PushBack[con->nPushBack-1];
-	c = curLine[con->posPushBack++];
+	char *curLine = con->PushBack[con->nPushBack-1];
+	int c = curLine[con->posPushBack++];
 	if(con->posPushBack >= strlen(curLine)) {
 	    /* last character on a line, so pop the line */
 	    free(curLine);
@@ -305,7 +303,7 @@ SEXP countfields(SEXP args)
     int blocksize, nlines, blskip;
     const char *p;
     Rboolean dbcslocale = (MB_CUR_MAX == 2);
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE,	 FALSE};
     data.NAstrings = R_NilValue;
 
@@ -336,10 +334,10 @@ SEXP countfields(SEXP args)
 
     if (isString(quotes)) {
 	const char *sc = translateChar(STRING_ELT(quotes, 0));
-	if (strlen(sc)) data.quoteset = strdup(sc);
-	else data.quoteset = "";
+	if (strlen(sc)) strcpy(data.quoteset, sc);
+	else strcpy(data.quoteset, "");
     } else if (isNull(quotes))
-	data.quoteset = "";
+	strcpy(data.quoteset, "");
     else
 	error(_("invalid quote symbol set"));
 
@@ -475,7 +473,6 @@ SEXP countfields(SEXP args)
     for (i = 0; i <= nlines; i++)
 	INTEGER(bns)[i] = INTEGER(ans)[i];
     UNPROTECT(1);
-    if (data.quoteset[0]) free(data.quoteset);
     return bns;
 }
 
@@ -547,7 +544,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     Rboolean done = FALSE, exact;
     char *endp;
     const char *tmp = NULL;
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE};
     Typecvt_Info typeInfo;      /* keep track of possible types of cvec */
     typeInfo.islogical = TRUE;  /* we can't rule anything out initially */
@@ -757,7 +754,7 @@ SEXP menu(SEXP choices)
     int c, j;
     double first;
     char buffer[MAXELTSIZE], *bufp = buffer;
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE};
     data.NAstrings = R_NilValue;
 
@@ -801,7 +798,7 @@ SEXP readtablehead(SEXP args)
 	blskip, skipNul;
     const char *p; char *buf;
     Rboolean empty, skip, firstnonwhite;
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE};
     data.NAstrings = R_NilValue;
 
@@ -821,10 +818,11 @@ SEXP readtablehead(SEXP args)
     if (isString(quotes)) {
 	const char *sc = translateChar(STRING_ELT(quotes, 0));
 	/* FIXME: will leak memory at long jump */
-	if (strlen(sc)) data.quoteset = strdup(sc);
-	else data.quoteset = "";
+	// strdup allocates and can fail
+	if (strlen(sc)) strcpy(data.quoteset, sc);
+	else strcpy(data.quoteset, "");
     } else if (isNull(quotes))
-	data.quoteset = "";
+	strcpy(data.quoteset, "");
     else
 	error(_("invalid quote symbol set"));
 
@@ -861,7 +859,7 @@ SEXP readtablehead(SEXP args)
     if(!buf)
 	error(_("cannot allocate buffer in 'readTableHead'"));
 
-    PROTECT(ans = allocVector(STRSXP, nlines));
+    ans = PROTECT(allocVector(STRSXP, nlines));
     for(nread = 0; nread < nlines; ) {
 	nbuf = 0; empty = TRUE; skip = FALSE; firstnonwhite = TRUE;
 	if (data.ttyflag)
@@ -874,7 +872,6 @@ SEXP readtablehead(SEXP args)
 		char *tmp = (char *) realloc(buf, buf_size);
 		if(!tmp) {
 		    free(buf);
-		    if (data.quoteset[0]) free(data.quoteset);
 		    error(_("cannot allocate buffer in 'readTableHead'"));
 		} else buf = tmp;
 	    }
@@ -888,7 +885,6 @@ SEXP readtablehead(SEXP args)
 		    c = scanchar(TRUE, &data);
 		    if(c == R_EOF) {
 			free(buf);
-			if (data.quoteset[0]) free(data.quoteset);
 			error(_("\\ followed by EOF"));
 		    }
 		    buf[nbuf++] = (char) c;
@@ -935,7 +931,6 @@ SEXP readtablehead(SEXP args)
     UNPROTECT(1);
     free(buf);
     if(!data.wasopen) data.con->close(data.con);
-    if (data.quoteset[0]) free(data.quoteset);
     return ans;
 
 no_more_lines:
@@ -946,7 +941,6 @@ no_more_lines:
 		    data.con->description);
 	} else {
 	    free(buf);
-	    if (data.quoteset[0]) free(data.quoteset);
 	    error(_("incomplete final line found by readTableHeader on '%s'"),
 		  data.con->description);
 	}
@@ -956,7 +950,6 @@ no_more_lines:
     for(i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
     UNPROTECT(2);
-    if (data.quoteset[0]) free(data.quoteset);
     return ans2;
 }
 
@@ -1104,9 +1097,9 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     quote_col = (Rboolean *) R_alloc(nc, sizeof(Rboolean));
     for(int j = 0; j < nc; j++) quote_col[j] = FALSE;
     for(int i = 0; i < length(quote); i++) { /* NB, quote might be NULL */
-	int this = INTEGER(quote)[i];
-	if(this == 0) quote_rn = TRUE;
-	if(this >  0) quote_col[this - 1] = TRUE;
+	int this_ = INTEGER(quote)[i];
+	if(this_ == 0) quote_rn = TRUE;
+	if(this_ >  0) quote_col[this_ - 1] = TRUE;
     }
     R_AllocStringBuffer(0, &strBuf);
     PrintDefaults();

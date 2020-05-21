@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:45\n"
 "PO-Revision-Date: 2015-01-17 13:31+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -84,7 +84,7 @@ msgid "%s function is only defined for equally-sized data frames"
 msgstr "nur definiert für gleich große data frames"
 
 #. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call), msg, domain = "R-base")
-#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call)[1L], msg, domain = "R-base")
+#. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call, nlines = 1L), msg, domain = "R-base")
 #: R/conditions.R:0
 msgid "%s in %s: %s"
 msgstr ""
@@ -1360,7 +1360,7 @@ msgid "Enter values for restart arguments:"
 msgstr ""
 
 #. R/New-Internal.R: gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
-#. R/conditions.R: gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base")
+#. R/conditions.R: gettextf("Error in command '%s':", deparse(call, nlines = 1L), domain = "R-base")
 #. R/library.R: gettext("Error in command '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""),     domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error in command '%s':"

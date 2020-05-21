@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-05-21 15:46+0200\n"
 "PO-Revision-Date: 2015-01-17 15:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -21,37 +21,37 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: tcltk.c:62
+#: tcltk.c:63
 msgid "parse error in R expression"
 msgstr "R 표현식에 구문분석 에러"
 
-#: tcltk.c:171 tcltk.c:248
+#: tcltk.c:172 tcltk.c:250
 msgid "tcl error.\n"
 msgstr "tcl 에러.\n"
 
-#: tcltk.c:200 tcltk.c:274 tcltk.c:291 tcltk.c:311 tcltk.c:331 tcltk.c:406
-#: tcltk.c:471 tcltk.c:525 tcltk.c:764
+#: tcltk.c:201 tcltk.c:276 tcltk.c:293 tcltk.c:313 tcltk.c:333 tcltk.c:408
+#: tcltk.c:473 tcltk.c:527 tcltk.c:766
 msgid "invalid argument"
 msgstr "잘못된 인수"
 
-#: tcltk.c:281
+#: tcltk.c:283
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.c:313 tcltk.c:333 tcltk.c:408 tcltk.c:473 tcltk.c:527
+#: tcltk.c:315 tcltk.c:335 tcltk.c:410 tcltk.c:475 tcltk.c:529
 #, fuzzy
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr "잘못된 tclObj -- 혹시 다른세션에서 저장된것인가요?"
 
-#: tcltk.c:637
+#: tcltk.c:639
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "tcltk 내부 함수 'callback_closure'에서 인수목록이 너무 깁니다"
 
-#: tcltk.c:670
+#: tcltk.c:672
 msgid "argument is not of correct type"
 msgstr "올바른 유형의 인수가 없습니다"
 
-#: tcltk.c:722
+#: tcltk.c:724
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "DISPLAY 변수가 없어서 Tk를 사용할 수 없습니다"
 

@@ -88,7 +88,8 @@ static Rboolean ncpus_ex(int *ians)
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 		          malloc(returnLength);
-                if (!buffer) error("allocation failure");
+                if (!buffer) error(_("memory allocation error"));
+
             } else
 		error(_("in reading processor information, probable cause: %d"),
 		      GetLastError());
@@ -123,7 +124,7 @@ static Rboolean ncpus_ex(int *ians)
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 		         malloc(returnLength);
-                if (!buffer) error("allocation failure");
+                if (!buffer) error(_("memory allocation error"));
             } else
 		error("in reading processor information, probable cause: %d",
 		      GetLastError());

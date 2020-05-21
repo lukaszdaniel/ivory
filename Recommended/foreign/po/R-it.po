@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-foreign 0.8-70\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-26 10:14\n"
+"POT-Creation-Date: 2020-05-08 22:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,152 +18,284 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-msgid "only one file"
-msgstr "solo un file"
-
-msgid "'file' must be character"
-msgstr "'file' dev'essere di tipo character"
-
-msgid "internal error - illegal S code value"
-msgstr "errore interno - valore del codice S illegale"
-
-msgid "not an S object"
-msgstr "non è un oggetto S"
-
-msgid "S mode %s (near byte offset %s) not supported"
-msgstr "Modalità S %s (byte offset vicino %s) non supportato"
-
-msgid "Argument 'file' must be a character string or connection."
+#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe", dQuote("data.frame"))
+#: R/read.dta.R:0
+msgid "'%s' argument is not an object of class %s"
 msgstr ""
-"L'argomento 'file' dev'essere una stringa di caratteri o una connessione."
 
-msgid "Invalid attribute specification."
-msgstr "Specificazione attributo non valido."
-
-msgid "Type 'relational' currently not implemented."
-msgstr "Il tipo 'relational' non è attualmente implementato."
-
-msgid "Missing data section."
-msgstr "Sezione dati mancante."
-
-msgid "Missing attribute section."
-msgstr "Sezione attributo mancante."
-
-msgid "Invalid type specification."
-msgstr "Specificazione tipo non valido."
-
-msgid "Field name: %s changed to: %s"
-msgstr "Nome campo: %s cambiato in: %s"
-
-msgid "cannot handle matrix/array columns"
-msgstr "non è possibile gestire le colonne della matrice/array"
-
-msgid "character column %d will be truncated to %d bytes"
-msgstr "la colonna di caratteri %d sarà troncata a %d byte"
-
-msgid "unknown column type in data frame"
-msgstr "tipo di colonna sconosciuto nel data frame"
-
-msgid "NA in precision"
-msgstr "NA in precisione"
-
-msgid "NA in scale"
-msgstr "NA in scala"
-
-msgid "cannot handle unknown type %s"
-msgstr "non è possibile gestire il tipo sconosciuto %s"
-
-msgid "'missing.type' only applicable to version >= 8 files"
-msgstr "'missing.type' applicabile unicamente alla versione >= 8 file"
-
-msgid "cannot read factor labels from Stata 5 files"
-msgstr "non è possibile leggere le etichette del fattore dai file Stata 5"
-
-msgid "value labels (%s) for %s are missing"
-msgstr "le etichette valore (%s) per %s sono mancanti"
-
-msgid "The object \"dataframe\" must have class data.frame"
-msgstr "L'oggetto \"dataframe\" dev'essere di classe data.frame"
-
-msgid "Version must be 6-12"
-msgstr "La versione dev'essere 6-12"
-
-msgid "Version must be 6-12: using 7"
-msgstr "La versione dev'essere 6-12: si utilizza la 7"
-
-msgid "cannot uniquely abbreviate variable names"
-msgstr "non è possibile abbreviare in maniera univoca i nomi delle variabili"
-
-msgid "abbreviating variable names"
-msgstr "abbreviazione dei nomi delle variabili"
-
-msgid "cannot handle multicolumn columns"
-msgstr "non è possibile gestire le colonne multiple"
-
-msgid "argument 'file' must be a character string or connection"
+#. R/R_systat.R: gettextf("'%s' argument must be a character string", "file")
+#: R/R_systat.R:0
+#, fuzzy
+msgid "'%s' argument must be a character string"
 msgstr ""
 "l'argomento 'file' dev'essere una stringa di caratteri o una connessione"
 
-msgid "file has zero or fewer variables: probably not an EpiInfo file"
-msgstr "il file ha zero o poche variabili: probabilmente non è un file Epilnfo"
-
-msgid "no records in file"
-msgstr "nessun record nel file"
-
-msgid "wrong number of records"
-msgstr "numero sbagliato di record"
-
-msgid "sectionname %s not found"
-msgstr "sectionname %s non trovato"
-
-msgid "SAS return code was %d"
-msgstr "Il codice restituito da SAS era %d"
-
-msgid "re-encoding from %s"
-msgstr "ri-codifica da %s"
-
-msgid "missingness type %s is not handled"
-msgstr "il tipo di mancanza %s non è gestito"
-
-msgid "Undeclared level(s)"
-msgstr "Livelli non dichiarati"
-
-msgid ","
-msgstr ","
-
-msgid "added in variable:"
-msgstr "aggiunto nella variabile:"
-
-msgid "Duplicated levels in factor"
-msgstr "Livelli duplicati nel fattore"
-
-msgid ":"
-msgstr ":"
-
-msgid "I cannot abbreviate the variable names to 'maxchars' or fewer chars"
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection", "file")
+#: R/arff.R:0 R/read.epiinfo.R:0
+#, fuzzy
+msgid "'%s' argument must be a character string or connection"
 msgstr ""
-"Non è possibile abbreviare i nomi delle variabili a 'maxchars' o un numero "
-"di caratteri inferiore"
+"l'argomento 'file' dev'essere una stringa di caratteri o una connessione"
 
-msgid "some variable names were abbreviated"
-msgstr "alcuni nomi variabile erano abbreviati"
+#. R/read.dta.R: warning("'missing.type' only applicable to version >= 8 files")
+#: R/read.dta.R:0
+msgid "'missing.type' only applicable to version >= 8 files"
+msgstr "'missing.type' applicabile unicamente alla versione >= 8 file"
 
+#. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
+#: R/Sread.R:0
+msgid "Argument %s is missing"
+msgstr ""
+
+#. R/Sread.R: gettext("Argument is missing", domain = "R-foreign")
+#: R/Sread.R:0
+msgid "Argument is missing"
+msgstr ""
+
+#. R/writeForeignSAS.R: stop("Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit")
+#: R/writeForeignSAS.R:0
+#, fuzzy
+msgid ""
+"Cannot uniquely abbreviate format names to conform to eight-character limit "
+"and not ending in a digit"
+msgstr ""
+"Non è possibile abbreviare univocamente i nomi dei formati a cui conformarsi"
+
+#. R/writeForeignSAS.R: gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters",     nmax)
+#: R/writeForeignSAS.R:0
 msgid "Cannot uniquely abbreviate the variable names to %d or fewer characters"
 msgstr ""
 "Non è possibile abbreviare in maniera univoca i nomi delle variabili a %d "
 "caratteri o meno"
 
-msgid "Cannot uniquely abbreviate format names to conform to"
+#. R/spss.R: gettextf("Duplicated levels in factor %s: %s", nm, paste(newlabels[dupnewlabels],     collapse = ", "))
+#: R/spss.R:0
+#, fuzzy
+msgid "Duplicated levels in factor %s: %s"
+msgstr "Livelli duplicati nel fattore"
+
+#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
+#: R/dbf.R:0
+msgid "Field name: %s changed to: %s"
+msgstr "Nome campo: %s cambiato in: %s"
+
+#. R/writeForeignCode.R: stop("I cannot abbreviate the variable names to 'maxchars' or fewer chars")
+#: R/writeForeignCode.R:0
+msgid "I cannot abbreviate the variable names to 'maxchars' or fewer chars"
 msgstr ""
-"Non è possibile abbreviare univocamente i nomi dei formati a cui conformarsi"
+"Non è possibile abbreviare i nomi delle variabili a 'maxchars' o un numero "
+"di caratteri inferiore"
 
-msgid "eight-character limit and not ending in a digit"
-msgstr "limite di otto caratteri e niente termine in una cifra"
+#. R/arff.R: stop("Invalid attribute specification.")
+#: R/arff.R:0
+msgid "Invalid attribute specification."
+msgstr "Specificazione attributo non valido."
 
+#. R/arff.R: stop("Invalid type specification.")
+#: R/arff.R:0
+msgid "Invalid type specification."
+msgstr "Specificazione tipo non valido."
+
+#. R/arff.R: stop("Missing attribute section.")
+#: R/arff.R:0
+msgid "Missing attribute section."
+msgstr "Sezione attributo mancante."
+
+#. R/arff.R: stop("Missing data section.")
+#: R/arff.R:0
+msgid "Missing data section."
+msgstr "Sezione dati mancante."
+
+#. R/dbf.R: stop("NA in precision")
+#: R/dbf.R:0
+msgid "NA in precision"
+msgstr "NA in precisione"
+
+#. R/dbf.R: stop("NA in scale")
+#: R/dbf.R:0
+msgid "NA in scale"
+msgstr "NA in scala"
+
+#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump))
+#: R/Sread.R:0
+msgid "S mode %s (near byte offset %s) not supported"
+msgstr "Modalità S %s (byte offset vicino %s) non supportato"
+
+#. R/read.ssd.R: gettextf("SAS failed. SAS program at %s", tmpProg, domain = "R-foreign")
+#: R/read.ssd.R:0
+msgid "SAS failed. SAS program at %s"
+msgstr ""
+
+#. R/read.ssd.R: gettextf("SAS return code was %d", sysret)
+#: R/read.ssd.R:0
+msgid "SAS return code was %d"
+msgstr "Il codice restituito da SAS era %d"
+
+#. R/writeForeignSAS.R: message("Some variable names were abbreviated or otherwise altered.")
+#: R/writeForeignSAS.R:0
 msgid "Some variable names were abbreviated or otherwise altered."
 msgstr "Alcuni nomi di variabili saranno abbreviati o alterati in altro modo."
 
+#. R/read.ssd.R: gettextf("The log file will be %s in the current directory", paste(basename(tmpProgLoc),     ".log", sep = ""), domain = "R-foreign")
+#: R/read.ssd.R:0
+msgid "The log file will be %s in the current directory"
+msgstr ""
+
+#. R/arff.R: stop("Type 'relational' currently not implemented.")
+#: R/arff.R:0
+msgid "Type 'relational' currently not implemented."
+msgstr "Il tipo 'relational' non è attualmente implementato."
+
+#. R/spss.R: gettextf("Undeclared level(s) %s added in variable: %s", paste(addlevels, collapse = ", "),     nm)
+#: R/spss.R:0
+#, fuzzy
+msgid "Undeclared level(s) %s added in variable: %s"
+msgstr "Livelli non dichiarati"
+
+#. R/Sread.R: gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign")
+#: R/Sread.R:0
+msgid "Unrecognized S mode %s is not supported"
+msgstr ""
+
+#. R/read.dta.R: stop("Version must be between 6 and 12")
+#: R/read.dta.R:0
+#, fuzzy
+msgid "Version must be between 6 and 12"
+msgstr "La versione dev'essere 6-12"
+
+#. R/read.dta.R: warning("Version must be between 6 and 12: using 7")
+#: R/read.dta.R:0
+#, fuzzy
+msgid "Version must be between 6 and 12: using 7"
+msgstr "La versione dev'essere 6-12: si utilizza la 7"
+
+#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity", domain = "R-foreign")
+#: R/read.ssd.R:0
+msgid "a log and other error products should be in the vicinity"
+msgstr ""
+
+#. R/read.dta.R: warning("abbreviating variable names")
+#: R/read.dta.R:0
+msgid "abbreviating variable names"
+msgstr "abbreviazione dei nomi delle variabili"
+
+#. R/dbf.R: stop("cannot handle matrix/array columns")
+#: R/dbf.R:0
+msgid "cannot handle matrix/array columns"
+msgstr "non è possibile gestire le colonne della matrice/array"
+
+#. R/read.dta.R: stop("cannot handle multicolumn columns")
+#: R/read.dta.R:0
+msgid "cannot handle multicolumn columns"
+msgstr "non è possibile gestire le colonne multiple"
+
+#. R/octave.R: gettextf("cannot handle unknown type %s", sQuote(type))
+#: R/octave.R:0
+msgid "cannot handle unknown type %s"
+msgstr "non è possibile gestire il tipo sconosciuto %s"
+
+#. R/read.dta.R: warning("cannot read factor labels from Stata 5 files")
+#: R/read.dta.R:0
+msgid "cannot read factor labels from Stata 5 files"
+msgstr "non è possibile leggere le etichette del fattore dai file Stata 5"
+
+#. R/read.dta.R: stop("cannot uniquely abbreviate variable names")
+#: R/read.dta.R:0
+msgid "cannot uniquely abbreviate variable names"
+msgstr "non è possibile abbreviare in maniera univoca i nomi delle variabili"
+
+#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes", i, max_nchar)
+#: R/dbf.R:0
+msgid "character column %d will be truncated to %d bytes"
+msgstr "la colonna di caratteri %d sarà troncata a %d byte"
+
+#. R/read.epiinfo.R: stop("file has zero or fewer variables: probably not an EpiInfo file")
+#: R/read.epiinfo.R:0
+msgid "file has zero or fewer variables: probably not an EpiInfo file"
+msgstr "il file ha zero o poche variabili: probabilmente non è un file Epilnfo"
+
+#. R/Sread.R: stop("internal error - illegal S code value")
+#: R/Sread.R:0
+msgid "internal error - illegal S code value"
+msgstr "errore interno - valore del codice S illegale"
+
+#. R/spss.R: gettextf("missingness type %s is not handled", tp)
+#: R/spss.R:0
+msgid "missingness type %s is not handled"
+msgstr "il tipo di mancanza %s non è gestito"
+
+#. R/read.epiinfo.R: stop("no records in file")
+#: R/read.epiinfo.R:0
+msgid "no records in file"
+msgstr "nessun record nel file"
+
+#. R/Sread.R: stop("not an S object")
+#: R/Sread.R:0
+msgid "not an S object"
+msgstr "non è un oggetto S"
+
+#. R/R_systat.R: stop("only one file")
+#: R/R_systat.R:0
+msgid "only one file"
+msgstr "solo un file"
+
+#. R/spss.R: gettextf("re-encoding from %s", cp)
+#: R/spss.R:0
+msgid "re-encoding from %s"
+msgstr "ri-codifica da %s"
+
+#. R/read.ssd.R: gettextf("sectionname %s not found", sn[i])
+#: R/read.ssd.R:0
+msgid "sectionname %s not found"
+msgstr "sectionname %s non trovato"
+
+#. R/writeForeignCode.R: warning("some variable names were abbreviated")
+#: R/writeForeignCode.R:0
+msgid "some variable names were abbreviated"
+msgstr "alcuni nomi variabile erano abbreviati"
+
+#. R/dbf.R: stop("unknown column type in data frame")
+#: R/dbf.R:0
+msgid "unknown column type in data frame"
+msgstr "tipo di colonna sconosciuto nel data frame"
+
+#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]), sQuote(names(rval)[v]))
+#: R/read.dta.R:0
+msgid "value labels (%s) for %s are missing"
+msgstr "le etichette valore (%s) per %s sono mancanti"
+
+#. R/read.epiinfo.R: warning("wrong number of records")
+#: R/read.epiinfo.R:0
+msgid "wrong number of records"
+msgstr "numero sbagliato di record"
+
+#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s", "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
+#: R/dbf.R:0
 msgid "data frame contains columns of unsupported class %s"
 msgid_plural "data frame contains columns of unsupported classes %s"
 msgstr[0] "il data frame contiene colonne della classe %s non supportata"
 msgstr[1] "il data frame contiene colonne delle classi %s non supportate"
+
+#~ msgid "'file' must be character"
+#~ msgstr "'file' dev'essere di tipo character"
+
+#~ msgid "Argument 'file' must be a character string or connection."
+#~ msgstr ""
+#~ "L'argomento 'file' dev'essere una stringa di caratteri o una connessione."
+
+#~ msgid "The object \"dataframe\" must have class data.frame"
+#~ msgstr "L'oggetto \"dataframe\" dev'essere di classe data.frame"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "added in variable:"
+#~ msgstr "aggiunto nella variabile:"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "eight-character limit and not ending in a digit"
+#~ msgstr "limite di otto caratteri e niente termine in una cifra"

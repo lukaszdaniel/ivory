@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 3.1-11\n"
-"POT-Creation-Date: 2020-03-09 21:45\n"
+"Project-Id-Version: survival 3.1-12\n"
+"POT-Creation-Date: 2020-05-08 22:51\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,7 +158,6 @@ msgstr ""
 #: R/summary.survexp.R: 0
 #: R/survfit.R: 0
 #: R/survfit.R: 0
-#: R/survfitKM.R: 0
 #: R/survfitTurnbull.R: 0
 #. R/aareg.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/aeqSurv.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("Surv"))
@@ -183,7 +182,6 @@ msgstr ""
 #. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
-#. R/survfitKM.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 
 msgid "'%s' argument is not an object of class %s"
@@ -920,6 +918,13 @@ msgstr ""
 #. R/survexp.R: stop("Can have only 1 'ratetable()' call in a formula")
 
 msgid "Can have only 1 'ratetable()' call in a formula"
+msgstr ""
+
+
+#: R/survfitKM.R: 0
+#. R/survfitKM.R: stop("Can only handle right censored or counting data")
+
+msgid "Can only handle right censored or counting data"
 msgstr ""
 
 
@@ -1839,14 +1844,18 @@ msgstr ""
 
 
 #: R/coxph.R: 0
+#: R/survreg.R: 0
 #. R/coxph.R: stop("a formula argument is required")
+#. R/survreg.R: stop("a formula argument is required")
 
 msgid "a formula argument is required"
 msgstr ""
 
 
 #: R/coxph.R: 0
+#: R/survreg.R: 0
 #. R/coxph.R: stop("a formula cannot have multiple cluster terms")
+#. R/survreg.R: stop("a formula cannot have multiple cluster terms")
 
 msgid "a formula cannot have multiple cluster terms"
 msgstr ""
@@ -2157,13 +2166,6 @@ msgid "can not have two cluster terms"
 msgstr ""
 
 
-#: R/survfitKM.R: 0
-#. R/survfitKM.R: stop("can only handle right censored or counting data")
-
-msgid "can only handle right censored or counting data"
-msgstr ""
-
-
 #: R/anova.coxph.R: 0
 #: R/anova.coxph.penal.R: 0
 #. R/anova.coxph.R: stop("cannot do anova tables with robust variances")
@@ -2291,23 +2293,34 @@ msgstr ""
 
 
 #: R/coxph.R: 0
+#: R/survreg.R: 0
 #. R/coxph.R: warning("cluster appears both in a formula and as an argument, formula term ignored")
+#. R/survreg.R: warning("cluster appears both in a formula and as an argument, formula term ignored")
 
 msgid "cluster appears both in a formula and as an argument, formula term ignored"
 msgstr ""
 
 
 #: R/aareg.R: 0
-#: R/survreg.R: 0
 #. R/aareg.R: stop("cluster cannot be used in an interaction")
-#. R/survreg.R: stop("cluster cannot be used in an interaction")
 
 msgid "cluster cannot be used in an interaction"
 msgstr ""
 
 
 #: R/coxph.R: 0
+#: R/survfitKM.R: 0
+#. R/coxph.R: warning("cluster specified with robust=FALSE, cluster ignored")
+#. R/survfitKM.R: warning("cluster specified with robust=FALSE, cluster ignored")
+
+msgid "cluster specified with robust=FALSE, cluster ignored"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/survreg.R: 0
 #. R/coxph.R: stop("cluster() cannot be in an interaction")
+#. R/survreg.R: stop("cluster() cannot be in an interaction")
 
 msgid "cluster() cannot be in an interaction"
 msgstr ""
@@ -2393,6 +2406,13 @@ msgid "cumhaz argument is not integer"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("cumtdc initial value must be numeric")
+
+msgid "cumtdc initial value must be numeric"
+msgstr ""
+
+
 #: R/survfit.matrix.R: 0
 #. R/survfit.matrix.R: warning("curves have a larger start.time than the parameter, start.time parameter value was ignored")
 
@@ -2401,9 +2421,9 @@ msgstr ""
 
 
 #: R/tmerge.R: 0
-#. R/tmerge.R: stop("data and options$tdcstart do not agree on data type")
+#. R/tmerge.R: stop("data and starting value do not agree on data type")
 
-msgid "data and options$tdcstart do not agree on data type"
+msgid "data and starting value do not agree on data type"
 msgstr ""
 
 
@@ -2574,7 +2594,9 @@ msgstr ""
 
 
 #: R/coxph.R: 0
+#: R/survreg.R: 0
 #. R/coxph.R: stop("formula must have a Surv response")
+#. R/survreg.R: stop("formula must have a Surv response")
 
 msgid "formula must have a Surv response"
 msgstr ""
@@ -2605,6 +2627,13 @@ msgstr ""
 #. R/survfit0.R: stop("function requires a survfit object")
 
 msgid "function requires a survfit object"
+msgstr ""
+
+
+#: R/survfitKM.R: 0
+#. R/survfitKM.R: stop("id or cluster option required")
+
+msgid "id or cluster option required"
 msgstr ""
 
 
@@ -2699,6 +2728,13 @@ msgstr ""
 #. R/survfitKM.R: stop("influence argument must be numeric or logical")
 
 msgid "influence argument must be numeric or logical"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("initial tdc value must be of length 1")
+
+msgid "initial tdc value must be of length 1"
 msgstr ""
 
 
@@ -3374,6 +3410,13 @@ msgid "multi-state curves are not a valid input"
 msgstr ""
 
 
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("multi-state survfit supports only a robust variance")
+
+msgid "multi-state survfit supports only a robust variance"
+msgstr ""
+
+
 #: R/survreg.R: 0
 #. R/survreg.R: stop("multi-state survival is not supported")
 
@@ -3869,13 +3912,6 @@ msgid "reference distribution was not found"
 msgstr ""
 
 
-#: R/tmerge.R: 0
-#. R/tmerge.R: gettextf("replacement of variable '%s'", argname[ii])
-
-msgid "replacement of variable '%s'"
-msgstr ""
-
-
 #: R/aareg.R: 0
 #: R/anova.survreg.R: 0
 #: R/cch.R: 0
@@ -3921,10 +3957,26 @@ msgid "right censored data only"
 msgstr ""
 
 
+#: R/coxph.R: 0
+#: R/survfitKM.R: 0
+#. R/coxph.R: stop("robust must be TRUE/FALSE")
+#. R/survfitKM.R: stop("robust must be TRUE/FALSE")
+
+msgid "robust must be TRUE/FALSE"
+msgstr ""
+
+
 #: R/clogit.R: 0
 #. R/clogit.R: stop("robust variance plus the exact method is not supported")
 
 msgid "robust variance plus the exact method is not supported"
+msgstr ""
+
+
+#: R/survfitKM.R: 0
+#. R/survfitKM.R: warning("robust=FALSE implies influence=FALSE")
+
+msgid "robust=FALSE implies influence=FALSE"
 msgstr ""
 
 
@@ -4129,6 +4181,13 @@ msgstr ""
 #. R/survfitms.R: stop("survfitms object has no states component")
 
 msgid "survfitms object has no states component"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("tdc initial value must be of length 1")
+
+msgid "tdc initial value must be of length 1"
 msgstr ""
 
 
@@ -4689,7 +4748,9 @@ msgid "y and weights are not the same length"
 msgstr ""
 
 
+#: R/survfitKM.R: 0
 #: R/xtras.R: 0
+#. R/survfitKM.R: stop("y must be a Surv object")
 #. R/xtras.R: stop("y must be a Surv object")
 
 msgid "y must be a Surv object"

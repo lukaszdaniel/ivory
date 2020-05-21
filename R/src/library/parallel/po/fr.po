@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25+0100\n"
+"POT-Creation-Date: 2020-05-21 15:46+0200\n"
 "PO-Revision-Date: 2015-01-17 15:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -38,7 +38,7 @@ msgstr "impossible de créer un canal (pipe)"
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.c:321 fork.c:601
+#: fork.c:321 fork.c:601 ncpus.c:91 ncpus.c:127
 msgid "memory allocation error"
 msgstr "erreur d'allocation mémoire"
 
@@ -201,16 +201,16 @@ msgstr ""
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 
-#: ncpus.c:93 ncpus.c:192
+#: ncpus.c:94 ncpus.c:193
 #, c-format
 msgid "in reading processor information, probable cause: %d"
 msgstr ""
 
-#: ncpus.c:178
+#: ncpus.c:179
 msgid "GetLogicalProcessorInformation is not supported on this OS."
 msgstr ""
 
-#: ncpus.c:191
+#: ncpus.c:192
 msgid "allocation failure"
 msgstr ""
 

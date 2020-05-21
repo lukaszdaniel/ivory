@@ -1019,13 +1019,13 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
     return ans;
 } // end{ match5 }
 
-SEXP matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
+SEXP Rf_matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
 {
     return match5(itable, ix, nmatch, NULL, env);
 }
 
 /* used from other code, not here: */
-SEXP match(SEXP itable, SEXP ix, int nmatch)
+SEXP Rf_match(SEXP itable, SEXP ix, int nmatch)
 {
     return match5(itable, ix, nmatch, NULL, R_BaseEnv);
 }

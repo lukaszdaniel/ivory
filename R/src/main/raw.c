@@ -314,13 +314,13 @@ SEXP attribute_hidden do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_xlen_t i, nc = XLENGTH(x);
 	PROTECT(ans = allocVector(STRSXP, nc));
 	for (i = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if (this == NA_INTEGER 
-		|| (this >= 0xD800 && this <= 0xDFFF) 
-		|| this > 0x10FFFF)
+	    int this_ = INTEGER(x)[i];
+	    if (this_ == NA_INTEGER 
+		|| (this_ >= 0xD800 && this_ <= 0xDFFF) 
+		|| this_ > 0x10FFFF)
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    else {
-		used = inttomb(buf, this);
+		used = inttomb(buf, this_);
 		buf[used] = '\0';
 		SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
 	    }
@@ -331,14 +331,14 @@ SEXP attribute_hidden do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	Rboolean haveNA = FALSE;
 	/* Note that this gives zero length for input '0', so it is omitted */
 	for (i = 0, len = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if (this == NA_INTEGER 
-		|| (this >= 0xDC00 && this <= 0xDFFF)
-		|| this > 0x10FFFF) {
+	    int this_ = INTEGER(x)[i];
+	    if (this_ == NA_INTEGER 
+		|| (this_ >= 0xDC00 && this_ <= 0xDFFF)
+		|| this_ > 0x10FFFF) {
 		haveNA = TRUE;
 		break;
 	    }
-	    else if (this >=  0xD800 && this <= 0xDBFF) {
+	    else if (this_ >=  0xD800 && this_ <= 0xDBFF) {
 		if(!s_pair || i >= nc-1) {haveNA = TRUE; break;}
 		int next = INTEGER(x)[i+1];
 		if(next >= 0xDC00 && next <= 0xDFFF) i++;
@@ -346,7 +346,7 @@ SEXP attribute_hidden do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 		len += 4; // all points not in the basic plane have length 4
 	    } 
 	    else
-		len += inttomb(NULL, this);
+		len += inttomb(NULL, this_);
 	}
 	if (haveNA) {
 	    PROTECT(ans = allocVector(STRSXP, 1));
@@ -361,14 +361,14 @@ SEXP attribute_hidden do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    tmp = alloca(len+1); tmp[len] = '\0';
 	}
 	for (i = 0, len = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if(s_pair && (this >=  0xD800 && this <= 0xDBFF)) {
+	    int this_ = INTEGER(x)[i];
+	    if(s_pair && (this_ >=  0xD800 && this_ <= 0xDBFF)) {
 		// all the validity checking has already been done.
 		int next = INTEGER(x)[++i];
-		unsigned int hi = this - 0xD800, lo = next - 0xDC00;
-		this = 0x10000 + (hi << 10) + lo;
+		unsigned int hi = this_ - 0xD800, lo = next - 0xDC00;
+		this_ = 0x10000 + (hi << 10) + lo;
 	    }
-	    used = inttomb(buf, this);
+	    used = inttomb(buf, this_);
 	    memcpy(tmp + len, buf, used);
 	    len += used;
 	}

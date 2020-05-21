@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:46\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -475,7 +475,7 @@ msgstr ""
 msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
-#. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
+#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -1456,7 +1456,7 @@ msgstr "인코딩 '%s'은  포터블하지 않습니다"
 msgid "Engine name %s and package %s do not match"
 msgstr "엔진명 %1$s과 패키지 %2$s가 일치하지 않습니다"
 
-#. R/QC.R: gettext("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.",     domain = "R-tools")
+#. R/QC.R: gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")
 #: R/QC.R:0
 msgid ""
 "Entries must be names of packages optionally followed by '<=' or '>=', white "
@@ -1465,12 +1465,12 @@ msgstr ""
 "항목들은 반드시 패키지들의 이름들이어야 하며, 추가정보는 괄호안에 '<=' 또는 "
 "'>=', 공백문자, 그리고 유효한 버전정보의 순서로 나열합니다. "
 
-#. R/QC.R: gettext("Entries with infeasible comparison operator:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible comparison operator:")
 #: R/QC.R:0
 msgid "Entries with infeasible comparison operator:"
 msgstr "실행할 수 없는 비교연산자가 함께 있는 항목들은 다음과 같습니다:"
 
-#. R/QC.R: gettext("Entries with infeasible version number:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible version number:")
 #: R/QC.R:0
 msgid "Entries with infeasible version number:"
 msgstr "가능하지 않은 버전정보를 가진 항목들은 다음과 같습니다:"
@@ -1647,13 +1647,13 @@ msgstr ""
 "%3$s 이름을 가진 비니에트에 대해서 %1$s 출력파일 (엔진 %2$s에 의해서)을 위치"
 "시키는데 실패했습니다. 디렉토리 %4$s내에 다음과 같은 파일들이 있습니다: %5$s"
 
-#. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr "ASCII가 아닌 태그가 사용된 항목들:"
 
-#. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
@@ -2137,13 +2137,20 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr "DESCRIPTION 파일이 잘못되었습니다"
 
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
+#: R/packages.R:0
+#, fuzzy
+msgid "Invalid DESCRIPTION file for package %s"
+msgstr "DESCRIPTION 파일이 잘못되었습니다"
+
 #. R/doitools.R: gettext("Invalid DOI")
 #: R/doitools.R:0
 #, fuzzy
 msgid "Invalid DOI"
 msgstr "패키지가 잘못되었습니다"
 
-#. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr "Priority 항목이 잘못되었습니다."
@@ -2160,7 +2167,7 @@ msgstr "패키지가 잘못되었습니다"
 msgid "Invalid URI scheme (use \\doi for DOIs in Rd markup)"
 msgstr "패키지가 잘못되었습니다"
 
-#. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid VignetteBuilder field.")
 #: R/QC.R:0
 msgid "Invalid VignetteBuilder field."
 msgstr "VignetteBuilder 항목이 잘못되었습니다."
@@ -2313,13 +2320,13 @@ msgstr ""
 msgid "Malformed Authors@R field:"
 msgstr "Authors@R 항목이 잘못되었습니다:"
 
-#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
 #: R/QC.R:0
 msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr ""
 "Depends 또는 Suggests 또는 Imports 또는 Enhances 항목이 잘못되었습니다."
 
-#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.")
 #: R/QC.R:0
 msgid ""
 "Malformed Description field: should contain one or more complete sentences."
@@ -2353,12 +2360,12 @@ msgid ""
 "contains no \\itemize."
 msgstr ""
 
-#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
 msgstr ""
 
-#. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed maintainer field.")
 #: R/QC.R:0
 msgid "Malformed maintainer field."
 msgstr "유지보수자 항목이 잘못되었습니다. "
@@ -2368,7 +2375,7 @@ msgstr "유지보수자 항목이 잘못되었습니다. "
 msgid "Malformed package name"
 msgstr "잘못된 패키지명입니다"
 
-#. R/QC.R: gettext("Malformed package version.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed package version.")
 #: R/QC.R:0
 msgid "Malformed package version."
 msgstr "잘못된 패키지 버전입니다."
@@ -2608,11 +2615,6 @@ msgstr "패키지 %s에 대한 예제를 찾을 수 없습니다"
 #. R/update_packages.R: message("No new packages or updated package versions detected")
 #: R/update_packages.R:0
 msgid "No new packages or updated package versions detected"
-msgstr ""
-
-#. R/news.R: stop("No news found in given file using old-style R-like format.")
-#: R/news.R:0
-msgid "No news found in given file using old-style R-like format."
 msgstr ""
 
 #. R/news.R: stop("No news found in given file using package default format.")
@@ -2860,7 +2862,7 @@ msgstr ""
 "다큐멘테이션 객체 '%s'내에 \\usage 부분에는 있고 \\alias 부분에는 없는 객체들"
 "입니다:"
 
-#. R/QC.R: gettext("Offending entries:", domain = "R-tools")
+#. R/QC.R: gettext("Offending entries:")
 #: R/QC.R:0
 msgid "Offending entries:"
 msgstr "다음과 같은 문제가 되는 항목들이 있습니다:"
@@ -2914,7 +2916,7 @@ msgstr ""
 msgid "Only one tag %s is allowed"
 msgstr ""
 
-#. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
+#. R/QC.R: gettextf("Only operators '<=' and '>=' are possible.")
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "오로지 '<='와 '>=' 연산자들만이 사용가능합니다."
@@ -3095,7 +3097,7 @@ msgid ""
 "to change without notice."
 msgstr ""
 
-#. R/QC.R: gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.",     domain = "R-tools")
+#. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
 msgid ""
 "Packages with priorities 'base' or 'recommended' or 'defunct-base' must "
@@ -3579,7 +3581,7 @@ msgstr ""
 "'Writing R Extensions' 매뉴얼에서 'Cross-references' 섹션의 내용을 살펴보세"
 "요."
 
-#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0 R/check.R:0
@@ -4068,7 +4070,7 @@ msgstr ""
 msgid "These are unlikely file names for src files."
 msgstr ""
 
-#. R/QC.R: gettext("These fields must have ASCII values.", domain = "R-tools")
+#. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
 msgstr "반드시 ASCII 값들을 가져야만 하는 항목들입니다."
@@ -4100,7 +4102,7 @@ msgstr ""
 msgid "This build time stamp is over a month old."
 msgstr ""
 
-#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
+#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 #: R/QC.R:0
 msgid ""
 "This field must contain one or more packages (and no version requirement)."
@@ -4196,7 +4198,7 @@ msgstr "문서화되지 않은 코드 객체들:"
 msgid "Undocumented data sets:"
 msgstr "문서화 되지 않은 데이터셋들:"
 
-#. R/QC.R: gettext("Unknown encoding", domain = "R-tools")
+#. R/QC.R: gettext("Unknown encoding")
 #: R/QC.R:0
 msgid "Unknown encoding"
 msgstr "알 수 없는 인코딩입니다"
@@ -4320,7 +4322,7 @@ msgstr ""
 msgid "Version jumps in minor (submitted: %s, existing: %s)"
 msgstr ""
 
-#. R/QC.R: gettext("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.",     domain = "R-tools")
+#. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
 #: R/QC.R:0
 msgid ""
 "Version numbers must be sequences of at least two non-negative integers, "

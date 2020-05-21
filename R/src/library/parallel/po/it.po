@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.6.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-05-21 15:46+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -37,7 +37,7 @@ msgstr "non è possibile terminare il figlio: %s"
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.c:321 fork.c:601
+#: fork.c:321 fork.c:601 ncpus.c:91 ncpus.c:127
 msgid "memory allocation error"
 msgstr "errore di allocazione memoria"
 
@@ -199,15 +199,15 @@ msgstr "l'insieme delle CPU richieste è troppo grande per questo sistema"
 msgid "retrieving CPU affinity set failed"
 msgstr "recupero insieme CPU affinity non avvenuto"
 
-#: ncpus.c:93 ncpus.c:192
+#: ncpus.c:94 ncpus.c:193
 #, c-format
 msgid "in reading processor information, probable cause: %d"
 msgstr ""
 
-#: ncpus.c:178
+#: ncpus.c:179
 msgid "GetLogicalProcessorInformation is not supported on this OS."
 msgstr ""
 
-#: ncpus.c:191
+#: ncpus.c:192
 msgid "allocation failure"
 msgstr ""

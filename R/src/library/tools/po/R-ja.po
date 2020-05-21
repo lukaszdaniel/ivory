@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:46\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -478,7 +478,7 @@ msgstr ""
 msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
-#. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
+#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -1457,7 +1457,7 @@ msgstr " エンコーディング '%s' は移植出来ません "
 msgid "Engine name %s and package %s do not match"
 msgstr " リンク %s （パッケージ %s 中の）は所在不明です "
 
-#. R/QC.R: gettext("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.",     domain = "R-tools")
+#. R/QC.R: gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")
 #: R/QC.R:0
 msgid ""
 "Entries must be names of packages optionally followed by '<=' or '>=', white "
@@ -1466,12 +1466,12 @@ msgstr ""
 " 項目はパッケージの名前(オプションで '<=' か '>=', 空白、そして括弧にはさまれ"
 "た適正なバージョン番号、が続く)でなければなりません. "
 
-#. R/QC.R: gettext("Entries with infeasible comparison operator:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible comparison operator:")
 #: R/QC.R:0
 msgid "Entries with infeasible comparison operator:"
 msgstr " 実行不可能な比較演算子によるエントリ： "
 
-#. R/QC.R: gettext("Entries with infeasible version number:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible version number:")
 #: R/QC.R:0
 msgid "Entries with infeasible version number:"
 msgstr " 実行不可能なバージョン番号がついたエントリーです： "
@@ -1643,13 +1643,13 @@ msgid ""
 "engine %s. The following files exist in working directory %s: %s"
 msgstr ""
 
-#. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr " ASCIIタグのないフィールドです： "
 
-#. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
@@ -2164,13 +2164,20 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr " 不正な DESCRIPTION ファイルです "
 
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
+#: R/packages.R:0
+#, fuzzy
+msgid "Invalid DESCRIPTION file for package %s"
+msgstr " 不正な DESCRIPTION ファイルです "
+
 #. R/doitools.R: gettext("Invalid DOI")
 #: R/doitools.R:0
 #, fuzzy
 msgid "Invalid DOI"
 msgstr " 不正なパッケージ名です "
 
-#. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr " 不正な優先フィールドです． "
@@ -2187,7 +2194,7 @@ msgstr " 不正なパッケージ名です "
 msgid "Invalid URI scheme (use \\doi for DOIs in Rd markup)"
 msgstr " 不正なパッケージ名です "
 
-#. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid VignetteBuilder field.")
 #: R/QC.R:0
 #, fuzzy
 msgid "Invalid VignetteBuilder field."
@@ -2339,12 +2346,12 @@ msgstr ""
 msgid "Malformed Authors@R field:"
 msgstr " 不正なAuthors@Rフィールドです。 "
 
-#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
 #: R/QC.R:0
 msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr " 不備な Depends, Suggests, Imports, Enhanced 欄。 "
 
-#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.")
 #: R/QC.R:0
 msgid ""
 "Malformed Description field: should contain one or more complete sentences."
@@ -2392,12 +2399,12 @@ msgstr ""
 " %s \n"
 " で始まるチャンクに、\\itemize が含まれていません "
 
-#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
 msgstr ""
 
-#. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed maintainer field.")
 #: R/QC.R:0
 msgid "Malformed maintainer field."
 msgstr " 不正な　maintainer field　です． "
@@ -2407,7 +2414,7 @@ msgstr " 不正な　maintainer field　です． "
 msgid "Malformed package name"
 msgstr " 奇矯なパッケージ名です "
 
-#. R/QC.R: gettext("Malformed package version.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed package version.")
 #: R/QC.R:0
 msgid "Malformed package version."
 msgstr " 不正なパッケージのバージョンです． "
@@ -2653,12 +2660,6 @@ msgstr " パッケージ %s に対する例文が見つかりません "
 msgid "No new packages or updated package versions detected"
 msgstr ""
 
-#. R/news.R: stop("No news found in given file using old-style R-like format.")
-#: R/news.R:0
-msgid "No news found in given file using old-style R-like format."
-msgstr ""
-" 旧来のR風の書式を使ったニュースは与えられたファイル中にはありません． "
-
 #. R/news.R: stop("No news found in given file using package default format.")
 #: R/news.R:0
 msgid "No news found in given file using package default format."
@@ -2899,7 +2900,7 @@ msgstr ""
 " ドキュメンテーションオブジェクト'%s' 中の\\alias がオブジェクト内の \\usage "
 "に存在しません: "
 
-#. R/QC.R: gettext("Offending entries:", domain = "R-tools")
+#. R/QC.R: gettext("Offending entries:")
 #: R/QC.R:0
 msgid "Offending entries:"
 msgstr " 好ましくないエントリー： "
@@ -2957,7 +2958,7 @@ msgstr " \\SexprはRdセクションを1つしか持てません。 "
 msgid "Only one tag %s is allowed"
 msgstr " \\SexprはRdセクションを1つしか持てません。 "
 
-#. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
+#. R/QC.R: gettextf("Only operators '<=' and '>=' are possible.")
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr " 演算子 '<=' 及び '>=' のみ有効です. "
@@ -3143,7 +3144,7 @@ msgid ""
 "to change without notice."
 msgstr ""
 
-#. R/QC.R: gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.",     domain = "R-tools")
+#. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
 msgid ""
 "Packages with priorities 'base' or 'recommended' or 'defunct-base' must "
@@ -3638,7 +3639,7 @@ msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
 
-#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0 R/check.R:0
@@ -4138,7 +4139,7 @@ msgstr ""
 msgid "These are unlikely file names for src files."
 msgstr ""
 
-#. R/QC.R: gettext("These fields must have ASCII values.", domain = "R-tools")
+#. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
 msgstr " これらのフィールドはASCII値でなければなりません "
@@ -4171,7 +4172,7 @@ msgstr ""
 msgid "This build time stamp is over a month old."
 msgstr ""
 
-#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
+#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 #: R/QC.R:0
 msgid ""
 "This field must contain one or more packages (and no version requirement)."
@@ -4268,7 +4269,7 @@ msgstr " ドキュメント化されてないコードオブジェクト: "
 msgid "Undocumented data sets:"
 msgstr " ドキュメント化されてないデータセット: "
 
-#. R/QC.R: gettext("Unknown encoding", domain = "R-tools")
+#. R/QC.R: gettext("Unknown encoding")
 #: R/QC.R:0
 msgid "Unknown encoding"
 msgstr " 未知のエンコードです "
@@ -4396,7 +4397,7 @@ msgstr ""
 msgid "Version jumps in minor (submitted: %s, existing: %s)"
 msgstr ""
 
-#. R/QC.R: gettext("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.",     domain = "R-tools")
+#. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
 #: R/QC.R:0
 msgid ""
 "Version numbers must be sequences of at least two non-negative integers, "
@@ -7967,6 +7968,10 @@ msgstr[0] ""
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#~ msgid "No news found in given file using old-style R-like format."
+#~ msgstr ""
+#~ " 旧来のR風の書式を使ったニュースは与えられたファイル中にはありません． "
 
 #, fuzzy
 #~ msgid "%s file wast not found"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-05-21 15:46\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -465,7 +465,7 @@ msgstr ""
 msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
-#. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
+#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -1409,7 +1409,7 @@ msgstr "編碼 '%s' 不可攜"
 msgid "Engine name %s and package %s do not match"
 msgstr "引擎名稱 %s 與套件 %s 不相符"
 
-#. R/QC.R: gettext("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.",     domain = "R-tools")
+#. R/QC.R: gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")
 #: R/QC.R:0
 msgid ""
 "Entries must be names of packages optionally followed by '<=' or '>=', white "
@@ -1418,12 +1418,12 @@ msgstr ""
 "每條目都必須是套件的名稱，名稱後面可以跟 '<=' 或 '>='，空格，或在括號內的適當"
 "版本數目。"
 
-#. R/QC.R: gettext("Entries with infeasible comparison operator:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible comparison operator:")
 #: R/QC.R:0
 msgid "Entries with infeasible comparison operator:"
 msgstr "帶不可行比較運算子號的條目："
 
-#. R/QC.R: gettext("Entries with infeasible version number:", domain = "R-tools")
+#. R/QC.R: gettext("Entries with infeasible version number:")
 #: R/QC.R:0
 msgid "Entries with infeasible version number:"
 msgstr "帶不可行的版本數目的條目："
@@ -1596,13 +1596,13 @@ msgstr ""
 "定位 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介時失敗。以下的檔案存在於目錄 "
 "%s 之中：%s"
 
-#. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #. R/QC.R: gettext("Fields with non-ASCII tags:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr "欄位內有非 -ASCII 的標籤："
 
-#. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
+#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
@@ -2075,12 +2075,19 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr "DESCRIPTION 檔案無效"
 
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
+#: R/packages.R:0
+#, fuzzy
+msgid "Invalid DESCRIPTION file for package %s"
+msgstr "DESCRIPTION 檔案無效"
+
 #. R/doitools.R: gettext("Invalid DOI")
 #: R/doitools.R:0
 msgid "Invalid DOI"
 msgstr ""
 
-#. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr "Priority 欄位不對。"
@@ -2095,7 +2102,7 @@ msgstr ""
 msgid "Invalid URI scheme (use \\doi for DOIs in Rd markup)"
 msgstr ""
 
-#. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
+#. R/QC.R: gettext("Invalid VignetteBuilder field.")
 #: R/QC.R:0
 msgid "Invalid VignetteBuilder field."
 msgstr "無效的 VignetteBuilder 欄位。"
@@ -2248,12 +2255,12 @@ msgstr ""
 msgid "Malformed Authors@R field:"
 msgstr "異常 Authors@R 欄位。"
 
-#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
 #: R/QC.R:0
 msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr "Depends/Suggests/Imports/Enhances 這些欄位中有些是異常的。"
 
-#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.")
 #: R/QC.R:0
 msgid ""
 "Malformed Description field: should contain one or more complete sentences."
@@ -2300,12 +2307,12 @@ msgstr ""
 "  %s\n"
 "沒有\\itemize."
 
-#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
 msgstr "異常的標題欄位：不應以句號結尾。"
 
-#. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed maintainer field.")
 #: R/QC.R:0
 msgid "Malformed maintainer field."
 msgstr "異常維護者欄位。"
@@ -2315,7 +2322,7 @@ msgstr "異常維護者欄位。"
 msgid "Malformed package name"
 msgstr "異常套件名稱"
 
-#. R/QC.R: gettext("Malformed package version.", domain = "R-tools")
+#. R/QC.R: gettext("Malformed package version.")
 #: R/QC.R:0
 msgid "Malformed package version."
 msgstr "異常套件版本。"
@@ -2555,11 +2562,6 @@ msgstr "程式套件 %s 沒有範例"
 msgid "No new packages or updated package versions detected"
 msgstr ""
 
-#. R/news.R: stop("No news found in given file using old-style R-like format.")
-#: R/news.R:0
-msgid "No news found in given file using old-style R-like format."
-msgstr "在所提供的檔案中用老式 R 類別的格式找不到任何新資訊。"
-
 #. R/news.R: stop("No news found in given file using package default format.")
 #: R/news.R:0
 msgid "No news found in given file using package default format."
@@ -2797,7 +2799,7 @@ msgstr ""
 msgid "Objects in \\usage without \\alias in documentation object %s:"
 msgstr "使用手冊物件 '%s' 裡的\\usage 物件沒有\\alias 這條目："
 
-#. R/QC.R: gettext("Offending entries:", domain = "R-tools")
+#. R/QC.R: gettext("Offending entries:")
 #: R/QC.R:0
 msgid "Offending entries:"
 msgstr "有問題的條目為："
@@ -2852,7 +2854,7 @@ msgstr "每 %s 只支援一個 Rd 章節"
 msgid "Only one tag %s is allowed"
 msgstr "每 %s 只支援一個 Rd 章節"
 
-#. R/QC.R: gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")
+#. R/QC.R: gettextf("Only operators '<=' and '>=' are possible.")
 #: R/QC.R:0
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "可用的運算子號只能是 '<=' 和 '>='。"
@@ -3028,7 +3030,7 @@ msgid ""
 "to change without notice."
 msgstr ""
 
-#. R/QC.R: gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.",     domain = "R-tools")
+#. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
 msgid ""
 "Packages with priorities 'base' or 'recommended' or 'defunct-base' must "
@@ -3497,7 +3499,7 @@ msgid ""
 "See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr "請參考 '如何寫 R 附加軟體' 說明書中 '交叉參照' 這一段。"
 
-#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0 R/check.R:0
@@ -3968,7 +3970,7 @@ msgstr ""
 msgid "These are unlikely file names for src files."
 msgstr ""
 
-#. R/QC.R: gettext("These fields must have ASCII values.", domain = "R-tools")
+#. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
 msgstr "這些欄位必須要有 ASCII 值。"
@@ -3996,7 +3998,7 @@ msgstr ""
 msgid "This build time stamp is over a month old."
 msgstr ""
 
-#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
+#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 #: R/QC.R:0
 msgid ""
 "This field must contain one or more packages (and no version requirement)."
@@ -4090,7 +4092,7 @@ msgstr "未公開的編碼物件："
 msgid "Undocumented data sets:"
 msgstr "未公開的資料集："
 
-#. R/QC.R: gettext("Unknown encoding", domain = "R-tools")
+#. R/QC.R: gettext("Unknown encoding")
 #: R/QC.R:0
 msgid "Unknown encoding"
 msgstr "不明的編碼"
@@ -4212,7 +4214,7 @@ msgstr ""
 msgid "Version jumps in minor (submitted: %s, existing: %s)"
 msgstr ""
 
-#. R/QC.R: gettext("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.",     domain = "R-tools")
+#. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
 #: R/QC.R:0
 msgid ""
 "Version numbers must be sequences of at least two non-negative integers, "
@@ -7631,6 +7633,9 @@ msgstr[0] ""
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "無法重新編碼 %s 行 %s"
+
+#~ msgid "No news found in given file using old-style R-like format."
+#~ msgstr "在所提供的檔案中用老式 R 類別的格式找不到任何新資訊。"
 
 #~ msgid "argument 'package' must be of length 1"
 #~ msgstr "引數 'package' 的長度必須為一"

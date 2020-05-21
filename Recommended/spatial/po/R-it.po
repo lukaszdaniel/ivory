@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: spatial 7.3-8\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2018-04-07 21:16\n"
+"POT-Creation-Date: 2020-05-08 22:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,41 +18,128 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-msgid "'np' exceeds 6"
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls"))
+#: R/kr.R:0
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+#. R/kr.R: stop("'n' argument is too large")
+#. R/kr.R: stop("'n' argument is too large")
+#: R/kr.R:0
+#, fuzzy
+msgid "'n' argument is too large"
+msgstr "'n' è troppo grande"
+
+#. R/kr.R: stop("'np' argument exceeds 6")
+#. R/kr.R: stop("'np' argument exceeds 6")
+#: R/kr.R:0
+#, fuzzy
+msgid "'np' argument exceeds 6"
 msgstr "'np' eccede 6"
 
-msgid "'x' does not have columns 'x', 'y' and 'z'"
-msgstr "'x' non ha le colonne 'x', 'y' e 'z'"
-
-msgid "some of '...' do not match"
-msgstr "alcuni '...' non corrispondono"
-
-msgid "rank failure in Choleski decomposition"
-msgstr "fallimento di rango nella decomposizione di Choleski"
-
-msgid "'object' is not a fitted trend surface"
-msgstr "'object' non è una superficie di trend aderente"
-
+#. R/kr.R: stop("'x' and 'y' differ in length")
+#: R/kr.R:0
 msgid "'x' and 'y' differ in length"
 msgstr "'x' e 'y' differiscono in lunghezza"
 
-msgid "'object' not from kriging"
-msgstr "'object' non da kriging"
+#. R/kr.R: stop("'x' does not have columns 'x', 'y' and 'z'")
+#. R/kr.R: stop("'x' does not have columns 'x', 'y' and 'z'")
+#: R/kr.R:0
+msgid "'x' does not have columns 'x', 'y' and 'z'"
+msgstr "'x' non ha le colonne 'x', 'y' e 'z'"
 
-msgid "'n' is too large"
-msgstr "'n' è troppo grande"
+#. R/kr.R: gettextf("AIC: (df = %s) %s", AIC[1L], round(AIC[2L], 4), domain = "R-spatial")
+#: R/kr.R:0
+msgid "AIC: (df = %s) %s"
+msgstr ""
 
-msgid "object not from kriging"
-msgstr "oggetto non da kringing"
+#. R/kr.R: gettext("Adjusted R-squared:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Adjusted R-squared:"
+msgstr ""
 
-msgid "Device not active"
+#. R/kr.R: gettext("Analysis of Variance Table", domain = "R-spatial")
+#. R/kr.R: gettext("Analysis of Variance Table")
+#: R/kr.R:0
+msgid "Analysis of Variance Table"
+msgstr ""
+
+#. R/kr.R: warning("Device is not active")
+#. R/kr.R: warning("Device is not active")
+#: R/kr.R:0
+#, fuzzy
+msgid "Device is not active"
 msgstr "Dispositivo non attivo"
 
-msgid "'x' not a fitted trend surface"
-msgstr "'x' non ha una superficie di trend aderente"
+#. R/kr.R: gettext("Fitted:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Fitted:"
+msgstr ""
 
+#. R/kr.R: gettextf("Model %s: %s", format(seq_len(nmodels)), models)
+#: R/kr.R:0
+msgid "Model %s: %s"
+msgstr ""
+
+#. R/kr.R: gettext("Model: ", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Model:"
+msgstr ""
+
+#. R/kr.R: gettext("Multiple R-Squared:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Multiple R-Squared:"
+msgstr ""
+
+#. R/kr.R: gettext("Residuals:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Residuals:"
+msgstr ""
+
+#. R/pp.R: stop("invalid input")
+#. R/pp.R: stop("invalid input")
+#. R/pp.R: stop("invalid input")
+#: R/pp.R:0
+msgid "invalid input"
+msgstr "input non valido"
+
+#. R/kr.R: stop("rank failure in Choleski decomposition")
+#: R/kr.R:0
+msgid "rank failure in Choleski decomposition"
+msgstr "fallimento di rango nella decomposizione di Choleski"
+
+#. R/kr.R: warning("some of '...' do not match")
+#: R/kr.R:0
+msgid "some of '...' do not match"
+msgstr "alcuni '...' non corrispondono"
+
+#. R/pp.R: stop("some points outside region")
+#: R/pp.R:0
 msgid "some points outside region"
 msgstr "alcuni punti al di fuori della regione"
 
-msgid "invalid input"
-msgstr "input non valido"
+#~ msgid "'object' is not a fitted trend surface"
+#~ msgstr "'object' non è una superficie di trend aderente"
+
+#~ msgid "'object' not from kriging"
+#~ msgstr "'object' non da kriging"
+
+#~ msgid "object not from kriging"
+#~ msgstr "oggetto non da kringing"
+
+#~ msgid "'x' not a fitted trend surface"
+#~ msgstr "'x' non ha una superficie di trend aderente"
