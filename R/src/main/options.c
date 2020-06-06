@@ -174,7 +174,7 @@ int GetOptionDigits(void)
     return FixupDigits(GetOption1(install("digits")), iWARN);
 }
 
-attribute_hidden
+HIDDEN
 int GetOptionCutoff(void)
 {
     int w;
@@ -186,7 +186,7 @@ int GetOptionCutoff(void)
     return w;
 }
 
-attribute_hidden
+HIDDEN
 Rboolean Rf_GetOptionDeviceAsk(void)
 {
     int ask;
@@ -241,7 +241,7 @@ static SEXP SetOption(SEXP tag, SEXP value)
 /* Set the width of lines for printing i.e. like options(width=...) */
 /* Returns the previous value for the options. */
 
-int attribute_hidden R_SetOptionWidth(int w)
+HIDDEN int R_SetOptionWidth(int w)
 {
     SEXP t, v;
     if (w < R_MIN_WIDTH_OPT) w = R_MIN_WIDTH_OPT;
@@ -253,7 +253,7 @@ int attribute_hidden R_SetOptionWidth(int w)
     return INTEGER(v)[0];
 }
 
-int attribute_hidden R_SetOptionWarn(int w)
+HIDDEN int R_SetOptionWarn(int w)
 {
     SEXP t, v;
 
@@ -267,7 +267,7 @@ int attribute_hidden R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-void attribute_hidden InitOptions(void)
+HIDDEN void InitOptions(void)
 {
     SEXP val, v;
     char *p;
@@ -399,7 +399,7 @@ void attribute_hidden InitOptions(void)
 }
 
 
-SEXP attribute_hidden do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -412,7 +412,7 @@ SEXP attribute_hidden do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 static Rboolean warned_on_strings_as_fact = FALSE; // -> once-per-session warning
 
 /* This needs to manage R_Visible */
-SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, value, options;
 

@@ -115,7 +115,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
     } else { /* numerical derivatives */
         /* As discussed in PR#15958, the callback might save a copy of
            x, so we need to duplicate it before changes.  Currently this
-           always duplicates; with true reference counting, it would 
+           always duplicates; with true reference counting, it would
            only do so when necessary. */
 	PROTECT_WITH_INDEX(x = allocVector(REALSXP, n), &ipx_x);
 	setAttrib(x, R_NamesSymbol, OS->names);
@@ -463,7 +463,7 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
 	dpar[i] = dpar[i] + eps;
     }
     // now symmetrize
-    for (i = 0; i < npar; i++) 
+    for (i = 0; i < npar; i++)
 	for (j = 0; j < i; j++) {
 	    double tmp =
 		0.5 * (REAL(ans)[i * npar + j] + REAL(ans)[j * npar + i]);

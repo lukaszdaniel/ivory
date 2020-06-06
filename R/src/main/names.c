@@ -1025,7 +1025,7 @@ static char *Spec_name[] = {
 
 
 /* also used in eval.c */
-SEXP attribute_hidden R_Primitive(const char *primname)
+HIDDEN SEXP R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
 	if (strcmp(primname, R_FunTab[i].name) == 0) { /* all names are ASCII */
@@ -1037,7 +1037,7 @@ SEXP attribute_hidden R_Primitive(const char *primname)
     return R_NilValue;
 }
 
-SEXP attribute_hidden do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP name, prim;
     checkArity(op, args);
@@ -1051,7 +1051,7 @@ SEXP attribute_hidden do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-attribute_hidden
+HIDDEN
 int StrToInternal(const char *s)
 {
     int i;
@@ -1158,7 +1158,7 @@ static void initializeDDVALSymbols() {
     }
 }
 
-SEXP attribute_hidden installDDVAL(int n) {
+HIDDEN SEXP installDDVAL(int n) {
     if (n < N_DDVAL_SYMBOLS)
 	return DDVALSymbols[n];
 
@@ -1178,7 +1178,7 @@ static SEXP mkSymMarker(SEXP pname)
 }
 
 /* initialize the symbol table */
-void attribute_hidden InitNames()
+HIDDEN void InitNames()
 {
     /* allocate the symbol table */
     if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))
@@ -1255,7 +1255,7 @@ SEXP Rf_install(const char *name)
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
-attribute_hidden
+HIDDEN
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     SEXP sym;
@@ -1297,7 +1297,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 }
 
 #define maxLength 512
-attribute_hidden
+HIDDEN
 SEXP installS3Signature(const char *className, const char *methodName) {
 
     const char *src;
@@ -1330,7 +1330,7 @@ SEXP installS3Signature(const char *className, const char *methodName) {
 
 /*  do_internal - This is the code for .Internal(). */
 
-SEXP attribute_hidden do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, fun, ans;
     int save = R_PPStackTop;
@@ -1404,7 +1404,7 @@ SEXP attribute_hidden do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* Internal code for the ~ operator */
 
-SEXP attribute_hidden do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     if (isObject(call))
 	return duplicate(call);

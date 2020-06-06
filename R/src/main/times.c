@@ -136,7 +136,7 @@ double currentTime(void)
     return ans;
 }
 
-SEXP attribute_hidden do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     return ScalarReal(currentTime());
@@ -147,7 +147,7 @@ SEXP attribute_hidden do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
 /* For RNG.c, main.c, mkdtemp.c */
-attribute_hidden unsigned int TimeToSeed(void)
+HIDDEN unsigned int TimeToSeed(void)
 {
     unsigned int seed, pid = getpid();
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)

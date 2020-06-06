@@ -406,7 +406,7 @@ static Rboolean cprod(SEXP sx, Rcomplex *value, Rboolean narm)
 }
 
 
-attribute_hidden
+HIDDEN
 SEXP fixup_NaRm(SEXP args)
 {
     SEXP t, na_value;
@@ -517,7 +517,7 @@ static R_INLINE SEXP complex_mean(SEXP x)
     return ScalarComplex(val);
 }
 
-SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(PRIMVAL(op) == 1) { /* mean */
@@ -966,7 +966,7 @@ invalid_type:
 }/* do_summary */
 
 
-SEXP attribute_hidden do_range(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, a, b, prargs, call2;
 
@@ -992,7 +992,7 @@ SEXP attribute_hidden do_range(SEXP call, SEXP op, SEXP args, SEXP env)
 
 // which.min(x) : The index (starting at 1), of the first min(x) in x
 // which.max(x) : The index (starting at 1), of the first max(x) in x
-SEXP attribute_hidden do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP sx = CAR(args), ans;
     int nprot = 1;
@@ -1086,7 +1086,7 @@ SEXP attribute_hidden do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* which(x) : indices of non-NA TRUE values in x */
-SEXP attribute_hidden do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP v = CAR(args);
@@ -1160,7 +1160,7 @@ SEXP attribute_hidden do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* op = 0 is pmin, op = 1 is pmax
    NULL and logicals are handled as if they had been coerced to integer.
  */
-SEXP attribute_hidden do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int narm = asLogical(CAR(args));
     if(narm == NA_LOGICAL)

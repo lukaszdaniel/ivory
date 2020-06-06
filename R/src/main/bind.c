@@ -558,7 +558,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 }
 
 /* also used in coerce.c */
-SEXP attribute_hidden ItemName(SEXP names, R_xlen_t i)
+HIDDEN SEXP ItemName(SEXP names, R_xlen_t i)
 {
   /* return  names[i]  if it is a character (>= 1 char), or NULL otherwise */
     if (names != R_NilValue &&
@@ -765,7 +765,7 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
 */
 
 /* This is a primitive SPECIALSXP */
-SEXP attribute_hidden do_c(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -783,7 +783,7 @@ SEXP attribute_hidden do_c(SEXP call, SEXP op, SEXP args, SEXP env)
     return res;
 }
 
-SEXP attribute_hidden do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* Method dispatch has failed; run the default code. */
     /* By default we do not recurse, but this can be over-ridden */
@@ -882,7 +882,7 @@ SEXP attribute_hidden do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
 } /* do_c */
 
 
-SEXP attribute_hidden do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, t;
     R_xlen_t i, n = 0;
@@ -1027,7 +1027,7 @@ SEXP attribute_hidden do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* cbind(deparse.level, ...) and rbind(deparse.level, ...) : */
 /* This is a special .Internal */
-SEXP attribute_hidden do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP a, t, obj, method, rho, ans;
     int mode, deparse_level;

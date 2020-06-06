@@ -56,20 +56,20 @@
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 /* this is just for conformity with other types */
-attribute_hidden
+HIDDEN
 void formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
-attribute_hidden
+HIDDEN
 void formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 
-attribute_hidden
+HIDDEN
 void formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
@@ -86,7 +86,7 @@ void formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 
 /* currently there is no STRING_GET_REGION */
 
-attribute_hidden
+HIDDEN
 void formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;

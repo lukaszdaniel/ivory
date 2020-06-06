@@ -22,11 +22,12 @@
       as suggested in \PR{17777} by Jan Gorecki.
 
       \item Using \code{c()} to combine a factor with other factors
-      now gives a factor.
+      now gives a factor, and specifically an ordered factor when
+      combining ordered factors with identical levels.
 
       \item Graphics devices can now specify \code{canClip =
         NA_LOGICAL}, in which case the graphics engine will never
-        perform any clipping of output itself.
+      perform any clipping of output itself.
 
       The clipping that the graphics engine does perform (for both
       \code{canClip = TRUE} and \code{canClip = FALSE}) has also
@@ -36,11 +37,30 @@
       \item \code{apply()} gains a \code{simplify} argument to possibly
       disable simplifying results.
 
-      \item The \code{format()} method for \code{"ftable"}s gets an option
-      \code{justify}; suggested by Thomas Soeiro.
+      \item The \code{format()} method for class \code{"ftable"} gets an
+      option \code{justify}; suggested by Thomas Soeiro.
 
       \item New \code{...names()} utility, complementing others, proposed
       by Neal Fultz in \PR{17705}.
+
+      \item \code{type.convert()} now warns when its \code{as.is} argument
+      is not specified, as the help file always said it \emph{should}.  In
+      that case, the default is changed to \code{TRUE} in line with its
+      change in \code{read.table()} (related to \code{stringsAsFactor}) in
+      \R 4.0.0.
+
+      \item When printing list arrays, classed objects are now shown via
+      their \code{format()} value if this is a short enough character
+      string, or by giving the first elements of their class vector and
+      their length.
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item The \emph{standalone} \file{libRmath} math library and \R's C
+      API now provide \code{log1pexp()} again as documented, and get new
+      \code{log1mexp()}.
     }
   }
 
@@ -57,27 +77,69 @@
 
       \item \command{R CMD config CXXCPP} is defunct (it was deprecated
       in \R{} 3.6.2).
+
+      \item \code{parallel::detectCores()} drops support for Irix
+      (retired in 2013).
     }
   }
 
-  %% \subsection{BUG FIXES}{
-  %%   \itemize{
-  %%   }
-  %% }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Many more C-level allocations (mainly by \code{malloc} and
+      \code{strdup}) are checked for success with suitable alternative
+      actions.
+
+      \item Bug fix for \code{replayPlot()};  this was turning off
+      graphics engine display list recording if a recorded plot was
+      replayed in the same session.  The impact of the bug became
+      visible if resize the device after replay OR if attempted another
+      \code{savePlot()} after replay (empty display list means empty
+      screen on resize or empty saved plot).
+
+      \item \command{R CMD check} etc now warn when a package exports
+      non-existing S4 classes or methods, also in case of no "methods"
+      presence; reported by Alex Bertram; repr.ex. and patch by Sebastian
+      Meyer in \PR{16662}.
+
+      \item \code{round()} and \code{signif()} now longer tolerate wrong
+      argument names, notably in 1-argument calls; reported by Shane
+      Mueller on R-devel (mailing list).
+
+      \item \code{source(*, echo=TRUE)} no longer fails in some cases with
+      empty lines; reported by Bill Dunlap in \PR{17769}.
+
+      \item \code{boxplot()} now also accepts \code{call}s for labels such
+      as \code{ylab}, the same as \code{plot()}.  Reported by Marius Hofert.
+
+      \item \code{on.exit()} now correctly matches named arguments, thanks
+      to \PR{17815} including patch by Brodie Gaslam.
+    }
+  }
 }
 
-\section{\Rlogo CHANGES IN 4.0.0 patched}{
+\section{\Rlogo CHANGES IN R 4.0.1 patched}{
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} skips vignette re-building (with a
+      warning) if the \samp{VignetteBuilder} package(s) are not available.
+    }
+  }
+
+}
+
+\section{\Rlogo CHANGES IN R 4.0.1}{
 
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{paste()} and \code{paste0()} gain a new optional
       argument \code{recycle0}.  When set to true, zero-length
-      arguments (and all zero-length or no arguments when \code{collapse}
-      is not \code{NULL}) lead to the zero-length value
-      \code{character(0)}.
+      arguments are recycled leading to \code{character(0)} after the
+      \code{sep}-concatenation, i.e., to the empty string \code{""} if
+      \code{collapse} is a string and to the zero-length value
+      \code{character(0)} when \code{collapse = NULL}.
 
-      This should not be used in package code until \R 4.0.1 is
-      released, when the package should depend on \samp{R (>= 4.0.1)}.
+      A package whose code uses this should depend on \samp{R (>= 4.0.1)}.
 
       \item The \code{summary(<warnings>)} method now maps the counts
       correctly to the warning messages.
@@ -86,7 +148,7 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{aov(frml, ...)} now also works in case the \code{formula}
+      \item \code{aov(frml, ...)} now also works where the \code{formula}
       deparses to more than 500 characters, thanks to a report and patch
       proposal by Jan Hauffa.
 
@@ -111,11 +173,18 @@
 
       \item \code{plot(y ~ x, ylab = quote(y[i]))} now works, as e.g., for
       \code{xlab}; related to \PR{10525}.
+
+      \item \code{parallel::detect.cores(all.tests = TRUE)} tries a
+      matching OS name before the other tests (which were intended only
+      for unknown OSes).
+
+      \item Parse data for raw strings is now recorded correctly. Reported
+      by Gabor Csardi.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN 4.0.0}{
+\section{\Rlogo CHANGES IN R 4.0.0}{
 
   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
     \itemize{

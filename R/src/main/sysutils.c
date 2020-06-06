@@ -65,7 +65,7 @@ Rboolean R_FileExists(const char *path)
     return _stati64(R_ExpandFileName(path), &sb) == 0;
 }
 
-double attribute_hidden R_FileMtime(const char *path)
+HIDDEN double R_FileMtime(const char *path)
 {
     struct _stati64 sb;
     if (_stati64(R_ExpandFileName(path), &sb) != 0)
@@ -79,7 +79,7 @@ Rboolean R_FileExists(const char *path)
     return stat(R_ExpandFileName(path), &sb) == 0;
 }
 
-double attribute_hidden R_FileMtime(const char *path)
+HIDDEN double R_FileMtime(const char *path)
 {
     struct stat sb;
     if (stat(R_ExpandFileName(path), &sb) != 0)
@@ -92,7 +92,7 @@ double attribute_hidden R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-Rboolean attribute_hidden R_HiddenFile(const char *name)
+HIDDEN Rboolean R_HiddenFile(const char *name)
 {
     if (name && name[0] != '.') return 0;
     else return 1;
@@ -228,13 +228,13 @@ char *R_HomeDir(void)
 }
 
 /* This is a primitive (with no arguments) */
-SEXP attribute_hidden do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return ScalarLogical( (R_Interactive) ? 1 : 0 );
 }
 
-SEXP attribute_hidden do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     Rboolean check = asLogical(CAR(args));
@@ -246,7 +246,7 @@ SEXP attribute_hidden do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-SEXP attribute_hidden do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  ans, pattern, fileext, tempdir;
     const char *tn, *td, *te;
@@ -359,7 +359,7 @@ extern char ** environ;
 # include <windows.h> /* _wgetenv etc */
 #endif
 
-SEXP attribute_hidden do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, j;
     SEXP ans;
@@ -452,7 +452,7 @@ static int Rputenv(const char *nm, const char *val)
 #endif
 
 
-SEXP attribute_hidden do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #if defined(HAVE_PUTENV) || defined(HAVE_SETENV)
     int i, n;
@@ -491,7 +491,7 @@ SEXP attribute_hidden do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 }
 
-SEXP attribute_hidden do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int i, n;
     SEXP ans, vars;
@@ -578,7 +578,7 @@ write_one (unsigned int namescount, const char * const *names, void *data)
 #include "RBufferUtils.h"
 
 /* iconv(x, from, to, sub, mark) */
-SEXP attribute_hidden do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x = CAR(args), si;
     void * obj;
@@ -998,7 +998,7 @@ const char *Rf_translateChar(SEXP x)
 }
 
 /* Variant which must work, used for file paths, including devices */
-const char *translateCharFP(SEXP x)
+const char *Rf_translateCharFP(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1018,8 +1018,8 @@ const char *translateCharFP(SEXP x)
 }
 
 /* Variant which may return NULL, used for file paths */
-attribute_hidden
-const char *translateCharFP2(SEXP x)
+HIDDEN
+const char *Rf_translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1145,7 +1145,7 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
-attribute_hidden
+HIDDEN
 const char *Rf_trCharUTF8(SEXP x)
 {
     void *obj;
@@ -1232,7 +1232,7 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-attribute_hidden /* but not hidden on Windows, where it was used in tcltk.c */
+HIDDEN /* but not hidden on Windows, where it was used in tcltk.c */
 const wchar_t *Rf_wtransChar(SEXP x)
 {
     void * obj;
@@ -1550,7 +1550,7 @@ next_char:
 }
 #endif
 
-void attribute_hidden
+HIDDEN void
 invalidate_cached_recodings(void)
 {
     if (latin1_obj) {
@@ -1640,8 +1640,7 @@ size_t ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in plot.c for non-UTF-8 MBCS */
-size_t attribute_hidden
-mbtoucs(unsigned int *wc, const char *s, size_t n)
+HIDDEN size_t mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -1853,7 +1852,7 @@ void R_reInitTempDir(int die_on_fail)
     }
 }
 
-void attribute_hidden InitTempDir() {
+HIDDEN void InitTempDir() {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 
@@ -1914,7 +1913,7 @@ void R_free_tmpnam(char *name)
     if (name) free(name);
 }
 
-SEXP attribute_hidden do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nm;
 
@@ -1933,7 +1932,7 @@ SEXP attribute_hidden do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-void attribute_hidden resetTimeLimits()
+HIDDEN void resetTimeLimits()
 {
     double data[5];
     R_getProcTime(data);
@@ -1952,7 +1951,7 @@ void attribute_hidden resetTimeLimits()
 	cpuLimit = cpuLimit2;
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, old_cpu = cpuLimitValue,
@@ -1979,7 +1978,7 @@ do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, data[5];
@@ -2017,7 +2016,7 @@ do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 #  define GLOB_QUOTE 0
 # endif
 #endif
-SEXP attribute_hidden do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     R_xlen_t i, n;
@@ -2137,7 +2136,7 @@ typedef struct _FILE_NAME_INFO {
 typedef BOOL (WINAPI *LPFN_GFIBH_EX) (HANDLE, FILE_INFO_BY_HANDLE_CLASS,
                                       LPVOID, DWORD);
 
-int attribute_hidden R_is_redirection_tty(int fd)
+HIDDEN int R_is_redirection_tty(int fd)
 {
     /* for now detects only msys/cygwin redirection tty */
     static LPFN_GFIBH_EX gfibh = NULL;
@@ -2172,7 +2171,7 @@ int attribute_hidden R_is_redirection_tty(int fd)
 }
 #endif
 
-int attribute_hidden R_isatty(int fd)
+HIDDEN int R_isatty(int fd)
 {
 #ifdef _WIN32
     if (R_is_redirection_tty(fd))

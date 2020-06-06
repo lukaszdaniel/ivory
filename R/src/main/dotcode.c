@@ -173,7 +173,7 @@ checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
     return; /* not reached */
 }
 
-attribute_hidden
+HIDDEN
 DL_FUNC R_dotCallFn(SEXP op, SEXP call, int nargs) {
     R_RegisteredNativeSymbol symbol = {R_CALL_SYM, {NULL}, NULL};
     DL_FUNC fun = NULL;
@@ -466,7 +466,7 @@ static SEXP enctrim(SEXP args)
 
 
 
-SEXP attribute_hidden do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *sym, *type="", *pkg = "";
     int val = 1, nargs = length(args);
@@ -526,7 +526,7 @@ static SEXP check_retval(SEXP call, SEXP val)
     return val;
 }
     
-SEXP attribute_hidden do_External(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     DL_FUNC ofun = NULL;
     SEXP retval;
@@ -568,7 +568,7 @@ typedef SEXP (*VarFun)(...);
 typedef DL_FUNC VarFun;
 #endif
 
-SEXP attribute_hidden R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
+HIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
 				  SEXP call) {
     VarFun fun = NULL;
     SEXP retval = R_NilValue;	/* -Wall */
@@ -1230,7 +1230,7 @@ SEXP attribute_hidden R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
 }
 
 /* .Call(name, <args>) */
-SEXP attribute_hidden do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     DL_FUNC ofun = NULL;
     SEXP retval, cargs[MAX_ARGS], pargs;
@@ -1323,13 +1323,23 @@ SEXP attribute_hidden do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #include <R_ext/GraphicsEngine.h>
 
-SEXP attribute_hidden do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
     Rboolean record = dd->recordGraphics;
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_record")) {
+        printf("do_Externalgr: record = FALSE\n");
+    }
+#endif
     dd->recordGraphics = FALSE;
     PROTECT(retval = do_External(call, op, args, env));
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_record")) {
+        printf("do_Externalgr: record = %d\n", record);
+    }
+#endif
     dd->recordGraphics = record;
     if (GErecording(call, dd)) { // which is record && call != R_NilValue
 	if (!GEcheckState(dd))
@@ -1344,13 +1354,23 @@ SEXP attribute_hidden do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
     return retval;
 }
 
-SEXP attribute_hidden do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
     Rboolean record = dd->recordGraphics;
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_record")) {
+        printf("do_dotcallgr: record = FALSE\n");
+    }
+#endif
     dd->recordGraphics = FALSE;
     PROTECT(retval = do_dotcall(call, op, args, env));
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_record")) {
+        printf("do_dotcallgr: record = %d\n", record);
+    }
+#endif
     dd->recordGraphics = record;
     if (GErecording(call, dd)) {
 	if (!GEcheckState(dd))
@@ -1364,8 +1384,7 @@ SEXP attribute_hidden do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
     return retval;
 }
 
-static SEXP
-Rf_getCallingDLL(void)
+static SEXP Rf_getCallingDLL(void)
 {
     SEXP e, ans;
     RCNTXT *cptr;
@@ -1462,7 +1481,7 @@ R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 #define FILL 0xee
 #define NG 64
 
-SEXP attribute_hidden do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     void **cargs, **cargs0 = NULL /* -Wall */;
     int naok, na, nargs, Fort;

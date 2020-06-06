@@ -40,7 +40,7 @@ static Rboolean neWithNaN(double x, double y, ne_strictness_type str);
 
 
 /* .Internal(identical(..)) */
-SEXP attribute_hidden do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int num_eq = 1, single_NA = 1, attr_as_set = 1, ignore_bytecode = 1,
 	ignore_env = 0, ignore_srcref = 1, nargs = length(args), flags;

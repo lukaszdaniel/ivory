@@ -150,7 +150,7 @@ static SEXP icummin(SEXP x, SEXP s)
     return s;
 }
 
-SEXP attribute_hidden do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, t, ans;
     R_xlen_t i, n;

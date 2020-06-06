@@ -25,11 +25,7 @@ extern "C" {
 #include "cholmod.h" //--->  M_cholmod_*() declarations
 // "Implementation" of these in ---> ./Matrix_stubs.c
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 // Copied from ../../src/Mutils.h ----------------------------------------
 #define MATRIX_VALID_ge_dense			\

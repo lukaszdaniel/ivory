@@ -67,7 +67,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
     return buf;
 }
 
-SEXP attribute_hidden do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nwhat, nret, nc, nr, m, k, lastm, need, i, n_eblanklines = 0;
     Rboolean blank_skip, field_skip = FALSE;

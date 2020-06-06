@@ -118,13 +118,13 @@ static SEXP duplicate1(SEXP, Rboolean deep);
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = (unsigned long)-1;
 
-unsigned long  attribute_hidden
+HIDDEN unsigned long
 get_duplicate_counter(void)
 {
     return duplicate_counter;
 }
 
-void attribute_hidden reset_duplicate_counter(void)
+HIDDEN void reset_duplicate_counter(void)
 {
     duplicate_counter = 0;
     return;
@@ -486,7 +486,7 @@ void copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 }
 
 #define COPY_WITH_RECYCLE(VALTYPE, TNAME) \
-void attribute_hidden \
+HIDDEN void \
 xcopy##TNAME##WithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) { \
 							\
     if (nsrc >= n) { /* no recycle needed */		\
@@ -516,7 +516,7 @@ COPY_WITH_RECYCLE(Rbyte, Raw)		/* xcopyRawWithRecycle */
 COPY_WITH_RECYCLE(double, Real)		/* xcopyRealWithRecycle */
 
 #define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
-void attribute_hidden \
+HIDDEN void \
 xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) { \
 							\
     if (nsrc >= n) { /* no recycle needed */		\
@@ -543,7 +543,7 @@ COPY_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT) /* xcopyStringWithRecy
 COPY_ELT_WITH_RECYCLE(Vector, VECTOR_ELT_LD, SET_VECTOR_ELT) /* xcopyVectorWithRecycle */
 
 #define FILL_WITH_RECYCLE(VALTYPE, TNAME) \
-void attribute_hidden xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,	\
+HIDDEN void xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,	\
     R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,		\
     R_xlen_t cols, R_xlen_t nsrc) {				\
 								\
@@ -558,7 +558,7 @@ FILL_WITH_RECYCLE(Rbyte, Raw)		/* xfillRawMatrixWithRecycle */
 FILL_WITH_RECYCLE(double, Real)		/* xfillRealMatrixWithRecycle */
 
 #define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
-void attribute_hidden xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,	\
+HIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,	\
     R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,		\
     R_xlen_t cols, R_xlen_t nsrc) {				\
 								\

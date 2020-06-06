@@ -191,31 +191,31 @@ int R_finite(double);
 
 	/* Chebyshev Series */
 
-int	attribute_hidden chebyshev_init(double*, int, double);
-double	attribute_hidden chebyshev_eval(double, const double *, const int);
+HIDDEN int chebyshev_init(double*, int, double);
+HIDDEN double chebyshev_eval(double, const double *, const int);
 
 	/* Gamma and Related Functions */
 
-void	attribute_hidden gammalims(double*, double*);
-double	attribute_hidden lgammacor(double); /* log(gamma) correction */
-double  attribute_hidden stirlerr(double);  /* Stirling expansion "error" */
+HIDDEN void gammalims(double*, double*);
+HIDDEN double lgammacor(double); /* log(gamma) correction */
+HIDDEN double stirlerr(double);  /* Stirling expansion "error" */
 
-double	attribute_hidden lfastchoose(double, double);
+HIDDEN double lfastchoose(double, double);
 
-double  attribute_hidden bd0(double, double);
+HIDDEN double bd0(double, double);
 
-double  attribute_hidden pnchisq_raw(double, double, double, double, double,
+HIDDEN double pnchisq_raw(double, double, double, double, double,
 				     int, Rboolean, Rboolean);
-double  attribute_hidden pgamma_raw(double, double, int, int);
-double	attribute_hidden pbeta_raw(double, double, double, int, int);
-double  attribute_hidden qchisq_appr(double, double, double, int, int, double tol);
-LDOUBLE attribute_hidden pnbeta_raw(double, double, double, double, double);
-double	attribute_hidden pnbeta2(double, double, double, double, double, int, int);
+HIDDEN double pgamma_raw(double, double, int, int);
+HIDDEN double pbeta_raw(double, double, double, int, int);
+HIDDEN double qchisq_appr(double, double, double, int, int, double tol);
+HIDDEN LDOUBLE pnbeta_raw(double, double, double, double, double);
+HIDDEN double pnbeta2(double, double, double, double, double, int, int);
 
 int	Rf_i1mach(int);
 
 /* From toms708.c */
-void attribute_hidden bratio(double a, double b, double x, double y,
+HIDDEN void bratio(double a, double b, double x, double y,
 	    		     double *w, double *w1, int *ierr, int log_p);
 
 

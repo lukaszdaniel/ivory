@@ -229,7 +229,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
  *    3. fix up the argument list; it should be the arguments to the
  *	 generic matched to the formals of the method to be invoked */
 
-attribute_hidden
+HIDDEN
 SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
@@ -371,7 +371,7 @@ SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
     return res;
 }
 
-attribute_hidden
+HIDDEN
 SEXP createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
@@ -441,7 +441,7 @@ SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP method,
     return ans;
 }
 
-attribute_hidden
+HIDDEN
 int usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
@@ -500,7 +500,7 @@ int usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 */
 
 /* This is a primitive SPECIALSXP */
-SEXP attribute_hidden NORET do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP NORET do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, generic = R_NilValue /* -Wall */, obj, val;
     SEXP callenv, defenv;
@@ -672,7 +672,7 @@ static R_INLINE SEXP getPrimitive(SEXP symbol)
 
 
 /* This is a special .Internal */
-SEXP attribute_hidden do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *sb, *sg, *sk;
     SEXP ans, s, t, klass, method, matchedarg, generic;
@@ -920,7 +920,7 @@ SEXP attribute_hidden do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* primitive */
-SEXP attribute_hidden do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -950,7 +950,7 @@ SEXP attribute_hidden do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-Rboolean attribute_hidden inherits2(SEXP x, const char *what) {
+HIDDEN Rboolean inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -1022,7 +1022,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
     return rval;
 }
 
-SEXP attribute_hidden do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -1191,7 +1191,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 }
 
 /* simpler version for internal use, in attrib.c and print.c */
-attribute_hidden
+HIDDEN
 Rboolean isMethodsDispatchOn(void)
 {
     return !NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr);
@@ -1205,7 +1205,7 @@ Rboolean isMethodsDispatchOn(void)
    It seems it is not currently called with onOff = TRUE (and would
    not have worked prior to 3.0.2).
 */
-attribute_hidden
+HIDDEN
 SEXP do_S4on(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     if(length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
@@ -1261,7 +1261,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 
 static SEXP get_this_generic(SEXP args);
 
-SEXP attribute_hidden do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg, value, fdef; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 
@@ -1501,7 +1501,7 @@ static SEXP get_this_generic(SEXP args)
 /* Could there be methods for this op?	Checks
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
-attribute_hidden
+HIDDEN
 Rboolean R_has_methods(SEXP op)
 {
     R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr(); int offset;
@@ -1544,7 +1544,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-SEXP attribute_hidden
+HIDDEN SEXP
 R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    Rboolean promisedArgs)
 {
@@ -1732,7 +1732,7 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-Rboolean attribute_hidden R_seemsOldStyleS4Object(SEXP object)
+HIDDEN Rboolean R_seemsOldStyleS4Object(SEXP object)
 {
     SEXP klass;
     if(!isObject(object) || IS_S4_OBJECT(object)) return FALSE;
@@ -1743,7 +1743,7 @@ Rboolean attribute_hidden R_seemsOldStyleS4Object(SEXP object)
 	    getAttrib(klass, R_PackageSymbol) != R_NilValue) ? TRUE: FALSE;
 }
 
-SEXP attribute_hidden do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP object = CAR(args);

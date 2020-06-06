@@ -668,7 +668,7 @@ makelt(stm *tm, SEXP ans, R_xlen_t i, int valid, double frac_secs)
 // We assume time zone names/abbreviations are ASCII, as all known ones are.
 
 // .Internal(as.POSIXlt(x, tz)) -- called only from  as.POSIXlt.POSIXct()
-SEXP attribute_hidden do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP stz, x, ans, ansnames, klass, tzone;
     int isgmt = 0, valid, settz = 0;
@@ -765,7 +765,7 @@ SEXP attribute_hidden do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // .Internal(as.POSIXct(x, tz)) -- called only from  as.POSIXct.POSIXlt()
-SEXP attribute_hidden do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP stz, x, ans;
     R_xlen_t n = 0, nlen[9];
@@ -857,7 +857,7 @@ SEXP attribute_hidden do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-SEXP attribute_hidden do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int settz = 0;
     char buff[300];
@@ -1035,7 +1035,7 @@ SEXP attribute_hidden do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 // .Internal(strptime(as.character(x), format, tz))
-SEXP attribute_hidden do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, sformat, ans, ansnames, klass, stz, tzone = R_NilValue;
     int invalid, isgmt = 0, settz = 0, offset;
@@ -1183,7 +1183,7 @@ SEXP attribute_hidden do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-SEXP attribute_hidden do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans, ansnames, klass;
     R_xlen_t n;
@@ -1245,7 +1245,7 @@ SEXP attribute_hidden do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-SEXP attribute_hidden do_POSIXlt2D(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_POSIXlt2D(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans, klass;
     R_xlen_t n = 0, nlen[9];

@@ -135,18 +135,18 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f,
 
 static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path);
 
-attribute_hidden OSDynSymbol Rf_osDynSymbol;
-attribute_hidden OSDynSymbol *R_osDynSymbol = &Rf_osDynSymbol;
+HIDDEN OSDynSymbol Rf_osDynSymbol;
+HIDDEN OSDynSymbol *R_osDynSymbol = &Rf_osDynSymbol;
 
 void R_init_base(DllInfo *); /* In Registration.c */
 
 static void initLoadedDLL();
 
-void attribute_hidden
+HIDDEN void
 InitDynload()
 {
     initLoadedDLL();
-    int which = addDLL(strdup("base"), "base", NULL);
+    int which = addDLL(Rstrdup("base"), "base", NULL);
     DllInfo *dll = &LoadedDLL[which];
     R_init_base(dll);
     InitFunctionHashing();
@@ -240,7 +240,7 @@ DllInfo *R_getEmbeddingDllInfo()
 {
     DllInfo *dll = R_getDllInfo("(embedding)");
     if (dll == NULL) {
-	int which = addDLL(strdup("(embedding)"), "(embedding)", NULL);
+	int which = addDLL(Rstrdup("(embedding)"), "(embedding)", NULL);
 	dll = &LoadedDLL[which];
 	/* make sure we don't attempt dynamic lookup */
 	R_useDynamicSymbols(dll, FALSE);
@@ -391,7 +391,7 @@ R_addFortranRoutine(DllInfo *info,
 		    const R_FortranMethodDef * const croutine,
 		    Rf_DotFortranSymbol *sym)
 {
-    sym->name = strdup(croutine->name);
+    sym->name = Rstrdup(croutine->name);
     sym->fun = croutine->fun;
     sym->numArgs = croutine->numArgs > -1 ? croutine->numArgs : -1;
     if(croutine->types)
@@ -403,7 +403,7 @@ R_addExternalRoutine(DllInfo *info,
 		     const R_ExternalMethodDef * const croutine,
 		     Rf_DotExternalSymbol *sym)
 {
-    sym->name = strdup(croutine->name);
+    sym->name = Rstrdup(croutine->name);
     sym->fun = croutine->fun;
     sym->numArgs = croutine->numArgs > -1 ? croutine->numArgs : -1;
 }
@@ -412,7 +412,7 @@ static void
 R_addCRoutine(DllInfo *info, const R_CMethodDef * const croutine,
 	      Rf_DotCSymbol *sym)
 {
-    sym->name = strdup(croutine->name);
+    sym->name = Rstrdup(croutine->name);
     sym->fun = croutine->fun;
     sym->numArgs = croutine->numArgs > -1 ? croutine->numArgs : -1;
     if(croutine->types)
@@ -423,7 +423,7 @@ static void
 R_addCallRoutine(DllInfo *info, const R_CallMethodDef * const croutine,
 		 Rf_DotCallSymbol *sym)
 {
-    sym->name = strdup(croutine->name);
+    sym->name = Rstrdup(croutine->name);
     sym->fun = croutine->fun;
     sym->numArgs = croutine->numArgs > -1 ? croutine->numArgs : -1;
 }
@@ -543,7 +543,7 @@ found:
     return 1;
 }
 
-attribute_hidden
+HIDDEN
 DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all)
 {
 #ifdef CACHE_DLL_SYM
@@ -809,8 +809,7 @@ R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
     return((DL_FUNC) NULL);
 }
 
-DL_FUNC attribute_hidden
-R_dlsym(DllInfo *info, char const *name,
+HIDDEN DL_FUNC R_dlsym(DllInfo *info, char const *name,
 	R_RegisteredNativeSymbol *symbol)
 {
     size_t len = strlen(name) + 4;
@@ -924,7 +923,7 @@ static void GetFullDLLPath(SEXP call, char *buf, const char *const path)
   call routines from "incomplete" DLLs.
  */
 
-SEXP attribute_hidden do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     char buf[2 * PATH_MAX];
     DllInfo *info;
@@ -941,7 +940,7 @@ SEXP attribute_hidden do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
     return(Rf_MakeDLLInfo(info));
 }
 
-SEXP attribute_hidden do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     char buf[2 * PATH_MAX];
 
@@ -1131,7 +1130,7 @@ Rf_MakeDLLInfo(DllInfo *info)
   registered, we add a class identifying the interface type
   for which it is intended (i.e. .C(), .Call(), etc.)
  */
-SEXP attribute_hidden
+HIDDEN SEXP
 R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
 {
     const void *vmax = vmaxget();
@@ -1166,7 +1165,7 @@ R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
     return sym;
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 R_getDllTable()
 {
     int i;
@@ -1321,7 +1320,7 @@ R_getRoutineSymbols(NativeSymbolType type, DllInfo *info)
 }
 
 
-SEXP attribute_hidden
+HIDDEN SEXP
 R_getRegisteredRoutines(SEXP dll)
 {
     DllInfo *info;
@@ -1352,7 +1351,7 @@ R_getRegisteredRoutines(SEXP dll)
     return(ans);
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *package = "", *name;
@@ -1386,7 +1385,7 @@ do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* .Internal(getLoadedDLLs()) */
-SEXP attribute_hidden
+HIDDEN SEXP
 do_getDllTable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nm;
@@ -1417,7 +1416,7 @@ do_getDllTable(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_getRegisteredRoutines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char * const names[] = {".C", ".Call", ".Fortran", ".External"};

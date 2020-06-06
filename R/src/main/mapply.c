@@ -24,7 +24,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);

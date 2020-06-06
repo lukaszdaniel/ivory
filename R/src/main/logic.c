@@ -38,7 +38,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2);
 
 
 /* & | ! */
-SEXP attribute_hidden do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
     Rboolean attr1 = ATTRIB(arg1) != R_NilValue;
@@ -266,7 +266,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 }
 
 /* && || */
-SEXP attribute_hidden do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 /*  &&	and  ||	 */
     SEXP s1, s2;
@@ -438,7 +438,7 @@ static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 }
 
 /* all, any */
-SEXP attribute_hidden do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, s, t, call2;
     int narm, has_na = 0;

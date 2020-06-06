@@ -45,7 +45,7 @@
 #include <R_ext/Visibility.h>
 
 #ifdef __MAIN__
-# define extern0 attribute_hidden
+# define extern0 HIDDEN
 #else
 # define extern0 extern
 #endif
@@ -656,7 +656,7 @@ FUNTAB	R_FunTab[];	    /* Built in functions */
 
 #ifdef __MAIN__
 # define INI_as(v) = v
-#define extern0 attribute_hidden
+#define extern0 HIDDEN
 #else
 # define INI_as(v)
 #define extern0 extern
@@ -882,7 +882,7 @@ extern0 int R_PCRE_limit_recursion;
 #endif
 #undef INI_as
 
-#define checkArity(a,b) Rf_checkArityCall(a,b,call)
+#define checkArity(a, b) Rf_checkArityCall(a, b, call)
 
 /*--- FUNCTIONS ------------------------------------------------------ */
 
@@ -1019,7 +1019,7 @@ extern0 int R_PCRE_limit_recursion;
 # define strIsASCII		Rf_strIsASCII
 # define StrToInternal		Rf_StrToInternal
 # define strmat2intmat		Rf_strmat2intmat
-# define substituteList		Rf_substituteList
+//# define substituteList		Rf_substituteList
 # define TimeToSeed		Rf_TimeToSeed
 # define translateCharFP	Rf_translateCharFP
 # define translateCharFP2	Rf_translateCharFP2

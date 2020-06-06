@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1998--2020 The R Core Team.
- *  Copyright (C) 2003--2019 The R Foundation
+ *  Copyright (C) 2003--2020 The R Foundation
  *  Copyright (C) 1995--1997 Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -144,24 +144,22 @@ int R_IsNaN(double x)
 
 int R_isnancpp(double x)
 {
-   return (isnan(x)!=0);
+	return (isnan(x) != 0);
 }
-
 
 /* Mainly for use in packages */
 int R_finite(double x)
 {
 #ifdef HAVE_WORKING_ISFINITE
-    return isfinite(x);
+	return isfinite(x);
 #else
-    return (!isnan(x) & (x != R_PosInf) & (x != R_NegInf));
+	return (!isnan(x) & (x != R_PosInf) & (x != R_NegInf));
 #endif
 }
 
-
 /* Arithmetic Initialization */
 
-void attribute_hidden InitArithmetic()
+HIDDEN void InitArithmetic()
 {
     R_NaInt = INT_MIN;
     R_NaReal = R_ValueOfNA();
@@ -179,22 +177,23 @@ void attribute_hidden InitArithmetic()
 
 
 #if HAVE_LONG_DOUBLE && (SIZEOF_LONG_DOUBLE > SIZEOF_DOUBLE)
+/*
 # ifdef __powerpc__
  // PowerPC 64 (when gcc has -mlong-double-128) fails constant folding with LDOUBLE
  // Debian Bug#946836 shows it is needed also for 32-bit ppc, not just __PPC64__
-#  define q_1_eps (1 / LDBL_EPSILON)
-# else
-static LDOUBLE q_1_eps = 1 / LDBL_EPSILON;
-# endif
+ // NB: 1 / LDBL_EPSILON has been seen to overflow on 'ppc64el ...
+ ==> use  eps instead of  1 / eps  (and one multiplication more)
+*/
+# define c_eps LDBL_EPSILON
 #else
-static double  q_1_eps = 1 / DBL_EPSILON;
+# define c_eps DBL_EPSILON
 #endif
 
 /* Keep myfmod() and myfloor() in step */
 static double myfmod(double x1, double x2)
 {
     if (x2 == 0.0) return R_NaN;
-    if(fabs(x2) > q_1_eps && R_FINITE(x1) && fabs(x1) <= fabs(x2)) {
+    if(fabs(x2) * c_eps > 1 && R_FINITE(x1) && fabs(x1) <= fabs(x2)) {
 	return
 	    (fabs(x1) == fabs(x2)) ? 0 :
 	    ((x1 < 0 && x2 > 0) ||
@@ -203,7 +202,7 @@ static double myfmod(double x1, double x2)
 	     : x1   ; // "same" signs (incl. 0)
     }
     double q = x1 / x2;
-    if(R_FINITE(q) && (fabs(q) > q_1_eps))
+    if(R_FINITE(q) && (fabs(q) * c_eps > 1))
 	warning(_("probable complete loss of accuracy in modulus"));
     LDOUBLE tmp = (LDOUBLE)x1 - floor(q) * (LDOUBLE)x2;
     return (double) (tmp - floorl(tmp/x2) * x2);
@@ -212,7 +211,7 @@ static double myfmod(double x1, double x2)
 static double myfloor(double x1, double x2)
 {
     double q = x1 / x2;
-    if (x2 == 0.0 || fabs(q) > q_1_eps || !R_FINITE(q))
+    if (x2 == 0.0 || fabs(q) * c_eps > 1 || !R_FINITE(q))
 	return q;
     if(fabs(q) < 1)
 	return (q < 0) ? -1
@@ -391,25 +390,25 @@ static R_INLINE double R_integer_divide(int x, int y)
 
 static R_INLINE SEXP ScalarValue1(SEXP x)
 {
-    if (NO_REFERENCES(x))
-	return x;
-    else
-	return allocVector(TYPEOF(x), 1);
+	if (NO_REFERENCES(x))
+		return x;
+	else
+		return allocVector(TYPEOF(x), 1);
 }
 
 static R_INLINE SEXP ScalarValue2(SEXP x, SEXP y)
 {
-    if (NO_REFERENCES(x))
-	return x;
-    else if (NO_REFERENCES(y))
-	return y;
-    else
-	return allocVector(TYPEOF(x), 1);
+	if (NO_REFERENCES(x))
+		return x;
+	else if (NO_REFERENCES(y))
+		return y;
+	else
+		return allocVector(TYPEOF(x), 1);
 }
 
 /* Unary and Binary Operators */
 
-SEXP attribute_hidden do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, arg1, arg2;
     int argc;
@@ -541,7 +540,7 @@ SEXP attribute_hidden do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     } \
 } while (0)
 
-SEXP attribute_hidden R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
+HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 {
     Rboolean xattr, yattr, xarray, yarray, xts, yts, xS4, yS4;
     PROTECT_INDEX xpi, ypi;
@@ -729,7 +728,7 @@ SEXP attribute_hidden R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     return val;
 }
 
-SEXP attribute_hidden R_unary(SEXP call, SEXP op, SEXP s1)
+HIDDEN SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 {
     ARITHOP_TYPE operation = (ARITHOP_TYPE) PRIMVAL(op);
     switch (TYPEOF(s1)) {
@@ -1259,7 +1258,7 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
 }
 
 
-SEXP attribute_hidden do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s;
 
@@ -1324,7 +1323,7 @@ SEXP attribute_hidden do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* methods are allowed to have more than one arg */
-SEXP attribute_hidden do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s;
     if (DispatchGroup("Math", call, op, args, env, &s))
@@ -1341,7 +1340,7 @@ SEXP attribute_hidden do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
    both for integer/logical inputs and what it dispatches to for complex ones.
 */
 
-SEXP attribute_hidden do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, s = R_NilValue /* -Wall */;
 
@@ -1564,12 +1563,12 @@ static SEXP math2B(SEXP sa, SEXP sb, double (*f)(double, double, double *),
     return sy;
 } /* math2B() */
 
-#define Math2(A, FUN)	  math2(CAR(A), CADR(A), FUN, call);
-#define Math2_1(A, FUN)	math2_1(CAR(A), CADR(A), CADDR(A), FUN, call);
+#define Math2(A, FUN) math2(CAR(A), CADR(A), FUN, call);
+#define Math2_1(A, FUN) math2_1(CAR(A), CADR(A), CADDR(A), FUN, call);
 #define Math2_2(A, FUN) math2_2(CAR(A), CADR(A), CADDR(A), CADDDR(A), FUN, call)
-#define Math2B(A, FUN)	  math2B(CAR(A), CADR(A), FUN, call);
+#define Math2B(A, FUN) math2B(CAR(A), CADR(A), FUN, call);
 
-SEXP attribute_hidden do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* For .Internals, fix up call so errorcall() behaves like error(). */
     if (TYPEOF(CAR(call)) == SYMSXP && INTERNAL(CAR(call)) == op)
@@ -1630,7 +1629,7 @@ SEXP attribute_hidden do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* The S4 Math2 group, round and signif */
 /* This is a primitive SPECIALSXP with internal argument matching */
-SEXP attribute_hidden do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2;
     int n, nprotect = 2;
@@ -1653,10 +1652,17 @@ SEXP attribute_hidden do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(n_("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
 	      n, PRIMNAME(op));
 
+    static SEXP R_x_Symbol = NULL;
     if (! DispatchGroup("Math", call2, op, args, env, &res)) {
 	if(n == 1) {
-	    double digits = 0.0;
-	    if(PRIMVAL(op) == 10004) digits = 6.0;
+	    if(R_x_Symbol == NULL) R_x_Symbol = install("x");
+	    // Ensure  we do not call it with a mis-named argument:
+	    if(CAR(args) == R_MissingArg ||
+	       (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
+		error(_("argument \"%s\" is missing, with no default"), "x");
+	    double digits = 0.0; // round()
+	    if(PRIMVAL(op) == 10004) // signif()
+		digits = 6.0;
 	    SETCDR(args, CONS(ScalarReal(digits), R_NilValue));
 	} else {
 	    /* If named, do argument matching by name */
@@ -1677,7 +1683,7 @@ SEXP attribute_hidden do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* log{2,10}() builtins : */
-SEXP attribute_hidden do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2, args2, tmp = R_NilValue /* -Wall */;
 
@@ -1712,13 +1718,13 @@ SEXP attribute_hidden do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
    matching. do_log_builtin is the BUILTIN version that expects
    evaluated arguments to be passed as 'args', expect that these may
    contain missing arguments.  */
-SEXP attribute_hidden do_log(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     args = evalListKeepMissing(args, env);
     return  do_log_builtin(call, op, args, env);
 }
 
-SEXP attribute_hidden do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     PROTECT(args);
     int n = length(args);
@@ -1943,11 +1949,11 @@ static SEXP math3B(SEXP sa, SEXP sb, SEXP sc,
     return sy;
 } /* math3B */
 
-#define Math3_1(A, FUN)	math3_1(CAR(A), CADR(A), CADDR(A), CADDDR(A), FUN, call);
+#define Math3_1(A, FUN) math3_1(CAR(A), CADR(A), CADDR(A), CADDDR(A), FUN, call);
 #define Math3_2(A, FUN) math3_2(CAR(A), CADR(A), CADDR(A), CADDDR(A), CAD4R(A), FUN, call)
-#define Math3B(A, FUN)  math3B (CAR(A), CADR(A), CADDR(A), FUN, call);
+#define Math3B(A, FUN) math3B(CAR(A), CADR(A), CADDR(A), FUN, call);
 
-SEXP attribute_hidden do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -2165,7 +2171,7 @@ static SEXP math4_2(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP sI, SEXP sJ,
 				CAD5R(A), FUN, call)
 
 
-SEXP attribute_hidden do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -2280,7 +2286,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
 #define Math5(A, FUN) \
 	math5(CAR(A), CADR(A), CADDR(A), CAD3R(A), CAD4R(A), FUN);
 
-SEXP attribute_hidden do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     lcall = call;

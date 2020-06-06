@@ -94,7 +94,7 @@ static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 /* Most are vectorized */
 
 /* primitive */
-SEXP attribute_hidden do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     int nargs = length(args);
@@ -217,7 +217,7 @@ int R_nchar(SEXP string, nchar_type type_,
     return NA_INTEGER; // -Wall
 } // R_nchar()
 
-SEXP attribute_hidden do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP d, s, x, stype, ans;
     int nargs = length(args);
@@ -331,7 +331,7 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
     }
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, x;
@@ -387,7 +387,7 @@ do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 // .Internal( startsWith(x, prefix) )  and
 // .Internal( endsWith  (x, suffix) )
-SEXP attribute_hidden
+HIDDEN SEXP
 do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
@@ -541,7 +541,7 @@ substrset(char *buf, const char *const str, cetype_t ienc, int sa, int so,
     }
 }
 
-SEXP attribute_hidden do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, x, sa, so, value, el, v_el;
     R_xlen_t i, len;
@@ -823,7 +823,7 @@ donewsc:
 }
 
 
-SEXP attribute_hidden do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op,args);
     SEXP x = CAR(args);
@@ -874,7 +874,7 @@ SEXP attribute_hidden do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-SEXP attribute_hidden do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg, ans;
     R_xlen_t i, n;
@@ -967,7 +967,7 @@ SEXP attribute_hidden do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-SEXP attribute_hidden do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t i, n;
@@ -1306,7 +1306,7 @@ static R_INLINE int xtable_key_comp(const void *a, const void *b)
     }                                                          \
 }
 
-SEXP attribute_hidden do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP old, _new, x, y;
     R_xlen_t i, n;
@@ -1540,7 +1540,7 @@ SEXP attribute_hidden do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
     return(y);
 }
 
-SEXP attribute_hidden do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, x, width;
     R_xlen_t i, len;
@@ -1616,7 +1616,7 @@ static int strtoi(SEXP s, int base)
 	: (int) res;
 }
 
-SEXP attribute_hidden do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x, b;
     R_xlen_t i, n;
@@ -1644,7 +1644,7 @@ SEXP attribute_hidden do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
 /* creates a new STRSXP which is a suffix of string, starting
    with given index; the result is returned unprotected  */
 
-SEXP attribute_hidden stringSuffix(SEXP string, int fromIndex) {
+HIDDEN SEXP stringSuffix(SEXP string, int fromIndex) {
 
     int origLen = LENGTH(string);
     int newLen = origLen - fromIndex;
@@ -1659,7 +1659,7 @@ SEXP attribute_hidden stringSuffix(SEXP string, int fromIndex) {
     return res;
 }
 
-SEXP attribute_hidden do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP d, s, x, n, el;
     R_xlen_t is, ix, in, ns, nx, nn;

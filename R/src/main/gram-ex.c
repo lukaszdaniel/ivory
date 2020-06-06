@@ -31,7 +31,7 @@
 
 #include "Defn.h"
 
-attribute_hidden
+HIDDEN
 int R_fgetc(FILE *fp)
 {
 #ifdef _WIN32

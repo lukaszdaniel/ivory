@@ -91,7 +91,7 @@ SEXP Rdownload(SEXP args)
     }
 }
 
-Rconnection attribute_hidden 
+HIDDEN Rconnection 
 R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
     if(!initialized) internet_Init();
@@ -103,7 +103,7 @@ R_newurl(const char *description, const char * const mode, SEXP headers, int typ
     }
 }
 
-Rconnection attribute_hidden
+HIDDEN Rconnection
 R_newsock(const char *host, int port, int server, int serverfd,
           const char * const mode, int timeout)
 {
@@ -116,7 +116,7 @@ R_newsock(const char *host, int port, int server, int serverfd,
     }
 }
 
-Rconnection attribute_hidden R_newservsock(int port)
+HIDDEN Rconnection R_newservsock(int port)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
@@ -309,7 +309,7 @@ SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 }
 
 
-attribute_hidden
+HIDDEN
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
 		double timeout)
 {
@@ -322,7 +322,7 @@ int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
     }
 }
 
-SEXP attribute_hidden do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if(!initialized) internet_Init();
@@ -334,7 +334,7 @@ SEXP attribute_hidden do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if(!initialized) internet_Init();
@@ -346,7 +346,7 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if(!initialized) internet_Init();
@@ -358,7 +358,7 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-Rconnection attribute_hidden
+HIDDEN Rconnection
 R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type)
 {
     if(!initialized) internet_Init();

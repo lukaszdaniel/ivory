@@ -569,7 +569,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
  ** Compact Integer/Real Sequences
  **/
 
-SEXP attribute_hidden R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
+HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
     R_xlen_t n = n1 <= n2 ? n2 - n1 + 1 : n1 - n2 + 1;
 
@@ -864,7 +864,7 @@ static void InitDefferredStringClass()
  * Constructor
  */
 
-SEXP attribute_hidden R_deferred_coerceToString(SEXP v, SEXP info)
+HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
 {
     SEXP ans = R_NilValue;
     switch (TYPEOF(v)) {
@@ -1335,7 +1335,7 @@ SEXP do_mmap_file(SEXP args)
 {
     args = CDR(args);
 #else
-SEXP attribute_hidden do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #endif
     SEXP file = CAR(args);
@@ -1371,7 +1371,7 @@ static SEXP do_munmap_file(SEXP args)
 {
     args = CDR(args);
 #else
-SEXP attribute_hidden do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #endif
     SEXP x = CAR(args);
@@ -1940,7 +1940,7 @@ static SEXP wrap_meta(SEXP x, int srt, int no_na)
     return make_wrapper(x, meta);
 }
 
-SEXP attribute_hidden do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_wrap_meta(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -1954,7 +1954,7 @@ SEXP R_tryWrap(SEXP x)
     return wrap_meta(x, UNKNOWN_SORTEDNESS, FALSE);
 }
 
-SEXP attribute_hidden do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -2006,7 +2006,7 @@ SEXP R_tryUnwrap(SEXP x)
  ** Initialize ALTREP Classes
  **/
 
-void attribute_hidden R_init_altrep()
+HIDDEN void R_init_altrep()
 {
     InitCompactIntegerClass();
     InitCompactRealClass();

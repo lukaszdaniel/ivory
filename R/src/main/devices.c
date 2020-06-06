@@ -497,7 +497,17 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
     gdd->displayListOn = dev->displayListOn;
     gdd->displayList = R_NilValue; /* gc needs this */
     gdd->savedSnapshot = R_NilValue; /* gc needs this */
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_dirty")) {
+        printf("GEcreateDevDesc: dirty = FALSE\n");
+    }
+#endif
     gdd->dirty = FALSE;
+#ifdef R_GE_DEBUG
+    if (getenv("R_GE_DEBUG_record")) {
+        printf("GEcreateDevDesc: record = TRUE\n");
+    }
+#endif
     gdd->recordGraphics = TRUE;
     gdd->ask = Rf_GetOptionDeviceAsk();
     gdd->dev->eventEnv = R_NilValue;  /* gc needs this */
@@ -505,7 +515,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
 }
 
 
-void attribute_hidden InitGraphics(void)
+HIDDEN void InitGraphics(void)
 {
     R_Devices[0] = &nullDevice;
     active[0] = TRUE;

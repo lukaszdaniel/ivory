@@ -1001,7 +1001,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 		      HTTP_QUERY_CONTENT_LENGTH | HTTP_QUERY_FLAG_NUMBER,
 		      &len, &d1, &d2))
 	wictxt->length = len;
-    wictxt->type = strdup(buf); // FIXME: could be NULL
+    wictxt->type = Rstrdup(buf);
     if(!IDquiet) {
 	if(len > 1024*1024)
 	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", len), buf, (double) len, len/1024.0/1024.0);

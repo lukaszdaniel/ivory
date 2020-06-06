@@ -67,7 +67,7 @@ static R_INLINE int integerOneIndex(int i, R_xlen_t len, SEXP call)
 }
 
 /* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.c : */
-R_xlen_t attribute_hidden
+HIDDEN R_xlen_t
 OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 	 int pos, SEXP call)
 {
@@ -154,7 +154,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 }
 
 /* used here and in subset.c and subassign.c */
-R_xlen_t attribute_hidden
+HIDDEN R_xlen_t
 get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 {
 /* Get a single index for the [[ and [[<- operators.
@@ -289,7 +289,7 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
    level start to level stop-1.  ( 0...len-1 or 0..len-2 then len-1).
    For [[<- it needs to duplicate if substructure might be shared.
  */
-SEXP attribute_hidden
+HIDDEN SEXP
 vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	    Rboolean dup)
 {
@@ -356,7 +356,7 @@ vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 */
 
 
-SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
+HIDDEN SEXP mat2indsub(SEXP dims, SEXP s, SEXP call)
 {
     int nrs = nrows(s);
     R_xlen_t NR = nrs;
@@ -452,7 +452,7 @@ to an integer matrix by matching against the dimnames of x. NA values
 in any row of i propagate to the result.  Unmatched entries result in
 a subscript is out of bounds error.  */
 
-SEXP attribute_hidden strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
+HIDDEN SEXP strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
 {
     /* XXX: assumes all args are protected */
     int nr = nrows(s), i, j, v;
@@ -909,7 +909,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     x is the array to be subscripted.
 */
 
-attribute_hidden SEXP
+HIDDEN SEXP
 int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
     int nd, ns;
@@ -966,7 +966,7 @@ arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
    otherwise, stretch returns the new required length for x
 */
 
-SEXP attribute_hidden
+HIDDEN SEXP
 makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
 {
     if (! (isVector(x) || isList(x) || isLanguage(x))) {

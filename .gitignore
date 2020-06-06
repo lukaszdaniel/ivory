@@ -131,3 +131,4 @@ R-recommended/
 R-recommended-frozen/
 R/tests/*.Rcheck/
 R/tests/RecPackages/*/
+R/.RData

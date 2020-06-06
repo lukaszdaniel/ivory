@@ -2042,7 +2042,7 @@ add_dummies <- function(dir, Log)
             checkingLog(Log, gettext("checking Rd line widths ...", domain = "R-tools"))
             Rcmd <- paste(opWarn_string, "\n",
                           if(do_install)
-                          sprintf("tools:::.check_Rd_line_widths(\"%s\", installed = TRUE)\n",
+                          sprintf("suppressPackageStartupMessages(tools:::.check_Rd_line_widths(\"%s\", installed = TRUE))\n",
                                   file.path(if(is_base_pkg) .Library else libdir,
                                             pkgname))
                           else
@@ -2112,12 +2112,14 @@ add_dummies <- function(dir, Log)
             ## Grr, get() in undoc can change the search path
             ## Current example is TeachingDemos
             out <- out[!startsWith(out, "Loading required package:")]
-            err <- startsWith(out, "Error")
-            if (any(err)) {
-                errorLog(Log)
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                maybe_exit(1L)
-            } else if (length(out)) {
+            ## We do not need to report errors here as check ERRORs.
+            ## err <- startsWith(out, "Error")
+            ## if (any(err)) {
+            ##     errorLog(Log)
+            ##     printLog0(Log, paste(c(out, ""), collapse = "\n"))
+            ##     maybe_exit(1L)
+            ## } else
+            if (length(out)) {
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 if (any(grepl("^Undocumented S4", out)))
@@ -2241,7 +2243,7 @@ add_dummies <- function(dir, Log)
         if (dir.exists("man") && do_install && !extra_arch && !is_base_pkg) {
             checkingLog(Log, gettext("checking for unstated dependencies in examples ...", domain = "R-tools"))
             Rcmd <- paste(opW_shE_F_str,
-                          sprintf("tools:::.check_packages_used_in_examples(package = \"%s\")\n", pkgname))
+                          sprintf("suppressPackageStartupMessages(tools:::.check_packages_used_in_examples(package = \"%s\"))\n", pkgname))
 
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
@@ -3328,7 +3330,10 @@ add_dummies <- function(dir, Log)
             Rcmd <-
                 sprintf("%s\ntools:::.load_namespace_rather_quietly(\"%s\")",
                         opWarn_string, pkgname)
-            out <- R_runR0(Rcmd, opts, c(env, env1), arch = arch)
+            env2 <- Sys.getenv("_R_LOAD_CHECK_S4_EXPORTS_", "NA")
+            env2 <- paste0("_R_LOAD_CHECK_S4_EXPORTS_=",
+                           if(env2 == "all") env else pkgname)
+            out <- R_runR0(Rcmd, opts, c(env, env1, env2), arch = arch)
             any <- FALSE
             if (any(startsWith(out, "Error")) || length(attr(out, "status"))) {
                 warningLog(Log)
@@ -3345,12 +3350,17 @@ add_dummies <- function(dir, Log)
                 if(config_val_to_logical(check_imports_flag))
                     out <- filtergrep("Warning: replacing previous import", out,
                                       fixed = TRUE)
-                if(any(startsWith(out, "Warning"))) {
+                if(any(startsWith(out, "Warning: S4 exports"))) {
+                    warningLog(Log)
+                    any <- if(length(out) == 1L) NA else TRUE
+                } else if(any(startsWith(out, "Warning"))) {
                     noteLog(Log)
                     any <- TRUE
                 }
             }
-            if(any) {
+            if (is.na(any)) {
+                printLog0(Log, paste(c(out, ""), collapse = "\n"))
+            } else if(any) {
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
                 wrapLog(gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n", domain = "R-tools"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
@@ -4782,6 +4792,10 @@ add_dummies <- function(dir, Log)
                 ex_re <- "(BH/include/boost|RcppArmadillo/include/armadillo_bits)/.*\\[-Wtautological-overlap-compare\\]"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
 
+                ## Filter out Eigen header warnings
+                ex_re <- "(RcppEigen/include/Eigen)/.*\\[-Wtautological-compare\\]"
+                lines <- filtergrep(ex_re, lines, useBytes = TRUE)
+
                 ## and GNU extensions in system headers
                 ex_re <- "^ *(/usr/|/opt/).*GNU extension"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
@@ -5218,6 +5232,7 @@ add_dummies <- function(dir, Log)
                          "skipped",
                          "hdOnly",
                          "orphaned2", "orphaned", "orphaned1",
+                         "required_for_checking_but_not_installed",
                          if(!check_incoming) "bad_engine")
             if(!all(names(res) %in% allowed)) {
                 errorLog(Log)
@@ -5227,8 +5242,14 @@ add_dummies <- function(dir, Log)
                 wrapLog(msg_DESCRIPTION)
                 summaryLog(Log)
                 do_exit(1L)
+            } else if (length(res$required_for_checking_but_not_installed)) {
+                warningLog(Log, gettext("Skipping vignette re-building", domain = "R-tools"))
+                do_build_vignettes  <<- FALSE
+                printLog0(Log, paste(out, collapse = "\n"))
             } else {
-                if(length(res[["orphaned"]])) warningLog(Log) else noteLog(Log)
+                if( length(res[["orphaned"]]) || length(res[["orphaned1"]]) )
+                    warningLog(Log)
+                else noteLog(Log)
                 printLog(Log, paste(out, collapse = "\n"))
                 ## if(length(res$orphaned2))
                 ##     wrapLog("\nSuggested packages need to be used conditionally:",

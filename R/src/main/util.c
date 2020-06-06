@@ -251,7 +251,7 @@ static int findTypeInTypeTable(SEXPTYPE t)
 }
 
 // called from main.c
-attribute_hidden
+HIDDEN
 void InitTypeTables(void) {
 
     /* Type2Table */
@@ -334,7 +334,7 @@ SEXP NORET type2symbol(SEXPTYPE t)
 }
 #endif
 
-attribute_hidden
+HIDDEN
 void NORET UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 {
     int i;
@@ -453,7 +453,7 @@ Rboolean StringFalse(const char *name)
 }
 
 /* used in bind.c and options.c */
-SEXP attribute_hidden Rf_EnsureString(SEXP s)
+HIDDEN SEXP Rf_EnsureString(SEXP s)
 {
     switch(TYPEOF(s)) {
     case SYMSXP:
@@ -496,7 +496,7 @@ void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
     }
 }
 
-void attribute_hidden Rf_check1arg(SEXP arg, SEXP call, const char *formal)
+HIDDEN void Rf_check1arg(SEXP arg, SEXP call, const char *formal)
 {
     SEXP tag = TAG(arg);
     if (tag == R_NilValue) return;
@@ -523,7 +523,7 @@ SEXP Rf_nthcdr(SEXP s, int n)
 
 
 /* This is a primitive (with no arguments) */
-SEXP attribute_hidden do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *cptr;
     int nargs = NA_INTEGER;
@@ -540,7 +540,7 @@ SEXP attribute_hidden do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* formerly used in subscript.c, in Utils.h */
-void attribute_hidden setIVector(int * vec, int len, int val)
+HIDDEN void setIVector(int * vec, int len, int val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
@@ -548,7 +548,7 @@ void attribute_hidden setIVector(int * vec, int len, int val)
 
 /* unused in R, in Utils.h, may have been used in Rcpp at some point,
       but not any more (as per Nov. 2018)  */
-void attribute_hidden setRVector(double * vec, int len, double val)
+HIDDEN void setRVector(double * vec, int len, double val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
@@ -631,7 +631,7 @@ SEXP R_body_no_src(SEXP x) {
    The return value is a list with 4 elements (xi, yi, x.alone, y.alone),
    which are index vectors for rows of x or y.
 */
-SEXP attribute_hidden do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP xi, yi, ansx, ansy, ans;
     int nx = 0, ny = 0, i, j, k, nx_lone = 0, ny_lone = 0;
@@ -750,7 +750,7 @@ SEXP static intern_getwd(void)
     return(rval);
 }
 
-SEXP attribute_hidden do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -762,7 +762,7 @@ SEXP attribute_hidden do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 # include <direct.h> /* for chdir, via io.h */
 #endif
 
-SEXP attribute_hidden do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP s = R_NilValue, wd = R_NilValue;	/* -Wall */
 
@@ -796,7 +796,7 @@ SEXP attribute_hidden do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* remove portion of path before file separator if one exists */
 
 #ifdef _WIN32
-SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
     char sp[4*PATH_MAX+1];
@@ -830,7 +830,7 @@ SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     return(ans);
 }
 #else
-SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
     char  buf[PATH_MAX], *p, fsp = FILESEP[0];
@@ -870,7 +870,7 @@ SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
    */
 
 #ifdef _WIN32
-SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
     wchar_t buf[PATH_MAX], *p;
@@ -913,7 +913,7 @@ SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     return(ans);
 }
 #else
-SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
     char buf[PATH_MAX], *p, fsp = FILESEP[0];
@@ -958,7 +958,7 @@ SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 extern char *realpath(const char *path, char *resolved_path);
 #endif
 
-SEXP attribute_hidden do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, paths = CAR(args), elp;
     int i, n = LENGTH(paths);
@@ -1079,7 +1079,7 @@ static void encode_cleanup(void *data)
 #endif
 
 /* encodeString(x, w, quote, justify) */
-SEXP attribute_hidden do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, s;
     R_xlen_t i, len;
@@ -1160,7 +1160,7 @@ SEXP attribute_hidden do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP attribute_hidden do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x;
     R_xlen_t i, n;
@@ -1182,7 +1182,7 @@ SEXP attribute_hidden do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP attribute_hidden do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, enc, tmp;
     int m;
@@ -1218,7 +1218,7 @@ SEXP attribute_hidden do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-SEXP attribute_hidden markKnown(const char *s, SEXP ref)
+HIDDEN SEXP markKnown(const char *s, SEXP ref)
 {
     int ienc = 0;
     if(ENC_KNOWN(ref)) {
@@ -1243,7 +1243,7 @@ static const unsigned char utf8_table4[] = {
   2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
   3,3,3,3,3,3,3,3,4,4,4,4,5,5,5,5 };
 
-int attribute_hidden utf8clen(char c)
+HIDDEN int utf8clen(char c)
 {
     /* This allows through 8-bit chars 10xxxxxx, which are invalid */
     if ((c & 0xc0) != 0xc0) return 1;
@@ -1263,16 +1263,14 @@ utf8toutf16low(const char *s)
     return (unsigned int) LOW_SURROGATE_START | ((s[2] & 0x0F) << 6) | (s[3] & 0x3F);
 }
 
-R_wchar_t attribute_hidden
-utf8toucs32(wchar_t high, const char *s)
+HIDDEN R_wchar_t utf8toucs32(wchar_t high, const char *s)
 {
     return utf16toucs(high, utf8toutf16low(s));
 }
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-size_t attribute_hidden
-utf8toucs(wchar_t *wc, const char *s)
+HIDDEN size_t utf8toucs(wchar_t *wc, const char *s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -1404,7 +1402,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
    s can be a buffer of size n>=0 chars, or NULL.  If n=0 or s=NULL, nothing is written.
    The return value is the number of chars including the terminating null.  If the
    buffer is not big enough, the result is truncated but still null-terminated */
-attribute_hidden // but used in windlgs
+HIDDEN // but used in windlgs
 size_t wcstoutf8(char *s, const wchar_t *wc, size_t n)
 {
     size_t m, res=0;
@@ -1463,7 +1461,7 @@ size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 
 /* Truncate a string in place (in native encoding) so that it only contains
    valid multi-byte characters. Has no effect in non-mbcs locales. */
-attribute_hidden
+HIDDEN
 char* mbcsTruncateToValid(char *s)
 {
     if (!mbcslocale)
@@ -1488,7 +1486,7 @@ char* mbcsTruncateToValid(char *s)
     return s;
 }
 
-attribute_hidden
+HIDDEN
 Rboolean mbcsValid(const char *str)
 {
     return  ((int)mbstowcs(NULL, str, 0) >= 0);
@@ -1502,7 +1500,7 @@ Rboolean utf8Valid(const char *str)
     return valid_utf8(str, strlen(str)) == 0;
 }
 
-SEXP attribute_hidden do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -1516,7 +1514,7 @@ SEXP attribute_hidden do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP attribute_hidden do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
@@ -1874,7 +1872,7 @@ const char* Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
   return utf8str;
 }
 
-int attribute_hidden Rf_AdobeSymbol2ucs2(int n)
+HIDDEN int Rf_AdobeSymbol2ucs2(int n)
 {
     if(n >= 32 && n < 256) return s2u[n-32];
     else return 0;
@@ -2055,7 +2053,7 @@ double R_atof(const char *str)
 
 /* enc2native and enc2utf8, but they are the same in a UTF-8 locale */
 /* primitive */
-SEXP attribute_hidden do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, el;
     R_xlen_t i;
@@ -2187,7 +2185,7 @@ static UCollator *collator = NULL;
 static int collationLocaleSet = 0;
 
 /* called from platform.c */
-void attribute_hidden resetICUcollator(Rboolean disable)
+HIDDEN void resetICUcollator(Rboolean disable)
 {
     if (collator) ucol_close(collator);
     collator = NULL;
@@ -2251,7 +2249,7 @@ static const char *getLocale(void)
 }
 #endif
 
-SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x;
     UErrorCode  status = U_ZERO_ERROR;
@@ -2312,7 +2310,7 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     const char *ans = "unknown", *res;
     checkArity(op, args);
@@ -2335,7 +2333,7 @@ SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Caller has to manage the R_alloc stack */
 /* NB: strings can have equal collation weight without being identical */
-attribute_hidden
+HIDDEN
 int Scollate(SEXP a, SEXP b)
 {
     if (!collationLocaleSet) {
@@ -2394,19 +2392,19 @@ int Scollate(SEXP a, SEXP b)
 
 #else /* not USE_ICU */
 
-SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     warning(_("ICU is not supported on this build"));
     return R_NilValue;
 }
 
-SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return mkString(_("ICU not in use"));
 }
 
-void attribute_hidden resetICUcollator(Rboolean disable) {}
+HIDDEN void resetICUcollator(Rboolean disable) {}
 
 # ifdef _WIN32
 
@@ -2428,7 +2426,7 @@ int Scollate(SEXP a, SEXP b)
 }
 
 # else
-attribute_hidden
+HIDDEN
 int Scollate(SEXP a, SEXP b)
 {
     return strcoll(translateChar(a), translateChar(b));
@@ -2439,7 +2437,7 @@ int Scollate(SEXP a, SEXP b)
 
 #include <lzma.h>
 
-SEXP attribute_hidden do_crc64(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_crc64(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP in = CAR(args);
@@ -2487,7 +2485,7 @@ bincode(double *x, R_xlen_t n, double *breaks, int nb,
 }
 
 /* 'breaks' cannot be a long vector as the return codes are integer. */
-SEXP attribute_hidden do_bincode(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_bincode(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x, breaks, right, lowest;
@@ -2513,7 +2511,7 @@ SEXP attribute_hidden do_bincode(SEXP call, SEXP op, SEXP args, SEXP rho)
     return codes;
 }
 
-SEXP attribute_hidden do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP in = CAR(args), nbin = CADR(args);
@@ -2548,7 +2546,7 @@ SEXP attribute_hidden do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
  *                         xt  x    right             inside       leftOp
  * x can be a long vector but xt cannot since the result is integer
 */
-SEXP attribute_hidden do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP xt, x, right, inside, leftOp;
@@ -2590,7 +2588,7 @@ SEXP attribute_hidden do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 # undef ERROR
 #endif
 #include <R_ext/Applic.h>
-SEXP attribute_hidden do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ans, nm, hi;
@@ -2639,7 +2637,7 @@ static void
 str_signif_sexp(SEXP x, const char *type, int width, int digits,
 	   const char *format, const char *flag, char **result);
 
-SEXP attribute_hidden do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args); args = CDR(args);
@@ -2876,4 +2874,17 @@ void str_signif_sexp(SEXP x, const char *type, int width, int digits,
     } else {
 	error(_("unsupported type "));
     }
+}
+
+/* added in R 4.1.0.
+   This checks if it succeeds.
+   FIXME: is this worth inlining?
+ */
+char *Rstrdup(const char *s)
+{
+    size_t nb = strlen(s) + 1;
+    void *cpy = malloc(nb);
+    if (cpy == NULL) error(_("allocation error in Rstrdup"));
+    memcpy (cpy, s, nb);
+    return (char *) cpy;
 }

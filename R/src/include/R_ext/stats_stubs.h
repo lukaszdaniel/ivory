@@ -27,15 +27,9 @@
 #include <Rconfig.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
+#include <R_ext/Visibility.h>
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
-
-void attribute_hidden
-S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
+HIDDEN void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
 {
     static void(*fun)(int,int[],int,int,double[]) = NULL;
     if (fun == NULL)
@@ -44,8 +38,7 @@ S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
     fun(alg, iv, liv, lv, v);
 }
 
-void attribute_hidden
-S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
+HIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
 		 int iv[], int liv, int lv, int n, double v[], double x[])
 {
     static void(*fun)(double[],double[],double,double[],double[],
@@ -57,8 +50,7 @@ S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
     fun(b, d, fx, g, h, iv, liv, lv, n, v, x);
 }
 
-void attribute_hidden
-S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
+HIDDEN void S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
 	       int lv, int n, int nd, int p, double r[], double rd[],
 	       double v[], double x[])
 {
@@ -73,8 +65,7 @@ S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
     fun(b, d, dr, iv, liv, lv, n, nd, p, r, rd, v, x);
 }
 
-void attribute_hidden
-S_rcont2(int nrow[], int ncol[], int nrowt[], int ncolt[], 
+HIDDEN void S_rcont2(int nrow[], int ncol[], int nrowt[], int ncolt[], 
          int ntotal[], double fact[], int jwork[], int matrix[])
 {
     static void(*fun)(int[], int[], int[], int[], int[], double[], 

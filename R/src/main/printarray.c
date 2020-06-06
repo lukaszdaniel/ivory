@@ -328,7 +328,7 @@ static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 }
 
 /* rm and cn are found by GetMatrixDimnames so in native encoding */
-attribute_hidden
+HIDDEN
 void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 		 SEXP rl, SEXP cl, const char *rn, const char *cn)
 {
@@ -392,7 +392,7 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     vmaxset(vmax);
 }
 
-attribute_hidden
+HIDDEN
 void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 {
 /* == printArray(.) */

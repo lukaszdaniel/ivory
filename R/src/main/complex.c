@@ -73,7 +73,7 @@
 #define NINTERRUPT 10000000
 
 
-SEXP attribute_hidden complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
+HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {
     R_xlen_t i, n;
     SEXP ans;
@@ -170,7 +170,7 @@ static double complex mycpow (double complex X, double complex Y)
 
 
 
-SEXP attribute_hidden complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
+HIDDEN SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, i1, i2, n, n1, n2;
     SEXP ans;
@@ -243,7 +243,7 @@ SEXP attribute_hidden complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     return ans;
 }
 
-SEXP attribute_hidden do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y = R_NilValue;	/* -Wall*/
     R_xlen_t i, n;
@@ -358,7 +358,7 @@ SEXP attribute_hidden do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* Implementing  signif(<complex>)  *and* used in format.c and printutils.c */
 #define MAX_DIGITS 22
-void attribute_hidden z_prec_r(Rcomplex *r, const Rcomplex *x, double digits)
+HIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits)
 {
     // Implement    r <- signif(x, digits)
 
@@ -603,7 +603,7 @@ static Rboolean cmath1(double complex (*f)(double complex),
     return naflag;
 }
 
-SEXP attribute_hidden complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t n;
@@ -691,7 +691,7 @@ static void z_atan2(Rcomplex *r, Rcomplex *csn, Rcomplex *ccs)
 	/* Complex Functions of Two Arguments */
 
 typedef void (*cm2_fun)(Rcomplex *, Rcomplex *, Rcomplex *);
-SEXP attribute_hidden complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     R_xlen_t i, n, na, nb, ia, ib;
     Rcomplex ai, bi, *y;
@@ -749,7 +749,7 @@ SEXP attribute_hidden complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     return sy;
 }
 
-SEXP attribute_hidden do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     /* complex(length, real, imaginary) */
     SEXP ans, re, im;
@@ -790,7 +790,7 @@ SEXP attribute_hidden do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
 static void R_cpolyroot(double *opr, double *opi, int *degree,
 			double *zeror, double *zeroi, Rboolean *fail);
 
-SEXP attribute_hidden do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP z, zr, zi, r, rr, ri;
     Rboolean fail;

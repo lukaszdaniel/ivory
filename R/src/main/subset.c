@@ -94,7 +94,7 @@ static R_INLINE SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
 	}					  \
     } while (0)
 
-SEXP attribute_hidden ExtractSubset(SEXP x, SEXP indx, SEXP call)
+HIDDEN SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
 	return x;
@@ -640,7 +640,7 @@ int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 /* The "[" subset operator.
  * This provides the most general form of subsetting. */
 
-SEXP attribute_hidden do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -684,7 +684,7 @@ static R_INLINE R_xlen_t scalarIndex(SEXP s)
     else return -1;
 }
 
-SEXP attribute_hidden do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, ax, px, x, subs;
     int drop, i, nsubs, type;
@@ -893,7 +893,7 @@ SEXP attribute_hidden do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* The [[ subset operator.  It needs to be fast. */
 /* The arguments to this call are evaluated on entry. */
 
-SEXP attribute_hidden do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
 
@@ -916,7 +916,7 @@ SEXP attribute_hidden do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subset2_dflt(call, op, ans, rho);
 }
 
-SEXP attribute_hidden do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, dims, dimnames, indx, subs, x;
     int i, ndims, nsubs;
@@ -1108,7 +1108,7 @@ SEXP attribute_hidden do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP attribute_hidden dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
+HIDDEN SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
     static SEXP bracket_op = NULL;
     SEXP args, x_elt;
@@ -1164,7 +1164,7 @@ pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-SEXP attribute_hidden
+HIDDEN SEXP
 fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
@@ -1204,7 +1204,7 @@ fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
    We need to be sure to only evaluate the first argument.
    The second will be a symbol that needs to be matched, not evaluated.
 */
-SEXP attribute_hidden do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -1231,7 +1231,7 @@ SEXP attribute_hidden do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in eval.c */
-SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
+HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 {
     SEXP y, nlist;
     size_t slen;
@@ -1266,6 +1266,10 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    case PARTIAL_MATCH:
 		havematch++;
 		xmatch = y;
+#ifdef SWITCH_TO_REFCNT
+		if (IS_GETTER_CALL(call))
+		    MARK_NOT_MUTABLE(y);
+#endif
 		break;
 	    case NO_MATCH:
 		break;
@@ -1315,7 +1319,12 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		       This is overkill, but alternative ways to prevent
 		       the aliasing appear to be even worse */
 		    y = VECTOR_ELT(x,i);
+#ifdef SWITCH_TO_REFCNT
+		    if (IS_GETTER_CALL(call))
+			MARK_NOT_MUTABLE(y);
+#else
 		    ENSURE_NAMEDMAX(y);
+#endif
 		    SET_VECTOR_ELT(x,i,y);
 		}
 		imatch = i;

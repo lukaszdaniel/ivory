@@ -81,7 +81,7 @@
 
 #define BUFSIZE 8192  /* used by Rprintf etc */
 
-attribute_hidden
+HIDDEN
 R_size_t R_Decode2Long(char *p, int *ierr)
 {
     R_size_t v = strtol(p, &p, 10);
@@ -135,7 +135,7 @@ const char *EncodeInteger(int x, int w)
     return buff;
 }
 
-attribute_hidden
+HIDDEN
 const char *EncodeRaw(Rbyte x, const char * prefix)
 {
     static char buff[10];
@@ -143,7 +143,7 @@ const char *EncodeRaw(Rbyte x, const char * prefix)
     return buff;
 }
 
-attribute_hidden
+HIDDEN
 const char *EncodeEnvironment(SEXP x)
 {
     const void *vmax = vmaxget();
@@ -272,7 +272,7 @@ static const char
     return out;
 }
 
-SEXP attribute_hidden StringFromReal(double x, int *warn)
+HIDDEN SEXP StringFromReal(double x, int *warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -281,7 +281,7 @@ SEXP attribute_hidden StringFromReal(double x, int *warn)
 }
 
 
-attribute_hidden
+HIDDEN
 const char *EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
@@ -380,7 +380,7 @@ const char
 
    This supported embedded nuls when we had those.
  */
-attribute_hidden
+HIDDEN
 int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 {
     const char *p = str;
@@ -499,7 +499,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 }
 
 /* Match what EncodeString does with encodings */
-attribute_hidden
+HIDDEN
 int Rstrlen(SEXP s, int quote)
 {
     cetype_t ienc = getCharCE(s);
@@ -522,7 +522,7 @@ int Rstrlen(SEXP s, int quote)
    format().
  */
 
-attribute_hidden
+HIDDEN
 const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int b, b0, i, j, cnt;
@@ -837,7 +837,7 @@ const char *EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
    any subsequent call to EncodeChar/EncodeString may happen. Note that
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
-//attribute_hidden
+//HIDDEN
 const char *EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
@@ -875,7 +875,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap)
 #endif
 
 # define R_BUFSIZE BUFSIZE
-attribute_hidden
+HIDDEN
 void Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
@@ -1013,12 +1013,12 @@ void REvprintf(const char *format, va_list arg)
     }
 }
 
-int attribute_hidden IndexWidth(R_xlen_t n)
+HIDDEN int IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-void attribute_hidden VectorIndex(R_xlen_t i, int w)
+HIDDEN void VectorIndex(R_xlen_t i, int w)
 {
 /* print index label "[`i']" , using total width `w' (left filling blanks) */
     Rprintf("%*s[%ld]", w-IndexWidth(i)-2, "", i);

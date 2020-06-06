@@ -206,7 +206,7 @@ static R_INLINE void register_bad_sexp_type(SEXP s, int line)
 }
 
 /* also called from typename() in inspect.c */
-attribute_hidden
+HIDDEN
 const char *sexptype2char(SEXPTYPE type) {
     switch (type) {
     case NILSXP:	return "NILSXP";
@@ -431,34 +431,34 @@ static R_size_t R_MaxVSize = R_SIZE_T_MAX;
 static R_size_t R_MaxNSize = R_SIZE_T_MAX;
 static int vsfac = 1; /* current units for vsize: changes at initialization */
 
-R_size_t attribute_hidden R_GetMaxVSize(void)
+HIDDEN R_size_t R_GetMaxVSize(void)
 {
     if (R_MaxVSize == R_SIZE_T_MAX) return R_SIZE_T_MAX;
     return R_MaxVSize * vsfac;
 }
 
-void attribute_hidden R_SetMaxVSize(R_size_t size)
+HIDDEN void R_SetMaxVSize(R_size_t size)
 {
     if (size == R_SIZE_T_MAX) return;
     if (size / vsfac >= R_VSize) R_MaxVSize = (size + 1) / vsfac;
 }
 
-R_size_t attribute_hidden R_GetMaxNSize(void)
+HIDDEN R_size_t R_GetMaxNSize(void)
 {
     return R_MaxNSize;
 }
 
-void attribute_hidden R_SetMaxNSize(R_size_t size)
+HIDDEN void R_SetMaxNSize(R_size_t size)
 {
     if (size >= R_NSize) R_MaxNSize = size;
 }
 
-void attribute_hidden R_SetPPSize(R_size_t size)
+HIDDEN void R_SetPPSize(R_size_t size)
 {
     R_PPStackSize = (int) size;
 }
 
-SEXP attribute_hidden do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     const double MB = 1048576.0;
     double newval = asReal(CAR(args));
@@ -476,7 +476,7 @@ SEXP attribute_hidden do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ScalarReal(R_GetMaxVSize() / MB);
 }
 
-SEXP attribute_hidden do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double newval = asReal(CAR(args));
 
@@ -1598,7 +1598,7 @@ void R_RegisterCFinalizer(SEXP s, R_CFinalizer_t fun)
 
 /* R interface function */
 
-SEXP attribute_hidden do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int onexit;
 
@@ -1980,7 +1980,7 @@ void R_gc_torture(int gap, int wait, Rboolean inhibit)
 #endif
 }
 
-SEXP attribute_hidden do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap;
     SEXP old = ScalarLogical(gc_force_wait > 0);
@@ -2000,7 +2000,7 @@ SEXP attribute_hidden do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
     return old;
 }
 
-SEXP attribute_hidden do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int gap, wait;
     Rboolean inhibit;
@@ -2041,7 +2041,7 @@ static void init_gctorture(void)
     }
 }
 
-SEXP attribute_hidden do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int i;
     SEXP old = ScalarLogical(gc_reporting);
@@ -2054,7 +2054,7 @@ SEXP attribute_hidden do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* reports memory use to profiler in eval.c */
 
-void attribute_hidden get_current_mem(size_t *smallvsize,
+HIDDEN void get_current_mem(size_t *smallvsize,
 				      size_t *largevsize,
 				      size_t *nodes)
 {
@@ -2064,7 +2064,7 @@ void attribute_hidden get_current_mem(size_t *smallvsize,
     return;
 }
 
-SEXP attribute_hidden do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
     int ogc, reset_max, full;
@@ -2131,7 +2131,7 @@ static void NORET mem_err_malloc(R_size_t size)
 #define PP_REDZONE_SIZE 1000L
 static int R_StandardPPStackSize, R_RealPPStackSize;
 
-void attribute_hidden InitMemory()
+HIDDEN void InitMemory()
 {
     int i;
     int gen;
@@ -2431,7 +2431,7 @@ SEXP cons(SEXP car, SEXP cdr)
     return s;
 }
 
-SEXP attribute_hidden CONS_NR(SEXP car, SEXP cdr)
+HIDDEN SEXP CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
@@ -2525,7 +2525,7 @@ SEXP NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments
    unless a GC will actually occur. */
-SEXP attribute_hidden mkPROMISE(SEXP expr, SEXP rho)
+HIDDEN SEXP mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
@@ -2568,7 +2568,7 @@ SEXP R_mkEVPROMISE(SEXP expr, SEXP val)
     return prom;
 }
 
-SEXP attribute_hidden R_mkEVPROMISE_NR(SEXP expr, SEXP val)
+HIDDEN SEXP R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 {
     SEXP prom = mkPROMISE(expr, R_NilValue);
     DISABLE_REFCNT(prom);
@@ -2905,7 +2905,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-SEXP attribute_hidden allocCharsxp(R_len_t len)
+HIDDEN SEXP allocCharsxp(R_len_t len)
 {
     return allocVector(intCHARSXP, len);
 }
@@ -3008,7 +3008,7 @@ static double gctimes[5], gcstarttimes[5];
 static Rboolean gctime_enabled = FALSE;
 
 /* this is primitive */
-SEXP attribute_hidden do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
 
@@ -3059,7 +3059,7 @@ static void gc_end_timing(void)
 #ifdef THREADCHECK
 # if !defined(Win32) && defined(HAVE_PTHREAD)
 #   include <pthread.h>
-void attribute_hidden R_check_thread(const char *s)
+HIDDEN void R_check_thread(const char *s)
 {
     static Rboolean main_thread_inited = FALSE;
     static pthread_t main_thread;
@@ -3077,7 +3077,7 @@ void attribute_hidden R_check_thread(const char *s)
 }
 # else
 /* This could be implemented for Windows using their threading API */ 
-void attribute_hidden R_check_thread(const char *s) {}
+HIDDEN void R_check_thread(const char *s) {}
 # endif
 #endif
 
@@ -3223,7 +3223,7 @@ static void R_gc_internal(R_size_t size_needed)
 }
 
 
-SEXP attribute_hidden do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nms;
     int i, tmp;
@@ -3408,7 +3408,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
 #endif
 
 /* "initStack" initialize environment stack */
-attribute_hidden
+HIDDEN
 void initStack(void)
 {
     R_PPStackTop = 0;
@@ -4080,23 +4080,23 @@ static R_INLINE SEXP CHKCONS(SEXP e)
 #define CHKCONS(e) CHK(e)
 #endif
 
-attribute_hidden
+HIDDEN
 int (BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
-attribute_hidden
+HIDDEN
 void (SET_BNDCELL_TAG)(SEXP cell, int val) { SET_BNDCELL_TAG(cell, val); }
-attribute_hidden
+HIDDEN
 double (BNDCELL_DVAL)(SEXP cell) { return BNDCELL_DVAL(cell); }
-attribute_hidden
+HIDDEN
 int (BNDCELL_IVAL)(SEXP cell) { return BNDCELL_IVAL(cell); }
-attribute_hidden
+HIDDEN
 int (BNDCELL_LVAL)(SEXP cell) { return BNDCELL_LVAL(cell); }
-attribute_hidden
+HIDDEN
 void (SET_BNDCELL_DVAL)(SEXP cell, double v) { SET_BNDCELL_DVAL(cell, v); }
-attribute_hidden
+HIDDEN
 void (SET_BNDCELL_IVAL)(SEXP cell, int v) { SET_BNDCELL_IVAL(cell, v); }
-attribute_hidden
+HIDDEN
 void (SET_BNDCELL_LVAL)(SEXP cell, int v) { SET_BNDCELL_LVAL(cell, v); }
-attribute_hidden
+HIDDEN
 void (INIT_BNDCELL)(SEXP cell, int type) { INIT_BNDCELL(cell, type); }
 
 #define CLEAR_BNDCELL_TAG(cell) do {		\
@@ -4106,14 +4106,14 @@ void (INIT_BNDCELL)(SEXP cell, int type) { INIT_BNDCELL(cell, type); }
 	}					\
     } while (0)
 
-attribute_hidden
+HIDDEN
 void SET_BNDCELL(SEXP cell, SEXP val)
 {
     CLEAR_BNDCELL_TAG(cell);
     SETCAR(cell, val);
 }
 
-attribute_hidden void R_expand_binding_value(SEXP b)
+HIDDEN void R_expand_binding_value(SEXP b)
 {
 #if BOXED_BINDING_CELLS
     SET_BNDCELL_TAG(b, 0);
@@ -4148,7 +4148,7 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 #endif
 }
 
-void attribute_hidden R_args_enable_refcnt(SEXP args)
+HIDDEN void R_args_enable_refcnt(SEXP args)
 {
 #ifdef SWITCH_TO_REFCNT
     /* args is escaping into user C code and might get captured, so
@@ -4283,6 +4283,8 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     return y;
 }
 
+void *(EXTPTR_PTR)(SEXP x) { return EXTPTR_PTR(CHK(x)); }
+
 void (SET_MISSING)(SEXP x, int v) { SET_MISSING(CHKCONS(x), v); }
 
 /* Closure Accessors */
@@ -4303,7 +4305,7 @@ void (SET_RSTEP)(SEXP x, int v) { SET_RSTEP(CHK(x), v); }
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
 int (PRIMOFFSET)(SEXP x) { return PRIMOFFSET(CHK(x)); }
-attribute_hidden
+HIDDEN
 void (SET_PRIMOFFSET)(SEXP x, int v) { SET_PRIMOFFSET(CHK(x), v); }
 #endif
 
@@ -4351,18 +4353,18 @@ void (SET_PRSEEN)(SEXP x, int v) { SET_PRSEEN(CHK(x), v); }
 
 /* Hashing Accessors */
 #ifdef TESTING_WRITE_BARRIER
-attribute_hidden
+HIDDEN
 int (HASHASH)(SEXP x) { return HASHASH(CHK(x)); }
-attribute_hidden
+HIDDEN
 int (HASHVALUE)(SEXP x) { return HASHVALUE(CHK(x)); }
 
-attribute_hidden
+HIDDEN
 void (SET_HASHASH)(SEXP x, int v) { SET_HASHASH(CHK(x), v); }
-attribute_hidden
+HIDDEN
 void (SET_HASHVALUE)(SEXP x, int v) { SET_HASHVALUE(CHK(x), v); }
 #endif
 
-attribute_hidden
+HIDDEN
 SEXP (SET_CXTAIL)(SEXP x, SEXP v) {
 #ifdef USE_TYPE_CHECKING
     if(TYPEOF(v) != CHARSXP && TYPEOF(v) != NILSXP)
@@ -4386,55 +4388,55 @@ Rboolean Rf_isString(SEXP s) { return isString(CHK(s)); }
 Rboolean Rf_isObject(SEXP s) { return isObject(CHK(s)); }
 
 /* Bindings accessors */
-Rboolean attribute_hidden
+HIDDEN Rboolean
 (IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}
-Rboolean attribute_hidden
+HIDDEN Rboolean
 (BINDING_IS_LOCKED)(SEXP b) {return BINDING_IS_LOCKED(CHK(b));}
-void attribute_hidden
+HIDDEN void
 (SET_ACTIVE_BINDING_BIT)(SEXP b) {SET_ACTIVE_BINDING_BIT(CHK(b));}
-void attribute_hidden (LOCK_BINDING)(SEXP b) {LOCK_BINDING(CHK(b));}
-void attribute_hidden (UNLOCK_BINDING)(SEXP b) {UNLOCK_BINDING(CHK(b));}
+HIDDEN void (LOCK_BINDING)(SEXP b) {LOCK_BINDING(CHK(b));}
+HIDDEN void (UNLOCK_BINDING)(SEXP b) {UNLOCK_BINDING(CHK(b));}
 
-attribute_hidden
+HIDDEN
 void (SET_BASE_SYM_CACHED)(SEXP b) { SET_BASE_SYM_CACHED(CHK(b)); }
-attribute_hidden
+HIDDEN
 void (UNSET_BASE_SYM_CACHED)(SEXP b) { UNSET_BASE_SYM_CACHED(CHK(b)); }
-attribute_hidden
+HIDDEN
 Rboolean (BASE_SYM_CACHED)(SEXP b) { return BASE_SYM_CACHED(CHK(b)); }
 
-attribute_hidden
+HIDDEN
 void (SET_SPECIAL_SYMBOL)(SEXP b) { SET_SPECIAL_SYMBOL(CHK(b)); }
-attribute_hidden
+HIDDEN
 void (UNSET_SPECIAL_SYMBOL)(SEXP b) { UNSET_SPECIAL_SYMBOL(CHK(b)); }
-attribute_hidden
+HIDDEN
 Rboolean (IS_SPECIAL_SYMBOL)(SEXP b) { return IS_SPECIAL_SYMBOL(CHK(b)); }
-attribute_hidden
+HIDDEN
 void (SET_NO_SPECIAL_SYMBOLS)(SEXP b) { SET_NO_SPECIAL_SYMBOLS(CHK(b)); }
-attribute_hidden
+HIDDEN
 void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b) { UNSET_NO_SPECIAL_SYMBOLS(CHK(b)); }
-attribute_hidden
+HIDDEN
 Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b) { return NO_SPECIAL_SYMBOLS(CHK(b)); }
 
 /* R_FunTab accessors, only needed when write barrier is on */
 /* Not hidden to allow experimentaiton without rebuilding R - LT */
-/* attribute_hidden */
+/* HIDDEN */
 int (PRIMVAL)(SEXP x) { return PRIMVAL(CHK(x)); }
-/* attribute_hidden */
+/* HIDDEN */
 CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
-/* attribute_hidden */
+/* HIDDEN */
 void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
 
 /* for use when testing the write barrier */
-int  attribute_hidden (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
-int  attribute_hidden (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
-int  attribute_hidden (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
-int  attribute_hidden (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }
-void attribute_hidden (SET_BYTES)(SEXP x) { SET_BYTES(CHK(x)); }
-void attribute_hidden (SET_LATIN1)(SEXP x) { SET_LATIN1(CHK(x)); }
-void attribute_hidden (SET_UTF8)(SEXP x) { SET_UTF8(CHK(x)); }
-void attribute_hidden (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
+HIDDEN int (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
+HIDDEN int (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
+HIDDEN int (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
+HIDDEN int (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }
+HIDDEN void (SET_BYTES)(SEXP x) { SET_BYTES(CHK(x)); }
+HIDDEN void (SET_LATIN1)(SEXP x) { SET_LATIN1(CHK(x)); }
+HIDDEN void (SET_UTF8)(SEXP x) { SET_UTF8(CHK(x)); }
+HIDDEN void (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
 int  (ENC_KNOWN)(SEXP x) { return ENC_KNOWN(CHK(x)); }
-void attribute_hidden (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
+HIDDEN void (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
 int  (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 
 /*******************************************/
@@ -4579,7 +4581,7 @@ R_FreeStringBuffer(R_StringBuffer *buf)
     }
 }
 
-void attribute_hidden
+HIDDEN void
 R_FreeStringBufferL(R_StringBuffer *buf)
 {
     if (buf->bufsize > buf->defaultSize) {
@@ -4592,7 +4594,7 @@ R_FreeStringBufferL(R_StringBuffer *buf)
 /* ======== This needs direct access to gp field for efficiency ======== */
 
 /* this has NA_STRING = NA_STRING */
-attribute_hidden
+HIDDEN
 int Seql(SEXP a, SEXP b)
 {
     /* The only case where pointer comparisons do not suffice is where
@@ -4618,16 +4620,3 @@ R_len_t NORET R_BadLongVector(SEXP x, const char *file, int line)
     error(_("long vectors not supported yet: %s:%d"), file, line);
 }
 #endif
-
-/* added in R 4.1.0.
-   This checks if it succeeds.
-   FIXME: is this worth inlining?
- */
-char *Rstrdup(const char *s)
-{
-    size_t nb = strlen(s) + 1;
-    void *cpy = malloc(nb);
-    if (cpy == NULL) error(_("allocation error in Rstrdup"));
-    memcpy (cpy, s, nb);
-    return (char *) cpy;
-}

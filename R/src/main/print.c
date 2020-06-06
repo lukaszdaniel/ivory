@@ -111,7 +111,7 @@ void PrintDefaults(void)
     PrintInit(&R_print, R_GlobalEnv);
 }
 
-SEXP attribute_hidden do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     switch (length(args)) {
     case 0:
@@ -126,7 +126,7 @@ SEXP attribute_hidden do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* This is *only* called via outdated R_level prmatrix() : */
-SEXP attribute_hidden do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int quote;
     SEXP a, x, rowlab, collab, naprint;
@@ -213,7 +213,7 @@ static void advancePrintArgs(SEXP* args, SEXP* prev,
 }
 
 /* .Internal(print.default(x, args, missings)) */
-SEXP attribute_hidden do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -809,7 +809,7 @@ static void print_cleanup(void *data)
 
  * This is the "dispatching" function for  print.default()
  */
-void attribute_hidden PrintValueRec(SEXP s, R_PrintData *data)
+HIDDEN void PrintValueRec(SEXP s, R_PrintData *data)
 {
     SEXP t;
 
@@ -1043,7 +1043,7 @@ static void printAttributes(SEXP s, R_PrintData *data, Rboolean useSlots)
 /* Print an S-expression using (possibly) local options.
    This is used for auto-printing from main.c */
 
-void attribute_hidden PrintValueEnv(SEXP s, SEXP env)
+HIDDEN void PrintValueEnv(SEXP s, SEXP env)
 {
     PrintDefaults();
     tagbuf[0] = '\0';
@@ -1078,7 +1078,7 @@ void R_PV(SEXP s)
 }
 
 
-void attribute_hidden CustomPrintValue(SEXP s, SEXP env)
+HIDDEN void CustomPrintValue(SEXP s, SEXP env)
 {
     tagbuf[0] = '\0';
 
@@ -1097,7 +1097,7 @@ void attribute_hidden CustomPrintValue(SEXP s, SEXP env)
 # include <stddef.h>
 #endif
 
-attribute_hidden
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata,
 		       const FC_LEN_T label_len)
@@ -1117,7 +1117,7 @@ void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata)
     if(*ndata > 0) printRealVector(data, *ndata, 1);
 }
 
-attribute_hidden
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata,
 		       const FC_LEN_T label_len)
@@ -1138,7 +1138,7 @@ void F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata)
     if(*ndata > 0) printIntegerVector(data, *ndata, 1);
 }
 
-attribute_hidden
+HIDDEN
 #ifdef FC_LEN_T
 void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata,
 		      const FC_LEN_T label_len)

@@ -35,11 +35,7 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 #include <string.h>
 #include <stdlib.h>
@@ -184,7 +180,7 @@ int Ri18n_wcwidth(R_wchar_t c)
 }
 
 /* Used in character.c, errors.c, ../gnuwin32/console.c */
-attribute_hidden
+HIDDEN
 int Ri18n_wcswidth (const wchar_t *s, size_t n)
 {
     int rs = 0;

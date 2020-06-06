@@ -833,7 +833,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     return ans;
 }
 
-SEXP attribute_hidden do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, file, sep, what, stripwhite, dec, quotes, comstr;
     int c, flush, fill, blskip, multiline, escapes, skipNul;
@@ -912,7 +912,7 @@ SEXP attribute_hidden do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (isString(quotes)) {
 	const char *sc = translateChar(STRING_ELT(quotes, 0));
-	if (strlen(sc)) data.quoteset = strdup(sc);
+	if (strlen(sc)) data.quoteset = Rstrdup(sc);
 	else data.quoteset = "";
     } else if (isNull(quotes))
 	data.quoteset = "";
@@ -1005,7 +1005,7 @@ SEXP attribute_hidden do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP attribute_hidden do_readln(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_readln(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int c;
     char buffer[MAXELTSIZE], *bufp = buffer;
