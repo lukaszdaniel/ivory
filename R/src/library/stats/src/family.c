@@ -31,7 +31,7 @@
 
 static const double THRESH = 30.;
 static const double MTHRESH = -30.;
-static const double INVEPS = 1/DOUBLE_EPS;
+static const double INVEPS = 1 / DOUBLE_EPS;
 
 /**
  * Evaluate x/(1 - x). An inline function is used so that x is
@@ -41,7 +41,7 @@ static const double INVEPS = 1/DOUBLE_EPS;
  *
  * @return x/(1 - x)
  */
-static R_INLINE double x_d_omx(double x) {
+R_INLINE static double x_d_omx(double x) {
     if (x < 0 || x > 1)
 	error(_("Value %g out of range (0, 1)"), x);
     return x/(1 - x);
@@ -55,7 +55,7 @@ static R_INLINE double x_d_omx(double x) {
  *
  * @return x/(1 + x)
  */
-static R_INLINE double x_d_opx(double x) {return x/(1 + x);}
+R_INLINE static double x_d_opx(double x) {return x/(1 + x);}
 
 SEXP logit_link(SEXP mu)
 {
@@ -108,7 +108,7 @@ SEXP logit_mu_eta(SEXP eta)
     return ans;
 }
 
-static R_INLINE
+R_INLINE static
 double y_log_y(double y, double mu)
 {
     return (y != 0.) ? (y * log(y/mu)) : 0;

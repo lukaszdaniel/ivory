@@ -46,7 +46,7 @@
 #undef _S4_subsettable
 
 
-static R_INLINE SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
+R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     /* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
        Duplicating might be safer/more consistent (fix bug reported by
        Radford Neal; similar to PR15098) */
@@ -377,7 +377,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
     return result;
 }
 
-static R_INLINE R_xlen_t findASubIndex(R_xlen_t k, const int * const *subs,
+R_INLINE static R_xlen_t findASubIndex(R_xlen_t k, const int * const *subs,
 				       const int *indx, const int *pxdims,
 				       const R_xlen_t *offset,
 				       SEXP call)
@@ -611,8 +611,7 @@ static int ExtractExactArg(SEXP args)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subassign.c */
-static R_INLINE
-int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
+R_INLINE static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
     SEXP prom = NULL;
@@ -663,7 +662,7 @@ HIDDEN SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subset_dflt(call, op, ans, rho);
 }
 
-static R_INLINE R_xlen_t scalarIndex(SEXP s)
+R_INLINE static R_xlen_t scalarIndex(SEXP s)
 {
     if (ATTRIB(s) == R_NilValue) {
 	if (IS_SCALAR(s, INTSXP)) {
@@ -1135,9 +1134,7 @@ enum pmatch {
    Tags are always in the native charset.
  */
 /* Returns: */
-static
-enum pmatch
-pstrmatch(SEXP target, SEXP input, size_t slen)
+static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 {
     const char *st = "";
     const char *si = "";
@@ -1155,7 +1152,7 @@ pstrmatch(SEXP target, SEXP input, size_t slen)
 	break;
     }
     si = translateChar(input);
-    if(si[0] != '\0' && strncmp(st, si, slen) == 0) {
+    if(si[0] != '\0' && streqln(st, si, slen)) {
 	vmaxset(vmax);
 	return (strlen(st) == slen) ?  EXACT_MATCH : PARTIAL_MATCH;
     } else {
@@ -1164,8 +1161,7 @@ pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-HIDDEN SEXP
-fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+HIDDEN SEXP fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 

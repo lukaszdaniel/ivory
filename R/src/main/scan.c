@@ -93,7 +93,7 @@ static SEXP insertString(char *str, LocalData *l)
     return mkCharCE(str, enc);
 }
 
-static R_INLINE Rboolean Rspace(unsigned int c)
+R_INLINE static Rboolean Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
 #ifdef _WIN32
@@ -214,7 +214,7 @@ strtoraw (const char *nptr, char **endptr)
     return (Rbyte) val;
 }
 
-static R_INLINE int scanchar_raw(LocalData *d)
+R_INLINE static int scanchar_raw(LocalData *d)
 {
     int c = (d->ttyflag) ? ConsoleGetcharWithPushBack(d->con) :
 	Rconn_fgetc(d->con);
@@ -229,7 +229,7 @@ static R_INLINE int scanchar_raw(LocalData *d)
     return c;
 }
 
-static R_INLINE void unscanchar(int c, LocalData *d)
+R_INLINE static void unscanchar(int c, LocalData *d)
 {
     d->save = c;
 }
@@ -237,7 +237,7 @@ static R_INLINE void unscanchar(int c, LocalData *d)
 /* For second bytes in a DBCS:
    should not be called when a char is saved, but be cautious
 */
-static R_INLINE int scanchar2(LocalData *d)
+R_INLINE static int scanchar2(LocalData *d)
 {
     int next;
     if (d->save) {
@@ -459,7 +459,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
     *bufp = '\0';
     /* Remove UTF-8 BOM */
     if(d->atStart && utf8locale &&
-       !strncmp(buffer->data, "\xef\xbb\xbf", 3))
+       streqln(buffer->data, "\xef\xbb\xbf", 3))
 	memmove(buffer->data, buffer->data+3, strlen(buffer->data) + 1);
     d->atStart = FALSE;
     *bch = filled;
@@ -469,7 +469,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 /* If mode = 0 use for numeric fields where "" is NA
    If mode = 1 use for character fields where "" is verbatim unless
    na.strings includes "" */
-static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
+R_INLINE static int isNAstring(const char *buf, int mode, LocalData *d)
 {
     int i;
 
@@ -479,7 +479,7 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
     return 0;
 }
 
-static R_INLINE void expected(LocalData *d)
+R_INLINE static void expected(LocalData *d)
 {
     int c;
     if (d->ttyflag) { /* This is safe in a MBCS */

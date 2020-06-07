@@ -30,8 +30,8 @@
 #include <Internal.h>
 
 #define NIL -1
-static R_INLINE int ARGUSED(SEXP x) { return LEVELS(x); }
-static R_INLINE void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
+R_INLINE static int ARGUSED(SEXP x) { return LEVELS(x); }
+R_INLINE static void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
 /* interval at which to check interrupts */
 #define NINTERRUPT 1000000
 
@@ -92,7 +92,7 @@ static hlen lhash(SEXP x, R_xlen_t indx, HashData *d)
     return (hlen) xi;
 }
 
-static R_INLINE hlen ihash(SEXP x, R_xlen_t indx, HashData *d)
+R_INLINE static hlen ihash(SEXP x, R_xlen_t indx, HashData *d)
 {
     int xi = INTEGER_ELT(x, indx);
     if (xi == NA_INTEGER) return 0;
@@ -108,7 +108,7 @@ union foo {
     unsigned int u[2];
 };
 
-static R_INLINE hlen rhash(SEXP x, R_xlen_t indx, HashData *d)
+R_INLINE static hlen rhash(SEXP x, R_xlen_t indx, HashData *d)
 {
     /* There is a problem with signed 0s under IEC60559 */
     double xi = REAL_ELT(x, indx);
@@ -161,7 +161,7 @@ static hlen chash(SEXP x, R_xlen_t indx, HashData *d)
 
 /* Hash CHARSXP by address.  Hash values are int, For 64bit pointers,
  * we do (upper ^ lower) */
-static R_INLINE hlen cshash(SEXP x, R_xlen_t indx, HashData *d)
+R_INLINE static hlen cshash(SEXP x, R_xlen_t indx, HashData *d)
 {
     intptr_t z = (intptr_t) STRING_ELT(x, indx);
     unsigned int z1 = (unsigned int)(z & 0xffffffff), z2 = 0;
@@ -171,7 +171,7 @@ static R_INLINE hlen cshash(SEXP x, R_xlen_t indx, HashData *d)
     return scatter(z1 ^ z2, d);
 }
 
-static R_INLINE hlen shash(SEXP x, R_xlen_t indx, HashData *d)
+R_INLINE static hlen shash(SEXP x, R_xlen_t indx, HashData *d)
 {
     unsigned int k;
     const char *p;
@@ -193,14 +193,14 @@ static int lequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 }
 
 
-static R_INLINE int iequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+R_INLINE static int iequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return (INTEGER_ELT(x, i) == INTEGER_ELT(y, j));
 }
 
 /* BDR 2002-1-17  We don't want NA and other NaNs to be equal */
-static R_INLINE int requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+R_INLINE static int requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     double xi = REAL_ELT(x, i);
@@ -235,7 +235,7 @@ static int cequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
     return cplx_eq(COMPLEX_ELT(x, i), COMPLEX_ELT(y, j));
 }
 
-static R_INLINE int sequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+R_INLINE static int sequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     SEXP xi = STRING_ELT(x, i);
@@ -806,7 +806,7 @@ static void UndoHashing(SEXP x, SEXP table, HashData *d)
 }
 
 #define DEFLOOKUP(NAME, HASHFUN, EQLFUN)			\
-    static R_INLINE int						\
+    R_INLINE static int						\
     NAME(SEXP table, SEXP x, R_xlen_t indx, HashData *d)	\
     {								\
 	int *h = HTDATA_INT(d);					\
@@ -1188,7 +1188,7 @@ HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 	    mtch_count = 0;
 	    for (int j = 0; j < n_target; j++) {
 		if (no_dups && used[j]) continue;
-		if (strncmp(ss, tar[j], temp) == 0) {
+		if (streqln(ss, tar[j], temp)) {
 		    mtch = j + 1;
 		    mtch_count++;
 		}

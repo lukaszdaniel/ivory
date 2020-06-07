@@ -120,7 +120,7 @@ static void setActiveValue(SEXP fun, SEXP val)
 }
 
 //#define IS_USER_DATABASE(rho)  OBJECT((rho)) && inherits((rho), "UserDefinedDatabase")
-static R_INLINE Rboolean IS_USER_DATABASE(SEXP rho)  { 
+R_INLINE static Rboolean IS_USER_DATABASE(SEXP rho)  { 
  return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
  }
 
@@ -128,18 +128,18 @@ static R_INLINE Rboolean IS_USER_DATABASE(SEXP rho)  {
 
 #define FRAME_LOCK_MASK (1<<14)
 //#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
-static R_INLINE Rboolean FRAME_IS_LOCKED(SEXP e) {
+R_INLINE static Rboolean FRAME_IS_LOCKED(SEXP e) {
  return ENVFLAGS(e) & FRAME_LOCK_MASK;
  }
 //#define LOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK)
-static R_INLINE void LOCK_FRAME(SEXP e) {
+R_INLINE static void LOCK_FRAME(SEXP e) {
  SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK);
  }
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
 /* use the same bits (15 and 14) in symbols and bindings */
 static SEXP getActiveValue(SEXP);
-static R_INLINE SEXP BINDING_VALUE(SEXP b)
+R_INLINE static SEXP BINDING_VALUE(SEXP b)
 {
     if (BNDCELL_TAG(b)) {
 	R_expand_binding_value(b);
@@ -150,11 +150,11 @@ static R_INLINE SEXP BINDING_VALUE(SEXP b)
 }
 
 //#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s)))
-static R_INLINE SEXP SYMBOL_BINDING_VALUE(SEXP s) {
+R_INLINE static SEXP SYMBOL_BINDING_VALUE(SEXP s) {
  return IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s);
  }
 //#define SYMBOL_HAS_BINDING(s) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue))
-static R_INLINE Rboolean SYMBOL_HAS_BINDING(SEXP s) {
+R_INLINE static Rboolean SYMBOL_HAS_BINDING(SEXP s) {
  return IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue);
  }
 
@@ -173,7 +173,7 @@ static R_INLINE Rboolean SYMBOL_HAS_BINDING(SEXP s) {
     SET_BNDCELL(__b__, __val__); \
 } while (0)
 */
-static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
+R_INLINE static void SET_BINDING_VALUE(SEXP b, SEXP val) {
   if (BINDING_IS_LOCKED(b)) 
     error(_("cannot change value of locked binding for '%s'"), 
           CHAR(PRINTNAME(TAG(b)))); 
@@ -199,7 +199,7 @@ static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
 } while (0)
 */
 
-static R_INLINE void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
+R_INLINE static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
   if (BINDING_IS_LOCKED(sym)) 
     error(_("cannot change value of locked binding for '%s'"), 
           CHAR(PRINTNAME(sym))); 
@@ -213,7 +213,7 @@ static R_INLINE void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
 
 /* Macro version of isNull for only the test against R_NilValue */
 //#define ISNULL(x) ((x) == R_NilValue)
-static R_INLINE Rboolean ISNULL(SEXP x) {
+R_INLINE static Rboolean ISNULL(SEXP x) {
  return x == R_NilValue;
 }
 
@@ -245,23 +245,23 @@ Rboolean R_envHasNoSpecialSymbols (SEXP env)
 */
 
 //#define HASHSIZE(x)	     ((int) STDVEC_LENGTH(x))
-static R_INLINE int HASHSIZE(SEXP x) {
+R_INLINE static int HASHSIZE(SEXP x) {
  return (int) STDVEC_LENGTH(x);
  }
 //#define HASHPRI(x)	     ((int) STDVEC_TRUELENGTH(x))
-static R_INLINE int HASHPRI(SEXP x) {
+R_INLINE static int HASHPRI(SEXP x) {
  return (int) STDVEC_TRUELENGTH(x);
  }
 #define HASHTABLEGROWTHRATE  1.2
 #define HASHMINSIZE	     29
 //#define SET_HASHPRI(x,v)     SET_TRUELENGTH(x,v)
-static R_INLINE void SET_HASHPRI(SEXP x, int v) {
+R_INLINE static void SET_HASHPRI(SEXP x, int v) {
  SET_TRUELENGTH(x, v);
  }
 #define HASHCHAIN(table, i)  ((SEXP *) STDVEC_DATAPTR(table))[i]
 
 //#define IS_HASHED(x)	     (HASHTAB(x) != R_NilValue)
-static R_INLINE Rboolean IS_HASHED(SEXP x) {
+R_INLINE static Rboolean IS_HASHED(SEXP x) {
  return HASHTAB(x) != R_NilValue;
  }
 
@@ -709,21 +709,21 @@ static SEXP R_HashProfile(SEXP table)
 
 #define GLOBAL_FRAME_MASK (1<<15)
 //#define IS_GLOBAL_FRAME(e) (ENVFLAGS(e) & GLOBAL_FRAME_MASK)
-static R_INLINE Rboolean IS_GLOBAL_FRAME(SEXP e) {
+R_INLINE static Rboolean IS_GLOBAL_FRAME(SEXP e) {
  return ENVFLAGS(e) & GLOBAL_FRAME_MASK;
  }
 /*
 #define MARK_AS_GLOBAL_FRAME(e) \
   SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK)
 */
-static R_INLINE void MARK_AS_GLOBAL_FRAME(SEXP e) {
+R_INLINE static void MARK_AS_GLOBAL_FRAME(SEXP e) {
  SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK);
  }
 /*
 #define MARK_AS_LOCAL_FRAME(e) \
   SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK))
 */
-static R_INLINE void MARK_AS_LOCAL_FRAME(SEXP e) {
+R_INLINE static void MARK_AS_LOCAL_FRAME(SEXP e) {
  SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK));
  }
 
@@ -1273,7 +1273,7 @@ static SEXP findGlobalVarLoc(SEXP symbol)
     return R_NilValue;
 }
 
-static R_INLINE SEXP findGlobalVar(SEXP symbol)
+R_INLINE static SEXP findGlobalVar(SEXP symbol)
 {
     SEXP loc = findGlobalVarLoc(symbol);
     switch (TYPEOF(loc)) {
@@ -1448,7 +1448,7 @@ static int ddVal(SEXP symbol)
     int rval;
 
     buf = CHAR(PRINTNAME(symbol));
-    if( !strncmp(buf,"..",2) && strlen(buf) > 2 ) {
+    if( streqln(buf,"..",2) && strlen(buf) > 2 ) {
 	buf += 2;
 	rval = (int) strtol(buf, &endp, 10);
 	if( *endp != '\0')
@@ -1899,7 +1899,7 @@ void gsetVar(SEXP symbol, SEXP value, SEXP rho)
 
 /* get environment from a subclass if possible; else return NULL */
 //#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
-static R_INLINE SEXP simple_as_environment(SEXP arg) {
+R_INLINE static SEXP simple_as_environment(SEXP arg) {
  return IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue;
  }
 
@@ -2773,7 +2773,7 @@ static void FrameNames(SEXP frame, int all, SEXP names, int *indx)
 /* returning the active binding function instead of the
    value is not right, but packages are depending on it so
    keep for now. */
-static R_INLINE SEXP BINDING_VALUE_TMP(SEXP cell)
+R_INLINE static SEXP BINDING_VALUE_TMP(SEXP cell)
 {
     if (IS_ACTIVE_BINDING(cell)) {
 	static int inited = FALSE;
@@ -3696,7 +3696,7 @@ Rboolean R_IsPackageEnv(SEXP rho)
 	char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
-	   ! strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
+	   streqln(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
 	    return TRUE;
 	else
 	    return FALSE;
@@ -3712,7 +3712,7 @@ SEXP R_PackageEnvName(SEXP rho)
 	char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
-	   ! strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
+	   streqln(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
 	    return name;
 	else
 	    return R_NilValue;
@@ -4301,7 +4301,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
 	/* search S4 registry */
 	const char *s4prefix = ".__T__";
 	if (TYPEOF(value) == ENVSXP &&
-		!strncmp(vname, s4prefix, strlen(s4prefix))) {
+		streqln(vname, s4prefix, strlen(s4prefix))) {
 	    SETCAR(args, value); /* re-use args */
 	    SEXP rlist = do_env2list(R_NilValue, env2listOp, args, R_NilValue);
 	    PROTECT(rlist);

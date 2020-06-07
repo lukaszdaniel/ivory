@@ -106,7 +106,7 @@ HIDDEN Rboolean R_HiddenFile(const char *name)
 
 #ifdef _WIN32
 
-static char * fixmode(const char *mode)
+static char *fixmode(const char *mode)
 {
     /* Rconnection can have a mode of 4 chars plus a ccs= setting plus a null; we might
      * add one char if neither b nor t is specified. */
@@ -119,7 +119,7 @@ static char * fixmode(const char *mode)
     return fixedmode;
 }
 
-static wchar_t * wcfixmode(const wchar_t *mode)
+static wchar_t *wcfixmode(const wchar_t *mode)
 {
     static wchar_t wcfixedmode[20];
     wcfixedmode[19] = L'\0';
@@ -556,15 +556,13 @@ HIDDEN SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_ICONVLIST
 static unsigned int cnt;
 
-static int
-count_one (unsigned int namescount, const char * const *names, void *data)
+static int count_one (unsigned int namescount, const char * const *names, void *data)
 {
     cnt += namescount;
     return 0;
 }
 
-static int
-write_one (unsigned int namescount, const char * const *names, void *data)
+static int write_one (unsigned int namescount, const char * const *names, void *data)
 {
   unsigned int i;
   SEXP ans = (SEXP) data;
@@ -840,7 +838,7 @@ typedef enum {
 } nttype_t;
 
 /* Decides whether translation to native encoding is needed. */
-static R_INLINE nttype_t needsTranslation(SEXP x) {
+R_INLINE static nttype_t needsTranslation(SEXP x) {
 
     if (IS_ASCII(x)) return NT_NONE;
     if (IS_UTF8(x)) {
@@ -1951,8 +1949,7 @@ HIDDEN void resetTimeLimits()
 	cpuLimit = cpuLimit2;
 }
 
-HIDDEN SEXP
-do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, old_cpu = cpuLimitValue,
 	old_elapsed = elapsedLimitValue;
@@ -1978,8 +1975,7 @@ do_setTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-HIDDEN SEXP
-do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     double cpu, elapsed, data[5];
 

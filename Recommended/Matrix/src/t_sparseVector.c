@@ -128,8 +128,7 @@ static Rcomplex cmplx_NA() {
  *
  * @return
  */
-static R_INLINE
-Type_ans sparseVector_sub(int64_t i, int nnz_v, double* v_i, Type_ans* v_x, int64_t len_v)
+R_INLINE static Type_ans sparseVector_sub(int64_t i, int nnz_v, double* v_i, Type_ans* v_x, int64_t len_v)
 {
 // double *v_i = INTEGER(GET_SLOT(vec, Matrix_iSym));
 // double *v_x =   REAL (GET_SLOT(vec, Matrix_xSym)); -- try to be agnostic about type

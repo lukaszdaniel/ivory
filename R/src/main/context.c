@@ -212,7 +212,7 @@ static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 
 /* R_jumpctxt - jump to the named context */
 
-HIDDEN void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
+HIDDEN NORET void R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 {
     Rboolean savevis = R_Visible;
     RCNTXT *cptr;
@@ -326,7 +326,7 @@ void endcontext(RCNTXT * cptr)
 
 /* findcontext - find the correct context */
 
-HIDDEN void NORET findcontext(int mask, SEXP env, SEXP val)
+HIDDEN NORET void findcontext(int mask, SEXP env, SEXP val)
 {
     RCNTXT *cptr;
     cptr = R_GlobalContext;
@@ -348,7 +348,7 @@ HIDDEN void NORET findcontext(int mask, SEXP env, SEXP val)
     }
 }
 
-HIDDEN void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
+HIDDEN NORET void R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     RCNTXT *cptr;
     for (cptr = R_GlobalContext;
@@ -902,7 +902,7 @@ SEXP R_MakeUnwindCont()
 
 #define RAWDATA(x) ((void *) RAW0(x))
 
-void NORET R_ContinueUnwind(SEXP cont)
+NORET void R_ContinueUnwind(SEXP cont)
 {
     SEXP retval = CAR(cont);
     unwind_cont_t *u = RAWDATA(CDR(cont));

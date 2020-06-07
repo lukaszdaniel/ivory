@@ -138,7 +138,7 @@ static void setup_jit(pcre_extra *re_pe)
 
 /* we allow pat == NULL if the regex cannot be safely expressed
    as a string (e.g., when using grepRaw) */
-static void NORET reg_report(int rc,  regex_t *reg, const char *pat)
+NORET static void reg_report(int rc,  regex_t *reg, const char *pat)
 {
     char errbuf[1001];
     tre_regerror(rc, reg, errbuf, 1001);
@@ -1000,7 +1000,7 @@ static int fgrep_one(const char *pat, const char *target,
     if (!useBytes && use_UTF8) {
         int ib, used;
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
-	    if (strncmp(pat, target+ib, plen) == 0) {
+	    if (streqln(pat, target+ib, plen)) {
 		if (next != NULL) *next = ib + plen;
 		return i;
 	    }
@@ -1013,7 +1013,7 @@ static int fgrep_one(const char *pat, const char *target,
 	int ib, used;
 	mbs_init(&mb_st);
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
-	    if (strncmp(pat, target+ib, plen) == 0) {
+	    if (streqln(pat, target+ib, plen)) {
 		if (next != NULL) *next = ib + plen;
 		return i;
 	    }
@@ -1023,7 +1023,7 @@ static int fgrep_one(const char *pat, const char *target,
 	}
     } else
 	for (i = 0; i <= len-plen; i++)
-	    if (strncmp(pat, target+i, plen) == 0) {
+	    if (streqln(pat, target+i, plen)) {
 		if (next != NULL) *next = i + plen;
 		return i;
 	    }
@@ -1050,7 +1050,7 @@ static int fgrep_one_bytes(const char *pat, const char *target, int len,
     if (!useBytes && use_UTF8) { /* not really needed */
 	int ib, used;
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
-	    if (strncmp(pat, target+ib, plen) == 0) return ib;
+	    if (streqln(pat, target+ib, plen)) return ib;
 	    used = utf8clen(target[ib]);
 	    if (used <= 0) break;
 	    ib += used;
@@ -1060,14 +1060,14 @@ static int fgrep_one_bytes(const char *pat, const char *target, int len,
 	int ib, used;
 	mbs_init(&mb_st);
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
-	    if (strncmp(pat, target+ib, plen) == 0) return ib;
+	    if (streqln(pat, target+ib, plen)) return ib;
 	    used = (int) Mbrtowc(NULL, target+ib, MB_CUR_MAX, &mb_st);
 	    if (used <= 0) break;
 	    ib += used;
 	}
     } else
 	for (i = 0; i <= len-plen; i++)
-	    if (strncmp(pat, target+i, plen) == 0) return i;
+	    if (streqln(pat, target+i, plen)) return i;
     return -1;
 }
 

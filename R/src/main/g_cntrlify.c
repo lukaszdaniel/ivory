@@ -215,8 +215,8 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 
 	  for (i = 0; i < NUM_LIGATURES; i++)
 	    if ((_ligature_tbl[i].font == raw_fontnum)
-		&& (strncmp ((char *)src, _ligature_tbl[i].from,
-			     strlen (_ligature_tbl[i].from)) == 0))
+		&& (streqln((char *)src, _ligature_tbl[i].from,
+			     strlen (_ligature_tbl[i].from))))
 	      {
 		matched = true;
 		break;

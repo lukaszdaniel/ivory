@@ -45,6 +45,7 @@
 //#define HAVE_STRING_H
 #endif
 
+#include <Defn.h>
 #include <string.h>
 #include <memory.h>
 #include <locale.h>
@@ -664,12 +665,12 @@ const char *locale2charset(const char *locale)
 	    if (0 == strcmp(known[i].name,enc)) return known[i].value;
 
 	/* cut encoding old linux cp- */
-	if (0 == strncmp(enc, "cp-", 3)){
+	if (streqln(enc, "cp-", 3)){
 	    snprintf(charset, 128, "CP%s", enc+3);
 	    return charset;
 	}
 	/* cut encoding IBM ibm- */
-	if (0 == strncmp(enc, "ibm", 3)){
+	if (streqln(enc, "ibm", 3)){
 	    cp = atoi(enc + 3);
 	    snprintf(charset, 128, "IBM-%d", abs(cp));
 	    /* IBM-[0-9]+ case */
@@ -694,9 +695,9 @@ const char *locale2charset(const char *locale)
 	    /* This is OK as encoding names are ASCII */
 	    if(isalpha((int)la_loc[0]) && isalpha((int)la_loc[1])
 	       && (la_loc[2] == '_')) {
-		if (0 == strncmp("ja", la_loc, 2)) return "EUC-JP";
-		if (0 == strncmp("ko", la_loc, 2)) return "EUC-KR";
-		if (0 == strncmp("zh", la_loc, 2)) return "GB2312";
+		if (streqln("ja", la_loc, 2)) return "EUC-JP";
+		if (streqln("ko", la_loc, 2)) return "EUC-KR";
+		if (streqln("zh", la_loc, 2)) return "GB2312";
 	    }
 	}
 

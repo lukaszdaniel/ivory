@@ -43,11 +43,7 @@ extern "C" {
 # include <stdio.h>
 #endif
 
-#if defined(__GNUC__) && __GNUC__ >= 3
-# define NORET __attribute__((noreturn))
-#else
-# define NORET
-#endif
+#include <R_ext/Visibility.h>
 
 /* from Defn.h */
 /* this duplication will be removed in due course */
@@ -61,7 +57,7 @@ extern void R_SaveGlobalEnv(void);
 extern void R_SaveGlobalEnvToFile(const char *);
 extern void R_FlushConsole(void);
 extern void R_ClearerrConsole(void);
-extern void NORET R_Suicide(const char *);
+extern NORET void R_Suicide(const char *);
 extern char *R_HomeDir(void);
 extern int R_DirtyImage;	/* Current image dirty */
 extern char *R_GUIType;
@@ -75,10 +71,10 @@ extern char *R_Home;		    /* Root of the R tree */
 # define mainloop		Rf_mainloop
 # define onintr			Rf_onintr
 # define onintrNoResume		Rf_onintrNoResume
-void NORET jump_to_toplevel(void);
-void mainloop(void);
-void onintr(void);
-void onintrNoResume(void);
+NORET void Rf_jump_to_toplevel(void);
+void Rf_mainloop(void);
+void Rf_onintr(void);
+void Rf_onintrNoResume(void);
 #ifndef DEFN_H_
 extern void* R_GlobalContext;    /* Need opaque pointer type for export */
 #endif

@@ -78,7 +78,7 @@ R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll);
 static SEXP pkgtrim(SEXP args, DllReference *dll);
 
-static R_INLINE Rboolean isNativeSymbolInfo(SEXP op)
+R_INLINE static Rboolean isNativeSymbolInfo(SEXP op)
 {
     /* was: inherits(op, "NativeSymbolInfo")
      * inherits() is slow because of string comparisons, so use
@@ -404,7 +404,7 @@ static void setDLLname(SEXP s, char *DLLname)
 	error(_("'%s' argument must be a single character string"), "PACKAGE");
     name = translateChar(STRING_ELT(ss, 0));
     /* allow the package: form of the name, as returned by find */
-    if(strncmp(name, "package:", 8) == 0)
+    if(streqln(name, "package:", 8))
 	name += 8;
     if(strlen(name) > PATH_MAX - 1)
 	error(_("'%s' argument is too long"), "PACKAGE");

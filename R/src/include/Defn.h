@@ -23,11 +23,7 @@
 #ifndef DEFN_H_
 #define DEFN_H_
 
-
-
-
 #define isRaw(x) (TYPEOF(x) == RAWSXP)
-
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
@@ -416,12 +412,12 @@ typedef struct {
 } VECREC, *VECP;
 
 /* Vector Heap Macros */
-#define BACKPOINTER(v)	((v).u.backpointer)
-#define BYTE2VEC(n)	(((n)>0)?(((n)-1)/sizeof(VECREC)+1):0)
-#define INT2VEC(n)	(((n)>0)?(((n)*sizeof(int)-1)/sizeof(VECREC)+1):0)
-#define FLOAT2VEC(n)	(((n)>0)?(((n)*sizeof(double)-1)/sizeof(VECREC)+1):0)
-#define COMPLEX2VEC(n)	(((n)>0)?(((n)*sizeof(Rcomplex)-1)/sizeof(VECREC)+1):0)
-#define PTR2VEC(n)	(((n)>0)?(((n)*sizeof(SEXP)-1)/sizeof(VECREC)+1):0)
+#define BACKPOINTER(v) ((v).u.backpointer)
+#define BYTE2VEC(n) (((n) > 0) ? (((n)-1) / sizeof(VECREC) + 1) : 0)
+#define INT2VEC(n) (((n) > 0) ? (((n) * sizeof(int) - 1) / sizeof(VECREC) + 1) : 0)
+#define FLOAT2VEC(n) (((n) > 0) ? (((n) * sizeof(double) - 1) / sizeof(VECREC) + 1) : 0)
+#define COMPLEX2VEC(n) (((n) > 0) ? (((n) * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1) : 0)
+#define PTR2VEC(n) (((n) > 0) ? (((n) * sizeof(SEXP) - 1) / sizeof(VECREC) + 1) : 0)
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
@@ -443,12 +439,12 @@ typedef struct {
     } while (0)
 #define UNLOCK_BINDING(b) ((b)->sxpinfo.gp &= (~BINDING_LOCK_MASK))
 
-#define BASE_SYM_CACHED_MASK (1<<13)
+#define BASE_SYM_CACHED_MASK (1 << 13)
 #define SET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp |= BASE_SYM_CACHED_MASK)
 #define UNSET_BASE_SYM_CACHED(b) ((b)->sxpinfo.gp &= (~BASE_SYM_CACHED_MASK))
 #define BASE_SYM_CACHED(b) ((b)->sxpinfo.gp & BASE_SYM_CACHED_MASK)
 
-#define SPECIAL_SYMBOL_MASK (1<<12)
+#define SPECIAL_SYMBOL_MASK (1 << 12)
 #define SET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp |= SPECIAL_SYMBOL_MASK)
 #define UNSET_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK))
 #define IS_SPECIAL_SYMBOL(b) ((b)->sxpinfo.gp & SPECIAL_SYMBOL_MASK)
@@ -516,6 +512,7 @@ typedef struct {
 	SEXP sxpval;
     } u;
 } R_bcstack_t;
+
 # define PARTIALSXP_MASK (~255)
 # define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
 # define RAWMEM_TAG 254
@@ -607,7 +604,8 @@ BUI   0 0 0 0 0 0 0 1 = 64
 #endif
 
 /* Miscellaneous Definitions */
-#define streql(s, t)	(!strcmp((s), (t)))
+inline Rboolean streql(const char* s, const char* t) { return (strcmp(s, t) == 0); }
+inline Rboolean streqln(const char* s, const char* t, size_t n) { return (strncmp(s, t, n) == 0); }
 
 /* Arithmetic and Relation Operators */
 typedef enum {
@@ -885,7 +883,7 @@ extern0 int R_PCRE_limit_recursion;
 #define checkArity(a, b) Rf_checkArityCall(a, b, call)
 
 /*--- FUNCTIONS ------------------------------------------------------ */
-
+#ifndef R_NO_REMAP
 # define allocCharsxp		Rf_allocCharsxp
 # define asVecSize		Rf_asVecSize
 # define asXLength		Rf_asXLength
@@ -1044,7 +1042,7 @@ extern0 int R_PCRE_limit_recursion;
 # define yylval			Rf_yylval
 # define yynerrs		Rf_yynerrs
 # define yyparse		Rf_yyparse
-
+#endif //R_NO_REMAP
 /* Platform Dependent Gui Hooks */
 
 #define	R_CONSOLE	1
@@ -1134,116 +1132,116 @@ typedef struct {
 
 SEXP Rf_allocCharsxp(R_len_t);
 SEXP Rf_append(SEXP, SEXP); /* apparently unused now */
-R_xlen_t asVecSize(SEXP x);
-R_xlen_t asXLength(SEXP x);
-void check1arg(SEXP, SEXP, const char *);
+R_xlen_t Rf_asVecSize(SEXP x);
+R_xlen_t Rf_asXLength(SEXP x);
+void Rf_check1arg(SEXP, SEXP, const char *);
 void Rf_checkArityCall(SEXP, SEXP, SEXP);
-void CheckFormals(SEXP);
+void Rf_CheckFormals(SEXP);
 void R_check_locale(void);
-void check_stack_balance(SEXP op, int save);
-void CleanEd(void);
-void copyMostAttribNoTs(SEXP, SEXP);
-SEXP createS3Vars(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-void CustomPrintValue(SEXP, SEXP);
-double currentTime(void);
-void DataFrameClass(SEXP);
-SEXP ddfindVar(SEXP, SEXP);
-SEXP deparse1(SEXP,Rboolean,int);
-SEXP deparse1m(SEXP call, Rboolean abbrev, int opts);
-SEXP deparse1w(SEXP,Rboolean,int);
-SEXP deparse1line(SEXP, Rboolean);
+void Rf_check_stack_balance(SEXP op, int save);
+void Rf_CleanEd(void);
+void Rf_copyMostAttribNoTs(SEXP, SEXP);
+SEXP Rf_createS3Vars(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+void Rf_CustomPrintValue(SEXP, SEXP);
+double Rf_currentTime(void);
+void Rf_DataFrameClass(SEXP);
+SEXP Rf_ddfindVar(SEXP, SEXP);
+SEXP Rf_deparse1(SEXP,Rboolean,int);
+SEXP Rf_deparse1m(SEXP call, Rboolean abbrev, int opts);
+SEXP Rf_deparse1w(SEXP,Rboolean,int);
+SEXP Rf_deparse1line(SEXP, Rboolean);
 SEXP deparse1line_(SEXP, Rboolean, int);
-SEXP deparse1s(SEXP call);
-int DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-int DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-int DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
+SEXP Rf_deparse1s(SEXP call);
+int Rf_DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+int Rf_DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+int Rf_DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
 R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
-SEXP duplicated(SEXP, Rboolean);
-R_xlen_t any_duplicated(SEXP, Rboolean);
-R_xlen_t any_duplicated3(SEXP, SEXP, Rboolean);
-SEXP evalList(SEXP, SEXP, SEXP, int);
-SEXP evalListKeepMissing(SEXP, SEXP);
-int factorsConform(SEXP, SEXP);
-void NORET findcontext(int, SEXP, SEXP);
-SEXP findVar1(SEXP, SEXP, SEXPTYPE, int);
-void FrameClassFix(SEXP);
-SEXP frameSubscript(int, SEXP, SEXP);
-R_xlen_t get1index(SEXP, SEXP, R_xlen_t, int, int, SEXP);
-int GetOptionCutoff(void);
-SEXP getVar(SEXP, SEXP);
-SEXP getVarInFrame(SEXP, SEXP);
-void InitArithmetic(void);
-void InitConnections(void);
-void InitEd(void);
-void InitFunctionHashing(void);
-void InitBaseEnv(void);
-void InitGlobalEnv(void);
+SEXP Rf_duplicated(SEXP, Rboolean);
+R_xlen_t Rf_any_duplicated(SEXP, Rboolean);
+R_xlen_t Rf_any_duplicated3(SEXP, SEXP, Rboolean);
+SEXP Rf_evalList(SEXP, SEXP, SEXP, int);
+SEXP Rf_evalListKeepMissing(SEXP, SEXP);
+int Rf_factorsConform(SEXP, SEXP);
+NORET void Rf_findcontext(int, SEXP, SEXP);
+SEXP Rf_findVar1(SEXP, SEXP, SEXPTYPE, int);
+void Rf_FrameClassFix(SEXP);
+SEXP Rf_frameSubscript(int, SEXP, SEXP);
+R_xlen_t Rf_get1index(SEXP, SEXP, R_xlen_t, int, int, SEXP);
+int Rf_GetOptionCutoff(void);
+SEXP Rf_getVar(SEXP, SEXP);
+SEXP Rf_getVarInFrame(SEXP, SEXP);
+void Rf_InitArithmetic(void);
+void Rf_InitConnections(void);
+void Rf_InitEd(void);
+void Rf_InitFunctionHashing(void);
+void Rf_InitBaseEnv(void);
+void Rf_InitGlobalEnv(void);
 Rboolean R_current_trace_state(void);
 Rboolean R_current_debug_state(void);
 Rboolean R_has_methods(SEXP);
 void R_InitialData(void);
 SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, Rboolean);
 Rboolean inherits2(SEXP, const char *);
-void InitGraphics(void);
-void InitMemory(void);
-void InitNames(void);
-void InitOptions(void);
-void InitStringHash(void);
+void Rf_InitGraphics(void);
+void Rf_InitMemory(void);
+void Rf_InitNames(void);
+void Rf_InitOptions(void);
+void Rf_InitStringHash(void);
 void Init_R_Variables(SEXP);
-void InitTempDir(void);
+void Rf_InitTempDir(void);
 void R_reInitTempDir(int);
-void InitTypeTables(void);
-void initStack(void);
+void Rf_InitTypeTables(void);
+void Rf_initStack(void);
 void Rf_InitS3DefaultTypes(void);
-void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
+void Rf_internalTypeCheck(SEXP, SEXP, SEXPTYPE);
 Rboolean isMethodsDispatchOn(void);
-int isValidName(const char *);
-void NORET jump_to_toplevel(void);
-void KillAllDevices(void);
-SEXP levelsgets(SEXP, SEXP);
-void mainloop(void);
-SEXP makeSubscript(SEXP, SEXP, R_xlen_t *, SEXP);
-SEXP markKnown(const char *, SEXP);
-SEXP mat2indsub(SEXP, SEXP, SEXP);
-SEXP matchArg(SEXP, SEXP*);
-SEXP matchArgExact(SEXP, SEXP*);
-SEXP matchArgs_NR(SEXP, SEXP, SEXP);
-SEXP matchArgs_RC(SEXP, SEXP, SEXP);
-SEXP matchPar(const char *, SEXP*);
-void memtrace_report(void *, void *);
-SEXP mkCLOSXP(SEXP, SEXP, SEXP);
-SEXP mkFalse(void);
+int Rf_isValidName(const char *);
+NORET void Rf_jump_to_toplevel(void);
+void Rf_KillAllDevices(void);
+SEXP Rf_levelsgets(SEXP, SEXP);
+void Rf_mainloop(void);
+SEXP Rf_makeSubscript(SEXP, SEXP, R_xlen_t *, SEXP);
+SEXP Rf_markKnown(const char *, SEXP);
+SEXP Rf_mat2indsub(SEXP, SEXP, SEXP);
+SEXP Rf_matchArg(SEXP, SEXP*);
+SEXP Rf_matchArgExact(SEXP, SEXP*);
+SEXP Rf_matchArgs_NR(SEXP, SEXP, SEXP);
+SEXP Rf_matchArgs_RC(SEXP, SEXP, SEXP);
+SEXP Rf_matchPar(const char *, SEXP*);
+void Rf_memtrace_report(void *, void *);
+SEXP Rf_mkCLOSXP(SEXP, SEXP, SEXP);
+SEXP Rf_mkFalse(void);
 SEXP mkPRIMSXP (int, int);
-SEXP mkPROMISE(SEXP, SEXP);
+SEXP Rf_mkPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE_NR(SEXP, SEXP);
-SEXP mkQUOTE(SEXP);
-SEXP mkSYMSXP(SEXP, SEXP);
-SEXP mkTrue(void);
+SEXP Rf_mkQUOTE(SEXP);
+SEXP Rf_mkSYMSXP(SEXP, SEXP);
+SEXP Rf_mkTrue(void);
 const char *R_nativeEncoding(void);
-SEXP NewEnvironment(SEXP, SEXP, SEXP);
-void onintr(void);
-void onintrNoResume(void);
-RETSIGTYPE onsigusr1(int);
-RETSIGTYPE onsigusr2(int);
-R_xlen_t OneIndex(SEXP, SEXP, R_xlen_t, int, SEXP*, int, SEXP);
-SEXP parse(FILE*, int);
-SEXP patchArgsByActuals(SEXP, SEXP, SEXP);
-void PrintInit(R_PrintData *, SEXP);
-void PrintDefaults(void);
-void PrintGreeting(void);
-void PrintValueEnv(SEXP, SEXP);
-void PrintValueRec(SEXP, R_PrintData *);
-void PrintVersion(char *, size_t len);
-void PrintVersion_part_1(char *, size_t len);
-void PrintVersionString(char *, size_t len);
-void PrintWarnings(const char *);
+SEXP Rf_NewEnvironment(SEXP, SEXP, SEXP);
+void Rf_onintr(void);
+void Rf_onintrNoResume(void);
+RETSIGTYPE Rf_onsigusr1(int);
+RETSIGTYPE Rf_onsigusr2(int);
+R_xlen_t Rf_OneIndex(SEXP, SEXP, R_xlen_t, int, SEXP*, int, SEXP);
+SEXP Rf_parse(FILE*, int);
+SEXP Rf_patchArgsByActuals(SEXP, SEXP, SEXP);
+void Rf_PrintInit(R_PrintData *, SEXP);
+void Rf_PrintDefaults(void);
+void Rf_PrintGreeting(void);
+void Rf_PrintValueEnv(SEXP, SEXP);
+void Rf_PrintValueRec(SEXP, R_PrintData *);
+void Rf_PrintVersion(char *, size_t len);
+void Rf_PrintVersion_part_1(char *, size_t len);
+void Rf_PrintVersionString(char *, size_t len);
+void Rf_PrintWarnings(const char *);
 void process_site_Renviron(void);
 void process_system_Renviron(void);
 void process_user_Renviron(void);
-SEXP promiseArgs(SEXP, SEXP);
+SEXP Rf_promiseArgs(SEXP, SEXP);
 void Rcons_vprintf(const char *, va_list);
 SEXP R_data_class(SEXP , Rboolean);
 SEXP R_data_class2(SEXP);
@@ -1265,34 +1263,34 @@ int R_SetOptionWidth(int);
 void R_Suicide(const char *);
 void R_getProcTime(double *data);
 int R_isMissing(SEXP symbol, SEXP rho);
-const char *sexptype2char(SEXPTYPE type);
-void sortVector(SEXP, Rboolean);
-void SrcrefPrompt(const char *, SEXP);
-void ssort(SEXP*,int);
-int StrToInternal(const char *);
-SEXP strmat2intmat(SEXP, SEXP, SEXP);
+const char *Rf_sexptype2char(SEXPTYPE type);
+void Rf_sortVector(SEXP, Rboolean);
+void Rf_SrcrefPrompt(const char *, SEXP);
+void Rf_ssort(SEXP*,int);
+int Rf_StrToInternal(const char *);
+SEXP Rf_strmat2intmat(SEXP, SEXP, SEXP);
 SEXP substituteList(SEXP, SEXP);
-unsigned int TimeToSeed(void);
-SEXP tspgets(SEXP, SEXP);
-SEXP type2symbol(SEXPTYPE);
-void unbindVar(SEXP, SEXP);
+unsigned int Rf_TimeToSeed(void);
+SEXP Rf_tspgets(SEXP, SEXP);
+SEXP Rf_type2symbol(SEXPTYPE);
+void Rf_unbindVar(SEXP, SEXP);
 #ifdef ALLOW_OLD_SAVE
 void unmarkPhase(void);
 #endif
 #ifdef ADJUST_ENVIR_REFCNTS
-void unpromiseArgs(SEXP);
+void Rf_unpromiseArgs(SEXP);
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
-int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
-SEXP vectorIndex(SEXP, SEXP, int, int, int, SEXP, Rboolean);
+int Rf_usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
+SEXP Rf_vectorIndex(SEXP, SEXP, int, int, int, SEXP, Rboolean);
 
 #ifdef R_USE_SIGNALS
-void begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP dynamicfindVar(SEXP, RCNTXT*);
-void endcontext(RCNTXT*);
-int framedepth(RCNTXT*);
+void Rf_begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rf_dynamicfindVar(SEXP, RCNTXT*);
+void Rf_endcontext(RCNTXT*);
+int Rf_framedepth(RCNTXT*);
 void R_InsertRestartHandlers(RCNTXT *, const char *);
-void NORET R_JumpToContext(RCNTXT *, int, SEXP);
+NORET void R_JumpToContext(RCNTXT *, int, SEXP);
 SEXP R_syscall(int,RCNTXT*);
 int R_sysparent(int,RCNTXT*);
 SEXP R_sysframe(int,RCNTXT*);
@@ -1301,16 +1299,16 @@ RCNTXT *R_findExecContext(RCNTXT *, SEXP);
 RCNTXT *R_findParentContext(RCNTXT *, int);
 
 void R_run_onexits(RCNTXT *);
-void NORET R_jumpctxt(RCNTXT *, int, SEXP);
+NORET void R_jumpctxt(RCNTXT *, int, SEXP);
 #endif
 
 /* ../main/bind.c */
-SEXP ItemName(SEXP, R_xlen_t);
+SEXP Rf_ItemName(SEXP, R_xlen_t);
 
 /* ../main/errors.c : */
-void NORET errorcall_cpy(SEXP, const char *, ...);
-void NORET ErrorMessage(SEXP, int, ...);
-void WarningMessage(SEXP, R_WARNING, ...);
+NORET void Rf_errorcall_cpy(SEXP, const char *, ...);
+NORET void Rf_ErrorMessage(SEXP, int, ...);
+void Rf_WarningMessage(SEXP, R_WARNING, ...);
 SEXP R_GetTraceback(int);    // including deparse()ing
 SEXP R_GetTracebackOnly(int);// no        deparse()ing
 
@@ -1337,10 +1335,10 @@ typedef enum {
 } Rprt_adj;
 
 int	Rstrlen(SEXP, int);
-const char *EncodeRaw(Rbyte, const char *);
-const char *EncodeString(SEXP, int, int, Rprt_adj);
-const char *EncodeReal2(double, int, int, int);
-const char *EncodeChar(SEXP);
+const char *Rf_EncodeRaw(Rbyte, const char *);
+const char *Rf_EncodeString(SEXP, int, int, Rprt_adj);
+const char *Rf_EncodeReal2(double, int, int, int);
+const char *Rf_EncodeChar(SEXP);
 
 /* main/raw.c */
 int mbrtoint(int *w, const char *s);
@@ -1358,8 +1356,8 @@ SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 #include <wchar.h>
 
 /* main/util.c */
-void NORET UNIMPLEMENTED_TYPE(const char *s, SEXP x);
-void NORET UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
+NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
+NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
 Rboolean Rf_strIsASCII(const char *str);
 int utf8clen(char c);
 int Rf_AdobeSymbol2ucs2(int n);
@@ -1367,23 +1365,23 @@ double R_strtod5(const char *str, char **endptr, char dec,
 		 Rboolean NA, int exact);
 
 typedef unsigned short R_ucs2_t;
-size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
+size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
 /* size_t mbcsMblen(char *in);
 size_t ucs2ToMbcs(R_ucs2_t *in, char *out);
 size_t ucs2Mblen(R_ucs2_t *in); */
-size_t utf8toucs(wchar_t *wc, const char *s);
-size_t utf8towcs(wchar_t *wc, const char *s, size_t n);
-size_t ucstomb(char *s, const unsigned int wc);
-size_t ucstoutf8(char *s, const unsigned int wc);
-size_t mbtoucs(unsigned int *wc, const char *s, size_t n);
-size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
+size_t Rf_utf8toucs(wchar_t *wc, const char *s);
+size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+size_t Rf_ucstomb(char *s, const unsigned int wc);
+size_t Rf_ucstoutf8(char *s, const unsigned int wc);
+size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n);
+size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
 SEXP Rf_installTrChar(SEXP);
 
 const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.c */
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
-size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 Rboolean mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
 Rboolean utf8Valid(const char *str);
@@ -1399,7 +1397,7 @@ extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.c */
 void get_current_mem(size_t *,size_t *,size_t *); /* from memory.c */
 unsigned long get_duplicate_counter(void);  /* from duplicate.c */
 void reset_duplicate_counter(void);  /* from duplicate.c */
-void BindDomain(char *); /* from main.c */
+void Rf_BindDomain(char *); /* from main.c */
 extern Rboolean LoadInitFile;  /* from startup.c */
 
 // Unix and Windows versions
@@ -1414,10 +1412,10 @@ void R_fixbackslash(char *s);
 wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);
 
 #if defined(SUPPORT_UTF8_WIN32)
-#define mbrtowc(a,b,c,d) Rmbrtowc(a,b)
-#define wcrtomb(a,b,c) Rwcrtomb(a,b)
-#define mbstowcs(a,b,c) Rmbstowcs(a,b,c)
-#define wcstombs(a,b,c) Rwcstombs(a,b,c)
+#define Rf_mbrtowc(a,b,c,d) Rmbrtowc(a,b)
+#define Rf_wcrtomb(a,b,c) Rwcrtomb(a,b)
+#define Rf_mbstowcs(a,b,c) Rmbstowcs(a,b,c)
+#define Rf_wcstombs(a,b,c) Rwcstombs(a,b,c)
 size_t Rmbrtowc(wchar_t *wc, const char *s);
 size_t Rwcrtomb(char *s, const wchar_t wc);
 size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n);
@@ -1426,8 +1424,8 @@ size_t Rwcstombs(char *s, const wchar_t *wc, size_t n);
 #endif
 
 FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand);
-int Seql(SEXP a, SEXP b);
-int Scollate(SEXP a, SEXP b);
+int Rf_Seql(SEXP a, SEXP b);
+int Rf_Scollate(SEXP a, SEXP b);
 
 double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
 double R_strtod(const char *str, char **endptr);

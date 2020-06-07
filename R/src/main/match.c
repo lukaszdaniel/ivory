@@ -74,7 +74,7 @@ Rboolean psmatch(const char *f, const char *t, Rboolean exact)
 
 /* Matching formals and arguments */
 
-static R_INLINE SEXP charFromSexp(SEXP s)
+R_INLINE static SEXP charFromSexp(SEXP s)
 {
     switch (TYPEOF(s)) {
     case SYMSXP:
@@ -173,9 +173,9 @@ HIDDEN SEXP matchArgExact(SEXP tag, SEXP * list)
 /* return the matched arguments in actuals. */
 
 //#define ARGUSED(x) LEVELS(x)
-static R_INLINE int ARGUSED(SEXP x) { return LEVELS(x); }
+R_INLINE static int ARGUSED(SEXP x) { return LEVELS(x); }
 //#define SET_ARGUSED(x,v) SETLEVELS(x,v)
-static R_INLINE void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
+R_INLINE static void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
 
 
 /* We need to leave 'supplied' unchanged in case we call UseMethod */
@@ -417,8 +417,7 @@ typedef enum {
                                has been used */
 } fstype_t;
 
-static R_INLINE
-void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
+R_INLINE static void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
     SEXP value = CAR(suppliedSlot);
     if (value == R_MissingArg) {
         value = findVarInFrame3(cloenv, name, TRUE);

@@ -45,24 +45,24 @@
 extern R_print_par_t R_print;
 
 /* Computation of printing formats */
-void formatRaw(const Rbyte *, R_xlen_t, int *);
-void formatString(const SEXP *, R_xlen_t, int *, int);
-void formatRawS(SEXP, R_xlen_t, int *);
-void formatStringS(SEXP, R_xlen_t, int*, int);
+void Rf_formatRaw(const Rbyte *, R_xlen_t, int *);
+void Rf_formatString(const SEXP *, R_xlen_t, int *, int);
+void Rf_formatRawS(SEXP, R_xlen_t, int *);
+void Rf_formatStringS(SEXP, R_xlen_t, int*, int);
 
 /* Formating of values */
-const char *EncodeElement0(SEXP, R_xlen_t, int, const char *);
-const char *EncodeEnvironment(SEXP);
+const char *Rf_EncodeElement0(SEXP, R_xlen_t, int, const char *);
+const char *Rf_EncodeEnvironment(SEXP);
 /* Legacy, for R.app */
-const char *EncodeElement(SEXP, int, int, char);
+const char *Rf_EncodeElement(SEXP, int, int, char);
 
 /* In Rinternals.h (and MUST be there):
    CustomPrintValue,  PrintValue, PrintValueRec */
-void printArray(SEXP, SEXP, int, int, SEXP);
-void printMatrix(SEXP, int, SEXP, int, int, SEXP, SEXP,
+void Rf_printArray(SEXP, SEXP, int, int, SEXP);
+void Rf_printMatrix(SEXP, int, SEXP, int, int, SEXP, SEXP,
 		 const char*, const char*);
-void printNamedVector(SEXP, SEXP, int, const char*);
-void printVector(SEXP, int, int);
+void Rf_printNamedVector(SEXP, SEXP, int, const char*);
+void Rf_printVector(SEXP, int, int);
 // void PrintClosure(SEXP, Rboolean);
 // void PrintLanguage(SEXP, Rboolean);
 

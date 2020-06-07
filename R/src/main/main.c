@@ -42,6 +42,7 @@
 
 #include <locale.h>
 #include <R_ext/Print.h>
+#include <R_ext/Error.h>
 
 #ifdef ENABLE_NLS
 HIDDEN void nl_Rdummy(void)

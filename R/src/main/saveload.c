@@ -1808,34 +1808,34 @@ static int R_ReadMagic(FILE *fp)
 	    return R_MAGIC_CORRUPT;
     }
 
-    if (strncmp((char*)buf, "RDA1\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA1\n", 5)) {
 	return R_MAGIC_ASCII_V1;
     }
-    else if (strncmp((char*)buf, "RDB1\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB1\n", 5)) {
 	return R_MAGIC_BINARY_V1;
     }
-    else if (strncmp((char*)buf, "RDX1\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX1\n", 5)) {
 	return R_MAGIC_XDR_V1;
     }
-    if (strncmp((char*)buf, "RDA2\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA2\n", 5)) {
 	return R_MAGIC_ASCII_V2;
     }
-    else if (strncmp((char*)buf, "RDB2\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB2\n", 5)) {
 	return R_MAGIC_BINARY_V2;
     }
-    else if (strncmp((char*)buf, "RDX2\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX2\n", 5)) {
 	return R_MAGIC_XDR_V2;
     }
-    if (strncmp((char*)buf, "RDA3\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA3\n", 5)) {
 	return R_MAGIC_ASCII_V3;
     }
-    else if (strncmp((char*)buf, "RDB3\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB3\n", 5)) {
 	return R_MAGIC_BINARY_V3;
     }
-    else if (strncmp((char*)buf, "RDX3\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX3\n", 5)) {
 	return R_MAGIC_XDR_V3;
     }
-    else if (strncmp((char *)buf, "RD", 2) == 0)
+    else if (streqln((char *)buf, "RD", 2))
 	return R_MAGIC_MAYBE_TOONEW;
 
     /* Intel gcc seems to screw up a single expression here */
@@ -2461,12 +2461,12 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     memset(buf, 0, 6);
     count = con->read(buf, sizeof(char), 5, con);
     if (count == 0) error(_("no input is available"));
-    if (strncmp((char*)buf, "RDA2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDB2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDX2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDA3\n", 5) == 0 ||
-	strncmp((char*)buf, "RDB3\n", 5) == 0 ||
-	strncmp((char*)buf, "RDX3\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA2\n", 5) ||
+	streqln((char*)buf, "RDB2\n", 5) ||
+	streqln((char*)buf, "RDX2\n", 5) ||
+	streqln((char*)buf, "RDA3\n", 5) ||
+	streqln((char*)buf, "RDB3\n", 5) ||
+	streqln((char*)buf, "RDX3\n", 5)) {
 	R_InitConnInPStream(&in, con, R_pstream_any_format, NULL, NULL);
 	if (PRIMVAL(op) == 0) {
 	    int old_InitReadItemDepth = R_InitReadItemDepth,

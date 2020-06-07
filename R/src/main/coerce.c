@@ -2164,7 +2164,7 @@ HIDDEN SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
     return (ans);
 }
 
-static R_INLINE void copyDimAndNames(SEXP x, SEXP ans)
+R_INLINE static void copyDimAndNames(SEXP x, SEXP ans)
 {
     if (isVector(x)) {
 	/* PROTECT/UNPROTECT are probably not needed here */

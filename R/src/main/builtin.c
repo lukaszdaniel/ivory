@@ -393,7 +393,7 @@ static Rboolean R_IsImportsEnv(SEXP env)
 
     const char *imports_prefix = "imports:";
     const char *name_string = CHAR(STRING_ELT(name, 0));
-    if (!strncmp(name_string, imports_prefix, strlen(imports_prefix)))
+    if (streqln(name_string, imports_prefix, strlen(imports_prefix)))
 	return TRUE;
     else
 	return FALSE;

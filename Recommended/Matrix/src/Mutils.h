@@ -151,8 +151,7 @@ extern	 /* stored pointers to symbols initialized in R_init_Matrix */
     if(R_has_slot(src, sym))					\
 	SET_SLOT(dest, sym, duplicate(GET_SLOT(src, sym)))
 
-static R_INLINE
-void SET_DimNames(SEXP dest, SEXP src) {
+R_INLINE static void SET_DimNames(SEXP dest, SEXP src) {
     SEXP dn = GET_SLOT(src, Matrix_DimNamesSym);
     // Be fast (do nothing!) for the case where dimnames = list(NULL,NULL) :
     if (!(isNull(VECTOR_ELT(dn,0)) && isNull(VECTOR_ELT(dn,1))))
@@ -204,8 +203,7 @@ enum dense_enum { ddense, ldense, ndense };
  *
  * @return number of columns
  */
-static R_INLINE
-int packed_ncol(int len)
+R_INLINE static int packed_ncol(int len)
 {
     int disc = 8 * len + 1;	/* discriminant */
     int sqrtd = (int) sqrt((double) disc);
@@ -233,8 +231,7 @@ int packed_ncol(int len)
  *
  * @return SEXP of given type and length assigned as slot nm in obj
  */
-static R_INLINE
-SEXP ALLOC_SLOT(SEXP obj, SEXP nm, SEXPTYPE type, R_xlen_t length)
+R_INLINE static SEXP ALLOC_SLOT(SEXP obj, SEXP nm, SEXPTYPE type, R_xlen_t length)
 {
     SEXP val = allocVector(type, length);
 
@@ -252,8 +249,7 @@ SEXP ALLOC_SLOT(SEXP obj, SEXP nm, SEXPTYPE type, R_xlen_t length)
  *
  * @return mj
  */
-static R_INLINE
-int* expand_cmprPt(int ncol, const int mp[], int mj[])
+R_INLINE static int* expand_cmprPt(int ncol, const int mp[], int mj[])
 {
     int j;
     for (j = 0; j < ncol; j++) {
@@ -270,8 +266,7 @@ int* expand_cmprPt(int ncol, const int mp[], int mj[])
  *
  * @return Rboolean :== any(is.na(slot(obj, "x") )
  */
-static R_INLINE
-Rboolean any_NA_in_x(SEXP obj)
+R_INLINE static Rboolean any_NA_in_x(SEXP obj)
 {
     double *x = REAL(GET_SLOT(obj, Matrix_xSym));
     int i, n = LENGTH(GET_SLOT(obj, Matrix_xSym));
@@ -286,8 +281,7 @@ Rboolean any_NA_in_x(SEXP obj)
 /** Inverse Permutation
  * C version of   .inv.perm.R <- function(p) { p[p] <- seq_along(p) ; p }
  */
-static R_INLINE
-SEXP inv_permutation(SEXP p_, SEXP zero_p, SEXP zero_res)
+R_INLINE static SEXP inv_permutation(SEXP p_, SEXP zero_p, SEXP zero_res)
 {
     int np = 1;
     if(!isInteger(p_)) {p_ = PROTECT(coerceVector(p_, INTSXP)); np++; }
@@ -327,17 +321,14 @@ SEXP R_rbind2_vector(SEXP a, SEXP b);
 SEXP R_all0(SEXP x);
 SEXP R_any0(SEXP x);
 
-static R_INLINE SEXP
-mMatrix_as_dgeMatrix(SEXP A) {
+R_INLINE static SEXP mMatrix_as_dgeMatrix(SEXP A) {
     return strcmp(class_P(A), "dgeMatrix") ? dup_mMatrix_as_dgeMatrix(A) : A;
 }
-static R_INLINE SEXP
-mMatrix_as_dgeMatrix2(SEXP A, Rboolean tr_if_vec) {
+R_INLINE static SEXP mMatrix_as_dgeMatrix2(SEXP A, Rboolean tr_if_vec) {
     return strcmp(class_P(A), "dgeMatrix") ? dup_mMatrix_as_dgeMatrix2(A, tr_if_vec) : A;
 }
 
-static R_INLINE SEXP
-mMatrix_as_geMatrix(SEXP A)
+R_INLINE static SEXP mMatrix_as_geMatrix(SEXP A)
 {
     return strcmp(class_P(A) + 1, "geMatrix") ? dup_mMatrix_as_geMatrix(A) : A;
 }
@@ -425,8 +416,7 @@ mMatrix_as_geMatrix(SEXP A)
  *
  * @return index of match or -1 for no match
  */
-static R_INLINE int
-Matrix_check_class(char *class, const char **valid)
+R_INLINE static int Matrix_check_class(char *class, const char **valid)
 {
     int ans;
     for (ans = 0; ; ans++) {

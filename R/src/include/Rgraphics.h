@@ -118,11 +118,11 @@ typedef enum {
  */
 
 /* Reset the current graphical parameters from the default ones: */
-void GRestore(pGEDevDesc);
+void Rf_GRestore(pGEDevDesc);
 /* Make a temporary copy of the current parameters */
-void GSavePars(pGEDevDesc);
+void Rf_GSavePars(pGEDevDesc);
 /* Restore the temporary copy saved by GSavePars */
-void GRestorePars(pGEDevDesc);
+void Rf_GRestorePars(pGEDevDesc);
 
 
 /*-------------------------------------------------------------------
@@ -134,10 +134,10 @@ void GRestorePars(pGEDevDesc);
  */
 
 /* has plot.new been called yet? */
-void GCheckState(pGEDevDesc);
+void Rf_GCheckState(pGEDevDesc);
 /* Set to 1 when plot.new succeeds
  * Set to 0 when don't want drawing to go ahead */
-void GSetState(int, pGEDevDesc);
+void Rf_GSetState(int, pGEDevDesc);
 
 /*-------------------------------------------------------------------
  *
@@ -155,49 +155,49 @@ void GSetState(int, pGEDevDesc);
 
 
 /* Draw a circle, centred on (x,y) with radius r (in inches). */
-void GCircle(double, double, int, double, int, int, pGEDevDesc);
+void Rf_GCircle(double, double, int, double, int, int, pGEDevDesc);
 /* Set clipping region (based on current setting of dd->gp.xpd).
  * Only clip if new clipping region is different from the current one */
-void GClip(pGEDevDesc);
+void Rf_GClip(pGEDevDesc);
 /* Polygon clipping: */
-int GClipPolygon(double *, double *, int, int, int,
+int Rf_GClipPolygon(double *, double *, int, int, int,
 		 double *, double *, pGEDevDesc);
 /* Always clips */
-void GForceClip(pGEDevDesc);
+void Rf_GForceClip(pGEDevDesc);
 /* Draw a line from (x1,y1) to (x2,y2): */
-void GLine(double, double, double, double, int, pGEDevDesc);
+void Rf_GLine(double, double, double, double, int, pGEDevDesc);
 /* Return the location of the next mouse click: */
-Rboolean GLocator(double*, double*, int, pGEDevDesc);
+Rboolean Rf_GLocator(double*, double*, int, pGEDevDesc);
 /* Return the height, depth, and width of the specified
  * character in the specified units: */
-void GMetricInfo(int, double*, double*, double*, GUnit, pGEDevDesc);
+void Rf_GMetricInfo(int, double*, double*, double*, GUnit, pGEDevDesc);
 /* Set device "mode" (drawing or not drawing) here for windows and mac drivers.
  */
-void GMode(int, pGEDevDesc);
+void Rf_GMode(int, pGEDevDesc);
 /* Draw a path using the specified lists of x and y values: */
-void GPath(double*, double*, int, int*, Rboolean, int, int, pGEDevDesc);
+void Rf_GPath(double*, double*, int, int*, Rboolean, int, int, pGEDevDesc);
 /* Draw a polygon using the specified lists of x and y values: */
-void GPolygon(int, double*, double*, int, int, int, pGEDevDesc);
+void Rf_GPolygon(int, double*, double*, int, int, int, pGEDevDesc);
 /* Draw series of straight lines using the specified lists of x and y values: */
-void GPolyline(int, double*, double*, int, pGEDevDesc);
+void Rf_GPolyline(int, double*, double*, int, pGEDevDesc);
 /* Draw a rectangle given two opposite corners: */
-void GRect(double, double, double, double, int, int, int, pGEDevDesc);
+void Rf_GRect(double, double, double, double, int, int, int, pGEDevDesc);
 /* Draw a raster image given two opposite corners: */
-void GRaster(unsigned int*, int, int,
+void Rf_GRaster(unsigned int*, int, int,
              double, double, double, double,
              double, Rboolean, pGEDevDesc);
 /* Return the height of the specified string in the specified units: */
-double GStrHeight(const char *, cetype_t, GUnit, pGEDevDesc);
+double Rf_GStrHeight(const char *, cetype_t, GUnit, pGEDevDesc);
 /* Return the width of the specified string in the specified units */
-double GStrWidth(const char *, cetype_t, GUnit, pGEDevDesc);
+double Rf_GStrWidth(const char *, cetype_t, GUnit, pGEDevDesc);
 /* Draw the specified text at location (x,y) with the specified
  * rotation and justification: */
-void GText(double, double, int, const char *, cetype_t, double, double, double,
+void Rf_GText(double, double, int, const char *, cetype_t, double, double, double,
 	   pGEDevDesc);
 
 /* From plotmath.c, used in plot.c */
-void GMathText(double, double, int, SEXP, double, double, double, pGEDevDesc);
-void GMMathText(SEXP, int, double, int, double, int, double, pGEDevDesc);
+void Rf_GMathText(double, double, int, SEXP, double, double, double, pGEDevDesc);
+void Rf_GMMathText(SEXP, int, double, int, double, int, double, pGEDevDesc);
 
 
 /*-------------------------------------------------------------------
@@ -211,21 +211,21 @@ void GMMathText(SEXP, int, double, int, double, int, double, pGEDevDesc);
 
 /* Draw a line from (x1,y1) to (x2,y2) with an arrow head
  * at either or both ends. */
-void GArrow(double, double, double, double, int, double, double, int, pGEDevDesc);
+void Rf_GArrow(double, double, double, double, int, double, double, int, pGEDevDesc);
 /* Draw a box around specified region:
  *  1=plot region, 2=figure region, 3=inner region, 4=device. */
-void GBox(int, pGEDevDesc);
+void Rf_GBox(int, pGEDevDesc);
 /* Return a "nice" min, max and number of intervals for a given
  * range on a linear or _log_ scale, respectively: */
-void GPretty(double*, double*, int*); /* used in plot3d.c */
+void Rf_GPretty(double*, double*, int*); /* used in plot3d.c */
 /* Draw text in margins. */
-void GMtext(const char *, cetype_t, int, double, int, double, int, double, pGEDevDesc);
+void Rf_GMtext(const char *, cetype_t, int, double, int, double, int, double, pGEDevDesc);
 /* Draw one of the predefined symbols (circle, square, diamond, ...) */
-void GSymbol(double, double, int, int, pGEDevDesc);
+void Rf_GSymbol(double, double, int, int, pGEDevDesc);
 
 /* From plotmath.c, used in plot.c */
-double GExpressionHeight(SEXP, GUnit, pGEDevDesc);
-double GExpressionWidth(SEXP, GUnit, pGEDevDesc);
+double Rf_GExpressionHeight(SEXP, GUnit, pGEDevDesc);
+double Rf_GExpressionWidth(SEXP, GUnit, pGEDevDesc);
 
 
 
@@ -238,44 +238,44 @@ double GExpressionWidth(SEXP, GUnit, pGEDevDesc);
  */
 
 /* Convert an R unit (e.g., "user") into an internal unit (e.g., USER)> */
-GUnit GMapUnits(int);
+GUnit Rf_GMapUnits(int);
 /* Convert a LOCATION from one coordinate system to another: */
-void GConvert(double*, double*, GUnit, GUnit, pGEDevDesc);
-double GConvertX(double, GUnit, GUnit, pGEDevDesc);
-double GConvertY(double, GUnit, GUnit, pGEDevDesc);
+void Rf_GConvert(double*, double*, GUnit, GUnit, pGEDevDesc);
+double Rf_GConvertX(double, GUnit, GUnit, pGEDevDesc);
+double Rf_GConvertY(double, GUnit, GUnit, pGEDevDesc);
 /* Convert an x/y-dimension from one set of units to another: */
-double GConvertXUnits(double, GUnit, GUnit, pGEDevDesc);
-double GConvertYUnits(double, GUnit, GUnit, pGEDevDesc);
+double Rf_GConvertXUnits(double, GUnit, GUnit, pGEDevDesc);
+double Rf_GConvertYUnits(double, GUnit, GUnit, pGEDevDesc);
 
 /* Set up the different regions on a device (i.e., inner region,
  * figure region, plot region) and transformations for associated
  * coordinate systems (called whenever anything that affects the
  * coordinate transformations changes):
  */
-void GReset(pGEDevDesc);
+void Rf_GReset(pGEDevDesc);
 
 /* Set up the user coordinate transformations: */
-void GMapWin2Fig(pGEDevDesc);
+void Rf_GMapWin2Fig(pGEDevDesc);
 /* Set up the device for a new plot by Resetting graphics parameters
  * and Resetting the regions and coordinate Systems */
-pGEDevDesc GNewPlot(Rboolean);
+pGEDevDesc Rf_GNewPlot(Rboolean);
 /* Set up the user coordinates based on the axis limits */
-void GScale(double, double, int, pGEDevDesc);
+void Rf_GScale(double, double, int, pGEDevDesc);
 /* Set up the axis limits based on the user coordinates */
-void GSetupAxis(int, pGEDevDesc);
+void Rf_GSetupAxis(int, pGEDevDesc);
 /* Return row and column of current figure in the layout matrix */
-void currentFigureLocation(int*, int*, pGEDevDesc);
+void Rf_currentFigureLocation(int*, int*, pGEDevDesc);
 
 /* which of these conversions should be public? maybe all? [NO_REMAP] */
-double xDevtoNDC(double, pGEDevDesc);
-double yDevtoNDC(double, pGEDevDesc);
-double xDevtoNFC(double, pGEDevDesc);
-double yDevtoNFC(double, pGEDevDesc);
-double xDevtoNPC(double, pGEDevDesc);
-double yDevtoNPC(double, pGEDevDesc);
-double xDevtoUsr(double, pGEDevDesc);
-double yDevtoUsr(double, pGEDevDesc);
-double xNPCtoUsr(double, pGEDevDesc);
-double yNPCtoUsr(double, pGEDevDesc);
+double Rf_xDevtoNDC(double, pGEDevDesc);
+double Rf_yDevtoNDC(double, pGEDevDesc);
+double Rf_xDevtoNFC(double, pGEDevDesc);
+double Rf_yDevtoNFC(double, pGEDevDesc);
+double Rf_xDevtoNPC(double, pGEDevDesc);
+double Rf_yDevtoNPC(double, pGEDevDesc);
+double Rf_xDevtoUsr(double, pGEDevDesc);
+double Rf_yDevtoUsr(double, pGEDevDesc);
+double Rf_xNPCtoUsr(double, pGEDevDesc);
+double Rf_yNPCtoUsr(double, pGEDevDesc);
 
 #endif /* RGRAPHICS_H_ */

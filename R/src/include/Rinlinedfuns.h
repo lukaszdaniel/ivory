@@ -31,6 +31,7 @@
 #define R_INLINES_H_
 
 #include <Localization.h>
+#include <R_ext/Error.h>
 /* Probably not able to use C99 semantics in gcc < 4.3.0 */
 #if __GNUC__ == 4 && __GNUC_MINOR__ >= 3 && defined(__GNUC_STDC_INLINE__) && !defined(C99_INLINE_SEMANTICS)
 #define C99_INLINE_SEMANTICS 1

@@ -28,12 +28,11 @@
 #include <Rmath.h>
 #include "localization.h"
 #include <R_ext/Minmax.h>
-
+#include <R_ext/Error.h>
 
 static double poly(const double *, int, double);
 
-static void
-swilk(double *x, int n, double *w, double *pw, int *ifault)
+static void swilk(double *x, int n, double *w, double *pw, int *ifault)
 {
     int nn2 = n / 2;
     double a[nn2 + 1]; /* 1-based */

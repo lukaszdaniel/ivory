@@ -363,8 +363,7 @@ Rboolean R_has_methods_attached(void) {
 	!R_BindingIsLocked(install(".BasicFunsList"), R_MethodsNamespace));
 }
 
-static R_INLINE
-SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
+R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 
     SEXP res = CONS(value, vars);
     SET_TAG(res, name);
@@ -500,7 +499,7 @@ int usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 */
 
 /* This is a primitive SPECIALSXP */
-HIDDEN SEXP NORET do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, generic = R_NilValue /* -Wall */, obj, val;
     SEXP callenv, defenv;
@@ -643,7 +642,7 @@ Rboolean equalS3Signature(const char *signature, const char *left,
 }
 
 
-static R_INLINE SEXP getPrimitive(SEXP symbol)
+R_INLINE static SEXP getPrimitive(SEXP symbol)
 {
     SEXP value = SYMVALUE(symbol);
     if (TYPEOF(value) == PROMSXP) {

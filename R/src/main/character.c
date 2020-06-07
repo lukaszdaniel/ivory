@@ -248,9 +248,9 @@ HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
     size_t ntype = strlen(type);
     if (ntype == 0) error(_("invalid '%s' argument"), "type");
     nchar_type type_;
-    if (strncmp(type, "bytes", ntype) == 0)	 type_ = Bytes;
-    else if (strncmp(type, "chars", ntype) == 0) type_ = Chars;
-    else if (strncmp(type, "width", ntype) == 0) type_ = Width;
+    if (streqln(type, "bytes", ntype))	 type_ = Bytes;
+    else if (streqln(type, "chars", ntype)) type_ = Chars;
+    else if (streqln(type, "width", ntype)) type_ = Width;
     else error(_("invalid '%s' argument"), "type");
     int allowNA = asLogical(CADDR(args));
     if (allowNA == NA_LOGICAL) allowNA = 0;
@@ -422,7 +422,7 @@ do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else {
 		    cp x0 = need_translate ? translateCharUTF8(el) : CHAR(el);
 		    if(PRIMVAL(op) == 0) { // startsWith
-			LOGICAL(ans)[i] = strncmp(x0, y0, ylen) == 0;
+			LOGICAL(ans)[i] = streqln(x0, y0, ylen);
 		    } else { // endsWith
 			int off = (int)strlen(x0) - ylen;
 			if (off < 0)
@@ -1239,12 +1239,12 @@ tr_get_next_char_from_spec(struct tr_spec **p) {
 
 typedef struct { wchar_t c_old, c_new; } xtable_t;
 
-static R_INLINE int xtable_comp(const void *a, const void *b)
+R_INLINE static int xtable_comp(const void *a, const void *b)
 {
     return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
 }
 
-static R_INLINE int xtable_key_comp(const void *a, const void *b)
+R_INLINE static int xtable_key_comp(const void *a, const void *b)
 {
     return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
 }

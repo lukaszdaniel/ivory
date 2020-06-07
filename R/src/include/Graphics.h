@@ -271,25 +271,25 @@ Rboolean GRecording(SEXP, pGEDevDesc);
 
 /* Default the settings for general graphical parameters
  * (i.e., defaults that do not depend on the device type: */
-void GInit(GPar*);
+void Rf_GInit(GPar*);
 
-void copyGPar(GPar *, GPar *);
+void Rf_copyGPar(GPar *, GPar *);
 
  /* from graphics.c, used in par.c */
 double R_Log10(double);
 
 /* from par.c, called in plot.c, plot3d.c */
-void ProcessInlinePars(SEXP, pGEDevDesc);
+void Rf_ProcessInlinePars(SEXP, pGEDevDesc);
 
 /* from device.c */
-void recordGraphicOperation(SEXP, SEXP, pGEDevDesc);
+void Rf_recordGraphicOperation(SEXP, SEXP, pGEDevDesc);
 
 /* some functions that plot.c needs to share with plot3d.c */
-SEXP FixupCol(SEXP, unsigned int);
-SEXP FixupLty(SEXP, int);
-SEXP FixupLwd(SEXP, double);
-SEXP FixupVFont(SEXP);
-SEXP labelformat(SEXP);
+SEXP Rf_FixupCol(SEXP, unsigned int);
+SEXP Rf_FixupLty(SEXP, int);
+SEXP Rf_FixupLwd(SEXP, double);
+SEXP Rf_FixupVFont(SEXP);
+SEXP Rf_labelformat(SEXP);
 
 /*
  * Function to generate an R_GE_gcontext from Rf_gpptr info

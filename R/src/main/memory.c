@@ -171,7 +171,7 @@ inline int OLDTYPE(SEXP x) { return LEVELS(x); }
 //#define SETOLDTYPE(s, t) SETLEVELS(s, t)
 inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 
-static R_INLINE SEXP CHK(SEXP x)
+R_INLINE static SEXP CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
     if (x != NULL && TYPEOF(x) == FREESXP)
@@ -192,7 +192,7 @@ static SEXPTYPE bad_sexp_type_old_type = 0;
 #endif
 static int bad_sexp_type_line = 0;
 
-static R_INLINE void register_bad_sexp_type(SEXP s, int line)
+R_INLINE static void register_bad_sexp_type(SEXP s, int line)
 {
     if (bad_sexp_type_seen == 0) {
 	bad_sexp_type_seen = TYPEOF(s);
@@ -1057,7 +1057,7 @@ static void TryToReleasePages(void)
 }
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
-static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
+R_INLINE static R_size_t getVecSizeInVEC(SEXP s)
 {
     if (IS_GROWABLE(s))
 	SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
@@ -2109,18 +2109,18 @@ HIDDEN SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-static void NORET mem_err_heap(R_size_t size)
+NORET static void mem_err_heap(R_size_t size)
 {
     errorcall(R_NilValue, _("vector memory exhausted (limit reached?)"));
 }
 
 
-static void NORET mem_err_cons(void)
+NORET static void mem_err_cons(void)
 {
     errorcall(R_NilValue, _("cons memory exhausted (limit reached?)"));
 }
 
-static void NORET mem_err_malloc(R_size_t size)
+NORET static void mem_err_malloc(R_size_t size)
 {
     errorcall(R_NilValue, _("memory exhausted (limit reached?)"));
 }
@@ -3277,7 +3277,7 @@ static void reset_pp_stack(void *data)
     R_PPStackSize =  *poldpps;
 }
 
-void NORET R_signal_protect_error(void)
+NORET void R_signal_protect_error(void)
 {
     RCNTXT cntxt;
     int oldpps = R_PPStackSize;
@@ -3294,7 +3294,7 @@ void NORET R_signal_protect_error(void)
     endcontext(&cntxt); /* not reached */
 }
 
-void NORET R_signal_unprotect_error(void)
+NORET void R_signal_unprotect_error(void)
 {
     error(n_("unprotect(): only %d protected item",
 		   "unprotect(): only %d protected items", R_PPStackTop),
@@ -3371,7 +3371,7 @@ void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
 }
 #endif
 
-void NORET R_signal_reprotect_error(PROTECT_INDEX i)
+NORET void R_signal_reprotect_error(PROTECT_INDEX i)
 {
     error(n_("R_Reprotect: only %d protected item, can't reprotect index %d",
 		   "R_Reprotect: only %d protected items, can't reprotect index %d",
@@ -3829,7 +3829,7 @@ static int nvec[32] = {
     0,1,1,1,1,1,1,1
 };
 
-static R_INLINE SEXP CHK2(SEXP x)
+R_INLINE static SEXP CHK2(SEXP x)
 {
     x = CHK(x);
     if(nvec[TYPEOF(x)])
@@ -4015,7 +4015,7 @@ const SEXP *(STRING_PTR_RO)(SEXP x) {
     return STRING_PTR_RO(x);
 }
 
-SEXP * NORET (VECTOR_PTR)(SEXP x)
+NORET SEXP * (VECTOR_PTR)(SEXP x)
 {
   error(_("not safe to return vector pointer"));
 }
@@ -4056,7 +4056,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 
 /* check for a CONS-like object */
 #ifdef TESTING_WRITE_BARRIER
-static R_INLINE SEXP CHKCONS(SEXP e)
+R_INLINE static SEXP CHKCONS(SEXP e)
 {
     if (ALTREP(e))
 	return CHK(e);
@@ -4447,7 +4447,7 @@ int  (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 
 #ifndef R_MEMORY_PROFILING
 
-SEXP NORET do_Rprofmem(SEXP args)
+NORET SEXP do_Rprofmem(SEXP args)
 {
     error(_("memory profiling is not available on this system"));
 }
@@ -4615,7 +4615,7 @@ int Seql(SEXP a, SEXP b)
 
 
 #ifdef LONG_VECTOR_SUPPORT
-R_len_t NORET R_BadLongVector(SEXP x, const char *file, int line)
+NORET R_len_t R_BadLongVector(SEXP x, const char *file, int line)
 {
     error(_("long vectors not supported yet: %s:%d"), file, line);
 }

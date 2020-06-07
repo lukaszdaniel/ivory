@@ -327,7 +327,7 @@ R_xlen_t /*HIDDEN*/ ALTREP_TRUELENGTH(SEXP x) { return 0; }
  * Generic ALTVEC support
  */
 
-static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writeable)
+R_INLINE static void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writeable)
 {
     /**** move GC disabling into methods? */
     if (R_in_gc)
@@ -927,7 +927,7 @@ static altstring_methods_t altstring_default_methods = {
 	INIT_CLASS(var, type);					\
     } while (FALSE)
 
-static R_INLINE R_altrep_class_t R_cast_altrep_class(SEXP x)
+R_INLINE static R_altrep_class_t R_cast_altrep_class(SEXP x)
 {
     /**** some king of optional check? */
     R_altrep_class_t val = R_SUBTYPE_INIT(x);

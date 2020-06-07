@@ -33,7 +33,7 @@
 
 #include "graphics.h"
 
-static R_INLINE void TypeCheck(SEXP s, SEXPTYPE type)
+R_INLINE static void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)
 	error(_("invalid type passed to graphics function"));

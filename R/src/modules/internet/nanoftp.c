@@ -103,8 +103,7 @@ extern int snprintf (char *s, size_t n, const char *format, ...);
 #include <R_ext/eventloop.h>
 
 /* modified from src/unix/sys-std.c  */
-static int
-setSelectMask(InputHandler *handlers, fd_set *readMask)
+static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 {
     int maxfd = -1;
     InputHandler *tmp = handlers;
@@ -178,8 +177,7 @@ static void RxmlNanoFTPFreeCtxt(void * ctx);
  * and get the hostname
  */
 
-static void
-RxmlNanoFTPInit(void) {
+static void RxmlNanoFTPInit(void) {
     const char *env;
 #ifdef _WINSOCKAPI_
     WSADATA wsaData;
@@ -223,8 +221,7 @@ RxmlNanoFTPInit(void) {
  * Cleanup the FTP protocol layer. This cleanup proxy informations.
  */
 
-void
-RxmlNanoFTPCleanup(void) {
+void RxmlNanoFTPCleanup(void) {
     if (proxy != NULL) {
 	xmlFree(proxy);
 	proxy = NULL;
@@ -254,8 +251,7 @@ RxmlNanoFTPCleanup(void) {
  * the protocol host port and path it indicates.
  */
 
-static void
-RxmlNanoFTPScanURL(void *ctx, const char *URL) {
+static void RxmlNanoFTPScanURL(void *ctx, const char *URL) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     const char *cur = URL;
     char buf[XML_NANO_MAX_URLBUF];
@@ -363,8 +359,7 @@ RxmlNanoFTPScanURL(void *ctx, const char *URL) {
  * A NULL URL cleans up proxy informations.
  */
 
-static void
-RxmlNanoFTPScanProxy(const char *URL) {
+static void RxmlNanoFTPScanProxy(const char *URL) {
     const char *cur = URL;
     char buf[XML_NANO_MAX_URLBUF];
     int indx = 0;
@@ -430,8 +425,7 @@ RxmlNanoFTPScanProxy(const char *URL) {
  * Returns an FTP context or NULL in case of error.
  */
 
-static void*
-RxmlNanoFTPNewCtxt(const char *URL) {
+static void* RxmlNanoFTPNewCtxt(const char *URL) {
     RxmlNanoFTPCtxtPtr ret;
 
     ret = (RxmlNanoFTPCtxtPtr) xmlMalloc(sizeof(RxmlNanoFTPCtxt));
@@ -462,8 +456,7 @@ RxmlNanoFTPNewCtxt(const char *URL) {
  * Frees the context after closing the connection.
  */
 
-static void
-RxmlNanoFTPFreeCtxt(void * ctx) {
+static void RxmlNanoFTPFreeCtxt(void * ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     if (ctxt == NULL) return;
     if (ctxt->hostname != NULL) xmlFree(ctxt->hostname);
@@ -488,8 +481,7 @@ RxmlNanoFTPFreeCtxt(void * ctx) {
  *     +XXX for last line of response
  *     -XXX for response to be continued
  */
-static int
-RxmlNanoFTPParseResponse(char *buf, int len) {
+static int RxmlNanoFTPParseResponse(char *buf, int len) {
     int val = 0;
 
     if (len < 3) return(-1);
@@ -520,8 +512,7 @@ RxmlNanoFTPParseResponse(char *buf, int len) {
  * Read more information from the FTP control connection
  * Returns the number of bytes read, < 0 indicates an error
  */
-static int
-RxmlNanoFTPGetMore(void *ctx) {
+static int RxmlNanoFTPGetMore(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     int len;
     int size;
@@ -602,8 +593,7 @@ static void RxmlFindLength(void *ctxt, char *ptr)
  * Read the response from the FTP server after a command.
  * Returns the code number
  */
-static int
-RxmlNanoFTPReadResponse(void *ctx) {
+static int RxmlNanoFTPReadResponse(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char *ptr, *end;
     int len;
@@ -668,13 +658,13 @@ get_more:
  * Returns the code number
  */
 
-static int
-RxmlNanoFTPGetResponse(void *ctx) {
-    int res;
+static int RxmlNanoFTPGetResponse(void *ctx)
+{
+	int res;
 
-    res = RxmlNanoFTPReadResponse(ctx);
+	res = RxmlNanoFTPReadResponse(ctx);
 
-    return(res);
+	return (res);
 }
 
 /**
@@ -685,8 +675,7 @@ RxmlNanoFTPGetResponse(void *ctx) {
  * Returns the code number, or 0
  */
 
-static int
-RxmlNanoFTPCheckResponse(void *ctx) {
+static int RxmlNanoFTPCheckResponse(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     fd_set rfd;
     struct timeval tv;
@@ -715,8 +704,7 @@ RxmlNanoFTPCheckResponse(void *ctx) {
  * Send the user authentication
  */
 
-static int
-RxmlNanoFTPSendUser(void *ctx) {
+static int RxmlNanoFTPSendUser(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[200];
     int len;
@@ -741,8 +729,7 @@ RxmlNanoFTPSendUser(void *ctx) {
  * Send the password authentication
  */
 
-static int
-RxmlNanoFTPSendPasswd(void *ctx) {
+static int RxmlNanoFTPSendPasswd(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[200];
     int len;
@@ -773,8 +760,7 @@ RxmlNanoFTPSendPasswd(void *ctx) {
  */
 
 
-static int
-RxmlNanoFTPQuit(void *ctx) {
+static int RxmlNanoFTPQuit(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[200];
     int len;
@@ -797,8 +783,7 @@ RxmlNanoFTPQuit(void *ctx) {
  * Returns -1 in case of error, 0 otherwise
  */
 
-static int
-RxmlNanoFTPConnect(void *ctx) {
+static int RxmlNanoFTPConnect(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     struct hostent *hp;
     int port;
@@ -1112,8 +1097,7 @@ RxmlNanoFTPConnect(void *ctx) {
  * Returns -1 in case of error, 0 otherwise
  */
 
-static int
-RxmlNanoFTPGetConnection(void *ctx) {
+static int RxmlNanoFTPGetConnection(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[200], *cur;
     int len, i;
@@ -1231,8 +1215,7 @@ RxmlNanoFTPGetConnection(void *ctx) {
  */
 
 
-static int
-RxmlNanoFTPGetSocket(void *ctx, const char *filename) {
+static int RxmlNanoFTPGetSocket(void *ctx, const char *filename) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[300];
     int res, len;
@@ -1296,8 +1279,7 @@ RxmlNanoFTPGetSocket(void *ctx, const char *filename) {
  *         -1 indicates a parameter error.
  */
 
-int
-RxmlNanoFTPRead(void *ctx, void *dest, int len)
+int RxmlNanoFTPRead(void *ctx, void *dest, int len)
 {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     int got = 0, res;
@@ -1388,8 +1370,7 @@ RxmlNanoFTPRead(void *ctx, void *dest, int len)
  * Returns an FTP context, or NULL
  */
 
-void*
-RxmlNanoFTPOpen(const char *URL) {
+void* RxmlNanoFTPOpen(const char *URL) {
     RxmlNanoFTPCtxtPtr ctxt;
     int sock;
 
@@ -1420,8 +1401,7 @@ RxmlNanoFTPOpen(const char *URL) {
  * Returns -1 incase of error, 0 otherwise
  */
 
-int
-RxmlNanoFTPClose(void *ctx) {
+int RxmlNanoFTPClose(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
 
     if (ctxt == NULL)
@@ -1448,13 +1428,11 @@ RxmlNanoFTPClose(void *ctx) {
  * return, while -1 infinite.
  */
 
-void
-RxmlNanoFTPTimeout(int delay) {
+void RxmlNanoFTPTimeout(int delay) {
     timeout = (unsigned int) delay;
 }
 
-DLsize_t
-RxmlNanoFTPContentLength(void *ctx)
+DLsize_t RxmlNanoFTPContentLength(void *ctx)
 {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
 

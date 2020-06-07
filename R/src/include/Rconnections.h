@@ -90,7 +90,7 @@ void con_pushback(Rconnection con, Rboolean newLine, char *line);
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout);
 
 #define set_iconv Rf_set_iconv
-void set_iconv(Rconnection con);
+void Rf_set_iconv(Rconnection con);
 
 #endif /* R_CONNECTIONS_H_ */
 

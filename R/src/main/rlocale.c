@@ -35,6 +35,7 @@
 #include <config.h>
 #endif
 
+#include <Defn.h>
 #include <R_ext/Visibility.h>
 
 #include <string.h>
@@ -163,7 +164,7 @@ int Ri18n_wcwidth(R_wchar_t c)
 	    lc_str[i] = (char) toupper(lc_str[i]);
 	for (i = 0; i < (sizeof(cjk_locale_name)/sizeof(cjk_locale_name_t));
 	     i++) {
-	    if (0 == strncmp(cjk_locale_name[i].name, lc_str,
+	    if (streqln(cjk_locale_name[i].name, lc_str,
 			     strlen(cjk_locale_name[i].name))) {
 		lc = cjk_locale_name[i].locale;
 		break;

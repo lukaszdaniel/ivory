@@ -335,7 +335,7 @@ static SEXP lcall;
 #define R_INT_MIN -INT_MAX
 // .. relying on fact that NA_INTEGER is outside of these
 
-static R_INLINE int R_integer_plus(int x, int y, Rboolean *pnaflag)
+R_INLINE static int R_integer_plus(int x, int y, Rboolean *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -349,7 +349,7 @@ static R_INLINE int R_integer_plus(int x, int y, Rboolean *pnaflag)
     return x + y;
 }
 
-static R_INLINE int R_integer_minus(int x, int y, Rboolean *pnaflag)
+R_INLINE static int R_integer_minus(int x, int y, Rboolean *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -364,7 +364,7 @@ static R_INLINE int R_integer_minus(int x, int y, Rboolean *pnaflag)
 }
 
 #define GOODIPROD(x, y, z) ((double) (x) * (double) (y) == (z))
-static R_INLINE int R_integer_times(int x, int y, Rboolean *pnaflag)
+R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -380,7 +380,7 @@ static R_INLINE int R_integer_times(int x, int y, Rboolean *pnaflag)
     }
 }
 
-static R_INLINE double R_integer_divide(int x, int y)
+R_INLINE static double R_integer_divide(int x, int y)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_REAL;
@@ -388,7 +388,7 @@ static R_INLINE double R_integer_divide(int x, int y)
 	return (double) x / (double) y;
 }
 
-static R_INLINE SEXP ScalarValue1(SEXP x)
+R_INLINE static SEXP ScalarValue1(SEXP x)
 {
 	if (NO_REFERENCES(x))
 		return x;
@@ -396,7 +396,7 @@ static R_INLINE SEXP ScalarValue1(SEXP x)
 		return allocVector(TYPEOF(x), 1);
 }
 
-static R_INLINE SEXP ScalarValue2(SEXP x, SEXP y)
+R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
 {
 	if (NO_REFERENCES(x))
 		return x;

@@ -4250,7 +4250,7 @@ static void yyerror(const char *s)
     R_ParseErrorCol  = yylloc.first_column;
     R_ParseErrorFile = PS_SRCFILE;
 
-    if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
+    if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i;
 	/* Edit the error message */
 	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);

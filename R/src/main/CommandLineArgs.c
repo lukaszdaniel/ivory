@@ -170,7 +170,7 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 	    else if (!strcmp(*av, "--debug-init")) {
 		Rp->DebugInitFile = TRUE;
 	    }
-	    else if (!strncmp(*av, "--encoding", 10)) {
+	    else if (streqln(*av, "--encoding", 10)) {
 		if(strlen(*av) < 12) {
 		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
 		} else p = &(*av)[11];
@@ -188,26 +188,26 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 		R_LoadRconsole = 0;
 	    }
 #endif
-	    else if (!strcmp(*av, "-save") ||
-		     !strcmp(*av, "-nosave") ||
-		     !strcmp(*av, "-restore") ||
-		     !strcmp(*av, "-norestore") ||
-		     !strcmp(*av, "-noreadline") ||
-		     !strcmp(*av, "-quiet") ||
-		     !strcmp(*av, "-nsize") ||
-		     !strcmp(*av, "-vsize") ||
-		     !strncmp(*av, "--max-nsize", 11) ||
-		     !strncmp(*av, "--max-vsize", 11) ||
-		     !strcmp(*av, "-V") ||
-		     !strcmp(*av, "-n") ||
-		     !strcmp(*av, "-v")) {
+	    else if (streql(*av, "-save") ||
+		     streql(*av, "-nosave") ||
+		     streql(*av, "-restore") ||
+		     streql(*av, "-norestore") ||
+		     streql(*av, "-noreadline") ||
+		     streql(*av, "-quiet") ||
+		     streql(*av, "-nsize") ||
+		     streql(*av, "-vsize") ||
+		     streqln(*av, "--max-nsize", 11) ||
+		     streqln(*av, "--max-vsize", 11) ||
+		     streql(*av, "-V") ||
+		     streql(*av, "-n") ||
+		     streql(*av, "-v")) {
 		snprintf(msg, 1024,
 			 _("WARNING: option '%s' is no longer supported"), *av);
 		R_ShowMessage(msg);
 	    }
 	    /* mop up --min-[nv]size */
-	    else if( !strncmp(*av, "--min-nsize", 11) ||
-		     !strncmp(*av, "--min-vsize", 11) ) {
+	    else if( streqln(*av, "--min-nsize", 11) ||
+		     streqln(*av, "--min-vsize", 11) ) {
 		if(strlen(*av) < 13) {
 		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
 		} else p = &(*av)[12];
@@ -232,11 +232,11 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 		    R_ShowMessage(msg);
 
 		} else {
-		    if(!strncmp(*av, "--min-nsize", 11)) Rp->nsize = value;
-		    if(!strncmp(*av, "--min-vsize", 11)) Rp->vsize = value;
+		    if(streqln(*av, "--min-nsize", 11)) Rp->nsize = value;
+		    if(streqln(*av, "--min-vsize", 11)) Rp->vsize = value;
 		}
 	    }
-	    else if(strncmp(*av, "--max-ppsize", 12) == 0) {
+	    else if(streqln(*av, "--max-ppsize", 12)) {
 		if(strlen(*av) < 14) {
 		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
 		} else p = &(*av)[13];

@@ -44,7 +44,7 @@ extern "C" {
 #include <R_ext/Arith.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Complex.h>
-#include <R_ext/Error.h>  // includes NORET macro
+#include <R_ext/Visibility.h>  // includes NORET macro
 #include <R_ext/Memory.h>
 #include <R_ext/Utils.h>
 #include <R_ext/Print.h>
@@ -279,15 +279,13 @@ struct promsxp_struct {
 # define REFCNTMAX ((1 << NAMED_BITS) - 1)
 #endif
 
-#define SEXPREC_HEADER \
-    struct sxpinfo_struct sxpinfo; \
-    struct SEXPREC *attrib; \
-    struct SEXPREC *gengc_next_node, *gengc_prev_node
-
 /* The standard node structure consists of a header followed by the
    node data. */
 typedef struct SEXPREC {
-    SEXPREC_HEADER;
+    struct sxpinfo_struct sxpinfo;
+    struct SEXPREC *attrib;
+    struct SEXPREC *gengc_next_node;
+    struct SEXPREC *gengc_prev_node;
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -304,9 +302,13 @@ typedef struct SEXPREC {
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
 typedef struct VECTOR_SEXPREC {
-    SEXPREC_HEADER;
+    struct sxpinfo_struct sxpinfo;
+    struct SEXPREC *attrib;
+    struct SEXPREC *gengc_next_node;
+    struct SEXPREC *gengc_prev_node;
     struct vecsxp_struct vecsxp;
-} VECTOR_SEXPREC, *VECSEXP;
+} VECTOR_SEXPREC;
+typedef struct VECTOR_SEXPREC *VECSEXP;
 
 typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 
@@ -441,22 +443,22 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #endif
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
-#define S4_OBJECT_MASK ((unsigned short)(1<<4))
+#define S4_OBJECT_MASK ((unsigned short)(1 << 4))
 #define IS_S4_OBJECT(x) ((x)->sxpinfo.gp & S4_OBJECT_MASK)
 #define SET_S4_OBJECT(x) (((x)->sxpinfo.gp) |= S4_OBJECT_MASK)
 #define UNSET_S4_OBJECT(x) (((x)->sxpinfo.gp) &= ~S4_OBJECT_MASK)
 
 /* JIT optimization support */
-#define NOJIT_MASK ((unsigned short)(1<<5))
+#define NOJIT_MASK ((unsigned short)(1 << 5))
 #define NOJIT(x) ((x)->sxpinfo.gp & NOJIT_MASK)
 #define SET_NOJIT(x) (((x)->sxpinfo.gp) |= NOJIT_MASK)
-#define MAYBEJIT_MASK ((unsigned short)(1<<6))
+#define MAYBEJIT_MASK ((unsigned short)(1 << 6))
 #define MAYBEJIT(x) ((x)->sxpinfo.gp & MAYBEJIT_MASK)
 #define SET_MAYBEJIT(x) (((x)->sxpinfo.gp) |= MAYBEJIT_MASK)
 #define UNSET_MAYBEJIT(x) (((x)->sxpinfo.gp) &= ~MAYBEJIT_MASK)
 
 /* Growable vector support */
-#define GROWABLE_MASK ((unsigned short)(1<<5))
+#define GROWABLE_MASK ((unsigned short)(1 << 5))
 #define GROWABLE_BIT_SET(x) ((x)->sxpinfo.gp & GROWABLE_MASK)
 #define SET_GROWABLE_BIT(x) (((x)->sxpinfo.gp) |= GROWABLE_MASK)
 #define IS_GROWABLE(x) (GROWABLE_BIT_SET(x) && XLENGTH(x) < XTRUELENGTH(x))
@@ -793,7 +795,7 @@ void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP *(STRING_PTR)(SEXP x);
 const SEXP *(STRING_PTR_RO)(SEXP x);
-SEXP * NORET (VECTOR_PTR)(SEXP x);
+NORET SEXP * (VECTOR_PTR)(SEXP x);
 
 /* ALTREP support */
 void *(STDVEC_DATAPTR)(SEXP x);
@@ -863,7 +865,7 @@ SEXP R_tryWrap(SEXP);
 SEXP R_tryUnwrap(SEXP);
 
 #ifdef LONG_VECTOR_SUPPORT
-    R_len_t NORET R_BadLongVector(SEXP, const char *, int);
+    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
 #endif
 
 /* checking for mis-use of multi-threading */
@@ -1215,9 +1217,9 @@ void Rf_unprotect(int);
 #endif
 void Rf_unprotect_ptr(SEXP);
 
-void NORET R_signal_protect_error(void);
-void NORET R_signal_unprotect_error(void);
-void NORET R_signal_reprotect_error(PROTECT_INDEX i);
+NORET void R_signal_protect_error(void);
+NORET void R_signal_unprotect_error(void);
+NORET void R_signal_reprotect_error(PROTECT_INDEX i);
 
 #ifndef INLINE_PROTECT
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
@@ -1319,7 +1321,7 @@ SEXP R_tryCatchError(SEXP (*)(void *), void *,        /* body closure*/
 SEXP R_withCallingErrorHandler(SEXP (*)(void *), void *, /* body closure*/
 			       SEXP (*)(SEXP, void *), void *); /* handler closure */
 SEXP R_MakeUnwindCont();
-void NORET R_ContinueUnwind(SEXP cont);
+NORET void R_ContinueUnwind(SEXP cont);
 SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
                      void (*cleanfun)(void *data, Rboolean jump),
                      void *cleandata, SEXP cont);
@@ -1831,7 +1833,7 @@ void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 
 /* macro version of R_CheckStack */
 #define R_CheckStack() do {						\
-	void NORET R_SignalCStackOverflow(intptr_t);				\
+	NORET void R_SignalCStackOverflow(intptr_t);				\
 	int dummy;							\
 	intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy); \
 	if(R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \

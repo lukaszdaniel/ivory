@@ -255,7 +255,7 @@ Rboolean R_cycle_detected(SEXP s, SEXP child) {
     return FALSE;
 }
 
-static R_INLINE SEXP duplicate_list(SEXP s, Rboolean deep)
+R_INLINE static SEXP duplicate_list(SEXP s, Rboolean deep)
 {
     SEXP sp, vp, val;
     PROTECT(s);
@@ -436,7 +436,7 @@ void copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
     }
 }
 
-static R_INLINE SEXP VECTOR_ELT_LD(SEXP x, R_xlen_t i)
+R_INLINE static SEXP VECTOR_ELT_LD(SEXP x, R_xlen_t i)
 {
     return lazy_duplicate(VECTOR_ELT(x, i));
 }

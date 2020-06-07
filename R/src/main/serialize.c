@@ -891,8 +891,7 @@ static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table)
 
 
 
-static R_INLINE void
-OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
+R_INLINE static void OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:
@@ -928,8 +927,7 @@ OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
     }
 }
 
-static R_INLINE void
-OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
+R_INLINE static void OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:
@@ -964,8 +962,7 @@ OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
     }
 }
 
-static R_INLINE void
-OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
+R_INLINE static void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:
@@ -1471,8 +1468,7 @@ static SEXP InStringVec(R_inpstream_t stream, SEXP ref_table)
 }
 
 /* use static buffer to reuse storage */
-static R_INLINE void
-InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
+R_INLINE static void InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:
@@ -1507,8 +1503,7 @@ InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     }
 }
 
-static R_INLINE void
-InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
+R_INLINE static void InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:
@@ -1543,8 +1538,7 @@ InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     }
 }
 
-static R_INLINE void
-InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
+R_INLINE static void InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
 {
     switch (stream->type) {
     case R_pstream_xdr_format:

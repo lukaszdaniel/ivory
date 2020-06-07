@@ -47,7 +47,7 @@ GPar* dpptr(pGEDevDesc dd) {
     return &(bss->dp);
 }
 
-static SEXP R_INLINE getSymbolValue(SEXP symbol)
+R_INLINE static SEXP getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)
 	error(_("argument passed to '%s' function is not a symbol"), "getSymbolValue()");

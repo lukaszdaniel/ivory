@@ -81,7 +81,7 @@ typedef struct {
 /* If mode = 0 use for numeric fields where "" is NA
    If mode = 1 use for character fields where "" is verbatim unless
    na.strings includes "" */
-static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
+R_INLINE static int isNAstring(const char *buf, int mode, LocalData *d)
 {
     int i;
 
@@ -92,7 +92,7 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
 }
 
 
-static R_INLINE Rboolean Rspace(unsigned int c)
+R_INLINE static Rboolean Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
 #ifdef _WIN32
@@ -198,7 +198,7 @@ strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
 }
 
 
-static R_INLINE int scanchar_raw(LocalData *d)
+R_INLINE static int scanchar_raw(LocalData *d)
 {
     int c = (d->ttyflag) ? ConsoleGetcharWithPushBack(d->con) :
 	Rconn_fgetc(d->con);
@@ -213,7 +213,7 @@ static R_INLINE int scanchar_raw(LocalData *d)
     return c;
 }
 
-static R_INLINE void unscanchar(int c, LocalData *d)
+R_INLINE static void unscanchar(int c, LocalData *d)
 {
     d->save = c;
 }
@@ -221,7 +221,7 @@ static R_INLINE void unscanchar(int c, LocalData *d)
 /* For second bytes in a DBCS:
    should not be called when a char is saved, but be cautious
 */
-static R_INLINE int scanchar2(LocalData *d)
+R_INLINE static int scanchar2(LocalData *d)
 {
     int next;
     if (d->save) {

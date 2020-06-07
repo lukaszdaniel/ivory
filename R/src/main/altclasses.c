@@ -146,7 +146,7 @@ Rboolean compact_intseq_Inspect(SEXP x, int pre, int deep, int pvec,
     return TRUE;
 }
 
-static R_INLINE R_xlen_t compact_intseq_Length(SEXP x)
+R_INLINE static R_xlen_t compact_intseq_Length(SEXP x)
 {
     SEXP info = COMPACT_SEQ_INFO(x);
     return COMPACT_INTSEQ_INFO_LENGTH(info);
@@ -206,8 +206,7 @@ static int compact_intseq_Elt(SEXP x, R_xlen_t i)
     if (DATAPTR_OR_NULL(x) != NULL)				\
 	error(_("method should only handle unexpanded vectors"))
 
-static R_xlen_t
-compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
+static R_xlen_t compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     /* should not get here if x is already expanded */
     CHECK_NOT_EXPANDED(sx);
@@ -392,7 +391,7 @@ Rboolean compact_realseq_Inspect(SEXP x, int pre, int deep, int pvec,
     return TRUE;
 }
 
-static R_INLINE R_xlen_t compact_realseq_Length(SEXP x)
+R_INLINE static R_xlen_t compact_realseq_Length(SEXP x)
 {
     return (R_xlen_t) REAL0(COMPACT_SEQ_INFO(x))[0];
 }
@@ -618,7 +617,7 @@ HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
     
 static SEXP R_OutDecSym = NULL;
 
-static R_INLINE const char *DEFERRED_STRING_OUTDEC(SEXP x)
+R_INLINE static const char *DEFERRED_STRING_OUTDEC(SEXP x)
 {
     /* The default value of OutDec at startup is ".". If it is
        something different at the time the deferred string conversion
@@ -671,7 +670,7 @@ Rboolean deferred_string_Inspect(SEXP x, int pre, int deep, int pvec,
     return TRUE;
 }
 
-static R_INLINE R_xlen_t deferred_string_Length(SEXP x)
+R_INLINE static R_xlen_t deferred_string_Length(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
     return state == R_NilValue ?
@@ -679,7 +678,7 @@ static R_INLINE R_xlen_t deferred_string_Length(SEXP x)
 	XLENGTH(DEFERRED_STRING_STATE_ARG(state));
 }
 
-static R_INLINE SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
+R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 {
     /* make sure the STRSXP for the expanded string is allocated */
     /* not yet expanded strings are NULL in the STRSXP */
@@ -735,7 +734,7 @@ static R_INLINE SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
     return elt;
 }
 
-static R_INLINE void expand_deferred_string(SEXP x)
+R_INLINE static void expand_deferred_string(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
     if (state != R_NilValue) {
@@ -1006,7 +1005,7 @@ static SEXP make_mmap(void *p, SEXP file, size_t size, int type,
 
 #define MMAP_EPTR_STATE(x) R_ExternalPtrProtected(x)
 
-static R_INLINE void *MMAP_ADDR(SEXP x)
+R_INLINE static void *MMAP_ADDR(SEXP x)
 {
     SEXP eptr = MMAP_EPTR(x);
     void *addr = R_ExternalPtrAddr(eptr);
@@ -1347,10 +1346,10 @@ HIDDEN SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     int type = REALSXP;
     if (stype != R_NilValue) {
 	const char *typestr = CHAR(asChar(stype));
-	if (strcmp(typestr, "double") == 0)
+	if (streql(typestr, "double"))
 	    type = REALSXP;
-	else if (strcmp(typestr, "integer") == 0 ||
-		 strcmp(typestr, "int") == 0)
+	else if (streql(typestr, "integer") ||
+		 streql(typestr, "int"))
 	    type = INTSXP;
 	else
 	    error(_("type '%s' is not supported"), typestr);
@@ -1419,7 +1418,7 @@ static R_altrep_class_t wrap_string_class;
 #define WRAPPER_SORTED(x) INTEGER(WRAPPER_METADATA(x))[0]
 #define WRAPPER_NO_NA(x) INTEGER(WRAPPER_METADATA(x))[1]
 
-static R_INLINE SEXP WRAPPER_WRAPPED_RW(SEXP x)
+R_INLINE static SEXP WRAPPER_WRAPPED_RW(SEXP x)
 {
     /* If the data might be shared and is accessed for possible
        modification, then it needs to be duplicated now. */
@@ -1885,7 +1884,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     return ans;
 }
 
-static R_INLINE int is_wrapper(SEXP x)
+R_INLINE static int is_wrapper(SEXP x)
 {
     if (ALTREP(x))
 	switch(TYPEOF(x)) {

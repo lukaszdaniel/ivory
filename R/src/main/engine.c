@@ -1723,9 +1723,9 @@ static int VFontFamilyCode(char *fontfamily)
 {
     if (strlen(fontfamily) > 7)  {
 	unsigned int j = fontfamily[7]; // protect against signed chars
-	if (!strncmp(fontfamily, "Hershey", 7) && j < 9) return 100 + j;
+	if (streqln(fontfamily, "Hershey", 7) && j < 9) return 100 + j;
 	for (int i = 0; VFontTable[i].minface; i++)
-	    if (!strcmp(fontfamily, VFontTable[i].name)) return i + 1;
+	    if (streql(fontfamily, VFontTable[i].name)) return i + 1;
     }
     return -1;
 }

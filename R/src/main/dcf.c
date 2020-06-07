@@ -208,8 +208,8 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			whatlen = (int) strlen(CHAR(STRING_ELT(what, m)));
 			if(strlen(line) > whatlen &&
 			   line[whatlen] == ':' &&
-			   strncmp(CHAR(STRING_ELT(what, m)),
-				   line, whatlen) == 0) {
+			   streqln(CHAR(STRING_ELT(what, m)),
+				   line, whatlen)) {
 			    /* An already known field we are recording. */
 			    lastm = m;
 			    field_skip = FALSE;

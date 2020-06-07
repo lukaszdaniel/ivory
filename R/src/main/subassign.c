@@ -108,7 +108,7 @@
 #define CLEAR_VECTOR_ELT(x, i) do { } while (0)
 #endif
 
-static R_INLINE SEXP getNames(SEXP x)
+R_INLINE static SEXP getNames(SEXP x)
 {
     /* defer to getAttrib if a 'dim' attribute is present */
     for (SEXP attr = ATTRIB(x); attr != R_NilValue; attr = CDR(attr))
@@ -493,7 +493,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 }
 
 #ifdef LONG_VECTOR_SUPPORT
-static R_INLINE R_xlen_t gi(SEXP indx, R_xlen_t i)
+R_INLINE static R_xlen_t gi(SEXP indx, R_xlen_t i)
 {
     if (TYPEOF(indx) == REALSXP) {
 	double d = REAL_ELT(indx, i);
@@ -503,7 +503,7 @@ static R_INLINE R_xlen_t gi(SEXP indx, R_xlen_t i)
 }
 #else
 #define R_SHORT_LEN_MAX INT_MAX
-static R_INLINE int gi(SEXP indx, R_xlen_t i)
+R_INLINE static int gi(SEXP indx, R_xlen_t i)
 {
     if (TYPEOF(indx) == REALSXP) {
 	double d = REAL_ELT(indx, i);
@@ -563,7 +563,7 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
     return xnew;
 }
 
-static R_INLINE SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
+R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     /* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
        Duplicating might be safer/more consistent (PR15098) */
     SEXP val = VECTOR_ELT(y, i);
@@ -1496,7 +1496,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 
 
 // For  x[s] <- y  --- extract (x, s, y)  and return the number of indices
-static R_INLINE int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
+R_INLINE static int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
 {
     if (CDR(args) == R_NilValue)
 	error(_("'SubAssignArgs()': invalid number of arguments"));
@@ -1522,7 +1522,7 @@ static R_INLINE int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subset.c */
-static R_INLINE
+R_INLINE static
 int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {

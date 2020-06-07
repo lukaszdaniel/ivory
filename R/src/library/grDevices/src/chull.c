@@ -13,6 +13,7 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Error.h>
 #include <R_ext/Boolean.h>	/* TRUE,... */
 
 

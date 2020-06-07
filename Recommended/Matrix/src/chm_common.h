@@ -58,7 +58,7 @@ CHM_FR as_cholmod_factor3(CHM_FR ans, SEXP x, Rboolean do_check);
 
 #define N_AS_CHM_DN(x,nr,nc) M_numeric_as_chm_dense((CHM_DN)alloca(sizeof(cholmod_dense)), x , nr, nc )
 
-static R_INLINE Rboolean chm_factor_ok(CHM_FR f)
+R_INLINE static Rboolean chm_factor_ok(CHM_FR f)
 {
     return (Rboolean) (f->minor >= f->n);
 }

@@ -447,7 +447,7 @@ SEXP fixup_NaRm(SEXP args)
  * mean.default.
  */
 
-static R_INLINE SEXP logical_mean(SEXP x)
+R_INLINE static SEXP logical_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -460,7 +460,7 @@ static R_INLINE SEXP logical_mean(SEXP x)
     return ScalarReal((double) (s/n));
 }
 
-static R_INLINE SEXP integer_mean(SEXP x)
+R_INLINE static SEXP integer_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -473,7 +473,7 @@ static R_INLINE SEXP integer_mean(SEXP x)
     return ScalarReal((double) (s/n));
 }
 
-static R_INLINE SEXP real_mean(SEXP x)
+R_INLINE static SEXP real_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0;
@@ -493,7 +493,7 @@ static R_INLINE SEXP real_mean(SEXP x)
     return ScalarReal((double) s);
 }
 
-static R_INLINE SEXP complex_mean(SEXP x)
+R_INLINE static SEXP complex_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0, si = 0.0;

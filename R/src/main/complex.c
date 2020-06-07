@@ -98,7 +98,7 @@ HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     return R_NilValue; /* -Wall */
 }
 
-static R_INLINE double complex R_cpow_n(double complex X, int k)
+R_INLINE static double complex R_cpow_n(double complex X, int k)
 {
     if(k == 0) return (double complex) 1.;
     else if(k == 1) return X;

@@ -228,7 +228,7 @@ Rconnection getConnection_no_err(int n)
 
 }
 
-static void NORET set_iconv_error(Rconnection con, char* from, char* to)
+NORET static void set_iconv_error(Rconnection con, char* from, char* to)
 {
     char buf[100];
     snprintf(buf, 100, _("unsupported conversion from '%s' to '%s'"), from, to);
@@ -390,7 +390,7 @@ void set_iconv(Rconnection con)
 
 /* ------------------- null connection functions --------------------- */
 
-static Rboolean NORET null_open(Rconnection con)
+NORET static Rboolean null_open(Rconnection con)
 {
     error(_("'%s' is not enabled for this connection"), "open");
 }
@@ -405,7 +405,7 @@ static void null_destroy(Rconnection con)
     if(con->private) free(con->private);
 }
 
-static int NORET null_vfprintf(Rconnection con, const char *format, va_list ap)
+NORET static int null_vfprintf(Rconnection con, const char *format, va_list ap)
 {
     error(_("'%s' is not enabled for this connection"), "printing");
 }
@@ -574,17 +574,17 @@ int dummy_fgetc(Rconnection con)
 	return con->fgetc_internal(con);
 }
 
-static int NORET null_fgetc(Rconnection con)
+NORET static int null_fgetc(Rconnection con)
 {
     error(_("'%s' is not enabled for this connection"), "getc");
 }
 
-static double NORET null_seek(Rconnection con, double where, int origin, int rw)
+NORET static double null_seek(Rconnection con, double where, int origin, int rw)
 {
     error(_("'%s' is not enabled for this connection"), "seek");
 }
 
-static void NORET null_truncate(Rconnection con)
+NORET static void null_truncate(Rconnection con)
 {
     error(_("'%s' is not enabled for this connection"), "truncation");
 }
@@ -594,13 +594,13 @@ static int null_fflush(Rconnection con)
     return 0;
 }
 
-static size_t NORET null_read(void *ptr, size_t size, size_t nitems,
+NORET static size_t null_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
     error(_("'%s' is not enabled for this connection"), "read");
 }
 
-static size_t NORET null_write(const void *ptr, size_t size, size_t nitems,
+NORET static size_t null_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
     error(_("'%s' is not enabled for this connection"), "write");
@@ -2281,15 +2281,15 @@ HIDDEN SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 	    size_t res;
 	    memset(buf, 0, 7); res = fread(buf, 5, 1, fp); fclose(fp);
 	    if(res == 1) {
-		if(!strncmp(buf, "BZh", 3)) type = 1;
-		if((buf[0] == '\xFD') && !strncmp(buf+1, "7zXZ", 4)) type = 2;
-		if((buf[0] == '\xFF') && !strncmp(buf+1, "LZMA", 4)) {
+		if(streqln(buf, "BZh", 3)) type = 1;
+		if((buf[0] == '\xFD') && streqln(buf+1, "7zXZ", 4)) type = 2;
+		if((buf[0] == '\xFF') && streqln(buf+1, "LZMA", 4)) {
 		    type = 2; subtype = 1;
 		}
 		if(!memcmp(buf, "]\0\0\200\0", 5)) {
 		    type = 2; subtype = 1;
 		}
-		if((buf[0] == '\x89') && !strncmp(buf+1, "LZO", 3))
+		if((buf[0] == '\x89') && streqln(buf+1, "LZO", 3))
 		    error(_("this is a file compressed using '%s' which this build of R does not support"), "lzop");
 	    }
 	}
@@ -2567,7 +2567,7 @@ static Rconnection newclp(const char *url, const char *inmode)
 #endif
     newcon = (Rconnection) malloc(sizeof(struct Rconn));
     if(!newcon) error(_("allocation of clipboard connection failed"));
-    if(strncmp(url, "clipboard", 9) == 0) description = "clipboard";
+    if(streqln(url, "clipboard", 9)) description = "clipboard";
     else description = url;
     newcon->connclass = (char *) malloc(strlen(description) + 1);
     if(!newcon->connclass) {
@@ -2601,7 +2601,7 @@ static Rconnection newclp(const char *url, const char *inmode)
 	/* for Solaris 12.5 */ newcon = NULL;
     }
     ((Rclpconn)newcon->private)->buff = NULL;
-    if (strncmp(url, "clipboard-", 10) == 0) {
+    if (streqln(url, "clipboard-", 10)) {
 	sizeKB = atoi(url+10);
 	if(sizeKB < 32) sizeKB = 32;
 	/* Rprintf("setting clipboard size to %dKB\n", sizeKB); */
@@ -3364,11 +3364,11 @@ HIDDEN SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     if (type == NA_INTEGER)
 	error(_("invalid '%s' argument"), "encoding");
     ncon = NextConnection();
-    if(!strlen(open) || strncmp(open, "r", 1) == 0) {
+    if(!strlen(open) || streqln(open, "r", 1)) {
 	if(!isString(stext))
 	    error(_("invalid '%s' argument"), "text");
 	con = Connections[ncon] = newtext(desc, stext, type);
-    } else if (strncmp(open, "w", 1) == 0 || strncmp(open, "a", 1) == 0) {
+    } else if (streqln(open, "w", 1) || streqln(open, "a", 1)) {
 	if (OutTextData == NULL) {
 	    OutTextData = allocVector(VECSXP, NCONNECTIONS);
 	    R_PreserveObject(OutTextData);
@@ -5371,16 +5371,16 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 
     UrlScheme type = HTTPsh;	/* -Wall */
     Rboolean inet = TRUE;
-    if (strncmp(url, "http://", 7) == 0)
+    if (streqln(url, "http://", 7))
 	type = HTTPsh;
-    else if (strncmp(url, "ftp://", 6) == 0)
+    else if (streqln(url, "ftp://", 6))
 	type = FTPsh;
-    else if (strncmp(url, "https://", 8) == 0)
+    else if (streqln(url, "https://", 8))
 	type = HTTPSsh;
     // ftps:// is available via most libcurl, only
     // The internal and wininet methods will create a connection
     // but refuse to open it so as from R 3.2.0 we switch to libcurl
-    else if (strncmp(url, "ftps://", 7) == 0)
+    else if (streqln(url, "ftps://", 7))
 	type = FTPSsh;
     else
 	inet = FALSE; // file:// URL or a file path
@@ -5435,21 +5435,21 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!meth) {
-	if (strncmp(url, "ftps://", 7) == 0) {
+	if (streqln(url, "ftps://", 7)) {
 #ifdef HAVE_LIBCURL
 	    if (defmeth) meth = 1; else
 #endif
 		error(_("ftps:// URLs are not supported by this method"));
 	}
 #ifdef _WIN32
-	if (!winmeth && strncmp(url, "https://", 8) == 0) {
+	if (!winmeth && streqln(url, "https://", 8)) {
 # ifdef HAVE_LIBCURL
 	    if (defmeth) meth = 1; else
 # endif
 		error(_("https:// URLs are not supported by this method"));
 	}
 #else // Unix
-	if (strncmp(url, "https://", 8) == 0) {
+	if (streqln(url, "https://", 8)) {
 	    // We check the libcurl build does support https as from R 3.3.0
 	    if (defmeth) meth = 1; else
 		error(_("https:// URLs are not supported by the \"internal\" method"));
@@ -5458,7 +5458,7 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     ncon = NextConnection();
-    if(strncmp(url, "file://", 7) == 0) {
+    if(streqln(url, "file://", 7)) {
 	int nh = 7;
 #ifdef _WIN32
 	/* on Windows we have file:///d:/path/to
@@ -5487,13 +5487,13 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	            warning(_("'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"), "file(\"\")");
 		}
 	    }
-	    if(strcmp(url, "clipboard") == 0 ||
+	    if(streql(url, "clipboard") ||
 #ifdef _WIN32
-	       strncmp(url, "clipboard-", 10) == 0
+	       strnstreqlncmp(url, "clipboard-", 10)
 #else
 	       strcmp(url, "X11_primary") == 0
-	       || strcmp(url, "X11_secondary") == 0
-	       || strcmp(url, "X11_clipboard") == 0
+	       || streql(url, "X11_secondary")
+	       || streql(url, "X11_clipboard")
 #endif
 		)
 		con = newclp(url, strlen(open) ? open : "r");
@@ -5528,10 +5528,10 @@ HIDDEN SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 			fclose(fp);
 			if(res == 1) {
 			    if(buf[0] == '\x1f' && buf[1] == '\x8b') ztype = 0;
-			    if(!strncmp(buf, "BZh", 3)) ztype = 1;
-			    if((buf[0] == '\xFD') && !strncmp(buf+1, "7zXZ", 4))
+			    if(streqln(buf, "BZh", 3)) ztype = 1;
+			    if((buf[0] == '\xFD') && streqln(buf+1, "7zXZ", 4))
 				ztype = 2;
-			    if((buf[0] == '\xFF') && !strncmp(buf+1, "LZMA", 4))
+			    if((buf[0] == '\xFF') && streqln(buf+1, "LZMA", 4))
 			    { ztype = 2; subtype = 1;}
 			    if(!memcmp(buf, "]\0\0\200\0", 5))
 			    { ztype = 2; subtype = 1;}
@@ -5906,14 +5906,14 @@ HIDDEN SEXP do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return CAR(args);
     }
     m = incon->mode;
-    if(strcmp(m, "r") == 0 || strncmp(m, "rb", 2) == 0) mode = "rb";
-    else if (strcmp(m, "w") == 0 || strncmp(m, "wb", 2) == 0) mode = "wb";
+    if(streql(m, "r") || streqln(m, "rb", 2)) mode = "rb";
+    else if (streql(m, "w") || streqln(m, "wb", 2)) mode = "wb";
     else error(_("can only use read- or write- binary connections"));
-    if(strcmp(incon->connclass, "file") == 0 &&
-       (strcmp(m, "r") == 0 || strcmp(m, "w") == 0))
+    if(streql(incon->connclass, "file") &&
+       (streql(m, "r") || streql(m, "w")))
 	warning(_("using a text-mode 'file' connection may not work correctly"));
 
-    else if(strcmp(incon->connclass, "textConnection") == 0 && strcmp(m, "w") == 0)
+    else if(streql(incon->connclass, "textConnection") && streql(m, "w"))
 	error(_("cannot create a gzcon connection from a writable textConnection; maybe use rawConnection"));
 
     newcon = (Rconnection) malloc(sizeof(struct Rconn));
@@ -6446,10 +6446,10 @@ do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
     type = asInteger(CADR(args));
     if (type == 5) {/* type = 5 is "unknown" */
 	char *p = (char *) RAW(from);
-	if (strncmp(p, "BZh", 3) == 0) type = 3; /* bzip2 always uses a header */
+	if (streqln(p, "BZh", 3)) type = 3; /* bzip2 always uses a header */
 	else if(p[0] == '\x1f' && p[1] == '\x8b') type = 2; /* gzip files */
-	else if((p[0] == '\xFD') && !strncmp(p+1, "7zXZ", 4)) type = 4;
-	else if((p[0] == '\xFF') && !strncmp(p+1, "LZMA", 4)) {
+	else if((p[0] == '\xFD') && streqln(p+1, "7zXZ", 4)) type = 4;
+	else if((p[0] == '\xFF') && streqln(p+1, "LZMA", 4)) {
 	    type = 4; subtype = 1;
 	} else if(!memcmp(p, "]\0\0\200\0", 5)) {
 	    type = 4; subtype = 1;

@@ -408,7 +408,7 @@ static void checkNames(SEXP x, SEXP s)
 
 /* Time Series Parameters */
 
-static void NORET badtsp(void)
+NORET static void badtsp(void)
 {
     error(_("invalid time series parameters specified"));
 }
@@ -1467,7 +1467,7 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     for (alist = ATTRIB(s); alist != R_NilValue; alist = CDR(alist)) {
 	SEXP tmp = TAG(alist);
 	const char *s = CHAR(PRINTNAME(tmp));
-	if (! strncmp(s, str, n)) {
+	if (streqln(s, str, n)) {
 	    if (strlen(s) == n) {
 		tag = tmp;
 		match = FULL;
@@ -1493,7 +1493,7 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Unless a full match has been found, check for a "names" attribute.
        This is stored via TAGs on pairlists, and via rownames on 1D arrays.
     */
-    if (match != FULL && strncmp("names", str, n) == 0) {
+    if (match != FULL && streqln("names", str, n)) {
 	if (strlen("names") == n) {
 	    /* we have a full match on "names", if there is such an
 	       attribute */

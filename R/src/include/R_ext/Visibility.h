@@ -44,4 +44,10 @@
 # define attribute_hidden
 #endif
 
+#if defined(__GNUC__) && __GNUC__ >= 3
+# define NORET __attribute__((noreturn))
+#else
+# define NORET
+#endif
+
 #endif /* R_EXT_VISIBILITY_H_ */

@@ -67,7 +67,7 @@ static int noBreakWarning = 0;
 
 static void try_jump_to_restart(void);
 // The next is crucial to the use of NORET attributes.
-static void NORET
+NORET static void
 jump_to_top_ex(Rboolean, Rboolean, Rboolean, Rboolean, Rboolean);
 static void signalInterrupt(void);
 static char * R_ConciseTraceback(SEXP call, int skip);
@@ -87,7 +87,7 @@ static char * R_ConciseTraceback(SEXP call, int skip);
   WarningMessage()-> warningcall (but with message from WarningDB[]).
 */
 
-void NORET R_SignalCStackOverflow(intptr_t usage)
+NORET void R_SignalCStackOverflow(intptr_t usage)
 {
     /* We do need some stack space to process error recovery, so
        temporarily raise the limit.  We have 5% head room because we
@@ -332,7 +332,7 @@ static char *Rstrncpy(char *dest, const char *src, size_t n)
 }
 
 #define BUFSIZE 8192
-static R_INLINE void RprintTrunc(char *buf, int truncated)
+R_INLINE static void RprintTrunc(char *buf, int truncated)
 {
     if(R_WarnLength < BUFSIZE - 20 &&
       (truncated || strlen(buf) == R_WarnLength)) {
@@ -378,7 +378,7 @@ void Rf_warning(const char *format, ...)
 
 static void vsignalError(SEXP call, const char *format, va_list ap);
 static void vsignalWarning(SEXP call, const char *format, va_list ap);
-static void NORET invokeRestart(SEXP, SEXP);
+NORET static void invokeRestart(SEXP, SEXP);
 
 static void reset_inWarning(void *data)
 {
@@ -700,7 +700,7 @@ static void restore_inError(void *data)
    checks in GC and session exit (or .Call) do not have such limit. */
 static int allowedConstsChecks = 1000;
 
-static void NORET
+NORET static void
 verrorcall_dflt(SEXP call, const char *format, va_list ap)
 {
     if (allowedConstsChecks > 0) {
@@ -841,7 +841,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
     inError = oldInError;
 }
 
-static void NORET errorcall_dflt(SEXP call, const char *format,...)
+NORET static void errorcall_dflt(SEXP call, const char *format,...)
 {
     va_list(ap);
 
@@ -850,7 +850,7 @@ static void NORET errorcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-void NORET Rf_errorcall(SEXP call, const char *format,...)
+NORET void Rf_errorcall(SEXP call, const char *format,...)
 {
     va_list(ap);
 
@@ -880,7 +880,7 @@ void NORET Rf_errorcall(SEXP call, const char *format,...)
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
 HIDDEN
-void NORET errorcall_cpy(SEXP call, const char *format, ...)
+NORET void errorcall_cpy(SEXP call, const char *format, ...)
 {
     char buf[BUFSIZE];
 
@@ -1035,7 +1035,7 @@ static void jump_to_top_ex(Rboolean traceback,
     R_jumpctxt(R_ToplevelContext, 0, NULL);
 }
 
-void NORET jump_to_toplevel()
+NORET void jump_to_toplevel()
 {
     /* no traceback, no user error option; for now, warnings are
        printed here and console is reset -- eventually these should be
@@ -1246,7 +1246,7 @@ static SEXP findCall(void)
     return R_NilValue;
 }
 
-HIDDEN SEXP NORET do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 /* error(.) : really doesn't return anything; but all do_foo() must be SEXP */
     SEXP c_call;
@@ -1308,13 +1308,13 @@ HIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Error recovery for incorrect argument count error. */
 HIDDEN
-void NORET WrongArgCount(const char *s)
+NORET void WrongArgCount(const char *s)
 {
     error(_("incorrect number of arguments passed to '%s' function"), s);
 }
 
 
-void NORET UNIMPLEMENTED(const char *s)
+NORET void UNIMPLEMENTED(const char *s)
 {
     error(_("unimplemented feature in '%s' function"), s);
 }
@@ -1349,7 +1349,7 @@ WarningDB[] = {
 
 
 HIDDEN
-void NORET ErrorMessage(SEXP call, int which_error, ...)
+NORET void ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1423,7 +1423,7 @@ void R_ReturnOrRestart(SEXP val, SEXP env, Rboolean restart)
     }
 }
 
-void NORET R_JumpToToplevel(Rboolean restart)
+NORET void R_JumpToToplevel(Rboolean restart)
 {
     RCNTXT *c;
 
@@ -1726,7 +1726,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
     else vwarningcall_dflt(call, format, ap);
 }
 
-static void NORET gotoExitingHandler(SEXP cond, SEXP call, SEXP entry)
+NORET static void gotoExitingHandler(SEXP cond, SEXP call, SEXP entry)
 {
     SEXP rho = ENTRY_TARGET_ENVIR(entry);
     SEXP result = ENTRY_RETURN_RESULT(entry);
@@ -1938,7 +1938,7 @@ HIDDEN SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-HIDDEN SEXP NORET do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     const char *msg;
     SEXP ecall;
@@ -2000,7 +2000,7 @@ HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #define RESTART_EXIT(r) VECTOR_ELT(r, 1)
 
-static void NORET invokeRestart(SEXP r, SEXP arglist)
+NORET static void invokeRestart(SEXP r, SEXP arglist)
 {
     SEXP exit = RESTART_EXIT(r);
 
@@ -2023,7 +2023,7 @@ static void NORET invokeRestart(SEXP r, SEXP arglist)
     }
 }
 
-HIDDEN SEXP NORET do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     CHECK_RESTART(CAR(args));
@@ -2118,7 +2118,7 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 	    pkgname = translateChar(STRING_ELT(spkg, 0));
 
 	while (check[0] != '\0') {
-	    if (!strncmp(pprefix, check, lpprefix)) {
+	    if (streqln(pprefix, check, lpprefix)) {
 		/* check starts with "package:" */
 		check += lpprefix;
 		size_t arglen = 0;
@@ -2129,9 +2129,9 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 		    arglen = strlen(check);
 		ignore = TRUE;
 		if (pkgname) {
-		    if (!strncmp(check, pkgname, arglen) && strlen(pkgname) == arglen)
+		    if (streqln(check, pkgname, arglen) && strlen(pkgname) == arglen)
 			ignore = FALSE;
-		    if (!strncmp(check, cpname, arglen) && lcpname == arglen) {
+		    if (streqln(check, cpname, arglen) && lcpname == arglen) {
 			/* package name specified in _R_CHECK_PACKAGE_NAME */
 			const char *envpname = getenv(cpname);
 			if (envpname && !strcmp(envpname, pkgname))
@@ -2139,15 +2139,15 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
 		    }
 		}
 		check += arglen;
-	    } else if (!strncmp(aprefix, check, laprefix)) {
+	    } else if (streqln(aprefix, check, laprefix)) {
 		/* check starts with "abort" */
 		check += laprefix;
 		abort = TRUE;
-	    } else if (!strncmp(vprefix, check, lvprefix)) {
+	    } else if (streqln(vprefix, check, lvprefix)) {
 		/* check starts with "verbose" */
 		check += lvprefix;
 		verbose = TRUE;
-	    } else if (!strncmp(wprefix, check, lwprefix)) {
+	    } else if (streqln(wprefix, check, lwprefix)) {
 		/* check starts with "warn" */
 		check += lwprefix;
 		warn = TRUE;

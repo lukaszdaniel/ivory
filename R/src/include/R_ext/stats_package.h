@@ -56,13 +56,13 @@ HIDDEN void S_nlminb_iterate(double b[], double d[], double fx, double g[],
 HIDDEN void S_rcont2(int nrow[], int ncol[], int nrowt[], int ncolt[], 
          int ntotal[], double fact[], int jwork[], int matrix[]);
 
-static R_INLINE int S_v_length(int alg, int n)
+R_INLINE static int S_v_length(int alg, int n)
 {
     return (alg - 1) ? (105 + (n * (2 * n + 20))) :
 	(130 + (n * (n + 27))/2);
 }
 
-static R_INLINE int S_iv_length(int alg, int n)
+R_INLINE static int S_iv_length(int alg, int n)
 {
     return (alg - 1) ? (82 + 4 * n) : (78 + 3 * n);
 }

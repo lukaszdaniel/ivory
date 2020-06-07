@@ -124,7 +124,7 @@ static int isDDName(SEXP name)
     char *endp;
 
     buf = CHAR(name);
-    if( !strncmp(buf, "..", 2) && strlen(buf) > 2 ) {
+    if( streqln(buf, "..", 2) && strlen(buf) > 2 ) {
 	buf += 2;
 	strtol(buf, &endp, 10); // discard value
 	if( *endp != '\0')

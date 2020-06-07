@@ -50,7 +50,7 @@
    and x[[-m]] selects one element for m = 1, 2.
    So 'len' is only used if it is 2 and i is negative.
 */
-static R_INLINE int integerOneIndex(int i, R_xlen_t len, SEXP call)
+R_INLINE static int integerOneIndex(int i, R_xlen_t len, SEXP call)
 {
     int indx = -1;
 
@@ -114,7 +114,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 		for(i = 0; i < nx; i++) {
 		    const char *tmp = translateChar(STRING_ELT(names, i));
 		    if (!tmp[0]) continue;
-		    if(!strncmp(tmp, translateChar(STRING_ELT(s, pos)), l)) {
+		    if(streqln(tmp, translateChar(STRING_ELT(s, pos)), l)) {
 			if(indx == -1 )
 			    indx = i;
 			else
@@ -240,7 +240,7 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 	    for(R_xlen_t i = 0; i < xlength(names); i++) {
 		if (STRING_ELT(names, i) != NA_STRING) {
 		    cur_name = translateChar(STRING_ELT(names, i));
-		    if(!strncmp(cur_name, ss, len)) {
+		    if(streqln(cur_name, ss, len)) {
 			if(indx == -1) {/* first one */
 			    indx = i;
 			    if (warn_pok) {

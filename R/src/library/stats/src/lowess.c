@@ -34,12 +34,12 @@
 # include <R_ext/Print.h>
 #endif
 
-static R_INLINE double fsquare(double x)
+R_INLINE static double fsquare(double x)
 {
     return x * x;
 }
 
-static R_INLINE double fcube(double x)
+R_INLINE static double fcube(double x)
 {
     return x * x * x;
 }

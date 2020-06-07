@@ -22,6 +22,7 @@
 #include <math.h>
 #include <Rmath.h> // M_* constants
 #include <Rinternals.h>
+#include <R_ext/Error.h>
 #include "localization.h"
 
 #define DELMAX 1000

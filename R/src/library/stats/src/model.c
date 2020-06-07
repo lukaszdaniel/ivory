@@ -28,14 +28,14 @@
 #include "localization.h"
 
 /* inline-able versions, used just once! */
-static R_INLINE Rboolean isUnordered_int(SEXP s)
+R_INLINE static Rboolean isUnordered_int(SEXP s)
 {
     return (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
 	    && !inherits(s, "ordered"));
 }
 
-static R_INLINE Rboolean isOrdered_int(SEXP s)
+R_INLINE static Rboolean isOrdered_int(SEXP s)
 {
     return (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")

@@ -36,6 +36,7 @@
 /* This sets ptr_QuartzBackend as a symbol in this file */
 #define IN_AQUA_C 1
 #include <R_ext/QuartzDevice.h>
+#include <R_ext/Error.h>
 
 #include "grDevices.h"
 
@@ -1606,6 +1607,7 @@ SEXP makeQuartzDefault() {
 
 #include "grDevices.h"
 #include <R_ext/QuartzDevice.h>
+#include <R_ext/Error.h>
 
 SEXP Quartz(SEXP args)
 {

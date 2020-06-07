@@ -32,7 +32,7 @@
 
 
 
-static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {
+R_INLINE static GPar* dpSavedptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("no base graphics system is registered"));
     baseSystemState *bss = dd->gesd[baseRegisterIndex]->systemSpecific;

@@ -27,6 +27,7 @@
 #include <math.h>
 
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
+#include <R_ext/Error.h>
 
 typedef enum {
     sm_NO_ENDRULE, sm_COPY_ENDRULE, sm_TUKEY_ENDRULE
