@@ -499,7 +499,7 @@ static unsigned char ConsoleBuf[CONSOLE_BUFFER_SIZE];
 
 static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 {
-    char *s;
+    //char *s;
 
     /* First check for stack overflow if we know the stack position.
        We assume anything within 16Mb beyond the stack end is a stack overflow.

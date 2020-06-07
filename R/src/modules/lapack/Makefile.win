@@ -15,7 +15,7 @@ OBJS=$(CSOURCES:.c=.o) dllversion.o
 LIBSOURCES = dlamch.f dlapack.f cmplx.f
 LIBOBJECTS = $(LIBSOURCES:.f=.o) init_win.o Rlapackrc.o
 
-CPPFLAGS = -I../../include -DHAVE_CONFIG_H
+CPPFLAGS = -I../../include -DHAVE_CONFIG_H $(WERROR_FLAGS)
 dlamch-FFLAGS = -ffloat-store
 
 install: $(MODULE).dll

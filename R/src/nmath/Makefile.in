@@ -59,6 +59,8 @@ SUBDIRS_WITH_NO_BUILD = standalone
 
 @WANT_R_SHLIB_TRUE@ALL_CFLAGS = $(ALL_CFLAGS_LO)
 
+ALL_CFLAGS := $(ALL_CFLAGS) $(WERROR_FLAGS)
+
 all: R
 
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status $(SOURCES)
