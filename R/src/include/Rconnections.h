@@ -72,7 +72,7 @@ int Rconn_printf(Rconnection con, const char *format, ...);
 Rconnection getConnection(int n);
 Rconnection getConnection_no_err(int n);
 Rboolean switch_stdout(int icon, int closeOnExit);
-void init_con(Rconnection newcon, const char *description, int enc,
+void init_con(Rconnection newconn, const char *description, int enc,
 	      const char * const mode);
 Rconnection R_newurl(const char *description, const char * const mode,
 		     SEXP headers, int type);

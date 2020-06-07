@@ -56,7 +56,7 @@ pkstwo(int n, double *x, double tol)
  * the value for x < 0.2, and use the standard expansion otherwise.)
  *
  */
-    double new, old, s, w, z;
+    double new_, old, s, w, z;
     int i, k, k_max;
 
     k_max = (int) sqrt(2 - log(tol));
@@ -76,14 +76,14 @@ pkstwo(int n, double *x, double tol)
 	    s = -1;
 	    k = 1;
 	    old = 0;
-	    new = 1;
-	    while(fabs(old - new) > tol) {
-		old = new;
-		new += 2 * s * exp(z * k * k);
+	    new_ = 1;
+	    while(fabs(old - new_) > tol) {
+		old = new_;
+		new_ += 2 * s * exp(z * k * k);
 		s *= -1;
 		k++;
 	    }
-	    x[i] = new;
+	    x[i] = new_;
 	}
     }
 }

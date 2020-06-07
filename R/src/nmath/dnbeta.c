@@ -52,7 +52,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnbeta(double x, double a, double b, double ncp, int give_log)
+double Rf_dnbeta(double x, double a, double b, double ncp, int give_log)
 {
     const static double eps = 1.e-15;
 

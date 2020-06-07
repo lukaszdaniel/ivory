@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pchisq(double x, double df, int lower_tail, int log_p)
+double Rf_pchisq(double x, double df, int lower_tail, int log_p)
 {
     return pgamma(x, df/2., 2., lower_tail, log_p);
 }

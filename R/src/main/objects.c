@@ -1053,11 +1053,11 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 {
     int ans;
     SEXP cl = PROTECT(asChar(getAttrib(x, R_ClassSymbol)));
-    const char *class = CHAR(cl);
+    const char *class_ = CHAR(cl);
     for (ans = 0; ; ans++) {
 	if (!strlen(valid[ans])) // empty string
 	    break;
-	if (!strcmp(class, valid[ans])) {
+	if (!strcmp(class_, valid[ans])) {
 	    UNPROTECT(1); /* cl */
 	    return ans;
 	}
@@ -1072,7 +1072,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	    s_contains      = install("contains");
 	    s_selectSuperCl = install(".selectSuperClasses");
 	}
-	SEXP classDef = PROTECT(R_getClassDef(class));
+	SEXP classDef = PROTECT(R_getClassDef(class_));
 	PROTECT(classExts = R_do_slot(classDef, s_contains));
 	/* .selectSuperClasses(getClassDef(class)@contains, dropVirtual = TRUE,
 	 *                     namesOnly = TRUE, directOnly = FALSE, simpleOnly = TRUE) :

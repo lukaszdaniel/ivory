@@ -355,7 +355,7 @@ SEXP L_setGPsaved(SEXP gpars)
 void initGPar(pGEDevDesc dd)
 {
     pDevDesc dev = dd->dev;
-    SEXP gpar, gparnames, class;
+    SEXP gpar, gparnames, class_;
     SEXP gpfill, gpcol, gpgamma, gplty, gplwd, gpcex, gpfs, gplh, gpfont;
     SEXP gpfontfamily, gpalpha, gplineend, gplinejoin, gplinemitre, gplex;
     SEXP gsd = (SEXP) dd->gesd[gridRegisterIndex]->systemSpecific;
@@ -425,9 +425,9 @@ void initGPar(pGEDevDesc dd)
     PROTECT(gplex = allocVector(REALSXP, 1));
     REAL(gplex)[0] = 1;
     SET_VECTOR_ELT(gpar, GP_LEX, gplex);
-    PROTECT(class = allocVector(STRSXP, 1));
-    SET_STRING_ELT(class, 0, mkChar("gpar"));
-    classgets(gpar, class);
+    PROTECT(class_ = allocVector(STRSXP, 1));
+    SET_STRING_ELT(class_, 0, mkChar("gpar"));
+    classgets(gpar, class_);
     SET_VECTOR_ELT(gsd, GSS_GPAR, gpar);
     UNPROTECT(18);
 }

@@ -32,7 +32,7 @@
 
 #include "nmath.h"
 
-double sign(double x)
+double Rf_sign(double x)
 {
     if (ISNAN(x))
 	return x;

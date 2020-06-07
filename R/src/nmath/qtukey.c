@@ -116,7 +116,7 @@ static double qinv(double p, double c, double v)
  */
 
 
-double qtukey(double p, double rr, double cc, double df,
+double Rf_qtukey(double p, double rr, double cc, double df,
 	      int lower_tail, int log_p)
 {
     const static double eps = 0.0001;

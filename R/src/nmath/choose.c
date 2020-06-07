@@ -46,7 +46,7 @@
 void R_CheckStack(void);
 #endif
 
-double attribute_hidden lfastchoose(double n, double k)
+HIDDEN double Rf_lfastchoose(double n, double k)
 {
     return -log(n + 1.) - lbeta(n - k + 1., k + 1.);
 }
@@ -64,7 +64,7 @@ double lfastchoose2(double n, double k, int *s_choose)
 
 #define R_IS_INT(x)  (!R_nonint(x))
 
-double lchoose(double n, double k)
+double Rf_lchoose(double n, double k)
 {
     double k0 = k;
     k = R_forceint(k);
@@ -107,7 +107,7 @@ double lchoose(double n, double k)
 /* 30 is somewhat arbitrary: it is on the *safe* side:
  * both speed and precision are clearly improved for k < 30.
 */
-double choose(double n, double k)
+double Rf_choose(double n, double k)
 {
     double r, k0 = k;
     k = R_forceint(k);

@@ -28,7 +28,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qcauchy(double p, double location, double scale,
+double Rf_qcauchy(double p, double location, double scale,
 	       int lower_tail, int log_p)
 {
 #ifdef IEEE_754

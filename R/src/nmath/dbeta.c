@@ -40,7 +40,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dbeta(double x, double a, double b, int give_log)
+double Rf_dbeta(double x, double a, double b, int give_log)
 {
 #ifdef IEEE_754
     /* NaNs propagated correctly */

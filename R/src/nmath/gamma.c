@@ -42,7 +42,7 @@
 
 #include "nmath.h"
 
-double gammafn(double x)
+double Rf_gammafn(double x)
 {
     const static double gamcs[42] = {
 	+.8571195590989331421920062399942e-2,

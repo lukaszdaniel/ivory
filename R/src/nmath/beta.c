@@ -37,7 +37,7 @@
 
 #include "nmath.h"
 
-double beta(double a, double b)
+double Rf_beta(double a, double b)
 {
 #ifdef NOMORE_FOR_THREADS
     static double xmin, xmax = 0;/*-> typically = 171.61447887 for IEEE */

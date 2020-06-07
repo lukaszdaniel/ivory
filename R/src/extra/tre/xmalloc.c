@@ -105,12 +105,11 @@ hash_void_ptr(void *ptr)
   return hash;
 }
 
-static void
-hash_table_add(hashTable *tbl, void *ptr, int bytes,
+static void hash_table_add(hashTable *tbl, void *ptr, int bytes,
 	       const char *file, int line, const char *func)
 {
   int i;
-  hashTableItem *item, *new;
+  hashTableItem *item, *new_;
 
   i = hash_void_ptr(ptr);
 
@@ -119,18 +118,18 @@ hash_table_add(hashTable *tbl, void *ptr, int bytes,
     while (item->next != NULL)
       item = item->next;
 
-  new = malloc(sizeof(*new));
-  assert(new != NULL);
-  new->ptr = ptr;
-  new->bytes = bytes;
-  new->file = file;
-  new->line = line;
-  new->func = func;
-  new->next = NULL;
+  new_ = malloc(sizeof(*new_));
+  assert(new_ != NULL);
+  new_->ptr = ptr;
+  new_->bytes = bytes;
+  new_->file = file;
+  new_->line = line;
+  new_->func = func;
+  new_->next = NULL;
   if (item != NULL)
-    item->next = new;
+    item->next = new_;
   else
-    tbl->table[i] = new;
+    tbl->table[i] = new_;
 
   xmalloc_current += bytes;
   if (xmalloc_current > xmalloc_peak)

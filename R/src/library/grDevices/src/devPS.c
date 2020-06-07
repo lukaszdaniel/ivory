@@ -5584,20 +5584,20 @@ static int addRaster(rcolorPtr raster, int w, int h,
     rcolorPtr newRaster;
 
     if (pd->numRasters == pd->maxRasters) {
-	int new = 2*pd->maxRasters;
+	int new_ = 2*pd->maxRasters;
 	void *tmp;
 	/* Do it this way so previous pointer is retained if it fails */
-	tmp = realloc(pd->masks, new*sizeof(int));
+	tmp = realloc(pd->masks, new_*sizeof(int));
 	if(!tmp) error(_("failed to increase 'maxRaster'"));
 	pd->masks = tmp;
-	tmp = realloc(pd->rasters, new*sizeof(rasterImage));
+	tmp = realloc(pd->rasters, new_*sizeof(rasterImage));
 	if(!tmp) error(_("failed to increase 'maxRaster'"));
 	pd->rasters = tmp;
-	for (i = pd->maxRasters; i < new; i++) {
+	for (i = pd->maxRasters; i < new_; i++) {
 	    pd->rasters[i].raster = NULL;
 	    pd->masks[i] = -1;
 	}
-	pd->maxRasters = new;
+	pd->maxRasters = new_;
     }
 
     newRaster = malloc(w*h*sizeof(rcolor));
@@ -6742,12 +6742,12 @@ static void PDF_endfile(PDFDesc *pd)
     nmask = pd->numMasks;
 
     if(pd->nobjs + nraster + nmask + 500 >= pd->max_nobjs) {
-	int new =  pd->nobjs + nraster + nmask + 500;
-	void *tmp = realloc(pd->pos, new * sizeof(int));
+	int new_ =  pd->nobjs + nraster + nmask + 500;
+	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
 	    error("unable to increase object limit: please shutdown the pdf device");
 	pd->pos = (int *) tmp;
-	pd->max_nobjs = new;
+	pd->max_nobjs = new_;
     }
 
     pd->pos[4] = (int) ftell(pd->pdffp);
@@ -6852,12 +6852,12 @@ static void PDF_endfile(PDFDesc *pd)
     }
 
     if(tempnobj >= pd->max_nobjs) {
-	int new = tempnobj + 500;
-	void *tmp = realloc(pd->pos, new * sizeof(int));
+	int new_ = tempnobj + 500;
+	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
 	    error("unable to increase object limit: please shutdown the pdf device");
 	pd->pos = (int *) tmp;
-	pd->max_nobjs = new;
+	pd->max_nobjs = new_;
     }
 
    /*
@@ -7190,12 +7190,12 @@ static void PDF_endpage(PDFDesc *pd)
 
     if(pd->nobjs + 2*(pd->numRasters-pd->writtenRasters) + 500 
        >= pd->max_nobjs) {
-	int new =  pd->nobjs + 2*(pd->numRasters-pd->writtenRasters) + 2000;
-	void *tmp = realloc(pd->pos, new * sizeof(int));
+	int new_ =  pd->nobjs + 2*(pd->numRasters-pd->writtenRasters) + 2000;
+	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
 	    error("unable to increase object limit: please shutdown the pdf device");
 	pd->pos = (int *) tmp;
-	pd->max_nobjs = new;
+	pd->max_nobjs = new_;
     }
 
     /* Write out any new rasters */
@@ -7233,12 +7233,12 @@ static void PDF_NewPage(const pGEcontext gc,
 	pd->pagemax *= 2;
     }
     if(pd->nobjs + 500 >= pd->max_nobjs) {
-	int new = pd->max_nobjs + 2000;
-	void *tmp = realloc(pd->pos, new * sizeof(int));
+	int new_ = pd->max_nobjs + 2000;
+	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
 	    error("unable to increase object limit: please shutdown the pdf device");
 	pd->pos = (int *) tmp;
-	pd->max_nobjs = new;
+	pd->max_nobjs = new_;
     }
 
 

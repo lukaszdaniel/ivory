@@ -31,7 +31,7 @@
 #include <config.h> /* needed for HAVE_* */
 #include "nmath.h"
 
-double fround(double x, double digits) {
+double Rf_fround(double x, double digits) {
 #define MAX_DIGITS (DBL_MAX_10_EXP + DBL_DIG)
     /* was DBL_MAX_10_EXP (= 308, IEEE) till R 3.6.x; before,
        was (DBL_DIG - 1)  till R 0.99  */

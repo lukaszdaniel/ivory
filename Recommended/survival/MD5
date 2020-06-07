@@ -131,9 +131,9 @@ eb3426c1018a1a407180b922c8568920 *vignettes/adjcurve.Rnw
 dfffceef39872c105be8fb3b54d2c15d *vignettes/validate.Rnw
 7d2afaa75cefcc21619b18780d9bb86b *vignettes/refer.bib
 9eaec0074096f3be163bfd72536d632c *DESCRIPTION
-60487713d7a555d8e372260ca5fa38e9 *po/survival.pot
-a7adeeb0f6ea3e7753b0f6c10a933e01 *po/R-pl.po
-9921043f68c4165216717f3f1b3c632a *po/R-survival.pot
+63e544d08d8a7cfe480497a693d1efc6 *po/survival.pot
+7ea5de90d104dbb8c10b55f2334869e7 *po/R-pl.po
+825c50ff4a21c5e163029caa76a9a3bb *po/R-survival.pot
 0323c41446d63fbf72837f9be7ff0cb4 *po/pl.po
 e43ac78be5fd7b4aed1917aecacaad6b *noweb/coxsurv.Rnw
 3143c29a616586f7445991f3a142ca4e *noweb/pyears.Rnw
@@ -195,7 +195,7 @@ b75ba40c947031f3285135bf83218664 *noweb/rates/usdecennial.dat
 40daba122be0c002e101c3d9b603668e *.Rinstignore
 ba01ac7a9482cc481afa2bcfd8126e99 *inst/CITATION
 e2151450f4c30202cbc0c8e4c957b472 *inst/NEWS.Rd
-9ba39e7b57fc54f69841657605e70de7 *inst/po/en@quot/LC_MESSAGES/R-survival.mo
+37a8a1f8f988d4b355c24bdaa9aef8d3 *inst/po/en@quot/LC_MESSAGES/R-survival.mo
 0c8cf15bb97f055dd7780a8c3bd5cf28 *inst/po/pl/LC_MESSAGES/R-survival.mo
 3e8ebae349953a3b7a665eecce562802 *inst/COPYRIGHTS
 e5e28360d2f5718b176951da04d5e24b *inst/doc/population.Rnw
@@ -625,7 +625,7 @@ f70d80c9191897a8281c59e4179e381c *src/pyears1.c
 30b326d5fc0c54a22bbe840281a400e0 *src/cholesky5.c
 c658e5655161bda6a2f0551ac5af265e *src/coxscore2.c
 db03bf4d4b066001ab3693254d9075aa *src/chsolve3.c
-d581082f66939c0281ce8c859f723148 *src/gchol.c
+0684437a82a381909692f0b09058233f *src/gchol.c
 8dc673be20ef1e7ad592d053336a5ea3 *src/survfitci.c
 85e382344b4f2cec6a07a4ad0121f95e *src/agfit5.c
 e88a56cc52359f1fead9dd0cb84c4f8e *src/chsolve2.c

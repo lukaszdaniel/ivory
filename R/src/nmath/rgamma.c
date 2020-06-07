@@ -52,7 +52,7 @@
 
 #define repeat for(;;)
 
-double rgamma(double a, double scale)
+double Rf_rgamma(double a, double scale)
 {
 /* Constants : */
     const static double sqrt32 = 5.656854;

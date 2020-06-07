@@ -113,7 +113,7 @@
 
 
 /* additions for density functions (C.Loader) */
-#define R_D_fexp(f,x)     (give_log ? -0.5*log(f)+(x) : exp(x)/sqrt(f))
+#define R_D_fexp(f,x)     (log_p ? -0.5*log(f)+(x) : exp(x)/sqrt(f))
 
 /* [neg]ative or [non int]eger : */
 #define R_D_negInonint(x) (x < 0. || R_nonint(x))

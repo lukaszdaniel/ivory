@@ -41,7 +41,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dbinom_raw(double x, double n, double p, double q, int give_log)
+double Rf_dbinom_raw(double x, double n, double p, double q, int give_log)
 {
     double lf, lc;
 
@@ -72,7 +72,7 @@ double dbinom_raw(double x, double n, double p, double q, int give_log)
     return R_D_exp(lc - 0.5*lf);
 }
 
-double dbinom(double x, double n, double p, int give_log)
+double Rf_dbinom(double x, double n, double p, int give_log)
 {
 #ifdef IEEE_754
     /* NaNs propagated correctly */

@@ -285,7 +285,7 @@ static double yDevtoCharUnits(double y, pGEDevDesc dd)
     return yDevtoNDCUnits(y, dd)/(gpptr(dd)->cex * gpptr(dd)->yNDCPerChar);
 }
 
-static void NORET BadUnitsError(const char *where)
+NORET static void BadUnitsError(const char *where)
 {
     error(_("bad units specified in '%s'"), where);
 }
@@ -1755,7 +1755,7 @@ static Rboolean validFigureMargins(pGEDevDesc dd)
 	    (gpptr(dd)->plt[2] < gpptr(dd)->plt[3]));
 }
 
-static void NORET invalidError(const char *message, pGEDevDesc dd)
+NORET static void invalidError(const char *message, pGEDevDesc dd)
 {
     dpptr(dd)->currentFigure -= 1;
     if (dpptr(dd)->currentFigure < 1)

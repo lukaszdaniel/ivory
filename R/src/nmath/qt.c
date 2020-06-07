@@ -41,7 +41,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qt(double p, double ndf, int lower_tail, int log_p)
+double Rf_qt(double p, double ndf, int lower_tail, int log_p)
 {
     const static double eps = 1.e-12;
 

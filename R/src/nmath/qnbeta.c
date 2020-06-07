@@ -20,7 +20,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qnbeta(double p, double a, double b, double ncp,
+double Rf_qnbeta(double p, double a, double b, double ncp,
 	      int lower_tail, int log_p)
 {
     const static double accu = 1e-15;

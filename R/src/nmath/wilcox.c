@@ -50,8 +50,7 @@
 static double ***w; /* to store  cwilcox(i,j,k) -> w[i][j][k] */
 static int allocated_m, allocated_n;
 
-static void
-w_free(int m, int n)
+static void w_free(int m, int n)
 {
     int i, j;
 
@@ -66,8 +65,7 @@ w_free(int m, int n)
     w = 0; allocated_m = allocated_n = 0;
 }
 
-static void
-w_init_maybe(int m, int n)
+static void w_init_maybe(int m, int n)
 {
     int i;
 
@@ -100,8 +98,7 @@ w_init_maybe(int m, int n)
     }
 }
 
-static void
-w_free_maybe(int m, int n)
+static void w_free_maybe(int m, int n)
 {
     if (m > WILCOX_MAX || n > WILCOX_MAX)
 	w_free(m, n);
@@ -109,8 +106,7 @@ w_free_maybe(int m, int n)
 
 
 /* This counts the number of choices with statistic = k */
-static double
-cwilcox(int k, int m, int n)
+static double cwilcox(int k, int m, int n)
 {
     int c, u, i, j, l;
 
@@ -160,7 +156,7 @@ cwilcox(int k, int m, int n)
     return(w[i][j][k]);
 }
 
-double dwilcox(double x, double m, double n, int give_log)
+double Rf_dwilcox(double x, double m, double n, int give_log)
 {
     double d;
 
@@ -190,7 +186,7 @@ double dwilcox(double x, double m, double n, int give_log)
 }
 
 /* args have the same meaning as R function pwilcox */
-double pwilcox(double q, double m, double n, int lower_tail, int log_p)
+double Rf_pwilcox(double q, double m, double n, int lower_tail, int log_p)
 {
     int i;
     double c, p;
@@ -234,7 +230,7 @@ double pwilcox(double q, double m, double n, int lower_tail, int log_p)
 
 /* x is 'p' in R function qwilcox */
 
-double qwilcox(double x, double m, double n, int lower_tail, int log_p)
+double Rf_qwilcox(double x, double m, double n, int lower_tail, int log_p)
 {
     double c, p;
 
@@ -288,7 +284,7 @@ double qwilcox(double x, double m, double n, int lower_tail, int log_p)
     return(q);
 }
 
-double rwilcox(double m, double n)
+double Rf_rwilcox(double m, double n)
 {
     int i, j, k, *x;
     double r;

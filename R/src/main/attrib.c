@@ -682,23 +682,23 @@ static SEXP s_dot_S3Class = 0;
 static SEXP R_S4_extends_table = 0;
 
 
-static SEXP cache_class(const char *class, SEXP klass)
+static SEXP cache_class(const char *class_, SEXP klass)
 {
     if(!R_S4_extends_table) {
 	R_S4_extends_table = R_NewHashedEnv(R_NilValue, ScalarInteger(0));
 	R_PreserveObject(R_S4_extends_table);
     }
     if(isNull(klass)) {
-	R_removeVarFromFrame(install(class), R_S4_extends_table);
+	R_removeVarFromFrame(install(class_), R_S4_extends_table);
     } else {
-	defineVar(install(class), klass, R_S4_extends_table);
+	defineVar(install(class_), klass, R_S4_extends_table);
     }
     return klass;
 }
 
 static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     static SEXP s_extends = 0, s_extendsForS3;
-    SEXP e, val; const char *class;
+    SEXP e, val; const char *class_;
     const void *vmax;
     if(use_tab) vmax = vmaxget();
     if(!s_extends) {
@@ -710,9 +710,9 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     if(!isMethodsDispatchOn()) {
         return klass;
     }
-    class = translateChar(STRING_ELT(klass, 0)); /* TODO: include package attr. */
+    class_ = translateChar(STRING_ELT(klass, 0)); /* TODO: include package attr. */
     if(use_tab) {
-	val = findVarInFrame(R_S4_extends_table, install(class));
+	val = findVarInFrame(R_S4_extends_table, install(class_));
 	vmaxset(vmax);
 	if(val != R_UnboundValue)
 	    return val;
@@ -723,7 +723,7 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     val = CDR(e);
     SETCAR(val, klass);
     PROTECT(val = eval(e, R_MethodsNamespace));
-    cache_class(class, val);
+    cache_class(class_, val);
     UNPROTECT(2); /* val, e */
     return(val);
 }
@@ -876,8 +876,8 @@ HIDDEN SEXP R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
       SEXP klass = CAR(args);
       if(TYPEOF(klass) != STRSXP || LENGTH(klass) < 1)
 	  error(_("invalid class argument passed to internal '.class_cache'"));
-      const char *class = translateChar(STRING_ELT(klass, 0));
-      return cache_class(class, CADR(args));
+      const char *class_ = translateChar(STRING_ELT(klass, 0));
+      return cache_class(class_, CADR(args));
   }
   check1arg(args, call, "x");
   if(PRIMVAL(op) == 2)

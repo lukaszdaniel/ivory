@@ -36,7 +36,7 @@
 #include "dpq.h"
 
 // called also from dgamma.c, pgamma.c, dnbeta.c, dnbinom.c, dnchisq.c :
-double dpois_raw(double x, double lambda, int give_log)
+double Rf_dpois_raw(double x, double lambda, int give_log)
 {
     /*       x >= 0 ; integer for dpois(), but not e.g. for pgamma()!
         lambda >= 0
@@ -54,7 +54,7 @@ double dpois_raw(double x, double lambda, int give_log)
     return(R_D_fexp( M_2PI*x, -stirlerr(x)-bd0(x,lambda) ));
 }
 
-double dpois(double x, double lambda, int give_log)
+double Rf_dpois(double x, double lambda, int give_log)
 {
 #ifdef IEEE_754
     if(ISNAN(x) || ISNAN(lambda))

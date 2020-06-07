@@ -55,7 +55,7 @@
      */
 
 
-double fprec(double x, double digits)
+double Rf_fprec(double x, double digits)
 {
     double l10, pow10, sgn, p10, P10;
     int e10, e2, do_round, dig;

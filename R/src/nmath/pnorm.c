@@ -22,7 +22,7 @@
  *
  *   #include <Rmath.h>
  *
- *   double pnorm5(double x, double mu, double sigma, int lower_tail,int log_p);
+ *   double pnorm(double x, double mu, double sigma, int lower_tail,int log_p);
  *	   {pnorm (..) is synonymous and preferred inside R}
  *
  *   void   pnorm_both(double x, double *cum, double *ccum,
@@ -59,7 +59,7 @@
 
 #include "nmath.h"
 #include "dpq.h"
-double pnorm5(double x, double mu, double sigma, int lower_tail, int log_p)
+double Rf_pnorm(double x, double mu, double sigma, int lower_tail, int log_p)
 {
     double p, cp;
 
@@ -88,7 +88,7 @@ double pnorm5(double x, double mu, double sigma, int lower_tail, int log_p)
 
 #define SIXTEN	16 /* Cutoff allowing exact "*" and "/" */
 
-void pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
+void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 {
 /* i_tail in {0,1,2} means: "lower", "upper", or "both" :
    if(lower) return  *cum := P[X <= x]

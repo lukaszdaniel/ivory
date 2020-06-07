@@ -41,8 +41,7 @@
 static double *w;
 static int allocated_n;
 
-static void
-w_free(void)
+static void w_free(void)
 {
     if (!w) return;
 
@@ -56,8 +55,7 @@ void signrank_free(void)
     w_free();
 }
 
-static void
-w_init_maybe(int n)
+static void w_init_maybe(int n)
 {
     int u, c;
 
@@ -80,8 +78,7 @@ w_init_maybe(int n)
     }
 }
 
-static double
-csignrank(int k, int n)
+static double csignrank(int k, int n)
 {
     int c, u, j;
 
@@ -112,7 +109,7 @@ csignrank(int k, int n)
     return w[k];
 }
 
-double dsignrank(double x, double n, int give_log)
+double Rf_dsignrank(double x, double n, int give_log)
 {
     double d;
 
@@ -137,7 +134,7 @@ double dsignrank(double x, double n, int give_log)
     return(d);
 }
 
-double psignrank(double x, double n, int lower_tail, int log_p)
+double Rf_psignrank(double x, double n, int lower_tail, int log_p)
 {
     int i;
     double f, p;
@@ -174,7 +171,7 @@ double psignrank(double x, double n, int lower_tail, int log_p)
     return(R_DT_val(p));
 } /* psignrank() */
 
-double qsignrank(double x, double n, int lower_tail, int log_p)
+double Rf_qsignrank(double x, double n, int lower_tail, int log_p)
 {
     double f, p;
 
@@ -227,7 +224,7 @@ double qsignrank(double x, double n, int lower_tail, int log_p)
     return(q);
 }
 
-double rsignrank(double n)
+double Rf_rsignrank(double n)
 {
     int i, k;
     double r;

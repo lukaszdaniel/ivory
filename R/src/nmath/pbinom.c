@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pbinom(double x, double n, double p, int lower_tail, int log_p)
+double Rf_pbinom(double x, double n, double p, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(n) || ISNAN(p))

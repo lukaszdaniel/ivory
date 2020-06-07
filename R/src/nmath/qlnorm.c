@@ -26,7 +26,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qlnorm(double p, double meanlog, double sdlog, int lower_tail, int log_p)
+double Rf_qlnorm(double p, double meanlog, double sdlog, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(p) || ISNAN(meanlog) || ISNAN(sdlog))

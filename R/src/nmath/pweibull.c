@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pweibull(double x, double shape, double scale, int lower_tail, int log_p)
+double Rf_pweibull(double x, double shape, double scale, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(shape) || ISNAN(scale))

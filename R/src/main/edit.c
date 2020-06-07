@@ -70,7 +70,7 @@ int Rgui_Edit(char *filename, int enc, char *title, int modal);
 static char *DefaultFileName;
 static int  EdFileUsed = 0;
 
-HIDDEN void InitEd()
+HIDDEN void Rf_InitEd()
 {
 #ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
@@ -79,7 +79,7 @@ HIDDEN void InitEd()
 #endif
 }
 
-void CleanEd()
+void Rf_CleanEd()
 {
     if(EdFileUsed) unlink(DefaultFileName);
 }

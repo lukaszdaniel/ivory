@@ -1135,7 +1135,7 @@ SEXP chm_factor_to_SEXP(CHM_FR f, int dofree)
 {
     SEXP ans;
     int *dims, *type;
-    char *class = (char*) NULL;	/* -Wall */
+    char *class_ = (char*) NULL;	/* -Wall */
 
 #define DOFREE_MAYBE					\
     if(dofree) {					\
@@ -1151,17 +1151,17 @@ SEXP chm_factor_to_SEXP(CHM_FR f, int dofree)
 
     switch(f->xtype) {
     case CHOLMOD_REAL:
-	class = f->is_super ? "dCHMsuper" : "dCHMsimpl";
+	class_ = f->is_super ? "dCHMsuper" : "dCHMsimpl";
 	break;
     case CHOLMOD_PATTERN:
-	class = f->is_super ? "nCHMsuper" : "nCHMsimpl";
+	class_ = f->is_super ? "nCHMsuper" : "nCHMsimpl";
 	break;
     default:
 	DOFREE_MAYBE;
 	error(_("f->xtype of %d not recognized"), f->xtype);
     }
 
-    ans = PROTECT(NEW_OBJECT_OF_CLASS(class));
+    ans = PROTECT(NEW_OBJECT_OF_CLASS(class_));
     dims = INTEGER(ALLOC_SLOT(ans, Matrix_DimSym, INTSXP, 2));
     dims[0] = dims[1] = f->n;
 				/* copy component of known length */

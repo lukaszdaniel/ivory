@@ -24,7 +24,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pexp(double x, double scale, int lower_tail, int log_p)
+double Rf_pexp(double x, double scale, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(scale))

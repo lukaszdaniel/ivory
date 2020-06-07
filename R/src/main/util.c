@@ -2444,11 +2444,10 @@ HIDDEN SEXP do_crc64(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(ans);
 }
 
-static void
-bincode(double *x, R_xlen_t n, double *breaks, int nb,
+static void bincode(double *x, R_xlen_t n, double *breaks, int nb,
 	int *code, int right, int include_border)
 {
-    int lo, hi, nb1 = nb - 1, new;
+    int lo, hi, nb1 = nb - 1, new_;
     int lft = !right;
 
     /* This relies on breaks being sorted, so wise to check that */
@@ -2464,11 +2463,11 @@ bincode(double *x, R_xlen_t n, double *breaks, int nb,
 	       (x[i] == breaks[lft ? hi : lo] && ! include_border)) ;
 	    else {
 		while(hi - lo >= 2) {
-		    new = (hi + lo)/2;
-		    if(x[i] > breaks[new] || (lft && x[i] == breaks[new]))
-			lo = new;
+		    new_ = (hi + lo)/2;
+		    if(x[i] > breaks[new_] || (lft && x[i] == breaks[new_]))
+			lo = new_;
 		    else
-			hi = new;
+			hi = new_;
 		}
 		code[i] = lo + 1;
 	    }

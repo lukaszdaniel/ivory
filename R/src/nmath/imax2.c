@@ -28,7 +28,7 @@
 
 #include "nmath.h"
 
-int imax2(int x, int y)
+int Rf_imax2(int x, int y)
 {
     return (x < y) ? y : x;
 }

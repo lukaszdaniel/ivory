@@ -91,8 +91,7 @@
                              MACH_NAME in {machar, machar_LD,   ..}
 			         ABS() in {fabs(), fabsl()  ,   ..}
 */
-static void
-MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, int *negep,
+static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, int *negep,
 	  int *iexp, int *minexp, int *maxexp,
 	  DTYPE *eps, DTYPE *epsneg, DTYPE *xmin, DTYPE *xmax)
 {

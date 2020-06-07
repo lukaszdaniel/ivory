@@ -35,7 +35,7 @@
 static void K_bessel(double *x, double *alpha, int *nb,
 		     int *ize, double *bk, int *ncalc);
 
-double bessel_k(double x, double alpha, double expo)
+double Rf_bessel_k(double x, double alpha, double expo)
 {
     int nb, ncalc, ize;
     double *bk;
@@ -81,7 +81,7 @@ double bessel_k(double x, double alpha, double expo)
 
 /* modified version of bessel_k that accepts a work array instead of
    allocating one. */
-double bessel_k_ex(double x, double alpha, double expo, double *bk)
+double Rf_bessel_k_ex(double x, double alpha, double expo, double *bk)
 {
     int nb, ncalc, ize;
 

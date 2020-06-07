@@ -73,7 +73,7 @@ int R_finite(double);		/* True if none of NA, NaN, +/-Inf */
   int R_isnancpp(double); /* in arithmetic.c */
 #  define ISNAN(x)     R_isnancpp(x)
 #else
-#  define ISNAN(x)     (isnan(x)!=0)
+#  define ISNAN(x)     (isnan(x) != 0)
 #endif
 
 /* The following is only defined inside R */

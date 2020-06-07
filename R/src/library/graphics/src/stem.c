@@ -165,7 +165,7 @@ static void
 C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
 	   int right, int include_border)
 {
-    R_xlen_t i, lo, hi, nb1 = nb - 1, new;
+    R_xlen_t i, lo, hi, nb1 = nb - 1, new_;
 
     // for(i = 0; i < nb1; i++) count[i] = 0;
     memset(count, 0, nb1 * sizeof(int));
@@ -177,11 +177,11 @@ C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
 	    if(breaks[lo] <= x[i] &&
 	       (x[i] < breaks[hi] || (x[i] == breaks[hi] && include_border))) {
 		while(hi-lo >= 2) {
-		    new = (hi+lo)/2;
-		    if(x[i] > breaks[new] || (!right && x[i] == breaks[new]))
-			lo = new;
+		    new_ = (hi+lo)/2;
+		    if(x[i] > breaks[new_] || (!right && x[i] == breaks[new_]))
+			lo = new_;
 		    else
-			hi = new;
+			hi = new_;
 		}
 #ifdef LONG_VECTOR_SUPPORT
 		if(count[lo] >= INT_MAX)

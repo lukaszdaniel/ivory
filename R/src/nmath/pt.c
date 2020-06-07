@@ -21,7 +21,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pt(double x, double n, int lower_tail, int log_p)
+double Rf_pt(double x, double n, int lower_tail, int log_p)
 {
 /* return  P[ T <= x ]	where
  * T ~ t_{n}  (t distrib. with n degrees of freedom).

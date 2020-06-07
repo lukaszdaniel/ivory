@@ -29,7 +29,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pnbinom(double x, double size, double prob, int lower_tail, int log_p)
+double Rf_pnbinom(double x, double size, double prob, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(size) || ISNAN(prob))
@@ -48,7 +48,7 @@ double pnbinom(double x, double size, double prob, int lower_tail, int log_p)
     return pbeta(prob, size, x + 1, lower_tail, log_p);
 }
 
-double pnbinom_mu(double x, double size, double mu, int lower_tail, int log_p)
+double Rf_pnbinom_mu(double x, double size, double mu, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(size) || ISNAN(mu))

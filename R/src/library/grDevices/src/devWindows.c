@@ -1091,7 +1091,7 @@ static void grpopupact(control m)
 
 static SEXP NewPlotHistory(int n)
 {
-    SEXP  vDL, class;
+    SEXP  vDL, class_;
     int   i;
 
     PROTECT(vDL = allocVector(VECSXP, 5));
@@ -1104,8 +1104,8 @@ static SEXP NewPlotHistory(int n)
     pCURRENTPOS = -1;
     for (i = 0; i < n; i++)
 	SET_VECTOR_ELT(pHISTORY, i, R_NilValue);
-    PROTECT(class = mkString("SavedPlots"));
-    classgets(vDL, class);
+    PROTECT(class_ = mkString("SavedPlots"));
+    classgets(vDL, class_);
     SETDL;
     UNPROTECT(7);
     return vDL;
@@ -1132,7 +1132,7 @@ static SEXP GrowthPlotHistory(SEXP vDL)
 static void AddtoPlotHistory(SEXP snapshot, int replace)
 {
     int   where;
-    SEXP  class;
+    SEXP  class_;
 
     GETDL;
     PROTECT(snapshot);
@@ -1151,8 +1151,8 @@ static void AddtoPlotHistory(SEXP snapshot, int replace)
     else
 	where = pNUMPLOTS;
 
-    PROTECT(class = mkString("recordedplot"));
-    classgets(snapshot, class);
+    PROTECT(class_ = mkString("recordedplot"));
+    classgets(snapshot, class_);
     SET_VECTOR_ELT(pHISTORY, where, snapshot);
     pCURRENTPOS = where;
     if (!replace) pNUMPLOTS += 1;

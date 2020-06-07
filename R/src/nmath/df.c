@@ -35,7 +35,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double df(double x, double m, double n, int give_log)
+double Rf_df(double x, double m, double n, int give_log)
 {
     double p, q, f, dens;
 

@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double ppois(double x, double lambda, int lower_tail, int log_p)
+double Rf_ppois(double x, double lambda, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(lambda))

@@ -51,8 +51,7 @@ static void init_file_handle (struct file_handle * handle);
 
 /* Sets up some fields in H; caller should fill in
    H->{NAME,NORM_FN,FN}. */
-static void
-init_file_handle (struct file_handle *h)
+static void init_file_handle (struct file_handle *h)
 {
   h->recform = FH_RF_VARIABLE;
   h->mode = FH_MD_CHARACTER;
@@ -65,8 +64,7 @@ init_file_handle (struct file_handle *h)
    if no handle exists for that file.  All filenames are normalized
    first, so different filenames referring to the same file will
    return the same file handle. */
-struct file_handle *
-fh_get_handle_by_filename (const char *filename)
+struct file_handle *fh_get_handle_by_filename (const char *filename)
 {
   struct file_handle f, *fp;
   char *fn;
@@ -104,8 +102,7 @@ fh_get_handle_by_filename (const char *filename)
 
 /* Returns the handle with identifier NAME, if it exists; otherwise
    reports error to user and returns NULL. */
-struct file_handle *
-fh_get_handle_by_name (const char name[9])
+struct file_handle *fh_get_handle_by_name (const char name[9])
 {
   struct file_handle f, *fp;
   f.name = (char *) name;
@@ -122,8 +119,7 @@ fh_get_handle_by_name (const char name[9])
    Return value is in a static buffer.
 
    Useful for printing error messages about use of file handles.  */
-const char *
-fh_handle_name (struct file_handle *h)
+const char *fh_handle_name (struct file_handle *h)
 {
   static char *buf = NULL;
 
@@ -151,8 +147,7 @@ fh_handle_name (struct file_handle *h)
 /* Closes the stdio FILE associated with handle H.  Frees internal
    buffers associated with that file.  Does *not* destroy the file
    handle H.  (File handles are permanent during a session.)  */
-void
-fh_close_handle (struct file_handle *h)
+void fh_close_handle (struct file_handle *h)
 {
   if (h == NULL)
     return;
@@ -170,8 +165,7 @@ fh_close_handle (struct file_handle *h)
 }
 
 /* Compares names of file handles A and B. */
-static int
-cmp_file_handle (const void *a, const void *b, void *foo)
+static int cmp_file_handle (const void *a, const void *b, void *foo)
 {
   return strcmp (((struct file_handle *) a)->name,
 		 ((struct file_handle *) b)->name);
@@ -182,8 +176,7 @@ cmp_file_handle (const void *a, const void *b, void *foo)
 
 static char inline_filename[] = "<Inline File>";
 
-void
-fh_init_files (void)
+void fh_init_files (void)
 {
   /* Create AVL tree. */
   files = R_avl_create (cmp_file_handle, NULL);
@@ -199,15 +192,13 @@ fh_init_files (void)
 }
 
 /* Returns the (normalized) filename associated with file handle H. */
-char *
-fh_handle_filename (struct file_handle * h)
+char *fh_handle_filename (struct file_handle * h)
 {
   return h->norm_fn;
 }
 
 /* Returns the width of a logical record on file handle H. */
-size_t
-fh_record_width (struct file_handle *h)
+size_t fh_record_width (struct file_handle *h)
 {
   if (h == inline_file)
     return 80;

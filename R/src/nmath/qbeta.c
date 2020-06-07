@@ -45,12 +45,11 @@
 #define MLOGICAL_NA -1
 // an "NA_LOGICAL" substitute for Mathlib {only used here, for now}
 
-//attribute_hidden
-static void
-qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
+//HIDDEN
+static void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int swap_01, double log_q_cut, int n_N, double* qb);
 
-double qbeta(double alpha, double p, double q, int lower_tail, int log_p)
+double Rf_qbeta(double alpha, double p, double q, int lower_tail, int log_p)
 {
 
     /* test for admissibility of parameters */
@@ -102,8 +101,7 @@ static const double
 #define const4 0.04481
 
 // Returns both qbeta() and its "mirror" 1-qbeta(). Useful notably when qbeta() ~= 1
-attribute_hidden void
-qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
+HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int swap_01, // {TRUE, NA, FALSE}: if NA, algorithm decides swap_tail
 	  double log_q_cut, /* if == Inf: return log(qbeta(..));
 			       otherwise, if finite: the bound for

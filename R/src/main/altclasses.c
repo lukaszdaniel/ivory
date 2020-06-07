@@ -81,7 +81,7 @@ static SEXP compact_intseq_Serialized_state(SEXP x)
 static SEXP new_compact_intseq(R_xlen_t, int, int);
 static SEXP new_compact_realseq(R_xlen_t, double, double);
 
-static SEXP compact_intseq_Unserialize(SEXP class, SEXP state)
+static SEXP compact_intseq_Unserialize(SEXP class_, SEXP state)
 {
     R_xlen_t n = COMPACT_INTSEQ_SERIALIZED_STATE_LENGTH(state);
     int n1 = COMPACT_INTSEQ_SERIALIZED_STATE_FIRST(state);
@@ -121,8 +121,7 @@ static SEXP compact_intseq_Duplicate(SEXP x, Rboolean deep)
     return val;
 }
 
-static
-Rboolean compact_intseq_Inspect(SEXP x, int pre, int deep, int pvec,
+static Rboolean compact_intseq_Inspect(SEXP x, int pre, int deep, int pvec,
 				void (*inspect_subtree)(SEXP, int, int, int))
 {
     int inc = COMPACT_INTSEQ_INFO_INCR(COMPACT_SEQ_INFO(x));
@@ -352,7 +351,7 @@ static SEXP compact_realseq_Serialized_state(SEXP x)
     return COMPACT_SEQ_INFO(x);
 }
 
-static SEXP compact_realseq_Unserialize(SEXP class, SEXP state)
+static SEXP compact_realseq_Unserialize(SEXP class_, SEXP state)
 {
     double inc = COMPACT_REALSEQ_INFO_INCR(state);
     R_xlen_t len = COMPACT_REALSEQ_INFO_LENGTH(state);
@@ -374,8 +373,7 @@ static SEXP compact_realseq_Duplicate(SEXP x, Rboolean deep)
     return val;
 }
 
-static
-Rboolean compact_realseq_Inspect(SEXP x, int pre, int deep, int pvec,
+static Rboolean compact_realseq_Inspect(SEXP x, int pre, int deep, int pvec,
 				 void (*inspect_subtree)(SEXP, int, int, int))
 {
     double inc = COMPACT_REALSEQ_INFO_INCR(COMPACT_SEQ_INFO(x));
@@ -446,8 +444,7 @@ static double compact_realseq_Elt(SEXP x, R_xlen_t i)
     }
 }
 
-static R_xlen_t
-compact_realseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
+static R_xlen_t compact_realseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
     /* should not get here if x is already expanded */
     CHECK_NOT_EXPANDED(sx);
@@ -645,15 +642,14 @@ static SEXP deferred_string_Serialized_state(SEXP x)
     return state != R_NilValue ? state : NULL;
 }
 
-static SEXP deferred_string_Unserialize(SEXP class, SEXP state)
+static SEXP deferred_string_Unserialize(SEXP class_, SEXP state)
 {
     SEXP arg = DEFERRED_STRING_STATE_ARG(state);
     SEXP info = DEFERRED_STRING_STATE_INFO(state);
     return R_deferred_coerceToString(arg, info);
 }
 
-static
-Rboolean deferred_string_Inspect(SEXP x, int pre, int deep, int pvec,
+static Rboolean deferred_string_Inspect(SEXP x, int pre, int deep, int pvec,
 				 void (*inspect_subtree)(SEXP, int, int, int))
 {
     SEXP state = DEFERRED_STRING_STATE(x);
@@ -977,18 +973,18 @@ static SEXP make_mmap(void *p, SEXP file, size_t size, int type,
     SEXP eptr = PROTECT(R_MakeExternalPtr(p, R_NilValue, state));
     register_mmap_eptr(eptr);
 
-    R_altrep_class_t class;
+    R_altrep_class_t class_;
     switch(type) {
     case INTSXP:
-	class = mmap_integer_class;
+	class_ = mmap_integer_class;
 	break;
     case REALSXP:
-	class = mmap_real_class;
+	class_ = mmap_real_class;
 	break;
     default: error(_("mmap for %s not supported yet"), type2char(type));
     }
 
-    SEXP ans = R_new_altrep(class, eptr, state);
+    SEXP ans = R_new_altrep(class_, eptr, state);
     if (ptrOK && ! wrtOK)
 	MARK_NOT_MUTABLE(ans);
 
@@ -1088,7 +1084,7 @@ static SEXP mmap_Serialized_state(SEXP x)
 
 static SEXP mmap_file(SEXP, int, Rboolean, Rboolean, Rboolean, Rboolean);
 
-static SEXP mmap_Unserialize(SEXP class, SEXP state)
+static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 {
     SEXP file = MMAP_STATE_FILE(state);
     int type = MMAP_STATE_TYPE(state);
@@ -1156,8 +1152,7 @@ static int mmap_integer_Elt(SEXP x, R_xlen_t i)
     return p[i];
 }
 
-static
-R_xlen_t mmap_integer_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
+static R_xlen_t mmap_integer_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     int *x = MMAP_ADDR(sx);
     R_xlen_t size = XLENGTH(sx);
@@ -1179,8 +1174,7 @@ static double mmap_real_Elt(SEXP x, R_xlen_t i)
     return p[i];
 }
 
-static
-R_xlen_t mmap_real_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
+static R_xlen_t mmap_real_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
     double *x = MMAP_ADDR(sx);
     R_xlen_t size = XLENGTH(sx);
@@ -1451,7 +1445,7 @@ static SEXP wrapper_Serialized_state(SEXP x)
 
 static SEXP make_wrapper(SEXP, SEXP);
 
-static SEXP wrapper_Unserialize(SEXP class, SEXP state)
+static SEXP wrapper_Unserialize(SEXP class_, SEXP state)
 {
     return make_wrapper(CAR(state), CDR(state));
 }
@@ -1531,8 +1525,7 @@ static int wrapper_integer_Elt(SEXP x, R_xlen_t i)
     return INTEGER_ELT(WRAPPER_WRAPPED(x), i);
 }
 
-static
-R_xlen_t wrapper_integer_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, int *buf)
+static R_xlen_t wrapper_integer_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, int *buf)
 {
     return INTEGER_GET_REGION(WRAPPER_WRAPPED(x), i, n, buf);
 }
@@ -1565,8 +1558,7 @@ static int wrapper_logical_Elt(SEXP x, R_xlen_t i)
     return LOGICAL_ELT(WRAPPER_WRAPPED(x), i);
 }
 
-static
-R_xlen_t wrapper_logical_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, int *buf)
+static R_xlen_t wrapper_logical_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, int *buf)
 {
     return LOGICAL_GET_REGION(WRAPPER_WRAPPED(x), i, n, buf);
 }
@@ -1599,8 +1591,7 @@ static double wrapper_real_Elt(SEXP x, R_xlen_t i)
     return REAL_ELT(WRAPPER_WRAPPED(x), i);
 }
 
-static
-R_xlen_t wrapper_real_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, double *buf)
+static R_xlen_t wrapper_real_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, double *buf)
 {
     return REAL_GET_REGION(WRAPPER_WRAPPED(x), i, n, buf);
 }
@@ -1633,8 +1624,7 @@ static Rcomplex wrapper_complex_Elt(SEXP x, R_xlen_t i)
     return COMPLEX_ELT(WRAPPER_WRAPPED(x), i);
 }
 
-static
-R_xlen_t wrapper_complex_Get_region(SEXP x, R_xlen_t i, R_xlen_t n,
+static R_xlen_t wrapper_complex_Get_region(SEXP x, R_xlen_t i, R_xlen_t n,
 				    Rcomplex *buf)
 {
     return COMPLEX_GET_REGION(WRAPPER_WRAPPED(x), i, n, buf);
@@ -1650,8 +1640,7 @@ static Rbyte wrapper_raw_Elt(SEXP x, R_xlen_t i)
     return RAW_ELT(WRAPPER_WRAPPED(x), i);
 }
 
-static
-R_xlen_t wrapper_raw_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, Rbyte *buf)
+static R_xlen_t wrapper_raw_Get_region(SEXP x, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
     return RAW_GET_REGION(WRAPPER_WRAPPED(x), i, n, buf);
 }

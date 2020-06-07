@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pf(double x, double df1, double df2, int lower_tail, int log_p)
+double Rf_pf(double x, double df1, double df2, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(df1) || ISNAN(df2))

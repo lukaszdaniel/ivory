@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dlnorm(double x, double meanlog, double sdlog, int give_log)
+double Rf_dlnorm(double x, double meanlog, double sdlog, int give_log)
 {
     double y;
 

@@ -43,8 +43,7 @@ static void La_Init(void)
 }
 
 
-HIDDEN SEXP
-do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(!initialized) La_Init();
@@ -57,8 +56,7 @@ do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-R_LapackRoutines *
-R_setLapackRoutines(R_LapackRoutines *routines)
+R_LapackRoutines *R_setLapackRoutines(R_LapackRoutines *routines)
 {
     R_LapackRoutines *tmp;
     tmp = ptr;

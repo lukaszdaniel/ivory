@@ -1,6 +1,6 @@
 /*
  *  AUTHOR
- *    Claus Ekstrøm, ekstrom@dina.kvl.dk
+ *    Claus Ekstrï¿½m, ekstrom@dina.kvl.dk
  *    July 15, 2003.
  *
  *  Merge in to R:
@@ -62,7 +62,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnt(double x, double df, double ncp, int give_log)
+double Rf_dnt(double x, double df, double ncp, int give_log)
 {
     double u;
 #ifdef IEEE_754

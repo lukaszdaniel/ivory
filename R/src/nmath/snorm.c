@@ -37,7 +37,7 @@
 #ifdef MATHLIB_STANDALONE
 static
 #else
-attribute_hidden
+HIDDEN
 #endif
 double BM_norm_keep = 0.0;
 
@@ -243,8 +243,8 @@ double norm_rand(void)
 	repeat {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
-	    tt = 0.479727404222441-0.595507138015940*fmin2(u2,u3);
-	    if(fmax2(u2,u3) <= 0.805577924423817)
+		tt = 0.479727404222441 - 0.595507138015940 * fmin2(u2, u3);
+		if(fmax2(u2,u3) <= 0.805577924423817)
 		return (u2<u3) ? tt : -tt;
 	}
     case BOX_MULLER:
@@ -254,8 +254,8 @@ double norm_rand(void)
 	    return s;
 	} else {
 	    theta = 2 * M_PI * unif_rand();
-	    R = sqrt(-2 * log(unif_rand())) + 10*DBL_MIN; /* ensure non-zero */
-	    BM_norm_keep = R * sin(theta);
+		R = sqrt(-2 * log(unif_rand())) + 10 * DBL_MIN; /* ensure non-zero */
+		BM_norm_keep = R * sin(theta);
 	    return R * cos(theta);
 	}
 #ifndef MATHLIB_STANDALONE
@@ -266,8 +266,8 @@ double norm_rand(void)
 #define BIG 134217728 /* 2^27 */
 	/* unif_rand() alone is not of high enough precision */
 	u1 = unif_rand();
-	u1 = (int)(BIG*u1) + unif_rand();
-	return qnorm5(u1/BIG, 0.0, 1.0, 1, 0);
+	u1 = (int)(BIG * u1) + unif_rand();
+	return qnorm(u1/BIG, 0.0, 1.0, 1, 0);
     case KINDERMAN_RAMAGE: /* see Reference above */
 	/* corrected version from Josef Leydold
 	 * */
@@ -281,7 +281,7 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = (A*A-2*log(u3));
+		tt = (A * A - 2 * log(u3));
 		if( u2*u2<(A*A)/tt )
 		    return (u1 < 0.986655477086949) ? sqrt(tt) : -sqrt(tt);
 	    }
@@ -291,7 +291,7 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = A - 0.630834801921960* fmin2(u2,u3);
+		tt = A - 0.630834801921960 * fmin2(u2, u3);
 		if(fmax2(u2,u3) <= 0.755591531667601)
 		    return (u2<u3) ? tt : -tt;
 		if(0.034240503750111*fabs(u2-u3) <= g(tt))

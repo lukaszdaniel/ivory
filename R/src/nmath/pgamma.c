@@ -69,8 +69,7 @@ static const double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON;/*=3.196577e18*
  *
  * auxilary in log1pmx() and lgamma1p()
  */
-static double
-logcf (double x, double i, double d,
+static double logcf(double x, double i, double d,
        double eps /* ~ relative tolerance */)
 {
     double c1 = 2 * d;
@@ -118,7 +117,7 @@ logcf (double x, double i, double d,
 }
 
 /* Accurate calculation of log(1+x)-x, particularly for small x.  */
-double log1pmx (double x)
+double Rf_log1pmx(double x)
 {
     static const double minLog1Value = -0.79149064;
 
@@ -143,7 +142,7 @@ double log1pmx (double x)
 
 
 /* Compute  log(gamma(a+1))  accurately also for small a (0 < a < 0.5). */
-double lgamma1p (double a)
+double Rf_lgamma1p(double a)
 {
     const double eulers_const =	 0.5772156649015328606065120900824024;
 
@@ -224,7 +223,7 @@ double lgamma1p (double a)
  * without causing overflows and without throwing away large handfuls
  * of accuracy.
  */
-double logspace_add (double logx, double logy)
+double Rf_logspace_add(double logx, double logy)
 {
     return fmax2 (logx, logy) + log1p (exp (-fabs (logx - logy)));
 }
@@ -238,7 +237,7 @@ double logspace_add (double logx, double logy)
  * without causing overflows and without throwing away large handfuls
  * of accuracy.
  */
-double logspace_sub (double logx, double logy)
+double Rf_logspace_sub(double logx, double logy)
 {
     return logx + R_Log1_Exp(logy - logx);
 }
@@ -259,7 +258,7 @@ double logspace_sub (double logx, double logy)
 # define EXP exp
 # define LOG log
 #endif
-double logspace_sum (const double* logx, int n)
+double Rf_logspace_sum(const double* logx, int n)
 {
     if(n == 0) return ML_NEGINF; // = log( sum(<empty>) )
     if(n == 1) return logx[0];
@@ -281,8 +280,7 @@ double logspace_sum (const double* logx, int n)
  *
  * and  dpois*(.., give_log = TRUE) :=  log( dpois*(..) )
 */
-static double
-dpois_wrap (double x_plus_1, double lambda, int give_log)
+static double dpois_wrap (double x_plus_1, double lambda, int give_log)
 {
 #ifdef DEBUG_p
     REprintf (" dpois_wrap(x+1=%.14g, lambda=%.14g, log=%d)\n",
@@ -308,8 +306,7 @@ dpois_wrap (double x_plus_1, double lambda, int give_log)
 /*
  * Abramowitz and Stegun 6.5.29 [right]
  */
-static double
-pgamma_smallx (double x, double alph, int lower_tail, int log_p)
+static double pgamma_smallx (double x, double alph, int lower_tail, int log_p)
 {
     double sum = 0, c = alph, n = 0, term;
 
@@ -363,8 +360,7 @@ pgamma_smallx (double x, double alph, int lower_tail, int log_p)
     }
 } /* pgamma_smallx() */
 
-static double
-pd_upper_series (double x, double y, int log_p)
+static double pd_upper_series (double x, double y, int log_p)
 {
     double term = x / y;
     double sum = term;
@@ -387,8 +383,7 @@ pd_upper_series (double x, double y, int log_p)
  *    scaled upper-tail F_{gamma}
  *  ~=  (y / d) * [1 +  (1-y)/d +  O( ((1-y)/d)^2 ) ]
  */
-static double
-pd_lower_cf (double y, double d)
+static double pd_lower_cf (double y, double d)
 {
     double f= 0.0 /* -Wall */, of, f0;
     double i, c2, c3, c4,  a1, b1,  a2, b2;
@@ -461,8 +456,7 @@ pd_lower_cf (double y, double d)
 #undef NEEDED_SCALE
 
 
-static double
-pd_lower_series (double lambda, double y)
+static double pd_lower_series (double lambda, double y)
 {
     double term = 1, sum = 0;
 
@@ -513,8 +507,7 @@ pd_lower_series (double lambda, double y)
  *
  * Abramowitz & Stegun 26.2.12
  */
-static double
-dpnorm (double x, int lower_tail, double lp)
+static double dpnorm (double x, int lower_tail, double lp)
 {
     /*
      * So as not to repeat a pnorm call, we expect
@@ -555,8 +548,7 @@ dpnorm (double x, int lower_tail, double lp)
  * Various assertions about this are made (without proof) at
  * http://members.aol.com/iandjmsmith/PoissonApprox.htm
  */
-static double
-ppois_asymp (double x, double lambda, int lower_tail, int log_p)
+static double ppois_asymp (double x, double lambda, int lower_tail, int log_p)
 {
     static const double coefs_a[8] = {
 	-1e99, /* placeholder used for 1-indexing */
@@ -720,7 +712,7 @@ double pgamma_raw (double x, double alph, int lower_tail, int log_p)
 }
 
 
-double pgamma(double x, double alph, double scale, int lower_tail, int log_p)
+double Rf_pgamma(double x, double alph, double scale, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(alph) || ISNAN(scale))

@@ -30,7 +30,7 @@
 
 #include "nmath.h"
 
-double fsign(double x, double y)
+double Rf_fsign(double x, double y)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(y))

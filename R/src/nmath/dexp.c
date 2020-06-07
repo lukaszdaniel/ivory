@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dexp(double x, double scale, int give_log)
+double Rf_dexp(double x, double scale, int give_log)
 {
 #ifdef IEEE_754
     /* NaNs propagated correctly */

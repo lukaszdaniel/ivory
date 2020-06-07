@@ -1131,7 +1131,7 @@ static void closerect(DEstruct DE)
 	    if (clength != 0) {
 		/* do it this way to ensure NA, Inf, ...  can get set */
 		char *endp;
-		double new = R_strtod(buf, &endp);
+		double new_ = R_strtod(buf, &endp);
 		Rboolean warn = !isBlankString(endp);
 		if (TYPEOF(cvec) == STRSXP) {
 		    SEXP newval;
@@ -1143,7 +1143,7 @@ static void closerect(DEstruct DE)
 			warning(_("dataentry: parse error on string"));
 		    UNPROTECT(2);
 		} else
-		    REAL(cvec)[wrow - 1] = new;
+		    REAL(cvec)[wrow - 1] = new_;
 		if (newcol && warn) {
 		    /* change mode to character */
 		    SEXP tmp = coerceVector(cvec, STRSXP);
@@ -1873,7 +1873,7 @@ static int R_X11Err(Display *dsp, XErrorEvent *event)
 }
 
 
-static int NORET R_X11IOErr(Display *dsp)
+NORET static int R_X11IOErr(Display *dsp)
 {
     error(_("X11 fatal IO error: please save work and shut down R"));
 }

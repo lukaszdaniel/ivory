@@ -19,7 +19,7 @@
 
 #include "nmath.h"
 
-double fmax2(double x, double y)
+double Rf_fmax2(double x, double y)
 {
 #ifdef IEEE_754
 	if (ISNAN(x) || ISNAN(y))

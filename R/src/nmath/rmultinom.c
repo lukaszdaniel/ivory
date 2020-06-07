@@ -44,7 +44,7 @@
 #define ML_WARN_ret_NAN(_k_) {ML_WARNING(ME_DOMAIN, "rmultinom()"); rN[_k_]=NA_INTEGER; return;}
 #endif
 
-void rmultinom(int n, double* prob, int K, int* rN)
+void Rf_rmultinom(int n, double* prob, int K, int* rN)
 /* `Return' vector  rN[1:K] {K := length(prob)}
  *  where rN[j] ~ Bin(n, prob[j]) ,  sum_j rN[j] == n,  sum_j prob[j] == 1,
  */

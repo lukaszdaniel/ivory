@@ -56,10 +56,10 @@ static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 }
 
 static void
-RegisterClass(SEXP class, int type, const char *cname, const char *pname,
+RegisterClass(SEXP class_, int type, const char *cname, const char *pname,
 	      DllInfo *dll)
 {
-    PROTECT(class);
+    PROTECT(class_);
     if (Registry == NULL) {
 	Registry = CONS(R_NilValue, R_NilValue);
 	R_PreserveObject(Registry);
@@ -71,16 +71,16 @@ RegisterClass(SEXP class, int type, const char *cname, const char *pname,
     SEXP iptr = R_MakeExternalPtr(dll, R_NilValue, R_NilValue);
     SEXP entry = LookupClassEntry(csym, psym);
     if (entry == NULL) {
-	entry = list4(class, psym, stype, iptr);
+	entry = list4(class_, psym, stype, iptr);
 	SET_TAG(entry, csym);
 	SETCDR(Registry, CONS(entry, CDR(Registry)));
     }
     else {
-	SETCAR(entry, class);
+	SETCAR(entry, class_);
 	SETCAR(CDR(CDR(entry)), stype);
 	SETCAR(CDR(CDR(CDR(entry))), iptr);
     }
-    SET_ALTREP_CLASS_SERIALIZED_CLASS(class, csym, psym, stype);
+    SET_ALTREP_CLASS_SERIALIZED_CLASS(class_, csym, psym, stype);
     UNPROTECT(2); /* class, stype */
 }
 
@@ -106,15 +106,15 @@ HIDDEN void R_reinit_altrep_classes(DllInfo *dll)
  **  ALTREP Method Tables and Class Objects
  **/
 
-static void SET_ALTREP_CLASS(SEXP x, SEXP class)
+static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
     SETALTREP(x, 1);
-    SET_TAG(x, class);
+    SET_TAG(x, class_);
 }
 
-#define CLASS_METHODS_TABLE(class) STDVEC_DATAPTR(class)
-#define GENERIC_METHODS_TABLE(x, class) \
-    ((class##_methods_t *) CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
+#define CLASS_METHODS_TABLE(class_) STDVEC_DATAPTR(class_)
+#define GENERIC_METHODS_TABLE(x, class_) \
+    ((class_##_methods_t *) CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
 
 #define ALTREP_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altrep)
 #define ALTVEC_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altvec)
@@ -263,14 +263,14 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
     if (TYPEOF(info) == LISTSXP) {
 	SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
 	SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
-	SEXP class = LookupClass(csym, psym);
-	if (class == NULL) {
+	SEXP class_ = LookupClass(csym, psym);
+	if (class_ == NULL) {
 	    SEXP pname = ScalarString(PRINTNAME(psym));
 	    R_tryCatchError(find_namespace, pname,
 			    handle_namespace_error, NULL);
-	    class = LookupClass(csym, psym);
+	    class_ = LookupClass(csym, psym);
 	}
-	return class;
+	return class_;
     }
     return NULL;
 }
@@ -282,9 +282,9 @@ ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
     SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
     int type = ALTREP_SERIALIZED_CLASS_TYPE(info);
 
-    /* look up the class in the registry and handle failure */
-    SEXP class = ALTREP_UNSERIALIZE_CLASS(info);
-    if (class == NULL) {
+    /* look up the class_ in the registry and handle failure */
+    SEXP class_ = ALTREP_UNSERIALIZE_CLASS(info);
+    if (class_ == NULL) {
 	switch(type) {
 	case LGLSXP:
 	case INTSXP:
@@ -294,7 +294,7 @@ ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
 	case RAWSXP:
 	case VECSXP:
 	case EXPRSXP:
-	    warning(_("cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"),
+	    warning(_("cannot unserialize ALTVEC object of class_ '%s' from package '%s'; returning length zero vector"),
 		    CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)));
 	    return allocVector(type, 0);
 	default:
@@ -303,15 +303,15 @@ ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
     }
 
     /* check the registered and unserialized types match */
-    int rtype = ALTREP_CLASS_BASE_TYPE(class);
+    int rtype = ALTREP_CLASS_BASE_TYPE(class_);
     if (type != rtype)
 	warning(_("serialized class '%s' from package '%s' has type %s; registered class has type %s"),
 		CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)),
 		type2char(type), type2char(rtype));
     
     /* dispatch to a class method */
-    altrep_methods_t *m = CLASS_METHODS_TABLE(class);
-    SEXP val = m->UnserializeEX(class, state, attr, objf, levs);
+    altrep_methods_t *m = CLASS_METHODS_TABLE(class_);
+    SEXP val = m->UnserializeEX(class_, state, attr, objf, levs);
     return val;
 }
 
@@ -614,11 +614,11 @@ void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
  ** ALTREP Default Methods
  **/
 
-static SEXP altrep_UnserializeEX_default(SEXP class, SEXP state, SEXP attr,
+static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
 					 int objf, int levs)
 {
-    altrep_methods_t *m = CLASS_METHODS_TABLE(class);
-    SEXP val = m->Unserialize(class, state);
+    altrep_methods_t *m = CLASS_METHODS_TABLE(class_);
+    SEXP val = m->Unserialize(class_, state);
     SET_ATTRIB(val, attr);
     SET_OBJECT(val, objf);
     SETLEVELS(val, levs);
@@ -627,7 +627,7 @@ static SEXP altrep_UnserializeEX_default(SEXP class, SEXP state, SEXP attr,
 
 static SEXP altrep_Serialized_state_default(SEXP x) { return NULL; }
 
-static SEXP altrep_Unserialize_default(SEXP class, SEXP state)
+static SEXP altrep_Unserialize_default(SEXP class_, SEXP state)
 {
     error(_("cannot unserialize this ALTREP object yet"));
 }
@@ -937,18 +937,18 @@ R_INLINE static R_altrep_class_t R_cast_altrep_class(SEXP x)
 static R_altrep_class_t
 make_altrep_class(int type, const char *cname, const char *pname, DllInfo *dll)
 {
-    SEXP class;
+    SEXP class_;
     switch(type) {
-    case INTSXP:  MAKE_CLASS(class, altinteger); break;
-    case REALSXP: MAKE_CLASS(class, altreal);    break;
-    case LGLSXP:  MAKE_CLASS(class, altlogical); break;
-    case RAWSXP:  MAKE_CLASS(class, altraw);     break;
-    case CPLXSXP: MAKE_CLASS(class, altcomplex); break;
-    case STRSXP:  MAKE_CLASS(class, altstring);  break;
+    case INTSXP:  MAKE_CLASS(class_, altinteger); break;
+    case REALSXP: MAKE_CLASS(class_, altreal);    break;
+    case LGLSXP:  MAKE_CLASS(class_, altlogical); break;
+    case RAWSXP:  MAKE_CLASS(class_, altraw);     break;
+    case CPLXSXP: MAKE_CLASS(class_, altcomplex); break;
+    case STRSXP:  MAKE_CLASS(class_, altstring);  break;
     default: error(_("unsupported ALTREP class"));
     }
-    RegisterClass(class, type, cname, pname, dll);
-    return R_cast_altrep_class(class);
+    RegisterClass(class_, type, cname, pname, dll);
+    return R_cast_altrep_class(class_);
 }
 
 /*  Using macros like this makes it easier to add new methods, but
@@ -969,15 +969,15 @@ DEFINE_CLASS_CONSTRUCTOR(altlogical, LGLSXP)
 DEFINE_CLASS_CONSTRUCTOR(altraw, RAWSXP)
 DEFINE_CLASS_CONSTRUCTOR(altcomplex, CPLXSXP)
 
-static void reinit_altrep_class(SEXP class)
+static void reinit_altrep_class(SEXP class_)
 {
-    switch (ALTREP_CLASS_BASE_TYPE(class)) {
-    case INTSXP: INIT_CLASS(class, altinteger); break;
-    case REALSXP: INIT_CLASS(class, altreal); break;
-    case STRSXP: INIT_CLASS(class, altstring); break;
-    case LGLSXP: INIT_CLASS(class, altlogical); break;
-    case RAWSXP: INIT_CLASS(class, altraw); break;
-    case CPLXSXP: INIT_CLASS(class, altcomplex); break;
+    switch (ALTREP_CLASS_BASE_TYPE(class_)) {
+    case INTSXP: INIT_CLASS(class_, altinteger); break;
+    case REALSXP: INIT_CLASS(class_, altreal); break;
+    case STRSXP: INIT_CLASS(class_, altstring); break;
+    case LGLSXP: INIT_CLASS(class_, altlogical); break;
+    case RAWSXP: INIT_CLASS(class_, altraw); break;
+    case CPLXSXP: INIT_CLASS(class_, altcomplex); break;
     default: error(_("unsupported ALTREP class"));
     }
 }
@@ -1056,9 +1056,9 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
     return ans;
 }
 
-Rboolean R_altrep_inherits(SEXP x, R_altrep_class_t class)
+Rboolean R_altrep_inherits(SEXP x, R_altrep_class_t class_)
 {
-    return ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class);
+    return ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class_);
 }
 
 HIDDEN SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)

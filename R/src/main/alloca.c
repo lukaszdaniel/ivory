@@ -208,17 +208,17 @@ alloca (unsigned size)
   /* Allocate combined header + user data storage.  */
 
   {
-    register pointer new = malloc (sizeof (header) + size);
+    register pointer new_ = malloc (sizeof (header) + size);
     /* Address of header.  */
 
-    ((header *) new)->h.next = last_alloca_header;
-    ((header *) new)->h.deep = depth;
+    ((header *) new_)->h.next = last_alloca_header;
+    ((header *) new_)->h.deep = depth;
 
-    last_alloca_header = (header *) new;
+    last_alloca_header = (header *) new_;
 
     /* User storage begins just after header.  */
 
-    return (pointer) ((char *) new + sizeof (header));
+    return (pointer) ((char *) new_ + sizeof (header));
   }
 }
 

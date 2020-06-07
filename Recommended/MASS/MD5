@@ -155,12 +155,13 @@ c9354f03af7c5806071ad7554b0e5306 *man/fitdistr.Rd
 e65737579ca1cd2810198d72f0260e21 *man/hills.Rd
 cb8c1be550e2003a83fd7cc7b7f7da02 *man/logtrans.Rd
 2a0b5dd4c71cf01dfc1894be0e8f759b *man/mammals.Rd
-e115b6652f43dd3301f0532c97d1121a *DESCRIPTION
+95c1c783a21f76b0145d59d4ed9efd34 *DESCRIPTION
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 b678832e02372694edb83acf679710c9 *po/R-de.po
-8d2770e9dddaa89e3ecd3ad204c5f535 *po/R-MASS.pot
-830aacb25abd40f7907d6ce0387eb2ee *po/MASS.pot
+b679a4b73f11e024451eaaf26b0a6d9e *po/R-MASS.pot
+5ff1730dfb52c2ec576d5cca3fcef023 *po/R-it.po
+3439e39ef4bac5b7b3c0925eea3a48f7 *po/MASS.pot
 416f9922dd5db11e3dc388715612d1e7 *po/R-pl.po
 94b6181a8553f060ca45778ded4e090b *po/pl.po
 e0d1ab11f24f7e3ff569541429d65825 *LICENCE.note
@@ -183,7 +184,7 @@ caebd3270cdb7268117f8a5a0cddd7be *inst/scripts/ch15.R
 ea5ee8654eb44d16e07c4d8aa214ce4d *inst/scripts/ch01.R
 793b62dd2329642c3e5e9af5962a0f59 *inst/scripts/ch12.R
 eaccdbc382485cbba1a95f5cf61aa96d *inst/po/fr/LC_MESSAGES/R-MASS.mo
-79d7f36b1c53e4b98645ca8a2b3f615f *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
+bcb1e6f2b16b8803b05b5785dfbafeda *inst/po/en@quot/LC_MESSAGES/R-MASS.mo
 40cf1769f25af93fcca0a72ae25b4e4e *inst/po/de/LC_MESSAGES/R-MASS.mo
 7dc1a726824f014bae222e1083f1b0e0 *inst/po/pl/LC_MESSAGES/R-MASS.mo
 92627b58b3a02db3fa16448be38c3395 *inst/po/ko/LC_MESSAGES/R-MASS.mo
@@ -336,4 +337,4 @@ a656d5f85e7fa15e72f86d03c14ea7cf *data/chem.rda
 50ba115ce1299da127a32fc9919310df *Changes
 1b785d0f8c6625af60124b845299f872 *src/MASS.c
 8fbf3a0f6c57bb6815ec2d4fbe3faed9 *src/localization.h
-6e5f48c7ce8b734c48cf01616813acb0 *src/lqs.c
+705665ce10b5f1fe970ebbd48ceb6272 *src/lqs.c

@@ -268,7 +268,7 @@ SEXP R_clear_method_selection()
     return R_NilValue;
 }
 
-static SEXP R_find_method(SEXP mlist, const char *class, SEXP fname)
+static SEXP R_find_method(SEXP mlist, const char *class_, SEXP fname)
 {
     /* find the element of the methods list that matches this class,
        but not including inheritance. */
@@ -279,7 +279,7 @@ static SEXP R_find_method(SEXP mlist, const char *class, SEXP fname)
 	      class_string(mlist), CHAR(asChar(fname)));
 	return(R_NilValue); /* -Wall */
     }
-    value = R_element_named(methods, class);
+    value = R_element_named(methods, class_);
     return value;
 }
 
@@ -287,7 +287,7 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 {
     /* Match the list of args to the methods list. */
     SEXP object, methods, value, retValue = R_NilValue;
-    const char *class;
+    const char *class_;
 
     if(!mlist)
 	return R_NilValue;
@@ -300,8 +300,8 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 	    /* not observed during tests, but promises in principle could come
 	       from DispatchOrEval/R_possible_dispatch */
 	    object = eval(object, Methods_Namespace);
-	class = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
-	value = R_element_named(methods, class);
+	class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	value = R_element_named(methods, class_);
 	if(isNull(value) || isFunction(value)){
 	    retValue = value;
 	    break;
@@ -317,7 +317,7 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
     /* Match the list of (possibly promised) args to the methods table. */
     static SEXP  R_allmtable = NULL, R_siglength;
     SEXP object, value, mtable;
-    const char *class; int nsig, nargs;
+    const char *class_; int nsig, nargs;
 #define NBUF 200
     char buf[NBUF]; char *ptr;
     if(!R_allmtable) {
@@ -363,10 +363,10 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 	if(TYPEOF(object) == PROMSXP)
 	    object = eval(object, Methods_Namespace);
 	if(object == R_MissingArg)
-	    class = "missing";
+	    class_ = "missing";
 	else
-	    class = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
-	if(ptr - buf + strlen(class) + 2 > NBUF) {
+	    class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	if(ptr - buf + strlen(class_) + 2 > NBUF) {
 	    UNPROTECT(1); /* mtable */
 	    return R_NilValue;
 	}
@@ -375,7 +375,7 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 	   the package, the code here must change too.
 	   Or, better, the two should use the same C code. */
 	if(ptr > buf) { ptr = strcpy(ptr, "#");  ptr += 1;}
-	ptr = strcpy(ptr, class); ptr += strlen(class);
+	ptr = strcpy(ptr, class_); ptr += strlen(class_);
 	nargs++;
     }
     for(; nargs < nsig; nargs++) {
@@ -645,7 +645,7 @@ static SEXP argEvalCleanup(SEXP err, void *data_)
 static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 			int evalArgs)
 {
-    const char *class;
+    const char *class_;
     SEXP arg_slot, arg_sym, method, value = R_NilValue;
     int nprotect = 0;
     /* check for dispatch turned off inside MethodsListSelect */
@@ -676,7 +676,7 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
     argEvalCleanup_t cleandata = { .fname = fname, .arg_sym = arg_sym };
     if(evalArgs) {
 	if(is_missing_arg(arg_sym, ev))
-	    class = "missing";
+	    class_ = "missing";
 	else {
 	    /*  get its class */
 	    SEXP arg, class_obj;
@@ -684,7 +684,7 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 					    &argEvalCleanup, &cleandata));
 	    nprotect++;
 	    PROTECT(class_obj = R_data_class(arg, TRUE)); nprotect++;
-	    class = CHAR(STRING_ELT(class_obj, 0));
+	    class_ = CHAR(STRING_ELT(class_obj, 0));
 	}
     }
     else {
@@ -693,13 +693,13 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 	PROTECT(arg = R_evalHandleError(arg_sym, ev, &argEvalCleanup,
 				        &cleandata));
 	nprotect++;
-	class = CHAR(asChar(arg));
+	class_ = CHAR(asChar(arg));
     }
-    method = R_find_method(mlist, class, fname);
+    method = R_find_method(mlist, class_, fname);
     if(isNull(method)) {
       if(!firstTry)
 	error(_("no matching method for function '%s' (argument '%s', with class \"%s\")"),
-	      EncodeChar(asChar(fname)), EncodeChar(PRINTNAME(arg_sym)), class);
+	      EncodeChar(asChar(fname)), EncodeChar(PRINTNAME(arg_sym)), class_);
       UNPROTECT(nprotect);
       return(R_NilValue);
     }
@@ -949,13 +949,13 @@ SEXP R_identC(SEXP e1, SEXP e2)
 	return R_FALSE;
 }
 
-SEXP R_getClassFromCache(SEXP class, SEXP table)
+SEXP R_getClassFromCache(SEXP class_, SEXP table)
 {
     SEXP value;
-    if(TYPEOF(class) == STRSXP) {
-	if (LENGTH(class) == 0) return R_NilValue;
-	SEXP package = PACKAGE_SLOT(class);
-	value = findVarInFrame(table, installTrChar(STRING_ELT(class, 0)));
+    if(TYPEOF(class_) == STRSXP) {
+	if (LENGTH(class_) == 0) return R_NilValue;
+	SEXP package = PACKAGE_SLOT(class_);
+	value = findVarInFrame(table, installTrChar(STRING_ELT(class_, 0)));
 	if(value == R_UnboundValue)
 	    return R_NilValue;
 	else if(TYPEOF(package) == STRSXP) {
@@ -970,11 +970,11 @@ SEXP R_getClassFromCache(SEXP class, SEXP table)
 	else /* may return a list if multiple instances of class */
 	    return value;
     }
-    else if(TYPEOF(class) != S4SXP) {
+    else if(TYPEOF(class_) != S4SXP) {
 	error(_("class should be either a character-string name or a class definition"));
 	return R_NilValue; /* NOT REACHED */
     } else /* assumes a class def, but might check */
-	return class;
+	return class_;
 }
 
 

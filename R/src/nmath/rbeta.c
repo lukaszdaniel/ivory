@@ -30,7 +30,7 @@
 
 #define expmax	(DBL_MAX_EXP * M_LN2)/* = log(DBL_MAX) */
 
-double rbeta(double aa, double bb)
+double Rf_rbeta(double aa, double bb)
 {
     if (ISNAN(aa) || ISNAN(bb) || aa < 0. || bb < 0.)
 	ML_WARN_return_NAN;

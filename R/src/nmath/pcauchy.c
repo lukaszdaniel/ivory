@@ -32,7 +32,7 @@ double atanpi(double);
 #include "nmath.h"
 #include "dpq.h"
 
-double pcauchy(double x, double location, double scale,
+double Rf_pcauchy(double x, double location, double scale,
 	       int lower_tail, int log_p)
 {
 #ifdef IEEE_754

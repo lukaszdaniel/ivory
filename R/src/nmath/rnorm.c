@@ -30,7 +30,7 @@
 
 #include "nmath.h"
 
-double rnorm(double mu, double sigma)
+double Rf_rnorm(double mu, double sigma)
 {
     if (ISNAN(mu) || !R_FINITE(sigma) || sigma < 0.)
 	ML_WARN_return_NAN;

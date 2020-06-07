@@ -35,7 +35,7 @@ static void Y_bessel(double *x, double *alpha, int *nb,
 		     double *by, int *ncalc);
 
 // unused now from R
-double bessel_y(double x, double alpha)
+double Rf_bessel_y(double x, double alpha)
 {
     int nb, ncalc;
     double na, *by;
@@ -99,7 +99,7 @@ double bessel_y(double x, double alpha)
 
 /* Called from R: modified version of bessel_y(), accepting a work array
  * instead of allocating one. */
-double bessel_y_ex(double x, double alpha, double *by)
+double Rf_bessel_y_ex(double x, double alpha, double *by)
 {
     int nb, ncalc;
     double na;

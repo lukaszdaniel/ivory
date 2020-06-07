@@ -126,10 +126,11 @@ R_INLINE static Rboolean IS_USER_DATABASE(SEXP rho)  {
 
 /* various definitions of macros/functions in Defn.h */
 
-#define FRAME_LOCK_MASK (1<<14)
-//#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
-R_INLINE static Rboolean FRAME_IS_LOCKED(SEXP e) {
- return ENVFLAGS(e) & FRAME_LOCK_MASK;
+#define FRAME_LOCK_MASK (1 << 14)
+ //#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
+ R_INLINE static Rboolean FRAME_IS_LOCKED(SEXP e)
+ {
+     return ENVFLAGS(e) & FRAME_LOCK_MASK;
  }
 //#define LOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK)
 R_INLINE static void LOCK_FRAME(SEXP e) {
@@ -734,13 +735,13 @@ static SEXP R_GlobalCache, R_GlobalCachePreserve;
 static SEXP R_BaseNamespaceName;
 static SEXP R_NamespaceSymbol;
 
-HIDDEN void InitBaseEnv()
+HIDDEN void Rf_InitBaseEnv()
 {
     R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
     R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
 }
 
-HIDDEN void InitGlobalEnv()
+HIDDEN void Rf_InitGlobalEnv()
 {
     R_NamespaceSymbol = install(".__NAMESPACE__.");
 
@@ -895,7 +896,7 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, int *found)
     }
 }
 
-HIDDEN void unbindVar(SEXP symbol, SEXP rho)
+HIDDEN void Rf_unbindVar(SEXP symbol, SEXP rho)
 {
     int hashcode;
     int found;
@@ -1064,7 +1065,7 @@ void R_SetVarLocValue(R_varloc_t vl, SEXP value)
   symbol in this frame (FALSE).  This is used for get() and exists().
 */
 
-SEXP findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
+SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 {
     int hashcode;
     SEXP frame, c;
@@ -1182,7 +1183,7 @@ SEXP findVarInFrame(SEXP rho, SEXP symbol)
 */
 
 HIDDEN
-void readS3VarsFromFrame(SEXP rho,
+void Rf_readS3VarsFromFrame(SEXP rho,
     SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
     SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv) {
 
@@ -1284,7 +1285,7 @@ R_INLINE static SEXP findGlobalVar(SEXP symbol)
 }
 #endif
 
-SEXP findVar(SEXP symbol, SEXP rho)
+SEXP Rf_findVar(SEXP symbol, SEXP rho)
 {
     SEXP vl;
 
@@ -1368,8 +1369,7 @@ R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol)
 
 */
 
-HIDDEN SEXP
-findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits)
+HIDDEN SEXP Rf_findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -1399,8 +1399,7 @@ findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits)
  *  ditto, but check *mode* not *type*
  */
 
-static SEXP
-findVar1mode(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits,
+static SEXP findVar1mode(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits,
 	     Rboolean doGet)
 {
     SEXP vl;
@@ -1502,7 +1501,7 @@ SEXP ddfind(int i, SEXP rho)
 }
 
 HIDDEN
-SEXP ddfindVar(SEXP symbol, SEXP rho)
+SEXP Rf_ddfindVar(SEXP symbol, SEXP rho)
 {
     int i = ddVal(symbol);
     return ddfind(i, rho);
@@ -1863,7 +1862,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 
 */
 
-void setVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -1885,7 +1884,7 @@ void setVar(SEXP symbol, SEXP value, SEXP rho)
 
 */
 
-void gsetVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 {
     if (FRAME_IS_LOCKED(rho)) {
 	if(SYMVALUE(symbol) == R_UnboundValue)
@@ -2334,8 +2333,7 @@ static SEXP findRootPromise(SEXP p) {
     return p;
 }
 
-HIDDEN int
-R_isMissing(SEXP symbol, SEXP rho)
+HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv=0;
     SEXP vl, s;
@@ -2873,8 +2871,7 @@ static int BuiltinSize(int all, int intern)
     return count;
 }
 
-static void
-BuiltinNames(int all, int intern, SEXP names, int *indx)
+static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 {
     SEXP s;
     int j;
@@ -2893,8 +2890,7 @@ BuiltinNames(int all, int intern, SEXP names, int *indx)
     }
 }
 
-static void
-BuiltinValues(int all, int intern, SEXP values, int *indx)
+static void BuiltinValues(int all, int intern, SEXP values, int *indx)
 {
     SEXP s, vl;
     int j;
@@ -3288,7 +3284,7 @@ static SEXP matchEnvir(SEXP call, const char *what)
 {
     SEXP t, name;
     const void *vmax = vmaxget();
-    if(!strcmp(".GlobalEnv", what))
+    if(streql(".GlobalEnv", what))
 	return R_GlobalEnv;
     if(!strcmp("package:base", what))
 	return R_BaseEnv;
@@ -3307,8 +3303,7 @@ static SEXP matchEnvir(SEXP call, const char *what)
 }
 
 /* This is primitive */
-HIDDEN SEXP
-do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP arg = CAR(args), ans;
     checkArity(op, args);
@@ -4005,7 +4000,7 @@ static unsigned int char_hash(const char *s, int len)
     return h;
 }
 
-HIDDEN void InitStringHash()
+HIDDEN void Rf_InitStringHash()
 {
     R_StringHash = R_NewHashTable(char_hash_size);
 }
@@ -4237,7 +4232,7 @@ void do_write_cache()
 
 // topenv
 
-SEXP topenv(SEXP target, SEXP envir) {
+SEXP Rf_topenv(SEXP target, SEXP envir) {
     SEXP env = envir;
     while (env != R_EmptyEnv) {
 	if (env == target || env == R_GlobalEnv ||
@@ -4267,7 +4262,7 @@ HIDDEN SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return topenv(target, envir);
 }
 
-HIDDEN Rboolean isUnmodifiedSpecSym(SEXP sym, SEXP env) {
+HIDDEN Rboolean Rf_isUnmodifiedSpecSym(SEXP sym, SEXP env) {
     if (!IS_SPECIAL_SYMBOL(sym))
 	return FALSE;
     for(;env != R_EmptyEnv; env = ENCLOS(env))
@@ -4326,7 +4321,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
 
 /*  findFunctionForBody - for a given function body, try to find a closure and
     the name of its binding (and the name of the package). For debugging. */
-HIDDEN void findFunctionForBody(SEXP body) {
+HIDDEN void Rf_findFunctionForBody(SEXP body) {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     CHECK_HASH_TABLE(nstable);
     int n = length(nstable);

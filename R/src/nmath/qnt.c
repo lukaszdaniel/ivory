@@ -20,7 +20,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qnt(double p, double df, double ncp, int lower_tail, int log_p)
+double Rf_qnt(double p, double df, double ncp, int lower_tail, int log_p)
 {
     const static double accu = 1e-13;
     const static double Eps = 1e-11; /* must be > accu */

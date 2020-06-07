@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dcauchy(double x, double location, double scale, int give_log)
+double Rf_dcauchy(double x, double location, double scale, int give_log)
 {
     double y;
 #ifdef IEEE_754

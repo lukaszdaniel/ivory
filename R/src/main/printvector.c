@@ -105,8 +105,7 @@
 	width += w;							\
     } while (0)
 
-static
-void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
+static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
     int w, labwidth=0, width;
     R_xlen_t i;
     DO_first_lab;
@@ -122,7 +121,7 @@ void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
 }
 
 HIDDEN
-void printIntegerVector(const int *x, R_xlen_t n, int indx)
+void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
 
@@ -157,7 +156,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 // used in uncmin.c
 // Not easily converted to printRealVectorS calls
 HIDDEN
-void printRealVector(const double *x, R_xlen_t n, int indx)
+void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
 
@@ -191,7 +190,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 
 #define CMPLX_ISNA(cplx) (ISNA(cplx.r) || ISNA(cplx.i))
 HIDDEN
-void printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
+void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
 
@@ -298,8 +297,7 @@ void printRawVector(const Rbyte *x, R_xlen_t n, int indx)
 }
 
 
-static
-void printRawVectorS(SEXP x, R_xlen_t n, int indx)
+static void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
     R_xlen_t i;
@@ -316,7 +314,7 @@ void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 }
 
 
-void printVector(SEXP x, int indx, int quote)
+void Rf_printVector(SEXP x, int indx, int quote)
 {
 /* print R vector x[];	if(indx) print indices; if(quote) quote strings */
     R_xlen_t n;
@@ -467,7 +465,7 @@ static void printNamedRawVectorS(SEXP x, int n, SEXP names)
 			   EncodeRaw(RAW_ELT(x, k), ""), R_print.gap,""))
 
 HIDDEN
-void printNamedVector(SEXP x, SEXP names, int quote, const char *title)
+void Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 {
     int n;
 

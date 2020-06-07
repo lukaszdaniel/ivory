@@ -37,7 +37,7 @@
 
 #include "nmath.h"
 
-double lbeta(double a, double b)
+double Rf_lbeta(double a, double b)
 {
     double corr, p, q;
 

@@ -26,7 +26,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double pgeom(double x, double p, int lower_tail, int log_p)
+double Rf_pgeom(double x, double p, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(p))

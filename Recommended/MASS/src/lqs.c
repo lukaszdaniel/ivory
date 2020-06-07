@@ -154,11 +154,11 @@ lqs_fitlots(double *x, double *y, int *n, int *p, int *qn,
 	    double *bestcoef, double *pk0, double *beta)
 {
     int nnew = *nwhich, pp = *p;
-    int i, iter, j, k,  nn = *n, this, trial;
+    int i, iter, j, k,  nn = *n, this_, trial;
     int rank, info, n100 = 100;
     int firsttrial = 1;
     double a = 0.0, tol = 1.0e-7, sum, thiscrit, best = BIG, target,
-	old, new, dummy, k0 = *pk0;
+	old, new_, dummy, k0 = *pk0;
 
     lqs_setup(n, p, nwhich);
 
@@ -177,9 +177,9 @@ lqs_fitlots(double *x, double *y, int *n, int *p, int *qn,
 	else sample_noreplace(which, nn, nnew);
 
 	for(j = 0; j < nnew; j++) {
-	    this = which[j];
-	    yr[j] = y[this];
-	    for(k = 0; k < pp; k++) xr[j + nnew*k] = x[this + nn*k];
+	    this_ = which[j];
+	    yr[j] = y[this_];
+	    for(k = 0; k < pp; k++) xr[j + nnew*k] = x[this_ + nn*k];
 	}
 
 	/* compute fit, find residuals */
@@ -234,11 +234,11 @@ lqs_fitlots(double *x, double *y, int *n, int *p, int *qn,
 		/*printf("iter %d, s = %f sum = %f %f\n", iter, old, sum, target);*/
 		sum = 0.0;
 		for(i = 0; i < nn; i ++) sum += chi(res[i], k0 * old);
-		new = sqrt(sum/target) * old;
+		new_ = sqrt(sum/target) * old;
 		if(fabs(sum/target - 1.) < 1e-4) break;
-		old = new;
+		old = new_;
 	    }
-	    thiscrit = new;
+	    thiscrit = new_;
 	}
 
 	if(thiscrit < best) {  /* first trial might be singular, so use fence */

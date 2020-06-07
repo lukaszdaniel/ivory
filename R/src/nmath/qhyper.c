@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qhyper(double p, double NR, double NB, double n,
+double Rf_qhyper(double p, double NR, double NB, double n,
 	      int lower_tail, int log_p)
 {
 /* This is basically the same code as  ./phyper.c  *used* to be --> FIXME! */

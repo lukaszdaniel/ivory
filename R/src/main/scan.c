@@ -669,7 +669,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
                       int flush, int fill, SEXP stripwhite, int blskip,
                       int multiline, LocalData *d)
 {
-    SEXP ans, new, old, w;
+    SEXP ans, new_, old, w;
     char *buffer = NULL;
     int c, strip, bch;
     R_xlen_t blksize, i, ii, j, n, nc, linesread, colsread;
@@ -750,9 +750,9 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	    for (i = 0; i < nc; i++) {
 		old = VECTOR_ELT(ans, i);
 		if(!isNull(old)) {
-		    new = allocVector(TYPEOF(old), blksize);
-		    copyVector(new, old);
-		    SET_VECTOR_ELT(ans, i, new);
+		    new_ = allocVector(TYPEOF(old), blksize);
+		    copyVector(new_, old);
+		    SET_VECTOR_ELT(ans, i, new_);
 		}
 	    }
 	}
@@ -798,35 +798,35 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
     for (i = 0; i < nc; i++) {
 	old = VECTOR_ELT(ans, i);
-	new = allocVector(TYPEOF(old), n);
+	new_ = allocVector(TYPEOF(old), n);
 	switch (TYPEOF(old)) {
 	case LGLSXP:
 	case INTSXP:
 	    for (j = 0; j < n; j++)
-		INTEGER(new)[j] = INTEGER(old)[j];
+		INTEGER(new_)[j] = INTEGER(old)[j];
 	    break;
 	case REALSXP:
 	    for (j = 0; j < n; j++)
-		REAL(new)[j] = REAL(old)[j];
+		REAL(new_)[j] = REAL(old)[j];
 	    break;
 	case CPLXSXP:
 	    for (j = 0; j < n; j++)
-		COMPLEX(new)[j] = COMPLEX(old)[j];
+		COMPLEX(new_)[j] = COMPLEX(old)[j];
 	    break;
 	case STRSXP:
 	    for (j = 0; j < n; j++)
-		SET_STRING_ELT(new, j, STRING_ELT(old, j));
+		SET_STRING_ELT(new_, j, STRING_ELT(old, j));
 	    break;
 	case RAWSXP:
 	    for (j = 0; j < n; j++)
-		RAW(new)[j] = RAW(old)[j];
+		RAW(new_)[j] = RAW(old)[j];
 	    break;
 	case NILSXP:
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("scanFrame()", old);
 	}
-	SET_VECTOR_ELT(ans, i, new);
+	SET_VECTOR_ELT(ans, i, new_);
     }
     UNPROTECT(1);
     R_FreeStringBuffer(&buf);

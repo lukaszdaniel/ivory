@@ -36,7 +36,7 @@ static void J_bessel(double *x, double *alpha, int *nb,
 		     double *b, int *ncalc);
 
 // unused now from R
-double bessel_j(double x, double alpha)
+double Rf_bessel_j(double x, double alpha)
 {
     int nb, ncalc;
     double na, *bj;
@@ -90,7 +90,7 @@ double bessel_j(double x, double alpha)
 
 /* Called from R: modified version of bessel_j(), accepting a work array
  * instead of allocating one. */
-double bessel_j_ex(double x, double alpha, double *bj)
+double Rf_bessel_j_ex(double x, double alpha, double *bj)
 {
     int nb, ncalc;
     double na;

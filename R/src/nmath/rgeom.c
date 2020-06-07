@@ -42,7 +42,7 @@
 
 #include "nmath.h"
 
-double rgeom(double p)
+double Rf_rgeom(double p)
 {
     if (!R_FINITE(p) || p <= 0 || p > 1) ML_WARN_return_NAN;
 

@@ -35,7 +35,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dt(double x, double n, int give_log)
+double Rf_dt(double x, double n, int give_log)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(n))

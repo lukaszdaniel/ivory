@@ -30,7 +30,7 @@
 
 #include "nmath.h"
 
-double rexp(double scale)
+double Rf_rexp(double scale)
 {
     if (!R_FINITE(scale) || scale <= 0.0) {
 	if(scale == 0.) return 0.;

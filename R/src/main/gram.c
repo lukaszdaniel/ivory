@@ -3495,7 +3495,7 @@ static void PutSrcRefState(SrcRefState *state);
 static void UseSrcRefState(SrcRefState *state);
 
 /* This is called once when R starts up. */
-HIDDEN
+attribute_hidden
 void InitParser(void)
 {
     ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
@@ -3511,7 +3511,7 @@ static void FinalizeSrcRefStateOnError(void *dummy)
 }
 
 /* This is called each time a new parse sequence begins */
-HIDDEN
+attribute_hidden
 void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
@@ -3546,7 +3546,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
     busy = TRUE;
 }
 
-HIDDEN
+attribute_hidden
 void R_FinalizeSrcRefState(void)
 {
     PS_SET_SRCFILE(R_NilValue);
@@ -3673,7 +3673,7 @@ static int file_getc(void)
 }
 
 /* used in main.c */
-HIDDEN
+attribute_hidden
 SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
     ParseInit();
@@ -3694,7 +3694,7 @@ static int buffer_getc(void)
 }
 
 /* Used only in main.c */
-HIDDEN
+attribute_hidden
 SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     Rboolean keepSource = FALSE; 
@@ -3722,7 +3722,7 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     	if (ParseState.didAttach) {
    	    int buflen = R_IoBufferReadOffset(buffer);
    	    char buf[buflen+1];
-   	    SEXP class;
+   	    SEXP class_;
    	    R_IoBufferReadReset(buffer);
    	    for (int i=0; i<buflen; i++)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
@@ -3732,11 +3732,11 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
 	    SEXP s_lines = install("lines");
 	    defineVar(s_lines, ScalarString(mkChar2(buf)), PS_ORIGINAL);
-    	    PROTECT(class = allocVector(STRSXP, 2));
-            SET_STRING_ELT(class, 0, mkChar("srcfilecopy"));
-            SET_STRING_ELT(class, 1, mkChar("srcfile"));
-	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class);
-	    UNPROTECT(1); /* class */
+    	    PROTECT(class_ = allocVector(STRSXP, 2));
+            SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
+            SET_STRING_ELT(class_, 1, mkChar("srcfile"));
+	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class_);
+	    UNPROTECT(1); /* class_ */
 	}
     }
     PROTECT(R_CurrentExpr);
@@ -3822,7 +3822,7 @@ finish:
 }
 
 /* used in edit.c */
-HIDDEN
+attribute_hidden
 SEXP R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -3846,7 +3846,7 @@ static int con_getc(void)
 }
 
 /* used in source.c */
-HIDDEN
+attribute_hidden
 SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -3884,7 +3884,7 @@ static const char *Prompt(SEXP prompt, int type)
 }
 
 /* used in source.c */
-HIDDEN
+attribute_hidden
 SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
@@ -4175,7 +4175,7 @@ static SEXP mkNA(void)
     return t;
 }
 
-HIDDEN
+attribute_hidden
 SEXP mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
@@ -4250,7 +4250,7 @@ static void yyerror(const char *s)
     R_ParseErrorCol  = yylloc.first_column;
     R_ParseErrorFile = PS_SRCFILE;
 
-    if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
+    if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i;
 	/* Edit the error message */
 	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);
@@ -5079,7 +5079,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-HIDDEN
+attribute_hidden
 int isValidName(const char *name)
 {
     const char *p = name;
@@ -5157,7 +5157,7 @@ static int SymbolValue(int c)
 }
 
 static void setParseFilename(SEXP newname) {
-    SEXP class;
+    SEXP class_;
     
     if (isEnvironment(PS_SRCFILE)) {
 	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
@@ -5168,11 +5168,11 @@ static void setParseFilename(SEXP newname) {
 	defineVar(install("filename"), newname, PS_SRCFILE);
 	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);
 
-	PROTECT(class = allocVector(STRSXP, 2));
-	SET_STRING_ELT(class, 0, mkChar("srcfilealias"));
-	SET_STRING_ELT(class, 1, mkChar("srcfile"));
-	setAttrib(PS_SRCFILE, R_ClassSymbol, class);
-	UNPROTECT(1); /* class */
+	PROTECT(class_ = allocVector(STRSXP, 2));
+	SET_STRING_ELT(class_, 0, mkChar("srcfilealias"));
+	SET_STRING_ELT(class_, 1, mkChar("srcfile"));
+	setAttrib(PS_SRCFILE, R_ClassSymbol, class_);
+	UNPROTECT(1); /* class_ */
     } else 
 	PS_SET_SRCFILE(duplicate(newname));
     RELEASE_SV(newname);

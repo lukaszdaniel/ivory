@@ -206,7 +206,7 @@ static double wprob(double w, double rr, double cc)
 } /* wprob() */
 
 
-double ptukey(double q, double rr, double cc, double df,
+double Rf_ptukey(double q, double rr, double cc, double df,
 	      int lower_tail, int log_p)
 {
 /*  function ptukey() [was qprob() ]:

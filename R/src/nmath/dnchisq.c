@@ -27,7 +27,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnchisq(double x, double df, double ncp, int give_log)
+double Rf_dnchisq(double x, double df, double ncp, int give_log)
 {
     const static double eps = 5e-15;
 

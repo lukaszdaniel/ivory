@@ -50,7 +50,7 @@
 	- but for ncp > 100
  */
 
-double pnt(double t, double df, double ncp, int lower_tail, int log_p)
+double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 {
     double albeta, a, b, del, errbd, lambda, rxb, tt, x;
     LDOUBLE geven, godd, p, q, s, tnc, xeven, xodd;

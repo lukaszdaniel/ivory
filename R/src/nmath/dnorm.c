@@ -20,7 +20,7 @@
  *
  *  SYNOPSIS
  *
- *	double dnorm4(double x, double mu, double sigma, int give_log)
+ *	double dnorm(double x, double mu, double sigma, int give_log)
  *	      {dnorm (..) is synonymous and preferred inside R}
  *
  *  DESCRIPTION
@@ -31,7 +31,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnorm4(double x, double mu, double sigma, int give_log)
+double Rf_dnorm(double x, double mu, double sigma, int give_log)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(mu) || ISNAN(sigma))

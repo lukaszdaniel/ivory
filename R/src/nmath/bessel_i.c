@@ -35,7 +35,7 @@ static void I_bessel(double *x, double *alpha, int *nb,
 		     int *ize, double *bi, int *ncalc);
 
 /* .Internal(besselI(*)) : */
-double bessel_i(double x, double alpha, double expo)
+double Rf_bessel_i(double x, double alpha, double expo)
 {
     int nb, ncalc, ize;
     double na, *bi;
@@ -88,7 +88,7 @@ double bessel_i(double x, double alpha, double expo)
 
 /* modified version of bessel_i that accepts a work array instead of
    allocating one. */
-double bessel_i_ex(double x, double alpha, double expo, double *bi)
+double Rf_bessel_i_ex(double x, double alpha, double expo, double *bi)
 {
     int nb, ncalc, ize;
     double na;

@@ -37,8 +37,8 @@
 #include "nmath.h"
 #include "dpq.h"
 
-attribute_hidden
-double pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
+HIDDEN
+double Rf_pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
 {
     // treat limit cases correctly here:
     if(a == 0 || b == 0 || !R_FINITE(a) || !R_FINITE(b)) {
@@ -66,7 +66,7 @@ double pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
     return lower_tail ? w : wc;
 } /* pbeta_raw() */
 
-double pbeta(double x, double a, double b, int lower_tail, int log_p)
+double Rf_pbeta(double x, double a, double b, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(a) || ISNAN(b)) return x + a + b;

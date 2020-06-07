@@ -35,7 +35,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnbinom(double x, double size, double prob, int give_log)
+double Rf_dnbinom(double x, double size, double prob, int give_log)
 {
     double ans, p;
 
@@ -57,7 +57,7 @@ double dnbinom(double x, double size, double prob, int give_log)
     return((give_log) ? log(p) + ans : p * ans);
 }
 
-double dnbinom_mu(double x, double size, double mu, int give_log)
+double Rf_dnbinom_mu(double x, double size, double mu, int give_log)
 {
     /* originally, just set  prob :=  size / (size + mu)  and called dbinom_raw(),
      * but that suffers from cancellation when   mu << size  */

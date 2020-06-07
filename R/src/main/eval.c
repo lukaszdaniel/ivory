@@ -1514,27 +1514,27 @@ static Rboolean R_compileAndExecute(SEXP call, SEXP rho)
 
 HIDDEN SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_jit_enabled, new;
+    int old = R_jit_enabled, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0) {
-	if (new > 0)
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0) {
+	if (new_ > 0)
 	    loadCompilerNamespace();
-	checkCompilerOptions(new);
-	R_jit_enabled = new;
+	checkCompilerOptions(new_);
+	R_jit_enabled = new_;
     }
-    /* negative 'new' just returns 'old' */
+    /* negative 'new_' just returns 'old' */
     return ScalarInteger(old);
 }
 
 HIDDEN SEXP do_compilepkgs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_compile_pkgs, new;
+    int old = R_compile_pkgs, new_;
     checkArity(op, args);
-    new = asLogical(CAR(args));
-    if (new != NA_LOGICAL && new)
+    new_ = asLogical(CAR(args));
+    if (new_ != NA_LOGICAL && new_)
 	loadCompilerNamespace();
-    R_compile_pkgs = new;
+    R_compile_pkgs = new_;
     return ScalarLogical(old);
 }
 
@@ -3468,7 +3468,7 @@ static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
  * immediately, rather than after the call to R_possible_dispatch.
  */
 HIDDEN
-int DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+int Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
@@ -3511,7 +3511,7 @@ int DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
  * at large in the world.
  */
 HIDDEN
-int DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+int Rf_DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
 /* DispatchOrEval is called very frequently, most often in cases where
@@ -3716,7 +3716,7 @@ static SEXP classForGroupDispatch(SEXP obj) {
 }
 
 HIDDEN
-int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
+int Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		  SEXP *ans)
 {
     int i, nargs, lwhich, rwhich;
@@ -8375,21 +8375,21 @@ NORET SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
 
 HIDDEN SEXP do_setnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_num_math_threads, new;
+    int old = R_num_math_threads, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0 && new <= R_max_num_math_threads)
-	R_num_math_threads = new;
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0 && new_ <= R_max_num_math_threads)
+	R_num_math_threads = new_;
     return ScalarInteger(old);
 }
 
 HIDDEN SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_max_num_math_threads, new;
+    int old = R_max_num_math_threads, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0) {
-	R_max_num_math_threads = new;
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0) {
+	R_max_num_math_threads = new_;
 	if (R_num_math_threads > R_max_num_math_threads)
 	    R_num_math_threads = R_max_num_math_threads;
     }

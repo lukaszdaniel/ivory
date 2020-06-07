@@ -1136,7 +1136,7 @@ void consolepaste(control c)
     ConsoleData p = getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new = NULL;
+    wchar_t *pc, *new_ = NULL;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1149,18 +1149,18 @@ void consolepaste(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	   new = realloc((void *)p->clp,
+	   new_ = realloc((void *)p->clp,
 			 (wcslen(p->clp) + wcslen(pc) + 1) * sizeof(wchar_t));
 	}
 	else {
-	   new = malloc((wcslen(pc) + 1) * sizeof(wchar_t)) ;
-	   if (new) new[0] = L'\0';
+	   new_ = malloc((wcslen(pc) + 1) * sizeof(wchar_t)) ;
+	   if (new_) new_[0] = L'\0';
 	   p->already = p->numkeys;
 	   p->pclp = 0;
 	}
-	if (new) {
+	if (new_) {
 	   int i;
-	   p->clp = new;
+	   p->clp = new_;
 	   /* Surrogate Pairs Block */
 	   for (i = 0; i < wcslen(pc); i++)
 	       if (IsSurrogatePairsHi(pc[i]) && i+1 < wcslen(pc) &&
@@ -1184,7 +1184,7 @@ void consolepastecmds(control c)
     ConsoleData p = getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new = NULL;
+    wchar_t *pc, *new_ = NULL;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1197,21 +1197,21 @@ void consolepastecmds(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	    new = realloc((void *)p->clp,
+	    new_ = realloc((void *)p->clp,
 			  (wcslen(p->clp) + CleanTranscript(pc, 0))
 			  * sizeof(wchar_t));
 	}
 	else {
-	    new = malloc(CleanTranscript(pc, 0) * sizeof(wchar_t));
-	    if (new) new[0] = '\0';
+	    new_ = malloc(CleanTranscript(pc, 0) * sizeof(wchar_t));
+	    if (new_) new_[0] = '\0';
 	    p->already = p->numkeys;
 	    p->pclp = 0;
 	}
-	if (new) {
-	    p->clp = new;
+	if (new_) {
+	    p->clp = new_;
 	    /* copy just the commands from the clipboard */
-	    for (; *new; ++new); /* append to the end of 'new' */
-	    CleanTranscript(pc, new);
+	    for (; *new_; ++new_); /* append to the end of 'new_' */
+	    CleanTranscript(pc, new_);
 	}
 	else {
 	    R_ShowMessage(G_("Not enough memory"));

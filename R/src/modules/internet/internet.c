@@ -353,57 +353,57 @@ static size_t url_read2(void *ptr, size_t size, size_t nitems,
 static Rconnection
 in_R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
-    Rconnection newcon;
-    newcon = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!newcon) error(_("allocation of url connection failed"));
-    newcon->connclass = (char *) malloc(strlen("url") + 1);
-    if(!newcon->connclass) {
-	free(newcon);
+    Rconnection newconn;
+    newconn = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!newconn) error(_("allocation of url connection failed"));
+    newconn->connclass = (char *) malloc(strlen("url") + 1);
+    if(!newconn->connclass) {
+	free(newconn);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ newcon = NULL;
+        /* for Solaris 12.5 */ newconn = NULL;
     }
-    strcpy(newcon->connclass, "url");
-    newcon->description = (char *) malloc(strlen(description) + 1);
-    if(!newcon->description) {
-	free(newcon->connclass); free(newcon);
+    strcpy(newconn->connclass, "url");
+    newconn->description = (char *) malloc(strlen(description) + 1);
+    if(!newconn->description) {
+	free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ newcon = NULL;
+        /* for Solaris 12.5 */ newconn = NULL;
     }
-    init_con(newcon, description, CE_NATIVE, mode);
-    newcon->canwrite = FALSE;
+    init_con(newconn, description, CE_NATIVE, mode);
+    newconn->canwrite = FALSE;
 #ifdef _WIN32
     if (type) {
-	newcon->open = &url_open2;
-	newcon->read = &url_read2;
-	newcon->close = &url_close2;
-	newcon->fgetc_internal = &url_fgetc_internal2;
+	newconn->open = &url_open2;
+	newconn->read = &url_read2;
+	newconn->close = &url_close2;
+	newconn->fgetc_internal = &url_fgetc_internal2;
     } else
 #endif
     {
-	newcon->open = &url_open;
-	newcon->read = &url_read;
-	newcon->close = &url_close;
-	newcon->fgetc_internal = &url_fgetc_internal;
+	newconn->open = &url_open;
+	newconn->read = &url_read;
+	newconn->close = &url_close;
+	newconn->fgetc_internal = &url_fgetc_internal;
     }
-    newcon->fgetc = &dummy_fgetc;
-    struct urlconn *uc = newcon->private = (void *) malloc(sizeof(struct urlconn));
-    if(!newcon->private) {
-	free(newcon->description); free(newcon->connclass); free(newcon);
+    newconn->fgetc = &dummy_fgetc;
+    struct urlconn *uc = newconn->private = (void *) malloc(sizeof(struct urlconn));
+    if(!newconn->private) {
+	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newcon = NULL;
+	/* for Solaris 12.5 */ newconn = NULL;
     }
     uc->headers = NULL;
     if(!isNull(headers)) {
 	uc->headers = strdup(CHAR(STRING_ELT(headers, 0)));
 	if(!uc->headers) {
-	    free(newcon->description); free(newcon->connclass); free(newcon->private); free(newcon);
+	    free(newconn->description); free(newconn->connclass); free(newconn->private); free(newconn);
 	    error(_("allocation of url connection failed"));
-	    /* for Solaris 12.5 */ newcon = NULL;
+	    /* for Solaris 12.5 */ newconn = NULL;
 	}
     }
 
     IDquiet = TRUE;
-    return newcon;
+    return newconn;
 }
 
 

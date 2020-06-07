@@ -43,7 +43,7 @@
 
 #include "nmath.h"
 
-double attribute_hidden lgammacor(double x)
+HIDDEN double Rf_lgammacor(double x)
 {
     const static double algmcs[15] = {
 	+.1666389480451863247205729650822e+0,

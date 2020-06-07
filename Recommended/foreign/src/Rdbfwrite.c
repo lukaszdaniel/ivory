@@ -63,7 +63,7 @@ static DBFHandle Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc,
 	int nWidth;
 	char szTitle[12];
 	double rtmp;
-	SEXP names = getAttrib(df, R_NamesSymbol), this;
+	SEXP names = getAttrib(df, R_NamesSymbol), this_;
 
 	nflds = length(df);
 	nrecs = length(VECTOR_ELT(df, 0));
@@ -122,11 +122,11 @@ static DBFHandle Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc,
 					DBFWriteDoubleAttribute(hDBF, iRecord, i, rtmp);
 				break;
 			case STRSXP:
-				this = STRING_ELT(VECTOR_ELT(df, i), iRecord);
-				if (this == NA_STRING)
+				this_ = STRING_ELT(VECTOR_ELT(df, i), iRecord);
+				if (this_ == NA_STRING)
 					DBFWriteNULLAttribute(hDBF, iRecord, i);
 				else
-					DBFWriteStringAttribute(hDBF, iRecord, i, CHAR(this));
+					DBFWriteStringAttribute(hDBF, iRecord, i, CHAR(this_));
 				break;
 			default:
 				error(_("unknown data type"));

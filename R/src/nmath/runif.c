@@ -23,7 +23,7 @@
  */
 #include "nmath.h"
 
-double runif(double a, double b)
+double Rf_runif(double a, double b)
 {
     if (!R_FINITE(a) || !R_FINITE(b) || b < a)	ML_WARN_return_NAN;
 

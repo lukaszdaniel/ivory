@@ -21,7 +21,7 @@
  *
  *  SYNOPSIS
  *
- *	double qnorm5(double p, double mu, double sigma,
+ *	double qnorm(double p, double mu, double sigma,
  *		      int lower_tail, int log_p)
  *            {qnorm (..) is synonymous and preferred inside R}
  *
@@ -49,7 +49,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qnorm5(double p, double mu, double sigma, int lower_tail, int log_p)
+double Rf_qnorm(double p, double mu, double sigma, int lower_tail, int log_p)
 {
     double p_, q, r, val;
 

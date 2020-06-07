@@ -20,7 +20,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qnf(double p, double df1, double df2, double ncp, int lower_tail, 
+double Rf_qnf(double p, double df1, double df2, double ncp, int lower_tail, 
 	   int log_p)
 {
     double y;

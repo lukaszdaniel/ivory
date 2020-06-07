@@ -33,8 +33,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-static double
-do_search(double y, double *z, double p, double lambda, double incr)
+static double do_search(double y, double *z, double p, double lambda, double incr)
 {
     if(*z >= p) {
 			/* search to the left */
@@ -55,7 +54,7 @@ do_search(double y, double *z, double p, double lambda, double incr)
     }
 }
 
-double qpois(double p, double lambda, int lower_tail, int log_p)
+double Rf_qpois(double p, double lambda, int lower_tail, int log_p)
 {
     double mu, sigma, gamma, z, y;
 #ifdef IEEE_754

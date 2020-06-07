@@ -146,7 +146,7 @@
 #define n_max (100)
 
 /* From R, currently only used for kode = 1, m = 1 : */
-void dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
+void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
 {
     const static double bvalues[] = {	/* Bernoulli Numbers */
 	 1.00000000000000000e+00,
@@ -485,7 +485,7 @@ void dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
 	return ML_NAN
 #endif
 
-double psigamma(double x, double deriv)
+double Rf_psigamma(double x, double deriv)
 {
     /* n-th derivative of psi(x);  e.g., psigamma(x,0) == digamma(x) */
     double ans;
@@ -508,7 +508,7 @@ double psigamma(double x, double deriv)
     return ans;/* = psi(n, x) */
 }
 
-double digamma(double x)
+double Rf_digamma(double x)
 {
     double ans;
     int nz, ierr;
@@ -518,7 +518,7 @@ double digamma(double x)
     return -ans;
 }
 
-double trigamma(double x)
+double Rf_trigamma(double x)
 {
     double ans;
     int nz, ierr;
@@ -528,7 +528,7 @@ double trigamma(double x)
     return ans;
 }
 
-double tetragamma(double x)
+double Rf_tetragamma(double x)
 {
     double ans;
     int nz, ierr;
@@ -538,7 +538,7 @@ double tetragamma(double x)
     return -2.0 * ans;
 }
 
-double pentagamma(double x)
+double Rf_pentagamma(double x)
 {
     double ans;
     int nz, ierr;

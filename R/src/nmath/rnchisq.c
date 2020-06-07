@@ -56,7 +56,7 @@
 
 #include "nmath.h"
 
-double rnchisq(double df, double lambda)
+double Rf_rnchisq(double df, double lambda)
 {
     if (ISNAN(df) || !R_FINITE(lambda) || df < 0. || lambda < 0.)
 	ML_WARN_return_NAN;

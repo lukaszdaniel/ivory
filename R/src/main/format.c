@@ -57,20 +57,20 @@
 
 /* this is just for conformity with other types */
 HIDDEN
-void formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
+void Rf_formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 HIDDEN
-void formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
+void Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 
 HIDDEN
-void formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
+void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;
@@ -87,7 +87,7 @@ void formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 /* currently there is no STRING_GET_REGION */
 
 HIDDEN
-void formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
+void Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;
@@ -103,7 +103,7 @@ void formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
 
 
 
-void formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
+void Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 1;
     for(R_xlen_t i = 0 ; i < n; i++) {
@@ -152,7 +152,7 @@ void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
 	}							\
     } while(0)
 
-void formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
+void Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
 {
     int xmin = INT_MAX, xmax = INT_MIN, naflag = 0;
     int l;
@@ -425,7 +425,7 @@ scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *rounding
    it is 0 except when called from do_format.
 */
 
-void formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
+void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
     int left, right, sleft;
     int mnl, mxl, rgt, mxsl, mxns, wF;
@@ -538,7 +538,7 @@ void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
 
 /* As from 2.2.0 the number of digits applies to real and imaginary parts
    together, not separately */
-void formatComplex(const Rcomplex *x, R_xlen_t n,
+void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 		   int *wr, int *dr, int *er, // (w,d,e) for Re(.)
 		   int *wi, int *di, int *ei, // (w,d,e) for Im(.)
 		   int nsmall)

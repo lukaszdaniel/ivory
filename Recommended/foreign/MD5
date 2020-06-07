@@ -126,7 +126,7 @@ d29de0fdc5693ea3346210bfe439f53d *src/stataread.c
 01c70b707ba2dc261b43e7f7bf2d9119 *src/SASxport.c
 99d6255ebd2483c1728e4f14fb1208d3 *src/Rdbfread.c
 915236a4dad83bcd90fd14b1e52da697 *src/swap_bytes.h
-c2ef2d7a2668fda0153c64482f1f2269 *src/Rdbfwrite.c
+64770a055950aaa4e2636f57d32e15d8 *src/Rdbfwrite.c
 c1bc225b793dc61b8e46afd50afde1a0 *src/file-handle.h
 e5b7d1642e202b121beaab6a52a5151f *src/sfm-read.c
 aeff565df3757541c439dad634871bf0 *src/dbfopen.c
@@ -134,7 +134,7 @@ aeff565df3757541c439dad634871bf0 *src/dbfopen.c
 2e1e966093db4d868c5d7f08bcd42410 *src/foreign.h
 22a951beb74f0121e6649b4a45262163 *src/localization.h
 f895d4239425bddbce18c855b48dd74a *src/minitab.c
-21aa88b89d361836580ebdfa9ec21ebc *src/file-handle.c
+7a319636bf3731a7171aa73ab33375f8 *src/file-handle.c
 f9de25dc6a45665e512b7c9b70f7dc52 *src/pfm-read.c
 a4a1b0e79c635cd4461b3c2bac29d56a *src/sfmP.h
 ba57918d9812b0751713e905c53c5d46 *src/format.h

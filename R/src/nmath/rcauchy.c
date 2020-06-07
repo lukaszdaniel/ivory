@@ -29,7 +29,7 @@
 
 #include "nmath.h"
 
-double rcauchy(double location, double scale)
+double Rf_rcauchy(double location, double scale)
 {
     if (ISNAN(location) || !R_FINITE(scale) || scale < 0)
 	ML_WARN_return_NAN;

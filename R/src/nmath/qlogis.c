@@ -22,7 +22,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qlogis(double p, double location, double scale, int lower_tail, int log_p)
+double Rf_qlogis(double p, double location, double scale, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(p) || ISNAN(location) || ISNAN(scale))

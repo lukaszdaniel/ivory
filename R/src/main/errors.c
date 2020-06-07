@@ -188,8 +188,8 @@ static void onintrEx(Rboolean resumeOK)
     jump_to_top_ex(TRUE, tryUserError, TRUE, TRUE, FALSE);
 }
 
-void onintr()  { onintrEx(TRUE); }
-void onintrNoResume() { onintrEx(FALSE); }
+void Rf_onintr()  { onintrEx(TRUE); }
+void Rf_onintrNoResume() { onintrEx(FALSE); }
 
 /* SIGUSR1: save and quit
    SIGUSR2: save and quit, don't run .Last or on.exit().
@@ -197,7 +197,7 @@ void onintrNoResume() { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-RETSIGTYPE HIDDEN onsigusr1(int dummy)
+HIDDEN RETSIGTYPE Rf_onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -232,7 +232,7 @@ RETSIGTYPE HIDDEN onsigusr1(int dummy)
 }
 
 
-RETSIGTYPE HIDDEN onsigusr2(int dummy)
+HIDDEN RETSIGTYPE Rf_onsigusr2(int dummy)
 {
     inError = 1;
 
@@ -506,7 +506,7 @@ static void warningcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-void warningcall(SEXP call, const char *format, ...)
+void Rf_warningcall(SEXP call, const char *format, ...)
 {
     va_list(ap);
     va_start(ap, format);
@@ -514,7 +514,7 @@ void warningcall(SEXP call, const char *format, ...)
     va_end(ap);
 }
 
-void warningcall_immediate(SEXP call, const char *format, ...)
+void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 {
     va_list(ap);
 
@@ -539,7 +539,7 @@ static void cleanup_PrintWarnings(void *data)
 
 
 HIDDEN
-void PrintWarnings(const char *hdr)
+void Rf_PrintWarnings(const char *hdr)
 {
     int i;
     const char *header = hdr? hdr: n_("Warning message:", "Warning messages:", R_CollectWarnings);
@@ -700,8 +700,7 @@ static void restore_inError(void *data)
    checks in GC and session exit (or .Call) do not have such limit. */
 static int allowedConstsChecks = 1000;
 
-NORET static void
-verrorcall_dflt(SEXP call, const char *format, va_list ap)
+NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 {
     if (allowedConstsChecks > 0) {
 	allowedConstsChecks--;
@@ -879,8 +878,7 @@ NORET void Rf_errorcall(SEXP call, const char *format,...)
 
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
-HIDDEN
-NORET void errorcall_cpy(SEXP call, const char *format, ...)
+HIDDEN NORET void Rf_errorcall_cpy(SEXP call, const char *format, ...)
 {
     char buf[BUFSIZE];
 
@@ -1035,7 +1033,7 @@ static void jump_to_top_ex(Rboolean traceback,
     R_jumpctxt(R_ToplevelContext, 0, NULL);
 }
 
-NORET void jump_to_toplevel()
+NORET void Rf_jump_to_toplevel()
 {
     /* no traceback, no user error option; for now, warnings are
        printed here and console is reset -- eventually these should be
@@ -1307,8 +1305,7 @@ HIDDEN SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Error recovery for incorrect argument count error. */
-HIDDEN
-NORET void WrongArgCount(const char *s)
+HIDDEN NORET void WrongArgCount(const char *s)
 {
     error(_("incorrect number of arguments passed to '%s' function"), s);
 }
@@ -1348,8 +1345,7 @@ WarningDB[] = {
 };
 
 
-HIDDEN
-NORET void ErrorMessage(SEXP call, int which_error, ...)
+HIDDEN NORET void Rf_ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1368,8 +1364,7 @@ NORET void ErrorMessage(SEXP call, int which_error, ...)
     errorcall(call, "%s", buf);
 }
 
-HIDDEN
-void WarningMessage(SEXP call, R_WARNING which_warn, ...)
+HIDDEN void Rf_WarningMessage(SEXP call, R_WARNING which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1529,7 +1524,7 @@ HIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_GetTraceback(skip);
 }
 
-static char * R_ConciseTraceback(SEXP call, int skip)
+static char *R_ConciseTraceback(SEXP call, int skip)
 {
     static char buf[560];
     RCNTXT *c;
@@ -1894,8 +1889,7 @@ static void signalInterrupt(void)
     }
 }
 
-HIDDEN void
-R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
+HIDDEN void R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry, name;
 
@@ -2053,16 +2047,14 @@ HIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-HIDDEN SEXP
-do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     R_PrintDeferredWarnings();
     return R_NilValue;
 }
 
-HIDDEN SEXP
-do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int orig_value = R_interrupts_suspended;
     if (args != R_NilValue)
@@ -2070,8 +2062,7 @@ do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarLogical(orig_value);
 }
 
-HIDDEN void
-R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
+HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
                   const char *errmsg, const char *warnmsg,
                   const char *varname, Rboolean warnByDefault)
 {
@@ -2214,8 +2205,7 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
    GetCurrentSrcref returns the first non-NULL srcref after skipping skip of them.  If it
    doesn't find one it returns NULL. */
 
-SEXP
-R_GetCurrentSrcref(int skip)
+SEXP R_GetCurrentSrcref(int skip)
 {
     RCNTXT *c = R_GlobalContext;
     SEXP srcref = R_Srcref;
@@ -2243,8 +2233,7 @@ R_GetCurrentSrcref(int skip)
 
 /* Return the filename corresponding to a srcref, or "" if none is found */
 
-SEXP
-R_GetSrcFilename(SEXP srcref)
+SEXP R_GetSrcFilename(SEXP srcref)
 {
     SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
     if (TYPEOF(srcfile) != ENVSXP)

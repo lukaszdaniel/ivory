@@ -29,7 +29,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dgeom(double x, double p, int give_log)
+double Rf_dgeom(double x, double p, int give_log)
 { 
     double prob;
 

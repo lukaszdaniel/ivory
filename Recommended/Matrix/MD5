@@ -192,7 +192,7 @@ fc72dd2599982f25f9ffbfc75f149134 *inst/external/lund_a.rsa
 7e22a368a5d129fc7396432949fb72ab *inst/external/test3comp.rda
 a42f11b6572cd4e01e271d14cf658059 *inst/include/cholmod.h
 c06b0491b3695c9186833b8897d54128 *inst/include/Matrix.h
-d67a3a0fc0a39419ebf6b7902e944dca *inst/include/Matrix_stubs.c
+d52b0dc8814ff835fc5200afa8d0e580 *inst/include/Matrix_stubs.c
 06d9de87597574aff0aa03776011bfa8 *tests/matr-exp.R
 7b3458450be97737bef6152babab85d1 *tests/dg_Matrix.R
 eca424b43492f27bcb4ba5a1fdb0a0c7 *tests/write-read.R
@@ -303,7 +303,7 @@ f14d4d8cd3b94ab5e95c8c9bff9630f1 *src/dense.h
 341e051982a88f9c4d9a02c1376978fc *src/dgTMatrix.h
 fdd9e01ae6f24fc59d821db2c984da53 *src/dgeMatrix.h
 37fd937251ae9f1c68d974bd6169ade3 *src/factorizations.h
-391af94c351b9ec1b6d341b44245421a *src/chm_common.c
+17c0b10d4907db38ac2c2c42985557fd *src/chm_common.c
 0f92396c76200fcdee483247ea723ca7 *src/dppMatrix.c
 069b9c048677ed614b7bb99a97609740 *src/init.c
 49c0cbced572ade1fdb599c55f6e20d1 *src/sparseQR.c

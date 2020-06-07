@@ -51,7 +51,7 @@
 
 #define repeat for(;;)
 
-double rpois(double mu)
+double Rf_rpois(double mu)
 {
     /* Factorial Table (0:9)! */
     const static double fact[10] =

@@ -41,7 +41,7 @@
 
 #include "nmath.h"
 
-double lgammafn_sign(double x, int *sgn)
+double Rf_lgammafn_sign(double x, int *sgn)
 {
     double ans, y, sinpiy;
 
@@ -120,7 +120,7 @@ double lgammafn_sign(double x, int *sgn)
     return ans;
 }
 
-double lgammafn(double x)
+double Rf_lgammafn(double x)
 {
     return lgammafn_sign(x, NULL);
 }

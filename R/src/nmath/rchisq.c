@@ -33,7 +33,7 @@
 
 #include "nmath.h"
 
-double rchisq(double df)
+double Rf_rchisq(double df)
 {
     if (!R_FINITE(df) || df < 0.0) ML_WARN_return_NAN;
 

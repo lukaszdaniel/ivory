@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double punif(double x, double a, double b, int lower_tail, int log_p)
+double Rf_punif(double x, double a, double b, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(x) || ISNAN(a) || ISNAN(b))

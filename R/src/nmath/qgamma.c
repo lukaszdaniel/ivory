@@ -46,8 +46,8 @@
 # define DEBUG_q
 #endif
 
-attribute_hidden
-double qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
+HIDDEN
+double Rf_qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
 		   int lower_tail, int log_p, double tol /* EPS1 */)
 {
 #define C7	4.67
@@ -101,37 +101,38 @@ double qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
 #ifdef DEBUG_qgamma
 	REprintf(" nu <= .32: a = %7g\n", a);
 #endif
-	do {
-	    q = ch;
-	    p1 = 1. / (1+ch*(C7+ch));
-	    p2 = ch*(C9+ch*(C8+ch));
-	    t = -0.5 +(C7+2*ch)*p1 - (C9+ch*(C10+3*ch))/p2;
-	    ch -= (1- exp(a+0.5*ch)*p2*p1)/t;
-	} while(fabs(q - ch) > tol * fabs(ch));
-    }
+	do
+	{
+		q = ch;
+		p1 = 1. / (1 + ch * (C7 + ch));
+		p2 = ch * (C9 + ch * (C8 + ch));
+		t = -0.5 + (C7 + 2 * ch) * p1 - (C9 + ch * (C10 + 3 * ch)) / p2;
+		ch -= (1 - exp(a + 0.5 * ch) * p2 * p1) / t;
+	} while (fabs(q - ch) > tol * fabs(ch));
+	}
 
     return ch;
 }
 
-double qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
+double Rf_qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
 /*			shape = alpha */
 {
 #define EPS1 1e-2
-#define EPS2 5e-7/* final precision of AS 91 */
-#define EPS_N 1e-15/* precision of Newton step / iterations */
+#define EPS2 5e-7				   /* final precision of AS 91 */
+#define EPS_N 1e-15				   /* precision of Newton step / iterations */
 #define LN_EPS -36.043653389117156 /* = log(.Machine$double.eps) iff IEEE_754 */
 
-#define MAXIT 1000/* was 20 */
+#define MAXIT 1000 /* was 20 */
 
-#define pMIN 1e-100   /* was 0.000002 = 2e-6 */
-#define pMAX (1-1e-14)/* was (1-1e-12) and 0.999998 = 1 - 2e-6 */
+#define pMIN 1e-100		 /* was 0.000002 = 2e-6 */
+#define pMAX (1 - 1e-14) /* was (1-1e-12) and 0.999998 = 1 - 2e-6 */
 
-    const static double
-	i420  = 1./ 420.,
-	i2520 = 1./ 2520.,
-	i5040 = 1./ 5040;
+	const static double
+		i420 = 1. / 420.,
+		i2520 = 1. / 2520.,
+		i5040 = 1. / 5040;
 
-    double p_, a, b, c, g, ch, ch0, p1;
+	double p_, a, b, c, g, ch, ch0, p1;
     double p2, q, s1, s2, s3, s4, s5, s6, t, x;
     int i, max_it_Newton = 1;
 
@@ -211,14 +212,14 @@ double qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
 
 	t = p2*exp(alpha*M_LN2+g+p1-c*log(ch));
 	b = t/ch;
-	a = 0.5*t - b*c;
-	s1 = (210+ a*(140+a*(105+a*(84+a*(70+60*a))))) * i420;
-	s2 = (420+ a*(735+a*(966+a*(1141+1278*a)))) * i2520;
-	s3 = (210+ a*(462+a*(707+932*a))) * i2520;
-	s4 = (252+ a*(672+1182*a) + c*(294+a*(889+1740*a))) * i5040;
-	s5 = (84+2264*a + c*(1175+606*a)) * i2520;
+	a = 0.5 * t - b * c;
+	s1 = (210 + a * (140 + a * (105 + a * (84 + a * (70 + 60 * a))))) * i420;
+	s2 = (420 + a * (735 + a * (966 + a * (1141 + 1278 * a)))) * i2520;
+	s3 = (210 + a * (462 + a * (707 + 932 * a))) * i2520;
+	s4 = (252 + a * (672 + 1182 * a) + c * (294 + a * (889 + 1740 * a))) * i5040;
+	s5 = (84 + 2264 * a + c * (1175 + 606 * a)) * i2520;
 
-	ch += t*(1+0.5*t*s1-b*c*(s1-b*(s2-b*(s3-b*(s4-b*(s5-b*s6))))));
+	ch += t * (1 + 0.5 * t * s1 - b * c * (s1 - b * (s2 - b * (s3 - b * (s4 - b * (s5 - b * s6))))));
 	if(fabs(q - ch) < EPS2*ch)
 	    goto END;
 	if(fabs(q - ch) > 0.1*ch) {/* diverging? -- also forces ch > 0 */

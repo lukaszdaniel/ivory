@@ -58,8 +58,7 @@
 
 #include <R_ext/Visibility.h>
 
-attribute_hidden
-double R_pretty(double *lo, double *up, int *ndiv, int min_n,
+HIDDEN double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 		double shrink_sml,
 		const double high_u_fact[],
 		// (h, h5) = c(high.u.bias, u5.bias) in base::pretty.default()

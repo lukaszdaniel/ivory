@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qunif(double p, double a, double b, int lower_tail, int log_p)
+double Rf_qunif(double p, double a, double b, int lower_tail, int log_p)
 {
 #ifdef IEEE_754
     if (ISNAN(p) || ISNAN(a) || ISNAN(b))

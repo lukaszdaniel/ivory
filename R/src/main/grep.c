@@ -294,8 +294,7 @@ static long R_pcre_max_recursions()
 #endif
 
 #ifdef HAVE_PCRE2
-static void
-R_pcre2_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
+static void R_pcre2_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
                 Rboolean caseless, const unsigned char **tables,
                 pcre2_code **re, pcre2_match_context **mcontext)
 {
@@ -355,8 +354,7 @@ R_pcre2_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
 # endif
 }
 #else /* ! HAVE_PCRE2 */
-static void
-set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
+static void set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
 {
     if (limit >= 0) {
 	pcre_extra *re_pe = *re_pe_ptr;
@@ -375,8 +373,7 @@ set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
     }
 }
 
-static void
-R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
+static void R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
                Rboolean caseless, Rboolean always_study,
                const unsigned char **tables, pcre **re, pcre_extra **re_extra)
 {

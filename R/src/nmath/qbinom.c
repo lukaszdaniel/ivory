@@ -33,8 +33,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-static double
-do_search(double y, double *z, double p, double n, double pr, double incr)
+static double do_search(double y, double *z, double p, double n, double pr, double incr)
 {
     if(*z >= p) {
 			/* search to the left */
@@ -64,7 +63,7 @@ do_search(double y, double *z, double p, double n, double pr, double incr)
 }
 
 
-double qbinom(double p, double n, double pr, int lower_tail, int log_p)
+double Rf_qbinom(double p, double n, double pr, int lower_tail, int log_p)
 {
     double q, mu, sigma, gamma, z, y;
 

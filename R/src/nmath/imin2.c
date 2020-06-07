@@ -28,7 +28,7 @@
 
 #include "nmath.h"
 
-int imin2(int x, int y)
+int Rf_imin2(int x, int y)
 {
     return (x < y) ? x : y;
 }

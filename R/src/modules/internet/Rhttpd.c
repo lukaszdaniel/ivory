@@ -235,11 +235,11 @@ static void first_init()
     /* create a dummy message-only window for synchronization with the
      * main event loop */
     HINSTANCE instance = GetModuleHandle(NULL);
-    LPCTSTR class = "Rhttpd";
+    LPCTSTR class_ = "Rhttpd";
     WNDCLASS wndclass = { 0, RhttpdWindowProc, 0, 0, instance, NULL, 0, 0,
-			  NULL, class };
+			  NULL, class_ };
     RegisterClass(&wndclass);
-    message_window = CreateWindow(class, "Rhttpd", 0, 1, 1, 1, 1,
+    message_window = CreateWindow(class_, "Rhttpd", 0, 1, 1, 1, 1,
 				  HWND_MESSAGE, NULL, instance, NULL);
 
     process_request_mutex = CreateMutex(NULL, FALSE, NULL);

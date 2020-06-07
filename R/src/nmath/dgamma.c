@@ -39,7 +39,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dgamma(double x, double shape, double scale, int give_log)
+double Rf_dgamma(double x, double shape, double scale, int give_log)
 {
     double pr;
 #ifdef IEEE_754

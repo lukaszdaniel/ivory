@@ -32,7 +32,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dnf(double x, double df1, double df2, double ncp, int give_log)
+double Rf_dnf(double x, double df1, double df2, double ncp, int give_log)
 {
     double y, z, f;
 

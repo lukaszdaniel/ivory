@@ -42,7 +42,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dhyper(double x, double r, double b, double n, int give_log)
+double Rf_dhyper(double x, double r, double b, double n, int give_log)
 {
     double p, q, p1, p2, p3;
 

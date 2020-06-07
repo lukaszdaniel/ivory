@@ -44,7 +44,7 @@ R_X11Routines * R_setX11Routines(R_X11Routines *routines)
     return tmp;
 }
 
-int attribute_hidden R_X11_Init(void)
+HIDDEN int R_X11_Init(void)
 {
     int res;
 
@@ -63,7 +63,7 @@ int attribute_hidden R_X11_Init(void)
     return initialized;
 }
 
-Rboolean attribute_hidden R_access_X11(void)
+HIDDEN Rboolean R_access_X11(void)
 {
     R_X11_Init();
     return (initialized > 0) ? (*ptr->access)() > 0 : FALSE;
@@ -105,7 +105,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
     }
 }
 
-Rboolean attribute_hidden R_ReadClipboard(Rclpconn clpcon, char *type)
+HIDDEN Rboolean R_ReadClipboard(Rclpconn clpcon, char *type)
 {
     R_X11_Init();
     if(initialized > 0)
@@ -135,7 +135,7 @@ SEXP do_bmVersion(void)
 }
 #else /* No HAVE_X11 */
 
-Rboolean attribute_hidden R_access_X11(void)
+HIDDEN Rboolean R_access_X11(void)
 {
     return FALSE;
 }
@@ -158,7 +158,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
     return FALSE;
 }
 
-Rboolean attribute_hidden R_ReadClipboard(Rclpconn con, char *type)
+HIDDEN Rboolean R_ReadClipboard(Rclpconn con, char *type)
 {
     error(_("X11 is not available"));
     return FALSE;

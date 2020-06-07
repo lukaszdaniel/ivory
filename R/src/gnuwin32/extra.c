@@ -1181,7 +1181,7 @@ size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n)
 #endif
 
 /* base::file.choose */
-SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     wchar_t *fn;
@@ -1201,7 +1201,7 @@ SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
 
-SEXP attribute_hidden do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     return mkString(getTZinfo());
 }

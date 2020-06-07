@@ -30,14 +30,14 @@
 #include "nmath.h"
 
 #ifdef OLD
-double ftrunc(double x)
+double Rf_ftrunc(double x)
 {
 	if(x >= 0) return floor(x);
 	else return ceil(x);
 }
 #else
 // use C99 function
-double ftrunc(double x)
+double Rf_ftrunc(double x)
 {
     return trunc(x);
 }

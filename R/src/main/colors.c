@@ -28,6 +28,7 @@
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 
+/* same as src/library/grDevices/src/colors.c */
 typedef unsigned int (*F1)(SEXP x, int i, unsigned int bg);
 typedef const char * (*F2)(unsigned int col);
 typedef unsigned int (*F3)(const char *s);
@@ -49,21 +50,21 @@ void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4)
 /* used in grid/src/gpar.c with bg = R_TRANWHITE,
    in packages Cairo, canvas and jpeg */
 /* in GraphicsEngine.h */
-unsigned int RGBpar3(SEXP x, int i, unsigned int bg)
+unsigned int Rf_RGBpar3(SEXP x, int i, unsigned int bg)
 {
     if (!ptr_RGBpar3) error(_("package 'grDevices' must be loaded"));
     return (ptr_RGBpar3)(x, i, bg);
 }
 
 /* in GraphicsEngine.h, used by devices */
-unsigned int RGBpar(SEXP x, int i)
+unsigned int Rf_RGBpar(SEXP x, int i)
 {
     return RGBpar3(x, i, R_TRANWHITE);
 }
 
 /* used in grid */
 /* in GraphicsEngine.h */
-const char *col2name(unsigned int col)
+const char *Rf_col2name(unsigned int col)
 {
     if (!ptr_col2name) error(_("package 'grDevices' must be loaded"));
     return (ptr_col2name)(col);
@@ -78,8 +79,7 @@ unsigned int R_GE_str2col(const char *s)
 }
 
 /* used in engine.c */
-HIDDEN
-void savePalette(Rboolean save)
+HIDDEN void savePalette(Rboolean save)
 {
     if (!ptr_savePalette) error(_("package 'grDevices' must be loaded"));
     (ptr_savePalette)(save);

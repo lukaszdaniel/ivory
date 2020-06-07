@@ -188,7 +188,7 @@ HIDDEN SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // deparse1() version *looking* at getOption("deparse.max.lines")
-SEXP deparse1m(SEXP call, Rboolean abbrev, int opts)
+SEXP Rf_deparse1m(SEXP call, Rboolean abbrev, int opts)
 {
     Rboolean backtick = TRUE;
     int old_bl = R_BrowseLines,
@@ -202,7 +202,7 @@ SEXP deparse1m(SEXP call, Rboolean abbrev, int opts)
 }
 
 // deparse1() version with R_BrowseLines := 0
-SEXP deparse1(SEXP call, Rboolean abbrev, int opts)
+SEXP Rf_deparse1(SEXP call, Rboolean abbrev, int opts)
 {
     Rboolean backtick = TRUE;
     int old_bl = R_BrowseLines;
@@ -216,7 +216,7 @@ SEXP deparse1(SEXP call, Rboolean abbrev, int opts)
 
 /* used for language objects in print() */
 HIDDEN
-SEXP deparse1w(SEXP call, Rboolean abbrev, int opts)
+SEXP Rf_deparse1w(SEXP call, Rboolean abbrev, int opts)
 {
     Rboolean backtick = TRUE;
     return deparse1WithCutoff(call, abbrev, R_print.cutoff, backtick, opts, -1);
@@ -341,7 +341,7 @@ SEXP deparse1line_(SEXP call, Rboolean abbrev, int opts)
     return(temp);
 }
 
-SEXP deparse1line(SEXP call, Rboolean abbrev)
+SEXP Rf_deparse1line(SEXP call, Rboolean abbrev)
 {
     return deparse1line_(call, abbrev, SIMPLEDEPARSE);
 }
@@ -545,8 +545,7 @@ static void deparse2(SEXP what, SEXP svec, LocalParseData *d)
 /* curlyahead looks at s to see if it is a list with
    the first op being a curly.  You need this kind of
    lookahead info to print if statements correctly.  */
-static Rboolean
-curlyahead(SEXP s)
+static Rboolean curlyahead(SEXP s)
 {
     if (isList(s) || isLanguage(s))
 	if (TYPEOF(CAR(s)) == SYMSXP && CAR(s) == R_BraceSymbol)
@@ -858,8 +857,8 @@ static void deparse2buff(SEXP s, LocalParseData *d)
     if (IS_S4_OBJECT(s) || hasS4_t) {
 	d->isS4 = TRUE;
 	/* const void *vmax = vmaxget(); */
-	SEXP class = getAttrib(s, R_ClassSymbol),
-	    cl_def = TYPEOF(class) == STRSXP ? STRING_ELT(class, 0) : R_NilValue;
+	SEXP class_ = getAttrib(s, R_ClassSymbol),
+	    cl_def = TYPEOF(class_) == STRSXP ? STRING_ELT(class_, 0) : R_NilValue;
 	if(TYPEOF(cl_def) == CHARSXP) { // regular S4 objects
 	    print2buff("new(\"", d);
 	    print2buff(translateChar(cl_def), d);
@@ -871,7 +870,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		R_getClassDef = findFun(install("getClassDef"), R_MethodsNamespace);
 	    if(R_slots == NULL) R_slots = install("slots");
 	    if(R_asS3  == NULL) R_asS3  = install("asS3");
-	    SEXP e = PROTECT(lang2(R_getClassDef, class));
+	    SEXP e = PROTECT(lang2(R_getClassDef, class_));
 	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
 	    slotNms = // names( cl_def@slots ) :
 		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
@@ -910,7 +909,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    else { // irregular S4 ((does this ever trigger ??))
 		d->sourceable = FALSE;
 		print2buff("<S4 object of class ", d);
-		deparse2buff(class, d);
+		deparse2buff(class_, d);
 		print2buff(">", d);
 	    }
 	}

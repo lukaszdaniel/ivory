@@ -25,7 +25,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double dweibull(double x, double shape, double scale, int give_log)
+double Rf_dweibull(double x, double shape, double scale, int give_log)
 {
     double tmp1, tmp2;
 #ifdef IEEE_754

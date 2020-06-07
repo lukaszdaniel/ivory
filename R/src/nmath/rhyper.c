@@ -80,7 +80,7 @@ static double afc(int i)
 }
 
 //     rhyper(NR, NB, n) -- NR 'red', NB 'blue', n drawn, how many are 'red'
-double rhyper(double nn1in, double nn2in, double kkin)
+double Rf_rhyper(double nn1in, double nn2in, double kkin)
 {
     /* extern double afc(int); */
 

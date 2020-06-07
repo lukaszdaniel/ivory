@@ -432,7 +432,7 @@ KalmanFore(SEXP nahead, SEXP mod, SEXP update)
 }
 
 
-static void partrans(int p, double *raw, double *new)
+static void partrans(int p, double *raw, double *new_)
 {
     int j, k;
     double a, work[100];
@@ -441,14 +441,14 @@ static void partrans(int p, double *raw, double *new)
 
     /* Step one: map (-Inf, Inf) to (-1, 1) via tanh
        The parameters are now the pacf phi_{kk} */
-    for(j = 0; j < p; j++) work[j] = new[j] = tanh(raw[j]);
+    for(j = 0; j < p; j++) work[j] = new_[j] = tanh(raw[j]);
     /* Step two: run the Durbin-Levinson recursions to find phi_{j.},
        j = 2, ..., p and phi_{p.} are the autoregression coefficients */
     for(j = 1; j < p; j++) {
-	a = new[j];
+	a = new_[j];
 	for(k = 0; k < j; k++)
-	    work[k] -= a * new[j - k - 1];
-	for(k = 0; k < j; k++) new[k] = work[k];
+	    work[k] -= a * new_[j - k - 1];
+	for(k = 0; k < j; k++) new_[k] = work[k];
     }
 }
 
@@ -518,23 +518,23 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
 #if !defined(atanh) && defined(HAVE_DECL_ATANH) && !HAVE_DECL_ATANH
 extern double atanh(double x);
 #endif
-static void invpartrans(int p, double *phi, double *new)
+static void invpartrans(int p, double *phi, double *new_)
 {
     int j, k;
     double a, work[100];
 
     if(p > 100) error(_("can only transform 100 pars in arima0"));
 
-    for(j = 0; j < p; j++) work[j] = new[j] = phi[j];
+    for(j = 0; j < p; j++) work[j] = new_[j] = phi[j];
     /* Run the Durbin-Levinson recursions backwards
        to find the PACF phi_{j.} from the autoregression coefficients */
     for(j = p - 1; j > 0; j--) {
-	a = new[j];
+	a = new_[j];
 	for(k = 0; k < j; k++)
-	    work[k]  = (new[k] + a * new[j - k - 1]) / (1 - a * a);
-	for(k = 0; k < j; k++) new[k] = work[k];
+	    work[k]  = (new_[k] + a * new_[j - k - 1]) / (1 - a * a);
+	for(k = 0; k < j; k++) new_[k] = work[k];
     }
-    for(j = 0; j < p; j++) new[j] = atanh(new[j]);
+    for(j = 0; j < p; j++) new_[j] = atanh(new_[j]);
 }
 
 SEXP ARIMA_Invtrans(SEXP in, SEXP sarma)
@@ -542,12 +542,12 @@ SEXP ARIMA_Invtrans(SEXP in, SEXP sarma)
     int *arma = INTEGER(sarma), mp = arma[0], mq = arma[1], msp = arma[2],
 	i, v, n = LENGTH(in);
     SEXP y = allocVector(REALSXP, n);
-    double *raw = REAL(in), *new = REAL(y);
+    double *raw = REAL(in), *new_ = REAL(y);
 
-    for(i = 0; i < n; i++) new[i] = raw[i];
-    if (mp > 0) invpartrans(mp, raw, new);
+    for(i = 0; i < n; i++) new_[i] = raw[i];
+    if (mp > 0) invpartrans(mp, raw, new_);
     v = mp + mq;
-    if (msp > 0) invpartrans(msp, raw + v, new + v);
+    if (msp > 0) invpartrans(msp, raw + v, new_ + v);
     return y;
 }
 

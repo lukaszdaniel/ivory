@@ -34,7 +34,7 @@
  */
 #include "nmath.h"
 
-double attribute_hidden bd0(double x, double np)
+HIDDEN double Rf_bd0(double x, double np)
 {
     double ej, s, s1, v;
     int j;
@@ -57,5 +57,5 @@ double attribute_hidden bd0(double x, double np)
 	}
     }
     /* else:  | x - np |  is not too small */
-    return(x*log(x/np)+np-x);
+	return (x * log(x / np) + np - x);
 }

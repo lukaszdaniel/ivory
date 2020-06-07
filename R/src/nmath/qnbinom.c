@@ -44,8 +44,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-static double
-do_search(double y, double *z, double p, double n, double pr, double incr)
+static double do_search(double y, double *z, double p, double n, double pr, double incr)
 {
     if(*z >= p) {	/* search to the left */
 	for(;;) {
@@ -65,7 +64,7 @@ do_search(double y, double *z, double p, double n, double pr, double incr)
 }
 
 
-double qnbinom(double p, double size, double prob, int lower_tail, int log_p)
+double Rf_qnbinom(double p, double size, double prob, int lower_tail, int log_p)
 {
     double P, Q, mu, sigma, gamma, z, y;
 
@@ -124,7 +123,7 @@ double qnbinom(double p, double size, double prob, int lower_tail, int log_p)
     }
 }
 
-double qnbinom_mu(double p, double size, double mu, int lower_tail, int log_p)
+double Rf_qnbinom_mu(double p, double size, double mu, int lower_tail, int log_p)
 {
     if (size == ML_POSINF) // limit case: Poisson
 	return(qpois(p, mu, lower_tail, log_p));

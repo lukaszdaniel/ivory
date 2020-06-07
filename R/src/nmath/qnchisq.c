@@ -22,7 +22,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-double qnchisq(double p, double df, double ncp, int lower_tail, int log_p)
+double Rf_qnchisq(double p, double df, double ncp, int lower_tail, int log_p)
 {
     const static double accu = 1e-13;
     const static double racc = 4*DBL_EPSILON;
