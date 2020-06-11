@@ -52,7 +52,7 @@
 # include <sys/stat.h>
 #endif
 
-static int isDir(char *path);
+static int isDir(const char *path);
 
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
@@ -76,7 +76,7 @@ HIDDEN double R_FileMtime(const char *path)
 Rboolean R_FileExists(const char *path)
 {
     struct stat sb;
-    return stat(R_ExpandFileName(path), &sb) == 0;
+    return (Rboolean) (stat(R_ExpandFileName(path), &sb) == 0);
 }
 
 HIDDEN double R_FileMtime(const char *path)
@@ -94,8 +94,8 @@ HIDDEN double R_FileMtime(const char *path)
 
 HIDDEN Rboolean R_HiddenFile(const char *name)
 {
-    if (name && name[0] != '.') return 0;
-    else return 1;
+    if (name && name[0] != '.') return FALSE;
+    else return TRUE;
 }
 
 /* The MSVC runtime has a global to determine whether an unspecified
@@ -237,7 +237,7 @@ HIDDEN SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
 HIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    Rboolean check = asLogical(CAR(args));
+    Rboolean check = (Rboolean) asLogical(CAR(args));
     if(check && !isDir(R_TempDir)) {
 	R_TempDir = NULL;
 	R_reInitTempDir(/* die_on_fail = */ FALSE);
@@ -642,7 +642,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	    error(_("unsupported conversion from '%s' to '%s'"), from, to);
 #endif
-	isRawlist = (TYPEOF(x) == VECSXP);
+	isRawlist = (Rboolean) (TYPEOF(x) == VECSXP);
 	if(isRawlist) {
 	    if(toRaw)
 		PROTECT(ans = duplicate(x));
@@ -730,7 +730,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
 			goto top_of_loop;
 		    }
-		    snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
+		    snprintf(outbuf, 5, "<%02x>", (unsigned char) *inbuf);
 		    outbuf += 4; outb -= 4;
 		} else {
 		    size_t sub_len = strlen(sub);
@@ -917,7 +917,7 @@ top_of_loop:
     Riconv (obj, NULL, NULL, &outbuf, &outb);
 next_char:
     /* Then convert input  */
-    res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
+    res = (int) Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
 	goto top_of_loop;
@@ -1016,8 +1016,7 @@ const char *Rf_translateCharFP(SEXP x)
 }
 
 /* Variant which may return NULL, used for file paths */
-HIDDEN
-const char *Rf_translateCharFP2(SEXP x)
+HIDDEN const char *Rf_translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1083,7 +1082,7 @@ const char *Rf_translateCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
-    char *outbuf, *p, *from = "";
+    char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 
@@ -1098,12 +1097,12 @@ const char *Rf_translateCharUTF8(SEXP x)
 
     if (IS_LATIN1(x))
 #ifdef HAVE_ICONV_CP1252
-	from = "CP1252";
+	from = (char *) "CP1252";
 #else
-	from = "latin1";
+	from = (char *) "latin1";
 #endif
     obj = Riconv_open("UTF-8", from);
-    if(obj == (void *)(-1))
+    if(obj == (void *) (-1))
 #ifdef _WIN32
 	error(_("unsupported conversion from '%s' in codepage %d"),
 	      from, localeCP);
@@ -1128,7 +1127,7 @@ next_char:
 	    R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
 	    goto top_of_loop;
 	}
-	snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
+	snprintf(outbuf, 5, "<%02x>", (unsigned char) *inbuf);
 	outbuf += 4; outb -= 4;
 	inbuf++; inb--;
 	goto next_char;
@@ -1143,12 +1142,11 @@ next_char:
 }
 
 /* Variant which does not return escaped string */
-HIDDEN
-const char *Rf_trCharUTF8(SEXP x)
+HIDDEN const char *Rf_trCharUTF8(SEXP x)
 {
     void *obj;
     const char *inbuf, *ans = CHAR(x);
-    char *outbuf, *p, *from = "";
+    char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
     Rboolean failed = FALSE;
@@ -1164,9 +1162,9 @@ const char *Rf_trCharUTF8(SEXP x)
 
     if (IS_LATIN1(x))
 #ifdef HAVE_ICONV_CP1252
-	from = "CP1252";
+	from = (char *) "CP1252";
 #else
-	from = "latin1";
+	from = (char *) "latin1";
 #endif
     obj = Riconv_open("UTF-8", from);
     if(obj == (void *)(-1))
@@ -1327,7 +1325,7 @@ const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
     const char *inbuf;
     char *outbuf, *p;
     size_t inb, outb, res, top;
-    char *tocode = NULL, *fromcode = NULL;
+    const char *tocode = NULL, *fromcode = NULL;
 #ifdef _WIN32
     char buf[20];
 #endif
@@ -1584,7 +1582,7 @@ static const char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.c and devX11.c */
-size_t ucstomb(char *s, const unsigned int wc)
+size_t Rf_ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
     void    *cd = NULL ;
@@ -1638,7 +1636,7 @@ size_t ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in plot.c for non-UTF-8 MBCS */
-HIDDEN size_t mbtoucs(unsigned int *wc, const char *s, size_t n)
+HIDDEN size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -1735,7 +1733,7 @@ size_t ucstoutf8(char *s, const unsigned int wc)
 # define S_IFDIR __S_IFDIR
 #endif
 
-static int isDir(char *path)
+static int isDir(const char *path)
 {
 #ifdef _WIN32
     struct _stati64 sb;
@@ -1775,7 +1773,8 @@ extern char * mkdtemp (char *template);
 
 void R_reInitTempDir(int die_on_fail)
 {
-    char *tmp, *tm, tmp1[PATH_MAX+11], *p;
+    char *tmp, tmp1[PATH_MAX+11], *p;
+    const char* tm;
 #ifdef _WIN32
     char tmp2[PATH_MAX];
     int hasspace = 0;
@@ -1850,7 +1849,7 @@ void R_reInitTempDir(int die_on_fail)
     }
 }
 
-HIDDEN void InitTempDir() {
+HIDDEN void Rf_InitTempDir() {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 

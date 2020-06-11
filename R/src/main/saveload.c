@@ -204,7 +204,7 @@ static int AsciiInInteger(FILE *fp, SaveLoadData *d)
     int x, res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	return NA_INTEGER;
     else {
 	res = sscanf(d->smbuf, "%d", &x);
@@ -218,11 +218,11 @@ static double AsciiInReal(FILE *fp, SaveLoadData *d)
     double x;
     int res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x = R_NegInf;
     else
 	res  = sscanf(d->smbuf, "%lg", &x);
@@ -236,11 +236,11 @@ static Rcomplex AsciiInComplex(FILE *fp, SaveLoadData *d)
     int res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x.r = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x.r = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x.r = R_NegInf;
     else {
 	res  = sscanf(d->smbuf, "%lg", &x.r);
@@ -249,11 +249,11 @@ static Rcomplex AsciiInComplex(FILE *fp, SaveLoadData *d)
 
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x.i = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x.i = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x.i = R_NegInf;
     else {
 	res = sscanf(d->smbuf, "%lg", &x.i);
@@ -605,15 +605,18 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
-	len = m->InInteger(fp, d);
-	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
-	int index = StrToInternal(m->InString(fp, d));
-	if (index == NA_INTEGER) {
-	    warning(_("unrecognized internal function name '%s'"), d->buffer.data);
-	    index = 0;   /* zero doesn't make sense, but is back compatible with 3.0.0 and earlier */
-	}
-	SET_PRIMOFFSET(s, index);
-	break;
+    {
+        len = m->InInteger(fp, d);
+        R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
+        int index = StrToInternal(m->InString(fp, d));
+        if (index == NA_INTEGER)
+        {
+            warning(_("unrecognized internal function name '%s'"), d->buffer.data);
+            index = 0; /* zero doesn't make sense, but is back compatible with 3.0.0 and earlier */
+        }
+        SET_PRIMOFFSET(s, index);
+    }
+    break;
     case CHARSXP:
 	len = m->InInteger(fp, d);
 	R_AllocStringBuffer(len, &(d->buffer));
@@ -1262,18 +1265,22 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
 	/*UNPROTECT(1);*/
 	break;
     case WEAKREFSXP:
-	PROTECT(s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue, FALSE));
+	PROTECT(s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue, (Rboolean) FALSE));
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
-	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
-	int index = StrToInternal(m->InString(fp, d));
-	if (index == NA_INTEGER) {
-	    warning(_("unrecognized internal function name '%s'"), d->buffer.data);
-	    PROTECT(s = R_NilValue);
-	} else
-	    PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
-	break;
+    {
+        R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
+        int index = StrToInternal(m->InString(fp, d));
+        if (index == NA_INTEGER)
+        {
+            warning(_("unrecognized internal function name '%s'"), d->buffer.data);
+            PROTECT(s = R_NilValue);
+        }
+        else
+            PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
+    }
+    break;
     case CHARSXP:
     case LGLSXP:
     case INTSXP:
@@ -1298,7 +1305,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
 
 static void newdataload_cleanup(void *data)
 {
-    InputCtxtData *cinfo = (InputCtxtData*)data;
+    InputCtxtData *cinfo = (InputCtxtData*) data;
     FILE *fp = (FILE *) data;
     cinfo->methods->InTerm(fp, cinfo->data);
 }
@@ -1972,7 +1979,7 @@ HIDDEN SEXP do_loadfile(SEXP call, SEXP op, SEXP args, SEXP env)
     if (! isValidStringF(file))
 	error(_("bad file name"));
 
-    fp = RC_fopen(STRING_ELT(file, 0), "rb", TRUE);
+    fp = RC_fopen(STRING_ELT(file, 0), "rb", (Rboolean) TRUE);
     if (!fp)
 	error(_("unable to open 'file'"));
     s = R_LoadFromFile(fp, 0);
@@ -2000,7 +2007,7 @@ HIDDEN SEXP do_savefile(SEXP call, SEXP op, SEXP args, SEXP env)
     if (version == NA_INTEGER || version <= 0)
 	error(_("invalid '%s' argument"), "version");
 
-    fp = RC_fopen(STRING_ELT(CADR(args), 0), "wb", TRUE);
+    fp = RC_fopen(STRING_ELT(CADR(args), 0), "wb", (Rboolean) TRUE);
     if (!fp)
 	error(_("unable to open 'file'"));
 
@@ -2048,7 +2055,7 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     if (ep == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "eval.promises");
 
-    fp = RC_fopen(STRING_ELT(CADR(args), 0), "wb", TRUE);
+    fp = RC_fopen(STRING_ELT(CADR(args), 0), "wb", (Rboolean) TRUE);
     if (!fp) {
 	const char *cfile = CHAR(STRING_ELT(CADR(args), 0));
 	error(_("cannot open file '%s': %s"), cfile, strerror(errno));
@@ -2161,7 +2168,7 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "envir");
 
     /* Process the saved file to obtain a list of saved objects. */
-    fp = RC_fopen(STRING_ELT(fname, 0), "rb", TRUE);
+    fp = RC_fopen(STRING_ELT(fname, 0), "rb", (Rboolean) TRUE);
     if (!fp) error(_("unable to open file '%s'"), translateChar(STRING_ELT(fname, 0)));
 
     /* set up a context which will close the file if there is an error */
@@ -2285,7 +2292,7 @@ void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = data;
+    Rconnection con = (Rconnection) data;
     if(con->isopen) con->close(con);
 }
 
@@ -2330,7 +2337,7 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (TYPEOF(CADDR(args)) != LGLSXP)
 	error(_("'%s' argument must be logical"), "ascii");
-    ascii = INTEGER(CADDR(args))[0];
+    ascii = (Rboolean) INTEGER(CADDR(args))[0];
 
     if (CADDDR(args) == R_NilValue)
 	version = defaultSaveVersion();

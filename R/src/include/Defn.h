@@ -365,7 +365,7 @@ typedef struct {
 /* The type definitions for the table of built-in functions. */
 /* This table can be found in ../main/names.c */
 typedef struct {
-    char   *name;    /* print name */
+    const char   *name;    /* print name */
     CCODE  cfun;     /* c-code address */
     int	   code;     /* offset within c-code */
     int	   eval;     /* evaluate args? */
@@ -386,8 +386,8 @@ typedef struct {
 #define PRIMVAL(x)	(R_FunTab[(x)->u.primsxp.offset].code)
 #define PRIMARITY(x)	(R_FunTab[(x)->u.primsxp.offset].arity)
 #define PPINFO(x)	(R_FunTab[(x)->u.primsxp.offset].gram)
-#define PRIMPRINT(x)	(((R_FunTab[(x)->u.primsxp.offset].eval)/100)%10)
-#define PRIMINTERNAL(x)	(((R_FunTab[(x)->u.primsxp.offset].eval)%100)/10)
+#define PRIMPRINT(x)    (((R_FunTab[(x)->u.primsxp.offset].eval) / 100) % 10)
+#define PRIMINTERNAL(x) (((R_FunTab[(x)->u.primsxp.offset].eval) % 100) / 10)
 
 /* Promise Access Macros */
 #define PRCODE(x)	((x)->u.promsxp.expr)

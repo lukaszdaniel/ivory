@@ -1011,7 +1011,7 @@ FUNTAB R_FunTab[] =
    defined in any environment other than base, and hence the ones
    where this is most likely to help. */
 
-static char *Spec_name[] = {
+static const char *Spec_name[] = {
     "if", "while", "repeat", "for", "break", "next", "return", "function",
     "(", "{",
     "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":",
@@ -1052,7 +1052,7 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 HIDDEN
-int StrToInternal(const char *s)
+int Rf_StrToInternal(const char *s)
 {
     int i;
     for (i = 0; R_FunTab[i].name; i++)
@@ -1158,7 +1158,7 @@ static void initializeDDVALSymbols() {
     }
 }
 
-HIDDEN SEXP installDDVAL(int n) {
+HIDDEN SEXP Rf_installDDVAL(int n) {
     if (n < N_DDVAL_SYMBOLS)
 	return DDVALSymbols[n];
 
@@ -1178,7 +1178,7 @@ static SEXP mkSymMarker(SEXP pname)
 }
 
 /* initialize the symbol table */
-HIDDEN void InitNames()
+HIDDEN void Rf_InitNames()
 {
     /* allocate the symbol table */
     if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))
@@ -1298,7 +1298,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 
 #define maxLength 512
 HIDDEN
-SEXP installS3Signature(const char *className, const char *methodName) {
+SEXP Rf_installS3Signature(const char *className, const char *methodName) {
 
     const char *src;
     char signature[maxLength];
@@ -1380,11 +1380,11 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 	args = evalList(args, env, call, 0);
     PROTECT(args);
     flag = PRIMPRINT(INTERNAL(fun));
-    R_Visible = flag != 1;
+    R_Visible = (Rboolean) (flag != 1);
     ans = PRIMFUN(INTERNAL(fun)) (s, INTERNAL(fun), args, env);
     /* This resetting of R_Visible = FALSE was to fix PR#7397,
        now fixed in GEText */
-    if (flag < 2) R_Visible = flag != 1;
+    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 #ifdef CHECK_VISIBILITY
     if(flag < 2 && flag == R_Visible) {
 	char *nm = CHAR(PRINTNAME(fun));

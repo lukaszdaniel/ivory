@@ -1388,7 +1388,7 @@ HIDDEN SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     if (nattrs > 0) {
 	int i0 = -1;
 	for (i = 0; i < nattrs; i++) {
-	    if (!strcmp(CHAR(STRING_ELT(names, i)), "dim")) {
+	    if (streql(CHAR(STRING_ELT(names, i)), "dim")) {
 		i0 = i;
 		setAttrib(object, R_DimSymbol, VECTOR_ELT(attrs, i));
 		break;
@@ -1621,7 +1621,7 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP val = CADDR(argList);
 	if (!isValidString(name) || STRING_ELT(name, 0) == NA_STRING)
 	    error(_("'%s' argument must be non-null character string"), "name");
-	/* TODO?  if (isFactor(obj) && !strcmp(asChar(name), "levels"))
+	/* TODO?  if (isFactor(obj) && streql(asChar(name), "levels"))
 	 * ---         if(any_duplicated(val))
 	 *                  error(.....)
 	 */

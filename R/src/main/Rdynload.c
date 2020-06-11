@@ -126,7 +126,7 @@ static int CountDLL = 0;
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo* LoadedDLL = NULL;
 
-static int addDLL(char *dpath, char *name, HINSTANCE handle);
+static int addDLL(char *dpath, const char *name, HINSTANCE handle);
 static SEXP Rf_MakeDLLInfo(DllInfo *info);
 
 static SEXP createRSymbolObject(SEXP sname, DL_FUNC f,
@@ -508,7 +508,7 @@ static int DeleteDLL(const char *path)
     int   i, loc;
 
     for (i = 0; i < CountDLL; i++) {
-	if (!strcmp(path, LoadedDLL[i].path)) {
+	if (streql(path, LoadedDLL[i].path)) {
 	    loc = i;
 	    goto found;
 	}
@@ -549,8 +549,8 @@ DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all)
 #ifdef CACHE_DLL_SYM
     int i;
     for (i = 0; i < nCPFun; i++)
-	if (!strcmp(name, CPFun[i].name) &&
-	    (all || !strcmp(pkg, CPFun[i].pkg)))
+	if (streql(name, CPFun[i].name) &&
+	    (all || streql(pkg, CPFun[i].pkg)))
 	    return CPFun[i].func;
 #endif
 
@@ -667,8 +667,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 	return NULL;
 }
 
-static int
-addDLL(char *dpath, char *DLLname, HINSTANCE handle)
+static int addDLL(char *dpath, const char *DLLname, HINSTANCE handle)
 {
     int ans = CountDLL;
     char *name = (char *) malloc(strlen(DLLname)+1);
@@ -698,8 +697,7 @@ addDLL(char *dpath, char *DLLname, HINSTANCE handle)
     return(ans);
 }
 
-static Rf_DotCSymbol *
-Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
+static Rf_DotCSymbol *Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
 {
     for(int i = 0; i < info->numCSymbols; i++) {
 	if(strcmp(name, info->CSymbols[i].name) == 0)
@@ -708,8 +706,7 @@ Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
     return NULL;
 }
 
-static Rf_DotFortranSymbol *
-Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
+static Rf_DotFortranSymbol *Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
 {
     for(int i = 0; i < info->numFortranSymbols; i++) {
 	if(strcmp(name, info->FortranSymbols[i].name) == 0)
@@ -719,8 +716,7 @@ Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
     return (Rf_DotFortranSymbol*) NULL;
 }
 
-static Rf_DotCallSymbol *
-Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
+static Rf_DotCallSymbol *Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
 {
 
     for(int i = 0; i < info->numCallSymbols; i++) {
@@ -730,8 +726,7 @@ Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
     return (Rf_DotCallSymbol*) NULL;
 }
 
-static Rf_DotExternalSymbol *
-Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
+static Rf_DotExternalSymbol *Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
 {
     for(int i = 0; i < info->numExternalSymbols; i++) {
 	if(strcmp(name, info->ExternalSymbols[i].name) == 0)
@@ -740,8 +735,7 @@ Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
     return (Rf_DotExternalSymbol*) NULL;
 }
 
-static DL_FUNC
-R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
+static DL_FUNC R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
 			 R_RegisteredNativeSymbol *symbol)
 {
     NativeSymbolType purpose = R_ANY_SYM;
@@ -875,7 +869,7 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
 
     for (i = CountDLL - 1; i >= 0; i--) {
 	doit = all;
-	if(!doit && !strcmp(pkg, LoadedDLL[i].name)) doit = 2;
+	if(!doit && streql(pkg, LoadedDLL[i].name)) doit = 2;
 	if(doit && LoadedDLL[i].forceSymbols) doit = 0;
 	if(doit) {
 	    fcnptr = R_dlsym(&LoadedDLL[i], name, symbol); /* R_osDynSymbol->dlsym */
@@ -975,7 +969,8 @@ int R_moduleCdynload(const char *module, int local, int now)
 
 int R_cairoCdynload(int local, int now)
 {
-    char dllpath[PATH_MAX], *p = getenv("R_HOME"), *module = "cairo";
+    char dllpath[PATH_MAX];
+    const char *p = getenv("R_HOME"), *module = "cairo";
     DllInfo *res;
 
     if(!p) return 0;
@@ -999,8 +994,7 @@ int R_cairoCdynload(int local, int now)
   NativeSymbol and can be used to relay symbols from
   one DLL to another.
  */
-static SEXP
-Rf_MakeNativeSymbolRef(DL_FUNC f)
+static SEXP Rf_MakeNativeSymbolRef(DL_FUNC f)
 {
     SEXP ref, klass;
 
@@ -1012,8 +1006,7 @@ Rf_MakeNativeSymbolRef(DL_FUNC f)
     return(ref);
 }
 
-static void
-freeRegisteredNativeSymbolCopy(SEXP ref)
+static void freeRegisteredNativeSymbolCopy(SEXP ref)
 {
    void *ptr;
    ptr = R_ExternalPtrAddr(ref);
@@ -1021,8 +1014,7 @@ freeRegisteredNativeSymbolCopy(SEXP ref)
        free(ptr);
 }
 
-static SEXP
-Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
+static SEXP Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
 {
     SEXP ref, klass;
     R_RegisteredNativeSymbol *copy;
@@ -1048,8 +1040,7 @@ Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
 }
 
 
-static SEXP
-Rf_makeDllObject(HINSTANCE inst)
+static SEXP Rf_makeDllObject(HINSTANCE inst)
 {
     SEXP ans;
 
@@ -1061,8 +1052,7 @@ Rf_makeDllObject(HINSTANCE inst)
     return(ans);
 }
 
-static SEXP
-Rf_makeDllInfoReference(HINSTANCE inst)
+static SEXP Rf_makeDllInfoReference(HINSTANCE inst)
 {
     SEXP ans;
 
@@ -1081,8 +1071,7 @@ Rf_makeDllInfoReference(HINSTANCE inst)
  name of the DLL and whether we only look for symbols that have been
  registered in this DLL or do we also use dynamic lookup.
  */
-static SEXP
-Rf_MakeDLLInfo(DllInfo *info)
+static SEXP Rf_MakeDLLInfo(DllInfo *info)
 {
     SEXP ref, elNames, tmp;
     int i, n;
@@ -1130,8 +1119,7 @@ Rf_MakeDLLInfo(DllInfo *info)
   registered, we add a class identifying the interface type
   for which it is intended (i.e. .C(), .Call(), etc.)
  */
-HIDDEN SEXP
-R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
+HIDDEN SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
 {
     const void *vmax = vmaxget();
     const char *package, *name;
@@ -1159,14 +1147,13 @@ R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
 
     if(f)
 	sym = createRSymbolObject(sname, f, &symbol,
-				  LOGICAL(withRegistrationInfo)[0]);
+				  (Rboolean) LOGICAL(withRegistrationInfo)[0]);
 
     vmaxset(vmax);
     return sym;
 }
 
-HIDDEN SEXP
-R_getDllTable()
+HIDDEN SEXP R_getDllTable()
 {
     int i;
     SEXP ans;
@@ -1190,8 +1177,7 @@ R_getDllTable()
     return(ans);
 }
 
-static SEXP
-createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
+static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
 		    Rboolean withRegistrationInfo)
 {
     SEXP tmp, klass, sym, names;
@@ -1228,7 +1214,7 @@ createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
 	   the number of arguments and the classname.
 	*/
 	int nargs = -1;
-	char *className = "";
+	const char *className = "";
 	switch(symbol->type) {
 	case R_C_SYM:
 	    nargs = symbol->symbol.c->numArgs;
@@ -1264,8 +1250,7 @@ createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
     return(sym);
 }
 
-static SEXP
-R_getRoutineSymbols(NativeSymbolType type, DllInfo *info)
+static SEXP R_getRoutineSymbols(NativeSymbolType type, DllInfo *info)
 {
     SEXP ans;
     int i, num;
@@ -1320,8 +1305,7 @@ R_getRoutineSymbols(NativeSymbolType type, DllInfo *info)
 }
 
 
-HIDDEN SEXP
-R_getRegisteredRoutines(SEXP dll)
+HIDDEN SEXP R_getRegisteredRoutines(SEXP dll)
 {
     DllInfo *info;
     SEXP ans, snames;
@@ -1351,8 +1335,7 @@ R_getRegisteredRoutines(SEXP dll)
     return(ans);
 }
 
-HIDDEN SEXP
-do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *package = "", *name;
     R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
@@ -1380,13 +1363,12 @@ do_getSymbolInfo(SEXP call, SEXP op, SEXP args, SEXP env)
 	f = R_FindSymbol(name, package, &symbol);
     if(f)
 	sym = createRSymbolObject(sname, f, &symbol,
-				  LOGICAL(withRegistrationInfo)[0]);
+				  (Rboolean) LOGICAL(withRegistrationInfo)[0]);
     return sym;
 }
 
 /* .Internal(getLoadedDLLs()) */
-HIDDEN SEXP
-do_getDllTable(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getDllTable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nm;
 

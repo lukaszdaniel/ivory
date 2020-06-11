@@ -40,8 +40,7 @@ NORET static void invalid(SEXP call)
     error(_("invalid arguments"));
 }
 
-static Rboolean
-random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
+static Rboolean random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
 {
     Rboolean naflag = FALSE;
     double ai;
@@ -211,8 +210,7 @@ HIDDEN SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-static Rboolean
-random3(double (*f) (double, double, double), double *a,
+static Rboolean random3(double (*f) (double, double, double), double *a,
 	R_xlen_t na, double *b, R_xlen_t nb, double *c, R_xlen_t nc,
 	double *x, R_xlen_t n)
 {
@@ -343,8 +341,7 @@ static void ProbSampleReplace(int n, double *p, int *perm, int nans, int *ans)
  */
 
 #define SMALL 10000
-static void
-walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
+static void walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
 {
     double *q, rU;
     int i, j, k;

@@ -100,11 +100,11 @@ HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP onOff = CAR(args);
-    Rboolean trace = (PRIMVAL(op) == 0),
+    Rboolean trace = (Rboolean) (PRIMVAL(op) == 0),
 	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
     if(length(onOff) > 0) {
-	Rboolean _new = asLogical(onOff);
+	Rboolean _new = (Rboolean) asLogical(onOff);
 	if(_new == TRUE || _new == FALSE)
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
@@ -190,7 +190,7 @@ HIDDEN NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif /* R_MEMORY_PROFILING */
 
 #ifndef R_MEMORY_PROFILING
-void memtrace_report(void* old, void *_new) {
+void Rf_memtrace_report(void* old, void *_new) {
     return;
 }
 #else
@@ -210,7 +210,7 @@ static void memtrace_stack_dump(void)
     Rprintf("\n");
 }
 
-void memtrace_report(void * old, void * _new)
+void Rf_memtrace_report(void * old, void * _new)
 {
     if (!R_current_trace_state()) return;
     Rprintf("tracemem[%p -> %p]: ", (void *) old, _new);

@@ -50,7 +50,6 @@
 
 #include "nmath.h"
 
-#define repeat for(;;)
 
 double Rf_rgamma(double a, double scale)
 {
@@ -96,7 +95,7 @@ double Rf_rgamma(double a, double scale)
 
     if (a < 1.) { /* GS algorithm for parameters a < 1 */
 	e = 1.0 + exp_m1 * a;
-	repeat {
+	while(TRUE) {
 	    p = e * unif_rand();
 	    if (p >= 1.0) {
 		x = -log((e - p) / a);
@@ -178,7 +177,7 @@ double Rf_rgamma(double a, double scale)
 	    return scale * ret_val;
     }
 
-    repeat {
+    while(TRUE) {
 	/* Step 8: e = standard exponential deviate
 	 *	u =  0,1 -uniform deviate
 	 *	t = (b,si)-double exponential (laplace) sample */

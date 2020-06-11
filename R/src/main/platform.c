@@ -369,7 +369,7 @@ HIDDEN void R_check_locale(void)
 	}
     }
 #endif
-    mbcslocale = MB_CUR_MAX > 1;
+    mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
 #ifdef _WIN32
     {
 	char *ctype = setlocale(LC_CTYPE, NULL), *p;
@@ -1234,7 +1234,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
     if ((dir = opendir(dnp)) != NULL) {
 	while ((de = readdir(dir))) {
 	    if (allfiles || !R_HiddenFile(de->d_name)) {
-		Rboolean not_dot = strcmp(de->d_name, ".") && strcmp(de->d_name, "..");
+		Rboolean not_dot = (Rboolean) (strcmp(de->d_name, ".") && strcmp(de->d_name, ".."));
 		if (recursive) {
 #ifdef _WIN32
 		    if (strlen(dnp) == 2 && dnp[1] == ':') // e.g. "C:"
@@ -1338,9 +1338,9 @@ HIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *p = translateCharFP2(STRING_ELT(d, i));
 	if (!p) continue;
 	const char *dnp = R_ExpandFileName(p);
-	list_files(dnp, fullnames ? dnp : NULL, &count, &ans, allfiles,
-		   recursive, pattern ? &reg : NULL, &countmax, idx,
-		   idirs, /* allowdots = */ !nodots);
+	list_files(dnp, fullnames ? dnp : NULL, &count, &ans, (Rboolean) allfiles,
+		   (Rboolean) recursive, pattern ? &reg : NULL, &countmax, idx,
+		   (Rboolean) idirs, /* allowdots = */ (Rboolean) !nodots);
     }
     REPROTECT(ans = lengthgets(ans, count), idx);
     if (pattern) tre_regfree(&reg);
@@ -1434,7 +1434,7 @@ HIDDEN SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *p = translateCharFP2(STRING_ELT(d, i));
 	if (!p) continue;
 	const char *dnp = R_ExpandFileName(p);
-	list_dirs(dnp, "", fullnames, &count, &ans, &countmax, idx, recursive);
+	list_dirs(dnp, "", (Rboolean) fullnames, &count, &ans, &countmax, idx, (Rboolean) recursive);
     }
     REPROTECT(ans = lengthgets(ans, count), idx);
     ssort(STRING_PTR(ans), count);
@@ -1887,7 +1887,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    setlocale(LC_COLLATE, l);
 	    /* disable the collator when setting to C to take
 	       precedence over R_ICU_LOCALE */
-	    resetICUcollator(!strcmp(l, "C"));
+	    resetICUcollator(streql(l, "C"));
 	    setlocale(LC_MONETARY, l);
 	    setlocale(LC_TIME, l);
 	    dt_invalidate_locale();
@@ -1903,7 +1903,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	p = setlocale(cat, l);
 	/* disable the collator when setting to C to take
 	   precedence over R_ICU_LOCALE */
-	resetICUcollator(!strcmp(l, "C"));
+	resetICUcollator(streql(l, "C"));
 	break;
     }
     case 3:
@@ -2082,7 +2082,7 @@ static Rboolean R_can_use_X11(void)
 #endif
     }
 
-    return var_R_can_use_X11 > 0;
+    return (Rboolean) (var_R_can_use_X11 > 0);
 }
 #endif
 
@@ -2434,14 +2434,14 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
     }
     struct _stati64 sb;
     int nfail = 0, res;
-    wchar_t dest[PATH_MAX + 1], this[PATH_MAX + 1];
+    wchar_t dest[PATH_MAX + 1], this_[PATH_MAX + 1];
 
     if (wcslen(from) + wcslen(name) >= PATH_MAX) {
 	warning(_("path is too long"));
 	return 1;
     }
-    wsprintfW(this, L"%ls%ls", from, name);
-    _wstati64(this, &sb);
+    wsprintfW(this_, L"%ls%ls", from, name);
+    _wstati64(this_, &sb);
     if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
 	_WDIR *dir;
 	struct _wdirent *de;
@@ -2462,7 +2462,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 		   (dsb.st_mode & S_IFDIR) == 0) {
 
 		    warning(_("cannot overwrite non-directory %ls with directory %ls"),
-		            dest, this);
+		            dest, this_);
 		    return 1;
 		}
 	    } else {
@@ -2472,7 +2472,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    }
 	}
 	// NB Windows' mkdir appears to require \ not /.
-	if ((dir = _wopendir(this)) != NULL) {
+	if ((dir = _wopendir(this_)) != NULL) {
 	    depth++;
 	    while ((de = _wreaddir(dir))) {
 		if (!wcscmp(de->d_name, L".") || !wcscmp(de->d_name, L".."))
@@ -2488,11 +2488,11 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    }
 	    _wclosedir(dir);
 	} else {
-	    warning(_("problem with reading directory %ls: %s"), this, strerror(errno));
+	    warning(_("problem with reading directory %ls: %s"), this_, strerror(errno));
 	    nfail++; /* we were unable to read a dir */
 	}
 	// chmod(dest, ... perms ...)  [TODO?]
-	if(dates) copyFileTime(this, dest);
+	if(dates) copyFileTime(this_, dest);
     } else { /* a file */
 	FILE *fp1 = NULL, *fp2 = NULL;
 	wchar_t buf[APPENDBUFSIZE];
@@ -2506,10 +2506,10 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	}
 	wsprintfW(dest, L"%ls%ls", to, name);
 	if (over || !R_WFileExists(dest)) { /* FIXME */
-	    if ((fp1 = _wfopen(this, L"rb")) == NULL ||
+	    if ((fp1 = _wfopen(this_, L"rb")) == NULL ||
 		(fp2 = _wfopen(dest, L"wb")) == NULL) {
 		warning(_("problem with copying %ls to %ls: %s"),
-			this, dest, strerror(errno));
+			this_, dest, strerror(errno));
 		nfail++;
 		goto copy_error;
 	    }
@@ -2530,7 +2530,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	if(fp2) { fclose(fp2); fp2 = NULL; }
 	/* FIXME: perhaps manipulate mode as we do in Sys.chmod? */
 	if(perms) _wchmod(dest, sb.st_mode & 0777);
-	if(dates) copyFileTime(this, dest);
+	if(dates) copyFileTime(this_, dest);
 copy_error:
 	if(fp2) fclose(fp2);
 	if(fp1) fclose(fp1);
@@ -2677,7 +2677,7 @@ static int do_copy(const char* from, const char* name, const char* to,
     }
     struct stat sb;
     int nfail = 0, res;
-    char dest[PATH_MAX + 1], this[PATH_MAX + 1];
+    char dest[PATH_MAX + 1], this_[PATH_MAX + 1];
 
     int mask;
 #ifdef HAVE_UMASK
@@ -2691,9 +2691,9 @@ static int do_copy(const char* from, const char* name, const char* to,
 	warning(_("path is too long"));
 	return 1;
     }
-    snprintf(this, PATH_MAX+1, "%s%s", from, name);
+    snprintf(this_, PATH_MAX+1, "%s%s", from, name);
     /* Here we want the target not the link */
-    stat(this, &sb);
+    stat(this_, &sb);
     if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
 	DIR *dir;
 	struct dirent *de;
@@ -2716,17 +2716,17 @@ static int do_copy(const char* from, const char* name, const char* to,
 		   (dsb.st_mode & S_IFDIR) == 0) {
 
 		    warning(_("cannot overwrite non-directory %s with directory %s"),
-		            dest, this);
+		            dest, this_);
 		    return 1;
 		}
 	    } else {
 		warning(_("problem with creating directory %s: %s"),
-		        this, strerror(errno));
+		        this_, strerror(errno));
 		return 1;
 	    }
 	}
 	strcat(dest, "/");
-	if ((dir = opendir(this)) != NULL) {
+	if ((dir = opendir(this_)) != NULL) {
 	    depth++;
 	    while ((de = readdir(dir))) {
 		if (streql(de->d_name, ".") || streql(de->d_name, ".."))
@@ -2742,11 +2742,11 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    }
 	    closedir(dir);
 	} else {
-	    warning(_("problem with reading directory %s: %s"), this, strerror(errno));
+	    warning(_("problem with reading directory %s: %s"), this_, strerror(errno));
 	    nfail++; /* we were unable to read a dir */
 	}
 	chmod(dest, (mode_t) (perms ? (sb.st_mode & mask): mask));
-	if(dates) copyFileTime(this, dest);
+	if(dates) copyFileTime(this_, dest);
     } else { /* a file */
 	FILE *fp1 = NULL, *fp2 = NULL;
 	char buf[APPENDBUFSIZE];
@@ -2761,10 +2761,10 @@ static int do_copy(const char* from, const char* name, const char* to,
 	snprintf(dest, PATH_MAX+1, "%s%s", to, name);
 	if (over || !R_FileExists(dest)) {
 	    /* REprintf("copying %s to %s\n", this, dest); */
-	    if ((fp1 = R_fopen(this, "rb")) == NULL ||
+	    if ((fp1 = R_fopen(this_, "rb")) == NULL ||
 		(fp2 = R_fopen(dest, "wb")) == NULL) {
 		warning(_("problem with copying %s to %s: %s"),
-			this, dest, strerror(errno));
+			this_, dest, strerror(errno));
 		nfail++;
 		goto copy_error;
 	    }
@@ -2784,7 +2784,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	if(fp1) { fclose(fp1); fp1 = NULL; }
 	if(fp2) { fclose(fp2); fp2 = NULL; }
 	if(perms) chmod(dest, sb.st_mode & mask);
-	if(dates) copyFileTime(this, dest);
+	if(dates) copyFileTime(this_, dest);
 copy_error:
 	if(fp2) fclose(fp2);
 	if(fp1) fclose(fp1);
@@ -3310,12 +3310,12 @@ do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
        of dynamic linkers.
     */
 #ifdef HAVE_F77_UNDERSCORE
-    char *dgemm_name = "dgemm_";
+    const char *dgemm_name = "dgemm_";
 #else
-    char *dgemm_name = "dgemm";
+    const char *dgemm_name = "dgemm";
 #endif
 
-    Rboolean ok = TRUE;
+    Rboolean ok = (Rboolean) TRUE;
 
     void *dgemm_addr = dlsym(RTLD_DEFAULT, dgemm_name);
 
@@ -3324,10 +3324,10 @@ do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* these calls to dladdr() convert a function pointer to an object
        pointer, which is not allowed by ISO C, but there is no compliant
        alternative to using dladdr() */
-    if (!dladdr((void *)do_eSoftVersion, &dl_info1)) ok = FALSE;
-    if (!dladdr((void *)dladdr, &dl_info2)) ok = FALSE;
+    if (!dladdr((void *)do_eSoftVersion, &dl_info1)) ok = (Rboolean) FALSE;
+    if (!dladdr((void *)dladdr, &dl_info2)) ok = (Rboolean) FALSE;
 
-    if (ok && !strcmp(dl_info1.dli_fname, dl_info2.dli_fname)) {
+    if (ok && streql(dl_info1.dli_fname, dl_info2.dli_fname)) {
 
 	/* dladdr is not inside R, hence we probably have the PLT for
 	   dynamically linked symbols; lets use dlsym(RTLD_NEXT) to

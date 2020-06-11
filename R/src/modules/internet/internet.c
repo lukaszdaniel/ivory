@@ -414,9 +414,15 @@ static void putdots(DLsize_t *pold, DLsize_t newt)
     *pold = newt;
     for(i = old; i < newt; i++) {
 	REprintf(".");
-	if((i+1) % 50 == 0) REprintf("\n");
-	else if((i+1) % 10 == 0) REprintf(" ");
-    }
+	if ((i + 1) % 50 == 0)
+	{
+		REprintf("\n");
+	}
+	else if ((i + 1) % 10 == 0)
+	{
+		REprintf(" ");
+	}
+	}
     if(R_Consolefile) fflush(R_Consolefile);
 }
 
@@ -647,14 +653,20 @@ static SEXP in_do_download(SEXP args)
 #else
 		REprintf("\n");
 #endif
-		if(nbytes > 1024*1024)
-		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024);
-		else if(nbytes > 10240)
-		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024);
+		if (nbytes > 1024 * 1024)
+		{
+			REprintf(_("Downloaded %0.1f MB"), (double)nbytes / 1024 / 1024);
+		}
+		else if (nbytes > 10240)
+		{
+			REprintf(_("Downloaded %d KB"), (int)nbytes / 1024);
+		}
 		else
-		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
+		{
+			REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int)nbytes), (int)nbytes);
+		}
 		REprintf("\n\n");
-	    }
+		}
 #ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
@@ -758,15 +770,20 @@ static SEXP in_do_download(SEXP args)
 #else
 		REprintf("\n");
 #endif
-		if(nbytes > 1024*1024)
-		    REprintf(_("Downloaded %0.1f MB"),
-			     (double)nbytes/1024/1024);
-		else if(nbytes > 10240)
-		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024);
+		if (nbytes > 1024 * 1024)
+		{
+			REprintf(_("Downloaded %0.1f MB"), (double)nbytes / 1024 / 1024);
+		}
+		else if (nbytes > 10240)
+		{
+			REprintf(_("Downloaded %d KB"), (int)nbytes / 1024);
+		}
 		else
-		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
-			REprintf("\n\n");
-	    }
+		{
+			REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int)nbytes), (int)nbytes);
+		}
+		REprintf("\n\n");
+		}
 #ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
@@ -826,21 +843,32 @@ void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers, int
 	    type = RxmlNanoHTTPContentType(ctxt);
 	    len = RxmlNanoHTTPContentLength(ctxt);
 	    if(!IDquiet){
-		if(len > 1024*1024)
-		    // might be longer than long, and is on 64-bit windows
-		    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)",
-				      "Content type '%s' length %0.0f bytes (%0.1f MB)",
-				      len), type ? type : "unknown", (double)len, len/1024.0/1024.0);
-		else if(len > 10240)
-		    REprintf(n_("Content type '%s' length %d byte (%d KB)",
-				      "Content type '%s' length %d bytes (%d KB)",
-				      (int)len), type ? type : "unknown", (int)len, (int)(len/1024));
-		else if(len >= 0)
-		    REprintf(n_("Content type '%s' length %d byte",
-				      "Content type '%s' length %d bytes",
-				      (int)len), type ? type : "unknown", (int)len);
-		else REprintf(_("Content type '%s' length unknown"), type ? type : "unknown", len);
-		REprintf("\n");
+			if (len > 1024 * 1024)
+			{ // might be longer than long, and is on 64-bit windows
+				REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)",
+							"Content type '%s' length %0.0f bytes (%0.1f MB)",
+							len),
+						 type ? type : "unknown", (double)len, len / 1024.0 / 1024.0);
+			}
+			else if (len > 10240)
+			{
+				REprintf(n_("Content type '%s' length %d byte (%d KB)",
+							"Content type '%s' length %d bytes (%d KB)",
+							(int)len),
+						 type ? type : "unknown", (int)len, (int)(len / 1024));
+			}
+			else if (len >= 0)
+			{
+				REprintf(n_("Content type '%s' length %d byte",
+							"Content type '%s' length %d bytes",
+							(int)len),
+						 type ? type : "unknown", (int)len);
+			}
+			else
+			{
+				REprintf(_("Content type '%s' length unknown"), type ? type : "unknown", len);
+			}
+			REprintf("\n");
 #ifdef _WIN32
 		R_FlushConsole();
 #endif
@@ -1003,15 +1031,24 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 	wictxt->length = len;
     wictxt->type = Rstrdup(buf);
     if(!IDquiet) {
-	if(len > 1024*1024)
-	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", len), buf, (double) len, len/1024.0/1024.0);
-	else if(len > 10240)
-	    REprintf(n_("Content type '%s' length %d byte (%d KB)", "Content type '%s' length %d bytes (%d KB)", (int)len), buf, (int) len, (int) (len/1024));
-	else if(wictxt->length >= 0) /* signed; len is not */
-	    REprintf(n_("Content type '%s' length %d byte", "Content type '%s' length %d bytes", (int)len), buf, (int) len);
-	else REprintf(_("Content type '%s' length unknown"), buf);
-	    REprintf("\n");
-	R_FlushConsole();
+		if (len > 1024 * 1024)
+		{
+			REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", len), buf, (double)len, len / 1024.0 / 1024.0);
+		}
+		else if (len > 10240)
+		{
+			REprintf(n_("Content type '%s' length %d byte (%d KB)", "Content type '%s' length %d bytes (%d KB)", (int)len), buf, (int)len, (int)(len / 1024));
+		}
+		else if (wictxt->length >= 0) /* signed; len is not */
+		{
+			REprintf(n_("Content type '%s' length %d byte", "Content type '%s' length %d bytes", (int)len), buf, (int)len);
+		}
+		else
+		{
+			REprintf(_("Content type '%s' length unknown"), buf);
+		}
+		REprintf("\n");
+		R_FlushConsole();
     }
 
     R_ProcessEvents();

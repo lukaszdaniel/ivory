@@ -66,7 +66,7 @@ static void pp(int pre) {
     while (pre-- > 0) Rprintf(" ");
 }
 
-static const char *typename(SEXP v) {
+static const char *typename_(SEXP v) {
     return sexptype2char(TYPEOF(v)); // -> memory.c
 }
 
@@ -90,10 +90,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
        It is invalid on 64-bit Windows.
     */
 #ifdef _WIN64
-    Rprintf("@%p %02d %s g%dc%d [", v, TYPEOF(v), typename(v),
+    Rprintf("@%p %02d %s g%dc%d [", v, TYPEOF(v), typename_(v),
 	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
 #else
-    Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typename(v),
+    Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typename_(v),
 	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }

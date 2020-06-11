@@ -86,7 +86,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 
     R_InitSrcRefState(&cntxt);
     savestack = R_PPStackTop;
-    for(;;) {
+    while(TRUE) {
 	R_PPStackTop = savestack;
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
@@ -238,7 +238,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	/* The intention here is to break on CR but not on other
 	   null statements: see PR#9063 */
 	if (browselevel && !R_DisableNLinBrowser
-	    && !strcmp((char *) state->buf, "\n")) return -1;
+	    && streql((char *) state->buf, "\n")) return -1;
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	state->prompt_type = 1;
 	return 1;
@@ -311,8 +311,8 @@ static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
     /* stopgap measure if line > CONSOLE_BUFFER_SIZE chars */
     state.bufp = state.buf;
     if(R_Verbose)
-	REprintf(" >R_ReplConsole(): before \"for(;;)\" {main.c}\n");
-    for(;;) {
+	REprintf(" >R_ReplConsole(): before \"while(TRUE)\" {main.c}\n");
+    while(TRUE) {
 	status = Rf_ReplIteration(rho, savestack, browselevel, &state);
 	if(status < 0) {
 	  if (state.status == PARSE_INCOMPLETE)
@@ -1163,10 +1163,10 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     int rval = 0;
     if (isSymbol(CExpr)) {
 	const char *expr = CHAR(PRINTNAME(CExpr));
-	if (!strcmp(expr, "c") || !strcmp(expr, "cont")) {
+	if (streql(expr, "c") || streql(expr, "cont")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 0);
-	} else if (!strcmp(expr, "f")) {
+	} else if (streql(expr, "f")) {
 	    rval = 1;
 	    RCNTXT *cntxt = R_GlobalContext;
 	    while (cntxt != R_ToplevelContext
@@ -1176,28 +1176,28 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    cntxt->browserfinish = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
-	} else if (!strcmp(expr, "help")) {
+	} else if (streql(expr, "help")) {
 	    rval = 2;
 	    printBrowserHelp();
-	} else if (!strcmp(expr, "n")) {
+	} else if (streql(expr, "n")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'n';
-	} else if (!strcmp(expr, "Q")) {
+	} else if (streql(expr, "Q")) {
 
 	    /* this is really dynamic state that should be managed as such */
 	    SET_RDEBUG(rho, 0); /*PR#1721*/
 
 	    jump_to_toplevel();
-	} else if (!strcmp(expr, "s")) {
+	} else if (streql(expr, "s")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 's';
-	} else if (!strcmp(expr, "where")) {
+	} else if (streql(expr, "where")) {
 	    rval = 2;
 	    printwhere();
 	    /* SET_RDEBUG(rho, 1); */
-	} else if (!strcmp(expr, "r")) {
+	} else if (streql(expr, "r")) {
 	    SEXP hooksym = install(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
 		SEXP hcall;
@@ -1368,15 +1368,15 @@ HIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if( !isString(CAR(args)) )
 	error(_("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
     tmp = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
-    if( !strcmp(tmp, "ask") ) {
+    if( streql(tmp, "ask") ) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
 	    warning(_("save=\"ask\" is in non-interactive use: command-line default will be used"));
-    } else if( !strcmp(tmp, "no") )
+    } else if( streql(tmp, "no") )
 	ask = SA_NOSAVE;
-    else if( !strcmp(tmp, "yes") )
+    else if( streql(tmp, "yes") )
 	ask = SA_SAVE;
-    else if( !strcmp(tmp, "default") )
+    else if( streql(tmp, "default") )
 	ask = SA_DEFAULT;
     else
 	error(_("unrecognized value of 'save' argument"));
@@ -1634,14 +1634,13 @@ Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 }
 
 
-Rboolean
-R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
+Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 		      Rboolean visible, void *userData)
 {
     SEXP f = (SEXP) userData;
     SEXP e, tmp, val, cur;
     int errorOccurred;
-    Rboolean again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
+    Rboolean again, useData = (Rboolean) LOGICAL(VECTOR_ELT(f, 2))[0];
 
     PROTECT(e = allocVector(LANGSXP, 5 + useData));
     SETCAR(e, VECTOR_ELT(f, 0));
@@ -1669,7 +1668,7 @@ R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 	      /* It would be nice to identify the function. */
 	    warning(_("top-level task callback did not return a logical value"));
 	}
-	again = asLogical(val);
+	again = (Rboolean) asLogical(val);
 	UNPROTECT(1);
     } else {
 	/* warning(_("error occurred in top-level task callback\n")); */
@@ -1719,7 +1718,7 @@ R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 # include <R_ext/RS.h>
 # if defined FC_LEN_T
 # include <stddef.h>
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 HIDDEN void dummy54321(void)
 {
     int nc = 5;

@@ -130,7 +130,7 @@ SEXP GetOption(SEXP tag, SEXP rho)
 }
 
 
-SEXP GetOption1(SEXP tag)
+SEXP Rf_GetOption1(SEXP tag)
 {
     SEXP opt = SYMVALUE(Options());
     if (!isList(opt)) error(_("corrupted options list"));
@@ -175,7 +175,7 @@ int GetOptionDigits(void)
 }
 
 HIDDEN
-int GetOptionCutoff(void)
+int Rf_GetOptionCutoff(void)
 {
     int w;
     w = asInteger(GetOption1(install("deparse.cutoff")));
@@ -195,7 +195,7 @@ Rboolean Rf_GetOptionDeviceAsk(void)
 	warning(_("invalid value for \"device.ask.default\", using FALSE"));
 	return FALSE;
     }
-    return ask != 0;
+    return (Rboolean) (ask != 0);
 }
 
 
@@ -267,10 +267,10 @@ HIDDEN int R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-HIDDEN void InitOptions(void)
+HIDDEN void Rf_InitOptions(void)
 {
     SEXP val, v;
-    char *p;
+    const char *p = NULL;
 
     /* options set here should be included into mandatory[] in do_options */
 #ifdef HAVE_RL_COMPLETION_MATCHES
@@ -316,7 +316,7 @@ HIDDEN void InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_KEEP_PKG_SOURCE");
-    R_KeepSource = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
+    R_KeepSource = (p && streql(p, "yes")) ? TRUE : FALSE;
 
     SET_TAG(v, install("keep.source")); /* overridden in Common.R */
     SETCAR(v, ScalarLogical(R_KeepSource));
@@ -332,7 +332,7 @@ HIDDEN void InitOptions(void)
 
     p = getenv("R_KEEP_PKG_PARSE_DATA");
     SET_TAG(v, install("keep.parse.data.pkgs"));
-    SETCAR(v, ScalarLogical((p && (strcmp(p, "yes") == 0)) ? TRUE : FALSE));
+    SETCAR(v, ScalarLogical((p && streql(p, "yes")) ? TRUE : FALSE));
     v = CDR(v);
 
     SET_TAG(v, install("warning.length"));
@@ -352,7 +352,7 @@ HIDDEN void InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_C_BOUNDS_CHECK");
-    R_CBoundsCheck = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
+    R_CBoundsCheck = (p && streql(p, "yes")) ? TRUE : FALSE;
 
     SET_TAG(v, install("CBoundsCheck"));
     SETCAR(v, ScalarLogical(R_CBoundsCheck));
@@ -561,7 +561,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_KeepSource = k;
+		R_KeepSource = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "editor") && isString(argi)) {
@@ -667,7 +667,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* Should be quicker than checking options(echo)
 		   every time R prompts for input:
 		   */
-		R_NoEcho = !k;
+		R_NoEcho = (Rboolean) !k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "OutDec")) {
@@ -702,35 +702,35 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_warn_partial_match_dollar = k;
+		R_warn_partial_match_dollar = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "warnPartialMatchArgs")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_warn_partial_match_args = k;
+		R_warn_partial_match_args = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "warnPartialMatchAttr")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_warn_partial_match_attr = k;
+		R_warn_partial_match_attr = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showWarnCalls")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_ShowWarnCalls = k;
+		R_ShowWarnCalls = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showErrorCalls")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_ShowErrorCalls = k;
+		R_ShowErrorCalls = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showNCalls")) {
@@ -749,14 +749,14 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		int k = asLogical(argi);
 		if (k == NA_LOGICAL)
 		    error(_("invalid value for '%s'"), CHAR(namei));
-		R_DisableNLinBrowser = k;
+		R_DisableNLinBrowser = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "CBoundsCheck")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_CBoundsCheck = k;
+		R_CBoundsCheck = (Rboolean) k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "matprod")) {
@@ -801,7 +801,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "PCRE_use_JIT")) {
 		int use_JIT = asLogical(argi);
-		R_PCRE_use_JIT = (use_JIT > 0); // NA_LOGICAL is < 0
+		R_PCRE_use_JIT = (Rboolean) (use_JIT > 0); // NA_LOGICAL is < 0
 		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, ScalarLogical(R_PCRE_use_JIT)));
 	    }

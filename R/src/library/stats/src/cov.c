@@ -301,8 +301,7 @@ cov_complete1(int n, int ncx, double *x, double *xm,
     }
 } /* cov_complete1 */
 
-static void
-cov_na_1(int n, int ncx, double *x, double *xm,
+static void cov_na_1(int n, int ncx, double *x, double *xm,
 	 int *has_na, double *ans, Rboolean *sd_0, Rboolean cor,
 	 Rboolean kendall)
 {
@@ -370,8 +369,7 @@ cov_na_1(int n, int ncx, double *x, double *xm,
     }
 } /* cov_na_1() */
 
-static void
-cov_complete2(int n, int ncx, int ncy, double *x, double *y,
+static void cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 	      double *xm, double *ym, int *ind,
 	      double *ans, Rboolean *sd_0, Rboolean cor, Rboolean kendall)
 {
@@ -452,8 +450,7 @@ cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 }/* cov_complete2 */
 #undef COV_SDEV
 
-static void
-cov_na_2(int n, int ncx, int ncy, double *x, double *y,
+static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 	 double *xm, double *ym, int *has_na_x, int *has_na_y,
 	 double *ans, Rboolean *sd_0, Rboolean cor, Rboolean kendall)
 {
@@ -580,8 +577,7 @@ static void complete1(int n, int ncx, double *x, int *ind, Rboolean na_fail)
     COMPLETE_1
 }
 
-static void
-complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, Rboolean na_fail)
+static void complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, Rboolean na_fail)
 {
     COMPLETE_1
 

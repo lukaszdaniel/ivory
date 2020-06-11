@@ -405,17 +405,22 @@ static int progress(void *clientp, double dltotal, double dlnow,
 	    char *type = NULL;
 	    CURL *hnd = (CURL *) clientp;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
-	    if (total > 1024.0*1024.0)
-		// might be longer than long, and is on 64-bit windows
-		REprintf(n_("Content length %0.0f byte (%0.1f MB)", "Content length %0.0f bytes (%0.1f MB)", total),
-			 total, total/1024.0/1024.0);
-	    else if (total > 10240)
-		REprintf(n_("Content length %d byte (%d KB)", "Content length %d bytes (%d KB)", (int)total),
-			 (int)total, (int)(total/1024));
-	    else
-		REprintf(n_("Content length %d byte", "Content length %d bytes",(int)total), (int)total);
-		REprintf("\n");
-	    R_FlushConsole();
+        if (total > 1024.0 * 1024.0)
+        { // might be longer than long, and is on 64-bit windows
+            REprintf(n_("Content length %0.0f byte (%0.1f MB)", "Content length %0.0f bytes (%0.1f MB)", total),
+                     total, total / 1024.0 / 1024.0);
+        }
+        else if (total > 10240)
+        {
+            REprintf(n_("Content length %d byte (%d KB)", "Content length %d bytes (%d KB)", (int)total),
+                     (int)total, (int)(total / 1024));
+        }
+        else
+        {
+            REprintf(n_("Content length %d byte", "Content length %d bytes", (int)total), (int)total);
+        }
+        REprintf("\n");
+        R_FlushConsole();
 	    if(R_Interactive) {
 		if (total > 1e9) factor = total/1e6; else factor = 1;
 		setprogressbarrange(pbar.pb, 0, total/factor);
@@ -455,11 +460,12 @@ static int progress(void *clientp, double dltotal, double dlnow,
 	    total = dltotal;
 	    char *type = NULL;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
-	    if (total > 1024.0*1024.0)
-		// might be longer than long, and is on 64-bit windows
-		REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", total),
-			 type ? type : "unknown", total, total/1024.0/1024.0);
-	    else if (total > 10240)
+        if (total > 1024.0 * 1024.0)
+        { // might be longer than long, and is on 64-bit windows
+            REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", total),
+                     type ? type : "unknown", total, total / 1024.0 / 1024.0);
+        }
+        else if (total > 10240)
         {
             REprintf(n_("Content type '%s' length %d byte (%d KB)", "Content type '%s' length %d bytes (%d KB)", (int)total),
                      type ? type : "unknown", (int)total, (int)(total / 1024));
@@ -677,7 +683,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
             REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int)dl), (int)dl);
         }
         REprintf("\n\n");
-	}
+    }
 	curl_easy_getinfo(hnd[0], CURLINFO_CONTENT_LENGTH_DOWNLOAD, &cl);
 	if (cl >= 0 && dl != cl)
 	    warning(_("downloaded length %0.f != reported length %0.f"), dl, cl);

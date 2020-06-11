@@ -32,7 +32,6 @@
 #include <R_ext/Random.h>
 #include "nmath.h"
 
-#define repeat for(;;)
 
 #ifdef MATHLIB_STANDALONE
 static
@@ -119,11 +118,11 @@ double norm_rand(void)
      *    JASA 71, 893-896.
      */
 
-#define C1		0.398942280401433
-#define C2		0.180025191068563
-#define g(x)		(C1*exp(-x*x/2.0)-C2*(A-x))
+#define C1 0.398942280401433
+#define C2 0.180025191068563
+#define g(x) (C1 * exp(-x * x / 2.0) - C2 * (A - x))
 
-    const static double A =  2.216035867166471;
+	const static double A =  2.216035867166471;
 
     double s, u1, w, y, u2, u3, aa, tt, theta, R;
     int i;
@@ -148,7 +147,7 @@ double norm_rand(void)
 		u1 = unif_rand();
 		w = u1 * (a[i] - aa);
 		tt = (w * 0.5 + aa) * w;
-		repeat {
+		while(TRUE) {
 		    if (u2 > tt)
 			goto deliver;
 		    u1 = unif_rand();
@@ -164,7 +163,7 @@ double norm_rand(void)
 	else {
 	    i = 6;
 	    aa = a[31];
-	    repeat {
+	    while(TRUE) {
 		u1 = u1 + u1;
 		if (u1 >= 1.0)
 		    break;
@@ -172,10 +171,10 @@ double norm_rand(void)
 		i = i + 1;
 	    }
 	    u1 = u1 - 1.0;
-	    repeat {
+	    while(TRUE) {
 		w = u1 * d[i - 1];
 		tt = (w * 0.5 + aa) * w;
-		repeat {
+		while(TRUE) {
 		    u2 = unif_rand();
 		    if (u2 > tt)
 			goto jump;
@@ -206,7 +205,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.973310954173898) { /* tail: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = (A*A-2*log(u3));
@@ -216,7 +215,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.958720824790463) { /* region3: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = A - 0.630834801921960* Rf_fmin2(u2,u3);
@@ -228,7 +227,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.911312780288703) { /* region2: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
@@ -240,7 +239,7 @@ double norm_rand(void)
 	}
 
 	/* ELSE	 region1: */
-	repeat {
+	while(TRUE) {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
 		tt = 0.479727404222441 - 0.595507138015940 * Rf_fmin2(u2, u3);
@@ -278,7 +277,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.973310954173898) { /* tail: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = (A * A - 2 * log(u3));
@@ -288,7 +287,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.958720824790463) { /* region3: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = A - 0.630834801921960 * Rf_fmin2(u2, u3);
@@ -300,7 +299,7 @@ double norm_rand(void)
 	}
 
 	if(u1 >= 0.911312780288703) { /* region2: */
-	    repeat {
+	    while(TRUE) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
@@ -312,7 +311,7 @@ double norm_rand(void)
 	}
 
 	/* ELSE	 region1: */
-	repeat {
+	while(TRUE) {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
 	    tt = 0.479727404222441-0.595507138015940*Rf_fmin2(u2,u3);

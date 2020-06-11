@@ -123,11 +123,11 @@ static void yyerror(const char *);
 static int yylex();
 int yyparse(void);
 
-static FILE *fp_parse;
-static int (*ptr_getc)(void);
+//static FILE *fp_parse;
+//static int (*ptr_getc)(void);
 
-static int	SavedToken;
-static SEXP	SavedLval;
+//static int	SavedToken;
+//static SEXP	SavedLval;
 
 #define yyconst const
 
@@ -252,7 +252,7 @@ static int	KeywordLookup(const char *);
 static SEXP	NewList(void);
 static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
-static int 	processLineDirective();
+static int 	processLineDirective(int *);
 
 /* These routines allocate constants */
 
@@ -2672,7 +2672,7 @@ static int xxgetc(void)
     prevlines[prevpos] = ParseState.xxlineno;  
     prevparse[prevpos] = ParseState.xxparseno;
     prevcols[prevpos] = ParseState.xxcolno;
-    	
+
     if (c == EOF) {
 	EndOfFile = 1;
 	return R_EOF;
@@ -2693,7 +2693,7 @@ static int xxgetc(void)
     }
 
     if (c == '\t') ParseState.xxcolno = ((ParseState.xxcolno + 7) & ~7);
-    
+
     R_ParseContextLine = ParseState.xxlineno;    
 
     xxcharcount++;
@@ -2707,7 +2707,7 @@ static int xxungetc(int c)
     ParseState.xxbyteno = prevbytes[prevpos];
     ParseState.xxcolno  = prevcols[prevpos];
     ParseState.xxparseno = prevparse[prevpos];
-    
+
     prevpos = (prevpos + PUSHBACK_BUFSIZE - 1) % PUSHBACK_BUFSIZE;
 
     R_ParseContextLine = ParseState.xxlineno;
@@ -2851,7 +2851,7 @@ static void attachSrcrefs(SEXP val)
     SEXP srval;
 
     PROTECT(srval = SrcRefsToVectorList());
-    
+
     setAttrib(val, R_SrcrefSymbol, srval);
     setAttrib(val, R_SrcfileSymbol, PS_SRCFILE);
     {
@@ -3515,7 +3515,7 @@ attribute_hidden
 void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
-    	SrcRefState *prev = malloc(sizeof(SrcRefState));
+    	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
 	if (prev == NULL)
 	    error(_("allocation of source reference state failed"));
     	PutSrcRefState(prev);
@@ -3702,11 +3702,11 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 
     R_InitSrcRefState(&cntxt);
     if (gencode) {
-    	keepSource = asLogical(GetOption1(install("keep.source")));
+    	keepSource = (Rboolean) asLogical(GetOption1(install("keep.source")));
     	if (keepSource) {
     	    ParseState.keepSrcRefs = TRUE;
 	    ParseState.keepParseData =
-		asLogical(GetOption1(install("keep.parse.data")));
+		(Rboolean) asLogical(GetOption1(install("keep.parse.data")));
 	    PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
 	    PS_SET_ORIGINAL(PS_SRCFILE);
 	    PS_SET_SRCREFS(R_NilValue);
@@ -3768,7 +3768,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    asLogical(GetOption1(install("keep.parse.data")));
+	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
     
@@ -3909,7 +3909,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    asLogical(GetOption1(install("keep.parse.data")));
+	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
     
@@ -4046,7 +4046,7 @@ static int nextchar(int expect)
 /* Syntactic Keywords + Symbolic Constants */
 
 struct {
-    char *name;
+    const char *name;
     int token;
 }
 static keywords[] = {
@@ -4079,7 +4079,7 @@ static int KeywordLookup(const char *s)
 {
     int i;
     for (i = 0; keywords[i].name; i++) {
-	if (strcmp(keywords[i].name, s) == 0) {
+	if (streql(keywords[i].name, s)) {
 	    switch (keywords[i].token) {
 	    case NULL_CONST:
 		PRESERVE_SV(yylval = R_NilValue);
@@ -4175,8 +4175,7 @@ static SEXP mkNA(void)
     return t;
 }
 
-attribute_hidden
-SEXP mkTrue(void)
+HIDDEN SEXP mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
@@ -4250,13 +4249,13 @@ static void yyerror(const char *s)
     R_ParseErrorCol  = yylloc.first_column;
     R_ParseErrorFile = PS_SRCFILE;
 
-    if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
+    if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i;
 	/* Edit the error message */
-	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);
+	expecting = (char*) strstr(s + sizeof yyunexpected -1, yyexpecting);
 	if (expecting) *expecting = '\0';
 	for (i = 0; yytname_translations[i]; i += 2) {
-	    if (!strcmp(s + sizeof yyunexpected - 1, yytname_translations[i])) {
+	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {
                 switch(i/2)
                 {
                 case 0:
@@ -4381,17 +4380,17 @@ static int SkipSpace(void)
 static int SkipComment(void)
 {
     int c='#', i;
-    
+
     /* locations before the # character was read */
     int _first_column = ParseState.xxcolno ;
     int _first_parsed = ParseState.xxparseno ;
     int type = COMMENT ;
 
-    Rboolean maybeLine = (ParseState.xxcolno == 1);
+    Rboolean maybeLine = (Rboolean) (ParseState.xxcolno == 1);
     Rboolean doSave;
 
     DECLARE_YYTEXT_BUFP(yyp);
-    
+
     if (maybeLine) {
     	char lineDirective[] = "#line";
     	YYTEXT_PUSH(c, yyp);
@@ -4410,19 +4409,19 @@ static int SkipComment(void)
     // __before__ the new line character
     int _last_column  = ParseState.xxcolno ;
     int _last_parsed  = ParseState.xxparseno ;
-    
+
     if (c == '\n') {
         _last_column = prevcols[prevpos];
         _last_parsed = prevparse[prevpos];
     }
-    
-    doSave = !maybeLine;
-    
+
+    doSave = (Rboolean) !maybeLine;
+
     while (c != '\n' && c != R_EOF) {
         // Comments can be any length; we only record the ones that fit in yytext.
         if (doSave) {
             YYTEXT_PUSH(c, yyp);
-            doSave = (yyp - yytext) < sizeof(yytext) - 2;
+            doSave = (Rboolean) ((yyp - yytext) < (int) sizeof(yytext) - 2);
         }
  	_last_column = ParseState.xxcolno ;
 	_last_parsed = ParseState.xxparseno ;
@@ -4456,7 +4455,7 @@ static int NumericValue(int c)
 	{   YYTEXT_PUSH(c, yyp);
 	    break;
 	}
-	
+
 	if (c == 'x' || c == 'X') {
 	    if (count > 2 || last != '0') break;  /* 0x must be first */
 	    YYTEXT_PUSH(c, yyp);
@@ -4508,10 +4507,10 @@ static int NumericValue(int c)
 	YYTEXT_PUSH(c, yyp);
 	last = c;
     }
-    
+
     if(c == 'i')
 	YYTEXT_PUSH(c, yyp); /* for getParseData */
-	
+
     YYTEXT_PUSH('\0', yyp);    
     /* Make certain that things are okay. */
     if(c == 'L') {
@@ -4866,7 +4865,7 @@ static int StringValue(int c, Rboolean forSymbol)
 	    clen = mbcs_get_next2(c, &wc);
 	    WTEXT_PUSH(wc);
 	    ParseState.xxbyteno += clen-1;
-	    
+
 	    for(i = 0; i < clen - 1; i++){
 		STEXT_PUSH(c);
 		c = xxgetc();
@@ -5079,8 +5078,7 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-attribute_hidden
-int isValidName(const char *name)
+HIDDEN int isValidName(const char *name)
 {
     const char *p = name;
     int i;
@@ -5111,10 +5109,10 @@ int isValidName(const char *name)
 	if (c != '\0') return 0;
     }
 
-    if (strcmp(name, "...") == 0) return 1;
+    if (streql(name, "...")) return 1;
 
     for (i = 0; keywords[i].name != NULL; i++)
-	if (strcmp(keywords[i].name, name) == 0) return 0;
+	if (streql(keywords[i].name, name)) return 0;
 
     return 1;
 }
@@ -5151,7 +5149,7 @@ static int SymbolValue(int c)
     YYTEXT_PUSH('\0', yyp);
     if ((kw = KeywordLookup(yytext))) 
 	return kw;
-    
+
     PRESERVE_SV(yylval = install(yytext));
     return SYMBOL;
 }
@@ -5201,14 +5199,14 @@ static int processLineDirective(int *type)
 }
 
 /* Get the R symbol, and set yytext at the same time */
-static SEXP install_and_save(char * text)
+static SEXP install_and_save(const char * text)
 {
     strcpy(yytext, text);
     return install(text);
 }
 
 /* Get an R symbol, and set different yytext.  Used for translation of -> to <-. ->> to <<- */
-static SEXP install_and_save2(char * text, char * savetext)
+static SEXP install_and_save2(const char * text, const char * savetext)
 {
     strcpy(yytext, savetext);
     return install(text);
@@ -5716,16 +5714,16 @@ static int yylex(void)
  */
 static void record_( int first_parsed, int first_column, int last_parsed, int last_column,
 	int token, int id, char* text_in ){
-	
+
 	if (!ParseState.keepSrcRefs || !ParseState.keepParseData
 	    || id == NA_INTEGER) return;
-	
+
 	// don't care about zero sized things
 	if( !yytext[0] ) return ;
-	
+
 	if (ParseState.data_count == DATA_COUNT)
 	    growData();
-	
+
 	_FIRST_COLUMN( ParseState.data_count ) = first_column; 
 	_FIRST_PARSED( ParseState.data_count ) = first_parsed;
 	_LAST_COLUMN( ParseState.data_count )  = last_column;  
@@ -5737,12 +5735,12 @@ static void record_( int first_parsed, int first_column, int last_parsed, int la
 	    SET_STRING_ELT(PS_TEXT, ParseState.data_count, mkChar2(text_in));
 	else
 	    SET_STRING_ELT(PS_TEXT, ParseState.data_count, mkChar(""));
-	
+
 	if( id > ID_COUNT )
 	    growID(id) ;
 
 	ID_ID( id ) = ParseState.data_count ; 
-	
+
 	ParseState.data_count++ ;
 }
 
@@ -5756,11 +5754,11 @@ static void record_( int first_parsed, int first_column, int last_parsed, int la
  * @param nchilds number of childs
  */
 static void recordParents( int parent, yyltype * childs, int nchilds){
-	
+
 	if( parent > ID_COUNT ){
 		growID(parent) ;
 	}
-	
+
 	/* some of the childs might be an empty token (like cr)
 	   which we do not want to track */
 	int ii;    /* loop index */
@@ -5775,7 +5773,7 @@ static void recordParents( int parent, yyltype * childs, int nchilds){
 		}
 		ID_PARENT( loc.id ) = parent;
 	}
-	
+
 }
 
 /**
@@ -5785,41 +5783,41 @@ static void recordParents( int parent, yyltype * childs, int nchilds){
  * @param loc location information for the token to track
  */ 
 static void modif_token( yyltype* loc, int tok ){
-	
+
 	int id = loc->id ;
-	
+
 	if (!ParseState.keepSrcRefs || !ParseState.keepParseData
 	    || id < 0 || id > ID_COUNT) return;
-	    
+
 	if( tok == SYMBOL_FUNCTION_CALL ){
 		// looking for first child of id
 		int j = ID_ID( id ) ;
 		int parent = id ;
-		
+
 		if (j < 0 || j > ID_COUNT)
 	            return;
-	            
+
 		while( ID_PARENT( _ID(j) ) != parent ){
 		    j-- ; 
 		    if (j < 0)
 	        	return;
 		}
-			
+
 		if( _TOKEN(j) == SYMBOL ){
 		    _TOKEN(j) = SYMBOL_FUNCTION_CALL ;
 		}
-		
+
 	} else{
 		_TOKEN( ID_ID(id) ) = tok ;
 	}
-	
+
 }
 
 /* this local version of lengthgets() always copies and doesn't fill with NA */
 static SEXP lengthgets2(SEXP x, int len) {
     SEXP result;
     PROTECT(result = allocVector( TYPEOF(x), len ));
-    
+
     len = (len < length(x)) ? len : length(x);
     switch(TYPEOF(x)) {
     	case INTSXP: 
@@ -5840,7 +5838,7 @@ static SEXP lengthgets2(SEXP x, int len) {
 }
 
 static void finalizeData( ){
-	
+
     int nloc = ParseState.data_count ;
 
     int i, j, id ;
@@ -5921,7 +5919,7 @@ static void finalizeData( ){
 	    for(j = i + 1; j < nloc && _LAST_PARSED(j) <= istartl; j++);
 
 	    if (j < nloc) {
-		for(;;) {
+		while(TRUE) {
 		    int jstartl = _FIRST_PARSED(j);
 		    int jstartc = _FIRST_COLUMN(j);
 
@@ -6030,9 +6028,9 @@ static void finalizeData( ){
     setAttrib( newdata, install( "dim" ), dims ) ;
     setAttrib( newdata, install("tokens"), tokens );
     setAttrib( newdata, install("text"), newtext );
-    
+
     setAttrib(newdata, R_ClassSymbol, mkString("parseData"));
-    
+
     /* Put it into the srcfile environment */
     if (isEnvironment(PS_SRCFILE))
 	defineVar(install("parseData"), newdata, PS_SRCFILE);
@@ -6043,7 +6041,7 @@ static void finalizeData( ){
  * Grows the data
  */
 static void growData(){
-	
+
     int new_data_count;	
     if (PS_DATA == R_NilValue) {
         new_data_count = INIT_DATA_COUNT;
@@ -6051,7 +6049,7 @@ static void growData(){
 	PS_SET_TEXT(allocVector(STRSXP, 0));
     } else
         new_data_count = 2*DATA_COUNT;
-	
+
     PS_SET_DATA(lengthgets2(PS_DATA, new_data_count * DATA_ROWS));
     PS_SET_TEXT(lengthgets2(PS_TEXT, new_data_count));
 }
@@ -6060,20 +6058,20 @@ static void growData(){
  * Grows the ids vector so that ID_ID(target) can be called
  */
 static void growID( int target ){
-	
+
     int new_count;
     if (PS_IDS == R_NilValue) {
         new_count = INIT_DATA_COUNT/2 - 1;
         PS_SET_IDS(allocVector(INTSXP, 0));
     } else
     	new_count = ID_COUNT;
-    	
+
     while (target > new_count)
     	new_count = 2*new_count + 1;
-    	
+
     if (new_count <= ID_COUNT)
     	return;
-    
+
     int new_size = (1 + new_count)*2;
     PS_SET_IDS(lengthgets2(PS_IDS, new_size));
 }

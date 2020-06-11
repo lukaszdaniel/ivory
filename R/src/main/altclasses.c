@@ -693,36 +693,41 @@ R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 	SEXP data = DEFERRED_STRING_ARG(x);
 	switch(TYPEOF(data)) {
 	case INTSXP:
-	    elt = StringFromInteger(INTEGER_ELT(data, i), &warn);
-	    break;
-	case REALSXP:
-	    savedigits = R_print.digits;
-	    savescipen = R_print.scipen;
-	    R_print.digits = DBL_DIG;/* MAX precision */
-	    R_print.scipen = DEFERRED_STRING_SCIPEN(x);
-	    const char *myoutdec = DEFERRED_STRING_OUTDEC(x);
-	    if (strcmp(OutDec, myoutdec)) {
-		/* The current and saved OutDec values differ. The
+    {
+        elt = StringFromInteger(INTEGER_ELT(data, i), &warn);
+        break;
+    }
+    case REALSXP:
+    {
+        savedigits = R_print.digits;
+        savescipen = R_print.scipen;
+        R_print.digits = DBL_DIG; /* MAX precision */
+        R_print.scipen = DEFERRED_STRING_SCIPEN(x);
+        const char *myoutdec = DEFERRED_STRING_OUTDEC(x);
+        if (strcmp(OutDec, myoutdec))
+        {
+            /* The current and saved OutDec values differ. The
 		   value to use is put in a static buffer and OutDec
 		   temporarily points to this buffer while
 		   StringFromReal is called and then reset. The buffer
 		   originally pointed to by OutDec cannot be used as
 		   it wil not be writable if the default "." has not
 		   been changed. */
-		static char buf[10];
-		strncpy(buf, myoutdec, sizeof buf);
-		buf[sizeof(buf) - 1] = '\0';
-		const char *savedOutDec = OutDec;
-		OutDec = buf;
-		elt = StringFromReal(REAL_ELT(data, i), &warn);
-		OutDec = savedOutDec;
-	    }
-	    else
-		elt = StringFromReal(REAL_ELT(data, i), &warn);
-	    R_print.digits = savedigits;
-	    R_print.scipen = savescipen;
-	    break;
-	default:
+            static char buf[10];
+            strncpy(buf, myoutdec, sizeof buf);
+            buf[sizeof(buf) - 1] = '\0';
+            const char *savedOutDec = OutDec;
+            OutDec = buf;
+            elt = StringFromReal(REAL_ELT(data, i), &warn);
+            OutDec = savedOutDec;
+        }
+        else
+            elt = StringFromReal(REAL_ELT(data, i), &warn);
+        R_print.digits = savedigits;
+        R_print.scipen = savescipen;
+        break;
+    }
+    default:
 	    error(_("unsupported type for deferred string coercion"));
 	}
 	SET_STRING_ELT(val, i, elt);
@@ -790,16 +795,22 @@ static int deferred_string_No_NA(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
     if (state == R_NilValue)
-	/* string is fully expanded and may have been modified. */
-	return FALSE;
-    else {
-	/* defer to the argument */
-	SEXP arg = DEFERRED_STRING_STATE_ARG(state);
-	switch(TYPEOF(arg)) {
-	case INTSXP: return INTEGER_NO_NA(arg);
-	case REALSXP: return REAL_NO_NA(arg);
-	default: return FALSE;
-	}
+    { /* string is fully expanded and may have been modified. */
+        return FALSE;
+    }
+    else
+    {
+        /* defer to the argument */
+        SEXP arg = DEFERRED_STRING_STATE_ARG(state);
+        switch (TYPEOF(arg))
+        {
+        case INTSXP:
+            return INTEGER_NO_NA(arg);
+        case REALSXP:
+            return REAL_NO_NA(arg);
+        default:
+            return FALSE;
+        }
     }
 }
 
@@ -1088,9 +1099,9 @@ static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 {
     SEXP file = MMAP_STATE_FILE(state);
     int type = MMAP_STATE_TYPE(state);
-    Rboolean ptrOK = MMAP_STATE_PTROK(state);
-    Rboolean wrtOK = MMAP_STATE_WRTOK(state);
-    Rboolean serOK = MMAP_STATE_SEROK(state);
+    Rboolean ptrOK = (Rboolean) MMAP_STATE_PTROK(state);
+    Rboolean wrtOK = (Rboolean) MMAP_STATE_WRTOK(state);
+    Rboolean serOK = (Rboolean) MMAP_STATE_SEROK(state);
 
     SEXP val = mmap_file(file, type, ptrOK, wrtOK, serOK, TRUE);
     if (val == NULL) {
@@ -1107,9 +1118,9 @@ static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 Rboolean mmap_Inspect(SEXP x, int pre, int deep, int pvec,
 		      void (*inspect_subtree)(SEXP, int, int, int))
 {
-    Rboolean ptrOK = MMAP_PTROK(x);
-    Rboolean wrtOK = MMAP_WRTOK(x);
-    Rboolean serOK = MMAP_SEROK(x);
+    Rboolean ptrOK = (Rboolean) MMAP_PTROK(x);
+    Rboolean wrtOK = (Rboolean) MMAP_WRTOK(x);
+    Rboolean serOK = (Rboolean) MMAP_SEROK(x);
     Rprintf(" mmaped %s", type2char(TYPEOF(x)));
     Rprintf(" [ptr=%d,wrt=%d,ser=%d]\n", ptrOK, wrtOK, serOK);
     return TRUE;
@@ -1148,13 +1159,13 @@ static const void *mmap_Dataptr_or_null(SEXP x)
 
 static int mmap_integer_Elt(SEXP x, R_xlen_t i)
 {
-    int *p = MMAP_ADDR(x);
+    int *p = (int*) MMAP_ADDR(x);
     return p[i];
 }
 
 static R_xlen_t mmap_integer_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    int *x = MMAP_ADDR(sx);
+    int *x = (int*) MMAP_ADDR(sx);
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
@@ -1170,13 +1181,13 @@ static R_xlen_t mmap_integer_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *bu
 
 static double mmap_real_Elt(SEXP x, R_xlen_t i)
 {
-    double *p = MMAP_ADDR(x);
+    double *p = (double*) MMAP_ADDR(x);
     return p[i];
 }
 
 static R_xlen_t mmap_real_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
-    double *x = MMAP_ADDR(sx);
+    double *x = (double*) MMAP_ADDR(sx);
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
@@ -1319,7 +1330,7 @@ static SEXP mmap_file(SEXP file, int type, Rboolean ptrOK, Rboolean wrtOK,
 
 static Rboolean asLogicalNA(SEXP x, Rboolean dflt)
 {
-    Rboolean val = asLogical(x);
+    Rboolean val = (Rboolean) asLogical(x);
     return val == NA_LOGICAL ? dflt : val;
 }
 
@@ -1479,8 +1490,8 @@ static SEXP wrapper_Duplicate(SEXP x, Rboolean deep)
 Rboolean wrapper_Inspect(SEXP x, int pre, int deep, int pvec,
 			 void (*inspect_subtree)(SEXP, int, int, int))
 {
-    Rboolean srt = WRAPPER_SORTED(x);
-    Rboolean no_na = WRAPPER_NO_NA(x);
+    Rboolean srt = (Rboolean) WRAPPER_SORTED(x);
+    Rboolean no_na = (Rboolean) WRAPPER_NO_NA(x);
     Rprintf(" wrapper [srt=%d,no_na=%d]\n", srt, no_na);
     inspect_subtree(WRAPPER_WRAPPED(x), pre, deep, pvec);
     return TRUE;

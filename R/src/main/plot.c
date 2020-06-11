@@ -69,7 +69,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	umin = usr[0];
 	umax = usr[1];
 	if (umin > umax) {
-	    reversed = (axp[0] > axp[1]);
+	    reversed = (Rboolean) (axp[0] > axp[1]);
 	    if (reversed) {
 		/* have *reversed* log axis -- whereas
 		 * the switch(n) { .. } below assumes *increasing* values

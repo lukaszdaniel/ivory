@@ -321,6 +321,6 @@ void doIdle(pDevDesc dd)
 
 Rboolean doesIdle(pDevDesc dd) {
     SEXP handler = findVar(install(idleHandler), dd->eventEnv);
-    return (handler != R_UnboundValue) &&
-        (handler != R_NilValue);
+    return (Rboolean) ((handler != R_UnboundValue) &&
+        (handler != R_NilValue));
 }

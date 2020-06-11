@@ -61,7 +61,7 @@ static Sampletype Sample_kind = REJECTION;
 typedef struct {
     RNGtype kind;
     N01type Nkind;
-    char *name; /* print name */
+    const char *name; /* print name */
     int n_seed; /* length of seed vector */
     Int32 *i_seed;
 } RNGTAB;

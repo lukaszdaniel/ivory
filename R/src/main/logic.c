@@ -41,7 +41,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2);
 HIDDEN SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
-    Rboolean attr1 = ATTRIB(arg1) != R_NilValue;
+    Rboolean attr1 = (Rboolean) (ATTRIB(arg1) != R_NilValue);
     if (attr1 || ATTRIB(CADR(args)) != R_NilValue) {
 	SEXP ans;
 	if (DispatchGroup("Ops", call, op, args, env, &ans))
@@ -479,7 +479,7 @@ HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 			    type2char(TYPEOF(t)));
 	    t = coerceVector(t, LGLSXP);
 	}
-	val = checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
+	val = (Rboolean) checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
 	if (val != NA_LOGICAL) {
 	    if ((PRIMVAL(op) == _OP_ANY && val)
 		|| (PRIMVAL(op) == _OP_ALL && !val)) {

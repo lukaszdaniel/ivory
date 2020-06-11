@@ -414,7 +414,7 @@ static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
 	UNIMPLEMENTED_TYPE("HashTableSetup()", x);
     }
 #ifdef LONG_VECTOR_SUPPORT
-    d->isLong = IS_LONG_VEC(x);
+    d->isLong = (Rboolean) IS_LONG_VEC(x);
     if (d->isLong) {
 	d->HashTable = allocVector(REALSXP, (R_xlen_t) d->M);
 	for (R_xlen_t i = 0; i < d->M; i++) HTDATA_DBL(d)[i] = NIL;
@@ -1104,7 +1104,7 @@ HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     dups_ok = asLogical(CADDDR(args));
     if (dups_ok == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "duplicates.ok");
-    no_dups = !dups_ok;
+    no_dups = (Rboolean) !dups_ok;
 
     if (!isString(input) || !isString(target))
 	error(_("argument is not of mode character"));

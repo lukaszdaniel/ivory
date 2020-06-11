@@ -54,15 +54,15 @@ HIDDEN SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     if (!isNumeric(x))
 	error(_("'%s' argument is not a numeric vector"), "x");
-    x_real= TYPEOF(x) == REALSXP;
-    x_int = !x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP);
+    x_real= (Rboolean) (TYPEOF(x) == REALSXP);
+    x_int = (Rboolean) (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));
     SET_ATTRIB(sx, R_NilValue);
     SET_OBJECT(sx, 0);
     indx_ret = asLogical(CADR(args));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
-    Rboolean isLong = n > INT_MAX;
+    Rboolean isLong = (Rboolean) (n > INT_MAX);
 #endif
     if(x_int) ivx = INTEGER(sx); else vx = REAL(sx);
     if(indx_ret) {

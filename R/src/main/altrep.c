@@ -303,14 +303,14 @@ ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
     }
 
     /* check the registered and unserialized types match */
-    int rtype = ALTREP_CLASS_BASE_TYPE(class_);
+    SEXPTYPE rtype = ALTREP_CLASS_BASE_TYPE(class_);
     if (type != rtype)
 	warning(_("serialized class '%s' from package '%s' has type %s; registered class has type %s"),
 		CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)),
 		type2char(type), type2char(rtype));
     
     /* dispatch to a class method */
-    altrep_methods_t *m = CLASS_METHODS_TABLE(class_);
+    altrep_methods_t *m = (altrep_methods_t *) CLASS_METHODS_TABLE(class_);
     SEXP val = m->UnserializeEX(class_, state, attr, objf, levs);
     return val;
 }
@@ -429,7 +429,7 @@ int REAL_NO_NA(SEXP x)
 
 R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    const int *x = DATAPTR_OR_NULL(sx);
+    const int *x = (const int *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
@@ -456,7 +456,7 @@ int LOGICAL_NO_NA(SEXP x)
 
 R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
-    const Rbyte *x = DATAPTR_OR_NULL(sx);
+    const Rbyte *x = (const Rbyte *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
@@ -472,7 +472,7 @@ R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 
 R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
-    const Rcomplex *x = DATAPTR_OR_NULL(sx);
+    const Rcomplex *x = (const Rcomplex *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
@@ -617,7 +617,7 @@ void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
 static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
 					 int objf, int levs)
 {
-    altrep_methods_t *m = CLASS_METHODS_TABLE(class_);
+    altrep_methods_t *m = (altrep_methods_t *) CLASS_METHODS_TABLE(class_);
     SEXP val = m->Unserialize(class_, state);
     SET_ATTRIB(val, attr);
     SET_OBJECT(val, objf);
@@ -954,12 +954,12 @@ make_altrep_class(int type, const char *cname, const char *pname, DllInfo *dll)
 /*  Using macros like this makes it easier to add new methods, but
     makes searching for source harder. Probably a good idea on
     balance though. */
-#define DEFINE_CLASS_CONSTRUCTOR(cls, type)			\
+#define DEFINE_CLASS_CONSTRUCTOR(cls, sexptype)			\
     R_altrep_class_t R_make_##cls##_class(const char *cname,	\
 					  const char *pname,	\
 					  DllInfo *dll)		\
     {								\
-	return  make_altrep_class(type, cname, pname, dll);	\
+	return  make_altrep_class(sexptype, cname, pname, dll);	\
     }
 
 DEFINE_CLASS_CONSTRUCTOR(altstring, STRSXP)
@@ -991,7 +991,7 @@ static void reinit_altrep_class(SEXP class_)
     void R_set_##CNAME##_##MNAME##_method(R_altrep_class_t cls,		\
 					  R_##CNAME##_##MNAME##_method_t fun) \
     {									\
-	CNAME##_methods_t *m = CLASS_METHODS_TABLE(R_SEXP(cls));	\
+	CNAME##_methods_t *m = (CNAME##_methods_t *) CLASS_METHODS_TABLE(R_SEXP(cls));	\
 	m->MNAME = fun;							\
     }
 
@@ -1058,7 +1058,7 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 
 Rboolean R_altrep_inherits(SEXP x, R_altrep_class_t class_)
 {
-    return ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class_);
+    return (Rboolean) (ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class_));
 }
 
 HIDDEN SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)

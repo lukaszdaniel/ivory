@@ -43,7 +43,7 @@ int baseRegisterIndex = -1;
 GPar* dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
-    baseSystemState *bss = dd->gesd[baseRegisterIndex]->systemSpecific;
+    baseSystemState *bss = (baseSystemState*) dd->gesd[baseRegisterIndex]->systemSpecific;
     return &(bss->dp);
 }
 
@@ -344,7 +344,7 @@ void killDevice(int devNum)
 /* Used by front-ends via R_CleanUp to shutdown all graphics devices
    at the end of a session. Not the same as graphics.off(), and leaves
    .Devices and .Device in an invalid state. */
-void KillAllDevices(void)
+void Rf_KillAllDevices(void)
 {
     /* Avoid lots of activation followed by removal of devices
        while (R_NumDevices > 1) killDevice(R_CurrentDevice);
@@ -515,7 +515,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
 }
 
 
-HIDDEN void InitGraphics(void)
+HIDDEN void Rf_InitGraphics(void)
 {
     R_Devices[0] = &nullDevice;
     active[0] = TRUE;

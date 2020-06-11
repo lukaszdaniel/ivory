@@ -60,12 +60,12 @@ static void f5xact(double pastp, double tol, int *kval, int *key,
 static Rboolean f6xact(int nrow, int *irow, const int kyy[],
 		       int *key, int ldkey, int *last, int *ipn);
 static Rboolean f7xact(int nrow, const int iro[], int *idif, int *k, int *ks);
-static void f8xact(const int irow[], int is, int i1, int izero, int *new);
+static void f8xact(const int irow[], int is, int i1, int izero, int *new_);
 static double f9xact(int n, int ntot, const int ir[], const double fact[]);
 static Rboolean f10act(int nrow, const int irow[], int ncol, const int icol[],
 		       double *val,
 		       const double fact[], int *nd, int *ne, int *m);
-static void f11act(const int irow[], int i1, int i2, int *new);
+static void f11act(const int irow[], int i1, int i2, int *new_);
 NORET static void prterr(int icode, const char *mes);
 static int iwork(int iwkmax, int *iwkpt, int number, int itype);
 
@@ -1622,7 +1622,7 @@ Rboolean f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 }
 
 
-void f8xact(const int irow[], int is, int i1, int izero, int *new)
+void f8xact(const int irow[], int is, int i1, int izero, int *new_)
 {
 /*
   -----------------------------------------------------------------------
@@ -1634,33 +1634,33 @@ void f8xact(const int irow[], int is, int i1, int izero, int *new)
      IS	    - Indicator.					(Input)
      I1	    - Indicator.					(Input)
      IZERO  - Position of the zero.				(Input)
-     NEW    - Vector of new row counts.				(Output)
+     NEW_   - Vector of new row counts.				(Output)
   -----------------------------------------------------------------------
   */
 
     int i;
 
     /* Parameter adjustments */
-    --new;
+    --new_;
     --irow;
 
     /* Function Body */
     for (i = 1; i < i1; ++i)
-	new[i] = irow[i];
+	new_[i] = irow[i];
 
     for (i = i1; i <= izero - 1; ++i) {
 	if (is >= irow[i + 1])
 	    break;
-	new[i] = irow[i + 1];
+	new_[i] = irow[i + 1];
     }
 
-    new[i] = is;
+    new_[i] = is;
 
     for(;;) {
 	++i;
 	if (i > izero)
 	    return;
-	new[i] = irow[i];
+	new_[i] = irow[i];
     }
 }
 
@@ -1754,7 +1754,7 @@ f10act(int nrow, const int irow[], int ncol, const int icol[],
 }
 
 
-void f11act(const int irow[], int i1, int i2, int *new)
+void f11act(const int irow[], int i1, int i2, int *new_)
 {
 /*
   -----------------------------------------------------------------------
@@ -1765,17 +1765,15 @@ void f11act(const int irow[], int i1, int i2, int *new)
      IROW   - Vector containing the row totals.	(Input)
      I1	    - Indicator.			(Input)
      I2	    - Indicator.			(Input)
-     NEW    - Vector containing the row totals.	(Output)
+     NEW_   - Vector containing the row totals.	(Output)
   -----------------------------------------------------------------------
   */
-    int i;
 
-    for (i = 0;  i < (i1 - 1); ++i)	new[i] = irow[i];
-    for (i = i1; i <= i2; ++i)	      new[i-1] = irow[i];
+    for (int i = 0;  i < (i1 - 1); ++i)	new_[i] = irow[i];
+    for (int i = i1; i <= i2; ++i)	      new_[i-1] = irow[i];
 
     return;
 }
-
 
 NORET void prterr(int icode, const char *mes)
 {
@@ -1789,7 +1787,9 @@ NORET void prterr(int icode, const char *mes)
      mes    - Character string containing the error message.	(Input)
   -----------------------------------------------------------------------
   */
-    PROBLEM _("FEXACT error %d.\n%s"), icode, mes RECOVER(NULL_ENTRY);
+	char R_problem_buf[R_PROBLEM_BUFSIZE];
+	sprintf(R_problem_buf, _("FEXACT error %d.\n%s"), icode, mes);
+	error(R_problem_buf);
 }
 
 int iwork(int iwkmax, int *iwkpt, int number, int itype)

@@ -70,7 +70,7 @@ typedef struct {
     int quiet;
     int sepchar; /*  = 0 */      /* This gets compared to ints */
     char decchar; /* = '.' */    /* This only gets compared to chars */
-    char *quoteset; /* = NULL */
+    const char *quoteset; /* = NULL */
     int comchar; /* = NO_COMCHAR */
     int ttyflag; /* = 0 */
     Rconnection con; /* = NULL */
@@ -161,14 +161,12 @@ static int Strtoi(const char *nptr, int base)
     return (int) res;
 }
 
-static double
-Strtod (const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 {
     return R_strtod4(nptr, endptr, d->decchar, NA);
 }
 
-static Rcomplex
-strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 {
     Rcomplex z;
     double x, y;
@@ -195,8 +193,7 @@ strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
     return z;
 }
 
-static Rbyte
-strtoraw (const char *nptr, char **endptr)
+static Rbyte strtoraw(const char *nptr, char **endptr)
 {
     const char *p = nptr;
     int i, val = 0;
@@ -311,9 +308,9 @@ static int scanchar(Rboolean inQuote, LocalData *d)
 /* utility to close connections after interrupts */
 static void scan_cleanup(void *data)
 {
-    LocalData *ld = data;
+    LocalData *ld = (LocalData *) data;
     if(!ld->ttyflag && !ld->wasopen) ld->con->close(ld->con);
-    if (ld->quoteset[0]) free(ld->quoteset);
+    if (ld->quoteset[0]) free((void*)(ld->quoteset));
 }
 
 #include "RBufferUtils.h"
@@ -324,8 +321,7 @@ static void scan_cleanup(void *data)
    what if this appends to the existing content. Appears it writes in
    directly at position 0.
  */
-static char *
-fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
+static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 	   R_StringBuffer *buffer)
 {
 /* The basic reader function, called from scanVector() and scanFrame().
@@ -335,7 +331,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 */
     char *bufp;
     int c, quote, filled, nbuf = MAXELTSIZE, m, mm = 0;
-    Rboolean dbcslocale = (MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1;
+    Rboolean dbcslocale = (Rboolean) ((MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1);
 
     m = 0;
     filled = 1;
@@ -475,7 +471,7 @@ R_INLINE static int isNAstring(const char *buf, int mode, LocalData *d)
 
     if(!mode && strlen(buf) == 0) return 1;
     for (i = 0; i < length(d->NAstrings); i++)
-	if (!strcmp(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
+	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
     return 0;
 }
 
@@ -709,7 +705,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
     // we checked its type in do_scan
     int *lstrip = LOGICAL(stripwhite);
-    Rboolean vec_strip = (xlength(stripwhite) == xlength(what));
+    Rboolean vec_strip = (Rboolean) (xlength(stripwhite) == xlength(what));
     strip = lstrip[0];
 
     for (;;) {
@@ -926,10 +922,10 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (strlen(p) == 1) data.comchar = (unsigned char)*p;
     if(escapes == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "allowEscapes");
-    data.escapes = escapes != 0;
+    data.escapes = (Rboolean) (escapes != 0);
     if(skipNul == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "skipNul");
-    data.skipNul = skipNul != 0;
+    data.skipNul = (Rboolean) (skipNul != 0);
 
     int ii = asInteger(file);
     data.con = getConnection(ii);
@@ -937,7 +933,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	data.atStart = FALSE;
 	data.ttyflag = 1;
     } else {
-	data.atStart = (nskip == 0);
+	data.atStart = (Rboolean) (nskip == 0);
 	data.ttyflag = 0;
 	data.wasopen = data.con->isopen;
 	if(!data.wasopen) {
@@ -997,7 +993,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if (!data.ttyflag && !data.wasopen)
 	data.con->close(data.con);
-    if (data.quoteset[0]) free(data.quoteset);
+    if (data.quoteset[0]) free((char*) data.quoteset);
     if (!skipNul && data.embedWarn)
 	warning(_("embedded nul(s) found in input"));
 

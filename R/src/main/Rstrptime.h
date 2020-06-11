@@ -139,8 +139,7 @@ static const unsigned short int __mon_yday[2][13] =
   ((year) % 4 == 0 && ((year) % 100 != 0 || (year) % 400 == 0))
 
 /* Compute the day of the week.  */
-static void
-day_of_the_week (stm *tm)
+static void day_of_the_week (stm *tm)
 {
     /* We know that January 1st 1970 was a Thursday (= 4).  Compute the
        the difference between this data in the one on TM and so determine
@@ -164,8 +163,7 @@ day_of_the_week (stm *tm)
 }
 
 /* Compute the day of the year.  */
-static void
-day_of_the_year (stm *tm)
+static void day_of_the_year (stm *tm)
 {
     /* R bug fix: day_of_the_year needs year, month, mday set */
     if(tm->tm_year == NA_INTEGER ||
@@ -220,8 +218,7 @@ static int Rwcsncasecmp(const wchar_t *cs1, const wchar_t *s2)
   (*(new_fmt) != '\0'							      \
    && (rp = w_strptime_internal (rp, (new_fmt), tm, psecs, poffset)) != NULL)
 
-static wchar_t *
-w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
+static wchar_t *w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 		     double *psecs, int *poffset)
 {
     int cnt;
@@ -479,15 +476,17 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    have_wday = 1;
 	    break;
 	case L'y':
-	    /* Match year within century.  */
-	    get_number (0, 99, 2);
-	    /* The "Year 2000: The Millennium Rollover" paper suggests that
-	       values in the range 69-99 refer to the twentieth century.  */
-	    int ival = val;
-	    tm->tm_year = ival >= 69 ? ival : ival + 100;
-	    /* Indicate that we want to use the century, if specified.  */
-	    want_century = 1;
-	    want_xday = 1;
+	    {
+		/* Match year within century.  */
+		get_number (0, 99, 2);
+		/* The "Year 2000: The Millennium Rollover" paper suggests that
+		   values in the range 69-99 refer to the twentieth century.  */
+		int ival = val;
+		tm->tm_year = ival >= 69 ? ival : ival + 100;
+		/* Indicate that we want to use the century, if specified.  */
+		want_century = 1;
+		want_xday = 1;
+	    }
 	    break;
 	case L'Y':
 	    /* Match year including century number.  */
@@ -606,11 +605,13 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 		have_wday = 1;
 		break;
 	    case L'y':
-		/* Match year within century using alternate numeric symbols.  */
-		get_alt_number (0, 99, 2);
-		int ival = val;
-		tm->tm_year = ival >= 69 ? ival : ival + 100;
-		want_xday = 1;
+		{
+		    /* Match year within century using alternate numeric symbols.  */
+		    get_alt_number (0, 99, 2);
+		    int ival = val;
+		    tm->tm_year = ival >= 69 ? ival : ival + 100;
+		    want_xday = 1;
+		}
 		break;
 	    default:
 		return NULL;
@@ -707,8 +708,7 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 }
 
 
-static char *
-strptime_internal (const char *rp, const char *fmt, stm *tm,
+static char *strptime_internal (const char *rp, const char *fmt, stm *tm,
 		   double *psecs, int *poffset)
 {
     int cnt;
@@ -958,18 +958,20 @@ strptime_internal (const char *rp, const char *fmt, stm *tm,
 	    have_wday = 1;
 	    break;
 	case 'y':
-	    /* Match year within century.  */
-	    get_number (0, 99, 2);
-	    /* The "Year 2000: The Millennium Rollover" paper suggests that
-	       values in the range 69-99 refer to the twentieth century.
-	       And this is mandated by the POSIX 2001 standard, with a
-	       caveat that it might change in future.
-	    */
-	    int ival = val;
-	    tm->tm_year = ival >= 69 ? ival : ival + 100;
-	    /* Indicate that we want to use the century, if specified.  */
-	    want_century = 1;
-	    want_xday = 1;
+	    {
+		/* Match year within century.  */
+		get_number (0, 99, 2);
+		/* The "Year 2000: The Millennium Rollover" paper suggests that
+		   values in the range 69-99 refer to the twentieth century.
+		   And this is mandated by the POSIX 2001 standard, with a
+		   caveat that it might change in future.
+		*/
+		int ival = val;
+		tm->tm_year = ival >= 69 ? ival : ival + 100;
+		/* Indicate that we want to use the century, if specified.  */
+		want_century = 1;
+		want_xday = 1;
+	    }
 	    break;
 	case 'Y':
 	    /* Match year including century number.  */
@@ -1088,11 +1090,13 @@ strptime_internal (const char *rp, const char *fmt, stm *tm,
 		have_wday = 1;
 		break;
 	    case 'y':
-		/* Match year within century using alternate numeric symbols.  */
-		get_alt_number (0, 99, 2);
-		int ival = val;
-		tm->tm_year = ival >= 69 ? ival : ival + 100;
-		want_xday = 1;
+		{
+		    /* Match year within century using alternate numeric symbols.  */
+		    get_alt_number (0, 99, 2);
+		    int ival = val;
+		    tm->tm_year = ival >= 69 ? ival : ival + 100;
+		    want_xday = 1;
+		}
 		break;
 	    default:
 		return NULL;
@@ -1280,8 +1284,7 @@ static void get_locale_w_strings(void)
 
 
 /* We only care if the result is null or not */
-static void *
-R_strptime (const char *buf, const char *format, stm *tm,
+static void *R_strptime (const char *buf, const char *format, stm *tm,
 	    double *psecs, int *poffset)
 {
 #if defined(HAVE_WCSTOD)

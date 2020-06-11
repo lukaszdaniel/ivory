@@ -49,7 +49,6 @@
 #define one_12	0.0833333333333333333
 #define one_24	0.0416666666666666667
 
-#define repeat for(;;)
 
 double Rf_rpois(double mu)
 {
@@ -108,7 +107,7 @@ double Rf_rpois(double mu)
 		q = p0 = p = exp(-mu);
 	    }
 
-	    repeat {
+	    while(TRUE) {
 		/* Step U. uniform sample for inversion method */
 		u = unif_rand();
 		if (u <= p0)
@@ -188,7 +187,7 @@ double Rf_rpois(double mu)
     }
 
 
-    repeat {
+    while(TRUE) {
 	/* Step E. Exponential Sample */
 
 	E = exp_rand();	/* ~ Exp(1) (standard exponential) */

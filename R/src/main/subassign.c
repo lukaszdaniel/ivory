@@ -294,7 +294,7 @@ static Rboolean dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
-    ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
+    ans = (Rboolean) Rf_DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
     UNPROTECT(1);
     return ans;
 }
@@ -314,7 +314,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     Rboolean redo_which = TRUE;
     int which = 100 * TYPEOF(*x) + TYPEOF(*y);
     /* coercion can lose the object bit */
-    Rboolean x_is_object = OBJECT(*x);
+    Rboolean x_is_object = (Rboolean) OBJECT(*x);
 
     switch (which) {
     case 1000:	/* logical    <- null       */
@@ -1603,7 +1603,7 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
 	x = SETCAR(args, shallow_duplicate(CAR(args)));
 
-    S4 = IS_S4_OBJECT(x);
+    S4 = (Rboolean) IS_S4_OBJECT(x);
 
     oldtype = 0;
     if (TYPEOF(x) == LISTSXP || TYPEOF(x) == LANGSXP) {
@@ -1736,7 +1736,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     nsubs = SubAssignArgs(args, &x, &subs, &y);
     PROTECT(y); /* gets cut loose in SubAssignArgs */
-    S4 = IS_S4_OBJECT(x);
+    S4 = (Rboolean) IS_S4_OBJECT(x);
 
     /* Handle NULL left-hand sides.  If the right-hand side */
     /* is NULL, just return the left-hand size otherwise, */
@@ -2110,7 +2110,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
     PROTECT_WITH_INDEX(x, &pxidx);
     PROTECT_WITH_INDEX(val, &pvalidx);
     nprotect += 2;
-    S4 = IS_S4_OBJECT(x);
+    S4 = (Rboolean) IS_S4_OBJECT(x);
 
     if (MAYBE_SHARED(x) ||
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))

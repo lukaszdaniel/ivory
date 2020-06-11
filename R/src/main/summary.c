@@ -551,7 +551,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     ans = matchArgExact(R_NaRmSymbol, &args);
-    Rboolean narm = asLogical(ans);
+    Rboolean narm = (Rboolean) asLogical(ans);
 
     if (ALTREP(CAR(args)) && CDDR(args) == R_NilValue &&
 	(CDR(args) == R_NilValue || TAG(CDR(args)) == R_NaRmSymbol)) {
@@ -621,7 +621,9 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		complex_a = TRUE;
 		break;
 	    default:
-		a = CAR(a); goto invalid_type;
+		a = CAR(a);
+		errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    	return R_NilValue;
             }
 	    a = CDR(a);
 	}
@@ -710,7 +712,8 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    else updated = smax(a, &stmp, narm);
 		    break;
 		default:
-		    goto invalid_type;
+			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    		return R_NilValue;
 		}
 
 		if(updated) {/* 'a' had non-NA elements; --> "add" tmp or itmp*/
@@ -846,7 +849,8 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    break;
 		default:
-		    goto invalid_type;
+			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    		return R_NilValue;
 		}
 
 		break;/* sum() part */
@@ -878,7 +882,8 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    break;
 		default:
-		    goto invalid_type;
+			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    		return R_NilValue;
 		}
 
 		break;/* prod() part */
@@ -895,9 +900,13 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	    case NILSXP:  /* OK historically, e.g. PR#1283 */
 		break;
 	    case CPLXSXP:
-		if (iop == 2 || iop == 3) goto invalid_type;
-		break;
-	    case STRSXP:
+			if (iop == 2 || iop == 3)
+			{
+			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    		return R_NilValue;
+			}
+			break;
+		case STRSXP:
 		if (iop == 2 || iop == 3) {
 		    if(!empty && ans_type == INTSXP) {
 			scum = StringFromInteger(icum, &warn);
@@ -912,7 +921,8 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    break;
 		}
 	    default:
-		goto invalid_type;
+			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+    		return R_NilValue;
 	    }
 	    if(ans_type < TYPEOF(a) && ans_type != CPLXSXP) {
 		if(!empty && ans_type == INTSXP)
@@ -960,9 +970,6 @@ na_answer: /* only sum(INTSXP, ...) case currently used */
     UNPROTECT(2); /* scum, args */
     return ans;
 
-invalid_type:
-    errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
-    return R_NilValue;
 }/* do_summary */
 
 
@@ -1065,7 +1072,7 @@ HIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
     i = (indx != -1);
-    Rboolean large = (indx + 1) > INT_MAX;
+    Rboolean large = (Rboolean) ((indx + 1) > INT_MAX);
     PROTECT(ans = allocVector(large ? REALSXP : INTSXP, i ? 1 : 0));
     if (i) {
 	if(large)

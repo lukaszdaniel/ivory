@@ -411,10 +411,10 @@ static double mktime0 (stm *tm, const int local)
 /* macOS 10.9 gives -1 for dates prior to 1902, and ignores DST after 2037 */
 #ifdef HAVE_WORKING_64BIT_MKTIME
     if(sizeof(time_t) == 8)
-	OK = !have_broken_mktime() || tm->tm_year >= 70;
+	OK = (Rboolean) (!have_broken_mktime() || tm->tm_year >= 70);
     else
 #endif
-	OK = tm->tm_year < 138 && tm->tm_year >= (have_broken_mktime() ? 70 : 02);
+	OK = (Rboolean) (tm->tm_year < 138 && tm->tm_year >= (have_broken_mktime() ? 70 : 02));
     if(OK) {
 	res = (double) mktime(tm);
 	if (res == -1.) return res;
@@ -438,11 +438,11 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 /* as mktime is broken, do not trust localtime */
 #ifdef HAVE_WORKING_64BIT_MKTIME
     if (sizeof(time_t) == 8)
-	OK = !have_broken_mktime() || d > 0.;
+	OK = (Rboolean) (!have_broken_mktime() || d > 0.);
     else
 #endif
-	OK = d < 2147483647.0 &&
-	    d > (have_broken_mktime() ? 0. : -2147483647.0);
+	OK = (Rboolean) (d < 2147483647.0 &&
+	    d > (have_broken_mktime() ? 0. : -2147483647.0));
     if(OK) {
 	t = (time_t) d;
 	/* if d is negative and non-integer then t will be off by one day
@@ -740,7 +740,7 @@ HIDDEN SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else valid = 0;
 	makelt(ptm, ans, i, valid, d - floor(d));
 	if(!isgmt) {
-	    char *p = "";
+	    const char *p = "";
 	    // or ptm->tm_zone
 	    if(valid && ptm->tm_isdst >= 0)
 		p = R_tzname[ptm->tm_isdst];
@@ -914,9 +914,9 @@ HIDDEN SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans = PROTECT(allocVector(STRSXP, N));
     char tm_zone[20];
 #ifdef HAVE_TM_GMTOFF
-    Rboolean have_zone = LENGTH(x) >= 11;// and components w/ length >= 1
+    Rboolean have_zone = (Rboolean) (LENGTH(x) >= 11);// and components w/ length >= 1
 #else
-    Rboolean have_zone = LENGTH(x) >= 10;
+    Rboolean have_zone = (Rboolean) (LENGTH(x) >= 10);
 #endif
     if(have_zone && !isString(VECTOR_ELT(x, 9)))
 	error(_("invalid component [[10]] in \"POSIXlt\" should be 'zone'"));

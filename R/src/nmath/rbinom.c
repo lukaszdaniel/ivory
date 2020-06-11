@@ -40,7 +40,6 @@
 #include <stdlib.h>
 #include <limits.h>
 
-#define repeat for(;;)
 
 double Rf_rbinom(double nin, double pp)
 {
@@ -115,7 +114,7 @@ double Rf_rbinom(double nin, double pp)
     }
 
     /*-------------------------- np = n*p >= 30 : ------------------- */
-    repeat {
+    while(TRUE) {
       u = unif_rand() * p4;
       v = unif_rand();
       /* triangular region */
@@ -184,11 +183,11 @@ double Rf_rbinom(double nin, double pp)
  L_np_small:
     /*---------------------- np = n*p < 30 : ------------------------- */
 
-  repeat {
+  while(TRUE) {
      ix = 0;
      f = qn;
      u = unif_rand();
-     repeat {
+     while(TRUE) {
 	 if (u < f)
 	     goto finis;
 	 if (ix > 110)

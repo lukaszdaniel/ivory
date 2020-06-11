@@ -61,10 +61,10 @@ Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact)
 {
     if (exact)
-	return (Rboolean)!strcmp(f, t);
+	return streql(f, t);
     /* else */
     while (*t) {
-	if (*t != *f)   return FALSE;
+	if (*t != *f) return FALSE;
 	t++;
 	f++;
     }
@@ -375,7 +375,7 @@ HIDDEN SEXP Rf_matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 		      n_("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unused)),
-		      strchr(CHAR(asChar(deparse1line(unused, 0))), '('));
+		      strchr(CHAR(asChar(deparse1line(unused, FALSE))), '('));
 	}
     }
     UNPROTECT(1);
@@ -458,7 +458,7 @@ HIDDEN SEXP Rf_patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
     while (f != R_NilValue) {
 	if (TAG(f) != R_DotsSymbol) {
 	    for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
-		if (TAG(b) != R_NilValue && pmatch(TAG(f), TAG(b), 1)) {
+		if (TAG(b) != R_NilValue && pmatch(TAG(f), TAG(b), TRUE)) {
 		    patchArgument(b, TAG(f), &farg[farg_i], cloenv);
 		    SET_ARGUSED(b, 2);
 		    break; /* Previous invocation of matchArgs_NR */
@@ -484,7 +484,7 @@ HIDDEN SEXP Rf_patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 	    } else {
 		for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
 		    if (!ARGUSED(b) && TAG(b) != R_NilValue &&
-			pmatch(TAG(f), TAG(b), seendots)) {
+			pmatch(TAG(f), TAG(b), (Rboolean) seendots)) {
 
 			patchArgument(b, TAG(f), &farg[farg_i], cloenv);
 			SET_ARGUSED(b, 1);

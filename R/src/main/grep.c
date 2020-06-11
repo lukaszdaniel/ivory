@@ -1142,7 +1142,7 @@ HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!useBytes) {
-	Rboolean onlyASCII = IS_ASCII(STRING_ELT(pat, 0));
+	Rboolean onlyASCII = (Rboolean) IS_ASCII(STRING_ELT(pat, 0));
 	if (onlyASCII)
 	    for (i = 0; i < n; i++) {
 		if(STRING_ELT(text, i) == NA_STRING) continue;
@@ -1154,7 +1154,7 @@ HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = onlyASCII;
     }
     if (!useBytes) {
-	Rboolean haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	Rboolean haveBytes = (Rboolean) IS_BYTES(STRING_ELT(pat, 0));
 	if (!haveBytes)
 	    for (i = 0; i < n; i++)
 		if (IS_BYTES(STRING_ELT(text, i))) {
@@ -1197,11 +1197,11 @@ HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     if (fixed_opt) ;
     else if (perl_opt) {
 #ifdef HAVE_PCRE2
-	R_pcre2_prepare(spat, text, use_UTF8, igcase_opt, &tables, &re,
+	R_pcre2_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, &tables, &re,
 	                &mcontext);
 	mdata = pcre2_match_data_create(ovecsize, NULL);
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, FALSE, &tables,
                      &re_pcre, &re_pe);
 #endif
     } else {
@@ -1241,7 +1241,7 @@ HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 
 	    if (fixed_opt)
-		LOGICAL(ind)[i] = fgrep_one(spat, s, useBytes, use_UTF8, NULL) >= 0;
+		LOGICAL(ind)[i] = fgrep_one(spat, s, (Rboolean) useBytes, use_UTF8, NULL) >= 0;
 	    else if (perl_opt) {
 #ifdef HAVE_PCRE2
 		int rc = pcre2_match(re, (PCRE2_SPTR) s, PCRE2_ZERO_TERMINATED,
@@ -1284,7 +1284,7 @@ HIDDEN SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	if (re_pe) pcre_free_study(re_pe);
 	pcre_free(re_pcre);
-	pcre_free((void *)tables);
+	pcre_free((unsigned char *) tables);
 #endif
     } else
 	tre_regfree(&reg);
@@ -1935,7 +1935,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!useBytes) {
-	Rboolean onlyASCII = (IS_ASCII(STRING_ELT(pat, 0)) &&
+	Rboolean onlyASCII = (Rboolean) (IS_ASCII(STRING_ELT(pat, 0)) &&
 			      IS_ASCII(STRING_ELT(rep, 0)));
 	if (onlyASCII)
 	    for (i = 0; i < n; i++) {
@@ -1948,7 +1948,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = onlyASCII;
     }
     if (!useBytes) {
-	Rboolean haveBytes = (IS_BYTES(STRING_ELT(pat, 0)) ||
+	Rboolean haveBytes = (Rboolean) (IS_BYTES(STRING_ELT(pat, 0)) ||
 			      IS_BYTES(STRING_ELT(rep, 0)));
 	if (!haveBytes)
 	    for (i = 0; i < n; i++)
@@ -2003,11 +2003,11 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	replen = strlen(srep);
     } else if (perl_opt) {
 #ifdef HAVE_PCRE2
-	R_pcre2_prepare(spat, text, use_UTF8, igcase_opt, &tables, &re,
+	R_pcre2_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, &tables, &re,
 	                &mcontext);
 	mdata = pcre2_match_data_create(ovecsize, NULL);
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, FALSE, &tables,
 	             &re_pcre, &re_pe);
 #endif
 	replen = strlen(srep);
@@ -2051,7 +2051,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (fixed_opt) {
 	    int st, nr, slen = (int) strlen(s);
 	    ns = slen;
-	    st = fgrep_one_bytes(spat, s, ns, useBytes, use_UTF8);
+	    st = fgrep_one_bytes(spat, s, ns, (Rboolean) useBytes, use_UTF8);
 	    if (st < 0)
 		SET_STRING_ELT(ans, i, STRING_ELT(text, i));
 	    else if (STRING_ELT(rep, 0) == NA_STRING)
@@ -2065,7 +2065,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 			nr++;
 			ss += sst+patlen;
 			slen -= (int)(sst+patlen);
-		    } while((sst = fgrep_one_bytes(spat, ss, slen, useBytes, use_UTF8)) >= 0);
+		    } while((sst = fgrep_one_bytes(spat, ss, slen, (Rboolean) useBytes, use_UTF8)) >= 0);
 		} else nr = 1;
 		cbuf = u = Calloc(ns + nr*(replen - patlen) + 1, char);
 		*u = '\0';
@@ -2077,7 +2077,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 		    slen -= (int)(st+patlen);
 		    strncpy(u, srep, replen);
 		    u += replen;
-		} while(global && (st = fgrep_one_bytes(spat, s, slen, useBytes, use_UTF8)) >= 0);
+		} while(global && (st = fgrep_one_bytes(spat, s, slen, (Rboolean) useBytes, use_UTF8)) >= 0);
 		strcpy(u, s);
 		if (useBytes)
 		    SET_STRING_ELT(ans, i, mkChar(cbuf));
@@ -2333,7 +2333,7 @@ HIDDEN SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	if (re_pe) pcre_free_study(re_pe);
 	pcre_free(re_pcre);
-	pcre_free((void *)tables);
+	pcre_free((unsigned char *) tables);
 #endif
     } else tre_regfree(&reg);
     SHALLOW_DUPLICATE_ATTRIB(ans, text);
@@ -2687,7 +2687,7 @@ R_pcre_gregexpr(const char *pattern, const char *string,
 		start = (int) ovector[0] + 1;
 	    else
 		start = (int) ovector[1];
-	    if (start >= slen) foundAll = 1;
+	    if (start >= slen) foundAll = TRUE;
 	} else {
 	    foundAll = TRUE;
 	    if (!foundAny) matchIndex = 0;
@@ -2821,7 +2821,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 
     n = XLENGTH(text);
     if (!useBytes) {
-	Rboolean onlyASCII = IS_ASCII(STRING_ELT(pat, 0));
+	Rboolean onlyASCII = (Rboolean) IS_ASCII(STRING_ELT(pat, 0));
 	if (onlyASCII)
 	    for (i = 0; i < n; i++) {
 		if(STRING_ELT(text, i) == NA_STRING) continue;
@@ -2833,7 +2833,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = onlyASCII;
     }
     if (!useBytes) {
-	Rboolean haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	Rboolean haveBytes = (Rboolean) IS_BYTES(STRING_ELT(pat, 0));
 	if (!haveBytes)
 	    for (i = 0; i < n; i++)
 		if (IS_BYTES(STRING_ELT(text, i))) {
@@ -2878,7 +2878,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     if (fixed_opt) ;
     else if (perl_opt) {
 #ifdef HAVE_PCRE2
-	R_pcre2_prepare(spat, text, use_UTF8, igcase_opt, &tables, &re,
+	R_pcre2_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, &tables, &re,
 	                &mcontext);
 
 	/* also extract info for named groups */
@@ -2895,7 +2895,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	mdata = pcre2_match_data_create(ovector_size, NULL);
 	/* ovector_size not used below */
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, (Rboolean) igcase_opt, FALSE, &tables,
 	               &re_pcre, &re_pe);
 
 	/* also extract info for named groups */
@@ -2988,7 +2988,7 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		}
 		if (fixed_opt) {
-		    int st = fgrep_one(spat, s, useBytes, use_UTF8, NULL);
+		    int st = fgrep_one(spat, s, (Rboolean) useBytes, use_UTF8, NULL);
 		    INTEGER(ans)[i] = (st > -1)?(st+1):-1;
 		    if (!useBytes && use_UTF8) {
 			INTEGER(matchlen)[i] = INTEGER(ans)[i] >= 0 ?
@@ -3067,17 +3067,17 @@ HIDDEN SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			elt = gregexpr_BadStringAns();
 		    } else {
 			if (fixed_opt)
-			    elt = gregexpr_fixed(spat, s, useBytes, use_UTF8,
+			    elt = gregexpr_fixed(spat, s, (Rboolean) useBytes, use_UTF8,
 				                 itype);
 			else
 #ifdef HAVE_PCRE2
-			    elt = R_pcre2_gregexpr(spat, s, re,	useBytes,
+			    elt = R_pcre2_gregexpr(spat, s, re, (Rboolean) useBytes,
 			                           use_UTF8, mdata, mcontext,
 			                           (int) capture_count,
 						   capture_names, i, itype);
 #else
 			    elt = R_pcre_gregexpr(spat, s, re_pcre, re_pe,
-						  useBytes, use_UTF8, ovector,
+						  (Rboolean) useBytes, use_UTF8, ovector,
 						  ovector_size,
 			                          (int) capture_count,
 						  capture_names, i, itype);
@@ -3166,7 +3166,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(text);
 
     if (!useBytes) {
-	Rboolean onlyASCII = IS_ASCII(STRING_ELT(pat, 0));
+	Rboolean onlyASCII = (Rboolean) IS_ASCII(STRING_ELT(pat, 0));
 	if(onlyASCII)
 	    for(i = 0; i < n; i++) {
 		if(STRING_ELT(text, i) == NA_STRING) continue;
@@ -3178,7 +3178,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = onlyASCII;
     }
     if(!useBytes) {
-	Rboolean haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	Rboolean haveBytes = (Rboolean) IS_BYTES(STRING_ELT(pat, 0));
 	if(!haveBytes)
 	    for(i = 0; i < n; i++) {
 		if(IS_BYTES(STRING_ELT(text, i))) {
@@ -3192,7 +3192,7 @@ HIDDEN SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!useBytes) {
-	use_WC = !IS_ASCII(STRING_ELT(pat, 0));
+	use_WC = (Rboolean) !IS_ASCII(STRING_ELT(pat, 0));
 	if(!use_WC) {
 	    for(i = 0 ; i < n ; i++) {
 		if(STRING_ELT(text, i) == NA_STRING) continue;

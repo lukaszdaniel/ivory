@@ -45,7 +45,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	s = NULL;
 	/** exact matches **/
 	for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
-	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), 1)) {
+	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), TRUE)) {
 		if (s != NULL)
 		    error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		else
@@ -55,7 +55,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	if (s == NULL)
 	    /** partial matches **/
 	    for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
-		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), 0)) {
+		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), FALSE)) {
 		    if ( s != NULL)
 			error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		    else
@@ -93,9 +93,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
     if (TYPEOF(op) == SPECIALSXP) {
 	int save = R_PPStackTop, flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
-	R_Visible = flag != 1;
+	R_Visible = (Rboolean) (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
     }
@@ -108,9 +108,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	int save = R_PPStackTop, flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	PROTECT(args = evalList(args, rho, call, 0));
-	R_Visible = flag != 1;
+	R_Visible = (Rboolean) (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	UNPROTECT(1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
@@ -340,7 +340,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
    which should be explicitly converted when an S3 method is applied
    to an object from an S4 subclass.
 */
-int isBasicClass(const char *ss) {
+int Rf_isBasicClass(const char *ss) {
     static SEXP s_S3table = NULL;
     if(!s_S3table) {
       s_S3table = findVarInFrame3(R_MethodsNamespace, install(".S3MethodsClasses"), TRUE);
@@ -357,7 +357,7 @@ int isBasicClass(const char *ss) {
 /* Note that ./attrib.c 's S4_extends() has an alternative
    'sanity check for methods package available' */
 Rboolean R_has_methods_attached(void) {
-    return(
+    return (Rboolean) (
 	isMethodsDispatchOn() &&
 	// based on unlockBinding() in ../library/methods/R/zzz.R  {since 2003}:
 	!R_BindingIsLocked(install(".BasicFunsList"), R_MethodsNamespace));
@@ -371,7 +371,7 @@ R_INLINE static SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 }
 
 HIDDEN
-SEXP createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
+SEXP Rf_createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
     SEXP v = R_NilValue;
@@ -386,8 +386,7 @@ SEXP createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 }
 
 
-static
-SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP method,
+static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP method,
 		    const char *generic, SEXP rho, SEXP callrho, SEXP defrho) {
 
     SEXP newvars = PROTECT(createS3Vars(
@@ -441,7 +440,7 @@ SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP method,
 }
 
 HIDDEN
-int usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
+int Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
     SEXP klass, method, sxp;
@@ -621,8 +620,7 @@ static SEXP fixcall(SEXP call, SEXP args)
    equalS3Signature: compares "signature" and "left.right"
    all arguments must be non-null
 */
-static
-Rboolean equalS3Signature(const char *signature, const char *left,
+static Rboolean equalS3Signature(const char *signature, const char *left,
 			 const char *right) {
 
     const char *s = signature;
@@ -959,7 +957,7 @@ HIDDEN Rboolean inherits2(SEXP x, const char *what) {
 	    PROTECT(klass = R_data_class(x, FALSE));
 	int nclass = length(klass);
 	for (int i = 0; i < nclass; i++) {
-	    if (!strcmp(CHAR(STRING_ELT(klass, i)), what)) {
+	    if (streql(CHAR(STRING_ELT(klass, i)), what)) {
 		UNPROTECT(1);
 		return TRUE;
 	    }
@@ -996,7 +994,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 
     if( !isLogical(which) || (LENGTH(which) != 1) )
 	error(_("'%s' argument must be a logical vector of length 1"), "which");
-    Rboolean isvec = asLogical(which);
+    Rboolean isvec = (Rboolean) asLogical(which);
 
     if(isvec)
 	PROTECT(rval = allocVector(INTSXP, nwhat));
@@ -1057,7 +1055,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
     for (ans = 0; ; ans++) {
 	if (!strlen(valid[ans])) // empty string
 	    break;
-	if (!strcmp(class_, valid[ans])) {
+	if (streql(class_, valid[ans])) {
 	    UNPROTECT(1); /* cl */
 	    return ans;
 	}
@@ -1087,7 +1085,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	    for (ans = 0; ; ans++) {
 		if (!strlen(valid[ans]))
 		    break;
-		if (!strcmp(s_class, valid[ans])) {
+		if (streql(s_class, valid[ans])) {
 		    UNPROTECT(2); /* superCl, cl */
 		    return ans;
 		}
@@ -1142,7 +1140,7 @@ static R_stdGen_ptr_t R_standardGeneric_ptr = 0;
 static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef);
 //#define NOT_METHODS_DISPATCH_PTR(ptr) (ptr == 0 || ptr == dispatchNonGeneric)
 static inline Rboolean NOT_METHODS_DISPATCH_PTR(R_stdGen_ptr_t ptr) {
-  return (ptr == 0 || ptr == dispatchNonGeneric);
+  return (Rboolean) (ptr == 0 || ptr == dispatchNonGeneric);
 }
 
 static
@@ -1171,7 +1169,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
     R_stdGen_ptr_t old = R_get_standardGeneric_ptr();
     int ival =  !NOT_METHODS_DISPATCH_PTR(old);
     if(length(onOff) > 0) {
-	Rboolean onOffValue = asLogical(onOff);
+	Rboolean onOffValue = (Rboolean) asLogical(onOff);
 	if(onOffValue == NA_INTEGER)
 	    error(_("'%s' argument must be TRUE or FALSE"), "onOff");
 	else if(onOffValue == FALSE)
@@ -1193,7 +1191,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 HIDDEN
 Rboolean isMethodsDispatchOn(void)
 {
-    return !NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr);
+    return (Rboolean) (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
 }
 
 
@@ -1679,7 +1677,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
     // more cautious:
-    Rboolean ans = (asLogical(e) == TRUE);
+    Rboolean ans = (Rboolean) (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
     return ans;
 }
@@ -1693,7 +1691,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
     // more cautious:
-    Rboolean ans = (asLogical(e) == TRUE);
+    Rboolean ans = (Rboolean) (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
     return ans;
 }
@@ -1718,8 +1716,8 @@ SEXP R_do_new_object(SEXP class_def)
     }
     PROTECT(e = R_do_slot(class_def, s_className));
     PROTECT(value = duplicate(R_do_slot(class_def, s_prototype)));
-    Rboolean xDataType = TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
-	TYPEOF(value) == EXTPTRSXP;
+    Rboolean xDataType = (Rboolean) (TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
+	TYPEOF(value) == EXTPTRSXP);
     if((TYPEOF(value) == S4SXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)
     {
@@ -1754,7 +1752,7 @@ HIDDEN SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
     if(flag == IS_S4_OBJECT(object))
 	return object;
     else
-      return asS4(object, flag, complete);
+      return asS4(object, (Rboolean) flag, complete);
 }
 
 #ifdef UNUSED
@@ -1771,12 +1769,12 @@ SEXP R_get_primname(SEXP object)
 #endif
 
 
-Rboolean isS4(SEXP s)
+Rboolean Rf_isS4(SEXP s)
 {
-    return IS_S4_OBJECT(s);
+    return (Rboolean) IS_S4_OBJECT(s);
 }
 
-SEXP asS4(SEXP s, Rboolean flag, int complete)
+SEXP Rf_asS4(SEXP s, Rboolean flag, int complete)
 {
     if(flag == IS_S4_OBJECT(s))
 	return s;

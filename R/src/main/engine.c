@@ -420,7 +420,7 @@ double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
  ****************************************************************
  */
 typedef struct {
-    char *name;
+    const char *name;
     R_GE_lineend end;
 } LineEND;
 
@@ -428,10 +428,10 @@ static LineEND lineend[] = {
     { "round",   GE_ROUND_CAP  },
     { "butt",	 GE_BUTT_CAP   },
     { "square",	 GE_SQUARE_CAP },
-    { NULL,	 0	     }
+    { NULL,	 (R_GE_lineend) 0 }
 };
 
-static int nlineend = (sizeof(lineend)/sizeof(LineEND)-2);
+static int nlineend = (int) ((sizeof(lineend) / sizeof(LineEND)) - 2);
 
 R_GE_lineend GE_LENDpar(SEXP value, int ind)
 {
@@ -440,10 +440,10 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
 
     if(isString(value)) {
 	for(i = 0; lineend[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), lineend[i].name)) /*ASCII */
+	    if(streql(CHAR(STRING_ELT(value, ind)), lineend[i].name)) /*ASCII */
 		return lineend[i].end;
 	}
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
@@ -463,7 +463,7 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
 	return lineend[code].end;
     }
     else {
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
 }
 
@@ -485,7 +485,7 @@ SEXP GE_LENDget(R_GE_lineend lend)
 }
 
 typedef struct {
-    char *name;
+    const char *name;
     R_GE_linejoin join;
 } LineJOIN;
 
@@ -493,10 +493,10 @@ static LineJOIN linejoin[] = {
     { "round",   GE_ROUND_JOIN },
     { "mitre",	 GE_MITRE_JOIN },
     { "bevel",	 GE_BEVEL_JOIN},
-    { NULL,	 0	     }
+    { NULL,	 (R_GE_linejoin) 0 }
 };
 
-static int nlinejoin = (sizeof(linejoin)/sizeof(LineJOIN)-2);
+static int nlinejoin = (int) ((sizeof(linejoin) / sizeof(LineJOIN)) - 2);
 
 R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 {
@@ -505,10 +505,10 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 
     if(isString(value)) {
 	for(i = 0; linejoin[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), linejoin[i].name)) /* ASCII */
+	    if(streql(CHAR(STRING_ELT(value, ind)), linejoin[i].name)) /* ASCII */
 		return linejoin[i].join;
 	}
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
@@ -528,7 +528,7 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 	return linejoin[code].join;
     }
     else {
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
 }
 
@@ -748,8 +748,7 @@ CSclipline(double *x1, double *y1, double *x2, double *y2,
 /* Clip the line
    If toDevice = 1, clip to the device extent (i.e., temporarily ignore
    dd->dev->gp.xpd) */
-static Rboolean
-clipLine(double *x1, double *y1, double *x2, double *y2,
+static Rboolean clipLine(double *x1, double *y1, double *x2, double *y2,
 	 int toDevice, pGEDevDesc dd)
 {
     int dummy1, dummy2;
@@ -997,7 +996,7 @@ void clipPoint (Edge b, double x, double y,
 	if (cross (b, x, y, cs[b].sx, cs[b].sy, clip)) {
 	    intersect (b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store,
+		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store,
 			   clip, cs);
 	    else {
 		if (store) {
@@ -1016,7 +1015,7 @@ void clipPoint (Edge b, double x, double y,
     /* proceed to next clip edge, if any */
     if (inside (b, x, y, clip)) {
 	if (b < Top)
-	    clipPoint (b + 1, x, y, xout, yout, cnt, store, clip, cs);
+	    clipPoint((Edge) (b + 1), x, y, xout, yout, cnt, store, clip, cs);
 	else {
 	    if (store) {
 		xout[*cnt] = x;
@@ -1034,12 +1033,12 @@ void closeClip (double *xout, double *yout, int *cnt, int store,
     double ix = 0.0, iy = 0.0 /* -Wall */;
     Edge b;
 
-    for (b = Left; b <= Top; b++) {
+    for (b = Left; b <= Top; b = (Edge) (b + 1)) {
 	if (cross (b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
 	    intersect (b, cs[b].sx, cs[b].sy,
 		       cs[b].fx, cs[b].fy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store, clip, cs);
+		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
 	    else {
 		if (store) {
 		    xout[*cnt] = ix;
@@ -1079,7 +1078,7 @@ static Rboolean mustClip(double xmin, double xmax, double ymin, double ymax,
 			    dd);
     else
 	getClipRect(&clip.xmin, &clip.ymin, &clip.xmax, &clip.ymax, dd);
-    return (clip.xmin > xmin || clip.xmax < xmax ||
+    return (Rboolean) (clip.xmin > xmin || clip.xmax < xmax ||
             clip.ymin > ymin || clip.ymax < ymax);
 }
 
@@ -1661,7 +1660,7 @@ static void clipText(double x, double y, const char *str, cetype_t enc,
  */
 
 typedef struct {
-    char *name;
+    const char *name;
     int minface;
     int maxface;
 } VFontTab;
@@ -2915,7 +2914,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
 
 Rboolean GErecording(SEXP call, pGEDevDesc dd)
 {
-    return (call != R_NilValue && dd->recordGraphics);
+    return (Rboolean) (call != R_NilValue && dd->recordGraphics);
 }
 
 /****************************************************************
@@ -3357,7 +3356,7 @@ int GEstring_to_pch(SEXP pch)
  */
 
 typedef struct {
-    char *name;
+    const char *name;
     int pattern;
 } LineTYPE;
 
@@ -3393,7 +3392,7 @@ unsigned int GE_LTYpar(SEXP value, int ind)
 
     if(isString(value)) {
 	for(i = 0; linetype[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), linetype[i].name))
+	    if(streql(CHAR(STRING_ELT(value, ind)), linetype[i].name))
 		return linetype[i].pattern;
 	}
 	/* otherwise, a string of hex digits: */

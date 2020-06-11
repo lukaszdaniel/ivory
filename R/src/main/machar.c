@@ -155,7 +155,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 	for(i=1 ; i<=*negep ; i++)
 		a = a * betain;
 	b = a;
-	for(;;) {
+	while(TRUE) {
 		temp = one - a;
 		if (temp - one != zero)
 			break;
@@ -175,7 +175,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 
 	*machep = -*it - 3;
 	a = b;
-	for(;;) {
+	while(TRUE) {
 		temp = one + a;
 		if (temp - one != zero)
 			break;
@@ -210,7 +210,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 	z = betain;
 	t = one + *eps;
 	nxres = 0;
-	for(;;) {
+	while(TRUE) {
 		y = z;
 		z = y * y;
 

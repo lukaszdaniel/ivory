@@ -277,9 +277,9 @@ double R_pow_di(double x, int n)
     if (n != 0) {
 	if (!R_FINITE(x)) return R_POW(x, (double)n);
 
-	Rboolean is_neg = (n < 0);
+	Rboolean is_neg = (Rboolean) (n < 0);
 	if(is_neg) n = -n;
-	for(;;) {
+	while(TRUE) {
 	    if(n & 01) xn *= x;
 	    if(n >>= 1) x *= x; else break;
 	}
@@ -786,9 +786,9 @@ static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 
     switch (code) {
     case PLUSOP:
-	return s1;
+	{return s1;}
     case MINUSOP:
-	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+{	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
 	int *pa = INTEGER(ans);
 	const int *px = INTEGER_RO(s1);
 	n = XLENGTH(s1);
@@ -797,7 +797,7 @@ static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	    pa[i] = (x == NA_INTEGER) ?
 		NA_INTEGER : ((x == 0.0) ? 0 : -x);
 	}
-	return ans;
+	return ans;}
     default:
 	errorcall(call, _("invalid unary operator"));
     }
@@ -810,15 +810,15 @@ static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
     SEXP ans;
 
     switch (code) {
-    case PLUSOP: return s1;
+    case PLUSOP: {return s1;}
     case MINUSOP:
-	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+	{ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
 	double *pa = REAL(ans);
 	const double *px = REAL_RO(s1);
 	n = XLENGTH(s1);
 	for (i = 0; i < n; i++)
 	    pa[i] = -px[i];
-	return ans;
+	return ans;}
     default:
 	errorcall(lcall, _("invalid unary operator"));
     }

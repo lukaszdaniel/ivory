@@ -64,7 +64,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 #else
     int nargs = length(args);
-    Rboolean correct_nargs = (PRIMARITY(op) == nargs);
+    Rboolean correct_nargs = (Rboolean) (PRIMARITY(op) == nargs);
     if(!correct_nargs) { // we allow one less for capture from earlier versions
 	if(PRIMARITY(op) == nargs + 1) {
 	    recycle_0 = FALSE;
@@ -96,7 +96,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *csep = NULL;
     int sepw, u_sepw;
     Rboolean sepASCII = TRUE, sepUTF8 = FALSE, sepBytes = FALSE,
-	sepKnown = FALSE, use_sep = (PRIMVAL(op) == 0);
+	sepKnown = FALSE, use_sep = (Rboolean) (PRIMVAL(op) == 0);
     if(use_sep) { /* paste(..., sep, .) */
 	sep = CADR(args);
 	if (!isString(sep) || LENGTH(sep) <= 0 || STRING_ELT(sep, 0) == NA_STRING)
@@ -105,19 +105,19 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	csep = translateChar(sep);
 	u_sepw = sepw = (int) strlen(csep); // will be short
 	sepASCII = strIsASCII(csep);
-	sepKnown = ENC_KNOWN(sep) > 0;
-	sepUTF8 = IS_UTF8(sep);
-	sepBytes = IS_BYTES(sep);
+	sepKnown = (Rboolean) (ENC_KNOWN(sep) > 0);
+	sepUTF8 = (Rboolean) (IS_UTF8(sep));
+	sepBytes = (Rboolean) (IS_BYTES(sep));
 	collapse = CADDR(args);
 	if(correct_nargs)
-	    recycle_0 = asLogical(CADDDR(args));
+	    recycle_0 = (Rboolean) asLogical(CADDDR(args));
     } else { /* paste0(..., .) */
 	u_sepw = sepw = 0; sep = R_NilValue;/* -Wall */
 	collapse = CADR(args);
 	if(correct_nargs)
-	    recycle_0 = asLogical(CADDR(args));
+	    recycle_0 = (Rboolean) asLogical(CADDR(args));
     }
-    Rboolean do_collapse = (collapse != R_NilValue); // == !isNull(collapse)
+    Rboolean do_collapse = (Rboolean) (collapse != R_NilValue); // == !isNull(collapse)
     if (do_collapse)
 	if(!isString(collapse) || LENGTH(collapse) <= 0 ||
 	   STRING_ELT(collapse, 0) == NA_STRING)
@@ -174,7 +174,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	 */
 	anyKnown = FALSE; allKnown = TRUE; use_UTF8 = FALSE; use_Bytes = FALSE;
 	if(nx > 1) {
-	    allKnown = sepKnown || sepASCII;
+	    allKnown = (Rboolean) (sepKnown || sepASCII);
 	    anyKnown = sepKnown;
 	    use_UTF8 = sepUTF8;
 	    use_Bytes = sepBytes;
@@ -213,7 +213,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	if (pwidth > INT_MAX)
 	    error(_("result would exceed 2^31-1 bytes"));
-	char *buf = R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
 	for (R_xlen_t j = 0; j < nx; j++) {
@@ -228,8 +228,8 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 		    const char *s = use_Bytes ? CHAR(cs) : translateChar(cs);
 		    strcpy(buf, s);
 		    buf += strlen(s);
-		    allKnown = allKnown && (strIsASCII(s) || (ENC_KNOWN(cs)> 0));
-		    anyKnown = anyKnown || (ENC_KNOWN(cs)> 0);
+		    allKnown = (Rboolean) (allKnown && (strIsASCII(s) || (ENC_KNOWN(cs)> 0)));
+		    anyKnown = (Rboolean) (anyKnown || (ENC_KNOWN(cs)> 0));
 		}
 	    }
 	    if (sepw != 0 && j != nx - 1) {
@@ -243,7 +243,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmax = vmaxget();
 	}
-	int ienc = 0;
+	cetype_t ienc = CE_NATIVE;
 	if(use_UTF8) ienc = CE_UTF8;
 	else if(use_Bytes) ienc = CE_BYTES;
 	else if(anyKnown && allKnown) {
@@ -257,8 +257,8 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if(do_collapse && (nx = XLENGTH(ans)) > 0) {
 	sep = STRING_ELT(collapse, 0);
-	use_UTF8 = IS_UTF8(sep);
-	use_Bytes = IS_BYTES(sep);
+	use_UTF8 = (Rboolean) (IS_UTF8(sep));
+	use_Bytes = (Rboolean) (IS_BYTES(sep));
 	for (R_xlen_t i = 0; i < nx; i++) {
 	    if(!use_UTF8  && IS_UTF8 (STRING_ELT(ans, i))) use_UTF8  = TRUE;
 	    if(!use_Bytes && IS_BYTES(STRING_ELT(ans, i))) use_Bytes = TRUE;
@@ -271,8 +271,8 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	else
 	    csep = translateChar(sep);
 	sepw = (int) strlen(csep);
-	anyKnown = ENC_KNOWN(sep) > 0;
-	allKnown = anyKnown || strIsASCII(csep);
+	anyKnown = (Rboolean) (ENC_KNOWN(sep) > 0);
+	allKnown = (Rboolean) (anyKnown || strIsASCII(csep));
 	R_xlen_t pwidth = 0;
 	const void *vmax = vmaxget();
 	for (R_xlen_t i = 0; i < nx; i++)
@@ -284,7 +284,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	pwidth += (nx - 1) * sepw;
 	if (pwidth > INT_MAX)
 	    error(_("result would exceed 2^31-1 bytes"));
-	char *buf = R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
 	for (R_xlen_t i = 0; i < nx; i++) {
@@ -300,13 +300,13 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	    strcpy(buf, s);
 	    while (*buf)
 		buf++;
-	    allKnown = allKnown &&
-		(strIsASCII(s)  || (ENC_KNOWN(STRING_ELT(ans, i)) > 0));
-	    anyKnown = anyKnown || (ENC_KNOWN(STRING_ELT(ans, i)) > 0);
+	    allKnown = (Rboolean) (allKnown &&
+		(strIsASCII(s)  || (ENC_KNOWN(STRING_ELT(ans, i)) > 0)));
+	    anyKnown = (Rboolean) (anyKnown || (ENC_KNOWN(STRING_ELT(ans, i)) > 0));
 	    if(use_UTF8) vmaxset(vmax);
 	}
 	UNPROTECT(1);
-	int ienc = CE_NATIVE;
+	cetype_t ienc = CE_NATIVE;
 	if(use_UTF8) ienc = CE_UTF8;
 	else if(use_Bytes) ienc = CE_BYTES;
 	else if(anyKnown && allKnown) {
@@ -403,7 +403,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 		pwidth += (int) strlen(translateCharFP(cs));
 	}
 	pwidth += (nx - 1) * sepw;
-	char *buf = R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
 	const char *cbuf = buf;
 	for (int j = 0; j < nx; j++) {
 	    int k = LENGTH(VECTOR_ELT(x, j));
@@ -431,7 +431,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 #endif
-	SET_STRING_ELT(ans, i, mkCharCE(cbuf, use_UTF8 ? CE_UTF8 : 0));
+	SET_STRING_ELT(ans, i, mkCharCE(cbuf, use_UTF8 ? CE_UTF8 : CE_NATIVE));
     }
     R_FreeStringBufferL(&cbuff);
     UNPROTECT(1);

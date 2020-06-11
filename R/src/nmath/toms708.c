@@ -739,7 +739,9 @@ static double bfrac(double a, double b, double x, double y, double lambda,
     }
 #ifdef DEBUG_bratio
     else
-	REprintf("\n");
+	{
+		{REprintf("\n")};
+	}
 #endif
 
     c = lambda + 1.;

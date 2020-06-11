@@ -46,7 +46,7 @@ static int NextWriteBufferListItem(IoBuffer *iob)
     }
     else {
 	BufferListItem *_new;
-	if (!(_new = (BufferListItem*)malloc(sizeof(BufferListItem))))
+	if (!(_new = (BufferListItem*) malloc(sizeof(BufferListItem))))
 	    return 0;
 	_new->next = NULL;
 	iob->write_buf->next = _new;
@@ -102,7 +102,7 @@ HIDDEN int R_IoBufferReadReset(IoBuffer *iob)
 HIDDEN int R_IoBufferInit(IoBuffer *iob)
 {
     if (iob == NULL) return 0;
-    iob->start_buf = (BufferListItem*)malloc(sizeof(BufferListItem));
+    iob->start_buf = (BufferListItem*) malloc(sizeof(BufferListItem));
     if (iob->start_buf == NULL) return 0;
     iob->start_buf->next = NULL;
     return R_IoBufferWriteReset(iob);
@@ -174,7 +174,7 @@ HIDDEN int R_IoBufferReadOffset(IoBuffer *iob)
     }
     return result;
 }
-    
+
 /* Initialization code for text buffers */
 
 static void transferChars(unsigned char *p, const char *q)

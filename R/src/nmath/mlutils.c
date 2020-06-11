@@ -96,7 +96,7 @@ double R_pow_di(double x, int n)
     if (n != 0) {
 	if (!R_FINITE(x)) return R_pow(x, (double)n);
 	if (n < 0) { n = -n; x = 1/x; }
-	for(;;) {
+	while(TRUE) {
 	    if(n & 01) pow *= x;
 	    if(n >>= 1) x *= x; else break;
 	}

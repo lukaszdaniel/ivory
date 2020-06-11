@@ -265,7 +265,7 @@ HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
     for (R_xlen_t i = 0; i < len; i++) {
 	SEXP sxi = STRING_ELT(x, i);
 	char msg_i[30]; sprintf(msg_i, _("element %ld"), (long)i+1);
-	s_[i] = R_nchar(sxi, type_, allowNA, keepNA, msg_i);
+	s_[i] = R_nchar(sxi, type_, (Rboolean) allowNA, (Rboolean) keepNA, msg_i);
     }
     R_FreeStringBufferL(&cbuff);
     if ((d = getAttrib(x, R_NamesSymbol)) != R_NilValue)
@@ -591,7 +591,7 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		/* just copy element across */
 		SET_STRING_ELT(s, i, STRING_ELT(x, i));
 	    } else {
-		int ienc2 = ienc;
+		cetype_t ienc2 = ienc;
 		v_ss = CHAR(v_el);
 		/* is the value in the same encoding?
 		   FIXME: could prefer UTF-8 here
@@ -604,7 +604,7 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		    ienc2 = CE_NATIVE;
 		}
 		/* might expand under MBCS */
-		buf = R_AllocStringBuffer(slen+strlen(v_ss), &cbuff);
+		buf = (char*) R_AllocStringBuffer(slen+strlen(v_ss), &cbuff);
 		strcpy(buf, ss);
 		substrset(buf, v_ss, ienc2, start, stop, i, i % v);
 		SET_STRING_ELT(s, i, mkCharCE(buf, ienc2));
@@ -1577,7 +1577,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    w = INTEGER(width)[i % nw];
 	    This = translateChar(STRING_ELT(x, i));
 	    nc = (int) strlen(This);
-	    buf = R_AllocStringBuffer(nc, &cbuff);
+	    buf = (char*) R_AllocStringBuffer(nc, &cbuff);
 	    wsum = 0;
 	    mbs_init(&mb_st);
 	    for (p = This, w0 = 0, q = buf; *p ;) {

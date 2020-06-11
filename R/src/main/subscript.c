@@ -809,15 +809,14 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
  * large, then it will be too slow unless ns is very small.
  */
 
-static SEXP
-stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
+static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 		R_xlen_t *stretch, SEXP call)
 {
     SEXP indx, indexnames = R_NilValue;
     R_xlen_t i, j, nnames, extra, sub;
     int canstretch = *stretch > 0;
     /* product may overflow, so check factors as well. */
-    Rboolean usehashing = ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
+    Rboolean usehashing = (Rboolean) ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
     int nprotect = 0;
 
     PROTECT(s);
@@ -909,8 +908,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     x is the array to be subscripted.
 */
 
-HIDDEN SEXP
-int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
+HIDDEN SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
     int nd, ns;
     R_xlen_t stretch = 0;
@@ -951,8 +949,7 @@ int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 typedef SEXP AttrGetter(SEXP x, SEXP data);
 typedef SEXP (*StringEltGetter)(SEXP x, int i);
 
-SEXP
-arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
+SEXP Rf_arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
 	       StringEltGetter strg, SEXP x)
 {
     return int_arraySubscript(dim, s, dims, x, R_NilValue);
@@ -966,8 +963,7 @@ arraySubscript(int dim, SEXP s, SEXP dims, AttrGetter dng,
    otherwise, stretch returns the new required length for x
 */
 
-HIDDEN SEXP
-makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
+HIDDEN SEXP Rf_makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
 {
     if (! (isVector(x) || isList(x) || isLanguage(x))) {
 	ECALL(call, _("subscripting on non-vector"));

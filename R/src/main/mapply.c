@@ -24,8 +24,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
-HIDDEN SEXP
-do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
+HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
@@ -35,7 +34,7 @@ do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     m = length(varyingArgs);
     SEXP vnames = PROTECT(getAttrib(varyingArgs, R_NamesSymbol));
-    Rboolean named = vnames != R_NilValue;
+    Rboolean named = (Rboolean) (vnames != R_NilValue);
 
     lengths = (R_xlen_t *)  R_alloc(m, sizeof(R_xlen_t));
     for (int i = 0; i < m; i++) {
@@ -78,7 +77,7 @@ do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_INDEX fi;
     PROTECT_WITH_INDEX(fcall, &fi);
 
-    Rboolean realIndx = longest > INT_MAX;
+    Rboolean realIndx = (Rboolean) (longest > INT_MAX);
     SEXP Dots = install("dots");
     for (int j = m - 1; j >= 0; j--) {
 	SET_VECTOR_ELT(mindex, j, ScalarInteger(j + 1));

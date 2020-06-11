@@ -82,7 +82,8 @@ HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     case PLUSOP:
 	return s1;
     case MINUSOP:
-	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
+	{
+	ans = NO_REFERENCES(s1) ? s1 : Rf_duplicate(s1);
 	Rcomplex *pans = COMPLEX(ans);
 	const Rcomplex *ps1 = COMPLEX_RO(s1);
 	n = XLENGTH(s1);
@@ -92,6 +93,7 @@ HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	    pans[i].i = -x.i;
 	}
 	return ans;
+	}
     default:
 	errorcall(call, _("invalid complex unary operator"));
     }
@@ -1402,8 +1404,7 @@ double errev(int n, double *qr, double *qi,
 }
 
 
-static
-double cpoly_cauchy(int n, double *pot, double *q)
+static double cpoly_cauchy(int n, double *pot, double *q)
 {
     /* Computes a lower bound on the moduli of the zeros of a polynomial
      * pot[1:nn] is the modulus of the coefficients.
@@ -1427,7 +1428,7 @@ double cpoly_cauchy(int n, double *pot, double *q)
 
     /* chop the interval (0,x) unitl f le 0. */
 
-    for(;;) {
+    while(TRUE) {
 	xm = x * 0.1;
 	f = pot[0];
 	for (i = 1; i < n; i++)
@@ -1456,8 +1457,7 @@ double cpoly_cauchy(int n, double *pot, double *q)
     return x;
 }
 
-static
-double cpoly_scale(int n, double *pot,
+static double cpoly_scale(int n, double *pot,
 		   double eps, double BIG, double small, double base)
 {
     /* Returns a scale factor to multiply the coefficients of the polynomial.
@@ -1503,8 +1503,7 @@ double cpoly_scale(int n, double *pot,
 }
 
 
-static
-void cdivid(double ar, double ai, double br, double bi,
+static void cdivid(double ar, double ai, double br, double bi,
 	    double *cr, double *ci)
 {
 /* complex division c = a/b, i.e., (cr +i*ci) = (ar +i*ai) / (br +i*bi),

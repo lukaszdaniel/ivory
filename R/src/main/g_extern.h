@@ -48,9 +48,11 @@
 /* PAUL MURRELL
    This type def taken from sys-defines.h
 */
+#ifndef __cplusplus
 typedef int bool;
 #define false 0
 #define true 1
+#endif
 
 /*************************************************************************/
 /* DEFINITIONS RELATED TO OUR FONT DATABASE (g_fontdb.c and g_fontd2.c)  */

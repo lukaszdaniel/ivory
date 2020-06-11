@@ -42,18 +42,16 @@ static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
     int oldvis = R_Visible;
     SEXP val = eval(e, rho);
-    R_Visible = oldvis;
+    R_Visible = (Rboolean) oldvis;
     return val;
 }
 
 #ifndef min
-#define min(a, b) (a<b?a:b)
+#define min(a, b) (a < b ? a : b)
 #endif
 
 /* Total line length, in chars, before splitting in warnings/errors */
-#define LONGWARN max(75, (GetOptionWidth()-5))
-
-
+#define LONGWARN max(75, (GetOptionWidth() - 5))
 
 /*
 Different values of inError are used to indicate different places
@@ -70,7 +68,7 @@ static void try_jump_to_restart(void);
 NORET static void
 jump_to_top_ex(Rboolean, Rboolean, Rboolean, Rboolean, Rboolean);
 static void signalInterrupt(void);
-static char * R_ConciseTraceback(SEXP call, int skip);
+static const char * R_ConciseTraceback(SEXP call, int skip);
 
 /* Interface / Calling Hierarchy :
 
@@ -179,7 +177,7 @@ static void onintrEx(Rboolean resumeOK)
        user error handler. But we have been, so as a transition,
        continue to use options('error') if options('interrupt') is not
        set */
-    Rboolean tryUserError = GetOption1(install("interrupt")) == R_NilValue;
+    Rboolean tryUserError = (Rboolean) (GetOption1(install("interrupt")) == R_NilValue);
 
     REprintf("\n");
     /* Attempt to save a traceback, show warnings, and reset console;
@@ -387,7 +385,7 @@ static void reset_inWarning(void *data)
 
 #include <rlocale.h>
 
-static int wd(const char * buf)
+static int wd(const char *buf)
 {
     int nc = (int) mbstowcs(NULL, buf, 0), nw;
     if(nc > 0 && nc < 2000) {
@@ -574,11 +572,12 @@ void Rf_PrintWarnings(const char *hdr)
 	    REprintf(_("In command '%s':"), dcall);
 	    if (mbcslocale) {
 		int msgline1;
-		char *p = strchr(msg, '\n');
+		const char *p = strchr(msg, '\n');
 		if (p) {
-		    *p = '\0';
+		    char *q = (char*) (p);
+		    *q = '\0';
 		    msgline1 = wd(msg);
-		    *p = '\n';
+		    *q = '\n';
 		} else msgline1 = wd(msg);
 		if (6 + wd(dcall) + msgline1 > LONGWARN) REprintf("\n ");
 	    } else {
@@ -602,7 +601,7 @@ void Rf_PrintWarnings(const char *hdr)
 		REprintf(_("In command '%s':"), dcall); 
 		if (mbcslocale) {
 		    int msgline1;
-		    char *p = strchr(msg, '\n');
+		    char *p = (char*) strchr(msg, '\n');
 		    if (p) {
 			*p = '\0';
 			msgline1 = wd(msg);
@@ -623,17 +622,21 @@ void Rf_PrintWarnings(const char *hdr)
 	    }
 	}
     } else {
-	if (R_CollectWarnings < R_nwarnings)
-	    REprintf(n_("There was %d warning (use 'warnings()' to see it)",
-			      "There were %d warnings (use 'warnings()' to see them)", 
-			      R_CollectWarnings), 
-		     R_CollectWarnings);
-	else
-	    REprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"), 
-		     R_nwarnings, R_nwarnings);
-	REprintf("\n");
-    }
-    /* now truncate and install last.warning */
+		if (R_CollectWarnings < R_nwarnings)
+		{
+			REprintf(n_("There was %d warning (use 'warnings()' to see it)",
+						"There were %d warnings (use 'warnings()' to see them)",
+						R_CollectWarnings),
+					 R_CollectWarnings);
+		}
+		else
+		{
+			REprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"),
+					 R_nwarnings, R_nwarnings);
+		}
+		REprintf("\n");
+	}
+	/* now truncate and install last.warning */
     PROTECT(s = allocVector(VECSXP, R_CollectWarnings));
     PROTECT(t = allocVector(STRSXP, R_CollectWarnings));
     names = CAR(ATTRIB(R_Warnings));
@@ -707,7 +710,8 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	R_checkConstants(TRUE);
     }
     RCNTXT cntxt;
-    char *p, *tr;
+    char *p;
+    const char *tr;
     int oldInError;
 
     if (inError) {
@@ -743,12 +747,12 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	const char *head = _("Error in command:"), *tail = "\n  ";
 	SEXP srcloc = R_NilValue; // -Wall
 	size_t len = 0;	// indicates if srcloc has been set
-	int protected = 0, skip = NA_INTEGER;
+	int nprotect = 0, skip = NA_INTEGER;
 	SEXP opt = GetOption1(install("show.error.locations"));
 	if (!isNull(opt)) {
 	    if (TYPEOF(opt) == STRSXP && length(opt) == 1) {
-	    	if (pmatch(ScalarString(mkChar("top")), opt, 0)) skip = 0;
-	    	else if (pmatch(ScalarString(mkChar("bottom")), opt, 0)) skip = -1;
+	    	if (pmatch(ScalarString(mkChar("top")), opt, FALSE)) skip = 0;
+	    	else if (pmatch(ScalarString(mkChar("bottom")), opt, FALSE)) skip = -1;
 	    } else if (TYPEOF(opt) == LGLSXP)
 	    	skip = asLogical(opt) == 1 ? 0 : NA_INTEGER;
 	    else
@@ -759,7 +763,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s': "), dcall); 
 	if (skip != NA_INTEGER) {
 	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(skip)));
-	    protected++;
+	    nprotect++;
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
 		Rsnprintf(tmp2, BUFSIZE,  _("Error in command '%s' (from %s): "), 
@@ -797,7 +801,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    Rsnprintf(errbuf, BUFSIZE, _("Error: "));
 	    ERRBUFCAT(tmp); // FIXME
 	}
-	UNPROTECT(protected);
+	UNPROTECT(nprotect);
     }
     else {
 	Rsnprintf(errbuf, BUFSIZE, _("Error: "));
@@ -1334,7 +1338,7 @@ const ErrorDB[] = {
 
 static struct {
     R_WARNING code;
-    char* format;
+    const char* format;
 }
 WarningDB[] = {
     { WARNING_coerce_NA,	N_("NA values introduced by coercion")	},
@@ -1504,7 +1508,7 @@ SEXP R_GetTraceback(int skip)
     u = v = PROTECT(allocList(nback));
 
     for(t = s; t != R_NilValue; t = CDR(t), v=CDR(v)) {
-        SETCAR(v, PROTECT(deparse1m(CAR(t), 0, DEFAULTDEPARSE)));
+        SETCAR(v, PROTECT(deparse1m(CAR(t), FALSE, DEFAULTDEPARSE)));
         UNPROTECT(1);
     }
     UNPROTECT(2);
@@ -1524,7 +1528,7 @@ HIDDEN SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_GetTraceback(skip);
 }
 
-static char *R_ConciseTraceback(SEXP call, int skip)
+static const char *R_ConciseTraceback(SEXP call, int skip)
 {
     static char buf[560];
     RCNTXT *c;
@@ -2058,7 +2062,7 @@ HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int orig_value = R_interrupts_suspended;
     if (args != R_NilValue)
-	R_interrupts_suspended = asLogical(CAR(args));
+	R_interrupts_suspended = (Rboolean) asLogical(CAR(args));
     return ScalarLogical(orig_value);
 }
 
@@ -2074,7 +2078,7 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
     int nprotect = 0;
     char *check = getenv(varname);
     const void *vmax = vmaxget();
-    Rboolean err = check && StringTrue(check);
+    Rboolean err = (Rboolean) (check && StringTrue(check));
     if (!err && check && StringFalse(check))
 	check = NULL; /* disabled */
     Rboolean abort = FALSE; /* R_Suicide/abort */
@@ -2125,7 +2129,7 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
 		    if (streqln(check, cpname, arglen) && lcpname == arglen) {
 			/* package name specified in _R_CHECK_PACKAGE_NAME */
 			const char *envpname = getenv(cpname);
-			if (envpname && !strcmp(envpname, pkgname))
+			if (envpname && streql(envpname, pkgname))
 			    ignore = FALSE;
 		    }
 		}
@@ -2343,7 +2347,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
     PROTECT(expr);
     SEXP val = evalKeepVis(expr, R_GlobalEnv);
     UNPROTECT(2); /* conds, expr */
-    R_interrupts_suspended = tcd.suspended;
+    R_interrupts_suspended = (Rboolean) tcd.suspended;
     return val;
 }
 
@@ -2356,7 +2360,7 @@ SEXP do_tryCatchHelper(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(eptr) != EXTPTRSXP)
 	error(_("this is not an external pointer"));
 
-    tryCatchData_t *ptcd = R_ExternalPtrAddr(CAR(args));
+    tryCatchData_t *ptcd = (tryCatchData_t*) R_ExternalPtrAddr(CAR(args));
 
     switch (asInteger(sw)) {
     case 0:

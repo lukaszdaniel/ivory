@@ -40,7 +40,7 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
 #ifdef DEBUG_qbinom
 	REprintf("\tnew z=%7g >= p = %7g  --> search to left (y--) ..\n", z,p);
 #endif
-	for(;;) {
+	while(TRUE) {
 	    double newz;
 	    if(y == 0 ||
 	       (newz = Rf_pbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
@@ -53,7 +53,7 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
 #ifdef DEBUG_qbinom
 	REprintf("\tnew z=%7g < p = %7g  --> search to right (y++) ..\n", z,p);
 #endif
-	for(;;) {
+	while(TRUE) {
 	    y = Rf_fmin2(y + incr, n);
 	    if(y == n ||
 	       (*z = Rf_pbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)

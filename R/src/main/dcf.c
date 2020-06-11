@@ -34,7 +34,7 @@ static void transferVector(SEXP s, SEXP t);
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = data;
+    Rconnection con = (Rconnection) data;
     if(con->isopen) con->close(con);
 }
 
@@ -107,7 +107,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
     args = CDR(args);
     PROTECT(fold_excludes = coerceVector(CAR(args), STRSXP));
-    has_fold_excludes = (LENGTH(fold_excludes) > 0);
+    has_fold_excludes = (Rboolean) (LENGTH(fold_excludes) > 0);
 
     buf = (char *) malloc(buflen);
     if(!buf) error(_("could not allocate memory for 'read.dcf()' function"));
@@ -314,7 +314,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* and now transpose the whole matrix */
     PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what)));
-    copyMatrix(retval2, retval, 1);
+    copyMatrix(retval2, retval, TRUE);
 
     PROTECT(dimnames = allocVector(VECSXP, 2));
     PROTECT(dims = allocVector(INTSXP, 2));

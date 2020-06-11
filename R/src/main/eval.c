@@ -789,7 +789,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    int save = R_PPStackTop, flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    PROTECT(e);
-	    R_Visible = flag != 1;
+	    R_Visible = (Rboolean) (flag != 1);
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
 	    if(flag < 2 && R_Visible == flag) {
@@ -800,7 +800,7 @@ SEXP eval(SEXP e, SEXP rho)
 		    printf(_("vis: special %s\n", nm));
 	    }
 #endif
-	    if (flag < 2) R_Visible = flag != 1;
+	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	    vmaxset(vmax);
@@ -810,7 +810,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    const void *vmax = vmaxget();
 	    RCNTXT cntxt;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	    if (flag < 2) R_Visible = flag != 1;
+	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	    /* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
 	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
@@ -830,7 +830,7 @@ SEXP eval(SEXP e, SEXP rho)
 		printf(_("vis: builtin %s\n"), nm);
 	    }
 #endif
-	    if (flag < 2) R_Visible = flag != 1;
+	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	    vmaxset(vmax);
@@ -860,7 +860,7 @@ SEXP eval(SEXP e, SEXP rho)
 }
 
 HIDDEN
-void SrcrefPrompt(const char * prefix, SEXP srcref)
+void Rf_SrcrefPrompt(const char * prefix, SEXP srcref)
 {
     /* If we have a valid srcref, use it */
     if (srcref && srcref != R_NilValue) {
@@ -998,7 +998,7 @@ static void checkCompilerOptions(int jitEnabled)
     PROTECT(call = lang2(fcall, arg));
     eval(call, R_GlobalEnv);
     UNPROTECT(3);
-    R_Visible = old_visible;
+    R_Visible = (Rboolean) old_visible;
 }
 
 static SEXP R_IfSymbol = NULL;
@@ -1407,7 +1407,7 @@ HIDDEN SEXP R_cmpfun1(SEXP fun)
 	R_gc();
     UNPROTECT(3); /* fcall, call, val */
 
-    R_Visible = old_visible;
+    R_Visible = (Rboolean) old_visible;
     return val;
 }
 
@@ -1487,7 +1487,7 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     PROTECT(call = lang5(fcall, qexpr, rho, R_NilValue, R_getCurrentSrcref()));
     val = eval(call, R_GlobalEnv);
     UNPROTECT(3);
-    R_Visible = old_visible;
+    R_Visible = (Rboolean) old_visible;
     return val;
 }
 
@@ -1794,7 +1794,7 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
 
 #ifdef ADJUST_ENVIR_REFCNTS
     Rboolean is_getter_call =
-	(CADR(call) == R_TmpvalSymbol && ! R_isReplaceSymbol(CAR(call)));
+	(Rboolean) (CADR(call) == R_TmpvalSymbol && ! R_isReplaceSymbol(CAR(call)));
 #endif
 
     /*  If we have a generic function we need to use the sysparent of
@@ -1903,15 +1903,15 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(e);
-	R_Visible = flag != 1;
+	R_Visible = (Rboolean) (flag != 1);
 	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
 	if (R_Profiling || (PPINFO(fun).kind == PP_FOREIGN)) {
@@ -1926,7 +1926,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	} else {
 	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
 	}
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == CLOSXP) {
@@ -2131,7 +2131,7 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
 */
 R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
 {
-    Rboolean cond = NA_LOGICAL;
+    Rboolean cond = (Rboolean) NA_LOGICAL;
 
     /* handle most common special case directly */
     if (IS_SCALAR(s, LGLSXP)) {
@@ -2142,7 +2142,7 @@ R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
     else if (IS_SCALAR(s, INTSXP)) {
 	int val = SCALAR_IVAL(s);
 	if (val != NA_INTEGER)
-	    return val != 0;
+	    return (Rboolean) (val != 0);
     }
 
     int len = length(s);
@@ -2161,13 +2161,13 @@ R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
 	/* inline common cases for efficiency */
 	switch(TYPEOF(s)) {
 	case LGLSXP:
-	    cond = LOGICAL(s)[0];
+	    cond = (Rboolean) LOGICAL(s)[0];
 	    break;
 	case INTSXP:
-	    cond = INTEGER(s)[0]; /* relies on NA_INTEGER == NA_LOGICAL */
+	    cond = (Rboolean) INTEGER(s)[0]; /* relies on NA_INTEGER == NA_LOGICAL */
 	    break;
 	default:
-	    cond = asLogical(s);
+	    cond = (Rboolean) asLogical(s);
 	}
     }
 
@@ -2187,7 +2187,7 @@ R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
     ((isLanguage(body) && CAR(body) == R_BraceSymbol) ? 1 : 0)
 */
 R_INLINE static Rboolean BodyHasBraces(SEXP body) {
- return (isLanguage(body) && CAR(body) == R_BraceSymbol);
+ return (Rboolean) (isLanguage(body) && CAR(body) == R_BraceSymbol);
  }
 
 /* Allocate space for the loop variable value the first time through
@@ -2348,7 +2348,7 @@ HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    switch (val_type) {
 	    case LGLSXP:
 		ALLOC_LOOP_VAR(v, val_type, vpi);
-		SET_SCALAR_LVAL(v, LOGICAL_ELT(val, i));
+		SET_SCALAR_LVAL(v, (Rboolean) LOGICAL_ELT(val, i));
 		break;
 	    case INTSXP:
 		ALLOC_LOOP_VAR(v, val_type, vpi);
@@ -2417,7 +2417,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
     if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK) {
-	for(;;) {
+	while(TRUE) {
 	    SEXP cond = PROTECT(eval(CAR(args), rho));
 	    int condl = asLogicalNoNA(cond, call, rho);
 	    UNPROTECT(1);
@@ -3008,7 +3008,7 @@ R_INLINE static void COPY_TAG(SEXP to, SEXP from) {
    'n' is the number of arguments already evaluated and hence not
    passed to evalArgs and hence to here.
  */
-HIDDEN SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
+HIDDEN SEXP Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3096,7 +3096,7 @@ HIDDEN SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
 /* used in evalArgs, arithmetic.c, seq.c */
-HIDDEN SEXP evalListKeepMissing(SEXP el, SEXP rho)
+HIDDEN SEXP Rf_evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3722,7 +3722,7 @@ int Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
     int i, nargs, lwhich, rwhich;
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;
     SEXP rclass, rmeth, rgr, rsxp, value;
-    char *generic;
+    const char *generic;
     Rboolean useS4 = TRUE, isOps = FALSE;
 
     /* pre-test to avoid string computations when there is nothing to
@@ -3735,7 +3735,7 @@ int Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 	(CDR(args) == R_NilValue || ! isObject(CADR(args))))
 	return 0;
 
-    isOps = strcmp(group, "Ops") == 0;
+    isOps = streql(group, "Ops");
 
     /* try for formal method */
     if(length(args) == 1 && !IS_S4_OBJECT(CAR(args))) useS4 = FALSE;
@@ -3756,7 +3756,7 @@ int Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
     /* check whether we are processing the default method */
     if ( isSymbol(CAR(call)) ) {
 	const char *cstr = strchr(CHAR(PRINTNAME(CAR(call))), '.');
-	if (cstr && !strcmp(cstr + 1, "default"))
+	if (cstr && streql(cstr + 1, "default"))
 	    return 0;
     }
 
@@ -4950,7 +4950,7 @@ typedef union { void *v; int i; } BCODE;
    in bcEval stack frames and thus increasing stack usage
    dramatically */
 volatile
-static struct { void *addr; int argc; char *instname; } opinfo[OPCOUNT];
+static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
 
 #define OP(name,n) \
   case name##_OP: opinfo[name##_OP].addr = (__extension__ &&op_##name); \
@@ -5365,7 +5365,7 @@ R_INLINE static void SETCALLARG_TAG_SYMBOL(SEXP tag) {
             SET_TAG(cell, tag);
  }
 
-static int tryDispatch(char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
+static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
 {
   RCNTXT cntxt;
   SEXP pargs, rho1;
@@ -5404,7 +5404,7 @@ static int tryDispatch(char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
   return dispatched;
 }
 
-static int tryAssignDispatch(char *generic, SEXP call, SEXP lhs, SEXP rhs,
+static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
 			     SEXP rho, SEXP *pv)
 {
     int result;
@@ -6247,7 +6247,7 @@ R_INLINE static SEXP SymbolValue(SEXP sym)
    true BUILTIN from a .Internal. LT */
 //#define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
 R_INLINE static Rboolean IS_TRUE_BUILTIN(SEXP x) {
- return ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0);
+ return (Rboolean) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0);
  }
 
 /* rho only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name */
@@ -6255,7 +6255,7 @@ R_INLINE static Rboolean GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 						    SEXP constants, SEXP rho)
 {
     if (s->tag == LGLSXP && s->u.ival != NA_LOGICAL)
-	return s->u.ival;
+	return (Rboolean) s->u.ival;
 
     SEXP value = GETSTACK_PTR(s);
     if (IS_SCALAR(value, LGLSXP)) {
@@ -6273,7 +6273,7 @@ R_INLINE static Rboolean GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 #define GETSTACK_LOGICAL(n) GETSTACK_LOGICAL_PTR(R_BCNodeStackTop + (n))
 R_INLINE static Rboolean GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
-    if (s->tag == LGLSXP) return s->u.ival;
+    if (s->tag == LGLSXP) return (Rboolean) s->u.ival;
     SEXP value = GETSTACK_PTR(s);
     return SCALAR_LVAL(value);
 }
@@ -6358,7 +6358,7 @@ static Rboolean maybeClosureWrapper(SEXP expr)
 
 	return FALSE;
 
-    return CDR(expr) != R_NilValue && CADR(expr) != R_NilValue;
+    return (Rboolean) (CDR(expr) != R_NilValue && CADR(expr) != R_NilValue);
 }
 
 static Rboolean maybeAssignmentCall(SEXP expr)
@@ -6370,7 +6370,7 @@ static Rboolean maybeAssignmentCall(SEXP expr)
 	return FALSE;
     const char *name = CHAR(PRINTNAME(CAR(expr)));
     size_t slen = strlen(name);
-    return slen > 2 && name[slen-2] == '<' && name[slen-1] == '-';
+    return (Rboolean) (slen > 2 && name[slen-2] == '<' && name[slen-1] == '-');
 }
 
 /* Check if the given expression is a call to a name that is also
@@ -6384,7 +6384,7 @@ static Rboolean maybePrimitiveCall(SEXP expr)
 	SEXP value = SYMVALUE(CAR(expr));
 	if (TYPEOF(value) == PROMSXP)
 	    value = PRVALUE(value);
-	return TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP;
+	return (Rboolean) (TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP);
     }
     return FALSE;
 }
@@ -6495,8 +6495,8 @@ HIDDEN Rboolean R_BCVersionOK(SEXP s)
     int version = GETOP();
 
     /* must be kept in sync with bcEval version check */
-    return version < 2 ||
-	(version >= R_bcMinVersion && version <= R_bcVersion);
+    return (Rboolean) (version < 2 ||
+	(version >= R_bcMinVersion && version <= R_bcVersion));
 }
 
 static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
@@ -6510,6 +6510,10 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
   SEXP oldbcbody = R_BCbody;
   void *oldbcpc = R_BCpc;
   BCODE *currentpc = NULL;
+  int old_byte_code = FALSE;
+  Rboolean smallcache = TRUE;
+  R_binding_cache_t vcache = NULL;
+  R_bcstack_t *ibcl_oldptop = NULL;
 
 #ifdef BC_PROFILING
   int old_current_opcode = current_opcode;
@@ -6530,7 +6534,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 
   /* check version */
   /* must be kept in sync with R_BCVersionOK */
-  int old_byte_code = FALSE; /* drop eventually */
+  old_byte_code = FALSE; /* drop eventually */
   {
       int version = GETOP();
       if (version < 12) old_byte_code = TRUE;  /* drop eventually */
@@ -6551,14 +6555,18 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
       }
   }
 
-  INCREMENT_BCSTACK_LINKS();
+    ibcl_oldptop = R_BCProtTop;
+    do {
+	if (R_BCNodeStackTop > R_BCProtTop)
+	    INCLNK_stack(R_BCNodeStackTop);
+    } while (0);
 
   R_Srcref = R_InBCInterpreter;
   R_BCIntActive = 1;
   R_BCbody = body;
   R_BCpc = &currentpc;
-  R_binding_cache_t vcache = NULL;
-  Rboolean smallcache = TRUE;
+  vcache = NULL;
+  smallcache = TRUE;
 #ifdef USE_BINDING_CACHE
   if (useCache) {
       R_len_t n = LENGTH(constants);
@@ -6619,7 +6627,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
 	{
-	    Rboolean is_for_loop = GETOP();
+	    Rboolean is_for_loop = (Rboolean) GETOP();
 	    R_bcstack_t *oldtop = R_BCNodeStackTop;
 	    RCNTXT *cntxt = BCNALLOC_CNTXT();
 	    BCNPUSH_INTEGER(GETOP());       /* pc offset for 'break' */
@@ -6662,7 +6670,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	}
     OP(ENDLOOPCNTXT, 1):
 	{
-	    Rboolean is_for_loop = GETOP();
+	    Rboolean is_for_loop = (Rboolean) GETOP();
 	    if (is_for_loop) {
 		int offset = GET_FOR_LOOP_BCPROT_OFFSET();
 		DECLNK_stack(R_BCNodeStackBase + offset);
@@ -6818,7 +6826,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 		NEXT();
 	    }
 	    GET_VEC_LOOP_VALUE(value);
-	    SET_SCALAR_LVAL(value, LOGICAL_ELT(seq, i));
+	    SET_SCALAR_LVAL(value, (Rboolean) LOGICAL_ELT(seq, i));
 	    SET_FOR_LOOP_VAR(value, cell, loopinfo, rho);
 	    NEXT();
 	  case CPLXSXP:
@@ -7100,15 +7108,15 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	  args = BUILTIN_CALL_FRAME_ARGS();
 	  checkForMissings(args, call);
 	  flag = PRIMPRINT(fun);
-	  R_Visible = flag != 1;
+	  R_Visible = (Rboolean) (flag != 1);
 	  value = PRIMFUN(fun) (call, fun, args, rho);
-	  if (flag < 2) R_Visible = flag != 1;
+	  if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	  break;
 	case SPECIALSXP:
 	  flag = PRIMPRINT(fun);
-	  R_Visible = flag != 1;
+	  R_Visible = (Rboolean) (flag != 1);
 	  value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	  if (flag < 2) R_Visible = flag != 1;
+	  if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	  break;
 	case CLOSXP:
 	  args = CLOSURE_CALL_FRAME_ARGS();
@@ -7132,7 +7140,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	if (TYPEOF(fun) != BUILTINSXP)
 	  error(_("'%s' is not a '%s' function"), CHAR(PRINTNAME(fun)), "BUILTIN");
 	flag = PRIMPRINT(fun);
-	R_Visible = flag != 1;
+	R_Visible = (Rboolean) (flag != 1);
 	SEXP value;
 	if (R_Profiling && IS_TRUE_BUILTIN(fun)) {
 	    RCNTXT cntxt;
@@ -7146,7 +7154,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	} else {
 	    value = PRIMFUN(fun) (call, fun, args, rho);
 	}
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	vmaxset(vmax);
 	POP_CALL_FRAME(value);
 	NEXT();
@@ -7163,9 +7171,9 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	  PrintValue(symbol);
 	}
 	flag = PRIMPRINT(fun);
-	R_Visible = flag != 1;
+	R_Visible = (Rboolean) (flag != 1);
 	SEXP value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	if (flag < 2) R_Visible = flag != 1;
+	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
 	vmaxset(vmax);
 	BCNPUSH(value);
 	NEXT();
@@ -7358,7 +7366,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
     OP(ISINTEGER, 0): {
 	SEXP arg = GETSTACK(-1);
-	Rboolean test = (TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor");
+	Rboolean test = (Rboolean) ((TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor"));
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
 	R_Visible = TRUE;
 	NEXT();
@@ -7659,7 +7667,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	       which = n - 1;
 	       for (i = 0; i < n - 1; i++)
 		   if (pmatch(STRING_ELT(value, 0),
-			      STRING_ELT(names, i), 1 /* exact */)) {
+			      STRING_ELT(names, i), TRUE /* exact */)) {
 		       which = i;
 		       break;
 		   }

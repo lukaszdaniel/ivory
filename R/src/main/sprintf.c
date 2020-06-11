@@ -81,7 +81,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     int i, nargs, cnt, v, thislen, nfmt, nprotect = 0;
     /* fmt2 is a copy of fmt with '*' expanded.
        bit will hold numeric formats and %<w>s, so be quite small. */
-    char fmt[MAXLINE+1], fmt2[MAXLINE+10], *fmtp, bit[MAXLINE+1],
+    char fmt[MAXLINE + 1], fmt2[MAXLINE + 10], *fmtp, bit[MAXLINE + 1],
 	*outputString;
     const char *formatString;
     size_t n, cur, chunk;
@@ -133,12 +133,12 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
     CHECK_maxlen;
 
-    outputString = R_AllocStringBuffer(0, &outbuff);
+    outputString = (char*) R_AllocStringBuffer(0, &outbuff);
 
     /* We do the format analysis a row at a time */
     for(ns = 0; ns < maxlen; ns++) {
 	outputString[0] = '\0';
-	use_UTF8 = getCharCE(STRING_ELT(format, ns % nfmt)) == CE_UTF8;
+	use_UTF8 = (Rboolean) (getCharCE(STRING_ELT(format, ns % nfmt)) == CE_UTF8);
 	if (!use_UTF8) {
 	    for(i = 0; i < nargs; i++) {
 		if (!isString(a[i])) continue;
@@ -318,7 +318,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				    nprotect++;				\
 				    did_this = TRUE;			\
 				    CHECK_this_length;			\
-				    do_check = (lens[nthis] == maxlen);	\
+				    do_check = (Rboolean) (lens[nthis] == maxlen);	\
 				    lens[nthis] = thislen; /* may have changed! */ \
 				    if(do_check && thislen < maxlen) {	\
 					CHECK_maxlen;			\
@@ -440,7 +440,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    else { /* not '%' : handle string part */
-		char *ch = use_UTF8 ? strchr(curFormat, '%')
+		const char *ch = use_UTF8 ? strchr(curFormat, '%')
 				    /* MBCS-aware version used */
 		                    : Rf_strchr(curFormat, '%');
 		chunk = (ch) ? (size_t) (ch - curFormat) : strlen(curFormat);
@@ -448,11 +448,11 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		bit[chunk] = '\0';
 	    }
 	    if(ss) {
-		outputString = R_AllocStringBuffer(strlen(outputString) +
+		outputString = (char*) R_AllocStringBuffer(strlen(outputString) +
 						   strlen(ss) + 1, &outbuff);
 		strcat(outputString, ss);
 	    } else {
-		outputString = R_AllocStringBuffer(strlen(outputString) +
+		outputString = (char*) R_AllocStringBuffer(strlen(outputString) +
 						   strlen(bit) + 1, &outbuff);
 		strcat(outputString, bit);
 	    }

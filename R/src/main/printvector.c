@@ -243,7 +243,7 @@ static void printStringVector(const SEXP *x, R_xlen_t n, int quote, int indx)
 	    DO_newline;
 	}
 	Rprintf("%*s%s", R_print.gap, "",
-		EncodeString(x[i], w, quote, R_print.right));
+		EncodeString(x[i], w, quote, (Rprt_adj) R_print.right));
 	width += w + R_print.gap;
     }
     Rprintf("\n");
@@ -272,7 +272,7 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
 
     for (R_xlen_t i = 0; i < n; i++) {
 	CHARVECTOR_TIGHTLOOP(
-	    EncodeString(STRING_ELT(x, i), w, quote, R_print.right)
+	    EncodeString(STRING_ELT(x, i), w, quote, (Rprt_adj) R_print.right)
 	    );
     }
     Rprintf("\n");

@@ -75,7 +75,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
 	    for (j = 0; j < nlt; j++) {
 		const char *vj = translateChar(STRING_ELT(lt, j));
 		size_t vt = strlen(vj), len = vs + vt + 2;
-		cbuf = R_AllocStringBuffer(len, &cbuff);
+		cbuf = (char*) R_AllocStringBuffer(len, &cbuff);
 		snprintf(cbuf, len, "%s:%s", vi, vj);
 		SET_STRING_ELT(la, k, mkChar(cbuf));
 		k++;
@@ -107,7 +107,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
     SEXP ans;
     R_xlen_t n = (R_xlen_t)(r + 1 + FLT_EPSILON);
 
-    Rboolean useInt = (n1 <= INT_MAX) &&  (n1 == (int) n1);
+    Rboolean useInt = (Rboolean) ((n1 <= INT_MAX) && (n1 == (int) n1));
     if(useInt) {
 	if(n1 <= INT_MIN || n1 > INT_MAX)
 	    useInt = FALSE;
@@ -800,7 +800,7 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans = R_NilValue /* -Wall */, from, to, by, len, along;
     int nargs = length(args), lf;
-    Rboolean One = (nargs == 1);
+    Rboolean One = (Rboolean) (nargs == 1);
     R_xlen_t i, lout = NA_INTEGER;
     static SEXP do_seq_formals = NULL;
 
@@ -824,8 +824,8 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     len  = CAR(args); args = CDR(args);
     along= CAR(args);
     Rboolean
-	miss_from = (from == R_MissingArg),
-	miss_to   = (to   == R_MissingArg);
+	miss_from = (Rboolean) (from == R_MissingArg),
+	miss_to   = (Rboolean) (to   == R_MissingArg);
 
     if(One && !miss_from) {
 	lf = length(from);

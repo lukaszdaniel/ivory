@@ -100,7 +100,7 @@ HIDDEN SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     return value;
 }
 
-HIDDEN void PrintVersion(char *s, size_t len)
+HIDDEN void Rf_PrintVersion(char *s, size_t len)
 {
     PrintVersion_part_1(s, len);
 
@@ -112,7 +112,7 @@ HIDDEN void PrintVersion(char *s, size_t len)
 	   "https://www.gnu.org/licenses/.\n");
 }
 
-HIDDEN void PrintVersionString(char *s, size_t len)
+HIDDEN void Rf_PrintVersionString(char *s, size_t len)
 {
     if(R_SVN_BASEREVISION <= 0) {// 'git log' failed in ../../Makefile.in
 	snprintf(s, len, "R version %s.%s %s (%s-%s-%s)",
@@ -120,7 +120,7 @@ HIDDEN void PrintVersionString(char *s, size_t len)
     } else if(strlen(R_STATUS) == 0) {
 	snprintf(s, len, "R version %s.%s (%s-%s-%s)",
 		R_MAJOR, R_MINOR, R_BASEYEAR, R_BASEMONTH, R_BASEDAY);
-    } else if(strcmp(R_STATUS, "Under development (unstable)") == 0) {
+    } else if(streql(R_STATUS, "Under development (unstable)")) {
 	snprintf(s, len, "R %s (%s-%s-%s r%d)",
 		R_STATUS, R_BASEYEAR, R_BASEMONTH, R_BASEDAY, R_SVN_BASEREVISION);
     } else {
@@ -148,7 +148,7 @@ HIDDEN void PrintIvoryVersionString(char *s, size_t len)
     }
 }
 
-HIDDEN void PrintVersion_part_1(char *s, size_t len)
+HIDDEN void Rf_PrintVersion_part_1(char *s, size_t len)
 {
 #define SPRINTF_2(_FMT, _OBJ) snprintf(tmp, 128, _FMT, _OBJ); strcat(s, tmp)
     char tmp[128];

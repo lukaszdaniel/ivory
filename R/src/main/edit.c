@@ -122,7 +122,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
 	    errorcall(call, _("unable to open file '%s'"), filename);
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
-	PROTECT(src = deparse1(x, 0, FORSOURCING)); /* deparse for sourcing, not for display */
+	PROTECT(src = deparse1(x, FALSE, FORSOURCING)); /* deparse for sourcing, not for display */
 	for (i = 0; i < LENGTH(src); i++)
 	    fprintf(fp, "%s\n", translateChar(STRING_ELT(src, i)));
 	UNPROTECT(1); /* src */
@@ -138,7 +138,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (strlen(cmd) == 0) errorcall(call, _("argument 'editor' is not set"));
     editcmd = R_alloc(strlen(cmd) + strlen(filename) + 6, sizeof(char));
 #ifdef _WIN32
-    if (!strcmp(cmd,"internal")) {
+    if (streql(cmd,"internal")) {
 	if (!isString(ti))
 	    error(_("'%s' argument must be a character string"), "title");
 	if (LENGTH(STRING_ELT(ti, 0)) > 0) {

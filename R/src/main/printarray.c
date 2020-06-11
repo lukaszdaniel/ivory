@@ -309,7 +309,7 @@ static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 		   /* ENCODE_I = */
 		   Rprintf("%*s%s", R_print.gap, "",
 			   EncodeString(x[i + j * (R_xlen_t) r],
-		                        w[j], quote, right)) );
+		                        w[j], quote, (Rprt_adj) right)) );
 }
 
 static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
@@ -412,7 +412,7 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	int i, j, nb, nb_pr, nr_last,
 	    nr = dims[0], nc = dims[1],
 	    b = nr * nc;
-	Rboolean max_reached, has_dimnames = (dimnames != R_NilValue),
+	Rboolean max_reached, has_dimnames = (Rboolean) (dimnames != R_NilValue),
 	    has_dnn = has_dimnames;
 
 	if (!has_dimnames) {
@@ -424,7 +424,7 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    dn0 = VECTOR_ELT(dimnames, 0);
 	    dn1 = VECTOR_ELT(dimnames, 1);
 	    dnn = getAttrib(dimnames, R_NamesSymbol);
-	    has_dnn = !isNull(dnn);
+	    has_dnn = (Rboolean) !isNull(dnn);
 	    if ( has_dnn ) {
 		PROTECT(dnn);
 		nprotect++;
@@ -437,7 +437,7 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	 *       are printed as matrices -- if options("max.print") allows */
 	for (i = 2, nb = 1; i < ndim; i++)
 	    nb *= dims[i];
-	max_reached = (b > 0 && R_print.max / b < nb);
+	max_reached = (Rboolean) (b > 0 && R_print.max / b < nb);
 	if (max_reached) { /* i.e., also  b > 0, nr > 0, nc > 0, nb > 0 */
 	    /* nb_pr := the number of matrix slices to be printed */
 	    nb_pr = ceil_DIV(R_print.max, b);
@@ -450,8 +450,8 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    nr_last = nr;
 	}
 	for (i = 0; i < nb_pr; i++) {
-	    Rboolean do_ij = nb > 0,
-		i_last = (i == nb_pr - 1); /* for the last slice */
+	    Rboolean do_ij = (Rboolean) (nb > 0),
+		i_last = (Rboolean) (i == nb_pr - 1); /* for the last slice */
 	    int use_nr = i_last ? nr_last : nr;
 	    if(do_ij) {
 		int k = 1;

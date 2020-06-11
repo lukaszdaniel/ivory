@@ -116,7 +116,7 @@ R_size_t R_Decode2Long(char *p, int *ierr)
 /* There is no documented (or enforced) limit on 'w' here,
    so use snprintf */
 #define NB 1000
-const char *EncodeLogical(int x, int w)
+const char *Rf_EncodeLogical(int x, int w)
 {
     static char buff[NB];
     if(x == NA_LOGICAL) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -126,7 +126,7 @@ const char *EncodeLogical(int x, int w)
     return buff;
 }
 
-const char *EncodeInteger(int x, int w)
+const char *Rf_EncodeInteger(int x, int w)
 {
     static char buff[NB];
     if(x == NA_INTEGER) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -136,7 +136,7 @@ const char *EncodeInteger(int x, int w)
 }
 
 HIDDEN
-const char *EncodeRaw(Rbyte x, const char * prefix)
+const char *Rf_EncodeRaw(Rbyte x, const char * prefix)
 {
     static char buff[10];
     sprintf(buff, "%s%02x", prefix, x);
@@ -144,7 +144,7 @@ const char *EncodeRaw(Rbyte x, const char * prefix)
 }
 
 HIDDEN
-const char *EncodeEnvironment(SEXP x)
+const char *Rf_EncodeEnvironment(SEXP x)
 {
     const void *vmax = vmaxget();
     static char ch[1000];
@@ -166,14 +166,14 @@ const char *EncodeEnvironment(SEXP x)
     return ch;
 }
 
-const char *EncodeReal(double x, int w, int d, int e, char cdec)
+const char *Rf_EncodeReal(double x, int w, int d, int e, char cdec)
 {
     char dec[2];
     dec[0] = cdec; dec[1] = '\0';
     return EncodeReal0(x, w, d, e, dec);
 }
 
-const char *EncodeReal0(double x, int w, int d, int e, const char *dec)
+const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
 {
     static char buff[NB], buff2[2*NB];
     char fmt[20], *out = buff;
@@ -215,8 +215,7 @@ const char *EncodeReal0(double x, int w, int d, int e, const char *dec)
     return out;
 }
 
-static const char
-*EncodeRealDrop0(double x, int w, int d, int e, const char *dec)
+static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *dec)
 {
     static char buff[NB], buff2[2*NB];
     char fmt[20], *out = buff;
@@ -272,7 +271,7 @@ static const char
     return out;
 }
 
-HIDDEN SEXP StringFromReal(double x, int *warn)
+HIDDEN SEXP Rf_StringFromReal(double x, int *warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -282,7 +281,7 @@ HIDDEN SEXP StringFromReal(double x, int *warn)
 
 
 HIDDEN
-const char *EncodeReal2(double x, int w, int d, int e)
+const char *Rf_EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
     char fmt[20];
@@ -318,8 +317,7 @@ void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
 #endif
 
 #define NB3 NB+3
-const char
-*EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
+const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
 	       const char *dec)
 {
     static char buff[NB3];
@@ -523,12 +521,12 @@ int Rstrlen(SEXP s, int quote)
  */
 
 HIDDEN
-const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
+const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int b, b0, i, j, cnt;
     const char *p; char *q, buf[11];
     cetype_t ienc = getCharCE(s);
-    Rboolean useUTF8 = w < 0;
+    Rboolean useUTF8 = (Rboolean) (w < 0);
     const void *vmax = vmaxget();
 
     if (w < 0) w = w + 1000000;
@@ -623,7 +621,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	error(_("too large string (nchar=%d) => 5*nchar + 8 > SIZE_MAX"));
     size_t q_len = 5*(size_t)cnt + 8;
     if(q_len < w) q_len = (size_t) w;
-    q = R_AllocStringBuffer(q_len, buffer);
+    q = (char*) R_AllocStringBuffer(q_len, buffer);
 
     b = w - i - (quote ? 2 : 0); /* total amount of padding */
     if(justify == Rprt_adj_none) b = 0;
@@ -785,14 +783,14 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
 /* NB this is called by R.app even though it is in no public header, so
    alter there if you alter this */
-const char *EncodeElement(SEXP x, int indx, int quote, char cdec)
+const char *Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
 {
     char dec[2];
     dec[0] = cdec; dec[1] = '\0';
     return EncodeElement0(x, indx, quote, dec);
 }
 
-const char *EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
+const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 {
     int w, d, e, wi, di, ei;
     const char *res;
@@ -838,7 +836,7 @@ const char *EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
 //HIDDEN
-const char *EncodeChar(SEXP x)
+const char *Rf_EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
 }
@@ -1013,12 +1011,12 @@ void REvprintf(const char *format, va_list arg)
     }
 }
 
-HIDDEN int IndexWidth(R_xlen_t n)
+HIDDEN int Rf_IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-HIDDEN void VectorIndex(R_xlen_t i, int w)
+HIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
 {
 /* print index label "[`i']" , using total width `w' (left filling blanks) */
     Rprintf("%*s[%ld]", w-IndexWidth(i)-2, "", i);

@@ -48,7 +48,7 @@ static char *rmspace(char *s)
    return "" on an error condition.
  */
 
-static char *subterm(char *s)
+static const char *subterm(char *s)
 {
     char *p, *q;
     int colon = 0;
@@ -97,9 +97,10 @@ static char *findRbrace(char *s)
 }
 
 #define BUF_SIZE 10000
-static char *findterm(char *s)
+static const char *findterm(const char *s)
 {
-    char *p, *q, *r2, *ss=s;
+    char *p, *q;
+    const char *r2, *ss=s;
     static char ans[BUF_SIZE];
 
     if(!strlen(s)) return "";
@@ -125,9 +126,10 @@ static char *findterm(char *s)
     return ans;
 }
 
-static void Putenv(char *a, char *b)
+static void Putenv(char *a, const char *b)
 {
-    char *buf, *value, *p, *q, quote='\0';
+    char *buf, *value, *q, quote='\0';
+    const char *p;
     int inquote = 0;
 
 #ifdef HAVE_SETENV
@@ -183,7 +185,8 @@ static void Putenv(char *a, char *b)
 static int process_Renviron(const char *filename)
 {
     FILE *fp;
-    char *s, *p, sm[BUF_SIZE], *lhs, *rhs, msg[MSG_SIZE+50];
+    char *s, *p, sm[BUF_SIZE], *lhs, msg[MSG_SIZE+50];
+    const char *rhs;
     int errs = 0;
 
     if (!filename || !(fp = R_fopen(filename, "r"))) return 0;

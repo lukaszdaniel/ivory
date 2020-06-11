@@ -81,7 +81,7 @@ double Rf_rbeta(double aa, double bb)
 	    k2 = 0.25 + (0.5 + 0.25 / delta) * a;
 	}
 	/* FIXME: "do { } while()", but not trivially because of "continue"s:*/
-	for(;;) {
+	while(TRUE) {
 	    u1 = unif_rand();
 	    u2 = unif_rand();
 	    if (u1 < 0.5) {

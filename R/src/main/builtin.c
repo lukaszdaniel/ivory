@@ -212,7 +212,7 @@ HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     if (TYPEOF(CAR(args)) == BUILTINSXP || TYPEOF(CAR(args)) == SPECIALSXP) {
-	char *nm = PRIMNAME(CAR(args));
+	const char *nm = PRIMNAME(CAR(args));
 	SEXP env, s2;
 	PROTECT_INDEX xp;
 
@@ -1052,7 +1052,7 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (isString(x)) {
 	    for (y = w; y != R_NilValue; y = CDR(y)) {
 		if (TAG(y) != R_NilValue) {
-		    if (pmatch(STRING_ELT(x, 0), TAG(y), 1 /* exact */)) {
+		    if (pmatch(STRING_ELT(x, 0), TAG(y), TRUE /* exact */)) {
 			/* Find the next non-missing argument.
 			   (If there is none, return NULL.) */
 			while (CAR(y) == R_MissingArg) {

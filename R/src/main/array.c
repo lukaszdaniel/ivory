@@ -48,7 +48,7 @@
 
  They are used in bind.c and subset.c, and advertised in Rinternals.h
 */
-SEXP GetRowNames(SEXP dimnames)
+SEXP Rf_GetRowNames(SEXP dimnames)
 {
     if (TYPEOF(dimnames) == VECSXP)
 	return VECTOR_ELT(dimnames, 0);
@@ -56,7 +56,7 @@ SEXP GetRowNames(SEXP dimnames)
 	return R_NilValue;
 }
 
-SEXP GetColNames(SEXP dimnames)
+SEXP Rf_GetColNames(SEXP dimnames)
 {
     if (TYPEOF(dimnames) == VECSXP)
 	return VECTOR_ELT(dimnames, 1);
@@ -156,9 +156,9 @@ HIDDEN SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = allocMatrix(TYPEOF(vals), nr, nc));
     if(lendat) {
 	if (isVector(vals))
-	    copyMatrix(ans, vals, byrow);
+	    copyMatrix(ans, vals, (Rboolean) byrow);
 	else
-	    copyListMatrix(ans, vals, byrow);
+	    copyListMatrix(ans, vals, (Rboolean) byrow);
     } else if (isVector(vals)) { /* fill with NAs */
 	R_xlen_t N = (R_xlen_t) nr * nc, i;
 	switch(TYPEOF(vals)) {
@@ -202,7 +202,7 @@ HIDDEN SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-SEXP allocMatrix(SEXPTYPE mode, int nrow, int ncol)
+SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
 {
     SEXP s, t;
     R_xlen_t n;
@@ -233,7 +233,7 @@ SEXP allocMatrix(SEXPTYPE mode, int nrow, int ncol)
  *
  * @return A 3-dimensional array of the indicated dimensions and mode
  */
-SEXP alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
+SEXP Rf_alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
 {
     SEXP s, t;
     R_xlen_t n;
@@ -256,7 +256,7 @@ SEXP alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
 }
 
 
-SEXP allocArray(SEXPTYPE mode, SEXP dims)
+SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 {
     SEXP array;
     int i;
@@ -287,7 +287,7 @@ SEXP allocArray(SEXPTYPE mode, SEXP dims)
 /* attribute.  Note that this function mutates x. */
 /* Duplication should occur before this is called. */
 
-SEXP DropDims(SEXP x)
+SEXP Rf_DropDims(SEXP x)
 {
     SEXP dims, dimnames, newnames = R_NilValue;
     int i, n, ndims;
@@ -458,12 +458,14 @@ HIDDEN SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(length(x));
 }
 
-HIDDEN R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho) {
-    R_xlen_t len = dispatch_xlength(x, call, rho);
+HIDDEN R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho)
+{
+	R_xlen_t len = dispatch_xlength(x, call, rho);
 #ifdef LONG_VECTOR_SUPPORT
-    if (len > INT_MAX) return R_BadLongVector(x, __FILE__, __LINE__);
+	if (len > INT_MAX)
+		return R_BadLongVector(x, __FILE__, __LINE__);
 #endif
-    return (R_len_t) len;
+	return (R_len_t)len;
 }
 
 HIDDEN R_xlen_t dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
@@ -485,14 +487,15 @@ HIDDEN R_xlen_t dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
 }
 
 // auxiliary for do_lengths_*(), i.e., R's lengths()
-static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho) {
-    SEXP x_elt;
-    R_xlen_t ans;
+static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
+{
+	SEXP x_elt;
+	R_xlen_t ans;
 
-    PROTECT(x_elt = dispatch_subset2(x, i, call, rho));
-    ans = dispatch_xlength(x_elt, call, rho);
-    UNPROTECT(1); /* x_elt */
-    return ans;
+	PROTECT(x_elt = dispatch_subset2(x, i, call, rho));
+	ans = dispatch_xlength(x_elt, call, rho);
+	UNPROTECT(1); /* x_elt */
+	return ans;
 }
 
 #ifdef LONG_VECTOR_SUPPORT
@@ -525,7 +528,7 @@ HIDDEN SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))
       return(ans);
 
-    Rboolean isList = isVectorList(x) || isS4(x);
+    Rboolean isList = (Rboolean) (isVectorList(x) || isS4(x));
     if(!isList) switch(TYPEOF(x)) {
 	case NILSXP:
 	case CHARSXP:
@@ -657,7 +660,7 @@ static Rboolean mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
 #endif
     for (R_xlen_t i = 0; i < n; i++)
 	s += x[i];
-    return !R_FINITE(s);
+    return (Rboolean) !R_FINITE(s);
 }
 
 static Rboolean cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
@@ -685,7 +688,7 @@ static Rboolean cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
 	s += x[i].r;
 	s += x[i].i;
     }
-    return !R_FINITE(s);
+    return (Rboolean) !R_FINITE(s);
 }
 
 static void internal_matprod(double *x, int nrx, int ncx,
@@ -797,7 +800,7 @@ static void matprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transN = "N", *transT = "T";
+    const char *transN = "N", *transT = "T";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -944,7 +947,7 @@ static void cmatprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "N", *transb = "N";
+    const char *transa = "N", *transb = "N";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -983,7 +986,7 @@ static void symcrossprod(double *x, int nr, int nc, double *z)
 	    break; /* use blas */
     }
 
-    char *trans = "T", *uplo = "U";
+    const char *trans = "T", *uplo = "U";
     double one = 1.0, zero = 0.0;
 
     F77_CALL(dsyrk)(uplo, trans, &nc, &nr, &one, x, &nr, &zero, z, &nc
@@ -1025,7 +1028,7 @@ static void crossprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transT = "T", *transN = "N";
+    const char *transT = "T", *transN = "N";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -1080,7 +1083,7 @@ static void ccrossprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "T", *transb = "N";
+    const char *transa = "T", *transb = "N";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -1119,7 +1122,7 @@ static void symtcrossprod(double *x, int nr, int nc, double *z)
 	    break; /* use blas */
     }
 
-    char *trans = "N", *uplo = "U";
+    const char *trans = "N", *uplo = "U";
     double one = 1.0, zero = 0.0;
 
     F77_CALL(dsyrk)(uplo, trans, &nr, &nc, &one, x, &nr, &zero, z, &nr
@@ -1159,7 +1162,7 @@ static void tcrossprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transN = "N", *transT = "T";
+    const char *transN = "N", *transT = "T";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -1213,7 +1216,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "N", *transb = "T";
+    const char *transa = "N", *transb = "T";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -1241,7 +1244,7 @@ HIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     checkArity(op, args);
-    sym = isNull(y);
+    sym = (Rboolean) isNull(y);
     if (sym && (PRIMVAL(op) > 0)) y = x;
     if ( !(isNumeric(x) || isComplex(x)) || !(isNumeric(y) || isComplex(y)) )
 	errorcall(call, _("numeric/complex matrix/vector arguments are required"));
@@ -1365,11 +1368,15 @@ HIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("non-conformable arguments"));
     }
 
-    if (isComplex(CAR(args)) || isComplex(CADR(args)))
-	mode = CPLXSXP;
-    else
-	mode = REALSXP;
-    SETCAR(args, coerceVector(CAR(args), mode));
+	if (isComplex(CAR(args)) || isComplex(CADR(args)))
+	{
+		mode = CPLXSXP;
+	}
+	else
+	{
+		mode = REALSXP;
+	}
+	SETCAR(args, coerceVector(CAR(args), mode));
     SETCADR(args, coerceVector(CADR(args), mode));
 
     if (PRIMVAL(op) == 0) {			/* op == 0 : matprod() */
@@ -1583,11 +1590,14 @@ HIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    break;
 	default:
-	    goto not_matrix;
+    error(_("'%s' argument is not a matrix"), "x");
+    return call;/* never used; just for -Wall */
 	}
     }
-    else
-	goto not_matrix;
+    else {
+    error(_("'%s' argument is not a matrix"), "x");
+    return call;/* never used; just for -Wall */
+	}
     PROTECT(dimnamesnames);
     PROTECT(r = allocVector(TYPEOF(a), len));
     R_xlen_t i, j, l_1 = len-1;
@@ -1632,7 +1642,8 @@ HIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default:
 	UNPROTECT(2); /* r, dimnamesnames */
-	goto not_matrix;
+    error(_("'%s' argument is not a matrix"), "x");
+    return call;/* never used; just for -Wall */
     }
     PROTECT(dims = allocVector(INTSXP, 2));
     INTEGER(dims)[0] = ncol;
@@ -1660,9 +1671,6 @@ HIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     copyMostAttrib(a, r);
     UNPROTECT(2); /* r, dimnamesnames */
     return r;
- not_matrix:
-    error(_("'%s' argument is not a matrix"), "x");
-    return call;/* never used; just for -Wall */
 }
 
 /*
@@ -1877,13 +1885,13 @@ HIDDEN SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args); args = CDR(args);
     R_xlen_t n = asVecSize(CAR(args)); args = CDR(args);
     R_xlen_t p = asVecSize(CAR(args)); args = CDR(args);
-    NaRm = asLogical(CAR(args));
+    NaRm = (Rboolean) asLogical(CAR(args));
     if (n == NA_INTEGER || n < 0)
 	error(_("invalid '%s' argument"), "n");
     if (p == NA_INTEGER || p < 0)
 	error(_("invalid '%s' argument"), "p");
     if (NaRm == NA_LOGICAL) error(_("invalid '%s' argument"), "na.rm");
-    keepNA = !NaRm;
+    keepNA = (Rboolean) !NaRm;
 
     switch (type = TYPEOF(x)) {
     case LGLSXP:

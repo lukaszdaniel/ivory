@@ -42,7 +42,7 @@ HIDDEN SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     XX = PROTECT(eval(CAR(args), rho));
     R_xlen_t n = xlength(XX);  // a vector, so will be valid.
     FUN = CADR(args);
-    Rboolean realIndx = n > INT_MAX;
+    Rboolean realIndx = (Rboolean) (n > INT_MAX);
 
     SEXP ans = PROTECT(allocVector(VECSXP, n));
     SEXP names = getAttrib(XX, R_NamesSymbol);
@@ -103,7 +103,7 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     n = xlength(XX);
     if (n == NA_INTEGER) error(_("invalid length"));
-    Rboolean realIndx = n > INT_MAX;
+    Rboolean realIndx = (Rboolean) (n > INT_MAX);
 
     commonLen = length(value);
     if (commonLen > 1 && n > INT_MAX)
@@ -116,7 +116,7 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	commonType != VECSXP)
 	error(_("type '%s' is not supported"), type2char(commonType));
     dim_v = getAttrib(value, R_DimSymbol);
-    array_value = (TYPEOF(dim_v) == INTSXP && LENGTH(dim_v) >= 1);
+    array_value = (Rboolean) (TYPEOF(dim_v) == INTSXP && LENGTH(dim_v) >= 1);
     PROTECT(ans = allocVector(commonType, n*commonLen));
     if (useNames) {
 	PROTECT(names = getAttrib(XX, R_NamesSymbol));
@@ -167,10 +167,10 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (valType != commonType) {
 		Rboolean okay = FALSE;
 		switch (commonType) {
-		case CPLXSXP: okay = (valType == REALSXP) || (valType == INTSXP)
-				    || (valType == LGLSXP); break;
-		case REALSXP: okay = (valType == INTSXP) || (valType == LGLSXP); break;
-		case INTSXP:  okay = (valType == LGLSXP); break;
+		case CPLXSXP: okay = (Rboolean) ((valType == REALSXP) || (valType == INTSXP)
+				    || (valType == LGLSXP)); break;
+		case REALSXP: okay = (Rboolean) ((valType == INTSXP) || (valType == LGLSXP)); break;
+		case INTSXP:  okay = (Rboolean) (valType == LGLSXP); break;
 		}
 		if (!okay)
 		    error(_("values must be type '%s', but 'FUN(X[[%d]])' result is type '%s'"),
@@ -334,7 +334,7 @@ HIDDEN SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     deflt = CAR(args); args = CDR(args);
     how = CAR(args);
     if(!isString(how)) error(_("invalid '%s' argument"), "how");
-    Rboolean replace = strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0; /* ASCII */
+    Rboolean replace = streql(CHAR(STRING_ELT(how, 0)), "replace"); /* ASCII */
     R_xlen_t n = xlength(X);
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));
@@ -384,7 +384,7 @@ HIDDEN SEXP do_islistfactor(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP X = CAR(args);
-    Rboolean recursive = asLogical(CADR(args));
+    Rboolean recursive = (Rboolean) asLogical(CADR(args));
     int n = length(X);
     if(n == 0 || !isVectorList(X))
 	return ScalarLogical(FALSE);

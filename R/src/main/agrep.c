@@ -41,8 +41,7 @@
 #include <wchar.h>
 #include <tre/tre.h>
 
-static void
-amatch_regaparams(regaparams_t *params, int patlen,
+static void amatch_regaparams(regaparams_t *params, int patlen,
 		  double *bounds, int *costs)
 {
     int cost, max_cost, warn = 0;
@@ -139,7 +138,7 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     n = XLENGTH(vec);
     if(!useBytes) {
-	Rboolean haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	Rboolean haveBytes = (Rboolean) IS_BYTES(STRING_ELT(pat, 0));
 	if(!haveBytes)
 	    for (i = 0; i < n; i++)
 		if(IS_BYTES(STRING_ELT(vec, i))) {
@@ -149,7 +148,7 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(haveBytes) useBytes = TRUE;
     }
     if(!useBytes) {
-	useWC = !IS_ASCII(STRING_ELT(pat, 0));
+	useWC = (Rboolean) !IS_ASCII(STRING_ELT(pat, 0));
 	if(!useWC) {
 	    for (i = 0 ; i < n ; i++) {
 		if(STRING_ELT(vec, i) == NA_STRING) continue;
@@ -293,8 +292,7 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define MAT(X, I, J)		X[I + (J) * nr]
 
-static SEXP
-adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
+static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
 {
     SEXP ans, counts, trafos = R_NilValue /* -Wall */, dimnames, names;
     double cost_ins, cost_del, cost_sub;
@@ -528,7 +526,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!opt_partial)
-	return(adist_full(x, y, REAL(opt_costs), opt_counts));
+	return (adist_full(x, y, REAL(opt_costs), (Rboolean) opt_counts));
 
     counts = R_NilValue;	/* -Wall */
     offsets = R_NilValue;	/* -Wall */
@@ -781,7 +779,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t n = XLENGTH(vec);
 
     if(!useBytes) {
-	haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	haveBytes = (Rboolean) IS_BYTES(STRING_ELT(pat, 0));
 	if(!haveBytes)
 	    for(R_xlen_t i = 0; i < n; i++) {
 		if(IS_BYTES(STRING_ELT(vec, i))) {
@@ -793,7 +791,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!useBytes) {
-	useWC = !IS_ASCII(STRING_ELT(pat, 0));
+	useWC = (Rboolean) !IS_ASCII(STRING_ELT(pat, 0));
 	if(!useWC) {
 	    for(R_xlen_t i = 0 ; i < n ; i++) {
 		if(STRING_ELT(vec, i) == NA_STRING) continue;

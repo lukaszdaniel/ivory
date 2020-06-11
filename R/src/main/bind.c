@@ -488,7 +488,7 @@ static SEXP NewBase(SEXP base, SEXP tag)
     if (*CHAR(base) && *CHAR(tag)) { /* test of length */
 	const void *vmax = vmaxget();
 	const char *sb = translateCharUTF8(base), *st = translateCharUTF8(tag);
-	cbuf = R_AllocStringBuffer(strlen(st) + strlen(sb) + 1, &cbuff);
+	cbuf = (char*) R_AllocStringBuffer(strlen(st) + strlen(sb) + 1, &cbuff);
 	sprintf(cbuf, "%s.%s", sb, st);
 	/* This isn't strictly correct as we do not know that all the
 	   components of the name were correctly translated. */
@@ -523,7 +523,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    const char
 		*sb = translateCharUTF8(base),
 		*st = translateCharUTF8(tag);
-	    char *cbuf = R_AllocStringBuffer(strlen(sb) + strlen(st) + 1, &cbuff);
+	    char *cbuf = (char*) R_AllocStringBuffer(strlen(sb) + strlen(st) + 1, &cbuff);
 	    sprintf(cbuf, "%s.%s", sb, st);
 	    ans = mkCharCE(cbuf, CE_UTF8);
 	    vmaxset(vmax);
@@ -534,7 +534,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    const void *vmax = vmaxget();
 	    const char *sb = translateCharUTF8(base);
 	    char *cbuf;
-	    cbuf = R_AllocStringBuffer(strlen(sb) + (size_t) IndexWidth(seqno),
+	    cbuf = (char*) R_AllocStringBuffer(strlen(sb) + (size_t) IndexWidth(seqno),
 				       &cbuff);
 #ifdef LONG_VECTOR_SUPPORT
 	    if (seqno > INT_MAX)
@@ -720,22 +720,22 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
     for (a = ans; a != R_NilValue; a = next) {
 	n = TAG(a);
 	next = CDR(a);
-	if (n != R_NilValue && pmatch(R_RecursiveSymbol, n, 1)) {
+	if (n != R_NilValue && pmatch(R_RecursiveSymbol, n, TRUE)) {
 	    if (n_recurse++ == 1)
 		errorcall(call, _("repeated formal argument '%s'"), "recursive");
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
-		*recurse = v;
+		*recurse = (Rboolean) v;
 	    }
 	    if (last == NULL)
 		ans = next;
 	    else
 		SETCDR(last, next);
 	}
-	else if (n != R_NilValue && pmatch(R_UseNamesSymbol, n, 1)) {
+	else if (n != R_NilValue && pmatch(R_UseNamesSymbol, n, TRUE)) {
 	    if (n_usenames++ == 1)
 		errorcall(call, _("repeated formal argument '%s'"), "user.names");
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
-		*usenames = v;
+		*usenames = (Rboolean) v;
 	    }
 	    if (last == NULL)
 		ans = next;
@@ -898,8 +898,8 @@ HIDDEN SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
     /* by an optional "recursive" argument. */
 
     PROTECT(args = CAR(ans));
-    Rboolean recurse = asLogical(CADR(ans));
-    Rboolean usenames = asLogical(CADDR(ans));
+    Rboolean recurse = (Rboolean) asLogical(CADR(ans));
+    Rboolean usenames = (Rboolean) asLogical(CADDR(ans));
     Rboolean lenient = TRUE; // was (implicitly!) FALSE  up to R 3.0.1
 
     /* Determine the type of the returned value. */
@@ -1033,7 +1033,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* since R 2.2.0: first argument "deparse.level" */
     deparse_level = asInteger(eval(CAR(args), env));
-    Rboolean tryS4 = deparse_level >= 0;
+    Rboolean tryS4 = (Rboolean) (deparse_level >= 0);
     /* NB: negative deparse_level should otherwise be equivalent to deparse_level == 0,
      * --  as cbind(), rbind() below only check for '== 1' and '== 2'
      * {FIXME: methods should do same} */
@@ -1093,7 +1093,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1);
     }
 
-    tryS4 = anyS4 && (method == R_NilValue);
+    tryS4 = (Rboolean) (anyS4 && (method == R_NilValue));
     if (tryS4) {
 	// keep 'deparse.level' as first arg and *name* it:
 	SET_TAG(args, install("deparse.level"));
@@ -1116,7 +1116,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     data.ans_length = 0;
     data.ans_nnames = 0;
     for (t = args; t != R_NilValue; t = CDR(t))
-	AnswerType(PRVALUE(CAR(t)), 0, 0, &data, call);
+	AnswerType(PRVALUE(CAR(t)), FALSE, FALSE, &data, call);
 
     /* zero-extent matrices shouldn't give NULL, but cbind(NULL) should: */
     if (!data.ans_flags && !data.ans_length) {
@@ -1291,6 +1291,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		case STRSXP:
 		case VECSXP:
 		case LISTSXP:
+		{
 		    PROTECT(u = coerceVector(u, mode));
 		    R_xlen_t k = XLENGTH(u);
 		    if (k > 0) {
@@ -1303,6 +1304,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		    }
 		    UNPROTECT(1);
 		    break;
+		}
 		default:
 		    for (int i = 0; i < rows; i++)
 			SET_VECTOR_ELT(result, n++, lazy_duplicate(u));

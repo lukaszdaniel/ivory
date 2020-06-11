@@ -411,7 +411,7 @@ scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *rounding
 	rgt = rgt < 0 ? 0 : rgt > KP_MAX ? KP_MAX : rgt;
 	double fuzz = 0.5/(double)tbl[1 + rgt];
 	// kpower can be bigger than the table.
-	*roundingwidens = *kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower + 1] - fuzz;
+	*roundingwidens = (Rboolean) (*kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower + 1] - fuzz);
     }
 }
 

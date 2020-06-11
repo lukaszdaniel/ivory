@@ -126,7 +126,7 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	PROTECT(x);
 	PROTECT(y);
 	SEXP ans;
-	ans = numeric_relop(PRIMVAL(op), x, y);
+	ans = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
 	UNPROTECT(2);
 	return ans;
     }
@@ -139,19 +139,19 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
     Rboolean iS;
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
-    if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
+    if ((iS = (Rboolean) isSymbol(x)) || TYPEOF(x) == LANGSXP) {
 	SEXP tmp = allocVector(STRSXP, 1);
 	PROTECT(tmp);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
-		       STRING_ELT(deparse1(x, 0, DEFAULTDEPARSE), 0));
+		       STRING_ELT(deparse1(x, FALSE, DEFAULTDEPARSE), 0));
 	REPROTECT(x = tmp, xpi);
 	UNPROTECT(1);
     }
-    if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
+    if ((iS = (Rboolean) isSymbol(y)) || TYPEOF(y) == LANGSXP) {
 	SEXP tmp = allocVector(STRSXP, 1);
 	PROTECT(tmp);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :
-		       STRING_ELT(deparse1(y, 0, DEFAULTDEPARSE), 0));
+		       STRING_ELT(deparse1(y, FALSE, DEFAULTDEPARSE), 0));
 	REPROTECT(y = tmp, ypi);
 	UNPROTECT(1);
     }

@@ -40,10 +40,10 @@ static void GLPretty(double *ul, double *uh, int *n);
 /* used in GScale() (../library/graphics/src/graphics.c), but also in
                      ../library/grDevices/src/axis_scales.c : */
 // (usr, log, n_inp) |--> (axp = (min, max), n_out) :
-void GAxisPars(double *min, double *max, int *n, Rboolean log, int axis)
+void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis)
 {
 #define EPS_FAC_2 100
-    Rboolean swap = *min > *max;
+    Rboolean swap = (Rboolean) (*min > *max);
     double t_, min_o, max_o;
 
     if(swap) { /* Feature: in R, something like  xlim = c(100,0)  just works */
@@ -127,7 +127,7 @@ static void GLPretty(double *ul, double *uh, int *n)
     }
 }
 
-void GPretty(double *lo, double *up, int *ndiv)
+void Rf_GPretty(double *lo, double *up, int *ndiv)
 {
     GEPretty(lo, up, ndiv);
 }

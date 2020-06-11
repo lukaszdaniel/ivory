@@ -153,7 +153,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("'%s' argument must be raw, integer or logical"), "x");
     if (!isString(stype)  || LENGTH(stype) != 1)
 	error(_("'%s' argument must be a character string"), "type");
-    useRaw = strcmp(CHAR(STRING_ELT(stype, 0)), "integer");
+    useRaw = (Rboolean) strcmp(CHAR(STRING_ELT(stype, 0)), "integer");
     fac = useRaw ? 8 : 32;
     if (len% fac)
 	error(_("argument 'x' must be a multiple of %d long"), fac);
@@ -197,7 +197,7 @@ HIDDEN SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 int mbrtoint(int *w, const char *s)
 {
     unsigned int byte;
-    byte = *((unsigned char *)s);
+    byte = *((unsigned char *) s);
 
     if (byte == 0) {
 	*w = 0;
@@ -358,7 +358,7 @@ HIDDEN SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    tmp = Calloc(len+1, char);
 	} else {
 	    R_CheckStack2(len+1);
-	    tmp = alloca(len+1); tmp[len] = '\0';
+	    tmp = (char*) alloca(len+1); tmp[len] = '\0';
 	}
 	for (i = 0, len = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];

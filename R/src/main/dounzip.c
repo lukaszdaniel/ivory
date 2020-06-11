@@ -1826,7 +1826,7 @@ static int unzOpenCurrentFile3 (unzFile file, int* method,
       pfile_in_zip_read_info->stream.zalloc = (alloc_func)0;
       pfile_in_zip_read_info->stream.zfree = (free_func)0;
       pfile_in_zip_read_info->stream.opaque = (voidpf)0;
-      pfile_in_zip_read_info->stream.next_in = (voidpf)0;
+      pfile_in_zip_read_info->stream.next_in = (Bytef*)0;
       pfile_in_zip_read_info->stream.avail_in = 0;
 
       err = BZ2_bzDecompressInit(&pfile_in_zip_read_info->bstream, 0, 0);
@@ -2174,7 +2174,7 @@ static voidpf fopen_func(const void* filename, int mode)
 	mode_fopen = "wb";
 
     if ((filename != NULL) && (mode_fopen != NULL))
-	file = fopen(filename, mode_fopen);
+	file = fopen((const char *) filename, mode_fopen);
     return file;
 }
 

@@ -244,7 +244,7 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
 	R_ShowMessage(_("WARNING: 'vsize' argument is ridiculously low, Megabytes assumed\n"));
 	vsize *= (R_size_t) Mega;
     }
-    if((sml = vsize < Min_Vsize) || vsize > Max_Vsize) {
+    if((sml = (Rboolean) (vsize < Min_Vsize)) || vsize > Max_Vsize) {
       if(sml) {
 		snprintf(msg, 1024,
 		 _("WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"),
@@ -257,7 +257,7 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
 	R_VSize = R_VSIZE;
     } else
 	R_VSize = vsize;
-    if((sml = nsize < Min_Nsize) || nsize > Max_Nsize) {
+    if((sml = (Rboolean) (nsize < Min_Nsize)) || nsize > Max_Nsize) {
 	  if(sml) {
 		snprintf(msg, 1024,
 		 _("WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"),

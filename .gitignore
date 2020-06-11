@@ -9,7 +9,7 @@
 R/autom4te.cache/*
 
 R/doc/*/*.html
-
+R/doc/NEWS.*.rds
 R/src/library/*/po/*.po~
 R/src/library/*/all.R
 R/src/**/Makedeps

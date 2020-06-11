@@ -81,7 +81,7 @@ static void PrintObject(SEXP, R_PrintData *);
 #define TAGBUFLEN0 TAGBUFLEN + 6
 static char tagbuf[TAGBUFLEN0 * 2]; /* over-allocate to allow overflow check */
 
-void PrintInit(R_PrintData *data, SEXP env)
+void Rf_PrintInit(R_PrintData *data, SEXP env)
 {
     data->na_string = NA_STRING;
     data->na_string_noquote = mkChar("<NA>");
@@ -106,7 +106,7 @@ void PrintInit(R_PrintData *data, SEXP env)
 /* Used in X11 module for dataentry */
 /* NB this is called by R.app even though it is in no public header, so
    alter there if you alter this */
-void PrintDefaults(void)
+void Rf_PrintDefaults(void)
 {
     PrintInit(&R_print, R_GlobalEnv);
 }
@@ -166,13 +166,13 @@ static void PrintLanguage(SEXP s, R_PrintData *data)
 {
     int i;
     SEXP t = getAttrib(s, R_SrcrefSymbol);
-    Rboolean useSrc = data->useSource && isInteger(t);
+    Rboolean useSrc = (Rboolean) (data->useSource && isInteger(t));
     if (useSrc) {
 	PROTECT(t = lang2(R_AsCharacterSymbol, t));
 	t = eval(t, R_BaseEnv);
 	UNPROTECT(1);
     } else {
-	t = deparse1w(s, 0, data->useSource | DEFAULTDEPARSE);
+	t = deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE);
 	R_print = *data; /* Deparsing calls PrintDefaults() */
     }
     PROTECT(t);
@@ -756,7 +756,7 @@ static void PrintExpression(SEXP s, R_PrintData *data)
     SEXP u;
     int i, n;
 
-    u = PROTECT(deparse1w(s, 0, data->useSource | DEFAULTDEPARSE));
+    u = PROTECT(deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE));
     R_print = *data; /* Deparsing calls PrintDefaults() */
 
     n = LENGTH(u);
@@ -768,7 +768,7 @@ static void PrintExpression(SEXP s, R_PrintData *data)
 static void PrintSpecial(SEXP s, R_PrintData *data)
 {
     /* This is OK as .Internals are not visible to be printed */
-    char *nm = PRIMNAME(s);
+    const char *nm = PRIMNAME(s);
     SEXP env, s2;
     PROTECT_INDEX xp;
     PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,
@@ -787,7 +787,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
     if(s2 != R_UnboundValue) {
 	SEXP t;
 	PROTECT(s2);
-	t = deparse1m(s2, 0, DEFAULTDEPARSE); // or deparse1() ?
+	t = deparse1m(s2, FALSE, DEFAULTDEPARSE); // or deparse1() ?
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 
 	Rprintf("%s ", CHAR(STRING_ELT(t, 0))); /* translated */
@@ -809,7 +809,7 @@ static void print_cleanup(void *data)
 
  * This is the "dispatching" function for  print.default()
  */
-HIDDEN void PrintValueRec(SEXP s, R_PrintData *data)
+HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData *data)
 {
     SEXP t;
 
@@ -854,7 +854,7 @@ HIDDEN void PrintValueRec(SEXP s, R_PrintData *data)
 	break;
     case SYMSXP:
 	/* Use deparse here to handle backtick quotification of "weird names". */
-	t = deparse1(s, 0, SIMPLEDEPARSE); // TODO ? rather deparse1m()
+	t = deparse1(s, FALSE, SIMPLEDEPARSE); // TODO ? rather deparse1m()
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 	Rprintf("%s\n", CHAR(STRING_ELT(t, 0))); /* translated */
 	break;
@@ -1043,7 +1043,7 @@ static void printAttributes(SEXP s, R_PrintData *data, Rboolean useSlots)
 /* Print an S-expression using (possibly) local options.
    This is used for auto-printing from main.c */
 
-HIDDEN void PrintValueEnv(SEXP s, SEXP env)
+HIDDEN void Rf_PrintValueEnv(SEXP s, SEXP env)
 {
     PrintDefaults();
     tagbuf[0] = '\0';
@@ -1064,7 +1064,7 @@ HIDDEN void PrintValueEnv(SEXP s, SEXP env)
 
 /* Print an S-expression using global options */
 
-void PrintValue(SEXP s)
+void Rf_PrintValue(SEXP s)
 {
     PrintValueEnv(s, R_GlobalEnv);
 }
@@ -1078,7 +1078,7 @@ void R_PV(SEXP s)
 }
 
 
-HIDDEN void CustomPrintValue(SEXP s, SEXP env)
+HIDDEN void Rf_CustomPrintValue(SEXP s, SEXP env)
 {
     tagbuf[0] = '\0';
 

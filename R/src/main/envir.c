@@ -121,7 +121,7 @@ static void setActiveValue(SEXP fun, SEXP val)
 
 //#define IS_USER_DATABASE(rho)  OBJECT((rho)) && inherits((rho), "UserDefinedDatabase")
 R_INLINE static Rboolean IS_USER_DATABASE(SEXP rho)  { 
- return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
+ return (Rboolean) (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
  }
 
 /* various definitions of macros/functions in Defn.h */
@@ -130,7 +130,7 @@ R_INLINE static Rboolean IS_USER_DATABASE(SEXP rho)  {
  //#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
  R_INLINE static Rboolean FRAME_IS_LOCKED(SEXP e)
  {
-     return ENVFLAGS(e) & FRAME_LOCK_MASK;
+     return (Rboolean) (ENVFLAGS(e) & FRAME_LOCK_MASK);
  }
 //#define LOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK)
 R_INLINE static void LOCK_FRAME(SEXP e) {
@@ -156,7 +156,7 @@ R_INLINE static SEXP SYMBOL_BINDING_VALUE(SEXP s) {
  }
 //#define SYMBOL_HAS_BINDING(s) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue))
 R_INLINE static Rboolean SYMBOL_HAS_BINDING(SEXP s) {
- return IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue);
+ return (Rboolean) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
  }
 
 /*
@@ -215,7 +215,7 @@ R_INLINE static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
 /* Macro version of isNull for only the test against R_NilValue */
 //#define ISNULL(x) ((x) == R_NilValue)
 R_INLINE static Rboolean ISNULL(SEXP x) {
- return x == R_NilValue;
+ return (Rboolean) (x == R_NilValue);
 }
 
 /* Function to determine whethr an environment contains special symbols */
@@ -263,7 +263,7 @@ R_INLINE static void SET_HASHPRI(SEXP x, int v) {
 
 //#define IS_HASHED(x)	     (HASHTAB(x) != R_NilValue)
 R_INLINE static Rboolean IS_HASHED(SEXP x) {
- return HASHTAB(x) != R_NilValue;
+ return (Rboolean) (HASHTAB(x) != R_NilValue);
  }
 
 /*----------------------------------------------------------------------
@@ -711,7 +711,7 @@ static SEXP R_HashProfile(SEXP table)
 #define GLOBAL_FRAME_MASK (1<<15)
 //#define IS_GLOBAL_FRAME(e) (ENVFLAGS(e) & GLOBAL_FRAME_MASK)
 R_INLINE static Rboolean IS_GLOBAL_FRAME(SEXP e) {
- return ENVFLAGS(e) & GLOBAL_FRAME_MASK;
+ return (Rboolean) (ENVFLAGS(e) & GLOBAL_FRAME_MASK);
  }
 /*
 #define MARK_AS_GLOBAL_FRAME(e) \
@@ -1040,7 +1040,7 @@ SEXP R_GetVarLocSymbol(R_varloc_t vl)
 /* used in methods */
 Rboolean R_GetVarLocMISSING(R_varloc_t vl)
 {
-    return MISSING(vl.cell);
+    return (Rboolean) MISSING(vl.cell);
 }
 
 HIDDEN
@@ -1166,7 +1166,7 @@ static Rboolean existsVarInFrame(SEXP rho, SEXP symbol)
     return FALSE;
 }
 
-SEXP findVarInFrame(SEXP rho, SEXP symbol)
+SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
 {
     return findVarInFrame3(rho, symbol, TRUE);
 }
@@ -1187,11 +1187,13 @@ void Rf_readS3VarsFromFrame(SEXP rho,
     SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
     SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv) {
 
+    SEXP frame = NULL;
+
     if (TYPEOF(rho) == NILSXP ||
 	rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv ||
 	IS_USER_DATABASE(rho) || HASHTAB(rho) != R_NilValue) goto slowpath;
 
-    SEXP frame = FRAME(rho);
+    frame = FRAME(rho);
 
     /*
     This code speculates there is a specific order of S3 meta-variables.  It
@@ -2147,7 +2149,7 @@ HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
     */
 
     if (isString(CADDR(args))) {
-	if (!strcmp(CHAR(STRING_ELT(CADDR(args), 0)), "function")) /* ASCII */
+	if (streql(CHAR(STRING_ELT(CADDR(args), 0)), "function")) /* ASCII */
 	    gmode = FUNSXP;
 	else
 	    gmode = str2type(CHAR(STRING_ELT(CADDR(args), 0))); /* ASCII */
@@ -2161,7 +2163,7 @@ HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "inherits");
 
     /* Search for the object */
-    rval = findVar1mode(t1, genv, gmode, ginherits, PRIMVAL(op));
+    rval = findVar1mode(t1, genv, gmode, ginherits, (Rboolean) PRIMVAL(op));
     if (rval == R_MissingArg)
 	error(_("'%s' argument is missing, with no default"),
 	      CHAR(PRINTNAME(t1)));
@@ -2212,7 +2214,7 @@ static SEXP gfind(const char *name, SEXP env, SEXPTYPE mode,
     t1 = install(name);
 
     /* Search for the object - last arg is 1 to 'get' */
-    rval = findVar1mode(t1, env, mode, inherits, 1);
+    rval = findVar1mode(t1, env, mode, inherits, TRUE);
 
     if (rval == R_UnboundValue) {
 	if( isFunction(ifnotfound) ) {
@@ -2290,7 +2292,7 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(int i = 0; i < nvals; i++) {
 	SEXPTYPE gmode;
-	if (!strcmp(CHAR(STRING_ELT(CADDR(args), i % nmode)), "function"))
+	if (streql(CHAR(STRING_ELT(CADDR(args), i % nmode)), "function"))
 	    gmode = FUNSXP;
 	else {
 	    gmode = str2type(CHAR(STRING_ELT(CADDR(args), i % nmode)));
@@ -2944,7 +2946,7 @@ HIDDEN SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
     int sort_nms = asLogical(CADDR(args)); /* sorted = TRUE/FALSE */
     if (sort_nms == NA_LOGICAL) sort_nms = 0;
 
-    return R_lsInternal3(env, all, sort_nms);
+    return R_lsInternal3(env, (Rboolean) all, (Rboolean) sort_nms);
 }
 
 /* takes an environment, a boolean indicating whether to get all
@@ -3286,12 +3288,12 @@ static SEXP matchEnvir(SEXP call, const char *what)
     const void *vmax = vmaxget();
     if(streql(".GlobalEnv", what))
 	return R_GlobalEnv;
-    if(!strcmp("package:base", what))
+    if(streql("package:base", what))
 	return R_BaseEnv;
     for (t = ENCLOS(R_GlobalEnv); t != R_EmptyEnv ; t = ENCLOS(t)) {
 	name = getAttrib(t, R_NameSymbol);
 	if(isString(name) && length(name) > 0 &&
-	   !strcmp(translateChar(STRING_ELT(name, 0)), what)) {
+	   streql(translateChar(STRING_ELT(name, 0)), what)) {
 	    vmaxset(vmax);
 	    return t;
 	}
@@ -3397,7 +3399,7 @@ Rboolean R_EnvironmentIsLocked(SEXP env)
     if (TYPEOF(env) != ENVSXP &&
 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 	error(_("'%s' argument is not an environment"), "env");
-    return FRAME_IS_LOCKED(env) != 0;
+    return (Rboolean) (FRAME_IS_LOCKED(env) != 0);
 }
 
 HIDDEN SEXP do_lockEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -3406,7 +3408,7 @@ HIDDEN SEXP do_lockEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean bindings;
     checkArity(op, args);
     frame = CAR(args);
-    bindings = asLogical(CADR(args));
+    bindings = (Rboolean) asLogical(CADR(args));
     R_LockEnvironment(frame, bindings);
     return R_NilValue;
 }
@@ -3506,12 +3508,12 @@ Rboolean R_BindingIsLocked(SEXP sym, SEXP env)
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	/* It is a symbol, so must have a binding even if it is
 	   R_UnboundSymbol */
-	return BINDING_IS_LOCKED(sym) != 0;
+	return (Rboolean) (BINDING_IS_LOCKED(sym) != 0);
     else {
 	SEXP binding = findVarLocInFrame(env, sym, NULL);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-	return BINDING_IS_LOCKED(binding) != 0;
+	return (Rboolean) (BINDING_IS_LOCKED(binding) != 0);
     }
 }
 
@@ -3526,12 +3528,12 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	/* It is a symbol, so must have a binding even if it is
 	   R_UnboundSymbol */
-	return IS_ACTIVE_BINDING(sym) != 0;
+	return (Rboolean) (IS_ACTIVE_BINDING(sym) != 0);
     else {
 	SEXP binding = findVarLocInFrame(env, sym, NULL);
 	if (binding == R_NilValue)
 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-	return IS_ACTIVE_BINDING(binding) != 0;
+	return (Rboolean) (IS_ACTIVE_BINDING(binding) != 0);
     }
 }
 
@@ -3688,7 +3690,7 @@ Rboolean R_IsPackageEnv(SEXP rho)
 {
     if (TYPEOF(rho) == ENVSXP) {
 	SEXP name = getAttrib(rho, R_NameSymbol);
-	char *packprefix = "package:";
+	const char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
 	   streqln(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
@@ -3704,7 +3706,7 @@ SEXP R_PackageEnvName(SEXP rho)
 {
     if (TYPEOF(rho) == ENVSXP) {
 	SEXP name = getAttrib(rho, R_NameSymbol);
-	char *packprefix = "package:";
+	const char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
 	   streqln(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */

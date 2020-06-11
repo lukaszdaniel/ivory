@@ -57,8 +57,8 @@
 
 /* name_value struct */
 typedef struct {
-    char *name;
-    char *value;
+    const char *name;
+    const char *value;
 } name_value;
 
 
@@ -531,7 +531,7 @@ static const int known_count = (sizeof(known)/sizeof(name_value));
 
 
 #ifndef __APPLE__
-static char* name_value_search(const char *name, const name_value table[],
+static const char* name_value_search(const char *name, const name_value table[],
 			       const int table_count)
 {
     int min, mid, max;
@@ -591,14 +591,14 @@ const char *locale2charset(const char *locale)
     int i;
     int  cp;
 #ifndef __APPLE__
-    char *value;
+    const char *value;
 #endif
 
-    if ((locale == NULL) || (0 == strcmp(locale, "NULL")))
+    if ((locale == NULL) || streql(locale, "NULL"))
 	locale = setlocale(LC_CTYPE,NULL);
 
     /* in some rare circumstances Darwin may return NULL */
-    if (!locale || !strcmp(locale, "C") || !strcmp(locale, "POSIX"))
+    if (!locale || streql(locale, "C") || streql(locale, "POSIX"))
 	return ("ASCII");
 
     memset(charset,0,sizeof(charset));
@@ -608,7 +608,7 @@ const char *locale2charset(const char *locale)
      */
     memset(la_loc, 0, sizeof(la_loc));
     memset(enc, 0, sizeof(enc));
-    p = strrchr(locale, '.');
+    p = (char*) strrchr(locale, '.');
     if(p) {
 	strncpy(enc, p+1, sizeof(enc)-1);
         enc[sizeof(enc) - 1] = '\0';
@@ -617,7 +617,7 @@ const char *locale2charset(const char *locale)
 	p = strrchr(la_loc, '.');
 	if(p) *p = '\0';
     }
-    
+
 #ifdef _WIN32
     /*
       ## PUTTY suggests mapping Windows code pages as
@@ -656,13 +656,13 @@ const char *locale2charset(const char *locale)
     */
 
     /* for AIX */
-    if (0 == strcmp(enc, "UTF-8")) strcpy(enc, "utf8");
+    if (streql(enc, "UTF-8")) strcpy(enc, "utf8");
 
     if(strcmp(enc, "") && strcmp(enc, "utf8")) {
 	for(i = 0; enc[i]; i++) enc[i] = (char) tolower(enc[i]);
 
 	for(i = 0; i < known_count; i++)
-	    if (0 == strcmp(known[i].name,enc)) return known[i].value;
+	    if (streql(known[i].name,enc)) return known[i].value;
 
 	/* cut encoding old linux cp- */
 	if (streqln(enc, "cp-", 3)){
@@ -691,7 +691,7 @@ const char *locale2charset(const char *locale)
 	}
 
 	/* let's hope it is a ll_* name */
-	if (0 == strcmp(enc, "euc")) {
+	if (streql(enc, "euc")) {
 	    /* This is OK as encoding names are ASCII */
 	    if(isalpha((int)la_loc[0]) && isalpha((int)la_loc[1])
 	       && (la_loc[2] == '_')) {
@@ -709,7 +709,7 @@ const char *locale2charset(const char *locale)
     return "UTF-8";
 #else
 
-    if(0 == strcmp(enc, "utf8")) return "UTF-8";
+    if(streql(enc, "utf8")) return "UTF-8";
 
     value = name_value_search(la_loc, guess, guess_count);
     return value == NULL ? "ASCII" : value;

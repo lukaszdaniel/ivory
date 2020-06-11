@@ -32,6 +32,17 @@
 
 #include <Localization.h>
 #include <R_ext/Error.h>
+
+#ifdef __cplusplus
+#define RBOOL(x) Rboolean(x)
+#else
+#define RBOOL(x) x
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /* Probably not able to use C99 semantics in gcc < 4.3.0 */
 #if __GNUC__ == 4 && __GNUC_MINOR__ >= 3 && defined(__GNUC_STDC_INLINE__) && !defined(C99_INLINE_SEMANTICS)
 #define C99_INLINE_SEMANTICS 1
@@ -786,15 +797,15 @@ INLINE_FUN Rboolean Rf_inherits(SEXP s, const char *name)
     return FALSE;
 }
 
-INLINE_FUN Rboolean isValidString(SEXP x)
+INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 {
-    return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
+    return RBOOL(TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
 }
 
 /* non-empty ("") valid string :*/
 INLINE_FUN Rboolean Rf_isValidStringF(SEXP x)
 {
-    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
+    return RBOOL(isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
@@ -809,25 +820,25 @@ INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
 
 INLINE_FUN Rboolean Rf_isPrimitive(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == BUILTINSXP ||
+    return RBOOL(TYPEOF(s) == BUILTINSXP ||
 	    TYPEOF(s) == SPECIALSXP);
 }
 
 INLINE_FUN Rboolean Rf_isFunction(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == CLOSXP ||
+    return RBOOL(TYPEOF(s) == CLOSXP ||
             isPrimitive(s));
 }
 
 INLINE_FUN Rboolean Rf_isList(SEXP s)
 {
-    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LISTSXP);
+    return RBOOL(s == R_NilValue || TYPEOF(s) == LISTSXP);
 }
 
 
 INLINE_FUN Rboolean Rf_isNewList(SEXP s)
 {
-    return (Rboolean) (s == R_NilValue || TYPEOF(s) == VECSXP);
+    return RBOOL(s == R_NilValue || TYPEOF(s) == VECSXP);
 }
 
 INLINE_FUN Rboolean Rf_isPairList(SEXP s)
@@ -903,7 +914,7 @@ INLINE_FUN Rboolean Rf_isFrame(SEXP s)
  *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
 INLINE_FUN Rboolean Rf_isLanguage(SEXP s)
 {
-    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LANGSXP);
+    return RBOOL(s == R_NilValue || TYPEOF(s) == LANGSXP);
 }
 
 INLINE_FUN Rboolean Rf_isMatrix(SEXP s)
@@ -934,18 +945,18 @@ INLINE_FUN Rboolean Rf_isArray(SEXP s)
 
 INLINE_FUN Rboolean Rf_isTs(SEXP s)
 {
-    return (Rboolean) (isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
+    return RBOOL(isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
 }
 
 
 INLINE_FUN Rboolean Rf_isInteger(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == INTSXP && !inherits(s, "factor"));
+    return RBOOL(TYPEOF(s) == INTSXP && !inherits(s, "factor"));
 }
 
 INLINE_FUN Rboolean Rf_isFactor(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == INTSXP  && inherits(s, "factor"));
+    return RBOOL(TYPEOF(s) == INTSXP  && inherits(s, "factor"));
 }
 
 INLINE_FUN int Rf_nlevels(SEXP f)
@@ -1132,4 +1143,9 @@ INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)
     }
     return y;
 }
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
+
 #endif /* R_INLINES_H_ */

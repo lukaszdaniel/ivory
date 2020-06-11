@@ -177,7 +177,7 @@ static void R_restore_globals(RCNTXT *cptr)
     R_BCbody = cptr->bcbody;
     R_EvalDepth = cptr->evaldepth;
     vmaxset(cptr->vmax);
-    R_interrupts_suspended = cptr->intsusp;
+    R_interrupts_suspended = (Rboolean) cptr->intsusp;
     R_HandlerStack = cptr->handlerstack;
     R_RestartStack = cptr->restartstack;
     while (R_PendingPromises != cptr->prstack) {
@@ -861,7 +861,7 @@ R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
 SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred)
 {
     SEXP val;
-    Rboolean oldshow = R_ShowErrorMessages;
+    Rboolean oldshow = (Rboolean) R_ShowErrorMessages;
     R_ShowErrorMessages = FALSE;
     val = R_tryEval(e, env, ErrorOccurred);
     R_ShowErrorMessages = oldshow;
@@ -905,7 +905,7 @@ SEXP R_MakeUnwindCont()
 NORET void R_ContinueUnwind(SEXP cont)
 {
     SEXP retval = CAR(cont);
-    unwind_cont_t *u = RAWDATA(CDR(cont));
+    unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
     R_jumpctxt(u->jumptarget, u->jumpmask, retval);
 }
 
@@ -933,7 +933,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     if (SETJMP(thiscontext.cjmpbuf)) {
 	jump = TRUE;
 	SETCAR(cont, R_ReturnedValue);
-	unwind_cont_t *u = RAWDATA(CDR(cont));
+	unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
 	u->jumpmask = thiscontext.jumpmask;
 	u->jumptarget = thiscontext.jumptarget;
 	thiscontext.jumptarget = NULL;

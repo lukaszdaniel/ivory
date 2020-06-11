@@ -83,7 +83,7 @@ R_INLINE static Rboolean isNativeSymbolInfo(SEXP op)
     /* was: inherits(op, "NativeSymbolInfo")
      * inherits() is slow because of string comparisons, so use
      * structural check instead. */
-    return (TYPEOF(op) == VECSXP &&
+    return (Rboolean) (TYPEOF(op) == VECSXP &&
 	    LENGTH(op) >= 2 &&
 	    TYPEOF(VECTOR_ELT(op, 1)) == EXTPTRSXP);
 }
@@ -102,8 +102,7 @@ R_INLINE static Rboolean isNativeSymbolInfo(SEXP op)
 
    NB: in the last two cases it sets fun and symbol as well!
  */
-static void
-checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
+static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
 		   R_RegisteredNativeSymbol *symbol, char *buf)
 {
     if (isValidString(op)) return;
@@ -192,8 +191,7 @@ DL_FUNC R_dotCallFn(SEXP op, SEXP call, int nargs) {
   and look there.
 */
 
-static SEXP
-resolveNativeRoutine(SEXP args, DL_FUNC *fun,
+static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 		     R_RegisteredNativeSymbol *symbol, char *buf,
 		     int *nargs, int *naok, SEXP call, SEXP env)
 {
@@ -305,30 +303,28 @@ resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 }
 
 
-static Rboolean
-checkNativeType(int targetType, int actualType)
+static Rboolean checkNativeType(int targetType, int actualType)
 {
     if(targetType > 0) {
 	if(targetType == INTSXP || targetType == LGLSXP) {
-	    return(actualType == INTSXP || actualType == LGLSXP);
+	    return (Rboolean) (actualType == INTSXP || actualType == LGLSXP);
 	}
-	return(targetType == actualType);
+	return (Rboolean) (targetType == actualType);
     }
 
-    return(TRUE);
+    return TRUE;
 }
 
 
-static Rboolean
-comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
+static Rboolean comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
 {
    if(type == ANYSXP || TYPEOF(s) == type)
-      return(TRUE);
+      return TRUE;
 
    if(type == SINGLESXP)
-      return(asLogical(getAttrib(s, install("Csingle"))) == TRUE);
+      return (Rboolean) (asLogical(getAttrib(s, install("Csingle"))) == TRUE);
 
-   return(FALSE);
+   return FALSE;
 }
 
 
@@ -468,8 +464,8 @@ static SEXP enctrim(SEXP args)
 
 HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    const char *sym, *type="", *pkg = "";
-    int val = 1, nargs = length(args);
+	const char *sym, *type = "", *pkg = "";
+	int val = 1, nargs = length(args);
     R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
 
     if (nargs < 1) error(_("no arguments supplied"));
@@ -1608,6 +1604,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 	case LGLSXP:
 	case INTSXP:
+	    {
 	    n = XLENGTH(s);
 	    int *iptr = INTEGER(s);
 	    if (!naok)
@@ -1629,8 +1626,10 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (RTRACE(s)) memtrace_report(s, ss);
 #endif
 	    } else cargs[na] = (void*) iptr;
+	    }
 	    break;
 	case REALSXP:
+	    {
 	    n = XLENGTH(s);
 	    double *rptr = REAL(s);
 	    if (!naok)
@@ -1659,8 +1658,10 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (RTRACE(s)) memtrace_report(s, ss);
 #endif
 	    } else cargs[na] = (void*) rptr;
+	    }
 	    break;
 	case CPLXSXP:
+	    {
 	    n = XLENGTH(s);
 	    Rcomplex *zptr = COMPLEX(s);
 	    if (!naok)
@@ -1682,6 +1683,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (RTRACE(s)) memtrace_report(s, ss);
 #endif
 	    } else cargs[na] = (void *) zptr;
+	    }
 	    break;
 	case STRSXP:
 	    n = XLENGTH(s);
@@ -2563,20 +2565,19 @@ static const struct {
 }
 
 typeinfo[] = {
-    {"logical",	  LGLSXP },
-    {"integer",	  INTSXP },
-    {"double",	  REALSXP},
-    {"complex",	  CPLXSXP},
-    {"character", STRSXP },
-    {"list",	  VECSXP },
-    {NULL,	  0      }
-};
+	{"logical", LGLSXP},
+	{"integer", INTSXP},
+	{"double", REALSXP},
+	{"complex", CPLXSXP},
+	{"character", STRSXP},
+	{"list", VECSXP},
+	{NULL, 0}};
 
 static int string2type(char *s)
 {
     int i;
     for (i = 0 ; typeinfo[i].name ; i++) {
-	if(!strcmp(typeinfo[i].name, s)) {
+	if(streql(typeinfo[i].name, s)) {
 	    return typeinfo[i].type;
 	}
     }
@@ -2595,27 +2596,34 @@ static void *RObjToCPtr2(SEXP s)
     switch(TYPEOF(s)) {
     case LGLSXP:
     case INTSXP:
+	{
 	n = LENGTH(s);
 	int *iptr = INTEGER(s);
 	iptr = (int*) R_alloc(n, sizeof(int));
 	for (int i = 0 ; i < n ; i++) iptr[i] = INTEGER(s)[i];
 	return (void*) iptr;
+	}
 	break;
     case REALSXP:
+	{
 	n = LENGTH(s);
 	double *rptr = REAL(s);
 	rptr = (double*) R_alloc(n, sizeof(double));
 	for (int i = 0 ; i < n ; i++) rptr[i] = REAL(s)[i];
 	return (void*) rptr;
+	}
 	break;
     case CPLXSXP:
+	{
 	n = LENGTH(s);
 	Rcomplex *zptr = COMPLEX(s);
 	zptr = (Rcomplex*) R_alloc(n, sizeof(Rcomplex));
 	for (int i = 0 ; i < n ; i++) zptr[i] = COMPLEX(s)[i];
 	return (void*) zptr;
+	}
 	break;
     case STRSXP:
+	{
 	n = LENGTH(s);
 	char **cptr = (char**) R_alloc(n, sizeof(char*));
 	for (int i = 0 ; i < n ; i++) {
@@ -2624,13 +2632,16 @@ static void *RObjToCPtr2(SEXP s)
 	    strcpy(cptr[i], ss);
 	}
 	return (void*) cptr;
+	}
 	break;
 	/* From here down, probably not right */
     case VECSXP:
+	{
 	n = length(s);
 	SEXP *lptr = (SEXP *) R_alloc(n, sizeof(SEXP));
 	for (int i = 0 ; i < n ; i++) lptr[i] = VECTOR_ELT(s, i);
 	return (void*) lptr;
+	}
 	break;
     default:
 	return (void*) s;
