@@ -66,20 +66,20 @@ double Rf_qt(double p, double ndf, int lower_tail, int log_p)
 
 	p = R_DT_qIv(p);
 
-	/* Invert pt(.) :
+	/* Invert Rf_pt(.) :
 	 * 1. finding an upper and lower bound */
 	if(p > 1 - DBL_EPSILON) return ML_POSINF;
-	pp = fmin2(1 - DBL_EPSILON, p * (1 + Eps));
-	for(ux = 1.; ux < DBL_MAX && pt(ux, ndf, TRUE, FALSE) < pp; ux *= 2);
+	pp = Rf_fmin2(1 - DBL_EPSILON, p * (1 + Eps));
+	for(ux = 1.; ux < DBL_MAX && Rf_pt(ux, ndf, TRUE, FALSE) < pp; ux *= 2);
 	pp = p * (1 - Eps);
-	for(lx =-1.; lx > -DBL_MAX && pt(lx, ndf, TRUE, FALSE) > pp; lx *= 2);
+	for(lx =-1.; lx > -DBL_MAX && Rf_pt(lx, ndf, TRUE, FALSE) > pp; lx *= 2);
 
 	/* 2. interval (lx,ux)  halving
 	   regula falsi failed on qt(0.1, 0.1)
 	 */
 	do {
 	    nx = 0.5 * (lx + ux);
-	    if (pt(nx, ndf, TRUE, FALSE) > p) ux = nx; else lx = nx;
+	    if (Rf_pt(nx, ndf, TRUE, FALSE) > p) ux = nx; else lx = nx;
 	} while ((ux - lx) / fabs(nx) > accu && ++iter < 1000);
 
 	if(iter >= 1000) ML_WARNING(ME_PRECISION, "qt()");
@@ -97,7 +97,7 @@ double Rf_qt(double p, double ndf, int lower_tail, int log_p)
      * The differences are tiny even if x ~ 1e5, and qnorm is not
      * that accurate in the extreme tails.
      */
-    if (ndf > 1e20) return qnorm(p, 0., 1., lower_tail, log_p);
+    if (ndf > 1e20) return Rf_qnorm(p, 0., 1., lower_tail, log_p);
 
     P = R_D_qIv(p); /* if exp(p) underflows, we fix below */
 
@@ -158,9 +158,9 @@ double Rf_qt(double p, double ndf, int lower_tail, int log_p)
 	if ((ndf < 2.1 && P > 0.5) || y > 0.05 + a) { /* P > P0(df) */
 	    /* Asymptotic inverse expansion about normal */
 	    if(P_ok)
-		x = qnorm(0.5 * P, 0., 1., /*lower_tail*/TRUE,  /*log_p*/FALSE);
+		x = Rf_qnorm(0.5 * P, 0., 1., /*lower_tail*/TRUE,  /*log_p*/FALSE);
 	    else /* log_p && P underflowed */
-		x = qnorm(log_P2,  0., 1., lower_tail,	        /*log_p*/ TRUE);
+		x = Rf_qnorm(log_P2,  0., 1., lower_tail,	        /*log_p*/ TRUE);
 
 	    y = x * x;
 	    if (ndf < 5)
@@ -191,8 +191,8 @@ double Rf_qt(double p, double ndf, int lower_tail, int log_p)
 
 	if(P_ok1) {
 	    int it=0;
-	    while(it++ < 10 && (y = dt(q, ndf, FALSE)) > 0 &&
-		  R_FINITE(x = (pt(q, ndf, FALSE, FALSE) - P/2) / y) &&
+	    while(it++ < 10 && (y = Rf_dt(q, ndf, FALSE)) > 0 &&
+		  R_FINITE(x = (Rf_pt(q, ndf, FALSE, FALSE) - P/2) / y) &&
 		  fabs(x) > 1e-14*fabs(q))
 		/* Newton (=Taylor 1 term):
 		 *  q += x;

@@ -256,8 +256,7 @@ addInputHandler(InputHandler *handlers, int fd, InputHandlerProc handler,
 
   See getInputHandler() for first locating the target handler instance.
  */
-int
-removeInputHandler(InputHandler **handlers, InputHandler *it)
+int removeInputHandler(InputHandler **handlers, InputHandler *it)
 {
     InputHandler *tmp;
 
@@ -270,7 +269,7 @@ removeInputHandler(InputHandler **handlers, InputHandler *it)
 
     if(*handlers == it) {
 	*handlers = (*handlers)->next;
-	free(it);
+	Free(it); // use Free to match allocation with Calloc
 	return(1);
     }
 
@@ -279,7 +278,7 @@ removeInputHandler(InputHandler **handlers, InputHandler *it)
     while(tmp) {
 	if(tmp->next == it) {
 	    tmp->next = it->next;
-	    free(it);
+	    Free(it); // use Free to match allocation with Calloc
 	    return(1);
 	}
 	tmp = tmp->next;
@@ -289,8 +288,7 @@ removeInputHandler(InputHandler **handlers, InputHandler *it)
 }
 
 
-InputHandler *
-getInputHandler(InputHandler *handlers, int fd)
+InputHandler *getInputHandler(InputHandler *handlers, int fd)
 {
     InputHandler *tmp;
     tmp = handlers;
@@ -377,8 +375,7 @@ fd_set *R_checkActivity(int usec, int ignore_stdin)
   file descriptor.
  */
 
-static int
-setSelectMask(InputHandler *handlers, fd_set *readMask)
+static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 {
     int maxfd = -1;
     InputHandler *tmp = handlers;
@@ -419,8 +416,7 @@ void R_runHandlers(InputHandler *handlers, fd_set *readMask)
 /* The following routine is still used by the internet routines, but
  * it should eventually go away. */
 
-InputHandler *
-getSelectedHandler(InputHandler *handlers, fd_set *readMask)
+InputHandler *getSelectedHandler(InputHandler *handlers, fd_set *readMask)
 {
     InputHandler *tmp = handlers;
 
@@ -573,8 +569,7 @@ static struct {
 #ifdef NEED_INT_HANDLER
 static volatile Rboolean caught_sigwinch = FALSE;
 
-static RETSIGTYPE
-R_readline_sigwinch_handler(int sig)
+static RETSIGTYPE R_readline_sigwinch_handler(int sig)
 {
     caught_sigwinch = TRUE;
 }
@@ -584,8 +579,7 @@ R_readline_sigwinch_handler(int sig)
   Registers the specified routine and prompt with readline
   and keeps a record of it on the top of the R readline stack.
  */
-static void
-pushReadline(const char *prompt, rl_vcpfunc_t f)
+static void pushReadline(const char *prompt, rl_vcpfunc_t f)
 {
    if(ReadlineStack.current >= ReadlineStack.max) {
      warning(_("An unusual circumstance has arisen in the nesting of readline input. Please report using bug.report()"));
@@ -706,8 +700,7 @@ static void readline_handler(char *line)
  the host application will probably not let things get that far and trap the
  signals itself.
 */
-static void
-handleInterrupt(void)
+static void handleInterrupt(void)
 {
     popReadline();
     onintrNoResume();
@@ -839,8 +832,7 @@ static void initialize_rlcompletion(void)
    in case we want to do some simple parsing.  Return the array of matches,
    or NULL if there aren't any. */
 
-static char **
-R_custom_completion(const char *text, int start, int end)
+static char **R_custom_completion(const char *text, int start, int end)
      /*
 	Make some relevant information available to R, then call
 	rl_completion_matches to generate matches.  FIXME: It would be
@@ -941,8 +933,7 @@ HIDDEN void set_rl_word_breaks(const char *str)
 #endif /* HAVE_RL_COMPLETION_MATCHES */
 
 #else
-static void
-handleInterrupt(void)
+static void handleInterrupt(void)
 {
     onintrNoResume();
 }

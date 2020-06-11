@@ -196,7 +196,7 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 	    return;
 	}
 	/* This could cancel badly */
-	dpsifn(1. - x, n, /*kode = */ 1, m, ans, nz, ierr);
+	Rf_dpsifn(1. - x, n, /*kode = */ 1, m, ans, nz, ierr);
 	/* ans[j] == (-1)^(k+1) / gamma(k+1) * psi(k, 1 - x)
 	 *	     for j = 0:(m-1) ,	k = n + j
 	 */
@@ -251,10 +251,10 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 	}
     }
     mm = m;
-    nx = imin2(-Rf_i1mach(15), Rf_i1mach(16));/* = 1021 */
+    nx = Rf_imin2(-Rf_i1mach(15), Rf_i1mach(16));/* = 1021 */
     r1m5 = Rf_d1mach(5);
     r1m4 = Rf_d1mach(4) * 0.5;
-    wdtol = fmax2(r1m4, 0.5e-18); /* 1.11e-16 */
+    wdtol = Rf_fmax2(r1m4, 0.5e-18); /* 1.11e-16 */
 
     /* elim = approximate exponential over and underflow limit */
     elim = 2.302 * (nx * r1m5 - 3.0);/* = 700.6174... */
@@ -287,17 +287,17 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 	    /* compute xmin and the number of terms of the series,  fln+1 */
 
 	    rln = r1m5 * Rf_i1mach(14);
-	    rln = fmin2(rln, 18.06);
-	    fln = fmax2(rln, 3.0) - 3.0;
+	    rln = Rf_fmin2(rln, 18.06);
+	    fln = Rf_fmax2(rln, 3.0) - 3.0;
 	    yint = 3.50 + 0.40 * fln;
 	    slope = 0.21 + fln * (0.0006038 * fln + 0.008677);
 	    xm = yint + slope * fn;
 	    mx = (int)xm + 1;
 	    xmin = mx;
 	    if (n != 0) {
-		xm = -2.302 * rln - fmin2(0.0, xln);
+		xm = -2.302 * rln - Rf_fmin2(0.0, xln);
 		arg = xm / n;
-		arg = fmin2(0.0, arg);
+		arg = Rf_fmin2(0.0, arg);
 		eps = exp(arg);
 		xm = 1.0 - eps;
 		if (fabs(arg) < 1.0e-3)
@@ -322,7 +322,7 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 	    t = fn * xdmln;
 	    t1 = xdmln + xdmln;
 	    t2 = t + xdmln;
-	    tk = fmax2(fabs(t), fmax2(fabs(t1), fabs(t2)));
+	    tk = Rf_fmax2(fabs(t), Rf_fmax2(fabs(t1), fabs(t2)));
 	    if (tk <= elim) /* for all but large x */
 		goto L10;
 	}
@@ -513,7 +513,7 @@ double Rf_digamma(double x)
     double ans;
     int nz, ierr;
     if(ISNAN(x)) return x;
-    dpsifn(x, 0, 1, 1, &ans, &nz, &ierr);
+    Rf_dpsifn(x, 0, 1, 1, &ans, &nz, &ierr);
     ML_TREAT_psigam(ierr);
     return -ans;
 }
@@ -523,7 +523,7 @@ double Rf_trigamma(double x)
     double ans;
     int nz, ierr;
     if(ISNAN(x)) return x;
-    dpsifn(x, 1, 1, 1, &ans, &nz, &ierr);
+    Rf_dpsifn(x, 1, 1, 1, &ans, &nz, &ierr);
     ML_TREAT_psigam(ierr);
     return ans;
 }
@@ -533,7 +533,7 @@ double Rf_tetragamma(double x)
     double ans;
     int nz, ierr;
     if(ISNAN(x)) return x;
-    dpsifn(x, 2, 1, 1, &ans, &nz, &ierr);
+    Rf_dpsifn(x, 2, 1, 1, &ans, &nz, &ierr);
     ML_TREAT_psigam(ierr);
     return -2.0 * ans;
 }
@@ -543,7 +543,7 @@ double Rf_pentagamma(double x)
     double ans;
     int nz, ierr;
     if(ISNAN(x)) return x;
-    dpsifn(x, 3, 1, 1, &ans, &nz, &ierr);
+    Rf_dpsifn(x, 3, 1, 1, &ans, &nz, &ierr);
     ML_TREAT_psigam(ierr);
     return 6.0 * ans;
 }

@@ -44,5 +44,5 @@ double Rf_pbinom(double x, double n, double p, int lower_tail, int log_p)
     if (x < 0) return R_DT_0;
     x = floor(x + 1e-7);
     if (n <= x) return R_DT_1;
-    return pbeta(p, x + 1, n - x, !lower_tail, log_p);
+    return Rf_pbeta(p, x + 1, n - x, !lower_tail, log_p);
 }

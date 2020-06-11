@@ -76,8 +76,8 @@ static void w_init_maybe(int m, int n)
 	w_free(allocated_m, allocated_n); /* zeroes w */
 
     if (!w) { /* initialize w[][] */
-	m = imax2(m, WILCOX_MAX);
-	n = imax2(n, WILCOX_MAX);
+	m = Rf_imax2(m, WILCOX_MAX);
+	n = Rf_imax2(n, WILCOX_MAX);
 	w = (double ***) calloc((size_t) m + 1, sizeof(double **));
 #ifdef MATHLIB_STANDALONE
 	if (!w) MATHLIB_ERROR(_("wilcox allocation error %d"), 1);
@@ -179,8 +179,8 @@ double Rf_dwilcox(double x, double m, double n, int give_log)
     int mm = (int) m, nn = (int) n, xx = (int) x;
     w_init_maybe(mm, nn);
     d = give_log ?
-	log(cwilcox(xx, mm, nn)) - lchoose(m + n, n) :
-	    cwilcox(xx, mm, nn)  /  choose(m + n, n);
+	log(cwilcox(xx, mm, nn)) - Rf_lchoose(m + n, n) :
+	    cwilcox(xx, mm, nn)  /  Rf_choose(m + n, n);
 
     return(d);
 }
@@ -211,7 +211,7 @@ double Rf_pwilcox(double q, double m, double n, int lower_tail, int log_p)
 
     int mm = (int) m, nn = (int) n;
     w_init_maybe(mm, nn);
-    c = choose(m + n, n);
+    c = Rf_choose(m + n, n);
     p = 0;
     /* Use summation of probs over the shorter range */
     if (q <= (m * n / 2)) {
@@ -257,7 +257,7 @@ double Rf_qwilcox(double x, double m, double n, int lower_tail, int log_p)
 
     int mm = (int) m, nn = (int) n;
     w_init_maybe(mm, nn);
-    c = choose(m + n, n);
+    c = Rf_choose(m + n, n);
     p = 0;
     int q = 0;
     if (x <= 0.5) {

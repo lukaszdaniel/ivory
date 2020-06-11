@@ -25,15 +25,15 @@
  * DESCRIPTION
  *
  *   To compute the binomial probability, call dbinom(x,n,p).
- *   This checks for argument validity, and calls dbinom_raw().
+ *   This checks for argument validity, and calls Rf_dbinom_raw().
  *
- *   dbinom_raw() does the actual computation; note this is called by
+ *   Rf_dbinom_raw() does the actual computation; note this is called by
  *   other functions in addition to dbinom().
- *     (1) dbinom_raw() has both p and q arguments, when one may be represented
+ *     (1) Rf_dbinom_raw() has both p and q arguments, when one may be represented
  *         more accurately than the other (in particular, in df()).
- *     (2) dbinom_raw() does NOT check that inputs x and n are integers. This
+ *     (2) Rf_dbinom_raw() does NOT check that inputs x and n are integers. This
  *         should be done in the calling function, where necessary.
- *         -- but is not the case at all when called e.g., from df() or dbeta() !
+ *         -- but is not the case at all when called e.g., from df() or Rf_dbeta() !
  *     (3) Also does not check for 0 <= p <= 1 and 0 <= q <= 1 or NaN's.
  *         Do this in the calling function.
  */
@@ -50,18 +50,18 @@ double Rf_dbinom_raw(double x, double n, double p, double q, int give_log)
 
     if (x == 0) {
 	if(n == 0) return R_D__1;
-	lc = (p < 0.1) ? -bd0(n,n*q) - n*p : n*log(q);
+	lc = (p < 0.1) ? -Rf_bd0(n,n*q) - n*p : n*log(q);
 	return( R_D_exp(lc) );
     }
     if (x == n) {
-	lc = (q < 0.1) ? -bd0(n,n*p) - n*q : n*log(p);
+	lc = (q < 0.1) ? -Rf_bd0(n,n*p) - n*q : n*log(p);
 	return( R_D_exp(lc) );
     }
     if (x < 0 || x > n) return( R_D__0 );
 
     /* n*p or n*q can underflow to zero if n and p or q are small.  This
        used to occur in dbeta, and gives NaN as from R 2.3.0.  */
-    lc = stirlerr(n) - stirlerr(x) - stirlerr(n-x) - bd0(x,n*p) - bd0(n-x,n*q);
+    lc = Rf_stirlerr(n) - Rf_stirlerr(x) - Rf_stirlerr(n-x) - Rf_bd0(x,n*p) - Rf_bd0(n-x,n*q);
 
     /* f = (M_2PI*x*(n-x))/n; could overflow or underflow */
     /* Upto R 2.7.1:
@@ -87,5 +87,5 @@ double Rf_dbinom(double x, double n, double p, int give_log)
     n = R_forceint(n);
     x = R_forceint(x);
 
-    return dbinom_raw(x, n, p, 1-p, give_log);
+    return Rf_dbinom_raw(x, n, p, 1-p, give_log);
 }

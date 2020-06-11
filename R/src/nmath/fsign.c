@@ -19,7 +19,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double fsign(double x, double y);
+ *    double Rf_fsign(double x, double y);
  *
  *  DESCRIPTION
  *

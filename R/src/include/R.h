@@ -109,7 +109,7 @@ void R_WaitEvent(void);
 #endif
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_R_H */

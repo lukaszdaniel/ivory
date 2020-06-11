@@ -712,7 +712,7 @@ R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 		static char buf[10];
 		strncpy(buf, myoutdec, sizeof buf);
 		buf[sizeof(buf) - 1] = '\0';
-		char *savedOutDec = OutDec;
+		const char *savedOutDec = OutDec;
 		OutDec = buf;
 		elt = StringFromReal(REAL_ELT(data, i), &warn);
 		OutDec = savedOutDec;

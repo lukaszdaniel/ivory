@@ -101,7 +101,7 @@ static double csignrank(int k, int n)
 
     w[0] = w[1] = 1.;
     for(j = 2; j < n+1; ++j) {
-        int i, end = imin2(j*(j+1)/2, c);
+        int i, end = Rf_imin2(j*(j+1)/2, c);
 	for(i = end; i >= j; --i)
 	    w[i] += w[i-j];
     }

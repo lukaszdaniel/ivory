@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    void gammalims(double *xmin, double *xmax);
+ *    void Rf_gammalims(double *xmin, double *xmax);
  *
  *  DESCRIPTION
  *
@@ -39,7 +39,7 @@
 HIDDEN void Rf_gammalims(double *xmin, double *xmax)
 {
 /* FIXME: Even better: If IEEE, #define these in nmath.h
-	  and don't call gammalims() at all
+	  and don't call Rf_gammalims() at all
 */
 #ifdef IEEE_754
     *xmin = -170.5674972726612;
@@ -87,7 +87,7 @@ find_xmax:
     *xmin = *xmax = ML_NAN;
 
 done:
-    *xmin = fmax2(*xmin, -(*xmax) + 1);
+    *xmin = Rf_fmax2(*xmin, -(*xmax) + 1);
 #endif
 }
 

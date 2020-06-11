@@ -56,8 +56,8 @@ double Rf_bessel_j(double x, double alpha)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.1.2
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(((alpha - na == 0.5) ? 0 : bessel_j(x, -alpha) * cospi(alpha)) +
-	       ((alpha      == na ) ? 0 : bessel_y(x, -alpha) * sinpi(alpha)));
+	return(((alpha - na == 0.5) ? 0 : Rf_bessel_j(x, -alpha) * cospi(alpha)) +
+	       ((alpha      == na ) ? 0 : Rf_bessel_y(x, -alpha) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
 	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"), alpha);
@@ -107,8 +107,8 @@ double Rf_bessel_j_ex(double x, double alpha, double *bj)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.1.2
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(((alpha - na == 0.5) ? 0 : bessel_j_ex(x, -alpha, bj) * cospi(alpha)) +
-	       ((alpha      == na ) ? 0 : bessel_y_ex(x, -alpha, bj) * sinpi(alpha)));
+	return(((alpha - na == 0.5) ? 0 : Rf_bessel_j_ex(x, -alpha, bj) * cospi(alpha)) +
+	       ((alpha      == na ) ? 0 : Rf_bessel_y_ex(x, -alpha, bj) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
 	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"), alpha);
@@ -431,7 +431,7 @@ static void J_bessel(double *x, double *alpha, int *nb,
 		/* -----------------------------------------------------
 		   Calculate special significance test for NBMX > 2.
 		   -----------------------------------------------------*/
-		test = fmax2(test, sqrt(plast * ensig_BESS) * sqrt(p + p));
+		test = Rf_fmax2(test, sqrt(plast * ensig_BESS) * sqrt(p + p));
 	    }
 	    /* ------------------------------------------------
 	       Calculate P*S until significance test passes. */

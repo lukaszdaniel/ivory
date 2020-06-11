@@ -40,22 +40,22 @@ double Rf_qnbeta(double p, double a, double b, double ncp,
 
     p = R_DT_qIv(p);
 
-    /* Invert pnbeta(.) :
+    /* Invert Rf_pnbeta(.) :
      * 1. finding an upper and lower bound */
     if(p > 1 - DBL_EPSILON) return 1.0;
-    pp = fmin2(1 - DBL_EPSILON, p * (1 + Eps));
+    pp = Rf_fmin2(1 - DBL_EPSILON, p * (1 + Eps));
     for(ux = 0.5;
-	ux < 1 - DBL_EPSILON && pnbeta(ux, a, b, ncp, TRUE, FALSE) < pp;
+	ux < 1 - DBL_EPSILON && Rf_pnbeta(ux, a, b, ncp, TRUE, FALSE) < pp;
 	ux = 0.5*(1+ux));
     pp = p * (1 - Eps);
     for(lx = 0.5;
-	lx > DBL_MIN && pnbeta(lx, a, b, ncp, TRUE, FALSE) > pp;
+	lx > DBL_MIN && Rf_pnbeta(lx, a, b, ncp, TRUE, FALSE) > pp;
 	lx *= 0.5);
 
     /* 2. interval (lx,ux)  halving : */
     do {
 	nx = 0.5 * (lx + ux);
-	if (pnbeta(nx, a, b, ncp, TRUE, FALSE) > p) ux = nx; else lx = nx;
+	if (Rf_pnbeta(nx, a, b, ncp, TRUE, FALSE) > p) ux = nx; else lx = nx;
     }
     while ((ux - lx) / nx > accu);
 

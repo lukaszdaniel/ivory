@@ -222,7 +222,7 @@
    this is executed not under Valgrind.  Args are passed in a memory
    block, and so there's no intrinsic limit to the number that could
    be passed, but it's currently five.
-   
+
    The macro args are: 
       _zzq_rlval    result lvalue
       _zzq_default  default value (result returned when running on real CPU)
@@ -912,7 +912,7 @@ typedef
                      "srl $0, $0, 29\n\t"       \
                      "srl $0, $0, 3\n\t"        \
                      "srl $0, $0, 19\n\t"
-                    
+
 #define VALGRIND_DO_CLIENT_REQUEST_EXPR(                          \
        _zzq_default, _zzq_request,                                \
        _zzq_arg1, _zzq_arg2, _zzq_arg3, _zzq_arg4, _zzq_arg5)     \
@@ -5128,7 +5128,7 @@ typedef
 #endif /* PLAT_s390x_linux */
 
 /* ------------------------- mips32-linux ----------------------- */
- 
+
 #if defined(PLAT_mips32_linux)
 
 /* These regs are trashed by the hidden call. */
@@ -6291,7 +6291,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
 
 /* These requests allow control to move from the simulated CPU to the
    real CPU, calling an arbitary function.
-   
+
    Note that the current ThreadId is inserted as the first argument.
    So this call:
 
@@ -6377,7 +6377,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
    - It marks the block as being addressable and undefined (if 'is_zeroed' is
      not set), or addressable and defined (if 'is_zeroed' is set).  This
      controls how accesses to the block by the program are handled.
-   
+
    'addr' is the start of the usable block (ie. after any
    redzone), 'sizeB' is its size.  'rzB' is the redzone size if the allocator
    can apply redzones -- these are blocks of padding at the start and end of
@@ -6385,7 +6385,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
    Valgrind will spot block overruns.  `is_zeroed' indicates if the memory is
    zeroed (or filled with another predictable value), as is the case for
    calloc().
-   
+
    VALGRIND_MALLOCLIKE_BLOCK should be put immediately after the point where a
    heap block -- that will be used by the client program -- is allocated.
    It's best to put it at the outermost level of the allocator if possible;

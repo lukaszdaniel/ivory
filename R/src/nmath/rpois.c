@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double rpois(double lambda)
+ *    double Rf_rpois(double lambda)
  *
  *  DESCRIPTION
  *
@@ -103,7 +103,7 @@ double Rf_rpois(double mu)
 	    /*muprev = 0.;-* such that next time, mu != muprev ..*/
 	    if (mu != muprev) {
 		muprev = mu;
-		m = imax2(1, (int) mu);
+		m = Rf_imax2(1, (int) mu);
 		l = 0; /* pp[] is already ok up to pp[l] */
 		q = p0 = p = exp(-mu);
 	    }
@@ -118,7 +118,7 @@ double Rf_rpois(double mu)
 		   pp-table of cumulative poisson probabilities
 		   (0.458 > ~= pp[9](= 0.45792971447) for mu=10 ) */
 		if (l != 0) {
-		    for (k = (u <= 0.458) ? 1 : imin2(l, m);  k <= l; k++)
+		    for (k = (u <= 0.458) ? 1 : Rf_imin2(l, m);  k <= l; k++)
 			if (u <= pp[k])
 			    return (double)k;
 		    if (l == 35) /* u > pp[35] */
@@ -196,7 +196,7 @@ double Rf_rpois(double mu)
 	/*  sample t from the laplace 'hat'
 	    (if t <= -0.6744 then pk < fk for all mu >= 10.) */
 	u = 2 * unif_rand() - 1.;
-	t = 1.8 + fsign(E, u);
+	t = 1.8 + Rf_fsign(E, u);
 	if (t > -0.6744) {
 	    pois = floor(mu + s * t);
 	    fk = pois;

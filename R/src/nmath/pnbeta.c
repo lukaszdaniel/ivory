@@ -13,7 +13,7 @@
  *
  *  Auxiliary routines required:
  *	lgamma - log-gamma function
- *      pbeta  - incomplete-beta function {nowadays: pbeta_raw() -> bratio()}
+ *      pbeta  - incomplete-beta function {nowadays: Rf_pbeta_raw() -> Rf_bratio()}
  */
 
 #include "nmath.h"
@@ -43,16 +43,16 @@ LDOUBLE HIDDEN Rf_pnbeta_raw(double x, double o_x, double a, double b, double nc
 
 	/* initialize the series */
 
-    x0 = floor(fmax2(c - 7. * sqrt(c), 0.));
+    x0 = floor(Rf_fmax2(c - 7. * sqrt(c), 0.));
     a0 = a + x0;
-    lbeta = lgammafn(a0) + lgammafn(b) - lgammafn(a0 + b);
-    /* temp = pbeta_raw(x, a0, b, TRUE, FALSE), but using (x, o_x): */
-    bratio(a0, b, x, o_x, &temp, &tmp_c, &ierr, FALSE);
+    lbeta = Rf_lgammafn(a0) + Rf_lgammafn(b) - Rf_lgammafn(a0 + b);
+    /* temp = Rf_pbeta_raw(x, a0, b, TRUE, FALSE), but using (x, o_x): */
+    Rf_bratio(a0, b, x, o_x, &temp, &tmp_c, &ierr, FALSE);
 
     gx = exp(a0 * log(x) + b * (x < .5 ? log1p(-x) : log(o_x))
 	     - lbeta - log(a0));
     if (a0 > a)
-	q = exp(-c + x0 * log(c) - lgammafn(x0 + 1.));
+	q = exp(-c + x0 * log(c) - Rf_lgammafn(x0 + 1.));
     else
 	q = exp(-c);
 
@@ -74,9 +74,9 @@ LDOUBLE HIDDEN Rf_pnbeta_raw(double x, double o_x, double a, double b, double nc
     while (errbd > errmax && j < itrmax + x0);
 
     if (errbd > errmax)
-	ML_WARNING(ME_PRECISION, "pnbeta()");
+	ML_WARNING(ME_PRECISION, "Rf_pnbeta()");
     if (j >= itrmax + x0)
-	ML_WARNING(ME_NOCONV, "pnbeta()");
+	ML_WARNING(ME_NOCONV, "Rf_pnbeta()");
 
     return ans;
 }
@@ -85,7 +85,7 @@ HIDDEN double Rf_pnbeta2(double x, double o_x, double a, double b, double ncp,
 	/* o_x  == 1 - x  but maybe more accurate */
 	int lower_tail, int log_p)
 {
-    LDOUBLE ans = pnbeta_raw(x, o_x, a,b, ncp);
+    LDOUBLE ans = Rf_pnbeta_raw(x, o_x, a,b, ncp);
 
     /* return R_DT_val(ans), but we want to warn about cancellation here */
     if (lower_tail)
@@ -115,5 +115,5 @@ double Rf_pnbeta(double x, double a, double b, double ncp,
 #endif
 
     R_P_bounds_01(x, 0., 1.);
-    return pnbeta2(x, 1-x, a, b, ncp, lower_tail, log_p);
+    return Rf_pnbeta2(x, 1-x, a, b, ncp, lower_tail, log_p);
 }

@@ -34,5 +34,5 @@ double Rf_qlnorm(double p, double meanlog, double sdlog, int lower_tail, int log
 #endif
     R_Q_P01_boundaries(p, 0, ML_POSINF);
 
-    return exp(qnorm(p, meanlog, sdlog, lower_tail, log_p));
+    return exp(Rf_qnorm(p, meanlog, sdlog, lower_tail, log_p));
 }

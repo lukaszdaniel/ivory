@@ -20,7 +20,7 @@
  *
  * #include <Rmath.h>
  *
- * double pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
+ * double Rf_pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
  * double pbeta	   (double x, double a, double b, int lower_tail, int log_p)
  *
  *  DESCRIPTION
@@ -57,14 +57,14 @@ double Rf_pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
     double x1 = 0.5 - x + 0.5, w, wc;
     int ierr;
     //====
-    bratio(a, b, x, x1, &w, &wc, &ierr, log_p); /* -> ./toms708.c */
+    Rf_bratio(a, b, x, x1, &w, &wc, &ierr, log_p); /* -> ./toms708.c */
     //====
     // ierr in {10,14} <==> bgrat() error code ierr-10 in 1:4; for 1 and 4, warned *there*
     if(ierr && ierr != 11 && ierr != 14)
-	MATHLIB_WARNING4(_("pbeta_raw(%g, a=%g, b=%g, ..) -> bratio() gave error code %d"),
+	MATHLIB_WARNING4(_("Rf_pbeta_raw(%g, a=%g, b=%g, ..) -> Rf_bratio() gave error code %d"),
 			x, a,b, ierr);
     return lower_tail ? w : wc;
-} /* pbeta_raw() */
+} /* Rf_pbeta_raw() */
 
 double Rf_pbeta(double x, double a, double b, int lower_tail, int log_p)
 {
@@ -80,5 +80,5 @@ double Rf_pbeta(double x, double a, double b, int lower_tail, int log_p)
     if (x >= 1)
 	return R_DT_1;
 
-    return pbeta_raw(x, a, b, lower_tail, log_p);
+    return Rf_pbeta_raw(x, a, b, lower_tail, log_p);
 }

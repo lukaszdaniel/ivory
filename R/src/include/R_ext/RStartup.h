@@ -115,7 +115,7 @@ void R_set_command_line_arguments(int argc, char **argv);
 void setup_Rmainloop(void); // also in Rembedded.h
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_RSTARTUP_H_ */

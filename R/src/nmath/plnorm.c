@@ -34,6 +34,6 @@ double Rf_plnorm(double x, double meanlog, double sdlog, int lower_tail, int log
     if (sdlog < 0) ML_WARN_return_NAN;
 
     if (x > 0)
-	return pnorm(log(x), meanlog, sdlog, lower_tail, log_p);
+	return Rf_pnorm(log(x), meanlog, sdlog, lower_tail, log_p);
     return R_DT_0;
 }

@@ -56,9 +56,9 @@ double Rf_bessel_i(double x, double alpha, double expo)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.6.2 & 9.6.6
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(bessel_i(x, -alpha, expo) +
+	return(Rf_bessel_i(x, -alpha, expo) +
 	       ((alpha == na) ? /* sin(pi * alpha) = 0 */ 0 :
-		bessel_k(x, -alpha, expo) *
+		Rf_bessel_k(x, -alpha, expo) *
 		((ize == 1)? 2. : 2.*exp(-2.*x))/M_PI * sinpi(-alpha)));
     }
     nb = 1 + (int)na;/* nb-1 <= alpha < nb */
@@ -106,9 +106,9 @@ double Rf_bessel_i_ex(double x, double alpha, double expo, double *bi)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.6.2 & 9.6.6
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(bessel_i_ex(x, -alpha, expo, bi) +
+	return(Rf_bessel_i_ex(x, -alpha, expo, bi) +
 	       ((alpha == na) ? 0 :
-		bessel_k_ex(x, -alpha, expo, bi) *
+		Rf_bessel_k_ex(x, -alpha, expo, bi) *
 		((ize == 1)? 2. : 2.*exp(-2.*x))/M_PI * sinpi(-alpha)));
     }
     nb = 1 + (int)na;/* nb-1 <= alpha < nb */
@@ -334,7 +334,7 @@ L90:
 		/*---------------------------------------------------
 		  Calculate special significance test for NBMX > 2.
 		  --------------------------------------------------- */
-		test = fmax2(test,sqrt(plast * ensig_BESS) * sqrt(p + p));
+		test = Rf_fmax2(test,sqrt(plast * ensig_BESS) * sqrt(p + p));
 	    }
 	    /* --------------------------------------------------------
 	       Calculate P-sequence until significance test passed.

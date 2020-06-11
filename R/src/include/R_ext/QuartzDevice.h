@@ -98,7 +98,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif   
- 
+
 #if HAVE_AQUA
 #include <ApplicationServices/ApplicationServices.h>
 #else
@@ -151,10 +151,10 @@ typedef struct QuartzParameters_s {
     const char *pars1, *pars2;
     void       *parv;
 } QuartzParameters_t;
-    
+
 /* all device implementations have to call this general Quartz device constructor at some point */
 QuartzDesc_t QuartzDevice_Create(void *dd, QuartzBackend_t* def);
-    
+
 typedef struct QuartzFunctons_s {
     void*  (*Create)(void *, QuartzBackend_t *);  /* create a new device */
     int    (*DevNumber)(QuartzDesc_t desc);       /* returns device number */
@@ -163,7 +163,7 @@ typedef struct QuartzFunctons_s {
     double (*GetWidth)(QuartzDesc_t desc);        /* get device width (in inches) */
     double (*GetHeight)(QuartzDesc_t desc);       /* get device height (in inches) */
     void   (*SetSize)(QuartzDesc_t desc, double width, double height); /* set device size (in inches) */
-    
+
     double (*GetScaledWidth)(QuartzDesc_t desc);  /* get device width (in pixels) */
     double (*GetScaledHeight)(QuartzDesc_t desc); /* get device height (in pixels) */
     void   (*SetScaledSize)(QuartzDesc_t desc, double width, double height); /* set device size (in pixels) */
@@ -232,7 +232,7 @@ typedef QuartzDesc_t (*quartz_create_fn_t)(void *dd, QuartzFunctions_t *fn, Quar
 QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif   
 
 #endif /* R_EXT_QUARTZDEVICE_H_ */

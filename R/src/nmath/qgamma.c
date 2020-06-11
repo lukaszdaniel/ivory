@@ -26,7 +26,7 @@
  *  NOTES
  *
  *	This function is based on the Applied Statistics
- *	Algorithm AS 91 ("ppchi2") and via pgamma(.) AS 239.
+ *	Algorithm AS 91 ("ppchi2") and via Rf_pgamma(.) AS 239.
  *
  *	R core improvements:
  *	o  lower_tail, log_p
@@ -75,7 +75,7 @@ double Rf_qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
 	 *        = log(alpha*gamma(alpha)) = lgamma(alpha+1) suffers from
 	 *  catastrophic cancellation when alpha << 1
 	 */
-	double lgam1pa = (alpha < 0.5) ? lgamma1p(alpha) : (log(alpha) + g);
+	double lgam1pa = (alpha < 0.5) ? Rf_lgamma1p(alpha) : (log(alpha) + g);
 	ch = exp((lgam1pa + p1)/alpha + M_LN2);
 #ifdef DEBUG_qgamma
 	REprintf(" small chi-sq., ch0 = %g\n", ch);
@@ -83,7 +83,7 @@ double Rf_qchisq_appr(double p, double nu, double g /* = log Gamma(nu/2) */,
 
     } else if(nu > 0.32) {	/*  using Wilson and Hilferty estimate */
 
-	x = qnorm(p, 0, 1, lower_tail, log_p);
+	x = Rf_qnorm(p, 0, 1, lower_tail, log_p);
 	p1 = 2./(9*nu);
 	ch = nu*pow(x*sqrt(p1) + 1-p1, 3);
 
@@ -162,10 +162,10 @@ double Rf_qgamma(double p, double alpha, double scale, int lower_tail, int log_p
     REprintf("qgamma(p=%7g, alpha=%7g, scale=%7g, l.t.=%2d, log_p=%2d): ",
 	     p,alpha,scale, lower_tail, log_p);
 #endif
-    g = lgammafn(alpha);/* log Gamma(v/2) */
+    g = Rf_lgammafn(alpha);/* log Gamma(v/2) */
 
     /*----- Phase I : Starting Approximation */
-    ch = qchisq_appr(p, /* nu= 'df' =  */ 2*alpha, /* lgamma(nu/2)= */ g,
+    ch = Rf_qchisq_appr(p, /* nu= 'df' =  */ 2*alpha, /* lgamma(nu/2)= */ g,
 		     lower_tail, log_p, /* tol= */ EPS1);
     if(!R_FINITE(ch)) {
 	/* forget about all iterations! */
@@ -189,7 +189,7 @@ double Rf_qgamma(double p, double alpha, double scale, int lower_tail, int log_p
 #endif
 
 /*----- Phase II: Iteration
- *	Call pgamma() [AS 239]	and calculate seven term taylor series
+ *	Call Rf_pgamma() [AS 239]	and calculate seven term taylor series
  */
     c = alpha-1;
     s6 = (120+c*(346+127*c)) * i5040; /* used below, is "const" */
@@ -198,7 +198,7 @@ double Rf_qgamma(double p, double alpha, double scale, int lower_tail, int log_p
     for(i=1; i <= MAXIT; i++ ) {
 	q = ch;
 	p1 = 0.5*ch;
-	p2 = p_ - pgamma_raw(p1, alpha, /*lower_tail*/TRUE, /*log_p*/FALSE);
+	p2 = p_ - Rf_pgamma_raw(p1, alpha, /*lower_tail*/TRUE, /*log_p*/FALSE);
 #ifdef DEBUG_qgamma
 	if(i == 1) REprintf(" Ph.II iter; ch=%g, p2=%g\n", ch, p2);
 	if(i >= 2) REprintf("     it=%d,  ch=%g, p2=%g\n", i, ch, p2);
@@ -256,14 +256,14 @@ END:
 	    const double _1_p = 1. + 1e-7;
 	    const double _1_m = 1. - 1e-7;
 	    x = DBL_MIN;
-	    p_ = pgamma(x, alpha, scale, lower_tail, log_p);
+	    p_ = Rf_pgamma(x, alpha, scale, lower_tail, log_p);
 	    if(( lower_tail && p_ > p * _1_p) ||
 	       (!lower_tail && p_ < p * _1_m))
 		return(0.);
 	    /* else:  continue, using x = DBL_MIN instead of  0  */
 	}
 	else
-	    p_ = pgamma(x, alpha, scale, lower_tail, log_p);
+	    p_ = Rf_pgamma(x, alpha, scale, lower_tail, log_p);
 	if(p_ == ML_NEGINF) return 0; /* PR#14710 */
 	for(i = 1; i <= max_it_Newton; i++) {
 	    p1 = p_ - p;
@@ -276,9 +276,9 @@ END:
 	    if(fabs(p1) < fabs(EPS_N * p))
 		break;
 	    /* else */
-	    if((g = dgamma(x, alpha, scale, log_p)) == R_D__0) {
+	    if((g = Rf_dgamma(x, alpha, scale, log_p)) == R_D__0) {
 #ifdef DEBUG_q
-		if(i == 1) REprintf("no final Newton step because dgamma(*)== 0!\n");
+		if(i == 1) REprintf("no final Newton step because Rf_dgamma(*)== 0!\n");
 #endif
 		break;
 	    }

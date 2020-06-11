@@ -50,7 +50,7 @@ void REvprintf(const char *, R_VA_LIST);
 #endif
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_PRINT_H_ */

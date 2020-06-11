@@ -32,8 +32,8 @@
  *               = (a+b-1) dbinom(a-1; a+b-2,x)
  *
  *    The basic formula for the log density is thus
- *    (a-1) log x + (b-1) log (1-x) - lbeta(a, b)
- *    If either a or b <= 2 then 0 < lbeta(a, b) < 710 and so no
+ *    (a-1) log x + (b-1) log (1-x) - Rf_lbeta(a, b)
+ *    If either a or b <= 2 then 0 < Rf_lbeta(a, b) < 710 and so no
  *    term is large.  We use Loader's code only if both a and b > 2.
  */
 
@@ -78,9 +78,9 @@ double Rf_dbeta(double x, double a, double b, int give_log)
 
     double lval;
     if (a <= 2 || b <= 2)
-	lval = (a-1)*log(x) + (b-1)*log1p(-x) - lbeta(a, b);
+	lval = (a-1)*log(x) + (b-1)*log1p(-x) - Rf_lbeta(a, b);
     else
-	lval = log(a+b-1) + dbinom_raw(a-1, a+b-2, x, 1-x, TRUE);
+	lval = log(a+b-1) + Rf_dbinom_raw(a-1, a+b-2, x, 1-x, TRUE);
 
     return R_D_exp(lval);
 }

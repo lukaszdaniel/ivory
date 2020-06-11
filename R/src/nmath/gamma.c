@@ -101,8 +101,8 @@ double Rf_gammafn(double x)
 	FIXME for threads ! */
     if (ngam == 0) {
 	ngam = chebyshev_init(gamcs, 42, DBL_EPSILON/20);/*was .1*d1mach(3)*/
-	gammalims(&xmin, &xmax);/*-> ./gammalims.c */
-	xsml = exp(fmax2(log(DBL_MIN), -log(DBL_MAX)) + 0.01);
+	Rf_gammalims(&xmin, &xmax);/*-> ./gammalims.c */
+	xsml = exp(Rf_fmax2(log(DBL_MIN), -log(DBL_MAX)) + 0.01);
 	/*   = exp(.01)*DBL_MIN = 2.247e-308 for IEEE */
 	dxrel = sqrt(DBL_EPSILON);/*was sqrt(d1mach(4)) */
     }
@@ -140,7 +140,7 @@ double Rf_gammafn(double x)
 	if(x < 0) --n;
 	y = x - n;/* n = floor(x)  ==>	y in [ 0, 1 ) */
 	--n;
-	value = chebyshev_eval(y * 2 - 1, gamcs, ngam) + .9375;
+	value = Rf_chebyshev_eval(y * 2 - 1, gamcs, ngam) + .9375;
 	if (n == 0)
 	    return value;/* x = 1.dddd = 1+y */
 
@@ -197,7 +197,7 @@ double Rf_gammafn(double x)
 	}
 	else { /* normal case */
 	    value = exp((y - 0.5) * log(y) - y + M_LN_SQRT_2PI +
-			((2*y == (int)2*y)? stirlerr(y) : lgammacor(y)));
+			((2*y == (int)2*y)? Rf_stirlerr(y) : Rf_lgammacor(y)));
 	}
 	if (x > 0)
 	    return value;

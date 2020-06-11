@@ -99,7 +99,7 @@ extern void (* R_PolledEvents)(void);
 extern int R_wait_usec;
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_EVENTLOOP_H */

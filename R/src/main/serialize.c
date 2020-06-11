@@ -2274,11 +2274,10 @@ R_InitInPStream(R_inpstream_t stream, R_pstream_data_t data,
     stream->nat2utf8_obj = NULL; 
 }
 
-void
-R_InitOutPStream(R_outpstream_t stream, R_pstream_data_t data,
+void R_InitOutPStream(R_outpstream_t stream, R_pstream_data_t data,
 		 R_pstream_format_t type, int version,
 		 void (*outchar)(R_outpstream_t, int),
-		 void (*outbytes)(R_outpstream_t, void *, int),
+		 void (*outbytes)(R_outpstream_t, const void *, int),
 		 SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
     stream->data = data;
@@ -2308,7 +2307,7 @@ static int InCharFile(R_inpstream_t stream)
     return fgetc(fp);
 }
 
-static void OutBytesFile(R_outpstream_t stream, void *buf, int length)
+static void OutBytesFile(R_outpstream_t stream, const void *buf, int length)
 {
     FILE *fp = stream->data;
     size_t out = fwrite(buf, 1, length, fp);
@@ -2322,8 +2321,7 @@ static void InBytesFile(R_inpstream_t stream, void *buf, int length)
     if (in != length) error(_("read failed"));
 }
 
-void
-R_InitFileOutPStream(R_outpstream_t stream, FILE *fp,
+void R_InitFileOutPStream(R_outpstream_t stream, FILE *fp,
 			  R_pstream_format_t type, int version,
 			  SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
@@ -2331,8 +2329,7 @@ R_InitFileOutPStream(R_outpstream_t stream, FILE *fp,
 		     OutCharFile, OutBytesFile, phook, pdata);
 }
 
-void
-R_InitFileInPStream(R_inpstream_t stream, FILE *fp,
+void R_InitFileInPStream(R_inpstream_t stream, FILE *fp,
 			 R_pstream_format_t type,
 			 SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
@@ -2408,13 +2405,13 @@ static int InCharConn(R_inpstream_t stream)
     }
 }
 
-static void OutBytesConn(R_outpstream_t stream, void *buf, int length)
+static void OutBytesConn(R_outpstream_t stream, const void *buf, int length)
 {
     Rconnection con = (Rconnection) stream->data;
     CheckOutConn(con);
     if (con->text) {
 	int i;
-	char *p = buf;
+	const char *p = buf;
 	for (i = 0; i < length; i++)
 	    Rconn_printf(con, "%c", p[i]);
     }
@@ -2484,8 +2481,7 @@ static void con_cleanup(void *data)
 /* Used from saveRDS().
    This became public in R 2.13.0, and that version added support for
    connections internally */
-HIDDEN SEXP
-do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* serializeToConn(object, conn, ascii, version, hook) */
 
@@ -2554,8 +2550,7 @@ do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 /* unserializeFromConn(conn, hook) used from readRDS().
    It became public in R 2.13.0, and that version added support for
    connections internally */
-HIDDEN SEXP
-do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* 0 .. unserializeFromConn(conn, hook) */
     /* 1 .. serializeInfoFromConn(conn) */
@@ -2608,7 +2603,7 @@ do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
  */
 
 /**** should eventually come from a public header file */
-size_t R_WriteConnection(Rconnection con, void *buf, size_t n);
+size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
 
 #define BCONBUFSIZ 4096
 
@@ -2633,7 +2628,7 @@ static void OutCharBB(R_outpstream_t stream, int c)
     bb->buf[bb->count++] = (char) c;
 }
 
-static void OutBytesBB(R_outpstream_t stream, void *buf, int length)
+static void OutBytesBB(R_outpstream_t stream, const void *buf, int length)
 {
     bconbuf_t bb = stream->data;
     if (bb->count + length > BCONBUFSIZ)
@@ -2658,8 +2653,7 @@ static void InitBConOutPStream(R_outpstream_t stream, bconbuf_t bb,
 }
 
 /* only for use by serialize(), with binary write to a socket connection */
-static SEXP
-R_serializeb(SEXP object, SEXP icon, SEXP xdr, SEXP Sversion, SEXP fun)
+static SEXP R_serializeb(SEXP object, SEXP icon, SEXP xdr, SEXP Sversion, SEXP fun)
 {
     struct R_outpstream_st out;
     SEXP (*hook)(SEXP, SEXP);
@@ -2729,7 +2723,7 @@ static void OutCharMem(R_outpstream_t stream, int c)
     mb->buf[mb->count++] = (char) c;
 }
 
-static void OutBytesMem(R_outpstream_t stream, void *buf, int length)
+static void OutBytesMem(R_outpstream_t stream, const void *buf, int length)
 {
     membuf_t mb = stream->data;
     R_size_t needed = mb->count + (R_size_t) length;
@@ -2808,8 +2802,7 @@ static SEXP CloseMemOutPStream(R_outpstream_t stream)
     return val;
 }
 
-static SEXP
-R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP fun)
+static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP fun)
 {
     struct R_outpstream_st out;
     R_pstream_format_t type;
@@ -2951,8 +2944,7 @@ static int used = 0;
 static char names[NC][PATH_MAX];
 static char *ptr[NC];
 
-HIDDEN SEXP
-do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -2976,7 +2968,7 @@ do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
    position/length vector and returns them as raw vector. */
 
 /* There are some large lazy-data examples, e.g. 80Mb for SNPMaP.cdm */
-#define LEN_LIMIT 10*1048576
+#define LEN_LIMIT 10 * 1048576
 static SEXP readRawFromFile(SEXP file, SEXP key)
 {
     FILE *fp;
@@ -3123,8 +3115,7 @@ SEXP R_decompress3(SEXP in, Rboolean *err);
    result to a file.  Returns the key position/length key for
    retrieving the value */
 
-static SEXP
-R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
+static SEXP R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
 			SEXP compsxp, SEXP hook)
 {
     PROTECT_INDEX vpi;
@@ -3148,8 +3139,7 @@ R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
    from a file, optionally decompresses, and unserializes the bytes.
    If the result is a promise, then the promise is forced. */
 
-HIDDEN SEXP
-do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP key, file, compsxp, hook;
     PROTECT_INDEX vpi;
@@ -3182,16 +3172,14 @@ do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
     return val;
 }
 
-HIDDEN SEXP
-do_getVarsFromFrame(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_getVarsFromFrame(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     return R_getVarsFromFrame(CAR(args), CADR(args), CADDR(args));
 }
 
 
-HIDDEN SEXP
-do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP value, file, ascii, compsxp, hook;
@@ -3203,8 +3191,7 @@ do_lazyLoadDBinsertValue(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_lazyLoadDBinsertValue(value, file, ascii, compsxp, hook);
 }
 
-HIDDEN SEXP
-do_serialize(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_serialize(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if (PRIMVAL(op) == 2) return R_unserialize(CAR(args), CADR(args));

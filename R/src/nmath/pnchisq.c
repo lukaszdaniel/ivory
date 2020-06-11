@@ -55,14 +55,14 @@ double Rf_pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
 
     if (df < 0. || ncp < 0.) ML_WARN_return_NAN;
 
-    ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, lower_tail, log_p);
+    ans = Rf_pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, lower_tail, log_p);
 
     if (x <= 0. || x == ML_POSINF)
 	return ans; // because it's perfect
 
     if(ncp >= 80) {
 	if(lower_tail) {
-	    ans = fmin2(ans, R_D__1);  /* e.g., pchisq(555, 1.01, ncp = 80) */
+	    ans = Rf_fmin2(ans, R_D__1);  /* e.g., Rf_pchisq(555, 1.01, ncp = 80) */
 	} else { /* !lower_tail */
 	    /* since we computed the other tail cancellation is likely */
 	    // FIXME: There are cases where  ans == 0. if(!log_p) is perfect
@@ -81,7 +81,7 @@ double Rf_pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
 #ifdef DEBUG_pnch
 	REprintf("   pnchisq_raw(*, log_p): ans=%g => 2nd call, other tail\n", ans);
 #endif
-	ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, !lower_tail, FALSE);
+	ans = Rf_pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, !lower_tail, FALSE);
 	return log1p(-ans);
     }
 }
@@ -111,26 +111,26 @@ HIDDEN double Rf_pnchisq_raw(double x, double f, double theta /* = ncp */,
     R_CheckUserInterrupt();
 #endif
 
-    if(theta < 80) { /* use 110 for Inf, as ppois(110, 80/2, lower.tail=FALSE) is 2e-20 */
+    if(theta < 80) { /* use 110 for Inf, as Rf_ppois(110, 80/2, lower.tail=FALSE) is 2e-20 */
 	LDOUBLE ans;
 	int i;
-	// Have  pgamma(x,s) < x^s / Gamma(s+1) (< and ~= for small x)
-	// ==> pchisq(x, f) = pgamma(x, f/2, 2) = pgamma(x/2, f/2)
+	// Have  Rf_pgamma(x,s) < x^s / Gamma(s+1) (< and ~= for small x)
+	// ==> Rf_pchisq(x, f) = Rf_pgamma(x, f/2, 2) = Rf_pgamma(x/2, f/2)
 	//                  <  (x/2)^(f/2) / Gamma(f/2+1) < eps
 	// <==>  f/2 * log(x/2) - log(Gamma(f/2+1)) < log(eps) ( ~= -708.3964 )
 	// <==>        log(x/2) < 2/f*(log(Gamma(f/2+1)) + log(eps))
 	// <==> log(x) < log(2) + 2/f*(log(Gamma(f/2+1)) + log(eps))
 	if(lower_tail && f > 0. &&
 	   log(x) < M_LN2 + 2/f*(lgamma(f/2. + 1) + _dbl_min_exp)) {
-	    // all  pchisq(x, f+2*i, lower_tail, FALSE), i=0,...,110 would underflow to 0.
+	    // all  Rf_pchisq(x, f+2*i, lower_tail, FALSE), i=0,...,110 would underflow to 0.
 	    // ==> work in log scale
 	    double lambda = 0.5 * theta;
 	    double sum, sum2, pr = -lambda;
 	    sum = sum2 = ML_NEGINF;
 	    /* we need to renormalize here: the result could be very close to 1 */
 	    for(i = 0; i < 110;  pr += log(lambda) - log(++i)) {
-		sum2 = logspace_add(sum2, pr);
-		sum = logspace_add(sum, pr + pchisq(x, f+2*i, lower_tail, TRUE));
+		sum2 = Rf_logspace_add(sum2, pr);
+		sum = Rf_logspace_add(sum, pr + Rf_pchisq(x, f+2*i, lower_tail, TRUE));
 		if (sum2 >= -1e-15) /*<=> EXP(sum2) >= 1-1e-15 */ break;
 	    }
 	    ans = sum - sum2;
@@ -147,9 +147,9 @@ HIDDEN double Rf_pnchisq_raw(double x, double f, double theta /* = ncp */,
 	    for(i = 0; i < 110;  pr *= lambda/++i) {
 		// pr == exp(-lambda) lambda^i / i!  ==  dpois(i, lambda)
 		sum2 += pr;
-		// pchisq(*, i, *) is  strictly decreasing to 0 for lower_tail=TRUE
+		// Rf_pchisq(*, i, *) is  strictly decreasing to 0 for lower_tail=TRUE
 		//                 and strictly increasing to 1 for lower_tail=FALSE
-		sum += pr * pchisq(x, f+2*i, lower_tail, FALSE);
+		sum += pr * Rf_pchisq(x, f+2*i, lower_tail, FALSE);
 		if (sum2 >= 1-1e-15) break;
 	    }
 	    ans = sum/sum2;
@@ -202,7 +202,7 @@ p 	   theta) */
     }
     else {
 	/* Usual case 2: careful not to overflow .. : */
-	lt = f2*log(x2) -x2 - lgammafn(f2 + 1);
+	lt = f2*log(x2) -x2 - Rf_lgammafn(f2 + 1);
     }
 #ifdef DEBUG_pnch
     REprintf(" lt= %g", lt);

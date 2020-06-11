@@ -45,7 +45,7 @@ double Rf_pnbinom(double x, double size, double prob, int lower_tail, int log_p)
     if (x < 0) return R_DT_0;
     if (!R_FINITE(x)) return R_DT_1;
     x = floor(x + 1e-7);
-    return pbeta(prob, size, x + 1, lower_tail, log_p);
+    return Rf_pbeta(prob, size, x + 1, lower_tail, log_p);
 }
 
 double Rf_pnbinom_mu(double x, double size, double mu, int lower_tail, int log_p)
@@ -64,22 +64,22 @@ double Rf_pnbinom_mu(double x, double size, double mu, int lower_tail, int log_p
     if (x < 0) return R_DT_0;
     if (!R_FINITE(x)) return R_DT_1;
     if (!R_FINITE(size)) // limit case: Poisson
-	return(ppois(x, mu, lower_tail, log_p));
+	return(Rf_ppois(x, mu, lower_tail, log_p));
 
     x = floor(x + 1e-7);
     /* return
-     * pbeta(pr, size, x + 1, lower_tail, log_p);  pr = size/(size + mu), 1-pr = mu/(size+mu)
+     * Rf_pbeta(pr, size, x + 1, lower_tail, log_p);  pr = size/(size + mu), 1-pr = mu/(size+mu)
      *
-     *= pbeta_raw(pr, size, x + 1, lower_tail, log_p)
+     *= Rf_pbeta_raw(pr, size, x + 1, lower_tail, log_p)
      *            x.  pin   qin
      *=  bratio (pin,  qin, x., 1-x., &w, &wc, &ierr, log_p),  and return w or wc ..
      *=  bratio (size, x+1, pr, 1-pr, &w, &wc, &ierr, log_p) */
     {
 	int ierr;
 	double w, wc;
-	bratio(size, x+1, size/(size+mu), mu/(size+mu), &w, &wc, &ierr, log_p);
+	Rf_bratio(size, x+1, size/(size+mu), mu/(size+mu), &w, &wc, &ierr, log_p);
 	if(ierr)
-	    MATHLIB_WARNING(_("pnbinom_mu() -> bratio() gave error code %d"), ierr);
+	    MATHLIB_WARNING(_("pnbinom_mu() -> Rf_bratio() gave error code %d"), ierr);
 	return lower_tail ? w : wc;
     }
 }

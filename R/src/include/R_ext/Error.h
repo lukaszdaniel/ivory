@@ -26,7 +26,7 @@
 #ifndef R_ERROR_H_
 #define R_ERROR_H_
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -38,16 +38,14 @@ NORET void WrongArgCount(const char *);
 
 void	Rf_warning(const char *, ...);
 void 	R_ShowMessage(const char *s);
-    
 
-#ifdef  __cplusplus
-}
+#ifdef __cplusplus
+} //extern "C"
 #endif
 
 #ifndef R_NO_REMAP
 #define error Rf_error
 #define warning Rf_warning
 #endif
-
 
 #endif /* R_ERROR_H_ */

@@ -52,39 +52,39 @@ extern "C" {
 #endif
 
 /* Computation of printing formats */
-void formatLogical(const int *, R_xlen_t, int *);
-void formatInteger(const int *, R_xlen_t, int *);
-void formatReal(const double *, R_xlen_t, int *, int *, int *, int);
-void formatComplex(const Rcomplex *, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
+void Rf_formatLogical(const int *, R_xlen_t, int *);
+void Rf_formatInteger(const int *, R_xlen_t, int *);
+void Rf_formatReal(const double *, R_xlen_t, int *, int *, int *, int);
+void Rf_formatComplex(const Rcomplex *, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
 void formatLogicalS(SEXP, R_xlen_t, int *);
 void formatIntegerS(SEXP, R_xlen_t, int *);
 void formatRealS(SEXP, R_xlen_t, int *, int *, int *, int);
 void formatComplexS(SEXP, R_xlen_t, int *, int *, int *, int *, int *, int *, int);
 
 /* Formating of values */
-const char *EncodeLogical(int, int);
-const char *EncodeInteger(int, int);
-const char *EncodeReal0(double, int, int, int, const char *);
-const char *EncodeComplex(Rcomplex, int, int, int, int, int, int, const char *);
+const char *Rf_EncodeLogical(int, int);
+const char *Rf_EncodeInteger(int, int);
+const char *Rf_EncodeReal0(double, int, int, int, const char *);
+const char *Rf_EncodeComplex(Rcomplex, int, int, int, int, int, int, const char *);
 
 /* Legacy, misused by packages RGtk2 and qtbase */
-const char *EncodeReal(double, int, int, int, char);
+const char *Rf_EncodeReal(double, int, int, int, char);
 
 
 /* Printing */
-int	IndexWidth(R_xlen_t);
-void VectorIndex(R_xlen_t, int);
+int	Rf_IndexWidth(R_xlen_t);
+void Rf_VectorIndex(R_xlen_t, int);
 
 //void printLogicalVector(int *, R_xlen_t, int);
-void printIntegerVector(const int *, R_xlen_t, int);
-void printRealVector   (const double *, R_xlen_t, int);
-void printComplexVector(const Rcomplex *, R_xlen_t, int);
+void Rf_printIntegerVector(const int *, R_xlen_t, int);
+void Rf_printRealVector   (const double *, R_xlen_t, int);
+void Rf_printComplexVector(const Rcomplex *, R_xlen_t, int);
 void printIntegerVectorS(SEXP, R_xlen_t, int);
 void printRealVectorS   (SEXP, R_xlen_t, int);
 void printComplexVectorS(SEXP, R_xlen_t, int);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* PRTUTIL_H_ */

@@ -114,7 +114,7 @@ typedef
     VALGRIND_DO_CLIENT_REQUEST_EXPR(0 /* default return */,      \
                             VG_USERREQ__MAKE_MEM_NOACCESS,       \
                             (_qzz_addr), (_qzz_len), 0, 0, 0)
-      
+
 /* Similarly, mark memory at _qzz_addr as addressable but undefined
    for _qzz_len bytes. */
 #define VALGRIND_MAKE_MEM_UNDEFINED(_qzz_addr,_qzz_len)          \

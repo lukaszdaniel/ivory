@@ -44,7 +44,7 @@ double Rf_beta(double a, double b)
     static double lnsml = 0;/*-> typically = -708.3964185 */
 
     if (xmax == 0) {
-	    gammalims(&xmin, &xmax);
+	    Rf_gammalims(&xmin, &xmax);
 	    lnsml = log(d1mach(1));
     }
 #else
@@ -77,9 +77,9 @@ double Rf_beta(double a, double b)
 	   gammafn(x) can still overflow for x ~ 1e-308,
 	   but the result would too.
 	*/
-	return (1 / gammafn(a+b)) * gammafn(a) * gammafn(b);
+	return (1 / Rf_gammafn(a+b)) * Rf_gammafn(a) * Rf_gammafn(b);
     } else {
-	double val = lbeta(a, b);
+	double val = Rf_lbeta(a, b);
 // underflow to 0 is not harmful per se;  exp(-999) also gives no warning
 #ifndef IEEE_754
 	if (val < lnsml) {

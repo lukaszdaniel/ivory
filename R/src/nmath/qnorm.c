@@ -21,9 +21,9 @@
  *
  *  SYNOPSIS
  *
- *	double qnorm(double p, double mu, double sigma,
+ *	double Rf_qnorm(double p, double mu, double sigma,
  *		      int lower_tail, int log_p)
- *            {qnorm (..) is synonymous and preferred inside R}
+ *            {Rf_qnorm(..) is synonymous and preferred inside R}
  *
  *  DESCRIPTION
  *
@@ -66,7 +66,7 @@ double Rf_qnorm(double p, double mu, double sigma, int lower_tail, int log_p)
     q = p_ - 0.5;
 
 #ifdef DEBUG_qnorm
-    REprintf("qnorm(p=%10.7g, m=%g, s=%g, l.t.= %d, log= %d): q = %g\n",
+    REprintf("Rf_qnorm(p=%10.7g, m=%g, s=%g, l.t.= %d, log= %d): q = %g\n",
 	     p,mu,sigma, lower_tail, log_p, q);
 #endif
 

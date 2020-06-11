@@ -39,5 +39,5 @@ double Rf_qgeom(double p, double prob, int lower_tail, int log_p)
     R_Q_P01_boundaries(p, 0, ML_POSINF);
 
 /* add a fuzz to ensure left continuity, but value must be >= 0 */
-    return fmax2(0, ceil(R_DT_Clog(p) / log1p(- prob) - 1 - 1e-12));
+    return Rf_fmax2(0, ceil(R_DT_Clog(p) / log1p(- prob) - 1 - 1e-12));
 }

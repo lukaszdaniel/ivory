@@ -67,7 +67,7 @@ void fpu_setup(Rboolean start);
 #endif
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* REMBEDDED_H_ */

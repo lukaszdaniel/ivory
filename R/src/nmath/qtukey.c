@@ -145,7 +145,7 @@ double Rf_qtukey(double p, double rr, double cc, double df,
 
     /* Find prob(value < x0) */
 
-    valx0 = ptukey(x0, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
+    valx0 = Rf_ptukey(x0, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
 
     /* Find the second iterate and prob(value < x1). */
     /* If the first iterate has probability value */
@@ -153,10 +153,10 @@ double Rf_qtukey(double p, double rr, double cc, double df,
     /* first iterate; otherwise it is 1 greater. */
 
     if (valx0 > 0.0)
-	x1 = fmax2(0.0, x0 - 1.0);
+	x1 = Rf_fmax2(0.0, x0 - 1.0);
     else
 	x1 = x0 + 1.0;
-    valx1 = ptukey(x1, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
+    valx1 = Rf_ptukey(x1, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
 
     /* Find new iterate */
 
@@ -173,7 +173,7 @@ double Rf_qtukey(double p, double rr, double cc, double df,
 	}
 	/* Find prob(value < new iterate) */
 
-	valx1 = ptukey(ans, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
+	valx1 = Rf_ptukey(ans, rr, cc, df, /*LOWER*/TRUE, /*LOG_P*/FALSE) - p;
 	x1 = ans;
 
 	/* If the difference between two successive */

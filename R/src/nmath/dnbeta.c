@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double dnbeta(double x, double a, double b, double ncp, int give_log);
+ *    double Rf_dnbeta(double x, double a, double b, double ncp, int give_log);
  *
  *  DESCRIPTION
  *
@@ -72,7 +72,7 @@ double Rf_dnbeta(double x, double a, double b, double ncp, int give_log)
 
     if (x < 0 || x > 1) return(R_D__0);
     if(ncp == 0)
-	return dbeta(x, a, b, give_log);
+	return Rf_dbeta(x, a, b, give_log);
 
     /* New algorithm, starting with *largest* term : */
     ncp2 = 0.5 * ncp;
@@ -87,8 +87,8 @@ double Rf_dnbeta(double x, double a, double b, double ncp, int give_log)
     }
 
     /* The starting "middle term" --- first look at it's log scale: */
-    term = dbeta(x, a + kMax, b, /* log = */ TRUE);
-    p_k = dpois_raw(kMax, ncp2,              TRUE);
+    term = Rf_dbeta(x, a + kMax, b, /* log = */ TRUE);
+    p_k = Rf_dpois_raw(kMax, ncp2,              TRUE);
     if(x == 0. || !R_FINITE(term) || !R_FINITE((double)p_k)) /* if term = +Inf */
 	return R_D_exp((double)(p_k + term));
 

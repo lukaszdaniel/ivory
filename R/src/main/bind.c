@@ -37,7 +37,11 @@ static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 
 #include "duplicate.h"
 
-#define LIST_ASSIGN(x) {SET_VECTOR_ELT(data->ans_ptr, data->ans_length, x); data->ans_length++;}
+#define LIST_ASSIGN(x)                                      \
+	{                                                       \
+		SET_VECTOR_ELT(data->ans_ptr, data->ans_length, x); \
+		data->ans_length++;                                 \
+	}
 
 static SEXP cbind(SEXP, SEXP, SEXPTYPE, SEXP, int);
 static SEXP rbind(SEXP, SEXP, SEXPTYPE, SEXP, int);
@@ -70,8 +74,7 @@ static int HasNames(SEXP x)
     return 0;
 }
 
-static void
-AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, SEXP call)
+static void AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, SEXP call)
 {
     switch (TYPEOF(x)) {
     case NILSXP:
@@ -170,8 +173,7 @@ AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, S
 /* The following functions are used to coerce arguments to the
  * appropriate type for inclusion in the returned value. */
 
-static void
-ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
+static void ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
 
@@ -232,8 +234,7 @@ ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
     }
 }
 
-static void
-StringAnswer(SEXP x, struct BindData *data, SEXP call)
+static void StringAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -259,8 +260,7 @@ StringAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
+static void LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -297,8 +297,7 @@ LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
+static void IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -333,8 +332,7 @@ IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-RealAnswer(SEXP x, struct BindData *data, SEXP call)
+static void RealAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     int xi;
@@ -382,8 +380,7 @@ RealAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
+static void ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     int xi;
@@ -455,8 +452,7 @@ ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-RawAnswer(SEXP x, struct BindData *data, SEXP call)
+static void RawAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {

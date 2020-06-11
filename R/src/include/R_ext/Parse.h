@@ -41,7 +41,7 @@ typedef enum {
 SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_PARSE_H_ */

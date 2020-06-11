@@ -44,7 +44,7 @@ size_t Riconv (void * cd, const char **inbuf, size_t *inbytesleft,
 int Riconv_close (void * cd);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_ICONV_H */

@@ -43,9 +43,9 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
 	for(;;) {
 	    double newz;
 	    if(y == 0 ||
-	       (newz = pbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
+	       (newz = Rf_pbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
 		return y;
-	    y = fmax2(0, y - incr);
+	    y = Rf_fmax2(0, y - incr);
 	    *z = newz;
 	}
     }
@@ -54,9 +54,9 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
 	REprintf("\tnew z=%7g < p = %7g  --> search to right (y++) ..\n", z,p);
 #endif
 	for(;;) {
-	    y = fmin2(y + incr, n);
+	    y = Rf_fmin2(y + incr, n);
 	    if(y == n ||
-	       (*z = pbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)
+	       (*z = Rf_pbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)
 		return y;
 	}
     }
@@ -106,15 +106,15 @@ double Rf_qbinom(double p, double n, double pr, int lower_tail, int log_p)
     if (p + 1.01*DBL_EPSILON >= 1.) return n;
 
     /* y := approx.value (Cornish-Fisher expansion) :  */
-    z = qnorm(p, 0., 1., /*lower_tail*/TRUE, /*log_p*/FALSE);
+    z = Rf_qnorm(p, 0., 1., /*lower_tail*/TRUE, /*log_p*/FALSE);
     y = floor(mu + sigma * (z + gamma * (z*z - 1) / 6) + 0.5);
 
     if(y > n) /* way off */ y = n;
 
 #ifdef DEBUG_qbinom
-    REprintf("  new (p,1-p)=(%7g,%7g), z=qnorm(..)=%7g, y=%5g\n", p, 1-p, z, y);
+    REprintf("  new (p,1-p)=(%7g,%7g), z=Rf_qnorm(..)=%7g, y=%5g\n", p, 1-p, z, y);
 #endif
-    z = pbinom(y, n, pr, /*lower_tail*/TRUE, /*log_p*/FALSE);
+    z = Rf_pbinom(y, n, pr, /*lower_tail*/TRUE, /*log_p*/FALSE);
 
     /* fuzz to ensure left continuity: */
     p *= 1 - 64*DBL_EPSILON;
@@ -126,7 +126,7 @@ double Rf_qbinom(double p, double n, double pr, int lower_tail, int log_p)
 	do {
 	    oldincr = incr;
 	    y = do_search(y, &z, p, n, pr, incr);
-	    incr = fmax2(1, floor(incr/100));
+	    incr = Rf_fmax2(1, floor(incr/100));
 	} while(oldincr > 1 && incr > n*1e-15);
 	return y;
     }

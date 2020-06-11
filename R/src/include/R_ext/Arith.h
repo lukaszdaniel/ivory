@@ -85,7 +85,7 @@ int R_finite(double);		/* True if none of NA, NaN, +/-Inf */
 #endif
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_ARITH_H_ */

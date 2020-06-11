@@ -157,7 +157,7 @@ DECLARE_METHOD_SETTER(altstring, Is_sorted)
 DECLARE_METHOD_SETTER(altstring, No_NA)
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_ALTREP_H_ */

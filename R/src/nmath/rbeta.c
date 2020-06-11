@@ -57,8 +57,8 @@ double Rf_rbeta(double aa, double bb)
     qsame = (olda == aa) && (oldb == bb);
     if (!qsame) { olda = aa; oldb = bb; }
 
-    a = fmin2(aa, bb);
-    b = fmax2(aa, bb); /* a <= b */
+    a = Rf_fmin2(aa, bb);
+    b = Rf_fmax2(aa, bb); /* a <= b */
     alpha = a + b;
 
 #define v_w_from__u1_bet(AA) 			\

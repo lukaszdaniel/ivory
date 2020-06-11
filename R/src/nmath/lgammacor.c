@@ -20,15 +20,15 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double lgammacor(double x);
+ *    double Rf_lgammacor(double x);
  *
  *  DESCRIPTION
  *
  *    Compute the log gamma correction factor for x >= 10 so that
  *
- *    log(gamma(x)) = .5*log(2*pi) + (x-.5)*log(x) -x + lgammacor(x)
+ *    log(gamma(x)) = .5*log(2*pi) + (x-.5)*log(x) -x + Rf_lgammacor(x)
  *
- *    [ lgammacor(x) is called	Del(x)	in other contexts (e.g. dcdflib)]
+ *    [ Rf_lgammacor(x) is called	Del(x)	in other contexts (e.g. dcdflib)]
  *
  *  NOTES
  *
@@ -75,12 +75,12 @@ HIDDEN double Rf_lgammacor(double x)
     if (x < 10)
 	ML_WARN_return_NAN
     else if (x >= xmax) {
-	ML_WARNING(ME_UNDERFLOW, "lgammacor()");
+	ML_WARNING(ME_UNDERFLOW, "Rf_lgammacor()");
 	/* allow to underflow below */
     }
     else if (x < xbig) {
 	tmp = 10 / x;
-	return chebyshev_eval(tmp * tmp * 2 - 1, algmcs, nalgm) / x;
+	return Rf_chebyshev_eval(tmp * tmp * 2 - 1, algmcs, nalgm) / x;
     }
     return 1 / (x * 12);
 }

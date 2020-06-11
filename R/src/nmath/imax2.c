@@ -19,7 +19,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    int imax2(int x, int y);
+ *    int Rf_imax2(int x, int y);
  *
  *  DESCRIPTION
  *

@@ -75,7 +75,7 @@ void RxmlNanoFTPCleanup(void);
 void RxmlNanoHTTPCleanup(void);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_FTP_HTTP_H_ */

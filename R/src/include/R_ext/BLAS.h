@@ -437,7 +437,7 @@ F77_NAME(dsyr2k)(const char *uplo, const char *trans,
 /* #endif */
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_BLAS_H */

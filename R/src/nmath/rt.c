@@ -36,8 +36,8 @@ double Rf_rt(double df)
 	return norm_rand();
     else {
 /* Some compilers (including MW6) evaluated this from right to left
-	return norm_rand() / sqrt(rchisq(df) / df); */
+	return norm_rand() / sqrt(Rf_rchisq(df) / df); */
 	double num = norm_rand();
-	return num / sqrt(rchisq(df) / df);
+	return num / sqrt(Rf_rchisq(df) / df);
     }
 }

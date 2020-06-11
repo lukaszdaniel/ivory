@@ -59,7 +59,7 @@ double Rf_dgamma(double x, double shape, double scale, int give_log)
     }
 
     if (shape < 1) {
-	pr = dpois_raw(shape, x/scale, give_log);
+	pr = Rf_dpois_raw(shape, x/scale, give_log);
 	return (
 	    give_log/* NB: currently *always*  shape/x > 0  if shape < 1:
 		     * -- overflow to Inf happens, but underflow to 0 does NOT : */
@@ -69,6 +69,6 @@ double Rf_dgamma(double x, double shape, double scale, int give_log)
 	    : pr*shape / x);
     }
     /* else  shape >= 1 */
-    pr = dpois_raw(shape-1, x/scale, give_log);
+    pr = Rf_dpois_raw(shape-1, x/scale, give_log);
     return give_log ? pr - log(scale) : pr/scale;
 }

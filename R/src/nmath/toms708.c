@@ -137,7 +137,7 @@ HIDDEN void Rf_bratio(double a, double b, double x, double y, double *w, double 
 
     if (fabs(z) > eps * 3.) { *ierr = 5; return; }
 
-    R_ifDEBUG_printf("bratio(a=%g, b=%g, x=%9g, y=%9g, .., log_p=%d): ",
+    R_ifDEBUG_printf("Rf_bratio(a=%g, b=%g, x=%9g, y=%9g, .., log_p=%d): ",
 		     a,b,x,y, log_p);
     *ierr = 0;
     if (x == 0.) goto L200;
@@ -253,7 +253,7 @@ HIDDEN void Rf_bratio(double a, double b, double x, double y, double *w, double 
 	// else
 	if(ierr1) *ierr = 10 + ierr1;
 	if(*w1 < 0)
-	    MATHLIB_WARNING4("bratio(a=%g, b=%g, x=%g): bgrat() -> w1 = %g",
+	    MATHLIB_WARNING4("Rf_bratio(a=%g, b=%g, x=%g): bgrat() -> w1 = %g",
 			     a,b,x, *w1);
 	goto L_end_from_w1;
     }
@@ -625,7 +625,7 @@ static double bpser(double a, double b, double x, double eps, int log_p)
 	else {
 	    if(ans > ML_NEGINF)
 		MATHLIB_WARNING3(
-		    "pbeta(*, log.p=TRUE) -> bpser(a=%g, b=%g, x=%g,...) underflow to -Inf",
+		    "Rf_pbeta(*, log.p=TRUE) -> bpser(a=%g, b=%g, x=%g,...) underflow to -Inf",
 		    a,b,x);
 	    ans = ML_NEGINF;
 	}
@@ -729,7 +729,7 @@ static double bfrac(double a, double b, double x, double y, double lambda,
     R_ifDEBUG_printf(" bfrac(a=%g, b=%g, x=%g, y=%g, lambda=%g, eps=%g, log_p=%d):",
 		     a,b,x,y, lambda, eps, log_p);
     brc = brcomp(a, b, x, y, log_p);
-    if(ISNAN(brc)) { // e.g. from   L <- 1e308; pnbinom(L, L, mu = 5)
+    if(ISNAN(brc)) { // e.g. from   L <- 1e308; Rf_pnbinom(L, L, mu = 5)
 	R_ifDEBUG_printf(" --> brcomp(a,b,x,y) = NaN\n");
 	ML_WARN_return_NAN; // TODO: could we know better?
     }
@@ -1095,7 +1095,7 @@ static void bgrat(double a, double b, double x, double y, double *w,
 *
 * if(log_w),  *w  itself must be in log-space;
 *     compute   w := w + I_x(a,b)  but return *w = log(w):
-*          *w := log(exp(*w) + I_x(a,b)) = logspace_add(*w, log( I_x(a,b) ))
+*          *w := log(exp(*w) + I_x(a,b)) = Rf_logspace_add(*w, log( I_x(a,b) ))
 * ----------------------------------------------------------------------- */
 
 #define n_terms_bgrat 30
@@ -1107,10 +1107,10 @@ static void bgrat(double a, double b, double x, double y, double *w,
 	z = -nu * lnx; // z =: u in (9.1) of D.&M.(1992)
 
     if (b * z == 0.) { // should not happen, but does, e.g.,
-	// for  pbeta(1e-320, 1e-5, 0.5)  i.e., _subnormal_ x,
+	// for  Rf_pbeta(1e-320, 1e-5, 0.5)  i.e., _subnormal_ x,
 	// Warning ... bgrat(a=20.5, b=1e-05, x=1, y=9.99989e-321): ..
 	MATHLIB_WARNING5(
-	    "bgrat(a=%g, b=%g, x=%g, y=%g): z=%g, b*z == 0 underflow, hence inaccurate pbeta()",
+	    "bgrat(a=%g, b=%g, x=%g, y=%g): z=%g, b*z == 0 underflow, hence inaccurate Rf_pbeta()",
 	    a,b,x,y, z);
 	/* L_Error:    THE EXPANSION CANNOT BE COMPUTED */
 	 *ierr = 1; return;
@@ -1191,7 +1191,7 @@ static void bgrat(double a, double b, double x, double y, double *w,
 /*                    ADD THE RESULTS TO W */
 
     if(log_w) // *w is in log space already:
-	*w = logspace_add(*w, log_u + log(sum));
+	*w = Rf_logspace_add(*w, log_u + log(sum));
     else
 	*w += (u_0 ? exp(log_u + log(sum)) : u * sum);
     return;
@@ -1205,7 +1205,7 @@ static double grat_r(double a, double x, double log_r, double eps)
  *        Scaled complement of incomplete gamma ratio function
  *                   grat_r(a,x,r) :=  Q(a,x) / r
  * where
- *               Q(a,x) = pgamma(x,a, lower.tail=FALSE)
+ *               Q(a,x) = Rf_pgamma(x,a, lower.tail=FALSE)
  *     and            r = e^(-x)* x^a / Gamma(a) ==  exp(log_r)
  *
  *     It is assumed that a <= 1.  eps is the tolerance to be used.
@@ -1218,7 +1218,7 @@ static double grat_r(double a, double x, double log_r, double eps)
 	    /* L110:*/  return 0.;
 	}
     }
-    else if (a == 0.5) { // e.g. when called from pt()
+    else if (a == 0.5) { // e.g. when called from Rf_pt()
 	/* L120: */
 	if (x < 0.25) {
 	    double p = erf__(sqrt(x));

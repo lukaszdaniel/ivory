@@ -524,7 +524,7 @@ SEXP CreateAtVector(double*, double*, int, Rboolean);
 void GAxisPars(double *min, double *max, int *n, Rboolean log, int axis);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_GRAPHICSENGINE_ */

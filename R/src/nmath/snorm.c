@@ -26,7 +26,7 @@
  *
  *    Random variates from the STANDARD normal distribution  N(0,1).
  *
- * Is called from  rnorm(..), but also rt(), rf(), rgamma(), ...
+ * Is called from  Rf_rnorm(..), but also rt(), rf(), Rf_rgamma(), ...
  */
 
 #include <R_ext/Random.h>
@@ -219,8 +219,8 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = A - 0.630834801921960* fmin2(u2,u3);
-		if(fmax2(u2,u3) <= 0.755591531667601)
+		tt = A - 0.630834801921960* Rf_fmin2(u2,u3);
+		if(Rf_fmax2(u2,u3) <= 0.755591531667601)
 		    return (u2<u3) ? tt : -tt;
 		if(0.034240503750111*fabs(u2-u3) <= g(tt))
 		    return (u2<u3) ? tt : -tt;
@@ -231,8 +231,8 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = 0.479727404222441+1.105473661022070*fmin2(u2,u3);
-		if( fmax2(u2,u3)<=0.872834976671790 )
+		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
+		if( Rf_fmax2(u2,u3)<=0.872834976671790 )
 		    return (u2<u3) ? tt : -tt;
 		if( 0.049264496373128*fabs(u2-u3)<=g(tt) )
 		    return (u2<u3) ? tt : -tt;
@@ -243,8 +243,8 @@ double norm_rand(void)
 	repeat {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
-		tt = 0.479727404222441 - 0.595507138015940 * fmin2(u2, u3);
-		if(fmax2(u2,u3) <= 0.805577924423817)
+		tt = 0.479727404222441 - 0.595507138015940 * Rf_fmin2(u2, u3);
+		if(Rf_fmax2(u2,u3) <= 0.805577924423817)
 		return (u2<u3) ? tt : -tt;
 	}
     case BOX_MULLER:
@@ -267,7 +267,7 @@ double norm_rand(void)
 	/* unif_rand() alone is not of high enough precision */
 	u1 = unif_rand();
 	u1 = (int)(BIG * u1) + unif_rand();
-	return qnorm(u1/BIG, 0.0, 1.0, 1, 0);
+	return Rf_qnorm(u1/BIG, 0.0, 1.0, 1, 0);
     case KINDERMAN_RAMAGE: /* see Reference above */
 	/* corrected version from Josef Leydold
 	 * */
@@ -291,8 +291,8 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = A - 0.630834801921960 * fmin2(u2, u3);
-		if(fmax2(u2,u3) <= 0.755591531667601)
+		tt = A - 0.630834801921960 * Rf_fmin2(u2, u3);
+		if(Rf_fmax2(u2,u3) <= 0.755591531667601)
 		    return (u2<u3) ? tt : -tt;
 		if(0.034240503750111*fabs(u2-u3) <= g(tt))
 		    return (u2<u3) ? tt : -tt;
@@ -303,8 +303,8 @@ double norm_rand(void)
 	    repeat {
 		u2 = unif_rand();
 		u3 = unif_rand();
-		tt = 0.479727404222441+1.105473661022070*fmin2(u2,u3);
-		if( fmax2(u2,u3)<=0.872834976671790 )
+		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
+		if( Rf_fmax2(u2,u3)<=0.872834976671790 )
 		    return (u2<u3) ? tt : -tt;
 		if( 0.049264496373128*fabs(u2-u3)<=g(tt) )
 		    return (u2<u3) ? tt : -tt;
@@ -315,9 +315,9 @@ double norm_rand(void)
 	repeat {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
-	    tt = 0.479727404222441-0.595507138015940*fmin2(u2,u3);
+	    tt = 0.479727404222441-0.595507138015940*Rf_fmin2(u2,u3);
 	    if (tt < 0.) continue;
-	    if(fmax2(u2,u3) <= 0.805577924423817)
+	    if(Rf_fmax2(u2,u3) <= 0.805577924423817)
 		return (u2<u3) ? tt : -tt;
      	    if(0.053377549506886*fabs(u2-u3) <= g(tt))
 		return (u2<u3) ? tt : -tt;

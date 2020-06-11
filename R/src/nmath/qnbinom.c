@@ -21,7 +21,7 @@
  *  SYNOPSIS
  *
  *	#include <Rmath.h>
- *	double qnbinom(double p, double size, double prob,
+ *	double Rf_qnbinom(double p, double size, double prob,
  *                     int lower_tail, int log_p)
  *
  *  DESCRIPTION
@@ -49,15 +49,15 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
     if(*z >= p) {	/* search to the left */
 	for(;;) {
 	    if(y == 0 ||
-	       (*z = pnbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
+	       (*z = Rf_pnbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
 		return y;
-	    y = fmax2(0, y - incr);
+	    y = Rf_fmax2(0, y - incr);
 	}
     }
     else {		/* search to the right */
 	for(;;) {
 	    y = y + incr;
-	    if((*z = pnbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)
+	    if((*z = Rf_pnbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)
 		return y;
 	}
     }
@@ -101,10 +101,10 @@ double Rf_qnbinom(double p, double size, double prob, int lower_tail, int log_p)
     if (p + 1.01*DBL_EPSILON >= 1.) return ML_POSINF;
 
     /* y := approx.value (Cornish-Fisher expansion) :  */
-    z = qnorm(p, 0., 1., /*lower_tail*/TRUE, /*log_p*/FALSE);
+    z = Rf_qnorm(p, 0., 1., /*lower_tail*/TRUE, /*log_p*/FALSE);
     y = R_forceint(mu + sigma * (z + gamma * (z*z - 1) / 6));
 
-    z = pnbinom(y, size, prob, /*lower_tail*/TRUE, /*log_p*/FALSE);
+    z = Rf_pnbinom(y, size, prob, /*lower_tail*/TRUE, /*log_p*/FALSE);
 
     /* fuzz to ensure left continuity: */
     p *= 1 - 64*DBL_EPSILON;
@@ -117,7 +117,7 @@ double Rf_qnbinom(double p, double size, double prob, int lower_tail, int log_p)
 	do {
 	    oldincr = incr;
 	    y = do_search(y, &z, p, size, prob, incr);
-	    incr = fmax2(1, floor(incr/100));
+	    incr = Rf_fmax2(1, floor(incr/100));
 	} while(oldincr > 1 && incr > y*1e-15);
 	return y;
     }
@@ -126,7 +126,7 @@ double Rf_qnbinom(double p, double size, double prob, int lower_tail, int log_p)
 double Rf_qnbinom_mu(double p, double size, double mu, int lower_tail, int log_p)
 {
     if (size == ML_POSINF) // limit case: Poisson
-	return(qpois(p, mu, lower_tail, log_p));
+	return(Rf_qpois(p, mu, lower_tail, log_p));
 /* FIXME!  Implement properly!! (not losing accuracy for very large size (prob ~= 1)*/
-    return qnbinom(p, size, /* prob = */ size/(size+mu), lower_tail, log_p);
+    return Rf_qnbinom(p, size, /* prob = */ size/(size+mu), lower_tail, log_p);
 }

@@ -49,8 +49,8 @@ double Rf_qhyper(double p, double NR, double NB, double n,
      *   phyper(xr,  NR,NB, n) >= p > phyper(xr - 1,  NR,NB, n)
      */
 
-    xstart = fmax2(0, n - NB);
-    xend = fmin2(n, NR);
+    xstart = Rf_fmax2(0, n - NB);
+    xend = Rf_fmin2(n, NR);
 
     R_Q_P01_boundaries(p, xstart, xend);
 
@@ -60,7 +60,7 @@ double Rf_qhyper(double p, double NR, double NB, double n,
     small_N = (N < 1000); /* won't have underflow in product below */
     /* if N is small,  term := product.ratio( bin.coef );
        otherwise work with its logarithm to protect against underflow */
-    term = lfastchoose(NR, xr) + lfastchoose(NB, xb) - lfastchoose(N, n);
+    term = Rf_lfastchoose(NR, xr) + Rf_lfastchoose(NB, xb) - Rf_lfastchoose(N, n);
     if(small_N) term = exp(term);
     NR -= xr;
     NB -= xb;

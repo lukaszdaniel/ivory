@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2019  The R Core Team
+ *  Copyright (C) 1997--2020  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -459,6 +459,38 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
     return 0;
 }
 
+static Rboolean duplicatedInit(SEXP x, HashData *d)
+{
+    R_xlen_t i, n = XLENGTH(x);
+    Rboolean stop = FALSE;
+
+    if(TYPEOF(x) == STRSXP) {
+	for(i = 0; i < n; i++) {
+	    if(IS_BYTES(STRING_ELT(x, i))) {
+		d->useUTF8 = FALSE;
+		stop = TRUE;
+		break;
+	    }
+	    if(ENC_KNOWN(STRING_ELT(x, i))) {
+		d->useUTF8 = TRUE;
+	    }
+	    /* uncached strings are currently not properly supported */
+	    if(!IS_CACHED(STRING_ELT(x, i))) {
+		d->useCache = FALSE;
+		stop = TRUE;
+		break;
+	    }
+	}
+    } else if (TYPEOF(x) == VECSXP) {
+	for(i = 0; i < n; i++)
+	    if (duplicatedInit(VECTOR_ELT(x, i), d)) {
+		stop = TRUE;
+		break;
+	    }
+    }
+    return stop;
+}
+
 static void removeEntry(SEXP table, SEXP x, R_xlen_t indx, HashData *d)
 {
 #ifdef LONG_VECTOR_SUPPORT
@@ -490,23 +522,11 @@ static void removeEntry(SEXP table, SEXP x, R_xlen_t indx, HashData *d)
 #define DUPLICATED_INIT						\
     HashData data;						\
     HashTableSetup(x, &data, nmax);				\
-    if(TYPEOF(x) == STRSXP) {					\
-	data.useUTF8 = FALSE; data.useCache = TRUE;		\
-	for(i = 0; i < n; i++) {				\
-	    if(IS_BYTES(STRING_ELT(x, i))) {			\
-		data.useUTF8 = FALSE; break;			\
-	    }							\
-	    if(ENC_KNOWN(STRING_ELT(x, i))) {			\
-		data.useUTF8 = TRUE;				\
-	    }							\
-	    if(!IS_CACHED(STRING_ELT(x, i))) {			\
-		data.useCache = FALSE; break;			\
-	    }							\
-	}							\
-    }
+    data.useUTF8 = FALSE; data.useCache = TRUE;			\
+    duplicatedInit(x, &data);
 
 /* used in scan() */
-SEXP duplicated(SEXP x, Rboolean from_last)
+SEXP Rf_duplicated(SEXP x, Rboolean from_last)
 {
     SEXP ans;
     int *v, nmax = NA_INTEGER;
@@ -565,7 +585,7 @@ static SEXP Duplicated(SEXP x, Rboolean from_last, int nmax)
 }
 
 /* simpler version of the above : return 1-based index of first, or 0 : */
-R_xlen_t any_duplicated(SEXP x, Rboolean from_last)
+R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last)
 {
     R_xlen_t result = 0;
     int nmax = NA_INTEGER;
@@ -629,7 +649,7 @@ static SEXP duplicated3(SEXP x, SEXP incomp, Rboolean from_last, int nmax)
 }
 
 /* return (1-based) index of first duplication, or 0 : */
-R_xlen_t any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
+R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
 {
     int j, m = length(incomp), nmax = NA_INTEGER;
 
@@ -1487,8 +1507,7 @@ HIDDEN SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
 
-static SEXP
-rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
+static SEXP rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 {
     SEXP matches,ans;
     int n, p, ng, narm;
@@ -1562,8 +1581,7 @@ rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     return ans;
 }
 
-static SEXP
-rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
+static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 {
     SEXP matches,ans,col,xcol;
     int p, narm;

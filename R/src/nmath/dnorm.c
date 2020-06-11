@@ -20,8 +20,8 @@
  *
  *  SYNOPSIS
  *
- *	double dnorm(double x, double mu, double sigma, int give_log)
- *	      {dnorm (..) is synonymous and preferred inside R}
+ *	double Rf_dnorm(double x, double mu, double sigma, int give_log)
+ *	      {Rf_dnorm(..) is synonymous and preferred inside R}
  *
  *  DESCRIPTION
  *

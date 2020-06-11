@@ -90,11 +90,11 @@ extern "C" {
 
 SEXP   R_new_custom_connection(const char *description, const char *mode, const char *class_name, Rconnection *ptr);
 size_t R_ReadConnection(Rconnection con, void *buf, size_t n);
-size_t R_WriteConnection(Rconnection con, void *buf, size_t n);
+size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
 Rconnection R_GetConnection(SEXP sConn); // added in R 3.3.0
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_CONNECTIONS_H_ */

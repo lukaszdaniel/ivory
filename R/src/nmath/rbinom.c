@@ -69,11 +69,11 @@ double Rf_rbinom(double nin, double pp)
 
     if (r >= INT_MAX)/* evade integer overflow,
 			and r == INT_MAX gave only even values */
-	return qbinom(unif_rand(), r, pp, /*lower_tail*/ 0, /*log_p*/ 0);
+	return Rf_qbinom(unif_rand(), r, pp, /*lower_tail*/ 0, /*log_p*/ 0);
     /* else */
     n = (int) r;
 
-    p = fmin2(pp, 1. - pp);
+    p = Rf_fmin2(pp, 1. - pp);
     q = 1. - p;
     np = n * p;
     r = p / q;

@@ -78,7 +78,7 @@ int * user_unif_seedloc(void);
 double * user_norm_rand(void);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_RANDOM_H */

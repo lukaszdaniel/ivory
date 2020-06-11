@@ -176,27 +176,27 @@ INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
 
 INLINE_FUN const int *LOGICAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_LGL(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const int *INTEGER_OR_NULL(SEXP x) {
     CHECK_VECTOR_INT(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const double *REAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_REAL(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const double *COMPLEX_OR_NULL(SEXP x) {
     CHECK_VECTOR_CPLX(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const double *RAW_OR_NULL(SEXP x) {
     CHECK_VECTOR_RAW(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN R_xlen_t XLENGTH_EX(SEXP x)
@@ -324,7 +324,7 @@ INLINE_FUN int *LOGICAL0(SEXP x) {
 }
 INLINE_FUN Rboolean SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
-    return LOGICAL0(x)[0];
+    return (Rboolean) LOGICAL0(x)[0];
 }
 INLINE_FUN void SET_SCALAR_LVAL(SEXP x, Rboolean v) {
     CHECK_SCALAR_LGL(x);
@@ -462,7 +462,7 @@ INLINE_FUN SEXP STRING_ELT(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return ALTSTRING_ELT(x, i);
     else {
-	SEXP *ps = STDVEC_DATAPTR(x);
+	SEXP* ps = (SEXP*) STDVEC_DATAPTR(x);
 	return ps[i];
     }
 }
@@ -788,13 +788,13 @@ INLINE_FUN Rboolean Rf_inherits(SEXP s, const char *name)
 
 INLINE_FUN Rboolean isValidString(SEXP x)
 {
-    return TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP;
+    return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
 }
 
 /* non-empty ("") valid string :*/
 INLINE_FUN Rboolean Rf_isValidStringF(SEXP x)
 {
-    return isValidString(x) && CHAR(STRING_ELT(x, 0))[0];
+    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
@@ -809,25 +809,25 @@ INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
 
 INLINE_FUN Rboolean Rf_isPrimitive(SEXP s)
 {
-    return (TYPEOF(s) == BUILTINSXP ||
+    return (Rboolean) (TYPEOF(s) == BUILTINSXP ||
 	    TYPEOF(s) == SPECIALSXP);
 }
 
 INLINE_FUN Rboolean Rf_isFunction(SEXP s)
 {
-    return (TYPEOF(s) == CLOSXP ||
+    return (Rboolean) (TYPEOF(s) == CLOSXP ||
             isPrimitive(s));
 }
 
 INLINE_FUN Rboolean Rf_isList(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == LISTSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LISTSXP);
 }
 
 
 INLINE_FUN Rboolean Rf_isNewList(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == VECSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == VECSXP);
 }
 
 INLINE_FUN Rboolean Rf_isPairList(SEXP s)
@@ -903,7 +903,7 @@ INLINE_FUN Rboolean Rf_isFrame(SEXP s)
  *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
 INLINE_FUN Rboolean Rf_isLanguage(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == LANGSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LANGSXP);
 }
 
 INLINE_FUN Rboolean Rf_isMatrix(SEXP s)
@@ -934,18 +934,18 @@ INLINE_FUN Rboolean Rf_isArray(SEXP s)
 
 INLINE_FUN Rboolean Rf_isTs(SEXP s)
 {
-    return (isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
+    return (Rboolean) (isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
 }
 
 
 INLINE_FUN Rboolean Rf_isInteger(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP && !inherits(s, "factor"));
+    return (Rboolean) (TYPEOF(s) == INTSXP && !inherits(s, "factor"));
 }
 
 INLINE_FUN Rboolean Rf_isFactor(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP  && inherits(s, "factor"));
+    return (Rboolean) (TYPEOF(s) == INTSXP  && inherits(s, "factor"));
 }
 
 INLINE_FUN int Rf_nlevels(SEXP f)
@@ -1059,8 +1059,9 @@ INLINE_FUN Rboolean Rf_isVectorizable(SEXP s)
 }
 
 
-/**
- * Create a named vector of type TYP
+/** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
+ *
+ * @brief Create a named vector of type TYP
  *
  * @example const char *nms[] = {"xi", "yi", "zi", ""};
  *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
@@ -1107,8 +1108,8 @@ stringPositionTr(SEXP string, const char *translatedElement) {
 
     const void *vmax = vmaxget();
     for (i = 0 ; i < slen; i++) {
-	Rboolean found = ! strcmp(translateChar(STRING_ELT(string, i)),
-				  translatedElement);
+	Rboolean found = (Rboolean) (! strcmp(translateChar(STRING_ELT(string, i)),
+				  translatedElement));
 	vmaxset(vmax);
         if (found)
             return i;

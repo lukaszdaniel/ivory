@@ -675,7 +675,7 @@ extern int N01_kind;
 #endif /* MATHLIB_STANDALONE */
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* RMATH_H */

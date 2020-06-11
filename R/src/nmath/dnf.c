@@ -58,17 +58,17 @@ double Rf_dnf(double x, double df1, double df2, double ncp, int give_log)
 	if(x == 1.) return ML_POSINF; else return R_D__0;
     }
     if (!R_FINITE(df2)) /* i.e.  = +Inf */
-	return df1* dnchisq(x*df1, df1, ncp, give_log);
+	return df1* Rf_dnchisq(x*df1, df1, ncp, give_log);
     /*	 ==  dngamma(x, df1/2, 2./df1, ncp, give_log)  -- but that does not exist */
     if (df1 > 1e14 && ncp < 1e7) {
 	/* includes df1 == +Inf: code below is inaccurate there */
 	f = 1 + ncp/df1; /* assumes  ncp << df1 [ignores 2*ncp^(1/2)/df1*x term] */
-	z = dgamma(1./x/f, df2/2, 2./df2, give_log);
+	z = Rf_dgamma(1./x/f, df2/2, 2./df2, give_log);
 	return give_log ? z - 2*log(x) - log(f) : z / (x*x) / f;
     }
 
     y = (df1 / df2) * x;
-    z = dnbeta(y/(1 + y), df1 / 2., df2 / 2., ncp, give_log);
+    z = Rf_dnbeta(y/(1 + y), df1 / 2., df2 / 2., ncp, give_log);
     return  give_log ?
 	z + log(df1) - log(df2) - 2 * log1p(y) :
 	z * (df1 / df2) /(1 + y) / (1 + y);

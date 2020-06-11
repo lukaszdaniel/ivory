@@ -4236,7 +4236,7 @@ function(package, dir, lib.loc = NULL)
 
     ## Flatten the xref db into one big matrix.
     db <- cbind(do.call("rbind", db),
-                rep.int(names(db), vapply(db, NROW, 0L)))
+                File = rep.int(names(db), vapply(db, NROW, 0L)))
     if(nrow(db) == 0L)
         return(structure(list(), class = "check_Rd_xrefs"))
 
@@ -4269,17 +4269,47 @@ function(package, dir, lib.loc = NULL)
         aliases_db <- NULL
     }
 
-    for (pkg in unique(thispkg[have_anchor])) {
+    anchors <- unique(thispkg[have_anchor])
+
+    ## added in 4.1.0: are anchors declared?
+    check_anchors <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_PKGS_ARE_DECLARED_",
+                                         "FALSE"))
+    if(check_anchors) {
+        deps2 <- c(names(pkgInfo$Depends), names(pkgInfo$Imports),
+                   names(pkgInfo$Suggests))
+        ## people link to the package itself, although never needed.
+        undeclared <- setdiff(anchors, c(unique(deps2), package, base))
+        if(length(undeclared)) {
+            ## Now dig out Enhances
+            DESC <- pkgInfo$DESCRIPTION
+            if("Enhances" %in% names(DESC)) {
+                enh <- names(.split_dependencies(DESC[["Enhances"]]))
+                undeclared <- setdiff(undeclared, enh)
+            }
+        }
+        if(length(undeclared))
+            message(sprintf(ngettext(length(undeclared),
+                                     "Undeclared package %s in Rd xrefs",
+                                     "Undeclared packages %s in Rd xrefs", domain = "R-tools"),
+                            paste(sQuote(undeclared), collapse = ", "),
+                            domain = NA))
+    }
+
+    mind_suspects <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_MIND_SUSPECT_ANCHORS_",
+                                         "FALSE"))
+    if(mind_suspects) {
+        db <- cbind(db, suspect = FALSE)
+    }
+    
+    for (pkg in anchors) {
         ## we can't do this on the current uninstalled package!
         if (missing(package) && pkg == basename(dir)) next
         this <- have_anchor & (thispkg %in% pkg)
         top <- system.file(package = pkg, lib.loc = lib.loc)
         if(nzchar(top)) {
             RdDB <- file.path(top, "help", "paths.rds")
-            if(!file.exists(RdDB)) {
-                message(gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked", sQuote(pkg)), domain = "R-tools")
-                next
-            }
             nm <- sub("\\.[Rr]d", "", basename(readRDS(RdDB)))
             good <- thisfile[this] %in% nm
             suspect <- if(any(!good)) {
@@ -4288,6 +4318,9 @@ function(package, dir, lib.loc = NULL)
                 !good & (thisfile[this] %in% aliases1)
             } else FALSE
             db[this, "bad"] <- !good & !suspect
+            if(mind_suspects)
+                db[this, "suspect"] <- suspect
+            
         } else if(use_aliases_from_CRAN) {
             if(is.null(aliases_db)) {
                 ## Not yet read in.
@@ -4308,22 +4341,14 @@ function(package, dir, lib.loc = NULL)
                 !good & (thisfile[this] %in% aliases1)
             } else FALSE
             db[this, "bad"] <- !good & !suspect
+            if(mind_suspects)
+                db[this, "suspect"] <- suspect
         }
         else
             unknown <- c(unknown, pkg)
     }
 
     unknown <- unique(unknown)
-    ## Ancient history ....
-    ## obsolete <- unknown %in% c("ctest", "eda", "lqs", "mle", "modreg", "mva", "nls", "stepfun", "ts")
-    ## if (any(obsolete)) {
-    ##     message(sprintf(ngettext(sum(obsolete),
-    ##                       "Obsolete package %s in Rd xrefs",
-    ##                       "Obsolete packages %s in Rd xrefs", domain = "R-tools"),
-    ##                  paste(sQuote(unknown[obsolete]), collapse = ", ")),
-    ##             domain = NA)
-    ## }
-    ## unknown <- unknown[!obsolete]
     if (length(unknown)) {
         repos <- .get_standard_repository_URLs()
         ## Also allow for additionally specified repositories.
@@ -4352,22 +4377,36 @@ function(package, dir, lib.loc = NULL)
     }
     ## The bad ones:
     bad <- db[, "bad"] == "TRUE"
-    res1 <- split(db[bad, "report"], db[bad, 3L])
-    structure(list(bad = res1), class = "check_Rd_xrefs")
+    out <- list(bad = split(db[bad, "report"], db[bad, "File"]))
+    if(mind_suspects && any(ind <- db[, "suspect"] == "TRUE")) {
+        out <- c(out, list(suspect = split(db[ind, "report"],
+                                           db[ind, "File"])))
+    }
+    structure(out, class = "check_Rd_xrefs")
 }
 
 format.check_Rd_xrefs <-
 function(x, ...)
 {
-    xx <- x$bad
-    if(length(xx)) {
-        .fmt <- function(i) {
-            c(gettextf("Missing link or links in documentation object %s:", sQuote(names(xx)[i]), domain = "R-tools"),
+    xb <- x$bad
+    xs <- x$suspect
+    if(length(xb) || length(xs)) {
+        .fmtb <- function(i) {
+            c(gettextf("Missing link or links in documentation object %s:", sQuote(names(xb)[i]), domain = "R-tools"),
               ## NB, link might be empty, and was in mvbutils
-              .pretty_format(unique(xx[[i]])), "")
+              .pretty_format(unique(xb[[i]])),
+              "")
         }
-        c(unlist(lapply(seq_along(xx), .fmt)),
-          strwrap(gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
+        .fmts <- function(i) {
+            c(gettextf("Non-file package-anchored link(s) in documentation object '%s':",
+                       names(xs)[i], domain = "R-tools"),
+              .pretty_format(unique(xs[[i]])),
+              "")
+        }
+        c(unlist(lapply(seq_along(xb), .fmtb)),
+          unlist(lapply(seq_along(xs), .fmts)),
+          strwrap(gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools"))
+          )
     } else {
         character()
     }

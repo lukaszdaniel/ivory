@@ -86,7 +86,7 @@ extern void F77_NAME(dspfa)(double*, int*, int*, int*);
 extern void F77_NAME(dspsl)(double*, int*, int*, double*);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_LINPACK_H_ */

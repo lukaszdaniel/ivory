@@ -27,5 +27,5 @@
 
 double Rf_dchisq(double x, double df, int give_log)
 {
-    return dgamma(x, df / 2., 2., give_log);
+    return Rf_dgamma(x, df / 2., 2., give_log);
 }

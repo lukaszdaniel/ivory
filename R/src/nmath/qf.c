@@ -44,13 +44,13 @@ double Rf_qf(double p, double df1, double df2, int lower_tail, int log_p)
 	if(!R_FINITE(df1)) /* df1 == df2 == Inf : */
 	    return 1.;
 	/* else */
-	return qchisq(p, df1, lower_tail, log_p) / df1;
+	return Rf_qchisq(p, df1, lower_tail, log_p) / df1;
     }
     if (df1 > 4e5) { /* and so  df2 < df1 */
-	return df2 / qchisq(p, df2, !lower_tail, log_p);
+	return df2 / Rf_qchisq(p, df2, !lower_tail, log_p);
     }
 
     // FIXME: (1/qb - 1) = (1 - qb)/qb; if we know qb ~= 1, should use other tail
-    p = (1. / qbeta(p, df2/2, df1/2, !lower_tail, log_p) - 1.) * (df2 / df1);
+    p = (1. / Rf_qbeta(p, df2/2, df1/2, !lower_tail, log_p) - 1.) * (df2 / df1);
     return ML_VALID(p) ? p : ML_NAN;
 }

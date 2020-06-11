@@ -44,7 +44,7 @@ double Rf_dgeom(double x, double p, int give_log)
     x = R_forceint(x);
 
     /* prob = (1-p)^x, stable for small p */
-    prob = dbinom_raw(0.,x, p,1-p, give_log);
+    prob = Rf_dbinom_raw(0.,x, p,1-p, give_log);
 
     return((give_log) ? log(p) + prob : p*prob);
 }

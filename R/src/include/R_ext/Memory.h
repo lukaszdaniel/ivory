@@ -57,7 +57,7 @@ void *  R_calloc_gc(size_t, size_t);
 void *  R_realloc_gc(void *, size_t);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_MEMORY_H_ */

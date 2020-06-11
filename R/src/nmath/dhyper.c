@@ -27,9 +27,9 @@
  *    items without replacement. The hypergeometric probability is the
  *    probability of x successes:
  *
- *		       choose(r, x) * choose(b, n-x)
+ *		       Rf_choose(r, x) * Rf_choose(b, n-x)
  *	p(x; r,b,n) =  -----------------------------  =
- *			       choose(r+b, n)
+ *			       Rf_choose(r+b, n)
  *
  *		      dbinom(x,r,p) * dbinom(n-x,b,p)
  *		    = --------------------------------
@@ -67,9 +67,9 @@ double Rf_dhyper(double x, double r, double b, double n, int give_log)
     p = ((double)n)/((double)(r+b));
     q = ((double)(r+b-n))/((double)(r+b));
 
-    p1 = dbinom_raw(x,	r, p,q,give_log);
-    p2 = dbinom_raw(n-x,b, p,q,give_log);
-    p3 = dbinom_raw(n,r+b, p,q,give_log);
+    p1 = Rf_dbinom_raw(x,	r, p,q,give_log);
+    p2 = Rf_dbinom_raw(n-x,b, p,q,give_log);
+    p3 = Rf_dbinom_raw(n,r+b, p,q,give_log);
 
     return( (give_log) ? p1 + p2 - p3 : p1*p2/p3 );
 }

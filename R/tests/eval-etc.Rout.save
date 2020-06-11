@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-05-21 r1222) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-07 r1226) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-05-21 r78651) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-07 r78681) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -988,5 +988,5 @@ Summary of (a total of 10) warning messages:
 > 
 > ## at the very end
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.249 0.004 0.253 0 0 
+Time elapsed:  0.272 0.004 0.276 0 0 
 > 

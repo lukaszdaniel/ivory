@@ -23,10 +23,10 @@
  *
  * DESCRIPTION
  *
- *    dpois() checks argument validity and calls dpois_raw().
+ *    dpois() checks argument validity and calls Rf_dpois_raw().
  *
- *    dpois_raw() computes the Poisson probability  lb^x exp(-lb) / x!.
- *      This does not check that x is an integer, since dgamma() may
+ *    Rf_dpois_raw() computes the Poisson probability  lb^x exp(-lb) / x!.
+ *      This does not check that x is an integer, since Rf_dgamma() may
  *      call this with a fractional x argument. Any necessary argument
  *      checks should be done in the calling function.
  *
@@ -38,7 +38,7 @@
 // called also from dgamma.c, pgamma.c, dnbeta.c, dnbinom.c, dnchisq.c :
 double Rf_dpois_raw(double x, double lambda, int give_log)
 {
-    /*       x >= 0 ; integer for dpois(), but not e.g. for pgamma()!
+    /*       x >= 0 ; integer for dpois(), but not e.g. for Rf_pgamma()!
         lambda >= 0
     */
     if (lambda == 0) return( (x == 0) ? R_D__1 : R_D__0 );
@@ -49,9 +49,9 @@ double Rf_dpois_raw(double x, double lambda, int give_log)
 	if (!R_FINITE(x)) // lambda < x = +Inf
 	    return R_D__0;
 	// else
-	return(R_D_exp(-lambda + x*log(lambda) -lgammafn(x+1)));
+    return (R_D_exp(-lambda + x * log(lambda) - Rf_lgammafn(x + 1)));
     }
-    return(R_D_fexp( M_2PI*x, -stirlerr(x)-bd0(x,lambda) ));
+    return (R_D_fexp(M_2PI * x, -Rf_stirlerr(x) - Rf_bd0(x, lambda)));
 }
 
 double Rf_dpois(double x, double lambda, int give_log)
@@ -68,5 +68,5 @@ double Rf_dpois(double x, double lambda, int give_log)
 
     x = R_forceint(x);
 
-    return( dpois_raw(x,lambda,give_log) );
+    return (Rf_dpois_raw(x, lambda, give_log));
 }

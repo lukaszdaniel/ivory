@@ -60,7 +60,7 @@ extern void R_ClearerrConsole(void);
 extern NORET void R_Suicide(const char *);
 extern char *R_HomeDir(void);
 extern int R_DirtyImage;	/* Current image dirty */
-extern char *R_GUIType;
+extern const char *R_GUIType;
 extern void R_setupHistory(void);
 extern char *R_HistoryFile;	/* Name of the history file */
 extern int R_HistorySize;	/* Size of the history file */
@@ -84,11 +84,11 @@ void process_system_Renviron(void);
 void process_user_Renviron(void);
 
 #ifdef __cplusplus
-extern std::FILE * R_Consolefile;
-extern std::FILE * R_Outputfile;
+extern std::FILE *R_Consolefile;
+extern std::FILE *R_Outputfile;
 #else
-extern FILE * R_Consolefile;
-extern FILE * R_Outputfile;
+extern FILE *R_Consolefile;
+extern FILE *R_Outputfile;
 #endif
 
 /* in ../unix/sys-unix.c */
@@ -166,7 +166,7 @@ extern long R_timeout_val;
 extern int R_SignalHandlers;
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* RINTERFACE_H_ */

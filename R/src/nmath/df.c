@@ -50,9 +50,9 @@ double Rf_df(double x, double m, double n, int give_log)
 	if(x == 1.) return ML_POSINF; else return R_D__0;
     }
     if (!R_FINITE(n)) /* must be +Inf by now */
-	return(dgamma(x, m/2, 2./m, give_log));
+	return(Rf_dgamma(x, m/2, 2./m, give_log));
     if (m > 1e14) {/* includes +Inf: code below is inaccurate there */
-	dens = dgamma(1./x, n/2, 2./n, give_log);
+	dens = Rf_dgamma(1./x, n/2, 2./n, give_log);
 	return give_log ? dens - 2*log(x): dens/(x*x);
     }
 
@@ -62,11 +62,11 @@ double Rf_df(double x, double m, double n, int give_log)
 
     if (m >= 2) {
 	f = m*q/2;
-	dens = dbinom_raw((m-2)/2, (m+n-2)/2, p, q, give_log);
+	dens = Rf_dbinom_raw((m-2)/2, (m+n-2)/2, p, q, give_log);
     }
     else {
 	f = m*m*q / (2*p*(m+n));
-	dens = dbinom_raw(m/2, (m+n)/2, p, q, give_log);
+	dens = Rf_dbinom_raw(m/2, (m+n)/2, p, q, give_log);
     }
     return(give_log ? log(f)+dens : f*dens);
 }

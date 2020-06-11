@@ -108,7 +108,7 @@ void R_RegisterCCallable(const char *package, const char *name, DL_FUNC fptr);
 DL_FUNC R_GetCCallable(const char *package, const char *name);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_DYNLOAD_H_ */

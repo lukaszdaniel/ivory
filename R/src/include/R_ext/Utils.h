@@ -60,10 +60,10 @@ void	R_isort(int*, int);
 void	R_rsort(double*, int);
 void	R_csort(Rcomplex*, int);
 void    rsort_with_index(double *, int *, int);
-void	revsort(double*, int*, int);/* reverse; sort i[] alongside */
-void	iPsort(int*,    int, int);
-void	rPsort(double*, int, int);
-void	cPsort(Rcomplex*, int, int);
+void	Rf_revsort(double*, int*, int);/* reverse; sort i[] alongside */
+void	Rf_iPsort(int*,    int, int);
+void	Rf_rPsort(double*, int, int);
+void	Rf_cPsort(Rcomplex*, int, int);
 
 /* ../../main/qsort.c : */
 /* dummy renamed to II to avoid problems with g++ on Solaris */
@@ -81,11 +81,11 @@ const char *R_ExpandFileName(const char *);
 #ifdef _WIN32
 const char *R_ExpandFileNameUTF8(const char *);
 #endif
-void	setIVector(int*, int, int);
-void	setRVector(double*, int, double);
-Rboolean StringFalse(const char *);
-Rboolean StringTrue(const char *);
-Rboolean isBlankString(const char *);
+void	Rf_setIVector(int*, int, int);
+void	Rf_setRVector(double*, int, double);
+Rboolean Rf_StringFalse(const char *);
+Rboolean Rf_StringTrue(const char *);
+Rboolean Rf_isBlankString(const char *);
 
 /* These two are guaranteed to use '.' as the decimal point,
    and to accept "NA".
@@ -121,7 +121,7 @@ void find_interv_vec(double *xt, int *n,	double *x,   int *nx,
 void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_UTILS_H_ */

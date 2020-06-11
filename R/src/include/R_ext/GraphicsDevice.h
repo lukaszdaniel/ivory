@@ -870,7 +870,7 @@ const char* utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
 extern size_t Rf_ucstoutf8(char *s, const unsigned int c);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_GRAPHICSDEVICE_ */

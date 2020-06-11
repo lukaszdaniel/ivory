@@ -122,7 +122,7 @@ double Rlog1p(double x)
 	if( (0 < x && x < 1e-8) || (-1e-9 < x && x < 0))
 	    return x * (1 - .5 * x);
 	/* else */
-	return x * (1 - x * chebyshev_eval(x / .375, alnrcs, nlnrel));
+	return x * (1 - x * Rf_chebyshev_eval(x / .375, alnrcs, nlnrel));
     }
     /* else */
     if (x < xmin) {

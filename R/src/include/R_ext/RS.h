@@ -103,7 +103,7 @@ void	call_R(char*, long, void**, char**, long*, char**, long, char**);
 #endif
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_RS_H */

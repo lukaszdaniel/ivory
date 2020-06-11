@@ -222,7 +222,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 /* 'name' should be 1-element STRSXP or SYMSXP */
-SEXP setAttrib(SEXP vec, SEXP name, SEXP val)
+SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val)
 {
     PROTECT(vec);
     PROTECT(name);
@@ -272,7 +272,7 @@ SEXP setAttrib(SEXP vec, SEXP name, SEXP val)
 /* the output.	Note that the Dim and Names attributes */
 /* should have been assigned elsewhere. */
 
-void copyMostAttrib(SEXP inp, SEXP ans)
+void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 {
     SEXP s;
 
@@ -294,7 +294,7 @@ void copyMostAttrib(SEXP inp, SEXP ans)
 }
 
 /* version that does not preserve ts information, for subsetting */
-void copyMostAttribNoTs(SEXP inp, SEXP ans)
+void Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
 
@@ -414,7 +414,7 @@ NORET static void badtsp(void)
 }
 
 HIDDEN
-SEXP tspgets(SEXP vec, SEXP val)
+SEXP Rf_tspgets(SEXP vec, SEXP val)
 {
     double start, end, frequency;
     int n;
@@ -1886,8 +1886,7 @@ HIDDEN SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
    (Obviously, this is another routine that has accumulated barnacles and
    should at some time be broken into separate parts.)
 */
-HIDDEN SEXP
-R_getS4DataSlot(SEXP obj, SEXPTYPE type)
+HIDDEN SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
 {
   static SEXP s_xData, s_dotData; SEXP value = R_NilValue;
   PROTECT_INDEX opi;

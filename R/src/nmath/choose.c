@@ -20,15 +20,15 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double choose(double n, double k);
- *    double lchoose(double n, double k);
+ *    double Rf_choose(double n, double k);
+ *    double Rf_lchoose(double n, double k);
  * (and private)
- *    double lfastchoose(double n, double k);
+ *    double Rf_lfastchoose(double n, double k);
  *
  *  DESCRIPTION
  *
  *	Binomial coefficients.
- *	choose(n, k)   and  lchoose(n,k) := log(abs(choose(n,k))
+ *	Rf_choose(n, k)   and  Rf_lchoose(n,k) := log(abs(Rf_choose(n,k))
  *
  *	These work for the *generalized* binomial theorem,
  *	i.e., are also defined for non-integer n  (integer k).
@@ -48,16 +48,15 @@ void R_CheckStack(void);
 
 HIDDEN double Rf_lfastchoose(double n, double k)
 {
-    return -log(n + 1.) - lbeta(n - k + 1., k + 1.);
+    return -log(n + 1.) - Rf_lbeta(n - k + 1., k + 1.);
 }
 /* mathematically the same:
    less stable typically, but useful if n-k+1 < 0 : */
-static
-double lfastchoose2(double n, double k, int *s_choose)
+static double lfastchoose2(double n, double k, int *s_choose)
 {
     double r;
-    r = lgammafn_sign(n - k + 1., s_choose);
-    return lgammafn(n + 1.) - lgammafn(k + 1.) - r;
+    r = Rf_lgammafn_sign(n - k + 1., s_choose);
+    return Rf_lgammafn(n + 1.) - Rf_lgammafn(k + 1.) - r;
 }
 
 #define ODD(_K_) ((_K_) != 2 * floor((_K_) / 2.))
@@ -85,22 +84,22 @@ double Rf_lchoose(double n, double k)
     }
     /* else: k >= 2 */
     if (n < 0) {
-	return lchoose(-n+ k-1, k);
+	return Rf_lchoose(-n+ k-1, k);
     }
     else if (R_IS_INT(n)) {
 	n = R_forceint(n);
 	if(n < k) return ML_NEGINF;
 	/* k <= n :*/
-	if(n - k < 2) return lchoose(n, n-k); /* <- Symmetry */
+	if(n - k < 2) return Rf_lchoose(n, n-k); /* <- Symmetry */
 	/* else: n >= k+2 */
-	return lfastchoose(n, k);
+	return Rf_lfastchoose(n, k);
     }
     /* else non-integer n >= 0 : */
     if (n < k-1) {
 	int s;
 	return lfastchoose2(n, k, &s);
     }
-    return lfastchoose(n, k);
+    return Rf_lfastchoose(n, k);
 }
 
 #define k_small_max 30
@@ -135,15 +134,15 @@ double Rf_choose(double n, double k)
     }
     /* else: k >= k_small_max */
     if (n < 0) {
-	r = choose(-n+ k-1, k);
+	r = Rf_choose(-n+ k-1, k);
 	if (ODD(k)) r = -r;
 	return r;
     }
     else if (R_IS_INT(n)) {
 	n = R_forceint(n);
 	if(n < k) return 0.;
-	if(n - k < k_small_max) return choose(n, n-k); /* <- Symmetry */
-	return R_forceint(exp(lfastchoose(n, k)));
+	if(n - k < k_small_max) return Rf_choose(n, n-k); /* <- Symmetry */
+	return R_forceint(exp(Rf_lfastchoose(n, k)));
     }
     /* else non-integer n >= 0 : */
     if (n < k-1) {
@@ -151,5 +150,5 @@ double Rf_choose(double n, double k)
 	r = lfastchoose2(n, k, /* -> */ &s_choose);
 	return s_choose * exp(r);
     }
-    return exp(lfastchoose(n, k));
+    return exp(Rf_lfastchoose(n, k));
 }

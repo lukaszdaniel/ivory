@@ -28,9 +28,9 @@
  *
  *    Requires the following auxiliary routines:
  *
- *	lgammafn(x)	- log gamma function
- *	pbeta(x, a, b)	- incomplete beta function
- *	pnorm(x)	- normal distribution function
+ *	Rf_lgammafn(x)	- log gamma function
+ *	Rf_pbeta(x, a, b)	- incomplete beta function
+ *	Rf_pnorm(x)	- normal distribution function
  *
  *  CONSTANTS
  *
@@ -62,7 +62,7 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
     const static double errmax = 1.e-12;
 
     if (df <= 0.0) ML_WARN_return_NAN;
-    if(ncp == 0.0) return pt(t, df, lower_tail, log_p);
+    if(ncp == 0.0) return Rf_pt(t, df, lower_tail, log_p);
 
     if(!R_FINITE(t))
 	return (t < 0) ? R_DT_0 : R_DT_1;
@@ -71,7 +71,7 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
     }
     else {
 	/* We deal quickly with left tail if extreme,
-	   since pt(q, df, ncp) <= pt(0, df, ncp) = \Phi(-ncp) */
+	   since Rf_pt(q, df, ncp) <= Rf_pt(0, df, ncp) = \Phi(-ncp) */
 	if (ncp > 40 && (!log_p || !lower_tail)) return R_DT_0;
 	negdel = TRUE;	tt = -t; del = -ncp;
     }
@@ -82,7 +82,7 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 	/* Approx. from	 Abramowitz & Stegun 26.7.10 (p.949) */
 	s = 1./(4.*df);
 
-	return pnorm((double)(tt*(1. - s)), del,
+	return Rf_pnorm((double)(tt*(1. - s)), del,
 		     sqrt((double) (1. + tt*tt*2.*s)),
 		     lower_tail != negdel, log_p);
     }
@@ -94,7 +94,7 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
     rxb = df/(x + df);/* := (1 - x) {x below} -- but more accurately */
     x = x / (x + df);/* in [0,1) */
 #ifdef DEBUG_pnt
-    REprintf("pnt(t=%7g, df=%7g, ncp=%7g) ==> x= %10g:",t,df,ncp, x);
+    REprintf("Rf_pnt(t=%7g, df=%7g, ncp=%7g) ==> x= %10g:",t,df,ncp, x);
 #endif
     if (x > 0.) {/* <==>  t != 0 */
 	lambda = del * del;
@@ -105,8 +105,8 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 	if(p == 0.) { /* underflow! */
 
 	    /*========== really use an other algorithm for this case !!! */
-	    ML_WARNING(ME_UNDERFLOW, "pnt()");
-	    ML_WARNING(ME_RANGE, "pnt()"); /* |ncp| too large */
+	    ML_WARNING(ME_UNDERFLOW, "Rf_pnt()");
+	    ML_WARNING(ME_RANGE, "Rf_pnt()"); /* |ncp| too large */
 	    return R_DT_0;
 	}
 #ifdef DEBUG_pnt
@@ -125,8 +125,8 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 	/* rxb = (1 - x) ^ b   [ ~= 1 - b*x for tiny x --> see 'xeven' below]
 	 *       where '(1 - x)' =: rxb {accurately!} above */
 	rxb = pow(rxb, b);
-	albeta = M_LN_SQRT_PI + lgammafn(b) - lgammafn(.5 + b);
-	xodd = pbeta(x, a, b, /*lower*/TRUE, /*log_p*/FALSE);
+	albeta = M_LN_SQRT_PI + Rf_lgammafn(b) - Rf_lgammafn(.5 + b);
+	xodd = Rf_pbeta(x, a, b, /*lower*/TRUE, /*log_p*/FALSE);
 	godd = 2. * rxb * exp(a * log(x) - albeta);
 	tnc = b * x;
 	xeven = (tnc < DBL_EPSILON) ? tnc : 1. - rxb;
@@ -146,7 +146,7 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 	    s -= p;
 	    /* R 2.4.0 added test for rounding error here. */
 	    if(s < -1.e-10) { /* happens e.g. for (t,df,ncp)=(40,10,38.5), after 799 it.*/
-		ML_WARNING(ME_PRECISION, "pnt()");
+		ML_WARNING(ME_PRECISION, "Rf_pnt()");
 #ifdef DEBUG_pnt
 		REprintf("s = %#14.7Lg < 0 !!! ---> non-convergence!!\n", s);
 #endif
@@ -161,17 +161,17 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 	    if(fabs(errbd) < errmax) goto finis;/*convergence*/
 	}
 	/* non-convergence:*/
-	ML_WARNING(ME_NOCONV, "pnt()");
+	ML_WARNING(ME_NOCONV, "Rf_pnt()");
     }
     else { /* x = t = 0 */
 	tnc = 0.;
     }
  finis:
-    tnc += pnorm(- del, 0., 1., /*lower*/TRUE, /*log_p*/FALSE);
+    tnc += Rf_pnorm(- del, 0., 1., /*lower*/TRUE, /*log_p*/FALSE);
 
     lower_tail = lower_tail != negdel; /* xor */
     if(tnc > 1 - 1e-10 && lower_tail)
 	ML_WARNING(ME_PRECISION, "pnt{final}");
 
-    return R_DT_val(fmin2((double)tnc, 1.) /* Precaution */);
+    return R_DT_val(Rf_fmin2((double)tnc, 1.) /* Precaution */);
 }

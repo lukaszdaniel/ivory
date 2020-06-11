@@ -604,8 +604,14 @@ BUI   0 0 0 0 0 0 0 1 = 64
 #endif
 
 /* Miscellaneous Definitions */
-inline Rboolean streql(const char* s, const char* t) { return (strcmp(s, t) == 0); }
-inline Rboolean streqln(const char* s, const char* t, size_t n) { return (strncmp(s, t, n) == 0); }
+inline Rboolean streql(const char *s, const char *t)
+{
+    return (Rboolean) (strcmp(s, t) == 0);
+}
+inline Rboolean streqln(const char *s, const char *t, size_t n)
+{
+    return (Rboolean) (strncmp(s, t, n) == 0);
+}
 
 /* Arithmetic and Relation Operators */
 typedef enum {
@@ -645,10 +651,8 @@ typedef enum {
 
 /* Defined and initialized in names.c (not main.c) :*/
 #ifndef __R_Names__
-extern
+extern FUNTAB	R_FunTab[];	    /* Built in functions */
 #endif
-FUNTAB	R_FunTab[];	    /* Built in functions */
-
 
 #include <R_ext/libextern.h>
 
@@ -784,7 +788,7 @@ extern0   Rboolean WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
 #endif
 
-extern char* OutDec	INI_as(".");  /* decimal point used for output */
+extern const char* OutDec	INI_as(".");  /* decimal point used for output */
 extern0 Rboolean R_DisableNLinBrowser	INI_as(FALSE);
 extern0 char R_BrowserLastCommand	INI_as('n');
 
@@ -793,7 +797,7 @@ extern int Rf_initEmbeddedR(int argc, char **argv);
 
 /* GUI type */
 
-extern char	*R_GUIType	INI_as("unknown");
+extern const char	*R_GUIType	INI_as("unknown");
 extern Rboolean R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);

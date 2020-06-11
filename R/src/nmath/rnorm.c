@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include "Rnorm.h"
- *    double rnorm(double mu, double sigma);
+ *    double Rf_rnorm(double mu, double sigma);
  *
  *  DESCRIPTION
  *

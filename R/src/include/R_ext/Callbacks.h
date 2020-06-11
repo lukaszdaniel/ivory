@@ -107,13 +107,13 @@ struct  _R_ObjectTable{
 
   Rdb_onDetach onDetach;
   Rdb_onAttach onAttach;
-  
+
   void     *privateData;
 };
 
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_CALLBACKS_H */

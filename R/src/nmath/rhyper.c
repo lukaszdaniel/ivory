@@ -45,7 +45,7 @@
 #include "dpq.h"
 #include <limits.h>
 
-// afc(i) :=  ln( i! )	[logarithm of the factorial i] = {R:} lgamma(i + 1) = {C:} lgammafn(i + 1)
+// afc(i) :=  ln( i! )	[logarithm of the factorial i] = {R:} lgamma(i + 1) = {C:} Rf_lgammafn(i + 1)
 static double afc(int i)
 {
     // If (i > 7), use Stirling's approximation, otherwise use table lookup.
@@ -116,10 +116,10 @@ double Rf_rhyper(double nn1in, double nn2in, double kkin)
         // FIXME: Much faster to give rbinom() approx when appropriate; -> see Kuensch(1989)
 	// Johnson, Kotz,.. p.258 (top) mention the *four* different binomial approximations
 	if(kkin == 1.) { // Bernoulli
-	    return rbinom(kkin, nn1in / (nn1in + nn2in));
+	    return Rf_rbinom(kkin, nn1in / (nn1in + nn2in));
 	}
 	// Slow, but safe: return  F^{-1}(U)  where F(.) = phyper(.) and  U ~ U[0,1]
-	return qhyper(unif_rand(), nn1in, nn2in, kkin,
+	return Rf_qhyper(unif_rand(), nn1in, nn2in, kkin,
 		      /*lower_tail =*/ FALSE, /*log_p = */ FALSE);
 	// lower_tail=FALSE: a thinko, is still "correct" as equiv. to  U <--> 1-U
     }
@@ -155,8 +155,8 @@ double Rf_rhyper(double nn1in, double nn2in, double kkin)
     }
     if (setup1 || setup2) {
 	m = (int) ((k + 1.) * (n1 + 1.) / (N + 2.)); // m := floor(adjusted mean E[.])
-	minjx = imax2(0, k - n2);
-	maxjx = imin2(n1, k);
+	minjx = Rf_imax2(0, k - n2);
+	maxjx = Rf_imin2(n1, k);
 #ifdef DEBUG_rhyper
 	REprintf("rhyper(n1=%d, n2=%d, k=%d), setup: floor(a.mean)=: m = %d, [min,maxjx]= [%d,%d]\n",
 		 nn1, nn2, kk, m, minjx, maxjx);

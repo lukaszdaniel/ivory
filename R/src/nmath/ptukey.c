@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double ptukey(q, rr, cc, df, lower_tail, log_p);
+ *    double Rf_ptukey(q, rr, cc, df, lower_tail, log_p);
  *
  *  DESCRIPTION
  *
@@ -119,7 +119,7 @@ static double wprob(double w, double rr, double cc)
     /* find (f(w/2) - 1) ^ cc */
     /* (first term in integral of hartley's form). */
 
-    pr_w = 2 * pnorm(qsqz, 0.,1., 1,0) - 1.; /* erf(qsqz / M_SQRT2) */
+    pr_w = 2 * Rf_pnorm(qsqz, 0.,1., 1,0) - 1.; /* erf(qsqz / M_SQRT2) */
     /* if pr_w ^ cc < 2e-22 then set pr_w = 0 */
     if (pr_w >= exp(C2 / cc))
 	pr_w = pow(pr_w, cc);
@@ -176,8 +176,8 @@ static double wprob(double w, double rr, double cc)
 	    if (qexpo > C3)
 		break;
 
-	    pplus = 2 * pnorm(ac, 0., 1., 1,0);
-	    pminus= 2 * pnorm(ac, w,  1., 1,0);
+	    pplus = 2 * Rf_pnorm(ac, 0., 1., 1,0);
+	    pminus= 2 * Rf_pnorm(ac, w,  1., 1,0);
 
 	    /* if rinsum ^ (cc-1) < 9e-14, */
 	    /* then doesn't contribute to integral */
@@ -209,7 +209,7 @@ static double wprob(double w, double rr, double cc)
 double Rf_ptukey(double q, double rr, double cc, double df,
 	      int lower_tail, int log_p)
 {
-/*  function ptukey() [was qprob() ]:
+/*  function Rf_ptukey() [was qprob() ]:
 
 	q = value of studentized range
 	rr = no. of rows or groups
@@ -329,8 +329,8 @@ double Rf_ptukey(double q, double rr, double cc, double df,
     /* calculate leading constant */
 
     f2 = df * 0.5;
-    /* lgammafn(u) = log(gamma(u)) */
-    f2lf = ((f2 * log(df)) - (df * M_LN2)) - lgammafn(f2);
+    /* Rf_lgammafn(u) = log(gamma(u)) */
+    f2lf = ((f2 * log(df)) - (df * M_LN2)) - Rf_lgammafn(f2);
     f21 = f2 - 1.0;
 
     /* integral is divided into unit, half-unit, quarter-unit, or */
@@ -401,7 +401,7 @@ double Rf_ptukey(double q, double rr, double cc, double df,
     }
 
     if(otsum > eps2) { /* not converged */
-	ML_WARNING(ME_PRECISION, "ptukey()");
+	ML_WARNING(ME_PRECISION, "Rf_ptukey()");
     }
     if (ans > 1.)
 	ans = 1.;

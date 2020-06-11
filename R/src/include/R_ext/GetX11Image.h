@@ -22,7 +22,7 @@
 #ifndef GETX11IMAGE_H_
 #define GETX11IMAGE_H_
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -31,8 +31,8 @@ extern "C" {
 Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight);
 /* pximage is really (XImage **) */
 
-#ifdef  __cplusplus
-}
+#ifdef __cplusplus
+} //extern "C"
 #endif
 
 #endif /* GETX11IMAGE_H_ */

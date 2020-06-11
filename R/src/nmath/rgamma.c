@@ -20,7 +20,7 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double rgamma(double a, double scale);
+ *    double Rf_rgamma(double a, double scale);
  *
  *  DESCRIPTION
  *

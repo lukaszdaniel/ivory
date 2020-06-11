@@ -45,9 +45,9 @@ double Rf_dt(double x, double n, int give_log)
     if(!R_FINITE(x))
 	return R_D__0;
     if(!R_FINITE(n))
-	return dnorm(x, 0., 1., give_log);
+	return Rf_dnorm(x, 0., 1., give_log);
 
-    double u, t = -bd0(n/2.,(n+1)/2.) + stirlerr((n+1)/2.) - stirlerr(n/2.),
+    double u, t = -Rf_bd0(n/2.,(n+1)/2.) + Rf_stirlerr((n+1)/2.) - Rf_stirlerr(n/2.),
 	x2n = x*x/n, // in  [0, Inf]
 	ax = 0., // <- -Wpedantic
 	l_x2n; // := log(sqrt(1 + x2n)) = log(1 + x2n)/2
@@ -63,7 +63,7 @@ double Rf_dt(double x, double n, int give_log)
 	u = n * l_x2n;
     } else {
 	l_x2n = log1p(x2n)/2.;
-	u = -bd0(n/2.,(n+x*x)/2.) + x*x/2.;
+	u = -Rf_bd0(n/2.,(n+x*x)/2.) + x*x/2.;
     }
 
     //old: return  R_D_fexp(M_2PI*(1+x2n), t-u);

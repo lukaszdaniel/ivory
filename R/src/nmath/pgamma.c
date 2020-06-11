@@ -26,9 +26,9 @@
  *		       int lower_tail, int log_p)
  *
  *	double log1pmx	(double x)
- *	double lgamma1p (double a)
+ *	double Rf_lgamma1p(double a)
  *
- *	double logspace_add (double logx, double logy)
+ *	double Rf_logspace_add(double logx, double logy)
  *	double logspace_sub (double logx, double logy)
  *	double logspace_sum (double* logx, int n)
  *
@@ -67,7 +67,7 @@ static const double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON;/*=3.196577e18*
 /* Continued fraction for calculation of
  *    1/i + x/(i+d) + x^2/(i+2*d) + x^3/(i+3*d) + ... = sum_{k=0}^Inf x^k/(i+k*d)
  *
- * auxilary in log1pmx() and lgamma1p()
+ * auxilary in Rf_log1pmx() and Rf_lgamma1p()
  */
 static double logcf(double x, double i, double d,
        double eps /* ~ relative tolerance */)
@@ -197,7 +197,7 @@ double Rf_lgamma1p(double a)
     int i;
 
     if (fabs (a) >= 0.5)
-	return lgammafn (a + 1);
+	return Rf_lgammafn (a + 1);
 
     /* Abramowitz & Stegun 6.1.33 : for |x| < 2,
      * <==> log(gamma(1+x)) = -(log(1+x) - x) - gamma*x + x^2 * \sum_{n=0}^\infty c_n (-x)^n
@@ -210,7 +210,7 @@ double Rf_lgamma1p(double a)
     for (i = N - 1; i >= 0; i--)
 	lgam = coeffs[i] - a * lgam;
 
-    return (a * lgam - eulers_const) * a - log1pmx (a);
+    return (a * lgam - eulers_const) * a - Rf_log1pmx (a);
 } /* lgamma1p */
 
 
@@ -225,7 +225,7 @@ double Rf_lgamma1p(double a)
  */
 double Rf_logspace_add(double logx, double logy)
 {
-    return fmax2 (logx, logy) + log1p (exp (-fabs (logx - logy)));
+    return Rf_fmax2(logx, logy) + log1p (exp (-fabs (logx - logy)));
 }
 
 
@@ -262,7 +262,7 @@ double Rf_logspace_sum(const double* logx, int n)
 {
     if(n == 0) return ML_NEGINF; // = log( sum(<empty>) )
     if(n == 1) return logx[0];
-    if(n == 2) return logspace_add(logx[0], logx[1]);
+    if(n == 2) return Rf_logspace_add(logx[0], logx[1]);
     // else (n >= 3) :
     int i;
     // Mx := max_i log(x_i)
@@ -289,11 +289,11 @@ static double dpois_wrap (double x_plus_1, double lambda, int give_log)
     if (!R_FINITE(lambda))
 	return R_D__0;
     if (x_plus_1 > 1)
-	return dpois_raw (x_plus_1 - 1, lambda, give_log);
+	return Rf_dpois_raw(x_plus_1 - 1, lambda, give_log);
     if (lambda > fabs(x_plus_1 - 1) * M_cutoff)
-	return R_D_exp(-lambda - lgammafn(x_plus_1));
+	return R_D_exp(-lambda - Rf_lgammafn(x_plus_1));
     else {
-	double d = dpois_raw (x_plus_1, lambda, give_log);
+	double d = Rf_dpois_raw(x_plus_1, lambda, give_log);
 #ifdef DEBUG_p
 	REprintf ("  -> d=dpois_raw(..)=%.14g\n", d);
 #endif
@@ -333,20 +333,20 @@ static double pgamma_smallx (double x, double alph, int lower_tail, int log_p)
 	double f1 = log_p ? log1p (sum) : 1 + sum;
 	double f2;
 	if (alph > 1) {
-	    f2 = dpois_raw (alph, x, log_p);
+	    f2 = Rf_dpois_raw(alph, x, log_p);
 	    f2 = log_p ? f2 + x : f2 * exp (x);
 	} else if (log_p)
-	    f2 = alph * log (x) - lgamma1p (alph);
+	    f2 = alph * log (x) - Rf_lgamma1p(alph);
 	else
-	    f2 = pow (x, alph) / exp (lgamma1p (alph));
+	    f2 = pow (x, alph) / exp (Rf_lgamma1p(alph));
 #ifdef DEBUG_p
     REprintf (" (f1,f2)= (%g,%g)\n", f1,f2);
 #endif
 	return log_p ? f1 + f2 : f1 * f2;
     } else {
-	double lf2 = alph * log (x) - lgamma1p (alph);
+	double lf2 = alph * log (x) - Rf_lgamma1p(alph);
 #ifdef DEBUG_p
-	REprintf (" 1:%.14g  2:%.14g\n", alph * log (x), lgamma1p (alph));
+	REprintf (" 1:%.14g  2:%.14g\n", alph * log (x), Rf_lgamma1p(alph));
 	REprintf (" sum=%.14g  log(1+sum)=%.14g	 lf2=%.14g\n",
 		  sum, log1p (sum), lf2);
 #endif
@@ -404,7 +404,7 @@ static double pd_lower_cf (double y, double d)
     if (y == 0) return 0;
 
     f0 = y/d;
-    /* Needed, e.g. for  pgamma(10^c(100,295), shape= 1.1, log=TRUE): */
+    /* Needed, e.g. for  Rf_pgamma(10^c(100,295), shape= 1.1, log=TRUE): */
     if(fabs(y - 1) < fabs(d) * DBL_EPSILON) { /* includes y < d = Inf */
 #ifdef DEBUG_p
 	REprintf(" very small 'y' -> returning (y/d)\n");
@@ -439,7 +439,7 @@ static double pd_lower_cf (double y, double d)
 	if (b2 != 0) {
 	    f = a2 / b2;
 	    /* convergence check: relative; "absolute" for very small f : */
-	    if (fabs (f - of) <= DBL_EPSILON * fmax2(f0, fabs(f))) {
+	    if (fabs (f - of) <= DBL_EPSILON * Rf_fmax2(f0, fabs(f))) {
 #ifdef DEBUG_p
 		REprintf(" %g iter.\n", i);
 #endif
@@ -449,7 +449,7 @@ static double pd_lower_cf (double y, double d)
 	}
     }
 
-    MATHLIB_WARNING(" ** NON-convergence in pgamma()'s pd_lower_cf() f= %g.\n",
+    MATHLIB_WARNING(" ** NON-convergence in Rf_pgamma()'s pd_lower_cf() f= %g.\n",
 		    f);
     return f;/* should not happen ... */
 } /* pd_lower_cf() */
@@ -486,7 +486,7 @@ static double pd_lower_series (double lambda, double y)
 	REprintf(" y not int: add another term ");
 #endif
 	/* FIXME: in quite few cases, adding  term*f  has no effect (f too small)
-	 *	  and is unnecessary e.g. for pgamma(4e12, 121.1) */
+	 *	  and is unnecessary e.g. for Rf_pgamma(4e12, 121.1) */
 	f = pd_lower_cf (y, lambda + 1 - y);
 #ifdef DEBUG_p
 	REprintf("  (= %.14g) * term = %.14g to sum %g\n", f, term * f, sum);
@@ -501,9 +501,9 @@ static double pd_lower_series (double lambda, double y)
  * Compute the following ratio with higher accuracy that would be had
  * from doing it directly.
  *
- *		 dnorm (x, 0, 1, FALSE)
+ *		 Rf_dnorm(x, 0, 1, FALSE)
  *	   ----------------------------------
- *	   pnorm (x, 0, 1, lower_tail, FALSE)
+ *	   Rf_pnorm(x, 0, 1, lower_tail, FALSE)
  *
  * Abramowitz & Stegun 26.2.12
  */
@@ -512,7 +512,7 @@ static double dpnorm (double x, int lower_tail, double lp)
     /*
      * So as not to repeat a pnorm call, we expect
      *
-     *	 lp == pnorm (x, 0, 1, lower_tail, TRUE)
+     *	 lp == Rf_pnorm(x, 0, 1, lower_tail, TRUE)
      *
      * but use it only in the non-critical case where either x is small
      * or p==exp(lp) is close to 1.
@@ -537,7 +537,7 @@ static double dpnorm (double x, int lower_tail, double lp)
 
 	return 1 / sum;
     } else {
-	double d = dnorm (x, 0., 1., FALSE);
+	double d = Rf_dnorm(x, 0., 1., FALSE);
 	return d / exp (lp);
     }
 }
@@ -583,7 +583,7 @@ static double ppois_asymp (double x, double lambda, int lower_tail, int log_p)
        to arbitrarily large values of pt_ and hence divergence of the
        coefficients of this approximation.
     */
-    pt_ = - log1pmx (dfm / x);
+    pt_ = - Rf_log1pmx(dfm / x);
     s2pt = sqrt (2 * x * pt_);
     if (dfm < 0) s2pt = -s2pt;
 
@@ -612,7 +612,7 @@ static double ppois_asymp (double x, double lambda, int lower_tail, int log_p)
 
     f = res12 / elfb;
 
-    np = pnorm (s2pt, 0.0, 1.0, !lower_tail, log_p);
+    np = Rf_pnorm(s2pt, 0.0, 1.0, !lower_tail, log_p);
 
     if (log_p) {
 	double n_d_over_p = dpnorm (s2pt, !lower_tail, np);
@@ -622,7 +622,7 @@ static double ppois_asymp (double x, double lambda, int lower_tail, int log_p)
 #endif
 	return np + log1p (f * n_d_over_p);
     } else {
-	double nd = dnorm (s2pt, 0., 1., log_p);
+	double nd = Rf_dnorm(s2pt, 0., 1., log_p);
 
 #ifdef DEBUG_p
 	REprintf ("pp*_asymp(): f=%.14g	 np=%.14g  nd=%.14g  f*nd=%.14g\n",
@@ -633,14 +633,14 @@ static double ppois_asymp (double x, double lambda, int lower_tail, int log_p)
 } /* ppois_asymp() */
 
 
-double pgamma_raw (double x, double alph, int lower_tail, int log_p)
+double Rf_pgamma_raw(double x, double alph, int lower_tail, int log_p)
 {
 /* Here, assume that  (x,alph) are not NA  &  alph > 0 . */
 
     double res;
 
 #ifdef DEBUG_p
-    REprintf("pgamma_raw(x=%.14g, alph=%.14g, low=%d, log=%d)\n",
+    REprintf("Rf_pgamma_raw(x=%.14g, alph=%.14g, low=%d, log=%d)\n",
 	     x, alph, lower_tail, log_p);
 #endif
     R_P_bounds_01(x, 0., ML_POSINF);
@@ -706,7 +706,7 @@ double pgamma_raw (double x, double alph, int lower_tail, int log_p)
 #ifdef DEBUG_p
 	REprintf(" very small res=%.14g; -> recompute via log\n", res);
 #endif
-	return exp (pgamma_raw (x, alph, lower_tail, 1));
+	return exp (Rf_pgamma_raw(x, alph, lower_tail, 1));
     } else
 	return res;
 }
@@ -726,8 +726,8 @@ double Rf_pgamma(double x, double alph, double scale, int lower_tail, int log_p)
 	return x;
 #endif
     if(alph == 0.) /* limit case; useful e.g. in pnchisq() */
-	return (x <= 0) ? R_DT_0: R_DT_1; /* <= assert  pgamma(0,0) ==> 0 */
-    return pgamma_raw (x, alph, lower_tail, log_p);
+	return (x <= 0) ? R_DT_0: R_DT_1; /* <= assert  Rf_pgamma(0,0) ==> 0 */
+    return Rf_pgamma_raw(x, alph, lower_tail, log_p);
 }
 /* From: terra@gnome.org (Morten Welinder)
  * To: R-bugs@biostat.ku.dk

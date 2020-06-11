@@ -43,7 +43,7 @@ LibExtern int R_num_math_threads;
 LibExtern int R_max_num_math_threads;
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_MATHTHREADS_H_ */

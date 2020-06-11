@@ -508,7 +508,7 @@ HIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
     // copy/paste from "OutDec" part of ./options.c
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' argument"), "decimal.mark");
-    char *my_OutDec;
+    const char *my_OutDec;
     if(STRING_ELT(CAR(args), 0) == NA_STRING)
 	my_OutDec = OutDec; // default
     else {

@@ -46,7 +46,7 @@ double Rf_dnchisq(double x, double df, double ncp, int give_log)
     if(x == 0 && df < 2.)
 	return ML_POSINF;
     if(ncp == 0)
-	return (df > 0) ? dchisq(x, df, give_log) : R_D__0;
+	return (df > 0) ? Rf_dchisq(x, df, give_log) : R_D__0;
     if(x == ML_POSINF) return R_D__0;
 
     ncp2 = 0.5 * ncp;
@@ -56,7 +56,7 @@ double Rf_dnchisq(double x, double df, double ncp, int give_log)
     if (imax < 0) imax = 0;
     if(R_FINITE(imax)) {
 	dfmid = df + 2 * imax;
-	mid = dpois_raw(imax, ncp2, FALSE) * dchisq(x, dfmid, FALSE);
+	mid = Rf_dpois_raw(imax, ncp2, FALSE) * Rf_dchisq(x, dfmid, FALSE);
     } else /* imax = Inf */
 	mid = 0;
 
@@ -67,7 +67,7 @@ double Rf_dnchisq(double x, double df, double ncp, int give_log)
 	 * ((FIXME: the optimal cutoff also depends on (x,df);  use always here? )) */
 	if(give_log || ncp > 1000.) {
 	    double nl = df + ncp, ic = nl/(nl + ncp);/* = "1/(1+b)" Abramowitz & St.*/
-	    return dchisq(x*ic, nl*ic, give_log);
+	    return Rf_dchisq(x*ic, nl*ic, give_log);
 	} else
 	    return R_D__0;
     }

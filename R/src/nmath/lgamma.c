@@ -20,8 +20,8 @@
  *  SYNOPSIS
  *
  *    #include <Rmath.h>
- *    double lgammafn_sign(double x, int *sgn);
- *    double lgammafn(double x);
+ *    double Rf_lgammafn_sign(double x, int *sgn);
+ *    double Rf_lgammafn(double x);
  *
  *  DESCRIPTION
  *
@@ -79,7 +79,7 @@ double Rf_lgammafn_sign(double x, int *sgn)
     y = fabs(x);
 
     if (y < 1e-306) return -log(y); // denormalized range, R change
-    if (y <= 10) return log(fabs(gammafn(x)));
+    if (y <= 10) return log(fabs(Rf_gammafn(x)));
     /*
       ELSE  y = |x| > 10 ---------------------- */
 
@@ -96,7 +96,7 @@ double Rf_lgammafn_sign(double x, int *sgn)
 	    return(M_LN_SQRT_2PI + (x - 0.5) * log(x) - x);
 	else
 #endif
-	    return M_LN_SQRT_2PI + (x - 0.5) * log(x) - x + lgammacor(x);
+	    return M_LN_SQRT_2PI + (x - 0.5) * log(x) - x + Rf_lgammacor(x);
     }
     /* else: x < -10; y = -x */
     sinpiy = fabs(sinpi(y));
@@ -107,7 +107,7 @@ double Rf_lgammafn_sign(double x, int *sgn)
 	ML_WARN_return_NAN;
     }
 
-    ans = M_LN_SQRT_PId2 + (x - 0.5) * log(y) - x - log(sinpiy) - lgammacor(y);
+    ans = M_LN_SQRT_PId2 + (x - 0.5) * log(y) - x - log(sinpiy) - Rf_lgammacor(y);
 
     if(fabs((x - trunc(x - 0.5)) * ans / x) < dxrel) {
 
@@ -122,5 +122,5 @@ double Rf_lgammafn_sign(double x, int *sgn)
 
 double Rf_lgammafn(double x)
 {
-    return lgammafn_sign(x, NULL);
+    return Rf_lgammafn_sign(x, NULL);
 }

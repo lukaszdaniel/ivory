@@ -22,10 +22,10 @@
  *
  *   #include <Rmath.h>
  *
- *   double pnorm(double x, double mu, double sigma, int lower_tail,int log_p);
- *	   {pnorm (..) is synonymous and preferred inside R}
+ *   double Rf_pnorm(double x, double mu, double sigma, int lower_tail,int log_p);
+ *	   {Rf_pnorm(..) is synonymous and preferred inside R}
  *
- *   void   pnorm_both(double x, double *cum, double *ccum,
+ *   void   Rf_pnorm_both(double x, double *cum, double *ccum,
  *		       int i_tail, int log_p);
  *
  *  DESCRIPTION
@@ -81,7 +81,7 @@ double Rf_pnorm(double x, double mu, double sigma, int lower_tail, int log_p)
 	return (x < mu) ? R_DT_0 : R_DT_1;
     x = p;
 
-    pnorm_both(x, &p, &cp, (lower_tail ? 0 : 1), log_p);
+    Rf_pnorm_both(x, &p, &cp, (lower_tail ? 0 : 1), log_p);
 
     return(lower_tail ? p : cp);
 }
@@ -162,7 +162,7 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
     upper = i_tail != 0;
 
     y = fabs(x);
-    if (y <= 0.67448975) { /* qnorm(3/4) = .6744.... -- earlier had 0.66291 */
+    if (y <= 0.67448975) { /* Rf_qnorm(3/4) = .6744.... -- earlier had 0.66291 */
 	if (y > eps) {
 	    xsq = x * x;
 	    xnum = a[4] * xsq;
@@ -183,7 +183,7 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
     }
     else if (y <= M_SQRT_32) {
 
-	/* Evaluate pnorm for 0.674.. = qnorm(3/4) < |x| <= sqrt(32) ~= 5.657 */
+	/* Evaluate pnorm for 0.674.. = Rf_qnorm(3/4) < |x| <= sqrt(32) ~= 5.657 */
 
 	xnum = c[8] * y;
 	xden = y;

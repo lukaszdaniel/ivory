@@ -151,7 +151,7 @@ void F77_NAME(dqrls)(double *x, int *n, int *p, double *y, int *ny,
 		     int *jpvt, double *qraux, double *work);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_APPLIC_H_ */

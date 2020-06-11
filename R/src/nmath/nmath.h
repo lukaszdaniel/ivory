@@ -56,7 +56,7 @@ double	Rf_gamma_cody(double);
 # define R_forceint(x)   round(x)
 #endif
 //R >= 3.1.0: # define R_nonint(x) 	  (fabs((x) - R_forceint(x)) > 1e-7)
-# define R_nonint(x) 	  (fabs((x) - R_forceint(x)) > 1e-7*fmax2(1., fabs(x)))
+# define R_nonint(x) 	  (fabs((x) - R_forceint(x)) > 1e-7*Rf_fmax2(1., fabs(x)))
 
 #ifndef MATHLIB_STANDALONE
 
@@ -191,31 +191,31 @@ int R_finite(double);
 
 	/* Chebyshev Series */
 
-HIDDEN int chebyshev_init(double*, int, double);
-HIDDEN double chebyshev_eval(double, const double *, const int);
+HIDDEN int Rf_chebyshev_init(double*, int, double);
+HIDDEN double Rf_chebyshev_eval(double, const double *, const int);
 
 	/* Gamma and Related Functions */
 
-HIDDEN void gammalims(double*, double*);
-HIDDEN double lgammacor(double); /* log(gamma) correction */
-HIDDEN double stirlerr(double);  /* Stirling expansion "error" */
+HIDDEN void Rf_gammalims(double*, double*);
+HIDDEN double Rf_lgammacor(double); /* log(gamma) correction */
+HIDDEN double Rf_stirlerr(double);  /* Stirling expansion "error" */
 
-HIDDEN double lfastchoose(double, double);
+HIDDEN double Rf_lfastchoose(double, double);
 
-HIDDEN double bd0(double, double);
+HIDDEN double Rf_bd0(double, double);
 
-HIDDEN double pnchisq_raw(double, double, double, double, double,
+HIDDEN double Rf_pnchisq_raw(double, double, double, double, double,
 				     int, Rboolean, Rboolean);
-HIDDEN double pgamma_raw(double, double, int, int);
-HIDDEN double pbeta_raw(double, double, double, int, int);
-HIDDEN double qchisq_appr(double, double, double, int, int, double tol);
-HIDDEN LDOUBLE pnbeta_raw(double, double, double, double, double);
-HIDDEN double pnbeta2(double, double, double, double, double, int, int);
+HIDDEN double Rf_pgamma_raw(double, double, int, int);
+HIDDEN double Rf_pbeta_raw(double, double, double, int, int);
+HIDDEN double Rf_qchisq_appr(double, double, double, int, int, double tol);
+HIDDEN LDOUBLE Rf_pnbeta_raw(double, double, double, double, double);
+HIDDEN double Rf_pnbeta2(double, double, double, double, double, int, int);
 
 int	Rf_i1mach(int);
 
 /* From toms708.c */
-HIDDEN void bratio(double a, double b, double x, double y,
+HIDDEN void Rf_bratio(double a, double b, double x, double y,
 	    		     double *w, double *w1, int *ierr, int log_p);
 
 
