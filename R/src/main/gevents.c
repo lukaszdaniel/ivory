@@ -32,22 +32,21 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Print.h>
 
-static const char * mouseHandlers[] =
+static const char * const mouseHandlers[] =
 {"onMouseDown", "onMouseUp", "onMouseMove"};
 
-static const char * keybdHandler = "onKeybd";
+static const char * const keybdHandler = "onKeybd";
 
-static const char * idleHandler = "onIdle";
+static const char * const idleHandler = "onIdle";
 
-static void checkHandler(const char * name, SEXP eventEnv)
+static void checkHandler(const char * const name, SEXP eventEnv)
 {
     SEXP handler = findVar(install(name), eventEnv);
     if (TYPEOF(handler) == CLOSXP)
 	warning(_("'%s' events not supported in this device"), name);
 }
 
-SEXP
-do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP eventEnv;
     int devnum;
@@ -87,8 +86,7 @@ do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
     return(R_NilValue);
 }
 
-SEXP
-do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int devnum;
     pGEDevDesc gdd;
@@ -129,8 +127,7 @@ Rboolean haveListeningDev()
 }
 
 
-SEXP
-do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP result = R_NilValue, prompt;
     pDevDesc dd;
@@ -210,7 +207,7 @@ do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in devWindows.c and cairoDevice */
-void doMouseEvent(pDevDesc dd, R_MouseEvent event,
+void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 		  int buttons, double x, double y)
 {
     int i;
@@ -251,13 +248,13 @@ void doMouseEvent(pDevDesc dd, R_MouseEvent event,
     return;
 }
 
-static const char * keynames[] =
+static const char * const keynames[] =
 {"Left", "Up", "Right", "Down",
  "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11","F12",
  "PgUp", "PgDn", "End", "Home", "Ins", "Del"};
 
 /* used in devWindows.c and cairoDevice */
-void doKeybd(pDevDesc dd, R_KeyName rkey,
+void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 	     const char *keyname)
 {
     SEXP handler, skey, temp, result;
@@ -292,7 +289,7 @@ void doKeybd(pDevDesc dd, R_KeyName rkey,
    stream and updating a plot, in-between handling of keyboard and
    mouse events.
  */
-void doIdle(pDevDesc dd)
+void Rf_doIdle(pDevDesc dd)
 {
     SEXP handler, temp, result;
 
@@ -319,7 +316,7 @@ void doIdle(pDevDesc dd)
     return;
 }
 
-Rboolean doesIdle(pDevDesc dd) {
+Rboolean Rf_doesIdle(pDevDesc dd) {
     SEXP handler = findVar(install(idleHandler), dd->eventEnv);
     return (Rboolean) ((handler != R_UnboundValue) &&
         (handler != R_NilValue));

@@ -725,7 +725,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 		    }
 		    goto next_char;
-		}  else if(strcmp(sub, "byte") == 0) {
+		}  else if(streql(sub, "byte")) {
 		    if(outb < 5) {
 			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
 			goto top_of_loop;
@@ -1319,7 +1319,7 @@ next_char:
 #include <R_ext/GraphicsEngine.h>
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
+const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 {
     void * obj;
     const char *inbuf;

@@ -35,7 +35,7 @@
 #include <R_ext/Boolean.h>
 
 /* called with a variable argument set */
-typedef void * (*DL_FUNC)();
+typedef void *(*DL_FUNC)();
 
 typedef unsigned int R_NativePrimitiveArgType;
 
@@ -48,24 +48,24 @@ typedef unsigned int R_NativePrimitiveArgType;
  some computations on the internal versions that are derived from
  these definitions.
 */
-typedef struct {
-    const char *name;
-    DL_FUNC     fun;
-    int         numArgs;
-    R_NativePrimitiveArgType *types;
+typedef struct
+{
+  const char *name;
+  DL_FUNC fun;
+  int numArgs;
+  R_NativePrimitiveArgType *types;
 } R_CMethodDef;
 
 typedef R_CMethodDef R_FortranMethodDef;
 
-
-typedef struct {
-    const char *name;
-    DL_FUNC     fun;
-    int         numArgs;
+typedef struct
+{
+  const char *name;
+  DL_FUNC fun;
+  int numArgs;
 } R_CallMethodDef;
 
 typedef R_CallMethodDef R_ExternalMethodDef;
-
 
 typedef struct _DllInfo DllInfo;
 
@@ -91,12 +91,17 @@ DllInfo *R_getDllInfo(const char *name);
 DllInfo *R_getEmbeddingDllInfo(void);
 
 typedef struct Rf_RegisteredNativeSymbol R_RegisteredNativeSymbol;
-typedef enum {R_ANY_SYM=0, R_C_SYM, R_CALL_SYM, R_FORTRAN_SYM, R_EXTERNAL_SYM} NativeSymbolType;
-
+typedef enum
+{
+  R_ANY_SYM = 0,
+  R_C_SYM,
+  R_CALL_SYM,
+  R_FORTRAN_SYM,
+  R_EXTERNAL_SYM
+} NativeSymbolType;
 
 DL_FUNC R_FindSymbol(char const *, char const *,
-		       R_RegisteredNativeSymbol *symbol);
-
+                     R_RegisteredNativeSymbol *symbol);
 
 /* Interface for exporting and importing functions from one package
    for use from C code in a package.  The registration part probably

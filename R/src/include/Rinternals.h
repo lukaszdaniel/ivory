@@ -44,6 +44,7 @@ extern "C" {
 #include <R_ext/Arith.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Complex.h>
+#include <R_ext/Error.h>
 #include <R_ext/Visibility.h>  // includes NORET macro
 #include <R_ext/Memory.h>
 #include <R_ext/Utils.h>
@@ -1380,7 +1381,7 @@ struct R_outpstream_st {
     R_pstream_format_t type;
     int version;
     void (*OutChar)(R_outpstream_t, int);
-    void (*OutBytes)(R_outpstream_t, const void *, int);
+    void (*OutBytes)(R_outpstream_t, /*const*/ void *, int);
     SEXP (*OutPersistHookFunc)(SEXP, SEXP);
     SEXP OutPersistHookData;
 };
@@ -1407,7 +1408,7 @@ void R_InitInPStream(R_inpstream_t stream, R_pstream_data_t data,
 void R_InitOutPStream(R_outpstream_t stream, R_pstream_data_t data,
 		      R_pstream_format_t type, int version,
 		      void (*outchar)(R_outpstream_t, int),
-		      void (*outbytes)(R_outpstream_t, const void *, int),
+		      void (*outbytes)(R_outpstream_t, /*const*/ void *, int),
 		      SEXP (*phook)(SEXP, SEXP), SEXP pdata);
 
 #ifdef __cplusplus

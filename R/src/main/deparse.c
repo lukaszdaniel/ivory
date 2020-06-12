@@ -636,8 +636,8 @@ static Rboolean usable_nice_names(SEXP x, Rboolean isAtomic)
 	if(isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names
 	    for (i = 0; i < n; i++) {
 		if (STRING_ELT(x, i) == NA_STRING
-		    || strcmp(CHAR(STRING_ELT(x, i)), "recursive") == 0
-		    || strcmp(CHAR(STRING_ELT(x, i)), "use.names") == 0)
+		    || streql(CHAR(STRING_ELT(x, i)), "recursive")
+		    || streql(CHAR(STRING_ELT(x, i)), "use.names"))
 		    return FALSE;
 		else if (all_0 && *CHAR(STRING_ELT(x, i))) /* length test */
 		    all_0 = FALSE;

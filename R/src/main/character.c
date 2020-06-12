@@ -331,8 +331,7 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
     }
 }
 
-HIDDEN SEXP
-do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, x;
     checkArity(op, args);
@@ -387,8 +386,7 @@ do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 // .Internal( startsWith(x, prefix) )  and
 // .Internal( endsWith  (x, suffix) )
-HIDDEN SEXP
-do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
+HIDDEN SEXP do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
@@ -1165,8 +1163,7 @@ struct tr_spec {
     } u;
 };
 
-static void
-tr_build_spec(const char *s, struct tr_spec *trs) {
+static void tr_build_spec(const char *s, struct tr_spec *trs) {
     int i, len = (int) strlen(s);
     struct tr_spec *This, *_new;
 
@@ -1197,8 +1194,7 @@ tr_build_spec(const char *s, struct tr_spec *trs) {
     }
 }
 
-static void
-tr_free_spec(struct tr_spec *trs) {
+static void tr_free_spec(struct tr_spec *trs) {
     struct tr_spec *This, *next;
     This = trs;
     while(This) {
@@ -1208,8 +1204,7 @@ tr_free_spec(struct tr_spec *trs) {
     }
 }
 
-static unsigned char
-tr_get_next_char_from_spec(struct tr_spec **p) {
+static unsigned char tr_get_next_char_from_spec(struct tr_spec **p) {
     unsigned char c;
     struct tr_spec *This;
 
@@ -1241,12 +1236,12 @@ typedef struct { wchar_t c_old, c_new; } xtable_t;
 
 R_INLINE static int xtable_comp(const void *a, const void *b)
 {
-    return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
+	return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
 }
 
 R_INLINE static int xtable_key_comp(const void *a, const void *b)
 {
-    return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
+	return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
 }
 
 #define SWAP(_a, _b, _TYPE)                                    \

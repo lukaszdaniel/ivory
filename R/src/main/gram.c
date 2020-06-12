@@ -4046,7 +4046,7 @@ static int nextchar(int expect)
 /* Syntactic Keywords + Symbolic Constants */
 
 struct {
-    const char *name;
+    const char * const name;
     int token;
 }
 static keywords[] = {
@@ -5160,8 +5160,8 @@ static void setParseFilename(SEXP newname) {
     if (isEnvironment(PS_SRCFILE)) {
 	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&
-    	    strcmp(CHAR(STRING_ELT(oldname, 0)),
-    	           CHAR(STRING_ELT(newname, 0))) == 0) return;
+    	    streql(CHAR(STRING_ELT(oldname, 0)),
+    	           CHAR(STRING_ELT(newname, 0)))) return;
 	PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
 	defineVar(install("filename"), newname, PS_SRCFILE);
 	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);

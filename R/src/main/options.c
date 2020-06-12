@@ -516,7 +516,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* Handle option removal separately to simplify value checking
 		   for known options below; mandatory means not allowed to be
 		   removed once set, but not all have to be set at startup. */
-		const char *mandatory[] = {"prompt", "continue", "expressions",
+		const char * const mandatory[] = {"prompt", "continue", "expressions",
 		  "width", "deparse.cutoff", "digits", "echo", "verbose",
 		  "check.bounds", "keep.source", "keep.source.pkgs",
 		  "keep.parse.data", "keep.parse.data.pkgs", "warning.length",
@@ -613,7 +613,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 #ifdef _NOT_YET_
 		char *p = getenv("R_WARN_BOUNDS_OPT");
-		if ((p && (strcmp(p, "yes") == 0)) && (k < -1 || k > 2)) {
+		if ((p && streql(p, "yes")) && (k < -1 || k > 2)) {
 		    int k_n = (k < 0) ? -1 : 2;
 		    REprintf(_("value for '%s' outside of -1:2 is set to %d\n"),
 			     CHAR(namei), k_n);

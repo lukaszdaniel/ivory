@@ -1051,12 +1051,11 @@ HIDDEN SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     return prim;
 }
 
-HIDDEN
-int Rf_StrToInternal(const char *s)
+HIDDEN int Rf_StrToInternal(const char *s)
 {
-    int i;
-    for (i = 0; R_FunTab[i].name; i++)
-	if (strcmp(s, R_FunTab[i].name) == 0) return i;
+    for (int i = 0; R_FunTab[i].name; i++)
+        if (streql(s, R_FunTab[i].name))
+            return i;
     return NA_INTEGER;
 }
 
@@ -1271,7 +1270,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     i = hashcode % HSIZE;
     /* Check to see if the symbol is already present;  if it is, return it. */
     for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (strcmp(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym)))) == 0) return (CAR(sym));
+	if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym))))) return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
     int len = LENGTH(charSXP);
     if (len == 0)

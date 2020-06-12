@@ -420,7 +420,7 @@ double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
  ****************************************************************
  */
 typedef struct {
-    const char *name;
+    const char * const name;
     R_GE_lineend end;
 } LineEND;
 
@@ -485,7 +485,7 @@ SEXP GE_LENDget(R_GE_lineend lend)
 }
 
 typedef struct {
-    const char *name;
+    const char * const name;
     R_GE_linejoin join;
 } LineJOIN;
 
@@ -657,13 +657,13 @@ void GESetClip(double x1, double y1, double x2, double y2, pGEDevDesc dd)
 #define	CS_TOP		004
 #define	CS_RIGHT	010
 
-typedef struct {
+typedef struct
+{
     double xl;
     double xr;
     double yb;
     double yt;
 } cliprect;
-
 
 static int clipcode(double x, double y, cliprect *cr)
 {
@@ -679,8 +679,7 @@ static int clipcode(double x, double y, cliprect *cr)
     return c;
 }
 
-static Rboolean
-CSclipline(double *x1, double *y1, double *x2, double *y2,
+static Rboolean CSclipline(double *x1, double *y1, double *x2, double *y2,
 	   cliprect *cr, int *clipped1, int *clipped2,
 	   pGEDevDesc dd)
 {
@@ -898,7 +897,8 @@ void GEPolyline(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
  ****************************************************************
  */
 
-typedef enum {
+typedef enum
+{
     Left = 0,
     Right = 1,
     Bottom = 2,
@@ -906,26 +906,25 @@ typedef enum {
 } Edge;
 
 /* Clipper State Variables */
-typedef struct {
-    int first;    /* true if we have seen the first point */
-    double fx;    /* x coord of the first point */
-    double fy;    /* y coord of the first point */
-    double sx;    /* x coord of the most recent point */
-    double sy;    /* y coord of the most recent point */
-}
-GClipState;
+typedef struct
+{
+    int first; /* true if we have seen the first point */
+    double fx; /* x coord of the first point */
+    double fy; /* y coord of the first point */
+    double sx; /* x coord of the most recent point */
+    double sy; /* y coord of the most recent point */
+} GClipState;
 
 /* The Clipping Rectangle */
-typedef struct {
+typedef struct
+{
     double xmin;
     double xmax;
     double ymin;
     double ymax;
-}
-GClipRect;
+} GClipRect;
 
-static
-int inside (Edge b, double px, double py, GClipRect *clip)
+static int inside(Edge b, double px, double py, GClipRect *clip)
 {
     switch (b) {
     case Left:   if (px < clip->xmin) return 0; break;
@@ -936,8 +935,7 @@ int inside (Edge b, double px, double py, GClipRect *clip)
     return 1;
 }
 
-static
-int cross (Edge b, double x1, double y1, double x2, double y2,
+static int cross(Edge b, double x1, double y1, double x2, double y2,
 	   GClipRect *clip)
 {
     if (inside (b, x1, y1, clip) == inside (b, x2, y2, clip))
@@ -945,8 +943,7 @@ int cross (Edge b, double x1, double y1, double x2, double y2,
     else return 1;
 }
 
-static
-void intersect (Edge b, double x1, double y1, double x2, double y2,
+static void intersect(Edge b, double x1, double y1, double x2, double y2,
 		double *ix, double *iy, GClipRect *clip)
 {
     double m = 0;
@@ -974,8 +971,7 @@ void intersect (Edge b, double x1, double y1, double x2, double y2,
     }
 }
 
-static
-void clipPoint (Edge b, double x, double y,
+static void clipPoint(Edge b, double x, double y,
 		double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
@@ -1026,8 +1022,7 @@ void clipPoint (Edge b, double x, double y,
     }
 }
 
-static
-void closeClip (double *xout, double *yout, int *cnt, int store,
+static void closeClip(double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
     double ix = 0.0, iy = 0.0 /* -Wall */;
@@ -1486,7 +1481,7 @@ void GERect(double x0, double y0, double x1, double y1,
  ****************************************************************
  */
 
-void GEPath(double *x, double *y, 
+void GEPath(double *x, double *y,
             int npoly, int *nper,
             Rboolean winding,
             const pGEcontext gc, pGEDevDesc dd)
@@ -1524,9 +1519,9 @@ void GEPath(double *x, double *y,
  */
 
 void GERaster(unsigned int *raster, int w, int h,
-              double x, double y, 
+              double x, double y,
               double width, double height,
-              double angle, 
+              double angle,
               Rboolean interpolate,
               const pGEcontext gc, pGEDevDesc dd)
 {
@@ -1555,9 +1550,10 @@ void GERaster(unsigned int *raster, int w, int h,
 SEXP GECap(pGEDevDesc dd)
 {
     /* safety check: this will be NULL if the device did not set it. */
-    if (!dd->dev->cap) {
-	warning(_("raster capture is not available for this device"));
-	return R_NilValue;
+    if (!dd->dev->cap)
+    {
+        warning(_("raster capture is not available for this device"));
+        return R_NilValue;
     }
     return dd->dev->cap(dd->dev);
 }
@@ -1659,16 +1655,17 @@ static void clipText(double x, double y, const char *str, cetype_t enc,
  ****************************************************************
  */
 
-typedef struct {
-    const char *name;
+typedef struct
+{
+    const char *const name;
     int minface;
     int maxface;
 } VFontTab;
 
 static VFontTab
-VFontTable[] = {
-    { "HersheySerif",	          1, 7 },
-    /*
+    VFontTable[] = {
+        {"HersheySerif", 1, 7},
+        /*
        HersheySerif
        HersheySerif-Italic
        HersheySerif-Bold
@@ -1677,37 +1674,37 @@ VFontTable[] = {
        HersheyCyrillic-Oblique
        HersheyEUC
     */
-    { "HersheySans",	          1, 4 },
-    /*
+        {"HersheySans", 1, 4},
+        /*
        HersheySans
        HersheySans-Oblique
        HersheySans-Bold
        HersheySans-BoldOblique
     */
-    { "HersheyScript",	          1, 4 },
-    /*
+        {"HersheyScript", 1, 4},
+        /*
       HersheyScript
       HersheyScript
       HersheyScript-Bold
       HersheyScript-Bold
     */
-    { "HersheyGothicEnglish",	  1, 1 },
-    { "HersheyGothicGerman",	  1, 1 },
-    { "HersheyGothicItalian",	  1, 1 },
-    { "HersheySymbol",	          1, 4 },
-    /*
+        {"HersheyGothicEnglish", 1, 1},
+        {"HersheyGothicGerman", 1, 1},
+        {"HersheyGothicItalian", 1, 1},
+        {"HersheySymbol", 1, 4},
+        /*
       HersheySerifSymbol
       HersheySerifSymbol-Oblique
       HersheySerifSymbol-Bold
       HersheySerifSymbol-BoldOblique
     */
-    { "HersheySansSymbol",        1, 2 },
-    /*
+        {"HersheySansSymbol", 1, 2},
+        /*
       HersheySansSymbol
       HersheySansSymbol-Oblique
     */
 
-    { NULL,		          0, 0 },
+        {NULL, 0, 0},
 };
 
 /* A Hershey family (all of which have names starting with Hershey) may
@@ -1720,11 +1717,14 @@ VFontTable[] = {
 */
 static int VFontFamilyCode(char *fontfamily)
 {
-    if (strlen(fontfamily) > 7)  {
-	unsigned int j = fontfamily[7]; // protect against signed chars
-	if (streqln(fontfamily, "Hershey", 7) && j < 9) return 100 + j;
-	for (int i = 0; VFontTable[i].minface; i++)
-	    if (streql(fontfamily, VFontTable[i].name)) return i + 1;
+    if (strlen(fontfamily) > 7)
+    {
+        unsigned int j = fontfamily[7]; // protect against signed chars
+        if (streqln(fontfamily, "Hershey", 7) && j < 9)
+            return 100 + j;
+        for (int i = 0; VFontTable[i].minface; i++)
+            if (streql(fontfamily, VFontTable[i].name))
+                return i + 1;
     }
     return -1;
 }
@@ -2091,8 +2091,9 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
 void GEMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
-	error(_("no graphics device is active"));
-    if(dd->dev->mode) dd->dev->mode(mode, dd->dev);
+        error(_("no graphics device is active"));
+    if (dd->dev->mode)
+        dd->dev->mode(mode, dd->dev);
 }
 
 /****************************************************************
@@ -2870,7 +2871,8 @@ Rboolean GEdeviceDirty(pGEDevDesc dd)
 void GEdirtyDevice(pGEDevDesc dd)
 {
 #ifdef R_GE_DEBUG
-    if (getenv("R_GE_DEBUG_dirty")) {
+    if (getenv("R_GE_DEBUG_dirty"))
+    {
         printf("GEdirtyDevice: dirty = TRUE\n");
     }
 #endif
@@ -2880,7 +2882,8 @@ void GEdirtyDevice(pGEDevDesc dd)
 void GEcleanDevice(pGEDevDesc dd)
 {
 #ifdef R_GE_DEBUG
-    if (getenv("R_GE_DEBUG_dirty")) {
+    if (getenv("R_GE_DEBUG_dirty"))
+    {
         printf("GEcleanDevice: dirty = FALSE\n");
     }
 #endif
@@ -2899,11 +2902,11 @@ Rboolean GEcheckState(pGEDevDesc dd)
 {
     int i;
     Rboolean result = TRUE;
-    for (i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL)
-	    if (!LOGICAL((dd->gesd[i]->callback)(GE_CheckPlot, dd,
-						 R_NilValue))[0])
-		result = FALSE;
+    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+        if (dd->gesd[i] != NULL)
+            if (!LOGICAL((dd->gesd[i]->callback)(GE_CheckPlot, dd,
+                                                 R_NilValue))[0])
+                result = FALSE;
     return result;
 }
 
@@ -2914,7 +2917,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
 
 Rboolean GErecording(SEXP call, pGEDevDesc dd)
 {
-    return (Rboolean) (call != R_NilValue && dd->recordGraphics);
+    return (Rboolean)(call != R_NilValue && dd->recordGraphics);
 }
 
 /****************************************************************
@@ -2925,15 +2928,19 @@ Rboolean GErecording(SEXP call, pGEDevDesc dd)
 void GErecordGraphicOperation(SEXP op, SEXP args, pGEDevDesc dd)
 {
     SEXP lastOperation = dd->DLlastElt;
-    if (dd->displayListOn) {
-	SEXP newOperation = list2(op, args);
-	if (lastOperation == R_NilValue) {
-	    dd->displayList = CONS(newOperation, R_NilValue);
-	    dd->DLlastElt = dd->displayList;
-	} else {
-	    SETCDR(lastOperation, CONS(newOperation, R_NilValue));
-	    dd->DLlastElt = CDR(lastOperation);
-	}
+    if (dd->displayListOn)
+    {
+        SEXP newOperation = list2(op, args);
+        if (lastOperation == R_NilValue)
+        {
+            dd->displayList = CONS(newOperation, R_NilValue);
+            dd->DLlastElt = dd->displayList;
+        }
+        else
+        {
+            SETCDR(lastOperation, CONS(newOperation, R_NilValue));
+            dd->DLlastElt = CDR(lastOperation);
+        }
     }
 }
 
@@ -2953,8 +2960,8 @@ void GEinitDisplayList(pGEDevDesc dd)
      * replaying the display list
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL)
-	    (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
+        if (dd->gesd[i] != NULL)
+            (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
     dd->displayList = dd->DLlastElt = R_NilValue;
 }
 
@@ -3355,34 +3362,38 @@ int GEstring_to_pch(SEXP pch)
  *					----------------------
  */
 
-typedef struct {
-    const char *name;
+typedef struct
+{
+    const char *const name;
     int pattern;
 } LineTYPE;
 
 static LineTYPE linetype[] = {
-    { "blank",   LTY_BLANK   },/* -1 */
-    { "solid",	 LTY_SOLID   },/* 1 */
-    { "dashed",	 LTY_DASHED  },/* 2 */
-    { "dotted",	 LTY_DOTTED  },/* 3 */
-    { "dotdash", LTY_DOTDASH },/* 4 */
-    { "longdash",LTY_LONGDASH},/* 5 */
-    { "twodash", LTY_TWODASH },/* 6 */
-    { NULL,	 0	     },
+    {"blank", LTY_BLANK},       /* -1 */
+    {"solid", LTY_SOLID},       /* 1 */
+    {"dashed", LTY_DASHED},     /* 2 */
+    {"dotted", LTY_DOTTED},     /* 3 */
+    {"dotdash", LTY_DOTDASH},   /* 4 */
+    {"longdash", LTY_LONGDASH}, /* 5 */
+    {"twodash", LTY_TWODASH},   /* 6 */
+    {NULL, 0},
 };
 
 /* Duplicated from graphics.c */
 static char HexDigits[] = "0123456789ABCDEF";
 static unsigned int hexdigit(int digit)
 {
-    if('0' <= digit && digit <= '9') return digit - '0';
-    if('A' <= digit && digit <= 'F') return 10 + digit - 'A';
-    if('a' <= digit && digit <= 'f') return 10 + digit - 'a';
+    if ('0' <= digit && digit <= '9')
+        return digit - '0';
+    if ('A' <= digit && digit <= 'F')
+        return 10 + digit - 'A';
+    if ('a' <= digit && digit <= 'f')
+        return 10 + digit - 'a';
     /*else */ error(_("invalid hex digit in 'color' or 'lty' argument"));
     return digit; /* never occurs (-Wall) */
 }
 
-static int nlinetype = (sizeof(linetype)/sizeof(LineTYPE)-2);
+static int nlinetype = (sizeof(linetype) / sizeof(LineTYPE) - 2);
 
 unsigned int GE_LTYpar(SEXP value, int ind)
 {

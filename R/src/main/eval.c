@@ -4633,11 +4633,11 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 
 #include <Rmath.h>
 /* Keep the order consistent with the order in the byte code compiler! */
-static struct { const char *name; SEXP sym; double (*fun)(double); }
+static struct { const char * const name; SEXP sym; double (*fun)(double); }
     math1funs[] = {
 	{"floor", NULL, floor},
 	{"ceiling", NULL, ceil},
-	{"sign", NULL, sign},
+	{"sign", NULL, Rf_sign},
 
 	{"expm1", NULL, expm1},
 	{"log1p", NULL, log1p},
@@ -4656,10 +4656,10 @@ static struct { const char *name; SEXP sym; double (*fun)(double); }
 	{"asinh", NULL, asinh},
 	{"atanh", NULL, atanh},
 
-	{"lgamma", NULL, lgammafn},
-	{"gamma", NULL, gammafn},
-	{"digamma", NULL, digamma},
-	{"trigamma", NULL, trigamma},
+	{"lgamma", NULL, Rf_lgammafn},
+	{"gamma", NULL, Rf_gammafn},
+	{"digamma", NULL, Rf_digamma},
+	{"trigamma", NULL, Rf_trigamma},
 
 	{"cospi", NULL, cospi},
 	{"sinpi", NULL, sinpi},
@@ -8175,7 +8175,7 @@ char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
     if (basename == NULL) basename = fname;
     ext = Rf_strrchr(basename, '.');
 
-    if (ext != NULL && strcmp(ext, R_COMPILED_EXTENSION) == 0) {
+    if (ext != NULL && streql(ext, R_COMPILED_EXTENSION)) {
 	/* the supplied file name has the compiled file extension, so
 	   just copy it to the buffer and return the buffer pointer */
 	if (snprintf(buf, bsize, "%s", fname) < 0)
@@ -8201,7 +8201,7 @@ FILE *R_OpenCompiledFile(char *fname, char *buf, size_t bsize)
     char *cname = R_CompiledFileName(fname, buf, bsize);
 
     if (cname != NULL && R_FileExists(cname) &&
-	(strcmp(fname, cname) == 0 ||
+	(streql(fname, cname) ||
 	 ! R_FileExists(fname) ||
 	 R_FileMtime(cname) > R_FileMtime(fname)))
 	/* the compiled file cname exists, and either fname does not

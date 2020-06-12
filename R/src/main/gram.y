@@ -1936,7 +1936,7 @@ static int nextchar(int expect)
 /* Syntactic Keywords + Symbolic Constants */
 
 struct {
-    const char *name;
+    const char * const name;
     int token;
 }
 static keywords[] = {

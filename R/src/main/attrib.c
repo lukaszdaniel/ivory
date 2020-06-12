@@ -315,7 +315,7 @@ void Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
 	    int i;
 	    Rboolean ists = FALSE;
 	    for (i = 0; i < LENGTH(cl); i++)
-		if (strcmp(CHAR(STRING_ELT(cl, i)), "ts") == 0) { /* ASCII */
+		if (streql(CHAR(STRING_ELT(cl, i)), "ts")) { /* ASCII */
 		    ists = TRUE;
 		    break;
 		}

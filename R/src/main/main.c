@@ -991,7 +991,7 @@ void setup_Rmainloop(void)
 	UNPROTECT(1);
     }
 
-    if (strcmp(R_GUIType, "Tk") == 0) {
+    if (streql(R_GUIType, "Tk")) {
 	char buf[PATH_MAX];
 
 	snprintf(buf, PATH_MAX, "%s/library/tcltk/exec/Tk-frontend.R", R_Home);
@@ -1410,8 +1410,7 @@ static R_ToplevelCallbackEl *Rf_ToplevelTaskHandlers = NULL;
   since they could be more identified by an invariant (rather than
   position).
  */
-R_ToplevelCallbackEl *
-Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
+R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 		   void (*finalizer)(void *), const char *name, int *pos)
 {
     int which;
@@ -1452,8 +1451,7 @@ Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
     return(el);
 }
 
-Rboolean
-Rf_removeTaskCallbackByName(const char *name)
+Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
     Rboolean status = TRUE;
@@ -1463,7 +1461,7 @@ Rf_removeTaskCallbackByName(const char *name)
     }
 
     while(el) {
-	if(strcmp(el->name, name) == 0) {
+	if(streql(el->name, name)) {
 	    if(prev == NULL) {
 		Rf_ToplevelTaskHandlers = el->next;
 	    } else {
@@ -1489,8 +1487,7 @@ Rf_removeTaskCallbackByName(const char *name)
   Remove the top-level task handler/callback identified by
   its position in the list of callbacks.
  */
-Rboolean
-Rf_removeTaskCallbackByIndex(int id)
+Rboolean Rf_removeTaskCallbackByIndex(int id)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
     Rboolean status = TRUE;
@@ -1536,8 +1533,7 @@ Rf_removeTaskCallbackByIndex(int id)
 
   @see Rf_RemoveToplevelCallbackByIndex(int)
  */
-SEXP
-R_removeTaskCallback(SEXP which)
+SEXP R_removeTaskCallback(SEXP which)
 {
     int id;
     Rboolean val;
@@ -1555,8 +1551,7 @@ R_removeTaskCallback(SEXP which)
     return ScalarLogical(val);
 }
 
-SEXP
-R_getTaskCallbackNames(void)
+SEXP R_getTaskCallbackNames(void)
 {
     SEXP ans;
     R_ToplevelCallbackEl *el;
@@ -1594,8 +1589,7 @@ R_getTaskCallbackNames(void)
 static Rboolean Rf_RunningToplevelHandlers = FALSE;
 
 /* This is not used in R and in no header */
-void
-Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 			Rboolean visible)
 {
     R_ToplevelCallbackEl *h, *prev = NULL;
@@ -1677,8 +1671,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     return(again);
 }
 
-SEXP
-R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
+SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 {
     SEXP internalData;
     SEXP index;

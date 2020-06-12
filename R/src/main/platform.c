@@ -2197,7 +2197,7 @@ HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_Interactive) LOGICAL(ans)[i] = TRUE;
 #endif
 #ifdef Unix
-    if (strcmp(R_GUIType, "GNOME") == 0) {  /* always interactive */
+    if (streql(R_GUIType, "GNOME")) {  /* always interactive */
 	LOGICAL(ans)[i] = TRUE;  /* also AQUA ? */
     } else {
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)

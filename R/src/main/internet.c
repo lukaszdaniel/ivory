@@ -59,8 +59,7 @@ void R_HTTPDStop(void);
 
 static int initialized = 0;
 
-R_InternetRoutines *
-R_setInternetRoutines(R_InternetRoutines *routines)
+R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines)
 {
     R_InternetRoutines *tmp;
     tmp = ptr;
@@ -91,8 +90,7 @@ SEXP Rdownload(SEXP args)
     }
 }
 
-HIDDEN Rconnection 
-R_newurl(const char *description, const char * const mode, SEXP headers, int type)
+HIDDEN Rconnection R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
@@ -103,8 +101,7 @@ R_newurl(const char *description, const char * const mode, SEXP headers, int typ
     }
 }
 
-HIDDEN Rconnection
-R_newsock(const char *host, int port, int server, int serverfd,
+HIDDEN Rconnection R_newsock(const char *host, int port, int server, int serverfd,
           const char * const mode, int timeout)
 {
     if(!initialized) internet_Init();

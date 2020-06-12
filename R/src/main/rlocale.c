@@ -112,7 +112,7 @@ static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
 */
 
 typedef struct {
-    const char *name;
+    const char * const name;
     int locale;
 } cjk_locale_name_t;
 
@@ -225,7 +225,7 @@ extern const char *locale2charset(const char *);
 								     \
   strncpy(fromcode, locale2charset(NULL), sizeof(fromcode));         \
   fromcode[sizeof(fromcode) - 1] = '\0';                             \
-  if(0 == strcmp(fromcode, "UTF-8"))				     \
+  if(streql(fromcode, "UTF-8"))				     \
        return wcsearch(wc,table_w ## ISWNAME , table_w ## ISWNAME ## _count);\
   memset(mb_buf, 0, sizeof(mb_buf));				     \
   memset(ucs4_buf, 0, sizeof(ucs4_buf));			     \
@@ -305,7 +305,7 @@ static int Ri18n_iswalnum (wint_t wc)
  * iswctype
  */
 typedef struct {
-    const char * name;
+    const char * const name;
     wctype_t wctype;
     int(*func)(wint_t);
 } Ri18n_wctype_func_l ;

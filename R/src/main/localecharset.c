@@ -57,8 +57,8 @@
 
 /* name_value struct */
 typedef struct {
-    const char *name;
-    const char *value;
+    const char * const name;
+    const char * const value;
 } name_value;
 
 

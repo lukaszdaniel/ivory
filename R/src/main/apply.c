@@ -290,7 +290,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	UNPROTECT(1);
 	return ans;
     }
-    if(strcmp(CHAR(STRING_ELT(classes, 0)), "ANY") == 0) /* ASCII */
+    if(streql(CHAR(STRING_ELT(classes, 0)), "ANY")) /* ASCII */
 	matched = TRUE;
     else {
 	PROTECT(klass = R_data_class(X, FALSE));

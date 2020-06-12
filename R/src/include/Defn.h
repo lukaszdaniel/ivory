@@ -46,8 +46,8 @@
 # define extern0 extern
 #endif
 
-#define MAXELTSIZE 8192 /* Used as a default for string buffer sizes,
-			   and occasionally as a limit. */
+#define MAXELTSIZE 8192 /* Used as a default for string buffer sizes, \
+               and occasionally as a limit. */
 
 #include <R_ext/Complex.h>
 void Rf_CoercionWarning(int);/* warning code */
@@ -301,10 +301,10 @@ extern int putenv(char *string);
 #endif
 
 #define HSIZE	  49157	/* The size of the hash table for symbols */
-#define MAXIDSIZE 10000	/* Largest symbol size,
-			   in bytes excluding terminator.
-			   Was 256 prior to 2.13.0, now just a sanity check.
-			*/
+#define MAXIDSIZE 10000 /* Largest symbol size,                  \
+               in bytes excluding terminator.                    \
+               Was 256 prior to 2.13.0, now just a sanity check. \
+            */
 
 /* The type of the do_xxxx functions. */
 /* These are the built-in R functions. */
@@ -404,11 +404,12 @@ typedef struct {
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
-typedef struct {
-	union {
-		SEXP		backpointer;
-		double		align;
-	} u;
+typedef struct
+{
+    union {
+        SEXP backpointer;
+        double align;
+    } u;
 } VECREC, *VECP;
 
 /* Vector Heap Macros */
@@ -455,17 +456,16 @@ typedef struct {
 #else /* USE_RINTERNALS */
 
 typedef struct VECREC *VECP;
-int (PRIMOFFSET)(SEXP x);
-void (SET_PRIMOFFSET)(SEXP x, int v);
+int(PRIMOFFSET)(SEXP x);
+void(SET_PRIMOFFSET)(SEXP x, int v);
 
-#define PRIMFUN(x)	(R_FunTab[PRIMOFFSET(x)].cfun)
-#define PRIMNAME(x)	(R_FunTab[PRIMOFFSET(x)].name)
-#define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
-#define PRIMARITY(x)	(R_FunTab[PRIMOFFSET(x)].arity)
-#define PPINFO(x)	(R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].eval)/100)%10)
-#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval)%100)/10)
-
+#define PRIMFUN(x) (R_FunTab[PRIMOFFSET(x)].cfun)
+#define PRIMNAME(x) (R_FunTab[PRIMOFFSET(x)].name)
+#define PRIMVAL(x) (R_FunTab[PRIMOFFSET(x)].code)
+#define PRIMARITY(x) (R_FunTab[PRIMOFFSET(x)].arity)
+#define PPINFO(x) (R_FunTab[PRIMOFFSET(x)].gram)
+#define PRIMPRINT(x) (((R_FunTab[PRIMOFFSET(x)].eval) / 100) % 10)
+#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval) % 100) / 10)
 
 Rboolean (IS_ACTIVE_BINDING)(SEXP b);
 Rboolean (BINDING_IS_LOCKED)(SEXP b);
@@ -503,20 +503,21 @@ Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b);
    Allocating on the stack memory is also supported; this is currently
    used for jump buffers.
 */
-typedef struct {
+typedef struct
+{
     int tag;
     int flags;
     union {
-	int ival;
-	double dval;
-	SEXP sxpval;
+        int ival;
+        double dval;
+        SEXP sxpval;
     } u;
 } R_bcstack_t;
 
-# define PARTIALSXP_MASK (~255)
-# define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
-# define RAWMEM_TAG 254
-# define CACHESZ_TAG 253
+#define PARTIALSXP_MASK (~255)
+#define IS_PARTIAL_SXP_TAG(x) ((x)&PARTIALSXP_MASK)
+#define RAWMEM_TAG 254
+#define CACHESZ_TAG 253
 
 #ifdef R_USE_SIGNALS
 /* Stack entry for pending promises */
@@ -569,19 +570,20 @@ RCNTXT *context;
  * If you add a new context type for functions make sure
  *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
  */
-enum {
+enum
+{
     CTXT_TOPLEVEL = 0,
-    CTXT_NEXT	  = 1,
-    CTXT_BREAK	  = 2,
-    CTXT_LOOP	  = 3,	/* break OR next target */
+    CTXT_NEXT = 1,
+    CTXT_BREAK = 2,
+    CTXT_LOOP = 3, /* break OR next target */
     CTXT_FUNCTION = 4,
-    CTXT_CCODE	  = 8,
-    CTXT_RETURN	  = 12,
-    CTXT_BROWSER  = 16,
-    CTXT_GENERIC  = 20,
-    CTXT_RESTART  = 32,
-    CTXT_BUILTIN  = 64, /* used in profiling */
-    CTXT_UNWIND   = 128
+    CTXT_CCODE = 8,
+    CTXT_RETURN = 12,
+    CTXT_BROWSER = 16,
+    CTXT_GENERIC = 20,
+    CTXT_RESTART = 32,
+    CTXT_BUILTIN = 64, /* used in profiling */
+    CTXT_UNWIND = 128
 };
 
 /*
@@ -598,7 +600,7 @@ RES   0 0 0 0 0 0 1 = 32
 BUI   0 0 0 0 0 0 0 1 = 64
 */
 
-#define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
+#define IS_RESTART_BIT_SET(flags) ((flags)&CTXT_RESTART)
 #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
 #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 #endif
@@ -606,15 +608,16 @@ BUI   0 0 0 0 0 0 0 1 = 64
 /* Miscellaneous Definitions */
 inline Rboolean streql(const char *s, const char *t)
 {
-    return (Rboolean) (strcmp(s, t) == 0);
+    return (Rboolean)(strcmp(s, t) == 0);
 }
 inline Rboolean streqln(const char *s, const char *t, size_t n)
 {
-    return (Rboolean) (strncmp(s, t, n) == 0);
+    return (Rboolean)(strncmp(s, t, n) == 0);
 }
 
 /* Arithmetic and Relation Operators */
-typedef enum {
+typedef enum
+{
     PLUSOP = 1,
     MINUSOP,
     TIMESOP,
@@ -624,7 +627,8 @@ typedef enum {
     IDIVOP
 } ARITHOP_TYPE;
 
-typedef enum {
+typedef enum
+{
     EQOP = 1,
     NEOP,
     LTOP,
@@ -633,11 +637,12 @@ typedef enum {
     GTOP
 } RELOP_TYPE;
 
-typedef enum {
+typedef enum
+{
     MATPROD_DEFAULT = 1,
     MATPROD_INTERNAL,
     MATPROD_BLAS,
-    MATPROD_DEFAULT_SIMD  /* experimental */
+    MATPROD_DEFAULT_SIMD /* experimental */
 } MATPROD_TYPE;
 
 /* File Handling */

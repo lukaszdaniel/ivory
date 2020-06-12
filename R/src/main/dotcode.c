@@ -55,13 +55,19 @@ static SEXP EncSymbol = NULL;
 static SEXP CSingSymbol = NULL;
 
 #include <Rdynpriv.h>
-// Odd: 'type' is really this enum
-enum {NOT_DEFINED, FILENAME, DLL_HANDLE, R_OBJECT};
-typedef struct {
-    char DLLname[PATH_MAX];
-    HINSTANCE dll;
-    SEXP  obj;
-    int type;
+typedef enum
+{
+	NOT_DEFINED = 0,
+	FILENAME,
+	DLL_HANDLE,
+	R_OBJECT
+} RefType;
+typedef struct
+{
+	char DLLname[PATH_MAX];
+	HINSTANCE dll;
+	SEXP obj;
+	RefType type;
 } DllReference;
 
 /* Maximum length of entry-point name, including nul terminator */
@@ -71,8 +77,7 @@ typedef struct {
 #define MAX_ARGS 65
 
 /* This looks up entry points in DLLs in a platform specific way. */
-static DL_FUNC
-R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
+static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 			  R_RegisteredNativeSymbol *symbol, SEXP env);
 
 static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll);
@@ -302,31 +307,30 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
     return args; /* -Wall */
 }
 
-
 static Rboolean checkNativeType(int targetType, int actualType)
 {
-    if(targetType > 0) {
-	if(targetType == INTSXP || targetType == LGLSXP) {
-	    return (Rboolean) (actualType == INTSXP || actualType == LGLSXP);
+	if (targetType > 0)
+	{
+		if (targetType == INTSXP || targetType == LGLSXP)
+		{
+			return (Rboolean)(actualType == INTSXP || actualType == LGLSXP);
+		}
+		return (Rboolean)(targetType == actualType);
 	}
-	return (Rboolean) (targetType == actualType);
-    }
 
-    return TRUE;
+	return TRUE;
 }
-
 
 static Rboolean comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
 {
-   if(type == ANYSXP || TYPEOF(s) == type)
-      return TRUE;
+	if (type == ANYSXP || TYPEOF(s) == type)
+		return TRUE;
 
-   if(type == SINGLESXP)
-      return (Rboolean) (asLogical(getAttrib(s, install("Csingle"))) == TRUE);
+	if (type == SINGLESXP)
+		return (Rboolean)(asLogical(getAttrib(s, install("Csingle"))) == TRUE);
 
-   return FALSE;
+	return FALSE;
 }
-
 
 /* Foreign Function Interface.  This code allows a user to call C */
 /* or Fortran code which is either statically or dynamically linked. */
@@ -393,18 +397,18 @@ static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll)
 
 static void setDLLname(SEXP s, char *DLLname)
 {
-    SEXP ss = CAR(s);
-    const char *name;
+	SEXP ss = CAR(s);
+	const char *name;
 
-    if(TYPEOF(ss) != STRSXP || length(ss) != 1)
-	error(_("'%s' argument must be a single character string"), "PACKAGE");
-    name = translateChar(STRING_ELT(ss, 0));
-    /* allow the package: form of the name, as returned by find */
-    if(streqln(name, "package:", 8))
-	name += 8;
-    if(strlen(name) > PATH_MAX - 1)
-	error(_("'%s' argument is too long"), "PACKAGE");
-    strcpy(DLLname, name);
+	if (TYPEOF(ss) != STRSXP || length(ss) != 1)
+		error(_("'%s' argument must be a single character string"), "PACKAGE");
+	name = translateChar(STRING_ELT(ss, 0));
+	/* allow the package: form of the name, as returned by find */
+	if (streqln(name, "package:", 8))
+		name += 8;
+	if (strlen(name) > PATH_MAX - 1)
+		error(_("'%s' argument is too long"), "PACKAGE");
+	strcpy(DLLname, name);
 }
 
 static SEXP pkgtrim(SEXP args, DllReference *dll)
@@ -440,35 +444,36 @@ static SEXP pkgtrim(SEXP args, DllReference *dll)
 
 static SEXP enctrim(SEXP args)
 {
-    SEXP s, ss;
+	SEXP s, ss;
 
-    for(s = args ; s != R_NilValue;) {
-	ss = CDR(s);
-	/* Look for ENCODING=. We look at the next arg, unless
+	for (s = args; s != R_NilValue;)
+	{
+		ss = CDR(s);
+		/* Look for ENCODING=. We look at the next arg, unless
 	   this is the last one (which will only happen for one arg),
 	   and remove it */
-	if(ss == R_NilValue && TAG(s) == EncSymbol) {
-	    warning(_("'ENCODING' argument is defunct and will be ignored"));
-	    return R_NilValue;
+		if (ss == R_NilValue && TAG(s) == EncSymbol)
+		{
+			warning(_("'ENCODING' argument is defunct and will be ignored"));
+			return R_NilValue;
+		}
+		if (TAG(ss) == EncSymbol)
+		{
+			warning(_("'ENCODING' argument is defunct and will be ignored"));
+			SETCDR(s, CDR(ss));
+		}
+		s = CDR(s);
 	}
-	if(TAG(ss) == EncSymbol) {
-	    warning(_("'ENCODING' argument is defunct and will be ignored"));
-	    SETCDR(s, CDR(ss));
-	}
-	s = CDR(s);
-    }
-    return args;
+	return args;
 }
-
-
 
 HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 	const char *sym, *type = "", *pkg = "";
 	int val = 1, nargs = length(args);
-    R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
+	R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
 
-    if (nargs < 1) error(_("no arguments supplied"));
+	if (nargs < 1) error(_("no arguments supplied"));
     if (nargs > 3) error(_("too many arguments"));
 
     if(!isValidString(CAR(args)))
@@ -483,10 +488,10 @@ HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!isValidString(CADDR(args)))
 	    error(_("invalid '%s' argument"), "type");
 	type = CHAR(STRING_ELT(CADDR(args), 0)); /* ASCII */
-	if(strcmp(type, "C") == 0) symbol.type = R_C_SYM;
-	else if(strcmp(type, "Fortran") == 0) symbol.type = R_FORTRAN_SYM;
-	else if(strcmp(type, "Call") == 0) symbol.type = R_CALL_SYM;
-	else if(strcmp(type, "External") == 0) symbol.type = R_EXTERNAL_SYM;
+	if(streql(type, "C")) symbol.type = R_C_SYM;
+	else if(streql(type, "Fortran")) symbol.type = R_FORTRAN_SYM;
+	else if(streql(type, "Call")) symbol.type = R_CALL_SYM;
+	else if(streql(type, "External")) symbol.type = R_EXTERNAL_SYM;
     }
     if(!(R_FindSymbol(sym, pkg, &symbol))) val = 0;
     return ScalarLogical(val);
@@ -500,28 +505,31 @@ typedef SEXP (*R_ExternalRoutine2)(SEXP, SEXP, SEXP, SEXP);
 
 static SEXP check_retval(SEXP call, SEXP val)
 {
-    static int inited = FALSE;
-    static int check = FALSE;
+	static int inited = FALSE;
+	static int check = FALSE;
 
-    if (! inited) {
-	inited = TRUE;
-	const char *p = getenv("_R_CHECK_DOTCODE_RETVAL_");
-	if (p != NULL && StringTrue(p))
-	    check = TRUE;
-    }
+	if (!inited)
+	{
+		inited = TRUE;
+		const char *p = getenv("_R_CHECK_DOTCODE_RETVAL_");
+		if (p != NULL && StringTrue(p))
+			check = TRUE;
+	}
 
-    if (check) {
-	if (val < (SEXP) 16)
-	    errorcall(call, _("WEIRD RETURN VALUE: %p"), val);
-    }
-    else if (val == NULL) {
-	warningcall(call, _("converting NULL pointer to R NULL"));
-	val = R_NilValue;
-    }
+	if (check)
+	{
+		if (val < (SEXP)16)
+			errorcall(call, _("WEIRD RETURN VALUE: %p"), val);
+	}
+	else if (val == NULL)
+	{
+		warningcall(call, _("converting NULL pointer to R NULL"));
+		val = R_NilValue;
+	}
 
-    return val;
+	return val;
 }
-    
+
 HIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     DL_FUNC ofun = NULL;
@@ -1426,8 +1434,7 @@ static SEXP Rf_getCallingDLL(void)
 
   1) dll.obj is a DLLInfo object
 */
-static DL_FUNC
-R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
+static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 			  R_RegisteredNativeSymbol *symbol,
 			  SEXP env)
 {
@@ -2560,7 +2567,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #ifndef NO_CALL_R
 static const struct {
-    const char *name;
+    const char * const name;
     const SEXPTYPE type;
 }
 
@@ -2732,8 +2739,8 @@ void call_R(char *func, long nargs, void **arguments, char **modes,
 }
 
 void call_S(char *func, long nargs, void **arguments, char **modes,
-	    long *lengths, char **names, long nres, char **results)
+			long *lengths, char **names, long nres, char **results)
 {
-    call_R(func, nargs, arguments, modes, lengths, names, nres, results);
+	call_R(func, nargs, arguments, modes, lengths, names, nres, results);
 }
 #endif

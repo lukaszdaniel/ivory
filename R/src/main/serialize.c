@@ -413,7 +413,7 @@ static int InInteger(R_inpstream_t stream)
     case R_pstream_ascii_format:
 	InWord(stream, word, sizeof(word));
 	if(sscanf(word, "%127s", buf) != 1) error(_("read error"));
-	if (strcmp(buf, "NA") == 0)
+	if (streql(buf, "NA"))
 	    return NA_INTEGER;
 	else
 	    if(sscanf(buf, "%d", &i) != 1) error(_("read error"));
@@ -444,13 +444,13 @@ static double InReal(R_inpstream_t stream)
     case R_pstream_ascii_format:
 	InWord(stream, word, sizeof(word));
 	if(sscanf(word, "%127s", buf) != 1) error(_("read error"));
-	if (strcmp(buf, "NA") == 0)
+	if (streql(buf, "NA"))
 	    return NA_REAL;
-	else if (strcmp(buf, "NaN") == 0)
+	else if (streql(buf, "NaN"))
 	    return R_NaN;
-	else if (strcmp(buf, "Inf") == 0)
+	else if (streql(buf, "Inf"))
 	    return R_PosInf;
-	else if (strcmp(buf, "-Inf") == 0)
+	else if (streql(buf, "-Inf"))
 	    return R_NegInf;
 	else
 	    if(
@@ -2281,7 +2281,7 @@ R_InitInPStream(R_inpstream_t stream, R_pstream_data_t data,
 void R_InitOutPStream(R_outpstream_t stream, R_pstream_data_t data,
 		 R_pstream_format_t type, int version,
 		 void (*outchar)(R_outpstream_t, int),
-		 void (*outbytes)(R_outpstream_t, const void *, int),
+		 void (*outbytes)(R_outpstream_t, /*const*/ void *, int),
 		 SEXP (*phook)(SEXP, SEXP), SEXP pdata)
 {
     stream->data = data;
@@ -2311,7 +2311,7 @@ static int InCharFile(R_inpstream_t stream)
     return fgetc(fp);
 }
 
-static void OutBytesFile(R_outpstream_t stream, const void *buf, int length)
+static void OutBytesFile(R_outpstream_t stream, /*const*/ void *buf, int length)
 {
     FILE *fp = (FILE*) stream->data;
     size_t out = fwrite(buf, 1, length, fp);
@@ -2409,7 +2409,7 @@ static int InCharConn(R_inpstream_t stream)
     }
 }
 
-static void OutBytesConn(R_outpstream_t stream, const void *buf, int length)
+static void OutBytesConn(R_outpstream_t stream, /*const*/ void *buf, int length)
 {
     Rconnection con = (Rconnection) stream->data;
     CheckOutConn(con);
@@ -2634,7 +2634,7 @@ static void OutCharBB(R_outpstream_t stream, int c)
     bb->buf[bb->count++] = (char) c;
 }
 
-static void OutBytesBB(R_outpstream_t stream, const void *buf, int length)
+static void OutBytesBB(R_outpstream_t stream, /*const*/ void *buf, int length)
 {
     bconbuf_t bb = (bconbuf_t) stream->data;
     if (bb->count + length > BCONBUFSIZ)
@@ -2729,7 +2729,7 @@ static void OutCharMem(R_outpstream_t stream, int c)
     mb->buf[mb->count++] = (char) c;
 }
 
-static void OutBytesMem(R_outpstream_t stream, const void *buf, int length)
+static void OutBytesMem(R_outpstream_t stream, /*const*/ void *buf, int length)
 {
     membuf_t mb = (membuf_t) stream->data;
     R_size_t needed = mb->count + (R_size_t) length;

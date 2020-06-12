@@ -3967,7 +3967,7 @@ SEXP Rf_mkCharLen(const char *name, int len)
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
-SEXP Rf_mkChar(const char *name)
+SEXP Rf_mkChar(const char * const name)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
@@ -4066,7 +4066,7 @@ static void R_StringHash_resize(unsigned int newsize)
    the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
    a new CHARSXP is created, added to the cache and then returned. */
 
-SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
+SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;

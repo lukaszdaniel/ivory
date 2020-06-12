@@ -106,11 +106,14 @@
 
       \item \code{boxplot()} now also accepts \code{call}s for labels such
       as \code{ylab}, the same as \code{plot()}.  Reported by Marius Hofert.
+
+      \item \code{phyper(11, 15, 0, 12, log.p=TRUE)} no longer gives
+      \code{NaN}; reported as \PR{17271} by Alexey Stukalov.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.0.1 patched}{
+\section{\Rlogo CHANGES IN R 4.0.2}{
 
   \subsection{UTILITIES}{
     \itemize{

@@ -1388,7 +1388,7 @@ static int InIntegerAscii(FILE *fp, SaveLoadData *unused)
     int x, res;
     res = fscanf(fp, "%127s", buf);
     if(res != 1) error(_("read error"));
-    if (strcmp(buf, "NA") == 0)
+    if (streql(buf, "NA"))
 	return NA_INTEGER;
     else {
 	res = sscanf(buf, "%d", &x);
@@ -1505,11 +1505,11 @@ static double InDoubleAscii(FILE *fp, SaveLoadData *unused)
     int res;
     res = fscanf(fp, "%127s", buf);
     if(res != 1) error(_("read error"));
-    if (strcmp(buf, "NA") == 0)
+    if (streql(buf, "NA"))
 	x = NA_REAL;
-    else if (strcmp(buf, "Inf") == 0)
+    else if (streql(buf, "Inf"))
 	x = R_PosInf;
-    else if (strcmp(buf, "-Inf") == 0)
+    else if (streql(buf, "-Inf"))
 	x = R_NegInf;
     else {
 	res = sscanf(buf, "%lg", &x);

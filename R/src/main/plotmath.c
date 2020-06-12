@@ -538,7 +538,7 @@ static double CenterShift(BBOX bbox)
 
 
 typedef struct {
-    const char *name;
+    const char * const name;
     int code;
 } SymTab;
 
@@ -1630,7 +1630,7 @@ static BBOX RenderBar(SEXP expr, int draw, mathContext *mc,
 }
 
 static struct {
-    const char *name;
+    const char *const name;
     int code;
 }
 AccentTable[] = {

@@ -70,17 +70,17 @@ HIDDEN
 IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
 
 /*- some of these really could be void */
-int R_IoBufferInit(IoBuffer*);
-int R_IoBufferFree(IoBuffer*);
-int R_IoBufferReadReset(IoBuffer*);
-int R_IoBufferWriteReset(IoBuffer*);
-int R_IoBufferGetc(IoBuffer*);
-int R_IoBufferPutc(int, IoBuffer*);
-int R_IoBufferPuts(char*, IoBuffer*);
-int R_IoBufferReadOffset(IoBuffer*);
+int R_IoBufferInit(IoBuffer *);
+int R_IoBufferFree(IoBuffer *);
+int R_IoBufferReadReset(IoBuffer *);
+int R_IoBufferWriteReset(IoBuffer *);
+int R_IoBufferGetc(IoBuffer *);
+int R_IoBufferPutc(int, IoBuffer *);
+int R_IoBufferPuts(char *, IoBuffer *);
+int R_IoBufferReadOffset(IoBuffer *);
 
-int R_TextBufferInit(TextBuffer*, SEXP);
-int R_TextBufferFree(TextBuffer*);
-int R_TextBufferGetc(TextBuffer*);
+int R_TextBufferInit(TextBuffer *, SEXP);
+int R_TextBufferFree(TextBuffer *);
+int R_TextBufferGetc(TextBuffer *);
 
 #endif /* R_IOSTUFF_H */

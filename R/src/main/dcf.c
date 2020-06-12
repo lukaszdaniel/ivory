@@ -353,7 +353,7 @@ static Rboolean field_is_foldable_p(const char *field, SEXP excludes)
 {
     int i, n = LENGTH(excludes);
     for(i = 0; i < n; i++) {
-	if(strcmp(field, CHAR(STRING_ELT(excludes, i))) == 0)
+	if(streql(field, CHAR(STRING_ELT(excludes, i))))
 	    return FALSE;
     }
     return TRUE;

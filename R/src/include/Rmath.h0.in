@@ -365,9 +365,9 @@ double  Rlog1p(double);
 #define trigamma	Rf_trigamma
 #endif
 
-//#define dnorm dnorm4
-//#define pnorm pnorm5
-//#define qnorm qnorm5
+#define Rf_dnorm4 Rf_dnorm
+#define Rf_pnorm5 Rf_pnorm
+#define Rf_qnorm5 Rf_qnorm
 
 #ifdef  __cplusplus
 extern "C" {

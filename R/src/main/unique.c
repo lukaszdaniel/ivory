@@ -1171,7 +1171,7 @@ HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (strlen(ss) == 0) continue;
 	    for (int j = 0; j < n_target; j++) {
 		if (no_dups && used[j]) continue;
-		if (strcmp(ss, tar[j]) == 0) {
+		if (streql(ss, tar[j])) {
 		    ians[i] = j + 1;
 		    if (no_dups) used[j] = 1;
 		    nexact++;

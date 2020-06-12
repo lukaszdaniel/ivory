@@ -138,7 +138,7 @@ HIDDEN void PrintIvoryVersionString(char *s, size_t len)
     } else if(strlen(R_STATUS) == 0) {
         snprintf(s, len, "Ivory version %s.%s (%s-%s-%s)",
                 R_MAJOR, R_MINOR, R_YEAR, R_MONTH, R_DAY);
-    } else if(strcmp(R_STATUS, "Under development (unstable)") == 0) {
+    } else if(streql(R_STATUS, "Under development (unstable)")) {
         snprintf(s, len, "Ivory %s (%s-%s-%s r%d)",
                 R_STATUS, R_YEAR, R_MONTH, R_DAY, R_SVN_REVISION);
     } else {

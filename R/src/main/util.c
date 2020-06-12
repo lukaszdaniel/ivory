@@ -129,7 +129,7 @@ const static char * const falsenames[] = {
     (char *) NULL,
 };
 
-SEXP asChar(SEXP x)
+SEXP Rf_asChar(SEXP x)
 {
 	if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
 	    int w, d, e, wi, di, ei;
@@ -221,7 +221,7 @@ TypeTable[] = {
 };
 
 
-SEXPTYPE Rf_str2type(const char *s)
+SEXPTYPE Rf_str2type(const char * const s)
 {
     for (int i = 0; TypeTable[i].str; i++) {
 	if (streql(s, TypeTable[i].str))
@@ -1205,7 +1205,7 @@ HIDDEN SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-HIDDEN SEXP Rf_markKnown(const char *s, SEXP ref)
+HIDDEN SEXP Rf_markKnown(const char * const s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {
@@ -1215,12 +1215,13 @@ HIDDEN SEXP Rf_markKnown(const char *s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-Rboolean Rf_strIsASCII(const char *str)
+Rboolean Rf_strIsASCII(const char *const str)
 {
-    const char *p;
-    for(p = str; *p; p++)
-	if((unsigned int) *p > 0x7F) return FALSE;
-    return TRUE;
+	const char *p;
+	for (p = str; *p; p++)
+		if ((unsigned int)*p > 0x7F)
+			return FALSE;
+	return TRUE;
 }
 
 /* Number of additional bytes */
@@ -1230,7 +1231,7 @@ static const unsigned char utf8_table4[] = {
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 	3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5};
 
-HIDDEN int utf8clen(char c)
+HIDDEN int utf8clen(const char c)
 {
     /* This allows through 8-bit chars 10xxxxxx, which are invalid */
     if ((c & 0xc0) != 0xc0) return 1;
@@ -1243,19 +1244,19 @@ static R_wchar_t utf16toucs(wchar_t high, wchar_t low)
 }
 
 /* Return the low UTF-16 surrogate from a UTF-8 string; assumes all testing has been done. */
-static wchar_t utf8toutf16low(const char *s)
+static wchar_t utf8toutf16low(const char * const s)
 {
     return (unsigned int) LOW_SURROGATE_START | ((s[2] & 0x0F) << 6) | (s[3] & 0x3F);
 }
 
-HIDDEN R_wchar_t utf8toucs32(wchar_t high, const char *s)
+HIDDEN R_wchar_t utf8toucs32(wchar_t high, const char * const s)
 {
     return utf16toucs(high, utf8toutf16low(s));
 }
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-HIDDEN size_t Rf_utf8toucs(wchar_t *wc, const char *s)
+HIDDEN size_t Rf_utf8toucs(wchar_t *wc, const char * const s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -1323,7 +1324,7 @@ HIDDEN size_t Rf_utf8toucs(wchar_t *wc, const char *s)
     }
 }
 
-size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
+size_t Rf_utf8towcs(wchar_t *wc, const char * const s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1409,7 +1410,7 @@ size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n)
 }
 
 /* A version that reports failure as an error */
-size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1445,7 +1446,7 @@ size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 
 /* Truncate a string in place (in native encoding) so that it only contains
    valid multi-byte characters. Has no effect in non-mbcs locales. */
-HIDDEN char* mbcsTruncateToValid(char *s)
+HIDDEN char* mbcsTruncateToValid(char * const s)
 {
     if (!mbcslocale)
 	return s;
@@ -1469,7 +1470,7 @@ HIDDEN char* mbcsTruncateToValid(char *s)
     return s;
 }
 
-HIDDEN Rboolean mbcsValid(const char *str)
+HIDDEN Rboolean mbcsValid(const char * const str)
 {
     return (Rboolean) ((int)mbstowcs(NULL, str, 0) >= 0);
 }
@@ -1477,7 +1478,7 @@ HIDDEN Rboolean mbcsValid(const char *str)
 
 /* used in src/library/grDevices/src/cairo/cairoFns.c */
 #include "valid_utf8.h"
-Rboolean utf8Valid(const char *str)
+Rboolean utf8Valid(const char * const str)
 {
     return (Rboolean) (valid_utf8(str, strlen(str)) == 0);
 }
@@ -1642,19 +1643,19 @@ void F77_SYMBOL(rchkusr)(void)
 /* Return a copy of a string using memory from R_alloc.
    NB: caller has to manage R_alloc stack.  Used in platform.c
 */
-char *Rf_acopy_string(const char *in)
+char *Rf_acopy_string(const char *const in)
 {
-    char *out;
-    size_t len = strlen(in);
-    if (len > 0) {
-	out = (char *) R_alloc(1 + len, sizeof(char));
-	strcpy(out, in);
-    } else
-	out = (char*) "";
-    return out;
+	char *out;
+	size_t len = strlen(in);
+	if (len > 0)
+	{
+		out = (char *)R_alloc(1 + len, sizeof(char));
+		strcpy(out, in);
+	}
+	else
+		out = (char *)"";
+	return out;
 }
-
-
 
 /* Table from
 http://unicode.org/Public/MAPPINGS/VENDORS/ADOBE/symbol.txt
@@ -1853,8 +1854,9 @@ const char* Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
 
 HIDDEN int Rf_AdobeSymbol2ucs2(int n)
 {
-    if(n >= 32 && n < 256) return s2u[n-32];
-    else return 0;
+	if (n >= 32 && n < 256)
+		return s2u[n - 32];
+	return 0;
 }
 
 double R_strtod5(const char *str, char **endptr, char dec,
