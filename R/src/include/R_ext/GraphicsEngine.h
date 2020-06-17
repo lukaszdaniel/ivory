@@ -21,7 +21,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* Used by graphics.c, grid and by third-party graphics devices */
+/* Used by graphics.cpp, grid and by third-party graphics devices */
 
 #ifndef R_GRAPHICSENGINE_H_
 #define R_GRAPHICSENGINE_H_
@@ -203,8 +203,15 @@ typedef struct {
 
 typedef R_GE_gcontext* pGEcontext;
 
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #include <R_ext/GraphicsDevice.h> /* needed for DevDesc */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct _GEDevDesc GEDevDesc;
 
@@ -460,7 +467,7 @@ void R_GE_rasterRotate(unsigned int *sraster, int w, int h, double angle,
 
 
 /*
- * From plotmath.c
+ * From plotmath.cpp
  */
 double GEExpressionWidth(SEXP expr,
 			 const pGEcontext gc, pGEDevDesc dd);
@@ -473,16 +480,16 @@ void GEMathText(double x, double y, SEXP expr,
 		double xc, double yc, double rot,
 		const pGEcontext gc, pGEDevDesc dd);
 /*
- * (End from plotmath.c)
+ * (End from plotmath.cpp)
  */
 
 /*
- * From plot3d.c : used in package clines
+ * From plot3d.cpp : used in package clines
  */
 SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 		    double *z, double *levels, int nl);
 /*
- * (End from plot3d.c)
+ * (End from plot3d.cpp)
  */
 
 /*

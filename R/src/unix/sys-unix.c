@@ -65,8 +65,7 @@
  *  4) INITIALIZATION AND TERMINATION ACTIONS
  */
 
-HIDDEN
-FILE *R_OpenInitFile(void)
+HIDDEN FILE *R_OpenInitFile(void)
 {
     char buf[PATH_MAX], *home, *p = getenv("R_PROFILE_USER");
     FILE *fp;
@@ -202,8 +201,7 @@ void R_setStartTime(void)
    clock ticks (which can overflow).  It is possible this version uses
    time() and so is in seconds.  But even Cygwin has gettimeofday.
  */
-HIDDEN
-void R_getProcTime(double *data)
+HIDDEN void R_getProcTime(double *data)
 {
     /* docs say this is rounded to the nearest ms */
     double et = currentTime() - StartTime;
@@ -234,12 +232,10 @@ void R_getProcTime(double *data)
 
 /* used in memory.c */
 /* FIXME: maybe should try to find the increment for getrusage */
-HIDDEN
-double R_getClockIncrement(void)
+HIDDEN double R_getClockIncrement(void)
 {
     return 1.0 / clk_tck;
 }
-
 
 #ifdef HAVE_SYS_WAIT_H
 # include <sys/wait.h>
@@ -683,7 +679,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if (intern) { /* intern = TRUE */
 	FILE *fp;
-	char *x = "r",
+	char *x = (char *) "r",
 #ifdef HAVE_GETLINE
 	    *buf = NULL;
 	size_t buf_len = 0;
@@ -790,7 +786,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_Busy(0);
 #endif
 	UNPROTECT(1);
-	R_Visible = 0;
+	R_Visible = FALSE;
 	return tlist;
     }
 }

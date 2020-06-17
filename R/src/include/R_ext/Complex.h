@@ -31,8 +31,8 @@ extern "C" {
 #endif
 
 typedef struct {
-	double r;
-	double i;
+    double r;
+    double i;
 } Rcomplex;
 
 #ifdef  __cplusplus

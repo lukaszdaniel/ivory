@@ -23,7 +23,7 @@
 #ifndef ERRORMSG_H
 #define ERRORMSG_H
 
-/* Used in ../main/sub*.c */
+/* Used in ../main/sub*.cpp */
 #define R_MSG_subs_o_b	_("subscript is out of bounds")
 #define R_MSG_ob_nonsub _("object of type '%s' is not subsettable")
 
@@ -31,7 +31,7 @@
  *---- ================================= ----*/
 
 /* ---> Handling & I18n 
- * via ErrorMessage() and WarningMessage() in ../../main/errors.c */
+ * via ErrorMessage() and WarningMessage() in ../../main/errors.cpp */
 
 typedef enum {
     /* Argument list length and type errors */

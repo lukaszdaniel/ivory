@@ -107,14 +107,16 @@ typedef enum {
 #define yDevtoUsr		Rf_yDevtoUsr
 #define yNPCtoUsr		Rf_yNPCtoUsr
 
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*-------------------------------------------------------------------
  *
  *  GPAR FUNCTIONS are concerned with operations on the
  *  entire set of graphics parameters for a device
  *  (e.g., initialisation, saving, and restoring)
  *
- *  From graphics.c, used in plot.c.
+ *  From graphics.cpp, used in plot.cpp.
  */
 
 /* Reset the current graphical parameters from the default ones: */
@@ -206,7 +208,7 @@ void Rf_GMMathText(SEXP, int, double, int, double, int, double, pGEDevDesc);
  *  using the graphical primitives (i.e., they are generic - NOT
  *  device-specific).
  *
- *  From graphics.c, used in plot.c.
+ *  From graphics.cpp, used in plot.cpp.
  */
 
 /* Draw a line from (x1,y1) to (x2,y2) with an arrow head
@@ -234,7 +236,7 @@ double Rf_GExpressionWidth(SEXP, GUnit, pGEDevDesc);
  *  TRANSFORMATIONS are concerned with converting locations between
  *  coordinate systems and dimensions between different units.
  *
- *  From graphics.c, used in par.c, plot.c, plot3d.c
+ *  From graphics.cpp, used in par.cpp, plot.cpp, plot3d.cpp
  */
 
 /* Convert an R unit (e.g., "user") into an internal unit (e.g., USER)> */
@@ -277,5 +279,9 @@ double Rf_xDevtoUsr(double, pGEDevDesc);
 double Rf_yDevtoUsr(double, pGEDevDesc);
 double Rf_xNPCtoUsr(double, pGEDevDesc);
 double Rf_yNPCtoUsr(double, pGEDevDesc);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* RGRAPHICS_H_ */

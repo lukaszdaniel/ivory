@@ -34,9 +34,9 @@ CSOURCES = \
 	version.c \
 	g_alab_her.c g_cntrlify.c g_fontdb.c g_her_glyph.c
 
-SOURCES_F = xxxpr.f
 
-OBJS = $(CSOURCES:.c=.o) $(SOURCES_F:.f=.o)
+FSOURCES = xxxpr.f
+OBJS = $(CSOURCES:.c=.o) $(FSOURCES:.f=.o)
 
 ifdef RUN_BISON
 gram.c: gram.y

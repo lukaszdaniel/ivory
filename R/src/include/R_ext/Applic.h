@@ -61,7 +61,7 @@ void Rdqagi(integr_fn f, void *ex, double *bound, int *inf,
 	    int *limit, int *lenw, int *last,
 	    int *iwork, double *work);
 
-/* main/optim.c */
+/* main/optim.cpp */
 typedef double optimfn(int, double *, void *);
 typedef void optimgr(int, double *, double *, void *);
 
@@ -111,7 +111,7 @@ void F77_NAME(dqrxb)(double *x, int *n, int *k, double *qraux,
 
 /* hidden, for use in R.bin/R.dll/libR.so */
 
-/* appl/pretty.c: for use in engine.c and util.c */
+/* appl/pretty.c: for use in engine.cpp and util.cpp */
 double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 		double shrink_sml, const double high_u_fact[],
 		int eps_correction, int return_bounds);

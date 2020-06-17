@@ -32,7 +32,7 @@ typedef Rboolean (*R_GetX11ImageRoutine)(int d, void *pximage,
 					 int *pwidth, int *pheight);
 typedef int (*R_X11_access)(void);
 
-typedef Rboolean (*R_X11clp)(Rclpconn, char*);
+typedef Rboolean (*R_X11clp)(Rclpconn, const char*);
 
 typedef const char * (*R_version_t)(void);
 
@@ -57,7 +57,7 @@ extern "C" {
 R_X11Routines *R_setX11Routines(R_X11Routines *routines);
 R_deRoutines *R_setdeRoutines(R_deRoutines *routines);
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_X11_MODULE_H */

@@ -13,6 +13,8 @@ include $(top_builddir)/Makeconf
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 DISTFILES = Makefile.in README \
 	R.m4 \
+	m4_ax_boost_base.m4 \
+	m4_ax_boost_regex.m4 \
 	bigendian.m4 \
 	cairo.m4 \
 	clibs.m4 \

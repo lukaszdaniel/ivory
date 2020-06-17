@@ -50,7 +50,10 @@
                and occasionally as a limit. */
 
 #include <R_ext/Complex.h>
-void Rf_CoercionWarning(int);/* warning code */
+#ifdef __cplusplus
+extern "C" {
+#endif
+void Rf_CoercionWarning(int); /* warning code */
 int Rf_LogicalFromInteger(int, int*);
 int Rf_LogicalFromReal(double, int*);
 int Rf_LogicalFromComplex(Rcomplex, int*);
@@ -63,16 +66,23 @@ double Rf_RealFromComplex(Rcomplex, int*);
 Rcomplex Rf_ComplexFromLogical(int, int*);
 Rcomplex Rf_ComplexFromInteger(int, int*);
 Rcomplex Rf_ComplexFromReal(double, int*);
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #define CALLED_FROM_DEFN_H 1
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
 				  Memory.h, PrtUtil.h, Utils.h */
 #undef CALLED_FROM_DEFN_H
-
-const char * Rf_translateCharFP(SEXP);
-const char * Rf_translateCharFP2(SEXP);
-const char * Rf_trCharUTF8(SEXP);
-
+#ifdef __cplusplus
+extern "C" {
+#endif
+const char *Rf_translateCharFP(SEXP);
+const char *Rf_translateCharFP2(SEXP);
+const char *Rf_trCharUTF8(SEXP);
+#ifdef __cplusplus
+} //extern "C"
+#endif
 extern0 SEXP	R_CommentSymbol;    /* "comment" */
 extern0 SEXP	R_DotEnvSymbol;     /* ".Environment" */
 extern0 SEXP	R_ExactSymbol;	    /* "exact" */
@@ -96,30 +106,38 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 
 
  /* writable char access for R internal use only */
-#define CHAR_RW(x)	((char *) CHAR(x))
+#define CHAR_RW(x) ((char *)CHAR(x))
 
 /* CHARSXP charset bits */
-#define BYTES_MASK (1<<1)
-#define LATIN1_MASK (1<<2)
-#define UTF8_MASK (1<<3)
-/* (1<<4) is taken by S4_OBJECT_MASK */
-#define CACHED_MASK (1<<5)
-#define ASCII_MASK (1<<6)
+enum CharsetBit
+{
+    NATIVE_MASK = 0,
+    BYTES_MASK = (1 << 1),
+    LATIN1_MASK = (1 << 2),
+    UTF8_MASK = (1 << 3),
+    /* (1<<4) is taken by S4_OBJECT_MASK */
+    CACHED_MASK = (1 << 5),
+    ASCII_MASK = (1 << 6)
+};
 #define HASHASH_MASK 1
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifdef USE_RINTERNALS
-# define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
-# define SET_BYTES(x) (((x)->sxpinfo.gp) |= BYTES_MASK)
-# define IS_LATIN1(x) ((x)->sxpinfo.gp & LATIN1_MASK)
-# define SET_LATIN1(x) (((x)->sxpinfo.gp) |= LATIN1_MASK)
-# define IS_ASCII(x) ((x)->sxpinfo.gp & ASCII_MASK)
-# define SET_ASCII(x) (((x)->sxpinfo.gp) |= ASCII_MASK)
-# define IS_UTF8(x) ((x)->sxpinfo.gp & UTF8_MASK)
-# define SET_UTF8(x) (((x)->sxpinfo.gp) |= UTF8_MASK)
-# define ENC_KNOWN(x) ((x)->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK))
-# define SET_CACHED(x) (((x)->sxpinfo.gp) |= CACHED_MASK)
-# define IS_CACHED(x) (((x)->sxpinfo.gp) & CACHED_MASK)
+#define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
+#define SET_BYTES(x) (((x)->sxpinfo.gp) |= BYTES_MASK)
+#define IS_LATIN1(x) ((x)->sxpinfo.gp & LATIN1_MASK)
+#define SET_LATIN1(x) (((x)->sxpinfo.gp) |= LATIN1_MASK)
+#define IS_ASCII(x) ((x)->sxpinfo.gp & ASCII_MASK)
+#define SET_ASCII(x) (((x)->sxpinfo.gp) |= ASCII_MASK)
+#define IS_UTF8(x) ((x)->sxpinfo.gp & UTF8_MASK)
+#define SET_UTF8(x) (((x)->sxpinfo.gp) |= UTF8_MASK)
+#define ENC_KNOWN(x) ((x)->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK))
+#define SET_CACHED(x) (((x)->sxpinfo.gp) |= CACHED_MASK)
+#define IS_CACHED(x) (((x)->sxpinfo.gp) & CACHED_MASK)
 #else
 /* Needed only for write-barrier testing */
 int IS_BYTES(SEXP x);
@@ -144,6 +162,10 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 extern void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
+#endif
+
+#ifdef __cplusplus
+} //extern "C"
 #endif
 
 #ifdef R_USE_SIGNALS
@@ -203,15 +225,21 @@ extern void R_WaitEvent(void);
 #endif
 
 #if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX
+#ifdef __cplusplus
+#include <limits>
+using R_size_t = size_t;
+constexpr R_size_t R_SIZE_T_MAX = std::numeric_limits<R_size_t>::max();
+#else
   typedef size_t R_size_t;
 # define R_SIZE_T_MAX SIZE_MAX
+#endif //__cplusplus
 #else
 # error SIZE_MAX is required for C99
 #endif
 
-
-#define Mega 1048576. /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
-#define Giga 1073741824. /* 1 Giga Byte := 2^30 Bytes */
+#ifdef __cplusplus
+constexpr double Mega = 1048576.; /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
+constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */
 
 /*	R_PPSSIZE  The pointer protection stack size  */
 /*	R_NSIZE	   The number of cons cells	 */
@@ -220,19 +248,23 @@ extern void R_WaitEvent(void);
     The maxima and minima are in ../main/startup.c */
 
 #ifndef R_PPSSIZE
-#define	R_PPSSIZE	50000L
+constexpr long R_PPSSIZE = 50000L;
 #endif
 #ifndef R_NSIZE
-#define	R_NSIZE		350000L
+constexpr long R_NSIZE = 350000L;
 #endif
 #ifndef R_VSIZE
-#define	R_VSIZE		67108864L
+constexpr long R_VSIZE = 67108864L;
 #endif
-
+#endif //__cplusplus
 /* some commonly needed headers */
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
@@ -300,11 +332,13 @@ extern int putenv(char *string);
 #endif
 #endif
 
-#define HSIZE	  49157	/* The size of the hash table for symbols */
-#define MAXIDSIZE 10000 /* Largest symbol size,                  \
+#ifdef __cplusplus
+constexpr int HSIZE = 49157;	/* The size of the hash table for symbols */
+constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                in bytes excluding terminator.                    \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
+#endif //__cplusplus
 
 /* The type of the do_xxxx functions. */
 /* These are the built-in R functions. */
@@ -558,8 +592,8 @@ typedef struct RCNTXT {
     SEXP returnValue;           /* only set during on.exit calls */
     struct RCNTXT *jumptarget;	/* target for a continuing jump */
     int jumpmask;               /* associated LONGJMP argument */
-} RCNTXT;
-RCNTXT *context;
+} RCNTXT, *context;
+
 /* The Various Context Types.
 
  * In general the type is a bitwise OR of the values below.
@@ -718,7 +752,7 @@ extern0 int	R_Expressions_keep INI_as(5000);/* options(expressions) */
 extern0 Rboolean R_KeepSource	INI_as(FALSE);	/* options(keep.source) */
 extern0 Rboolean R_CBoundsCheck	INI_as(FALSE);	/* options(CBoundsCheck) */
 extern0 MATPROD_TYPE R_Matprod	INI_as(MATPROD_DEFAULT);  /* options(matprod) */
-extern0 int	R_WarnLength	INI_as(1000);	/* Error/warning max length */
+extern0 size_t	R_WarnLength	INI_as(1000);	/* Error/warning max length */
 extern0 int	R_nwarnings	INI_as(50);
 
 /* C stack checking */
@@ -1071,7 +1105,7 @@ void	R_Busy(int);
 int	R_ShowFiles(int, const char **, const char **, const char *,
 		    Rboolean, const char *);
 int     R_EditFiles(int, const char **, const char **, const char *);
-int	R_ChooseFile(int, char *, int);
+size_t	R_ChooseFile(int, char *, size_t);
 char	*R_HomeDir(void);
 Rboolean R_FileExists(const char *);
 Rboolean R_HiddenFile(const char *);
@@ -1090,22 +1124,24 @@ Rboolean R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
 
 /* deparse option bits: change do_dump if more are added */
-
-#define KEEPINTEGER 		1
-#define QUOTEEXPRESSIONS 	2
-#define SHOWATTRIBUTES 		4
-#define USESOURCE 		8
-#define WARNINCOMPLETE 		16
-#define DELAYPROMISES 		32
-#define KEEPNA			64
-#define S_COMPAT       		128
-#define HEXNUMERIC             	256
-#define DIGITS17		512
-#define NICE_NAMES             	1024
-/* common combinations of the above */
-#define SIMPLEDEPARSE		0
-#define DEFAULTDEPARSE		1089 /* KEEPINTEGER | KEEPNA | NICE_NAMES, used for calls */
-#define FORSOURCING		95 /* not DELAYPROMISES, used in edit.c */
+enum DeparseOptionBits
+{
+    KEEPINTEGER = 1,
+    QUOTEEXPRESSIONS = 2,
+    SHOWATTRIBUTES = 4,
+    USESOURCE = 8,
+    WARNINCOMPLETE = 16,
+    DELAYPROMISES = 32,
+    KEEPNA = 64,
+    S_COMPAT = 128,
+    HEXNUMERIC = 256,
+    DIGITS17 = 512,
+    NICE_NAMES = 1024,
+    /* common combinations of the above */
+    SIMPLEDEPARSE = 0,
+    DEFAULTDEPARSE = 1089, /* KEEPINTEGER | KEEPNA | NICE_NAMES, used for calls */
+    FORSOURCING = 95       /* not DELAYPROMISES, used in edit.cpp */
+};
 
 /* Coercion functions */
 int Rf_LogicalFromString(SEXP, int*);
@@ -1119,7 +1155,8 @@ SEXP Rf_StringFromComplex(Rcomplex, int*);
 SEXP Rf_EnsureString(SEXP);
 
 /* ../../main/print.c : */
-typedef struct {
+typedef struct
+{
     int width;
     int na_width;
     int na_width_noquote;
@@ -1336,7 +1373,8 @@ void R_args_enable_refcnt(SEXP);
 #define R_MaxDevices 64
 
 /* ../../main/printutils.c : */
-typedef enum {
+typedef enum
+{
     Rprt_adj_left = 0,
     Rprt_adj_right = 1,
     Rprt_adj_centre = 2,
@@ -1421,10 +1459,10 @@ void R_fixbackslash(char *s);
 wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);
 
 #if defined(SUPPORT_UTF8_WIN32)
-#define Rf_mbrtowc(a,b,c,d) Rmbrtowc(a,b)
-#define Rf_wcrtomb(a,b,c) Rwcrtomb(a,b)
-#define Rf_mbstowcs(a,b,c) Rmbstowcs(a,b,c)
-#define Rf_wcstombs(a,b,c) Rwcstombs(a,b,c)
+#define Rf_mbrtowc(a, b, c, d) Rmbrtowc(a, b)
+#define Rf_wcrtomb(a, b, c) Rwcrtomb(a, b)
+#define Rf_mbstowcs(a, b, c) Rmbstowcs(a, b, c)
+#define Rf_wcstombs(a, b, c) Rwcstombs(a, b, c)
 size_t Rmbrtowc(wchar_t *wc, const char *s);
 size_t Rwcrtomb(char *s, const wchar_t wc);
 size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n);
@@ -1451,14 +1489,17 @@ extern const char *locale2charset(const char *);
 // From now on it must be included separately.
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
-#define BEGIN_SUSPEND_INTERRUPTS do { \
-    Rboolean __oldsusp__ = R_interrupts_suspended; \
-    R_interrupts_suspended = TRUE;
-#define END_SUSPEND_INTERRUPTS R_interrupts_suspended = __oldsusp__; \
-    if (R_interrupts_pending && ! R_interrupts_suspended) \
-        onintr(); \
-} while(0)
-
+#define BEGIN_SUSPEND_INTERRUPTS                       \
+    do                                                 \
+    {                                                  \
+        Rboolean __oldsusp__ = R_interrupts_suspended; \
+        R_interrupts_suspended = TRUE;
+#define END_SUSPEND_INTERRUPTS                           \
+    R_interrupts_suspended = __oldsusp__;                \
+    if (R_interrupts_pending && !R_interrupts_suspended) \
+        onintr();                                        \
+    }                                                    \
+    while (0)
 
 /*
    alloca is neither C99 nor POSIX.
@@ -1500,6 +1541,9 @@ extern void *alloca(size_t);
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
 
+#ifdef __cplusplus
+} //extern "C"
+#endif
 #endif /* DEFN_H_ */
 /*
  *- Local Variables:

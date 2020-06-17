@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Ivory",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "intelliSenseMode": "gcc-x64",
+            "defines": [
+                "COMPILING_IVORY",
+                "HAVE_CONFIG_H"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

@@ -217,7 +217,7 @@ static void Cairo_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void Cairo_Polyline(int n, double *x, double *y,
+static void Cairo_Polyline(int n, const double *x, const double *y,
 			   const pGEcontext gc, pDevDesc dd)
 {
     int i;
@@ -233,7 +233,7 @@ static void Cairo_Polyline(int n, double *x, double *y,
     }
 }
 
-static void Cairo_Polygon(int n, double *x, double *y,
+static void Cairo_Polygon(int n, const double *x, const double *y,
 			  const pGEcontext gc, pDevDesc dd)
 {
     int i;

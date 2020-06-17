@@ -28,7 +28,10 @@
    And use on Win32/64 suppresses warnings.
    The warning was also seen on macOS 10.5, but not later.
 */
-#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
+#ifdef __cplusplus
+#include <complex>
+#define I std::complex<double>(0,1)
+#elif defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
 # undef  I
 # define I (__extension__ 1.0iF)
 #endif
@@ -37,6 +40,12 @@
    Note: this could use the C11 CMPLX() macro.
    As could mycpow, z_tan and some of the substitutes.
  */
+#ifdef __cplusplus
+R_INLINE static std::complex<double> toC99(const Rcomplex *x) {
+    std::complex<double> val(x->r, x->i);
+    return val;
+}
+#else
 R_INLINE static double complex toC99(const Rcomplex *x)
 {
 #if __GNUC__
@@ -48,12 +57,32 @@ R_INLINE static double complex toC99(const Rcomplex *x)
     return x->r + x->i * I;
 #endif
 }
+#endif
 
+#ifdef __cplusplus
+R_INLINE static void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, std::complex<double> value)
+{
+    Rcomplex *ans = x + i;
+    ans->r = value.real();
+    ans->i = value.imag();
+}
+#else
 R_INLINE static void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex value)
 {
-    Rcomplex *ans = x+i;
+    Rcomplex *ans = x + i;
     ans->r = creal(value);
     ans->i = cimag(value);
 }
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+HIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* R_RCOMPLEX_H */

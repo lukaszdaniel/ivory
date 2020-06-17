@@ -66,7 +66,7 @@ HIDDEN int R_X11_Init(void)
 HIDDEN Rboolean R_access_X11(void)
 {
     R_X11_Init();
-    return (initialized > 0) ? (*ptr->access)() > 0 : FALSE;
+    return (initialized > 0) ? (Rboolean) ((*ptr->access)() > 0) : FALSE;
 }
 
 // called from src/library/grDevices/src/stubs.c
@@ -167,7 +167,7 @@ HIDDEN Rboolean R_ReadClipboard(Rclpconn con, char *type)
 SEXP do_bmVersion(void)
 {
     SEXP ans = PROTECT(allocVector(STRSXP, 3)),
-	nms = PROTECT(allocVector(STRSXP, 3));
+         nms = PROTECT(allocVector(STRSXP, 3));
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));

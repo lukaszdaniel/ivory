@@ -31,7 +31,7 @@ extern "C" {
   typedef struct { SEXP ptr; } R_altrep_class_t;
 #else
 # define R_SEXP(x) ((SEXP) (x))
-# define R_SUBTYPE_INIT(x) (void *) (x)
+# define R_SUBTYPE_INIT(x) (R_altrep_class_t) (x)
   typedef struct R_altcls *R_altrep_class_t;
 #endif
 

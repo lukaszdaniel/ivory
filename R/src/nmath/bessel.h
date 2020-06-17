@@ -18,7 +18,7 @@
  */
 
 /* Constants und Documentation that apply to several of the
- * ./bessel_[ijky].c  files */
+ * ./bessel_[ijky].cpp  files */
 
 /* *******************************************************************
 

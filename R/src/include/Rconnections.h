@@ -65,6 +65,9 @@ typedef struct clpconn {
 #define init_con	Rf_init_con
 #define con_pushback	Rf_con_pushback
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 int Rconn_fgetc(Rconnection con);
 int Rconn_ungetc(int c, Rconnection con);
 size_t Rconn_getline(Rconnection con, char *buf, size_t bufsize);
@@ -91,6 +94,10 @@ int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout
 
 #define set_iconv Rf_set_iconv
 void Rf_set_iconv(Rconnection con);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* R_CONNECTIONS_H_ */
 

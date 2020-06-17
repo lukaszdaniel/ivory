@@ -179,7 +179,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	       signal handler, and return the result of the select. */
 	    val = select(n, readfds, writefds, exceptfds, timeout);
 	    signal(SIGINT, oldSigintHandler);
-	    R_interrupts_suspended = old_interrupts_suspended;
+	    R_interrupts_suspended = (Rboolean) old_interrupts_suspended;
 	    return val;
 	}
     }
@@ -759,7 +759,7 @@ static void initialize_rlcompletion(void)
 	    SEXP cmdSexp, cmdexpr;
 	    ParseStatus status;
 	    int i;
-	    char *p = "try(loadNamespace('rcompgen'), silent=TRUE)";
+	    char *p = (char *) "try(loadNamespace('rcompgen'), silent=TRUE)";
 
 	    PROTECT(cmdSexp = mkString(p));
 	    cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
@@ -935,7 +935,7 @@ HIDDEN void set_rl_word_breaks(const char *str)
 #else
 static void handleInterrupt(void)
 {
-    onintrNoResume();
+	Rf_onintrNoResume();
 }
 #endif /* HAVE_LIBREADLINE */
 
@@ -943,7 +943,7 @@ static void handleInterrupt(void)
 /* Fill a text buffer from stdin or with user typed console input. */
 static void *cd = NULL;
 
-HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
+HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		 int addtohistory)
 {
     if(!R_Interactive) {
@@ -1047,7 +1047,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		    static SEXP opsym = NULL;
 		    if (! opsym)
 			opsym = install("setWidthOnResize");
-		    Rboolean setOK = asLogical(GetOption1(opsym));
+		    Rboolean setOK = (Rboolean) asLogical(GetOption1(opsym));
 		    oldwidth = width;
 		    if (setOK != NA_LOGICAL && setOK)
 			R_SetOptionWidth(width);
@@ -1316,7 +1316,7 @@ HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 
 
 
-HIDDEN int Rstd_ChooseFile(int _new, char *buf, int len)
+HIDDEN size_t Rstd_ChooseFile(int _new, char *buf, size_t len)
 {
     size_t namelen;
     char *bufp;
@@ -1419,7 +1419,7 @@ HIDDEN void Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 void Rsleep(double timeint)
 {
     double tm = timeint * 1e6, start = currentTime(), elapsed;
-    for (;;) {
+    while(TRUE) {
 	fd_set *what;
 	tm = min(tm, 2e9); /* avoid integer overflow */
 
@@ -1427,7 +1427,7 @@ void Rsleep(double timeint)
 	if (R_wait_usec > 0) wt = R_wait_usec;
 	if (Rg_wait_usec > 0 && (wt < 0 || wt > Rg_wait_usec))
 	    wt = Rg_wait_usec;
-	int Timeout = (int) (wt > 0 ? min(tm, wt) : tm);
+	int Timeout = (int) (wt > 0 ? min(tm, (double) wt) : tm);
 	what = R_checkActivity(Timeout, 1);
 	/* For polling, elapsed time limit ... */
 	R_CheckUserInterrupt();

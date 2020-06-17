@@ -25,20 +25,25 @@
 /* This file is installed and available to packages, but only a small
    part of the contents is within the API.  See chapter 6 of 'Writing
    R Extensions'.
+*/
+
+/** @file Rinternals.h
+ * @brief (As described in 'Writing R Extensions'.)
  */
 
 #ifndef R_INTERNALS_H_
 #define R_INTERNALS_H_
 
 #ifdef __cplusplus
-# include <cstdio>
-# include <climits>
-# include <cstddef>
+#include <cstdio>
+#include <climits>
+#include <limits>
+#include <cstddef>
 extern "C" {
 #else
-# include <stdio.h>
-# include <limits.h> /* for INT_MAX */
-# include <stddef.h> /* for ptrdiff_t, which is required by C99 */
+#include <stdio.h>
+#include <limits.h> /* for INT_MAX */
+#include <stddef.h> /* for ptrdiff_t, which is required by C99 */
 #endif
 
 #include <R_ext/Arith.h>
@@ -53,12 +58,29 @@ extern "C" {
 
 #include <R_ext/libextern.h>
 
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+
+#ifdef __cplusplus
+using Rbyte = unsigned char;
+#else
 typedef unsigned char Rbyte;
+#endif
 
 #define DO_NOTHING do {} while(0)
 /* type for length of (standard, not long) vectors etc */
+#ifdef __cplusplus
+using R_len_t = int;
+constexpr R_len_t R_LEN_T_MAX = std::numeric_limits<R_len_t>::max();
+constexpr int R_INT_MAX = std::numeric_limits<int>::max();
+constexpr int R_INT_MIN = std::numeric_limits<int>::min() + 1;
+#else
 typedef int R_len_t;
 #define R_LEN_T_MAX INT_MAX
+#define R_INT_MAX  INT_MAX
+#define R_INT_MIN -INT_MAX
+#endif
 
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
@@ -66,21 +88,32 @@ typedef int R_len_t;
 # include <Rconfig.h>
 #endif
 
-#if ( SIZEOF_SIZE_T > 4 )
-# define LONG_VECTOR_SUPPORT
+#if (SIZEOF_SIZE_T > 4)
+#define LONG_VECTOR_SUPPORT
 #endif
 
+#ifdef __cplusplus
 #ifdef LONG_VECTOR_SUPPORT
-    typedef ptrdiff_t R_xlen_t;
-# define R_XLEN_T_MAX 4503599627370496 //2^52
-# define R_SHORT_LEN_MAX 2147483647 //2^31-1
+using R_xlen_t = ptrdiff_t;
+constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
+constexpr int R_SHORT_LEN_MAX = std::numeric_limits<int>::max();
 #else
-    typedef int R_xlen_t;
-# define R_XLEN_T_MAX R_LEN_T_MAX
+using R_xlen_t = int;
+constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
+#endif
+#else // not __cplusplus
+#ifdef LONG_VECTOR_SUPPORT
+typedef ptrdiff_t R_xlen_t;
+#define R_XLEN_T_MAX PTRDIFF_MAX
+#define R_SHORT_LEN_MAX INT_MAX
+#else
+typedef int R_xlen_t;
+#define R_XLEN_T_MAX R_LEN_T_MAX
+#endif
 #endif
 
 #ifndef TESTING_WRITE_BARRIER
-# define INLINE_PROTECT
+#define INLINE_PROTECT
 #endif
 
 /* Fundamental Data Types:  These are largely Lisp
@@ -88,7 +121,7 @@ typedef int R_len_t;
  * INTSXP, REALSXP, CPLXSXP and STRSXP which are the
  * element types for S-like data objects.
  *
- *			--> TypeTable[] in ../main/util.c for  typeof()
+ *			--> TypeTable[] in ../main/util.cpp for  typeof()
  */
 
 /* UUID identifying the internals version -- packages using compiled
@@ -96,9 +129,9 @@ typedef int R_len_t;
 #define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
 
 /*  These exact numeric values are seldom used, but they are, e.g., in
- *  ../main/subassign.c, and they are serialized.
+ *  ../main/subassign.cpp, and they are serialized.
 */
-#ifndef enum_SEXPTYPE
+#if !(defined(enum_SEXPTYPE) || defined(COMPILING_IVORY))
 /* NOT YET using enum:
  *  1)	The SEXPREC struct below has 'SEXPTYPE type : 5'
  *	(making FUNSXP and CLOSXP equivalent in there),
@@ -109,96 +142,136 @@ typedef int R_len_t;
  */
 typedef unsigned int SEXPTYPE;
 
-#define NILSXP	     0	  /* nil = NULL */
-#define SYMSXP	     1	  /* symbols */
-#define LISTSXP	     2	  /* lists of dotted pairs */
-#define CLOSXP	     3	  /* closures */
-#define ENVSXP	     4	  /* environments */
-#define PROMSXP	     5	  /* promises: [un]evaluated closure arguments */
-#define LANGSXP	     6	  /* language constructs (special lists) */
-#define SPECIALSXP   7	  /* special forms */
-#define BUILTINSXP   8	  /* builtin non-special forms */
-#define CHARSXP	     9	  /* "scalar" string type (internal only)*/
-#define LGLSXP	    10	  /* logical vectors */
+#define NILSXP 0     /* nil = NULL */
+#define SYMSXP 1     /* symbols */
+#define LISTSXP 2    /* lists of dotted pairs */
+#define CLOSXP 3     /* closures */
+#define ENVSXP 4     /* environments */
+#define PROMSXP 5    /* promises: [un]evaluated closure arguments */
+#define LANGSXP 6    /* language constructs (special lists) */
+#define SPECIALSXP 7 /* special forms */
+#define BUILTINSXP 8 /* builtin non-special forms */
+#define CHARSXP 9    /* "scalar" string type (internal only)*/
+#define LGLSXP 10    /* logical vectors */
 /* 11 and 12 were factors and ordered factors in the 1990s */
-#define INTSXP	    13	  /* integer vectors */
-#define REALSXP	    14	  /* real variables */
-#define CPLXSXP	    15	  /* complex variables */
-#define STRSXP	    16	  /* string vectors */
-#define DOTSXP	    17	  /* dot-dot-dot object */
-#define ANYSXP	    18	  /* make "any" args work.
-			     Used in specifying types for symbol
-			     registration to mean anything is okay  */
-#define VECSXP	    19	  /* generic vectors */
-#define EXPRSXP	    20	  /* expressions vectors */
-#define BCODESXP    21    /* byte code */
-#define EXTPTRSXP   22    /* external pointer */
-#define WEAKREFSXP  23    /* weak reference */
-#define RAWSXP      24    /* raw bytes */
-#define S4SXP       25    /* S4, non-vector */
+#define INTSXP 13     /* integer vectors */
+#define REALSXP 14    /* real variables */
+#define CPLXSXP 15    /* complex variables */
+#define STRSXP 16     /* string vectors */
+#define DOTSXP 17     /* dot-dot-dot object */
+#define ANYSXP 18     /* make "any" args work.   \
+             Used in specifying types for symbol \
+             registration to mean anything is okay  */
+#define VECSXP 19     /* generic vectors */
+#define EXPRSXP 20    /* expressions vectors */
+#define BCODESXP 21   /* byte code */
+#define EXTPTRSXP 22  /* external pointer */
+#define WEAKREFSXP 23 /* weak reference */
+#define RAWSXP 24     /* raw bytes */
+#define S4SXP 25      /* S4, non-vector */
 
 /* used for detecting PROTECT issues in memory.c */
-#define NEWSXP      30    /* fresh node created in new page */
-#define FREESXP     31    /* node released by GC */
+#define NEWSXP 30  /* fresh node created in new page */
+#define FREESXP 31 /* node released by GC */
 
-#define FUNSXP      99    /* Closure or Builtin or Special */
-
+#define intCHARSXP 73
+#define FUNSXP 99 /* Closure or Builtin or Special */
+#define ALTREP_SXP 238
+#define ATTRLISTSXP 239
+#define ATTRLANGSXP 240
+#define REFSXP 255
+#define NILVALUE_SXP 254
+#define GLOBALENV_SXP 253
+#define UNBOUNDVALUE_SXP 252
+#define MISSINGARG_SXP 251
+#define BASENAMESPACE_SXP 250
+#define NAMESPACESXP 249
+#define PACKAGESXP 248
+#define PERSISTSXP 247
+/* the following are speculative--we may or may not need them soon */
+#define CLASSREFSXP 246
+#define GENERICREFSXP 245
+#define BCREPDEF 244
+#define BCREPREF 243
+#define EMPTYENV_SXP 242
+#define BASEENV_SXP 241
 
 #else /* NOT YET */
-/*------ enum_SEXPTYPE ----- */
-typedef enum {
-    NILSXP	= 0,	/* nil = NULL */
-    SYMSXP	= 1,	/* symbols */
-    LISTSXP	= 2,	/* lists of dotted pairs */
-    CLOSXP	= 3,	/* closures */
-    ENVSXP	= 4,	/* environments */
-    PROMSXP	= 5,	/* promises: [un]evaluated closure arguments */
-    LANGSXP	= 6,	/* language constructs (special lists) */
-    SPECIALSXP	= 7,	/* special forms */
-    BUILTINSXP	= 8,	/* builtin non-special forms */
-    CHARSXP	= 9,	/* "scalar" string type (internal only)*/
-    LGLSXP	= 10,	/* logical vectors */
-    INTSXP	= 13,	/* integer vectors */
-    REALSXP	= 14,	/* real variables */
-    CPLXSXP	= 15,	/* complex variables */
-    STRSXP	= 16,	/* string vectors */
-    DOTSXP	= 17,	/* dot-dot-dot object */
-    ANYSXP	= 18,	/* make "any" args work */
-    VECSXP	= 19,	/* generic vectors */
-    EXPRSXP	= 20,	/* expressions vectors */
-    BCODESXP	= 21,	/* byte code */
-    EXTPTRSXP	= 22,	/* external pointer */
-    WEAKREFSXP	= 23,	/* weak reference */
-    RAWSXP	= 24,	/* raw bytes */
-    S4SXP	= 25,	/* S4 non-vector */
+    /*------ enum_SEXPTYPE ----- */
+    typedef enum
+    {
+        NILSXP = 0,      /* nil = NULL */
+        SYMSXP = 1,      /* symbols */
+        LISTSXP = 2,     /* lists of dotted pairs */
+        CLOSXP = 3,      /* closures */
+        ENVSXP = 4,      /* environments */
+        PROMSXP = 5,     /* promises: [un]evaluated closure arguments */
+        LANGSXP = 6,     /* language constructs (special lists) */
+        SPECIALSXP = 7,  /* special forms */
+        BUILTINSXP = 8,  /* builtin non-special forms */
+        CHARSXP = 9,     /* "scalar" string type (internal only)*/
+        LGLSXP = 10,     /* logical vectors */
+        INTSXP = 13,     /* integer vectors */
+        REALSXP = 14,    /* real variables */
+        CPLXSXP = 15,    /* complex variables */
+        STRSXP = 16,     /* string vectors */
+        DOTSXP = 17,     /* dot-dot-dot object */
+        ANYSXP = 18,     /* make "any" args work */
+        VECSXP = 19,     /* generic vectors */
+        EXPRSXP = 20,    /* expressions vectors */
+        BCODESXP = 21,   /* byte code */
+        EXTPTRSXP = 22,  /* external pointer */
+        WEAKREFSXP = 23, /* weak reference */
+        RAWSXP = 24,     /* raw bytes */
+        S4SXP = 25,      /* S4 non-vector */
 
-    NEWSXP      = 30,   /* fresh node creaed in new page */
-    FREESXP     = 31,   /* node released by GC */
-
-    FUNSXP	= 99	/* Closure or Builtin */
-} SEXPTYPE;
+        NEWSXP = 30,  /* fresh node created in new page */
+        FREESXP = 31, /* node released by GC */
+        intCHARSXP = 73,
+        FUNSXP = 99, /* Closure or Builtin */
+        ALTREP_SXP = 238,
+        ATTRLISTSXP = 239,
+        ATTRLANGSXP = 240,
+        REFSXP = 255,
+        NILVALUE_SXP = 254,
+        GLOBALENV_SXP = 253,
+        UNBOUNDVALUE_SXP = 252,
+        MISSINGARG_SXP = 251,
+        BASENAMESPACE_SXP = 250,
+        NAMESPACESXP = 249,
+        PACKAGESXP = 248,
+        PERSISTSXP = 247,
+        /* the following are speculative--we may or may not need them soon */
+        CLASSREFSXP = 246,
+        GENERICREFSXP = 245,
+        BCREPDEF = 244,
+        BCREPREF = 243,
+        EMPTYENV_SXP = 242,
+        BASEENV_SXP = 241
+    } SEXPTYPE;
 #endif
 
-/* These are also used with the write barrier on, in attrib.c and util.c */
-#define TYPE_BITS 5
-#define MAX_NUM_SEXPTYPE (1<<TYPE_BITS)
+/* These are also used with the write barrier on, in attrib.cpp and util.cpp */
+#define BASIC_TYPE_BITS 5
+#define FULL_TYPE_BITS 8
+#define MAX_NUM_BASIC_SEXPTYPE (1 << BASIC_TYPE_BITS)
+#define MAX_NUM_SEXPTYPE (1 << FULL_TYPE_BITS)
 
 typedef struct SEXPREC *SEXP;
 
 
 /* Define SWITCH_TO_NAMED to use the 'NAMED' mechanism instead of
    reference counting. */
-#if ! defined(SWITCH_TO_NAMED) && ! defined(SWITCH_TO_REFCNT)
-# define SWITCH_TO_REFCNT
+#if !defined(SWITCH_TO_NAMED) && !defined(SWITCH_TO_REFCNT)
+#define SWITCH_TO_REFCNT
 #endif
 
-#if defined(SWITCH_TO_REFCNT) && ! defined(COMPUTE_REFCNT_VALUES)
-# define COMPUTE_REFCNT_VALUES
+#if defined(SWITCH_TO_REFCNT) && !defined(COMPUTE_REFCNT_VALUES)
+#define COMPUTE_REFCNT_VALUES
 #endif
-#if defined(SWITCH_TO_REFCNT) && ! defined(ADJUST_ENVIR_REFCNTS)
-# define ADJUST_ENVIR_REFCNTS
+#if defined(SWITCH_TO_REFCNT) && !defined(ADJUST_ENVIR_REFCNTS)
+#define ADJUST_ENVIR_REFCNTS
 #endif
-
 
 // ======================= USE_RINTERNALS section
 #ifdef USE_RINTERNALS
@@ -212,61 +285,68 @@ typedef struct SEXPREC *SEXP;
 
 /* Flags */
 
-
-struct sxpinfo_struct {
-    SEXPTYPE type      :  TYPE_BITS;
-                            /* ==> (FUNSXP == 99) %% 2^5 == 3 == CLOSXP
+struct sxpinfo_struct
+{
+    SEXPTYPE type : FULL_TYPE_BITS;
+    /* ==> (FUNSXP == 99) %% 2^5 == 3 == CLOSXP
 			     * -> warning: `type' is narrower than values
 			     *              of its type
 			     * when SEXPTYPE was an enum */
-    unsigned int scalar:  1;
-    unsigned int obj   :  1;
-    unsigned int alt   :  1;
-    unsigned int gp    : 16;
-    unsigned int mark  :  1;
-    unsigned int debug :  1;
-    unsigned int trace :  1;  /* functions and memory tracing */
-    unsigned int spare :  1;  /* used on closures and when REFCNT is defined */
-    unsigned int gcgen :  1;  /* old generation number */
-    unsigned int gccls :  3;  /* node class */
+    unsigned int scalar : 1;
+    unsigned int obj : 1;
+    unsigned int alt : 1;
+    unsigned int gp : 16;
+    unsigned int mark : 1;
+    unsigned int debug : 1;
+    unsigned int trace : 1; /* functions and memory tracing */
+    unsigned int spare : 1; /* used on closures and when REFCNT is defined */
+    unsigned int gcgen : 1; /* old generation number */
+    unsigned int gccls : 3; /* node class */
     unsigned int named : NAMED_BITS;
     unsigned int extra : 32 - NAMED_BITS; /* used for immediate bindings */
-}; /*		    Tot: 64 */
+};                                        /*		    Tot: 67 */
 
-struct vecsxp_struct {
-    R_xlen_t	length;
-    R_xlen_t	truelength;
+struct vecsxp_struct
+{
+    R_xlen_t length;
+    R_xlen_t truelength;
 };
 
-struct primsxp_struct {
+struct primsxp_struct
+{
     int offset;
 };
 
-struct symsxp_struct {
+struct symsxp_struct
+{
     struct SEXPREC *pname;
     struct SEXPREC *value;
     struct SEXPREC *internal;
 };
 
-struct listsxp_struct {
+struct listsxp_struct
+{
     struct SEXPREC *carval;
     struct SEXPREC *cdrval;
     struct SEXPREC *tagval;
 };
 
-struct envsxp_struct {
+struct envsxp_struct
+{
     struct SEXPREC *frame;
     struct SEXPREC *enclos;
     struct SEXPREC *hashtab;
 };
 
-struct closxp_struct {
+struct closxp_struct
+{
     struct SEXPREC *formals;
     struct SEXPREC *body;
     struct SEXPREC *env;
 };
 
-struct promsxp_struct {
+struct promsxp_struct
+{
     struct SEXPREC *value;
     struct SEXPREC *expr;
     struct SEXPREC *env;
@@ -277,23 +357,24 @@ struct promsxp_struct {
    fields used to maintain the collector's linked list structures. */
 
 #ifdef SWITCH_TO_REFCNT
-# define REFCNTMAX ((1 << NAMED_BITS) - 1)
+#define REFCNTMAX ((1 << NAMED_BITS) - 1)
 #endif
 
 /* The standard node structure consists of a header followed by the
    node data. */
-typedef struct SEXPREC {
+typedef struct SEXPREC
+{
     struct sxpinfo_struct sxpinfo;
     struct SEXPREC *attrib;
     struct SEXPREC *gengc_next_node;
     struct SEXPREC *gengc_prev_node;
     union {
-	struct primsxp_struct primsxp;
-	struct symsxp_struct symsxp;
-	struct listsxp_struct listsxp;
-	struct envsxp_struct envsxp;
-	struct closxp_struct closxp;
-	struct promsxp_struct promsxp;
+        struct primsxp_struct primsxp;
+        struct symsxp_struct symsxp;
+        struct listsxp_struct listsxp;
+        struct envsxp_struct envsxp;
+        struct closxp_struct closxp;
+        struct promsxp_struct promsxp;
     } u;
 } SEXPREC;
 
@@ -302,7 +383,8 @@ typedef struct SEXPREC {
    the SEXPREC definition. The standard SEXPREC takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
-typedef struct VECTOR_SEXPREC {
+typedef struct VECTOR_SEXPREC
+{
     struct sxpinfo_struct sxpinfo;
     struct SEXPREC *attrib;
     struct SEXPREC *gengc_next_node;
@@ -311,7 +393,10 @@ typedef struct VECTOR_SEXPREC {
 } VECTOR_SEXPREC;
 typedef struct VECTOR_SEXPREC *VECSEXP;
 
-typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
+typedef union {
+    VECTOR_SEXPREC s;
+    double align;
+} SEXPREC_ALIGN;
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->attrib)
@@ -345,15 +430,19 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 # else
 #  define SET_TRACKREFS(x,v) ((x)->sxpinfo.spare = ! (v))
 # endif
-# define DECREMENT_REFCNT(x) do {					\
-	SEXP drc__x__ = (x);						\
-	if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX)	\
-	    SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);			\
+#define DECREMENT_REFCNT(x)                                       \
+    do                                                            \
+    {                                                             \
+        SEXP drc__x__ = (x);                                      \
+        if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX) \
+            SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);           \
     } while (0)
-# define INCREMENT_REFCNT(x) do {			      \
-	SEXP irc__x__ = (x);				      \
-	if (REFCNT(irc__x__) < REFCNTMAX)		      \
-	    SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1);	      \
+#define INCREMENT_REFCNT(x)                             \
+    do                                                  \
+    {                                                   \
+        SEXP irc__x__ = (x);                            \
+        if (REFCNT(irc__x__) < REFCNTMAX)               \
+            SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1); \
     } while (0)
 #else
 # define SET_REFCNT(x,v) do {} while(0)
@@ -399,9 +488,13 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 
 #define ASSIGNMENT_PENDING_MASK (1 << 11)
 #define ASSIGNMENT_PENDING(x) ((x)->sxpinfo.gp & ASSIGNMENT_PENDING_MASK)
-#define SET_ASSIGNMENT_PENDING(x, v) do {			\
-	if (v) (((x)->sxpinfo.gp) |= ASSIGNMENT_PENDING_MASK);	\
-	else (((x)->sxpinfo.gp) &= ~ASSIGNMENT_PENDING_MASK);	\
+#define SET_ASSIGNMENT_PENDING(x, v)                         \
+    do                                                       \
+    {                                                        \
+        if (v)                                               \
+            (((x)->sxpinfo.gp) |= ASSIGNMENT_PENDING_MASK);  \
+        else                                                 \
+            (((x)->sxpinfo.gp) &= ~ASSIGNMENT_PENDING_MASK); \
     } while (0)
 
 /* The same bit can be used to mark calls used in complex assignments
@@ -419,10 +512,12 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 # define ENSURE_NAMEDMAX(v) do { } while (0)
 # define ENSURE_NAMED(v) do { } while (0)
 #else
-# define ENSURE_NAMEDMAX(v) do {		\
-	SEXP __enm_v__ = (v);			\
-	if (NAMED(__enm_v__) < NAMEDMAX)	\
-	    SET_NAMED( __enm_v__, NAMEDMAX);	\
+#define ENSURE_NAMEDMAX(v)                  \
+    do                                      \
+    {                                       \
+        SEXP __enm_v__ = (v);               \
+        if (NAMED(__enm_v__) < NAMEDMAX)    \
+            SET_NAMED(__enm_v__, NAMEDMAX); \
     } while (0)
 # define ENSURE_NAMED(v) do { if (NAMED(v) == 0) SET_NAMED(v, 1); } while (0)
 #endif
@@ -431,15 +526,20 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 # define SETTER_CLEAR_NAMED(x) do { } while (0)
 # define RAISE_NAMED(x, n) do { } while (0)
 #else
-# define SETTER_CLEAR_NAMED(x) do {			\
-	SEXP __x__ = (x);				\
-	if (NAMED(__x__) == 1) SET_NAMED(__x__, 0);	\
+#define SETTER_CLEAR_NAMED(x)    \
+    do                           \
+    {                            \
+        SEXP __x__ = (x);        \
+        if (NAMED(__x__) == 1)   \
+            SET_NAMED(__x__, 0); \
     } while (0)
-# define RAISE_NAMED(x, n) do {			\
-	SEXP __x__ = (x);			\
-	int __n__ = (n);			\
-	if (NAMED(__x__) < __n__)		\
-	    SET_NAMED(__x__, __n__);		\
+#define RAISE_NAMED(x, n)            \
+    do                               \
+    {                                \
+        SEXP __x__ = (x);            \
+        int __n__ = (n);             \
+        if (NAMED(__x__) < __n__)    \
+            SET_NAMED(__x__, __n__); \
     } while (0)
 #endif
 
@@ -473,11 +573,14 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define STDVEC_LENGTH(x) (((VECSEXP) (x))->vecsxp.length)
 #define STDVEC_TRUELENGTH(x) (((VECSEXP) (x))->vecsxp.truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
-#define SET_TRUELENGTH(x,v) do {				\
-	SEXP sl__x__ = (x);					\
-	R_xlen_t sl__v__ = (v);					\
-	if (ALTREP(x)) error("can't set ALTREP truelength");	\
-	SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);	\
+#define SET_TRUELENGTH(x, v)                      \
+    do                                            \
+    {                                             \
+        SEXP sl__x__ = (x);                       \
+        R_xlen_t sl__v__ = (v);                   \
+        if (ALTREP(x))                            \
+            error("can't set ALTREP truelength"); \
+        SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);  \
     } while (0)
 
 #define IS_SCALAR(x, t) (((x)->sxpinfo.type == (t)) && (x)->sxpinfo.scalar)
@@ -488,11 +591,13 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define XLENGTH(x) XLENGTH_EX(x)
 
 /* THIS ABSOLUTELY MUST NOT BE USED IN PACKAGES !!! */
-#define SET_STDVEC_LENGTH(x,v) do {		\
-	SEXP __x__ = (x);			\
-	R_xlen_t __v__ = (v);			\
-	STDVEC_LENGTH(__x__) = __v__;		\
-	SETSCALAR(__x__, __v__ == 1 ? 1 : 0);	\
+#define SET_STDVEC_LENGTH(x, v)               \
+    do                                        \
+    {                                         \
+        SEXP __x__ = (x);                     \
+        R_xlen_t __v__ = (v);                 \
+        STDVEC_LENGTH(__x__) = __v__;         \
+        SETSCALAR(__x__, __v__ == 1 ? 1 : 0); \
     } while (0)
 
 /* Under the generational allocator the data for vector nodes comes
@@ -532,12 +637,14 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define CAD4R(e)	CAR(CDDR(CDDR(e)))
 #define MISSING_MASK	15 /* reserve 4 bits--only 2 uses now */
 #define MISSING(x)	((x)->sxpinfo.gp & MISSING_MASK)/* for closure calls */
-#define SET_MISSING(x,v) do { \
-  SEXP __x__ = (x); \
-  int __v__ = (v); \
-  int __other_flags__ = __x__->sxpinfo.gp & ~MISSING_MASK; \
-  __x__->sxpinfo.gp = __other_flags__ | __v__; \
-} while (0)
+#define SET_MISSING(x, v)                                        \
+    do                                                           \
+    {                                                            \
+        SEXP __x__ = (x);                                        \
+        int __v__ = (v);                                         \
+        int __other_flags__ = __x__->sxpinfo.gp & ~MISSING_MASK; \
+        __x__->sxpinfo.gp = __other_flags__ | __v__;             \
+    } while (0)
 #define BNDCELL_TAG(e)	((e)->sxpinfo.extra)
 #define SET_BNDCELL_TAG(e, v) ((e)->sxpinfo.extra = (v))
 
@@ -558,12 +665,14 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define SET_BNDCELL_IVAL(cell, ival) SET_SCALAR_IVAL(CAR0(cell), ival)
 #define SET_BNDCELL_LVAL(cell, lval) SET_SCALAR_LVAL(CAR0(cell), lval)
 
-#define INIT_BNDCELL(cell, type) do {		\
-	SEXP val = allocVector(type, 1);	\
-	SETCAR(cell, val);			\
-	INCREMENT_NAMED(val);			\
-	SET_BNDCELL_TAG(cell, type);		\
-	SET_MISSING(cell, 0);			\
+#define INIT_BNDCELL(cell, type)         \
+    do                                   \
+    {                                    \
+        SEXP val = allocVector(type, 1); \
+        SETCAR(cell, val);               \
+        INCREMENT_NAMED(val);            \
+        SET_BNDCELL_TAG(cell, type);     \
+        SET_MISSING(cell, 0);            \
     } while (0)
 #else
 /* Use a union in the CAR field to represent an SEXP or an immediate
@@ -584,11 +693,13 @@ typedef union {
 #define SET_BNDCELL_IVAL(cell, ival) (BNDCELL_IVAL(cell) = (ival))
 #define SET_BNDCELL_LVAL(cell, lval) (BNDCELL_LVAL(cell) = (lval))
 
-#define INIT_BNDCELL(cell, type) do {		\
-	if (BNDCELL_TAG(cell) == 0)		\
-	    SETCAR(cell, R_NilValue);		\
-	SET_BNDCELL_TAG(cell, type);		\
-	SET_MISSING(cell, 0);			\
+#define INIT_BNDCELL(cell, type)      \
+    do                                \
+    {                                 \
+        if (BNDCELL_TAG(cell) == 0)   \
+            SETCAR(cell, R_NilValue); \
+        SET_BNDCELL_TAG(cell, type);  \
+        SET_MISSING(cell, 0);         \
     } while (0)
 #endif
 
@@ -647,28 +758,36 @@ Rboolean (Rf_isObject)(SEXP s);
 # define INCREMENT_NAMED(x) do { } while (0)
 # define DECREMENT_NAMED(x) do { } while (0)
 #else
-# define INCREMENT_NAMED(x) do {			\
-	SEXP __x__ = (x);				\
-	if (NAMED(__x__) != NAMEDMAX)			\
-	    SET_NAMED(__x__, NAMED(__x__) + 1);		\
+#define INCREMENT_NAMED(x)                      \
+    do                                          \
+    {                                           \
+        SEXP __x__ = (x);                       \
+        if (NAMED(__x__) != NAMEDMAX)           \
+            SET_NAMED(__x__, NAMED(__x__) + 1); \
     } while (0)
-# define DECREMENT_NAMED(x) do {			    \
-	SEXP __x__ = (x);				    \
-	int __n__ = NAMED(__x__);			    \
-	if (__n__ > 0 && __n__ < NAMEDMAX)		    \
-	    SET_NAMED(__x__, __n__ - 1);		    \
+#define DECREMENT_NAMED(x)                 \
+    do                                     \
+    {                                      \
+        SEXP __x__ = (x);                  \
+        int __n__ = NAMED(__x__);          \
+        if (__n__ > 0 && __n__ < NAMEDMAX) \
+            SET_NAMED(__x__, __n__ - 1);   \
     } while (0)
 #endif
 
-#define INCREMENT_LINKS(x) do {			\
-	SEXP il__x__ = (x);			\
-	INCREMENT_NAMED(il__x__);		\
-	INCREMENT_REFCNT(il__x__);		\
+#define INCREMENT_LINKS(x)         \
+    do                             \
+    {                              \
+        SEXP il__x__ = (x);        \
+        INCREMENT_NAMED(il__x__);  \
+        INCREMENT_REFCNT(il__x__); \
     } while (0)
-#define DECREMENT_LINKS(x) do {			\
-	SEXP dl__x__ = (x);			\
-	DECREMENT_NAMED(dl__x__);		\
-	DECREMENT_REFCNT(dl__x__);		\
+#define DECREMENT_LINKS(x)         \
+    do                             \
+    {                              \
+        SEXP dl__x__ = (x);        \
+        DECREMENT_NAMED(dl__x__);  \
+        DECREMENT_REFCNT(dl__x__); \
     } while (0)
 
 /* Macros for some common idioms. */
@@ -689,25 +808,29 @@ Rboolean (Rf_isObject)(SEXP s);
 #define NOT_SHARED(x) (! MAYBE_SHARED(x))
 
 /* ALTREP sorting support */
-enum {SORTED_DECR_NA_1ST = -2,
-      SORTED_DECR = -1,
-      UNKNOWN_SORTEDNESS = INT_MIN, /*INT_MIN is NA_INTEGER! */
-      SORTED_INCR = 1,
-      SORTED_INCR_NA_1ST = 2,
-      KNOWN_UNSORTED = 0};
-#define KNOWN_SORTED(sorted) (sorted == SORTED_DECR ||			\
-			      sorted == SORTED_INCR ||			\
-			      sorted == SORTED_DECR_NA_1ST ||		\
-			      sorted == SORTED_INCR_NA_1ST)
+enum
+{
+    SORTED_DECR_NA_1ST = -2,
+    SORTED_DECR = -1,
+    UNKNOWN_SORTEDNESS = INT_MIN, /*INT_MIN is NA_INTEGER! */
+    SORTED_INCR = 1,
+    SORTED_INCR_NA_1ST = 2,
+    KNOWN_UNSORTED = 0
+};
 
-#define KNOWN_NA_1ST(sorted) (sorted == SORTED_INCR_NA_1ST ||	\
-			      sorted == SORTED_DECR_NA_1ST)
+#define KNOWN_SORTED(sorted) (sorted == SORTED_DECR ||        \
+                              sorted == SORTED_INCR ||        \
+                              sorted == SORTED_DECR_NA_1ST || \
+                              sorted == SORTED_INCR_NA_1ST)
 
-#define KNOWN_INCR(sorted) (sorted == SORTED_INCR ||		\
-			    sorted == SORTED_INCR_NA_1ST)
+#define KNOWN_NA_1ST(sorted) (sorted == SORTED_INCR_NA_1ST || \
+                              sorted == SORTED_DECR_NA_1ST)
 
-#define KNOWN_DECR(sorted) (sorted == SORTED_DECR ||	\
-			    sorted == SORTED_DECR_NA_1ST)
+#define KNOWN_INCR(sorted) (sorted == SORTED_INCR || \
+                            sorted == SORTED_INCR_NA_1ST)
+
+#define KNOWN_DECR(sorted) (sorted == SORTED_DECR || \
+                            sorted == SORTED_DECR_NA_1ST)
 
 /* Complex assignment support */
 /* temporary definition that will need to be refined to distinguish
@@ -724,12 +847,12 @@ enum {SORTED_DECR_NA_1ST = -2,
 SEXP (ATTRIB)(SEXP x);
 int  (OBJECT)(SEXP x);
 int  (MARK)(SEXP x);
-int  (TYPEOF)(SEXP x);
+SEXPTYPE  (TYPEOF)(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 int  (TRACKREFS)(SEXP x);
 void (SET_OBJECT)(SEXP x, int v);
-void (SET_TYPEOF)(SEXP x, int v);
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
 void (SET_NAMED)(SEXP x, int v);
 void SET_ATTRIB(SEXP x, SEXP v);
 void DUPLICATE_ATTRIB(SEXP to, SEXP from);
@@ -1093,8 +1216,12 @@ Rcomplex Rf_asComplex(SEXP x);
 typedef struct R_allocator R_allocator_t;
 #endif
 
-typedef enum { iSILENT, iWARN, iERROR } warn_type;
-
+typedef enum
+{
+    iSILENT,
+    iWARN,
+    iERROR
+} warn_type;
 
 /* Other Internally Used Functions, excluding those which are inline-able*/
 
@@ -1154,9 +1281,9 @@ void Rf_GetMatrixDimnames(SEXP, SEXP*, SEXP*, const char**, const char**);
 SEXP Rf_GetOption(SEXP, SEXP); /* pre-2.13.0 compatibility */
 SEXP Rf_GetOption1(SEXP);
 int Rf_FixupDigits(SEXP, warn_type);
-int Rf_FixupWidth (SEXP, warn_type);
+size_t Rf_FixupWidth(SEXP, warn_type);
 int Rf_GetOptionDigits(void);
-int Rf_GetOptionWidth(void);
+size_t Rf_GetOptionWidth(void);
 SEXP Rf_GetRowNames(SEXP);
 void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP Rf_install(const char *);
@@ -1185,7 +1312,12 @@ int Rf_nrows(SEXP);
 SEXP Rf_nthcdr(SEXP, int);
 
 // ../main/character.c :
-typedef enum {Bytes, Chars, Width} nchar_type;
+typedef enum
+{
+    Bytes,
+    Chars,
+    Width
+} nchar_type;
 int R_nchar(SEXP string, nchar_type type_,
 	    Rboolean allowNA, Rboolean keepNA, const char* msg_name);
 
@@ -1206,10 +1338,10 @@ SEXPTYPE Rf_str2type(const char *);
 Rboolean Rf_StringBlank(SEXP);
 SEXP Rf_substitute(SEXP,SEXP);
 SEXP Rf_topenv(SEXP, SEXP);
-const char * Rf_translateChar(SEXP);
-const char * Rf_translateChar0(SEXP);
-const char * Rf_translateCharUTF8(SEXP);
-const char * Rf_type2char(SEXPTYPE);
+const char *Rf_translateChar(SEXP);
+const char *Rf_translateChar0(SEXP);
+const char *Rf_translateCharUTF8(SEXP);
+const char *Rf_type2char(SEXPTYPE);
 SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
 SEXP Rf_type2str_nowarn(SEXPTYPE);
@@ -1240,13 +1372,14 @@ Rboolean R_cycle_detected(SEXP s, SEXP child);
 
 /* cetype_t is an identifier reseved by POSIX, but it is
    well established as public.  Could remap by a #define though */
-typedef enum {
+typedef enum
+{
     CE_NATIVE = 0,
-    CE_UTF8   = 1,
+    CE_UTF8 = 1,
     CE_LATIN1 = 2,
-    CE_BYTES  = 3,
+    CE_BYTES = 3,
     CE_SYMBOL = 5,
-    CE_ANY    =99
+    CE_ANY = 99
 } cetype_t;
 
 cetype_t Rf_getCharCE(SEXP);
@@ -1254,9 +1387,17 @@ SEXP Rf_mkCharCE(const char *, cetype_t);
 SEXP Rf_mkCharLenCE(const char *, int, cetype_t);
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
 
-				/* match(.) NOT reached : for -Wall */
-#define error_return(msg)	{ Rf_error(msg);	   return R_NilValue; }
-#define errorcall_return(cl,msg){ Rf_errorcall(cl, msg);   return R_NilValue; }
+/* match(.) NOT reached : for -Wall */
+#define error_return(msg)  \
+    {                      \
+        Rf_error(msg);     \
+        return R_NilValue; \
+    }
+#define errorcall_return(cl, msg) \
+    {                             \
+        Rf_errorcall(cl, msg);    \
+        return R_NilValue;        \
+    }
 
 #ifdef __MAIN__
 #undef extern
@@ -1367,7 +1508,8 @@ int R_XDRDecodeInteger(void *buf);
 
 typedef void *R_pstream_data_t;
 
-typedef enum {
+typedef enum
+{
     R_pstream_any_format,
     R_pstream_ascii_format,
     R_pstream_binary_format,
@@ -1376,24 +1518,28 @@ typedef enum {
 } R_pstream_format_t;
 
 typedef struct R_outpstream_st *R_outpstream_t;
-struct R_outpstream_st {
+struct R_outpstream_st
+{
     R_pstream_data_t data;
     R_pstream_format_t type;
     int version;
     void (*OutChar)(R_outpstream_t, int);
     void (*OutBytes)(R_outpstream_t, /*const*/ void *, int);
-    SEXP (*OutPersistHookFunc)(SEXP, SEXP);
+    SEXP (*OutPersistHookFunc)
+    (SEXP, SEXP);
     SEXP OutPersistHookData;
 };
 
 typedef struct R_inpstream_st *R_inpstream_t;
 #define R_CODESET_MAX 63
-struct R_inpstream_st {
+struct R_inpstream_st
+{
     R_pstream_data_t data;
     R_pstream_format_t type;
     int (*InChar)(R_inpstream_t);
     void (*InBytes)(R_inpstream_t, void *, int);
-    SEXP (*InPersistHookFunc)(SEXP, SEXP);
+    SEXP (*InPersistHookFunc)
+    (SEXP, SEXP);
     SEXP InPersistHookData;
     char native_encoding[R_CODESET_MAX + 1];
     void *nat2nat_obj;
@@ -1814,32 +1960,24 @@ void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
 
 /* Test macros with function versions above */
 #undef isNull
-#define isNull(s)	(TYPEOF(s) == NILSXP)
+#define isNull(s) (TYPEOF(s) == NILSXP)
 #undef isSymbol
-#define isSymbol(s)	(TYPEOF(s) == SYMSXP)
+#define isSymbol(s) (TYPEOF(s) == SYMSXP)
 #undef isLogical
-#define isLogical(s)	(TYPEOF(s) == LGLSXP)
+#define isLogical(s) (TYPEOF(s) == LGLSXP)
 #undef isReal
-#define isReal(s)	(TYPEOF(s) == REALSXP)
+#define isReal(s) (TYPEOF(s) == REALSXP)
 #undef isComplex
-#define isComplex(s)	(TYPEOF(s) == CPLXSXP)
+#define isComplex(s) (TYPEOF(s) == CPLXSXP)
 #undef isExpression
 #define isExpression(s) (TYPEOF(s) == EXPRSXP)
 #undef isEnvironment
 #define isEnvironment(s) (TYPEOF(s) == ENVSXP)
 #undef isString
-#define isString(s)	(TYPEOF(s) == STRSXP)
+#define isString(s) (TYPEOF(s) == STRSXP)
 #undef isObject
-#define isObject(s)	(OBJECT(s) != 0)
+#define isObject(s) (OBJECT(s) != 0)
 
-/* macro version of R_CheckStack */
-#define R_CheckStack() do {						\
-	NORET void R_SignalCStackOverflow(intptr_t);				\
-	int dummy;							\
-	intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy); \
-	if(R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \
-	    R_SignalCStackOverflow(usage);				\
-    } while (FALSE)
 #endif
 
 void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,

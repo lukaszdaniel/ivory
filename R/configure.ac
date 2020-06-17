@@ -31,6 +31,7 @@ m4_define([R_VERSION],
                        [\([0-9.]*\)\(\w\|\W\)*],
                        [\1]))
 AC_INIT([R],[R_VERSION],[https://bugs.r-project.org],[R],[https://www.r-project.org])
+AC_USE_SYSTEM_EXTENSIONS
 AC_CONFIG_SRCDIR([src/include/Defn.h])
 AC_CONFIG_AUX_DIR([tools])
 
@@ -358,6 +359,19 @@ AC_SUBST(LTOALL)
 ## used in src/main/Makefile
 AM_CONDITIONAL(BUILD_LTO, [test "x${want_lto}" != xno])
 AM_CONDITIONAL(BUILD_LTO_CHECK, [test "x${want_lto}" = xcheck])
+
+### ivory requires Boost of at least a given version,
+### including the boost::regex library.
+
+AX_BOOST_BASE([1.48.0],
+	      [],
+              [AC_MSG_ERROR([rho requires boost, which was not found.])]
+             )
+AX_BOOST_REGEX
+if test -n "$BOOST_LDFLAGS"; then
+    BOOST_LD_LIBRARY_PATH=`echo $BOOST_LDFLAGS | sed -e 's/^-L//'`
+fi
+AC_SUBST(BOOST_LD_LIBRARY_PATH)
 
 AC_ARG_ENABLE([java],
 [AS_HELP_STRING([--enable-java],[enable Java @<:@yes@:>@])],
@@ -981,6 +995,7 @@ AC_LANG_POP(Fortran)
 ### *** C++ compiler
 
 R_PROG_CXX_MAKEFRAG
+R_PROG_CXX_LO_MAKEFRAG
 
 ## OpenMP selection has to come after dialect is chosen.
 
@@ -1715,13 +1730,18 @@ R_STDCXX([14], [CXX14], [CXX11])
 R_STDCXX([17], [CXX17], [CXX14])
 R_STDCXX([20], [CXX20], [CXX17])
 
-## Set default compiler to C++11 if available
+## Set default compiler to C++17 if available; otherwise C++14
 if test -n "${CXX}" && test -z "${CXXSTD}"; then
-  if test -n "${CXX11}"; then
-    CXX=${CXX11}
-    CXXSTD=${CXX11STD}
-    CXXFLAGS=${CXX11FLAGS}
-    CXXPICFLAGS=${CXX11PICFLAGS}
+  if test -n "${CXX17}"; then
+    CXX=${CXX17}
+    CXXSTD=${CXX17STD}
+    CXXFLAGS=${CXX17FLAGS}
+    CXXPICFLAGS=${CXX17PICFLAGS}
+  elif test -n "${CXX14}"; then
+    CXX=${CXX14}
+    CXXSTD=${CXX14STD}
+    CXXFLAGS=${CXX14FLAGS}
+    CXXPICFLAGS=${CXX14PICFLAGS}
   fi
 fi
 

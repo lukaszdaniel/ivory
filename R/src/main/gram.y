@@ -50,16 +50,17 @@ static void incrementId(void);
 static void initData(void);
 static void initId(void);
 static void record_( int, int, int, int, int, int, char* ) ;
+#define YYINITDEPTH 400
 
 static void yyerror(const char *);
 static int yylex();
 int yyparse(void);
 
-//static FILE *fp_parse;
-//static int (*ptr_getc)(void);
+static FILE *fp_parse;
+static int (*ptr_getc)(void);
 
-//static int	SavedToken;
-//static SEXP	SavedLval;
+static int	SavedToken;
+static SEXP	SavedLval;
 
 #define yyconst const
 
@@ -72,10 +73,10 @@ typedef struct yyltype
   int last_line;
   int last_column;
   int last_byte;
-  
+
   int first_parsed;
   int last_parsed;
-  
+
   int id;
 } yyltype;
 
@@ -279,7 +280,8 @@ static SrcRefState ParseState;
 
 static int mbcs_get_next(int c, wchar_t *wc)
 {
-    int i, res, clen = 1; char s[9];
+    int i, res; char s[9];
+	size_t clen = 1;
     mbstate_t mb_st;
 
     s[0] = (char) c;
@@ -291,7 +293,7 @@ static int mbcs_get_next(int c, wchar_t *wc)
     }
     if(utf8locale) {
 	clen = utf8clen((char) c);
-	for(i = 1; i < clen; i++) {
+	for(size_t i = 1; i < clen; i++) {
 	    c = xxgetc();
 	    if(c == R_EOF) error(_("EOF whilst reading MBCS char at line %d"), ParseState.xxlineno);
 	    s[i] = (char) c;
@@ -529,13 +531,13 @@ cr	:					{ EatLines = 1; }
 
 /*----------------------------------------------------------------------------*/
 
-static int (*ptr_getc)(void);
+//static int (*ptr_getc)(void);
 
 /* Private pushback, since file ungetc only guarantees one byte.
    We need up to one MBCS-worth */
 #define DECLARE_YYTEXT_BUFP(bp) char *bp = yytext ;
 #define YYTEXT_PUSH(c, bp) do { \
-    if ((bp) - yytext >= sizeof(yytext) - 1){ \
+    if ((bp) - yytext >= int(sizeof(yytext)) - 1){ \
 		error(_("input buffer overflow at line %d"), ParseState.xxlineno); \
 	} \
     *(bp)++ = ((char)c);			\
@@ -693,7 +695,7 @@ static void finish_mbcs_in_parse_context()
 	
 	mbs_init(&mb_st);
 	res = (int) mbrtowc(&wc, buf + i, nbytes - i, &mb_st);
-	while (res == -2 && nbytes < sizeof(buf)) {
+	while (res == -2 && (long unsigned int) nbytes < sizeof(buf)) {
 	    /* This is not necessarily correct for stateful MBCS */
 	    buf[nbytes++] = (char) add_mbcs_byte_to_parse_context();
 	    mbs_init(&mb_st);
@@ -1377,15 +1379,15 @@ static SEXP SrcRefsToVectorList() {
  */
 
 #define CONTEXTSTACK_SIZE 50
-static int	SavedToken;
-static SEXP	SavedLval;
+//static int	SavedToken;
+//static SEXP	SavedLval;
 static char	contextstack[CONTEXTSTACK_SIZE], *contextp;
 
 static void PutSrcRefState(SrcRefState *state);
 static void UseSrcRefState(SrcRefState *state);
 
 /* This is called once when R starts up. */
-attribute_hidden
+HIDDEN
 void InitParser(void)
 {
     ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
@@ -1401,7 +1403,7 @@ static void FinalizeSrcRefStateOnError(void *dummy)
 }
 
 /* This is called each time a new parse sequence begins */
-attribute_hidden
+HIDDEN
 void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
@@ -1436,7 +1438,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
     busy = TRUE;
 }
 
-attribute_hidden
+HIDDEN
 void R_FinalizeSrcRefState(void)
 {
     PS_SET_SRCFILE(R_NilValue);
@@ -1555,7 +1557,7 @@ static SEXP R_Parse1(ParseStatus *status)
     return R_CurrentExpr;
 }
 
-static FILE *fp_parse;
+//static FILE *fp_parse;
 
 static int file_getc(void)
 {
@@ -1563,7 +1565,7 @@ static int file_getc(void)
 }
 
 /* used in main.c */
-attribute_hidden
+HIDDEN
 SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
     ParseInit();
@@ -1584,7 +1586,7 @@ static int buffer_getc(void)
 }
 
 /* Used only in main.c */
-attribute_hidden
+HIDDEN
 SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     Rboolean keepSource = FALSE; 
@@ -1712,7 +1714,7 @@ finish:
 }
 
 /* used in edit.c */
-attribute_hidden
+HIDDEN
 SEXP R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -1736,7 +1738,7 @@ static int con_getc(void)
 }
 
 /* used in source.c */
-attribute_hidden
+HIDDEN
 SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
@@ -1774,7 +1776,7 @@ static const char *Prompt(SEXP prompt, int type)
 }
 
 /* used in source.c */
-attribute_hidden
+HIDDEN
 SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
@@ -2142,7 +2144,7 @@ static void yyerror(const char *s)
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i;
 	/* Edit the error message */
-	expecting = (char*) strstr(s + sizeof yyunexpected -1, yyexpecting);
+	expecting = const_cast<char *>(strstr(s + sizeof yyunexpected -1, yyexpecting));
 	if (expecting) *expecting = '\0';
 	for (i = 0; yytname_translations[i]; i += 2) {
 	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {

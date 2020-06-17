@@ -61,8 +61,7 @@
 
 HIDDEN FILE *ifp = NULL; /* used in sys-std.c */
 
-HIDDEN
-Rboolean UsingReadline = TRUE;  /* used in sys-std.c & ../main/platform.c
+HIDDEN Rboolean UsingReadline = TRUE;  /* used in sys-std.c & ../main/platform.c
 				   and also in sys-unix.c for tilde expansion */
 
 /* call pointers to allow interface switching */
@@ -90,18 +89,20 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
     exit(status);
 }
 
-HIDDEN
-int R_ShowFiles(int nfile, const char **file, const char **headers,
-		const char *wtitle, Rboolean del, const char *pager)
-{ return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager); }
+HIDDEN int R_ShowFiles(int nfile, const char **file, const char **headers,
+					   const char *wtitle, Rboolean del, const char *pager)
+{
+	return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager);
+}
 
-HIDDEN
-int R_ChooseFile(int _new,  char *buf, int len)
-{ return ptr_R_ChooseFile(_new, buf, len); }
+HIDDEN size_t R_ChooseFile(int _new, char *buf, size_t len)
+{
+	return ptr_R_ChooseFile(_new, buf, len);
+}
 
-
-void R_setStartTime(void); /* in sys-unix.c */
-
+/* Use header files!
+void R_setStartTime(void); // in sys-unix.c
+*/
 
 #ifdef HAVE_AQUA
 /*  used here and in main/sysutils.c (for system). */
@@ -123,7 +124,7 @@ void R_setupHistory()
     char *p;
 
     if ((R_HistoryFile = getenv("R_HISTFILE")) == NULL)
-	R_HistoryFile = ".Rhistory";
+	R_HistoryFile = (char *) ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
 	value = (int) R_Decode2Long(p, &ierr);
@@ -354,7 +355,7 @@ int Rf_initialize_R(int ac, char **av)
 		} else {
 		    snprintf(msg, 1024, _("WARNING: --gui or -g without value ignored"));
 		    R_ShowMessage(msg);
-		    p = "X11";
+		    p = (char *) "X11";
 		}
 	    }
 	    if(!strcmp(p, "none"))
@@ -483,7 +484,7 @@ int Rf_initialize_R(int ac, char **av)
 	R_Interactive = useaqua;
     else
 #endif
-	R_Interactive = R_Interactive && (force_interactive || R_isatty(0));
+	R_Interactive = (Rboolean) (R_Interactive && (force_interactive || R_isatty(0)));
 
 #ifdef HAVE_AQUA
     /* for Aqua and non-dumb terminal use callbacks instead of connections
@@ -514,7 +515,7 @@ int Rf_initialize_R(int ac, char **av)
     R_setupHistory();
     if (R_RestoreHistory)
 	Rstd_read_history(R_HistoryFile);
-    fpu_setup(1);
+    fpu_setup(TRUE);
 
     return(0);
 }
@@ -616,7 +617,7 @@ int R_EnsureFDLimit(int desired) {
 	rlim.rlim_cur = hlim;
     if (setrlimit(RLIMIT_NOFILE, &rlim))
 	return (int) lim; /* also could return error */
-    
+
     return (int) rlim.rlim_cur;
 #else
     return -1;

@@ -26,10 +26,7 @@ R/GIT-REVISION
 R/Makeconf
 R/Makefile
 R/Makefile.bak
-R/Makefrag.cc
-R/Makefrag.cc_lo
-R/Makefrag.cxx
-R/Makefrag.m
+R/Makefrag.*
 R/aclocal.m4
 R/bin/
 R/config.log

@@ -2984,10 +2984,10 @@ static void PS_MetricInfo(int c,
 static void PS_NewPage(const pGEcontext gc,
 		       pDevDesc dd);
 static Rboolean PS_Open(pDevDesc, PostScriptDesc*);
-static void PS_Polygon(int n, double *x, double *y,
+static void PS_Polygon(int n, const double *x, const double *y,
 		       const pGEcontext gc,
 		       pDevDesc dd);
-static void PS_Polyline(int n, double *x, double *y,
+static void PS_Polyline(int n, const double *x, const double *y,
 			const pGEcontext gc,
 			pDevDesc dd);
 static void PS_Rect(double x0, double y0, double x1, double y1,
@@ -4127,7 +4127,7 @@ static void PS_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void PS_Polygon(int n, double *x, double *y,
+static void PS_Polygon(int n, const double *x, const double *y,
 		       const pGEcontext gc,
 		       pDevDesc dd)
 {
@@ -4220,7 +4220,7 @@ static void PS_Path(double *x, double *y,
     }
 }
 
-static void PS_Polyline(int n, double *x, double *y,
+static void PS_Polyline(int n, const double *x, const double *y,
 			const pGEcontext gc,
 			pDevDesc dd)
 {
@@ -4670,10 +4670,10 @@ static void XFig_MetricInfo(int c,
 			    double* ascent, double* descent,
 			    double* width, pDevDesc dd);
 static void XFig_NewPage(const pGEcontext gc, pDevDesc dd);
-static void XFig_Polygon(int n, double *x, double *y,
+static void XFig_Polygon(int n, const double *x, const double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd);
-static void XFig_Polyline(int n, double *x, double *y,
+static void XFig_Polyline(int n, const double *x, const double *y,
 			  const pGEcontext gc,
 			  pDevDesc dd);
 static void XFig_Rect(double x0, double y0, double x1, double y1,
@@ -5219,7 +5219,7 @@ static void XFig_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void XFig_Polygon(int n, double *x, double *y,
+static void XFig_Polygon(int n, const double *x, const double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd)
 {
@@ -5252,7 +5252,7 @@ static void XFig_Polygon(int n, double *x, double *y,
     }
 }
 
-static void XFig_Polyline(int n, double *x, double *y,
+static void XFig_Polyline(int n, const double *x, const double *y,
 			  const pGEcontext gc,
 			  pDevDesc dd)
 {
@@ -5521,10 +5521,10 @@ void PDF_MetricInfo(int c,
                     double* ascent, double* descent,
                     double* width, pDevDesc dd);
 static void PDF_NewPage(const pGEcontext gc, pDevDesc dd);
-static void PDF_Polygon(int n, double *x, double *y,
+static void PDF_Polygon(int n, const double *x, const double *y,
 			const pGEcontext gc,
 			pDevDesc dd);
-static void PDF_Polyline(int n, double *x, double *y,
+static void PDF_Polyline(int n, const double *x, const double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd);
 static void PDF_Rect(double x0, double y0, double x1, double y1,
@@ -7537,7 +7537,7 @@ static void PDF_Line(double x1, double y1, double x2, double y2,
     fprintf(pd->pdffp, "%.2f %.2f m %.2f %.2f l S\n", x1, y1, x2, y2);
 }
 
-static void PDF_Polygon(int n, double *x, double *y,
+static void PDF_Polygon(int n, const double *x, const double *y,
 			const pGEcontext gc,
 			pDevDesc dd)
 {
@@ -7632,7 +7632,7 @@ static void PDF_Path(double *x, double *y,
     }
 }
 
-static void PDF_Polyline(int n, double *x, double *y,
+static void PDF_Polyline(int n, const double *x, const double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd)
 {

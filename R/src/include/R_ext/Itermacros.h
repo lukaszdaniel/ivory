@@ -30,10 +30,10 @@
 #define  R_EXT_ITERMACROS_H_
 
 #define LOOP_WITH_INTERRUPT_CHECK(LOOP, ncheck, n, ...) do {		\
-	for (size_t __intr_threshold__ = ncheck;			\
+	for (R_xlen_t __intr_threshold__ = ncheck;			\
 	     TRUE;							\
 	     __intr_threshold__ += ncheck) {				\
-	    size_t __intr_end__ = n < __intr_threshold__ ?		\
+	    R_xlen_t __intr_end__ = n < __intr_threshold__ ?		\
 		n : __intr_threshold__;					\
 	    LOOP(__intr_end__, __VA_ARGS__);				\
 	    if (__intr_end__ == n) break;				\

@@ -27,6 +27,9 @@
 #ifndef R_INTERNAL_H
 #define R_INTERNAL_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Function Names */
 
@@ -534,5 +537,9 @@ SEXP do_untracemem(SEXP, SEXP, SEXP, SEXP);
 /* ALTREP-related */
 
 SEXP do_sorted_fpass(SEXP, SEXP, SEXP, SEXP);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* not R_INTERNAL_H */

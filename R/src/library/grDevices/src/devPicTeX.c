@@ -171,7 +171,7 @@ static void PicTeX_MetricInfo(int c,
 			      double* ascent, double* descent,
 			      double* width, pDevDesc dd);
 static void PicTeX_NewPage(const pGEcontext gc, pDevDesc dd);
-static void PicTeX_Polygon(int n, double *x, double *y, 
+static void PicTeX_Polygon(int n, const double *x, const double *y, 
 			   const pGEcontext gc,
 			   pDevDesc dd);
 static void PicTeX_Rect(double x0, double y0, double x1, double y1,
@@ -413,7 +413,7 @@ static void PicTeX_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void PicTeX_Polyline(int n, double *x, double *y, 
+static void PicTeX_Polyline(int n, const double *x, const double *y, 
 			    const pGEcontext gc,
 			    pDevDesc dd)
 {
@@ -500,7 +500,7 @@ static void PicTeX_Circle(double x, double y, double r,
 	    x, (y + r), x, y);
 }
 
-static void PicTeX_Polygon(int n, double *x, double *y, 
+static void PicTeX_Polygon(int n, const double *x, const double *y, 
 			   const pGEcontext gc,
 			   pDevDesc dd)
 {

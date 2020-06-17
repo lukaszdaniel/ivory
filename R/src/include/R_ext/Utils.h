@@ -55,7 +55,7 @@
 extern "C" {
 #endif
 
-/* ../../main/sort.c : */
+/* ../../main/sort.cpp : */
 void	R_isort(int*, int);
 void	R_rsort(double*, int);
 void	R_csort(Rcomplex*, int);
@@ -65,7 +65,7 @@ void	Rf_iPsort(int*,    int, int);
 void	Rf_rPsort(double*, int, int);
 void	Rf_cPsort(Rcomplex*, int, int);
 
-/* ../../main/qsort.c : */
+/* ../../main/qsort.cpp : */
 /* dummy renamed to II to avoid problems with g++ on Solaris */
 void R_qsort    (double *v,         R_SIZE_T i, R_SIZE_T j);
 void R_qsort_I  (double *v, int *II, int i, int j);
@@ -76,7 +76,7 @@ void F77_NAME(qsort4)(double *v, int *indx, int *ii, int *jj);
 void F77_NAME(qsort3)(double *v,            int *ii, int *jj);
 #endif
 
-/* ../../main/util.c  and others : */
+/* ../../main/util.cpp  and others : */
 const char *R_ExpandFileName(const char *);
 #ifdef _WIN32
 const char *R_ExpandFileNameUTF8(const char *);

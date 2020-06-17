@@ -181,6 +181,9 @@ static void check_header(gz_stream *s)
     s->z_err = s->z_eof ? Z_DATA_ERROR : Z_OK;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 gzFile R_gzopen (const char *path, const char *mode)
 {
     int err;
@@ -376,7 +379,10 @@ static int R_gzread (gzFile file, voidp buf, unsigned len)
     return (int)(len - s->stream.avail_out);
 }
 
-/* for devPS.c */
+/* for devPS.cp */
+#ifdef __cplusplus
+extern "C"
+#endif
 char *R_gzgets(gzFile file, char *buf, int len)
 {
     char *b = buf;
@@ -429,7 +435,7 @@ static int gz_flush (gzFile file, int flush)
 
     s->stream.avail_in = 0; /* should be zero already anyway */
 
-    for (;;) {
+    while(TRUE) {
         len = Z_BUFSIZE - s->stream.avail_out;
         if (len != 0) {
             if ((uInt)fwrite(s->buffer, 1, len, s->file) != len) {
@@ -534,6 +540,9 @@ static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
     return 0;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 int R_gzclose (gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
@@ -559,8 +568,7 @@ R_zlib_free(voidpf ptr, voidpf addr) {}
 */
 
 /* added in 4.0.0, modified from uncompress[2] */
-static int
-R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong sourceLen,
+static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong sourceLen,
 	     int opt)
 {
     z_stream stream;

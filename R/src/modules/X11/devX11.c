@@ -159,9 +159,9 @@ static void X11_MetricInfo(int c, const pGEcontext gc,
 			   double* width, pDevDesc dd);
 static void X11_Mode(int mode, pDevDesc dd);
 static void X11_NewPage(const pGEcontext gc, pDevDesc dd);
-static void X11_Polygon(int n, double *x, double *y,
+static void X11_Polygon(int n, const double *x, const double *y,
 			const pGEcontext gc, pDevDesc dd);
-static void X11_Polyline(int n, double *x, double *y,
+static void X11_Polyline(int n, const double *x, const double *y,
 			 const pGEcontext gc, pDevDesc dd);
 static void X11_Rect(double x0, double y0, double x1, double y1,
 		     const pGEcontext gc, pDevDesc dd);
@@ -2429,7 +2429,7 @@ static void X11_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void X11_Polyline(int n, double *x, double *y,
+static void X11_Polyline(int n, const double *x, const double *y,
 			 const pGEcontext gc, pDevDesc dd)
 {
     const void *vmax = vmaxget();
@@ -2460,7 +2460,7 @@ static void X11_Polyline(int n, double *x, double *y,
     vmaxset(vmax);
 }
 
-static void X11_Polygon(int n, double *x, double *y,
+static void X11_Polygon(int n, const double *x, const double *y,
 			const pGEcontext gc, pDevDesc dd)
 {
     const void *vmax = vmaxget();
@@ -2828,8 +2828,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
   methods/functions. It also specifies the current values of the
   dimensions of the device, and establishes the fonts, line styles, etc.
  */
-int
-Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
+int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 {
     double ps = xd->pointsize;
     int res0 = (xd->res_dpi > 0) ? xd->res_dpi : 72;
@@ -3015,8 +3014,7 @@ pX11Desc Rf_allocX11DeviceDesc(double ps)
 }
 
 
-static
-Rboolean in_R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
+static Rboolean in_R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 {
     SEXP dev = elt(findVar(install(".Devices"), R_BaseEnv), d);
 
@@ -3041,12 +3039,10 @@ Rboolean in_R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 /**
    Allows callers to retrieve the current Display setting for the process.
  */
-Display*
-Rf_getX11Display(void)
+Display *Rf_getX11Display(void)
 {
-    return(display);
+	return (display);
 }
-
 
 /**
  Allows the caller to register the X11 Display object for the process.
@@ -3058,8 +3054,7 @@ Rf_getX11Display(void)
  function.
  Finally, setHandlers controls whether the code establishes handlers for the X errors.
  */
-int
-Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
+int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 		 int maxcube, Rboolean setHandlers)
 {
 /*    static int alreadyDone = 0;
@@ -3098,8 +3093,7 @@ typedef Rboolean (*X11DeviceDriverRoutine)(pDevDesc, char*,
 					   double, double, double, double,
 					   X_COLORTYPE, int, int);
 
-static void
-Rf_addX11Device(const char *display, double width, double height, double ps,
+static void Rf_addX11Device(const char *display, double width, double height, double ps,
 		double gamma, int colormodel, int maxcubesize,
 		int bgcolor, int canvascolor, const char *devname, SEXP sfonts,
 		int res, int xpos, int ypos, const char *title,
@@ -3326,7 +3320,7 @@ static int in_R_X11_access(void)
     }
 }
 
-static Rboolean in_R_X11readclp(Rclpconn this_, char *type)
+static Rboolean in_R_X11readclp(Rclpconn this_, const char *type)
 {
     Window clpwin;
     Atom sel = XA_PRIMARY, pty, pty_type;
@@ -3414,9 +3408,9 @@ static Rboolean in_R_X11readclp(Rclpconn this_, char *type)
 
 #include <R_ext/Rdynload.h>
 
-extern const char * in_R_pngVersion(void);
-extern const char * in_R_jpegVersion(void);
-extern const char * in_R_tiffVersion(void);
+extern const char *in_R_pngVersion(void);
+extern const char *in_R_jpegVersion(void);
+extern const char *in_R_tiffVersion(void);
 
 void R_init_R_X11(DllInfo *info)
 {

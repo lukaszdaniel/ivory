@@ -45,7 +45,7 @@
 /* this allows the opaque pointer definition to be made available 
    in Rinternals.h */
 #ifndef HAVE_RCONNECTION_TYPEDEF
-typedef struct Rconn  *Rconnection;
+typedef struct Rconn* Rconnection;
 #endif
 struct Rconn {
     char* connclass;
@@ -65,7 +65,7 @@ struct Rconn {
     int (*fflush)(struct Rconn *);
     size_t (*read)(void *, size_t, size_t, struct Rconn *);
     size_t (*write)(const void *, size_t, size_t, struct Rconn *);
-    int nPushBack, posPushBack; /* number of lines, position on top line */
+    size_t nPushBack, posPushBack; /* number of lines, position on top line */
     char **PushBack;
     int save, save2;
     char encname[101];
@@ -78,7 +78,11 @@ struct Rconn {
     Rboolean UTF8out;
     void *id;
     void *ex_ptr;
+#ifdef __cplusplus
+    void *connprivate;
+#else
     void *private;
+#endif
     int status; /* for pipes etc */
     unsigned char *buff;
     size_t buff_len, buff_stored_len, buff_pos;

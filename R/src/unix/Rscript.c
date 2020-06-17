@@ -36,6 +36,7 @@ R --no-echo --no-restore --vanilla --file=foo [script_args]
 */
 
 #include <Localization.h>
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
@@ -220,8 +221,8 @@ int main(int argc_, char *argv_[])
     snprintf(cmd, PATH_MAX+1, "%s/bin/R", p);
 #endif
     av[ac++] = cmd;
-    av[ac++] = "--no-echo";
-    av[ac++] = "--no-restore";
+    av[ac++] = (char *) "--no-echo";
+    av[ac++] = (char *) "--no-restore";
 
     if(argc == 2) {
 	if(strcmp(argv[1], "--help") == 0) {
@@ -297,7 +298,7 @@ int main(int argc_, char *argv_[])
     // copy any user arguments, preceded by "--args"
     i = i0+1;
     if (i < argc) {
-	av[ac++] = "--args";
+	av[ac++] = (char *) "--args";
 	for(; i < argc; i++)
 	    av[ac++] = argv[i];
     }
@@ -307,7 +308,7 @@ int main(int argc_, char *argv_[])
        command line, then R_SCRIPT_DEFAULT_PACKAGES takes precedence
        over R_DEFAULT_PACKAGES. */
     if (! have_cmdarg_default_packages) {
-	char *rdpvar = "R_DEFAULT_PACKAGES";
+	char *rdpvar = (char *) "R_DEFAULT_PACKAGES";
 	char *rsdp = getenv("R_SCRIPT_DEFAULT_PACKAGES");
 	if (rsdp && strlen(rdpvar) + strlen(rsdp) + 1 < sizeof(buf2)) {
 	    snprintf(buf2, sizeof(buf2), "%s=%s", rdpvar, rsdp);
@@ -319,7 +320,7 @@ int main(int argc_, char *argv_[])
     int legacy = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
     //int legacy = (p && (strcmp(p, "no") == 0)) ? 0 : 1;
     if(legacy && !set_dp && !getenv("R_DEFAULT_PACKAGES"))
-	putenv("R_DEFAULT_PACKAGES=datasets,utils,grDevices,graphics,stats");
+	putenv((char *) "R_DEFAULT_PACKAGES=datasets,utils,grDevices,graphics,stats");
 
 #ifndef _WIN32
     /* pass on r_arch from this binary to R as a default */

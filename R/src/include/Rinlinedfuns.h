@@ -21,7 +21,7 @@
 /* Internal header, not installed */
 
 /* this header is always to be included from others.
-   It is only called if COMPILING_R is defined (in util.c) or
+   It is only called if COMPILING_R is defined (in util.cpp) or
    from GNU C systems.
 
    There are different conventions for inlining across compilation units.
@@ -468,7 +468,7 @@ INLINE_FUN void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
 
 #if !defined(COMPILING_R) && !defined(COMPILING_MEMORY_C) &&	\
     !defined(TESTING_WRITE_BARRIER)
-/* if not inlining use version in memory.c with more error checking */
+/* if not inlining use version in memory.cpp with more error checking */
 INLINE_FUN SEXP STRING_ELT(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return ALTSTRING_ELT(x, i);
@@ -522,7 +522,7 @@ INLINE_FUN void R_Reprotect(SEXP s, PROTECT_INDEX i)
 }
 #endif /* INLINE_PROTECT */
 
-/* from dstruct.c */
+/* from dstruct.cpp */
 
 /*  length - length of objects  */
 
@@ -568,9 +568,10 @@ R_xlen_t Rf_envxlength(SEXP rho);
 
 INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
 {
-    switch (TYPEOF(s)) {
+    switch (TYPEOF(s))
+    {
     case NILSXP:
-	return 0;
+        return 0;
     case LGLSXP:
     case INTSXP:
     case REALSXP:
@@ -580,23 +581,24 @@ INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
     case VECSXP:
     case EXPRSXP:
     case RAWSXP:
-	return XLENGTH(s);
+        return XLENGTH(s);
     case LISTSXP:
     case LANGSXP:
     case DOTSXP:
     {
-	// it is implausible this would be >= 2^31 elements, but allow it
-	R_xlen_t i = 0;
-	while (s != NULL && s != R_NilValue) {
-	    i++;
-	    s = CDR(s);
-	}
-	return i;
+        // it is implausible this would be >= 2^31 elements, but allow it
+        R_xlen_t i = 0;
+        while (s != NULL && s != R_NilValue)
+        {
+            i++;
+            s = CDR(s);
+        }
+        return i;
     }
     case ENVSXP:
-	return Rf_envxlength(s);
+        return Rf_envxlength(s);
     default:
-	return 1;
+        return 1;
     }
 }
 
@@ -606,12 +608,19 @@ INLINE_FUN SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
     return allocVector3(type, length, NULL);
 }
 
-/* from list.c */
+/* from list.cpp */
 /* Return a dotted pair with the given CAR and CDR. */
 /* The (R) TAG slot on the cell is set to NULL. */
 
 
 /* Get the i-th element of a list */
+    /** @brief i-th element of a list.
+     *
+     * @param list SEXP object.
+     * @param i i-th element of that object.
+     *
+     * @return i-th element.
+     */
 INLINE_FUN SEXP Rf_elt(SEXP list, int i)
 {
     int j;
@@ -779,7 +788,7 @@ INLINE_FUN Rboolean Rf_conformable(SEXP x, SEXP y)
     return TRUE;
 }
 
-/* NOTE: R's inherits() is based on inherits3() in ../main/objects.c
+/* NOTE: R's inherits() is based on inherits3() in ../main/objects.cpp
  * Here, use char / CHAR() instead of the slower more general translateChar()
  */
 INLINE_FUN Rboolean Rf_inherits(SEXP s, const char *name)
@@ -910,7 +919,7 @@ INLINE_FUN Rboolean Rf_isFrame(SEXP s)
     return FALSE;
 }
 
-/* DIFFERENT than R's  is.language(.) in ../main/coerce.c [do_is(), case 301:]
+/* DIFFERENT than R's  is.language(.) in ../main/coerce.cpp [do_is(), case 301:]
  *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
 INLINE_FUN Rboolean Rf_isLanguage(SEXP s)
 {
@@ -1111,8 +1120,7 @@ INLINE_FUN SEXP Rf_mkString(const char *s)
 }
 
 /* index of a given C string in (translated) R string vector  */
-INLINE_FUN int
-stringPositionTr(SEXP string, const char *translatedElement) {
+INLINE_FUN int Rf_stringPositionTr(SEXP string, const char *translatedElement) {
 
     int slen = LENGTH(string);
     int i;

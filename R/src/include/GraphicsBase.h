@@ -36,8 +36,8 @@ typedef struct {
     Rboolean baseDevice;  /* Has the device received base output? */
 } baseSystemState;
 
-void registerBase(void); /* used in devices.c */
-void unregisterBase(void); /* used in devices.c */
+void registerBase(void); /* used in devices.cpp */
+void unregisterBase(void); /* used in devices.cpp */
 
 void Rf_setBaseDevice(Rboolean val, pGEDevDesc dd); /* used in graphics.c */
 

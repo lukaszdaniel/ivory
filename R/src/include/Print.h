@@ -43,6 +43,9 @@
 #define R_print_par_t R_PrintData
 
 extern R_print_par_t R_print;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Computation of printing formats */
 void Rf_formatRaw(const Rbyte *, R_xlen_t, int *);
@@ -68,6 +71,9 @@ void Rf_printVector(SEXP, int, int);
 
 /* Utilities for S compatibility and debuggging */
 void R_PV(SEXP s);
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 /* Offset for rowlabels if there are named dimnames */
 #define R_MIN_LBLOFF 2

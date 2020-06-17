@@ -32,12 +32,18 @@ extern Rboolean EmitEmbeddedUTF8;
 /* originally from Defn.h : */
 
 #include <R_ext/Visibility.h>  // includes NORET macro
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 NORET void R_CleanUp(SA_TYPE, int, int);
 void R_StartUp(void);
 
 FILE *R_OpenInitFile(void);
 FILE *R_OpenSysInitFile(void);
 FILE *R_OpenSiteFile(void);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* STARTUP_H */

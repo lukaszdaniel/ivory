@@ -24,7 +24,7 @@
 /* Used by third-party graphics devices.
  *
  * This defines DevDesc, whereas GraphicsEngine.h defines GEDevDesc.
- * Also contains entry points from gevents.c
+ * Also contains entry points from gevents.cpp
  */
 
 #ifndef R_GRAPHICSDEVICE_H_
@@ -152,10 +152,10 @@ struct _DevDesc {
     Rboolean canGenMouseUp;   /* can the device generate mouseup events */
     Rboolean canGenKeybd;     /* can the device generate keyboard events */
     Rboolean canGenIdle;      /* can the device generate idle events */
- 
+
     Rboolean gettingEvent;    /* This is set while getGraphicsEvent
 				 is actively looking for events */
-    
+
     /********************************************************
      * Device procedures.
      ********************************************************/
@@ -340,7 +340,7 @@ struct _DevDesc {
     /*
      * device_Mode is called whenever the graphics engine
      * starts drawing (mode=1) or stops drawing (mode=0)
-     * GMode (in graphics.c) also says that 
+     * GMode (in graphics.cpp) also says that 
      * mode = 2 (graphical input on) exists.
      * The device is not required to do anything
      * An example is ...
@@ -381,7 +381,7 @@ struct _DevDesc {
      * If "fill" is NA_INTEGER don't fill the polygon
      * An example is ...
      *
-     * static void X11_Polygon(int n, double *x, double *y,
+     * static void X11_Polygon(int n, const double *x, const double *y,
      *                         const pGEcontext gc,
      *                         pDevDesc dd);
      *
@@ -389,7 +389,7 @@ struct _DevDesc {
      *   col, fill, gamma, lty, lwd
      */
 #if R_USE_PROTOTYPES
-    void (*polygon)(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd);
+    void (*polygon)(int n, const double *x, const double *y, const pGEcontext gc, pDevDesc dd);
 #else
     void (*polygon)();
 #endif
@@ -399,7 +399,7 @@ struct _DevDesc {
      * and y values.
      * An example is ...
      *
-     * static void X11_Polyline(int n, double *x, double *y,
+     * static void X11_Polyline(int n, const double *x, const double *y,
      *                          const pGEcontext gc,
      *                          pDevDesc dd);
      *
@@ -407,7 +407,7 @@ struct _DevDesc {
      *   col, gamma, lty, lwd
      */
 #if R_USE_PROTOTYPES
-    void (*polyline)(int n, double *x, double *y, const pGEcontext gc, pDevDesc dd);
+    void (*polyline)(int n, const double *x, const double *y, const pGEcontext gc, pDevDesc dd);
 #else
     void (*polyline)();
 #endif
@@ -634,7 +634,7 @@ struct _DevDesc {
     /* --------- Post-2.7.0 features --------- */
 
     /* Added in 2.12.0:  Changed graphics event handling. */
-    
+
     SEXP eventEnv;   /* This is an environment holding event handlers. */
     /*
      * eventHelper(dd, 1) is called by do_getGraphicsEvent before looking for a 
@@ -802,10 +802,10 @@ void Rf_killDevice(int);
 
 int Rf_NoDevices(void); /* used in engine, graphics, plot, grid */
 
-void Rf_NewFrameConfirm(pDevDesc); /* used in graphics.c, grid */
+void Rf_NewFrameConfirm(pDevDesc); /* used in graphics.cpp, grid */
 
 
-/* Graphics events: defined in gevents.c */
+/* Graphics events: defined in gevents.cpp */
 
 /* These give the indices of some known keys */
 
@@ -846,12 +846,12 @@ Rboolean Rf_doesIdle(pDevDesc dd);
 /* Macros for suspending interrupts */
 #define BEGIN_SUSPEND_INTERRUPTS do { \
     Rboolean __oldsusp__ = R_interrupts_suspended; \
-    R_interrupts_suspended = TRUE;
+    R_interrupts_suspended = (Rboolean) TRUE;
 #define END_SUSPEND_INTERRUPTS R_interrupts_suspended = __oldsusp__; \
     if (R_interrupts_pending && ! R_interrupts_suspended) \
         Rf_onintr(); \
 } while(0)
-    
+
 #include <R_ext/libextern.h>
 LibExtern Rboolean R_interrupts_suspended;    
 LibExtern int R_interrupts_pending;
@@ -860,13 +860,13 @@ LibExtern Rboolean mbcslocale;
 #endif
 
 /* Useful for devices: translates Adobe symbol encoding to UTF-8 */
-extern void *Rf_AdobeSymbol2utf8(char*out, const char *in, size_t nwork,
-                              Rboolean usePUA);
-extern int Rf_utf8toAdobeSymbol(char* out, const char *in);
-const char* Rf_utf8Toutf8NoPUA(const char *in);
-const char* Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
+void *Rf_AdobeSymbol2utf8(char *out, const char *in, size_t nwork,
+                          Rboolean usePUA);
+int Rf_utf8toAdobeSymbol(char *out, const char *in);
+const char *Rf_utf8Toutf8NoPUA(const char *in);
+const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
 /* Translates Unicode point to UTF-8 */
-extern size_t Rf_ucstoutf8(char *s, const unsigned int c);
+size_t Rf_ucstoutf8(char *s, const unsigned int c);
 
 #ifdef __cplusplus
 } //extern "C"

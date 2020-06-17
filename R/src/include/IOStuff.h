@@ -69,6 +69,10 @@ HIDDEN
 #endif
 IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*- some of these really could be void */
 int R_IoBufferInit(IoBuffer *);
 int R_IoBufferFree(IoBuffer *);
@@ -82,5 +86,9 @@ int R_IoBufferReadOffset(IoBuffer *);
 int R_TextBufferInit(TextBuffer *, SEXP);
 int R_TextBufferFree(TextBuffer *);
 int R_TextBufferGetc(TextBuffer *);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* R_IOSTUFF_H */

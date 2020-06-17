@@ -561,6 +561,32 @@ fi
 AC_SUBST_FILE(r_cxx_rules_frag)
 ])# R_PROG_CXX_MAKEFRAG
 
+## R_PROG_CXX_LO_MAKEFRAG
+## ---------------------
+## Generate a Make fragment with suffix rules for the C++ compiler.
+## Used for both building R (Makeconf) and add-ons (etc/Makeconf).
+## Need to make .lo files in src/nmath/standalone only
+## NB test -d .libs || mkdir .libs can be run more than once
+##    and hence race when a parallel make is used
+AC_DEFUN([R_PROG_CXX_LO_MAKEFRAG],
+[r_cxx_lo_rules_frag=Makefrag.cxx_lo
+AC_REQUIRE([R_PROG_CC_C_O_LO])
+if test "${r_cv_prog_cc_c_o_lo}" = yes; then
+  cat << \EOF > ${r_cxx_lo_rules_frag}
+.cpp.lo:
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CFLAGS_LO) -c $< -o $[@]
+EOF
+else
+  cat << \EOF > ${r_cxx_lo_rules_frag}
+.cpp.lo:
+	@-test -d .libs || mkdir .libs
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CFLAGS_LO) -c $< -o .libs/$[*].o
+	mv .libs/$[*].o $[*].lo
+EOF
+fi
+AC_SUBST_FILE(r_cxx_lo_rules_frag)
+])# R_PROG_CXX_LO_MAKEFRAG
+
 ## R_PROG_CXX_FLAG
 ## ---------------
 ## Check whether the C++ compiler handles command line option FLAG,

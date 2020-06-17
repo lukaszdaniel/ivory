@@ -25,7 +25,7 @@
 /* 
    C declarations of double-precision LINPACK Fortran subroutines
    included in R, and some others.
-   
+
    Those which are listed as part of R are in the API
  */
 

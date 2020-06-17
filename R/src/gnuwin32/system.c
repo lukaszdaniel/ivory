@@ -635,7 +635,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 
 extern int DialogSelectFile(char *buf, int len); /* from rui.c */
 
-int R_ChooseFile(int new, char *buf, int len)
+size_t R_ChooseFile(int new, char *buf, size_t len)
 {
     return DialogSelectFile(buf, len);
 }

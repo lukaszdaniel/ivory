@@ -61,34 +61,33 @@ double	Rf_gamma_cody(double);
 #ifndef MATHLIB_STANDALONE
 
 #include <R_ext/Error.h>
-# define MATHLIB_ERROR(fmt,x)		error(fmt,x);
-# define MATHLIB_WARNING(fmt,x)		warning(fmt,x)
-# define MATHLIB_WARNING2(fmt,x,x2)	warning(fmt,x,x2)
-# define MATHLIB_WARNING3(fmt,x,x2,x3)	warning(fmt,x,x2,x3)
-# define MATHLIB_WARNING4(fmt,x,x2,x3,x4) warning(fmt,x,x2,x3,x4)
-# define MATHLIB_WARNING5(fmt,x,x2,x3,x4,x5) warning(fmt,x,x2,x3,x4,x5)
+# define MATHLIB_ERROR(fmt,x)		Rf_error(fmt,x);
+# define MATHLIB_WARNING(fmt,x)		Rf_warning(fmt,x)
+# define MATHLIB_WARNING2(fmt,x,x2)	Rf_warning(fmt,x,x2)
+# define MATHLIB_WARNING3(fmt,x,x2,x3)	Rf_warning(fmt,x,x2,x3)
+# define MATHLIB_WARNING4(fmt,x,x2,x3,x4) Rf_warning(fmt,x,x2,x3,x4)
+# define MATHLIB_WARNING5(fmt,x,x2,x3,x4,x5) Rf_warning(fmt,x,x2,x3,x4,x5)
 
 #include <R_ext/Arith.h>
 #define ML_POSINF	R_PosInf
 #define ML_NEGINF	R_NegInf
 #define ML_NAN		R_NaN
 
-
+extern "C"
 void R_CheckUserInterrupt(void);
 /* Ei-ji Nakama reported that AIX 5.2 has calloc as a macro and objected
    to redefining it.  Tests added for 2.2.1 */
-#ifdef calloc
-# undef calloc
-#endif
-#define calloc R_chk_calloc
-#ifdef free
-# undef free
-#endif
-#define free R_chk_free
+// #ifdef calloc
+// # undef calloc
+// #endif
+// #define calloc R_chk_calloc
+// #ifdef free
+// # undef free
+// #endif
+// #define free R_chk_free
 
 /* Localization */
-
-#include "Localization.h"
+#include <Localization.h>
 
 #else
 /* Mathlib standalone */
@@ -143,29 +142,32 @@ int R_finite(double);
    We don't report ME_DOMAIN errors as the callers collect ML_NANs into
    a single warning.
  */
-#define ML_WARNING(x, s) { \
-   if(x > ME_DOMAIN) { \
-       char *msg = ""; \
-       switch(x) { \
-       case ME_DOMAIN: \
-	   msg = _("argument out of domain in '%s' function");	\
-	   break; \
-       case ME_RANGE: \
-	   msg = _("value out of range in '%s' function");	\
-	   break; \
-       case ME_NOCONV: \
-	   msg = _("convergence failed in '%s' function");	\
-	   break; \
-       case ME_PRECISION: \
-	   msg = _("full precision may not have been achieved in '%s' function"); \
-	   break; \
-       case ME_UNDERFLOW: \
-	   msg = _("underflow occurred in '%s' function");	\
-	   break; \
-       } \
-       MATHLIB_WARNING(msg, s); \
-   } \
-}
+#define ML_WARNING(x, s)                                                           \
+   {                                                                               \
+      if (x > ME_DOMAIN)                                                           \
+      {                                                                            \
+         const char *msg = "";                                                     \
+         switch (x)                                                                \
+         {                                                                         \
+         case ME_DOMAIN:                                                           \
+            msg = _("argument out of domain in '%s' function");                    \
+            break;                                                                 \
+         case ME_RANGE:                                                            \
+            msg = _("value out of range in '%s' function");                        \
+            break;                                                                 \
+         case ME_NOCONV:                                                           \
+            msg = _("convergence failed in '%s' function");                        \
+            break;                                                                 \
+         case ME_PRECISION:                                                        \
+            msg = _("full precision may not have been achieved in '%s' function"); \
+            break;                                                                 \
+         case ME_UNDERFLOW:                                                        \
+            msg = _("underflow occurred in '%s' function");                        \
+            break;                                                                 \
+         }                                                                         \
+         MATHLIB_WARNING(msg, s);                                                  \
+      }                                                                            \
+   }
 
 /* Wilcoxon Rank Sum Distribution */
 
@@ -194,7 +196,7 @@ int R_finite(double);
 HIDDEN int Rf_chebyshev_init(double*, int, double);
 HIDDEN double Rf_chebyshev_eval(double, const double *, const int);
 
-	/* Gamma and Related Functions */
+/* Gamma and Related Functions */
 
 HIDDEN void Rf_gammalims(double*, double*);
 HIDDEN double Rf_lgammacor(double); /* log(gamma) correction */
@@ -204,17 +206,16 @@ HIDDEN double Rf_lfastchoose(double, double);
 
 HIDDEN double Rf_bd0(double, double);
 
-HIDDEN double Rf_pnchisq_raw(double, double, double, double, double,
-				     int, Rboolean, Rboolean);
+HIDDEN double Rf_pnchisq_raw(double, double, double, double, double, int, Rboolean, Rboolean);
 HIDDEN double Rf_pgamma_raw(double, double, int, int);
 HIDDEN double Rf_pbeta_raw(double, double, double, int, int);
 HIDDEN double Rf_qchisq_appr(double, double, double, int, int, double tol);
 HIDDEN LDOUBLE Rf_pnbeta_raw(double, double, double, double, double);
 HIDDEN double Rf_pnbeta2(double, double, double, double, double, int, int);
 
-int	Rf_i1mach(int);
+int Rf_i1mach(int);
 
-/* From toms708.c */
+/* From toms708.cpp */
 HIDDEN void Rf_bratio(double a, double b, double x, double y,
 	    		     double *w, double *w1, int *ierr, int log_p);
 
