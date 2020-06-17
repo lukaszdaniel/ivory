@@ -1225,7 +1225,7 @@ typedef enum
 
 /* Other Internally Used Functions, excluding those which are inline-able*/
 
-char * Rf_acopy_string(const char *);
+char *Rf_acopy_string(const char *);
 void Rf_addMissingVarsToNewEnv(SEXP, SEXP);
 SEXP Rf_alloc3DArray(SEXPTYPE, int, int, int);
 SEXP Rf_allocArray(SEXPTYPE, SEXP);
@@ -1238,15 +1238,15 @@ SEXP Rf_allocMatrix(SEXPTYPE, int, int);
 SEXP Rf_allocList(int);
 SEXP Rf_allocS4Object(void);
 SEXP Rf_allocSExp(SEXPTYPE);
-SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t*);
+SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t *);
 R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last);
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last);
 SEXP Rf_applyClosure(SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rf_arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP,SEXP),
+SEXP Rf_arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP, SEXP),
                        SEXP (*)(SEXP, int), SEXP);
 SEXP Rf_classgets(SEXP, SEXP);
 SEXP Rf_cons(SEXP, SEXP);
-SEXP Rf_fixSubset3Args(SEXP, SEXP, SEXP, SEXP*);
+SEXP Rf_fixSubset3Args(SEXP, SEXP, SEXP, SEXP *);
 void Rf_copyMatrix(SEXP, SEXP, Rboolean);
 void Rf_copyListMatrix(SEXP, SEXP, Rboolean);
 void Rf_copyMostAttrib(SEXP, SEXP);
@@ -1277,7 +1277,7 @@ void R_removeVarFromFrame(SEXP, SEXP);
 SEXP Rf_getAttrib(SEXP, SEXP);
 SEXP Rf_GetArrayDimnames(SEXP);
 SEXP Rf_GetColNames(SEXP);
-void Rf_GetMatrixDimnames(SEXP, SEXP*, SEXP*, const char**, const char**);
+void Rf_GetMatrixDimnames(SEXP, SEXP *, SEXP *, const char **, const char **);
 SEXP Rf_GetOption(SEXP, SEXP); /* pre-2.13.0 compatibility */
 SEXP Rf_GetOption1(SEXP);
 int Rf_FixupDigits(SEXP, warn_type);

@@ -86,7 +86,7 @@ R/tests/Makefile
 R/tools/Makefile
 R/etc/Makefile
 R/src/nmath/standalone/*.lo
-R/src/nmath/standalone/*.c
+R/src/nmath/standalone/*.cpp
 R/src/nmath/standalone/check.log
 R/tests/Examples/*.R
 R/tests/Examples/*.R-cnt
