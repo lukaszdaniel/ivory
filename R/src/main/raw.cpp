@@ -267,8 +267,8 @@ HIDDEN SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* Based on PCRE, but current Unicode only needs 4 bytes with maximum 0x10ffff */
-static const int utf8_table1[] = { 0x7f, 0x7ff, 0xffff, 0x1fffff };
-static const int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0 };
+static constexpr int utf8_table1[] = { 0x7f, 0x7ff, 0xffff, 0x1fffff };
+static constexpr int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0 };
 
 static size_t inttomb(char *s, const int wc)
 {

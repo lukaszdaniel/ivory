@@ -32,6 +32,9 @@
 #include <float.h>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
+#include <vector>
+#include <string>
+
 using namespace std;
 
 #undef COMPILING_R
@@ -115,22 +118,6 @@ void Rf_internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 }
 #endif
 
-const static char * const truenames[] = {
-    "T",
-    "True",
-    "TRUE",
-    "true",
-    (char *) NULL,
-};
-
-const static char * const falsenames[] = {
-    "F",
-    "False",
-    "FALSE",
-    "false",
-    (char *) NULL,
-};
-
 SEXP Rf_asChar(SEXP x)
 {
 	if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
@@ -171,14 +158,14 @@ SEXP Rf_asChar(SEXP x)
     return NA_STRING;
 }
 
-Rboolean isUnordered(SEXP s)
+Rboolean Rf_isUnordered(SEXP s)
 {
     return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
 	    && !inherits(s, "ordered"));
 }
 
-Rboolean isOrdered(SEXP s)
+Rboolean Rf_isOrdered(SEXP s)
 {
     return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
@@ -354,9 +341,9 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
    (and it commonly is).  These functions do not. */
 # ifdef WORDS_BIGENDIAN
-static const char UCS2ENC[] = "UCS-2BE";
+static constexpr char UCS2ENC[] = "UCS-2BE";
 # else
-static const char UCS2ENC[] = "UCS-2LE";
+static constexpr char UCS2ENC[] = "UCS-2LE";
 # endif
 
 
@@ -366,7 +353,7 @@ static const char UCS2ENC[] = "UCS-2LE";
 /* Note: this does not terminate out, as all current uses are to look
  * at 'out' a wchar at a time, and sometimes just one char.
  */
-size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
+size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 {
     void   *cd = NULL ;
     const char *i_buf;
@@ -431,21 +418,25 @@ Rboolean Rf_StringBlank(SEXP x)
 
 Rboolean Rf_StringTrue(const char* name)
 {
-    for (int i = 0; truenames[i]; i++)
-	if (streql(name, truenames[i]))
+    string str(name);
+    vector<string> truenames { "T", "True", "TRUE", "true" };
+    for (const string& word : truenames)
+	if (str == word)
 	    return TRUE;
     return FALSE;
 }
 
 Rboolean Rf_StringFalse(const char* name)
 {
-    for (int i = 0; falsenames[i]; i++)
-	if (streql(name, falsenames[i]))
+    vector<string> falsenames { "F", "False", "FALSE", "false" };
+    string str(name);
+    for (const string& word : falsenames)
+	if (str == word)
 	    return TRUE;
     return FALSE;
 }
 
-/* used in bind.c and options.c */
+/* used in bind.cpp and options.cpp */
 HIDDEN SEXP Rf_EnsureString(SEXP s)
 {
     switch(TYPEOF(s)) {
@@ -531,27 +522,30 @@ HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(nargs);
 }
 
-
-/* formerly used in subscript.c, in Utils.h */
-HIDDEN void Rf_setIVector(int * vec, int len, int val)
+template <typename T>
+HIDDEN void setVector(T *vec, const int &len, const T &val)
 {
-    for (int i = 0; i < len; i++) vec[i] = val;
+	for (int i = 0; i < len; i++)
+		vec[i] = val;
 }
-
+/* formerly used in subscript.cpp, in Utils.h */
+HIDDEN void Rf_setIVector(int *vec, int len, int val)
+{
+	setVector(vec, len, val);
+}
 
 /* unused in R, in Utils.h, may have been used in Rcpp at some point,
       but not any more (as per Nov. 2018)  */
-HIDDEN void Rf_setRVector(double * vec, int len, double val)
+HIDDEN void Rf_setRVector(double *vec, int len, double val)
 {
-    for (int i = 0; i < len; i++) vec[i] = val;
+	setVector(vec, len, val);
 }
 
 /* unused in R, in Rinternals.h */
-void Rf_setSVector(SEXP * vec, int len, SEXP val)
+void Rf_setSVector(SEXP *vec, int len, SEXP val)
 {
-    for (int i = 0; i < len; i++) vec[i] = val;
+	setVector(vec, len, val);
 }
-
 
 Rboolean Rf_isFree(SEXP val)
 {
@@ -675,7 +669,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* 2. allocate and store result components */
 
     const char *nms[] = {"xi", "yi", "x.alone", "y.alone", ""};
-    ans = PROTECT(mkNamed(VECSXP, nms));
+    ans = PROTECT(Rf_mkNamed(VECSXP, nms));
     ansx = allocVector(INTSXP, nans);    SET_VECTOR_ELT(ans, 0, ansx);
     ansy = allocVector(INTSXP, nans);    SET_VECTOR_ELT(ans, 1, ansy);
 
@@ -1227,7 +1221,7 @@ Rboolean Rf_strIsASCII(const char *const str)
 }
 
 /* Number of additional bytes */
-static const unsigned char utf8_table4[] = {
+constexpr unsigned char utf8_table4[] = {
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -1359,9 +1353,9 @@ size_t Rf_utf8towcs(wchar_t *wc, const char * const s, size_t n)
 }
 
 /* based on pcre.c */
-static const unsigned int utf8_table1[] =
+constexpr unsigned int utf8_table1[] =
 	{0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff};
-static const unsigned int utf8_table2[] = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
+constexpr unsigned int utf8_table2[] = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
 /* s is NULL, or it contains at least n bytes.  Just write a a terminator if it's not big enough. */
 

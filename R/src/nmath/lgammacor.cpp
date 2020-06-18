@@ -45,7 +45,7 @@
 
 HIDDEN double Rf_lgammacor(double x)
 {
-    const static double algmcs[15] = {
+    static constexpr double algmcs[15] = {
 	+.1666389480451863247205729650822e+0,
 	-.1384948176067563840732986059135e-4,
 	+.9810825646924729426157171547487e-8,
@@ -68,9 +68,9 @@ HIDDEN double Rf_lgammacor(double x)
 /* For IEEE double precision DBL_EPSILON = 2^-52 = 2.220446049250313e-16 :
  *   xbig = 2 ^ 26.5
  *   xmax = DBL_MAX / 48 =  2^1020 / 3 */
-#define nalgm 5
-#define xbig  94906265.62425156
-#define xmax  3.745194030963158e306
+constexpr int nalgm = 5;
+constexpr double xbig = 94906265.62425156;
+constexpr double xmax = 3.745194030963158e306;
 
     if (x < 10)
 	ML_WARN_return_NAN

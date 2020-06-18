@@ -106,7 +106,7 @@ predict.coxph.penal <- function(object,  newdata,
 	# Collapse over subjects, if requested
 	if (!missing(collapse)) {
 	    if (length(collapse) != n) 
-		    stop("Collapse vector is the wrong length")
+		    stop("Collapse vector is of the wrong length")
 	    pred <- drop(rowsum(pred, collapse))
 	    if (se.fit) se <- sqrt(drop(rowsum(se^2, collapse)))
 	    }

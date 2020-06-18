@@ -76,7 +76,7 @@ terms.inner <- function(x) {
 #  which for the above is 1,0,2,3.  This assumes no overlapping intervals
 
 survflag <- function(y, id) {
-    if (!inherits(y, "Surv")) stop("y must be a Surv object")
+    if (!inherits(y, "Surv")) gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
     if (nrow(y) != length(id)) stop("length mismatch")
     if (ncol(y) != 3) stop("y needs to be of (tstart, tstop) form")
   

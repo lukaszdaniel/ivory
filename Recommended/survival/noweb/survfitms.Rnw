@@ -265,7 +265,7 @@ summary.survfit <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) 
     }
 
     # adding time 0 makes the mean and median easier
@@ -418,6 +418,8 @@ findrow <- function(fit, times, extend) {
     
     index1 <- findInterval(ptimes, fit$time) 
     index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
+    if (length(index1) ==0)
+        stop("no points selected for one or more curves, consider using the extend argument")
     # The pmax() above encodes the assumption that n.risk for any
     #  times before the first observation = n.risk at the first obs
     fit$time <- ptimes
@@ -499,7 +501,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     fit0 <- survfit0(fit, fit$start.time) # add time 0
@@ -600,7 +602,7 @@ print.survfitms <- function(x, scale=1,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for 'rmean' option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     temp <- survmean2(x, scale=scale, rmean)
@@ -663,7 +665,7 @@ survmean2 <- function(x, scale=1, rmean) {
         outmat[,1] <- rep(x$n, nstate*ndata)
         outmat[, 2] <- rep(c(nevent), each=ndata)
        
-        temp <- outer(1:ndata, x$states, paste, sep=", ")
+        temp <- outer(seq_len(ndata), x$states, paste, sep=", ")
         if (ngrp >1) 
             rowname <- c(outer(rname, temp, paste, sep=", "))
         else rowname <- temp

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:45+0100\n"
+"POT-Creation-Date: 2020-06-17 19:43+0200\n"
 "PO-Revision-Date: 2018-07-19 19:19+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -272,7 +272,7 @@ msgstr "'fseek(%d)' nie powiodło się na pliku DBF"
 msgid "fread(%d) failed on DBF file"
 msgstr "'fread(%d)' nie powiodło się na pliku DBF"
 
-#: file-handle.c:115
+#: file-handle.c:112
 #, c-format
 msgid "file handle `%s' has not been previously declared on FILE HANDLE"
 msgstr "obsługa pliku '%s' nie została poprzednio zadeklarowana w FILE HANDLE"

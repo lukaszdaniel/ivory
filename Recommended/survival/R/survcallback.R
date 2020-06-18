@@ -55,7 +55,7 @@ survcallback <- function(pcols, pattr, assign, x) {
 	# Remove the sparse term from the X matrix
 	frailx <- x[, fcol]
 	x <- x[, -fcol, drop=FALSE]
-	for (i in 1:length(assign)){
+	for (i in seq_along(assign)){
 	    j <- assign[[i]]
 	    if (j[1] > fcol) assign[[i]] <- j-1
 	    }

@@ -136,7 +136,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     if (!missing(start.time)) {
         if (!is.numeric(start.time) || length(start.time) !=1
             || !is.finite(start.time))
-            stop("start.time must be a single numeric value")
+            stop(gettextf("'%s' argument must be a single numeric value", "start.time"))
         toss <- which(Y[,ncol(Y)-1] <= start.time)
         if (length(toss)) {
             n <- nrow(Y)
@@ -162,7 +162,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     if (has.id) id <- as.factor(id)
     else  {
         if (ncol(Y) ==3) stop("an id statement is required for start,stop data")
-        id <- 1:n  # older default, which could lead to invalid curves
+        id <- seq_len(n)  # older default, which could lead to invalid curves
     }
     if (influence && !(has.cluster || has.id)) {
         cluster <- seq(along=X)

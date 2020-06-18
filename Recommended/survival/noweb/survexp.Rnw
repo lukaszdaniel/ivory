@@ -69,7 +69,7 @@ Call <- match.call()
 # keep the first element (the call), and the following selected arguments
 indx <- match(c('formula', 'data', 'weights', 'subset', 'na.action'),
                   names(Call), nomatch=0)
-if (indx[1] ==0) stop("A formula argument is required")
+if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 tform <- Call[c(1,indx)]  # only keep the arguments we wanted
 tform[[1L]] <- quote(stats::model.frame)  # change the function called
     
@@ -163,7 +163,7 @@ else if(inherits(ratetable, "coxph") && !inherits(ratetable, "coxphms")) {
     #   variable names
     varlist <- all.vars(delete.response(ratetable$terms))
     }
-else stop("Invalid rate table")
+else stop("invalid rate table")
 
 temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
 if (any(is.na(temp)))
@@ -309,7 +309,7 @@ else if (inherits(ratetable, 'coxph')) {
     if (any(names(mf[,rate]) !=  attr(ratetable$terms, 'term.labels')))
          stop("Unable to match new data to old formula")
     }
-else stop("Invalid ratetable")
+else stop("invalid rate table")
 @ 
 
 Now for some calculation.  If cohort is false, then any covariates on the

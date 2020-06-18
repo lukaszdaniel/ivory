@@ -69,9 +69,9 @@ c0b61bd5af27cef5527d99efaaee0a17 *DESCRIPTION
 10e53072b7a7b604206cbe607f8b41d8 *po/R-fr.po
 799169ecc009326ca0f53399287a6c38 *po/R-ko.po
 3843cc783842fba99f4066e996261903 *po/R-de.po
-50a79425a127598e46c174291905c174 *po/R-lattice.pot
+5da2618f2159e01309c48f488b4b303e *po/R-lattice.pot
 8c9a90c140da594f1d344f1b4a305798 *po/R-pl.po
-8baf65a3810b8ea428cec7e7ded360eb *po/lattice.pot
+3c51daacaf267314b83da23cd046a469 *po/lattice.pot
 727c4beb4897b4909405e84ba01ce0bc *po/R-en@quot.po
 41662f59de40581fd680540fa4aad2e9 *po/pl.po
 7199eb188d519ce084efef5ed75633be *NEWS
@@ -83,7 +83,7 @@ aeb8a42c24baed6f0918691449a49681 *demo/lattice.R
 9ec1d932fca442660b60818b0be9c0f3 *demo/labels.R
 a6a64750f8d29e22e7abaf210b1dded4 *inst/CITATION
 3ba595c2db246c203845a63dc441bcca *inst/po/fr/LC_MESSAGES/R-lattice.mo
-6d1aed7a6f5ef0a2567e054bed61a80a *inst/po/en@quot/LC_MESSAGES/R-lattice.mo
+aa5777aefc5f1ec2add5a9b42cd69057 *inst/po/en@quot/LC_MESSAGES/R-lattice.mo
 951320168b0a54e8f4d9707179a605fc *inst/po/de/LC_MESSAGES/R-lattice.mo
 c8513981384a3d7de1536ee8081b9a57 *inst/po/pl/LC_MESSAGES/R-lattice.mo
 400d131a41e30611218414c96e7c7dfd *inst/po/ko/LC_MESSAGES/R-lattice.mo

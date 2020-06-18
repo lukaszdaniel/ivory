@@ -60,7 +60,7 @@ concordance.formula <- function(formula, data,
     temp$formula <- if(missing(data)) terms(formula, special)
                     else              terms(formula, special, data=data)
     mf <- eval(temp, parent.frame())  # model frame
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
     Y <- model.response(mf)
@@ -122,7 +122,7 @@ concordance.formula <- function(formula, data,
 
 print.concordance <- function(x, ...) {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
@@ -856,7 +856,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
         strata <- as.factor(strata)
         ustrat <- levels(strata)[table(strata) >0]  #some strata may have 0 obs
         count <- matrix(0., nrow=length(ustrat), ncol=5)
-        for (i in 1:length(ustrat)) {
+        for (i in seq_along(ustrat)) {
             keep <- which(strata == ustrat[i])
             count[i,] <- docount(y[keep,,drop=F], x[keep], weight[keep])
         }

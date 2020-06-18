@@ -78,7 +78,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     indx <- match(c("formula", "data", "weights", "subset", "na.action",
                     "cluster", "id", "istate"),
                   names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("A formula argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     tform <- Call[c(1,indx)]  # only keep the arguments we wanted
     tform[[1L]] <- quote(stats::model.frame)  # change the function called
 
@@ -111,7 +111,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
 
     # add specials to the formula
-    special <- c("strata", "tt")
+    special <- c("strata", "tt", "frailty", "ridge", "pspline")
     tform$formula <- if(missing(data)) terms(formula, special) else
                                       terms(formula, special, data=data)
 
@@ -124,12 +124,35 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     # okay, now evaluate the formula
     mf <- eval(tform, parent.frame())
-    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
-    # Grab the response variable
-    Y <- model.extract(mf, "response")
-    if (!inherits(Y, "Surv")) stop("Response must be a survival object")
+    # Grab the response variable, and deal with Surv2 objects
+    n <- nrow(mf)
+    Y <- model.response(mf)
+    isSurv2 <- inherits(Y, "Surv2")
+    if (isSurv2) {
+        # this is Surv2 style data
+        # if there were any obs removed due to missing, remake the model frame
+        if (length(attr(mf, "na.action"))) {
+            tform$na.action <- na.pass
+            mf <- eval.parent(tform)
+        }
+        if (!is.null(attr(Terms, "specials")$cluster))
+            stop("cluster() cannot appear in the model statement")
+        new <- surv2data(mf)
+        mf <- new$mf
+        istate <- new$istate
+        id <- new$id
+        Y <- new$y
+        n <- nrow(mf)
+    }       
+    else {
+        if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
+        id <- model.extract(mf, "id")
+        istate <- model.extract(mf, "istate")
+    }
+    if (n==0) stop("no (non-missing) observations")
+
     type <- attr(Y, "type")
     multi <- FALSE
     if (type=="mright" || type == "mcounting") multi <- TRUE
@@ -139,6 +162,12 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     if (!multi && multiform)
         stop("formula is a list but the response is not multi-state")
+    if (multi && length(attr(Terms, "specials")$frailty) >0)
+        stop("multi-state models do not currently support frailty terms")
+    if (multi && length(attr(Terms, "specials")$pspline) >0)
+        stop("multi-state models do not currently support pspline terms")
+    if (multi && length(attr(Terms, "specials")$ridge) >0)
+        stop("multi-state models do not currently support ridge penalties")
 
     if (control$timefix) Y <- aeqSurv(Y)
     if (length(attr(Terms, 'variables')) > 2) { # a ~1 formula has length 2
@@ -178,7 +207,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     timetrans <- attr(Terms, "specials")$tt
     if (missing(tt)) tt <- NULL
     if (length(timetrans)) {
-        if (multi) stop("the tt() transform is not implemented for multi-state models")
+        if (multi || isSurv2) stop("the tt() transform is not implemented for multi-state or Surv2 models")
          timetrans <- untangle.specials(Terms, 'tt')
          ntrans <- length(timetrans$terms)
 
@@ -271,7 +300,6 @@ coxph <- function(formula, data, weights, subset, na.action,
     # grab the cluster, if present.  Using cluster() in a formula is no
     #  longer encouraged
     cluster <- model.extract(mf, "cluster")
-    id <- model.extract(mf, "id")
     weights <- model.weights(mf)
     # The user can call with cluster, id, robust, or any combination
     # Default for robust: if cluster or any id with > 1 event or 
@@ -329,21 +357,12 @@ coxph <- function(formula, data, weights, subset, na.action,
     contrast.arg <- NULL  #due to shared code with model.matrix.coxph
     attr(Terms, "intercept") <- 1  # always have a baseline hazard
 
-    # Grab the id variable to check out multi-state data
-    id <- model.extract(mf, "id")
     if (multi) {
-        # remove strata from dformula, before any further processing
-        if (length(dropterms)){ 
-            Terms2 <- Terms[-dropterms]
-            dformula <- formula(Terms2)
-        } else Terms2 <- Terms
-
         # check for consistency of the states, and create a transition
         #  matrix
         if (length(id)==0) 
             stop("an id statement is required for multi-state models")
 
-        istate <- model.extract(mf, "istate")
         mcheck <- survcheck2(Y, id, istate)
         # error messages here
         if (mcheck$flag["overlap"] > 0)
@@ -356,9 +375,9 @@ coxph <- function(formula, data, weights, subset, na.action,
         #  build tmap, which has one row per term, one column per transition
         if (missing(statedata))
             covlist2 <- parsecovar2(covlist, NULL, dformula= dformula,
-                                Terms2, transitions, states)
+                                Terms, transitions, states)
         else covlist2 <- parsecovar2(covlist, statedata, dformula= dformula,
-                                Terms2, transitions, states)
+                                Terms, transitions, states)
         tmap <- covlist2$tmap
         if (!is.null(covlist)) {
             # first vector will be true if there is at least 1 transition for which all
@@ -403,7 +422,7 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     if (length(dropterms)) {
         Terms2 <- Terms[ -dropterms]
-        X <- model.matrix(Terms2, mf, constrasts=contrast.arg)
+        X <- model.matrix(Terms2, mf, constrasts.arg=contrast.arg)
         # we want to number the terms wrt the original model matrix
         temp <- attr(X, "assign")
         shift <- sort(dropterms)
@@ -411,7 +430,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         if (length(shift)==2) temp + 1*(shift[2] <= temp)
         attr(X, "assign") <- temp 
     }
-    else X <- model.matrix(Terms, mf, contrasts=contrast.arg)
+    else X <- model.matrix(Terms, mf, contrasts.arg=contrast.arg)
 
     # drop the intercept after the fact, and also drop strata if necessary
     Xatt <- attributes(X) 
@@ -454,8 +473,22 @@ coxph <- function(formula, data, weights, subset, na.action,
         return(rval)
     }
     if (multi) {
+        if (length(strats) >0) {
+            stratum_map <- tmap[c(1L, strats),] # strats includes Y, + tmap has an extra row
+            stratum_map[-1,] <- ifelse(stratum_map[-1,] >0, 1L, 0L)
+            if (nrow(stratum_map) > 2) {
+                temp <- stratum_map[-1,]
+                if (!all(apply(temp, 2, function(x) all(x==0) || all(x==1)))) {
+                    # the hard case: some transitions use one strata variable, some
+                    #  transitions use another.  We need to keep them separate
+                    strata.keep <- mf[,strats]  # this will be a data frame
+                    istrat <- sapply(strata.keep, as.numeric)
+                }
+            }
+        }
+        else stratum_map <- tmap[1,,drop=FALSE]
         cmap <- parsecovar3(tmap, colnames(X), attr(X, "assign"))
-        xstack <- stacker(cmap, as.integer(istate), X, Y, strata=istrat,
+        xstack <- stacker(cmap, stratum_map, as.integer(istate), X, Y, strata=istrat,
                           states=states)
         rkeep <- unique(xstack$rindex)
         transitions <- survcheck2(Y[rkeep,], id[rkeep], istate[rkeep])$transitions
@@ -466,10 +499,10 @@ coxph <- function(formula, data, weights, subset, na.action,
         if (length(offset)) offset <- offset[xstack$rindex]
         if (length(weights)) weights <- weights[xstack$rindex]
         if (length(cluster)) cluster <- cluster[xstack$rindex]
-        t2 <- tmap[-1,,drop=FALSE]   # remove the intercept row
-        r2 <- row(t2)[!duplicated(as.vector(t2))]
-        c2 <- col(t2)[!duplicated(as.vector(t2))]
-        a2 <- lapply(seq(along=r2), function(i) {cmap[1+assign[[r2[i]]], c2[i]]})
+        t2 <- tmap[-c(1, strats),,drop=FALSE]   # remove the intercept row and strata rows
+        r2 <- row(t2)[!duplicated(as.vector(t2)) & t2 !=0]
+        c2 <- col(t2)[!duplicated(as.vector(t2)) & t2 !=0]
+        a2 <- lapply(seq(along=r2), function(i) {cmap[assign[[r2[i]]], c2[i]]})
         # which elements are unique?  
         tab <- table(r2)
         count <- tab[r2]
@@ -577,7 +610,7 @@ coxph <- function(formula, data, weights, subset, na.action,
             # The init vector might be longer than the betas, for a sparse term
             if (is.null(init)) temp <- fit$coefficients[nabeta]
             else temp <- (fit$coefficients - 
-                          init[1:length(fit$coefficients)])[nabeta]
+                          init[seq_along(fit$coefficients)])[nabeta]
             fit$wald.test <-  coxph.wtest(fit$var[nabeta,nabeta], temp,
                                           control$toler.chol)$test
         }
@@ -614,17 +647,23 @@ coxph <- function(formula, data, weights, subset, na.action,
         fit$timefix <- control$timefix  # remember this option
     }
     if (!is.null(weights) && any(weights!=1)) fit$weights <- weights
-    names(fit$means) <- names(fit$coefficients)
-
     if (multi) {
         fit$transitions <- transitions
         fit$states <- states
         fit$cmap <- cmap
+        fit$stratum_map <- stratum_map   # why not 'stratamap'?  Confusion with fit$strata
         fit$resid <- rowsum(fit$resid, xstack$rindex)
-        names(fit$coefficients) <- seq(along=fit$coefficients)
+        # add a suffix to each coefficent name.  Those that map to multiple transitions
+        #  get the first transition they map to
+        single <- apply(cmap, 1, function(x) all(x %in% c(0, max(x)))) #only 1 coef
+        cindx <- col(cmap)[match(seq_along(fit$coefficients), cmap)]
+        rindx <- row(cmap)[match(seq_along(fit$coefficients), cmap)]
+        suffix <- ifelse(single[rindx], "", paste0("_", colnames(cmap)[cindx]))
+        names(fit$coefficients) <- paste0(names(fit$coefficients), suffix)
         if (x) fit$strata <- istrat  # save the expanded strata
         class(fit) <- c("coxphms", class(fit))
     }
+    names(fit$means) <- names(fit$coefficients)
      
     fit$formula <- formula(Terms)
     if (length(xlevels) >0) fit$xlevels <- xlevels

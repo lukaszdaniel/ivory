@@ -55,7 +55,7 @@ HIDDEN double Rf_gamma_cody(double x)
 /* ----------------------------------------------------------------------
    Mathematical constants
    ----------------------------------------------------------------------*/
-    //const static double sqrtpi = M_LN_SQRT_2PI; //.9189385332046727417803297; /* == ln(2*pi)/2 */
+    //static constexpr double sqrtpi = M_LN_SQRT_2PI; //.9189385332046727417803297; /* == ln(2*pi)/2 */
 
 /* *******************************************************************
 
@@ -108,7 +108,7 @@ HIDDEN double Rf_gamma_cody(double x)
    */
 
 
-    const static double xbig = 171.624;
+    static constexpr double xbig = 171.624;
     /* ML_POSINF ==   const double xinf = 1.79e308;*/
     /* DBL_EPSILON = const double eps = 2.22e-16;*/
     /* DBL_MIN ==   const double xminin = 2.23e-308;*/
@@ -117,13 +117,13 @@ HIDDEN double Rf_gamma_cody(double x)
       Numerator and denominator coefficients for rational minimax
       approximation over (1,2).
       ----------------------------------------------------------------------*/
-    const static double p[8] = {
+    static constexpr double p[8] = {
 	-1.71618513886549492533811,
 	24.7656508055759199108314,-379.804256470945635097577,
 	629.331155312818442661052,866.966202790413211295064,
 	-31451.2729688483675254357,-36144.4134186911729807069,
 	66456.1438202405440627855 };
-    const static double q[8] = {
+    static constexpr double q[8] = {
 	-30.8402300119738975254353,
 	315.350626979604161529144,-1015.15636749021914166146,
 	-3107.77167157231109440444,22538.1184209801510330112,
@@ -132,7 +132,7 @@ HIDDEN double Rf_gamma_cody(double x)
     /*----------------------------------------------------------------------
       Coefficients for minimax approximation over (12, INF).
       ----------------------------------------------------------------------*/
-    const static double c[7] = {
+    static constexpr double c[7] = {
 	-.001910444077728,8.4171387781295e-4,
 	-5.952379913043012e-4,7.93650793500350248e-4,
 	-.002777777777777681622553,.08333333333333333331554247,

@@ -1,7 +1,14 @@
 
-R Under development (unstable) (2019-06-28 r76752) -- "Unsuffered Consequences"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
+Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+Ivory is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -151,7 +158,7 @@ Type 'q()' to quit R.
 > test2$state <- factor(test2$state, 0:3, c("censor", "a", "b", "c"))
 > 
 > if (FALSE) {
-+     # this graph is very useful
++     # this graph is very useful when debugging
 +     temp <- survcheck(Surv(t1, t2, state) ~1, test2, id=id)
 +     plot(c(0,22), c(1,9.1), type='n', xlab="Time", ylab= "Subject")
 +     with(test2, segments(t1+.1, id, t2, id, col=as.numeric(temp$istate)))
@@ -201,4 +208,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  1.200   0.040   1.241 
+  1.905   0.085   1.985 

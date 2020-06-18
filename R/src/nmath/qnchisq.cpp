@@ -24,11 +24,11 @@
 
 double Rf_qnchisq(double p, double df, double ncp, int lower_tail, int log_p)
 {
-	const static double accu = 1e-13;
-	const static double racc = 4 * DBL_EPSILON;
+	static constexpr double accu = 1e-13;
+	static constexpr double racc = 4 * DBL_EPSILON;
 	/* these two are for the "search" loops, can have less accuracy: */
-    const static double Eps = 1e-11; /* must be > accu */
-    const static double rEps= 1e-10; /* relative tolerance ... */
+    static constexpr double Eps = 1e-11; /* must be > accu */
+    static constexpr double rEps= 1e-10; /* relative tolerance ... */
 
     double ux, lx, ux0, nx, pp;
 

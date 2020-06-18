@@ -104,11 +104,19 @@
       presence; reported by Alex Bertram; repr.ex. and patch by Sebastian
       Meyer in \PR{16662}.
 
+      \item \code{round()} and \code{signif()} no longer tolerate wrong
+      argument names, notably in 1-argument calls; reported by Shane
+      Mueller on R-devel (mailing list).
+
       \item \code{boxplot()} now also accepts \code{call}s for labels such
       as \code{ylab}, the same as \code{plot()}.  Reported by Marius Hofert.
 
       \item \code{phyper(11, 15, 0, 12, log.p=TRUE)} no longer gives
       \code{NaN}; reported as \PR{17271} by Alexey Stukalov.
+
+      \item The help page for \code{xtabs()} now correctly states that
+      \code{addNA} is setting \code{na.action = na.pass} among others;
+      reported as \PR{17770} by Thomas Soeiro.
     }
   }
 }
@@ -124,15 +132,18 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{round()} and \code{signif()} now longer tolerate wrong
-      argument names, notably in 1-argument calls; reported by Shane
-      Mueller on R-devel (mailing list).
+      \item Using some of the \pkg{tcltk} widgets no longer crashes R on
+      Windows.
 
       \item \code{source(*, echo=TRUE)} no longer fails in some cases with
       empty lines; reported by Bill Dunlap in \PR{17769}.
 
       \item \code{on.exit()} now correctly matches named arguments, thanks
       to \PR{17815} (including patch) by Brodie Gaslam.
+
+      \item \code{regexpr(*, perl=TRUE)} no longer returns incorrect
+      positions into text containing characters outside of the Unicode
+      Basic Multilingual Plane on Windows.
     }
   }
 }

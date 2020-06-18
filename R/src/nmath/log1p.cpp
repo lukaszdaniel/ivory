@@ -50,7 +50,7 @@ double Rlog1p(double x)
      *			    significant figures required  30.93
      *				 decimal places required  32.01
      */
-    const static double alnrcs[43] = {
+    static constexpr double alnrcs[43] = {
 	+.10378693562743769800686267719098e+1,
 	-.13364301504908918098766041553133e+0,
 	+.19408249135520563357926199374750e-1,
@@ -105,7 +105,7 @@ double Rlog1p(double x)
 	nlnrel = chebyshev_init(alnrcs, 43, DBL_EPSILON/20);/*was .1*d1mach(3)*/
 #else
 # define nlnrel 22
-    const static double xmin = -0.999999985;
+    static constexpr double xmin = -0.999999985;
 /* 22: for IEEE double precision where DBL_EPSILON =  2.22044604925031e-16 */
 #endif
 

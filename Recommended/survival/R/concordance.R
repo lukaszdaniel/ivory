@@ -22,7 +22,7 @@ concordance.formula <- function(object, data,
     temp$formula <- if(missing(data)) terms(object, special)
                     else              terms(object, special, data=data)
     mf <- eval(temp, parent.frame())  # model frame
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
     Y <- model.response(mf)
@@ -85,7 +85,7 @@ concordance.formula <- function(object, data,
 print.concordance <- function(x, digits= max(1L, getOption("digits") - 3L), 
                               ...) {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
@@ -266,7 +266,7 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
         vcox <- sum(temp[,6])
         imat <- do.call("rbind", lapply(tfit, function(x) x$influence))
         # put it back into data order
-        index <- match(1:n, (1:n)[order(strata)])
+        index <- match(seq_len(n), (seq_len(n))[order(strata)])
         imat <- imat[index,]
         if (ranks) {
             nr <- lapply(tfit, function(x) nrow(x$resid))

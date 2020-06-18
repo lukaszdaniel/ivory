@@ -72,7 +72,7 @@ for (i in newterm) newform <- addterm(newform, newterm)
 # The next few lines are standard and almost identical to coxph
 indx <- match(c("formula", "data", "weights", "subset", "na.action"),
               names(Call), nomatch=0) 
-if (indx[1] ==0) stop("A formula argument is required")
+if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 temp <- Call[c(1,indx)]  # only keep the arguments we wanted
 temp[[1]] <-  quote(stats::model.frame)  # change the function called
     
@@ -152,7 +152,7 @@ is not.
 <<cch-setup-data>>=
 Y <-  model.extract(m, "response")
 if(!inherits(Y, "Surv"))
-    stop("Response must be a survival object")
+    stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
 ytype <- attr(Y, "type")
 if (!ytype %in% c("right", "counting"))
     stop("Cox model doesn't support \"", type, "\" survival data")
@@ -303,7 +303,7 @@ LinYing <- function(tenter, texit, cc,  id, X, ntot,robust){
 I.Borgan <- function(tenter, texit, cc,  id, X, stratum, stratum.sizes){
   eps <- 0.00000001
   nobs <- length(texit)
-  idx <- 1:length(nobs)
+  idx <- seq_along(nobs)
   jj <- max(stratum)
   nn <- stratum.sizes  ## Cohort stratum sizes
   n <- table(stratum)  ## Sample stratum sizes

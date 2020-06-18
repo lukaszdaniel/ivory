@@ -113,16 +113,17 @@ void Rf_PrintDefaults(void)
 
 HIDDEN SEXP do_invisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    switch (length(args)) {
-    case 0:
-	return R_NilValue;
-    case 1:
-	check1arg(args, call, "x");
-	return CAR(args);
-    default:
-	checkArity(op, args); /* must fail */
-	return call;/* never used, just for -Wall */
-    }
+	switch (length(args))
+	{
+	case 0:
+		return R_NilValue;
+	case 1:
+		check1arg(args, call, "x");
+		return CAR(args);
+	default:
+		checkArity(op, args); /* must fail */
+		return call;		  /* never used, just for -Wall */
+	}
 }
 
 /* This is *only* called via outdated R_level prmatrix() : */
@@ -184,13 +185,13 @@ static void PrintLanguage(SEXP s, R_PrintData *data)
 
 static void PrintClosure(SEXP s, R_PrintData *data)
 {
-    PrintLanguage(s, data);
+	PrintLanguage(s, data);
 
-    if (isByteCode(BODY(s)))
-	Rprintf(_("<bytecode: %p>\n"), BODY(s));
-    SEXP t = CLOENV(s);
-    if (t != R_GlobalEnv)
-	Rprintf("%s\n", EncodeEnvironment(t));
+	if (isByteCode(BODY(s)))
+		Rprintf(_("<bytecode: %p>\n"), BODY(s));
+	SEXP t = CLOENV(s);
+	if (t != R_GlobalEnv)
+		Rprintf("%s\n", EncodeEnvironment(t));
 }
 
 /* This advances `args` and `prev`. If an argument should not be
@@ -388,11 +389,12 @@ static void PrintObject(SEXP s, R_PrintData *data)
     strcpy(tagbuf, save);
 }
 
-static void PrintDispatch(SEXP s, R_PrintData *data) {
-    if (isObject(s))
-	PrintObject(s, data);
-    else
-	PrintValueRec(s, data);
+static void PrintDispatch(SEXP s, R_PrintData *data)
+{
+	if (isObject(s))
+		PrintObject(s, data);
+	else
+		PrintValueRec(s, data);
 }
 
 static void PrintGenericVector(SEXP s, R_PrintData *data)
@@ -1061,32 +1063,29 @@ HIDDEN void Rf_PrintValueEnv(SEXP s, SEXP env)
     UNPROTECT(1);
 }
 
-
 /* Print an S-expression using global options */
 
 void Rf_PrintValue(SEXP s)
 {
-    PrintValueEnv(s, R_GlobalEnv);
+	PrintValueEnv(s, R_GlobalEnv);
 }
-
 
 /* Ditto, but only for objects, for use in debugging */
 
 void R_PV(SEXP s)
 {
-    if(isObject(s)) PrintValueEnv(s, R_GlobalEnv);
+	if (isObject(s))
+		PrintValueEnv(s, R_GlobalEnv);
 }
-
 
 HIDDEN void Rf_CustomPrintValue(SEXP s, SEXP env)
 {
-    tagbuf[0] = '\0';
+	tagbuf[0] = '\0';
 
-    R_PrintData data;
-    PrintInit(&data, env);
-    PrintValueRec(s, &data);
+	R_PrintData data;
+	PrintInit(&data, env);
+	PrintValueRec(s, &data);
 }
-
 
 /* xxxpr are mostly for S compatibility (as mentioned in V&R).
    The Fortran interfaces are in xxxpr.f and call these.

@@ -12,8 +12,9 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
     names(survlist) <- ustrata
     survtype <- if (stype==1) 1 else ctype+1
     vartype <- survtype
-        
-    for (i in 1:nstrata) {
+    if (is.null(wt)) wt <- rep(1.0, nrow(y))
+    if (is.null(strata)) strata <- rep(1L, nrow(y))
+    for (i in seq_len(nstrata)) {
         indx <- which(strata== ustrata[i])
         survlist[[i]] <- agsurv(y[indx,,drop=F], x[indx,,drop=F], 
                                 wt[indx], risk[indx],
@@ -29,7 +30,7 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
             dimnames(fit$surv) <- list(NULL, row.names(x2))
             if (se.fit) {
                 varh <- matrix(0., nrow=length(fit$varhaz), ncol=nrow(x2))
-                for (i in 1:nrow(x2)) {
+                for (i in seq_len(nrow(x2))) {
                     dt <- outer(fit$cumhaz, x2[i,], '*') - fit$xbar
                     varh[,i] <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt))*
                         risk2[i]^2
@@ -60,7 +61,7 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
             hazard  <- vector('list', ntarget)
             stemp <- as.integer(strata2)
             timeforward <- 0
-            for (i in 1:ntarget) {
+            for (i in seq_len(ntarget)) {
                 slist <- survlist[[stemp[i]]]
                 indx <- which(slist$time > y2[i,1] & slist$time <= y2[i,2])
                 if (length(indx)==0) {
@@ -113,7 +114,7 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
         else {
             uid <- unique(id2)
             result <- vector('list', length=length(uid))
-            for (i in 1:length(uid)) {
+            for (i in seq_along(uid)) {
                 indx <- which(id2==uid[i])
                 result[[i]] <- onecurve(survlist, x2[indx,,drop=FALSE], 
                                          y2[indx,,drop=FALSE], 

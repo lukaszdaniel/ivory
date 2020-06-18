@@ -72,21 +72,21 @@ static double wprob(double w, double rr, double cc)
 	xleg = legendre 12-point nodes
 	aleg = legendre 12-point coefficients
  */
-#define nleg	12
-#define ihalf	6
+constexpr int nleg = 12;
+constexpr int ihalf = 6;
 
     /* looks like this is suboptimal for double precision.
        (see how C1-C3 are used) <MM>
     */
     /* const double iMax  = 1.; not used if = 1*/
-    const static double C1 = -30.;
-    const static double C2 = -50.;
-    const static double C3 = 60.;
-    const static double bb   = 8.;
-    const static double wlar = 3.;
-    const static double wincr1 = 2.;
-    const static double wincr2 = 3.;
-    const static double xleg[ihalf] = {
+    static constexpr double C1 = -30.;
+    static constexpr double C2 = -50.;
+    static constexpr double C3 = 60.;
+    static constexpr double bb   = 8.;
+    static constexpr double wlar = 3.;
+    static constexpr double wincr1 = 2.;
+    static constexpr double wincr2 = 3.;
+    static constexpr double xleg[ihalf] = {
 	0.981560634246719250690549090149,
 	0.904117256370474856678465866119,
 	0.769902674194304687036893833213,
@@ -94,7 +94,7 @@ static double wprob(double w, double rr, double cc)
 	0.367831498998180193752691536644,
 	0.125233408511468915472441369464
     };
-    const static double aleg[ihalf] = {
+    static constexpr double aleg[ihalf] = {
 	0.047175336386511827194615961485,
 	0.106939325995318430960254718194,
 	0.160078328543346226334652529543,
@@ -270,21 +270,21 @@ double Rf_ptukey(double q, double rr, double cc, double df,
 	if degrees of freedom large, approximate integral
 	with range distribution.
  */
-#define nlegq	16
-#define ihalfq	8
+constexpr int nlegq = 16;
+constexpr int ihalfq = 8;
 
 /*  const double eps = 1.0; not used if = 1 */
-    const static double eps1 = -30.0;
-    const static double eps2 = 1.0e-14;
-    const static double dhaf  = 100.0;
-    const static double dquar = 800.0;
-    const static double deigh = 5000.0;
-    const static double dlarg = 25000.0;
-    const static double ulen1 = 1.0;
-    const static double ulen2 = 0.5;
-    const static double ulen3 = 0.25;
-    const static double ulen4 = 0.125;
-    const static double xlegq[ihalfq] = {
+    static constexpr double eps1 = -30.0;
+    static constexpr double eps2 = 1.0e-14;
+    static constexpr double dhaf  = 100.0;
+    static constexpr double dquar = 800.0;
+    static constexpr double deigh = 5000.0;
+    static constexpr double dlarg = 25000.0;
+    static constexpr double ulen1 = 1.0;
+    static constexpr double ulen2 = 0.5;
+    static constexpr double ulen3 = 0.25;
+    static constexpr double ulen4 = 0.125;
+    static constexpr double xlegq[ihalfq] = {
 	0.989400934991649932596154173450,
 	0.944575023073232576077988415535,
 	0.865631202387831743880467897712,
@@ -294,7 +294,7 @@ double Rf_ptukey(double q, double rr, double cc, double df,
 	0.281603550779258913230460501460,
 	0.950125098376374401853193354250e-1
     };
-    const static double alegq[ihalfq] = {
+    static constexpr double alegq[ihalfq] = {
 	0.271524594117540948517805724560e-1,
 	0.622535239386478928628438369944e-1,
 	0.951585116824927848099251076022e-1,

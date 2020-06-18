@@ -115,9 +115,7 @@ dim.survfit <- function(x) {
         if (is.null(i)) indx <- seq(along= x$strata)
         else indx <- nmatch(i, names(x$strata)) #strata to keep
         if (any(is.na(indx))) 
-            stop(paste("strata", 
-                       paste(i[is.na(indx)], collapse=' '),
-                       'not matched'))
+            stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " ")))
         # Now, indx may not be in order: some can use curve[3:2] to reorder
         #  The list/unlist construct will reorder the data
         temp <- split(seq(along=x$time), 
@@ -177,8 +175,38 @@ survfit.formula <- function(formula, data, weights, subset,
             stop("Interaction terms are not valid for this function")
 
     n <- nrow(mf)
-    Y <- model.extract(mf, 'response')
-    if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
+    Y <- model.response(mf)
+    if (inherits(Y, "Surv2")) {
+        # this is Surv2 style data
+        # if there are any obs removed due to missing, remake the model frame
+        if (length(attr(mf, "na.action"))) {
+            temp$na.action <- na.pass
+            mf <- eval.parent(temp)
+        }
+        if (!is.null(attr(Terms, "specials")$cluster))
+            stop("cluster() cannot appear in the model statement")
+        new <- surv2data(mf)
+        mf <- new$mf
+        istate <- new$istate
+        id <- new$id
+        Y <- new$y
+        if (anyNA(mf[-1])) { #ignore the response still found there
+            if (missing(na.action)) temp <- get(getOption("na.action"))(mf[-1])
+            else temp <- na.action(mf[-1])
+            omit <- attr(temp, "na.action")
+            mf <- mf[-omit,]
+            Y <- Y[-omit]
+            id <- id[-omit]
+            istate <- istate[-omit]
+        }                      
+        n <- nrow(mf)
+    }       
+    else {
+        if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
+        id <- model.extract(mf, "id")
+        istate <- model.extract(mf, "istate")
+    }
+    if (n==0) stop("data set has no non-missing observations")
 
     casewt <- model.extract(mf, "weights")
     if (is.null(casewt)) casewt <- rep(1.0, n)
@@ -191,8 +219,6 @@ survfit.formula <- function(formula, data, weights, subset,
 
     if (!is.null(attr(Terms, 'offset'))) warning("Offset term ignored")
 
-    id    <- model.extract(mf, 'id')
-    istate <- model.extract(mf,"istate")
     cluster <- model.extract(mf, "cluster")
     temp <- untangle.specials(Terms, "cluster")
     if (length(temp$vars)>0) {
@@ -205,8 +231,6 @@ survfit.formula <- function(formula, data, weights, subset,
     ll <- attr(Terms, 'term.labels')
     if (length(ll) == 0) X <- factor(rep(1,n))  # ~1 on the right
     else X <- strata(mf[ll])
-    
-    if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv")))
     
     # Backwards support for the now-depreciated etype argument
     etype <- model.extract(mf, "etype")

@@ -645,9 +645,9 @@ typedef short yytype_int16;
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
 typedef __UINT_LEAST8_TYPE__ yytype_uint8;
 #elif (!defined __UINT_LEAST8_MAX__ && defined YY_STDINT_H \
-       && UINT_LEAST8_MAX <= R_INT_MAX)
+       && UINT_LEAST8_MAX <= INT_MAX)
 typedef uint_least8_t yytype_uint8;
-#elif !defined __UINT_LEAST8_MAX__ && UCHAR_MAX <= R_INT_MAX
+#elif !defined __UINT_LEAST8_MAX__ && UCHAR_MAX <= INT_MAX
 typedef unsigned char yytype_uint8;
 #else
 typedef short yytype_uint8;
@@ -656,9 +656,9 @@ typedef short yytype_uint8;
 #if defined __UINT_LEAST16_MAX__ && __UINT_LEAST16_MAX__ <= __INT_MAX__
 typedef __UINT_LEAST16_TYPE__ yytype_uint16;
 #elif (!defined __UINT_LEAST16_MAX__ && defined YY_STDINT_H \
-       && UINT_LEAST16_MAX <= R_INT_MAX)
+       && UINT_LEAST16_MAX <= INT_MAX)
 typedef uint_least16_t yytype_uint16;
-#elif !defined __UINT_LEAST16_MAX__ && USHRT_MAX <= R_INT_MAX
+#elif !defined __UINT_LEAST16_MAX__ && USHRT_MAX <= INT_MAX
 typedef unsigned short yytype_uint16;
 #else
 typedef int yytype_uint16;
@@ -1562,7 +1562,7 @@ yytnamerr (char *yyres, const char *yystr)
       YYPTRDIFF_T yyn = 0;
       char const *yyp = yystr;
 
-      while(true)
+      for (;;)
         switch (*++yyp)
           {
           case '\'':
@@ -2534,7 +2534,7 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
-  while(true)
+  for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))

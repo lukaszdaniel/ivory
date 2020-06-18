@@ -59,9 +59,11 @@ static double lfastchoose2(double n, double k, int *s_choose)
     return Rf_lgammafn(n + 1.) - Rf_lgammafn(k + 1.) - r;
 }
 
-#define ODD(_K_) ((_K_) != 2 * floor((_K_) / 2.))
+template <typename T>
+inline bool ODD(const T &_K_) { return ((_K_) != 2 * floor((_K_) / 2.)); }
 
-#define R_IS_INT(x) (!R_nonint(x))
+template <typename T>
+inline bool R_IS_INT(const T &x) { return (!R_nonint(x)); }
 
 double Rf_lchoose(double n, double k)
 {
@@ -102,7 +104,7 @@ double Rf_lchoose(double n, double k)
     return Rf_lfastchoose(n, k);
 }
 
-#define k_small_max 30
+constexpr double k_small_max = 30;
 /* 30 is somewhat arbitrary: it is on the *safe* side:
  * both speed and precision are clearly improved for k < 30.
 */

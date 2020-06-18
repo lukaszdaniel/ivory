@@ -139,19 +139,27 @@ void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
 /* needed in 2 places so rolled out into macro
    to avoid divergence
 */
-#define FORMATINT_RETLOGIC do {					\
-	if (naflag) *fieldwidth = R_print.na_width;		\
-	else *fieldwidth = 1;					\
-								\
-	if (xmin < 0) {						\
-	    l = IndexWidth(-xmin) + 1;	/* +1 for sign */	\
-	    if (l > *fieldwidth) *fieldwidth = l;		\
-	}							\
-	if (xmax > 0) {						\
-	    l = IndexWidth(xmax);				\
-	    if (l > *fieldwidth) *fieldwidth = l;		\
-	}							\
-    } while(0)
+#define FORMATINT_RETLOGIC                               \
+    do                                                   \
+    {                                                    \
+        if (naflag)                                      \
+            *fieldwidth = R_print.na_width;              \
+        else                                             \
+            *fieldwidth = 1;                             \
+                                                         \
+        if (xmin < 0)                                    \
+        {                                                \
+            l = IndexWidth(-xmin) + 1; /* +1 for sign */ \
+            if (l > *fieldwidth)                         \
+                *fieldwidth = l;                         \
+        }                                                \
+        if (xmax > 0)                                    \
+        {                                                \
+            l = IndexWidth(xmax);                        \
+            if (l > *fieldwidth)                         \
+                *fieldwidth = l;                         \
+        }                                                \
+    } while (0)
 
 void Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
 {
@@ -271,7 +279,7 @@ LDOUBLE private_nearbyintl(LDOUBLE x)
 # endif
 #endif
 
-#define NB 1000
+constexpr int NB = 1000;
 static void format_via_sprintf(double r, int d, int *kpower, int *nsig)
 {
     static char buff[NB];
@@ -285,7 +293,7 @@ static void format_via_sprintf(double r, int d, int *kpower, int *nsig)
 
 
 #if defined(HAVE_LONG_DOUBLE) && (SIZEOF_LONG_DOUBLE > SIZEOF_DOUBLE)
-static const long double tbl[] =
+static constexpr long double tbl[] =
 {
     /* Powers exactly representable with 64 bit mantissa (except the first, which is only used with digits=0) */
     1e-1,
@@ -293,20 +301,19 @@ static const long double tbl[] =
     1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19,
     1e20, 1e21, 1e22, 1e23, 1e24, 1e25, 1e26, 1e27
 };
-#define KP_MAX 27
+constexpr int KP_MAX = 27;
 #else
-static const double tbl[] =
+static constexpr double tbl[] =
 {
     1e-1,
     1e00, 1e01, 1e02, 1e03, 1e04, 1e05, 1e06, 1e07, 1e08, 1e09,
     1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19,
     1e20, 1e21, 1e22
 };
-#define KP_MAX 22
+constexpr int KP_MAX = 22;
 #endif
 
-static void
-scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
+static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
 {
     /* for a number x , determine
      *	neg    = 1_{x < 0}  {0/1}

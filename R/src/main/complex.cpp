@@ -937,24 +937,24 @@ static double sr, si;
 static double tr, ti;
 static double pvr, pvi;
 
-static const double eta =  DBL_EPSILON;
-static const double are = /* eta = */DBL_EPSILON;
-static const double mre = 2. * M_SQRT2 * /* eta, i.e. */DBL_EPSILON;
-static const double infin = DBL_MAX;
+static constexpr double eta =  DBL_EPSILON;
+static constexpr double are = /* eta = */DBL_EPSILON;
+static constexpr double mre = 2. * M_SQRT2 * /* eta, i.e. */DBL_EPSILON;
+static constexpr double infin = DBL_MAX;
 
 static void R_cpolyroot(double *opr, double *opi, int *degree,
 			double *zeror, double *zeroi, Rboolean *fail)
 {
-    static const double smalno = DBL_MIN;
-    static const double base = (double)FLT_RADIX;
+    static constexpr double smalno = DBL_MIN;
+    static constexpr double base = (double)FLT_RADIX;
     static int d_n, i, i1, i2;
     static double zi, zr, xx, yy;
     static double bnd, xxx;
     Rboolean conv;
     int d1;
     double *tmp;
-    static const double cosr =/* cos 94 */ -0.06975647374412529990;
-    static const double sinr =/* sin 94 */  0.99756405025982424767;
+    static constexpr double cosr =/* cos 94 */ -0.06975647374412529990;
+    static constexpr double sinr =/* sin 94 */  0.99756405025982424767;
     xx = M_SQRT1_2;/* 1/sqrt(2) = 0.707.... */
 
     yy = -xx;

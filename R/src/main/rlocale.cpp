@@ -203,46 +203,48 @@ int Ri18n_wcswidth (const wchar_t *s, size_t n)
 #if defined(__APPLE__)
 /* allow for both PowerPC and Intel platforms */
 #ifdef WORDS_BIGENDIAN
-static const char UNICODE[] = "UCS-4BE";
+static constexpr char UNICODE[] = "UCS-4BE";
 #else
-static const char UNICODE[] = "UCS-4LE";
+static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
 /* in Defn.h which is not included here */
 extern const char *locale2charset(const char *);
 
-#define ISWFUNC(ISWNAME) static int Ri18n_isw ## ISWNAME (wint_t wc) \
-{	                                                             \
-  char    mb_buf[MB_LEN_MAX+1];			                     \
-  size_t  mb_len;                                                    \
-  int     ucs4_buf[2];				                     \
-  size_t  wc_len;                                                    \
-  void   *cd;					                     \
-  char    fromcode[128];                                             \
-  char   *_mb_buf;						     \
-  char   *_wc_buf;						     \
-  size_t  rc ;							     \
-								     \
-  strncpy(fromcode, locale2charset(NULL), sizeof(fromcode));         \
-  fromcode[sizeof(fromcode) - 1] = '\0';                             \
-  if(streql(fromcode, "UTF-8"))				     \
-       return wcsearch(wc,table_w ## ISWNAME , table_w ## ISWNAME ## _count);\
-  memset(mb_buf, 0, sizeof(mb_buf));				     \
-  memset(ucs4_buf, 0, sizeof(ucs4_buf));			     \
-  wcrtomb( mb_buf, wc, NULL);					     \
-  if((void *)(-1) != (cd = Riconv_open(UNICODE, fromcode))) {	     \
-      wc_len = sizeof(ucs4_buf);		                     \
-      _wc_buf = (char *)ucs4_buf;				     \
-      mb_len = strlen(mb_buf);					     \
-      _mb_buf = (char *)mb_buf;					     \
-      rc = Riconv(cd, (const char **)&_mb_buf, (size_t *)&mb_len,	     \
-		  (char **)&_wc_buf, (size_t *)&wc_len);	     \
-      Riconv_close(cd);						     \
-      wc = ucs4_buf[0];                                              \
-      return wcsearch(wc,table_w ## ISWNAME , table_w ## ISWNAME ## _count); \
-  }                                                                  \
-  return(-1);                                                        \
-}
+#define ISWFUNC(ISWNAME)                                                     \
+    static int Ri18n_isw##ISWNAME(wint_t wc)                                 \
+    {                                                                        \
+        char mb_buf[MB_LEN_MAX + 1];                                         \
+        size_t mb_len;                                                       \
+        int ucs4_buf[2];                                                     \
+        size_t wc_len;                                                       \
+        void *cd;                                                            \
+        char fromcode[128];                                                  \
+        char *_mb_buf;                                                       \
+        char *_wc_buf;                                                       \
+        size_t rc;                                                           \
+                                                                             \
+        strncpy(fromcode, locale2charset(NULL), sizeof(fromcode));           \
+        fromcode[sizeof(fromcode) - 1] = '\0';                               \
+        if (streql(fromcode, "UTF-8"))                                       \
+            return wcsearch(wc, table_w##ISWNAME, table_w##ISWNAME##_count); \
+        memset(mb_buf, 0, sizeof(mb_buf));                                   \
+        memset(ucs4_buf, 0, sizeof(ucs4_buf));                               \
+        wcrtomb(mb_buf, wc, NULL);                                           \
+        if ((void *)(-1) != (cd = Riconv_open(UNICODE, fromcode)))           \
+        {                                                                    \
+            wc_len = sizeof(ucs4_buf);                                       \
+            _wc_buf = (char *)ucs4_buf;                                      \
+            mb_len = strlen(mb_buf);                                         \
+            _mb_buf = (char *)mb_buf;                                        \
+            rc = Riconv(cd, (const char **)&_mb_buf, (size_t *)&mb_len,      \
+                        (char **)&_wc_buf, (size_t *)&wc_len);               \
+            Riconv_close(cd);                                                \
+            wc = ucs4_buf[0];                                                \
+            return wcsearch(wc, table_w##ISWNAME, table_w##ISWNAME##_count); \
+        }                                                                    \
+        return (-1);                                                         \
+    }
 #endif // __APPLE__
 
 /*********************************************************************
@@ -251,10 +253,11 @@ extern const char *locale2charset(const char *);
  *  all locale wchar_t == UNICODE
  ********************************************************************/
 #if defined(_WIN32) || defined(_AIX)
-#define ISWFUNC(ISWNAME) static int Ri18n_isw ## ISWNAME (wint_t wc) \
-{									\
-    return wcsearch(wc,table_w ## ISWNAME , table_w ## ISWNAME ## _count); \
-}
+#define ISWFUNC(ISWNAME)                                                 \
+    static int Ri18n_isw##ISWNAME(wint_t wc)                             \
+    {                                                                    \
+        return wcsearch(wc, table_w##ISWNAME, table_w##ISWNAME##_count); \
+    }
 #endif
 
 /*********************************************************************
@@ -304,11 +307,12 @@ static int Ri18n_iswalnum (wint_t wc)
 /*
  * iswctype
  */
-typedef struct {
-    const char * const name;
+typedef struct
+{
+    const char *const name;
     wctype_t wctype;
-    int(*func)(wint_t);
-} Ri18n_wctype_func_l ;
+    int (*func)(wint_t);
+} Ri18n_wctype_func_l;
 
 static const Ri18n_wctype_func_l Ri18n_wctype_func[] = {
     {"upper",  1<<0,  Ri18n_iswupper},

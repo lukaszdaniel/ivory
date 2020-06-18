@@ -489,7 +489,7 @@ void Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 		}
 		Rprintf("\n\n");
 	    } else { // nb == 0 -- e.g. <logical array of size 2 x 3 x 0>
-	    	const int bufsize = 100;
+	    	constexpr int bufsize = 100;
 	    	char buf[bufsize];
 	    	int cx = 0;
 	    	int dx = 0;

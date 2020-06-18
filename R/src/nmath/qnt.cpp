@@ -22,8 +22,8 @@
 
 double Rf_qnt(double p, double df, double ncp, int lower_tail, int log_p)
 {
-    const static double accu = 1e-13;
-    const static double Eps = 1e-11; /* must be > accu */
+    static constexpr double accu = 1e-13;
+    static constexpr double Eps = 1e-11; /* must be > accu */
 
     double ux, lx, nx, pp;
 

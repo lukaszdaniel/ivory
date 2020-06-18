@@ -86,7 +86,7 @@ double Rf_pnorm(double x, double mu, double sigma, int lower_tail, int log_p)
     return(lower_tail ? p : cp);
 }
 
-#define SIXTEN	16 /* Cutoff allowing exact "*" and "/" */
+constexpr int SIXTEN = 16; /* Cutoff allowing exact "*" and "/" */
 
 void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 {
@@ -94,20 +94,20 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
    if(lower) return  *cum := P[X <= x]
    if(upper) return *ccum := P[X >  x] = 1 - P[X <= x]
 */
-    const static double a[5] = {
+    static constexpr double a[5] = {
 	2.2352520354606839287,
 	161.02823106855587881,
 	1067.6894854603709582,
 	18154.981253343561249,
 	0.065682337918207449113
     };
-    const static double b[4] = {
+    static constexpr double b[4] = {
 	47.20258190468824187,
 	976.09855173777669322,
 	10260.932208618978205,
 	45507.789335026729956
     };
-    const static double c[9] = {
+    static constexpr double c[9] = {
 	0.39894151208813466764,
 	8.8831497943883759412,
 	93.506656132177855979,
@@ -118,7 +118,7 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 	9842.7148383839780218,
 	1.0765576773720192317e-8
     };
-    const static double d[8] = {
+    static constexpr double d[8] = {
 	22.266688044328115691,
 	235.38790178262499861,
 	1519.377599407554805,
@@ -128,7 +128,7 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 	38912.003286093271411,
 	19685.429676859990727
     };
-    const static double p[6] = {
+    static constexpr double p[6] = {
 	0.21589853405795699,
 	0.1274011611602473639,
 	0.022235277870649807,
@@ -136,7 +136,7 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 	2.9112874951168792e-5,
 	0.02307344176494017303
     };
-    const static double q[5] = {
+    static constexpr double q[5] = {
 	1.28426009614491121,
 	0.468238212480865118,
 	0.0659881378689285515,
@@ -193,23 +193,29 @@ void Rf_pnorm_both(double x, double *cum, double *ccum, int i_tail, int log_p)
 	}
 	temp = (xnum + c[7]) / (xden + d[7]);
 
-#define do_del(X)							\
-	xsq = trunc(X * SIXTEN) / SIXTEN;				\
-	del = (X - xsq) * (X + xsq);					\
-	if(log_p) {							\
-	    *cum = (-xsq * xsq * 0.5) + (-del * 0.5) + log(temp);	\
-	    if((lower && x > 0.) || (upper && x <= 0.))			\
-		  *ccum = log1p(-exp(-xsq * xsq * 0.5) *		\
-				exp(-del * 0.5) * temp);		\
-	}								\
-	else {								\
-	    *cum = exp(-xsq * xsq * 0.5) * exp(-del * 0.5) * temp;	\
-	    *ccum = 1.0 - *cum;						\
+#define do_del(X)                                              \
+	xsq = trunc(X * SIXTEN) / SIXTEN;                          \
+	del = (X - xsq) * (X + xsq);                               \
+	if (log_p)                                                 \
+	{                                                          \
+		*cum = (-xsq * xsq * 0.5) + (-del * 0.5) + log(temp);  \
+		if ((lower && x > 0.) || (upper && x <= 0.))           \
+			*ccum = log1p(-exp(-xsq * xsq * 0.5) *             \
+						  exp(-del * 0.5) * temp);             \
+	}                                                          \
+	else                                                       \
+	{                                                          \
+		*cum = exp(-xsq * xsq * 0.5) * exp(-del * 0.5) * temp; \
+		*ccum = 1.0 - *cum;                                    \
 	}
 
-#define swap_tail						\
-	if (x > 0.) {/* swap  ccum <--> cum */			\
-	    temp = *cum; if(lower) *cum = *ccum; *ccum = temp;	\
+#define swap_tail               \
+	if (x > 0.)                 \
+	{ /* swap  ccum <--> cum */ \
+		temp = *cum;            \
+		if (lower)              \
+			*cum = *ccum;       \
+		*ccum = temp;           \
 	}
 
 	do_del(y);

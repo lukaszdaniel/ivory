@@ -462,7 +462,7 @@ HIDDEN void R_SetPPSize(R_size_t size)
 
 HIDDEN SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    const double MB = 1048576.0;
+    constexpr double MB = 1048576.0;
     double newval = asReal(CAR(args));
 
     if (newval > 0) {

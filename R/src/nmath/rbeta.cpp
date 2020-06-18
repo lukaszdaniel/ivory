@@ -28,7 +28,7 @@
 
 #include "nmath.h"
 
-#define expmax	(DBL_MAX_EXP * M_LN2)/* = log(DBL_MAX) */
+constexpr double expmax = (DBL_MAX_EXP * M_LN2); /* = log(DBL_MAX) */
 
 double Rf_rbeta(double aa, double bb)
 {
@@ -61,16 +61,18 @@ double Rf_rbeta(double aa, double bb)
     b = Rf_fmax2(aa, bb); /* a <= b */
     alpha = a + b;
 
-#define v_w_from__u1_bet(AA) 			\
-	    v = beta * log(u1 / (1.0 - u1));	\
-	    if (v <= expmax) {			\
-		w = AA * exp(v);		\
-		if(!R_FINITE(w)) w = DBL_MAX;	\
-	    } else				\
+#define v_w_from__u1_bet(AA)         \
+	v = beta * log(u1 / (1.0 - u1)); \
+	if (v <= expmax)                 \
+	{                                \
+		w = AA * exp(v);             \
+		if (!R_FINITE(w))            \
+			w = DBL_MAX;             \
+	}                                \
+	else                             \
 		w = DBL_MAX
 
-
-    if (a <= 1.0) {	/* --- Algorithm BC --- */
+	if (a <= 1.0) {	/* --- Algorithm BC --- */
 
 	/* changed notation, now also a <= b (was reversed) */
 

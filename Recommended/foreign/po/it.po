@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-70\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-08 22:51+0200\n"
+"POT-Creation-Date: 2020-06-17 19:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -277,7 +277,7 @@ msgstr ""
 msgid "fread(%d) failed on DBF file"
 msgstr ""
 
-#: file-handle.c:115
+#: file-handle.c:112
 #, c-format
 msgid "file handle `%s' has not been previously declared on FILE HANDLE"
 msgstr ""

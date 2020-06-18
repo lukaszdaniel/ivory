@@ -152,7 +152,7 @@ print.clara <- function(x, ...)
 	cat(gettext("Medoids:", domain = "R-cluster"), "\n", sep = "");		print(x$medoids, ...)
     cat(gettext("Objective function:", domain = "R-cluster"), "\t", format(x$objective, ...), "\n", sep = "")
 	cat(gettext("Clustering vector:", domain = "R-cluster"), "\t", sep = ""); str(x$clustering, vec.len = 7)
-    cat(gettext("Cluster sizes:", domain = "R-cluster"), "	    \t", x$clusinfo[,1], "\n", sep = "")
+    cat(gettext("Cluster sizes:", domain = "R-cluster"), "	    \t", paste(x$clusinfo[,1], sep = " "), "\n", sep = "")
 	cat(gettext("Best sample:", domain = "R-cluster"), "\n", sep = "");		print(x$sample, quote = FALSE, ...)
     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
     invisible(x)
@@ -177,10 +177,10 @@ print.summary.clara <- function(x, ...)
 	cat(gettext("Average silhouette width of best sample: ", domain = "R-cluster"),
 	    format(x$silinfo[[3]], ...), "\n", sep = "")
     }
-    cat("\n", gettext("Best sample:", domain = "R-cluster"), "\n");		print(x$sample, quote = FALSE, ...)
-    cat(gettext("Clustering vector:", domain = "R-cluster"), "\n");	print(x$clustering, ...)
+    cat("\n", gettext("Best sample:", domain = "R-cluster"), "\n", sep = "");		print(x$sample, quote = FALSE, ...)
+    cat(gettext("Clustering vector:", domain = "R-cluster"), "\n", sep = "");	print(x$clustering, ...)
     if(has.sil) {
-	cat("\n", gettext("Silhouette plot information for best sample:", domain = "R-cluster"), "\n")
+	cat("\n", gettext("Silhouette plot information for best sample:", domain = "R-cluster"), "\n", sep = "")
 	print(x$silinfo[[1]], ...)
     }
     if(!is.null(x$diss)) { ## Dissimilarities:

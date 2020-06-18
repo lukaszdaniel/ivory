@@ -42,7 +42,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         conf.int <- .95
     }
       
-    if (!is.Surv(y)) stop("y must be a Surv object")
+    if (!is.Surv(y)) gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
     if (attr(y, 'type') != 'right' && attr(y, 'type') != 'counting')
 	    stop("Can only handle right censored or counting data")
     ny <- ncol(y)       # Will be 2 for right censored, 3 for counting
@@ -107,9 +107,9 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         else if (ncol(y)==2 || !has.robust) {
             # create our own clustering
             n <- nrow(y)
-            cluster <- 1:n
+            cluster <- seq_len(n)
             ncluster <- n
-            clname <- 1:n
+            clname <- seq_len(n)
         }   
         else stop("id or cluster option required")
     } else ncluster <- 0
@@ -132,6 +132,16 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
         influence <- 0L
+    }
+
+    # if start.time was set, delete obs if necessary
+    keep <- y[,ny-1] >= time0
+    if (!all(keep)) {
+        y <- y[keep,]
+        if (length(id) >0) id <- id[keep]
+        if (length(cluster) >0) cluster <- cluster[keep]
+        x <- x[keep]
+        weights <- weights[keep]
     }
 
 
@@ -317,7 +327,7 @@ if (se.fit) {
 	events <- rval$n.event >0
 	if (nstrat ==1) events[1] <- TRUE
 	else           events[1 + cumsum(c(0, rval$strata[-nstrat]))] <- TRUE
-	zz <- 1:length(events)
+	zz <- seq_along(events)
 	n.lag <- rep(rval$n.risk[events], diff(c(zz[events], 1+max(zz))))
 	#
 	# n.lag = the # at risk the last time there was an event (or

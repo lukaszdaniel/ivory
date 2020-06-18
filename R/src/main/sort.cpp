@@ -501,28 +501,33 @@ HIDDEN SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* c(1, 4^k +3*2^(k-1)+1) */
 #ifdef LONG_VECTOR_SUPPORT
 // This goes up to 2^38: extend eventually.
-#define NI 20
-static const R_xlen_t incs[NI + 1] = {
+constexpr int NI = 20;
+static constexpr R_xlen_t incs[NI + 1] = {
     274878693377L, 68719869953L, 17180065793L, 4295065601L,
     1073790977L, 268460033L, 67121153L, 16783361L, 4197377L, 1050113L,
     262913L, 65921L, 16577L, 4193L, 1073L, 281L, 77L, 23L, 8L, 1L, 0L
 };
 #else
-#define NI 16
-static const int incs[NI + 1] = {
+constexpr int NI = 16;
+static constexpr int incs[NI + 1] = {
     1073790977, 268460033, 67121153, 16783361, 4197377, 1050113,
     262913, 65921, 16577, 4193, 1073, 281, 77, 23, 8, 1, 0
 };
 #endif
 
-#define sort2_body \
-    for (h = incs[t]; t < NI; h = incs[++t]) \
-	for (i = h; i < n; i++) { \
-	    v = x[i]; \
-	    j = i; \
-	    while (j >= h && x[j - h] less v) { x[j] = x[j - h]; j -= h; } \
-	    x[j] = v; \
-	}
+#define sort2_body                            \
+	for (h = incs[t]; t < NI; h = incs[++t])  \
+		for (i = h; i < n; i++)               \
+		{                                     \
+			v = x[i];                         \
+			j = i;                            \
+			while (j >= h && x[j - h] less v) \
+			{                                 \
+				x[j] = x[j - h];              \
+				j -= h;                       \
+			}                                 \
+			x[j] = v;                         \
+		}
 
 /* These are only called with n >= 2 */
 static void R_isort2(int *x, R_xlen_t n, Rboolean decreasing)
@@ -943,7 +948,7 @@ static int FNAME(int i, int j,						\
     }									\
 }
 
-static const int sincs[17] = {
+static constexpr int sincs[17] = {
     1073790977, 268460033, 67121153, 16783361, 4197377, 1050113,
     262913, 65921, 16577, 4193, 1073, 281, 77, 23, 8, 1, 0
 };

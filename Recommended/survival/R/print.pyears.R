@@ -8,24 +8,24 @@ print.pyears <- function(x, ...) {
 
     if (is.null(x$data)) {
         if (!is.null(x$event))
-            cat("Total number of events:", format(sum(x$event)), "\n")
-        cat (   "Total number of person-years tabulated:", 
+            cat(gettext("Total number of events: ", domain = "R-survival"), format(sum(x$event)), "\n", sep = "")
+        cat (   gettext("Total number of person-years tabulated: ", domain = "R-survival"), 
              format(sum(x$pyears)),
-             "\nTotal number of person-years off table:",
-             format(x$offtable), "\n")
+             "\n", gettext("Total number of person-years off table: ", domain = "R-survival"),
+             format(x$offtable), "\n", sep = "")
         }
     else {
         if (!is.null(x$data$event))
-            cat("Total number of events:", format(sum(x$data$event)), "\n")
-        cat (   "Total number of person-years tabulated:", 
+            cat(gettext("Total number of events: ", domain = "R-survival"), format(sum(x$data$event)), "\n", sep = "")
+        cat (   gettext("Total number of person-years tabulated: ", domain = "R-survival"), 
              format(sum(x$data$pyears)),
-             "\nTotal number of person-years off table:",
-             format(x$offtable), "\n")
+             "\n", gettext("Total number of person-years off table: ", domain = "R-survival"),
+             format(x$offtable), "\n", sep = "")
         }
     if (!is.null(x$summary)) {
-        cat("Matches to the chosen rate table:\n  ", x$summary)
+        cat(gettext("Matches to the chosen rate table:", domain = "R-survival"), "\n  ", x$summary, sep = "")
         }
-    cat("Observations in the data set:", x$observations, "\n")
+    cat(gettext("Observations in the data set: ", domain = "R-survival"), x$observations, "\n", sep = "")
     if (!is.null(x$na.action))
       cat("  (", naprint(x$na.action), ")\n", sep='')
     cat("\n")
@@ -50,13 +50,13 @@ summary.pyears <- function(object, header=TRUE, call=header,
                "rate", "ci.r", "rr", "ci.rr", "vline", "vertical", 
                "legend", "totals")
     if (any(!temp) || length(temp) != 14 || any(is.na(temp))) {
-        stop(gettextf("the %s argument(s) must be single logical values", paste(tname[!temp], collapse=", "), domain = "R-survival"), domain = NA)
+        stop(gettextf("the %s argument(s) must be single logical values", paste(tname[!temp], collapse=", ")))
     }
     if (!is.numeric(conf.level) || conf.level <=0 || conf.level >=1 |
         length(conf.level) > 1 || is.na(conf.level) > 1)
         stop("conf.level must be a single numeric between 0 and 1")
     if (is.na(scale) || !is.numeric(scale) || length(scale) !=1 || scale <=0)
-        stop(gettextf("'%s' argument must be a value > 0", "scale"))
+        stop("scale must be a value > 0")
     
     vname <- attr(terms(object), "term.labels")  #variable names
 
@@ -98,12 +98,12 @@ summary.pyears <- function(object, header=TRUE, call=header,
         cat("\n")
     }
     if (header) {
-        cat(gettextf("number of observations = %d", object$observations, domain = "R-survival"))
+        cat(gettext("number of observations = ", domain = "R-survival"), object$observations, sep = "")
         if (length(object$omit))
             cat("  (", naprint(object$omit), ")\n", sep="")
         else cat("\n")
         if (object$offtable > 0)
-            cat(gettextf(" Total time lost (off table) %s", format(object$offtable), domain = "R-survival"), "\n", sep = "")
+            cat(gettext(" Total time lost (off table) ", domain = "R-survival"), format(object$offtable), "\n", sep = "")
         cat("\n")
     }
     

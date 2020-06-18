@@ -77,47 +77,47 @@ typedef struct {
        sed -e '/\/$/d' | \
        sort | uniq | \
        awk '{NAME=$1;gsub(/-/,"_",NAME);
-	     printf("static  const   char    ENC_%-20s\"%s\";\n",
+	     printf("static  constexpr   char    ENC_%-20s\"%s\";\n",
 	     NAME "[]=" ,
 	     $1)}'
   */
-static  char    ENC_ARMSCII_8[]=        "ARMSCII-8";
-static  char    ENC_BIG5[]=             "BIG5";
-static  char    ENC_BIG5_HKSCS[]=       "BIG5-HKSCS";
-static  char    ENC_C[]=                "C";
-static  char    ENC_CP1251[]=           "CP1251";
-static  char    ENC_CP1255[]=           "CP1255";
-static  char    ENC_CP1256[]=           "CP1256";
-static  char    ENC_EUC_CN[]=           "EUC-CN";
-static  char    ENC_EUC_JP[]=           "EUC-JP";
-static  char    ENC_EUC_KR[]=           "EUC-KR";
-static  char    ENC_EUC_TW[]=           "EUC-TW";
-static  char    ENC_GB2312[]=           "GB2312";
-static  char    ENC_GBK[]=              "GBK";
-static  char    ENC_GEORGIAN_ACADEMY[]= "GEORGIAN-ACADEMY";
-/* static  char    ENC_GEORGIAN_PS[]=      "GEORGIAN-PS"; */
-/* static  char    ENC_ISIRI_3342[]=       "ISIRI-3342"; */
-static  char    ENC_ISO8859_1[]=        "ISO8859-1";
-static  char    ENC_ISO8859_10[]=       "ISO8859-10";
-static  char    ENC_ISO8859_11[]=       "ISO8859-11";
-static  char    ENC_ISO8859_13[]=       "ISO8859-13";
-/* static  char    ENC_ISO8859_14[]=       "ISO8859-14"; */
-static  char    ENC_ISO8859_15[]=       "ISO8859-15";
-static  char    ENC_ISO8859_2[]=        "ISO8859-2";
-static  char    ENC_ISO8859_3[]=        "ISO8859-3";
-/* static  char    ENC_ISO8859_4[]=        "ISO8859-4"; */
-static  char    ENC_ISO8859_5[]=        "ISO8859-5";
-static  char    ENC_ISO8859_6[]=        "ISO8859-6";
-static  char    ENC_ISO8859_7[]=        "ISO8859-7";
-static  char    ENC_ISO8859_8[]=        "ISO8859-8";
-static  char    ENC_ISO8859_9[]=        "ISO8859-9";
-static  char    ENC_KOI8_R[]=           "KOI8-R";
-static  char    ENC_KOI8_U[]=           "KOI8-U";
-/* static  char    ENC_SJIS[]=             "SJIS"; */
-static  char    ENC_TCVN[]=             "TCVN";
-/* static  char    ENC_TIS620[]=           "TIS620"; */
-static  char    ENC_UTF_8[]=            "UTF-8";
-/* static  char    ENC_VISCII[]=           "VISCII"; */
+static  constexpr char    ENC_ARMSCII_8[]=        "ARMSCII-8";
+static  constexpr char    ENC_BIG5[]=             "BIG5";
+static  constexpr char    ENC_BIG5_HKSCS[]=       "BIG5-HKSCS";
+static  constexpr char    ENC_C[]=                "C";
+static  constexpr char    ENC_CP1251[]=           "CP1251";
+static  constexpr char    ENC_CP1255[]=           "CP1255";
+static  constexpr char    ENC_CP1256[]=           "CP1256";
+static  constexpr char    ENC_EUC_CN[]=           "EUC-CN";
+static  constexpr char    ENC_EUC_JP[]=           "EUC-JP";
+static  constexpr char    ENC_EUC_KR[]=           "EUC-KR";
+static  constexpr char    ENC_EUC_TW[]=           "EUC-TW";
+static  constexpr char    ENC_GB2312[]=           "GB2312";
+static  constexpr char    ENC_GBK[]=              "GBK";
+static  constexpr char    ENC_GEORGIAN_ACADEMY[]= "GEORGIAN-ACADEMY";
+/* static  constexpr char    ENC_GEORGIAN_PS[]=      "GEORGIAN-PS"; */
+/* static  constexpr char    ENC_ISIRI_3342[]=       "ISIRI-3342"; */
+static  constexpr char    ENC_ISO8859_1[]=        "ISO8859-1";
+static  constexpr char    ENC_ISO8859_10[]=       "ISO8859-10";
+static  constexpr char    ENC_ISO8859_11[]=       "ISO8859-11";
+static  constexpr char    ENC_ISO8859_13[]=       "ISO8859-13";
+/* static  constexpr char    ENC_ISO8859_14[]=       "ISO8859-14"; */
+static  constexpr char    ENC_ISO8859_15[]=       "ISO8859-15";
+static  constexpr char    ENC_ISO8859_2[]=        "ISO8859-2";
+static  constexpr char    ENC_ISO8859_3[]=        "ISO8859-3";
+/* static  constexpr char    ENC_ISO8859_4[]=        "ISO8859-4"; */
+static  constexpr char    ENC_ISO8859_5[]=        "ISO8859-5";
+static  constexpr char    ENC_ISO8859_6[]=        "ISO8859-6";
+static  constexpr char    ENC_ISO8859_7[]=        "ISO8859-7";
+static  constexpr char    ENC_ISO8859_8[]=        "ISO8859-8";
+static  constexpr char    ENC_ISO8859_9[]=        "ISO8859-9";
+static  constexpr char    ENC_KOI8_R[]=           "KOI8-R";
+static  constexpr char    ENC_KOI8_U[]=           "KOI8-U";
+/* static  constexpr char    ENC_SJIS[]=             "SJIS"; */
+static  constexpr char    ENC_TCVN[]=             "TCVN";
+/* static  constexpr char    ENC_TIS620[]=           "TIS620"; */
+static  constexpr char    ENC_UTF_8[]=            "UTF-8";
+/* static  constexpr char    ENC_VISCII[]=           "VISCII"; */
 
 /*
    # charset getscript. iconv list output line is backslant.
@@ -139,7 +139,7 @@ static  char    ENC_UTF_8[]=            "UTF-8";
  awk '{printf ("    {%-34s%s},\n", "\"" $1 "\",", $2)}'
 */
 
-static const name_value guess[] = {
+static constexpr name_value guess[] = {
     {"Cextend",                        ENC_ISO8859_1},
     {"English_United-States.437",      ENC_C},
     {"ISO-8859-1",                     ENC_ISO8859_1},
@@ -477,10 +477,10 @@ static const name_value guess[] = {
     {"zh_TW",                          ENC_BIG5},
     {"zu_ZA",                          ENC_ISO8859_1},
 };
-static const int guess_count = (sizeof(guess)/sizeof(name_value));
+static constexpr int guess_count = (sizeof(guess)/sizeof(name_value));
 #endif
 
-static const name_value known[] = {
+static constexpr name_value known[] = {
     {"iso88591", "ISO8859-1"},
     {"iso88592", "ISO8859-2"},
     {"iso88593", "ISO8859-3"},
@@ -527,7 +527,7 @@ static const name_value known[] = {
     {"big5hkscs", "BIG5-HKSCS"},
 #endif
 };
-static const int known_count = (sizeof(known)/sizeof(name_value));
+static constexpr int known_count = (sizeof(known)/sizeof(name_value));
 
 
 #ifndef __APPLE__

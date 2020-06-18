@@ -17,8 +17,8 @@ summary.survfit <- function(object, times, censored=FALSE,
             if (rmean < min(fit$time)) 
                 stop("Truncation point for the mean time in state is < smallest survival")
         }
-        else if (rmean < object$start.time)
-            stop("Truncation point for the mean is < smallest survival")
+        else if (rmean < fit$start.time)
+            stop("Truncation point for the mean time in state is < smallest survival")
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
@@ -108,6 +108,8 @@ summary.survfit <- function(object, times, censored=FALSE,
             
             index1 <- findInterval(ptimes, fit$time) 
             index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
+            if (length(index1) ==0)
+                stop("no points selected for one or more curves, consider using the extend argument")
             # The pmax() above encodes the assumption that n.risk for any
             #  times before the first observation = n.risk at the first obs
             fit$time <- ptimes
@@ -302,6 +304,8 @@ summary.survfitms <- function(object, times, censored=FALSE,
             
             index1 <- findInterval(ptimes, fit$time) 
             index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
+            if (length(index1) ==0)
+                stop("no points selected for one or more curves, consider using the extend argument")
             # The pmax() above encodes the assumption that n.risk for any
             #  times before the first observation = n.risk at the first obs
             fit$time <- ptimes
@@ -561,14 +565,14 @@ survmean2 <- function(x, scale=1, rmean) {
         newx$transitions <- newx$states <- newx$newdata <- NULL
         
         # what strata and columns do I need?
-        itemp <- matrix(1:prod(dd), nrow=dd[1])
+        itemp <- matrix(seq_len(prod(dd)), nrow=dd[1])
         jj <- (col(itemp))[i]    # columns
         ii <- (row(itemp))[i]    # this is now the strata id
         
         if (dtype[1]!=1 || dd[1]==1) # no strata or only 1
-            irow <- rep(seq(along= x$time), length(ii))
+            irow <- rep(seq_along(x$time), length(ii))
         else {
-            itemp2 <- split(1:sum(x$strata), rep(1:length(x$strata), x$strata))
+            itemp2 <- split(seq_len(sum(x$strata)), rep(seq_along(x$strata), x$strata))
             irow <- unlist(itemp2[ii])  # rows of the pstate object
         }
         inum <- x$strata[ii]        # number of rows in each ii
@@ -607,7 +611,7 @@ survmean2 <- function(x, scale=1, rmean) {
     if (is.null(i)) i <- seq.int(dd[1])
     else if (length(x$strata)) i <- nmatch(i, names(x$strata))
     if (dd[1]==1) # no strata or only 1
-        irow <- rep(seq(along= x$time), length(i))
+        irow <- rep(seq_along(x$time), length(i))
     else {
         itemp <- split(seq_len(sum(x$strata)), rep(seq_along(x$strata), x$strata))
         irow <- unlist(itemp[i])  # rows of the pstate object

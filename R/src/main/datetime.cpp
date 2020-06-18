@@ -111,7 +111,7 @@ extern char *tzname[2];
 /* Substitute based on glibc code. */
 #include "Rstrptime.h"
 
-static const int days_in_month[12] =
+static constexpr int days_in_month[12] =
 {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 #define isleap(y) ((((y) % 4) == 0 && ((y) % 100) != 0) || ((y) % 400) == 0)
@@ -301,7 +301,7 @@ static Rboolean have_broken_mktime(void)
 
 #ifndef HAVE_POSIX_LEAPSECONDS
 static int n_leapseconds = 27; // 2017-01, sync with .leap.seconds in R (!)
-static const time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
+static constexpr time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
 {  78796800, 94694400,126230400,157766400,189302400,220924800,252460800,
   283996800,315532800,362793600,394329600,425865600,489024000,567993600,
   631152000,662688000,709948800,741484800,773020800,820454400,867715200,
@@ -636,7 +636,7 @@ static void glibc_fix(stm *tm, int *invalid)
 }
 
 
-static const char ltnames [][7] =
+static constexpr char ltnames [][7] =
 { "sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "isdst",
   "zone",  "gmtoff"};
 

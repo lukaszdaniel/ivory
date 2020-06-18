@@ -54,28 +54,28 @@
 double Rf_rgamma(double a, double scale)
 {
 /* Constants : */
-    const static double sqrt32 = 5.656854;
-    const static double exp_m1 = 0.36787944117144232159;/* exp(-1) = 1/e */
+    static constexpr double sqrt32 = 5.656854;
+    static constexpr double exp_m1 = 0.36787944117144232159;/* exp(-1) = 1/e */
 
     /* Coefficients q[k] - for q0 = sum(q[k]*a^(-k))
      * Coefficients a[k] - for q = q0+(t*t/2)*sum(a[k]*v^k)
      * Coefficients e[k] - for exp(q)-1 = sum(e[k]*q^k)
      */
-    const static double q1 = 0.04166669;
-    const static double q2 = 0.02083148;
-    const static double q3 = 0.00801191;
-    const static double q4 = 0.00144121;
-    const static double q5 = -7.388e-5;
-    const static double q6 = 2.4511e-4;
-    const static double q7 = 2.424e-4;
+    static constexpr double q1 = 0.04166669;
+    static constexpr double q2 = 0.02083148;
+    static constexpr double q3 = 0.00801191;
+    static constexpr double q4 = 0.00144121;
+    static constexpr double q5 = -7.388e-5;
+    static constexpr double q6 = 2.4511e-4;
+    static constexpr double q7 = 2.424e-4;
 
-    const static double a1 = 0.3333333;
-    const static double a2 = -0.250003;
-    const static double a3 = 0.2000062;
-    const static double a4 = -0.1662921;
-    const static double a5 = 0.1423657;
-    const static double a6 = -0.1367177;
-    const static double a7 = 0.1233795;
+    static constexpr double a1 = 0.3333333;
+    static constexpr double a2 = -0.250003;
+    static constexpr double a3 = 0.2000062;
+    static constexpr double a4 = -0.1662921;
+    static constexpr double a5 = 0.1423657;
+    static constexpr double a6 = -0.1367177;
+    static constexpr double a7 = 0.1233795;
 
     /* State variables [FIXME for threading!] :*/
     static double aa = 0.;

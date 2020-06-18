@@ -462,8 +462,8 @@ cellname <- function(i, j) paste("cell", i, j, sep = "")
 
 splom.vpTree <- function(n) {
     vplist <- vector("list", n^2)
-    for (i in 1:n)
-        for (j in 1:n)
+    for (i in seq_len(n))
+        for (j in seq_len(n))
             vplist[[(i - 1)*n + j]] <-
               viewport(layout.pos.row = i, layout.pos.col = j,
                        name = cellname(i, j))
@@ -476,8 +476,8 @@ cellpath <- function(i, j) vpPath("cellgrid", cellname(i, j))
 splom <- function(df, name = NULL, draw = TRUE) {
     n <- dim(df)[2]
     glist <- vector("list", n*n)
-    for (i in 1:n)
-        for (j in 1:n) {
+    for (i in seq_len(n))
+        for (j in seq_len(n)) {
             glist[[(i - 1)*n + j]] <-if (i == j)
                 textGrob(paste("diag", i, sep = ""),
                          gp = gpar(col = "grey"), vp = cellpath(i, j))

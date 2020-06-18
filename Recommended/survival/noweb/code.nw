@@ -110,7 +110,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         indx <- pmatch(names(extraArgs), controlargs, nomatch=0L)
         if (any(indx==0L))
             stop(gettextf("Argument %s not matched", 
-                          names(extraArgs)[indx==0L]), domain = NA)
+                          names(extraArgs)[indx==0L]), domain = "R-survival")
     }
     if (missing(control)) control <- coxph.control(...) 
 
@@ -171,7 +171,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     indx <- match(c("formula", "data", "weights", "subset", "na.action",
                     "cluster", "id", "istate"),
                   names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("A formula argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     tform <- Call[c(1,indx)]  # only keep the arguments we wanted
     tform[[1L]] <- quote(stats::model.frame)  # change the function called
 
@@ -186,7 +186,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
 
     # add specials to the formula
-    special <- c("strata", "tt")
+    special <- c("strata", "tt", "frailty", "ridge", "pspline")
     tform$formula <- if(missing(data)) terms(formula, special) else
                                       terms(formula, special, data=data)
 
@@ -199,22 +199,50 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     # okay, now evaluate the formula
     mf <- eval(tform, parent.frame())
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
     Terms <- terms(mf)
 
-    # Grab the response variable
-    Y <- model.extract(mf, "response")
-    if (!inherits(Y, "Surv")) stop("Response must be a survival object")
+    # Grab the response variable, and deal with Surv2 objects
+    n <- nrow(mf)
+    Y <- model.response(mf)
+    isSurv2 <- inherits(Y, "Surv2")
+    if (isSurv2) {
+        # this is Surv2 style data
+        # if there were any obs removed due to missing, remake the model frame
+        if (length(attr(mf, "na.action"))) {
+            tform$na.action <- na.pass
+            mf <- eval.parent(tform)
+        }
+        if (!is.null(attr(Terms, "specials")$cluster))
+            stop("cluster() cannot appear in the model statement")
+        new <- surv2data(mf)
+        mf <- new$mf
+        istate <- new$istate
+        id <- new$id
+        Y <- new$y
+        n <- nrow(mf)
+    }       
+    else {
+        if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
+        id <- model.extract(mf, "id")
+        istate <- model.extract(mf, "istate")
+    }
+    if (n==0) stop("no (non-missing) observations")
+
     type <- attr(Y, "type")
     multi <- FALSE
     if (type=="mright" || type == "mcounting") multi <- TRUE
     else if (type!='right' && type!='counting')
-	stop(paste("Cox model doesn't support \"", type,
-			  "\" survival data", sep=''))
+	stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
     data.n <- nrow(Y)   #remember this before any time transforms
 
     if (!multi && multiform)
         stop("formula is a list but the response is not multi-state")
+    if (multi && length(attr(Terms, "specials")$frailty) >0)
+        stop("multi-state models do not currently support frailty terms")
+    if (multi && length(attr(Terms, "specials")$pspline) >0)
+        stop("multi-state models do not currently support pspline terms")
+    if (multi && length(attr(Terms, "specials")$ridge) >0)
+        stop("multi-state models do not currently support ridge penalties")
 
     if (control$timefix) Y <- aeqSurv(Y)
     <<coxph-bothsides>>
@@ -249,7 +277,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     timetrans <- attr(Terms, "specials")$tt
     if (missing(tt)) tt <- NULL
     if (length(timetrans)) {
-        if (multi) stop("the tt() transform is not implemented for multi-state models")
+        if (multi || isSurv2) stop("the tt() transform is not implemented for multi-state or Surv2 models")
          <<coxph-transform>>
         }
    
@@ -258,7 +286,6 @@ coxph <- function(formula, data, weights, subset, na.action,
     # grab the cluster, if present.  Using cluster() in a formula is no
     #  longer encouraged
     cluster <- model.extract(mf, "cluster")
-    id <- model.extract(mf, "id")
     weights <- model.weights(mf)
     # The user can call with cluster, id, robust, or any combination
     # Default for robust: if cluster or any id with > 1 event or 
@@ -316,8 +343,6 @@ coxph <- function(formula, data, weights, subset, na.action,
     contrast.arg <- NULL  #due to shared code with model.matrix.coxph
     attr(Terms, "intercept") <- 1  # always have a baseline hazard
 
-    # Grab the id variable to check out multi-state data
-    id <- model.extract(mf, "id")
     if (multi) {
         <<coxph-multiform2>>
     }
@@ -393,18 +418,11 @@ tform$na.action <- na.pass  # defer any missing value work to later
 @
 
 <<coxph-multiform2>>=
-# remove strata from dformula, before any further processing
-if (length(dropterms)){ 
-    Terms2 <- Terms[-dropterms]
-    dformula <- formula(Terms2)
-} else Terms2 <- Terms
-
 # check for consistency of the states, and create a transition
 #  matrix
 if (length(id)==0) 
     stop("an id statement is required for multi-state models")
 
-istate <- model.extract(mf, "istate")
 mcheck <- survcheck2(Y, id, istate)
 # error messages here
 if (mcheck$flag["overlap"] > 0)
@@ -417,9 +435,9 @@ states <- mcheck$states
 #  build tmap, which has one row per term, one column per transition
 if (missing(statedata))
     covlist2 <- parsecovar2(covlist, NULL, dformula= dformula,
-                        Terms2, transitions, states)
+                        Terms, transitions, states)
 else covlist2 <- parsecovar2(covlist, statedata, dformula= dformula,
-                        Terms2, transitions, states)
+                        Terms, transitions, states)
 tmap <- covlist2$tmap
 if (!is.null(covlist)) {
     <<coxph-missing>>
@@ -428,7 +446,7 @@ if (!is.null(covlist)) {
  
 For multi-state models we can't tell what observations should be removed until
 any extra formulas have been processed.
-There may still be rows that are missing \emph{some} of the covariates but
+There may be rows that are missing \emph{some} of the covariates but
 are okay for \emph{some} transitions.  Others could be useless.
 Those rows can be removed from the model frame before creating the X matrix.
 Also identify partially used rows, ones where the necessary covariates are
@@ -477,6 +495,25 @@ For a multi-state model, create the expanded X matrix.  Sometimes it is
 much expanded.  
 The first step is to create the cmap matrix from tmap by expanding terms;
 factors turn into multiple columns for instance.  
+If tmap has rows (terms) for strata, then we have to deal with the complication
+that a strata might be applied to some transitions and not to others.
+<<coxph-multi-X>>=
+if (length(strats) >0) {
+    stratum_map <- tmap[c(1L, strats),] # strats includes Y, + tmap has an extra row
+    stratum_map[-1,] <- ifelse(stratum_map[-1,] >0, 1L, 0L)
+    if (nrow(stratum_map) > 2) {
+        temp <- stratum_map[-1,]
+        if (!all(apply(temp, 2, function(x) all(x==0) || all(x==1)))) {
+            # the hard case: some transitions use one strata variable, some
+            #  transitions use another.  We need to keep them separate
+            strata.keep <- mf[,strats]  # this will be a data frame
+            istrat <- sapply(strata.keep, as.numeric)
+        }
+    }
+}
+else stratum_map <- tmap[1,,drop=FALSE]
+@ 
+
 Also create the initial values vector.
 
 The stacker function will create a separate block of observations for every
@@ -491,7 +528,7 @@ Then set up the data.
 
 <<coxph-multi-X>>=
 cmap <- parsecovar3(tmap, colnames(X), attr(X, "assign"))
-xstack <- stacker(cmap, as.integer(istate), X, Y, strata=istrat,
+xstack <- stacker(cmap, stratum_map, as.integer(istate), X, Y, strata=istrat,
                   states=states)
 rkeep <- unique(xstack$rindex)
 transitions <- survcheck2(Y[rkeep,], id[rkeep], istate[rkeep])$transitions
@@ -514,10 +551,10 @@ use that as the label, but if it appears twice, as separate terms for
 two different transitions, then we label it as fred\_x:y where x:y is the
 transition.
 <<coxph-multi-X>>=
-t2 <- tmap[-1,,drop=FALSE]   # remove the intercept row
-r2 <- row(t2)[!duplicated(as.vector(t2))]
-c2 <- col(t2)[!duplicated(as.vector(t2))]
-a2 <- lapply(seq(along=r2), function(i) {cmap[1+assign[[r2[i]]], c2[i]]})
+t2 <- tmap[-c(1, strats),,drop=FALSE]   # remove the intercept row and strata rows
+r2 <- row(t2)[!duplicated(as.vector(t2)) & t2 !=0]
+c2 <- col(t2)[!duplicated(as.vector(t2)) & t2 !=0]
+a2 <- lapply(seq(along=r2), function(i) {cmap[assign[[r2[i]]], c2[i]]})
 # which elements are unique?  
 tab <- table(r2)
 count <- tab[r2]
@@ -574,17 +611,17 @@ if (is.function(tt)) tt <- list(tt)  #single function becomes a list
     
 if (is.list(tt)) {
     if (any(!sapply(tt, is.function))) 
-        stop("The tt argument must contain function or list of functions")
+        stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
     if (length(tt) != ntrans) {
         if (length(tt) ==1) {
             temp <- vector("list", ntrans)
-            for (i in 1:ntrans) temp[[i]] <- tt[[1]]
+            for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
             tt <- temp
         }
-        else stop("Wrong length for tt argument")
+        else stop(gettextf("wrong length for '%s' argument", "tt"))
     }
 }
-else stop("The tt argument must contain a function or list of functions")
+else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
 
 if (ncol(Y)==2) {
     if (length(strats)==0) {
@@ -654,7 +691,7 @@ Y <- Surv(rep(counts$time, counts$nrisk), counts$status)
 type <- 'right'  # new Y is right censored, even if the old was (start, stop]
 
 mf <- mf[tindex,]
-istrat <- rep(1:length(counts$nrisk), counts$nrisk)
+istrat <- rep(seq_along(counts$nrisk), counts$nrisk)
 weights <- model.weights(mf)
 if (!is.null(weights) && any(!is.finite(weights)))
     stop("weights must be finite")  
@@ -662,7 +699,7 @@ if (!is.null(weights) && any(!is.finite(weights)))
 tcall <- attr(Terms, 'variables')[timetrans$terms+2]
 pvars <- attr(Terms, 'predvars')
 pmethod <- sub("makepredictcall.", "", as.vector(methods("makepredictcall")))
-for (i in 1:ntrans) {
+for (i in seq_len(ntrans)) {
     newtt <- (tt[[i]])(mf[[timetrans$var[i]]], Y[,1], istrat, weights)
     mf[[timetrans$var[i]]] <- newtt
     nclass <- class(newtt)
@@ -927,14 +964,16 @@ The requires a shift.  The cluster and strata terms are seen as main
 effects, so appear early in that list.
 We have found a case where terms get relabeled:
 <<relabel>>=
- t1 <- terms( (x1 + x2):x3 + strata(x4))
- t2 <- t1[-1]
+ t1 <- terms( ~(x1 + x2):x3 + strata(x4))
+ t2 <- terms( ~(x1 + x2):x3)
+ t3 <- t1[-1]
  colnames(attr(t1, "factors"))
  colnames(attr(t2, "factors"))
+ colnames(attr(t3, "factors"))
 @ 
 In t1 the strata term appears first, as it is the only thing that looks like
 a main effect, and the column labels are strata(x4), x1:x3, x2:x3.
-In t2 the column labels are x1:x3 and x3:x2 --- note left-right swap of 
+In t3 the column labels are x1:x3 and x3:x2 --- note left-right swap of 
 the second.  This means that using match() on the labels is not a reliable
 approach.
 We instead assume that nothing is reordered and do a shift.
@@ -943,7 +982,7 @@ We instead assume that nothing is reordered and do a shift.
 
 if (length(dropterms)) {
     Terms2 <- Terms[ -dropterms]
-    X <- model.matrix(Terms2, mf, constrasts=contrast.arg)
+    X <- model.matrix(Terms2, mf, constrasts.arg=contrast.arg)
     # we want to number the terms wrt the original model matrix
     temp <- attr(X, "assign")
     shift <- sort(dropterms)
@@ -951,7 +990,7 @@ if (length(dropterms)) {
     if (length(shift)==2) temp + 1*(shift[2] <= temp)
     attr(X, "assign") <- temp 
 }
-else X <- model.matrix(Terms, mf, contrasts=contrast.arg)
+else X <- model.matrix(Terms, mf, contrasts.arg=contrast.arg)
 
 # drop the intercept after the fact, and also drop strata if necessary
 Xatt <- attributes(X) 
@@ -1023,7 +1062,7 @@ if (any(pterms)) {
     # 
     # Check the order of any penalty terms
     ord <- attr(Terms, "order")[match(pname, attr(Terms, 'term.labels'))]
-    if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
+    if (any(ord>1)) stop('Penalty terms cannot be in an interaction')
     pcols <- assign[match(pname, names(assign))] 
     
     fit <- coxpenal.fit(X, Y, istrat, offset, init=init,
@@ -1043,7 +1082,7 @@ else {
         if (type== "right")  fitter <- get("coxexact.fit")
         else  fitter <- get("agexact.fit")
     }
-    else stop(paste ("Unknown method", method))
+    else stop(gettextf("unknown '%s' method", method))
 
     fit <- fitter(X, Y, istrat, offset, init, control, weights=weights,
                   method=method, row.names(mf))
@@ -1057,9 +1096,8 @@ if (is.character(fit)) {
 }
 else {
     if (!is.null(fit$coefficients) && any(is.na(fit$coefficients))) {
-       vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
-       msg <-paste("X matrix deemed to be singular; variable",
-    		   paste(vars, collapse=" "))
+       vars <- seq_along(fit$coefficients)[is.na(fit$coefficients)]
+       msg <- gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
        if (!singular.ok) stop(msg)
        # else warning(msg)  # stop being chatty
     }
@@ -1105,7 +1143,7 @@ else {
         # The init vector might be longer than the betas, for a sparse term
         if (is.null(init)) temp <- fit$coefficients[nabeta]
         else temp <- (fit$coefficients - 
-    		  init[1:length(fit$coefficients)])[nabeta]
+    		  init[seq_along(fit$coefficients)])[nabeta]
         fit$wald.test <-  coxph.wtest(fit$var[nabeta,nabeta], temp,
     				  control$toler.chol)$test
     }
@@ -1150,17 +1188,23 @@ model frame.
 
 <<coxph-finish>>=
 if (!is.null(weights) && any(weights!=1)) fit$weights <- weights
-names(fit$means) <- names(fit$coefficients)
-
 if (multi) {
     fit$transitions <- transitions
     fit$states <- states
     fit$cmap <- cmap
+    fit$stratum_map <- stratum_map   # why not 'stratamap'?  Confusion with fit$strata
     fit$resid <- rowsum(fit$resid, xstack$rindex)
-    names(fit$coefficients) <- seq(along=fit$coefficients)
+    # add a suffix to each coefficent name.  Those that map to multiple transitions
+    #  get the first transition they map to
+    single <- apply(cmap, 1, function(x) all(x %in% c(0, max(x)))) #only 1 coef
+    cindx <- col(cmap)[match(seq_along(fit$coefficients), cmap)]
+    rindx <- row(cmap)[match(seq_along(fit$coefficients), cmap)]
+    suffix <- ifelse(single[rindx], "", paste0("_", colnames(cmap)[cindx]))
+    names(fit$coefficients) <- paste0(names(fit$coefficients), suffix)
     if (x) fit$strata <- istrat  # save the expanded strata
     class(fit) <- c("coxphms", class(fit))
 }
+names(fit$means) <- names(fit$coefficients)
  
 fit$formula <- formula(Terms)
 if (length(xlevels) >0) fit$xlevels <- xlevels
@@ -1858,7 +1902,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
 
     if (missing(offset) || is.null(offset)) offset <- rep(0.0, nrow(y))
     if (missing(weights)|| is.null(weights))weights<- rep(1.0, nrow(y))
-    else if (any(weights<=0)) stop("Invalid weights, must be >0")
+    else if (any(weights<=0)) stop("invalid weights, must be >0")
     else weights <- as.vector(weights)
 
     # Find rows to be ignored.  We have to match within strata: a
@@ -1897,7 +1941,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
         #  To keep the C code to a small set, we call the usual routines, but
 	#  with a dummy X matrix and 0 iterations
 	nvar <- 1
-	x <- matrix(as.double(1:nrow(y)), ncol=1)  #keep the .C call happy
+	x <- matrix(as.double(seq_len(nrow(y))), ncol=1)  #keep the .C call happy
 	maxiter <- 0
 	nullmodel <- TRUE
         if (length(init) !=0) stop("Wrong length for inital values")
@@ -1925,7 +1969,7 @@ agreg.fit <- function(x, y, strata, offset, init, control,
                    as.integer(maxiter), 
                    as.double(control$eps),
                    as.double(control$toler.chol),
-                   as.integer(0)) # internally rescale
+                   as.integer(1)) # internally rescale
 
     <<agreg-fixup>>
     <<agreg-finish>>
@@ -1957,17 +2001,15 @@ else which.sing <- rep(FALSE,nvar)
 if (maxiter >1) {
     infs <- abs(agfit$u %*% vmat)
     if (any(!is.finite(coef)) || any(!is.finite(vmat)))
-        stop("routine failed due to numeric overflow.",
-             "This should never happen.  Please contact the author.")   
+        stop("routine failed due to numeric overflow. This should never happen. Please contact the author.")
     if (agfit$flag[4] > 0)
         warning("Ran out of iterations and did not converge")
     else {
         infs <- (!is.finite(agfit$u) |
                  infs > control$toler.inf*(1+ abs(coef)))
         if (any(infs))
-            warning(paste("Loglik converged before variable ",
-                          paste((1:nvar)[infs],collapse=","),
-                          "; beta may be infinite. "))
+            warning(gettextf("Loglik converged before variable %s; beta may be infinite.",
+                          paste(seq_len(nvar)[infs], collapse = ", ")))
     }
 }
 @ 
@@ -2904,7 +2946,7 @@ if (any(tfac >1))
 
 Terms <- object$terms
 n <- object$n[1]
-if (!has.strata) strata <- rep(0L, n)
+if (!has.strata) strata <- NULL
 else strata <- object$strata
 
 missid <- missing(id) # I need this later, and setting id below makes
@@ -2976,15 +3018,13 @@ might not have that element, if missing assume TRUE.
 position <- NULL
 Y <- object[['y']]
 if (is.null(mf)) {
-    weights <- rep(1., n)
-    offset <- rep(0., n)
+    weights <- object$weights  # let offsets/weights be NULL until needed
+    offset <- NULL
     X <- object[['x']]
 }
 else {
     weights <- model.weights(mf)
-    if (is.null(weights)) weights <- rep(1.0, n)
     offset <- model.offset(mf)
-    if (is.null(offset)) offset <- rep(0., n)
     X <- model.matrix.coxph(object, data=mf)
     if (is.null(Y) || coxms) {
         Y <- model.response(mf)
@@ -3026,7 +3066,7 @@ if (!is.null(mf)){
 }
 type <- attr(Y, 'type')
 if (!type %in% c("right", "counting", "mright", "mcounting"))
-    stop("Cannot handle \"", type, "\" type survival data")
+    stop(gettextf("Cannot handle \"%s\" type survival data", type))
 if (type=="right" || type== "mright") individual <- FALSE
 
 if (!missing(start.time)) {
@@ -3044,10 +3084,11 @@ if (!missing(start.time)) {
         stop("start.time argument has removed all endpoints")
     Y <- Y[keep,,drop=FALSE]
     X <- X[keep,,drop=FALSE]
-    offset <- offset[keep]
-    strata <- strata[keep]
+    if (!is.null(offset)) offset <- offset[keep]
+    if (!is.null(weights)) weights <- weights[keep]
+    if (!is.null(strata))  strata <- strata[keep]
     if (length(id) >0 ) id <- id[keep]
-    if (length(position)) position <- position[keep]
+    if (length(position) >0) position <- position[keep]
     n <- nrow(Y)
 }
 @
@@ -3088,6 +3129,7 @@ if (length(object$means) ==0) { # a model with only an offset term
     #  (This case is really rare)
     # se.fit <- FALSE
     X <- matrix(0., nrow=n, ncol=1)
+    if (is.null(offset)) offset <- rep(0, n)
     xcenter <- mean(offset)
     coef <- 0.0
     varmat <- matrix(0.0, 1, 1)
@@ -3096,13 +3138,15 @@ if (length(object$means) ==0) { # a model with only an offset term
 else {
     varmat <- object$var
     beta <- ifelse(is.na(object$coefficients), 0, object$coefficients)
-    xcenter <- sum(object$means * beta)+ mean(offset)
+    if (is.null(offset)) xcenter <- sum(object$means * beta)
+    else xcenter <- sum(object$means * beta)+ mean(offset)
     if (!is.null(object$frail)) {
        keep <- !grepl("frailty(", dimnames(X)[[2]], fixed=TRUE)
        X <- X[,keep, drop=F]
     }
         
-    risk <- c(exp(X%*% beta + offset - xcenter))
+    if (is.null(offset)) risk <- c(exp(X%*% beta - xcenter))
+    else     risk <- c(exp(X%*% beta + offset - xcenter))
 }
 @ 
 
@@ -3201,9 +3245,9 @@ Then turn it into a data frame, like it should have been from the beginning.
 people forget it ever existed.) 
 <<survfit.coxph-newdata2>>=
 if (is.vector(newdata, "numeric")) {
-    if (individual) stop("newdata must be a data frame")
+    if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
     if (is.null(names(newdata))) {
-        stop("Newdata argument must be a data frame")
+        stop(gettextf("'%s' argument must be a data frame", "newdata"))
     }
     newdata <- data.frame(as.list(newdata), stringsAsFactors=FALSE)
 }
@@ -3287,10 +3331,10 @@ else strata2 <- factor(rep(0, nrow(mf2)))
 if (!robust) cluster <- NULL
 if (individual) {
     if (missing(newdata)) 
-        stop("The newdata argument must be present when individual=TRUE")
+        stop("The newdata argument must be present when 'individual=TRUE'")
     if (!missid) {  #grab the id variable
         id2 <- model.extract(mf2, "id")
-        if (is.null(id2)) stop("id=NULL is an invalid argument")
+        if (is.null(id2)) stop("'id=NULL' is an invalid argument")
         }
     else id2 <- rep(1, nrow(mf2))
     
@@ -3304,7 +3348,7 @@ if (individual) {
     if (attr(y2,'type') != type)
         stop("Survival type of newdata does not match the fitted model")
     if (attr(y2, "type") != "counting")
-        stop("Individual=TRUE is only valid for counting process data")
+        stop("'individual=TRUE' is only valid for counting process data")
     y2 <- y2[,1:2, drop=F]  #throw away status, it's never used
 }
 else if (missing(newdata)) {
@@ -3353,7 +3397,7 @@ The names of the curves will be the rownames of the newdata arg,
 if they exist.
 <<newstrata-fixup>>=
 nr <- nrow(result$surv)  #a vector if newdata had only 1 row
-indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
+indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
 rows <- indx1[as.numeric(strata2)]  #the rows for each curve
 
 indx2 <- unlist(rows)  #index for time, n.risk, n.event, n.censor
@@ -3450,8 +3494,9 @@ coxsurv.fit <- function(ctype, stype, se.fit, varmat, cluster,
     names(survlist) <- ustrata
     survtype <- if (stype==1) 1 else ctype+1
     vartype <- survtype
-        
-    for (i in 1:nstrata) {
+    if (is.null(wt)) wt <- rep(1.0, nrow(y))
+    if (is.null(strata)) strata <- rep(1L, nrow(y))
+    for (i in seq_len(nstrata)) {
         indx <- which(strata== ustrata[i])
         survlist[[i]] <- agsurv(y[indx,,drop=F], x[indx,,drop=F], 
                                 wt[indx], risk[indx],
@@ -3567,7 +3612,7 @@ expand <- function(fit, x2, varmat, se.fit) {
         dimnames(fit$surv) <- list(NULL, row.names(x2))
         if (se.fit) {
             varh <- matrix(0., nrow=length(fit$varhaz), ncol=nrow(x2))
-            for (i in 1:nrow(x2)) {
+            for (i in seq_len(nrow(x2))) {
                 dt <- outer(fit$cumhaz, x2[i,], '*') - fit$xbar
                 varh[,i] <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt))*
                     risk2[i]^2
@@ -3638,7 +3683,7 @@ else {
         hazard  <- vector('list', ntarget)
         stemp <- as.integer(strata2)
         timeforward <- 0
-        for (i in 1:ntarget) {
+        for (i in seq_len(ntarget)) {
             slist <- survlist[[stemp[i]]]
             indx <- which(slist$time > y2[i,1] & slist$time <= y2[i,2])
             if (length(indx)==0) {
@@ -3691,7 +3736,7 @@ else {
     else {
         uid <- unique(id2)
         result <- vector('list', length=length(uid))
-        for (i in 1:length(uid)) {
+        for (i in seq_along(uid)) {
             indx <- which(id2==uid[i])
             result[[i]] <- onecurve(survlist, x2[indx,,drop=FALSE], 
                                      y2[indx,,drop=FALSE], 
@@ -3788,7 +3833,7 @@ agsurv <- function(y, x, wt, risk, survtype, vartype) {
     else {
         delta <- min(diff(time))/2
         etime <- c(sort(unique(y[,1])), max(y[,1])+delta)  #unique entry times
-        indx  <- approx(etime, 1:length(etime), time, method='constant',
+        indx  <- approx(etime, seq_along(etime), time, method='constant',
                         rule=2, f=1)$y   
         esum <- rcumsum(rowsum(wrisk, y[,1]))  #not yet entered
         nrisk <- nrisk - c(esum,0)[indx]
@@ -3923,7 +3968,7 @@ On output the values are
     \end{description}
     \item d=3
       \begin{description}
-        \item[sum1] (1/3) [[(1/x1 + 1/(x1 - x2/3 + 1/(x1 - 2*x2/3))]]
+        \item[sum1] (1/3) [[(1/x1 + 1/(x1 - x2/3) + 1/(x1 - 2*x2/3))]]
         \item[sum2] (1/3) (  same terms, squared)
         \item[xbar] (1/3) [[(xsum/x1^2 + (xsum - 1/3 xsum2)/(x1- x2/3)^2 + ]]\\
           [[(xsum - 2/3 xsum2)/(x1- 2/3 x3)^2)]]
@@ -4012,7 +4057,7 @@ while for the computation proper it is easier to make use of the same
 expanded data set that coxph used for a multi-state fit.
 
 <<survfit.coxphms-setupa>>=
-# Rebuild istate using the mcheck routine
+# Rebuild istate using the survcheck routine
 istate <- model.extract(mf, "istate")
 mcheck <- survcheck2(Y, oldid, istate)
 transitions <- mcheck$transitions
@@ -4028,14 +4073,21 @@ if (missing(start.time)) start.time <- min(Y[,2], 0)
 #  remove those rows first since they won't be in the final output.
 t2 <- transitions[, is.na(match(colnames(transitions), "(censored)")), drop=FALSE]
 absorb <- row.names(t2)[rowSums(t2)==0]
+
+if (is.null(weights)) weights <- rep(1.0, nrow(Y))
+if (is.null(strata))  tempstrat <- rep(1L, nrow(Y))
+else                  tempstrat <- strata
+
 if (length(absorb)) droprow <- istate %in% absorb  else droprow <- FALSE
 if (any(droprow)) {
     j <- which(!droprow)
-    cifit <- survfitCI(as.factor(strata[j]), Y[j,], weights[j], oldid[j], 
+    cifit <- survfitCI(as.factor(tempstrat[j]), Y[j,], weights[j], 
+                       id =oldid[j], istate= istate[j],
                        istate[j], stype=stype, ctype=ctype,
                        se.fit=FALSE, start.time=start.time, p0=p0)
     }
-else cifit <- survfitCI(as.factor(strata), Y, weights, oldid, istate, 
+else cifit <- survfitCI(as.factor(tempstrat), Y, weights, 
+                        id= oldid, istate = istate, 
                         stype=stype, ctype=ctype, se.fit=FALSE, 
                         start.time=start.time, p0=p0)
 
@@ -4043,7 +4095,7 @@ else cifit <- survfitCI(as.factor(strata), Y, weights, oldid, istate,
 #  expanded data set.
 # Replicate actions found in the coxph-multi-X chunk,
 cluster <- model.extract(mf, "cluster")
-xstack <- stacker(object$cmap, as.integer(istate), X, Y,
+xstack <- stacker(object$cmap, object$stratum_map, as.integer(istate), X, Y,
                   as.integer(strata),
                   states= object$states)
 if (length(position) >0)
@@ -4065,7 +4117,7 @@ Create a matrix of risk scores, number of subjects by number of transitions.
 The reason is that different transitions often have different coefficients.
 
 <<survfit.coxphms-setup3b>>=
-risk2 <- exp(x2 %*% coef(object, type="matrix") - xcenter)
+risk2 <- exp(x2 %*% coef(object, matrix=TRUE) - xcenter)
 @ 
 
 The first step in the computation is to compute the hazard functions for
@@ -4087,7 +4139,7 @@ time points.
 if (individual) {
     stop("time dependent survival curves not yet supported for multistate")
     result <- coxsurv.fit2(ctype, stype, se.fit, varmat, cluster, start.time,
-                           object$cmap, object$transitions, object$states,
+                           object$stratum_map[1,], object$transitions, object$states,
                            Y, X, weights, risk, position, strata, oldid,
                            transition, y2, x2, risk2, strata2, id2)
                           
@@ -4099,7 +4151,7 @@ if (individual) {
         p0 <- cifit$pstate[first,, drop=FALSE]
     }
     cifit <- coxsurv.fit2(ctype, stype, se.fit, varmat, cluster, start.time,
-                           object$cmap, object$transitions, object$states,
+                           object$stratum_map[1,], object$transitions, object$states,
                            Y, X, weights, risk, position, strata, oldid,
                            transition, y2, x2, risk2, cifit=cifit)
 
@@ -4108,7 +4160,7 @@ if (individual) {
 
 <<survfit.coxphms>>=
 coxsurv.fit2 <- function (ctype, stype, se.fit, varmat, cluster, 
-                          start.time, cmap, tmat, states,
+                          start.time, smap, tmat, states,
                           y, x, weights, risk, position, strata, id,
                           transition, y2, x2, risk2, strata2, id2, cifit) {
     # args are the options (ctype, stype, se.fit), args info from the prior fit
@@ -4122,12 +4174,12 @@ coxsurv.fit2 <- function (ctype, stype, se.fit, varmat, cluster,
     nstrata <- length(ustrata)
 
     # make the expansion map.  
-    #  cmap[1,] will contain integers 1, 2,... which match the values in
+    #  smap will contain integers 1, 2,... which match the values in
     # the transtion vector, which in turn is the set of hazard functions that
     # come back from the .Call
     #  The H matrices we will need are nstate by nstate, at each time, with
     # elements that are non-zero only for observed transtions.  Some elements
-    # may be the same: cmat[1,] can have repeats.
+    # may be the same: smat[1,] can have repeats.
     nstate <- length(states)
     tmat <- tmat[,is.na(match(colnames(tmat), "(censored)")), drop=FALSE]
     from <- row(tmat)[tmat>0]  # tmat contains fit$transitions matrix
@@ -4138,7 +4190,7 @@ coxsurv.fit2 <- function (ctype, stype, se.fit, varmat, cluster,
 
     if (nstrata==1) {
         temp <- multihaz(y, x, position, weights, risk, transition,
-                                  ctype, stype, hfill, cmap[1,], 
+                                  ctype, stype, hfill, smap, 
                                   x2, risk2, varmat, nstate, se.fit, 
                                   cifit$pstate[1,], cifit$time)
         cifit$pstate <- temp$pstate
@@ -4155,7 +4207,7 @@ coxsurv.fit2 <- function (ctype, stype, se.fit, varmat, cluster,
             survlist[[i]] <- multihaz(y[indx,,drop=F], x[indx,,drop=F],
                                   position[indx], weights[indx], risk[indx],
                                   transition[indx], ctype, stype, hfill,
-                                  cmap[1,], x2, risk2, varmat, nstate, se.fit, 
+                                  smap, x2, risk2, varmat, nstate, se.fit, 
                                   cifit$pstate[firstrow[i],], timelist[[i]])
                                   
             }
@@ -4181,7 +4233,7 @@ Variables are
   \item ctype, stype = type of hazard and survival
   \item hfill: the starting and ending states for each transition, on row per
     observed transtion type
-  \item cmap: a vector giving the stratum number for each transtion.
+  \item smap: a vector giving the stratum number for each transtion.
   \item x2, risk2 = covariates and risk scores for the predicted values
   \item vmat = variance matrix of the coxph model
   \item se.fit: do or do not compute standard errors
@@ -4192,7 +4244,7 @@ Variables are
 <<survfit.coxphms>>=
 # Compute the hazard  and survival functions 
 multihaz <- function(y, x, position, weight, risk, transition, ctype, stype, 
-                     hfill, cmap, x2, risk2, vmat, nstate, se.fit, p0, utime) {
+                     hfill, smap, x2, risk2, vmat, nstate, se.fit, p0, utime) {
     if (ncol(y) ==2) {
        sort1 <- seq.int(0, nrow(y)-1L)   # sort order for a constant
        y <- cbind(-1.0, y)               # add a start.time column, -1 in case
@@ -4221,19 +4273,25 @@ multihaz <- function(y, x, position, weight, risk, transition, ctype, stype,
 
     hazard <- matrix(cn[,5] / denom1, ncol = fit$ntrans)
     varhaz <- matrix(cn[,5] / denom2, ncol = fit$ntrans)
-    if (any(cmap != seq(along=cmap))) {
-        hazard <- hazard[, cmap]
-        varhaz <- varhaz[, cmap]
+    if (any(smap != seq(along=smap))) {
+        hazard <- hazard[, smap]
+        varhaz <- varhaz[, smap]
     }
 
     # Expand the result, one "hazard set" for each row of x2
     nx2 <- nrow(x2)
     h2 <- array(0, dim=c(nrow(hazard), nx2, ncol(hazard)))
     if (se.fit) v2 <- h2
-    S <- matrix(0, nrow(hazard), nstate)
+    S <- double(nstate)  # survival at the current time
     S2 <- array(0, dim=c(nrow(hazard), nx2, nstate))
  
     H <- matrix(0, nstate, nstate)
+    if (stype==2) {
+        H[hfill] <- colMeans(hazard)
+        diag(H) <- -rowSums(H)
+        esetup <- survexpmsetup(H)
+    }
+
     for (i in 1:nx2) {
         h2[,i,] <- apply(hazard %*% diag(risk2[i,]), 2, cumsum)
         if (se.fit) {
@@ -4243,21 +4301,21 @@ multihaz <- function(y, x, position, weight, risk, transition, ctype, stype,
 #            v2[jj,] <- (apply(varhaz[jj,],2, cumsum) + d3) * (risk2[i])^2
         }
 
-        S[1,] <- p0
-        for (j in 2:ntime) {
+        S <- p0
+        for (j in 1:ntime) {
             H[,] <- 0.0
             H[hfill] <- hazard[j,] *risk2[i,]
             if (stype==1) {
                 diag(H) <- pmin(0, 1 + diag(H)- rowSums(H))
-                S[j,] <- drop(S[j-1,] %*% H)  
+                S <- as.vector(S %*% H)  # don't keep any names
             }
             else {
                 diag(H) <- diag(H) - rowSums(H)
-                S[j,] <- as.vector(S[j-1,] %*% expm(H))  # dgeMatrix issue
+                #S <- as.vector(S %*% expm(H))  # dgeMatrix issue
+                S <- as.vector(S %*% survexpm(H, 1, esetup))
             }
+            S2[j,i,] <- S
         }
-
-        S2[,i,] <- S
     }
 
     rval <- list(time=utime, xgrp=rep(1:nx2, each=nrow(hazard)),
@@ -4300,7 +4358,7 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
     Call <- match.call()
     indx <- match(c("formula", "data", "weights", "subset", "id"),
               names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("A formula argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     temp <- Call[c(1,indx)]  # only keep the arguments we wanted
     temp$na.action <- na.action
     temp[[1L]] <- quote(stats::model.frame)  # change the function called
@@ -4310,11 +4368,11 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
     else              terms(formula, special, data=data)
 
     mf <- eval(temp, parent.frame())
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
     Y <- model.extract(mf, "response")
-    if (!inherits(Y, "Surv")) stop("Response must be a survival object")
+    if (!inherits(Y, "Surv")) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
     type <- attr(Y, "type")
     if (type!='mright' && type!='mcounting')
 	stop("Fine-Gray model requires a multi-state survival")
@@ -4372,7 +4430,7 @@ finegray <- function(formula, data, weights, subset, na.action= na.pass,
     else {
         index <- match(etype, states)
         if (any(is.na(index)))
-            stop ("etype argument has a state that is not in the data")
+            stop("'etype' argument has a state that is not in the data")
         enum <- index[1]
         if (length(index) > 1) warning("only the first endpoint was used")
     }
@@ -4568,7 +4626,7 @@ stratfun <- function(i) {
 
 if (max(istrat) ==1) result <- stratfun(1)
 else {
-    tlist <- lapply(1:max(istrat), stratfun)
+    tlist <- lapply(seq_len(max(istrat)), stratfun)
     result <- do.call("rbind", tlist)
 }
 
@@ -4652,7 +4710,7 @@ it as well since the user's newdata might not contain one.    %'
 The type= survival is treated the same as type expected.
 <<pcoxph-init>>=
 if (!inherits(object, 'coxph'))
-    stop("Primary argument much be a coxph object")
+    stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
 
 Call <- match.call()
 type <-match.arg(type)
@@ -4669,10 +4727,10 @@ if (!missing(terms)) {
     if (is.numeric(terms)) {
         if (any(terms != floor(terms) | 
                 terms > length(object$assign) |
-                terms <1)) stop("Invalid terms argument")
+                terms <1)) stop(gettextf("invalid '%s' argument", "terms"))
         }
     else if (any(is.na(match(terms, names(object$assign)))))
-       stop("a name given in the terms argument not found in the model")
+       stop("a name given in the 'terms' argument not found in the model")
     }
 
 # I will never need the cluster argument, if present delete it.
@@ -4904,7 +4962,7 @@ for (i in ustrata) {
     afit.n <- length(afit$time)
     if (missing(newdata)) { 
         # In this case we need se.fit, nothing else
-        j1 <- approx(afit$time, 1:afit.n, y[indx,1], method='constant',
+        j1 <- approx(afit$time, seq_len(afit.n), y[indx,1], method='constant',
                      f=0, yleft=0, yright=afit.n)$y
         chaz <- c(0, afit$cumhaz)[j1 +1]
         varh <- c(0, cumsum(afit$varhaz))[j1 +1]
@@ -4915,7 +4973,7 @@ for (i in ustrata) {
                 risk[indx]
             }
         else {
-            j2 <- approx(afit$time, 1:afit.n, y[indx,2], method='constant',
+            j2 <- approx(afit$time, seq_len(afit.n), y[indx,2], method='constant',
                      f=0, yleft=0, yright=afit.n)$y
             chaz2 <- c(0, afit$cumhaz)[j2 +1]
             varh2 <- c(0, cumsum(afit$varhaz))[j2 +1]
@@ -4932,7 +4990,7 @@ for (i in ustrata) {
         #there is new data
         use.x <- TRUE
         indx2 <- which(newstrat == i)
-        j1 <- approx(afit$time, 1:afit.n, newy[indx2,1], 
+        j1 <- approx(afit$time, seq_len(afit.n), newy[indx2,1], 
                      method='constant', f=0, yleft=0, yright=afit.n)$y
         chaz <-c(0, afit$cumhaz)[j1+1]
         pred[indx2] <- chaz * newrisk[indx2]
@@ -4948,7 +5006,7 @@ for (i in ustrata) {
                 }
             }
         else {
-            j2 <- approx(afit$time, 1:afit.n, newy[indx2,2], 
+            j2 <- approx(afit$time, seq_len(afit.n), newy[indx2,2], 
                      method='constant', f=0, yleft=0, yright=afit.n)$y
                         chaz2 <- approx(-afit$time, afit$cumhaz, -newy[indx2,2],
                        method="constant", rule=2, f=0)$y
@@ -5093,7 +5151,7 @@ else if (type=='terms') {
     dimnames(pred) <- list(rownames(newx), names(asgn))
     if (se.fit) se <- pred
     
-    for (i in 1:nterms) {
+    for (i in seq_len(nterms)) {
         tt <- asgn[[i]]
         tt <- tt[!is.na(object$coefficients[tt])]
         xtt <- newx[,tt, drop=F]
@@ -5137,7 +5195,7 @@ if (!is.null(na.action.used)) {
     }
 
 if (!missing(collapse) && !is.null(collapse)) {
-    if (length(collapse) != n2) stop("Collapse vector is the wrong length")
+    if (length(collapse) != n2) stop("Collapse vector is of the wrong length")
     pred <- rowsum(pred, collapse)  # in R, rowsum is a matrix, always
     if (se.fit) se <- sqrt(rowsum(se^2, collapse))
     if (type != 'terms') {
@@ -5214,7 +5272,7 @@ concordance.formula <- function(object, data,
     temp$formula <- if(missing(data)) terms(object, special)
                     else              terms(object, special, data=data)
     mf <- eval(temp, parent.frame())  # model frame
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
     Y <- model.response(mf)
@@ -5277,7 +5335,7 @@ concordance.formula <- function(object, data,
 print.concordance <- function(x, digits= max(1L, getOption("digits") - 3L), 
                               ...) {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
@@ -5470,7 +5528,7 @@ concordancefit <- function(y, x, strata, weights, ymin=NULL, ymax=NULL,
         vcox <- sum(temp[,6])
         imat <- do.call("rbind", lapply(tfit, function(x) x$influence))
         # put it back into data order
-        index <- match(1:n, (1:n)[order(strata)])
+        index <- match(seq_len(n), (seq_len(n))[order(strata)])
         imat <- imat[index,]
         if (ranks) {
             nr <- lapply(tfit, function(x) nrow(x$resid))
@@ -6180,7 +6238,7 @@ node.
 The tree contains the weights for everyone whose survival is larger
 than the time currently under review, so starts with all weights
 equal to zero.  
-For any pair of observations $i,j$ we need to add [[wt[i]*wt[j]]]
+For any pair of observations $i,j$ we need to add $w_iw_j$
 to the appropriate count, $w_j$ to subject $i$'s row of the leverage
 matrix and $w_i$ to subject $j$'s row.  We use two trees to do this 
 efficiently, one with all the observations to date, one with the events to
@@ -6696,7 +6754,7 @@ Call <- match.call()
 # keep the first element (the call), and the following selected arguments
 indx <- match(c('formula', 'data', 'weights', 'subset', 'na.action'),
                   names(Call), nomatch=0)
-if (indx[1] ==0) stop("A formula argument is required")
+if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 tform <- Call[c(1,indx)]  # only keep the arguments we wanted
 tform[[1L]] <- quote(stats::model.frame)  # change the function called
     
@@ -6757,7 +6815,7 @@ code is given its own name so that it can be included there as well.
 <<survexp-setup>>=
 rate <- attr(Terms, "specials")$ratetable                   
 if(length(rate) > 1)
-        stop("Can have only 1 ratetable() call in a formula")
+        stop("Can have only 1 'ratetable()' call in a formula")
 <<survexp-setup-rmap>>
 
 mf <- eval(tform, parent.frame())
@@ -6765,7 +6823,7 @@ mf <- eval(tform, parent.frame())
 <<survexp-setup-rmap>>=
 if(length(rate) == 1) {
     if (!missing(rmap)) 
-        stop("The ratetable() call in a formula is depreciated")
+        stop("The 'ratetable()' call in a formula is depreciated")
 
     stemp <- untangle.specials(Terms, 'ratetable')
     rcall <- as.call(parse(text=stemp$var)[[1]])   # as a call object
@@ -6775,7 +6833,7 @@ if(length(rate) == 1) {
 else if (!missing(rmap)) {
     rcall <- substitute(rmap)
     if (!is.call(rcall) || rcall[[1]] != as.name('list'))
-        stop ("Invalid rcall argument")
+        stop(gettextf("invalid '%s' argument", "rcall"))
     }
 else rcall <- NULL   # A ratetable, but no rcall argument
 
@@ -6790,11 +6848,11 @@ else if(inherits(ratetable, "coxph") && !inherits(ratetable, "coxphms")) {
     #   variable names
     varlist <- all.vars(delete.response(ratetable$terms))
     }
-else stop("Invalid rate table")
+else stop("invalid rate table")
 
 temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
 if (any(is.na(temp)))
-    stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+    stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
     
 if (any(!(varlist %in% names(rcall)))) {
     to.add <- varlist[!(varlist %in% names(rcall))]
@@ -6832,9 +6890,9 @@ that eliminated all subjects, we need to stop early.  Otherwise the
 .C code fails in a nasty way. 
 <<survexp-setup>>= 
 n <- nrow(mf)
-if (n==0) stop("Data set has 0 rows")
+if (n==0) stop("data set has 0 rows")
 if (!missing(se.fit) && se.fit)
-    warning("se.fit value ignored")
+    warning("'se.fit' value ignored")
 
 weights <- model.extract(mf, 'weights')
 if (length(weights) ==0) weights <- rep(1.0, n)
@@ -6864,7 +6922,7 @@ no.Y <- is.null(Y)
 if (no.Y) {
     if (missing(times)) {
         if (is.ratetable(ratetable)) 
-            stop("either a times argument or a response is needed")
+            stop("either a 'times' argument or a 'response' is needed")
         }
     else newtime <- times
     }
@@ -6873,7 +6931,7 @@ else {
         if (is.Surv(Y) && attr(Y, 'type')=='right') Y <- Y[,1]
         else stop("Illegal response value")
         }
-    if (any(Y<0)) stop ("Negative follow up time")
+    if (any(Y<0)) stop("Negative follow up time")
 #    if (missing(npoints)) temp <- unique(Y)
 #    else                  temp <- seq(min(Y), max(Y), length=npoints)
     temp <- unique(Y)
@@ -6936,7 +6994,7 @@ else if (inherits(ratetable, 'coxph')) {
     if (any(names(mf[,rate]) !=  attr(ratetable$terms, 'term.labels')))
          stop("Unable to match new data to old formula")
     }
-else stop("Invalid ratetable")
+else stop("invalid rate table")
 @ 
 
 Now for some calculation.  If cohort is false, then any covariates on the
@@ -6946,11 +7004,11 @@ returns a vector of expected values rather than survival curves.
 if (substring(method, 1, 10) == "individual") { #individual survival
     if (no.Y) stop("for individual survival an observation time must be given")
     if (israte)
-	 temp <- survexp.fit (1:n, R, Y, max(Y), TRUE, ratetable)
+	 temp <- survexp.fit (seq_len(n), R, Y, max(Y), TRUE, ratetable)
     else {
         rmatch <- match(names(data), names(rdata))
         if (any(is.na(rmatch))) rdata <- cbind(rdata, data[,is.na(rmatch)])
-        temp <- survexp.cfit(1:n, rdata, Y, 'individual', ratetable)
+        temp <- survexp.cfit(seq_len(n), rdata, Y, 'individual', ratetable)
     }
     if (method == "individual.s") xx <- temp$surv
     else xx <- -log(temp$surv)
@@ -6973,7 +7031,7 @@ variables.
 if (length(ovars)==0)  X <- rep(1,n)  #no categories
 else {
     odim <- length(ovars)
-    for (i in 1:odim) {
+    for (i in seq_len(odim)) {
 	temp <- mf[[ovars[i]]]
 	ctemp <- class(temp)
 	if (!is.null(ctemp) && ctemp=='tcut')
@@ -7011,7 +7069,7 @@ else {
         #  for requested points that precede the Cox fit's
         #  first downward step.  The code is like summary.survfit.
         n <- length(temp$time)
-        keep <- approx(temp$time, 1:n, xout=times, yleft=0,
+        keep <- approx(temp$time, seq_len(n), xout=times, yleft=0,
                        method='constant', f=0, rule=2)$y
         }
 
@@ -7064,25 +7122,22 @@ are of the form \code{transitions ~ formula/options}, where the left hand side
 denotes one or more transitions, and the right hand side is used to augment
 the basic formula wrt those transitions.
 
-Step 1 is to accumulate all the terms that appear on the right hand side(s)
-into a single ``pseudo formula'' that is used to drive the model.frame
-process.  
-After the model frame is constructed we have the necessary data to
-check that state names given in the formulas actually exist in the 
-data and that initial value strings are the right length.
-We can then construct the \code{cmap} matrix.
-After this first step the left hand side ends up as a complicated
-structure:
-\begin{itemize}
-  \item a list with one element per formula in the covariates list
-  \item each element is a list, with one element per term: multiple
-    a:b terms are allowed separated by + signs on the left hand side of the ~
-  \item each of these level 3 elements is a list with two elements
-    ``left'' and ``right'', for the two sides of the : operator
-  \item left and right will be one or two element lists containing the
-    stateid and/or the values.  Any word that doesn't match one of the
-    column names of statedata ends up as a set of values.
-\end{itemize}
+Step 1 is to break the formula into parts.  There will be a list of left sides,
+a list of right sides, and a list of options.
+From this we can create a single ``pseudo formula'' that is used to drive the model.frame
+process, which ensures that all of the variables we need will be found
+in the model frame.
+Further processing has to wait until after the model frame has been constructed,
+i.e., if a left side referred to state ``deathh'' that might be a real state
+or a typing mistake, we can't know until the data is in hand.
+
+Should we walk the parse tree of the formula, or convert it to character and use
+string manipulations?  The latter looks promising until you see a fragment like this:
+\code{entry:death ~ age/sex + ns(weight/height, df=4) / common}
+Walking the parse tree is a bit more subtle, but we then can take advantage of all
+the knowledge built into the R parser.
+A formula is a 3 element list of ``~'', leftside, rightside, or 2 elements if it has
+only a right hand side.  Legal ones for coxph have both left and right.
 
 <<parsecovar>>=
 parsecovar1 <- function(flist, statedata) {
@@ -7092,58 +7147,97 @@ parsecovar1 <- function(flist, statedata) {
         stop("all formulas must have a left and right side")
     
     # split the formulas into a right hand and left hand side
-    lhs <- lapply(flist, function(x) x[-3])
-    rhs <- lapply(flist, function(x) x[-2])
+    lhs <- lapply(flist, function(x) x[-3])   # keep the ~
+    rhs <- lapply(flist, function(x) x[[3]])  # don't keep the ~
     
-    <<parse-rightside>>
+    rhs <- parse_rightside(rhs)
     <<parse-leftside>>
-    list(rhs = rh2, lhs= lterm)
+    list(rhs = rhs, lhs= lterm)
 }
 @ 
 
-First look at the right hand side of each formula.  There are 4
-possble options of common, fixed, clear, and init.  
+\begin{figure}
+  \includegraphics{figure/fig1.pdf}
+  \caption{The parse tree for the formula 
+    \code{1:2 ~ strata(sex)/(age + trt) + ns(weight/ht, df=4) / common + fixed}}
+  \label{figparse}
+\end{figure}
+
+Figure \ref{figparse} shows the parse tree for a complex formula.
+The following function splits the formula at the rightmost slash, ignoring the
+inside of any function or parenthesised phrase.
+Recursive functions like this are almost impossible to read, but luckily it is short.
+The formula recurrs on the left and right side of +*: and \%in\%, and on binary - (but
+not on unary -).
+<<parsecovar>>=
+rightslash <- function(x) {
+    if (class(x) != 'call') return(x)
+    else {
+        if (x[[1]] == as.name('/')) return(list(x[[2]], x[[3]]))
+        else if (x[[1]]==as.name('+') || (x[[1]]==as.name('-') && length(x)==3) ||
+                 x[[1]]==as.name('*') || x[[1]]==as.name(':')  ||
+                 x[[1]]==as.name('%in%')) {
+                     temp <- rightslash(x[[3]])
+                     if (is.list(temp)) {
+                         x[[3]] <- temp[[1]]
+                         return(list(x, temp[[2]]))
+                     } else {
+                         temp <- rightslash(x[[2]])
+                         if (is.list(temp)) {
+                             x[[2]] <- temp[[2]]
+                             return(list(temp[[1]], x))
+                         } else return(x)
+                     }
+                 }
+        else return(x)
+    }
+}
+@ 
+
+There are 4 possble options of common, fixed, clear, and init.  
 The first 3 appear just as words, the last should have a set of
 values attached which become the \code{ival} vector.
-The end result is a list for each formula containing the actual right
-hand side formula along with the options.
+There will, of course, one day be a user with a variable named \code{common}
+who wants a nested term \code{x/common}. Since we don't look inside
+parenthesis they will be able to use \code{1:3 ~ (x/common)}.
 
-<<parse-rightside>>=
-# take apart the right hand side of each formula
-# the function below is applied to each formula in turn.
-rh2 <- lapply(rhs, function(form) {
-    parts <- strsplit(deparse(form, width.cutoff=300, control=NULL), 
-                      '/', fixed=TRUE)[[1]]
-    if (length(parts) ==1)  { # nothing after a /
-        ival <- NULL; common <- FALSE; fixed <- FALSE; clear <- FALSE;
-    }
-    else{
-        # treat the right hand side as though it were a formula
-        optterms <- terms(formula(paste("~", parts[2])))
-        ff <- rownames(attr(optterms, "factors"))
-        index <- match(ff, c("common", "fixed", "init", "clear"))
-        if (any(is.na(index)))
-            stop("option not recognized in a covariates formula: ",
-                 paste(ff[is.na(index)], collapse=", "))
-        common <- any(index==1)
-        fixed  <- any(index==2)
-        clear  <- any(index==3)
-        if (any(index==3)) {
-            optatt <- attributes(optterms)
-            j <- optatt$variables[1 + which(index==3)]
-            j[[1]] <- as.name("list")
-            ival <- unlist(eval(j, parent.frame()))
-        } else ival <- NULL
-    }
-
-    # and now the terms before the slash, which is the actual formula
-    #  a formula of -1 +1 is recorded as intercept=TRUE, pasting a -1 on
-    #  allows us to tell if a 1 was included.  (But don't add a second ~).
-    form <- formula(paste("~ -1 +", substring(parts[1], 2, nchar(parts[1]))))
-    list(common=common, fixed=fixed, clear=clear, ival=ival, 
-       formula = form) 
-})
-@ 
+<<parsecovar>>=
+parse_rightside <- function(rhs) {
+    parts <- lapply(rhs, rightslash)
+    new <- lapply(parts, function(opt) {
+        tform <- ~ x    # a skeleton, "x" will be replaced
+        if (!is.list(opt)) { # no options for this line
+            tform[[2]] <- opt
+            list(formula = tform, ival = NULL, common = FALSE,
+                 fixed = FALSE, clear = FALSE)
+        }
+        else{
+            # treat the option list as though it were a formula
+            temp <- ~ x
+            temp[[2]] <- opt[[2]]
+            optterms <- terms(temp)
+            ff <- rownames(attr(optterms, "factors"))
+            index <- match(ff, c("common", "fixed", "init", "clear"))
+            if (any(is.na(index)))
+                stop(gettextf("option not recognized in a covariates formula: %s", paste(ff[is.na(index)], collapse = ", ")))
+            common <- any(index==1)
+            fixed  <- any(index==2)
+            clear  <- any(index==3)
+            if (any(index==3)) {
+                optatt <- attributes(optterms)
+                j <- optatt$variables[1 + which(index==3)]
+                j[[1]] <- as.name("list")
+                ival <- unlist(eval(j, parent.frame()))
+            } 
+            else ival <- NULL
+            tform[[2]] <- opt[[1]] 
+            list(formula= tform, ival= ival, common= common, fixed = fixed,
+                 clear = clear)
+        }
+    })
+    new
+}
+@
  
 The left hand side of each formula specifies the set of transitions to which
 the covariates apply, and is more complex.
@@ -7246,7 +7340,31 @@ Arguments are the results from the first pass, the statedata data frame,
 the default formula, the terms structure from the full formula,
 and the transitions count.
 
+One nuisance is that the terms function sometimes inverts things.  For 
+example in the formula
+\code{terms(~ x1 + x1:iage + x2 + x2:iage)} the label for the second
+of these becomes \code{iage:x2}.  
+I'm guessing it is because the variable first appear in the order x1, iage, x2
+and labels make use of that order. 
+But when we look at the formula fragment \code{~ x2 + x2:iage} the terms
+will be in the other order.  
+A way out of this is to use the simple \code{termmatch} function below,
+which keys off of the factors attribute instead of the names. 
+
 <<parsecovar>>=
+termmatch <- function(f1, f2) {
+    # look for f1 in f2, each the factors attribute of a terms object
+    if (length(f1)==0) return(NULL)   # a formula with only ~1
+    irow <- match(rownames(f1), rownames(f2))
+    if (any(is.na(irow))) stop ("termmatch failure 1") 
+    hashfun <- function(j) sum(ifelse(j==0, 0, 2^(seq(along=j))))
+    hash1 <- apply(f1, 2, hashfun)
+    hash2 <- apply(f2[irow,,drop=FALSE], 2, hashfun)
+    index <- match(hash1, hash2)
+    if (any(is.na(index))) stop("termmatch failure 2")
+    index
+}
+
 parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) {
     if (is.null(statedata))
         statedata <- data.frame(state = states, stringsAsFactors=FALSE)
@@ -7265,38 +7383,26 @@ parsecovar2 <- function(covar1, statedata, dformula, Terms, transitions,states) 
     #  those were eliminated above.
     # Likewise, the formula list might have rules for transitions that are
     #  not present.  Don't worry about it at this stage.
-    allterm <- attr(Terms, 'term.labels')
-    nterm <- length(allterm)
+    allterm <- attr(Terms, 'factors')
+    nterm <- ncol(allterm)
 
-    <<parse-tmap-setup>>
-    
-    # if there is no formula extension, the middle part of the work is skipped
+    # create a map for every transition, even ones that are not used.
+    # at the end we will thin it out
+    # It has an extra first row for intercept (baseline)
+    # Fill it in with the default formula
+    nstate <- length(states)
+    tmap <- array(0, dim=c(nterm+1, nstate, nstate))
+    dmap <- array(seq_len(length(tmap)), dim=c(nterm+1, nstate, nstate)) #unique values
+    dterm <- termmatch(attr(terms(dformula), "factors"), allterm)
+    dterm <- c(1L, 1L+ dterm)  # add intercept
+    tmap[dterm,,] <- dmap[dterm,,]
+    inits <- NULL
+
     if (!is.null(covar1)) {
         <<parse-tmap>>
     }
     <<parse-finish>>
 }
-@ 
-
-Create a map for every transition, even the ones that are not used;
-this simply makes the indexing easier.  At the end we will dispose of
-unneeded ones.
-The very first term is the intercept or strata.
-<<parse-tmap-setup>>=
-# create the map and fill it in with the default formula
-nstate <- length(states)
-tmap <- array(0L, dim=c(nterm+1, nstate, nstate))
-dterms <- match(attr(terms.formula(dformula), "term.labels"), allterm)
-dterms <- c(1L, 1L + dterms)  # add the intercept
-k <- seq(along=dterms)
-for (i in 1:nstate) {
-    for (j in 1:nstate) {
-        tmap[dterms,j,i] <- k    # fill in in column major order
-        k <- k + length(k)
-    }
-}
-ncoef <- max(tmap)  # number of coefs used so far
-inits <- NULL
 @ 
 
 Now go through the formulas one by one.  The left hand side tells us which
@@ -7308,7 +7414,7 @@ entry can have left and right portions.
 state1 <- state2 <- NULL
 for (x in lhs) {
     # x is one term
-    if (is.null(x$left)) stop("term found without a :", x)
+    if (!is.list(x) || is.null(x$left)) stop("term found without a ':' ", x)
     # left of the colon
     if (!is.list(x$left) && length(x$left) ==1 && x$left==0) 
         temp1 <- 1:nrow(statedata)
@@ -7323,16 +7429,16 @@ for (x in lhs) {
             stop("state variable with no list of values: ",x$left$stateid)
         else {
             if (any(k= is.na(match(x$left$stateid, names(statedata)))))
-                stop(x$left$stateid[k], ": state variable not found")
+                stop(gettextf("%s: state variable not found", x$left$stateid[k]))
             zz <- statedata[[x$left$stateid]]
             if (any(k= is.na(match(x$left$value, zz))))
-                stop(x$left$value[k], ": state value not found")
+                stop(gettextf("%s: state value not found", x$left$value[k]))
             temp1 <- which(zz %in% x$left$value)
         }
     }
     else {
         k <- match(x$left, statedata$state)
-        if (any(is.na(k))) stop(x$left[k], ": state not found")
+        if (any(is.na(k))) stop(gettextf("%s: state not found", x$left[is.na(k)]))
         temp1 <- which(statedata$state %in% x$left)
     }
     
@@ -7350,16 +7456,16 @@ for (x in lhs) {
             stop("state variable with no list of values: ",x$right$stateid)
         else {
             if (any(k= is.na(match(x$right$stateid, names(statedata)))))
-                stop(x$right$stateid[k], ": state variable not found")
+                stop(gettextf("%s: state variable not found", x$right$stateid[k]))
             zz <- statedata[[x$right$stateid]]
             if (any(k= is.na(match(x$right$value, zz))))
-                stop(x$right$value[k], ": state value not found")
+                stop(gettextf("%s: state value not found", x$right$value[k]))
             temp2 <- which(zz %in% x$right$value)
         }
     }
     else {
         k <- match(x$right, statedata$state)
-        if (any(is.na(k))) stop(x$right[k], ": state not found")
+        if (any(is.na(k))) stop(gettextf("%s: state not found", x$right[k]))
         temp2 <- which(statedata$state %in% x$right)
     }
 
@@ -7369,35 +7475,62 @@ for (x in lhs) {
 }           
 @ 
 
-The inits need to wait a little longer, until the X matrix is in hand.
+The init clause (initial values) are gathered but not checked:
+we don't yet know how many columns a term will expand into.
 <<parse-tmap>>=
-for (i in 1:length(covar1$rhs)) {  
+for (i in seq_along(covar1$rhs)) {  
     rhs <- covar1$rhs[[i]]
-    lhs <- covar1$lhs[[i]]  # the two are the same length
-    rterm <- terms.formula(rhs$formula)
-    rindex <- 1L + match(attr(rterm, "term.labels"), allterm, nomatch=0)
-    if (any(rindex== 1L)) stop("dterm mismatch bug 2")
-    if (attr(rterm, "intercept")==1) rindex <- c(1L, rindex)
-    
+    lhs <- covar1$lhs[[i]]  # one rhs and one lhs per formula
+     
     <<parse-lmatch>>
-    npair <- length(state1)
-    if (rhs$clear) {
+    npair <- length(state1)  # number of state:state pairs for this line
+
+    # update tmap for this set of transitions
+    # first, what variables are mentioned, and check for errors
+    rterm <- terms(rhs$formula)
+    rindex <- 1L + termmatch(attr(rterm, "factors"), allterm)
+
+    # second, were any variables dropped from the base formula?
+    if (rhs$clear) {  # drop everything
         for(k in 1:npair) tmap[-1, state1[k], state2[k]] <- 0
     }
+    else {
+        # the update.formula function is good at identifying changes
+        # formulas that start with  "- x" have to be pasted on carefully
+        temp <- substring(deparse(rhs$formula, width.cutoff=500), 2)
+        if (substring(temp, 1,1) == '-') dummy <- formula(paste("~ .", temp))
+        else dummy <- formula(paste("~. +", temp))
+
+        rindex1 <- termmatch(attr(terms(dformula), "factors"), allterm)
+        rindex2 <- termmatch(attr(terms(update(dformula, dummy)), "factors"),
+                         allterm)
+        dropped <- 1L + rindex1[is.na(match(rindex1, rindex2))] # remember the intercept
+        if (length(dropped) >0) {
+            for (k in 1:npair) tmap[dropped, state1[k], state2[k]] <- 0
+        }
+    }
+    
+    # grab initial values
     if (length(rhs$ival)) 
         inits <- c(inits, list(term=rindex, state1=state1, 
                                state2= state2, init= rhs$ival))
-    j <- ncoef + seq_len(length(rindex))
-    if (rhs$common) {
-        for(k in 1:npair) tmap[rindex, state1[k], state2[k]] <-j
+    
+    # adding -1 to the front is a trick, to check if there is a "+1" term
+    dummy <- ~ -1 + x
+    dummy[[2]][[3]] <- rhs$formula
+    if (attr(terms(dummy), "intercept") ==1) rindex <- c(1L, rindex)
+ 
+    # an update of "- sex" won't generate anything to add
+    if (length(rindex) > 0) {
+        if (rhs$common) {
+            j <- dmap[rindex, state1[1], state2[1]] 
+            for(k in 1:npair) tmap[rindex, state1[k], state2[k]] <- j
+        }
+        else {
+            for (k in 1:npair)
+                tmap[rindex, state1[k], state2[k]] <- dmap[rindex, state1[k], state2[k]]
+        }
     }
-    else {
-        for(k in 1:npair){
-            tmap[rindex, state1[k], state2[k]] <-j
-            j <- j + length(rindex)
-        }  
-    }       
-    ncoef <- max(j)
 }    
 @ 
 
@@ -7420,12 +7553,11 @@ for (i in 1:nrow(tmap2)) {
         tmap2[i,j] <- tmap[i, indx1[trow[j]], indx2[tcol[j]]]
 }
 
-# relabel as 1-k
 tmap2[1,] <- match(tmap2[1,], unique(c(0L, tmap2[1,]))) -1L
 if (nrow(tmap2) > 1)
     tmap2[-1,] <- match(tmap2[-1,], unique(c(0L, tmap2[-1,]))) -1L
   
-dimnames(tmap2) <- list(c("(Baseline)", allterm),
+dimnames(tmap2) <- list(c("(Baseline)", colnames(allterm)),
                             paste(indx1[trow], indx2[tcol], sep=':')) 
 list(tmap = tmap2, inits=inits, mapid= cbind(indx1[trow], indx2[tcol]))
 @
@@ -7435,35 +7567,49 @@ Last is a helper routine that converts tmap, which has one row per term,
 into cmap, which has one row per coefficient.  Both have one column per 
 transition.
 It uses the assign attribute of the X matrix along with the column names.
-Be careful to make 0 stay as a 0.
+
+Consider the model \code{~ x1 + strata(x2) + factor(x3)} where x3 has 4 levels.
+The Xassign vector will be 1, 3, 3, 3, since it refers to terms and there are 3
+columns of X for term number 3.
+If there were an intercept the first column of X
+would be a 1 and Xassign would be 0, 1, 3, 3, 3.
+
+Let's say that there were 3 transitions and tmap looks like this:
+\begin{tabular}{rccc}
+            & 1:2 & 1:3 & 2:3 \\
+(Baseline)  & 1   & 2   & 3 \\
+ x1         & 1   & 4   & 4 \\ 
+ strata(x2) & 2   & 5   & 6 \\
+ factor(x3) & 3   & 3   & 7
+\end{tabular}
+The cmap matrix will ignore rows 1 and 3 since they do not correspond to 
+coefficients in the model.   
 
 <<parsecovar>>=
 parsecovar3 <- function(tmap, Xcol, Xassign) {
-    # sometime X will have an intercept, sometimes not, tmap and cmap
-    #  always do
+    # sometime X will have an intercept, sometimes not; cmap never does
     hasintercept <- (Xassign[1] ==0)
 
-    cmap <- matrix(0L, length(Xcol) + !hasintercept, ncol(tmap))
-    cmap[1,] <- tmap[1,]
-
+    cmap <- matrix(0L, length(Xcol) - hasintercept, ncol(tmap))
+    uterm <- unique(Xassign[Xassign != 0])   # terms that will have coefficients
+    
     xcount <- table(factor(Xassign, levels=1:max(Xassign)))
-    mult <- 1+ max(xcount)  #used to keep the coefs in the same oder
+    mult <- 1+ max(xcount)  # temporary scaling
 
-    ii <- 1
-    for (i in 2:nrow(tmap)) {
-        k <- seq_len(xcount[i-1])
-        for (j in 1:ncol(tmap))
-            cmap[ii+k, j] <- if(tmap[i,j]==0) 0 else tmap[i,j]*mult +k
-
+    ii <- 0
+    for (i in uterm) {
+        k <- seq_len(xcount[i])
+        for (j in 1:ncol(tmap)) 
+            cmap[ii+k, j] <- if(tmap[i+1,j]==0) 0 else tmap[i+1,j]*mult +k
         ii <- ii + max(k)
     }
 
     # renumber coefs as 1, 2, 3, ...
-    cmap[-1,] <- match(cmap[-1,], sort(unique(c(0L, cmap[-1,])))) -1L
+    cmap[,] <- match(cmap, sort(unique(c(0L, cmap)))) -1L
     
     colnames(cmap) <- colnames(tmap)
-    if (hasintercept) rownames(cmap) <- Xcol
-    else rownames(cmap) <- c("(Baseline)", Xcol)
+    if (hasintercept) rownames(cmap) <- Xcol[-1]
+    else rownames(cmap) <- Xcol
 
     cmap
 }
@@ -7519,7 +7665,7 @@ Call <- match.call()
 # then evaluate it in the proper frame
 indx <- match(c("formula", "data", "weights", "subset", "na.action"),
                   names(Call), nomatch=0) 
-if (indx[1] ==0) stop("A formula argument is required")
+if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 tform <- Call[c(1,indx)]  # only keep the arguments we wanted
 tform[[1L]] <- quote(stats::model.frame)  # change the function called
 
@@ -7532,7 +7678,7 @@ rate <- attr(Terms, "specials")$ratetable
 if (length(rate) >0 || !missing(rmap) || !missing(ratetable)) {
     has.ratetable <- TRUE
     if(length(rate) > 1)
-        stop("Can have only 1 ratetable() call in a formula")
+        stop("Can have only 1 'ratetable()' call in a formula")
     if (missing(ratetable)) stop("No rate table specified")
 
     <<survexp-setup-rmap>>
@@ -7542,9 +7688,9 @@ else has.ratetable <- FALSE
 mf <- eval(tform, parent.frame())
 
 Y <- model.extract(mf, 'response')
-if (is.null(Y)) stop ("Follow-up time must appear in the formula")
+if (is.null(Y)) stop("Follow-up time must appear in the formula")
 if (!is.Surv(Y)){
-    if (any(Y <0)) stop ("Negative follow up time")
+    if (any(Y <0)) stop("Negative follow up time")
     Y <- as.matrix(Y)
     if (ncol(Y) >2) stop("Y has too many columns")
     }
@@ -7554,16 +7700,14 @@ else {
         if (any(Y[,1] <0)) stop("Negative survival time")
         nzero <- sum(Y[,1]==0 & Y[,2] ==1)
         if (nzero >0) 
-            warning(paste(nzero, 
-                     "observations with an event and 0 follow-up time,",
-                   "any rate calculations are statistically questionable"))
+            warning(sprintf(ngettext(nzero, "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable","%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"), nzero), domain = NA)
         }
     else if (stype != 'counting')
         stop("Only right-censored and counting process survival types are supported")
     }
 
 n <- nrow(Y)
-if (is.null(n) || n==0) stop("Data set has 0 observations")
+if (is.null(n) || n==0) stop("data set has 0 observations")
 
 weights <- model.extract(mf, 'weights')
 if (is.null(weights)) weights <- rep(1.0, n)
@@ -7599,7 +7743,7 @@ if (has.ratetable) {
              stop("Unable to match new data to old formula")
         R <- model.matrix.coxph(ratetable, data=rdata)
         }
-    else stop("Invalid ratetable")
+    else stop("invalid rate table")
     }
 @ 
 
@@ -7623,7 +7767,7 @@ else {
     X <- matrix(0, n, odim)
     outdname <- vector("list", odim)
     names(outdname) <- attr(Terms, 'term.labels')
-    for (i in 1:odim) {
+    for (i in seq_len(odim)) {
         temp <- mf[[ovars[i]]]
         if (inherits(temp, 'tcut')) {
             X[,i] <- temp
@@ -7725,7 +7869,7 @@ if (has.ratetable) {  #include expected
             temp <-  which(us.special)
             nyear <- length(cuts[[temp]])
             nint <- rfac[temp]       #intervals to interpolate over
-            cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
+            cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
     				nint:(nint*nyear))$y - .0001)
             }
         }
@@ -7789,7 +7933,7 @@ if (data.frame) {
         keep <- (temp$pyears >0)  # what rows to keep in the output
         # grab prototype rows from the model frame, this preserves class
         #  (unless it is a tcut variable, then we know what to do)
-        tdata <- lapply(1:length(ovars), function(i) {
+        tdata <- lapply(seq_along(ovars), function(i) {
             temp <- mf[[ovars[i]]]
             if (inherits(temp, "tcut")) factor(outdname[[i]], outdname[[i]])
             else temp[match(outdname[[i]], temp)]
@@ -7805,7 +7949,7 @@ if (data.frame) {
     if (expect=='pyears') df$expected <- df$expected/scale
     if (docount) df$event <- temp$pcount[keep]
     # if any of the predictors were factors, make them factors in the output
-    for (i in 1:length(ovars)){
+    for (i in seq_along(ovars)){
         if (is.factor( mf[[ovars[i]]]))
             df[[ovars[i]]] <- factor(df[[ovars[i]]], levels( mf[[ovars[i]]]))
     }
@@ -7860,32 +8004,31 @@ It works with pyears objects with or without a data component.
 <<print.pyears>>=
 print.pyears <- function(x, ...) {
     if (!is.null(cl<- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
 
     if (is.null(x$data)) {
         if (!is.null(x$event))
-            cat("Total number of events:", format(sum(x$event)), "\n")
-        cat (   "Total number of person-years tabulated:", 
+            cat(gettext("Total number of events: ", domain = "R-survival"), format(sum(x$event)), "\n", sep = "")
+        cat (   gettext("Total number of person-years tabulated: ", domain = "R-survival"), 
              format(sum(x$pyears)),
-             "\nTotal number of person-years off table:",
-             format(x$offtable), "\n")
+             "\n", gettext("Total number of person-years off table: ", domain = "R-survival"),
+             format(x$offtable), "\n", sep = "")
         }
     else {
         if (!is.null(x$data$event))
-            cat("Total number of events:", format(sum(x$data$event)), "\n")
-        cat (   "Total number of person-years tabulated:", 
+            cat(gettext("Total number of events: ", domain = "R-survival"), format(sum(x$data$event)), "\n", sep = "")
+        cat (   gettext("Total number of person-years tabulated: ", domain = "R-survival"), 
              format(sum(x$data$pyears)),
-             "\nTotal number of person-years off table:",
-             format(x$offtable), "\n")
+             "\n", gettext("Total number of person-years off table: ", domain = "R-survival"),
+             format(x$offtable), "\n", sep = "")
         }
     if (!is.null(x$summary)) {
-        cat("Matches to the chosen rate table:\n  ", 
-            x$summary)
+        cat(gettext("Matches to the chosen rate table:", domain = "R-survival"), "\n  ", x$summary, sep = "")
         }
-    cat("Observations in the data set:", x$observations, "\n")
+    cat(gettext("Observations in the data set: ", domain = "R-survival"), x$observations, "\n", sep = "")
     if (!is.null(x$na.action))
       cat("  (", naprint(x$na.action), ")\n", sep='')
     cat("\n")
@@ -7929,8 +8072,7 @@ summary.pyears <- function(object, header=TRUE, call=header,
                "rate", "ci.r", "rr", "ci.rr", "vline", "vertical", 
                "legend", "totals")
     if (any(!temp) || length(temp) != 14 || any(is.na(temp))) {
-        stop("the ", paste(tname[!temp], collapse=", "), 
-             "argument(s) must be single logical values")
+        stop(gettextf("the %s argument(s) must be single logical values", paste(tname[!temp], collapse=", ")))
     }
     if (!is.numeric(conf.level) || conf.level <=0 || conf.level >=1 |
         length(conf.level) > 1 || is.na(conf.level) > 1)
@@ -7978,12 +8120,12 @@ summary.pyears <- function(object, header=TRUE, call=header,
         cat("\n")
     }
     if (header) {
-        cat("number of observations =", object$observations)
+        cat(gettext("number of observations = ", domain = "R-survival"), object$observations, sep = "")
         if (length(object$omit))
             cat("  (", naprint(object$omit), ")\n", sep="")
         else cat("\n")
         if (object$offtable > 0)
-            cat(" Total time lost (off table)", format(object$offtable), "\n")
+            cat(gettext(" Total time lost (off table) ", domain = "R-survival"), format(object$offtable), "\n", sep = "")
         cat("\n")
     }
     
@@ -8059,7 +8201,7 @@ if (vertical) {
     plist <- lapply(plist, pformat, nastring, ...) # make it character
     pcol  <- sapply(plist, function(x) nchar(x[1])) #width of each one
     colwidth <- pmax(pcol, nchar(rname)) +2
-    for (i in 1:length(plist)) 
+    for (i in seq_along(plist)) 
         plist[[i]] <- strpad(plist[[i]], colwidth[i])
 
     colwidth <- c(max(nchar(vname), nchar(cname)) +2, colwidth)
@@ -8073,7 +8215,7 @@ else {
     colwidth <- pmax(nchar(cname), apply(nchar(newmat), 1, max)) +2
     # turn the list sideways
     plist <- split(newmat, row(newmat))
-    for (i in 1:length(plist))
+    for (i in seq_along(plist))
         plist[[i]] <- strpad(plist[[i]], colwidth[i])
 
     colwidth <- c(max(nchar(vname), nchar(rname)) +2, colwidth)
@@ -8128,7 +8270,7 @@ if (length(dd) > 2) {
                     nastring, ...)
     outer.label <- do.call("expand.grid", dimnames(object$n)[-(1:2)])
     temp <- names(outer.label)
-    for (i in 1:nrow(outer.label)) {
+    for (i in seq_len(nrow(outer.label))) {
         # first the caption, then data
         cat(paste(":", paste(temp, outer.label[i,], sep="=")), '\n')
         pyshow(newmat[,,i,], tname, rowname, colname, vline)
@@ -8246,8 +8388,8 @@ pyshow <- function(dmat, labels, rowname, colname, vline) {
             "|\n", sep='')
         cat("+", paste(strpad('=', colwidth, pad='='), collapse="+"), "+\n",
             sep='')
-        for (i in 1:dd[1]) {
-            for (j in 1:dd[3]) { #one printout line per stat
+        for (i in seq_len(dd[1])) {
+            for (j in seq_len(dd[3])) { #one printout line per stat
                 if (j==rline) temp <- c(rowname[i], dmat[i,,j])
                 else temp <- c("", dmat[i,,j])
                 cat("|", paste(strpad(temp, colwidth), collapse='|'), "|\n",
@@ -8264,8 +8406,8 @@ pyshow <- function(dmat, labels, rowname, colname, vline) {
         cat(paste(strpad(c(labels[1], colname), colwidth), collapse=" "),
             "\n")
         cat(paste(strpad('-', colwidth, pad='-'), collapse=" "), "\n")
-        for (i in 1:dd[1]) {
-            for (j in 1:dd[3]) { #one printout line per stat
+        for (i in seq_len(dd[1])) {
+            for (j in seq_len(dd[3])) { #one printout line per stat
                 if (j==rline) temp <- c(rowname[i], dmat[i,,j])
                 else temp <- c("", dmat[i,,j])
                 cat(paste(strpad(temp, colwidth), collapse=' '), "\n")
@@ -8301,7 +8443,7 @@ pytot <- function(x, na=FALSE) {
     }
     else {
         # The general case
-        index <- 1:length(dd)
+        index <- seq_along(dd)
         if (na) sum1 <- sum2 <- sum3 <- NA
         else {
             sum1 <- apply(x, index[-1], sum)    # row sums
@@ -8321,7 +8463,7 @@ pytot <- function(x, na=FALSE) {
         #  and new[6,9,] <- sum3
         # if dim is longer, we need to add more commas
         commas <- rep(',', length(dd) -2)
-        eval(parse(text=paste("new[1:dd[1], 1:dd[2]", commas, "] <- x")))
+        eval(parse(text=paste("new[seq_len(dd[1]), seq_len(dd[2])", commas, "] <- x")))
         eval(parse(text=paste("new[ d2[1],-d2[2]", commas, "] <- sum1")))
         eval(parse(text=paste("new[-d2[1], d2[2]", commas, "] <- sum2")))
         eval(parse(text=paste("new[ d2[1], d2[2]", commas, "] <- sum3")))
@@ -8384,7 +8526,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
     n <- length(object$linear.predictors)
     Terms <- object$terms
     if(!inherits(Terms, "terms"))
-	    stop("invalid terms component of  object")
+	    stop("invalid terms component of object")
     
     # If the variance wasn't estimated then it has no error
     if (nrow(object$var) == length(object$coefficients)) rsigma <- FALSE
@@ -8665,7 +8807,7 @@ else if (type=='dfbeta' || type== 'dfbetas' || type=='ldcase') {
     if (rsigma) {
         if (nstrata > 1) {
             d4 <- matrix(0., nrow=n, ncol=nstrata)
-            d4[cbind(1:n, strata)] <- deriv[,4]
+            d4[cbind(seq_len(n), strata)] <- deriv[,4]
             score <- cbind(score, d4)
             }
         else score <- cbind(score, deriv[,4])
@@ -8682,7 +8824,7 @@ else if (type=='ldresp') {
     if (rsigma) {
         if (nstrata >1) {
             d6 <- matrix(0., nrow=n, ncol=nstrata)
-            d6[cbind(1:n, strata)] <- deriv[,6]*sigma
+            d6[cbind(seq_len(n), strata)] <- deriv[,6]*sigma
             rscore <- cbind(rscore, d6)
             }
         else rscore <- cbind(rscore, deriv[,6] * sigma)
@@ -8696,7 +8838,7 @@ else if (type=='ldshape') {
     if (rsigma) {
         if (nstrata >1) {
             d5 <- matrix(0., nrow=n, ncol=nstrata)
-            d5[cbind(1:n, strata)] <- deriv[,5]
+            d5[cbind(seq_len(n), strata)] <- deriv[,5]
             sscore <- cbind(sscore, d5)
             }
         else sscore <- cbind(sscore, deriv[,5])
@@ -8725,7 +8867,7 @@ if (!is.null(object$na.action)) {
 
 # Collapse if desired
 if (!missing(collapse)) {
-    if (length(collapse) !=n) stop("Wrong length for 'collapse'")
+    if (length(collapse) !=n) stop(gettextf("'%s' argument is of the wrong length", "collapse"))
     rr <- drop(rowsum(rr, collapse))
     }
 
@@ -8838,7 +8980,7 @@ dim.survfit <- function(x) {
         # This function lets R worry about character, negative, or 
         #  logical subscripts.
         #  It always returns a set of positive integer indices
-        temp <- 1:length(target)
+        temp <- seq_along(target)
         names(temp) <- target
         temp[indx]
     }
@@ -8884,7 +9026,7 @@ dim.survfit <- function(x) {
         else if (dd[2]==1) j <- 1
         else {
             #  the user has a mix of rows/cols
-            index <- 1:prod(dd)
+            index <- seq_len(prod(dd))
             itemp <- matrix(index, nrow=dd[1])
             keep <- itemp[i]   # illegal subscripts will generate an error
             if (length(keep) == length(index) && all(keep==index)) return(x)
@@ -8894,7 +9036,7 @@ dim.survfit <- function(x) {
             # at this point we have a matrix subscript of (ii, jj)
             # expand into a long pair of rows and cols
             temp <- split(seq(along=x$time), 
-                          rep(1:length(x$strata), x$strata))
+                          rep(seq_along(x$strata), x$strata))
             indx1 <- unlist(temp[ii])   # rows of the surv object
             indx2 <- rep(jj, x$strata[ii])
         
@@ -8907,7 +9049,7 @@ dim.survfit <- function(x) {
                         "std.chaz", "influence.surv", "influence.chaz"))
                 if (!is.null(x[[j]])) newx[[j]] <- (x[[j]])[k]
             temp <- x$strata[ii]
-            names(temp) <- 1:length(ii)
+            names(temp) <- seq_along(ii)
             newx$strata <- temp
             return(newx)
         }
@@ -8917,20 +9059,18 @@ dim.survfit <- function(x) {
     #  j the columns (of present)
     if (is.null(x$strata)) {
            if (is.null(i) || all(i==1)) irow <- seq(along=x$time)
-           else stop("subscript out of bounds")
+           else stop("subscript is out of bounds")
            newx$n <- x$n
     }
     else { 
         if (is.null(i)) indx <- seq(along= x$strata)
         else indx <- nmatch(i, names(x$strata)) #strata to keep
         if (any(is.na(indx))) 
-            stop(paste("strata", 
-                       paste(i[is.na(indx)], collapse=' '),
-                       'not matched'))
+            stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " ")))
         # Now, indx may not be in order: some can use curve[3:2] to reorder
         #  The list/unlist construct will reorder the data
         temp <- split(seq(along=x$time), 
-                      rep(1:length(x$strata), x$strata))
+                      rep(seq_along(x$strata), x$strata))
         irow <- unlist(temp[indx])
         
         if (length(indx) <=1 && drop) newx$strata <- NULL
@@ -8988,7 +9128,7 @@ survfit.formula <- function(formula, data, weights, subset,
                     'istate', 'id', 'cluster', "etype"), names(Call), nomatch=0)
     #It's very hard to get the next error message other than malice
     #  eg survfit(wt=Surv(time, status) ~1) 
-    if (indx[1]==0) stop("a formula argument is required")
+    if (indx[1]==0) stop(gettextf("'%s' argument is required", "formula"))
     temp <- Call[c(1, indx)]
     temp[[1L]] <- quote(stats::model.frame)
     mf <- eval.parent(temp)
@@ -8999,8 +9139,38 @@ survfit.formula <- function(formula, data, weights, subset,
 	    stop("Interaction terms are not valid for this function")
 
     n <- nrow(mf)
-    Y <- model.extract(mf, 'response')
-    if (!is.Surv(Y)) stop("Response must be a survival object")
+    Y <- model.response(mf)
+    if (inherits(Y, "Surv2")) {
+        # this is Surv2 style data
+        # if there are any obs removed due to missing, remake the model frame
+        if (length(attr(mf, "na.action"))) {
+            temp$na.action <- na.pass
+            mf <- eval.parent(temp)
+        }
+        if (!is.null(attr(Terms, "specials")$cluster))
+            stop("cluster() cannot appear in the model statement")
+        new <- surv2data(mf)
+        mf <- new$mf
+        istate <- new$istate
+        id <- new$id
+        Y <- new$y
+        if (anyNA(mf[-1])) { #ignore the response still found there
+            if (missing(na.action)) temp <- get(getOption("na.action"))(mf[-1])
+            else temp <- na.action(mf[-1])
+            omit <- attr(temp, "na.action")
+            mf <- mf[-omit,]
+            Y <- Y[-omit]
+            id <- id[-omit]
+            istate <- istate[-omit]
+        }                      
+        n <- nrow(mf)
+    }       
+    else {
+        if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
+        id <- model.extract(mf, "id")
+        istate <- model.extract(mf, "istate")
+    }
+    if (n==0) stop("data set has no non-missing observations")
 
     casewt <- model.extract(mf, "weights")
     if (is.null(casewt)) casewt <- rep(1.0, n)
@@ -9013,8 +9183,6 @@ survfit.formula <- function(formula, data, weights, subset,
 
     if (!is.null(attr(Terms, 'offset'))) warning("Offset term ignored")
 
-    id    <- model.extract(mf, 'id')
-    istate <- model.extract(mf,"istate")
     cluster <- model.extract(mf, "cluster")
     temp <- untangle.specials(Terms, "cluster")
     if (length(temp$vars)>0) {
@@ -9028,16 +9196,14 @@ survfit.formula <- function(formula, data, weights, subset,
     if (length(ll) == 0) X <- factor(rep(1,n))  # ~1 on the right
     else X <- strata(mf[ll])
     
-    if (!is.Surv(Y)) stop("y must be a Surv object")
-    
     # Backwards support for the now-depreciated etype argument
     etype <- model.extract(mf, "etype")
     if (!is.null(etype)) {
         if (attr(Y, "type") == "mcounting" ||
             attr(Y, "type") == "mright")
-            stop("cannot use both the etype argument and mstate survival type")
+            stop("cannot use both the 'etype' argument and 'mstate' survival type")
         if (length(istate)) 
-            stop("cannot use both the etype and istate arguments")
+            stop("cannot use both the 'etype' and 'istate' arguments")
         status <- Y[,ncol(Y)]
         etype <- as.factor(etype)
         temp <- table(etype, status==0)
@@ -9054,12 +9220,12 @@ survfit.formula <- function(formula, data, weights, subset,
             Y <- Surv(Y[,1], status, type="mstate")
         else if (attr(Y, "type") == "counting")
             Y <- Surv(Y[,1], Y[,2], status, type="mstate")
-        else stop("etype argument incompatable with survival type")
+        else stop("'etype' argument incompatable with survival type")
     }
                          
     # Deal with the near-ties problem
     if (!is.logical(timefix) || length(timefix) > 1)
-        stop("invalid value for timefix option")
+        stop(gettextf("invalid value for '%s' option", "timefix"))
     if (timefix) newY <- aeqSurv(Y) else newY <- Y
     
     if (missing(robust)) robust <- NULL
@@ -9180,7 +9346,7 @@ survfit_confint <- function(p, se, logse=TRUE, conf.type, conf.int,
         list(lower= (sin(pmax(0, asin(sqrt(xx)) - se2*scale)))^2,
              upper= (sin(pmin(pi/2, asin(sqrt(xx)) + se2)))^2)
     }
-    else stop("invalid conf.int type")
+    else stop(gettextf("invalid '%s' type", "conf.int"))
 }
 @ 
 \subsection{Kaplan-Meier}
@@ -9227,7 +9393,7 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         conf.int <- .95
     }
       
-    if (!is.Surv(y)) stop("y must be a Surv object")
+    if (!is.Surv(y)) gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
     if (attr(y, 'type') != 'right' && attr(y, 'type') != 'counting')
 	    stop("Can only handle right censored or counting data")
     ny <- ncol(y)       # Will be 2 for right censored, 3 for counting
@@ -9292,9 +9458,9 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         else if (ncol(y)==2 || !has.robust) {
             # create our own clustering
             n <- nrow(y)
-            cluster <- 1:n
+            cluster <- seq_len(n)
             ncluster <- n
-            clname <- 1:n
+            clname <- seq_len(n)
         }   
         else stop("id or cluster option required")
     } else ncluster <- 0
@@ -9317,6 +9483,16 @@ survfitKM <- function(x, y, weights=rep(1.0,length(x)),
         # if the user asked for no standard error, skip any robust computation
         ncluster <- 0L
         influence <- 0L
+    }
+
+    # if start.time was set, delete obs if necessary
+    keep <- y[,ny-1] >= time0
+    if (!all(keep)) {
+        y <- y[keep,]
+        if (length(id) >0) id <- id[keep]
+        if (length(cluster) >0) cluster <- cluster[keep]
+        x <- x[keep]
+        weights <- weights[keep]
     }
 
 
@@ -9502,7 +9678,7 @@ if (se.fit) {
 	events <- rval$n.event >0
 	if (nstrat ==1) events[1] <- TRUE
 	else           events[1 + cumsum(c(0, rval$strata[-nstrat]))] <- TRUE
-	zz <- 1:length(events)
+	zz <- seq_along(events)
 	n.lag <- rep(rval$n.risk[events], diff(c(zz[events], 1+max(zz))))
 	#
 	# n.lag = the # at risk the last time there was an event (or
@@ -10393,18 +10569,17 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     type <- attr(Y, "type")
     # This line should be unreachable, unless they call "surfitCI" directly
     if (type !='mright' && type!='mcounting')
-         stop(paste("multi-state computation doesn't support \"", type,
-                          "\" survival data", sep=''))
+         stop(gettextf("multi-state computation doesn't support \"%s\" survival data", type))
     
     # If there is a start.time directive, start by removing any prior events
     if (!missing(start.time)) {
         if (!is.numeric(start.time) || length(start.time) !=1
             || !is.finite(start.time))
-            stop("start.time must be a single numeric value")
+            stop(gettextf("'%s' argument must be a single numeric value", "start.time"))
         toss <- which(Y[,ncol(Y)-1] <= start.time)
         if (length(toss)) {
             n <- nrow(Y)
-            if (length(toss)==n) stop("start.time has removed all observations")
+            if (length(toss)==n) stop("'start.time' has removed all observations")
             Y <- Y[-toss,,drop=FALSE]
             X <- X[-toss]
             weights <- weights[-toss]
@@ -10426,7 +10601,7 @@ survfitCI <- function(X, Y, weights, id, cluster, robust, istate,
     if (has.id) id <- as.factor(id)
     else  {
         if (ncol(Y) ==3) stop("an id statement is required for start,stop data")
-        id <- 1:n  # older default, which could lead to invalid curves
+        id <- seq_len(n)  # older default, which could lead to invalid curves
     }
     if (influence && !(has.cluster || has.id)) {
         cluster <- seq(along=X)
@@ -10795,7 +10970,7 @@ docurve2 <- function(entry, etime, status, istate, wt, states, id,
     i0  <- matrix(0., nid, nstate)
     if (all(p0 <1)) {  #actually have to compute it
         who <- index[at.zero]  # this will have no duplicates
-        for (j in 1:nstate) 
+        for (j in seq_len(nstate)) 
             i0[who,j] <- (ifelse(istate[at.zero]==states[j], 1, 0) - p0[j])/wtsum
     }
      
@@ -11257,7 +11432,7 @@ or integer indices.
         # This function lets R worry about character, negative, 
         # or logical subscripts
         #  It always returns a set of positive integer indices
-        temp <- seq(along=target)
+        temp <- seq_along(target)
         names(temp) <- target
         temp[i]
     }
@@ -11293,14 +11468,14 @@ or integer indices.
         newx$transitions <- newx$states <- newx$newdata <- NULL
         
         # what strata and columns do I need?
-        itemp <- matrix(1:prod(dd), nrow=dd[1])
+        itemp <- matrix(seq_len(prod(dd)), nrow=dd[1])
         jj <- (col(itemp))[i]    # columns
         ii <- (row(itemp))[i]    # this is now the strata id
         
         if (dtype[1]!=1 || dd[1]==1) # no strata or only 1
-            irow <- rep(seq(along= x$time), length(ii))
+            irow <- rep(seq_along(x$time), length(ii))
         else {
-            itemp2 <- split(1:sum(x$strata), rep(1:length(x$strata), x$strata))
+            itemp2 <- split(seq_len(sum(x$strata)), rep(seq_along(x$strata), x$strata))
             irow <- unlist(itemp2[ii])  # rows of the pstate object
         }
         inum <- x$strata[ii]        # number of rows in each ii
@@ -11339,9 +11514,9 @@ or integer indices.
     if (is.null(i)) i <- seq.int(dd[1])
     else if (length(x$strata)) i <- nmatch(i, names(x$strata))
     if (dd[1]==1) # no strata or only 1
-        irow <- rep(seq(along= x$time), length(i))
+        irow <- rep(seq_along(x$time), length(i))
     else {
-        itemp <- split(1:sum(x$strata), rep(1:length(x$strata), x$strata))
+        itemp <- split(seq_len(sum(x$strata)), rep(seq_along(x$strata), x$strata))
         irow <- unlist(itemp[i])  # rows of the pstate object
     }
     newx$n <- x$n[i]
@@ -11485,7 +11660,7 @@ summary.survfit <- function(object, times, censored=FALSE,
                             ...) {
     fit <- object  #save typing
     if (!inherits(fit, 'survfit'))
-	    stop("summary.survfit can only be used for survfit objects")
+	    stop("'summary.survfit()' function can only be used for objects of class \"survfit\"")
     if (is.null(fit$logse)) fit$logse <- TRUE   #older style
 
     # The print.rmean option is depreciated, it is still listened
@@ -11501,7 +11676,7 @@ summary.survfit <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for rmean option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     # adding time 0 makes the mean and median easier
@@ -11537,7 +11712,7 @@ summary.survfit <- function(object, times, censored=FALSE,
         if (is.null(fit$strata)) fit <- findrow(fit, times, extend)
         else {
             ltemp <- vector("list", nstrat)
-            for (i in 1:nstrat) 
+            for (i in seq_len(nstrat)) 
                 ltemp[[i]] <- findrow(fit[i], times, extend)
             fit <- unpacksurv(fit, ltemp)
         }
@@ -11553,7 +11728,7 @@ summary.survfit <- function(object, times, censored=FALSE,
  
     # Expand the strata
     if (!is.null(fit$strata)) 
-        fit$strata <- factor(rep(1:nstrat, fit$strata), 1:nstrat,
+        fit$strata <- factor(rep(seq_len(nstrat), fit$strata), seq_len(nstrat),
                              labels= names(fit$strata))
     if (scale != 1) {
         # fix scale in the output
@@ -11588,15 +11763,15 @@ if (!censored) {
                 fit[[i]] <- delta(fit[[i]], index)
     }
     else {
-        sindx <- rep(1:nstrat, fit$strata)
+        sindx <- rep(seq_len(nstrat), fit$strata)
         for (i in c("n.enter", "n.censor")) {
             if (!is.null(fit[[i]]))
-                fit[[i]] <- unlist(sapply(1:nstrat, function(j) 
+                fit[[i]] <- unlist(sapply(seq_len(nstrat), function(j) 
                              delta(fit[[i]][sindx==j], index[sindx==j])))
         }
         # the "factor" is needed for the case that a strata has no
         #  events at all, and hence 0 lines of output
-        fit$strata[] <- as.vector(table(factor(sindx[index], 1:nstrat))) 
+        fit$strata[] <- as.vector(table(factor(sindx[index], seq_len(nstrat)))) 
     }
 }
 #if missing(times) and censored=TRUE, the fit object is ok as it is
@@ -11654,6 +11829,8 @@ findrow <- function(fit, times, extend) {
     
     index1 <- findInterval(ptimes, fit$time) 
     index2 <- 1 + findInterval(ptimes, fit$time, left.open=TRUE)
+    if (length(index1) ==0)
+        stop("no points selected for one or more curves, consider using the extend argument")
     # The pmax() above encodes the assumption that n.risk for any
     #  times before the first observation = n.risk at the first obs
     fit$time <- ptimes
@@ -11719,7 +11896,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
 
     fit <- object  # save typing
     if (!inherits(fit, 'survfitms'))
-	    stop("summary.survfitms can only be used for survfitms objects")
+	    stop("'summary.survfitms()' can only be used for objects of class \"survfitms\"")
     if (is.null(fit$logse)) fit$logse <- FALSE  # older style
 
     # The print.rmean option is depreciated, it is still listened
@@ -11735,7 +11912,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for rmean option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     fit0 <- survfit0(fit, fit$start.time) # add time 0
@@ -11744,13 +11921,13 @@ summary.survfitms <- function(object, times, censored=FALSE,
     rmean.endtime <- temp$end.time
 
     if (!missing(times)) {
-        if (!is.numeric(times)) stop ("times must be numeric")
+        if (!is.numeric(times)) stop(gettextf("'%s' argument must be numeric", "times"))
         times <- sort(times)
     }
 
     if (!is.null(fit$strata)) {
         nstrat <-  length(fit$strata)
-        sindx <- rep(1:nstrat, fit$strata)
+        sindx <- rep(seq_len(nstrat), fit$strata)
     }    
     delta <- function(x, indx) {  # sums between chosen times
         if (is.logical(indx)) indx <- which(indx)
@@ -11775,7 +11952,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
         if (is.null(fit$strata)) fit <- findrow(fit, times, extend)
         else {
             ltemp <- vector("list", nstrat)
-            for (i in 1:nstrat) 
+            for (i in seq_len(nstrat)) 
                 ltemp[[i]] <- findrow(fit[i,], times, extend)
             fit <- unpacksurv(fit, ltemp)
         }
@@ -11817,7 +11994,7 @@ for the other states.
 print.survfitms <- function(x, scale=1,
                             rmean = getOption("survfit.rmean"), ...) {
     if (!is.null(cl<- x$call)) {
-	cat("Call: ")
+	cat(gettext("Call:", domain = "R-survival"))
 	dput(cl)
 	cat("\n")
         }	
@@ -11836,7 +12013,7 @@ print.survfitms <- function(x, scale=1,
     }
     else {
         rmean <- match.arg(rmean, c('none', 'common', 'individual'))
-        if (length(rmean)==0) stop("Invalid value for rmean option")
+        if (length(rmean)==0) stop(gettextf("invalid value for '%s' option", "rmean"))
     }
 
     temp <- survmean2(x, scale=scale, rmean)
@@ -11850,9 +12027,8 @@ print.survfitms <- function(x, scale=1,
         dimnames(temp$matrix) <- dd
         print(temp$matrix, ...)
         if (length(etime) ==1)
-             cat("   *mean time in state, restricted (max time =", 
-                 format(etime, ...), ")\n")
-        else cat("   *mean time in state, restricted (per curve cutoff)\n")
+             cat(gettextf("   *mean time in state, restricted (max time = %s)\n", format(etime, ...), domain = "R-survival"))
+        else cat(gettextf("   *mean time in state, restricted (per curve cutoff)\n", domain = "R-survival"))
     }
     invisible(x)
 }
@@ -11866,7 +12042,7 @@ survmean2 <- function(x, scale=1, rmean) {
     ngrp   <- max(1, length(x$strata))
     if (is.null(x$newdata)) ndata <- 0  else ndata <- nrow(x$newdata)
     if (ngrp >1)  {
-        igrp <- rep(1:ngrp, x$strata)
+        igrp <- rep(seq_len(ngrp), x$strata)
         rname <- names(x$strata)
         }
     else {
@@ -11879,7 +12055,7 @@ survmean2 <- function(x, scale=1, rmean) {
     if (is.matrix(x$n.event)) {
         nc <- ncol(x$n.event)
         nevent <- tapply(x$n.event, list(rep(igrp, nc), col(x$n.event)), sum)
-        dimnames(nevent) <- list(rname, x$states[1:nc])
+        dimnames(nevent) <- list(rname, x$states[seq_len(nc)])
         }
     else {
         nevent <- tapply(x$n.event, igrp, sum)
@@ -11889,7 +12065,7 @@ survmean2 <- function(x, scale=1, rmean) {
     if (ndata< 2) {
         outmat <- matrix(0., nrow=nstate*ngrp , ncol=2)
         outmat[,1] <- rep(x$n, nstate)
-        outmat[1:length(nevent), 2] <- c(nevent)
+        outmat[seq_along(nevent), 2] <- c(nevent)
         
         if (ngrp >1) 
             rowname <- c(outer(rname, x$states, paste, sep=", "))
@@ -11900,7 +12076,7 @@ survmean2 <- function(x, scale=1, rmean) {
         outmat[,1] <- rep(x$n, nstate*ndata)
         outmat[, 2] <- rep(c(nevent), each=ndata)
        
-        temp <- outer(1:ndata, x$states, paste, sep=", ")
+        temp <- outer(seq_len(ndata), x$states, paste, sep=", ")
         if (ngrp >1) 
             rowname <- c(outer(rname, temp, paste, sep=", "))
         else rowname <- temp
@@ -11915,7 +12091,7 @@ survmean2 <- function(x, scale=1, rmean) {
     
         meantime <- matrix(0., ngrp, nstate)
         if (!is.null(x$influence)) stdtime <- meantime
-        for (i in 1:ngrp) {
+        for (i in seq_len(ngrp)) {
             # a 2 dimensional matrix is an "array", but a 3-dim array is
             #  not a "matrix", so check for matrix first.
             if (is.matrix(x$pstate))
@@ -11929,7 +12105,7 @@ survmean2 <- function(x, scale=1, rmean) {
  
             # Now cut it off at maxtime
             delta <- diff(c(tt[tt<maxtime[i]], maxtime[i]))
-            if (length(delta) > nrow(temp)) delta <- delta[1:nrow(temp)]
+            if (length(delta) > nrow(temp)) delta <- delta[seq_len(nrow(temp))]
             if (length(delta) < nrow(temp))
                 delta <- c(delta, rep(0, nrow(temp) - length(delta)))
             meantime[i,] <- colSums(delta*temp)
@@ -11960,6 +12136,371 @@ survmean2 <- function(x, scale=1, rmean) {
     else list(matrix=outmat, end.time=maxtime/scale)
 }
 @ 
+\section{Matrix exponentials and transition matrices}
+For multi-state models, we need to compute the exponential of the transition
+matrix, sometimes many times.
+The matrix exponential is a hard problem, formally defined as
+\begin{equation*}
+  \exp(R) = I + \sum_{j=1}^\infty R^i/i!
+  \end{equation*}
+The computation is nicely solved by the expm package
+\emph{if} we didn't need derivatives and/or high speed.  
+We want both.
+The key idea is from a paper by Kalbfleisch and Lawless: if the rate matrix
+$R$ has distinct eigenvalues then $\exp(R)$ and its derivative can be written
+in terms of a matrix decomposition.  
+If $R$ is upper triangular this decompostion is itself very easy to compute.
+If the transition matrix is acylic then it can be rearranged to be in upper
+triangular form.  
+As importantly, the decomposition leads to a simple computation for the
+first derivative of each element.
+
+Also be aware that $\exp(A)\exp(B) \ne \exp(A+B)$ for the case of matrices.
+
+Nearly all the rate matrices encountered during an iteration will have
+distint eigenvalues.
+For the few which do not we can use the Pade' approximation found in the
+matexp package.
+If the rate matrix is upper triangular (\code{uppertri}), then the
+eigenvalues are found on the diagonal of $R$.  
+The overall stategy is the following:
+\begin{enumerate} 
+  \item Call \code{survexpmsetup} once, which will decide if the matrix is
+    acyclic, and return a reorder vector if so or a flag if it is not.
+  \item Call \code{survexpm} multiple times.  For that routine
+    \begin{itemize}
+      \item Do not need derivatives: call survexpm or pade as appropriate
+      \item Do need derivatives
+        \begin{itemize}
+          \item If upper triangular and no tied values, use the deriv routine
+          \item Otherwise use the Pade routine
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+<<survexpm>>=
+survexpmsetup <- function(rmat) {
+    # check the validity of the transition matrix, and determine if it
+    #  is acyclic, i.e., can be reordered into an upper triangular matrix.
+    if (!is.matrix(rmat) || nrow(rmat) != ncol(rmat) || any(diag(rmat) > 0) ||
+        any(rmat[row(rmat) != col(rmat)] < 0))
+        stop ("input is not a transition matrix")
+    if (!is.logical(all.equal(rowSums(rmat), rep(0, ncol(rmat)))))
+        stop("input is not a transition matrix")
+    nc <- ncol(rmat)
+    lower <- row(rmat) > col(rmat)
+    if (all(rmat[lower] ==0))  return(0)  # already in order
+    
+    # score each state by (number of states it follows) - (number it precedes)
+    temp <- 1*(rmat >0) # 0/1 matrix
+    indx <- order(colSums(temp) - rowSums(temp))
+    temp <- rmat[indx, indx]  # try that ordering
+    if (all(temp[lower]== 0)) indx  # it worked!
+    else -1  # there is a loop in the states
+}
+@ 
+
+\subsection{Decompostion}
+Based on Kalbfleisch and Lawless, ``The analysis of panel data under a 
+Markov assumption'' (J Am Stat Assoc, 1985:863-871), the
+rate matrix $R$ can be written as $ADA^{-1}$ for some matrix $A$, where
+$D$ is a diagonal matrix of eigenvalues, provided all of the eigenvalues
+are distinct.
+Then $\exp(R) = A \exp(D) A^{-1}$, and the exponential of a diagonal
+matrix is simply a diagonal matrix of the exponentials.
+The matrix $Rt$ for a scalar $t$ has decomposition $A\exp(Dt)A^{-1}$; a
+single decompostion suffices for all values of $t$.
+
+A particular example is
+\begin{equation}
+  R =
+  \begin{pmatrix}
+    r_{11} & r_{12} & r_{13} & 0 & 0 & r_{15}\\
+    0 & r_{22} & 0 & r_{24} & 0 & r_{25}\\
+    0 & 0 & r_{33} & r_{34} & r_{35} & r_{35}\\
+    0 & 0 & 0 & r_{44} & r_{45} & r_{45} \\
+    0 & 0 & 0 & 0 & r_{55} & r_{55} \\
+    0 & 0 & 0 & 0 & 0 & 0
+  \end{pmatrix}.
+\end{equation}
+Since this is a transition matrix the diagonal elements are constrained so that
+row sums are zero: $r_{ii} = -\sum_{j\ne i} r_{ij}$.
+Since R is an upper triangular matrix it's eigenvalues lie on the diagonal.
+If none of the the eigenvalues are
+repeated, then the Prentice result applies.
+
+The decompostion is quite simple since $R$ is triangular.
+We want the eigenvectors, i.e. solutions to 
+\begin{align*}
+  R v_i &= r_{ii} v_i \\
+%  R v_2 &= r_{22} v_2 \\
+%  R v_3 &= r_{33} v_3 \\
+%  R v_4 &= r_{44} v_4 \\
+%  R v_5 &= r_{55} v_5 \\
+%  R v_6 &= r_{66} v_6
+\end{align*}
+for $i= 1, \dots, 6$, where $v_i$ are the colums of $V$. 
+
+A sneaky fact is that the set of eigenvectors is
+also upper triangular; we can solve for them one by one
+using back substitution.
+For the first eigenvector we have 
+$v_1 = (1, 0,0,0,0,0)$.
+For the second we have the equations
+\begin{align*}
+  r_{11} x + r_{12}y &=  r_{22} x \\
+             r_{22}y &=  r_{22} y
+\end{align*}
+which has the solution $(r_{12}/(r_{22}- r_{11}), 1, 0,0,0,0)$,
+and the process recurs for other rows.
+Since $V$ is triangular the inverse of $V$ is upper triangular
+and also easy to compute.
+
+This approach fails if there are tied eigenvalues.
+Kalbfleice and Lawless comment that this case is rare,
+but one can then use a decomposition to Jordan canonical form re
+Cox and Miller, the Theory of Stochastic Processes, 1965.
+Although this leads to some nice theorems it does not give a 
+simple comutational form, however, 
+and it is easier to fall back on the pade routine.
+At this time, the pade routine is as fast as the triangluar code,
+at least for small matrices without deriviatives.
+
+<<survexpm>>=
+survexpm <- function(rmat, time=1.0, setup, eps=1e-6) {
+    if (missing(setup) || setup[1] < 0 ||
+        any(diff(sort(diag(rmat)))< eps)) pade(rmat*time)
+    else {
+        if (setup==1) .Call(Ccdecomp, rmat, time)$P
+        else {
+            temp <- rmat
+            temp[setup, setup] <- .Call(Ccdecomp, rmat[setup, setup], time)
+            temp$P
+        }
+    }
+}
+@ 
+
+The routine below is modeled after the cholesky routines in the survival
+library.  
+To help with notation, the return values are labeled as in the 
+Kalbfleisch and Lawless paper,
+except that their Q = our rmat.  Q = A diag(d) Ainv and P= exp(Qt)
+
+<<cdecomp>>=
+/*
+** Compute the eigenvectors for the upper triangular matrix R
+*/
+#include <math.h>
+#include "R.h"
+#include "Rinternals.h"
+
+SEXP cdecomp(SEXP R2, SEXP time2) {
+    int i,j,k;
+    int nc, ii;
+    
+    static const char *outnames[]= {"d", "A", "Ainv", 
+				    "P", ""};    
+    SEXP rval, stemp;
+    double *R, *A, *Ainv, *P;
+    double *dd, temp, *ediag;
+    double time;
+
+    nc = ncols(R2);   /* number of columns */
+    R = REAL(R2);
+    time = asReal(time2);
+
+    /* Make the output matrices as copies of R, so as to inherit
+    **   the dimnames and etc
+    */
+    
+    PROTECT(rval = mkNamed(VECSXP, outnames));
+    stemp=  SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));
+    dd = REAL(stemp);
+    stemp = SET_VECTOR_ELT(rval, 1, allocMatrix(REALSXP, nc, nc));
+    A = REAL(stemp);
+    for (i =0; i< nc*nc; i++) A[i] =0;   /* R does not zero memory */
+    stemp = SET_VECTOR_ELT(rval, 2, duplicate(stemp));
+    Ainv = REAL(stemp);
+    stemp = SET_VECTOR_ELT(rval, 3, duplicate(stemp));
+    P = REAL(stemp);
+   
+    ediag = (double *) R_alloc(nc, sizeof(double));
+    
+    /* 
+    **	Compute the eigenvectors
+    **   For each column of R, find x such that Rx = kx
+    **   The eigenvalue k is R[i,i], x is a column of A
+    **  Remember that R is in column order, so the i,j element is in
+    **   location i + j*nc
+    */
+    ii =0; /* contains i * nc */
+    for (i=0; i<nc; i++) { /* computations for column i */
+	dd[i] = R[i +ii];    /* the i,i diagonal element = eigenvalue*/
+	A[i +ii] = 1.0;
+	for (j=(i-1); j >=0; j--) {  /* fill in the rest */
+	    temp =0;
+	    for (k=j; k<=i; k++) temp += R[j + k*nc]* A[k +ii];
+	    A[j +ii] = temp/(dd[i]- R[j + j*nc]);
+	}
+	ii += nc;
+    }
+    
+    /*
+    ** Solve for A-inverse, which is also upper triangular. The diagonal
+    **  of A and the diagonal of A-inverse are both 1.  At the same time 
+    **  solve for P = A D Ainverse, where D is a diagonal matrix 
+    **  with exp(eigenvalues) on the diagonal.
+    ** P will also be upper triangular, and we can solve for it using
+    **  nearly the same code as above.  The prior block had RA = x with A the
+    **  unknown and x successive colums of the identity matrix. 
+    **  We have PA = AD, so x is successively columns of AD.
+    ** Imagine P and A are 4x4 and we are solving for the second row
+    **  of P.  Remember that P[2,1]= A[2,3] = A[2,4] =0; the equations for
+    **  this row of P are:
+    **
+    **    0*A[1,2] + P[2,2]A[2,2] + P[2,3] 0     + P[2,4] 0     = A[2,2] D[2]
+    **    0*A[1,3] + P[2,2]A[2,3] + P[2,3]A[3,3] + P[2,4] 0     = A[2,3] D[3]
+    **    0*A[1,4] + P[2,2]A[2,4] + P[2,3]A[3,4] + P[2,4]A[4,4] = A[2,4] D[4]
+    **
+    **  For A-inverse the equations are (use U= A-inverse for a moment)
+    **    0*A[1,2] + U[2,2]A[2,2] + U[2,3] 0     + U[2,4] 0     = 1
+    **    0*A[1,3] + U[2,2]A[2,3] + U[2,3]A[3,3] + U[2,4] 0     = 0
+    **    0*A[1,4] + U[2,2]A[2,4] + U[2,3]A[3,4] + U[2,4]A[4,4] = 0
+    */
+    
+    ii =0; /* contains i * nc */
+    for (i=0; i<nc; i++) ediag[i] = exp(time* dd[i]);
+    for (i=0; i<nc; i++) { 
+	/* computations for column i of A-inverse */
+	Ainv[i+ii] = 1.0 ;
+	for (j=(i-1); j >=0; j--) {  /* fill in the rest of the column*/
+	    temp =0;
+	    for (k=j+1; k<=i; k++) temp += A[j + k*nc]* Ainv[k +ii];
+	    Ainv[j +ii] = -temp;
+	}
+	
+        /* column i of P */
+	P[i + ii] = ediag[i];
+        for (j=0; j<i; j++) {
+	    temp =0;
+            for (k=j; k<nc; k++) temp += A[j + k*nc] * Ainv[k+ii] * ediag[k];
+            P[j+ii] = temp;
+        }
+        
+	/* alternate computations for row i of P, does not use Ainv*/
+	/*P[i +ii] = ediag[i];
+	  for (j=i+1; j<nc; j++) { 
+	      temp =0;
+	      for (k=i; k<j; k++) temp += P[i+ k*nc]* A[k + j*nc];
+              P[i + j*nc] = (A[i + j*nc]*ediag[j] - temp)/A[j + j*nc];
+	  } 
+        */
+	ii += nc;
+    }
+    UNPROTECT(1);
+    return(rval);
+}
+@ 
+
+\subsection{Derivatives}
+From Kalbfliesch and Lawless, the first derivative of 
+$P = \exp(Rt)$ is
+\begin{align*}
+  \frac{\partial P}{\partial \theta} &= AVA^{-1} \\
+     V_{ij} &= \left\{ \begin{array}{ll}
+         G_{ij}(e^{d_i t} - e^{d_j t})/(d_i - d_j) & i \ne j \\
+         G_{ii}t e^{d_it} & i=j 
+         \end{array} \right. \\
+       G&= A (\partial R /\partial \theta) A^{-1}
+\end{align*}
+The formula for the off diagonal elements collapses to give the formula for
+the diagonal ones by an application of L'Hospital's rule (for the math
+geeks).
+
+Each off diagonal element of R is $\exp(X_i\beta)= \exp(\eta_i)$ for a fixed
+vector $X_i$ --- we are computing the derivative at a particular trial value.
+The first derivative with respect to
+$\beta_j$ is then $X_{ij} \exp(\eta_{i})$.
+Since the rows of R sum to a constant then the rows of 
+its derivative must sum to zero;
+we can fill in the diagonal element after the off diagonal ones are computed.
+This notation has left something out: there is a separate $\eta$ vector
+for each of the non-zero transitions, there is a matrix
+of derivatives ($P$ is a matrix after all) for each $\beta_j$.
+
+This computation is more bookkeeping than the earlier one, but no
+single portion is particularly intensive computationally when the number
+of states is modest.
+
+The input will be the $X$ matrix row for the particular subject, 
+the coefficient matrix, the rates matrix, time interval, and the mapping
+vector from eta to the rates.  The last tells us where the zeros are.
+
+<<survexpm>>=
+derivative <- function(rmat, time, dR, setup, eps=1e-8) {
+    if (missing(setup) || setup[1] <0 || any(diff(sort(diag(rmat)))< eps)) 
+        return (pade(rmat*time, dR*time))
+
+    if (setup==0) dlist <- .Call(Ccdecomp, rmat, time)
+    else dlist <- .Call(Ccdecomp, rmat[setup, setup], time)
+    ncoef <- dim(dR)[3]
+    nstate <- nrow(rmat)
+    
+    dmat <- array(0.0, dim=c(nstate, nstate, ncoef))
+    vtemp <- outer(dlist$d, dlist$d,
+                   function(a, b) {
+                       ifelse(abs(a-b)< eps, time* exp(time* (a+b)/2),
+                         (exp(a*time) - exp(b*time))/(a-b))})
+
+    # two transitions can share a coef, but only for the same X variable
+    for (i in 1:ncoef) {
+        G <- dlist$Ainv %*% dR[,,i] %*% dlist$A
+        V <- G*vtemp
+        dmat[,,i] <- dlist$A %*% V %*% dlist$Ainv
+    }
+    dlist$dmat <- dmat
+    
+    # undo the reordering, if needed
+    if (setup[1] >0) {
+        indx <- order(setup)
+        dlist <- list(P = dlist$P[indx, indx],
+                      dmat = apply(dmat,1:2, function(x) x[indx, indx]))
+    }
+                      
+    dlist
+}
+@ 
+
+The Pade approximation is found in the file pade.R.  There is a good discussion
+of the problem at www.maths.manchester.ac.uk/~higham/talks/exp09.pdf.
+The pade function copied code from the matexp package, which in turn is based
+on Higham 2005.  Let B be a matrix and define
+\begin{eqnarray*}
+  r_m(B) &= p(B)/q(B) \\
+  p(B)   &= \sum_{j=0^m} \frac{((2m-j)! m!}{(2m)!(m-j)! j!} B^j \\
+    q(B) &= p(-B)
+\end{eqnarray*}
+
+The algorithm for calculating $\exp(A)$ is based on the following table
+\begin{center}
+\begin{tabular}{c|ccccc}
+   $||A||_1$ & 0.15 & .25 & .95 & 2.1 & 3.4 \\
+    m        & 3    & 5   &  7  & 9   & 13
+\end{tabular} \end{center}
+The 1 norm of a matrix is \code{max(colSums(A))}.  If the norm is $\le 3.4$
+the $\exp(A) = r_m(A)$ using the table.
+Otherwise, find $s$ such that $B = A/2^s$ has norm $<=3.4$ and use the table
+method to find $\exp(B)$, then $\exp(A) \approx B^(2^s)$, the latter involves
+repeated squaring of the matrix.  
+
+The expm code has a lot of extra steps whose job is to make sure that elements
+of $A$ are not too disparate in size.  Transition matrices are nice and we can
+skip all of that.  This makes the pade function conserably faster than the
+expm function from the Matrix library.  In fact, if there aren't any
+tied event times, most elements of the rate matrix will be zero, and 
+others are on the order of 1/(number at risk), so that $m=3$ is the most common
+outcome. 
 \section{Plotting survival curves}
 This version of the curves uses the newer form of the survfit object, which
 fixes an original design decision that I now consider to have been a mistake.
@@ -12025,7 +12566,7 @@ lines.survfit <- function(x, type='s',
     <<plot-transform>>
     <<plot-setup-marks>>
 
-    do.clip <- options("plot.survfit")
+    do.clip <- getOption("plot.survfit")
     if (!is.null(xx <- do.clip$plotclip)) clip(xx[1], xx[2], xx[3], xx[4])
 
     <<plot-functions>>
@@ -12057,7 +12598,7 @@ points.survfit <- function(x, fun, censor=FALSE,
                 pch2 <- rep(strsplit(pch, '')[[1]], length=ncurve)
             else pch2 <- rep(pch, length=ncurve)
         }
-        for (j in 1:ncol(ssurv)) {
+        for (j in seq_len(ncol(ssurv))) {
             for (i in unique(stemp)) {
                 if (censor) who <- which(stemp==i)
                 else who <- which(stemp==i & x$n.event >0)
@@ -12209,7 +12750,7 @@ if (is.null(x$strata)) {
 }
 else {
     nstrat <- length(x$strata)
-    stemp <- rep(1:nstrat, x$strata) # same length as stime
+    stemp <- rep(seq_len(nstrat), x$strata) # same length as stime
 }
 ncurve <- nstrat * ncol(ssurv)
 @ 
@@ -12272,7 +12813,7 @@ if (!inherits(x, "survfitms") && !cumhaz & !missing(fun)) {
             !inherits(x, "survfitms") && !cumhaz) yzero <- TRUE
     }
     else if (is.function(fun)) tfun <- fun
-    else stop("Invalid 'fun' argument")
+    else stop(gettextf("invalid '%s' argument", "fun"))
     
     ssurv <- tfun(ssurv )
     if (!is.null(supper)) {
@@ -12417,10 +12958,12 @@ else resetclip <- !(missing(xlim) & missing(ylim) &
                     missing(xmax) & missing(firstx)& missing(ymin))
 
 if (resetclip) {
-  # yes, do it
-  #if (xaxs=='S') tempx <- c(tempx[1], temp[1])
-  clip(tempx[1], tempx[2], tempy[1], tempy[2])
-  options(plot.survfit = list(plotclip=c(tempx, tempy), plotreset=par('usr')))
+    # yes, do it
+    #if (xaxs=='S') tempx <- c(tempx[1], temp[1])
+    ctemp <- par('usr')
+    ctemp[2] <- tempx[2]  # only be stronger on the right edge, per xmax
+    clip(ctemp[1], ctemp[2], ctemp[3], ctemp[4])
+    options(plot.survfit = list(plotclip= ctemp, plotreset=par('usr')))
 }
 else options(plot.survfit = NULL)  #remove any notes from a prior plot
 @ 
@@ -12487,11 +13030,11 @@ c1 <- 1  # keeps track of the curve number
 c2 <- 1  # keeps track of the lty, col, etc
 xend <- yend <- double(ncurve)
 if (length(conf.offset) ==1) 
-    temp.offset <- (1:ncurve - (ncurve+1)/2)* conf.offset* diff(par("usr")[1:2])
+    temp.offset <- (seq_len(ncurve) - (ncurve+1)/2)* conf.offset* diff(par("usr")[1:2])
 else temp.offset <- rep(conf.offset, length=ncurve) *  diff(par("usr")[1:2])
 temp.cap    <-  conf.cap    * diff(par("usr")[1:2])
 
-for (j in 1:ncol(ssurv)) {
+for (j in seq_len(ncol(ssurv))) {
     for (i in unique(stemp)) {  #for each strata
         who <- which(stemp==i)
 
@@ -12634,7 +13177,7 @@ if (is.matrix(layout) && ncol(layout)==2 && nrow(layout) > 1) {
 else {
     if (any(layout <=0 | layout != floor(layout)))
         stop("non-integer number of states in layout argument")
-    space <- function(n) (1:n -.5)/n   # centers of the boxes
+    space <- function(n) (seq_len(n) -.5)/n   # centers of the boxes
     if (sum(layout) != nstate) stop("number of boxes != number of states")
     cbox <- matrix(0, ncol=2, nrow=nstate)  #coordinates will be here
     n <- length(layout)
@@ -12642,10 +13185,10 @@ else {
     ix <- rep(seq(along=layout), layout) 
     if (is.vector(layout) || ncol(layout)> 1) { #left to right     
         cbox[,1] <- space(n)[ix]
-        for (i in 1:n) cbox[ix==i,2] <- 1 -space(layout[i])
+        for (i in seq_len(n)) cbox[ix==i,2] <- 1 -space(layout[i])
     } else { # top to bottom
         cbox[,2] <- 1- space(n)[ix]
-        for (i in 1:n) cbox[ix==i,1] <- space(layout[i])
+        for (i in seq_len(n)) cbox[ix==i,1] <- space(layout[i])
     }
 }
 @ 
@@ -12668,7 +13211,7 @@ if (box) {
         lines(x+ c(-dx, dx, dx, -dx, -dx),
               y+ c(-dy, -dy, dy, dy, -dy), lwd=lwd, lty=lty, col=col)
     }
-    for (i in 1:nstate) 
+    for (i in seq_len(nstate)) 
         drawbox(cbox[i,1], cbox[i,2], textwd[i]/2 + dx, textht[i]/2 + dy,
                 col=bcol[i], lwd=lwd[i], lty=lty[i])
     dx <- 2*dx; dy <- 2*dy   # move arrows out from the box
@@ -12845,8 +13388,8 @@ A user can use a negative value for offset to reverse this if they wish.
 
 <<statefig-arrows>>=
 k <- 1
-for (j in 1:nstate) {
-    for (i in 1:nstate) {
+for (j in seq_len(nstate)) {
+    for (i in seq_len(nstate)) {
         if (i != j && connect[i,j] !=0) {
             if (connect[i,j] == 2-connect[j,i] && offset!=0) {
                 #add an offset
@@ -12927,8 +13470,8 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
            envir=new)
 
     if (missing(data1) || missing(data2) || missing(id)) 
-        stop("the data1, data2, and id arguments are required")
-    if (!inherits(data1, "data.frame")) stop("data1 must be a data frame")
+        stop("'data1', 'data2', and 'id' arguments are required")
+    if (!inherits(data1, "data.frame")) stop(gettextf("'%s' argument must be a data frame", "data1"))
     
     <<tmerge-setup>>
     <<tmerge-addvar>>
@@ -12947,27 +13490,27 @@ tmerge.control <- function(idname="id", tstartname="tstart", tstopname="tstop",
                            delay =0, na.rm=TRUE, tdcstart=NA_real_, ...) {
     extras <- list(...)
     if (length(extras) > 0) 
-        stop("unrecognized option(s):", paste(names(extras), collapse=', '))
+        stop(sprintf(ngettext(length(extras), "unrecognized option: %s", "unrecognized options: %s", domain = "R-survival"), paste(names(extras), collapse = ", ")), domain = NA)
     if (length(idname) != 1 || make.names(idname) != idname)
-        stop("idname option must be a valid variable name")
+        stop(gettextf("'%s' argument must be a variable name", "idname"))
     if (!is.null(tstartname) && 
         (length(tstartname) !=1 || make.names(tstartname) != tstartname))
-        stop("tstart option must be NULL or a valid variable name")
+        stop(gettextf("'%s' argument must be NULL or a variable name", "tstartname"))
     if (length(tstopname) != 1 || make.names(tstopname) != tstopname)
-        stop("tstop option must be a valid variable name") 
+        stop(gettextf("'%s' argument must be a variable name", "tstopname"))
     if (length(delay) !=1 || !is.numeric(delay) || delay < 0)
-        stop("delay option must be a number >= 0")
+        stop(gettextf("'%s' argument must be a number >= 0", "delay"))
     if (length(na.rm) !=1 || ! is.logical(na.rm))
-        stop("na.rm option must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "na.rm"))
     if (length(tdcstart) !=1) stop("tdcstart must be a single value")
-   list(idname=idname, tstartname=tstartname, tstopname=tstopname, 
-        delay=delay, na.rm=na.rm, tdcstart=tdcstart)
+    list(idname=idname, tstartname=tstartname, tstopname=tstopname, 
+         delay=delay, na.rm=na.rm, tdcstart=tdcstart)
 }
 
 tname <- attr(data1, "tname")
 firstcall <- is.null(tname)  #first call to the function
 if (!firstcall && any(is.null(match(unlist(tname), names(data1)))))
-    stop("data1 does not match its own tname attribute")
+    stop("'data1' does not match its own 'tname' attribute")
 
 if (!missing(options)) {
     if (!is.list(options)) stop("options must be a list")
@@ -12990,7 +13533,7 @@ else if (length(tname)) topt <- do.call(tmerge.control, tname)
 else  topt <- tmerge.control()
 
 # id, tstart, tstop are found in data2
-if (missing(id)) stop("the id argument is required")
+if (missing(id)) stop(gettextf("'%s' argument is required", "id"))
 if (missing(data1) || missing(data2))
     stop("two data sets are required")
 id <- eval(Call[["id"]], data2, enclos=emptyenv()) #don't find it elsewhere
@@ -13001,21 +13544,21 @@ if (firstcall) {
     if (!missing(tstop)) {
          tstop <-  eval(Call[["tstop"]],  data2)
          if (length(tstop) != length(id))
-             stop("tstop and id must be the same length")
+             stop(gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id"))
          # The neardate routine will check for legal tstop data type
       }
     if (!missing(tstart)) {
         tstart <- eval(Call[["tstart"]], data2)
         if (length(tstart)==1) tstart <- rep(tstart, length(id))
         if  (length(tstart) != length(id))        
-            stop("tstart and id must be the same length")
+             stop(gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id"))
         if (any(tstart >= tstop))
-            stop("tstart must be < tstop")
+            stop("'tstart' must be < 'tstop'")
          }
 }
 else {
     if (!missing(tstart) || !missing(tstop))
-        stop("tstart and tstop arguments only apply to the first call")
+        stop("'tstart' and 'tstop' arguments only apply to the first call")
 }
 @ 
 
@@ -13034,12 +13577,11 @@ else  args <- eval(dotarg, data2, enclos=new)
     
 argclass <- sapply(args, function(x) (class(x))[1])
 argname <- names(args)
-if (any(argname== "")) stop("all additional argments must have a name")
+if (any(argname== "")) stop("all additional arguments must have a name")
        
 check <- match(argclass, c("tdc", "cumtdc", "event", "cumevent"))
 if (any(is.na(check)))
-    stop(paste("argument(s)", argname[is.na(check)], 
-                   "not a recognized type"))
+    stop(gettextf("argument(s) %s not a recognized type", argname[is.na(check)]))
 @ 
 
 The tcount matrix keeps track of what we have done, and is added to
@@ -13055,6 +13597,7 @@ dimnames(tcount) <- list(argname, c("early","late", "gap", "within",
                                     "tied"))
 tevent <- attr(data1, "tevent") # event type variables
 tcens  <- attr(data1, "tcensor")# censor code for variables
+tdcvar <- attr(data1, "tdcvar")   # tdc type varaiables
 if (is.null(tcens)) tcens <- vector('list', 0)
 @ 
 
@@ -13087,7 +13630,7 @@ if (firstcall) {
                   nomatch=0)
     if (any(indx[1:2]>0) && FALSE) {  # warning currently turned off. Be chatty?
         overwrite <- c(topt$tstartname, topt$tstopname)[indx[2:3]]
-        warning("overwriting data1 variables", paste(overwrite, collapse=' '))
+        warning(gettextf("overwriting data1 variables %s", paste(overwrite, collapse = " ")))
         }
     
     temp <- as.character(idname)
@@ -13118,12 +13661,11 @@ if (firstcall) {
         stop("missing time value, when that variable defines the span")
     if (missing(tstart)) {
         indx <- which(tstop <=0)
-        if (length(indx) >0) stop("found an ending time of ", tstop[indx[1]],
-                                  ", the default starting time of 0 is invalid")
+        if (length(indx) >0) stop(gettextf("found an ending time of %s, the default starting time of 0 is invalid", tstop[indx[1]]))
         tstart <- rep(0, length(tstop))
     }
     if (any(tstart >= tstop)) 
-        stop("tstart must be < tstop")
+        stop("'tstart' must be < 'tstop'")
     newdata[[topt$tstartname]] <- tstart
     newdata[[topt$tstopname]] <- tstop
     n <- nrow(newdata)
@@ -13133,7 +13675,7 @@ if (firstcall) {
         newdata <- newdata[order(indx1, tstop),]
      }
     temp <- newdata[[topt$idname]]
-    if (any(tstart >= tstop)) stop("tstart must be < tstop")
+    if (any(tstart >= tstop)) stop("'tstart' must be < 'tstop'")
     if (any(newdata$tstart[-n] > newdata$tstop[-1] &
             temp[-n] == temp[-1]))
         stop("first call has created overlapping or duplicated time intervals")
@@ -13163,10 +13705,10 @@ for (ii in seq(along.with=args)) {
     # if an event time is missing then skip that obs
     etime <- argi$time
     if (length(etime) != length(saveid))
-        stop("argument ", argname[ii], " is not the same length as id")
+        stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
     if (!is.null(argi$value)) {
        if (length(argi$value) != length(saveid))
-            stop("argument ", argname[ii], " is not the same length as id")
+            stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
         if (topt$na.rm) keep <- !(is.na(etime) | is.na(argi$value))
         else keep <- !is.na(etime)
         if (!all(keep)) {
@@ -13306,7 +13848,7 @@ if (n4 > 0) {
     irep <- rep.int(1L, nrow(newdata))
     erow <- unique(indx1[indx4])   # which rows in newdata to be expanded
     irep[erow] <- 1+ n.add # number of rows in new data
-    jrep <- rep(1:nrow(newdata), irep)  #stutter the duplicated rows
+    jrep <- rep(seq_len(nrow(newdata)), irep)  #stutter the duplicated rows
     newdata <- newdata[jrep,]  #expand it out
     dstart <- dstart[jrep]
     dstop <-  dstop[jrep]
@@ -13315,7 +13857,7 @@ if (n4 > 0) {
     nfix <- length(erow)
     temp <- vector("list", nfix)
     iend <- (cumsum(irep))[irep >1]  #end row of each duplication set
-    for (j in 1:nfix) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
+    for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
     newrows <- unlist(temp)
     
     dstart[newrows] <- dstop[newrows-1] <- icount$etime
@@ -13337,16 +13879,20 @@ The most common is a tdc, so start with it.
 The C routine returns a set of indices: 0,1,1,2,3,0,4,... would mean that
 row 1 of the new data happens before the tdc variable, 2 and 3 take values from
 the first element of yinc, etc.  
-By returning and index, the yinc variable can be of any data type.  Using
+By returning an index, the yinc variable can be of any data type.  Using
 is.na() on the left side below causes the \emph{right} kind of NA to be inserted
 (this trick was stolen from the merge routine).
+
+If this is a first call, don't allow the new variable to overwrite a variable
+already existing in the data set, we found it leads to problems.  (Usually it
+is a user mistake.)  However, tdc calls themselves can stack.
 
 <<tmerge-addin2>>=
 # add a tdc variable
 newvar <- newdata[[argname[ii]]]  # prior value (for sequential tmerge calls)
 if (argclass[ii] == "tdc") {
     if (argname[[ii]] %in% tevent)
-        stop("attempt to turn event variable", argname[[ii]], "into a tdc")
+        stop(gettextf("attempt to turn event variable %s into a tdc", argname[[ii]]))
     
     default <- argi$default   # default value
     if (is.null(default)) default <- topt$tdcstart
@@ -13359,28 +13905,50 @@ if (argclass[ii] == "tdc") {
     index <- .Call(Ctmerge2, match(baseid, uid), dstop, 
                                match(id, uid),  etime)
 
-    #if (!is.null(newvar))      
-    #   warning(paste0("replacement of variable '", argname[ii], "'")) 
+    if (!(argname[[ii]] %in% tdcvar) && !is.null(newvar)) {
+        warning(gettextf("replacement of variable '%s'", argname[ii]))
+        newvar <- NULL
+    }
 
-    if (is.null(yinc)) newvar <- ifelse(index==0, 0L, 1L) # add a 0/1 variable
-    else {
-        newvar <- yinc[pmax(1L, index)]
-        if (any(index==0)) {
-            if (is.na(default)) is.na(newvar) <- (index==0L)
-            else {
-                if (is.numeric(newvar)) newvar[index==0L] <- as.numeric(default)
+    if (is.null(newvar)) {
+        if (is.null(yinc)) newvar <- ifelse(index==0, 0L, 1L) # add a 0/1 variable
+        else {
+            newvar <- yinc[pmax(1L, index)]
+            if (any(index==0)) {
+                if (is.na(default)) is.na(newvar) <- (index==0L)                
                 else {
-                    if (is.factor(newvar)) {
-                        # special case: if default isn't in the set of levels,
-                        #   add it to the levels
-                        if (is.na(match(default, levels(newvar))))
-                            levels(newvar) <- c(levels(newvar), default)
+                    if (is.numeric(newvar)) newvar[index==0L] <- as.numeric(default)
+                    else {
+                        if (is.factor(newvar)) {
+                            # special case: if default isn't in the set of levels,
+                            #   add it to the levels
+                            if (is.na(match(default, levels(newvar))))
+                                levels(newvar) <- c(levels(newvar), default)
+                        }
+                        newvar[index== 0L] <- default
                     }
-                    newvar[index== 0L] <- default
                 }
             }
         }
+    } else {
+        # make sure new data type matches the old
+        if (is.null(yinc)){
+            if (is.integer(newvar) && all(newvar==0L | newvar==1L))
+                newvar[index!=0L] <- 1L
+            else stop("tdc update does not match prior variable type: ", argname[ii])
+        }
+        else if (is.factor(yinc)) {
+            if (!is.factor(newvar)) 
+                stop("tdc update does not match prior variable type: ", argname[ii])
+            if (!identical(levels(yinc), levels(newvar)))      
+                stop("tdc update's levels do not match prior variable: ", argname[ii])
+            newvar[index!= 0L] <- yinc[index]
+        } 
+        else if (class(yinc) != class(newvar))
+            stop("tdc update does not match prior variable type: ", argname[ii]) 
+        else newvar[index!= 0L] <- yinc[index]
     }
+    tdcvar <- unique(c(tdcvar, argname[[ii]]))
 }
 @ 
 
@@ -13439,7 +14007,7 @@ if (argclass[ii] %in% c("event", "cumevent")) {
 else if (argclass[ii] == "cumtdc") {  # process a cumtdc variable
     # I don't have a good way to catch the reverse of this user error
     if (argname[[ii]] %in% tevent)
-        stop("attempt to turn event variable", argname[[ii]], "into a cumtdc")
+        stop(gettextf("attempt to turn event variable %s into a cumtdc", argname[[ii]]))
 
     keep <- itype != 2  # changes after the last interval are ignored
     indx <- ifelse(subtype==1, indx1, 
@@ -13479,6 +14047,8 @@ if (length(tevent)) {
     attr(newdata, "tevent") <- tevent
     attr(newdata, "tcensor" ) <- tcens
     }
+if (length(tdcvar)) attr(newdata, "tdcvar") <- tdcvar
+
 row.names(newdata) <- NULL  #These are a mess; kill them off.
 # Not that it works: R just assigns new row names.
 class(newdata) <- c("data.frame")
@@ -13547,7 +14117,7 @@ cmatrix <- function(fit, term,
                     test =c("global", "trend", "pairwise"),
                     levels, assign) {
     # Make sure that "fit" is present and isn't missing any parts.
-    if (missing(fit)) stop("a fit argument is required")
+    if (missing(fit)) stop(gettextf("'%s' argument is required", "fit"))
     Terms <- try(terms(fit), silent=TRUE)
 
     if (inherits(Terms, "try-error"))
@@ -13558,7 +14128,7 @@ cmatrix <- function(fit, term,
     Tatt$dataClasses <- Tatt$dataClasses[row.names(Tatt$factors)]
     test <- match.arg(test)
 
-    if (missing(term)) stop("a term argument is required")
+    if (missing(term)) stop(gettextf("'%s' argument is required", "term"))
     if (is.character(term)) term <- formula(paste("~", term))
     else if (is.numeric(term)) {
         if (all(term == floor(term) & term >0 & term < length(Tatt$term.labels)))
@@ -13579,12 +14149,12 @@ cmatrix <- function(fit, term,
         temp <- fatt$term.labels
         temp2 <- Tatt$term.labels
         temp2[grepl(":", temp2)] <- ""
-        for (i in 1:length(temp)) {
+        for (i in seq_along(temp)) {
             j <- grep(temp[i], Tatt$term.labels)
             k <- grep(temp[i], temp2)
             if (length(j)==1) temp[i] <- Tatt$term.labels[j]
             else if (length(k)==1) temp[i] <- Tatt$term.labels[k]
-            else stop("term '", temp[i], "' not found in the fit")
+            else stop(gettextf("term '%s' not found in the fit", temp[i]))
             }
         fterm <- terms(formula( paste("~", paste(temp, collapse="+"))))
         fatt <- attributes(fterm)
@@ -13596,7 +14166,7 @@ cmatrix <- function(fit, term,
     if (missing(assign)) stop("the fit is missing an assign component")
     if (is.list(assign)) {
         # old style assign as used in Splus, and still used in coxph
-        assign <- rep(1:length(assign), sapply(assign, length))
+        assign <- rep(seq_along(assign), sapply(assign, length))
     }
     ncoef <- length(assign)
     whichcol <- which(assign %in% indx & !is.na(coef(fit)))
@@ -13632,7 +14202,7 @@ cmatrix <- function(fit, term,
         }
         else if (is.list(levels)) {
             if (length(levels) != length(parts))
-                stop("levels list should have", length(parts), "components")
+                stop(sprintf(ngettext(length(parts), "levels list should have %d component", "levels list should have %d components", domain = "R-survival"), length(parts)), domain = NA)
             if (!is.null(names(levels))) {
                 temp <- match(names(levels), parts)
                 if (any(is.null(temp)))
@@ -13665,7 +14235,7 @@ cmatrix <- function(fit, term,
     for (i in which(iscat==1)) {
         xlev <- fit$xlevels[[parts[i]]]
         if (is.null(xlev))
-            stop("xlevels attribute not found for", parts[i])
+            stop(gettextf("xlevels attribute not found for %s", parts[i]))
         temp <- match(levels[[parts[i]]], xlev)
         if (any(is.na(temp)))
             stop("invalid level for term", parts[i])
@@ -13720,7 +14290,7 @@ else {
     cmat <- vector("list", npair +1)
     k <- 1
     cname <- rep("", npair)
-    for (i in 1:(nlev-1)) {
+    for (i in seq_len(nlev-1)) {
         temp <- double(nlev)
         temp[tindex[i]] <- 1
         for (j in (i+1):nlev) {
@@ -13748,7 +14318,7 @@ entire range.
 
 <<cmatrix-build-linear>>=
 cmat <- vector("list", 2)
-cmat[[1]] <- matrix(1:ntest, 1, ntest)
+cmat[[1]] <- matrix(seq_len(ntest), 1, ntest)
 cmat[[2]] <- diag(ntest)
 attr(cmat, "nested") <- TRUE
 if (is.null(levels[[1]])) {
@@ -13860,7 +14430,7 @@ yates <- function(fit, term, population=c("data", "factorial", "sas"),
                   predict="linear", options, nsim=200,
                   method=c("direct", "sgtt")) {
     Call <- match.call()
-    if (missing(fit)) stop("a fit argument is required")
+    if (missing(fit)) stop(gettextf("'%s' argument is required", "fit"))
     Terms <- try(terms(fit), silent=TRUE)
     if (inherits(Terms, "try-error"))
         stop("the fit does not have a terms structure")
@@ -13990,7 +14560,7 @@ tests of the pmm values.
 
 <<yates-linear>>=
 if (is.na(match(contr$termname, colnames(Tatt$factors))))
-    stop("term '", contr$termname, "' not found in the model")
+    stop(gettextf("term '%s' not found in the model", contr$termname))
 
 Cmat <- t(sapply(xmatlist, colMeans))[,!nabeta]
           
@@ -14053,7 +14623,7 @@ if (inherits(fit, "coxph")) {
 }
 else eta <- xall %*% beta
 n1 <- nrow(xmatlist[[1]])  # all of them are the same size
-index <- rep(1:length(xmatlist), each = n1)
+index <- rep(seq_along(xmatlist), each = n1)
 if (is.function(mfun)) predfun <- mfun
 else {  # double check the object
     if (!is.list(mfun) || 
@@ -14090,7 +14660,7 @@ sims <- array(0., dim=c(nsim, nrow(pmm), ncol(pmm)))
 if (inherits(fit, 'coxph')) offset <- bmat %*% fit$means[!nabeta]
 else offset <- rep(0., nsim)
    
-for (i in 1:nsim)
+for (i in seq_len(nsim))
     sims[i,,] <- rowsum(predfun(xall %*% bmat[i,] - offset[i]), index, 
                         reorder=FALSE)/n1
 mvar <- var(sims[,,1])  # this will be used for the tests
@@ -14185,10 +14755,10 @@ yates_xmat <- function(Terms, Tatt, contr, population, mframe, fit,
             pdata <- yates_factorial_pop(mframe, Terms, x2indx & iscat, 
                                          fit$xlevels)
             n2 <- nrow(pdata)
-            pdata <- pdata[rep(1:nrow(pdata), each=nrow(mframe)), ]
-            row.names(pdata) <- 1:nrow(pdata)
+            pdata <- pdata[rep(seq_len(nrow(pdata)), each=nrow(mframe)), ]
+            row.names(pdata) <- seq_len(nrow(pdata))
             # fill in the continuous
-            k <- rep(1:nrow(mframe), n2)
+            k <- rep(seq_len(nrow(mframe)), n2)
             for (i in which(x2indx & !iscat)) {
                 j <- names(x1indx)[i]
                 if (is.matrix(mframe[[j]])) 
@@ -14221,11 +14791,11 @@ yates_factorial_pop <- function(mframe, terms, x2indx, xlevels) {
     pdata <- mframe[rep(1, n), -1]  # toss the response
     row.names(pdata) <- NULL        # throw away funny names
     n1 <- 1
-    for (i in 1:nvar) {
-        j <- rep(rep(1:n2[i], each=n1), length=n)
+    for (i in seq_len(nvar)) {
+        j <- rep(rep(seq_len(n2[i]), each=n1), length=n)
         xx <- xlevels[[x2name[i]]]
         if (dclass[i] == "factor") 
-            pdata[[x2name[i]]] <- factor(j, 1:n2[i], labels= xx)
+            pdata[[x2name[i]]] <- factor(j, seq_len(n2[i]), labels= xx)
         else pdata[[x2name[i]]] <- xx[j]
         n1 <- n1 * n2[i]
     }
@@ -14273,7 +14843,7 @@ data set using `ph.ecog' as the name.
 if (is.null(contr$levels)) stop("levels are missing for this contrast")
 x1data <- as.data.frame(contr$levels)  # in case it is a list
 x1name <- names(x1indx)[x1indx]
-for (i in 1:ncol(x1data)) {
+for (i in seq_len(ncol(x1data))) {
     if (is.character(x1data[[i]])) {
         if (is.null(fit$xlevels[[x1name[i]]])) 
             x1data[[i]] <- factor(x1data[[i]])
@@ -14286,7 +14856,7 @@ if (is.null(attr(pdata, "terms"))) {
     np <- nrow(pdata)
     k <- match(x1name, names(pdata), nomatch=0)
     if (any(k>0)) pdata <- pdata[, -k, drop=FALSE]  # toss out yates var
-    for (i in 1:nrow(x1data)) {
+    for (i in seq_len(nrow(x1data))) {
         j <- rep(i, np)
         tdata <- cbind(pdata, x1data[j,,drop=FALSE]) # new data set
         xmatlist[[i]] <- model.matrix(Terms, tdata, xlev=fit$xlevels,
@@ -14301,7 +14871,7 @@ if (is.null(attr(pdata, "terms"))) {
         identical(lapply(x1data, class), lapply(pdata, class)[index]) &
         identical(sapply(x1data, ncol) , sapply(pdata, ncol)[index]))
             { # everything agrees
-        for (i in 1:nrow(x1data)) {
+        for (i in seq_len(nrow(x1data))) {
             j <- rep(i, nrow(pdata))
             tdata <- pdata
             tdata[,names(x1data)] <- x1data[j,]
@@ -14317,7 +14887,7 @@ if (is.null(attr(pdata, "terms"))) {
         x1name <- names(x1indx)[x1indx]
         attr(x1term, "dataClasses") <- Tatt$dataClasses[x1name] # R bug
         x1frame <- model.frame(x1term, x1data, xlev=fit$xlevels[x1name])
-        for (i in 1:nrow(x1data)) {
+        for (i in seq_len(nrow(x1data))) {
             j <- rep(i, nrow(pdata))
             tdata <- pdata
             tdata[,names(x1frame)] <- x1frame[j,]
@@ -14384,7 +14954,7 @@ if (!all(temp))
         stop("yates sgtt method can only handle contr.SAS or contr.treatment")
 temp <- vector("list", length(fit$xlevels))
 names(temp) <- names(fit$xlevels)
-for (i in 1:length(fit$xlevels)) {
+for (i in seq_along(fit$xlevels)) {
     cmat <- diag(length(fit$xlevels[[i]]))
     dimnames(cmat) <- list(fit$xlevels[[i]], fit$xlevels[[i]])
     if (i>1 || Tatt$intercept==1) {
@@ -14419,7 +14989,7 @@ if (!all(iscat)) {
 else tcat <- rep(TRUE, max(sas.assign)) # all vars are categorical
    
 B <- t(D)
-dimnames(B)[[2]] <- paste0("L", 1:ncol(B))  # for the user
+dimnames(B)[[2]] <- paste0("L", seq_len(ncol(B)))  # for the user
 if (ncol(Tatt$factors) > 1) {
     share <- t(Tatt$factors) %*% Tatt$factors
     nc <- ncol(share)
@@ -14510,9 +15080,7 @@ yates_setup <- function(fit, ...)
 
 yates_setup.default <- function(fit, type, ...) {
     if (!missing(type) && !(type %in% c("linear", "link")))
-        warning("no yates_setup method exists for a model of class ",
-                class(fit)[1], " and estimate type ", type,
-                ", linear predictor estimate used by default")
+        warning(gettextf("no yates_setup method exists for a model of class %s and estimate type %s, linear predictor estimate used by default", dQuote(class(fit)[1]), type))
     NULL
 }
 
@@ -14748,7 +15316,7 @@ nvar <- length(varnames)
 
 if (!terms) {
     # create a fake asgn that has one value per coefficient
-    asgn <- as.list(1:nvar)
+    asgn <- as.list(seq_len(nvar))
     names(asgn) <- names(fit$coefficients)
 }
 else if (inherits(fit, "coxme")) {
@@ -14809,19 +15377,19 @@ df   <- rep(1L, nterm+1)
 u0 <- rep(0, nvar)
 if (!is.null(fit$coxlist2)) { # there are penalized terms
     pmat <- matrix(0., 2*nvar, 2*nvar) # second derivative penalty
-    pmat[1:nvar, 1:nvar] <- fit$coxlist2$second
-    pmat[1:nvar + nvar, 1:nvar + nvar] <- fit$coxlist2$second
+    pmat[seq_len(nvar), seq_len(nvar)] <- fit$coxlist2$second
+    pmat[seq_len(nvar) + nvar, seq_len(nvar) + nvar] <- fit$coxlist2$second
     imatr <- resid$imat + pmat
 }
 else imatr <- resid$imat
 
-for (ii in 1:nterm) {
+for (ii in seq_len(nterm)) {
     jj <- asgn[[ii]]
-    kk <- c(1:nvar, jj+nvar)
+    kk <- c(seq_len(nvar), jj+nvar)
     imat <- imatr[kk, kk]
     u <- c(u0, resid$u[jj+nvar])
     if (singledf && length(jj) >1) {
-        vv <- solve(imat)[-(1:nvar), -(1:nvar)]
+        vv <- solve(imat)[-seq_len(nvar), -(seq_len(nvar))]
         t1 <- sum(fit$coef[jj] * resid$u[jj+nvar])
         test[ii] <- t1^2 * (fit$coef[jj] %*% vv %*% fit$coef[jj])
         df[ii] <- 1
@@ -14835,7 +15403,7 @@ for (ii in 1:nterm) {
 
 #Global test
 if (global) {
-    u <- c(u0, resid$u[-(1:nvar)])
+    u <- c(u0, resid$u[-seq_len(nvar)])
     test[nterm+1] <- solve(imatr, u) %*% u
     if (is.null(fit$df))  df[nterm+1]   <- nvar
     else df[nterm+1] <- sum(fit$df)
@@ -14900,17 +15468,17 @@ for (i in asgn) {
     
 # Make the weight matrix
 wtmat <- matrix(0, nvar, nvar)
-for (i in 1:nrow(used))
+for (i in seq_len(nrow(used)))
     wtmat <- wtmat + outer(used[i,], used[i,], pmin)
 # with strata*covariate interactions (multi-state models for instance) the
 #  imatr matrix will be block diagonal.  Don't divide these off diagonal zeros
 #  by a wtmat value of zero.
-vmean <- imatr[1:nvar, 1:nvar, drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
+vmean <- imatr[seq_len(nvar), seq_len(nvar), drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
 
 sresid <- resid$schoen
 if (terms && any(sapply(asgn, length) > 1)) { # collase multi-column terms
     temp <- matrix(0, ncol(sresid), nterm)
-    for (i in 1:nterm) {
+    for (i in seq_len(nterm)) {
         j <- asgn[[i]]
         if (length(j) ==1) temp[j, i] <- 1
         else temp[j, i] <- fit$coefficients[j]
@@ -14924,8 +15492,8 @@ if (terms && any(sapply(asgn, length) > 1)) { # collase multi-column terms
 dimnames(sresid) <- list(signif(rval$time, 4), termname)
 
 # for each stratum, rescale the Schoenfeld residuals in that stratum
-sgrp <- rep(1:nrow(used), apply(used, 1, max))
-for (i in 1:nrow(used)) {
+sgrp <- rep(seq_len(nrow(used)), apply(used, 1, max))
+for (i in seq_len(nrow(used))) {
     k <- which(used[i,] > 0)
     if (length(k) >0)  { # there might be no deaths in the stratum
         j <- which(sgrp==i)
@@ -14937,7 +15505,7 @@ for (i in 1:nrow(used)) {
 
 # Add in beta-hat.  For a term with multiple columns we are testing zph for
 #  the linear predictor X\beta, which always has a coefficient of 1
-for (i in 1:nterm) {
+for (i in seq_len(nterm)) {
     j <- asgn[[i]]
     if (length(j) ==1) sresid[,i] <- sresid[,i] + fit$coefficients[j]
     else sresid[,i] <- sresid[,i] +1

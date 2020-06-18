@@ -39,7 +39,7 @@
 # define LOG log
 #endif
 
-static const double _dbl_min_exp = M_LN2 * DBL_MIN_EXP;
+static constexpr double _dbl_min_exp = M_LN2 * DBL_MIN_EXP;
 /*= -708.3964 for IEEE double precision */
 
 

@@ -169,7 +169,7 @@ nvar <- length(varnames)
 
 if (!terms) {
     # create a fake asgn that has one value per coefficient
-    asgn <- as.list(1:nvar)
+    asgn <- as.list(seq_len(nvar))
     names(asgn) <- names(fit$coefficients)
 }
 else if (inherits(fit, "coxme")) {
@@ -230,19 +230,19 @@ df   <- rep(1L, nterm+1)
 u0 <- rep(0, nvar)
 if (!is.null(fit$coxlist2)) { # there are penalized terms
     pmat <- matrix(0., 2*nvar, 2*nvar) # second derivative penalty
-    pmat[1:nvar, 1:nvar] <- fit$coxlist2$second
-    pmat[1:nvar + nvar, 1:nvar + nvar] <- fit$coxlist2$second
+    pmat[seq_len(nvar), seq_len(nvar)] <- fit$coxlist2$second
+    pmat[seq_len(nvar) + nvar, seq_len(nvar) + nvar] <- fit$coxlist2$second
     imatr <- resid$imat + pmat
 }
 else imatr <- resid$imat
 
-for (ii in 1:nterm) {
+for (ii in seq_len(nterm)) {
     jj <- asgn[[ii]]
-    kk <- c(1:nvar, jj+nvar)
+    kk <- c(seq_len(nvar), jj+nvar)
     imat <- imatr[kk, kk]
     u <- c(u0, resid$u[jj+nvar])
     if (singledf && length(jj) >1) {
-        vv <- solve(imat)[-(1:nvar), -(1:nvar)]
+        vv <- solve(imat)[-seq_len(nvar), -(seq_len(nvar))]
         t1 <- sum(fit$coef[jj] * resid$u[jj+nvar])
         test[ii] <- t1^2 * (fit$coef[jj] %*% vv %*% fit$coef[jj])
         df[ii] <- 1
@@ -256,7 +256,7 @@ for (ii in 1:nterm) {
 
 #Global test
 if (global) {
-    u <- c(u0, resid$u[-(1:nvar)])
+    u <- c(u0, resid$u[-seq_len(nvar)])
     test[nterm+1] <- solve(imatr, u) %*% u
     if (is.null(fit$df))  df[nterm+1]   <- nvar
     else df[nterm+1] <- sum(fit$df)
@@ -321,17 +321,17 @@ for (i in asgn) {
     
 # Make the weight matrix
 wtmat <- matrix(0, nvar, nvar)
-for (i in 1:nrow(used))
+for (i in seq_len(nrow(used)))
     wtmat <- wtmat + outer(used[i,], used[i,], pmin)
 # with strata*covariate interactions (multi-state models for instance) the
 #  imatr matrix will be block diagonal.  Don't divide these off diagonal zeros
 #  by a wtmat value of zero.
-vmean <- imatr[1:nvar, 1:nvar, drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
+vmean <- imatr[seq_len(nvar), seq_len(nvar), drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
 
 sresid <- resid$schoen
 if (terms && any(sapply(asgn, length) > 1)) { # collase multi-column terms
     temp <- matrix(0, ncol(sresid), nterm)
-    for (i in 1:nterm) {
+    for (i in seq_len(nterm)) {
         j <- asgn[[i]]
         if (length(j) ==1) temp[j, i] <- 1
         else temp[j, i] <- fit$coefficients[j]
@@ -345,8 +345,8 @@ if (terms && any(sapply(asgn, length) > 1)) { # collase multi-column terms
 dimnames(sresid) <- list(signif(rval$time, 4), termname)
 
 # for each stratum, rescale the Schoenfeld residuals in that stratum
-sgrp <- rep(1:nrow(used), apply(used, 1, max))
-for (i in 1:nrow(used)) {
+sgrp <- rep(seq_len(nrow(used)), apply(used, 1, max))
+for (i in seq_len(nrow(used))) {
     k <- which(used[i,] > 0)
     if (length(k) >0)  { # there might be no deaths in the stratum
         j <- which(sgrp==i)
@@ -358,7 +358,7 @@ for (i in 1:nrow(used)) {
 
 # Add in beta-hat.  For a term with multiple columns we are testing zph for
 #  the linear predictor X\beta, which always has a coefficient of 1
-for (i in 1:nterm) {
+for (i in seq_len(nterm)) {
     j <- asgn[[i]]
     if (length(j) ==1) sresid[,i] <- sresid[,i] + fit$coefficients[j]
     else sresid[,i] <- sresid[,i] +1

@@ -108,7 +108,7 @@ some care to make sure the result is an integer.
 <<btree1>>=
 btree <- function(n) {
     ranks <- rep(0L, n)  #will be overwritten
-    yet.to.do <- 1:n
+    yet.to.do <- seq_len(n)
     depth <- floor(logb(n,2))
     start <- as.integer(2^depth)
     lastrow.length <- 1+n-start
@@ -598,7 +598,7 @@ survConcordance <- function(formula, data,
 
 print.survConcordance <- function(x, ...) {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
@@ -677,7 +677,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
         strata <- as.factor(strata)
         ustrat <- levels(strata)[table(strata) >0]  #some strata may have 0 obs
         count <- matrix(0., nrow=length(ustrat), ncol=5)
-        for (i in 1:length(ustrat)) {
+        for (i in seq_along(ustrat)) {
             keep <- which(strata == ustrat[i])
             count[i,] <- docount(y[keep,,drop=F], x[keep], weight[keep])
         }

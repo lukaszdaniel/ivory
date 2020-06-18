@@ -25,7 +25,7 @@
 
 
 
-#include "Defn.h"
+#include <Defn.h>
 /* Mingw-w64 defines this to be 0x0502 */
 #ifndef _WIN32_WINNT
 # define _WIN32_WINNT 0x0502 /* for KEY_WOW64_64KEY */
@@ -34,19 +34,18 @@
 #include <windows.h>
 #include "localization.h"
 
-const static struct {
-    const char * reg;
+const static struct
+{
+    const char *const reg;
     HKEY key;
-} 
-KeyTable[] = {
-    { "HCC", HKEY_CURRENT_CONFIG },
-    { "HCR", HKEY_CLASSES_ROOT },
-    { "HCU", HKEY_CURRENT_USER },
-    { "HLM", HKEY_LOCAL_MACHINE },
-    { "HPD", HKEY_PERFORMANCE_DATA },
-    { "HU" , HKEY_USERS },
-    {NULL, NULL}
-};
+} KeyTable[] = {
+    {"HCC", HKEY_CURRENT_CONFIG},
+    {"HCR", HKEY_CLASSES_ROOT},
+    {"HCU", HKEY_CURRENT_USER},
+    {"HLM", HKEY_LOCAL_MACHINE},
+    {"HPD", HKEY_PERFORMANCE_DATA},
+    {"HU", HKEY_USERS},
+    {NULL, NULL}};
 
 const char *formatError(DWORD res)
 {
@@ -69,7 +68,7 @@ static HKEY find_hive(const char *hkey)
 {
     int i;
     for(i = 0;  KeyTable[i].reg; i++)
-	if(!strcmp(hkey, KeyTable[i].reg)) return KeyTable[i].key;
+	if(!streql(hkey, KeyTable[i].reg)) return KeyTable[i].key;
     error(_("invalid '%s' value"),  "hive");
     return HKEY_LOCAL_MACHINE; /* -Wall */
 }

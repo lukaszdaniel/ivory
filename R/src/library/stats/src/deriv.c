@@ -26,7 +26,7 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <Defn.h>
 #include "localization.h"
 
 static SEXP ParenSymbol;
@@ -328,8 +328,8 @@ static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 static SEXP D(SEXP expr, SEXP var)
 {
 
-#define PP_S(F,a1,a2) PP(simplify(F,a1,a2))
-#define PP_S2(F,a1)   PP(simplify(F,a1, R_MissingArg))
+#define PP_S(F, a1, a2) PP(simplify(F, a1, a2))
+#define PP_S2(F, a1) PP(simplify(F, a1, R_MissingArg))
 
     SEXP ans = R_NilValue, expr1, expr2;
     switch(TYPEOF(expr)) {

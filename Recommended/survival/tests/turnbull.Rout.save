@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -80,7 +80,7 @@ Type 'q()' to quit R.
 + 	   cat("             weights=", format(round(wt2,3)), "\n")
 + 	   }
 + 	}
-+     survfit(tempy ~ tempx, weights=c(ww, wt2))
++     survfit(tempy ~ tempx, weights=c(ww, wt2), robust=FALSE)
 +     }
 > 
 > temp <-emsurv(turnbull$time, turnbull$status, turnbull$n)
@@ -94,7 +94,7 @@ Iteration 3 survival= 0.538 0.295 0.210 0.095
 Iteration 4 survival= 0.538 0.295 0.210 0.095 
              weights= 8.338 3.342 0.685 0.635 
 > print(summary(temp))
-Call: survfit(formula = tempy ~ tempx, weights = c(ww, wt2))
+Call: survfit(formula = tempy ~ tempx, weights = c(ww, wt2), robust = FALSE)
 
  time n.risk n.event survival std.err lower 95% CI upper 95% CI
     1  44.00   20.34   0.5378  0.0752       0.4089        0.707
@@ -200,4 +200,4 @@ Call: survfit(formula = tempy ~ tempx, weights = c(ww, wt2))
 > 
 > proc.time()
    user  system elapsed 
-  0.894   0.049   0.935 
+  1.775   0.064   1.832 

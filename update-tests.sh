@@ -172,6 +172,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/book6.Rout		../../$RECIVORY/survival/tests/book6.Rout.save`
 `$cmd	survival.Rcheck/tests/book7.Rout		../../$RECIVORY/survival/tests/book7.Rout.save`
 `$cmd	survival.Rcheck/tests/cancer.Rout		../../$RECIVORY/survival/tests/cancer.Rout.save`
+`$cmd	survival.Rcheck/tests/checkSurv2.Rout		../../$RECIVORY/survival/tests/checkSurv2.Rout.save`
 `$cmd	survival.Rcheck/tests/clogit.Rout		../../$RECIVORY/survival/tests/clogit.Rout.save`
 `$cmd	survival.Rcheck/tests/concordance2.Rout		../../$RECIVORY/survival/tests/concordance2.Rout.save`
 `$cmd	survival.Rcheck/tests/concordance3.Rout		../../$RECIVORY/survival/tests/concordance3.Rout.save`
@@ -180,6 +181,7 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/coxsurv2.Rout		../../$RECIVORY/survival/tests/coxsurv2.Rout.save`
 `$cmd	survival.Rcheck/tests/coxsurv3.Rout		../../$RECIVORY/survival/tests/coxsurv3.Rout.save`
 `$cmd	survival.Rcheck/tests/coxsurv4.Rout		../../$RECIVORY/survival/tests/coxsurv4.Rout.save`
+`$cmd	survival.Rcheck/tests/coxsurv5.Rout		../../$RECIVORY/survival/tests/coxsurv5.Rout.save`
 `$cmd	survival.Rcheck/tests/coxsurv.Rout		../../$RECIVORY/survival/tests/coxsurv.Rout.save`
 `$cmd	survival.Rcheck/tests/detail.Rout		../../$RECIVORY/survival/tests/detail.Rout.save`
 `$cmd	survival.Rcheck/tests/difftest.Rout		../../$RECIVORY/survival/tests/difftest.Rout.save`
@@ -227,9 +229,10 @@ if [[ "$1" == "survival" ]] || [[ "$1" == "all" ]]; then
 `$cmd	survival.Rcheck/tests/strata2.Rout		../../$RECIVORY/survival/tests/strata2.Rout.save`
 `$cmd	survival.Rcheck/tests/stratatest.Rout		../../$RECIVORY/survival/tests/stratatest.Rout.save`
 `$cmd	survival.Rcheck/tests/summary_survfit.Rout	../../$RECIVORY/survival/tests/summary_survfit.Rout.save`
-`$cmd	survival.Rcheck/tests/summary_survfit.Rout	../../$RECIVORY/survival/tests/summary_survfit.Rout.save`
+`$cmd	survival.Rcheck/tests/survcheck.Rout		../../$RECIVORY/survival/tests/survcheck.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit1.Rout		../../$RECIVORY/survival/tests/survfit1.Rout.save`
 `$cmd	survival.Rcheck/tests/survfit2.Rout		../../$RECIVORY/survival/tests/survfit2.Rout.save`
+`$cmd	survival.Rcheck/tests/survreg1.Rout		../../$RECIVORY/survival/tests/survreg1.Rout.save`
 `$cmd	survival.Rcheck/tests/survreg2.Rout		../../$RECIVORY/survival/tests/survreg2.Rout.save`
 `$cmd	survival.Rcheck/tests/surv.Rout			../../$RECIVORY/survival/tests/surv.Rout.save`
 `$cmd	survival.Rcheck/tests/survSplit.Rout		../../$RECIVORY/survival/tests/survSplit.Rout.save`

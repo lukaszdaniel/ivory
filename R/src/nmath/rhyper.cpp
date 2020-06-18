@@ -49,7 +49,7 @@
 static double afc(int i)
 {
     // If (i > 7), use Stirling's approximation, otherwise use table lookup.
-    const static double al[8] =
+    static constexpr double al[8] =
     {
 	0.0,/*ln(0!)=ln(1)*/
 	0.0,/*ln(1!)=ln(1)*/
@@ -172,8 +172,8 @@ double Rf_rhyper(double nn1in, double nn2in, double kkin)
 	goto L_finis; // return appropriate variate
 
     } else if (m - minjx < 10) { // II: (Scaled) algorithm HIN (inverse transformation) ----
-	const static double scale = 1e25; // scaling factor against (early) underflow
-	const static double con = 57.5646273248511421;
+	static constexpr double scale = 1e25; // scaling factor against (early) underflow
+	static constexpr double con = 57.5646273248511421;
 					  // 25*log(10) = log(scale) { <==> exp(con) == scale }
 	if (setup1 || setup2) {
 	    double lw; // log(w);  w = exp(lw) * scale = exp(lw + log(scale)) = exp(lw + con)
@@ -292,8 +292,8 @@ double Rf_rhyper(double nn1in, double nn2in, double kkin)
 	    }
 	} else {
 
-	    const static double deltal = 0.0078;
-	    const static double deltau = 0.0034;
+	    static constexpr double deltal = 0.0078;
+	    static constexpr double deltau = 0.0034;
 
 	    double e, g, r, t, y;
 	    double de, dg, dr, ds, dt, gl, gu, nk, nm, ub;

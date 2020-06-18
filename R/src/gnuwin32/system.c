@@ -25,7 +25,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include "Defn.h"
+#include <Defn.h>
 #include <R_ext/Riconv.h>
 #include "Fileio.h"
 #include "graphapp/ga.h"

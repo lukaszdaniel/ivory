@@ -54,7 +54,7 @@ survfit.coxph <-
 
       Terms <- object$terms
       n <- object$n[1]
-      if (!has.strata) strata <- rep(0L, n)
+      if (!has.strata) strata <- NULL
       else strata <- object$strata
 
       missid <- missing(id) # I need this later, and setting id below makes
@@ -86,15 +86,13 @@ survfit.coxph <-
       position <- NULL
       Y <- object[['y']]
       if (is.null(mf)) {
-          weights <- rep(1., n)
-          offset <- rep(0., n)
+          weights <- object$weights  # let offsets/weights be NULL until needed
+          offset <- NULL
           X <- object[['x']]
       }
       else {
           weights <- model.weights(mf)
-          if (is.null(weights)) weights <- rep(1.0, n)
           offset <- model.offset(mf)
-          if (is.null(offset)) offset <- rep(0., n)
           X <- model.matrix.coxph(object, data=mf)
           if (is.null(Y) || coxms) {
               Y <- model.response(mf)
@@ -124,7 +122,7 @@ survfit.coxph <-
       }
       type <- attr(Y, 'type')
       if (!type %in% c("right", "counting", "mright", "mcounting"))
-          stop("Cannot handle \"", type, "\" type survival data")
+          stop(gettextf("Cannot handle \"%s\" type survival data", type))
       if (type=="right" || type== "mright") individual <- FALSE
 
       if (!missing(start.time)) {
@@ -142,10 +140,11 @@ survfit.coxph <-
               stop("start.time argument has removed all endpoints")
           Y <- Y[keep,,drop=FALSE]
           X <- X[keep,,drop=FALSE]
-          offset <- offset[keep]
-          strata <- strata[keep]
+          if (!is.null(offset)) offset <- offset[keep]
+          if (!is.null(weights)) weights <- weights[keep]
+          if (!is.null(strata))  strata <- strata[keep]
           if (length(id) >0 ) id <- id[keep]
-          if (length(position)) position <- position[keep]
+          if (length(position) >0) position <- position[keep]
           n <- nrow(Y)
       }
       if (length(object$means) ==0) { # a model with only an offset term
@@ -153,6 +152,7 @@ survfit.coxph <-
           #  (This case is really rare)
           # se.fit <- FALSE
           X <- matrix(0., nrow=n, ncol=1)
+          if (is.null(offset)) offset <- rep(0, n)
           xcenter <- mean(offset)
           coef <- 0.0
           varmat <- matrix(0.0, 1, 1)
@@ -161,13 +161,15 @@ survfit.coxph <-
       else {
           varmat <- object$var
           beta <- ifelse(is.na(object$coefficients), 0, object$coefficients)
-          xcenter <- sum(object$means * beta)+ mean(offset)
+          if (is.null(offset)) xcenter <- sum(object$means * beta)
+          else xcenter <- sum(object$means * beta)+ mean(offset)
           if (!is.null(object$frail)) {
              keep <- !grepl("frailty(", dimnames(X)[[2]], fixed=TRUE)
              X <- X[,keep, drop=F]
           }
               
-          risk <- c(exp(X%*% beta + offset - xcenter))
+          if (is.null(offset)) risk <- c(exp(X%*% beta - xcenter))
+          else     risk <- c(exp(X%*% beta + offset - xcenter))
       }
       if (missing(newdata)) {
           # If the model has interactions, print out a long warning message.
@@ -198,7 +200,7 @@ survfit.coxph <-
           Terms2 <- Terms 
           if (!individual)  Terms2 <- delete.response(Terms)
           if (is.vector(newdata, "numeric")) {
-              if (individual) stop("newdata must be a data frame")
+              if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
               if (is.null(names(newdata))) {
                   stop(gettextf("'%s' argument must be a data frame", "newdata"))
               }
@@ -248,7 +250,7 @@ survfit.coxph <-
       if (!robust) cluster <- NULL
       if (individual) {
           if (missing(newdata)) 
-              stop("The newdata argument must be present when individual=TRUE")
+              stop("The newdata argument must be present when 'individual=TRUE'")
           if (!missid) {  #grab the id variable
               id2 <- model.extract(mf2, "id")
               if (is.null(id2)) stop("'id=NULL' is an invalid argument")
@@ -302,7 +304,7 @@ survfit.coxph <-
           if (has.strata && found.strata) {
               if (is.matrix(result$surv)) {
                   nr <- nrow(result$surv)  #a vector if newdata had only 1 row
-                  indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
+                  indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
                   rows <- indx1[as.numeric(strata2)]  #the rows for each curve
 
                   indx2 <- unlist(rows)  #index for time, n.risk, n.event, n.censor

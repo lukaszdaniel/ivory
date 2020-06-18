@@ -65,7 +65,7 @@ double Rf_qbeta(double alpha, double p, double q, int lower_tail, int log_p)
     return qbet[0];
 }
 
-static const double
+static constexpr double
 #ifdef IEEE_754
 // CARE: assumes subnormal numbers, i.e., no underflow at DBL_MIN:
     DBL_very_MIN  = DBL_MIN / 4.,
@@ -87,17 +87,17 @@ static const double
 /* set the exponent of acu to -2r-2 for r digits of accuracy */
 /*---- NEW ---- -- still fails for p = 1e11, q=.5*/
 
-#define fpu 3e-308
+constexpr double fpu = 3e-308;
 /* acu_min:  Minimal value for accuracy 'acu' which will depend on (a,p);
 	     acu_min >= fpu ! */
-#define acu_min 1e-300
-#define p_lo fpu
-#define p_hi 1-2.22e-16
+constexpr double acu_min = 1e-300;
+constexpr double p_lo = fpu;
+constexpr double p_hi = 1-2.22e-16;
 
-#define const1 2.30753
-#define const2 0.27061
-#define const3 0.99229
-#define const4 0.04481
+constexpr double const1 = 2.30753;
+constexpr double const2 = 0.27061;
+constexpr double const3 = 0.99229;
+constexpr double const4 = 0.04481;
 
 // Returns both Rf_qbeta() and its "mirror" 1-Rf_qbeta(). Useful notably when Rf_qbeta() ~= 1
 HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
@@ -126,23 +126,40 @@ HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_
 
     // Deal with boundary cases here:
     if(alpha == R_DT_0) {
-#define return_q_0						\
-	if(give_log_q) { qb[0] = ML_NEGINF; qb[1] = 0; }	\
-	else {           qb[0] = 0;         qb[1] = 1; }	\
+#define return_q_0         \
+	if (give_log_q)        \
+	{                      \
+		qb[0] = ML_NEGINF; \
+		qb[1] = 0;         \
+	}                      \
+	else                   \
+	{                      \
+		qb[0] = 0;         \
+		qb[1] = 1;         \
+	}                      \
 	return
 
-	return_q_0;
-    }
-    if(alpha == R_DT_1) {
-#define return_q_1						\
-	if(give_log_q) { qb[0] = 0; qb[1] = ML_NEGINF; }	\
-	else {           qb[0] = 1; qb[1] = 0;         }	\
+		return_q_0;
+	}
+	if (alpha == R_DT_1)
+	{
+#define return_q_1         \
+	if (give_log_q)        \
+	{                      \
+		qb[0] = 0;         \
+		qb[1] = ML_NEGINF; \
+	}                      \
+	else                   \
+	{                      \
+		qb[0] = 1;         \
+		qb[1] = 0;         \
+	}                      \
 	return
 
-	return_q_1;
-    }
+		return_q_1;
+	}
 
-    // check alpha {*before* transformation which may all accuracy}:
+	// check alpha {*before* transformation which may all accuracy}:
     if((log_p && alpha > 0) ||
        (!log_p && (alpha < 0 || alpha > 1))) { // alpha is outside
 	R_ifDEBUG_printf("Rf_qbeta(alpha=%g, %g, %g, .., log_p=%d): %s%s\n",
@@ -163,12 +180,14 @@ HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_
 	    if(alpha < R_D_half) { return_q_0; }
 	    if(alpha > R_D_half) { return_q_1; }
 	    // else:  alpha == "1/2"
-#define return_q_half					\
-	    if(give_log_q) qb[0] = qb[1] = -M_LN2;	\
-	    else	   qb[0] = qb[1] = 0.5;		\
-	    return
+#define return_q_half           \
+	if (give_log_q)             \
+		qb[0] = qb[1] = -M_LN2; \
+	else                        \
+		qb[0] = qb[1] = 0.5;    \
+	return
 
-	    return_q_half;
+		return_q_half;
 	} else if (p == 0 || p/q == 0) { // point mass 1 at 0 - "flipped around"
 	    return_q_0;
 	} else if (q == 0 || q/p == 0) { // point mass 1 at 0 - "flipped around"
@@ -211,7 +230,7 @@ HIDDEN void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_
     double acu = Rf_fmax2(acu_min, pow(10., -13. - 2.5/(pp * pp) - 0.5/(a * a)));
     // try to catch  "extreme left tail" early
     double tx, u0 = (la + log(pp) + logbeta) / pp; // = log(x_0)
-    static const double
+    static constexpr double
 	log_eps_c = M_LN2 * (1. - DBL_MANT_DIG);// = log(DBL_EPSILON) = -36.04..
     r = pp*(1.-qq)/(pp+1.);
 

@@ -28,14 +28,14 @@ print.summary.survfitms <- function(x,
 
     dd <- dim(x$pstate)
     if (length(dd) ==3 ) {
-        if (is.null(x$strata)) group <- rep(paste("data", 1:dd[2]), each=dd[1])
-        else group <- c(outer(rep(names(x$strata), x$strata),
+        if (is.null(x$strata)) group <- rep(paste("data", seq_len(dd[2])), each=dd[1])
+        else group <- c(outer(x$strata,
                               paste("data", seq_len(dd[2])), paste, sep=(", ")))
         mat <- mat[rep(seq_len(nrow(mat)), dim(x$pstate)[2]), ]
         mat <- cbind(mat, matrix(x$pstate, ncol= dd[3]))
     } else {
         if (is.null(strata)) group <- NULL
-        else group <- rep(names(x$strata), x$strata)
+        else group <- x$strata
         mat <- cbind(mat, x$pstate)
     }
 
@@ -62,7 +62,7 @@ print.summary.survfitms <- function(x,
     if (!is.null(x$start.time)) {
 	mat.keep <- mat[,1] >= x$start.time
         if (!any(mat.keep))
-            stop(paste("No rows remain using start.time =", x$start.time, "."))
+            stop(gettextf("No rows remain using start.time = %s.", x$start.time))
 	mat <- mat[mat.keep,,drop=FALSE]
         if (!is.null(group)) group <- group[mat.keep]
     }

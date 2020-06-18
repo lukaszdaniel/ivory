@@ -58,8 +58,8 @@ double Rf_lgammafn_sign(double x, int *sgn)
    xmax  = DBL_MAX / log(DBL_MAX) = 2^1024 / (1024 * log(2)) = 2^1014 / log(2)
    dxrel = sqrt(DBL_EPSILON) = 2^-26 = 5^26 * 1e-26 (is *exact* below !)
  */
-#define xmax  2.5327372760800758e+305
-#define dxrel 1.490116119384765625e-8
+constexpr double xmax = 2.5327372760800758e+305;
+constexpr double dxrel = 1.490116119384765625e-8;
 #endif
 
     if (sgn != NULL) *sgn = 1;

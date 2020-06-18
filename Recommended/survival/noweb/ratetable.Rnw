@@ -216,7 +216,7 @@ iyears <- unique(infant$year)
 deaths <- array(as.matrix(infant[,3:8]), dim=c(4, length(iyears), 2,3),
             dimnames=list(c('0', '1-6','7-27', '28-365'), iyears,
                           c("Male", "Female"), c("total", "white", "black")))
-for (i in 1:length(iyears)) {
+for (i in seq_along(iyears)) {
     for (j in 1:2) {
         for (k in 1:3) {
             deaths[,i,j,k] <- deaths[,i,j,k]/sum(deaths[,i,j,k])

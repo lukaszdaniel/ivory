@@ -112,7 +112,7 @@ xmat2 <- xmat - centers[kdata3$interval,]
 kfit4a <- glm(status ~ xmat2 + factor(interval) -1, poisson, kdata3)
 temp <- coef(kfit4a)[-(1:2)]   # intercepts
 phat <- with(kdata3, tapply(status, interval, sum)) /counts
-matplot(1:length(counts), cbind(phat, exp(temp)), log='y',
+matplot(seq_along(counts), cbind(phat, exp(temp)), log='y',
      xlab="Interval", ylab="Simple event rate")
 legend(5, .5, c("Rate", "Poisson intercept"), pch="12", col=1:2)
 @ 

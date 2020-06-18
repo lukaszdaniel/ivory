@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -97,10 +97,10 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  $ t0     : numeric  0 0 1487 0 0 ...
  - attr(*, "datalabel")= character ""
  - attr(*, "time.stamp")= character "14 Feb 1997 14:22"
- - attr(*, "formats")= character  "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
- - attr(*, "types")= integer  102 102 102 102 102 102 102 102 102 102 ...
- - attr(*, "val.labels")= character  "" "" "" "" ...
- - attr(*, "var.labels")= character  "" "" "" "" ...
+ - attr(*, "formats")= character [1:24] "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
+ - attr(*, "types")= integer [1:24] 102 102 102 102 102 102 102 102 102 102 ...
+ - attr(*, "val.labels")= character [1:24] "" "" "" "" ...
+ - attr(*, "var.labels")= character [1:24] "" "" "" "" ...
  - attr(*, "version")= integer 5
 > compressed <- read.dta("compressed.dta")
 > summary(compressed)
@@ -220,10 +220,10 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  $ t0     : integer  0 0 1487 0 0 1487 0 1487 0 1487 ...
  - attr(*, "datalabel")= character ""
  - attr(*, "time.stamp")= character "14 Sep 2000 10:40"
- - attr(*, "formats")= character  "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
- - attr(*, "types")= integer  102 102 102 98 102 105 98 102 98 105 ...
- - attr(*, "val.labels")= character  "" "" "" "" ...
- - attr(*, "var.labels")= character  "" "" "" "" ...
+ - attr(*, "formats")= character [1:24] "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
+ - attr(*, "types")= integer [1:24] 102 102 102 98 102 105 98 102 98 105 ...
+ - attr(*, "val.labels")= character [1:24] "" "" "" "" ...
+ - attr(*, "var.labels")= character [1:24] "" "" "" "" ...
  - attr(*, "version")= integer 6
 > all.equal(summary(sun6),summary(pc5))
 [1] TRUE
@@ -289,28 +289,28 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  $ testmiss    : numeric  NA NA NA NA NA NA NA NA NA NA ...
  - attr(*, "datalabel")= character "1978 Automobile Data"
  - attr(*, "time.stamp")= character "20 May 2003 14:39"
- - attr(*, "formats")= character  "%-18s" "%8.0gc" "%8.0g" "%8.0g" ...
- - attr(*, "types")= integer  18 252 252 252 254 252 252 252 252 252 ...
- - attr(*, "val.labels")= character  "" "" "" "" ...
- - attr(*, "var.labels")= character  "Make and Model" "Price" "Mileage (mpg)" "Repair Record 1978" ...
+ - attr(*, "formats")= character [1:13] "%-18s" "%8.0gc" "%8.0g" "%8.0g" ...
+ - attr(*, "types")= integer [1:13] 18 252 252 252 254 252 252 252 252 252 ...
+ - attr(*, "val.labels")= character [1:13] "" "" "" "" ...
+ - attr(*, "var.labels")= character [1:13] "Make and Model" "Price" "Mileage (mpg)" "Repair Record 1978" ...
  - attr(*, "version")= integer 8
  - attr(*, "label.table")=List of 1 component
-  ..$ origin: Named integer  0 1
-  .. ..- attr(*, "names")= character  "Domestic" "Foreign"
+  ..$ origin: Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "Domestic" "Foreign"
  - attr(*, "missing")=List of 13 components
   ..$ make        : NULL
-  ..$ price       : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ mpg         : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ rep78       : numeric  NA NA 0 NA NA NA 0 NA NA NA ...
-  ..$ headroom    : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ trunk       : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ weight      : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ length      : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ turn        : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ displacement: numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ gear_ratio  : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ foreign     : numeric  NA NA NA NA NA NA NA NA NA NA ...
-  ..$ testmiss    : numeric  18 18 18 18 18 18 18 18 18 18 ...
+  ..$ price       : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ mpg         : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ rep78       : numeric [1:74] NA NA 0 NA NA NA 0 NA NA NA ...
+  ..$ headroom    : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ trunk       : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ weight      : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ length      : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ turn        : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ displacement: numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ gear_ratio  : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ foreign     : numeric [1:74] NA NA NA NA NA NA NA NA NA NA ...
+  ..$ testmiss    : numeric [1:74] 18 18 18 18 18 18 18 18 18 18 ...
 > 
 > bq <- read.dta("MLLabelsWithNotesChar.dta")
 > str(bq)
@@ -323,23 +323,23 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  - attr(*, "val.labels")= character "female_lbl_def"
  - attr(*, "var.labels")= character "Is it female"
  - attr(*, "expansion.fields")=List of 11 components
-  ..$ : character  "female" "question" "Are you Female?"
-  ..$ : character  "_dta" "_lang_c" "default"
-  ..$ : character  "_dta" "_lang_v_spanish" "etiqdataBQ"
-  ..$ : character  "female" "_lang_l_spanish" "female_lbl_es"
-  ..$ : character  "female" "_lang_v_spanish" "Femenino"
-  ..$ : character  "_dta" "note1" "datasetNoteTxt"
-  ..$ : character  "_dta" "note0" "1"
-  ..$ : character  "female" "note2" "FemaleNote2Txt"
-  ..$ : character  "female" "note0" "2"
-  ..$ : character  "female" "note1" "FemaleNoteTxt"
-  ..$ : character  "_dta" "_lang_list" "default spanish"
+  ..$ : character [1:3] "female" "question" "Are you Female?"
+  ..$ : character [1:3] "_dta" "_lang_c" "default"
+  ..$ : character [1:3] "_dta" "_lang_v_spanish" "etiqdataBQ"
+  ..$ : character [1:3] "female" "_lang_l_spanish" "female_lbl_es"
+  ..$ : character [1:3] "female" "_lang_v_spanish" "Femenino"
+  ..$ : character [1:3] "_dta" "note1" "datasetNoteTxt"
+  ..$ : character [1:3] "_dta" "note0" "1"
+  ..$ : character [1:3] "female" "note2" "FemaleNote2Txt"
+  ..$ : character [1:3] "female" "note0" "2"
+  ..$ : character [1:3] "female" "note1" "FemaleNoteTxt"
+  ..$ : character [1:3] "_dta" "_lang_list" "default spanish"
  - attr(*, "version")= integer 12
  - attr(*, "label.table")=List of 2 components
-  ..$ female_lbl_es : Named integer  0 1
-  .. ..- attr(*, "names")= character  "No" "Si"
-  ..$ female_lbl_def: Named integer  0 1
-  .. ..- attr(*, "names")= character  "No" "Yes"
+  ..$ female_lbl_es : Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "No" "Si"
+  ..$ female_lbl_def: Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "No" "Yes"
 > write.dta(bq, "bq.dta", version = 12)
 > str(read.dta('bq.dta'))
 'data.frame':	0 observations of 1 variable:
@@ -351,23 +351,23 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  - attr(*, "val.labels")= character "female_lbl_def"
  - attr(*, "var.labels")= character "Is it female"
  - attr(*, "expansion.fields")=List of 11 components
-  ..$ : character  "female" "question" "Are you Female?"
-  ..$ : character  "_dta" "_lang_c" "default"
-  ..$ : character  "_dta" "_lang_v_spanish" "etiqdataBQ"
-  ..$ : character  "female" "_lang_l_spanish" "female_lbl_es"
-  ..$ : character  "female" "_lang_v_spanish" "Femenino"
-  ..$ : character  "_dta" "note1" "datasetNoteTxt"
-  ..$ : character  "_dta" "note0" "1"
-  ..$ : character  "female" "note2" "FemaleNote2Txt"
-  ..$ : character  "female" "note0" "2"
-  ..$ : character  "female" "note1" "FemaleNoteTxt"
-  ..$ : character  "_dta" "_lang_list" "default spanish"
+  ..$ : character [1:3] "female" "question" "Are you Female?"
+  ..$ : character [1:3] "_dta" "_lang_c" "default"
+  ..$ : character [1:3] "_dta" "_lang_v_spanish" "etiqdataBQ"
+  ..$ : character [1:3] "female" "_lang_l_spanish" "female_lbl_es"
+  ..$ : character [1:3] "female" "_lang_v_spanish" "Femenino"
+  ..$ : character [1:3] "_dta" "note1" "datasetNoteTxt"
+  ..$ : character [1:3] "_dta" "note0" "1"
+  ..$ : character [1:3] "female" "note2" "FemaleNote2Txt"
+  ..$ : character [1:3] "female" "note0" "2"
+  ..$ : character [1:3] "female" "note1" "FemaleNoteTxt"
+  ..$ : character [1:3] "_dta" "_lang_list" "default spanish"
  - attr(*, "version")= integer 12
  - attr(*, "label.table")=List of 2 components
-  ..$ female_lbl_def: Named integer  1 2
-  .. ..- attr(*, "names")= character  "No" "Yes"
-  ..$ female_lbl_es : Named integer  0 1
-  .. ..- attr(*, "names")= character  "No" "Si"
+  ..$ female_lbl_def: Named integer [1:2] 1 2
+  .. ..- attr(*, "names")= character [1:2] "No" "Yes"
+  ..$ female_lbl_es : Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "No" "Si"
 > unlink("bq.dta")
 > 
 > ## PR#15290
@@ -382,15 +382,15 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
  - attr(*, "val.labels")= character "fem_lbl_val_en"
  - attr(*, "var.labels")= character ""
  - attr(*, "expansion.fields")=List of 3 components
-  ..$ : character  "_dta" "_lang_c" "default"
-  ..$ : character  "female" "_lang_l_spanish" "fem_lbl_val_es"
-  ..$ : character  "_dta" "_lang_list" "default spanish"
+  ..$ : character [1:3] "_dta" "_lang_c" "default"
+  ..$ : character [1:3] "female" "_lang_l_spanish" "fem_lbl_val_es"
+  ..$ : character [1:3] "_dta" "_lang_list" "default spanish"
  - attr(*, "version")= integer 12
  - attr(*, "label.table")=List of 2 components
-  ..$ fem_lbl_val_es: Named integer  0 1
-  .. ..- attr(*, "names")= character  "Masculino" "Femenino"
-  ..$ fem_lbl_val_en: Named integer  0 1
-  .. ..- attr(*, "names")= character  "Male" "Female"
+  ..$ fem_lbl_val_es: Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "Masculino" "Femenino"
+  ..$ fem_lbl_val_en: Named integer [1:2] 0 1
+  .. ..- attr(*, "names")= character [1:2] "Male" "Female"
 > 
 > ## Dates and date-times in Stata12
 > Sys.setenv(TZ = "UTC") # avoid timezone differences: cannot unset so must be last
@@ -410,4 +410,4 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
 > q()
 > proc.time()
    user  system elapsed 
-  0.300   0.003   0.297 
+  0.529   0.032   0.554 

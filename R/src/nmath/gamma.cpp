@@ -44,7 +44,7 @@
 
 double Rf_gammafn(double x)
 {
-    const static double gamcs[42] = {
+    static constexpr double gamcs[42] = {
 	+.8571195590989331421920062399942e-2,
 	+.4415381324841006757191315771652e-2,
 	+.5685043681599363378632664588789e-1,
@@ -112,11 +112,11 @@ double Rf_gammafn(double x)
  * xsml = exp(.01)*DBL_MIN
  * dxrel = sqrt(DBL_EPSILON) = 2 ^ -26
 */
-# define ngam 22
-# define xmin -170.5674972726612
-# define xmax  171.61447887182298
-# define xsml 2.2474362225598545e-308
-# define dxrel 1.490116119384765696e-8
+constexpr int ngam = 22;
+constexpr double xmin = -170.5674972726612;
+constexpr double xmax = 171.61447887182298;
+constexpr double xsml = 2.2474362225598545e-308;
+constexpr double dxrel = 1.490116119384765696e-8;
 #endif
 
     if(ISNAN(x)) return x;

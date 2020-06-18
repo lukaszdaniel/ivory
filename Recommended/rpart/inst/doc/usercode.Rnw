@@ -493,7 +493,7 @@ logsplit <- function(y, wt, x, parms, continuous)
         #
 	xx <- direction[match(x, sort(unique(x)))] #relabel from small to large
 	goodness <- double(length(direction) - 1)
-	for (i in 1:length(goodness)) {
+	for (i in seq_along(goodness)) {
 	    tfit <- glm(y[,1] ~ I(xx > i) + offset(y[,2]), binomial, weight = wt)
 	    goodness[i] <- tfit$null.deviance - tfit$deviance
         }

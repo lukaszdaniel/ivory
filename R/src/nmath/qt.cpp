@@ -43,7 +43,7 @@
 
 double Rf_qt(double p, double ndf, int lower_tail, int log_p)
 {
-    const static double eps = 1.e-12;
+    static constexpr double eps = 1.e-12;
 
     double P, q;
 
@@ -57,8 +57,8 @@ double Rf_qt(double p, double ndf, int lower_tail, int log_p)
     if (ndf <= 0) ML_WARN_return_NAN;
 
     if (ndf < 1) { /* based on qnt */
-	const static double accu = 1e-13;
-	const static double Eps = 1e-11; /* must be > accu */
+	static constexpr double accu = 1e-13;
+	static constexpr double Eps = 1e-11; /* must be > accu */
 
 	double ux, lx, nx, pp;
 

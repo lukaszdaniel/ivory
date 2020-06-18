@@ -19,7 +19,7 @@ strata <- function(..., na.group=FALSE, shortlabel, sep=', ') {
                   function(x) is.character(x) | inherits(x, 'factor')))
     }
     else {
-        argname <- ifelse(names(allf) == '', words[1:nterms], names(allf))
+        argname <- ifelse(names(allf) == '', words[seq_len(nterms)], names(allf))
         if (missing(shortlabel)) shortlabel <- FALSE
     }
 
@@ -46,7 +46,7 @@ strata <- function(..., na.group=FALSE, shortlabel, sep=', ') {
     else            labs <- paste(argname[1], wlab, sep='=')
 
     # Now march through the other variables, if any
-    for (i in (1:nterms)[-1]) {
+    for (i in (seq_len(nterms))[-1]) {
 	what <- allf[[i]]
 	if(is.null(levels(what)))
 		what <- factor(what)

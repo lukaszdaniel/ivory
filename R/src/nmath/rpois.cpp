@@ -36,24 +36,24 @@
 
 #include "nmath.h"
 
-#define a0	-0.5
-#define a1	 0.3333333
-#define a2	-0.2500068
-#define a3	 0.2000118
-#define a4	-0.1661269
-#define a5	 0.1421878
-#define a6	-0.1384794
-#define a7	 0.1250060
+constexpr double a0 = -0.5;
+constexpr double a1 = 0.3333333;
+constexpr double a2 = -0.2500068;
+constexpr double a3 = 0.2000118;
+constexpr double a4 = -0.1661269;
+constexpr double a5 = 0.1421878;
+constexpr double a6 = -0.1384794;
+constexpr double a7 = 0.1250060;
 
-#define one_7	0.1428571428571428571
-#define one_12	0.0833333333333333333
-#define one_24	0.0416666666666666667
+constexpr double one_7 = 0.1428571428571428571;
+constexpr double one_12 = 0.0833333333333333333;
+constexpr double one_24 = 0.0416666666666666667;
 
 
 double Rf_rpois(double mu)
 {
     /* Factorial Table (0:9)! */
-    const static double fact[10] =
+    static constexpr double fact[10] =
     {
 	1., 1., 2., 6., 24., 120., 720., 5040., 40320., 362880.
     };

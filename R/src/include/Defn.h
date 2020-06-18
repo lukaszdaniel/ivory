@@ -245,7 +245,7 @@ constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */
 /*	R_NSIZE	   The number of cons cells	 */
 /*	R_VSIZE	   The vector heap size in bytes */
 /*  These values are defaults and can be overridden in config.h
-    The maxima and minima are in ../main/startup.c */
+    The maxima and minima are in ../main/startup.cpp */
 
 #ifndef R_PPSSIZE
 constexpr long R_PPSSIZE = 50000L;
@@ -397,7 +397,7 @@ typedef struct {
 } PPinfo;
 
 /* The type definitions for the table of built-in functions. */
-/* This table can be found in ../main/names.c */
+/* This table can be found in ../main/names.cpp */
 typedef struct {
     const char   *name;    /* print name */
     CCODE  cfun;     /* c-code address */
@@ -688,7 +688,7 @@ typedef enum
 
 /*--- Global Variables ---------------------------------------------------- */
 
-/* Defined and initialized in names.c (not main.c) :*/
+/* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
 extern FUNTAB	R_FunTab[];	    /* Built in functions */
 #endif
@@ -884,7 +884,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t);
 SEXP R_primitive_methods(SEXP op);
 SEXP R_primitive_generic(SEXP op);
 
-/* smallest decimal exponent, needed in format.c, set in Init_R_Machine */
+/* smallest decimal exponent, needed in format.cpp, set in Init_R_Machine */
 extern0 int R_dec_min_exponent		INI_as(-308);
 
 /* structure for caching machine accuracy values */
@@ -1086,11 +1086,7 @@ extern0 int R_PCRE_limit_recursion;
 # define yynerrs		Rf_yynerrs
 # define yyparse		Rf_yyparse
 #endif //R_NO_REMAP
-/* Platform Dependent Gui Hooks */
 
-#define	R_CONSOLE	1
-#define	R_FILE		2
-#define R_TEXT		3
 
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
@@ -1154,7 +1150,7 @@ SEXP Rf_StringFromReal(double, int*);
 SEXP Rf_StringFromComplex(Rcomplex, int*);
 SEXP Rf_EnsureString(SEXP);
 
-/* ../../main/print.c : */
+/* ../../main/print.cpp : */
 typedef struct
 {
     int width;
@@ -1348,10 +1344,10 @@ void R_run_onexits(RCNTXT *);
 NORET void R_jumpctxt(RCNTXT *, int, SEXP);
 #endif
 
-/* ../main/bind.c */
+/* ../main/bind.cpp */
 SEXP Rf_ItemName(SEXP, R_xlen_t);
 
-/* ../main/errors.c : */
+/* ../main/errors.cpp : */
 NORET void Rf_errorcall_cpy(SEXP, const char *, ...);
 NORET void Rf_ErrorMessage(SEXP, int, ...);
 void Rf_WarningMessage(SEXP, R_WARNING, ...);
@@ -1369,10 +1365,10 @@ void R_expand_binding_value(SEXP);
 
 void R_args_enable_refcnt(SEXP);
 
-/* ../main/devices.c, used in memory.c, gnuwin32/extra.c */
+/* ../main/devices.cpp, used in memory.cpp, gnuwin32/extra.c */
 #define R_MaxDevices 64
 
-/* ../../main/printutils.c : */
+/* ../../main/printutils.cpp : */
 typedef enum
 {
     Rprt_adj_left = 0,
@@ -1387,22 +1383,22 @@ const char *Rf_EncodeString(SEXP, int, int, Rprt_adj);
 const char *Rf_EncodeReal2(double, int, int, int);
 const char *Rf_EncodeChar(SEXP);
 
-/* main/raw.c */
+/* main/raw.cpp */
 int mbrtoint(int *w, const char *s);
 
-/* main/sort.c */
+/* main/sort.cpp */
 void orderVector1(int *indx, int n, SEXP key, Rboolean nalast,
 		  Rboolean decreasing, SEXP rho);
 
-/* main/subset.c */
+/* main/subset.cpp */
 SEXP R_subset3_dflt(SEXP, SEXP, SEXP);
 
-/* main/subassign.c */
+/* main/subassign.cpp */
 SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 
 #include <wchar.h>
 
-/* main/util.c */
+/* main/util.cpp */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
 NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
 Rboolean Rf_strIsASCII(const char *str);
@@ -1425,7 +1421,7 @@ size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
 SEXP Rf_installTrChar(SEXP);
 
-const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.c */
+const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.cpp */
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
@@ -1435,17 +1431,17 @@ Rboolean utf8Valid(const char *str);
 char *Rf_strchr(const char *s, int c);
 char *Rf_strrchr(const char *s, int c);
 
-SEXP fixup_NaRm(SEXP args); /* summary.c */
-void invalidate_cached_recodings(void);  /* from sysutils.c */
-void resetICUcollator(Rboolean disable); /* from util.c */
+SEXP fixup_NaRm(SEXP args); /* summary.cpp */
+void invalidate_cached_recodings(void);  /* from sysutils.cpp */
+void resetICUcollator(Rboolean disable); /* from util.cpp */
 void dt_invalidate_locale(); /* from Rstrptime.h */
-extern int R_OutputCon; /* from connections.c */
-extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.c */
-void get_current_mem(size_t *,size_t *,size_t *); /* from memory.c */
-unsigned long get_duplicate_counter(void);  /* from duplicate.c */
-void reset_duplicate_counter(void);  /* from duplicate.c */
-void Rf_BindDomain(char *); /* from main.c */
-extern Rboolean LoadInitFile;  /* from startup.c */
+extern int R_OutputCon; /* from connections.cpp */
+extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.cpp */
+void get_current_mem(size_t *,size_t *,size_t *); /* from memory.cpp */
+unsigned long get_duplicate_counter(void);  /* from duplicate.cpp */
+void reset_duplicate_counter(void);  /* from duplicate.cpp */
+void Rf_BindDomain(char *); /* from main.cpp */
+extern Rboolean LoadInitFile;  /* from startup.cpp */
 
 // Unix and Windows versions
 double R_getClockIncrement(void);
@@ -1478,10 +1474,10 @@ double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
 double R_strtod(const char *str, char **endptr);
 double R_atof(const char *str);
 
-/* unix/sys-std.c, main/options.c */
+/* unix/sys-std.c, main/options.cpp */
 void set_rl_word_breaks(const char *str);
 
-/* From localecharset.c */
+/* From localecharset.cpp */
 extern const char *locale2charset(const char *);
 
 /* Localization */

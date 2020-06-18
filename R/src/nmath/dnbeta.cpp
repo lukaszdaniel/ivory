@@ -54,7 +54,7 @@
 
 double Rf_dnbeta(double x, double a, double b, double ncp, int give_log)
 {
-    const static double eps = 1.e-15;
+    static constexpr double eps = 1.e-15;
 
     int kMax;
     double k, ncp2, dx2, d, D;

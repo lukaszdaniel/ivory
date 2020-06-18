@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival\n"
-"POT-Creation-Date: 2020-05-08 22:51\n"
+"POT-Creation-Date: 2020-06-18 08:40\n"
 "PO-Revision-Date: 2018-07-17 21:24+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,12 +14,6 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: -1,-1,226,-1,-1,-1,-1,-1,-1,-1\n"
-
-#. R/survfit.coxph.R: stop("Cannot handle \"", type, "\" type survival data")
-#: R/survfit.coxph.R:0
-#, fuzzy
-msgid "\" type survival data"
-msgstr "niepoprawny typ przeżycia"
 
 #. R/print.aareg.R: gettextf("%d out of %d unique event times used", summ$n[2], x$n[3], domain = "R-survival")
 #: R/print.aareg.R:0
@@ -84,6 +78,27 @@ msgstr "%s nie zostało dopasowane"
 msgid "%s+ thru %s"
 msgstr "%s+ aż do %s"
 
+#. R/parsecovar.R: gettextf("%s: state not found", x$left[is.na(k)])
+#. R/parsecovar.R: gettextf("%s: state not found", x$right[k])
+#: R/parsecovar.R:0
+#, fuzzy
+msgid "%s: state not found"
+msgstr "nie znaleziono funkcji %s"
+
+#. R/parsecovar.R: gettextf("%s: state value not found", x$left$value[k])
+#. R/parsecovar.R: gettextf("%s: state value not found", x$right$value[k])
+#: R/parsecovar.R:0
+#, fuzzy
+msgid "%s: state value not found"
+msgstr "rozkład %s nie został znaleziony"
+
+#. R/parsecovar.R: gettextf("%s: state variable not found", x$left$stateid[k])
+#. R/parsecovar.R: gettextf("%s: state variable not found", x$right$stateid[k])
+#: R/parsecovar.R:0
+#, fuzzy
+msgid "%s: state variable not found"
+msgstr "zmienna nie została znaleziona w tabeli szybkości:"
+
 #. R/Surv.R: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
 #. R/Surv.R: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
 #. R/Surv.R: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
@@ -116,6 +131,7 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/anova.coxph.penal.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
 #. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/coxph.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/finegray.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
 #. R/is.ratetable.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
 #. R/lines.aareg.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
@@ -131,16 +147,20 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/summary.aareg.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("aareg"))
 #. R/summary.ratetable.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable"))
 #. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
+#. R/surv2data.R: gettextf("'%s' argument is not an object of class %s", "response", dQuote("Surv2"))
+#. R/survcheck.R: gettextf("'%s' argument is not an object of class %s", "response", dQuote("Surv"))
 #. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv"))
-#. R/survfit.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
+#. R/survfitKM.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
+#. R/xtras.R: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #: R/aareg.R:0 R/aeqSurv.R:0 R/anova.coxph.R:0 R/anova.coxph.penal.R:0
-#: R/attrassign.R:0 R/basehaz.R:0 R/finegray.R:0 R/is.ratetable.R:0
+#: R/attrassign.R:0 R/basehaz.R:0 R/coxph.R:0 R/finegray.R:0 R/is.ratetable.R:0
 #: R/lines.aareg.R:0 R/plot.aareg.R:0 R/predict.coxph.R:0 R/print.aareg.R:0
 #: R/print.coxph.penal.R:0 R/print.survdiff.R:0 R/print.survexp.R:0
 #: R/print.survreg.penal.R:0 R/pspline.R:0 R/quantile.survfit.R:0
 #: R/summary.aareg.R:0 R/summary.ratetable.R:0 R/summary.survexp.R:0
-#: R/survfit.R:0 R/survfitTurnbull.R:0
+#: R/surv2data.R:0 R/survcheck.R:0 R/survfit.R:0 R/survfitKM.R:0
+#: R/survfitTurnbull.R:0 R/xtras.R:0
 msgid "'%s' argument is not an object of class %s"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
@@ -162,13 +182,17 @@ msgstr "argument '%s' ma niepoprawną długość"
 
 #. R/Surv.R: gettextf("'%s' argument is required", "time")
 #. R/clogit.R: gettextf("'%s' argument is required", "formula")
+#. R/coxph.R: gettextf("'%s' argument is required", "formula")
 #. R/finegray.R: gettextf("'%s' argument is required", "formula")
 #. R/neardate.R: gettextf("'%s' argument is required", "id1")
 #. R/neardate.R: gettextf("'%s' argument is required", "id2")
 #. R/neardate.R: gettextf("'%s' argument is required", "y1")
 #. R/neardate.R: gettextf("'%s' argument is required", "y2")
 #. R/pyears.R: gettextf("'%s' argument is required", "formula")
+#. R/surv2data.R: gettextf("'%s' argument is required", "formula")
 #. R/survSplit.R: gettextf("'%s' argument is required", "data")
+#. R/survcheck.R: gettextf("'%s' argument is required", "formula")
+#. R/survexp.R: gettextf("'%s' argument is required", "formula")
 #. R/survfit.R: gettextf("'%s' argument is required", "formula")
 #. R/survobrien.R: gettextf("'%s' argument is required", "formula")
 #. R/survreg.R: gettextf("'%s' argument is required", "formula")
@@ -176,9 +200,9 @@ msgstr "argument '%s' ma niepoprawną długość"
 #. R/yates.R: gettextf("'%s' argument is required", "fit")
 #. R/yates.R: gettextf("'%s' argument is required", "term")
 #. R/yates.R: gettextf("'%s' argument is required", "fit")
-#: R/Surv.R:0 R/clogit.R:0 R/finegray.R:0 R/neardate.R:0 R/pyears.R:0
-#: R/survSplit.R:0 R/survfit.R:0 R/survobrien.R:0 R/survreg.R:0 R/tmerge.R:0
-#: R/yates.R:0
+#: R/Surv.R:0 R/clogit.R:0 R/coxph.R:0 R/finegray.R:0 R/neardate.R:0
+#: R/pyears.R:0 R/surv2data.R:0 R/survSplit.R:0 R/survcheck.R:0 R/survexp.R:0
+#: R/survfit.R:0 R/survobrien.R:0 R/survreg.R:0 R/tmerge.R:0 R/yates.R:0
 msgid "'%s' argument is required"
 msgstr "argument '%s' jest wymagany"
 
@@ -199,8 +223,11 @@ msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być tekstem"
 
 #. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/survfit.coxphms.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/survfit.coxphms.R: gettextf("'%s' argument must be a data frame", "newdata")
 #. R/tmerge.R: gettextf("'%s' argument must be a data frame", "data1")
-#: R/survfit.coxph.R:0 R/tmerge.R:0
+#: R/survfit.coxph.R:0 R/survfit.coxphms.R:0 R/tmerge.R:0
 msgid "'%s' argument must be a data frame"
 msgstr "argument '%s' musi być ramką danych"
 
@@ -219,10 +246,11 @@ msgstr "argument '%s' musi być listą"
 msgid "'%s' argument must be a number >= 0"
 msgstr "argument '%s' musi być liczbą >= 0"
 
-#. R/print.pyears.R: gettextf("'%s' argument must be a value > 0", "scale")
-#: R/print.pyears.R:0
-msgid "'%s' argument must be a value > 0"
-msgstr "argument '%s' musi być wartością >= 0"
+#. R/survfitCI.R: gettextf("'%s' argument must be a single numeric value", "start.time")
+#: R/survfitCI.R:0
+#, fuzzy
+msgid "'%s' argument must be a single numeric value"
+msgstr "'start.time' musi być pojedynczą wartością liczbową"
 
 #. R/survSplit.R: gettextf("'%s' argument must be a variable name", "start")
 #. R/survSplit.R: gettextf("'%s' argument must be a variable name", "id")
@@ -365,12 +393,14 @@ msgid "'id' has values not in data1"
 msgstr "'id' posiada wartości nie mieszczące się w 'data1'"
 
 #. R/survfit.coxph.R: stop("'id=NULL' is an invalid argument")
-#: R/survfit.coxph.R:0
+#. R/survfit.coxphms.R: stop("'id=NULL' is an invalid argument")
+#: R/survfit.coxph.R:0 R/survfit.coxphms.R:0
 msgid "'id=NULL' is an invalid argument"
 msgstr "'id=NULL' jest niepoprawnym argumentem"
 
 #. R/survfit.coxph.R: stop("'individual=TRUE' is only valid for counting process data")
-#: R/survfit.coxph.R:0
+#. R/survfit.coxphms.R: stop("'individual=TRUE' is only valid for counting process data")
+#: R/survfit.coxph.R:0 R/survfit.coxphms.R:0
 #, fuzzy
 msgid "'individual=TRUE' is only valid for counting process data"
 msgstr "argument 'individual' jest poprawny tylko dla danych start:stop"
@@ -547,51 +577,6 @@ msgstr ""
 msgid "*mean time in state, restricted (per curve cutoff)"
 msgstr ""
 
-#. R/coxph.fit.R: paste((1:nvar)[infs], collapse = ",")
-#. R/parsecovar.R: paste(ff[is.na(index)], collapse = ", ")
-#: R/coxph.fit.R:0 R/parsecovar.R:0
-msgid ","
-msgstr ""
-
-#. R/print.summary.survfitms.R: paste("No rows remain using start.time =", x$start.time, ".")
-#: R/print.summary.survfitms.R:0
-msgid "."
-msgstr ""
-
-#. R/parsecovar.R: stop(x$left[k], ": state not found")
-#. R/parsecovar.R: stop(x$right[k], ": state not found")
-#: R/parsecovar.R:0
-#, fuzzy
-msgid ": state not found"
-msgstr "nie znaleziono funkcji %s"
-
-#. R/parsecovar.R: stop(x$left$value[k], ": state value not found")
-#. R/parsecovar.R: stop(x$right$value[k], ": state value not found")
-#: R/parsecovar.R:0
-#, fuzzy
-msgid ": state value not found"
-msgstr "rozkład %s nie został znaleziony"
-
-#. R/parsecovar.R: stop(x$left$stateid[k], ": state variable not found")
-#. R/parsecovar.R: stop(x$right$stateid[k], ": state variable not found")
-#: R/parsecovar.R:0
-#, fuzzy
-msgid ": state variable not found"
-msgstr "zmienna nie została znaleziona w tabeli szybkości:"
-
-#. R/coxph.fit.R: paste("Loglik converged before variable ", paste((1:nvar)[infs], collapse = ","),     "; coefficient may be infinite. ")
-#: R/coxph.fit.R:0
-#, fuzzy
-msgid "; coefficient may be infinite."
-msgstr "przesunięcia muszą być skończone"
-
-#. R/coxph.R: stop("A formula argument is required")
-#. R/survcheck.R: stop("A formula argument is required")
-#. R/survexp.R: stop("A formula argument is required")
-#: R/coxph.R:0 R/survcheck.R:0 R/survexp.R:0
-msgid "A formula argument is required"
-msgstr "Argument 'formula' jest wymagany"
-
 #. R/match.ratetable.R: stop("A ratetable argument appears twice in the data")
 #: R/match.ratetable.R:0
 #, fuzzy
@@ -644,6 +629,7 @@ msgstr "Beta(t) dla %s"
 
 #. R/cch.R: gettext("Call: ", domain = "R-survival")
 #. R/cch.R: gettext("Call: ", domain = "R-survival")
+#. R/concordance.R: gettext("Call:", domain = "R-survival")
 #. R/print.aareg.R: gettext("Call:", domain = "R-survival")
 #. R/print.coxph.R: gettext("Call:", domain = "R-survival")
 #. R/print.coxph.null.R: gettext("Call: ", domain = "R-survival")
@@ -663,13 +649,14 @@ msgstr "Beta(t) dla %s"
 #. R/print.survreg.penal.R: gettext("Call:", domain = "R-survival")
 #. R/survConcordance.R: gettext("Call:", domain = "R-survival")
 #. R/survfitms.R: gettext("Call:", domain = "R-survival")
-#: R/cch.R:0 R/print.aareg.R:0 R/print.coxph.R:0 R/print.coxph.null.R:0
-#: R/print.coxph.penal.R:0 R/print.pyears.R:0 R/print.summary.coxph.R:0
-#: R/print.summary.coxph.penal.R:0 R/print.summary.survexp.R:0
-#: R/print.summary.survfit.R:0 R/print.summary.survfitms.R:0
-#: R/print.summary.survreg.R:0 R/print.survdiff.R:0 R/print.survexp.R:0
-#: R/print.survfit.R:0 R/print.survreg.R:0 R/print.survreg.penal.R:0
-#: R/survConcordance.R:0 R/survfitms.R:0
+#: R/cch.R:0 R/concordance.R:0 R/print.aareg.R:0 R/print.coxph.R:0
+#: R/print.coxph.null.R:0 R/print.coxph.penal.R:0 R/print.pyears.R:0
+#: R/print.summary.coxph.R:0 R/print.summary.coxph.penal.R:0
+#: R/print.summary.survexp.R:0 R/print.summary.survfit.R:0
+#: R/print.summary.survfitms.R:0 R/print.summary.survreg.R:0
+#: R/print.survdiff.R:0 R/print.survexp.R:0 R/print.survfit.R:0
+#: R/print.survreg.R:0 R/print.survreg.penal.R:0 R/survConcordance.R:0
+#: R/survfitms.R:0
 msgid "Call:"
 msgstr "Wywołanie:"
 
@@ -706,10 +693,11 @@ msgstr ""
 msgid "Cannot deal with models that contain an offset"
 msgstr ""
 
-#. R/survfit.coxph.R: stop("Cannot handle \"", type, "\" type survival data")
+#. R/survfit.coxph.R: gettextf("Cannot handle \"%s\" type survival data", type)
 #: R/survfit.coxph.R:0
-msgid "Cannot handle \""
-msgstr ""
+#, fuzzy
+msgid "Cannot handle \"%s\" type survival data"
+msgstr "nie można obsłużyć typu \"%s\" danych przeżycia"
 
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
@@ -744,14 +732,10 @@ msgid "Coefficients:"
 msgstr "Współczynniki:"
 
 #. R/predict.coxph.R: stop("Collapse vector is of the wrong length")
-#: R/predict.coxph.R:0
+#. R/predict.coxph.penal.R: stop("Collapse vector is of the wrong length")
+#: R/predict.coxph.R:0 R/predict.coxph.penal.R:0
 #, fuzzy
 msgid "Collapse vector is of the wrong length"
-msgstr "Wektor zapaści jest niepoprawnej długości"
-
-#. R/predict.coxph.penal.R: stop("Collapse vector is the wrong length")
-#: R/predict.coxph.penal.R:0
-msgid "Collapse vector is the wrong length"
 msgstr "Wektor zapaści jest niepoprawnej długości"
 
 #. R/print.summary.coxph.R: gettextf("Concordance = %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
@@ -848,12 +832,6 @@ msgstr "niepoprawna wartość zmiennej zależnej"
 msgid "Individual survival but no variables"
 msgstr ""
 
-#. R/survfit.coxphms.R: stop("Individual=TRUE is only valid for counting process data")
-#: R/survfit.coxphms.R:0
-#, fuzzy
-msgid "Individual=TRUE is only valid for counting process data"
-msgstr "argument 'individual' jest poprawny tylko dla danych start:stop"
-
 #. R/survfit.R: stop("Interaction terms are not valid for this function")
 #: R/survfit.R:0
 msgid "Interaction terms are not valid for this function"
@@ -863,6 +841,26 @@ msgstr "człony interakcji nie są poprawne dla tej funkcji"
 #: R/cipoisson.R:0
 msgid "Invalid method"
 msgstr "niepoprawna metoda"
+
+#. R/Surv2.R: stop("Invalid operation on a survival time")
+#. R/Surv2.R: stop("Invalid operation on a survival time")
+#. R/Surv2.R: stop("Invalid operation on a survival time")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "Invalid operation on a survival time"
+msgstr "niepoprawna operacja na czasie przeżycia"
+
+#. R/Surv2.R: warning("Invalid status value, converted to NA")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "Invalid status value, converted to NA"
+msgstr "niepoprawna wartość statusu, zamieniono na wartość NA"
+
+#. R/Surv2.R: stop("Invalid status value, must be factor, logical or numeric")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "Invalid status value, must be factor, logical or numeric"
+msgstr "niepoprawna wartość statusu, musi być wartością logiczną lub liczbą"
 
 #. R/survConcordance.fit.R: stop("Invalid survival type for concordance")
 #: R/survConcordance.fit.R:0
@@ -921,11 +919,6 @@ msgid ""
 msgstr ""
 "Test stosunku funkcji wiarygodności = %s dla %s stopni swobody, p=%s  n=%d"
 
-#. R/coxph.fit.R: paste("Loglik converged before variable ", paste((1:nvar)[infs], collapse = ","),     "; coefficient may be infinite. ")
-#: R/coxph.fit.R:0
-msgid "Loglik converged before variable"
-msgstr ""
-
 #. R/agexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste((seq_len(nvar))[infs],     collapse = ", "), domain = "R-survival")
 #. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "))
 #. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "), domain = "R-survival")
@@ -933,11 +926,25 @@ msgstr ""
 msgid "Loglik converged before variable %s; beta may be infinite."
 msgstr ""
 
+#. R/coxph.fit.R: gettextf("Loglik converged before variable %s; coefficient may be infinite.", paste(seq_len(nvar)[infs],     collapse = ", "))
+#: R/coxph.fit.R:0
+#, fuzzy
+msgid "Loglik converged before variable %s; coefficient may be infinite."
+msgstr "przesunięcia muszą być skończone"
+
 #. R/print.summary.survreg.R: gettextf("Loglik(model)= %s   Loglik(intercept only)= %s", format(round(x$loglik[2],     1)), format(round(x$loglik[1], 1)), domain = "R-survival")
 #. R/print.survreg.R: gettextf("Loglik(model)= %s   Loglik(intercept only)= %s", format(round(x$loglik[2],     1)), format(round(x$loglik[1], 1)), domain = "R-survival")
 #: R/print.summary.survreg.R:0 R/print.survreg.R:0
 msgid "Loglik(model)= %s   Loglik(intercept only)= %s"
 msgstr "Loglik(model)= %s   Loglik(tylko przecięcie)= %s"
+
+#. R/print.pyears.R: gettext("Matches to the chosen rate table:", domain = "R-survival")
+#: R/print.pyears.R:0
+#, fuzzy
+msgid "Matches to the chosen rate table:"
+msgstr ""
+"Dopasowania do wybranej tabeli szybkości:\n"
+"  %s"
 
 #. R/anova.coxphlist.R: gettextf(" Model %s:", format(seq_len(nmodels)))
 #: R/anova.coxphlist.R:0
@@ -979,12 +986,6 @@ msgstr "Nowe dane mają warstwę nieobecną w oryginalnym modelu"
 msgid "New data set has strata levels not found in the original"
 msgstr "Nowy zbiór danych ma poziomy warstwy nieobecne w oryginalnym modelu"
 
-#. R/survfit.coxphms.R: stop("Newdata argument must be a data frame")
-#: R/survfit.coxphms.R:0
-#, fuzzy
-msgid "Newdata argument must be a data frame"
-msgstr "argument '%s' musi być ramką danych"
-
 #. R/survfit.coxph.R: stop("Newdata cannot be used when a model has frailty terms")
 #. R/survfit.coxphms.R: stop("Newdata cannot be used when a model has frailty terms")
 #: R/survfit.coxph.R:0 R/survfit.coxphms.R:0
@@ -992,20 +993,15 @@ msgstr "argument '%s' musi być ramką danych"
 msgid "Newdata cannot be used when a model has frailty terms"
 msgstr "argument 'newdata' musi być ramką danych"
 
-#. R/concordance.R: stop("No (non-missing) observations")
-#: R/concordance.R:0
-msgid "No (non-missing) observations"
-msgstr "brak (niebrakujących) obserwacji"
-
 #. R/pyears.R: stop("No rate table specified")
 #: R/pyears.R:0
 msgid "No rate table specified"
 msgstr "Nie określono tabeli szybkości"
 
-#. R/print.summary.survfitms.R: paste("No rows remain using start.time =", x$start.time, ".")
+#. R/print.summary.survfitms.R: gettextf("No rows remain using start.time = %s.", x$start.time)
 #: R/print.summary.survfitms.R:0
 #, fuzzy
-msgid "No rows remain using start.time ="
+msgid "No rows remain using start.time = %s."
 msgstr "brak dostępnej informacji używając 'start.time = %s'."
 
 #. R/summary.survreg.R: gettext("   No summary provided\n")
@@ -1029,6 +1025,11 @@ msgstr "Pusty model"
 #: R/print.summary.survreg.R:0
 msgid "Number of Newton-Raphson Iterations:"
 msgstr "Liczba iteracji Newtona-Raphsona:"
+
+#. R/print.pyears.R: gettext("Observations in the data set: ", domain = "R-survival")
+#: R/print.pyears.R:0
+msgid "Observations in the data set:"
+msgstr "Obserwacje w zbiorze danych:"
 
 #. R/print.survdiff.R: gettext("Observed")
 #. R/print.survdiff.R: gettext("Observed")
@@ -1095,12 +1096,6 @@ msgstr "Wyczerpano limit iteracji, a algorytm nie uzbieżnił się"
 #: R/residuals.survreg.penal.R:0
 msgid "Residuals are not available for sparse models"
 msgstr "Reszty nie są dostępne dla rzadkich modeli"
-
-#. R/coxph.R: stop("Response must be a survival object")
-#: R/coxph.R:0
-#, fuzzy
-msgid "Response must be a survival object"
-msgstr "y musi być obiektem klasy \"surv\""
 
 #. R/anova.survreg.R: gettext("Response: ")
 #. R/anova.survreglist.R: gettext("Response: ")
@@ -1213,11 +1208,11 @@ msgstr ""
 msgid "The graphical argument 'type' is not allowed"
 msgstr "argument graficzny 'type' nie jest dozwolony"
 
-#. R/survfit.coxph.R: stop("The newdata argument must be present when individual=TRUE")
-#. R/survfit.coxphms.R: stop("The newdata argument must be present when individual=TRUE")
+#. R/survfit.coxph.R: stop("The newdata argument must be present when 'individual=TRUE'")
+#. R/survfit.coxphms.R: stop("The newdata argument must be present when 'individual=TRUE'")
 #: R/survfit.coxph.R:0 R/survfit.coxphms.R:0
 #, fuzzy
-msgid "The newdata argument must be present when individual=TRUE"
+msgid "The newdata argument must be present when 'individual=TRUE'"
 msgstr "argument 'newdata' musi być obecny, gdy 'individual=TRUE'"
 
 #. R/survfit.coxph.R: stop("The survfit function can not process coxph models with a tt term")
@@ -1265,19 +1260,49 @@ msgstr "Powtórzone wartości dla 'max(y)', poddaję się"
 msgid "Time"
 msgstr "Czas"
 
+#. R/Surv2.R: stop("Time and event are different lengths")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "Time and event are different lengths"
+msgstr "argumenty 'time' oraz 'time2' mają różną długość"
+
+#. R/Surv2.R: stop("Time variable is not numeric")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "Time variable is not numeric"
+msgstr "zmienna %s jest poza zakresem"
+
 #. R/survexp.R: stop("Times must be in increasing order")
 #: R/survexp.R:0
 msgid "Times must be in increasing order"
 msgstr "Czasy muszą być w porządku rosnącym"
 
-#. R/print.pyears.R: gettextf(" Total time lost (off table) %s", format(object$offtable), domain = "R-survival")
+#. R/print.pyears.R: gettext("Total number of events: ", domain = "R-survival")
+#. R/print.pyears.R: gettext("Total number of events: ", domain = "R-survival")
 #: R/print.pyears.R:0
-msgid "Total time lost (off table) %s"
+#, fuzzy
+msgid "Total number of events:"
+msgstr "liczba zdarzeń= %d"
+
+#. R/print.pyears.R: gettext("Total number of person-years off table: ", domain = "R-survival")
+#. R/print.pyears.R: gettext("Total number of person-years off table: ", domain = "R-survival")
+#: R/print.pyears.R:0
+msgid "Total number of person-years off table:"
+msgstr ""
+
+#. R/print.pyears.R: gettext("Total number of person-years tabulated: ", domain = "R-survival")
+#. R/print.pyears.R: gettext("Total number of person-years tabulated: ", domain = "R-survival")
+#: R/print.pyears.R:0
+msgid "Total number of person-years tabulated:"
+msgstr ""
+
+#. R/print.pyears.R: gettext(" Total time lost (off table) ", domain = "R-survival")
+#: R/print.pyears.R:0
+msgid "Total time lost (off table)"
 msgstr ""
 
 #. R/print.survfit.R: stop("Truncation point for the mean is < smallest survival")
 #. R/print.survfit.R: stop("Truncation point for the mean is < smallest survival")
-#. R/survfitms.R: stop("Truncation point for the mean is < smallest survival")
 #. R/survfitms.R: stop("Truncation point for the mean is < smallest survival")
 #. R/survfitms.R: stop("Truncation point for the mean is < smallest survival")
 #. R/survfitms.R: stop("Truncation point for the mean is < smallest survival")
@@ -1286,6 +1311,7 @@ msgstr ""
 msgid "Truncation point for the mean is < smallest survival"
 msgstr ""
 
+#. R/survfitms.R: stop("Truncation point for the mean time in state is < smallest survival")
 #. R/survfitms.R: stop("Truncation point for the mean time in state is < smallest survival")
 #: R/survfitms.R:0
 msgid "Truncation point for the mean time in state is < smallest survival"
@@ -1376,6 +1402,12 @@ msgstr "nie można mieć dwóch członów grupujących"
 msgid "a mean method has not been defined for Surv objects"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
+#. R/Surv2.R: stop("a mean method has not been defined for Surv2 objects")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "a mean method has not been defined for Surv2 objects"
+msgstr "argument '%s' nie jest obiektem klasy %s"
+
 #. R/predict.coxph.R: stop("a name given in the 'terms' argument not found in the model")
 #: R/predict.coxph.R:0
 msgid "a name given in the 'terms' argument not found in the model"
@@ -1454,6 +1486,12 @@ msgstr "wszystkie krzywe muszą być tego samego typu"
 msgid "all elements must be of class Surv"
 msgstr "wszystkie argumenty muszą być obiektami klasy %s lub %s"
 
+#. R/Surv2.R: stop("all elements must be of class Surv2")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "all elements must be of class Surv2"
+msgstr "wszystkie argumenty muszą być obiektami klasy %s lub %s"
+
 #. R/Surv.R: stop("all elements must be of the same Surv type")
 #: R/Surv.R:0
 #, fuzzy
@@ -1462,7 +1500,9 @@ msgstr "wszystkie krzywe muszą być tego samego typu"
 
 #. R/Surv.R: stop("all elements must have the same list of states")
 #. R/Surv.R: stop("all elements must have the same list of states")
-#: R/Surv.R:0
+#. R/Surv2.R: stop("all elements must have the same list of states")
+#. R/Surv2.R: stop("all elements must have the same list of states")
+#: R/Surv.R:0 R/Surv2.R:0
 msgid "all elements must have the same list of states"
 msgstr "wszystkie elementy muszą mieć tę samą listę stanów"
 
@@ -1567,14 +1607,14 @@ msgstr "argument %s ma nierozpoznany typ"
 msgid "attemp to update an event variable and levels do not match"
 msgstr ""
 
-#. R/tmerge.R: stop("attempt to turn event variable", argname[[ii]], "into a tdc")
-#: R/tmerge.R:0
-msgid "attempt to turn event variable"
-msgstr ""
-
 #. R/tmerge.R: gettextf("attempt to turn event variable %s into a cumtdc", argname[[ii]])
 #: R/tmerge.R:0
 msgid "attempt to turn event variable %s into a cumtdc"
+msgstr ""
+
+#. R/tmerge.R: gettextf("attempt to turn event variable %s into a tdc", argname[[ii]])
+#: R/tmerge.R:0
+msgid "attempt to turn event variable %s into a tdc"
 msgstr ""
 
 #. R/tmerge.R: stop("attempt to update an event variable with a different type")
@@ -1723,6 +1763,14 @@ msgstr "grupa nie może być użyta w interakcji"
 msgid "cluster specified with robust=FALSE, cluster ignored"
 msgstr ""
 
+#. R/coxph.R: stop("cluster() cannot appear in the model statement")
+#. R/survcheck.R: stop("cluster() cannot appear in the model statement")
+#. R/survfit.R: stop("cluster() cannot appear in the model statement")
+#: R/coxph.R:0 R/survcheck.R:0 R/survfit.R:0
+#, fuzzy
+msgid "cluster() cannot appear in the model statement"
+msgstr "grupa nie może być użyta w interakcji"
+
 #. R/coxph.R: stop("cluster() cannot be in an interaction")
 #. R/survreg.R: stop("cluster() cannot be in an interaction")
 #: R/coxph.R:0 R/survreg.R:0
@@ -1839,6 +1887,12 @@ msgstr "zbiór danych ma 0 obserwacji"
 msgid "data set has 0 rows"
 msgstr "zbiór danych ma 0 wierszy"
 
+#. R/survfit.R: stop("data set has no non-missing observations")
+#: R/survfit.R:0
+#, fuzzy
+msgid "data set has no non-missing observations"
+msgstr "brak (niebrakujących) obserwacji"
+
 #. R/coxph.R: stop("data set has overlapping intervals for one or more subjects")
 #: R/coxph.R:0
 msgid "data set has overlapping intervals for one or more subjects"
@@ -1875,14 +1929,14 @@ msgstr "nazwa wymiaru %d ma niepoprawną długość"
 msgid "don't know how to do a linear contrast for this term"
 msgstr ""
 
-#. R/parsecovar.R: stop("dterm mismatch bug 2")
-#: R/parsecovar.R:0
-#, fuzzy
-msgid "dterm mismatch bug 2"
-msgstr "niezgodność długości danych"
+#. R/surv2data.R: stop("duplicated time values for a single id")
+#: R/surv2data.R:0
+msgid "duplicated time values for a single id"
+msgstr ""
 
 #. R/Surv.R: stop("each state must have a non-blank name")
-#: R/Surv.R:0
+#. R/Surv2.R: stop("each state must have a non-blank name")
+#: R/Surv.R:0 R/Surv2.R:0
 msgid "each state must have a non-blank name"
 msgstr ""
 
@@ -1891,6 +1945,11 @@ msgstr ""
 #, fuzzy
 msgid "either a 'times' argument or a 'response' is needed"
 msgstr "wymagany jest albo argument 'times' albo 'response'"
+
+#. R/surv2data.R: stop("everyone or no one should have an initial state")
+#: R/surv2data.R:0
+msgid "everyone or no one should have an initial state"
+msgstr ""
 
 #. R/stacker.R: warning("extra column in cmap")
 #: R/stacker.R:0
@@ -1967,10 +2026,22 @@ msgstr "nie można mieć dwóch członów grupujących"
 msgid "function requires a survfit object"
 msgstr ""
 
+#. R/surv2data.R: stop("id and time cannot be missing")
+#: R/surv2data.R:0
+#, fuzzy
+msgid "id and time cannot be missing"
+msgstr "zmienna nie została znaleziona w tabeli szybkości:"
+
 #. R/survfitKM.R: stop("id or cluster option required")
 #: R/survfitKM.R:0
 #, fuzzy
 msgid "id or cluster option required"
+msgstr "argument '%s' jest wymagany"
+
+#. R/surv2data.R: stop("id statement is required")
+#: R/surv2data.R:0
+#, fuzzy
+msgid "id statement is required"
 msgstr "argument '%s' jest wymagany"
 
 #. R/tmerge.R: stop("id values were found in data2 which are not in data1")
@@ -1996,12 +2067,6 @@ msgstr "zmienna nie została znaleziona w tabeli szybkości:"
 #, fuzzy
 msgid "id variable not found in data2"
 msgstr "zmienna nie została znaleziona w tabeli szybkości:"
-
-#. R/survfit.coxphms.R: stop("id=NULL is an invalid argument")
-#: R/survfit.coxphms.R:0
-#, fuzzy
-msgid "id=NULL is an invalid argument"
-msgstr "'id=NULL' jest niepoprawnym argumentem"
 
 #. R/is.ratetable.R: gettext("illegal 'factor' attribute of <0")
 #: R/is.ratetable.R:0
@@ -2063,6 +2128,13 @@ msgstr ""
 msgid "inner loop failed to coverge for iterations %s"
 msgstr "niepowodzenie zbieżności wewnętrznej pętli dla iteracji %s "
 
+#. R/survexpm.R: stop("input is not a transition matrix")
+#. R/survexpm.R: stop("input is not a transition matrix")
+#: R/survexpm.R:0
+#, fuzzy
+msgid "input is not a transition matrix"
+msgstr "wejście musi mieć co najmniej 2 przejścia"
+
 #. R/print.coxph.R: stop("input is not valid")
 #. R/summary.coxph.R: stop("input is not valid")
 #. R/summary.coxph.penal.R: stop("input is not valid")
@@ -2088,11 +2160,6 @@ msgstr "wejście musi być kwadratową macierzą krzywych przeżycia"
 #: R/survfit.matrix.R:0
 msgid "input must have at least 2 transitions"
 msgstr "wejście musi mieć co najmniej 2 przejścia"
-
-#. R/tmerge.R: stop("attempt to turn event variable", argname[[ii]], "into a tdc")
-#: R/tmerge.R:0
-msgid "into a tdc"
-msgstr ""
 
 #. R/aareg.taper.R: gettextf("invalid '%s' argument", "taper")
 #. R/lines.survfit.coxph.R: gettextf("invalid '%s' argument", "mark.time")
@@ -2199,7 +2266,8 @@ msgstr "niepoprawny poziom dla członu"
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
 #. R/Surv.R: stop("invalid operation on a survival time")
-#: R/Surv.R:0
+#. R/Surv2.R: stop("invalid operation on a survival time")
+#: R/Surv.R:0 R/Surv2.R:0
 msgid "invalid operation on a survival time"
 msgstr "niepoprawna operacja na czasie przeżycia"
 
@@ -2449,10 +2517,29 @@ msgstr "logarytm funkcji wiarygodności=%s"
 msgid "matrix column names do no match the terms"
 msgstr "macierz 'x' nie zgadza sę z tablicą częstości"
 
+#. R/Surv2.R: stop("median method has not been defined for Surv2 objects")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "median method has not been defined for Surv2 objects"
+msgstr "argument '%s' nie jest obiektem klasy %s"
+
 #. R/cch.R: gettextf("method (%s) requires 'stratum'", method)
 #: R/cch.R:0
 msgid "method (%s) requires 'stratum'"
 msgstr "metoda (%s) wymaga argumentu 'stratum'"
+
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#. R/Surv2.R: stop("method not defined for a Surv2 object")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "method not defined for a Surv2 object"
+msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
 #. R/Surv.R: gettextf("method not defined for an object of class %s", dQuote("Surv"))
@@ -2509,7 +2596,8 @@ msgid "missing time value, when that variable defines the span"
 msgstr ""
 
 #. R/Surv.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
-#: R/Surv.R:0
+#. R/Surv2.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
+#: R/Surv.R:0 R/Surv2.R:0
 msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
 msgstr ""
 
@@ -2554,6 +2642,24 @@ msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 msgid "multi-state curves are not a valid input"
 msgstr ""
 
+#. R/coxph.R: stop("multi-state models do not currently support frailty terms")
+#: R/coxph.R:0
+#, fuzzy
+msgid "multi-state models do not currently support frailty terms"
+msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
+
+#. R/coxph.R: stop("multi-state models do not currently support pspline terms")
+#: R/coxph.R:0
+#, fuzzy
+msgid "multi-state models do not currently support pspline terms"
+msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
+
+#. R/coxph.R: stop("multi-state models do not currently support ridge penalties")
+#: R/coxph.R:0
+#, fuzzy
+msgid "multi-state models do not currently support ridge penalties"
+msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
+
 #. R/survfitCI.R: stop("multi-state survfit supports only a robust variance")
 #: R/survfitCI.R:0
 msgid "multi-state survfit supports only a robust variance"
@@ -2574,6 +2680,18 @@ msgstr "wiele rekordów na id nie jest dozwolonych"
 #, fuzzy
 msgid "multiple state survival is not supported"
 msgstr "zgrubna wariancja wraz ze ścisłym modelem nie jest wspierana"
+
+#. R/Surv2.R: stop("must have a time argument")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "must have a time argument"
+msgstr "'method != fixed', ale obecny jest argument 'theta'"
+
+#. R/Surv2.R: stop("must have an event argument")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "must have an event argument"
+msgstr "'method != fixed', ale obecny jest argument 'theta'"
 
 #. R/yates.R: stop("names of levels does not match the terms")
 #: R/yates.R:0
@@ -2601,17 +2719,13 @@ msgstr ""
 msgid "new theta= %s"
 msgstr "nowa theta= %s"
 
-#. R/survfit.coxph.R: stop("newdata must be a data frame")
-#. R/survfit.coxphms.R: stop("newdata must be a data frame")
-#: R/survfit.coxph.R:0 R/survfit.coxphms.R:0
-#, fuzzy
-msgid "newdata must be a data frame"
-msgstr "argument 'newdata' musi być ramką danych"
-
+#. R/concordance.R: stop("no (non-missing) observations")
 #. R/coxph.R: stop("no (non-missing) observations")
 #. R/finegray.R: stop("no (non-missing) observations")
+#. R/survcheck.R: stop("no (non-missing) observations")
 #. R/survobrien.R: stop("no (non-missing) observations")
-#: R/coxph.R:0 R/finegray.R:0 R/survobrien.R:0
+#: R/concordance.R:0 R/coxph.R:0 R/finegray.R:0 R/survcheck.R:0
+#: R/survobrien.R:0
 msgid "no (non-missing) observations"
 msgstr "brak (niebrakujących) obserwacji"
 
@@ -2633,6 +2747,13 @@ msgstr "brak dostępnej informacji używając 'start.time = %s'."
 #. R/yates.R: stop("no non-missing coefficients in the estimate")
 #: R/yates.R:0
 msgid "no non-missing coefficients in the estimate"
+msgstr ""
+
+#. R/survfitms.R: stop("no points selected for one or more curves, consider using the extend argument")
+#. R/survfitms.R: stop("no points selected for one or more curves, consider using the extend argument")
+#: R/survfitms.R:0
+msgid ""
+"no points selected for one or more curves, consider using the extend argument"
 msgstr ""
 
 #. R/Surv.R: stop("no time variable!")
@@ -2671,6 +2792,12 @@ msgid ""
 "the lower order effect"
 msgstr ""
 
+#. R/Surv2.R: stop("not defined for a Surv2 object")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "not defined for a Surv2 object"
+msgstr "argument '%s' nie jest obiektem klasy %s"
+
 #. R/coxph.wtest.R: gettext("not finite in coxph.wtest", domain = "R-survival")
 #: R/coxph.wtest.R:0
 msgid "not finite in coxph.wtest"
@@ -2680,12 +2807,6 @@ msgstr ""
 #: R/yates.R:0
 msgid "not found in levels data frame:"
 msgstr ""
-
-#. R/survfit.R: paste("strata", paste(i[is.na(indx)], collapse = " "), "not matched")
-#: R/survfit.R:0
-#, fuzzy
-msgid "not matched"
-msgstr "%s nie zostało dopasowane"
 
 #. R/survSplit.R: gettextf("not valid for %s censored survival data", attr(Y, "type"))
 #: R/survSplit.R:0
@@ -2702,6 +2823,12 @@ msgstr "jeszcze nie zaimplementowane 1"
 #: R/yates.R:0
 msgid "not yet done 2"
 msgstr "jeszcze nie zaimplementowane 2"
+
+#. R/Surv2.R: stop("note defined for a Surv2 object")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "note defined for a Surv2 object"
+msgstr "argument '%s' nie jest obiektem klasy %s"
 
 #. R/statefig.R: stop("number of boxes != number of states")
 #: R/statefig.R:0
@@ -2730,9 +2857,10 @@ msgstr "liczba etykiet musi być o jeden mniejsza niż liczba przerw."
 msgid "number of labels must equal number of intervals"
 msgstr "liczba etykiet musi równać się liczbie interwałów"
 
-#. R/print.pyears.R: gettextf("number of observations = %d", object$observations, domain = "R-survival")
+#. R/print.pyears.R: gettext("number of observations = ", domain = "R-survival")
 #: R/print.pyears.R:0
-msgid "number of observations = %d"
+#, fuzzy
+msgid "number of observations ="
 msgstr "liczba obserwacji = %d"
 
 #. R/cch.R: stop("number of records greater than cohort size")
@@ -2818,9 +2946,9 @@ msgstr "tylko pierwszy punkt końcowy został użyty"
 msgid "only the last dimension can be interpolated"
 msgstr "tylko ostatni wymiar może być interpolowany"
 
-#. R/parsecovar.R: stop("option not recognized in a covariates formula: ", paste(ff[is.na(index)], collapse = ", "))
+#. R/parsecovar.R: gettextf("option not recognized in a covariates formula: %s", paste(ff[is.na(index)],     collapse = ", "))
 #: R/parsecovar.R:0
-msgid "option not recognized in a covariates formula:"
+msgid "option not recognized in a covariates formula: %s"
 msgstr ""
 
 #. R/tmerge.R: stop("options must be a list")
@@ -2907,6 +3035,12 @@ msgstr "błędna długość parametrów początkowych"
 msgid "pyears cannot handle stratified Cox models"
 msgstr "funkcja 'pyears()' nie może obsługiwać warstowych modeli Cox'a"
 
+#. R/Surv2.R: stop("quantile method not defined for Surv2 objects")
+#: R/Surv2.R:0
+#, fuzzy
+msgid "quantile method not defined for Surv2 objects"
+msgstr "argument '%s' nie jest obiektem klasy %s"
+
 #. R/Surv.R: stop("quantile method not defined for multiple-endpoint Surv objects")
 #: R/Surv.R:0
 #, fuzzy
@@ -2929,6 +3063,11 @@ msgstr ""
 msgid "reference distribution was not found"
 msgstr "rozkład referencyjny nie został znaleziony"
 
+#. R/tmerge.R: gettextf("replacement of variable '%s'", argname[ii])
+#: R/tmerge.R:0
+msgid "replacement of variable '%s'"
+msgstr ""
+
 #. R/aareg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/anova.survreg.R: gettextf("response is not an object of class %s", dQuote("Surv"))
 #. R/cch.R: gettextf("response is not an object of class %s", dQuote("Surv"))
@@ -2939,12 +3078,6 @@ msgstr "rozkład referencyjny nie został znaleziony"
 #: R/survreg.R:0
 msgid "response is not an object of class %s"
 msgstr "zmienna zależna nie jest obiektem klasy %s"
-
-#. R/survcheck.R: stop("response must be a survival object")
-#: R/survcheck.R:0
-#, fuzzy
-msgid "response must be a survival object"
-msgstr "y musi być obiektem klasy \"surv\""
 
 #. R/survcheck.R: stop("response must be right censored")
 #: R/survcheck.R:0
@@ -2989,6 +3122,12 @@ msgid ""
 "routine failed due to numeric overflow. This should never happen. Please "
 "contact the author."
 msgstr ""
+
+#. R/print.pyears.R: stop("scale must be a value > 0")
+#: R/print.pyears.R:0
+#, fuzzy
+msgid "scale must be a value > 0"
+msgstr "argument '%s' musi być liczbą >= 0"
 
 #. R/yates.R: stop("sgtt method only applies if population = sas and predict = linear")
 #: R/yates.R:0
@@ -3045,8 +3184,7 @@ msgstr "czas startu = %s jest większy niż wszystkie punkty czasowe."
 
 #. R/survfit.coxph.R: stop("start.time must be a single numeric value")
 #. R/survfit.matrix.R: stop("start.time must be a single numeric value")
-#. R/survfitCI.R: stop("start.time must be a single numeric value")
-#: R/survfit.coxph.R:0 R/survfit.matrix.R:0 R/survfitCI.R:0
+#: R/survfit.coxph.R:0 R/survfit.matrix.R:0
 msgid "start.time must be a single numeric value"
 msgstr "'start.time' musi być pojedynczą wartością liczbową"
 
@@ -3083,10 +3221,10 @@ msgstr "status musi mieć wartość 0, 1, 2 lub 3; zmieniono na NA"
 msgid "stop time must be > start time, NA created"
 msgstr "czas stopu musi być > od czasu startu, utworzono wartość NA"
 
-#. R/survfit.R: paste("strata", paste(i[is.na(indx)], collapse = " "), "not matched")
+#. R/survfit.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "))
 #: R/survfit.R:0
-msgid "strata"
-msgstr ""
+msgid "strata %s not matched"
+msgstr "warstwa %s nie została dopasowana"
 
 #. R/aareg.R: stop("strata terms not allowed")
 #: R/aareg.R:0
@@ -3148,6 +3286,19 @@ msgstr "obiekt klasy \"survfit\" nie ma 2 wymiarów"
 msgid "tdc initial value must be of length 1"
 msgstr ""
 
+#. R/tmerge.R: stop("tdc update does not match prior variable type: ", argname[ii])
+#. R/tmerge.R: stop("tdc update does not match prior variable type: ", argname[ii])
+#. R/tmerge.R: stop("tdc update does not match prior variable type: ", argname[ii])
+#: R/tmerge.R:0
+#, fuzzy
+msgid "tdc update does not match prior variable type:"
+msgstr "macierz 'x' nie zgadza sę z tablicą częstości"
+
+#. R/tmerge.R: stop("tdc update's levels do not match prior variable: ", argname[ii])
+#: R/tmerge.R:0
+msgid "tdc update's levels do not match prior variable:"
+msgstr ""
+
 #. R/tmerge.R: stop("tdcstart must be a single value")
 #: R/tmerge.R:0
 msgid "tdcstart must be a single value"
@@ -3163,12 +3314,24 @@ msgstr "człon '%s' nie został znaleziony w dopasowaniu"
 msgid "term '%s' not found in the model"
 msgstr "człon '%s' nie został znaleziony w modelu"
 
-#. R/parsecovar.R: stop("term found without a :", x)
+#. R/parsecovar.R: stop("term found without a ':' ", x)
 #: R/parsecovar.R:0
-msgid "term found without a :"
+msgid "term found without a ':'"
 msgstr ""
 
-#. R/print.pyears.R: gettextf("the %s argument(s) must be single logical values", paste(tname[!temp],     collapse = ", "), domain = "R-survival")
+#. R/parsecovar.R: stop("termmatch failure 1")
+#: R/parsecovar.R:0
+#, fuzzy
+msgid "termmatch failure 1"
+msgstr "niezgodność długości danych"
+
+#. R/parsecovar.R: stop("termmatch failure 2")
+#: R/parsecovar.R:0
+#, fuzzy
+msgid "termmatch failure 2"
+msgstr "niezgodność długości danych"
+
+#. R/print.pyears.R: gettextf("the %s argument(s) must be single logical values", paste(tname[!temp],     collapse = ", "))
 #: R/print.pyears.R:0
 #, fuzzy
 msgid "the %s argument(s) must be single logical values"
@@ -3270,10 +3433,10 @@ msgstr "funkcja 'survfit()' wymaga formuły jako pierwszego argumentu"
 msgid "the term must be a formula, character string, or integer"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
 
-#. R/coxph.R: stop("the tt() transform is not implemented for multi-state models")
+#. R/coxph.R: stop("the tt() transform is not implemented for multi-state or Surv2 models")
 #: R/coxph.R:0
 #, fuzzy
-msgid "the tt() transform is not implemented for multi-state models"
+msgid "the tt() transform is not implemented for multi-state or Surv2 models"
 msgstr "argument 'robust' nie jest zaimplementowany dla warstwowej analizy"
 
 #. R/match.ratetable.R: gettextf("the variable %s is out of range", dimid[i])
@@ -3570,13 +3733,6 @@ msgstr "wszystkie argumenty muszą mieć tę samą długość"
 msgid "y and weights are not the same length"
 msgstr "wszystkie argumenty muszą mieć tę samą długość"
 
-#. R/survfitKM.R: stop("y must be a Surv object")
-#. R/xtras.R: stop("y must be a Surv object")
-#: R/survfitKM.R:0 R/xtras.R:0
-#, fuzzy
-msgid "y must be a Surv object"
-msgstr "y musi być obiektem klasy \"surv\""
-
 #. R/xtras.R: stop("y needs to be of (tstart, tstop) form")
 #: R/xtras.R:0
 msgid "y needs to be of (tstart, tstop) form"
@@ -3654,6 +3810,58 @@ msgstr[0] "nierozpoznana opcja: %s"
 msgstr[1] "nierozpoznane opcje: %s"
 msgstr[2] "nierozpoznane opcje: %s"
 
+#~ msgid "No (non-missing) observations"
+#~ msgstr "brak (niebrakujących) obserwacji"
+
+#, fuzzy
+#~ msgid "Response must be a survival object"
+#~ msgstr "y musi być obiektem klasy \"surv\""
+
+#, fuzzy
+#~ msgid "response must be a Surv2 object"
+#~ msgstr "y musi być obiektem klasy \"surv\""
+
+#, fuzzy
+#~ msgid "y must be a Surv object"
+#~ msgstr "y musi być obiektem klasy \"surv\""
+
+#~ msgid "'%s' argument must be a value > 0"
+#~ msgstr "argument '%s' musi być wartością >= 0"
+
+#~ msgid "A formula argument is required"
+#~ msgstr "Argument 'formula' jest wymagany"
+
+#~ msgid "Collapse vector is the wrong length"
+#~ msgstr "Wektor zapaści jest niepoprawnej długości"
+
+#, fuzzy
+#~ msgid "Individual=TRUE is only valid for counting process data"
+#~ msgstr "argument 'individual' jest poprawny tylko dla danych start:stop"
+
+#, fuzzy
+#~ msgid "Newdata argument must be a data frame"
+#~ msgstr "argument '%s' musi być ramką danych"
+
+#, fuzzy
+#~ msgid "id=NULL is an invalid argument"
+#~ msgstr "'id=NULL' jest niepoprawnym argumentem"
+
+#, fuzzy
+#~ msgid "newdata must be a data frame"
+#~ msgstr "argument 'newdata' musi być ramką danych"
+
+#, fuzzy
+#~ msgid "\" type survival data"
+#~ msgstr "niepoprawny typ przeżycia"
+
+#, fuzzy
+#~ msgid "not matched"
+#~ msgstr "%s nie zostało dopasowane"
+
+#, fuzzy
+#~ msgid "; coefficient may be infinite."
+#~ msgstr "przesunięcia muszą być skończone"
+
 #, fuzzy
 #~ msgid ""
 #~ "'istate' argument should be a vector of positive integers or a factor"
@@ -3662,10 +3870,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 
 #~ msgid "'object' argument must be a list of objects of class \"coxph\""
 #~ msgstr "argument 'object' musi być listą obiektów klasy \"coxph\""
-
-#, fuzzy
-#~ msgid "Cannot handle \"%s\" type survival data"
-#~ msgstr "nie można obsłużyć typu \"%s\" danych przeżycia"
 
 #, fuzzy
 #~ msgid "The individual option is only valid for start-stop data"
@@ -3681,9 +3885,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 #, fuzzy
 #~ msgid "gap in follow-up, id %s"
 #~ msgstr "ujemny czas przeżycia"
-
-#~ msgid "strata %s not matched"
-#~ msgstr "warstwa %s nie została dopasowana"
 
 #, fuzzy
 #~ msgid "subject is in two different groups, id %s"
@@ -3731,10 +3932,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 #~ msgstr "wejście musi być kwadratową macierzą krzywych przeżycia"
 
 #, fuzzy
-#~ msgid "scale must be a value > 0"
-#~ msgstr "argument '%s' musi być liczbą >= 0"
-
-#, fuzzy
 #~ msgid "subject changes to the same state, id %s"
 #~ msgstr "obiekt zmienia się do tego samego stanu, id %s"
 
@@ -3750,16 +3947,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 
 #~ msgid "illegal 'factor' level of NA"
 #~ msgstr "niepoprawna wartość NA poziomu czynnika"
-
-#~ msgid ""
-#~ "Matches to the chosen rate table:\n"
-#~ "  %s"
-#~ msgstr ""
-#~ "Dopasowania do wybranej tabeli szybkości:\n"
-#~ "  %s"
-
-#~ msgid "Observations in the data set:"
-#~ msgstr "Obserwacje w zbiorze danych:"
 
 #, fuzzy
 #~ msgid "invalid p0 vector"
@@ -3929,9 +4116,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 #~ msgid "'%s' option is set, but no '%s' argument"
 #~ msgstr "wybrano opcję '%s', ale brak argumentu '%s'"
 
-#~ msgid "'method != fixed', but have a 'theta' argument"
-#~ msgstr "'method != fixed', ale obecny jest argument 'theta'"
-
 #~ msgid "'method = df' but no 'df' argument"
 #~ msgstr "'method = df', ale brak argumentu 'df'"
 
@@ -4041,9 +4225,6 @@ msgstr[2] "nierozpoznane opcje: %s"
 
 #~ msgid "invalid 'strata' argument"
 #~ msgstr "niepoprawny argument 'strata'"
-
-#~ msgid "'time' and 'time2' arguments are of different lengths"
-#~ msgstr "argumenty 'time' oraz 'time2' mają różną długość"
 
 #~ msgid "'cutpoints' component is not a list"
 #~ msgstr "komponent 'cutpoints' nie jest listą"

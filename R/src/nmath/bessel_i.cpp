@@ -224,7 +224,7 @@ static void I_bessel(double *x, double *alpha, int *nb,
     /*-------------------------------------------------------------------
       Mathematical constants
       -------------------------------------------------------------------*/
-    const static double const__ = 1.585;
+    static constexpr double const__ = 1.585;
 
     /* Local variables */
     int nend, intx, nbmx, k, l, n, nstart;

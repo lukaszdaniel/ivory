@@ -28,7 +28,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
 
     if (!terms) {
         # create a fake asgn that has one value per coefficient
-        asgn <- as.list(1:nvar)
+        asgn <- as.list(seq_len(nvar))
         names(asgn) <- names(fit$coefficients)
     }
     else if (inherits(fit, "coxme")) {
@@ -119,7 +119,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
         imat <- imatr[kk, kk]
         u <- c(u0, resid$u[jj+nvar])
         if (singledf && length(jj) >1) {
-            vv <- solve(imat)[-(seq_len(nvar)), -(seq_len(nvar))]
+            vv <- solve(imat)[-seq_len(nvar), -(seq_len(nvar))]
             t1 <- sum(fit$coef[jj] * resid$u[jj+nvar])
             test[ii] <- t1^2 * (fit$coef[jj] %*% vv %*% fit$coef[jj])
             df[ii] <- 1
@@ -133,7 +133,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
 
     #Global test
     if (global) {
-        u <- c(u0, resid$u[-(seq_len(nvar))])
+        u <- c(u0, resid$u[-seq_len(nvar)])
         test[nterm+1] <- solve(imatr, u) %*% u
         if (is.null(fit$df))  df[nterm+1]   <- nvar
         else df[nterm+1] <- sum(fit$df)
@@ -168,7 +168,7 @@ cox.zph <- function(fit, transform='km', terms=TRUE, singledf =FALSE,
     # with strata*covariate interactions (multi-state models for instance) the
     #  imatr matrix will be block diagonal.  Don't divide these off diagonal zeros
     #  by a wtmat value of zero.
-    vmean <- imatr[1:nvar, 1:nvar, drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
+    vmean <- imatr[seq_len(nvar), seq_len(nvar), drop=FALSE]/ifelse(wtmat==0, 1, wtmat)
 
     sresid <- resid$schoen
     if (terms && any(sapply(asgn, length) > 1)) { # collase multi-column terms

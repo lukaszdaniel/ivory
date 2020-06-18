@@ -37,7 +37,7 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
     else alist <- x$assign2
 
     print2 <- NULL
-    for (i in 1:nterms) {
+    for (i in seq_len(nterms)) {
 	kk <- alist[[i]]
 	if (print.map[i] >0) {
 	    j <- print.map[i]	

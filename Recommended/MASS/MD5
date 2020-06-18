@@ -193,12 +193,12 @@ cfe49768ecb548ac7f483e75ce75d0e0 *inst/NEWS
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 7fea2161b12d01c8940107342815dd0e *tests/hubers.R
 80c50d5c299f0d0a4dbbb457a235faba *tests/lme.R
-bc6250483c67b62668e56529c57bd03a *tests/fitdistr.Rout.save
+42f71c1c4af42d1cf0d05464593c7776 *tests/fitdistr.Rout.save
 d87553db40364fdc9c337fa31c009b17 *tests/confint.R
 edee76adc2d27e4ba90f1ff79360148b *tests/polr.R
-d2bdd25be0a09cba42824bf9aa3a7b4e *tests/regression.Rout.save
+1e3dd3ef7513dba9403fb73b23ab3f97 *tests/regression.Rout.save
 f5fd08eb22747dbe31443bc3560cfa2d *tests/scripts.R
-c899cbc1c0b09b960ccb4671be157740 *tests/Examples/MASS-Ex.Rout.save
+1e13c8dc0f5c92028878f44b26d1fb0a *tests/Examples/MASS-Ex.Rout.save
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R

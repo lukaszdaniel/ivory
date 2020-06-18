@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / foreign 0.8-38\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:45+0100\n"
+"POT-Creation-Date: 2020-06-17 19:43+0200\n"
 "PO-Revision-Date: 2012-10-11 13:34+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -276,7 +276,7 @@ msgstr ""
 msgid "fread(%d) failed on DBF file"
 msgstr ""
 
-#: file-handle.c:115
+#: file-handle.c:112
 #, c-format
 msgid "file handle `%s' has not been previously declared on FILE HANDLE"
 msgstr ""

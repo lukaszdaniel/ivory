@@ -58,8 +58,8 @@ double Rf_pnt(double t, double df, double ncp, int lower_tail, int log_p)
 
     /* note - itrmax and errmax may be changed to suit one's needs. */
 
-    const int itrmax = 1000;
-    const static double errmax = 1.e-12;
+    constexpr int itrmax = 1000;
+    static constexpr double errmax = 1.e-12;
 
     if (df <= 0.0) ML_WARN_return_NAN;
     if(ncp == 0.0) return Rf_pt(t, df, lower_tail, log_p);

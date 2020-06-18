@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-06-12 r1229) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-06-12 r78687) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3918,7 +3918,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x55d6b104d978>
+<environment: 0x55f5801a9c28>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4955,7 +4955,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x55d6b21cd248>
+<bytecode: 0x55f58132a9b8>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7580,7 +7580,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x55d6b23c68c8>
+<environment: 0x55f581b5ad78>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -12270,14 +12270,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x55d6b23b36a8>
-<environment: 0x55d6b2496c98>
+<bytecode: 0x55f5814d7c48>
+<environment: 0x55f5815f55c8>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x55d6b23b3528>
-<environment: 0x55d6b2496c98>
+<bytecode: 0x55f5814d7ac8>
+<environment: 0x55f5815f55c8>
 
 > 
 > 
@@ -16522,8 +16522,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x55d6b3039988>
-<environment: 0x55d6b3165518>
+<bytecode: 0x55f582192068>
+<environment: 0x55f5822bd1d8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18771,7 +18771,8 @@ Test for independence of all factors:
 	Chisq = 2000.3, df = 16, p-value = 0
 > 
 > ## with NA's
-> DN <- DF; DN[cbind(6:9, c(1:2,4,1))] <- NA; DN
+> DN <- DF; DN[cbind(6:9, c(1:2,4,1))] <- NA
+> DN # 'Freq' is missing only for (Rejected, Female, B)
       Admit Gender Dept Freq
 1  Admitted   Male    A  512
 2  Rejected   Male    A  313
@@ -18798,24 +18799,41 @@ Test for independence of all factors:
 23 Admitted Female    F   24
 24 Rejected Female    F  317
 > tools::assertError(# 'na.fail' should fail :
-+      xtabs(Freq ~ Gender + Admit, DN, na.action=na.fail))
-> xtabs(Freq ~ Gender + Admit, DN)
++      xtabs(Freq ~ Gender + Admit, DN, na.action=na.fail), verbose=TRUE)
+Asserted error: missing values in 'object' argument
+> op <- options(na.action = "na.omit") # the "factory" default
+> (xtabs(Freq ~ Gender + Admit, DN) -> xtD)
         Admit
 Gender   Admitted Rejected
   Male       1078     1286
   Female      540     1270
+> noC <- function(O) `attr<-`(O, "call", NULL)
+> ident_noC <- function(x,y) identical(noC(x), noC(y))
+> stopifnot(exprs = {
++   ident_noC(xtD, xtabs(Freq ~ Gender + Admit, DN, na.action = na.omit))
++   ident_noC(xtD, xtabs(Freq ~ Gender + Admit, DN, na.action = NULL))
++ })
+> 
 > xtabs(Freq ~ Gender + Admit, DN, na.action = na.pass)
         Admit
 Gender   Admitted Rejected
   Male       1078     1286
   Female      540         
 > ## The Female:Rejected combination has NA 'Freq' (and NA prints 'invisibly' as "")
-> xtabs(Freq ~ Gender + Admit, DN, addNA = TRUE) # ==> count NAs
+> (xtNA <- xtabs(Freq ~ Gender + Admit, DN, addNA = TRUE)) # ==> count NAs
         Admit
 Gender   Admitted Rejected <NA>
   Male       1078     1286  327
   Female      540             0
   <NA>         17        0    0
+> ## show NA's better via  na.print = ".." :
+> print(xtNA, na.print= "NA")
+        Admit
+Gender   Admitted Rejected <NA>
+  Male       1078     1286  327
+  Female      540       NA    0
+  <NA>         17        0    0
+> 
 > 
 > ## Create a nice display for the warp break data.
 > warpbreaks$replicate <- rep_len(1:9, 54)
@@ -18932,7 +18950,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  9.014 0.191 9.214 0 0 
+Time elapsed:  9.313 0.172 9.485 0 0 
 > grDevices::dev.off()
 null device 
           1 

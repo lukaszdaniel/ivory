@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-02-17 r1217) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-17 r1231) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-02-17 r77919) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-17 r78705) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -50,8 +50,12 @@ Type 'q()' to quit R.
 > # I also am checking that missing values propogate
 > test1 <- data.frame(time=  c(9, 3,1,1,6,6,8),
 +                     status=c(1,NA,1,0,1,1,0),
-+                     x=     c(0, 2,1,1,1,0,0))
-> fit1 <- survreg(Surv(time, status) ~ x + cluster(1:7), test1)
++                     x=     c(0, 2,1,1,1,0,0),
++                     id=  1:7)
+> fit1 <- survreg(Surv(time, status) ~ x, cluster = id, test1)
+> fit2 <- survreg(Surv(time, status) ~ x + cluster(id), test1) #old form
+> all.equal(fit1, fit2)
+[1] TRUE
 > 
 > db1 <- resid(fit1, 'dfbeta')
 > ijack <-db1
@@ -93,4 +97,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  1.144   0.049   1.185 
+  2.437   0.051   2.501 

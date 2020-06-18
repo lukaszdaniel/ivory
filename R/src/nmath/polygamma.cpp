@@ -143,12 +143,12 @@
 #include <errno.h>
 #endif
 
-#define n_max (100)
+constexpr int n_max = 100;
 
 /* From R, currently only used for kode = 1, m = 1 : */
 void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
 {
-    const static double bvalues[] = {	/* Bernoulli Numbers */
+    static constexpr double bvalues[] = {	/* Bernoulli Numbers */
 	 1.00000000000000000e+00,
 	-5.00000000000000000e-01,
 	 1.66666666666666667e-01,

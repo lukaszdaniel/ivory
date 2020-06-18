@@ -1213,12 +1213,12 @@ next_char:
 
 
 #ifdef _WIN32
-static const char TO_WCHAR[] = "UCS-2LE";
+static constexpr char TO_WCHAR[] = "UCS-2LE";
 #else
 # ifdef WORDS_BIGENDIAN
-static const char TO_WCHAR[] = "UCS-4BE";
+static constexpr char TO_WCHAR[] = "UCS-4BE";
 # else
-static const char TO_WCHAR[] = "UCS-4LE";
+static constexpr char TO_WCHAR[] = "UCS-4LE";
 # endif
 #endif
 
@@ -1578,9 +1578,9 @@ invalidate_cached_recodings(void)
 
 /* in C11 these could use char32_t */
 #ifdef WORDS_BIGENDIAN
-static const char UNICODE[] = "UCS-4BE";
+static constexpr char UNICODE[] = "UCS-4BE";
 #else
-static const char UNICODE[] = "UCS-4LE";
+static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.c and devX11.c */

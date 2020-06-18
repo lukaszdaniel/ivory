@@ -127,7 +127,7 @@ if (has.ratetable) {
              stop("Unable to match new data to old formula")
         R <- model.matrix.coxph(ratetable, data=rdata)
         }
-    else stop("Invalid ratetable")
+    else stop("invalid rate table")
     }
 @ 
 
@@ -317,7 +317,7 @@ if (data.frame) {
         keep <- (temp$pyears >0)  # what rows to keep in the output
         # grab prototype rows from the model frame, this preserves class
         #  (unless it is a tcut variable, then we know what to do)
-        tdata <- lapply(1:length(ovars), function(i) {
+        tdata <- lapply(seq_along(ovars), function(i) {
             temp <- mf[[ovars[i]]]
             if (inherits(temp, "tcut")) factor(outdname[[i]], outdname[[i]])
             else temp[match(outdname[[i]], temp)]

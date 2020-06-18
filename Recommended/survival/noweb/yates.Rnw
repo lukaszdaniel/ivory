@@ -50,7 +50,7 @@ cmatrix <- function(fit, term,
                     test =c("global", "trend", "pairwise"),
                     levels, assign) {
     # Make sure that "fit" is present and isn't missing any parts.
-    if (missing(fit)) stop("a fit argument is required")
+    if (missing(fit)) stop(gettextf("'%s' argument is required", "fit"))
     Terms <- try(terms(fit), silent=TRUE)
 
     if (inherits(Terms, "try-error"))
@@ -61,7 +61,7 @@ cmatrix <- function(fit, term,
     Tatt$dataClasses <- Tatt$dataClasses[row.names(Tatt$factors)]
     test <- match.arg(test)
 
-    if (missing(term)) stop("a term argument is required")
+    if (missing(term)) stop(gettextf("'%s' argument is required", "term"))
     if (is.character(term)) term <- formula(paste("~", term))
     else if (is.numeric(term)) {
         if (all(term == floor(term) & term >0 & term < length(Tatt$term.labels)))
@@ -82,12 +82,12 @@ cmatrix <- function(fit, term,
         temp <- fatt$term.labels
         temp2 <- Tatt$term.labels
         temp2[grepl(":", temp2)] <- ""
-        for (i in 1:length(temp)) {
+        for (i in seq_along(temp)) {
             j <- grep(temp[i], Tatt$term.labels)
             k <- grep(temp[i], temp2)
             if (length(j)==1) temp[i] <- Tatt$term.labels[j]
             else if (length(k)==1) temp[i] <- Tatt$term.labels[k]
-            else stop("term '", temp[i], "' not found in the fit")
+            else stop(gettextf("term '%s' not found in the fit", temp[i]))
             }
         fterm <- terms(formula( paste("~", paste(temp, collapse="+"))))
         fatt <- attributes(fterm)
@@ -99,7 +99,7 @@ cmatrix <- function(fit, term,
     if (missing(assign)) stop("the fit is missing an assign component")
     if (is.list(assign)) {
         # old style assign as used in Splus, and still used in coxph
-        assign <- rep(1:length(assign), sapply(assign, length))
+        assign <- rep(seq_along(assign), sapply(assign, length))
     }
     ncoef <- length(assign)
     whichcol <- which(assign %in% indx & !is.na(coef(fit)))
@@ -135,7 +135,7 @@ cmatrix <- function(fit, term,
         }
         else if (is.list(levels)) {
             if (length(levels) != length(parts))
-                stop("levels list should have", length(parts), "components")
+                stop(sprintf(ngettext(length(parts), "levels list should have %d component", "levels list should have %d components", domain = "R-survival"), length(parts)), domain = NA)
             if (!is.null(names(levels))) {
                 temp <- match(names(levels), parts)
                 if (any(is.null(temp)))
@@ -168,7 +168,7 @@ cmatrix <- function(fit, term,
     for (i in which(iscat==1)) {
         xlev <- fit$xlevels[[parts[i]]]
         if (is.null(xlev))
-            stop("xlevels attribute not found for", parts[i])
+            stop(gettextf("xlevels attribute not found for %s", parts[i]))
         temp <- match(levels[[parts[i]]], xlev)
         if (any(is.na(temp)))
             stop("invalid level for term", parts[i])
@@ -223,7 +223,7 @@ else {
     cmat <- vector("list", npair +1)
     k <- 1
     cname <- rep("", npair)
-    for (i in 1:(nlev-1)) {
+    for (i in seq_len(nlev-1)) {
         temp <- double(nlev)
         temp[tindex[i]] <- 1
         for (j in (i+1):nlev) {
@@ -251,7 +251,7 @@ entire range.
 
 <<cmatrix-build-linear>>=
 cmat <- vector("list", 2)
-cmat[[1]] <- matrix(1:ntest, 1, ntest)
+cmat[[1]] <- matrix(seq_len(ntest), 1, ntest)
 cmat[[2]] <- diag(ntest)
 attr(cmat, "nested") <- TRUE
 if (is.null(levels[[1]])) {

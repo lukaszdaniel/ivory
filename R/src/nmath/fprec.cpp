@@ -42,7 +42,7 @@
    further ones, Feb.2000:
    Replace  pow(x, (double)i) by  R_pow_di(x, i) {and use  int dig} */
 
-#define MAX_DIGITS 22
+constexpr int MAX_DIGITS = 22;
 /* was till R 0.99: DBL_DIG := digits of precision of a double, usually 15 */
 /* FIXME: Hmm, have quite a host of these:
 
@@ -60,7 +60,7 @@ double Rf_fprec(double x, double digits)
     double l10, pow10, sgn, p10, P10;
     int e10, e2, do_round, dig;
     /* Max.expon. of 10 (=308.2547) */
-    const static int max10e = (int) (DBL_MAX_EXP * M_LOG10_2);
+    static constexpr int max10e = (int) (DBL_MAX_EXP * M_LOG10_2);
 
     if (ISNAN(x) || ISNAN(digits))
 	return x + digits;

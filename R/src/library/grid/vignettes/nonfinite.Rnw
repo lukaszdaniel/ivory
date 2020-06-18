@@ -104,7 +104,7 @@ primtest2 <- function(nas, na) {
     y <- 0.5 + 0.4*sin(t)
     x <- 0.5 + 0.4*cos(t)
     if (any(nas))
-        grid.text(paste("NA", (1:n)[nas], sep = ""),
+        grid.text(paste("NA", seq_len(n)[nas], sep = ""),
                   x[nas], y[nas], gp = gpar(col = "grey"))
     x[nas] <- na
     y[nas] <- na

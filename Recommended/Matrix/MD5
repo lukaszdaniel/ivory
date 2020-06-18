@@ -210,8 +210,8 @@ c97e1324fa0cacc27329e49f77248125 *tests/factorizing.R
 92213c349590000081de59b1fb21bebe *tests/Class+Meth.R
 4966b9ac5a23de46814439a84174973b *tests/abIndex-tsts.R
 7723c00eb9f4ef3b3b2149da6b1a9621 *tests/validObj.R
-a210c0156b7d375624c1adc4dad1c8cd *tests/indexing.Rout.save
-30591c8ae554034a1bcd08f08c978720 *tests/bind.Rout.save
+cc9bd47ede861867e386c6a8359eb549 *tests/indexing.Rout.save
+764f75f772da2ea09e9afa8d04fd5353 *tests/bind.Rout.save
 f2ad5375e270deeb7b041272dd095032 *cleanup
 cac2aed2748ce92e00d6a59c1120619d *R/eigen.R
 89906a3cd04333869a7c68a5105f1d37 *R/dgTMatrix.R
