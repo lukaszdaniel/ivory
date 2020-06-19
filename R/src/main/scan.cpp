@@ -49,22 +49,22 @@
 #endif
 
 /* The size of vector initially allocated by scan */
-#define SCAN_BLOCKSIZE		1000
+constexpr int SCAN_BLOCKSIZE = 1000;
 /* The size of the console buffer */
 /* NB:  in Windows this also needs to be set in gnuwin32/getline/getline.c */
-#define CONSOLE_PROMPT_SIZE	256
+constexpr int CONSOLE_PROMPT_SIZE = 256;
 
-#define NO_COMCHAR 100000 /* won't occur even in Unicode */
+constexpr int NO_COMCHAR = 100000; /* won't occur even in Unicode */
 
 
 /* The number of distinct strings to track */
-#define MAX_STRINGS	10000
+constexpr int MAX_STRINGS = 10000;
 
 static unsigned char ConsoleBuf[CONSOLE_BUFFER_SIZE + 1], *ConsoleBufp;
 static int ConsoleBufCnt;
 static char ConsolePrompt[CONSOLE_PROMPT_SIZE];
 
-typedef struct
+struct LocalData
 {
 	SEXP NAstrings;
 	int quiet;
@@ -83,27 +83,27 @@ typedef struct
 	Rboolean embedWarn;
 	Rboolean skipNul;
 	char convbuf[100];
-} LocalData;
+};
 
 static SEXP insertString(char *str, LocalData *l)
 {
     cetype_t enc = CE_NATIVE;
     if (l->con->UTF8out || l->isUTF8) enc = CE_UTF8;
     else if (l->isLatin1) enc = CE_LATIN1;
-    return mkCharCE(str, enc);
+    return Rf_mkCharCE(str, enc);
 }
 
-R_INLINE static Rboolean Rspace(unsigned int c)
+R_INLINE static bool Rspace(unsigned int c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
+    if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return true;
 #ifdef _WIN32
     /* 0xa0 is NBSP in all 8-bit Windows locales */
-    if(!mbcslocale && c == 0xa0) return TRUE;
+    if(!mbcslocale && c == 0xa0) return true;
 #else
      /* 0xa0 is NBSP in Latin-1 */
-    if(known_to_be_latin1 && c == 0xa0) return TRUE;
+    if(known_to_be_latin1 && c == 0xa0) return true;
 #endif
-    return FALSE;
+    return false;
 }
 
 

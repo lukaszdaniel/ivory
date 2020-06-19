@@ -22,14 +22,15 @@
 #include <Rmath.h>
 
 #include <stdio.h>
-typedef enum {
+enum N01type
+{
     BUGGY_KINDERMAN_RAMAGE,
     AHRENS_DIETER,
     BOX_MULLER,
     USER_NORM,
     INVERSION,
     KINDERMAN_RAMAGE
-} N01type;
+};
 
 int
 main(int argc, char** argv)

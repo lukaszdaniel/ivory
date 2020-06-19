@@ -65,10 +65,10 @@
  *  2. Accessing native routines in base (the R executable).
  *
  *  In this case, we use the registration mechanism and the DllInfo array
- *  in ../main/Rdynload.c to locate functions in the executable. We do this
+ *  in ../main/Rdynload.cpp to locate functions in the executable. We do this
  *  by straight linear search through the table.
  *  Note that the base routines registered are listed in
- *               ../main/registration.c
+ *               ../main/registration.cpp
  *  and are registered during the initialization of the R engine.
  *
  *
@@ -106,7 +106,7 @@
 #endif
 
 #ifdef _WIN32
-# define HAVE_DYNAMIC_LOADING
+#define HAVE_DYNAMIC_LOADING
 #endif
 
 
@@ -467,7 +467,7 @@ static void Rf_freeDllInfo(DllInfo *info)
 typedef void (*DllInfoUnloadCall)(DllInfo *);
 typedef DllInfoUnloadCall DllInfoInitCall;
 
-static Rboolean R_callDLLUnload(DllInfo *dllInfo)
+static bool R_callDLLUnload(DllInfo *dllInfo)
 {
     char buf[1024];
     DllInfoUnloadCall f;
@@ -478,7 +478,7 @@ static Rboolean R_callDLLUnload(DllInfo *dllInfo)
     f = (DllInfoUnloadCall) R_dlsym(dllInfo, buf, &symbol);
     if(f) f(dllInfo);
 
-    return(TRUE);
+    return true;
 }
 
 	/* Remove the specified DLL from the current DLL list */

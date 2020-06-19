@@ -27,10 +27,10 @@
 extern "C" {
 #endif
 
-int	R_fgetc(FILE*);
-FILE *	R_fopen(const char *filename, const char *mode);
-int	R_isatty(int fd);
-int	R_is_redirection_tty(int fd);
+int R_fgetc(FILE *);
+FILE *R_fopen(const char *filename, const char *mode);
+int R_isatty(int fd);
+int R_is_redirection_tty(int fd);
 
 #ifdef __cplusplus
 } //extern "C"

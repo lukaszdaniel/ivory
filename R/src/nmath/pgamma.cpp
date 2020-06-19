@@ -252,11 +252,11 @@ double Rf_logspace_sub(double logx, double logy)
  * without causing overflows or throwing much accuracy.
  */
 #ifdef HAVE_LONG_DOUBLE
-# define EXP expl
-# define LOG logl
+#define EXP expl
+#define LOG logl
 #else
-# define EXP exp
-# define LOG log
+#define EXP exp
+#define LOG log
 #endif
 double Rf_logspace_sum(const double* logx, int n)
 {

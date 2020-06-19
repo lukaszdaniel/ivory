@@ -28,11 +28,10 @@
 #include <Internal.h>
 #include <R_ext/Random.h>
 
-/* Normal generator is not actually set here but in ../nmath/snorm.c */
-#define RNG_DEFAULT MERSENNE_TWISTER
-#define N01_DEFAULT INVERSION
-#define Sample_DEFAULT REJECTION
-
+/* Normal generator is not actually set here but in ../nmath/snorm.cpp */
+const RNGtype &RNG_DEFAULT = MERSENNE_TWISTER;
+const N01type &N01_DEFAULT = INVERSION;
+const Sampletype &Sample_DEFAULT = REJECTION;
 
 #include <R_ext/Rdynload.h>
 
@@ -42,12 +41,12 @@ typedef void (*UnifInitFun)(Int32);
 
 UnifInitFun User_unif_init = NULL; /* some picky compilers */
 
-DL_FUNC  User_norm_fun = NULL; /* also in ../nmath/snorm.c */
+DL_FUNC  User_norm_fun = NULL; /* also in ../nmath/snorm.cpp */
 
 #include "nmath2.h"
 static RNGtype RNG_kind = RNG_DEFAULT;
-//extern N01type N01_kind; /* from ../nmath/snorm.c */
-//extern double BM_norm_keep; /* ../nmath/snorm.c */
+//extern N01type N01_kind; /* from ../nmath/snorm.cpp */
+//extern double BM_norm_keep; /* ../nmath/snorm.cpp */
 static Sampletype Sample_kind = REJECTION;
 
 /* typedef unsigned int Int32; in Random.h */
@@ -58,14 +57,14 @@ static Sampletype Sample_kind = REJECTION;
  * currently in  outer(outer(0:7, 100*(0:5), "+"), 10000*(0:1), "+")
  */
 
-typedef struct {
+struct RNGTAB
+{
     RNGtype kind;
     N01type Nkind;
-    const char * const name; /* print name */
-    int n_seed; /* length of seed vector */
+    const char *const name; /* print name */
+    int n_seed;             /* length of seed vector */
     Int32 *i_seed;
-} RNGTAB;
-
+};
 
 static Int32 dummy[628]; // allow for optimizing compilers to read over bound
 static
@@ -620,26 +619,25 @@ void seed_out(long *ignored)
 */
 
 /* Period parameters */
-#define N 624
-#define M 397
-#define MATRIX_A 0x9908b0df   /* constant vector a */
-#define UPPER_MASK 0x80000000 /* most significant w-r bits */
-#define LOWER_MASK 0x7fffffff /* least significant r bits */
+constexpr int N = 624;
+constexpr int M = 397;
+constexpr Int32 MATRIX_A = 0x9908b0df;   /* constant vector a */
+constexpr Int32 UPPER_MASK = 0x80000000; /* most significant w-r bits */
+constexpr Int32 LOWER_MASK = 0x7fffffff; /* least significant r bits */
 
 /* Tempering parameters */
-#define TEMPERING_MASK_B 0x9d2c5680
-#define TEMPERING_MASK_C 0xefc60000
+constexpr Int32 TEMPERING_MASK_B = 0x9d2c5680;
+constexpr Int32 TEMPERING_MASK_C = 0xefc60000;
 #define TEMPERING_SHIFT_U(y)  (y >> 11)
 #define TEMPERING_SHIFT_S(y)  (y << 7)
 #define TEMPERING_SHIFT_T(y)  (y << 15)
 #define TEMPERING_SHIFT_L(y)  (y >> 18)
 
-static Int32 *mt = dummy+1; /* the array for the state vector  */
-static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
+static Int32 *mt = dummy + 1; /* the array for the state vector  */
+static int mti = N + 1;       /* mti==N+1 means mt[N] is not initialized */
 
 /* Initializing the array with a seed */
-static void
-MT_sgenrand(Int32 seed)
+static void MT_sgenrand(Int32 seed)
 {
     int i;
 
@@ -664,7 +662,7 @@ MT_sgenrand(Int32 seed)
 static double MT_genrand(void)
 {
     Int32 y;
-    static Int32 mag01[2]={0x0, MATRIX_A};
+    static Int32 mag01[2] = {0x0, MATRIX_A};
     /* mag01[x] = x * MATRIX_A  for x=0,1 */
 
     mti = dummy[0];

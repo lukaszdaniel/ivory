@@ -64,7 +64,7 @@ double exp_rand(void)
     double a = 0.;
     double u = unif_rand();    /* precaution if u = 0 is ever returned */
     while(u <= 0. || u >= 1.) u = unif_rand();
-    while(TRUE) {
+    while(true) {
 	u += u;
 	if (u > 1.)
 	    break;

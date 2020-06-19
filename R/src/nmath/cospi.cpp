@@ -70,7 +70,7 @@ double sinpi(double x) {
 
 // tan(pi * x)  -- exact when x = k/2  for all integer k
 #if defined(HAVE_TANPI) || defined(HAVE___TANPI)
-// for use in arithmetic.c, half-values documented to give NaN
+// for use in arithmetic.cpp, half-values documented to give NaN
 double Rtanpi(double x)
 #else
 double tanpi(double x)

@@ -262,7 +262,7 @@ double Rf_qwilcox(double x, double m, double n, int lower_tail, int log_p)
     int q = 0;
     if (x <= 0.5) {
 	x = x - 10 * DBL_EPSILON;
-	while(TRUE) {
+	while(true) {
 	    p += cwilcox(q, mm, nn) / c;
 	    if (p >= x)
 		break;
@@ -271,7 +271,7 @@ double Rf_qwilcox(double x, double m, double n, int lower_tail, int log_p)
     }
     else {
 	x = 1 - x + 10 * DBL_EPSILON;
-	while(TRUE) {
+	while(true) {
 	    p += cwilcox(q, mm, nn) / c;
 	    if (p > x) {
 		q = (int) (m * n - q);

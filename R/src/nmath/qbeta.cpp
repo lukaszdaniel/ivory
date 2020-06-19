@@ -31,9 +31,9 @@
 #include "dpq.h"
 
 #ifdef DEBUG_qbeta
-# define R_ifDEBUG_printf(...) REprintf(__VA_ARGS__)
+#define R_ifDEBUG_printf(...) REprintf(__VA_ARGS__)
 #else
-# define R_ifDEBUG_printf(...)
+#define R_ifDEBUG_printf(...)
 #endif
 
 #define USE_LOG_X_CUTOFF -5.

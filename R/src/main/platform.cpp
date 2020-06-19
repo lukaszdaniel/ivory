@@ -23,7 +23,7 @@
 
    The 'stat' structure returns a file size as 'off_t'.  On some
    32-bit systems this will fail if called on a file > 2GB.  On
-   systems with LFS selected (see the notes in connections.c) the call
+   systems with LFS selected (see the notes in connections.cpp) the call
    is re-mapped to *stat64, which uses off64_t for the file size.
 
    file.info() returns file sizes as an R double.
@@ -66,7 +66,7 @@
 #ifdef Win32
 /* Mingw-w64 defines this to be 0x0502 */
 #ifndef _WIN32_WINNT
-# define _WIN32_WINNT 0x0500 /* for CreateHardLink */
+#define _WIN32_WINNT 0x0500 /* for CreateHardLink */
 #endif
 #include <windows.h>
 typedef BOOLEAN (WINAPI *PCSL)(LPWSTR, LPWSTR, DWORD);
@@ -92,9 +92,9 @@ const char *formatError(DWORD res);  /* extra.c */
 #undef ABS
 
 #ifdef HAVE_LONG_DOUBLE
-# define DTYPE long double
-# define MACH_NAME machar_LD
-# define ABS fabsl
+#define DTYPE long double
+#define MACH_NAME machar_LD
+#define ABS fabsl
 # include "machar.cpp"
 # undef DTYPE
 # undef MACH_NAME
@@ -120,9 +120,9 @@ static void Init_R_Machine(SEXP rho)
     R_dec_min_exponent = (int) floor(log10(R_AccuracyInfo.xmin)); /* smallest decimal exponent */
 
 #ifdef HAVE_LONG_DOUBLE
-# define MACH_SIZE 18+10
+#define MACH_SIZE 18+10
 #else
-# define MACH_SIZE 18
+#define MACH_SIZE 18
 #endif
     SEXP ans = PROTECT(allocVector(VECSXP, MACH_SIZE)),
 	 nms = PROTECT(allocVector(STRSXP, MACH_SIZE));
@@ -500,9 +500,9 @@ HIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* OS's buffer size in stdio.h, probably.
    Windows has 512, Solaris 1024, glibc 8192
  */
-# define APPENDBUFSIZE BUFSIZ
+#define APPENDBUFSIZE BUFSIZ
 #else
-# define APPENDBUFSIZE 512
+#define APPENDBUFSIZE 512
 #endif
 
 static int R_AppendFile(SEXP file1, SEXP file2)
@@ -897,11 +897,11 @@ HIDDEN SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 #  define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim.tv_nsec)
 # endif
 #elif defined HAVE_STRUCT_STAT_ST_ATIMESPEC_TV_NSEC
-# define STAT_TIMESPEC(st, st_xtim) ((st).st_xtim##espec)
+#define STAT_TIMESPEC(st, st_xtim) ((st).st_xtim##espec)
 #elif defined HAVE_STRUCT_STAT_ST_ATIMENSEC
-# define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim##ensec)
+#define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim##ensec)
 #elif defined HAVE_STRUCT_STAT_ST_ATIM_ST__TIM_TV_NSEC
-# define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim.st__tim.tv_nsec)
+#define STAT_TIMESPEC_NS(st, st_xtim) ((st).st_xtim.st__tim.tv_nsec)
 #endif
 
 HIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2044,18 +2044,26 @@ HIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
 	SEXP tmp = STRING_ELT(fn, i);
-#ifndef _WIN32
-	const char *p = translateCharFP2(tmp);
-	if (p && tmp != NA_STRING)
-	    tmp = markKnown(R_ExpandFileName(p), tmp);
-#else
-/* Windows can have files and home directories that aren't representable
-   in the native encoding (e.g. latin1), so we need to translate
-   everything to UTF8.
-*/
-	if (tmp != NA_STRING)
-	    tmp = mkCharCE(R_ExpandFileNameUTF8(trCharUTF8(tmp)), CE_UTF8);
+	if (tmp != NA_STRING) {
+#ifdef _WIN32
+	    /* Windows can have files and home directories that aren't
+	       representable in the native encoding (e.g. latin1). Translate
+	       to UTF-8 when the input is in UTF-8 already or is in latin1,
+	       but the native encoding is not latin1.
+
+	       R (including R_ExpandFileNameUTF8) for now only supports R home
+	       directories representable in native encoding.
+	    */
+	    if (IS_UTF8(tmp) || (IS_LATIN1(tmp) && !latin1locale))
+		tmp = mkCharCE(R_ExpandFileNameUTF8(trCharUTF8(tmp)), CE_UTF8);
+	    else
 #endif
+	    {
+		const char *p = translateCharFP2(tmp);
+		if (p)
+		    tmp = markKnown(R_ExpandFileName(p), tmp);
+	    }
+	}
 	SET_STRING_ELT(ans, i, tmp);
     }
     UNPROTECT(1);
@@ -2891,7 +2899,7 @@ HIDDEN SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-/* do_normalizepath moved to util.c in R 2.13.0 */
+/* do_normalizepath moved to util.cpp in R 2.13.0 */
 
 HIDDEN SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 {

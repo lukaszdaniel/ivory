@@ -17,7 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* This at times needed to be separate from grep.c, as TRE has a
+/* This at times needed to be separate from grep.cpp, as TRE has a
    conflicting regcomp and the two headers cannot both be included in
    one file
 */
@@ -34,7 +34,7 @@
 #undef pmatch
 
 /* interval at which to check interrupts */
-#define NINTERRUPT 1000000
+// #define NINTERRUPT 1000000
 
 #include <R_ext/RS.h>		/* for Calloc/Free */
 
@@ -287,10 +287,10 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-#define ANS(I, J)		REAL(ans)[I + (J) * nx]
-#define COUNTS(I, J, K)		INTEGER(counts)[I + (J) * nx + (K) * nxy]
+#define ANS(I, J) REAL(ans) [I + (J)*nx]
+#define COUNTS(I, J, K) INTEGER(counts)[I + (J)*nx + (K)*nxy]
 
-#define MAT(X, I, J)		X[I + (J) * nr]
+#define MAT(X, I, J) X[I + (J)*nr]
 
 static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
 {
@@ -480,7 +480,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
     return ans;
 }
 
-#define OFFSETS(I, J, K)	INTEGER(offsets)[I + (J) * nx + (K) * nxy]
+#define OFFSETS(I, J, K) INTEGER(offsets)[I + (J)*nx + (K)*nxy]
 
 HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 {

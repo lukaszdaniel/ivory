@@ -30,10 +30,10 @@ The regex functions
 
 strsplit grep [g]sub [g]regexpr agrep
 
-here prior to 2.10.0 are now in grep.c and agrep.c
+here prior to 2.10.0 are now in grep.cpp and agrep.cpp
 
-make.unique, duplicated, unique, match, pmatch, charmatch are in unique.c
-iconv is in sysutils.c
+make.unique, duplicated, unique, match, pmatch, charmatch are in unique.cpp
+iconv is in sysutils.cpp
 
 Character strings in R are less than 2^31-1 bytes, so we use int not size_t.
 
@@ -737,14 +737,17 @@ static int vowels[] = {
     0x169, 0x16b, 0x16d, 0x16f, 0x171, 0x173
 };
 
-static Rboolean iswvowel(wchar_t w)
+static bool iswvowel(wchar_t w)
 {
-    int v = (int) w, n = sizeof(vowels)/sizeof(int);
-    Rboolean found = FALSE;
-    for(int i = 0; i < n; i++)
-	if(v == vowels[i]) {found = TRUE; break;}
+	int v = (int)w, n = sizeof(vowels) / sizeof(int);
 
-    return found;
+	for (int i = 0; i < n; i++)
+		if (v == vowels[i])
+		{
+			return true;
+		}
+
+	return false;
 }
 
 static void mywcscpy(wchar_t *dest, const wchar_t *src)
@@ -1067,18 +1070,24 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
     return(y);
 }
 
-
-typedef enum { WTR_INIT, WTR_CHAR, WTR_RANGE } wtr_type;
-struct wtr_spec {
-    wtr_type type;
-    struct wtr_spec *next;
-    union {
-	wchar_t c;
-	struct {
-	    wchar_t first;
-	    wchar_t last;
-	} r;
-    } u;
+enum wtr_type
+{
+	WTR_INIT,
+	WTR_CHAR,
+	WTR_RANGE
+};
+struct wtr_spec
+{
+	wtr_type type;
+	struct wtr_spec *next;
+	union {
+		wchar_t c;
+		struct
+		{
+			wchar_t first;
+			wchar_t last;
+		} r;
+	} u;
 };
 
 static void
@@ -1153,17 +1162,24 @@ wtr_get_next_char_from_spec(struct wtr_spec **p) {
     return(c);
 }
 
-typedef enum { TR_INIT, TR_CHAR, TR_RANGE } tr_spec_type;
-struct tr_spec {
-    tr_spec_type type;
-    struct tr_spec *next;
-    union {
-	unsigned char c;
-	struct {
-	    unsigned char first;
-	    unsigned char last;
-	} r;
-    } u;
+enum tr_spec_type
+{
+	TR_INIT,
+	TR_CHAR,
+	TR_RANGE
+};
+struct tr_spec
+{
+	tr_spec_type type;
+	struct tr_spec *next;
+	union {
+		unsigned char c;
+		struct
+		{
+			unsigned char first;
+			unsigned char last;
+		} r;
+	} u;
 };
 
 static void tr_build_spec(const char *s, struct tr_spec *trs) {
@@ -1235,7 +1251,11 @@ static unsigned char tr_get_next_char_from_spec(struct tr_spec **p) {
     return(c);
 }
 
-typedef struct { wchar_t c_old, c_new; } xtable_t;
+struct xtable_t
+{
+	wchar_t c_old;
+	wchar_t c_new;
+};
 
 R_INLINE static int xtable_comp(const void *a, const void *b)
 {

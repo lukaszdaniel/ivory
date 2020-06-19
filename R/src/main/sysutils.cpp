@@ -350,14 +350,14 @@ int R_system(const char *command)
 
 #if defined(__APPLE__)
 # include <crt_externs.h>
-# define environ (*_NSGetEnviron())
+#define environ (*_NSGetEnviron())
 #else
 extern "C" char ** environ;
 #endif
 
 #ifdef _WIN32
 /* _wenviron is declared in stdlib.h */
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 # include <windows.h> /* _wgetenv etc */
 #endif
 
@@ -817,7 +817,7 @@ void * Riconv_open (const char* tocode, const char* fromcode)
 /* Should be defined in config.h, but prior to 2.13.0 was only checked
    if the NLS was enabled  */
 #ifndef ICONV_CONST
-# define ICONV_CONST
+#define ICONV_CONST
 #endif
 
 size_t Riconv (void *cd, const char **inbuf, size_t *inbytesleft,
@@ -833,11 +833,12 @@ int Riconv_close (void *cd)
     return iconv_close((iconv_t) cd);
 }
 
-typedef enum {
-    NT_NONE        = 0, /* no translation to native encoding is needed */
-    NT_FROM_UTF8   = 1, /* need to translate from UTF8 */
+enum nttype_t
+{
+    NT_NONE = 0,        /* no translation to native encoding is needed */
+    NT_FROM_UTF8 = 1,   /* need to translate from UTF8 */
     NT_FROM_LATIN1 = 2, /* need to translate from latin1 */
-} nttype_t;
+};
 
 /* Decides whether translation to native encoding is needed. */
 R_INLINE static nttype_t needsTranslation(SEXP x) {
@@ -1583,7 +1584,7 @@ static constexpr char UNICODE[] = "UCS-4BE";
 static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
-/* used in gram.c and devX11.c */
+/* used in gram.cpp and devX11.c */
 size_t Rf_ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
@@ -1637,7 +1638,7 @@ size_t Rf_ucstomb(char *s, const unsigned int wc)
     return strlen(buf);
 }
 
-/* used in plot.c for non-UTF-8 MBCS */
+/* used in plot.cpp for non-UTF-8 MBCS */
 HIDDEN size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
@@ -1727,12 +1728,12 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc)
 # endif
 
 #ifdef _WIN32
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 # include <windows.h> /* For GetShortPathName */
 #endif
 
 #if !defined(S_IFDIR) && defined(__S_IFDIR)
-# define S_IFDIR __S_IFDIR
+#define S_IFDIR __S_IFDIR
 #endif
 
 static int isDir(const char *path)
@@ -2007,8 +2008,8 @@ HIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 #ifdef _WIN32
 # include <dos_wglob.h>
-# define globfree dos_wglobfree
-# define glob_t wglob_t
+#define globfree dos_wglobfree
+#define glob_t wglob_t
 #else
 # ifndef GLOB_QUOTE
 #  define GLOB_QUOTE 0

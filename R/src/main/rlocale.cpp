@@ -111,44 +111,45 @@ static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
    e.g. ja_JP.SJIS, ko_KR.CP949, zh_CN.eucCN, zh_HK.Big5HKSCS.
 */
 
-typedef struct {
-    const char * const name;
+struct cjk_locale_name_t
+{
+    const char *const name;
     int locale;
-} cjk_locale_name_t;
+};
 
 static cjk_locale_name_t cjk_locale_name[] = {
     // Windows locale names
-    {"CHINESE(SINGAPORE)_SIGNAPORE",		MB_zh_SG},
-    {"CHINESE_SIGNAPORE",			MB_zh_SG},
-    {"CHINESE(PRC)_PEOPLE'S REPUBLIC OF CHINA",	MB_zh_CN},
-    {"CHINESE_PEOPLE'S REPUBLIC OF CHINA",	MB_zh_CN},
-    {"CHINESE_MACAU S.A.R.",			MB_zh_HK},
-    {"CHINESE(PRC)_HONG KONG",		        MB_zh_HK},
-    {"CHINESE_HONG KONG S.A.R.",		MB_zh_HK},
-    {"CHINESE(TAIWAN)_TAIWAN",			MB_zh_TW},
-    {"CHINESE_TAIWAN",				MB_zh_TW},
-    {"CHINESE-S",                               MB_zh_CN},
-    {"CHINESE-T",                               MB_zh_TW},
-    {"JAPANESE_JAPAN",				MB_ja_JP},
-    {"JAPANESE",				MB_ja_JP},
-    {"KOREAN_KOREA",				MB_ko_KR},
-    {"KOREAN",				        MB_ko_KR},
+    {"CHINESE(SINGAPORE)_SIGNAPORE", MB_zh_SG},
+    {"CHINESE_SIGNAPORE", MB_zh_SG},
+    {"CHINESE(PRC)_PEOPLE'S REPUBLIC OF CHINA", MB_zh_CN},
+    {"CHINESE_PEOPLE'S REPUBLIC OF CHINA", MB_zh_CN},
+    {"CHINESE_MACAU S.A.R.", MB_zh_HK},
+    {"CHINESE(PRC)_HONG KONG", MB_zh_HK},
+    {"CHINESE_HONG KONG S.A.R.", MB_zh_HK},
+    {"CHINESE(TAIWAN)_TAIWAN", MB_zh_TW},
+    {"CHINESE_TAIWAN", MB_zh_TW},
+    {"CHINESE-S", MB_zh_CN},
+    {"CHINESE-T", MB_zh_TW},
+    {"JAPANESE_JAPAN", MB_ja_JP},
+    {"JAPANESE", MB_ja_JP},
+    {"KOREAN_KOREA", MB_ko_KR},
+    {"KOREAN", MB_ko_KR},
     // Other OSes, but only in default encodings.
-    {"ZH_TW",                                   MB_zh_TW},
-    {"ZH_CN",                                   MB_zh_CN},
-    {"ZH_CN.BIG5",                              MB_zh_TW},
-    {"ZH_HK",                                   MB_zh_HK},
-    {"ZH_SG",                                   MB_zh_SG},
-    {"JA_JP",					MB_ja_JP},
-    {"KO_KR",				        MB_ko_KR},
-    {"ZH",				        MB_zh_CN},
-    {"JA",					MB_ja_JP},
-    {"KO",				        MB_ko_KR},
+    {"ZH_TW", MB_zh_TW},
+    {"ZH_CN", MB_zh_CN},
+    {"ZH_CN.BIG5", MB_zh_TW},
+    {"ZH_HK", MB_zh_HK},
+    {"ZH_SG", MB_zh_SG},
+    {"JA_JP", MB_ja_JP},
+    {"KO_KR", MB_ko_KR},
+    {"ZH", MB_zh_CN},
+    {"JA", MB_ja_JP},
+    {"KO", MB_ko_KR},
     // Default, where all EA Ambiguous characters have width one.
-    {"",				        MB_Default},
+    {"", MB_Default},
 };
 
-// used in character.c, ../gnuwin32/console.c , ../library/grDevices/src/devP*.c :
+// used in character.cpp, ../gnuwin32/console.c , ../library/grDevices/src/devP*.c :
 int Ri18n_wcwidth(R_wchar_t c)
 {
     char lc_str[128];
@@ -180,7 +181,7 @@ int Ri18n_wcwidth(R_wchar_t c)
     return zw ? 0 : 1; // assume unknown chars are width one.
 }
 
-/* Used in character.c, errors.c, ../gnuwin32/console.c */
+/* Used in character.cpp, errors.cpp, ../gnuwin32/console.c */
 HIDDEN
 int Ri18n_wcswidth (const wchar_t *s, size_t n)
 {
@@ -307,12 +308,12 @@ static int Ri18n_iswalnum (wint_t wc)
 /*
  * iswctype
  */
-typedef struct
+struct Ri18n_wctype_func_l
 {
     const char *const name;
     wctype_t wctype;
     int (*func)(wint_t);
-} Ri18n_wctype_func_l;
+};
 
 static const Ri18n_wctype_func_l Ri18n_wctype_func[] = {
     {"upper",  1<<0,  Ri18n_iswupper},

@@ -65,7 +65,7 @@ R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines)
     R_InternetRoutines *tmp;
     tmp = ptr;
     ptr = routines;
-    return(tmp);
+    return (tmp);
 }
 
 static void internet_Init(void)
@@ -73,9 +73,10 @@ static void internet_Init(void)
     int res;
     res = R_moduleCdynload("internet", 1, 1);
     initialized = -1;
-    if(!res) return;
-    if(!ptr->download)
-	error(_("internet routines cannot be accessed in module"));
+    if (!res)
+        return;
+    if (!ptr->download)
+        error(_("internet routines cannot be accessed in module"));
     initialized = 1;
     return;
 }
@@ -83,12 +84,14 @@ static void internet_Init(void)
 extern "C"
 SEXP Rdownload(SEXP args)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->download)(args);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return R_NilValue;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->download)(args);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return R_NilValue;
     }
 }
 
@@ -104,110 +107,125 @@ HIDDEN Rconnection R_newurl(const char *description, const char * const mode, SE
 }
 
 HIDDEN Rconnection R_newsock(const char *host, int port, int server, int serverfd,
-          const char * const mode, int timeout)
+                             const char *const mode, int timeout)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->newsock)(host, port, server, serverfd, mode, timeout);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return (Rconnection)0;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->newsock)(host, port, server, serverfd, mode, timeout);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
 }
 
 HIDDEN Rconnection R_newservsock(int port)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->newservsock)(port);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return (Rconnection)0;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->newservsock)(port);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
 }
-
 
 void *R_HTTPOpen(const char *url)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->HTTPOpen)(url, NULL, NULL, 0);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return NULL;
-    }
-}
-
-int   R_HTTPRead(void *ctx, char *dest, int len)
-{
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->HTTPRead)(ctx, dest, len);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return 0;
-    }
-}
-
-void  R_HTTPClose(void *ctx)
-{
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	(*ptr->HTTPClose)(ctx);
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->HTTPOpen)(url, nullptr, nullptr, 0);
     else
-	error(_("internet routines cannot be loaded"));
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
+    }
+}
+
+int R_HTTPRead(void *ctx, char *dest, int len)
+{
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->HTTPRead)(ctx, dest, len);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return 0;
+    }
+}
+
+void R_HTTPClose(void *ctx)
+{
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        (*ptr->HTTPClose)(ctx);
+    else
+        error(_("internet routines cannot be loaded"));
 }
 
 void *R_FTPOpen(const char *url)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->FTPOpen)(url);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return NULL;
-    }
-}
-
-int   R_FTPRead(void *ctx, char *dest, int len)
-{
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->FTPRead)(ctx, dest, len);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return 0;
-    }
-}
-
-void  R_FTPClose(void *ctx)
-{
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	(*ptr->FTPClose)(ctx);
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->FTPOpen)(url);
     else
-	error(_("internet routines cannot be loaded"));
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
+    }
+}
+
+int R_FTPRead(void *ctx, char *dest, int len)
+{
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->FTPRead)(ctx, dest, len);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return 0;
+    }
+}
+
+void R_FTPClose(void *ctx)
+{
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        (*ptr->FTPClose)(ctx);
+    else
+        error(_("internet routines cannot be loaded"));
 }
 
 extern "C"
 int extR_HTTPDCreate(const char *ip, int port)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->HTTPDCreate)(ip, port);
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->HTTPDCreate)(ip, port);
     else
-	error(_("internet routines cannot be loaded"));
+        error(_("internet routines cannot be loaded"));
     return -1;
 }
 
 extern "C"
 void extR_HTTPDStop(void)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	(*ptr->HTTPDStop)();
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        (*ptr->HTTPDStop)();
     else
-	error(_("internet routines cannot be loaded"));
+        error(_("internet routines cannot be loaded"));
 }
 
 extern "C"
@@ -317,63 +335,71 @@ SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 
 HIDDEN
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
-		double timeout)
+                double timeout)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->sockselect)(nsock, insockfd, ready, write, timeout);
-    else {
-	error(_("socket routines cannot be loaded"));
-	return 0;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->sockselect)(nsock, insockfd, ready, write, timeout);
+    else
+    {
+        error(_("socket routines cannot be loaded"));
+        return 0;
     }
 }
 
 HIDDEN SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->curlVersion)(call, op, args, rho);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return R_NilValue;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->curlVersion)(call, op, args, rho);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
 }
 
 HIDDEN SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->curlGetHeaders)(call, op, args, rho);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return R_NilValue;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->curlGetHeaders)(call, op, args, rho);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
 }
 
 HIDDEN SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->curlDownload)(call, op, args, rho);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return R_NilValue;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->curlDownload)(call, op, args, rho);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
 }
 
-HIDDEN Rconnection
-R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type)
+HIDDEN Rconnection R_newCurlUrl(const char *description, const char *const mode, SEXP headers, int type)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
-	return (*ptr->newcurlurl)(description, mode, headers, type);
-    else {
-	error(_("internet routines cannot be loaded"));
-	return (Rconnection)0;
+    if (!initialized)
+        internet_Init();
+    if (initialized > 0)
+        return (*ptr->newcurlurl)(description, mode, headers, type);
+    else
+    {
+        error(_("internet routines cannot be loaded"));
+        return nullptr;
     }
-    return (Rconnection)0; /* -Wall */
+    return nullptr; /* -Wall */
 }
-

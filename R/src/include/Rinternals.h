@@ -303,8 +303,8 @@ struct sxpinfo_struct
     unsigned int gcgen : 1; /* old generation number */
     unsigned int gccls : 3; /* node class */
     unsigned int named : NAMED_BITS;
-    unsigned int extra : 32 - NAMED_BITS; /* used for immediate bindings */
-};                                        /*		    Tot: 67 */
+    unsigned int extra : 29 - NAMED_BITS; /* used for immediate bindings */
+};                                        /*		    Tot: 64 */
 
 struct vecsxp_struct
 {
@@ -1387,18 +1387,6 @@ SEXP Rf_mkCharCE(const char *, cetype_t);
 SEXP Rf_mkCharLenCE(const char *, int, cetype_t);
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
 
-/* match(.) NOT reached : for -Wall */
-#define error_return(msg)  \
-    {                      \
-        Rf_error(msg);     \
-        return R_NilValue; \
-    }
-#define errorcall_return(cl, msg) \
-    {                             \
-        Rf_errorcall(cl, msg);    \
-        return R_NilValue;        \
-    }
-
 #ifdef __MAIN__
 #undef extern
 #undef LibExtern
@@ -1487,7 +1475,7 @@ SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
 Rboolean R_HasFancyBindings(SEXP rho);
 
 
-/* ../main/errors.c : */
+/* ../main/errors.cpp : */
 /* needed for R_load/savehistory handling in front ends */
 #if defined(__GNUC__) && __GNUC__ >= 3
 void Rf_errorcall(SEXP, const char *, ...) __attribute__((noreturn));
@@ -1844,7 +1832,7 @@ void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean de
 
 /* Defining NO_RINLINEDFUNS disables use to simulate platforms where
    this is not available */
-#if defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
+#if defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || (__GNUC__ && !defined(__INTEL_COMPILER))) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
 #include "Rinlinedfuns.h"
 #else
 /* need remapped names here for use with R_NO_REMAP */

@@ -113,7 +113,7 @@ static void GLPretty(double *ul, double *uh, int *n)
 	GPretty(ul, uh, n);
 	*n = -*n;
     }
-    else { /* extra tickmarks --> CreateAtVector() in ./plot.c */
+    else { /* extra tickmarks --> CreateAtVector() in ./plot.cpp */
 	/* round to nice "1e<N>" */
 	*ul = Rexp10((double)p1);
 	*uh = Rexp10((double)p2);

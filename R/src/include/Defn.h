@@ -41,9 +41,9 @@
 #include <R_ext/Visibility.h>
 
 #ifdef __MAIN__
-# define extern0 HIDDEN
+#define extern0 HIDDEN
 #else
-# define extern0 extern
+#define extern0 extern
 #endif
 
 #define MAXELTSIZE 8192 /* Used as a default for string buffer sizes, \
@@ -157,7 +157,7 @@ int IS_CACHED(SEXP x);
 # define CXTAIL(x) ATTRIB(x)
 SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
-#include "Errormsg.h"
+#include <Errormsg.h>
 
 extern void R_ProcessEvents(void);
 #ifdef _WIN32
@@ -230,11 +230,11 @@ extern void R_WaitEvent(void);
 using R_size_t = size_t;
 constexpr R_size_t R_SIZE_T_MAX = std::numeric_limits<R_size_t>::max();
 #else
-  typedef size_t R_size_t;
-# define R_SIZE_T_MAX SIZE_MAX
-#endif //__cplusplus
+typedef size_t R_size_t;
+#define R_SIZE_T_MAX SIZE_MAX
+#endif // __cplusplus
 #else
-# error SIZE_MAX is required for C99
+#error SIZE_MAX is required for C99
 #endif
 
 #ifdef __cplusplus
@@ -291,14 +291,14 @@ extern int putenv(char *string);
    or NAME_MAX (often 255/256).
  */
 #if !defined(PATH_MAX)
-# if defined(HAVE_SYS_PARAM_H)
-#  include <sys/param.h>
-# endif
-# if !defined(PATH_MAX)
-#  if defined(MAXPATHLEN)
+#if defined(HAVE_SYS_PARAM_H)
+#include <sys/param.h>
+#endif
+#if !defined(PATH_MAX)
+#if defined(MAXPATHLEN)
 /* Try BSD name */
-#    define PATH_MAX MAXPATHLEN
-#  elif defined(_WIN32)
+#define PATH_MAX MAXPATHLEN
+#elif defined(_WIN32)
 /* seems this is now defined by MinGW to be 259, whereas FILENAME_MAX
    and MAX_PATH are 260.  It is not clear that this really is in bytes,
    but might be chars for the Unicode interfaces.
@@ -306,29 +306,29 @@ extern int putenv(char *string);
    260 is d:\ plus 256 chars plus nul.  Some but not all API calls
    allow filepaths of the form \\?\D:\very_long_path .
 */
-#    define PATH_MAX 260
-#  else
+#define PATH_MAX 260
+#else
 /* quite possibly unlimited, so we make this large, and test when used */
-#    define PATH_MAX 5000
-#  endif
-# endif
+#define PATH_MAX 5000
+#endif
+#endif
 #endif
 
 #ifdef R_USE_SIGNALS
 #ifdef HAVE_POSIX_SETJMP
-# define SIGJMP_BUF sigjmp_buf
-# define SIGSETJMP(x,s) sigsetjmp(x,s)
-# define SIGLONGJMP(x,i) siglongjmp(x,i)
-# define JMP_BUF sigjmp_buf
-# define SETJMP(x) sigsetjmp(x,0)
-# define LONGJMP(x,i) siglongjmp(x,i)
+#define SIGJMP_BUF sigjmp_buf
+#define SIGSETJMP(x, s) sigsetjmp(x, s)
+#define SIGLONGJMP(x, i) siglongjmp(x, i)
+#define JMP_BUF sigjmp_buf
+#define SETJMP(x) sigsetjmp(x, 0)
+#define LONGJMP(x, i) siglongjmp(x, i)
 #else
-# define SIGJMP_BUF jmp_buf
-# define SIGSETJMP(x,s) setjmp(x)
-# define SIGLONGJMP(x,i) longjmp(x,i)
-# define JMP_BUF jmp_buf
-# define SETJMP(x) setjmp(x)
-# define LONGJMP(x,i) longjmp(x,i)
+#define SIGJMP_BUF jmp_buf
+#define SIGSETJMP(x, s) setjmp(x)
+#define SIGLONGJMP(x, i) longjmp(x, i)
+#define JMP_BUF jmp_buf
+#define SETJMP(x) setjmp(x)
+#define LONGJMP(x, i) longjmp(x, i)
 #endif
 #endif
 
@@ -338,7 +338,7 @@ constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                in bytes excluding terminator.                    \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
-#endif //__cplusplus
+#endif // __cplusplus
 
 /* The type of the do_xxxx functions. */
 /* These are the built-in R functions. */
@@ -398,13 +398,14 @@ typedef struct {
 
 /* The type definitions for the table of built-in functions. */
 /* This table can be found in ../main/names.cpp */
-typedef struct {
-    const char   *name;    /* print name */
-    CCODE  cfun;     /* c-code address */
-    int	   code;     /* offset within c-code */
-    int	   eval;     /* evaluate args? */
-    int	   arity;    /* function arity */
-    PPinfo gram;     /* pretty-print info */
+typedef struct
+{
+    const char *name; /* print name */
+    CCODE cfun;       /* c-code address */
+    int code;         /* offset within c-code */
+    int eval;         /* evaluate args? */
+    int arity;        /* function arity */
+    PPinfo gram;      /* pretty-print info */
 } FUNTAB;
 
 #ifdef USE_RINTERNALS
@@ -448,12 +449,19 @@ typedef struct
 
 /* Vector Heap Macros */
 #define BACKPOINTER(v) ((v).u.backpointer)
+#ifdef __cplusplus
+inline size_t BYTE2VEC(int n) { return (n > 0) ? (std::size_t(n) - 1)/sizeof(VECREC) + 1 : 0; }
+inline size_t INT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(int) - 1)/sizeof(VECREC) + 1 : 0; }
+inline size_t FLOAT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(double) - 1)/sizeof(VECREC) + 1 : 0; }
+inline size_t COMPLEX2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(Rcomplex) - 1)/sizeof(VECREC) + 1 : 0; }
+inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1)/sizeof(VECREC) + 1 : 0; }
+#else
 #define BYTE2VEC(n) (((n) > 0) ? (((n)-1) / sizeof(VECREC) + 1) : 0)
 #define INT2VEC(n) (((n) > 0) ? (((n) * sizeof(int) - 1) / sizeof(VECREC) + 1) : 0)
 #define FLOAT2VEC(n) (((n) > 0) ? (((n) * sizeof(double) - 1) / sizeof(VECREC) + 1) : 0)
 #define COMPLEX2VEC(n) (((n) > 0) ? (((n) * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1) : 0)
 #define PTR2VEC(n) (((n) > 0) ? (((n) * sizeof(SEXP) - 1) / sizeof(VECREC) + 1) : 0)
-
+#endif // __cplusplus
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
 #define ACTIVE_BINDING_MASK (1<<15)
@@ -462,15 +470,18 @@ typedef struct
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
 #define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
 #define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
-#define LOCK_BINDING(b) do {						\
-	SEXP lb__b__ = b;						\
-	if (! IS_ACTIVE_BINDING(lb__b__)) {				\
-	    if (TYPEOF(lb__b__) == SYMSXP)				\
-		MARK_NOT_MUTABLE(SYMVALUE(lb__b__));			\
-	    else							\
-		MARK_NOT_MUTABLE(CAR(lb__b__));				\
-	}								\
-	((lb__b__))->sxpinfo.gp |= BINDING_LOCK_MASK;			\
+#define LOCK_BINDING(b)                               \
+    do                                                \
+    {                                                 \
+        SEXP lb__b__ = b;                             \
+        if (!IS_ACTIVE_BINDING(lb__b__))              \
+        {                                             \
+            if (TYPEOF(lb__b__) == SYMSXP)            \
+                MARK_NOT_MUTABLE(SYMVALUE(lb__b__));  \
+            else                                      \
+                MARK_NOT_MUTABLE(CAR(lb__b__));       \
+        }                                             \
+        ((lb__b__))->sxpinfo.gp |= BINDING_LOCK_MASK; \
     } while (0)
 #define UNLOCK_BINDING(b) ((b)->sxpinfo.gp &= (~BINDING_LOCK_MASK))
 
@@ -604,7 +615,7 @@ typedef struct RCNTXT {
  * If you add a new context type for functions make sure
  *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
  */
-enum
+enum CTXT
 {
     CTXT_TOPLEVEL = 0,
     CTXT_NEXT = 1,
@@ -620,7 +631,7 @@ enum
     CTXT_UNWIND = 128
 };
 
-/*
+/*    1 2 4 8 ...
 TOP   0 0 0 0 0 0  = 0
 NEX   1 0 0 0 0 0  = 1
 BRE   0 1 0 0 0 0  = 2
@@ -690,16 +701,16 @@ typedef enum
 
 /* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
-extern FUNTAB	R_FunTab[];	    /* Built in functions */
+extern FUNTAB R_FunTab[]; /* Built in functions */
 #endif
 
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
-# define INI_as(v) = v
+#define INI_as(v) = v
 #define extern0 HIDDEN
 #else
-# define INI_as(v)
+#define INI_as(v)
 #define extern0 extern
 #endif
 
@@ -848,7 +859,9 @@ extern0 double elapsedLimitValue       	INI_as(-1.0);
 
 void resetTimeLimits(void);
 
-#define R_BCNODESTACKSIZE 200000
+#ifdef __cplusplus
+constexpr size_t R_BCNODESTACKSIZE = 200000;
+#endif
 LibExtern R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
 extern0 R_bcstack_t *R_BCNodeStackBase;
 extern0 R_bcstack_t *R_BCProtTop;
@@ -876,10 +889,8 @@ typedef SEXP (*R_stdGen_ptr_t)(SEXP, SEXP, SEXP); /* typedef */
 R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
 LibExtern SEXP R_MethodsNamespace;
 SEXP R_deferred_default_method(void);
-SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
-		       SEXP mlist);
-SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
-			SEXP mlist);
+SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
+SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef, SEXP mlist);
 void R_set_quick_method_check(R_stdGen_ptr_t);
 SEXP R_primitive_methods(SEXP op);
 SEXP R_primitive_generic(SEXP op);
@@ -915,11 +926,10 @@ extern0 int R_PCRE_study INI_as(10);
 #endif
 extern0 int R_PCRE_limit_recursion;
 
-
 #ifdef __MAIN__
-# undef extern
-# undef extern0
-# undef LibExtern
+#undef extern
+#undef extern0
+#undef LibExtern
 #endif
 #undef INI_as
 
@@ -1091,26 +1101,29 @@ extern0 int R_PCRE_limit_recursion;
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
 #define CONSOLE_BUFFER_SIZE 4096
-int	R_ReadConsole(const char *, unsigned char *, int, int);
-void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
-void	R_WriteConsoleEx(const char *, int, int);
-void	R_ResetConsole(void);
-void	R_FlushConsole(void);
-void	R_ClearerrConsole(void);
-void	R_Busy(int);
-int	R_ShowFiles(int, const char **, const char **, const char *,
-		    Rboolean, const char *);
-int     R_EditFiles(int, const char **, const char **, const char *);
-size_t	R_ChooseFile(int, char *, size_t);
-char	*R_HomeDir(void);
+int R_ReadConsole(const char *, unsigned char *, int, int);
+void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
+void R_WriteConsoleEx(const char *, int, int);
+void R_ResetConsole(void);
+void R_FlushConsole(void);
+void R_ClearerrConsole(void);
+void R_Busy(int);
+int R_ShowFiles(int, const char **, const char **, const char *,
+                Rboolean, const char *);
+int R_EditFiles(int, const char **, const char **, const char *);
+size_t R_ChooseFile(int, char *, size_t);
+char *R_HomeDir(void);
 Rboolean R_FileExists(const char *);
 Rboolean R_HiddenFile(const char *);
-double	R_FileMtime(const char *);
-int	R_GetFDLimit();
-int	R_EnsureFDLimit(int);
+double R_FileMtime(const char *);
+int R_GetFDLimit();
+int R_EnsureFDLimit(int);
 
 /* environment cell access */
-typedef struct { SEXP cell; } R_varloc_t; /* use struct to prevent casting */
+typedef struct
+{
+    SEXP cell;
+} R_varloc_t; /* use struct to prevent casting */
 #define R_VARLOC_IS_NULL(loc) ((loc).cell == NULL)
 R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
 R_varloc_t R_findVarLoc(SEXP, SEXP);

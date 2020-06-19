@@ -52,9 +52,9 @@ double Rf_beta(double a, double b)
  *   xmin, xmax : see ./gammalims.c
  *   lnsml = log(DBL_MIN) = log(2 ^ -1022) = -1022 * log(2)
 */
-# define xmin  -170.5674972726612
-# define xmax   171.61447887182298
-# define lnsml -708.39641853226412
+#define xmin  -170.5674972726612
+#define xmax   171.61447887182298
+#define lnsml -708.39641853226412
 #endif
 
 

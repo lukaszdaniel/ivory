@@ -203,7 +203,7 @@ double Rf_qsignrank(double x, double n, int lower_tail, int log_p)
     int q = 0;
     if (x <= 0.5) {
 	x = x - 10 * DBL_EPSILON;
-	while(TRUE) {
+	while(true) {
 	    p += csignrank(q, nn) * f;
 	    if (p >= x)
 		break;
@@ -212,7 +212,7 @@ double Rf_qsignrank(double x, double n, int lower_tail, int log_p)
     }
     else {
 	x = 1 - x + 10 * DBL_EPSILON;
-	while(TRUE) {
+	while(true) {
 	    p += csignrank(q, nn) * f;
 	    if (p > x) {
 		q = (int)(n * (n + 1) / 2 - q);

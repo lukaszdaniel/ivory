@@ -505,7 +505,7 @@ static double _label_width_hershey (const pGEcontext gc, pGEDevDesc dd,
 	{
 	  int raw_fontnum;
 
-	  /* compute index of font, in table in g_fontdb.c */
+	  /* compute index of font, in table in g_fontdb.cpp */
 	  raw_fontnum = (c >> FONT_SHIFT) & ONE_BYTE;
 
 	  c &= ~FONT_SPEC;	/* extract character proper */
@@ -631,8 +631,7 @@ void _draw_hershey_glyph (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 /* _draw_hershey_string() strokes a string beginning at present location,
    which is taken to be on the string's baseline.  Besides invoking move()
    and cont(), it invokes linewidth(). */
-static
-void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
+static void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 			   const unsigned short *string)
 {
   unsigned short c;
@@ -646,7 +645,7 @@ void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 	 glyph number, (2) an oriental Hershey glyph specified by glyph
 	 number, (3) a control code, and (4) an ordinary font character,
 	 which will be mapped to a Hershey glyph by one of the tables in
-	 g_fontdb.c. */
+	 g_fontdb.cpp. */
 
       if (c & RAW_HERSHEY_GLYPH)
 	{
@@ -785,7 +784,7 @@ void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 	  unsigned char composite, character = '\0', accent = '\0' /* -Wall */;
 	  bool oblique, small_kana = false;
 
-	  /* compute index of font, in font table in g_fontdb.c */
+	  /* compute index of font, in font table in g_fontdb.cpp */
 	  raw_fontnum = (c >> FONT_SHIFT) & ONE_BYTE;
 	  /* shear font?  (for HersheySans-Oblique, etc.) */
 	  oblique = _hershey_font_info[raw_fontnum].obliquing;
@@ -802,7 +801,7 @@ void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 	  switch (glyphnum)
 	    {
 	      /* special case: this is a composite (accented) character;
-		 search font table in g_fontdb.c for it */
+		 search font table in g_fontdb.cpp for it */
 	    case ACC0:
 	    case ACC1:
 	    case ACC2:
@@ -954,7 +953,7 @@ void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 }
 
 /* retrieve the two elements of a composite character from the table in
-   g_fontdb.c */
+   g_fontdb.cpp */
 static bool _composite_char (unsigned char *composite,
 			     unsigned char *character,
 			     unsigned char *accent)

@@ -65,9 +65,9 @@
  *	"pager"
  *	"paper.size"		./devPS.c
 
- *	"timeout"		./connections.c
+ *	"timeout"		./connections.cpp
 
- *      "deparse.max.lines"     ./deparse.c (& PrintCall() in ./eval.c, ./main.c
+ *      "deparse.max.lines"     ./deparse.cpp (& PrintCall() in ./eval.cpp, ./main.cpp
 
  *	"check.bounds"
  *	"error"

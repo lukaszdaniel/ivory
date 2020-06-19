@@ -193,7 +193,7 @@ Rboolean isUnsorted(SEXP x, Rboolean strictly)
 			return TRUE;
 	    }
 	    break;
-	case RAWSXP: // being compatible with raw_relop() in ./relop.c
+	case RAWSXP: // being compatible with raw_relop() in ./relop.cpp
 	    if(strictly) {
 		for(i = 0; i+1 < n ; i++)
 		    if(RAW(x)[i] >= RAW(x)[i+1])
@@ -308,7 +308,7 @@ void R_csort(Rcomplex *x, int n)
     sort_body(ccmp,,)
 }
 
-/* used in platform.c */
+/* used in platform.cpp */
 HIDDEN void Rf_ssort(SEXP *x, int n)
 {
     SEXP v;

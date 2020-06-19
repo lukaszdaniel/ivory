@@ -59,25 +59,25 @@
  *    oldest reader R version as -1.
  */
 
-#define R_MAGIC_ASCII_V3   3001
-#define R_MAGIC_BINARY_V3  3002
-#define R_MAGIC_XDR_V3     3003
-#define R_MAGIC_ASCII_V2   2001
-#define R_MAGIC_BINARY_V2  2002
-#define R_MAGIC_XDR_V2     2003
-#define R_MAGIC_ASCII_V1   1001
-#define R_MAGIC_BINARY_V1  1002
-#define R_MAGIC_XDR_V1     1003
-#define R_MAGIC_EMPTY      999
-#define R_MAGIC_CORRUPT    998
-#define R_MAGIC_MAYBE_TOONEW 997
+constexpr int R_MAGIC_ASCII_V3 = 3001;
+constexpr int R_MAGIC_BINARY_V3 = 3002;
+constexpr int R_MAGIC_XDR_V3 = 3003;
+constexpr int R_MAGIC_ASCII_V2 = 2001;
+constexpr int R_MAGIC_BINARY_V2 = 2002;
+constexpr int R_MAGIC_XDR_V2 = 2003;
+constexpr int R_MAGIC_ASCII_V1 = 1001;
+constexpr int R_MAGIC_BINARY_V1 = 1002;
+constexpr int R_MAGIC_XDR_V1 = 1003;
+constexpr int R_MAGIC_EMPTY = 999;
+constexpr int R_MAGIC_CORRUPT = 998;
+constexpr int R_MAGIC_MAYBE_TOONEW = 997;
 
 /* pre-1 formats (R < 0.99.0) */
-#define R_MAGIC_BINARY 1975
-#define R_MAGIC_ASCII  1976
-#define R_MAGIC_XDR    1977
-#define R_MAGIC_BINARY_VERSION16 1971
-#define R_MAGIC_ASCII_VERSION16	 1972
+constexpr int R_MAGIC_BINARY = 1975;
+constexpr int R_MAGIC_ASCII = 1976;
+constexpr int R_MAGIC_XDR = 1977;
+constexpr int R_MAGIC_BINARY_VERSION16 = 1971;
+constexpr int R_MAGIC_ASCII_VERSION16 = 1972;
 
 
 /* Static Globals, DIE, DIE, DIE! */
@@ -89,17 +89,17 @@
  OffsetToNode is called by DataLoad() and RestoreSEXP()
  which itself is only called by RestoreSEXP.
  */
-struct NodeInfo {
- int NSymbol;		/* Number of symbols */
- int NSave;		/* Number of non-symbols */
- int NTotal;		/* NSymbol + NSave */
- int NVSize;		/* Number of vector cells */
+struct NodeInfo
+{
+    int NSymbol; /* Number of symbols */
+    int NSave;   /* Number of non-symbols */
+    int NTotal;  /* NSymbol + NSave */
+    int NVSize;  /* Number of vector cells */
 
- int *OldOffset;        /* Offsets in previous incarnation */
+    int *OldOffset; /* Offsets in previous incarnation */
 
- SEXP NewAddress;       /* Addresses in this incarnation */
+    SEXP NewAddress; /* Addresses in this incarnation */
 };
-
 
 #ifndef INT_32_BITS
 /* The way XDR is used pretty much assumes that int is 32 bits and
@@ -108,7 +108,7 @@ struct NodeInfo {
    complement) are pretty much universal, we can worry about that when
    the need arises.  To be safe, we signal a compiler error if int is
    not 32 bits. There may be similar issues with doubles. */
-*/
+* /
 # error code requires that int have 32 bits
 #endif
 
@@ -116,11 +116,12 @@ struct NodeInfo {
 #include <rpc/types.h>
 #include <rpc/xdr.h>
 
-#define SMBUF_SIZE 512
+constexpr int SMBUF_SIZE = 512;
 #define SMBUF_SIZED_STRING "%511s"
 
-struct SaveLoadData {
-/* These variables are accessed in the
+struct SaveLoadData
+{
+    /* These variables are accessed in the
    InInteger, InComplex, InReal, InString
    methods for Ascii, Binary, XDR.
    bufsize is only used in XdrInString!
@@ -131,45 +132,48 @@ mean some of them wouldn't need the extra argument.
 */
 
     R_StringBuffer buffer;
-    char smbuf[SMBUF_SIZE];	/* Small buffer for temp use */
-				/* smbuf is only used by Ascii. */
+    char smbuf[SMBUF_SIZE]; /* Small buffer for temp use */
+    /* smbuf is only used by Ascii. */
     XDR xdrs;
 };
 
 /* ----- I / O -- F u n c t i o n -- P o i n t e r s ----- */
 
-struct OutputRoutines {
- void	(*OutInit)(FILE*, SaveLoadData *d);
- void	(*OutInteger)(FILE*, int, SaveLoadData *);
- void	(*OutReal)(FILE*, double, SaveLoadData *);
- void	(*OutComplex)(FILE*, Rcomplex, SaveLoadData *);
- void	(*OutString)(FILE*, const char*, SaveLoadData *);
- void	(*OutSpace)(FILE*, int, SaveLoadData *);
- void	(*OutNewline)(FILE*, SaveLoadData *);
- void	(*OutTerm)(FILE*, SaveLoadData *);
+struct OutputRoutines
+{
+    void (*OutInit)(FILE *, SaveLoadData *d);
+    void (*OutInteger)(FILE *, int, SaveLoadData *);
+    void (*OutReal)(FILE *, double, SaveLoadData *);
+    void (*OutComplex)(FILE *, Rcomplex, SaveLoadData *);
+    void (*OutString)(FILE *, const char *, SaveLoadData *);
+    void (*OutSpace)(FILE *, int, SaveLoadData *);
+    void (*OutNewline)(FILE *, SaveLoadData *);
+    void (*OutTerm)(FILE *, SaveLoadData *);
 };
 
-struct InputRoutines {
- void	(*InInit)(FILE*, SaveLoadData *d);
- int	(*InInteger)(FILE*, SaveLoadData *);
- double	(*InReal)(FILE*, SaveLoadData *);
- Rcomplex	(*InComplex)(FILE*, SaveLoadData *);
- char*	(*InString)(FILE*, SaveLoadData *);
- void	(*InTerm)(FILE*, SaveLoadData *d);
+struct InputRoutines
+{
+    void (*InInit)(FILE *, SaveLoadData *d);
+    int (*InInteger)(FILE *, SaveLoadData *);
+    double (*InReal)(FILE *, SaveLoadData *);
+    Rcomplex (*InComplex)(FILE *, SaveLoadData *);
+    char *(*InString)(FILE *, SaveLoadData *);
+    void (*InTerm)(FILE *, SaveLoadData *d);
 };
 
-typedef struct {
-  FILE *fp;
-  OutputRoutines *methods;
-  SaveLoadData *data;
-} OutputCtxtData;
+struct OutputCtxtData
+{
+    FILE *fp;
+    OutputRoutines *methods;
+    SaveLoadData *data;
+};
 
-typedef struct {
-  FILE *fp;
-  InputRoutines *methods;
-  SaveLoadData *data;
-} InputCtxtData;
-
+struct InputCtxtData
+{
+    FILE *fp;
+    InputRoutines *methods;
+    SaveLoadData *data;
+};
 
 static SEXP DataLoad(FILE*, int startup, InputRoutines *m, int version, SaveLoadData *d);
 
@@ -887,8 +891,8 @@ static int NewLookup(SEXP item, SEXP ht)
 
     if (count != 0)
         return count;
-    else
-        return HashGet(item, ht);
+
+    return HashGet(item, ht);
 }
 
 /*  This code carries out the basic inspection of an object, building
@@ -1972,7 +1976,7 @@ HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 	default:
 	    error(_("bad restore file magic number (file may be corrupted) -- no data loaded"));
 	}
-	return(R_NilValue);/* for -Wall */
+	return R_NilValue;/* for -Wall */
     }
 }
 

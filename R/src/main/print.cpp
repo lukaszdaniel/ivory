@@ -35,10 +35,10 @@
  *		-> PrintSpecial
  *		-> PrintExpression
  *		-> PrintClosure         -> PrintLanguage
- *		-> printVector		>>>>> ./printvector.c
- *		-> printNamedVector	>>>>> ./printvector.c
- *		-> printMatrix		>>>>> ./printarray.c
- *		-> printArray		>>>>> ./printarray.c
+ *		-> printVector		>>>>> ./printvector.cpp
+ *		-> printNamedVector	>>>>> ./printvector.cpp
+ *		-> printMatrix		>>>>> ./printarray.cpp
+ *		-> printArray		>>>>> ./printarray.cpp
  *
  * PrintDispatch
  *	-> PrintObject
@@ -46,15 +46,15 @@
  *
  *  do_prmatrix
  *	-> PrintDefaults
- *	-> printMatrix			>>>>> ./printarray.c
+ *	-> printMatrix			>>>>> ./printarray.cpp
  *
  *
- *  See ./printutils.c	 for general remarks on Printing
+ *  See ./printutils.cpp	 for general remarks on Printing
  *			 and the EncodeString() and all Encode*() utils,
  *
- *  Also ./printvector.c,  ./printarray.c
+ *  Also ./printvector.cpp,  ./printarray.cpp
  *
- *  do_sink moved to connections.c as of 1.3.0
+ *  do_sink moved to connections.cpp as of 1.3.0
  */
 
 #ifdef HAVE_CONFIG_H
@@ -1043,7 +1043,7 @@ static void printAttributes(SEXP s, R_PrintData *data, Rboolean useSlots)
 
 
 /* Print an S-expression using (possibly) local options.
-   This is used for auto-printing from main.c */
+   This is used for auto-printing from main.cpp */
 
 HIDDEN void Rf_PrintValueEnv(SEXP s, SEXP env)
 {

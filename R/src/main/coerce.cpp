@@ -334,7 +334,7 @@ HIDDEN SEXP Rf_StringFromInteger(int x, int *warn)
     }
 }
 
-// dropTrailing0 and StringFromReal moved to printutils.c
+// dropTrailing0 and StringFromReal moved to printutils.cpp
 
 HIDDEN SEXP Rf_StringFromComplex(Rcomplex x, int *warn)
 {
@@ -1398,7 +1398,7 @@ HIDDEN SEXP do_asCharacterFactor(SEXP call, SEXP op, SEXP args,
     return asCharacterFactor(x);
 }
 
-/* used in attrib.c, eval.c and unique.c */
+/* used in attrib.cpp, eval.cpp and unique.cpp */
 SEXP Rf_asCharacterFactor(SEXP x)
 {
     SEXP ans;
@@ -1939,7 +1939,7 @@ HIDDEN SEXP do_typeof(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Define many of the <primitive> "is.xxx" functions :
-   Note that  isNull, isNumeric, etc are defined in util.c or ../include/Rinlinedfuns.h
+   Note that  isNull, isNumeric, etc are defined in util.cpp or ../include/Rinlinedfuns.h
 */
 HIDDEN SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2199,9 +2199,11 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return(ans);
     PROTECT(args = ans);
 #ifdef stringent_is
-    if (!isList(CAR(args)) && !isVector(CAR(args)))
-	errorcall_return(call, strcat(_("'%s' function applies only to lists and vectors"), "is.na()"));
-
+	if (!isList(CAR(args)) && !isVector(CAR(args)))
+	{
+		Rf_errorcall(call, strcat(_("'%s' function applies only to lists and vectors"), "is.na()"));
+		return R_NilValue;
+	}
 #endif
     x = CAR(args);
     n = xlength(x);
@@ -2445,7 +2447,10 @@ HIDDEN SEXP do_isnan(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(args = ans);
 #ifdef stringent_is
     if (!isList(CAR(args)) && !isVector(CAR(args)))
-	errorcall_return(call, strcat(_("'%s' function applies only to lists and vectors"), "is.nan()"));
+	{
+		Rf_errorcall(call, strcat(_("'%s' function applies only to lists and vectors"), "is.nan()"));
+		return R_NilValue;
+	}
 #endif
     x = CAR(args);
     n = xlength(x);
@@ -2493,7 +2498,10 @@ HIDDEN SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return(ans);
 #ifdef stringent_is
     if (!isList(CAR(args)) && !isVector(CAR(args)))
-	errorcall_return(call, strcat(_("'%s' function applies only to lists and vectors"), "is.finite()"));
+	{
+		Rf_errorcall(call, strcat(_("'%s' function applies only to lists and vectors"), "is.finite()"));
+		return R_NilValue;
+	}
 #endif
     x = CAR(args);
     n = xlength(x);
@@ -2562,7 +2570,10 @@ HIDDEN SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return(ans);
 #ifdef stringent_is
     if (!isList(CAR(args)) && !isVector(CAR(args)))
-	errorcall_return(call, strcat(_("'%s' function applies only to lists and vectors"), "is.infinite()"));
+	{
+		Rf_errorcall(call, strcat(_("'%s' function applies only to lists and vectors"), "is.infinite()"));
+		return R_NilValue;
+	}
 #endif
     x = CAR(args);
     n = xlength(x);
@@ -2635,7 +2646,10 @@ HIDDEN SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
        better error message.
      */
     if (!isString(rfun) || length(rfun) != 1)
-	errorcall_return(call, _("first argument must be a character string"));
+	{
+		Rf_errorcall(call, _("first argument must be a character string"));
+		return R_NilValue;
+	}
     const char *str = translateChar(STRING_ELT(rfun, 0));
     if (streql(str, ".Internal")) error(_("illegal usage"));
     PROTECT(rfun = install(str));
@@ -2859,11 +2873,12 @@ HIDDEN SEXP do_quote(SEXP call, SEXP op, SEXP args, SEXP rho)
     return(val);
 }
 
-typedef struct {
-    const char *s;
-    SEXPTYPE sexp;
-    Rboolean canChange;
-} classType;
+struct classType
+{
+	const char *s;
+	SEXPTYPE sexp;
+	Rboolean canChange;
+};
 
 static classType classTable[] = {
     { "logical",	LGLSXP,	   TRUE },

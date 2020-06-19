@@ -1,7 +1,7 @@
 #  File src/library/stats/R/lm.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2018 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -117,7 +117,7 @@ lm.fit <- function (x, y, offset = NULL, method = "qr", tol = 1e-07,
     pivot <- z$pivot
     ## careful here: the rank might be 0
     r1 <- seq_len(z$rank)
-    dn <- colnames(x); if(is.null(dn)) dn <- paste0("x", seq_len(p))
+    dn <- colnames(x) %||% paste0("x", seq_len(p))
     nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
     r2 <- if(z$rank < p) (z$rank+1L):p else integer()
     if (is.matrix(y)) {
@@ -196,7 +196,7 @@ lm.wfit <- function (x, y, w, offset = NULL, method = "qr", tol = 1e-7,
     coef <- z$coefficients
     pivot <- z$pivot
     r1 <- seq_len(z$rank)
-    dn <- colnames(x); if(is.null(dn)) dn <- paste0("x", seq_len(p))
+    dn <- colnames(x) %||% paste0("x", seq_len(p))
     nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
     r2 <- if(z$rank < p) (z$rank+1L):p else integer()
     if (is.matrix(y)) {
@@ -448,9 +448,8 @@ residuals.lm <-
 
 ## using qr(<lm>)  as interface to  <lm>$qr :
 qr.lm <- function(x, ...) {
-      if(is.null(r <- x$qr))
+      x$qr %||%
         stop("lm object does not have a proper 'qr' component. Rank zero or should not have used lm(.., qr=FALSE).")
-      r
 }
 
 ## The lm method includes objects of class "glm"
@@ -542,8 +541,7 @@ model.frame.lm <- function(formula, ...)
         ## We want to copy over attributes here, especially predvars.
         fcall$formula <- terms(formula)
         fcall[names(nargs)] <- nargs
-        env <- environment(formula$terms)
-	if (is.null(env)) env <- parent.frame()
+        env <- environment(formula$terms) %||% parent.frame()
         eval(fcall, env) # 2-arg form as env is an environment
     }
     else formula$model

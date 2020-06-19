@@ -32,7 +32,7 @@
 
 #ifdef __OpenBSD__
 /* for definition of "struct exception" in math.h */
-# define __LIBM_PRIVATE
+#define __LIBM_PRIVATE
 #endif
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #include <Localization.h>
@@ -52,6 +52,7 @@
 #include "arithmetic.h"
 
 #include <errno.h>
+#include <limits>
 
 #ifdef HAVE_MATHERR
 
@@ -162,18 +163,11 @@ int R_finite(double x)
 
 HIDDEN void Rf_InitArithmetic()
 {
-    R_NaInt = INT_MIN;
+    R_NaInt = std::numeric_limits<int>::min();;
     R_NaReal = R_ValueOfNA();
-// we assume C99, so
-#ifndef OLD
-    R_NaN = NAN;
-    R_PosInf = INFINITY;
-    R_NegInf = -INFINITY;
-#else
-    R_NaN = 0.0/R_Zero_Hack;
-    R_PosInf = 1.0/R_Zero_Hack;
-    R_NegInf = -1.0/R_Zero_Hack;
-#endif
+    R_NaN = std::numeric_limits<double>::quiet_NaN();
+    R_PosInf = std::numeric_limits<double>::infinity();
+    R_NegInf = -R_PosInf;
 }
 
 
@@ -185,9 +179,9 @@ HIDDEN void Rf_InitArithmetic()
  // NB: 1 / LDBL_EPSILON has been seen to overflow on 'ppc64el ...
  ==> use  eps instead of  1 / eps  (and one multiplication more)
 */
-# define c_eps LDBL_EPSILON
+#define c_eps LDBL_EPSILON
 #else
-# define c_eps DBL_EPSILON
+#define c_eps DBL_EPSILON
 #endif
 
 /* Keep myfmod() and myfloor() in step */
@@ -280,7 +274,7 @@ double R_pow_di(double x, int n)
 
 	Rboolean is_neg = (Rboolean) (n < 0);
 	if(is_neg) n = -n;
-	while(TRUE) {
+	while(true) {
 	    if(n & 01) xn *= x;
 	    if(n >>= 1) x *= x; else break;
 	}
@@ -532,21 +526,35 @@ HIDDEN SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;			/* never used; to keep -Wall happy */
 }
 
-#define COERCE_IF_NEEDED(v, tp, vpi) do { \
-    if (TYPEOF(v) != (tp)) { \
-	int __vo__ = OBJECT(v); \
-	REPROTECT(v = coerceVector(v, (tp)), vpi); \
-	if (__vo__) SET_OBJECT(v, 1); \
-    } \
-} while (0)
+#define COERCE_IF_NEEDED(v, tp, vpi)                   \
+	do                                                 \
+	{                                                  \
+		if (TYPEOF(v) != (tp))                         \
+		{                                              \
+			int __vo__ = OBJECT(v);                    \
+			REPROTECT(v = coerceVector(v, (tp)), vpi); \
+			if (__vo__)                                \
+				SET_OBJECT(v, 1);                      \
+		}                                              \
+	} while (0)
 
-#define FIXUP_NULL_AND_CHECK_TYPES(v, vpi) do { \
-    switch (TYPEOF(v)) { \
-    case NILSXP: REPROTECT(v = allocVector(INTSXP,0), vpi); break; \
-    case CPLXSXP: case REALSXP: case INTSXP: case LGLSXP: break; \
-    default: errorcall(call, _("non-numeric argument passed to binary operator")); \
-    } \
-} while (0)
+#define FIXUP_NULL_AND_CHECK_TYPES(v, vpi)                                        \
+	do                                                                            \
+	{                                                                             \
+		switch (TYPEOF(v))                                                        \
+		{                                                                         \
+		case NILSXP:                                                              \
+			REPROTECT(v = allocVector(INTSXP, 0), vpi);                           \
+			break;                                                                \
+		case CPLXSXP:                                                             \
+		case REALSXP:                                                             \
+		case INTSXP:                                                              \
+		case LGLSXP:                                                              \
+			break;                                                                \
+		default:                                                                  \
+			errorcall(call, _("non-numeric argument passed to binary operator")); \
+		}                                                                         \
+	} while (0)
 
 HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 {
@@ -1336,7 +1344,7 @@ HIDDEN SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP s;
     if (DispatchGroup("Math", call, op, args, env, &s))
 	return s;
-    // checkArity(op, args); /* is -1 in names.c */
+    // checkArity(op, args); /* is -1 in names.cpp */
     check1arg(args, call, "x");
     if (isComplex(CAR(args)))
 	errorcall(call, _("unimplemented complex function"));
@@ -1398,9 +1406,11 @@ HIDDEN SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
   compiler knows how to optimize to .External rather than
   .Internal */
 
-#define if_NA_Math2_set(y,a,b)				\
-	if      (ISNA (a) || ISNA (b)) y = NA_REAL;	\
-	else if (ISNAN(a) || ISNAN(b)) y = R_NaN;
+#define if_NA_Math2_set(y, a, b)   \
+	if (ISNA(a) || ISNA(b))        \
+		y = NA_REAL;               \
+	else if (ISNAN(a) || ISNAN(b)) \
+		y = R_NaN;
 
 static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
 		  SEXP lcall)
@@ -1416,25 +1426,27 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
 
     /* for 0-length a we want the attributes of a, not those of b
        as no recycling will occur */
-#define SETUP_Math2					\
-    na = XLENGTH(sa);					\
-    nb = XLENGTH(sb);					\
-    if ((na == 0) || (nb == 0))	{			\
-	PROTECT(sy = allocVector(REALSXP, 0));		\
-	if (na == 0) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
-	UNPROTECT(1);					\
-	return(sy);					\
-    }							\
-    n = (na < nb) ? nb : na;				\
-    PROTECT(sa = coerceVector(sa, REALSXP));		\
-    PROTECT(sb = coerceVector(sb, REALSXP));		\
-    PROTECT(sy = allocVector(REALSXP, n));		\
-    a = REAL_RO(sa);					\
-    b = REAL_RO(sb);					\
-    y = REAL(sy);					\
-    naflag = 0
+#define SETUP_Math2                            \
+	na = XLENGTH(sa);                          \
+	nb = XLENGTH(sb);                          \
+	if ((na == 0) || (nb == 0))                \
+	{                                          \
+		PROTECT(sy = allocVector(REALSXP, 0)); \
+		if (na == 0)                           \
+			SHALLOW_DUPLICATE_ATTRIB(sy, sa);  \
+		UNPROTECT(1);                          \
+		return (sy);                           \
+	}                                          \
+	n = (na < nb) ? nb : na;                   \
+	PROTECT(sa = coerceVector(sa, REALSXP));   \
+	PROTECT(sb = coerceVector(sb, REALSXP));   \
+	PROTECT(sy = allocVector(REALSXP, n));     \
+	a = REAL_RO(sa);                           \
+	b = REAL_RO(sb);                           \
+	y = REAL(sy);                              \
+	naflag = 0
 
-    SETUP_Math2;
+	SETUP_Math2;
 
     MOD_ITERATE2(n, na, nb, i, ia, ib, {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -1549,7 +1561,7 @@ static SEXP math2B(SEXP sa, SEXP sb, double (*f)(double, double, double *),
 	    amax = av;
     }
     if (amax > besselJY_max_nu)
-	amax = besselJY_max_nu; // and warning will happen in ../nmath/bessel_[jy].c
+	amax = besselJY_max_nu; // and warning will happen in ../nmath/bessel_[jy].cpp
     const void *vmax = vmaxget();
     nw = 1 + (size_t)floor(amax);
     work = (double *) R_alloc(nw, sizeof(double));
@@ -1592,8 +1604,8 @@ HIDDEN SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     switch (PRIMVAL(op)) {
 
     case  0: return Math2(args, atan2);
-    case 10001: return Math2(args, fround);// round(),  ../nmath/fround.c
-    case 10004: return Math2(args, fprec); // signif(), ../nmath/fprec.c
+    case 10001: return Math2(args, fround);// round(),  ../nmath/fround.cpp
+    case 10004: return Math2(args, fprec); // signif(), ../nmath/fprec.cpp
 
     case  2: return Math2(args, lbeta);
     case  3: return Math2(args, beta);
@@ -1717,9 +1729,9 @@ HIDDEN SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef M_E
-# define DFLT_LOG_BASE M_E
+#define DFLT_LOG_BASE M_E
 #else
-# define DFLT_LOG_BASE exp(1.)
+#define DFLT_LOG_BASE exp(1.)
 #endif
 
 /* do_log is a primitive SPECIALSXP with internal argument
@@ -1819,40 +1831,47 @@ HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
   compiler knows how to optimize to .External rather than
   .Internal */
 
+#define if_NA_Math3_set(y, a, b, c)            \
+	if (ISNA(a) || ISNA(b) || ISNA(c))         \
+		y = NA_REAL;                           \
+	else if (ISNAN(a) || ISNAN(b) || ISNAN(c)) \
+		y = R_NaN;
 
-#define if_NA_Math3_set(y,a,b,c)			        \
-	if      (ISNA (a) || ISNA (b)|| ISNA (c)) y = NA_REAL;	\
-	else if (ISNAN(a) || ISNAN(b)|| ISNAN(c)) y = R_NaN;
+#define SETUP_Math3                                         \
+	if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc)) \
+		error(R_MSG_NONNUM_MATH);                           \
+                                                            \
+	na = XLENGTH(sa);                                       \
+	nb = XLENGTH(sb);                                       \
+	nc = XLENGTH(sc);                                       \
+	if ((na == 0) || (nb == 0) || (nc == 0))                \
+		return (allocVector(REALSXP, 0));                   \
+	n = na;                                                 \
+	if (n < nb)                                             \
+		n = nb;                                             \
+	if (n < nc)                                             \
+		n = nc;                                             \
+	PROTECT(sa = coerceVector(sa, REALSXP));                \
+	PROTECT(sb = coerceVector(sb, REALSXP));                \
+	PROTECT(sc = coerceVector(sc, REALSXP));                \
+	PROTECT(sy = allocVector(REALSXP, n));                  \
+	a = REAL_RO(sa);                                        \
+	b = REAL_RO(sb);                                        \
+	c = REAL_RO(sc);                                        \
+	y = REAL(sy);                                           \
+	naflag = 0
 
-#define SETUP_Math3						\
-    if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc))	\
-	error(R_MSG_NONNUM_MATH);			        \
-								\
-    na = XLENGTH(sa);						\
-    nb = XLENGTH(sb);						\
-    nc = XLENGTH(sc);						\
-    if ((na == 0) || (nb == 0) || (nc == 0))			\
-	return(allocVector(REALSXP, 0));			\
-    n = na;							\
-    if (n < nb) n = nb;						\
-    if (n < nc) n = nc;						\
-    PROTECT(sa = coerceVector(sa, REALSXP));			\
-    PROTECT(sb = coerceVector(sb, REALSXP));			\
-    PROTECT(sc = coerceVector(sc, REALSXP));			\
-    PROTECT(sy = allocVector(REALSXP, n));			\
-    a = REAL_RO(sa);						\
-    b = REAL_RO(sb);						\
-    c = REAL_RO(sc);						\
-    y = REAL(sy);						\
-    naflag = 0
-
-#define FINISH_Math3					\
-    if(naflag) warning(R_MSG_NA);			\
-							\
-    if (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
-    else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
-    else if (n == nc) SHALLOW_DUPLICATE_ATTRIB(sy, sc);	\
-    UNPROTECT(4)
+#define FINISH_Math3                      \
+	if (naflag)                           \
+		warning(R_MSG_NA);                \
+                                          \
+	if (n == na)                          \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sa); \
+	else if (n == nb)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sb); \
+	else if (n == nc)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sc); \
+	UNPROTECT(4)
 
 static SEXP math3_1(SEXP sa, SEXP sb, SEXP sc, SEXP sI,
 		    double (*f)(double, double, double, int), SEXP lcall)
@@ -2041,9 +2060,11 @@ HIDDEN SEXP do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
 /* This can be removed completely once the byte compiler knows how to
   optimize to .External rather than .Internal */
 
-#define if_NA_Math4_set(y,a,b,c,d)				\
-	if      (ISNA (a)|| ISNA (b)|| ISNA (c)|| ISNA (d)) y = NA_REAL;\
-	else if (ISNAN(a)|| ISNAN(b)|| ISNAN(c)|| ISNAN(d)) y = R_NaN;
+#define if_NA_Math4_set(y, a, b, c, d)                     \
+	if (ISNA(a) || ISNA(b) || ISNA(c) || ISNA(d))          \
+		y = NA_REAL;                                       \
+	else if (ISNAN(a) || ISNAN(b) || ISNAN(c) || ISNAN(d)) \
+		y = R_NaN;
 
 static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
 		  double (*f)(double, double, double, double), SEXP lcall)
@@ -2054,33 +2075,36 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     const double *a, *b, *c, *d;
     int naflag;
 
-#define SETUP_Math4							\
-    if(!isNumeric(sa)|| !isNumeric(sb)|| !isNumeric(sc)|| !isNumeric(sd))\
-	error(R_MSG_NONNUM_MATH);				        \
-									\
-    na = XLENGTH(sa);							\
-    nb = XLENGTH(sb);							\
-    nc = XLENGTH(sc);							\
-    nd = XLENGTH(sd);							\
-    if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0))		\
-	return(allocVector(REALSXP, 0));				\
-    n = na;								\
-    if (n < nb) n = nb;							\
-    if (n < nc) n = nc;							\
-    if (n < nd) n = nd;							\
-    PROTECT(sa = coerceVector(sa, REALSXP));				\
-    PROTECT(sb = coerceVector(sb, REALSXP));				\
-    PROTECT(sc = coerceVector(sc, REALSXP));				\
-    PROTECT(sd = coerceVector(sd, REALSXP));				\
-    PROTECT(sy = allocVector(REALSXP, n));				\
-    a = REAL_RO(sa);							\
-    b = REAL_RO(sb);							\
-    c = REAL_RO(sc);							\
-    d = REAL_RO(sd);							\
-    y = REAL(sy);							\
-    naflag = 0
+#define SETUP_Math4                                                           \
+	if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc) || !isNumeric(sd)) \
+		error(R_MSG_NONNUM_MATH);                                             \
+                                                                              \
+	na = XLENGTH(sa);                                                         \
+	nb = XLENGTH(sb);                                                         \
+	nc = XLENGTH(sc);                                                         \
+	nd = XLENGTH(sd);                                                         \
+	if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0))                     \
+		return (allocVector(REALSXP, 0));                                     \
+	n = na;                                                                   \
+	if (n < nb)                                                               \
+		n = nb;                                                               \
+	if (n < nc)                                                               \
+		n = nc;                                                               \
+	if (n < nd)                                                               \
+		n = nd;                                                               \
+	PROTECT(sa = coerceVector(sa, REALSXP));                                  \
+	PROTECT(sb = coerceVector(sb, REALSXP));                                  \
+	PROTECT(sc = coerceVector(sc, REALSXP));                                  \
+	PROTECT(sd = coerceVector(sd, REALSXP));                                  \
+	PROTECT(sy = allocVector(REALSXP, n));                                    \
+	a = REAL_RO(sa);                                                          \
+	b = REAL_RO(sb);                                                          \
+	c = REAL_RO(sc);                                                          \
+	d = REAL_RO(sd);                                                          \
+	y = REAL(sy);                                                             \
+	naflag = 0
 
-    SETUP_Math4;
+	SETUP_Math4;
 
     MOD_ITERATE4 (n, na, nb, nc, nd, i, ia, ib, ic, id, {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -2095,16 +2119,21 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
 	}
     });
 
-#define FINISH_Math4					\
-    if(naflag) warning(R_MSG_NA);			\
-							\
-    if (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
-    else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
-    else if (n == nc) SHALLOW_DUPLICATE_ATTRIB(sy, sc);	\
-    else if (n == nd) SHALLOW_DUPLICATE_ATTRIB(sy, sd);	\
-    UNPROTECT(5)
+#define FINISH_Math4                      \
+	if (naflag)                           \
+		warning(R_MSG_NA);                \
+                                          \
+	if (n == na)                          \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sa); \
+	else if (n == nb)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sb); \
+	else if (n == nc)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sc); \
+	else if (n == nd)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sd); \
+	UNPROTECT(5)
 
-    FINISH_Math4;
+	FINISH_Math4;
 
     return sy;
 } /* math4() */
@@ -2215,10 +2244,10 @@ HIDDEN SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* Mathematical Functions of Five (Real) Arguments */
 
-#define if_NA_Math5_set(y,a,b,c,d,e)					\
-	if     (ISNA (a)|| ISNA (b)|| ISNA (c)|| ISNA (d)|| ISNA (e))	\
-		y = NA_REAL;						\
-	else if(ISNAN(a)|| ISNAN(b)|| ISNAN(c)|| ISNAN(d)|| ISNAN(e))	\
+#define if_NA_Math5_set(y, a, b, c, d, e)                              \
+	if (ISNA(a) || ISNA(b) || ISNA(c) || ISNA(d) || ISNA(e))           \
+		y = NA_REAL;                                                   \
+	else if (ISNAN(a) || ISNAN(b) || ISNAN(c) || ISNAN(d) || ISNAN(e)) \
 		y = R_NaN;
 
 static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
@@ -2228,38 +2257,42 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
     double ai, bi, ci, di, ei, *y;
     const double *a, *b, *c, *d, *e;
 
-#define SETUP_Math5							\
-    if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc) ||		\
-	!isNumeric(sd) || !isNumeric(se))				\
-	error(R_MSG_NONNUM_MATH);				        \
-									\
-    na = XLENGTH(sa);							\
-    nb = XLENGTH(sb);							\
-    nc = XLENGTH(sc);							\
-    nd = XLENGTH(sd);							\
-    ne = XLENGTH(se);							\
-    if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0) || (ne == 0))	\
-	return(allocVector(REALSXP, 0));				\
-    n = na;								\
-    if (n < nb) n = nb;							\
-    if (n < nc) n = nc;							\
-    if (n < nd) n = nd;							\
-    if (n < ne) n = ne;		/* n = max(na,nb,nc,nd,ne) */		\
-    PROTECT(sa = coerceVector(sa, REALSXP));				\
-    PROTECT(sb = coerceVector(sb, REALSXP));				\
-    PROTECT(sc = coerceVector(sc, REALSXP));				\
-    PROTECT(sd = coerceVector(sd, REALSXP));				\
-    PROTECT(se = coerceVector(se, REALSXP));				\
-    PROTECT(sy = allocVector(REALSXP, n));				\
-    a = REAL_RO(sa);							\
-    b = REAL_RO(sb);							\
-    c = REAL_RO(sc);							\
-    d = REAL_RO(sd);							\
-    e = REAL_RO(se);							\
-    y = REAL(sy);							\
-    naflag = 0
+#define SETUP_Math5                                                    \
+	if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc) ||          \
+		!isNumeric(sd) || !isNumeric(se))                              \
+		error(R_MSG_NONNUM_MATH);                                      \
+                                                                       \
+	na = XLENGTH(sa);                                                  \
+	nb = XLENGTH(sb);                                                  \
+	nc = XLENGTH(sc);                                                  \
+	nd = XLENGTH(sd);                                                  \
+	ne = XLENGTH(se);                                                  \
+	if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0) || (ne == 0)) \
+		return (allocVector(REALSXP, 0));                              \
+	n = na;                                                            \
+	if (n < nb)                                                        \
+		n = nb;                                                        \
+	if (n < nc)                                                        \
+		n = nc;                                                        \
+	if (n < nd)                                                        \
+		n = nd;                                                        \
+	if (n < ne)                                                        \
+		n = ne; /* n = max(na,nb,nc,nd,ne) */                          \
+	PROTECT(sa = coerceVector(sa, REALSXP));                           \
+	PROTECT(sb = coerceVector(sb, REALSXP));                           \
+	PROTECT(sc = coerceVector(sc, REALSXP));                           \
+	PROTECT(sd = coerceVector(sd, REALSXP));                           \
+	PROTECT(se = coerceVector(se, REALSXP));                           \
+	PROTECT(sy = allocVector(REALSXP, n));                             \
+	a = REAL_RO(sa);                                                   \
+	b = REAL_RO(sb);                                                   \
+	c = REAL_RO(sc);                                                   \
+	d = REAL_RO(sd);                                                   \
+	e = REAL_RO(se);                                                   \
+	y = REAL(sy);                                                      \
+	naflag = 0
 
-    SETUP_Math5;
+	SETUP_Math5;
 
     MOD_ITERATE5 (n, na, nb, nc, nd, ne,
 		  i, ia, ib, ic, id, ie, {
@@ -2276,17 +2309,23 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
 	}
     });
 
-#define FINISH_Math5					\
-    if(naflag) warning(R_MSG_NA);			\
-							\
-    if (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
-    else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
-    else if (n == nc) SHALLOW_DUPLICATE_ATTRIB(sy, sc);	\
-    else if (n == nd) SHALLOW_DUPLICATE_ATTRIB(sy, sd);	\
-    else if (n == ne) SHALLOW_DUPLICATE_ATTRIB(sy, se);	\
-    UNPROTECT(6)
+#define FINISH_Math5                      \
+	if (naflag)                           \
+		warning(R_MSG_NA);                \
+                                          \
+	if (n == na)                          \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sa); \
+	else if (n == nb)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sb); \
+	else if (n == nc)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sc); \
+	else if (n == nd)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, sd); \
+	else if (n == ne)                     \
+		SHALLOW_DUPLICATE_ATTRIB(sy, se); \
+	UNPROTECT(6)
 
-    FINISH_Math5;
+	FINISH_Math5;
 
     return sy;
 } /* math5() */

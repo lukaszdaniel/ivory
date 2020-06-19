@@ -40,25 +40,25 @@ NORET static void invalid(SEXP call)
     error(_("invalid arguments"));
 }
 
-static Rboolean random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
+static bool random1(double (*f)(double), double *a, R_xlen_t na, double *x, R_xlen_t n)
 {
-    Rboolean naflag = FALSE;
-    double ai;
-    R_xlen_t i, ia;
-    errno = 0;
-    MOD_ITERATE1(n, na, i, ia, {
-	ai = a[ia];
-	x[i] = f(ai);
-	if (ISNAN(x[i])) naflag = TRUE;
-    });
-    return(naflag);
+	bool naflag = false;
+	double ai;
+	R_xlen_t i, ia;
+	errno = 0;
+	MOD_ITERATE1(n, na, i, ia, {
+		ai = a[ia];
+		x[i] = f(ai);
+		if (ISNAN(x[i]))
+			naflag = true;
+	});
+	return naflag;
 }
 
-#define RAND1(num,name) \
-	case num: \
+#define RAND1(num, name)                                 \
+	case num:                                            \
 		naflag = random1(name, REAL(a), na, REAL(x), n); \
 		break
-
 
 /* "do_random1" - random sampling from 1 parameter families. */
 /* See switch below for distributions. */
@@ -95,16 +95,16 @@ HIDDEN SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NA values produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	GetRNGstate();
 	switch (PRIMVAL(op)) {
-	    RAND1(0, rchisq);
-	    RAND1(1, rexp);
-	    RAND1(2, rgeom);
-	    RAND1(3, rpois);
-	    RAND1(4, rt);
-	    RAND1(5, rsignrank);
+	    RAND1(0, Rf_rchisq);
+	    RAND1(1, Rf_rexp);
+	    RAND1(2, Rf_rgeom);
+	    RAND1(3, Rf_rpois);
+	    RAND1(4, Rf_rt);
+	    RAND1(5, Rf_rsignrank);
 	default:
 	    error(_("internal error in '%s' function"), "do_random1()");
 	}
@@ -118,25 +118,25 @@ HIDDEN SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-static Rboolean random2(double (*f) (double, double),
+static bool random2(double (*f) (double, double),
 			double *a, R_xlen_t na, double *b, R_xlen_t nb,
 			double *x, R_xlen_t n)
 {
     double ai, bi;
     R_xlen_t i, ia, ib;
-    Rboolean naflag = FALSE;
+    bool naflag = false;
     errno = 0;
     MOD_ITERATE2(n, na, nb, i, ia, ib, {
 	ai = a[ia];
 	bi = b[ib];
 	x[i] = f(ai, bi);
-	if (ISNAN(x[i])) naflag = TRUE;
+	if (ISNAN(x[i])) naflag = true;
     });
-    return(naflag);
+    return naflag;
 }
 
-#define RAND2(num,name) \
-	case num: \
+#define RAND2(num, name)                                              \
+	case num:                                                         \
 		naflag = random2(name, REAL(a), na, REAL(b), nb, REAL(x), n); \
 		break
 
@@ -178,7 +178,7 @@ HIDDEN SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NA values produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	PROTECT(b = coerceVector(CADDR(args), REALSXP));
 	GetRNGstate();
@@ -210,29 +210,28 @@ HIDDEN SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-static Rboolean random3(double (*f) (double, double, double), double *a,
+static bool random3(double (*f) (double, double, double), double *a,
 	R_xlen_t na, double *b, R_xlen_t nb, double *c, R_xlen_t nc,
 	double *x, R_xlen_t n)
 {
     double ai, bi, ci;
     R_xlen_t i, ia, ib, ic;
-    Rboolean naflag = FALSE;
+    bool naflag = false;
     errno = 0;
     MOD_ITERATE3(n, na, nb, nc, i, ia, ib, ic, {
 	ai = a[ia];
 	bi = b[ib];
 	ci = c[ic];
 	x[i] = f(ai, bi, ci);
-	if (ISNAN(x[i])) naflag = TRUE;
+	if (ISNAN(x[i])) naflag = true;
     });
-    return(naflag);
+    return naflag;
 }
 
-#define RAND3(num,name) \
-	case num: \
+#define RAND3(num, name)                                                           \
+	case num:                                                                      \
 		naflag = random3(name, REAL(a), na, REAL(b), nb, REAL(c), nc, REAL(x), n); \
 		break
-
 
 /* "do_random3" - random sampling from 3 parameter families. */
 /* See switch below for distributions. */
@@ -276,7 +275,7 @@ HIDDEN SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NA values produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(a, REALSXP));
 	PROTECT(b = coerceVector(b, REALSXP));
 	PROTECT(c = coerceVector(c, REALSXP));

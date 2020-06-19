@@ -85,7 +85,7 @@ R_INLINE static SEXP getSymbolValue(SEXP symbol)
  *  to succeed (to avoid heaps of error messages on a
  *  redraw) which means that the recording should be the
  *  last thing done in a graphical operation (see do_*
- *  in plot.c).
+ *  in plot.cpp).
  *
  */
 
@@ -476,7 +476,7 @@ void GEaddDevice2f(pGEDevDesc gdd, const char *name, const char *file)
 }
 
 
-Rboolean Rf_GetOptionDeviceAsk(void); /* from options.c */
+Rboolean Rf_GetOptionDeviceAsk(void); /* from options.cpp */
 
 /* Create a GEDevDesc, given a pDevDesc
  */

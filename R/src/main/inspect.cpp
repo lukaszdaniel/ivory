@@ -33,13 +33,13 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 
-/* FIXME: envir.c keeps this private - it should probably go to Defn.h */
+/* FIXME: envir.cpp keeps this private - it should probably go to Defn.h */
 #define FRAME_LOCK_MASK (1 << 14)
 #define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
 #define GLOBAL_FRAME_MASK (1 << 15)
 #define IS_GLOBAL_FRAME(e) (ENVFLAGS(e) & GLOBAL_FRAME_MASK)
 
-/* based on EncodeEnvironment in  printutils.c */
+/* based on EncodeEnvironment in  printutils.cpp */
 static void PrintEnvironment(SEXP x)
 {
 	const void *vmax = vmaxget();
@@ -75,7 +75,7 @@ static void pp(int pre)
 
 static const char *typename_(SEXP v)
 {
-	return sexptype2char(TYPEOF(v)); // -> memory.c
+	return sexptype2char(TYPEOF(v)); // -> memory.cpp
 }
 
 static void inspect_tree(int, SEXP, int, int);

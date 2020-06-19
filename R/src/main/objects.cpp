@@ -354,7 +354,7 @@ int Rf_isBasicClass(const char *ss) {
     return findVarInFrame3(s_S3table, install(ss), FALSE) != R_UnboundValue;
 }
 
-/* Note that ./attrib.c 's S4_extends() has an alternative
+/* Note that ./attrib.cpp 's S4_extends() has an alternative
    'sanity check for methods package available' */
 Rboolean R_has_methods_attached(void) {
     return (Rboolean) (
@@ -620,7 +620,7 @@ static SEXP fixcall(SEXP call, SEXP args)
    equalS3Signature: compares "signature" and "left.right"
    all arguments must be non-null
 */
-static Rboolean equalS3Signature(const char *signature, const char *left,
+static bool equalS3Signature(const char *signature, const char *left,
 			 const char *right) {
 
     const char *s = signature;
@@ -628,15 +628,15 @@ static Rboolean equalS3Signature(const char *signature, const char *left,
 
     for(a = left; *a; s++, a++) {
 	if (*s != *a)
-	    return FALSE;
+	    return false;
     }
     if (*s++ != '.')
-	return FALSE;
+	return false;
     for(a = right; *a; s++, a++) {
 	if (*s != *a)
-	    return FALSE;
+	    return false;
     }
-    return (*s == 0) ? TRUE : FALSE;
+    return (*s == 0);
 }
 
 
@@ -1138,13 +1138,11 @@ int R_check_class_etc(SEXP x, const char **valid)
 */
 static R_stdGen_ptr_t R_standardGeneric_ptr = 0;
 static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef);
-//#define NOT_METHODS_DISPATCH_PTR(ptr) (ptr == 0 || ptr == dispatchNonGeneric)
-static inline Rboolean NOT_METHODS_DISPATCH_PTR(R_stdGen_ptr_t ptr) {
-  return (Rboolean) (ptr == 0 || ptr == dispatchNonGeneric);
+static inline bool NOT_METHODS_DISPATCH_PTR(R_stdGen_ptr_t ptr) {
+  return (ptr == 0 || ptr == dispatchNonGeneric);
 }
 
-static
-R_stdGen_ptr_t R_get_standardGeneric_ptr(void)
+static R_stdGen_ptr_t R_get_standardGeneric_ptr(void)
 {
     return R_standardGeneric_ptr;
 }
@@ -1187,7 +1185,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
     return ScalarLogical(ival);
 }
 
-/* simpler version for internal use, in attrib.c and print.c */
+/* simpler version for internal use, in attrib.cpp and print.cpp */
 HIDDEN
 Rboolean isMethodsDispatchOn(void)
 {
@@ -1288,7 +1286,13 @@ HIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static int maxMethodsOffset = 0, curMaxOffset;
 static Rboolean allowPrimitiveMethods = TRUE;
-typedef enum {NO_METHODS, NEEDS_RESET, HAS_METHODS, SUPPRESSED} prim_methods_t;
+enum prim_methods_t
+{
+	NO_METHODS,
+	NEEDS_RESET,
+	HAS_METHODS,
+	SUPPRESSED
+};
 
 static prim_methods_t *prim_methods;
 static SEXP *prim_generics;
@@ -1541,8 +1545,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-HIDDEN SEXP
-R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    Rboolean promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;

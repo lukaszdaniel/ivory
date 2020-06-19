@@ -283,7 +283,7 @@ static void icount(int *x, int *o, int n)
     int w = (order==1) ? 0 : range-1;
     for (int i = 0; i < range; i++) 
         /* no point in adding tmp < n && i <= range, since range includes max, 
-           need to go to max, unlike 256 loops elsewhere in radixsort.c */
+           need to go to max, unlike 256 loops elsewhere in radixsort.cpp */
     {
 	if (counts[w]) {
 	    // cumulate but not through 0's.
@@ -647,14 +647,14 @@ static unsigned long long dtwiddle(void *p, int i, int order)
     return ((u.ull ^ mask) & dmask2);
 }
 
-static Rboolean dnan(void *p, int i)
+static bool dnan(void *p, int i)
 {
     u.d = ((double *) p)[i];
-    return (Rboolean) (ISNAN(u.d));
+    return (ISNAN(u.d));
 }
 
 static unsigned long long (*twiddle) (void *, int, int);
-static Rboolean(*is_nan) (void *, int);
+static bool(*is_nan) (void *, int);
 // the size of the arg type (4 or 8). Just 8 currently until iradix is
 // merged in.
 static size_t colSize = 8;

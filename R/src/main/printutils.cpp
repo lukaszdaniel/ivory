@@ -31,9 +31,9 @@
  * ``standard error'' and is useful for error messages and warnings.
  * It is not redirected by sink().
  *
- *  See ./format.c  for the  format_FOO_  functions which provide
+ *  See ./format.cpp  for the  format_FOO_  functions which provide
  *	~~~~~~~~~~  the	 length, width, etc.. that are used here.
- *  See ./print.c  for do_printdefault, do_prmatrix, etc.
+ *  See ./print.cpp  for do_printdefault, do_prmatrix, etc.
  *
  *
  * Here, the following UTILITIES are provided:
@@ -73,7 +73,7 @@ using namespace std;
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__))
 /* This may not be 100% true (see the comment in rlocales.h),
    but it seems true in normal locales */
-# define __STDC_ISO_10646__
+#define __STDC_ISO_10646__
 #endif
 
 #ifdef _WIN32
@@ -376,7 +376,7 @@ const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di,
 
 /* strlen() using escaped rather than literal form.
    In MBCS locales it works in characters, and reports in display width.
-   Rstrwid is also used in printarray.c.
+   Rstrwid is also used in printarray.cpp.
 
    This supported embedded nuls when we had those.
  */

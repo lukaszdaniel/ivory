@@ -52,9 +52,9 @@ HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #ifdef LONG_VECTOR_SUPPORT
     if (IS_LONG_VEC(x))
-# define _L_INTSXP_ REALSXP
-# define _L_INTEG_  REAL
-# define _L_int_    R_xlen_t
+#define _L_INTSXP_ REALSXP
+#define _L_INTEG_  REAL
+#define _L_int_    R_xlen_t
 # include "split-incl.cpp"
 
 # undef _L_INTSXP_
@@ -63,9 +63,9 @@ HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
     else
 #endif
 
-# define _L_INTSXP_ INTSXP
-# define _L_INTEG_  INTEGER
-# define _L_int_    int
+#define _L_INTSXP_ INTSXP
+#define _L_INTEG_  INTEGER
+#define _L_int_    int
 # include "split-incl.cpp"
 
 # undef _L_INTSXP_

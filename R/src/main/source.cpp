@@ -189,7 +189,7 @@ static void parse_cleanup(void *data)
 
 /* "do_parse" - the user interface input/output to files.
 
- The internal R_Parse.. functions are defined in ./gram.y (-> gram.c)
+ The internal R_Parse.. functions are defined in ./gram.y (-> gram.cpp)
 
  .Internal( parse(file, n, text, prompt, srcfile, encoding) )
  If there is text then that is read and the other arguments are ignored.

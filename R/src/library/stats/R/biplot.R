@@ -1,7 +1,7 @@
 #  File src/library/stats/R/biplot.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 1995-2020 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -27,14 +27,12 @@ biplot.default <-
     n <- nrow(x)
     p <- nrow(y)
     if(missing(xlabs)) {
-	xlabs <- dimnames(x)[[1L]]
-	if(is.null(xlabs)) xlabs <- seq_len(n)
+	xlabs <- dimnames(x)[[1L]] %||% seq_len(n)
     }
     xlabs <- as.character(xlabs)
     dimnames(x) <- list(xlabs, dimnames(x)[[2L]])
     if(missing(ylabs)) {
-	ylabs <- dimnames(y)[[1L]]
-	if(is.null(ylabs)) ylabs <- paste("Var", seq_len(p))
+	ylabs <- dimnames(y)[[1L]] %||% paste("Var", seq_len(p))
     }
     ylabs <- as.character(ylabs)
     dimnames(y) <- list(ylabs, dimnames(y)[[2L]])
@@ -85,7 +83,7 @@ biplot.princomp <- function(x, choices = 1L:2L, scale = 1, pc.biplot=FALSE, ...)
     if(!length(scores <- x$scores))
 	stop(gettextf("object '%s' has no scores", deparse1(substitute(x))), domain = "R-stats")
     lam <- x$sdev[choices]
-    if(is.null(n <- x$n.obs)) n <- 1
+    n <- x$n.obs %||% 1
     lam <- lam * sqrt(n)
     if(scale < 0 || scale > 1) warning(gettextf("'%s' argument is outside [0,1]", "scale"))
     if(scale != 0) lam <- lam^scale else lam <- 1

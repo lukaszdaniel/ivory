@@ -62,9 +62,9 @@
    need to be selected explicitly (even on Win64).
 
    There are also issues with the glob(), readdir(), stat() system
-   calls: see platform.c and sysutils.c
+   calls: see platform.cpp and sysutils.cpp
 
-   saveload.c uses f[gs]etpos: they have 64-bit versions on LFS Linux
+   saveload.cpp uses f[gs]etpos: they have 64-bit versions on LFS Linux
    and Solaris.  But this only used for pre-1.4.0 formats, and fpos_t
    is 64-bit on Windows.
 */
@@ -94,7 +94,7 @@ using namespace std;
 #include <trioremap.h>
 #endif
 
-HIDDEN int R_OutputCon; /* used in printutils.c */
+HIDDEN int R_OutputCon; /* used in printutils.cpp */
 
 static void con_destroy(int i);
 
@@ -645,17 +645,17 @@ void init_con(Rconnection newconn, const char *description, int enc,
 /* ------------------- file connections --------------------- */
 
 #ifdef _WIN32
-# define f_seek fseeko64
-# define f_tell ftello64
-# define OFF_T off64_t
+#define f_seek fseeko64
+#define f_tell ftello64
+#define OFF_T off64_t
 #elif defined(HAVE_OFF_T) && defined(HAVE_FSEEKO)
-# define f_seek fseeko
-# define f_tell ftello
-# define OFF_T off_t
+#define f_seek fseeko
+#define f_tell ftello
+#define OFF_T off_t
 #else
-# define f_seek fseek
-# define f_tell ftell
-# define OFF_T long
+#define f_seek fseek
+#define f_tell ftell
+#define OFF_T long
 #endif
 
 #ifdef _WIN32
@@ -1160,7 +1160,7 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
 #elif defined(_WIN32)  // ----- Windows part ------
 
 // PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 #include <Windows.h>
 #include <wchar.h>
 
@@ -2348,7 +2348,7 @@ HIDDEN SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 /* ------------------- clipboard connections --------------------- */
 
 #ifdef _WIN32
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 extern int GA_clipboardhastext(void); /* from ga.h */
 #endif
@@ -3522,7 +3522,7 @@ HIDDEN SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "encoding");
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     ncon = NextConnection();
-    con = Connections[ncon] = R_newunz(file, strlen(open) ? open : "r"); // see dounzip.c for the details
+    con = Connections[ncon] = R_newunz(file, strlen(open) ? open : "r"); // see dounzip.cpp for the details
 
     strncpy(con->encname, CHAR(STRING_ELT(enc, 0)), 100); /* ASCII */
     con->encname[100 - 1] = '\0';
@@ -5318,7 +5318,7 @@ HIDDEN SEXP do_sumconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 #if defined(USE_WININET_ASYNC) && !defined(USE_WININET)
-# define USE_WININET 2
+#define USE_WININET 2
 #endif
 
 // in internet module: 'type' is unused
@@ -5987,7 +5987,7 @@ static unsigned int uiSwap(unsigned int x)
 #define uiSwap(x) (x)
 #endif
 
-/* These are all hidden and used only in serialize.c,
+/* These are all hidden and used only in serialize.cpp,
    so managing R_alloc stack is prudence. */
 HIDDEN
 SEXP R_compress1(SEXP in)

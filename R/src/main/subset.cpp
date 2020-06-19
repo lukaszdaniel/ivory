@@ -611,7 +611,7 @@ static int ExtractExactArg(SEXP args)
 }
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
-   Also defined in subassign.c */
+   Also defined in subassign.cpp */
 R_INLINE static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
@@ -1232,7 +1232,7 @@ HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-/* used in eval.c */
+/* used in eval.cpp */
 HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 {
     SEXP y, nlist;
@@ -1320,7 +1320,7 @@ HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    case PARTIAL_MATCH:
 		havematch++;
 		if (havematch == 1) {
-		    /* partial matches can cause aliasing in eval.c:evalseq
+		    /* partial matches can cause aliasing in eval.cpp:evalseq
 		       This is overkill, but alternative ways to prevent
 		       the aliasing appear to be even worse */
 		    y = VECTOR_ELT(x,i);

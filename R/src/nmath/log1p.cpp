@@ -104,7 +104,7 @@ double Rlog1p(double x)
     if (nlnrel == 0) /* initialize chebychev coefficients */
 	nlnrel = chebyshev_init(alnrcs, 43, DBL_EPSILON/20);/*was .1*d1mach(3)*/
 #else
-# define nlnrel 22
+#define nlnrel 22
     static constexpr double xmin = -0.999999985;
 /* 22: for IEEE double precision where DBL_EPSILON =  2.22044604925031e-16 */
 #endif

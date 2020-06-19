@@ -107,7 +107,7 @@ double Rf_rpois(double mu)
 		q = p0 = p = exp(-mu);
 	    }
 
-	    while(TRUE) {
+	    while(true) {
 		/* Step U. uniform sample for inversion method */
 		u = unif_rand();
 		if (u <= p0)
@@ -187,7 +187,7 @@ double Rf_rpois(double mu)
     }
 
 
-    while(TRUE) {
+    while(true) {
 	/* Step E. Exponential Sample */
 
 	E = exp_rand();	/* ~ Exp(1) (standard exponential) */

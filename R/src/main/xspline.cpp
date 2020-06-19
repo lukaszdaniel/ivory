@@ -3,7 +3,7 @@
  * instead linked lists of F_points and to remove some globals(!)
  * See copyright etc below.
  *
- * #included from engine.c
+ * #included from engine.cpp
  * That manages the R_alloc stack.
  */
 
@@ -47,8 +47,7 @@ static double *ypoints;
 /************* Code begins here *************/
 
 /* R_allocs or mallocs global arrays */
-static Rboolean
-add_point(double x, double y, pGEDevDesc dd)
+static bool add_point(double x, double y, pGEDevDesc dd)
 {
     if (npoints >= max_points) {
 	int tmp_n;
@@ -79,14 +78,14 @@ add_point(double x, double y, pGEDevDesc dd)
     }
     /* ignore identical points */
     if (npoints > 0 && xpoints[npoints-1] == x && ypoints[npoints-1] == y)
-	return TRUE;
+	return true;
     /*
      * Convert back from 1200ppi to DEVICE coordinates
      */
     xpoints[npoints] = toDeviceX(x / 1200, GE_INCHES, dd);
     ypoints[npoints] = toDeviceY(y / 1200, GE_INCHES, dd);
     npoints = npoints + 1;
-    return TRUE;
+    return true;
 }
 
 /*
@@ -123,17 +122,17 @@ add_point(double x, double y, pGEDevDesc dd)
 
 ***********************************************************************/
 
-#define         HIGH_PRECISION    0.5
-#define         LOW_PRECISION     1.0
-#define         ZOOM_PRECISION    5.0
-#define         ARROW_START       4
-#define         MAX_SPLINE_STEP   0.2
+// #define         HIGH_PRECISION    0.5
+constexpr double LOW_PRECISION = 1.0;
+// #define         ZOOM_PRECISION    5.0
+// #define         ARROW_START       4
+constexpr double MAX_SPLINE_STEP = 0.2;
 
 /***********************************************************************/
 
-#define Q(s)  (-(s))
+#define Q(s) (-(s))
 #define EQN_NUMERATOR(dim) \
-  (A_blend[0]*dim[0]+A_blend[1]*dim[1]+A_blend[2]*dim[2]+A_blend[3]*dim[3])
+  (A_blend[0] * dim[0] + A_blend[1] * dim[1] + A_blend[2] * dim[2] + A_blend[3] * dim[3])
 
 static double f_blend(double numerator, double denominator)
 {
@@ -141,75 +140,75 @@ static double f_blend(double numerator, double denominator)
   double u = numerator / denominator;
   double u2 = u * u;
 
-  return (u * u2 * (10 - p + (2*p - 15)*u + (6 - p)*u2));
+  return (u * u2 * (10 - p + (2 * p - 15) * u + (6 - p) * u2));
 }
 
-static double g_blend(double u, double q)             /* p equals 2 */
+static double g_blend(double u, double q) /* p equals 2 */
 {
-  return(u*(q + u*(2*q + u*(8 - 12*q + u*(14*q - 11 + u*(4 - 5*q))))));
+  return (u * (q + u * (2 * q + u * (8 - 12 * q + u * (14 * q - 11 + u * (4 - 5 * q))))));
 }
 
 static double h_blend(double u, double q)
 {
-    double u2=u*u;
-    return (u * (q + u * (2 * q + u2 * (-2*q - u*q))));
+  double u2 = u * u;
+  return (u * (q + u * (2 * q + u2 * (-2 * q - u * q))));
 }
 
-static void negative_s1_influence(double t, double s1, double *A0, double *A2)
+static void negative_s1_influence(double t, double s1, double &A0, double &A2)
 {
-  *A0 = h_blend(-t, Q(s1));
-  *A2 = g_blend(t, Q(s1));
+  A0 = h_blend(-t, Q(s1));
+  A2 = g_blend(t, Q(s1));
 }
 
-static void negative_s2_influence(double t, double s2, double *A1, double *A3)
+static void negative_s2_influence(double t, double s2, double &A1, double &A3)
 {
-  *A1 = g_blend(1-t, Q(s2));
-  *A3 = h_blend(t-1, Q(s2));
+  A1 = g_blend(1 - t, Q(s2));
+  A3 = h_blend(t - 1, Q(s2));
 }
 
-static void positive_s1_influence(double k, double t, double s1, double *A0, double *A2)
-{
-  double Tk;
-
-  Tk = k+1+s1;
-  *A0 = (t+k+1<Tk) ? f_blend(t+k+1-Tk, k-Tk) : 0.0;
-
-  Tk = k+1-s1;
-  *A2 = f_blend(t+k+1-Tk, k+2-Tk);
-}
-
-static void positive_s2_influence(double k, double t, double s2, double *A1, double *A3)
+static void positive_s1_influence(double k, double t, double s1, double &A0, double &A2)
 {
   double Tk;
 
-  Tk = k+2+s2;
-  *A1 = f_blend(t+k+1-Tk, k+1-Tk);
+  Tk = k + 1 + s1;
+  A0 = (t + k + 1 < Tk) ? f_blend(t + k + 1 - Tk, k - Tk) : 0.0;
 
-  Tk = k+2-s2;
-  *A3 = (t+k+1>Tk) ? f_blend(t+k+1-Tk, k+3-Tk) : 0.0;
+  Tk = k + 1 - s1;
+  A2 = f_blend(t + k + 1 - Tk, k + 2 - Tk);
+}
+
+static void positive_s2_influence(double k, double t, double s2, double &A1, double &A3)
+{
+  double Tk;
+
+  Tk = k + 2 + s2;
+  A1 = f_blend(t + k + 1 - Tk, k + 1 - Tk);
+
+  Tk = k + 2 - s2;
+  A3 = (t + k + 1 > Tk) ? f_blend(t + k + 1 - Tk, k + 3 - Tk) : 0.0;
 }
 
 static void point_adding(double *A_blend, double *px, double *py,
-	     pGEDevDesc dd)
+                         pGEDevDesc dd)
 {
   double weights_sum;
 
   weights_sum = A_blend[0] + A_blend[1] + A_blend[2] + A_blend[3];
   add_point(EQN_NUMERATOR(px) / (weights_sum),
-	    EQN_NUMERATOR(py) / (weights_sum),
-	    dd);
+            EQN_NUMERATOR(py) / (weights_sum),
+            dd);
 }
 
 static void point_computing(double *A_blend,
-		double *px, double *py,
-		double *x, double *y)
+                            double *px, double *py,
+                            double &x, double &y)
 {
   double weights_sum;
 
   weights_sum = A_blend[0] + A_blend[1] + A_blend[2] + A_blend[3];
 
-  *x = EQN_NUMERATOR(px) / (weights_sum);
-  *y = EQN_NUMERATOR(py) / (weights_sum);
+  x = EQN_NUMERATOR(px) / (weights_sum);
+  y = EQN_NUMERATOR(py) / (weights_sum);
 }
 
 static double step_computing(int k,
@@ -233,13 +232,13 @@ static double step_computing(int k,
   /* compute coordinates of the origin */
   if (s1>0) {
       if (s2<0) {
-	  positive_s1_influence(k, 0.0, s1, &A_blend[0], &A_blend[2]);
-	  negative_s2_influence(0.0, s2, &A_blend[1], &A_blend[3]);
+	  positive_s1_influence(k, 0.0, s1, A_blend[0], A_blend[2]);
+	  negative_s2_influence(0.0, s2, A_blend[1], A_blend[3]);
       } else {
-	  positive_s1_influence(k, 0.0, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, 0.0, s2, &A_blend[1], &A_blend[3]);
+	  positive_s1_influence(k, 0.0, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, 0.0, s2, A_blend[1], A_blend[3]);
       }
-      point_computing(A_blend, px, py, &xstart, &ystart);
+      point_computing(A_blend, px, py, xstart, ystart);
   } else {
       xstart = px[1];
       ystart = py[1];
@@ -248,13 +247,13 @@ static double step_computing(int k,
   /* compute coordinates  of the extremity */
   if (s2>0) {
       if (s1<0) {
-	  negative_s1_influence(1.0, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, 1.0, s2, &A_blend[1], &A_blend[3]);
+	  negative_s1_influence(1.0, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, 1.0, s2, A_blend[1], A_blend[3]);
       } else {
-	  positive_s1_influence(k, 1.0, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, 1.0, s2, &A_blend[1], &A_blend[3]);
+	  positive_s1_influence(k, 1.0, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, 1.0, s2, A_blend[1], A_blend[3]);
       }
-      point_computing(A_blend, px, py, &xend, &yend);
+      point_computing(A_blend, px, py, xend, yend);
   } else {
       xend = px[2];
       yend = py[2];
@@ -263,20 +262,20 @@ static double step_computing(int k,
   /* compute coordinates  of the middle */
   if (s2>0) {
       if (s1<0) {
-	  negative_s1_influence(0.5, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, 0.5, s2, &A_blend[1], &A_blend[3]);
+	  negative_s1_influence(0.5, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, 0.5, s2, A_blend[1], A_blend[3]);
       } else {
-	  positive_s1_influence(k, 0.5, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, 0.5, s2, &A_blend[1], &A_blend[3]);
+	  positive_s1_influence(k, 0.5, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, 0.5, s2, A_blend[1], A_blend[3]);
 	}
   } else if (s1<0) {
-      negative_s1_influence(0.5, s1, &A_blend[0], &A_blend[2]);
-      negative_s2_influence(0.5, s2, &A_blend[1], &A_blend[3]);
+      negative_s1_influence(0.5, s1, A_blend[0], A_blend[2]);
+      negative_s2_influence(0.5, s2, A_blend[1], A_blend[3]);
   } else {
-      positive_s1_influence(k, 0.5, s1, &A_blend[0], &A_blend[2]);
-      negative_s2_influence(0.5, s2, &A_blend[1], &A_blend[3]);
+      positive_s1_influence(k, 0.5, s1, A_blend[0], A_blend[2]);
+      negative_s2_influence(0.5, s2, A_blend[1], A_blend[3]);
   }
-  point_computing(A_blend, px, py, &xmid, &ymid);
+  point_computing(A_blend, px, py, xmid, ymid);
 
   xv1 = xstart - xmid;
   yv1 = ystart - ymid;
@@ -342,30 +341,30 @@ static void spline_segment_computing(double step, int k,
   if (s1<0) {
      if (s2<0) {
 	 for (t=0.0 ; t<1 ; t+=step) {
-	     negative_s1_influence(t, s1, &A_blend[0], &A_blend[2]);
-	     negative_s2_influence(t, s2, &A_blend[1], &A_blend[3]);
+	     negative_s1_influence(t, s1, A_blend[0], A_blend[2]);
+	     negative_s2_influence(t, s2, A_blend[1], A_blend[3]);
 
 	     point_adding(A_blend, px, py, dd);
 	 }
      } else {
 	 for (t=0.0 ; t<1 ; t+=step) {
-	     negative_s1_influence(t, s1, &A_blend[0], &A_blend[2]);
-	     positive_s2_influence(k, t, s2, &A_blend[1], &A_blend[3]);
+	     negative_s1_influence(t, s1, A_blend[0], A_blend[2]);
+	     positive_s2_influence(k, t, s2, A_blend[1], A_blend[3]);
 
 	     point_adding(A_blend, px, py, dd);
 	 }
      }
   } else if (s2<0) {
       for (t=0.0 ; t<1 ; t+=step) {
-	     positive_s1_influence(k, t, s1, &A_blend[0], &A_blend[2]);
-	     negative_s2_influence(t, s2, &A_blend[1], &A_blend[3]);
+	     positive_s1_influence(k, t, s1, A_blend[0], A_blend[2]);
+	     negative_s2_influence(t, s2, A_blend[1], A_blend[3]);
 
 	     point_adding(A_blend, px, py, dd);
       }
   } else {
       for (t=0.0 ; t<1 ; t+=step) {
-	     positive_s1_influence(k, t, s1, &A_blend[0], &A_blend[2]);
-	     positive_s2_influence(k, t, s2, &A_blend[1], &A_blend[3]);
+	     positive_s1_influence(k, t, s1, A_blend[0], A_blend[2]);
+	     positive_s2_influence(k, t, s2, A_blend[1], A_blend[3]);
 
 	     point_adding(A_blend, px, py, dd);
       }
@@ -387,24 +386,24 @@ static void spline_last_segment_computing(double step, int k,
 
   if (s1<0) {
       if (s2<0) {
-	  negative_s1_influence(t, s1, &A_blend[0], &A_blend[2]);
-	  negative_s2_influence(t, s2, &A_blend[1], &A_blend[3]);
+	  negative_s1_influence(t, s1, A_blend[0], A_blend[2]);
+	  negative_s2_influence(t, s2, A_blend[1], A_blend[3]);
 
 	  point_adding(A_blend, px, py, dd);
       } else {
-	  negative_s1_influence(t, s1, &A_blend[0], &A_blend[2]);
-	  positive_s2_influence(k, t, s2, &A_blend[1], &A_blend[3]);
+	  negative_s1_influence(t, s1, A_blend[0], A_blend[2]);
+	  positive_s2_influence(k, t, s2, A_blend[1], A_blend[3]);
 
 	  point_adding(A_blend, px, py, dd);
       }
   } else if (s2<0) {
-      positive_s1_influence(k, t, s1, &A_blend[0], &A_blend[2]);
-      negative_s2_influence(t, s2, &A_blend[1], &A_blend[3]);
+      positive_s1_influence(k, t, s1, A_blend[0], A_blend[2]);
+      negative_s2_influence(t, s2, A_blend[1], A_blend[3]);
 
       point_adding(A_blend, px, py, dd);
   } else {
-      positive_s1_influence(k, t, s1, &A_blend[0], &A_blend[2]);
-      positive_s2_influence(k, t, s2, &A_blend[1], &A_blend[3]);
+      positive_s1_influence(k, t, s1, A_blend[0], A_blend[2]);
+      positive_s2_influence(k, t, s2, A_blend[1], A_blend[3]);
 
       point_adding(A_blend, px, py, dd);
   }
@@ -439,7 +438,7 @@ static void spline_last_segment_computing(double step, int k,
   step = step_computing(K, PX, PY, S1, S2, PREC, dd); \
   spline_segment_computing(step, K, PX, PY, S1, S2, dd)
 
-static Rboolean compute_open_spline(int n, double *x, double *y, double *s,
+static bool compute_open_spline(int n, double *x, double *y, double *s,
 		    Rboolean repEnds,
 		    double precision,
 		    pGEDevDesc dd)
@@ -448,7 +447,7 @@ static Rboolean compute_open_spline(int n, double *x, double *y, double *s,
   double     step = 0.0 /* -Wall */;
   double px[4];
   double py[4];
-  double ps[4]={0.,0.,0.,0.};
+  double ps[4] = {0., 0., 0., 0.};
 
   max_points = 0;
   npoints = 0;
@@ -498,10 +497,10 @@ static Rboolean compute_open_spline(int n, double *x, double *y, double *s,
       spline_last_segment_computing(step, n - 4, px, py, ps[1], ps[2], dd);
   }
 
-  return TRUE;
+  return true;
 }
 
-static Rboolean compute_closed_spline(int n, double *x, double *y, double *s,
+static bool compute_closed_spline(int n, double *x, double *y, double *s,
 		      double precision,
 		      pGEDevDesc dd)
 {
@@ -526,5 +525,5 @@ static Rboolean compute_closed_spline(int n, double *x, double *y, double *s,
       NEXT_CONTROL_POINTS(k, n);
   }
 
-  return TRUE;
+  return true;
 }

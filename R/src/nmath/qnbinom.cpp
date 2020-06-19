@@ -47,7 +47,7 @@
 static double do_search(double y, double *z, double p, double n, double pr, double incr)
 {
     if(*z >= p) {	/* search to the left */
-	while(TRUE) {
+	while(true) {
 	    if(y == 0 ||
 	       (*z = Rf_pnbinom(y - incr, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) < p)
 		return y;
@@ -55,7 +55,7 @@ static double do_search(double y, double *z, double p, double n, double pr, doub
 	}
     }
     else {		/* search to the right */
-	while(TRUE) {
+	while(true) {
 	    y = y + incr;
 	    if((*z = Rf_pnbinom(y, n, pr, /*l._t.*/TRUE, /*log_p*/FALSE)) >= p)
 		return y;

@@ -30,13 +30,13 @@
  */
 
 #ifdef HAVE_LONG_DOUBLE
-# define EXP expl
-# define FABS fabsl
-# define LOG logl
+#define EXP expl
+#define FABS fabsl
+#define LOG logl
 #else
-# define EXP exp
-# define FABS fabs
-# define LOG log
+#define EXP exp
+#define FABS fabs
+#define LOG log
 #endif
 
 static constexpr double _dbl_min_exp = M_LN2 * DBL_MIN_EXP;

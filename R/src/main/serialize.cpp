@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995--2019  The R Core Team
+ *  Copyright (C) 1995--2020  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -484,7 +484,7 @@ static Rcomplex InComplex(R_inpstream_t stream)
 
 /* These utilities for reading characters with an unget option are
    defined so the code in InString can match the code in
-   saveload.c:InStringAscii--that way it is easier to match changes in
+   saveload.cpp:InStringAscii--that way it is easier to match changes in
    one to the other. */
 typedef struct R_instring_stream_st {
     int last;
@@ -1069,8 +1069,10 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	HashAdd(s, ref_table);
 	if (R_IsPackageEnv(s)) {
 	    SEXP name = R_PackageEnvName(s);
+	    const void *vmax = vmaxget();
 	    warning(_("'%s' may not be available when loading"),
-		    CHAR(STRING_ELT(name, 0)));
+		    translateChar(STRING_ELT(name, 0)));
+	    vmaxset(vmax);
 	    OutInteger(stream, PACKAGESXP);
 	    OutStringVec(stream, name, ref_table);
 	}
@@ -1218,7 +1220,7 @@ static SEXP MakeCircleHashTable(void)
     return CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
 }
 
-static Rboolean AddCircleHash(SEXP item, SEXP ct)
+static bool AddCircleHash(SEXP item, SEXP ct)
 {
     SEXP table, bucket, list;
 
@@ -1232,14 +1234,14 @@ static Rboolean AddCircleHash(SEXP item, SEXP ct)
 		SETCAR(list, R_UnboundValue); /* anything different will do */
 		SETCAR(ct, CONS(item, CAR(ct)));
 	    }
-	    return (Rboolean) TRUE;
+	    return true;
 	}
 
     /* If we get here then this is a new item; enter in the table */
     bucket = CONS(R_NilValue, bucket);
     SET_TAG(bucket, item);
     SET_VECTOR_ELT(table, pos, bucket);
-    return (Rboolean) FALSE;
+    return false;
 }
 
 static void ScanForCircles1(SEXP s, SEXP ct)
@@ -1406,7 +1408,7 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
  * Unserialize Code
  */
 
-// used in saveload.c
+// used in saveload.cpp
 HIDDEN int R_ReadItemDepth = 0, R_InitReadItemDepth;
 
 static char lastname[8192] = "<unknown>";
@@ -1588,7 +1590,7 @@ static SEXP ConvertChar(void *obj, char *inp, size_t inplen, cetype_t enc)
 {
     size_t buflen = inplen;
 
-    while(TRUE) {
+    while(true) {
 	size_t bufleft = buflen;
 	if (buflen < 1000) {
 	    char buf[buflen + 1];
@@ -1727,7 +1729,7 @@ static R_xlen_t ReadLENGTH (R_inpstream_t stream)
 #endif
 }
 
-/* differs when it fails from version in envir.c */
+/* differs when it fails from version in envir.cpp */
 static SEXP R_FindNamespace1(SEXP info)
 {
     SEXP expr, val, where;
@@ -2907,25 +2909,29 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     size_t len, out;
     long pos;  // what ftell gives: won't work for > 2GB files
     SEXP val;
+    const void *vmax;
+    const char *cfile;
 
     if (! IS_PROPER_STRING(file))
 	error(_("'%s' argument is not a proper file name"), "file");
+    vmax = vmaxget();
+    cfile = translateCharFP(STRING_ELT(file, 0));
     if (TYPEOF(bytes) != RAWSXP)
 	error(_("'%s' argument is not a proper raw vector"), "bytes");
 #ifdef HAVE_WORKING_FTELL
     /* Windows' ftell returns position 0 with "ab" */
-    if ((fp = R_fopen(CHAR(STRING_ELT(file, 0)), "ab")) == NULL) {
-	error( _("cannot open file '%s': %s"), CHAR(STRING_ELT(file, 0)),
+    if ((fp = R_fopen(cfile, "ab")) == NULL) {
+	error( _("cannot open file '%s': %s"), cfile,
 	       strerror(errno));
     }
 #else
-    if ((fp = R_fopen(CHAR(STRING_ELT(file, 0)), "r+b")) == NULL) {
-	error( _("cannot open file '%s': %s"), CHAR(STRING_ELT(file, 0)),
+    if ((fp = R_fopen(cfile, "r+b")) == NULL) {
+	error( _("cannot open file '%s': %s"), cfile,
 	       strerror(errno));
     }
     if (fseek(fp, 0, SEEK_END) != 0) {
 	fclose(fp);
-	error(_("seek failed on %s"), CHAR(STRING_ELT(file, 0)));
+	error(_("seek failed on %s"), cfile);
     }
 #endif
 
@@ -2940,6 +2946,8 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     val = allocVector(INTSXP, 2);
     INTEGER(val)[0] = (int) pos;
     INTEGER(val)[1] = (int) len;
+    vmaxset(vmax);
+
     return val;
 }
 
@@ -2956,7 +2964,7 @@ HIDDEN SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 
     int i;
-    const char *cfile = CHAR(STRING_ELT(CAR(args), 0));
+    const char *cfile = translateCharFP(STRING_ELT(CAR(args), 0));
 
     /* fprintf(stderr, "flushing file %s", cfile); */
     for (i = 0; i < used; i++)
@@ -2982,10 +2990,13 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     int offset, len, in, i, icache = -1;
     long filelen;
     SEXP val;
-    const char *cfile = CHAR(STRING_ELT(file, 0));
+    const void *vmax;
+    const char *cfile;
 
     if (! IS_PROPER_STRING(file))
 	error(_("not a proper file name"));
+    vmax = vmaxget();
+    cfile = translateCharFP(STRING_ELT(file, 0));
     if (TYPEOF(key) != INTSXP || LENGTH(key) != 2)
 	error(_("bad offset/length argument"));
 
@@ -2998,6 +3009,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	if(streql(cfile, names[i])) {icache = i; break;}
     if (icache >= 0) {
 	memcpy(RAW(val), ptr[icache]+offset, len);
+	vmaxset(vmax);
 	return val;
     }
 
@@ -3039,6 +3051,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 		fclose(fp);
 		if (len != in) error(_("read failed on %s"), cfile);
 	    }
+	    vmaxset(vmax);
 	    return val;
 	} else {
 	    if (fseek(fp, offset, SEEK_SET) != 0) {
@@ -3048,6 +3061,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	    in = (int) fread(RAW(val), 1, len, fp);
 	    fclose(fp);
 	    if (len != in) error(_("read failed on %s"), cfile);
+	    vmaxset(vmax);
 	    return val;
 	}
     }
@@ -3061,6 +3075,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     in = (int) fread(RAW(val), 1, len, fp);
     fclose(fp);
     if (len != in) error(_("read failed on %s"), cfile);
+    vmaxset(vmax);
     return val;
 }
 
@@ -3110,7 +3125,7 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
     return val;
 }
 
-/* from connections.c */
+/* from connections.cpp */
 SEXP R_compress1(SEXP in);
 SEXP R_decompress1(SEXP in, Rboolean *err);
 SEXP R_compress2(SEXP in);
@@ -3169,7 +3184,7 @@ HIDDEN SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 	REPROTECT(val = R_decompress2(val, &err), vpi);
     else if (compressed)
 	REPROTECT(val = R_decompress1(val, &err), vpi);
-    if (err) error(_("lazy-load database '%s' is corrupt"), CHAR(STRING_ELT(file, 0)));
+    if (err) error(_("lazy-load database '%s' is corrupt"), translateChar(STRING_ELT(file, 0)));
     val = R_unserialize(val, hook);
     if (TYPEOF(val) == PROMSXP) {
 	REPROTECT(val, vpi);

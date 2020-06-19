@@ -28,15 +28,16 @@
 /* Implementation of identical(x, y) */
 
 /* How are  R "double"s compared : */
-typedef enum {
-    bit_NA__num_bit = 0,// S's default - look at bit pattern, also for NA/NaN's
-    bit_NA__num_eq  = 1,// bitwise comparison for NA / NaN; '==' for other numbers
- single_NA__num_bit = 2,// one kind of NA or NaN; for num, use 'bit'comparison
- single_NA__num_eq  = 3,// one kind of NA or NaN; for num, use '==' : R's DEFAULT
-} ne_strictness_type;
+enum ne_strictness_type
+{
+	bit_NA__num_bit = 0,	// S's default - look at bit pattern, also for NA/NaN's
+	bit_NA__num_eq = 1,		// bitwise comparison for NA / NaN; '==' for other numbers
+	single_NA__num_bit = 2, // one kind of NA or NaN; for num, use 'bit'comparison
+	single_NA__num_eq = 3,	// one kind of NA or NaN; for num, use '==' : R's DEFAULT
+};
 /* NOTE:  ne_strict = NUM_EQ + (SINGLE_NA * 2)  = NUM_EQ | (SINGLE_NA << 1)   */
 
-static Rboolean neWithNaN(double x, double y, ne_strictness_type str);
+static bool neWithNaN(double x, double y, ne_strictness_type str);
 
 
 /* .Internal(identical(..)) */
@@ -92,9 +93,8 @@ HIDDEN SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
 #define IGNORE_SRCREF   (!(flags & 32))
 
 /* do the two objects compute as identical?
-   Also used in unique.c */
-Rboolean
-R_compute_identical(SEXP x, SEXP y, int flags)
+   Also used in unique.cpp */
+Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 {
     SEXP ax, ay, atrx, atry;
     if(x == y) /* same pointer */
@@ -337,39 +337,44 @@ R_compute_identical(SEXP x, SEXP y, int flags)
  *  whereas "bit_NA" and "num_bit" use the bitwise memory comparison  memcmp();
  *  notably "*_num_bit" will differentiate '+0.' and '-0.'.
  *
- * @return FALSE or TRUE indicating if x or y differ
+ * @return false or true indicating if x or y differ
  */
-static Rboolean neWithNaN(double x, double y, ne_strictness_type str)
+static bool neWithNaN(double x, double y, ne_strictness_type str)
 {
-    switch (str) {
-    case single_NA__num_eq:
-    case single_NA__num_bit:
-	if(R_IsNA(x))
-	    return(R_IsNA(y) ? FALSE : TRUE);
-	if(R_IsNA(y))
-	    return(R_IsNA(x) ? FALSE : TRUE);
-	if(ISNAN(x))
-	    return(ISNAN(y) ? FALSE : TRUE);
+	switch (str)
+	{
+	case single_NA__num_eq:
+	case single_NA__num_bit:
+		if (R_IsNA(x))
+			return (R_IsNA(y) ? false : true);
+		if (R_IsNA(y))
+			return (R_IsNA(x) ? false : true);
+		if (ISNAN(x))
+			return (ISNAN(y) ? false : true);
 
-    case bit_NA__num_eq:
-    case bit_NA__num_bit:
-	; /* do nothing */
-    }
+	case bit_NA__num_eq:
+	case bit_NA__num_bit:; /* do nothing */
+	}
 
-    switch (str) {
-    case single_NA__num_eq:
-	return (Rboolean) (x != y);
-    case bit_NA__num_eq:
-	if(!ISNAN(x) && !ISNAN(y))
-	    return (Rboolean) (x != y);
-	else /* bitwise check for NA/NaN's */
-	    return memcmp((const void *) &x,
-			  (const void *) &y, sizeof(double)) ? TRUE : FALSE;
-    case bit_NA__num_bit:
-    case single_NA__num_bit:
-	return memcmp((const void *) &x,
-		      (const void *) &y, sizeof(double)) ? TRUE : FALSE;
-    default: /* Wall */
-	return FALSE;
-    }
+	switch (str)
+	{
+	case single_NA__num_eq:
+		return (Rboolean)(x != y);
+	case bit_NA__num_eq:
+		if (!ISNAN(x) && !ISNAN(y))
+			return (Rboolean)(x != y);
+		else /* bitwise check for NA/NaN's */
+			return memcmp((const void *)&x,
+						  (const void *)&y, sizeof(double))
+					   ? true
+					   : false;
+	case bit_NA__num_bit:
+	case single_NA__num_bit:
+		return memcmp((const void *)&x,
+					  (const void *)&y, sizeof(double))
+				   ? true
+				   : false;
+	default: /* Wall */
+		return false;
+	}
 }

@@ -63,13 +63,13 @@
 */
 #ifdef _WIN32
 # ifndef USE_VALGRIND_FOR_WINE
-# define NVALGRIND 1
+#define NVALGRIND 1
 #endif
 #endif
 
 
 #ifndef VALGRIND_LEVEL
-# define VALGRIND_LEVEL 0
+#define VALGRIND_LEVEL 0
 #endif
 
 #ifndef NVALGRIND
@@ -136,7 +136,7 @@ static void gc_error(const char *msg)
 int R_gc_running() { return R_in_gc; }
 
 #ifdef TESTING_WRITE_BARRIER
-# define PROTECTCHECK
+#define PROTECTCHECK
 #endif
 
 #ifdef PROTECTCHECK
@@ -207,7 +207,7 @@ R_INLINE static void register_bad_sexp_type(SEXP s, int line)
     }
 }
 
-/* also called from typename() in inspect.c */
+/* also called from typename() in inspect.cpp */
 HIDDEN
 const char *Rf_sexptype2char(const SEXPTYPE type) {
     switch (type) {
@@ -253,7 +253,7 @@ static int gc_force_gap = 0;
 static Rboolean gc_inhibit_release = FALSE;
 #define FORCE_GC (gc_pending || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
 #else
-# define FORCE_GC gc_pending
+#define FORCE_GC gc_pending
 #endif
 
 #ifdef R_MEMORY_PROFILING
@@ -567,9 +567,9 @@ typedef union PAGE_HEADER {
 } PAGE_HEADER;
 
 #if ( SIZEOF_SIZE_T > 4 )
-# define BASE_PAGE_SIZE 8000
+#define BASE_PAGE_SIZE 8000
 #else
-# define BASE_PAGE_SIZE 2000
+#define BASE_PAGE_SIZE 2000
 #endif
 #define R_PAGE_SIZE \
     (((BASE_PAGE_SIZE - sizeof(PAGE_HEADER)) / sizeof(SEXPREC)) * sizeof(SEXPREC) + sizeof(PAGE_HEADER))
@@ -680,11 +680,11 @@ static R_size_t R_NodesInUse = 0;
    part of a hash chain.  Theoretically, for CHARSXPs the ATTRIB field
    should always be either R_NilValue or a CHARSXP. */
 #ifdef PROTECTCHECK
-# define HAS_GENUINE_ATTRIB(x) \
+#define HAS_GENUINE_ATTRIB(x) \
     (TYPEOF(x) != FREESXP && ATTRIB(x) != R_NilValue && \
      (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #else
-# define HAS_GENUINE_ATTRIB(x) \
+#define HAS_GENUINE_ATTRIB(x) \
     (ATTRIB(x) != R_NilValue && \
      (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #endif
@@ -1441,9 +1441,9 @@ static void CheckFinalizers(void)
    are not guaranteed to be compatible with a void *.  There should be
    a cleaner way of doing this, but this will do for now. --LT */
 /* Changed to RAWSXP in 2.8.0 */
-static Rboolean isCFinalizer(SEXP fun)
+static bool isCFinalizer(SEXP fun)
 {
-    return (Rboolean) (TYPEOF(fun) == RAWSXP);
+    return (TYPEOF(fun) == RAWSXP);
     /*return TYPEOF(fun) == EXTPTRSXP;*/
 }
 
@@ -2083,7 +2083,7 @@ HIDDEN SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     return old;
 }
 
-/* reports memory use to profiler in eval.c */
+/* reports memory use to profiler in eval.cpp */
 
 HIDDEN void get_current_mem(size_t *smallvsize,
 				      size_t *largevsize,
@@ -2949,16 +2949,16 @@ SEXP Rf_allocList(int n)
     SEXP result;
     result = R_NilValue;
     for (i = 0; i < n; i++)
-	result = CONS(R_NilValue, result);
+        result = CONS(R_NilValue, result);
     return result;
 }
 
 SEXP Rf_allocS4Object(void)
 {
-   SEXP s;
-   GC_PROT(s = allocSExpNonCons(S4SXP));
-   SET_S4_OBJECT(s);
-   return s;
+    SEXP s;
+    GC_PROT(s = allocSExpNonCons(S4SXP));
+    SET_S4_OBJECT(s);
+    return s;
 }
 
 static SEXP allocFormalsList(int nargs, ...)
@@ -3219,19 +3219,19 @@ static void R_gc_internal(R_size_t size_needed)
 #ifdef PROTECTCHECK
 	if (first_bad_sexp_type == FREESXP)
 	    snprintf(msg, 256,
-	          "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d",
+	          "GC encountered a node (%p) with type FREESXP (was %s) at memory.cpp:%d",
 		  (void *) first_bad_sexp_type_sexp,
 		  sexptype2char(first_bad_sexp_type_old_type),
 		  first_bad_sexp_type_line);
 	else
 	    snprintf(msg, 256,
-		     "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d",
+		     "GC encountered a node (%p) with an unknown SEXP type: %d at memory.cpp:%d",
 		     (void *) first_bad_sexp_type_sexp,
 		     first_bad_sexp_type,
 		     first_bad_sexp_type_line);
 #else
 	snprintf(msg, 256,
-		 "GC encountered a node (%p) with an unknown SEXP type: %d at memory.c:%d",
+		 "GC encountered a node (%p) with an unknown SEXP type: %d at memory.cpp:%d",
 		 (void *)first_bad_sexp_type_sexp,
 		 first_bad_sexp_type,
 		 first_bad_sexp_type_line);
@@ -3386,15 +3386,15 @@ int Rf_isProtected(SEXP s)
     int i = R_PPStackTop;
 
     /* go look for  s  in  R_PPStack */
-    do {
-	if (i == 0)
-	    return(i);
-    } while ( R_PPStack[--i] != s );
+    do
+    {
+        if (i == 0)
+            return (i);
+    } while (R_PPStack[--i] != s);
 
     /* OK, got it, and  i  is indexing its location */
-    return(i);
+    return (i);
 }
-
 
 #ifndef INLINE_PROTECT
 void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
@@ -3467,11 +3467,14 @@ void *R_chk_realloc(void *ptr, size_t size)
 {
     void *p;
     /* Protect against broken realloc */
-    if(ptr) p = realloc(ptr, size); else p = malloc(size);
-    if(!p)
-	error(_("'Realloc()' function could not re-allocate memory (%.0f bytes)"),
-	      (double) size);
-    return(p);
+    if (ptr)
+        p = realloc(ptr, size);
+    else
+        p = malloc(size);
+    if (!p)
+        error(_("'Realloc()' function could not re-allocate memory (%.0f bytes)"),
+              (double)size);
+    return (p);
 }
 
 void R_chk_free(void *ptr)
@@ -3490,17 +3493,21 @@ void R_chk_free(void *ptr)
 static SEXP DeleteFromList(SEXP object, SEXP list)
 {
     if (CAR(list) == object)
-	return CDR(list);
-    else {
-	SEXP last = list;
-	for (SEXP head = CDR(list); head != R_NilValue; head = CDR(head)) {
-	    if (CAR(head) == object) {
-		SETCDR(last, CDR(head));
-		return list;
-	    }
-	    else last = head;
-	}
-	return list;
+        return CDR(list);
+    else
+    {
+        SEXP last = list;
+        for (SEXP head = CDR(list); head != R_NilValue; head = CDR(head))
+        {
+            if (CAR(head) == object)
+            {
+                SETCDR(last, CDR(head));
+                return list;
+            }
+            else
+                last = head;
+        }
+        return list;
     }
 }
 
@@ -3512,7 +3519,7 @@ static SEXP DeleteFromList(SEXP object, SEXP list)
    R with the environment variable R_HASH_PRECIOUS set.
 
    Pointer hashing as used here isn't entirely portable (we do it in
-   at least one othe rplace, in serialize.c) but it could be made so
+   at least one othe rplace, in serialize.cpp) but it could be made so
    by computing a unique value based on the allocation page and
    position in the page. */
 
@@ -3933,13 +3940,13 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
    that even zero-length vectors have non-NULL data pointers, so
    return (void *) 1 instead. Zero-length CHARSXP objects still have a
    trailing zero byte so they are not handled. */
-# define CHKZLN(x) do {					   \
+#define CHKZLN(x) do {					   \
 	CHK(x);						   \
 	if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
 	    return (void *) 1;				   \
     } while (0)
 #else
-# define CHKZLN(x) do { } while (0)
+#define CHKZLN(x) do { } while (0)
 #endif
 
 void *(STDVEC_DATAPTR)(SEXP x)
@@ -4576,7 +4583,7 @@ SEXP do_Rprofmem(SEXP args)
 
 #endif /* R_MEMORY_PROFILING */
 
-/* RBufferUtils, moved from deparse.c */
+/* RBufferUtils, moved from deparse.cpp */
 
 #include "RBufferUtils.h"
 

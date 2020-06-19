@@ -18,10 +18,10 @@
  *  https://www.R-project.org/Licenses/
  *
  *
- *  See ./printutils.c	 for general remarks on Printing
+ *  See ./printutils.cpp	 for general remarks on Printing
  *                       and the Encode.. utils.
  *
- *  See ./format.c	 for the  format_Foo_  functions.
+ *  See ./format.cpp	 for the  format_Foo_  functions.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -508,7 +508,7 @@ HIDDEN SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "scientific");
     if(sci != NA_INTEGER) R_print.scipen = sci;
     args = CDR(args);
-    // copy/paste from "OutDec" part of ./options.c
+    // copy/paste from "OutDec" part of ./options.cpp
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' argument"), "decimal.mark");
     const char *my_OutDec;

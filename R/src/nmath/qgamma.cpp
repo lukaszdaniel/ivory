@@ -43,7 +43,7 @@
 #include "dpq.h"
 
 #ifdef DEBUG_qgamma
-# define DEBUG_q
+#define DEBUG_q
 #endif
 
 HIDDEN

@@ -18,8 +18,8 @@
  */
 
 /*  This file was contributed by Ei-ji Nakama.
- *  It exports locale2charset for use in gram.y, and rlocale.c on macOS.
- *  And sysutils.c, grDevices/src/devPS.c
+ *  It exports locale2charset for use in gram.y, and rlocale.cpp on macOS.
+ *  And sysutils.cpp, grDevices/src/devPS.c
  */
 
 /* setlocale(LC_CTYPE,NULL) to encodingname cf nl_langinfo(LC_CTYPE) */
@@ -30,9 +30,9 @@
  * return : ASCII - default and undefine                             *
  *          other - encodename                                       *
  *                                                                   *
- *         cc -o localecharset -DDEBUG_TEST=1  localecharset.c       *
+ *         cc -o localecharset -DDEBUG_TEST=1  localecharset.cpp     *
  *                                or                                 *
- *         cc -o localecharset -DDEBUG_TEST=2  localecharset.c       *
+ *         cc -o localecharset -DDEBUG_TEST=2  localecharset.cpp     *
  *********************************************************************/
 
 #ifdef HAVE_CONFIG_H
@@ -56,11 +56,11 @@
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
 
 /* name_value struct */
-typedef struct {
-    const char * const name;
-    const char * const value;
-} name_value;
-
+struct name_value
+{
+    const char *const name;
+    const char *const value;
+};
 
 #ifndef __APPLE__
 /*

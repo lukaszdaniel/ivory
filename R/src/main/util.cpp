@@ -236,7 +236,7 @@ static int findTypeInTypeTable(const SEXPTYPE t)
     return -1;
 }
 
-// called from main.c
+// called from main.cpp
 HIDDEN void Rf_InitTypeTables(void) {
 
     /* Type2Table */
@@ -706,7 +706,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Functions for getting and setting the working directory. */
 #ifdef _WIN32
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>
 #endif
 
@@ -1639,7 +1639,7 @@ void F77_SYMBOL(rchkusr)(void)
 }
 
 /* Return a copy of a string using memory from R_alloc.
-   NB: caller has to manage R_alloc stack.  Used in platform.c
+   NB: caller has to manage R_alloc stack.  Used in platform.cpp
 */
 char *Rf_acopy_string(const char *const in)
 {
@@ -2140,11 +2140,11 @@ void uiter_setUTF8(UCharIterator *iter, const char *s, int32_t length);
 
 void uloc_setDefault(const char* localeID, UErrorCode* status);
 
-typedef enum {
+enum ULocDataLocaleType {
     ULOC_ACTUAL_LOCALE = 0,
     ULOC_VALID_LOCALE = 1,
     ULOC_DATA_LOCALE_TYPE_LIMIT = 3
-} ULocDataLocaleType ;
+};
 
 
 const char* ucol_getLocaleByType(const UCollator *coll,
@@ -2165,7 +2165,7 @@ const char* ucol_getLocaleByType(const UCollator *coll,
 static UCollator *collator = NULL;
 static int collationLocaleSet = 0;
 
-/* called from platform.c */
+/* called from platform.cpp */
 HIDDEN void resetICUcollator(Rboolean disable)
 {
 	if (collator)

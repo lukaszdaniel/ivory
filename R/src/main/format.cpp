@@ -21,10 +21,10 @@
  *
  * Object Formatting
  *
- *  See ./paste.c for do_paste() , do_format() and do_formatinfo() and
- *       ./util.c for do_formatC()
- *  See ./printutils.c for general remarks on Printing and the Encode.. utils.
- *  See ./print.c  for do_printdefault, do_prmatrix, etc.
+ *  See ./paste.cpp for do_paste() , do_format() and do_formatinfo() and
+ *       ./util.cpp for do_formatC()
+ *  See ./printutils.cpp for general remarks on Printing and the Encode.. utils.
+ *  See ./print.cpp  for do_printdefault, do_prmatrix, etc.
  *
  * Exports
  *	formatString
@@ -259,11 +259,11 @@ void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
 */
 #if defined(HAVE_LONG_DOUBLE) && (SIZEOF_LONG_DOUBLE > SIZEOF_DOUBLE)
 # ifdef HAVE_NEARBYINTL
-# define R_nearbyintl nearbyintl
+#define R_nearbyintl nearbyintl
 # elif defined(HAVE_RINTL)
-# define R_nearbyintl rintl
+#define R_nearbyintl rintl
 # else
-# define R_nearbyintl private_nearbyintl
+#define R_nearbyintl private_nearbyintl
 LDOUBLE private_nearbyintl(LDOUBLE x)
 {
     LDOUBLE x1;
@@ -539,10 +539,10 @@ void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 		      });
 }
 
-#ifdef formatComplex_USING_signif
-/*   From complex.c. */
-void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
-#endif
+// #ifdef formatComplex_USING_signif
+// /*   From complex.cpp. */
+// void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
+// #endif
 
 /* As from 2.2.0 the number of digits applies to real and imaginary parts
    together, not separately */

@@ -48,7 +48,7 @@ using namespace std;
 #endif
 
 #ifdef LONG_INT
-# define isum_INT LONG_INT
+#define isum_INT LONG_INT
 static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 {
     LONG_INT s = 0;  // at least 64-bit
@@ -60,7 +60,7 @@ static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
  * After the first 2^32 entries, only check every 1000th time (related to GET_REGION_BUFSIZE=512 ?)
  * Assume LONG_INT_MAX >= 2^63-1 >=~ 9.223e18 >  (1000 * 9000..0L = 9 * 10^18)
  */
-# define ISUM_OVERFLOW_CHECK do {					\
+#define ISUM_OVERFLOW_CHECK do {					\
 	if (ii++ > 1000) {						\
 	    if (s > 9000000000000000L || s < -9000000000000000L) {	\
 		DbgP2("|OVERFLOW triggered: s=%ld|", s);		\
@@ -71,7 +71,7 @@ static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 	}								\
     } while (0)
 #else
-# define ISUM_OVERFLOW_CHECK do { } while(0)
+#define ISUM_OVERFLOW_CHECK do { } while(0)
 #endif
 
     /**** assumes INTEGER(sx) and LOGICAL(sx) are identical!! */
@@ -92,7 +92,7 @@ static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 #undef ISUM_OVERFLOW_CHECK
 }
 #else // no LONG_INT  : should never be used with a C99/C11 compiler
-# define isum_INT int
+#define isum_INT int
 static Rboolean isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
 /* Version from R 3.0.0 */
 {

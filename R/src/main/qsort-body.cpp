@@ -21,7 +21,7 @@
 
 /*====== BODY of R_qsort() and R_qsorti() functions ====================
  *
- * is included in ./qsort.c  with and without ``qsort_Index'' defined
+ * is included in ./qsort.cpp  with and without ``qsort_Index'' defined
  *======================================================================
 */
 {
@@ -35,7 +35,7 @@
 */
 
 #ifndef INTt
-# define INTt size_t
+#define INTt size_t
 #endif
 
     INTt il[40], iu[40]; /* was 31 */
@@ -92,7 +92,7 @@
 	    }
 	}
 
-	while(TRUE) { /*L50:*/
+	while(true) { /*L50:*/
 	    do l--;  while (v[l] > vt);
 
 #ifdef qsort_Index

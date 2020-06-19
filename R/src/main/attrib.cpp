@@ -92,22 +92,22 @@ static SEXP stripAttrib(SEXP tag, SEXP lst)
     return lst;
 }
 
-static Rboolean isOneDimensionalArray(SEXP vec)
+static bool isOneDimensionalArray(SEXP vec)
 {
     if(isVector(vec) || isList(vec) || isLanguage(vec)) {
 	SEXP s = getAttrib(vec, R_DimSymbol);
 	if(TYPEOF(s) == INTSXP && LENGTH(s) == 1)
-	    return TRUE;
+	    return true;
     }
-    return FALSE;
+    return false;
 }
 
-/* NOTE: For environments serialize.c calls this function to find if
+/* NOTE: For environments serialize.cpp calls this function to find if
    there is a class attribute in order to reconstruct the object bit
    if needed.  This means the function cannot use OBJECT(vec) == 0 to
    conclude that the class attribute is R_NilValue.  If you want to
    rewrite this function to use such a pre-test, be sure to adjust
-   serialize.c accordingly.  LT */
+   serialize.cpp accordingly.  LT */
 HIDDEN SEXP getAttrib0(SEXP vec, SEXP name)
 {
     SEXP s;
@@ -926,7 +926,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
          setAttrib(x, R_DimNamesSymbol, R_NilValue)
        (and remove the dimnames) here if we want
          setAttrib(x, R_NamesSymbol, R_NilValue)
-       to actually remove the names, as needed in subset.c.
+       to actually remove the names, as needed in subset.cpp.
     */
     if(names == R_NilValue && isOneDimensionalArray(CAR(args)))
 	setAttrib(CAR(args), R_DimNamesSymbol, names);

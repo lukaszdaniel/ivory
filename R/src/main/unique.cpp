@@ -459,16 +459,16 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
     return 0;
 }
 
-static Rboolean duplicatedInit(SEXP x, HashData *d)
+static bool duplicatedInit(SEXP x, HashData *d)
 {
     R_xlen_t i, n = XLENGTH(x);
-    Rboolean stop = FALSE;
+    bool stop = false;
 
     if(TYPEOF(x) == STRSXP) {
 	for(i = 0; i < n; i++) {
 	    if(IS_BYTES(STRING_ELT(x, i))) {
 		d->useUTF8 = FALSE;
-		stop = TRUE;
+		stop = true;
 		break;
 	    }
 	    if(ENC_KNOWN(STRING_ELT(x, i))) {
@@ -477,14 +477,14 @@ static Rboolean duplicatedInit(SEXP x, HashData *d)
 	    /* uncached strings are currently not properly supported */
 	    if(!IS_CACHED(STRING_ELT(x, i))) {
 		d->useCache = FALSE;
-		stop = TRUE;
+		stop = true;
 		break;
 	    }
 	}
     } else if (TYPEOF(x) == VECSXP) {
 	for(i = 0; i < n; i++)
 	    if (duplicatedInit(VECTOR_ELT(x, i), d)) {
-		stop = TRUE;
+		stop = true;
 		break;
 	    }
     }

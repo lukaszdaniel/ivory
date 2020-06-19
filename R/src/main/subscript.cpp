@@ -19,15 +19,15 @@
  *
  * EXPORTS:
  *
- *  OneIndex()        -- used for "[[<-" in ./subassign.c
- *  get1index()       -- used for "[["   in ./subassign.c & subset.c
+ *  OneIndex()        -- used for "[[<-" in ./subassign.cpp
+ *  get1index()       -- used for "[["   in ./subassign.cpp & subset.cpp
  *  vectorIndex()     -- used for "[[" and "[[<-" with a vector arg
 
  *  mat2indsub()      -- for "mat[i]"     "    "            "
 
- *  makeSubscript()   -- for "[" and "[<-" in ./subset.c and ./subassign.c,
- *			 and "[[<-" with a scalar in ./subassign.c
- *  arraySubscript()  -- for "[i,j,..." and "[<-..." in ./subset.c, ./subassign.c
+ *  makeSubscript()   -- for "[" and "[<-" in ./subset.cpp and ./subassign.cpp,
+ *			 and "[[<-" with a scalar in ./subassign.cpp
+ *  arraySubscript()  -- for "[i,j,..." and "[<-..." in ./subset.cpp, ./subassign.cpp
  */
 
 #ifdef HAVE_CONFIG_H
@@ -66,7 +66,7 @@ R_INLINE static int integerOneIndex(int i, R_xlen_t len, SEXP call)
     return indx;
 }
 
-/* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.c : */
+/* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.cpp : */
 HIDDEN R_xlen_t
 OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 	 int pos, SEXP call)
@@ -153,7 +153,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
     return indx;
 }
 
-/* used here and in subset.c and subassign.c */
+/* used here and in subset.cpp and subassign.cpp */
 HIDDEN R_xlen_t
 get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 {
@@ -795,7 +795,7 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 }
 
 /* This uses a couple of horrible hacks in conjunction with
- * VectorAssign (in subassign.c).  If subscripting is used for
+ * VectorAssign (in subassign.cpp).  If subscripting is used for
  * assignment, it is possible to extend a vector by supplying new
  * names, and we want to give the extended vector those names, so they
  * are returned as the use.names attribute. Also, unset elements of the vector

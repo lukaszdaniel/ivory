@@ -97,7 +97,7 @@
    SETLENGTH is used when checking the write barrier.
    Always using SETLENGTH would be OK but maybe a little less efficient. */
 #ifndef SET_STDVEC_LENGTH
-# define SET_STDVEC_LENGTH(x, v) SETLENGTH(x, v)
+#define SET_STDVEC_LENGTH(x, v) SETLENGTH(x, v)
 #endif
 
 #ifdef COMPUTE_REFCNT_VALUES
@@ -592,7 +592,7 @@ R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     } while (0)
 
 /**** This could use SET_REAL_ELT and such, but would also have to
-      change byte code instructions in eval.c */
+      change byte code instructions in eval.cpp */
 
 static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 {
@@ -1521,7 +1521,7 @@ R_INLINE static int SubAssignArgs(SEXP args, SEXP *x, SEXP *s, SEXP *y)
 }
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
-   Also defined in subset.c */
+   Also defined in subset.cpp */
 R_INLINE static
 int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)

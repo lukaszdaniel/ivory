@@ -86,7 +86,7 @@ HIDDEN SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
     return do_relop_dflt(call, op, arg1, arg2);
 }
 
-// also called from cmp_relop() in eval.c :
+// also called from cmp_relop() in eval.cpp :
 HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 {
     /* handle the REALSXP/INTSXP simple scalar case quickly */

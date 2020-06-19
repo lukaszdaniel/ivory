@@ -38,7 +38,7 @@ using namespace std;
 
 /* eval() sets R_Visible = TRUE. Thas may not be wanted when eval() is
    used in C code. This is a version that saves/restores R_Visible.
-   This should probably be moved to eval.c, be make public, and used
+   This should probably be moved to eval.cpp, be make public, and used
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
@@ -2280,7 +2280,7 @@ SEXP R_tryCatchError(SEXP (*body)(void *), void *bdata,
    implementation fairly simple but not fast. If performance becomes
    an issue we can look into a pure C implementation. LT */
 
-typedef struct {
+struct tryCatchData_t {
     SEXP (*body)(void *);
     void *bdata;
     SEXP (*handler)(SEXP, void *);
@@ -2288,7 +2288,7 @@ typedef struct {
     void (*finally)(void *);
     void *fdata;
     int suspended;
-} tryCatchData_t;
+};
 
 static SEXP default_tryCatch_handler(SEXP cond, void *data)
 {

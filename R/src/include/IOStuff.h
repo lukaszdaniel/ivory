@@ -37,29 +37,31 @@
 
 #define IOBSIZE 4096
 
-typedef struct BufferListItem {
-	unsigned char			buf[IOBSIZE];
-	struct BufferListItem	*next;
+typedef struct BufferListItem
+{
+	unsigned char buf[IOBSIZE];
+	struct BufferListItem *next;
 } BufferListItem;
 
-typedef struct IoBuffer {
-	BufferListItem	*start_buf;		/* First buffer item */
-	BufferListItem	*write_buf;		/* Write pointer location */
-	unsigned char	*write_ptr;		/* Write pointer location */
-	int		 write_offset;		/* Write pointer location */
-	BufferListItem	*read_buf;		/* Read pointer location */
-	unsigned  char	*read_ptr;		/* Read pointer location */
-	int		 read_offset;		/* Read pointer location */
+typedef struct IoBuffer
+{
+	BufferListItem *start_buf; /* First buffer item */
+	BufferListItem *write_buf; /* Write pointer location */
+	unsigned char *write_ptr;  /* Write pointer location */
+	int write_offset;		   /* Write pointer location */
+	BufferListItem *read_buf;  /* Read pointer location */
+	unsigned char *read_ptr;   /* Read pointer location */
+	int read_offset;		   /* Read pointer location */
 } IoBuffer;
 
-
-typedef struct TextBuffer {
-	void	*vmax;				/* Memory stack top */
-	unsigned char	*buf;			/* Line buffer */
-	unsigned char	*bufp;			/* Line buffer location */
-	SEXP	text;				/* String Vector */
-	int	ntext;				/* Vector length */
-	int	offset;				/* Offset within vector */
+typedef struct TextBuffer
+{
+	void *vmax;			 /* Memory stack top */
+	unsigned char *buf;	 /* Line buffer */
+	unsigned char *bufp; /* Line buffer location */
+	SEXP text;			 /* String Vector */
+	int ntext;			 /* Vector length */
+	int offset;			 /* Offset within vector */
 } TextBuffer;
 
 #ifndef __MAIN__
@@ -70,25 +72,21 @@ HIDDEN
 IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
 
 #ifdef __cplusplus
-extern "C" {
-#endif
 
 /*- some of these really could be void */
-int R_IoBufferInit(IoBuffer *);
-int R_IoBufferFree(IoBuffer *);
-int R_IoBufferReadReset(IoBuffer *);
-int R_IoBufferWriteReset(IoBuffer *);
+bool R_IoBufferInit(IoBuffer *);
+bool R_IoBufferFree(IoBuffer *);
+bool R_IoBufferReadReset(IoBuffer *);
+bool R_IoBufferWriteReset(IoBuffer *);
 int R_IoBufferGetc(IoBuffer *);
-int R_IoBufferPutc(int, IoBuffer *);
+bool R_IoBufferPutc(int, IoBuffer *);
 int R_IoBufferPuts(char *, IoBuffer *);
 int R_IoBufferReadOffset(IoBuffer *);
 
-int R_TextBufferInit(TextBuffer *, SEXP);
-int R_TextBufferFree(TextBuffer *);
+bool R_TextBufferInit(TextBuffer *, SEXP);
+bool R_TextBufferFree(TextBuffer *);
 int R_TextBufferGetc(TextBuffer *);
 
-#ifdef __cplusplus
-} //extern "C"
 #endif
 
 #endif /* R_IOSTUFF_H */

@@ -1,4 +1,4 @@
-/* included  twice  from  ./split.c   after defining
+/* included  twice  from  ./split.cpp   after defining
     _L_INTSXP_, _L_INTEG_,  _L_int_
     ===========  =========  ========    as
       INTSXP  ,  INTEGER ,  int         or

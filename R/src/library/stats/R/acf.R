@@ -70,8 +70,7 @@ pacf.default <- function(x, lag.max = NULL, plot = TRUE,
     x.freq <- frequency(x)
     sampleT <- NROW(x)
     if (is.null(lag.max))
-        lag.max <- if(is.matrix(x)) floor(10 * (log10(sampleT) - log10(ncol(x))))
-        else floor(10 * (log10(sampleT)))
+        lag.max <- floor(10 * log10(sampleT / NCOL(x)))
     lag.max <- min(lag.max, sampleT - 1)
     if (lag.max < 1) stop(gettextf("'%s' argument must be at least %d", "lag.max", 1))
 
@@ -123,9 +122,7 @@ plot.acf <-
                        correlation = gettext("ACF", domain = "R-stats"),
                        covariance = gettext("ACF (cov)", domain = "R-stats"),
                        partial = gettext("Partial ACF", domain = "R-stats"))
-    if (is.null(snames <- x$snames))
-        if(nser == 1L) snames <- gettextf("Series %s", x$series)
-	else snames <- gettextf("Series %s", seq_len(nser))
+    snames <- x$snames %||% gettextf("Series %s", if(nser == 1L) x$series else seq_len(nser))
 
     with.ci <- ci > 0 && x$type != "covariance"
     with.ci.ma <- with.ci && ci.type == "ma" && x$type == "correlation"
@@ -192,12 +189,10 @@ plot.acf <-
                     abline(h = c(clim, -clim), col = ci.col, lty = 2)
                 else if (with.ci.ma && i == j) {
                     clim <- clim[-length(clim)]
-                    lines(x$lag[-1, i, j], clim, col = ci.col, lty = 2)
+                    lines(x$lag[-1, i, j],  clim, col = ci.col, lty = 2)
                     lines(x$lag[-1, i, j], -clim, col = ci.col, lty = 2)
                 }
-                title(if (!is.null(main)) main else
-                      if (i == j) snames[i]
-                      else paste(sn.abbr[i], "&", sn.abbr[j]),
+                title(main %||% if(i == j) snames[i] else paste(sn.abbr[i], "&", sn.abbr[j]),
                       line = if(nser > 2) 1 else 2)
             }
         if(Npgs > 1) {                  # label the page

@@ -258,7 +258,7 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 
     /* elim = approximate exponential over and underflow limit */
     elim = 2.302 * (nx * r1m5 - 3.0);/* = 700.6174... */
-    while(TRUE) {
+    while(true) {
 	nn = n + mm - 1;
 	fn = nn;
 	t = (fn + 1) * xln;
@@ -474,13 +474,13 @@ void Rf_dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr
 } /* dpsifn() */
 
 #ifdef MATHLIB_STANDALONE
-# define ML_TREAT_psigam(_IERR_)	\
+#define ML_TREAT_psigam(_IERR_)	\
     if(_IERR_ != 0) {			\
 	errno = EDOM;			\
 	return ML_NAN;			\
     }
 #else
-# define ML_TREAT_psigam(_IERR_)	\
+#define ML_TREAT_psigam(_IERR_)	\
     if(_IERR_ != 0)			\
 	return ML_NAN
 #endif

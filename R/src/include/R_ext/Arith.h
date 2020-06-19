@@ -70,18 +70,18 @@ int R_finite(double);		/* True if none of NA, NaN, +/-Inf */
    hence the workaround.  This code also appears in Rmath.h
 */
 #ifdef __cplusplus
-  int R_isnancpp(double); /* in arithmetic.cpp */
-#  define ISNAN(x)     R_isnancpp(x)
+int R_isnancpp(double); /* in arithmetic.cpp */
+#define ISNAN(x) R_isnancpp(x)
 #else
-#  define ISNAN(x)     (isnan(x) != 0)
+#define ISNAN(x) (isnan(x) != 0)
 #endif
 
 /* The following is only defined inside R */
 #ifdef HAVE_WORKING_ISFINITE
 /* isfinite is defined in <math.h> according to C99 */
-# define R_FINITE(x)    isfinite(x)
+#define R_FINITE(x) isfinite(x)
 #else
-# define R_FINITE(x)    R_finite(x)
+#define R_FINITE(x) R_finite(x)
 #endif
 
 #ifdef __cplusplus

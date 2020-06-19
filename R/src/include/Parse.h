@@ -35,28 +35,29 @@
 
 typedef struct SrcRefState SrcRefState;
 
-struct SrcRefState {
+struct SrcRefState
+{
 
-    Rboolean keepSrcRefs;	/* Whether to attach srcrefs to objects as they are parsed */
-    Rboolean keepParseData;	/* Whether to attach also parse data to srcrefs */
-    Rboolean didAttach;		/* Record of whether a srcref was attached */
-    SEXP data;			/* Parse data as in sexps, also here for performance */
+    Rboolean keepSrcRefs;   /* Whether to attach srcrefs to objects as they are parsed */
+    Rboolean keepParseData; /* Whether to attach also parse data to srcrefs */
+    Rboolean didAttach;     /* Record of whether a srcref was attached */
+    SEXP data;              /* Parse data as in sexps, also here for performance */
     SEXP sexps;
-	/* SrcRefs */
-	/* SrcFile		The srcfile object currently being parsed */
-	/* Original		The underlying srcfile object */
-	/* data	(INTSXP)	Detailed info on parse */
-	/* text (STRSXP)*/
-	/* ids  (INTSXP)*/
-	/* svs  (VECSEXP)	Precious multi-set of semantic values */
+    /* SrcRefs */
+    /* SrcFile		The srcfile object currently being parsed */
+    /* Original		The underlying srcfile object */
+    /* data	(INTSXP)	Detailed info on parse */
+    /* text (STRSXP)*/
+    /* ids  (INTSXP)*/
+    /* svs  (VECSEXP)	Precious multi-set of semantic values */
     int data_count;
-    				/* Position information about the current parse */
-    int xxlineno;		/* Line number according to #line directives */
-    int xxcolno;		/* Character number on line */
-    int xxbyteno;		/* Byte number on line */
-    int xxparseno;              /* Line number ignoring #line directives */
+    /* Position information about the current parse */
+    int xxlineno;  /* Line number according to #line directives */
+    int xxcolno;   /* Character number on line */
+    int xxbyteno;  /* Byte number on line */
+    int xxparseno; /* Line number ignoring #line directives */
 
-    SrcRefState* prevState;
+    SrcRefState *prevState;
 };
 
 #ifdef __cplusplus
@@ -68,14 +69,14 @@ void InitParser(void);
 void R_InitSrcRefState(RCNTXT *cntxt);
 void R_FinalizeSrcRefState(void);
 
-SEXP R_Parse1Buffer(IoBuffer*, int, ParseStatus *); /* in ReplIteration,
+SEXP R_Parse1Buffer(IoBuffer *, int, ParseStatus *);            /* in ReplIteration,
 						       R_ReplDLLdo1 */
-SEXP R_ParseBuffer(IoBuffer*, int, ParseStatus *, SEXP, SEXP); /* in source.cpp */
-SEXP R_Parse1File(FILE*, int, ParseStatus *); /* in R_ReplFile */
-SEXP R_ParseFile(FILE*, int, ParseStatus *, SEXP);  /* in edit.cpp */
+SEXP R_ParseBuffer(IoBuffer *, int, ParseStatus *, SEXP, SEXP); /* in source.cpp */
+SEXP R_Parse1File(FILE *, int, ParseStatus *);                  /* in R_ReplFile */
+SEXP R_ParseFile(FILE *, int, ParseStatus *, SEXP);             /* in edit.cpp */
 
 #ifndef HAVE_RCONNECTION_TYPEDEF
-typedef struct Rconn  *Rconnection;
+typedef struct Rconn *Rconnection;
 #define HAVE_RCONNECTION_TYPEDEF
 #endif
 SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);

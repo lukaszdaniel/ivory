@@ -57,7 +57,7 @@ double Rf_pbeta_raw(double x, double a, double b, int lower_tail, int log_p)
     double x1 = 0.5 - x + 0.5, w, wc;
     int ierr;
     //====
-    Rf_bratio(a, b, x, x1, &w, &wc, &ierr, log_p); /* -> ./toms708.c */
+    Rf_bratio(a, b, x, x1, &w, &wc, &ierr, log_p); /* -> ./toms708.cpp */
     //====
     // ierr in {10,14} <==> bgrat() error code ierr-10 in 1:4; for 1 and 4, warned *there*
     if(ierr && ierr != 11 && ierr != 14)

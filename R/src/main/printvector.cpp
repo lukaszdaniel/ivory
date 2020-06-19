@@ -26,8 +26,8 @@
  *		printComplexVector()
  *		printComplexVectorS()
  *
- *  See ./printutils.c	 for remarks on Printing and the Encoding utils.
- *  See ./format.c	 for the formatXXXX functions used below.
+ *  See ./printutils.cpp	 for remarks on Printing and the Encoding utils.
+ *  See ./format.cpp	 for the formatXXXX functions used below.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -165,7 +165,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
     Rprintf("\n");
 }
 
-// used in uncmin.c
+// used in uncmin.cpp
 // Not easily converted to printRealVectorS calls
 HIDDEN
 void Rf_printRealVector(const double *x, R_xlen_t n, int indx)

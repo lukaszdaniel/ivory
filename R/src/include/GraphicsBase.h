@@ -24,6 +24,9 @@
 #ifndef R_GRAPHICSBASE_H_
 #define R_GRAPHICSBASE_H_
 
+#include <Graphics.h>
+#include <R_ext/Boolean.h>
+
 typedef struct {
     GPar dp;		  /* current device default parameters: 
 			     those which will be used at the next GNewPage */

@@ -50,7 +50,7 @@
 # endif
 #endif
 #if defined(HAVE_GLIBC2) && !defined(_DEFAULT_SOURCE_) && !defined(_BSD_SOURCE)
-# define _BSD_SOURCE 1
+#define _BSD_SOURCE 1
 #endif
 #include <time.h>
 
@@ -86,15 +86,15 @@ known OS with 64-bit time_t and complete tables is Linux.
 #ifdef USE_INTERNAL_MKTIME
 # include "datetime.h"
 # undef HAVE_LOCAL_TIME_R
-# define HAVE_LOCAL_TIME_R 1
+#define HAVE_LOCAL_TIME_R 1
 # undef HAVE_TM_ZONE
-# define HAVE_TM_ZONE 1
+#define HAVE_TM_ZONE 1
 # undef HAVE_TM_GMTOFF
-# define HAVE_TM_GMTOFF 1
+#define HAVE_TM_GMTOFF 1
 # undef MKTIME_SETS_ERRNO
-# define MKTIME_SETS_ERRNO
+#define MKTIME_SETS_ERRNO
 # undef HAVE_WORKING_64BIT_MKTIME
-# define HAVE_WORKING_64BIT_MKTIME 1
+#define HAVE_WORKING_64BIT_MKTIME 1
 #else
 
 typedef struct tm stm;
@@ -276,10 +276,10 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
    Sometime in late 2004 this was reverted in glibc.
 */
 
-static Rboolean have_broken_mktime(void)
+static bool have_broken_mktime(void)
 {
 #if defined(_AIX)
-    return TRUE;  // maybe not so for AIX >= 6, which allegedly uses Olson code
+    return true;  // maybe not so for AIX >= 6, which allegedly uses Olson code
 #elif defined(__GLIBC__) && defined(__GLIBC_MINOR__) && __GLIBC__ == 2 && __GLIBC_MINOR__ >= 2 &&  __GLIBC_MINOR__ < 10
     static int test_result = -1;
 
@@ -295,7 +295,7 @@ static Rboolean have_broken_mktime(void)
     }
     return test_result > 0;
 #else
-    return FALSE;
+    return false;
 #endif
 }
 
@@ -393,7 +393,7 @@ static double guess_offset (stm *tm)
 }
 
 /* Interface to mktime or mktime00 */
-static double mktime0 (stm *tm, const int local)
+static double mktime0(stm *tm, const int local)
 {
     double res;
     Rboolean OK;

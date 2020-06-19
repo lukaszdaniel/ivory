@@ -214,8 +214,8 @@ R_INLINE static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
 
 /* Macro version of isNull for only the test against R_NilValue */
 //#define ISNULL(x) ((x) == R_NilValue)
-R_INLINE static Rboolean ISNULL(SEXP x) {
- return (Rboolean) (x == R_NilValue);
+R_INLINE static bool ISNULL(SEXP x) {
+ return (x == R_NilValue);
 }
 
 /* Function to determine whethr an environment contains special symbols */
@@ -245,26 +245,26 @@ Rboolean R_envHasNoSpecialSymbols (SEXP env)
   internal changes of implementation without affecting client code.
 */
 
-//#define HASHSIZE(x)	     ((int) STDVEC_LENGTH(x))
-R_INLINE static int HASHSIZE(SEXP x) {
- return (int) STDVEC_LENGTH(x);
- }
-//#define HASHPRI(x)	     ((int) STDVEC_TRUELENGTH(x))
-R_INLINE static int HASHPRI(SEXP x) {
- return (int) STDVEC_TRUELENGTH(x);
- }
-#define HASHTABLEGROWTHRATE  1.2
-#define HASHMINSIZE	     29
-//#define SET_HASHPRI(x,v)     SET_TRUELENGTH(x,v)
-R_INLINE static void SET_HASHPRI(SEXP x, int v) {
- SET_TRUELENGTH(x, v);
- }
-#define HASHCHAIN(table, i)  ((SEXP *) STDVEC_DATAPTR(table))[i]
+R_INLINE static int HASHSIZE(SEXP x)
+{
+    return (int)STDVEC_LENGTH(x);
+}
+R_INLINE static int HASHPRI(SEXP x)
+{
+    return (int)STDVEC_TRUELENGTH(x);
+}
+#define HASHTABLEGROWTHRATE 1.2
+#define HASHMINSIZE 29
+R_INLINE static void SET_HASHPRI(SEXP x, int v)
+{
+    SET_TRUELENGTH(x, v);
+}
+#define HASHCHAIN(table, i) ((SEXP *)STDVEC_DATAPTR(table))[i]
 
-//#define IS_HASHED(x)	     (HASHTAB(x) != R_NilValue)
-R_INLINE static Rboolean IS_HASHED(SEXP x) {
- return (Rboolean) (HASHTAB(x) != R_NilValue);
- }
+R_INLINE static bool IS_HASHED(SEXP x)
+{
+    return (HASHTAB(x) != R_NilValue);
+}
 
 /*----------------------------------------------------------------------
 
@@ -275,7 +275,7 @@ R_INLINE static Rboolean IS_HASHED(SEXP x) {
 
 */
 
-/* was extern: used in this file and names.c (for the symbol table).
+/* was extern: used in this file and names.cpp (for the symbol table).
 
    This hash function seems to work well enough for symbol tables,
    and hash tables get saved as part of environments so changing it
@@ -737,8 +737,8 @@ static SEXP R_NamespaceSymbol;
 
 HIDDEN void Rf_InitBaseEnv()
 {
-    R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
-    R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
+    R_EmptyEnv = Rf_NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
+    R_BaseEnv = Rf_NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
 }
 
 HIDDEN void Rf_InitGlobalEnv()
@@ -856,7 +856,7 @@ static SEXP R_GetGlobalCacheLoc(SEXP symbol)
 
   FIXME ? should this also unbind the symbol value slot when rho is
   R_BaseEnv.
-  This is only called from eval.c in applydefine and bcEval
+  This is only called from eval.cpp in applydefine and bcEval
   (and applydefine only works for unhashed environments, so not base).
 */
 
@@ -2323,7 +2323,7 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
   passed down.  So 'symbol' is the promise value, and 'rho' its
   evaluation argument.
 
-  It is also called in arithmetic.c. for e.g. do_log
+  It is also called in arithmetic.cpp. for e.g. do_log
 */
 
 static SEXP findRootPromise(SEXP p) {
@@ -3958,7 +3958,7 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
     size_t len =  strlen(name);
     if (len > R_INT_MAX)
 	error(_("R character strings are limited to 2^31-1 bytes"));
-   return mkCharLenCE(name, (int) len, enc);
+   return Rf_mkCharLenCE(name, (int) len, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
@@ -4071,7 +4071,7 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
     SEXP cval, chain;
     unsigned int hashcode;
     CharsetBit need_enc;
-    Rboolean embedNul = FALSE, is_ascii = TRUE;
+    bool embedNul = false, is_ascii = true;
 
     switch (enc)
     {
@@ -4086,8 +4086,8 @@ SEXP Rf_mkCharLenCE(const char * const name, int len, cetype_t enc)
         error(_("unknown encoding: %d"), enc);
     }
     for (int slen = 0; slen < len; slen++) {
-	if ((unsigned int) name[slen] > 127) is_ascii = FALSE;
-	if (!name[slen]) embedNul = TRUE;
+	if ((unsigned int) name[slen] > 127) is_ascii = false;
+	if (!name[slen]) embedNul = true;
     }
     if (embedNul) {
 	SEXP c;

@@ -147,7 +147,7 @@ constexpr double C2 = 0.180025191068563;
 		u1 = unif_rand();
 		w = u1 * (a[i] - aa);
 		tt = (w * 0.5 + aa) * w;
-		while(TRUE) {
+		while(true) {
 		    if (u2 > tt)
 			goto deliver;
 		    u1 = unif_rand();
@@ -163,7 +163,7 @@ constexpr double C2 = 0.180025191068563;
 	else {
 	    i = 6;
 	    aa = a[31];
-	    while(TRUE) {
+	    while(true) {
 		u1 = u1 + u1;
 		if (u1 >= 1.0)
 		    break;
@@ -171,10 +171,10 @@ constexpr double C2 = 0.180025191068563;
 		i = i + 1;
 	    }
 	    u1 = u1 - 1.0;
-	    while(TRUE) {
+	    while(true) {
 		w = u1 * d[i - 1];
 		tt = (w * 0.5 + aa) * w;
-		while(TRUE) {
+		while(true) {
 		    u2 = unif_rand();
 		    if (u2 > tt)
 			goto jump;
@@ -205,7 +205,7 @@ constexpr double C2 = 0.180025191068563;
 	}
 
 	if(u1 >= 0.973310954173898) { /* tail: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = (A*A-2*log(u3));
@@ -215,7 +215,7 @@ constexpr double C2 = 0.180025191068563;
 	}
 
 	if(u1 >= 0.958720824790463) { /* region3: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = A - 0.630834801921960* Rf_fmin2(u2,u3);
@@ -227,7 +227,7 @@ constexpr double C2 = 0.180025191068563;
 	}
 
 	if(u1 >= 0.911312780288703) { /* region2: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
@@ -239,7 +239,7 @@ constexpr double C2 = 0.180025191068563;
 	}
 
 	/* ELSE	 region1: */
-	while(TRUE) {
+	while(true) {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
 		tt = 0.479727404222441 - 0.595507138015940 * Rf_fmin2(u2, u3);
@@ -279,7 +279,7 @@ constexpr int BIG = 134217728; /* 2^27 */
 	}
 
 	if(u1 >= 0.973310954173898) { /* tail: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = (A * A - 2 * log(u3));
@@ -289,7 +289,7 @@ constexpr int BIG = 134217728; /* 2^27 */
 	}
 
 	if(u1 >= 0.958720824790463) { /* region3: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = A - 0.630834801921960 * Rf_fmin2(u2, u3);
@@ -301,7 +301,7 @@ constexpr int BIG = 134217728; /* 2^27 */
 	}
 
 	if(u1 >= 0.911312780288703) { /* region2: */
-	    while(TRUE) {
+	    while(true) {
 		u2 = unif_rand();
 		u3 = unif_rand();
 		tt = 0.479727404222441+1.105473661022070*Rf_fmin2(u2,u3);
@@ -313,7 +313,7 @@ constexpr int BIG = 134217728; /* 2^27 */
 	}
 
 	/* ELSE	 region1: */
-	while(TRUE) {
+	while(true) {
 	    u2 = unif_rand();
 	    u3 = unif_rand();
 	    tt = 0.479727404222441-0.595507138015940*Rf_fmin2(u2,u3);

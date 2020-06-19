@@ -43,6 +43,7 @@
 #define R_print_par_t R_PrintData
 
 extern R_print_par_t R_print;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

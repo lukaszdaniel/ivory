@@ -114,7 +114,7 @@ static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 
 #define CLASS_METHODS_TABLE(class_) STDVEC_DATAPTR(class_)
 #define GENERIC_METHODS_TABLE(x, class_) \
-    ((class_##_methods_t *) CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
+    ((class_##_methods_t *)CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
 
 #define ALTREP_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altrep)
 #define ALTVEC_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altvec)
@@ -125,65 +125,65 @@ static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 #define ALTCOMPLEX_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altcomplex)
 #define ALTSTRING_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altstring)
 
-#define ALTREP_METHODS						\
-    R_altrep_UnserializeEX_method_t UnserializeEX;		\
-    R_altrep_Unserialize_method_t Unserialize;			\
-    R_altrep_Serialized_state_method_t Serialized_state;	\
-    R_altrep_DuplicateEX_method_t DuplicateEX;			\
-    R_altrep_Duplicate_method_t Duplicate;			\
-    R_altrep_Coerce_method_t Coerce;				\
-    R_altrep_Inspect_method_t Inspect;				\
+#define ALTREP_METHODS                                   \
+    R_altrep_UnserializeEX_method_t UnserializeEX;       \
+    R_altrep_Unserialize_method_t Unserialize;           \
+    R_altrep_Serialized_state_method_t Serialized_state; \
+    R_altrep_DuplicateEX_method_t DuplicateEX;           \
+    R_altrep_Duplicate_method_t Duplicate;               \
+    R_altrep_Coerce_method_t Coerce;                     \
+    R_altrep_Inspect_method_t Inspect;                   \
     R_altrep_Length_method_t Length
 
-#define ALTVEC_METHODS					\
-    ALTREP_METHODS;					\
-    R_altvec_Dataptr_method_t Dataptr;			\
-    R_altvec_Dataptr_or_null_method_t Dataptr_or_null;	\
+#define ALTVEC_METHODS                                 \
+    ALTREP_METHODS;                                    \
+    R_altvec_Dataptr_method_t Dataptr;                 \
+    R_altvec_Dataptr_or_null_method_t Dataptr_or_null; \
     R_altvec_Extract_subset_method_t Extract_subset
 
-#define ALTINTEGER_METHODS				\
-    ALTVEC_METHODS;					\
-    R_altinteger_Elt_method_t Elt;			\
-    R_altinteger_Get_region_method_t Get_region;	\
-    R_altinteger_Is_sorted_method_t Is_sorted;		\
-    R_altinteger_No_NA_method_t No_NA;			\
-    R_altinteger_Sum_method_t Sum ;			\
-    R_altinteger_Min_method_t Min;			\
+#define ALTINTEGER_METHODS                       \
+    ALTVEC_METHODS;                              \
+    R_altinteger_Elt_method_t Elt;               \
+    R_altinteger_Get_region_method_t Get_region; \
+    R_altinteger_Is_sorted_method_t Is_sorted;   \
+    R_altinteger_No_NA_method_t No_NA;           \
+    R_altinteger_Sum_method_t Sum;               \
+    R_altinteger_Min_method_t Min;               \
     R_altinteger_Max_method_t Max
 
-#define ALTREAL_METHODS				\
-    ALTVEC_METHODS;				\
-    R_altreal_Elt_method_t Elt;			\
-    R_altreal_Get_region_method_t Get_region;	\
-    R_altreal_Is_sorted_method_t Is_sorted;	\
-    R_altreal_No_NA_method_t No_NA;		\
-    R_altreal_Sum_method_t Sum;			\
-    R_altreal_Min_method_t Min;			\
+#define ALTREAL_METHODS                       \
+    ALTVEC_METHODS;                           \
+    R_altreal_Elt_method_t Elt;               \
+    R_altreal_Get_region_method_t Get_region; \
+    R_altreal_Is_sorted_method_t Is_sorted;   \
+    R_altreal_No_NA_method_t No_NA;           \
+    R_altreal_Sum_method_t Sum;               \
+    R_altreal_Min_method_t Min;               \
     R_altreal_Max_method_t Max
 
-#define ALTLOGICAL_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altlogical_Elt_method_t Elt;              \
-    R_altlogical_Get_region_method_t Get_region;\
-    R_altlogical_Is_sorted_method_t Is_sorted;  \
-    R_altlogical_No_NA_method_t No_NA;		\
+#define ALTLOGICAL_METHODS                       \
+    ALTVEC_METHODS;                              \
+    R_altlogical_Elt_method_t Elt;               \
+    R_altlogical_Get_region_method_t Get_region; \
+    R_altlogical_Is_sorted_method_t Is_sorted;   \
+    R_altlogical_No_NA_method_t No_NA;           \
     R_altlogical_Sum_method_t Sum
 
-#define ALTRAW_METHODS				\
-    ALTVEC_METHODS;				\
-    R_altraw_Elt_method_t Elt;			\
+#define ALTRAW_METHODS         \
+    ALTVEC_METHODS;            \
+    R_altraw_Elt_method_t Elt; \
     R_altraw_Get_region_method_t Get_region
 
-#define ALTCOMPLEX_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altcomplex_Elt_method_t Elt;              \
+#define ALTCOMPLEX_METHODS         \
+    ALTVEC_METHODS;                \
+    R_altcomplex_Elt_method_t Elt; \
     R_altcomplex_Get_region_method_t Get_region
 
-#define ALTSTRING_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altstring_Elt_method_t Elt;		\
-    R_altstring_Set_elt_method_t Set_elt;	\
-    R_altstring_Is_sorted_method_t Is_sorted;	\
+#define ALTSTRING_METHODS                     \
+    ALTVEC_METHODS;                           \
+    R_altstring_Elt_method_t Elt;             \
+    R_altstring_Set_elt_method_t Set_elt;     \
+    R_altstring_Is_sorted_method_t Is_sorted; \
     R_altstring_No_NA_method_t No_NA
 
 typedef struct { ALTREP_METHODS; } altrep_methods_t;

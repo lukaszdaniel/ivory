@@ -203,7 +203,7 @@ FUNTAB R_FunTab[] =
 {"...names",    do_dotsNames,	0,	1,	0,	{PP_FUNCALL, PREC_FN,	0}},
 {"length",	do_length,	0,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"length<-",	do_lengthgets,	0,	1,	2,	{PP_FUNCALL, PREC_LEFT,	1}},
-{"c",/* bind.c: */ do_c,	0,	1,	-1,	{PP_FUNCALL, PREC_FN,	0}},
+{"c",/* bind.cpp: */ do_c,	0,	1,	-1,	{PP_FUNCALL, PREC_FN,	0}},
 {"oldClass",	do_class,	0,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"oldClass<-",	do_classgets,	0,	1,	2,	{PP_FUNCALL, PREC_LEFT, 1}},
 {"class",	R_do_data_class,0,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
@@ -362,7 +362,7 @@ FUNTAB R_FunTab[] =
 
 
 /* Mathematical Functions of a Complex Argument:
- * These are group generic and so need to eval args --> ./complex.c */
+ * These are group generic and so need to eval args --> ./complex.cpp */
 
 {"Re",		do_cmathfuns,	1,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"Im",		do_cmathfuns,	2,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
@@ -574,7 +574,7 @@ FUNTAB R_FunTab[] =
 {"strtoi",	do_strtoi,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"strrep",	do_strrep,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 
-/* Type Checking (typically implemented in ./coerce.c ) */
+/* Type Checking (typically implemented in ./coerce.cpp ) */
 
 {"is.null",	do_is,		NILSXP,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"is.logical",	do_is,		LGLSXP,	1,	1,	{PP_FUNCALL, PREC_FN,	0}},
@@ -1024,7 +1024,7 @@ static const char *Spec_name[] = {
 };
 
 
-/* also used in eval.c */
+/* also used in eval.cpp */
 HIDDEN SEXP R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
@@ -1141,7 +1141,7 @@ static void SymbolShortcuts(void)
 }
 
 
-#define N_DDVAL_SYMBOLS 65
+constexpr int N_DDVAL_SYMBOLS = 65;
 
 static SEXP DDVALSymbols[N_DDVAL_SYMBOLS];
 
@@ -1295,7 +1295,7 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     return (sym);
 }
 
-#define maxLength 512
+constexpr int maxLength = 512;
 HIDDEN
 SEXP Rf_installS3Signature(const char *className, const char *methodName) {
 

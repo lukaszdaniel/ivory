@@ -357,8 +357,8 @@ HIDDEN SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
     return y;
 }
 
-/* Implementing  signif(<complex>)  *and* used in format.c and printutils.c */
-#define MAX_DIGITS 22
+/* Implementing  signif(<complex>)  *and* used in format.cpp and printutils.cpp */
+constexpr int MAX_DIGITS = 22;
 HIDDEN void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits)
 {
     // Implement    r <- signif(x, digits)
@@ -589,18 +589,18 @@ static std::complex<double> z_atanh(std::complex<double> z)
     return -I * z_atan(z * I);
 }
 
-static Rboolean cmath1(std::complex<double> (*f)(std::complex<double>),
+static bool cmath1(std::complex<double> (*f)(std::complex<double>),
 		       const Rcomplex *x, Rcomplex *y, R_xlen_t n)
 {
     R_xlen_t i;
-    Rboolean naflag = FALSE;
+    bool naflag = false;
     for (i = 0 ; i < n ; i++) {
 	if (ISNA(x[i].r) || ISNA(x[i].i)) {
 	    y[i].r = NA_REAL; y[i].i = NA_REAL;
 	} else {
 	    SET_C99_COMPLEX(y, i, f(toC99(x + i)));
 	    if ( (ISNAN(y[i].r) || ISNAN(y[i].i)) &&
-		!(ISNAN(x[i].r) || ISNAN(x[i].i)) ) naflag = TRUE;
+		!(ISNAN(x[i].r) || ISNAN(x[i].i)) ) naflag = true;
 	}
     }
     return naflag;
@@ -619,7 +619,7 @@ HIDDEN SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t n;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
 
     PROTECT(x = CAR(args));
     n = XLENGTH(x);
@@ -722,9 +722,10 @@ HIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	f = z_logbase; break;
     case 10004: /* signif */
 	f = z_prec; break;
-    default:
-	error_return(_("unimplemented complex function"));
-    }
+	default:
+		Rf_error(_("unimplemented complex function"));
+		return R_NilValue;
+	}
 
     PROTECT(sa = coerceVector(CAR(args), CPLXSXP));
     PROTECT(sb = coerceVector(CADR(args), CPLXSXP));
@@ -916,10 +917,10 @@ HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #include <Rmath.h> /* for R_pow_di */
 
-static void calct(Rboolean&);
-static Rboolean fxshft(int, double *, double *);
-static Rboolean vrshft(int, double *, double *);
-static void nexth(Rboolean);
+static void calct(bool&);
+static bool fxshft(int, double *, double *);
+static bool vrshft(int, double *, double *);
+static void nexth(bool);
 static void noshft(int);
 
 static void polyev(int, double, double,
@@ -950,7 +951,7 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
     static int d_n, i, i1, i2;
     static double zi, zr, xx, yy;
     static double bnd, xxx;
-    Rboolean conv;
+    bool conv;
     int d1;
     double *tmp;
     static constexpr double cosr =/* cos 94 */ -0.06975647374412529990;
@@ -1125,7 +1126,7 @@ static void noshft(int l1)
  *  initiates a variable-shift iteration and returns with the
  *  approximate zero if successful.
  */
-static Rboolean fxshft(int l2, double *zr, double *zi)
+static bool fxshft(int l2, double *zr, double *zi)
 {
 /*  l2	  - limit of fixed shift steps
  *  zr,zi - approximate zero if convergence (result TRUE)
@@ -1135,7 +1136,7 @@ static Rboolean fxshft(int l2, double *zr, double *zi)
  * Uses global (sr,si), nn, pr[], pi[], .. (all args of polyev() !)
 */
 
-    Rboolean pasd, bool_, test;
+    bool pasd, bool_, test;
     static double svsi, svsr;
     static int i, j, n;
     static double oti, otr;
@@ -1220,7 +1221,7 @@ static Rboolean fxshft(int l2, double *zr, double *zi)
 
 /* carries out the third stage iteration.
  */
-static Rboolean vrshft(int l3, double *zr, double *zi)
+static bool vrshft(int l3, double *zr, double *zi)
 {
 /*  l3	    - limit of steps in stage 3.
  *  zr,zi   - on entry contains the initial iterate;
@@ -1230,7 +1231,7 @@ static Rboolean vrshft(int l3, double *zr, double *zi)
  *
  * Assign and uses  GLOBAL sr, si
 */
-    Rboolean bool_, b;
+    bool bool_, b;
     static int i, j;
     static double r1, r2, mp, ms, tp, relstp;
     static double omp;
@@ -1312,7 +1313,7 @@ L_conv:
     return TRUE;
 }
 
-static void calct(Rboolean& bool_)
+static void calct(bool& bool_)
 {
     /* computes	 t = -p(s)/h(s).
      * bool_   - logical, set true if h(s) is essentially zero.	*/
@@ -1334,7 +1335,7 @@ static void calct(Rboolean& bool_)
     }
 }
 
-static void nexth(Rboolean bool_)
+static void nexth(bool bool_)
 {
     /* calculates the next shifted h polynomial.
      * bool_ :	if TRUE  h(s) is essentially zero

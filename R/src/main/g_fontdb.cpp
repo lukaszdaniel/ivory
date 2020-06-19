@@ -3,7 +3,7 @@
    stuff removed
 */
 
-/* THIS FILE IS NOW SPLIT INTO TWO PIECES: g_fontdb.c and g_fontd2.c, TO
+/* THIS FILE IS NOW SPLIT INTO TWO PIECES: g_fontdb.cpp and g_fontd2.c, TO
    FACILITATE COMPILING.  This is the first half, containing PS fonts and
    Hershey vector fonts. */
 
@@ -15,7 +15,7 @@
    fonts, the most important information is the width tables.  For the
    Hershey fonts, it is the mapping from the character position in the
    font, to the position of the corresponding glyph in the glyph array in
-   g_her_glyph.c.  Accented characters are formed as composites. */
+   g_her_glyph.cpp.  Accented characters are formed as composites. */
 
 /* PAUL MURRELL
    sys-defines.h not used
@@ -32,7 +32,7 @@
 */
 
 /* The Hershey vector fonts we support.	 Each character in a Hershey font
-   is an index into the glyph array in g_her_glyphs.c.	Each
+   is an index into the glyph array in g_her_glyphs.cpp.	Each
    plHersheyFontInfoStruct includes these elements:
 
    (1) PS-style name for the font
@@ -48,7 +48,7 @@
 
 /* Each Hershey font below may contain up to 256 Hershey glyphs, each of
    which is specified by a number that indexes into the array in
-   g_her_glyph.c.  Only the ranges 0x20..0x7e and 0xa0..0xff are directly
+   g_her_glyph.cpp.  Only the ranges 0x20..0x7e and 0xa0..0xff are directly
    accessible to the user.
 
    There are several sorts of hole in the Hershey fonts, i.e., entries in
@@ -64,12 +64,12 @@
    ordfeminine.	 These are written as 0, which means an empty glyph.  That
    is because they not implemented as conventional glyphs at all: the
    corresponding entries in this table are never accessed.  In the file
-   g_cntrlify.c these characters are mapped to sequences of control
+   g_cntrlify.cpp these characters are mapped to sequences of control
    sequences, which implement them as superscripts.
 
    2. the characters ae, AE, and germandbls (i.e. eszet), which (except in
    Gothic-German) are also written as 0.  That is because they are
-   `deligatured' in g_cntrlify.c, via a translation table in g_cntrlify.h.
+   `deligatured' in g_cntrlify.cpp, via a translation table in g_cntrlify.h.
    Deligaturization maps them to the two-characters sequences "ae", "AE",
    and "ss".  The corresponding entries in this table are never accessed.
 
@@ -1252,7 +1252,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
    three non-conflicting tables.)  This table maps each accented character
    to a base character and an accent.
 
-   The indices of the accent glyphs, in the glyph table in g_her_glyph.c,
+   The indices of the accent glyphs, in the glyph table in g_her_glyph.cpp,
    are stored in the inaccessible 0x80--0x9f region (i.e., \0200--\0237
    region) of each font. */
 

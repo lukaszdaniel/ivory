@@ -1199,9 +1199,9 @@ static R_xlen_t mmap_real_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, double *bu
  */
 
 #ifdef SIMPLEMMAP
-# define MMAPPKG "simplemmap"
+#define MMAPPKG "simplemmap"
 #else
-# define MMAPPKG "base"
+#define MMAPPKG "base"
 #endif
 
 static void InitMmapIntegerClass(DllInfo *dll)

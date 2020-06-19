@@ -421,10 +421,10 @@ double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
  * representation
  ****************************************************************
  */
-typedef struct {
+struct LineEND {
     const char * const name;
     R_GE_lineend end;
-} LineEND;
+};
 
 static LineEND lineend[] = {
     { "round",   GE_ROUND_CAP  },
@@ -486,10 +486,10 @@ SEXP GE_LENDget(R_GE_lineend lend)
     return ans;
 }
 
-typedef struct {
+struct LineJOIN {
     const char * const name;
     R_GE_linejoin join;
-} LineJOIN;
+};
 
 static LineJOIN linejoin[] = {
     { "round",   GE_ROUND_JOIN },
@@ -659,13 +659,13 @@ void GESetClip(double x1, double y1, double x2, double y2, pGEDevDesc dd)
 #define	CS_TOP		004
 #define	CS_RIGHT	010
 
-typedef struct
+struct cliprect
 {
     double xl;
     double xr;
     double yb;
     double yt;
-} cliprect;
+};
 
 static int clipcode(double x, double y, cliprect *cr)
 {
@@ -681,7 +681,7 @@ static int clipcode(double x, double y, cliprect *cr)
     return c;
 }
 
-static Rboolean CSclipline(double *x1, double *y1, double *x2, double *y2,
+static bool CSclipline(double *x1, double *y1, double *x2, double *y2,
 	   cliprect *cr, int *clipped1, int *clipped2,
 	   pGEDevDesc dd)
 {
@@ -693,7 +693,7 @@ static Rboolean CSclipline(double *x1, double *y1, double *x2, double *y2,
     c1 = clipcode(*x1, *y1, cr);
     c2 = clipcode(*x2, *y2, cr);
     if ( !c1 && !c2 )
-	return TRUE;
+	return true;
 
     xl = cr->xl;
     xr = cr->xr;
@@ -707,7 +707,7 @@ static Rboolean CSclipline(double *x1, double *y1, double *x2, double *y2,
     y = yb;		/* keep -Wall happy */
     while( c1 || c2 ) {
 	if(c1 & c2)
-	    return FALSE;
+	    return false;
 	if( c1 )
 	    c = c1;
 	else
@@ -742,14 +742,14 @@ static Rboolean CSclipline(double *x1, double *y1, double *x2, double *y2,
 	    c2 = clipcode(x, y, cr);
 	}
     }
-    return TRUE;
+    return true;
 }
 
 
 /* Clip the line
    If toDevice = 1, clip to the device extent (i.e., temporarily ignore
    dd->dev->gp.xpd) */
-static Rboolean clipLine(double *x1, double *y1, double *x2, double *y2,
+static bool clipLine(double *x1, double *y1, double *x2, double *y2,
 	 int toDevice, pGEDevDesc dd)
 {
     int dummy1, dummy2;
@@ -772,7 +772,7 @@ static Rboolean clipLine(double *x1, double *y1, double *x2, double *y2,
 void GELine(double x1, double y1, double x2, double y2,
 	    const pGEcontext gc, pGEDevDesc dd)
 {
-    Rboolean clip_ok;
+    bool clip_ok;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
@@ -926,23 +926,21 @@ struct GClipRect
     double ymax;
 };
 
-static int inside(Edge b, double px, double py, GClipRect *clip)
+static bool inside(Edge b, double px, double py, GClipRect *clip)
 {
     switch (b) {
-    case Left:   if (px < clip->xmin) return 0; break;
-    case Right:  if (px > clip->xmax) return 0; break;
-    case Bottom: if (py < clip->ymin) return 0; break;
-    case Top:    if (py > clip->ymax) return 0; break;
+    case Left:   if (px < clip->xmin) return false; break;
+    case Right:  if (px > clip->xmax) return false; break;
+    case Bottom: if (py < clip->ymin) return false; break;
+    case Top:    if (py > clip->ymax) return false; break;
     }
-    return 1;
+    return true;
 }
 
-static int cross(Edge b, double x1, double y1, double x2, double y2,
-	   GClipRect *clip)
+static bool cross(Edge b, double x1, double y1, double x2, double y2,
+                  GClipRect *clip)
 {
-    if (inside (b, x1, y1, clip) == inside (b, x2, y2, clip))
-	return 0;
-    else return 1;
+    return !(inside(b, x1, y1, clip) == inside(b, x2, y2, clip));
 }
 
 static void intersect(Edge b, double x1, double y1, double x2, double y2,
@@ -991,8 +989,8 @@ static void clipPoint(Edge b, double x, double y,
 	/* If 'p' and previous point cross edge, find intersection.  */
 	/* Clip against next boundary, if any.  */
 	/* If no more edges, add intersection to output list. */
-	if (cross (b, x, y, cs[b].sx, cs[b].sy, clip)) {
-	    intersect (b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
+	if (cross(b, x, y, cs[b].sx, cs[b].sy, clip)) {
+	    intersect(b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
 	    if (b < Top)
 		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store,
 			   clip, cs);
@@ -1011,7 +1009,7 @@ static void clipPoint(Edge b, double x, double y,
 
     /* For all, if point is 'inside' */
     /* proceed to next clip edge, if any */
-    if (inside (b, x, y, clip)) {
+    if (inside(b, x, y, clip)) {
 	if (b < Top)
 	    clipPoint((Edge) (b + 1), x, y, xout, yout, cnt, store, clip, cs);
 	else {
@@ -1031,8 +1029,8 @@ static void closeClip(double *xout, double *yout, int *cnt, int store,
     Edge b;
 
     for (b = Left; b <= Top; b = (Edge) (b + 1)) {
-	if (cross (b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
-	    intersect (b, cs[b].sx, cs[b].sy,
+	if (cross(b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
+	    intersect(b, cs[b].sx, cs[b].sy,
 		       cs[b].fx, cs[b].fy, &ix, &iy, clip);
 	    if (b < Top)
 		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
@@ -1066,16 +1064,20 @@ static int clipPoly(double *x, double *y, int n, int store, int toDevice,
     return (cnt);
 }
 
-static Rboolean mustClip(double xmin, double xmax, double ymin, double ymax,
-                         int toDevice, pGEDevDesc dd)
+static bool mustClip(double xmin, double xmax, double ymin, double ymax,
+                     int toDevice, pGEDevDesc dd)
 {
     GClipRect clip;
     if (toDevice)
-	getClipRectToDevice(&clip.xmin, &clip.ymin, &clip.xmax, &clip.ymax,
-			    dd);
+    {
+        getClipRectToDevice(&clip.xmin, &clip.ymin, &clip.xmax, &clip.ymax,
+                            dd);
+    }
     else
-	getClipRect(&clip.xmin, &clip.ymin, &clip.xmax, &clip.ymax, dd);
-    return (Rboolean) (clip.xmin > xmin || clip.xmax < xmax ||
+    {
+        getClipRect(&clip.xmin, &clip.ymin, &clip.xmax, &clip.ymax, dd);
+    }
+    return (clip.xmin > xmin || clip.xmax < xmax ||
             clip.ymin > ymin || clip.ymax < ymax);
 }
 
@@ -1714,8 +1716,8 @@ static VFontTab
    saving further table lookups.
 
    (Done by GEText and GEStrWidth/Height, and also set that way in the
-   graphics package's plot.c for C_text, C_strWidth and C_strheight,
-   and in plot3d.c for C_contour.)
+   graphics package's plot.cpp for C_text, C_strWidth and C_strheight,
+   and in plot3d.cpp for C_contour.)
 */
 static int VFontFamilyCode(char *fontfamily)
 {
@@ -2102,13 +2104,13 @@ void GEMode(int mode, pGEDevDesc dd)
  * GESymbol
  ****************************************************************
  */
-#define SMALL	0.25
-#define RADIUS	0.375
-#define SQRC	M_SQRT_PI/2 //0.88622692545275801364		/* sqrt(pi / 4) */
-#define DMDC	SQRC * M_SQRT2 //1.25331413731550025119		/* sqrt(pi / 4) * sqrt(2) */
-#define TRC0	1.55512030155621416073		/* sqrt(4 * pi/(3 * sqrt(3))) */
-#define TRC1	1.34677368708859836060		/* TRC0 * sqrt(3) / 2 */
-#define TRC2	0.77756015077810708036		/* TRC0 / 2 */
+constexpr double SMALL = 0.25;
+constexpr double RADIUS = 0.375;
+constexpr double SQRC = M_SQRT_PI/2; //0.88622692545275801364		/* sqrt(pi / 4) */
+constexpr double DMDC = SQRC * M_SQRT2; //1.25331413731550025119		/* sqrt(pi / 4) * sqrt(2) */
+constexpr double TRC0 = 1.55512030155621416073;		/* sqrt(4 * pi/(3 * sqrt(3))) */
+constexpr double TRC1 = 1.34677368708859836060;		/* TRC0 * sqrt(3) / 2 */
+constexpr double TRC2 = 0.77756015077810708036;		/* TRC0 / 2 */
 /* Draw one of the R special symbols. */
 /* "size" is in device coordinates and is assumed to be a width
  * rather than a height.
@@ -2152,7 +2154,7 @@ void GESymbol(double x, double y, int pch, double size,
 	       pixels are not square, but only on low resolution
 	       devices where we can do nothing better.
 
-	       For this symbol only, size is cex (see engine.c).
+	       For this symbol only, size is cex (see engine.cpp).
 
 	       Prior to 2.1.0 the offsets were always 0.5.
 	    */
@@ -3255,7 +3257,7 @@ HIDDEN SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     /*
      * If there is an error or user-interrupt in the above
      * evaluation, dd->recordGraphics is set to TRUE
-     * on all graphics devices (see GEonExit(); called in errors.c)
+     * on all graphics devices (see GEonExit(); called in errors.cpp)
      */
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_record")) {
@@ -3285,7 +3287,7 @@ void GEonExit()
    * Run through all devices and turn graphics recording back on
    * in case an error occurred in the middle of a do_recordGraphics
    * call.
-   * Awkward cos device code still in graphics.c
+   * Awkward cos device code still in graphics.cpp
    * Can be cleaned up when device code moved here.
    */
     int i, devNum;

@@ -47,8 +47,8 @@ constexpr int MAX_DIGITS = 22;
 /* FIXME: Hmm, have quite a host of these:
 
        1) ./fround.c   uses much more (sensibly!) ``instead''
-       2) ../main/coerce.c   & ../main/deparse.c have  DBL_DIG	directly
-       3) ../main/options.c has	  #define MAX_DIGITS 22	 for options(digits)
+       2) ../main/coerce.cpp   & ../main/deparse.c have  DBL_DIG	directly
+       3) ../main/options.cpp has	  #define MAX_DIGITS 22	 for options(digits)
 
        Really should decide on a (config.h dependent?) global MAX_DIGITS.
        --MM--

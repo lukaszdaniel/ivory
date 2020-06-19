@@ -13,7 +13,7 @@
    This conversion is to facilitate rendering.  _controlify() is called by
    alabel(), and the converted label is rendered by _alabel_standard(),
    _alabel_stroke(), or _alabel_device(), depending on what sort of font is
-   currently selected.  See g_alabel.c (_controlify() is called by
+   currently selected.  See g_alabel.cpp (_controlify() is called by
    labelwidth() too).
 
    If the currently selected font is a font with ISO-Latin-1 encoding, the
@@ -71,7 +71,7 @@
 #include "g_cntrlify.h"
 #include "g_jis.h"
 
-/* these two array lengths must agree with values in file g_her_glyph.c */
+/* these two array lengths must agree with values in file g_her_glyph.cpp */
 #define NUM_OCCIDENTAL_HERSHEY_GLYPHS 4400
 #define NUM_ORIENTAL_HERSHEY_GLYPHS 5500
 
@@ -175,7 +175,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 		  if (matched)
 		    /* the entry in the character table maps the JIS
 		       character to a character (in 0..255 range) in
-		       one of the fonts in the master table in g_fontdb.c */
+		       one of the fonts in the master table in g_fontdb.cpp */
 		    {
 		      int fontnum = char_mapping->font;
 		      unsigned short charnum = char_mapping->charnum;
@@ -184,7 +184,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 			/* a raw Hershey glyph, not in any font */
 			dest[j++] = RAW_HERSHEY_GLYPH | charnum;
 		      else
-			/* a character in one of the fonts in g_fontdb.c */
+			/* a character in one of the fonts in g_fontdb.cpp */
 			  dest[j++] = (unsigned short)((fontnum << FONT_SHIFT) | charnum);
 		      src += 2;
 		      continue; /* back to top of while loop */
@@ -460,7 +460,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 		      if (matched)
 			/* the entry in the character table maps the JIS
 			   character to a character (in 0..255 range) in
-			   one of the fonts in the master table in g_fontdb.c*/
+			   one of the fonts in the master table in g_fontdb.cpp*/
 			{
 			  int fontnum = char_mapping->font;
 			  unsigned short charnum = char_mapping->charnum;
@@ -469,7 +469,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 			    /* a raw Hershey glyph, not in any font */
 			    dest[j++] = RAW_HERSHEY_GLYPH | charnum;
 			  else
-			    /* a character in one of the fonts in g_fontdb.c */
+			    /* a character in one of the fonts in g_fontdb.cpp */
 			    dest[j++] = (unsigned short)((fontnum << FONT_SHIFT) | charnum);
 			  src += 4;
 			  continue; /* back to top of while loop */

@@ -59,7 +59,7 @@ static int R_Profiling = 0;
    each give the call stack found at a sampling point with the inner
    most function first.
 
-   To enable profiling, recompile eval.c with R_PROFILING defined.  It
+   To enable profiling, recompile eval.cpp with R_PROFILING defined.  It
    would be possible to selectively turn profiling on and off from R
    and to specify the file name from R as well, but for now I won't
    bother.
@@ -86,7 +86,7 @@ static int R_Profiling = 0;
    L. T.  */
 
 #ifdef _WIN32
-# define WIN32_LEAN_AND_MEAN 1
+#define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>		/* for CreateEvent, SetEvent */
 # include <process.h>		/* for _beginthread, _endthread */
 #else
@@ -1201,16 +1201,16 @@ R_INLINE static Rboolean R_CheckJIT(SEXP fun)
 }
 
 #ifdef DEBUG_JIT
-# define PRINT_JIT_INFO							\
+#define PRINT_JIT_INFO							\
     REprintf("JIT cache hits: %ld; env: %ld; body %ld\n",		\
 	     jit_info.count, jit_info.envcount, jit_info.bdcount)
 #else
-# define PRINT_JIT_INFO	do { } while(0)
+#define PRINT_JIT_INFO	do { } while(0)
 #endif
 
 
-/* FIXME: this should not depend on internals from envir.c but does for now. */
-/* copied from envir.c for now */
+/* FIXME: this should not depend on internals from envir.cpp but does for now. */
+/* copied from envir.cpp for now */
 #define IS_USER_DATABASE(rho)  (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"))
 #define IS_STANDARD_UNHASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) == R_NilValue)
 #define IS_STANDARD_HASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) != R_NilValue)
@@ -1333,15 +1333,15 @@ R_INLINE static SEXP cmpenv_topenv(SEXP cmpenv)
     return topenv(R_NilValue, cmpenv);
 }
 
-R_INLINE static Rboolean cmpenv_exists_local(SEXP sym, SEXP cmpenv, SEXP top)
+R_INLINE static bool cmpenv_exists_local(SEXP sym, SEXP cmpenv, SEXP top)
 {
     if (cmpenv != top)
 	for (SEXP frame = FRAME(cmpenv);
 	     frame != R_NilValue;
 	     frame = CDR(frame))
 	    if (TAG(frame) == sym)
-		return TRUE;
-    return FALSE;
+		return true;
+    return false;
 }
 
 R_INLINE static Rboolean jit_env_match(SEXP cmpenv, SEXP fun)
@@ -1579,7 +1579,7 @@ R_INLINE static Rboolean R_isReplaceSymbol(SEXP fun)
 }
 #endif
 
-/* There's another copy of this in main.c */
+/* There's another copy of this in main.cpp */
 static void PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
@@ -1773,7 +1773,7 @@ SEXP Rf_applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho, SEXP suppliedva
     /* This piece of code is destructively modifying the actuals list,
        which is now also the list of bindings in the frame of newrho.
        This is one place where internal structure of environment
-       bindings leaks out of envir.c.  It should be rewritten
+       bindings leaks out of envir.cpp.  It should be rewritten
        eventually so as not to break encapsulation of the internal
        environment layout.  We can live with it for now since it only
        happens immediately after the environment creation.  LT */
@@ -1992,7 +1992,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
        of the internal environment of the generic call to the new
        frame.  need to make sure missingness information is preserved
        and the environments for any default expression promises are
-       set to the new environment.  should move this to envir.c where
+       set to the new environment.  should move this to envir.cpp where
        it can be done more efficiently. */
     for (next = FORMALS(op); next != R_NilValue; next = CDR(next)) {
 	SEXP symbol =  TAG(next);
@@ -2192,21 +2192,24 @@ R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
 #define BodyHasBraces(body) \
     ((isLanguage(body) && CAR(body) == R_BraceSymbol) ? 1 : 0)
 */
-R_INLINE static Rboolean BodyHasBraces(SEXP body) {
- return (Rboolean) (isLanguage(body) && CAR(body) == R_BraceSymbol);
+R_INLINE static bool BodyHasBraces(SEXP body) {
+ return (isLanguage(body) && CAR(body) == R_BraceSymbol);
  }
 
 /* Allocate space for the loop variable value the first time through
    (when v == R_NilValue) and when the value may have been assigned to
    another variable. This should be safe and avoid allocation in many
    cases. */
-#define ALLOC_LOOP_VAR(v, val_type, vpi) do {			\
-	if (v == R_NilValue || MAYBE_SHARED(v) ||		\
-	    ATTRIB(v) != R_NilValue || (v) != CAR(cell)) {	\
-	    REPROTECT(v = allocVector(val_type, 1), vpi);	\
-	    INCREMENT_NAMED(v);					\
-	}							\
-    } while(0)
+#define ALLOC_LOOP_VAR(v, val_type, vpi)                  \
+	do                                                    \
+	{                                                     \
+		if (v == R_NilValue || MAYBE_SHARED(v) ||         \
+			ATTRIB(v) != R_NilValue || (v) != CAR(cell))  \
+		{                                                 \
+			REPROTECT(v = allocVector(val_type, 1), vpi); \
+			INCREMENT_NAMED(v);                           \
+		}                                                 \
+	} while (0)
 
 HIDDEN SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2249,7 +2252,7 @@ R_INLINE static SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
     }
 }
 
-R_INLINE static Rboolean SET_BINDING_VALUE(SEXP loc, SEXP value) {
+R_INLINE static bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
     /* This depends on the current implementation of bindings */
     if (loc != R_NilValue &&
 	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
@@ -2258,10 +2261,10 @@ R_INLINE static Rboolean SET_BINDING_VALUE(SEXP loc, SEXP value) {
 	    if (MISSING(loc))
 		SET_MISSING(loc, 0);
 	}
-	return TRUE;
+	return true;
     }
     else
-	return FALSE;
+	return false;
 }
 
 HIDDEN SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2424,7 +2427,7 @@ HIDDEN SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
     if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK) {
-	while(TRUE) {
+	while(true) {
 	    SEXP cond = PROTECT(eval(CAR(args), rho));
 	    int condl = asLogicalNoNA(cond, call, rho);
 	    UNPROTECT(1);
@@ -2533,7 +2536,7 @@ HIDDEN NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
     findcontext(CTXT_BROWSER | CTXT_FUNCTION, rho, v);
 }
 
-/* Declared with a variable number of args in names.c */
+/* Declared with a variable number of args in names.cpp */
 HIDDEN SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rval, srcref;
@@ -2997,19 +3000,15 @@ HIDDEN SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
    and because it is a little more efficient.
 */
 
-/*
-#define COPY_TAG(to, from) do { \
-  SEXP __tag__ = TAG(from); \
-  if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
-} while (0)
-*/
-R_INLINE static void COPY_TAG(SEXP to, SEXP from) {
-  SEXP tag = TAG(from);
-  if (tag != R_NilValue) SET_TAG(to, tag);
- }
+inline static void COPY_TAG(SEXP to, SEXP from)
+{
+	SEXP tag = TAG(from);
+	if (tag != R_NilValue)
+		SET_TAG(to, tag);
+}
 
 /* Used in eval and applyMethod (object.c) for builtin primitives,
-   do_internal (names.c) for builtin .Internals
+   do_internal (names.cpp) for builtin .Internals
    and in evalArgs.
 
    'n' is the number of arguments already evaluated and hence not
@@ -3102,7 +3101,7 @@ HIDDEN SEXP Rf_evalList(SEXP el, SEXP rho, SEXP call, int n)
 
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
-/* used in evalArgs, arithmetic.c, seq.c */
+/* used in evalArgs, arithmetic.cpp, seq.cpp */
 HIDDEN SEXP Rf_evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
@@ -3178,7 +3177,7 @@ HIDDEN SEXP Rf_evalListKeepMissing(SEXP el, SEXP rho)
 /* form below because it is does not cause growth of the pointer */
 /* protection stack, and because it is a little more efficient. */
 
-HIDDEN SEXP promiseArgs(SEXP el, SEXP rho)
+HIDDEN SEXP Rf_promiseArgs(SEXP el, SEXP rho)
 {
     SEXP ans, h, tail;
 
@@ -3237,8 +3236,8 @@ HIDDEN SEXP promiseArgs(SEXP el, SEXP rho)
 
 /* Check that each formal is a symbol */
 
-/* used in coerce.c */
-HIDDEN void CheckFormals(SEXP ls)
+/* used in coerce.cpp */
+HIDDEN void Rf_CheckFormals(SEXP ls)
 {
     if (isList(ls)) {
 	for (; ls != R_NilValue; ls = CDR(ls))
@@ -3928,7 +3927,7 @@ static SEXP R_DotCSym = NULL;
 static SEXP R_ConstantsRegistry = NULL;
 
 #if defined(__GNUC__) && ! defined(BC_PROFILING) && (! defined(NO_THREADED_CODE))
-# define THREADED_CODE
+#define THREADED_CODE
 #endif
 
 HIDDEN
@@ -4146,7 +4145,7 @@ static SEXP seq_int(int n1, int n2)
 
 #define COMPACT_INTSEQ
 #ifdef COMPACT_INTSEQ
-# define INTSEQSXP 9999
+#define INTSEQSXP 9999
 #endif
 /* tag for boxed stack entries to be ignored by stack protection */
 #define NLNKSXP 9996
@@ -4198,10 +4197,10 @@ R_INLINE static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 #define SETSTACK_NLNK(i, v) SETSTACK_NLNK_PTR(R_BCNodeStackTop + (i), v)
 
 #ifdef TESTING_WRITE_BARRIER
-# define CHECK_SET_BELOW_PROT(s)					\
+#define CHECK_SET_BELOW_PROT(s)					\
     if ((s) < R_BCProtTop) error("changing stack value below R_BCProt pointer")
 #else
-# define CHECK_SET_BELOW_PROT(s) do { } while (0)
+#define CHECK_SET_BELOW_PROT(s) do { } while (0)
 #endif
 
 #define SETSTACK_PTR(s, v) do { \
@@ -4586,9 +4585,9 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
    around this. */
 #if (defined(_WIN32) || defined(_WIN64)) && defined(__GNUC__) && \
     __GNUC__ <= 4
-# define R_sqrt(x) (ISNAN(x) ? x : sqrt(x))
+#define R_sqrt(x) (ISNAN(x) ? x : sqrt(x))
 #else
-# define R_sqrt sqrt
+#define R_sqrt sqrt
 #endif
 
 #define DO_LOG() do {							\
@@ -5065,7 +5064,7 @@ R_INLINE static SEXP BINDING_VALUE(SEXP loc)
    number.
 
    Bindings recorded may become invalid if user code removes a
-   variable.  The code in envir.c has been modified to insert
+   variable.  The code in envir.cpp has been modified to insert
    R_unboundValue as the value of a binding when it is removed, and
    code using cached bindings checks for this.
 
@@ -5078,7 +5077,7 @@ R_INLINE static SEXP BINDING_VALUE(SEXP loc)
 #define USE_BINDING_CACHE
 # ifdef USE_BINDING_CACHE
 /* CACHE_MAX must be a power of 2 for modulus using & CACHE_MASK to work*/
-# define CACHE_MAX 256
+#define CACHE_MAX 256
 # ifdef CACHE_MAX
 #  define CACHE_MASK (CACHE_MAX - 1)
 #  define CACHEIDX(i) ((i) & CACHE_MASK)
@@ -5086,7 +5085,7 @@ R_INLINE static SEXP BINDING_VALUE(SEXP loc)
 #  define CACHEIDX(i) (i)
 # endif
 
-# define CACHE_ON_STACK
+#define CACHE_ON_STACK
 # ifdef CACHE_ON_STACK
 typedef R_bcstack_t * R_binding_cache_t;
 #  define VCACHE(i) GETSTACK_SXPVAL_PTR(vcache + (i))
@@ -5108,10 +5107,10 @@ typedef SEXP R_binding_cache_t;
 # endif
 #else
 typedef void *R_binding_cache_t;
-# define GET_CACHED_BINDING_CELL(vcache, sidx) R_NilValue
-# define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) R_NilValue
+#define GET_CACHED_BINDING_CELL(vcache, sidx) R_NilValue
+#define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) R_NilValue
 
-# define SET_CACHED_BINDING(vcache, sidx, cell)
+#define SET_CACHED_BINDING(vcache, sidx, cell)
 #endif
 
 R_INLINE static SEXP GET_BINDING_CELL_CACHE(SEXP symbol, SEXP rho,
@@ -6207,7 +6206,7 @@ R_INLINE static void checkForMissings(SEXP args, SEXP call)
 	signalMissingArgError(args, call);
 }
 
-typedef struct {
+struct R_loopinfo_t{
     R_xlen_t idx, len;
     int type;
     /* Include the symbol in the loopinfo structure in case the
@@ -6216,7 +6215,7 @@ typedef struct {
        symbol is GC protected during the loop evaluation by its
        reference from the current byte code object. */
     SEXP symbol;
-} R_loopinfo_t;
+};
 
 #define FOR_LOOP_STATE_SIZE 5
 #define GET_FOR_LOOP_INFO() ((R_loopinfo_t *) RAW0(GETSTACK_SXPVAL(-2)))
@@ -6287,23 +6286,26 @@ R_INLINE static SEXP SymbolValue(SEXP sym)
     }
 }
 
-#define DO_BASEGUARD() do {				\
-	SEXP expr = VECTOR_ELT(constants, GETOP());	\
-	int label = GETOP();				\
-	SEXP sym = CAR(expr);				\
-	if (findFun(sym, rho) != SymbolValue(sym)) {	\
-	    BCNPUSH(eval(expr, rho));			\
-	    pc = codebase + label;			\
-	}						\
-    } while (0)
+#define DO_BASEGUARD()                              \
+	do                                              \
+	{                                               \
+		SEXP expr = VECTOR_ELT(constants, GETOP()); \
+		int label = GETOP();                        \
+		SEXP sym = CAR(expr);                       \
+		if (findFun(sym, rho) != SymbolValue(sym))  \
+		{                                           \
+			BCNPUSH(eval(expr, rho));               \
+			pc = codebase + label;                  \
+		}                                           \
+	} while (0)
 
 /* The CALLBUILTIN instruction handles calls to both true BUILTINs and
    to .Internals of type BUILTIN. To handle profiling in a way that is
    consistent with this instruction needs to be able to distinguish a
    true BUILTIN from a .Internal. LT */
 //#define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
-R_INLINE static Rboolean IS_TRUE_BUILTIN(SEXP x) {
- return (Rboolean) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0);
+R_INLINE static bool IS_TRUE_BUILTIN(SEXP x) {
+ return ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0);
  }
 
 /* rho only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name */
@@ -6394,16 +6396,16 @@ static SEXP R_findBCInterpreterExpression()
 
 HIDDEN SEXP R_getCurrentSrcref()
 {
-    if (R_Srcref != R_InBCInterpreter)
-	return R_Srcref;
-    else
+	if (R_Srcref != R_InBCInterpreter)
+		return R_Srcref;
+
 	return R_findBCInterpreterSrcref(NULL);
 }
 
-static Rboolean maybeClosureWrapper(SEXP expr)
+static bool maybeClosureWrapper(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
-	return FALSE;
+	return false;
 
     SEXP sym = CAR(expr);
 
@@ -6412,37 +6414,37 @@ static Rboolean maybeClosureWrapper(SEXP expr)
 	sym == R_DotCallSym || sym == R_DotFortranSym ||
 	sym == R_DotCSym || sym == R_DotCallgraphicsSym))
 
-	return FALSE;
+	return false;
 
-    return (Rboolean) (CDR(expr) != R_NilValue && CADR(expr) != R_NilValue);
+    return (CDR(expr) != R_NilValue && CADR(expr) != R_NilValue);
 }
 
-static Rboolean maybeAssignmentCall(SEXP expr)
+static bool maybeAssignmentCall(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
-	return FALSE;
+	return false;
 
     if (TYPEOF(CAR(expr)) != SYMSXP)
-	return FALSE;
+	return false;
     const char *name = CHAR(PRINTNAME(CAR(expr)));
     size_t slen = strlen(name);
-    return (Rboolean) (slen > 2 && name[slen-2] == '<' && name[slen-1] == '-');
+    return (slen > 2 && name[slen-2] == '<' && name[slen-1] == '-');
 }
 
 /* Check if the given expression is a call to a name that is also
    a builtin or special (does not search the environment!). */
-static Rboolean maybePrimitiveCall(SEXP expr)
+static bool maybePrimitiveCall(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
-	return FALSE;
+	return false;
 
     if (TYPEOF(CAR(expr)) == SYMSXP) {
 	SEXP value = SYMVALUE(CAR(expr));
 	if (TYPEOF(value) == PROMSXP)
 	    value = PRVALUE(value);
-	return (Rboolean) (TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP);
+	return (TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP);
     }
-    return FALSE;
+    return false;
 }
 
 /* Inflate a (single-level) compiler-flattenned assignment call.

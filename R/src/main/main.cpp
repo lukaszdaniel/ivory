@@ -53,7 +53,7 @@ HIDDEN void nl_Rdummy(void)
 #endif
 
 
-/* The 'real' main() program is in Rmain.c on Unix-alikes, and
+/* The 'real' main() program is in Rmain.cpp on Unix-alikes, and
    src/gnuwin/front-ends/graphappmain.c on Windows, unless of course
    R is embedded */
 
@@ -86,7 +86,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 
     R_InitSrcRefState(&cntxt);
     savestack = R_PPStackTop;
-    while(TRUE) {
+    while(true) {
 	R_PPStackTop = savestack;
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
@@ -173,14 +173,14 @@ static const char *R_PromptString(int browselevel, int type)
   In the future, we may need to make this accessible to packages
   and so put it into one of the public R header files.
  */
-typedef struct {
-  ParseStatus    status;
-  int            prompt_type;
-  int            browselevel;
-  unsigned char  buf[CONSOLE_BUFFER_SIZE+1];
-  unsigned char *bufp;
-} R_ReplState;
-
+struct R_ReplState
+{
+	ParseStatus status;
+	int prompt_type;
+	int browselevel;
+	unsigned char buf[CONSOLE_BUFFER_SIZE + 1];
+	unsigned char *bufp;
+};
 
 /**
   This is the body of the REPL.
@@ -311,8 +311,8 @@ static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
     /* stopgap measure if line > CONSOLE_BUFFER_SIZE chars */
     state.bufp = state.buf;
     if(R_Verbose)
-	REprintf(" >R_ReplConsole(): before \"while(TRUE)\" {main.c}\n");
-    while(TRUE) {
+	REprintf(" >R_ReplConsole(): before \"while(true)\" {main.cpp}\n");
+    while(true) {
 	status = Rf_ReplIteration(rho, savestack, browselevel, &state);
 	if(status < 0) {
 	  if (state.status == PARSE_INCOMPLETE)
@@ -653,7 +653,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 }
 
 #ifndef SIGSTKSZ
-# define SIGSTKSZ 8192    /* just a guess */
+#define SIGSTKSZ 8192    /* just a guess */
 #endif
 
 #ifdef HAVE_STACK_T
@@ -725,7 +725,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 
 int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
-const char* get_workspace_name();  /* from startup.c */
+const char* get_workspace_name();  /* from startup.cpp */
 
 HIDDEN void BindDomain(char *R_Home)
 {
@@ -1077,7 +1077,7 @@ void setup_Rmainloop(void)
 	PrintWarnings(n_("Warning message during startup:", "Warning messages during startup:", R_CollectWarnings));
     }
     if(R_Verbose)
-	REprintf(" ending setup_Rmainloop(): R_Interactive = %d {main.c}\n",
+	REprintf(" ending setup_Rmainloop(): R_Interactive = %d {main.cpp}\n",
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
@@ -1093,7 +1093,7 @@ void setup_Rmainloop(void)
     R_Is_Running = 2;
 }
 
-extern SA_TYPE SaveAction; /* from src/main/startup.c */
+extern SA_TYPE SaveAction; /* from src/main/startup.cpp */
 
 static void end_Rmainloop(void)
 {
@@ -1212,7 +1212,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     return rval;
 }
 
-/* There's another copy of this in eval.c */
+/* There's another copy of this in eval.cpp */
 static void PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
@@ -1228,7 +1228,7 @@ static void PrintCall(SEXP call, SEXP rho)
 }
 
 /* browser(text = "", condition = NULL, expr = TRUE, skipCalls = 0L)
- * ------- but also called from ./eval.c */
+ * ------- but also called from ./eval.cpp */
 HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *saveToplevelContext;

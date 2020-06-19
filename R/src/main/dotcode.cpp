@@ -56,21 +56,21 @@ static SEXP CSingSymbol = NULL;
 
 #include <Rdynpriv.h>
 
-typedef enum
+enum RefType
 {
 	NOT_DEFINED = 0,
 	FILENAME,
 	DLL_HANDLE,
 	R_OBJECT
-} RefType;
+};
 
-typedef struct
+struct DllReference
 {
 	char DLLname[PATH_MAX];
 	HINSTANCE dll;
 	SEXP obj;
 	RefType type;
-} DllReference;
+};
 
 /* Maximum length of entry-point name, including nul terminator */
 constexpr size_t MaxSymbolBytes = 1024;
@@ -85,12 +85,12 @@ static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll);
 static SEXP pkgtrim(SEXP args, DllReference *dll);
 
-R_INLINE static Rboolean isNativeSymbolInfo(SEXP op)
+R_INLINE static bool isNativeSymbolInfo(SEXP op)
 {
     /* was: inherits(op, "NativeSymbolInfo")
      * inherits() is slow because of string comparisons, so use
      * structural check instead. */
-    return (Rboolean) (TYPEOF(op) == VECSXP &&
+    return (TYPEOF(op) == VECSXP &&
 	    LENGTH(op) >= 2 &&
 	    TYPEOF(VECTOR_ELT(op, 1)) == EXTPTRSXP);
 }
@@ -277,7 +277,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
     }
 
     /* NB: the actual conversion to the symbol is done in
-       R_dlsym in Rdynload.c.  That prepends an underscore (usually),
+       R_dlsym in Rdynload.cpp.  That prepends an underscore (usually),
        and may append one or more underscores.
     */
 
@@ -309,29 +309,29 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
     return args; /* -Wall */
 }
 
-static Rboolean checkNativeType(int targetType, int actualType)
+static bool checkNativeType(int targetType, int actualType)
 {
 	if (targetType > 0)
 	{
 		if (targetType == INTSXP || targetType == LGLSXP)
 		{
-			return (Rboolean)(actualType == INTSXP || actualType == LGLSXP);
+			return (actualType == INTSXP || actualType == LGLSXP);
 		}
-		return (Rboolean)(targetType == actualType);
+		return (targetType == actualType);
 	}
 
-	return TRUE;
+	return true;
 }
 
-static Rboolean comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
+static bool comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
 {
 	if (type == ANYSXP || TYPEOF(s) == type)
-		return TRUE;
+		return true;
 
 	if (type == SINGLESXP)
-		return (Rboolean)(asLogical(getAttrib(s, install("Csingle"))) == TRUE);
+		return (asLogical(getAttrib(s, install("Csingle"))) == TRUE);
 
-	return FALSE;
+	return false;
 }
 
 /* Foreign Function Interface.  This code allows a user to call C */
@@ -692,7 +692,7 @@ HIDDEN SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     If there is an error or user-interrupt in the above
     evaluation, dd->recordGraphics is set to TRUE
-    on all graphics devices (see GEonExit(); called in errors.c)
+    on all graphics devices (see GEonExit(); called in errors.cpp)
 
     NOTE: if someone uses try() around this call and there
     is an error, then dd->recordGraphics stays FALSE, so

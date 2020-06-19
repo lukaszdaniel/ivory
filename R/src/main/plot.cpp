@@ -65,7 +65,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	Rboolean reversed = FALSE;
 
 	n = (int)(axp[2] + 0.5);
-	/* {xy}axp[2] for 'log': GLpretty() [./graphics.c] sets
+	/* {xy}axp[2] for 'log': GLpretty() [./graphics.cpp] sets
 	   n < 0: very small scale ==> linear axis, above, or
 	   n = 1,2,3.  see switch() below */
 	umin = usr[0];

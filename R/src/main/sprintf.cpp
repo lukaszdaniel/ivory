@@ -62,13 +62,14 @@ static const char *findspec(const char *str)
 
 
 /*   FALSE is success, TRUE is an error: pattern *not* found . */
-static Rboolean checkfmt(const char *fmt, const char *pattern)
+static bool checkfmt(const char *fmt, const char *pattern)
 {
-    const char *p =fmt;
+	const char *p = fmt;
 
-    if(*p != '%') return TRUE;
-    p = findspec(fmt);
-    return strcspn(p, pattern) ? TRUE : FALSE;
+	if (*p != '%')
+		return true;
+	p = findspec(fmt);
+	return strcspn(p, pattern) ? true : false;
 }
 
 #define TRANSLATE_CHAR(_STR_, _i_)                          \

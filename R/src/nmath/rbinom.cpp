@@ -114,7 +114,7 @@ double Rf_rbinom(double nin, double pp)
     }
 
     /*-------------------------- np = n*p >= 30 : ------------------- */
-    while(TRUE) {
+    while(true) {
       u = unif_rand() * p4;
       v = unif_rand();
       /* triangular region */
@@ -183,11 +183,11 @@ double Rf_rbinom(double nin, double pp)
  L_np_small:
     /*---------------------- np = n*p < 30 : ------------------------- */
 
-  while(TRUE) {
+  while(true) {
      ix = 0;
      f = qn;
      u = unif_rand();
-     while(TRUE) {
+     while(true) {
 	 if (u < f)
 	     goto finis;
 	 if (ix > 110)

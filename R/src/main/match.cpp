@@ -46,7 +46,7 @@
 #include <Defn.h>
 
 
-/* used in subscript.c and subassign.c */
+/* used in subscript.cpp and subassign.cpp */
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 {
     /* "" or NA string matches nothing */
@@ -408,14 +408,15 @@ HIDDEN SEXP Rf_matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
    invoked.
 */
 
-typedef enum {
-    FS_UNMATCHED       = 0, /* the formal was not matched by any supplied arg */
-    FS_MATCHED_PRESENT = 1, /* the formal was matched by a non-missing arg */
-    FS_MATCHED_MISSING = 2, /* the formal was matched, but by a missing arg */
-    FS_MATCHED_LOCAL   = 3, /* the formal was matched by a missing arg, but
+enum fstype_t
+{
+	FS_UNMATCHED = 0,		/* the formal was not matched by any supplied arg */
+	FS_MATCHED_PRESENT = 1, /* the formal was matched by a non-missing arg */
+	FS_MATCHED_MISSING = 2, /* the formal was matched, but by a missing arg */
+	FS_MATCHED_LOCAL = 3,	/* the formal was matched by a missing arg, but
                                a local variable of the same name as the formal
                                has been used */
-} fstype_t;
+};
 
 R_INLINE static void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
     SEXP value = CAR(suppliedSlot);

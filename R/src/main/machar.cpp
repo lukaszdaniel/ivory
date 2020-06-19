@@ -1,7 +1,7 @@
 
 /* Formerly src/appl/machar.c:
  * void machar()  -- computes ALL `machine constants' at once.
- * -------------  -- compare with ../nmath/i1mach.c & ../nmath/d1mach.c
+ * -------------  -- compare with ../nmath/i1mach.cpp & ../nmath/d1mach.cpp
  *		     which use the C  <float.h> constants !
  *      algorithm 665, collected algorithms from acm.
  *      this work published in transactions on mathematical software,
@@ -86,7 +86,7 @@
  *
  */
 
-/* #include  from ./platform.c , now as
+/* #include  from ./platform.cpp , now as
  a "template" to be used with    DTYPE in {double, long double, ..}
                              MACH_NAME in {machar, machar_LD,   ..}
 			         ABS() in {fabs(), fabsl()  ,   ..}
@@ -155,7 +155,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 	for(i=1 ; i<=*negep ; i++)
 		a = a * betain;
 	b = a;
-	while(TRUE) {
+	while(true) {
 		temp = one - a;
 		if (temp - one != zero)
 			break;
@@ -175,7 +175,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 
 	*machep = -*it - 3;
 	a = b;
-	while(TRUE) {
+	while(true) {
 		temp = one + a;
 		if (temp - one != zero)
 			break;
@@ -210,7 +210,7 @@ static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, in
 	z = betain;
 	t = one + *eps;
 	nxres = 0;
-	while(TRUE) {
+	while(true) {
 		y = z;
 		z = y * y;
 

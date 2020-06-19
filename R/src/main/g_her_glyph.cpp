@@ -125,8 +125,8 @@
 */
 #include "g_extern.h"
 
-#define NUM_OCCIDENTAL_HERSHEY_GLYPHS 4400 /*should agree with val in g_cntrlify.c */
-#define NUM_ORIENTAL_HERSHEY_GLYPHS 5500 /* should agree with value in g_cntrlify.c */
+#define NUM_OCCIDENTAL_HERSHEY_GLYPHS 4400 /*should agree with val in g_cntrlify.cpp */
+#define NUM_ORIENTAL_HERSHEY_GLYPHS 5500 /* should agree with value in g_cntrlify.cpp */
 
 const char * const _occidental_hershey_glyphs[NUM_OCCIDENTAL_HERSHEY_GLYPHS] =
 {

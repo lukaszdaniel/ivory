@@ -522,14 +522,14 @@ static void cat_printsep(SEXP sep, int ntot)
     return;
 }
 
-typedef struct cat_info {
+struct cat_info {
     Rboolean wasopen;
     int changedcon;
     Rconnection con;
 #ifdef _WIN32
     Rboolean saveWinUTF8out;
 #endif
-} cat_info;
+};
 
 static void cat_cleanup(void *data)
 {
@@ -831,7 +831,7 @@ HIDDEN SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* (if it is vectorizable). We could probably be fairly */
 /* clever with memory here if we wanted to. */
 
-/* used in connections.c, attrib.c, seq.c, .. */
+/* used in connections.cpp, attrib.cpp, seq.cpp, .. */
 SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
 {
     R_xlen_t lenx, i;
@@ -1027,7 +1027,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
  condition.
 
  This is a SPECIALSXP, so arguments need to be evaluated as needed.
-  And (see names.c) X=2, so it defaults to a visible value.
+  And (see names.cpp) X=2, so it defaults to a visible value.
 */
 
 
