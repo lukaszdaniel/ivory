@@ -561,10 +561,10 @@ static int collect_counts[NUM_OLD_GENERATIONS];
    from fixed size pages.  The pages for each node class are kept in a
    linked list. */
 
-typedef union PAGE_HEADER {
+union PAGE_HEADER {
     union PAGE_HEADER *next;
     double align;
-} PAGE_HEADER;
+};
 
 #if ( SIZEOF_SIZE_T > 4 )
 #define BASE_PAGE_SIZE 8000
@@ -1790,8 +1790,8 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 
-    for (ctxt = R_GlobalContext ; ctxt != NULL ; ctxt = ctxt->nextcontext) {
-	FORWARD_NODE(ctxt->conexit);       /* on.exit expressions */
+    for (ctxt = R_GlobalContext ; ctxt != NULL ; ctxt = ctxt->nextContext()) {
+	FORWARD_NODE(ctxt->onExit());       /* on.exit expressions */
 	FORWARD_NODE(ctxt->promargs);	   /* promises supplied to closure */
 	FORWARD_NODE(ctxt->callfun);       /* the closure called */
 	FORWARD_NODE(ctxt->sysparent);     /* calling environment */
@@ -3156,11 +3156,11 @@ static void R_gc_internal(R_size_t size_needed)
     R_V_maxused = max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
-	R_in_gc = TRUE;
+	R_in_gc = true;
 	gc_start_timing();
 	gens_collected = RunGenCollect(size_needed);
 	gc_end_timing();
-	R_in_gc = FALSE;
+	R_in_gc = false;
     } END_SUSPEND_INTERRUPTS;
 
     if (R_check_constants > 2 ||
@@ -3759,10 +3759,10 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
    Added to API in R 3.4.0.
    Work around casting issues: works where it is needed.
  */
-typedef union {
+union fn_ptr {
     void *p;
     DL_FUNC fn;
-} fn_ptr;
+};
 
 SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 {
@@ -4509,7 +4509,7 @@ static void R_OutputStackTrace(FILE *file)
 {
     RCNTXT *cptr;
 
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
 	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
 	    && TYPEOF(cptr->call) == LANGSXP) {
 	    SEXP fun = CAR(cptr->call);

@@ -1540,14 +1540,14 @@ static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
     SEXP
 	valueClass = PROTECT(R_data_class(value, FALSE)),
 	objClass   = PROTECT(R_data_class(obj, FALSE));
-    static SEXP checkAt = NULL;
+    static SEXP checkAt = nullptr;
     // 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
     if(!isMethodsDispatchOn()) { // needed?
 	SEXP e = PROTECT(lang1(install("initMethodDispatch")));
 	eval(e, R_MethodsNamespace); // only works with methods loaded
 	UNPROTECT(1);
     }
-    if(checkAt == NULL)
+    if(checkAt == nullptr)
 	checkAt = findFun(install("checkAtAssignment"), R_MethodsNamespace);
     SEXP e = PROTECT(lang4(checkAt, objClass, input, valueClass));
     eval(e, env);
@@ -1743,14 +1743,15 @@ SEXP Rf_S3Class(SEXP obj)
  */
 int R_has_slot(SEXP obj, SEXP name) {
 
-#define R_SLOT_INIT							\
-    if(!(isSymbol(name) || (isString(name) && LENGTH(name) == 1)))	\
-	error(_("invalid type or length for slot name"));		\
-    if(!s_dot_Data)							\
-	init_slot_handling();						\
-    if(isString(name)) name = installTrChar(STRING_ELT(name, 0))
+#define R_SLOT_INIT                                                 \
+	if (!(isSymbol(name) || (isString(name) && LENGTH(name) == 1))) \
+		error(_("invalid type or length for slot name"));           \
+	if (!s_dot_Data)                                                \
+		init_slot_handling();                                       \
+	if (isString(name))                                             \
+	name = installTrChar(STRING_ELT(name, 0))
 
-    R_SLOT_INIT;
+	R_SLOT_INIT;
     if(name == s_dot_Data && TYPEOF(obj) != S4SXP)
 	return(1);
     /* else */

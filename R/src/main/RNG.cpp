@@ -37,7 +37,7 @@ const Sampletype &Sample_DEFAULT = REJECTION;
 
 static DL_FUNC User_unif_fun, User_unif_nseed,
 	User_unif_seedloc;
-typedef void (*UnifInitFun)(Int32);
+using UnifInitFun = void (*)(Int32);
 
 UnifInitFun User_unif_init = NULL; /* some picky compilers */
 

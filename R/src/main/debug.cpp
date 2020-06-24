@@ -198,7 +198,7 @@ static void memtrace_stack_dump(void)
 {
     RCNTXT *cptr;
 
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
 	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
 	    && TYPEOF(cptr->call) == LANGSXP) {
 	    SEXP fun = CAR(cptr->call);

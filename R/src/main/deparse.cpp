@@ -122,7 +122,7 @@ constexpr int MAX_Cutoff = (BUFSIZE - 12);
 
 #include "RBufferUtils.h"
 
-typedef R_StringBuffer DeparseBuffer;
+using DeparseBuffer = R_StringBuffer;
 
 struct LocalParseData {
     int linenumber;

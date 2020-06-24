@@ -909,7 +909,7 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
     x <- x[rowInd, colInd]
 
     labRow <- labRow[rowInd] %||% rownames(x) %||% seq_len(nr)[rowInd]
-    labCol <- labCol[rowInd] %||% colnames(x) %||% seq_len(nc)[colInd]
+    labCol <- labCol[colInd] %||% colnames(x) %||% seq_len(nc)[colInd]
 
     if(scale == "row") {
 	x <- sweep(x, 1L, rowMeans(x, na.rm = na.rm), check.margin=FALSE)

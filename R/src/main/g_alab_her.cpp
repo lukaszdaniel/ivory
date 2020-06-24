@@ -64,11 +64,12 @@
 /* PAUL MURRELL
    Structure to contain vfont current position
 */
-typedef struct {
-    double currX;
-    double currY;
-    double angle;
-} vfontContext;
+struct vfontContext
+{
+	double currX;
+	double currY;
+	double angle;
+};
 
 /* forward references */
 static bool _composite_char (unsigned char *composite,

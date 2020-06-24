@@ -11,7 +11,8 @@
                 "COMPILING_IVORY",
                 "HAVE_CONFIG_H",
                 "Unix",
-                "ENABLE_NLS"
+                "ENABLE_NLS",
+                "USE_ICU"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

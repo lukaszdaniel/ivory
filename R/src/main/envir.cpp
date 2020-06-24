@@ -1571,7 +1571,7 @@ SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 	    vl = findVarInFrame3(cptr->cloenv, symbol, TRUE);
 	    if (vl != R_UnboundValue) return vl;
 	}
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
     }
     return R_UnboundValue;
 }
@@ -3245,9 +3245,9 @@ static SEXP pos2env(int pos, SEXP call)
     else if (pos == -1) {
 	/* make sure the context is a funcall */
 	cptr = R_GlobalContext;
-	while( !(cptr->callflag & CTXT_FUNCTION) && cptr->nextcontext
+	while( !(cptr->callflag & CTXT_FUNCTION) && cptr->nextContext()
 	       != NULL )
-	    cptr = cptr->nextcontext;
+	    cptr = cptr->nextContext();
 	if( !(cptr->callflag & CTXT_FUNCTION) )
 	    errorcall(call, _("no enclosing environment"));
 

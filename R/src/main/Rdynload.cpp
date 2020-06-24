@@ -438,34 +438,34 @@ static void Rf_freeFortranSymbol(Rf_DotFortranSymbol *sym)
 
 static void Rf_freeDllInfo(DllInfo *info)
 {
-    int i;
+
     free(info->name);
     free(info->path);
     if(info->CSymbols) {
-	for(i = 0; i < info->numCSymbols; i++)
+	for(int i = 0; i < info->numCSymbols; i++)
 	    Rf_freeCSymbol(info->CSymbols+i);
 	free(info->CSymbols);
     }
     if(info->CallSymbols) {
-	for(i = 0; i < info->numCallSymbols; i++)
+	for(int i = 0; i < info->numCallSymbols; i++)
 	    Rf_freeCallSymbol(info->CallSymbols+i);
 	free(info->CallSymbols);
     }
     if(info->ExternalSymbols) {
-	for(i = 0; i < info->numExternalSymbols; i++)
+	for(int i = 0; i < info->numExternalSymbols; i++)
 	    Rf_freeExternalSymbol(info->ExternalSymbols+i);
 	free(info->ExternalSymbols);
     }
     if(info->FortranSymbols) {
-	for(i = 0; i < info->numFortranSymbols; i++)
+	for(int i = 0; i < info->numFortranSymbols; i++)
 	    Rf_freeFortranSymbol(info->FortranSymbols+i);
 	free(info->FortranSymbols);
     }
 }
 
 
-typedef void (*DllInfoUnloadCall)(DllInfo *);
-typedef DllInfoUnloadCall DllInfoInitCall;
+using DllInfoUnloadCall = void (*)(DllInfo *);
+using DllInfoInitCall = DllInfoUnloadCall;
 
 static bool R_callDLLUnload(DllInfo *dllInfo)
 {
@@ -485,44 +485,45 @@ static bool R_callDLLUnload(DllInfo *dllInfo)
 	/* Returns 1 if the DLL was found and removed from */
 	/* the list and returns 0 otherwise. */
 
-static int DeleteDLL(const char *path)
+static bool DeleteDLL(const char *path)
 {
-    int i, loc;
+    int loc;
 
-    for (i = 0; i < CountDLL; i++) {
-	if (streql(path, LoadedDLL[i].path)) {
-	    loc = i;
-	    goto found;
-	}
-    }
-    return 0;
-found:
+    for (int i = 0; i < CountDLL; i++)
+    {
+        if (streql(path, LoadedDLL[i].path))
+        {
+            loc = i;
 #ifdef CACHE_DLL_SYM
-    if(R_osDynSymbol->deleteCachedSymbols)
-	R_osDynSymbol->deleteCachedSymbols(&LoadedDLL[loc]);
+            if (R_osDynSymbol->deleteCachedSymbols)
+                R_osDynSymbol->deleteCachedSymbols(&LoadedDLL[loc]);
 #endif
-    R_reinit_altrep_classes(&LoadedDLL[loc]);
-    R_callDLLUnload(&LoadedDLL[loc]);
-    R_osDynSymbol->closeLibrary(LoadedDLL[loc].handle);
-    Rf_freeDllInfo(LoadedDLL+loc);
-    /* FIXME: why not use memcpy here? */
-    for(i = loc + 1 ; i < CountDLL ; i++) {
-	LoadedDLL[i - 1].path = LoadedDLL[i].path;
-	LoadedDLL[i - 1].name = LoadedDLL[i].name;
-	LoadedDLL[i - 1].handle = LoadedDLL[i].handle;
-	LoadedDLL[i - 1].useDynamicLookup = LoadedDLL[i].useDynamicLookup;
-	LoadedDLL[i - 1].numCSymbols = LoadedDLL[i].numCSymbols;
-	LoadedDLL[i - 1].numCallSymbols = LoadedDLL[i].numCallSymbols;
-	LoadedDLL[i - 1].numFortranSymbols = LoadedDLL[i].numFortranSymbols;
-	LoadedDLL[i - 1].numExternalSymbols = LoadedDLL[i].numExternalSymbols;
-	LoadedDLL[i - 1].CSymbols = LoadedDLL[i].CSymbols;
-	LoadedDLL[i - 1].CallSymbols = LoadedDLL[i].CallSymbols;
-	LoadedDLL[i - 1].FortranSymbols = LoadedDLL[i].FortranSymbols;
-	LoadedDLL[i - 1].ExternalSymbols = LoadedDLL[i].ExternalSymbols;
-	LoadedDLL[i - 1].forceSymbols = LoadedDLL[i].forceSymbols;
+            R_reinit_altrep_classes(&LoadedDLL[loc]);
+            R_callDLLUnload(&LoadedDLL[loc]);
+            R_osDynSymbol->closeLibrary(LoadedDLL[loc].handle);
+            Rf_freeDllInfo(LoadedDLL + loc);
+            /* FIXME: why not use memcpy here? */
+            for (int i = loc + 1; i < CountDLL; i++)
+            {
+                LoadedDLL[i - 1].path = LoadedDLL[i].path;
+                LoadedDLL[i - 1].name = LoadedDLL[i].name;
+                LoadedDLL[i - 1].handle = LoadedDLL[i].handle;
+                LoadedDLL[i - 1].useDynamicLookup = LoadedDLL[i].useDynamicLookup;
+                LoadedDLL[i - 1].numCSymbols = LoadedDLL[i].numCSymbols;
+                LoadedDLL[i - 1].numCallSymbols = LoadedDLL[i].numCallSymbols;
+                LoadedDLL[i - 1].numFortranSymbols = LoadedDLL[i].numFortranSymbols;
+                LoadedDLL[i - 1].numExternalSymbols = LoadedDLL[i].numExternalSymbols;
+                LoadedDLL[i - 1].CSymbols = LoadedDLL[i].CSymbols;
+                LoadedDLL[i - 1].CallSymbols = LoadedDLL[i].CallSymbols;
+                LoadedDLL[i - 1].FortranSymbols = LoadedDLL[i].FortranSymbols;
+                LoadedDLL[i - 1].ExternalSymbols = LoadedDLL[i].ExternalSymbols;
+                LoadedDLL[i - 1].forceSymbols = LoadedDLL[i].forceSymbols;
+            }
+            CountDLL--;
+            return true;
+        }
     }
-    CountDLL--;
-    return 1;
+    return false;
 }
 
 HIDDEN

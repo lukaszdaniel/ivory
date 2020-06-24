@@ -29,10 +29,10 @@
 #include <R_ext/GraphicsEngine.h>
 
 /* same as src/library/grDevices/src/colors.cpp */
-typedef unsigned int (*F1)(SEXP x, int i, unsigned int bg);
-typedef const char* (*F2)(unsigned int col);
-typedef unsigned int (*F3)(const char* s);
-typedef void (*F4)(Rboolean save);
+using F1 = unsigned int (*)(SEXP x, int i, unsigned int bg);
+using F2 = const char* (*)(unsigned int col);
+using F3 = unsigned int (*)(const char* s);
+using F4 = void (*)(Rboolean save);
 
 static F1 ptr_RGBpar3;
 static F2 ptr_col2name;

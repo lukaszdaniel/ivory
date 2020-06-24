@@ -187,7 +187,7 @@ static pthread_t R_profiled_thread;
 static RCNTXT *findProfContext(RCNTXT *cptr)
 {
     if (! R_Filter_Callframes)
-	return cptr->nextcontext;
+	return cptr->nextContext();
 
     /* Find parent context, same algorithm as in `parent.frame()`. */
     RCNTXT * parent = R_findParentContext(cptr, 1);
@@ -195,20 +195,20 @@ static RCNTXT *findProfContext(RCNTXT *cptr)
     /* If we're in a frame called by `eval()`, find the evaluation
        environment higher up the stack, if any. */
     if (parent && parent->callfun == INTERNAL(R_EvalSymbol))
-	parent = R_findExecContext(parent->nextcontext, cptr->sysparent);
+	parent = R_findExecContext(parent->nextContext(), cptr->sysparent);
 
     if (parent)
 	return parent;
 
     /* Base case, this interrupts the iteration over context frames */
-    if (cptr->nextcontext == R_ToplevelContext)
+    if (cptr->nextContext() == R_ToplevelContext)
 	return NULL;
 
     /* There is no parent frame and we haven't reached the top level
        context. Find the very first context on the stack which should
        always be included in the profiles. */
-    while (cptr->nextcontext != R_ToplevelContext)
-	cptr = cptr->nextcontext;
+    while (cptr->nextContext() != R_ToplevelContext)
+	cptr = cptr->nextContext();
     return cptr;
 }
 
@@ -679,8 +679,8 @@ SEXP eval(SEXP e, SEXP rho)
     default: break;
     }
 
-    int bcintactivesave = R_BCIntActive;
-    R_BCIntActive = 0;
+    bool bcintactivesave = R_BCIntActive;
+    R_BCIntActive = false;
 
     if (!rho)
 	error(_("'rho' argument cannot be C NULL: detected in C-level '%s' function"), "eval");
@@ -879,7 +879,7 @@ void Rf_SrcrefPrompt(const char * prefix, SEXP srcref)
 }
 
 /* JIT support */
-typedef unsigned long R_exprhash_t;
+using R_exprhash_t = unsigned long;
 
 static R_exprhash_t hash(unsigned char *str, int n, R_exprhash_t hash)
 {
@@ -1849,7 +1849,7 @@ R_INLINE static SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	dbg = TRUE;
 	SET_RSTEP(op, 0);
 	SET_RDEBUG(newrho, 1);
-	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
+	cntxt.browserfinish = false; /* Don't want to inherit the "f" */
 	/* switch to interpreted version when debugging compiled code */
 	if (TYPEOF(body) == BCODESXP)
 	    body = bytecodeExpr(body);
@@ -2042,7 +2042,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
        profiling has inserted a CTXT_BUILTIN frame. */
     cptr = R_GlobalContext;
     if (cptr->callflag & CTXT_BUILTIN)
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
 
     /* The calling environment should either be the environment of the
        generic, rho, or the environment of the caller of the generic,
@@ -3401,7 +3401,7 @@ HIDDEN SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     while (cptr != NULL) {
 	if (cptr->callflag == CTXT_RETURN && cptr->cloenv == rho)
 	    break;
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
     }
     if (cptr != NULL) {
 	args = cptr->promargs;
@@ -3411,7 +3411,7 @@ HIDDEN SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     while (cptr != NULL) {
 	if (cptr->callflag == CTXT_RETURN && cptr->cloenv == s)
 	    break;
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
     }
     if (cptr == NULL)
 	error(_("'Recall()' function called from outside a closure"));
@@ -4935,7 +4935,7 @@ SEXP R_ClosureExpr(SEXP p)
 }
 
 #ifdef THREADED_CODE
-typedef union { void *v; int i; } BCODE;
+union BCODE { void *v; int i; };
 
 /* Declare opinfo volatile to prevent gcc 6 from making a local copy
    in bcEval stack frames and thus increasing stack usage
@@ -4960,7 +4960,7 @@ static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
 
 #define BCCODE(e) (BCODE *) INTEGER(BCODE_CODE(e))
 #else
-typedef int BCODE;
+using BCODE = int;
 
 #define OP(name,argc) case name##_OP
 
@@ -5066,7 +5066,7 @@ R_INLINE static SEXP BINDING_VALUE(SEXP loc)
 
 #define CACHE_ON_STACK
 # ifdef CACHE_ON_STACK
-typedef R_bcstack_t * R_binding_cache_t;
+using R_binding_cache_t = R_bcstack_t *;
 #  define VCACHE(i) GETSTACK_SXPVAL_PTR(vcache + (i))
 #  define GET_CACHED_BINDING_CELL(vcache, sidx) \
     (vcache ? VCACHE(CACHEIDX(sidx)) : R_NilValue)
@@ -5075,7 +5075,7 @@ typedef R_bcstack_t * R_binding_cache_t;
 #  define SET_CACHED_BINDING(vcache, sidx, cell) \
     do { if (vcache) VCACHE(CACHEIDX(sidx)) = (cell); } while (0)
 # else
-typedef SEXP R_binding_cache_t;
+using R_binding_cache_t = SEXP;
 #  define GET_CACHED_BINDING_CELL(vcache, sidx) \
     (vcache ? VECTOR_ELT(vcache, CACHEIDX(sidx)) : R_NilValue)
 #  define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) \
@@ -5085,7 +5085,7 @@ typedef SEXP R_binding_cache_t;
     do { if (vcache) SET_VECTOR_ELT(vcache, CACHEIDX(sidx), cell); } while (0)
 # endif
 #else
-typedef void *R_binding_cache_t;
+using R_binding_cache_t = void *;
 #define GET_CACHED_BINDING_CELL(vcache, sidx) R_NilValue
 #define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) R_NilValue
 
@@ -6400,14 +6400,14 @@ static bool maybeClosureWrapper(SEXP expr)
 
 static bool maybeAssignmentCall(SEXP expr)
 {
-    if (TYPEOF(expr) != LANGSXP)
-	return false;
+	if (TYPEOF(expr) != LANGSXP)
+		return false;
 
-    if (TYPEOF(CAR(expr)) != SYMSXP)
-	return false;
-    const char *name = CHAR(PRINTNAME(CAR(expr)));
-    size_t slen = strlen(name);
-    return (slen > 2 && name[slen-2] == '<' && name[slen-1] == '-');
+	if (TYPEOF(CAR(expr)) != SYMSXP)
+		return false;
+	const char *name = CHAR(PRINTNAME(CAR(expr)));
+	size_t slen = strlen(name);
+	return (slen > 2 && name[slen - 2] == '<' && name[slen - 1] == '-');
 }
 
 /* Check if the given expression is a call to a name that is also
@@ -6509,7 +6509,7 @@ HIDDEN SEXP R_getBCInterpreterExpression()
 		exp = c->call;
 		break;
 	    }
-	    c = c->nextcontext;
+	    c = c->nextContext();
 	}
     }
     return exp;
@@ -6543,7 +6543,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
   R_bcstack_t *oldntop = R_BCNodeStackTop;
   static int evalcount = 0;
   SEXP oldsrcref = R_Srcref;
-  int oldbcintactive = R_BCIntActive;
+  bool oldbcintactive = R_BCIntActive;
   SEXP oldbcbody = R_BCbody;
   void *oldbcpc = R_BCpc;
   BCODE *currentpc = NULL;
@@ -6599,7 +6599,7 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
     } while (0);
 
   R_Srcref = R_InBCInterpreter;
-  R_BCIntActive = 1;
+  R_BCIntActive = true;
   R_BCbody = body;
   R_BCpc = &currentpc;
   vcache = NULL;

@@ -581,8 +581,11 @@ constexpr int S_PRODUCT = 213;
 //constexpr int S_RADICAL = 214;
 constexpr int S_SUM = 229;
 //constexpr int S_INTEGRAL = 242;
+
+constexpr int S_ANGLELEFT = 225;
 constexpr int S_BRACKETLEFTTP = 233;
 constexpr int S_BRACKETLEFTBT = 235;
+constexpr int S_ANGLERIGHT = 241;
 constexpr int S_BRACKETRIGHTTP = 249;
 constexpr int S_BRACKETRIGHTBT = 251;
 
@@ -1931,10 +1934,14 @@ static int DelimCode(SEXP expr, SEXP head)
 	    code = S_BRACKETLEFTBT;
 	else if (NameMatch(head, "rfloor"))
 	    code = S_BRACKETRIGHTBT;
-	if (NameMatch(head, "lceil"))
+	else if (NameMatch(head, "lceil"))
 	    code = S_BRACKETLEFTTP;
 	else if (NameMatch(head, "rceil"))
 	    code = S_BRACKETRIGHTTP;
+	else if (NameMatch(head, "langle"))
+	    code = S_ANGLELEFT;
+	else if (NameMatch(head, "rangle"))
+	    code = S_ANGLERIGHT;
     }
     else if (StringAtom(head) && length(head) > 0) {
 	if (StringMatch(head, "|"))

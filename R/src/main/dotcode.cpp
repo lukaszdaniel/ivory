@@ -502,8 +502,8 @@ HIDDEN SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
 /*   Call dynamically loaded "internal" functions.
      Original code by Jean Meloche <jean@stat.ubc.ca> */
 
-typedef SEXP (*R_ExternalRoutine)(SEXP);
-typedef SEXP (*R_ExternalRoutine2)(SEXP, SEXP, SEXP, SEXP);
+using R_ExternalRoutine = SEXP (*)(SEXP);
+using R_ExternalRoutine2 = SEXP (*)(SEXP, SEXP, SEXP, SEXP);
 
 static SEXP check_retval(SEXP call, SEXP val)
 {
@@ -569,9 +569,9 @@ HIDDEN SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef __cplusplus
-typedef SEXP (*VarFun)(...);
+using VarFun = SEXP (*)(...);
 #else
-typedef DL_FUNC VarFun;
+using VarFun = DL_FUNC;
 #endif
 
 HIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
@@ -778,7 +778,7 @@ static SEXP Rf_getCallingDLL(void)
      */
     for (cptr = R_GlobalContext;
 	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
-	 cptr = cptr->nextcontext)
+	 cptr = cptr->nextContext())
 	    if (cptr->callflag & CTXT_FUNCTION) {
 		/* PrintValue(cptr->call); */
 		rho = cptr->cloenv;

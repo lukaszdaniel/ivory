@@ -687,7 +687,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     sysp = R_GlobalContext->sysparent;
     while (cptr != NULL) {
 	if (cptr->callflag & CTXT_FUNCTION && cptr->cloenv == sysp) break;
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
     }
     if (cptr == NULL)
 	error(_("'NextMethod()' called from outside a function"));
@@ -1242,7 +1242,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	if (cptr->callflag & CTXT_FUNCTION )
 	    if (cptr->cloenv == env)
 		break;
-	cptr = cptr->nextcontext;
+	cptr = cptr->nextContext();
     }
 
     PROTECT(e = duplicate(R_syscall(0, cptr)));
@@ -1490,7 +1490,7 @@ static SEXP get_this_generic(SEXP args)
     fname = STRING_ELT(CAR(args), 0); /* type and length checked by caller */
 
     /* check for a matching "generic" slot */
-    for(cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextcontext)
+    for(cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext())
 	if((cptr->callflag & CTXT_FUNCTION) && isObject(cptr->callfun)) {
 	    SEXP generic = getAttrib(cptr->callfun, gen_name);
 	    if(isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))

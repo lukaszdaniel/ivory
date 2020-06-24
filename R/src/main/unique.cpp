@@ -35,7 +35,7 @@ R_INLINE static void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
 /* interval at which to check interrupts */
 constexpr R_xlen_t NINTERRUPT = 1000000;
 
-typedef size_t hlen;
+using hlen = size_t;
 
 /* Hash function and equality test for keys */
 typedef struct _HashData HashData;

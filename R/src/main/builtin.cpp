@@ -168,22 +168,22 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
        expression evaluation environment. */
     while (ctxt != R_ToplevelContext &&
 	   !((ctxt->callflag & CTXT_FUNCTION) && ctxt->cloenv == rho) )
-	ctxt = ctxt->nextcontext;
+	ctxt = ctxt->nextContext();
     if (ctxt->callflag & CTXT_FUNCTION)
     {
 	if (code == R_NilValue && ! addit)
-	    ctxt->conexit = R_NilValue;
+	    ctxt->setOnExit(R_NilValue);
 	else {
-	    oldcode = ctxt->conexit;
+	    oldcode = ctxt->onExit();
 	    if (oldcode == R_NilValue || ! addit)
-                ctxt->conexit = CONS(code, R_NilValue);
+                ctxt->setOnExit(CONS(code, R_NilValue));
 	    else {
                 if (after) {
                     SEXP codelist = PROTECT(CONS(code, R_NilValue));
-                    ctxt->conexit = listAppend(shallow_duplicate(oldcode), codelist);
+                    ctxt->setOnExit(listAppend(shallow_duplicate(oldcode), codelist));
                     UNPROTECT(1);
                 } else {
-                    ctxt->conexit = CONS(code, oldcode);
+                    ctxt->setOnExit(CONS(code, oldcode));
                 }
 	    }
 	}

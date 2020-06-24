@@ -917,7 +917,7 @@ void setup_Rmainloop(void)
     R_Toplevel.prstack = NULL;
     R_Toplevel.returnValue = NULL;
     R_Toplevel.evaldepth = 0;
-    R_Toplevel.browserfinish = 0;
+    R_Toplevel.browserfinish = false;
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     R_ExitContext = NULL;
 
@@ -1130,7 +1130,7 @@ HIDDEN void printwhere(void)
   RCNTXT *cptr;
   int lct = 1;
 
-  for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+  for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
     if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
 	(TYPEOF(cptr->call) == LANGSXP)) {
 	Rprintf(_("where %d"), lct++);
@@ -1171,9 +1171,9 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    RCNTXT *cntxt = R_GlobalContext;
 	    while (cntxt != R_ToplevelContext
 		      && !(cntxt->callflag & (CTXT_RETURN | CTXT_LOOP))) {
-		cntxt = cntxt->nextcontext;
+		cntxt = cntxt->nextContext();
 	    }
-	    cntxt->browserfinish = 1;
+	    cntxt->browserfinish = true;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
 	} else if (streql(expr, "help")) {
@@ -1279,7 +1279,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	cptr = R_GlobalContext;
 	while ( ( !(cptr->callflag & CTXT_FUNCTION) || skipCalls--)
 		&& cptr->callflag )
-	    cptr = cptr->nextcontext;
+	    cptr = cptr->nextContext();
 	Rprintf(_("Called from: "));
 	if( cptr != R_ToplevelContext ) {
 	    PrintCall(cptr->call, rho);

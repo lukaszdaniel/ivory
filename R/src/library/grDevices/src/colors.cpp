@@ -1558,10 +1558,10 @@ static void savePalette(Rboolean save)
 }
 
 /* same as src/main/colors.cpp */
-typedef unsigned int (*F1)(SEXP x, int i, unsigned int bg);
-typedef const char* (*F2)(unsigned int col);
-typedef unsigned int (*F3)(const char* s);
-typedef void (*F4)(Rboolean save);
+using F1 = unsigned int (*)(SEXP x, int i, unsigned int bg);
+using F2 = const char* (*)(unsigned int col);
+using F3 = unsigned int (*)(const char* s);
+using F4 = void (*)(Rboolean save);
 
 void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4);
 

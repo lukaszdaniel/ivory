@@ -348,7 +348,7 @@ static SEXP getCurrentCall()
     /* This can be called before R_GlobalContext is defined, so... */
     /* If profiling is on, this can be a CTXT_BUILTIN */
 
-    if (c && (c->callflag & CTXT_BUILTIN)) c = c->nextcontext;
+    if (c && (c->callflag & CTXT_BUILTIN)) c = c->nextContext();
     if (c == R_GlobalContext && R_BCIntActive)
 	return R_getBCInterpreterExpression();
     else
@@ -419,7 +419,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	}
 	cptr = R_GlobalContext;
 	while ( !(cptr->callflag & CTXT_FUNCTION) && cptr->callflag )
-	    cptr = cptr->nextcontext;
+	    cptr = cptr->nextContext();
 	evalKeepVis(s, cptr->cloenv);
 	return;
     }
@@ -1067,9 +1067,9 @@ HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isNull(CAR(args))) {
 	RCNTXT *cptr;
 	SEXP rho = R_BaseEnv;
-	for (cptr = R_GlobalContext->nextcontext;
+	for (cptr = R_GlobalContext->nextContext();
 	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
-	     cptr = cptr->nextcontext)
+	     cptr = cptr->nextContext())
 	    if (cptr->callflag & CTXT_FUNCTION) {
 		/* stop() etc have internal call to .makeMessage */
 		cfn = CHAR(STRING_ELT(deparse1s(CAR(cptr->call)), 0));
@@ -1171,9 +1171,9 @@ HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isNull(sdom)) {
 	RCNTXT *cptr;
 	SEXP rho = R_BaseEnv;
-	for (cptr = R_GlobalContext->nextcontext;
+	for (cptr = R_GlobalContext->nextContext();
 	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
-	     cptr = cptr->nextcontext)
+	     cptr = cptr->nextContext())
 	    if (cptr->callflag & CTXT_FUNCTION) {
 		/* stop() etc have internal call to .makeMessage */
 		cfn = CHAR(STRING_ELT(deparse1s(CAR(cptr->call)), 0));
@@ -1241,9 +1241,9 @@ HIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 static SEXP findCall(void)
 {
     RCNTXT *cptr;
-    for (cptr = R_GlobalContext->nextcontext;
+    for (cptr = R_GlobalContext->nextContext();
 	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
-	 cptr = cptr->nextcontext)
+	 cptr = cptr->nextContext())
 	if (cptr->callflag & CTXT_FUNCTION)
 	    return cptr->call;
     return R_NilValue;
@@ -1413,7 +1413,7 @@ void R_ReturnOrRestart(SEXP val, SEXP env, Rboolean restart)
 
     mask = CTXT_BROWSER | CTXT_FUNCTION;
 
-    for (c = R_GlobalContext; c; c = c->nextcontext) {
+    for (c = R_GlobalContext; c; c = c->nextContext()) {
 	if (c->callflag & mask && c->cloenv == env)
 	    findcontext(mask, env, val);
 	else if (restart && IS_RESTART_BIT_SET(c->callflag))
@@ -1428,7 +1428,7 @@ NORET void R_JumpToToplevel(Rboolean restart)
     RCNTXT *c;
 
     /* Find the target for the jump */
-    for (c = R_GlobalContext; c != NULL; c = c->nextcontext) {
+    for (c = R_GlobalContext; c != NULL; c = c->nextContext()) {
 	if (restart && IS_RESTART_BIT_SET(c->callflag))
 	    findcontext(CTXT_RESTART, c->cloenv, R_RestartToken);
 	else if (c->callflag == CTXT_TOPLEVEL)
@@ -1464,7 +1464,7 @@ SEXP R_GetTracebackOnly(int skip)
 
     for (c = R_GlobalContext, ns = skip;
 	 c != NULL && c->callflag != CTXT_TOPLEVEL;
-	 c = c->nextcontext)
+	 c = c->nextContext())
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (ns > 0)
 		ns--;
@@ -1476,7 +1476,7 @@ SEXP R_GetTracebackOnly(int skip)
     t = s;
     for (c = R_GlobalContext ;
 	 c != NULL && c->callflag != CTXT_TOPLEVEL;
-	 c = c->nextcontext)
+	 c = c->nextContext())
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
 		skip--;
@@ -1541,7 +1541,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
     buf[0] = '\0';
     for (c = R_GlobalContext;
 	 c != NULL && c->callflag != CTXT_TOPLEVEL;
-	 c = c->nextcontext)
+	 c = c->nextContext())
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
 		skip--;
@@ -2074,8 +2074,8 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    bool enabled = R_GCEnabled;
+    R_GCEnabled = false;
     int nprotect = 0;
     char *check = getenv(varname);
     const void *vmax = vmaxget();
@@ -2219,7 +2219,7 @@ SEXP R_GetCurrentSrcref(int skip)
 	    if (srcref && srcref != R_NilValue)
 		skip++;
 	    srcref = c->srcref;
-	    c = c->nextcontext;
+	    c = c->nextContext();
 	};
 	if (skip < 0) return R_NilValue; /* not enough there */
 	c = R_GlobalContext;
@@ -2229,7 +2229,7 @@ SEXP R_GetCurrentSrcref(int skip)
 	if (srcref && srcref != R_NilValue)
 	    skip--;
 	srcref = c->srcref;
-	c = c->nextcontext;
+	c = c->nextContext();
     }
     if (skip || !srcref)
 	srcref = R_NilValue;
@@ -2471,13 +2471,13 @@ HIDDEN SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 #ifdef DODO
     for (RCNTXT *cptr = R_GlobalContext;
 	 cptr != R_ToplevelContext;
-	 cptr = cptr->nextcontext)
+	 cptr = cptr->nextContext())
 	if (cptr->handlerstack == R_NilValue)
 	    cptr->handlerstack = R_HandlerStack;
 #endif
     for (RCNTXT *cptr = R_GlobalContext;
 	 cptr != R_ToplevelContext;
-	 cptr = cptr->nextcontext)
+	 cptr = cptr->nextContext())
 	if (cptr->handlerstack == oldstk)
 	    cptr->handlerstack = R_HandlerStack;
 	else error(_("should not be called with handlers on the stack"));

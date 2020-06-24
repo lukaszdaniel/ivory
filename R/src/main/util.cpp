@@ -507,7 +507,7 @@ HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nargs = NA_INTEGER;
 
     checkArity(op, args);
-    for (cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextcontext) {
+    for (cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext()) {
 	if ((cptr->callflag & CTXT_FUNCTION) && cptr->cloenv == rho) {
 	    nargs = length(cptr->promargs);
 	    break;
@@ -2067,14 +2067,14 @@ typedef int UErrorCode; /* really an enum these days */
 struct UCollator;
 typedef struct UCollator UCollator;
 
-typedef enum
+enum UCollationResult
 {
 	UCOL_EQUAL = 0,
 	UCOL_GREATER = 1,
 	UCOL_LESS = -1
-} UCollationResult;
+};
 
-typedef enum
+enum UColAttributeValue
 {
 	UCOL_DEFAULT = -1,
 	UCOL_PRIMARY = 0,
@@ -2092,11 +2092,11 @@ typedef enum
 	UCOL_LOWER_FIRST = 24,
 	UCOL_UPPER_FIRST = 25,
 	UCOL_ATTRIBUTE_VALUE_COUNT
-} UColAttributeValue;
+};
 
-typedef UColAttributeValue UCollationStrength;
+using UCollationStrength = UColAttributeValue;
 
-typedef enum
+enum UColAttribute
 {
 	UCOL_FRENCH_COLLATION,
 	UCOL_ALTERNATE_HANDLING,
@@ -2108,18 +2108,18 @@ typedef enum
 	UCOL_HIRAGANA_QUATERNARY_MODE,
 	UCOL_NUMERIC_COLLATION,
 	UCOL_ATTRIBUTE_COUNT
-} UColAttribute;
+};
 
 /* UCharIterator struct has to be defined since we use its instances as
    local variables, but we don't actually use any of its members. */
-typedef struct UCharIterator {
+struct UCharIterator {
   const void *context;
   int32_t length, start, index, limit, reservedField;
   void *fns[16]; /* we overshoot here (there is just 10 fns in ICU 3.6),
 		    but we have to make sure that enough stack space
 		    is allocated when used as a local var in future
 		    versions */
-} UCharIterator;
+};
 
 UCollator* ucol_open(const char *loc, UErrorCode *status);
 void ucol_close(UCollator *coll);

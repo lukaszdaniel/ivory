@@ -320,63 +320,66 @@ constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
 
 /* The type of the do_xxxx functions. */
 /* These are the built-in R functions. */
-typedef SEXP (*CCODE)(SEXP, SEXP, SEXP, SEXP);
+using CCODE = SEXP(*)(SEXP, SEXP, SEXP, SEXP);
 
 /* Information for Deparsing Expressions */
-typedef enum {
-    PP_INVALID  =  0,
-    PP_ASSIGN   =  1,
-    PP_ASSIGN2  =  2,
-    PP_BINARY   =  3,
-    PP_BINARY2  =  4,
-    PP_BREAK    =  5,
-    PP_CURLY    =  6,
-    PP_FOR      =  7,
-    PP_FUNCALL  =  8,
-    PP_FUNCTION =  9,
-    PP_IF 	= 10,
-    PP_NEXT 	= 11,
-    PP_PAREN    = 12,
-    PP_RETURN   = 13,
-    PP_SUBASS   = 14,
-    PP_SUBSET   = 15,
-    PP_WHILE 	= 16,
-    PP_UNARY 	= 17,
-    PP_DOLLAR 	= 18,
-    PP_FOREIGN 	= 19,
-    PP_REPEAT 	= 20
-} PPkind;
+enum PPkind
+{
+    PP_INVALID = 0,
+    PP_ASSIGN = 1,
+    PP_ASSIGN2 = 2,
+    PP_BINARY = 3,
+    PP_BINARY2 = 4,
+    PP_BREAK = 5,
+    PP_CURLY = 6,
+    PP_FOR = 7,
+    PP_FUNCALL = 8,
+    PP_FUNCTION = 9,
+    PP_IF = 10,
+    PP_NEXT = 11,
+    PP_PAREN = 12,
+    PP_RETURN = 13,
+    PP_SUBASS = 14,
+    PP_SUBSET = 15,
+    PP_WHILE = 16,
+    PP_UNARY = 17,
+    PP_DOLLAR = 18,
+    PP_FOREIGN = 19,
+    PP_REPEAT = 20
+};
 
-typedef enum {
-    PREC_FN	 = 0,
-    PREC_EQ	 = 1,
-    PREC_LEFT    = 2,
-    PREC_RIGHT	 = 3,
-    PREC_TILDE	 = 4,
-    PREC_OR	 = 5,
-    PREC_AND	 = 6,
-    PREC_NOT	 = 7,
+enum PPprec
+{
+    PREC_FN = 0,
+    PREC_EQ = 1,
+    PREC_LEFT = 2,
+    PREC_RIGHT = 3,
+    PREC_TILDE = 4,
+    PREC_OR = 5,
+    PREC_AND = 6,
+    PREC_NOT = 7,
     PREC_COMPARE = 8,
-    PREC_SUM	 = 9,
-    PREC_PROD	 = 10,
+    PREC_SUM = 9,
+    PREC_PROD = 10,
     PREC_PERCENT = 11,
-    PREC_COLON	 = 12,
-    PREC_SIGN	 = 13,
-    PREC_POWER	 = 14,
-    PREC_SUBSET  = 15,
-    PREC_DOLLAR	 = 16,
-    PREC_NS	 = 17
-} PPprec;
+    PREC_COLON = 12,
+    PREC_SIGN = 13,
+    PREC_POWER = 14,
+    PREC_SUBSET = 15,
+    PREC_DOLLAR = 16,
+    PREC_NS = 17
+};
 
-typedef struct {
-	PPkind kind; 	 /* deparse kind */
-	PPprec precedence; /* operator precedence */
-	unsigned int rightassoc;  /* right associative? */
-} PPinfo;
+struct PPinfo
+{
+    PPkind kind;             /* deparse kind */
+    PPprec precedence;       /* operator precedence */
+    unsigned int rightassoc; /* right associative? */
+};
 
 /* The type definitions for the table of built-in functions. */
 /* This table can be found in ../main/names.cpp */
-typedef struct
+struct FUNTAB
 {
     const char *name; /* print name */
     CCODE cfun;       /* c-code address */
@@ -384,7 +387,7 @@ typedef struct
     int eval;         /* evaluate args? */
     int arity;        /* function arity */
     PPinfo gram;      /* pretty-print info */
-} FUNTAB;
+};
 
 #ifdef USE_RINTERNALS
 /* There is much more in Rinternals.h, including function versions
@@ -417,13 +420,13 @@ typedef struct
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
-typedef struct
+struct VECREC
 {
     union {
         SEXP backpointer;
         double align;
     } u;
-} VECREC, *VECP;
+};
 
 /* Vector Heap Macros */
 //#define BACKPOINTER(v) ((v).u.backpointer)
@@ -471,7 +474,7 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 
 #else /* USE_RINTERNALS */
 
-typedef struct VECREC *VECP;
+using VECP = VECREC *;
 int(PRIMOFFSET)(SEXP x);
 void(SET_PRIMOFFSET)(SEXP x, int v);
 
@@ -519,7 +522,7 @@ Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b);
    Allocating on the stack memory is also supported; this is currently
    used for jump buffers.
 */
-typedef struct
+struct R_bcstack_t
 {
     int tag;
     int flags;
@@ -528,7 +531,7 @@ typedef struct
         double dval;
         SEXP sxpval;
     } u;
-} R_bcstack_t;
+};
 
 #define PARTIALSXP_MASK (~255)
 #define IS_PARTIAL_SXP_TAG(x) ((x)&PARTIALSXP_MASK)
@@ -537,44 +540,59 @@ typedef struct
 
 #ifdef R_USE_SIGNALS
 /* Stack entry for pending promises */
-typedef struct RPRSTACK {
+struct RPRSTACK
+{
     SEXP promise;
     struct RPRSTACK *next;
-} RPRSTACK;
+};
 
 /* Evaluation Context Structure */
-typedef struct RCNTXT {
-    struct RCNTXT *nextcontext;	/* The next context up the chain */
-    int callflag;		/* The context "type" */
-    JMP_BUF cjmpbuf;		/* C stack and register information */
-    int cstacktop;		/* Top of the pointer protection stack */
-    int evaldepth;	        /* evaluation depth at inception */
-    SEXP promargs;		/* Promises supplied to closure */
-    SEXP callfun;		/* The closure called */
-    SEXP sysparent;		/* environment the closure was called from */
-    SEXP call;			/* The call that effected this context*/
-    SEXP cloenv;		/* The environment */
-    SEXP conexit;		/* Interpreted "on.exit" code */
-    void (*cend)(void *);	/* C "on.exit" thunk */
-    void *cenddata;		/* data for C "on.exit" thunk */
-    void *vmax;		        /* top of R_alloc stack */
-    int intsusp;                /* interrupts are suspended */
-    int gcenabled;		/* R_GCEnabled value */
-    int bcintactive;            /* R_BCIntActive value */
-    SEXP bcbody;                /* R_BCbody value */
-    void* bcpc;                 /* R_BCpc value */
-    SEXP handlerstack;          /* condition handler stack */
-    SEXP restartstack;          /* stack of available restarts */
-    struct RPRSTACK *prstack;   /* stack of pending promises */
+struct RCNTXT
+{
+    RCNTXT *nextcontext;  /* The next context up the chain */
+    int callflag;         /* The context "type" */
+    JMP_BUF cjmpbuf;      /* C stack and register information */
+    int cstacktop;        /* Top of the pointer protection stack */
+    int evaldepth;        /* evaluation depth at inception */
+    SEXP promargs;        /* Promises supplied to closure */
+    SEXP callfun;         /* The closure called */
+    SEXP sysparent;       /* environment the closure was called from */
+    SEXP call;            /* The call that effected this context*/
+    SEXP cloenv;          /* The environment */
+    SEXP conexit;         /* Interpreted "on.exit" code */
+    void (*cend)(void *); /* C "on.exit" thunk */
+    void *cenddata;       /* data for C "on.exit" thunk */
+    void *vmax;           /* top of R_alloc stack */
+    int intsusp;          /* interrupts are suspended */
+    bool gcenabled;        /* R_GCEnabled value */
+    bool bcintactive;      /* R_BCIntActive value */
+    SEXP bcbody;          /* R_BCbody value */
+    void *bcpc;           /* R_BCpc value */
+    SEXP handlerstack;    /* condition handler stack */
+    SEXP restartstack;    /* stack of available restarts */
+    RPRSTACK *prstack;    /* stack of pending promises */
     R_bcstack_t *nodestack;
     R_bcstack_t *bcprottop;
-    SEXP srcref;	        /* The source line in effect */
-    int browserfinish;          /* should browser finish this context without
+    SEXP srcref;        /* The source line in effect */
+    bool browserfinish;  /* should browser finish this context without
                                    stopping */
-    SEXP returnValue;           /* only set during on.exit calls */
-    struct RCNTXT *jumptarget;	/* target for a continuing jump */
-    int jumpmask;               /* associated LONGJMP argument */
-} RCNTXT, *context;
+    SEXP returnValue;   /* only set during on.exit calls */
+    RCNTXT *jumptarget; /* target for a continuing jump */
+    int jumpmask;       /* associated LONGJMP argument */
+
+    RCNTXT() : nextcontext(nullptr), callflag(0), cjmpbuf(), cstacktop(0), evaldepth(0), promargs(nullptr),
+    callfun(nullptr), sysparent(nullptr), call(nullptr), cloenv(nullptr), conexit(nullptr), cend(nullptr), cenddata(nullptr),
+    vmax(nullptr), intsusp(0), gcenabled(false), bcintactive(false), bcbody(nullptr), bcpc(nullptr), handlerstack(nullptr),
+    restartstack(nullptr), prstack(nullptr), nodestack(nullptr), bcprottop(nullptr), srcref(nullptr), browserfinish(false),
+    returnValue(nullptr), jumptarget(nullptr), jumpmask(0) {};
+    ~RCNTXT() {};
+    SEXP getHandlerStack() const { return this->handlerstack; }
+    void setHandlerStack(SEXP handler) { this->handlerstack = handler; }
+    SEXP onExit() const { return this->conexit; }
+    void setOnExit(SEXP x) { this->conexit = x; }
+    SEXP workingEnvironment() const { return this->cloenv; }
+    RCNTXT *nextContext() const { return this->nextcontext; }
+};
 
 /* The Various Context Types.
 
@@ -616,9 +634,9 @@ RES   0 0 0 0 0 0 1 = 32
 BUI   0 0 0 0 0 0 0 1 = 64
 */
 
-#define IS_RESTART_BIT_SET(flags) ((flags)&CTXT_RESTART)
-#define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
-#define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
+inline int IS_RESTART_BIT_SET(const int &flags) { return ((flags)&CTXT_RESTART); }
+inline void SET_RESTART_BIT_ON(int &flags) { (flags |= CTXT_RESTART); }
+inline void SET_RESTART_BIT_OFF(int &flags) { (flags &= ~CTXT_RESTART); }
 #endif
 
 /* Miscellaneous Definitions */
@@ -632,7 +650,7 @@ inline Rboolean streqln(const char *s, const char *t, size_t n)
 }
 
 /* Arithmetic and Relation Operators */
-typedef enum
+enum ARITHOP_TYPE
 {
     PLUSOP = 1,
     MINUSOP,
@@ -641,9 +659,9 @@ typedef enum
     POWOP,
     MODOP,
     IDIVOP
-} ARITHOP_TYPE;
+} ;
 
-typedef enum
+enum RELOP_TYPE
 {
     EQOP = 1,
     NEOP,
@@ -651,15 +669,15 @@ typedef enum
     LEOP,
     GEOP,
     GTOP
-} RELOP_TYPE;
+};
 
-typedef enum
+enum MATPROD_TYPE
 {
     MATPROD_DEFAULT = 1,
     MATPROD_INTERNAL,
     MATPROD_BLAS,
     MATPROD_DEFAULT_SIMD /* experimental */
-} MATPROD_TYPE;
+};
 
 /* File Handling */
 /*
@@ -698,9 +716,9 @@ LibExtern char *R_Home;		    /* Root of the R tree */
 /* Memory Management */
 extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
 extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
-extern0 int	R_GCEnabled INI_as(1);
-extern0 int	R_in_gc INI_as(0);
-extern0 int	R_BCIntActive INI_as(0); /* bcEval called more recently than
+extern0 bool	R_GCEnabled INI_as(true);
+extern0 bool	R_in_gc INI_as(false);
+extern0 bool	R_BCIntActive INI_as(false); /* bcEval called more recently than
                                             eval */
 extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
 extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */
@@ -853,8 +871,8 @@ void R_BCProtReset(R_bcstack_t *);
 LibExtern int R_num_math_threads INI_as(1);
 LibExtern int R_max_num_math_threads INI_as(1);
 
-/* Pointer  type and utilities for dispatch in the methods package */
-typedef SEXP (*R_stdGen_ptr_t)(SEXP, SEXP, SEXP); /* typedef */
+/* Pointer type and utilities for dispatch in the methods package */
+using R_stdGen_ptr_t = SEXP(*)(SEXP, SEXP, SEXP); /* typedef */
 //R_stdGen_ptr_t R_get_standardGeneric_ptr(void); /* get method */
 R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t, SEXP); /* set method */
 LibExtern SEXP R_MethodsNamespace;
@@ -869,10 +887,10 @@ SEXP R_primitive_generic(SEXP op);
 extern0 int R_dec_min_exponent		INI_as(-308);
 
 /* structure for caching machine accuracy values */
-typedef struct {
+struct AccuracyInfo {
     int ibeta, it, irnd, ngrd, machep, negep, iexp, minexp, maxexp;
     double eps, epsneg, xmin, xmax;
-} AccuracyInfo;
+};
 
 LibExtern AccuracyInfo R_AccuracyInfo;
 
@@ -1090,11 +1108,12 @@ int R_GetFDLimit();
 int R_EnsureFDLimit(int);
 
 /* environment cell access */
-typedef struct
+struct R_varloc_t
 {
     SEXP cell;
-} R_varloc_t; /* use struct to prevent casting */
-#define R_VARLOC_IS_NULL(loc) ((loc).cell == NULL)
+}; /* use struct to prevent casting */
+
+inline bool R_VARLOC_IS_NULL(const R_varloc_t& loc) { return ((loc).cell == nullptr); }
 R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
 R_varloc_t R_findVarLoc(SEXP, SEXP);
 SEXP R_GetVarLocValue(R_varloc_t);
@@ -1134,7 +1153,7 @@ SEXP Rf_StringFromComplex(Rcomplex, int*);
 SEXP Rf_EnsureString(SEXP);
 
 /* ../../main/print.cpp : */
-typedef struct
+struct R_PrintData
 {
     int width;
     int na_width;
@@ -1151,7 +1170,7 @@ typedef struct
     int cutoff; // for deparsed language objects
     SEXP env;
     SEXP callArgs;
-} R_PrintData;
+};
 
 /* Other Internally Used Functions */
 
@@ -1352,13 +1371,13 @@ void R_args_enable_refcnt(SEXP);
 constexpr int R_MaxDevices = 64;
 
 /* ../../main/printutils.cpp : */
-typedef enum
+enum Rprt_adj
 {
     Rprt_adj_left = 0,
     Rprt_adj_right = 1,
     Rprt_adj_centre = 2,
     Rprt_adj_none = 3
-} Rprt_adj;
+};
 
 int	Rstrlen(SEXP, int);
 const char *Rf_EncodeRaw(Rbyte, const char *);
@@ -1390,7 +1409,7 @@ int Rf_AdobeSymbol2ucs2(int n);
 double R_strtod5(const char *str, char **endptr, char dec,
 		 Rboolean NA, int exact);
 
-typedef unsigned short R_ucs2_t;
+using R_ucs2_t = unsigned short;
 size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
 /* size_t mbcsMblen(char *in);
 size_t ucs2ToMbcs(R_ucs2_t *in, char *out);
@@ -1406,7 +1425,7 @@ SEXP Rf_installTrChar(SEXP);
 
 const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.cpp */
 
-#define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
+inline void mbs_init(mbstate_t *x) { memset(x, 0, sizeof(mbstate_t)); }
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 Rboolean mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);

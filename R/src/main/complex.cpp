@@ -701,7 +701,7 @@ static void z_atan2(Rcomplex *r, Rcomplex *csn, Rcomplex *ccs)
 
 	/* Complex Functions of Two Arguments */
 
-typedef void (*cm2_fun)(Rcomplex *, Rcomplex *, Rcomplex *);
+using cm2_fun = void (*)(Rcomplex *, Rcomplex *, Rcomplex *);
 HIDDEN SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     R_xlen_t i, n, na, nb, ia, ib;
