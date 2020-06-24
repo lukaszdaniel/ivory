@@ -41,7 +41,7 @@ HIDDEN SEXP mkPRIMSXP(int offset, int eval)
     SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;
     static SEXP PrimCache = NULL;
     static int FunTabSize = 0;
-    
+
     if (PrimCache == NULL) {
 	/* compute the number of entires in R_FunTab */
 	while (R_FunTab[FunTabSize].name)
@@ -118,28 +118,29 @@ HIDDEN SEXP Rf_mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 /*  mkSYMSXP - return a symsxp with the string  */
 /*             name inserted in the name field  */
 
-static int isDDName(SEXP name)
+static bool isDDName(SEXP name)
 {
     const char *buf;
     char *endp;
 
     buf = CHAR(name);
-    if( streqln(buf, "..", 2) && strlen(buf) > 2 ) {
-	buf += 2;
-	strtol(buf, &endp, 10); // discard value
-	if( *endp != '\0')
-	    return 0;
-	else
-	    return 1;
+    if (streqln(buf, "..", 2) && strlen(buf) > 2)
+    {
+        buf += 2;
+        strtol(buf, &endp, 10); // discard value
+        if (*endp != '\0')
+            return false;
+        else
+            return true;
     }
-    return 0;
+    return false;
 }
 
 HIDDEN SEXP Rf_mkSYMSXP(SEXP name, SEXP value)
 
 {
     SEXP c;
-    int i;
+    unsigned int i;
     PROTECT(name);
     PROTECT(value);
     i = isDDName(name);

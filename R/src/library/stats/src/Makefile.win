@@ -11,26 +11,27 @@ top_builddir = ../../../..
 subdir = src/library/$(pkg)/src
 R_HOME = $(top_builddir)
 
-SOURCES_C = init.c kmeans.c \
-  ansari.c bandwidths.c chisqsim.c d2x2xk.c fexact.c kendall.c ks.c \
-  line.c smooth.c \
-  prho.c swilk.c \
-  ksmooth.c loessc.c monoSpl.c isoreg.c Srunmed.c \
-  dblcen.c distance.c hclust-utils.c \
-  nls.c rWishart.c \
-  HoltWinters.c PPsum.c arima.c burg.c filter.c \
-  mAR.c pacf.c starma.c port.c family.c sbart.c \
-  approx.c loglin.c lowess.c massdist.c splines.c lm.c \
-  complete_cases.c cov.c deriv.c fft.c fourier.c model.c optim.c optimize.c \
-  integrate.c random.c distn.c zeroin.c rcont.c influence.c
+SOURCES_C = 
+SOURCES_CXX = init.cpp kmeans.cpp \
+  ansari.cpp bandwidths.cpp chisqsim.cpp d2x2xk.cpp fexact.cpp kendall.cpp ks.cpp \
+  line.cpp smooth.cpp \
+  prho.cpp swilk.cpp \
+  ksmooth.cpp loessc.cpp monoSpl.cpp isoreg.cpp Srunmed.cpp \
+  dblcen.cpp distance.cpp hclust-utils.cpp \
+  nls.cpp rWishart.cpp \
+  HoltWinters.cpp PPsum.cpp arima.cpp burg.cpp filter.cpp \
+  mAR.cpp pacf.cpp starma.cpp port.cpp family.cpp sbart.cpp \
+  approx.cpp loglin.cpp lowess.cpp massdist.cpp splines.cpp lm.cpp \
+  complete_cases.cpp cov.cpp deriv.cpp fft.cpp fourier.cpp model.cpp optim.cpp optimize.cpp \
+  integrate.cpp random.cpp distn.cpp zeroin.cpp rcont.cpp influence.cpp
 
 SOURCES_F = bsplvd.f bvalue.f bvalus.f loessf.f ppr.f qsbart.f \
   sgram.f sinerp.f sslvrg.f stxwx.f \
   hclust.f kmns.f \
   eureka.f stl.f portsrc.f lminfl.f
 
-DEPENDS = $(SOURCES_C:.c=.d)
-OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_F:.f=.o) ../../../gnuwin32/dllversion.o
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o) ../../../gnuwin32/dllversion.o
 
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include

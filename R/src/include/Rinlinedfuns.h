@@ -528,8 +528,8 @@ INLINE_FUN void R_Reprotect(SEXP s, PROTECT_INDEX i)
 
 int Rf_envlength(SEXP rho);
 
-/* TODO: a  Length(.) {say} which is  length() + dispatch (S3 + S4) if needed
-         for one approach, see do_seq_along() in ../main/seq.c
+/* TODO: a  Length(.) {say} which is length() + dispatch (S3 + S4) if needed
+         for one approach, see do_seq_along() in ../main/seq.cpp
 */
 INLINE_FUN R_len_t Rf_length(SEXP s)
 {
@@ -627,26 +627,25 @@ INLINE_FUN SEXP Rf_elt(SEXP list, int i)
     SEXP result = list;
 
     if ((i < 0) || (i > length(list)))
-	return R_NilValue;
-    else
-	for (j = 0; j < i; j++)
-	    result = CDR(result);
+        return R_NilValue;
+
+    for (j = 0; j < i; j++)
+        result = CDR(result);
 
     return CAR(result);
 }
-
 
 /* Return the last element of a list */
 INLINE_FUN SEXP Rf_lastElt(SEXP list)
 {
     SEXP result = R_NilValue;
-    while (list != R_NilValue) {
-	result = list;
-	list = CDR(list);
+    while (list != R_NilValue)
+    {
+        result = list;
+        list = CDR(list);
     }
     return result;
 }
-
 
 /* Shorthands for creating small lists */
 
@@ -704,14 +703,13 @@ INLINE_FUN SEXP Rf_listAppend(SEXP s, SEXP t)
 {
     SEXP r;
     if (s == R_NilValue)
-	return t;
+        return t;
     r = s;
     while (CDR(r) != R_NilValue)
-	r = CDR(r);
+        r = CDR(r);
     SETCDR(r, t);
     return s;
 }
-
 
 /* Language based list constructs.  These are identical to the list */
 /* constructs, but the results can be evaluated. */

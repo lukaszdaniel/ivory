@@ -31,10 +31,10 @@
 #ifndef R_DEFINES_H
 #define R_DEFINES_H
 
-#if !defined(R_R_H) && !defined(R_S_H)
+#if !(defined(R_R_H) || defined(R_S_H))
 /* user forgot to include R.h or S.h */
-# include <R_ext/Memory.h>
-# include <R_ext/RS.h>
+#include <R_ext/Memory.h>
+#include <R_ext/RS.h>
 #endif
 
 #include <Rinternals.h>

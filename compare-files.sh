@@ -2,7 +2,7 @@
 
 source conf.sh
 
-converted=('main' 'nmath')
+converted=('appl' 'gnuwin32' 'library' 'main' 'modules' 'nmath' 'unix')
 
 for ix in ${!filedev[@]}
 do

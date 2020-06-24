@@ -34,7 +34,6 @@ static R_InternetRoutines routines, *ptr = &routines;
 
 
 /*
-extern "C"
 SEXP Rdownload(SEXP args);
 Rconnection R_newurl(char *description, char *mode);
 Rconnection R_newsock(char *host, int port, int server, int serverfd, char *mode, int timeout);
@@ -81,7 +80,6 @@ static void internet_Init(void)
     return;
 }
 
-extern "C"
 SEXP Rdownload(SEXP args)
 {
     if (!initialized)
@@ -205,7 +203,6 @@ void R_FTPClose(void *ctx)
         error(_("internet routines cannot be loaded"));
 }
 
-extern "C"
 int extR_HTTPDCreate(const char *ip, int port)
 {
     if (!initialized)
@@ -217,7 +214,6 @@ int extR_HTTPDCreate(const char *ip, int port)
     return -1;
 }
 
-extern "C"
 void extR_HTTPDStop(void)
 {
     if (!initialized)
@@ -228,7 +224,6 @@ void extR_HTTPDStop(void)
         error(_("internet routines cannot be loaded"));
 }
 
-extern "C"
 SEXP Rsockconnect(SEXP sport, SEXP shost)
 {
     if (length(sport) != 1) error(_("invalid '%s' argument"), "socket");
@@ -243,7 +238,6 @@ SEXP Rsockconnect(SEXP sport, SEXP shost)
     return ScalarInteger(port); // The socket number
 }
 
-extern "C"
 SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 {
     if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
@@ -266,10 +260,9 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     SET_STRING_ELT(ans, 0, mkCharLen(buf, maxlen));
     UNPROTECT(2); /* rbuf, ans */
     return ans;
-		       
+
 }
 
-extern "C"
 SEXP Rsockclose(SEXP ssock)
 {
     if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
@@ -283,7 +276,6 @@ SEXP Rsockclose(SEXP ssock)
     return ScalarLogical(sock);
 }
 
-extern "C"
 SEXP Rsockopen(SEXP sport)
 {
     if (length(sport) != 1) error(_("invalid '%s' argument"), "port");
@@ -296,7 +288,6 @@ SEXP Rsockopen(SEXP sport)
     return ScalarInteger(port); // The socket number
 }
 
-extern "C"
 SEXP Rsocklisten(SEXP ssock)
 {
     if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
@@ -316,7 +307,6 @@ SEXP Rsocklisten(SEXP ssock)
     return ans;
 }
 
-extern "C"
 SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 {
     if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
@@ -333,8 +323,7 @@ SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 }
 
 
-HIDDEN
-int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
+HIDDEN int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
                 double timeout)
 {
     if (!initialized)

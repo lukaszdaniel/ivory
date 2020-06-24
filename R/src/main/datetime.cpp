@@ -114,15 +114,22 @@ extern char *tzname[2];
 static constexpr int days_in_month[12] =
 {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-#define isleap(y) ((((y) % 4) == 0 && ((y) % 100) != 0) || ((y) % 400) == 0)
-#define days_in_year(year) (isleap(year) ? 366 : 365)
+namespace
+{
+	inline bool isleap(int y)
+	{
+		return (((y % 4) == 0 && (y % 100) != 0) || (y % 400) == 0);
+	}
+
+	inline int days_in_year(int year) { return isleap(year) ? 366 : 365; }
+} // namespace
 
 /*
   Adjust a struct tm to be a valid date-time.
   Return 0 if valid, -1 if invalid and uncorrectable, or a positive
   integer approximating the number of corrections needed.
   */
-static int validate_tm (stm *tm)
+static int validate_tm(stm *tm)
 {
     int tmp, res = 0;
 
@@ -208,7 +215,7 @@ static int validate_tm (stm *tm)
 
 
 /* Substitute for mktime -- no checking, always in GMT */
-static double mktime00 (stm *tm)
+static double mktime00(stm *tm)
 {
     int day = 0;
     int year, year0;

@@ -161,7 +161,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 			  i = idx + j; /* for macros */
 			  NUMVECTOR_TIGHTLOOP(EncodeInteger(px[j], w));
 		      });
-    
+
     Rprintf("\n");
 }
 
@@ -196,7 +196,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 			  i = idx + j; /* for macros */
 			  NUMVECTOR_TIGHTLOOP(EncodeReal0(px[j], w, d, e, OutDec));
 		      });
-    
+
     Rprintf("\n");
 }
 
@@ -276,7 +276,7 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
 	printStringVector(xptr, n, quote, indx);
 	return;
     }
-    
+
     int w, labwidth=0, width;
 
     DO_first_lab;

@@ -109,10 +109,10 @@ void fit_magic(double *X,double *sp,double **S,double *H,double *gamma,double *s
   if (control[3]) /* then there is a non null H */
   for (p=St;p<St+q*q;p++,H++) *p = *H; 
   for (k=0;k<m;k++) { xx=exp(sp[k]);for (p=St,p1=S[k];p<St+q*q;p++,p1++) *p += *p1 * xx;}
-  
+
   if (m>0||control[3]) mroot(St,&rank_S,&q); /* St replaced by its square root */
   else rank_S=0;
- 
+
   /* Now form the augmented R matrix [R',St']' */
   r=rank_S+q;
   R=(double *)CALLOC((size_t)(r*q),sizeof(double));  
@@ -258,7 +258,7 @@ void magic_gH(double *U1U1,double **M,double **K,double *VS,double **My,double *
     }
     d2norm[i][i]+=dnorm[i];
   }
-  
+
   if (gcv)
   { norm += *norm_const; /* inflate the residual sum of squares by the supplied norm constant */
     xx = n/(delta*delta);xx1= xx*2*norm/delta;
@@ -332,7 +332,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
 
 
    The m square roots of smoothing penalty matrices are packed one after another in S.
-   
+
    Currently first guess smoothing parameters are 1/tr(S_i), and second guess are
    \sigma^2 rank(S_i) / b'S_ib
 
@@ -381,7 +381,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
   #endif
 
   gcv=control[0];q=control[2];n=control[1];m=control[4];max_half=control[5];mp=control[6];
-  
+
   /* first get the QR decomposition of X */
   tau=(double *)CALLOC((size_t)q *(1 + *nt),sizeof(double)); /* part of reflector storage */
   pivot=(int *)CALLOC((size_t)q,sizeof(int));
@@ -397,13 +397,13 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
   cucS = (int *)CALLOC((size_t)m,sizeof(int)); /* cumulative cols in S */
   for (i=1;i<m;i++) cucS[i] = cucS[i-1] + cS[i-1];
   ScS=0;for (pi=cS;pi<cS+m;pi++) ScS+= *pi;  /* total columns of input S */
-  
+
   work=(double *)CALLOC((size_t)q,sizeof(double)); 
   for (p=S,i=0;i<ScS;i++,p+=q) /* work across columns */
   { for (pi=pivot,p2=work;p2<work+q;pi++,p2++) *p2 = p[*pi];  /* apply pivot into work */
     for (p1=p,p2=work;p1<p+q;p1++,p2++) *p1 = *p2;  /* copy back into S */
   } /* S pivoting complete, do H .... */
- 
+
   if (control[3])
   { for (j=0;j<q;j++)
      { for (i=0;i<q;i++) work[i]=H[pivot[i]+q*j];
@@ -416,22 +416,22 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
   }
 
   /* form y_1 = Q_1'y */
- 
+
   y0=(double *)CALLOC((size_t)n,sizeof(double));
   for (p=y,p1=y0;p<y+n;p++,p1++) *p1 = *p;
   tp=1;i=1;/*left=1;mgcv_qrqy(y0,X,tau,&n,&i,&q,&left,&tp);*/ /* first q elements are y1 */
   mgcv_pqrqy(y0,X,tau,&n,&q,&i,&tp,nt);
   /* form y'y */
- 
+
   for (yy=0.0,p=y;p<y+n;p++) yy += *p * *p;
   /* explicitly form the S_i's since they are needed in S = H + \sum_i \theta_i S_i */
-  
+
   if (m>0)
   { Si=array2d(m,q*q);
     i=0;j=1;
     for (p=S,k=0;k<m;p+=cS[k]*q,k++)  mgcv_mmult(Si[k],p,p,&i,&j,&q,&q,cS+k);   
   }
-   
+
   /* now get the initial smoothing parameter estimates \propto 1/tr(S_i) */
 
   if (mp<0) { L_exists=0;mp=m;} else L_exists=1;
@@ -443,7 +443,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
 
   if (L_exists&&!def_supplied) 
     error(_("magic requires smoothing parameter starting values if L supplied"));
-  
+
   /* extract the R factor, to get a norm for X, and for returning later */
   R = (double *)CALLOC((size_t)q*q,sizeof(double));
   getRpqr(R,X,&n,&q,&q,nt);
@@ -521,7 +521,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
     { sp0[i]=log(def_sp[i]);ok=0;
     /*  Rprintf("Resetting sp[%d]\n",i);*/
     } 
-    
+
     if (L_exists) {
       i=0;j=1;mgcv_mmult(sp,L,sp0,&i,&i,&m,&j,&mp); /* form sp = L sp0 */
       for (p=sp,p1=lsp0,p2=sp+m;p<p2;p++,p1++) *p += *p1; /* form sp= L sp0 + lsp0 */
@@ -535,12 +535,12 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
       fit_call++;
     }
   }
-  
+
 
   min_score=score;
   sd_step=(double *)CALLOC((size_t)mp,sizeof(double));
   n_step=(double *)CALLOC((size_t)mp,sizeof(double));
- 
+
   if (autoinit&&!def_supplied) /* can't get here if L exists */
   { /* second guesses are scale*rank(S_i) / b'S_ib */
     for (p=S,k=0;k<m;k++)
@@ -554,7 +554,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
     use_sd=1;
     /*  Rprintf("Using second guess\n");*/
   }
-  
+
   /* Now do smoothing parameter estimation if there are any to estimate */
   if (mp>0)
   { converged=0;iter=0;
@@ -597,8 +597,8 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
         if (try==max_half) converged=1; /* can't improve score */
         if (converged) { msg=sqrt(xx*xx/mp);if (try==max_half) step_fail=1;}
       }
-    
-     
+
+
       /* now get derivatives */
       { if (L_exists) {
           i=0;j=1;mgcv_mmult(sp,L,sp0,&i,&i,&m,&j,&mp); /* form sp = L sp0 */
@@ -617,7 +617,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
         } else {
           p = grad;grad=grad1;grad1=p;
         }
-               
+
         mgcv_symeig(u,ev,&mp,&use_dsyevd,&TRUE,&FALSE); /* columns of hess are now eigen-vectors */
         use_sd=0;for (p=ev;p<ev+mp;p++) if (*p<0.0) {use_sd=1;break;} /* check hessian +ve def */
         if (!use_sd) /* get the Newton direction Hess^{-1}grad */
@@ -631,7 +631,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
         for (i=0;i<mp;i++) sd_step[i]= -grad[i]/xx;     
       }
     } /* end of estimation iterative loop */
-  
+
     /* At this point Newton/SD has converged, but we need to check s.p. optima are not at +/- infinity */
     for (k=0;k<mp;k++)
     { ok=5;xx=2.0; 
@@ -660,7 +660,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
       for (i=0;i<m;i++) sp[i]=sp0[i];
     }
     fit_magic(X,sp,Si,H,gamma,scale,control,*rank_tol,yy,y0,y1,U1,V,d,b,&score,&norm,&delta,&rank,norm_const,n_score,nt);
-   
+
     /* free search related memory */
     free2d(M);free2d(K);free2d(My);free2d(Ky);free2d(yK);free2d(hess);
     free2d(d2norm);free2d(d2delta);FREE(U1U1);FREE(rSms);FREE(u);
@@ -688,7 +688,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
   control[4]=fit_call; /* number of evaluations of GCV/UBRE score */
 
   if (m>0) {FREE(sp);free2d(Si);}
-  
+
   /* unpivot R from QR factor of X */
   for (i=0;i<q;i++) { 
     for (j=0;j<i;j++) V[i + q * j] = 0.0; 
@@ -701,7 +701,7 @@ void magic(double *y,double *X,double *sp0,double *def_sp,double *S,double *H,do
   FREE(tau);FREE(pivot);FREE(work);FREE(y0);FREE(y1);
   FREE(U1);FREE(V);FREE(d);FREE(sd_step);
   FREE(n_step);FREE(R);FREE(cucS);
-    
+
 } /* magic */
 
 

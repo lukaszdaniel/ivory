@@ -19,18 +19,14 @@
 
 #include <Rinternals.h>
 
-#define DUPLICATE_CLASS_CASE(method) TYPEOF(method) == ENVSXP
-
-
-SEXP R_M_setPrimitiveMethods(SEXP fname, SEXP op, SEXP code_vec,
-			     SEXP fundef, SEXP mlist);
+SEXP R_M_setPrimitiveMethods(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef, SEXP mlist);
 SEXP R_clear_method_selection();
 NORET SEXP R_dummy_extern_place();
 SEXP R_el_named(SEXP object, SEXP what);
 SEXP R_externalptr_prototype_object();
 SEXP R_getGeneric(SEXP name, SEXP mustFind, SEXP env, SEXP package);
 SEXP R_get_slot(SEXP obj, SEXP name);
-SEXP R_getClassFromCache(SEXP class, SEXP table);
+SEXP R_getClassFromCache(SEXP class_, SEXP table);
 SEXP R_hasSlot(SEXP obj, SEXP name);
 SEXP R_identC(SEXP e1, SEXP e2);
 SEXP R_initMethodDispatch(SEXP envir);

@@ -88,22 +88,25 @@ void rcmdusage (char *RCMD)
 	    "for usage information for each command.\n\n");
 }
 
-#define PROCESS_CMD(ARG)	if (cmdarg + 1 < argc) {\
-	    for (i = cmdarg + 1; i < argc; i++) {\
-		strcat(cmd, ARG);\
-		if (strlen(cmd) + strlen(argv[i]) > 9900) {\
-		    fprintf(stderr, "command line too long\n");\
-		    return(27);\
-		}\
-		strcat(cmd, "\"");\
-		strcat(cmd, argv[i]);\
-		strcat(cmd, "\"");\
-	    }\
-	    /* the outermost double quotes are needed for cmd.exe */\
-	    strcat(cmd,"\"");\
-	}\
-	return(system(cmd))
-
+#define PROCESS_CMD(ARG)                                         \
+	if (cmdarg + 1 < argc)                                       \
+	{                                                            \
+		for (i = cmdarg + 1; i < argc; i++)                      \
+		{                                                        \
+			strcat(cmd, ARG);                                    \
+			if (strlen(cmd) + strlen(argv[i]) > 9900)            \
+			{                                                    \
+				fprintf(stderr, "command line too long\n");      \
+				return (27);                                     \
+			}                                                    \
+			strcat(cmd, "\"");                                   \
+			strcat(cmd, argv[i]);                                \
+			strcat(cmd, "\"");                                   \
+		}                                                        \
+		/* the outermost double quotes are needed for cmd.exe */ \
+		strcat(cmd, "\"");                                       \
+	}                                                            \
+	return (system(cmd))
 
 extern int process_Renviron(const char *filename);
 #define CMD_LEN 10000

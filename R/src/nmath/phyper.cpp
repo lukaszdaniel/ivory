@@ -75,7 +75,7 @@ static double pdhyper(double x, double NR, double NB, double n, int log_p)
 }
 
 
-/* FIXME: The old phyper() code was basically used in ./qhyper.c as well
+/* FIXME: The old phyper() code was basically used in ./qhyper.cpp as well
  * -----  We need to sync this again!
                       q         m           n         k   */
 double Rf_phyper(double x, double NR, double NB, double n,

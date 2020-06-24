@@ -90,7 +90,7 @@ double Rf_qnbinom(double p, double size, double prob, int lower_tail, int log_p)
     sigma = sqrt(size * P * Q);
     gamma = (Q + P)/sigma;
 
-    /* Note : "same" code in qpois.c, qbinom.c, qnbinom.c --
+    /* Note : "same" code in qpois.cpp, qbinom.cpp, qnbinom.cpp --
      * FIXME: This is far from optimal [cancellation for p ~= 1, etc]: */
     if(!lower_tail || log_p) {
 	p = R_DT_qIv(p); /* need check again (cancellation!): */

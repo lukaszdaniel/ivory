@@ -54,7 +54,7 @@ SEXP tmerge(SEXP id2,  SEXP time2x, SEXP newx2,
 	    newx[i] = x[k];
 	    }
 	}
-    
+
     UNPROTECT(1);
     return(newx3);
     }
@@ -68,7 +68,7 @@ SEXP tmerge(SEXP id2,  SEXP time2x, SEXP newx2,
 **  and 30, the return index would be 0, 1, 1, and 2.  (Covariates change
 **  after a time point change.)
 */
-	    
+
 SEXP tmerge2(SEXP id2,  SEXP time2x, SEXP nid2, SEXP ntime2) {
     int i, k;
     int n1, n2;
@@ -195,4 +195,4 @@ SEXP tmerge2(SEXP id2,  SEXP time2x, SEXP nid2, SEXP ntime2) {
     return(index2);
     }
 
-     
+

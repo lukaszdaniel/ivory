@@ -36,14 +36,14 @@ DEFFMT (FMT_PIBHEX,	  "PIBHEX",    2,  2,  16,  2,   16, 0002, FMT_F, 7)
 DEFFMT (FMT_PK,		  "PK",        2,  1,  16,  1,   16, 0010, FMT_F, 10)
 DEFFMT (FMT_RB,		  "RB",        1,  2,   8,  2,    8, 0002, FMT_F, 11)
 DEFFMT (FMT_RBHEX,	  "RBHEX",     1,  4,  16,  4,   16, 0002, FMT_F, 12)
-			  					    
+
 /* Custom currency. */	  					    
 DEFFMT (FMT_CCA,	  "CCA",       2, -1,  -1,  1,   40, 0020, FMT_CCA, 33)
 DEFFMT (FMT_CCB,	  "CCB",       2, -1,  -1,  1,   40, 0020, FMT_CCB, 34)
 DEFFMT (FMT_CCC,	  "CCC",       2, -1,  -1,  1,   40, 0020, FMT_CCC, 35)
 DEFFMT (FMT_CCD,	  "CCD",       2, -1,  -1,  1,   40, 0020, FMT_CCD, 36)
 DEFFMT (FMT_CCE,	  "CCE",       2, -1,  -1,  1,   40, 0020, FMT_CCE, 37)
-			  					     
+
 /* Date/time formats. */  					     
 DEFFMT (FMT_DATE,	  "DATE",      1,  9,  40,  9,   40, 0001, FMT_DATE, 20)
 DEFFMT (FMT_EDATE,	  "EDATE",     1,  8,  40,  8,   40, 0001, FMT_EDATE, 23)
@@ -58,7 +58,7 @@ DEFFMT (FMT_TIME,	  "TIME",      2,  5,  40,  5,   40, 0001, FMT_TIME, 39)
 DEFFMT (FMT_DTIME,	  "DTIME",     2, 11,  40,  8,   40, 0001, FMT_DTIME, 25)
 DEFFMT (FMT_WKDAY,	  "WKDAY",     1,  2,  40,  2,   40, 0001, FMT_WKDAY, 26)
 DEFFMT (FMT_MONTH,	  "MONTH",     1,  3,  40,  3,   40, 0001, FMT_MONTH, 27)
-			  					     
+
 /* These aren't real formats.  They're used by DATA LIST. */	     
 DEFFMT (FMT_T,            "T",         1,  1,99999, 1,99999, 0000, FMT_T, -1)
 DEFFMT (FMT_X,		  "X",         1,  1,99999, 1,99999, 0000, FMT_X, -1)

@@ -1213,7 +1213,7 @@ void	resetdrawstate(void);
 /*
  *  Caret-related functions.
  */
- 
+
 void 	setcaret(control c, int x, int y, int width, int height);
 void	showcaret(control c, int showing);
 

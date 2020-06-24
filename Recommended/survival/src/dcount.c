@@ -51,7 +51,7 @@ SEXP dcount(SEXP y2, SEXP strata2, SEXP sort12,  SEXP sort22) {
 		d1=0; d2=0;
 		istrat = strata[i2];
 	    }
-	    
+
 	    if (status[i2] > 0) {
 		dtime = time2[i2];   /* found a new event time */
 		d2++;
@@ -60,7 +60,7 @@ SEXP dcount(SEXP y2, SEXP strata2, SEXP sort12,  SEXP sort22) {
 	    }
 	    else icount[i2] = d2;
 	}
-	
+
 	/* catch person1 up to this death time */
 	for (; person1 <=person2;) {
 	    i1 = sort1[person1];
@@ -77,7 +77,7 @@ SEXP dcount(SEXP y2, SEXP strata2, SEXP sort12,  SEXP sort22) {
 	i1 - sort1[person1];
 	icount[i1] -= d1;
     }
-    
+
     UNPROTECT(1);
     return(icount2);
 }

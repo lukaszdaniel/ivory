@@ -30,7 +30,7 @@
 
 
 /* Remove and process common command-line arguments
- *  Formally part of ../unix/sys-common.c.
+ *  Formally part of ../unix/sys-common.cpp.
  */
 
 /*
@@ -52,7 +52,7 @@ static int    NumCommandLineArgs = 0;
 static char **CommandLineArgs = NULL; // this does not get freed
 
 
-void R_set_command_line_arguments(int argc, char **argv)
+void R_set_command_line_arguments(int argc, char *argv[])
 {
     // nothing here is ever freed.
     NumCommandLineArgs = argc;
@@ -91,7 +91,7 @@ HIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 extern Rboolean R_LoadRconsole;
 #endif
 
-void R_common_command_line(int *pac, char **argv, Rstart Rp)
+void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 {
     int ac = *pac, newac = 1;	/* argv[0] is process name */
     long lval; /* this is only used for ppval, so 32-bit long is fine */

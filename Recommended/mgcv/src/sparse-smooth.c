@@ -40,11 +40,11 @@
    * closest - find closest point in kd tree to a new point x.
    * k_nn_work finds k nearest neighbours of each node in kd tree
    * k_nn forms kd tree and then obtains k nearest neighbours
-  
+
    * kd_sizes, kd_dump, kd_read are concerned with encoding 
      kd tree in form suitable for storage in R and reading 
      from this format.
- 
+
    needed: 
    * k_closest - find k nearest neighbours in kd tree to points not 
                  in kd tree.
@@ -128,7 +128,7 @@ void kd_read(kdtree_type *kd,int *idat,double *ddat,int new_mem) {
     kd->ind = idat + 3;
     kd->rind = idat + 3 + n;
   }  
- 
+
   /* Now make an array of boxes (all cleared to zero)... */
   kd->box = (box_type *)CALLOC((size_t)nb,sizeof(box_type));
   /* now work through boxes loading contents */
@@ -268,7 +268,7 @@ void kd_tree(double *X,int *n, int *d,kdtree_type *kd) {
    * box[i] has one parent and 2 children, unless it contains only one 
      or 2 points, in which case it has no children.
 
-   
+
 */
   int *ind,*rind,*p,i,m,todo[50],todo_d[50],item,bi,nb,np,k,dim,b,p0,p1;
   box_type *box;
@@ -313,15 +313,15 @@ void kd_tree(double *X,int *n, int *d,kdtree_type *kd) {
     /* next line re-orders the point index for this box only.
        after reordering the index is split into two parts, indexing
        points below and above the kth largest value */  
- 
+
     k_order(&k,ind+p0,x,&np); 
-  
+
     /*... so the box is now split at a plane/line through x[ind[p0+k-1]] */
     item--; /* basically done that item */
     /* create the offspring boxes... */
-    
+
     bi++; /* lower box first */ 
-    
+
     if (bi>nb-1) Rprintf(_("too many boxes!!"));
     box[b].child1=bi;/* record box relationships */
     /* copy box coordinates... */
@@ -399,14 +399,14 @@ SEXP Rkdtree(SEXP x) {
    "kd_ptr" of the object returned here. The returned object is 
    a vector of doubles which encodes the kd tree, in combination 
    with a vector of integers returned as its "kd_ind" attribute.
-   
+
    The real and integer vectors are created by kd_dump. They can be 
    used to restore the kd tree of the pointer is NULL, as will happen
    when the kd object is saved to disk and re-loaded. See Rknearest 
    and Rkradius for examples. This design requires twice as much storage 
    as is strictly necessary, but makes for efficient tree use when the 
    tree is large. 
-  
+
    library(mgcv)
 
    X <- matrix(runif(3000000),1000000,3)
@@ -488,16 +488,16 @@ double box_dist(box_type *box,double *x,int d) {
   return(sqrt(d2));
 }
 
- 
+
 int which_box(kdtree_type *kd,int j) {
 /* Finds smallest box in kd tree containing jth point 
    from point set used to create tree */ 
   int i,bi,b1;
   i = kd->rind[j]; /* where jth point is in kd->ind */
   bi=0;
-  
+
   while (kd->box[bi].child1) { /* still haven't reached smallest */
-   
+
     b1 = kd->box[bi].child1;   /* index of first child */
     if (kd->box[b1].p1>=i) bi = b1; /* point is in child1 */
     else bi = kd->box[bi].child2; /* kd->box[bi].child1 must be in child2 */
@@ -582,7 +582,7 @@ int closest(kdtree_type *kd, double *X,double *x,int n,int *ex,int nex) {
   /* now look for closer points in any box that could be better */
   todo[0] = 0; /* index of root box... first to check */
   item = 0; 
- 
+
   while (item>=0) { /* items on the todo list */
     if (todo[item]==bx) { /* this is the initializing box - already dealt with */
        item--;
@@ -776,7 +776,7 @@ SEXP Rkradius(SEXP kdr,SEXP Xr,SEXP xr,SEXP rr,SEXP offr) {
   if (!kd_symb) kd_symb = install("kd_ptr"); /* register symbol for attribute */
   DIM = getAttrib(xr, dim_sym);
   dim = INTEGER(DIM); m = dim[1];
-  
+
   X = REAL(Xr);x = REAL(xr);
   r = REAL(rr);
   ptr = getAttrib(kdr, kd_symb);
@@ -788,7 +788,7 @@ SEXP Rkradius(SEXP kdr,SEXP Xr,SEXP xr,SEXP rr,SEXP offr) {
     ddat = REAL(kdr);
     kd = (kdtree_type *) CALLOC((size_t)1,sizeof(kdtree_type));
     kd_read(kd,idat,ddat,1);
-   
+
     ptr = R_MakeExternalPtr(kd,R_NilValue, R_NilValue);
     PROTECT(ptr);
     /* Register the routine to call when R object to
@@ -797,11 +797,11 @@ SEXP Rkradius(SEXP kdr,SEXP Xr,SEXP xr,SEXP rr,SEXP offr) {
     /* attach ptr as attibute to 'kdr' ... */
     setAttrib(kdr, kd_symb, ptr);
     nprot++;
- 
+
   }
   d = kd->d; /* dimension */
   off = INTEGER(offr);
- 
+
   /* get the r-radius neighbour information... */
   list = (int *)CALLOC((size_t)kd->n,sizeof(int)); /* list of neighbours of ith point */
   n_buff = kd->n*10;
@@ -883,7 +883,7 @@ void k_newn_work(double *Xm,kdtree_type kd,double *X,double *dist,int *ni,int*m,
   int i,j,bi,*ik,bii,todo[100],item,pcount,*ind;
   box_type *box;
   double *dk,huge,*p,*p1,*p2,dij,*x;
- 
+
   huge = kd.huge;
   ind = kd.ind;
   box = kd.box;
@@ -900,14 +900,14 @@ void k_newn_work(double *Xm,kdtree_type kd,double *X,double *dist,int *ni,int*m,
        box and then re-ascending to find box with enough points. This is
        probably more efficient than checking box size all the way down 
        if n >> k .... */
-   
+
     /*bi = which_box(&kd,i);*/ /* bi is smallest box containing ith point */
     bi = xbox(&kd,x); /* bi is smallest box containing ith point, x */
 
     while (box[bi].p1-box[bi].p0 < *k) bi = box[bi].parent; /* note k does not include self */    
-    
+
     /*  Rprintf("Initial box %d contains %d need %d\n",bi,kd.box[bi].p1-kd.box[bi].p0+1,*k); */
- 
+
    /* now find k nearest points in the box and put in dk... */     
     for (j=box[bi].p0;j<=box[bi].p1;j++) { 
       pcount++;
@@ -919,7 +919,7 @@ void k_newn_work(double *Xm,kdtree_type kd,double *X,double *dist,int *ni,int*m,
         if (*k>1) update_heap(dk,ik,*k); /* update heap so it still obeys heap ordering */  
       } 
     } /* finished initialising heap (dk, ik) */
-    
+
     /* Now search the rest of the tree. Basic idea is that if a box is further from the 
        ith point than dk[0] (the largest of the current neighbour distances), then we 
        can ignore all the points it contains (and hence its descendents) */ 
@@ -960,7 +960,7 @@ void k_newn_work(double *Xm,kdtree_type kd,double *X,double *dist,int *ni,int*m,
       ni[i + j * *m] = ik[j];
     }     
   } /* end of points loop (i) */
- 
+
   FREE(dk);
   FREE(ik);
   FREE(x);
@@ -1038,7 +1038,7 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
   int i,j,bi,*ik,bii,todo[100],item,pcount,*ind;
   box_type *box;
   double *dk,huge,*p,*p1,*p2,dij,*x;
- 
+
   huge = kd.huge;
   ind = kd.ind;
   box = kd.box;
@@ -1055,9 +1055,9 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
        box and then re-ascending to find box with enough points. This is
        probably more efficient than checking box size all the way down 
        if n >> k .... */
-   
+
     bi = which_box(&kd,i); /* bi is smallest box containing ith point */
- 
+
 
  /*   for (j=0;j<*d;j++) 
     if (x[j]<kd.box[bi].lo[j]||x[j]>kd.box[bi].hi[j]) { 
@@ -1071,10 +1071,10 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
     Rprintf("%d  ",bi);*/
 
     while (box[bi].p1-box[bi].p0 < *k) bi = box[bi].parent; /* note k does not include self */    
-    
+
     /*  Rprintf("Initial box %d contains %d need %d\n",bi,kd.box[bi].p1-kd.box[bi].p0+1,*k); */
     /* now find k nearest points in the box and put in dk... */    
- 
+
     for (j=box[bi].p0;j<=box[bi].p1;j++) 
     if (ind[j]!=i) { /* avoid self! */
       pcount++;
@@ -1085,7 +1085,7 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
         if (*k>1) update_heap(dk,ik,*k); /* update heap so it still obeys heap ordering */  
       } 
     } /* finished initialising heap (dk, ik) */
-    
+
     /* Now search the rest of the tree. Basic idea is that if a box is further from the 
        ith point than dk[0] (the largest of the current neighbour distances), then we 
        can ignore all the points it contains (and hence its descendents) */ 
@@ -1125,7 +1125,7 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
       ni[i + j * *n] = ik[j];
     }     
   } /* end of points loop (i) */
- 
+
   FREE(dk);
   FREE(ik);
   FREE(x);
@@ -1135,7 +1135,7 @@ void k_nn_work(kdtree_type kd,double *X,double *dist,int *ni,int *n,int *d,int *
 void k_nn(double *X,double *dist,double *a,int *ni,int *n,int *d,int *k,int *get_a) {
 /* NOTE: n modified on exit!!
          no tie handling... impractical without!
-         
+
    X is an n by d matrix. Each row is the location of a point
    in some Euclidean d-space.
    Find k nearest neighbours in X of all points in X. 
@@ -1143,12 +1143,12 @@ void k_nn(double *X,double *dist,double *a,int *ni,int *n,int *d,int *k,int *get
    Each row of dist is contains the corresponding distances. 
    if get_a is non zero, then volumes of kd boxes are associated with each point
    and returned in a.
-   
+
    Some R test code...
    cd ~simon/mgcv-related/sparse-smooth
    R CMD SHLIB kd-tree.c  
    R 
-   
+
    dyn.load("kd-tree.so")
    set.seed(2)
    n <- 100;d <- 2;k <- 5
@@ -1250,7 +1250,7 @@ void ni_dist_filter(double *X,int *n,int *d,int *ni,int *off,double *mult) {
   i0 = 0;
   for (j=0;j<*n;j++) {
     i1 = off[j];
-  
+
     for (i=i0;i<i1;i++) {
       z2=0.0;
       for (k=0;k<*d;k++) {
@@ -1263,7 +1263,7 @@ void ni_dist_filter(double *X,int *n,int *d,int *ni,int *off,double *mult) {
     i0=i1;
   }
   md/=i0; /* average neighbour distance */
-  
+
   /* now remove distant neighbours... */
   k = i0 = 0;
   for (j=0;j<*n;j++) { /* loop through points */
@@ -1310,7 +1310,7 @@ void nei_penalty(double *X,int *n,int *d,double *D,int *ni,int *ii,int *off,
   int i,j,k,true=1,kk,l,i0,i1,max_nn=0,jj,di,doff;
   double *M,*Mi,*Vt,*sv, /* matrix mapping derivatives to function values */
     x,z; 
-  
+
   /* first strip out distant neighbours */
   z = 10.0;
   ni_dist_filter(X,n,d,ni,off,&z);
@@ -1358,7 +1358,7 @@ void nei_penalty(double *X,int *n,int *d,double *D,int *ni,int *ii,int *off,
     }  
     /* Let g = [f,f_x,f_z,f_xx,f_zz,f_xz], then f -> Mg as neighbours
        approach point i. Now pseudo invert M, to estimate g using g = M^{-}f */
-     
+
     /* call mgcv_svd_full to pseudoinvert M */
     i = 6;
     mgcv_svd_full(M,Vt,sv,&kk,&i); 
@@ -1366,7 +1366,7 @@ void nei_penalty(double *X,int *n,int *d,double *D,int *ni,int *ii,int *off,
     /* Rprintf("%d done svd...\n",i);*/ 
     jj = k; if (jj>6) jj=6;
     kappa[i] = sv[0]/sv[jj-1]; /* condition number */
-    
+
     for (i=0;i<jj;i++) if (sv[i]>sv[0]*1e-10) sv[i] = 1/sv[i]; else sv[i]=0.0; 
     /* if k < kk, need to remove trailing rows of M */
     if (k<kk) {
@@ -1391,7 +1391,7 @@ void nei_penalty(double *X,int *n,int *d,double *D,int *ni,int *ii,int *off,
     /*  Rprintf("done mmult...\n"); */
     /* Now read coefficients of second derivatives out into D matrix */
     /* if (*a_weight) x = sqrt(area[i]); else */ x = 1.0;
-    
+
     /* issue here is that off and ii don't include references to self,
        don't want to handle this with an interleaving convention as
        it's a mess to code, and will increase memory footprint. Better 
@@ -1399,7 +1399,7 @@ void nei_penalty(double *X,int *n,int *d,double *D,int *ni,int *ii,int *off,
        by off and ii */ 
     for (l=0;l<3;l++) 
       D[j + doff * l] = Mi[3 + l]; /* self nodes are first in each block */
- 
+
     for (i=1;i<k;i++) {  /* now neighbours in off, ii order */ 
       for (l=0;l<3;l++) D[di + doff * l + *n] = Mi[3 + l + 6 * i];
       di++;
@@ -1457,7 +1457,7 @@ void ss_setup(double *ub,double *lb,double *x,double *w, int *n) {
   for (i=0;i< *n-1;i++) h[i]=x[i+1]-x[i];
   for (i=0;i< *n-2;i++) hh[i]=2.0*(h[i]+h[i+1])/3.0;
   for (i=0;i< *n-3;i++) hh1[i]=h[i+1]/3.0;
- 
+
   lb[0] = sqrt(hh[0]);
   lb1 = lb + *n; /* pointers to second band */
 
@@ -1489,7 +1489,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
    U and V will each contain n pairs of Givens rotations and are therefor of 
    length 4*n. They are packed in 4 vectors...
    [rotation 0 s, rotation 0 c, rotation 1 s, rotation 1 c] 
-   
+
    lb is storage for the lower band in dH&H terms. It is needed for computing
    spline coefficients. Dimension is 2 * n;
 
@@ -1498,7 +1498,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
    duplicates are dealt with here by deleting duplicate x values and summing the 
    squared weights for the duplicate set. On exit *n is the number of unique x values.
    idea is that y's at duplicate x values will be averaged before smoothing.
-  
+
    x values within tol of each other are treated as duplicates.
 */   
   double *ub,rho,*p,*p1,*ub1,*ub2,*lb1,c,s,*U0s,*U0c,*U1s,*U1c,
@@ -1568,7 +1568,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
   V0s[i] = -s;V0c[i] = c;
 
   givens(ub[i],ub2[i],&c,&s);
- 
+
   V1s[i] = -s; V1c[i] = c;
 
   /* Now compute the trace of the influence matrix */ 
@@ -1612,7 +1612,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
   L32=L32*c-L22*s;L22=Lt;
   L33=L32;L23=L22;L22=L21;
 
- 
+
   for (i = *n-5;i>=0;i--)
   { V0c--;V0s--;V1c--;V1s--;U0c--;U0s--;U1c--;U1s--;
     L13 = - *V1s;L11 = *V1c;
@@ -1630,7 +1630,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
     X1 = -L11 * *U0s;
     L11 *= *U0c;
     L12 = L12 * *U1c + X1 * *U1s;
- 
+
     X2 = -L21 * *U0s;
     L21 *= *U0c;
     L22 = L22 * *U1c + X2 * *U1s;
@@ -1640,7 +1640,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
     L11 = L11*c+L21*s;
     Lt = L12*c+L22*s;
     L22 = L22*c-L12*s;L12=Lt;
-    
+
     diagA[i+2]=L33*L33+L23*L23+L13*L13;
     if (i!=0)
     { L33=L22;L23=L12;L22=L11;
@@ -1656,7 +1656,7 @@ void sspl_construct(double *lambda,double *x,double *w,double *U,double *V,
 void sspl_apply(double *y,double *x,double *w,double *U,double *V,int *n,int *nf,double *tol) {
 /* Apply the smoothing spline stored in U and V to the data in y, 
    with weights w. The smoothed values are returned in y.
-   
+
    x and w are also modified here.
 
    nf is length of y and x. n is the number of unique x values.
@@ -1687,7 +1687,7 @@ void sspl_apply(double *y,double *x,double *w,double *U,double *V,int *n,int *nf
   for (i=0;i<*n;i++) w[i] = 1/w[i];  /* convert to H and de H convention */
 
   /* ... y now contains weighted averages at unique x values, w corresponding weights */
-  
+
   Wy = (double *)CALLOC((size_t) 2 * *n,sizeof(double));
   for (i=0;i < *n;i++) Wy[i] = y[i]/w[i];
   /* set up pointers to various rotation pairs.. */
@@ -1699,16 +1699,16 @@ void sspl_apply(double *y,double *x,double *w,double *U,double *V,int *n,int *nf
   { QTz(i+1,*n+i,U1c[i],-U1s[i],Wy);
 
     QTz(i,*n+i,U0c[i],-U0s[i],Wy);
-   
+
     QTz(i,i+1,V0c[i],-V0s[i],Wy);
-  
+
     QTz(i,i+2,V1c[i],-V1s[i],Wy);
   }
   i= *n-3;
   QTz(i,*n+i,U0c[i],-U0s[i],Wy);
- 
+
   QTz(i,i+1,V0c[i],-V0s[i],Wy);
- 
+
   QTz(i,i+2,V1c[i],-V1s[i],Wy);
 
   /* Calculates Weighted Residual */

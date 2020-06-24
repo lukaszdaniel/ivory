@@ -20,7 +20,7 @@ void chinv3(double **matrix , int n, int m, double *fdiag)
      {
      int i,j,k;
      int n2, ii;
-   
+
      n2 = n-m;   /* number of full covariates */
 
      /*
@@ -35,7 +35,7 @@ void chinv3(double **matrix , int n, int m, double *fdiag)
 		 matrix[j][i] = -matrix[j][i];
 	     }
 	  }
-	 
+
      /* Now for the original portion */
      for (i=0; i<n2; i++){
 	  ii = i+m;
@@ -63,7 +63,7 @@ double **matrix;
      double temp;	 
      int i,j,k;
      int n2, ii;
-   
+
      n2 = n-m;   /* number of full covariates */
      /*
      ** lower triangle now contains inverse of cholesky

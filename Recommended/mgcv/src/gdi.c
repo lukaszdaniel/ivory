@@ -52,7 +52,7 @@ void multSk(double *y,double *x,int *xcol,int k,double *rS,int *rSncol,int *q,do
    is packed somewhere inside rS. x must be q by xcol. The 
    kth square root is q by rSncol[k]. The square roots are packed 
    one after another columnwise (R default).
-   
+
    work and y must be the same dimension as x.
 */
 { int i,off,nc,bt,ct;
@@ -102,7 +102,7 @@ void get_bSb(double *bSb,double *bSb1, double *bSb2,double *sp,double *E,
 /*
   Routine to obtain beta'Sbeta and its derivatives w.r.t. the log smoothing 
    parameters, this is part of REML calculation... 
-   
+
    sp is of length M, but b1 and b2 contain derivative w.r.t. to M0 + M 
    parameter [theta,log sp] where theta are parameters of the likelihood,
    but not the penalties.  The returned bSb1 and bSb2 should contain 
@@ -114,7 +114,7 @@ void get_bSb(double *bSb,double *bSb1, double *bSb2,double *sp,double *E,
 
    * b1 will contain dbeta/d\rho_0, dbeta/d\rho_1 etc. So, for example, dbeta_i/d\rho_j
      (indices starting at zero) is located in b1[q*j+i].
-   
+
    * b2 will contain d^2beta/d\rho_0d\rho_0, d^2beta/d\rho_1d\rho_0,... but rows will not be
      stored if they duplicate an existing row (e.g. d^2beta/d\rho_0d\rho_1 would not be 
      stored as it already exists and can be accessed by interchanging the sp indices).
@@ -128,7 +128,7 @@ void get_bSb(double *bSb,double *bSb1, double *bSb2,double *sp,double *E,
   int i,j,bt,ct,one=1,m,k,rSoff,mk,km,Mtot; 
   j = *q; for (i=0;i<*M;i++) if (rSncol[i]>j) j = rSncol[i];
   j += *M0; /* work space needed */
-  
+
   work = (double *)CALLOC((size_t)j,sizeof(double)); 
   Sb = (double *)CALLOC((size_t)*q,sizeof(double));
   bt=0;ct=0;mgcv_mmult(work,E,beta,&bt,&ct,Enrow,&one,q);
@@ -164,7 +164,7 @@ void get_bSb(double *bSb,double *bSb1, double *bSb2,double *sp,double *E,
       /* d2beta'/drho_k drho_m S beta */
       for (xx=0.0,p0=Sb,p1=Sb + *q;p0<p1;p0++,b2++) xx += *b2 * *p0;
       bSb2[km] = 2*xx; 
-       
+
       /* dbeta'/drho_k S dbeta/drho_m */
       for (xx=0.0,p0=b1+ k  * *q,p1=p0 + *q,p2=work;p0<p1;p0++,p2++) xx += *p2 * *p0;
       bSb2[km] += 2*xx;
@@ -186,11 +186,11 @@ void get_bSb(double *bSb,double *bSb1, double *bSb2,double *sp,double *E,
     }
   } /* done Hessian */
 
-    
+
   /* Now finish off the first derivatives */
   bt=1;ct=0;mgcv_mmult(work,b1,Sb,&bt,&ct,&Mtot,&one,q);
   for (i=0;i<Mtot;i++) bSb1[i] += 2*work[i];
-  
+
   FREE(Sb);FREE(work);FREE(Skb);FREE(work1);
 
 } /* end get_bSb */
@@ -263,12 +263,12 @@ double qr_ldet_inv(double *X,int *r,double *Xi,int *get_inv)
   /* Allocated working storage ...*/
   pivot = (int *)CALLOC((size_t)*r,sizeof(int));
   tau = (double *)CALLOC((size_t)*r,sizeof(double));
-  
+
   mgcv_qr(X,r,r,pivot,tau); /* get QR=X itself */
 
   /* evaluate log|X| = sum_i log(|R_ii|) ...*/
   for (ldet=0.0,p=X,i=0;i<*r;i++,p += *r+1) ldet += log(fabs(*p));
-  
+
   if (*get_inv) {
   /* Now get the inverse of X. X^{-1} = R^{-1}Q' */
     Qt = (double *)CALLOC((size_t)*r * *r,sizeof(double));
@@ -316,7 +316,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
    `det' the log determinant.
    `det1' M-array of derivatives of log det wrt log sp. 
    `det2' M by M Hessian of log det wrt log sp.   
-   
+
 */
 { double *R,*work,*tau,*rS1,*rS2, *S,*Si,*Sb,*B,*Sg,*p,*p1,*p2,*p3,*p4,*frob,max_frob,x,*spf,Rcond;
   int *pivot,iter,i,j,k,bt,ct,rSoff,K,Q,Qr,*gamma,*gamma1,*alpha,r,max_col,Mf,tot_col=0,left,tp;
@@ -348,12 +348,12 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
   for (i=0;i<Mf;i++) if (rSncol[i]>max_col) max_col=rSncol[i];
 
   p = Si = (double *)CALLOC((size_t)*q * max_col * Mf,sizeof(double));
-  
+
   for (rSoff=i=0;i<Mf;p+= *q * *q,rSoff+=rSncol[i],i++) {
     bt=0;ct=1;mgcv_mmult(p,sqrtS+rSoff * *q,sqrtS+rSoff * *q,&bt,&ct,q,q,rSncol+i);   
   }
 
- 
+
   /* Initialize the sub-dominant set gamma and the counters */
   K = 0;Q = *q;
   frob =  (double *)CALLOC((size_t)Mf,sizeof(double)); 
@@ -361,7 +361,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
   gamma1 = (int *)CALLOC((size_t)Mf,sizeof(int)); /* new gamma */
   alpha = (int *)CALLOC((size_t)Mf,sizeof(int));  /* dominant terms */
   for (i=0;i<Mf;i++) gamma[i] = 1; /* no terms dealt with initially */
-  
+
   /* Other storage... */
 
   S = (double *) CALLOC((size_t) Q * Q,sizeof(double)); /* Transformed S (total) */
@@ -420,10 +420,10 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
     printf("\n gamma = ");for (i=0;i<Mf;i++) printf(" %d",gamma[i]);
     printf("\n alpha = ");for (i=0;i<Mf;i++) printf(" %d",alpha[i]);
     printf("\n gamma1 = ");for (i=0;i<Mf;i++) printf(" %d",gamma1[i]);*/
-   
+
 
   /* If Q==r then terminate (form S first if it's the first iteration) */
-    
+
     if (Q==r) { 
       if (iter==1 ) { /* form S */
         for (p=Si,i=0;i<Mf;i++,p += Q*Q) { 
@@ -442,7 +442,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
     }
     for (i=0;i<*q;i++) pivot[i]=0; 
     mgcv_qr(Sb, &Q, q ,pivot,tau); /* obtain pivoted QR decomposition of Sb */
-    
+
   /* unpivot R, which means that no further pivoting is needed */
     for (p=R,p1=R + *q * r;p<p1;p++) *p=0.0; /* clear R */
     for (i=0;i<r;i++) for (j=i;j<*q;j++) R[i + pivot[j] * r] = Sb[i + j * Q]; 
@@ -461,7 +461,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
     } 
 
   /* Form S' the orthogonal transform of S */
-  
+
   /* Form Q'Sg... */ 
     left=1;tp=1; 
     mgcv_qrqy(Sg,Sb,tau,&Q,q,&Q,&left,&tp);
@@ -479,7 +479,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
       p2=p+r;p3=p1;
       for (j=0;j<*q;j++,p2+=r) for (k=0;k<Qr;k++,p3++,p2++) *p3 = *p2; /* copy to correct place */ 
     } 
- 
+
   /* Transform the square roots of Si */
     if (*deriv) { /* transformed rS1 only needed for derivatives */
       /* copy last Q rows of rS1 into rS2 */
@@ -487,10 +487,10 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
       /* pre-multiply rS2 by Q */ 
       left=1;tp=1;
       mgcv_qrqy(rS2,Sb,tau,&Q,&tot_col,&Q,&left,&tp); /* Q'rS2 */
-      
+
       /* copy rS2 into last Q rows of rS1 */
       for (i=0;i<Q;i++) for (j=0;j<tot_col;j++) rS1[K + i + *q * j] = rS2[i+Q*j];
-    
+
       /* zero the last Qr rows of the rS1 in alpha */
       for (p=rS1,k=0;k<Mf;p +=rSncol[k] * *q, k++) if (alpha[k]) {
         for (i=K+r;i<*q;i++) for (j=0;j<rSncol[k];j++) p[i + j * *q] = 0.0;
@@ -501,7 +501,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
     /* DEBUG ONLY... */
     /* printf("Current S...\n");
        for (i=0;i<*q;i++) { for (j=0;j<*q;j++) printf("%7.2g  ",S[i + *q *j]); printf("\n");}*/
- 
+
   /* Update K, Q and gamma */   
     K = K + r; Q = Qr;
     for (i=0;i<Mf;i++) gamma[i] = gamma1[i];
@@ -517,7 +517,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
   /* Now get the determinant and inverse of the transformed S (stored in B) */
   *det = qr_ldet_inv(R,q,B,deriv); /* R=S' here */
   /* finally, the derivatives, based on transformed S inverse and transformed square roots */  
-  
+
   if (*deriv) { /* get the first derivatives */
     /* first accumulate S^{-T} sqrtS into Si */
     bt=0;ct=0;mgcv_mmult(Si,B,sqrtS,&bt,&ct,q,&tot_col,q);
@@ -527,7 +527,7 @@ void get_detS2(double *sp,double *sqrtS, int *rSncol, int *q,int *M, int * deriv
       det1[i] = x*sp[i]; /* tr(S^{-1}S_i) */
     }
   }
-  
+
   if (*deriv==2) { /* get second derivatives, as well */
     for (p=Si,p1=rS2,p2 = p1 + *q * tot_col;p1<p2;p1++,p++) *p1 = *p; /* copy S^{-1} sqrtS into rS2 */   
 
@@ -596,7 +596,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
    `Qf' - the orthogonal factor of the similarity transform. If S0 is the 
           original total penalty then S = Qf' S0 Qf 
     sqrtS - the square roots of the components of S, transformed as S itself.        
-   
+
 */
 { double *rS, *Un, *U, *Si,*Sb,*B,*C,*Sg,*p,*p1,*p2,*p3,*frob,*ev,max_frob,x,*spf;
   int iter,i,j,k,bt,ct,rSoff,K,Q,Qr,*gamma,*gamma1,*alpha,TRUE=1,FALSE=0,r,max_col,Mf,n_gamma1;
@@ -610,7 +610,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
   else {spf=sp;Mf = *M;} /* total number of components, including fixed one */
 
   /* Create a working copy of sqrtS, which can be modified  */
- 
+
   rS = sqrtS; /* this routine modifies sqrtS */
   /* Explicitly form the Si (stored in a single block), so S_i is stored
      in Si + i * q * q (starting i from 0). As iteration progresses,
@@ -622,7 +622,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
     if (rSncol[i]>max_col) max_col=rSncol[i];
   }
 
- 
+
   /* Initialize the sub-dominant set gamma and the counters */
   K = 0; /* counter for coefs already deal with */
   Q = *q; /* How many coefs left to deal with */
@@ -631,7 +631,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
   gamma1 = (int *)CALLOC((size_t)Mf,sizeof(int)); /* new gamma */
   alpha = (int *)CALLOC((size_t)Mf,sizeof(int));  /* dominant terms */
   for (i=0;i<Mf;i++) gamma[i] = 1; /* no terms dealt with initially */
-  
+
   /* Other storage... */
 
   U=Sb = (double *) CALLOC((size_t) Q * Q,sizeof(double)); /* summation storage */
@@ -675,7 +675,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
         for (p1=p,p2=Sb,p3=p+Q*Q;p1<p3;p1++,p2++) *p2 += *p1 / x;
       } 
       mgcv_symeig(Sb,ev,&Q,&FALSE,&FALSE,&FALSE); /* get eigenvalues (ascending) of scaled sum over alpha */
-      
+
       r=1;
       while(r<Q&&(ev[Q-r-1]>ev[Q-1] * *r_tol)) r++;
     } else { /* nothing left in gamma1, so... */
@@ -685,7 +685,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
 
 
     /* If Q==r then terminate (form S first if it's the first iteration) */
-    
+
     if (Q==r) { 
       if (iter==1 ) { /* form S and Qf*/
         for (p=Si,i=0;i<Mf;i++,p += Q*Q) { 
@@ -707,7 +707,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
     } 
 
     mgcv_symeig(Sb,ev,&Q,&FALSE,&TRUE,&TRUE); /* get eigen decomposition of dominant term (ev descending) */
-    
+
   /* .... U points to Sb, which now contains eigenvectors */
     if (iter==1) for (p=U,p1=Qf,p2 = p+Q*Q;p<p2;p++,p1++) *p1 = *p;
     else { 
@@ -727,7 +727,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
       /* first copy out K by Q matrix B  */ 
       for (j=0;j<Q;j++) for (i=0;i<K;i++) C[i + K * j] = S[i + *q * (j+K)];
       /* Now form BU (store in B)*/
-    
+
       bt=0;ct=0;mgcv_mmult(B,C,U,&bt,&ct,&K,&Q,&Q);
       /* Replace B into S */
       for (j=0;j<Q;j++) for (i=0;i<K;i++) S[i + *q * (j+K)]= S[j + K + *q * i] = B[i + K * j];
@@ -735,17 +735,17 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
 
     /* Now deal with the lower right component, C */
     /* U'SgU  */
- 
+
     bt=0;ct=0;mgcv_mmult(B,Sg,U,&bt,&ct,&Q,&Q,&Q); /* SgU is in B */
     bt=1;ct=0;mgcv_mmult(C,U,B,&bt,&ct,&Q,&Q,&Q);  /* U'SgU is in C */ 
-    
+
     for (i=0;i<r;i++) C[i+i * Q] += ev[i];  /* Adding in the non-zero eigenvalues */
-   
+
     /* Now copy U'SgU + D back into right part of S' */
     for (j=0;j<Q;j++) for (i=0;i<Q;i++) S[i + K + *q * (j+K)] = C[i + Q * j];
-    
+
     /* Transform the square roots of Si in alpha and gamma1 (Can leave fixed term alone - not needed)*/
-   
+
      for (p=rS,k=0;k<*M;p += rSncol[k] * *q,k++) if (alpha[k]) {  /* p points to the square root of S_i */    
         /* extract the part of rS_i to be modified */
         for (i=0;i<Q;i++) for (j=0;j<rSncol[k];j++) C[i + Q * j] = p[i + K + *q * j]; 
@@ -754,15 +754,15 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
         for (i=K+r;i<K+Q;i++) for (j=0;j<rSncol[k];j++) p[i + *q * j] = 0.0;
       } else if (gamma1[k]) { 
         for (i=0;i<Q;i++) for (j=0;j<rSncol[k];j++) C[i + Q * j] = p[i + K + *q * j];
-       
+
         bt=1;ct=0;mgcv_mmult(B,U,C,&bt,&ct,&Q,rSncol+k,&Q);
         for (i=0;i<Q;i++) for (j=0;j<rSncol[k];j++) p[i + K + *q * j] = B[i + Q * j];
       }
-   
+
 
   /* Transform the Si in gamma' */
     Qr = Q - r;Un = U + r * Q;
-   
+
     for (p1=p=Si,i=0;i<Mf;i++,p += Q*Q,p1 +=Qr*Qr) if (gamma1[i]) { /* p points to old Si, and p1 to new */
       bt=1;ct=0;mgcv_mmult(B,Un,p,&bt,&ct,&Qr,&Q,&Q);
       bt=0;ct=0;mgcv_mmult(p1,B,Un,&bt,&ct,&Qr,&Qr,&Q); 
@@ -777,11 +777,11 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
   for (p=S,p1=S + *q * *q,p2=C;p<p1;p++,p2++) *p2 = *p; /* copy S to C */
   *det = qr_ldet_inv(C,q,B,deriv);
   /* finally, the dervivatives, based on transformed S inverse and transformed square roots */  
-  
+
   if (*deriv) { /* get the first derivatives */
    for (p=rS,i=0;i<*M;p += *q *rSncol[i],i++) det1[i] = trBtAB(B,p,q,rSncol+i)*sp[i]; /* tr(S^{-1}S_i) */
   }
- 
+
   if (*deriv==2) { /* get second derivatives, as well */
     for (p1=Si,p=rS,i=0;i<*M;p += *q *rSncol[i],i++,p1 += *q * *q) { /* loop through creating S^{-1} S_i and storing in Si*/
       bt=0;ct=0;mgcv_mmult(C,B,p,&bt,&ct,q,rSncol+i,q);
@@ -792,7 +792,7 @@ void get_stableS(double *S,double *Qf,double *sp,double *sqrtS, int *rSncol, int
     for (i=0;i<*M;i++) det2[i + *M * i] += det1[i];
   }
 
- 
+
   FREE(frob);
   FREE(gamma);
   FREE(gamma1);
@@ -816,13 +816,13 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
 
    * P is q by r
    * K is n by r
-  
+
    * sp is of length M, and there are M penalties, but derivatives are required w.r.t. M0 + M
      parameters [theta,sp] and Tk, Tkm contain derivatives w.r.t. all of these. The parameters
      theta are parameters of the likelihood, but are not involved in penalties.
 
    * this routine assumes that sp contains smoothing parameters, rather than log smoothing parameters.
- 
+
    * Note that P and K are as in Wood (2008) JRSSB 70, 495-518.
 
    * uses nthreads via openMP - assumes nthreads already set and nthreads already reset to 1
@@ -833,7 +833,7 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
     int m,k,bt,ct,j,one=1,km,mk,*rSoff,deriv2,max_col,Mtot;
   int tid;
   if (nthreads<1) nthreads = 1;
-  
+
   Mtot = *M0 + *M; /* total length of sp */
 
   if (*deriv==2) deriv2=1; else deriv2=0;
@@ -871,7 +871,7 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
   bt=1;ct=0;mgcv_mmult(det1,Tk,diagKKt,&bt,&ct,&Mtot,&one,n); /* tr(TkKK') */ 
 
   /* Finish first derivative and create create P'SmP if second derivs needed */
-  
+
   max_col = *q;
   for (j=0;j<*M;j++) if (max_col<rSncol[j]) max_col=rSncol[j]; /* under ML can have q < max(rSncol) */
 
@@ -881,8 +881,8 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
   if (deriv2) {
     PtSP = (double *)CALLOC((size_t)(*M * *r * *r ),sizeof(double));
   } else { PtSP = (double *) NULL;}
-  
-  
+
+
   rSoff =  (int *)CALLOC((size_t)*M,sizeof(int));
   if (*M>0) {
     rSoff[0] = 0;for (m=0;m < *M-1;m++) rSoff[m+1] = rSoff[m] + rSncol[m];
@@ -942,10 +942,10 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
 
         /* -sp[m]*tr(K'T_kKP'S_mP) */
         if (m >= *M0) det2[km] -= sp[m - *M0]*diagABt(work + *n * tid,KtTK + k * *r * *r,PtSP + (m - *M0) * *r * *r,r,r);
-     
+
         /* -sp[k]*tr(K'T_mKP'S_kP) */
         if (k >= *M0) det2[km] -= sp[k - *M0]*diagABt(work + *n * tid,KtTK + m * *r * *r,PtSP + (k - *M0) * *r * *r,r,r);
- 
+
         /* -sp[m]*sp[k]*tr(P'S_kPP'S_mP) */
         if (k >= *M0 && m >= *M0) det2[km] -= sp[m - *M0]*sp[k - *M0]*
                                   diagABt(work + *n * tid,PtSP + (k - *M0) * *r * *r,PtSP + (m - *M0) * *r * *r,r,r);
@@ -954,7 +954,7 @@ void get_ddetXWXpS(double *det1,double *det2,double *P,double *K,double *sp,
       }     
     }
   } /* end of parallel section */
- 
+
   /* free up some memory */
   if (deriv2) {FREE(PtSP);FREE(KtTK);}
   FREE(diagKKt);FREE(work);
@@ -1032,7 +1032,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
   /* obtain diag(KK'KK') */
   diagKKtKKt = (double *)CALLOC((size_t)*n,sizeof(double));
   xx = diagABt(diagKKtKKt,KKtK,K,n,r);
- 
+
   /* now loop through the smoothing parameters to create K'TkK and K'TkKK'K */
   if (deriv2) {
     KtTK = (double *)CALLOC((size_t)(*r * *r * *M),sizeof(double));
@@ -1054,7 +1054,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
       }
     } /* parallel section end */
   } else { KtTK=KtTKKtK=(double *)NULL;}
-  
+
   /* evaluate first and last terms in first derivative of tr(F) */
   bt=1;ct=0;mgcv_mmult(trA1,Tk,diagKKt,&bt,&ct,M,&one,n); /* tr(KK'Tk) */ 
   bt=1;ct=0;mgcv_mmult(work,Tk,diagKKtKKt,&bt,&ct,M,&one,n); /* tr(KK'TkKK') */
@@ -1074,7 +1074,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
 
      /* 2 tr(K'TkKK'TmKK'K) -- needs correction*/
      xx = 2*diagABt(work,KtTK+k * *r * *r,KtTKKtK+m * *r * *r,r,r);
-    
+
      trA2[km] += xx;
 
      trA2[mk] = trA2[km];     
@@ -1096,7 +1096,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
     KKtKPtrSm = (double *)CALLOC((size_t)(*n * *q * *nt),sizeof(double));/* transient storage for K'K P'rSm */ 
     diagKPtSPKtKKt = (double *)CALLOC((size_t)(*n * *M),sizeof(double));
   } else {  KKtKPtrSm=PtSPKtK= PtSP=KtKPtrSm=diagKPtSPKtKKt=(double *)NULL; }
-  
+
   rSoff =  (int *)CALLOC((size_t)*M,sizeof(int));
   rSoff[0] = 0;for (m=0;m < *M-1;m++) rSoff[m+1] = rSoff[m] + rSncol[m];
   tid = 0;
@@ -1116,7 +1116,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
       if (deriv2) {
         bt=0;ct=0;mgcv_mmult(KtKPtrSm + *r * *q * tid,KtK,PtrSm + *r * *q * tid,&bt,&ct,r,rSncol+m,r); 
         bt=0;ct=1;mgcv_mmult(PtSP+ m * *r * *r,PtrSm + *r * *q * tid,PtrSm + *r * *q * tid,&bt,&ct,r,r,rSncol+m);
-    
+
         bt=0;ct=0;mgcv_mmult(KKtKPtrSm + *n * *q * tid,KKtK,PtrSm + *r * *q * tid,&bt,&ct,n,rSncol+m,r);      
         bt=0;ct=1;mgcv_mmult(PtSPKtK + m * *r * *r,PtrSm + *r * *q * tid,KtKPtrSm+ *r * *q * tid,&bt,&ct,r,r,rSncol+m); 
         xx = diagABt(diagKPtSPKtKKt+ m * *n,KPtrSm + *n * *q * tid,KKtKPtrSm + *n * *q * tid,n,rSncol+m);
@@ -1131,7 +1131,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
     } 
   } /* end of parallel section */
   FREE(rSoff);
-  
+
 
   if (!deriv2) { /* trA1 finished, so return */
     FREE(PtrSm);FREE(KPtrSm);FREE(diagKPtSPKt);
@@ -1154,12 +1154,12 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
      pTm = Tk + m * *n;
      for (xx=0.0,pd = diagKPtSPKtKKt + k * *n,p1=pd + *n;pd < p1;pd++,pTm++) xx += *pd * *pTm;
      trA2[km] += 2*sp[k] *xx;
-     
+
      /* - sp[m] tr(TkKP'SmPK') */
      pTk = Tk + k * *n;
      for (xx=0.0,pd = diagKPtSPKt + m * *n,p1=pd + *n;pd < p1;pd++,pTk++) xx += *pd * *pTk;
      trA2[km] -= sp[m] *xx;
-     
+
      /* - sp[k] tr(TmKP'SkPK') */
      pTm = Tk + m * *n;
      for (xx=0.0,pd = diagKPtSPKt + k * *n,p1=pd + *n;pd < p1;pd++,pTm++) xx += *pd * *pTm;
@@ -1167,7 +1167,7 @@ void get_trA2(double *trA,double *trA1,double *trA2,double *P,double *K,double *
 
      /* 2 sp[m] sp[k] tr(KP'SkPP'SmPK') */
      trA2[km] += 2 * sp[k]*sp[m]*diagABt(work,PtSP + m * *r * *r,PtSPKtK + k * *r * *r,r,r);
-      
+
      trA2[mk] =trA2[km];
    } 
    /* clear up */
@@ -1274,7 +1274,7 @@ void pearson2(double *P, double *P1, double *P2,
         } 
     }
   } /* end of derivative summation */
-  
+
   /* clear up */
   if (deriv) {
     FREE(Pe1);FREE(Pi1);
@@ -1518,7 +1518,7 @@ void undrop_rows(double *X,int r,int c,int *drop,int n_drop)
 
    The assumption is that X is densely packed as (r-n_drop) by c on 
    entry.
-   
+
    `drop' *must* be in ascending order.
 */
 { double *Xs;
@@ -1577,21 +1577,21 @@ double *R,double *Q, int *nind,double *sp,double *rS,int *rSncol,int *q,int *n,
 
   RU1 = (double *)CALLOC((size_t) *q * *q ,sizeof(double));
   for (p1=RU1,p2=R,p3=R+ *q * *q;p2 < p3;p1++,p2++) *p1 = *p2;
- 
+
   drop_cols(RU1,*q,*q,drop,n_drop); /* drop the null space columns from R */ 
 
   /* A pivoted QR decomposition of RU1 is needed next */
   tau=(double *)CALLOC((size_t)qM,sizeof(double)); /* part of reflector storage */
   pivot=(int *)CALLOC((size_t)qM,sizeof(int));
-  
+
   mgcv_qr(RU1,q,&qM,pivot,tau); /* RU1 and tau now contain the QR decomposition information */
   /* pivot[i] gives the unpivoted position of the ith pivoted parameter.*/
-  
+
   /* Ri needed */
 
   Ri =  (double *)CALLOC((size_t) qM * qM,sizeof(double)); 
   Rinv(Ri,RU1,&qM,q,&qM); /* getting R^{-1} */
-  
+
   if (*type==0||*neg_w) { /* new Q factor needed explicitly */
     Qb = (double *)CALLOC((size_t) *q * qM,sizeof(double)); 
     for (i=0;i< qM;i++) Qb[i * *q + i] = 1.0;
@@ -1617,7 +1617,7 @@ double *R,double *Q, int *nind,double *sp,double *rS,int *rSncol,int *q,int *n,
     IQQ = (double *)CALLOC((size_t) k * qM,sizeof(double)); 
     bt=0;ct=0;mgcv_mmult(IQQ,IQ,Qb,&bt,&ct,&k,&qM,q); /* I^-Q_1 \bar Q is k by rank */
     FREE(IQ);
-     
+
     /* Get the SVD of IQQ */
     Vt = (double *)CALLOC((size_t) qM * qM,sizeof(double));
     d = (double *)CALLOC((size_t) qM,sizeof(double));
@@ -1634,7 +1634,7 @@ double *R,double *Q, int *nind,double *sp,double *rS,int *rSncol,int *q,int *n,
     /* Now form (I-2D^2)^.5 Vt and store in Vt... */
     for (p0=Vt,i=0;i<qM;i++)
     for (p1=d,p2=d+qM;p1<p2;p1++,p0++) *p0 *= *p1;
-    
+
     /* Form P */
     bt=0;ct=1;mgcv_mmult(P,Ri,Vt,&bt,&ct,&qM,&qM,&qM);
 
@@ -1649,7 +1649,7 @@ double *R,double *Q, int *nind,double *sp,double *rS,int *rSncol,int *q,int *n,
       FREE(work);
     }
     FREE(d);FREE(Vt);   
-    
+
   } else { /* no negative weights, so P and K can be obtained directly */
     ldetI2D = 0.0;
     /* Form P */
@@ -1668,21 +1668,21 @@ double *R,double *Q, int *nind,double *sp,double *rS,int *rSncol,int *q,int *n,
 
   for (ldetXWXS=0.0,i=0;i<qM;i++) ldetXWXS += log(fabs(RU1[i + i * *q])); 
   ldetXWXS *= 2;
- 
+
   ldetXWXS += ldetI2D; /* the negative weights correction */
-  
+
   FREE(RU1);
 
   /* rS also needs to have null space parts dropped, and to be pivoted... */
 
   drop_rows(rS,*q,ScS,drop,n_drop);   /* rS now rank by ScS */ 
   pivoter(rS,&qM,&ScS,pivot,&FALSE,&FALSE); /* row pivot of rS */
-  
+
   if (*type==0||*neg_w) FREE(Qb); else FREE(XU1);
   FREE(pivot);
 
   /* Now we have all the ingredients to obtain required derivatives of the log determinant... */
-  
+
   if (*deriv)
     get_ddetXWXpS(det1,det2,P,K,sp,rS,rSncol,Tk,Tkm,n,&qM,&qM,M,M0,deriv,*nthreads);
 
@@ -1711,7 +1711,7 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
 { int i,j,k,*pivot,nt1,nr,left,tp,bt,ct,TRUE=1,FALSE=0,one=1,rr;
   double *zz=NULL,*WX,*tau,*R1,Rnorm,Enorm,Rcond,*Q=NULL,*tau1,*Ri,ldetI2D,*IQ,*d,*p0,*p1,*p2,*p3,*p4,xx,norm1,norm2;
   nt1 = *nt;
-  
+
   if (*type==0) {
     zz = (double *)CALLOC((size_t)*n,sizeof(double)); /* storage for z=[sqrt(|W|)z,0] */
     for (i=0;i< *n;i++) { 
@@ -1728,24 +1728,24 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
     }
   }
   /* get the QR decomposition of WX */
- 
+
   tau=(double *)CALLOC((size_t) *q * (*nt + 1),sizeof(double)); /* part of reflector storage */
 
   pivot=(int *)CALLOC((size_t)*q,sizeof(int));
-  
+
   mgcv_pqr(WX,n,q,pivot,tau,&nt1); /* WX and tau now contain the QR decomposition information */
 
   /* pivot[i] gives the unpivoted position of the ith pivoted parameter.*/
-  
+
   /* copy out upper triangular factor R, and unpivot it */
- 
+
   rr = *q; if (*n < rr) rr = *n;
   R1 = (double *)CALLOC((size_t)rr * *q,sizeof(double));
- 
+
   getRpqr(R1,WX,n,q,&rr,&nt1);
 
   pivoter(R1,&rr,q,pivot,&TRUE,&TRUE); /* unpivoting the columns of R1 */
- 
+
   /* Form a nicely scaled version of [R',Es']' for rank determination */ 
   Rnorm = frobenius_norm(R1,&rr,q);
   Enorm =  frobenius_norm(Es,Enrow,q);
@@ -1754,13 +1754,13 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
     for (i=0;i< rr;i++) R[i + nr * j] = R1[i + rr * j]/Rnorm;
     for (i=0;i< *Enrow;i++) R[i + rr + nr * j] = Es[i + *Enrow * j]/Enorm;
   }
-  
+
   /* ... and now use it to establish rank */
-   
+
   tau1=(double *)CALLOC((size_t)*q,sizeof(double)); /* part of reflector storage */
 
   mgcv_qr(R,&nr,q,pivot1,tau1);
-  
+
   /* now actually find the rank of R */
   *rank = *q;if (nr < *rank) *rank = nr;
   R_cond(R,&nr,rank,work,&Rcond);
@@ -1795,16 +1795,16 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
     for (i=0;i< rr;i++) R[i + nr * j] = R1[i + rr * j];
       for (i=0;i< *Enrow;i++) R[i + rr + nr * j] = E[i + *Enrow * j];
   }
-   
+
   mgcv_qr(R,&nr,rank,pivot1,tau1); /* The final QR decomposition */ 
-  
+
   i=1;pivoter(nulli,rank,&i,pivot1,&FALSE,&FALSE); /* pivoting the rows of nulli */
 
   if (deriv2) { /* get first bit of X'WX (hessian of the deviance)*/
     pivoter(R1,&rr,rank,pivot1,&TRUE,&FALSE); /* pivot the columns of R1 */
     getXtX(dev_hess,R1,&rr,rank);    
   } 
-    
+
   /* Form Q1 = Qf Qs[1:q,] where Qf and Qs are orthogonal factors from first and final QR decomps
      respectively ... */
   if (neg_w || *type==0) { /* Q1 needed if neg_w correction needed, and anyway for type==0 */
@@ -1820,7 +1820,7 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
 
   Ri =  (double *)CALLOC((size_t) *rank * *rank,sizeof(double)); 
   Rinv(Ri,R,rank,&nr,rank); /* getting R^{-1} */
-  
+
 
   ldetI2D = 0.0; /* REML determinant correction */
   if (neg_w) { /* then the correction for the negative w_i has to be evaluated */
@@ -1831,7 +1831,7 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
       for (j=0;j < *rank;j++,p0+=k,p1+= *n) *p0 = *p1;
     }
     /* Note that IQ may be zero padded, for convenience */
-   
+
     d = (double *)CALLOC((size_t) *rank,sizeof(double));
     mgcv_svd_full(IQ,Vt,d,&k,rank); /* SVD of IQ */
     FREE(IQ);
@@ -1862,7 +1862,7 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
         d[i] = 1/work[i];
       }
     } /* d now contains diagonal of diagonal matrix (I-2D^2)^{-1/2} (possibly pseudoinverse) */
-    
+
     /* copy uppertriangle of R (nr by rank) temporarily to P (rank by rank)... */
     for (p0=P,i=0;i < *rank;i++) {
       for (p1 = R + i*nr,p2 = p1 + i;p1 <= p2;p1++,p0++) *p0 = *p1;
@@ -1882,10 +1882,10 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
 
     /* Form P */
     bt=0;ct=1;mgcv_pmmult(P,Ri,Vt,&bt,&ct,rank,rank,rank,nt);
-    
+
     /* Form K - or postpone if type!=0*/
     if (*type==0) mgcv_pmmult(K,Q1,Vt,&bt,&ct,n,rank,rank,nt);
-  
+
     FREE(d);   
   } else { /* no negative weights so Rh, P and K much simpler */
     if (*type==0) { /* Form K now */
@@ -1918,11 +1918,11 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
   */
 
   pivoter(rS,rank,&ScS,pivot1,&FALSE,&FALSE); /* row pivot of rS */
-  
+
   pivoter(E,Enrow,rank,pivot1,&TRUE,&FALSE);  /* column pivot of E */  
 
   pivoter(X,n,rank,pivot1,&TRUE,&FALSE);  /* column pivot of X */ 
- 
+
   if (*type==1) { /* create K = XP... */
     applyP(K,X,R,Vt,neg_w,nr,*rank,*n,1);
   } else {
@@ -1930,7 +1930,7 @@ void gdiPK(double *work,double *X,double *E,double *Es,double *rS,double *U1,dou
     bt=1;ct=0;mgcv_mmult(work,K,zz,&bt,&ct,rank,&one,n); /* K'z */ 
     mgcv_mmult(work + *q *2,Q1,zz,&bt,&ct,rank,&one,n); /* Q1'z */
   }
-  
+
   if (*type==1) { 
     bt=1;ct=0;mgcv_mmult(work,K,z,&bt,&ct,rank,&one,n); /* K'Wz */
     applyP(PKtz,work,R,Vt,neg_w,nr,*rank,1,0);
@@ -1972,7 +1972,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
 	  int *n,int *q, int *M,int *n_theta, int *Mp,int *Enrow,int *rSncol,int *deriv,
 	  int *fixed_penalty,int *nt,int *type,double *dVkk)     
 /* Extended GAM derivative function, for independent data beyond exponential family.
-   
+
    On entry *ldet < 0 indicates that ML ingredients should be computed, else REML 
 
    type == 0 is the original computation involving (|w|)^{-1}dw/drho whereas type == 1
@@ -1985,7 +1985,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
    This version deals properly with negative weights, which can occur with Newton based 
    PIRLS. In consequence w's in this routine are proportional to reciprocal variances,
    not reciprocal standard deviations.
-  
+
    The function is to be called at convergence of a P-IRLS scheme, estimating model coefficients 
    by P-IRLS.
 
@@ -2045,10 +2045,10 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
 
    The method involves first and second derivatives of a number of k-vectors wrt
    log smoothing parameters (\rho), where k is q or n. Consider such a vector, v. 
-   
+
    * v1 will contain dv/d\rho_0, dv/d\rho_1 etc. So, for example, dv_i/d\rho_j
      (indices starting at zero) is located in v1[q*j+i].
-   
+
    * v2 will contain d^2v/d\rho_0d\rho_0, d^2v/d\rho_1d\rho_0,... but rows will not be
      stored if they duplicate an existing row (e.g. d^2v/d\rho_0d\rho_1 would not be 
      stored as it already exists and can be accessed by interchanging the sp indices).
@@ -2065,7 +2065,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
   int i,j,k,*pivot1,ScS,*pi,rank,*pivot,
     ntot,n_2dCols=0,n_drop,*drop,tp,
     n_work,deriv2,neg_w=0,*nind,nr,TRUE=1,FALSE=0,ML=0; 
- 
+
   #ifdef OPENMP_ON
   int m;
   m = omp_get_num_procs(); /* detected number of processors */
@@ -2110,7 +2110,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
     nind = (int *)CALLOC((size_t)neg_w,sizeof(int)); /* index the negative w_i */
     k=0;for (i=0;i< *n;i++) if (w[i]<0) { nind[k]=i;k++;}
   } else { nind = (int *)NULL; Vt = (double *)NULL;}
-  
+
   /* get  R,nulli,dev_hess,P,K,Vt,PKtz (== beta),Q1, nind,pivot1,drop,rank,n_drop,ldetXWXS */
   if (*type==1) z=wz; /* need to pass wz to gdiPK */ 
   //j=1; // debug &j for nt
@@ -2121,7 +2121,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
         &rank,&n_drop,
         deriv2,ScS,&TRUE,
       rank_tol,ldet,type);
-       
+
   FREE(raw);
 
   /* now call ift2 to get derivatives of coefs w.r.t. smoothing/theta parameters */
@@ -2138,7 +2138,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
           Det_th,Det2_th,Det3,Det_th2,
           b1,b2,eta1,eta2,
           n,&rank,M,n_theta,rSncol,&deriv2,&neg_w,&nr);
-    
+
     if (*M>0) {
       i=0;mgcv_mmult(work,Rh,b1,&i,&i,&rank,M,&rank); /* Rh db/drho */
       /* Now obtain dVkk = db'/drho Rh' Rh db/drho ... */
@@ -2177,7 +2177,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
   } /* if (*deriv) */
 
   /* Obtain the derivatives of the weights w.r.t. theta, sp */
-  
+
   if (*deriv) {
     /* first derivs... */
     p0 = w1; // = (double *)CALLOC((size_t) *n * ntot,sizeof(double)); 
@@ -2216,7 +2216,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
         for (;p0 < p5;p0++) *p0 *= .5;
       }
     } /* end of 2nd derivs */
-    
+
     if (*type==0) { /* form |w|^{-1}dw/drho etc... */
       /* a useful array for Tk and Tkm */
       wi=(double *)CALLOC((size_t)*n,sizeof(double)); 
@@ -2244,7 +2244,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
     }
   }
   /* the derivatives of b'S'b w.r.t. all parameters [theta,sp] */
-  
+
   get_bSb(P0,P1,P2,sp,E,rS,rSncol,Enrow,&rank,M,n_theta,PKtz,b1,b2,deriv);
 
   /* Now get the derivatives of log|X'WX+S| w.r.t. all parameters [theta,sp] */ 
@@ -2254,9 +2254,9 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
 		       &rank,n,Mp,M,n_theta,&neg_w,rank_tol,deriv,nt,type);
 
   } else get_ddetXWXpS(ldet1,ldet2,P,K,sp,rS,rSncol,Tk,Tkm,n,&rank,&rank,M,n_theta,deriv,*nt); 
-  
+
   if (*deriv) { /* unpivot and zero pad b1 */
-    
+
     for (j = ntot - 1;j>=0;j--) { 
       p0 = b1 + rank * j; /* start of source column */
       for (i=0;i< rank;i++) beta[pivot1[i]] = p0[i];
@@ -2271,7 +2271,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
 
   /* get rV and K using E(W)... these things are needed in order to compute 
      effective degrees of freedom safely, and for posterior inference, */
-    
+
   /* form sqrt(wf)X augmented with E */
   nr = *n + *Enrow;
   WX = (double *) CALLOC((size_t) ( (nr + *nt * rank) * rank),sizeof(double));
@@ -2307,7 +2307,7 @@ void gdi2(double *X,double *E,double *Es,double *rS,double *U1,
   for (p0 = X + rank * *n,p1 = X + *q * *n;p0<p1;p0++) *p0 = 0.0;
 
   /* ... now X contains K and rV%*%t(rV)*scale is the covariance matrix */
-  
+
   /* and tidy up */
 
   *rank_est = rank;
@@ -2352,7 +2352,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
    This version deals properly with negative weights, which can occur with Newton based 
    PIRLS. In consequence w's in this routine are proportional to reciprocal variances,
    not reciprocal standard deviations.
-  
+
    The function is to be called at convergence of a P-IRLS scheme so that 
    z, w, mu and functions of these can be treated as fixed, and only the 
    derivatives need to be updated.
@@ -2427,10 +2427,10 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
 
    The method involves first and second derivatives of a number of k-vectors wrt
    log smoothing parameters (\rho), where k is q or n. Consider such a vector, v. 
-   
+
    * v1 will contain dv/d\rho_0, dv/d\rho_1 etc. So, for example, dv_i/d\rho_j
      (indices starting at zero) is located in v1[q*j+i].
-   
+
    * v2 will contain d^2v/d\rho_0d\rho_0, d^2v/d\rho_1d\rho_0,... but rows will not be
      stored if they duplicate an existing row (e.g. d^2v/d\rho_0d\rho_1 would not be 
      stored as it already exists and can be accessed by interchanging the sp indices).
@@ -2450,7 +2450,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   int i,j,k,*pivot=NULL,*pivot1,ScS,*pi,rank,tp,bt,ct,iter=0,m,one=1,
     n_2dCols=0,n_b2,n_drop,*drop,nt1,
       n_eta1=0,n_eta2=0,n_work,deriv2,neg_w=0,*nind,nr,TRUE=1,FALSE=0; 
-  
+
   #ifdef OPENMP_ON
   m = omp_get_num_procs(); /* detected number of processors */
   if (*nt > m || *nt < 1) *nt = m; /* no point in more threads than m */
@@ -2474,7 +2474,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   n_work = (4 * *n + 2 * *q) * *M + 2 * *n; 
   k = 5 * *q; if (n_work < k) n_work = k;
   k = (*M * (1 + *M))/2 * *n; if (n_work < k) n_work = k;
- 
+
   work = (double *)CALLOC((size_t) n_work,sizeof(double)); /* work space for several routines*/
   nr = *q + *Enrow;
   R = (double *)CALLOC((size_t)*q * nr,sizeof(double));
@@ -2494,7 +2494,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
     nind = (int *)CALLOC((size_t)neg_w,sizeof(int)); /* index the negative w_i */
     k=0;for (i=0;i< *n;i++) if (w[i]<0) { nind[k]=i;k++;}
   } else { nind = (int *)NULL; Vt = (double *)NULL;}
-  
+
   /* get  R,nulli,dev_hess,P,K,Vt,PKtz,Q1, nind,pivot1,drop,rank,n_drop,ldetXWXS */
   gdiPK(work,X,E,Es,rS,U1,z,raw,
         R,Rh,nulli,dev_hess,P,K,Vt,PKtz,Q1,
@@ -2503,7 +2503,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
         &rank,&n_drop,
         deriv2,ScS,REML,
         rank_tol,&ldetXWXS,&FALSE);
-       
+
   /************************************************************************************/
   /* free some memory */                    
   /************************************************************************************/
@@ -2516,43 +2516,43 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
     n_2dCols = (*M * (1 + *M))/2;
     n_b2 = rank * n_2dCols;
     b2 = (double *)CALLOC((size_t)n_b2,sizeof(double)); /* 2nd derivs of beta */
-   
+
     //n_b1 = rank * *M;
     //b1 = (double *)CALLOC((size_t)n_b1,sizeof(double)); /* 1st derivs of beta */
-   
+
     n_eta1 = *n * *M;
     eta1 = (double *)CALLOC((size_t)n_eta1,sizeof(double));
     Tk = (double *)CALLOC((size_t)n_eta1,sizeof(double));
-   
+
     //w1 = (double *)CALLOC((size_t)n_eta1,sizeof(double));
 
     n_eta2 = *n * n_2dCols;
     eta2 = (double *)CALLOC((size_t)n_eta2,sizeof(double));
     Tkm = (double *)CALLOC((size_t)n_eta2,sizeof(double));
-  
+
     w2 = (double *)CALLOC((size_t)n_eta2,sizeof(double));
 
- 
+
     v1 = work;v2=work + *n * *M; /* a couple of working vectors */ 
-   
+
     /* Set up constants involved updates (little work => leave readable!)*/
-  
+
     a1=(double *)CALLOC((size_t)*n,sizeof(double));  
     a2=(double *)CALLOC((size_t)*n,sizeof(double));
     alpha1=alpha2 =(double *)NULL;
     if (*fisher) { /* Fisher scoring updates */
-   
+
       /* set up constants involved in w updates */
       /* dw/deta = - w[i]*(V'/V+2g''/g')/g' */
       for (i=0;i< *n;i++) a1[i] = -  w[i] *(V1[i] + 2*g2[i])/g1[i];
-     
-      
+
+
       /* d2w/deta2 .... */
       for (i=0;i< *n;i++) 
         a2[i] = a1[i]*(a1[i]/w[i]-g2[i]/g1[i]) - w[i]*(V2[i]-V1[i]*V1[i] + 2*g3[i]-2*g2[i]*g2[i])/(g1[i]*g1[i]) ;
 
     } else { /* full Newton updates */
-      
+
       alpha1 = (double *) CALLOC((size_t)*n,sizeof(double));
       alpha2 = (double *) CALLOC((size_t)*n,sizeof(double));
       for (i=0;i< *n;i++) {
@@ -2560,10 +2560,10 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
         alpha1[i] = (-(V1[i]+g2[i]) + (y[i]-mu[i])*xx)/alpha[i];
         alpha2[i] = (-2*xx + (y[i]-mu[i])*(V3[i]-3*V1[i]*V2[i]+2*V1[i]*V1[i]*V1[i]+g4[i]-3*g3[i]*g2[i]+2*g2[i]*g2[i]*g2[i]))/alpha[i];
       }
-    
+
       /* end of preliminaries, now setup the multipliers that go forward */
 
-   
+
       /* dw/deta ... */
       for (i=0;i<*n;i++) a1[i] = w[i]*(alpha1[i]-V1[i]-2*g2[i])/g1[i];
       /* d2w/deta2... */
@@ -2582,18 +2582,18 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
 
 
       FREE(alpha1);FREE(alpha2);
-      
+
     } /* end of full Newton setup */
 
     /* get gradient vector and Hessian of deviance wrt coefficients */
     for (i=0;i< *n ;i++) v1[i] = -2*p_weights[i]*(y[i]-mu[i])/(V0[i]*g1[i]);
     dev_grad=(double *)CALLOC((size_t) rank,sizeof(double));
     bt=1;ct=0;mgcv_mmult(dev_grad,X,v1,&bt,&ct,&rank,&one,n);
-    
+
     if (deriv2) { /* get hessian of deviance w.r.t. beta */
        for (p0=dev_hess,p1=p0 + rank * rank;p0<p1;p0++) *p0 *= 2.0;      
     } 
-  
+
   } /* end of if (*deriv) */ 
   else { /* keep compilers happy */
     v1=v2=b1=(double *)NULL;
@@ -2639,10 +2639,10 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
     for (i=0;i< *n;i++) { wi[i]=1/fabs(w[i]);}
 
     /* get Tk and Tkm */
-      
+
     rc_prod(Tk,wi,w1,M,n); 
     if (deriv2) rc_prod(Tkm,wi,w2,&n_2dCols,n);
-    
+
     if (! *REML && ! *fisher) { /* then Fisher based versions of Tk and Tkm needed */ 
       rc_prod(w1,af1,eta1,M,n); /* w1 = dwf/d\rho_k done */
         Tfk = (double *)CALLOC((size_t)n_eta1,sizeof(double));
@@ -2666,10 +2666,10 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
     /* evaluate gradient and Hessian of deviance */
 
     bt=1;ct=0;mgcv_mmult(D1,b1,dev_grad,&bt,&ct,M,&one,&rank); /* gradient of deviance is complete */
-      
+
     if (deriv2) {       
       getXtMX(D2,b1,dev_hess,&rank,M,v1);
-          
+
       for (pb2=b2,m=0;m < *M;m++) for (k=m;k < *M;k++) { /* double sp loop */
           p1 = dev_grad + rank;  
           for (xx=0.0,p0=dev_grad;p0<p1;p0++,pb2++) xx += *p0 * *pb2;
@@ -2703,7 +2703,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   }
 
   pearson2(P0,P1,P2,y,mu,V0,V1,V2,g1,g2,p_weights,eta1,eta2,*n,*M,*deriv,deriv2);
-  
+
   if (*REML) { /* really want scale estimate and derivatives in P0-P2, so rescale */
     j = *n - *Mp;
     i = 0; /* set to 1 to use penalized pearson statistic as basis for scale estimate */
@@ -2719,9 +2719,9 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   }
 
 
-  
+
   if (*deriv) { /* unpivot and zero pad b1 */
-    
+
     for (j = *M-1;j>=0;j--) {
       p0 = b1 + rank * j; /* start of source column */
       for (i=0;i< rank;i++) beta[pivot1[i]] = p0[i];
@@ -2735,7 +2735,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   undrop_rows(beta,*q,1,drop,n_drop); /* zero rows inserted */
 
 
- 
+
   /* Now get the REML penalty */
 
   if (*REML>0) { /* It's REML */
@@ -2745,12 +2745,12 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
   } /* So trA1 and trA2 actually contain the derivatives for reml_penalty */
 
   if (*REML<0) { /* it's ML, and more complicated */
-    
+
     /* get derivs of ML log det in trA1 and trA2... */
 
     reml_penalty =  MLpenalty1(trA1,trA2,Tk,Tkm,nulli,X,R,Q1,nind,sp,rS,rSncol,
 			       &rank,n,Mp,M,&FALSE,&neg_w,rank_tol,deriv,nt,&FALSE);
-    
+
     FREE(R);FREE(Q1);FREE(nind);
   } /* note that rS scrambled from here on... */
 
@@ -2760,7 +2760,7 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
 
   if (neg_w) FREE(Vt);   
   FREE(work);FREE(PKtz);
- 
+
   if (*deriv) {
     //FREE(b1);
     FREE(eta1);
@@ -2771,13 +2771,13 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
 
     if (deriv2) { FREE(dev_hess);}
   }
-  
+
   /* Note: the following gets only trA if REML is being used,
            so as not to overwrite the derivatives actually needed,
            which also means that it doesn't matter if MLpenalty
            has messed up rS */
 
-  
+
   if (*fisher) { /* then all quantites are the ones required for EDF calculations */ 
     wf = w;Tfk=Tk;Tfkm=Tkm;
   } else { /* Need expected value versions of everything for EDF calculation */
@@ -2815,10 +2815,10 @@ void gdi1(double *X,double *E,double *Es,double *rS,double *U1,
     for (p1=Q,p0=K,j=0;j<rank;j++,p1 += *Enrow) for (i=0;i<*n;i++,p1++,p0++) *p0 = *p1;
     FREE(Q);FREE(WX);FREE(tau);
     if (*deriv)  pivoter(rS,&rank,&ScS,pivot,&FALSE,&FALSE); /* apply the latest pivoting to rows of rS */
-    
+
   }
 
- 
+
   if (*REML) i=0; else i = *deriv;
   get_trA2(trA,trA1,trA2,P,K,sp,rS,rSncol,Tfk,Tfkm,wf,n,&rank,&rank,M,&i,nt);
 
@@ -2920,7 +2920,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
 
    Also has the option to not test, but simply use X'Wy directly, if *use_wy is non-zero. This is 
    useful in situations in which y is pseudodata involving a reciprocal w and some w_i is zero.  
-   
+
    Note that here E'E = S, while Es'Es = `well scaled version of S'   
 
    In this version the w_i are the w_i in \sum_i w_i (y_i - X_i \beta)^2
@@ -2932,7 +2932,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
    to nt.
 
    On return:
-   
+
    * if *n is -ve then X'WX+E'E was not +ve definite (which means that the routine should be
      called again with weights based on Fisher scoring).
 
@@ -2949,7 +2949,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
     *R1,*tau1,Rnorm,Enorm,*R,*Xp;
   #ifdef OPENMP_ON
   int m;
- 
+
   m = omp_get_num_procs(); /* detected number of processors */
   if (*nt > m || *nt < 1) *nt = m; /* no point in more threads than m */
   omp_set_num_threads(*nt); /* set number of threads to use */
@@ -2961,7 +2961,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
   nz = *n; if (nz<nr) nz=nr; /* possible for nr to be more than n */
   z = (double *)CALLOC((size_t) nz,sizeof(double)); /* storage for z=[sqrt(|W|)z,0] */
   raw = (double *)CALLOC((size_t) *n,sizeof(double)); /* storage for sqrt(|w|) */
-  
+
   for (i=0;i< *n;i++) 
     if (w[i]<0) { neg_w++;raw[i] = sqrt(-w[i]);} 
     else raw[i] = sqrt(w[i]);
@@ -2989,43 +2989,43 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
   /* get the QR decomposition of WX */
   /* st tau=(double *)CALLOC((size_t)*q,sizeof(double)); */ /* part of reflector storage */
   tau=(double *)CALLOC((size_t) *q * (*nt + 1),sizeof(double)); 
-  
+
   pivot=(int *)CALLOC((size_t)*q,sizeof(int));
-  
+
   /* st mgcv_qr(WX,n,q,pivot,tau); */ /* WX and tau now contain the QR decomposition information */
   mgcv_pqr(WX,n,q,pivot,tau,nt);
 
   /* pivot[i] gives the unpivoted position of the ith pivoted parameter.*/
-  
+
   /* copy out upper triangular factor R, and unpivot it */
   R1 = (double *)CALLOC((size_t) rr * *q,sizeof(double));
   /* st for (i=0;i<*q;i++) for (j=i;j<*q;j++) R1[i + *q * j] = WX[i + *n * j]; */ 
   getRpqr(R1,WX,n,q,&rr,nt);
-  
+
   pivoter(R1,&rr,q,pivot,&TRUE,&TRUE); /* unpivoting the columns of R1 */
- 
+
   /* Form a nicely scaled version of [R',Es']' for rank determination */ 
   Rnorm = frobenius_norm(R1,&rr,q);
   Enorm =  frobenius_norm(Es,rE,q);
- 
+
   R = (double *)CALLOC((size_t)*q * nr,sizeof(double));
   for (j=0;j<*q;j++) { 
     for (i=0;i< rr;i++) R[i + nr * j] = R1[i + rr * j]/Rnorm;
     for (i=0;i< *rE;i++) R[i + rr + nr * j] = Es[i + *rE * j]/Enorm;
   }
-  
+
   /* ... and now use it to establish rank */
-   
+
   tau1=(double *)CALLOC((size_t)*q,sizeof(double)); /* part of reflector storage */
   pivot1=(int *)CALLOC((size_t)*q,sizeof(int));
   mgcv_qr(R,&nr,q,pivot1,tau1);
-  
+
   /* now actually find the rank of R */
   work = (double *)CALLOC((size_t)(4 * *q),sizeof(double));
   rank = *q; if (nr < rank) rank = nr;
   R_cond(R,&nr,&rank,work,&Rcond);
   while (*rank_tol * Rcond > 1) { rank--;R_cond(R,&nr,&rank,work,&Rcond);}
-  
+
   /* Now have to drop the unidentifiable columns from R1, E and the corresponding rows from rS
      The columns to drop are indexed by the elements of pivot1 from pivot1[rank] onwards.
      Before returning, zeros will need to be inserted in the parameter vector at these locations. 
@@ -3051,7 +3051,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
   }
   FREE(R1);
   mgcv_qr(R,&nr,&rank,pivot1,tau1); /* The final QR decomposition */ 
-  
+
 
   if (neg_w) { /* then the correction for the negative w_i has to be evaluated */
     Q = (double *)CALLOC((size_t) nr * rank,sizeof(double)); 
@@ -3063,7 +3063,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
     /* st left=1;tp=0;mgcv_qrqy(Q1,WX,tau,n,&rank,q,&left,&tp); */ /* Q1 = Qb Q[1:q,]  where Qb from first QR decomposition */   
     for (i=0;i<rr;i++) for (j=0;j<rank;j++) Q1[i + rr * j] = Q[i + nr * j];
     tp=0;mgcv_pqrqy(Q1,WX,tau,n,&rr,&rank,&tp,nt);/* Q1 = Qb Q[1:rr,]  where Qb from first QR decomposition (contained in WX, tau) */   
-    
+
     FREE(Q);
 
     if (neg_w < rank+1) k = rank+1; else k = neg_w;
@@ -3100,18 +3100,18 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
     for (i=j;i<nz;i++) z[i]=0.0;
     left=1,tp=1; 
     mgcv_qrqy(z,R,tau1,&nr,&one,&rank,&left,&tp); /* z = Q1'Q'z, where Q1 is the first rank rows of second orth factor */
- 
+
     for (i=rank;i < nz;i++) z[i]=0.0;
 
     for (i=0;i<rank;i++) y[i] = work[i+*q] = z[i];        /* y = Q'z, or corrected version, for finding beta */ 
-    
+
     if (neg_w) { /* apply the correction factor for negative w_i terms */
        bt=0;ct=0;mgcv_mmult(work,Vt,z,&bt,&ct,&rank,&one,&rank); /* V' Q_1' z */
        for (i=0;i<rank;i++) work[i] *= d[i];
        bt=1;ct=0;mgcv_mmult(z,Vt,work,&bt,&ct,&rank,&one,&rank); /* V (I-2D^2)^{-1} V' Q1' Q' z */
        for (i=0;i<rank;i++) y[i] = z[i];
     }
-  
+
     left=1,tp=0; mgcv_qrqy(z,R,tau1,&nr,&one,&rank,&left,&tp); /* z = Q1 Q1'Q'z */
 
     for (*penalty=0.0,i=rank;i<nr;i++) *penalty += z[i]*z[i]; /* the penalty term */
@@ -3128,7 +3128,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
   bt=1;ct=0;mgcv_mmult(work,X,wy,&bt,&ct,q,&one,n);     
   drop_rows(work,*q,1,drop,n_drop);
   pivoter(work,&rank,&one,pivot1,&FALSE,&FALSE);  
-  
+
   if (!*use_wy) { /* Test R'Q'wz = X'Wz - not equal implies stability loss */ 
     for (zz=zz1=0,i=0;i<rank;i++) {
       for (xx=0,j=0;j<=i;j++) xx += R[j + nr * i] * work[*q + j];
@@ -3152,7 +3152,7 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
     } 
     for (i=0;i<rank;i++) y[i] = z[i];
   } /* end of alternative computation */
- 
+
   /* now find  \hat \beta = R^{-1}Q'z, which are needed if P-IRLS starts to diverge
      in order to be able to evaluate penalty on step reduction */ 
 
@@ -3165,9 +3165,9 @@ void pls_fit1(double *y,double *X,double *w,double *wy,double *E,double *Es,int 
   for (i=0;i< rank;i++) y[pivot1[i]] = z[i];
   /* insert zeroes for unidentifiables */
   undrop_rows(y,*q,1,drop,n_drop); 
-  
+
   if (*use_wy) { /* re-compute other results from beta, as originals appear unstable or this method requested */
-   
+
     bt=0;ct=0;mgcv_mmult(eta,X,y,&bt,&ct,n,&one,q);
     bt=0;ct=0;mgcv_mmult(work,E,y,&bt,&ct,rE,&one,q);
     for (*penalty=0.0,i=0;i < *rE;i++) *penalty += work[i]*work[i]; /* the penalty term */

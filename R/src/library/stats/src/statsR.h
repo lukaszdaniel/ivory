@@ -18,7 +18,7 @@
  */
 
 /* auxiliary */
-SEXP getListElement(SEXP list, char *str);
+SEXP getListElement(SEXP list, const char *str);
 
 /* Declarations for .Call entry points */
 
@@ -34,7 +34,7 @@ SEXP Cdist(SEXP x, SEXP method, SEXP attrs, SEXP p);
 SEXP r2dtable(SEXP n, SEXP r, SEXP c);
 SEXP cor(SEXP x, SEXP y, SEXP na_method, SEXP method);
 SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP method);
-SEXP updateform(SEXP old, SEXP new);
+SEXP updateform(SEXP old, SEXP new_);
 SEXP fft(SEXP z, SEXP inverse);
 SEXP mvfft(SEXP z, SEXP inverse);
 SEXP nextn(SEXP n, SEXP factors);

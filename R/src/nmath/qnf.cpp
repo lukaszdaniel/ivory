@@ -24,7 +24,7 @@ double Rf_qnf(double p, double df1, double df2, double ncp, int lower_tail,
 	   int log_p)
 {
     double y;
-    
+
 #ifdef IEEE_754
     if (ISNAN(p) || ISNAN(df1) || ISNAN(df2) || ISNAN(ncp))
 	return p + df1 + df2 + ncp;

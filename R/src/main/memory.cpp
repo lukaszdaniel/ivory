@@ -168,9 +168,7 @@ int R_gc_running() { return R_in_gc; }
 /* Before a node is marked as a FREESXP by the collector the previous
    type is recorded.  For now using the LEVELS field seems
    reasonable.  */
-//#define OLDTYPE(s) LEVELS(s)
 inline int OLDTYPE(SEXP x) { return LEVELS(x); }
-//#define SETOLDTYPE(s, t) SETLEVELS(s, t)
 inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 
 R_INLINE static SEXP CHK(SEXP x)
@@ -261,15 +259,17 @@ static void R_ReportAllocation(R_size_t);
 static void R_ReportNewPage();
 #endif
 
-#define GC_PROT(X) do { \
-    int __wait__ = gc_force_wait; \
-    int __gap__ = gc_force_gap;			   \
-    Rboolean __release__ = gc_inhibit_release;	   \
-    X;						   \
-    gc_force_wait = __wait__;			   \
-    gc_force_gap = __gap__;			   \
-    gc_inhibit_release = __release__;		   \
-}  while(0)
+#define GC_PROT(X)                                 \
+    do                                             \
+    {                                              \
+        int __wait__ = gc_force_wait;              \
+        int __gap__ = gc_force_gap;                \
+        Rboolean __release__ = gc_inhibit_release; \
+        X;                                         \
+        gc_force_wait = __wait__;                  \
+        gc_force_gap = __gap__;                    \
+        gc_inhibit_release = __release__;          \
+    } while (0)
 
 static void R_gc_internal(R_size_t size_needed);
 static void R_gc_no_finalizers(R_size_t size_needed);
@@ -680,11 +680,11 @@ static R_size_t R_NodesInUse = 0;
    part of a hash chain.  Theoretically, for CHARSXPs the ATTRIB field
    should always be either R_NilValue or a CHARSXP. */
 #ifdef PROTECTCHECK
-#define HAS_GENUINE_ATTRIB(x) \
+#define HAS_GENUINE_ATTRIB(x)                           \
     (TYPEOF(x) != FREESXP && ATTRIB(x) != R_NilValue && \
      (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #else
-#define HAS_GENUINE_ATTRIB(x) \
+#define HAS_GENUINE_ATTRIB(x)   \
     (ATTRIB(x) != R_NilValue && \
      (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
 #endif
@@ -1346,13 +1346,13 @@ static SEXP R_weak_refs = NULL;
 #define CLEAR_READY_TO_FINALIZE(s) ((s)->sxpinfo.gp &= ~READY_TO_FINALIZE_MASK)
 #define IS_READY_TO_FINALIZE(s) ((s)->sxpinfo.gp & READY_TO_FINALIZE_MASK)
 
-#define FINALIZE_ON_EXIT_MASK 2
+#define FINALIZE_ON_EXIT_MASK 1 << 1
 
 #define SET_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp |= FINALIZE_ON_EXIT_MASK)
 #define CLEAR_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK)
 #define FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp & FINALIZE_ON_EXIT_MASK)
 
-#define WEAKREF_SIZE 4
+#define WEAKREF_SIZE 1 << 2
 #define WEAKREF_KEY(w) VECTOR_ELT(w, 0)
 #define SET_WEAKREF_KEY(w, k) SET_VECTOR_ELT(w, 0, k)
 #define WEAKREF_VALUE(w) VECTOR_ELT(w, 1)
@@ -1464,7 +1464,7 @@ static R_CFinalizer_t GetCFinalizer(SEXP fun)
 SEXP R_WeakRefKey(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+        error(_("not a weak reference"));
     return WEAKREF_KEY(w);
 }
 
@@ -1472,10 +1472,10 @@ SEXP R_WeakRefValue(SEXP w)
 {
     SEXP v;
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+        error(_("not a weak reference"));
     v = WEAKREF_VALUE(w);
     if (v != R_NilValue)
-	ENSURE_NAMEDMAX(v);
+        ENSURE_NAMEDMAX(v);
     return v;
 }
 
@@ -3940,10 +3940,12 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
    that even zero-length vectors have non-NULL data pointers, so
    return (void *) 1 instead. Zero-length CHARSXP objects still have a
    trailing zero byte so they are not handled. */
-#define CHKZLN(x) do {					   \
-	CHK(x);						   \
-	if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
-	    return (void *) 1;				   \
+#define CHKZLN(x)                                          \
+    do                                                     \
+    {                                                      \
+        CHK(x);                                            \
+        if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
+            return (void *)1;                              \
     } while (0)
 #else
 #define CHKZLN(x) do { } while (0)
@@ -4141,11 +4143,14 @@ void (SET_BNDCELL_LVAL)(SEXP cell, int v) { SET_BNDCELL_LVAL(cell, v); }
 HIDDEN
 void (INIT_BNDCELL)(SEXP cell, int type) { INIT_BNDCELL(cell, type); }
 
-#define CLEAR_BNDCELL_TAG(cell) do {		\
-	if (BNDCELL_TAG(cell)) {		\
-	    CAR0(cell) = R_NilValue;		\
-	    SET_BNDCELL_TAG(cell, 0);		\
-	}					\
+#define CLEAR_BNDCELL_TAG(cell)       \
+    do                                \
+    {                                 \
+        if (BNDCELL_TAG(cell))        \
+        {                             \
+            CAR0(cell) = R_NilValue;  \
+            SET_BNDCELL_TAG(cell, 0); \
+        }                             \
     } while (0)
 
 HIDDEN
@@ -4490,7 +4495,6 @@ int  (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 /*******************************************/
 
 #ifndef R_MEMORY_PROFILING
-extern "C"
 NORET SEXP do_Rprofmem(SEXP args)
 {
     error(_("memory profiling is not available on this system"));
@@ -4562,7 +4566,6 @@ static void R_InitMemReporting(SEXP filename, int append,
     return;
 }
 
-extern "C"
 SEXP do_Rprofmem(SEXP args)
 {
     SEXP filename;

@@ -35,7 +35,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-// called also from dgamma.c, pgamma.c, dnbeta.c, dnbinom.c, dnchisq.c :
+// called also from dgamma.cpp, pgamma.cpp, dnbeta.cpp, dnbinom.cpp, dnchisq.cpp :
 double Rf_dpois_raw(double x, double lambda, int give_log)
 {
     /*       x >= 0 ; integer for dpois(), but not e.g. for Rf_pgamma()!

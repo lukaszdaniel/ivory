@@ -23,7 +23,7 @@
  *
  * to be called as  .C(.)  in ../R/lqs.R
  */
- 
+
 #include <math.h>  // currently in R.h
 #include <stddef.h>  // currently in R.h
 

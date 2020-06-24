@@ -33,7 +33,7 @@ SEXP agmart3(SEXP nused2,  SEXP surv2,  SEXP score2, SEXP weight2,
     double temp, dtime =0;  /* =0 to stop a -Wall message */
     double wtsum;
     int nr, person1, person2, nused;
- 
+
     /* pointers to the input data */
     double *tstart, *tstop, *event;
     double *weight, *score;
@@ -134,7 +134,7 @@ SEXP agmart3(SEXP nused2,  SEXP surv2,  SEXP score2, SEXP weight2,
 		resid[p1] -= cumhaz * score[p1];
             }
 	}
-	
+
 	/*
         **  Add in new subjects 
         */
@@ -159,7 +159,7 @@ SEXP agmart3(SEXP nused2,  SEXP surv2,  SEXP score2, SEXP weight2,
 		resid[p2] = cumhaz * score[p2];
 	    }
 	}		    
-	
+
 	/* compute the increment in hazard 
 	** hazard = usual increment
 	** e_hazard = efron increment, for tied deaths only
@@ -197,6 +197,6 @@ SEXP agmart3(SEXP nused2,  SEXP surv2,  SEXP score2, SEXP weight2,
     UNPROTECT(1);
     return(resid2);
 }
-	
-	    
-	    
+
+
+

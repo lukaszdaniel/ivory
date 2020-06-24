@@ -3641,7 +3641,7 @@ static const int table_wxdigit_count =
  *
  *    And reflecting practices in glibc's wcwidth()
  */
- 
+
 static const struct interval zero_width[] = {
     { 0x0000, 0x001F }, { 0x007F, 0x009F }, { 0x0300, 0x036F },
     { 0x0483, 0x0489 }, { 0x0591, 0x05BD }, { 0x05BF, 0x05BF },

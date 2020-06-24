@@ -16,7 +16,7 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
- 
+
 unsigned long rlogo_icon[] = {
 99, 77,0x00000000,
 0x00000000,

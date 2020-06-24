@@ -37,8 +37,8 @@
 
 static void GLPretty(double *ul, double *uh, int *n);
 
-/* used in GScale() (../library/graphics/src/graphics.c), but also in
-                     ../library/grDevices/src/axis_scales.c : */
+/* used in GScale() (../library/graphics/src/graphics.cpp), but also in
+                     ../library/grDevices/src/axis_scales.cpp : */
 // (usr, log, n_inp) |--> (axp = (min, max), n_out) :
 void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis)
 {

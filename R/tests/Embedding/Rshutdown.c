@@ -18,8 +18,7 @@ main(int argc, char *argv[])
     R_embeddedShutdown(FALSE);
 }
 
-int
-callLength(SEXP obj)
+int callLength(SEXP obj)
 {
     SEXP e, val;
     int errorOccurred;
@@ -29,13 +28,12 @@ callLength(SEXP obj)
     val = R_tryEval(e, R_GlobalEnv, &errorOccurred);
     len = INTEGER(val)[0];
     UNPROTECT(1);
-   
+
     return(len);
 }
 
 
-int 
-R_embeddedShutdown(Rboolean ask)
+int R_embeddedShutdown(Rboolean ask)
 {
 
     R_dot_Last();

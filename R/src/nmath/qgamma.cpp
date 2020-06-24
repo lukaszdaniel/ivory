@@ -120,7 +120,7 @@ double Rf_qgamma(double p, double alpha, double scale, int lower_tail, int log_p
 constexpr double EPS1 = 1e-2;
 constexpr double EPS2 = 5e-7;				   /* final precision of AS 91 */
 constexpr double EPS_N = 1e-15;				   /* precision of Newton step / iterations */
-constexpr double LN_EPS = -36.043653389117156; /* = log(.Machine$double.eps) iff IEEE_754 */
+//constexpr double LN_EPS = -36.043653389117156; /* = log(.Machine$double.eps) iff IEEE_754 */
 
 constexpr int MAXIT = 1000; /* was 20 */
 
@@ -192,9 +192,9 @@ constexpr double pMAX = (1 - 1e-14); /* was (1-1e-12) and 0.999998 = 1 - 2e-6 */
  *	Call Rf_pgamma() [AS 239]	and calculate seven term taylor series
  */
     c = alpha-1;
-    s6 = (120+c*(346+127*c)) * i5040; /* used below, is "const" */
+	s6 = (120 + c * (346 + 127 * c)) * i5040; /* used below, is "const" */
 
-    ch0 = ch;/* save initial approx. */
+	ch0 = ch;/* save initial approx. */
     for(i=1; i <= MAXIT; i++ ) {
 	q = ch;
 	p1 = 0.5*ch;

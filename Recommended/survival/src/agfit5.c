@@ -140,7 +140,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy,
     tmean   = score + nused;
     start   = tmean + nvar2;
     stop    = start + nused;
-    
+
     event  = Calloc(3*nused, int);
     sort1   = event + nused;
     sort2   = sort1 + nused;
@@ -183,7 +183,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy,
 	means[i] = temp;
 	for (person=0; person<nused; person++) covar[i][person] -=temp;
 	}
-	
+
     /*
     ** Find the loglik of the initial model
     **   (actually, just a no-sparse-terms model) -- loglik only
@@ -648,7 +648,7 @@ static double **cmatrix(double *data, int ncol, int nrow)
     int i,j;
     double **pointer;
     double *temp;
- 
+
     pointer = Calloc(nrow, double *);
     temp =    Calloc(nrow*ncol, double);
     if (data==0){

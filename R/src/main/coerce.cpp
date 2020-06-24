@@ -1850,7 +1850,7 @@ R_xlen_t Rf_asXLength(SEXP x)
 	return na;
 
     double d = asReal(x);
-    if (!R_FINITE(d) || d > R_XLEN_T_MAX || d < 0)
+    if (!R_FINITE(d) || d > double(R_XLEN_T_MAX) || d < 0)
 	return na;
     else
 	return (R_xlen_t) d;

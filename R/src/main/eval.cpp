@@ -184,7 +184,7 @@ static void lineprof(char* buf, SEXP srcref)
 static pthread_t R_profiled_thread;
 #endif
 
-static RCNTXT * findProfContext(RCNTXT *cptr)
+static RCNTXT *findProfContext(RCNTXT *cptr)
 {
     if (! R_Filter_Callframes)
 	return cptr->nextcontext;
@@ -464,7 +464,6 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
     R_Profiling = 1;
 }
 
-extern "C"
 SEXP do_Rprof(SEXP args)
 {
     SEXP filename;
@@ -505,7 +504,7 @@ SEXP do_Rprof(SEXP args)
     return R_NilValue;
 }
 #else /* not R_PROFILING */
-extern "C"
+
 SEXP do_Rprof(SEXP args)
 {
     error(_("R profiling is not available on this system"));
@@ -708,7 +707,7 @@ SEXP eval(SEXP e, SEXP rho)
 
     tmp = R_NilValue;		/* -Wall */
 #ifdef _WIN32
-    /* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.c)
+    /* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.cpp)
        and resets the precision, rounding and exception modes of a ix86
        fpu.
      */
@@ -884,22 +883,23 @@ typedef unsigned long R_exprhash_t;
 
 static R_exprhash_t hash(unsigned char *str, int n, R_exprhash_t hash)
 {
-    // djb2 from http://www.cse.yorku.ca/~oz/hash.html
-    // (modified for n-byte lengths)
+	// djb2 from http://www.cse.yorku.ca/~oz/hash.html
+	// (modified for n-byte lengths)
 
-    int i;
+	for (int i = 0; i < n; i++)
+		hash = ((hash << 5) + hash) + str[i]; /* hash * 33 + c */
 
-    for(i = 0; i < n; i++)
-        hash = ((hash << 5) + hash) + str[i]; /* hash * 33 + c */
-
-    return hash;
+	return hash;
 }
 
-#define HASH(x, h) hash((unsigned char *) &x, sizeof(x), h)
+namespace
+{
+	template <typename T>
+	inline R_exprhash_t HASH(T x, int h) { return hash((unsigned char *)&x, sizeof(x), h); }
+} // namespace
 
 static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 {
-#define SKIP_NONSCALAR 	if (len != 1) break /* non-scalars hashed by address */
     int len = length(e);
     int type = TYPEOF(e);
     h = HASH(type, h);
@@ -913,28 +913,28 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 	    h = hashexpr1(CAR(e), h);
 	return h;
     case LGLSXP:
-	SKIP_NONSCALAR;
+	if (len != 1) break; /* non-scalars hashed by address */
 	for (int i = 0; i < len; i++) {
 	    int ival = LOGICAL(e)[i];
 	    h = HASH(ival, h);
 	}
 	return h;
     case INTSXP:
-	SKIP_NONSCALAR;
+	if (len != 1) break; /* non-scalars hashed by address */
 	for (int i = 0; i < len; i++) {
 	    int ival = INTEGER(e)[i];
 	    h = HASH(ival, h);
 	}
 	return h;
     case REALSXP:
-	SKIP_NONSCALAR;
+	if (len != 1) break; /* non-scalars hashed by address */
 	for (int i = 0; i < len; i++) {
 	    double dval = REAL(e)[i];
 	    h = HASH(dval, h);
 	}
 	return h;
     case STRSXP:
-	SKIP_NONSCALAR;
+	if (len != 1) break; /* non-scalars hashed by address */
 	for (int i = 0; i < len; i++) {
 	    SEXP cval = STRING_ELT(e, i);
 	    h = hash((unsigned char *) CHAR(cval), LENGTH(cval), h);
@@ -943,7 +943,6 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
     }
 
     return HASH(e, h);
-#undef SKIP_NONSCALAR
 }
 
 R_INLINE static SEXP getSrcref(SEXP srcrefs, int ind);
@@ -960,7 +959,6 @@ static R_exprhash_t hashsrcref(SEXP e, R_exprhash_t h)
     }
     return h;
 }
-#undef HASH
 
 static R_exprhash_t hashexpr(SEXP e)
 {
@@ -1977,8 +1975,7 @@ HIDDEN SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* **** FIXME: Temporary code to execute S4 methods in a way that
    **** preserves lexical scope. */
 
-/* called from methods_list_dispatch.c */
-extern "C"
+/* called from methods_list_dispatch.cpp */
 SEXP R_execMethod(SEXP op, SEXP rho)
 {
     SEXP call, arglist, callerenv, newrho, next, val;
@@ -2187,14 +2184,7 @@ R_INLINE static Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
     return cond;
 }
 
-
-/*
-#define BodyHasBraces(body) \
-    ((isLanguage(body) && CAR(body) == R_BraceSymbol) ? 1 : 0)
-*/
-R_INLINE static bool BodyHasBraces(SEXP body) {
- return (isLanguage(body) && CAR(body) == R_BraceSymbol);
- }
+inline static bool BodyHasBraces(SEXP body) { return (isLanguage(body) && CAR(body) == R_BraceSymbol); }
 
 /* Allocate space for the loop variable value the first time through
    (when v == R_NilValue) and when the value may have been assigned to
@@ -2676,43 +2666,27 @@ static void tmp_cleanup(void *data)
    1. The SET_CAR is intended to protect against possible GC in
    R_SetVarLocValue; this might occur it the binding is an active
    binding. */
-/*
-#define SET_TEMPVARLOC_FROM_CAR(loc, lhs) do { \
-	SEXP __lhs__ = (lhs); \
-	SEXP __v__ = CAR(__lhs__); \
-	if (MAYBE_SHARED(__v__)) { \
-	    __v__ = shallow_duplicate(__v__); \
-	    ENSURE_NAMED(__v__); \
-	    SETCAR(__lhs__, __v__); \
-	} \
-	R_SetVarLocValue(loc, __v__); \
-    } while(0)
-*/
-R_INLINE static void SET_TEMPVARLOC_FROM_CAR(R_varloc_t loc, SEXP lhs) {
-        SEXP v = CAR(lhs);
-        if (MAYBE_SHARED(v)) {
-            v = shallow_duplicate(v);
-            ENSURE_NAMED(v);
-            SETCAR(lhs, v);
-        }
-        R_SetVarLocValue(loc, v);
- }
+inline static void SET_TEMPVARLOC_FROM_CAR(R_varloc_t loc, SEXP lhs)
+{
+	SEXP v = CAR(lhs);
+	if (MAYBE_SHARED(v))
+	{
+		v = shallow_duplicate(v);
+		ENSURE_NAMED(v);
+		SETCAR(lhs, v);
+	}
+	R_SetVarLocValue(loc, v);
+}
 /* This macro makes sure the RHS NAMED value is 0 or NAMEDMAX. This is
    necessary to make sure the RHS value returned by the assignment
    expression is correct when the RHS value is part of the LHS
    object. */
-/*
-#define FIXUP_RHS_NAMED(r) do { \
-	SEXP __rhs__ = (r); \
-	if (NAMED(__rhs__)) \
-	    ENSURE_NAMEDMAX(__rhs__); \
-    } while (0)
-*/
-R_INLINE static void FIXUP_RHS_NAMED(SEXP rhs) {
-        if (NAMED(rhs) && NAMED(rhs) <= 1)
-            SET_NAMED(rhs, 2);
- }
-#define ASSIGNBUFSIZ 32
+inline static void FIXUP_RHS_NAMED(SEXP rhs)
+{
+	if (NAMED(rhs) && NAMED(rhs) <= 1)
+		SET_NAMED(rhs, 2);
+}
+constexpr size_t ASSIGNBUFSIZ = 32;
 static SEXP installAssignFcnSymbol(SEXP fun)
 {
     char buf[ASSIGNBUFSIZ];
@@ -2729,21 +2703,21 @@ static SEXP installAssignFcnSymbol(SEXP fun)
 
 R_INLINE static SEXP getAssignFcnSymbol(SEXP fun)
 {
-    /* handle [<-, [[<-, and $<- efficiently */
-    if (fun == R_SubsetSym)
-	return R_SubassignSym;
-    else if (fun == R_Subset2Sym)
-	return R_Subassign2Sym;
-    else if (fun == R_DollarSymbol)
-	return R_DollarGetsSymbol;
+	/* handle [<-, [[<-, and $<- efficiently */
+	if (fun == R_SubsetSym)
+		return R_SubassignSym;
+	else if (fun == R_Subset2Sym)
+		return R_Subassign2Sym;
+	else if (fun == R_DollarSymbol)
+		return R_DollarGetsSymbol;
 
-    /* look up in the replacement functions table */
-    SEXP val = lookupAssignFcnSymbol(fun);
-    if (val != R_UnboundValue)
-	return val;
+	/* look up in the replacement functions table */
+	SEXP val = lookupAssignFcnSymbol(fun);
+	if (val != R_UnboundValue)
+		return val;
 
-    /* instal symbol, entern in table,  and return */
-    return installAssignFcnSymbol(fun);
+	/* instal symbol, entern in table,  and return */
+	return installAssignFcnSymbol(fun);
 }
 
 R_INLINE static SEXP mkRHSPROMISE(SEXP expr, SEXP rhs)
@@ -3007,7 +2981,7 @@ inline static void COPY_TAG(SEXP to, SEXP from)
 		SET_TAG(to, tag);
 }
 
-/* Used in eval and applyMethod (object.c) for builtin primitives,
+/* Used in eval and applyMethod (object.cpp) for builtin primitives,
    do_internal (names.cpp) for builtin .Internals
    and in evalArgs.
 
@@ -3239,16 +3213,16 @@ HIDDEN SEXP Rf_promiseArgs(SEXP el, SEXP rho)
 /* used in coerce.cpp */
 HIDDEN void Rf_CheckFormals(SEXP ls)
 {
-    if (isList(ls)) {
-	for (; ls != R_NilValue; ls = CDR(ls))
-	    if (TYPEOF(TAG(ls)) != SYMSXP)
-		goto err;
-	return;
-    }
- err:
-    error(_("invalid formal argument list for \"function\""));
-}
+	if (isList(ls))
+	{
+		for (; ls != R_NilValue; ls = CDR(ls))
+			if (TYPEOF(TAG(ls)) != SYMSXP)
+				error(_("invalid formal argument list for \"function\""));
+		return;
+	}
 
+	error(_("invalid formal argument list for \"function\""));
+}
 
 static SEXP VectorToPairListNamed(SEXP x)
 {
@@ -3280,10 +3254,10 @@ static SEXP VectorToPairListNamed(SEXP x)
     return xnew;
 }
 
-//#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
-R_INLINE static SEXP simple_as_environment(SEXP arg) {
- return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue);
- }
+inline static SEXP simple_as_environment(SEXP arg)
+{
+	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue);
+}
 
 /* "eval": Evaluate the first argument
    in the environment specified by the second argument. */
@@ -3459,13 +3433,12 @@ HIDDEN SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-
 static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
 {
-    if(dropmissing) return evalList(el, rho, call, n);
-    else return evalListKeepMissing(el, rho);
+	if (dropmissing)
+		return evalList(el, rho, call, n);
+	return evalListKeepMissing(el, rho);
 }
-
 
 /* A version of DispatchOrEval that checks for possible S4 methods for
  * any argument, not just the first.  Used in the code for `c()` in do_c()
@@ -3715,10 +3688,11 @@ static void findmethod(SEXP Class, const char *group, const char *generic,
     *which = whichclass;
 }
 
-static SEXP classForGroupDispatch(SEXP obj) {
+static SEXP classForGroupDispatch(SEXP obj)
+{
 
-    return IS_S4_OBJECT(obj) ? R_data_class2(obj)
-	    : getAttrib(obj, R_ClassSymbol);
+	return IS_S4_OBJECT(obj) ? R_data_class2(obj)
+							 : getAttrib(obj, R_ClassSymbol);
 }
 
 HIDDEN
@@ -3930,8 +3904,7 @@ static SEXP R_ConstantsRegistry = NULL;
 #define THREADED_CODE
 #endif
 
-HIDDEN
-void R_initialize_bcode(void)
+HIDDEN void R_initialize_bcode(void)
 {
   R_AddSym = install("+");
   R_SubSym = install("-");
@@ -4107,9 +4080,7 @@ enum
 	OPCOUNT
 };
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 SEXP R_unary(SEXP, SEXP, SEXP);
 SEXP R_binary(SEXP, SEXP, SEXP, SEXP);
 SEXP do_math1(SEXP, SEXP, SEXP, SEXP);
@@ -4120,9 +4091,7 @@ SEXP do_subassign_dflt(SEXP, SEXP, SEXP, SEXP);
 SEXP do_c_dflt(SEXP, SEXP, SEXP, SEXP);
 SEXP do_subset2_dflt(SEXP, SEXP, SEXP, SEXP);
 SEXP do_subassign2_dflt(SEXP, SEXP, SEXP, SEXP);
-#ifdef __cplusplus
 } //extern "C"
-#endif
 
 static SEXP seq_int(int n1, int n2)
 {
@@ -4188,12 +4157,14 @@ R_INLINE static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 
 #define GETSTACK_IVAL_PTR(s) ((s)->u.ival)
 
-#define SETSTACK_NLNK_PTR(s, v) do {			\
-	R_bcstack_t *__s__ = (s);			\
-	SEXP __v__ = (v);				\
-	__s__->tag = NLNKSXP;				\
-	__s__->u.sxpval = __v__;			\
-    } while (0)
+#define SETSTACK_NLNK_PTR(s, v)   \
+	do                            \
+	{                             \
+		R_bcstack_t *__s__ = (s); \
+		SEXP __v__ = (v);         \
+		__s__->tag = NLNKSXP;     \
+		__s__->u.sxpval = __v__;  \
+	} while (0)
 #define SETSTACK_NLNK(i, v) SETSTACK_NLNK_PTR(R_BCNodeStackTop + (i), v)
 
 #ifdef TESTING_WRITE_BARRIER
@@ -4203,33 +4174,41 @@ R_INLINE static SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 #define CHECK_SET_BELOW_PROT(s) do { } while (0)
 #endif
 
-#define SETSTACK_PTR(s, v) do { \
-    CHECK_SET_BELOW_PROT(s); \
-    SEXP __v__ = (v); \
-    (s)->tag = 0; \
-    (s)->u.sxpval = __v__; \
-} while (0)
+#define SETSTACK_PTR(s, v)       \
+	do                           \
+	{                            \
+		CHECK_SET_BELOW_PROT(s); \
+		SEXP __v__ = (v);        \
+		(s)->tag = 0;            \
+		(s)->u.sxpval = __v__;   \
+	} while (0)
 
-#define SETSTACK_REAL_PTR(s, v) do { \
-    double __v__ = (v); \
-    (s)->tag = REALSXP; \
-    (s)->u.dval = __v__; \
-} while (0)
+#define SETSTACK_REAL_PTR(s, v) \
+	do                          \
+	{                           \
+		double __v__ = (v);     \
+		(s)->tag = REALSXP;     \
+		(s)->u.dval = __v__;    \
+	} while (0)
 
-#define SETSTACK_INTEGER_PTR(s, v) do { \
-    int __v__ = (v); \
-    (s)->tag = INTSXP; \
-    (s)->u.ival = __v__; \
-} while (0)
+#define SETSTACK_INTEGER_PTR(s, v) \
+	do                             \
+	{                              \
+		int __v__ = (v);           \
+		(s)->tag = INTSXP;         \
+		(s)->u.ival = __v__;       \
+	} while (0)
 
-#define SETSTACK_LOGICAL_PTR(s, v) do {		\
-	int __v__ = (v);			\
-	(s)->tag = LGLSXP;			\
-	if (__v__ == NA_LOGICAL)		\
-	    (s)->u.ival = NA_LOGICAL;		\
-	else					\
-	    (s)->u.ival = __v__ ? TRUE : FALSE;	\
-    } while (0)
+#define SETSTACK_LOGICAL_PTR(s, v)              \
+	do                                          \
+	{                                           \
+		int __v__ = (v);                        \
+		(s)->tag = LGLSXP;                      \
+		if (__v__ == NA_LOGICAL)                \
+			(s)->u.ival = NA_LOGICAL;           \
+		else                                    \
+			(s)->u.ival = __v__ ? TRUE : FALSE; \
+	} while (0)
 
 #define IS_STACKVAL_BOXED(idx)	(R_BCNodeStackTop[idx].tag == 0)
 

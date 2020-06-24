@@ -46,7 +46,7 @@ int main (int argc, char **argv)
 	Usage(argv[0], arch);
 	exit(0);
     }
-    
+
     if (argc > 1 && strcmp(argv[1], "--arch") == 0) {
 	cmdarg = 3;
 	if(argc < 3) {
@@ -64,7 +64,7 @@ int main (int argc, char **argv)
 	strncpy(arch, p+1, 10 - 1); /* skip leading slash */
 	arch[10 - 1] = '\0';
     }
-    
+
     if (stricmp(argv[0] + strlen(argv[0]) - 11, "Rscript.exe") == 0
 	|| stricmp(argv[0] + strlen(argv[0]) - 7, "Rscript") == 0)
 	snprintf(cmd, CMD_LEN, "\"\"%s\\bin\\%s\\Rscript.exe\"", getRHOME(2), arch);
@@ -87,6 +87,6 @@ int main (int argc, char **argv)
     if (interactive)
 	/* Ignore Ctrl-C so that Rterm.exe can handle it */
 	SetConsoleCtrlHandler(NULL, TRUE);   
-    
+
     exit(system(cmd));
  }

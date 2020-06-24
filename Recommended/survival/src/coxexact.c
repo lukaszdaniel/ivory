@@ -7,7 +7,7 @@
 double coxd0(int d, int n, double *score, double *dmat,
              int dmax) {
     double *dn;
-    
+
     if (d==0) return(1.0);
     dn = dmat + (n-1)*dmax + d -1;  /* pointer to dmat[d,n] */
 
@@ -20,7 +20,7 @@ double coxd0(int d, int n, double *score, double *dmat,
 double coxd1(int d, int n, double *score, double *dmat, double *d1,
              double *covar, int dmax) {
     int indx;
-    
+
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d.n]*/
     if (d1[indx] ==0) { /* still to be computed */
         d1[indx] = score[n-1]* covar[n-1]* coxd0(d-1, n-1, score, dmat, dmax);
@@ -35,7 +35,7 @@ double coxd2(int d, int n, double *score, double *dmat, double *d1j,
              double *d1k, double *d2, double *covarj, double *covark,
              int dmax) {
     int indx;
-    
+
     indx = (n-1)*dmax + d -1;  /*index to the current array member d1[d,n]*/
     if (d2[indx] ==0) { /*still to be computed */
         d2[indx] = coxd0(d-1, n-1, score, dmat, dmax)*score[n-1] *
@@ -55,7 +55,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
               SEXP ibeta,     SEXP eps2,    SEXP toler2) {
     int i,j,k;
     int     iter;
-    
+
     double **covar, **imat;  /*ragged arrays */
     double *time, *status;   /* input data */
     double *offset;
@@ -78,17 +78,17 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     double *dtemp;   /* used for zeroing the memory */
     double *d1;     /* current first derivatives from coxd1 */
     double d0;      /* global sum from coxc0 */
-        
+
     /* copies of scalar input arguments */
     int     nused, nvar, maxiter;
     double  eps, toler;
-    
+
     /* returned objects */
     SEXP imat2, beta2, u2, loglik2;
     double *beta, *u, *loglik;
     SEXP rlist, rlistnames;
     int nprotect;  /* number of protect calls I have issued */
-    
+
     nused = LENGTH(offset2);
     nvar  = ncols(covar2);
     maxiter = asInteger(maxiter2);
@@ -185,7 +185,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             sstart =i;
             nrisk =0;
         }
-        
+
         dtime = time[i];  /*current unique time */
         ndeath =0;
         while (time[i] == dtime) {
@@ -291,7 +291,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
                 sstart =i;
                 nrisk =0;
             }
-            
+
             dtime = time[i];  /*current unique time */
             ndeath =0;
             while (time[i] == dtime) {
@@ -330,7 +330,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
                 }
             }
          }
-                   
+
         /* am I done?
         **   update the betas and test for convergence
         */

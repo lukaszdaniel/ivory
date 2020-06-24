@@ -34,6 +34,7 @@ void HoltWinters (double *x, int *xl, double *alpha, double *beta,
 		  double *a, double *b, double *s, double *SSE, double *level, 
 		  double *trend, double *season);
 
+extern "C" {
 void
 F77_NAME(eureka)(int *lr, double *r__, double *g,
 		 double *f, double *var, double *a);
@@ -44,6 +45,7 @@ F77_NAME(stl)(double *y, int *n, int *np, int *ns,
 	      int *nsjump, int *ntjump, int *nljump, int *ni,
 	      int *no, double *rw, double *season, double *trend,
 	      double *work);
+}
 
 typedef struct
 {

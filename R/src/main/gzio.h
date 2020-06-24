@@ -181,9 +181,6 @@ static void check_header(gz_stream *s)
     s->z_err = s->z_eof ? Z_DATA_ERROR : Z_OK;
 }
 
-#ifdef __cplusplus
-extern "C"
-#endif
 gzFile R_gzopen (const char *path, const char *mode)
 {
     int err;
@@ -380,9 +377,6 @@ static int R_gzread (gzFile file, voidp buf, unsigned len)
 }
 
 /* for devPS.cp */
-#ifdef __cplusplus
-extern "C"
-#endif
 char *R_gzgets(gzFile file, char *buf, int len)
 {
     char *b = buf;
@@ -540,9 +534,6 @@ static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
     return 0;
 }
 
-#ifdef __cplusplus
-extern "C"
-#endif
 int R_gzclose (gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
@@ -572,7 +563,7 @@ static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong source
 	     int opt)
 {
     z_stream stream;
-    
+
     stream.next_in = source;
     stream.avail_in = 0;
     stream.zalloc = (alloc_func)0;

@@ -19,7 +19,7 @@
  */
 
 extern "C"
-int Rf_initialize_R(int ac, char **av); /* in ../unix/system.c */
+int Rf_initialize_R(int ac, char **av); /* in ../unix/system.cpp */
 
 #include <Rinterface.h>
 

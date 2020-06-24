@@ -19,7 +19,7 @@
 
 /*  This file was contributed by Ei-ji Nakama.
  *  It exports locale2charset for use in gram.y, and rlocale.cpp on macOS.
- *  And sysutils.cpp, grDevices/src/devPS.c
+ *  And sysutils.cpp, grDevices/src/devPS.cpp
  */
 
 /* setlocale(LC_CTYPE,NULL) to encodingname cf nl_langinfo(LC_CTYPE) */

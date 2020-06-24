@@ -21,7 +21,7 @@
 /*
   Replaces FORTRAN version in rs.f which did not handle special values
   such as NaN.
-  
+
   return value in an arg for maximal portability -- see WRE section 6.6
 */
 

@@ -10,14 +10,14 @@ SEXP gchol(SEXP matrix2, SEXP toler2) {
     double **mat;
     double *toler;
     SEXP gc;   /* the returned matrix */
-    
+
     PROTECT(gc = duplicate(matrix2));
     n = nrows(gc);
     mat = dmatrix(REAL(gc), n, n);
     toler = REAL(toler2);
-    
+
     i = cholesky5(mat, n, *toler);
- 
+
     /* zero out the upper triangle */
     for (i=0; i<n; i++) {
 	for (j= i+1; j<n; j++) mat[i][j] =0;
@@ -31,9 +31,9 @@ SEXP gchol_solve(SEXP x2, SEXP y2, SEXP flag2) {
     int n;
     double **mat;
     int flag;
-    
+
     SEXP new_;   /*returned matrix */
-    
+
     n = nrows(x2);
     flag = asInteger(flag2);
     PROTECT(new_ = duplicate(x2));
@@ -43,7 +43,7 @@ SEXP gchol_solve(SEXP x2, SEXP y2, SEXP flag2) {
     UNPROTECT(1);
     return(new_);
     }
-    
+
 SEXP gchol_inv(SEXP matrix, SEXP flag2) {
     int n;
     double **mat;
@@ -79,8 +79,8 @@ SEXP gchol_inv(SEXP matrix, SEXP flag2) {
 	    for (j=i+1; j<n; j++) mat[j][i] = mat[i][j];
 	    }
 	}
-    
+
     UNPROTECT(1);
     return(new_);
     }
-   
+

@@ -39,7 +39,7 @@
 
 SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22, 
               SEXP position2,   SEXP strata2, SEXP xmat2, SEXP risk2) {
-              
+
     int i, i2, j2, k, person, person2, itime;
     int nused, istrat;
     int ntime;
@@ -94,7 +94,7 @@ SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     /* Allocate memory for the working matrices. */
     xsum1 = (double *) ALLOC(2*nvar, sizeof(double));
     xsum2 = xsum1 + nvar;
-   
+
     /* Allocate memory for returned objects.  Essentially ntime copies of each
        of n, xsum1, xsum2.
     */
@@ -107,7 +107,7 @@ SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
 			      allocMatrix(REALSXP, ntime, nvar))), ntime, nvar);
     rx2 = dmatrix(REAL(SET_VECTOR_ELT(rlist, 4, 
 			      allocMatrix(REALSXP, ntime, nvar))), ntime, nvar);
-						     
+
     R_CheckUserInterrupt();  /*check for control-C */
 
     /* now add up all the sums */
@@ -157,7 +157,7 @@ SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
 		    n[9] += wt[i2]*risk[i2];
 		}
 	    }
-	    
+
 	    if (position[i2] > 1) {  /* 2 or 3 = end of a subject's series */
 		n[5]++;
 		n[6] += wt[i2];
@@ -180,13 +180,13 @@ SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
 		n[2] -= wt[j2]*risk[j2];
 		for (k=0; k<nvar; k++) xsum1[k] -=xmat[k][j2] * wt[j2]* risk[j2];
 	    }
-		    
+
 	    /* count entries */
 	    if (position[j2]==1 || position[j2]==3) {
 		n[10]++;
 		n[11] += wt[j2];
 	    }
-		
+
 	    person2++;
 	    j2 = sort1[person2];	
 	}
@@ -212,4 +212,4 @@ SEXP coxsurv1(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     UNPROTECT(1);
     return(rlist);
 }
-    
+

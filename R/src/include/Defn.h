@@ -23,6 +23,10 @@
 #ifndef DEFN_H_
 #define DEFN_H_
 
+#ifndef __cplusplus
+#error Defn.h can only be included in C++ files
+#endif
+
 #define isRaw(x) (TYPEOF(x) == RAWSXP)
 
 /* To test the write barrier used by the generational collector,
@@ -46,13 +50,11 @@
 #define extern0 extern
 #endif
 
-#define MAXELTSIZE 8192 /* Used as a default for string buffer sizes, \
+constexpr int MAXELTSIZE = 8192; /* Used as a default for string buffer sizes, \
                and occasionally as a limit. */
 
 #include <R_ext/Complex.h>
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 void Rf_CoercionWarning(int); /* warning code */
 int Rf_LogicalFromInteger(int, int*);
 int Rf_LogicalFromReal(double, int*);
@@ -66,23 +68,16 @@ double Rf_RealFromComplex(Rcomplex, int*);
 Rcomplex Rf_ComplexFromLogical(int, int*);
 Rcomplex Rf_ComplexFromInteger(int, int*);
 Rcomplex Rf_ComplexFromReal(double, int*);
-#ifdef __cplusplus
-} //extern "C"
-#endif
 
 #define CALLED_FROM_DEFN_H 1
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
 				  Memory.h, PrtUtil.h, Utils.h */
 #undef CALLED_FROM_DEFN_H
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 const char *Rf_translateCharFP(SEXP);
 const char *Rf_translateCharFP2(SEXP);
 const char *Rf_trCharUTF8(SEXP);
-#ifdef __cplusplus
-} //extern "C"
-#endif
+
 extern0 SEXP	R_CommentSymbol;    /* "comment" */
 extern0 SEXP	R_DotEnvSymbol;     /* ".Environment" */
 extern0 SEXP	R_ExactSymbol;	    /* "exact" */
@@ -115,17 +110,14 @@ enum CharsetBit
     BYTES_MASK = (1 << 1),
     LATIN1_MASK = (1 << 2),
     UTF8_MASK = (1 << 3),
-    /* (1<<4) is taken by S4_OBJECT_MASK */
+    /* (1 << 4) is taken by S4_OBJECT_MASK */
     CACHED_MASK = (1 << 5),
     ASCII_MASK = (1 << 6)
 };
 #define HASHASH_MASK 1
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
 #ifdef USE_RINTERNALS
 #define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
 #define SET_BYTES(x) (((x)->sxpinfo.gp) |= BYTES_MASK)
@@ -163,10 +155,7 @@ extern void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
-
-#ifdef __cplusplus
 } //extern "C"
-#endif
 
 #ifdef R_USE_SIGNALS
 #ifdef _WIN32
@@ -225,19 +214,13 @@ extern void R_WaitEvent(void);
 #endif
 
 #if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX
-#ifdef __cplusplus
 #include <limits>
 using R_size_t = size_t;
 constexpr R_size_t R_SIZE_T_MAX = std::numeric_limits<R_size_t>::max();
 #else
-typedef size_t R_size_t;
-#define R_SIZE_T_MAX SIZE_MAX
-#endif // __cplusplus
-#else
 #error SIZE_MAX is required for C99
 #endif
 
-#ifdef __cplusplus
 constexpr double Mega = 1048576.; /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
 constexpr double Giga = 1073741824.; /* 1 Giga Byte := 2^30 Bytes */
 
@@ -256,16 +239,13 @@ constexpr long R_NSIZE = 350000L;
 #ifndef R_VSIZE
 constexpr long R_VSIZE = 67108864L;
 #endif
-#endif //__cplusplus
+
 /* some commonly needed headers */
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
 extern char *strdup(const char *s1);
@@ -332,13 +312,11 @@ extern int putenv(char *string);
 #endif
 #endif
 
-#ifdef __cplusplus
 constexpr int HSIZE = 49157;	/* The size of the hash table for symbols */
 constexpr int MAXIDSIZE = 10000; /* Largest symbol size,                  \
                in bytes excluding terminator.                    \
                Was 256 prior to 2.13.0, now just a sanity check. \
             */
-#endif // __cplusplus
 
 /* The type of the do_xxxx functions. */
 /* These are the built-in R functions. */
@@ -448,24 +426,17 @@ typedef struct
 } VECREC, *VECP;
 
 /* Vector Heap Macros */
-#define BACKPOINTER(v) ((v).u.backpointer)
-#ifdef __cplusplus
+//#define BACKPOINTER(v) ((v).u.backpointer)
 inline size_t BYTE2VEC(int n) { return (n > 0) ? (std::size_t(n) - 1)/sizeof(VECREC) + 1 : 0; }
 inline size_t INT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(int) - 1)/sizeof(VECREC) + 1 : 0; }
 inline size_t FLOAT2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(double) - 1)/sizeof(VECREC) + 1 : 0; }
 inline size_t COMPLEX2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(Rcomplex) - 1)/sizeof(VECREC) + 1 : 0; }
 inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1)/sizeof(VECREC) + 1 : 0; }
-#else
-#define BYTE2VEC(n) (((n) > 0) ? (((n)-1) / sizeof(VECREC) + 1) : 0)
-#define INT2VEC(n) (((n) > 0) ? (((n) * sizeof(int) - 1) / sizeof(VECREC) + 1) : 0)
-#define FLOAT2VEC(n) (((n) > 0) ? (((n) * sizeof(double) - 1) / sizeof(VECREC) + 1) : 0)
-#define COMPLEX2VEC(n) (((n) > 0) ? (((n) * sizeof(Rcomplex) - 1) / sizeof(VECREC) + 1) : 0)
-#define PTR2VEC(n) (((n) > 0) ? (((n) * sizeof(SEXP) - 1) / sizeof(VECREC) + 1) : 0)
-#endif // __cplusplus
+
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */
-#define ACTIVE_BINDING_MASK (1<<15)
-#define BINDING_LOCK_MASK (1<<14)
+#define ACTIVE_BINDING_MASK (1 << 15)
+#define BINDING_LOCK_MASK (1 << 14)
 #define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
 #define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
@@ -859,9 +830,8 @@ extern0 double elapsedLimitValue       	INI_as(-1.0);
 
 void resetTimeLimits(void);
 
-#ifdef __cplusplus
 constexpr size_t R_BCNODESTACKSIZE = 200000;
-#endif
+
 LibExtern R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
 extern0 R_bcstack_t *R_BCNodeStackBase;
 extern0 R_bcstack_t *R_BCProtTop;
@@ -1100,7 +1070,7 @@ extern0 int R_PCRE_limit_recursion;
 
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
-#define CONSOLE_BUFFER_SIZE 4096
+constexpr int CONSOLE_BUFFER_SIZE = 4096;
 int R_ReadConsole(const char *, unsigned char *, int, int);
 void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
 void R_WriteConsoleEx(const char *, int, int);
@@ -1378,8 +1348,8 @@ void R_expand_binding_value(SEXP);
 
 void R_args_enable_refcnt(SEXP);
 
-/* ../main/devices.cpp, used in memory.cpp, gnuwin32/extra.c */
-#define R_MaxDevices 64
+/* ../main/devices.cpp, used in memory.cpp, gnuwin32/extra.cpp */
+constexpr int R_MaxDevices = 64;
 
 /* ../../main/printutils.cpp : */
 typedef enum
@@ -1502,7 +1472,7 @@ extern const char *locale2charset(const char *);
     do                                                 \
     {                                                  \
         Rboolean __oldsusp__ = R_interrupts_suspended; \
-        R_interrupts_suspended = TRUE;
+        R_interrupts_suspended = (Rboolean)TRUE;
 #define END_SUSPEND_INTERRUPTS                           \
     R_interrupts_suspended = __oldsusp__;                \
     if (R_interrupts_pending && !R_interrupts_suspended) \
@@ -1549,10 +1519,8 @@ extern void *alloca(size_t);
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
-
-#ifdef __cplusplus
 } //extern "C"
-#endif
+
 #endif /* DEFN_H_ */
 /*
  *- Local Variables:

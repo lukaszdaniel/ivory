@@ -49,7 +49,7 @@ R_xlen_t Rf_asVecSize(SEXP x)
 	    double d = REAL(x)[0];
 	    if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
 	    if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	    if(d > double(R_XLEN_T_MAX)) error(_("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	case STRSXP:
@@ -57,7 +57,7 @@ R_xlen_t Rf_asVecSize(SEXP x)
 	    double d = asReal(x);
 	    if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
 	    if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	    if(d > double(R_XLEN_T_MAX)) error(_("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	default:
@@ -381,22 +381,22 @@ HIDDEN SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     return( ENCLOS(arg) );
 }
 
-static Rboolean R_IsImportsEnv(SEXP env)
+static bool R_IsImportsEnv(SEXP env)
 {
-    if (isNull(env) || !isEnvironment(env))
-	return FALSE;
-    if (ENCLOS(env) != R_BaseNamespace)
-	return FALSE;
-    SEXP name = getAttrib(env, R_NameSymbol);
-    if (!isString(name) || LENGTH(name) != 1)
-	return FALSE;
+	if (isNull(env) || !isEnvironment(env))
+		return false;
+	if (ENCLOS(env) != R_BaseNamespace)
+		return false;
+	SEXP name = getAttrib(env, R_NameSymbol);
+	if (!isString(name) || LENGTH(name) != 1)
+		return false;
 
-    const char *imports_prefix = "imports:";
-    const char *name_string = CHAR(STRING_ELT(name, 0));
-    if (streqln(name_string, imports_prefix, strlen(imports_prefix)))
-	return TRUE;
-    else
-	return FALSE;
+	const char *imports_prefix = "imports:";
+	const char *name_string = CHAR(STRING_ELT(name, 0));
+	if (streqln(name_string, imports_prefix, strlen(imports_prefix)))
+		return true;
+
+	return false;
 }
 
 HIDDEN SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)

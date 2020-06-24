@@ -44,7 +44,7 @@
 
 SEXP coxsurv2(SEXP otime2, SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22, 
               SEXP sindex2,  SEXP trans2, SEXP xmat2, SEXP risk2) {
-              
+
     int i, i1, i2, k, person1, person2, itrans;
     int nused, ntrans, ntime, irow, ii, jj;
     double *tstart=0, *tstop, *status, *wt, *otime;
@@ -55,7 +55,7 @@ SEXP coxsurv2(SEXP otime2, SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     int nvar;              /* number of covariates */
     double  *xsum1,  /* a weighted sum, for computing xbar */
 	    *xsum2;
-	    
+
     int *atrisk;
 
     static const char *outnames[]={"ntrans", "count", 
@@ -96,13 +96,13 @@ SEXP coxsurv2(SEXP otime2, SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
 	    itrans = trans[i2];
 	}	
     }  
- 
+
     /* Allocate memory for the working matrices. */
     xsum1 = (double *) ALLOC(2*nvar, sizeof(double));
     xsum2 = xsum1 + nvar;
     atrisk = (int *) ALLOC(nused, sizeof(int));
     for (i=0; i<nused; i++) atrisk[i] =0;
-    
+
     /* Allocate memory for returned objects: ntime*ntrans copies of n, xsum1,
        and xsum2
     */
@@ -115,7 +115,7 @@ SEXP coxsurv2(SEXP otime2, SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
 			      allocMatrix(REALSXP, irow, nvar))), irow, nvar);
     rx2 = dmatrix(REAL(SET_VECTOR_ELT(rlist, 3, 
 			      allocMatrix(REALSXP, irow, nvar))), irow, nvar);
-						     
+
     R_CheckUserInterrupt();  /*check for control-C */
 
     /* now add up all the sums 
@@ -237,4 +237,4 @@ SEXP coxsurv2(SEXP otime2, SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     UNPROTECT(1);
     return(rlist);
 }
-    
+

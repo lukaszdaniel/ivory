@@ -8,7 +8,7 @@ void agsurv4(Sint   *ndeath,   double *risk,    double *wt,
     int i,j,k, l;
     int n;  /* number of unique death times */
     double sumt, guess, inc;    
-    
+
     n = *sn;
     j =0;
     for (i=0; i<n; i++) {

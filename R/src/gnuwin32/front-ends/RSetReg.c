@@ -36,7 +36,7 @@ int main (int argc, char **argv)
 {
     HKEY hk = HKEY_LOCAL_MACHINE;
     DWORD subkeys = 0;
-  
+
     char *RHome, version[40], keyname[60];
     LONG rc;
     HKEY hkey, hkey2;
@@ -44,7 +44,7 @@ int main (int argc, char **argv)
 
     for(int i = 1; i < argc; i++) if(!strcmp(argv[i], "/U")) delete = 1;
     for(int i = 1; i < argc; i++) if(!strcmp(argv[i], "/Personal")) personal = 1;
-    
+
     if(personal) hk = HKEY_CURRENT_USER;
 
     /* Needs to match JRins */
@@ -63,7 +63,7 @@ int main (int argc, char **argv)
 	    RegCloseKey(hkey);
 	} else
 	    fprintf(stderr, "\nWarning: failed to open key '%s'\n", keyname);
-	
+
 	snprintf(keyname, 60, "Software\\%s\\%s", PRODUCER, RK);
 	if (RegOpenKeyEx(hk, keyname, 0, KEY_SET_VALUE, &hkey) == ERROR_SUCCESS) {
 	    RegDeleteValue(hkey, "InstallPath");
@@ -90,7 +90,7 @@ int main (int argc, char **argv)
 	} else
 	    fprintf(stderr, "\nWarning: failed to open key '%s'\n", keyname);
 
-	
+
 	snprintf(keyname, 60, "Software\\%s\\R", PRODUCER);
 	if (RegOpenKeyEx(hk, keyname, 0, KEY_SET_VALUE, &hkey) == ERROR_SUCCESS) {
 	    RegDeleteValue(hkey, "InstallPath");
@@ -126,16 +126,16 @@ int main (int argc, char **argv)
 	    fprintf(stderr, "\nError: failed to open key '%s'\n", keyname);
 	    exit(1);
 	}
-	
+
 	rc = RegSetValueEx(hkey, "InstallPath", 0, REG_SZ,
 			   (CONST BYTE *)RHome, lstrlen(RHome)+1);
 	if (rc == ERROR_SUCCESS)
 	    rc = RegSetValueEx(hkey, "Current Version", 0, REG_SZ,
 			       (CONST BYTE *)version, lstrlen(version)+1);
-	
+
 	if (rc == ERROR_SUCCESS)
 	    rc = RegCreateKey(hkey, version, &hkey2);
-	
+
 	if (rc == ERROR_SUCCESS) {
 	    rc = RegSetValueEx(hkey2, "InstallPath", 0, REG_SZ,
 			       (CONST BYTE *)RHome, lstrlen(RHome)+1);
@@ -153,7 +153,7 @@ int main (int argc, char **argv)
 	    fprintf(stderr, "\nError: failed to open key '%s'\n", keyname);
 	    exit(1);
 	}
-	
+
 	rc = RegSetValueEx(hkey, "InstallPath", 0, REG_SZ,
 			   (CONST BYTE *)RHome, lstrlen(RHome)+1);
 	rc = RegSetValueEx(hkey, "Current Version", 0, REG_SZ,

@@ -835,7 +835,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
     if(pmatch == NULL) error(_("allocation failure in aregexec"));
-    
+
     tre_regaparams_default(&params);
     amatch_regaparams(&params, patlen,
 		      REAL(opt_bounds), INTEGER(opt_costs));

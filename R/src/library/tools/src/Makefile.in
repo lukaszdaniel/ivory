@@ -13,10 +13,11 @@ R_HOME = $(top_builddir)
 R_SHARE_DIR = $(R_HOME)/share
 R_INCLUDE_DIR = $(R_HOME)/include
 
-SOURCES_C = text.c init.c Rmd5.c md5.c signals.c install.c getfmts.c http.c \
-  gramLatex.c gramRd.c pdscan.c
-DEPENDS = $(SOURCES_C:.c=.d)
-OBJECTS = $(SOURCES_C:.c=.o)
+SOURCES_C = 
+SOURCES_CXX = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts.cpp http.cpp \
+  gramLatex.cpp gramRd.cpp pdscan.cpp
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
 
 # need config.h
 PKG_CPPFLAGS = -I../../../include -I$(top_srcdir)/src/include \
@@ -56,14 +57,14 @@ maintainer-clean: distclean
 # suppress #line directives
 YFLAGS=-l
 
-$(srcdir)/gramRd.c: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramRd.y
-	@$(ECHO) "re-making gramRd.c"
+$(srcdir)/gramRd.cpp: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramRd.y
+	@$(ECHO) "re-making gramRd.cpp"
 	$(YACC) $(YFLAGS) $(srcdir)/gramRd.y
-	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramRd.c	
-# depend on gramRd.c to avoid race condition with parallel make
-$(srcdir)/gramLatex.c: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramLatex.y $(srcdir)/gramRd.c
-	@$(ECHO) "re-making gramLatex.c"
+	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramRd.cpp	
+# depend on gramRd.cpp to avoid race condition with parallel make
+$(srcdir)/gramLatex.cpp: @MAINTAINER_MODE_TRUE@ $(srcdir)/gramLatex.y $(srcdir)/gramRd.cpp
+	@$(ECHO) "re-making gramLatex.cpp"
 	$(YACC) $(YFLAGS) $(srcdir)/gramLatex.y
-	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramLatex.c
+	$(SHELL) $(top_srcdir)/tools/move-if-change y.tab.c $(srcdir)/gramLatex.cpp
 
 ## Automagically generated dependencies:

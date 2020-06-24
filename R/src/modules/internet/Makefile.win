@@ -4,7 +4,7 @@ include ../../gnuwin32/MkRules
 MODULE = internet
 all: makeMakedeps ../../../modules$(R_ARCH)/internet.dll
 
-CSOURCES = internet.c libcurl.c nanoftp.c nanohttp.c sockconn.c Rsock.c sock.c Rhttpd.c
+CSOURCES = internet.cpp libcurl.cpp nanoftp.cpp nanohttp.cpp sockconn.cpp Rsock.cpp sock.cpp Rhttpd.cpp
 
 CPPFLAGS = -I../../include -I../../extra/graphapp -DHAVE_CONFIG_H $(WERROR_FLAGS)
 
@@ -28,7 +28,7 @@ clean:
 
 # Dependencies
 dllversion.o: ../../include/Rversion.h
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.cpp=.d)
 
 
 makeMakedeps: $(DEPS)

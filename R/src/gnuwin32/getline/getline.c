@@ -277,7 +277,7 @@ static void
 gl_puts(const char *const buf)
 {
     int len; 
-    
+
     if (buf) {
         len = strlen(buf);
         write(1, buf, len);
@@ -542,7 +542,7 @@ getline(const char *prompt, char *buf, int buflen)
 
 static void
 gl_addchar(int c)
-      
+
 /* adds the character c to the input buffer at current location */
 {
     int  i;
@@ -557,7 +557,7 @@ gl_addchar(int c)
 	char s[9]; /* only 3 needed */
 	int res;
 	int clen ;
-      
+
 	s[0] = c;
 	clen = 1;
 	res = 0;
@@ -587,7 +587,7 @@ gl_addchar(int c)
                 gl_buf[gl_pos + i] = s[i];
 	    gl_fixup(gl_prompt, gl_pos, gl_pos+clen);
 	}
-       
+
     } else
 	if (gl_overwrite == 0 || gl_pos == gl_cnt) {
 	    for (i = gl_cnt; i >= gl_pos; i--)
@@ -715,7 +715,7 @@ gl_del(int loc)
 
        mb_len=0;
        mbs_init(&mb_st);
-   
+
        if ((loc == -1 && gl_pos > 0) || (loc == 0 && gl_pos < gl_cnt)) {
 	   for(i = 0; i<= gl_pos + loc;) {
 	       mbrtowc(&wc,gl_buf+i, MB_CUR_MAX, &mb_st);
@@ -738,7 +738,7 @@ gl_del(int loc)
 
 static void
 gl_kill(int pos)
-        
+
 /* delete from pos to the end of line */
 {
     if (pos < gl_cnt) {
@@ -788,7 +788,7 @@ gl_killword(int direction)
 
 static void
 gl_word(int direction)
-              
+
 /* move forward or backword one word */
 {
     int pos = gl_pos;
@@ -823,8 +823,8 @@ gl_redraw(void)
 
 static void
 gl_fixup(const char *prompt, int change, int cursor)
-              
-                      
+
+
 /*
  * This function is used both for redrawing when input changes or for
  * moving within the input line.  The parameters are:
@@ -1061,7 +1061,7 @@ gl_hist_next(void)
 
 static char *
 hist_save(const char *p)
-        
+
 /* makes a copy of the string */
 {
     char *s = 0;

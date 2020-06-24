@@ -17,7 +17,7 @@ static int      wgl_init_done = -1;
 static void gl_error(char *msg)
 {
     char buf[1001];
-    
+
     wgl_init_done = 1;
     snprintf(buf, 1000, _("%s\nDisabling commands history for this session"), msg);
     buf[1000] = '\0';
@@ -47,7 +47,7 @@ static wchar_t *hist_save(const wchar_t *p)
     }
     if (s == 0)
 	gl_error(_("*** Error: 'hist_save()' failed on malloc"));
-    
+
     return s;
 }
 

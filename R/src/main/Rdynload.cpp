@@ -20,7 +20,7 @@
 
 
 /*
-  This is an effort to merge the 3 different dynload.c files in the
+  This is an effort to merge the 3 different dynload.cpp files in the
   distribution from the unix/, macintosh/dll/ and gnuwin32/ directories.
   The aim is to consolidate these different implementations into
       i) a generic or platform-independent common core
@@ -138,7 +138,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path);
 HIDDEN OSDynSymbol Rf_osDynSymbol;
 HIDDEN OSDynSymbol *R_osDynSymbol = &Rf_osDynSymbol;
 
-void R_init_base(DllInfo *); /* In Registration.c */
+void R_init_base(DllInfo *); /* In Registration.cpp */
 
 static void initLoadedDLL();
 
@@ -487,7 +487,7 @@ static bool R_callDLLUnload(DllInfo *dllInfo)
 
 static int DeleteDLL(const char *path)
 {
-    int   i, loc;
+    int i, loc;
 
     for (i = 0; i < CountDLL; i++) {
 	if (streql(path, LoadedDLL[i].path)) {
@@ -949,7 +949,6 @@ int R_moduleCdynload(const char *module, int local, int now)
     return res != NULL ? 1 : 0;
 }
 
-extern "C"
 int R_cairoCdynload(int local, int now)
 {
     char dllpath[PATH_MAX];

@@ -26,7 +26,7 @@
 
 typedef unsigned short Sock_port_t;
 
-typedef struct Sock_error_t {
+typedef struct Sock_error_st {
     int error;
     int h_error;
 } *Sock_error_t;
@@ -55,7 +55,7 @@ int R_socket_errno(void);
 char *R_socket_strerror(int errnum);
 int R_set_nonblocking(SOCKET s);
 
-/* R interface (Rsock.c) :*/
+/* R interface (Rsock.cpp) :*/
 void in_Rsockopen(int *port);
 void in_Rsocklisten(int *sock, char **buf, int *len);
 void in_Rsockconnect(int *port, char **host);
@@ -65,7 +65,7 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len);
 int in_Rsockselect(int nsock, int *insockfd, int *ready, int *write,
 		   double timeout);
 
-/* from Rsock.c, for sockconn.c */
+/* from Rsock.cpp, for sockconn.cpp */
 int R_SockOpen(int port);
 int R_SockListen(int sockp, char *buf, int len, int timeout);
 int R_SockConnect(int port, char *host, int timeout);
@@ -73,6 +73,6 @@ int R_SockClose(int sockp);
 ssize_t R_SockRead(int sockp, void *buf, size_t maxlen, int blocking, int timeout);
 ssize_t R_SockWrite(int sockp, const void *buf, size_t len, int timeout);
 
-/* from Rhttpd.c */
+/* from Rhttpd.cpp */
 int in_R_HTTPDCreate(const char *ip, int port);
 void in_R_HTTPDStop(void);

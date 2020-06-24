@@ -2090,7 +2090,7 @@ static void xzfile_close(Rconnection con)
 	lzma_stream *strm = &(xz->stream);
 	size_t nout, res;
 	unsigned char buf[BUFSIZE];
-	while(1) {
+	while(true) {
 	    strm->avail_out = BUFSIZE; strm->next_out = buf;
 	    ret = lzma_code(strm, LZMA_FINISH);
 	    nout = BUFSIZE - strm->avail_out;
@@ -2115,7 +2115,7 @@ static size_t xzfile_read(void *ptr, size_t size, size_t nitems,
 
     if (!s) return 0;
 
-    while(1) {
+    while(true) {
 	if (strm->avail_in == 0 && xz->action != LZMA_FINISH) {
 	    strm->next_in = xz->buf;
 	    strm->avail_in = fread(xz->buf, 1, BUFSIZ, xz->fp);
@@ -2173,7 +2173,7 @@ static size_t xzfile_write(const void *ptr, size_t size, size_t nitems,
 
     strm->avail_in = s;
     strm->next_in = p;
-    while(1) {
+    while(true) {
 	strm->avail_out = BUFSIZE; strm->next_out = buf;
 	ret = lzma_code(strm, LZMA_RUN);
 	if (ret > 1) {
@@ -2354,7 +2354,6 @@ extern int GA_clipboardhastext(void); /* from ga.h */
 #endif
 
 #ifdef Unix
-extern "C"
 Rboolean R_ReadClipboard(Rclpconn clpcon, char *type);
 #endif
 
@@ -5615,7 +5614,7 @@ Rconnection R_GetConnection(SEXP sConn) {
 
 /* ------------------- (de)compression functions  --------------------- */
 
-/* Code for gzcon connections is modelled on gzio.c from zlib 1.2.3 */
+/* Code for gzcon connections is modelled on gzio.cpp from zlib 1.2.3 */
 
 #define get_byte() (icon->read(&ccc, 1, 1, icon), ccc)
 
@@ -6461,7 +6460,7 @@ HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    // in this case we could read outlen from the trailer
 	    opt = 16;  // force gzip format
 	}
-	while(1) {
+	while(true) {
 	    buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 	    int res = R_uncompress(buf, &outlen, p, inlen, opt);
 	    if(res == Z_BUF_ERROR) {
@@ -6477,7 +6476,7 @@ HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	/*
 	if (p[0] == 0x1f && p[1] == 0x8b) { // in-memory gzip file
 	    // in this case we could read outlen from the trailer
-	    while(1) {
+	    while(true) {
 		buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 		int res = R_gzuncompress(buf, &outlen, p, inlen, 16); // force gzip format
 		if(res == Z_BUF_ERROR) {
@@ -6490,7 +6489,7 @@ HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		      "type = \"gzip\"");
 	    }
 	} else {
-	    while(1) {
+	    while(true) {
 		buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 		int res = uncompress(buf, &outlen, p, inlen);
 		if(res == Z_BUF_ERROR) {
@@ -6516,7 +6515,7 @@ HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	outlen = (o0 > UINT_MAX)? UINT_MAX: (unsigned int)o0;
 	int res;
 	char *buf, *p = (char *) RAW(from);
-	while(1) {
+	while(true) {
 	    buf = R_alloc(outlen, sizeof(char));
 	    res = BZ2_bzBuffToBuffDecompress(buf, &outlen, p, inlen, 0, 0);
 	    if(res == BZ_OUTBUFF_FULL) {
@@ -6539,7 +6538,7 @@ HIDDEN SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	size_t outlen = 3*inlen;
 	lzma_stream strm = LZMA_STREAM_INIT;
 	lzma_ret ret;
-	while(1) {
+	while(true) {
 	    /* Initialize lzma_stream in each iteration. */
 	    /* probably at most 80Mb is required, but 512Mb seems OK as a limit */
 	    if (subtype == 1)

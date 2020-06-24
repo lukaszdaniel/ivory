@@ -13,12 +13,12 @@ SEXP coxcount1(SEXP y2, SEXP strat2) {
     double dtime;
     SEXP rlist, rlistnames, rtime, rn, rindex, rstatus;
     int *rrindex, *rrstatus;
-    
+
     n = nrows(y2);
     time = REAL(y2);
     status = time +n;
     strata = INTEGER(strat2);
-    
+
     /* 
     ** First pass: count the total number of death times (risk sets)
     **  and the total number of rows in the new data set.
@@ -46,7 +46,7 @@ SEXP coxcount1(SEXP y2, SEXP strat2) {
     PROTECT(rstatus=allocVector(INTSXP,nrow));
     rrindex = INTEGER(rindex);
     rrstatus= INTEGER(rstatus);
-    
+
     /*
     ** Pass 2, fill them in
     */
@@ -98,7 +98,7 @@ SEXP coxcount2(SEXP y2, SEXP isort1, SEXP isort2, SEXP strat2) {
     SEXP rlist, rlistnames, rtime, rn, rindex, rstatus;
     int *rrindex, *rrstatus;
     int *sort1, *sort2;
-    
+
     n = nrows(y2);
     time1 = REAL(y2);
     time2 =  time1+n;
@@ -106,7 +106,7 @@ SEXP coxcount2(SEXP y2, SEXP isort1, SEXP isort2, SEXP strat2) {
     strata = INTEGER(strat2);
     sort1 = INTEGER(isort1);
     sort2 = INTEGER(isort2);
-    
+
     /* 
     ** First pass: count the total number of death times (risk sets)
     **  and the total number of rows in the new data set
@@ -143,7 +143,7 @@ SEXP coxcount2(SEXP y2, SEXP isort1, SEXP isort2, SEXP strat2) {
     rrindex = INTEGER(rindex);
     rrstatus= INTEGER(rstatus);
     atrisk = (int *)R_alloc(n, sizeof(int)); /* marks who is at risk */
-    
+
     /*
     ** Pass 2, fill them in
     */

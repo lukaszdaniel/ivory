@@ -1271,7 +1271,8 @@ static void csort_pre(SEXP * x, int n)
 
 // order = 1 is ascending and order=-1 is descending; also takes care
 // of na.last argument with check through 'icheck' Relies on
-// NA_INTEGER == INT_MIN, checked in init.c
+// NA_INTEGER == INT_MIN, checked in init.cpp
+
 static int isorted(int *x, int n)
 {
     int i = 1, j = 0;

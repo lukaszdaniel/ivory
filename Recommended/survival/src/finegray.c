@@ -74,7 +74,7 @@ SEXP finegray(SEXP tstart2, SEXP tstop2,   SEXP ctime2,   SEXP cprob2,
     wt = REAL(wt2);
     add2 =   SET_VECTOR_ELT(rlist, 4, allocVector(INTSXP, n2));
     add = INTEGER(add2);
-    
+
     /* do the work */
     k =0; 
     for (i=0; i<n; i++) {
@@ -84,7 +84,7 @@ SEXP finegray(SEXP tstart2, SEXP tstop2,   SEXP ctime2,   SEXP cprob2,
 	row[k]  = i+1;    /* 1 based subscripts for R */
 	wt[k] =1;
 	add[k] =0;
-    
+
 	if (!ISNAN(tstart[i]) && !ISNAN(tstop[i]) && extend[i]) {
 	    /* ctime contains the time at the end of the interval */
 	    for (j=0; (j<ncut) && (ctime[j] < tstop[i]); j++);

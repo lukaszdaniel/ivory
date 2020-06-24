@@ -9,18 +9,18 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
     double *twt, *nwt, *count;
     double vss, myrank, wsum1, wsum2, wsum3; /*sum of wts below, tied, above*/
     double lmean, umean, oldmean, newmean;
-        
+
     double ndeath;   /* weighted number of deaths at this point */
-    
+
     SEXP count2;
     double *wt;
     int    *indx;
-    
+
     n = nrows(y);
     ntree = asInteger(ntree2);
     wt = REAL(wt2);
     indx = INTEGER(indx2);
-    
+
     time = REAL(y);
     status = time + n;
     PROTECT(count2 = allocVector(REALSXP, 5));
@@ -45,7 +45,7 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
                 child++;
                 if (child < ntree)
                     count[1] += wt[j] * twt[child]; /*right children */
-                
+
                 while (index >0) {  /* walk up the tree  */
                     parent = (index-1)/2;
                     if (index & 1)   /* I am the left child */
@@ -56,7 +56,7 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
                 }
             }                    
         else j = i-1;
-        
+
         /* Add the weights for these obs into the tree and update variance*/
         for (; i>j; i--) {
             wsum1=0; 
@@ -86,7 +86,7 @@ SEXP concordance1(SEXP y, SEXP wt2,  SEXP indx2, SEXP ntree2) {
             }
         count[4] += ndeath * vss/twt[0];
         }
-        
+
     UNPROTECT(1);
     return(count2);
 }
@@ -106,14 +106,14 @@ SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
     SEXP count2;
     double *wt;
     int    *indx;
-    
+
     n = nrows(y);
     ntree = asInteger(ntree2);
     wt = REAL(wt2);
     indx = INTEGER(indx2);
     sort2 = INTEGER(sortstop);
     sort1 = INTEGER(sortstart);
-    
+
     time1 = REAL(y);
     time2 = time1 + n;
     status= time2 + n;
@@ -158,7 +158,7 @@ SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
                 vss += wsum3*(newmean+ oldmean -2*umean) * (newmean-oldmean);
                 vss -= wt[jptr]* (myrank -newmean)*(myrank -newmean);
                 }
-                
+
             /* Process deaths */
             for (j=i; j <n && status[sort2[j]]==1 && time2[sort2[j]]==dtime; j++) {
                 jptr =  sort2[j];
@@ -211,7 +211,7 @@ SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
             }
         count[4] += ndeath * vss/twt[0];
         }
-        
+
     UNPROTECT(1);
     return(count2);
 }

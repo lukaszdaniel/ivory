@@ -151,7 +151,7 @@ static void _draw_stroke (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 /* this is the version of the flabelwidth() method that is specific to the
    case when the current Plotter font is a Hershey font; called in
    g_flabelwidth () .
-   
+
    Argument 'enc' is ignored: these are in their own encoding.
 */
 HIDDEN

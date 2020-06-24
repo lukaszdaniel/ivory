@@ -18,7 +18,7 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
- 
+
 #include "guicolors.h"
 
 /*                configuration editor                        */

@@ -101,14 +101,14 @@ double Rf_gammafn(double x)
 	FIXME for threads ! */
     if (ngam == 0) {
 	ngam = chebyshev_init(gamcs, 42, DBL_EPSILON/20);/*was .1*d1mach(3)*/
-	Rf_gammalims(&xmin, &xmax);/*-> ./gammalims.c */
+	Rf_gammalims(&xmin, &xmax);/*-> ./gammalims.cpp */
 	xsml = exp(Rf_fmax2(log(DBL_MIN), -log(DBL_MAX)) + 0.01);
 	/*   = exp(.01)*DBL_MIN = 2.247e-308 for IEEE */
 	dxrel = sqrt(DBL_EPSILON);/*was sqrt(d1mach(4)) */
     }
 #else
 /* For IEEE double precision DBL_EPSILON = 2^-52 = 2.220446049250313e-16 :
- * (xmin, xmax) are non-trivial, see ./gammalims.c
+ * (xmin, xmax) are non-trivial, see ./gammalims.cpp
  * xsml = exp(.01)*DBL_MIN
  * dxrel = sqrt(DBL_EPSILON) = 2 ^ -26
 */

@@ -324,7 +324,7 @@ SEXP L_layoutRegion(SEXP layoutPosRow, SEXP layoutPosCol);
 
 SEXP L_stringMetric(SEXP label);
 
-/* From matrix.c */
+/* From matrix.cpp */
 double locationX(LLocation l);
 
 double locationY(LLocation l);
@@ -347,7 +347,7 @@ void location(double x, double y, LLocation v);
 
 void trans(LLocation vin, LTransform m, LLocation vout);
 
-/* From unit.c */
+/* From unit.cpp */
 SEXP unit(double value, int unit);
 
 double unitValue(SEXP unit, int index);
@@ -442,7 +442,7 @@ double transformXYfromNPC(double x, int to, double min, double max);
 
 double transformWHfromNPC(double x, int to, double min, double max);
 
-/* From just.c */
+/* From just.cpp */
 double justifyX(double x, double width, double hjust);
 
 double justifyY(double y, double height, double vjust);
@@ -452,10 +452,10 @@ double convertJust(int vjust);
 void justification(double width, double height, double hjust, double vjust,
 		   double *hadj, double *vadj);
 
-/* From util.c */
-SEXP getListElement(SEXP list, char *str);
+/* From util.cpp */
+SEXP getListElement(SEXP list, const char *str);
 
-void setListElement(SEXP list, char *str, SEXP value);
+void setListElement(SEXP list, const char *str, SEXP value);
 
 SEXP getSymbolValue(char *symbolName);
 
@@ -476,7 +476,7 @@ void textRect(double x, double y, SEXP text, int i,
 	      double xadj, double yadj,
 	      double rot, pGEDevDesc dd, LRect *r);
 
-/* From gpar.c */
+/* From gpar.cpp */
 double gpFontSize(SEXP gp, int i);
 
 double gpLineHeight(SEXP gp, int i);
@@ -515,7 +515,7 @@ void updateGContext(SEXP gp, int i, const pGEcontext gc, pGEDevDesc dd,
 
 void initGPar(pGEDevDesc dd);
 
-/* From viewport.c */
+/* From viewport.cpp */
 SEXP viewportX(SEXP vp);
 
 SEXP viewportY(SEXP vp);
@@ -589,7 +589,7 @@ void calcViewportTransform(SEXP vp, SEXP parent, Rboolean incremental,
 
 void initVP(pGEDevDesc dd);
 
-/* From layout.c */
+/* From layout.cpp */
 Rboolean checkPosRowPosCol(SEXP viewport, SEXP parent);
 
 void calcViewportLayout(SEXP viewport,
@@ -604,7 +604,7 @@ void calcViewportLocationFromLayout(SEXP layoutPosRow,
 				    SEXP parent,
 				    LViewportLocation *vpl);
 
-/* From state.c */
+/* From state.cpp */
 void initDL(pGEDevDesc dd);
 
 SEXP gridStateElement(pGEDevDesc dd, int elementIndex);
@@ -616,7 +616,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data);
 extern int gridRegisterIndex;
 
 
-/* From grid.c */
+/* From grid.cpp */
 SEXP doSetViewport(SEXP vp, 
 		   Rboolean topLevelVP,
 		   Rboolean pushing,
@@ -645,7 +645,7 @@ SEXP L_xsplineBounds(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep,
 SEXP L_xsplinePoints(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep,
 		     SEXP index, SEXP theta);
 
-/* From unit.c */
+/* From unit.cpp */
 SEXP validUnits(SEXP units);
 SEXP constructUnits(SEXP amount, SEXP data, SEXP unit);
 SEXP asUnit(SEXP simpleUnit);
@@ -657,7 +657,7 @@ SEXP flipUnits(SEXP units);
 SEXP absoluteUnits(SEXP units);
 SEXP summaryUnits(SEXP units, SEXP op_type);
 
-/* From gpar.c */
+/* From gpar.cpp */
 SEXP L_getGPar(void);
 SEXP L_setGPar(SEXP gpars);
-    
+

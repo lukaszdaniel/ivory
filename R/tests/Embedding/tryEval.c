@@ -1,8 +1,7 @@
 #include <Rinternals.h>
 #include <Rembedded.h>
 
-int 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     SEXP e, val;
     int errorOccurred;
@@ -21,9 +20,9 @@ main(int argc, char *argv[])
     } else {
 	Rf_PrintValue(val);
     }
-   
+
     UNPROTECT(1);
-    
+
     return(0);
 }
 

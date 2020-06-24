@@ -7,7 +7,7 @@ void agsurv5(Sint *n2,     Sint *nvar2,  Sint *dd, double *x1,
     int i,j, k, kk;
     double d;
     int n, nvar;
-    
+
     n = n2[0];
     nvar = nvar2[0];
 

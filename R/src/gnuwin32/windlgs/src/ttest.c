@@ -161,7 +161,7 @@ SEXP menu_ttest3()
     SEXP cmdSexp, cmdexpr, ans = R_NilValue;
     int i;
     ParseStatus status;
-    
+
     done = 0;
     create_dialog();
     setaction(bCancel, cancel2);

@@ -95,7 +95,7 @@
  *
  * Supports all xtypes (pattern, real, complex, and zomplex).
  */
- 
+
 #include "cholmod_internal.h"
 #include "cholmod_core.h"
 

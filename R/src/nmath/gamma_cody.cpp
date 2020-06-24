@@ -5,7 +5,7 @@
  *===========			~~~~~~
  */
 
-// used in bessel_i.c and bessel_j.c, hidden if possible.
+// used in bessel_i.cpp and bessel_j.cpp, hidden if possible.
 
 #include "nmath.h"
 

@@ -405,11 +405,11 @@ sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
 
 	    switch (data.subtype)
 	      {
-			  
+
 		/* subtypes as specified by PSPP documentation at
 			  https://www.gnu.org/software/pspp/pspp-dev/html_node/System-File-Format.html#System-File-Format
 		*/
-			  
+
 	      case 3: /* Machine integer information */
 		  if (!read_machine_int32_info (h, data.size, data.count,
 						&(inf->encoding)))
@@ -459,7 +459,7 @@ sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
 	      case 17: /* Data File Attributes Record */
 		skip = 1;
 		break;
-		  
+
 	      case 18: /* Variable Attributes Records */
 		skip = 1;
 		break;
@@ -467,7 +467,7 @@ sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
 	      case 19: /* bninary multiple-response sets */
 		skip = 1;
 		break;
-		  
+
 	      case 20: /* another codepage information */
 		skip = 1;
 		break;
@@ -481,11 +481,11 @@ sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
 		warning(_("%s: Long string missing values record found (record type 7, subtype %d), but ignored"), h->fn, data.subtype);
 		skip = 1;
 		break;
-		  
+
 	      case 24: /* XML that describes how data in the file should be displayed on-screen */
 		skip = 1;
 		break;
-						  
+
 	      default:
 		warning(_("%s: Unrecognized record type 7, subtype %d encountered in system file"), h->fn, data.subtype);
 		skip = 1;

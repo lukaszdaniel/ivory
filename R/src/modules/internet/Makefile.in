@@ -11,10 +11,10 @@ R_HOME = $(top_builddir)
 
 include $(top_builddir)/Makeconf
 
-SOURCES = Rhttpd.c Rsock.c internet.c libcurl.c nanoftp.c nanohttp.c sock.c sockconn.c
+SOURCES = Rhttpd.cpp Rsock.cpp internet.cpp libcurl.cpp nanoftp.cpp nanohttp.cpp sock.cpp sockconn.cpp
 HEADERS = sock.h
-DEPENDS = $(SOURCES:.c=.d)
-OBJECTS = $(SOURCES:.c=.o)
+DEPENDS = $(SOURCES:.cpp=.d)
+OBJECTS = $(SOURCES:.cpp=.o)
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 DISTFILES = \
@@ -24,7 +24,7 @@ DISTFILES = \
 internet_la = internet$(SHLIB_EXT)
 internet_la_LIBADD = $(CURL_LIBS) $(LIBR1) @INTERNET_LIBS@ @DYLIB_UNDEFINED_ALLOWED_FALSE@ $(LIBINTL)
 
-ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(CURL_CPPFLAGS) $(CPPFLAGS) $(DEFS)
+ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(CURL_CPPFLAGS) $(CPPFLAGS) $(CPICFLAGS) $(WERROR_FLAGS) $(DEFS)
 ALL_CFLAGS = $(ALL_CFLAGS_LO) $(WERROR_FLAGS) @C_VISIBILITY@
 
 all: R

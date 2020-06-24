@@ -957,7 +957,7 @@ FUNTAB R_FunTab[] =
 {"traceOnOff",	do_traceOnOff,	0,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"debugOnOff",	do_traceOnOff,	1,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 
-// do_lapack : all in ---> ../modules/lapack/Lapack.c
+// do_lapack : all in ---> ../modules/lapack/Lapack.cpp
 {"La_qr_cmplx",	do_lapack,	0,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"La_rs",	do_lapack,	1,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
 {"La_rs_cmplx",do_lapack,	2,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},
@@ -1420,7 +1420,7 @@ HIDDEN SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* For use in packages */
-extern "C"
+
 const char *getPRIMNAME(SEXP object)
 {
     return PRIMNAME(object);

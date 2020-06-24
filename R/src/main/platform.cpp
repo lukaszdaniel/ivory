@@ -808,7 +808,7 @@ HIDDEN SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef _WIN32
-int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.c */
+int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.cpp */
 int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 #endif
 
@@ -2073,7 +2073,7 @@ HIDDEN SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef Unix
 static int var_R_can_use_X11 = -1;
 
-extern "C" Rboolean R_access_X11(void); /* from src/unix/X11.c */
+Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
 
 static Rboolean R_can_use_X11(void)
 {
@@ -3375,7 +3375,7 @@ HIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* platform-specific */
-extern "C" void Rsleep(double timeint);
+void Rsleep(double timeint);
 
 HIDDEN SEXP do_syssleep(SEXP call, SEXP op, SEXP args, SEXP rho)
 {

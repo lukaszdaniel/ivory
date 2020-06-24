@@ -50,7 +50,7 @@ SEXP zph2(SEXP gt2,    SEXP y2,
     eta =    REAL(eta2);
     sort1=   INTEGER(sort12);
     sort2=   INTEGER(sort22);
- 
+
    /* 
     ** count up the number of events and the number of strata
     */
@@ -76,14 +76,14 @@ SEXP zph2(SEXP gt2,    SEXP y2,
     u = REAL(SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, 2*nvar)));
     dtemp = REAL(SET_VECTOR_ELT(rlist, 1, allocMatrix(REALSXP, 2*nvar, 2*nvar)));
     imat = dmatrix(dtemp, 2*nvar, 2*nvar);  /* information matrix */
-    
+
     dtemp = REAL(SET_VECTOR_ELT(rlist, 2, allocMatrix(REALSXP, nevent, nvar)));
     schoen = dmatrix(dtemp, nevent, nvar);  /* schoenfeld residuals */
 
     used = imatrix(INTEGER(SET_VECTOR_ELT(rlist, 3, 
 					  allocMatrix(INTSXP, nstrat, nvar))),
 		   nstrat, nvar);
-    
+
     /* scratch vectors */
     a = (double *) R_alloc(2*nvar*nvar + 2*nvar, sizeof(double));
     a2 = a + nvar;
@@ -253,7 +253,7 @@ SEXP zph2(SEXP gt2,    SEXP y2,
                     cmat2[i][j]=0;
                 }
             }
-            
+
             for (; person<nused; person++) {
                 p = sort2[person];
                 if (strata[p] != cstrat || tstop[p] < dtime) break; /* no more to add */
@@ -354,7 +354,7 @@ SEXP zph2(SEXP gt2,    SEXP y2,
             }
         }
     }   /* end  of accumulation loop */
-    
+
     /* fill in the rest of the information matrix */
     for (i=0; i<nvar; i++) {
 	for (j=0; j<i; j++) {

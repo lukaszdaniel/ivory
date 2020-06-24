@@ -101,7 +101,7 @@ void gen_tps_poly_powers(int *pi /* **pi */,int *M,int *m, int *d)
 /* generates the sequence of powers required to specify the M polynomials spanning the 
    null space of the penalty of a d-dimensional tps with wiggliness penalty order m 
    So, if x_i are the co-ordinates the kth polynomial is x_1^pi[k][1]*x_2^pi[k][2] ....
- 
+
    pi[k][j] actually stored as pi[k + M * j] 
 */
 
@@ -147,7 +147,7 @@ void tpsT(matrix *T,matrix *X,int m,int d)
 
   pin = (int *)CALLOC((size_t) (M * d),sizeof(int));
   gen_tps_poly_powers(pin, &M, &m, &d); /* pin[][] contains powers of polynomials in unpenalized basis */
-  
+
   (*T)=initmat(X->r,M);
   for (i=0;i<T->r;i++)
   for (j=0;j<M;j++)
@@ -155,7 +155,7 @@ void tpsT(matrix *T,matrix *X,int m,int d)
     for (k=0;k<d;k++) for (z=0;z<pin[j + M * k];z++) x *= X->M[i][k];
     T->M[i][j]=x;
   }
-  
+
   /*for (i=0;i<M;i++) FREE(pin[i]);*/
   FREE(pin);
 }
@@ -185,13 +185,13 @@ double tps_g(matrix *X,matrix *p,double *x,int d,int m,double *b,int constant)
    when d or m change. Set d to zero to clear this memory. 
    Calling with this d=0 when the memory is empty is now safe - thanks to
    Luke Tierney for spotting that it was not always so!   
-   
+
    It is assumed that coefficients of the null space of the penalty are at the end of p.
 
    If constant == 0 then the model has no intercept term, while if constant ==1 it does.
 
    - the intercept parameter is at p[p.r-M], if it is present.
-   
+
    The rows of X contain the covariates from the original data-points, reduced to 
    uniqueness (preferably in tprs_setup())
 
@@ -231,7 +231,7 @@ double tps_g(matrix *X,matrix *p,double *x,int d,int m,double *b,int constant)
   for (i=off;i<M;i++,pb++) /* work through null space */
   { r=1.0;
     /* for (j=0;j<d;j++) for (k=0;k<pin[i][j];k++) r*=x[j];*/
-    
+
     for (j=0;j<d;j++) for (k=0;k<pin[i+M*j];k++)  r*=x[j];
     *pb = r; /* b->V[i+X->r-off]=r;*/
     if (p->r) g+=p->V[i+n-off]*r;
@@ -258,7 +258,7 @@ int *Xd_strip(matrix *Xd)
    yxindex[i] contains the row of the stripped down Xd that corresponds to 
    the ith response datum. Note that the identification of ties involves 
    sorting Xd - even if there are no ties.
-    
+
    Note that this routine assumes that the final column of Xd consists of the 
    integers 0 to Xd->r-1. These are vital for constructing the index.
 
@@ -312,7 +312,7 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
 
    The dimension of the truncated basis must be greater than the dimension of 
    the null space of the penalty. 
-   
+
    The inputs are:
 
    x[i] = array of n values for covariate i (i=0..d-1)
@@ -369,8 +369,8 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
   /* Now the number of unique covariate "points" must be obtained */
   /* and these points stored in Xu, to avoid problems with E */
   yxindex=Xd_strip(Xu); /*yxindex[i] is the row of Xu corresponding to y[i] */
- 
-  
+
+
   Xu->c--; /* hide indexing column */
   if (Xu->r<k) 
   error(_("A term has fewer unique covariate combinations than specified maximum degrees of freedom"));
@@ -397,18 +397,18 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
   } else
   { v=initmat(k,1);    /* eigen-value matrix for E */
 
-  
+
       nk = E.r;
       Ea = (double *) CALLOC((size_t) (nk*nk),sizeof(double));
       Ua = (double *) CALLOC((size_t) (nk*k),sizeof(double));
       RArrayFromMatrix(Ea,nk,&E);
       minus = -1;kk=k; 
-  
+
       Rlanczos(Ea,Ua,v.M[0],&nk, &kk, &minus,&tol,&one); // final '&one' is for single thread version
 
       U = Rmatrix(Ua,E.r,k);FREE(Ea);FREE(Ua);
-    
-  
+
+
     /* Now form the constraint matrix for the truncated problem T'U */
     TU=initmat(M,k);
     matmult(TU,T,U,1,0);
@@ -426,7 +426,7 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
   /* Now add the elements required to get UZ to map from whole real parameter vector to whole t.p.s. vector */
   for (i=0;i<E.r;i++) for (j=k-M;j<UZ->c;j++) UZ->M[i][j]=0.0;
   for (i=0;i<M-1+constant;i++) UZ->M[UZ->r-i-1][UZ->c-i-1]=1.0;
-  
+
   /* Now construct the design matrix X = [Udiag(v)Z,T] .... */
   if (n_knots<k&&!pure_knot) /* then the basis prior to truncation is pure spline basis: 6/5/2002 - !pure_knots added as bug fix*/
   { X1=initmat(U.r,k);
@@ -462,7 +462,7 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
       for (j=0;j<d;j++) xc[j]=x[j][i];
       tps_g(Xu,&p,xc,d,m,b,constant);
       /* now X1'[UZ] p_k evaluates to the correct thing */
-      
+
       /* UZ is kk by k */
       F77_CALL(dgemv)(&trans,&kk,&k,&alpha,uz,&kk, b, &one,&beta, a, &one FCONE); /* BLAS call for (UZ)'b */
       XMi = X->M[i];
@@ -488,7 +488,7 @@ void tprs_setup(double **x,double **knt,int m,int d,int n,int k,int constant,mat
      Specifically, rescale each column of X so that it has rms value 1. X -> XW.
      This means that S -> WSW and UZ -> UZW.  
   */
- 
+
   for (i=0;i<X->c;i++)
   { w=0; for (j=0;j<X->r;j++) w+=X->M[j][i]*X->M[j][i]; w=sqrt(w/X->r);
     for (j=0;j<X->r;j++) X->M[j][i]/=w;
@@ -602,7 +602,7 @@ void predict_tprs(double *x, int *d,int *n,int *m,int *k,int *M,double *Xu,int *
       for (xp1=Xp,xxp=a,xxp1=a + *k;xxp<xxp1;xxp++,xp1+= *n) *xp1 = *xxp * by_mult; 
       else 
       for (xp1=Xp,xxp=a,xxp1=a + *k;xxp<xxp1;xxp++,xp1+= *n) *xp1 = *xxp;
-      
+
       /* for (j=0;j< *k;j++) 
       { Xm.M[i][j]=0.0;
         for (l=0;l<UZm.r;l++) Xm.M[i][j] += b[l]*UZm.M[l][j];  // forming b'UZ 

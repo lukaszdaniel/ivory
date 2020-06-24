@@ -155,7 +155,7 @@ HIDDEN void Rf_PrintVersion_part_1(char *s, size_t len)
     PrintIvoryVersionString(s, len);
     strcat(s, " -- \"Internationalized Version of R\"\n");
     SPRINTF_2("Copyright (C) 2013-%s Lukasz Daniel (lukasz.daniel@gmail.com)\nSee README-IVORY file for details.\n\n", R_YEAR);
-    
+
     PrintVersionString(tmp, len);
     if(strlen(R_NICK) != 0) {
 	char nick[128];

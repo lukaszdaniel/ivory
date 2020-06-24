@@ -149,7 +149,7 @@ static cjk_locale_name_t cjk_locale_name[] = {
     {"", MB_Default},
 };
 
-// used in character.cpp, ../gnuwin32/console.c , ../library/grDevices/src/devP*.c :
+// used in character.cpp, ../gnuwin32/console.cpp , ../library/grDevices/src/devP*.cpp :
 int Ri18n_wcwidth(R_wchar_t c)
 {
     char lc_str[128];
@@ -181,7 +181,7 @@ int Ri18n_wcwidth(R_wchar_t c)
     return zw ? 0 : 1; // assume unknown chars are width one.
 }
 
-/* Used in character.cpp, errors.cpp, ../gnuwin32/console.c */
+/* Used in character.cpp, errors.cpp, ../gnuwin32/console.cpp */
 HIDDEN
 int Ri18n_wcswidth (const wchar_t *s, size_t n)
 {
@@ -298,7 +298,7 @@ extern const char *locale2charset(const char *);
 wctype_t Ri18n_wctype(const char *);
 int Ri18n_iswctype(wint_t, wctype_t);
 
-static int Ri18n_iswalnum (wint_t wc)
+static int Ri18n_iswalnum(wint_t wc)
 {
     return (Ri18n_iswctype(wc, Ri18n_wctype("digit")) ||
 	    Ri18n_iswctype(wc, Ri18n_wctype("alpha"))    );

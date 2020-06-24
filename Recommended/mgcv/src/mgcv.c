@@ -114,7 +114,7 @@ void MonoCon(matrix *A,matrix *b,matrix *x,int control,double lower,double upper
 
 /* gets matrices A and b for constraints of the form Ay>=b ensuring monotonic
    change  of the cubic spline interpolating (x_i,y_i) where h_i=x_{i+1}-x_i 
-   
+
    control indicates type of constraints:
    up=control/4 - 0 for decrease, 1 for increase
    lo=(control-up*4)/2 - 1 for lower bound, 0 no lower bound
@@ -267,7 +267,7 @@ void crspl(double *x,int *n,double *xk, int *nk,double *X,double *S, double *F,i
       }
       /* now xk[j] <= x[i] <= xk[j+1] */ 
     } /* end of bisection */
-    
+
     /* knot interval containing x[i] now known. Compute spline basis */ 
     if (extrapolate) { /* x[i] is outside knot range */
       if (xi<kmin) {
@@ -299,7 +299,7 @@ void crspl(double *x,int *n,double *xk, int *nk,double *X,double *S, double *F,i
       cjm = (ajm*(ajm*ajm/h - h))/6;
       cjp = (ajp*(ajp*ajp/h - h))/6;
       ajm /= h;ajp /= h;
-      
+
       Xp = X + i; /* ith row of X */
 
       for (Fp = F+ j * *nk, Fp1 = F+(j+1)* *nk,k=0;k < *nk;k++,Xp += *n,Fp++,Fp1++) 
@@ -379,13 +379,13 @@ void RuniqueCombs(double *X,int *ind,int *r, int *c)
 void RMonoCon(double *Ad,double *bd,double *xd,int *control,double *lower,double *upper,int *n)
 /* obtains coefficient matrices for imposing monotonicity (and optionally bounds) on a 
    cubic regression spline with n knots located as specified in xd. 
-   
+
    control indicates type of constraints:
    up=control/4 - 0 for decrease, 1 for increase
    lo=(control-up*4)/2 - 1 for lower bound, 0 no lower bound
    hi=(control-up*4-lo*2) - 1 for upper bound, 0 no upper bound
    control = 4*up+2*lo+hi
-   
+
    lower and upper are the bounds to impose (ignored if control doesn't
    indicate that they should be used).
 
@@ -401,7 +401,7 @@ void RMonoCon(double *Ad,double *bd,double *xd,int *control,double *lower,double
   MonoCon(&A,&b,&x,*control,*lower,*upper); 
   RArrayFromMatrix(Ad,A.r,&A);
   RArrayFromMatrix(bd,b.r,&b);
- 
+
   freemat(x);freemat(A);freemat(b);  
 
 }
@@ -417,8 +417,8 @@ void  RPCLS(double *Xd,double *pd,double *yd, double *wd,double *Aind,double *bd
    np=nar[1] - number of parameters
    nai=nar[2] - number of inequality constraints
    naf=nar[3] - number of fixed constraints
-  
-   
+
+
    Problem to be solved is:
 
    minimise      ||W^0.5 (y - Xp)||^2 + p'Bp
@@ -438,7 +438,7 @@ void  RPCLS(double *Xd,double *pd,double *yd, double *wd,double *Aind,double *bd
 */
 { matrix y,X,p,w,Ain,Af,b,*S;
   int n,np,i,*active;
- 
+
   np=nar[1];n=nar[0];
   /* unpack from R into matrices */
   X=Rmatrix(Xd,(long)n,(long)np);
@@ -448,28 +448,28 @@ void  RPCLS(double *Xd,double *pd,double *yd, double *wd,double *Aind,double *bd
   if (nar[2]>0) Ain=Rmatrix(Aind,(long)nar[2],(long)np); else Ain.r=0L;
   if (nar[3]>0) Af=Rmatrix(Afd,(long)nar[3],(long)np); else Af.r=0L;
   if (nar[2]>0) b=Rmatrix(bd,(long)nar[2],1L);else b.r=0L;
- 
+
   if (*m) S=(matrix *)CALLOC((size_t) *m,sizeof(matrix));
   else S=NULL; /* avoid spurious compiler warning */
   for (i=0;i< *m;i++) S[i]=initmat((long)dim[i],(long)dim[i]);
   RUnpackSarray(*m,S,Sd);
-  
+
   //if (nar[4]) H=initmat(y.r,y.r); else H.r=H.c=0L;
   active=(int *)CALLOC((size_t)(p.r+1),sizeof(int)); /* array for active constraints at best fit active[0] will be  number of them */
   /* call routine that actually does the work */
- 
+
   PCLS(&X,&p,&y,&w,&Ain,&b,&Af,S,off,theta,*m,active);
 
   /* copy results back into R arrays */ 
   for (i=0;i<p.r;i++) pd[i]=p.V[i];
- 
+
   //if (H.r) RArrayFromMatrix(Hd,H.r,&H);
   /* clear up .... */
   FREE(active);
- 
+
   for (i=0;i< *m;i++) freemat(S[i]);
   if (*m) FREE(S);
- 
+
   freemat(X);freemat(p);freemat(y);freemat(w);
   //if (H.r) freemat(H);
   if (Ain.r) freemat(Ain);

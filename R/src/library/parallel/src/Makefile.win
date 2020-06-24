@@ -11,9 +11,11 @@ top_builddir = ../../../..
 subdir = src/library/$(pkg)/src
 R_HOME = $(top_builddir)
 
-SOURCES_C = init.c rngstream.c ncpus.c
-DEPENDS = $(SOURCES_C:.c=.d)
-OBJECTS = $(SOURCES_C:.c=.o) ../../../gnuwin32/dllversion.o
+SOURCES_C = 
+SOURCES_CXX = init.cpp rngstream.cpp ncpus.cpp
+
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion.o
 
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include

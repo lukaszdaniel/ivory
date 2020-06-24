@@ -49,7 +49,7 @@ double Rf_beta(double a, double b)
     }
 #else
 /* For IEEE double precision DBL_EPSILON = 2^-52 = 2.220446049250313e-16 :
- *   xmin, xmax : see ./gammalims.c
+ *   xmin, xmax : see ./gammalims.cpp
  *   lnsml = log(DBL_MIN) = log(2 ^ -1022) = -1022 * log(2)
 */
 #define xmin  -170.5674972726612

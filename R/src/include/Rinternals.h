@@ -195,6 +195,7 @@ typedef unsigned int SEXPTYPE;
 #define BCREPREF 243
 #define EMPTYENV_SXP 242
 #define BASEENV_SXP 241
+// #define SINGLESXP 302
 
 #else /* NOT YET */
     /*------ enum_SEXPTYPE ----- */
@@ -232,22 +233,23 @@ typedef unsigned int SEXPTYPE;
         ALTREP_SXP = 238,
         ATTRLISTSXP = 239,
         ATTRLANGSXP = 240,
-        REFSXP = 255,
-        NILVALUE_SXP = 254,
-        GLOBALENV_SXP = 253,
-        UNBOUNDVALUE_SXP = 252,
-        MISSINGARG_SXP = 251,
-        BASENAMESPACE_SXP = 250,
-        NAMESPACESXP = 249,
-        PACKAGESXP = 248,
-        PERSISTSXP = 247,
-        /* the following are speculative--we may or may not need them soon */
-        CLASSREFSXP = 246,
-        GENERICREFSXP = 245,
-        BCREPDEF = 244,
-        BCREPREF = 243,
+        /* the following (241 - 246) are speculative--we may or may not need them soon */
+        BASEENV_SXP = 241,
         EMPTYENV_SXP = 242,
-        BASEENV_SXP = 241
+        BCREPREF = 243,
+        BCREPDEF = 244,
+        GENERICREFSXP = 245,
+        CLASSREFSXP = 246,
+        PERSISTSXP = 247,
+        PACKAGESXP = 248,
+        NAMESPACESXP = 249,
+        BASENAMESPACE_SXP = 250,
+        MISSINGARG_SXP = 251,
+        UNBOUNDVALUE_SXP = 252,
+        GLOBALENV_SXP = 253,
+        NILVALUE_SXP = 254,
+        REFSXP = 255
+// SINGLESXP = 302        
     } SEXPTYPE;
 #endif
 
@@ -635,7 +637,7 @@ typedef union {
 #define CADDR(e)	CAR(CDDR(e))
 #define CADDDR(e)	CAR(CDR(CDDR(e)))
 #define CAD4R(e)	CAR(CDDR(CDDR(e)))
-#define MISSING_MASK	15 /* reserve 4 bits--only 2 uses now */
+#define MISSING_MASK	((1 << 4) - 1) // = 15 /* reserve 4 bits--only 2 uses now */
 #define MISSING(x)	((x)->sxpinfo.gp & MISSING_MASK)/* for closure calls */
 #define SET_MISSING(x, v)                                        \
     do                                                           \
@@ -808,7 +810,7 @@ Rboolean (Rf_isObject)(SEXP s);
 #define NOT_SHARED(x) (! MAYBE_SHARED(x))
 
 /* ALTREP sorting support */
-enum
+typedef enum Sortness
 {
     SORTED_DECR_NA_1ST = -2,
     SORTED_DECR = -1,
@@ -816,7 +818,7 @@ enum
     SORTED_INCR = 1,
     SORTED_INCR_NA_1ST = 2,
     KNOWN_UNSORTED = 0
-};
+} Sortness;
 
 #define KNOWN_SORTED(sorted) (sorted == SORTED_DECR ||        \
                               sorted == SORTED_INCR ||        \

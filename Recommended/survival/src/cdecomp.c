@@ -9,7 +9,7 @@
 SEXP cdecomp(SEXP R2, SEXP time2) {
     int i,j,k;
     int nc, ii;
-    
+
     static const char *outnames[]= {"d", "A", "Ainv", 
                                     "P", ""};    
     SEXP rval, stemp;
@@ -24,7 +24,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     /* Make the output matrices as copies of R, so as to inherit
     **   the dimnames and etc
     */
-    
+
     PROTECT(rval = mkNamed(VECSXP, outnames));
     stemp=  SET_VECTOR_ELT(rval, 0, allocVector(REALSXP, nc));
     dd = REAL(stemp);
@@ -35,9 +35,9 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     Ainv = REAL(stemp);
     stemp = SET_VECTOR_ELT(rval, 3, duplicate(stemp));
     P = REAL(stemp);
-   
+
     ediag = (double *) R_alloc(nc, sizeof(double));
-    
+
     /* 
     **        Compute the eigenvectors
     **   For each column of R, find x such that Rx = kx
@@ -56,7 +56,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
         }
         ii += nc;
     }
-    
+
     /*
     ** Solve for A-inverse, which is also upper triangular. The diagonal
     **  of A and the diagonal of A-inverse are both 1.  At the same time 
@@ -79,7 +79,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
     **    0*A[1,3] + U[2,2]A[2,3] + U[2,3]A[3,3] + U[2,4] 0     = 0
     **    0*A[1,4] + U[2,2]A[2,4] + U[2,3]A[3,4] + U[2,4]A[4,4] = 0
     */
-    
+
     ii =0; /* contains i * nc */
     for (i=0; i<nc; i++) ediag[i] = exp(time* dd[i]);
     for (i=0; i<nc; i++) { 
@@ -90,7 +90,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
             for (k=j+1; k<=i; k++) temp += A[j + k*nc]* Ainv[k +ii];
             Ainv[j +ii] = -temp;
         }
-        
+
         /* column i of P */
         P[i + ii] = ediag[i];
         for (j=0; j<i; j++) {
@@ -98,7 +98,7 @@ SEXP cdecomp(SEXP R2, SEXP time2) {
             for (k=j; k<nc; k++) temp += A[j + k*nc] * Ainv[k+ii] * ediag[k];
             P[j+ii] = temp;
         }
-        
+
         /* alternate computations for row i of P, does not use Ainv*/
         /*P[i +ii] = ediag[i];
           for (j=i+1; j<nc; j++) { 

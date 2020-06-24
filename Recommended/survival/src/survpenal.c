@@ -68,7 +68,7 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	    else {
 		dptr = REAL(VECTOR_ELT(plist, 1));
 		for (i=0; i<nfrail; i++) u[i] += dptr[i];
-	    
+
 		dptr = REAL(VECTOR_ELT(plist,2));
 		for (i=0; i<nfrail; i++) {
 		    hdiag[i] += dptr[i];
@@ -95,7 +95,7 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 
 	    dptr = REAL(VECTOR_ELT(plist, 1));       /* first deriv penalty */
 	    for (i=0; i<nvar; i++) u[i+nfrail] += dptr[i];
-	    
+
 	    dptr = REAL(VECTOR_ELT(plist,2));
 	    if (pdiag==0) {
 		/* diagonal penalty */
@@ -127,6 +127,6 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	    }
 	UNPROTECT(1);
 	}
-	
+
     }
-		
+

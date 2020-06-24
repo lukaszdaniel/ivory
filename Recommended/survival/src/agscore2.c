@@ -52,7 +52,7 @@ SEXP agscore2(SEXP y2,     SEXP covar2,   SEXP strata2,
     score = REAL(score2);
     weights = REAL(weights2);
     method = asInteger(method2);
-   
+
     /* scratch space */
     a = (double *) R_alloc(6*nvar, sizeof(double));
     a2  = a+nvar;

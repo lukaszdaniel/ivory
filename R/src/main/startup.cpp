@@ -35,7 +35,7 @@
 #include <unistd.h>
 #endif
 
-/* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
+/* These are used in ../gnuwin32/system.cpp, ../unix/sys-std.cpp */
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE	RestoreAction = SA_RESTORE;
 static Rboolean LoadSiteFile = TRUE;
@@ -111,7 +111,7 @@ FILE *R_OpenSiteFile(void)
 static char workspace_name[1000] = ".RData";
 
 /*
-  set_workspace_name is in src/gnuwin32/system.c and used to implement
+  set_workspace_name is in src/gnuwin32/system.cpp and used to implement
   drag-and-drop on Windows.
  */
 #else

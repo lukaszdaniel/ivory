@@ -20,7 +20,7 @@
 /* <UTF8> This does byte-level access, e.g. isspace, but is OK. */
 
 /* ------------------- process .Renviron files in C -----------------
- *  Formerly part of ../unix/sys-common.c.
+ *  Formerly part of ../unix/sys-common.cpp.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -106,7 +106,7 @@ static const char *findterm(const char *s)
 
     if(!strlen(s)) return "";
     ans[0] = '\0';
-    while(1) {
+    while(true) {
 	/* Look for ${...}, taking care to look for inner matches */
 	p = Rf_strchr(s, '$');
 	if(!p || p[1] != '{') break;

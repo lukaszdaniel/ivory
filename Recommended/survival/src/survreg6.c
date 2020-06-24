@@ -128,7 +128,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
     **  copy them to to the end of newbeta as well (survregc1/c2 expects em)
     */
     for (i=nvar; i<LENGTH(beta2); i++) newbeta[i] = beta[i];
-       
+
 
     if (ny==2) {
 	time1= REAL(y); 
@@ -158,7 +158,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
 	zptr = REAL(z);
 	nprotect = nprotect+1;
 	}
-  
+
     /*
     ** do the initial iteration step
     */
@@ -183,7 +183,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
 	chsolve2(JJ, nvar2, u);
 	}
     else chsolve2(imat,nvar2,u);        /* a replaced by  a *inverse(i) */
-   
+
     /*
     **  Never, never complain about convergence on the first step.  That way,
     **  if someone HAS to they can force one iter at a time.
@@ -231,7 +231,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
 	    *iter2 = iter;
 	    goto alldone;
 	    }
-	
+
 	if (isnan(newlk) || 0 != isinf(newlk) || newlk < *loglik)   {    
 	    /*it is not converging ! */
 	    for (j=0; j<5 && newlk < *loglik; j++) {
@@ -277,7 +277,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
 		newbeta[i] = newbeta[i] +  u[i];
 		}
 	    }
-	
+
 	newlk = (*dolik)(n,      nvar,             nstrat,  0,
 			 newbeta,asInteger(dist),  strat,   offset,
 			 time1,  time2,            status,  wt,
@@ -293,7 +293,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
     for (i=1; i<nvar2; i++) {
         for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
         }
-    
+
     for (i=0; i<nvar2; i++)
 	beta[i] = newbeta[i];
     *flag= 1000;
@@ -302,7 +302,7 @@ SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
     ** Put together the return list
     */
 alldone:
-    
+
     PROTECT(rlist=allocVector(VECSXP, 6));
     SET_VECTOR_ELT(rlist, 0, out_beta);
     SET_VECTOR_ELT(rlist, 1, out_iter);
@@ -332,4 +332,4 @@ alldone:
     Free(newbeta);
     return(rlist);
     }
-    
+

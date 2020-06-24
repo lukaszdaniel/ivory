@@ -1006,8 +1006,7 @@ SEXP Rf_namesgets(SEXP vec, SEXP val)
     return vec;
 }
 
-#define isS4Environment(x) (TYPEOF(x) == S4SXP &&	\
-			    isEnvironment(R_getS4DataSlot(x, ENVSXP)))
+inline static bool isS4Environment(SEXP x) { return (TYPEOF(x) == S4SXP && isEnvironment(R_getS4DataSlot(x, ENVSXP))); }
 
 HIDDEN SEXP do_names(SEXP call, SEXP op, SEXP args, SEXP env)
 {

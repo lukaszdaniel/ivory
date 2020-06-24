@@ -28,7 +28,7 @@
 double Rf_qhyper(double p, double NR, double NB, double n,
 	      int lower_tail, int log_p)
 {
-/* This is basically the same code as  ./phyper.c  *used* to be --> FIXME! */
+/* This is basically the same code as  ./phyper.cpp  *used* to be --> FIXME! */
     double N, xstart, xend, xr, xb, sum, term;
     int small_N;
 #ifdef IEEE_754

@@ -164,7 +164,7 @@ void TEMPLATE (CHOLMOD (gpu_end))
     /* ------------------------------------------------------------------ */
     /* destroy Cublas Handle */
     /* ------------------------------------------------------------------ */
-    
+
     if (Common->cublasHandle) {
         cublasDestroy(Common->cublasHandle);
         Common->cublasHandle = NULL ;
@@ -270,7 +270,7 @@ int TEMPLATE (CHOLMOD (gpu_updateC))
         ndrow2 * ndrow1 * L_ENTRY * sizeof (devPtrC [0])) ;
     Common->devSyrkGemmPtrLx = devPtrLx ;
     Common->devSyrkGemmPtrC  = devPtrC ;
-    
+
     if (cudaStat [0] || cudaStat [1])
     {
         /* one or both cudaMalloc's failed */
@@ -958,7 +958,7 @@ int TEMPLATE (CHOLMOD (gpu_triangular_solve))
     /* ---------------------------------------------------------------------- */
     /* free workspace and return */
     /* ---------------------------------------------------------------------- */
-    
+
     cudaFree (Common->devPotrfWork) ;
     Common->devPotrfWork = NULL ;
 #ifndef NTIMER

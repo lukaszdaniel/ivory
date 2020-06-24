@@ -62,19 +62,19 @@ struct BindData
 	/* int  deparse_level; Initialize to 1. */
 };
 
-static int HasNames(SEXP x)
+static bool HasNames(SEXP x)
 {
     if(isVector(x)) {
 	if (!isNull(getAttrib(x, R_NamesSymbol)))
-	    return 1;
+	    return true;
     }
     else if(isList(x)) {
 	while (!isNull(x)) {
-	    if (!isNull(TAG(x))) return 1;
+	    if (!isNull(TAG(x))) return true;
 	    x = CDR(x);
 	}
     }
-    return 0;
+    return false;
 }
 
 static void AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, SEXP call)

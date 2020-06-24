@@ -57,12 +57,11 @@
  */
 
 /* Scalefactor:= (2^32)^8 = 2^256 = 1.157921e+77 */
-#define SQR(x) ((x)*(x))
-static constexpr double scalefactor = SQR(SQR(SQR(4294967296.0)));
-#undef SQR
+static constexpr double scalefactor = std::pow(2, 256);
+
 
 /* If |x| > |k| * M_cutoff,  then  log[ exp(-x) * k^x ]	 =~=  -x */
-static constexpr double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON;/*=3.196577e18*/
+static constexpr double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON; /*=3.196577e18*/
 
 /* Continued fraction for calculation of
  *    1/i + x/(i+d) + x^2/(i+2*d) + x^3/(i+3*d) + ... = sum_{k=0}^Inf x^k/(i+k*d)

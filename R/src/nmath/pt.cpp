@@ -26,7 +26,7 @@ double Rf_pt(double x, double n, int lower_tail, int log_p)
 /* return  P[ T <= x ]	where
  * T ~ t_{n}  (t distrib. with n degrees of freedom).
 
- *	--> ./pnt.c for NON-central
+ *	--> ./pnt.cpp for NON-central
  */
     double val, nx;
 #ifdef IEEE_754

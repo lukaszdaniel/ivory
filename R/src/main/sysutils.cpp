@@ -35,7 +35,7 @@
 
 /*
   See ../unix/system.txt for a description of some of these functions.
-  Formally part of ../unix/sys-common.c.
+  Formally part of ../unix/sys-common.cpp.
  */
 
 /*
@@ -1231,7 +1231,7 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-HIDDEN /* but not hidden on Windows, where it was used in tcltk.c */
+HIDDEN /* but not hidden on Windows, where it was used in tcltk.cpp */
 const wchar_t *Rf_wtransChar(SEXP x)
 {
     void * obj;
@@ -1584,7 +1584,7 @@ static constexpr char UNICODE[] = "UCS-4BE";
 static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
-/* used in gram.cpp and devX11.c */
+/* used in gram.cpp and devX11.cpp */
 size_t Rf_ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
@@ -1718,7 +1718,7 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc)
     return strlen(buf);
 }
 
-/* moved from src/unix/sys-unix.c and src/gnuwin32/extra.c */
+/* moved from src/unix/sys-unix.cpp and src/gnuwin32/extra.cpp */
 
 #ifdef HAVE_STAT
 # ifdef HAVE_ACCESS
@@ -2001,7 +2001,7 @@ HIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-/* moved from character.c in 2.10.0: configure requires this */
+/* moved from character.cpp in 2.10.0: configure requires this */
 
 #ifdef HAVE_GLOB_H
 # include <glob.h>

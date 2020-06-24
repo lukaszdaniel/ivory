@@ -42,15 +42,13 @@ SEXP savePlot(SEXP call, SEXP op, SEXP args, SEXP rho);
 
 SEXP devCairo(SEXP);
 
-Rboolean
-PSDeviceDriver(pDevDesc, const char*, const char*, const char*,
+Rboolean PSDeviceDriver(pDevDesc, const char*, const char*, const char*,
 	       const char **, const char*, const char*, const char*,
 	       double, double, Rboolean, double, Rboolean, Rboolean,
 	       Rboolean, const char*, const char*, SEXP, const char*, int,
 	       Rboolean);
 
-Rboolean
-PDFDeviceDriver(pDevDesc, const char *, const char *, const char *,
+Rboolean PDFDeviceDriver(pDevDesc, const char *, const char *, const char *,
 		const char **, const char *, const char *, const char *,
 		double, double, double, int, int, const char*, SEXP,
 		int, int, const char *, int, int, Rboolean, Rboolean);

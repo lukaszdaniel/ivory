@@ -1793,7 +1793,6 @@ static void HashTableSetup1(SEXP x, HashData *d)
 }
 
 /* used in utils */
-extern "C"
 SEXP Rf_csduplicated(SEXP x)
 {
     if(TYPEOF(x) != STRSXP)

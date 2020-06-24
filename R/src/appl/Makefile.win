@@ -2,19 +2,20 @@
 include ../gnuwin32/MkRules
 
 CPPFLAGS = -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD
-CSOURCES = \
-	integrate.c interv.c maxcol.c optim.c pretty.c uncmin.c
+CSOURCES = 
+CXXSOURCES = \
+	integrate.cpp interv.cpp maxcol.cpp optim.cpp pretty.cpp uncmin.cpp
 FSOURCES = \
 	dchdc.f dpbfa.f dpbsl.f dpoco.f dpodi.f dpofa.f dposl.f dqrdc.f \
 	dqrdc2.f dqrls.f dqrsl.f dqrutl.f dsvdc.f dtrco.f dtrsl.f
-OBJS = $(CSOURCES:.c=.o) $(FSOURCES:.f=.o)
+OBJS = $(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) $(FSOURCES:.f=.o)
 
 all: makeMakedeps libappl.a
 
 libappl.a: $(OBJS)
 
 # Dependencies
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.c=.d) $(CXXSOURCES:.cpp=.d)
 
 
 makeMakedeps: $(DEPS)

@@ -1,5 +1,5 @@
 /* (c) Simon N Wood. 2014. Released under GPL2. 
-  
+
   likelihood and derivative evaluation for multivariate Gaussian 
   additive models.
 
@@ -23,7 +23,7 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
     * 'beta' is a parameter vector corresponding to X. The m*(m+1)/2 elements starting at lpi[m] are the 
       parameters of the Choleki factor of the precision matrix.
     * nt is number of threads to use.     
-  
+
     outputs:
     * 'll' is the evaluated log likelihood.
     * 'lb' is the grad vector 
@@ -33,7 +33,7 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
   int i,j,k,l,pl,one=1,bt,ct,nb,*din,ntheta,ncoef,*rri,*rci,ri,rj,ril,rjl,rik,rjk,rij,rjj,q,r;
   const char not_trans='N';
   ntheta = *m * (*m+1)/2;ncoef = lpi[*m-1];
- 
+
   nb = ncoef + ntheta; /* number of coefficients overall */
   /* Create the Choleski factor of the precision matrix */
   R = (double *)CALLOC((size_t)*m * *m,sizeof(double));
@@ -63,16 +63,16 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
   }
   FREE(mu);
   /* so y now contains y-mu */
-  
+
   /* R(y-mu) is required repeatedly... */
   Rymu =  (double *)CALLOC((size_t)*n * *m,sizeof(double));
   bt=0;ct=0;mgcv_pmmult(Rymu,R,y,&bt,&ct,m,n,m,nt);  
   /* compute the log likelihood */
   for (*ll=0.0,p=Rymu,p1=p + *n * *m;p<p1;p++) *ll += *p * *p;
   *ll = - *ll/2 + ldetR * *n;  
-  
+
   /* now the grad vector */
-  
+
   p = lb;
   /* first the derivatives w.r.t. the coeffs of the linear predictors */
   for (l=0;l<*m;l++) { /* work through dimensions */
@@ -88,7 +88,7 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
     }
   }
   /* now the derivatives w.r.t. the parameters, theta, of R */ 
-  
+
   for (k=0,i=0;i<*m;i++) { /* i is row */ 
     /* get tr(R^{-1}R R_theta^k) */
     xx = deriv_theta[k]; /* the non-zero element of R_theta^i at i,i */;
@@ -148,7 +148,7 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
           xx -= zz *  deriv_theta[k];
         }
       } 
-      
+
       ri=rri[k];rj=rci[k];
       zz = deriv_theta[k]; 
       /* compute (y-\mu)'R_\theta^l'R_\theta^k_\theta^l(y-\mu) */
@@ -218,7 +218,7 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
         }
         dH[i + (j+ncoef) * nb] = dH[j+ncoef + i * nb] = xx;   
       } /* mixed block loop */
-      
+
       /* finally the theta block... */
       for (j=0;j<ntheta;j++) for (k=j;k<ntheta;k++) {
         rij=rri[j];rjj=rci[j];rik=rri[k];rjk=rci[k];
@@ -258,10 +258,10 @@ void mvn_ll(double *y,double *X,double *XX,double *beta,int *n,int *lpi, /* note
     } /* smoothing parameter loop */ 
     FREE(yX);FREE(yRX);FREE(yty);
   } /* if (*deriv) */
-  
+
 
   FREE(din); FREE(rri); FREE(rci);
-  
+
   FREE(R);FREE(Rymu);FREE(deriv_theta);
 } /* mvn_ll */
 

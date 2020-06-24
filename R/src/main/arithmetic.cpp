@@ -286,9 +286,7 @@ double R_pow_di(double x, int n)
 
 /* General Base Logarithms */
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 SEXP R_unary(SEXP, SEXP, SEXP);
 SEXP R_binary(SEXP, SEXP, SEXP, SEXP);
 static SEXP logical_unary(ARITHOP_TYPE, SEXP, SEXP);
@@ -296,9 +294,7 @@ static SEXP integer_unary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP real_unary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP real_binary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
-#ifdef __cplusplus
 } //extern "C"
-#endif
 
 #if 0
 static int naflag;
@@ -365,7 +361,11 @@ R_INLINE static int R_integer_minus(int x, int y, Rboolean *pnaflag)
     return x - y;
 }
 
-#define GOODIPROD(x, y, z) ((double) (x) * (double) (y) == (z))
+namespace
+{
+	inline bool GOODIPROD(int x, int y, int z) { return ((double)(x) * (double)(y) == (z)); }
+} // namespace
+
 R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
@@ -384,18 +384,18 @@ R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
 
 R_INLINE static double R_integer_divide(int x, int y)
 {
-    if (x == NA_INTEGER || y == NA_INTEGER)
-	return NA_REAL;
-    else
-	return (double) x / (double) y;
+	if (x == NA_INTEGER || y == NA_INTEGER)
+		return NA_REAL;
+
+	return (double)x / (double)y;
 }
 
 R_INLINE static SEXP ScalarValue1(SEXP x)
 {
 	if (NO_REFERENCES(x))
 		return x;
-	else
-		return allocVector(TYPEOF(x), 1);
+
+	return allocVector(TYPEOF(x), 1);
 }
 
 R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
@@ -404,8 +404,8 @@ R_INLINE static SEXP ScalarValue2(SEXP x, SEXP y)
 		return x;
 	else if (NO_REFERENCES(y))
 		return y;
-	else
-		return allocVector(TYPEOF(x), 1);
+
+	return allocVector(TYPEOF(x), 1);
 }
 
 /* Unary and Binary Operators */

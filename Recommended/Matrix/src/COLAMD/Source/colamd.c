@@ -207,7 +207,7 @@
 	    (AQ)'AQ=LL' have less fill-in and require fewer floating point
 	    operations than factorizing the unpermuted matrix A or A'A,
 	    respectively.
-	    
+
 	Returns:
 
 	    TRUE (1) if successful, FALSE (0) otherwise.
@@ -374,7 +374,7 @@
 		Future versions may return more statistics in the stats array.
 
 	Example:
-	
+
 	    See colamd_example.c for a complete example.
 
 	    To order the columns of a 5-by-4 matrix with 11 nonzero entries in
@@ -438,7 +438,7 @@
 	    int A [nnz] ;	Input argument.
 
 	    	A is an integer array of size nnz, where nnz = p [n].
-		
+
 		The row indices of the entries in column c of the matrix are
 		held in A [(p [c]) ... (p [c+1]-1)].  The row indices in a
 		given column c need not be in ascending order, and duplicate

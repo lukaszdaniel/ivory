@@ -6,7 +6,7 @@
 SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22, 
                SEXP type2, SEXP id2, SEXP nid2,   SEXP position2,
                SEXP influence2) {
-              
+
     int i, i1, i2, j, k, person1, person2;
     int nused, nid, type, influence;
     int ny, ntime;
@@ -22,7 +22,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     int n1, n2, n3, n4;
     int *position=0, hasid;
     double wt1, wt2, wt3, wt4;
-                      
+
     /* output variables */
     double  *n[10],  *dtime,
             *kvec, *nvec, *std[2], *imat1=0, *imat2=0; /* =0 to silence -Wall*/
@@ -41,7 +41,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     wt = REAL(weight2);
     sort2 = INTEGER(sort22);
     nused = LENGTH(sort22);
-                   
+
     type = asInteger(type2);
     nid = asInteger(nid2);
     if (LENGTH(position2) > 0) {
@@ -80,7 +80,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
         number added to the risk set (when ny=3)
     */
     PROTECT(rlist = mkNamed(VECSXP, outnames));
-    
+
     dtime  = REAL(SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, ntime)));
     if (ny==2) j=7;  else j=9;
     n[0]  = REAL(SET_VECTOR_ELT(rlist, 1, allocMatrix(REALSXP, ntime, j)));
@@ -90,7 +90,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
     nvec  = kvec + ntime;  /* Nelson-Aalen estimate */
     std[0] = REAL(SET_VECTOR_ELT(rlist, 3, allocMatrix(REALSXP, ntime,2)));
     std[1] = std[0] + ntime;
-  
+
     if (nid >0 ) { /* robust variance */
         gcount = (int *) R_alloc(nid, sizeof(int));
         if (type <3) {  /* working vectors for the influence */
@@ -156,7 +156,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                 wt3 += wt[i2];
             }
         }
-        
+
         if (ny==3) { /* remove any with start time >=dtime*/
             n4 =0; wt4 =0;
             for (; person1 >=0; person1--) {
@@ -253,7 +253,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                 gwt[i2] += wt[i];
             }
         }
-            
+
         if (type==1) {
             for (i=0; i< ntime; i++) {
                 if (ny==3) {
@@ -266,7 +266,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         gwt[id[i1]] += wt[i1];
                     }
                 }
-         
+
                 if (n[1][i] > 0 && n[4][i]>0) { /* need to update the sums */
                     haz = n[4][i]/n[3][i];
                     for (k=0; k< nid; k++) {
@@ -286,7 +286,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                     }
                     km *= (1-haz);
                     nelson += haz;
-                   
+
                     v1=0; v2=0;
                     for (k=0; k<nid; k++) {
                         v1 += inf1[k]*inf1[k];
@@ -301,7 +301,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                 }
-         
+
                 kvec[i] = km;
                 nvec[i] = nelson;
                 std[0][i] = sqrt(v1);
@@ -323,7 +323,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         gwt[id[i1]] += wt[i1];
                     }
                 }
-         
+
                 if (n[1][i] > 0 && n[4][i] >0) { /* need to update the sums */
                     dtemp =0;  /* the working denominator */
                     dtemp2=0;  /* sum of squares */
@@ -362,7 +362,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                     km *= (1-haz);
-                    
+
                     v1=0; v2=0;
                     for (k=0; k<nid; k++) {
                         v1 += inf1[k]*inf1[k];
@@ -377,7 +377,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                 }
-         
+
                 kvec[i] = km;
                 nvec[i] = nelson;
                 std[0][i] = sqrt(v1);
@@ -401,7 +401,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         gwt[id[i1]] += wt[i1];
                     }
                 }
-                 
+
                 if (n[1][i] > 0 && n[4][i]>0) { /* need to update the sums */
                     haz = n[4][i]/n[3][i];
                     for (k=0; k< nid; k++) {
@@ -419,7 +419,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                     nelson += haz;
-                   
+
                     v2=0;
                     for (k=0; k<nid; k++) {
                         v2 += inf2[k]*inf2[k];
@@ -433,12 +433,12 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                 }
-         
+
                 kvec[i] = exp(-nelson);
                 nvec[i] = nelson;
                 std[1][i] = sqrt(v2);
                 std[0][i] = sqrt(v2);
-                
+
                 if (influence>0)
                     for (k=0; k<nid; k++) *imat2++ = inf2[k];
             }
@@ -466,7 +466,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         dtemp2 += btemp*btemp*frac;
                         dtemp3 += btemp*btemp;    /* non-death deriv */
                     } 
-                    
+
                     dtemp /=  n[1][i];        /* average denominator */
                     if (n[4][i] != n[1][i]) { /* case weights */
                         dtemp2 *= n[4][i]/ n[1][i];
@@ -487,7 +487,7 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         if (gcount[id[i2]] ==0) gwt[id[i2]] = 0.0;
                         else gwt[id[i2]] -= wt[i2];
                     }
-            
+
                     v2=0;
                     for (k=0; k<nid; k++) v2 += inf2[k]*inf2[k];
                 }
@@ -500,18 +500,18 @@ SEXP survfitkm(SEXP y2, SEXP weight2,  SEXP sort12, SEXP sort22,
                         else gwt[id[i2]] -= wt[i2];
                     }
                 }
-                
+
                 kvec[i] = exp(-nelson);
                 nvec[i] = nelson;
                 std[1][i] = sqrt(v2);
                 std[0][i] = sqrt(v2);
-                
+
                 if (influence>0)
                     for (k=0; k<nid; k++) *imat2++ = inf2[k];
             }
         }
     }
-    
+
     UNPROTECT(1);
     return(rlist);
 }

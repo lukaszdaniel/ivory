@@ -157,7 +157,7 @@ static void setId(yyltype loc){
 	} 								\
     } while (0)
 
-		
+
 #define YY_LOCATION_PRINT(File,Loc)					\
  fprintf ( File, "%d.%d.%d-%d.%d.%d (%d)",				\
  	(Loc).first_line, (Loc).first_column,	(Loc).first_byte, 	\
@@ -628,7 +628,7 @@ static int add_mbcs_byte_to_parse_context()
     if (c == EOF) 
 	error(_("invalid multibyte character in parser at line %d"),
 	      ParseState.xxlineno);
-    
+
     R_ParseContextLast = (R_ParseContextLast + 1) % PARSE_CONTEXT_SIZE;
     R_ParseContext[R_ParseContextLast] = (char) c;
     return c;
@@ -692,7 +692,7 @@ static void finish_mbcs_in_parse_context()
 	wchar_t wc;
 	int res;
 	mbstate_t mb_st;
-	
+
 	mbs_init(&mb_st);
 	res = (int) mbrtowc(&wc, buf + i, nbytes - i, &mb_st);
 	while (res == -2 && (long unsigned int) nbytes < sizeof(buf)) {
@@ -1529,7 +1529,7 @@ static void ParseContextInit(void)
 {
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
-    
+
     /* starts the identifier counter*/
     initId();
     initData();
@@ -1656,14 +1656,14 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 
     PS_SET_SRCFILE(srcfile);
     PS_SET_ORIGINAL(srcfile);
-    
+
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
 	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
-    
+
     PROTECT(t = NewList());
     for(i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
@@ -1790,21 +1790,21 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     bufp = buf;
     R_InitSrcRefState(&cntxt);
     ParseContextInit();
-    
+
     GenerateCode = 1;
     iob = buffer;
     ptr_getc = buffer_getc;
 
     PS_SET_SRCFILE(srcfile);
     PS_SET_ORIGINAL(srcfile);
-    
+
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
 	    (Rboolean) asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
-    
+
     PROTECT(t = NewList());
     for(i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
@@ -2129,7 +2129,7 @@ static void yyerror(const char *s)
     static char const yyunexpected[] = "syntax error, unexpected ";
     static char const yyexpecting[] = ", expecting ";
     char *expecting;
-    
+
     if (!EndOfFile)
 	/* On EndOfFile, there are no more bytes to add, but trying to do
 	   so may have non-trivial performance overhead and this can be
@@ -2864,7 +2864,7 @@ static int RawStringValue(int c0, int c)
 	    /* count the dashes after the closing delimiter */
 	    int nd = 0;
 	    while (nd < ndash && nextchar('-')) nd++;
-	    
+
 	    if (nd == ndash && nextchar(quote))
 		/* right number of dashes, right quote: were done! */
 		break;
@@ -2888,7 +2888,7 @@ static int RawStringValue(int c0, int c)
 	    clen = mbcs_get_next2(c, &wc);
 	    WTEXT_PUSH(wc);
 	    ParseState.xxbyteno += clen-1;
-	    
+
 	    for(i = 0; i < clen - 1; i++){
 		STEXT_PUSH(c);
 		c = xxgetc();
@@ -3017,7 +3017,7 @@ static int SymbolValue(int c)
     if(mbcslocale) {
 	wchar_t wc; int i, clen;
 	clen = mbcs_get_next(c, &wc);
-	while(1) {
+	while(true) {
 	    /* at this point we have seen one char, so push its bytes
 	       and get one more */
 	    for(i = 0; i < clen; i++) {
@@ -3048,7 +3048,7 @@ static int SymbolValue(int c)
 
 static void setParseFilename(SEXP newname) {
     SEXP class_;
-    
+
     if (isEnvironment(PS_SRCFILE)) {
 	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&

@@ -13,11 +13,12 @@ R_HOME = $(top_builddir)
 R_SHARE_DIR = $(R_HOME)/share
 R_INCLUDE_DIR = $(R_HOME)/include
 
-SOURCES_C = do_substitute_direct.c init.c methods_list_dispatch.c \
-  slot.c class_support.c tests.c utils.c
+SOURCES_C = 
+SOURCES_CXX = do_substitute_direct.cpp init.cpp methods_list_dispatch.cpp \
+  slot.cpp class_support.cpp tests.cpp utils.cpp
 SOURCES_F =
-DEPENDS = $(SOURCES_C:.c=.d)
-OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_F:.f=.o)
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o)
 
 # need  config.h
 PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DHAVE_CONFIG_H

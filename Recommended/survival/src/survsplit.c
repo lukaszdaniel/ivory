@@ -49,14 +49,14 @@ SEXP survsplit(SEXP tstart2, SEXP tstop2, SEXP cut2) {
 
     interval2 = SET_VECTOR_ELT(rlist, 1, allocVector(INTSXP, n2));
     interval = INTEGER(interval2);
-	
+
     start2 = SET_VECTOR_ELT(rlist, 2, allocVector(REALSXP, n2));
     start = REAL(start2);
     end2   = SET_VECTOR_ELT(rlist, 3, allocVector(REALSXP, n2));
     end = REAL(end2);
     censor2= SET_VECTOR_ELT(rlist, 4, allocVector(LGLSXP,  n2));
     censor = LOGICAL(censor2);
-    
+
     /* do the work */
     k =0; 
     for (i=0; i<n; i++) {

@@ -81,7 +81,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
     int     method;
     double  eps, toler;
     int doscale;
-   
+
     /* returned objects */
     SEXP imat2, means2, beta2, u2, loglik2;
     double *beta, *loglik, *means;
@@ -105,7 +105,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
     offset= REAL(offset2);
     status = INTEGER(status2);
     strata = INTEGER(strata2);
-    
+
     /*
     **  Set up the ragged arrays and scratch space
     **  Normally covar2 does not need to be duplicated, even though
@@ -176,7 +176,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
 		}
 	    }
 	}
- 
+
    if (doscale==1) {
 	for (i=0; i<nvar; i++) beta[i] /= scale[i]; /*rescale initial betas */
 	}
@@ -252,7 +252,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
 	    }	
 	}	
 	if (isfinite(newlk) ==0) notfinite =4;
-	
+
 	if (notfinite==0 &&(fabs(1-(loglik[1]/newlk))<= eps)) { 
 	    /* all done */
 	    loglik[1] = newlk;
@@ -276,7 +276,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
 	    halving++;  /* get more agressive when it doesn't work */
 	    for (i=0; i<nvar; i++) 
 		newbeta[i] = (newbeta[i] + halving*beta[i])/(halving + 1.0);
-		    
+
 	    }
 	else {
 	    halving=0;
@@ -307,7 +307,7 @@ SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2,
 	}
     }	
     *flag = 1000;
-	
+
 finish:
     /*
     ** create the output list
@@ -321,7 +321,7 @@ finish:
     SET_VECTOR_ELT(rlist, 5, sctest2);
     SET_VECTOR_ELT(rlist, 6, iter2);
     SET_VECTOR_ELT(rlist, 7, flag2);
-    
+
 
     /* add names to the objects */
     PROTECT(rlistnames = allocVector(STRSXP, 8));
@@ -351,7 +351,7 @@ static double coxfit6_iter(int nvar, int nused,  int method, double *beta) {
     double  deadwt;  /*sum of case weights for the deaths*/
     double  denom2;  /* sum of weighted risk scores for the deaths*/
     int     nrisk;   /* number of subjects in the current risk set */
-   
+
     for (i=0; i<nvar; i++) {
 	u[i] =0;
 	a2[i] =0;
@@ -412,7 +412,7 @@ static double coxfit6_iter(int nvar, int nused,  int method, double *beta) {
 	    if (method==0 || ndead==1) { /* Breslow */
 		denom += denom2;
 		loglik -= deadwt* log(denom);
-	   
+
 		for (i=0; i<nvar; i++) {
 		    a[i] += a2[i];
 		    temp2= a[i]/ denom;  /* mean */
@@ -452,6 +452,6 @@ static double coxfit6_iter(int nvar, int nused,  int method, double *beta) {
 	    }
 	}
     }   /* end  of accumulation loop */
-    
+
     return(loglik);
 }	

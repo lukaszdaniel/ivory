@@ -244,7 +244,7 @@ HIDDEN NORET void R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 
 /* begincontext - begin an execution context */
 
-/* begincontext and endcontext are used in dataentry.c and modules */
+/* begincontext and endcontext are used in dataentry.cpp and modules */
 void begincontext(RCNTXT * cptr, int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
@@ -852,7 +852,7 @@ SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
 }
 
 /* Temporary hack to suppress error message printing around a
-   R_tryEval call for use in methods_list_dispatch.c; should be
+   R_tryEval call for use in methods_list_dispatch.cpp; should be
    replaced once we have a way of establishing error handlers from C
    code (probably would want a calling handler if we want to allow
    user-defined calling handlers to enter a debugger, for

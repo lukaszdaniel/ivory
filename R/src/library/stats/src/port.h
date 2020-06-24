@@ -36,6 +36,7 @@
 /* PORT interface functions - reverse communication */
 
 /* DRMNF(D, FX, IV, LIV, LV, N, V, X) */
+extern "C" {
 extern void F77_NAME(drmnf)(double[], double*,
 			    int[], int*, int*, int*, double[], double[]);
 
@@ -77,6 +78,7 @@ extern void F77_NAME(drnsg)(double[], double[], double[], double[],
 			    int[], int[], int*, int*, int*, int*,
 			    int*, int*, int*, int*, int*,
 			    double[], double[]);
+}
 
 SEXP port_ivset(SEXP kind, SEXP iv, SEXP v);
 

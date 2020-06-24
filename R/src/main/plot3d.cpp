@@ -33,7 +33,7 @@
 #include <R_ext/Boolean.h>
 
 /* filled contours and perspective plots were originally here,
-   now in ../library/graphics/src/plot3d.c .
+   now in ../library/graphics/src/plot3d.cpp.
  */
 
 #include "contour-common.h"
@@ -66,7 +66,7 @@ static int addContourLines(double *x, int nx, double *y, int ny,
     int i, ii, j, jj, ns, dir, nc;
     SEGP seglist, seg, s, start, end;
     SEXP ctr, level, xsxp, ysxp, names;
-/// NB: The following is very much the same as in contour() in ../library/graphics/src/plot3d.c
+/// NB: The following is very much the same as in contour() in ../library/graphics/src/plot3d.cpp
 
     /* Begin following contours. */
     /* 1. Grab a segment */

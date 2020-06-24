@@ -355,20 +355,19 @@ static SEXP R_HashGet(int hashcode, SEXP symbol, SEXP table)
     return R_UnboundValue;
 }
 
-static Rboolean R_HashExists(int hashcode, SEXP symbol, SEXP table)
+static bool R_HashExists(int hashcode, SEXP symbol, SEXP table)
 {
     SEXP chain;
 
     /* Grab the chain from the hashtable */
     chain = VECTOR_ELT(table, hashcode);
     /* Find the binding in the chain */
-    for (; chain != R_NilValue ; chain = CDR(chain))
-	if (TAG(chain) == symbol) return TRUE;
+    for (; chain != R_NilValue; chain = CDR(chain))
+        if (TAG(chain) == symbol)
+            return true;
     /* If not found */
-    return FALSE;
+    return false;
 }
-
-
 
 /*----------------------------------------------------------------------
 
@@ -1119,7 +1118,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 
 /* This variant of findVarinFrame3 is needed to avoid running active
    binding functions in calls to exists() with mode = "any" */
-static Rboolean existsVarInFrame(SEXP rho, SEXP symbol)
+static bool existsVarInFrame(SEXP rho, SEXP symbol)
 {
     int hashcode;
     SEXP frame, c;
@@ -1131,25 +1130,25 @@ static Rboolean existsVarInFrame(SEXP rho, SEXP symbol)
 	return SYMBOL_HAS_BINDING(symbol);
 
     if (rho == R_EmptyEnv)
-	return FALSE;
+	return false;
 
     if(IS_USER_DATABASE(rho)) {
 	/* Use the objects function pointer for this symbol. */
 	R_ObjectTable *table;
-	Rboolean val = FALSE;
+	bool val = false;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	if(table->active) {
 	    if(table->exists(CHAR(PRINTNAME(symbol)), NULL, table))
-		val = TRUE;
+		val = true;
 	    else
-		val = FALSE;
+		val = false;
 	}
-	return(val);
+	return (val);
     } else if (HASHTAB(rho) == R_NilValue) {
 	frame = FRAME(rho);
 	while (frame != R_NilValue) {
 	    if (TAG(frame) == symbol)
-		return TRUE;
+		return true;
 	    frame = CDR(frame);
 	}
     }
@@ -1163,7 +1162,7 @@ static Rboolean existsVarInFrame(SEXP rho, SEXP symbol)
 	/* Will return 'R_UnboundValue' if not found */
 	return R_HashExists(hashcode, symbol, HASHTAB(rho));
     }
-    return FALSE;
+    return false;
 }
 
 SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
@@ -1479,7 +1478,7 @@ static int ddVal(SEXP symbol)
 
 */
 
-#define length_DOTS(_v_) (TYPEOF(_v_) == DOTSXP ? length(_v_) : 0)
+inline static R_len_t length_DOTS(SEXP _v_) { return (TYPEOF(_v_) == DOTSXP ? Rf_length(_v_) : 0); }
 
 SEXP ddfind(int i, SEXP rho)
 {
@@ -2183,17 +2182,20 @@ HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 		      CHAR(STRING_ELT(CADDR(args), 0))); /* ASCII */
 	}
 
-#     define GET_VALUE(rval) do {				\
-	    /* We need to evaluate if it is a promise */	\
-	    if (TYPEOF(rval) == PROMSXP) {			\
-		PROTECT(rval);					\
-		rval = eval(rval, genv);			\
-		UNPROTECT(1);					\
-	    }							\
-	    ENSURE_NAMED(rval);					\
-	} while (0)
+#define GET_VALUE(rval)                              \
+    do                                               \
+    {                                                \
+        /* We need to evaluate if it is a promise */ \
+        if (TYPEOF(rval) == PROMSXP)                 \
+        {                                            \
+            PROTECT(rval);                           \
+            rval = eval(rval, genv);                 \
+            UNPROTECT(1);                            \
+        }                                            \
+        ENSURE_NAMED(rval);                          \
+    } while (0)
 
-	GET_VALUE(rval);
+    GET_VALUE(rval);
 	break;
 
     case 2: // get0(.)
@@ -2326,11 +2328,14 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
   It is also called in arithmetic.cpp. for e.g. do_log
 */
 
-static SEXP findRootPromise(SEXP p) {
-    if (TYPEOF(p) == PROMSXP) {
-	while(TYPEOF(PREXPR(p)) == PROMSXP) {
-	    p = PREXPR(p);
-	}
+static SEXP findRootPromise(SEXP p)
+{
+    if (TYPEOF(p) == PROMSXP)
+    {
+        while (TYPEOF(PREXPR(p)) == PROMSXP)
+        {
+            p = PREXPR(p);
+        }
     }
     return p;
 }
@@ -2474,7 +2479,6 @@ HIDDEN SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 */
 
-
 HIDDEN SEXP do_globalenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -2488,7 +2492,6 @@ HIDDEN SEXP do_globalenv(SEXP call, SEXP op, SEXP args, SEXP rho)
   Returns the current base environment.
 
 */
-
 
 HIDDEN SEXP do_baseenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -2504,13 +2507,11 @@ HIDDEN SEXP do_baseenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 */
 
-
 HIDDEN SEXP do_emptyenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     return R_EmptyEnv;
 }
-
 
 /*----------------------------------------------------------------------
 
@@ -2730,8 +2731,7 @@ HIDDEN SEXP do_search(SEXP call, SEXP op, SEXP args, SEXP env)
   functions.  [ ls(envir, all.names, sorted) ]
 
 */
-#define NONEMPTY_(_FRAME_) \
-    CHAR(PRINTNAME(TAG(_FRAME_)))[0] != '.'
+inline static bool NONEMPTY_(SEXP _FRAME_) { return CHAR(PRINTNAME(TAG(_FRAME_)))[0] != '.'; }
 
 static int FrameSize(SEXP frame, int all)
 {
@@ -2793,17 +2793,18 @@ static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
 {
     if (all) {
 	while (frame != R_NilValue) {
-#         define DO_FrameValues						\
-	    SEXP value = BINDING_VALUE_TMP(frame);			\
-	    if (TYPEOF(value) == PROMSXP) {				\
-		PROTECT(value);						\
-		value = eval(value, R_GlobalEnv);			\
-		UNPROTECT(1);						\
-	    }								\
-	    SET_VECTOR_ELT(values, *indx, lazy_duplicate(value));	\
-	    (*indx)++
+#define DO_FrameValues                                    \
+    SEXP value = BINDING_VALUE_TMP(frame);                \
+    if (TYPEOF(value) == PROMSXP)                         \
+    {                                                     \
+        PROTECT(value);                                   \
+        value = eval(value, R_GlobalEnv);                 \
+        UNPROTECT(1);                                     \
+    }                                                     \
+    SET_VECTOR_ELT(values, *indx, lazy_duplicate(value)); \
+    (*indx)++
 
-	    DO_FrameValues;
+        DO_FrameValues;
 	    frame = CDR(frame);
 	}
     } else {
@@ -2816,11 +2817,12 @@ static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
     }
 }
 #undef DO_FrameValues
-#undef NONEMPTY_
 
-#define CHECK_HASH_TABLE(table) do {		\
-	if (TYPEOF(table) != VECSXP)		\
-	    error(_("bad hash table contents"));	\
+#define CHECK_HASH_TABLE(table)                  \
+    do                                           \
+    {                                            \
+        if (TYPEOF(table) != VECSXP)             \
+            error(_("bad hash table contents")); \
     } while (0)
 
 static int HashTableSize(SEXP table, int all)
@@ -3171,23 +3173,25 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Leaks out via inlining in ../library/tools/src/ */
-#define R_ENVLENGTH(NAME_, LENGTH_FN_, TYPE_)				\
-TYPE_ NAME_(SEXP rho)							\
-{									\
-    if(IS_USER_DATABASE(rho)) {						\
-	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(HASHTAB(rho)); \
-	return LENGTH_FN_(tb->objects(tb));				\
-    } else if( HASHTAB(rho) != R_NilValue)				\
-	return HashTableSize(HASHTAB(rho), 1);				\
-    else if (rho == R_BaseEnv || rho == R_BaseNamespace) 		\
-	return BuiltinSize(1, 0);					\
-    else								\
-	return FrameSize(FRAME(rho), 1);				\
-}
+#define R_ENVLENGTH(NAME_, LENGTH_FN_, TYPE_)                                     \
+    TYPE_ NAME_(SEXP rho)                                                         \
+    {                                                                             \
+        if (IS_USER_DATABASE(rho))                                                \
+        {                                                                         \
+            R_ObjectTable *tb = (R_ObjectTable *)R_ExternalPtrAddr(HASHTAB(rho)); \
+            return LENGTH_FN_(tb->objects(tb));                                   \
+        }                                                                         \
+        else if (HASHTAB(rho) != R_NilValue)                                      \
+            return HashTableSize(HASHTAB(rho), 1);                                \
+        else if (rho == R_BaseEnv || rho == R_BaseNamespace)                      \
+            return BuiltinSize(1, 0);                                             \
+        else                                                                      \
+            return FrameSize(FRAME(rho), 1);                                      \
+    }
 
-R_ENVLENGTH(Rf_envlength,   length, int)
+R_ENVLENGTH(Rf_envlength,   Rf_length, int)
 
-R_ENVLENGTH(Rf_envxlength, xlength, R_xlen_t)
+R_ENVLENGTH(Rf_envxlength, Rf_xlength, R_xlen_t)
 
 /*----------------------------------------------------------------------
 

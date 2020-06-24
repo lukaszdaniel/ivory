@@ -1,11 +1,11 @@
 /* The Cox Proportional Hazard model for survival data, 
    for mgcv. (c) Simon N. Wood 2013-14 
-   
+
    See for example, Hastie and Tibshirani (1990) for the log partial 
    likelihood (Peto's, 1972, approximation for ties). 
 
    For details of hazard estimation see...
- 
+
    Klein, J.P and Moeschberger, M.L. (2003) Survival Analysis: Techniques for
    Censored and Truncated Data (2nd ed.) Springer
 
@@ -111,7 +111,7 @@ void coxpp(double *eta,double *X,int *r, int *d,double *h,double *q,double *km,
     }
     bj += *p; /* move on to next b^+ vector */
   } /* back in time loop done */
-  
+
   /* with gamma_p, dc and b computed, we can now do time forward accumulations 
      of h, q and a... */
   j = *nt - 1;
@@ -154,11 +154,11 @@ void coxlpl(double *eta,double *X,int *r, int *d,double *tr,
    lp is the log partial likelihood.
    g is the p vector of derivatives of lp w.r.t. beta.
    H is the p by p second derivative matrix of lp wrt beta
-   
+
    The d1* are the derivatives of H and beta wrt rho=log(lambda), 
    the log smoothing parameters. In each case there are n_sp replicates
    of the same dimension as the original object stored end to end. 
-   
+
    The d1* & d2* are unused unless deriv is non-zero. d1/2beta contains the derivatives
    of beta wrt the log smoothing parameters, on entry.
 
@@ -224,9 +224,9 @@ void coxlpl(double *eta,double *X,int *r, int *d,double *tr,
     /* Basic second derivative derived from d2beta */ 
     nhh = *n_sp * (*n_sp+1) / 2; /* elements in `half hessian' */
     d2eta  = (double *)CALLOC((size_t)(*n * nhh),sizeof(double));
-     
+
     mgcv_mmult(d2eta,X,d2beta,&tB,&tC,n,&nhh,p);
-   
+
     p1=d2gamma  = (double *)CALLOC((size_t)(*n * nhh),sizeof(double));
     p2=d2eta;
     for (j=0;j<*n_sp;j++) {  /* create d2gamma */
@@ -285,7 +285,7 @@ void coxlpl(double *eta,double *X,int *r, int *d,double *tr,
           for (k=0;k<*p;k++) d1b_p[k + *p * m] += xx * X[i + *n * k];
         }
       } /* end of first derivative accumulation */
-    
+
       if (*deriv>2) { /* second derivative accumulation */
          off = 0;         
          for (m=0;m<*n_sp;m++)   
@@ -359,7 +359,7 @@ void coxlpl(double *eta,double *X,int *r, int *d,double *tr,
                                        6 * xx2 * d1gamma_p[m] * b_p[l] * b_p[l] * d1gamma_p[k] -
 		                       2 * xx1 * (2*d1b_p[l + *p * m] * b_p[l] * d1gamma_p[k] +
 						  b_p[l]*b_p[l]*d2gamma_p[off]);
-               
+
               }
               off++;
             } /* end k -loop */    
@@ -374,7 +374,7 @@ void coxlpl(double *eta,double *X,int *r, int *d,double *tr,
     for (k = 0;k < *p;k++) for (l = 0;l < k ;l++) 
 	d1H[k + *p * l + off] = d1H[l + *p * k + off];
   }
- 
+
   if (*deriv>=0) { FREE(A_p);FREE(b_p);}
   FREE(gamma);
 

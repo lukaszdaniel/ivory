@@ -11,13 +11,14 @@ R_HOME = $(top_builddir)
 
 include $(top_builddir)/Makeconf
 
-SOURCES_C = Lapack.c @USE_VECLIB_G95FIX_TRUE@ vecLibg95c.c
+SOURCES_C = 
+SOURCES_CXX = Lapack.cpp @USE_VECLIB_G95FIX_TRUE@ vecLibg95c.cpp
 SOURCES_F = @USE_VECLIB_G95FIX_TRUE@ vecLibg95f.f
 
 ## BUILD_LTO_CHECK_TRUE relies on using the internal LAPACK
-DEPENDS = $(SOURCES_C:.c=.d)
-SOURCES = $(SOURCES_C) $(SOURCES_F)
-OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_F:.f=.o)
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+SOURCES = $(SOURCES_C) $(SOURCES_CXX) $(SOURCES_F)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o)
 HEADERS = Lapack.h
 
 ## Sources for the -lRlapack.  On OSX this may be linked directly to
@@ -30,8 +31,8 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 DISTFILES = \
 	LICENSE README Makefile.in Makefile.win \
 	Rlapackrc.rc dllversion.rc \
-	$(HEADERS) Lapack.c init_win.c \
-	vecLibg95c.c vecLibg95f.f \
+	$(HEADERS) Lapack.cpp init_win.cpp \
+	vecLibg95c.cpp vecLibg95f.f \
 	cmplx.f dlapack.f dlamch.f \
 	dble.txt cmplx.txt
 
@@ -50,7 +51,7 @@ Rlapack_la_OBJECTS = $(LIBOBJECTS)
 ## different compiler.
 Rlapack_la_LIBADD =  $(FLIBS_IN_SO) @DYLIB_UNDEFINED_ALLOWED_FALSE@ $(LIBR)
 
-ALL_CFLAGS = $(ALL_CFLAGS_LO) $(WERROR_FLAGS)
+ALL_CFLAGS = $(ALL_CFLAGS_LO)
 ALL_FFLAGS = $(ALL_FFLAGS_LO)
 
 

@@ -26,33 +26,29 @@
 
 SEXP isoreg(SEXP y);
 
-/* monoSpl.c : */
+/* monoSpl.cpp : */
 SEXP monoFC_m(SEXP m, SEXP Sx);
 void monoFC_mod(double *m, double Sx[], int n);
 
-void
-loess_raw(double *y, double *x, double *weights, double *robust, int *d,
+
+void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 	  int *n, double *span, int *degree, int *nonparametric,
 	  int *drop_square, int *sum_drop_sqr, double *cell,
 	  char **surf_stat, double *surface, int *parameter,
 	  int *a, double *xi, double *vert, double *vval, double *diagonal,
-	  double *trL, double *one_delta, double *two_delta, int *setLf);
-void
-loess_dfit(double *y, double *x, double *x_evaluate, double *weights,
+	  double *trL, double *one_delta, double *two_delta, Rboolean *setLf);
+void loess_dfit(double *y, double *x, double *x_evaluate, double *weights,
 	   double *span, int *degree, int *nonparametric,
 	   int *drop_square, int *sum_drop_sqr,
 	   int *d, int *n, int *m, double *fit);
-void
-loess_dfitse(double *y, double *x, double *x_evaluate, double *weights,
+void loess_dfitse(double *y, double *x, double *x_evaluate, double *weights,
 	     double *robust, int *family, double *span, int *degree,
 	     int *nonparametric, int *drop_square,
 	     int *sum_drop_sqr,
 	     int *d, int *n, int *m, double *fit, double *L);
-void
-loess_ifit(int *parameter, int *a, double *xi, double *vert,
+void loess_ifit(int *parameter, int *a, double *xi, double *vert,
 	   double *vval, int *m, double *x_evaluate, double *fit);
-void
-loess_ise(double *y, double *x, double *x_evaluate, double *weights,
+void loess_ise(double *y, double *x, double *x_evaluate, double *weights,
 	  double *span, int *degree, int *nonparametric,
 	  int *drop_square, int *sum_drop_sqr, double *cell,
 	  int *d, int *n, int *m, double *fit, double *L);
@@ -64,7 +60,7 @@ void kmeans_MacQueen(double *x, int *pn, int *pp, double *cen, int *pk,
 		     int *cl, int *pmaxiter, int *nc, double *wss);
 
 /* Fortran : */
-
+extern "C" {
 void F77_NAME(lowesw)(double *res, int *n, double *rw, int *pi);
 void F77_NAME(lowesp)(int *n, double *y, double *yhat, double *pwgts,
 		      double *rwgts, int *pi, double *ytilde);
@@ -116,4 +112,5 @@ void F77_NAME(bvalus)(int *n, double *knot, double *coef,
 void F77_NAME(supsmu)(int *n, double *x, double *y,
 		      double *w, int *iper, double *span, double *alpha,
 		      double *smo, double *sc, double *edf);
+}
 #endif

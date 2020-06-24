@@ -10,12 +10,13 @@ ifdef USE_IMPLIBS
 endif
 	@$(MAKE) --no-print-directory -f Makefile.win install
 
-CSOURCES = Lapack.c
-OBJS=$(CSOURCES:.c=.o) dllversion.o
+CSOURCES = 
+CXXSOURCES = Lapack.cpp
+OBJS=$(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) dllversion.o
 LIBSOURCES = dlamch.f dlapack.f cmplx.f
 LIBOBJECTS = $(LIBSOURCES:.f=.o) init_win.o Rlapackrc.o
 
-CPPFLAGS = -I../../include -DHAVE_CONFIG_H $(WERROR_FLAGS)
+CPPFLAGS = -I../../include -DHAVE_CONFIG_H
 dlamch-FFLAGS = -ffloat-store
 
 install: $(MODULE).dll
@@ -48,7 +49,7 @@ clean:
 dllversion.o: ../../include/Rversion.h
 Rlapackrc.o: ../../include/Rversion.h
 
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.c=.d) $(CXXSOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

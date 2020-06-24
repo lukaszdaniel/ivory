@@ -4,9 +4,9 @@
  *  The sys*.c files contain the platform dependent code for
  *  the Unix command-line (reference) port of R.
  *
- *	sys-common.c  has code common to the unix/gnome/gnuwin32 ports
- *	sys-unix.c    has code common to the unix/gnome ports
- *	system.c      has interface-specific code
+ *	sys-common.cpp  has code common to the unix/gnome/gnuwin32 ports
+ *	sys-unix.cpp    has code common to the unix/gnome ports
+ *	system.cpp      has interface-specific code
  *
  *
  *  1) FATAL MESSAGES AT STARTUP

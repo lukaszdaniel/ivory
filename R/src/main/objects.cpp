@@ -1138,8 +1138,9 @@ int R_check_class_etc(SEXP x, const char **valid)
 */
 static R_stdGen_ptr_t R_standardGeneric_ptr = 0;
 static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef);
-static inline bool NOT_METHODS_DISPATCH_PTR(R_stdGen_ptr_t ptr) {
-  return (ptr == 0 || ptr == dispatchNonGeneric);
+inline static bool NOT_METHODS_DISPATCH_PTR(R_stdGen_ptr_t ptr)
+{
+	return (ptr == 0 || ptr == dispatchNonGeneric);
 }
 
 static R_stdGen_ptr_t R_get_standardGeneric_ptr(void)
@@ -1299,7 +1300,7 @@ static SEXP *prim_generics;
 static SEXP *prim_mlist;
 #define DEFAULT_N_PRIM_METHODS 100
 
-// Called from methods package, ../library/methods/src/methods_list_dispatch.c
+// Called from methods package, ../library/methods/src/methods_list_dispatch.cpp
 SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 		       SEXP mlist)
 {

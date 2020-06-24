@@ -77,7 +77,7 @@ static void unregisterOne(pGEDevDesc dd, int systemNumber) {
 }
 
 /* NOTE that dd->dev has been shut down by a call
- * to dev->close within devices.c
+ * to dev->close within devices.cpp
  */
 void GEdestroyDevDesc(pGEDevDesc dd)
 {
@@ -243,7 +243,7 @@ void GEunregisterSystem(int registerIndex)
  * It calls back to registered graphics systems and passes on the event
  * so that the graphics systems can respond however they want to.
  *
- * Currently only used for GE_ScalePS in devWindows.c
+ * Currently only used for GE_ScalePS in devWindows.cpp
  */
 SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
 {
@@ -2466,7 +2466,7 @@ void GEPretty(double *lo, double *up, int *ndiv)
 #ifdef DEBUG_PLOT
     x1 = ns; x2 = nu;
 #endif
-    // -> ../appl/pretty.c 
+    // -> ../appl/pretty.cpp
     unit = R_pretty(&ns, &nu, ndiv, /* min_n = */ 1,
 		    /* shrink_sml = */ 0.25,
 		    high_u_fact,
@@ -2712,7 +2712,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
         char *sb, *sbuf;
         cetype_t enc2;
 	int noMetricInfo;
-       
+
         const void *vmax = vmaxget();
 
         GEMetricInfo('M', gc, &asc, &dsc, &wid, dd);
@@ -2773,7 +2773,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                 }
             }
         }
-        
+
 	/* Count the lines of text minus one */
 	n = 0;
 	for(s = str; *s ; s++)
@@ -2974,7 +2974,7 @@ void GEinitDisplayList(pGEDevDesc dd)
  ****************************************************************
  */
 
-/* from colors.c */
+/* from colors.cpp */
 void savePalette(Rboolean save);
 
 void GEplayDisplayList(pGEDevDesc dd)
@@ -3350,7 +3350,7 @@ int GEstring_to_pch(SEXP pch)
     return ipch;
 }
 
-/* moved from graphics.c as used by grid */
+/* moved from graphics.cpp as used by grid */
 /*  LINE TEXTURE CODE */
 
 /*
@@ -3383,7 +3383,7 @@ static LineTYPE linetype[] = {
     {NULL, 0},
 };
 
-/* Duplicated from graphics.c */
+/* Duplicated from graphics.cpp */
 static char HexDigits[] = "0123456789ABCDEF";
 static unsigned int hexdigit(int digit)
 {

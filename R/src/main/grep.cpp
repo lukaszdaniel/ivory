@@ -2586,13 +2586,11 @@ static Rboolean ovector_extract_start_length(Rboolean use_UTF8,int *ovector,
 
    Toby Dylan Hocking 2011-03-10 */
 #ifdef HAVE_PCRE2
-static Rboolean
-extract_match_and_groups(Rboolean use_UTF8, PCRE2_SIZE *ovector, int capture_count,
+static Rboolean extract_match_and_groups(Rboolean use_UTF8, PCRE2_SIZE *ovector, int capture_count,
 			 int *mptr, int *lenptr, int *cptr, int *clenptr,
 			 const char *string, int capture_stride)
 #else
-static Rboolean
-extract_match_and_groups(Rboolean use_UTF8, int *ovector, int capture_count,
+static Rboolean extract_match_and_groups(Rboolean use_UTF8, int *ovector, int capture_count,
 			 int *mptr, int *lenptr, int *cptr, int *clenptr,
 			 const char *string, int capture_stride)
 #endif

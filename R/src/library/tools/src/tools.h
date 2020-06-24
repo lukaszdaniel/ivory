@@ -24,6 +24,7 @@
 #include <Rinternals.h>
 
 SEXP delim_match(SEXP x, SEXP delims);
+extern "C"
 SEXP dirchmod(SEXP dr, SEXP gwsxp);
 SEXP Rmd5(SEXP files);
 SEXP check_nonASCII(SEXP text, SEXP ignore_quotes);

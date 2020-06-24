@@ -467,11 +467,11 @@ Rboolean fastpass_sortcheck(SEXP x, int wanted) {
 }
 
 static int makeSortEnum(int decr, int nalast) {
-    
+
     /* passing decr = NA_INTEGER indicates UNKNOWN_SORTEDNESS. */
     if (decr == NA_INTEGER)
 	return UNKNOWN_SORTEDNESS;
-    
+
     if (nalast == NA_INTEGER)
 	nalast = 1; //  they were/will be removed so we say they are "last"
 
@@ -1119,7 +1119,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
 
 
 /* Needs indx set to  0:(n-1)  initially.
-   Also used by do_options and  ../gnuwin32/extra.c
+   Also used by do_options and  ../gnuwin32/extra.cpp
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
 HIDDEN void orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,

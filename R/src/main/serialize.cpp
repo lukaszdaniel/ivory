@@ -64,7 +64,7 @@ using namespace std;
  *    provided in a released version, then these should specify the
  *    oldest reader R version as -1.
  */
- 
+
  /* It is now customary that the version (1, 2, 3) of the format is
   * reflected also in magic numbers (such as RDX2, RDX3, ...), together with
   * type (xdr/ascii/binary).  Adding a new serialization format thus now
@@ -683,7 +683,7 @@ static int HashGet(SEXP item, SEXP ht)
 /*
  * Administrative SXP values
  *
- * These macros defind SXP "type" for specifying special object, such
+ * These macros defined SXP "type" for specifying special object, such
  * as R_NilValue, or control information, like REFSXP or NAMESPACESXP.
  * The range of SXP types is limited to 5 bit by the current sxpinfo
  * layout, but just in case these values are placed at the top of the
@@ -1019,7 +1019,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	   Do not compile default binding functions, because the byte-code is
 	   dropped as fields are set in constructors (just an optimization).
 	*/
-	    
+
 	SEXP new_s;
 	R_compile_pkgs = FALSE;
 	PROTECT(new_s = R_cmpfun1(s));
@@ -2896,8 +2896,7 @@ HIDDEN SEXP R_unserialize(SEXP icon, SEXP fun)
  * Support Code for Lazy Loading of Packages
  */
 
-
-#define IS_PROPER_STRING(s) (TYPEOF(s) == STRSXP && LENGTH(s) > 0)
+inline static bool IS_PROPER_STRING(SEXP s) { return (TYPEOF(s) == STRSXP && LENGTH(s) > 0); }
 
 /* Appends a raw vector to the end of a file using binary mode.
    Returns an integer vector of the initial offset of the string in

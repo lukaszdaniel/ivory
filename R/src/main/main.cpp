@@ -344,7 +344,7 @@ static void check_session_exit()
 	    REprintf(_("Execution halted\n"));
 	    R_CleanUp(SA_NOSAVE, 1, 0); /* quit, no save, no .Last, status=1 */
 	}
-	
+
     }
 }
 
@@ -634,7 +634,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
     }
     if(R_Interactive) {
 	REprintf(_("\nPossible actions:\n1: abort (with core dump, if enabled)\n2: normal R exit\n3: exit R without saving workspace\n4: exit R saving workspace\n"));
-	while(1) {
+	while(true) {
 	    if(R_ReadConsole(_("Selection: "), ConsoleBuf, CONSOLE_BUFFER_SIZE, 0) > 0) {
 		if(ConsoleBuf[0] == '1') break;
 		if(ConsoleBuf[0] == '2') R_CleanUp(SA_DEFAULT, 0, 1);

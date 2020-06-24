@@ -32,4 +32,4 @@ void coxph_wtest(Sint *nvar2, Sint *ntest, double *var, double *b,
         }
     *nvar2 = df;
     }
-    
+

@@ -348,13 +348,13 @@ void invert(matrix *A)
       }
     }
   } 
- 
+
   for (i=A->r-1;i>=0;i--) /*work down through column re-ordering  */
   { if (cp[i]!=i)
     { p=AM[i];AM[i]=AM[cp[i]];AM[cp[i]]=p; /* row exchange */
     }
   }
-  
+
   for (j=0;j<A->c-1;j++) /* implement column exchange */
   if (c[j]!=j)
   { if (c[j]<j) k=c[c[j]]; else k=c[j]; 
@@ -363,13 +363,13 @@ void invert(matrix *A)
     d[k]=d[j];d[j]=c[j];
     c[d[k]]=k;
   } 
-  
+
   for (i=A->r-1;i>=0;i--) /* column exchange implied by row re-ordering */
   if (rp[i]!=i)
   { for (k=0;k<A->r;k++) 
     { p=AM[k];x=p[i];p[i]=p[rp[i]];p[rp[i]]=x;} /* column exchange  */
   }
-   
+
   FREE(c);FREE(rp);FREE(cp);FREE(d);
 } /* invert */
 
@@ -457,7 +457,7 @@ void HQmult(C,U,p,t) matrix C,U;int p,t;
                   p==0,t==1 => CQ'; 
                   p==1,t==0 => QC;
 		          p==1,t==1 => Q'C
-   
+
    NOTE that the routine expects C to be compatible with the Hi's - if
    this routine is being used for projection in and out of Null spaces, then
    make sure that C is appropriately packed with zeroes.
@@ -621,7 +621,7 @@ void Rsolv(matrix *R,matrix *p,matrix *y, int transpose)
 /* Solves Rp=y for p when R is upper triangular - i.e. lower left 0.
    dimensions of p and y are not checked
    if transpose!=0 then solves: R'p=y
-   
+
 */
 
 { int i,j,k;
@@ -674,7 +674,7 @@ int QR(matrix *Q,matrix *R)
    Q can be used with OrthoMult(). 
    Under/overflow avoidance added 13/1/2000 along with more efficient calculation
    of length of u (modifications tested).
-   
+
 */
 
 { int i,j,k,n,Rr;

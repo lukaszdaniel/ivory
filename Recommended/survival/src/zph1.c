@@ -87,14 +87,14 @@ SEXP zph1(SEXP gt2,    SEXP y2,
     u = REAL(SET_VECTOR_ELT(rlist, 0, allocVector(REALSXP, 2*nvar)));
     dtemp = REAL(SET_VECTOR_ELT(rlist, 1, allocMatrix(REALSXP, 2*nvar, 2*nvar)));
     imat = dmatrix(dtemp, 2*nvar, 2*nvar);  /* information matrix */
-    
+
     dtemp = REAL(SET_VECTOR_ELT(rlist, 2, allocMatrix(REALSXP, nevent, nvar)));
     schoen = dmatrix(dtemp, nevent, nvar);  /* schoenfeld residuals */
 
     used = imatrix(INTEGER(SET_VECTOR_ELT(rlist, 3, 
 					  allocMatrix(INTSXP, nstrat, nvar))),
 		   nstrat, nvar);
-    
+
     /* scratch vectors */
     a = (double *) R_alloc(2*nvar*nvar + 2*nvar, sizeof(double));
     a2 = a + nvar;
@@ -141,7 +141,7 @@ SEXP zph1(SEXP gt2,    SEXP y2,
 	    }
 	}
     }
- 	
+
     /*
     **	Recenter the X matrix to make the variance computation more stable
     */
@@ -223,7 +223,7 @@ SEXP zph1(SEXP gt2,    SEXP y2,
 	if (ndead >0) {  /* we need to add to the main terms */
 	    if (method==0) { /* Breslow */
 		denom += denom2;
-	   
+
 		for (i=0; i<nvar; i++) {
 		    a[i] += a2[i];
 		    temp2= a[i]/ denom;  /* mean */

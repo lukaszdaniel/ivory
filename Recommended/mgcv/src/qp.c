@@ -546,7 +546,7 @@ void PCLS(matrix *X,matrix *p,matrix *y,matrix *w,matrix *Ain,matrix *b,
 { int i,j,k,n;
   matrix z,F,W,Z,B;
   double x,xx,*p1,*C;
- 
+
   /* form transformed data vector z */
   if (m>0) z=initmat(y->r+p->r,1);else z=initmat(y->r,1);
   W=initmat(w->r,1);
@@ -556,7 +556,7 @@ void PCLS(matrix *X,matrix *p,matrix *y,matrix *w,matrix *Ain,matrix *b,
   /* first put in W^0.5X */
   for (i=0;i<X->r;i++) for (j=0;j<X->c;j++) F.M[i][j]=W.V[i]*X->M[i][j];
   /* add up the Penalties */
- 
+
   if (m>0) { //B=initmat(p->r,p->r);
     n = p->r;
     C = (double *)CALLOC((size_t)(n*n),sizeof(double));

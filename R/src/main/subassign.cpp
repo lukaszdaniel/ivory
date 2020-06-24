@@ -2099,7 +2099,7 @@ HIDDEN SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-/* used in "$<-" (above) and methods_list_dispatch.c */
+/* used in "$<-" (above) and methods_list_dispatch.cpp */
 SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 {
     SEXP t;

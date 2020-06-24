@@ -323,7 +323,7 @@ void tensorXb(double *f,double *X, double *C,double *work, double *beta,
   } else { /* there is a constraint matrix */
     /* first map supplied beta to unconstrained parameterization */ 
     j = pb * pd; /* total number of coeffs - length of unconstrained beta */
-    
+
     *work = 0.0;x=0.0;
     for (p0=work+1,p1=p0+j-1,p2=beta,p3=v+1;p0<p1;p0++,p2++,p3++) { 
       *p0 = *p2; 
@@ -530,7 +530,7 @@ void diagXVXt(double *diag,double *V,double *X,int *k,int *ks,int *m,int *p, int
    X1 <- cbind(X[[1]][k[,1],]*mt[1],X[[2]][k[,2],]*mt[2],X[[3]][k[,3],]*mt[3])
    mt <- as.numeric(1:3 %in% rt)
    X2 <- cbind(X[[1]][k[,1],]*mt[1],X[[2]][k[,2],]*mt[2],X[[3]][k[,3],]*mt[3])
-   
+
    diagXVXd(X,V,k,ks,ts,dt,v=NULL,qc=rep(-1,3),lt=lt,rt=rt)
    rowSums((X1%*%V)*X2)
 
@@ -538,7 +538,7 @@ void diagXVXt(double *diag,double *V,double *X,int *k,int *ks,int *m,int *p, int
    beta <- runif(9)
    Xbd(X,beta,k,ks,ts,dt,v=NULL,qc=rep(-1,3),drop=NULL,lt=NULL)
    drop(Xf%*%beta)
-  
+
    Xbd(X,beta,k,ks,ts,dt,v=NULL,qc=rep(-1,3),drop=NULL,lt=lt)
    drop(X1%*%beta)
 
@@ -547,7 +547,7 @@ void diagXVXt(double *diag,double *V,double *X,int *k,int *ks,int *m,int *p, int
    XWX <- XWXd(X,w,k,ks,ts,dt,v=NULL,qc=rep(-1,3))
    XWXf <- t(Xf)%*%(w*Xf)
    range(XWXf-XWX)
-   
+
    ## XWXd with selection
    X1 <- matrix(0,100,0) 
    for (i in 1:length(X)) if (mt[i]>0) X1 <- cbind(X1,X[[i]][k[,i],]) 
@@ -705,11 +705,11 @@ void XWyd(double *XWy,double *y,double *X,double *w,int *k,int *ks, int *m,int *
   } /* kk is number of rows of XWy, at this point */
 
   n_XWy = kk;
-  
+
   Xy0 =  (double *) CALLOC((size_t)maxp,sizeof(double));
   work =  (double *) CALLOC((size_t)*n,sizeof(double));
   work1 = (double *) CALLOC((size_t)maxm,sizeof(double));
-  
+
   Wy = (double *) CALLOC((size_t)*n,sizeof(double)); /* Wy */
   for (j=0;j<*cy;j++) { /* loop over columns of y */
     for (p0=Wy,p1=Wy + *n,p2=w;p0<p1;p0++,y++,p2++) *p0 = *y * *p2; /* apply W to y */
@@ -778,17 +778,17 @@ void XWXd(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n,
      The full model matrix for the jth term is constucted by summing over q the full 
      model matrices corresponding to the qth index vectors for each of its marginals.    
    * For example the exression for the full model matrix of the jth term is...
-  
+
      X^full_j = sum_q prod_i X_{ts[j]+i}[k[,ks[i]+q],]  
 
      - q runs from 0 to ks[i,2] - ks[i,1] - 1; i runs from 0 to dt[j] - 1.
-         
+
    Tensor product terms may have constraint matrices Z, which post multiply the tensor product 
    (typically imposing approximate sum-to-zero constraints). Actually Z is Q with the first column 
    dropped where Q =  I - vv'. qc[i]==0 for singleton terms.  
 
    AR models are handled via the 3 ar_* arrays. ar_stop[0] < 0 signals no AR. 
-  
+
 */  
   int r,c,i,j,q,*pt,*pd,a,b,*tps,ptot,maxp=0,maxm=0,pa,pb,kk,dk,*start,one=1,zero=0,add; 
   ptrdiff_t *off,*voff;
@@ -920,7 +920,7 @@ void XWXd(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n,
       pb=pt[b]-1;
     } else pb=pt[b];
     /* copy result into overall XWX*/  
-  
+
     if (pd[r]>pd[c]) { /* xwx = Xr'WXc */
       for (i=0;i<pa;i++) for (j=0;j<pb;j++) 
       XWX[i+tps[r]+(j+tps[c]) * (ptrdiff_t)ptot] = XWX[j+tps[c]+(i+tps[r]) * (ptrdiff_t)ptot] 
@@ -959,7 +959,7 @@ ptrdiff_t XWXijspace(int i,int j,int r,int c,int *k, int *ks, int *m, int *p,int
     /* Allocate space for wb(m[im]), wbs and wbl*/
     nwork += mim;
     //wb = work; work += mim;// wbs = work; work += m[i]; wbl = work; work += m[i];
-    				  
+
   } else { /* general case */
     sj = ks[ts[j]+nx]-ks[ts[j]]; /* number of terms in summation convention for j */
     for (rj=1,kk=ts[j];kk<ts[j]+dt[j]-1;kk++) rj *= p[kk];
@@ -968,7 +968,7 @@ ptrdiff_t XWXijspace(int i,int j,int r,int c,int *k, int *ks, int *m, int *p,int
     if (ddti) tensi = 1; else tensi = 0; /* is term i a tensor? */
     if (ddtj) tensj = 1; else tensj = 0;
     mjm = (ptrdiff_t) m[jm];
-   
+
     if (n>mjm*mim) acc_w = 1; else acc_w = 0; /* accumulate \bar W or \bar W X_j / \bar W'X_i)? */ 
     if (acc_w) {
       if (p[im]*mim*mjm + p[im]*p[jm]*mjm > mim*mjm*p[jm] + p[im]*p[jm]*mim) rfac=0; else rfac=1;
@@ -981,9 +981,9 @@ ptrdiff_t XWXijspace(int i,int j,int r,int c,int *k, int *ks, int *m, int *p,int
       if (tri) alpha = ii*3 + 3; else alpha = ii + 1; /* ~ ops per iteration of accumulation loop */ 
       if (alpha*si*sj*n*p[im]+mjm*p[im]*p[jm]<alpha*si*sj*n*p[jm]+mim*p[im]*p[jm]) rfac = 0; else rfac=1; //rfac = 1; 
       if (mim == n) rfac = 0; else if (mjm == n) rfac = 1; /* make absolutely sure we do not form n by p*m product */
-     
+
     } /* end of accumulation storage allocation */
-    
+
     if (rfac) {
       /* Allocate storge for C mim by p[jm] */
       nwork +=  mim * p[jm];
@@ -1041,7 +1041,7 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
    * off[i] is offset to start of ith matrix (out of nx)  
    If Xk is a tensor product term, let dXk denote row tensor product of all but it's final 
    marginal. 
-   
+
    Workspace: Let mi and mj index the final marginal of term i and j, then the dim of work needed is
               2*n + 3*m[mi] + I(n>m[mi]*m[mj])*m[mi]*m[mj] + max(m[mi]*p[mj],m[mj]*p[mi]) 
               + 3n 
@@ -1116,21 +1116,21 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
   } else if (!tri && i==j && si==1) {/* simplest setup - just accumulate diagonal */
     /* note that if you turn this branch off in debugging then i==j case is forced to general
        code, which does NOT handle fact that only upper triangular blocks computed!! */
-    
+
     /* Allocate space for wb(m[im]), wbs and wbl*/
     wb = work; work += mim;// wbs = work; work += m[i]; wbl = work; work += m[i];
-    
+
     if (dt[i]>1) { /* tensor */
       ddt = dt[i]-1; /* number of marginals, exluding final */
       koff = 0; /* only one index vector per marginal, so no offset */
     }  
-   
+
     if (dt[i]>1) { /* extract col r of dXi */
 	for (kk=0;kk<n;kk++) dXi[kk] = 1.0;
 	tensorXj(dXi, X + off[ts[i]], m + ts[i], p + ts[i],&ddt, 
 		 k, &n, &r, ks + ts[i],&koff);
     }
-     
+
     if (dt[i]>1) { /* extract col c of dXi */
       if (r!=c) {
         dXj=pdXj;for (kk=0;kk<n;kk++) dXj[kk] = 1.0;
@@ -1140,7 +1140,7 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
     }
     /* Clear work space to zero... */
     for (ii=0;ii<mim;ii++) wb[ii]=0.0;
-   
+
     K = k + ks[im] * n; /* index for final margin */
     /* Accumulate the weights ... */
     if (dt[i]>1) {
@@ -1173,7 +1173,7 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
     if (ddti) tensi = 1; else tensi = 0; /* is term i a tensor? */
     if (ddtj) tensj = 1; else tensj = 0;
     mjm = (ptrdiff_t) m[jm];
-   
+
     if (n>mjm*mim) acc_w = 1; else acc_w = 0; /* accumulate \bar W or \bar W X_j / \bar W'X_i)? */ 
     if (acc_w) {
       if (p[im]*mim*mjm + p[im]*p[jm]*mjm > mim*mjm*p[jm] + p[im]*p[jm]*mim) rfac=0; else rfac=1;
@@ -1185,9 +1185,9 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
       if (tri) alpha = ii*3 + 3; else alpha = ii + 1; /* ~ ops per iteration of accumulation loop */ 
       if (alpha*si*sj*n*p[im]+mjm*p[im]*p[jm]<alpha*si*sj*n*p[jm]+mim*p[im]*p[jm]) rfac = 0; else rfac=1; //rfac = 1; 
       if (mim == n) rfac = 0; else if (mjm == n) rfac = 1; /* make absolutely sure we do not form n by p*m product */
-     
+
     } /* end of accumulation storage allocation */
-    
+
     if (rfac) {
       /* Allocate storge for C mim by p[jm] */
       C = work; work += mim * p[jm];
@@ -1195,7 +1195,7 @@ void XWXijs(double *XWX,int i,int j,int r,int c, double *X,int *k, int *ks, int 
       /* Allocate storage for D mjm by p[im] */
       D = work; work += mjm * p[im]; 
     }	
-   
+
     if (acc_w) for (kk=0;kk<mim*mjm;kk++) W[kk] = 0.0; /* clear W */
     else if (rfac) for (kk=0;kk<mim*p[jm];kk++) C[kk] = 0.0; /* clear C */
     else for (kk=0;kk<mjm*p[im];kk++) D[kk] = 0.0; /* clear D */
@@ -1409,10 +1409,10 @@ void XWXd0(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
 /* This version is the original without allowing the selection of sub-blocks
 
    essentially a driver routine for XWXij implementing block oriented cross products
-   
+
    This version has the looping over sub-blocks, associated with tensor product terms, located in this routine
    to get better load balancing.
-   
+
    Requires XWX to be over-sized on entry - namely n.params + n.terms by n.params + n.terms instead of
    n.params by n.params.
 */   
@@ -1476,7 +1476,7 @@ void XWXd0(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
   Cost = (double *)CALLOC((size_t) N,sizeof(double));
   sb[0] = 0; /* start of first sub-block of block 0 */
   for (kk=r=0;r < *nt;r++) for (c=r;c< *nt;c++,kk++) { /* loop over main blocks */
-    
+
     R[kk]=r;C[kk]=c;
     si = ks[ts[r] + *nx] - ks[ts[r]]; /* number of terms in summation convention for i */
     if (r==c && si==1 && !tri) {
@@ -1528,7 +1528,7 @@ void XWXd0(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
       r = i / ct;
       c = i % ct;
     }
-   
+
     #ifdef OPENMP_ON
     tid = omp_get_thread_num(); /* needed for providing thread specific work space to XWXij */
     #endif
@@ -1579,7 +1579,7 @@ void XWXd0(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
 
   if (ptot<nxwx) row_squash(XWX,ptot,nxwx,ptot); /* drop the now redundant trailing rows */
   up2lo(XWX,ptot); /* copy upper triangle to lower */
-  
+
   FREE(pt);FREE(pd);FREE(off);FREE(voff);FREE(tps);FREE(tpsu);FREE(work); if (tri) FREE(ws);//FREE(xwx);FREE(xwx0);
   FREE(B);FREE(R);FREE(C);FREE(sb);FREE(Cost);FREE(cost);FREE(b);FREE(sm);FREE(SMstack);FREE(worki);
 } /* XWXd0 */ 
@@ -1600,10 +1600,10 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
      If only one is > zero, then its array denotes the rows and cols required.   
    - the selected blocks are returned as a dense compact matrix (rather than being inserted into the full X'WX 
      in the appropriate places, for example.) 
-   
+
    This version has the looping over sub-blocks, associated with tensor product terms, located in this routine
    to get better load balancing.
-   
+
    Requires XWX to be over-sized on entry - namely n.params + n.terms by n.params + n.terms instead of
    n.params by n.params.
 
@@ -1626,11 +1626,11 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
      The full model matrix for the jth term is constucted by summing over q the full 
      model matrices corresponding to the qth index vectors for each of its marginals.    
    * For example the exression for the full model matrix of the jth term is...
-  
+
      X^full_j = sum_q prod_i X_{ts[j]+i}[k[,ks[i]+q],]  
 
      - q runs from 0 to ks[i,2] - ks[i,1] - 1; i runs from 0 to dt[j] - 1.
-         
+
    Tensor product terms may have constraint matrices Z, which post multiply the tensor product 
    (typically imposing approximate sum-to-zero constraints). Actually Z is Q with the first column 
    dropped where Q =  I - vv'. qc[i]==0 for singleton terms.  
@@ -1699,20 +1699,20 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
     else kk += pt[c] - 1; /* there is a tensor constraint to apply - reducing param count*/
     i +=  pt[c]; /* where cth term starts in unconstrained param vector */ 
   }
-  
+
   //Rprintf("\n pt:");for (i=0;i<*nt;i++) Rprintf(" %d",pt[i]);
   //Rprintf("\n rs:");for (i=0;i<*nrs;i++) Rprintf(" %d",rs[i]);
   //Rprintf("\n cs:");for (i=0;i<*ncs;i++) Rprintf(" %d",cs[i]);
   //Rprintf("\n tpsc:");for (i=0;i<*nt;i++) Rprintf(" %d",tpsc[i]);
   //Rprintf("\n tpsr:");for (i=0;i<*nt;i++) Rprintf(" %d",tpsr[i]);
-  
+
   qi = 6 * *n; /* integer work space */
   // maxm and maxmp only used here...
   //q = 6 * *n + maxm + maxm * maxmp; /* note that we never allocate a W accumulation matrix with more than n elements */
   //work = (double *)CALLOC((size_t)q * *nthreads,sizeof(double));
   worki = (int *)CALLOC((size_t)qi * *nthreads,sizeof(int));
   mmp = maxp;mmp = mmp*mmp;
- 
+
   if (*ar_stop>=0) { /* model has AR component*/
     for (p0 = w,p1 = w + *n;p0<p1;p0++) *p0 = sqrt(*p0); /* sqrt weights */
     /* ar_weights[0,2,4,6,...,2*n-2] is the ld of the square root of the tri-diagonal AR weight matrix
@@ -1789,7 +1789,7 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
       r = i / ct;
       c = i % ct;
     }
-   
+
     #ifdef OPENMP_ON
     tid = omp_get_thread_num(); /* needed for providing thread specific work space to XWXij */
     #endif
@@ -1844,7 +1844,7 @@ void XWXd1(double *XWX,double *X,double *w,int *k,int *ks, int *m,int *p, int *n
 
   if (ptot<nxwx) row_squash(XWX,ptot,nxwx,ptot); /* drop the now redundant trailing rows */
   if (symmetric) up2lo(XWX,ptot); /* copy upper triangle to lower */
-  
+
   FREE(pt);FREE(pd);FREE(off);FREE(voff);FREE(tpsr);FREE(tpsur);FREE(tpsc);FREE(tpsuc);
   FREE(work); if (tri) FREE(ws);//FREE(xwx);FREE(xwx0);
   FREE(B);FREE(R);FREE(C);FREE(sb);FREE(Cost);FREE(cost);FREE(b);FREE(sm);FREE(SMstack);FREE(worki);

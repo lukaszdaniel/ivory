@@ -103,7 +103,7 @@ void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy,
     int ii; 
     int     nused, nvar;
     int    nf, nvar2;
-    
+
     double  denom, zbeta, risk;
     double  temp, temp2;
     double  ndead;
@@ -228,7 +228,7 @@ void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy,
 	    for (i=0; i<nvar; i++) a[i] = 0;
 	    istrat++;
 	    }
-	
+
 	p = sort[ii];
 	zbeta = offset[p];    /* form the term beta*z   (vector mult) */
 	for (i=0; i<nvar; i++)
@@ -540,7 +540,7 @@ static double **cmatrix(double *data, int ncol, int nrow)
     int i,j;
     double **pointer;
     double *temp;
- 
+
     pointer = Calloc(nrow, double *);
     temp = Calloc(nrow*ncol, double);
     if (data==0){
@@ -611,7 +611,7 @@ void coxfit5_c (Sint *nusedx, Sint *nvar, Sint *strata, Sint *methodx,
 		efron_wt += score[i]* weights[i];
 		temp2    += weights[i];
 	        }
-        
+
             if (ndead<2 || method==0)  {
 		expect[p]  = temp2/denom;
 		weights[p] = temp2/denom;
@@ -659,7 +659,7 @@ void coxfit5_c (Sint *nusedx, Sint *nvar, Sint *strata, Sint *methodx,
 	    istrat--;
 	    }
 	}
-    
+
     /*
     ** Free up the extra memory
     */

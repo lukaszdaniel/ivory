@@ -32,7 +32,7 @@ int *norisk(int n, double *time1, double *time2, double *status,
     for (i=0; i<n; i++) {
 	p2 = sort2[i];
 	dtime = time2[p2];   
-	
+
 	if (i== strata[istrat]) {
 	    /* first obs of a new stratum */
 	    for (; j<i; j++) { /* finish off old stratum */
@@ -56,7 +56,7 @@ int *norisk(int n, double *time1, double *time2, double *status,
 
     for (; j<n; j++) {
 	p1 = sort2[j];
-	
+
 	if (ndeath > notused[p1]) notused[p1] =1; 
 	else notused[p1] =0;
 	}
@@ -64,5 +64,5 @@ int *norisk(int n, double *time1, double *time2, double *status,
     return(notused);
 }
 
-	    
-	
+
+

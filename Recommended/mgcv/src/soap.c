@@ -20,7 +20,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
 /* Function to create solution grid definition matrix G (nx by ny).
    Lower left cell centre is at x0, y0. cells are dx by dy. On entry 
    matrices d and dto are same dimension as G. 
-   
+
    The boundary is supplied in n-arrays, `x' and `y'. Sub loops are separated by elements
    <= break_code. nb must have dimension of number of loops.
 
@@ -35,7 +35,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
 
    'g' refers to the solution grid itself, which will contain only interior and 
    boundary points.
- 
+
    The boundary in x,y must be *strictly* within the outer grid cells. 
 
    `G' is stored column-wise (R default).
@@ -51,13 +51,13 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
    It is easy to work out which lines are crossed by a boundary line 
    segment, and where this crossing occurs. Cells whose cell boundaries 
    are cut are treated as boundary cells.
- 
+
 */ 
 { int segi,j,j0,j1,k,kk,i,reversed,*inb,*ip,*ip1,*ip2,bnd_count,ii,out_lim;
   double x1,y1,x2,y2,xb0,yb0,xl,yl,xc,yc,dist,dist_to,grad=0.0,b,len2,*p1,*p2;
- 
+
   /* first step is to mark outside points in grid */
-  
+
   p1 = d;p2 = dto;
   for (x1 = *x0,i=0;i<*nx;i++,x1 += *dx) {
     for (y1 = *y0,j=0;j<*ny;j++,y1 += *dy,p1++,p2++) {
@@ -76,7 +76,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
   FREE(inb);
 
   xb0 = *x0 - *dx/2;yb0 = *y0 - *dx/2; /* Refers to boundary lines lower left */ 
- 
+
   dist = 0.0; /* distance along current boundary loop */
   bnd_count = 0; /* count number of boundary loops */
   nb[0] = 0; /* count cells in this boundary */
@@ -93,10 +93,10 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
       y1=y[segi];y2=y[segi-1]; 
       reversed = 1;    
     }
-   
+
     j0 = (int) ceil( (x1 - xb0) / *dx); /* index of first vertical line after start */ 
     j1 = (int) floor( (x2 - xb0) / *dx);   /* index of last vertical line before end */
-    
+
     if (x2-x1>0) grad = (y2-y1)/(x2-x1); else j1=j0-1;
 
     for (j=j0;j<=j1;j++) {      /* loop through intersected lines */
@@ -116,9 +116,9 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
         ii++;
         nb[bnd_count]++;
       } 
-   
+
       /* Now get the distance along/to the boundary */ 
-     
+
       for (i=0;i<2;i++) { /* loop over the two cells concerned */
         xl = x2-x1;yl=y2-y1; 
         xc = (j-i) * *dx + *x0;
@@ -127,13 +127,13 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
         len2 = yl*yl + xl*xl;
         b = (xc*xl + yc*yl)/len2;
         xl = xl*b+x1;yl = yl * b + y1; /* location of projection from node to line */
-        
+
         if (xl < x1) {xl = x1;yl = y1;}
         if (xl > x2) {xl = x2;yl = y2;} /* constrained to *within* segment */
-         
+
         dist_to = sqrt((xl-xc)*(xl-xc) + (yl-yc)*(yl-yc));
         kk = (j-i) * *ny + k;
- 
+
         if (dist_to < dto[kk] || dto[kk]<0) { 
           dto[kk] = dist_to;
           xl -= x1; yl -= y1;
@@ -142,7 +142,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
           else 
             d[-G[kk]] = dist + sqrt(xl*xl + yl*yl); /* distance along boundary */
 	}
-        
+
       }
     } /* end of vertical line processing */
 
@@ -157,7 +157,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
       y1=y[segi];y2=y[segi-1];  
       reversed=1;   
     }
-   
+
     j0 = (int) ceil( (y1 - yb0) / *dy); /* index of first horizontal line after start */ 
     j1 = (int) floor( (y2 - yb0) / *dy);   /* index of last horizontal line before end */
 
@@ -168,14 +168,14 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
       xl = x1 + (yl - y1)*grad; /* y intersection location */
       k = (int) floor(( xl - xb0)/ *dx);
       /* so nodes k,j and k, (j-1) are boundary nodes */
-      
+
       kk = k * *ny + j - 1;
       if (G[kk]>0||G[kk]< out_lim) {G[kk] = -ii;ii++;nb[bnd_count]++;} /* otherwise already a boundary cell */
       kk ++; /* k * *ny + j */
       if (G[kk]>0||G[kk]< out_lim) {G[kk] = -ii;ii++;nb[bnd_count]++;} /* otherwise already a boundary cell */
-      
+
       /* Now get the distance along/to the boundary */ 
-     
+
       for (i=0;i<2;i++) { /* loop over the two cells concerned */
         xl = x2-x1;yl=y2-y1;
         yc = (j-i) * *dy + *y0;
@@ -184,13 +184,13 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
         len2 = yl*yl + xl*xl;
         b = (xc*xl + yc*yl)/len2;
         xl = xl*b+x1;yl = yl * b + y1; /* location of projection from node to line */
-        
+
         if (yl < y1) {xl = x1;yl = y1;}
         if (yl > y2) {xl = x2;yl = y2;} /* constrained to *within* segment */
-         
+
         dist_to = sqrt((xl-xc)*(xl-xc) + (yl-yc)*(yl-yc));
         kk = k * *ny + j-i;
- 
+
         if (dist_to < dto[kk] || dto[kk]<0) { 
           dto[kk] = dist_to;
           xl -= x1; yl -= y1;
@@ -199,7 +199,7 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
           else 
             d[-G[kk]] = dist + sqrt(xl*xl + yl*yl); /* distance along boundary */
 	}
-        
+
       }
     } /* end of horizontal line processing */
 
@@ -214,10 +214,10 @@ void boundary(int *G, double *d, double *dto, double *x0, double *y0, double *dx
       if (segi < *n) nb[bnd_count] = 0; /* set cell counter for this loop */
     }    
   } /* end of line segment loop */
-  
+
   /* Clear the remainder of d to -ve */
   k = *nx * *ny;for (i=ii;i<k;i++) d[i] = -1;
-  
+
   /* Set remaining elements of G */
   for (ip1 = G,ip2 = G + k;ip1<ip2;ip1++) if (*ip1 > 0) {*ip1 = ii;ii++;} 
 
@@ -347,7 +347,7 @@ void gridder(double *z,double *x,double *y,int *n,double *g, int *G,int *nx, int
       yy = yy - yy0 - iy * *dy;
       /* evaluate interpolating polynomial */
       z[i] = b0 + b1 * xx + b2 * yy + b3 * xx * yy; 
-   
+
     } else if (!ok) { /* no good neighbours - NA */
       z[i] = NA_code;
     } else { /* resort to nearest neighbour */

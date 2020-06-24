@@ -16,7 +16,7 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
- 
+
 /* Recent MinGW-w64 releases define snprintf and vsnprintf as macros
    that can't be redefined; these are necessary to make our substitutions
    of the trio replacements.  We need the replacements because msvcrt.dll

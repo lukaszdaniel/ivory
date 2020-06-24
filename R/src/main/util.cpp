@@ -50,10 +50,7 @@ void R_UTF8fixslash(char *s);
 static void R_wfixslash(wchar_t *s);
 #endif
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
 #if defined FC_LEN_T
 # include <stddef.h>
 void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
@@ -62,10 +59,7 @@ NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len);
 void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
 NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar);
 #endif
-
-#ifdef __cplusplus
 }
-#endif
 
 #include <rlocale.h>
 
@@ -936,7 +930,7 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
 
-#ifndef _WIN32 /* Windows version is in src/gnuwin32/extra.c */
+#ifndef _WIN32 /* Windows version is in src/gnuwin32/extra.cpp */
 #ifndef HAVE_DECL_REALPATH
 extern char *realpath(const char *path, char *resolved_path);
 #endif
@@ -1361,7 +1355,7 @@ constexpr unsigned int utf8_table2[] = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
 static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
 {
-    register size_t i, j;
+    size_t i, j;
     if (!n) return 0;
     if (s) *s = 0;    /* Simplifies exit later */
     if(cvalue == 0) return 0;
@@ -1471,7 +1465,7 @@ HIDDEN Rboolean mbcsValid(const char *const str)
 	return (Rboolean)((int)mbstowcs(NULL, str, 0) >= 0);
 }
 
-/* used in src/library/grDevices/src/cairo/cairoFns.c */
+/* used in src/library/grDevices/src/cairo/cairoFns.cpp */
 #include "valid_utf8.h"
 Rboolean utf8Valid(const char *const str)
 {
@@ -2555,7 +2549,7 @@ HIDDEN SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ii = NA_INTEGER;
 	else {
 	    int mfl;
-	    ii = findInterval2(rxt, n, rx[i], (Rboolean) sr, (Rboolean) si, (Rboolean) lO, ii, &mfl); // -> ../appl/interv.c
+	    ii = findInterval2(rxt, n, rx[i], (Rboolean) sr, (Rboolean) si, (Rboolean) lO, ii, &mfl); // -> ../appl/interv.cpp
 	}
 	INTEGER(ans)[i] = ii;
     }

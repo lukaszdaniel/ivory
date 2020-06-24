@@ -353,7 +353,7 @@ HIDDEN SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (DispatchOrEval(call, op, "rep", args, rho, &a, 0, 0))
       return(a);
-    
+
     if (!isVector(ncopy))
 	error(_("invalid type (%s) for '%s' (must be a vector)"),
 	      type2char(TYPEOF(ncopy)), "times");
@@ -428,7 +428,7 @@ HIDDEN SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	UNPROTECT(1);
     }
-    
+
     if (!isVector(s) && s != R_NilValue)
 	error(_("attempt to replicate non-vector"));
 

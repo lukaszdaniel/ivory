@@ -9,7 +9,9 @@
             "intelliSenseMode": "gcc-x64",
             "defines": [
                 "COMPILING_IVORY",
-                "HAVE_CONFIG_H"
+                "HAVE_CONFIG_H",
+                "Unix",
+                "ENABLE_NLS"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

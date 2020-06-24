@@ -463,7 +463,7 @@ read_SPSS_PORT(const char *filename)
 	setAttrib(ans, install("missings"), miss_labels);
     }
     UNPROTECT(1);
-   
+
     free_dictionary(dict);
     setAttrib(ans, R_NamesSymbol, ans_names);
     UNPROTECT(2);

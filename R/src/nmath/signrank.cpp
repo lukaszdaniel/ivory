@@ -50,7 +50,6 @@ static void w_free(void)
     allocated_n = 0;
 }
 
-extern "C"
 void signrank_free(void)
 {
     w_free();

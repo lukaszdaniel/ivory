@@ -208,7 +208,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
     return(result);
 }
 
-/* used in devWindows.c and cairoDevice */
+/* used in devWindows.cpp and cairoDevice */
 void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 		  int buttons, double x, double y)
 {
@@ -255,7 +255,7 @@ static const char * const keynames[] =
  "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11","F12",
  "PgUp", "PgDn", "End", "Home", "Ins", "Del"};
 
-/* used in devWindows.c and cairoDevice */
+/* used in devWindows.cpp and cairoDevice */
 void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 	     const char *keyname)
 {

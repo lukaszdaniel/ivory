@@ -15,7 +15,7 @@ SEXP multicheck(SEXP time12, SEXP time22, SEXP status2, SEXP id2,
 		SEXP istate2, SEXP sort2) {
     int i, ii, oldid, oldii;
     int n;
-    
+
     double *time1, *time2;
     int *status;
     int *istate, *id;
@@ -25,7 +25,7 @@ SEXP multicheck(SEXP time12, SEXP time22, SEXP status2, SEXP id2,
     static const char *outnames[]={"dupid", "gap", "cstate", ""};
     int *dupid, *gap, *cstate;
     SEXP rlist;   /* return list*/
-    
+
     n = LENGTH(id2);
     time1 =  REAL(time12);
     time2 =  REAL(time22);
@@ -42,7 +42,7 @@ SEXP multicheck(SEXP time12, SEXP time22, SEXP status2, SEXP id2,
     oldid = -1;  /* the input id values are all > 0 */
     oldii = 0 ;  /* stop a complaint from -Wall option of gcc */
     cstate[0] = istate[0];
-	    
+
     for (i=0; i<n; i++) {  /* ii= next obs, ilag=prior obs */
 	ii = sort[i];
 	if (id[ii] == oldid) {
@@ -67,5 +67,5 @@ SEXP multicheck(SEXP time12, SEXP time22, SEXP status2, SEXP id2,
     UNPROTECT(1);
     return(rlist);
 }	
-    
-    
+
+

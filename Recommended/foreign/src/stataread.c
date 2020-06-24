@@ -402,7 +402,7 @@ SEXP R_LoadStataData(FILE *fp)
 	    charlen = (InIntegerBinary(fp, 1, swapends));
 	else
 	    charlen = (InShortIntBinary(fp, 1, swapends));
-	
+
 	if((charlen > 66)) {
 	    labeltable = lengthgets(labeltable, j+1);
 	    UNPROTECT(1);
