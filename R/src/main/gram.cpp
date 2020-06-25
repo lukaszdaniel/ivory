@@ -5080,10 +5080,9 @@ static int SpecialValue(int c)
 }
 
 /* return 1 if name is a valid name 0 otherwise */
-HIDDEN int isValidName(const char *name)
+HIDDEN bool Rf_isValidName(const char *name)
 {
     const char *p = name;
-    int i;
 
     if(mbcslocale) {
 	/* the only way to establish which chars are alpha etc is to
@@ -5092,31 +5091,31 @@ HIDDEN int isValidName(const char *name)
 	wchar_t wc;
 	used = Mbrtowc(&wc, p, n, NULL); p += used; n -= used;
 	if(used == 0) return 0;
-	if (wc != L'.' && !iswalpha(wc) ) return 0;
+	if (wc != L'.' && !iswalpha(wc) ) return false;
 	if (wc == L'.') {
 	    /* We don't care about other than ASCII digits */
-	    if(isdigit(0xff & (int)*p)) return 0;
+	    if(isdigit(0xff & (int)*p)) return false;
 	    /* Mbrtowc(&wc, p, n, NULL); if(iswdigit(wc)) return 0; */
 	}
 	while((used = Mbrtowc(&wc, p, n, NULL))) {
 	    if (!(iswalnum(wc) || wc == L'.' || wc == L'_')) break;
 	    p += used; n -= used;
 	}
-	if (*p != '\0') return 0;
+	if (*p != '\0') return false;
     } else {
 	int c = 0xff & *p++;
-	if (c != '.' && !isalpha(c) ) return 0;
-	if (c == '.' && isdigit(0xff & (int)*p)) return 0;
+	if (c != '.' && !isalpha(c) ) return false;
+	if (c == '.' && isdigit(0xff & (int)*p)) return false;
 	while ( c = 0xff & *p++, (isalnum(c) || c == '.' || c == '_') ) ;
-	if (c != '\0') return 0;
+	if (c != '\0') return false;
     }
 
-    if (streql(name, "...")) return 1;
+    if (streql(name, "...")) return true;
 
-    for (i = 0; keywords[i].name != NULL; i++)
-	if (streql(keywords[i].name, name)) return 0;
+    for (int i = 0; keywords[i].name != NULL; i++)
+	if (streql(keywords[i].name, name)) return false;
 
-    return 1;
+    return true;
 }
 
 

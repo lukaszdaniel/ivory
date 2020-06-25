@@ -60,7 +60,7 @@ int (*ptr_CocoaSystem)(const char*);
 #endif
 
 #ifdef _WIN32
-Rboolean R_FileExists(const char *path)
+bool R_FileExists(const char *path)
 {
     struct _stati64 sb;
     return _stati64(R_ExpandFileName(path), &sb) == 0;
@@ -74,7 +74,7 @@ HIDDEN double R_FileMtime(const char *path)
     return sb.st_mtime;
 }
 #else
-Rboolean R_FileExists(const char *path)
+bool R_FileExists(const char *path)
 {
     struct stat sb;
     return (Rboolean) (stat(R_ExpandFileName(path), &sb) == 0);
@@ -93,10 +93,10 @@ HIDDEN double R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-HIDDEN Rboolean R_HiddenFile(const char *name)
+HIDDEN bool R_HiddenFile(const char *name)
 {
-    if (name && name[0] != '.') return FALSE;
-    else return TRUE;
+    if (name && name[0] != '.') return false;
+    return true;
 }
 
 /* The MSVC runtime has a global to determine whether an unspecified
@@ -2019,7 +2019,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     R_xlen_t i, n;
-    int res, dirmark, initialized=FALSE;
+    int res, dirmark; bool initialized = false;
     glob_t globbuf;
 #ifdef _WIN32
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
@@ -2063,7 +2063,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("internal out-of-memory condition"));
 # endif
 #endif
-	initialized = TRUE;
+	initialized = true;
     }
     n = initialized ? globbuf.gl_pathc : 0;
     PROTECT(ans = allocVector(STRSXP, n));
@@ -2139,10 +2139,10 @@ HIDDEN int R_is_redirection_tty(int fd)
 {
     /* for now detects only msys/cygwin redirection tty */
     static LPFN_GFIBH_EX gfibh = NULL;
-    static Rboolean initialized = FALSE;
+    static bool initialized = false;
 
     if (!initialized) {
-	initialized = TRUE;
+	initialized = true;
 	gfibh = (LPFN_GFIBH_EX) GetProcAddress(
 	    GetModuleHandle(TEXT("kernel32")),
 	    "GetFileInformationByHandleEx");

@@ -1658,7 +1658,7 @@ void f8xact(const int irow[], int is, int i1, int izero, int *new_)
 
     new_[i] = is;
 
-    for(;;) {
+    while(true) {
 	++i;
 	if (i > izero)
 	    return;

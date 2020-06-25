@@ -476,7 +476,7 @@ static void waitForJob(pinfo *pi, DWORD timeoutMillis, int* timedout)
 	beforeMillis = timeGetTime();
 
     queryMillis = 0;
-    for(;;) {
+    while(true) {
 	ret = GetQueuedCompletionStatus(pi->port, &code, &key,
 					&overlapped, queryMillis);
 	if (ret && code == JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO &&

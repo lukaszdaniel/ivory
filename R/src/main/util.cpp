@@ -655,7 +655,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* printf("i %d nnx %d j %d nny %d\n", i, nnx, j, nny); */
 	dnans += ((double)(nnx-i))*(nny-j);
     }
-    if (dnans > R_XLEN_T_MAX)
+    if (dnans > (double) R_XLEN_T_MAX)
 	error(_("number of rows in the result exceeds maximum vector length"));
     R_xlen_t nans = (int) dnans;
 
@@ -1467,9 +1467,9 @@ HIDDEN Rboolean mbcsValid(const char *const str)
 
 /* used in src/library/grDevices/src/cairo/cairoFns.cpp */
 #include "valid_utf8.h"
-Rboolean utf8Valid(const char *const str)
+bool utf8Valid(const char *const str)
 {
-	return (Rboolean)(valid_utf8(str, strlen(str)) == 0);
+	return (valid_utf8(str, strlen(str)) == 0);
 }
 
 HIDDEN SEXP do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -1905,17 +1905,19 @@ double R_strtod5(const char *str, char **endptr, char dec,
 	    else break;
 	    if (exph >= 0) exph += 4;
 	}
-#define strtod_EXACT_CLAUSE						\
-	if(exact && ans > 0x1.fffffffffffffp52) {			\
-	    if(exact == NA_LOGICAL)					\
-		warning(_(						\
-		"accuracy loss in conversion from \"%s\" to numeric"),	\
-			str);						\
-	    else {							\
-		ans = NA_REAL;						\
-		p = str; /* back out */					\
-		goto done;						\
-	    }								\
+#define strtod_EXACT_CLAUSE                                                    \
+	if (exact && ans > 0x1.fffffffffffffp52)                                   \
+	{                                                                          \
+		if (exact == NA_LOGICAL)                                               \
+			warning(_(                                                         \
+						"accuracy loss in conversion from \"%s\" to numeric"), \
+					str);                                                      \
+		else                                                                   \
+		{                                                                      \
+			ans = NA_REAL;                                                     \
+			p = str; /* back out */                                            \
+			goto done;                                                         \
+		}                                                                      \
 	}
 	strtod_EXACT_CLAUSE;
 	if (*p == 'p' || *p == 'P') {

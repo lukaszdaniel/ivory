@@ -859,8 +859,8 @@ static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 */
 
 /* pattern and number of guard bytes */
-#define FILL 0xee
-#define NG 64
+static constexpr int FILL = 0xee;
+static constexpr int NG = 64;
 
 HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -946,7 +946,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_VECTOR_ELT(ans, na, s);
 
 	if(checkNativeType(targetType, TYPEOF(s)) == FALSE &&
-	   targetType != SINGLESXP) {
+	   targetType != SEXPTYPE(SINGLESXP)) {
 	    /* Cannot be called if DUP = FALSE, so only needs to live
 	       until copied in the switch.
 	       But R_alloc allocates, so missed protection < R 2.15.0.

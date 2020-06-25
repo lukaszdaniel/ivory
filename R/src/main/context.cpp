@@ -214,7 +214,7 @@ static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 
 HIDDEN NORET void R_jumpctxt(RCNTXT *targetcptr, int mask, SEXP val)
 {
-    Rboolean savevis = R_Visible;
+    bool savevis = R_Visible;
     RCNTXT *cptr;
 
     /* find the target for the first jump -- either an intermediate
@@ -291,7 +291,7 @@ void Rf_endcontext(RCNTXT *cptr)
     RCNTXT *jumptarget = cptr->jumptarget;
     if (cptr->cloenv != R_NilValue && cptr->onExit() != R_NilValue ) {
 	SEXP s = cptr->onExit();
-	Rboolean savevis = R_Visible;
+	bool savevis = R_Visible;
 	RCNTXT* savecontext = R_ExitContext;
 	SEXP saveretval = R_ReturnedValue;
 	R_ExitContext = cptr;
@@ -755,7 +755,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     RCNTXT thiscontext;
     RCNTXT * volatile saveToplevelContext;
     volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
-    volatile Rboolean oldvis;
+    volatile bool oldvis;
     Rboolean result;
 
 

@@ -42,7 +42,7 @@ typedef struct {
 void registerBase(void); /* used in devices.cpp */
 void unregisterBase(void); /* used in devices.cpp */
 
-void Rf_setBaseDevice(Rboolean val, pGEDevDesc dd); /* used in graphics.c */
+void Rf_setBaseDevice(Rboolean val, pGEDevDesc dd); /* used in graphics.cpp */
 
 extern int baseRegisterIndex;
 

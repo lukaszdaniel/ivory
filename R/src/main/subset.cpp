@@ -284,7 +284,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
     nrs = LENGTH(sr);
     ncs = LENGTH(sc);
     /* Check this does not overflow: currently only possible on 32-bit */
-    if ((double)nrs * (double)ncs > R_XLEN_T_MAX)
+    if ((double)nrs * (double)ncs > (double) R_XLEN_T_MAX)
 	error(_("dimensions would exceed maximum size of array"));
     PROTECT(sr);
     PROTECT(sc);
@@ -392,23 +392,28 @@ R_INLINE static R_xlen_t findASubIndex(R_xlen_t k, const int * const *subs,
     return ii;
 }
 
-#define ARRAY_SUBSET_LOOP(STDCODE, NACODE) do {			\
-	for (R_xlen_t i = 0; i < n; i++) {			\
-	    R_xlen_t ii = findASubIndex(k, subs, indx,		\
-					pxdims, offset, call);	\
-	    if (ii != NA_INTEGER)				\
-		STDCODE;					\
-	    else						\
-		NACODE;						\
-	    if (n > 1) {					\
-		int j = 0;					\
-		while (++indx[j] >= bound[j]) {			\
-		    indx[j] = 0;				\
-		    j = (j + 1) % k;				\
-		}						\
-	    }							\
-	}							\
-    } while (0)
+#define ARRAY_SUBSET_LOOP(STDCODE, NACODE)                     \
+	do                                                         \
+	{                                                          \
+		for (R_xlen_t i = 0; i < n; i++)                       \
+		{                                                      \
+			R_xlen_t ii = findASubIndex(k, subs, indx,         \
+										pxdims, offset, call); \
+			if (ii != NA_INTEGER)                              \
+				STDCODE;                                       \
+			else                                               \
+				NACODE;                                        \
+			if (n > 1)                                         \
+			{                                                  \
+				int j = 0;                                     \
+				while (++indx[j] >= bound[j])                  \
+				{                                              \
+					indx[j] = 0;                               \
+					j = (j + 1) % k;                           \
+				}                                              \
+			}                                                  \
+		}                                                      \
+	} while (0)
 
 static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 {

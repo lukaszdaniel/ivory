@@ -171,7 +171,7 @@ int findInterval2(double *xt, int n, double x,
 
 L50: // ! left_open
     /* **** now xt[ilo] <= x < xt[ihi] . narrow the interval. */
-    for(;;) {
+    while(true) {
 	middle = (ilo + ihi) / 2;
 	if (middle == ilo) {
 	    *mflag = 0;	   return ilo;
@@ -185,7 +185,7 @@ L50: // ! left_open
 
 L51: // left_open
     /* **** now xt[ilo] < x <= xt[ihi] . narrow the interval. */
-    for(;;) {
+    while(true) {
 	middle = (ilo + ihi) / 2;
 	if (middle == ilo) {
 	    *mflag = 0;	   return ilo;

@@ -88,20 +88,25 @@
    assignment functions (and duplicate in the case of ATTRIB) when the
    ATTRIB or TAG value to be stored is R_NilValue, the value the field
    will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep) do { \
-  SEXP __a__ = ATTRIB(from); \
-  if (__a__ != R_NilValue) { \
-      SET_ATTRIB(to, duplicate1(__a__, deep)); \
-    SET_OBJECT(to, OBJECT(from)); \
-    IS_S4_OBJECT(from) ? SET_S4_OBJECT(to) : UNSET_S4_OBJECT(to);  \
-  } \
-} while (0)
+#define DUPLICATE_ATTRIB(to, from, deep)                                  \
+	do                                                                    \
+	{                                                                     \
+		SEXP __a__ = ATTRIB(from);                                        \
+		if (__a__ != R_NilValue)                                          \
+		{                                                                 \
+			SET_ATTRIB(to, duplicate1(__a__, deep));                      \
+			SET_OBJECT(to, OBJECT(from));                                 \
+			if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);}; \
+		}                                                                 \
+	} while (0)
 
-#define COPY_TAG(to, from) do { \
-  SEXP __tag__ = TAG(from); \
-  if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
-} while (0)
-
+#define COPY_TAG(to, from)         \
+	do                             \
+	{                              \
+		SEXP __tag__ = TAG(from);  \
+		if (__tag__ != R_NilValue) \
+			SET_TAG(to, __tag__);  \
+	} while (0)
 
 /* For memory profiling.  */
 /* We want a count of calls to duplicate from outside
@@ -367,7 +372,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     }
     if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
 	SET_OBJECT(t, OBJECT(s));
-	(IS_S4_OBJECT(s) ? SET_S4_OBJECT(t) : UNSET_S4_OBJECT(t));
+	if(IS_S4_OBJECT(s)) {SET_S4_OBJECT(t);} else {UNSET_S4_OBJECT(t);};
     }
     return t;
 }

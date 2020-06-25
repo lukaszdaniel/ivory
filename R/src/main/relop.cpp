@@ -34,7 +34,7 @@
 using namespace std;
 
 /* interval at which to check interrupts, a guess */
-constexpr R_xlen_t NINTERRUPT = 10000000;
+//constexpr R_xlen_t NINTERRUPT = 10000000;
 
 static SEXP numeric_relop(RELOP_TYPE code, SEXP s1, SEXP s2);
 static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call);
@@ -297,42 +297,47 @@ HIDDEN SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 
 #define ISNA_INT(x) x == NA_INTEGER
 
-#define NR_HELPER(OP, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2) do { \
-	type1 x1, *px1 = ACCESSOR1(s1);					\
-	type2 x2, *px2 = ACCESSOR2(s2);					\
-	int *pa = LOGICAL(ans);						\
-        MOD_ITERATE2(n, n1, n2, i, i1, i2, {                            \
-	    x1 = px1[i1];						\
-	    x2 = px2[i2];						\
-            if (ISNA1(x1) || ISNA2(x2))                                 \
-                pa[i] = NA_LOGICAL;					\
-            else                                                        \
-                pa[i] = (x1 OP x2);					\
-        });                                                             \
-    } while (0)
+#define NR_HELPER(OP, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2) \
+	do                                                                  \
+	{                                                                   \
+		type1 x1, *px1 = ACCESSOR1(s1);                                 \
+		type2 x2, *px2 = ACCESSOR2(s2);                                 \
+		int *pa = LOGICAL(ans);                                         \
+		MOD_ITERATE2(n, n1, n2, i, i1, i2, {                            \
+			x1 = px1[i1];                                               \
+			x2 = px2[i2];                                               \
+			if (ISNA1(x1) || ISNA2(x2))                                 \
+				pa[i] = NA_LOGICAL;                                     \
+			else                                                        \
+				pa[i] = (x1 OP x2);                                     \
+		});                                                             \
+	} while (0)
 
-#define NUMERIC_RELOP(type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2) do { \
-    switch (code) {                                                     \
-    case EQOP:                                                          \
-	NR_HELPER(==, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    case NEOP:                                                          \
-	NR_HELPER(!=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    case LTOP:                                                          \
-	NR_HELPER(<, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    case GTOP:                                                          \
-	NR_HELPER(>, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    case LEOP:                                                          \
-	NR_HELPER(<=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    case GEOP:                                                          \
-	NR_HELPER(>=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
-        break;                                                          \
-    }                                                                   \
-} while(0)
+#define NUMERIC_RELOP(type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2)      \
+	do                                                                       \
+	{                                                                        \
+		switch (code)                                                        \
+		{                                                                    \
+		case EQOP:                                                           \
+			NR_HELPER(==, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
+			break;                                                           \
+		case NEOP:                                                           \
+			NR_HELPER(!=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
+			break;                                                           \
+		case LTOP:                                                           \
+			NR_HELPER(<, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2);  \
+			break;                                                           \
+		case GTOP:                                                           \
+			NR_HELPER(>, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2);  \
+			break;                                                           \
+		case LEOP:                                                           \
+			NR_HELPER(<=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
+			break;                                                           \
+		case GEOP:                                                           \
+			NR_HELPER(>=, type1, ACCESSOR1, ISNA1, type2, ACCESSOR2, ISNA2); \
+			break;                                                           \
+		}                                                                    \
+	} while (0)
 
 static SEXP numeric_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 {

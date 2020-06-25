@@ -168,12 +168,12 @@ void R_DefParams(Rstart Rp)
     R_SizeFromEnv(Rp);
 }
 
-#define Max_Nsize 50000000	/* about 1.4Gb 32-bit, 2.8Gb 64-bit */
-#define Max_Vsize R_SIZE_T_MAX	/* unlimited */
+constexpr R_size_t Max_Nsize = 50000000;	/* about 1.4Gb 32-bit, 2.8Gb 64-bit */
+constexpr R_size_t Max_Vsize = R_SIZE_T_MAX;	/* unlimited */
 
 // small values ok for R_DEFAULT_PACKAGES=NULL (= 'base' only)
-#define Min_Nsize 50000
-#define Min_Vsize 262144 // = (Mega/4)
+constexpr R_size_t Min_Nsize = 50000;
+constexpr R_size_t Min_Vsize = 262144; // = (Mega/4)
 
 void R_SizeFromEnv(Rstart Rp)
 {

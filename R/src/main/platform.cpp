@@ -2075,7 +2075,7 @@ static int var_R_can_use_X11 = -1;
 
 Rboolean R_access_X11(void); /* from src/unix/X11.cpp */
 
-static Rboolean R_can_use_X11(void)
+static bool R_can_use_X11(void)
 {
     if (var_R_can_use_X11 < 0) {
 #ifdef HAVE_X11
@@ -2090,7 +2090,7 @@ static Rboolean R_can_use_X11(void)
 #endif
     }
 
-    return (Rboolean) (var_R_can_use_X11 > 0);
+    return (var_R_can_use_X11 > 0);
 }
 #endif
 

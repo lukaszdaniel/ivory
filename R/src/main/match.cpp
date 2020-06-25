@@ -172,10 +172,8 @@ HIDDEN SEXP Rf_matchArgExact(SEXP tag, SEXP * list)
 /* Match the supplied arguments with the formals and */
 /* return the matched arguments in actuals. */
 
-//#define ARGUSED(x) LEVELS(x)
-R_INLINE static int ARGUSED(SEXP x) { return LEVELS(x); }
-//#define SET_ARGUSED(x,v) SETLEVELS(x,v)
-R_INLINE static void SET_ARGUSED(SEXP x, int v) { SETLEVELS(x, v); }
+const auto ARGUSED = LEVELS;
+const auto SET_ARGUSED = SETLEVELS;
 
 
 /* We need to leave 'supplied' unchanged in case we call UseMethod */

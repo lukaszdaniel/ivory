@@ -54,7 +54,7 @@ extern "C" {
 #endif
 
 #ifdef COMPILING_R
-/* defined only in inlined.c: this emits standalone code there */
+/* defined only in inlined.cpp: this emits standalone code there */
 # define INLINE_FUN
 #else
 /* This section is normally only used for versions of gcc which do not
@@ -768,7 +768,7 @@ INLINE_FUN SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
     return s;
 }
 
-/* from util.c */
+/* from util.cpp */
 
 /* Check to see if the arrays "x" and "y" have the identical extents */
 

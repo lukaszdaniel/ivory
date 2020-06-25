@@ -73,7 +73,7 @@ HIDDEN SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (XLENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else
@@ -155,7 +155,7 @@ HIDDEN SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (XLENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else
@@ -245,7 +245,7 @@ HIDDEN SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (LENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else

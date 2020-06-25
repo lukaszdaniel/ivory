@@ -121,17 +121,18 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(lens[i] == 0) return allocVector(STRSXP, 0);
     }
 
-#define CHECK_maxlen							\
-    maxlen = nfmt;							\
-    for(i = 0; i < nargs; i++)						\
-	if(maxlen < lens[i]) maxlen = lens[i];				\
-    if(maxlen % nfmt)							\
-	error(_("arguments cannot be recycled to the same length"));	\
-    for(i = 0; i < nargs; i++)						\
-	if(maxlen % lens[i])						\
-	    error(_("arguments cannot be recycled to the same length"))
+#define CHECK_maxlen                                                 \
+	maxlen = nfmt;                                                   \
+	for (i = 0; i < nargs; i++)                                      \
+		if (maxlen < lens[i])                                        \
+			maxlen = lens[i];                                        \
+	if (maxlen % nfmt)                                               \
+		error(_("arguments cannot be recycled to the same length")); \
+	for (i = 0; i < nargs; i++)                                      \
+		if (maxlen % lens[i])                                        \
+	error(_("arguments cannot be recycled to the same length"))
 
-    CHECK_maxlen;
+	CHECK_maxlen;
 
     outputString = (char*) R_AllocStringBuffer(0, &outbuff);
 
@@ -263,13 +264,14 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    fmtp = fmt2;
 			} else fmtp = fmt;
 
-#define CHECK_this_length						\
-			do {						\
-			    PROTECT(_this);				\
-			    thislen = length(_this);			\
-			    if(thislen == 0)				\
-				error(_("coercion has changed vector length to 0")); \
-			} while (0)
+#define CHECK_this_length                                        \
+	do                                                           \
+	{                                                            \
+		PROTECT(_this);                                          \
+		thislen = length(_this);                                 \
+		if (thislen == 0)                                        \
+			error(_("coercion has changed vector length to 0")); \
+	} while (0)
 
 			/* Now let us see if some minimal coercion
 			   would be sensible, but only do so once, for ns = 0: */
@@ -311,20 +313,21 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				   /* no automatic as.double(<string>) : */
 				   TYPEOF(_this) != STRSXP) {
 				    PROTECT(tmp = lang2(install("as.double"), _this));
-#define COERCE_THIS_TO_A						\
-				    _this = eval(tmp, env);		\
-				    UNPROTECT(1);			\
-				    PROTECT(a[nthis] = _this);		\
-				    nprotect++;				\
-				    did_this = TRUE;			\
-				    CHECK_this_length;			\
-				    do_check = (Rboolean) (lens[nthis] == maxlen);	\
-				    lens[nthis] = thislen; /* may have changed! */ \
-				    if(do_check && thislen < maxlen) {	\
-					CHECK_maxlen;			\
-				    }
+#define COERCE_THIS_TO_A                           \
+	_this = eval(tmp, env);                        \
+	UNPROTECT(1);                                  \
+	PROTECT(a[nthis] = _this);                     \
+	nprotect++;                                    \
+	did_this = TRUE;                               \
+	CHECK_this_length;                             \
+	do_check = (Rboolean)(lens[nthis] == maxlen);  \
+	lens[nthis] = thislen; /* may have changed! */ \
+	if (do_check && thislen < maxlen)              \
+	{                                              \
+		CHECK_maxlen;                              \
+	}
 
-				    COERCE_THIS_TO_A
+					COERCE_THIS_TO_A
 				}
 				break;
 			    case 's':

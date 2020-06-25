@@ -460,7 +460,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	setAttrib(value2, R_NamesSymbol, names2);
 	UNPROTECT(5);
-	R_Visible = TRUE;
+	R_Visible = true;
 	return value2;
     }
 

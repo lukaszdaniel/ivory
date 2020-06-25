@@ -675,7 +675,7 @@ static ssize_t readrep(int fildes, void *buf, size_t nbyte)
 {
     size_t rbyte = 0;
     char *ptr = (char *)buf;
-    for(;;) {
+    while(true) {
 	ssize_t r = read(fildes, ptr + rbyte, nbyte - rbyte);
 	if (r == -1) {
 	    if (errno == EINTR)
@@ -703,7 +703,7 @@ static ssize_t writerep(int fildes, const void *buf, size_t nbyte)
 {
     size_t wbyte = 0;
     const char *ptr = (const char *)buf;
-    for(;;) {
+    while(true) {
 	ssize_t w = write(fildes, ptr + wbyte, nbyte - wbyte);
 	if (w == -1) {
 	    if (errno == EINTR)
@@ -895,7 +895,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 	fd_set savefs;
 	fdcopy(&savefs, &fs, maxfd + 1);
 
-	for(;;) {
+	while(true) {
 	    R_ProcessEvents();
 	    /* re-set tv as it may get updated by select */
 	    if (R_wait_usec > 0) {

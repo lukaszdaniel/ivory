@@ -47,15 +47,16 @@
 #ifndef HAVE_RCONNECTION_TYPEDEF
 typedef struct Rconn* Rconnection;
 #endif
-struct Rconn {
-    char* connclass;
-    char* description;
+struct Rconn
+{
+    char *connclass;
+    char *description;
     int enc; /* the encoding of 'description' */
     char mode[5];
-    Rboolean text, isopen, incomplete, canread, canwrite, canseek, blocking, 
-	isGzcon;
+    Rboolean text, isopen, incomplete, canread, canwrite, canseek, blocking,
+        isGzcon;
     Rboolean (*open)(struct Rconn *);
-    void (*close)(struct Rconn *); /* routine closing after auto open */
+    void (*close)(struct Rconn *);   /* routine closing after auto open */
     void (*destroy)(struct Rconn *); /* when closing connection */
     int (*vfprintf)(struct Rconn *, const char *, va_list);
     int (*fgetc)(struct Rconn *);

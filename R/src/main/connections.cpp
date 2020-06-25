@@ -2806,7 +2806,7 @@ static size_t raw_write(const void *ptr, size_t size, size_t nitems,
     Rrawconn thisconn = (Rrawconn) con->connprivate;
     size_t freespace = XLENGTH(thisconn->data) - thisconn->pos, bytes = size*nitems;
 
-    if ((double) size * (double) nitems + (double) thisconn->pos > R_XLEN_T_MAX)
+    if ((double) size * (double) nitems + (double) thisconn->pos > (double) R_XLEN_T_MAX)
 	error(_("attempting to add too many elements to raw vector"));
     /* resize may fail, when this will give an error */
     if(bytes >= freespace) raw_resize(thisconn, bytes + thisconn->pos);
@@ -2829,7 +2829,7 @@ static size_t raw_read(void *ptr, size_t size, size_t nitems,
     Rrawconn thisconn = (Rrawconn) con->connprivate;
     size_t available = thisconn->nbytes - thisconn->pos, request = size*nitems, used;
 
-    if ((double) size * (double) nitems + (double) thisconn->pos > R_XLEN_T_MAX)
+    if ((double) size * (double) nitems + (double) thisconn->pos > (double) R_XLEN_T_MAX)
 	error(_("specified block is too large"));
     used = (request < available) ? request : available;
     memmove(ptr, RAW(thisconn->data) + thisconn->pos, used);
@@ -3943,7 +3943,7 @@ HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
     for(nread = 0; nread < nnn; nread++) {
 	if(nread >= nn) {
 	    double dnn = 2.* nn;
-	    if (dnn > R_XLEN_T_MAX) error(_("too many items"));
+	    if (dnn > (double) R_XLEN_T_MAX) error(_("too many items"));
 	    ans2 = allocVector(STRSXP, 2*nn);
 	    for(i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
@@ -4650,8 +4650,8 @@ HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = TRUE;
-    } else R_Visible = FALSE;
+	R_Visible = true;
+    } else R_Visible = false;
     return ans;
 }
 
@@ -4898,7 +4898,7 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	double dlen = 0;
 	for (i = 0; i < n; i++)
 	    dlen += (double)(INTEGER(nchars)[i] + slen);
-	if (dlen > R_XLEN_T_MAX)
+	if (dlen > (double) R_XLEN_T_MAX)
 	    error(_("too much data for a raw vector on this platform"));
 	len = (R_xlen_t) dlen;
 	PROTECT(ans = allocVector(RAWSXP, len));
@@ -4995,10 +4995,10 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = TRUE;
+	R_Visible = true;
     } else {
 	ans = R_NilValue;
-	R_Visible = FALSE;
+	R_Visible = false;
     }
     return ans;
 }

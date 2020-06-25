@@ -46,7 +46,7 @@ extern "C" {
 
 /* Entry points in the R API */
 
-/* ../../appl/integrate.c */
+/* ../../appl/integrate.cpp */
 typedef void integr_fn(double *x, int n, void *ex);
 /* vectorizing function   f(x[1:n], ...) -> x[]  {overwriting x[]}. */
 
@@ -84,7 +84,7 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 void samin(int n, double *pb, double *yb, optimfn fn, int maxit,
 	   int tmax, double ti, int trace, void *ex);
 
-/* appl/interv.c: Also in Utils.h, used in package eco */
+/* appl/interv.cpp: Also in Utils.h, used in package eco */
 int findInterval(double *xt, int n, double x,
 		 Rboolean rightmost_closed,  Rboolean all_inside, int ilo,
 		 int *mflag);
@@ -111,7 +111,7 @@ void F77_NAME(dqrxb)(double *x, int *n, int *k, double *qraux,
 
 /* hidden, for use in R.bin/R.dll/libR.so */
 
-/* appl/pretty.c: for use in engine.cpp and util.cpp */
+/* appl/pretty.cpp: for use in engine.cpp and util.cpp */
 double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 		double shrink_sml, const double high_u_fact[],
 		int eps_correction, int return_bounds);
@@ -119,7 +119,7 @@ double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 
 /* For use in package stats */
 
-/* appl/uncmin.c : */
+/* appl/uncmin.cpp : */
 
 /* type of pointer to the target and gradient functions */
 typedef void (*fcn_p)(int, double *, double *, void *);

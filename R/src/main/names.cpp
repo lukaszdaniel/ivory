@@ -1379,11 +1379,11 @@ HIDDEN SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 	args = evalList(args, env, call, 0);
     PROTECT(args);
     flag = PRIMPRINT(INTERNAL(fun));
-    R_Visible = (Rboolean) (flag != 1);
+    R_Visible = (flag != 1);
     ans = PRIMFUN(INTERNAL(fun)) (s, INTERNAL(fun), args, env);
-    /* This resetting of R_Visible = FALSE was to fix PR#7397,
+    /* This resetting of R_Visible = false was to fix PR#7397,
        now fixed in GEText */
-    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+    if (flag < 2) R_Visible = (flag != 1);
 #ifdef CHECK_VISIBILITY
     if(flag < 2 && flag == R_Visible) {
 	char *nm = CHAR(PRINTNAME(fun));

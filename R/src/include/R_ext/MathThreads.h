@@ -22,7 +22,7 @@
  */
 
 /*
-  Experimental: included by src/library/stats/src/distance.c
+  Experimental: included by src/library/stats/src/distance.cpp
 
   Note that only uses R_num_math_threads: it is not clear
   R_num_math_threads should be exposed at all.

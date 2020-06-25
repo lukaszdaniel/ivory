@@ -90,7 +90,7 @@
 # include <sys/time.h>
 #endif
 
-double currentTime(void)
+double Rf_currentTime(void)
 {
     double ans = NA_REAL;
 

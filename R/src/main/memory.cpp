@@ -121,7 +121,7 @@ static int gc_count = 0;
    continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
    are due to memory corruption.
 */
-static Rboolean gc_fail_on_error = FALSE;
+static bool gc_fail_on_error = false;
 static void gc_error(const char *msg)
 {
     if (gc_fail_on_error)
@@ -241,7 +241,7 @@ const char *Rf_sexptype2char(const SEXPTYPE type) {
 
 #define GC_TORTURE
 
-static int gc_pending = 0;
+static bool gc_pending = false;
 #ifdef GC_TORTURE
 /* **** if the user specified a wait before starting to force
    **** collections it might make sense to also wait before starting
@@ -940,17 +940,13 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 #define DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
 
+inline static void INIT_REFCNT(SEXP x)
+{
 #ifdef COMPUTE_REFCNT_VALUES
-#define INIT_REFCNT(x)              \
-    do                              \
-    {                               \
-        SEXP __x__ = (x);           \
-        SET_REFCNT(__x__, 0);       \
-        SET_TRACKREFS(__x__, TRUE); \
-    } while (0)
-#else
-#define INIT_REFCNT(x) do {} while (0)
+    SET_REFCNT(x, 0);
+    SET_TRACKREFS(x, TRUE);
 #endif
+}
 
 /* Page Allocation and Release. */
 
@@ -1346,13 +1342,13 @@ static SEXP R_weak_refs = NULL;
 #define CLEAR_READY_TO_FINALIZE(s) ((s)->sxpinfo.gp &= ~READY_TO_FINALIZE_MASK)
 #define IS_READY_TO_FINALIZE(s) ((s)->sxpinfo.gp & READY_TO_FINALIZE_MASK)
 
-#define FINALIZE_ON_EXIT_MASK 1 << 1
+#define FINALIZE_ON_EXIT_MASK 2
 
 #define SET_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp |= FINALIZE_ON_EXIT_MASK)
 #define CLEAR_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK)
 #define FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp & FINALIZE_ON_EXIT_MASK)
 
-#define WEAKREF_SIZE 1 << 2
+#define WEAKREF_SIZE 4
 #define WEAKREF_KEY(w) VECTOR_ELT(w, 0)
 #define SET_WEAKREF_KEY(w, k) SET_VECTOR_ELT(w, 0, k)
 #define WEAKREF_VALUE(w) VECTOR_ELT(w, 1)
@@ -1423,16 +1419,16 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
     return w;
 }
 
-static Rboolean R_finalizers_pending = FALSE;
+static bool R_finalizers_pending = false;
 static void CheckFinalizers(void)
 {
     SEXP s;
-    R_finalizers_pending = FALSE;
+    R_finalizers_pending = false;
     for (s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
 	if (! NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
-	    R_finalizers_pending = TRUE;
+	    R_finalizers_pending = true;
     }
 }
 
@@ -1493,7 +1489,7 @@ void R_RunWeakRefFinalizer(SEXP w)
 	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
     PROTECT(key);
     PROTECT(fun);
-    int oldintrsusp = R_interrupts_suspended;
+    Rboolean oldintrsusp = R_interrupts_suspended;
     R_interrupts_suspended = TRUE;
     if (isCFinalizer(fun)) {
 	/* Must be a C finalizer. */
@@ -1506,23 +1502,23 @@ void R_RunWeakRefFinalizer(SEXP w)
 	eval(e, R_GlobalEnv);
 	UNPROTECT(1);
     }
-    R_interrupts_suspended = (Rboolean) oldintrsusp;
+    R_interrupts_suspended = oldintrsusp;
     UNPROTECT(2);
 }
 
-static Rboolean RunFinalizers(void)
+static bool RunFinalizers(void)
 {
     R_CHECK_THREAD;
     /* Prevent this function from running again when already in
        progress. Jumps can only occur inside the top level context
        where they will be caught, so the flag is guaranteed to be
        reset at the end. */
-    static Rboolean running = FALSE;
-    if (running) return FALSE;
-    running = TRUE;
+    static bool running = false;
+    if (running) return false;
+    running = true;
 
     volatile SEXP s, last;
-    volatile Rboolean finalizer_run = FALSE;
+    volatile bool finalizer_run = false;
 
     for (s = R_weak_refs, last = R_NilValue; s != R_NilValue;) {
 	SEXP next = WEAKREF_NEXT(s);
@@ -1532,7 +1528,7 @@ static Rboolean RunFinalizers(void)
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile int savestack;
 	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
-	    volatile Rboolean oldvis;
+	    volatile bool oldvis;
 	    PROTECT(oldHStack = R_HandlerStack);
 	    PROTECT(oldRStack = R_RestartStack);
 	    PROTECT(oldRVal = R_ReturnedValue);
@@ -1581,8 +1577,8 @@ static Rboolean RunFinalizers(void)
 	else last = s;
 	s = next;
     }
-    running = FALSE;
-    R_finalizers_pending = FALSE;
+    running = false;
+    R_finalizers_pending = false;
     return finalizer_run;
 }
 
@@ -2173,9 +2169,9 @@ HIDDEN void InitMemory()
 
     arg = getenv("_R_GC_FAIL_ON_ERROR_");
     if (arg != NULL && StringTrue(arg))
-	gc_fail_on_error = TRUE;
+	gc_fail_on_error = true;
     else if (arg != NULL && StringFalse(arg))
-	gc_fail_on_error = FALSE;
+	gc_fail_on_error = false;
 
     gc_reporting = R_Verbose;
     R_StandardPPStackSize = R_PPStackSize;
@@ -2286,7 +2282,7 @@ char *R_alloc(size_t nelem, int eltsize)
 	SEXP s;
 #ifdef LONG_VECTOR_SUPPORT
 	/* 64-bit platform: previous version used REALSXPs */
-	if(dsize > R_XLEN_T_MAX)  /* currently 4096 TB */
+	if(dsize > (double) R_XLEN_T_MAX)  /* currently 4096 TB */
 	    error(_("cannot allocate memory block of size %0.f Tb"),
 		  dsize/R_pow_di(1024.0, 4));
 	s = allocVector(RAWSXP, size + 1);
@@ -3130,10 +3126,10 @@ static void R_gc_internal(R_size_t size_needed)
       if (size_needed > VHEAP_FREE())
 	R_VSize += size_needed - VHEAP_FREE();
 
-      gc_pending = TRUE;
+      gc_pending = true;
       return;
     }
-    gc_pending = FALSE;
+    gc_pending = false;
 
     R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
@@ -3526,16 +3522,16 @@ static SEXP DeleteFromList(SEXP object, SEXP list)
 #define PHASH_SIZE 1069
 #define PTRHASH(obj) (((R_size_t) (obj)) >> 3)
 
-static int use_precious_hash = FALSE;
-static int precious_inited = FALSE;
+static bool use_precious_hash = false;
+static bool precious_inited = false;
 
 void R_PreserveObject(SEXP object)
 {
     R_CHECK_THREAD;
     if (! precious_inited) {
-	precious_inited = TRUE;
+	precious_inited = true;
 	if (getenv("R_HASH_PRECIOUS"))
-	    use_precious_hash = TRUE;
+	    use_precious_hash = true;
     }
     if (use_precious_hash) {
 	if (R_PreciousList == R_NilValue)
@@ -3835,12 +3831,12 @@ int (SETLEVELS)(SEXP x, int v) { return SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
     SET_OBJECT(CHK(to), OBJECT(from));
-    IS_S4_OBJECT(from) ?  SET_S4_OBJECT(to) : UNSET_S4_OBJECT(to);
+    if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);};
 }
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), shallow_duplicate(CHK(ATTRIB(CHK(from)))));
     SET_OBJECT(CHK(to), OBJECT(from));
-    IS_S4_OBJECT(from) ?  SET_S4_OBJECT(to) : UNSET_S4_OBJECT(to);
+    if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);};
 }
 
 void (ENSURE_NAMEDMAX)(SEXP x) { ENSURE_NAMEDMAX(CHK(x)); }
@@ -4640,19 +4636,19 @@ HIDDEN void R_FreeStringBufferL(R_StringBuffer *buf)
 /* ======== This needs direct access to gp field for efficiency ======== */
 
 /* this has NA_STRING = NA_STRING */
-HIDDEN int Rf_Seql(SEXP a, SEXP b)
+HIDDEN bool Rf_Seql(SEXP a, SEXP b)
 {
     /* The only case where pointer comparisons do not suffice is where
       we have two strings in different encodings (which must be
       non-ASCII strings). Note that one of the strings could be marked
       as unknown. */
-    if (a == b) return 1;
+    if (a == b) return true;
     /* Leave this to compiler to optimize */
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
-	return 0;
+	return false;
     else {
 	SEXP vmax = R_VStack;
-	int result = streql(translateCharUTF8(a), translateCharUTF8(b));
+	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
 	R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
 	return result;
     }

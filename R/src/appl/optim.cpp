@@ -734,7 +734,7 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 }
 
 
-constexpr double E1 = exp(1.0) - 1.0; //1.7182818
+constexpr double E1 = 1.71828182845904523536; // exp(1.0) - 1.0;
 
 void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 	   int tmax, double ti, int trace, void *ex)
@@ -810,4 +810,3 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
     PutRNGstate();
 }
 
-#undef E1

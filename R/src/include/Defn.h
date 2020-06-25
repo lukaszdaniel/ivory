@@ -533,17 +533,17 @@ struct R_bcstack_t
     } u;
 };
 
-#define PARTIALSXP_MASK (~255)
-#define IS_PARTIAL_SXP_TAG(x) ((x)&PARTIALSXP_MASK)
-#define RAWMEM_TAG 254
-#define CACHESZ_TAG 253
+constexpr int PARTIALSXP_MASK = (~255);
+inline int IS_PARTIAL_SXP_TAG(int x) { return ((x)&PARTIALSXP_MASK); }
+constexpr int RAWMEM_TAG = 254;
+constexpr int CACHESZ_TAG = 253;
 
 #ifdef R_USE_SIGNALS
 /* Stack entry for pending promises */
 struct RPRSTACK
 {
     SEXP promise;
-    struct RPRSTACK *next;
+    RPRSTACK *next;
 };
 
 /* Evaluation Context Structure */
@@ -683,7 +683,7 @@ enum MATPROD_TYPE
 /*
 #define R_EOF	65535
 */
-#define R_EOF	-1
+constexpr int R_EOF = -1;
 
 
 /*--- Global Variables ---------------------------------------------------- */
@@ -743,7 +743,7 @@ LibExtern RCNTXT* R_GlobalContext;    /* The global context */
 extern0 RCNTXT* R_SessionContext;   /* The session toplevel context */
 extern0 RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
 #endif
-extern Rboolean R_Visible;	    /* Value visibility flag */
+extern bool R_Visible;	    /* Value visibility flag */
 extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
 extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :
 						 * options(deparse.max.lines) */
@@ -760,7 +760,7 @@ extern uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */
 extern uintptr_t R_OldCStackLimit INI_as((uintptr_t)0); /* Old value while
 							   handling overflow */
 extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */
-/* Default here is for Windows: set from configure in src/unix/system.c */
+/* Default here is for Windows: set from configure in src/unix/system.cpp */
 extern int	R_CStackDir	INI_as(1);	/* C stack direction */
 
 #ifdef R_USE_SIGNALS
@@ -964,7 +964,7 @@ extern0 int R_PCRE_limit_recursion;
 # define ErrorMessage		Rf_ErrorMessage
 # define evalList		Rf_evalList
 # define evalListKeepMissing	Rf_evalListKeepMissing
-# define factorsConform		Rf_factorsConform
+//# define factorsConform		Rf_factorsConform
 # define findcontext		Rf_findcontext
 # define findVar1		Rf_findVar1
 # define FrameClassFix		Rf_FrameClassFix
@@ -1101,8 +1101,8 @@ int R_ShowFiles(int, const char **, const char **, const char *,
 int R_EditFiles(int, const char **, const char **, const char *);
 size_t R_ChooseFile(int, char *, size_t);
 char *R_HomeDir(void);
-Rboolean R_FileExists(const char *);
-Rboolean R_HiddenFile(const char *);
+bool R_FileExists(const char *);
+bool R_HiddenFile(const char *);
 double R_FileMtime(const char *);
 int R_GetFDLimit();
 int R_EnsureFDLimit(int);
@@ -1196,9 +1196,9 @@ SEXP Rf_deparse1w(SEXP,Rboolean,int);
 SEXP Rf_deparse1line(SEXP, Rboolean);
 SEXP deparse1line_(SEXP, Rboolean, int);
 SEXP Rf_deparse1s(SEXP call);
-int Rf_DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-int Rf_DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-int Rf_DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
+bool Rf_DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+bool Rf_DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+bool Rf_DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
 R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
@@ -1207,7 +1207,7 @@ R_xlen_t Rf_any_duplicated(SEXP, Rboolean);
 R_xlen_t Rf_any_duplicated3(SEXP, SEXP, Rboolean);
 SEXP Rf_evalList(SEXP, SEXP, SEXP, int);
 SEXP Rf_evalListKeepMissing(SEXP, SEXP);
-int Rf_factorsConform(SEXP, SEXP);
+//int Rf_factorsConform(SEXP, SEXP);
 NORET void Rf_findcontext(int, SEXP, SEXP);
 SEXP Rf_findVar1(SEXP, SEXP, SEXPTYPE, int);
 void Rf_FrameClassFix(SEXP);
@@ -1222,12 +1222,12 @@ void Rf_InitEd(void);
 void Rf_InitFunctionHashing(void);
 void Rf_InitBaseEnv(void);
 void Rf_InitGlobalEnv(void);
-Rboolean R_current_trace_state(void);
-Rboolean R_current_debug_state(void);
-Rboolean R_has_methods(SEXP);
+bool R_current_trace_state(void);
+bool R_current_debug_state(void);
+bool R_has_methods(SEXP);
 void R_InitialData(void);
 SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, Rboolean);
-Rboolean inherits2(SEXP, const char *);
+bool inherits2(SEXP, const char *);
 void Rf_InitGraphics(void);
 void Rf_InitMemory(void);
 void Rf_InitNames(void);
@@ -1240,8 +1240,8 @@ void Rf_InitTypeTables(void);
 void Rf_initStack(void);
 void Rf_InitS3DefaultTypes(void);
 void Rf_internalTypeCheck(SEXP, SEXP, SEXPTYPE);
-Rboolean isMethodsDispatchOn(void);
-int Rf_isValidName(const char *);
+bool isMethodsDispatchOn(void);
+bool Rf_isValidName(const char *);
 NORET void Rf_jump_to_toplevel(void);
 void Rf_KillAllDevices(void);
 SEXP Rf_levelsgets(SEXP, SEXP);
@@ -1301,12 +1301,12 @@ void R_SaveGlobalEnv(void);
 void R_SaveGlobalEnvToFile(const char *);
 void R_SaveToFile(SEXP, FILE*, int);
 void R_SaveToFileV(SEXP, FILE*, int, int);
-Rboolean R_seemsOldStyleS4Object(SEXP object);
+bool R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
 void R_Suicide(const char *);
 void R_getProcTime(double *data);
-int R_isMissing(SEXP symbol, SEXP rho);
+bool R_isMissing(SEXP symbol, SEXP rho);
 const char *Rf_sexptype2char(SEXPTYPE type);
 void Rf_sortVector(SEXP, Rboolean);
 void Rf_SrcrefPrompt(const char *, SEXP);
@@ -1325,7 +1325,7 @@ void unmarkPhase(void);
 void Rf_unpromiseArgs(SEXP);
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
-int Rf_usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
+bool Rf_usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
 SEXP Rf_vectorIndex(SEXP, SEXP, int, int, int, SEXP, Rboolean);
 
 #ifdef R_USE_SIGNALS
@@ -1352,7 +1352,7 @@ SEXP Rf_ItemName(SEXP, R_xlen_t);
 /* ../main/errors.cpp : */
 NORET void Rf_errorcall_cpy(SEXP, const char *, ...);
 NORET void Rf_ErrorMessage(SEXP, int, ...);
-void Rf_WarningMessage(SEXP, R_WARNING, ...);
+void Rf_WarningMessage(SEXP, int, ...);
 SEXP R_GetTraceback(int);    // including deparse()ing
 SEXP R_GetTracebackOnly(int);// no        deparse()ing
 
@@ -1429,7 +1429,7 @@ inline void mbs_init(mbstate_t *x) { memset(x, 0, sizeof(mbstate_t)); }
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 Rboolean mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
-Rboolean utf8Valid(const char *str);
+bool utf8Valid(const char *str);
 char *Rf_strchr(const char *s, int c);
 char *Rf_strrchr(const char *s, int c);
 
@@ -1469,14 +1469,14 @@ size_t Rwcstombs(char *s, const wchar_t *wc, size_t n);
 #endif
 
 FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand);
-int Rf_Seql(SEXP a, SEXP b);
+bool Rf_Seql(SEXP a, SEXP b);
 int Rf_Scollate(SEXP a, SEXP b);
 
 double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
 double R_strtod(const char *str, char **endptr);
 double R_atof(const char *str);
 
-/* unix/sys-std.c, main/options.cpp */
+/* unix/sys-std.cpp, main/options.cpp */
 void set_rl_word_breaks(const char *str);
 
 /* From localecharset.cpp */

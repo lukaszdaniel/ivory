@@ -1062,7 +1062,7 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			if (y == R_NilValue) {
 			    UNPROTECT(2);
-			    R_Visible = FALSE;
+			    R_Visible = false;
 			    return R_NilValue;
 			}
 			/* Check for multiple defaults following y.  This loop
@@ -1102,6 +1102,6 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warningcall(call, _("'switch()' function with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
-    R_Visible = FALSE;
+    R_Visible = false;
     return R_NilValue;
 }

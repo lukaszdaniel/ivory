@@ -31,11 +31,11 @@
 #define R_GRAPHICS 1
 #include <Rgraphics.h> /* RUnit */
 
-/* base.c, graphics.c, par.c */
+/* base.cpp, graphics.cpp, par.cpp */
 #define MAX_LAYOUT_ROWS 200
 #define MAX_LAYOUT_COLS 200
-#define MAX_LAYOUT_CELLS 10007 /* must be less than 65535,
-				3 copies, 3bytes each */
+#define MAX_LAYOUT_CELLS 10007 /* must be less than 65535, \
+            3 copies, 3bytes each */
 
 typedef struct {
 	double ax;
@@ -275,16 +275,16 @@ void Rf_GInit(GPar*);
 
 void Rf_copyGPar(GPar *, GPar *);
 
- /* from graphics.c, used in par.c */
+ /* from graphics.cpp, used in par.cpp */
 double R_Log10(double);
 
-/* from par.c, called in plot.c, plot3d.c */
+/* from par.cpp, called in plot.cpp, plot3d.cpp */
 void Rf_ProcessInlinePars(SEXP, pGEDevDesc);
 
-/* from device.c */
+/* from device.cpp */
 void Rf_recordGraphicOperation(SEXP, SEXP, pGEDevDesc);
 
-/* some functions that plot.c needs to share with plot3d.c */
+/* some functions that plot.cpp needs to share with plot3d.cpp */
 SEXP Rf_FixupCol(SEXP, unsigned int);
 SEXP Rf_FixupLty(SEXP, int);
 SEXP Rf_FixupLwd(SEXP, double);
@@ -294,11 +294,11 @@ SEXP Rf_labelformat(SEXP);
 /*
  * Function to generate an R_GE_gcontext from Rf_gpptr info
  *
- * from graphics.c, used in plot.c, plotmath.c
+ * from graphics.cpp, used in plot.cpp, plotmath.cpp
  */
 void gcontextFromGP(pGEcontext gc, pGEDevDesc dd);
 
-/* From base.c */
+/* From base.cpp */
 #define gpptr Rf_gpptr
 #define dpptr Rf_dpptr
 GPar* Rf_gpptr(pGEDevDesc dd);

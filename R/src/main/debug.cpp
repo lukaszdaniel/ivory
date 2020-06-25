@@ -32,12 +32,13 @@ HIDDEN SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans = R_NilValue;
 
     checkArity(op,args);
-#define find_char_fun \
-    if (isValidString(CAR(args))) {				\
-	SEXP s;							\
-	PROTECT(s = installTrChar(STRING_ELT(CAR(args), 0)));	\
-	SETCAR(args, findFun(s, rho));				\
-	UNPROTECT(1);						\
+#define find_char_fun                                         \
+    if (isValidString(CAR(args)))                             \
+    {                                                         \
+        SEXP s;                                               \
+        PROTECT(s = installTrChar(STRING_ELT(CAR(args), 0))); \
+        SETCAR(args, findFun(s, rho));                        \
+        UNPROTECT(1);                                         \
     }
     find_char_fun
 
@@ -90,22 +91,22 @@ HIDDEN SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* maintain global trace & debug state */
 
-static Rboolean tracing_state = TRUE, debugging_state = TRUE;
-#define GET_TRACE_STATE tracing_state
-#define GET_DEBUG_STATE debugging_state
-#define SET_TRACE_STATE(value) tracing_state = value
-#define SET_DEBUG_STATE(value) debugging_state = value
+static bool tracing_state = true, debugging_state = true;
+const bool& GET_TRACE_STATE = tracing_state;
+const bool& GET_DEBUG_STATE = debugging_state;
+inline void SET_TRACE_STATE(bool value) {tracing_state = value;}
+inline void SET_DEBUG_STATE(bool value) {debugging_state = value;}
 
 HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP onOff = CAR(args);
-    Rboolean trace = (Rboolean) (PRIMVAL(op) == 0),
+    bool trace = (PRIMVAL(op) == 0),
 	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
     if(length(onOff) > 0) {
-	Rboolean _new = (Rboolean) asLogical(onOff);
-	if(_new == TRUE || _new == FALSE)
+	int _new = asLogical(onOff);
+	if(_new == true || _new == false)
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
 	else
@@ -115,8 +116,8 @@ HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // GUIs, packages, etc can query:
-Rboolean R_current_debug_state() { return GET_DEBUG_STATE; }
-Rboolean R_current_trace_state() { return GET_TRACE_STATE; }
+bool R_current_debug_state() { return GET_DEBUG_STATE; }
+bool R_current_trace_state() { return GET_TRACE_STATE; }
 
 
 /* memory tracing */
@@ -268,7 +269,7 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_Visible = visible;
     return ans;
 #else
-    R_Visible = FALSE; /* for consistency with other case */
+    R_Visible = false; /* for consistency with other case */
     return R_NilValue;
 #endif
 }

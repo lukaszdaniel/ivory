@@ -70,7 +70,7 @@ HIDDEN void nl_Rdummy(void)
  */
 
 void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
-			     Rboolean visible);
+			     bool visible);
 
 static int ParseBrowser(SEXP, SEXP);
 
@@ -93,7 +93,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	case PARSE_NULL:
 	    break;
 	case PARSE_OK:
-	    R_Visible = FALSE;
+	    R_Visible = false;
 	    R_EvalDepth = 0;
 	    resetTimeLimits();
 	    count++;
@@ -203,7 +203,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
-    Rboolean wasDisplayed = FALSE;
+    bool wasDisplayed = false;
 
     /* clear warnings that might have accumulated during a jump to top level */
     if (R_CollectWarnings)
@@ -258,7 +258,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	       The 'S' will be changed back to 's' after the next eval. */
 	    if (R_BrowserLastCommand == 's') R_BrowserLastCommand = 'S';
 	}
-	R_Visible = FALSE;
+	R_Visible = false;
 	R_EvalDepth = 0;
 	resetTimeLimits();
 	PROTECT(thisExpr = R_CurrentExpr);
@@ -332,13 +332,13 @@ static void check_session_exit()
 	   error is signaled from one of the functions called. The
 	   'exiting' variable identifies this and results in
 	   R_Suicide. */
-	static Rboolean exiting = FALSE;
+	static bool exiting = false;
 	if (exiting)
 	    R_Suicide(_("error during cleanup\n"));
 	else {
-	    exiting = TRUE;
+	    exiting = true;
 	    if (GetOption1(install("error")) != R_NilValue) {
-		exiting = FALSE;
+		exiting = false;
 		return;
 	    }
 	    REprintf(_("Execution halted\n"));
@@ -366,7 +366,7 @@ int R_ReplDLLdo1(void)
     int c;
     ParseStatus status;
     SEXP rho = R_GlobalEnv, lastExpr;
-    Rboolean wasDisplayed = FALSE;
+    bool wasDisplayed = false;
 
     if(!*DLLbufp) {
 	R_Busy(0);
@@ -390,7 +390,7 @@ int R_ReplDLLdo1(void)
     case PARSE_OK:
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &status);
-	R_Visible = FALSE;
+	R_Visible = false;
 	R_EvalDepth = 0;
 	resetTimeLimits();
 	PROTECT(R_CurrentExpr);
@@ -1306,7 +1306,7 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (SETJMP(thiscontext.cjmpbuf)) {
 	    SET_RESTART_BIT_ON(thiscontext.callflag);
 	    R_ReturnedValue = R_NilValue;
-	    R_Visible = FALSE;
+	    R_Visible = false;
 	}
 	R_GlobalContext = &thiscontext;
 	R_InsertRestartHandlers(&thiscontext, "browser");
@@ -1586,20 +1586,20 @@ SEXP R_getTaskCallbackNames(void)
 
   /* Flag to ensure that the top-level handlers aren't called recursively.
      Simple state to indicate that they are currently being run. */
-static Rboolean Rf_RunningToplevelHandlers = FALSE;
+static bool Rf_RunningToplevelHandlers = false;
 
 /* This is not used in R and in no header */
 void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
-			Rboolean visible)
+			bool visible)
 {
     R_ToplevelCallbackEl *h, *prev = NULL;
     Rboolean again;
 
-    if(Rf_RunningToplevelHandlers == TRUE)
+    if(Rf_RunningToplevelHandlers == true)
 	return;
 
     h = Rf_ToplevelTaskHandlers;
-    Rf_RunningToplevelHandlers = TRUE;
+    Rf_RunningToplevelHandlers = true;
     while(h) {
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	if(R_CollectWarnings) {
@@ -1624,12 +1624,12 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 	}
     }
 
-    Rf_RunningToplevelHandlers = FALSE;
+    Rf_RunningToplevelHandlers = false;
 }
 
 
 Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
-		      Rboolean visible, void *userData)
+		      bool visible, void *userData)
 {
     SEXP f = (SEXP) userData;
     SEXP e, tmp, val, cur;

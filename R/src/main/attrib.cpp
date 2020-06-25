@@ -215,7 +215,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP in = CAR(args), out = CADR(args);
     SET_ATTRIB(out, shallow_duplicate(ATTRIB(in)));
-    IS_S4_OBJECT(in) ?  SET_S4_OBJECT(out) : UNSET_S4_OBJECT(out);
+	if(IS_S4_OBJECT(in)) { SET_S4_OBJECT(out); } else { UNSET_S4_OBJECT(out); };
     SET_OBJECT(out, OBJECT(in));
     return out;
 }
@@ -289,7 +289,7 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 	}
     }
     if (OBJECT(inp)) SET_OBJECT(ans, 1);
-    IS_S4_OBJECT(inp) ?  SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+	if(IS_S4_OBJECT(inp)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); };
     UNPROTECT(2);
 }
 
@@ -334,7 +334,7 @@ void Rf_copyMostAttribNoTs(SEXP inp, SEXP ans)
 	}
     }
     SET_OBJECT(ans, OBJECT(inp));
-    IS_S4_OBJECT(inp) ?  SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+    if(IS_S4_OBJECT(inp)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); };
     UNPROTECT(2);
 }
 

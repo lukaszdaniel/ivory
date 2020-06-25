@@ -1491,7 +1491,7 @@ HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double d = REAL(x)[0];
 	if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
 	if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	if(d > R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	if(d > (double) R_XLEN_T_MAX) error(_("vector size specified is too large"));
 	n = (R_xlen_t) d;
 	if (n < 0) error(_("invalid '%s' value"), "length(xx)");
     } else {

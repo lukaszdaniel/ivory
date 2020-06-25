@@ -23,32 +23,36 @@
 
 /* Internal header, not installed */
 
+#ifndef __cplusplus
+#error Rgraphics.h can only be included in C++ files
+#endif
+
 	/* possible coordinate systems (for specifying locations) */
-typedef enum {
- DEVICE	= 0,	/* native device coordinates (rasters) */
- NDC	= 1,	/* normalised device coordinates x=(0,1), y=(0,1) */
- INCHES = 13,	/* inches x=(0,width), y=(0,height) */
- NIC	= 6,	/* normalised inner region coordinates (0,1) */
- OMA1	= 2,	/* outer margin 1 (bottom) x=NIC, y=LINES */
- OMA2	= 3,	/* outer margin 2 (left) */
- OMA3	= 4,	/* outer margin 3 (top) */
- OMA4	= 5,	/* outer margin 4 (right) */
- NFC	= 7,	/* normalised figure region coordinates (0,1) */
- NPC	= 16,	/* normalised plot region coordinates (0,1) */
- USER	= 12,	/* user/data/world coordinates;
+enum GUnit
+{
+	DEVICE = 0,	 /* native device coordinates (rasters) */
+	NDC = 1,	 /* normalised device coordinates x=(0,1), y=(0,1) */
+	INCHES = 13, /* inches x=(0,width), y=(0,height) */
+	NIC = 6,	 /* normalised inner region coordinates (0,1) */
+	OMA1 = 2,	 /* outer margin 1 (bottom) x=NIC, y=LINES */
+	OMA2 = 3,	 /* outer margin 2 (left) */
+	OMA3 = 4,	 /* outer margin 3 (top) */
+	OMA4 = 5,	 /* outer margin 4 (right) */
+	NFC = 7,	 /* normalised figure region coordinates (0,1) */
+	NPC = 16,	 /* normalised plot region coordinates (0,1) */
+	USER = 12,	 /* user/data/world coordinates;
 		 * x,=(xmin,xmax), y=(ymin,ymax) */
- MAR1	= 8,	/* figure margin 1 (bottom) x=USER(x), y=LINES */
- MAR2	= 9,	/* figure margin 2 (left)   x=USER(y), y=LINES */
- MAR3	= 10,	/* figure margin 3 (top)    x=USER(x), y=LINES */
- MAR4	= 11,	/* figure margin 4 (right)  x=USER(y), y=LINES */
+	MAR1 = 8,	 /* figure margin 1 (bottom) x=USER(x), y=LINES */
+	MAR2 = 9,	 /* figure margin 2 (left)   x=USER(y), y=LINES */
+	MAR3 = 10,	 /* figure margin 3 (top)    x=USER(x), y=LINES */
+	MAR4 = 11,	 /* figure margin 4 (right)  x=USER(y), y=LINES */
 
 	/* possible, units (for specifying dimensions) */
 	/* all of the above, plus ... */
 
- LINES = 14,	/* multiples of a line in the margin (mex) */
- CHARS = 15	/* multiples of text height (cex) */
-} GUnit;
-
+	LINES = 14, /* multiples of a line in the margin (mex) */
+	CHARS = 15	/* multiples of text height (cex) */
+};
 
 #define currentFigureLocation	Rf_currentFigureLocation
 #define GArrow			Rf_GArrow
@@ -107,9 +111,8 @@ typedef enum {
 #define yDevtoUsr		Rf_yDevtoUsr
 #define yNPCtoUsr		Rf_yNPCtoUsr
 
-#ifdef __cplusplus
 extern "C" {
-#endif
+
 /*-------------------------------------------------------------------
  *
  *  GPAR FUNCTIONS are concerned with operations on the
@@ -132,7 +135,7 @@ void Rf_GRestorePars(pGEDevDesc);
  *  DEVICE STATE FUNCTIONS are concerned with getting and setting
  *  the current state of the device;  is it ready to be drawn into?
  *
- *  From graphics.c, used in plot.c.
+ *  From graphics.cpp, used in plot.cpp.
  */
 
 /* has plot.new been called yet? */
@@ -152,7 +155,7 @@ void Rf_GSetState(int, pGEDevDesc);
  *  version of the function is responsible for calling GConvert to get
  *  the location into device coordinates.
  *
- *  From graphics.c, used in plot.c.
+ *  From graphics.cpp, used in plot.cpp.
  */
 
 
@@ -197,7 +200,7 @@ double Rf_GStrWidth(const char *, cetype_t, GUnit, pGEDevDesc);
 void Rf_GText(double, double, int, const char *, cetype_t, double, double, double,
 	   pGEDevDesc);
 
-/* From plotmath.c, used in plot.c */
+/* From plotmath.cpp, used in plot.cpp */
 void Rf_GMathText(double, double, int, SEXP, double, double, double, pGEDevDesc);
 void Rf_GMMathText(SEXP, int, double, int, double, int, double, pGEDevDesc);
 
@@ -219,13 +222,13 @@ void Rf_GArrow(double, double, double, double, int, double, double, int, pGEDevD
 void Rf_GBox(int, pGEDevDesc);
 /* Return a "nice" min, max and number of intervals for a given
  * range on a linear or _log_ scale, respectively: */
-void Rf_GPretty(double*, double*, int*); /* used in plot3d.c */
+void Rf_GPretty(double*, double*, int*); /* used in plot3d.cpp */
 /* Draw text in margins. */
 void Rf_GMtext(const char *, cetype_t, int, double, int, double, int, double, pGEDevDesc);
 /* Draw one of the predefined symbols (circle, square, diamond, ...) */
 void Rf_GSymbol(double, double, int, int, pGEDevDesc);
 
-/* From plotmath.c, used in plot.c */
+/* From plotmath.cpp, used in plot.cpp */
 double Rf_GExpressionHeight(SEXP, GUnit, pGEDevDesc);
 double Rf_GExpressionWidth(SEXP, GUnit, pGEDevDesc);
 
@@ -280,8 +283,7 @@ double Rf_yDevtoUsr(double, pGEDevDesc);
 double Rf_xNPCtoUsr(double, pGEDevDesc);
 double Rf_yNPCtoUsr(double, pGEDevDesc);
 
-#ifdef __cplusplus
 } //extern "C"
-#endif
+
 
 #endif /* RGRAPHICS_H_ */

@@ -962,15 +962,17 @@ static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
  other methods. This is only needed when calling OutCHARSXP
  since it needs to know how to write sub-elements!
 */
-#define OutVec(fp, obj, accessor, outfunc, methods, d)	                \
-	do {								\
-		int cnt;						\
-		for (cnt = 0; cnt < LENGTH(obj); ++cnt) {		\
-			methods->OutSpace(fp, 1,d);			\
-			outfunc(fp, accessor(obj, cnt), d);	        \
-			methods->OutNewline(fp, d);                     \
-		}							\
-	} while (0)
+#define OutVec(fp, obj, accessor, outfunc, methods, d) \
+    do                                                 \
+    {                                                  \
+        int cnt;                                       \
+        for (cnt = 0; cnt < LENGTH(obj); ++cnt)        \
+        {                                              \
+            methods->OutSpace(fp, 1, d);               \
+            outfunc(fp, accessor(obj, cnt), d);        \
+            methods->OutNewline(fp, d);                \
+        }                                              \
+    } while (0)
 
 #define LOGICAL_ELT(x,__i__)	LOGICAL(x)[__i__]
 #define INTEGER_ELT(x,__i__)	INTEGER(x)[__i__]

@@ -4,7 +4,7 @@
 #define MINMAX_H_
 
 /* Just one global definition of min/max instead of
-   many ones spread out across many *.c files */
+   many ones spread out across many *.c/cpp files */
 #ifdef __cplusplus
 #include <algorithm>
 #else

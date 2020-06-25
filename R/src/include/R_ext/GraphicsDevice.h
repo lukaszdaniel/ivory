@@ -839,18 +839,22 @@ Rboolean Rf_doesIdle(pDevDesc dd);
 
 /* For use in third-party devices when setting up a device:
  * duplicates Defn.h which is used internally.
- * (Tested in devNull.c)
+ * (Tested in devNull.cpp)
  */
 
 #ifndef BEGIN_SUSPEND_INTERRUPTS
 /* Macros for suspending interrupts */
-#define BEGIN_SUSPEND_INTERRUPTS do { \
-    Rboolean __oldsusp__ = R_interrupts_suspended; \
-    R_interrupts_suspended = (Rboolean) TRUE;
-#define END_SUSPEND_INTERRUPTS R_interrupts_suspended = __oldsusp__; \
-    if (R_interrupts_pending && ! R_interrupts_suspended) \
-        Rf_onintr(); \
-} while(0)
+#define BEGIN_SUSPEND_INTERRUPTS                       \
+    do                                                 \
+    {                                                  \
+        Rboolean __oldsusp__ = R_interrupts_suspended; \
+        R_interrupts_suspended = (Rboolean)TRUE;
+#define END_SUSPEND_INTERRUPTS                           \
+    R_interrupts_suspended = __oldsusp__;                \
+    if (R_interrupts_pending && !R_interrupts_suspended) \
+        Rf_onintr();                                     \
+    }                                                    \
+    while (0)
 
 #include <R_ext/libextern.h>
 LibExtern Rboolean R_interrupts_suspended;    

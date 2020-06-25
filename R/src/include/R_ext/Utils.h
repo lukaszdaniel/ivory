@@ -102,7 +102,7 @@ void R_CheckStack(void);
 void R_CheckStack2(R_SIZE_T);
 
 
-/* ../../appl/interv.c: also in Applic.h */
+/* ../../appl/interv.cpp: also in Applic.h */
 int findInterval(double *xt, int n, double x,
 		 Rboolean rightmost_closed,  Rboolean all_inside, int ilo,
 		 int *mflag);
@@ -117,7 +117,7 @@ int F77_SUB(interv)(double *xt, int *n, double *x,
 void find_interv_vec(double *xt, int *n,	double *x,   int *nx,
 		     int *rightmost_closed, int *all_inside, int *indx);
 
-/* ../../appl/maxcol.c: also in Applic.h */
+/* ../../appl/maxcol.cpp: also in Applic.h */
 void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth);
 
 #ifdef  __cplusplus

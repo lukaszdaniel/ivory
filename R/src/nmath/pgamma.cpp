@@ -53,12 +53,13 @@
 #include "dpq.h"
 /*----------- DEBUGGING -------------
  * make CFLAGS='-DDEBUG_p -g'
- * (cd `R-devel RHOME`/src/nmath; gcc -I. -I../../src/include -I../../../R/src/include  -DHAVE_CONFIG_H -fopenmp -DDEBUG_p -g -c ../../../R/src/nmath/pgamma.c -o pgamma.o)
+ * (cd `R-devel RHOME`/src/nmath; g++ -I. -I../../src/include -I../../../R/src/include  -DHAVE_CONFIG_H -fopenmp -DDEBUG_p -g -c ../../../R/src/nmath/pgamma.cpp -o pgamma.o)
  */
 
 /* Scalefactor:= (2^32)^8 = 2^256 = 1.157921e+77 */
-static constexpr double scalefactor = std::pow(2, 256);
-
+#define SQR(x) ((x)*(x))
+static const double scalefactor = SQR(SQR(SQR(4294967296.0)));
+#undef SQR
 
 /* If |x| > |k| * M_cutoff,  then  log[ exp(-x) * k^x ]	 =~=  -x */
 static constexpr double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON; /*=3.196577e18*/
@@ -143,7 +144,7 @@ double Rf_log1pmx(double x)
 /* Compute  log(gamma(a+1))  accurately also for small a (0 < a < 0.5). */
 double Rf_lgamma1p(double a)
 {
-    static constexpr double eulers_const =	 0.5772156649015328606065120900824024;
+    static constexpr double eulers_const = M_EC;
 
     /* coeffs[i] holds (zeta(i+2)-1)/(i+2) , i = 0:(N-1), N = 40 : */
     constexpr int N = 40;

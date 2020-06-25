@@ -222,7 +222,7 @@ R_INLINE static int packed_ncol(int len)
  * the slot.
  * NOTE:  GET_SLOT(x, what)        :== R_do_slot       (x, what)
  * ----   SET_SLOT(x, what, value) :== R_do_slot_assign(x, what, value)
- * and the R_do_slot* are in src/main/attrib.c
+ * and the R_do_slot* are in src/main/attrib.cpp
  *
  * @param obj object in which to assign the slot
  * @param nm name of the slot, as an R name object

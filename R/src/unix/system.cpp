@@ -249,7 +249,7 @@ int Rf_initialize_R(int ac, char **av)
 	FILE *f;
 	f = fopen("/proc/self/maps", "r");
 	if (f) {
-	    for(;;) {
+	    while(true) {
 		int c;
 		unsigned long start, end;
 

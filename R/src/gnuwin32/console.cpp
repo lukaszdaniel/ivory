@@ -1752,7 +1752,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
     cur_line[0] = L'\0';
     showcaret(c, 1);
     REDRAW;
-    for(;;) {
+    while(true) {
 	wchar_t cur_char;
 	char chtype; /* boolean */
 	p->input = 1;

@@ -24,7 +24,7 @@
 
  *  It does 2 things:
  * (a) supplies wrapper/substitute wc[s]width functions for use in 
- *    character.cpp, errors.cpp, printutils.cpp, devPS.c, RGui console.
+ *    character.cpp, errors.cpp, printutils.cpp, devPS.cpp, RGui console.
  * (b) Defines a replacment for iswctype to be used on Windows, maxOS and AIX.
  * in gram.cpp
  *

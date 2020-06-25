@@ -36,15 +36,15 @@
 
 using namespace std;
 
-/* eval() sets R_Visible = TRUE. Thas may not be wanted when eval() is
+/* eval() sets R_Visible = true. Thas may not be wanted when eval() is
    used in C code. This is a version that saves/restores R_Visible.
    This should probably be moved to eval.cpp, be make public, and used
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    int oldvis = R_Visible;
+    bool oldvis = R_Visible;
     SEXP val = eval(e, rho);
-    R_Visible = (Rboolean) oldvis;
+    R_Visible = oldvis;
     return val;
 }
 
@@ -164,7 +164,7 @@ static void onintrEx(Rboolean resumeOK)
 	if (SETJMP(restartcontext.cjmpbuf)) {
 	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 	    R_ReturnedValue = R_NilValue;
-	    R_Visible = FALSE;
+	    R_Visible = false;
 	    endcontext(&restartcontext);
 	    return;
 	}
@@ -1369,7 +1369,7 @@ HIDDEN NORET void Rf_ErrorMessage(SEXP call, int which_error, ...)
     errorcall(call, "%s", buf);
 }
 
-HIDDEN void Rf_WarningMessage(SEXP call, R_WARNING which_warn, ...)
+HIDDEN void Rf_WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1983,11 +1983,11 @@ HIDDEN SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* very minimal error checking --just enough to avoid a segfault */
-#define CHECK_RESTART(r) do { \
-    SEXP __r__ = (r); \
-    if (TYPEOF(__r__) != VECSXP || LENGTH(__r__) < 2) \
-	error(_("bad restart")); \
-} while (0)
+static inline void CHECK_RESTART(SEXP r)
+{
+	if (TYPEOF(r) != VECSXP || LENGTH(r) < 2)
+		error(_("bad restart"));
+}
 
 HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -1997,7 +1997,7 @@ HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-#define RESTART_EXIT(r) VECTOR_ELT(r, 1)
+static inline SEXP RESTART_EXIT(SEXP r) { return VECTOR_ELT(r, 1); }
 
 NORET static void invokeRestart(SEXP r, SEXP arglist)
 {
@@ -2287,7 +2287,7 @@ struct tryCatchData_t {
     void *hdata;
     void (*finally)(void *);
     void *fdata;
-    int suspended;
+    Rboolean suspended;
 };
 
 static SEXP default_tryCatch_handler(SEXP cond, void *data)
@@ -2348,7 +2348,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
     PROTECT(expr);
     SEXP val = evalKeepVis(expr, R_GlobalEnv);
     UNPROTECT(2); /* conds, expr */
-    R_interrupts_suspended = (Rboolean) tcd.suspended;
+    R_interrupts_suspended = tcd.suspended;
     return val;
 }
 

@@ -96,11 +96,11 @@ typedef int R_len_t;
 #ifdef LONG_VECTOR_SUPPORT
 using R_xlen_t = ptrdiff_t;
 constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
-constexpr int R_SHORT_LEN_MAX = std::numeric_limits<int>::max();
 #else
 using R_xlen_t = int;
 constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
 #endif
+constexpr int R_SHORT_LEN_MAX = std::numeric_limits<int>::max();
 #else // not __cplusplus
 #ifdef LONG_VECTOR_SUPPORT
 typedef ptrdiff_t R_xlen_t;
@@ -137,7 +137,7 @@ typedef int R_xlen_t;
  *	(making FUNSXP and CLOSXP equivalent in there),
  *	giving (-Wall only ?) warnings all over the place
  * 2)	Many switch(type) { case ... } statements need a final `default:'
- *	added in order to avoid warnings like [e.g. l.170 of ../main/util.c]
+ *	added in order to avoid warnings like [e.g. l.170 of ../main/util.cpp]
  *	  "enumeration value `FUNSXP' not handled in switch"
  */
 typedef unsigned int SEXPTYPE;
@@ -170,7 +170,7 @@ typedef unsigned int SEXPTYPE;
 #define RAWSXP 24     /* raw bytes */
 #define S4SXP 25      /* S4, non-vector */
 
-/* used for detecting PROTECT issues in memory.c */
+/* used for detecting PROTECT issues in memory.cpp */
 #define NEWSXP 30  /* fresh node created in new page */
 #define FREESXP 31 /* node released by GC */
 
@@ -510,7 +510,7 @@ typedef union {
 # undef NAMED
 # undef SET_NAMED
 # define NAMED(x) REFCNT(x)
-/* no definition for SET_NAMED; any calls will use the one in memory.c */
+/* no definition for SET_NAMED; any calls will use the one in memory.cpp */
 # define ENSURE_NAMEDMAX(v) do { } while (0)
 # define ENSURE_NAMED(v) do { } while (0)
 #else
@@ -722,7 +722,7 @@ typedef union {
 #define DDVAL(x)	((x)->sxpinfo.gp & DDVAL_MASK) /* for ..1, ..2 etc */
 #define SET_DDVAL_BIT(x) (((x)->sxpinfo.gp) |= DDVAL_MASK)
 #define UNSET_DDVAL_BIT(x) (((x)->sxpinfo.gp) &= ~DDVAL_MASK)
-#define SET_DDVAL(x,v) ((v) ? SET_DDVAL_BIT(x) : UNSET_DDVAL_BIT(x)) /* for ..1, ..2 etc */
+#define SET_DDVAL(x,v) if(v) {SET_DDVAL_BIT(x);} else {UNSET_DDVAL_BIT(x);} /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
 #define FRAME(x)	((x)->u.envsxp.frame)
@@ -1313,7 +1313,7 @@ int Rf_ncols(SEXP);
 int Rf_nrows(SEXP);
 SEXP Rf_nthcdr(SEXP, int);
 
-// ../main/character.c :
+// ../main/character.cpp :
 typedef enum
 {
     Bytes,
@@ -1583,14 +1583,14 @@ void R_Serialize(SEXP s, R_outpstream_t ops);
 SEXP R_Unserialize(R_inpstream_t ips);
 SEXP R_SerializeInfo(R_inpstream_t ips);
 
-/* slot management (in attrib.c) */
+/* slot management (in attrib.cpp) */
 SEXP R_do_slot(SEXP obj, SEXP name);
 SEXP R_do_slot_assign(SEXP obj, SEXP name, SEXP value);
 int R_has_slot(SEXP obj, SEXP name);
-/* S3-S4 class (inheritance), attrib.c */
+/* S3-S4 class (inheritance), attrib.cpp */
 SEXP R_S4_extends(SEXP klass, SEXP useTable);
 
-/* class definition, new objects (objects.c) */
+/* class definition, new objects (objects.cpp) */
 SEXP R_do_MAKE_CLASS(const char *what);
 SEXP R_getClassDef  (const char *what);
 SEXP R_getClassDef_R(SEXP what);
@@ -1612,8 +1612,8 @@ void R_ReleaseFromMSet(SEXP x, SEXP mset);
 void R_ReleaseMSet(SEXP mset, int keepSize);
 
 /* Shutdown actions */
-void R_dot_Last(void);		/* in main.c */
-void R_RunExitFinalizers(void);	/* in memory.c */
+void R_dot_Last(void);		/* in main.cpp */
+void R_RunExitFinalizers(void);	/* in memory.cpp */
 
 /* Replacements for popen and system */
 #ifdef HAVE_POPEN
@@ -1637,7 +1637,7 @@ int R_system(const char *);
 */
 Rboolean R_compute_identical(SEXP, SEXP, int);
 
-SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.c
+SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.cpp
 
 /* C version of R's  indx <- order(..., na.last, decreasing) :
    e.g.  arglist = Rf_lang2(x,y)  or  Rf_lang3(x,y,z) */

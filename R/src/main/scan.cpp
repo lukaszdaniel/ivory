@@ -58,7 +58,7 @@ constexpr int NO_COMCHAR = 100000; /* won't occur even in Unicode */
 
 
 /* The number of distinct strings to track */
-constexpr int MAX_STRINGS = 10000;
+//constexpr int MAX_STRINGS = 10000;
 
 static unsigned char ConsoleBuf[CONSOLE_BUFFER_SIZE + 1], *ConsoleBufp;
 static int ConsoleBufCnt;
@@ -211,7 +211,7 @@ static Rbyte strtoraw(const char *nptr, char **endptr)
     return (Rbyte) val;
 }
 
-R_INLINE static int scanchar_raw(LocalData *d)
+inline static int scanchar_raw(LocalData *d)
 {
     int c = (d->ttyflag) ? ConsoleGetcharWithPushBack(d->con) :
 	Rconn_fgetc(d->con);
@@ -226,7 +226,7 @@ R_INLINE static int scanchar_raw(LocalData *d)
     return c;
 }
 
-R_INLINE static void unscanchar(int c, LocalData *d)
+inline static void unscanchar(int c, LocalData *d)
 {
 	d->save = c;
 }
@@ -234,7 +234,7 @@ R_INLINE static void unscanchar(int c, LocalData *d)
 /* For second bytes in a DBCS:
    should not be called when a char is saved, but be cautious
 */
-R_INLINE static int scanchar2(LocalData *d)
+inline static int scanchar2(LocalData *d)
 {
 	int next;
 	if (d->save)

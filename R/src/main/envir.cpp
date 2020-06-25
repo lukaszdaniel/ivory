@@ -119,22 +119,22 @@ static void setActiveValue(SEXP fun, SEXP val)
     UNPROTECT(1);
 }
 
-//#define IS_USER_DATABASE(rho)  OBJECT((rho)) && inherits((rho), "UserDefinedDatabase")
-R_INLINE static Rboolean IS_USER_DATABASE(SEXP rho)  { 
- return (Rboolean) (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
- }
+inline static bool IS_USER_DATABASE(SEXP rho)
+{
+    return (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"));
+}
 
 /* various definitions of macros/functions in Defn.h */
 
 #define FRAME_LOCK_MASK (1 << 14)
- //#define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
- R_INLINE static Rboolean FRAME_IS_LOCKED(SEXP e)
+ inline static int FRAME_IS_LOCKED(SEXP e)
  {
-     return (Rboolean) (ENVFLAGS(e) & FRAME_LOCK_MASK);
+     return (ENVFLAGS(e) & FRAME_LOCK_MASK);
  }
-//#define LOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK)
-R_INLINE static void LOCK_FRAME(SEXP e) {
- SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK);
+
+ inline static void LOCK_FRAME(SEXP e)
+ {
+     SET_ENVFLAGS(e, ENVFLAGS(e) | FRAME_LOCK_MASK);
  }
 /*#define UNLOCK_FRAME(e) SET_ENVFLAGS(e, ENVFLAGS(e) & (~ FRAME_LOCK_MASK))*/
 
@@ -306,7 +306,7 @@ HIDDEN int R_Newhashpjw(const char *s)
 */
 
 static void R_HashSet(int hashcode, SEXP symbol, SEXP table, SEXP value,
-		      Rboolean frame_locked)
+		      int frame_locked)
 {
     SEXP chain;
 
@@ -1024,10 +1024,10 @@ SEXP R_GetVarLocValue(R_varloc_t vl)
 {
     SEXP cell = vl.cell;
     if (cell == NULL || cell == R_UnboundValue)
-	return R_UnboundValue;
+        return R_UnboundValue;
     else if (TYPEOF(cell) == SYMSXP)
-	return SYMBOL_BINDING_VALUE(cell);
-    else return BINDING_VALUE(cell);
+        return SYMBOL_BINDING_VALUE(cell);
+    return BINDING_VALUE(cell);
 }
 
 HIDDEN
@@ -2340,13 +2340,13 @@ static SEXP findRootPromise(SEXP p)
     return p;
 }
 
-HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
+HIDDEN bool R_isMissing(SEXP symbol, SEXP rho)
 {
-    int ddv=0;
+    int ddv = 0;
     SEXP vl, s;
 
     if (symbol == R_MissingArg) /* Yes, this can happen */
-	return 1;
+	return true;
 
     /* check for infinite recursion */
     R_CheckStack();
@@ -2359,13 +2359,13 @@ HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
 	s = symbol;
 
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
-	return 0;  /* is this really the right thing to do? LT */
+	return false;  /* is this really the right thing to do? LT */
 
     vl = findVarLocInFrame(rho, s, NULL);
     if (vl != R_NilValue) {
 	if (DDVAL(symbol)) {
 	    if (length(CAR(vl)) < ddv || CAR(vl) == R_MissingArg)
-		return 1;
+		return true;
 	    /* defineVar(symbol, value, R_GlobalEnv); */
 	    else
 		vl = nthcdr(CAR(vl), ddv-1);
@@ -2374,9 +2374,9 @@ HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
 	    (BNDCELL_TAG(vl) == 0 && CAR(vl) == R_MissingArg))
 	    return 1;
 	if (IS_ACTIVE_BINDING(vl))
-	    return 0;
+	    return false;
 	if (BNDCELL_TAG(vl))
-	    return 0;
+	    return false;
 	SETCAR(vl, findRootPromise(CAR(vl)));
 	if (TYPEOF(CAR(vl)) == PROMSXP &&
 	    PRVALUE(CAR(vl)) == R_UnboundValue &&
@@ -2391,9 +2391,9 @@ HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
 	       for an active binding a longjmp should only happen if
 	       the stack check fails.  LT */
 	    if (PRSEEN(CAR(vl)) == 1)
-		return 1;
+		return true;
 	    else {
-		int val;
+		bool val;
 		int oldseen = PRSEEN(CAR(vl));
 		SET_PRSEEN(CAR(vl), 1);
 		PROTECT(vl);
@@ -2406,9 +2406,9 @@ HIDDEN int R_isMissing(SEXP symbol, SEXP rho)
 	    }
 	}
 	else
-	    return 0;
+	    return false;
     }
-    return 0;
+    return false;
 }
 
 /* this is primitive and a SPECIALSXP */
@@ -2527,7 +2527,7 @@ HIDDEN SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP name, s, t, x;
     int pos, hsize;
-    Rboolean isSpecial;
+    bool isSpecial;
 
     checkArity(op, args);
 
@@ -2644,7 +2644,7 @@ HIDDEN SEXP do_detach(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, t, x;
     int pos, n;
-    Rboolean isSpecial = FALSE;
+    bool isSpecial = false;
 
     checkArity(op, args);
     pos = asInteger(CAR(args));

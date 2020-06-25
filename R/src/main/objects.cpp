@@ -93,9 +93,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
     if (TYPEOF(op) == SPECIALSXP) {
 	int save = R_PPStackTop, flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
-	R_Visible = (Rboolean) (flag != 1);
+	R_Visible = (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
     }
@@ -108,9 +108,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	int save = R_PPStackTop, flag = PRIMPRINT(op);
 	const void *vmax = vmaxget();
 	PROTECT(args = evalList(args, rho, call, 0));
-	R_Visible = (Rboolean) (flag != 1);
+	R_Visible = (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	UNPROTECT(1);
 	check_stack_balance(op, save);
 	vmaxset(vmax);
@@ -440,7 +440,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 }
 
 HIDDEN
-int Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
+bool Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
     SEXP klass, method, sxp;
@@ -476,7 +476,7 @@ int Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 				      rho, callrho, defrho);
 	    }
 	    UNPROTECT(2); /* klass, sxp */
-	    return 1;
+	    return true;
 	}
     }
     method = installS3Signature(generic, "default");
@@ -485,11 +485,11 @@ int Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	*ans = dispatchMethod(op, sxp, R_NilValue, cptr, method, generic,
 			      rho, callrho, defrho);
 	UNPROTECT(2); /* klass, sxp */
-	return 1;
+	return true;
     }
     UNPROTECT(2); /* klass, sxp */
     cptr->callflag = CTXT_RETURN;
-    return 0;
+    return false;
 }
 
 /* Note: "do_usemethod" is not the only entry point to
@@ -947,7 +947,7 @@ HIDDEN SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-HIDDEN Rboolean inherits2(SEXP x, const char *what) {
+HIDDEN bool inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -959,12 +959,12 @@ HIDDEN Rboolean inherits2(SEXP x, const char *what) {
 	for (int i = 0; i < nclass; i++) {
 	    if (streql(CHAR(STRING_ELT(klass, i)), what)) {
 		UNPROTECT(1);
-		return TRUE;
+		return true;
 	    }
 	}
 	UNPROTECT(1);
     }
-    return FALSE;
+    return false;
 }
 
 /* NOTE: Fast  inherits(x, what)    in ../include/Rinlinedfuns.h
@@ -1187,10 +1187,9 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 }
 
 /* simpler version for internal use, in attrib.cpp and print.cpp */
-HIDDEN
-Rboolean isMethodsDispatchOn(void)
+HIDDEN bool isMethodsDispatchOn(void)
 {
-    return (Rboolean) (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
+    return (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
 }
 
 
@@ -1286,7 +1285,7 @@ HIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 static int maxMethodsOffset = 0, curMaxOffset;
-static Rboolean allowPrimitiveMethods = TRUE;
+static bool allowPrimitiveMethods = true;
 enum prim_methods_t
 {
 	NO_METHODS,
@@ -1298,7 +1297,7 @@ enum prim_methods_t
 static prim_methods_t *prim_methods;
 static SEXP *prim_generics;
 static SEXP *prim_mlist;
-#define DEFAULT_N_PRIM_METHODS 100
+static constexpr int DEFAULT_N_PRIM_METHODS = 100;
 
 // Called from methods package, ../library/methods/src/methods_list_dispatch.cpp
 SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
@@ -1315,9 +1314,9 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 	SEXP value = allowPrimitiveMethods ? mkTrue() : mkFalse();
 	switch(code_string[0]) {
 	case 'c': case 'C':/* clear */
-	    allowPrimitiveMethods = FALSE; break;
+	    allowPrimitiveMethods = false; break;
 	case 's': case 'S': /* set */
-	    allowPrimitiveMethods = TRUE; break;
+	    allowPrimitiveMethods = true; break;
 	default: /* just report the current state */
 	    break;
 	}
@@ -1503,21 +1502,20 @@ static SEXP get_this_generic(SEXP args)
 /* Could there be methods for this op?	Checks
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
-HIDDEN
-Rboolean R_has_methods(SEXP op)
+HIDDEN bool R_has_methods(SEXP op)
 {
-    R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr(); int offset;
-    if(NOT_METHODS_DISPATCH_PTR(ptr))
-	return(FALSE);
-    if(!op || TYPEOF(op) == CLOSXP) /* except for primitives, just test for the package */
-	return(TRUE);
-    if(!allowPrimitiveMethods) /* all primitives turned off by a call to R_set_prim */
-	return FALSE;
-    offset = PRIMOFFSET(op);
-    if(offset > curMaxOffset || prim_methods[offset] == NO_METHODS
-       || prim_methods[offset] == SUPPRESSED)
-	return(FALSE);
-    return(TRUE);
+	R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
+	int offset;
+	if (NOT_METHODS_DISPATCH_PTR(ptr))
+		return false;
+	if (!op || TYPEOF(op) == CLOSXP) /* except for primitives, just test for the package */
+		return true;
+	if (!allowPrimitiveMethods) /* all primitives turned off by a call to R_set_prim */
+		return false;
+	offset = PRIMOFFSET(op);
+	if (offset > curMaxOffset || prim_methods[offset] == NO_METHODS || prim_methods[offset] == SUPPRESSED)
+		return false;
+	return true;
 }
 
 static SEXP deferred_default_object;
@@ -1733,15 +1731,16 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-HIDDEN Rboolean R_seemsOldStyleS4Object(SEXP object)
+HIDDEN bool R_seemsOldStyleS4Object(SEXP object)
 {
-    SEXP klass;
-    if(!isObject(object) || IS_S4_OBJECT(object)) return FALSE;
-    /* We want to know about S4SXPs with no S4 bit */
-    /* if(TYPEOF(object) == S4SXP) return FALSE; */
-    klass = getAttrib(object, R_ClassSymbol);
-    return (klass != R_NilValue && LENGTH(klass) == 1 &&
-	    getAttrib(klass, R_PackageSymbol) != R_NilValue) ? TRUE: FALSE;
+	SEXP klass;
+	if (!isObject(object) || IS_S4_OBJECT(object))
+		return false;
+	/* We want to know about S4SXPs with no S4 bit */
+	/* if(TYPEOF(object) == S4SXP) return FALSE; */
+	klass = getAttrib(object, R_ClassSymbol);
+	return (klass != R_NilValue && LENGTH(klass) == 1 &&
+			getAttrib(klass, R_PackageSymbol) != R_NilValue);
 }
 
 HIDDEN SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)

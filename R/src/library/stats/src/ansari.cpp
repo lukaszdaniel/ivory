@@ -124,7 +124,7 @@ qansari(int len, double *P, double *Q, int m, int n)
 	else {
 	    p = 0.;
 	    int q = 0;
-	    for(;;) {
+	    while(true) {
 		p += cansari(q, m, n, w) / c;
 		if (p >= xi) break;
 		q++;

@@ -179,7 +179,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 
     if (newlen > len) {
 	double expanded_nlen = newlen * expand;
-	if (expanded_nlen <= R_XLEN_T_MAX)
+	if (expanded_nlen <= (double) R_XLEN_T_MAX)
 	    newtruelen = (R_xlen_t) expanded_nlen;
 	else
 	    newtruelen = newlen;
@@ -286,15 +286,15 @@ static SEXP embedInVector(SEXP v, SEXP call)
     return (ans);
 }
 
-static Rboolean dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
+static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
     static SEXP op = NULL;
     SEXP args;
-    Rboolean ans;
+    bool ans;
     if (op == NULL)
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
-    ans = (Rboolean) Rf_DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
+    ans = Rf_DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
     UNPROTECT(1);
     return ans;
 }
@@ -502,7 +502,6 @@ R_INLINE static R_xlen_t gi(SEXP indx, R_xlen_t i)
 	return INTEGER_ELT(indx, i);
 }
 #else
-#define R_SHORT_LEN_MAX R_INT_MAX
 R_INLINE static int gi(SEXP indx, R_xlen_t i)
 {
     if (TYPEOF(indx) == REALSXP) {
@@ -572,24 +571,35 @@ R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     return val;
 }
 
-#define VECTOR_ASSIGN_LOOP(CODE) do {			\
-	if (TYPEOF(indx) == INTSXP) {			\
-	    const int *pindx = INTEGER_RO(indx);	\
-	    MOD_ITERATE1(n, ny, i, iny, {		\
-		    ii = pindx[i];			\
-		    if (ii == NA_INTEGER) continue;	\
-		    ii = ii - 1;			\
-		    do { CODE } while (0);		\
-		});					\
-	}						\
-	else /* could specialize this to REALSXP case */\
-	    MOD_ITERATE1(n, ny, i, iny, {		\
-		    ii = gi(indx, i);			\
-		    if (ii == NA_INTEGER) continue;	\
-		    ii = ii - 1;			\
-		    do { CODE } while (0);		\
-		});					\
-    } while (0)
+#define VECTOR_ASSIGN_LOOP(CODE)                         \
+	do                                                   \
+	{                                                    \
+		if (TYPEOF(indx) == INTSXP)                      \
+		{                                                \
+			const int *pindx = INTEGER_RO(indx);         \
+			MOD_ITERATE1(n, ny, i, iny, {                \
+				ii = pindx[i];                           \
+				if (ii == NA_INTEGER)                    \
+					continue;                            \
+				ii = ii - 1;                             \
+				do                                       \
+				{                                        \
+					CODE                                 \
+				} while (0);                             \
+			});                                          \
+		}                                                \
+		else /* could specialize this to REALSXP case */ \
+			MOD_ITERATE1(n, ny, i, iny, {                \
+				ii = gi(indx, i);                        \
+				if (ii == NA_INTEGER)                    \
+					continue;                            \
+				ii = ii - 1;                             \
+				do                                       \
+				{                                        \
+					CODE                                 \
+				} while (0);                             \
+			});                                          \
+	} while (0)
 
 /**** This could use SET_REAL_ELT and such, but would also have to
       change byte code instructions in eval.cpp */
@@ -890,38 +900,54 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
 SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
 
-#define MATRIX_ASSIGN_LOOP(CODE) do {			\
-	R_xlen_t k = 0, NR = nr, ij;			\
-	if (anyIdxNA)					\
-	    for (int j = 0; j < ncs; j++) {		\
-		int jj = psc[j];			\
-		if (jj != NA_INTEGER) {			\
-		    jj = jj - 1;			\
-		    R_xlen_t offset = jj * NR;		\
-		    for (int i = 0; i < nrs; i++) {	\
-			int ii = psr[i];		\
-			if (ii != NA_INTEGER) {		\
-			    ij = ii + offset - 1;	\
-			    do { CODE } while (0);	\
-			    k++;			\
-			    if (k == ny) k = 0;		\
-			}				\
-		    }					\
-		}					\
-	    }						\
-	else						\
-	    for (int j = 0; j < ncs; j++) {		\
-		int jj = psc[j] - 1;			\
-		R_xlen_t offset = jj * NR;		\
-		for (int i = 0; i < nrs; i++) {		\
-		    int ii = psr[i];			\
-		    ij = ii + offset - 1;		\
-		    do { CODE } while (0);		\
-		    k++;				\
-		    if (k == ny) k = 0;			\
-		}					\
-	    }						\
-    } while (0)
+#define MATRIX_ASSIGN_LOOP(CODE)                  \
+	do                                            \
+	{                                             \
+		R_xlen_t k = 0, NR = nr, ij;              \
+		if (anyIdxNA)                             \
+			for (int j = 0; j < ncs; j++)         \
+			{                                     \
+				int jj = psc[j];                  \
+				if (jj != NA_INTEGER)             \
+				{                                 \
+					jj = jj - 1;                  \
+					R_xlen_t offset = jj * NR;    \
+					for (int i = 0; i < nrs; i++) \
+					{                             \
+						int ii = psr[i];          \
+						if (ii != NA_INTEGER)     \
+						{                         \
+							ij = ii + offset - 1; \
+							do                    \
+							{                     \
+								CODE              \
+							} while (0);          \
+							k++;                  \
+							if (k == ny)          \
+								k = 0;            \
+						}                         \
+					}                             \
+				}                                 \
+			}                                     \
+		else                                      \
+			for (int j = 0; j < ncs; j++)         \
+			{                                     \
+				int jj = psc[j] - 1;              \
+				R_xlen_t offset = jj * NR;        \
+				for (int i = 0; i < nrs; i++)     \
+				{                                 \
+					int ii = psr[i];              \
+					ij = ii + offset - 1;         \
+					do                            \
+					{                             \
+						CODE                      \
+					} while (0);                  \
+					k++;                          \
+					if (k == ny)                  \
+						k = 0;                    \
+				}                                 \
+			}                                     \
+	} while (0)
 
 static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 {
@@ -1129,31 +1155,41 @@ static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     return x;
 }
 
-#define ARRAY_ASSIGN_LOOP(CODE) do {			\
-	R_xlen_t i, iny;				\
-	MOD_ITERATE1(n, ny, i, iny, {			\
-		R_xlen_t ii = 0;			\
-		for (int j = 0; j < k; j++) {		\
-		    int jj = subs[j][indx[j]];		\
-		    if (jj == NA_INTEGER) {		\
-			ii = NA_INTEGER;		\
-			break;				\
-		    }					\
-		    else				\
-			ii += (jj - 1) * offset[j];	\
-		}					\
-		if (ii != NA_INTEGER)			\
-		    do { CODE } while (0);		\
-		if (n > 1) {				\
-		    int j = 0;				\
-		    while (++indx[j] >= bound[j]) {	\
-			indx[j] = 0;			\
-			j++;				\
-			if (j == k) j = 0;		\
-		    }					\
-		}					\
-	    });						\
-    } while (0)
+#define ARRAY_ASSIGN_LOOP(CODE)                 \
+	do                                          \
+	{                                           \
+		R_xlen_t i, iny;                        \
+		MOD_ITERATE1(n, ny, i, iny, {           \
+			R_xlen_t ii = 0;                    \
+			for (int j = 0; j < k; j++)         \
+			{                                   \
+				int jj = subs[j][indx[j]];      \
+				if (jj == NA_INTEGER)           \
+				{                               \
+					ii = NA_INTEGER;            \
+					break;                      \
+				}                               \
+				else                            \
+					ii += (jj - 1) * offset[j]; \
+			}                                   \
+			if (ii != NA_INTEGER)               \
+				do                              \
+				{                               \
+					CODE                        \
+				} while (0);                    \
+			if (n > 1)                          \
+			{                                   \
+				int j = 0;                      \
+				while (++indx[j] >= bound[j])   \
+				{                               \
+					indx[j] = 0;                \
+					j++;                        \
+					if (j == k)                 \
+						j = 0;                  \
+				}                               \
+			}                                   \
+		});                                     \
+	} while (0)
 
 static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 {
@@ -1485,7 +1521,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     }
     if (val != R_NilValue) {
 	SET_ATTRIB(val, ATTRIB(x));
-	IS_S4_OBJECT(x) ?  SET_S4_OBJECT(val) : UNSET_S4_OBJECT(val);
+	if(IS_S4_OBJECT(x)) {SET_S4_OBJECT(val);} else {UNSET_S4_OBJECT(val);};
 	SET_OBJECT(val, OBJECT(x));
 	RAISE_NAMED(val, NAMED(x));
     }
@@ -2128,7 +2164,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	if (TAG(x) == nlist) {
 	    if (val == R_NilValue) {
 		SET_ATTRIB(CDR(x), ATTRIB(x));
-		IS_S4_OBJECT(x) ?  SET_S4_OBJECT(CDR(x)) : UNSET_S4_OBJECT(CDR(x));
+		if(IS_S4_OBJECT(x)) {SET_S4_OBJECT(CDR(x));} else {UNSET_S4_OBJECT(CDR(x));};
 		SET_OBJECT(CDR(x), OBJECT(x));
 		RAISE_NAMED(CDR(x), NAMED(x));
 		SETCAR(x, R_NilValue); // decrements REFCNT

@@ -24,7 +24,7 @@
    Adapted by Paul Murrell
 */
 
-/* Included by src/main/plot3d.c and src/library/graphics/src/plot3d  */
+/* Included by src/main/plot3d.cpp and src/library/graphics/src/plot3d.cpp  */
 
 	/*  C o n t o u r   P l o t t i n g  */
 

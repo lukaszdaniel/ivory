@@ -88,11 +88,12 @@ void R_GE_checkVersionOrDie(int version);
  *    CM = centimetres (!!)
  */
 
-typedef enum {
- GE_DEVICE	= 0,	/* native device coordinates (rasters) */
- GE_NDC	= 1,	/* normalised device coordinates x=(0,1), y=(0,1) */
- GE_INCHES = 2,
- GE_CM     = 3
+typedef enum
+{
+  GE_DEVICE = 0, /* native device coordinates (rasters) */
+  GE_NDC = 1,    /* normalised device coordinates x=(0,1), y=(0,1) */
+  GE_INCHES = 2,
+  GE_CM = 3
 } GEUnit;
 
 #define MAX_GRAPHICS_SYSTEMS 24
@@ -152,13 +153,15 @@ typedef enum {
 /*
  *  Some line end/join constants
  */
-typedef enum {
-  GE_ROUND_CAP  = 1,
-  GE_BUTT_CAP   = 2,
+typedef enum
+{
+  GE_ROUND_CAP = 1,
+  GE_BUTT_CAP = 2,
   GE_SQUARE_CAP = 3
 } R_GE_lineend;
 
-typedef enum {
+typedef enum
+{
   GE_ROUND_JOIN = 1,
   GE_MITRE_JOIN = 2,
   GE_BEVEL_JOIN = 3
@@ -174,31 +177,32 @@ typedef enum {
  * Devices are not *required* to honour graphical parameters
  * (e.g., alpha transparency is going to be tough for some)
  */
-typedef struct {
-    /*
+typedef struct
+{
+  /*
      * Colours
      *
      * NOTE:  Alpha transparency included in col & fill
      */
-    int col;             /* pen colour (lines, text, borders, ...) */
-    int fill;            /* fill colour (for polygons, circles, rects, ...) */
-    double gamma;        /* Gamma correction */
-    /*
+  int col;      /* pen colour (lines, text, borders, ...) */
+  int fill;     /* fill colour (for polygons, circles, rects, ...) */
+  double gamma; /* Gamma correction */
+  /*
      * Line characteristics
      */
-    double lwd;          /* Line width (roughly number of pixels) */
-    int lty;             /* Line type (solid, dashed, dotted, ...) */
-    R_GE_lineend lend;   /* Line end */
-    R_GE_linejoin ljoin; /* line join */
-    double lmitre;       /* line mitre */
-    /*
+  double lwd;          /* Line width (roughly number of pixels) */
+  int lty;             /* Line type (solid, dashed, dotted, ...) */
+  R_GE_lineend lend;   /* Line end */
+  R_GE_linejoin ljoin; /* line join */
+  double lmitre;       /* line mitre */
+  /*
      * Text characteristics
      */
-    double cex;          /* Character expansion (font size = fontsize*cex) */
-    double ps;           /* Font size in points */
-    double lineheight;   /* Line height (multiply by font size) */
-    int fontface;        /* Font face (plain, italic, bold, ...) */
-    char fontfamily[201]; /* Font family */
+  double cex;           /* Character expansion (font size = fontsize*cex) */
+  double ps;            /* Font size in points */
+  double lineheight;    /* Line height (multiply by font size) */
+  int fontface;         /* Font face (plain, italic, bold, ...) */
+  char fontfamily[201]; /* Font family */
 } R_GE_gcontext;
 
 typedef R_GE_gcontext* pGEcontext;
@@ -240,46 +244,47 @@ typedef struct {
     GEcallback callback;
 } GESystemDesc;
 
-struct _GEDevDesc {
-    /*
+struct _GEDevDesc
+{
+  /*
      * Stuff that the devices can see (and modify).
      * All detailed in GraphicsDevice.h
      */
-    pDevDesc dev;
-    /*
+  pDevDesc dev;
+  /*
      * Stuff about the device that only the graphics engine sees
      * (the devices don't see it).
      */
-    Rboolean displayListOn;  /* toggle for display list status */
-    SEXP displayList;        /* display list */
-    SEXP DLlastElt;          /* A pointer to the end of the display list
+  Rboolean displayListOn;  /* toggle for display list status */
+  SEXP displayList;        /* display list */
+  SEXP DLlastElt;          /* A pointer to the end of the display list
 				to avoid tranversing pairlists */
-    SEXP savedSnapshot;      /* The last element of the display list
+  SEXP savedSnapshot;      /* The last element of the display list
 			      * just prior to when the display list
 			      * was last initialised
 			      */
-    Rboolean dirty;          /* Has the device received any output? */
-    Rboolean recordGraphics; /* Should a graphics call be stored
+  Rboolean dirty;          /* Has the device received any output? */
+  Rboolean recordGraphics; /* Should a graphics call be stored
 			      * on the display list?
 			      * Set to FALSE by do_recordGraphics,
 			      * do_dotcallgr, and do_Externalgr
 			      * so that nested calls are not
 			      * recorded on the display list
 			      */
-    /*
+  /*
      * Stuff about the device that only graphics systems see.
      * The graphics engine has no idea what is in here.
      * Used by graphics systems to store system state per device.
      */
-    GESystemDesc *gesd[MAX_GRAPHICS_SYSTEMS];
+  GESystemDesc *gesd[MAX_GRAPHICS_SYSTEMS];
 
-    /* per-device setting for 'ask' (use NewFrameConfirm) */
-    Rboolean ask;
+  /* per-device setting for 'ask' (use NewFrameConfirm) */
+  Rboolean ask;
 };
 
 typedef GEDevDesc* pGEDevDesc;
 
-/* functions from devices.c for use by graphics devices */
+/* functions from devices.cpp for use by graphics devices */
 
 #define desc2GEDesc		Rf_desc2GEDesc
 /* map DevDesc to enclosing GEDevDesc */
@@ -321,14 +326,14 @@ double GEtoDeviceHeight(double value, GEUnit from, pGEDevDesc dd);
  *
  *  COLOUR CODE is concerned with the internals of R colour representation
  *
- *  From colors.c, used in par.c, grid/src/gpar.c
+ *  From colors.cpp, used in par.cpp, grid/src/gpar.cpp
  */
 
 typedef unsigned int rcolor;
 
-#define RGBpar			Rf_RGBpar
-#define RGBpar3			Rf_RGBpar3
-#define col2name                Rf_col2name
+#define RGBpar Rf_RGBpar
+#define RGBpar3 Rf_RGBpar3
+#define col2name Rf_col2name
 
 /* Convert an element of a R colour specification (which might be a
    number or a string) into an internal colour specification. */
@@ -336,7 +341,7 @@ rcolor Rf_RGBpar(SEXP, int);
 rcolor Rf_RGBpar3(SEXP, int, rcolor);
 
 /* Convert an internal colour specification to/from a colour name */
-const char *Rf_col2name(rcolor col); /* used in par.c, grid */
+const char *Rf_col2name(rcolor col); /* used in par.cpp, grid */
 
 /* Convert either a name or a #RRGGBB[AA] string to internal.
    Because people were using it, it also converts "1", "2" ...
@@ -465,7 +470,6 @@ void R_GE_rasterRotate(unsigned int *sraster, int w, int h, double angle,
                        unsigned int *draster, const pGEcontext gc,
                        Rboolean perPixelAlpha);
 
-
 /*
  * From plotmath.cpp
  */
@@ -523,10 +527,10 @@ void GEonExit(void);
 void GEnullDevice(void);
 
 
-/* From ../../main/plot.c, used by ../../library/grid/src/grid.c : */
+/* From ../../main/plot.cpp, used by ../../library/grid/src/grid.cpp : */
 #define CreateAtVector		Rf_CreateAtVector
 SEXP Rf_CreateAtVector(double*, double*, int, Rboolean);
-/* From ../../main/graphics.c, used by ../../library/grDevices/src/axis_scales.c : */
+/* From ../../main/graphics.cpp, used by ../../library/grDevices/src/axis_scales.cpp : */
 #define GAxisPars 		Rf_GAxisPars
 void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis);
 

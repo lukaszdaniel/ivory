@@ -164,7 +164,7 @@ void clowess(double *x, double *y, int n,
 	last = 0;	/* index of prev estimated point */
 	i = 1;		/* index of current point */
 
-	for(;;) {
+	while(true) {
 	    if (nright < n) {
 
 		/* move nleft,  nright to right */

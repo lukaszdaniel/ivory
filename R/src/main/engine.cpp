@@ -653,11 +653,13 @@ void GESetClip(double x1, double y1, double x2, double y2, pGEDevDesc dd)
 /* Cohen-Sutherland Algorithm */
 /* Unneeded if the device can do the clipping */
 
-
-#define	CS_BOTTOM	001
-#define	CS_LEFT		002
-#define	CS_TOP		004
-#define	CS_RIGHT	010
+enum ClipCode
+{
+    CS_BOTTOM = 1,
+    CS_LEFT = 2,
+    CS_TOP = 4,
+    CS_RIGHT = 8
+};
 
 struct cliprect
 {
@@ -1806,7 +1808,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	R_GE_VText(x, y, str, enc, xc, yc, rot, gc, dd);
     } else {
 	/* PR#7397: this seemed to reset R_Visible */
-	Rboolean savevis = R_Visible;
+	bool savevis = R_Visible;
 	int noMetricInfo = -1;
 	char *sbuf = NULL;
 	if(str && *str) {
@@ -2473,7 +2475,7 @@ void GEPretty(double *lo, double *up, int *ndiv)
 		    2, /* do eps_correction in any case */
 		    0 /* return (ns,nu) in  (lo,up) */);
     // The following is ugly since it kind of happens already in R_pretty(..):
-#define rounding_eps 1e-10 /* <- compatible to seq*(); was 1e-7 till 2017-08-14 */
+    const double rounding_eps = 1e-10; /* <- compatible to seq*(); was 1e-7 till 2017-08-14 */
     if(nu >= ns + 1) {
 	int mod = 0;
 	if(               ns * unit < *lo - rounding_eps*unit) { ns++; mod++; }

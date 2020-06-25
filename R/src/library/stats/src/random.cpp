@@ -63,7 +63,7 @@ R_INLINE static R_xlen_t resultLength(SEXP lengthArgument) {
     if (XLENGTH(lengthArgument) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(lengthArgument);
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX) {
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX) {
 	    error(_("invalid arguments"));
         }
 	n = (R_xlen_t) dn;

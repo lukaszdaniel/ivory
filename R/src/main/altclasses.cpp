@@ -1878,7 +1878,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 	PROTECT(ans);
 	SET_ATTRIB(ans, shallow_duplicate(ATTRIB(x)));
 	SET_OBJECT(ans, OBJECT(x));
-	IS_S4_OBJECT(x) ? SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+    if(IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); };
 	UNPROTECT(1); /* ans */
     }
 #endif
@@ -1990,7 +1990,7 @@ SEXP R_tryUnwrap(SEXP x)
 	if (! MAYBE_SHARED(data)) {
 	    SET_ATTRIB(data, ATTRIB(x));
 	    SET_OBJECT(data, OBJECT(x));
-	    IS_S4_OBJECT(x) ? SET_S4_OBJECT(data) : UNSET_S4_OBJECT(data);
+	    if(IS_S4_OBJECT(x)) { SET_S4_OBJECT(data); } else { UNSET_S4_OBJECT(data); };
 
 	    /* Clear the fields to drop reference counts and set the
 	       type to LISTSXP to limit errors in case the object is
