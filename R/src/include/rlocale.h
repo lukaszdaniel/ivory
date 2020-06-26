@@ -34,9 +34,9 @@
 #ifndef R_LOCALE_H
 #define R_LOCALE_H
 
-#include <wchar.h>
-#include <ctype.h>
-#include <wctype.h>
+#include <cwchar>
+#include <cctype>
+#include <cwctype>
 
 #ifdef __cplusplus
 extern "C" {
