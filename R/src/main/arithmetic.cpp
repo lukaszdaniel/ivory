@@ -23,11 +23,12 @@
 #include <config.h>
 #endif
 
+#include <Defn.h>
 // LDBL_EPSILON
 #include <float.h>
 
 /* interval at which to check interrupts, a guess */
-#define NINTERRUPT 10000000
+constexpr R_xlen_t NINTERRUPT = 10000000;
 
 
 #ifdef __OpenBSD__

@@ -34,7 +34,7 @@
 #undef pmatch
 
 /* interval at which to check interrupts */
-// #define NINTERRUPT 1000000
+// constexpr R_xlen_t NINTERRUPT = 1000000;
 
 #include <R_ext/RS.h>		/* for Calloc/Free */
 

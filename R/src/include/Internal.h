@@ -27,9 +27,12 @@
 #ifndef R_INTERNAL_H
 #define R_INTERNAL_H
 
-#ifdef __cplusplus
-extern "C" {
+
+#ifndef __cplusplus
+#error Internal.h can only be included in C++ files
 #endif
+
+extern "C" {
 
 /* Function Names */
 
@@ -538,8 +541,7 @@ SEXP do_untracemem(SEXP, SEXP, SEXP, SEXP);
 
 SEXP do_sorted_fpass(SEXP, SEXP, SEXP, SEXP);
 
-#ifdef __cplusplus
 } //extern "C"
-#endif
+
 
 #endif /* not R_INTERNAL_H */

@@ -40,7 +40,7 @@
 #include <R_ext/Itermacros.h>
 
 /* interval at which to check interrupts, a guess (~subsecond on current hw) */
-#define NINTERRUPT 10000000
+constexpr R_xlen_t NINTERRUPT = 10000000;
 
 /* We might get a call with R_NilValue from subassignment code */
 #define ECALL(call, yy)     if(call == R_NilValue) error(yy);    else errorcall(call, yy);

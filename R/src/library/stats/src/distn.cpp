@@ -36,7 +36,7 @@
 using namespace std;
 
 /* interval at which to check interrupts */
-//#define NINTERRUPT 1000000
+// constexpr R_xlen_t NINTERRUPT = 1000000;
 
 
 #define R_MSG_NA	_("NaN values produced")

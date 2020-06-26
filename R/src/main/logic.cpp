@@ -28,7 +28,7 @@
 #include <R_ext/Itermacros.h>
 
 /* interval at which to check interrupts, a guess */
-// #define NINTERRUPT 10000000
+// constexpr R_xlen_t NINTERRUPT = 10000000;
 
 
 static SEXP lunary(SEXP, SEXP, SEXP);

@@ -29,8 +29,8 @@
 #include <Rinternals.h>
 
 /* The global var. R_Expressions is in Defn.h */
-#define R_MIN_EXPRESSIONS_OPT	25
-#define R_MAX_EXPRESSIONS_OPT	500000
+constexpr int R_MIN_EXPRESSIONS_OPT = 25;
+constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
 
 /* Interface to the (polymorphous!)  options(...)  command.
  *

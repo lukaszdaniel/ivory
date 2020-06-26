@@ -30,7 +30,7 @@
 
 using namespace std;
 
-static double * vect(int n)
+static double *vect(int n)
 {
     return (double *)R_alloc(n, sizeof(double));
 }

@@ -23,6 +23,10 @@
 #ifndef R_IOSTUFF_H
 #define R_IOSTUFF_H
 
+#ifndef __cplusplus
+#error IOStuff.h can only be included in C++ files
+#endif
+
 /*
  *  I/O Support for Consoles and Character Vectors
  *
@@ -37,13 +41,13 @@
 
 #define IOBSIZE 4096
 
-typedef struct BufferListItem
+struct BufferListItem
 {
 	unsigned char buf[IOBSIZE];
 	struct BufferListItem *next;
-} BufferListItem;
+};
 
-typedef struct IoBuffer
+struct IoBuffer
 {
 	BufferListItem *start_buf; /* First buffer item */
 	BufferListItem *write_buf; /* Write pointer location */
@@ -52,9 +56,9 @@ typedef struct IoBuffer
 	BufferListItem *read_buf;  /* Read pointer location */
 	unsigned char *read_ptr;   /* Read pointer location */
 	int read_offset;		   /* Read pointer location */
-} IoBuffer;
+};
 
-typedef struct TextBuffer
+struct TextBuffer
 {
 	void *vmax;			 /* Memory stack top */
 	unsigned char *buf;	 /* Line buffer */
@@ -62,16 +66,14 @@ typedef struct TextBuffer
 	SEXP text;			 /* String Vector */
 	int ntext;			 /* Vector length */
 	int offset;			 /* Offset within vector */
-} TextBuffer;
+};
 
 #ifndef __MAIN__
 extern
 #else
 HIDDEN
 #endif
-IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
-
-#ifdef __cplusplus
+	IoBuffer R_ConsoleIob; /* Console IO Buffer */
 
 /*- some of these really could be void */
 bool R_IoBufferInit(IoBuffer *);
@@ -86,7 +88,5 @@ int R_IoBufferReadOffset(IoBuffer *);
 bool R_TextBufferInit(TextBuffer *, SEXP);
 bool R_TextBufferFree(TextBuffer *);
 int R_TextBufferGetc(TextBuffer *);
-
-#endif
 
 #endif /* R_IOSTUFF_H */

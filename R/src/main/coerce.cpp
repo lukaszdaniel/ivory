@@ -23,8 +23,7 @@
 #include <config.h>
 #endif
 
-/* interval at which to check interrupts */
-#define NINTERRUPT 10000000
+
 
 #include <Localization.h>
 #include <Parse.h>
@@ -37,6 +36,9 @@
 #ifdef Win32
 #include <trioremap.h> /* for %lld */
 #endif
+
+/* interval at which to check interrupts */
+constexpr R_xlen_t NINTERRUPT = 10000000;
 
 /* This section of code handles type conversion for elements */
 /* of data vectors.  Type coercion throughout R should use these */

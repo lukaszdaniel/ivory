@@ -17,7 +17,7 @@ matrix:
             - zlib1g-dev
             - libbz2-dev
             - liblzma-dev
-            - libpcre3-dev
+            - libpcre2-dev
             - libedit-dev
             - gcc
             - g++
@@ -36,7 +36,7 @@ matrix:
             - zlib1g-dev
             - libbz2-dev
             - liblzma-dev
-            - libpcre3-dev
+            - libpcre2-dev
             - libedit-dev
             - libomp-dev
             - clang

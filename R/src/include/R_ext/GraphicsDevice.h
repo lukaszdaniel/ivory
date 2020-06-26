@@ -389,7 +389,7 @@ struct _DevDesc {
      *   col, fill, gamma, lty, lwd
      */
 #if R_USE_PROTOTYPES
-    void (*polygon)(int n, const double *x, const double *y, const pGEcontext gc, pDevDesc dd);
+    void (*polygon)(int n, /*const*/ double *x, /*const*/ double *y, const pGEcontext gc, pDevDesc dd);
 #else
     void (*polygon)();
 #endif
@@ -407,7 +407,7 @@ struct _DevDesc {
      *   col, gamma, lty, lwd
      */
 #if R_USE_PROTOTYPES
-    void (*polyline)(int n, const double *x, const double *y, const pGEcontext gc, pDevDesc dd);
+    void (*polyline)(int n, /*const*/ double *x, /*const*/ double *y, const pGEcontext gc, pDevDesc dd);
 #else
     void (*polyline)();
 #endif

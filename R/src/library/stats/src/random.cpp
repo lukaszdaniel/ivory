@@ -33,7 +33,7 @@
 #include "localization.h"
 
 /* interval at which to check interrupts */
-#define NINTERRUPT 1000000
+constexpr R_xlen_t NINTERRUPT = 1000000;
 
 typedef double (*ran1) (double);
 typedef double (*ran2) (double, double);

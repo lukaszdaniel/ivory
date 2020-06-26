@@ -52,12 +52,8 @@ strsplit grep [g]sub [g]regexpr
 # include <config.h>
 #endif
 
-
-/* interval at which to check interrupts */
-#define NINTERRUPT 1000000
-
 /* How many encoding warnings to give */
-#define NWARN 5
+constexpr int NWARN = 5;
 
 #include <Localization.h>
 #include <Defn.h>
@@ -71,6 +67,9 @@ strsplit grep [g]sub [g]regexpr
 using namespace std;
 /* As from TRE 0.8.0, tre.h replaces regex.h */
 #include <tre/tre.h>
+
+/* interval at which to check interrupts */
+constexpr R_xlen_t NINTERRUPT = 1000000;
 
 #ifdef HAVE_PCRE2
   /* PCRE2_CODE_UNIT_WIDTH is defined to 8 via config.h */
@@ -91,7 +90,7 @@ using namespace std;
    until needed.  The help says 1M suffices, but we found more was
    needed for strings around a million bytes.
 */
-#define JIT_STACK_MAX 64 * 1024 * 1024
+constexpr int JIT_STACK_MAX = 64 * 1024 * 1024;
 /*
    This will stay reserved until the end of the session, but at 64MB
    that is not an issue -- and most sessions will not use PCRE with
@@ -1487,8 +1486,8 @@ HIDDEN SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	       hassle.  We just special-case really tiny matches which
 	       should be the most common case anyway.
 	    */
-#define MAX_MATCHES_MINIBUF 32
-	    int matches[MAX_MATCHES_MINIBUF];
+		constexpr int MAX_MATCHES_MINIBUF = 32;
+		int matches[MAX_MATCHES_MINIBUF];
 	    int n = LENGTH(text);
 	    while (offset < (R_size_t) n) {
 		offset = fgrepraw1(pat, text, offset);

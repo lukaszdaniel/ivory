@@ -1601,7 +1601,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
     h = Rf_ToplevelTaskHandlers;
     Rf_RunningToplevelHandlers = true;
     while(h) {
-	again = (h->cb)(expr, value, succeeded, visible, h->data);
+	again = (h->cb)(expr, value, succeeded, Rboolean(visible), h->data);
 	if(R_CollectWarnings) {
 	    REprintf(_("warning messages from top-level task callback '%s'"), h->name);
 	    REprintf("\n");
@@ -1629,7 +1629,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 
 
 Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
-		      bool visible, void *userData)
+		      Rboolean visible, void *userData)
 {
     SEXP f = (SEXP) userData;
     SEXP e, tmp, val, cur;

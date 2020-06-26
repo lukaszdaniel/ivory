@@ -145,44 +145,44 @@ static int numX11Devices = 0;
 
 static void X11_Activate(pDevDesc dd);
 static void X11_Circle(double x, double y, double r,
-		       const pGEcontext gc, pDevDesc dd);
+					   const pGEcontext gc, pDevDesc dd);
 static void X11_Clip(double x0, double x1, double y0, double y1,
-		     pDevDesc dd);
+					 pDevDesc dd);
 static void X11_Close(pDevDesc dd);
 static void X11_Deactivate(pDevDesc dd);
 static Rboolean X11_Locator(double *x, double *y, pDevDesc dd);
 static void X11_Line(double x1, double y1, double x2, double y2,
-		     const pGEcontext gc, pDevDesc dd);
+					 const pGEcontext gc, pDevDesc dd);
 static void X11_MetricInfo(int c, const pGEcontext gc,
-			   double* ascent, double* descent,
-			   double* width, pDevDesc dd);
+						   double *ascent, double *descent,
+						   double *width, pDevDesc dd);
 static void X11_Mode(int mode, pDevDesc dd);
 static void X11_NewPage(const pGEcontext gc, pDevDesc dd);
-static void X11_Polygon(int n, const double *x, const double *y,
-			const pGEcontext gc, pDevDesc dd);
-static void X11_Polyline(int n, const double *x, const double *y,
-			 const pGEcontext gc, pDevDesc dd);
+static void X11_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
+						const pGEcontext gc, pDevDesc dd);
+static void X11_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
+						 const pGEcontext gc, pDevDesc dd);
 static void X11_Rect(double x0, double y0, double x1, double y1,
-		     const pGEcontext gc, pDevDesc dd);
+					 const pGEcontext gc, pDevDesc dd);
 static void X11_Raster(unsigned int *raster, int w, int h,
-                       double x, double y, double width, double height,
-                       double rot, Rboolean interpolate,
-                       const pGEcontext gc, pDevDesc dd);
+					   double x, double y, double width, double height,
+					   double rot, Rboolean interpolate,
+					   const pGEcontext gc, pDevDesc dd);
 static SEXP X11_Cap(pDevDesc dd);
 static void X11_Size(double *left, double *right,
-		     double *bottom, double *top,
-		     pDevDesc dd);
+					 double *bottom, double *top,
+					 pDevDesc dd);
 static double X11_StrWidth(const char *str, const pGEcontext gc, pDevDesc dd);
 static void X11_Text(double x, double y, const char *str,
-		     double rot, double hadj,
-		     const pGEcontext gc, pDevDesc dd);
+					 double rot, double hadj,
+					 const pGEcontext gc, pDevDesc dd);
 static void X11_eventHelper(pDevDesc dd, int code);
 
-	/*************************************************/
-	/* End of list of required device driver actions */
-	/*************************************************/
+/*************************************************/
+/* End of list of required device driver actions */
+/*************************************************/
 
-	/* Support Routines */
+/* Support Routines */
 
 static void *RLoadFont(pX11Desc, char*, int, int);
 static double pixelHeight(void);
@@ -2428,7 +2428,7 @@ static void X11_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void X11_Polyline(int n, const double *x, const double *y,
+static void X11_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 			 const pGEcontext gc, pDevDesc dd)
 {
     const void *vmax = vmaxget();
@@ -2459,7 +2459,7 @@ static void X11_Polyline(int n, const double *x, const double *y,
     vmaxset(vmax);
 }
 
-static void X11_Polygon(int n, const double *x, const double *y,
+static void X11_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
 			const pGEcontext gc, pDevDesc dd)
 {
     const void *vmax = vmaxget();

@@ -103,6 +103,7 @@ constexpr R_xlen_t R_XLEN_T_MAX = std::numeric_limits<R_xlen_t>::max();
 constexpr int R_SHORT_LEN_MAX = std::numeric_limits<int>::max();
 #else // not __cplusplus
 #ifdef LONG_VECTOR_SUPPORT
+#include <stdint.h>
 typedef ptrdiff_t R_xlen_t;
 #define R_XLEN_T_MAX PTRDIFF_MAX
 #define R_SHORT_LEN_MAX INT_MAX
@@ -1388,6 +1389,10 @@ cetype_t Rf_getCharCE(SEXP);
 SEXP Rf_mkCharCE(const char *, cetype_t);
 SEXP Rf_mkCharLenCE(const char *, int, cetype_t);
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
+
+				/* match(.) NOT reached : for -Wall */
+#define error_return(msg)	{ Rf_error(msg);	   return R_NilValue; }
+#define errorcall_return(cl,msg){ Rf_errorcall(cl, msg);   return R_NilValue; }
 
 #ifdef __MAIN__
 #undef extern

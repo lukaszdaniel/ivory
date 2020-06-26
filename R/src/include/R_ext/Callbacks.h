@@ -28,10 +28,6 @@
 #ifndef R_CALLBACKS_H
 #define R_CALLBACKS_H
 
-#ifndef __cplusplus
-#error Callbacks.h can only be included in C++ files
-#endif
-
 /*
   These structures are for C (and R function) top-level task handlers.
   Such routines are called at the end of every (successful) top-level task
@@ -47,7 +43,7 @@
   visible - a logical value indicating whether the result was printed to the R ``console''/stdout.
   data - user-level data passed to the registration routine.
  */
-using R_ToplevelCallback = Rboolean(*)(SEXP expr, SEXP value, Rboolean succeeded, bool visible, void *);
+typedef Rboolean (*R_ToplevelCallback)(SEXP expr, SEXP value, Rboolean succeeded, Rboolean visible, void *);
 
 typedef struct _ToplevelCallback  R_ToplevelCallbackEl;
 /* 
@@ -88,15 +84,15 @@ typedef struct  _R_ObjectTable R_ObjectTable;
 
 /* Do we actually need the exists() since it is never called but R
    uses get to see if the symbol is bound to anything? */
-using Rdb_exists = Rboolean(*)(const char * const name, Rboolean *canCache, R_ObjectTable *);
-using Rdb_get = SEXP(*)(const char * const name, Rboolean *canCache, R_ObjectTable *);
-using Rdb_remove = int(*)(const char * const name, R_ObjectTable *);
-using Rdb_assign = SEXP(*)(const char * const name, SEXP value, R_ObjectTable *);
-using Rdb_objects = SEXP(*)(R_ObjectTable *);
-using Rdb_canCache = Rboolean(*)(const char * const name, R_ObjectTable *);
+typedef Rboolean (*Rdb_exists)(const char * const name, Rboolean *canCache, R_ObjectTable *);
+typedef SEXP     (*Rdb_get)(const char * const name, Rboolean *canCache, R_ObjectTable *);
+typedef int      (*Rdb_remove)(const char * const name, R_ObjectTable *);
+typedef SEXP     (*Rdb_assign)(const char * const name, SEXP value, R_ObjectTable *);
+typedef SEXP     (*Rdb_objects)(R_ObjectTable *);
+typedef Rboolean (*Rdb_canCache)(const char * const name, R_ObjectTable *);
 
-using Rdb_onDetach = void(*)(R_ObjectTable *);
-using Rdb_onAttach = void(*)(R_ObjectTable *);
+typedef void     (*Rdb_onDetach)(R_ObjectTable *);
+typedef void     (*Rdb_onAttach)(R_ObjectTable *);
 
 struct _R_ObjectTable
 {

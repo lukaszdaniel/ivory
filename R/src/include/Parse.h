@@ -22,6 +22,10 @@
 #ifndef R_PARSE_H
 #define R_PARSE_H
 
+#ifndef __cplusplus
+#error Parse.h can only be included in C++ files
+#endif
+
 #define R_USE_SIGNALS 1
 #include <IOStuff.h>	/*-> Defn.h */
 
@@ -32,8 +36,6 @@
 
 
 /* Private interface */
-
-typedef struct SrcRefState SrcRefState;
 
 struct SrcRefState
 {
@@ -60,9 +62,8 @@ struct SrcRefState
     SrcRefState *prevState;
 };
 
-#ifdef __cplusplus
+
 extern "C" {
-#endif
 
 void InitParser(void);
 
@@ -85,8 +86,6 @@ SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);
 
 NORET void parseError(SEXP call, int linenum);
 
-#ifdef __cplusplus
 } //extern "C"
-#endif
 
 #endif /* not R_PARSE_H */

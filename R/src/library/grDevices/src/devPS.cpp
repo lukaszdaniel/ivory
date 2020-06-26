@@ -2969,56 +2969,56 @@ PostScriptTextKern(FILE *fp, double x, double y,
 /* Device Driver Actions */
 
 static void PS_Circle(double x, double y, double r,
-		      const pGEcontext gc,
-		      pDevDesc dd);
+					  const pGEcontext gc,
+					  pDevDesc dd);
 static void PS_Clip(double x0, double x1, double y0, double y1,
-		     pDevDesc dd);
+					pDevDesc dd);
 static void PS_Close(pDevDesc dd);
 static void PS_Line(double x1, double y1, double x2, double y2,
-		    const pGEcontext gc,
-		    pDevDesc dd);
+					const pGEcontext gc,
+					pDevDesc dd);
 static void PS_MetricInfo(int c,
-			  const pGEcontext gc,
-			  double* ascent, double* descent,
-			  double* width, pDevDesc dd);
+						  const pGEcontext gc,
+						  double *ascent, double *descent,
+						  double *width, pDevDesc dd);
 static void PS_NewPage(const pGEcontext gc,
-		       pDevDesc dd);
-static Rboolean PS_Open(pDevDesc, PostScriptDesc*);
-static void PS_Polygon(int n, const double *x, const double *y,
-		       const pGEcontext gc,
-		       pDevDesc dd);
-static void PS_Polyline(int n, const double *x, const double *y,
-			const pGEcontext gc,
-			pDevDesc dd);
+					   pDevDesc dd);
+static Rboolean PS_Open(pDevDesc, PostScriptDesc *);
+static void PS_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
+					   const pGEcontext gc,
+					   pDevDesc dd);
+static void PS_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
+						const pGEcontext gc,
+						pDevDesc dd);
 static void PS_Rect(double x0, double y0, double x1, double y1,
-		    const pGEcontext gc,
-		    pDevDesc dd);
+					const pGEcontext gc,
+					pDevDesc dd);
 static void PS_Path(double *x, double *y,
-                    int npoly, int *nper,
-                    Rboolean winding,
-                    const pGEcontext gc,
-                    pDevDesc dd);
+					int npoly, int *nper,
+					Rboolean winding,
+					const pGEcontext gc,
+					pDevDesc dd);
 static void PS_Raster(unsigned int *raster, int w, int h,
-		       double x, double y, double width, double height,
-		       double rot, Rboolean interpolate,
-		       const pGEcontext gc, pDevDesc dd);
+					  double x, double y, double width, double height,
+					  double rot, Rboolean interpolate,
+					  const pGEcontext gc, pDevDesc dd);
 static void PS_Size(double *left, double *right,
-		     double *bottom, double *top,
-		     pDevDesc dd);
+					double *bottom, double *top,
+					pDevDesc dd);
 static double PS_StrWidth(const char *str,
-			  const pGEcontext gc,
-			  pDevDesc dd);
+						  const pGEcontext gc,
+						  pDevDesc dd);
 static void PS_Text(double x, double y, const char *str,
-		    double rot, double hadj,
-		    const pGEcontext gc,
-		    pDevDesc dd);
+					double rot, double hadj,
+					const pGEcontext gc,
+					pDevDesc dd);
 static double PS_StrWidthUTF8(const char *str,
-			      const pGEcontext gc,
-			      pDevDesc dd);
+							  const pGEcontext gc,
+							  pDevDesc dd);
 static void PS_TextUTF8(double x, double y, const char *str,
-			double rot, double hadj,
-			const pGEcontext gc,
-			pDevDesc dd);
+						double rot, double hadj,
+						const pGEcontext gc,
+						pDevDesc dd);
 
 /* PostScript Support (formerly in PostScript.c) */
 
@@ -3095,8 +3095,7 @@ static void Invalidate(pDevDesc);
 static void PS_cleanup(int stage, pDevDesc dd, PostScriptDesc *pd);
 
 
-Rboolean
-PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
+Rboolean PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	       const char *family, const char **afmpaths, const char *encoding,
 	       const char *bg, const char *fg, double width, double height,
 	       Rboolean horizontal, double ps,
@@ -4127,7 +4126,7 @@ static void PS_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void PS_Polygon(int n, const double *x, const double *y,
+static void PS_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
 		       const pGEcontext gc,
 		       pDevDesc dd)
 {
@@ -4220,7 +4219,7 @@ static void PS_Path(double *x, double *y,
     }
 }
 
-static void PS_Polyline(int n, const double *x, const double *y,
+static void PS_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 			const pGEcontext gc,
 			pDevDesc dd)
 {
@@ -4657,39 +4656,39 @@ static int XF_SetLty(int lty)
 /* Device Driver Actions */
 
 static void XFig_Circle(double x, double y, double r,
-			const pGEcontext gc,
-			pDevDesc dd);
+						const pGEcontext gc,
+						pDevDesc dd);
 static void XFig_Clip(double x0, double x1, double y0, double y1,
-		     pDevDesc dd);
+					  pDevDesc dd);
 static void XFig_Close(pDevDesc dd);
 static void XFig_Line(double x1, double y1, double x2, double y2,
-		      const pGEcontext gc,
-		      pDevDesc dd);
+					  const pGEcontext gc,
+					  pDevDesc dd);
 static void XFig_MetricInfo(int c,
-			    const pGEcontext gc,
-			    double* ascent, double* descent,
-			    double* width, pDevDesc dd);
+							const pGEcontext gc,
+							double *ascent, double *descent,
+							double *width, pDevDesc dd);
 static void XFig_NewPage(const pGEcontext gc, pDevDesc dd);
-static void XFig_Polygon(int n, const double *x, const double *y,
-			 const pGEcontext gc,
-			 pDevDesc dd);
-static void XFig_Polyline(int n, const double *x, const double *y,
-			  const pGEcontext gc,
-			  pDevDesc dd);
+static void XFig_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
+						 const pGEcontext gc,
+						 pDevDesc dd);
+static void XFig_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
+						  const pGEcontext gc,
+						  pDevDesc dd);
 static void XFig_Rect(double x0, double y0, double x1, double y1,
-		      const pGEcontext gc,
-		      pDevDesc dd);
+					  const pGEcontext gc,
+					  pDevDesc dd);
 static void XFig_Size(double *left, double *right,
-		     double *bottom, double *top,
-		     pDevDesc dd);
+					  double *bottom, double *top,
+					  pDevDesc dd);
 static double XFig_StrWidth(const char *str,
-			    const pGEcontext gc,
-			    pDevDesc dd);
+							const pGEcontext gc,
+							pDevDesc dd);
 static void XFig_Text(double x, double y, const char *str,
-		      double rot, double hadj,
-		      const pGEcontext gc,
-		      pDevDesc dd);
-static Rboolean XFig_Open(pDevDesc, XFigDesc*);
+					  double rot, double hadj,
+					  const pGEcontext gc,
+					  pDevDesc dd);
+static Rboolean XFig_Open(pDevDesc, XFigDesc *);
 
 /*
  * Values taken from FIG format definition
@@ -5218,7 +5217,7 @@ static void XFig_Line(double x1, double y1, double x2, double y2,
     }
 }
 
-static void XFig_Polygon(int n, const double *x, const double *y,
+static void XFig_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd)
 {
@@ -5251,7 +5250,7 @@ static void XFig_Polygon(int n, const double *x, const double *y,
     }
 }
 
-static void XFig_Polyline(int n, const double *x, const double *y,
+static void XFig_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 			  const pGEcontext gc,
 			  pDevDesc dd)
 {
@@ -5520,10 +5519,10 @@ void PDF_MetricInfo(int c,
                     double* ascent, double* descent,
                     double* width, pDevDesc dd);
 static void PDF_NewPage(const pGEcontext gc, pDevDesc dd);
-static void PDF_Polygon(int n, const double *x, const double *y,
+static void PDF_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
 			const pGEcontext gc,
 			pDevDesc dd);
-static void PDF_Polyline(int n, const double *x, const double *y,
+static void PDF_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd);
 static void PDF_Rect(double x0, double y0, double x1, double y1,
@@ -7536,7 +7535,7 @@ static void PDF_Line(double x1, double y1, double x2, double y2,
     fprintf(pd->pdffp, "%.2f %.2f m %.2f %.2f l S\n", x1, y1, x2, y2);
 }
 
-static void PDF_Polygon(int n, const double *x, const double *y,
+static void PDF_Polygon(int n, /*const*/ double *x, /*const*/ double *y,
 			const pGEcontext gc,
 			pDevDesc dd)
 {
@@ -7631,7 +7630,7 @@ static void PDF_Path(double *x, double *y,
     }
 }
 
-static void PDF_Polyline(int n, const double *x, const double *y,
+static void PDF_Polyline(int n, /*const*/ double *x, /*const*/ double *y,
 			 const pGEcontext gc,
 			 pDevDesc dd)
 {
