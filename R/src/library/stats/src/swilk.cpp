@@ -24,7 +24,7 @@
  * ------- and produced by f2c-clean,v 1.8 --- and hand polished: M.Maechler
  */
 
-#include <math.h>
+#include <cmath>
 #include <Rmath.h>
 #include "localization.h"
 #include <R_ext/Minmax.h>

@@ -93,7 +93,7 @@ static bool R_Profiling = false;
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <signal.h>
+# include <csignal>
 #endif /* not Win32 */
 
 static FILE *R_ProfileOutfile = NULL;
@@ -178,7 +178,7 @@ static void lineprof(char* buf, SEXP srcref)
 }
 
 #if !defined(Win32) && defined(HAVE_PTHREAD)
-// <signal.h> is needed for pthread_kill on most platforms (and by POSIX
+// <csignal> is needed for pthread_kill on most platforms (and by POSIX
 //  but apparently not FreeBSD): it is included above.
 # include <pthread.h>
 static pthread_t R_profiled_thread;

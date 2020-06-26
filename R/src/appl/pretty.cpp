@@ -46,8 +46,8 @@
 
 #include <Localization.h>
 
-#include <math.h>
-#include <float.h>
+#include <cmath>
+#include <cfloat>
 #include <R_ext/Applic.h>
 #include <Rmath.h>
 #include <R_ext/Error.h>

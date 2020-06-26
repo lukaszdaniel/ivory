@@ -40,7 +40,7 @@
 #include <Rmath.h> // Rexp10
 
 // to get tm_zone, tm_gmtoff defined in glibc.
-// some other header, e.g. math.h, might define the macro.
+// some other header, e.g. cmath, might define the macro.
 #if defined HAVE_FEATURES_H
 # include <features.h>
 # ifdef __GNUC_PREREQ
@@ -54,7 +54,7 @@
 #endif
 #include <time.h>
 
-#include <errno.h>
+#include <cerrno>
 
 /*
 
@@ -103,7 +103,7 @@ extern char *tzname[2];
 
 #endif
 
-#include <stdlib.h> /* for setenv or putenv */
+#include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

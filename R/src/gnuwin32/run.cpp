@@ -31,9 +31,9 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <mmsystem.h> /* for timeGetTime */
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
 #include "run.h"
 
 #include <Startup.h> /* for CharacterMode and RGui */

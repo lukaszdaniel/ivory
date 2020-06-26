@@ -27,12 +27,12 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h> /* for setenv or putenv */
+#include <cstdlib> /* for setenv or putenv */
 #include <Localization.h>
 #include <Defn.h> /* for PATH_MAX */
 #include <Rinterface.h>
 #include <Fileio.h>
-#include <ctype.h>		/* for isspace */
+#include <cctype>		/* for isspace */
 
 /* remove leading and trailing space */
 static char *rmspace(char *s)

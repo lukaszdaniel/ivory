@@ -34,7 +34,7 @@
 #include "Fileio.h"
 #include "Parse.h"
 
-#include <stdio.h>
+#include <cstdio>
 #ifdef _WIN32
 # include "run.h"
 int Rgui_Edit(char *filename, int enc, char *title, int modal);

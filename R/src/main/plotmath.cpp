@@ -28,7 +28,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
-#include <ctype.h>
+#include <cctype>
 #include <rlocale.h>
 
 

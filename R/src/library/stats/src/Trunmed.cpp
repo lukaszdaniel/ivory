@@ -44,7 +44,7 @@
  * ...		 j	2nd permuter  X[i +j[m]] == H[m]
  */
 #include "localization.h"
-#include <math.h>
+#include <cmath>
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
 static void

@@ -20,9 +20,9 @@
 
 #include "grid.h"
 #include "localization.h"
-#include <math.h>
-#include <float.h>
-#include <string.h>
+#include <cmath>
+#include <cfloat>
+#include <cstring>
 
 /* Function to build a single-value unit SEXP internally.
  * Cannot build units requiring data as yet.

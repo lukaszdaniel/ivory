@@ -1158,28 +1158,28 @@ int mspace_mallopt(int, int);
 #endif /* WIN32 */
 #endif
 
-#include <stdio.h>       /* for printing in malloc_stats */
+#include <cstdio>       /* for printing in malloc_stats */
 
 #ifndef LACKS_ERRNO_H
-#include <errno.h>       /* for MALLOC_FAILURE_ACTION */
+#include <cerrno>       /* for MALLOC_FAILURE_ACTION */
 #endif /* LACKS_ERRNO_H */
 #if FOOTERS
-#include <time.h>        /* for magic initialization */
+#include <ctime>        /* for magic initialization */
 #endif /* FOOTERS */
 #ifndef LACKS_STDLIB_H
-#include <stdlib.h>      /* for abort() */
+#include <cstdlib>      /* for abort() */
 #endif /* LACKS_STDLIB_H */
 #ifdef DEBUG
 #if ABORT_ON_ASSERT_FAILURE
 #define assert(x) if(!(x)) ABORT
 #else /* ABORT_ON_ASSERT_FAILURE */
-#include <assert.h>
+#include <cassert>
 #endif /* ABORT_ON_ASSERT_FAILURE */
 #else  /* DEBUG */
 #define assert(x)
 #endif /* DEBUG */
 #ifndef LACKS_STRING_H
-#include <string.h>      /* for memset etc */
+#include <cstring>      /* for memset etc */
 #endif  /* LACKS_STRING_H */
 #if USE_BUILTIN_FFS
 #ifndef LACKS_STRINGS_H
@@ -4995,7 +4995,7 @@ History:
       * Introduce USE_PUBLIC_MALLOC_WRAPPERS, USE_MALLOC_LOCK
       * Introduce MALLOC_FAILURE_ACTION, MORECORE_CONTIGUOUS
         Thanks to Tony E. Bennett <tbennett@nvidia.com> and others.
-      * Include errno.h to support default failure action.
+      * Include cerrno to support default failure action.
 
     V2.6.6 Sun Dec  5 07:42:19 1999  Doug Lea  (dl at gee)
       * return null for negative arguments

@@ -60,9 +60,9 @@ constexpr int NWARN = 5;
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
 #include <R_ext/Minmax.h>
-#include <ctype.h>
-#include <wchar.h>
-#include <wctype.h>    /* for wctrans_t */
+#include <cctype>
+#include <cwchar>
+#include <cwctype>    /* for wctrans_t */
 
 using namespace std;
 /* As from TRE 0.8.0, tre.h replaces regex.h */

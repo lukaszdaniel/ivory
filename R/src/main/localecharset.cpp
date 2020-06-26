@@ -46,12 +46,12 @@
 #endif
 
 #include <Defn.h>
-#include <string.h>
+#include <cstring>
 #include <memory.h>
-#include <locale.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include <clocale>
+#include <cstdio>
+#include <cstdlib>
+#include <cctype>
 
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
 

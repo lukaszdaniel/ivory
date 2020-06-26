@@ -8,11 +8,11 @@
 */
 
 
-#include "nmath.h" /* includes config.h, math.h */
+#include "nmath.h" /* includes config.h, cmath */
 #include <algorithm>
 #include "dpq.h"
 /* after config.h to avoid warning on Solaris */
-#include <limits.h>
+#include <climits>
 
 using namespace std;
 /**----------- DEBUGGING -------------

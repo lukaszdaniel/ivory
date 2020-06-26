@@ -2,7 +2,7 @@
 /* Formerly src/appl/machar.c:
  * void machar()  -- computes ALL `machine constants' at once.
  * -------------  -- compare with ../nmath/i1mach.cpp & ../nmath/d1mach.cpp
- *		     which use the C  <float.h> constants !
+ *		     which use the C  <cfloat> constants !
  *      algorithm 665, collected algorithms from acm.
  *      this work published in transactions on mathematical software,
  *      vol. 14, no. 4, pp. 303-311.

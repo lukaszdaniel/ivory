@@ -12,7 +12,7 @@
 #endif
 
 #include "localization.h"
-#include <math.h>
+#include <cmath>
 
 #include <R_ext/Random.h>
 #include <R_ext/Applic.h>

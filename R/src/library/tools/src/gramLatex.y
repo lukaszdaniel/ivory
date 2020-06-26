@@ -29,7 +29,7 @@
 #include <Parse.h>
 #define STRICT_R_HEADERS
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
-#include <ctype.h>
+#include <cctype>
 #include <R_ext/Print.h>
 #include "localization.h"
 

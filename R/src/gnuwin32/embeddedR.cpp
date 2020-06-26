@@ -22,7 +22,7 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <stdio.h>
+#include <cstdio>
 #include <Rversion.h>
 #include <R_ext/RStartup.h>
 /* for askok and askyesnocancel */

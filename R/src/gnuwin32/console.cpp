@@ -34,10 +34,10 @@ extern void R_WaitEvent(void);
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <string.h>
-#include <ctype.h>
-#include <wchar.h>
-#include <limits.h>
+#include <cstring>
+#include <cctype>
+#include <cwchar>
+#include <climits>
 #include <rlocale.h>
 #include <R_ext/Memory.h>
 #include "graphapp/ga.h"
@@ -51,7 +51,7 @@ extern void R_WaitEvent(void);
 #include "Startup.h" /* for CharacterMode */
 #include <Fileio.h>
 
-#include <stdint.h>
+#include <cstdint>
 
 /* Surrogate Pairs Macro */
 #define SURROGATE_PAIRS_HI_MIN  ((uint16_t)0xd800)

@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <string.h>
+#include <cstring>
 
 #include <Localization.h>
 #include <Defn.h>

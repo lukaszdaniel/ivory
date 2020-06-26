@@ -31,7 +31,7 @@
 #include <Fileio.h>
 #include <Rconnections.h>
 #include <R_ext/R-ftp-http.h>
-#include <errno.h>
+#include <cerrno>
 #include <R_ext/Print.h>
 #include <R_ext/Visibility.h>
 

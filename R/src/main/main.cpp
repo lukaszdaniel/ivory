@@ -23,11 +23,11 @@
 #include <config.h>
 #endif
 
-#include <math.h> /* avoid redefinition of extern in Defn.h */
-#include <float.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath> /* avoid redefinition of extern in Defn.h */
+#include <cfloat>
+#include <cctype>
+#include <cstdlib>
+#include <cstring>
 
 #define __MAIN__
 #define R_USE_SIGNALS 1
@@ -40,7 +40,7 @@
 #include "Parse.h"
 #include "Startup.h"
 
-#include <locale.h>
+#include <clocale>
 #include <R_ext/Print.h>
 #include <R_ext/Error.h>
 

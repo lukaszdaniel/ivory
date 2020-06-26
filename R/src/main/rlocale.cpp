@@ -38,18 +38,18 @@
 #include <Defn.h>
 #include <R_ext/Visibility.h>
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 
 #define IN_RLOCALE_C 1 /* used in rlocale.h */
 #include <rlocale.h>
 #include "rlocale_data.h"
 
-#include <wctype.h>
-#include <wchar.h>
-#include <ctype.h>
-#include <locale.h>
-#include <limits.h>
+#include <cwctype>
+#include <cwchar>
+#include <cctype>
+#include <clocale>
+#include <climits>
 #include <R_ext/Riconv.h>
 
 // This seems based on Markus Kuhn's function but with 1-based 'max'

@@ -19,7 +19,7 @@
 
 #include <R_ext/Utils.h>	/* R_rsort() */
 #include <R_ext/Error.h>
-#include <math.h>
+#include <cmath>
 
 #include <Rinternals.h>
 #include "statsR.h"

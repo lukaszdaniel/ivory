@@ -39,10 +39,10 @@
 #endif
 #include <sys/select.h>
 #include <sys/wait.h>
-#include <signal.h>
-#include <errno.h>
+#include <csignal>
+#include <cerrno>
 #include <fcntl.h>
-#include <string.h>
+#include <cstring>
 
 #include <Rinterface.h> /* for R_Interactive */
 #include <R_ext/eventloop.h> /* for R_SelectEx */

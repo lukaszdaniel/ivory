@@ -36,7 +36,7 @@
  */
 
 #include "nmath.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 #ifdef MATHLIB_STANDALONE
 #define ML_WARN_ret_NAN(_k_) {ML_WARNING(ME_DOMAIN, "rmultinom()"); rN[_k_]=-1; return;}

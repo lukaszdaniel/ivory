@@ -48,7 +48,7 @@
 #endif
 #include "run.h"
 #include "Startup.h"
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 
 #include <Localization.h>
 

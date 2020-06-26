@@ -28,8 +28,8 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 #include <R_ext/Minmax.h>
-#include <ctype.h>		/* for isspace */
-#include <float.h>		/* for DBL_MAX */
+#include <cctype>		/* for isspace */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 #include <vector>
@@ -329,7 +329,7 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
 
 # include <R_ext/Riconv.h>
 # include <sys/param.h>
-# include <errno.h>
+# include <cerrno>
 
 
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
@@ -384,7 +384,7 @@ size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 }
 
 
-#include <wctype.h>
+#include <cwctype>
 
 /* This one is not in Rinternals.h, but is used in internet module */
 Rboolean Rf_isBlankString(const char *s)
@@ -2062,7 +2062,7 @@ HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #if 0 //#ifdef USE_ICU
-# include <locale.h>
+# include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
 typedef int UErrorCode; /* really an enum these days */
@@ -2698,7 +2698,7 @@ HIDDEN SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* <UTF8> char here is either ASCII or handled as a whole */
 
 #ifdef _WIN32
-/* avoid latest MinGW's redefinition in stdio.h */
+/* avoid latest MinGW's redefinition in cstdio */
 #include <trioremap.h>
 #endif
 #include <Rmath.h>		/* fround */

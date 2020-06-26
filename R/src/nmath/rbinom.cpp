@@ -37,8 +37,8 @@
 
 #include "nmath.h"
 #include "dpq.h"
-#include <stdlib.h>
-#include <limits.h>
+#include <cstdlib>
+#include <climits>
 
 
 double Rf_rbinom(double nin, double pp)

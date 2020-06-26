@@ -38,7 +38,7 @@
 
 #include <R_ext/RS.h>		/* for Calloc/Free */
 
-#include <wchar.h>
+#include <cwchar>
 #include <tre/tre.h>
 
 static void amatch_regaparams(regaparams_t *params, int patlen,

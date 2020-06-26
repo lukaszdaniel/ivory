@@ -30,8 +30,8 @@
 #include <Localization.h>
 
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <time.h>
 #include <Defn.h>
 #include <Internal.h>

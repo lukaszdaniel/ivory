@@ -33,7 +33,7 @@
 #include <Rconnections.h>
 #include <R_ext/R-ftp-http.h>
 #include "sock.h"
-#include <errno.h>
+#include <cerrno>
 
 #ifdef _WIN32
 # ifndef EINTR

@@ -29,7 +29,7 @@
 #include <R_ext/Minmax.h>
 #include <Internal.h>
 #include <Fileio.h>
-#include <errno.h>
+#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 // for unlink

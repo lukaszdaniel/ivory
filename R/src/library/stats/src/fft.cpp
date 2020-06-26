@@ -22,10 +22,10 @@
 #include <config.h>
 #endif
 
-#include <limits.h> /* for INT_MAX */
+#include <climits> /* for INT_MAX */
 #include <stddef.h> /* for size_t */
-#include <stdlib.h> /* for abs */
-#include <math.h>
+#include <cstdlib> /* for abs */
+#include <cmath>
 #include <Rmath.h>
 #include <R_ext/Minmax.h>
 

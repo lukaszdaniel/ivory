@@ -31,7 +31,7 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <ctype.h>  /* isspace */
+#include <cctype>  /* isspace */
 #include "graphapp/ga.h"
 #include "graphapp/graphapp.h"
 #include "opt.h"

@@ -22,9 +22,9 @@
 #define GRID_MAIN
 #include "grid.h"
 #include "localization.h"
-#include <math.h>
-#include <float.h>
-#include <string.h>
+#include <cmath>
+#include <cfloat>
+#include <cstring>
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 

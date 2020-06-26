@@ -28,7 +28,7 @@
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
-#include <float.h> /* for DBL_MAX */
+#include <cfloat> /* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 			/*--- Part I: Comparison Utilities ---*/

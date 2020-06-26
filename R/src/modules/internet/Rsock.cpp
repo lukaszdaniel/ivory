@@ -35,12 +35,12 @@ extern "C" void R_ProcessEvents(void);
   #include <strings.h>
 #endif
 
-#include <stdlib.h> /* for NULL */
-#include <limits.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdlib> /* for NULL */
+#include <climits>
+#include <cstdio>
+#include <cstring>
 #include <sys/types.h>
-/* #include <errno.h>*/
+/* #include <cerrno>*/
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
@@ -186,7 +186,7 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 #include <fcntl.h>
 #endif
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #endif
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>

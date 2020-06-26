@@ -107,7 +107,7 @@ double R_pow_di(double x, int n)
 double NA_REAL = ML_NAN;
 double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
-#include <stdio.h>
+#include <cstdio>
 #include <stdarg.h>
 HIDDEN void REprintf(const char *format, ...)
 {

@@ -24,7 +24,7 @@
 #endif
 
 #include <Defn.h>
-#include <float.h>		/* for DBL_MAX */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
@@ -77,8 +77,8 @@
     Algol  60 procedure  localmin  given in Richard Brent, Algorithms for
     Minimization without Derivatives, Prentice-Hall, Inc. (1973).
 */
-#include <math.h>
-#include <float.h> /* DBL_EPSILON */
+#include <cmath>
+#include <cfloat> /* DBL_EPSILON */
 
 #include <Rmath.h>
 #include <R_ext/Applic.h>

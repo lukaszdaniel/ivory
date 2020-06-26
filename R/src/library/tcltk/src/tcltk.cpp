@@ -24,7 +24,7 @@
 #include <R_ext/RS.h> // for Calloc
 
 #include "tcltk.h" /* declarations of our `public' interface */
-#include <stdlib.h>
+#include <cstdlib>
 #include "localization.h"
 
 Tcl_Interp *RTcl_interp;

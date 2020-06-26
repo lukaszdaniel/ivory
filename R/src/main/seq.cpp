@@ -29,7 +29,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_EPSILON */
+#include <cfloat>  /* for DBL_EPSILON */
 #include <Rmath.h>
 #include <R_ext/Itermacros.h>
 

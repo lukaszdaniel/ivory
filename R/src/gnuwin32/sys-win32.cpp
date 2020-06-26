@@ -32,7 +32,7 @@
 #include <Fileio.h>
 #include <Startup.h>
 
-#include <ctype.h> /* for isalpha */
+#include <cctype> /* for isalpha */
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS

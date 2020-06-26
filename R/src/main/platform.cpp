@@ -43,14 +43,14 @@
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Fileio.h>
-#include <ctype.h>			/* toupper */
-#include <float.h> // -> FLT_RADIX
-#include <limits.h>
-#include <string.h>
-#include <stdlib.h>			/* for realpath */
+#include <cctype>			/* toupper */
+#include <cfloat> // -> FLT_RADIX
+#include <climits>
+#include <cstring>
+#include <cstdlib>			/* for realpath */
 #include <time.h>			/* for ctime */
 
-# include <errno.h>
+# include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */
@@ -324,7 +324,7 @@ int static R_strieql(const char *a, const char *b)
 }
 #endif
 
-#include <locale.h>
+#include <clocale>
 #ifdef HAVE_LANGINFO_CODESET
 # include <langinfo.h>
 #endif
@@ -497,7 +497,7 @@ HIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 
 #if defined(BUFSIZ) && (BUFSIZ > 512)
-/* OS's buffer size in stdio.h, probably.
+/* OS's buffer size in cstdio, probably.
    Windows has 512, Solaris 1024, glibc 8192
  */
 #define APPENDBUFSIZE BUFSIZ

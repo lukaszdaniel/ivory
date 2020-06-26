@@ -27,7 +27,7 @@
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
 #include <R_ext/Minmax.h>
-#include <float.h> // for DBL_MAX
+#include <cfloat> // for DBL_MAX
 #include "duplicate.h"
 
 using namespace std;

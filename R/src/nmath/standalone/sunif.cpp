@@ -40,8 +40,8 @@ double unif_rand(void)
     return ((I1 << 16)^(I2 & 0177777)) * 2.328306437080797e-10; /* in [0,1) */
 }
 
-#include <math.h>
-#include <stdint.h>
+#include <cmath>
+#include <cstdint>
 //copied from src/main/RNG.cpp:
 //generate a random non-negative integer < 2 ^ bits in 16 bit chunks
 static double rbits(int bits)

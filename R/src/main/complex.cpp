@@ -913,7 +913,7 @@ HIDDEN SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 #include <R_ext/Arith.h> /* for declaration of hypot */
 #include <R_ext/Memory.h> /* for declaration of R_alloc */
 
-#include <float.h> /* for FLT_RADIX */
+#include <cfloat> /* for FLT_RADIX */
 
 #include <Rmath.h> /* for R_pow_di */
 

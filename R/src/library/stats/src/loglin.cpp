@@ -9,9 +9,9 @@
 # include <config.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 
-#include <stdio.h>
+#include <cstdio>
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include "localization.h"

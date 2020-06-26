@@ -20,7 +20,7 @@
 
 #include "grid.h"
 #include "localization.h"
-#include <string.h>
+#include <cstring>
 
 /* Some access methods for gpars */
 SEXP gpFontSizeSXP(SEXP gp) {

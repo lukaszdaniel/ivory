@@ -24,7 +24,7 @@
 
 #include "localization.h"
 
-#include <math.h>
+#include <cmath>
 #include <Rmath.h>		/* fmax2 */
 #include <R_ext/Applic.h>	/* prototypes for lowess and clowess */
 #include <R_ext/Boolean.h>

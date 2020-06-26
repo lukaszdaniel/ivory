@@ -28,9 +28,9 @@
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <ctype.h> /* for tolower */
-#include <string.h>
-#include <errno.h>
+#include <cctype> /* for tolower */
+#include <cstring>
+#include <cerrno>
 
 #include <Rmath.h>
 #include <boost/preprocessor.hpp>

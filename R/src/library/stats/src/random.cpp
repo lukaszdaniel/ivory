@@ -26,7 +26,7 @@
 #include <Defn.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */
-#include <errno.h>
+#include <cerrno>
 #include "statsR.h"
 
 #include "stats.h" // for rcont2

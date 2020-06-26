@@ -36,8 +36,8 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <setjmp.h>
 
 /* 8 bits red, green and blue channel */

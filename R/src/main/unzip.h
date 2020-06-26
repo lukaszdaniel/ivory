@@ -52,7 +52,7 @@ extern "C" {
 #endif
 
 /* merged from ioapi.h */
-#include <stdint.h>
+#include <cstdint>
 typedef uint64_t ZPOS64_T;
 
 /* apparently needed for zlib > 1.2.5 with --with-system-zlib, PR#14951 */

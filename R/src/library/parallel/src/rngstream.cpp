@@ -18,7 +18,7 @@
  */
 
 #include "parallel.h"
-#include <stdint.h>
+#include <cstdint>
 
 typedef uint_least64_t Uint64;
 

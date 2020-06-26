@@ -18,7 +18,7 @@
  *
  */
 
-# include <stdint.h>
+# include <cstdint>
 // C99/C11 require this to be implemented.
 typedef int_fast64_t R_time_t;
 

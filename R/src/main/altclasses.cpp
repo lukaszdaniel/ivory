@@ -24,7 +24,7 @@
 #include <Defn.h>
 #include <Localization.h>
 #include <R_ext/Altrep.h>
-#include <float.h> /* for DBL_DIG */
+#include <cfloat> /* for DBL_DIG */
 #include <Print.h> /* for R_print */
 #include <R_ext/Itermacros.h>
 
@@ -1271,7 +1271,7 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
 
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <errno.h>
+#include <cerrno>
 #include <unistd.h>
 #include <sys/mman.h>
 

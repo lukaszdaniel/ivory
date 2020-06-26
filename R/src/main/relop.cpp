@@ -28,7 +28,7 @@
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/Minmax.h>
-#include <errno.h>
+#include <cerrno>
 #include <R_ext/Itermacros.h>
 
 using namespace std;

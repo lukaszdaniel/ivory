@@ -110,7 +110,7 @@ SEXP dirchmod(SEXP dr, SEXP gwsxp)
 }
 
 #if defined(BUFSIZ) && (BUFSIZ > 512)
-/* OS's buffer size in stdio.h, probably.
+/* OS's buffer size in cstdio, probably.
    Windows has 512, Solaris 1024, glibc 8192
  */
 # define APPENDBUFSIZE BUFSIZ

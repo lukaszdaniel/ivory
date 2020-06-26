@@ -25,17 +25,17 @@
 
 #include <Defn.h>
 // LDBL_EPSILON
-#include <float.h>
+#include <cfloat>
 
 /* interval at which to check interrupts, a guess */
 constexpr R_xlen_t NINTERRUPT = 10000000;
 
 
 #ifdef __OpenBSD__
-/* for definition of "struct exception" in math.h */
+/* for definition of "struct exception" in cmath */
 #define __LIBM_PRIVATE
 #endif
-#include <Defn.h>		/*-> Arith.h -> math.h */
+#include <Defn.h>		/*-> Arith.h -> cmath */
 #include <Localization.h>
 #ifdef __OpenBSD__
 # undef __LIBM_PRIVATE
@@ -52,7 +52,7 @@ constexpr R_xlen_t NINTERRUPT = 10000000;
 
 #include "arithmetic.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <limits>
 
 #ifdef HAVE_MATHERR

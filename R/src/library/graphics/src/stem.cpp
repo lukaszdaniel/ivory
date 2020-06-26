@@ -23,9 +23,9 @@
 #endif
 
 #include <Rinternals.h>
-#include <math.h>
-#include <limits.h> /* INT_MAX */
-#include <stdlib.h> /* abs */
+#include <cmath>
+#include <climits> /* INT_MAX */
+#include <cstdlib> /* abs */
 #include <Rmath.h>
 #include <R_ext/Print.h> /* for Rprintf */
 #include <R_ext/Utils.h> /* for R_rsort */
@@ -160,7 +160,7 @@ SEXP C_StemLeaf(SEXP x, SEXP scale, SEXP swidth, SEXP atom)
 }
 
 /* Formerly a version in src/appl/binning.c */
-#include <string.h> // for memset
+#include <cstring> // for memset
 
 static void C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
 	   int right, int include_border)

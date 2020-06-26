@@ -21,8 +21,8 @@
 # include <config.h>
 #endif
 
-#include <stdlib.h> // for abs
-#include <string.h>
+#include <cstdlib> // for abs
+#include <cstring>
 
 #include <R.h>
 #include <R_ext/Minmax.h>

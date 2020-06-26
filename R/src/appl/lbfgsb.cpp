@@ -31,9 +31,9 @@
 
 /* <UTF8> all char uses here are ASCII */
 
-#include <math.h>
-#include <float.h> /* for DBL_EPSILON */
-#include <string.h>
+#include <cmath>
+#include <cfloat> /* for DBL_EPSILON */
+#include <cstring>
 #include <R_ext/RS.h> /* for F77_CALL */
 #include <R_ext/Linpack.h>
 #include <R_ext/Applic.h>

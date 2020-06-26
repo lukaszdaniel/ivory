@@ -17,8 +17,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <math.h>
-#include <R.h>			/* for NA_REAL, includes math.h */
+#include <cmath>
+#include <R.h>			/* for NA_REAL, includes cmath */
 #include <Rinternals.h>
 
 #include "localization.h"

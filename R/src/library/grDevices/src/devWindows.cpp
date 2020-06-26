@@ -35,7 +35,7 @@
 #include <R_ext/Minmax.h>
 
 #include <Fileio.h>
-#include <stdio.h>
+#include <cstdio>
 #include "opt.h"
 #include "graphapp/ga.h"
 #include "graphapp/stdimg.h"

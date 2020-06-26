@@ -29,7 +29,7 @@
 
 #include <Defn.h>
 #include <Fileio.h>
-#include <stdio.h>
+#include <cstdio>
 #include <Startup.h>
 #include "graphapp/ga.h"
 #include "graphapp/graphapp.h"

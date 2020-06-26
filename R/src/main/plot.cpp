@@ -25,7 +25,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
-#include <float.h>  /* for DBL_MAX */
+#include <cfloat>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h> // for Rexp10

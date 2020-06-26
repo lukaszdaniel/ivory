@@ -28,7 +28,7 @@
 #include <config.h>
 #endif
 
-#include <R_ext/Arith.h> // includes math.h
+#include <R_ext/Arith.h> // includes cmath
 #include <R_ext/Error.h>
 #include <Rinternals.h>
 #include "localization.h"

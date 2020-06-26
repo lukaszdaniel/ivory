@@ -42,9 +42,9 @@
 #include <config.h>
 #endif
 
-#include <stdio.h>
-#include <errno.h>
-#include <math.h>
+#include <cstdio>
+#include <cerrno>
+#include <cmath>
 #include "localization.h"
 
 #include <R.h>

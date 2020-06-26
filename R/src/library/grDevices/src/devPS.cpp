@@ -25,12 +25,12 @@
 
 #include <Defn.h>
 
-#include <stdio.h>
-#include <ctype.h>
-#include <limits.h> /* required for MB_LEN_MAX */
+#include <cstdio>
+#include <cctype>
+#include <climits> /* required for MB_LEN_MAX */
 
-#include <wchar.h>
-#include <wctype.h>
+#include <cwchar>
+#include <cwctype>
 static void
 mbcsToSbcs(const char *in, char *out, const char *encoding, int enc);
 
@@ -47,7 +47,7 @@ mbcsToSbcs(const char *in, char *out, const char *encoding, int enc);
 #include "grDevices.h"
 
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #else
 extern int errno;
 #endif
@@ -6708,7 +6708,7 @@ static int isSans(const char *name)
 #define boldslant(x) ((x==3)?",BoldItalic":((x==2)?",Italic":((x==1)?",Bold":"")))
 
 #if defined(BUFSIZ) && (BUFSIZ > 512)
-/* OS's buffer size in stdio.h, probably.
+/* OS's buffer size in cstdio, probably.
    Windows has 512, Solaris 1024, glibc 8192
  */
 # define APPENDBUFSIZE BUFSIZ

@@ -24,8 +24,8 @@
 #endif
 
 #include <getline/getline.h>
-#include <string.h>
-#include <stdlib.h> /* for getenv */
+#include <cstring>
+#include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
 
 

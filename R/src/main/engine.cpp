@@ -24,7 +24,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_MAX */
+#include <cfloat>  /* for DBL_MAX */
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* pretty() */
 #include <R_ext/Minmax.h>

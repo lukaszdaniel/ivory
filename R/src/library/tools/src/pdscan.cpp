@@ -19,7 +19,7 @@
 
 #include <R.h>
 #include <Rdefines.h>
-#include <ctype.h>
+#include <cctype>
 #include "tools.h"
 #include "localization.h"
 

@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h> /* for abs */
-#include <math.h>
+#include <cstdlib> /* for abs */
+#include <cmath>
 
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
 #include <R_ext/Error.h>

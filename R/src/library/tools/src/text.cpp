@@ -21,13 +21,13 @@
    match length is in now in chars.
 */
 
-#include <string.h>
+#include <cstring>
 #include <R.h>
 #include "tools.h"
 #include "localization.h"
 
-#include <stdlib.h> /* for MB_CUR_MAX */
-#include <wchar.h>
+#include <cstdlib> /* for MB_CUR_MAX */
+#include <cwchar>
 LibExtern Rboolean mbcslocale;
 extern "C" size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 

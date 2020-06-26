@@ -1247,7 +1247,7 @@ HIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
  *  7) PLATFORM DEPENDENT FUNCTIONS
  */
 
-# include <errno.h>
+# include <cerrno>
 
 HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 	       const char **file,		/* array of filenames */

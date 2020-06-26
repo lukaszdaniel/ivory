@@ -28,7 +28,7 @@
 /* R user interface based on GraphApp */
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
-#include <stdio.h>
+#include <cstdio>
 #undef DEBUG /* needed for mingw-runtime 2.0 */
 /* the user menu code looks at the internal structure */
 #define GA_EXTERN
@@ -1015,7 +1015,7 @@ static int RguiWindowMenu()
     return 0;
 }
 
-#include <locale.h>
+#include <clocale>
 
 int setupui(void)
 {

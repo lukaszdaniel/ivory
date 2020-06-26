@@ -23,7 +23,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 /* Based on example at
    http://msdn.microsoft.com/en-us/library/ms683194%28v=VS.85%29.aspx

@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h> /* for putenv */
+#include <cstdlib> /* for putenv */
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
@@ -30,7 +30,7 @@
 #include <R_ext/Riconv.h>
 #include <R_ext/GraphicsEngine.h>
 #include <Rinterface.h>
-#include <errno.h>
+#include <cerrno>
 #include <rlocale.h>
 
 /*
@@ -356,7 +356,7 @@ extern "C" char ** environ;
 #endif
 
 #ifdef _WIN32
-/* _wenviron is declared in stdlib.h */
+/* _wenviron is declared in cstdlib */
 #define WIN32_LEAN_AND_MEAN 1
 # include <windows.h> /* _wgetenv etc */
 #endif
@@ -1771,7 +1771,7 @@ extern char * mkdtemp (char *template);
 #endif
 
 #ifdef _WIN32
-# include <ctype.h>
+# include <cctype>
 #endif
 
 void R_reInitTempDir(int die_on_fail)

@@ -29,7 +29,7 @@
 #include <Parse.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
-#include <float.h> /* for DBL_DIG */
+#include <cfloat> /* for DBL_DIG */
 #include <Rmath.h>
 #include <Print.h>
 

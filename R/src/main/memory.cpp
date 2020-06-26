@@ -2304,7 +2304,7 @@ char *R_alloc(size_t nelem, int eltsize)
 # include <stdalign.h>
 #endif
 
-#include <stdint.h>
+#include <cstdint>
 
 long double *R_allocLD(size_t nelem)
 {

@@ -33,8 +33,8 @@
 #include <R_ext/Riconv.h>
 #include <R_ext/RS.h>           /* for CallocCharBuf, Free */
 #include <R_ext/Minmax.h>
-#include <errno.h>
-#include <ctype.h>		/* for isspace */
+#include <cerrno>
+#include <cctype>		/* for isspace */
 #include <stdarg.h>
 #ifdef _WIN32
 #include <trioremap.h>

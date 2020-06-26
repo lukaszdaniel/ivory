@@ -20,8 +20,8 @@
 #endif
 
 #ifdef STDC_HEADERS
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #else
 char *malloc ();
 char *strcpy ();

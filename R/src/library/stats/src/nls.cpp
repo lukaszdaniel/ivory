@@ -24,10 +24,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <float.h>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <cfloat>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Minmax.h>

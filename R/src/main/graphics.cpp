@@ -30,7 +30,7 @@
 
 #include <Localization.h>
 #include <Defn.h>
-#include <float.h> /* for DBL_EPSILON etc */
+#include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h
 #include <Rmath.h>		/* eg. fmax2() */

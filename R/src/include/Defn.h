@@ -161,8 +161,8 @@ extern void R_WaitEvent(void);
 #ifdef _WIN32
 # include <psignal.h>
 #else
-# include <signal.h>
-# include <setjmp.h>
+# include <csignal>
+# include <csetjmp>
 #endif
 #endif
 
@@ -241,9 +241,9 @@ constexpr long R_VSIZE = 67108864L;
 #endif
 
 /* some commonly needed headers */
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 extern "C" {
 /* declare substitutions */
@@ -1398,7 +1398,7 @@ SEXP R_subset3_dflt(SEXP, SEXP, SEXP);
 /* main/subassign.cpp */
 SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 
-#include <wchar.h>
+#include <cwchar>
 
 /* main/util.cpp */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);

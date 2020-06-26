@@ -77,9 +77,9 @@ extern void R_FlushConsole(void);
   #include <strings.h>
 #endif
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -97,7 +97,7 @@ extern struct hostent *R_gethostbyname(const char *name);
 #include <fcntl.h>
 #endif
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #endif
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>

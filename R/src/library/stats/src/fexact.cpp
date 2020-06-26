@@ -29,9 +29,9 @@
 
 /* <UTF8> chars are handled as whole strings */
 
-#include <stdio.h>
-#include <limits.h>
-#include <math.h>
+#include <cstdio>
+#include <climits>
+#include <cmath>
 #include <R.h>
 #include "stats.h"
 #include <R_ext/Minmax.h>

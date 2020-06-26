@@ -23,8 +23,8 @@
 #include <Rinternals.h>
 #include <Rconfig.h>
 #include <R_ext/Constants.h>
-#include <float.h>
-#include <math.h>
+#include <cfloat>
+#include <cmath>
 #include "stats.h"
 #include "statsR.h"
 #include "localization.h"

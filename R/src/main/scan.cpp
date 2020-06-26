@@ -36,10 +36,10 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_DIG */
+#include <cfloat>  /* for DBL_DIG */
 #include <Fileio.h>
 #include <Rconnections.h>
-#include <errno.h>
+#include <cerrno>
 #include <Print.h>
 
 #include <rlocale.h> /* for btowc */

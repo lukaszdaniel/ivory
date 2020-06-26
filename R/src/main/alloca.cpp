@@ -225,7 +225,7 @@ alloca (unsigned size)
 #  if defined (CRAY) && defined (CRAY_STACKSEG_END)
 
 #   ifdef DEBUG_I00AFUNC
-#    include <stdio.h>
+#    include <cstdio>
 #   endif
 
 #   ifndef CRAY_STACK

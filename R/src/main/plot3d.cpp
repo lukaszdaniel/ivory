@@ -26,7 +26,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_MAX */
+#include <cfloat>  /* for DBL_MAX */
 #include <Rmath.h>
 #include <Graphics.h>
 #include <Print.h>

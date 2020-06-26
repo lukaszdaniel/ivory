@@ -85,8 +85,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif

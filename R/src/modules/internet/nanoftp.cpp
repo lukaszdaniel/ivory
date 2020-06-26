@@ -57,9 +57,9 @@ extern "C" void R_ProcessEvents(void);
 #include <R_ext/R-ftp-http.h>
 /* #define DEBUG_FTP */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
 
 #ifdef HAVE_UNISTD_H
 # include <unistd.h>
@@ -75,7 +75,7 @@ extern "C" void R_ProcessEvents(void);
 #include <fcntl.h>
 #endif
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #endif
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
