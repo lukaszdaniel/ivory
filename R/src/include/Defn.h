@@ -1398,7 +1398,7 @@ SEXP R_subset3_dflt(SEXP, SEXP, SEXP);
 /* main/subassign.cpp */
 SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 
-#include <cwchar>
+#include <wchar.h>
 
 /* main/util.cpp */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
