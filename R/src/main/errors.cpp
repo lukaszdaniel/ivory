@@ -2423,11 +2423,16 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     }
 
     /* record the C-level handler information */
-    tryCatchData_t tcd = {
-	.handler = handler != NULL ? handler : default_tryCatch_handler,
-	.hdata = hdata
-    };
-    SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
+	tryCatchData_t tcd = {
+		.body = nullptr,
+		.bdata = nullptr,
+		.handler = handler != nullptr ? handler : default_tryCatch_handler,
+		.hdata = hdata,
+		.finally = nullptr,
+		.fdata = nullptr,
+		.suspended = FALSE};
+
+	SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
 
     /* create the R handler function closure */
     SEXP env = CONS(tcdptr, R_NilValue);
