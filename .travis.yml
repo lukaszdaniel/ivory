@@ -27,7 +27,7 @@ matrix:
       addons:
         apt:
           sources:
-            - sourceline: "deb http://llvm.org/apt/bionic/ llvm-toolchain-bionic-7 main"
+            - sourceline: "deb http://llvm.org/apt/bionic/ llvm-toolchain-bionic-10 main"
           packages:
             - gfortran
             - automake
