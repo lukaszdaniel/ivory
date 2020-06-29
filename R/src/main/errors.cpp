@@ -32,7 +32,7 @@
 #include <R_ext/GraphicsEngine.h> /* for GEonExit */
 #include <R_ext/Minmax.h>
 #include <R_ext/Print.h>
-#include <stdarg.h>
+#include <cstdarg>
 
 using namespace std;
 
@@ -322,12 +322,13 @@ static char *Rstrncat(char *dest, const char *src, size_t n)
    split multi-byte characters */
 static char *Rstrncpy(char *dest, const char *src, size_t n)
 {
-    strncpy(dest, src, n);
-    if (dest[n-1] != '\0') {
-	dest[n-1] = '\0';
-	mbcsTruncateToValid(dest);
-    }
-    return dest;
+	strncpy(dest, src, n);
+	if (dest[n - 1] != '\0')
+	{
+		dest[n - 1] = '\0';
+		mbcsTruncateToValid(dest);
+	}
+	return dest;
 }
 
 constexpr size_t BUFSIZE = 8192;
@@ -343,15 +344,18 @@ R_INLINE static void RprintTrunc(char *buf, int truncated)
 
 static SEXP getCurrentCall()
 {
-    RCNTXT *c = R_GlobalContext;
+	RCNTXT *c = R_GlobalContext;
 
-    /* This can be called before R_GlobalContext is defined, so... */
-    /* If profiling is on, this can be a CTXT_BUILTIN */
+	/* This can be called before R_GlobalContext is defined, so... */
+	/* If profiling is on, this can be a CTXT_BUILTIN */
 
-    if (c && (c->callflag & CTXT_BUILTIN)) c = c->nextContext();
-    if (c == R_GlobalContext && R_BCIntActive)
-	return R_getBCInterpreterExpression();
-    else
+	if (c && (c->callflag & CTXT_BUILTIN))
+		c = c->nextContext();
+	if (c == R_GlobalContext && R_BCIntActive)
+	{
+		return R_getBCInterpreterExpression();
+	}
+
 	return c ? c->call : R_NilValue;
 }
 
@@ -926,9 +930,9 @@ static void try_jump_to_restart(void)
 	    SEXP name = VECTOR_ELT(restart, 0);
 	    if (TYPEOF(name) == STRSXP && LENGTH(name) == 1) {
 		const char *cname = CHAR(STRING_ELT(name, 0));
-		if (! strcmp(cname, "browser") ||
-		    ! strcmp(cname, "tryRestart") ||
-		    ! strcmp(cname, "abort")) /**** move abort eventually? */
+		if (streql(cname, "browser") ||
+		    streql(cname, "tryRestart") ||
+		    streql(cname, "abort")) /**** move abort eventually? */
 		    invokeRestart(restart, R_NilValue);
 	    }
 	}
@@ -1728,12 +1732,12 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
 
 NORET static void gotoExitingHandler(SEXP cond, SEXP call, SEXP entry)
 {
-    SEXP rho = ENTRY_TARGET_ENVIR(entry);
-    SEXP result = ENTRY_RETURN_RESULT(entry);
-    SET_VECTOR_ELT(result, 0, cond);
-    SET_VECTOR_ELT(result, 1, call);
-    SET_VECTOR_ELT(result, 2, ENTRY_HANDLER(entry));
-    findcontext(CTXT_FUNCTION, rho, result);
+	SEXP rho = ENTRY_TARGET_ENVIR(entry);
+	SEXP result = ENTRY_RETURN_RESULT(entry);
+	SET_VECTOR_ELT(result, 0, cond);
+	SET_VECTOR_ELT(result, 1, call);
+	SET_VECTOR_ELT(result, 2, ENTRY_HANDLER(entry));
+	findcontext(CTXT_FUNCTION, rho, result);
 }
 
 static void vsignalError(SEXP call, const char *format, va_list ap)
@@ -1841,14 +1845,15 @@ HIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static SEXP findInterruptHandler(void)
 {
-    SEXP list;
-    for (list = R_HandlerStack; list != R_NilValue; list = CDR(list)) {
-	SEXP entry = CAR(list);
-	if (! strcmp(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
-	    ! strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
-	    return list;
-    }
-    return R_NilValue;
+	SEXP list;
+	for (list = R_HandlerStack; list != R_NilValue; list = CDR(list))
+	{
+		SEXP entry = CAR(list);
+		if (!strcmp(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
+			!strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
+			return list;
+	}
+	return R_NilValue;
 }
 
 static SEXP getInterruptCondition(void)
@@ -1991,10 +1996,10 @@ static inline void CHECK_RESTART(SEXP r)
 
 HIDDEN SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    CHECK_RESTART(CAR(args));
-    R_RestartStack = CONS(CAR(args), R_RestartStack);
-    return R_NilValue;
+	checkArity(op, args);
+	CHECK_RESTART(CAR(args));
+	R_RestartStack = CONS(CAR(args), R_RestartStack);
+	return R_NilValue;
 }
 
 static inline SEXP RESTART_EXIT(SEXP r) { return VECTOR_ELT(r, 1); }
@@ -2024,47 +2029,47 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 
 HIDDEN NORET SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    CHECK_RESTART(CAR(args));
-    invokeRestart(CAR(args), CADR(args));
+	checkArity(op, args);
+	CHECK_RESTART(CAR(args));
+	invokeRestart(CAR(args), CADR(args));
 }
 
 HIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    if (R_GlobalContext == R_ToplevelContext ||
-	! (R_GlobalContext->callflag & CTXT_FUNCTION))
-	error(_("not in a try context"));
-    SET_RESTART_BIT_ON(R_GlobalContext->callflag);
-    R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
-    return R_NilValue;
+	checkArity(op, args);
+	if (R_GlobalContext == R_ToplevelContext ||
+		!(R_GlobalContext->callflag & CTXT_FUNCTION))
+		error(_("not in a try context"));
+	SET_RESTART_BIT_ON(R_GlobalContext->callflag);
+	R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
+	return R_NilValue;
 }
 
 HIDDEN SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP msg;
+	SEXP msg;
 
-    checkArity(op, args);
-    msg = CAR(args);
-    if(!isString(msg) || LENGTH(msg) != 1)
-	error(_("error message is not a character string"));
-    R_SetErrmessage(CHAR(STRING_ELT(msg, 0)));
-    return R_NilValue;
+	checkArity(op, args);
+	msg = CAR(args);
+	if (!isString(msg) || LENGTH(msg) != 1)
+		error(_("error message is not a character string"));
+	R_SetErrmessage(CHAR(STRING_ELT(msg, 0)));
+	return R_NilValue;
 }
 
 HIDDEN SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    checkArity(op, args);
-    R_PrintDeferredWarnings();
-    return R_NilValue;
+	checkArity(op, args);
+	R_PrintDeferredWarnings();
+	return R_NilValue;
 }
 
 HIDDEN SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int orig_value = R_interrupts_suspended;
-    if (args != R_NilValue)
-	R_interrupts_suspended = (Rboolean) asLogical(CAR(args));
-    return ScalarLogical(orig_value);
+	int orig_value = R_interrupts_suspended;
+	if (args != R_NilValue)
+		R_interrupts_suspended = (Rboolean)asLogical(CAR(args));
+	return ScalarLogical(orig_value);
 }
 
 HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
@@ -2240,15 +2245,14 @@ SEXP R_GetCurrentSrcref(int skip)
 
 SEXP R_GetSrcFilename(SEXP srcref)
 {
-    SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
-    if (TYPEOF(srcfile) != ENVSXP)
-	return ScalarString(mkChar(""));
-    srcfile = findVar(install("filename"), srcfile);
-    if (TYPEOF(srcfile) != STRSXP)
-	return ScalarString(mkChar(""));
-    return srcfile;
+	SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
+	if (TYPEOF(srcfile) != ENVSXP)
+		return ScalarString(mkChar(""));
+	srcfile = findVar(install("filename"), srcfile);
+	if (TYPEOF(srcfile) != STRSXP)
+		return ScalarString(mkChar(""));
+	return srcfile;
 }
-
 
 /*
  * C level tryCatch support

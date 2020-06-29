@@ -26,7 +26,7 @@
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
@@ -48,7 +48,7 @@
 #include <X11/cursorfont.h>
 #include <X11/Intrinsic.h>	/*->	Xlib.h	Xutil.h Xresource.h .. */
 #ifdef HAVE_X11_Xmu
-# include <X11/Xmu/Atoms.h>
+#include <X11/Xmu/Atoms.h>
 #endif
 #include <X11/keysymdef.h>
 
@@ -198,7 +198,7 @@ static double GreenGamma = 1.0;
 static double BlueGamma	 = 1.0;
 
 #ifdef HAVE_WORKING_CAIRO
-# include "cairoFns.cpp"
+#include "cairoFns.cpp"
 
 	/************************/
 	/*        Buffering     */
@@ -228,7 +228,7 @@ extern double currentTime(void); /* from datetime.cpp */
   be used, clock_t is 32-bit (it is typically long or unsigned long)
   and CLK_TCK is 60-100, so it happens after many months of uptime.
 */
-# include <sys/times.h>
+#include <sys/times.h>
 # ifndef CLK_TCK
 #   define CLK_TCK 60
 # endif

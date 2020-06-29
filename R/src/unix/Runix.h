@@ -17,7 +17,7 @@ void Rstd_ClearerrConsole(void);
 void Rstd_Busy(int which);
 NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast);
 int  Rstd_ShowFiles(int nfile, const char **file, const char **headers,
-		    const char *wtitle, Rboolean del, const char *pager);
+		    const char *wtitle, bool del, const char *pager);
 size_t  Rstd_ChooseFile(int _new, char *buf, size_t len);
 void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env);
 void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env);

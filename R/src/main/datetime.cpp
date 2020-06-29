@@ -34,7 +34,7 @@
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Rmath.h> // Rexp10
@@ -42,7 +42,7 @@
 // to get tm_zone, tm_gmtoff defined in glibc.
 // some other header, e.g. cmath, might define the macro.
 #if defined HAVE_FEATURES_H
-# include <features.h>
+#include <features.h>
 # ifdef __GNUC_PREREQ
 #  if __GNUC_PREREQ(2,20) && !defined(_DEFAULT_SOURCE_)
 #   define _DEFAULT_SOURCE 1
@@ -52,7 +52,7 @@
 #if defined(HAVE_GLIBC2) && !defined(_DEFAULT_SOURCE_) && !defined(_BSD_SOURCE)
 #define _BSD_SOURCE 1
 #endif
-#include <time.h>
+#include <ctime>
 
 #include <cerrno>
 
@@ -84,7 +84,7 @@ known OS with 64-bit time_t and complete tables is Linux.
 */
 
 #ifdef USE_INTERNAL_MKTIME
-# include "datetime.h"
+#include "datetime.h"
 # undef HAVE_LOCAL_TIME_R
 #define HAVE_LOCAL_TIME_R 1
 # undef HAVE_TM_ZONE

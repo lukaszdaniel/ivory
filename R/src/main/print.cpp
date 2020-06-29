@@ -803,7 +803,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 #ifdef _WIN32
 static void print_cleanup(void *data)
 {
-    WinUTF8out = *(Rboolean *)data;
+    WinUTF8out = *(bool *)data;
 }
 #endif
 
@@ -1093,7 +1093,7 @@ HIDDEN void Rf_CustomPrintValue(SEXP s, SEXP env)
  */
 
 #ifdef FC_LEN_T
-# include <stddef.h>
+#include <stddef.h>
 #endif
 extern "C" {
 

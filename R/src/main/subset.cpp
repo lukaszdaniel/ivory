@@ -67,34 +67,41 @@ R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
    currently the subscript code forces allocation.
 */
 
-#define EXTRACT_SUBSET_LOOP(STDCODE, NACODE) do { \
-	if (TYPEOF(indx) == INTSXP) {		  \
-	    const int *pindx = INTEGER_RO(indx);  \
-	    for (i = 0; i < n; i++) {		  \
-		ii = pindx[i];			  \
-		if (0 < ii && ii <= nx) {	  \
-		    ii--;			  \
-		    STDCODE;			  \
-		}				  \
-		else /* out of bounds or NA */	  \
-		    NACODE;			  \
-	    }					  \
-	}					  \
-	else {					  \
-	    const double *pindx = REAL_RO(indx);  \
-	    for (i = 0; i < n; i++) {		  \
-		double di = pindx[i];		  \
-		ii = (R_xlen_t) (di - 1);	  \
-		if (R_FINITE(di) &&		  \
-		    0 <= ii && ii < nx)		  \
-		    STDCODE;			  \
-		else				  \
-		    NACODE;			  \
-	    }					  \
-	}					  \
-    } while (0)
+#define EXTRACT_SUBSET_LOOP(STDCODE, NACODE)     \
+	do                                           \
+	{                                            \
+		if (TYPEOF(indx) == INTSXP)              \
+		{                                        \
+			const int *pindx = INTEGER_RO(indx); \
+			for (i = 0; i < n; i++)              \
+			{                                    \
+				ii = pindx[i];                   \
+				if (0 < ii && ii <= nx)          \
+				{                                \
+					ii--;                        \
+					STDCODE;                     \
+				}                                \
+				else /* out of bounds or NA */   \
+					NACODE;                      \
+			}                                    \
+		}                                        \
+		else                                     \
+		{                                        \
+			const double *pindx = REAL_RO(indx); \
+			for (i = 0; i < n; i++)              \
+			{                                    \
+				double di = pindx[i];            \
+				ii = (R_xlen_t)(di - 1);         \
+				if (R_FINITE(di) &&              \
+					0 <= ii && ii < nx)          \
+					STDCODE;                     \
+				else                             \
+					NACODE;                      \
+			}                                    \
+		}                                        \
+	} while (0)
 
-HIDDEN SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
+HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
 	return x;
@@ -153,7 +160,7 @@ HIDDEN SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
     case LANGSXP:
 	/* cannot happen: LANGSXPs are coerced to lists */
     default:
-	errorcall(call, R_MSG_ob_nonsub, type2char(mode));
+	errorcall(call, _("object of type '%s' is not subsettable"), type2char(mode));
     }
     UNPROTECT(1); /* result */
     return result;
@@ -240,31 +247,38 @@ SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
    type and vector type to happen outside the loop. Running through
    the indices in column-major order also improves cache locality. */
 
-#define MATRIX_SUBSET_LOOP(STDCODE, NACODE) do {		\
-	for (j = 0; j < ncs; j++) {				\
-	    jj = psc[j];					\
-	    if (jj != NA_INTEGER) {				\
-		if (jj < 1 || jj > nc)				\
-		    errorcall(call, R_MSG_subs_o_b);		\
-		jj--;						\
-	    }							\
-	    for (i = 0; i < nrs; i++) {				\
-		ii = psr[i];					\
-		if (ii != NA_INTEGER) {				\
-		    if (ii < 1 || ii > nr)			\
-			errorcall(call, R_MSG_subs_o_b);	\
-		    ii--;					\
-		}						\
-		ij = i + j * nrs;				\
-		if (ii == NA_INTEGER || jj == NA_INTEGER)	\
-		    NACODE;					\
-		else {						\
-		    iijj = ii + jj * nr;			\
-		    STDCODE;					\
-		}						\
-	    }							\
-	}							\
-    } while (0)
+#define MATRIX_SUBSET_LOOP(STDCODE, NACODE)                               \
+	do                                                                    \
+	{                                                                     \
+		for (j = 0; j < ncs; j++)                                         \
+		{                                                                 \
+			jj = psc[j];                                                  \
+			if (jj != NA_INTEGER)                                         \
+			{                                                             \
+				if (jj < 1 || jj > nc)                                    \
+					errorcall(call, _("subscript is out of bounds"));     \
+				jj--;                                                     \
+			}                                                             \
+			for (i = 0; i < nrs; i++)                                     \
+			{                                                             \
+				ii = psr[i];                                              \
+				if (ii != NA_INTEGER)                                     \
+				{                                                         \
+					if (ii < 1 || ii > nr)                                \
+						errorcall(call, _("subscript is out of bounds")); \
+					ii--;                                                 \
+				}                                                         \
+				ij = i + j * nrs;                                         \
+				if (ii == NA_INTEGER || jj == NA_INTEGER)                 \
+					NACODE;                                               \
+				else                                                      \
+				{                                                         \
+					iijj = ii + jj * nr;                                  \
+					STDCODE;                                              \
+				}                                                         \
+			}                                                             \
+		}                                                                 \
+	} while (0)
 
 static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 {
@@ -464,7 +478,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 		   point should be positive or NA_INTEGER, which is
 		   negative */
 		(jj < 1 && jj != NA_INTEGER))
-		errorcall(call, R_MSG_subs_o_b);
+		errorcall(call, _("subscript is out of bounds"));
 	}
 
     /* Transfer the subset elements from "x" to "a". */
@@ -819,7 +833,7 @@ HIDDEN SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for(px = x, i = 0 ; px != R_NilValue ; px = CDR(px))
 	    SET_VECTOR_ELT(ax, i++, CAR(px));
     }
-    else errorcall(call, R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+    else errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
     /* This is the actual subsetting code. */
     /* The separation of arrays and matrices is purely an optimization. */
@@ -989,7 +1003,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* back to the regular program */
     if (!(isVector(x) || isList(x) || isLanguage(x)))
-	errorcall(call, R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+	errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
 #ifndef SWITCH_TO_REFCNT
     int named_x;
@@ -1013,12 +1027,12 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    UNPROTECT(1); /* old x */
 		    PROTECT(x);
 		}
-		x = vectorIndex(x, thesub, 0, len-1, pok, call, TRUE);
+		x = vectorIndex(x, thesub, 0, len-1, pok, call, true);
 	    }
 	    else
-		x = vectorIndex(x, thesub, 0, len-1, pok, call, FALSE);
+		x = vectorIndex(x, thesub, 0, len-1, pok, call, false);
 #else
-	    x = vectorIndex(x, thesub, 0, len-1, pok, call, FALSE);
+	    x = vectorIndex(x, thesub, 0, len-1, pok, call, false);
 	    named_x = NAMED(x);
 #endif
 	    UNPROTECT(1); /* x */
@@ -1038,7 +1052,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		UNPROTECT(2); /* args, x */
 		return R_NilValue;
 	    }
-	    else errorcall(call, R_MSG_subs_o_b);
+	    else errorcall(call, _("subscript is out of bounds"));
 	}
     } else { /* nsubs == ndims >= 2 : matrix|array indexing */
 	/* Here we use the fact that: */
@@ -1060,7 +1074,7 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 			  pindx[i], pok, -1, call);
 	    subs = CDR(subs);
 	    if (pindx[i] < 0 || pindx[i] >= pdims[i])
-		errorcall(call, R_MSG_subs_o_b);
+		errorcall(call, _("subscript is out of bounds"));
 	}
 	offset = 0;
 	for (i = (nsubs - 1); i > 0; i--)
@@ -1172,7 +1186,7 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-HIDDEN SEXP fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+HIDDEN SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 
@@ -1389,7 +1403,7 @@ HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	errorcall(call, _("$ operator is invalid for atomic vectors"));
     }
     else /* e.g. a function */
-	errorcall(call, R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+	errorcall(call, _("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
     UNPROTECT(2); /* input, x */
     return R_NilValue;
 }

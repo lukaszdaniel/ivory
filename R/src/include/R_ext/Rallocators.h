@@ -29,9 +29,9 @@
 #define R_EXT_RALLOCATORS_H_
 
 #if defined(__cplusplus) && !defined(DO_NOT_USE_CXX_HEADERS)
-# include <cstddef>
+#include <cstddef>
 #else
-# include <stddef.h> /* for size_t */
+#include <stddef.h> /* for size_t */
 #endif
 
 /* R_allocator_t typedef is also declared in Rinternals.h 

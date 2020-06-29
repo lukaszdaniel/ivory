@@ -40,7 +40,7 @@ typedef void *(*DL_FUNC)();
 typedef unsigned int R_NativePrimitiveArgType;
 
 /* For interfaces to objects created with as.single */
-#define SINGLESXP 302
+//#define SINGLESXP 302 // moved to SEXPTYPE in Rinternals.h
 
 /*
  These are very similar to those in Rdynpriv.h,

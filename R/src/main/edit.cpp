@@ -23,7 +23,7 @@
 
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1	/* for Parse.h */
@@ -36,7 +36,7 @@
 
 #include <cstdio>
 #ifdef _WIN32
-# include "run.h"
+#include "run.h"
 int Rgui_Edit(char *filename, int enc, char *title, int modal);
 #endif
 
@@ -47,7 +47,7 @@ int Rgui_Edit(char *filename, int enc, char *title, int modal);
 
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>		/* for unlink() */
+#include <unistd.h>		/* for unlink() */
 #endif
 
 /*

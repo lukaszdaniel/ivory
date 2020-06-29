@@ -41,10 +41,12 @@
  *  promises requires that the promises be forced and
  *  the value duplicated.  */
 
-#define COPY_TRUELENGTH(to, from) do {			\
-	if (! IS_GROWABLE(from))			\
-	    SET_TRUELENGTH(to, XTRUELENGTH(from));	\
-    } while (0)
+#define COPY_TRUELENGTH(to, from)                  \
+	do                                             \
+	{                                              \
+		if (!IS_GROWABLE(from))                    \
+			SET_TRUELENGTH(to, XTRUELENGTH(from)); \
+	} while (0)
 
 /* This macro pulls out the common code in copying an atomic vector.
    The special handling of the scalar case (__n__ == 1) seems to make
@@ -53,51 +55,69 @@
 */
 #ifdef __APPLE__
 /* it seems macOS builds did not copy >= 2^32 bytes fully */
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep) do {	\
-  R_xlen_t __n__ = XLENGTH(from); \
-  PROTECT(from); \
-  PROTECT(to = allocVector(TYPEOF(from), __n__)); \
-  if (__n__ == 1) fun(to)[0] = fun(from)[0]; \
-  else { \
-      R_xlen_t __this; \
-      type *__to = fun(to), *__from = fun(from); \
-      do { \
-	 __this = (__n__ < 1000000) ? __n__ : 1000000; \
-	 memcpy(__to, __from, __this * sizeof(type));  \
-	 __n__ -= __this;  __to += __this; __from += __this; \
-      } while(__n__ > 0); \
-  } \
-  DUPLICATE_ATTRIB(to, from, deep);		 \
-  COPY_TRUELENGTH(to, from); \
-  UNPROTECT(2); \
-} while (0)
+#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
+	do                                                        \
+	{                                                         \
+		R_xlen_t __n__ = XLENGTH(from);                       \
+		PROTECT(from);                                        \
+		PROTECT(to = allocVector(TYPEOF(from), __n__));       \
+		if (__n__ == 1)                                       \
+			fun(to)[0] = fun(from)[0];                        \
+		else                                                  \
+		{                                                     \
+			R_xlen_t __this;                                  \
+			type *__to = fun(to), *__from = fun(from);        \
+			do                                                \
+			{                                                 \
+				__this = (__n__ < 1000000) ? __n__ : 1000000; \
+				memcpy(__to, __from, __this * sizeof(type));  \
+				__n__ -= __this;                              \
+				__to += __this;                               \
+				__from += __this;                             \
+			} while (__n__ > 0);                              \
+		}                                                     \
+		DUPLICATE_ATTRIB(to, from, deep);                     \
+		COPY_TRUELENGTH(to, from);                            \
+		UNPROTECT(2);                                         \
+	} while (0)
 #else
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep) do {	\
-  R_xlen_t __n__ = XLENGTH(from); \
-  PROTECT(from); \
-  PROTECT(to = allocVector(TYPEOF(from), __n__)); \
-  if (__n__ == 1) fun(to)[0] = fun(from)[0]; \
-  else memcpy(fun(to), fun(from), __n__ * sizeof(type)); \
-  DUPLICATE_ATTRIB(to, from, deep); \
-  COPY_TRUELENGTH(to, from); \
-  UNPROTECT(2); \
-} while (0)
+#define DUPLICATE_ATOMIC_VECTOR(type, fun, to, from, deep)    \
+	do                                                        \
+	{                                                         \
+		R_xlen_t __n__ = XLENGTH(from);                       \
+		PROTECT(from);                                        \
+		PROTECT(to = allocVector(TYPEOF(from), __n__));       \
+		if (__n__ == 1)                                       \
+			fun(to)[0] = fun(from)[0];                        \
+		else                                                  \
+			memcpy(fun(to), fun(from), __n__ * sizeof(type)); \
+		DUPLICATE_ATTRIB(to, from, deep);                     \
+		COPY_TRUELENGTH(to, from);                            \
+		UNPROTECT(2);                                         \
+	} while (0)
 #endif
 
 /* The following macros avoid the cost of going through calls to the
    assignment functions (and duplicate in the case of ATTRIB) when the
    ATTRIB or TAG value to be stored is R_NilValue, the value the field
    will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep)                                  \
-	do                                                                    \
-	{                                                                     \
-		SEXP __a__ = ATTRIB(from);                                        \
-		if (__a__ != R_NilValue)                                          \
-		{                                                                 \
-			SET_ATTRIB(to, duplicate1(__a__, deep));                      \
-			SET_OBJECT(to, OBJECT(from));                                 \
-			if(IS_S4_OBJECT(from)) {SET_S4_OBJECT(to);} else {UNSET_S4_OBJECT(to);}; \
-		}                                                                 \
+#define DUPLICATE_ATTRIB(to, from, deep)             \
+	do                                               \
+	{                                                \
+		SEXP __a__ = ATTRIB(from);                   \
+		if (__a__ != R_NilValue)                     \
+		{                                            \
+			SET_ATTRIB(to, duplicate1(__a__, deep)); \
+			SET_OBJECT(to, OBJECT(from));            \
+			if (IS_S4_OBJECT(from))                  \
+			{                                        \
+				SET_S4_OBJECT(to);                   \
+			}                                        \
+			else                                     \
+			{                                        \
+				UNSET_S4_OBJECT(to);                 \
+			};                                       \
+		}                                            \
 	} while (0)
 
 #define COPY_TAG(to, from)         \
@@ -136,8 +156,9 @@ HIDDEN void reset_duplicate_counter(void)
 }
 #endif
 
-SEXP Rf_duplicate(SEXP s){
-    SEXP t;
+SEXP Rf_duplicate(SEXP s)
+{
+	SEXP t;
 
 #ifdef R_PROFILING
     duplicate_counter++;
@@ -207,10 +228,13 @@ SEXP Rf_lazy_duplicate(SEXP s) {
     return s;
 }
 
-static SEXP duplicate_child(SEXP s, Rboolean deep) {
-    if (deep)
-	return duplicate1(s, TRUE);
-    else
+static SEXP duplicate_child(SEXP s, Rboolean deep)
+{
+	if (deep)
+	{
+		return duplicate1(s, TRUE);
+	}
+
 	return lazy_duplicate(s);
 }
 
@@ -441,9 +465,9 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
     }
 }
 
-R_INLINE static SEXP VECTOR_ELT_LD(SEXP x, R_xlen_t i)
+inline static SEXP VECTOR_ELT_LD(SEXP x, R_xlen_t i)
 {
-    return lazy_duplicate(VECTOR_ELT(x, i));
+    return Rf_lazy_duplicate(VECTOR_ELT(x, i));
 }
 
 void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
@@ -490,29 +514,34 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 	copyVector(s, t);
 }
 
-#define COPY_WITH_RECYCLE(VALTYPE, TNAME) \
-HIDDEN void \
-xcopy##TNAME##WithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) { \
-							\
-    if (nsrc >= n) { /* no recycle needed */		\
-	for(R_xlen_t i = 0; i < n; i++)		\
-	    dst[dstart + i] = src[i];			\
-	return;					\
-    }							\
-    if (nsrc == 1) {					\
-	VALTYPE val = src[0];				\
-	for(R_xlen_t i = 0; i < n; i++)			\
-	    dst[dstart + i] = val;			\
-	return;						\
-    }							\
-							\
-    /* recycle needed */					\
-    R_xlen_t sidx = 0;					\
-    for(R_xlen_t i = 0; i < n; i++, sidx++) {		\
-	if (sidx == nsrc) sidx = 0;			\
-	dst[dstart + i] = src[sidx];			\
-    }							\
-}
+#define COPY_WITH_RECYCLE(VALTYPE, TNAME)                                                                 \
+	HIDDEN void                                                                                           \
+		xcopy##TNAME##WithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) \
+	{                                                                                                     \
+                                                                                                          \
+		if (nsrc >= n)                                                                                    \
+		{ /* no recycle needed */                                                                         \
+			for (R_xlen_t i = 0; i < n; i++)                                                              \
+				dst[dstart + i] = src[i];                                                                 \
+			return;                                                                                       \
+		}                                                                                                 \
+		if (nsrc == 1)                                                                                    \
+		{                                                                                                 \
+			VALTYPE val = src[0];                                                                         \
+			for (R_xlen_t i = 0; i < n; i++)                                                              \
+				dst[dstart + i] = val;                                                                    \
+			return;                                                                                       \
+		}                                                                                                 \
+                                                                                                          \
+		/* recycle needed */                                                                              \
+		R_xlen_t sidx = 0;                                                                                \
+		for (R_xlen_t i = 0; i < n; i++, sidx++)                                                          \
+		{                                                                                                 \
+			if (sidx == nsrc)                                                                             \
+				sidx = 0;                                                                                 \
+			dst[dstart + i] = src[sidx];                                                                  \
+		}                                                                                                 \
+	}
 
 COPY_WITH_RECYCLE(Rcomplex, Complex)	/* xcopyComplexWithRecycle */
 COPY_WITH_RECYCLE(int, Integer)		/* xcopyIntegerWithRecycle */
@@ -520,41 +549,47 @@ COPY_WITH_RECYCLE(int, Logical)		/* xcopyLogicalWithRecycle */
 COPY_WITH_RECYCLE(Rbyte, Raw)		/* xcopyRawWithRecycle */
 COPY_WITH_RECYCLE(double, Real)		/* xcopyRealWithRecycle */
 
-#define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
-HIDDEN void \
-xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) { \
-							\
-    if (nsrc >= n) { /* no recycle needed */		\
-	for(R_xlen_t i = 0; i < n; i++)		\
-	    SETELT(dst, dstart + i, GETELT(src, i));	\
-	return;					\
-    }							\
-    if (nsrc == 1) {					\
-	SEXP val = GETELT(src, 0);			\
-	for(R_xlen_t i = 0; i < n; i++)			\
-	    SETELT(dst, dstart + i, val);		\
-	return;						\
-    }							\
-							\
-    /* recycle needed */					\
-    R_xlen_t sidx = 0;					\
-    for(R_xlen_t i = 0; i < n; i++, sidx++) {		\
-	if (sidx == nsrc) sidx = 0;			\
-	SETELT(dst, dstart + i, GETELT(src, sidx));	\
-    }							\
-}
+#define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                              \
+	HIDDEN void                                                                                   \
+		xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) \
+	{                                                                                             \
+                                                                                                  \
+		if (nsrc >= n)                                                                            \
+		{ /* no recycle needed */                                                                 \
+			for (R_xlen_t i = 0; i < n; i++)                                                      \
+				SETELT(dst, dstart + i, GETELT(src, i));                                          \
+			return;                                                                               \
+		}                                                                                         \
+		if (nsrc == 1)                                                                            \
+		{                                                                                         \
+			SEXP val = GETELT(src, 0);                                                            \
+			for (R_xlen_t i = 0; i < n; i++)                                                      \
+				SETELT(dst, dstart + i, val);                                                     \
+			return;                                                                               \
+		}                                                                                         \
+                                                                                                  \
+		/* recycle needed */                                                                      \
+		R_xlen_t sidx = 0;                                                                        \
+		for (R_xlen_t i = 0; i < n; i++, sidx++)                                                  \
+		{                                                                                         \
+			if (sidx == nsrc)                                                                     \
+				sidx = 0;                                                                         \
+			SETELT(dst, dstart + i, GETELT(src, sidx));                                           \
+		}                                                                                         \
+	}
 
 COPY_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT) /* xcopyStringWithRecycle */
 COPY_ELT_WITH_RECYCLE(Vector, VECTOR_ELT_LD, SET_VECTOR_ELT) /* xcopyVectorWithRecycle */
 
-#define FILL_WITH_RECYCLE(VALTYPE, TNAME) \
-HIDDEN void xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,	\
-    R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,		\
-    R_xlen_t cols, R_xlen_t nsrc) {				\
-								\
-    FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)	\
-	dst[didx] = src[sidx];					\
-}
+#define FILL_WITH_RECYCLE(VALTYPE, TNAME)                                                        \
+	HIDDEN void xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,                      \
+												R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, \
+												R_xlen_t cols, R_xlen_t nsrc)                    \
+	{                                                                                            \
+                                                                                                 \
+		FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)                                    \
+		dst[didx] = src[sidx];                                                                   \
+	}
 
 FILL_WITH_RECYCLE(Rcomplex, Complex)	/* xfillComplexMatrixWithRecycle */
 FILL_WITH_RECYCLE(int, Integer)		/* xfillIntegerMatrixWithRecycle */
@@ -562,14 +597,15 @@ FILL_WITH_RECYCLE(int, Logical)		/* xfillLogicalMatrixWithRecycle */
 FILL_WITH_RECYCLE(Rbyte, Raw)		/* xfillRawMatrixWithRecycle */
 FILL_WITH_RECYCLE(double, Real)		/* xfillRealMatrixWithRecycle */
 
-#define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
-HIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,	\
-    R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,		\
-    R_xlen_t cols, R_xlen_t nsrc) {				\
-								\
-    FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)	\
-	SETELT(dst, didx, GETELT(src, sidx));			\
-}
+#define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                             \
+	HIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,                              \
+												R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, \
+												R_xlen_t cols, R_xlen_t nsrc)                    \
+	{                                                                                            \
+                                                                                                 \
+		FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)                                    \
+		SETELT(dst, didx, GETELT(src, sidx));                                                    \
+	}
 
 FILL_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT) /* xfillStringMatrixWithRecycle */
 FILL_ELT_WITH_RECYCLE(Vector, VECTOR_ELT, SET_VECTOR_ELT) /* xfillVectorMatrixWithRecycle */

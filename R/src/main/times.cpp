@@ -76,18 +76,18 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
 #include <Internal.h>
 
-#include <time.h>
+#include <ctime>
 
 /* clock_gettime, timespec_get time are in <time.h> */
 #ifdef HAVE_SYS_TIME_H
 /* gettimeoday, including on Windows */
-# include <sys/time.h>
+#include <sys/time.h>
 #endif
 
 double Rf_currentTime(void)

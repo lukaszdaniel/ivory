@@ -35,7 +35,7 @@
 #include <R_ext/Minmax.h>
 #include <cerrno>
 #include <cctype>		/* for isspace */
-#include <stdarg.h>
+#include <cstdarg>
 #ifdef _WIN32
 #include <trioremap.h>
 #endif

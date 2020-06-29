@@ -71,28 +71,28 @@ typedef struct yyltype
   int last_byte;
 } yyltype;
 
-# define YYLTYPE yyltype
-# define YYLLOC_DEFAULT(Current, Rhs, N)				\
-    do									\
-	if (N)								\
-	{								\
-	  (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;	\
-	  (Current).first_column = YYRHSLOC (Rhs, 1).first_column;	\
-	  (Current).first_byte   = YYRHSLOC (Rhs, 1).first_byte;	\
-	  (Current).last_line    = YYRHSLOC (Rhs, N).last_line;		\
-	  (Current).last_column  = YYRHSLOC (Rhs, N).last_column;	\
-	  (Current).last_byte    = YYRHSLOC (Rhs, N).last_byte;		\
-	}								\
-      else								\
-	{								\
-	  (Current).first_line   = (Current).last_line   =		\
-	    YYRHSLOC (Rhs, 0).last_line;				\
-	  (Current).first_column = (Current).last_column =		\
-	    YYRHSLOC (Rhs, 0).last_column;				\
-	  (Current).first_byte   = (Current).last_byte =		\
-	    YYRHSLOC (Rhs, 0).last_byte;				\
-	}								\
-    while (0)
+#define YYLTYPE yyltype
+#define YYLLOC_DEFAULT(Current, Rhs, N)                       \
+  do                                                          \
+    if (N)                                                    \
+    {                                                         \
+      (Current).first_line = YYRHSLOC(Rhs, 1).first_line;     \
+      (Current).first_column = YYRHSLOC(Rhs, 1).first_column; \
+      (Current).first_byte = YYRHSLOC(Rhs, 1).first_byte;     \
+      (Current).last_line = YYRHSLOC(Rhs, N).last_line;       \
+      (Current).last_column = YYRHSLOC(Rhs, N).last_column;   \
+      (Current).last_byte = YYRHSLOC(Rhs, N).last_byte;       \
+    }                                                         \
+    else                                                      \
+    {                                                         \
+      (Current).first_line = (Current).last_line =            \
+          YYRHSLOC(Rhs, 0).last_line;                         \
+      (Current).first_column = (Current).last_column =        \
+          YYRHSLOC(Rhs, 0).last_column;                       \
+      (Current).first_byte = (Current).last_byte =            \
+          YYRHSLOC(Rhs, 0).last_byte;                         \
+    }                                                         \
+  while (0)
 
 /* Useful defines so editors don't get confused ... */
 
@@ -823,16 +823,22 @@ static int (*ptr_getc)(void);
 /* Private pushback, since file ungetc only guarantees one byte.
    We need arbitrarily large size, since this is how macros are expanded. */
 
-#define PUSH_BACK(c) do {                  \
-	if (npush >= pushsize - 1) {             \
-	    int *old = pushbase;              \
-            pushsize *= 2;                    \
-	    pushbase = static_cast<int*>(malloc(pushsize*sizeof(int)));         \
-	    if(!pushbase) error(_("unable to allocate buffer for long macro at line %d"), parseState.xxlineno);\
-	    memmove(pushbase, old, npush*sizeof(int));        \
-	    if(old != pushback) free(old); }	    \
-	pushbase[npush++] = (c);                        \
-} while(0)
+#define PUSH_BACK(c)                                                                          \
+  do                                                                                          \
+  {                                                                                           \
+    if (npush >= pushsize - 1)                                                                \
+    {                                                                                         \
+      int *old = pushbase;                                                                    \
+      pushsize *= 2;                                                                          \
+      pushbase = static_cast<int *>(malloc(pushsize * sizeof(int)));                          \
+      if (!pushbase)                                                                          \
+        error(_("unable to allocate buffer for long macro at line %d"), parseState.xxlineno); \
+      memmove(pushbase, old, npush * sizeof(int));                                            \
+      if (old != pushback)                                                                    \
+        free(old);                                                                            \
+    }                                                                                         \
+    pushbase[npush++] = (c);                                                                  \
+  } while (0)
 
 
 

@@ -1145,25 +1145,28 @@ constexpr int N_DDVAL_SYMBOLS = 65;
 
 static SEXP DDVALSymbols[N_DDVAL_SYMBOLS];
 
-static SEXP createDDVALSymbol(int n) {
+static SEXP createDDVALSymbol(int n)
+{
     char buf[15];
     snprintf(buf, 15, "..%d", n);
     return install(buf);
 }
 
-static void initializeDDVALSymbols() {
-    for(int i = 0; i < N_DDVAL_SYMBOLS; i++) {
-	DDVALSymbols[i] = createDDVALSymbol(i);
+static void initializeDDVALSymbols()
+{
+    for (int i = 0; i < N_DDVAL_SYMBOLS; i++)
+    {
+        DDVALSymbols[i] = createDDVALSymbol(i);
     }
 }
 
-HIDDEN SEXP Rf_installDDVAL(int n) {
+HIDDEN SEXP Rf_installDDVAL(int n)
+{
     if (n < N_DDVAL_SYMBOLS)
-	return DDVALSymbols[n];
+        return DDVALSymbols[n];
 
     return createDDVALSymbol(n);
 }
-
 
 static SEXP mkSymMarker(SEXP pname)
 {

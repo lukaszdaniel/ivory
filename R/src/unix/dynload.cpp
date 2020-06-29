@@ -39,7 +39,7 @@
 #endif
 
 #ifdef HAVE_DLFCN_H
-# include <dlfcn.h>
+#include <dlfcn.h>
 # define HAVE_DYNAMIC_LOADING
 #endif
 
@@ -55,7 +55,7 @@ static void getSystemError(char *buf, int len);
 
 static int computeDLOpenFlag(int asLocal, int now);
 
-HIDDEN void InitFunctionHashing()
+HIDDEN void Rf_InitFunctionHashing()
 {
     R_osDynSymbol->loadLibrary = loadLibrary;
     R_osDynSymbol->dlsym = R_local_dlsym;
@@ -98,11 +98,10 @@ static void closeLibrary(HINSTANCE handle)
 static void deleteCachedSymbols(DllInfo *dll)
 {
 #ifdef CACHE_DLL_SYM
-    int i;
     /* Wouldn't a linked list be easier here?
        Potentially ruin the contiguity of the memory.
     */
-    for(i = nCPFun - 1; i >= 0; i--)
+    for(int i = nCPFun - 1; i >= 0; i--)
 	if(!strcmp(CPFun[i].pkg, dll->name)) {
 	    if(i < nCPFun - 1) {
 		strcpy(CPFun[i].name, CPFun[--nCPFun].name);
@@ -146,10 +145,10 @@ static int computeDLOpenFlag(int asLocal, int now)
        or to control the emission via the options currently in effect at
        call time.
     */
-# define DL_WARN(i) \
-    if(asInteger(GetOption1(install("warn"))) == 1 || \
-       asInteger(GetOption1(install("verbose"))) > 0) \
-	warning(_(warningMessages[i]))
+#define DL_WARN(i)                                     \
+    if (asInteger(GetOption1(install("warn"))) == 1 || \
+        asInteger(GetOption1(install("verbose"))) > 0) \
+    warning(_(warningMessages[i]))
 #endif
 
     int openFlag = 0;		/* Default value so no-ops for undefined
@@ -197,7 +196,11 @@ static int computeDLOpenFlag(int asLocal, int now)
   If we were, this would need to use dlerror() before and after
   dlsym, and check the second value is NULL.
  */
-typedef union {void *p; DL_FUNC fn;} fn_ptr;
+union fn_ptr
+{
+    void *p;
+    DL_FUNC fn;
+};
 static DL_FUNC R_local_dlsym(DllInfo *info, char const *name)
 {
     fn_ptr tmp;

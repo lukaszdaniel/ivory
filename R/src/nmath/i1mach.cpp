@@ -51,6 +51,7 @@ HIDDEN int Rf_i1mach(int i)
     }
 }
 
+extern "C"
 int F77_NAME(i1mach)(int *i)
 {
     return Rf_i1mach(*i);

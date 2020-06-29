@@ -53,7 +53,7 @@
 #include <R_ext/Error.h>
 #include <R_ext/Minmax.h>
 #ifdef DEBUGpr
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
 #endif
 
 #include <R_ext/Visibility.h>

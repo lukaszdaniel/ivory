@@ -954,7 +954,7 @@ HIDDEN bool inherits2(SEXP x, const char *what) {
 	if(IS_S4_OBJECT(x))
 	    PROTECT(klass = R_data_class2(x));
 	else
-	    PROTECT(klass = R_data_class(x, FALSE));
+	    PROTECT(klass = R_data_class(x, false));
 	int nclass = length(klass);
 	for (int i = 0; i < nclass; i++) {
 	    if (streql(CHAR(STRING_ELT(klass, i)), what)) {
@@ -986,7 +986,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
     if(IS_S4_OBJECT(x))
 	PROTECT(klass = R_data_class2(x)); // -> := S4_extends( "class(x)" )
     else
-	PROTECT(klass = R_data_class(x, FALSE));
+	PROTECT(klass = R_data_class(x, false));
 
     if(!isString(what))
 	error(_("'%s' argument must be a character vector"), "what");
@@ -1800,7 +1800,7 @@ SEXP Rf_asS4(SEXP s, Rboolean flag, int complete)
 	    /* else no plausible S3 object*/
 	    else if(complete == 1) /* ordinary case (2, for conditional) */
 	      error(_("object of class \"%s\" does not correspond to a valid S3 object"),
-		      CHAR(STRING_ELT(R_data_class(s, FALSE), 0)));
+		      CHAR(STRING_ELT(R_data_class(s, false), 0)));
 	    else {
 		UNPROTECT(1);
 		return s; /*  unchanged */

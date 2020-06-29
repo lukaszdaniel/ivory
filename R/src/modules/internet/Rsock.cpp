@@ -177,9 +177,9 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 #  define EWOULDBLOCK             WSAEWOULDBLOCK
 # endif
 #else
-# include <netdb.h>
-# include <sys/socket.h>
-# include <netinet/in.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 #endif
 
 #ifdef HAVE_FCNTL_H

@@ -39,7 +39,7 @@
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE	RestoreAction = SA_RESTORE;
 static Rboolean LoadSiteFile = TRUE;
-HIDDEN Rboolean LoadInitFile = TRUE;  /* Used in R_OpenInitFile */
+HIDDEN bool LoadInitFile = true;  /* Used in R_OpenInitFile */
 static Rboolean DebugInitFile = FALSE;
 
 /*
@@ -282,7 +282,7 @@ void R_SetParams(Rstart Rp)
     RestoreAction = Rp->RestoreAction;
     SaveAction = Rp->SaveAction;
     LoadSiteFile = Rp->LoadSiteFile;
-    LoadInitFile = Rp->LoadInitFile;
+    LoadInitFile = bool(Rp->LoadInitFile);
     DebugInitFile = Rp->DebugInitFile;
     SetSize(Rp->vsize, Rp->nsize);
     R_SetMaxNSize(Rp->max_nsize);

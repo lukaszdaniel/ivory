@@ -806,7 +806,7 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "PCRE_use_JIT")) {
 		int use_JIT = asLogical(argi);
-		R_PCRE_use_JIT = (Rboolean) (use_JIT > 0); // NA_LOGICAL is < 0
+		R_PCRE_use_JIT = (use_JIT > 0); // NA_LOGICAL is < 0
 		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, ScalarLogical(R_PCRE_use_JIT)));
 	    }

@@ -1709,9 +1709,9 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 extern "C" {
 #ifndef _WIN32
 /* this is here solely to pull in xxxpr.o */
-# include <R_ext/RS.h>
+#include <R_ext/RS.h>
 # if defined FC_LEN_T
-# include <stddef.h>
+#include <cstddef>
 void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 HIDDEN void dummy54321(void)
 {

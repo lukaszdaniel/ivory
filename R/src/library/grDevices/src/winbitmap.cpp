@@ -38,7 +38,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <setjmp.h>
+#include <csetjmp>
 
 /* 8 bits red, green and blue channel */
 #define DECLARESHIFTS int RSHIFT=(bgr)?0:16, GSHIFT=8, BSHIFT=(bgr)?16:0

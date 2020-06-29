@@ -25,7 +25,7 @@
 #include <stdio.h>
 
 #if defined HAVE_LIMITS_H || _LIBC
-# include <limits.h>
+#include <limits.h>
 #endif
 
 /* The following contortions are an attempt to use the C preprocessor
@@ -36,7 +36,7 @@
    is usually not possible.  */
 
 #ifdef _LIBC
-# include <sys/types.h>
+#include <sys/types.h>
 typedef u_int32_t md5_uint32;
 #else
 # if defined __STDC__ && __STDC__

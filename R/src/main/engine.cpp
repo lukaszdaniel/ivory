@@ -30,7 +30,7 @@
 #include <R_ext/Minmax.h>
 #include <Rmath.h>
 
-# include <rlocale.h>
+#include <rlocale.h>
 
 using namespace std;
 

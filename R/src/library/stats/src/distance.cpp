@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <cfloat>
@@ -30,7 +30,7 @@
 #include "stats.h"
 #include "localization.h"
 #ifdef _OPENMP
-# include <R_ext/MathThreads.h>
+#include <R_ext/MathThreads.h>
 #endif
 
 #define both_FINITE(a,b) (R_FINITE(a) && R_FINITE(b))

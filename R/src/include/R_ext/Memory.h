@@ -30,10 +30,10 @@
 #define R_EXT_MEMORY_H_
 
 #if defined(__cplusplus) && !defined(DO_NOT_USE_CXX_HEADERS)
-# include <cstddef>
+#include <cstddef>
 # define R_SIZE_T std::size_t
 #else
-# include <stddef.h> /* for size_t */
+#include <stddef.h> /* for size_t */
 # define R_SIZE_T size_t
 #endif
 

@@ -70,7 +70,7 @@
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -101,11 +101,11 @@ static void con_destroy(int i);
 #include <cerrno>
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifdef HAVE_FCNTL_H
-# include <fcntl.h>
+#include <fcntl.h>
 /* Solaris and AIX define open as open64 under some circumstances */
 # undef open
 /* AIX defines truncate as truncate64 under some circumstances */
@@ -113,7 +113,7 @@ static void con_destroy(int i);
 #endif
 
 #ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
+#include <sys/stat.h>
 #endif
 
 /* This works on Win64 where long is 4 bytes but long long is 8 bytes. */
@@ -126,7 +126,7 @@ typedef long long int _lli_t;
 /* Win32 does have popen, but it does not work in GUI applications,
    so test that later */
 #ifdef _WIN32
-# include <Startup.h>
+#include <Startup.h>
 #endif
 
 constexpr int NCONNECTIONS = 128; /* snow needs one per no-echo node */
@@ -1047,10 +1047,10 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
 #if defined(HAVE_MKFIFO) && defined(HAVE_FCNTL_H)
 
 #ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
+#include <sys/types.h>
 #endif
 
-# include <cerrno>
+#include <cerrno>
 
 typedef struct fifoconn {
     int fd;
@@ -2681,8 +2681,8 @@ static Rconnection newterminal(const char *description, const char *mode)
     }
     init_con(newconn, description, CE_NATIVE, mode);
     newconn->isopen = TRUE;
-    newconn->canread = streql(mode, "r");
-    newconn->canwrite = streql(mode, "w");
+    newconn->canread = Rboolean(streql(mode, "r"));
+    newconn->canwrite = Rboolean(streql(mode, "w"));
     newconn->destroy = &null_close;
     newconn->connprivate = NULL;
     return newconn;
@@ -5219,7 +5219,7 @@ void WinCheckUTF8(void)
 	WinUTF8out = (SinkCons[R_SinkNumber] == 1 ||
 	              SinkCons[R_SinkNumber] == 2) && localeCP != 65001;
     else
-	WinUTF8out = FALSE;
+	WinUTF8out = false;
 }
 #endif
 

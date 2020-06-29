@@ -69,7 +69,7 @@ extern void R_FlushConsole(void);
 // ../../include/R_ext/R-ftp-http.h :
 #include <R_ext/R-ftp-http.h>
 #ifdef _WIN32
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
 #endif
 
 #ifdef HAVE_STRINGS_H
@@ -86,9 +86,9 @@ extern void R_FlushConsole(void);
 #endif
 
 #ifdef Unix
-# include <netdb.h>
-# include <sys/socket.h>
-# include <netinet/in.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 #endif
 
 extern struct hostent *R_gethostbyname(const char *name);
@@ -166,7 +166,7 @@ static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 /* where strncasecmp is defined seems system-specific,
    and on Windows the cross-compiler doesn't find strings.h */
 #if defined(HAVE_STRINGS_H) && !defined(_WIN32)
-# include <strings.h>
+#include <strings.h>
 #endif
 #if !defined(strncasecmp) && defined(HAVE_DECL_STRNCASECMP) && !HAVE_DECL_STRNCASECMP
 extern int strncasecmp(const char *s1, const char *s2, size_t n);
@@ -238,7 +238,7 @@ static int socket_errno(void)
  */
 
 #ifdef _WIN32
-# include "graphapp.h"
+#include "graphapp.h"
 #endif
 
 static void RxmlNanoHTTPInit(void)

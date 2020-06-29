@@ -19,7 +19,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include "localization.h"
@@ -31,7 +31,7 @@
 #include <R_ext/Utils.h>	/* rPsort() */
 #include <R_ext/Minmax.h>
 #ifdef DEBUG_lowess
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
 #endif
 
 using namespace std;

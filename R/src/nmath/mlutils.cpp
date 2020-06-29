@@ -18,7 +18,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 # undef fprintf
 #endif
 #include "nmath.h"
@@ -108,7 +108,7 @@ double NA_REAL = ML_NAN;
 double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 #include <cstdio>
-#include <stdarg.h>
+#include <cstdarg>
 HIDDEN void REprintf(const char *format, ...)
 {
     va_list(ap);

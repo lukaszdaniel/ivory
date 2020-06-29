@@ -27,12 +27,12 @@
 #define R_RS_H
 
 #if defined(__cplusplus) && !defined(DO_NOT_USE_CXX_HEADERS)
-# include <cstring>
-# include <cstddef>
+#include <cstring>
+#include <cstddef>
 # define R_SIZE_T std::size_t
 #else
-# include <string.h>		/* for memcpy, memset */
-# include <stddef.h> /* for size_t */
+#include <string.h>		/* for memcpy, memset */
+#include <stddef.h> /* for size_t */
 # define R_SIZE_T size_t
 #endif
 

@@ -62,13 +62,13 @@ extern "C" void R_ProcessEvents(void);
 #include <cstdlib>
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifdef Unix
-# include <netdb.h>
-# include <sys/socket.h>
-# include <netinet/in.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 #endif
 
 #ifdef HAVE_FCNTL_H

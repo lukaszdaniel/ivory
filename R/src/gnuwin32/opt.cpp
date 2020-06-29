@@ -27,7 +27,7 @@
 #include <Fileio.h>
 
 #ifndef MAX_PATH
-# include <windows.h>
+#include <windows.h>
 #endif
 
 

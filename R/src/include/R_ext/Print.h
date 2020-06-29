@@ -38,7 +38,7 @@
 # endif
 extern "C" {
 #else
-# include <stdarg.h>
+#include <stdarg.h>
 # define R_VA_LIST va_list
 #endif
 

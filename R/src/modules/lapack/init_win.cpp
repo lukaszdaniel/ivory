@@ -27,7 +27,7 @@
 #endif
 
 #ifdef _WIN32
-# include <fcntl.h>
+#include <fcntl.h>
 
 static void __attribute__((constructor))
 init(void)

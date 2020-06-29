@@ -20,7 +20,7 @@
 
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -87,13 +87,13 @@ static bool R_Profiling = false;
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN 1
-# include <windows.h>		/* for CreateEvent, SetEvent */
-# include <process.h>		/* for _beginthread, _endthread */
+#include <windows.h>		/* for CreateEvent, SetEvent */
+#include <process.h>		/* for _beginthread, _endthread */
 #else
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <csignal>
+#include <csignal>
 #endif /* not Win32 */
 
 static FILE *R_ProfileOutfile = NULL;
@@ -180,7 +180,7 @@ static void lineprof(char* buf, SEXP srcref)
 #if !defined(Win32) && defined(HAVE_PTHREAD)
 // <csignal> is needed for pthread_kill on most platforms (and by POSIX
 //  but apparently not FreeBSD): it is included above.
-# include <pthread.h>
+#include <pthread.h>
 static pthread_t R_profiled_thread;
 #endif
 
@@ -3703,7 +3703,7 @@ bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;
     SEXP rclass, rmeth, rgr, rsxp, value;
     const char *generic;
-    Rboolean useS4 = TRUE, isOps = FALSE;
+    bool useS4 = true, isOps = false;
 
     /* pre-test to avoid string computations when there is nothing to
        dispatch on because either there is only one argument and it
@@ -3718,9 +3718,9 @@ bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
     isOps = streql(group, "Ops");
 
     /* try for formal method */
-    if(length(args) == 1 && !IS_S4_OBJECT(CAR(args))) useS4 = FALSE;
+    if(length(args) == 1 && !IS_S4_OBJECT(CAR(args))) useS4 = false;
     if(length(args) == 2 &&
-       !IS_S4_OBJECT(CAR(args)) && !IS_S4_OBJECT(CADR(args))) useS4 = FALSE;
+       !IS_S4_OBJECT(CAR(args)) && !IS_S4_OBJECT(CADR(args))) useS4 = false;
     if(useS4) {
 	/* Remove argument names to ensure positional matching */
 	if(isOps)

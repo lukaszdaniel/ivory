@@ -21,7 +21,7 @@
 /* See ../unix/system.txt for a description of functions */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -44,7 +44,7 @@
 #include <process.h>		/* for _beginthread,... */
 #include <io.h>			/* for isatty, chdir */
 #ifdef _MSC_VER  /* for chdir */
-# include <direct.h>
+#include <direct.h>
 #endif
 #include "run.h"
 #include "Startup.h"
@@ -533,7 +533,7 @@ extern FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 int R_ShowFiles(int nfile, const char **file, const char **headers,
-		const char *wtitle, Rboolean del, const char *pager)
+		const char *wtitle, bool del, const char *pager)
 {
     int   i, ll;
     char  buf[1024];

@@ -38,7 +38,7 @@
 #endif
 
 /* interval at which to check interrupts */
-constexpr R_xlen_t NINTERRUPT = 10000000;
+// constexpr R_xlen_t NINTERRUPT = 10000000;
 
 /* This section of code handles type conversion for elements */
 /* of data vectors.  Type coercion throughout R should use these */
@@ -302,10 +302,11 @@ HIDDEN Rcomplex Rf_ComplexFromString(SEXP x, int *warn)
 
 HIDDEN SEXP Rf_StringFromLogical(int x, int *warn)
 {
-    int w;
-    formatLogical(&x, 1, &w);
-    if (x == NA_LOGICAL) return NA_STRING;
-    else return mkChar(EncodeLogical(x, w));
+	int w;
+	formatLogical(&x, 1, &w);
+	if (x == NA_LOGICAL)
+		return NA_STRING;
+	return mkChar(EncodeLogical(x, w));
 }
 
 /* The conversions for small non-negative integers are saved in a chache. */
@@ -340,19 +341,19 @@ HIDDEN SEXP Rf_StringFromInteger(int x, int *warn)
 
 HIDDEN SEXP Rf_StringFromComplex(Rcomplex x, int *warn)
 {
-    int wr, dr, er, wi, di, ei;
-    formatComplex(&x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
-    if (ISNA(x.r) || ISNA(x.i)) // "NA" if Re or Im is (but not if they're just NaN)
-	return NA_STRING;
-    else /* EncodeComplex has its own anti-trailing-0 care :*/
+	int wr, dr, er, wi, di, ei;
+	formatComplex(&x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
+	if (ISNA(x.r) || ISNA(x.i)) // "NA" if Re or Im is (but not if they're just NaN)
+		return NA_STRING;
+	/* EncodeComplex has its own anti-trailing-0 care :*/
 	return mkChar(EncodeComplex(x, wr, dr, er, wi, di, ei, OutDec));
 }
 
 static SEXP StringFromRaw(Rbyte x, int *warn)
 {
-    char buf[3];
-    sprintf(buf, "%02x", x);
-    return mkChar(buf);
+	char buf[3];
+	sprintf(buf, "%02x", x);
+	return mkChar(buf);
 }
 
 /* Conversion between the two list types (LISTSXP and VECSXP). */
@@ -1256,11 +1257,6 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
     case STRSXP:
     case RAWSXP:
 
-#define COERCE_ERROR_STRING _("cannot coerce type '%s' to vector of type '%s'")
-
-#define COERCE_ERROR							\
-	error(COERCE_ERROR_STRING, type2char(TYPEOF(v)), type2char(type))
-
 	switch (type) {
 	case SYMSXP:
 	    ans = coerceToSymbol(v);	    break;
@@ -1291,15 +1287,14 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
 	case LISTSXP:
 	    ans = coerceToPairList(v);	    break;
 	default:
-	    COERCE_ERROR;
+	    error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(TYPEOF(v)), type2char(type));
 	}
 	break;
     default:
-	COERCE_ERROR;
+	error(_("cannot coerce type '%s' to vector of type '%s'"), type2char(TYPEOF(v)), type2char(type));
     }
     return ans;
 }
-#undef COERCE_ERROR
 
 
 SEXP Rf_CreateTag(SEXP x)
@@ -1385,7 +1380,7 @@ static SEXP ascommon(SEXP call, SEXP u, SEXPTYPE type)
 	SET_VECTOR_ELT(v, 0, u);
 	return v;
     }
-    else errorcall(call, _(COERCE_ERROR_STRING),
+    else errorcall(call, _("cannot coerce type '%s' to vector of type '%s'"),
 		   type2char(TYPEOF(u)), type2char(type));
     return u;/* -Wall */
 }
@@ -1394,7 +1389,7 @@ HIDDEN SEXP do_asCharacterFactor(SEXP call, SEXP op, SEXP args,
                                            SEXP rho)
 {
     SEXP x;
-    checkArity(op, args);
+    Rf_checkArityCall(op, args, call);
     check1arg(args, call, "x");
     x = CAR(args);
     return asCharacterFactor(x);
@@ -1617,11 +1612,12 @@ HIDDEN SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
     return args;
 }
 
-typedef struct parse_info {
-    Rconnection con;
-    Rboolean old_latin1;
-    Rboolean old_utf8;
-}  parse_cleanup_info;
+struct parse_cleanup_info
+{
+	Rconnection con;
+	bool old_latin1;
+	bool old_utf8;
+};
 
 static void parse_cleanup(void *data)
 {
@@ -2965,7 +2961,7 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
 	int whichType = class2type(valueString);
 	SEXPTYPE valueType = (whichType == -1) ? (SEXPTYPE) -1
 	    : classTable[whichType].sexp;
-	// SEXP cur_class = PROTECT(R_data_class(obj, FALSE)); nProtect++;
+	// SEXP cur_class = PROTECT(R_data_class(obj, false)); nProtect++;
 	/*  assigning type as a class deletes an explicit class attribute. */
 	if(valueType != (SEXPTYPE)-1) {
 	    setAttrib(obj, R_ClassSymbol, R_NilValue);

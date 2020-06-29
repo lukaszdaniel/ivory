@@ -31,7 +31,7 @@
 /* select() is essential here, but configure has required it */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -58,7 +58,7 @@
 #undef __SYSTEM__
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>		/* for unlink */
+#include <unistd.h>		/* for unlink */
 #endif
 
 extern SA_TYPE SaveAction;
@@ -472,7 +472,7 @@ InputHandler *getSelectedHandler(InputHandler *handlers, fd_set *readMask)
    rl_sort_completion_matches (>= 6.0)
  */
 
-# include <readline/readline.h>
+#include <readline/readline.h>
 
 /* For compatibility with pre-readline-4.2 systems, 
    also missing in Apple's emulation via the NetBSD editline library.*/
@@ -1247,7 +1247,7 @@ HIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
  *  7) PLATFORM DEPENDENT FUNCTIONS
  */
 
-# include <cerrno>
+#include <cerrno>
 
 HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 	       const char **file,		/* array of filenames */
@@ -1255,7 +1255,7 @@ HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 					   Printed before each file. */
 	       const char *wtitle,	/* title for window
 					   = `title' arg of file.show */
-	       Rboolean del,	/* should files be deleted after use? */
+	       bool del,	/* should files be deleted after use? */
 	       const char *pager)		/* pager to be used */
 
 {

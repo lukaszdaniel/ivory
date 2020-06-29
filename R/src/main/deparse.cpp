@@ -566,7 +566,7 @@ static bool curlyahead(SEXP s)
    mainop is a unary or binary operator,
    arg is an argument to it, on the left if left == 1 */
 
-static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left)
+static bool needsparens(PPinfo mainop, SEXP arg, bool left)
 {
     PPinfo arginfo;
     if (TYPEOF(arg) == LANGSXP) {
@@ -611,7 +611,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left)
 		case PP_IF:
 		case PP_WHILE:
 		case PP_REPEAT:
-		    return (left == 1);
+		    return left;
 		    break;
 		default:
 		    return false;
@@ -886,13 +886,14 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
 	    UNPROTECT(2); // (e, cl_def)
 	    int n;
-	    Rboolean has_Data = FALSE;// does it have ".Data" slot?
+	    bool has_Data = false;// does it have ".Data" slot?
 	    if(TYPEOF(slotNms) == STRSXP && (n = LENGTH(slotNms))) {
 		PROTECT(slotNms);
 		SEXP slotlist = PROTECT(allocVector(VECSXP, n));
 		// := structure(lapply(slotNms, slot, object=s), names=slotNms)
-		for(int i=0; i < n; i++) {
-		    SEXP slot_i = STRING_ELT(slotNms, i);
+		for (int i = 0; i < n; i++)
+		{
+			SEXP slot_i = STRING_ELT(slotNms, i);
 		    SET_VECTOR_ELT(slotlist, i, R_do_slot(s, installTrChar(slot_i)));
 		    if(!hasS4_t && !has_Data)
 			has_Data = streql(CHAR(slot_i), ".Data");
@@ -1200,7 +1201,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    print2buff(")", d);
 		    break;
 		case PP_SUBSET:
-		    if ((parens = needsparens(fop, CAR(s), 1)))
+		    if ((parens = needsparens(fop, CAR(s), true)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)
@@ -1258,7 +1259,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    Rboolean outerparens = (Rboolean) (fnarg && streql(CHAR(PRINTNAME(op)), "="));
 		    if (outerparens)
 		    	print2buff("(", d);
-		    if ((parens = needsparens(fop, CAR(s), 1)))
+		    if ((parens = needsparens(fop, CAR(s), true)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)
@@ -1266,7 +1267,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    print2buff(" ", d);
 		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
 		    print2buff(" ", d);
-		    if ((parens = needsparens(fop, CADR(s), 0)))
+		    if ((parens = needsparens(fop, CADR(s), false)))
 			print2buff("(", d);
 		    deparse2buff(CADR(s), d);
 		    if (parens)
@@ -1276,7 +1277,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    break;
 		}
 		case PP_DOLLAR:
-		    if ((parens = needsparens(fop, CAR(s), 1)))
+		    if ((parens = needsparens(fop, CAR(s), true)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)
@@ -1287,7 +1288,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 			isValidName(CHAR(STRING_ELT(CADR(s), 0))))
 			deparse2buff(STRING_ELT(CADR(s), 0), d);
 		    else {
-			if ((parens = needsparens(fop, CADR(s), 0)))
+			if ((parens = needsparens(fop, CADR(s), false)))
 			    print2buff("(", d);
 			deparse2buff(CADR(s), d);
 			if (parens)
@@ -1295,7 +1296,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    }
 		    break;
 		case PP_BINARY:
-		    if ((parens = needsparens(fop, CAR(s), 1)))
+		    if ((parens = needsparens(fop, CAR(s), true)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)
@@ -1304,7 +1305,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
 		    print2buff(" ", d);
 		    linebreak(lbreak, d);
-		    if ((parens = needsparens(fop, CADR(s), 0)))
+		    if ((parens = needsparens(fop, CADR(s), false)))
 			print2buff("(", d);
 		    deparse2buff(CADR(s), d);
 		    if (parens)
@@ -1315,13 +1316,13 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    }
 		    break;
 		case PP_BINARY2:	/* no space between op and args */
-		    if ((parens = needsparens(fop, CAR(s), 1)))
+		    if ((parens = needsparens(fop, CAR(s), true)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)
 			print2buff(")", d);
 		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
-		    if ((parens = needsparens(fop, CADR(s), 0)))
+		    if ((parens = needsparens(fop, CADR(s), false)))
 			print2buff("(", d);
 		    deparse2buff(CADR(s), d);
 		    if (parens)
@@ -1329,7 +1330,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    break;
 		case PP_UNARY:
 		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
-		    if ((parens = needsparens(fop, CAR(s), 0)))
+		    if ((parens = needsparens(fop, CAR(s), false)))
 			print2buff("(", d);
 		    deparse2buff(CAR(s), d);
 		    if (parens)

@@ -85,7 +85,7 @@ typedef int R_len_t;
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
 #ifndef R_CONFIG_H
-# include <Rconfig.h>
+#include <Rconfig.h>
 #endif
 
 #if (SIZEOF_SIZE_T > 4)
@@ -176,82 +176,81 @@ typedef unsigned int SEXPTYPE;
 #define FREESXP 31 /* node released by GC */
 
 #define intCHARSXP 73
-#define FUNSXP 99 /* Closure or Builtin or Special */
+#define SINGLESXP 74 /* For interfaces to objects created with as.single */
+#define FUNSXP 99    /* Closure or Builtin or Special */
 #define ALTREP_SXP 238
 #define ATTRLISTSXP 239
 #define ATTRLANGSXP 240
-#define REFSXP 255
-#define NILVALUE_SXP 254
-#define GLOBALENV_SXP 253
-#define UNBOUNDVALUE_SXP 252
-#define MISSINGARG_SXP 251
-#define BASENAMESPACE_SXP 250
-#define NAMESPACESXP 249
-#define PACKAGESXP 248
-#define PERSISTSXP 247
-/* the following are speculative--we may or may not need them soon */
-#define CLASSREFSXP 246
-#define GENERICREFSXP 245
-#define BCREPDEF 244
-#define BCREPREF 243
-#define EMPTYENV_SXP 242
+/* the following (241 - 246) are speculative--we may or may not need them soon */
 #define BASEENV_SXP 241
-// #define SINGLESXP 302
-
+#define EMPTYENV_SXP 242
+#define BCREPREF 243
+#define BCREPDEF 244
+#define GENERICREFSXP 245
+#define CLASSREFSXP 246
+#define PERSISTSXP 247
+#define PACKAGESXP 248
+#define NAMESPACESXP 249
+#define BASENAMESPACE_SXP 250
+#define MISSINGARG_SXP 251
+#define UNBOUNDVALUE_SXP 252
+#define GLOBALENV_SXP 253
+#define NILVALUE_SXP 254
+#define REFSXP 255
 #else /* NOT YET */
-    /*------ enum_SEXPTYPE ----- */
-    typedef enum
-    {
-        NILSXP = 0,      /* nil = NULL */
-        SYMSXP = 1,      /* symbols */
-        LISTSXP = 2,     /* lists of dotted pairs */
-        CLOSXP = 3,      /* closures */
-        ENVSXP = 4,      /* environments */
-        PROMSXP = 5,     /* promises: [un]evaluated closure arguments */
-        LANGSXP = 6,     /* language constructs (special lists) */
-        SPECIALSXP = 7,  /* special forms */
-        BUILTINSXP = 8,  /* builtin non-special forms */
-        CHARSXP = 9,     /* "scalar" string type (internal only)*/
-        LGLSXP = 10,     /* logical vectors */
-        INTSXP = 13,     /* integer vectors */
-        REALSXP = 14,    /* real variables */
-        CPLXSXP = 15,    /* complex variables */
-        STRSXP = 16,     /* string vectors */
-        DOTSXP = 17,     /* dot-dot-dot object */
-        ANYSXP = 18,     /* make "any" args work */
-        VECSXP = 19,     /* generic vectors */
-        EXPRSXP = 20,    /* expressions vectors */
-        BCODESXP = 21,   /* byte code */
-        EXTPTRSXP = 22,  /* external pointer */
-        WEAKREFSXP = 23, /* weak reference */
-        RAWSXP = 24,     /* raw bytes */
-        S4SXP = 25,      /* S4 non-vector */
+/*------ enum_SEXPTYPE ----- */
+typedef enum
+{
+    NILSXP = 0,      /* nil = NULL */
+    SYMSXP = 1,      /* symbols */
+    LISTSXP = 2,     /* lists of dotted pairs */
+    CLOSXP = 3,      /* closures */
+    ENVSXP = 4,      /* environments */
+    PROMSXP = 5,     /* promises: [un]evaluated closure arguments */
+    LANGSXP = 6,     /* language constructs (special lists) */
+    SPECIALSXP = 7,  /* special forms */
+    BUILTINSXP = 8,  /* builtin non-special forms */
+    CHARSXP = 9,     /* "scalar" string type (internal only)*/
+    LGLSXP = 10,     /* logical vectors */
+    INTSXP = 13,     /* integer vectors */
+    REALSXP = 14,    /* real variables */
+    CPLXSXP = 15,    /* complex variables */
+    STRSXP = 16,     /* string vectors */
+    DOTSXP = 17,     /* dot-dot-dot object */
+    ANYSXP = 18,     /* make "any" args work */
+    VECSXP = 19,     /* generic vectors */
+    EXPRSXP = 20,    /* expressions vectors */
+    BCODESXP = 21,   /* byte code */
+    EXTPTRSXP = 22,  /* external pointer */
+    WEAKREFSXP = 23, /* weak reference */
+    RAWSXP = 24,     /* raw bytes */
+    S4SXP = 25,      /* S4 non-vector */
 
-        NEWSXP = 30,  /* fresh node created in new page */
-        FREESXP = 31, /* node released by GC */
-        intCHARSXP = 73,
-        FUNSXP = 99, /* Closure or Builtin */
-        ALTREP_SXP = 238,
-        ATTRLISTSXP = 239,
-        ATTRLANGSXP = 240,
-        /* the following (241 - 246) are speculative--we may or may not need them soon */
-        BASEENV_SXP = 241,
-        EMPTYENV_SXP = 242,
-        BCREPREF = 243,
-        BCREPDEF = 244,
-        GENERICREFSXP = 245,
-        CLASSREFSXP = 246,
-        PERSISTSXP = 247,
-        PACKAGESXP = 248,
-        NAMESPACESXP = 249,
-        BASENAMESPACE_SXP = 250,
-        MISSINGARG_SXP = 251,
-        UNBOUNDVALUE_SXP = 252,
-        GLOBALENV_SXP = 253,
-        NILVALUE_SXP = 254,
-        REFSXP = 255
-// SINGLESXP = 302        
-    } SEXPTYPE;
+    NEWSXP = 30,  /* fresh node created in new page */
+    FREESXP = 31, /* node released by GC */
+    SINGLESXP = 47, /* For interfaces to objects created with as.single */
+    intCHARSXP = 73,
+    FUNSXP = 99,    /* Closure or Builtin */
+    ALTREP_SXP = 238,
+    ATTRLISTSXP = 239,
+    ATTRLANGSXP = 240,
+    /* the following (241 - 246) are speculative--we may or may not need them soon */
+    BASEENV_SXP = 241,
+    EMPTYENV_SXP = 242,
+    BCREPREF = 243,
+    BCREPDEF = 244,
+    GENERICREFSXP = 245,
+    CLASSREFSXP = 246,
+    PERSISTSXP = 247,
+    PACKAGESXP = 248,
+    NAMESPACESXP = 249,
+    BASENAMESPACE_SXP = 250,
+    MISSINGARG_SXP = 251,
+    UNBOUNDVALUE_SXP = 252,
+    GLOBALENV_SXP = 253,
+    NILVALUE_SXP = 254,
+    REFSXP = 255
+} SEXPTYPE;
 #endif
 
 /* These are also used with the write barrier on, in attrib.cpp and util.cpp */
@@ -291,10 +290,6 @@ typedef struct SEXPREC *SEXP;
 struct sxpinfo_struct
 {
     SEXPTYPE type : FULL_TYPE_BITS;
-    /* ==> (FUNSXP == 99) %% 2^5 == 3 == CLOSXP
-			     * -> warning: `type' is narrower than values
-			     *              of its type
-			     * when SEXPTYPE was an enum */
     unsigned int scalar : 1;
     unsigned int obj : 1;
     unsigned int alt : 1;
@@ -371,7 +366,8 @@ typedef struct SEXPREC
     struct SEXPREC *attrib;
     struct SEXPREC *gengc_next_node;
     struct SEXPREC *gengc_prev_node;
-    union {
+    union
+    {
         struct primsxp_struct primsxp;
         struct symsxp_struct symsxp;
         struct listsxp_struct listsxp;
@@ -396,7 +392,8 @@ typedef struct VECTOR_SEXPREC
 } VECTOR_SEXPREC;
 typedef struct VECTOR_SEXPREC *VECSEXP;
 
-typedef union {
+typedef union
+{
     VECTOR_SEXPREC s;
     double align;
 } SEXPREC_ALIGN;
@@ -637,7 +634,9 @@ typedef union {
 #define CDDDR(e)	CDR(CDDR(e))
 #define CADDR(e)	CAR(CDDR(e))
 #define CADDDR(e)	CAR(CDR(CDDR(e)))
+#define CAD3R(e)	CAR(CDR(CDDR(e)))
 #define CAD4R(e)	CAR(CDDR(CDDR(e)))
+#define CAD5R(e)	CAR(CDR(CDR(CDR(CDR(CDR(e))))))
 #define MISSING_MASK	((1 << 4) - 1) // = 15 /* reserve 4 bits--only 2 uses now */
 #define MISSING(x)	((x)->sxpinfo.gp & MISSING_MASK)/* for closure calls */
 #define SET_MISSING(x, v)                                        \
@@ -682,7 +681,8 @@ typedef union {
    value.  More efficient, but changes the menory layout on 32 bit
    platforms since the size of the union is larger than the size of a
    pointer. The layout should not change on 64 bit platforms. */
-typedef union {
+typedef union
+{
     SEXP sxpval;
     double dval;
     int ival;

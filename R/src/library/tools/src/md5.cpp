@@ -24,8 +24,8 @@
 #include <Rconfig.h>
 #include <sys/types.h>
 
-# include <cstdlib>
-# include <cstring>
+#include <cstdlib>
+#include <cstring>
 
 #include "md5.h"
 

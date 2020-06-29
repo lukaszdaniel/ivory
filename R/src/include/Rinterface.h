@@ -37,10 +37,10 @@
 
 #ifdef __cplusplus
 /* we do not support DO_NOT_USE_CXX_HEADERS in this file */
-# include <cstdio>
+#include <cstdio>
 extern "C" {
 #else
-# include <stdio.h>
+#include <stdio.h>
 #endif
 
 #include <R_ext/Visibility.h>
@@ -146,7 +146,7 @@ extern void (*ptr_R_ClearerrConsole)(void);
 extern void (*ptr_R_Busy)(int);
 extern void (*ptr_R_CleanUp)(SA_TYPE, int, int);
 extern int  (*ptr_R_ShowFiles)(int, const char **, const char **,
-			       const char *, Rboolean, const char *);
+			       const char *, bool, const char *);
 extern size_t  (*ptr_R_ChooseFile)(int, char *, size_t);
 extern int  (*ptr_R_EditFile)(const char *);
 extern void (*ptr_R_loadhistory)(SEXP, SEXP, SEXP, SEXP);

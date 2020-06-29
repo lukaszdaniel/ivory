@@ -47,10 +47,10 @@
  */
 
 #ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
+#include <sys/types.h>
 #endif
 #ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
+#include <sys/stat.h>
 #endif
 
 static int isDir(const char *path);
@@ -306,7 +306,7 @@ FILE *R_popen(const char *command, const char *type)
 }
 
 #ifdef HAVE_SYS_WAIT_H
-# include <sys/wait.h>
+#include <sys/wait.h>
 #endif
 
 int R_system(const char *command)
@@ -349,7 +349,7 @@ int R_system(const char *command)
 }
 
 #if defined(__APPLE__)
-# include <crt_externs.h>
+#include <crt_externs.h>
 #define environ (*_NSGetEnviron())
 #else
 extern "C" char ** environ;
@@ -358,7 +358,7 @@ extern "C" char ** environ;
 #ifdef _WIN32
 /* _wenviron is declared in cstdlib */
 #define WIN32_LEAN_AND_MEAN 1
-# include <windows.h> /* _wgetenv etc */
+#include <windows.h> /* _wgetenv etc */
 #endif
 
 HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -1729,7 +1729,7 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc)
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN 1
-# include <windows.h> /* For GetShortPathName */
+#include <windows.h> /* For GetShortPathName */
 #endif
 
 #if !defined(S_IFDIR) && defined(__S_IFDIR)
@@ -1771,7 +1771,7 @@ extern char * mkdtemp (char *template);
 #endif
 
 #ifdef _WIN32
-# include <cctype>
+#include <cctype>
 #endif
 
 void R_reInitTempDir(int die_on_fail)
@@ -2004,10 +2004,10 @@ HIDDEN SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* moved from character.cpp in 2.10.0: configure requires this */
 
 #ifdef HAVE_GLOB_H
-# include <glob.h>
+#include <glob.h>
 #endif
 #ifdef _WIN32
-# include <dos_wglob.h>
+#include <dos_wglob.h>
 #define globfree dos_wglobfree
 #define glob_t wglob_t
 #else
@@ -2090,7 +2090,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* isatty is in unistd.h, or io.h on Windows */
 #ifdef _WIN32
-# include <io.h>
+#include <io.h>
 #endif
 
 #ifdef _WIN32

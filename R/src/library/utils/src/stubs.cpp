@@ -26,9 +26,9 @@
 #include "localization.h"
 
 #ifdef _WIN32
-# include "Startup.h"
-# include "getline/getline.h"     /* for gl_load/savehistory */
-# include "getline/wc_history.h"  /* for wgl_load/savehistory */
+#include "Startup.h"
+#include "getline/getline.h"     /* for gl_load/savehistory */
+#include "getline/wc_history.h"  /* for wgl_load/savehistory */
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;

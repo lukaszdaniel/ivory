@@ -454,7 +454,7 @@ HIDDEN SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef _WIN32
-# include "rgui_UTF8.h"
+#include "rgui_UTF8.h"
 #endif
 /* Uses R_alloc but called by a .Internal.  Result may be R_alloc-ed */
 static const char *trChar(SEXP x)
@@ -527,7 +527,7 @@ struct cat_info {
     int changedcon;
     Rconnection con;
 #ifdef _WIN32
-    Rboolean saveWinUTF8out;
+    bool saveWinUTF8out;
 #endif
 };
 

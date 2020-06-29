@@ -23,7 +23,7 @@
 #endif
 
 #include <climits> /* for INT_MAX */
-#include <stddef.h> /* for size_t */
+#include <cstddef> /* for size_t */
 #include <cstdlib> /* for abs */
 #include <cmath>
 #include <Rmath.h>

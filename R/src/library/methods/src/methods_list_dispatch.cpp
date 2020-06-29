@@ -22,7 +22,7 @@
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
@@ -235,7 +235,7 @@ static SEXP R_element_named(SEXP obj, const char * what)
     }
     if(offset < 0)
 	return R_NilValue;
-    else
+
 	return VECTOR_ELT(obj, offset);
 }
 
@@ -300,7 +300,7 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 	    /* not observed during tests, but promises in principle could come
 	       from DispatchOrEval/R_possible_dispatch */
 	    object = eval(object, Methods_Namespace);
-	class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	class_ = CHAR(STRING_ELT(R_data_class(object, true), 0));
 	value = R_element_named(methods, class_);
 	if(isNull(value) || isFunction(value)){
 	    retValue = value;
@@ -365,7 +365,7 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 	if(object == R_MissingArg)
 	    class_ = "missing";
 	else
-	    class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	    class_ = CHAR(STRING_ELT(R_data_class(object, true), 0));
 	if(ptr - buf + strlen(class_) + 2 > NBUF) {
 	    UNPROTECT(1); /* mtable */
 	    return R_NilValue;
@@ -438,7 +438,7 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
 
 static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 {
-    SEXP vl, generic = R_UnboundValue, gpackage; const char *pkg; Rboolean ok;
+    SEXP vl, generic = R_UnboundValue, gpackage; const char *pkg; bool ok;
     if(!isSymbol(symbol))
 	symbol = installTrChar(asChar(symbol));
     pkg = CHAR(STRING_ELT(package, 0)); /* package is guaranteed single string */
@@ -451,7 +451,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    ok = FALSE;
+	    ok = false;
 	    if(IS_GENERIC(vl)) {
 	      if(strlen(pkg)) {
 		  gpackage = PACKAGE_SLOT(vl);
@@ -459,7 +459,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 		  ok = streql(pkg, CHAR(STRING_ELT(gpackage, 0)));
 		}
 		else
-		  ok = TRUE;
+		  ok = true;
 	    }
 	    if(ok) {
 		generic = vl;
@@ -684,7 +684,7 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 	    PROTECT(arg = R_evalHandleError(arg_sym, ev,
 					    &argEvalCleanup, &cleandata));
 	    nprotect++;
-	    PROTECT(class_obj = R_data_class(arg, TRUE)); nprotect++;
+	    PROTECT(class_obj = R_data_class(arg, true)); nprotect++;
 	    class_ = CHAR(STRING_ELT(class_obj, 0));
 	}
     }
@@ -911,7 +911,7 @@ static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty,
 
 static const char *class_string(SEXP obj)
 {
-    return CHAR(STRING_ELT(R_data_class(obj, TRUE), 0));
+    return CHAR(STRING_ELT(R_data_class(obj, true), 0));
 }
 
 /* internal version of paste(".", prefix, name, sep="__"),
@@ -1088,7 +1088,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 		SEXP arg = PROTECT(R_evalHandleError(arg_sym, ev,
 						     &argEvalCleanup,
 						     &cleandata));
-		thisClass = R_data_class(arg, TRUE);
+		thisClass = R_data_class(arg, true);
 		UNPROTECT(1); /* arg */
 	    }
 	}

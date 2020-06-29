@@ -55,7 +55,7 @@ HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 #define _L_INTSXP_ REALSXP
 #define _L_INTEG_  REAL
 #define _L_int_    R_xlen_t
-# include "split-incl.cpp"
+#include "split-incl.cpp"
 
 # undef _L_INTSXP_
 # undef _L_INTEG_
@@ -66,7 +66,7 @@ HIDDEN SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 #define _L_INTSXP_ INTSXP
 #define _L_INTEG_  INTEGER
 #define _L_int_    int
-# include "split-incl.cpp"
+#include "split-incl.cpp"
 
 # undef _L_INTSXP_
 # undef _L_INTEG_

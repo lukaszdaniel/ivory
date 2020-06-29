@@ -36,7 +36,7 @@
  *********************************************************************/
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #ifdef DEBUG_TEST
@@ -47,7 +47,7 @@
 
 #include <Defn.h>
 #include <cstring>
-#include <memory.h>
+#include <memory>
 #include <clocale>
 #include <cstdio>
 #include <cstdlib>

@@ -18,7 +18,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <cstdlib> // for abs
@@ -850,7 +850,7 @@ inclu2(size_t np, double *xnext, double *xrow, double ynext,
 }
 
 #ifdef DEBUG_Q0bis
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
   double chk_V(double v[], char* nm, int jj, int len) { 
     // len = length(<vector>)  <==> index must be in  {0, len-1}
     if(jj < 0 || jj >= len)

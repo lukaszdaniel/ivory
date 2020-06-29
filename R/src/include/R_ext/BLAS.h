@@ -39,7 +39,7 @@
 #include <R_ext/Complex.h>	/* for Rcomplex */
 
 #ifdef FC_LEN_T
-# include <stddef.h> // for size_t if needed
+#include <stddef.h> // for size_t if needed
 # define FCLEN ,FC_LEN_T
 # define FCONE ,(FC_LEN_T)1
 #else

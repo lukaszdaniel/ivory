@@ -1267,7 +1267,7 @@ findEncoding(const char *encpath, encodinglist deviceEncodings, Rboolean isPDF)
      * "default" is a special encoding which means use the
      * default (FIRST) encoding set up ON THIS DEVICE.
      */
-    if (!strcmp(encpath, "default")) {
+    if (streql(encpath, "default")) {
 	found = 1;
 	// called from PDFDeviceDriver with null deviceEncodings as last resort
 	if (deviceEncodings) encoding = deviceEncodings->encoding;
@@ -1403,13 +1403,12 @@ static encodinglist addDeviceEncoding(encodinginfo encoding,
 
 static const char *getFontEncoding(const char *family, const char *fontdbname);
 
-static type1fontfamily
-findLoadedFont(const char *name, const char *encoding, Rboolean isPDF)
+static type1fontfamily findLoadedFont(const char *name, const char *encoding, Rboolean isPDF)
 {
     type1fontlist fontlist;
     type1fontfamily font = NULL;
     char *fontdbname;
-    int found = 0;
+    bool found = false;
 
     if (isPDF) {
 	fontlist = PDFloadedFonts;
@@ -1419,7 +1418,7 @@ findLoadedFont(const char *name, const char *encoding, Rboolean isPDF)
 	fontdbname = PostScriptFonts;
     }
     while (fontlist && !found) {
-	found = !strcmp(name, fontlist->family->fxname);
+	found = streql(name, fontlist->family->fxname);
 	if (found) {
 	    font = fontlist->family;
 	    if (encoding) {
@@ -1428,7 +1427,7 @@ findLoadedFont(const char *name, const char *encoding, Rboolean isPDF)
 		// encname could be NULL
 		if(encname) {
 		    seticonvName(encoding, encconvname);
-		    if (!strcmp(encname, "default") &&
+		    if (streql(encname, "default") &&
 			strcmp(fontlist->family->encoding->convname,
 			       encconvname)) {
 			font = NULL;
@@ -1458,7 +1457,7 @@ static cidfontfamily findLoadedCIDFont(const char *family, Rboolean isPDF)
 {
     cidfontlist fontlist;
     cidfontfamily font = NULL;
-    int found = 0;
+    bool found = false;
 
     if (isPDF) {
 	fontlist = PDFloadedCIDFonts;
@@ -1466,7 +1465,7 @@ static cidfontfamily findLoadedCIDFont(const char *family, Rboolean isPDF)
 	fontlist = loadedCIDFonts;
     }
     while (fontlist && !found) {
-	found = !strcmp(family, fontlist->cidfamily->cidfonts[0]->name);
+	found = streql(family, fontlist->cidfamily->cidfonts[0]->name);
 	if (found)
 	    font = fontlist->cidfamily;
 	fontlist = fontlist->next;
@@ -1490,11 +1489,10 @@ SEXP CIDFontInUse(SEXP name, SEXP isPDF)
 /*
  * Find a font in device font list
  */
-static cidfontfamily
-findDeviceCIDFont(const char *name, cidfontlist fontlist, int *index)
+static cidfontfamily findDeviceCIDFont(const char *name, cidfontlist fontlist, int *index)
 {
     cidfontfamily font = NULL;
-    int found = 0;
+    bool found = false;
     *index = 0;
     /*
      * If the graphics engine font family is ""
@@ -1515,7 +1513,7 @@ findDeviceCIDFont(const char *name, cidfontlist fontlist, int *index)
 		    fontlist->cidfamily->fxname);
 #endif
 
-	    found = !strcmp(name, fontlist->cidfamily->fxname);
+	    found = streql(name, fontlist->cidfamily->fxname);
 	    if (found)
 		font = fontlist->cidfamily;
 	    fontlist = fontlist->next;
@@ -1536,11 +1534,10 @@ findDeviceCIDFont(const char *name, cidfontlist fontlist, int *index)
  * Must only be called once a device has at least one font added
  * (i.e., after the default font has been added)
  */
-static type1fontfamily
-findDeviceFont(const char *name, type1fontlist fontlist, int *index)
+static type1fontfamily findDeviceFont(const char *name, type1fontlist fontlist, int *index)
 {
     type1fontfamily font = NULL;
-    int found = 0;
+    bool found = false;
     *index = 0;
     /*
      * If the graphics engine font family is ""
@@ -1550,7 +1547,7 @@ findDeviceFont(const char *name, type1fontlist fontlist, int *index)
      */
     if (strlen(name) > 0) {
 	while (fontlist && !found) {
-	    found = !strcmp(name, fontlist->family->fxname);
+	    found = streql(name, fontlist->family->fxname);
 	    if (found)
 		font = fontlist->family;
 	    fontlist = fontlist->next;
@@ -1596,7 +1593,7 @@ static SEXP getFont(const char *family, const char *fontdbname) {
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    result = VECTOR_ELT(fontdb, i);
 	}
@@ -1629,7 +1626,7 @@ fontMetricsFileName(const char *family, int faceIndex,
     nfonts = LENGTH(fontdb);
     for (i = 0; i < nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 1 means vector of font afm file paths */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 1),
@@ -1653,7 +1650,7 @@ static const char *getFontType(const char *family, const char *fontdbname)
     return result;
 }
 
-static Rboolean isType1Font(const char *family, const char *fontdbname,
+static bool isType1Font(const char *family, const char *fontdbname,
 			    type1fontfamily defaultFont)
 {
     /*
@@ -1665,19 +1662,19 @@ static Rboolean isType1Font(const char *family, const char *fontdbname,
      */
     if (strlen(family) == 0) {
 	if (defaultFont)
-	    return TRUE;
+	    return true;
 	else
-	    return FALSE;
+	    return false;
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
             return streql(fontType, "Type1Font");
         else
-            return FALSE;
+            return false;
     }
 }
 
-static Rboolean isCIDFont(const char *family, const char *fontdbname,
+static bool isCIDFont(const char *family, const char *fontdbname,
 			  cidfontfamily defaultCIDFont) {
     /*
      * If family is "" then we're referring to the default device
@@ -1688,15 +1685,15 @@ static Rboolean isCIDFont(const char *family, const char *fontdbname,
      */
     if (strlen(family) == 0) {
 	if (defaultCIDFont)
-	    return TRUE;
+	    return true;
 	else
-	    return FALSE;
+	    return false;
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
             return streql(fontType, "CIDFont");
         else
-            return FALSE;
+            return false;
     }
 }
 
@@ -1714,7 +1711,7 @@ static const char *getFontEncoding(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 2 means 'encoding' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 2), 0));
@@ -1741,7 +1738,7 @@ static const char *getFontName(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 0 means 'family' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 0), 0));
@@ -1768,7 +1765,7 @@ static const char *getFontCMap(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 2 means 'cmap' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 2), 0));
@@ -1796,7 +1793,7 @@ getCIDFontEncoding(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 3 means 'encoding' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 3), 0));
@@ -1823,7 +1820,7 @@ static const char *getCIDFontPDFResource(const char *family)
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 4 means 'pdfresource' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 4), 0));
@@ -2433,8 +2430,8 @@ static void PSEncodeFonts(FILE *fp, PostScriptDesc *pd)
 		fprintf(fp, "%% begin encoding\n%s def\n%% end encoding\n",
 			fonts->family->encoding->enccode);
 	}
-	if(strcmp(fonts->family->fonts[4]->name,
-		  "CMSY10 CMBSY10 CMMI10") == 0) {
+	if(streql(fonts->family->fonts[4]->name,
+		  "CMSY10 CMBSY10 CMMI10")) {
 	    /* use different ps fragment for CM fonts */
 	    specialCaseCM(fp, fonts->family, familynum);
 	} else {
@@ -3034,10 +3031,10 @@ static void PostScriptSetCol(FILE *fp, double r, double g, double b,
 	else fprintf(fp, "%.4f", r);
 	fprintf(fp," setgray");
     } else {
-	if(strcmp(mm, "gray") == 0) {
+	if(streql(mm, "gray")) {
 	    fprintf(fp, "%.4f setgray", 0.213*r + 0.715*g + 0.072*b);
 	    // error(_("only gray colors are allowed in this color model"));
-	} else if(strcmp(mm, "cmyk") == 0) {
+	} else if(streql(mm, "cmyk")) {
 	    double c = 1.0-r, m=1.0-g, y=1.0-b, k=c;
 	    k = fmin2(k, m);
 	    k = fmin2(k, y);
@@ -4326,7 +4323,7 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
 
 #if 0
     if(enc != CE_UTF8 &&
-       ( !strcmp(encoding, "latin1") || !strcmp(encoding, "ISOLatin1")) ) {
+       ( streql(encoding, "latin1") || streql(encoding, "ISOLatin1")) ) {
 	mbcsToLatin1(in, out); /* more tolerant */
 	return;
     }
@@ -4398,7 +4395,7 @@ static void PS_Text0(double x, double y, const char *str, int enc,
 		  gc->fontfamily);
 
 	if (!dd->hasTextUTF8 &&
-	    !strcmp(locale2charset(NULL), cidfont->encoding)) {
+	    streql(locale2charset(NULL), cidfont->encoding)) {
 	    SetFont(translateCIDFont(gc->fontfamily, gc->fontface, pd),
 		    (int)floor(gc->cex * gc->ps + 0.5),dd);
 	    CheckAlpha(gc->col, pd);
@@ -6631,7 +6628,7 @@ static void PDFwritesRGBcolorspace(PDFDesc *pd)
     fclose(fp);
 }
 
-#include <time.h>  // for time_t, time, localtime
+#include <ctime>  // for time_t, time, localtime
 #include <Rversion.h>
 
 static void PDF_startfile(PDFDesc *pd)

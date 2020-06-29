@@ -284,15 +284,15 @@ HIDDEN SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
     x1 = asLogical2(s1, /*checking*/ 1, call, env);
     UNPROTECT(1); /* s1 */
 
-#define get_2nd							\
-	PROTECT(s2 = eval(s2, env));				\
-	if (!isNumber(s2))					\
-	    errorcall(call, _("invalid '%s' type in 'x %s y'"),	"y", \
-		      PRIMVAL(op) == 1 ? "&&" : "||");		\
-	x2 = asLogical2(s2, 1, call, env);			\
+#define get_2nd                                                  \
+	PROTECT(s2 = eval(s2, env));                                 \
+	if (!isNumber(s2))                                           \
+		errorcall(call, _("invalid '%s' type in 'x %s y'"), "y", \
+				  PRIMVAL(op) == 1 ? "&&" : "||");               \
+	x2 = asLogical2(s2, 1, call, env);                           \
 	UNPROTECT(1); /* s2 */
 
-    switch (PRIMVAL(op)) {
+	switch (PRIMVAL(op)) {
     case 1: /* && */
 	if (x1 == FALSE)
 	    ans = FALSE;
@@ -408,8 +408,8 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
     return ans;
 }
 
-#define _OP_ALL 1
-#define _OP_ANY 2
+constexpr int _OP_ALL = 1;
+constexpr int _OP_ANY = 2;
 
 static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 {
@@ -490,5 +490,3 @@ HIDDEN SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(2);
     return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(val);
 }
-#undef _OP_ALL
-#undef _OP_ANY

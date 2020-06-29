@@ -159,10 +159,10 @@ extern void R_WaitEvent(void);
 
 #ifdef R_USE_SIGNALS
 #ifdef _WIN32
-# include <psignal.h>
+#include <psignal.h>
 #else
-# include <csignal>
-# include <csetjmp>
+#include <csignal>
+#include <csetjmp>
 #endif
 #endif
 
@@ -202,15 +202,15 @@ extern void R_WaitEvent(void);
 
  */
 #ifdef HAVE_INTTYPES_H
-# include <inttypes.h>
+#include <inttypes.h>
 #endif
 /* According to POSIX inttypes.h should include stdint.h,
    but let's be sure. */
 #ifdef HAVE_STDINT_H
-# include <stdint.h>
+#include <stdint.h>
 #endif
 #ifdef HAVE_LIMITS_H
-# include <limits.h>
+#include <limits.h>
 #endif
 
 #if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX
@@ -286,10 +286,10 @@ extern int putenv(char *string);
    260 is d:\ plus 256 chars plus nul.  Some but not all API calls
    allow filepaths of the form \\?\D:\very_long_path .
 */
-#define PATH_MAX 260
+constexpr size_t PATH_MAX = 260;
 #else
 /* quite possibly unlimited, so we make this large, and test when used */
-#define PATH_MAX 5000
+constexpr size_t PATH_MAX = 5000;
 #endif
 #endif
 #endif
@@ -374,7 +374,7 @@ struct PPinfo
 {
     PPkind kind;             /* deparse kind */
     PPprec precedence;       /* operator precedence */
-    unsigned int rightassoc; /* right associative? */
+    bool rightassoc; /* right associative? */
 };
 
 /* The type definitions for the table of built-in functions. */
@@ -472,7 +472,7 @@ inline size_t PTR2VEC(int n) { return (n > 0) ? (std::size_t(n)*sizeof(SEXP) - 1
 #define UNSET_NO_SPECIAL_SYMBOLS(b) ((b)->sxpinfo.gp &= (~SPECIAL_SYMBOL_MASK))
 #define NO_SPECIAL_SYMBOLS(b) ((b)->sxpinfo.gp & SPECIAL_SYMBOL_MASK)
 
-#else /* USE_RINTERNALS */
+#else /* of USE_RINTERNALS */
 
 using VECP = VECREC *;
 int(PRIMOFFSET)(SEXP x);
@@ -591,6 +591,7 @@ struct RCNTXT
     SEXP onExit() const { return this->conexit; }
     void setOnExit(SEXP x) { this->conexit = x; }
     SEXP workingEnvironment() const { return this->cloenv; }
+    void setWorkingEnvironment(SEXP x) {this->cloenv = x; }
     RCNTXT *nextContext() const { return this->nextcontext; }
 };
 
@@ -637,16 +638,16 @@ BUI   0 0 0 0 0 0 0 1 = 64
 inline int IS_RESTART_BIT_SET(const int &flags) { return ((flags)&CTXT_RESTART); }
 inline void SET_RESTART_BIT_ON(int &flags) { (flags |= CTXT_RESTART); }
 inline void SET_RESTART_BIT_OFF(int &flags) { (flags &= ~CTXT_RESTART); }
-#endif
+#endif // R_USE_SIGNALS
 
 /* Miscellaneous Definitions */
-inline Rboolean streql(const char *s, const char *t)
+inline bool streql(const char *s, const char *t)
 {
-    return (Rboolean)(strcmp(s, t) == 0);
+    return (strcmp(s, t) == 0);
 }
-inline Rboolean streqln(const char *s, const char *t, size_t n)
+inline bool streqln(const char *s, const char *t, size_t n)
 {
-    return (Rboolean)(strncmp(s, t, n) == 0);
+    return (strncmp(s, t, n) == 0);
 }
 
 /* Arithmetic and Relation Operators */
@@ -788,9 +789,9 @@ LibExtern int	R_ParseError	INI_as(0); /* Line where parse error occurred */
 extern0 int	R_ParseErrorCol;    /* Column of start of token where parse error occurred */
 extern0 SEXP	R_ParseErrorFile;   /* Source file where parse error was seen.  Either a
 				       STRSXP or (when keeping srcrefs) a SrcFile ENVSXP */
-#define PARSE_ERROR_SIZE 256	    /* Parse error messages saved here */
+constexpr size_t PARSE_ERROR_SIZE = 256;	    /* Parse error messages saved here */
 LibExtern char	R_ParseErrorMsg[PARSE_ERROR_SIZE] INI_as("");
-#define PARSE_CONTEXT_SIZE 256	    /* Recent parse context kept in a circular buffer */
+constexpr size_t PARSE_CONTEXT_SIZE = 256;	    /* Recent parse context kept in a circular buffer */
 LibExtern char	R_ParseContext[PARSE_CONTEXT_SIZE] INI_as("");
 LibExtern int	R_ParseContextLast INI_as(0); /* last character in context buffer */
 LibExtern int	R_ParseContextLine; /* Line in file of the above */
@@ -807,7 +808,7 @@ extern void 	R_setupHistory(void);
 /* Warnings/Errors */
 extern0 int	R_CollectWarnings INI_as(0);	/* the number of warnings */
 extern0 SEXP	R_Warnings;	    /* the warnings and their calls */
-extern0 int	R_ShowErrorMessages INI_as(1);	/* show error messages? */
+extern0 bool	R_ShowErrorMessages INI_as(true);	/* show error messages? */
 extern0 SEXP	R_HandlerStack;	/* Condition handler stack */
 extern0 SEXP	R_RestartStack;	/* Stack of available restarts */
 extern0 Rboolean R_warn_partial_match_args   INI_as(FALSE);
@@ -817,13 +818,13 @@ extern0 Rboolean R_ShowWarnCalls INI_as(FALSE);
 extern0 Rboolean R_ShowErrorCalls INI_as(FALSE);
 extern0 int	R_NShowCalls INI_as(50);
 
-LibExtern Rboolean utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
+LibExtern bool utf8locale  INI_as(false);  /* is this a UTF-8 locale? */
 LibExtern Rboolean mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
-extern0   Rboolean latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
+extern0   bool latin1locale INI_as(false); /* is this a Latin-1 locale? */
 #ifdef _WIN32
 LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
 LibExtern unsigned int systemCP  INI_as(437);  /* the ANSI codepage, GetACP */
-extern0   Rboolean WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
+extern0   bool WinUTF8out  INI_as(false);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
 #endif
 
@@ -837,7 +838,7 @@ extern int Rf_initEmbeddedR(int argc, char **argv);
 /* GUI type */
 
 extern const char	*R_GUIType	INI_as("unknown");
-extern Rboolean R_isForkedChild		INI_as(FALSE); /* was this forked? */
+extern bool R_isForkedChild		INI_as(false); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);
 extern0 double cpuLimit2	       	INI_as(-1.0);
@@ -887,7 +888,8 @@ SEXP R_primitive_generic(SEXP op);
 extern0 int R_dec_min_exponent		INI_as(-308);
 
 /* structure for caching machine accuracy values */
-struct AccuracyInfo {
+struct AccuracyInfo
+{
     int ibeta, it, irnd, ngrd, machep, negep, iexp, minexp, maxexp;
     double eps, epsneg, xmin, xmax;
 };
@@ -897,8 +899,8 @@ LibExtern AccuracyInfo R_AccuracyInfo;
 extern unsigned int max_contour_segments INI_as(25000);
 
 /* used in package utils */
-extern Rboolean known_to_be_latin1 INI_as(FALSE);
-extern0 Rboolean known_to_be_utf8 INI_as(FALSE);
+extern bool known_to_be_latin1 INI_as(false);
+extern0 bool known_to_be_utf8 INI_as(false);
 
 /* pre-allocated boolean values */
 LibExtern SEXP R_TrueValue INI_as(NULL);
@@ -906,7 +908,7 @@ LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 
 /* for PCRE as from R 3.4.0 */
-extern0 Rboolean R_PCRE_use_JIT INI_as(TRUE);
+extern0 bool R_PCRE_use_JIT INI_as(true);
 #ifdef HAVE_PCRE2
 extern0 int R_PCRE_study INI_as(-2);
 #else
@@ -1097,7 +1099,7 @@ void R_FlushConsole(void);
 void R_ClearerrConsole(void);
 void R_Busy(int);
 int R_ShowFiles(int, const char **, const char **, const char *,
-                Rboolean, const char *);
+                bool, const char *);
 int R_EditFiles(int, const char **, const char **, const char *);
 size_t R_ChooseFile(int, char *, size_t);
 char *R_HomeDir(void);
@@ -1190,15 +1192,15 @@ void Rf_CustomPrintValue(SEXP, SEXP);
 double Rf_currentTime(void);
 void Rf_DataFrameClass(SEXP);
 SEXP Rf_ddfindVar(SEXP, SEXP);
-SEXP Rf_deparse1(SEXP,Rboolean,int);
+SEXP Rf_deparse1(SEXP, Rboolean, int);
 SEXP Rf_deparse1m(SEXP call, Rboolean abbrev, int opts);
-SEXP Rf_deparse1w(SEXP,Rboolean,int);
+SEXP Rf_deparse1w(SEXP, Rboolean, int);
 SEXP Rf_deparse1line(SEXP, Rboolean);
 SEXP deparse1line_(SEXP, Rboolean, int);
 SEXP Rf_deparse1s(SEXP call);
-bool Rf_DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-bool Rf_DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
-bool Rf_DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
+bool Rf_DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP *, int, int);
+bool Rf_DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP *, int, int);
+bool Rf_DispatchGroup(const char *, SEXP, SEXP, SEXP, SEXP, SEXP *);
 R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
@@ -1287,7 +1289,7 @@ void process_system_Renviron(void);
 void process_user_Renviron(void);
 SEXP Rf_promiseArgs(SEXP, SEXP);
 void Rcons_vprintf(const char *, va_list);
-SEXP R_data_class(SEXP , Rboolean);
+SEXP R_data_class(SEXP , bool);
 SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);
 SEXP R_LoadFromFile(FILE*, int);
@@ -1326,19 +1328,19 @@ void Rf_unpromiseArgs(SEXP);
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 bool Rf_usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
-SEXP Rf_vectorIndex(SEXP, SEXP, int, int, int, SEXP, Rboolean);
+SEXP Rf_vectorIndex(SEXP, SEXP, int, int, int, SEXP, bool);
 
 #ifdef R_USE_SIGNALS
-void Rf_begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rf_dynamicfindVar(SEXP, RCNTXT*);
-void Rf_endcontext(RCNTXT*);
-int Rf_framedepth(RCNTXT*);
+void Rf_begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP Rf_dynamicfindVar(SEXP, RCNTXT *);
+void Rf_endcontext(RCNTXT *);
+int Rf_framedepth(RCNTXT *);
 void R_InsertRestartHandlers(RCNTXT *, const char *);
 NORET void R_JumpToContext(RCNTXT *, int, SEXP);
-SEXP R_syscall(int,RCNTXT*);
-int R_sysparent(int,RCNTXT*);
-SEXP R_sysframe(int,RCNTXT*);
-SEXP R_sysfunction(int,RCNTXT*);
+SEXP R_syscall(int, RCNTXT *);
+int R_sysparent(int, RCNTXT *);
+SEXP R_sysframe(int, RCNTXT *);
+SEXP R_sysfunction(int, RCNTXT *);
 RCNTXT *R_findExecContext(RCNTXT *, SEXP);
 RCNTXT *R_findParentContext(RCNTXT *, int);
 
@@ -1353,8 +1355,8 @@ SEXP Rf_ItemName(SEXP, R_xlen_t);
 NORET void Rf_errorcall_cpy(SEXP, const char *, ...);
 NORET void Rf_ErrorMessage(SEXP, int, ...);
 void Rf_WarningMessage(SEXP, int, ...);
-SEXP R_GetTraceback(int);    // including deparse()ing
-SEXP R_GetTracebackOnly(int);// no        deparse()ing
+SEXP R_GetTraceback(int);     // including deparse()ing
+SEXP R_GetTracebackOnly(int); // no        deparse()ing
 
 R_size_t R_GetMaxVSize(void);
 void R_SetMaxVSize(R_size_t);
@@ -1379,7 +1381,7 @@ enum Rprt_adj
     Rprt_adj_none = 3
 };
 
-int	Rstrlen(SEXP, int);
+int Rstrlen(SEXP, int);
 const char *Rf_EncodeRaw(Rbyte, const char *);
 const char *Rf_EncodeString(SEXP, int, int, Rprt_adj);
 const char *Rf_EncodeReal2(double, int, int, int);
@@ -1403,7 +1405,7 @@ SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 /* main/util.cpp */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
 NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
-Rboolean Rf_strIsASCII(const char *str);
+bool Rf_strIsASCII(const char *str);
 int utf8clen(char c);
 int Rf_AdobeSymbol2ucs2(int n);
 double R_strtod5(const char *str, char **endptr, char dec,
@@ -1427,7 +1429,7 @@ const wchar_t *Rf_wtransChar(SEXP x); /* from sysutils.cpp */
 
 inline void mbs_init(mbstate_t *x) { memset(x, 0, sizeof(mbstate_t)); }
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
-Rboolean mbcsValid(const char *str);
+bool mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
 bool utf8Valid(const char *str);
 char *Rf_strchr(const char *s, int c);
@@ -1435,7 +1437,7 @@ char *Rf_strrchr(const char *s, int c);
 
 SEXP fixup_NaRm(SEXP args); /* summary.cpp */
 void invalidate_cached_recodings(void);  /* from sysutils.cpp */
-void resetICUcollator(Rboolean disable); /* from util.cpp */
+void resetICUcollator(bool disable); /* from util.cpp */
 void dt_invalidate_locale(); /* from Rstrptime.h */
 extern int R_OutputCon; /* from connections.cpp */
 extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.cpp */
@@ -1443,7 +1445,7 @@ void get_current_mem(size_t *,size_t *,size_t *); /* from memory.cpp */
 unsigned long get_duplicate_counter(void);  /* from duplicate.cpp */
 void reset_duplicate_counter(void);  /* from duplicate.cpp */
 void Rf_BindDomain(char *); /* from main.cpp */
-extern Rboolean LoadInitFile;  /* from startup.cpp */
+extern bool LoadInitFile;  /* from startup.cpp */
 
 // Unix and Windows versions
 double R_getClockIncrement(void);

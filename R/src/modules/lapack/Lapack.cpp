@@ -21,7 +21,7 @@
 /* Interface routines, callable from R using .Internal, for Lapack code */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Localization.h>
@@ -31,11 +31,11 @@
 #include <cstdlib> /* for realpath */
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h> /* for realpath on some systems */
+#include <unistd.h> /* for realpath on some systems */
 #endif
 
 #ifdef HAVE_DLFCN_H
-# include <dlfcn.h>  /* for dladdr */
+#include <dlfcn.h>  /* for dladdr */
 #endif
 
 #if defined(HAVE_REALPATH) && defined(HAVE_DECL_REALPATH) && !HAVE_DECL_REALPATH

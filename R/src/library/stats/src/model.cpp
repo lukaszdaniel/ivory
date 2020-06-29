@@ -966,7 +966,7 @@ SEXP updateform(SEXP old, SEXP new_)
    ------------------------------------------------------------------------------
  */
 #ifdef DEBUG_terms
-# include <Print.h>
+#include <Print.h>
 /* can use  printVector(SEXP x, int indx, int quote)
  *	    ~~~~~~~~~~~		    ^^^^      ^^^^^
  * to print R vector x[]; if(indx) print indices; if(quote) quote strings

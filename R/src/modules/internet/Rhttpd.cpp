@@ -61,16 +61,16 @@
 /* this is orignally from sisock.h - system independent sockets */
 
 #ifndef _WIN32
-# include <R_ext/eventloop.h>
-# include <sys/types.h>
+#include <R_ext/eventloop.h>
+#include <sys/types.h>
 # ifdef HAVE_UNISTD_H
 #  include <unistd.h>
 # endif
-# include <netdb.h>
-# include <sys/socket.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
-# include <cerrno>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <cerrno>
 
 # define sockerrno errno
 # define SOCKET int
@@ -80,9 +80,9 @@
 # define donesocks()
 #else
 /* --- Windows-only --- */
-# include <windows.h>
-# include <winsock.h>
-# include <cstring>
+#include <windows.h>
+#include <winsock.h>
+#include <cstring>
 
 # define sockerrno WSAGetLastError()
 

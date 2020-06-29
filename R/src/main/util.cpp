@@ -52,7 +52,7 @@ static void R_wfixslash(wchar_t *s);
 
 extern "C" {
 #if defined FC_LEN_T
-# include <stddef.h>
+#include <cstddef>
 void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
 NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len);
 #else
@@ -327,9 +327,9 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, const SEXP x)
     UNIMPLEMENTED_TYPEt(s, TYPEOF(x));
 }
 
-# include <R_ext/Riconv.h>
-# include <sys/param.h>
-# include <cerrno>
+#include <R_ext/Riconv.h>
+#include <sys/param.h>
+#include <cerrno>
 
 
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
@@ -701,13 +701,13 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Functions for getting and setting the working directory. */
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN 1
-# include <windows.h>
+#include <windows.h>
 #endif
 
 SEXP static intern_getwd(void)
 {
     SEXP rval = R_NilValue;
-    char buf[4*PATH_MAX+1];
+	char buf[4 * PATH_MAX + 1];
 
 #ifdef _WIN32
     {
@@ -736,7 +736,7 @@ HIDDEN SEXP do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #if defined(_WIN32) && defined(_MSC_VER)
-# include <direct.h> /* for chdir, via io.h */
+#include <direct.h> /* for chdir, via io.h */
 #endif
 
 HIDDEN SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -979,7 +979,7 @@ HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else SET_STRING_ELT(ans, i, elp);
     }
 #else
-    Rboolean OK;
+    bool OK;
     warning(_("this platform does not have realpath so the results may not be canonical"));
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -1051,7 +1051,7 @@ const char *getTZinfo(void)
 #ifdef _WIN32
 static void encode_cleanup(void *data)
 {
-    WinUTF8out = TRUE;
+    WinUTF8out = true;
 }
 #endif
 
@@ -1110,7 +1110,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 		     R_NilValue, R_NilValue);
 	cntxt.cend = &encode_cleanup;
 	havecontext = TRUE;
-	WinUTF8out = FALSE;
+	WinUTF8out = false;
     }
 #endif
     for(i = 0; i < len; i++) {
@@ -1205,13 +1205,13 @@ HIDDEN SEXP Rf_markKnown(const char * const s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-Rboolean Rf_strIsASCII(const char *const str)
+bool Rf_strIsASCII(const char *const str)
 {
 	const char *p;
 	for (p = str; *p; p++)
 		if ((unsigned int)*p > 0x7F)
-			return FALSE;
-	return TRUE;
+			return false;
+	return true;
 }
 
 /* Number of additional bytes */
@@ -1460,9 +1460,9 @@ HIDDEN char *mbcsTruncateToValid(char *const s)
     return s;
 }
 
-HIDDEN Rboolean mbcsValid(const char *const str)
+HIDDEN bool mbcsValid(const char *const str)
 {
-	return (Rboolean)((int)mbstowcs(NULL, str, 0) >= 0);
+	return ((int)mbstowcs(NULL, str, 0) >= 0);
 }
 
 /* used in src/library/grDevices/src/cairo/cairoFns.cpp */
@@ -2062,7 +2062,7 @@ HIDDEN SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #if 0 //#ifdef USE_ICU
-# include <clocale>
+#include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
 typedef int UErrorCode; /* really an enum these days */
@@ -2162,7 +2162,7 @@ static UCollator *collator = NULL;
 static int collationLocaleSet = 0;
 
 /* called from platform.cpp */
-HIDDEN void resetICUcollator(Rboolean disable)
+HIDDEN void resetICUcollator(bool disable)
 {
 	if (collator)
 		ucol_close(collator);
@@ -2381,7 +2381,7 @@ HIDDEN SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(_("ICU not in use"));
 }
 
-HIDDEN void resetICUcollator(Rboolean disable) {}
+HIDDEN void resetICUcollator(bool disable) {}
 
 # ifdef _WIN32
 
@@ -2707,8 +2707,8 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 		const char *format, const char *flag, char **result)
 {
     int dig = abs(digits);
-    Rboolean rm_trailing_0 = (Rboolean) (digits >= 0);
-    Rboolean do_fg = streql("fg", format); /* TRUE  iff  format == "fg" */
+    bool rm_trailing_0 = (digits >= 0);
+    bool do_fg = streql("fg", format); /* TRUE  iff  format == "fg" */
     double xx;
     int iex;
     size_t j, len_flag = strlen(flag);

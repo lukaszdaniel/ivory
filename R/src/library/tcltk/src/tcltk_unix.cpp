@@ -18,7 +18,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 #include <Defn.h>
 #include "tcltk.h" /* declarations of our `public' interface */
@@ -54,7 +54,7 @@ static void TclSpinLoop(void *data)
     while (Tcl_DoOneEvent(TCL_DONT_WAIT)) ;
 }
 
-//extern Rboolean R_isForkedChild;
+//extern bool R_isForkedChild;
 static void TclHandler(void)
 {
     if (!R_isForkedChild && !Tcl_lock 

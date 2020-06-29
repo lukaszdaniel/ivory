@@ -18,11 +18,11 @@
  *
  */
 
-# include <cstdint>
+#include <cstdint>
 // C99/C11 require this to be implemented.
-typedef int_fast64_t R_time_t;
+using R_time_t = int_fast64_t;
 
-struct Rtm
+struct stm
 {
   int tm_sec;
   int tm_min;
@@ -36,8 +36,6 @@ struct Rtm
   long tm_gmtoff;
   const char *tm_zone;
 };
-
-typedef struct Rtm stm;
 
 #define time_t R_time_t
 #define gmtime R_gmtime
@@ -56,6 +54,5 @@ extern void R_tzsetwall(void);
 extern char *R_tzname[2];
 extern int_fast64_t R_timegm(stm*);
 
-extern size_t
-R_strftime(char * const s, const size_t maxsize, const char *const format,
+extern size_t R_strftime(char * const s, const size_t maxsize, const char *const format,
 	   const stm *const t);

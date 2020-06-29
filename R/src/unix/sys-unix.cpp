@@ -28,7 +28,7 @@
 /* See system.txt for a description of functions */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -40,7 +40,7 @@
 #include "Runix.h"
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifndef HAVE_GETRUSAGE
@@ -50,13 +50,13 @@
 #endif
 
 #ifdef HAVE_FCNTL_H
-# include <fcntl.h>
+#include <fcntl.h>
 #endif
 
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_GETRUSAGE)
 /* on macOS it seems sys/resource.h needs sys/time.h first */
-# include <sys/time.h>
-# include <sys/resource.h>
+#include <sys/time.h>
+#include <sys/resource.h>
 #endif
 
 #include <cerrno>
@@ -239,7 +239,7 @@ HIDDEN double R_getClockIncrement(void)
 }
 
 #ifdef HAVE_SYS_WAIT_H
-# include <sys/wait.h>
+#include <sys/wait.h>
 #endif
 
 /* The timeout support is inspired by timeout utility from coreutils.
@@ -793,7 +793,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef HAVE_SYS_UTSNAME_H
-# include <sys/utsname.h>
+#include <sys/utsname.h>
 
 # ifdef HAVE_UNISTD_H
 #  include <unistd.h>

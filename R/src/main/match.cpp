@@ -61,7 +61,7 @@ Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact)
 {
     if (exact)
-	return streql(f, t);
+	return Rboolean(streql(f, t));
     /* else */
     while (*t) {
 	if (*t != *f) return FALSE;
@@ -416,7 +416,7 @@ enum fstype_t
                                has been used */
 };
 
-R_INLINE static void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
+inline static void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
     SEXP value = CAR(suppliedSlot);
     if (value == R_MissingArg) {
         value = findVarInFrame3(cloenv, name, TRUE);

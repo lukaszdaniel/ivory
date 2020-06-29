@@ -691,28 +691,33 @@ static Rboolean cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
     return (Rboolean) !R_FINITE(s);
 }
 
+template <typename T>
+static void generic_matprod(double *x, int nrx, int ncx,
+							double *y, int nry, int ncy, double *z)
+{
+	T sum;
+
+	R_xlen_t NRX = nrx, NRY = nry;
+	for (int i = 0; i < nrx; i++)
+		for (int k = 0; k < ncy; k++)
+		{
+			sum = 0.0;
+			for (int j = 0; j < ncx; j++)
+				sum += x[i + j * NRX] * y[j + k * NRY];
+			z[i + k * NRX] = (double)sum;
+		}
+}
+
 static void internal_matprod(double *x, int nrx, int ncx,
                              double *y, int nry, int ncy, double *z)
 {
-    LDOUBLE sum;
-#define MATPROD_BODY                                    \
-	R_xlen_t NRX = nrx, NRY = nry;                      \
-	for (int i = 0; i < nrx; i++)                       \
-		for (int k = 0; k < ncy; k++)                   \
-		{                                               \
-			sum = 0.0;                                  \
-			for (int j = 0; j < ncx; j++)               \
-				sum += x[i + j * NRX] * y[j + k * NRY]; \
-			z[i + k * NRX] = (double)sum;               \
-		}
-	MATPROD_BODY;
+	generic_matprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_matprod(double *x, int nrx, int ncx,
                            double *y, int nry, int ncy, double *z)
 {
-    double sum;
-    MATPROD_BODY;
+    generic_matprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 template <typename T>
@@ -1434,34 +1439,39 @@ HIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 	    }
 
-#define YDIMS_ET_CETERA							\
-	    if (ydims != R_NilValue) {					\
-		if (ldy == 2) {						\
-		    SET_VECTOR_ELT(dimnames, 1, VECTOR_ELT(ydims, 1));	\
-		    dny = getAttrib(ydims, R_NamesSymbol);		\
-		    if(!isNull(dny))					\
-			SET_STRING_ELT(dimnamesnames, 1, STRING_ELT(dny, 1)); \
-		} else if (nry == 1) {					\
-		    SET_VECTOR_ELT(dimnames, 1, VECTOR_ELT(ydims, 0));	\
-		    dny = getAttrib(ydims, R_NamesSymbol);		\
-		    if(!isNull(dny))					\
-			SET_STRING_ELT(dimnamesnames, 1, STRING_ELT(dny, 0)); \
-		}							\
-	    }								\
-									\
-	    /* We sometimes attach a dimnames attribute			\
-	     * whose elements are all NULL ...				\
-	     * This is ugly but causes no real damage.			\
-	     * Now (2.1.0 ff), we don't anymore: */			\
-	    if (VECTOR_ELT(dimnames,0) != R_NilValue ||			\
-		VECTOR_ELT(dimnames,1) != R_NilValue) {			\
-		if (dnx != R_NilValue || dny != R_NilValue)		\
-		    setAttrib(dimnames, R_NamesSymbol, dimnamesnames);	\
-		setAttrib(ans, R_DimNamesSymbol, dimnames);		\
-	    }								\
-	    UNPROTECT(2)
+#define YDIMS_ET_CETERA                                               \
+	if (ydims != R_NilValue)                                          \
+	{                                                                 \
+		if (ldy == 2)                                                 \
+		{                                                             \
+			SET_VECTOR_ELT(dimnames, 1, VECTOR_ELT(ydims, 1));        \
+			dny = getAttrib(ydims, R_NamesSymbol);                    \
+			if (!isNull(dny))                                         \
+				SET_STRING_ELT(dimnamesnames, 1, STRING_ELT(dny, 1)); \
+		}                                                             \
+		else if (nry == 1)                                            \
+		{                                                             \
+			SET_VECTOR_ELT(dimnames, 1, VECTOR_ELT(ydims, 0));        \
+			dny = getAttrib(ydims, R_NamesSymbol);                    \
+			if (!isNull(dny))                                         \
+				SET_STRING_ELT(dimnamesnames, 1, STRING_ELT(dny, 0)); \
+		}                                                             \
+	}                                                                 \
+                                                                      \
+	/* We sometimes attach a dimnames attribute                       \
+	 * whose elements are all NULL ...                                \
+	 * This is ugly but causes no real damage.                        \
+	 * Now (2.1.0 ff), we don't anymore: */                           \
+	if (VECTOR_ELT(dimnames, 0) != R_NilValue ||                      \
+		VECTOR_ELT(dimnames, 1) != R_NilValue)                        \
+	{                                                                 \
+		if (dnx != R_NilValue || dny != R_NilValue)                   \
+			setAttrib(dimnames, R_NamesSymbol, dimnamesnames);        \
+		setAttrib(ans, R_DimNamesSymbol, dimnames);                   \
+	}                                                                 \
+	UNPROTECT(2)
 
-	    YDIMS_ET_CETERA;
+		YDIMS_ET_CETERA;
 	}
     }
 
@@ -1710,15 +1720,17 @@ HIDDEN SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* this increments iip and sets j using strides */
 
-#define CLICKJ						\
-    for (itmp = 0; itmp < n; itmp++)			\
-	if (iip[itmp] == isr[itmp]-1) iip[itmp] = 0;	\
-	else {						\
-	    iip[itmp]++;				\
-	    break;					\
-	}						\
-    for (lj = 0, itmp = 0; itmp < n; itmp++)		\
-	lj += iip[itmp] * stride[itmp];
+#define CLICKJ                               \
+	for (itmp = 0; itmp < n; itmp++)         \
+		if (iip[itmp] == isr[itmp] - 1)      \
+			iip[itmp] = 0;                   \
+		else                                 \
+		{                                    \
+			iip[itmp]++;                     \
+			break;                           \
+		}                                    \
+	for (lj = 0, itmp = 0; itmp < n; itmp++) \
+		lj += iip[itmp] * stride[itmp];
 
 /* aperm (a, perm, resize = TRUE) */
 HIDDEN SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)

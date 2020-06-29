@@ -34,13 +34,13 @@ Iterator macro to fill a matrix from a vector with re-use of vector
     }
 */
 
-#define FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc) 		\
-    for(R_xlen_t i = 0, sidx = 0; i < srows; i++, sidx = i)		\
-        for(R_xlen_t j = 0, didx = dstart + i; j < cols;		\
-            j++, 							\
-            sidx += srows,						\
-            (sidx >= nsrc) ? sidx -= nsrc : 0,				\
-            didx += drows)
+#define FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc) \
+    for (R_xlen_t i = 0, sidx = 0; i < srows; i++, sidx = i)  \
+        for (R_xlen_t j = 0, didx = dstart + i; j < cols;     \
+             j++,                                             \
+                      sidx += srows,                          \
+                      (sidx >= nsrc) ? sidx -= nsrc : 0,      \
+                      didx += drows)
 
 void xcopyComplexWithRecycle(Rcomplex *dst, Rcomplex *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 void xcopyIntegerWithRecycle(int *dst, int *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
@@ -58,13 +58,12 @@ void xfillRealMatrixWithRecycle(double *dst, double *src, R_xlen_t dstart, R_xle
 void xfillStringMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
 void xfillVectorMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
 
-#define FILL_MATRIX_BYROW_ITERATE(dstart, drows, dcols, nsrc) 		\
-    for(R_xlen_t i = 0, sidx = 0; i < drows; i++)			\
-        for(R_xlen_t j = 0, didx = dstart + i; j < dcols;		\
-            j++, 							\
-            sidx++,							\
-            (sidx >= nsrc) ? sidx -= nsrc : 0,				\
-            didx += drows)
-
+#define FILL_MATRIX_BYROW_ITERATE(dstart, drows, dcols, nsrc) \
+    for (R_xlen_t i = 0, sidx = 0; i < drows; i++)            \
+        for (R_xlen_t j = 0, didx = dstart + i; j < dcols;    \
+             j++,                                             \
+                      sidx++,                                 \
+                      (sidx >= nsrc) ? sidx -= nsrc : 0,      \
+                      didx += drows)
 
 #endif /* R_DUPLICATE_H */

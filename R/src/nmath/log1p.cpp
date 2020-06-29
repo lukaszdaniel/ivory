@@ -37,7 +37,7 @@
 /* Every currently known platform has log1p (which is C99), 
    but NetBSD/OpenBSD were at least at one time inaccurate */
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 #include "nmath.h"
 

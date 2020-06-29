@@ -113,11 +113,11 @@
 static Rboolean busy = FALSE;
 static SEXP R_NullSymbol = NULL;
 
-static int identifier ;
+static int identifier;
 static void incrementId(void);
 static void initData(void);
 static void initId(void);
-static void record_( int, int, int, int, int, int, char* ) ;
+static void record_(int, int, int, int, int, int, char *);
 #define YYINITDEPTH 400
 
 static void yyerror(const char *);
@@ -190,47 +190,52 @@ static void setId(yyltype loc){
 }
 
 #define YYLTYPE yyltype
-#define YYLLOC_DEFAULT(Current, Rhs, N)				\
-    do	{ 								\
-	if (N){								\
-	    (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;	\
-	    (Current).first_column = YYRHSLOC (Rhs, 1).first_column;	\
-	    (Current).first_byte   = YYRHSLOC (Rhs, 1).first_byte;	\
-	    (Current).last_line    = YYRHSLOC (Rhs, N).last_line;	\
-	    (Current).last_column  = YYRHSLOC (Rhs, N).last_column;	\
-	    (Current).last_byte    = YYRHSLOC (Rhs, N).last_byte;	\
-	    (Current).first_parsed = YYRHSLOC (Rhs, 1).first_parsed;    \
-	    (Current).last_parsed  = YYRHSLOC (Rhs, N).last_parsed;	\
-	    incrementId( ) ; 						\
-	    (Current).id = identifier ; 				\
-	    _current_token = yyr1[yyn] ; 				\
-	    if (ParseState.keepSrcRefs && ParseState.keepParseData) {	\
-	        yyltype childs[N];					\
-	        int ii = 0; 						\
-	        for(ii=0; ii<N; ii++){					\
-		      childs[ii] = YYRHSLOC (Rhs, (ii+1) ) ; 		\
-	        } 							\
-	        recordParents( identifier, childs, N) ; 		\
-	    }								\
-	} else	{							\
-	  (Current).first_line   = (Current).last_line   =		\
-	    YYRHSLOC (Rhs, 0).last_line;				\
-	  (Current).first_parsed   = (Current).last_parsed   =		\
-	    YYRHSLOC (Rhs, 0).last_parsed;				\
-	  (Current).first_column = YYRHSLOC (Rhs, 0).last_column;	\
-	  (Current).last_column = (Current).first_column - 1;		\
-	  (Current).first_byte = YYRHSLOC (Rhs, 0).last_byte;		\
-	  (Current).last_byte = (Current).first_byte - 1;		\
-	  (Current).id = NA_INTEGER;                                    \
-	} 								\
+#define YYLLOC_DEFAULT(Current, Rhs, N)                             \
+    do                                                              \
+    {                                                               \
+        if (N)                                                      \
+        {                                                           \
+            (Current).first_line = YYRHSLOC(Rhs, 1).first_line;     \
+            (Current).first_column = YYRHSLOC(Rhs, 1).first_column; \
+            (Current).first_byte = YYRHSLOC(Rhs, 1).first_byte;     \
+            (Current).last_line = YYRHSLOC(Rhs, N).last_line;       \
+            (Current).last_column = YYRHSLOC(Rhs, N).last_column;   \
+            (Current).last_byte = YYRHSLOC(Rhs, N).last_byte;       \
+            (Current).first_parsed = YYRHSLOC(Rhs, 1).first_parsed; \
+            (Current).last_parsed = YYRHSLOC(Rhs, N).last_parsed;   \
+            incrementId();                                          \
+            (Current).id = identifier;                              \
+            _current_token = yyr1[yyn];                             \
+            if (ParseState.keepSrcRefs && ParseState.keepParseData) \
+            {                                                       \
+                yyltype childs[N];                                  \
+                int ii = 0;                                         \
+                for (ii = 0; ii < N; ii++)                          \
+                {                                                   \
+                    childs[ii] = YYRHSLOC(Rhs, (ii + 1));           \
+                }                                                   \
+                recordParents(identifier, childs, N);               \
+            }                                                       \
+        }                                                           \
+        else                                                        \
+        {                                                           \
+            (Current).first_line = (Current).last_line =            \
+                YYRHSLOC(Rhs, 0).last_line;                         \
+            (Current).first_parsed = (Current).last_parsed =        \
+                YYRHSLOC(Rhs, 0).last_parsed;                       \
+            (Current).first_column = YYRHSLOC(Rhs, 0).last_column;  \
+            (Current).last_column = (Current).first_column - 1;     \
+            (Current).first_byte = YYRHSLOC(Rhs, 0).last_byte;      \
+            (Current).last_byte = (Current).first_byte - 1;         \
+            (Current).id = NA_INTEGER;                              \
+        }                                                           \
     } while (0)
 
-
-#define YY_LOCATION_PRINT(File,Loc)					\
- fprintf ( File, "%d.%d.%d-%d.%d.%d (%d)",				\
- 	(Loc).first_line, (Loc).first_column,	(Loc).first_byte, 	\
- 	(Loc).last_line,  (Loc).last_column, 	(Loc).last_byte, 	\
-	(Loc).id )
+#define YY_LOCATION_PRINT(File, Loc)                                \
+    fprintf(File, "%d.%d.%d-%d.%d.%d (%d)",                         \
+            (Loc).first_line, (Loc).first_column, (Loc).first_byte, \
+            (Loc).last_line, (Loc).last_column, (Loc).last_byte,    \
+            (Loc).id)
 
 /* Useful defines so editors don't get confused ... */
 
@@ -343,7 +348,7 @@ static SrcRefState ParseState;
 
 #include <rlocale.h>
 #ifdef HAVE_LANGINFO_CODESET
-# include <langinfo.h>
+#include <langinfo.h>
 #endif
 
 static int mbcs_get_next(int c, wchar_t *wc)
@@ -389,8 +394,8 @@ static int mbcs_get_next(int c, wchar_t *wc)
 
 /* Soon to be defunct entry points */
 
-void		R_SetInput(int);
-int		R_fgetc(FILE*);
+void R_SetInput(int);
+int R_fgetc(FILE *);
 
 /* Routines used to build the parse tree */
 
@@ -971,16 +976,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   410,   410,   411,   412,   413,   414,   417,   418,   419,
-     422,   423,   426,   427,   428,   429,   431,   432,   434,   435,
-     436,   437,   438,   440,   441,   442,   443,   444,   445,   446,
-     447,   448,   449,   450,   451,   452,   453,   454,   455,   456,
-     457,   458,   459,   460,   462,   463,   464,   465,   466,   467,
-     468,   469,   470,   471,   472,   473,   474,   475,   476,   477,
-     478,   479,   480,   481,   482,   483,   487,   490,   493,   497,
-     498,   499,   500,   501,   502,   505,   506,   509,   510,   511,
-     512,   513,   514,   515,   516,   519,   520,   521,   522,   523,
-     527
+       0,   415,   415,   416,   417,   418,   419,   422,   423,   424,
+     427,   428,   431,   432,   433,   434,   436,   437,   439,   440,
+     441,   442,   443,   445,   446,   447,   448,   449,   450,   451,
+     452,   453,   454,   455,   456,   457,   458,   459,   460,   461,
+     462,   463,   464,   465,   467,   468,   469,   470,   471,   472,
+     473,   474,   475,   476,   477,   478,   479,   480,   481,   482,
+     483,   484,   485,   486,   487,   488,   492,   495,   498,   502,
+     503,   504,   505,   506,   507,   510,   511,   514,   515,   516,
+     517,   518,   519,   520,   521,   524,   525,   526,   527,   528,
+     532
 };
 #endif
 
@@ -2646,12 +2651,15 @@ yyreturn:
 /* Private pushback, since file ungetc only guarantees one byte.
    We need up to one MBCS-worth */
 #define DECLARE_YYTEXT_BUFP(bp) char *bp = yytext ;
-#define YYTEXT_PUSH(c, bp) do { \
-    if ((bp) - yytext >= int(sizeof(yytext)) - 1){ \
-		error(_("input buffer overflow at line %d"), ParseState.xxlineno); \
-	} \
-    *(bp)++ = ((char)c);			\
-} while(0) ;
+#define YYTEXT_PUSH(c, bp)                                                     \
+    do                                                                         \
+    {                                                                          \
+        if ((bp)-yytext >= int(sizeof(yytext)) - 1)                            \
+        {                                                                      \
+            error(_("input buffer overflow at line %d"), ParseState.xxlineno); \
+        }                                                                      \
+        *(bp)++ = ((char)c);                                                   \
+    } while (0);
 
 #define PUSHBACK_BUFSIZE 16
 static int pushback[PUSHBACK_BUFSIZE];
@@ -4567,20 +4575,24 @@ static int NumericValue(int c)
 
 /* The buffer is reallocated on the R heap if needed; not by malloc */
 /* to avoid memory leak in case of R error (long jump) */
-#define STEXT_PUSH(c) do {                  \
-	size_t nc = bp - stext;             \
-	if (nc >= nstext - 1) {             \
-	    char *old = stext;              \
-	    SEXP st1;		            \
-	    nstext *= 2;                    \
-	    PROTECT(st1 = allocVector(RAWSXP, nstext)); \
-	    stext = (char *)RAW(st1);       \
-	    memmove(stext, old, nc);        \
-	    REPROTECT(st1, sti);	    \
-	    UNPROTECT(1); /* st1 */         \
-	    bp = stext+nc; }		    \
-	*bp++ = ((char) c);		    \
-} while(0)
+#define STEXT_PUSH(c)                                   \
+    do                                                  \
+    {                                                   \
+        size_t nc = bp - stext;                         \
+        if (nc >= nstext - 1)                           \
+        {                                               \
+            char *old = stext;                          \
+            SEXP st1;                                   \
+            nstext *= 2;                                \
+            PROTECT(st1 = allocVector(RAWSXP, nstext)); \
+            stext = (char *)RAW(st1);                   \
+            memmove(stext, old, nc);                    \
+            REPROTECT(st1, sti);                        \
+            UNPROTECT(1); /* st1 */                     \
+            bp = stext + nc;                            \
+        }                                               \
+        *bp++ = ((char)c);                              \
+    } while (0)
 
 
 /* The idea here is that if a string contains \u escapes that are not
@@ -4663,13 +4675,18 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     return t;
 }
 
-#define CTEXT_PUSH(c) do { \
-	if (ct - currtext >= 1000) { \
-	    memmove(currtext, currtext+100, 901); memmove(currtext, "... ", 4); ct -= 100; \
-	    currtext_truncated = TRUE; \
-	} \
-	*ct++ = ((char) c);  \
-} while(0)
+#define CTEXT_PUSH(c)                               \
+    do                                              \
+    {                                               \
+        if (ct - currtext >= 1000)                  \
+        {                                           \
+            memmove(currtext, currtext + 100, 901); \
+            memmove(currtext, "... ", 4);           \
+            ct -= 100;                              \
+            currtext_truncated = TRUE;              \
+        }                                           \
+        *ct++ = ((char)c);                          \
+    } while (0)
 #define CTEXT_POP() ct--
 
 

@@ -12,7 +12,8 @@
                 "HAVE_CONFIG_H",
                 "Unix",
                 "ENABLE_NLS",
-                "USE_ICU"
+                "USE_ICU",
+                "R_USE_SIGNALS"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

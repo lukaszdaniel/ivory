@@ -91,11 +91,11 @@ static void *in_R_FTPOpen2(const char *url);
 #include <Rmodules/Rinternet.h>
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifdef HAVE_FCNTL_H
-# include <fcntl.h>
+#include <fcntl.h>
 /* Solaris and AIX define open as open64 under some circumstances */
 # undef open
 #endif
@@ -505,7 +505,7 @@ static SEXP in_do_download(SEXP args)
     cacheOK = asLogical(CAR(args)); args = CDR(args);
     if(cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
-    Rboolean file_URL = (streqln(url, "file://", 7));
+    bool file_URL = (streqln(url, "file://", 7));
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))
         error(_("invalid '%s' argument"), "headers");

@@ -515,14 +515,14 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 
 	    /* HOWEVER, it is the way that the object bit gets set/unset */
 
-	    Rboolean isfactor = FALSE;
+	    bool isfactor = false;
 
 	    if (vec == R_NilValue)
 		error(_("attempt to set an attribute on NULL"));
 
 	    for(int i = 0; i < ncl; i++)
 		if(streql(CHAR(STRING_ELT(klass, i)), "factor")) { /* ASCII */
-		    isfactor = TRUE;
+		    isfactor = true;
 		    break;
 		}
 	    if(isfactor && TYPEOF(vec) != INTSXP) {
@@ -625,7 +625,7 @@ static SEXP lang2str(SEXP obj, SEXPTYPE t)
    if(!singleString) , keeps S3-style multiple classes.
    Called from the methods package, so exposed.
  */
-SEXP R_data_class(SEXP obj, Rboolean singleString)
+SEXP R_data_class(SEXP obj, bool singleString)
 {
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);
     int n = length(klass);
@@ -697,7 +697,7 @@ static SEXP cache_class(const char *class_, SEXP klass)
 }
 
 static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
-    static SEXP s_extends = 0, s_extendsForS3;
+    static SEXP s_extends = nullptr, s_extendsForS3;
     SEXP e, val; const char *class_;
     const void *vmax;
     if(use_tab) vmax = vmaxget();
@@ -884,7 +884,7 @@ HIDDEN SEXP R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
       // .class2()
       return R_data_class2(CAR(args));
   // class():
-  return R_data_class(CAR(args), FALSE);
+  return R_data_class(CAR(args), false);
 }
 
 /* names(object) <- name */
@@ -906,7 +906,7 @@ HIDDEN SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
 	SETCAR(args, R_shallow_duplicate_attr(CAR(args)));
     if (TYPEOF(CAR(args)) == S4SXP) {
-	const char *klass = CHAR(STRING_ELT(R_data_class(CAR(args), FALSE), 0));
+	const char *klass = CHAR(STRING_ELT(R_data_class(CAR(args), false), 0));
 	error(_("invalid to use 'names()<-' on an S4 object of class \"%s\""),
 	      klass);
     }
@@ -1538,8 +1538,8 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 {
     SEXP
-	valueClass = PROTECT(R_data_class(value, FALSE)),
-	objClass   = PROTECT(R_data_class(obj, FALSE));
+	valueClass = PROTECT(R_data_class(value, false)),
+	objClass   = PROTECT(R_data_class(obj, false));
     static SEXP checkAt = nullptr;
     // 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
     if(!isMethodsDispatchOn()) { // needed?
@@ -1771,7 +1771,7 @@ SEXP R_do_slot(SEXP obj, SEXP name) {
 	if(value == R_NilValue) {
 	    SEXP input = name, classString;
 	    if(name == s_dot_S3Class) /* defaults to class(obj) */
-		return R_data_class(obj, FALSE);
+		return R_data_class(obj, false);
 	    else if(name == R_NamesSymbol &&
 		    TYPEOF(obj) == VECSXP) /* needed for namedList class */
 		return value;
@@ -1860,7 +1860,7 @@ HIDDEN SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(length(klass) == 0)
 	    error(_("trying to get slot \"%s\" from an object of a basic class (\"%s\") with no slots"),
 		  CHAR(PRINTNAME(nlist)),
-		  CHAR(STRING_ELT(R_data_class(object, FALSE), 0)));
+		  CHAR(STRING_ELT(R_data_class(object, false), 0)));
 	else
 	    error(_("trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 object"),
 		  CHAR(PRINTNAME(nlist)),

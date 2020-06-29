@@ -33,10 +33,10 @@
 #include <R_ext/Complex.h>
 
 #if defined(__cplusplus) && !defined(DO_NOT_USE_CXX_HEADERS)
-# include <cstddef>
+#include <cstddef>
 # define R_SIZE_T std::size_t
 #else
-# include <stddef.h>
+#include <stddef.h>
 # define R_SIZE_T size_t
 #endif
 

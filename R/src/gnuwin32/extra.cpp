@@ -32,7 +32,7 @@
 
 #include <cstdio>
 #include <cstring>
-#include <time.h>
+#include <ctime>
 #include <Defn.h>
 #include <Internal.h>
 #include "Fileio.h"

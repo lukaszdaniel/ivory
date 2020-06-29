@@ -73,7 +73,7 @@ static int iwork(int iwkmax, int *iwkpt, int number, int itype);
 
 #ifdef USING_R
 # define isort(n, ix)		R_isort(ix, *n)
-# include <Rmath.h>	/* -> pgamma() */
+#include <Rmath.h>	/* -> pgamma() */
 #else
  static void isort(int *n, int *ix);
  static double gammds(double *y, double *p, int *ifault);

@@ -35,7 +35,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Localization.h>
@@ -48,19 +48,19 @@
 #include <climits>
 #include <cstring>
 #include <cstdlib>			/* for realpath */
-#include <time.h>			/* for ctime */
+#include <ctime>			/* for ctime */
 
-# include <cerrno>
+#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */
 #endif
 
 #ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
+#include <sys/types.h>
 #endif
 #ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
+#include <sys/stat.h>
 #endif
 
 #ifdef Win32
@@ -95,7 +95,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #define DTYPE long double
 #define MACH_NAME machar_LD
 #define ABS fabsl
-# include "machar.cpp"
+#include "machar.cpp"
 # undef DTYPE
 # undef MACH_NAME
 # undef ABS
@@ -326,7 +326,7 @@ int static R_strieql(const char *a, const char *b)
 
 #include <clocale>
 #ifdef HAVE_LANGINFO_CODESET
-# include <langinfo.h>
+#include <langinfo.h>
 #endif
 
 static char native_enc[R_CODESET_MAX + 1];
@@ -340,7 +340,7 @@ HIDDEN const char *R_nativeEncoding(void)
    known_to_be_latin1, utf8locale, latin1locale and mbcslocale) */
 HIDDEN void R_check_locale(void)
 {
-    known_to_be_utf8 = utf8locale = FALSE;
+    known_to_be_utf8 = utf8locale = false;
     known_to_be_latin1 = latin1locale = FALSE;
     mbcslocale = FALSE;
     strcpy(native_enc, "ASCII");
@@ -350,14 +350,14 @@ HIDDEN void R_check_locale(void)
 	char  *p = nl_langinfo(CODESET);
 	/* more relaxed due to Darwin: CODESET is case-insensitive and
 	   latin1 is ISO8859-1 */
-	if (R_strieql(p, "UTF-8")) known_to_be_utf8 = utf8locale = TRUE;
+	if (R_strieql(p, "UTF-8")) known_to_be_utf8 = utf8locale = true;
 	if (streql(p, "ISO-8859-1")) known_to_be_latin1 = latin1locale = TRUE;
 	if (R_strieql(p, "ISO8859-1")) known_to_be_latin1 = latin1locale = TRUE;
 # if __APPLE__
 	/* On Darwin 'regular' locales such as 'en_US' are UTF-8 (hence
 	   MB_CUR_MAX == 6), but CODESET is "" */
 	if (*p == 0 && MB_CUR_MAX == 6)
-	    known_to_be_utf8 = utf8locale = TRUE;
+	    known_to_be_utf8 = utf8locale = true;
 # endif
 	if (utf8locale)
 	    strcpy(native_enc, "UTF-8");
@@ -396,7 +396,7 @@ HIDDEN void R_check_locale(void)
     }
 #endif
 #if defined(SUPPORT_UTF8_WIN32) /* never at present */
-    utf8locale = mbcslocale = TRUE;
+    utf8locale = mbcslocale = true;
     strcpy(native_enc, "UTF-8");
 #endif
 }
@@ -439,14 +439,14 @@ HIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, tl, hd, pg;
     const char **f, **h, *t, *pager = NULL /* -Wall */;
-    Rboolean dl;
+    bool dl;
     int i, n;
 
     checkArity(op, args);
     fn = CAR(args); args = CDR(args);
     hd = CAR(args); args = CDR(args);
     tl = CAR(args); args = CDR(args);
-    dl = (Rboolean) asLogical(CAR(args)); args = CDR(args);
+    dl = bool(asLogical(CAR(args))); args = CDR(args);
     pg = CAR(args);
     n = 0;			/* -Wall */
     if (!isString(fn) || (n = LENGTH(fn)) < 1)
@@ -1177,17 +1177,17 @@ HIDDEN SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* No longer required by POSIX, but maybe on earlier OSes */
 #ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
+#include <sys/types.h>
 #endif
 
 #if HAVE_DIRENT_H
-# include <dirent.h>
+#include <dirent.h>
 #elif HAVE_SYS_NDIR_H
-# include <sys/ndir.h>
+#include <sys/ndir.h>
 #elif HAVE_SYS_DIR_H
-# include <sys/dir.h>
+#include <sys/dir.h>
 #elif HAVE_NDIR_H
-# include <ndir.h>
+#include <ndir.h>
 #endif
 
 #define CBUFSIZE 2*PATH_MAX+1
@@ -1509,7 +1509,7 @@ HIDDEN SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* needed for access, and perhaps for realpath */
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifdef _WIN32
@@ -1720,7 +1720,7 @@ static int R_unlink(const char *name, int recursive, int force)
 
 /* Note that wildcards are allowed in 'names' */
 #ifdef _WIN32
-# include <dos_wglob.h>
+#include <dos_wglob.h>
 HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;
@@ -2632,12 +2632,12 @@ HIDDEN SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
 #if defined(HAVE_UTIMENSAT)
-# include <fcntl.h>
-# include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #elif defined(HAVE_UTIMES)
-# include <sys/time.h>
+#include <sys/time.h>
 #elif defined(HAVE_UTIME)
-# include <utime.h>
+#include <utime.h>
 #endif
 
 static void copyFileTime(const char *from, const char * to)
@@ -3195,7 +3195,7 @@ HIDDEN SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #ifdef HAVE_PCRE2
   /* PCRE2_CODE_UNIT_WIDTH is defined to 8 via config.h */
-# include<pcre2.h>
+#include<pcre2.h>
 #else
 # ifdef HAVE_PCRE_PCRE_H
 #  include <pcre/pcre.h>
@@ -3218,12 +3218,12 @@ void u_getVersion(UVersionInfo versionArray);
 
 #include <iconv.h>
 #if defined(__GLIBC__)
-# include <gnu/libc-version.h>
+#include <gnu/libc-version.h>
 #endif
 
 #ifdef HAVE_LIBREADLINE
 // that ensures we have this header
-# include <readline/readline.h>
+#include <readline/readline.h>
 #endif
 
 #if defined(HAVE_REALPATH) && defined(HAVE_DECL_REALPATH) && !HAVE_DECL_REALPATH

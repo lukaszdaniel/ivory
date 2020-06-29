@@ -20,7 +20,7 @@
 /* <UTF8> OK since this is intended to treat chars as byte streams */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>

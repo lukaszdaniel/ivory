@@ -289,9 +289,8 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
    level start to level stop-1.  ( 0...len-1 or 0..len-2 then len-1).
    For [[<- it needs to duplicate if substructure might be shared.
  */
-HIDDEN SEXP
-vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
-	    Rboolean dup)
+HIDDEN SEXP Rf_vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
+	    bool dup)
 {
     int i;
     R_xlen_t offset;

@@ -66,7 +66,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
@@ -1267,62 +1267,66 @@ R_INLINE static int xtable_key_comp(const void *a, const void *b)
 	return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
 }
 
-#define SWAP(_a, _b, _TYPE)                                    \
-{                                                              \
-    _TYPE _t;                                                  \
-    _t    = *(_a);                                             \
-    *(_a) = *(_b);                                             \
-    *(_b) = _t;                                                \
-}
+#define SWAP(_a, _b, _TYPE) \
+	{                       \
+		_TYPE _t;           \
+		_t = *(_a);         \
+		*(_a) = *(_b);      \
+		*(_b) = _t;         \
+	}
 
-#define ISORT(_base,_num,_TYPE,_comp)                          \
-{                                                              \
-/* insert sort */                                              \
-/* require stable data */                                      \
-    int _i, _j ;                                               \
-    for ( _i = 1 ; _i < _num ; _i++ )                          \
-	for ( _j = _i; _j > 0 &&                               \
-		      (*_comp)(_base+_j-1, _base+_j)>0; _j--)  \
-	   SWAP(_base+_j-1, _base+_j, _TYPE);                  \
-}
+#define ISORT(_base, _num, _TYPE, _comp)                            \
+	{                                                               \
+		/* insert sort */                                           \
+		/* require stable data */                                   \
+		int _i, _j;                                                 \
+		for (_i = 1; _i < _num; _i++)                               \
+			for (_j = _i; _j > 0 &&                                 \
+						  (*_comp)(_base + _j - 1, _base + _j) > 0; \
+				 _j--)                                              \
+				SWAP(_base + _j - 1, _base + _j, _TYPE);            \
+	}
 
-#define COMPRESS(_base,_num,_TYPE,_comp)                       \
-{                                                              \
-/* supress even c_old. last use */                             \
-    int _i,_j ;                                                \
-    for ( _i = 0 ; _i < (*(_num)) - 1 ; _i++ ){                \
-	int rc = (*_comp)(_base+_i, _base+_i+1);               \
-	if (rc == 0){                                          \
-	   for ( _j = _i, _i-- ; _j < (*(_num)) - 1; _j++ )     \
-		*((_base)+_j) = *((_base)+_j+1);               \
-	    (*(_num))--;                                       \
-	}                                                      \
-    }                                                          \
-}
+#define COMPRESS(_base, _num, _TYPE, _comp)                   \
+	{                                                         \
+		/* supress even c_old. last use */                    \
+		int _i, _j;                                           \
+		for (_i = 0; _i < (*(_num)) - 1; _i++)                \
+		{                                                     \
+			int rc = (*_comp)(_base + _i, _base + _i + 1);    \
+			if (rc == 0)                                      \
+			{                                                 \
+				for (_j = _i, _i--; _j < (*(_num)) - 1; _j++) \
+					*((_base) + _j) = *((_base) + _j + 1);    \
+				(*(_num))--;                                  \
+			}                                                 \
+		}                                                     \
+	}
 
-#define BSEARCH(_rc,_key,_base,_nmemb,_TYPE,_comp)             \
-{                                                              \
-    size_t l, u, idx;                                          \
-    _TYPE *p;                                                  \
-    int comp;                                                  \
-    l = 0;                                                     \
-    u = _nmemb;                                                \
-    _rc = NULL;                                                \
-    while (l < u)                                              \
-    {                                                          \
-	idx = (l + u) / 2;                                     \
-	p =  (_base) + idx;                                    \
-	comp = (*_comp)(_key, p);                              \
-	if (comp < 0)                                          \
-	    u = idx;                                           \
-	else if (comp > 0)                                     \
-	    l = idx + 1;                                       \
-	else{                                                  \
-	  _rc = p;                                             \
-	  break;                                               \
-	}                                                      \
-    }                                                          \
-}
+#define BSEARCH(_rc, _key, _base, _nmemb, _TYPE, _comp) \
+	{                                                   \
+		size_t l, u, idx;                               \
+		_TYPE *p;                                       \
+		int comp;                                       \
+		l = 0;                                          \
+		u = _nmemb;                                     \
+		_rc = NULL;                                     \
+		while (l < u)                                   \
+		{                                               \
+			idx = (l + u) / 2;                          \
+			p = (_base) + idx;                          \
+			comp = (*_comp)(_key, p);                   \
+			if (comp < 0)                               \
+				u = idx;                                \
+			else if (comp > 0)                          \
+				l = idx + 1;                            \
+			else                                        \
+			{                                           \
+				_rc = p;                                \
+				break;                                  \
+			}                                           \
+		}                                               \
+	}
 
 HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 {

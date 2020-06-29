@@ -49,7 +49,7 @@ strsplit grep [g]sub [g]regexpr
 
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 /* How many encoding warnings to give */
@@ -69,11 +69,11 @@ using namespace std;
 #include <tre/tre.h>
 
 /* interval at which to check interrupts */
-constexpr R_xlen_t NINTERRUPT = 1000000;
+// constexpr R_xlen_t NINTERRUPT = 1000000;
 
 #ifdef HAVE_PCRE2
   /* PCRE2_CODE_UNIT_WIDTH is defined to 8 via config.h */
-# include<pcre2.h>
+#include<pcre2.h>
 #else
   /*
   Some systems might have pcre headers in a subdirectory -- not seen recently.

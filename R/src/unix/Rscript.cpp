@@ -36,7 +36,7 @@ R --no-echo --no-restore --vanilla --file=foo [script_args]
 */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 //#include <Localization.h>
 #ifdef _WIN32
@@ -82,7 +82,7 @@ static char rarch[] = R_ARCH;
 #  define BINDIR "bin"
 # endif
 # define FOR_Rscript
-# include "rterm.c"
+#include "rterm.c"
 #endif
 
 #ifdef HAVE_EXECV

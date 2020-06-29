@@ -49,18 +49,18 @@
    DO_NOT_USE_CXX_HEADERS is legacy, left as a last resort.
 */
 #if defined(__cplusplus) && !defined(DO_NOT_USE_CXX_HEADERS)
-# include <cstdlib>
-# include <cstdio>
-# include <climits>
-# include <cmath>
+#include <cstdlib>
+#include <cstdio>
+#include <climits>
+#include <cmath>
 # ifdef __SUNPRO_CC
 using namespace std;
 # endif
 #else
-# include <stdlib.h> /* Not used by R itself, but widely assumed in packages */
-# include <stdio.h>  /* Used by ca 200 packages, but not in R itself */
-# include <limits.h> /* for INT_MAX */
-# include <math.h>
+#include <stdlib.h> /* Not used by R itself, but widely assumed in packages */
+#include <stdio.h>  /* Used by ca 200 packages, but not in R itself */
+#include <limits.h> /* for INT_MAX */
+#include <math.h>
 #endif 
 /* 
    math.h is also included by R_ext/Arith.h, except in C++ code

@@ -88,7 +88,7 @@
  * LT */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -150,76 +150,48 @@ R_INLINE static SEXP BINDING_VALUE(SEXP b)
     else return CAR(b);
 }
 
-//#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s)))
-R_INLINE static SEXP SYMBOL_BINDING_VALUE(SEXP s) {
- return IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s);
- }
-//#define SYMBOL_HAS_BINDING(s) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue))
-R_INLINE static Rboolean SYMBOL_HAS_BINDING(SEXP s) {
- return (Rboolean) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
- }
-
-/*
-#define SET_BINDING_VALUE(b,val) do { \
-  SEXP __b__ = (b); \
-  SEXP __val__ = (val); \
-  if (BINDING_IS_LOCKED(__b__)) \
-    error(_("cannot change value of locked binding for '%s'"), \
-	  CHAR(PRINTNAME(TAG(__b__)))); \
-  if (IS_ACTIVE_BINDING(__b__)) { \
-    PROTECT(__val__); \
-    setActiveValue(CAR(__b__), __val__); \
-    UNPROTECT(1); \
-   } else \
-    SET_BNDCELL(__b__, __val__); \
-} while (0)
-*/
-R_INLINE static void SET_BINDING_VALUE(SEXP b, SEXP val) {
-  if (BINDING_IS_LOCKED(b)) 
-    error(_("cannot change value of locked binding for '%s'"), 
-          CHAR(PRINTNAME(TAG(b)))); 
-  if (IS_ACTIVE_BINDING(b)) 
-    setActiveValue(CAR(b), val); 
-  else 
-    SET_BNDCELL(b, val); 
+inline static SEXP SYMBOL_BINDING_VALUE(SEXP s)
+{
+    return IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s);
+}
+inline static Rboolean SYMBOL_HAS_BINDING(SEXP s)
+{
+    return (Rboolean)(IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue));
 }
 
-/*
-#define SET_SYMBOL_BINDING_VALUE(sym, val) do { \
-  SEXP __sym__ = (sym); \
-  SEXP __val__ = (val); \
-  if (BINDING_IS_LOCKED(__sym__)) \
-    error(_("cannot change value of locked binding for '%s'"), \
-	  CHAR(PRINTNAME(__sym__))); \
-  if (IS_ACTIVE_BINDING(__sym__)) { \
-    PROTECT(__val__); \
-    setActiveValue(SYMVALUE(__sym__), __val__); \
-    UNPROTECT(1); \
-  } else \
-    SET_SYMVALUE(__sym__, __val__); \
-} while (0)
-*/
+inline static void SET_BINDING_VALUE(SEXP b, SEXP val)
+{
+    if (BINDING_IS_LOCKED(b))
+        error(_("cannot change value of locked binding for '%s'"),
+              CHAR(PRINTNAME(TAG(b))));
+    if (IS_ACTIVE_BINDING(b))
+        setActiveValue(CAR(b), val);
+    else
+        SET_BNDCELL(b, val);
+}
 
-R_INLINE static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
-  if (BINDING_IS_LOCKED(sym)) 
-    error(_("cannot change value of locked binding for '%s'"), 
-          CHAR(PRINTNAME(sym))); 
-  if (IS_ACTIVE_BINDING(sym)) {
-    PROTECT(val);
-    setActiveValue(SYMVALUE(sym), val);
-    UNPROTECT(1);
-  } else
-    SET_SYMVALUE(sym, val);
+inline static void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val)
+{
+    if (BINDING_IS_LOCKED(sym))
+        error(_("cannot change value of locked binding for '%s'"),
+              CHAR(PRINTNAME(sym)));
+    if (IS_ACTIVE_BINDING(sym))
+    {
+        PROTECT(val);
+        setActiveValue(SYMVALUE(sym), val);
+        UNPROTECT(1);
+    }
+    else
+        SET_SYMVALUE(sym, val);
 }
 
 /* Macro version of isNull for only the test against R_NilValue */
-//#define ISNULL(x) ((x) == R_NilValue)
-R_INLINE static bool ISNULL(SEXP x) {
+inline static bool ISNULL(SEXP x) {
  return (x == R_NilValue);
 }
 
 /* Function to determine whethr an environment contains special symbols */
-Rboolean R_envHasNoSpecialSymbols (SEXP env)
+Rboolean R_envHasNoSpecialSymbols(SEXP env)
 {
     SEXP frame;
 
@@ -708,24 +680,20 @@ static SEXP R_HashProfile(SEXP table)
    L. T. */
 
 #define GLOBAL_FRAME_MASK (1<<15)
-//#define IS_GLOBAL_FRAME(e) (ENVFLAGS(e) & GLOBAL_FRAME_MASK)
-R_INLINE static Rboolean IS_GLOBAL_FRAME(SEXP e) {
- return (Rboolean) (ENVFLAGS(e) & GLOBAL_FRAME_MASK);
- }
-/*
-#define MARK_AS_GLOBAL_FRAME(e) \
-  SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK)
-*/
-R_INLINE static void MARK_AS_GLOBAL_FRAME(SEXP e) {
- SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK);
- }
-/*
-#define MARK_AS_LOCAL_FRAME(e) \
-  SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK))
-*/
-R_INLINE static void MARK_AS_LOCAL_FRAME(SEXP e) {
- SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK));
- }
+inline static Rboolean IS_GLOBAL_FRAME(SEXP e)
+{
+    return (Rboolean)(ENVFLAGS(e) & GLOBAL_FRAME_MASK);
+}
+
+inline static void MARK_AS_GLOBAL_FRAME(SEXP e)
+{
+    SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK);
+}
+
+inline static void MARK_AS_LOCAL_FRAME(SEXP e)
+{
+    SET_ENVFLAGS(e, ENVFLAGS(e) & (~GLOBAL_FRAME_MASK));
+}
 
 #define INITIAL_CACHE_SIZE 1000
 

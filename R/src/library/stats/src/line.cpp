@@ -26,7 +26,7 @@
 #include "localization.h"
 
 #ifdef DEBUG_tukeyline
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
 #endif
 
 /* Speed up by `inlining' these (as macros) [since R version 1.2] : */

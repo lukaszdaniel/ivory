@@ -63,4 +63,4 @@ SEXP RunregisterBase(void);
 SEXP C_StemLeaf(SEXP x, SEXP scale, SEXP swidth, SEXP atom);
 SEXP C_BinCount(SEXP x, SEXP breaks, SEXP right, SEXP lowest);
 
-Rboolean isNAcol(SEXP col, int index, int ncol);
+bool isNAcol(SEXP col, int index, int ncol);

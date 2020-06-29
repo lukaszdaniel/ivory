@@ -22,7 +22,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <cstring>
@@ -102,7 +102,7 @@ static void closeLibrary(HINSTANCE handle)
     FreeLibrary(handle);
 }
 
-void InitFunctionHashing()
+void Rf_InitFunctionHashing()
 {
     R_osDynSymbol->loadLibrary = R_loadLibrary;
     R_osDynSymbol->dlsym = getRoutine;

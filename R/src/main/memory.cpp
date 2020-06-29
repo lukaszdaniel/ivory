@@ -34,7 +34,7 @@
 #include <config.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -2301,7 +2301,7 @@ char *R_alloc(size_t nelem, int eltsize)
 }
 
 #ifdef HAVE_STDALIGN_H
-# include <stdalign.h>
+#include <stdalign.h>
 #endif
 
 #include <cstdint>

@@ -288,8 +288,7 @@ static void R_addExternalRoutine(DllInfo *info,
  */
 DllInfo *R_getDllInfo(const char *const path)
 {
-    int i;
-    for(i = 0; i < CountDLL; i++) {
+    for(int i = 0; i < CountDLL; i++) {
 	if(streql(LoadedDLL[i].path, path)) return(&LoadedDLL[i]);
     }
     return (DllInfo*) NULL;

@@ -26,7 +26,7 @@
 /* #define MC_DEBUG */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h> /* for affinity function checks and sigaction */
+#include <config.h> /* for affinity function checks and sigaction */
 #endif
 
 #include <Defn.h> /* for R_isForkedChild */
@@ -35,7 +35,7 @@
 #include "localization.h"
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 #include <sys/select.h>
 #include <sys/wait.h>
@@ -65,7 +65,7 @@
     }
 # else
     /* logging into a file */
-#   include <stdarg.h>
+#   include <cstdarg>
     void Dprintf(char *format, ...) {
       va_list (args);
       va_start (args, format);
@@ -559,7 +559,7 @@ SEXP mc_fork(SEXP sEstranged)
 #endif
     res_i[0] = (int) pid;
     if (pid == 0) { /* child */
-	R_isForkedChild = TRUE;
+	R_isForkedChild = true;
 	/* free children entries inherited from parent */
 	while(children) {
 	    close_fds_child_ci(children);

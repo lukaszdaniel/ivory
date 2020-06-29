@@ -19,7 +19,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 /* This module is only compiled if HAVE_WORKING_CAIRO is true */
@@ -46,10 +46,10 @@
 //#define USE_FC 1
 
 # define raise our_raise
-# include <Defn.h>
+#include <Defn.h>
 # undef raise
 #else
-# include <Defn.h>
+#include <Defn.h>
 #endif
 
 #define R_USE_PROTOTYPES 1
@@ -80,9 +80,9 @@ static void cbm_Size(double *left, double *right,
 #include "cairoFns.cpp"
 
 #ifdef _WIN32
-# include "winbitmap.h"
+#include "winbitmap.h"
 #else
-# include "bitmap.h"
+#include "bitmap.h"
 #endif
 
 static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)

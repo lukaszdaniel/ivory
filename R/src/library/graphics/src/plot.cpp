@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
@@ -45,21 +45,21 @@ R_INLINE static void TypeCheck(SEXP s, SEXPTYPE type)
 /*
  * Is element i of a colour object NA (or NULL)?
  */
-Rboolean isNAcol(SEXP col, int index, int ncol)
+bool isNAcol(SEXP col, int index, int ncol)
 {
-    Rboolean result = TRUE; /* -Wall */
+    bool result = true; /* -Wall */
 
     if (isNull(col))
-	result = TRUE;
+	result = true;
     else {
 	if (isLogical(col))
-	    result = Rboolean(LOGICAL(col)[index % ncol] == NA_LOGICAL);
+	    result = (LOGICAL(col)[index % ncol] == NA_LOGICAL);
 	else if (isString(col))
 	    result = streql(CHAR(STRING_ELT(col, index % ncol)), "NA");
 	else if (isInteger(col))
-	    result = Rboolean(INTEGER(col)[index % ncol] == NA_INTEGER);
+	    result = (INTEGER(col)[index % ncol] == NA_INTEGER);
 	else if (isReal(col))
-	    result = Rboolean(!R_FINITE(REAL(col)[index % ncol]));
+	    result = (!R_FINITE(REAL(col)[index % ncol]));
 	else
 	    error(_("invalid color specification"));
     }

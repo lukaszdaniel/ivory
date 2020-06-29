@@ -33,9 +33,9 @@
 */
 /* required by C99/C11 */
 #ifdef __cplusplus
-# include <cstdint>
+#include <cstdint>
 #else
-# include <stdint.h>
+#include <stdint.h>
 #endif
 
 typedef int_fast64_t DLsize_t; // used for download lengths and sizes

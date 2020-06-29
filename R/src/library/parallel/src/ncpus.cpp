@@ -30,7 +30,7 @@
 */
 
 #ifndef _W64
-# include "glpi.h"
+#include "glpi.h"
 #endif
 
 typedef BOOL 

@@ -18,7 +18,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #ifdef _WIN32
@@ -33,13 +33,13 @@
 
 #ifdef HAVE_UNISTD_H
 // for unlink
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 using namespace std;
 
 #ifdef HAVE_LIBCURL
-# include <curl/curl.h>
+#include <curl/curl.h>
 /*
   This needed libcurl >= 7.28.0 (Oct 2012) for curl_multi_wait.
   Substitute code is provided for a Unix-alike only.

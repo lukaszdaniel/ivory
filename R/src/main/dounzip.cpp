@@ -30,7 +30,7 @@
 #include <Fileio.h> /* for R_fopen */
 #include "unzip.h"
 #ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
+#include <sys/stat.h>
 #endif
 #include <cerrno>
 
@@ -69,7 +69,7 @@ static void setFileTime(const char *fn, uLong dosdate)
     CloseHandle(hFile);
 }
 #else
-# include <time.h>
+#include <time.h>
 # ifdef HAVE_UTIMES
 #  include <sys/time.h>
 # endif

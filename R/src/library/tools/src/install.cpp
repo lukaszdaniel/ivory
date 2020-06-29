@@ -20,26 +20,26 @@
 /* Formerly in src/main/platform.cpp */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #include <Defn.h>
 #include "localization.h"
 #ifdef HAVE_SYS_TYPES_H
-# include <sys/types.h>
+#include <sys/types.h>
 #endif
 #ifdef HAVE_SYS_STAT_H
-# include <sys/stat.h>
+#include <sys/stat.h>
 #endif
 
 #if HAVE_DIRENT_H
-# include <dirent.h>
+#include <dirent.h>
 #elif HAVE_SYS_NDIR_H
-# include <sys/ndir.h>
+#include <sys/ndir.h>
 #elif HAVE_SYS_DIR_H
-# include <sys/dir.h>
+#include <sys/dir.h>
 #elif HAVE_NDIR_H
-# include <ndir.h>
+#include <ndir.h>
 #endif
 static const char  * const R_FileSep = FILESEP;
 

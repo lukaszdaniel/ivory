@@ -1688,7 +1688,7 @@ HIDDEN SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	break;
     default:
-	error(R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+	error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 	break;
     }
 
@@ -1835,12 +1835,11 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	thesub = CAR(subs);
 	len = length(thesub); /* depth of recursion, small */
 	if (len > 1) {
-	    xup = vectorIndex(x, thesub, 0, len-2, /*partial ok*/TRUE, call,
-			      TRUE);
+	    xup = vectorIndex(x, thesub, 0, len-2, /*partial ok*/TRUE, call, true);
 	    /* OneIndex sets newname, but it will be overwritten before being used. */
 	    PROTECT(xup);
 	    off = OneIndex(xup, thesub, xlength(xup), 0, &newname, len-2, R_NilValue);
-	    x = vectorIndex(xup, thesub, len-2, len-1, TRUE, call, TRUE);
+	    x = vectorIndex(xup, thesub, len-2, len-1, TRUE, call, true);
 	    UNPROTECT(2); /* xup, x */
 	    PROTECT(x);
 	    recursed = TRUE;
@@ -2090,7 +2089,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x);
 	PROTECT(xup);
     }
-    else error(R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+    else error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
 
     if(recursed) {
 	if (isVectorList(xup)) {
@@ -2216,7 +2215,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	     TYPEOF(x) == CLOSXP ||
 	     TYPEOF(x) == SPECIALSXP ||
 	     TYPEOF(x) == BUILTINSXP) {
-	error(R_MSG_ob_nonsub, type2char(TYPEOF(x)));
+	error(_("object of type '%s' is not subsettable"), type2char(TYPEOF(x)));
     }
     else {
 	R_xlen_t i, imatch, nx;

@@ -25,7 +25,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-# include <config.h>
+#include <config.h>
 #endif
 
 #define R_USE_SIGNALS 1
@@ -44,7 +44,7 @@
 #endif
 
 #ifdef HAVE_UNISTD_H
-# include <unistd.h>
+#include <unistd.h>
 #endif
 
 #include <cerrno>
@@ -75,7 +75,13 @@ void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
 int R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)
 { return ptr_R_ReadConsole(prompt, buf, len, addtohistory); }
 void R_WriteConsole(const char *buf, int len) {if (ptr_R_WriteConsole) ptr_R_WriteConsole(buf, len); else ptr_R_WriteConsoleEx(buf, len, 0); }
-void R_WriteConsoleEx(const char *buf, int len, int otype) {if (ptr_R_WriteConsole) ptr_R_WriteConsole(buf, len); else ptr_R_WriteConsoleEx(buf, len, otype); }
+void R_WriteConsoleEx(const char *buf, int len, int otype)
+{
+	if (ptr_R_WriteConsole)
+		ptr_R_WriteConsole(buf, len);
+	else
+		ptr_R_WriteConsoleEx(buf, len, otype);
+}
 void R_ResetConsole(void) { ptr_R_ResetConsole(); }
 #ifndef HAVE_AQUA
 void R_FlushConsole(void) { ptr_R_FlushConsole(); }
@@ -90,7 +96,7 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 }
 
 HIDDEN int R_ShowFiles(int nfile, const char **file, const char **headers,
-					   const char *wtitle, Rboolean del, const char *pager)
+					   const char *wtitle, bool del, const char *pager)
 {
 	return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager);
 }
@@ -143,7 +149,7 @@ void R_setupHistory()
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <sys/resource.h>
+#include <sys/resource.h>
 # ifdef HAVE_LIBC_STACK_END
 extern void * __libc_stack_end;
 # endif
@@ -179,7 +185,7 @@ static char* unescape_arg(char *p, char* avp) {
 
 /* for thr_stksegment */
 #if defined(HAVE_THREAD_H)
-# include <thread.h>
+#include <thread.h>
 #endif
 #include <csignal> /* thr_stksegment */
 

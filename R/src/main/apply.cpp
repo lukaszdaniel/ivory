@@ -275,7 +275,7 @@ HIDDEN SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 //  Apply FUN() to X recursively;  workhorse of rapply()
 static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
-		   Rboolean replace, SEXP rho)
+		   bool replace, SEXP rho)
 {
     SEXP ans, names, klass;
     Rboolean matched = FALSE;
@@ -299,7 +299,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
     if(streql(CHAR(STRING_ELT(classes, 0)), "ANY")) /* ASCII */
 	matched = TRUE;
     else {
-	PROTECT(klass = R_data_class(X, FALSE));
+	PROTECT(klass = R_data_class(X, false));
 	for(int i = 0; i < LENGTH(klass); i++)
 	    for(int j = 0; j < length(classes); j++)
 		if(Seql(STRING_ELT(klass, i), STRING_ELT(classes, j)))
@@ -340,7 +340,7 @@ HIDDEN SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     deflt = CAR(args); args = CDR(args);
     how = CAR(args);
     if(!isString(how)) error(_("invalid '%s' argument"), "how");
-    Rboolean replace = streql(CHAR(STRING_ELT(how, 0)), "replace"); /* ASCII */
+    bool replace = streql(CHAR(STRING_ELT(how, 0)), "replace"); /* ASCII */
     R_xlen_t n = xlength(X);
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));

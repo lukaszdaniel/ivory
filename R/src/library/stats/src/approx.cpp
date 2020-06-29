@@ -27,7 +27,7 @@
 #include <R_ext/Applic.h>
 #include <Rinternals.h> // for R_xlen_t
 #ifdef DEBUG_approx
-# include <R_ext/Print.h>
+#include <R_ext/Print.h>
 #endif
 
 #include "localization.h"
