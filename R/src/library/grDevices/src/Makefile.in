@@ -14,6 +14,7 @@ R_SHARE_DIR = $(R_HOME)/share
 R_INCLUDE_DIR = $(R_HOME)/include
 
 SOURCES_CXX = axis_scales.cpp chull.cpp devices.cpp init.cpp stubs.cpp colors.cpp \
+  clippath.cpp patterns.cpp mask.cpp \
   devCairo.cpp devPicTeX.cpp devPS.cpp \
   devQuartz.cpp @BUILD_AQUA_TRUE@ qdBitmap.cpp qdPDF.cpp
 SOURCES_M = @BUILD_AQUA_TRUE@ qdCocoa.m

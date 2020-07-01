@@ -351,29 +351,35 @@ static void*  QuartzDevice_GetParameter(QuartzDesc_t desc, const char *key)
 
 #pragma mark RGD API Function Prototypes
 
-static void     RQuartz_Close(pDevDesc);
-static void     RQuartz_Activate(pDevDesc);
-static void     RQuartz_Deactivate(pDevDesc);
-static void     RQuartz_Size(double*, double*, double*, double*, pDevDesc);
-static void     RQuartz_NewPage(const pGEcontext, pDevDesc);
-static int      RQuartz_HoldFlush(pDevDesc, int);
-static void     RQuartz_Clip(double, double, double, double, pDevDesc);
-static double   RQuartz_StrWidth(const char*, const pGEcontext, pDevDesc);
-static void     RQuartz_Text(double, double, const char*, double, double, const pGEcontext, pDevDesc);
-static void     RQuartz_Rect(double, double, double, double, const pGEcontext, pDevDesc);
-static void     RQuartz_Raster(unsigned int *raster, int w, int h,
-                       double x, double y, double width, double height,
-                       double rot, Rboolean interpolate,
-                       const pGEcontext gc, pDevDesc dd);
-static SEXP     RQuartz_Cap(pDevDesc dd);
-static void     RQuartz_Circle(double, double, double, const pGEcontext, pDevDesc);
-static void     RQuartz_Line(double, double, double, double, const pGEcontext, pDevDesc);
-static void     RQuartz_Polyline(int, double*, double*, const pGEcontext, pDevDesc);
-static void     RQuartz_Polygon(int, double*, double*, const pGEcontext, pDevDesc);
-static void     RQuartz_Path(double*, double*, int, int*, Rboolean, const pGEcontext, pDevDesc);
-static Rboolean RQuartz_Locator(double*, double*, pDevDesc);
-static void     RQuartz_Mode(int mode, pDevDesc);
-static void     RQuartz_MetricInfo(int, const pGEcontext , double*, double*, double*, pDevDesc);
+static void RQuartz_Close(pDevDesc);
+static void RQuartz_Activate(pDevDesc);
+static void RQuartz_Deactivate(pDevDesc);
+static void RQuartz_Size(double *, double *, double *, double *, pDevDesc);
+static void RQuartz_NewPage(const pGEcontext, pDevDesc);
+static int RQuartz_HoldFlush(pDevDesc, int);
+static void RQuartz_Clip(double, double, double, double, pDevDesc);
+static double RQuartz_StrWidth(const char *, const pGEcontext, pDevDesc);
+static void RQuartz_Text(double, double, const char *, double, double, const pGEcontext, pDevDesc);
+static void RQuartz_Rect(double, double, double, double, const pGEcontext, pDevDesc);
+static void RQuartz_Raster(unsigned int *raster, int w, int h,
+                           double x, double y, double width, double height,
+                           double rot, Rboolean interpolate,
+                           const pGEcontext gc, pDevDesc dd);
+static SEXP RQuartz_Cap(pDevDesc dd);
+static void RQuartz_Circle(double, double, double, const pGEcontext, pDevDesc);
+static void RQuartz_Line(double, double, double, double, const pGEcontext, pDevDesc);
+static void RQuartz_Polyline(int, double *, double *, const pGEcontext, pDevDesc);
+static void RQuartz_Polygon(int, double *, double *, const pGEcontext, pDevDesc);
+static void RQuartz_Path(double *, double *, int, int *, Rboolean, const pGEcontext, pDevDesc);
+static Rboolean RQuartz_Locator(double *, double *, pDevDesc);
+static void RQuartz_Mode(int mode, pDevDesc);
+static void RQuartz_MetricInfo(int, const pGEcontext, double *, double *, double *, pDevDesc);
+static SEXP     RQuartz_setPattern(SEXP pattern, pDevDesc dd);
+static void     RQuartz_releasePattern(SEXP ref, pDevDesc dd);
+static SEXP     RQuartz_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
+static void     RQuartz_releaseClipPath(SEXP ref, pDevDesc dd);
+static SEXP     RQuartz_setMask(SEXP path, SEXP ref, pDevDesc dd);
+static void     RQuartz_releaseMask(SEXP ref, pDevDesc dd);
 
 #pragma mark Quartz device implementation
 
@@ -432,6 +438,14 @@ void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     dev->haveRaster = 2;
     dev->haveCapture = (def->cap) ? 2 : 1;
     dev->haveLocator = (def->locatePoint) ? 2 : 1;
+
+    dev->setPattern      = RQuartz_setPattern;
+    dev->releasePattern  = RQuartz_releasePattern;
+    dev->setClipPath     = RQuartz_setClipPath;
+    dev->releaseClipPath = RQuartz_releaseClipPath;
+    dev->setMask         = RQuartz_setMask;
+    dev->releaseMask     = RQuartz_releaseMask;
+    dev->deviceVersion = R_GE_definitions;
 
     QuartzDesc *qd = calloc(1, sizeof(QuartzDesc));
     qd->width      = def->width;
@@ -1284,6 +1298,24 @@ static Rboolean RQuartz_Locator(double *x, double *y, DEVDESC)
     *y/=xd->scaley;
     return res;
 }
+
+static SEXP RQuartz_setPattern(SEXP pattern, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void RQuartz_releasePattern(SEXP ref, pDevDesc dd) {} 
+
+static SEXP RQuartz_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void RQuartz_releaseClipPath(SEXP ref, pDevDesc dd) {}
+
+static SEXP RQuartz_setMask(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void RQuartz_releaseMask(SEXP ref, pDevDesc dd) {}
 
 #pragma mark -
 #pragma mark R Interface

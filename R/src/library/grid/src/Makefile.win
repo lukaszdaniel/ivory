@@ -12,7 +12,7 @@ subdir = src/library/$(pkg)/src
 R_HOME = $(top_builddir)
 
 SOURCES_C = 
-SOURCES_CXX = gpar.cpp grid.cpp just.cpp layout.cpp matrix.cpp register.cpp state.cpp \
+SOURCES_CXX = clippath.cpp gpar.cpp grid.cpp just.cpp layout.cpp mask.cpp matrix.cpp register.cpp state.cpp \
   unit.cpp util.cpp viewport.cpp
 SOURCES_F =
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)

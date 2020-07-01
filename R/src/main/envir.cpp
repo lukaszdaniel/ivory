@@ -2955,7 +2955,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 	    FrameNames(FRAME(env), all, ans, &k);
     }
 
-    if(sorted) sortVector(ans, FALSE);
+    if(sorted) sortVector(ans, false);
     UNPROTECT(1);
     return ans;
 }
@@ -3141,25 +3141,35 @@ HIDDEN SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* Leaks out via inlining in ../library/tools/src/ */
-#define R_ENVLENGTH(NAME_, LENGTH_FN_, TYPE_)                                     \
-    TYPE_ NAME_(SEXP rho)                                                         \
-    {                                                                             \
-        if (IS_USER_DATABASE(rho))                                                \
-        {                                                                         \
-            R_ObjectTable *tb = (R_ObjectTable *)R_ExternalPtrAddr(HASHTAB(rho)); \
-            return LENGTH_FN_(tb->objects(tb));                                   \
-        }                                                                         \
-        else if (HASHTAB(rho) != R_NilValue)                                      \
-            return HashTableSize(HASHTAB(rho), 1);                                \
-        else if (rho == R_BaseEnv || rho == R_BaseNamespace)                      \
-            return BuiltinSize(1, 0);                                             \
-        else                                                                      \
-            return FrameSize(FRAME(rho), 1);                                      \
+int Rf_envlength(SEXP rho)
+{
+    if (IS_USER_DATABASE(rho))
+    {
+        R_ObjectTable *tb = (R_ObjectTable *)R_ExternalPtrAddr(HASHTAB(rho));
+        return Rf_length(tb->objects(tb));
     }
+    else if (HASHTAB(rho) != R_NilValue)
+        return HashTableSize(HASHTAB(rho), 1);
+    else if (rho == R_BaseEnv || rho == R_BaseNamespace)
+        return BuiltinSize(1, 0);
+    else
+        return FrameSize(FRAME(rho), 1);
+}
 
-R_ENVLENGTH(Rf_envlength,   Rf_length, int)
-
-R_ENVLENGTH(Rf_envxlength, Rf_xlength, R_xlen_t)
+R_xlen_t Rf_envxlength(SEXP rho)
+{
+    if (IS_USER_DATABASE(rho))
+    {
+        R_ObjectTable *tb = (R_ObjectTable *)R_ExternalPtrAddr(HASHTAB(rho));
+        return Rf_xlength(tb->objects(tb));
+    }
+    else if (HASHTAB(rho) != R_NilValue)
+        return HashTableSize(HASHTAB(rho), 1);
+    else if (rho == R_BaseEnv || rho == R_BaseNamespace)
+        return BuiltinSize(1, 0);
+    else
+        return FrameSize(FRAME(rho), 1);
+}
 
 /*----------------------------------------------------------------------
 
@@ -3176,16 +3186,16 @@ HIDDEN SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     int intern, nelts;
     checkArity(op, args);
     intern = asLogical(CAR(args));
-    if (intern == NA_INTEGER) intern = 0;
+    if (intern == NA_INTEGER)
+        intern = 0;
     nelts = BuiltinSize(1, intern);
     PROTECT(ans = allocVector(STRSXP, nelts));
     nelts = 0;
     BuiltinNames(1, intern, ans, &nelts);
-    sortVector(ans, TRUE);
+    sortVector(ans, true);
     UNPROTECT(1); /* ans */
     return ans;
 }
-
 
 /*----------------------------------------------------------------------
 

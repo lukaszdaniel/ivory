@@ -50,7 +50,7 @@ print.htest <- function(x, digits = getOption("digits"), prefix = "\t", ...)
     }
     if(!is.null(x$conf.int)) {
         cat(gettextf("%s percent confidence interval:", format(100 * attr(x$conf.int, "conf.level")), domain = "R-stats"), "\n ", sep = "")
-        cat(format(x$conf.int[1:2], digits=digits), collapse = " ")
+        cat(format(x$conf.int[1:2], digits=digits), collapse = " ", sep = "")
 	cat("\n")
     }
     if(!is.null(x$estimate)) {

@@ -726,7 +726,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	    /* put the levels in lexicographic order */
 
-	    sortVector(levs, FALSE);
+	    sortVector(levs, false);
 
 	    PROTECT(a = matchE(levs, cvec, NA_INTEGER, env));
 	    for (i = 0; i < len; i++)
@@ -788,7 +788,7 @@ SEXP menu(SEXP choices)
 /* readTableHead(file, nlines, comment.char, blank.lines.skip, quote, sep) */
 /* simplified version of readLines, with skip of blank lines and
    comment-only lines */
-#define BUF_SIZE 1000
+constexpr int BUF_SIZE = 1000;
 SEXP readtablehead(SEXP args)
 {
     SEXP file, comstr, ans = R_NilValue, ans2, quotes, sep;

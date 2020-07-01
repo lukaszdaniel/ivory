@@ -14,7 +14,7 @@ R_SHARE_DIR = $(R_HOME)/share
 R_INCLUDE_DIR = $(R_HOME)/include
 
 SOURCES_C = 
-SOURCES_CXX = gpar.cpp grid.cpp just.cpp layout.cpp matrix.cpp register.cpp state.cpp \
+SOURCES_CXX = clippath.cpp gpar.cpp grid.cpp just.cpp layout.cpp mask.cpp matrix.cpp register.cpp state.cpp \
   unit.cpp util.cpp viewport.cpp
 
 SOURCES_F =

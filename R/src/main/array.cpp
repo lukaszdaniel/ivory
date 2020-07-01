@@ -1270,7 +1270,7 @@ HIDDEN SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP s, value;
 	/* Remove argument names to ensure positional matching */
 	for(s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
-	value = R_possible_dispatch(call, op, args, rho, FALSE);
+	value = R_possible_dispatch(call, op, args, rho, false);
 	if (value) return value;
     }
 

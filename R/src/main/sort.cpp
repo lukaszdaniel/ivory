@@ -405,7 +405,7 @@ HIDDEN SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = duplicate(CAR(args)));
     SET_ATTRIB(ans, R_NilValue);  /* this is never called with names */
     SET_OBJECT(ans, 0);		  /* we may have just stripped off the class */
-    sortVector(ans, decreasing);
+    sortVector(ans, bool(decreasing));
     UNPROTECT(1);
     return(ans); /* wrapping with metadata happens at end of sort.int */
 }
@@ -530,7 +530,7 @@ static constexpr int incs[NI + 1] = {
 		}
 
 /* These are only called with n >= 2 */
-static void R_isort2(int *x, R_xlen_t n, Rboolean decreasing)
+static void R_isort2(int *x, R_xlen_t n, bool decreasing)
 {
     int v;
     R_xlen_t i, j, h, t;
@@ -547,7 +547,7 @@ static void R_isort2(int *x, R_xlen_t n, Rboolean decreasing)
 #undef less
 }
 
-static void R_rsort2(double *x, R_xlen_t n, Rboolean decreasing)
+static void R_rsort2(double *x, R_xlen_t n, bool decreasing)
 {
     double v;
     R_xlen_t i, j, h, t;
@@ -564,7 +564,7 @@ static void R_rsort2(double *x, R_xlen_t n, Rboolean decreasing)
 #undef less
 }
 
-static void R_csort2(Rcomplex *x, R_xlen_t n, Rboolean decreasing)
+static void R_csort2(Rcomplex *x, R_xlen_t n, bool decreasing)
 {
     Rcomplex v;
     R_xlen_t i, j, h, t;
@@ -587,7 +587,7 @@ static void R_csort2(Rcomplex *x, R_xlen_t n, Rboolean decreasing)
 	}
 }
 
-static void ssort2(SEXP *x, R_xlen_t n, Rboolean decreasing)
+static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
 {
     SEXP v;
     R_xlen_t i, j, h, t;
@@ -611,7 +611,7 @@ static void ssort2(SEXP *x, R_xlen_t n, Rboolean decreasing)
 }
 
 /* The meat of sort.int() */
-void sortVector(SEXP s, Rboolean decreasing)
+void Rf_sortVector(SEXP s, bool decreasing)
 {
     R_xlen_t n = XLENGTH(s);
     if (n >= 2 && (decreasing || isUnsorted(s, FALSE)))
@@ -644,21 +644,31 @@ void sortVector(SEXP s, Rboolean decreasing)
    NOTA BENE:  k < n  required, and *not* checked here but in do_psort();
 	       -----  infinite loop possible otherwise!
  */
-#define psort_body						\
-    Rboolean nalast=TRUE;					\
-    R_xlen_t L, R, i, j;					\
-								\
-    for (L = lo, R = hi; L < R; ) {				\
-	v = x[k];						\
-	for(i = L, j = R; i <= j;) {				\
-	    while (TYPE_CMP(x[i], v, nalast) < 0) i++;		\
-	    while (TYPE_CMP(v, x[j], nalast) < 0) j--;		\
-	    if (i <= j) { w = x[i]; x[i++] = x[j]; x[j--] = w; }\
-	}							\
-	if (j < k) L = i;					\
-	if (k < i) R = j;					\
-    }
-
+#define psort_body                                \
+	Rboolean nalast = TRUE;                       \
+	R_xlen_t L, R, i, j;                          \
+                                                  \
+	for (L = lo, R = hi; L < R;)                  \
+	{                                             \
+		v = x[k];                                 \
+		for (i = L, j = R; i <= j;)               \
+		{                                         \
+			while (TYPE_CMP(x[i], v, nalast) < 0) \
+				i++;                              \
+			while (TYPE_CMP(v, x[j], nalast) < 0) \
+				j--;                              \
+			if (i <= j)                           \
+			{                                     \
+				w = x[i];                         \
+				x[i++] = x[j];                    \
+				x[j--] = w;                       \
+			}                                     \
+		}                                         \
+		if (j < k)                                \
+			L = i;                                \
+		if (k < i)                                \
+			R = j;                                \
+	}
 
 static void iPsort2(int *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 {
@@ -1477,7 +1487,7 @@ HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP rank, x;
     int *ik = NULL /* -Wall */;
     double *rk = NULL /* -Wall */;
-    enum {AVERAGE, MAX, MIN} ties_kind = AVERAGE;
+    enum Ties {AVERAGE, MAX, MIN} ties_kind = AVERAGE;
     Rboolean isLong = FALSE;
 
     checkArity(op, args);

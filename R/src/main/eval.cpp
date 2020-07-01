@@ -3462,7 +3462,7 @@ bool Rf_DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	else argValue = args;
 	for(el = argValue; el != R_NilValue; el = CDR(el)) {
 	    if(IS_S4_OBJECT(CAR(el))) {
-		value = R_possible_dispatch(call, op, argValue, rho, TRUE);
+		value = R_possible_dispatch(call, op, argValue, rho, true);
 		if(value) {
 		    *ans = value;
 		    UNPROTECT(nprotect);
@@ -3550,7 +3550,7 @@ bool Rf_DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    } else argValue = args;
 	    PROTECT(argValue); nprotect++;
 	    /* This means S4 dispatch */
-	    value = R_possible_dispatch(call, op, argValue, rho, TRUE);
+	    value = R_possible_dispatch(call, op, argValue, rho, true);
 	    if(value) {
 		*ans = value;
 		UNPROTECT(nprotect);
@@ -3696,8 +3696,7 @@ static SEXP classForGroupDispatch(SEXP obj)
 }
 
 HIDDEN
-bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
-		  SEXP *ans)
+bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho, SEXP *ans)
 {
     int i, nargs, lwhich, rwhich;
     SEXP lclass, s, t, m, lmeth, lsxp, lgr, newvars;
@@ -3726,7 +3725,7 @@ bool Rf_DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho
 	if(isOps)
 	    for(s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
 	if(R_has_methods(op) &&
-	   (value = R_possible_dispatch(call, op, args, rho, FALSE))) {
+	   (value = R_possible_dispatch(call, op, args, rho, false))) {
 	       *ans = value;
 	       return true;
 	}
@@ -5492,7 +5491,7 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
 	have been evaluated; these will then be evaluated again by the
 	compiled argument code. */
   if (IS_S4_OBJECT(x) && R_has_methods(op)) {
-    SEXP val = R_possible_dispatch(call, op, pargs, rho, TRUE);
+    SEXP val = R_possible_dispatch(call, op, pargs, rho, true);
     if (val) {
       *pv = val;
       UNPROTECT(1);

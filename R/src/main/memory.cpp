@@ -3755,7 +3755,8 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
    Added to API in R 3.4.0.
    Work around casting issues: works where it is needed.
  */
-union fn_ptr {
+union fn_ptr
+{
     void *p;
     DL_FUNC fn;
 };

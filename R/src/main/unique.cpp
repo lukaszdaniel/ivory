@@ -462,10 +462,10 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 
 static bool duplicatedInit(SEXP x, HashData *d)
 {
-    R_xlen_t i, n = XLENGTH(x);
     bool stop = false;
 
     if(TYPEOF(x) == STRSXP) {
+	R_xlen_t i, n = XLENGTH(x);
 	for(i = 0; i < n; i++) {
 	    if(IS_BYTES(STRING_ELT(x, i))) {
 		d->useUTF8 = FALSE;
@@ -483,6 +483,7 @@ static bool duplicatedInit(SEXP x, HashData *d)
 	    }
 	}
     } else if (TYPEOF(x) == VECSXP) {
+	R_xlen_t i, n = XLENGTH(x);
 	for(i = 0; i < n; i++)
 	    if (duplicatedInit(VECTOR_ELT(x, i), d)) {
 		stop = true;

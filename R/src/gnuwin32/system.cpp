@@ -240,8 +240,7 @@ void Rconsolesetwidth(int cols)
 	R_SetOptionWidth(cols);
 }
 
-static int
-GuiReadConsole(const char *prompt, char *buf, int len, int addtohistory)
+static int GuiReadConsole(const char *prompt, char *buf, int len, int addtohistory)
 {
     int res;
     const char *NormalPrompt =
@@ -272,8 +271,7 @@ static void __cdecl ReaderThread(void *unused)
     }
 }
 
-static int
-ThreadedReadConsole(const char *prompt, char *buf, int len, int addtohistory)
+static int ThreadedReadConsole(const char *prompt, char *buf, int len, int addtohistory)
 {
     sighandler_t oldint,oldbreak;
     /*
@@ -305,8 +303,7 @@ ThreadedReadConsole(const char *prompt, char *buf, int len, int addtohistory)
 
 
 /*2: from character console with getline (only used as InThreadReadConsole)*/
-static int
-CharReadConsole(const char *prompt, char *buf, int len, int addtohistory)
+static int CharReadConsole(const char *prompt, char *buf, int len, int addtohistory)
 {
     int res = getline(prompt, buf, len);
     if (addtohistory) gl_histadd(buf);
@@ -316,8 +313,7 @@ CharReadConsole(const char *prompt, char *buf, int len, int addtohistory)
 /*3: (as InThreadReadConsole) and 4: non-interactive */
 static void *cd = NULL;
 
-static int
-FileReadConsole(const char *prompt, char *buf, int len, int addhistory)
+static int FileReadConsole(const char *prompt, char *buf, int len, int addhistory)
 {
     int ll, err = 0;
 

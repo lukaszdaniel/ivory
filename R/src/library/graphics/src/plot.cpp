@@ -35,7 +35,7 @@
 
 using namespace std;
 
-R_INLINE static void TypeCheck(SEXP s, SEXPTYPE type)
+inline static void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)
 	error(_("invalid type passed to graphics function"));
@@ -3652,17 +3652,16 @@ SEXP C_erase(SEXP args)
 /* symbols(..) in ../R/symbols.R  : */
 
 /* utility just computing range() */
-static bool SymbolRange(double *x, int n, double *xmax, double *xmin)
+static bool SymbolRange(double *x, int n, double &xmax, double &xmin)
 {
-    int i;
-    *xmax = -DBL_MAX;
-    *xmin =  DBL_MAX;
-    for(i = 0; i < n; i++)
+    xmax = -DBL_MAX;
+    xmin =  DBL_MAX;
+    for(int i = 0; i < n; i++)
 	if (R_FINITE(x[i])) {
-	    if (*xmax < x[i]) *xmax = x[i];
-	    if (*xmin > x[i]) *xmin = x[i];
+	    if (xmax < x[i]) xmax = x[i];
+	    if (xmin > x[i]) xmin = x[i];
 	}
-    return (*xmax >= *xmin && *xmin >= 0);
+    return (xmax >= xmin && xmin >= 0);
 }
 
 static void CheckSymbolPar(SEXP p, int *nr, int *nc)
@@ -3737,7 +3736,7 @@ SEXP C_symbols(SEXP args)
     case 1: /* circles */
 	if (nc != 1)
 	    error(_("invalid circles data"));
-	if (!SymbolRange(REAL(p), nr, &pmax, &pmin))
+	if (!SymbolRange(REAL(p), nr, pmax, pmin))
 	    error(_("invalid symbol parameter"));
 	for (i = 0; i < nr; i++) {
 	    if (R_FINITE(REAL(x)[i]) && R_FINITE(REAL(y)[i]) &&
@@ -3758,7 +3757,7 @@ SEXP C_symbols(SEXP args)
     case 2: /* squares */
 	if(nc != 1)
 	    error(_("invalid squares data"));
-	if(!SymbolRange(REAL(p), nr, &pmax, &pmin))
+	if(!SymbolRange(REAL(p), nr, pmax, pmin))
 	    error(_("invalid symbol parameter"));
 	for (i = 0; i < nr; i++) {
 	    if (R_FINITE(REAL(x)[i]) && R_FINITE(REAL(y)[i]) &&
@@ -3783,7 +3782,7 @@ SEXP C_symbols(SEXP args)
     case 3: /* rectangles */
 	if (nc != 2)
 	    error(_("invalid rectangles data (need 2 columns)"));
-	if (!SymbolRange(REAL(p), 2 * nr, &pmax, &pmin))
+	if (!SymbolRange(REAL(p), 2 * nr, pmax, pmin))
 	    error(_("invalid symbol parameter"));
 	for (i = 0; i < nr; i++) {
 	    if (R_FINITE(REAL(x)[i]) && R_FINITE(REAL(y)[i]) &&
@@ -3813,7 +3812,7 @@ SEXP C_symbols(SEXP args)
     case 4: /* stars */
 	if (nc < 3)
 	    error(_("invalid stars data"));
-	if (!SymbolRange(REAL(p), nc * nr, &pmax, &pmin))
+	if (!SymbolRange(REAL(p), nc * nr, pmax, pmin))
 	    error(_("invalid symbol parameter"));
 	vmax = vmaxget();
 	pp = (double*)R_alloc(nc, sizeof(double));
@@ -3855,14 +3854,14 @@ SEXP C_symbols(SEXP args)
     case 5: /* thermometers */
 	if (nc != 3 && nc != 4)
 	    error(_("invalid thermometers data (need 3 or 4 columns)"));
-	SymbolRange(REAL(p)+2*nr/* <-- pointer arith*/, nr, &pmax, &pmin);
+	SymbolRange(REAL(p)+2*nr/* <-- pointer arith*/, nr, pmax, pmin);
 	if (pmax < pmin)
 	    error(_("invalid 'thermometers[, %s]'"),
 		      (nc == 4)? "3:4" : "3");
 	if (pmin < 0. || pmax > 1.) /* S-PLUS has an error here */
 	    warning(_("'thermometers[, %s]' not in [0,1] -- may look funny"),
 		    (nc == 4)? "3:4" : "3");
-	if (!SymbolRange(REAL(p), 2 * nr, &pmax, &pmin))
+	if (!SymbolRange(REAL(p), 2 * nr, pmax, pmin))
 	    error(_("invalid 'thermometers[, %s]'"), "1:2");
 	for (i = 0; i < nr; i++) {
 	    xx = REAL(x)[i];
@@ -3912,7 +3911,7 @@ SEXP C_symbols(SEXP args)
 	}
 	if (pmin < 0. || pmax > 1.) /* S-PLUS has an error here */
 	    warning(_("'boxplots[, 5]' outside [0,1] -- may look funny"));
-	if (!SymbolRange(REAL(p), 4 * nr, &pmax, &pmin))
+	if (!SymbolRange(REAL(p), 4 * nr, pmax, pmin))
 	    error(_("invalid 'boxplots[, 1:4]'"));
 	for (i = 0; i < nr; i++) {
 	    xx = REAL(x)[i];

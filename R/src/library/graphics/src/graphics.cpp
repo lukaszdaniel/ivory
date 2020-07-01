@@ -2195,52 +2195,51 @@ void GRestore(pGEDevDesc dd)
 /*  specified as a arguments to high-level  */
 /*  graphics functions.	 */
 
-static double	adjsave;	/* adj */
-static int	annsave;	/* ann */
-static char	btysave;	/* bty */
-static double	cexsave;	/* cex */
-static double   lheightsave;
-static double	cexbasesave;	/* cexbase */
-static double	cexmainsave;	/* cex.main */
-static double	cexlabsave;	/* cex.lab */
-static double	cexsubsave;	/* cex.sub */
-static double	cexaxissave;	/* cex.axis */
-static int	colsave;	/* col */
-static int	fgsave;		/* fg */
-static int	bgsave;		/* bg */
-static int	colmainsave;	/* col.main */
-static int	collabsave;	/* col.lab */
-static int	colsubsave;	/* col.sub */
-static int	colaxissave;	/* col.axis */
-static double	crtsave;	/* character rotation */
-static char     familysave[201];
-static int	fontsave;	/* font */
-static int	fontmainsave;	/* font.main */
-static int	fontlabsave;	/* font.lab */
-static int	fontsubsave;	/* font.sub */
-static int	fontaxissave;	/* font.axis */
-static int	errsave;	/* error mode */
-static int	labsave[3];	/* axis labelling parameters */
-static int	lassave;	/* label style */
-static int	ltysave;	/* line type */
-static double	lwdsave;	/* line width */
+static double adjsave; /* adj */
+static int annsave;    /* ann */
+static char btysave;   /* bty */
+static double cexsave; /* cex */
+static double lheightsave;
+static double cexbasesave; /* cexbase */
+static double cexmainsave; /* cex.main */
+static double cexlabsave;  /* cex.lab */
+static double cexsubsave;  /* cex.sub */
+static double cexaxissave; /* cex.axis */
+static int colsave;        /* col */
+static int fgsave;         /* fg */
+static int bgsave;         /* bg */
+static int colmainsave;    /* col.main */
+static int collabsave;     /* col.lab */
+static int colsubsave;     /* col.sub */
+static int colaxissave;    /* col.axis */
+static double crtsave;     /* character rotation */
+static char familysave[201];
+static int fontsave;     /* font */
+static int fontmainsave; /* font.main */
+static int fontlabsave;  /* font.lab */
+static int fontsubsave;  /* font.sub */
+static int fontaxissave; /* font.axis */
+static int errsave;      /* error mode */
+static int labsave[3];   /* axis labelling parameters */
+static int lassave;      /* label style */
+static int ltysave;      /* line type */
+static double lwdsave;   /* line width */
 static R_GE_lineend lendsave;
 static R_GE_linejoin ljoinsave;
-static double   lmitresave;
-static double	mgpsave[3];	/* margin position for annotation */
-static double	mkhsave;	/* mark height */
-static int	pchsave;	/* plotting character */
-static double	srtsave;	/* string rotation */
-static double	tcksave;	/* tick mark length */
-static double	tclsave;	/* tick mark length in LINES */
-static double	xaxpsave[3];	/* x axis parameters */
-static char	xaxssave;	/* x axis calculation style */
-static char	xaxtsave;	/* x axis type */
-static int	xpdsave;	/* clipping control */
-static double	yaxpsave[3];	/* y axis parameters */
-static char	yaxssave;	/* y axis calculation style */
-static char	yaxtsave;	/* y axis type */
-
+static double lmitresave;
+static double mgpsave[3];  /* margin position for annotation */
+static double mkhsave;     /* mark height */
+static int pchsave;        /* plotting character */
+static double srtsave;     /* string rotation */
+static double tcksave;     /* tick mark length */
+static double tclsave;     /* tick mark length in LINES */
+static double xaxpsave[3]; /* x axis parameters */
+static char xaxssave;      /* x axis calculation style */
+static char xaxtsave;      /* x axis type */
+static int xpdsave;        /* clipping control */
+static double yaxpsave[3]; /* y axis parameters */
+static char yaxssave;      /* y axis calculation style */
+static char yaxtsave;      /* y axis type */
 
 /* Make a temporary copy of the inline parameter values. */
 void GSavePars(pGEDevDesc dd)
@@ -2486,6 +2485,10 @@ void gcontextFromGP(pGEcontext gc, pGEDevDesc dd)
     gc->lineheight = gpptr(dd)->lheight;
     gc->fontface = gpptr(dd)->font;
     strncpy(gc->fontfamily, gpptr(dd)->family, 201);
+    /*
+     * Just "zero" this for now
+     */
+    gc->patternFill = R_NilValue;
 }
 
 /* Draw a line. */

@@ -187,122 +187,201 @@ SEXP doSetViewport(SEXP vp,
 			  Rboolean(!topLevelVP &&
 			  !deviceChanged(devWidthCM, devHeightCM, 
 					 viewportParent(vp))), dd);
-    /* 
-     * We must "turn off" clipping
-     * We set the clip region to be the entire device
-     * (actually, as for the top-level viewport, we set it
-     *  to be slightly larger than the device to avoid 
-     *  "edge effects")
+    /*
+     * Establish the clipping region for this viewport
      */
-    if (viewportClip(vp) == NA_LOGICAL) {
-	xx1 = toDeviceX(-0.5*devWidthCM/2.54, GE_INCHES, dd);
-	yy1 = toDeviceY(-0.5*devHeightCM/2.54, GE_INCHES, dd);
-	xx2 = toDeviceX(1.5*devWidthCM/2.54, GE_INCHES, dd);
-	yy2 = toDeviceY(1.5*devHeightCM/2.54, GE_INCHES, dd);
-	GESetClip(xx1, yy1, xx2, yy2, dd);
-    }
-    /* If we are supposed to clip to this viewport ...
-     * NOTE that we will only clip if there is no rotation
-     */
-    else if (viewportClip(vp)) {
-	double rotationAngle = REAL(viewportRotation(vp))[0];
-	if (rotationAngle != 0 &&
-            rotationAngle != 90 &&
-            rotationAngle != 270 &&
-            rotationAngle != 360) {
-	    warning(_("cannot clip to rotated viewport"));
-            /* Still need to set clip region for this viewport.
-               So "inherit" parent clip region.
-               In other words, 'clip=TRUE' + 'rot=15' = 'clip=FALSE'
-            */
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /*
+         * Clipping settings are (silently) ignored during resolution of 
+         * a clipping path
+         */
+        if (!isClipPath(viewportClipSXP(vp)) &&
+            (viewportClip(vp) == NA_LOGICAL || viewportClip(vp))) {
+            warning(_("Turning clipping on or off within a clipping path is no honoured"));
+        }
+    } else if (isClipPath(viewportClipSXP(vp))) {
+        SEXP currentClip, parentClip;
+        /*
+         * Set clipping path AFTER doSetViewport() so that this
+         * viewport is the current viewport for resolving clip path.
+         */
+        /*
+         * Record clip rect from parent, just so there are numbers there
+         */
+        PROTECT(parentClip = viewportClipRect(viewportParent(vp)));
+        PROTECT(currentClip = allocVector(REALSXP, 4));
+        REAL(currentClip)[0] = REAL(parentClip)[0];
+        REAL(currentClip)[1] = REAL(parentClip)[1];
+        REAL(currentClip)[2] = REAL(parentClip)[2];
+        REAL(currentClip)[3] = REAL(parentClip)[3];
+        SET_VECTOR_ELT(vp, PVP_CLIPRECT, currentClip);
+        UNPROTECT(2);
+    } else {
+        if (viewportClip(vp) == NA_LOGICAL) {
+            /* 
+             * We must "turn off" clipping
+             * We set the clip region to be the entire device
+             * (actually, as for the top-level viewport, we set it
+             *  to be slightly larger than the device to avoid 
+             *  "edge effects")
+             */
+            xx1 = toDeviceX(-0.5*devWidthCM/2.54, GE_INCHES, dd);
+            yy1 = toDeviceY(-0.5*devHeightCM/2.54, GE_INCHES, dd);
+            xx2 = toDeviceX(1.5*devWidthCM/2.54, GE_INCHES, dd);
+            yy2 = toDeviceY(1.5*devHeightCM/2.54, GE_INCHES, dd);
+            GESetClip(xx1, yy1, xx2, yy2, dd);
+        } else if (viewportClip(vp)) {
+            /* If we are supposed to clip to this viewport ...
+             * NOTE that we will only clip if there is no rotation
+             */
+            double rotationAngle = REAL(viewportRotation(vp))[0];
+            if (rotationAngle != 0 &&
+                rotationAngle != 90 &&
+                rotationAngle != 270 &&
+                rotationAngle != 360) {
+                warning(_("cannot clip to rotated viewport"));
+                /* Still need to set clip region for this viewport.
+                   So "inherit" parent clip region.
+                   In other words, 'clip=TRUE' + 'rot=15' = 'clip=FALSE'
+                */
+                SEXP parentClip;
+                PROTECT(parentClip = viewportClipRect(viewportParent(vp)));
+                xx1 = REAL(parentClip)[0];
+                yy1 = REAL(parentClip)[1];
+                xx2 = REAL(parentClip)[2];
+                yy2 = REAL(parentClip)[3];
+                UNPROTECT(1);
+            } else {
+                /* Calculate a clipping region and set it
+                 */
+                SEXP x1, y1, x2, y2;
+                LViewportContext vpc;
+                double vpWidthCM = REAL(viewportWidthCM(vp))[0];
+                double vpHeightCM = REAL(viewportHeightCM(vp))[0];
+                R_GE_gcontext gc;
+                LTransform transform;
+                for (i=0; i<3; i++)
+                    for (j=0; j<3; j++)
+                        transform[i][j] = 
+                            REAL(viewportTransform(vp))[i + 3*j];
+                if (!topLevelVP) {
+                    PROTECT(x1 = unit(0, L_NPC));
+                    PROTECT(y1 = unit(0, L_NPC));
+                    PROTECT(x2 = unit(1, L_NPC));
+                    PROTECT(y2 = unit(1, L_NPC));
+                } else {
+                    /* Special case for top-level viewport.
+                     * Set clipping region outside device boundaries.
+                     * This means that we have set the clipping region to
+                     * something, but avoids problems if the nominal device
+                     * limits are actually within its physical limits
+                     * (e.g., PostScript)
+                     */
+                    PROTECT(x1 = unit(-.5, L_NPC));
+                    PROTECT(y1 = unit(-.5, L_NPC));
+                    PROTECT(x2 = unit(1.5, L_NPC));
+                    PROTECT(y2 = unit(1.5, L_NPC));
+                }
+                getViewportContext(vp, &vpc);
+                gcontextFromViewport(vp, &gc, dd);
+                transformLocn(x1, y1, 0, vpc, &gc, 
+                              vpWidthCM, vpHeightCM,
+                              dd,
+                              transform,
+                              &xx1, &yy1);
+                transformLocn(x2, y2, 0, vpc, &gc,
+                              vpWidthCM, vpHeightCM,
+                              dd,
+                              transform,
+                              &xx2, &yy2);
+                UNPROTECT(4);  /* unprotect x1, y1, x2, y2 */
+                /* The graphics engine only takes device coordinates
+                 */
+                xx1 = toDeviceX(xx1, GE_INCHES, dd);
+                yy1 = toDeviceY(yy1, GE_INCHES, dd);
+                xx2 = toDeviceX(xx2, GE_INCHES, dd);
+                yy2 = toDeviceY(yy2, GE_INCHES, dd);
+                GESetClip(xx1, yy1, xx2, yy2, dd);
+            }
+        } else {
+            /* If we haven't set the clipping region for this viewport
+             * we need to save the clipping region from its parent
+             * so that when we pop this viewport we can restore that.
+             */
+            /* NOTE that we are relying on grid.R setting clip=TRUE
+             * for the top-level viewport, else *BOOM*!
+             */
             SEXP parentClip;
+            SEXP parentClipPath;
             PROTECT(parentClip = viewportClipRect(viewportParent(vp)));
             xx1 = REAL(parentClip)[0];
             yy1 = REAL(parentClip)[1];
             xx2 = REAL(parentClip)[2];
             yy2 = REAL(parentClip)[3];
-            UNPROTECT(1);
-        } else {
-	    /* Calculate a clipping region and set it
-	     */
-	    SEXP x1, y1, x2, y2;
-	    LViewportContext vpc;
-	    double vpWidthCM = REAL(viewportWidthCM(vp))[0];
-	    double vpHeightCM = REAL(viewportHeightCM(vp))[0];
-	    R_GE_gcontext gc;
-	    LTransform transform;
-	    for (i=0; i<3; i++)
-		for (j=0; j<3; j++)
-		    transform[i][j] = 
-			REAL(viewportTransform(vp))[i + 3*j];
-	    if (!topLevelVP) {
-		PROTECT(x1 = unit(0, L_NPC));
-		PROTECT(y1 = unit(0, L_NPC));
-		PROTECT(x2 = unit(1, L_NPC));
-		PROTECT(y2 = unit(1, L_NPC));
-	    } else {
-		/* Special case for top-level viewport.
-		 * Set clipping region outside device boundaries.
-		 * This means that we have set the clipping region to
-		 * something, but avoids problems if the nominal device
-		 * limits are actually within its physical limits
-		 * (e.g., PostScript)
-		 */
-	        PROTECT(x1 = unit(-.5, L_NPC));
-		PROTECT(y1 = unit(-.5, L_NPC));
-		PROTECT(x2 = unit(1.5, L_NPC));
-		PROTECT(y2 = unit(1.5, L_NPC));
-	    }
-	    getViewportContext(vp, &vpc);
-	    gcontextFromViewport(vp, &gc, dd);
-	    transformLocn(x1, y1, 0, vpc, &gc, 
-			  vpWidthCM, vpHeightCM,
-			  dd,
-			  transform,
-			  &xx1, &yy1);
-	    transformLocn(x2, y2, 0, vpc, &gc,
-			  vpWidthCM, vpHeightCM,
-			  dd,
-			  transform,
-			  &xx2, &yy2);
-	    UNPROTECT(4);  /* unprotect x1, y1, x2, y2 */
-	    /* The graphics engine only takes device coordinates
-	     */
-	    xx1 = toDeviceX(xx1, GE_INCHES, dd);
-	    yy1 = toDeviceY(yy1, GE_INCHES, dd);
-	    xx2 = toDeviceX(xx2, GE_INCHES, dd);
-	    yy2 = toDeviceY(yy2, GE_INCHES, dd);
-	    GESetClip(xx1, yy1, xx2, yy2, dd);
-	}
-    } else {
-	/* If we haven't set the clipping region for this viewport
-	 * we need to save the clipping region from its parent
-	 * so that when we pop this viewport we can restore that.
-	 */
-	/* NOTE that we are relying on grid.R setting clip=TRUE
-	 * for the top-level viewport, else *BOOM*!
-	 */
-	SEXP parentClip;
-	PROTECT(parentClip = viewportClipRect(viewportParent(vp)));
-	xx1 = REAL(parentClip)[0];
-	yy1 = REAL(parentClip)[1];
-	xx2 = REAL(parentClip)[2];
-	yy2 = REAL(parentClip)[3];
-	UNPROTECT(1);
-        /* If we are revisiting a viewport that inherits a clip
-         * region from a parent viewport, we may need to reset 
-         * the clip region (at worst, we generate a redundant clip)
+            /*
+             * The parent may have a clipping path instead of a clipping rect
+             */
+            PROTECT(parentClipPath = VECTOR_ELT(viewportParent(vp), 
+                                                PVP_CLIPPATH));            
+            if (isClipPath(parentClipPath)) {
+                SET_VECTOR_ELT(vp, PVP_CLIPPATH, parentClipPath);
+            }
+            /* If we are revisiting a viewport that inherits a clip
+             * region from a parent viewport, we may need to reset 
+             * the clip region (at worst, we generate a redundant clip)
+             */
+            if (!pushing) {
+                if (isClipPath(parentClipPath)) {
+                    /*
+                     * Set clipping path AFTER doSetViewport() so that this
+                     * viewport is the current viewport for resolving clip path
+                     */
+                } else {
+                    GESetClip(xx1, yy1, xx2, yy2, dd);
+                }
+            }
+            UNPROTECT(2);
+        }
+        /*
+         * Record clip rect for revisiting this viewport
          */
-        if (!pushing) {
-	    GESetClip(xx1, yy1, xx2, yy2, dd);
+        PROTECT(currentClip = allocVector(REALSXP, 4));
+        REAL(currentClip)[0] = xx1;
+        REAL(currentClip)[1] = yy1;
+        REAL(currentClip)[2] = xx2;
+        REAL(currentClip)[3] = yy2;
+        SET_VECTOR_ELT(vp, PVP_CLIPRECT, currentClip);
+        UNPROTECT(1);
+    }
+    /*
+     * Establish the mask for this viewport
+     */
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /* Masks are (silently) ignored during resolution of a 
+         * clipping path
+         */
+    } else if (isMask(viewportMaskSXP(vp))) {
+        /* Resolve AFTER doSetViewport() so that the current viewport
+         * is the context for resolving the mask
+         */
+    } else {
+        if (viewportMask(vp)) {
+            /* TRUE = "inherit" means use the parent mask 
+             * So we record the parent mask in this pushed vp to restore on pop 
+             */
+            /* NOTE that we are relying on grid.R setting mask = FALSE
+             * (so pushedvp$mask = NULL)
+             * for the top-level viewport, else *BOOM*!
+             */
+            SET_VECTOR_ELT(vp, PVP_MASK, 
+                           VECTOR_ELT(viewportParent(vp), PVP_MASK));
+        } else {
+            /* FALSE = "none" means DO NOT use any masks */
+            SET_VECTOR_ELT(vp, PVP_MASK, R_NilValue);
+            /* We can enforce this immediately */
+            resolveMask(R_NilValue, dd);
         }
     }
-    PROTECT(currentClip = allocVector(REALSXP, 4));
-    REAL(currentClip)[0] = xx1;
-    REAL(currentClip)[1] = yy1;
-    REAL(currentClip)[2] = xx2;
-    REAL(currentClip)[3] = yy2;
-    SET_VECTOR_ELT(vp, PVP_CLIPRECT, currentClip);
     /*
      * Save the current device size
      */
@@ -312,7 +391,7 @@ SEXP doSetViewport(SEXP vp,
     PROTECT(heightCM = allocVector(REALSXP, 1));
     REAL(heightCM)[0] = devHeightCM;
     SET_VECTOR_ELT(vp, PVP_DEVHEIGHTCM, heightCM);
-    UNPROTECT(3);
+    UNPROTECT(2);
     return vp;
 }
 
@@ -346,6 +425,64 @@ SEXP L_setviewport(SEXP invp, SEXP hasParent)
     }
 #endif
     setGridStateElement(dd, GSS_VP, pushedvp);
+    /*
+     * Resolve patterns for this viewport 
+     */
+    {
+        SEXP vpgp = PROTECT(VECTOR_ELT(pushedvp, VP_GP));
+        SEXP fill = getListElement(vpgp, "fill");
+        if (fill != R_NilValue) {
+            /* Do not keep resolved fill because cannot release it
+               * (until grid.newpage()) 
+               */
+            resolveGPar(vpgp);
+            /* Record the resolved fill for subsequent up/down/pop */
+            SET_VECTOR_ELT(VECTOR_ELT(pushedvp, PVP_GPAR),
+                           GP_FILL,
+                           getListElement(vpgp, "fill"));
+            /* Ensure that the "current" gpar has the resolved fill too */
+            setGridStateElement(dd, GSS_GPAR, VECTOR_ELT(pushedvp, PVP_GPAR));
+        }
+        UNPROTECT(1);
+    }
+    /* 
+     * Resolve clipping paths for this viewport
+     */
+    {
+        SEXP clip, resolvedclip;
+        PROTECT(clip = viewportClipSXP(pushedvp));
+        if (isClipPath(clip)) {
+            if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+                warning(_("Clipping paths within a clipping path are not honoured"));
+                SET_VECTOR_ELT(pushedvp, PVP_CLIPPATH, R_NilValue);
+            } else {
+                /* Record the resolved clip path for subsequent up/down/pop */
+                PROTECT(resolvedclip = resolveClipPath(clip, dd));
+                SET_VECTOR_ELT(pushedvp, PVP_CLIPPATH, resolvedclip);
+                UNPROTECT(1);
+            }
+        }
+        UNPROTECT(1);
+    }
+    /* 
+     * Resolve mask for this viewport
+     */
+    {
+        SEXP mask, resolvedmask;
+        PROTECT(mask = viewportMaskSXP(pushedvp));
+        if (isMask(mask)) {
+            if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+                warning(_("Masks within a clipping path are not honoured"));
+                SET_VECTOR_ELT(pushedvp, PVP_MASK, R_NilValue);
+            } else {
+                /* Record resolved mask for subsequent up/down/pop */
+                PROTECT(resolvedmask = resolveMask(mask, dd));
+                SET_VECTOR_ELT(pushedvp, PVP_MASK, resolvedmask);
+                UNPROTECT(1);
+            }
+        }
+        UNPROTECT(1);
+    }
     UNPROTECT(3);
     return R_NilValue;
 }
@@ -521,6 +658,38 @@ SEXP L_downviewport(SEXP name, SEXP strict)
         }
 #endif
 	setGridStateElement(dd, GSS_VP, vp);
+        /* 
+         * Restore clipping paths for this viewport.
+         * This may resolve the clipping path again if device does
+         * not maintain clipping path cache.
+         */
+        {
+            SEXP clip, resolvedclip;
+            PROTECT(clip = VECTOR_ELT(vp, PVP_CLIPPATH));
+            if (isClipPath(clip)) {
+                /* Record resolved clip path for subsequent up/down/pop */
+                PROTECT(resolvedclip = resolveClipPath(clip, dd));
+                SET_VECTOR_ELT(vp, PVP_CLIPPATH, resolvedclip);
+                UNPROTECT(1);
+            }
+            UNPROTECT(1);
+        }
+        /* 
+         * Restore masks for this viewport.
+         * This may resolve the mask again if device does
+         * not maintain mask cache.
+         */
+        {
+            SEXP mask, resolvedmask;
+            PROTECT(mask = VECTOR_ELT(vp, PVP_MASK));
+            if (isMask(mask)) {
+                /* Record the resolved mask for subsequent up/down/pop */
+                PROTECT(resolvedmask = resolveMask(mask, dd));
+                SET_VECTOR_ELT(vp, PVP_MASK, resolvedmask);
+                UNPROTECT(1);
+            }
+            UNPROTECT(1);
+        }
         UNPROTECT(1);    
     } else {
         /* Important to have an error here, rather than back in
@@ -671,6 +840,38 @@ SEXP L_downvppath(SEXP path, SEXP name, SEXP strict)
         }
 #endif
 	setGridStateElement(dd, GSS_VP, vp);
+        /* 
+         * Restore clipping paths for this viewport.
+         * This may resolve the clipping path again if device does
+         * not maintain clipping path cache.
+         */
+        {
+            SEXP clip, resolvedclip;
+            PROTECT(clip = VECTOR_ELT(vp, PVP_CLIPPATH));
+            if (isClipPath(clip)) {
+                /* Record resolved clip path for subsequent up/down/pop */
+                PROTECT(resolvedclip = resolveClipPath(clip, dd));
+                SET_VECTOR_ELT(vp, PVP_CLIPPATH, resolvedclip);
+                UNPROTECT(1);
+            }
+            UNPROTECT(1);
+        }
+        /* 
+         * Restore masks for this viewport.
+         * This may resolve the mask again if device does
+         * not maintain mask cache.
+         */
+        {
+            SEXP mask, resolvedmask;
+            PROTECT(mask = VECTOR_ELT(vp, PVP_MASK));
+            if (isMask(mask)) {
+                /* Record the resolved mask for subsequent up/down/pop */
+                PROTECT(resolvedmask = resolveMask(mask, dd));
+                SET_VECTOR_ELT(vp, PVP_MASK, resolvedmask);
+                UNPROTECT(1);
+            }
+            UNPROTECT(1);
+        }
         UNPROTECT(1);    
     } else {
         /* Important to have an error here, rather than back in
@@ -694,7 +895,7 @@ SEXP L_unsetviewport(SEXP n)
     int i;
     double xx1, yy1, xx2, yy2;
     double devWidthCM, devHeightCM;
-    SEXP parentClip;
+    SEXP parentClip, parentClipPath;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -760,14 +961,6 @@ SEXP L_unsetviewport(SEXP n)
      * Enforce the current viewport settings
      */
     setGridStateElement(dd, GSS_GPAR, viewportgpar(newvp));
-    /* Set the clipping region to the parent's cur.clip
-     */
-    parentClip = viewportClipRect(newvp);
-    xx1 = REAL(parentClip)[0];
-    yy1 = REAL(parentClip)[1];
-    xx2 = REAL(parentClip)[2];
-    yy2 = REAL(parentClip)[3];
-    GESetClip(xx1, yy1, xx2, yy2, dd);
     /* Set the value of the current viewport for the current device
      * Need to do this in here so that redrawing via R BASE display
      * list works 
@@ -779,6 +972,37 @@ SEXP L_unsetviewport(SEXP n)
     }
 #endif
     setGridStateElement(dd, GSS_VP, newvp);
+    /* Set the clipping region to the parent's cur.clip
+     */
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /* Clipping is (silently) ignored during resolution of 
+         * a clipping path
+         */
+    } else {
+        PROTECT(parentClip = viewportClipRect(newvp));
+        PROTECT(parentClipPath = VECTOR_ELT(newvp, PVP_CLIPPATH));            
+        /*
+         * The parent may have a clipping path instead of a clipping rect
+         */
+        if (isClipPath(parentClipPath)) {
+            resolveClipPath(parentClipPath, dd);
+        } else {
+            xx1 = REAL(parentClip)[0];
+            yy1 = REAL(parentClip)[1];
+            xx2 = REAL(parentClip)[2];
+            yy2 = REAL(parentClip)[3];
+            GESetClip(xx1, yy1, xx2, yy2, dd);
+        }
+        UNPROTECT(2);
+    }
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /* Masks are (silently) ignored during resolution of 
+         * a clipping path
+         */
+    } else {
+        /* Set the mask to the parent's mask */
+        resolveMask(VECTOR_ELT(newvp, PVP_MASK), dd);
+    }
     /* 
      * Remove the parent from the child
      * This is not strictly necessary, but it is conceptually
@@ -803,7 +1027,7 @@ SEXP L_upviewport(SEXP n)
     int i;
     double xx1, yy1, xx2, yy2;
     double devWidthCM, devHeightCM;
-    SEXP parentClip;
+    SEXP parentClip, parentClipPath;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -832,24 +1056,6 @@ SEXP L_upviewport(SEXP n)
      *  is a childrenvp of a gTree, where the gTree has gpar settings)
      */
     setGridStateElement(dd, GSS_GPAR, VECTOR_ELT(gvp, PVP_PARENTGPAR));
-    /* Set the clipping region to the parent's cur.clip
-     */
-    parentClip = viewportClipRect(newvp);
-    xx1 = REAL(parentClip)[0];
-    yy1 = REAL(parentClip)[1];
-    xx2 = REAL(parentClip)[2];
-    yy2 = REAL(parentClip)[3];
-    GESetClip(xx1, yy1, xx2, yy2, dd);
-#if 0
-	    /* This is a VERY short term fix to avoid mucking
-	     * with the core graphics during feature freeze
-	     * It should be removed post R 1.4 release
-	     */
-	    dd->dev->clipLeft = fmin2(xx1, xx2);
-	    dd->dev->clipRight = fmax2(xx1, xx2);
-	    dd->dev->clipTop = fmax2(yy1, yy2);
-	    dd->dev->clipBottom = fmin2(yy1, yy2); 
-#endif
     /* Set the value of the current viewport for the current device
      * Need to do this in here so that redrawing via R BASE display
      * list works 
@@ -861,6 +1067,37 @@ SEXP L_upviewport(SEXP n)
     }
 #endif
     setGridStateElement(dd, GSS_VP, newvp);
+    /* Set the clipping region to the parent's cur.clip
+     */
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /* Clipping is (silently) ignored during resolution of 
+         * a clipping path
+         */
+    } else {
+        PROTECT(parentClip = viewportClipRect(newvp));
+        PROTECT(parentClipPath = VECTOR_ELT(newvp, PVP_CLIPPATH));            
+        /*
+         * The parent may have a clipping path instead of a clipping rect
+         */
+        if (isClipPath(parentClipPath)) {
+            resolveClipPath(parentClipPath, dd);
+        } else {
+            xx1 = REAL(parentClip)[0];
+            yy1 = REAL(parentClip)[1];
+            xx2 = REAL(parentClip)[2];
+            yy2 = REAL(parentClip)[3];
+            GESetClip(xx1, yy1, xx2, yy2, dd);
+        }
+        UNPROTECT(2);
+    }
+    if (LOGICAL(gridStateElement(dd, GSS_RESOLVINGCLIP))[0]) {
+        /* Masks are (silently) ignored during resolution of 
+         * a clipping path
+         */
+    } else {
+        /* Set the mask to the parent's mask */
+        resolveMask(VECTOR_ELT(newvp, PVP_MASK), dd);
+    }
     return R_NilValue;
 }
 
@@ -1056,6 +1293,15 @@ SEXP L_newpage()
         dd->recordGraphics = TRUE;
 	GENewPage(&gc, dd);
     }
+    
+    /* Clear all device patterns */
+    dd->dev->releasePattern(R_NilValue, dd->dev);
+    /* Clear all clip paths */
+    setGridStateElement(dd, GSS_RESOLVINGCLIP, ScalarLogical(FALSE));
+    dd->dev->releaseClipPath(R_NilValue, dd->dev);
+    /* Clear all masks */
+    dd->dev->releaseMask(R_NilValue, dd->dev);
+
     return R_NilValue;
 }
 
@@ -1321,7 +1567,7 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
 /*
  * Convert locations or dimensions to device inches
  */
-SEXP L_devLoc(SEXP x, SEXP y) {
+SEXP L_devLoc(SEXP x, SEXP y, SEXP device) {
     double xx, yy;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -1355,6 +1601,10 @@ SEXP L_devLoc(SEXP x, SEXP y) {
                       dd,
                       transform,
                       &xx, &yy);
+        if (LOGICAL(device)[0]) {
+            xx = toDeviceX(xx, GE_INCHES, dd);
+            yy = toDeviceY(yy, GE_INCHES, dd);
+        }
         REAL(devx)[i] = xx;
         REAL(devy)[i] = yy;
     }
@@ -1364,7 +1614,7 @@ SEXP L_devLoc(SEXP x, SEXP y) {
     return result;
 }
 
-SEXP L_devDim(SEXP x, SEXP y) {
+SEXP L_devDim(SEXP x, SEXP y, SEXP device) {
     double xx, yy;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -1397,6 +1647,10 @@ SEXP L_devDim(SEXP x, SEXP y) {
                       vpWidthCM, vpHeightCM,
                       dd, rotationAngle,
                       &xx, &yy);
+        if (LOGICAL(device)[0]) {
+            xx = toDeviceWidth(xx, GE_INCHES, dd);
+            yy = toDeviceHeight(yy, GE_INCHES, dd);
+        }
         REAL(devx)[i] = xx;
         REAL(devy)[i] = yy;
     }
@@ -2078,6 +2332,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
     double xmax = -DOUBLE_XMAX;
     double ymin = DOUBLE_XMAX;
     double ymax = -DOUBLE_XMAX;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -2087,6 +2342,9 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    if (!LOGICAL(o)[0] && draw) {
+        PROTECT(resolvedFill = resolveGPar(currentgp));
+    }
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     /* 
      * Number of xsplines
@@ -2238,6 +2496,15 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	    GEMode(0, dd);
 	vmaxset(vmax);
     }
+    if (!LOGICAL(o)[0] && draw) {
+        if (resolvedFill != R_NilValue &&
+            Rf_inherits(resolvedFill, "GridGrobPattern")) {
+            SEXP patternRef = getListElement(resolvedFill, "index");
+            dd->dev->releasePattern(patternRef, dd->dev);
+        }
+        UNPROTECT(1); /* resolvedFill */
+    }
+
     if (!draw && !trace && nloc > 0) {
 	PROTECT(result = allocVector(REALSXP, 4));
 	/*
@@ -2407,8 +2674,9 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     Rboolean first, last;
+    int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     LViewportContext vpc;
-    R_GE_gcontext gc;
+    R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
     SEXP devloc = R_NilValue; /* -Wall */
@@ -2424,6 +2692,8 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
     maxn = getArrowN(x1, x2, xnm1, xn,
 		     y1, y2, ynm1, yn);
     ne = LENGTH(ends);
+    resolveGPar(currentgp);
+    initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     /* Convert the x and y values to INCHES locations */
     /* FIXME:  Need to check for NaN's and NA's
      */
@@ -2442,7 +2712,7 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
 	    last = FALSE;
 	    break;
 	}
-	gcontextFromgpar(currentgp, i, &gc, dd);
+	updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
 	/*
 	 * If we're adding arrows to a line.to
 	 * x1 will be NULL
@@ -2499,6 +2769,7 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
 	    UNPROTECT(1);
     }
     GEMode(0, dd);
+
     return R_NilValue;
 }
 
@@ -2514,6 +2785,7 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
     R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -2523,6 +2795,7 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    PROTECT(resolvedFill = resolveGPar(currentgp));
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     GEMode(1, dd);
     /* 
@@ -2574,6 +2847,13 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 	vmaxset(vmax);
     }
     GEMode(0, dd);
+    if (resolvedFill != R_NilValue &&
+        Rf_inherits(resolvedFill, "GridGrobPattern")) {
+        SEXP patternRef = getListElement(resolvedFill, "index");
+        dd->dev->releasePattern(patternRef, dd->dev);
+    }
+    UNPROTECT(1); /* resolvedFill */
+
     return R_NilValue;
 }
 
@@ -2595,6 +2875,7 @@ static SEXP gridCircle(SEXP x, SEXP y, SEXP r,
     double ymin = DOUBLE_XMAX;
     double ymax = -DOUBLE_XMAX;
     double edgex, edgey;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -2604,6 +2885,9 @@ static SEXP gridCircle(SEXP x, SEXP y, SEXP r,
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    if (draw) {
+        PROTECT(resolvedFill = resolveGPar(currentgp));
+    }
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     nx = unitLength(x); 
     ny = unitLength(y);
@@ -2681,6 +2965,13 @@ static SEXP gridCircle(SEXP x, SEXP y, SEXP r,
     }
     if (draw) {
 	GEMode(0, dd);
+        if (resolvedFill != R_NilValue &&
+            Rf_inherits(resolvedFill, "GridGrobPattern")) {
+            SEXP patternRef = getListElement(resolvedFill, "index");
+            dd->dev->releasePattern(patternRef, dd->dev);
+        }
+        UNPROTECT(1); /* resolvedFill */
+
     } else if (ncirc > 0) {
 	result = allocVector(REALSXP, 4);
 	if (ncirc == 1) {
@@ -2743,6 +3034,7 @@ static SEXP gridRect(SEXP x, SEXP y, SEXP w, SEXP h,
     double xmax = -DOUBLE_XMAX;
     double ymin = DOUBLE_XMAX;
     double ymax = -DOUBLE_XMAX;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -2752,6 +3044,9 @@ static SEXP gridRect(SEXP x, SEXP y, SEXP w, SEXP h,
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    if (draw) {
+        PROTECT(resolvedFill = resolveGPar(currentgp));
+    }
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     maxn = unitLength(x); 
     ny = unitLength(y); 
@@ -2917,6 +3212,12 @@ static SEXP gridRect(SEXP x, SEXP y, SEXP w, SEXP h,
     }
     if (draw) {
 	GEMode(0, dd);
+        if (resolvedFill != R_NilValue &&
+            Rf_inherits(resolvedFill, "GridGrobPattern")) {
+            SEXP patternRef = getListElement(resolvedFill, "index");
+            dd->dev->releasePattern(patternRef, dd->dev);
+        }
+        UNPROTECT(1); /* resolvedFill */
     }
     if (nrect > 0) {
 	result = allocVector(REALSXP, 4);
@@ -2970,6 +3271,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
     R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -2979,6 +3281,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    PROTECT(resolvedFill = resolveGPar(currentgp));
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     GEMode(1, dd);
     /*
@@ -3028,6 +3331,12 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
     	vmaxset(vmax);
     }
     GEMode(0, dd);
+    if (resolvedFill != R_NilValue &&
+        Rf_inherits(resolvedFill, "GridGrobPattern")) {
+        SEXP patternRef = getListElement(resolvedFill, "index");
+        dd->dev->releasePattern(patternRef, dd->dev);
+    }
+    UNPROTECT(1); /* resolvedFill */
     return R_NilValue;
 }
 
@@ -3469,6 +3778,7 @@ SEXP L_points(SEXP x, SEXP y, SEXP pch, SEXP size)
     R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
+    SEXP resolvedFill = R_NilValue;
     /* Get the current device 
      */
     pGEDevDesc dd = getDevice();
@@ -3478,6 +3788,7 @@ SEXP L_points(SEXP x, SEXP y, SEXP pch, SEXP size)
 			 &vpWidthCM, &vpHeightCM, 
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
+    PROTECT(resolvedFill = resolveGPar(currentgp));
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
     nx = unitLength(x); 
     npch = LENGTH(pch);
@@ -3536,6 +3847,7 @@ SEXP L_points(SEXP x, SEXP y, SEXP pch, SEXP size)
         }
     }
     GEMode(1, dd);
+
     for (i=0; i<nx; i++)
 	if (R_FINITE(xx[i]) && R_FINITE(yy[i])) {
 	    /* FIXME:  The symbols will not respond to viewport
@@ -3563,6 +3875,12 @@ SEXP L_points(SEXP x, SEXP y, SEXP pch, SEXP size)
 	    }
 	}
     GEMode(0, dd);
+    if (resolvedFill != R_NilValue &&
+        Rf_inherits(resolvedFill, "GridGrobPattern")) {
+        SEXP patternRef = getListElement(resolvedFill, "index");
+        dd->dev->releasePattern(patternRef, dd->dev);
+    }
+    UNPROTECT(1); /* resolvedFill */
     vmaxset(vmax);
     return R_NilValue;
 }

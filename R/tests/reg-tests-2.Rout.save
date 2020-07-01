@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-06-24 r1235) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-29 r1244) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-06-24 r78745) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-29 r78751) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3712,7 +3712,7 @@ data: c(800, 10)
 number of successes = 800, number of trials = 810, p-value < 2.2e-16
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
- 0.9774134 0.9940643  
+ 0.97741340.9940643 
 sample estimates:
 probability of success 
              0.9876543 
@@ -6363,7 +6363,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55c36b4fc750>
+<bytecode: 0x55a0d677b488>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6374,7 +6374,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55c36b4fc750>
+<bytecode: 0x55a0d677b488>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6386,7 +6386,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x55c36b4fc750>
+<bytecode: 0x55a0d677b488>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -6748,7 +6748,7 @@ data: Nitrous
 S = 57, p-value = 0.1959
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
- 0.000000 1.388197  
+ 0.0000001.388197 
 sample estimates:
 common odds ratio 
         0.6652418 
@@ -6761,7 +6761,7 @@ data: Nitrous
 Mantel-Haenszel X-squared = 0.71432, df = 1, p-value = 0.199
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
- 0.000000 1.260053  
+ 0.0000001.260053 
 sample estimates:
 common odds ratio 
         0.6645374 
@@ -8026,7 +8026,7 @@ data: 1:28
 t = 9, df = 27, p-value = 6e-10
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 11.3 17.7  
+ 11.317.7 
 sample estimates:
 mean of x 
      14.5 
@@ -8046,13 +8046,15 @@ mean of x
 > ## now shows the *length* of "someA"
 > 
 > 
-> ## summaryRprof() bug PR#15886 :
-> Rprof(tf <- tempfile("Rprof.out", tmpdir = getwd()), memory.profiling=TRUE, line.profiling=FALSE)
-> out <- lapply(1:10000, rnorm, n= 512)
-> Rprof(NULL)
-> if(interactive())
+> ## summaryRprof() bug PR#15886  + "Rprof() not enabled" PR#17836
+> if(capabilities("Rprof")) {
++ Rprof(tf <- tempfile("Rprof.out", tmpdir = getwd()), memory.profiling=TRUE, line.profiling=FALSE)
++ out <- lapply(1:10000, rnorm, n= 512)
++ Rprof(NULL)
++ if(interactive())
 +     print(length(readLines(tf))) # ca. 10 .. 20 lines
-> op <- options(warn = 2) # no warnings, even !
-> for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
-> options(op) ## "always" triggered an error (or a warning) in R <= 3.6.3
++ op <- options(warn = 2) # no warnings, even !
++ for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
++ options(op) ## "always" triggered an error (or a warning) in R <= 3.6.3
++ }
 > 

@@ -1545,7 +1545,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    already been evaluated.
  */
 HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
-		    Rboolean promisedArgs)
+		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
     int offset;

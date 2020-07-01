@@ -115,26 +115,25 @@ typedef size_t STRLEN;
 typedef struct _stat Stat_t;
 typedef struct _wdirent Direntry_t;
 
-
-static int	 compare(const void *, const void *);
-static int	 ci_compare(const void *, const void *);
-static int	 g_Ctoc(const wchar_t *, wchar_t *, STRLEN);
-static int	 g_lstat(wchar_t *, Stat_t *, wglob_t *);
-static _WDIR	*g_opendir(wchar_t *, wglob_t *);
+static int compare(const void *, const void *);
+static int ci_compare(const void *, const void *);
+static int g_Ctoc(const wchar_t *, wchar_t *, STRLEN);
+static int g_lstat(wchar_t *, Stat_t *, wglob_t *);
+static _WDIR *g_opendir(wchar_t *, wglob_t *);
 static const wchar_t *
-		 g_strchr(const wchar_t *, int);
-static int	 glob0(const wchar_t *, wglob_t *);
-static int	 glob1(wchar_t *, wchar_t *, wglob_t *, size_t *);
-static int	 glob2(wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *,
-		       wglob_t *, size_t *);
-static int	 glob3(wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *,
-		       wchar_t *, wchar_t *, wglob_t *, size_t *);
-static int	 globextend(const wchar_t *, wglob_t *, size_t *);
+g_strchr(const wchar_t *, int);
+static int glob0(const wchar_t *, wglob_t *);
+static int glob1(wchar_t *, wchar_t *, wglob_t *, size_t *);
+static int glob2(wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *,
+				 wglob_t *, size_t *);
+static int glob3(wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *, wchar_t *,
+				 wchar_t *, wchar_t *, wglob_t *, size_t *);
+static int globextend(const wchar_t *, wglob_t *, size_t *);
 static const wchar_t *
-		 globtilde(const wchar_t *, wchar_t *, size_t, wglob_t *);
-static int	 globexp1(const wchar_t *, wglob_t *);
-static int	 globexp2(const wchar_t *, const wchar_t *, wglob_t *, int *);
-static int	 match(wchar_t *, wchar_t *, wchar_t *, int);
+globtilde(const wchar_t *, wchar_t *, size_t, wglob_t *);
+static int globexp1(const wchar_t *, wglob_t *);
+static int globexp2(const wchar_t *, const wchar_t *, wglob_t *, int *);
+static int match(wchar_t *, wchar_t *, wchar_t *, int);
 #ifdef GLOB_DEBUG
 static void	 qprintf(const char *, wchar_t *);
 #endif /* GLOB_DEBUG */
@@ -317,8 +316,7 @@ dos_wglob(const wchar_t *pattern, int flags,
  * invoke the standard globbing routine to glob the rest of the magic
  * characters
  */
-static int
-globexp1(const wchar_t *pattern, wglob_t *pglob)
+static int globexp1(const wchar_t *pattern, wglob_t *pglob)
 {
     const wchar_t* ptr = pattern;
     int rv;
@@ -340,8 +338,7 @@ globexp1(const wchar_t *pattern, wglob_t *pglob)
  * If it succeeds then it invokes globexp1 with the new pattern.
  * If it fails then it tries to glob the rest of the pattern and returns.
  */
-static int
-globexp2(const wchar_t *ptr, const wchar_t *pattern,
+static int globexp2(const wchar_t *ptr, const wchar_t *pattern,
 	 wglob_t *pglob, int *rv)
 {
     int     i;
@@ -499,8 +496,7 @@ globtilde(const wchar_t *pattern, wchar_t *patbuf, size_t patbuf_len, wglob_t *p
  * if things went well, nonzero if errors occurred.  It is not an error
  * to find no matches.
  */
-static int
-glob0(const wchar_t *pattern, wglob_t *pglob)
+static int glob0(const wchar_t *pattern, wglob_t *pglob)
 {
     const wchar_t *qpat, *qpatnext;
     int c, err, oldflags, oldpathc;
@@ -596,8 +592,7 @@ glob0(const wchar_t *pattern, wglob_t *pglob)
     return(0);
 }
 
-static int
-ci_compare(const void *p, const void *q)
+static int ci_compare(const void *p, const void *q)
 {
     const wchar_t *pp = *(const wchar_t **)p;
     const wchar_t *qq = *(const wchar_t **)q;
@@ -614,14 +609,12 @@ ci_compare(const void *p, const void *q)
     return ci;
 }
 
-static int
-compare(const void *p, const void *q)
+static int compare(const void *p, const void *q)
 {
     return(wcscmp(*(wchar_t **)p, *(wchar_t **)q));
 }
 
-static int
-glob1(wchar_t *pattern, wchar_t *pattern_last, wglob_t *pglob, size_t *limitp)
+static int glob1(wchar_t *pattern, wchar_t *pattern_last, wglob_t *pglob, size_t *limitp)
 {
     wchar_t pathbuf[MAXPATHLEN];
 
@@ -637,8 +630,7 @@ glob1(wchar_t *pattern, wchar_t *pattern_last, wglob_t *pglob, size_t *limitp)
  * of recursion for each segment in the pattern that contains one or more
  * meta characters.
  */
-static int
-glob2(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathend_last,
+static int glob2(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathend_last,
       wchar_t *pattern, wchar_t *pattern_last, wglob_t *pglob, size_t *limitp)
 {
     Stat_t sb;
@@ -705,8 +697,7 @@ glob2(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathen
     /* NOTREACHED */
 }
 
-static int
-glob3(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathend_last,
+static int glob3(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathend_last,
       wchar_t *pattern, wchar_t *pattern_last,
       wchar_t *restpattern, wchar_t *restpattern_last, wglob_t *pglob, size_t *limitp)
 {
@@ -784,8 +775,7 @@ glob3(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wchar_t *pathen
  *	Either gl_pathc is zero and gl_pathv is NULL; or gl_pathc > 0 and
  *	gl_pathv points to (gl_offs + gl_pathc + 1) items.
  */
-static int
-globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
+static int globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
 {
     wchar_t **pathv;
     int i;
@@ -849,8 +839,7 @@ globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
  * pattern matching function for filenames.  Each occurrence of the *
  * pattern causes a recursion level.
  */
-static int
-match(wchar_t *name, wchar_t *pat, wchar_t *patend, int nocase)
+static int match(wchar_t *name, wchar_t *pat, wchar_t *patend, int nocase)
 {
     int ok, negate_range;
     wchar_t c, k;
@@ -899,12 +888,11 @@ match(wchar_t *name, wchar_t *pat, wchar_t *patend, int nocase)
 	    break;
 	}
     }
-    return(*name == BG_EOS);
+    return (*name == BG_EOS);
 }
 
 /* Free allocated data belonging to a wglob_t structure. */
-void
-dos_wglobfree(wglob_t *pglob)
+void dos_wglobfree(wglob_t *pglob)
 {
     int i;
     wchar_t **pp;
@@ -919,8 +907,7 @@ dos_wglobfree(wglob_t *pglob)
     }
 }
 
-static _WDIR *
-g_opendir(wchar_t *str, wglob_t *pglob)
+static _WDIR *g_opendir(wchar_t *str, wglob_t *pglob)
 {
     wchar_t buf[MAXPATHLEN];
 
@@ -930,8 +917,7 @@ g_opendir(wchar_t *str, wglob_t *pglob)
     return _wopendir(buf);
 }
 
-static int
-g_lstat(wchar_t *fn, Stat_t *sb, wglob_t *pglob)
+static int g_lstat(wchar_t *fn, Stat_t *sb, wglob_t *pglob)
 {
     wchar_t buf[MAXPATHLEN];
 
@@ -940,8 +926,7 @@ g_lstat(wchar_t *fn, Stat_t *sb, wglob_t *pglob)
     return(_wstat(buf, sb));
 }
 
-static const wchar_t *
-g_strchr(const wchar_t *str, int ch)
+static const wchar_t *g_strchr(const wchar_t *str, int ch)
 {
     do {
 	if (*str == ch)
@@ -950,8 +935,7 @@ g_strchr(const wchar_t *str, int ch)
     return (NULL);
 }
 
-static int
-g_Ctoc(const wchar_t *str, wchar_t *buf, STRLEN len)
+static int g_Ctoc(const wchar_t *str, wchar_t *buf, STRLEN len)
 {
     while (len--)
 	if ((*buf++ = *str++) == BG_EOS) return 0;

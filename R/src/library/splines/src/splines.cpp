@@ -51,8 +51,7 @@ SEXP spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv);
 
 /* set sp->curs to the index of the first knot position > x.
    Special handling for x == sp->knots[sp->nknots - sp-order + 1] */
-static int
-set_cursor(splPTR sp, double x)
+static int set_cursor(splPTR sp, double x)
 {
     int i;
     /* don't assume x's are sorted */
@@ -72,8 +71,7 @@ set_cursor(splPTR sp, double x)
     return sp->curs;
 }
 
-static void
-diff_table(splPTR sp, double x, int ndiff)
+static void diff_table(splPTR sp, double x, int ndiff)
 {
   int i;
   for (i = 0; i < ndiff; i++) {
@@ -83,8 +81,7 @@ diff_table(splPTR sp, double x, int ndiff)
 }
 
 /* fast evaluation of basis functions */
-static void
-basis_funcs(splPTR sp, double x, double *b)
+static void basis_funcs(splPTR sp, double x, double *b)
 {
     diff_table(sp, x, sp->ordm1);
     b[0] = 1.;

@@ -39,7 +39,7 @@ SEXP getListElement(SEXP list, const char *str)
   return elmt;
 }
 
-void setListElement(SEXP list, char *str, SEXP value)
+void setListElement(SEXP list, const char *str, SEXP value)
 {
   SEXP names = getAttrib(list, R_NamesSymbol);
   int i;

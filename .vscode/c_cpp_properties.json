@@ -13,7 +13,8 @@
                 "Unix",
                 "ENABLE_NLS",
                 "USE_ICU",
-                "R_USE_SIGNALS"
+                "R_USE_SIGNALS",
+                "LONG_VECTOR_SUPPORT"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

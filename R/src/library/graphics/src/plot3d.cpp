@@ -333,14 +333,14 @@ SEXP C_image(SEXP args)
 /* Definitions of data structures for vectors and */
 /* transformations in homogeneous 3d coordinates */
 
-typedef double Vector3d[4];
-typedef double Trans3d[4][4];
+using Vector3d = double[4];
+using Trans3d = double[4][4];
 
 /* The viewing transformation matrix. */
 
 static Trans3d VT;
 
-static void TransVector (Vector3d u, Trans3d T, Vector3d v)
+static void TransVector(Vector3d u, Trans3d T, Vector3d v)
 {
     double sum;
     int i, j;
@@ -353,7 +353,7 @@ static void TransVector (Vector3d u, Trans3d T, Vector3d v)
     }
 }
 
-static void Accumulate (Trans3d T)
+static void Accumulate(Trans3d T)
 {
     Trans3d U;
     double sum;
@@ -372,17 +372,17 @@ static void Accumulate (Trans3d T)
 	    VT[i][j] = U[i][j];
 }
 
-static void SetToIdentity (Trans3d T)
+static void SetToIdentity(Trans3d T)
 {
-    int i, j;
-    for (i = 0; i < 4; i++) {
-	for (j = 0; j < 4; j++)
-	    T[i][j] = 0;
-	T[i][i] = 1;
-    }
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+			T[i][j] = 0;
+		T[i][i] = 1;
+	}
 }
 
-static void Translate (double x, double y, double z)
+static void Translate(double x, double y, double z)
 {
     Trans3d T;
     SetToIdentity(T);
@@ -392,7 +392,7 @@ static void Translate (double x, double y, double z)
     Accumulate(T);
 }
 
-static void Scale (double x, double y, double z)
+static void Scale(double x, double y, double z)
 {
     Trans3d T;
     SetToIdentity(T);
@@ -402,7 +402,7 @@ static void Scale (double x, double y, double z)
     Accumulate(T);
 }
 
-static void XRotate (double angle)
+static void XRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -416,7 +416,7 @@ static void XRotate (double angle)
     Accumulate(T);
 }
 
-static void YRotate (double angle)
+static void YRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -430,7 +430,7 @@ static void YRotate (double angle)
     Accumulate(T);
 }
 
-static void ZRotate (double angle)
+static void ZRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -444,7 +444,7 @@ static void ZRotate (double angle)
     Accumulate(T);
 }
 
-static void Perspective (double d)
+static void Perspective(double d)
 {
     Trans3d T;
 
@@ -672,24 +672,24 @@ static int LimitCheck(double *lim, double *c, double *s)
 
 /* The vertices of the box */
 static short int Vertex[8][3] = {
-    {0, 0, 0},
-    {0, 0, 1},
-    {0, 1, 0},
-    {0, 1, 1},
-    {1, 0, 0},
-    {1, 0, 1},
-    {1, 1, 0},
-    {1, 1, 1},
+	{0, 0, 0},
+	{0, 0, 1},
+	{0, 1, 0},
+	{0, 1, 1},
+	{1, 0, 0},
+	{1, 0, 1},
+	{1, 1, 0},
+	{1, 1, 1},
 };
 
 /* The vertices visited when tracing a face */
 static short int Face[6][4] = {
-    {0, 1, 5, 4},
-    {2, 6, 7, 3},
-    {0, 2, 3, 1},
-    {4, 5, 7, 6},
-    {0, 4, 6, 2},
-    {1, 3, 7, 5},
+	{0, 1, 5, 4},
+	{2, 6, 7, 3},
+	{0, 2, 3, 1},
+	{4, 5, 7, 6},
+	{0, 4, 6, 2},
+	{1, 3, 7, 5},
 };
 
 /* The edges drawn when tracing a face */
@@ -786,7 +786,7 @@ static short int TickVector[8][3] = {
     {-1, 1, 0},
     {1, 1, 0}};
 
-static int lowest(double y1, double y2, double y3, double y4) {
+static bool lowest(double y1, double y2, double y3, double y4) {
     return ((y1 <= y2) && (y1 <= y3) && (y1 <= y4));
 }
 
@@ -1270,8 +1270,7 @@ SEXP C_persp(SEXP args)
 /* in src/main */
 #include "contour-common.h"
 
-static
-void FindCorners(double width, double height, SEXP label,
+static void FindCorners(double width, double height, SEXP label,
 		 double x0, double y0, double x1, double y1,
 		 pGEDevDesc dd) {
     double delta = height / width;
@@ -1289,8 +1288,7 @@ void FindCorners(double width, double height, SEXP label,
     REAL(label)[2] = x1 - dy;
     REAL(label)[6] = y1 + dx;
 }
-static
-int TestLabelIntersection(SEXP label1, SEXP label2) {
+static int TestLabelIntersection(SEXP label1, SEXP label2) {
 
     int i, j, l1, l2;
     double Ax, Bx, Ay, By, ax, ay, bx, by;
@@ -1355,8 +1353,7 @@ static int LabelInsideWindow(SEXP label, pGEDevDesc dd) {
     return 0;
 }
 
-static
-int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
+static int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
 	      pGEDevDesc dd) {
     double dX, dY;
     double dXC, dYC;
@@ -1381,8 +1378,7 @@ int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
 	return n;
 }
 
-static
-int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
+static int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
 		pGEDevDesc dd) {
     double dX, dY;
     double dXC, dYC;
@@ -1407,22 +1403,18 @@ int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
 	return n;
 }
 
-static
-double distFromEdge(double *xxx, double *yyy, int iii, pGEDevDesc dd) {
-    return fmin2(fmin2(xxx[iii]-gpptr(dd)->usr[0], gpptr(dd)->usr[1]-xxx[iii]),
-		 fmin2(yyy[iii]-gpptr(dd)->usr[2], gpptr(dd)->usr[3]-yyy[iii]));
+static double distFromEdge(double *xxx, double *yyy, int iii, pGEDevDesc dd)
+{
+	return fmin2(fmin2(xxx[iii] - gpptr(dd)->usr[0], gpptr(dd)->usr[1] - xxx[iii]),
+				 fmin2(yyy[iii] - gpptr(dd)->usr[2], gpptr(dd)->usr[3] - yyy[iii]));
 }
 
 static SEGP *ctr_SegDB;
 
-static
-Rboolean useStart(double *xxx, double *yyy, int ns, pGEDevDesc dd) {
-    if (distFromEdge(xxx, yyy, 0, dd) < distFromEdge(xxx, yyy, ns-1, dd))
-	return TRUE;
-    else
-	return FALSE;
+static bool useStart(double *xxx, double *yyy, int ns, pGEDevDesc dd)
+{
+	return (distFromEdge(xxx, yyy, 0, dd) < distFromEdge(xxx, yyy, ns - 1, dd));
 }
-
 
 static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		    double zc,

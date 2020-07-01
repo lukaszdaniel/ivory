@@ -2119,8 +2119,8 @@ HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    PROTECT(ans = allocVector(LGLSXP, 18));
-    PROTECT(ansnames = allocVector(STRSXP, 18));
+    PROTECT(ans      = allocVector(LGLSXP, 19));
+    PROTECT(ansnames = allocVector(STRSXP, 19));
 
     SET_STRING_ELT(ansnames, i, mkChar("jpeg"));
 #ifdef HAVE_JPEG
@@ -2222,6 +2222,13 @@ HIDDEN SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SET_STRING_ELT(ansnames, i, mkChar("NLS"));
 #ifdef ENABLE_NLS
+    LOGICAL(ans)[i++] = TRUE;
+#else
+    LOGICAL(ans)[i++] = FALSE;
+#endif
+
+    SET_STRING_ELT(ansnames, i, mkChar("Rprof"));
+#ifdef R_PROFILING
     LOGICAL(ans)[i++] = TRUE;
 #else
     LOGICAL(ans)[i++] = FALSE;
