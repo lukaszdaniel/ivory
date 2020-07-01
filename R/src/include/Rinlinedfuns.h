@@ -38,7 +38,7 @@
 #include <R_ext/Error.h>
 
 
-#include <cstring> /* for strlen, strcmp */
+#include <string.h> /* for strlen, strcmp */
 
 /* define inline-able functions */
 #ifdef TESTING_WRITE_BARRIER

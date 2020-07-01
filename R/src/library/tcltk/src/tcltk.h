@@ -23,8 +23,8 @@
 #endif
 
 #include <tcl.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
