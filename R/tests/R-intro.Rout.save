@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2020-06-24 r1235) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2020-06-29 r1244) -- "Internationalized Version of R"
 Copyright (C) 2013-2020 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2020-06-24 r78745) -- "Unsuffered Consequences"
+R Under development (unstable) (2020-06-29 r78759) -- "Unsuffered Consequences"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -594,7 +594,7 @@ data: A and B
 t = 3.25, df = 12, p-value = 0.0069
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- 0.013855 0.070183  
+ 0.0138550.070183 
 sample estimates:
 mean of x mean of y 
    80.021    79.979 
@@ -608,7 +608,7 @@ data: A and B
 F = 0.584, num df = 12, denom df = 7, p-value = 0.39
 alternative hypothesis: true ratio of variances is not equal to 1
 95 percent confidence interval:
- 0.12511 2.10527  
+ 0.125112.10527 
 sample estimates:
 ratio of variances 
            0.58374 
@@ -622,7 +622,7 @@ data: A and B
 t = 3.47, df = 19, p-value = 0.0026
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- 0.016691 0.067348  
+ 0.0166910.067348 
 sample estimates:
 mean of x mean of y 
    80.021    79.979 
