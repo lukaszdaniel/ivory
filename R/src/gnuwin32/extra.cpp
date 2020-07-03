@@ -992,7 +992,7 @@ menu getGraphMenu(const char* menuname)
 
     if (strcmp(menuname, "Main") == 0) return(xd->mbar);
     else if (strcmp(menuname, "Popup") == 0) return(xd->grpopup);
-    else return(NULL);
+    else return(nullptr);
 }
 
 /*

@@ -155,7 +155,7 @@ HINSTANCE R_loadLibrary(const char *path, int asLocal, int now,
     _clearfp();
     if(useSearch) setDLLSearchPath(search);
     tdlh = LoadLibrary(path);
-    if(useSearch) setDLLSearchPath(NULL);
+    if(useSearch) setDLLSearchPath(nullptr);
     dllcw = _controlfp(0,0) & ~_MCW_IC;
     if (dllcw != rcw) {
 	_controlfp(rcw, _MCW_EM | _MCW_IC | _MCW_RC | _MCW_PC);

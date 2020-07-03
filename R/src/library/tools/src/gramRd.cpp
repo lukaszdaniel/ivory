@@ -4353,8 +4353,8 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
+	    cntxt.setContextEnd(&con_cleanup);
+	    cntxt.setContextEndData(con);
 	}
 	if(!con->canread) error(_("cannot read from this connection"));
 	s = R_ParseRd(con, &status, source, fragment, macros);

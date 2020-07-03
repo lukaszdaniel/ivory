@@ -1107,8 +1107,8 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     wi.buf = &strBuf;
     begincontext(&cntxt, CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &wt_cleanup;
-    cntxt.cenddata = &wi;
+    cntxt.setContextEnd(&wt_cleanup);
+    cntxt.setContextEndData(&wi);
 
     if(isVectorList(x)) { /* A data frame */
 

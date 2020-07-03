@@ -2537,8 +2537,8 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
     }
     if (!ascii && con->text)
 	error(_("binary-mode connection required for ascii=FALSE"));
@@ -2586,8 +2586,8 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
     }
     if(!con->canread) error(_("connection is not open for reading"));
 
@@ -2842,8 +2842,8 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	/* set up a context which will free the buffer if there is an error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = reinterpret_cast<void(*)(void*)>(&free_mem_buffer);
-	cntxt.cenddata = &mbs;
+	cntxt.setContextEnd(reinterpret_cast<void(*)(void*)>(&free_mem_buffer));
+	cntxt.setContextEndData(&mbs);
 
 	InitMemOutPStream(&out, &mbs, type, version, hook, fun);
 	R_Serialize(object, &out);

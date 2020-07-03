@@ -5,13 +5,13 @@
 
 SEXP lgC_to_matrix(SEXP x)
 {
-    SEXP ans, pslot = GET_SLOT(x, Matrix_pSym),
-	dn = GET_SLOT(x, Matrix_DimNamesSym);
+    SEXP ans, pslot = R_do_slot(x, Matrix_pSym),
+	dn = R_do_slot(x, Matrix_DimNamesSym);
     int j, ncol = length(pslot) - 1,
-	nrow = INTEGER(GET_SLOT(x, Matrix_DimSym))[0],
+	nrow = INTEGER(R_do_slot(x, Matrix_DimSym))[0],
 	*xp = INTEGER(pslot),
-	*xi = INTEGER(GET_SLOT(x, Matrix_iSym));
-    int *xx = LOGICAL(GET_SLOT(x, Matrix_xSym)), *ax;
+	*xi = INTEGER(R_do_slot(x, Matrix_iSym));
+    int *xx = LOGICAL(R_do_slot(x, Matrix_xSym)), *ax;
 
     ax = LOGICAL(ans = PROTECT(allocMatrix(LGLSXP, nrow, ncol)));
     for (j = 0; j < (nrow * ncol); j++) ax[j] = 0;
@@ -29,12 +29,12 @@ SEXP lgC_to_matrix(SEXP x)
 /* as above,  '1' instead of 'x' slot: */
 SEXP ngC_to_matrix(SEXP x)
 {
-    SEXP ans, pslot = GET_SLOT(x, Matrix_pSym),
-	dn = GET_SLOT(x, Matrix_DimNamesSym);
+    SEXP ans, pslot = R_do_slot(x, Matrix_pSym),
+	dn = R_do_slot(x, Matrix_DimNamesSym);
     int j, ncol = length(pslot) - 1,
-	nrow = INTEGER(GET_SLOT(x, Matrix_DimSym))[0],
+	nrow = INTEGER(R_do_slot(x, Matrix_DimSym))[0],
 	*xp = INTEGER(pslot),
-	*xi = INTEGER(GET_SLOT(x, Matrix_iSym));
+	*xi = INTEGER(R_do_slot(x, Matrix_iSym));
     int *ax;
 
     ax = LOGICAL(ans = PROTECT(allocMatrix(LGLSXP, nrow, ncol)));

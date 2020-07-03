@@ -5,15 +5,15 @@
 	      DECLARE_AND_GET_X_SLOT(__T__, __S__)
 
 #define Matrix_T_as_DENSE(_C_TYPE_, _SEXP_, _SEXPTYPE_, _SYMM_)		\
-    SEXP dimP = GET_SLOT(x, Matrix_DimSym),				\
-	  xiP = GET_SLOT(x, Matrix_iSym);				\
+    SEXP dimP = R_do_slot(x, Matrix_DimSym),				\
+	  xiP = R_do_slot(x, Matrix_iSym);				\
     int k, n = INTEGER(dimP)[0], nnz = length(xiP);			\
-    int *xi = INTEGER(xiP), *xj = INTEGER(GET_SLOT(x, Matrix_jSym)),	\
+    int *xi = INTEGER(xiP), *xj = INTEGER(R_do_slot(x, Matrix_jSym)),	\
 	sz = n * n;							\
     _C_TYPE_ *tx = _SEXP_(ALLOC_SLOT(val, Matrix_xSym, _SEXPTYPE_, sz)); \
     MAYBE_DECLARE_AND_GET_X_SLOT(_C_TYPE_, _SEXP_);			\
 									\
-    SET_SLOT(val, Matrix_DimSym, duplicate(dimP));			\
+    R_do_slot_assign(val, Matrix_DimSym, duplicate(dimP));			\
     if(_SYMM_)								\
 	SET_DimNames_symm(val, x);					\
     else								\
@@ -83,11 +83,11 @@ SEXP ltTMatrix_as_ltrMatrix(SEXP x)
 #define MAYBE_SET_x_SLOT	SET_x_SLOT
 
 #define Matrix_sT_as_GENERAL(_C_TYPE_, _SEXP_, _SEXPTYPE_)		\
-    SEXP xiP = GET_SLOT(x, Matrix_iSym);				\
-    /* , uplo = GET_SLOT(x, Matrix_uploSym); */				\
+    SEXP xiP = R_do_slot(x, Matrix_iSym);				\
+    /* , uplo = R_do_slot(x, Matrix_uploSym); */				\
     int i, nnz = length(xiP), n0d, nv,					\
 	*xi = INTEGER(xiP),						\
-	*xj = INTEGER(GET_SLOT(x, Matrix_jSym)),			\
+	*xj = INTEGER(R_do_slot(x, Matrix_jSym)),			\
 	*vi, *vj;							\
     MAYBE_DECLARE_AND_GET_X_SLOT(_C_TYPE_, _SEXP_);			\
 									\

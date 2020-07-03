@@ -36,7 +36,7 @@ static SEXP GetObject(RCNTXT *cptr)
 {
     SEXP s, b, formals, tag;
 
-    b = cptr->callfun;
+    b = cptr->getCallFun();
     if (TYPEOF(b) != CLOSXP) error(_("generic 'function' is not a function"));
     formals = FORMALS(b);
 
@@ -44,7 +44,7 @@ static SEXP GetObject(RCNTXT *cptr)
     if (tag != R_NilValue && tag != R_DotsSymbol) {
 	s = NULL;
 	/** exact matches **/
-	for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
+	for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), TRUE)) {
 		if (s != NULL)
 		    error(_("formal argument '%s' matched by multiple actual arguments"), tag);
@@ -54,7 +54,7 @@ static SEXP GetObject(RCNTXT *cptr)
 
 	if (s == NULL)
 	    /** partial matches **/
-	    for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
+	    for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), FALSE)) {
 		    if ( s != NULL)
 			error(_("formal argument '%s' matched by multiple actual arguments"), tag);
@@ -63,20 +63,20 @@ static SEXP GetObject(RCNTXT *cptr)
 		}
 	if (s == NULL)
 	    /** first untagged argument **/
-	    for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
+	    for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 		if (TAG(b) == R_NilValue )
 		{
 		    s = CAR(b);
 		    break;
 		}
 	if (s == NULL)
-	    s = CAR(cptr->promargs);
+	    s = CAR(cptr->getPromiseArgs());
 /*
 	    error("failed to match argument for dispatch");
 */
     }
     else
-	s = CAR(cptr->promargs);
+	s = CAR(cptr->getPromiseArgs());
 
     if (TYPEOF(s) == PROMSXP) {
 	if (PRVALUE(s) == R_UnboundValue)
@@ -406,7 +406,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 	SEXP s, t;
 	int matched;
 
-	for (s = FRAME(cptr->cloenv); s != R_NilValue; s = CDR(s)) {
+	for (s = FRAME(cptr->workingEnvironment()); s != R_NilValue; s = CDR(s)) {
 	    matched = 0;
 	    for (t = formals; t != R_NilValue; t = CDR(t))
 		if (TAG(t) == TAG(s)) {
@@ -428,12 +428,12 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
     if ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op) || RDEBUG(rho))
 	SET_RSTEP(sxp, 1);
 
-    SEXP newcall =  PROTECT(shallow_duplicate(cptr->call));
+    SEXP newcall =  PROTECT(shallow_duplicate(cptr->getCall()));
     SETCAR(newcall, method);
-    R_GlobalContext->callflag = CTXT_GENERIC;
-    SEXP matchedarg = PROTECT(cptr->promargs); /* ? is this PROTECT needed ? */
+    R_GlobalContext->setCallFlag(CTXT_GENERIC);
+    SEXP matchedarg = PROTECT(cptr->getPromiseArgs()); /* ? is this PROTECT needed ? */
     SEXP ans = applyMethod(newcall, sxp, matchedarg, rho, newvars);
-    R_GlobalContext->callflag = CTXT_RETURN;
+    R_GlobalContext->setCallFlag(CTXT_RETURN);
     UNPROTECT(5); /* "generic,method", newvars, newcall, matchedarg */
 
     return ans;
@@ -451,7 +451,7 @@ bool Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
     /* Get the context which UseMethod was called from. */
 
     cptr = R_GlobalContext;
-    op = cptr->callfun;
+    op = cptr->getCallFun();
     PROTECT(klass = R_data_class2(obj));
 
     nclass = length(klass);
@@ -488,7 +488,7 @@ bool Rf_usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	return true;
     }
     UNPROTECT(2); /* klass, sxp */
-    cptr->callflag = CTXT_RETURN;
+    cptr->getCallFlag() = CTXT_RETURN;
     return false;
 }
 
@@ -531,9 +531,9 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
        callenv = environment from which the generic was called
        defenv = environment where the generic was defined */
     cptr = R_GlobalContext;
-    if ( !(cptr->callflag & CTXT_FUNCTION) || cptr->cloenv != env)
+    if ( !(cptr->getCallFlag() & CTXT_FUNCTION) || cptr->workingEnvironment() != env)
 	errorcall(call, _("'UseMethod()' used in an inappropriate fashion"));
-    callenv = cptr->sysparent;
+    callenv = cptr->getSysParent();
     /* We need to find the generic to find out where it is defined.
        This is set up to avoid getting caught by things like
 
@@ -681,21 +681,21 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     int i, j;
 
     cptr = R_GlobalContext;
-    cptr->callflag = CTXT_GENERIC;
+    cptr->getCallFlag() = CTXT_GENERIC;
 
     /* get the env NextMethod was called from */
-    sysp = R_GlobalContext->sysparent;
+    sysp = R_GlobalContext->getSysParent();
     while (cptr != NULL) {
-	if (cptr->callflag & CTXT_FUNCTION && cptr->cloenv == sysp) break;
+	if (cptr->getCallFlag() & CTXT_FUNCTION && cptr->workingEnvironment() == sysp) break;
 	cptr = cptr->nextContext();
     }
     if (cptr == NULL)
 	error(_("'NextMethod()' called from outside a function"));
 
-    PROTECT(newcall = duplicate(cptr->call));
+    PROTECT(newcall = duplicate(cptr->getCall()));
 
     /* eg get("print.ts")(1) or do.call() */
-    if (TYPEOF(CAR(cptr->call)) != SYMSXP)
+    if (TYPEOF(CAR(cptr->getCall())) != SYMSXP)
        error(_("'NextMethod()' called from an anonymous function"));
 
     readS3VarsFromFrame(sysp, &generic, &group, &klass, &method,
@@ -713,7 +713,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (defenv == R_UnboundValue) defenv = R_GlobalEnv;
 
     /* set up the arglist */
-    s = cptr->callfun;
+    s = cptr->getCallFun();
 
     if (TYPEOF(s) != CLOSXP){ /* R_LookupMethod looked for a function */
 	if (s == R_UnboundValue)
@@ -726,7 +726,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     /* get formals and actuals; attach the names of the formals to
        the actuals, expanding any ... that occurs */
     formals = FORMALS(s);
-    PROTECT(matchedarg = patchArgsByActuals(formals, cptr->promargs, cptr->cloenv));
+    PROTECT(matchedarg = patchArgsByActuals(formals, cptr->getPromiseArgs(), cptr->workingEnvironment()));
 
     /*
       Now see if there were any other arguments passed in
@@ -814,7 +814,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     else {
-	b = CHAR(PRINTNAME(CAR(cptr->call)));
+	b = CHAR(PRINTNAME(CAR(cptr->getCall())));
     }
 
     sb = translateChar(STRING_ELT(basename, 0));
@@ -908,7 +908,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     /* applyMethod expects that the parent of the caller is the caller
        of the generic, so fixup by brute force. This should fix
        PR#15267 --pd */
-    R_GlobalContext->sysparent = callenv;
+    R_GlobalContext->setSysParent(callenv);
 
     ans = applyMethod(newcall, nextfun, matchedarg, env, newvars);
     vmaxset(vmax);
@@ -1238,8 +1238,8 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
     cptr = R_GlobalContext;
     /* check this is the right context */
     while (cptr != R_ToplevelContext) {
-	if (cptr->callflag & CTXT_FUNCTION )
-	    if (cptr->cloenv == env)
+	if (cptr->getCallFlag() & CTXT_FUNCTION )
+	    if (cptr->workingEnvironment() == env)
 		break;
 	cptr = cptr->nextContext();
     }
@@ -1248,7 +1248,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
     SETCAR(e, fun);
     /* evaluate a call the non-generic with the same arguments and from
        the same environment as the call to the generic version */
-    value = eval(e, cptr->sysparent);
+    value = eval(e, cptr->getSysParent());
     UNPROTECT(1);
     return value;
 }
@@ -1490,11 +1490,11 @@ static SEXP get_this_generic(SEXP args)
 
     /* check for a matching "generic" slot */
     for(cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext())
-	if((cptr->callflag & CTXT_FUNCTION) && isObject(cptr->callfun)) {
-	    SEXP generic = getAttrib(cptr->callfun, gen_name);
+	if((cptr->getCallFlag() & CTXT_FUNCTION) && isObject(cptr->getCallFun())) {
+	    SEXP generic = getAttrib(cptr->getCallFun(), gen_name);
 	    if(isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))
 		/* not duplicating/marking immutable, used read-only */
-		return cptr->callfun;
+		return cptr->getCallFun();
 	}
     return R_NilValue;
 }
@@ -1555,7 +1555,7 @@ HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 	error(_("invalid primitive operation given for dispatch"));
     current = prim_methods[offset];
     if(current == NO_METHODS || current == SUPPRESSED)
-	return(NULL);
+	return(nullptr);
     /* check that the methods for this function have been set */
     if(current == NEEDS_RESET) {
 	/* get the methods and store them in the in-core primitive
@@ -1573,10 +1573,10 @@ HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
        && quick_method_check_ptr) {
 	value = (*quick_method_check_ptr)(args, mlist, op);
 	if(isPrimitive(value))
-	    return(NULL);
+	    return(nullptr);
 	if(isFunction(value)) {
             if (inherits(value, "internalDispatchMethod")) {
-                return(NULL);
+                return(nullptr);
             }
             PROTECT(suppliedvars = list1(mkString(PRIMNAME(op))));
             SET_TAG(suppliedvars, R_dot_Generic);

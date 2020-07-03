@@ -369,7 +369,7 @@ HIDDEN SEXP Rf_matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 		    last = CDR(last);
 		    SET_TAG(last, TAG(b));
 		}
-	    errorcall(call /* R_GlobalContext->call */,
+	    errorcall(call /* R_GlobalContext->getCall() */,
 		      n_("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unused)),

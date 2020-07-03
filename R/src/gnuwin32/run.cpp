@@ -607,8 +607,8 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
 	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	    cntxt.cend = &terminate_process;
-	    cntxt.cenddata = &pi;
+	    cntxt.setContextEnd(&terminate_process);
+	    cntxt.setContextEndData(&pi);
 	    DWORD timeoutMillis = (DWORD) (1000*timeout);
 	    ret = pwait2(&pi, timeoutMillis, timedout);
 	    endcontext(&cntxt);

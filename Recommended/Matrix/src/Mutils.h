@@ -11,7 +11,7 @@ extern "C" {
 #include <ctype.h>
 #include <R.h>  /* includes Rconfig.h */
 #include <Rversion.h>
-#include <Rdefines.h> /* Rinternals.h + GET_SLOT etc */
+#include <Rinternals.h> /* Rinternals.h + R_do_slot etc */
 #include <R_ext/RS.h> /* for Memzero() */
 #include "localization.h"
 
@@ -41,26 +41,30 @@ extern "C" {
 #define SMALL_4_Alloca 10000
 //			==== R uses the same cutoff in several places
 
-#define C_or_Alloca_TO(_VAR_, _N_, _TYPE_)			\
-	if(_N_ < SMALL_4_Alloca) {				\
-	    _VAR_ = Alloca(_N_, _TYPE_);  R_CheckStack();	\
-	} else {						\
-	    _VAR_ = Calloc(_N_, _TYPE_);			\
-	}
-// and user needs to   if(_N_ >= SMALL_4_Alloca)  Free(_VAR_);
+#define C_or_Alloca_TO(_VAR_, _N_, _TYPE_) \
+    if (_N_ < SMALL_4_Alloca)              \
+    {                                      \
+        _VAR_ = Alloca(_N_, _TYPE_);       \
+        R_CheckStack();                    \
+    }                                      \
+    else                                   \
+    {                                      \
+        _VAR_ = Calloc(_N_, _TYPE_);       \
+    }
+ // and user needs to   if(_N_ >= SMALL_4_Alloca)  Free(_VAR_);
 
 SEXP triangularMatrix_validate(SEXP obj);
 SEXP symmetricMatrix_validate(SEXP obj);
 SEXP dense_nonpacked_validate(SEXP obj);
-SEXP dim_validate(SEXP Dim, const char* name);
+SEXP dim_validate(SEXP Dim, const char *name);
 SEXP Dim_validate(SEXP obj, SEXP name);
 SEXP dimNames_validate(SEXP obj);
-SEXP dimNames_validate__(SEXP dmNms, int dims[], const char* obj_name);
+SEXP dimNames_validate__(SEXP dmNms, int dims[], const char *obj_name);
 
 
 // La_norm_type() & La_rcond_type()  have been in R_ext/Lapack.h
 //  but have still not been available to package writers ...
-char La_norm_type (const char *typstr);
+char La_norm_type(const char *typstr);
 char La_rcond_type(const char *typstr);
 
 /* enum constants from cblas.h and some short forms */
@@ -114,22 +118,21 @@ SEXP tr_d_packed_addDiag(double *diag, int l_d, SEXP x, int n);
 
 SEXP Matrix_getElement(SEXP list, char *nm);
 
-#define PACKED_TO_FULL(TYPE)						\
-TYPE *packed_to_full_ ## TYPE(TYPE *dest, const TYPE *src,		\
-			     int n, enum CBLAS_UPLO uplo)
+#define PACKED_TO_FULL(TYPE)                                 \
+    TYPE *packed_to_full_##TYPE(TYPE *dest, const TYPE *src, \
+                                int n, enum CBLAS_UPLO uplo)
 PACKED_TO_FULL(double);
 PACKED_TO_FULL(int);
 #undef PACKED_TO_FULL
 
-#define FULL_TO_PACKED(TYPE)						\
-TYPE *full_to_packed_ ## TYPE(TYPE *dest, const TYPE *src, int n,	\
-			      enum CBLAS_UPLO uplo, enum CBLAS_DIAG diag)
+#define FULL_TO_PACKED(TYPE)                                        \
+    TYPE *full_to_packed_##TYPE(TYPE *dest, const TYPE *src, int n, \
+                                enum CBLAS_UPLO uplo, enum CBLAS_DIAG diag)
 FULL_TO_PACKED(double);
 FULL_TO_PACKED(int);
 #undef FULL_TO_PACKED
 
-
-extern	 /* stored pointers to symbols initialized in R_init_Matrix */
+extern /* stored pointers to symbols initialized in R_init_Matrix */
 #include "Syms.h"
 
 /* zero an array */
@@ -140,22 +143,22 @@ extern	 /* stored pointers to symbols initialized in R_init_Matrix */
 
 /* duplicate the slot with name given by sym from src to dest */
 
-#define slot_dup(dest, src, sym)  SET_SLOT(dest, sym, duplicate(GET_SLOT(src, sym)))
+#define slot_dup(dest, src, sym)  R_do_slot_assign(dest, sym, duplicate(R_do_slot(src, sym)))
 
 /* is not yet used: */
-#define slot_nonNull_dup(dest, src, sym)			\
-    if(GET_SLOT(src, sym) != R_NilValue)			\
-	SET_SLOT(dest, sym, duplicate(GET_SLOT(src, sym)))
+#define slot_nonNull_dup(dest, src, sym)   \
+    if (R_do_slot(src, sym) != R_NilValue) \
+    R_do_slot_assign(dest, sym, duplicate(R_do_slot(src, sym)))
 
-#define slot_dup_if_has(dest, src, sym)				\
-    if(R_has_slot(src, sym))					\
-	SET_SLOT(dest, sym, duplicate(GET_SLOT(src, sym)))
+#define slot_dup_if_has(dest, src, sym) \
+    if (R_has_slot(src, sym))           \
+    R_do_slot_assign(dest, sym, duplicate(R_do_slot(src, sym)))
 
 R_INLINE static void SET_DimNames(SEXP dest, SEXP src) {
-    SEXP dn = GET_SLOT(src, Matrix_DimNamesSym);
+    SEXP dn = R_do_slot(src, Matrix_DimNamesSym);
     // Be fast (do nothing!) for the case where dimnames = list(NULL,NULL) :
     if (!(isNull(VECTOR_ELT(dn,0)) && isNull(VECTOR_ELT(dn,1))))
-	SET_SLOT(dest, Matrix_DimNamesSym, duplicate(dn));
+	R_do_slot_assign(dest, Matrix_DimNamesSym, duplicate(dn));
 }
 
 // code in ./Mutils.c :
@@ -164,10 +167,10 @@ SEXP R_symmetric_Dimnames(SEXP x);
 void SET_DimNames_symm(SEXP dest, SEXP src);
 
 
-#define uplo_P(_x_) CHAR(STRING_ELT(GET_SLOT(_x_, Matrix_uploSym), 0))
-#define diag_P(_x_) CHAR(STRING_ELT(GET_SLOT(_x_, Matrix_diagSym), 0))
+#define uplo_P(_x_) CHAR(STRING_ELT(R_do_slot(_x_, Matrix_uploSym), 0))
+#define diag_P(_x_) CHAR(STRING_ELT(R_do_slot(_x_, Matrix_diagSym), 0))
 #define Diag_P(_x_) (R_has_slot(x, Matrix_diagSym) ?			\
-		     CHAR(STRING_ELT(GET_SLOT(_x_, Matrix_diagSym), 0)) : " ")
+		     CHAR(STRING_ELT(R_do_slot(_x_, Matrix_diagSym), 0)) : " ")
 #define class_P(_x_) CHAR(asChar(getAttrib(_x_, R_ClassSymbol)))
 
 
@@ -188,11 +191,11 @@ enum dense_enum { ddense, ldense, ndense };
 			 (isLogical(_x_) ? x_logical : x_double))
 
 /* requires 'x' slot, i.e., not for ..nMatrix.  FIXME ? via R_has_slot(obj, name) */
-#define Real_kind(_x_)	(isReal(GET_SLOT(_x_, Matrix_xSym)) ? x_double	: \
-			 (isLogical(GET_SLOT(_x_, Matrix_xSym)) ? x_logical : x_pattern))
+#define Real_kind(_x_)	(isReal(R_do_slot(_x_, Matrix_xSym)) ? x_double	: \
+			 (isLogical(R_do_slot(_x_, Matrix_xSym)) ? x_logical : x_pattern))
 
 #define DECLARE_AND_GET_X_SLOT(__C_TYPE, __SEXP)	\
-    __C_TYPE *xx = __SEXP(GET_SLOT(x, Matrix_xSym))
+    __C_TYPE *xx = __SEXP(R_do_slot(x, Matrix_xSym))
 
 
 /**
@@ -216,12 +219,12 @@ R_INLINE static int packed_ncol(int len)
 /**
  * Allocate an SEXP of given type and length, assign it as slot nm in
  * the object, and return the SEXP.  The validity of this function
- * depends on SET_SLOT not duplicating val when NAMED(val) == 0.  If
- * this behavior changes then ALLOC_SLOT must use SET_SLOT followed by
- * GET_SLOT to ensure that the value returned is indeed the SEXP in
+ * depends on R_do_slot_assign not duplicating val when NAMED(val) == 0.  If
+ * this behavior changes then ALLOC_SLOT must use R_do_slot_assign followed by
+ * R_do_slot to ensure that the value returned is indeed the SEXP in
  * the slot.
- * NOTE:  GET_SLOT(x, what)        :== R_do_slot       (x, what)
- * ----   SET_SLOT(x, what, value) :== R_do_slot_assign(x, what, value)
+ * NOTE:  R_do_slot(x, what)        :== R_do_slot       (x, what)
+ * ----   R_do_slot_assign(x, what, value) :== R_do_slot_assign(x, what, value)
  * and the R_do_slot* are in src/main/attrib.cpp
  *
  * @param obj object in which to assign the slot
@@ -235,7 +238,7 @@ R_INLINE static SEXP ALLOC_SLOT(SEXP obj, SEXP nm, SEXPTYPE type, R_xlen_t lengt
 {
     SEXP val = allocVector(type, length);
 
-    SET_SLOT(obj, nm, val);
+    R_do_slot_assign(obj, nm, val);
     return val;
 }
 
@@ -268,8 +271,8 @@ R_INLINE static int* expand_cmprPt(int ncol, const int mp[], int mj[])
  */
 R_INLINE static Rboolean any_NA_in_x(SEXP obj)
 {
-    double *x = REAL(GET_SLOT(obj, Matrix_xSym));
-    int i, n = LENGTH(GET_SLOT(obj, Matrix_xSym));
+    double *x = REAL(R_do_slot(obj, Matrix_xSym));
+    int i, n = LENGTH(R_do_slot(obj, Matrix_xSym));
     for(i=0; i < n; i++)
 	if(ISNAN(x[i])) return TRUE;
     /* else */
@@ -334,74 +337,76 @@ R_INLINE static SEXP mMatrix_as_geMatrix(SEXP A)
 }
 
 // Keep centralized --- *and* in sync with ../inst/include/Matrix.h :
-#define MATRIX_VALID_ge_dense			\
-        "dmatrix", "dgeMatrix",			\
-	"lmatrix", "lgeMatrix",			\
-	"nmatrix", "ngeMatrix",			\
-	"zmatrix", "zgeMatrix"
+#define MATRIX_VALID_ge_dense   \
+    "dmatrix", "dgeMatrix",     \
+        "lmatrix", "lgeMatrix", \
+        "nmatrix", "ngeMatrix", \
+        "zmatrix", "zgeMatrix"
 
 /* NB:  ddiMatrix & ldiMatrix are part of VALID_ddense / VALID_ldense
  * --   even though they are no longer "denseMatrix" formally.
  * CARE: dup_mMatrix_as_geMatrix() code depends on  14 ddense and 6 ldense
  * ----  entries here :
 */
-#define MATRIX_VALID_ddense					\
-		    "dgeMatrix", "dtrMatrix",			\
-		    "dsyMatrix", "dpoMatrix", "ddiMatrix",	\
-		    "dtpMatrix", "dspMatrix", "dppMatrix",	\
-		    /* sub classes of those above:*/		\
-		    /* dtr */ "Cholesky", "LDL", "BunchKaufman",\
-		    /* dtp */ "pCholesky", "pBunchKaufman",	\
-		    /* dpo */ "corMatrix"
+#define MATRIX_VALID_ddense                                                     \
+    "dgeMatrix", "dtrMatrix",                                                   \
+        "dsyMatrix", "dpoMatrix", "ddiMatrix",                                  \
+        "dtpMatrix", "dspMatrix", "dppMatrix", /* sub classes of those above:*/ \
+        /* dtr */ "Cholesky", "LDL", "BunchKaufman",                            \
+        /* dtp */ "pCholesky", "pBunchKaufman",                                 \
+        /* dpo */ "corMatrix"
 
-#define MATRIX_VALID_ldense			\
-		    "lgeMatrix", "ltrMatrix",	\
-		    "lsyMatrix", "ldiMatrix",	\
-		    "ltpMatrix", "lspMatrix"
+#define MATRIX_VALID_ldense       \
+    "lgeMatrix", "ltrMatrix",     \
+        "lsyMatrix", "ldiMatrix", \
+        "ltpMatrix", "lspMatrix"
 
-#define MATRIX_VALID_ndense			\
-		    "ngeMatrix", "ntrMatrix",	\
-		    "nsyMatrix",		\
-		    "ntpMatrix", "nspMatrix"
+#define MATRIX_VALID_ndense   \
+    "ngeMatrix", "ntrMatrix", \
+        "nsyMatrix",          \
+        "ntpMatrix", "nspMatrix"
 
-#define MATRIX_VALID_dCsparse			\
- "dgCMatrix", "dsCMatrix", "dtCMatrix"
-#define MATRIX_VALID_nCsparse			\
- "ngCMatrix", "nsCMatrix", "ntCMatrix"
+#define MATRIX_VALID_dCsparse \
+    "dgCMatrix", "dsCMatrix", "dtCMatrix"
+#define MATRIX_VALID_nCsparse \
+    "ngCMatrix", "nsCMatrix", "ntCMatrix"
 
-#define MATRIX_VALID_Csparse			\
-    MATRIX_VALID_dCsparse,			\
- "lgCMatrix", "lsCMatrix", "ltCMatrix",		\
-    MATRIX_VALID_nCsparse,			\
- "zgCMatrix", "zsCMatrix", "ztCMatrix"
+#define MATRIX_VALID_Csparse                   \
+    MATRIX_VALID_dCsparse,                     \
+        "lgCMatrix", "lsCMatrix", "ltCMatrix", \
+        MATRIX_VALID_nCsparse,                 \
+        "zgCMatrix", "zsCMatrix", "ztCMatrix"
 
-#define MATRIX_VALID_Tsparse			\
- "dgTMatrix", "dsTMatrix", "dtTMatrix",		\
- "lgTMatrix", "lsTMatrix", "ltTMatrix",		\
- "ngTMatrix", "nsTMatrix", "ntTMatrix",		\
- "zgTMatrix", "zsTMatrix", "ztTMatrix"
+#define MATRIX_VALID_Tsparse                   \
+    "dgTMatrix", "dsTMatrix", "dtTMatrix",     \
+        "lgTMatrix", "lsTMatrix", "ltTMatrix", \
+        "ngTMatrix", "nsTMatrix", "ntTMatrix", \
+        "zgTMatrix", "zsTMatrix", "ztTMatrix"
 
-#define MATRIX_VALID_Rsparse			\
- "dgRMatrix", "dsRMatrix", "dtRMatrix",		\
- "lgRMatrix", "lsRMatrix", "ltRMatrix",		\
- "ngRMatrix", "nsRMatrix", "ntRMatrix",		\
- "zgRMatrix", "zsRMatrix", "ztRMatrix"
+#define MATRIX_VALID_Rsparse                   \
+    "dgRMatrix", "dsRMatrix", "dtRMatrix",     \
+        "lgRMatrix", "lsRMatrix", "ltRMatrix", \
+        "ngRMatrix", "nsRMatrix", "ntRMatrix", \
+        "zgRMatrix", "zsRMatrix", "ztRMatrix"
 
-#define MATRIX_VALID_tri_Csparse		\
-   "dtCMatrix", "ltCMatrix", "ntCMatrix", "ztCMatrix"
+#define MATRIX_VALID_tri_Csparse \
+    "dtCMatrix", "ltCMatrix", "ntCMatrix", "ztCMatrix"
 
 #ifdef __UN_USED__
-#define MATRIX_VALID_tri_sparse			\
- "dtCMatrix",  "dtTMatrix", "dtRMatrix",	\
- "ltCMatrix",  "ltTMatrix", "ltRMatrix",	\
- "ntCMatrix",  "ntTMatrix", "ntRMatrix",	\
- "ztCMatrix",  "ztTMatrix", "ztRMatrix"
+#define MATRIX_VALID_tri_sparse                \
+    "dtCMatrix", "dtTMatrix", "dtRMatrix",     \
+        "ltCMatrix", "ltTMatrix", "ltRMatrix", \
+        "ntCMatrix", "ntTMatrix", "ntRMatrix", \
+        "ztCMatrix", "ztTMatrix", "ztRMatrix"
 
-#define MATRIX_VALID_tri_dense			\
- "dtrMatrix",  "dtpMatrix"			\
- "ltrMatrix",  "ltpMatrix"			\
- "ntrMatrix",  "ntpMatrix"			\
- "ztrMatrix",  "ztpMatrix"
+#define MATRIX_VALID_tri_dense \
+    "dtrMatrix", "dtpMatrix"   \
+                 "ltrMatrix",  \
+        "ltpMatrix"            \
+        "ntrMatrix",           \
+        "ntpMatrix"            \
+        "ztrMatrix",           \
+        "ztpMatrix"
 #endif
 
 #define MATRIX_VALID_CHMfactor "dCHMsuper", "dCHMsimpl", "nCHMsuper", "nCHMsimpl"

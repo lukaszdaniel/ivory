@@ -229,8 +229,8 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
        error if opened by do_parse */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &parse_cleanup;
-    cntxt.cenddata = &pci;
+    cntxt.setContextEnd(&parse_cleanup);
+    cntxt.setContextEndData(&pci);
 
     known_to_be_latin1 = known_to_be_utf8 = FALSE;
     Rboolean allKnown = TRUE;

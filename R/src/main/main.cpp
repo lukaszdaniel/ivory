@@ -104,7 +104,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    if (R_Visible)
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
-		PrintWarnings(NULL);
+		PrintWarnings();
 	    break;
 	case PARSE_ERROR:
 	    R_FinalizeSrcRefState();
@@ -207,7 +207,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 
     /* clear warnings that might have accumulated during a jump to top level */
     if (R_CollectWarnings)
-	PrintWarnings(NULL);
+	PrintWarnings();
 
     if(!*state->bufp) {
 	    R_Busy(0);
@@ -269,7 +269,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	if (R_Visible)
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
-	    PrintWarnings(NULL);
+	    PrintWarnings();
 	Rf_callToplevelHandlers(thisExpr, value, TRUE, wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
 	UNPROTECT(2); /* thisExpr, value */
@@ -350,7 +350,7 @@ static void check_session_exit()
 
 void R_ReplDLLinit(void)
 {
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     R_IoBufferWriteReset(&R_ConsoleIob);
@@ -402,7 +402,7 @@ int R_ReplDLLdo1(void)
 	if (R_Visible)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
-	    PrintWarnings(NULL);
+	    PrintWarnings();
 	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, wasDisplayed);
 	UNPROTECT(1);
 	R_IoBufferWriteReset(&R_ConsoleIob);
@@ -712,7 +712,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
     if (fp != NULL) {
-	if (SETJMP(R_Toplevel.cjmpbuf))
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
 	    check_session_exit();
 	else {
 	    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
@@ -895,31 +895,31 @@ void setup_Rmainloop(void)
     /* This provides a target for any non-local gotos */
     /* which occur during error handling */
 
-    R_Toplevel.nextcontext = NULL;
-    R_Toplevel.callflag = CTXT_TOPLEVEL;
-    R_Toplevel.cstacktop = 0;
-    R_Toplevel.gcenabled = R_GCEnabled;
-    R_Toplevel.promargs = R_NilValue;
-    R_Toplevel.callfun = R_NilValue;
-    R_Toplevel.call = R_NilValue;
-    R_Toplevel.cloenv = R_BaseEnv;
-    R_Toplevel.sysparent = R_BaseEnv;
-    R_Toplevel.conexit = R_NilValue;
-    R_Toplevel.vmax = NULL;
-    R_Toplevel.nodestack = R_BCNodeStackTop;
-    R_Toplevel.bcprottop = R_BCProtTop;
-    R_Toplevel.cend = NULL;
-    R_Toplevel.cenddata = NULL;
-    R_Toplevel.intsusp = FALSE;
-    R_Toplevel.handlerstack = R_HandlerStack;
-    R_Toplevel.restartstack = R_RestartStack;
-    R_Toplevel.srcref = R_NilValue;
-    R_Toplevel.prstack = NULL;
-    R_Toplevel.returnValue = NULL;
-    R_Toplevel.evaldepth = 0;
-    R_Toplevel.browserfinish = false;
+    R_Toplevel.setNextContext(nullptr);
+    R_Toplevel.setCallFlag(CTXT_TOPLEVEL);
+    R_Toplevel.setCStackTop(0);
+    R_Toplevel.setGCEnabled(R_GCEnabled);
+    R_Toplevel.setPromiseArgs(R_NilValue);
+    R_Toplevel.setCallFun(R_NilValue);
+    R_Toplevel.setCall(R_NilValue);
+    R_Toplevel.setWorkingEnvironment(R_BaseEnv);
+    R_Toplevel.setSysParent(R_BaseEnv);
+    R_Toplevel.setOnExit(R_NilValue);
+    R_Toplevel.setVMax(nullptr);
+    R_Toplevel.setNodeStack(R_BCNodeStackTop);
+    R_Toplevel.setBCProtTop(R_BCProtTop);
+    R_Toplevel.setContextEnd(nullptr);
+    R_Toplevel.setContextEndData(nullptr);
+    R_Toplevel.setIntSusp(FALSE);
+    R_Toplevel.setHandlerStack(R_HandlerStack);
+    R_Toplevel.setRestartStack(R_RestartStack);
+    R_Toplevel.setSrcRef(R_NilValue);
+    R_Toplevel.setPrStack(nullptr);
+    R_Toplevel.setReturnValue(nullptr);
+    R_Toplevel.setEvalDepth(0);
+    R_Toplevel.setBrowserFinish(false);
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    R_ExitContext = NULL;
+    R_ExitContext = nullptr;
 
     R_Warnings = R_NilValue;
 
@@ -945,7 +945,7 @@ void setup_Rmainloop(void)
 	R_Suicide(_("unable to open the base package\n"));
 
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (R_SignalHandlers) init_signal_handlers();
@@ -975,7 +975,7 @@ void setup_Rmainloop(void)
 
     /* require(methods) if it is in the default packages */
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
@@ -1014,7 +1014,7 @@ void setup_Rmainloop(void)
        or dropped on the application.
     */
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
@@ -1022,7 +1022,7 @@ void setup_Rmainloop(void)
 	R_InitialData();
     }
     else {
-	if (SETJMP(R_Toplevel.cjmpbuf))
+	if (SETJMP(R_Toplevel.getCJmpBuf()))
 	    check_session_exit();
 	else {
     	    warning(_("unable to restore saved data in %s\n"), get_workspace_name());
@@ -1034,7 +1034,7 @@ void setup_Rmainloop(void)
        If there is an error we continue. */
 
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
@@ -1053,7 +1053,7 @@ void setup_Rmainloop(void)
        If there is an error we continue. */
 
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
@@ -1082,7 +1082,7 @@ void setup_Rmainloop(void)
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
     doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
@@ -1109,7 +1109,7 @@ void run_Rmainloop(void)
 {
     /* Here is the real R read-eval-loop. */
     /* We handle the console until end-of-file. */
-    if (SETJMP(R_Toplevel.cjmpbuf))
+    if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     R_ReplConsole(R_GlobalEnv, 0, 0);
@@ -1131,16 +1131,16 @@ HIDDEN void printwhere(void)
   int lct = 1;
 
   for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-    if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
-	(TYPEOF(cptr->call) == LANGSXP)) {
+    if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
+	(TYPEOF(cptr->getCall()) == LANGSXP)) {
 	Rprintf(_("where %d"), lct++);
 	SEXP sref;
-	if (cptr->srcref == R_InBCInterpreter)
+	if (cptr->getSrcRef() == R_InBCInterpreter)
 	    sref = R_findBCInterpreterSrcref(cptr);
 	else
-	    sref = cptr->srcref;
+	    sref = cptr->getSrcRef();
 	SrcrefPrompt("", sref);
-	PrintValue(cptr->call);
+	PrintValue(cptr->getCall());
     }
   }
   Rprintf("\n");
@@ -1170,10 +1170,10 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    rval = 1;
 	    RCNTXT *cntxt = R_GlobalContext;
 	    while (cntxt != R_ToplevelContext
-		      && !(cntxt->callflag & (CTXT_RETURN | CTXT_LOOP))) {
+		      && !(cntxt->getCallFlag() & (CTXT_RETURN | CTXT_LOOP))) {
 		cntxt = cntxt->nextContext();
 	    }
-	    cntxt->browserfinish = true;
+	    cntxt->setBrowserFinish(true);
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
 	} else if (streql(expr, "help")) {
@@ -1277,13 +1277,13 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!RDEBUG(rho)) {
 	int skipCalls = asInteger(CADDDR(argList));
 	cptr = R_GlobalContext;
-	while ( ( !(cptr->callflag & CTXT_FUNCTION) || skipCalls--)
-		&& cptr->callflag )
+	while ( ( !(cptr->getCallFlag() & CTXT_FUNCTION) || skipCalls--)
+		&& cptr->getCallFlag() )
 	    cptr = cptr->nextContext();
 	Rprintf(_("Called from: "));
 	if( cptr != R_ToplevelContext ) {
-	    PrintCall(cptr->call, rho);
-	    SET_RDEBUG(cptr->cloenv, 1);
+	    PrintCall(cptr->getCall(), rho);
+	    SET_RDEBUG(cptr->workingEnvironment(), 1);
 	} else
 	    Rprintf(_("top level \n"));
 
@@ -1300,11 +1300,11 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&returncontext, CTXT_BROWSER, call, rho,
 		 R_BaseEnv, argList, R_NilValue);
-    if (!SETJMP(returncontext.cjmpbuf)) {
+    if (!SETJMP(returncontext.getCJmpBuf())) {
 	begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
 		     R_BaseEnv, R_NilValue, R_NilValue);
-	if (SETJMP(thiscontext.cjmpbuf)) {
-	    SET_RESTART_BIT_ON(thiscontext.callflag);
+	if (SETJMP(thiscontext.getCJmpBuf())) {
+	    SET_RESTART_BIT_ON(thiscontext.getCallFlag());
 	    R_ReturnedValue = R_NilValue;
 	    R_Visible = false;
 	}
@@ -1605,7 +1605,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 	if(R_CollectWarnings) {
 	    REprintf(_("warning messages from top-level task callback '%s'"), h->name);
 	    REprintf("\n");
-	    PrintWarnings(NULL);
+	    PrintWarnings();
 	}
 	if(again) {
 	    prev = h;

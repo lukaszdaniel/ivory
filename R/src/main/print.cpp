@@ -824,8 +824,8 @@ HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData *data)
     if (WinUTF8out != saveWinUTF8out) {
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 	             R_NilValue, R_NilValue);
-	cntxt.cend = &print_cleanup;
-	cntxt.cenddata = &saveWinUTF8out;
+	cntxt.setContextEnd(&print_cleanup);
+	cntxt.setContextEndData(&saveWinUTF8out);
 	havecontext = TRUE;
     }
 #endif

@@ -913,7 +913,7 @@ static _WDIR *g_opendir(wchar_t *str, wglob_t *pglob)
 
     if (!*str) wcscpy(buf, L".");
     else
-	if (g_Ctoc(str, buf, sizeof(buf))) return(NULL);
+	if (g_Ctoc(str, buf, sizeof(buf))) return(nullptr);
     return _wopendir(buf);
 }
 
@@ -932,7 +932,7 @@ static const wchar_t *g_strchr(const wchar_t *str, int ch)
 	if (*str == ch)
 	    return (str);
     } while (*str++);
-    return (NULL);
+    return (nullptr);
 }
 
 static int g_Ctoc(const wchar_t *str, wchar_t *buf, STRLEN len)

@@ -5,15 +5,15 @@
 
 SEXP triangularMatrix_validate(SEXP obj)
 {
-    SEXP val = GET_SLOT(obj, Matrix_DimSym);
+    SEXP val = R_do_slot(obj, Matrix_DimSym);
 
     if (LENGTH(val) < 2)
 	return mkString(_("'dim' slot has length less than two"));
     if (INTEGER(val)[0] != INTEGER(val)[1])
         return mkString(_("Matrix is not square"));
-    if (isString(val = check_scalar_string(GET_SLOT(obj, Matrix_uploSym),
+    if (isString(val = check_scalar_string(R_do_slot(obj, Matrix_uploSym),
 					   "LU", "uplo"))) return val;
-    if (isString(val = check_scalar_string(GET_SLOT(obj, Matrix_diagSym),
+    if (isString(val = check_scalar_string(R_do_slot(obj, Matrix_diagSym),
 					   "NU", "diag"))) return val;
     return ScalarLogical(1);
 }
@@ -22,7 +22,7 @@ static
 double get_norm(SEXP obj, const char *typstr)
 {
     char typnm[] = {'\0', '\0'};
-    int *dims = INTEGER(GET_SLOT(obj, Matrix_DimSym));
+    int *dims = INTEGER(R_do_slot(obj, Matrix_DimSym));
     double *work = (double *) NULL;
 
     typnm[0] = La_norm_type(typstr);
@@ -30,7 +30,7 @@ double get_norm(SEXP obj, const char *typstr)
 	work = (double *) R_alloc(dims[0], sizeof(double));
     }
     return F77_CALL(dlantr)(typnm, uplo_P(obj), diag_P(obj), dims, dims+1,
-			    REAL(GET_SLOT(obj, Matrix_xSym)), dims, work);
+			    REAL(R_do_slot(obj, Matrix_xSym)), dims, work);
 }
 
 
@@ -42,12 +42,12 @@ SEXP dtrMatrix_norm(SEXP obj, SEXP type)
 SEXP dtrMatrix_rcond(SEXP obj, SEXP type)
 {
     char typnm[] = {'\0', '\0'};
-    int *dims = INTEGER(GET_SLOT(obj, Matrix_DimSym)), info;
+    int *dims = INTEGER(R_do_slot(obj, Matrix_DimSym)), info;
     double rcond;
 
     typnm[0] = La_rcond_type(CHAR(asChar(type)));
     F77_CALL(dtrcon)(typnm, uplo_P(obj), diag_P(obj), dims,
-		     REAL(GET_SLOT(obj, Matrix_xSym)), dims, &rcond,
+		     REAL(R_do_slot(obj, Matrix_xSym)), dims, &rcond,
 		     (double *) R_alloc(3*dims[0], sizeof(double)),
 		     (int *) R_alloc(dims[0], sizeof(int)), &info);
     return ScalarReal(rcond);
@@ -56,9 +56,9 @@ SEXP dtrMatrix_rcond(SEXP obj, SEXP type)
 SEXP dtrMatrix_solve(SEXP a)
 {
     SEXP val = PROTECT(duplicate(a));
-    int info, *Dim = INTEGER(GET_SLOT(val, Matrix_DimSym));
+    int info, *Dim = INTEGER(R_do_slot(val, Matrix_DimSym));
     F77_CALL(dtrtri)(uplo_P(val), diag_P(val), Dim,
-		     REAL(GET_SLOT(val, Matrix_xSym)), Dim, &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), Dim, &info);
     UNPROTECT(1);
     return val;
 }
@@ -73,9 +73,9 @@ SEXP dtrMatrix_chol2inv(SEXP a)
     slot_dup(val, a, Matrix_diagSym);
     slot_dup(val, a, Matrix_DimNamesSym);
     slot_dup(val, a, Matrix_xSym);
-    n = *INTEGER(GET_SLOT(val, Matrix_DimSym));
+    n = *INTEGER(R_do_slot(val, Matrix_DimSym));
     F77_CALL(dpotri)(uplo_P(val), &n,
-		     REAL(GET_SLOT(val, Matrix_xSym)), &n, &info);
+		     REAL(R_do_slot(val, Matrix_xSym)), &n, &info);
     UNPROTECT(1);
     return val;
 }
@@ -83,16 +83,16 @@ SEXP dtrMatrix_chol2inv(SEXP a)
 SEXP dtrMatrix_matrix_solve(SEXP a, SEXP b)
 {
     SEXP ans = PROTECT(dup_mMatrix_as_dgeMatrix(b));
-    int *adims = INTEGER(GET_SLOT(a, Matrix_DimSym)),
-	*bdims = INTEGER(GET_SLOT(ans, Matrix_DimSym));
+    int *adims = INTEGER(R_do_slot(a, Matrix_DimSym)),
+	*bdims = INTEGER(R_do_slot(ans, Matrix_DimSym));
     int n = bdims[0], nrhs = bdims[1];
     double one = 1.0;
 
     if (adims[0] != n || n != adims[1])
 	error(_("Dimensions of system to be solved are inconsistent"));
     F77_CALL(dtrsm)("L", uplo_P(a), "N", diag_P(a),
-		    &n, &nrhs, &one, REAL(GET_SLOT(a, Matrix_xSym)), &n,
-		    REAL(GET_SLOT(ans, Matrix_xSym)), &n);
+		    &n, &nrhs, &one, REAL(R_do_slot(a, Matrix_xSym)), &n,
+		    REAL(R_do_slot(ans, Matrix_xSym)), &n);
     UNPROTECT(1);
     return ans;
 }
@@ -117,8 +117,8 @@ SEXP dtrMatrix_matrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
     SEXP val = PROTECT(dup_mMatrix_as_dgeMatrix(b));
     int rt = asLogical(right); /* if(rt), compute b %*% op(a),  else  op(a) %*% b */
     int tr = asLogical(trans);/* if true, use t(a) */
-    int *adims = INTEGER(GET_SLOT(a, Matrix_DimSym)),
-	*bdims = INTEGER(GET_SLOT(val, Matrix_DimSym));
+    int *adims = INTEGER(R_do_slot(a, Matrix_DimSym)),
+	*bdims = INTEGER(R_do_slot(val, Matrix_DimSym));
     int m = bdims[0], n = bdims[1];
     double one = 1.;
 
@@ -131,13 +131,13 @@ SEXP dtrMatrix_matrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 	F77_CALL(dtrmm)(rt ? "R" : "L", uplo_P(a),
 			/*trans_A = */ tr ? "T" : "N",
 			diag_P(a), &m, &n, &one,
-			REAL(GET_SLOT(a, Matrix_xSym)), adims,
-			REAL(GET_SLOT(val, Matrix_xSym)), &m);
+			REAL(R_do_slot(a, Matrix_xSym)), adims,
+			REAL(R_do_slot(val, Matrix_xSym)), &m);
     }
 
     SEXP
-	dn_a = GET_SLOT( a,  Matrix_DimNamesSym),
-	dn   = GET_SLOT(val, Matrix_DimNamesSym);
+	dn_a = R_do_slot( a,  Matrix_DimNamesSym),
+	dn   = R_do_slot(val, Matrix_DimNamesSym);
     /* matrix product   a %*% b, t(a) %*% b,  b %*% a, or  b %*% t(a)
      * (right, trans) =  (F, F)    (F, T)      (T, F)        (T, T)
      *   set:from_a   =   0:0       0:1         1:1           1:0
@@ -168,9 +168,9 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
      * ===         (2) result is "general"
      */
     SEXP val,/* = in case (2):  PROTECT(dup_mMatrix_as_dgeMatrix(b)); */
-	d_a = GET_SLOT(a, Matrix_DimSym),
-	uplo_a = GET_SLOT(a, Matrix_uploSym),  diag_a = GET_SLOT(a, Matrix_diagSym),
-	uplo_b = GET_SLOT(b, Matrix_uploSym),  diag_b = GET_SLOT(b, Matrix_diagSym);
+	d_a = R_do_slot(a, Matrix_DimSym),
+	uplo_a = R_do_slot(a, Matrix_uploSym),  diag_a = R_do_slot(a, Matrix_diagSym),
+	uplo_b = R_do_slot(b, Matrix_uploSym),  diag_b = R_do_slot(b, Matrix_diagSym);
     int rt = asLogical(right);
     int tr = asLogical(trans);
     int *adims = INTEGER(d_a), n = adims[0];
@@ -184,7 +184,7 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 	matching_uplo = tr ? (!same_uplo) : same_uplo,
 	uDiag_b = /* -Wall: */ FALSE;
 
-    if (INTEGER(GET_SLOT(b, Matrix_DimSym))[0] != n)
+    if (INTEGER(R_do_slot(b, Matrix_DimSym))[0] != n)
 	/* validity checking already "assures" square matrices ... */
 	error(_("objects of class \"dtrMatrix\" in '%*%' must have matching (square) dimensions"));
     if(matching_uplo) {
@@ -192,11 +192,11 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 	 * val := dup_mMatrix_as_dtrMatrix(b) : */
 	int sz = n * n;
 	val = PROTECT(NEW_OBJECT_OF_CLASS("dtrMatrix"));
-	SET_SLOT(val, Matrix_uploSym, duplicate(uplo_b));
-	SET_SLOT(val, Matrix_DimSym,  duplicate(d_a));
+	R_do_slot_assign(val, Matrix_uploSym, duplicate(uplo_b));
+	R_do_slot_assign(val, Matrix_DimSym,  duplicate(d_a));
 	SET_DimNames(val, b);
 	valx = REAL(ALLOC_SLOT(val, Matrix_xSym, REALSXP, sz));
-	Memcpy(valx, REAL(GET_SLOT(b, Matrix_xSym)), sz);
+	Memcpy(valx, REAL(R_do_slot(b, Matrix_xSym)), sz);
 	if((uDiag_b = (*diag_b_ch == 'U'))) {
 	    /* unit-diagonal b - may contain garbage in diagonal */
 	    for (int i = 0; i < n; i++)
@@ -205,8 +205,8 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
     } else { /* different "uplo" ==> result is "dgeMatrix" ! */
 	val = PROTECT(dup_mMatrix_as_dgeMatrix(b));
 	SEXP
-	    dn_a = GET_SLOT( a , Matrix_DimNamesSym),
-	    dn   = GET_SLOT(val, Matrix_DimNamesSym);
+	    dn_a = R_do_slot( a , Matrix_DimNamesSym),
+	    dn   = R_do_slot(val, Matrix_DimNamesSym);
 	/* matrix product   a %*% b, t(a) %*% b,  b %*% a, or  b %*% t(a)
 	 * (right, trans) =  (F, F)    (F, T)      (T, F)        (T, T)
 	 *   set:from_a   =   0:0       0:1         1:1           1:0
@@ -221,13 +221,13 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 	 *				  op(A):= t(A) "T"ransposed */
 	F77_CALL(dtrmm)(rt ? "R" : "L", uplo_a_ch,
 			/*trans_A = */ tr ? "T" : "N", diag_a_ch, &n, &n, &alpha,
-			REAL(GET_SLOT(a,   Matrix_xSym)), adims,
-			REAL(GET_SLOT(val, Matrix_xSym)), &n);
+			REAL(R_do_slot(a,   Matrix_xSym)), adims,
+			REAL(R_do_slot(val, Matrix_xSym)), &n);
     }
     if(matching_uplo) {
 	make_d_matrix_triangular(valx, tr ? b : a); /* set "other triangle" to 0 */
 	if(*diag_a_ch == 'U' && uDiag_b) /* result remains uni-diagonal */
-	    SET_SLOT(val, Matrix_diagSym, duplicate(diag_a));
+	    R_do_slot_assign(val, Matrix_diagSym, duplicate(diag_a));
     }
     UNPROTECT(1);
     return val;
@@ -236,21 +236,21 @@ SEXP dtrMatrix_dtrMatrix_mm(SEXP a, SEXP b, SEXP right, SEXP trans)
 
 SEXP dtrMatrix_as_matrix(SEXP from, SEXP keep_dimnames)
 {
-    int *Dim = INTEGER(GET_SLOT(from, Matrix_DimSym));
+    int *Dim = INTEGER(R_do_slot(from, Matrix_DimSym));
     int m = Dim[0], n = Dim[1];
     SEXP val = PROTECT(allocMatrix(REALSXP, m, n));
     make_d_matrix_triangular(Memcpy(REAL(val),
-				    REAL(GET_SLOT(from, Matrix_xSym)), m * n),
+				    REAL(R_do_slot(from, Matrix_xSym)), m * n),
 			     from);
     if(asLogical(keep_dimnames))
-	setAttrib(val, R_DimNamesSymbol, GET_SLOT(from, Matrix_DimNamesSym));
+	setAttrib(val, R_DimNamesSymbol, R_do_slot(from, Matrix_DimNamesSym));
     UNPROTECT(1);
     return val;
 }
 
 #define GET_trMatrix_Diag(_C_TYPE_, _SEXPTYPE_, _SEXP_, _ONE_)		\
-    int i, n = INTEGER(GET_SLOT(x, Matrix_DimSym))[0];			\
-    SEXP x_x = GET_SLOT(x, Matrix_xSym);				\
+    int i, n = INTEGER(R_do_slot(x, Matrix_DimSym))[0];			\
+    SEXP x_x = R_do_slot(x, Matrix_xSym);				\
 									\
     SEXP ret = PROTECT(allocVector(_SEXPTYPE_, n));			\
     _C_TYPE_ *rv = _SEXP_(ret),						\
@@ -277,12 +277,12 @@ SEXP ltrMatrix_getDiag(SEXP x) {
     if ('U' == diag_P(x)[0])						\
 	error(_("cannot set diag() as long as 'diag = \"U\"'"));	\
 			    /* careful to recycle RHS value: */		\
-    int n = INTEGER(GET_SLOT(x, Matrix_DimSym))[0];			\
+    int n = INTEGER(R_do_slot(x, Matrix_DimSym))[0];			\
     int l_d = LENGTH(d); Rboolean d_full = (l_d == n);			\
     if (!d_full && l_d != 1)						\
 	error(_("replacement diagonal has wrong length"));		\
     SEXP ret = PROTECT(duplicate(x)),					\
-	r_x = GET_SLOT(ret, Matrix_xSym);				\
+	r_x = R_do_slot(ret, Matrix_xSym);				\
     _C_TYPE_ *dv = _SEXP_(d),						\
 	     *rv = _SEXP_(r_x);						\
 									\
@@ -303,9 +303,9 @@ SEXP ltrMatrix_setDiag(SEXP x, SEXP d) {
 }
 
 SEXP dtrMatrix_addDiag(SEXP x, SEXP d) {
-    int n = INTEGER(GET_SLOT(x, Matrix_DimSym))[0];
+    int n = INTEGER(R_do_slot(x, Matrix_DimSym))[0];
     SEXP ret = PROTECT(duplicate(x)),
-	r_x = GET_SLOT(ret, Matrix_xSym);
+	r_x = R_do_slot(ret, Matrix_xSym);
     double *dv = REAL(d), *rv = REAL(r_x);
 
     if ('U' == diag_P(x)[0])
@@ -320,21 +320,21 @@ SEXP dtrMatrix_addDiag(SEXP x, SEXP d) {
 SEXP dtrMatrix_as_dtpMatrix(SEXP from)
 {
     SEXP val = PROTECT(NEW_OBJECT_OF_CLASS("dtpMatrix")),
-	uplo = GET_SLOT(from, Matrix_uploSym),
-	diag = GET_SLOT(from, Matrix_diagSym),
-	dimP = GET_SLOT(from, Matrix_DimSym);
+	uplo = R_do_slot(from, Matrix_uploSym),
+	diag = R_do_slot(from, Matrix_diagSym),
+	dimP = R_do_slot(from, Matrix_DimSym);
     int n = *INTEGER(dimP);
 
-    SET_SLOT(val, Matrix_DimSym, duplicate(dimP));
-    SET_SLOT(val, Matrix_diagSym, duplicate(diag));
-    SET_SLOT(val, Matrix_uploSym, duplicate(uplo));
+    R_do_slot_assign(val, Matrix_DimSym, duplicate(dimP));
+    R_do_slot_assign(val, Matrix_diagSym, duplicate(diag));
+    R_do_slot_assign(val, Matrix_uploSym, duplicate(uplo));
     full_to_packed_double(
 	REAL(ALLOC_SLOT(val, Matrix_xSym, REALSXP, (n*(n+1))/2)),
-	REAL(GET_SLOT(from, Matrix_xSym)), n,
+	REAL(R_do_slot(from, Matrix_xSym)), n,
 	*CHAR(STRING_ELT(uplo, 0)) == 'U' ? UPP : LOW,
 	*CHAR(STRING_ELT(diag, 0)) == 'U' ? UNT : NUN);
-    SET_SLOT(val, Matrix_DimNamesSym,
-	     duplicate(GET_SLOT(from, Matrix_DimNamesSym)));
+    R_do_slot_assign(val, Matrix_DimNamesSym,
+	     duplicate(R_do_slot(from, Matrix_DimNamesSym)));
     UNPROTECT(1);
     return val;
 }

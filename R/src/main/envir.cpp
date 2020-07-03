@@ -1535,8 +1535,8 @@ SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
     while (cptr != R_ToplevelContext) {
-	if (cptr->callflag & CTXT_FUNCTION) {
-	    vl = findVarInFrame3(cptr->cloenv, symbol, TRUE);
+	if (cptr->getCallFlag() & CTXT_FUNCTION) {
+	    vl = findVarInFrame3(cptr->workingEnvironment(), symbol, TRUE);
 	    if (vl != R_UnboundValue) return vl;
 	}
 	cptr = cptr->nextContext();
@@ -1866,12 +1866,10 @@ void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 }
 
 /* get environment from a subclass if possible; else return NULL */
-//#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
-R_INLINE static SEXP simple_as_environment(SEXP arg) {
- return IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue;
- }
-
-
+inline static SEXP simple_as_environment(SEXP arg)
+{
+	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue);
+}
 
 /*----------------------------------------------------------------------
 
@@ -2845,10 +2843,8 @@ static int BuiltinSize(int all, int intern)
 
 static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 {
-    SEXP s;
-    int j;
-    for (j = 0; j < HSIZE; j++) {
-	for (s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
+    for (int j = 0; j < HSIZE; j++) {
+	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
 	    if (intern) {
 		if (INTERNAL(CAR(s)) != R_NilValue)
 		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
@@ -2864,10 +2860,9 @@ static void BuiltinNames(int all, int intern, SEXP names, int *indx)
 
 static void BuiltinValues(int all, int intern, SEXP values, int *indx)
 {
-    SEXP s, vl;
-    int j;
-    for (j = 0; j < HSIZE; j++) {
-	for (s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
+    SEXP vl;
+    for (int j = 0; j < HSIZE; j++) {
+	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
 	    if (intern) {
 		if (INTERNAL(CAR(s)) != R_NilValue) {
 		    vl = SYMVALUE(CAR(s));
@@ -3223,13 +3218,13 @@ static SEXP pos2env(int pos, SEXP call)
     else if (pos == -1) {
 	/* make sure the context is a funcall */
 	cptr = R_GlobalContext;
-	while( !(cptr->callflag & CTXT_FUNCTION) && cptr->nextContext()
+	while( !(cptr->getCallFlag() & CTXT_FUNCTION) && cptr->nextContext()
 	       != NULL )
 	    cptr = cptr->nextContext();
-	if( !(cptr->callflag & CTXT_FUNCTION) )
+	if( !(cptr->getCallFlag() & CTXT_FUNCTION) )
 	    errorcall(call, _("no enclosing environment"));
 
-	env = cptr->sysparent;
+	env = cptr->getSysParent();
 	if (R_GlobalEnv != R_NilValue && env == R_NilValue)
 	    errorcall(call, _("invalid '%s' argument"), "pos");
     }
@@ -3337,10 +3332,8 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
 	env = R_getS4DataSlot(env, ANYSXP); /* better be an ENVSXP */
     if (env == R_BaseEnv || env == R_BaseNamespace) {
 	if (bindings) {
-	    SEXP s;
-	    int j;
-	    for (j = 0; j < HSIZE; j++)
-		for (s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
+	    for (int j = 0; j < HSIZE; j++)
+		for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
 		    if(SYMVALUE(CAR(s)) != R_UnboundValue)
 			LOCK_BINDING(CAR(s));
 	}

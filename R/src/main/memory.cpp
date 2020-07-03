@@ -1550,7 +1550,7 @@ static bool RunFinalizers(void)
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
 	    PROTECT(next);
-	    if (! SETJMP(thiscontext.cjmpbuf)) {
+	    if (! SETJMP(thiscontext.getCJmpBuf())) {
 		R_GlobalContext = R_ToplevelContext = &thiscontext;
 
 		/* The entry in the weak reference list is removed
@@ -1788,16 +1788,16 @@ static int RunGenCollect(R_size_t size_needed)
 
     for (ctxt = R_GlobalContext ; ctxt != NULL ; ctxt = ctxt->nextContext()) {
 	FORWARD_NODE(ctxt->onExit());       /* on.exit expressions */
-	FORWARD_NODE(ctxt->promargs);	   /* promises supplied to closure */
-	FORWARD_NODE(ctxt->callfun);       /* the closure called */
-	FORWARD_NODE(ctxt->sysparent);     /* calling environment */
-	FORWARD_NODE(ctxt->call);          /* the call */
-	FORWARD_NODE(ctxt->cloenv);        /* the closure environment */
-	FORWARD_NODE(ctxt->bcbody);        /* the current byte code object */
-	FORWARD_NODE(ctxt->handlerstack);  /* the condition handler stack */
-	FORWARD_NODE(ctxt->restartstack);  /* the available restarts stack */
-	FORWARD_NODE(ctxt->srcref);	   /* the current source reference */
-	FORWARD_NODE(ctxt->returnValue);   /* For on.exit calls */
+	FORWARD_NODE(ctxt->getPromiseArgs());	   /* promises supplied to closure */
+	FORWARD_NODE(ctxt->getCallFun());       /* the closure called */
+	FORWARD_NODE(ctxt->getSysParent());     /* calling environment */
+	FORWARD_NODE(ctxt->getCall());          /* the call */
+	FORWARD_NODE(ctxt->workingEnvironment());        /* the closure environment */
+	FORWARD_NODE(ctxt->getBCBody());        /* the current byte code object */
+	FORWARD_NODE(ctxt->getHandlerStack());  /* the condition handler stack */
+	FORWARD_NODE(ctxt->getRestartStack());  /* the available restarts stack */
+	FORWARD_NODE(ctxt->getSrcRef());	   /* the current source reference */
+	FORWARD_NODE(ctxt->getReturnValue());   /* For on.exit calls */
     }
 
     FORWARD_NODE(R_PreciousList);
@@ -3313,8 +3313,8 @@ NORET void R_signal_protect_error(void)
 
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &reset_pp_stack;
-    cntxt.cenddata = &oldpps;
+    cntxt.setContextEnd(&reset_pp_stack);
+    cntxt.setContextEndData(&oldpps);
 
     if (R_PPStackSize < R_RealPPStackSize)
 	R_PPStackSize = R_RealPPStackSize;
@@ -3451,7 +3451,7 @@ void *R_chk_calloc(size_t nelem, size_t elsize)
     void *p;
 #ifndef HAVE_WORKING_CALLOC
     if(nelem == 0)
-	return(NULL);
+	return(nullptr);
 #endif
     p = calloc(nelem, elsize);
     if(!p) /* problem here is that we don't have a format for size_t. */
@@ -4507,9 +4507,9 @@ static void R_OutputStackTrace(FILE *file)
     RCNTXT *cptr;
 
     for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
-	    && TYPEOF(cptr->call) == LANGSXP) {
-	    SEXP fun = CAR(cptr->call);
+	if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN))
+	    && TYPEOF(cptr->getCall()) == LANGSXP) {
+	    SEXP fun = CAR(cptr->getCall());
 	    fprintf(file, "\"%s\" ",
 		    TYPEOF(fun) == SYMSXP ? CHAR(PRINTNAME(fun)) :
 		    "<Anonymous>");

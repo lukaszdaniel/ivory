@@ -13,9 +13,9 @@
 Rboolean isValid_Csparse(SEXP x)
 {
     /* NB: we do *NOT* check a potential 'x' slot here, at all */
-    SEXP pslot = GET_SLOT(x, Matrix_pSym),
-	islot = GET_SLOT(x, Matrix_iSym);
-    int *dims = INTEGER(GET_SLOT(x, Matrix_DimSym)), j,
+    SEXP pslot = R_do_slot(x, Matrix_pSym),
+	islot = R_do_slot(x, Matrix_iSym);
+    int *dims = INTEGER(R_do_slot(x, Matrix_DimSym)), j,
 	nrow = dims[0],
 	ncol = dims[1],
 	*xp = INTEGER(pslot),
@@ -64,11 +64,11 @@ SEXP Csparse_sort (SEXP x) {
 SEXP Rsparse_validate(SEXP x)
 {
     /* NB: we do *NOT* check a potential 'x' slot here, at all */
-    SEXP pslot = GET_SLOT(x, Matrix_pSym),
-	jslot = GET_SLOT(x, Matrix_jSym);
+    SEXP pslot = R_do_slot(x, Matrix_pSym),
+	jslot = R_do_slot(x, Matrix_jSym);
     Rboolean sorted, strictly;
     int i, k,
-	*dims = INTEGER(GET_SLOT(x, Matrix_DimSym)),
+	*dims = INTEGER(R_do_slot(x, Matrix_DimSym)),
 	nrow = dims[0],
 	ncol = dims[1],
 	*xp = INTEGER(pslot),
@@ -161,7 +161,7 @@ SEXP Csparse_to_dense(SEXP x, SEXP symm_or_tri)
     //                   ^^^ important when prod(dim(.)) > INT_MAX
     int Rkind = (chxs->xtype == CHOLMOD_PATTERN)? -1 : Real_kind(x);
 
-    SEXP ans = chm_dense_to_SEXP(chxd, 1, Rkind, GET_SLOT(x, Matrix_DimNamesSym),
+    SEXP ans = chm_dense_to_SEXP(chxd, 1, Rkind, R_do_slot(x, Matrix_DimNamesSym),
 				 /* transp: */ FALSE);
     // -> a [dln]geMatrix
     if(is_sym) { // ==> want  [dln]syMatrix
@@ -170,10 +170,10 @@ SEXP Csparse_to_dense(SEXP x, SEXP symm_or_tri)
 	SEXP aa = PROTECT(NEW_OBJECT_OF_CLASS((cl1 == 'd') ? "dsyMatrix" :
 					      ((cl1 == 'l') ? "lsyMatrix" : "nsyMatrix")));
 	// No need to duplicate() as slots of ans are freshly allocated and ans will not be used
-	SET_SLOT(aa, Matrix_xSym,       GET_SLOT(ans, Matrix_xSym));
-	SET_SLOT(aa, Matrix_DimSym,     GET_SLOT(ans, Matrix_DimSym));
-	SET_SLOT(aa, Matrix_DimNamesSym,GET_SLOT(ans, Matrix_DimNamesSym));
-	SET_SLOT(aa, Matrix_uploSym, mkString((chxs->stype > 0) ? "U" : "L"));
+	R_do_slot_assign(aa, Matrix_xSym,       R_do_slot(ans, Matrix_xSym));
+	R_do_slot_assign(aa, Matrix_DimSym,     R_do_slot(ans, Matrix_DimSym));
+	R_do_slot_assign(aa, Matrix_DimNamesSym,R_do_slot(ans, Matrix_DimNamesSym));
+	R_do_slot_assign(aa, Matrix_uploSym, mkString((chxs->stype > 0) ? "U" : "L"));
 	UNPROTECT(2);
 	return aa;
     }
@@ -183,12 +183,12 @@ SEXP Csparse_to_dense(SEXP x, SEXP symm_or_tri)
 	SEXP aa = PROTECT(NEW_OBJECT_OF_CLASS((cl1 == 'd') ? "dtrMatrix" :
 					      ((cl1 == 'l') ? "ltrMatrix" : "ntrMatrix")));
 	// No need to duplicate() as slots of ans are freshly allocated and ans will not be used
-	SET_SLOT(aa, Matrix_xSym,       GET_SLOT(ans, Matrix_xSym));
-	SET_SLOT(aa, Matrix_DimSym,     GET_SLOT(ans, Matrix_DimSym));
-	SET_SLOT(aa, Matrix_DimNamesSym,GET_SLOT(ans, Matrix_DimNamesSym));
+	R_do_slot_assign(aa, Matrix_xSym,       R_do_slot(ans, Matrix_xSym));
+	R_do_slot_assign(aa, Matrix_DimSym,     R_do_slot(ans, Matrix_DimSym));
+	R_do_slot_assign(aa, Matrix_DimNamesSym,R_do_slot(ans, Matrix_DimNamesSym));
 	slot_dup(aa, x, Matrix_uploSym);
-	/* already by NEW_OBJECT(..) above:
-	   SET_SLOT(aa, Matrix_diagSym, mkString("N")); */
+	/* already by R_do_new_object(..) above:
+	   R_do_slot_assign(aa, Matrix_diagSym, mkString("N")); */
 	UNPROTECT(2);
 	return aa;
     }
@@ -207,7 +207,7 @@ SEXP Csparse2nz(SEXP x, Rboolean tri)
 			      tri ? ((*uplo_P(x) == 'U') ? 1 : -1) : 0,
 			      /* Rkind: pattern */ 0,
 			      /* diag = */ tri ? diag_P(x) : "",
-			      GET_SLOT(x, Matrix_DimNamesSym));
+			      R_do_slot(x, Matrix_DimNamesSym));
 }
 SEXP Csparse_to_nz_pattern(SEXP x, SEXP tri)
 {
@@ -240,7 +240,7 @@ SEXP nz2Csparse(SEXP x, enum x_slot_kind r_kind)
 	else // fine : get a valid  cl_x  class_P()-like string :
 	    cl_x = valid[ctype];
     }
-    int nnz = LENGTH(GET_SLOT(x, Matrix_iSym));
+    int nnz = LENGTH(R_do_slot(x, Matrix_iSym));
     SEXP ans;
     char *ncl = alloca(strlen(cl_x) + 1); /* not much memory required */
     strcpy(ncl, cl_x);
@@ -294,8 +294,8 @@ SEXP Csparse_to_matrix(SEXP x, SEXP chk, SEXP symm)
 	cholmod_sparse_to_dense(AS_CHM_SP2(x, asLogical(chk)), &c),
 	1 /*do_free*/,
 	(is_sym
-	 ? symmetric_DimNames(GET_SLOT(x, Matrix_DimNamesSym))
-	 :                    GET_SLOT(x, Matrix_DimNamesSym)));
+	 ? symmetric_DimNames(R_do_slot(x, Matrix_DimNamesSym))
+	 :                    R_do_slot(x, Matrix_DimNamesSym)));
 }
 
 SEXP Csparse_to_vector(SEXP x)
@@ -314,7 +314,7 @@ SEXP Csparse_to_Tsparse(SEXP x, SEXP tri)
     return chm_triplet_to_SEXP(chxt, 1,
 			       tr ? ((*uplo_P(x) == 'U') ? 1 : -1) : 0,
 			       Rkind, tr ? diag_P(x) : "",
-			       GET_SLOT(x, Matrix_DimNamesSym));
+			       R_do_slot(x, Matrix_DimNamesSym));
 }
 
 SEXP Csparse_to_tCsparse(SEXP x, SEXP uplo, SEXP diag)
@@ -325,7 +325,7 @@ SEXP Csparse_to_tCsparse(SEXP x, SEXP uplo, SEXP diag)
     return chm_sparse_to_SEXP(chxs, /* dofree = */ 0,
 			      /* uploT = */ (*CHAR(asChar(uplo)) == 'U')? 1: -1,
 			       Rkind, /* diag = */ CHAR(STRING_ELT(diag, 0)),
-			       GET_SLOT(x, Matrix_DimNamesSym));
+			       R_do_slot(x, Matrix_DimNamesSym));
 }
 
 SEXP Csparse_to_tTsparse(SEXP x, SEXP uplo, SEXP diag)
@@ -337,7 +337,7 @@ SEXP Csparse_to_tTsparse(SEXP x, SEXP uplo, SEXP diag)
     return chm_triplet_to_SEXP(chxt, 1,
 			      /* uploT = */ (*CHAR(asChar(uplo)) == 'U')? 1: -1,
 			       Rkind, /* diag = */ CHAR(STRING_ELT(diag, 0)),
-			       GET_SLOT(x, Matrix_DimNamesSym));
+			       R_do_slot(x, Matrix_DimNamesSym));
 }
 
 
@@ -351,12 +351,12 @@ SEXP Csparse_symmetric_to_general(SEXP x)
 	error(_("Nonsymmetric matrix in Csparse_symmetric_to_general"));
     chgx = cholmod_copy(chx, /* stype: */ 0, chx->xtype, &c);
     return chm_sparse_to_SEXP(chgx, 1, 0, Rkind, "",
-			      symmetric_DimNames(GET_SLOT(x, Matrix_DimNamesSym)));
+			      symmetric_DimNames(R_do_slot(x, Matrix_DimNamesSym)));
 }
 
 SEXP Csparse_general_to_symmetric(SEXP x, SEXP uplo, SEXP sym_dmns)
 {
-    int *adims = INTEGER(GET_SLOT(x, Matrix_DimSym)), n = adims[0];
+    int *adims = INTEGER(R_do_slot(x, Matrix_DimSym)), n = adims[0];
     if(n != adims[1]) {
 	error(_("Csparse_general_to_symmetric(): matrix is not square!"));
 	return R_NilValue; /* -Wall */
@@ -367,7 +367,7 @@ SEXP Csparse_general_to_symmetric(SEXP x, SEXP uplo, SEXP sym_dmns)
     R_CheckStack();
     chgx = cholmod_copy(chx, /* stype: */ uploT, chx->xtype, &c);
 
-    SEXP dns = GET_SLOT(x, Matrix_DimNamesSym);
+    SEXP dns = R_do_slot(x, Matrix_DimNamesSym);
     if(asLogical(sym_dmns))
 	dns = symmetric_DimNames(dns);
     else if((!isNull(VECTOR_ELT(dns, 0)) &&
@@ -406,7 +406,7 @@ SEXP Csparse_transpose(SEXP x, SEXP tri)
     CHM_SP chx = AS_CHM_SP__(x);
     int Rkind = (chx->xtype != CHOLMOD_PATTERN) ? Real_kind(x) : 0;
     CHM_SP chxt = cholmod_transpose(chx, chx->xtype, &c);
-    SEXP dn = PROTECT(duplicate(GET_SLOT(x, Matrix_DimNamesSym))), tmp;
+    SEXP dn = PROTECT(duplicate(R_do_slot(x, Matrix_DimNamesSym))), tmp;
     int tr = asLogical(tri);
     R_CheckStack();
 
@@ -503,9 +503,9 @@ SEXP Csparse_Csparse_prod(SEXP a, SEXP b, SEXP bool_arith)
 
     SEXP dn = PROTECT(allocVector(VECSXP, 2));
     SET_VECTOR_ELT(dn, 0,	/* establish dimnames */
-		   duplicate(VECTOR_ELT(GET_SLOT(a, Matrix_DimNamesSym), 0)));
+		   duplicate(VECTOR_ELT(R_do_slot(a, Matrix_DimNamesSym), 0)));
     SET_VECTOR_ELT(dn, 1,
-		   duplicate(VECTOR_ELT(GET_SLOT(b, Matrix_DimNamesSym), 1)));
+		   duplicate(VECTOR_ELT(R_do_slot(b, Matrix_DimNamesSym), 1)));
     UNPROTECT(nprot);
     return chm_sparse_to_SEXP(chc, 1, uploT, /*Rkind*/0, diag, dn);
 }
@@ -583,10 +583,10 @@ SEXP Csparse_Csparse_crossprod(SEXP a, SEXP b, SEXP trans, SEXP bool_arith)
 
     SEXP dn = PROTECT(allocVector(VECSXP, 2));
     SET_VECTOR_ELT(dn, 0,	/* establish dimnames */
-		   duplicate(VECTOR_ELT(GET_SLOT(a, Matrix_DimNamesSym),
+		   duplicate(VECTOR_ELT(R_do_slot(a, Matrix_DimNamesSym),
 					(tr) ? 0 : 1)));
     SET_VECTOR_ELT(dn, 1,
-		   duplicate(VECTOR_ELT(GET_SLOT(b, Matrix_DimNamesSym),
+		   duplicate(VECTOR_ELT(R_do_slot(b, Matrix_DimNamesSym),
 					(tr) ? 0 : 1)));
     UNPROTECT(nprot);
     return chm_sparse_to_SEXP(chc, 1, uploT, /*Rkind*/0, diag, dn);
@@ -691,9 +691,9 @@ SEXP Csp_dense_products(SEXP a, SEXP b,
 
     SEXP dn = PROTECT(allocVector(VECSXP, 2));	/* establish dimnames */
     SET_VECTOR_ELT(dn, transp_ans ? 1 : 0,
-		   duplicate(VECTOR_ELT(GET_SLOT(a, Matrix_DimNamesSym), transp_a ? 1 : 0)));
+		   duplicate(VECTOR_ELT(R_do_slot(a, Matrix_DimNamesSym), transp_a ? 1 : 0)));
     SET_VECTOR_ELT(dn, transp_ans ? 0 : 1,
-		   duplicate(VECTOR_ELT(GET_SLOT(b_M, Matrix_DimNamesSym),
+		   duplicate(VECTOR_ELT(R_do_slot(b_M, Matrix_DimNamesSym),
 					transp_b ? 0 : 1)));
     if(transp_b) cholmod_free_dense(&b_t, &c);
     UNPROTECT(nprot);
@@ -777,7 +777,7 @@ SEXP Csparse_crossprod(SEXP x, SEXP trans, SEXP triplet, SEXP bool_arith)
     if (tripl) cholmod_free_sparse(&chx, &c);
     if (!tr) cholmod_free_sparse(&chxt, &c);
     SET_VECTOR_ELT(dn, 0,	/* establish dimnames */
-		   duplicate(VECTOR_ELT(GET_SLOT(x, Matrix_DimNamesSym),
+		   duplicate(VECTOR_ELT(R_do_slot(x, Matrix_DimNamesSym),
 					(tr) ? 0 : 1)));
     SET_VECTOR_ELT(dn, 1, duplicate(VECTOR_ELT(dn, 0)));
     UNPROTECT(nprot);
@@ -803,7 +803,7 @@ SEXP Csparse_drop(SEXP x, SEXP tol)
    return chm_sparse_to_SEXP(ans, 1,
 			      tr ? ((*uplo_P(x) == 'U') ? 1 : -1) : 0,
 			      Rkind, tr ? diag_P(x) : "",
-			      GET_SLOT(x, Matrix_DimNamesSym));
+			      R_do_slot(x, Matrix_DimNamesSym));
 }
 
 /** @brief Horizontal Concatenation -  cbind( <Csparse>,  <Csparse>)
@@ -860,7 +860,7 @@ SEXP Csparse_band(SEXP x, SEXP k1, SEXP k2)
     R_CheckStack();
 
     return chm_sparse_to_SEXP(ans, 1, 0, Rkind, "",
-			      GET_SLOT(x, Matrix_DimNamesSym));
+			      R_do_slot(x, Matrix_DimNamesSym));
 }
 
 SEXP Csparse_diagU2N(SEXP x)
@@ -883,7 +883,7 @@ SEXP Csparse_diagU2N(SEXP x)
 	R_CheckStack();
 	cholmod_free_sparse(&eye, &c);
 	return chm_sparse_to_SEXP(ans, 1, uploT, Rkind, "N",
-				  GET_SLOT(x, Matrix_DimNamesSym));
+				  R_do_slot(x, Matrix_DimNamesSym));
     }
 }
 
@@ -908,7 +908,7 @@ SEXP Csparse_diagN2U(SEXP x)
 
 	SEXP ans = chm_sparse_to_SEXP(chx, /*dofree*/ 0/* or 1 ?? */,
 				      uploT, Rkind, "U",
-				      GET_SLOT(x, Matrix_DimNamesSym));
+				      R_do_slot(x, Matrix_DimNamesSym));
 	UNPROTECT(1);// only now !
 	return ans;
     }
@@ -965,7 +965,7 @@ SEXP Csparse_submatrix(SEXP x, SEXP i, SEXP j)
 
     // "FIXME": currently dropping dimnames, and adding them afterwards in R :
     /* // dimnames: */
-    /* SEXP x_dns = GET_SLOT(x, Matrix_DimNamesSym), */
+    /* SEXP x_dns = R_do_slot(x, Matrix_DimNamesSym), */
     /* 	dn = PROTECT(allocVector(VECSXP, 2)); */
     return chm_sparse_to_SEXP(ans, 1, 0, Rkind, "", /* dimnames: */ R_NilValue);
 }
@@ -1131,17 +1131,17 @@ SEXP diag_tC(SEXP obj, SEXP resultKind)
 {
 
     SEXP
-	pslot = GET_SLOT(obj, Matrix_pSym),
-	xslot = GET_SLOT(obj, Matrix_xSym);
+	pslot = R_do_slot(obj, Matrix_pSym),
+	xslot = R_do_slot(obj, Matrix_xSym);
     Rboolean is_U = (R_has_slot(obj, Matrix_uploSym) &&
-		     *CHAR(asChar(GET_SLOT(obj, Matrix_uploSym))) == 'U');
+		     *CHAR(asChar(R_do_slot(obj, Matrix_uploSym))) == 'U');
     int n = length(pslot) - 1, /* n = ncol(.) = nrow(.) */
 	*x_p  = INTEGER(pslot), pp = -1, *perm;
     double *x_x = REAL(xslot);
 /*  ^^^^^^        ^^^^ FIXME[Generalize] to INTEGER(.) / LOGICAL(.) / ... xslot !*/
 
     if(R_has_slot(obj, Matrix_permSym))
-	perm = INTEGER(GET_SLOT(obj, Matrix_permSym));
+	perm = INTEGER(R_do_slot(obj, Matrix_permSym));
     else perm = &pp;
 
     return diag_tC_ptr(n, x_p, x_x, is_U, perm, resultKind);
@@ -1327,8 +1327,8 @@ SEXP matrix_to_Csparse(SEXP x, SEXP cls)
     /* 	error(_("Only 'g'eneral sparse matrix types allowed")); */
 
     SEXP ans = PROTECT(NEW_OBJECT_OF_CLASS(ccls));
-    SET_SLOT(ans, Matrix_DimSym, d_x);
-    SET_SLOT(ans, Matrix_DimNamesSym, (!isNull(dn_x) && LENGTH(dn_x) == 2)
+    R_do_slot_assign(ans, Matrix_DimSym, d_x);
+    R_do_slot_assign(ans, Matrix_DimNamesSym, (!isNull(dn_x) && LENGTH(dn_x) == 2)
 	     ? duplicate(dn_x)
 	     : allocVector(VECSXP, 2));
 

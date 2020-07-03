@@ -619,8 +619,8 @@ static SEXP in_do_download(SEXP args)
 		    show(pbar.wprog);
 		    begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 				 R_NilValue, R_NilValue, R_NilValue);
-		    pbar.cntxt.cend = &doneprogressbar;
-		    pbar.cntxt.cenddata = &pbar;
+		    pbar.cntxt.setContextEnd(&doneprogressbar);
+		    pbar.cntxt.setContextEndData(&pbar);
 		    pbar.pc = 0;
 		}
 	    }
@@ -737,8 +737,8 @@ static SEXP in_do_download(SEXP args)
 		/* set up a context which will close progressbar on error. */
 		begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 			     R_NilValue, R_NilValue, R_NilValue);
-		pbar.cntxt.cend = &doneprogressbar;
-		pbar.cntxt.cenddata = &pbar;
+		pbar.cntxt.setContextEnd(&doneprogressbar);
+		pbar.cntxt.setContextEndData(&pbar);
 		pbar.pc = 0;
 	    }
 #endif

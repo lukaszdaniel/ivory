@@ -10,8 +10,8 @@ SEXP xTMatrix_validate(SEXP x)
 {
     /* Almost everything now in Tsparse_validate ( ./Tsparse.c )
      * *but* the checking of the 'x' slot : */
-    if (LENGTH(GET_SLOT(x, Matrix_iSym)) !=
-	LENGTH(GET_SLOT(x, Matrix_xSym)))
+    if (LENGTH(R_do_slot(x, Matrix_iSym)) !=
+	LENGTH(R_do_slot(x, Matrix_xSym)))
 	return mkString(_("lengths of slots 'i' and 'x' must match"));
     return ScalarLogical(1);
 }
@@ -81,34 +81,34 @@ l_insert_triplets_in_array(int m, int n, int nnz,
     }
 }
 
-#define MAKE_gTMatrix_to_geMatrix(_t1_, _SEXPTYPE_, _SEXP_)		\
-SEXP _t1_ ## gTMatrix_to_ ## _t1_ ## geMatrix(SEXP x)			\
-{									\
-    SEXP dd = GET_SLOT(x, Matrix_DimSym),				\
-	islot = GET_SLOT(x, Matrix_iSym),				\
-	ans = PROTECT(NEW_OBJECT_OF_CLASS(#_t1_ "geMatrix"));	\
-									\
-    int *dims = INTEGER(dd),						\
-	m = dims[0],							\
-	n = dims[1];							\
-    double len = m * (double)n;						\
-									\
-    if (len > R_XLEN_T_MAX)						\
-	error(_("Cannot coerce to too large '*geMatrix' with %.0f entries"), \
-              len);							\
-									\
-    SET_SLOT(ans, Matrix_factorSym, allocVector(VECSXP, 0));		\
-    SET_SLOT(ans, Matrix_DimSym, duplicate(dd));			\
-    SET_DimNames(ans, x);						\
-    SET_SLOT(ans, Matrix_xSym, allocVector(_SEXPTYPE_, (R_xlen_t)len));	\
-    _t1_ ## _insert_triplets_in_array(m, n, length(islot),		\
-				      INTEGER(islot),			\
-				      INTEGER(GET_SLOT(x, Matrix_jSym)),\
-				      _SEXP_(GET_SLOT(x, Matrix_xSym)),	\
-				      _SEXP_(GET_SLOT(ans, Matrix_xSym))); \
-    UNPROTECT(1);							\
-    return ans;								\
-}
+#define MAKE_gTMatrix_to_geMatrix(_t1_, _SEXPTYPE_, _SEXP_)                         \
+	SEXP _t1_##gTMatrix_to_##_t1_##geMatrix(SEXP x)                                 \
+	{                                                                               \
+		SEXP dd = R_do_slot(x, Matrix_DimSym),                                       \
+			 islot = R_do_slot(x, Matrix_iSym),                                      \
+			 ans = PROTECT(NEW_OBJECT_OF_CLASS(#_t1_ "geMatrix"));                  \
+                                                                                    \
+		int *dims = INTEGER(dd),                                                    \
+			m = dims[0],                                                            \
+			n = dims[1];                                                            \
+		double len = m * (double)n;                                                 \
+                                                                                    \
+		if (len > R_XLEN_T_MAX)                                                     \
+			error(_("Cannot coerce to too large '*geMatrix' with %.0f entries"),    \
+				  len);                                                             \
+                                                                                    \
+		R_do_slot_assign(ans, Matrix_factorSym, allocVector(VECSXP, 0));            \
+		R_do_slot_assign(ans, Matrix_DimSym, duplicate(dd));                        \
+		SET_DimNames(ans, x);                                                       \
+		R_do_slot_assign(ans, Matrix_xSym, allocVector(_SEXPTYPE_, (R_xlen_t)len)); \
+		_t1_##_insert_triplets_in_array(m, n, length(islot),                        \
+										INTEGER(islot),                             \
+										INTEGER(R_do_slot(x, Matrix_jSym)),          \
+										_SEXP_(R_do_slot(x, Matrix_xSym)),           \
+										_SEXP_(R_do_slot(ans, Matrix_xSym)));        \
+		UNPROTECT(1);                                                               \
+		return ans;                                                                 \
+	}
 
 MAKE_gTMatrix_to_geMatrix(d, REALSXP, REAL)
 
@@ -116,26 +116,26 @@ MAKE_gTMatrix_to_geMatrix(l, LGLSXP, LOGICAL)
 
 #undef MAKE_gTMatrix_to_geMatrix
 
-#define MAKE_gTMatrix_to_matrix(_t1_, _SEXPTYPE_, _SEXP_)		\
-SEXP _t1_ ## gTMatrix_to_matrix(SEXP x)					\
-{									\
-    SEXP dd = GET_SLOT(x, Matrix_DimSym),				\
-	dn = GET_SLOT(x, Matrix_DimNamesSym),				\
-	islot = GET_SLOT(x, Matrix_iSym);				\
-    int m = INTEGER(dd)[0],						\
-	n = INTEGER(dd)[1];						\
-    SEXP ans = PROTECT(allocMatrix(_SEXPTYPE_, m, n));			\
-    if(VECTOR_ELT(dn, 0) != R_NilValue || VECTOR_ELT(dn, 1) != R_NilValue) \
-	/* matrix() with non-trivial dimnames */			\
-	setAttrib(ans, R_DimNamesSymbol, duplicate(dn));		\
-    _t1_ ## _insert_triplets_in_array(m, n, length(islot),		\
-				      INTEGER(islot),			\
-				      INTEGER(GET_SLOT(x, Matrix_jSym)),\
-				      _SEXP_(GET_SLOT(x, Matrix_xSym)),	\
-				      _SEXP_(ans));			\
-    UNPROTECT(1);							\
-    return ans;								\
-}
+#define MAKE_gTMatrix_to_matrix(_t1_, _SEXPTYPE_, _SEXP_)                       \
+	SEXP _t1_##gTMatrix_to_matrix(SEXP x)                                       \
+	{                                                                           \
+		SEXP dd = R_do_slot(x, Matrix_DimSym),                                   \
+			 dn = R_do_slot(x, Matrix_DimNamesSym),                              \
+			 islot = R_do_slot(x, Matrix_iSym);                                  \
+		int m = INTEGER(dd)[0],                                                 \
+			n = INTEGER(dd)[1];                                                 \
+		SEXP ans = PROTECT(allocMatrix(_SEXPTYPE_, m, n));                      \
+		if (VECTOR_ELT(dn, 0) != R_NilValue || VECTOR_ELT(dn, 1) != R_NilValue) \
+			/* matrix() with non-trivial dimnames */                            \
+			setAttrib(ans, R_DimNamesSymbol, duplicate(dn));                    \
+		_t1_##_insert_triplets_in_array(m, n, length(islot),                    \
+										INTEGER(islot),                         \
+										INTEGER(R_do_slot(x, Matrix_jSym)),      \
+										_SEXP_(R_do_slot(x, Matrix_xSym)),       \
+										_SEXP_(ans));                           \
+		UNPROTECT(1);                                                           \
+		return ans;                                                             \
+	}
 
 MAKE_gTMatrix_to_matrix(d, REALSXP, REAL)
 

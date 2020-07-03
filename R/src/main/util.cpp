@@ -508,8 +508,8 @@ HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     for (cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext()) {
-	if ((cptr->callflag & CTXT_FUNCTION) && cptr->cloenv == rho) {
-	    nargs = length(cptr->promargs);
+	if ((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho) {
+	    nargs = length(cptr->getPromiseArgs());
 	    break;
 	}
     }
@@ -1108,7 +1108,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (WinUTF8out) {
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &encode_cleanup;
+	cntxt.setContextEnd(&encode_cleanup);
 	havecontext = TRUE;
 	WinUTF8out = false;
     }

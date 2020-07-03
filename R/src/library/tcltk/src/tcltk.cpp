@@ -692,7 +692,7 @@ void tcltk_init(int *TkUp)
      * tcl >= 8.4 on all platforms, and is known to cause crashes under
      * Windows */
 
-    Tcl_FindExecutable(NULL);
+    Tcl_FindExecutable(nullptr);
 
     RTcl_interp = Tcl_CreateInterp();
     code = Tcl_Init(RTcl_interp);

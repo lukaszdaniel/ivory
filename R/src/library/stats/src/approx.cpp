@@ -26,11 +26,13 @@
 #include <R_ext/Error.h>
 #include <R_ext/Applic.h>
 #include <Rinternals.h> // for R_xlen_t
+#include "statsR.h"
+#include "localization.h"
 #ifdef DEBUG_approx
 #include <R_ext/Print.h>
 #endif
 
-#include "localization.h"
+
 
 /* Linear and Step Function Interpolation */
 
@@ -98,8 +100,7 @@ static double approx1(double v, double *x, double *y, R_xlen_t n,
 
 
 /* Testing done only once - in a separate function */
-static void
-R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm)
+static void R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm)
 {
     switch(method) {
     case 1: /* linear */
@@ -126,8 +127,7 @@ R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm
 
 /* R Frontend for Linear and Constant Interpolation, no testing */
 
-static void
-R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
+static void R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
 	    R_xlen_t nout, int method, double yleft, double yright, double f, int na_rm)
 {
     appr_meth M = {0.0, 0.0, 0.0, 0.0, 0}; /* -Wall */
@@ -146,8 +146,7 @@ R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
 	yout[i] = ISNAN(xout[i]) ? xout[i] : approx1(xout[i], x, y, nxy, &M);
 }
 
-#include <Rinternals.h>
-#include "statsR.h"
+
 SEXP ApproxTest(SEXP x, SEXP y, SEXP method, SEXP f, SEXP na_rm)
 {
     R_xlen_t nx = XLENGTH(x);

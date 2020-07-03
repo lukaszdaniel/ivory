@@ -61,7 +61,7 @@ SEXP R_chm_factor_name(SEXP perm, SEXP LDL, SEXP super)
 static CHM_FR
 internal_chm_factor(SEXP Ap, int perm, int LDL, int super, double Imult)
 {
-    SEXP facs = GET_SLOT(Ap, Matrix_factorSym);
+    SEXP facs = R_do_slot(Ap, Matrix_factorSym);
     SEXP nms = PROTECT(getAttrib(facs, R_NamesSymbol)); // being very careful..
     CHM_FR L;
     CHM_SP A = AS_CHM_SP__(Ap);
@@ -132,7 +132,7 @@ SEXP dsCMatrix_chol(SEXP x, SEXP pivot)
     R = cholmod_transpose(Rt, /*values*/ 1, &c);
     cholmod_free_sparse(&Rt, &c);
     ans = PROTECT(chm_sparse_to_SEXP(R, 1/*do_free*/, 1/*uploT*/, 0/*Rkind*/,
-				     "N"/*diag*/, GET_SLOT(x, Matrix_DimNamesSym)));
+				     "N"/*diag*/, R_do_slot(x, Matrix_DimNamesSym)));
 
     if (pivP) {
 	SEXP piv = PROTECT(allocVector(INTSXP, L->n)),
@@ -253,5 +253,5 @@ SEXP dsCMatrix_to_dgTMatrix(SEXP x)
 	error(_("Non-symmetric matrix passed to 'dsCMatrix_to_dgTMatrix' function"));
     cholmod_free_sparse(&Afull, &c);
     return chm_triplet_to_SEXP(At, 1, /*uploT*/ 0, /*Rkind*/ 0, "",
-			       GET_SLOT(x, Matrix_DimNamesSym));
+			       R_do_slot(x, Matrix_DimNamesSym));
 }

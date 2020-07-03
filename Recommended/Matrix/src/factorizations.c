@@ -3,7 +3,7 @@
 SEXP MatrixFactorization_validate(SEXP obj)
 {
     SEXP val;
-    if (isString(val = dim_validate(GET_SLOT(obj, Matrix_DimSym),
+    if (isString(val = dim_validate(R_do_slot(obj, Matrix_DimSym),
 				    "MatrixFactorization")))
 	return(val);
     return ScalarLogical(1);
@@ -11,8 +11,8 @@ SEXP MatrixFactorization_validate(SEXP obj)
 
 SEXP LU_validate(SEXP obj)
 {
-    SEXP x = GET_SLOT(obj, Matrix_xSym),
-	Dim = GET_SLOT(obj, Matrix_DimSym);
+    SEXP x = R_do_slot(obj, Matrix_xSym),
+	Dim = R_do_slot(obj, Matrix_DimSym);
     int m = INTEGER(Dim)[0], n = INTEGER(Dim)[1]; // checked already in MatrixF.._validate()
     if(TYPEOF(x) != REALSXP)
 	return mkString(_("'x' slot is not \"double\""));
@@ -57,9 +57,9 @@ SEXP LU_expand(SEXP x)
     const char *nms[] = {"L", "U", "P", ""};
     // x[,] is  m x n    (using LAPACK dgetrf notation)
     SEXP L, U, P, val = PROTECT(Rf_mkNamed(VECSXP, nms)),
-	lux = GET_SLOT(x, Matrix_xSym),
-	dd = GET_SLOT(x, Matrix_DimSym);
-    int *iperm, *perm, *pivot = INTEGER(GET_SLOT(x, Matrix_permSym)),
+	lux = R_do_slot(x, Matrix_xSym),
+	dd = R_do_slot(x, Matrix_DimSym);
+    int *iperm, *perm, *pivot = INTEGER(R_do_slot(x, Matrix_permSym)),
 	*dim = INTEGER(dd), m = dim[0], n = dim[1], nn = m, i;
     size_t m_ = (size_t) m; // to prevent integer (multiplication) overflow
     Rboolean is_sq = (n == m), L_is_tri = TRUE, U_is_tri = TRUE;
@@ -81,8 +81,8 @@ SEXP LU_expand(SEXP x)
     U = VECTOR_ELT(val, 1);
     P = VECTOR_ELT(val, 2);
     if(is_sq || !L_is_tri) {
-	SET_SLOT(L, Matrix_xSym, duplicate(lux));
-	SET_SLOT(L, Matrix_DimSym, duplicate(dd));
+	R_do_slot_assign(L, Matrix_xSym, duplicate(lux));
+	R_do_slot_assign(L, Matrix_DimSym, duplicate(dd));
     } else { // !is_sq && L_is_tri -- m < n -- "wide" -- L is  m x m
 	size_t m2 = m_ * m;
 	double *Lx = REAL(ALLOC_SLOT(L, Matrix_xSym, REALSXP, m2));
@@ -92,8 +92,8 @@ SEXP LU_expand(SEXP x)
 	Memcpy(Lx, REAL(lux), m2);
     }
     if(is_sq || !U_is_tri) {
-	SET_SLOT(U, Matrix_xSym, duplicate(lux));
-	SET_SLOT(U, Matrix_DimSym, duplicate(dd));
+	R_do_slot_assign(U, Matrix_xSym, duplicate(lux));
+	R_do_slot_assign(U, Matrix_DimSym, duplicate(dd));
     } else { // !is_sq && U_is_tri -- m > n -- "long" -- U is  n x n
 	double *Ux = REAL(ALLOC_SLOT(U, Matrix_xSym, REALSXP, ((size_t) n) * n)),
 	       *xx = REAL(lux);
@@ -109,12 +109,12 @@ SEXP LU_expand(SEXP x)
 	}
     }
     if(L_is_tri) {
-	SET_SLOT(L, Matrix_uploSym, mkString("L"));
-	SET_SLOT(L, Matrix_diagSym, mkString("U"));
-	make_d_matrix_triangular(REAL(GET_SLOT(L, Matrix_xSym)), L);
+	R_do_slot_assign(L, Matrix_uploSym, mkString("L"));
+	R_do_slot_assign(L, Matrix_diagSym, mkString("U"));
+	make_d_matrix_triangular(REAL(R_do_slot(L, Matrix_xSym)), L);
     } else { // L is "unit-diagonal" trapezoidal -- m > n -- "long"
 	// fill the upper right part with 0  *and* the diagonal with 1
-	double *Lx = REAL(GET_SLOT(L, Matrix_xSym));
+	double *Lx = REAL(R_do_slot(L, Matrix_xSym));
 	size_t ii;
 	for (i = 0, ii = 0; i < n; i++, ii+=(m+1)) { // ii = i*(m+1)
 	    Lx[ii] = 1.;
@@ -124,20 +124,20 @@ SEXP LU_expand(SEXP x)
     }
 
     if(U_is_tri) {
-	SET_SLOT(U, Matrix_uploSym, mkString("U"));
-	SET_SLOT(U, Matrix_diagSym, mkString("N"));
-	make_d_matrix_triangular(REAL(GET_SLOT(U, Matrix_xSym)), U);
+	R_do_slot_assign(U, Matrix_uploSym, mkString("U"));
+	R_do_slot_assign(U, Matrix_diagSym, mkString("N"));
+	make_d_matrix_triangular(REAL(R_do_slot(U, Matrix_xSym)), U);
     } else { // U is trapezoidal -- m < n
 	// fill the lower left part with 0
-	double *Ux = REAL(GET_SLOT(U, Matrix_xSym));
+	double *Ux = REAL(R_do_slot(U, Matrix_xSym));
 	for (i = 0; i < m; i++)
 	    for (size_t j = i*(m_+1) +1; j < (i+1)*m_; j++)
 		Ux[j] = 0.;
     }
 
-    SET_SLOT(P, Matrix_DimSym, duplicate(dd));
+    R_do_slot_assign(P, Matrix_DimSym, duplicate(dd));
     if(!is_sq) // m != n -- P is  m x m
-	INTEGER(GET_SLOT(P, Matrix_DimSym))[1] = m;
+	INTEGER(R_do_slot(P, Matrix_DimSym))[1] = m;
     perm = INTEGER(ALLOC_SLOT(P, Matrix_permSym, INTSXP, m));
     C_or_Alloca_TO(iperm, m, int);
 

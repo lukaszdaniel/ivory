@@ -610,8 +610,8 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 		show(pbar.wprog);
 		begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 			     R_NilValue, R_NilValue, R_NilValue);
-		pbar.cntxt.cend = &doneprogressbar;
-		pbar.cntxt.cenddata = &pbar;
+		pbar.cntxt.setContextEnd(&doneprogressbar);
+		pbar.cntxt.setContextEndData(&pbar);
 	    }
 #endif
 	    // For libcurl >= 7.32.0 use CURLOPT_XFERINFOFUNCTION

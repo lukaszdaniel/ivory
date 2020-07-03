@@ -167,9 +167,9 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
        first closure call context with an environment matching the
        expression evaluation environment. */
     while (ctxt != R_ToplevelContext &&
-	   !((ctxt->callflag & CTXT_FUNCTION) && ctxt->cloenv == rho) )
+	   !((ctxt->getCallFlag() & CTXT_FUNCTION) && ctxt->workingEnvironment() == rho) )
 	ctxt = ctxt->nextContext();
-    if (ctxt->callflag & CTXT_FUNCTION)
+    if (ctxt->getCallFlag() & CTXT_FUNCTION)
     {
 	if (code == R_NilValue && ! addit)
 	    ctxt->setOnExit(R_NilValue);
@@ -288,8 +288,10 @@ HIDDEN SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* get environment from a subclass if possible; else return NULL */
-#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : arg)
-
+inline static SEXP simple_as_environment(SEXP arg)
+{
+	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : arg);
+}
 
 HIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -297,7 +299,7 @@ HIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CAR(args)) == CLOSXP)
 	return CLOENV(CAR(args));
     else if (CAR(args) == R_NilValue)
-	return R_GlobalContext->sysparent;
+	return R_GlobalContext->getSysParent();
     else return getAttrib(CAR(args), R_DotEnvSymbol);
 }
 
@@ -623,8 +625,8 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* set up a context which will close the connection if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &cat_cleanup;
-    cntxt.cenddata = &ci;
+    cntxt.setContextEnd(&cat_cleanup);
+    cntxt.setContextEndData(&ci);
 
     nobjs = length(objs);
     width = 0;
@@ -932,7 +934,7 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
 /* older version */
 SEXP Rf_lengthgets(SEXP x, R_len_t len)
 {
-    return xlengthgets(x, (R_xlen_t) len);
+    return Rf_xlengthgets(x, (R_xlen_t) len);
 }
 
 

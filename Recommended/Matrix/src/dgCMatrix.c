@@ -20,8 +20,8 @@ SEXP xCMatrix_validate(SEXP x)
 {
     /* Almost everything now in Csparse_validate ( ./Csparse.c )
      * *but* the checking of the 'x' slot : */
-    if (xlength(GET_SLOT(x, Matrix_iSym)) !=
-	xlength(GET_SLOT(x, Matrix_xSym)))
+    if (xlength(R_do_slot(x, Matrix_iSym)) !=
+	xlength(R_do_slot(x, Matrix_xSym)))
 	return mkString(_("lengths of slots 'i' and 'x' must match"));
 
     return ScalarLogical(1);
@@ -32,8 +32,8 @@ SEXP xRMatrix_validate(SEXP x)
 {
     /* Almost everything now in Rsparse_validate ( ./Csparse.c )
      * *but* the checking of the 'x' slot : */
-    if (xlength(GET_SLOT(x, Matrix_jSym)) !=
-	xlength(GET_SLOT(x, Matrix_xSym)))
+    if (xlength(R_do_slot(x, Matrix_jSym)) !=
+	xlength(R_do_slot(x, Matrix_xSym)))
 	return mkString(_("lengths of slots 'j' and 'x' must match"));
 
     return ScalarLogical(1);
@@ -48,8 +48,8 @@ SEXP compressed_to_TMatrix(SEXP x, SEXP colP)
      * Csparse_to_Tsparse() in ./Csparse.c ; maybe should simply write
      * an  as_cholmod_Rsparse() function and then do "as there" ...*/
     SEXP indSym = col ? Matrix_iSym : Matrix_jSym, ans,
-	indP = PROTECT(GET_SLOT(x, indSym)),
-	  pP = PROTECT(GET_SLOT(x, Matrix_pSym));
+	indP = PROTECT(R_do_slot(x, indSym)),
+	  pP = PROTECT(R_do_slot(x, Matrix_pSym));
     int npt = length(pP) - 1;
     char *ncl = strdup(class_P(x));
     static const char *valid[] = { MATRIX_VALID_Csparse, MATRIX_VALID_Rsparse, ""};
@@ -72,7 +72,7 @@ SEXP compressed_to_TMatrix(SEXP x, SEXP colP)
     }
     SET_DimNames(ans, x);
     // possibly asymmetric for symmetricMatrix is ok
-    SET_SLOT(ans, indSym, duplicate(indP));
+    R_do_slot_assign(ans, indSym, duplicate(indP));
     expand_cmprPt(npt, INTEGER(pP),
 		  INTEGER(ALLOC_SLOT(ans, col ? Matrix_jSym : Matrix_iSym,
 				     INTSXP, length(indP))));
@@ -87,7 +87,7 @@ SEXP R_to_CMatrix(SEXP x)
     char *ncl = strdup(class_P(x));
     static const char *valid[] = { MATRIX_VALID_Rsparse, ""};
     int ctype = R_check_class_etc(x, valid);
-    int *x_dims = INTEGER(GET_SLOT(x, Matrix_DimSym)), *a_dims;
+    int *x_dims = INTEGER(R_do_slot(x, Matrix_DimSym)), *a_dims;
     PROTECT_INDEX ipx;
 
     if (ctype < 0)
@@ -106,14 +106,14 @@ SEXP R_to_CMatrix(SEXP x)
     if((ctype / 3) != 2) /* not n..Matrix */
 	slot_dup(ans, x, Matrix_xSym);
     if(ctype % 3) { /* s(ymmetric) or t(riangular) : */
-	SET_SLOT(ans, Matrix_uploSym,
+	R_do_slot_assign(ans, Matrix_uploSym,
 		 mkString((*uplo_P(x) == 'U') ? "L" : "U"));
 	if(ctype % 3 == 2) { /* t(riangular) : */
 	    LOGICAL(tri)[0] = 1;
 	    slot_dup(ans, x, Matrix_diagSym);
 	}
     }
-    SET_SLOT(ans, Matrix_iSym, duplicate(GET_SLOT(x, Matrix_jSym)));
+    R_do_slot_assign(ans, Matrix_iSym, duplicate(R_do_slot(x, Matrix_jSym)));
     slot_dup(ans, x, Matrix_pSym);
     REPROTECT(ans = Csparse_transpose(ans, tri), ipx);
     SET_DimNames(ans, x);
@@ -131,10 +131,10 @@ SEXP compressed_non_0_ij(SEXP x, SEXP colP)
 {
     int col = asLogical(colP); /* 1 if "C"olumn compressed;  0 if "R"ow */
     SEXP ans, indSym = col ? Matrix_iSym : Matrix_jSym;
-    SEXP indP = PROTECT(GET_SLOT(x, indSym)),
-	 pP   = PROTECT(GET_SLOT(x, Matrix_pSym));
+    SEXP indP = PROTECT(R_do_slot(x, indSym)),
+	 pP   = PROTECT(R_do_slot(x, Matrix_pSym));
     int i, *ij;
-    int nouter = INTEGER(GET_SLOT(x, Matrix_DimSym))[col ? 1 : 0],
+    int nouter = INTEGER(R_do_slot(x, Matrix_DimSym))[col ? 1 : 0],
 	n_el   = INTEGER(pP)[nouter]; /* is only == length(indP), if the
 				     inner slot is not over-allocated */
 
@@ -253,7 +253,7 @@ SEXP dgCMatrix_QR(SEXP Ap, SEXP order, SEXP keep_dimnames)
     p = cs_pinv(S->pinv, m);	/* p = pinv' */
     SEXP dn = R_NilValue; Rboolean do_dn = FALSE;
     if(keep_dimnms) {
-	dn = GET_SLOT(Ap, Matrix_DimNamesSym);
+	dn = R_do_slot(Ap, Matrix_DimNamesSym);
 	do_dn = !isNull(VECTOR_ELT(dn, 0)) && m == m0;
 	// FIXME? also deal with case m > m0 ?
 	if(do_dn) { // keep rownames
@@ -261,7 +261,7 @@ SEXP dgCMatrix_QR(SEXP Ap, SEXP order, SEXP keep_dimnames)
 	    SET_VECTOR_ELT(dn, 1, R_NilValue);
 	} else dn = R_NilValue;
     }
-    SET_SLOT(ans, Matrix_VSym, Matrix_cs_to_SEXP(N->L, "dgCMatrix", 0, dn)); // "V"
+    R_do_slot_assign(ans, Matrix_VSym, Matrix_cs_to_SEXP(N->L, "dgCMatrix", 0, dn)); // "V"
     Memcpy(REAL(ALLOC_SLOT(ans, Matrix_betaSym, REALSXP, n)), N->B, n);
     Memcpy(INTEGER(ALLOC_SLOT(ans, Matrix_pSym,  INTSXP, m)), p, m);
     if(do_dn) {
@@ -271,7 +271,7 @@ SEXP dgCMatrix_QR(SEXP Ap, SEXP order, SEXP keep_dimnames)
     if (ord) {
 	Memcpy(INTEGER(ALLOC_SLOT(ans, install("q"), INTSXP, n)), S->q, n);
 	if(keep_dimnms) {
-	    dn = GET_SLOT(Ap, Matrix_DimNamesSym);
+	    dn = R_do_slot(Ap, Matrix_DimNamesSym);
 	    do_dn = !isNull(VECTOR_ELT(dn, 1));
 	    if(do_dn) {
 		dn = PROTECT(duplicate(dn));
@@ -286,7 +286,7 @@ SEXP dgCMatrix_QR(SEXP Ap, SEXP order, SEXP keep_dimnames)
     } else
 	ALLOC_SLOT(ans, install("q"), INTSXP, 0);
     SEXP R = PROTECT(Matrix_cs_to_SEXP(N->U, "dgCMatrix", 0, dn));
-    SET_SLOT(ans, Matrix_RSym, R); UNPROTECT(1); // R
+    R_do_slot_assign(ans, Matrix_RSym, R); UNPROTECT(1); // R
     if(do_dn) UNPROTECT(1); // dn
     cs_nfree(N);
     cs_sfree(S);
@@ -333,14 +333,14 @@ SEXP dgCMatrix_SPQR(SEXP Ap, SEXP ordering, SEXP econ, SEXP tol)
     slot_dup(ans, Ap, Matrix_DimSym);
 /*     SET_VECTOR_ELT(ans, 0, */
 /* 		   chm_sparse_to_SEXP(Q, 0, 0, 0, "", R_NilValue)); */
-    SET_SLOT(ans, install("Q"),
+    R_do_slot_assign(ans, install("Q"),
 	     chm_sparse_to_SEXP(Q, 0, 0, 0, "", R_NilValue));
 
     /* Also gives a dgCMatrix (not a dtC* *triangular*) :
      * may make sense if to be used in the "spqr_solve" routines .. ?? */
 /*     SET_VECTOR_ELT(ans, 1, */
 /* 		   chm_sparse_to_SEXP(R, 0, 0, 0, "", R_NilValue)); */
-    SET_SLOT(ans, Matrix_RSym,
+    R_do_slot_assign(ans, Matrix_RSym,
 	     chm_sparse_to_SEXP(R, 0, 0, 0, "", R_NilValue));
     cholmod_free_sparse(&Al, &cl);
     cholmod_free_sparse(&R, &cl);
@@ -405,7 +405,7 @@ void install_lu(SEXP Ap, int order, double tol, Rboolean err_sing, Rboolean keep
     dims[0] = n; dims[1] = n;
     SEXP dn; Rboolean do_dn = FALSE;
     if(keep_dimnms) {
-	dn = GET_SLOT(Ap, Matrix_DimNamesSym);
+	dn = R_do_slot(Ap, Matrix_DimNamesSym);
 	do_dn = !isNull(VECTOR_ELT(dn, 0));
 	if(do_dn) {
 	    dn = PROTECT(duplicate(dn));
@@ -417,13 +417,13 @@ void install_lu(SEXP Ap, int order, double tol, Rboolean err_sing, Rboolean keep
 	    SET_VECTOR_ELT(dn, 1, R_NilValue); // colnames(.) := NULL
 	}
     }
-    SET_SLOT(ans, Matrix_LSym,
+    R_do_slot_assign(ans, Matrix_LSym,
 	     Matrix_cs_to_SEXP(N->L, "dtCMatrix", 0, do_dn ? dn : R_NilValue));
 
     if(keep_dimnms) {
 	if(do_dn) {
 	    UNPROTECT(1); // dn
-	    dn = GET_SLOT(Ap, Matrix_DimNamesSym);
+	    dn = R_do_slot(Ap, Matrix_DimNamesSym);
 	}
 	do_dn = !isNull(VECTOR_ELT(dn, 1));
 	if(do_dn) {
@@ -437,7 +437,7 @@ void install_lu(SEXP Ap, int order, double tol, Rboolean err_sing, Rboolean keep
 	    SET_VECTOR_ELT(dn, 0, R_NilValue); // rownames(.) := NULL
 	}
     }
-    SET_SLOT(ans, Matrix_USym,
+    R_do_slot_assign(ans, Matrix_USym,
 	     Matrix_cs_to_SEXP(N->U, "dtCMatrix", 0, do_dn ? dn : R_NilValue));
     if(do_dn) UNPROTECT(1); // dn
     Memcpy(INTEGER(ALLOC_SLOT(ans, Matrix_pSym, /* "p" */
@@ -492,9 +492,9 @@ SEXP dgCMatrix_matrix_solve(SEXP Ap, SEXP b, SEXP give_sparse)
     SEXP ans = PROTECT(dup_mMatrix_as_dgeMatrix(b)),
 	lu, qslot;
     CSP L, U;
-    int *bdims = INTEGER(GET_SLOT(ans, Matrix_DimSym)), *p, *q;
+    int *bdims = INTEGER(R_do_slot(ans, Matrix_DimSym)), *p, *q;
     int j, n = bdims[0], nrhs = bdims[1];
-    double *x, *ax = REAL(GET_SLOT(ans, Matrix_xSym));
+    double *x, *ax = REAL(R_do_slot(ans, Matrix_xSym));
     C_or_Alloca_TO(x, n, double);
 
     if (isNull(lu = get_factors(Ap, "LU"))) {
@@ -502,14 +502,14 @@ SEXP dgCMatrix_matrix_solve(SEXP Ap, SEXP b, SEXP give_sparse)
 		   /* keep_dimnames = */ TRUE);
 	lu = get_factors(Ap, "LU");
     }
-    qslot = GET_SLOT(lu, install("q"));
-    L = AS_CSP__(GET_SLOT(lu, Matrix_LSym));
-    U = AS_CSP__(GET_SLOT(lu, Matrix_USym));
+    qslot = R_do_slot(lu, install("q"));
+    L = AS_CSP__(R_do_slot(lu, Matrix_LSym));
+    U = AS_CSP__(R_do_slot(lu, Matrix_USym));
     R_CheckStack();
     if (U->n != n)
 	error(_("Dimensions of system to be solved are inconsistent"));
     if(nrhs >= 1 && n >= 1) {
-	p = INTEGER(GET_SLOT(lu, Matrix_pSym));
+	p = INTEGER(R_do_slot(lu, Matrix_pSym));
 	q = LENGTH(qslot) ? INTEGER(qslot) : (int *) NULL;
 
 	for (j = 0; j < nrhs; j++) {

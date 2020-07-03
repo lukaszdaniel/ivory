@@ -130,9 +130,9 @@ static Rcomplex cmplx_NA() {
  */
 R_INLINE static Type_ans sparseVector_sub(int64_t i, int nnz_v, double* v_i, Type_ans* v_x, int64_t len_v)
 {
-// double *v_i = INTEGER(GET_SLOT(vec, Matrix_iSym));
-// double *v_x =   REAL (GET_SLOT(vec, Matrix_xSym)); -- try to be agnostic about type
-// int64_t  len_v = (int64_t) asReal(GET_SLOT(vec, Matrix_lengthSym));
+// double *v_i = INTEGER(R_do_slot(vec, Matrix_iSym));
+// double *v_x =   REAL (R_do_slot(vec, Matrix_xSym)); -- try to be agnostic about type
+// int64_t  len_v = (int64_t) asReal(R_do_slot(vec, Matrix_lengthSym));
     int64_t i1 = (i % len_v) +1;
     // NB: Rely on the "validity": the i-slot  v_i[] is strictly sorted increasingly
     for(int j=0; j < nnz_v; j++) {

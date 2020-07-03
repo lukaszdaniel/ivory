@@ -12,8 +12,8 @@ SEXP tCMatrix_validate(SEXP x)
 	return(val);
     else {
 	SEXP
-	    islot = GET_SLOT(x, Matrix_iSym),
-	    pslot = GET_SLOT(x, Matrix_pSym);
+	    islot = R_do_slot(x, Matrix_iSym),
+	    pslot = R_do_slot(x, Matrix_pSym);
 	int uploT = (*uplo_P(x) == 'U'),
 	    k, nnz = length(islot),
 	    *xi = INTEGER(islot),
@@ -47,8 +47,8 @@ SEXP tRMatrix_validate(SEXP x)
 	return(val);
     else {
 	SEXP
-	    jslot = GET_SLOT(x, Matrix_jSym),
-	    pslot = GET_SLOT(x, Matrix_pSym);
+	    jslot = R_do_slot(x, Matrix_jSym),
+	    pslot = R_do_slot(x, Matrix_pSym);
 	int uploT = (*uplo_P(x) == 'U'),
 	    k, nnz = length(jslot),
 	    *xj = INTEGER(jslot),
@@ -79,8 +79,8 @@ SEXP dtCMatrix_matrix_solve(SEXP a, SEXP b, SEXP classed)
     int cl = asLogical(classed);
     SEXP ans = PROTECT(NEW_OBJECT_OF_CLASS("dgeMatrix"));
     CSP A = AS_CSP(a);
-    int *adims = INTEGER(GET_SLOT(a, Matrix_DimSym)),
-	*bdims = INTEGER(cl ? GET_SLOT(b, Matrix_DimSym) :
+    int *adims = INTEGER(R_do_slot(a, Matrix_DimSym)),
+	*bdims = INTEGER(cl ? R_do_slot(b, Matrix_DimSym) :
 			 getAttrib(b, R_DimSymbol));
     int j, n = bdims[0], nrhs = bdims[1], lo = (*uplo_P(a) == 'L');
     double *bx;
@@ -91,20 +91,20 @@ SEXP dtCMatrix_matrix_solve(SEXP a, SEXP b, SEXP classed)
     Memcpy(INTEGER(ALLOC_SLOT(ans, Matrix_DimSym, INTSXP, 2)), bdims, 2);
     // dimnames:
     SEXP dn = PROTECT(allocVector(VECSXP, 2)), dn2;
-    SET_VECTOR_ELT(dn, 0, duplicate(VECTOR_ELT(GET_SLOT(a, Matrix_DimNamesSym), 1)));
+    SET_VECTOR_ELT(dn, 0, duplicate(VECTOR_ELT(R_do_slot(a, Matrix_DimNamesSym), 1)));
     if(!cl) {
 	dn2 = getAttrib(b, R_DimNamesSymbol);
 	if(dn2 != R_NilValue) // either NULL or  list(<dn1>, <dn2>)
 	    dn2 = VECTOR_ELT(dn2, 1);
     }
     SET_VECTOR_ELT(dn, 1, duplicate(cl // b can be "Matrix" or not:
-				    ? VECTOR_ELT(GET_SLOT(b, Matrix_DimNamesSym), 1)
+				    ? VECTOR_ELT(R_do_slot(b, Matrix_DimNamesSym), 1)
 				    : dn2));
-    SET_SLOT(ans, Matrix_DimNamesSym, dn);
+    R_do_slot_assign(ans, Matrix_DimNamesSym, dn);
     UNPROTECT(1);
     if(n >= 1 && nrhs >=1) {
 	bx = Memcpy(REAL(ALLOC_SLOT(ans, Matrix_xSym, REALSXP, n * nrhs)),
-		    REAL(cl ? GET_SLOT(b, Matrix_xSym):b), n * nrhs);
+		    REAL(cl ? R_do_slot(b, Matrix_xSym):b), n * nrhs);
 	for (j = 0; j < nrhs; j++)
 	    lo ? cs_lsolve(A, bx + n * j) : cs_usolve(A, bx + n * j);
     }
@@ -159,9 +159,9 @@ SEXP dtCMatrix_sparse_solve(SEXP a, SEXP b)
 
     // dimnames:
     SEXP dn = PROTECT(allocVector(VECSXP, 2));
-    SET_VECTOR_ELT(dn, 0, duplicate(VECTOR_ELT(GET_SLOT(a, Matrix_DimNamesSym), 1)));
-    SET_VECTOR_ELT(dn, 1, duplicate(VECTOR_ELT(GET_SLOT(b, Matrix_DimNamesSym), 1)));
-    SET_SLOT(ans, Matrix_DimNamesSym, dn);
+    SET_VECTOR_ELT(dn, 0, duplicate(VECTOR_ELT(R_do_slot(a, Matrix_DimNamesSym), 1)));
+    SET_VECTOR_ELT(dn, 1, duplicate(VECTOR_ELT(R_do_slot(b, Matrix_DimNamesSym), 1)));
+    R_do_slot_assign(ans, Matrix_DimNamesSym, dn);
     UNPROTECT(1);
 
     RETURN(ans);

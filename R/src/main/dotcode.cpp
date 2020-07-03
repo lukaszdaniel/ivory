@@ -777,11 +777,11 @@ static SEXP Rf_getCallingDLL(void)
        Testing shows this is the right caller, despite the .C/.Call ...
      */
     for (cptr = R_GlobalContext;
-	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
+	 cptr != NULL && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	 cptr = cptr->nextContext())
-	    if (cptr->callflag & CTXT_FUNCTION) {
-		/* PrintValue(cptr->call); */
-		rho = cptr->cloenv;
+	    if (cptr->getCallFlag() & CTXT_FUNCTION) {
+		/* PrintValue(cptr->getCall()); */
+		rho = cptr->workingEnvironment();
 		break;
 	    }
     /* Then search up until we hit a namespace or globalenv.

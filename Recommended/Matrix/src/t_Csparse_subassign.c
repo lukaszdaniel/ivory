@@ -150,8 +150,8 @@ SEXP Csparse_subassign(SEXP x, SEXP i_, SEXP j_, SEXP value)
 #endif
 
     SEXP
-	islot   = GET_SLOT(x, Matrix_iSym),
-	dimslot = GET_SLOT(x, Matrix_DimSym),
+	islot   = R_do_slot(x, Matrix_iSym),
+	dimslot = R_do_slot(x, Matrix_DimSym),
 	i_cp = PROTECT(coerceVector(i_, INTSXP)),
 	j_cp = PROTECT(coerceVector(j_, INTSXP));
     // for d.CMatrix and l.CMatrix  but not n.CMatrix:
@@ -176,9 +176,9 @@ SEXP Csparse_subassign(SEXP x, SEXP i_, SEXP j_, SEXP value)
 #endif
 
     SEXP val_i_slot, val_x_slot;
-    val_i_slot = PROTECT(coerceVector(GET_SLOT(value, Matrix_iSym), REALSXP));
+    val_i_slot = PROTECT(coerceVector(R_do_slot(value, Matrix_iSym), REALSXP));
     double *val_i = REAL(val_i_slot);
-    int nnz_val = LENGTH(GET_SLOT(value, Matrix_iSym)), n_prot = 4;
+    int nnz_val = LENGTH(R_do_slot(value, Matrix_iSym)), n_prot = 4;
     Type_x *val_x = NULL;
     if(!value_is_nsp) {
 	if(ctype_v) { // matrix 'x' and 'value' are of different kinds
@@ -201,23 +201,23 @@ SEXP Csparse_subassign(SEXP x, SEXP i_, SEXP j_, SEXP value)
 		error(_("programming error in 'Csparse_subassign()' function should never happen"));
 	    }
 	    // otherwise: "coerce" :  as(., <sparseVector>) :
-	    val_x_slot = PROTECT(coerceVector(GET_SLOT(value, Matrix_xSym), SXP_x)); n_prot++;
+	    val_x_slot = PROTECT(coerceVector(R_do_slot(value, Matrix_xSym), SXP_x)); n_prot++;
 	    val_x = STYP_x(val_x_slot);
 	} else {
-	    val_x = STYP_x(		      GET_SLOT(value, Matrix_xSym));
+	    val_x = STYP_x(		      R_do_slot(value, Matrix_xSym));
 	}
     }
-    int64_t len_val = (int64_t) asReal(GET_SLOT(value, Matrix_lengthSym));
+    int64_t len_val = (int64_t) asReal(R_do_slot(value, Matrix_lengthSym));
     /* llen_i = (int64_t) len_i; */
 
     SEXP ans;
     /* Instead of simple "duplicate": PROTECT(ans = duplicate(x)) , build up: */
     // Assuming that ans will have the same basic Matrix type as x :
     ans = PROTECT(NEW_OBJECT_OF_CLASS(valid_cM[ctype_x]));
-    SET_SLOT(ans, Matrix_DimSym,      duplicate(dimslot));
+    R_do_slot_assign(ans, Matrix_DimSym,      duplicate(dimslot));
     slot_dup(ans, x, Matrix_DimNamesSym);
     slot_dup(ans, x, Matrix_pSym);
-    SEXP r_pslot = GET_SLOT(ans, Matrix_pSym);
+    SEXP r_pslot = R_do_slot(ans, Matrix_pSym);
     // and assign the i- and x- slots at the end, as they are potentially modified
     // not just in content, but also in their *length*
     int *rp = INTEGER(r_pslot),
@@ -227,7 +227,7 @@ SEXP Csparse_subassign(SEXP x, SEXP i_, SEXP j_, SEXP value)
     Type_x_1_init(one_ans);
 #ifdef _has_x_slot_
     Type_x *rx = Calloc(nnz_x, Type_x); // to contain the final x - slot
-    Memcpy(rx, STYP_x(GET_SLOT(x, Matrix_xSym)), nnz_x);
+    Memcpy(rx, STYP_x(R_do_slot(x, Matrix_xSym)), nnz_x);
 #endif
     // NB:  nnz_x : will always be the "current allocated length" of (i, x) slots
     // --   nnz   : the current *used* length; always   nnz <= nnz_x

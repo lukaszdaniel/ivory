@@ -3541,8 +3541,8 @@ void R_InitSrcRefState(RCNTXT* cptr)
     /* set up context _after_ PutSrcRefState */
     begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
-    cptr->cend = &FinalizeSrcRefStateOnError;
-    cptr->cenddata = NULL;
+    cptr->setContextEnd(&FinalizeSrcRefStateOnError);
+    cptr->setContextEndData(NULL);
     ParseState.keepSrcRefs = FALSE;
     ParseState.keepParseData = TRUE;
     ParseState.didAttach = FALSE;

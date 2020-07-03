@@ -1228,7 +1228,7 @@ static void menunext(control m)
     pMUSTEXIST;
     pCHECK;
     if (pCURRENTPOS != (pNUMPLOTS - 1)) pMOVE(1);
-    PrintWarnings(NULL);
+    PrintWarnings();
 }
 
 static void menuprev(control m)
@@ -1251,7 +1251,7 @@ static void menuprev(control m)
 	}
 	pMOVE((xd->needsave) ? 0 : -1);
     }
-    PrintWarnings(NULL);
+    PrintWarnings();
 }
 
 static void menugrclear(control m)
@@ -1532,18 +1532,18 @@ static Rboolean setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
     if (R_FINITE(user_xpinch) && user_xpinch > 0.0)
 	dw = dw0 = (int) (w * user_xpinch);
     else
-	dw = dw0 = (int) (w / pixelWidth(NULL));
+	dw = dw0 = (int) (w / pixelWidth(nullptr));
     if (R_FINITE(user_ypinch) && user_ypinch > 0.0)
 	dh = (int) (h * user_ypinch);
     else
-	dh = (int) (h / pixelHeight(NULL));
+	dh = (int) (h / pixelHeight(nullptr));
 
     if (ismdi() && !isiconic(RFrame)) {
 	cw = RgetMDIwidth();
 	ch = RgetMDIheight();
     } else {
-	cw = devicewidth(NULL);
-	ch = deviceheight(NULL);
+	cw = devicewidth(nullptr);
+	ch = deviceheight(nullptr);
     }
 
     if (resize != 3) {
@@ -2249,7 +2249,7 @@ static void GA_Close(pDevDesc dd)
     SEXP vDL;
 
     if (xd->cntxt)
-    	((RCNTXT *)xd->cntxt)->cend = NULL;  /* Don't try to run cleanup; it will have already happened */
+    	((RCNTXT *)xd->cntxt)->setContextEnd(nullptr);  /* Don't try to run cleanup; it will have already happened */
 
     if (dd->onExit) {
 	dd->onExit(dd);
@@ -3145,8 +3145,8 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     /* set up a context which will clean up if there's an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &donelocator;
-    cntxt.cenddata = xd;
+    cntxt.setContextEnd(&donelocator);
+    cntxt.setContextEndData(xd);
     xd->cntxt = (void *) &cntxt;
 
     /* and an exit handler in case the window gets closed */

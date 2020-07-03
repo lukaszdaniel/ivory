@@ -1144,7 +1144,7 @@ void consolepaste(control c)
 	REDRAW;
      }
     if (p->kind == PAGER) return;
-    if ( OpenClipboard(NULL) &&
+    if ( OpenClipboard(nullptr) &&
 	 (hglb = GetClipboardData(CF_UNICODETEXT)) &&
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
@@ -1192,7 +1192,7 @@ void consolepastecmds(control c)
 	REDRAW;
      }
     if (p->kind == PAGER) return;;
-    if ( OpenClipboard(NULL) &&
+    if ( OpenClipboard(nullptr) &&
 	 (hglb = GetClipboardData(CF_UNICODETEXT)) &&
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
@@ -1302,7 +1302,7 @@ static void consoletoclipboardHelper(control c, int x0, int y0, int x1, int y1)
     }
     *s = L'\0';
     GlobalUnlock(hglb);
-    if (!OpenClipboard(NULL) || !EmptyClipboard()) {
+    if (!OpenClipboard(nullptr) || !EmptyClipboard()) {
 	R_ShowMessage(G_("Unable to open the clipboard"));
 	GlobalFree(hglb);
 	return;;

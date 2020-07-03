@@ -6,9 +6,9 @@ SEXP Tsparse_validate(SEXP x)
 {
     /* NB: we do *NOT* check a potential 'x' slot here, at all */
     SEXP
-	islot = GET_SLOT(x, Matrix_iSym),
-	jslot = GET_SLOT(x, Matrix_jSym),
-	dimslot = GET_SLOT(x, Matrix_DimSym);
+	islot = R_do_slot(x, Matrix_iSym),
+	jslot = R_do_slot(x, Matrix_jSym),
+	dimslot = R_do_slot(x, Matrix_DimSym);
     int j,
 	nrow = INTEGER(dimslot)[0],
 	ncol = INTEGER(dimslot)[1],
@@ -42,7 +42,7 @@ SEXP Tsparse_to_Csparse(SEXP x, SEXP tri)
     return chm_sparse_to_SEXP(chxs, 1,
 			      tr ? ((*uplo_P(x) == 'U') ? 1 : -1) : 0,
 			      Rkind, tr ? diag_P(x) : "",
-			      GET_SLOT(x, Matrix_DimNamesSym));
+			      R_do_slot(x, Matrix_DimNamesSym));
 }
 
 /* speedup utility, needed e.g. after subsetting: */
@@ -57,7 +57,7 @@ SEXP Tsparse_to_tCsparse(SEXP x, SEXP uplo, SEXP diag)
 			      /* uploT = */ (*CHAR(asChar(uplo)) == 'U')? 1: -1,
 			      Rkind,
 			      /* diag = */ CHAR(STRING_ELT(diag, 0)),
-			      GET_SLOT(x, Matrix_DimNamesSym));
+			      R_do_slot(x, Matrix_DimNamesSym));
 }
 
 SEXP Tsparse_diagU2N(SEXP x)
@@ -78,9 +78,9 @@ SEXP Tsparse_diagU2N(SEXP x)
 	return (x);
     }
     else { /* instead of going to Csparse -> Cholmod -> Csparse -> Tsparse, work directly: */
-	int i, n = INTEGER(GET_SLOT(x, Matrix_DimSym))[0];
+	int i, n = INTEGER(R_do_slot(x, Matrix_DimSym))[0];
 	R_xlen_t
-	    nnz = xlength(GET_SLOT(x, Matrix_iSym)),
+	    nnz = xlength(R_do_slot(x, Matrix_iSym)),
 	    new_n = nnz + n;
 	SEXP ans = PROTECT(NEW_OBJECT_OF_CLASS(class_P(x)));
 	int *islot = INTEGER(ALLOC_SLOT(ans, Matrix_iSym, INTSXP, new_n)),
@@ -89,11 +89,11 @@ SEXP Tsparse_diagU2N(SEXP x)
 	slot_dup(ans, x, Matrix_DimSym);
 	SET_DimNames(ans, x);
 	slot_dup(ans, x, Matrix_uploSym);
-	SET_SLOT(ans, Matrix_diagSym, mkString("N"));
+	R_do_slot_assign(ans, Matrix_diagSym, mkString("N"));
 
 	/* Build the new i- and j- slots : first copy the current : */
-	Memcpy(islot, INTEGER(GET_SLOT(x, Matrix_iSym)), nnz);
-	Memcpy(jslot, INTEGER(GET_SLOT(x, Matrix_jSym)), nnz);
+	Memcpy(islot, INTEGER(R_do_slot(x, Matrix_iSym)), nnz);
+	Memcpy(jslot, INTEGER(R_do_slot(x, Matrix_jSym)), nnz);
 	/* then, add the new (i,j) slot entries: */
 	for(i = 0; i < n; i++) {
 	    islot[i + nnz] = i;
@@ -105,7 +105,7 @@ SEXP Tsparse_diagU2N(SEXP x)
 	case 0: { /* "d" */
 	    double *x_new = REAL(ALLOC_SLOT(ans, Matrix_xSym,
 					    REALSXP, new_n));
-	    Memcpy(x_new, REAL(GET_SLOT(x, Matrix_xSym)), nnz);
+	    Memcpy(x_new, REAL(R_do_slot(x, Matrix_xSym)), nnz);
 	    for(i = 0; i < n; i++) /* add  x[i,i] = 1. */
 		x_new[i + nnz] = 1.;
 	    break;
@@ -113,7 +113,7 @@ SEXP Tsparse_diagU2N(SEXP x)
 	case 1: { /* "l" */
 	    int *x_new = LOGICAL(ALLOC_SLOT(ans, Matrix_xSym,
 					    LGLSXP, new_n));
-	    Memcpy(x_new, LOGICAL(GET_SLOT(x, Matrix_xSym)), nnz);
+	    Memcpy(x_new, LOGICAL(R_do_slot(x, Matrix_xSym)), nnz);
 	    for(i = 0; i < n; i++) /* add  x[i,i] = 1 (= TRUE) */
 		x_new[i + nnz] = 1;
 	    break;
@@ -125,7 +125,7 @@ SEXP Tsparse_diagU2N(SEXP x)
 	case 3: { /* "z" */
 	    Rcomplex *x_new = COMPLEX(ALLOC_SLOT(ans, Matrix_xSym,
 						 CPLXSXP, new_n));
-	    Memcpy(x_new, COMPLEX(GET_SLOT(x, Matrix_xSym)), nnz);
+	    Memcpy(x_new, COMPLEX(R_do_slot(x, Matrix_xSym)), nnz);
 	    for(i = 0; i < n; i++) /* add  x[i,i] = 1 (= TRUE) */
 		x_new[i + nnz] = (Rcomplex) {1., 0.};
 	    break;

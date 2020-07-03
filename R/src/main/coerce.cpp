@@ -1654,8 +1654,8 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     /* set up context to recover known_to_be_* variable */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
-    cntxt.cend = &parse_cleanup;
-    cntxt.cenddata = &pci;
+    cntxt.setContextEnd(&parse_cleanup);
+    cntxt.setContextEndData(&pci);
 
     /* Preserve uncertainty in encoding as in do_parse(): if at least one
        argument is of "unknown" encoding, the result is also flagged

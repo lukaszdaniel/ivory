@@ -31,7 +31,7 @@ SEXP CHMfactor_solve(SEXP a, SEXP b, SEXP system)
 
     X = cholmod_solve(sys, L, B, &c);
     SEXP ans = chm_dense_to_SEXP(X, 1/*do_free*/, 0/*Rkind*/,
-				 GET_SLOT(bb, Matrix_DimNamesSym), FALSE);
+				 R_do_slot(bb, Matrix_DimNamesSym), FALSE);
     UNPROTECT(1);
     return ans;
 }
@@ -63,7 +63,7 @@ SEXP CHMfactor_spsolve(SEXP a, SEXP b, SEXP system)
     // dimnames:
     SEXP dn = PROTECT(allocVector(VECSXP, 2));
     // none from a: our CHMfactor objects have no dimnames
-    SET_VECTOR_ELT(dn, 1, duplicate(VECTOR_ELT(GET_SLOT(b, Matrix_DimNamesSym), 1)));
+    SET_VECTOR_ELT(dn, 1, duplicate(VECTOR_ELT(R_do_slot(b, Matrix_DimNamesSym), 1)));
     SEXP ans = chm_sparse_to_SEXP(cholmod_spsolve(sys, L, B, &c),
 				  1/*do_free*/, 0/*uploT*/, 0/*Rkind*/, "", dn);
     UNPROTECT(1);

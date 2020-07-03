@@ -21,22 +21,21 @@
 /* These are the R interface routines to the plain FFT code
    fft_factor() & fft_work() in fft.c. */
 
-#include <cinttypes>
-// for PRIu64
+
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
+#include <cinttypes> // for PRIu64
 #include <Defn.h>
 #include "localization.h"
+#include "statsR.h"
 
 // workhorse routines from fft.c
 void fft_factor(int n, int *pmaxf, int *pmaxp);
 Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn,
 		  int isn, double *work, int *iwork);
-
-#include "statsR.h"
 
 /* Fourier Transform for Univariate Spatial and Time Series */
 

@@ -161,13 +161,13 @@ static void *xpt(int ctype, SEXP x)
 {
     switch(ctype / 3) {
     case 0: /* "d" */
-	return (void *) REAL(GET_SLOT(x, Matrix_xSym));
+	return (void *) REAL(R_do_slot(x, Matrix_xSym));
     case 1: /* "l" */
-	return RallocedREAL(GET_SLOT(x, Matrix_xSym));
+	return RallocedREAL(R_do_slot(x, Matrix_xSym));
     case 2: /* "n" */
 	return (void *) NULL;
     case 3: /* "z" */
-	return (void *) COMPLEX(GET_SLOT(x, Matrix_xSym));
+	return (void *) COMPLEX(R_do_slot(x, Matrix_xSym));
     }
     return (void *) NULL; 	/* -Wall */
 }
@@ -252,9 +252,9 @@ CHM_SP as_cholmod_sparse(CHM_SP ans, SEXP x,
 			 Rboolean check_Udiag, Rboolean sort_in_place)
 {
     static const char *valid[] = { MATRIX_VALID_Csparse, ""};
-    int *dims = INTEGER(GET_SLOT(x, Matrix_DimSym)),
+    int *dims = INTEGER(R_do_slot(x, Matrix_DimSym)),
 	ctype = R_check_class_etc(x, valid);
-    SEXP islot = GET_SLOT(x, Matrix_iSym);
+    SEXP islot = R_do_slot(x, Matrix_iSym);
 
     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_sparse' function"));
     if (!isValid_Csparse(x))
@@ -266,7 +266,7 @@ CHM_SP as_cholmod_sparse(CHM_SP ans, SEXP x,
     ans->packed = TRUE;
 				/* slots always present */
     ans->i = INTEGER(islot);
-    ans->p = INTEGER(GET_SLOT(x, Matrix_pSym));
+    ans->p = INTEGER(R_do_slot(x, Matrix_pSym));
 				/* dimensions and nzmax */
     ans->nrow = dims[0];
     ans->ncol = dims[1];
@@ -423,15 +423,15 @@ SEXP chm_sparse_to_SEXP(CHM_SP a, int dofree, int uploT, int Rkind,
     }
     if (uploT) {		/* slots for triangularMatrix */
 	if (a->stype) error(_("'symmetric' and 'triangular' both set"));
-	SET_SLOT(ans, Matrix_uploSym, mkString((uploT > 0) ? "U" : "L"));
-	SET_SLOT(ans, Matrix_diagSym, mkString(diag));
+	R_do_slot_assign(ans, Matrix_uploSym, mkString((uploT > 0) ? "U" : "L"));
+	R_do_slot_assign(ans, Matrix_diagSym, mkString(diag));
     }
     if (a->stype)		/* slot for symmetricMatrix */
-	SET_SLOT(ans, Matrix_uploSym,
+	R_do_slot_assign(ans, Matrix_uploSym,
 		 mkString((a->stype > 0) ? "U" : "L"));
     DOFREE_MAYBE;
     if (dn != R_NilValue)
-	SET_SLOT(ans, Matrix_DimNamesSym, duplicate(dn));
+	R_do_slot_assign(ans, Matrix_DimNamesSym, duplicate(dn));
 
     UNPROTECT(2);
     return ans;
@@ -494,8 +494,8 @@ CHM_TR as_cholmod_triplet(CHM_TR ans, SEXP x, Rboolean check_Udiag)
 {
     static const char *valid[] = { MATRIX_VALID_Tsparse, ""};
     int ctype = R_check_class_etc(x, valid),
-	*dims = INTEGER(GET_SLOT(x, Matrix_DimSym));
-    SEXP islot = GET_SLOT(x, Matrix_iSym);
+	*dims = INTEGER(R_do_slot(x, Matrix_DimSym));
+    SEXP islot = R_do_slot(x, Matrix_iSym);
     int m = LENGTH(islot);
     Rboolean do_Udiag = (check_Udiag && ctype % 3 == 2 && (*diag_P(x) == 'U'));
     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_triplet' function"));
@@ -511,7 +511,7 @@ CHM_TR as_cholmod_triplet(CHM_TR ans, SEXP x, Rboolean check_Udiag)
     ans->stype = stype(ctype, x);
     ans->xtype = xtype(ctype);
     ans->i = (void *) INTEGER(islot);
-    ans->j = (void *) INTEGER(GET_SLOT(x, Matrix_jSym));
+    ans->j = (void *) INTEGER(R_do_slot(x, Matrix_jSym));
     ans->x = xpt(ctype, x);
 
     if(do_Udiag) {
@@ -653,16 +653,16 @@ SEXP chm_triplet_to_SEXP(CHM_TR a, int dofree, int uploT, int Rkind,
     }
     if (uploT) {		/* slots for triangularMatrix */
 	if (a->stype) error(_("'symmetric' and 'triangular' both set"));
-	SET_SLOT(ans, Matrix_uploSym, mkString((uploT > 0) ? "U" : "L"));
-	SET_SLOT(ans, Matrix_diagSym, mkString(diag));
+	R_do_slot_assign(ans, Matrix_uploSym, mkString((uploT > 0) ? "U" : "L"));
+	R_do_slot_assign(ans, Matrix_diagSym, mkString(diag));
     }
 				/* set symmetry attributes */
     if (a->stype)
-	SET_SLOT(ans, Matrix_uploSym,
+	R_do_slot_assign(ans, Matrix_uploSym,
 		 mkString((a->stype > 0) ? "U" : "L"));
     DOFREE_MAYBE;
     if (dn != R_NilValue)
-	SET_SLOT(ans, Matrix_DimNamesSym, duplicate(dn));
+	R_do_slot_assign(ans, Matrix_DimNamesSym, duplicate(dn));
     UNPROTECT(2);
     return ans;
 }
@@ -697,7 +697,7 @@ CHM_DN as_cholmod_dense(CHM_DN ans, SEXP x)
 	ctype = (isReal(x) ? 0 :					\
 		 (isLogical(x) ? 2 : /* logical -> default to "l", not "n" */ \
 		  (isComplex(x) ? 6 : -1)));				\
-    } else Memcpy(dims, INTEGER(GET_SLOT(x, Matrix_DimSym)), 2);	\
+    } else Memcpy(dims, INTEGER(R_do_slot(x, Matrix_DimSym)), 2);	\
     if (ctype < 0) error(_("invalid class of object passed to 'as_cholmod_dense()' function")); \
     memset(ans, 0, sizeof(cholmod_dense)); /* zero the struct */        \
                                                                         \
@@ -711,24 +711,24 @@ CHM_DN as_cholmod_dense(CHM_DN ans, SEXP x)
     switch(ctype / 2) {							\
     case 0: /* "d" */							\
 	ans->xtype = CHOLMOD_REAL;					\
-	ans->x = (void *) REAL((ctype % 2) ? GET_SLOT(x, Matrix_xSym) : x); \
+	ans->x = (void *) REAL((ctype % 2) ? R_do_slot(x, Matrix_xSym) : x); \
 	break
 
     _AS_cholmod_dense_1;
 
     case 1: /* "l" */
 	ans->xtype = CHOLMOD_REAL;
-	ans->x = RallocedREAL((ctype % 2) ? GET_SLOT(x, Matrix_xSym) : x);
+	ans->x = RallocedREAL((ctype % 2) ? R_do_slot(x, Matrix_xSym) : x);
 	break;
     case 2: /* "n" */
 	ans->xtype = CHOLMOD_PATTERN;
-	ans->x = (void *) LOGICAL((ctype % 2) ? GET_SLOT(x, Matrix_xSym) : x);
+	ans->x = (void *) LOGICAL((ctype % 2) ? R_do_slot(x, Matrix_xSym) : x);
 	break;
 
 #define _AS_cholmod_dense_2						\
     case 3: /* "z" */							\
 	ans->xtype = CHOLMOD_COMPLEX;					\
-	ans->x = (void *) COMPLEX((ctype % 2) ? GET_SLOT(x, Matrix_xSym) : x); \
+	ans->x = (void *) COMPLEX((ctype % 2) ? R_do_slot(x, Matrix_xSym) : x); \
 	break;								\
     }									\
     UNPROTECT(nprot);							\
@@ -747,7 +747,7 @@ CHM_DN as_cholmod_x_dense(CHM_DN ans, SEXP x)
     case 1: /* "l" */
     case 2: /* "n" (no NA in 'x', but *has* 'x' slot => treat as "l" */
 	ans->xtype = CHOLMOD_REAL;
-	ans->x = RallocedREAL((ctype % 2) ? GET_SLOT(x, Matrix_xSym) : x);
+	ans->x = RallocedREAL((ctype % 2) ? R_do_slot(x, Matrix_xSym) : x);
 	break;
 
     _AS_cholmod_dense_2;
@@ -936,7 +936,7 @@ SEXP chm_dense_to_SEXP(CHM_DN a, int dofree, int Rkind, SEXP dn, Rboolean transp
 
     DOFREE_de_MAYBE;
     if (dn != R_NilValue)
-	SET_SLOT(ans, Matrix_DimNamesSym, duplicate(dn));
+	R_do_slot_assign(ans, Matrix_DimNamesSym, duplicate(dn));
     UNPROTECT(2);
     return ans;
 }
@@ -1041,7 +1041,7 @@ CHM_DN numeric_as_chm_dense(CHM_DN ans, double *v, int nr, int nc)
 CHM_FR as_cholmod_factor3(CHM_FR ans, SEXP x, Rboolean do_check)
 {
     static const char *valid[] = { MATRIX_VALID_CHMfactor, ""};
-    int *type = INTEGER(GET_SLOT(x, install("type"))),
+    int *type = INTEGER(R_do_slot(x, install("type"))),
 	ctype = R_check_class_etc(x, valid);
     SEXP tmp;
 
@@ -1063,40 +1063,40 @@ CHM_FR as_cholmod_factor3(CHM_FR ans, SEXP x, Rboolean do_check)
     if ((!type[2]) ^ (ctype % 2))
 	error(_("Supernodal/simplicial class inconsistent with 'type' flags"));
 				/* slots always present */
-    tmp = GET_SLOT(x, Matrix_permSym);
+    tmp = R_do_slot(x, Matrix_permSym);
     ans->minor = ans->n = LENGTH(tmp); ans->Perm = INTEGER(tmp);
-    ans->ColCount = INTEGER(GET_SLOT(x, install("colcount")));
+    ans->ColCount = INTEGER(R_do_slot(x, install("colcount")));
     ans->z = ans->x = (void *) NULL;
     if (ctype < 2) {
-	tmp = GET_SLOT(x, Matrix_xSym);
+	tmp = R_do_slot(x, Matrix_xSym);
 	ans->x = REAL(tmp);
     }
     if (ans->is_super) {	/* supernodal factorization */
 	ans->xsize = LENGTH(tmp);
 	ans->maxcsize = type[4]; ans->maxesize = type[5];
 	ans->i = (int*)NULL;
-	tmp = GET_SLOT(x, install("super"));
+	tmp = R_do_slot(x, install("super"));
 	ans->nsuper = LENGTH(tmp) - 1; ans->super = INTEGER(tmp);
 	/* Move these checks to the CHMfactor_validate function */
 	if (ans->nsuper < 1)
 	    error(_("Number of supernodes must be positive when 'is_super' argument is TRUE"));
-	tmp = GET_SLOT(x, install("pi"));
+	tmp = R_do_slot(x, install("pi"));
 	if (LENGTH(tmp) != ans->nsuper + 1)
 	    error(_("Lengths of 'super' and 'pi' arguments must be equal"));
 	ans->pi = INTEGER(tmp);
-	tmp = GET_SLOT(x, install("px"));
+	tmp = R_do_slot(x, install("px"));
 	if (LENGTH(tmp) != ans->nsuper + 1)
 	    error(_("Lengths of 'super' and 'px' arguments must be equal"));
 	ans->px = INTEGER(tmp);
-	tmp = GET_SLOT(x, install("s"));
+	tmp = R_do_slot(x, install("s"));
 	ans->ssize = LENGTH(tmp); ans->s = INTEGER(tmp);
     } else {
 	ans->nzmax = LENGTH(tmp);
-	ans->p = INTEGER(GET_SLOT(x, Matrix_pSym));
-	ans->i = INTEGER(GET_SLOT(x, Matrix_iSym));
-	ans->nz = INTEGER(GET_SLOT(x, install("nz")));
-	ans->next = INTEGER(GET_SLOT(x, install("nxt")));
-	ans->prev = INTEGER(GET_SLOT(x, install("prv")));
+	ans->p = INTEGER(R_do_slot(x, Matrix_pSym));
+	ans->i = INTEGER(R_do_slot(x, Matrix_iSym));
+	ans->nz = INTEGER(R_do_slot(x, install("nz")));
+	ans->next = INTEGER(R_do_slot(x, install("nxt")));
+	ans->prev = INTEGER(R_do_slot(x, install("prv")));
     }
     if (do_check && !cholmod_check_factor(ans, &c))
 	error(_("failure in 'as_cholmod_factor' function"));

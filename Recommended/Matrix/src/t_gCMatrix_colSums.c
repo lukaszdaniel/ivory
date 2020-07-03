@@ -193,7 +193,7 @@ SEXP gCMatrix_colSums(SEXP x, SEXP NArm, SEXP spRes, SEXP trans, SEXP means)
 	ai =  INTEGER(ALLOC_SLOT(ans, Matrix_iSym, INTSXP,  nza));
 	ax = STYP_ans(ALLOC_SLOT(ans, Matrix_xSym, SXP_ans, nza));
 
-	SET_SLOT(ans, Matrix_lengthSym, ScalarInteger(nc));
+	R_do_slot_assign(ans, Matrix_lengthSym, ScalarInteger(nc));
 
 	i2 = xp[0];
 	for (j = 1, p = 0; j <= nc; j++) {
@@ -217,7 +217,7 @@ SEXP gCMatrix_colSums(SEXP x, SEXP NArm, SEXP spRes, SEXP trans, SEXP means)
 
     if (tr) cholmod_free_sparse(&cx, &c);
     if (!sp) {
-	SEXP nms = VECTOR_ELT(GET_SLOT(x, Matrix_DimNamesSym), tr ? 0 : 1);
+	SEXP nms = VECTOR_ELT(R_do_slot(x, Matrix_DimNamesSym), tr ? 0 : 1);
 	if (!isNull(nms))
 	    setAttrib(ans, R_NamesSymbol, duplicate(nms));
     }

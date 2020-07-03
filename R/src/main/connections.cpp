@@ -3920,8 +3920,8 @@ HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
 	if(!con->canread) error(_("cannot read from this connection"));
     } else {
 	if(!con->canread) error(_("cannot read from this connection"));
@@ -4041,8 +4041,8 @@ HIDDEN SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
     }
     if(!con->canwrite) error(_("cannot write to this connection"));
     /* NB: translateChar0() is the same as CHAR() for IS_BYTES strings */
@@ -4206,8 +4206,8 @@ HIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
+	    cntxt.setContextEnd(&con_cleanup);
+	    cntxt.setContextEndData(con);
 	}
 	if(!con->canread) error(_("cannot read from this connection"));
     }
@@ -4462,8 +4462,8 @@ HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
 	if(!con->canwrite) error(_("cannot write to this connection"));
     }
 
@@ -4789,8 +4789,8 @@ HIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
+	    cntxt.setContextEnd(&con_cleanup);
+	    cntxt.setContextEndData(con);
 	}
 	if(!con->canread) error(_("cannot read from this connection"));
     }
@@ -4915,8 +4915,8 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
 	if(!con->canwrite) error(_("cannot write to this connection"));
     }
 

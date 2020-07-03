@@ -399,8 +399,8 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
+	    cntxt.setContextEnd(&con_cleanup);
+	    cntxt.setContextEndData(con);
 	}
 	if(!con->canwrite) error(_("cannot write to this connection"));
 	Rboolean havewarned = FALSE;
@@ -485,8 +485,8 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* Set up a context which will close the connection on error */
 		begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			     R_NilValue, R_NilValue);
-		cntxt.cend = &con_cleanup;
-		cntxt.cenddata = con;
+		cntxt.setContextEnd(&con_cleanup);
+		cntxt.setContextEndData(con);
 	    }
 	    if(!con->canwrite) error(_("cannot write to this connection"));
 	    Rboolean havewarned = FALSE;

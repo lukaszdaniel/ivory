@@ -547,8 +547,9 @@ struct RPRSTACK
 };
 
 /* Evaluation Context Structure */
-struct RCNTXT
+class RCNTXT
 {
+    private:
     RCNTXT *nextcontext;  /* The next context up the chain */
     int callflag;         /* The context "type" */
     JMP_BUF cjmpbuf;      /* C stack and register information */
@@ -580,6 +581,7 @@ struct RCNTXT
     RCNTXT *jumptarget; /* target for a continuing jump */
     int jumpmask;       /* associated LONGJMP argument */
 
+    public:
     RCNTXT() : nextcontext(nullptr), callflag(0), cjmpbuf(), cstacktop(0), evaldepth(0), promargs(nullptr),
     callfun(nullptr), sysparent(nullptr), call(nullptr), cloenv(nullptr), conexit(nullptr), cend(nullptr), cenddata(nullptr),
     vmax(nullptr), intsusp(0), gcenabled(false), bcintactive(false), bcbody(nullptr), bcpc(nullptr), handlerstack(nullptr),
@@ -593,6 +595,57 @@ struct RCNTXT
     SEXP workingEnvironment() const { return this->cloenv; }
     void setWorkingEnvironment(SEXP x) {this->cloenv = x; }
     RCNTXT *nextContext() const { return this->nextcontext; }
+    void setNextContext(RCNTXT *ctxt) { this->nextcontext = ctxt; }
+    SEXP getReturnValue() const { return this->returnValue; }
+    void setReturnValue(SEXP rv) { this->returnValue = rv; }
+    void *getContextEndData() const {return this->cenddata; };
+    void setContextEndData(void *data) { cenddata = data; }
+    void setContextEnd(void (*cendf)(void *) ) { cend = cendf; }
+    auto getContextEnd() { return (this->cend); }
+    int& getCallFlag() { return this->callflag; }
+    int getCallFlag() const { return this->callflag; }
+    void setCallFlag(int cflag) { this->callflag = cflag; }
+    SEXP getSysParent() const { return this->sysparent; }
+    void setSysParent(SEXP sp) { this->sysparent = sp; }
+    SEXP getRestartStack() const { return this->restartstack; }
+    void setRestartStack(SEXP rs) { this->restartstack = rs; }
+    int getCStackTop() const { return this->cstacktop; }
+    void setCStackTop(int stacktop) { this->cstacktop = stacktop; }
+    bool getGCEnabled() const { return this->gcenabled; }
+    void setGCEnabled(bool enabled) { this->gcenabled = enabled;}
+    bool getBCIntactive() const { return this->bcintactive; }
+    void setBCIntactive(bool active) { this->bcintactive = active; }
+    void *getBCPC() const { return this->bcpc; }
+    void setBCPC(void *bc) { this->bcpc = bc; }
+    SEXP getBCBody() const { return this->bcbody; }
+    void setBCBody(SEXP body) { this->bcbody = body; }
+    int getEvalDepth() const { return this->evaldepth; }
+    void setEvalDepth(int depth) { this->evaldepth = depth; }
+    int getIntSusp() const { return this->intsusp; }
+    void setIntSusp(int susp) { this->intsusp = susp; }
+    void *getVMax() const { return this->vmax; }
+    void setVMax(void *vm) { this->vmax = vm; }
+    RPRSTACK *getPrStack() const { return this->prstack; }
+    void setPrStack(RPRSTACK *rpr) { this->prstack = rpr; }
+    RCNTXT *getJumpTarget() const { return this->jumptarget; }
+    void setJumpTarget(RCNTXT * target) { this->jumptarget = target; }
+    int getJumpMask() const { return this->jumpmask; }
+    void setJumpMask(int mask) { this->jumpmask = mask; }
+    R_bcstack_t *getNodeStack() const { return this->nodestack; }
+    void setNodeStack(R_bcstack_t *stack) { this->nodestack = stack; }
+    SEXP getSrcRef() const { return this->srcref; }
+    void setSrcRef(SEXP src) { this->srcref = src; }
+    R_bcstack_t *getBCProtTop() const { return this->bcprottop; }
+    void setBCProtTop(R_bcstack_t *stack) { this->bcprottop = stack; }
+    auto getCJmpBuf() { return this->cjmpbuf; }
+    SEXP getCallFun() const { return this->callfun; }
+    void setCallFun(SEXP cfun) { this->callfun = cfun; }
+    SEXP getPromiseArgs() const { return this->promargs; }
+    void setPromiseArgs(SEXP pargs) { this->promargs = pargs; }
+    SEXP getCall() const { return this->call; }
+    void setCall(SEXP call) { this->call = call; }
+    bool getBrowserFinish() const { return this->browserfinish; }
+    void setBrowserFinish(bool finish) { this->browserfinish = finish; }
 };
 
 /* The Various Context Types.
@@ -1283,7 +1336,7 @@ void Rf_PrintValueRec(SEXP, R_PrintData *);
 void Rf_PrintVersion(char *, size_t len);
 void Rf_PrintVersion_part_1(char *, size_t len);
 void Rf_PrintVersionString(char *, size_t len);
-void Rf_PrintWarnings(const char *);
+void Rf_PrintWarnings(const char *hdr = nullptr);
 void process_site_Renviron(void);
 void process_system_Renviron(void);
 void process_user_Renviron(void);

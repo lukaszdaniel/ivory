@@ -21,6 +21,7 @@
 
 #include <R.h>
 #include <Rmath.h>
+#include <Rinternals.h>
 #include <R_ext/Minmax.h>
 
 using namespace std;
@@ -51,8 +52,6 @@ static void int_d2x2xk(int K, double *m, double *n, double *t, double *d)
     for(j = 0; j <= l; j++) u += c[K][j];
     for(j = 0; j <= l; j++) d[j] = c[K][j] / u;
 }
-
-#include <Rinternals.h>
 
 SEXP d2x2xk(SEXP sK, SEXP m, SEXP n, SEXP t, SEXP srn)
 {

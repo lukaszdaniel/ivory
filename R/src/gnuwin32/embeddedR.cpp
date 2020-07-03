@@ -142,6 +142,6 @@ void Rf_endEmbeddedR(int fatal)
 	AllDevicesKilled = TRUE;
     }
     if(!fatal && R_CollectWarnings)
-	PrintWarnings(NULL);	/* from device close and .Last */
+	PrintWarnings();	/* from device close and .Last */
     app_cleanup();
 }

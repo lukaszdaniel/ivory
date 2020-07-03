@@ -27,11 +27,11 @@
 CSPARSE_VAL_RES_TYPE CSPARSE_VAL_FN_NAME(SEXP x, Rboolean maybe_modify)
 {
     /* NB: we do *NOT* check a potential 'x' slot here, at all */
-    SEXP pslot = GET_SLOT(x, Matrix_pSym),
-	islot = GET_SLOT(x, Matrix_iSym);
+    SEXP pslot = R_do_slot(x, Matrix_pSym),
+	islot = R_do_slot(x, Matrix_iSym);
     Rboolean sorted, strictly;
     int j, k,
-	*dims = INTEGER(GET_SLOT(x, Matrix_DimSym)),
+	*dims = INTEGER(R_do_slot(x, Matrix_DimSym)),
 	nrow = dims[0],
 	ncol = dims[1],
 	*xp = INTEGER(pslot),

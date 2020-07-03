@@ -1529,8 +1529,7 @@ struct R_inpstream_st
     R_pstream_format_t type;
     int (*InChar)(R_inpstream_t);
     void (*InBytes)(R_inpstream_t, void *, int);
-    SEXP (*InPersistHookFunc)
-    (SEXP, SEXP);
+    SEXP (*InPersistHookFunc)(SEXP, SEXP);
     SEXP InPersistHookData;
     char native_encoding[R_CODESET_MAX + 1];
     void *nat2nat_obj;

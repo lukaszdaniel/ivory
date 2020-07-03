@@ -1318,7 +1318,7 @@ static menu getMenu(const char * name)
 	return(RMenuBar);
     else if (strncmp(name, "$Graph", 6) == 0)
 	return(getGraphMenu(name));
-    else return(NULL);
+    else return(nullptr);
 }
 
 int winaddmenu(const char *name, char *errmsg)

@@ -10,8 +10,8 @@ SEXP tTMatrix_validate(SEXP x)
 	return(val);
     else {
 	SEXP
-	    islot = GET_SLOT(x, Matrix_iSym),
-	    jslot = GET_SLOT(x, Matrix_jSym);
+	    islot = R_do_slot(x, Matrix_iSym),
+	    jslot = R_do_slot(x, Matrix_jSym);
 	int uploT = (*uplo_P(x) == 'U'),
 	    k, nnz = length(islot),
 	    *xj = INTEGER(jslot),

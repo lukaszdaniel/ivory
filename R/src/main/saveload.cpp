@@ -1134,8 +1134,8 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
     /* set up a context which will call OutTerm if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &newdatasave_cleanup;
-    cntxt.cenddata = &cinfo;
+    cntxt.setContextEnd(&newdatasave_cleanup);
+    cntxt.setContextEndData(&cinfo);
 
     m->OutInteger(fp, sym_count = HASH_TABLE_COUNT(sym_table), d); m->OutSpace(fp, 1, d);
     m->OutInteger(fp, env_count = HASH_TABLE_COUNT(env_table), d); m->OutNewline(fp, d);
@@ -1331,8 +1331,8 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
     /* set up a context which will call InTerm if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &newdataload_cleanup;
-    cntxt.cenddata = &cinfo;
+    cntxt.setContextEnd(&newdataload_cleanup);
+    cntxt.setContextEndData(&cinfo);
 
     /* Read the table sizes */
     sym_count = m->InInteger(fp, d);
@@ -2079,8 +2079,8 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     /* set up a context which will close the file if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &saveload_cleanup;
-    cntxt.cenddata = fp;
+    cntxt.setContextEnd(&saveload_cleanup);
+    cntxt.setContextEndData(fp);
 
     len = length(CAR(args));
     PROTECT(s = allocList(len));
@@ -2189,8 +2189,8 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     /* set up a context which will close the file if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &saveload_cleanup;
-    cntxt.cenddata = fp;
+    cntxt.setContextEnd(&saveload_cleanup);
+    cntxt.setContextEndData(fp);
 
     PROTECT(val = R_LoadSavedData(fp, aenv));
 
@@ -2380,8 +2380,8 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	   if there is an error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
     }
     if(!con->canwrite)
 	error(_("connection is not open for writing"));
@@ -2465,8 +2465,8 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	   if there is an error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+	cntxt.setContextEnd(&con_cleanup);
+	cntxt.setContextEndData(con);
     }
     if(!con->canread) error(_("connection is not open for reading"));
     if(con->text) error(_("can only load from a binary connection"));

@@ -200,9 +200,9 @@ static void memtrace_stack_dump(void)
     RCNTXT *cptr;
 
     for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
-	    && TYPEOF(cptr->call) == LANGSXP) {
-	    SEXP fun = CAR(cptr->call);
+	if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN))
+	    && TYPEOF(cptr->getCall()) == LANGSXP) {
+	    SEXP fun = CAR(cptr->getCall());
 	    Rprintf("%s ",
 		    TYPEOF(fun) == SYMSXP ? translateChar(PRINTNAME(fun)) :
 		    "<Anonymous>");

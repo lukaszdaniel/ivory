@@ -67,14 +67,14 @@ cs *Matrix_as_cs(cs *ans, SEXP x, Rboolean check_Udiag)
 
     if (ctype < 0) error(_("invalid class of 'x' argument in 'Matrix_as_cs(a, x)' function"));
 				/* dimensions and nzmax */
-    dims = INTEGER(GET_SLOT(x, Matrix_DimSym));
+    dims = INTEGER(R_do_slot(x, Matrix_DimSym));
     ans->m = dims[0]; ans->n = dims[1];
-    islot = GET_SLOT(x, Matrix_iSym);
+    islot = R_do_slot(x, Matrix_iSym);
     ans->nz = -1;		/* indicates compressed column storage */
     ans->nzmax = LENGTH(islot);
     ans->i = INTEGER(islot);
-    ans->p = INTEGER(GET_SLOT(x, Matrix_pSym));
-    ans->x = REAL(GET_SLOT(x, Matrix_xSym));
+    ans->p = INTEGER(R_do_slot(x, Matrix_pSym));
+    ans->x = REAL(R_do_slot(x, Matrix_xSym));
 
     if(check_Udiag && ctype == 1 && (*diag_P(x) == 'U')) { /* diagU2N(.) : */
 	int n = dims[0];
@@ -140,13 +140,13 @@ SEXP Matrix_cs_to_SEXP(cs *a, char *cl, int dofree, SEXP dn)
 	if (!uplo)
 	    error(_("cs matrix not compatible with class '%s'"), valid[ctype]);
 	if (ctype == 2) /* dtC* */
-	    SET_SLOT(ans, Matrix_diagSym, mkString("N"));
-	SET_SLOT(ans, Matrix_uploSym, mkString(uplo < 0 ? "L" : "U"));
+	    R_do_slot_assign(ans, Matrix_diagSym, mkString("N"));
+	R_do_slot_assign(ans, Matrix_uploSym, mkString(uplo < 0 ? "L" : "U"));
     }
     if (dofree > 0) cs_spfree(a);
     if (dofree < 0) Free(a);
     if (dn != R_NilValue)
-	SET_SLOT(ans, Matrix_DimNamesSym, duplicate(dn));
+	R_do_slot_assign(ans, Matrix_DimNamesSym, duplicate(dn));
     UNPROTECT(2);
     return ans;
 }
@@ -167,12 +167,12 @@ css *Matrix_as_css(css *ans, SEXP x)
 {
     char *cl = class_P(x);
     static const char *valid[] = {"css_LU", "css_QR", ""};
-    int *nz = INTEGER(GET_SLOT(x, install("nz"))),
+    int *nz = INTEGER(R_do_slot(x, install("nz"))),
 	ctype = Matrix_check_class(cl, valid);
 
     if (ctype < 0)
 	error(_("invalid class of object to %s"), "Matrix_as_css");
-    ans->q = INTEGER(GET_SLOT(x, install("Q")));
+    ans->q = INTEGER(R_do_slot(x, install("Q")));
     ans->m2 = nz[0]; ans->lnz = nz[1]; ans->unz = nz[2];
     switch(ctype) {
     case 0:			/* css_LU */
@@ -181,9 +181,9 @@ css *Matrix_as_css(css *ans, SEXP x)
 	ans->cp = (int *) NULL;
 	break;
     case 1:			/* css_QR */
-	ans->pinv = INTEGER(GET_SLOT(x, install("Pinv")));
-	ans->parent = INTEGER(GET_SLOT(x, install("parent")));
-	ans->cp = INTEGER(GET_SLOT(x, install("cp")));
+	ans->pinv = INTEGER(R_do_slot(x, install("Pinv")));
+	ans->parent = INTEGER(R_do_slot(x, install("parent")));
+	ans->cp = INTEGER(R_do_slot(x, install("cp")));
 	break;
     default:
 	error(_("invalid class of object to %s"), "Matrix_as_css");
@@ -207,15 +207,15 @@ csn *Matrix_as_csn(csn *ans, SEXP x)
 
     if (ctype < 0)
 	error(_("invalid class of object to %s"), "Matrix_as_csn");
-    ans->U = Matrix_as_cs(GET_SLOT(x, Matrix_USym));
-    ans->L = Matrix_as_cs(GET_SLOT(x, Matrix_LSym));
+    ans->U = Matrix_as_cs(R_do_slot(x, Matrix_USym));
+    ans->L = Matrix_as_cs(R_do_slot(x, Matrix_LSym));
     switch(ctype) {
     case 0:
 	ans->B = (double*) NULL;
-	ans->pinv = INTEGER(GET_SLOT(x, install("Pinv")));
+	ans->pinv = INTEGER(R_do_slot(x, install("Pinv")));
 	break;
     case 1:
-	ans->B = REAL(GET_SLOT(x, Matrix_betaSym));
+	ans->B = REAL(R_do_slot(x, Matrix_betaSym));
 	ans->pinv = (int*) NULL;
 	break;
     default:
@@ -294,9 +294,9 @@ SEXP Matrix_csn_to_SEXP(csn *N, char *cl, int dofree, SEXP dn)
     ans = PROTECT(NEW_OBJECT_OF_CLASS(cl));
 				/* allocate and copy common slots */
     /* FIXME: Use the triangular matrix classes for csn_LU */
-    SET_SLOT(ans, Matrix_LSym,	/* these are free'd later if requested */
+    R_do_slot_assign(ans, Matrix_LSym,	/* these are free'd later if requested */
 	     Matrix_cs_to_SEXP(N->L, "dgCMatrix", 0, dn)); // FIXME: dn
-    SET_SLOT(ans, Matrix_USym,
+    R_do_slot_assign(ans, Matrix_USym,
 	     Matrix_cs_to_SEXP(N->U, "dgCMatrix", 0, dn)); // FIXME: dn
     switch(ctype) {
     case 0:
