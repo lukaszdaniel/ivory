@@ -1541,7 +1541,7 @@ static bool RunFinalizers(void)
 	    /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
-	    begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
+	    RCNTXT::begincontext(thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 			 R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
 	    PROTECT(topExp = R_CurrentExpr);
@@ -1563,7 +1563,7 @@ static bool RunFinalizers(void)
 		    SET_WEAKREF_NEXT(last, next);
 		R_RunWeakRefFinalizer(s);
 	    }
-	    endcontext(&thiscontext);
+	    RCNTXT::endcontext(thiscontext);
 	    UNPROTECT(1); /* next */
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
@@ -3311,7 +3311,7 @@ NORET void R_signal_protect_error(void)
     RCNTXT cntxt;
     int oldpps = R_PPStackSize;
 
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&reset_pp_stack);
     cntxt.setContextEndData(&oldpps);
@@ -3320,7 +3320,7 @@ NORET void R_signal_protect_error(void)
 	R_PPStackSize = R_RealPPStackSize;
     errorcall(R_NilValue, _("protect(): protection stack overflow"));
 
-    endcontext(&cntxt); /* not reached */
+    RCNTXT::endcontext(cntxt); /* not reached */
 }
 
 NORET void R_signal_unprotect_error(void)

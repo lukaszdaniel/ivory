@@ -397,7 +397,7 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(!con->open(con)) error(_("cannot open the connection"));
 	    strcpy(con->mode, mode);
 	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
 	    cntxt.setContextEnd(&con_cleanup);
 	    cntxt.setContextEndData(con);
@@ -412,7 +412,7 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 		havewarned = TRUE;
 	    }
 	}
-	if(!wasopen) {endcontext(&cntxt); con->close(con);}
+	if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
     }
     else { // ifile == 1 : "Stdout"
 	for (int i = 0; i < LENGTH(tval); i++)
@@ -483,7 +483,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(!con->open(con)) error(_("cannot open the connection"));
 		strcpy(con->mode, mode);
 		/* Set up a context which will close the connection on error */
-		begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			     R_NilValue, R_NilValue);
 		cntxt.setContextEnd(&con_cleanup);
 		cntxt.setContextEndData(con);
@@ -519,7 +519,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 		if (!wasopen)
 		{
-			endcontext(&cntxt);
+			RCNTXT::endcontext(cntxt);
 			con->close(con);
 		}
 	}

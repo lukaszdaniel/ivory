@@ -111,7 +111,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    parseError(R_NilValue, R_ParseError);
 	    break;
 	case PARSE_EOF:
-	    endcontext(&cntxt);
+	    RCNTXT::endcontext(cntxt);
 	    R_FinalizeSrcRefState();
 	    return;
 	    break;
@@ -1298,22 +1298,22 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* browser prompt.  The (optional) second one */
     /* acts as a target for error returns. */
 
-    begincontext(&returncontext, CTXT_BROWSER, call, rho,
+    RCNTXT::begincontext(returncontext, CTXT_BROWSER, call, rho,
 		 R_BaseEnv, argList, R_NilValue);
     if (!SETJMP(returncontext.getCJmpBuf())) {
-	begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
+	RCNTXT::begincontext(thiscontext, CTXT_RESTART, R_NilValue, rho,
 		     R_BaseEnv, R_NilValue, R_NilValue);
 	if (SETJMP(thiscontext.getCJmpBuf())) {
-	    SET_RESTART_BIT_ON(thiscontext.getCallFlag());
+		thiscontext.setRestartBitOn();
 	    R_ReturnedValue = R_NilValue;
 	    R_Visible = false;
 	}
 	R_GlobalContext = &thiscontext;
-	R_InsertRestartHandlers(&thiscontext, "browser");
+	RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
 	R_ReplConsole(rho, savestack, browselevel+1);
-	endcontext(&thiscontext);
+	RCNTXT::endcontext(thiscontext);
     }
-    endcontext(&returncontext);
+    RCNTXT::endcontext(returncontext);
 
     /* Reset the interpreter state. */
 

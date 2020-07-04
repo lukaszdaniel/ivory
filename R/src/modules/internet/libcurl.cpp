@@ -608,7 +608,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 		setprogressbar(pbar.pb, 0);
 		settext(pbar.wprog, _("Download progress"));
 		show(pbar.wprog);
-		begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
+		RCNTXT::begincontext((pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 			     R_NilValue, R_NilValue, R_NilValue);
 		pbar.cntxt.setContextEnd(&doneprogressbar);
 		pbar.cntxt.setContextEndData(&pbar);
@@ -657,7 +657,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_Busy(0);
 #ifdef _WIN32
     if (R_Interactive && !quiet && nurls<=1) {
-	endcontext(&(pbar.cntxt));
+	RCNTXT::endcontext((pbar.cntxt));
 	doneprogressbar(&pbar);
     } else if (total > 0.) {
 	REprintf("\n");

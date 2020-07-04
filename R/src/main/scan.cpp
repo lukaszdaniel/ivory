@@ -962,7 +962,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
-    begincontext(&cntxt, CTXT_CCODE, R_GlobalContext->getCall(), R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_GlobalContext->getCall(), R_BaseEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&scan_cleanup);
     cntxt.setContextEndData(&data);
@@ -986,7 +986,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "what");
     }
     PROTECT(ans);
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     /* we might have a character that was unscanchar-ed.
        So pushback if possible */

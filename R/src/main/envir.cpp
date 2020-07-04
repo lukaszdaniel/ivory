@@ -1531,7 +1531,7 @@ HIDDEN SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 */
 
 #ifdef UNUSED
-SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
+SEXP RCNTXT::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
     while (cptr != R_ToplevelContext) {
@@ -2094,7 +2094,7 @@ HIDDEN SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(CADR(args)) == REALSXP || TYPEOF(CADR(args)) == INTSXP) {
 	where = asInteger(CADR(args));
-	genv = R_sysframe(where, R_GlobalContext);
+	genv = R_GlobalContext->R_sysframe(where);
     }
     else if (TYPEOF(CADR(args)) == NILSXP) {
 	error(_("use of NULL environment is defunct"));

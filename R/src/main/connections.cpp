@@ -3918,7 +3918,7 @@ HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -3979,12 +3979,12 @@ HIDDEN SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	    warning(_("line %d appears to contain an embedded nul"), nread + 1);
 	if(c == R_EOF) goto no_more_lines;
     }
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
     UNPROTECT(1);
     free(buf);
     return ans;
 no_more_lines:
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
     if(nbuf > 0) { /* incomplete last line */
 	if(con->text && !con->blocking &&
 	   (strcmp(con->connclass, "gzfile") != 0)) {
@@ -4039,7 +4039,7 @@ HIDDEN SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -4074,7 +4074,7 @@ HIDDEN SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!wasopen) {
-    	endcontext(&cntxt);
+    	RCNTXT::endcontext(cntxt);
     	checkClose(con);
     }
     return R_NilValue;
@@ -4204,7 +4204,7 @@ HIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(!con->open(con)) error(_("cannot open the connection"));
 	    strcpy(con->mode, mode);
 	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
 	    cntxt.setContextEnd(&con_cleanup);
 	    cntxt.setContextEndData(con);
@@ -4405,7 +4405,7 @@ HIDDEN SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
     if(m < n)
 	ans = xlengthgets(ans, m);
     UNPROTECT(1);
@@ -4460,7 +4460,7 @@ HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -4645,7 +4645,7 @@ HIDDEN SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!wasopen) {
-        endcontext(&cntxt);
+        RCNTXT::endcontext(cntxt);
         checkClose(con);
     }
     if(isRaw) {
@@ -4787,7 +4787,7 @@ HIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(!con->open(con)) error(_("cannot open the connection"));
 	    strcpy(con->mode, mode);
 	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
 	    cntxt.setContextEnd(&con_cleanup);
 	    cntxt.setContextEndData(con);
@@ -4815,7 +4815,7 @@ HIDDEN SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else break;
     }
 
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
     if(m < n) {
 	PROTECT(ans = xlengthgets(ans, m));
 	UNPROTECT(1);
@@ -4913,7 +4913,7 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -4990,7 +4990,7 @@ HIDDEN SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     if(!wasopen) {
-        endcontext(&cntxt);
+        RCNTXT::endcontext(cntxt);
         checkClose(con);
     }
     if(isRaw) {

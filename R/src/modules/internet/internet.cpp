@@ -617,7 +617,7 @@ static SEXP in_do_download(SEXP args)
 		    setprogressbar(pbar.pb, 0);
 		    settext(pbar.wprog, _("Download progress"));
 		    show(pbar.wprog);
-		    begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
+		    RCNTXT::begincontext((pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 				 R_NilValue, R_NilValue, R_NilValue);
 		    pbar.cntxt.setContextEnd(&doneprogressbar);
 		    pbar.cntxt.setContextEndData(&pbar);
@@ -678,7 +678,7 @@ static SEXP in_do_download(SEXP args)
 #ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
-		endcontext(&(pbar.cntxt));
+		RCNTXT::endcontext((pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
 #endif
@@ -735,7 +735,7 @@ static SEXP in_do_download(SEXP args)
 		show(pbar.wprog);
 
 		/* set up a context which will close progressbar on error. */
-		begincontext(&(pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
+		RCNTXT::begincontext((pbar.cntxt), CTXT_CCODE, R_NilValue, R_NilValue,
 			     R_NilValue, R_NilValue, R_NilValue);
 		pbar.cntxt.setContextEnd(&doneprogressbar);
 		pbar.cntxt.setContextEndData(&pbar);
@@ -795,7 +795,7 @@ static SEXP in_do_download(SEXP args)
 #ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
-		endcontext(&(pbar.cntxt));
+		RCNTXT::endcontext((pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
 #endif

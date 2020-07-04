@@ -1969,14 +1969,14 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!wasopen) {
 	    if(!con->open(con)) error(_("cannot open the connection"));
 	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
 	    cntxt.setContextEnd(&con_cleanup);
 	    cntxt.setContextEndData(con);
 	}
 	if(!con->canread) error(_("cannot read from this connection"));
 	s = R_ParseRd(con, &status, source, fragment, macros);
-	if(!wasopen) endcontext(&cntxt);
+	if(!wasopen) RCNTXT::endcontext(cntxt);
 	PopState();
 	if (status != PARSE_OK) parseError(call, R_ParseError);
     }

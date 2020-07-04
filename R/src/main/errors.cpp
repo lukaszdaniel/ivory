@@ -158,18 +158,18 @@ static void onintrEx(Rboolean resumeOK)
 	SEXP rho = R_GlobalContext->workingEnvironment();
 	int dbflag = RDEBUG(rho);
 	RCNTXT restartcontext;
-	begincontext(&restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
+	RCNTXT::begincontext(restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
 		     R_BaseEnv, R_NilValue, R_NilValue);
 	if (SETJMP(restartcontext.getCJmpBuf())) {
 	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 	    R_ReturnedValue = R_NilValue;
 	    R_Visible = false;
-	    endcontext(&restartcontext);
+	    RCNTXT::endcontext(restartcontext);
 	    return;
 	}
-	R_InsertRestartHandlers(&restartcontext, "resume");
+	RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
 	signalInterrupt();
-	endcontext(&restartcontext);
+	RCNTXT::endcontext(restartcontext);
     }
     else signalInterrupt();
 
@@ -224,7 +224,7 @@ HIDDEN RETSIGTYPE Rf_onsigusr1(int dummy)
        get used by what are conceptually concurrent computations, this
        is a bit like telling all active threads to terminate and clean
        up on the way out. */
-    R_run_onexits(NULL);
+    RCNTXT::R_run_onexits();
 
     R_CleanUp(SA_SAVE, 2, 1); /* quit, save,  .Last, status=2 */
 }
@@ -438,7 +438,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
 
     /* set up a context which will restore inWarning if there is an exit */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&reset_inWarning);
 
     inWarning = 1;
@@ -495,7 +495,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	}
     }
     /* else:  w <= -1 */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     inWarning = 0;
 }
 
@@ -561,7 +561,7 @@ void Rf_PrintWarnings(const char *hdr)
     }
 
     /* set up a context which will restore inPrintWarnings if there is an exit */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&cleanup_PrintWarnings);
 
     inPrintWarnings = 1;
@@ -652,7 +652,7 @@ void Rf_PrintWarnings(const char *hdr)
     SET_SYMVALUE(install("last.warning"), s);
     UNPROTECT(2);
 
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     inPrintWarnings = 0;
     R_CollectWarnings = 0;
@@ -740,7 +740,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     }
 
     /* set up a context to restore inError value on exit */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&restore_inError);
     cntxt.setContextEndData(&oldInError);
     oldInError = inError;
@@ -844,7 +844,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
 
     /* not reached */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     inError = oldInError;
 }
 
@@ -951,7 +951,7 @@ static void jump_to_top_ex(Rboolean traceback,
     int haveHandler, oldInError;
 
     /* set up a context to restore inError value on exit */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&restore_inError);
     cntxt.setContextEndData(&oldInError);
@@ -1036,7 +1036,7 @@ static void jump_to_top_ex(Rboolean traceback,
 	}
     }
 
-    R_jumpctxt(R_ToplevelContext, 0, nullptr);
+    R_ToplevelContext->R_jumpctxt(0, nullptr);
 }
 
 NORET void Rf_jump_to_toplevel()
@@ -1407,7 +1407,7 @@ void R_ReturnOrRestart(SEXP val, SEXP env, Rboolean restart)
     for (RCNTXT *c = R_GlobalContext; c; c = c->nextContext()) {
 	if (c->getCallFlag() & mask && c->workingEnvironment() == env)
 	    findcontext(mask, env, val);
-	else if (restart && IS_RESTART_BIT_SET(c->getCallFlag()))
+	else if (restart && c->isRestartBitSet())
 	    findcontext(CTXT_RESTART, c->workingEnvironment(), R_RestartToken);
 	else if (c->getCallFlag() == CTXT_TOPLEVEL)
 	    error(_("no function to return from, jumping to top level"));
@@ -1420,7 +1420,7 @@ NORET void R_JumpToToplevel(Rboolean restart)
 
     /* Find the target for the jump */
     for (c = R_GlobalContext; c != NULL; c = c->nextContext()) {
-	if (restart && IS_RESTART_BIT_SET(c->getCallFlag()))
+	if (restart && c->isRestartBitSet())
 	    findcontext(CTXT_RESTART, c->workingEnvironment(), R_RestartToken);
 	else if (c->getCallFlag() == CTXT_TOPLEVEL)
 	    break;
@@ -1428,7 +1428,7 @@ NORET void R_JumpToToplevel(Rboolean restart)
     if (c != R_ToplevelContext)
 	warning(_("top level inconsistency?"));
 
-    R_jumpctxt(R_ToplevelContext, CTXT_TOPLEVEL, nullptr);
+    R_ToplevelContext->R_jumpctxt(CTXT_TOPLEVEL, nullptr);
 }
 #endif
 
@@ -1612,7 +1612,7 @@ HIDDEN void R_FixupExitingHandlerResult(SEXP result)
 {
     /* The internal error handling mechanism stores the error message
        in 'errbuf'.  If an on.exit() action is processed while jumping
-       to an exiting handler for such an error, then endcontext()
+       to an exiting handler for such an error, then RCNTXT::endcontext()
        calls R_FixupExitingHandlerResult to save the error message
        currently in the buffer before processing the on.exit
        action. This is in case an error occurs in the on.exit action
@@ -1883,13 +1883,13 @@ static void signalInterrupt(void)
     }
 }
 
-HIDDEN void R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
+HIDDEN void RCNTXT::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry, name;
 
     if ((cptr->getHandlerStack() != R_HandlerStack ||
 	 cptr->getRestartStack() != R_RestartStack)) {
-	if (IS_RESTART_BIT_SET(cptr->getCallFlag()))
+	if (cptr->isRestartBitSet())
 	    return;
 	else
 	    error(_("handler or restart stack mismatch in old restart"));
@@ -2003,7 +2003,7 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 		R_RestartStack = CDR(R_RestartStack);
 		if (TYPEOF(exit) == EXTPTRSXP) {
 		    RCNTXT *c = (RCNTXT *) R_ExternalPtrAddr(exit);
-		    R_JumpToContext(c, CTXT_RESTART, R_RestartToken);
+		    RCNTXT::R_JumpToContext(c, CTXT_RESTART, R_RestartToken);
 		}
 		else findcontext(CTXT_FUNCTION, exit, arglist);
 	    }
@@ -2024,8 +2024,8 @@ HIDDEN SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (R_GlobalContext == R_ToplevelContext ||
 		!(R_GlobalContext->getCallFlag() & CTXT_FUNCTION))
 		error(_("not in a try context"));
-	SET_RESTART_BIT_ON(R_GlobalContext->getCallFlag());
-	R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
+	R_GlobalContext->setRestartBitOn();
+	RCNTXT::R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
 	return R_NilValue;
 }
 

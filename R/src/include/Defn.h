@@ -117,7 +117,7 @@ enum CharsetBit
 #define HASHASH_MASK 1
 /**** HASHASH uses the first bit -- see HASHASH_MASK defined below */
 
-extern "C" {
+
 #ifdef USE_RINTERNALS
 #define IS_BYTES(x) ((x)->sxpinfo.gp & BYTES_MASK)
 #define SET_BYTES(x) (((x)->sxpinfo.gp) |= BYTES_MASK)
@@ -151,11 +151,11 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
 #include <Errormsg.h>
 
-extern void R_ProcessEvents(void);
+extern "C" void R_ProcessEvents(void);
 #ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
-} //extern "C"
+
 
 #ifdef R_USE_SIGNALS
 #ifdef _WIN32
@@ -245,7 +245,7 @@ constexpr long R_VSIZE = 67108864L;
 #include <cstdlib>
 #include <cstring>
 
-extern "C" {
+
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
 extern char *strdup(const char *s1);
@@ -546,6 +546,46 @@ struct RPRSTACK
     RPRSTACK *next;
 };
 
+/* The Various Context Types.
+
+ * In general the type is a bitwise OR of the values below.
+ * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
+ * Only functions should have the third bit turned on;
+ * this allows us to move up the context stack easily
+ * with either RETURN's or GENERIC's or RESTART's.
+ * If you add a new context type for functions make sure
+ *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
+ */
+enum CTXT
+{
+    CTXT_TOPLEVEL = 0,
+    CTXT_NEXT = 1,
+    CTXT_BREAK = 2,
+    CTXT_LOOP = 3, /* break OR next target */
+    CTXT_FUNCTION = 4,
+    CTXT_CCODE = 8,
+    CTXT_RETURN = 12,
+    CTXT_BROWSER = 16,
+    CTXT_GENERIC = 20,
+    CTXT_RESTART = 32,
+    CTXT_BUILTIN = 64, /* used in profiling */
+    CTXT_UNWIND = 128
+};
+
+/*    1 2 4 8 ...
+TOP   0 0 0 0 0 0  = 0
+NEX   1 0 0 0 0 0  = 1
+BRE   0 1 0 0 0 0  = 2
+LOO   1 1 0 0 0 0  = 3
+FUN   0 0 1 0 0 0  = 4
+CCO   0 0 0 1 0 0  = 8
+BRO   0 0 0 0 1 0  = 16
+RET   0 0 1 1 0 0  = 12
+GEN   0 0 1 0 1 0  = 20
+RES   0 0 0 0 0 0 1 = 32
+BUI   0 0 0 0 0 0 0 1 = 64
+*/
+
 /* Evaluation Context Structure */
 class RCNTXT
 {
@@ -580,6 +620,8 @@ class RCNTXT
     SEXP returnValue;   /* only set during on.exit calls */
     RCNTXT *jumptarget; /* target for a continuing jump */
     int jumpmask;       /* associated LONGJMP argument */
+    SEXP getCallWithSrcref();
+    RCNTXT *first_jump_target(int mask);
 
     public:
     RCNTXT() : nextcontext(nullptr), callflag(0), cjmpbuf(), cstacktop(0), evaldepth(0), promargs(nullptr),
@@ -646,51 +688,28 @@ class RCNTXT
     void setCall(SEXP call) { this->call = call; }
     bool getBrowserFinish() const { return this->browserfinish; }
     void setBrowserFinish(bool finish) { this->browserfinish = finish; }
+    bool isRestartBitSet() const { return (this->callflag & CTXT_RESTART); }
+    void setRestartBitOn() { this->callflag |= CTXT_RESTART; }
+    void setRestartBitOff() { this->callflag &= ~CTXT_RESTART; }
+    int R_sysparent(int n);
+    SEXP R_sysfunction(int n);
+    SEXP R_syscall(int n);
+    void R_restore_globals();
+    static void R_run_onexits(RCNTXT *cptr = nullptr);
+    NORET void R_jumpctxt(int mask, SEXP val);
+    SEXP R_sysframe(int n);
+    int Rf_framedepth();
+    static void begincontext(RCNTXT &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+    static void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+    static SEXP dynamicfindVar(SEXP, RCNTXT *);
+    static void endcontext(RCNTXT &);
+    static void endcontext(RCNTXT *);
+    static void R_InsertRestartHandlers(RCNTXT *, const char *);
+    NORET static void R_JumpToContext(RCNTXT *, int, SEXP);
+    static RCNTXT *R_findExecContext(RCNTXT *, SEXP);
+    static RCNTXT *R_findParentContext(RCNTXT *, int);
+    static RCNTXT *findProfContext(RCNTXT *cptr);
 };
-
-/* The Various Context Types.
-
- * In general the type is a bitwise OR of the values below.
- * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
- * Only functions should have the third bit turned on;
- * this allows us to move up the context stack easily
- * with either RETURN's or GENERIC's or RESTART's.
- * If you add a new context type for functions make sure
- *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
- */
-enum CTXT
-{
-    CTXT_TOPLEVEL = 0,
-    CTXT_NEXT = 1,
-    CTXT_BREAK = 2,
-    CTXT_LOOP = 3, /* break OR next target */
-    CTXT_FUNCTION = 4,
-    CTXT_CCODE = 8,
-    CTXT_RETURN = 12,
-    CTXT_BROWSER = 16,
-    CTXT_GENERIC = 20,
-    CTXT_RESTART = 32,
-    CTXT_BUILTIN = 64, /* used in profiling */
-    CTXT_UNWIND = 128
-};
-
-/*    1 2 4 8 ...
-TOP   0 0 0 0 0 0  = 0
-NEX   1 0 0 0 0 0  = 1
-BRE   0 1 0 0 0 0  = 2
-LOO   1 1 0 0 0 0  = 3
-FUN   0 0 1 0 0 0  = 4
-CCO   0 0 0 1 0 0  = 8
-BRO   0 0 0 0 1 0  = 16
-RET   0 0 1 1 0 0  = 12
-GEN   0 0 1 0 1 0  = 20
-RES   0 0 0 0 0 0 1 = 32
-BUI   0 0 0 0 0 0 0 1 = 64
-*/
-
-inline int IS_RESTART_BIT_SET(const int &flags) { return ((flags)&CTXT_RESTART); }
-inline void SET_RESTART_BIT_ON(int &flags) { (flags |= CTXT_RESTART); }
-inline void SET_RESTART_BIT_OFF(int &flags) { (flags &= ~CTXT_RESTART); }
 #endif // R_USE_SIGNALS
 
 /* Miscellaneous Definitions */
@@ -746,7 +765,7 @@ constexpr int R_EOF = -1;
 #ifndef __R_Names__
 extern FUNTAB R_FunTab[]; /* Built in functions */
 #endif
-
+extern "C" {
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
@@ -968,6 +987,7 @@ extern0 int R_PCRE_study INI_as(-2);
 extern0 int R_PCRE_study INI_as(10);
 #endif
 extern0 int R_PCRE_limit_recursion;
+} // extern "C"
 
 #ifdef __MAIN__
 #undef extern
@@ -983,7 +1003,7 @@ extern0 int R_PCRE_limit_recursion;
 # define allocCharsxp		Rf_allocCharsxp
 # define asVecSize		Rf_asVecSize
 # define asXLength		Rf_asXLength
-# define begincontext		Rf_begincontext
+//# define begincontext		Rf_begincontext
 # define BindDomain		Rf_BindDomain
 # define check_stack_balance	Rf_check_stack_balance
 # define check1arg		Rf_check1arg
@@ -1008,13 +1028,13 @@ extern0 int R_PCRE_limit_recursion;
 # define DispatchGroup		Rf_DispatchGroup
 # define DispatchOrEval		Rf_DispatchOrEval
 # define DispatchAnyOrEval      Rf_DispatchAnyOrEval
-# define dynamicfindVar		Rf_dynamicfindVar
+//# define dynamicfindVar		Rf_dynamicfindVar
 # define EncodeChar             Rf_EncodeChar
 # define EncodeRaw              Rf_EncodeRaw
 # define EncodeReal2            Rf_EncodeReal2
 # define EncodeString           Rf_EncodeString
 # define EnsureString 		Rf_EnsureString
-# define endcontext		Rf_endcontext
+//# define endcontext		Rf_endcontext
 # define errorcall_cpy		Rf_errorcall_cpy
 # define ErrorMessage		Rf_ErrorMessage
 # define evalList		Rf_evalList
@@ -1148,14 +1168,14 @@ int R_ReadConsole(const char *, unsigned char *, int, int);
 void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
 void R_WriteConsoleEx(const char *, int, int);
 void R_ResetConsole(void);
-void R_FlushConsole(void);
-void R_ClearerrConsole(void);
+extern "C" void R_FlushConsole(void);
+extern "C" void R_ClearerrConsole(void);
 void R_Busy(int);
 int R_ShowFiles(int, const char **, const char **, const char *,
                 bool, const char *);
 int R_EditFiles(int, const char **, const char **, const char *);
 size_t R_ChooseFile(int, char *, size_t);
-char *R_HomeDir(void);
+extern "C" char *R_HomeDir(void);
 bool R_FileExists(const char *);
 bool R_HiddenFile(const char *);
 double R_FileMtime(const char *);
@@ -1297,10 +1317,10 @@ void Rf_InitS3DefaultTypes(void);
 void Rf_internalTypeCheck(SEXP, SEXP, SEXPTYPE);
 bool isMethodsDispatchOn(void);
 bool Rf_isValidName(const char *);
-NORET void Rf_jump_to_toplevel(void);
+extern "C" NORET void Rf_jump_to_toplevel(void);
 void Rf_KillAllDevices(void);
 SEXP Rf_levelsgets(SEXP, SEXP);
-void Rf_mainloop(void);
+extern "C" void Rf_mainloop(void);
 SEXP Rf_makeSubscript(SEXP, SEXP, R_xlen_t *, SEXP);
 SEXP Rf_markKnown(const char *, SEXP);
 SEXP Rf_mat2indsub(SEXP, SEXP, SEXP);
@@ -1321,8 +1341,8 @@ SEXP Rf_mkSYMSXP(SEXP, SEXP);
 SEXP Rf_mkTrue(void);
 const char *R_nativeEncoding(void);
 SEXP Rf_NewEnvironment(SEXP, SEXP, SEXP);
-void Rf_onintr(void);
-void Rf_onintrNoResume(void);
+extern "C" void Rf_onintr(void);
+extern "C" void Rf_onintrNoResume(void);
 RETSIGTYPE Rf_onsigusr1(int);
 RETSIGTYPE Rf_onsigusr2(int);
 R_xlen_t Rf_OneIndex(SEXP, SEXP, R_xlen_t, int, SEXP*, int, SEXP);
@@ -1337,9 +1357,9 @@ void Rf_PrintVersion(char *, size_t len);
 void Rf_PrintVersion_part_1(char *, size_t len);
 void Rf_PrintVersionString(char *, size_t len);
 void Rf_PrintWarnings(const char *hdr = nullptr);
-void process_site_Renviron(void);
-void process_system_Renviron(void);
-void process_user_Renviron(void);
+//extern "C" void process_site_Renviron(void);
+//extern "C" void process_system_Renviron(void);
+//extern "C" void process_user_Renviron(void);
 SEXP Rf_promiseArgs(SEXP, SEXP);
 void Rcons_vprintf(const char *, va_list);
 SEXP R_data_class(SEXP , bool);
@@ -1350,16 +1370,16 @@ SEXP R_NewHashedEnv(SEXP, SEXP);
 extern int R_Newhashpjw(const char *);
 FILE* R_OpenLibraryFile(const char *);
 SEXP R_Primitive(const char *);
-void R_RestoreGlobalEnv(void);
-void R_RestoreGlobalEnvFromFile(const char *, Rboolean);
-void R_SaveGlobalEnv(void);
-void R_SaveGlobalEnvToFile(const char *);
+extern "C" void R_RestoreGlobalEnv(void);
+extern "C" void R_RestoreGlobalEnvFromFile(const char *, Rboolean);
+extern "C" void R_SaveGlobalEnv(void);
+extern "C" void R_SaveGlobalEnvToFile(const char *);
 void R_SaveToFile(SEXP, FILE*, int);
 void R_SaveToFileV(SEXP, FILE*, int, int);
 bool R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
-void R_Suicide(const char *);
+extern "C" void R_Suicide(const char *);
 void R_getProcTime(double *data);
 bool R_isMissing(SEXP symbol, SEXP rho);
 const char *Rf_sexptype2char(SEXPTYPE type);
@@ -1383,23 +1403,25 @@ SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 bool Rf_usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
 SEXP Rf_vectorIndex(SEXP, SEXP, int, int, int, SEXP, bool);
 
-#ifdef R_USE_SIGNALS
-void Rf_begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP Rf_dynamicfindVar(SEXP, RCNTXT *);
-void Rf_endcontext(RCNTXT *);
-int Rf_framedepth(RCNTXT *);
-void R_InsertRestartHandlers(RCNTXT *, const char *);
-NORET void R_JumpToContext(RCNTXT *, int, SEXP);
-SEXP R_syscall(int, RCNTXT *);
-int R_sysparent(int, RCNTXT *);
-SEXP R_sysframe(int, RCNTXT *);
-SEXP R_sysfunction(int, RCNTXT *);
-RCNTXT *R_findExecContext(RCNTXT *, SEXP);
-RCNTXT *R_findParentContext(RCNTXT *, int);
+// #ifdef R_USE_SIGNALS
+// void Rf_begincontext(RCNTXT &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+// void Rf_begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+// SEXP Rf_dynamicfindVar(SEXP, RCNTXT *);
+// void Rf_endcontext(RCNTXT &);
+// void Rf_endcontext(RCNTXT *);
+// int Rf_framedepth(RCNTXT *);
+// void R_InsertRestartHandlers(RCNTXT *, const char *);
+// NORET void R_JumpToContext(RCNTXT *, int, SEXP);
+// SEXP R_syscall(int, RCNTXT *);
+// int R_sysparent(int, RCNTXT *);
+// SEXP R_sysframe(int, RCNTXT *);
+// SEXP R_sysfunction(int, RCNTXT *);
+// RCNTXT *R_findExecContext(RCNTXT *, SEXP);
+// RCNTXT *R_findParentContext(RCNTXT *, int);
 
-void R_run_onexits(RCNTXT *);
-NORET void R_jumpctxt(RCNTXT *, int, SEXP);
-#endif
+// void R_run_onexits(RCNTXT *);
+// NORET void R_jumpctxt(RCNTXT *, int, SEXP);
+// #endif
 
 /* ../main/bind.cpp */
 SEXP Rf_ItemName(SEXP, R_xlen_t);
@@ -1472,7 +1494,7 @@ size_t ucs2Mblen(R_ucs2_t *in); */
 size_t Rf_utf8toucs(wchar_t *wc, const char *s);
 size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 size_t Rf_ucstomb(char *s, const unsigned int wc);
-size_t Rf_ucstoutf8(char *s, const unsigned int wc);
+//size_t Rf_ucstoutf8(char *s, const unsigned int wc);
 size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n);
 size_t Rf_wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
@@ -1593,7 +1615,7 @@ extern void *alloca(size_t);
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
-} //extern "C"
+
 
 #endif /* DEFN_H_ */
 /*

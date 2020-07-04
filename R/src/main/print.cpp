@@ -822,7 +822,7 @@ HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData *data)
 
     WinCheckUTF8();
     if (WinUTF8out != saveWinUTF8out) {
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 	             R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&print_cleanup);
 	cntxt.setContextEndData(&saveWinUTF8out);
@@ -967,7 +967,7 @@ done:
 
 #ifdef _WIN32
     if (havecontext)
-	endcontext(&cntxt);
+	RCNTXT::endcontext(cntxt);
     print_cleanup(&saveWinUTF8out);
 #endif
     return; /* needed when Win32 is not defined */

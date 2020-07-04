@@ -3539,10 +3539,10 @@ void R_InitSrcRefState(RCNTXT* cptr)
 	/* re-use data, text, ids arrays */
         ParseState.prevState = NULL;
     /* set up context _after_ PutSrcRefState */
-    begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cptr->setContextEnd(&FinalizeSrcRefStateOnError);
-    cptr->setContextEndData(NULL);
+    cptr->setContextEndData(nullptr);
     ParseState.keepSrcRefs = FALSE;
     ParseState.keepParseData = TRUE;
     ParseState.didAttach = FALSE;
@@ -3750,7 +3750,7 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	}
     }
     PROTECT(R_CurrentExpr);
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* R_CurrentExpr */
     return R_CurrentExpr;
@@ -3801,7 +3801,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 	    UNPROTECT(1); /* t */
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData)
 	        finalizeData();
-	    endcontext(&cntxt);
+	    RCNTXT::endcontext(cntxt);
 	    R_FinalizeSrcRefState();	    
 	    return R_NilValue;
 	    break;
@@ -3824,7 +3824,7 @@ finish:
     }
     UNPROTECT(2); /* t, rval */
     PROTECT(rval);
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
     *status = PARSE_OK;
@@ -3958,7 +3958,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	case PARSE_ERROR:
 	    UNPROTECT(1); /* t */
 	    R_IoBufferWriteReset(buffer);
-	    endcontext(&cntxt);
+	    RCNTXT::endcontext(cntxt);
 	    R_FinalizeSrcRefState();
 	    return R_NilValue;
 	    break;
@@ -3980,7 +3980,7 @@ finish:
     }
     UNPROTECT(2); /* t, rval */
     PROTECT(rval);
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
     *status = PARSE_OK;

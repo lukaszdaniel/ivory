@@ -1244,7 +1244,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	cptr = cptr->nextContext();
     }
 
-    PROTECT(e = duplicate(R_syscall(0, cptr)));
+    PROTECT(e = duplicate(cptr->R_syscall(0)));
     SETCAR(e, fun);
     /* evaluate a call the non-generic with the same arguments and from
        the same environment as the call to the generic version */

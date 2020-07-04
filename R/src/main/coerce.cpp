@@ -1652,7 +1652,7 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     RCNTXT cntxt;
 
     /* set up context to recover known_to_be_* variable */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.setContextEnd(&parse_cleanup);
     cntxt.setContextEndData(&pci);
@@ -1686,7 +1686,7 @@ HIDDEN SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     UNPROTECT(2);
     return ans;

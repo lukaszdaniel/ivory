@@ -1031,13 +1031,13 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP a, t, obj, method, rho, ans;
     SEXPTYPE mode;
     int deparse_level;
-    Rboolean anyS4 = FALSE;
+    bool anyS4 = false;
     struct BindData data;
     char buf[512];
 
     /* since R 2.2.0: first argument "deparse.level" */
     deparse_level = asInteger(eval(CAR(args), env));
-    Rboolean tryS4 = (Rboolean) (deparse_level >= 0);
+    bool tryS4 = (deparse_level >= 0);
     /* NB: negative deparse_level should otherwise be equivalent to deparse_level == 0,
      * --  as cbind(), rbind() below only check for '== 1' and '== 2'
      * {FIXME: methods should do same} */
@@ -1077,7 +1077,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     method = R_NilValue;
     for (a = CDR(args); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
 	PROTECT(obj = eval(CAR(a), env));
-	if (tryS4 && !anyS4 && isS4(obj)) anyS4 = TRUE;
+	if (tryS4 && !anyS4 && isS4(obj)) anyS4 = true;
 	if (isObject(obj)) {
 	    SEXP classlist = PROTECT(R_data_class2(obj));
 	    for (int i = 0; i < length(classlist); i++) {
@@ -1097,7 +1097,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1);
     }
 
-    tryS4 = (Rboolean) (anyS4 && (method == R_NilValue));
+    tryS4 = (anyS4 && (method == R_NilValue));
     if (tryS4) {
 	// keep 'deparse.level' as first arg and *name* it:
 	SET_TAG(args, install("deparse.level"));
@@ -1163,21 +1163,20 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     return a;
 }
 
-
 static void SetRowNames(SEXP dimnames, SEXP x)
 {
-    if (TYPEOF(dimnames) == VECSXP)
-	SET_VECTOR_ELT(dimnames, 0, x);
-    else if (TYPEOF(dimnames) == LISTSXP)
-	SETCAR(dimnames, x);
+	if (TYPEOF(dimnames) == VECSXP)
+		SET_VECTOR_ELT(dimnames, 0, x);
+	else if (TYPEOF(dimnames) == LISTSXP)
+		SETCAR(dimnames, x);
 }
 
 static void SetColNames(SEXP dimnames, SEXP x)
 {
-    if (TYPEOF(dimnames) == VECSXP)
-	SET_VECTOR_ELT(dimnames, 1, x);
-    else if (TYPEOF(dimnames) == LISTSXP)
-	SETCADR(dimnames, x);
+	if (TYPEOF(dimnames) == VECSXP)
+		SET_VECTOR_ELT(dimnames, 1, x);
+	else if (TYPEOF(dimnames) == LISTSXP)
+		SETCADR(dimnames, x);
 }
 
 /*

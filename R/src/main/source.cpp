@@ -227,7 +227,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     RCNTXT cntxt;
     /* set up context to recover known_to_be_* and to close connection on
        error if opened by do_parse */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&parse_cleanup);
     cntxt.setContextEndData(&pci);
@@ -302,7 +302,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
     PROTECT(s);
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     UNPROTECT(3);
     return s;
 }

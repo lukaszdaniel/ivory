@@ -2535,7 +2535,7 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -2547,7 +2547,7 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_InitConnOutPStream(&out, con, type, version, hook, fun);
     R_Serialize(object, &out);
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
 
     return R_NilValue;
 }
@@ -2584,7 +2584,7 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -2597,7 +2597,7 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);    
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
-	endcontext(&cntxt);
+	RCNTXT::endcontext(cntxt);
 	con->close(con);
 	UNPROTECT(1);
     }
@@ -2840,7 +2840,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	SEXP val;
 
 	/* set up a context which will free the buffer if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(reinterpret_cast<void(*)(void*)>(&free_mem_buffer));
 	cntxt.setContextEndData(&mbs);
@@ -2852,7 +2852,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 
 	/* end the context after anything that could raise an error but before
 	   calling OutTerm so it doesn't get called twice */
-	endcontext(&cntxt);
+	RCNTXT::endcontext(cntxt);
 
 	UNPROTECT(1); /* val */
 	return val;

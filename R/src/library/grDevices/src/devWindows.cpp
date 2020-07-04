@@ -3143,7 +3143,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     setstatus(G_("Locator is active"));
 
     /* set up a context which will clean up if there's an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&donelocator);
     cntxt.setContextEndData(xd);
@@ -3166,7 +3166,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     dd->onExit = NULL;
     xd->cntxt = NULL;
 
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     donelocator((void *)xd);
 
     if (xd->clicked == 1) {
@@ -3782,7 +3782,7 @@ static void GA_onExit(pDevDesc dd)
     xd->confirmation = FALSE;
     dd->gettingEvent = FALSE;
 
-    if (xd->cntxt) endcontext((RCNTXT *)xd->cntxt);
+    if (xd->cntxt) RCNTXT::endcontext((RCNTXT *)xd->cntxt);
     if (xd->locator) donelocator((void *)xd);
 
     addto(xd->gawin);

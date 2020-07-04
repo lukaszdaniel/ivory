@@ -487,7 +487,7 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
     timeout_init();
 
     /* set up a context to recover from R error between popen and pclose */
-    begincontext(&tost.cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(tost.cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     tost.cntxt.setContextEndData(nullptr);
     tost.cntxt.setContextEnd(&timeout_cend);
@@ -552,7 +552,7 @@ int R_pclose_timeout(FILE *fp)
     int wstatus;
 
     wres = timeout_wait(&wstatus);
-    endcontext(&tost.cntxt);
+    RCNTXT::endcontext(tost.cntxt);
 
     if (wres < 0)
 	return -1;

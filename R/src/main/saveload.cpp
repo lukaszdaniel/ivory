@@ -1132,7 +1132,7 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 
     m->OutInit(fp, d);
     /* set up a context which will call OutTerm if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&newdatasave_cleanup);
     cntxt.setContextEndData(&cinfo);
@@ -1158,7 +1158,7 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 
     /* end the context after anything that could raise an error but before
        calling OutTerm so it doesn't get called twice */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     m->OutTerm(fp, d);
     UNPROTECT(2);
@@ -1329,7 +1329,7 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
     m->InInit(fp, d);
 
     /* set up a context which will call InTerm if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&newdataload_cleanup);
     cntxt.setContextEndData(&cinfo);
@@ -1364,7 +1364,7 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
 
     /* end the context after anything that could raise an error but before
        calling InTerm so it doesn't get called twice */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     /* Wrap up */
     m->InTerm(fp, d);
@@ -2077,7 +2077,7 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* set up a context which will close the file if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&saveload_cleanup);
     cntxt.setContextEndData(fp);
@@ -2104,7 +2104,7 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(1);
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     fclose(fp);
     return R_NilValue;
 }
@@ -2187,7 +2187,7 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp) error(_("unable to open file '%s'"), translateChar(STRING_ELT(fname, 0)));
 
     /* set up a context which will close the file if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&saveload_cleanup);
     cntxt.setContextEndData(fp);
@@ -2196,7 +2196,7 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     fclose(fp);
     UNPROTECT(1);
     return val;
@@ -2378,7 +2378,7 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, mode);
 	/* set up a context which will close the connection
 	   if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -2463,7 +2463,7 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, mode);
 	/* set up a context which will close the connection
 	   if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&con_cleanup);
 	cntxt.setContextEndData(con);
@@ -2502,7 +2502,7 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!wasopen) {
 	    /* PROTECT is paranoia: some close() method might allocate */
 	    PROTECT(res);
-	    endcontext(&cntxt);
+	    RCNTXT::endcontext(cntxt);
 	    con->close(con);
 	    UNPROTECT(1);
 	}

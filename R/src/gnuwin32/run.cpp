@@ -605,13 +605,13 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
     if (pi.pi.hProcess) {
 	if (wait) {
 	    RCNTXT cntxt;
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	    cntxt.setContextEnd(&terminate_process);
 	    cntxt.setContextEndData(&pi);
 	    DWORD timeoutMillis = (DWORD) (1000*timeout);
 	    ret = pwait2(&pi, timeoutMillis, timedout);
-	    endcontext(&cntxt);
+	    RCNTXT::endcontext(cntxt);
 	    snprintf(RunError, 501, _("Exit code was %d"), ret);
 	    ret &= 0xffff;
 	} else ret = 0;

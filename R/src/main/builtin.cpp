@@ -623,7 +623,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&cat_cleanup);
     cntxt.setContextEndData(&ci);
@@ -707,7 +707,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* end the context after anything that could raise an error but before
        doing the cleanup so the cleanup doesn't get done twice */
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
 
     cat_cleanup(&ci);
 

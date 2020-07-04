@@ -1106,7 +1106,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
        must not produce Rgui escapes (do_encodeString may get called as part
        of print dispatch with WinUTF8out being already set to TRUE). */
     if (WinUTF8out) {
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.setContextEnd(&encode_cleanup);
 	havecontext = TRUE;
@@ -1130,7 +1130,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef _WIN32
     if (havecontext) {
 	encode_cleanup(NULL);
-	endcontext(&cntxt);
+	RCNTXT::endcontext(cntxt);
     }
 #endif
     UNPROTECT(1);

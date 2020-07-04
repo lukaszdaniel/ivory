@@ -1105,7 +1105,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     wi.con = con;
     wi.wasopen = wasopen;
     wi.buf = &strBuf;
-    begincontext(&cntxt, CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+    RCNTXT::begincontext(cntxt, CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.setContextEnd(&wt_cleanup);
     cntxt.setContextEndData(&wi);
@@ -1184,7 +1184,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
     }
-    endcontext(&cntxt);
+    RCNTXT::endcontext(cntxt);
     wt_cleanup(&wi);
     return R_NilValue;
 }
