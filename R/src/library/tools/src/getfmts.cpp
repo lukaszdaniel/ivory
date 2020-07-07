@@ -49,13 +49,15 @@ SEXP getfmts(SEXP format)
 
     SEXP res = PROTECT(allocVector(STRSXP, MAXNARGS));
 
-#define SET_RESULT(n, s) {						\
-     if (n >= MAXNARGS) error(n_("only %d argument is allowed", "only %d arguments are allowed", MAXNARGS), MAXNARGS); \
-	maxlen = (n) < maxlen ? maxlen : (n) + 1;			\
-	SET_STRING_ELT(res, (n), mkChar(s));				\
-    }
+#define SET_RESULT(n, s)                                                                                   \
+	{                                                                                                      \
+		if (n >= MAXNARGS)                                                                                 \
+			error(n_("only %d argument is allowed", "only %d arguments are allowed", MAXNARGS), MAXNARGS); \
+		maxlen = (n) < maxlen ? maxlen : (n) + 1;                                                          \
+		SET_STRING_ELT(res, (n), mkChar(s));                                                               \
+	}
 
-    if (!isString(format)) error(_("'%s' argument is not a character vector"), "fmt");
+	if (!isString(format)) error(_("'%s' argument is not a character vector"), "fmt");
     nfmt = LENGTH(format);
     if (nfmt != 1) 
         error(_("'%s' argument must be length 1"), "fmt");

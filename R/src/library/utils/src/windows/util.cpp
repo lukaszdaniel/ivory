@@ -123,7 +123,7 @@ SEXP dllversion(SEXP path)
     if (dwVerInfoSize) {
 	BOOL  fRet;
 	LPSTR lpstrVffInfo;
-	LPSTR lszVer = NULL;
+	LPSTR lszVer = nullptr;
 	UINT  cchVer = 0;
 
 	lpstrVffInfo = (LPSTR) malloc(dwVerInfoSize);
@@ -157,7 +157,7 @@ SEXP getClipboardFormats(void)
     SEXP ans = R_NilValue;
     int j, size, format = 0;
 
-    if(OpenClipboard(NULL)) {
+    if(OpenClipboard(nullptr)) {
 	size = CountClipboardFormats();
 	PROTECT(ans = allocVector(INTSXP, size));
 	for (j = 0; j < size; j++) {
@@ -234,7 +234,7 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
     format = asInteger(sformat);
     raw = asLogical(sraw);
 
-    if(OpenClipboard(NULL)) {
+    if(OpenClipboard(nullptr)) {
 	if(IsClipboardFormatAvailable(format) &&
 	   (hglb = GetClipboardData(format)) &&
 	   (pc = (const char *) GlobalLock(hglb))) {
@@ -316,7 +316,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 	    }
 
 	    GlobalUnlock(hglb);
-	    if (!OpenClipboard(NULL) || !EmptyClipboard()) {
+	    if (!OpenClipboard(nullptr) || !EmptyClipboard()) {
 		warning(_("unable to open the clipboard"));
 		GlobalFree(hglb);
 	    } else {
@@ -418,14 +418,14 @@ SEXP setStatusBar(SEXP text)
 
 static void * getConsoleHandle(const char *which)
 {
-    if (CharacterMode != RGui) return(NULL);
+    if (CharacterMode != RGui) return(nullptr);
     else if (strcmp(which, "Console") == 0 && RConsole)
 	return getHandle(RConsole);
     else if (strcmp(which, "Frame") == 0 && RFrame)
 	return getHandle(RFrame);
     else if (strcmp(which, "Process") == 0)
 	return GetCurrentProcess();
-    else return NULL;
+    else return nullptr;
 }
 
 #include <R_ext/GraphicsEngine.h>
@@ -438,9 +438,9 @@ static void *getDeviceHandle(int dev)
     if (dev == -1) return(getHandle(RConsole));
     if (dev < 1 || dev > R_MaxDevices || dev == NA_INTEGER) return(0);
     gdd = GEgetDevice(dev - 1);
-    if (!gdd) return(NULL);
+    if (!gdd) return(nullptr);
     xd = (gadesc *) gdd->dev->deviceSpecific;
-    if (!xd) return(NULL);
+    if (!xd) return(nullptr);
     return getHandle(xd->gawin);
 }
 
@@ -452,7 +452,7 @@ SEXP getWindowsHandle(SEXP which)
     if(length(which) != 1) error(_("'%s' argument must be of length 1"), "which");
     if (isString(which)) handle = getConsoleHandle(CHAR(STRING_ELT(which,0)));
     else if (isInteger(which)) handle = getDeviceHandle(INTEGER(which)[0]);
-    else handle = NULL;
+    else handle = nullptr;
 
     if (handle)
 	return R_MakeExternalPtr(handle,R_NilValue,R_NilValue);
@@ -537,12 +537,12 @@ in_ArrangeWindows(int n, void** windows, int action, int preserve, int outer)
 		}
 	    }
 	}
-        if (rect.left == rect.right || rect.top == rect.bottom) prect = NULL;
+        if (rect.left == rect.right || rect.top == rect.bottom) prect = nullptr;
 
         if (!outer && ismdi())
             parent = GetParent(getHandle(RConsole));
         else
-            parent = NULL;
+            parent = nullptr;
 	switch (action) {
 	case CASCADE: CascadeWindows(parent, 0, prect, n, (HWND FAR *)windows);
 		      break;

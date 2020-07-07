@@ -58,7 +58,7 @@ static int cmatch(const char *col, const char **list)
 {
     int i=0;
     const char **pos = list;
-    while(*pos != NULL) {
+    while(*pos != nullptr) {
 	if(strcmpi(*pos, col) == 0) return(i);
 	i++; pos++;
     }
@@ -66,13 +66,13 @@ static int cmatch(const char *col, const char **list)
 }
 
 
-static const char *StyleList[] = {"normal", "bold", "italic", NULL};
-static const char *PointsList[] = {"6", "7", "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "32", "36", NULL};
-static const char *FontsList[] = {"Courier", "Courier New", "FixedSys", "FixedFont", "Lucida Console", "Consolas", "Terminal", "BatangChe", "DotumChe", "GulimChe", "MingLiU", "MS Gothic", "MS Mincho", "NSimSun", NULL};
+static const char *StyleList[] = {"normal", "bold", "italic", nullptr};
+static const char *PointsList[] = {"6", "7", "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "32", "36", nullptr};
+static const char *FontsList[] = {"Courier", "Courier New", "FixedSys", "FixedFont", "Lucida Console", "Consolas", "Terminal", "BatangChe", "DotumChe", "GulimChe", "MingLiU", "MS Gothic", "MS Mincho", "NSimSun", nullptr};
 static const char *GuiElementNames[numGuiColors+1] = {"background", "normaltext", "usertext",
 						"pagerbg", "pagertext", "highlight",
 						"dataeditbg", "dataedittext", "dataedituser",
-						"editorbg", "editortext", NULL};
+						"editorbg", "editortext", nullptr};
 static const char *BlinkList[] = {"None", "Partial", "Full"};
 static window wconfig;
 static button bApply, bSave, bLoad, bOK, bCancel;
@@ -86,7 +86,7 @@ static checkbox toolbar, statusbar, tt_font, c_resize, c_buff;
 static field f_crows, f_ccols, f_prows, f_pcols, f_cx, f_cy, f_cbb,f_cbl,
     f_grx, f_gry, f_lang, f_blink;
 static textbox guisample;
-static font samplefont = NULL;
+static font samplefont = nullptr;
 static int samplePointsize = 10;
 static int sampleStyle = Plain;
 static int sampleFontNum;
@@ -332,7 +332,7 @@ void applyGUI(Gui newGUI)
 
 	/* Don't delete font: open pagers may be using it */
 	if (strcmp(fontname, "FixedFont"))
-	    consolefn = gnewfont(NULL, fontname, fontsty, pointsize, 0.0, 1);
+	    consolefn = gnewfont(nullptr, fontname, fontsty, pointsize, 0.0, 1);
 	else consolefn = FixedFont;
 	if (!consolefn) {
 	    snprintf(msg, LF_FACESIZE + 128,
@@ -423,7 +423,7 @@ static void save(button b)
     if(!strncmp(p, ".*", 2)) *p = '\0';
 
     fp = R_fopen(buf, "w");
-    if(fp == NULL) {
+    if(fp == nullptr) {
 	MessageBox(0, "Cannot open file to fp",
 		   "Configuration Save Error",
 		   MB_TASKMODAL | MB_ICONSTOP | MB_OK);
@@ -769,7 +769,7 @@ static void changeFont(control c)
     } else 
     	strcat(fontname, gettext(f_font));
 
-    samplefont = gnewfont(NULL, fontname, sampleStyle, samplePointsize, 0.0, 1);
+    samplefont = gnewfont(nullptr, fontname, sampleStyle, samplePointsize, 0.0, 1);
     settextfont(guisample, samplefont);
     clickColor(c, getlistitem(guicolor));
 }
@@ -807,9 +807,9 @@ static void showDialog(Gui gui)
     rb_sdi = newradiobutton("SDI", rect(220, 10 , 70, 20), cSDI);
 
 
-    toolbar = newcheckbox("MDI toolbar", rect(300, 10, 100, 20), NULL);
+    toolbar = newcheckbox("MDI toolbar", rect(300, 10, 100, 20), nullptr);
     if(gui->toolbar) check(toolbar);
-    statusbar = newcheckbox("MDI statusbar", rect(420, 10, 130, 20), NULL);
+    statusbar = newcheckbox("MDI statusbar", rect(420, 10, 130, 20), nullptr);
     if(gui->statusbar) check(statusbar);
     if(gui->MDI) {
 	check(rb_mdi); cMDI(rb_mdi);
@@ -819,8 +819,8 @@ static void showDialog(Gui gui)
 
     l_mwin = newlabel("Pager style", rect(10, 40, 90, 20), AlignLeft);
     g_mwin = newradiogroup();
-    rb_mwin = newradiobutton("multiple windows", rect(150, 40, 150, 20), NULL);
-    rb_swin = newradiobutton("single window", rect(150, 60 , 150, 20), NULL);
+    rb_mwin = newradiobutton("multiple windows", rect(150, 40, 150, 20), nullptr);
+    rb_swin = newradiobutton("single window", rect(150, 60 , 150, 20), nullptr);
     if(gui->pagerMultiple) check(rb_mwin); else check(rb_swin);
 
     l_lang = newlabel("Language for menus\nand messages",
@@ -859,7 +859,7 @@ static void showDialog(Gui gui)
     f_cy = newfield(buf, rect(480, 150, 40, 20));
 
     c_resize = newcheckbox("set options(width) on resize?",
-			   rect(20, 175, 200, 20), NULL);
+			   rect(20, 175, 200, 20), nullptr);
     if(gui->setWidthOnResize) check(c_resize);
 
     l_cbb = newlabel("buffer chars", rect(270, 175, 70, 20), AlignLeft);
@@ -870,13 +870,13 @@ static void showDialog(Gui gui)
     f_cbl = newfield(buf, rect(480, 175, 40, 20));
 
     c_buff = newcheckbox("buffer console by default?",
-			 rect(20, 190, 200, 20), NULL);
+			 rect(20, 190, 200, 20), nullptr);
     if(gui->buffered) check(c_buff);
 
 /* Cursor blink */
 
     l_blink = newlabel("Cursor blink", rect(270, 200,100, 30), AlignLeft);
-    f_blink = newdroplist(BlinkList, rect(350, 200, 80, 20), NULL);
+    f_blink = newdroplist(BlinkList, rect(350, 200, 80, 20), nullptr);
     setlistitem(f_blink, gui->cursor_blink);
 
 /* Pager size */
@@ -900,8 +900,8 @@ static void showDialog(Gui gui)
     l_cols = newlabel("Console and Pager Colours",
 		      rect(10, 310, 520, 20), AlignCenter);
 
-    guielement = newlistbox(GuiElementNames, rect(50, 330, 100, 80), changeElement, NULL);
-    guicolor = newlistbox(ColorName, rect(205, 330, 100, 80), clickColor, NULL);
+    guielement = newlistbox(GuiElementNames, rect(50, 330, 100, 80), changeElement, nullptr);
+    guicolor = newlistbox(ColorName, rect(205, 330, 100, 80), clickColor, nullptr);
     guisample = newrichtextarea("Sample text", rect(350, 330, 150, 55));
 
     for (int i=0; i<numGuiColors; i++)

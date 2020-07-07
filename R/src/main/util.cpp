@@ -200,7 +200,7 @@ TypeTable[] = {
     { "numeric",	REALSXP	   },
     { "name",		SYMSXP	   },
 
-    { (char *)NULL,	(SEXPTYPE) -1	   }
+    { (char *)nullptr,	(SEXPTYPE) -1	   }
 };
 
 
@@ -251,10 +251,10 @@ HIDDEN void Rf_InitTypeTables(void) {
 	    Type2Table[type].rsymName = rsym;
 	    UNPROTECT(1); /* rchar */
 	} else {
-	    Type2Table[type].cstrName = NULL;
-	    Type2Table[type].rcharName = NULL;
-	    Type2Table[type].rstrName = NULL;
-	    Type2Table[type].rsymName = NULL;
+	    Type2Table[type].cstrName = nullptr;
+	    Type2Table[type].rcharName = nullptr;
+	    Type2Table[type].rstrName = nullptr;
+	    Type2Table[type].rsymName = nullptr;
 	}
     }
 }
@@ -263,7 +263,7 @@ SEXP Rf_type2str_nowarn(const SEXPTYPE t) /* returns a CHARSXP */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rcharName;
-	if (res != NULL) return res;
+	if (res != nullptr) return res;
     // }
     return R_NilValue;
 }
@@ -284,7 +284,7 @@ SEXP Rf_type2rstr(const SEXPTYPE t) /* returns a STRSXP */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) {
 	SEXP res = Type2Table[t].rstrName;
-	if (res != NULL) return res;
+	if (res != nullptr) return res;
     // }
     error(_("type %d is unimplemented in '%s' function"), t, "type2ImmutableScalarString()");
     return R_NilValue; /* for -Wall */
@@ -294,7 +294,7 @@ const char *Rf_type2char(const SEXPTYPE t) /* returns a char* */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	const char * res = Type2Table[t].cstrName;
-	if (res != NULL) return res;
+	if (res != nullptr) return res;
     // }
     warning(_("type %d is unimplemented in '%s' function"), t, "type2char()");
     static char buf[50];
@@ -307,7 +307,7 @@ NORET SEXP Rf_type2symbol(SEXPTYPE t)
 {
     // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rsymName;
-	if (res != NULL) return res;
+	if (res != nullptr) return res;
     // }
     error(_("type %d is unimplemented in '%s' function"), t, "type2symbol()");
 }
@@ -349,13 +349,13 @@ static constexpr char UCS2ENC[] = "UCS-2LE";
  */
 size_t Rf_mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 {
-    void   *cd = NULL ;
+    void   *cd = nullptr ;
     const char *i_buf;
     char *o_buf;
     size_t  i_len, o_len, status, wc_len;
     /* out length */
-    wc_len = (enc == CE_UTF8)? utf8towcs(NULL, in, 0) : mbstowcs(NULL, in, 0);
-    if (out == NULL || (int)wc_len < 0) return wc_len;
+    wc_len = (enc == CE_UTF8)? utf8towcs(nullptr, in, 0) : mbstowcs(nullptr, in, 0);
+    if (out == nullptr || (int)wc_len < 0) return wc_len;
 
     if ((void*)-1 == (cd = Riconv_open(UCS2ENC, (enc == CE_UTF8) ? "UTF-8": "")))
 	return (size_t) -1;
@@ -507,7 +507,7 @@ HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nargs = NA_INTEGER;
 
     checkArity(op, args);
-    for (cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext()) {
+    for (cptr = R_GlobalContext; cptr != nullptr; cptr = cptr->nextContext()) {
 	if ((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho) {
 	    nargs = length(cptr->getPromiseArgs());
 	    break;
@@ -722,7 +722,7 @@ SEXP static intern_getwd(void)
 	}
     }
 #else
-    char *res = getcwd(buf, PATH_MAX); /* can return NULL */
+    char *res = getcwd(buf, PATH_MAX); /* can return nullptr */
     if(res) rval = mkString(buf);
 #endif
     return(rval);
@@ -874,7 +874,7 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		while ( *(p = buf + wcslen(buf) - 1) == L'/'  && p > buf
 			&& (p > buf+2 || *(p-1) != L':')) *p = L'\0';
 		p = wcsrchr(buf, L'/');
-		if(p == NULL) wcscpy(buf, L".");
+		if(p == nullptr) wcscpy(buf, L".");
 		else {
 		    while(p > buf && *p == L'/'
 			  /* this covers both drives and network shares */
@@ -914,7 +914,7 @@ HIDDEN SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* remove trailing file separator(s) */
 		while ( *(p = buf + ll - 1) == fsp  && p > buf) *p = '\0';
 		p = Rf_strrchr(buf, fsp);
-		if(p == NULL)
+		if(p == nullptr)
 		    strcpy(buf, ".");
 		else {
 		    while(p > buf && *p == fsp) --p;
@@ -997,7 +997,7 @@ HIDDEN SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (OK) {
 	    if (path[0] == '/') strncpy(abspath, path, PATH_MAX);
 	    else {
-		OK = getcwd(abspath, PATH_MAX) != NULL;
+		OK = getcwd(abspath, PATH_MAX) != nullptr;
 		OK = OK && (strlen(path) + strlen(abspath) + 1 <= PATH_MAX);
 		if (OK) {strcat(abspath, "/"); strcat(abspath, path);}
 	    }
@@ -1129,7 +1129,7 @@ HIDDEN SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #ifdef _WIN32
     if (havecontext) {
-	encode_cleanup(NULL);
+	encode_cleanup(nullptr);
 	RCNTXT::endcontext(cntxt);
     }
 #endif
@@ -1351,7 +1351,7 @@ constexpr unsigned int utf8_table1[] =
 	{0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff};
 constexpr unsigned int utf8_table2[] = {0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
-/* s is NULL, or it contains at least n bytes.  Just write a a terminator if it's not big enough. */
+/* s is nullptr, or it contains at least n bytes.  Just write a a terminator if it's not big enough. */
 
 static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
 {
@@ -1374,7 +1374,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
 }
 
 /* on input, wc is a string encoded in UTF-16 or UCS-2 or UCS-4.
-   s can be a buffer of size n>=0 chars, or NULL.  If n=0 or s=NULL, nothing is written.
+   s can be a buffer of size n>=0 chars, or NULL.  If n=0 or s=nullptr, nothing is written.
    The return value is the number of chars including the terminating null.  If the
    buffer is not big enough, the result is truncated but still null-terminated */
 HIDDEN // but used in windlgs
@@ -1415,7 +1415,7 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 	const char *p;
 	for(p = s, q = err; *p; ) {
 	    /* don't do the first to keep ps state straight */
-	    if(p > s) used = mbrtowc(NULL, p, n, ps);
+	    if(p > s) used = mbrtowc(nullptr, p, n, ps);
 	    if(used == 0) break;
 	    else if((int) used > 0) {
 		memcpy(q, p, used);
@@ -1457,7 +1457,7 @@ HIDDEN char *mbcsTruncateToValid(char *const s)
     }
     while(goodlen < slen) {
 	size_t res;
-	res = mbrtowc(NULL, s + goodlen, slen - goodlen, &mb_st);
+	res = mbrtowc(nullptr, s + goodlen, slen - goodlen, &mb_st);
 	if (res == (size_t) -1 || res == (size_t) -2) {
 	    /* strip off all remaining characters */
 	    for(;goodlen < slen; goodlen++)
@@ -1471,7 +1471,7 @@ HIDDEN char *mbcsTruncateToValid(char *const s)
 
 HIDDEN bool mbcsValid(const char *const str)
 {
-	return ((int)mbstowcs(NULL, str, 0) >= 0);
+	return ((int)mbstowcs(nullptr, str, 0) >= 0);
 }
 
 /* used in src/library/grDevices/src/cairo/cairoFns.cpp */
@@ -1524,22 +1524,22 @@ char *Rf_strchr(const char *s, int c)
 
     if(!mbcslocale || utf8locale) return (char*) strchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st)) ) {
+    while( (used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) return p;
 	p += used;
     }
-    return (char *)NULL;
+    return (char *)nullptr;
 }
 
 char *Rf_strrchr(const char *s, int c)
 {
-    char *p = (char *) s, *plast = NULL;
+    char *p = (char *) s, *plast = nullptr;
     mbstate_t mb_st;
     size_t used;
 
     if(!mbcslocale || utf8locale) return (char*) strrchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st)) ) {
+    while( (used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) plast = p;
 	p += used;
     }
@@ -1554,7 +1554,7 @@ void R_fixslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st))) {
 	    if(*p == '\\') *p = '/';
 	    p += used;
 	}
@@ -1590,7 +1590,7 @@ void R_fixbackslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st))) {
 	    if(*p == '/') *p = '\\';
 	    p += used;
 	}
@@ -2031,7 +2031,7 @@ double R_strtod(const char *str, char **endptr)
 
 double R_atof(const char *str)
 {
-	return R_strtod5(str, NULL, '.', FALSE, FALSE);
+	return R_strtod5(str, nullptr, '.', FALSE, FALSE);
 }
 
 /* enc2native and enc2utf8, but they are the same in a UTF-8 locale */
@@ -2167,7 +2167,7 @@ const char* ucol_getLocaleByType(const UCollator *coll,
 #include <unicode/uiter.h>
 #endif
 
-static UCollator *collator = NULL;
+static UCollator *collator = nullptr;
 static int collationLocaleSet = 0;
 
 /* called from platform.cpp */
@@ -2175,7 +2175,7 @@ HIDDEN void resetICUcollator(bool disable)
 {
 	if (collator)
 		ucol_close(collator);
-	collator = NULL;
+	collator = nullptr;
 	collationLocaleSet = disable ? 1 : 0;
 }
 
@@ -2203,7 +2203,7 @@ static const struct
 	{"shifted", UCOL_SHIFTED},
 	{"case_level", UCOL_CASE_LEVEL},
 	{"hiragana_quaternary", UCOL_HIRAGANA_QUATERNARY_MODE},
-	{NULL, 0}};
+	{nullptr, 0}};
 
 #ifdef _WIN32
 #define BUFFER_SIZE 512
@@ -2224,7 +2224,7 @@ static const char *getLocale(void)
 	pGSDLN(wcBuffer, BUFFER_SIZE);
 	static char locale[BUFFER_SIZE];
 	WideCharToMultiByte(CP_ACP, 0, wcBuffer, -1,
-			    locale, BUFFER_SIZE, NULL, NULL);
+			    locale, BUFFER_SIZE, nullptr, nullptr);
 	return locale;
     } else return "root";
 }
@@ -2232,7 +2232,7 @@ static const char *getLocale(void)
 static const char *getLocale(void)
 {
     const char *p = getenv("R_ICU_LOCALE");
-    return (p && p[0]) ? p : setlocale(LC_COLLATE, NULL);
+    return (p && p[0]) ? p : setlocale(LC_COLLATE, nullptr);
 }
 #endif
 
@@ -2253,7 +2253,7 @@ HIDDEN SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (streql(this_, "locale")) {
 	    if (collator) {
 		ucol_close(collator);
-		collator = NULL;
+		collator = nullptr;
 	    }
 	    if(streql(s, "ASCII")) {
 		collationLocaleSet = 2;
@@ -2264,9 +2264,9 @@ HIDDEN SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    else uloc_setDefault(s, &status);
 		    if(U_FAILURE(status))
 			error(_("failed to set ICU locale %s (%d)"), s, status);
-		    collator = ucol_open(NULL, &status);
+		    collator = ucol_open(nullptr, &status);
 		    if (U_FAILURE(status)) {
-			collator = NULL;
+			collator = nullptr;
 			error(_("failed to open ICU collator (%d)"), status);
 		    }
 		}
@@ -2351,16 +2351,16 @@ HIDDEN int Rf_Scollate(SEXP a, SEXP b)
 	    uloc_setDefault(getLocale(), &status);
 	    if(U_FAILURE(status))
 		error(_("failed to set ICU locale (%d)"), status);
-	    collator = ucol_open(NULL, &status);
+	    collator = ucol_open(nullptr, &status);
 	    if (U_FAILURE(status)) {
-		collator = NULL;
+		collator = nullptr;
 		error(_("failed to open ICU collator (%d)"), status);
 	    }
 	}
 	errno = errsv;
     }
     // translation may use escapes, but that is OK here
-    if (collator == NULL)
+    if (collator == nullptr)
 	return collationLocaleSet == 2 ?
 	    strcmp(translateChar(a), translateChar(b)) :
 	    strcoll(translateChar(a), translateChar(b));
@@ -2865,7 +2865,7 @@ char *Rstrdup(const char *s)
 {
 	size_t nb = strlen(s) + 1;
 	void *cpy = malloc(nb);
-	if (cpy == NULL)
+	if (cpy == nullptr)
 		error(_("allocation error in Rstrdup"));
 	memcpy(cpy, s, nb);
 	return (char *)cpy;

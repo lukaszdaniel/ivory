@@ -684,14 +684,14 @@ HIDDEN SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return rval;
     case 7: /* sys.on.exit */
 	{
-	    SEXP conexit = cptr->onExit();
-	    if (conexit == R_NilValue)
-		return R_NilValue;
-	    else if (CDR(conexit) == R_NilValue)
-		return CAR(conexit);
-	    else
-		return LCONS(R_BraceSymbol, conexit);
-	}
+        SEXP conexit = cptr->onExit();
+        if (conexit == R_NilValue)
+            return R_NilValue;
+        else if (CDR(conexit) == R_NilValue)
+            return CAR(conexit);
+        else
+            return LCONS(R_BraceSymbol, conexit);
+    }
     case 8: /* sys.parents */
 	nframe = cptr->framedepth();
 	rval = allocVector(INTSXP, nframe);

@@ -235,7 +235,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
 	deglobaliseState((SEXP) sd->systemSpecific);
 	/* Also set the device pointer to NULL
 	 */
-	sd->systemSpecific = NULL;	
+	sd->systemSpecific = nullptr;	
 	break;
     case GE_SaveState:
 	break;

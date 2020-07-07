@@ -61,7 +61,7 @@ R_size_t R_max_memory = R_SIZE_T_MAX;
 
 extern SA_TYPE SaveAction; /* from ../main/startup.cpp */
 Rboolean DebugMenuitem = FALSE;  /* exported for rui.cpp */
-static FILE *ifp = NULL;
+static FILE *ifp = nullptr;
 static char ifile[MAX_PATH] = "\0";
 
 __declspec(dllexport) UImode  CharacterMode = RGui; /* some compilers want initialized for export */
@@ -89,7 +89,7 @@ static void (*my_R_Busy)(int);
  */
 
 typedef void (*DO_FUNC)();
-static void (* R_Tcl_do)(void) = NULL; /* Initialized to be sure */
+static void (* R_Tcl_do)(void) = nullptr; /* Initialized to be sure */
 
 void set_R_Tcldo(DO_FUNC ptr)
 {
@@ -105,7 +105,7 @@ void unset_R_Tcldo(DO_FUNC ptr)
        to be detached. */
     if (R_Tcl_do != ptr)
 	warning("Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do");
-    R_Tcl_do = NULL;
+    R_Tcl_do = nullptr;
     return;
 }
 
@@ -311,7 +311,7 @@ static int CharReadConsole(const char *prompt, char *buf, int len, int addtohist
 }
 
 /*3: (as InThreadReadConsole) and 4: non-interactive */
-static void *cd = NULL;
+static void *cd = nullptr;
 
 static int FileReadConsole(const char *prompt, char *buf, int len, int addhistory)
 {
@@ -321,7 +321,7 @@ static int FileReadConsole(const char *prompt, char *buf, int len, int addhistor
 	fputs(prompt, stdout);
 	fflush(stdout);
     }
-    if (fgets(buf, len, ifp ? ifp : stdin) == NULL) return 0;
+    if (fgets(buf, len, ifp ? ifp : stdin) == nullptr) return 0;
     /* translate if necessary */
     if(strlen(R_StdinEnc) && strcmp(R_StdinEnc, "native.enc")) {
 	size_t res, inb = strlen(buf), onb = len;
@@ -357,16 +357,14 @@ static int FileReadConsole(const char *prompt, char *buf, int len, int addhistor
 
 
 /* Rgui */
-static void
-GuiWriteConsole(const char *buf,int len)
+static void GuiWriteConsole(const char *buf,int len)
 {
     if (RConsole) consolewrites(RConsole, buf);
-    else MessageBox(NULL, buf, "Console not found", MB_OK | MB_ICONEXCLAMATION);
+    else MessageBox(nullptr, buf, "Console not found", MB_OK | MB_ICONEXCLAMATION);
 }
 
 /* Rterm write */
-static void
-TermWriteConsole(const char *buf, int len)
+static void TermWriteConsole(const char *buf, int len)
 {
     printf("%s", buf);
 }
@@ -490,12 +488,12 @@ void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 					as the console is about to close */
 	PrintWarnings();        /* from device close and (if run) .Last */
     app_cleanup();
-    RConsole = NULL;
+    RConsole = nullptr;
     // Add some protection against calling this more than once:
     // caused by signals on Unix, so maybe cannot happen here.
     if(ifp) { 
 	fclose(ifp);    /* input file from -f or --file= */
-	ifp = NULL; 
+	ifp = nullptr; 
     }
     if(ifile[0]) {
 	unlink(ifile); /* input file from -e */
@@ -535,7 +533,7 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
     char  buf[1024];
 
     if (nfile > 0) {
-	if (pager == NULL || strlen(pager) == 0)
+	if (pager == nullptr || strlen(pager) == 0)
 	    pager = "internal";
 	for (i = 0; i < nfile; i++) {
 	    if(!access(file[i], R_OK)) {
@@ -567,7 +565,7 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
 			snprintf(buf, 1024, "\"%s\" \"%s\"", pager, file[i]);
 		    else
 			snprintf(buf, 1024, "%s \"%s\"", pager, file[i]);
-		    ll = runcmd(buf, CE_NATIVE, 0, 1, NULL, NULL, NULL);
+		    ll = runcmd(buf, CE_NATIVE, 0, 1, nullptr, nullptr, nullptr);
 		    if (ll == NOLAUNCH) warning(runerror());
 		}
 	    } else {
@@ -603,7 +601,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
     char  buf[1024];
 
     if (nfile > 0) {
-	if (editor == NULL || strlen(editor) == 0)
+	if (editor == nullptr || strlen(editor) == 0)
 	    editor = "internal";
 	for (i = 0; i < nfile; i++) {
 	    if (!strcmp(editor, "internal")) {
@@ -614,7 +612,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 		    snprintf(buf, 1024, "\"%s\" \"%s\"", editor, file[i]);
 		else
 		    snprintf(buf, 1024, "%s \"%s\"", editor, file[i]);
-		ll = runcmd(buf, CE_UTF8, 0, 1, NULL, NULL, NULL);
+		ll = runcmd(buf, CE_UTF8, 0, 1, nullptr, nullptr, nullptr);
 		if (ll == NOLAUNCH) warning(runerror());
 	    }
 
@@ -850,7 +848,7 @@ void R_setupHistory(void)
     int value, ierr;
     char *p;
 
-    if ((R_HistoryFile = getenv("R_HISTFILE")) == NULL)
+    if ((R_HistoryFile = getenv("R_HISTFILE")) == nullptr)
 	R_HistoryFile = ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
@@ -968,14 +966,14 @@ int cmdlineoptions(int ac, char **av)
 	       before process_user_Renviron(), because user .Renviron may be read from
 	       the current directory, which is expected to be userdocs. */
 	    wchar_t mydocs[MAX_PATH + 1];
-	    if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PERSONAL|CSIDL_FLAG_CREATE,
-		                           NULL, 0, mydocs))) 
+	    if (SUCCEEDED(SHGetFolderPathW(nullptr, CSIDL_PERSONAL|CSIDL_FLAG_CREATE,
+		                           nullptr, 0, mydocs))) 
 		SetCurrentDirectoryW(mydocs);
 	}
 
     Rp->CallBack = R_DoNothing;
     /* Here so that --ess and similar can change */
-    InThreadReadConsole = NULL;
+    InThreadReadConsole = nullptr;
     if (CharacterMode == RTerm) {
 	if (isatty(0) && isatty(1)) {
 	    Rp->R_Interactive = TRUE;
@@ -994,7 +992,7 @@ int cmdlineoptions(int ac, char **av)
 	    Rp->R_Interactive = TRUE;
 	    Rp->ReadConsole = ThreadedReadConsole;
 	    InThreadReadConsole = FileReadConsole;
-	    setvbuf(stdout, NULL, _IONBF, 0);
+	    setvbuf(stdout, nullptr, _IONBF, 0);
 	} else {
 	    Rp->R_Interactive = FALSE;
 	    Rp->ReadConsole = FileReadConsole;
@@ -1074,7 +1072,7 @@ int cmdlineoptions(int ac, char **av)
 		Rp->R_Interactive = TRUE;
 		Rp->ReadConsole = ThreadedReadConsole;
 		InThreadReadConsole = FileReadConsole;
-		setvbuf(stdout, NULL, _IONBF, 0);
+		setvbuf(stdout, nullptr, _IONBF, 0);
 	    } else if (!strcmp(*av, "--internet2")) {
 /*	        This is now the default */
 	    } else if (!strcmp(*av, "--mdi")) {
@@ -1087,7 +1085,7 @@ int cmdlineoptions(int ac, char **av)
 		}
 		else
 		    p = &(*av)[15];
-		if (p == NULL) {
+		if (p == nullptr) {
 		    R_ShowMessage(_("WARNING: no max-mem-size given\n"));
 		    break;
 		}
@@ -1222,8 +1220,8 @@ int cmdlineoptions(int ac, char **av)
 	R_Suicide(_("you must specify '--save', '--no-save' or '--vanilla'"));
 
     if (InThreadReadConsole &&
-	(!(EhiWakeUp = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
-	 (_beginthread(ReaderThread, 0, NULL) == -1)))
+	(!(EhiWakeUp = CreateEvent(nullptr, FALSE, FALSE, nullptr)) ||
+	 (_beginthread(ReaderThread, 0, nullptr) == -1)))
 	R_Suicide(_("impossible to create 'reader thread'; you must free some system resources"));
 
     R_setupHistory();

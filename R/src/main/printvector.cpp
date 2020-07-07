@@ -272,7 +272,7 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
        Dataptr_or_null method. */
 
     const SEXP *xptr = (const SEXP *) DATAPTR_OR_NULL(x);
-    if(xptr != NULL) {
+    if(xptr != nullptr) {
 	printStringVector(xptr, n, quote, indx);
 	return;
     }
@@ -456,11 +456,11 @@ static void printNamedRealVectorS(SEXP x, int n, SEXP names)
 				R_print.gap,""))
 
 #undef INI_F_CPLX_S
-#define INI_F_CPLX_S						\
-    int wr, dr, er, wi, di, ei;					\
-    formatComplexS(x, n, &wr, &dr, &er, &wi, &di, &ei, 0);	\
-    w = wr + wi + 2;						\
-    Rcomplex tmp
+#define INI_F_CPLX_S                                       \
+	int wr, dr, er, wi, di, ei;                            \
+	formatComplexS(x, n, &wr, &dr, &er, &wi, &di, &ei, 0); \
+	w = wr + wi + 2;                                       \
+	Rcomplex tmp
 
 #undef P_IMAG_NA
 #define P_IMAG_NA(VALUE)			\
@@ -503,7 +503,7 @@ void Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 {
     int n;
 
-    if (title != NULL)
+    if (title != nullptr)
 	 Rprintf("%s\n", title);
 
     if ((n = LENGTH(x)) != 0) {

@@ -143,7 +143,7 @@ int mb_char_len(const char *buf, int clength)
     int i, mb_len = 0;
 
     for(i = 0; i <= clength; i += mb_len)
-	mb_len = mbrtowc(NULL, buf+i, MB_CUR_MAX, NULL);
+	mb_len = mbrtowc(nullptr, buf+i, MB_CUR_MAX, nullptr);
     return mb_len;
 }
 
@@ -1524,8 +1524,8 @@ static void de_popupmenu(DEstruct DE, int x_pos, int y_pos, int col)
     lwhat = newlabel(G_("variable name"), rect(10, 22, 90, 20), AlignLeft);
     varname = newfield(blah, rect(100, 20, 120, 20));
     lrb = newlabel(G_("type"), rect(50, 62, 50, 20), AlignLeft);
-    rb_num = newradiobutton("numeric", rect(100, 60 , 80, 20), NULL);
-    rb_char = newradiobutton("character", rect(180, 60 , 80, 20), NULL);
+    rb_num = newradiobutton("numeric", rect(100, 60 , 80, 20), nullptr);
+    rb_char = newradiobutton("character", rect(180, 60 , 80, 20), nullptr);
     isnumeric = (get_col_type(DE, popupcol) == NUMERIC);
     if (isnumeric) check(rb_num); else check(rb_char);
     setkeydown(wconf, nm_hit_key);
@@ -1728,7 +1728,7 @@ static void depopupact(control m)
 }
 
 
-#define MCHECK(a) if (!(a)) {del(c);return NULL;}
+#define MCHECK(a) if (!(a)) {del(c);return nullptr;}
 
 RECT *RgetMDIsize(void); /* in rui.cpp */
 
@@ -1742,7 +1742,7 @@ static dataeditor newdataeditor(DEstruct DE, const char *title)
 			   pagerrow, pagercol, 0, 0,
 			   guiColors,
 			   DATAEDITOR, 0, 0);
-    if (!DE->p) return NULL;
+    if (!DE->p) return nullptr;
 
     w = DE->p->w ;
     h = DE->p->h;
@@ -1751,15 +1751,15 @@ static dataeditor newdataeditor(DEstruct DE, const char *title)
 	x = (pR->right - w) / 3; x = x > 20 ? x:20;
 	y = (pR->bottom - h) / 3; y = y > 20 ? y:20;
     } else {
-	x = (devicewidth(NULL) - w) / 3;
-	y = (deviceheight(NULL) - h) / 3 ;
+	x = (devicewidth(nullptr) - w) / 3;
+	y = (deviceheight(nullptr) - h) / 3 ;
     }
     c = (dataeditor) newwindow(title, rect(x, y, w, h),
 			       Document | StandardWindow | Menubar |
 			       VScrollbar | HScrollbar | TrackMouse);
     if (!c) {
 	freeConsoleData(DE->p);
-	return NULL;
+	return nullptr;
     }
     setdata(c, DE);
     if(h == 0) DE->p->h = getheight(c);
@@ -1801,7 +1801,7 @@ static dataeditor newdataeditor(DEstruct DE, const char *title)
 	setdata(m, DE);
 	MCHECK(m = newmenuitem(G_("Delete\tDEL"), 0, de_delete));
 	setdata(m, DE);
-	MCHECK(m = newmenuitem("-", 0, NULL));
+	MCHECK(m = newmenuitem("-", 0, nullptr));
 	MCHECK(m = DE->de_mvw = newmenuitem(G_("Cell widths ..."), 0,
 					    menudecellwidth));
 	setdata(m, DE);

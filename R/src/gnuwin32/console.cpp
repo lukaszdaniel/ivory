@@ -103,24 +103,24 @@ xbuf newxbuf(xlong dim, xint ms, xint shift)
 
     p = (xbuf) malloc(sizeof(struct structXBUF));
     if (!p)
-	return NULL;
+	return nullptr;
     p->b = (wchar_t *) malloc((dim + 1) * sizeof(wchar_t));
     if (!p->b) {
 	free(p);
-	return NULL;
+	return nullptr;
     }
     p->user = (int *) malloc(ms * sizeof(int));
     if (!p->user) {
 	free(p->b);
 	free(p);
-	return NULL;
+	return nullptr;
     }
     p->s = (wchar_t **) malloc(ms * sizeof(wchar_t *));
     if (!p->s) {
 	free(p->b);
 	free(p->user);
 	free(p);
-	return NULL;
+	return nullptr;
     }
     p->ns = 1;
     p->ms = ms;
@@ -324,7 +324,7 @@ newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
     initapp(0, 0);
     p = (ConsoleData) malloc(sizeof(struct structConsoleData));
     if (!p)
-	return NULL;
+	return nullptr;
     p->kind = kind;
     /* PR#14624 claimed this was needed, with no example */
     p->chbrk = p->modbrk = '\0';
@@ -332,19 +332,19 @@ newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	p->lbuf = newxbuf(bufbytes, buflines, SLBUF);
 	if (!p->lbuf) {
 	    free(p);
-	    return NULL;
+	    return nullptr;
 	}
 	p->kbuf = malloc(NKEYS * sizeof(wchar_t));
 	if (!p->kbuf) {
 	    xbufdel(p->lbuf);
 	    free(p);
-	    return NULL;
+	    return nullptr;
 	}
     } else {
-	p->lbuf = NULL;
-	p->kbuf = NULL;
+	p->lbuf = nullptr;
+	p->kbuf = nullptr;
     }
-    BM = NULL;
+    BM = nullptr;
     p->rows = rows;
     p->cols = cols;
     for (int i=0; i<numGuiColors; i++)
@@ -357,7 +357,7 @@ newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
     FV = FC = 0;
     NEWFV = NEWFC = 0;
     p->firstkey = p->numkeys = 0;
-    p->clp = NULL;
+    p->clp = nullptr;
     CURROW = -1;
     p->overwrite = 0;
     p->needredraw = 0;
@@ -1136,7 +1136,7 @@ void consolepaste(control c)
     ConsoleData p = getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new_ = NULL;
+    wchar_t *pc, *new_ = nullptr;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1184,7 +1184,7 @@ void consolepastecmds(control c)
     ConsoleData p = getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new_ = NULL;
+    wchar_t *pc, *new_ = nullptr;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1607,7 +1607,7 @@ static wchar_t consolegetc(control c)
 	ch = p->clp[p->pclp++];
 	if (!(p->clp[p->pclp])) {
 	    free(p->clp);
-	    p->clp = NULL;
+	    p->clp = nullptr;
 	}
     } else {
 	if(isUnicodeWindow(c)) {
@@ -1623,7 +1623,7 @@ static wchar_t consolegetc(control c)
 
 		for(i = 0; i < MB_CUR_MAX; i++)
 		    tmp[i] = p->kbuf[(p->firstkey + i) % NKEYS];
-		used = mbrtowc(&ch, tmp, MB_CUR_MAX, NULL);
+		used = mbrtowc(&ch, tmp, MB_CUR_MAX, nullptr);
 		p->firstkey = (p->firstkey + used) % NKEYS;
 		p->numkeys -= used;
 		if (p->already) p->already -= used;
@@ -1632,7 +1632,7 @@ static wchar_t consolegetc(control c)
 		if(ch >=128) {
 		    char tmp[2] = " ";
 		    tmp[0] = ch;
-		    mbrtowc(&ch, tmp, 2, NULL);
+		    mbrtowc(&ch, tmp, 2, nullptr);
 		}
 		p->firstkey = (p->firstkey + 1) % NKEYS;
 		p->numkeys--;
@@ -1963,7 +1963,7 @@ void consolesetbrk(console c, actionfn fn, char ch, char mod)
     p->fbrk = fn;
 }
 
-font consolefn = NULL;
+font consolefn = nullptr;
 char fontname[LF_FACESIZE+4];
 int fontsty, pointsize;
 int consoler = 25, consolec = 80, consolex = 0, consoley = 0;
@@ -1985,9 +1985,9 @@ setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
     fontsty =   fnsty;
     pointsize = fnpoints;
     if (consolefn) del(consolefn);
-    consolefn = NULL;
+    consolefn = nullptr;
     if (strcmp(fontname, "FixedFont")) {
-	consolefn = gnewfont(NULL, fnname, fnsty | FixedWidth, fnpoints, 0.0, 1);
+	consolefn = gnewfont(nullptr, fnname, fnsty | FixedWidth, fnpoints, 0.0, 1);
 	if (!consolefn) {
 	    /* This is unlikely to happen: it will find some match */
 	    snprintf(msg, LF_FACESIZE + 128,
@@ -2214,7 +2214,7 @@ console newconsole(char *name, int flags)
 		       consoler, consolec, consolebufb, consolebufl,
 		       guiColors,
 		       CONSOLE, consolebuffered, consoleblink);
-    if (!p) return NULL;
+    if (!p) return nullptr;
     c = (console) newwindow(name, rect(consolex, consoley, WIDTH, HEIGHT),
 			    flags | TrackMouse | VScrollbar | HScrollbar);
     HEIGHT = getheight(c);
@@ -2231,7 +2231,7 @@ console newconsole(char *name, int flags)
     if (!c || !BM ) {
 	freeConsoleData(p);
 	del(c);
-	return NULL;
+	return nullptr;
     }
     setdata(c, p);
     sethit(c, console_sbf);

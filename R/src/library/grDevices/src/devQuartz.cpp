@@ -229,7 +229,7 @@ int   QuartzDevice_GetAntialias(QuartzDesc_t desc) { return ((QuartzDesc*) desc)
 void  QuartzDevice_SetAntialias(QuartzDesc_t desc,int aa) {
     QuartzDesc *qd = (QuartzDesc*) desc;
     qd->antialias  = aa;
-    if(NULL != qd->getCGContext)
+    if(nullptr != qd->getCGContext)
         CGContextSetAllowsAntialiasing( qd->getCGContext(qd, qd->userInfo), aa );
 }
 
@@ -301,7 +301,7 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
 {
     QuartzDesc *qd = (QuartzDesc*) desc;
     pGEDevDesc gd  = GEgetDevice(ndevNumber(qd->dev));
-    if(NULL == snap) return; /*Aw, hell no!*/
+    if(nullptr == snap) return; /*Aw, hell no!*/
     PROTECT((SEXP)snap);
     if(R_NilValue == VECTOR_ELT(snap,0))
         warning("Tried to restore an empty snapshot?");
@@ -318,7 +318,7 @@ static void* QuartzDevice_SetParameter(QuartzDesc_t desc, const char *key, void 
 {
     if (desc) { /* backend-specific? pass it on */
 	QuartzDesc *qd = (QuartzDesc*) desc;
-	return (qd->par) ? qd->par(qd, qd->userInfo, 1, key, value) : NULL;
+	return (qd->par) ? qd->par(qd, qd->userInfo, 1, key, value) : nullptr;
     } else { /* global? try to handle it */
 	if (key) {
 	    if (!streql(key, QuartzParam_EmbeddingFlags)) {
@@ -327,26 +327,26 @@ static void* QuartzDevice_SetParameter(QuartzDesc_t desc, const char *key, void 
 	    }
 	}
     }
-    return NULL;
+    return nullptr;
 }
 
 void setup_RdotApp(void)
 {
     int eflags = QP_Flags_CFLoop | QP_Flags_Cocoa | QP_Flags_Front;
-    QuartzDevice_SetParameter(NULL, QuartzParam_EmbeddingFlags, &eflags);
+    QuartzDevice_SetParameter(nullptr, QuartzParam_EmbeddingFlags, &eflags);
 }
 
 static void*  QuartzDevice_GetParameter(QuartzDesc_t desc, const char *key)
 {
     if (desc) { /* backend-specific? pass it on */
 	QuartzDesc *qd = (QuartzDesc*) desc;
-	return (qd->par) ? qd->par(qd, qd->userInfo, 0, key, NULL) : NULL;
+	return (qd->par) ? qd->par(qd, qd->userInfo, 0, key, nullptr) : nullptr;
     } else { /* global? try to handle it */
 	if (key) {
 	    if (!streql(key, QuartzParam_EmbeddingFlags)) return &quartz_embedding;
 	}
     }
-    return NULL;
+    return nullptr;
 }
 
 #pragma mark RGD API Function Prototypes
@@ -467,7 +467,7 @@ void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     qd->antialias  = (def->flags & QPFLAG_ANTIALIAS) ? 1 : 0;
     qd->flags      = def->flags;
     qd->gstate     = 0;
-    qd->font       = NULL;
+    qd->font       = nullptr;
 
     dev->deviceSpecific = qd;
     qd->dev             = dev;
@@ -648,7 +648,7 @@ const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
 /* get a font according to the current graphics context */
 CGFontRef RQuartz_Font(CTXDESC)
 {
-    const char *fontName = NULL, *fontFamily = gc->fontfamily;
+    const char *fontName = nullptr, *fontFamily = gc->fontfamily;
     ATSFontRef atsFont = 0;
     int fontFace = gc->fontface;
     if (fontFace < 1 || fontFace > 5) fontFace = 1; /* just being paranoid */
@@ -659,14 +659,14 @@ CGFontRef RQuartz_Font(CTXDESC)
     if (fontName) {
         atsFont = RQuartz_CacheGetFont(fontName, 0); /* face is 0 because we are passing a true font name */
         if (!atsFont) { /* not in the cache, get it */
-            CFStringRef cfFontName = CFStringCreateWithCString(NULL, fontName, kCFStringEncodingUTF8);
+            CFStringRef cfFontName = CFStringCreateWithCString(nullptr, fontName, kCFStringEncodingUTF8);
             atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
             if (!atsFont)
                 atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
             CFRelease(cfFontName);
             if (!atsFont) {
                 warning(_("font \"%s\" could not be found for family \"%s\""), fontName, fontFamily);
-                return NULL;
+                return nullptr;
             }
             RQuartz_CacheAddFont(fontName, 0, atsFont);
         }
@@ -688,20 +688,20 @@ CGFontRef RQuartz_Font(CTXDESC)
                 strcpy(compositeFontName, fontFamily);
                 if (fontFace == 2 || fontFace == 4) strcat(compositeFontName, " Bold");
                 if (fontFace == 3 || fontFace == 4) strcat(compositeFontName, " Italic");
-                CFStringRef cfFontName = CFStringCreateWithCString(NULL, compositeFontName, kCFStringEncodingUTF8);
+                CFStringRef cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
                 atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
                 if (!atsFont) atsFont = ATSFontFindFromPostScriptName(cfFontName, kATSOptionFlagsDefault);
                 CFRelease(cfFontName);
                 if (!atsFont) {
                     if (fontFace == 1) { /* more guessing - fontFace == 1 may need Regular or Roman */
                         strcat(compositeFontName," Regular");
-                        cfFontName = CFStringCreateWithCString(NULL, compositeFontName, kCFStringEncodingUTF8);
+                        cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
                         atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
                         CFRelease(cfFontName);
                         if (!atsFont) {
                             strcpy(compositeFontName, fontFamily);
                             strcat(compositeFontName," Roman");
-                            cfFontName = CFStringCreateWithCString(NULL, compositeFontName, kCFStringEncodingUTF8);
+                            cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
                             atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
                             CFRelease(cfFontName);
                         }
@@ -709,7 +709,7 @@ CGFontRef RQuartz_Font(CTXDESC)
                         strcpy(compositeFontName, fontFamily);
                         if (fontFace == 4) strcat(compositeFontName, " Bold");
                         strcat(compositeFontName," Oblique");
-                        cfFontName = CFStringCreateWithCString(NULL, compositeFontName, kCFStringEncodingUTF8);
+                        cfFontName = CFStringCreateWithCString(nullptr, compositeFontName, kCFStringEncodingUTF8);
                         atsFont = ATSFontFindFromName(cfFontName, kATSOptionFlagsDefault);
                         CFRelease(cfFontName);                    
                     }
@@ -737,7 +737,7 @@ CGFontRef RQuartz_Font(CTXDESC)
 #define RQUARTZ_LINE   (1<<2)
 
 static void RQuartz_SetFont(CGContextRef ctx, const pGEcontext gc, QuartzDesc *xd) {
-    CGFontRef font = RQuartz_Font(gc, NULL);
+    CGFontRef font = RQuartz_Font(gc, nullptr);
     if (font) {
         CGContextSetFont(ctx, font);
         if (font != xd->font) {
@@ -841,7 +841,7 @@ static void RQuartz_NewPage(CTXDESC)
 {
     {
         DRAWSPEC;
-        ctx = NULL;
+        ctx = nullptr;
         if (xd->newPage) xd->newPage(xd, xd->userInfo, xd->redraw ? QNPF_REDRAW : 0);
     }
     { /* we have to re-fetch the status *after* newPage since it may have changed it */
@@ -920,20 +920,20 @@ static CFStringRef text2unichar(CTXDESC, const char *text, UniChar **buffer, int
 {
     CFStringRef str;
     if(gc->fontface == 5)
-        str = CFStringCreateWithCString(NULL, text, kCFStringEncodingMacSymbol);
+        str = CFStringCreateWithCString(nullptr, text, kCFStringEncodingMacSymbol);
     else {
-        str = CFStringCreateWithCString(NULL, text, kCFStringEncodingUTF8);
+        str = CFStringCreateWithCString(nullptr, text, kCFStringEncodingUTF8);
         /* Try fallback Latin1 encoding if UTF8 doesn't work 
 	   -- should no longer be needed. */
         if(!str)
-            CFStringCreateWithCString(NULL, text, kCFStringEncodingISOLatin1);
+            CFStringCreateWithCString(nullptr, text, kCFStringEncodingISOLatin1);
     }
-    if (!str) return NULL;
+    if (!str) return nullptr;
     *buffer = (UniChar*) CFStringGetCharactersPtr(str);
-    if (*buffer == NULL) {
+    if (*buffer == nullptr) {
         CFIndex length = CFStringGetLength(str);
         *buffer = malloc(length * sizeof(UniChar));
-	if (buffer == NULL) error(_("allocation failure in text2unichar"));
+	if (buffer == nullptr) error(_("allocation failure in text2unichar"));
         CFStringGetCharacters(str, CFRangeMake(0, length), *buffer);
         *free = 1;
     }
@@ -1062,7 +1062,7 @@ static void RQuartz_Raster(unsigned int *raster, int w, int h,
     CGImageRef img;
 
     /* Create a "data provider" containing the raster data */
-    dp = CGDataProviderCreateWithData(NULL, (void *) raster, 4*w*h, NULL);
+    dp = CGDataProviderCreateWithData(nullptr, (void *) raster, 4*w*h, nullptr);
 
     cs = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
 
@@ -1079,7 +1079,7 @@ static void RQuartz_Raster(unsigned int *raster, int w, int h,
                         kCGImageAlphaLast | kCGBitmapByteOrder32Big,
 #endif
                         dp,  /* data provider */
-                        NULL,/* decode array */
+                        nullptr,/* decode array */
                         1,   /* interpolate (interpolation type below) */
                         kCGRenderingIntentDefault);
 
@@ -1253,7 +1253,7 @@ RQuartz_MetricInfo(int c, const pGEcontext gc,
 				 CGFontGetUnitsPerEm(font));
 	UniChar  *buffer, single;
         CGGlyph  glyphs[8];
-	CFStringRef str = NULL;
+	CFStringRef str = nullptr;
         int free_buffer = 0, len;
 	*width = *ascent = *descent = 0.0; /* data for bail-out cases */
 	if (c >= 0 && c <= ((mbcslocale && gc->fontface != 5) ? 127 : 255)) {
@@ -1290,7 +1290,7 @@ static Rboolean RQuartz_Locator(double *x, double *y, DEVDESC)
 {
     Rboolean res;
     DEVSPEC;
-    ctx = NULL;
+    ctx = nullptr;
     if (!xd->locatePoint)
         return FALSE;
     res = xd->locatePoint(xd, xd->userInfo, x, y);
@@ -1329,7 +1329,7 @@ static void RQuartz_releaseMask(SEXP ref, pDevDesc dd) {}
 QuartzDesc_t 
 QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
-    return NULL;
+    return nullptr;
 }
 
 #define ARG(HOW,WHAT) HOW(CAR(WHAT));WHAT = CDR(WHAT)
@@ -1342,11 +1342,11 @@ Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (!q_create || !par) {
 	if (errorCode) errorCode[0] = -4;
-	return NULL;
+	return nullptr;
     }
     {
         const void *vmax = vmaxget();
-	QuartzDesc_t qd = NULL;
+	QuartzDesc_t qd = nullptr;
 	R_GE_checkVersionOrDie(R_GE_version);
         R_CheckDeviceAvailable();
         {
@@ -1356,13 +1356,13 @@ Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 
             if (!dev) {
 		if (errorCode) errorCode[0] = -2;
-		return NULL;
+		return nullptr;
 	    }
             if (!(qd = q_create(dev, &qfn, par))) {
                 vmaxset(vmax);
                 free(dev);
 		if (errorCode) errorCode[0] = -3;
-		return NULL;
+		return nullptr;
             }
 	    if(streql(par->type, "") || streql(par->type, "native")
 	       || streql(par->type, "cocoa") || streql(par->type, "carbon"))
@@ -1387,8 +1387,8 @@ SEXP Quartz(SEXP args)
     int      quartzpos, bg, canvas, module = 0;
     double   mydpi[2], *dpi = 0;
     const char *type, *mtype = 0, *family, *title;
-    char *file = NULL;
-    QuartzDesc_t qd = NULL;
+    char *file = nullptr;
+    QuartzDesc_t qd = nullptr;
 
     const void *vmax = vmaxget();
     /* Get function arguments */
@@ -1401,7 +1401,7 @@ SEXP Quartz(SEXP args)
     /* we may want to support connections at some point, but not yet ... */
     tmps = CAR(args);    args = CDR(args);
     if (isNull(tmps)) 
-	file = NULL;
+	file = nullptr;
     else if (isString(tmps) && LENGTH(tmps) >= 1) {
         const char *tmp = R_ExpandFileName(CHAR(STRING_ELT(tmps, 0)));
 	file = R_alloc(strlen(tmp) + 1, sizeof(char));
@@ -1479,7 +1479,7 @@ SEXP Quartz(SEXP args)
 	if (ptr_QuartzBackend)
 	    qd = ptr_QuartzBackend(dev, &qfn, &qpar);
 
-	if (qd == NULL) { /* try internal modules next */
+	if (qd == nullptr) { /* try internal modules next */
 	    switch (module) {
             case QBE_COCOA:
                 qd = QuartzCocoa_DeviceCreate(dev, &qfn, &qpar);
@@ -1498,7 +1498,7 @@ SEXP Quartz(SEXP args)
             case QBE_BITMAP:
 		/* we need to set up the default file name here, where we
 		   know the original type name. */
-		if (file == NULL) {
+		if (file == nullptr) {
 		    static char deffile[30];
 		    snprintf(deffile, 30, "%s.%s", "Rplot%03d", type);
 		    qpar.file = deffile;
@@ -1509,7 +1509,7 @@ SEXP Quartz(SEXP args)
 	    }
 	}
 
-	if (qd == NULL) {
+	if (qd == nullptr) {
 	    vmaxset(vmax);
 	    free(dev);
 	    error(_("unable to create quartz() device target, given type may not be supported"));
@@ -1584,9 +1584,9 @@ static int has_wss() {
 	    bool_array_t            active;
 	    mach_msg_type_number_t  activeCount;
 
-	    serviceNames  = NULL;
-	    serverNames   = NULL;
-	    active        = NULL;
+	    serviceNames  = nullptr;
+	    serverNames   = nullptr;
+	    active        = nullptr;
 
 	    kr = bootstrap_info(bport, 
 				&serviceNames, &serviceNameCount, 
@@ -1655,12 +1655,12 @@ QuartzDesc_t
 Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (errorCode) errorCode[0] = -1;
-    return NULL;
+    return nullptr;
 }
 
 void *getQuartzAPI()
 {
-    return NULL;
+    return nullptr;
 }
 
 #endif

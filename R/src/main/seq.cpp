@@ -34,7 +34,7 @@
 #include <R_ext/Itermacros.h>
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
 #define _S4_rep_keepClass
 /* ==>  rep(<S4>, .) keeps class e.g., for list-like */
@@ -684,7 +684,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, times = R_NilValue;
     R_xlen_t i, lx, len = NA_INTEGER, each = 1, nt;
-    static SEXP do_rep_formals = NULL;
+    static SEXP do_rep_formals = nullptr;
 
     /* includes factors, POSIX[cl]t, Date */
     /* DispatchOrEval internal generic: rep */
@@ -698,7 +698,7 @@ HIDDEN SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
        so we manage the argument matching ourselves.  We pretend this is
        rep(x, times, length.out, each, ...)
     */
-    if (do_rep_formals == NULL)
+    if (do_rep_formals == nullptr)
 	do_rep_formals = allocFormalsList5(install("x"), install("times"),
 					   install("length.out"),
 					   install("each"), R_DotsSymbol);
@@ -849,7 +849,7 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nargs = length(args), lf;
     Rboolean One = (Rboolean) (nargs == 1);
     R_xlen_t i, lout = NA_INTEGER;
-    static SEXP do_seq_formals = NULL;
+    static SEXP do_seq_formals = nullptr;
 
     /* DispatchOrEval internal generic: seq.int */
     if (DispatchOrEval(call, op, "seq", args, rho, &ans, 0, 1))
@@ -859,7 +859,7 @@ HIDDEN SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
        We pretend this is
        seq(from, to, by, length.out, along.with, ...)
     */
-    if (do_seq_formals == NULL)
+    if (do_seq_formals == nullptr)
 	do_seq_formals = allocFormalsList6(install("from"), install("to"),
 					   install("by"), install("length.out"),
 					   install("along.with"), R_DotsSymbol);
@@ -1070,14 +1070,14 @@ HIDDEN SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     R_xlen_t len;
-    static SEXP length_op = NULL;
+    static SEXP length_op = nullptr;
 
     /* Store the .Primitive for 'length' for DispatchOrEval to use. */
-    if (length_op == NULL) {
+    if (length_op == nullptr) {
 	SEXP R_lengthSymbol = install("length");
 	length_op = eval(R_lengthSymbol, R_BaseEnv);
 	if (TYPEOF(length_op) != BUILTINSXP) {
-	    length_op = NULL;
+	    length_op = nullptr;
 	    error(_("'%s' is not a '%s' function"), "length", "BUILTIN");
 	}
 	R_PreserveObject(length_op);

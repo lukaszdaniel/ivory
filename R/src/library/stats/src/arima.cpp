@@ -123,7 +123,7 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
 	}
 	if (!ISNAN(y[l])) {
 	    nu++;
-	    double *rr = NULL /* -Wall */;
+	    double *rr = nullptr /* -Wall */;
 	    if(lop) rr = REAL(resid);
 	    double resid0 = y[l];
 	    for (int i = 0; i < p; i++)
@@ -145,7 +145,7 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
 		for (int j = 0; j < p; j++)
 		    P[i + j * p] = Pnew[i + j * p] - M[i] * M[j] / gain;
 	} else {
-	    double *rr = NULL /* -Wall */;
+	    double *rr = nullptr /* -Wall */;
 	    if(lop) rr = REAL(resid);
 	    for (int i = 0; i < p; i++)
 		a[i] = anew[i];
@@ -607,10 +607,10 @@ ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 	q = LENGTH(sTheta), d = LENGTH(sDelta), r = rd - d;
     double *y = REAL(sy), *a = REAL(sa), *P = REAL(sP), *Pnew = REAL(sPn);
     double *phi = REAL(sPhi), *theta = REAL(sTheta), *delta = REAL(sDelta);
-    double sumlog = 0.0, ssq = 0, *anew, *mm = NULL, *M;
+    double sumlog = 0.0, ssq = 0, *anew, *mm = nullptr, *M;
     int nu = 0;
     Rboolean useResid = (Rboolean) asLogical(giveResid);
-    double *rsResid = NULL /* -Wall */;
+    double *rsResid = nullptr /* -Wall */;
 
     anew = (double *) R_alloc(rd, sizeof(double));
     M = (double *) R_alloc(rd, sizeof(double));

@@ -732,7 +732,7 @@ extern inline SEXP Rf_listAppend(SEXP s, SEXP t)
 
 extern inline SEXP Rf_lcons(SEXP car, SEXP cdr)
 {
-    SEXP e = cons(car, cdr);
+    SEXP e = Rf_cons(car, cdr);
     SET_TYPEOF(e, LANGSXP);
     return e;
 }

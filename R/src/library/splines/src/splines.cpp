@@ -240,13 +240,13 @@ spline_basis(SEXP knots, SEXP order, SEXP xvals, SEXP derivs)
 static const R_CallMethodDef R_CallDef[] = {
     CALLDEF(spline_basis, 4),
     CALLDEF(spline_value, 5),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 VISIBLE void attribute_visible R_init_splines(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, R_CallDef, NULL, NULL);
+    R_registerRoutines(dll, nullptr, R_CallDef, nullptr, nullptr);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, TRUE);
 }

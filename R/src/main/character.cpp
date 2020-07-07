@@ -90,7 +90,7 @@ using namespace std;
  */
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
 /* Functions to perform analogues of the standard C string library. */
 /* Most are vectorized */
@@ -164,7 +164,7 @@ int R_nchar(SEXP string, nchar_type type_,
 		      msg_name);
 	    return NA_INTEGER;
 	} else if (mbcslocale) {
-	    int nc = (int) mbstowcs(NULL, translateChar(string), 0);
+	    int nc = (int) mbstowcs(nullptr, translateChar(string), 0);
 	    if (!allowNA && nc < 0)
 		error(_("invalid multibyte string, %s"), msg_name);
 	    return (nc >= 0 ? nc : NA_INTEGER);
@@ -199,7 +199,7 @@ int R_nchar(SEXP string, nchar_type type_,
 	    return NA_INTEGER;
 	} else if (mbcslocale) {
 	    const char *xi = translateChar(string);
-	    int nc = (int) mbstowcs(NULL, xi, 0);
+	    int nc = (int) mbstowcs(nullptr, xi, 0);
 	    if (nc >= 0) {
 		const void *vmax = vmaxget();
 		wchar_t *wc = (wchar_t *)
@@ -313,11 +313,11 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
 	mbs_init(&mb_st);
 	for (i = 0; i < sa - 1 && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += Mbrtowc(NULL, str, MB_CUR_MAX, &mb_st);
+	    str += Mbrtowc(nullptr, str, MB_CUR_MAX, &mb_st);
 	*rfrom = str;
 	for (; i < so && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += (int) Mbrtowc(NULL, str, MB_CUR_MAX, &mb_st);
+	    str += (int) Mbrtowc(nullptr, str, MB_CUR_MAX, &mb_st);
 	*rlen = (int) (str - *rfrom);
     } else {
 	if (so - 1 < len) {
@@ -327,7 +327,7 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
 	    *rfrom = str + sa - 1;
 	    *rlen = len - (sa - 1);
 	} else {
-	    *rfrom = NULL;
+	    *rfrom = nullptr;
 	    *rlen = 0;
 	}
     }
@@ -342,7 +342,7 @@ HIDDEN SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("extracting substrings from a non-character object"));
     R_xlen_t len = XLENGTH(x);
     PROTECT(s = allocVector(STRSXP, len));
-    SEXP lastel = NULL;
+    SEXP lastel = nullptr;
     if (len > 0) {
 	SEXP sa = CADR(args),
 	    so = CADDR(args);
@@ -523,11 +523,11 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, size_t sa
     } else {
 	/* This cannot work for stateful encodings */
 	if (mbcslocale) {
-	    for (size_t i = 1; i < sa; i++) buf += Mbrtowc(NULL, buf, MB_CUR_MAX, NULL);
+	    for (size_t i = 1; i < sa; i++) buf += Mbrtowc(nullptr, buf, MB_CUR_MAX, nullptr);
 	    /* now work out how many bytes to replace by how many */
 	    for (size_t i = sa; i <= so && in < strlen(str); i++) {
-		in += Mbrtowc(NULL, str+in, MB_CUR_MAX, NULL);
-		out += Mbrtowc(NULL, buf+out, MB_CUR_MAX, NULL);
+		in += Mbrtowc(nullptr, str+in, MB_CUR_MAX, nullptr);
+		out += Mbrtowc(nullptr, buf+out, MB_CUR_MAX, nullptr);
 		if (!str[in]) break;
 	    }
 	    if (in != out) memmove(buf+in, buf+out, strlen(buf+out)+1);
@@ -818,7 +818,7 @@ donewsc:
 		if (iswspace((int)wc[i])) mywcscpy(wc + i, wc + i + 1);
     }
 
-    int nb = (int) wcstoutf8(NULL, wc, R_INT_MAX);
+    int nb = (int) wcstoutf8(nullptr, wc, R_INT_MAX);
     char *cbuf = CallocCharBuf(nb);
     wcstoutf8(cbuf, wc, nb);
     SEXP ans = mkCharCE(cbuf, CE_UTF8);
@@ -858,7 +858,7 @@ HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else SET_STRING_ELT(ans, i, el);
 	    } else {
 		s = translateCharUTF8(el);
-		int nc = (int) utf8towcs(NULL, s, 0);
+		int nc = (int) utf8towcs(nullptr, s, 0);
 		if (nc > minlen) {
 		    warn = TRUE;
 		    const wchar_t *wc = wtransChar(el);
@@ -883,7 +883,7 @@ HIDDEN SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP arg, ans;
     R_xlen_t i, n;
     int l, allow_;
-    char *p, *tmp = NULL, *cbuf;
+    char *p, *tmp = nullptr, *cbuf;
     const char *This;
     Rboolean need_prefix;
     const void *vmax;
@@ -933,7 +933,7 @@ HIDDEN SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	if (mbcslocale) {
 	    /* This cannot lengthen the string, so safe to overwrite it. */
-	    int nc = (int) mbstowcs(NULL, tmp, 0);
+	    int nc = (int) mbstowcs(nullptr, tmp, 0);
 	    if (nc >= 0) {
 		wchar_t *wstr = Calloc(nc+1, wchar_t);
 		mbstowcs(wstr, tmp, nc+1);
@@ -1014,10 +1014,10 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		ienc = getCharCE(el);
 		if (use_UTF8 && ienc == CE_UTF8) {
 		    xi = CHAR(el);
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) utf8towcs(nullptr, xi, 0);
 		} else {
 		    xi = translateChar(el);
-		    nc = (int) mbstowcs(NULL, xi, 0);
+		    nc = (int) mbstowcs(nullptr, xi, 0);
 		    ienc = CE_NATIVE;
 		}
 		if (nc >= 0) {
@@ -1027,14 +1027,14 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		    if (ienc == CE_UTF8) {
 			utf8towcs(wc, xi, nc + 1);
 			for (j = 0; j < nc; j++) wc[j] = towctrans(wc[j], tr);
-			nb = (int) wcstoutf8(NULL, wc, R_INT_MAX);
+			nb = (int) wcstoutf8(nullptr, wc, R_INT_MAX);
 			cbuf = CallocCharBuf(nb);
 			wcstoutf8(cbuf, wc, nb);
 			SET_STRING_ELT(y, i, mkCharCE(cbuf, CE_UTF8));
 		    } else {
 			mbstowcs(wc, xi, nc + 1);
 			for (j = 0; j < nc; j++) wc[j] = towctrans(wc[j], tr);
-			nb = (int) wcstombs(NULL, wc, 0);
+			nb = (int) wcstombs(nullptr, wc, 0);
 			cbuf = CallocCharBuf(nb);
 			wcstombs(cbuf, wc, nb + 1);
 			SET_STRING_ELT(y, i, markKnown(cbuf, el));
@@ -1098,7 +1098,7 @@ wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
     This = trs;
     for (i = 0; i < len - 2; ) {
 	_new = Calloc(1, struct wtr_spec);
-	_new->next = NULL;
+	_new->next = nullptr;
 	if (s[i + 1] == L'-') {
 	    _new->type = WTR_RANGE;
 	    if (s[i] > s[i + 2])
@@ -1115,7 +1115,7 @@ wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
     }
     for ( ; i < len; i++) {
 	_new = Calloc(1, struct wtr_spec);
-	_new->next = NULL;
+	_new->next = nullptr;
 	_new->type = WTR_CHAR;
 	_new->u.c = s[i];
 	This = This->next = _new;
@@ -1189,7 +1189,7 @@ static void tr_build_spec(const char *s, struct tr_spec *trs) {
     This = trs;
     for (i = 0; i < len - 2; ) {
 	_new = Calloc(1, struct tr_spec);
-	_new->next = NULL;
+	_new->next = nullptr;
 	if (s[i + 1] == '-') {
 	    _new->type = TR_RANGE;
 	    if (s[i] > s[i + 2])
@@ -1206,7 +1206,7 @@ static void tr_build_spec(const char *s, struct tr_spec *trs) {
     }
     for ( ; i < len; i++) {
 	_new = Calloc(1, struct tr_spec);
-	_new->next = NULL;
+	_new->next = nullptr;
 	_new->type = TR_CHAR;
 	_new->u.c = s[i];
 	This = This->next = _new;
@@ -1310,7 +1310,7 @@ R_INLINE static int xtable_key_comp(const void *a, const void *b)
 		int comp;                                       \
 		l = 0;                                          \
 		u = _nmemb;                                     \
-		_rc = NULL;                                     \
+		_rc = nullptr;                                     \
 		while (l < u)                                   \
 		{                                               \
 			idx = (l + u) / 2;                          \
@@ -1378,20 +1378,20 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Initialize the old and new wtr_spec lists. */
 	trs_old = Calloc(1, struct wtr_spec);
 	trs_old->type = WTR_INIT;
-	trs_old->next = NULL;
+	trs_old->next = nullptr;
 	trs_new = Calloc(1, struct wtr_spec);
 	trs_new->type = WTR_INIT;
-	trs_new->next = NULL;
+	trs_new->next = nullptr;
 	/* Build the old and new wtr_spec lists. */
 	if (use_UTF8 && getCharCE(STRING_ELT(old, 0)) == CE_UTF8) {
 	    s = CHAR(STRING_ELT(old, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) utf8towcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "old");
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
-	    nc = (int) mbstowcs(NULL, s, 0);
+	    nc = (int) mbstowcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "old");
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    mbstowcs(wc, s, nc + 1);
@@ -1399,18 +1399,18 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	wtr_build_spec(wc, trs_old);
 	trs_cnt = Calloc(1, struct wtr_spec);
 	trs_cnt->type = WTR_INIT;
-	trs_cnt->next = NULL;
+	trs_cnt->next = nullptr;
 	wtr_build_spec(wc, trs_cnt); /* use count only */
 
 	if (use_UTF8 && getCharCE(STRING_ELT(_new, 0)) == CE_UTF8) {
 	    s = CHAR(STRING_ELT(_new, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) utf8towcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "new");
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
-	    nc = (int) mbstowcs(NULL, s, 0);
+	    nc = (int) mbstowcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "new");
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    mbstowcs(wc, s, nc + 1);
@@ -1464,10 +1464,10 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		ienc = getCharCE(el);
 		if (use_UTF8 && ienc == CE_UTF8) {
 		    xi = CHAR(el);
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) utf8towcs(nullptr, xi, 0);
 		} else {
 		    xi = translateChar(el);
-		    nc = (int) mbstowcs(NULL, xi, 0);
+		    nc = (int) mbstowcs(nullptr, xi, 0);
 		    ienc = CE_NATIVE;
 		}
 		if (nc < 0)
@@ -1482,12 +1482,12 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    if (tbl) wc[j] = tbl->c_new;
 		}
 		if (ienc == CE_UTF8) {
-		    nb = (int) wcstoutf8(NULL, wc, R_INT_MAX);
+		    nb = (int) wcstoutf8(nullptr, wc, R_INT_MAX);
 		    cbuf = CallocCharBuf(nb);
 		    wcstoutf8(cbuf, wc, nb);
 		    SET_STRING_ELT(y, i, mkCharCE(cbuf, CE_UTF8));
 		} else {
-		    nb = (int) wcstombs(NULL, wc, 0);
+		    nb = (int) wcstombs(nullptr, wc, 0);
 		    cbuf = CallocCharBuf(nb);
 		    wcstombs(cbuf, wc, nb + 1);
 		    SET_STRING_ELT(y, i, markKnown(cbuf, el));
@@ -1508,10 +1508,10 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Initialize the old and new tr_spec lists. */
 	trs_old = Calloc(1, struct tr_spec);
 	trs_old->type = TR_INIT;
-	trs_old->next = NULL;
+	trs_old->next = nullptr;
 	trs_new = Calloc(1, struct tr_spec);
 	trs_new->type = TR_INIT;
-	trs_new->next = NULL;
+	trs_new->next = nullptr;
 	/* Build the old and new tr_spec lists. */
 	tr_build_spec(translateChar(STRING_ELT(old, 0)), trs_old);
 	tr_build_spec(translateChar(STRING_ELT(_new, 0)), trs_new);

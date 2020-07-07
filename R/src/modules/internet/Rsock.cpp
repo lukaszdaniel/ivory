@@ -278,7 +278,7 @@ static int R_SocketWait(int sockfd, int write, int timeout)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != NULL) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) NULL);
 	    continue;
 	}
 #endif
@@ -374,7 +374,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	    /* one of the extras is ready */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != NULL) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) NULL);
 	    continue;
 	}
 #endif
@@ -493,7 +493,7 @@ int R_SockConnect(int port, char *host, int timeout)
 	} else { /* some other handler needed */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != NULL) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) NULL);
 	    continue;
 #endif
 	}
@@ -625,7 +625,7 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != NULL) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) NULL);
 	    continue;
 #endif
 	}
@@ -674,7 +674,7 @@ struct hostent *R_gethostbyname(const char *name)
     /* hard-code IPv4 address for localhost to be robust against
        misconfigured systems */
 
-    if (ans == NULL && !strcmp(name, "localhost"))
+    if (ans == nullptr && !strcmp(name, "localhost"))
 	ans = gethostbyname("127.0.0.1");
     return ans;
 }

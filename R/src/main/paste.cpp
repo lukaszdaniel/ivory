@@ -38,7 +38,7 @@
 
 using namespace std;
 
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
 /*
   .Internal(paste (args, sep, collapse, recycle0))
@@ -96,7 +96,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid first argument"));
     R_xlen_t nx = xlength(x);
 
-    const char *csep = NULL;
+    const char *csep = nullptr;
     int sepw, u_sepw;
     bool sepASCII = true, sepUTF8 = false, sepBytes = false,
 	sepKnown = false, use_sep = (PRIMVAL(op) == 0);
@@ -203,7 +203,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 		vmaxset(vmax);
 	    }
 	}
-	const char *u_csep = NULL;
+	const char *u_csep = nullptr;
 	if(use_sep) {
 	    if (use_UTF8 && !u_csep) {
 		u_csep = translateCharUTF8(sep);

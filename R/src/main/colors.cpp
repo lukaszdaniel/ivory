@@ -66,7 +66,8 @@ unsigned int Rf_RGBpar(SEXP x, int i)
 /* in GraphicsEngine.h */
 const char *Rf_col2name(unsigned int col)
 {
-    if (!ptr_col2name) error(_("package 'grDevices' must be loaded"));
+    if (!ptr_col2name)
+        error(_("package 'grDevices' must be loaded"));
     return (ptr_col2name)(col);
 }
 
@@ -74,13 +75,15 @@ const char *Rf_col2name(unsigned int col)
 /* in GraphicsEngine.h */
 unsigned int R_GE_str2col(const char *s)
 {
-    if (!ptr_R_GE_str2col) error(_("package 'grDevices' must be loaded"));
+    if (!ptr_R_GE_str2col)
+        error(_("package 'grDevices' must be loaded"));
     return (ptr_R_GE_str2col)(s);
 }
 
 /* used in engine.cpp */
 HIDDEN void savePalette(Rboolean save)
 {
-    if (!ptr_savePalette) error(_("package 'grDevices' must be loaded"));
+    if (!ptr_savePalette)
+        error(_("package 'grDevices' must be loaded"));
     (ptr_savePalette)(save);
 }

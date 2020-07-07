@@ -206,7 +206,7 @@ static int defaultSerializeVersion()
     if (dflt < 0) {
 	char *valstr = getenv("R_DEFAULT_SERIALIZE_VERSION");
 	int val = -1;
-	if (valstr != NULL)
+	if (valstr != nullptr)
 	    val = atoi(valstr);
 	if (val == 2 || val == 3)
 	    dflt = val;
@@ -810,7 +810,7 @@ static int InRefIndex(R_inpstream_t stream, int flags)
 
 static SEXP GetPersistentName(R_outpstream_t stream, SEXP s)
 {
-    if (stream->OutPersistHookFunc != NULL) {
+    if (stream->OutPersistHookFunc != nullptr) {
 	switch (TYPEOF(s)) {
 	case WEAKREFSXP:
 	case EXTPTRSXP: break;
@@ -833,7 +833,7 @@ static SEXP GetPersistentName(R_outpstream_t stream, SEXP s)
 
 static SEXP PersistentRestore(R_inpstream_t stream, SEXP s)
 {
-    if (stream->InPersistHookFunc == NULL)
+    if (stream->InPersistHookFunc == nullptr)
 	error(_("no restore method available"));
     return stream->InPersistHookFunc(s, stream->InPersistHookData);
 }
@@ -1034,7 +1034,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
     if (ALTREP(s) && stream->version >= 3) {
 	SEXP info = ALTREP_SERIALIZED_CLASS(s);
 	SEXP state = ALTREP_SERIALIZED_STATE(s);
-	if (info != NULL && state != NULL) {
+	if (info != nullptr && state != nullptr) {
 	    int flags = PackFlags(ALTREP_SXP, LEVELS(s), OBJECT(s), 0, 0);
 	    PROTECT(state);
 	    PROTECT(info);
@@ -1581,7 +1581,7 @@ R_INLINE static void InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t lengt
 static int TryConvertString(void *obj, const char *inp, size_t inplen,
                             char *buf, size_t *bufleft)
 {
-    if (Riconv(obj, NULL, NULL, &buf, bufleft) == (size_t) -1)
+    if (Riconv(obj, nullptr, nullptr, &buf, bufleft) == (size_t) -1)
 	return -1;
     return (int) Riconv(obj, &inp, &inplen, &buf, bufleft);
 }
@@ -1883,7 +1883,7 @@ static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream)
 	case EXTPTRSXP:
 	    PROTECT(s = allocSExp(type));
 	    AddReadRef(ref_table, s);
-	    R_SetExternalPtrAddr(s, NULL);
+	    R_SetExternalPtrAddr(s, nullptr);
 	    R_ReadItemDepth++;
 	    R_SetExternalPtrProtected(s, ReadItem(ref_table, stream));
 	    R_SetExternalPtrTag(s, ReadItem(ref_table, stream));
@@ -2181,11 +2181,11 @@ SEXP R_Unserialize(R_inpstream_t stream)
     if (version == 3) {
 	if (stream->nat2nat_obj && stream->nat2nat_obj != (void *)-1) {
 	    Riconv_close(stream->nat2nat_obj);
-	    stream->nat2nat_obj = NULL;
+	    stream->nat2nat_obj = nullptr;
 	}
 	if (stream->nat2utf8_obj && stream->nat2utf8_obj != (void *)-1) {
 	    Riconv_close(stream->nat2utf8_obj);
-	    stream->nat2utf8_obj = NULL;
+	    stream->nat2utf8_obj = nullptr;
 	}
     }
     UNPROTECT(1);
@@ -2274,8 +2274,8 @@ void R_InitInPStream(R_inpstream_t stream, R_pstream_data_t data,
     stream->InPersistHookFunc = phook;
     stream->InPersistHookData = pdata;
     stream->native_encoding[0] = 0;
-    stream->nat2nat_obj = NULL;
-    stream->nat2utf8_obj = NULL; 
+    stream->nat2nat_obj = nullptr;
+    stream->nat2utf8_obj = nullptr; 
 }
 
 void R_InitOutPStream(R_outpstream_t stream, R_pstream_data_t data,
@@ -2352,7 +2352,7 @@ static void CheckInConn(Rconnection con)
 {
     if (! con->isopen)
 	error(_("connection is not open"));
-    if (! con->canread || con->read == NULL)
+    if (! con->canread || con->read == nullptr)
 	error(_("cannot read from this connection"));
 }
 
@@ -2360,7 +2360,7 @@ static void CheckOutConn(Rconnection con)
 {
     if (! con->isopen)
 	error(_("connection is not open"));
-    if (! con->canwrite || con->write == NULL)
+    if (! con->canwrite || con->write == nullptr)
 	error(_("cannot write to this connection"));
 }
 
@@ -2521,7 +2521,7 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("cannot save to connections in version %d format"), version);
 
     fun = CAR(nthcdr(args,4));
-    hook = fun != R_NilValue ? CallHook : NULL;
+    hook = fun != R_NilValue ? CallHook : nullptr;
 
     /* Now we need to do some sanity checking of the arguments.
        A filename will already have been opened, so anything
@@ -2592,7 +2592,7 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!con->canread) error(_("connection is not open for reading"));
 
     fun = PRIMVAL(op) == 0 ? CADR(args) : R_NilValue;
-    hook = fun != R_NilValue ? CallHook : NULL;
+    hook = fun != R_NilValue ? CallHook : nullptr;
     R_InitConnInPStream(&in, con, R_pstream_any_format, hook, fun);
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);    
     if(!wasopen) {
@@ -2675,7 +2675,7 @@ static SEXP R_serializeb(SEXP object, SEXP icon, SEXP xdr, SEXP Sversion, SEXP f
     if (version == NA_INTEGER || version <= 0)
 	error(_("bad version value"));
 
-    hook = fun != R_NilValue ? CallHook : NULL;
+    hook = fun != R_NilValue ? CallHook : nullptr;
 
     InitBConOutPStream(&out, &bbs, con,
 		       asLogical(xdr) ? R_pstream_xdr_format : R_pstream_binary_format,
@@ -2716,8 +2716,8 @@ static void resize_buffer(membuf_t mb, R_size_t needed)
 	needed = (1+needed/INCR) * INCR;
 #endif
     unsigned char *tmp = (unsigned char*) realloc(mb->buf, needed);
-    if (tmp == NULL) {
-	free(mb->buf); mb->buf = NULL;
+    if (tmp == nullptr) {
+	free(mb->buf); mb->buf = nullptr;
 	error(_("cannot allocate buffer"));
     } else mb->buf = tmp;
     mb->size = needed;
@@ -2779,7 +2779,7 @@ static void InitMemOutPStream(R_outpstream_t stream, membuf_t mb,
 {
     mb->count = 0;
     mb->size = 0;
-    mb->buf = NULL;
+    mb->buf = nullptr;
     R_InitOutPStream(stream, (R_pstream_data_t) mb, type, version,
 		     OutCharMem, OutBytesMem, phook, pdata);
 }
@@ -2787,9 +2787,9 @@ static void InitMemOutPStream(R_outpstream_t stream, membuf_t mb,
 static void free_mem_buffer(void *data)
 {
     membuf_t mb = (membuf_t) data;
-    if (mb->buf != NULL) {
+    if (mb->buf != nullptr) {
 	unsigned char *buf = mb->buf;
-	mb->buf = NULL;
+	mb->buf = nullptr;
 	free(buf);
     }
 }
@@ -2823,7 +2823,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
     if (version == NA_INTEGER || version <= 0)
 	error(_("bad version value"));
 
-    hook = fun != R_NilValue ? CallHook : NULL;
+    hook = fun != R_NilValue ? CallHook : nullptr;
 
     // Prior to 3.2.0 this was logical, values 0/1/NA for binary.
     int asc = asInteger(ascii);
@@ -2871,7 +2871,7 @@ HIDDEN SEXP R_unserialize(SEXP icon, SEXP fun)
     struct R_inpstream_st in;
     SEXP (*hook)(SEXP, SEXP);
 
-    hook = fun != R_NilValue ? CallHook : NULL;
+    hook = fun != R_NilValue ? CallHook : nullptr;
 
     if (TYPEOF(icon) == STRSXP && LENGTH(icon) > 0) {
 	/* was the format in R < 2.4.0, removed in R 2.8.0 */
@@ -2919,12 +2919,12 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
 	error(_("'%s' argument is not a proper raw vector"), "bytes");
 #ifdef HAVE_WORKING_FTELL
     /* Windows' ftell returns position 0 with "ab" */
-    if ((fp = R_fopen(cfile, "ab")) == NULL) {
+    if ((fp = R_fopen(cfile, "ab")) == nullptr) {
 	error( _("cannot open file '%s': %s"), cfile,
 	       strerror(errno));
     }
 #else
-    if ((fp = R_fopen(cfile, "r+b")) == NULL) {
+    if ((fp = R_fopen(cfile, "r+b")) == nullptr) {
 	error( _("cannot open file '%s': %s"), cfile,
 	       strerror(errno));
     }
@@ -3018,7 +3018,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     if(icache < 0 && used < NC) icache = used++;
 
     if(icache >= 0) {
-	if ((fp = R_fopen(cfile, "rb")) == NULL)
+	if ((fp = R_fopen(cfile, "rb")) == nullptr)
 	    error(_("cannot open file '%s': %s"), cfile, strerror(errno));
 	if (fseek(fp, 0, SEEK_END) != 0) {
 	    fclose(fp);
@@ -3065,7 +3065,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	}
     }
 
-    if ((fp = R_fopen(cfile, "rb")) == NULL)
+    if ((fp = R_fopen(cfile, "rb")) == nullptr)
 	error(_("cannot open file '%s': %s"), cfile, strerror(errno));
     if (fseek(fp, offset, SEEK_SET) != 0) {
 	fclose(fp);

@@ -211,14 +211,14 @@ Rconnection in_R_newsock(const char *host, int port, int server, int serverfd,
     if(!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of socket connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     strcpy(newconn->connclass, "sockconn");
     newconn->description = (char *) malloc(strlen(host) + 10);
     if(!newconn->description) {
 	free(newconn->connclass); free(newconn);
 	error(_("allocation of socket connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     init_con(newconn, host, CE_NATIVE, mode);
     newconn->open = &sock_open;
@@ -232,7 +232,7 @@ Rconnection in_R_newsock(const char *host, int port, int server, int serverfd,
     if(!newconn->connprivate) {
 	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of socket connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     ((Rsockconn)newconn->connprivate)-> port = port;
     ((Rsockconn)newconn->connprivate)-> server = server;
@@ -251,14 +251,14 @@ Rconnection in_R_newservsock(int port)
     if(!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of server socket connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     strcpy(newconn->connclass, "servsockconn");
     newconn->description = (char *) malloc(strlen("localhost") + 10);
     if(!newconn->description) {
 	free(newconn->connclass); free(newconn);
 	error(_("allocation of server socket connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     init_con(newconn, "localhost", CE_NATIVE, "a+");
     newconn->close = &servsock_close;
@@ -266,7 +266,7 @@ Rconnection in_R_newservsock(int port)
     if(!newconn->connprivate) {
 	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of server socket connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     ((Rservsockconn)newconn->connprivate)-> port = port;
 
@@ -276,7 +276,7 @@ Rconnection in_R_newservsock(int port)
 	free(newconn->connprivate); free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("creation of server socket failed: port %d cannot be opened"),
 	      port);
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     ((Rservsockconn)newconn->connprivate)-> fd = sock;
     newconn->isopen = TRUE;

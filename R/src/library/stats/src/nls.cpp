@@ -40,10 +40,9 @@ using namespace std;
  * get the list element named str. names is the name attribute of list
  */
 
-static SEXP
-getListElement(SEXP list, SEXP names, const char *str)
+static SEXP getListElement(SEXP list, SEXP names, const char *str)
 {
-    SEXP elmt = (SEXP) NULL;
+    SEXP elmt = (SEXP) nullptr;
     const char *tempChar;
     int i;
 
@@ -102,27 +101,27 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     PROTECT(tmp = getAttrib(control, R_NamesSymbol));
 
     conv = getListElement(control, tmp, "maxiter");
-    if(conv == NULL || !isNumeric(conv))
+    if(conv == nullptr || !isNumeric(conv))
 	error(_("'%s' is absent"), "control$maxiter");
     maxIter = asInteger(conv);
 
     conv = getListElement(control, tmp, "tol");
-    if(conv == NULL || !isNumeric(conv))
+    if(conv == nullptr || !isNumeric(conv))
 	error(_("'%s' is absent"), "control$tol");
     tolerance = asReal(conv);
 
     conv = getListElement(control, tmp, "minFactor");
-    if(conv == NULL || !isNumeric(conv))
+    if(conv == nullptr || !isNumeric(conv))
 	error(_("'%s' is absent"), "control$minFactor");
     minFac = asReal(conv);
 
     conv = getListElement(control, tmp, "warnOnly");
-    if(conv == NULL || !isLogical(conv))
+    if(conv == nullptr || !isLogical(conv))
 	error(_("'%s' is absent"), "control$warnOnly");
     warnOnly = asLogical(conv);
 
     conv = getListElement(control, tmp, "printEval");
-    if(conv == NULL || !isLogical(conv))
+    if(conv == nullptr || !isLogical(conv))
 	error(_("'%s' is absent"), "control$printEval");
     printEval = asLogical(conv);
 
@@ -163,32 +162,32 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     tmp = getAttrib(m, R_NamesSymbol);
 
     conv = getListElement(m, tmp, "conv");
-    if(conv == NULL || !isFunction(conv))
+    if(conv == nullptr || !isFunction(conv))
 	error(_("'%s' is absent"), "m$conv()");
     PROTECT(conv = lang1(conv));
 
     incr = getListElement(m, tmp, "incr");
-    if(incr == NULL || !isFunction(incr))
+    if(incr == nullptr || !isFunction(incr))
 	error(_("'%s' is absent"), "m$incr()");
     PROTECT(incr = lang1(incr));
 
     deviance = getListElement(m, tmp, "deviance");
-    if(deviance == NULL || !isFunction(deviance))
+    if(deviance == nullptr || !isFunction(deviance))
 	error(_("'%s' is absent"), "m$deviance()");
     PROTECT(deviance = lang1(deviance));
 
     trace = getListElement(m, tmp, "trace");
-    if(trace == NULL || !isFunction(trace))
+    if(trace == nullptr || !isFunction(trace))
 	error(_("'%s' is absent"), "m$trace()");
     PROTECT(trace = lang1(trace));
 
     setPars = getListElement(m, tmp, "setPars");
-    if(setPars == NULL || !isFunction(setPars))
+    if(setPars == nullptr || !isFunction(setPars))
 	error(_("'%s' is absent"), "m$setPars()");
     PROTECT(setPars);
 
     getPars = getListElement(m, tmp, "getPars");
-    if(getPars == NULL || !isFunction(getPars))
+    if(getPars == nullptr || !isFunction(getPars))
 	error(_("'%s' is absent"), "m$getPars()");
     PROTECT(getPars = lang1(getPars));
 
@@ -277,8 +276,7 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
  *  .Call("numeric_deriv", expr, theta, rho)
  *  Returns: ans
  */
-SEXP
-numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir)
+SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir)
 {
     SEXP ans, gradient, pars;
     double eps = sqrt(DOUBLE_EPS), *rDir;

@@ -22,7 +22,7 @@
 #include "localization.h"
 #include <cstring>
 
-/* Get the list element named str, or return NULL.
+/* Get the list element named str, or return nullptr.
  * Copied from the Writing R Extensions manual (which copied it from nls)
  */
 SEXP getListElement(SEXP list, const char *str)
@@ -270,7 +270,7 @@ SEXP L_GetSEXPPtr(SEXP sp)
      * This can occur if, for example, a grid grob is saved
      * and then loaded.  The saved grob has its ptr null'ed
      */
-    if (data == NULL)
+    if (data == nullptr)
 	error(_("grid grob object is empty"));
     return VECTOR_ELT(data, 0);
 }
@@ -282,7 +282,7 @@ SEXP L_SetSEXPPtr(SEXP sp, SEXP s)
      * This can occur if, for example, a grid grob is saved
      * and then loaded.  The saved grob has its ptr null'ed
      */
-    if (data == NULL)
+    if (data == nullptr)
 	error(_("grid grob object is empty"));
     SET_VECTOR_ELT(data, 0, s);
     return R_NilValue;

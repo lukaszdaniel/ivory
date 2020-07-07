@@ -34,13 +34,14 @@ static char rhomebuf[MAX_PATH];
 
 /* <MBCS-FIXME> We can't just use Rf_strchr as this is called
    from front-ends */
-#define GOBACKONESLASH \
-    p = strrchr(rhomebuf,'\\'); \
-    if (!p) { \
-	MessageBox(NULL, "Installation problem", "Terminating", \
-		   MB_TASKMODAL | MB_ICONSTOP | MB_OK);\
-	exit(1); \
-    } \
+#define GOBACKONESLASH                                             \
+    p = strrchr(rhomebuf, '\\');                                   \
+    if (!p)                                                        \
+    {                                                              \
+        MessageBox(nullptr, "Installation problem", "Terminating", \
+                   MB_TASKMODAL | MB_ICONSTOP | MB_OK);            \
+        exit(1);                                                   \
+    }                                                              \
     *p = '\0'
 
 /* get R_HOME from the module path: used in RSetReg */
@@ -48,7 +49,7 @@ char *getRHOMElong(int m)
 {
     char *p;
 
-    GetModuleFileName(NULL, rhomebuf, MAX_PATH);
+    GetModuleFileName(nullptr, rhomebuf, MAX_PATH);
     for(int i=0; i < m; i++) {GOBACKONESLASH;}
     return (rhomebuf);
 }
@@ -97,7 +98,7 @@ char *get_R_HOME(void)
 	rc = RegQueryValueEx(hkey, "InstallPath", 0, &keytype,
 			     (LPBYTE) rhomebuf, &cbData);
 	RegCloseKey (hkey);
-    } else return NULL;
-    if (rc != ERROR_SUCCESS) return NULL;
+    } else return nullptr;
+    if (rc != ERROR_SUCCESS) return nullptr;
     return rhomebuf;
 }

@@ -799,7 +799,7 @@ static SymTab
         {"bracerightmid", 253},
         {"bracerightbt", 254},
 
-        {NULL, 0},
+        {nullptr, 0},
 };
 
 static int SymbolCode(SEXP expr)
@@ -1058,7 +1058,7 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
     if (draw) {
 	memset(asciiStr, 0, sizeof(asciiStr));
 	if(mbcslocale) {
-	    size_t res = wcrtomb(asciiStr, ascii, NULL);
+	    size_t res = wcrtomb(asciiStr, ascii, nullptr);
 	    if(res == (size_t) -1)
 		error(_("invalid character in current multibyte locale"));
 	} else
@@ -1274,7 +1274,7 @@ static SymTab BinTable[] = {
     {"%intersection%", 0307},
     {"%union%", 0310},
     {"%.%", 0327}, /* cdot or dotmath */
-    {NULL, 0}};
+    {nullptr, 0}};
 
 static int BinAtom(SEXP expr)
 {
@@ -1646,7 +1646,7 @@ static struct AccentTable
     {"ring", 176},
     {"tilde", 126},
     {"dot", 215},
-    {NULL, 0},
+    {nullptr, 0},
 };
 
 static int AccentCode(SEXP expr)
@@ -2291,7 +2291,7 @@ static SymTab OpTable[] = {
     { "sup",		N_SUP },
     { "min",		N_MIN },
     { "max",		N_MAX },
-    { NULL,		0 }
+    { nullptr,		0 }
 };
 
 static int OpAtom(SEXP expr)
@@ -2643,7 +2643,7 @@ SymTab RelTable[] = {
     { "%in%",		206 },
     { "%notin%",	207 },
 
-    { NULL,		  0 },
+    { nullptr,		  0 },
 };
 
 static int RelAtom(SEXP expr)

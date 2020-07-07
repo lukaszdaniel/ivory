@@ -42,26 +42,26 @@ static SEXP GetObject(RCNTXT *cptr)
 
     tag = TAG(formals);
     if (tag != R_NilValue && tag != R_DotsSymbol) {
-	s = NULL;
+	s = nullptr;
 	/** exact matches **/
 	for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), TRUE)) {
-		if (s != NULL)
+		if (s != nullptr)
 		    error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		else
 		    s = CAR(b);
 	    }
 
-	if (s == NULL)
+	if (s == nullptr)
 	    /** partial matches **/
 	    for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), FALSE)) {
-		    if ( s != NULL)
+		    if ( s != nullptr)
 			error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		    else
 			s = CAR(b);
 		}
-	if (s == NULL)
+	if (s == nullptr)
 	    /** first untagged argument **/
 	    for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 		if (TAG(b) == R_NilValue )
@@ -69,7 +69,7 @@ static SEXP GetObject(RCNTXT *cptr)
 		    s = CAR(b);
 		    break;
 		}
-	if (s == NULL)
+	if (s == nullptr)
 	    s = CAR(cptr->getPromiseArgs());
 /*
 	    error("failed to match argument for dispatch");
@@ -155,7 +155,7 @@ static SEXP matchmethargs(SEXP oldargs, SEXP newargs)
    loaded, and back to R_GlobalEnv when it is unloaded. */
 
 #ifdef S3_for_S4_warn /* not currently used */
-static SEXP s_check_S3_for_S4 = NULL;
+static SEXP s_check_S3_for_S4 = nullptr;
 void R_warn_S3_for_S4(SEXP method) {
   SEXP call;
   if(!s_check_S3_for_S4)
@@ -233,7 +233,7 @@ HIDDEN
 SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
-    static SEXP s_S3MethodsTable = NULL;
+    static SEXP s_S3MethodsTable = nullptr;
     static int lookup_baseenv_after_globalenv = -1;
     static int lookup_report_search_path_uses = -1;
     char *lookup;
@@ -257,13 +257,13 @@ SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     if(lookup_baseenv_after_globalenv == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_BASEENV_AFTER_GLOBALENV_");
 	lookup_baseenv_after_globalenv = 
-	    ((lookup != NULL) && StringFalse(lookup)) ? 0 : 1;
+	    ((lookup != nullptr) && StringFalse(lookup)) ? 0 : 1;
     }
 
     if(lookup_report_search_path_uses == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_REPORT_SEARCH_PATH_USES_");
 	lookup_report_search_path_uses = 
-	    ((lookup != NULL) && StringTrue(lookup)) ? 1 : 0;
+	    ((lookup != nullptr) && StringTrue(lookup)) ? 1 : 0;
     }
 
     /* This evaluates promises */
@@ -341,7 +341,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
    to an object from an S4 subclass.
 */
 int Rf_isBasicClass(const char *ss) {
-    static SEXP s_S3table = NULL;
+    static SEXP s_S3table = nullptr;
     if(!s_S3table) {
       s_S3table = findVarInFrame3(R_MethodsNamespace, install(".S3MethodsClasses"), TRUE);
       if(s_S3table == R_UnboundValue)
@@ -504,12 +504,12 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP callenv, defenv;
     SEXP argList;
     RCNTXT *cptr;
-    static SEXP do_usemethod_formals = NULL;
+    static SEXP do_usemethod_formals = nullptr;
 
     static int lookup_use_topenv_as_defenv = -1;
     char *lookup;
 
-    if (do_usemethod_formals == NULL)
+    if (do_usemethod_formals == nullptr)
 	do_usemethod_formals = allocFormalsList2(install("generic"),
 						 install("object"));
 
@@ -524,7 +524,7 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if(lookup_use_topenv_as_defenv == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_USE_TOPENV_AS_DEFENV_");
 	lookup_use_topenv_as_defenv = 
-	    ((lookup != NULL) && StringFalse(lookup)) ? 0 : 1;
+	    ((lookup != nullptr) && StringFalse(lookup)) ? 0 : 1;
     }
 
     /* get environments needed for dispatching.
@@ -685,11 +685,11 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* get the env NextMethod was called from */
     sysp = R_GlobalContext->getSysParent();
-    while (cptr != NULL) {
+    while (cptr != nullptr) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION && cptr->workingEnvironment() == sysp) break;
 	cptr = cptr->nextContext();
     }
-    if (cptr == NULL)
+    if (cptr == nullptr)
 	error(_("'NextMethod()' called from outside a function"));
 
     PROTECT(newcall = duplicate(cptr->getCall()));
@@ -797,7 +797,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
        If t is R_UnboundValue then we called the current method directly
     */
     const void *vmax = vmaxget(); /* needed for translateChar */
-    const char *b = NULL;
+    const char *b = nullptr;
     if (method != R_UnboundValue) {
 	if (!isString(method))
 	    error(_("wrong value for .Method"));
@@ -1065,7 +1065,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	/* now try the superclasses, i.e.,  try   is(x, "....");  superCl :=
 	   .selectSuperClasses(getClass("....")@contains, dropVirtual=TRUE)  */
 	SEXP classExts, superCl, _call;
-	static SEXP s_contains = NULL, s_selectSuperCl = NULL;
+	static SEXP s_contains = nullptr, s_selectSuperCl = nullptr;
 	if(!s_contains) {
 	    s_contains      = install("contains");
 	    s_selectSuperCl = install(".selectSuperClasses");
@@ -1111,7 +1111,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
  */
 int R_check_class_etc(SEXP x, const char **valid)
 {
-    static SEXP meth_classEnv = NULL;
+    static SEXP meth_classEnv = nullptr;
     SEXP cl = getAttrib(x, R_ClassSymbol), rho = R_GlobalEnv, pkg;
     if(!meth_classEnv)
 	meth_classEnv = install(".classEnv");
@@ -1172,7 +1172,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 	if(onOffValue == NA_INTEGER)
 	    error(_("'%s' argument must be TRUE or FALSE"), "onOff");
 	else if(onOffValue == FALSE)
-	    R_set_standardGeneric_ptr(NULL, R_GlobalEnv);
+	    R_set_standardGeneric_ptr(nullptr, R_GlobalEnv);
 	// TRUE is not currently used
 	else if(NOT_METHODS_DISPATCH_PTR(old)) {
 	    // so not already on
@@ -1258,14 +1258,15 @@ static SEXP get_this_generic(SEXP args);
 
 HIDDEN SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP arg, value, fdef; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
+	SEXP arg, value, fdef;
+	R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 
-    checkArity(op, args); /* set to -1 */
+	checkArity(op, args); /* set to -1 */
     check1arg(args, call, "f");
 
     if(!ptr) {
 	warningcall(call, _("'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"));
-	R_set_standardGeneric_ptr(dispatchNonGeneric, NULL);
+	R_set_standardGeneric_ptr(dispatchNonGeneric, nullptr);
 	ptr = R_get_standardGeneric_ptr();
     }
 
@@ -1337,24 +1338,26 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 
 SEXP R_primitive_methods(SEXP op)
 {
-    int offset = PRIMOFFSET(op);
-    if(offset < 0 || offset > curMaxOffset)
-	return R_NilValue;
-    else {
-	SEXP value = prim_mlist[offset];
-	return value ? value : R_NilValue;
-    }
+	int offset = PRIMOFFSET(op);
+	if (offset < 0 || offset > curMaxOffset)
+		return R_NilValue;
+	else
+	{
+		SEXP value = prim_mlist[offset];
+		return value ? value : R_NilValue;
+	}
 }
 
 SEXP R_primitive_generic(SEXP op)
 {
-    int offset = PRIMOFFSET(op);
-    if(offset < 0 || offset > curMaxOffset)
-	return R_NilValue;
-    else {
-	SEXP value = prim_generics[offset];
-	return value ? value : R_NilValue;
-    }
+	int offset = PRIMOFFSET(op);
+	if (offset < 0 || offset > curMaxOffset)
+		return R_NilValue;
+	else
+	{
+		SEXP value = prim_generics[offset];
+		return value ? value : R_NilValue;
+	}
 }
 
 // used in the methods package, but also here
@@ -1408,8 +1411,8 @@ SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 	    /* Realloc does not clear the added memory, hence: */
 	    for (i = maxMethodsOffset ; i < n ; i++) {
 		prim_methods[i]	 = NO_METHODS;
-		prim_generics[i] = NULL;
-		prim_mlist[i]	 = NULL;
+		prim_generics[i] = nullptr;
+		prim_mlist[i]	 = nullptr;
 	    }
 	}
 	else {
@@ -1455,21 +1458,23 @@ SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 
 static SEXP get_primitive_methods(SEXP op, SEXP rho)
 {
-    SEXP f, e, val;
-    int nprotect = 0;
-    f = PROTECT(allocVector(STRSXP, 1));  nprotect++;
-    SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
-    PROTECT(e = allocVector(LANGSXP, 2)); nprotect++;
-    SETCAR(e, install("getGeneric"));
-    val = CDR(e); SETCAR(val, f);
-    val = eval(e, rho);
-    /* a rough sanity check that this looks like a generic function */
-    if(TYPEOF(val) != CLOSXP || !IS_S4_OBJECT(val))
-	error(_("object returned as generic function '%s' does not appear to be one"), PRIMNAME(op));
-    UNPROTECT(nprotect);
-    return CLOENV(val);
+	SEXP f, e, val;
+	int nprotect = 0;
+	f = PROTECT(allocVector(STRSXP, 1));
+	nprotect++;
+	SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
+	PROTECT(e = allocVector(LANGSXP, 2));
+	nprotect++;
+	SETCAR(e, install("getGeneric"));
+	val = CDR(e);
+	SETCAR(val, f);
+	val = eval(e, rho);
+	/* a rough sanity check that this looks like a generic function */
+	if (TYPEOF(val) != CLOSXP || !IS_S4_OBJECT(val))
+		error(_("object returned as generic function '%s' does not appear to be one"), PRIMNAME(op));
+	UNPROTECT(nprotect);
+	return CLOENV(val);
 }
-
 
 /* get the generic function, defined to be the function definition for
 the call to standardGeneric(), or for primitives, passed as the second
@@ -1477,7 +1482,7 @@ argument to standardGeneric.
 */
 static SEXP get_this_generic(SEXP args)
 {
-    static SEXP gen_name = NULL;
+    static SEXP gen_name = nullptr;
     RCNTXT *cptr;
     SEXP fname;
 
@@ -1489,7 +1494,7 @@ static SEXP get_this_generic(SEXP args)
     fname = STRING_ELT(CAR(args), 0); /* type and length checked by caller */
 
     /* check for a matching "generic" slot */
-    for(cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextContext())
+    for(cptr = R_GlobalContext; cptr != nullptr; cptr = cptr->nextContext())
 	if((cptr->getCallFlag() & CTXT_FUNCTION) && isObject(cptr->getCallFun())) {
 	    SEXP generic = getAttrib(cptr->getCallFun(), gen_name);
 	    if(isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))
@@ -1522,13 +1527,12 @@ static SEXP deferred_default_object;
 
 SEXP R_deferred_default_method()
 {
-    if(!deferred_default_object)
-	deferred_default_object = install("__Deferred_Default_Marker__");
-    return(deferred_default_object);
+	if (!deferred_default_object)
+		deferred_default_object = install("__Deferred_Default_Marker__");
+	return deferred_default_object;
 }
 
-
-static R_stdGen_ptr_t quick_method_check_ptr = NULL;
+static R_stdGen_ptr_t quick_method_check_ptr = nullptr;
 void R_set_quick_method_check(R_stdGen_ptr_t value)
 {
     quick_method_check_ptr = value;
@@ -1627,14 +1631,14 @@ HIDDEN SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
     }
     prim_methods[offset] = current;
     if(value == deferred_default_object)
-	return NULL;
+	return nullptr;
     else
 	return value;
 }
 
 SEXP R_do_MAKE_CLASS(const char *what)
 {
-    static SEXP s_getClass = NULL;
+    static SEXP s_getClass = nullptr;
     SEXP e, call;
     if(!what)
 	error(_("C level MAKE_CLASS macro called with NULL string pointer"));
@@ -1651,7 +1655,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
 // and 'what' is never checked
 SEXP R_getClassDef_R(SEXP what)
 {
-    static SEXP s_getClassDef = NULL;
+    static SEXP s_getClassDef = nullptr;
     if(!s_getClassDef) s_getClassDef = install("getClassDef");
     if(!isMethodsDispatchOn()) error(_("'methods' package not yet loaded"));
     SEXP call = PROTECT(lang2(s_getClassDef, what));
@@ -1673,7 +1677,7 @@ SEXP R_getClassDef(const char *what)
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
-    static SEXP isVCl_sym = NULL;
+    static SEXP isVCl_sym = nullptr;
     if(!isVCl_sym) isVCl_sym = install("isVirtualClass");
     SEXP call = PROTECT(lang2(isVCl_sym, class_def));
     SEXP e = PROTECT(eval(call, env));
@@ -1687,7 +1691,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
 Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 {
     if(!isMethodsDispatchOn()) return(FALSE);
-    static SEXP extends_sym = NULL;
+    static SEXP extends_sym = nullptr;
     if(!extends_sym) extends_sym = install("extends");
     SEXP call = PROTECT(lang3(extends_sym, class1, class2));
     SEXP e = PROTECT(eval(call, env));
@@ -1701,7 +1705,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 /* in Rinternals.h */
 SEXP R_do_new_object(SEXP class_def)
 {
-    static SEXP s_virtual = NULL, s_prototype, s_className;
+    static SEXP s_virtual = nullptr, s_prototype, s_className;
     SEXP e, value;
     const void *vmax = vmaxget();
     if(!s_virtual) {

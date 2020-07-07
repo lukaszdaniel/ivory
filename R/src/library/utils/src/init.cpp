@@ -67,7 +67,7 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(shortpath, 1),
 #endif
 
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -112,13 +112,13 @@ static const R_ExternalMethodDef ExtEntries[] = {
     EXTDEF(arrangeWindows, 4),
 #endif
 
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_utils(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, ExtEntries);
+    R_registerRoutines(dll, nullptr, CallEntries, nullptr, ExtEntries);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, TRUE);
 }

@@ -94,7 +94,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 	    else if(c == '%') {
 		while((c != '\0') && (c != '\n')) {
 		    if(mbcslocale) {
-			used = (int) Rf_mbrtowc(NULL, s, MB_CUR_MAX, &mb_st);
+			used = (int) Rf_mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
 			if(used == 0) break;
 			s += used; c = *s;
 		    } else
@@ -118,7 +118,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		delim_depth++;
 	    }
 	    if(mbcslocale) {
-		used = (int) Rf_mbrtowc(NULL, s, MB_CUR_MAX, &mb_st);
+		used = (int) Rf_mbrtowc(nullptr, s, MB_CUR_MAX, &mb_st);
 		if(used == 0) break;
 		s += used;
 	    } else
@@ -221,7 +221,7 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 {
     int bufsize = 1024;
     char *buffer = (char *) malloc(bufsize*sizeof(char));
-    if (buffer == NULL) error(_("out of memory"));
+    if (buffer == nullptr) error(_("out of memory"));
     SEXP result = PROTECT(allocVector(STRSXP, length(strings)));
     for (int i = 0; i < length(strings); i++) {
 	char *b;

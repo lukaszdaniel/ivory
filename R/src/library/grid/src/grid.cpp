@@ -370,7 +370,7 @@ SEXP doSetViewport(SEXP vp,
              * So we record the parent mask in this pushed vp to restore on pop 
              */
             /* NOTE that we are relying on grid.R setting mask = FALSE
-             * (so pushedvp$mask = NULL)
+             * (so pushedvp$mask = nullptr)
              * for the top-level viewport, else *BOOM*!
              */
             SET_VECTOR_ELT(vp, PVP_MASK, 
@@ -3481,7 +3481,7 @@ SEXP L_cap()
     SEXP image, idim;
 
     PROTECT(raster = GECap(dd));
-    /* Non-complying devices will return NULL */
+    /* Non-complying devices will return nullptr */
     if (isNull(raster)) {
         image = raster;
     } else {
@@ -3534,7 +3534,7 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
      * Bounding rectangles for checking overlapping
      * Initialised to shut up compiler
      */
-    LRect *bounds = NULL;
+    LRect *bounds = nullptr;
     LRect trect;
     int numBounds = 0;
     int overlapChecking = LOGICAL(checkOverlap)[0];
@@ -3966,7 +3966,7 @@ SEXP L_pretty(SEXP scale) {
      * log scales.  This will cause death and destruction if it is 
      * not addressed when log scales are added !
      */
-    double *usr = NULL;
+    double *usr = nullptr;
     double axp[3];
     /* FIXME:  Default preferred number of ticks hard coded ! */
     int n = 5;

@@ -51,13 +51,13 @@ static const R_CallMethodDef callMethods[] = {
 #else
     CALLDEF(ncpus, 1),
 #endif
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_parallel(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
+    R_registerRoutines(dll, nullptr, callMethods, nullptr, nullptr);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, FALSE);
 }

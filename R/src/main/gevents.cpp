@@ -32,18 +32,18 @@
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Print.h>
 
-static const char * const mouseHandlers[] =
-{"onMouseDown", "onMouseUp", "onMouseMove"};
+static const char *const mouseHandlers[] =
+	{"onMouseDown", "onMouseUp", "onMouseMove"};
 
-static const char * const keybdHandler = "onKeybd";
+static const char *const keybdHandler = "onKeybd";
 
-static const char * const idleHandler = "onIdle";
+static const char *const idleHandler = "onIdle";
 
-static void checkHandler(const char * const name, SEXP eventEnv)
+static void checkHandler(const char *const name, SEXP eventEnv)
 {
-    SEXP handler = findVar(install(name), eventEnv);
-    if (TYPEOF(handler) == CLOSXP)
-	warning(_("'%s' events not supported in this device"), name);
+	SEXP handler = findVar(install(name), eventEnv);
+	if (TYPEOF(handler) == CLOSXP)
+		warning(_("'%s' events not supported in this device"), name);
 }
 
 extern "C"
@@ -109,9 +109,9 @@ SEXP do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* helper function to check if there is at least one open graphics device listening for events. Returns TRUE if so, FALSE if no listening devices are found */
 
-Rboolean haveListeningDev()
+bool haveListeningDev()
 {
-    Rboolean ret = FALSE;
+    bool ret = false;
     pDevDesc dd;
     pGEDevDesc gd;
     if(!NoDevices())
@@ -120,7 +120,7 @@ Rboolean haveListeningDev()
 	{
 	    if ((gd = GEgetDevice(i)) && (dd = gd->dev)
 		 && dd->gettingEvent){
-		ret = TRUE;
+		ret = true;
 		break;
 	    }
 	}
@@ -250,10 +250,10 @@ void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
     return;
 }
 
-static const char * const keynames[] =
-{"Left", "Up", "Right", "Down",
- "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11","F12",
- "PgUp", "PgDn", "End", "Home", "Ins", "Del"};
+static const char *const keynames[] =
+	{"Left", "Up", "Right", "Down",
+	 "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
+	 "PgUp", "PgDn", "End", "Home", "Ins", "Del"};
 
 /* used in devWindows.cpp and cairoDevice */
 void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
@@ -318,8 +318,9 @@ void Rf_doIdle(pDevDesc dd)
     return;
 }
 
-Rboolean Rf_doesIdle(pDevDesc dd) {
-    SEXP handler = findVar(install(idleHandler), dd->eventEnv);
-    return (Rboolean) ((handler != R_UnboundValue) &&
-        (handler != R_NilValue));
+Rboolean Rf_doesIdle(pDevDesc dd)
+{
+	SEXP handler = findVar(install(idleHandler), dd->eventEnv);
+	return (Rboolean)((handler != R_UnboundValue) &&
+					  (handler != R_NilValue));
 }

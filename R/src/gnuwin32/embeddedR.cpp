@@ -92,7 +92,7 @@ int Rf_initialize_R(int argc, char *argv[])
 
     R_setStartTime();
     R_DefParams(Rp);
-    if((RHome = get_R_HOME()) == NULL) {
+    if((RHome = get_R_HOME()) == nullptr) {
 	fprintf(stderr,
 		"R_HOME must be set in the environment or Registry\n");
 	exit(2);

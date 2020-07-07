@@ -140,7 +140,7 @@ static int computeDLOpenFlag(int asLocal, int now)
        warning once as in
        DL_WARN(i) if(warningMessages[i]) {\
        warning(warningMessages[i]); \
-       warningMessages[i] = NULL; \
+       warningMessages[i] = nullptr; \
        }
        or to control the emission via the options currently in effect at
        call time.

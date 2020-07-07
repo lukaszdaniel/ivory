@@ -1529,7 +1529,7 @@ static UnitTab UnitTable[] = {
     { "point",       1008 },
     { "pt",          1008 },
 
-    { NULL,            -1 }
+    { nullptr,            -1 }
 };
 
 int convertUnit(SEXP unit, int index) 
@@ -1538,7 +1538,7 @@ int convertUnit(SEXP unit, int index)
     int result = 0;
     int found = 0;
     while (result >= 0 && !found) {
-	if (UnitTable[i].name == NULL) 
+	if (UnitTable[i].name == nullptr) 
 	    result = -1;
 	else {
 	    found = !strcmp(CHAR(STRING_ELT(unit, index)), UnitTable[i].name);

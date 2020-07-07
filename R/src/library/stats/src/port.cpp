@@ -394,8 +394,8 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
     int i, n = LENGTH(d);
     SEXP xpt;
     SEXP dot_par_symbol = install(".par");
-    double *b = (double *) NULL, *g = (double *) NULL,
-	*h = (double *) NULL, fx = R_PosInf;
+    double *b = (double *) nullptr, *g = (double *) nullptr,
+	*h = (double *) nullptr, fx = R_PosInf;
     if (isNull(rho)) {
 	error(_("use of NULL environment is defunct"));
 	rho = R_BaseEnv;
@@ -502,7 +502,7 @@ R_INLINE static SEXP getFunc(SEXP list, const char *enm, const char *lnm)
 {
     SEXP ans;
     if (!isFunction(ans = getElement(list, enm))) {
-	char *bf = NULL;
+	char *bf = nullptr;
 	strcat(bf, lnm);
 	strcat(bf, "$");
 	strcat(bf, enm);
@@ -570,7 +570,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	x = PROTECT(allocVector(REALSXP, n));
     // This used to use Calloc, but that will leak if 
     // there is a premature return (and did in package drfit)
-    double *b = (double *) NULL,
+    double *b = (double *) nullptr,
 	*rd = (double *)R_alloc(nd, sizeof(double));
 
     if (!isReal(d) || n < 1)

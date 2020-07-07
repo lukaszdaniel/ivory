@@ -45,15 +45,15 @@ const static struct
     {"HLM", HKEY_LOCAL_MACHINE},
     {"HPD", HKEY_PERFORMANCE_DATA},
     {"HU", HKEY_USERS},
-    {NULL, NULL}};
+    {nullptr, nullptr}};
 
 const char *formatError(DWORD res)
 {
     static char buf[1000], *p;
     FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-		  NULL, res,
+		  nullptr, res,
 		  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		  buf, 1000, NULL);
+		  buf, 1000, nullptr);
     p = buf+strlen(buf) -1;
     if(*p == '\n') *p = '\0';
     p = buf+strlen(buf) -1;
@@ -89,12 +89,12 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
     DWORD type, size0 = 10000, size = size0;
     BYTE data[10000], *d = data;
 
-    res = RegQueryValueExW(hkey, name, NULL, &type, d, &size);
+    res = RegQueryValueExW(hkey, name, nullptr, &type, d, &size);
     while (res == ERROR_MORE_DATA) {
 	size0 *= 10;
 	size = size0;
 	d = (BYTE *) R_alloc(size0, sizeof(char));
-	res = RegQueryValueExW(hkey, name, NULL, &type, d, &size);
+	res = RegQueryValueExW(hkey, name, nullptr, &type, d, &size);
     }
     if (res != ERROR_SUCCESS) return ans;
 
@@ -169,9 +169,9 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
     if(view == 2) acc |= KEY_WOW64_32KEY;
     else if(view == 3) acc |= KEY_WOW64_64KEY;
 
-    res = RegQueryInfoKey(hkey, NULL, NULL, NULL,
-			  &nsubkeys, &maxsubkeylen, NULL, &nval,
-			  &maxvalnamlen, NULL, NULL, NULL);
+    res = RegQueryInfoKey(hkey, nullptr, nullptr, nullptr,
+			  &nsubkeys, &maxsubkeylen, nullptr, &nval,
+			  &maxvalnamlen, nullptr, nullptr, nullptr);
     if (res != ERROR_SUCCESS)
 	error(_("RegQueryInfoKey error code %d: '%s'"), (int) res,
 	      formatError(res));
@@ -185,7 +185,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 	for (i = 0; i < nval; i++) {
 	    size = size0;
 	    res  = RegEnumValueW(hkey, i, (LPWSTR) name, &size,
-				 NULL, NULL, NULL, NULL);
+				 nullptr, nullptr, nullptr, nullptr);
 	    if (res != ERROR_SUCCESS) break;
 	    SET_VECTOR_ELT(ans0, i, readRegistryKey1(hkey, name));
 	    SET_STRING_ELT(nm0, i, mkCharUcs(name));
@@ -209,7 +209,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 	for (i = 0; i < nsubkeys; i++) {
 	    size = size0;
 	    res = RegEnumKeyExW(hkey, i, (LPWSTR) name, &size,
-				NULL, NULL, NULL, NULL);
+				nullptr, nullptr, nullptr, nullptr);
 	    if (res != ERROR_SUCCESS) break;
 	    res = RegOpenKeyExW(hkey, (LPWSTR) name, 0, acc, &sub);
 	    if (res != ERROR_SUCCESS) break;

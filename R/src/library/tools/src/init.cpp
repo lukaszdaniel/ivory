@@ -30,7 +30,7 @@ void Renctest(char **x)
 
 static const R_CMethodDef CEntries[]  = {
     {"Renctest", (DL_FUNC) &Renctest, 1},
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 #endif
 
@@ -54,7 +54,7 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(splitString, 2),
     CALLDEF(package_dependencies_scan, 1),
 
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -62,13 +62,13 @@ static const R_ExternalMethodDef ExtEntries[] = {
     EXTDEF(parseLatex, 4),
     EXTDEF(parseRd, 9),
 
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_tools(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, ExtEntries);
+    R_registerRoutines(dll, nullptr, CallEntries, nullptr, ExtEntries);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, FALSE);
 }

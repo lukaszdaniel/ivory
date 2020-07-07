@@ -54,13 +54,13 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(R_set_method_dispatch, 1),
     CALLDEF(R_get_primname, 1),
     CALLDEF(new_object, 1),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_methods(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_registerRoutines(dll, nullptr, CallEntries, nullptr, nullptr);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, TRUE);
 }

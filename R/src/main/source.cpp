@@ -221,7 +221,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *encoding = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
 
     parse_cleanup_info pci;
-    pci.con = NULL;
+    pci.con = nullptr;
     pci.old_latin1 = known_to_be_latin1;
     pci.old_utf8 = known_to_be_utf8;
     RCNTXT cntxt;
@@ -288,7 +288,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	s = R_ParseConn(con, num, &status, source);
 	if(!wasopen) {
 	    PROTECT(s);
-	    pci.con = NULL;
+	    pci.con = nullptr;
 	    con->close(con);
 	    UNPROTECT(1);
 	}

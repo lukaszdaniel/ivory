@@ -2519,7 +2519,7 @@ void GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd
    This assume that locator is running on only one device at a time,
    which is currently safe.
 */
-static void (*old_close)(pDevDesc) = NULL;
+static void (*old_close)(pDevDesc) = nullptr;
 
 static void
 #ifndef _WIN32
@@ -2529,7 +2529,7 @@ locator_close(pDevDesc dd)
 {
     if(old_close) old_close(dd);
     dd->close = old_close;
-    old_close = NULL;
+    old_close = nullptr;
     /* It's not safe to call error() in a Windows event handler, so
        the GA_Close method records the close event separately.
     */
@@ -2555,7 +2555,7 @@ Rboolean GLocator(double *x, double *y, int coords, pGEDevDesc dd)
   } else ret =  FALSE;
   /* restore original close handler */
   dd->dev->close = old_close;
-  old_close = NULL;
+  old_close = nullptr;
   return ret;
 
 }

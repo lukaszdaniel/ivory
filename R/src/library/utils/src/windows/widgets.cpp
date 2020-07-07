@@ -60,8 +60,8 @@ static void finish(button b)
 
 static void key1(control c, int ch)
 {
-    if(ch == '\n') finish(NULL);
-    if(ch == ESC)  cancel(NULL);
+    if(ch == '\n') finish(nullptr);
+    if(ch == ESC)  cancel(nullptr);
 }
 
 rect getSysFontSize(void); /* in graphapp/fonts.c */
@@ -90,9 +90,9 @@ SEXP Win_selectlist(SEXP args)
     clist = (const char **) R_alloc(n + 1, sizeof(char *));
     for(i = 0; i < n; i++) {
 	clist[i] = translateChar(STRING_ELT(choices, i));
-	mw = max(mw, gstrwidth(NULL, SystemFont, clist[i]));
+	mw = max(mw, gstrwidth(nullptr, SystemFont, clist[i]));
     }
-    clist[n] = NULL;
+    clist[n] = nullptr;
 
     fht = getSysFontSize().height;
 
@@ -101,7 +101,7 @@ SEXP Win_selectlist(SEXP args)
 	RECT *pR = RgetMDIsize();
 	h0 = pR->bottom;
     } else {
-	h0 = deviceheight(NULL);
+	h0 = deviceheight(nullptr);
     }
     ymax = min(80+fht*n, h0-100); /* allow for window widgets, toolbar */
     ylist = ymax - 60;
@@ -111,9 +111,9 @@ SEXP Win_selectlist(SEXP args)
 			Titlebar | Centered | Modal | Floating);
     setbackground(wselect, dialog_bg());
     if(multiple)
-	f_list = newmultilist(clist, rect(10, 10, xmax-25, ylist), NULL, finish);
+	f_list = newmultilist(clist, rect(10, 10, xmax-25, ylist), nullptr, finish);
     else
-	f_list = newlistbox(clist, rect(10, 10, xmax-25, ylist), NULL, finish);
+	f_list = newlistbox(clist, rect(10, 10, xmax-25, ylist), nullptr, finish);
     if(!isNull(preselect) && LENGTH(preselect)) {
 	for(i = 0; i < n; i++)
 	    for(j = 0; j < LENGTH(preselect); j++)
@@ -206,7 +206,7 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     *temp = 0;
 
     res = askfilenamesW(filenameToWchar(STRING_ELT(caption, 0), 0), path,
-			multi, cfilters, filterindex, NULL);
+			multi, cfilters, filterindex, nullptr);
 
     if (multi)
     	count = countFilenamesW(res);

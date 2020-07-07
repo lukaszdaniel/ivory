@@ -1050,13 +1050,13 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 
 SEXP Rf_matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
 {
-    return match5(itable, ix, nmatch, NULL, env);
+    return match5(itable, ix, nmatch, nullptr, env);
 }
 
 /* used from other code, not here: */
 SEXP Rf_match(SEXP itable, SEXP ix, int nmatch)
 {
-    return match5(itable, ix, nmatch, NULL, R_BaseEnv);
+    return match5(itable, ix, nmatch, nullptr, R_BaseEnv);
 }
 
 
@@ -1075,7 +1075,7 @@ HIDDEN SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
     if (isNull(incomp) || /* S has FALSE to mean empty */
 	(length(incomp) == 1 && isLogical(incomp) &&
 	 LOGICAL_ELT(incomp, 0) == 0))
-	return match5(CADR(args), CAR(args), nomatch, NULL, env);
+	return match5(CADR(args), CAR(args), nomatch, nullptr, env);
     else
 	return match5(CADR(args), CAR(args), nomatch, incomp, env);
 }
@@ -1099,7 +1099,7 @@ HIDDEN SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, input, target;
     int mtch, n_target, mtch_count, dups_ok, no_match;
     size_t temp;
-    int *used = NULL, *ians;
+    int *used = nullptr, *ians;
     const char **in, **tar;
     Rboolean no_dups;
     bool useBytes = false, useUTF8 = false;

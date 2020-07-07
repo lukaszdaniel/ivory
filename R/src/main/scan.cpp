@@ -70,10 +70,10 @@ struct LocalData
 	int quiet;
 	int sepchar; /*  = 0 */	  /* This gets compared to ints */
 	char decchar; /* = '.' */ /* This only gets compared to chars */
-	const char *quoteset;	  /* = NULL */
+	const char *quoteset;	  /* = nullptr */
 	int comchar;			  /* = NO_COMCHAR */
 	int ttyflag;			  /* = 0 */
-	Rconnection con;		  /* = NULL */
+	Rconnection con;		  /* = nullptr */
 	Rboolean wasopen;		  /* = FALSE */
 	Rboolean escapes;		  /* = FALSE */
 	int save;				  /* = 0; */
@@ -557,7 +557,7 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     int c, strip, bch;
     R_xlen_t i, blocksize, linesread, n, nprev;
     char *buffer;
-    R_StringBuffer strBuf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = {nullptr, 0, MAXELTSIZE};
 
     if (maxitems > 0) blocksize = maxitems;
     else blocksize = SCAN_BLOCKSIZE;
@@ -670,11 +670,11 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
                       int multiline, LocalData *d)
 {
     SEXP ans, new_, old, w;
-    char *buffer = NULL;
+    char *buffer = nullptr;
     int c, strip, bch;
     R_xlen_t blksize, i, ii, j, n, nc, linesread, colsread;
     R_xlen_t badline, nstring = 0;
-    R_StringBuffer buf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer buf = {nullptr, 0, MAXELTSIZE};
 
     nc = xlength(what);
     if (!nc) {
@@ -840,7 +840,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
     RCNTXT cntxt;
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {nullptr, 0, 0, '.', nullptr, NO_COMCHAR, 0, nullptr, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE, FALSE, FALSE, {FALSE}};
     data.NAstrings = R_NilValue;
 

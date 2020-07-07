@@ -131,7 +131,7 @@ HIDDEN SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int quote;
     SEXP a, x, rowlab, collab, naprint;
-    char *rowname = NULL, *colname = NULL;
+    char *rowname = nullptr, *colname = nullptr;
 
     checkArity(op,args);
     PrintDefaults();
@@ -605,7 +605,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	else { /* ns = length(s) == 0 */
 	    const void *vmax = vmaxget();
 	    /* Formal classes are represented as empty lists */
-	    const char *className = NULL;
+	    const char *className = nullptr;
 	    SEXP klass;
 	    if(isObject(s) && isMethodsDispatchOn()) {
 		klass = getAttrib(s, R_ClassSymbol);
@@ -907,7 +907,7 @@ HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData *data)
 		PROTECT(t = getAttrib(s, R_DimNamesSymbol));
 		if (t != R_NilValue && VECTOR_ELT(t, 0) != R_NilValue) {
 		    SEXP nn = getAttrib(t, R_NamesSymbol);
-		    const char *title = NULL;
+		    const char *title = nullptr;
 
 		    if (!isNull(nn))
 			title = translateChar(STRING_ELT(nn, 0));
@@ -937,7 +937,7 @@ HIDDEN void Rf_PrintValueRec(SEXP s, R_PrintData *data)
 	    UNPROTECT(1);
 	    PROTECT(t = getAttrib(s, R_NamesSymbol));
 	    if (t != R_NilValue)
-		printNamedVector(s, t, data->quote, NULL);
+		printNamedVector(s, t, data->quote, nullptr);
 	    else
 		printVector(s, 1, data->quote);
 	}

@@ -125,21 +125,21 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
     if (n > FD_SETSIZE)
 	error(_("file descriptor is too large for select()"));
 
-    if (timeout != NULL && timeout->tv_sec == 0 && timeout->tv_usec == 0)
+    if (timeout != nullptr && timeout->tv_sec == 0 && timeout->tv_usec == 0)
 	return select(n, readfds, writefds, exceptfds, timeout);
     else {
-	volatile sel_intr_handler_t myintr = intr != NULL ?
+	volatile sel_intr_handler_t myintr = intr != nullptr ?
 	    intr : onintr;
 	volatile int old_interrupts_suspended = R_interrupts_suspended;
 	volatile double base_time = currentTime();
 	struct timeval tm;
-	if (timeout != NULL)
+	if (timeout != nullptr)
 	    tm = *timeout;
     retry:
 	if (SIGSETJMP(seljmpbuf, 1)) {
 	    myintr();
 
-	    if (timeout != NULL) {
+	    if (timeout != nullptr) {
 		/* Ajdust timeout for elapsed complete seconds; ignore
 		   microseconde for now. This modifies the data pointed to
 		   by timeval, which is what select() on Linux does as
@@ -191,7 +191,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
    value is reset by setSelectwblplotMask() each time to ensure that it points
    to the correct value of stdin.
  */
-static InputHandler BasicInputHandler = {StdinActivity, -1, NULL};
+static InputHandler BasicInputHandler = {StdinActivity, -1, nullptr};
 
 /*
    This can be reset by the initialization routines which
@@ -207,7 +207,7 @@ InputHandler * initStdinHandler(void)
 {
     InputHandler *inputs;
 
-    inputs = addInputHandler(R_InputHandlers, fileno(stdin), NULL,
+    inputs = addInputHandler(R_InputHandlers, fileno(stdin), nullptr,
 			     StdinActivity);
     /* Defer the X11 registration until it is loaded and actually used. */
 
@@ -236,13 +236,13 @@ InputHandler *addInputHandler(InputHandler *handlers, int fd, InputHandlerProc h
 
     tmp = handlers;
 
-    if(handlers == NULL) {
+    if(handlers == nullptr) {
 	R_InputHandlers = input;
 	return(input);
     }
 
     /* Go to the end of the list to append the new one.  */
-    while(tmp->next != NULL) {
+    while(tmp->next != nullptr) {
 	tmp = tmp->next;
     }
     tmp->next = input;
@@ -264,7 +264,7 @@ int removeInputHandler(InputHandler **handlers, InputHandler *it)
        element as the first argument.
     */
 
-    if (it == NULL) return(0);
+    if (it == nullptr) return(0);
 
     if(*handlers == it) {
 	*handlers = (*handlers)->next;
@@ -292,7 +292,7 @@ InputHandler *getInputHandler(InputHandler *handlers, int fd)
     InputHandler *tmp;
     tmp = handlers;
 
-    while(tmp != NULL) {
+    while(tmp != nullptr) {
 	if(tmp->fileDescriptor == fd)
 	    return(tmp);
 	tmp = tmp->next;
@@ -339,7 +339,7 @@ fd_set *R_checkActivityEx(int usec, int ignore_stdin, void (*intr)(void))
     static fd_set readMask;
 
     if (R_interrupts_pending) {
-	if (intr != NULL) intr();
+	if (intr != nullptr) intr();
 	else onintr();
     }
 
@@ -352,16 +352,16 @@ fd_set *R_checkActivityEx(int usec, int ignore_stdin, void (*intr)(void))
     maxfd = setSelectMask(R_InputHandlers, &readMask);
     if (ignore_stdin)
 	FD_CLR(fileno(stdin), &readMask);
-    if (R_SelectEx(maxfd+1, &readMask, NULL, NULL,
-		   (usec >= 0) ? &tv : NULL, intr) > 0)
+    if (R_SelectEx(maxfd+1, &readMask, nullptr, nullptr,
+		   (usec >= 0) ? &tv : nullptr, intr) > 0)
 	return(&readMask);
     else
-	return(NULL);
+	return(nullptr);
 }
 
 fd_set *R_checkActivity(int usec, int ignore_stdin)
 {
-    return R_checkActivityEx(usec, ignore_stdin, NULL);
+    return R_checkActivityEx(usec, ignore_stdin, nullptr);
 }
 
 /*
@@ -397,7 +397,7 @@ void R_runHandlers(InputHandler *handlers, fd_set *readMask)
 {
     InputHandler *tmp = handlers, *next;
 
-    if (readMask == NULL) {
+    if (readMask == nullptr) {
 	Rg_PolledEvents();
 	R_PolledEvents();
     } else
@@ -406,7 +406,7 @@ void R_runHandlers(InputHandler *handlers, fd_set *readMask)
 	       removeInputHandlers */
 	    next = tmp->next;
 	    if(FD_ISSET(tmp->fileDescriptor, readMask)
-	       && tmp->handler != NULL)
+	       && tmp->handler != nullptr)
 		tmp->handler((void*) tmp->userData);
 	    tmp = next;
 	}
@@ -435,7 +435,7 @@ InputHandler *getSelectedHandler(InputHandler *handlers, fd_set *readMask)
     if(FD_ISSET(handlers->fileDescriptor, readMask))
 	return(handlers);
 
-    return((InputHandler*) NULL);
+    return((InputHandler*) nullptr);
 }
 
 
@@ -555,7 +555,7 @@ struct _R_ReadlineData {
 
 };
 
-static R_ReadlineData *rl_top = NULL;
+static R_ReadlineData *rl_top = nullptr;
 
 #define MAX_READLINE_NESTING 10
 
@@ -592,7 +592,7 @@ static void pushReadline(const char *prompt, rl_vcpfunc_t f)
     sigemptyset(&sa.sa_mask);
     sa.sa_handler = &R_readline_sigwinch_handler;
     sa.sa_flags = SA_RESTART;
-    sigaction(SIGWINCH, &sa, NULL);
+    sigaction(SIGWINCH, &sa, nullptr);
 #endif
 
    /* flush stdout in case readline wrote the prompt, but didn't flush
@@ -644,7 +644,7 @@ static void popReadline(void)
      resetReadline();
 #endif
      rl_callback_handler_remove();
-     ReadlineStack.fun[ReadlineStack.current--] = NULL;
+     ReadlineStack.fun[ReadlineStack.current--] = nullptr;
      if(ReadlineStack.current > -1 && ReadlineStack.fun[ReadlineStack.current])
 	rl_callback_handler_install("", ReadlineStack.fun[ReadlineStack.current]);
   }
@@ -840,7 +840,7 @@ static char **R_custom_completion(const char *text, int start, int end)
 	the old line buffer around and do useful things with it.
      */
 {
-    char **matches = (char **)NULL;
+    char **matches = (char **)nullptr;
     SEXP infile,
 	linebufferCall = PROTECT(lang2(RComp_assignBufferSym,
 				       mkString(rl_line_buffer))),
@@ -898,7 +898,7 @@ static char *R_completion_generator(const char *text, int state)
 	    compstrings = (char **) malloc(ncomp * sizeof(char*));
 	    if (!compstrings) {
 		UNPROTECT(4);
-		return (char *)NULL;
+		return (char *)nullptr;
 	    }
 	    for (int i = 0; i < ncomp; i++) {
 		compstrings[i] =
@@ -907,7 +907,7 @@ static char *R_completion_generator(const char *text, int state)
 		    UNPROTECT(4);
 		    for (int j = 0; j < i; j++) free(compstrings[j]);
 		    free(compstrings);
-		    return (char *)NULL;
+		    return (char *)nullptr;
 		}
 	    }
 	}
@@ -918,10 +918,10 @@ static char *R_completion_generator(const char *text, int state)
     if (list_index < ncomp)
 	return compstrings[list_index++];
     else {
-	/* nothing matched or remaining, so return NULL. */
+	/* nothing matched or remaining, so return nullptr. */
 	if (ncomp > 0) free(compstrings);
     }
-    return (char *)NULL;
+    return (char *)nullptr;
 }
 
 /* ============================================================ */
@@ -940,7 +940,7 @@ static void handleInterrupt(void)
 
 
 /* Fill a text buffer from stdin or with user typed console input. */
-static void *cd = NULL;
+static void *cd = nullptr;
 
 HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		 int addtohistory)
@@ -952,7 +952,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 	    fputs(prompt, stdout);
 	    fflush(stdout); /* make sure prompt is output */
 	}
-	if (fgets((char *)buf, len, ifp ? ifp: stdin) == NULL)
+	if (fgets((char *)buf, len, ifp ? ifp: stdin) == nullptr)
 	    return 0;
 	ll = strlen((char *)buf);
 	/* remove CR in CRLF ending */
@@ -1022,7 +1022,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 	    fflush(stdout);
 	}
 
-	if(R_InputHandlers == NULL)
+	if(R_InputHandlers == nullptr)
 	    initStdinHandler();
 
 	for (;;) {
@@ -1043,7 +1043,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		int height, width;
 		rl_get_screen_size(&height,&width);
 		if (oldwidth >= 0 && oldwidth != width) {
-		    static SEXP opsym = NULL;
+		    static SEXP opsym = nullptr;
 		    if (! opsym)
 			opsym = install("setWidthOnResize");
 		    Rboolean setOK = (Rboolean) asLogical(GetOption1(opsym));
@@ -1061,7 +1061,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 	     * immediately. */
 
 	    R_runHandlers(R_InputHandlers, what);
-	    if (what == NULL)
+	    if (what == nullptr)
 		continue;
 	    if (FD_ISSET(fileno(stdin), what)) {
 		/* We could make this a regular handler, but we need
@@ -1077,7 +1077,7 @@ HIDDEN int Rstd_ReadConsole(const char *prompt, unsigned char *buf, size_t len,
 		else
 #endif /* HAVE_LIBREADLINE */
 		{
-		    if(fgets((char *)buf, len, stdin) == NULL)
+		    if(fgets((char *)buf, len, stdin) == nullptr)
 			return 0;
 		    else
 			return 1;
@@ -1236,7 +1236,7 @@ HIDDEN NORET void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 	PrintWarnings();	/* from device close and (if run) .Last */
     if(ifp) {
 	fclose(ifp);    /* input file from -f or --file= */
-	ifp = NULL; 	/* To avoid trying to close it again */
+	ifp = nullptr; 	/* To avoid trying to close it again */
     }
     fpu_setup(FALSE);
 
@@ -1272,9 +1272,9 @@ HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
     char buf[1024];
 
     if (nfile > 0) {
-	if (pager == NULL || strlen(pager) == 0) pager = "more";
-	filename = R_tmpnam(NULL, R_TempDir); /* mallocs result */
-	if ((tfp = R_fopen(filename, "w")) != NULL) {
+	if (pager == nullptr || strlen(pager) == 0) pager = "more";
+	filename = R_tmpnam(nullptr, R_TempDir); /* mallocs result */
+	if ((tfp = R_fopen(filename, "w")) != nullptr) {
 	    for(i = 0; i < nfile; i++) {
 		if (headers[i] && *headers[i])
 		    fprintf(tfp, "%s\n\n", headers[i]);
@@ -1282,7 +1282,7 @@ HIDDEN int Rstd_ShowFiles(int nfile,		/* number of files */
 		/* File expansion is now done in file.show(), but
 		   left here in case other callers assumed it */
 		if ((fp = R_fopen(R_ExpandFileName(file[i]), "r"))
-		    != NULL) {
+		    != nullptr) {
 		    while ((c = fgetc(fp)) != EOF)
 			fputc(c, tfp);
 		    fprintf(tfp, "\n");

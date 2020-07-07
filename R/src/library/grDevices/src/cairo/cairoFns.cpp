@@ -125,7 +125,7 @@ static void CairoInitPatterns(pX11Desc xd)
     xd->numPatterns = 20;
     xd->patterns = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numPatterns);
     for (i = 0; i < xd->numPatterns; i++) {
-        xd->patterns[i] = NULL;
+        xd->patterns[i] = nullptr;
     }
 }
 
@@ -133,9 +133,9 @@ static void CairoCleanPatterns(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numPatterns; i++) {
-        if (xd->patterns[i] != NULL) {
+        if (xd->patterns[i] != nullptr) {
             cairo_pattern_destroy(xd->patterns[i]);
-            xd->patterns[i] = NULL;
+            xd->patterns[i] = nullptr;
         }
     }    
 }
@@ -144,7 +144,7 @@ static void CairoDestroyPatterns(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numPatterns; i++) {
-        if (xd->patterns[i] != NULL) {
+        if (xd->patterns[i] != nullptr) {
             cairo_pattern_destroy(xd->patterns[i]);
         }
     }    
@@ -155,7 +155,7 @@ static int CairoNewPatternIndex(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numPatterns; i++) {
-        if (xd->patterns[i] == NULL) {
+        if (xd->patterns[i] == nullptr) {
             return i;
         }
     }    
@@ -282,7 +282,7 @@ static cairo_pattern_t *CairoTilingPattern(SEXP pattern, pX11Desc xd)
 
 static cairo_pattern_t *CairoCreatePattern(SEXP pattern, pX11Desc xd)
 {
-    cairo_pattern_t *cairo_pattern = NULL;
+    cairo_pattern_t *cairo_pattern = nullptr;
     switch(R_GE_patternType(pattern)) {
     case R_GE_linearGradientPattern: 
         cairo_pattern = CairoLinearGradient(pattern, xd);
@@ -312,7 +312,7 @@ static void CairoReleasePattern(int index, pX11Desc xd)
 {
     if (xd->patterns[index]) {
         cairo_pattern_destroy(xd->patterns[index]);
-        xd->patterns[index] = NULL;
+        xd->patterns[index] = nullptr;
     } else {
         warning(_("Attempt to release non-existent pattern"));
     }
@@ -342,7 +342,7 @@ static void CairoInitClipPaths(pX11Desc xd)
     xd->numClipPaths = 20;
     xd->clippaths = (cairo_path_t **) malloc(sizeof(cairo_path_t*) * xd->numClipPaths);
     for (i = 0; i < xd->numClipPaths; i++) {
-        xd->clippaths[i] = NULL;
+        xd->clippaths[i] = nullptr;
     }
 }
 
@@ -350,9 +350,9 @@ static void CairoCleanClipPaths(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numClipPaths; i++) {
-        if (xd->clippaths[i] != NULL) {
+        if (xd->clippaths[i] != nullptr) {
             cairo_path_destroy(xd->clippaths[i]);
-            xd->clippaths[i] = NULL;
+            xd->clippaths[i] = nullptr;
         }
     }    
 }
@@ -361,9 +361,9 @@ static void CairoDestroyClipPaths(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numClipPaths; i++) {
-        if (xd->clippaths[i] != NULL) {
+        if (xd->clippaths[i] != nullptr) {
             cairo_path_destroy(xd->clippaths[i]);
-            xd->clippaths[i] = NULL;
+            xd->clippaths[i] = nullptr;
         }
     }    
     free(xd->clippaths);
@@ -373,7 +373,7 @@ static int CairoNewClipPathIndex(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numClipPaths; i++) {
-        if (xd->clippaths[i] == NULL) {
+        if (xd->clippaths[i] == nullptr) {
             return i;
         }
     }    
@@ -470,7 +470,7 @@ static void CairoReleaseClipPath(int index, pX11Desc xd)
 {
     if (xd->clippaths[index]) {
         cairo_path_destroy(xd->clippaths[index]);
-        xd->clippaths[index] = NULL;
+        xd->clippaths[index] = nullptr;
     } else {
         warning(_("Attempt to release non-existent clipping path"));
     }
@@ -487,7 +487,7 @@ static void CairoInitMasks(pX11Desc xd)
     xd->numMasks = 20;
     xd->masks = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numMasks);
     for (i = 0; i < xd->numMasks; i++) {
-        xd->masks[i] = NULL;
+        xd->masks[i] = nullptr;
     }
     xd->currentMask = -1;
 }
@@ -496,9 +496,9 @@ static void CairoCleanMasks(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numMasks; i++) {
-        if (xd->masks[i] != NULL) {
+        if (xd->masks[i] != nullptr) {
             cairo_pattern_destroy(xd->masks[i]);
-            xd->masks[i] = NULL;
+            xd->masks[i] = nullptr;
         }
     }    
     xd->currentMask = -1;
@@ -508,9 +508,9 @@ static void CairoDestroyMasks(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numMasks; i++) {
-        if (xd->masks[i] != NULL) {
+        if (xd->masks[i] != nullptr) {
             cairo_pattern_destroy(xd->masks[i]);
-            xd->masks[i] = NULL;
+            xd->masks[i] = nullptr;
         }
     }    
     free(xd->masks);
@@ -520,7 +520,7 @@ static int CairoNewMaskIndex(pX11Desc xd)
 {
     int i;
     for (i = 0; i < xd->numMasks; i++) {
-        if (xd->masks[i] == NULL) {
+        if (xd->masks[i] == nullptr) {
             return i;
         }
     }    
@@ -585,7 +585,7 @@ static void CairoReleaseMask(int index, pX11Desc xd)
 {
     if (xd->masks[index]) {
         cairo_pattern_destroy(xd->masks[index]);
-        xd->masks[index] = NULL;
+        xd->masks[index] = nullptr;
     } else {
         warning(_("Attempt to release non-existent mask"));
     }
@@ -1191,7 +1191,7 @@ static void PangoCairo_MetricInfo(int c, const pGEcontext gc,
 	str[0] = (char) c; str[1] = (char) 0;
     }
     layout = PG_layout(desc, xd->cc, str);
-    PG_text_extents(xd->cc, layout, NULL, NULL, &iwidth,
+    PG_text_extents(xd->cc, layout, nullptr, nullptr, &iwidth,
 		    &iascent, &idescent, 1);
     g_object_unref(layout);
     pango_font_description_free(desc);
@@ -1222,7 +1222,7 @@ PangoCairo_StrWidth(const char *str, const pGEcontext gc, pDevDesc dd)
 	PG_getFont(gc, xd->fontscale, xd->basefontfamily, xd->symbolfamily);
     PangoLayout *layout = PG_layout(desc, xd->cc, textstr);
 
-    PG_text_extents(xd->cc, layout, NULL, NULL, &width, NULL, NULL, 0);
+    PG_text_extents(xd->cc, layout, nullptr, nullptr, &width, nullptr, nullptr, 0);
     g_object_unref(layout);
     pango_font_description_free(desc);
     return (double) width;
@@ -1262,8 +1262,8 @@ PangoCairo_Text(double x, double y,
         }
 
 	layout = PG_layout(desc, xd->cc, textstr);
-	PG_text_extents(xd->cc, layout, &lbearing, NULL, &width,
-			&ascent, NULL, 0);
+	PG_text_extents(xd->cc, layout, &lbearing, nullptr, &width,
+			&ascent, nullptr, 0);
 	cairo_move_to(xd->cc, x, y);
 	if (rot != 0.0) cairo_rotate(xd->cc, -rot/180.*M_PI);
 	/* pango has a coord system at top left */
@@ -1329,7 +1329,7 @@ static cairo_font_face_t *Rc_findFont(const char *family, int face)
 	    return here->font;
 	here = here->next;
     }
-    return NULL;
+    return nullptr;
 }
 
 static void Rc_addFont(const char *family, int face, cairo_font_face_t* font)
@@ -1339,7 +1339,7 @@ static void Rc_addFont(const char *family, int face, cairo_font_face_t* font)
     fc->family = Rstrdup(family);
     fc->face = face;
     fc->font = font;
-    fc->next = NULL;
+    fc->next = nullptr;
     if (cache)
 	cache_tail = cache_tail->next = fc;
     else
@@ -1368,14 +1368,14 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
 
     /* find candidate fonts via FontConfig */
     if (!fc_loaded) {
-	if (!FcInit()) return NULL;
+	if (!FcInit()) return nullptr;
 	fc_loaded = 1;
     }
     style &= 3;
     strcpy(fcname, family);
     strcat(fcname, face_styles[style]);
     pat = FcNameParse((FcChar8 *)fcname);
-    if (!pat) return NULL;
+    if (!pat) return nullptr;
     FcConfigSubstitute (0, pat, FcMatchPattern);
     FcDefaultSubstitute (pat);
     fs = FcFontSetCreate ();
@@ -1383,7 +1383,7 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
     FcPatternDestroy (pat);
     if (!match) {
 	FcFontSetDestroy (fs);
-	return NULL;
+	return nullptr;
     }
     FcFontSetAdd (fs, match);
 
@@ -1399,7 +1399,7 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
 		FT_Face face;
 		if (!ft_library && FT_Init_FreeType(&ft_library)) {
 		    FcFontSetDestroy (fs);
-		    return NULL;
+		    return nullptr;
 		}
 		/* some FreeType versions have broken index support,
 		   fall back to index 0 */
@@ -1439,7 +1439,7 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
 	}
 	FcFontSetDestroy (fs);
     }
-    return NULL;
+    return nullptr;
 }
 
 static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
@@ -1447,7 +1447,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     int face = gc->fontface;
     double size = gc->cex * gc->ps *fs;
-    cairo_font_face_t *cairo_face = NULL;
+    cairo_font_face_t *cairo_face = nullptr;
     const char *family;
 #ifdef _WIN32
     char *times = (char *) "Times New Roman", *hv = (char *) "Arial";

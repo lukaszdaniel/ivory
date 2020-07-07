@@ -66,10 +66,6 @@ typedef void *pointer;
 typedef char *pointer;
 #  endif
 
-#  ifndef NULL
-#   define NULL 0
-#  endif
-
 /* Different portions of Emacs need to call different versions of
    malloc.  The Emacs executable needs alloca to call xmalloc, because
    ordinary malloc isn't protected from input signals.  On the other
@@ -110,10 +106,10 @@ static int stack_dir;		/* 1 or -1 once known.  */
 static void
 find_stack_direction ()
 {
-  static char *addr = NULL;	/* Address of first `dummy', once known.  */
+  static char *addr = nullptr;	/* Address of first `dummy', once known.  */
   auto char dummy;		/* To get stack address.  */
 
-  if (addr == NULL)
+  if (addr == nullptr)
     {				/* Initial entry.  */
       addr = ADDRESS_FUNCTION (dummy);
 
@@ -152,7 +148,7 @@ typedef union hdr
     } h;
 } header;
 
-static header *last_alloca_header = NULL;	/* -> last alloca header.  */
+static header *last_alloca_header = nullptr;	/* -> last alloca header.  */
 
 /* Return a pointer to at least SIZE bytes of storage,
    which will be automatically reclaimed upon exit from
@@ -182,7 +178,7 @@ alloca (unsigned size)
     BLOCK_INPUT;
 #  endif
 
-    for (hp = last_alloca_header; hp != NULL;)
+    for (hp = last_alloca_header; hp != nullptr;)
       if ((STACK_DIR > 0 && hp->h.deep > depth)
 	  || (STACK_DIR < 0 && hp->h.deep < depth))
 	{
@@ -203,7 +199,7 @@ alloca (unsigned size)
   }
 
   if (size == 0)
-    return NULL;		/* No allocation required.  */
+    return nullptr;		/* No allocation required.  */
 
   /* Allocate combined header + user data storage.  */
 

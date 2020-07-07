@@ -76,7 +76,7 @@ void QuartzPDF_Close(QuartzDesc_t dev, void *userInfo)
 QuartzDesc_t
 QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
-    QuartzDesc_t ret = NULL;
+    QuartzDesc_t ret = nullptr;
     double *dpi = par->dpi;
     double mydpi[2] = { 72.0, 72.0 };
     double width = par->width, height = par->height;
@@ -126,7 +126,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
     } else
 	dev->context = CGPDFContextCreateWithURL(dev->url, &dev->bbox, ai);
 
-    if (dev->context == NULL) {
+    if (dev->context == nullptr) {
 	if (ai) CFRelease(ai);
 	if (dev->url) CFRelease(dev->url);
 	free(dev);
@@ -145,17 +145,17 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	par->bg, par->canvas, par->flags,
 	dev,
 	QuartzPDF_GetCGContext,
-	NULL,	/* locate */
+	nullptr,	/* locate */
 	QuartzPDF_Close,
 	QuartzPDF_NewPage,
-	NULL,	/* state */
-	NULL,	/* par */
-	NULL,   /* sync */
-        NULL,   /* cap */
+	nullptr,	/* state */
+	nullptr,	/* par */
+	nullptr,   /* sync */
+        nullptr,   /* cap */
     };
 
     if (!(ret = qf->Create(dd, &qdef)))
-	QuartzPDF_Close(NULL,dev);
+	QuartzPDF_Close(nullptr,dev);
     else {
 	qf->SetSize(ret, width, height);
 	qf->ResetContext(ret);

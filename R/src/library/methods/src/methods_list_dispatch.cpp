@@ -64,7 +64,7 @@ SEXP R_quick_method_check(SEXP object, SEXP fsym, SEXP fdef);
 static SEXP R_target, R_defined, R_nextMethod, R_dot_nextMethod,
     R_loadMethod_name, R_methods_name, R_tripleColon_name;
 
-static SEXP Methods_Namespace = NULL;
+static SEXP Methods_Namespace = nullptr;
 
 static const char *check_single_string(SEXP, Rboolean, const char *);
 static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty, const char *what);
@@ -315,7 +315,7 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 {
     /* Match the list of (possibly promised) args to the methods table. */
-    static SEXP  R_allmtable = NULL, R_siglength;
+    static SEXP  R_allmtable = nullptr, R_siglength;
     SEXP object, value, mtable;
     const char *class_; int nsig, nargs;
 #define NBUF 200
@@ -513,7 +513,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
     int nprotect = 0;
 
     if(!initialized)
-	R_initMethodDispatch(NULL);
+	R_initMethodDispatch(nullptr);
     fsym = fname;
     /* TODO:  the code for do_standardGeneric does a test of fsym,
      * with a less informative error message.  Should combine them.*/
@@ -788,7 +788,7 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
     }
     if(prim_case)
 	val = R_evalHandleErrorProtect(e, ev,
-				       &R_nextMethodCallCleanup, NULL,
+				       &R_nextMethodCallCleanup, nullptr,
 				       &R_nextMethodCallFinally, op);
     else
 	val = eval(e, ev);
@@ -980,8 +980,8 @@ SEXP R_getClassFromCache(SEXP class_, SEXP table)
 
 static SEXP do_inherited_table(SEXP class_objs, SEXP fdef, SEXP mtable, SEXP ev)
 {
-    static SEXP dotFind = NULL, f; SEXP  e, ee;
-    if(dotFind == NULL) {
+    static SEXP dotFind = nullptr, f; SEXP  e, ee;
+    if(dotFind == nullptr) {
 	dotFind = install(".InheritForDispatch");
 	f = findFun(dotFind, R_MethodsNamespace);
     }
@@ -997,8 +997,8 @@ static SEXP do_inherited_table(SEXP class_objs, SEXP fdef, SEXP mtable, SEXP ev)
 
 static SEXP dots_class(SEXP ev, void *cleandata)
 {
-    static SEXP call = NULL; SEXP  ee;
-    if(call == NULL) {
+    static SEXP call = nullptr; SEXP  ee;
+    if(call == nullptr) {
 	SEXP dotFind, f, R_dots;
 	dotFind = install(".dotsClass");
 	PROTECT(f = findFun(dotFind, R_MethodsNamespace));
@@ -1014,8 +1014,8 @@ static SEXP dots_class(SEXP ev, void *cleandata)
 
 static SEXP do_mtable(SEXP fdef, SEXP ev)
 {
-    static SEXP dotFind = NULL, f; SEXP  e, ee;
-    if(dotFind == NULL) {
+    static SEXP dotFind = nullptr, f; SEXP  e, ee;
+    if(dotFind == nullptr) {
 	dotFind = install(".getMethodsTable");
 	f = findFun(dotFind, R_MethodsNamespace);
 	R_PreserveObject(f);
@@ -1030,7 +1030,7 @@ static SEXP do_mtable(SEXP fdef, SEXP ev)
 
 SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 {
-    static SEXP R_mtable = NULL, R_allmtable, R_sigargs, R_siglength, R_dots;
+    static SEXP R_mtable = nullptr, R_allmtable, R_sigargs, R_siglength, R_dots;
     int nprotect = 0;
     SEXP mtable, classes, thisClass = R_NilValue /* -Wall */, sigargs,
 	siglength, f_env = R_NilValue, method, f, val = R_NilValue;

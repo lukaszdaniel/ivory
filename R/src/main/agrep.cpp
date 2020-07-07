@@ -102,7 +102,7 @@ HIDDEN SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, j, n;
     int nmatches, patlen;
     Rboolean useWC = FALSE;
-    const void *vmax = NULL;
+    const void *vmax = nullptr;
 
     regex_t reg;
     regaparams_t params;
@@ -297,7 +297,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
     SEXP ans, counts, trafos = R_NilValue /* -Wall */, dimnames, names;
     double cost_ins, cost_del, cost_sub;
     double *dists, d, d_ins, d_del, d_sub;
-    char *paths = NULL, p, *buf = NULL;
+    char *paths = nullptr, p, *buf = nullptr;
     int i, j, k, l, m, nx, ny, nxy, *xi, *yj, nxi, nyj, nr, nc, nz;
     int nins, ndel, nsub, buflen = 100, need;
 
@@ -490,7 +490,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     int opt_fixed, opt_partial, opt_counts, opt_icase, useBytes;
     int i = 0, j = 0, m, nx, ny, nxy;
     const char *s, *t;
-    const void *vmax = NULL;
+    const void *vmax = nullptr;
 
     Rboolean haveBytes, useWC = FALSE;
 
@@ -498,7 +498,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     regaparams_t params;
     regamatch_t match;
     size_t nmatch = 0 /* -Wall */;
-    regmatch_t *pmatch = NULL; /* -Wall */
+    regmatch_t *pmatch = nullptr; /* -Wall */
 
     int rc, cflags = REG_EXTENDED;
 
@@ -624,7 +624,7 @@ HIDDEN SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(opt_counts) {
 		nmatch = reg.re_nsub + 1;
 		pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
-		if (pmatch == NULL) error(_("allocation failure in adist"));
+		if (pmatch == nullptr) error(_("allocation failure in adist"));
 	    }
 
 	    for(j = 0; j < ny; j++) {
@@ -736,7 +736,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     Rboolean haveBytes, useWC = FALSE;
     const char *s, *t;
-    const void *vmax = NULL;
+    const void *vmax = nullptr;
 
     regex_t reg;
     size_t nmatch;
@@ -834,7 +834,7 @@ HIDDEN SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     nmatch = reg.re_nsub + 1;
 
     pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
-    if(pmatch == NULL) error(_("allocation failure in aregexec"));
+    if(pmatch == nullptr) error(_("allocation failure in aregexec"));
 
     tre_regaparams_default(&params);
     amatch_regaparams(&params, patlen,

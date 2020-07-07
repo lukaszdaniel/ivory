@@ -118,7 +118,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
                                           (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
         if (res != CAIRO_STATUS_SUCCESS) {
-            xd->cs = NULL;
+            xd->cs = nullptr;
             warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return Rboolean(FALSE);
         }
@@ -276,7 +276,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                                                   (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    xd->cs = NULL;
+                    xd->cs = nullptr;
                     error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 if(xd->onefile)
@@ -445,7 +445,7 @@ static Rboolean BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
     xd->col = R_RGB(0, 0, 0);
     xd->fill = xd->canvas = bg;
     xd->type = static_cast<X_GTYPE>(kind);
-    xd->fp = NULL;
+    xd->fp = nullptr;
     xd->lty = -1;
     xd->lwd = -1;
     xd->lend = static_cast<R_GE_lineend>(0);

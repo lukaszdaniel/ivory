@@ -59,7 +59,7 @@
 
 #include "Runix.h"
 
-HIDDEN FILE *ifp = NULL; /* used in sys-std.cpp */
+HIDDEN FILE *ifp = nullptr; /* used in sys-std.cpp */
 
 HIDDEN Rboolean UsingReadline = TRUE;  /* used in sys-std.cpp & ../main/platform.cpp
 				   and also in sys-unix.cpp for tilde expansion */
@@ -129,7 +129,7 @@ void R_setupHistory()
     int value, ierr;
     char *p;
 
-    if ((R_HistoryFile = getenv("R_HISTFILE")) == NULL)
+    if ((R_HistoryFile = getenv("R_HISTFILE")) == nullptr)
 	R_HistoryFile = (char *) ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
@@ -284,7 +284,7 @@ int Rf_initialize_R(int ac, char **av)
 	int nm[2] = {CTL_KERN, KERN_USRSTACK};
 	void * base;
 	size_t len = sizeof(void *);
-	(void) sysctl(nm, 2, &base, &len, NULL, 0);
+	(void) sysctl(nm, 2, &base, &len, nullptr, 0);
 	R_CStackStart = (uintptr_t) base;
     }
 #elif defined(HAVE_THR_STKSEGMENT)
@@ -327,13 +327,13 @@ int Rf_initialize_R(int ac, char **av)
     ptr_R_loadhistory = Rstd_loadhistory;
     ptr_R_savehistory = Rstd_savehistory;
     ptr_R_addhistory = Rstd_addhistory;
-    ptr_R_EditFile = NULL; /* for future expansion */
-    R_timeout_handler = NULL;
+    ptr_R_EditFile = nullptr; /* for future expansion */
+    R_timeout_handler = nullptr;
     R_timeout_val = 0;
 
-    R_GlobalContext = NULL; /* Make R_Suicide less messy... */
+    R_GlobalContext = nullptr; /* Make R_Suicide less messy... */
 
-    if((R_Home = R_HomeDir()) == NULL)
+    if((R_Home = R_HomeDir()) == nullptr)
 	R_Suicide(_("R home directory is not defined"));
     BindDomain(R_Home);
 
@@ -498,10 +498,10 @@ int Rf_initialize_R(int ac, char **av)
        and pretty-print warnings/errors (ESS = dumb terminal) */
     if(useaqua || 
        (R_Interactive && getenv("TERM") && strcmp(getenv("TERM"), "dumb"))) {
-	R_Outputfile = NULL;
-	R_Consolefile = NULL;
+	R_Outputfile = nullptr;
+	R_Consolefile = nullptr;
 	ptr_R_WriteConsoleEx = Rstd_WriteConsoleEx;
-	ptr_R_WriteConsole = NULL;
+	ptr_R_WriteConsole = nullptr;
     } else {
 #endif
 	R_Outputfile = stdout;

@@ -551,7 +551,7 @@ static const char* name_value_search(const char *name, const name_value table[],
 	DPRINT(strcmp(name, table[min].name));
 	DPRINT(strcmp(name, table[max].name));
 #endif
-	return (NULL);
+	return (nullptr);
     }
     while (max >= min) {
 #if defined(DEBUG_TEST)
@@ -578,7 +578,7 @@ static const char* name_value_search(const char *name, const name_value table[],
 	    return(table[mid].value);
 	}
     }
-    return (NULL);
+    return (nullptr);
 }
 #endif
 
@@ -594,10 +594,10 @@ const char *locale2charset(const char *locale)
     const char *value;
 #endif
 
-    if ((locale == NULL) || streql(locale, "NULL"))
-	locale = setlocale(LC_CTYPE,NULL);
+    if ((locale == nullptr) || streql(locale, "NULL"))
+	locale = setlocale(LC_CTYPE,nullptr);
 
-    /* in some rare circumstances Darwin may return NULL */
+    /* in some rare circumstances Darwin may return nullptr */
     if (!locale || streql(locale, "C") || streql(locale, "POSIX"))
 	return ("ASCII");
 
@@ -712,7 +712,7 @@ const char *locale2charset(const char *locale)
     if(streql(enc, "utf8")) return "UTF-8";
 
     value = name_value_search(la_loc, guess, guess_count);
-    return value == NULL ? "ASCII" : value;
+    return value == nullptr ? "ASCII" : value;
 #endif
 }
 
@@ -727,7 +727,7 @@ main()
     setlocale(LC_CTYPE,"");
     DPRINT(guess_count);
 #ifndef _WIN32
-    SPRINT(locale2charset(NULL));
+    SPRINT(locale2charset(nullptr));
     SPRINT(locale2charset("ja"));
     SPRINT(locale2charset("ja_JP"));
     SPRINT(locale2charset("ja_JP.eucJP"));

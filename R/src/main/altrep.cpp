@@ -45,21 +45,21 @@
 #define ALTREP_CLASS_BASE_TYPE(x) \
     ALTREP_SERIALIZED_CLASS_TYPE(ALTREP_CLASS_SERIALIZED_CLASS(x))
 
-static SEXP Registry = NULL;
+static SEXP Registry = nullptr;
 
 static SEXP LookupClassEntry(SEXP csym, SEXP psym)
 {
     for (SEXP chain = CDR(Registry); chain != R_NilValue; chain = CDR(chain))
 	if (TAG(CAR(chain)) == csym && CADR(CAR(chain)) == psym)
 	    return CAR(chain);
-    return NULL;
+    return nullptr;
 }
 
 static void RegisterClass(SEXP class_, int type, const char *cname, const char *pname,
 	      DllInfo *dll)
 {
     PROTECT(class_);
-    if (Registry == NULL) {
+    if (Registry == nullptr) {
 	Registry = CONS(R_NilValue, R_NilValue);
 	R_PreserveObject(Registry);
     }
@@ -69,7 +69,7 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
     SEXP stype = PROTECT(ScalarInteger(type));
     SEXP iptr = R_MakeExternalPtr(dll, R_NilValue, R_NilValue);
     SEXP entry = LookupClassEntry(csym, psym);
-    if (entry == NULL) {
+    if (entry == nullptr) {
 	entry = list4(class_, psym, stype, iptr);
 	SET_TAG(entry, csym);
 	SETCDR(Registry, CONS(entry, CDR(Registry)));
@@ -86,7 +86,7 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
 static SEXP LookupClass(SEXP csym, SEXP psym)
 {
     SEXP entry = LookupClassEntry(csym, psym);
-    return entry != NULL ? CAR(entry) : NULL;
+    return entry != nullptr ? CAR(entry) : nullptr;
 }
 
 static void reinit_altrep_class(SEXP sclass);
@@ -248,7 +248,7 @@ HIDDEN SEXP ALTREP_SERIALIZED_STATE(SEXP x)
 HIDDEN SEXP ALTREP_SERIALIZED_CLASS(SEXP x)
 {
     SEXP val = ALTREP_CLASS_SERIALIZED_CLASS(ALTREP_CLASS(x));
-    return val != R_NilValue ? val : NULL;
+    return val != R_NilValue ? val : nullptr;
 }
 
 static SEXP find_namespace(void *data) { return R_FindNamespace((SEXP) data); }
@@ -260,15 +260,15 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 	SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
 	SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
 	SEXP class_ = LookupClass(csym, psym);
-	if (class_ == NULL) {
+	if (class_ == nullptr) {
 	    SEXP pname = ScalarString(PRINTNAME(psym));
 	    R_tryCatchError(find_namespace, pname,
-			    handle_namespace_error, NULL);
+			    handle_namespace_error, nullptr);
 	    class_ = LookupClass(csym, psym);
 	}
 	return class_;
     }
-    return NULL;
+    return nullptr;
 }
 
 HIDDEN SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
@@ -279,7 +279,7 @@ HIDDEN SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, in
 
     /* look up the class_ in the registry and handle failure */
     SEXP class_ = ALTREP_UNSERIALIZE_CLASS(info);
-    if (class_ == NULL) {
+    if (class_ == nullptr) {
 	switch(type) {
 	case LGLSXP:
 	case INTSXP:
@@ -370,7 +370,7 @@ HIDDEN int ALTINTEGER_ELT(SEXP x, R_xlen_t i)
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     const int *x = INTEGER_OR_NULL(sx);
-    if (x != NULL) {
+    if (x != nullptr) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
 	for (R_xlen_t k = 0; k < ncopy; k++)
@@ -400,7 +400,7 @@ HIDDEN double ALTREAL_ELT(SEXP x, R_xlen_t i)
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
     const double *x = REAL_OR_NULL(sx);
-    if (x != NULL) {
+    if (x != nullptr) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
 	for (R_xlen_t k = 0; k < ncopy; k++)
@@ -425,7 +425,7 @@ int REAL_NO_NA(SEXP x)
 R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     const int *x = (const int *) DATAPTR_OR_NULL(sx);
-    if (x != NULL) {
+    if (x != nullptr) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
 	for (R_xlen_t k = 0; k < ncopy; k++)
@@ -452,7 +452,7 @@ int LOGICAL_NO_NA(SEXP x)
 R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
     const Rbyte *x = (const Rbyte *) DATAPTR_OR_NULL(sx);
-    if (x != NULL) {
+    if (x != nullptr) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
 	for (R_xlen_t k = 0; k < ncopy; k++)
@@ -468,7 +468,7 @@ R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
     const Rcomplex *x = (const Rcomplex *) DATAPTR_OR_NULL(sx);
-    if (x != NULL) {
+    if (x != nullptr) {
 	R_xlen_t size = XLENGTH(sx);
 	R_xlen_t ncopy = size - i > n ? n : size - i;
 	for (R_xlen_t k = 0; k < ncopy; k++)
@@ -483,7 +483,7 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 
 SEXP /*HIDDEN*/ ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
-    SEXP val = NULL;
+    SEXP val = nullptr;
 
     /**** move GC disabling into method? */
     if (R_in_gc)
@@ -620,25 +620,25 @@ static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
     return val;
 }
 
-static SEXP altrep_Serialized_state_default(SEXP x) { return NULL; }
+static SEXP altrep_Serialized_state_default(SEXP x) { return nullptr; }
 
 static SEXP altrep_Unserialize_default(SEXP class_, SEXP state)
 {
     error(_("cannot unserialize this ALTREP object yet"));
 }
 
-static SEXP altrep_Coerce_default(SEXP x, int type) { return NULL; }
+static SEXP altrep_Coerce_default(SEXP x, int type) { return nullptr; }
 
 static SEXP altrep_Duplicate_default(SEXP x, Rboolean deep)
 {
-    return NULL;
+    return nullptr;
 }
 
 static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 {
     SEXP ans = ALTREP_DUPLICATE(x, deep);
 
-    if (ans != NULL &&
+    if (ans != nullptr &&
 	ans != x) { /* leave attributes alone if returning original */
 	/* handle attributes generically */
 	SEXP attr = ATTRIB(x);
@@ -677,12 +677,12 @@ static void *altvec_Dataptr_default(SEXP x, Rboolean writeable)
 
 static const void *altvec_Dataptr_or_null_default(SEXP x)
 {
-    return NULL;
+    return nullptr;
 }
 
 static SEXP altvec_Extract_subset_default(SEXP x, SEXP indx, SEXP call)
 {
-    return NULL;
+    return nullptr;
 }
 
 static int altinteger_Elt_default(SEXP x, R_xlen_t i) { return INTEGER(x)[i]; }
@@ -699,9 +699,9 @@ static R_xlen_t altinteger_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, i
 static int altinteger_Is_sorted_default(SEXP x) { return UNKNOWN_SORTEDNESS; }
 static int altinteger_No_NA_default(SEXP x) { return 0; }
 
-static SEXP altinteger_Sum_default(SEXP x, Rboolean narm) { return NULL; }
-static SEXP altinteger_Min_default(SEXP x, Rboolean narm) { return NULL; }
-static SEXP altinteger_Max_default(SEXP x, Rboolean narm) { return NULL; }
+static SEXP altinteger_Sum_default(SEXP x, Rboolean narm) { return nullptr; }
+static SEXP altinteger_Min_default(SEXP x, Rboolean narm) { return nullptr; }
+static SEXP altinteger_Max_default(SEXP x, Rboolean narm) { return nullptr; }
 
 static double altreal_Elt_default(SEXP x, R_xlen_t i) { return REAL(x)[i]; }
 
@@ -717,9 +717,9 @@ static R_xlen_t altreal_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, doub
 static int altreal_Is_sorted_default(SEXP x) { return UNKNOWN_SORTEDNESS; }
 static int altreal_No_NA_default(SEXP x) { return 0; }
 
-static SEXP altreal_Sum_default(SEXP x, Rboolean narm) { return NULL; }
-static SEXP altreal_Min_default(SEXP x, Rboolean narm) { return NULL; }
-static SEXP altreal_Max_default(SEXP x, Rboolean narm) { return NULL; }
+static SEXP altreal_Sum_default(SEXP x, Rboolean narm) { return nullptr; }
+static SEXP altreal_Min_default(SEXP x, Rboolean narm) { return nullptr; }
+static SEXP altreal_Max_default(SEXP x, Rboolean narm) { return nullptr; }
 
 static int altlogical_Elt_default(SEXP x, R_xlen_t i) { return LOGICAL(x)[i]; }
 
@@ -735,7 +735,7 @@ static R_xlen_t altlogical_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, i
 static int altlogical_Is_sorted_default(SEXP x) { return UNKNOWN_SORTEDNESS; }
 static int altlogical_No_NA_default(SEXP x) { return 0; }
 
-static SEXP altlogical_Sum_default(SEXP x, Rboolean narm) { return NULL; }
+static SEXP altlogical_Sum_default(SEXP x, Rboolean narm) { return nullptr; }
 
 
 static Rbyte altraw_Elt_default(SEXP x, R_xlen_t i) { return RAW(x)[i]; }

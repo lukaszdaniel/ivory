@@ -196,7 +196,7 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
 	/* called from unregisterOne */
 	sd = dd->gesd[baseRegisterIndex];
 	free(sd->systemSpecific);
-	sd->systemSpecific = NULL;
+	sd->systemSpecific = nullptr;
 	break;
     case GE_InitState:
     {

@@ -101,10 +101,10 @@ int R_SaveAsPng(void  *d, int width, int height,
     volatile DECLARESHIFTS;
 
     /* Have we enough memory?*/
-    if (scanline == NULL)
+    if (scanline == nullptr)
 	return 0;
 
-    if (fp == NULL) {
+    if (fp == nullptr) {
 	free(scanline);
 	return 0;
     }
@@ -115,17 +115,17 @@ int R_SaveAsPng(void  *d, int width, int height,
      * the library version is compatible with the one used at compile time,
      * in case we are using dynamically linked libraries.  REQUIRED.
      */
-    png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-    if (png_ptr == NULL) {
+    png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+    if (png_ptr == nullptr) {
 	free(scanline);
 	return 0;
     }
 
     /* Allocate/initialize the image information data.  REQUIRED */
     info_ptr = png_create_info_struct(png_ptr);
-    if (info_ptr == NULL) {
+    if (info_ptr == nullptr) {
 	free(scanline);
-	png_destroy_write_struct(&png_ptr,  (png_infopp)NULL);
+	png_destroy_write_struct(&png_ptr,  (png_infopp)nullptr);
 	return 0;
     }
 
@@ -143,7 +143,7 @@ int R_SaveAsPng(void  *d, int width, int height,
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 	return 0;
     }
-    png_set_error_fn(png_ptr, NULL, my_png_error, my_png_warning);
+    png_set_error_fn(png_ptr, nullptr, my_png_error, my_png_warning);
 
     /* I/O initialization functions is REQUIRED */
     png_init_io(png_ptr, fp);
@@ -363,10 +363,10 @@ int R_SaveAsJpeg(void  *d, int width, int height,
     volatile DECLARESHIFTS;
 
     /* Have we enough memory?*/
-    if (scanline == NULL)
+    if (scanline == nullptr)
 	return 0;
 
-    if (outfile == NULL) {
+    if (outfile == nullptr) {
 	free(scanline);
 	return 0;
     }
@@ -594,7 +594,7 @@ int R_SaveAsBmp(void  *d, int width, int height,
     int lres;
     DECLARESHIFTS;
 
-    if (fp == NULL)
+    if (fp == nullptr)
 	return 0;
 
     /* Have we less than 256 different colors? */
@@ -708,7 +708,7 @@ int R_SaveAsBmp(void  *d, int width, int height,
 const char * in_R_pngVersion(void)
 {
 #ifdef HAVE_PNG
-    return png_get_header_ver(NULL /*ignored*/);
+    return png_get_header_ver(nullptr /*ignored*/);
 #else
     return "";
 #endif

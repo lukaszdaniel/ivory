@@ -346,7 +346,7 @@ HIDDEN SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 		len += 4; // all points not in the basic plane have length 4
 	    } 
 	    else
-		len += inttomb(NULL, this_);
+		len += inttomb(nullptr, this_);
 	}
 	if (haveNA) {
 	    PROTECT(ans = allocVector(STRSXP, 1));

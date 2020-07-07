@@ -303,7 +303,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
 {
     int status;
-    R_ReplState state = { PARSE_NULL, 1, 0, "", NULL};
+    R_ReplState state = { PARSE_NULL, 1, 0, "", nullptr};
 
     R_IoBufferWriteReset(&R_ConsoleIob);
     state.buf[0] = '\0';
@@ -517,7 +517,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 #if defined(linux) || defined(__linux__) || defined(__sun) || defined(sun)
 	    sigset_t ss;
 	    sigaddset(&ss, signum);
-	    sigprocmask(SIG_UNBLOCK, &ss, NULL);
+	    sigprocmask(SIG_UNBLOCK, &ss, nullptr);
 #endif
 	    jump_to_toplevel();
 	}
@@ -669,21 +669,21 @@ static void init_signal_handlers(void)
     /* <FIXME> may need to reinstall this if we do recover. */
     struct sigaction sa;
     signal_stack = malloc(SIGSTKSZ + R_USAGE);
-    if (signal_stack != NULL) {
+    if (signal_stack != nullptr) {
 	sigstk.ss_sp = signal_stack;
 	sigstk.ss_size = SIGSTKSZ + R_USAGE;
 	sigstk.ss_flags = 0;
-	if(sigaltstack(&sigstk, NULL) < 0)
+	if(sigaltstack(&sigstk, nullptr) < 0)
 	    warning(_("failed to set alternate signal stack"));
     } else
 	warning(_("failed to allocate alternate signal stack"));
     sa.sa_sigaction = sigactionSegv;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_ONSTACK | SA_SIGINFO;
-    sigaction(SIGSEGV, &sa, NULL);
-    sigaction(SIGILL, &sa, NULL);
+    sigaction(SIGSEGV, &sa, nullptr);
+    sigaction(SIGILL, &sa, nullptr);
 #ifdef SIGBUS
-    sigaction(SIGBUS, &sa, NULL);
+    sigaction(SIGBUS, &sa, nullptr);
 #endif
 
     signal(SIGINT,  handleInterrupt);
@@ -711,7 +711,7 @@ static void init_signal_handlers(void)
 static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
-    if (fp != NULL) {
+    if (fp != nullptr) {
 	if (SETJMP(R_Toplevel.getCJmpBuf()))
 	    check_session_exit();
 	else {
@@ -762,7 +762,7 @@ static uintptr_t almostFillStack() {
 
 void setup_Rmainloop(void)
 {
-    volatile int doneit;
+    volatile bool doneit;
     volatile SEXP baseEnv;
     SEXP cmd;
     char deferred_warnings[11][250];
@@ -941,16 +941,16 @@ void setup_Rmainloop(void)
     if (R_SignalHandlers) init_signal_handlers();
 #else
     FILE *fp = R_OpenLibraryFile("base");
-    if (fp == NULL)
+    if (fp == nullptr)
 	R_Suicide(_("unable to open the base package\n"));
 
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (R_SignalHandlers) init_signal_handlers();
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	R_ReplFile(fp, baseEnv);
     }
     fclose(fp);
@@ -974,12 +974,12 @@ void setup_Rmainloop(void)
     R_unLockBinding(install(".Library.site"), R_BaseEnv);
 
     /* require(methods) if it is in the default packages */
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	PROTECT(cmd = install(".OptRequireMethods"));
 	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
 	if (R_CurrentExpr != R_UnboundValue &&
@@ -1013,12 +1013,12 @@ void setup_Rmainloop(void)
        we look in any documents which might have been double clicked on
        or dropped on the application.
     */
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	R_InitialData();
     }
     else {
@@ -1033,12 +1033,12 @@ void setup_Rmainloop(void)
        At this point we try to invoke the .First Function.
        If there is an error we continue. */
 
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	PROTECT(cmd = install(".First"));
 	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
 	if (R_CurrentExpr != R_UnboundValue &&
@@ -1052,12 +1052,12 @@ void setup_Rmainloop(void)
     /* Try to invoke the .First.sys function, which loads the default packages.
        If there is an error we continue. */
 
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	PROTECT(cmd = install(".First.sys"));
 	R_CurrentExpr = findVar(cmd, baseEnv);
 	if (R_CurrentExpr != R_UnboundValue &&
@@ -1081,12 +1081,12 @@ void setup_Rmainloop(void)
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
-    doneit = 0;
+    doneit = false;
     if (SETJMP(R_Toplevel.getCJmpBuf()))
 	check_session_exit();
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     if (!doneit) {
-	doneit = 1;
+	doneit = true;
 	R_init_jit_enabled();
     } else
 	R_Suicide(_("unable to initialize the JIT\n"));
@@ -1227,7 +1227,7 @@ static void PrintCall(SEXP call, SEXP rho)
     R_BrowseLines = old_bl;
 }
 
-/* browser(text = "", condition = NULL, expr = TRUE, skipCalls = 0L)
+/* browser(text = "", condition = nullptr, expr = TRUE, skipCalls = 0L)
  * ------- but also called from ./eval.cpp */
 HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -1400,7 +1400,7 @@ HIDDEN SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #include <R_ext/Callbacks.h>
 
-static R_ToplevelCallbackEl *Rf_ToplevelTaskHandlers = NULL;
+static R_ToplevelCallbackEl *Rf_ToplevelTaskHandlers = nullptr;
 
 /**
   This is the C-level entry point for registering a handler
@@ -1421,10 +1421,10 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 
     el->data = data;
     el->cb = cb;
-    el->next = NULL;
+    el->next = nullptr;
     el->finalizer = finalizer;
 
-    if(Rf_ToplevelTaskHandlers == NULL) {
+    if(Rf_ToplevelTaskHandlers == nullptr) {
 	Rf_ToplevelTaskHandlers = el;
 	which = 0;
     } else {
@@ -1453,7 +1453,7 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 
 Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
-    R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
+    R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = nullptr;
     Rboolean status = TRUE;
 
     if(!Rf_ToplevelTaskHandlers) {
@@ -1462,7 +1462,7 @@ Rboolean Rf_removeTaskCallbackByName(const char *name)
 
     while(el) {
 	if(streql(el->name, name)) {
-	    if(prev == NULL) {
+	    if(prev == nullptr) {
 		Rf_ToplevelTaskHandlers = el->next;
 	    } else {
 		prev->next = el->next;
@@ -1489,7 +1489,7 @@ Rboolean Rf_removeTaskCallbackByName(const char *name)
  */
 Rboolean Rf_removeTaskCallbackByIndex(int id)
 {
-    R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
+    R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = nullptr;
     Rboolean status = TRUE;
 
     if(id < 0)
@@ -1508,7 +1508,7 @@ Rboolean Rf_removeTaskCallbackByIndex(int id)
 
 	    if(i == (id -1) && el) {
 		tmp = el->next;
-		el->next = (tmp ? tmp->next : NULL);
+		el->next = (tmp ? tmp->next : nullptr);
 	    }
 	}
     }
@@ -1592,7 +1592,7 @@ static bool Rf_RunningToplevelHandlers = false;
 void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 			bool visible)
 {
-    R_ToplevelCallbackEl *h, *prev = NULL;
+    R_ToplevelCallbackEl *h, *prev = nullptr;
     Rboolean again;
 
     if(Rf_RunningToplevelHandlers == true)
@@ -1654,7 +1654,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 	SETCAR(cur, VECTOR_ELT(f, 1));
     }
 
-    val = R_tryEval(e, NULL, &errorOccurred);
+    val = R_tryEval(e, nullptr, &errorOccurred);
     UNPROTECT(1); /* e */
     if(!errorOccurred) {
 	PROTECT(val);
@@ -1676,7 +1676,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
     SEXP internalData;
     SEXP index;
     R_ToplevelCallbackEl *el;
-    const char *tmpName = NULL;
+    const char *tmpName = nullptr;
 
     internalData = allocVector(VECSXP, 3);
     R_PreserveObject(internalData);

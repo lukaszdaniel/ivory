@@ -158,10 +158,10 @@ typedef struct RxmlNanoFTPCtxt {
 } RxmlNanoFTPCtxt, *RxmlNanoFTPCtxtPtr;
 
 static int initialized = 0;
-static char *proxy = NULL;	/* the proxy name if any */
+static char *proxy = nullptr;	/* the proxy name if any */
 static int proxyPort = 0;	/* the proxy port if any */
-static char *proxyUser = NULL;	/* user for proxy authentication */
-static char *proxyPasswd = NULL;/* passwd for proxy authentication */
+static char *proxyUser = nullptr;	/* user for proxy authentication */
+static char *proxyPasswd = nullptr;/* passwd for proxy authentication */
 static int proxyType = 0;	/* uses TYPE or a@b ? */
 static unsigned int timeout = 60;/* the select() timeout in seconds */
 
@@ -196,20 +196,20 @@ static void RxmlNanoFTPInit(void) {
     if (env && ((env[0] == '*' ) && (env[1] == 0)))
 	return;
     env = getenv("ftp_proxy");
-    if (env != NULL) {
+    if (env != nullptr) {
 	RxmlNanoFTPScanProxy(env);
     } else {
 	env = getenv("FTP_PROXY");
-	if (env != NULL) {
+	if (env != nullptr) {
 	    RxmlNanoFTPScanProxy(env);
 	}
     }
     env = getenv("ftp_proxy_user");
-    if (env != NULL) {
+    if (env != nullptr) {
 	proxyUser = xmlMemStrdup(env);
     }
     env = getenv("ftp_proxy_password");
-    if (env != NULL) {
+    if (env != nullptr) {
 	proxyPasswd = xmlMemStrdup(env);
     }
     initialized = 1;
@@ -222,17 +222,17 @@ static void RxmlNanoFTPInit(void) {
  */
 
 void RxmlNanoFTPCleanup(void) {
-    if (proxy != NULL) {
+    if (proxy != nullptr) {
 	xmlFree(proxy);
-	proxy = NULL;
+	proxy = nullptr;
     }
-    if (proxyUser != NULL) {
+    if (proxyUser != nullptr) {
 	xmlFree(proxyUser);
-	proxyUser = NULL;
+	proxyUser = nullptr;
     }
-    if (proxyPasswd != NULL) {
+    if (proxyPasswd != nullptr) {
 	xmlFree(proxyPasswd);
-	proxyPasswd = NULL;
+	proxyPasswd = nullptr;
     }
 #ifdef _WINSOCKAPI_
     if (initialized)
@@ -261,19 +261,19 @@ static void RxmlNanoFTPScanURL(void *ctx, const char *URL) {
     /*
      * Clear any existing data from the context
      */
-    if (ctxt->protocol != NULL) {
+    if (ctxt->protocol != nullptr) {
 	xmlFree(ctxt->protocol);
-	ctxt->protocol = NULL;
+	ctxt->protocol = nullptr;
     }
-    if (ctxt->hostname != NULL) {
+    if (ctxt->hostname != nullptr) {
 	xmlFree(ctxt->hostname);
-	ctxt->hostname = NULL;
+	ctxt->hostname = nullptr;
     }
-    if (ctxt->path != NULL) {
+    if (ctxt->path != nullptr) {
 	xmlFree(ctxt->path);
-	ctxt->path = NULL;
+	ctxt->path = nullptr;
     }
-    if (URL == NULL) return;
+    if (URL == nullptr) return;
     buf[indx] = 0;
     while (*cur != 0 && (indx < XML_NANO_MAX_URLBUF-1)) {
 	if ((cur[0] == ':') && (cur[1] == '/') && (cur[2] == '/')) {
@@ -365,18 +365,18 @@ static void RxmlNanoFTPScanProxy(const char *URL) {
     int indx = 0;
     int port = 0;
 
-    if (proxy != NULL) {
+    if (proxy != nullptr) {
 	xmlFree(proxy);
-	proxy = NULL;
+	proxy = nullptr;
     }
     /*if (proxyPort != 0) {
 	proxyPort = 0;
 	}*/
-    if (URL == NULL)
+    if (URL == nullptr)
 	RxmlMessage(0, _("removing FTP proxy info"));
     else
 	RxmlMessage(1, _("using FTP proxy '%s'"), URL);
-    if (URL == NULL) return;
+    if (URL == nullptr) return;
     buf[indx] = 0;
     while (*cur != 0 && (indx < XML_NANO_MAX_URLBUF - 1)) {
 	if ((cur[0] == ':') && (cur[1] == '/') && (cur[2] == '/')) {
@@ -429,7 +429,7 @@ static void* RxmlNanoFTPNewCtxt(const char *URL) {
     RxmlNanoFTPCtxtPtr ret;
 
     ret = (RxmlNanoFTPCtxtPtr) xmlMalloc(sizeof(RxmlNanoFTPCtxt));
-    if (ret == NULL) {
+    if (ret == nullptr) {
 	RxmlMessage(1, _("error allocating FTP context"));
 	return(NULL);
     }
@@ -443,7 +443,7 @@ static void* RxmlNanoFTPNewCtxt(const char *URL) {
     ret->controlBufUsed = 0;
     ret->controlFd = -1;
 
-    if (URL != NULL)
+    if (URL != nullptr)
 	RxmlNanoFTPScanURL(ret, URL);
 
     return(ret);
@@ -458,10 +458,10 @@ static void* RxmlNanoFTPNewCtxt(const char *URL) {
 
 static void RxmlNanoFTPFreeCtxt(void * ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
-    if (ctxt == NULL) return;
-    if (ctxt->hostname != NULL) xmlFree(ctxt->hostname);
-    if (ctxt->protocol != NULL) xmlFree(ctxt->protocol);
-    if (ctxt->path != NULL) xmlFree(ctxt->path);
+    if (ctxt == nullptr) return;
+    if (ctxt->hostname != nullptr) xmlFree(ctxt->hostname);
+    if (ctxt->protocol != nullptr) xmlFree(ctxt->protocol);
+    if (ctxt->path != nullptr) xmlFree(ctxt->path);
     ctxt->passive = 1;
     if (ctxt->controlFd > 2) closesocket(ctxt->controlFd);
     ctxt->controlFd = -1;
@@ -517,7 +517,7 @@ static int RxmlNanoFTPGetMore(void *ctx) {
     int len;
     int size;
 
-    if ((ctxt == NULL) || (ctxt->controlFd < 0)) return(-1);
+    if ((ctxt == nullptr) || (ctxt->controlFd < 0)) return(-1);
 
     if ((ctxt->controlBufIndex < 0) || (ctxt->controlBufIndex > FTP_BUF_SIZE)) {
 	RxmlMessage(0, "RxmlNanoFTPGetMore : controlBufIndex = %d",
@@ -599,7 +599,7 @@ static int RxmlNanoFTPReadResponse(void *ctx) {
     int len;
     int res = -1, cur = -1;
 
-    if ((ctxt == NULL) || (ctxt->controlFd < 0)) return(-1);
+    if ((ctxt == nullptr) || (ctxt->controlFd < 0)) return(-1);
 
 get_more:
     /*
@@ -680,7 +680,7 @@ static int RxmlNanoFTPCheckResponse(void *ctx) {
     fd_set rfd;
     struct timeval tv;
 
-    if ((ctxt == NULL) || (ctxt->controlFd < 0)) return(-1);
+    if ((ctxt == nullptr) || (ctxt->controlFd < 0)) return(-1);
     tv.tv_sec = 0;
     tv.tv_usec = 0;
     FD_ZERO(&rfd);
@@ -710,7 +710,7 @@ static int RxmlNanoFTPSendUser(void *ctx) {
     int len;
     int res;
 
-    if (ctxt->user == NULL)
+    if (ctxt->user == nullptr)
 	snprintf(buf, sizeof(buf), "USER anonymous\r\n");
     else
 	snprintf(buf, sizeof(buf), "USER %s\r\n", ctxt->user);
@@ -735,7 +735,7 @@ static int RxmlNanoFTPSendPasswd(void *ctx) {
     int len;
     int res;
 
-    if (ctxt->passwd == NULL)
+    if (ctxt->passwd == nullptr)
 	snprintf(buf, sizeof(buf), "PASS anonymous@\r\n");
     else
 	snprintf(buf, sizeof(buf), "PASS %s\r\n", ctxt->passwd);
@@ -765,7 +765,7 @@ static int RxmlNanoFTPQuit(void *ctx) {
     char buf[200];
     int len;
 
-    if ((ctxt == NULL) || (ctxt->controlFd < 0)) return(-1);
+    if ((ctxt == nullptr) || (ctxt->controlFd < 0)) return(-1);
 
     snprintf(buf, sizeof(buf), "QUIT\r\n");
     len = (int) strlen(buf);
@@ -789,9 +789,9 @@ static int RxmlNanoFTPConnect(void *ctx) {
     int port;
     int res;
 
-    if (ctxt == NULL)
+    if (ctxt == nullptr)
 	return(-1);
-    if (ctxt->hostname == NULL)
+    if (ctxt->hostname == nullptr)
 	return(-1);
 
     /*
@@ -801,7 +801,7 @@ static int RxmlNanoFTPConnect(void *ctx) {
 	hp = gethostbyname(proxy);
     else
 	hp = gethostbyname(ctxt->hostname);
-    if (hp == NULL) {
+    if (hp == nullptr) {
 	RxmlMessage(1, _("cannot resolve host"));
 	return(-1);
     }
@@ -890,7 +890,7 @@ static int RxmlNanoFTPConnect(void *ctx) {
 	int len;
 	char buf[400];
 
-	if (proxyUser != NULL) {
+	if (proxyUser != nullptr) {
 	    /*
 	     * We need proxy auth
 	     */
@@ -908,10 +908,10 @@ static int RxmlNanoFTPConnect(void *ctx) {
 	    res = RxmlNanoFTPGetResponse(ctxt);
 	    switch (res) {
 		case 2:
-		    if (proxyPasswd == NULL)
+		    if (proxyPasswd == nullptr)
 			break;
 		case 3:
-		    if (proxyPasswd != NULL)
+		    if (proxyPasswd != nullptr)
 			snprintf(buf, sizeof(buf), "PASS %s\r\n", proxyPasswd);
 		    else
 			snprintf(buf, sizeof(buf), "PASS anonymous@\r\n");
@@ -977,7 +977,7 @@ static int RxmlNanoFTPConnect(void *ctx) {
 		}
 	    case 2:
 		/* USER user@host command */
-		if (ctxt->user == NULL)
+		if (ctxt->user == nullptr)
 		    snprintf(buf, sizeof(buf), "USER anonymous@%s\r\n",
 				   ctxt->hostname);
 		else
@@ -999,7 +999,7 @@ static int RxmlNanoFTPConnect(void *ctx) {
 		    proxyType = 2;
 		    return(0);
 		}
-		if (ctxt->passwd == NULL)
+		if (ctxt->passwd == nullptr)
 		    snprintf(buf, sizeof(buf), "PASS anonymous@\r\n");
 		else
 
@@ -1219,9 +1219,9 @@ static int RxmlNanoFTPGetSocket(void *ctx, const char *filename) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     char buf[300];
     int res, len;
-    if (ctx == NULL)
+    if (ctx == nullptr)
 	return(-1);
-    if ((filename == NULL) && (ctxt->path == NULL))
+    if ((filename == nullptr) && (ctxt->path == nullptr))
 	return(-1);
     ctxt->dataFd = RxmlNanoFTPGetConnection(ctxt);
     if (ctxt->dataFd == -1)
@@ -1243,7 +1243,7 @@ static int RxmlNanoFTPGetSocket(void *ctx, const char *filename) {
 	closesocket(ctxt->dataFd); ctxt->dataFd = -1;
 	return(-res);
     }
-    if (filename == NULL)
+    if (filename == nullptr)
 	snprintf(buf, sizeof(buf), "RETR %s\r\n", ctxt->path);
     else
 	snprintf(buf, sizeof(buf), "RETR %s\r\n", filename);
@@ -1287,9 +1287,9 @@ int RxmlNanoFTPRead(void *ctx, void *dest, int len)
     struct timeval tv;
     double used = 0.0;
 
-    if (ctx == NULL) return(-1);
+    if (ctx == nullptr) return(-1);
     if (ctxt->dataFd < 0) return(0);
-    if (dest == NULL) return(-1);
+    if (dest == nullptr) return(-1);
     if (len <= 0) return(0);
     while(true) {
 	int maxfd = 0;
@@ -1345,7 +1345,7 @@ int RxmlNanoFTPRead(void *ctx, void *dest, int len)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != NULL) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) NULL);
 	    continue;
 	}
 #endif
@@ -1375,11 +1375,11 @@ void* RxmlNanoFTPOpen(const char *URL) {
     int sock;
 
     RxmlNanoFTPInit();
-    if (URL == NULL) return(NULL);
+    if (URL == nullptr) return(NULL);
     if (strncmp("ftp://", URL, 6)) return(NULL);
 
     ctxt = (RxmlNanoFTPCtxtPtr) RxmlNanoFTPNewCtxt(URL);
-    if (ctxt == NULL) return(NULL);
+    if (ctxt == nullptr) return(NULL);
     if (RxmlNanoFTPConnect(ctxt) < 0) {
 	RxmlNanoFTPFreeCtxt(ctxt);
 	return(NULL);
@@ -1404,7 +1404,7 @@ void* RxmlNanoFTPOpen(const char *URL) {
 int RxmlNanoFTPClose(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
 
-    if (ctxt == NULL)
+    if (ctxt == nullptr)
 	return(-1);
 
     if (ctxt->dataFd >= 0) {
@@ -1436,6 +1436,6 @@ DLsize_t RxmlNanoFTPContentLength(void *ctx)
 {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
 
-    if (ctxt == NULL) return(-1);
+    if (ctxt == nullptr) return(-1);
     return(ctxt->contentLength);
 }

@@ -759,16 +759,16 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* updateform() :  Update a model formula by the replacement of "." templates.
    ---------------------------------------------------------------------------
  */
-static SEXP tildeSymbol = NULL;
-static SEXP plusSymbol  = NULL;
-static SEXP minusSymbol = NULL;
-static SEXP timesSymbol = NULL;
-static SEXP slashSymbol = NULL;
-static SEXP colonSymbol = NULL;
-static SEXP powerSymbol = NULL;
-static SEXP dotSymbol   = NULL;
-static SEXP parenSymbol = NULL;
-static SEXP inSymbol    = NULL;
+static SEXP tildeSymbol = nullptr;
+static SEXP plusSymbol  = nullptr;
+static SEXP minusSymbol = nullptr;
+static SEXP timesSymbol = nullptr;
+static SEXP slashSymbol = nullptr;
+static SEXP colonSymbol = nullptr;
+static SEXP powerSymbol = nullptr;
+static SEXP dotSymbol   = nullptr;
+static SEXP parenSymbol = nullptr;
+static SEXP inSymbol    = nullptr;
 
 static SEXP ExpandDots(SEXP object, SEXP value)
 {
@@ -782,7 +782,7 @@ static SEXP ExpandDots(SEXP object, SEXP value)
 
     if (TYPEOF(object) == LANGSXP) {
 	if (TYPEOF(value) == LANGSXP) op = CAR(value);
-	else op = NULL;
+	else op = nullptr;
 	PROTECT(object);
 	if (CAR(object) == plusSymbol) {
 	    if (length(object) == 2) {

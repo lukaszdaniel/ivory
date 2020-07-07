@@ -43,10 +43,10 @@ FILE *R_OpenInitFile(void)
     char  buf[PATH_MAX], *p = getenv("R_PROFILE_USER");
     FILE *fp;
 
-    fp = NULL;
+    fp = nullptr;
     if (LoadInitFile) {
 	if(p) {
-	    if(!*p) return NULL;  /* set to "" */
+	    if(!*p) return nullptr;  /* set to "" */
 	    return R_fopen(R_ExpandFileName(p), "r");
 	}
 	if ((fp = R_fopen(".Rprofile", "r")))
@@ -264,9 +264,9 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	if (flag == 2) flag = 1; /* ignore std.output.on.console */
 	if (TYPEOF(Stdout) == STRSXP) fout = CHAR(STRING_ELT(Stdout, 0));
-	else if (asLogical(Stdout) == 0) fout = NULL;
+	else if (asLogical(Stdout) == 0) fout = nullptr;
 	if (TYPEOF(Stderr) == STRSXP) ferr = CHAR(STRING_ELT(Stderr, 0));
-	else if (asLogical(Stderr) == 0) ferr = NULL;
+	else if (asLogical(Stderr) == 0) ferr = nullptr;
     }
 
     if (flag < 2) { /* Neither intern = TRUE nor

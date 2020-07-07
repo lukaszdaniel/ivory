@@ -164,7 +164,7 @@ static Tcl_Obj * tk_eval(const char *cmd)
     Tcl_DString  cmd_utf8_ds;
 
     Tcl_DStringInit(&cmd_utf8_ds);
-    cmd_utf8 = Tcl_ExternalToUtfDString(NULL, cmd, -1, &cmd_utf8_ds);
+    cmd_utf8 = Tcl_ExternalToUtfDString(nullptr, cmd, -1, &cmd_utf8_ds);
     if (Tcl_Eval(RTcl_interp, cmd_utf8) == TCL_ERROR)
     {
 	char p[512];
@@ -175,7 +175,7 @@ static Tcl_Obj * tk_eval(const char *cmd)
 	    Tcl_DString  res_ds;
 
 	    Tcl_DStringInit(&res_ds);
-	    res = Tcl_UtfToExternalDString(NULL,
+	    res = Tcl_UtfToExternalDString(nullptr,
 					   Tcl_GetStringResult(RTcl_interp),
 					   -1, &res_ds);
 	    snprintf(p, sizeof(p), "[tcl] %s.\n", res);
@@ -252,7 +252,7 @@ SEXP dotTclObjv(SEXP args)
 	    char *res;
 	    Tcl_DString  res_ds;
 	    Tcl_DStringInit(&res_ds);
-	    res = Tcl_UtfToExternalDString(NULL,
+	    res = Tcl_UtfToExternalDString(nullptr,
 					   Tcl_GetStringResult(RTcl_interp),
 					   -1, &res_ds);
 	    snprintf(p, sizeof(p), "[tcl] %s.\n", res);
@@ -276,9 +276,9 @@ SEXP RTcl_ObjFromVar(SEXP args)
 	error(_("invalid argument"));
     tclobj = Tcl_GetVar2Ex(RTcl_interp,
                            translateChar(STRING_ELT(CADR(args), 0)),
-                           NULL,
+                           nullptr,
                            0);
-    if (tclobj == NULL)
+    if (tclobj == nullptr)
 	/* the variable may have been deleted using "unset" */
 	error(_("no such variable"));
     SEXP res = makeRTclObject(tclobj);
@@ -293,7 +293,7 @@ SEXP RTcl_AssignObjToVar(SEXP args)
 	error(_("invalid argument"));
     Tcl_SetVar2Ex(RTcl_interp,
 		  translateChar(STRING_ELT(CADR(args), 0)),
-		  NULL,
+		  nullptr,
 		  (Tcl_Obj *) R_ExternalPtrAddr(CADDR(args)),
 		  0);
     vmaxset(vmax);
@@ -314,9 +314,9 @@ SEXP RTcl_StringFromObj(SEXP args)
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
     if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
     Tcl_DStringInit(&s_ds);
-    str = Tcl_GetStringFromObj(obj, NULL);
+    str = Tcl_GetStringFromObj(obj, nullptr);
     /* FIXME: could use UTF-8 here */
-    s = Tcl_UtfToExternalDString(NULL, str, -1, &s_ds);
+    s = Tcl_UtfToExternalDString(nullptr, str, -1, &s_ds);
     so = mkString(s);
     Tcl_DStringFree(&s_ds);
     return(so);
@@ -343,8 +343,8 @@ SEXP RTcl_ObjAsCharVector(SEXP args)
 	Tcl_DString s_ds;
 	Tcl_DStringInit(&s_ds);
 	/* FIXME: could use UTF-8 here */
-	s = Tcl_UtfToExternalDString(NULL,
-				     (Tcl_GetStringFromObj(elem[i], NULL)),
+	s = Tcl_UtfToExternalDString(nullptr,
+				     (Tcl_GetStringFromObj(elem[i], nullptr)),
 				     -1, &s_ds);
 	SET_STRING_ELT(ans, i, mkChar(s));
 	Tcl_DStringFree(&s_ds);
@@ -415,7 +415,7 @@ SEXP RTcl_ObjAsDoubleVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK) /* didn't work, return NULL */
+    if (ret != TCL_OK) /* didn't work, return nullptr */
 	return R_NilValue;
 
     ans = allocVector(REALSXP, count);
@@ -480,7 +480,7 @@ SEXP RTcl_ObjAsIntVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK) /* didn't work, return NULL */
+    if (ret != TCL_OK) /* didn't work, return nullptr */
 	return R_NilValue;
 
     ans = allocVector(INTSXP, count);
@@ -579,7 +579,7 @@ SEXP RTcl_GetArrayElem(SEXP args)
     tclobj = Tcl_GetVar2Ex(RTcl_interp, xstr, istr, 0);
     vmaxset(vmax);
 
-    if (tclobj == NULL)
+    if (tclobj == nullptr)
 	return R_NilValue;
     else
 	return makeRTclObject(tclobj);
@@ -672,7 +672,7 @@ SEXP dotTclcallback(SEXP args)
     	error(_("argument is not of correct type"));
 
     Tcl_DStringInit(&s_ds);
-    s = Tcl_UtfToExternalDString(NULL, buff, -1, &s_ds);
+    s = Tcl_UtfToExternalDString(nullptr, buff, -1, &s_ds);
     ans = mkString(s);
     Tcl_DStringFree(&s_ds);
     return ans;
@@ -728,20 +728,20 @@ void tcltk_init(int *TkUp)
     Tcl_CreateCommand(RTcl_interp,
 		      "R_eval",
 		      R_eval,
-		      (ClientData) NULL,
-		      (Tcl_CmdDeleteProc *) NULL);
+		      (ClientData) nullptr,
+		      (Tcl_CmdDeleteProc *) nullptr);
 
     Tcl_CreateCommand(RTcl_interp,
 		      "R_call",
 		      R_call,
-		      (ClientData) NULL,
-		      (Tcl_CmdDeleteProc *) NULL);
+		      (ClientData) nullptr,
+		      (Tcl_CmdDeleteProc *) nullptr);
 
     Tcl_CreateCommand(RTcl_interp,
 		      "R_call_lang",
 		      R_call_lang,
-		      (ClientData) NULL,
-		      (Tcl_CmdDeleteProc *) NULL);
+		      (ClientData) nullptr,
+		      (Tcl_CmdDeleteProc *) nullptr);
 
 #ifndef _WIN32
     Tcl_unix_setup();

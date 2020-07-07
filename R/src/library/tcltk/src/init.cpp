@@ -33,7 +33,7 @@ static const R_CMethodDef CEntries[] = {
     C_DEF(tcltk_init, 1),
     C_DEF(RTcl_ActivateConsole, 0),
 #endif
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -58,13 +58,13 @@ static const R_ExternalMethodDef ExternEntries[] = {
     EXTDEF(RTcl_GetArrayElem, 2),
     EXTDEF(RTcl_RemoveArrayElem, 2),
     EXTDEF(RTcl_SetArrayElem, 3),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_tcltk(DllInfo *dll)
 {
-    R_registerRoutines(dll, CEntries, NULL, NULL, ExternEntries);
+    R_registerRoutines(dll, CEntries, nullptr, nullptr, ExternEntries);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, FALSE);
 }

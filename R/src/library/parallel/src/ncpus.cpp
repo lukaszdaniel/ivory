@@ -60,8 +60,8 @@ static Rboolean ncpus_ex(int *ians)
 {
     LPFN_GLPI_EX glpi;
     BOOL done = FALSE;
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX buffer = NULL;
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX ptr = NULL;
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX buffer = nullptr;
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX ptr = nullptr;
     DWORD returnLength = 0;
     DWORD logicalProcessorCount = 0;
     DWORD processorCoreCount = 0;
@@ -72,7 +72,7 @@ static Rboolean ncpus_ex(int *ians)
     glpi = (LPFN_GLPI_EX) 
 	GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 		       "GetLogicalProcessorInformationEx");
-    if (NULL == glpi)
+    if (nullptr == glpi)
 	return FALSE;
 
     /* count the number of logical processors using RelationGroup, counting
@@ -83,7 +83,7 @@ static Rboolean ncpus_ex(int *ians)
         if (rc == FALSE) {
             if (buffer) {
 		free(buffer);
-		buffer = NULL;
+		buffer = nullptr;
 	    }
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
@@ -119,7 +119,7 @@ static Rboolean ncpus_ex(int *ians)
         if (rc == FALSE) {
             if (buffer) {
 		free(buffer);
-		buffer = NULL;
+		buffer = nullptr;
 	    }
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
@@ -163,8 +163,8 @@ SEXP ncpus(SEXP virtual)
 
     LPFN_GLPI glpi;
     BOOL done = FALSE;
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION buffer = NULL;
-    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION ptr = NULL;
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION buffer = nullptr;
+    PSYSTEM_LOGICAL_PROCESSOR_INFORMATION ptr = nullptr;
     DWORD returnLength = 0;
     DWORD logicalProcessorCount = 0;
     DWORD numaNodeCount = 0;
@@ -175,7 +175,7 @@ SEXP ncpus(SEXP virtual)
     glpi = (LPFN_GLPI) 
 	GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 		       "GetLogicalProcessorInformation");
-    if (NULL == glpi) {
+    if (nullptr == glpi) {
 	warning(_("GetLogicalProcessorInformation is not supported on this OS."));
         return ans;
     }
@@ -185,7 +185,7 @@ SEXP ncpus(SEXP virtual)
         if (rc == FALSE) {
             if (buffer) {
 		free(buffer);
-		buffer = NULL;
+		buffer = nullptr;
 	    }
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION) malloc(returnLength);

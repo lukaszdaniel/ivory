@@ -139,7 +139,7 @@ static wchar_t *wcfixmode(const wchar_t *mode)
 extern "C"
 FILE *R_fopen(const char *filename, const char *mode)
 {
-    return (filename ? fopen(filename, fixmode(mode)) : NULL);
+    return (filename ? fopen(filename, fixmode(mode)) : nullptr);
 }
 
 /* The point of this function is to allow file names in foreign
@@ -193,7 +193,7 @@ wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand)
 
 FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode)
 {
-    return filename ? _wfopen(filename, wcfixmode(mode)) : NULL;
+    return filename ? _wfopen(filename, wcfixmode(mode)) : nullptr;
 }
 
 
@@ -201,7 +201,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
 {
     wchar_t wmode[10];
 
-    if(fn == NA_STRING) return NULL;
+    if(fn == NA_STRING) return nullptr;
     mbstowcs(wmode, fixmode(mode), 10);
     return _wfopen(filenameToWchar(fn, expand), wmode);
 }
@@ -210,7 +210,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
 {
     const void *vmax = vmaxget();
     const char *filename = translateCharFP(fn), *res;
-    if(fn == NA_STRING || !filename) return NULL;
+    if(fn == NA_STRING || !filename) return nullptr;
     if(expand) res = R_ExpandFileName(filename);
     else res = filename;
     vmaxset(vmax);
@@ -241,7 +241,7 @@ HIDDEN SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     Rboolean check = (Rboolean) asLogical(CAR(args));
     if(check && !isDir(R_TempDir)) {
-	R_TempDir = NULL;
+	R_TempDir = nullptr;
 	R_reInitTempDir(/* die_on_fail = */ FALSE);
     }
     return mkString(R_TempDir);
@@ -296,9 +296,9 @@ FILE *R_popen(const char *command, const char *type)
     sigset_t ss;
     sigemptyset(&ss);
     sigaddset(&ss, SIGPROF);
-    sigprocmask(SIG_BLOCK, &ss,  NULL);
+    sigprocmask(SIG_BLOCK, &ss,  nullptr);
     fp = popen(command, type);
-    sigprocmask(SIG_UNBLOCK, &ss, NULL);
+    sigprocmask(SIG_UNBLOCK, &ss, nullptr);
 #else
     fp = popen(command, type);
 #endif
@@ -319,14 +319,14 @@ int R_system(const char *command)
     sigset_t ss;
     sigemptyset(&ss);
     sigaddset(&ss, SIGPROF);
-    sigprocmask(SIG_BLOCK, &ss,  NULL);
+    sigprocmask(SIG_BLOCK, &ss,  nullptr);
 # endif
 #ifdef HAVE_AQUA
     if(ptr_CocoaSystem) res = ptr_CocoaSystem(command); else
 #endif
     res = system(command);
 # ifdef OLD__APPLE__
-    sigprocmask(SIG_UNBLOCK, &ss, NULL);
+    sigprocmask(SIG_UNBLOCK, &ss, nullptr);
 # endif
 #else // not APPLE
     res = system(command);
@@ -379,20 +379,20 @@ HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef _WIN32
 	int n = 0, N;
 	wchar_t **w;
-	for (i = 0, w = _wenviron; *w != NULL; i++, w++)
+	for (i = 0, w = _wenviron; *w != nullptr; i++, w++)
 	    n = max(n, wcslen(*w));
 	N = 4*n+1;
 	char buf[N];
 	PROTECT(ans = allocVector(STRSXP, i));
-	for (i = 0, w = _wenviron; *w != NULL; i++, w++) {
+	for (i = 0, w = _wenviron; *w != nullptr; i++, w++) {
 	    wcstoutf8(buf, *w, sizeof(buf));
 	    SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
 	}
 #else
 	char **e;
-	for (i = 0, e = environ; *e != NULL; i++, e++);
+	for (i = 0, e = environ; *e != nullptr; i++, e++);
 	PROTECT(ans = allocVector(STRSXP, i));
-	for (i = 0, e = environ; *e != NULL; i++, e++)
+	for (i = 0, e = environ; *e != nullptr; i++, e++)
 	    SET_STRING_ELT(ans, i, mkChar(*e));
 #endif
     } else {
@@ -401,7 +401,7 @@ HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef _WIN32
 	    const wchar_t *wnm = wtransChar(STRING_ELT(CAR(args), j));
 	    wchar_t *w = _wgetenv(wnm);
-	    if (w == NULL)
+	    if (w == nullptr)
 		SET_STRING_ELT(ans, j, STRING_ELT(CADR(args), 0));
 	    else {
 		int n = wcslen(w), N = 4*n+1; /* UTF-16 maps to <= 4 UTF-8 */
@@ -412,7 +412,7 @@ HIDDEN SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 #else
 	    char *s = getenv(translateChar(STRING_ELT(CAR(args), j)));
-	    if (s == NULL)
+	    if (s == nullptr)
 		SET_STRING_ELT(ans, j, STRING_ELT(CADR(args), 0));
 	    else {
 		SEXP tmp;
@@ -586,14 +586,14 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     char *outbuf;
     const char *sub;
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     Rboolean isRawlist = FALSE;
 
     checkArity(op, args);
     if(isNull(x)) {  /* list locales */
 #ifdef HAVE_ICONVLIST
 	cnt = 0;
-	iconvlist(count_one, NULL);
+	iconvlist(count_one, nullptr);
 	PROTECT(ans = allocVector(STRSXP, cnt));
 	cnt = 0;
 	iconvlist(write_one, (void *)ans);
@@ -616,7 +616,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	args = CDR(args);
 	if(!isString(CAR(args)) || length(CAR(args)) != 1)
 	    error(_("invalid '%s' argument"), "sub");
-	if(STRING_ELT(CAR(args), 0) == NA_STRING) sub = NULL;
+	if(STRING_ELT(CAR(args), 0) == NA_STRING) sub = nullptr;
 	else sub = translateChar(STRING_ELT(CAR(args), 0));
 	args = CDR(args);
 	mark = asLogical(CAR(args));
@@ -686,7 +686,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    inb = LENGTH(si);
 	    outbuf = cbuff.data; outb = cbuff.bufsize - 1;
 	    /* First initialize output */
-	    Riconv (obj, NULL, NULL, &outbuf, &outb);
+	    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 	next_char:
 	    /* Then convert input  */
 	    res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -799,7 +799,7 @@ void * Riconv_open (const char* tocode, const char* fromcode)
 # else /* __APPLE__ */
     const char *cp = "UTF-8";
     if (latin1locale) cp = "ISO-8859-1";
-    else if (!utf8locale) cp = locale2charset(NULL);
+    else if (!utf8locale) cp = locale2charset(nullptr);
 # endif
     if (!*tocode && !*fromcode) return iconv_open(cp, cp);
     if(!*tocode)  return iconv_open(cp, fromcode);
@@ -857,8 +857,8 @@ R_INLINE static nttype_t needsTranslation(SEXP x) {
     return NT_NONE;
 }
 
-static void *latin1_obj = NULL, *utf8_obj = NULL, *ucsmb_obj = NULL,
-            *ucsutf8_obj = NULL;
+static void *latin1_obj = nullptr, *utf8_obj = nullptr, *ucsmb_obj = nullptr,
+            *ucsutf8_obj = nullptr;
 
 /* Translates string in "ans" to native encoding returning it in string
    buffer "cbuff" */
@@ -917,7 +917,7 @@ top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff->data; outb = cbuff->bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = (int) Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -988,7 +988,7 @@ const char *Rf_translateChar(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     translateToNative(ans, &cbuff, t, 0);
 
     size_t res = strlen(cbuff.data) + 1;
@@ -1008,7 +1008,7 @@ const char *Rf_translateCharFP(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     translateToNative(ans, &cbuff, t, 1);
 
     size_t res = strlen(cbuff.data) + 1;
@@ -1018,7 +1018,7 @@ const char *Rf_translateCharFP(SEXP x)
     return p;
 }
 
-/* Variant which may return NULL, used for file paths */
+/* Variant which may return nullptr, used for file paths */
 HIDDEN const char *Rf_translateCharFP2(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
@@ -1028,8 +1028,8 @@ HIDDEN const char *Rf_translateCharFP2(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
-    if (translateToNative(ans, &cbuff, t, 2)) return NULL;
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
+    if (translateToNative(ans, &cbuff, t, 2)) return nullptr;
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
@@ -1046,7 +1046,7 @@ SEXP Rf_installTrChar(SEXP x)
     nttype_t t = needsTranslation(x);
     if (t == NT_NONE) return installNoTrChar(x);
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     // For back-compatibility this allows installing
     // symbols with escapes, with a warning.
     translateToNative(CHAR(x), &cbuff, t, 2);
@@ -1087,7 +1087,7 @@ const char *Rf_translateCharUTF8(SEXP x)
     const char *inbuf, *ans = CHAR(x);
     char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP, but got '%s'"),
@@ -1118,7 +1118,7 @@ top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1151,7 +1151,7 @@ HIDDEN const char *Rf_trCharUTF8(SEXP x)
     const char *inbuf, *ans = CHAR(x);
     char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     Rboolean failed = FALSE;
 
     if(TYPEOF(x) != CHARSXP)
@@ -1183,7 +1183,7 @@ top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1223,7 +1223,7 @@ static constexpr char TO_WCHAR[] = "UCS-4LE";
 # endif
 #endif
 
-static void *latin1_wobj = NULL, *utf8_wobj=NULL;
+static void *latin1_wobj = nullptr, *utf8_wobj=nullptr;
 
 /* Translate from current encoding to wchar_t = UCS-2/4
    NB: that wchar_t is UCS-4 is an assumption, but not easy to avoid.
@@ -1240,7 +1240,7 @@ const wchar_t *Rf_wtransChar(SEXP x)
     wchar_t *p;
     size_t inb, outb, res, top;
     Rboolean knownEnc = FALSE;
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' must be called on a CHARSXP"), "wtransChar");
@@ -1289,7 +1289,7 @@ top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1328,11 +1328,11 @@ const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
     const char *inbuf;
     char *outbuf, *p;
     size_t inb, outb, res, top;
-    const char *tocode = NULL, *fromcode = NULL;
+    const char *tocode = nullptr, *fromcode = nullptr;
 #ifdef _WIN32
     char buf[20];
 #endif
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
     /* We can only encode from Symbol to UTF-8 */
     if(ce_in == ce_out || ce_out == CE_SYMBOL ||
@@ -1394,7 +1394,7 @@ top_of_loop:
     inbuf = x; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1452,9 +1452,9 @@ void reEnc2(const char *x, char *y, int ny,
     const char *inbuf;
     char *outbuf;
     size_t inb, outb, res, top;
-    char *tocode = NULL, *fromcode = NULL;
+    char *tocode = nullptr, *fromcode = nullptr;
     char buf[20];
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
     strncpy(y, x, ny);
     y[ny - 1] = '\0';
@@ -1500,7 +1500,7 @@ top_of_loop:
     inbuf = x; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
     /* First initialize output */
-    Riconv (obj, NULL, NULL, &outbuf, &outb);
+    Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
@@ -1554,24 +1554,24 @@ invalidate_cached_recodings(void)
 {
     if (latin1_obj) {
 	Riconv_close(latin1_obj);
-	latin1_obj = NULL;
+	latin1_obj = nullptr;
     }
     if (utf8_obj) {
 	Riconv_close(utf8_obj);
-	utf8_obj = NULL;
+	utf8_obj = nullptr;
     }
     if (ucsmb_obj) {
 	Riconv_close(ucsmb_obj);
-	ucsmb_obj = NULL;
+	ucsmb_obj = nullptr;
     }
 #ifdef _WIN32
     if (latin1_wobj) {
 	Riconv_close(latin1_wobj);
-	latin1_wobj = NULL;
+	latin1_wobj = nullptr;
     }
     if (utf8_wobj) {
 	Riconv_close(utf8_wobj);
-	utf8_wobj = NULL;
+	utf8_wobj = nullptr;
     }
 #endif
 }
@@ -1588,7 +1588,7 @@ static constexpr char UNICODE[] = "UCS-4LE";
 size_t Rf_ucstomb(char *s, const unsigned int wc)
 {
     char     buf[MB_CUR_MAX+1];
-    void    *cd = NULL ;
+    void    *cd = nullptr ;
     unsigned int  wcs[2];
     const char *inbuf = (const char *) wcs;
     size_t   inbytesleft = sizeof(unsigned int); /* better be 4 */
@@ -1602,12 +1602,12 @@ size_t Rf_ucstomb(char *s, const unsigned int wc)
     memset(wcs, 0, sizeof(wcs));
     wcs[0] = wc;
 
-    if(ucsmb_obj == NULL) {
+    if(ucsmb_obj == nullptr) {
 	if((void *)(-1) == (cd = Riconv_open("", UNICODE))) {
 #ifndef  _WIN32
 	    char tocode[128];
 	    /* locale set fuzzy case */
-	    strncpy(tocode, locale2charset(NULL), sizeof(tocode) - 1);
+	    strncpy(tocode, locale2charset(nullptr), sizeof(tocode) - 1);
 	    tocode[sizeof(tocode) - 1] = '\0';
 	    if((void *)(-1) == (cd = Riconv_open(tocode, UNICODE)))
 		return (size_t)(-1);
@@ -1680,7 +1680,7 @@ HIDDEN size_t Rf_mbtoucs(unsigned int *wc, const char *s, size_t n)
 size_t Rf_ucstoutf8(char *s, const unsigned int wc)
 {
     char     buf[16];
-    void    *cd = NULL ;
+    void    *cd = nullptr ;
     unsigned int  wcs[2];
     const char *inbuf = (const char *) wcs;
     size_t   inbytesleft = sizeof(unsigned int); /* better be 4 */
@@ -1693,7 +1693,7 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc)
     memset(buf, 0, sizeof(buf));
     wcs[0] = wc; wcs[1] = 0;
 
-    if(ucsutf8_obj == NULL) {
+    if(ucsutf8_obj == nullptr) {
 	if((void *)(-1) == (cd = Riconv_open("UTF-8", UNICODE))) {
 	    error(_("unsupported conversion from '%s' to '%s'"),
 		  UNICODE, "UTF-8");
@@ -1790,7 +1790,7 @@ void R_reInitTempDir(int die_on_fail)
 	errorcall(R_NilValue, MSG_)
 
     if(R_TempDir) return; /* someone else set it */
-    tmp = NULL; /* getenv("R_SESSION_TMPDIR");   no longer set in R.sh */
+    tmp = nullptr; /* getenv("R_SESSION_TMPDIR");   no longer set in R.sh */
     if (!tmp) {
 	tm = getenv("TMPDIR");
 	if (!isDir(tm)) {
@@ -2022,7 +2022,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     int res, dirmark; bool initialized = false;
     glob_t globbuf;
 #ifdef _WIN32
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 #endif
 
     checkArity(op, args);
@@ -2044,7 +2044,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 	res = dos_wglob(filenameToWchar(el, FALSE),
 			(dirmark ? GLOB_MARK : 0) |
 			GLOB_QUOTE | (initialized ? GLOB_APPEND : 0),
-			NULL, &globbuf);
+			nullptr, &globbuf);
 	if (res == GLOB_NOSPACE)
 	    error(_("internal out-of-memory condition"));
 #else
@@ -2053,7 +2053,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 		   (dirmark ? GLOB_MARK : 0) |
 # endif
 		   GLOB_QUOTE | (initialized ? GLOB_APPEND : 0),
-		   NULL, &globbuf);
+		   nullptr, &globbuf);
 # ifdef GLOB_ABORTED
 	if (res == GLOB_ABORTED)
 	    warning(_("read error on '%s'"), translateChar(el));
@@ -2072,7 +2072,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     {
 	wchar_t *w = globbuf.gl_pathv[i];
 	char *buf;
-	int nb = wcstoutf8(NULL, w, R_INT_MAX);
+	int nb = wcstoutf8(nullptr, w, R_INT_MAX);
 	buf = R_AllocStringBuffer(nb, &cbuff);
 	wcstoutf8(buf, w, nb);
 	SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
@@ -2138,7 +2138,7 @@ typedef BOOL (WINAPI *LPFN_GFIBH_EX) (HANDLE, FILE_INFO_BY_HANDLE_CLASS,
 HIDDEN int R_is_redirection_tty(int fd)
 {
     /* for now detects only msys/cygwin redirection tty */
-    static LPFN_GFIBH_EX gfibh = NULL;
+    static LPFN_GFIBH_EX gfibh = nullptr;
     static bool initialized = false;
 
     if (!initialized) {
@@ -2147,7 +2147,7 @@ HIDDEN int R_is_redirection_tty(int fd)
 	    GetModuleHandle(TEXT("kernel32")),
 	    "GetFileInformationByHandleEx");
     }
-    if (gfibh == NULL)
+    if (gfibh == nullptr)
 	return 0;
 
     HANDLE h = (HANDLE) _get_osfhandle(fd);

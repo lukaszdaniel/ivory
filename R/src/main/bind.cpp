@@ -35,7 +35,7 @@
 using namespace std;
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
 
 #include "duplicate.h"
 
@@ -717,7 +717,7 @@ static void NewExtractNames(SEXP v, SEXP base, SEXP tag, int recurse,
 static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
 			  SEXP call)
 {
-    SEXP a, n, last = NULL, next = NULL;
+    SEXP a, n, last = nullptr, next = nullptr;
     int v, n_recurse = 0, n_usenames = 0;
 
     for (a = ans; a != R_NilValue; a = next) {
@@ -729,7 +729,7 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
 		*recurse = (Rboolean) v;
 	    }
-	    if (last == NULL)
+	    if (last == nullptr)
 		ans = next;
 	    else
 		SETCDR(last, next);
@@ -740,7 +740,7 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
 		*usenames = (Rboolean) v;
 	    }
-	    if (last == NULL)
+	    if (last == nullptr)
 		ans = next;
 	    else
 		SETCDR(last, next);
@@ -1122,7 +1122,7 @@ HIDDEN SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     for (t = args; t != R_NilValue; t = CDR(t))
 	AnswerType(PRVALUE(CAR(t)), FALSE, FALSE, &data, call);
 
-    /* zero-extent matrices shouldn't give NULL, but cbind(NULL) should: */
+    /* zero-extent matrices shouldn't give nullptr, but cbind(NULL) should: */
     if (!data.ans_flags && !data.ans_length) {
 	UNPROTECT(1);
 	return R_NilValue;
@@ -1322,7 +1322,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, CPLXSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
-		xcopyComplexWithRecycle(COMPLEX(result), COMPLEX(u), n, idx, k);
+		xcopyWithRecycle(COMPLEX(result), COMPLEX(u), n, idx, k);
 		n += idx;
 	    }
 	}
@@ -1334,7 +1334,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, RAWSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
-		xcopyRawWithRecycle(RAW(result), RAW(u), n, idx, k);
+		xcopyWithRecycle(RAW(result), RAW(u), n, idx, k);
 		n += idx;
 	    }
 	}
@@ -1347,7 +1347,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
 		if (TYPEOF(u) <= INTSXP) { /* INT or LGL */
 		    if (mode <= INTSXP) {
-			xcopyIntegerWithRecycle(INTEGER(result), INTEGER(u),
+			xcopyWithRecycle(INTEGER(result), INTEGER(u),
 						n, idx, k);
 			n += idx;
 		    }
@@ -1360,7 +1360,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		    }
 		}
 		else if (TYPEOF(u) == REALSXP) {
-		    xcopyRealWithRecycle(REAL(result), REAL(u), n, idx, k);
+		    xcopyWithRecycle(REAL(result), REAL(u), n, idx, k);
 		    n += idx;
 		}
 		else { /* RAWSXP */
@@ -1569,7 +1569,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, RAWSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillRawMatrixWithRecycle(RAW(result), RAW(u), n, rows, idx,
+		xfillMatrixWithRecycle(RAW(result), RAW(u), n, rows, idx,
 					  cols, k);
 		n += idx;
 	    }
@@ -1582,7 +1582,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, CPLXSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillComplexMatrixWithRecycle(COMPLEX(result), COMPLEX(u), n,
+		xfillMatrixWithRecycle(COMPLEX(result), COMPLEX(u), n,
 					      rows, idx, cols, k);
 		n += idx;
 	    }
@@ -1596,7 +1596,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		if (TYPEOF(u) <= INTSXP) {
 		    if (mode <= INTSXP) {
-			xfillIntegerMatrixWithRecycle(INTEGER(result),
+			xfillMatrixWithRecycle(INTEGER(result),
 						      INTEGER(u), n, rows,
 						      idx, cols, k);
 			n += idx;
@@ -1609,7 +1609,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		    }
 		}
 		else if (TYPEOF(u) == REALSXP) {
-		    xfillRealMatrixWithRecycle(REAL(result), REAL(u), n,
+		    xfillMatrixWithRecycle(REAL(result), REAL(u), n,
 					       rows, idx, cols, k);
 		    n += idx;
 		}

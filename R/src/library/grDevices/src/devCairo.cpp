@@ -49,11 +49,11 @@ static int Load_Rcairo_Dll(void)
 
     int res = R_cairoCdynload(1, 1);
     if(!res) return initialized;
-    R_devCairo = (R_cairo) R_FindSymbol("in_Cairo", "cairo", NULL);
+    R_devCairo = (R_cairo) R_FindSymbol("in_Cairo", "cairo", nullptr);
     if (!R_devCairo) error(_("failed to load cairo DLL"));
-    R_cairoVersion = (R_cairoVersion_t) R_FindSymbol("in_CairoVersion", "cairo", NULL);
-    R_pangoVersion = (R_pangoVersion_t) R_FindSymbol("in_PangoVersion", "cairo", NULL);
-    R_cairoFT = (R_cairoFT_t) R_FindSymbol("in_CairoFT", "cairo", NULL);
+    R_cairoVersion = (R_cairoVersion_t) R_FindSymbol("in_CairoVersion", "cairo", nullptr);
+    R_pangoVersion = (R_pangoVersion_t) R_FindSymbol("in_PangoVersion", "cairo", nullptr);
+    R_cairoFT = (R_cairoFT_t) R_FindSymbol("in_CairoFT", "cairo", nullptr);
     initialized = 1;
     return initialized;
 }

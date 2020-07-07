@@ -87,8 +87,8 @@ void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc);
 #define SYMMETRIC	0
 
 // Global variables :
-static int	*iv = NULL, liv, lv, tau;
-static double	*v = NULL;
+static int	*iv = nullptr, liv, lv, tau;
+static double	*v = nullptr;
 
 /* these are set in an earlier call to loess_workspace or loess_grow */
 static void loess_free(void)
@@ -353,7 +353,7 @@ loess_grow(int *parameter, int *a, double *xi,
 
 void F77_SUB(loesswarn)(int *i)
 {
-    char *msg = NULL, msg2[50];
+    char *msg = nullptr, msg2[50];
 
 switch(*i){
  case 100:sprintf(msg, _("wrong version number in lowesd. Probably typo in caller.")); break ;

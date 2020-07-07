@@ -180,7 +180,7 @@ mkdtemp (char *Template)
 #endif
 {
   if (gen_tempname (Template))
-    return NULL;
+    return nullptr;
   else
     return Template;
 }

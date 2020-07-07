@@ -49,7 +49,7 @@
    These are populated via the routine R_set_command_line_arguments().
 */
 static int    NumCommandLineArgs = 0;
-static char **CommandLineArgs = NULL; // this does not get freed
+static char **CommandLineArgs = nullptr; // this does not get freed
 
 
 void R_set_command_line_arguments(int argc, char *argv[])
@@ -57,12 +57,12 @@ void R_set_command_line_arguments(int argc, char *argv[])
     // nothing here is ever freed.
     NumCommandLineArgs = argc;
     CommandLineArgs = (char**) calloc((size_t) argc, sizeof(char*));
-    if(CommandLineArgs == NULL)
+    if(CommandLineArgs == nullptr)
 	R_Suicide(_("allocation failure in R_set_command_line_arguments"));
 
     for(int i = 0; i < argc; i++) {
 	CommandLineArgs[i] = strdup(argv[i]);
-	if(CommandLineArgs[i] == NULL)
+	if(CommandLineArgs[i] == nullptr)
 	    R_Suicide(_("allocation failure in R_set_command_line_arguments"));
     }
 }
@@ -152,9 +152,7 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 	    else if (streql(*av, "--verbose")) {
 		Rp->R_Verbose = TRUE;
 	    }
-	    else if (streql(*av, "--no-echo") ||
-		     streql(*av, "--slave") || // "deprecated" from R 4.0.0 (spring 2020)
-		     streql(*av, "-s")) {
+	    else if (streql(*av, "--no-echo") || streql(*av, "-s")) {
 		Rp->R_Quiet = TRUE;
 		Rp->R_NoEcho = TRUE;
 		Rp->SaveAction = SA_NOSAVE;
@@ -170,9 +168,9 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 	    }
 	    else if (streqln(*av, "--encoding", 10)) {
 		if(strlen(*av) < 12) {
-		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
+		    if(ac > 1) {ac--; av++; p = *av;} else p = nullptr;
 		} else p = &(*av)[11];
-		if (p == NULL) {
+		if (p == nullptr) {
 		    snprintf(msg, 1024,
 			     _("WARNING: no value given for '%s'"), *av);
 		    R_ShowMessage(msg);
@@ -207,9 +205,9 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 	    else if( streqln(*av, "--min-nsize", 11) ||
 		     streqln(*av, "--min-vsize", 11) ) {
 		if(strlen(*av) < 13) {
-		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
+		    if(ac > 1) {ac--; av++; p = *av;} else p = nullptr;
 		} else p = &(*av)[12];
-		if (p == NULL) {
+		if (p == nullptr) {
 		    snprintf(msg, 1024,
 			     _("WARNING: no value given for '%s'"), *av);
 		    R_ShowMessage(msg);
@@ -236,9 +234,9 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 	    }
 	    else if(streqln(*av, "--max-ppsize", 12)) {
 		if(strlen(*av) < 14) {
-		    if(ac > 1) {ac--; av++; p = *av;} else p = NULL;
+		    if(ac > 1) {ac--; av++; p = *av;} else p = nullptr;
 		} else p = &(*av)[13];
-		if (p == NULL) {
+		if (p == nullptr) {
 		    snprintf(msg, 1024,
 			     _("WARNING: no value given for '%s'"), *av);
 		    R_ShowMessage(msg);

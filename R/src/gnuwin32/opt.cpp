@@ -31,7 +31,7 @@
 #endif
 
 
-static FILE *ff = NULL;
+static FILE *ff = nullptr;
 static char optfl[MAX_PATH];
 static int optln;
 
@@ -39,7 +39,7 @@ void optclosefile(void)
 {
     if (!ff) return;
     fclose(ff);
-    ff = NULL;
+    ff = nullptr;
 }
 
 
@@ -86,7 +86,7 @@ int optread(char *opt[], const char sep)
     while (l == 0) {
 	if (!fgets(sm, 120, ff)) {
 	    fclose(ff);
-	    ff = NULL;
+	    ff = nullptr;
 	    return 0;
 	}
 	optln += 1;

@@ -89,7 +89,7 @@ SEXP nsl(SEXP hostname)
 
     hp = gethostbyname(name);
 
-    if (hp == NULL) {		/* cannot resolve the address */
+    if (hp == nullptr) {		/* cannot resolve the address */
 	warning(_("'nsl()' was unable to resolve host '%s'"), name);
     } else {
 	if (hp->h_addrtype == AF_INET) {

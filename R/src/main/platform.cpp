@@ -70,7 +70,7 @@
 #endif
 #include <windows.h>
 typedef BOOLEAN (WINAPI *PCSL)(LPWSTR, LPWSTR, DWORD);
-static PCSL pCSL = NULL;
+static PCSL pCSL = nullptr;
 const char *formatError(DWORD res);  /* extra.c */
 /* Windows does not have link(), but it does have CreateHardLink() on NTFS */
 #undef HAVE_LINK
@@ -372,7 +372,7 @@ HIDDEN void R_check_locale(void)
     mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
 #ifdef _WIN32
     {
-	char *ctype = setlocale(LC_CTYPE, NULL), *p;
+	char *ctype = setlocale(LC_CTYPE, nullptr), *p;
 	p = strrchr(ctype, '.');
 	if (p) {
 	    if (isdigit(p[1]))
@@ -438,7 +438,7 @@ HIDDEN SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
 HIDDEN SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, tl, hd, pg;
-    const char **f, **h, *t, *pager = NULL /* -Wall */;
+    const char **f, **h, *t, *pager = nullptr /* -Wall */;
     bool dl;
     int i, n;
 
@@ -511,8 +511,8 @@ static int R_AppendFile(SEXP file1, SEXP file2)
     char buf[APPENDBUFSIZE];
     size_t nchar;
     int status = 0;
-    if ((fp1 = RC_fopen(file1, "ab", TRUE)) == NULL) return 0;
-    if ((fp2 = RC_fopen(file2, "rb", TRUE)) == NULL) {
+    if ((fp1 = RC_fopen(file1, "ab", TRUE)) == nullptr) return 0;
+    if ((fp2 = RC_fopen(file2, "rb", TRUE)) == nullptr) {
 	fclose(fp1);
 	return 0;
     }
@@ -603,7 +603,7 @@ HIDDEN SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < n; i++) {
 	LOGICAL(ans)[i] = 0;
 	if (STRING_ELT(fn, i) == NA_STRING) continue;
-	if ((fp = RC_fopen(STRING_ELT(fn, i), "w", TRUE)) != NULL) {
+	if ((fp = RC_fopen(STRING_ELT(fn, i), "w", TRUE)) != nullptr) {
 	    LOGICAL(ans)[i] = 1;
 	    fclose(fp);
 	} else if (show) {
@@ -771,7 +771,7 @@ HIDDEN SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    	error(_("'%s' path is too long"), "from");
 	    wcscpy(from, p);
 	    to = filenameToWchar(STRING_ELT(f2, i%n2), TRUE);
-	    LOGICAL(ans)[i] = CreateHardLinkW(to, from, NULL) != 0;
+	    LOGICAL(ans)[i] = CreateHardLinkW(to, from, nullptr) != 0;
 	    if(!LOGICAL(ans)[i]) {
 		warning(_("cannot link '%ls' to '%ls', reason '%s'"), from, to, formatError(GetLastError()));
 	    }
@@ -1012,7 +1012,7 @@ HIDDEN SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 		int success = 0;
 		h = CreateFileW(wfn, 0,
 		                FILE_SHARE_DELETE | FILE_SHARE_READ | FILE_SHARE_WRITE,
-		                NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+		                nullptr, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, nullptr);
 		if (h != INVALID_HANDLE_VALUE) {
 		    int res  = GetFileTime(h, &c_ft, &a_ft, &m_ft);
 		    CloseHandle(h);
@@ -1231,7 +1231,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
     struct stat sb;
 #endif
     R_CheckUserInterrupt(); // includes stack check
-    if ((dir = opendir(dnp)) != NULL) {
+    if ((dir = opendir(dnp)) != nullptr) {
 	while ((de = readdir(dir))) {
 	    if (allfiles || !R_HiddenFile(de->d_name)) {
 		Rboolean not_dot = (Rboolean) (strcmp(de->d_name, ".") && strcmp(de->d_name, ".."));
@@ -1252,7 +1252,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 			if (not_dot) {
 			    if (idirs) {
 #define IF_MATCH_ADD_TO_ANS						\
-				if (!reg || tre_regexec(reg, de->d_name, 0, NULL, 0) == 0) { \
+				if (!reg || tre_regexec(reg, de->d_name, 0, nullptr, 0) == 0) { \
 				    if (*count == *countmax - 1) {	\
 					*countmax *= 2;			\
 					REPROTECT(*pans = lengthgets(*pans, *countmax), idx); \
@@ -1338,8 +1338,8 @@ HIDDEN SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *p = translateCharFP2(STRING_ELT(d, i));
 	if (!p) continue;
 	const char *dnp = R_ExpandFileName(p);
-	list_files(dnp, fullnames ? dnp : NULL, &count, &ans, (Rboolean) allfiles,
-		   (Rboolean) recursive, pattern ? &reg : NULL, &countmax, idx,
+	list_files(dnp, fullnames ? dnp : nullptr, &count, &ans, (Rboolean) allfiles,
+		   (Rboolean) recursive, pattern ? &reg : nullptr, &countmax, idx,
 		   (Rboolean) idirs, /* allowdots = */ (Rboolean) !nodots);
     }
     REPROTECT(ans = lengthgets(ans, count), idx);
@@ -1365,7 +1365,7 @@ static void list_dirs(const char *dnp, const char *nm,
 #endif
     R_CheckUserInterrupt(); // includes stack check
 
-    if ((dir = opendir(dnp)) != NULL) {
+    if ((dir = opendir(dnp)) != nullptr) {
 	if (recursive) {
 	    if (*count == *countmax - 1) {
 		*countmax *= 2;
@@ -1586,7 +1586,7 @@ static int delReparsePoint(const wchar_t *name)
     DWORD dwBytes;
     BOOL res = DeviceIoControl(hd, FSCTL_DELETE_REPARSE_POINT, &rgdb,
 			       REPARSE_GUID_DATA_BUFFER_HEADER_SIZE,
-			       NULL, 0, &dwBytes, 0);
+			       nullptr, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(res == 0)
 	warning(_("cannot delete reparse point '%ls', reason '%s'"), name, formatError(GetLastError()));
@@ -1615,7 +1615,7 @@ static int R_unlink(const wchar_t *name, int recursive, int force)
 	   are detected as directories. */
 	if (isReparsePoint(name)) ans += delReparsePoint(name);
 	else if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
-	    if ((dir = _wopendir(name)) != NULL) {
+	    if ((dir = _wopendir(name)) != nullptr) {
 		while ((de = _wreaddir(dir))) {
 		    if (!wcscmp(de->d_name, L".") || !wcscmp(de->d_name, L".."))
 			continue;
@@ -1683,7 +1683,7 @@ static int R_unlink(const char *name, int recursive, int force)
 	int ans = 0;
 
 	if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
-	    if ((dir = opendir(name)) != NULL) {
+	    if ((dir = opendir(name)) != nullptr) {
 		while ((de = readdir(dir))) {
 		    if (streql(de->d_name, ".") || streql(de->d_name, ".."))
 			continue;
@@ -1751,7 +1751,7 @@ HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 		    continue;
 		names = filenameToWchar(STRING_ELT(fn, i), expand ? TRUE : FALSE);
 		if (expand) {
-		    res = dos_wglob(names, GLOB_NOCHECK, NULL, &globbuf);
+		    res = dos_wglob(names, GLOB_NOCHECK, nullptr, &globbuf);
 		    if (res == GLOB_NOSPACE)
 			error(_("internal out-of-memory condition"));
 		    for (j = 0; j < globbuf.gl_pathc; j++)
@@ -1810,7 +1810,7 @@ HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 		    names = R_ExpandFileName(names);
 		if (useglob) {
 #if defined(HAVE_GLOB)
-		    res = glob(names, GLOB_NOCHECK, NULL, &globbuf);
+		    res = glob(names, GLOB_NOCHECK, nullptr, &globbuf);
 # ifdef GLOB_ABORTED
 		    if (res == GLOB_ABORTED)
 			warning(_("read error on '%s'"), names);
@@ -1836,7 +1836,7 @@ HIDDEN SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 HIDDEN SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int cat;
-    char *p = NULL;
+    char *p = nullptr;
 
     checkArity(op, args);
     cat = asInteger(CAR(args));
@@ -1860,7 +1860,7 @@ HIDDEN SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     default: cat = NA_INTEGER;
     }
-    if (cat != NA_INTEGER) p = setlocale(cat, NULL);
+    if (cat != NA_INTEGER) p = setlocale(cat, nullptr);
     return mkString(p ? p : "");
 }
 
@@ -1892,7 +1892,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    setlocale(LC_TIME, l);
 	    dt_invalidate_locale();
 	    /* Need to return value of LC_ALL */
-	    p = setlocale(cat, NULL);
+	    p = setlocale(cat, nullptr);
 	}
 	break;
     }
@@ -1935,7 +1935,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef _WIN32
 /* this seems to exist in MinGW, but it does not work in Windows */
 	warning(_("LC_MESSAGES exists on Windows but is not operational"));
-	p = NULL;
+	p = nullptr;
 #else
 	p = setlocale(cat, CHAR(STRING_ELT(locale, 0)));
 #endif
@@ -1954,7 +1954,7 @@ HIDDEN SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
 #endif
     default:
-	p = NULL; /* -Wall */
+	p = nullptr; /* -Wall */
 	error(_("invalid '%s' argument"), "category");
     }
     PROTECT(ans = allocVector(STRSXP, 1));
@@ -2425,17 +2425,17 @@ static void copyFileTime(const wchar_t *from, const wchar_t * to)
     HANDLE hFrom, hTo;
     FILETIME modft;
 
-    hFrom = CreateFileW(from, GENERIC_READ, 0, NULL, OPEN_EXISTING,
-			FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    hFrom = CreateFileW(from, GENERIC_READ, 0, nullptr, OPEN_EXISTING,
+			FILE_FLAG_BACKUP_SEMANTICS, nullptr);
     if (hFrom == INVALID_HANDLE_VALUE) return;
-    int res  = GetFileTime(hFrom, NULL, NULL, &modft);
+    int res  = GetFileTime(hFrom, nullptr, nullptr, &modft);
     CloseHandle(hFrom);
     if(!res) return;
 
-    hTo = CreateFileW(to, GENERIC_WRITE, 0, NULL, OPEN_EXISTING,
-		      FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    hTo = CreateFileW(to, GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
+		      FILE_FLAG_BACKUP_SEMANTICS, nullptr);
     if (hTo == INVALID_HANDLE_VALUE) return;
-    SetFileTime(hTo, NULL, NULL, &modft);
+    SetFileTime(hTo, nullptr, nullptr, &modft);
     CloseHandle(hTo);
 }
 
@@ -2487,7 +2487,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    }
 	}
 	// NB Windows' mkdir appears to require \ not /.
-	if ((dir = _wopendir(this_)) != NULL) {
+	if ((dir = _wopendir(this_)) != nullptr) {
 	    depth++;
 	    while ((de = _wreaddir(dir))) {
 		if (!wcscmp(de->d_name, L".") || !wcscmp(de->d_name, L".."))
@@ -2509,7 +2509,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	// chmod(dest, ... perms ...)  [TODO?]
 	if(dates) copyFileTime(this_, dest);
     } else { /* a file */
-	FILE *fp1 = NULL, *fp2 = NULL;
+	FILE *fp1 = nullptr, *fp2 = nullptr;
 	wchar_t buf[APPENDBUFSIZE];
 
 	nfail = 0;
@@ -2521,8 +2521,8 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	}
 	wsprintfW(dest, L"%ls%ls", to, name);
 	if (over || !R_WFileExists(dest)) { /* FIXME */
-	    if ((fp1 = _wfopen(this_, L"rb")) == NULL ||
-		(fp2 = _wfopen(dest, L"wb")) == NULL) {
+	    if ((fp1 = _wfopen(this_, L"rb")) == nullptr ||
+		(fp2 = _wfopen(dest, L"wb")) == nullptr) {
 		warning(_("problem with copying %ls to %ls: %s"),
 			this_, dest, strerror(errno));
 		nfail++;
@@ -2541,8 +2541,8 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    nfail++;
 	    goto copy_error;
 	}
-	if(fp1) { fclose(fp1); fp1 = NULL; }
-	if(fp2) { fclose(fp2); fp2 = NULL; }
+	if(fp1) { fclose(fp1); fp1 = nullptr; }
+	if(fp2) { fclose(fp2); fp2 = nullptr; }
 	/* FIXME: perhaps manipulate mode as we do in Sys.chmod? */
 	if(perms) _wchmod(dest, sb.st_mode & 0777);
 	if(dates) copyFileTime(this_, dest);
@@ -2741,7 +2741,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    }
 	}
 	strcat(dest, "/");
-	if ((dir = opendir(this_)) != NULL) {
+	if ((dir = opendir(this_)) != nullptr) {
 	    depth++;
 	    while ((de = readdir(dir))) {
 		if (streql(de->d_name, ".") || streql(de->d_name, ".."))
@@ -2763,7 +2763,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	chmod(dest, (mode_t) (perms ? (sb.st_mode & mask): mask));
 	if(dates) copyFileTime(this_, dest);
     } else { /* a file */
-	FILE *fp1 = NULL, *fp2 = NULL;
+	FILE *fp1 = nullptr, *fp2 = nullptr;
 	char buf[APPENDBUFSIZE];
 
 	nfail = 0;
@@ -2776,8 +2776,8 @@ static int do_copy(const char* from, const char* name, const char* to,
 	snprintf(dest, PATH_MAX+1, "%s%s", to, name);
 	if (over || !R_FileExists(dest)) {
 	    /* REprintf("copying %s to %s\n", this, dest); */
-	    if ((fp1 = R_fopen(this_, "rb")) == NULL ||
-		(fp2 = R_fopen(dest, "wb")) == NULL) {
+	    if ((fp1 = R_fopen(this_, "rb")) == nullptr ||
+		(fp2 = R_fopen(dest, "wb")) == nullptr) {
 		warning(_("problem with copying %s to %s: %s"),
 			this_, dest, strerror(errno));
 		nfail++;
@@ -2796,8 +2796,8 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    nfail++;
 	    goto copy_error;
 	}
-	if(fp1) { fclose(fp1); fp1 = NULL; }
-	if(fp2) { fclose(fp2); fp2 = NULL; }
+	if(fp1) { fclose(fp1); fp1 = nullptr; }
+	if(fp2) { fclose(fp2); fp2 = nullptr; }
 	if(perms) chmod(dest, sb.st_mode & mask);
 	if(dates) copyFileTime(this_, dest);
 copy_error:
@@ -3075,10 +3075,10 @@ static int winSetFileTime(const char *fn, double ftime)
     st.wMilliseconds = (WORD) 1000*(ftime - ftimei);
     if (!SystemTimeToFileTime(&st, &modft)) return 0;
 
-    hFile = CreateFile(fn, GENERIC_WRITE, 0, NULL, OPEN_EXISTING,
-		       FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    hFile = CreateFile(fn, GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
+		       FILE_FLAG_BACKUP_SEMANTICS, nullptr);
     if (hFile == INVALID_HANDLE_VALUE) return 0;
-    int res  = SetFileTime(hFile, NULL, NULL, &modft);
+    int res  = SetFileTime(hFile, nullptr, nullptr, &modft);
     CloseHandle(hFile);
     return res != 0; /* success is non-zero */
 }
@@ -3130,7 +3130,7 @@ HIDDEN SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    res = utime(fn, &settime) == 0;
 	#endif
 	LOGICAL(ans)[i] = (res == 0) ? FALSE : TRUE;
-	fn = NULL;
+	fn = nullptr;
 	vmaxset(vmax); // throws away result of translateCharFP
     }
     UNPROTECT(2); /* times, ans */
@@ -3187,7 +3187,7 @@ HIDDEN SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
     const BOOL bOK =
 	DeviceIoControl(hd, FSCTL_SET_REPARSE_POINT, &rdb,
 			8 /* header */ + rdb.ReparseDataLength,
-			NULL, 0, &dwBytes, 0);
+			nullptr, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(!bOK)
 	warning(_("cannot set reparse point '%ls', reason '%s'"),
@@ -3349,15 +3349,15 @@ HIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   PLT is used on Linux and on Solaris when the main binary
 	   is _not_ position independent. PLT is not used on macOS.
 	*/
-	if (dgemm_addr != NULL) {
+	if (dgemm_addr != nullptr) {
 
-	    /* If dgemm_addr is NULL, dgemm is statically linked and
+	    /* If dgemm_addr is nullptr, dgemm is statically linked and
 	       we are on Linux. On Solaris, dgemm_addr is never NULL.
 	    */
 	    void *dgemm_next_addr = dlsym(RTLD_NEXT, dgemm_name);
-	    if (dgemm_next_addr != NULL)
+	    if (dgemm_next_addr != nullptr)
 
-		/* If dgemm_next_addr is NULL, dgemm is statically linked.
+		/* If dgemm_next_addr is nullptr, dgemm is statically linked.
 		   Otherwise, it is linked dynamically and dgemm_next_addr
 		   is its true address (dgemm points to PLT).
 

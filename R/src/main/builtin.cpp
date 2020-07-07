@@ -136,10 +136,10 @@ HIDDEN SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP code, oldcode, argList;
     int addit = FALSE;
     int after = TRUE;
-    static SEXP do_onexit_formals = NULL;
+    static SEXP do_onexit_formals = nullptr;
 
     checkArity(op, args);
-    if (do_onexit_formals == NULL)
+    if (do_onexit_formals == nullptr)
         do_onexit_formals = allocFormalsList3(install("expr"),
                                               install("add"),
                                               install("after"));
@@ -287,7 +287,7 @@ HIDDEN SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else return R_NilValue;
 }
 
-/* get environment from a subclass if possible; else return NULL */
+/* get environment from a subclass if possible; else return nullptr */
 inline static SEXP simple_as_environment(SEXP arg)
 {
 	return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : arg);
@@ -1016,7 +1016,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
  to match the name with the remaining args, and evaluate the match. If
  the value is missing then take the next non-missing arg as the value.
  Then things like switch(as.character(answer), yes=, YES=1, no=, NO=2,
- 3) will work.  But if there is no 'next', return NULL. One arg beyond
+ 3) will work.  But if there is no 'next', return nullptr. One arg beyond
  the first is allowed to be unnamed; it becomes the default value if
  there is no match.
 
@@ -1025,7 +1025,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
  that remain provided 1 < k < nargs.
 
  Changed in 2.11.0 to be primitive, so the wrapper does not partially
- match to EXPR, and to return NULL invisibly if it is an error
+ match to EXPR, and to return nullptr invisibly if it is an error
  condition.
 
  This is a SPECIALSXP, so arguments need to be evaluated as needed.
@@ -1036,7 +1036,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
 HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int argval, nargs = length(args);
-    SEXP x, y, z, w, ans, dflt = NULL;
+    SEXP x, y, z, w, ans, dflt = nullptr;
 
     if (nargs < 1) errorcall(call, _("'%s' argument is missing"), "EXPR");
     check1arg(args, call, "EXPR");
@@ -1056,7 +1056,7 @@ HIDDEN SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TAG(y) != R_NilValue) {
 		    if (pmatch(STRING_ELT(x, 0), TAG(y), TRUE /* exact */)) {
 			/* Find the next non-missing argument.
-			   (If there is none, return NULL.) */
+			   (If there is none, return nullptr.) */
 			while (CAR(y) == R_MissingArg) {
 			    y = CDR(y);
 			    if (y == R_NilValue) break;

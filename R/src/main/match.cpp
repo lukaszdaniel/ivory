@@ -537,7 +537,7 @@ HIDDEN SEXP Rf_patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 	        /* argument matching in subsequently called functions. */
 	        SETCAR(b, R_MissingArg);
 	    else
-	        patchArgument(b, TAG(f), NULL, cloenv);
+	        patchArgument(b, TAG(f), nullptr, cloenv);
 
 	    SET_ARGUSED(b, 1);
 	    b = CDR(b);

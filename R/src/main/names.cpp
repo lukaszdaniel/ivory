@@ -33,6 +33,7 @@
 #include "arithmetic.h" /* for do_math[1234], do_cmathfuns */
 
 #include <Rinterface.h>
+#include <vector>
 
 /* Table of  .Internal(.) and .Primitive(.)  R functions
  * =====     =========	      ==========
@@ -81,7 +82,7 @@
  *
  */
 
-FUNTAB R_FunTab[] =
+std::vector<FUNTAB> R_FunTab =
 {
 
 /* printname	c-entry		offset	eval	arity	pp-kind	     precedence	rightassoc
@@ -996,7 +997,7 @@ FUNTAB R_FunTab[] =
 {"curlGetHeaders",do_curlGetHeaders,0,	11,	3,	{PP_FUNCALL, PREC_FN,	0}},
 {"curlDownload",do_curlDownload, 0,	11,	6,	{PP_FUNCALL, PREC_FN,	0}},
 
-{NULL,		NULL,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
+{nullptr,		nullptr,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
 };
 
 
@@ -1011,29 +1012,31 @@ FUNTAB R_FunTab[] =
    defined in any environment other than base, and hence the ones
    where this is most likely to help. */
 
-static const char *Spec_name[] = {
-    "if", "while", "repeat", "for", "break", "next", "return", "function",
-    "(", "{",
-    "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":",
-    "==", "!=", "<", ">", "<=", ">=",
-    "&", "|", "&&", "||", "!",
-    "<-", "<<-", "=",
-    "$", "[", "[[",
-    "$<-", "[<-", "[[<-",
-    0
-};
-
+namespace
+{
+    const std::vector<const char *> Spec_name = {
+        "if", "while", "repeat", "for", "break", "next", "return", "function",
+        "(", "{",
+        "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":",
+        "==", "!=", "<", ">", "<=", ">=",
+        "&", "|", "&&", "||", "!",
+        "<-", "<<-", "=",
+        "$", "[", "[[",
+        "$<-", "[<-", "[[<-",
+        0};
+}
 
 /* also used in eval.cpp */
 HIDDEN SEXP R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
-	if (strcmp(primname, R_FunTab[i].name) == 0) { /* all names are ASCII */
-	    if ((R_FunTab[i].eval % 100 )/10)
-		return R_NilValue; /* it is a .Internal */
-	    else
-		return mkPRIMSXP(i, R_FunTab[i].eval % 10);
-	}
+        if (streql(primname, R_FunTab[i].name))
+        { /* all names are ASCII */
+            if ((R_FunTab[i].eval % 100) / 10)
+                return R_NilValue; /* it is a .Internal */
+            else
+                return mkPRIMSXP(i, R_FunTab[i].eval % 10);
+        }
     return R_NilValue;
 }
 

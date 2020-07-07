@@ -70,16 +70,16 @@ HIDDEN FILE *R_OpenInitFile(void)
     char buf[PATH_MAX], *home, *p = getenv("R_PROFILE_USER");
     FILE *fp;
 
-    fp = NULL;
+    fp = nullptr;
     if (LoadInitFile) {
 	if(p) {
-	    if(!*p) return NULL;  /* set to "" */
+	    if(!*p) return nullptr;  /* set to "" */
 	    return R_fopen(R_ExpandFileName(p), "r");
 	}
 	if((fp = R_fopen(".Rprofile", "r")))
 	    return fp;
-	if((home = getenv("HOME")) == NULL)
-	    return NULL;
+	if((home = getenv("HOME")) == nullptr)
+	    return nullptr;
 	snprintf(buf, PATH_MAX, "%s/.Rprofile", home);
 	if((fp = R_fopen(buf, "r")))
 	    return fp;
@@ -304,28 +304,28 @@ static void timeout_init()
     tost.child_pid = 0;
     tost.timedout = 0;
     tost.kill_attempts = 0;
-    sigprocmask(0, NULL, &tost.oldset);
-    sigaction(SIGALRM, NULL, &tost.oldalrm);
-    sigaction(SIGINT, NULL, &tost.oldint);
-    sigaction(SIGQUIT, NULL, &tost.oldquit);
-    sigaction(SIGHUP, NULL, &tost.oldhup);
-    sigaction(SIGTERM, NULL, &tost.oldterm);
-    sigaction(SIGTTIN, NULL, &tost.oldttin);
-    sigaction(SIGTTOU, NULL, &tost.oldttou);
-    sigaction(SIGCHLD, NULL, &tost.oldchld);
-    tost.fp = NULL;
+    sigprocmask(0, nullptr, &tost.oldset);
+    sigaction(SIGALRM, nullptr, &tost.oldalrm);
+    sigaction(SIGINT, nullptr, &tost.oldint);
+    sigaction(SIGQUIT, nullptr, &tost.oldquit);
+    sigaction(SIGHUP, nullptr, &tost.oldhup);
+    sigaction(SIGTERM, nullptr, &tost.oldterm);
+    sigaction(SIGTTIN, nullptr, &tost.oldttin);
+    sigaction(SIGTTOU, nullptr, &tost.oldttou);
+    sigaction(SIGCHLD, nullptr, &tost.oldchld);
+    tost.fp = nullptr;
 
     /* install handler */
     struct sigaction sa;
     sigemptyset(&sa.sa_mask);
     sa.sa_handler = &timeout_handler;
     sa.sa_flags = SA_RESTART;
-    sigaction(SIGALRM, &sa, NULL);
-    sigaction(SIGINT, &sa, NULL);
-    sigaction(SIGQUIT, &sa, NULL);
-    sigaction(SIGHUP, &sa, NULL);
-    sigaction(SIGTERM, &sa, NULL);
-    sigaction(SIGCHLD, &sa, NULL);
+    sigaction(SIGALRM, &sa, nullptr);
+    sigaction(SIGINT, &sa, nullptr);
+    sigaction(SIGQUIT, &sa, nullptr);
+    sigaction(SIGHUP, &sa, nullptr);
+    sigaction(SIGTERM, &sa, nullptr);
+    sigaction(SIGCHLD, &sa, nullptr);
 }
 
 static void timeout_cleanup_set(sigset_t *ss)
@@ -345,19 +345,19 @@ static void timeout_cleanup()
 {
     sigset_t ss;
     timeout_cleanup_set(&ss);
-    sigprocmask(SIG_BLOCK, &ss, NULL);
+    sigprocmask(SIG_BLOCK, &ss, nullptr);
     alarm(0); /* clear alarm */
 
-    sigaction(SIGALRM, &tost.oldalrm, NULL);
-    sigaction(SIGINT, &tost.oldint, NULL);
-    sigaction(SIGQUIT, &tost.oldquit, NULL);
-    sigaction(SIGHUP, &tost.oldhup, NULL);
-    sigaction(SIGTERM, &tost.oldterm, NULL);
-    sigaction(SIGTTIN, &tost.oldttin, NULL);
-    sigaction(SIGTTOU, &tost.oldttou, NULL);
-    sigaction(SIGCHLD, &tost.oldchld, NULL);
+    sigaction(SIGALRM, &tost.oldalrm, nullptr);
+    sigaction(SIGINT, &tost.oldint, nullptr);
+    sigaction(SIGQUIT, &tost.oldquit, nullptr);
+    sigaction(SIGHUP, &tost.oldhup, nullptr);
+    sigaction(SIGTERM, &tost.oldterm, nullptr);
+    sigaction(SIGTTIN, &tost.oldttin, nullptr);
+    sigaction(SIGTTOU, &tost.oldttou, nullptr);
+    sigaction(SIGCHLD, &tost.oldchld, nullptr);
 
-    sigprocmask(SIG_SETMASK, &tost.oldset, NULL);
+    sigprocmask(SIG_SETMASK, &tost.oldset, nullptr);
 }
 
 static void timeout_handler(int sig)
@@ -430,7 +430,7 @@ static void timeout_cend(void *data)
 {
     if (tost.child_pid > 0) {
 	timeout_handler(SIGALRM);
-	timeout_wait(NULL);
+	timeout_wait(nullptr);
     }
     timeout_cleanup();
 }
@@ -443,9 +443,9 @@ static void timeout_fork()
     sigset_t css; 
     sigemptyset(&css);
     sigaddset(&css, SIGCHLD);
-    sigprocmask(SIG_BLOCK, &css, NULL);
+    sigprocmask(SIG_BLOCK, &css, nullptr);
     tost.child_pid = fork();
-    sigprocmask(SIG_UNBLOCK, &css, NULL);
+    sigprocmask(SIG_UNBLOCK, &css, nullptr);
 }
 
 /* R_popen_timeout, R_pclose_timeout - a partial implementation of popen/close
@@ -465,13 +465,13 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
     /* close-on-exec is not supported */
     if (!type || type[1] ||  (type[0] != 'r' && type[0] != 'w')) {
 	errno = EINVAL;
-	return NULL;
+	return nullptr;
     }
     int doread = (type[0] == 'r');
     int pipefd[2];
     int parent_end, child_end;
     if (pipe(pipefd) < 0)
-	return NULL;
+	return nullptr;
     if (doread) {
 	parent_end = pipefd[0];
 	child_end = pipefd[1];
@@ -510,7 +510,7 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
 	    perror(_("Cannot open /dev/null for reading:"));
 	    _exit(127);
 	}
-	execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
+	execl("/bin/sh", "sh", "-c", cmd, (char *)nullptr);
 	_exit(127); /* execl failed */
     } else if (tost.child_pid > 0) {
 	/* parent */
@@ -518,19 +518,19 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
         tost.fp = fdopen(parent_end, type);
 	if (!tost.fp) {
 	    close(parent_end);
-	    return NULL;
+	    return nullptr;
 	}
 
 	sigset_t ss;
 	sigemptyset(&ss);
 	sigaddset(&ss, SIGALRM);
-	sigprocmask(SIG_UNBLOCK, &ss, NULL);
+	sigprocmask(SIG_UNBLOCK, &ss, nullptr);
 	alarm(timeout); /* will get SIGALRM on timeout */
 
 	return tost.fp;
     } else {
 	close(parent_end);
-	return NULL;
+	return nullptr;
     }
 }
 
@@ -589,14 +589,14 @@ static int R_system_timeout(const char *cmd, int timeout)
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
 
-	execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
+	execl("/bin/sh", "sh", "-c", cmd, (char *)nullptr);
 	_exit(127); /* execl failed */
     } else if (tost.child_pid > 0) {
 	/* parent */
 	sigset_t ss;
 	sigemptyset(&ss);
 	sigaddset(&ss, SIGALRM);
-	sigprocmask(SIG_UNBLOCK, &ss, NULL);
+	sigprocmask(SIG_UNBLOCK, &ss, nullptr);
 	alarm(timeout); /* will get SIGALRM on timeout */
 
 	int wstatus;
@@ -682,7 +682,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	FILE *fp;
 	char *x = (char *) "r",
 #ifdef HAVE_GETLINE
-	    *buf = NULL;
+	    *buf = nullptr;
 	size_t buf_len = 0;
 #else
 	    buf[INTERN_BUFSIZE];
@@ -716,7 +716,7 @@ HIDDEN SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    PROTECT(tlist = CONS(tchar, tlist));
 	}
 #ifdef HAVE_GETLINE
-        if (buf != NULL)
+        if (buf != nullptr)
           free(buf);
 #endif
 	if (timeout == 0)

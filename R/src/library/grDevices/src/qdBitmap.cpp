@@ -31,13 +31,14 @@
 #include <R_ext/QuartzDevice.h>
 #include "localization.h"
 
-struct QuartzBitmapDevice {
-    CGContextRef bitmap;	/* Bitmap drawing context */
-    char *uti;			/* Type of bitmap to produce */
-    char *path;			/* Path for file save during close (can be NULL) */
-    int page;			/* current page number increased by NewPage (0 right after init) */
-    unsigned int length;	/* Size of the bitmap */
-    char data[1];		/* Actual bitmap bytes */
+struct QuartzBitmapDevice
+{
+    CGContextRef bitmap; /* Bitmap drawing context */
+    char *uti;           /* Type of bitmap to produce */
+    char *path;          /* Path for file save during close (can be NULL) */
+    int page;            /* current page number increased by NewPage (0 right after init) */
+    unsigned int length; /* Size of the bitmap */
+    char data[1];        /* Actual bitmap bytes */
 };
 
 static QuartzFunctions_t *qf;
@@ -58,8 +59,8 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
         CFStringRef pathString = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) buf, strlen(buf), kCFStringEncodingUTF8, FALSE);
         CFURLRef path;
         if(CFStringFind(pathString, CFSTR("://"), 0).location != kCFNotFound) {
-            CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, NULL, NULL, kCFStringEncodingUTF8);
-            path = CFURLCreateWithString(kCFAllocatorDefault, pathEscaped, NULL);
+            CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, nullptr, nullptr, kCFStringEncodingUTF8);
+            path = CFURLCreateWithString(kCFAllocatorDefault, pathEscaped, nullptr);
             CFRelease(pathEscaped);
         } else {
             path = CFURLCreateFromFileSystemRepresentation(kCFAllocatorDefault, (const UInt8*) buf, strlen(buf), FALSE);
@@ -70,20 +71,20 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
        	CFStringRef type  = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) qbd->uti, strlen(qbd->uti), kCFStringEncodingUTF8, FALSE);
     	CGImageRef image = CGBitmapContextCreateImage(qbd->bitmap);
         if(CFStringCompare(scheme,CFSTR("file"), 0) == 0) { /* file output */
-            CGImageDestinationRef dest = CGImageDestinationCreateWithURL(path, type, 1, NULL);
+            CGImageDestinationRef dest = CGImageDestinationCreateWithURL(path, type, 1, nullptr);
 	    if(dest) {
-		CGImageDestinationAddImage(dest, image, NULL);
+		CGImageDestinationAddImage(dest, image, nullptr);
 		CGImageDestinationFinalize(dest);
 		CFRelease(dest);
 	    } else 
 		error(_("QuartzBitmap_Output - unable to open file '%s'"), buf);
         } else if(CFStringCompare(scheme, CFSTR("clipboard"), 0) == 0) { /* clipboard output */
             CFMutableDataRef      data = CFDataCreateMutable(kCFAllocatorDefault, 0);
-            CGImageDestinationRef dest = CGImageDestinationCreateWithData(data, type, 1, NULL);
-            CGImageDestinationAddImage(dest, image, NULL);
+            CGImageDestinationRef dest = CGImageDestinationCreateWithData(data, type, 1, nullptr);
+            CGImageDestinationAddImage(dest, image, nullptr);
             CGImageDestinationFinalize(dest);
             CFRelease(dest);
-            PasteboardRef pb = NULL;
+            PasteboardRef pb = nullptr;
             if(PasteboardCreate(kPasteboardClipboard, &pb) == noErr) {
                 PasteboardClear(pb);
                 PasteboardSynchronize(pb);
@@ -130,7 +131,7 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
     double width = par->width, height = par->height;
     const char *type = par->type;
     double mydpi[2] = { 72.0, 72.0 }; /* fall-back to 72dpi if none was specified */
-    QuartzDesc_t ret = NULL;
+    QuartzDesc_t ret = nullptr;
     if (!qf) qf = fn;
     if(!type || strlen(type) == 0) type = "public.png";
     if (!dpi) dpi = mydpi;
@@ -147,25 +148,25 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
         /* QuartzDesc_t qd; */
         /* Allocate sufficient space */
         QuartzBitmapDevice *dev = malloc(sizeof(QuartzBitmapDevice)+s);
-	if(dev == NULL) error(_("allocation failure in QuartzBitmap_DeviceCreate"));
+	if(dev == nullptr) error(_("allocation failure in QuartzBitmap_DeviceCreate"));
         dev->length = (unsigned int) s;
-        // dev->uti  = type ? strdup(type) : NULL;
+        // dev->uti  = type ? strdup(type) : nullptr;
 	if(type) { // code above forces this
 	    dev->uti = strdup(type);
-	    if(dev->uti == NULL) {
+	    if(dev->uti == nullptr) {
 		free(dev);
 		error(_("allocation failure in QuartzBitmap_DeviceCreate"));
 	    }
-	} else dev->uti = NULL;
-        // dev->path = par->file ? strdup(par->file) : NULL;
+	} else dev->uti = nullptr;
+        // dev->path = par->file ? strdup(par->file) : nullptr;
 	if (par->file) {
 	    dev->path = strdup(par->file);
-	    if (dev->path == NULL) {
+	    if (dev->path == nullptr) {
 		if (dev->uti) free(dev->uti);
 		free(dev);
 		error(_("allocation failure in QuartzBitmap_DeviceCreate"));
 	    }
-	} else dev->path = NULL;
+	} else dev->path = nullptr;
         dev->page = 0;
         memset(dev->data, 0, s);
         dev->bitmap = CGBitmapContextCreate(dev->data, w, h, 8, rb,
@@ -179,18 +180,18 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
 	    par->bg, par->canvas, par->flags | QDFLAG_RASTERIZED,
 	    dev,
 	    QuartzBitmap_GetCGContext,
-	    NULL,	/* locate */
+	    nullptr,	/* locate */
 	    QuartzBitmap_Close,
 	    QuartzBitmap_NewPage,
-	    NULL,	/* state */
-	    NULL,	/* par */
-	    NULL,       /* sync */
-	    NULL,       /* cap */
+	    nullptr,	/* state */
+	    nullptr,	/* par */
+	    nullptr,       /* sync */
+	    nullptr,       /* cap */
 	};
 
 
 	if (!(ret = qf->Create(dd, &qdef)))
-            QuartzBitmap_Close(NULL, dev);
+            QuartzBitmap_Close(nullptr, dev);
         else {
 	    /* since this device is non-resizable we set the size right away (as opposed to on-display) */
 	    qf->SetSize(ret, width, height);

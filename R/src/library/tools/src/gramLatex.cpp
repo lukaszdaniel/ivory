@@ -215,7 +215,7 @@ static int 	mkComment(int);
 static int      mkVerb(int);
 static int      mkVerbEnv();
 
-static SEXP R_LatexTagSymbol = NULL;
+static SEXP R_LatexTagSymbol = nullptr;
 
 #define YYSTYPE		SEXP
 
@@ -1618,7 +1618,7 @@ yyreduce:
     break;
 
   case 3:
-                                                { xxsavevalue(NULL, &(yyloc)); YYACCEPT; }
+                                                { xxsavevalue(nullptr, &(yyloc)); YYACCEPT; }
     break;
 
   case 4:
@@ -1691,7 +1691,7 @@ yyreduce:
     break;
 
   case 21:
-                                                { yyval = xxblock(NULL, &(yyloc)); }
+                                                { yyval = xxblock(nullptr, &(yyloc)); }
     break;
 
 
@@ -2041,7 +2041,7 @@ static void xxSetInVerbEnv(SEXP envname)
     if (VerbatimLookup(CHAR(STRING_ELT(envname, 0)))) {
     	snprintf(buffer, sizeof(buffer), "\\end{%s}", CHAR(STRING_ELT(envname, 0)));
 	PRESERVE_SV(parseState.xxInVerbEnv = ScalarString(mkChar(buffer)));
-    } else parseState.xxInVerbEnv = NULL;
+    } else parseState.xxInVerbEnv = nullptr;
 }
 
 static void xxsavevalue(SEXP items, YYLTYPE *lloc)
@@ -2238,7 +2238,7 @@ static SEXP ParseLatex(ParseStatus *status, SEXP srcfile)
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
 
-    parseState.xxInVerbEnv = NULL;
+    parseState.xxInVerbEnv = nullptr;
 
     parseState.xxlineno = 1;
     parseState.xxcolno = 1; 
@@ -2604,7 +2604,7 @@ static int mkVerbEnv()
     	for (i = matched-1; i >= 0; i--) 
     	    xxungetc(*(--bp));    	    
 	RELEASE_SV(parseState.xxInVerbEnv);
-    	parseState.xxInVerbEnv = NULL;
+    	parseState.xxInVerbEnv = nullptr;
     }
 
     PRESERVE_SV(yylval = mkString2(stext, bp - stext));
@@ -2629,11 +2629,11 @@ static int yylex(void)
 static void PushState() {
     if (busy) {
     	ParseState *prev = static_cast<ParseState *>(malloc(sizeof(ParseState)));
-	if (prev == NULL) error(_("unable to allocate in PushState"));
+	if (prev == nullptr) error(_("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 
-        parseState.prevState = NULL;  
+        parseState.prevState = nullptr;  
     busy = TRUE;
 }
 

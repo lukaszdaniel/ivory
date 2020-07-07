@@ -319,7 +319,7 @@ static void removeBuffering(pX11Desc xd)
 	    free(old);
 	    break; 
 	}
-    if(xdl->next == NULL) {
+    if(xdl->next == nullptr) {
 	Rg_wait_usec = 0;
 	timingInstalled = 0;
     }
@@ -789,8 +789,8 @@ static void handleEvent(XEvent event)
 #if defined HAVE_WORKING_CAIRO
 	    if(xd->useCairo) {
 		if(xd->buffered) {
-		    cairo_surface_destroy(xd->cs); xd->cs = NULL;
-		    cairo_destroy(xd->cc); xd->cc = NULL;
+		    cairo_surface_destroy(xd->cs); xd->cs = nullptr;
+		    cairo_destroy(xd->cc); xd->cc = nullptr;
 		    cairo_xlib_surface_set_size(xd->xcs, xd->windowWidth,
 						    xd->windowHeight);
 		    xd->cs = 
@@ -884,7 +884,7 @@ static R_XFont *R_XLoadQueryFont(Display *display, char *name)
 	return tmp;
     else {
 	free(tmp);
-	return NULL;
+	return nullptr;
     }
 }
 
@@ -914,7 +914,7 @@ static R_XFont *R_XLoadQueryFontSet(Display *display,
 			     &missing_charset_count, &def_string);
     if(!fontset) {
 	free(tmp);
-	return NULL;
+	return nullptr;
     }
     if (missing_charset_count) {
 #ifdef DEBUG_X11
@@ -937,7 +937,7 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
     cacheentry *f;
     char buf[BUFSIZ];
     char buf1[BUFSIZ];
-    R_XFont *tmp = NULL;
+    R_XFont *tmp = nullptr;
 
 #ifdef DEBUG_X11
     printf(_("trying face %d size %d\n"), face, size);
@@ -1299,14 +1299,14 @@ typedef struct gx_device_X_s {
 
 static XtResource x_resources[] = {
     rpix(XtNbackground, XtCBackground, background, "XtDefaultBackground"),
-    rstr(XtNgeometry, XtCGeometry, geometry, NULL),
+    rstr(XtNgeometry, XtCGeometry, geometry, nullptr),
 };
 
 static const int x_resource_count = XtNumber(x_resources);
 
 static String x_fallback_resources[] = {
     (String) "R_x11*Background: white",
-    NULL
+    nullptr
 };
 #endif
 
@@ -1390,7 +1390,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	if(strlen(pp+1) >= PATH_MAX)
 	    error(_("filename is too long in '%s' call"), "tiff()");
 	strcpy(xd->filename, pp+1);
-	xd->fp = NULL;
+	xd->fp = nullptr;
 	type = TIFF;
 	p = "";
 	xd->res_dpi = res; /* place holder */
@@ -1414,7 +1414,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	dd->displayListOn = (Rboolean) FALSE;
     } else if (!strcmp(dsp, "XImage")) {
 	type = XIMAGE;
-	xd->fp = NULL;
+	xd->fp = nullptr;
 	p = "";
     }
     else type = WINDOW;
@@ -1432,7 +1432,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	strncpy(dspname, p, 101);
 	dspname[100] = '\0';
 	old = XSetIOErrorHandler(R_X11IOErrSimple);
-	if ((display = XOpenDisplay(p)) == NULL) {
+	if ((display = XOpenDisplay(p)) == nullptr) {
 	    XSetIOErrorHandler(old);
 	    warning(_("unable to open connection to X11 display '%s'"), p);
 	    return (Rboolean) FALSE;
@@ -1492,7 +1492,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 
 
     if (type == WINDOW) {
-	int alreadyCreated = (xd->window != (Window)NULL);
+	int alreadyCreated = (xd->window != (Window)nullptr);
 	if(alreadyCreated == 0) {
 	    xd->windowWidth = iw = (int)((ISNA(w)?7:w)/pixelWidth());
 	    xd->windowHeight = ih = (int)((ISNA(h)?7:h)/pixelHeight());
@@ -1525,16 +1525,16 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		app_con = XtCreateApplicationContext();
 		XtAppSetFallbackResources(app_con, x_fallback_resources);
 		xtdpy = XtOpenDisplay(app_con, dspname, "r_x11", "R_x11",
-				      NULL, 0, &zero, NULL);
+				      nullptr, 0, &zero, nullptr);
 		if(xtdpy) {
-		    toplevel = XtAppCreateShell(NULL, "R_x11",
+		    toplevel = XtAppCreateShell(nullptr, "R_x11",
 						applicationShellWidgetClass,
-						xtdpy, NULL, 0);
+						xtdpy, nullptr, 0);
 		    XtGetApplicationResources(toplevel, (XtPointer) &xdev,
 					      x_resources,
 					      x_resource_count,
-					      NULL, 0);
-		    if (xdev.geometry != NULL) {
+					      nullptr, 0);
+		    if (xdev.geometry != nullptr) {
 			char gstr[40];
 			int bitmask;
 
@@ -1831,7 +1831,7 @@ static void X11_MetricInfo(int c, const pGEcontext gc,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     int first = 0, last = 0;
-    XFontStruct *f = NULL;
+    XFontStruct *f = nullptr;
 
     if (c < 0)
 	error(_("invalid use of %d < 0 in '%s'"), c, "X11_MetricInfo");
@@ -1949,7 +1949,7 @@ static void X11_NewPage(const pGEcontext gc, pDevDesc dd)
 	if (xd->npages++) {
 	    /* try to preserve the page we do have */
 	    if (xd->type != XIMAGE) X11_Close_bitmap(xd);
-	    if (xd->type != XIMAGE && xd->fp != NULL) fclose(xd->fp);
+	    if (xd->type != XIMAGE && xd->fp != nullptr) fclose(xd->fp);
 	    if (xd->type == PNG || xd->type == JPEG || xd->type == BMP) {
 		char buf[PATH_MAX];
 		snprintf(buf, PATH_MAX, xd->filename, xd->npages);
@@ -2072,7 +2072,7 @@ static void X11_Close(pDevDesc dd)
 	/* process pending events */
 	/* set block on destroy events */
 	inclose = (Rboolean) TRUE;
-	R_ProcessX11Events((void*) NULL);
+	R_ProcessX11Events((void*) nullptr);
 
 #ifdef HAVE_WORKING_CAIRO
 	if(xd->useCairo) {
@@ -2093,7 +2093,7 @@ static void X11_Close(pDevDesc dd)
 	if (xd->npages && xd->type != XIMAGE) X11_Close_bitmap(xd);
 	XFreeGC(display, xd->wgc);
 	XFreePixmap(display, xd->window);
-	if (xd->type != XIMAGE && xd->fp != NULL) fclose(xd->fp);
+	if (xd->type != XIMAGE && xd->fp != nullptr) fclose(xd->fp);
     }
 
     numX11Devices--;
@@ -2332,7 +2332,7 @@ static void X11_Raster(unsigned int *raster, int w, int h,
                          depth >= 24 ? 32 : 16, /* bitmap_pad */
                          0); /* bytes_per_line: 0 means auto-calculate*/
 
-    if (image == NULL || XInitImage(image) == 0)
+    if (image == nullptr || XInitImage(image) == 0)
         error(_("Unable to create XImage"));
 
     for (i = 0; i < imageHeight ;i++) {
@@ -2535,7 +2535,7 @@ static Rboolean X11_Locator(double *x, double *y, pDevDesc dd)
 	error(_("attempt to use the locator after 'dev.hold()'"));
     if (xd->buffered) Cairo_update(xd);
 #endif
-    R_ProcessX11Events((void*)NULL);	/* discard pending events */
+    R_ProcessX11Events((void*)nullptr);	/* discard pending events */
     if(xd->type==WINDOW) XDefineCursor(display, xd->window, cross_cursor);
     XSync(display, 1);
     /* handle X events as normal until get a button */
@@ -2603,7 +2603,7 @@ static void X11_eventHelper(pDevDesc dd, int code)
 
     if (xd->type > WINDOW) return;
     if (code == 1) {
-    	R_ProcessX11Events((void*)NULL);	/* discard pending events */
+    	R_ProcessX11Events((void*)nullptr);	/* discard pending events */
     	if (isEnvironment(dd->eventEnv)) {
     	    SEXP prompt = findVar(install("prompt"), dd->eventEnv);
     	    if (isString(prompt) && length(prompt) == 1) {
@@ -2668,7 +2668,7 @@ static void X11_eventHelper(pDevDesc dd, int code)
 			  &keysym, &compose);
       	    /* Rprintf("keysym=%x\n", keysym); */
       	    if ((keycode = translate_key(keysym)) > knUNKNOWN)
-      	    	doKeybd(dd, (R_KeyName) keycode, NULL);
+      	    	doKeybd(dd, (R_KeyName) keycode, nullptr);
       	    else if (*keystart)
 	    	doKeybd(dd, knUNKNOWN, keybuffer);
 	    done = 1;
@@ -3043,7 +3043,7 @@ pX11Desc Rf_allocX11DeviceDesc(double ps)
     pX11Desc xd;
     /* allocate new device description */
     if (!(xd = (pX11Desc)calloc(1, sizeof(X11Desc))))
-	return NULL;
+	return nullptr;
 
     /* From here on, if we need to bail out with "error", */
     /* then we must also free(xd). */
@@ -3055,7 +3055,7 @@ pX11Desc Rf_allocX11DeviceDesc(double ps)
     xd->fontsize = -1;
     xd->pointsize = ps;
     xd->handleOwnEvents = (Rboolean) FALSE;
-    xd->window = (Window) NULL;
+    xd->window = (Window) nullptr;
 
     return xd;
 }
@@ -3147,7 +3147,7 @@ static void Rf_addX11Device(const char *display, double width, double height, do
 		int useCairo, int antialias, const char * family, 
                 const char * symbolfamily, Rboolean usePUA, SEXP call)
 {
-    pDevDesc dev = NULL;
+    pDevDesc dev = nullptr;
     pGEDevDesc dd;
 
     R_GE_checkVersionOrDie(R_GE_version);
@@ -3167,7 +3167,7 @@ static void Rf_addX11Device(const char *display, double width, double height, do
 	GEaddDevice2(dd, devname);
 
 	/* Requires dd to be set up first. */
-	R_ProcessX11Events((void*) NULL);
+	R_ProcessX11Events((void*) nullptr);
 
     } END_SUSPEND_INTERRUPTS;
 }
@@ -3357,7 +3357,7 @@ static int in_R_X11_access(void)
        if we get an error, but that is rare.
     */
     old = XSetIOErrorHandler(R_X11IOErrSimple);
-    if ((display = XOpenDisplay(NULL)) == NULL) {
+    if ((display = XOpenDisplay(nullptr)) == nullptr) {
 	XSetIOErrorHandler(old);
 	return (Rboolean) FALSE;
     } else {
@@ -3378,7 +3378,7 @@ static Rboolean in_R_X11readclp(Rclpconn this_, const char *type)
     Rboolean res = (Rboolean) TRUE;
 
     if (!displayOpen) {
-	if ((display = XOpenDisplay(NULL)) == NULL) {
+	if ((display = XOpenDisplay(nullptr)) == nullptr) {
 	    warning(_("unable to contact X11 display"));
 	    return (Rboolean) FALSE;
 	}

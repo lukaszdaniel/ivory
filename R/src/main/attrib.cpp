@@ -30,7 +30,6 @@
 static SEXP installAttrib(SEXP, SEXP, SEXP);
 static SEXP removeAttrib(SEXP, SEXP);
 
-SEXP comment(SEXP);
 static SEXP commentgets(SEXP, SEXP);
 
 static SEXP row_names_gets(SEXP vec, SEXP val)
@@ -86,10 +85,12 @@ static SEXP row_names_gets(SEXP vec, SEXP val)
 /* used in removeAttrib, commentgets and classgets */
 static SEXP stripAttrib(SEXP tag, SEXP lst)
 {
-    if(lst == R_NilValue) return lst;
-    if(tag == TAG(lst)) return stripAttrib(tag, CDR(lst));
-    SETCDR(lst, stripAttrib(tag, CDR(lst)));
-    return lst;
+	if (lst == R_NilValue)
+		return lst;
+	if (tag == TAG(lst))
+		return stripAttrib(tag, CDR(lst));
+	SETCDR(lst, stripAttrib(tag, CDR(lst)));
+	return lst;
 }
 
 static bool isOneDimensionalArray(SEXP vec)
@@ -540,7 +541,7 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 		if(!isNull(cld)) {
 		    PROTECT(cld);
 		    /* More efficient? can we protect? -- rather *assign* in method-ns?
-		       static SEXP oldCl = NULL;
+		       static SEXP oldCl = nullptr;
 		       if(!oldCl) oldCl = R_getClassDef("oldClass");
 		       if(!oldCl) oldCl = mkString("oldClass");
 		       PROTECT(oldCl);
@@ -1426,9 +1427,9 @@ HIDDEN SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *str;
     int nargs = length(args), exact = 0;
     enum { NONE, PARTIAL, PARTIAL2, FULL } match = NONE;
-    static SEXP do_attr_formals = NULL;
+    static SEXP do_attr_formals = nullptr;
 
-    if (do_attr_formals == NULL)
+    if (do_attr_formals == nullptr)
 	do_attr_formals = allocFormalsList3(install("x"), install("which"),
 					    R_ExactSymbol);
 
@@ -1600,7 +1601,7 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     else { // attr(obj, "name") <- value :
 	SEXP argList;
-	static SEXP do_attrgets_formals = NULL;
+	static SEXP do_attrgets_formals = nullptr;
 
 	obj = CAR(args);
 	if (MAYBE_SHARED(obj) ||
@@ -1610,7 +1611,7 @@ HIDDEN SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	    PROTECT(obj);
 
 	/* argument matching */
-	if (do_attrgets_formals == NULL)
+	if (do_attrgets_formals == nullptr)
 	    do_attrgets_formals = allocFormalsList3(install("x"), install("which"),
 						    install("value"));
 	argList = matchArgs_NR(do_attrgets_formals, args, call);
@@ -1645,16 +1646,16 @@ void Rf_GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
     if (isNull(dimnames)) {
 	*rl = R_NilValue;
 	*cl = R_NilValue;
-	*rn = NULL;
-	*cn = NULL;
+	*rn = nullptr;
+	*cn = nullptr;
     }
     else {
 	*rl = VECTOR_ELT(dimnames, 0);
 	*cl = VECTOR_ELT(dimnames, 1);
 	nn = getAttrib(dimnames, R_NamesSymbol);
 	if (isNull(nn)) {
-	    *rn = NULL;
-	    *cn = NULL;
+	    *rn = nullptr;
+	    *cn = nullptr;
 	}
 	else {
 	    *rn = translateChar(STRING_ELT(nn, 0));

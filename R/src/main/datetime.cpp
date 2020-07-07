@@ -546,7 +546,7 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 
 static int set_tz(const char *tz, char *oldtz)
 {
-    char *p = NULL;
+    char *p = nullptr;
     int settz = 0;
 
     strcpy(oldtz, "");
@@ -606,7 +606,7 @@ static void glibc_fix(stm *tm, int *invalid)
 
        Specifying mon but not mday nor yday is invalid.
     */
-    time_t t = time(NULL);
+    time_t t = time(nullptr);
     stm *tm0;
     int tmp;
 #ifndef HAVE_POSIX_LEAPSECONDS
@@ -648,8 +648,7 @@ static constexpr char ltnames [][7] =
   "zone",  "gmtoff"};
 
 
-static void
-makelt(stm *tm, SEXP ans, R_xlen_t i, int valid, double frac_secs)
+static void makelt(stm *tm, SEXP ans, R_xlen_t i, int valid, double frac_secs)
 {
     if(valid) {
 	REAL(VECTOR_ELT(ans, 0))[i] = tm->tm_sec + frac_secs;
@@ -680,7 +679,7 @@ HIDDEN SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP stz, x, ans, ansnames, klass, tzone;
     int isgmt = 0, valid, settz = 0;
     char oldtz[1001] = "";
-    const char *tz = NULL;
+    const char *tz = nullptr;
 
     checkArity(op, args);
     PROTECT(x = coerceVector(CAR(args), REALSXP));
@@ -743,7 +742,7 @@ HIDDEN SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* in theory localtime/gmtime always return a valid
 	       struct tm pointer, but Windows uses NULL for error
 	       conditions (like negative times). */
-	    valid = (ptm != NULL);
+	    valid = (ptm != nullptr);
 	} else valid = 0;
 	makelt(ptm, ans, i, valid, d - floor(d));
 	if(!isgmt) {
@@ -778,7 +777,7 @@ HIDDEN SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t n = 0, nlen[9];
     int isgmt = 0, settz = 0;
     char oldtz[1001] = "";
-    const char *tz = NULL;
+    const char *tz = nullptr;
     stm tm;
     double tmp;
 
@@ -1047,7 +1046,7 @@ HIDDEN SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x, sformat, ans, ansnames, klass, stz, tzone = R_NilValue;
     int invalid, isgmt = 0, settz = 0, offset;
     stm tm, tm2, *ptm = &tm;
-    const char *tz = NULL;
+    const char *tz = nullptr;
     char oldtz[1001] = "";
     double psecs = 0.0;
     R_xlen_t n, m, N;

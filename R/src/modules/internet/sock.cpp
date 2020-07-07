@@ -172,7 +172,7 @@ extern struct hostent *R_gethostbyname(const char *name);
 
 static int Sock_error(Sock_error_t perr, int e, int he)
 {
-    if (perr != NULL) {
+    if (perr != nullptr) {
 	perr->error = e;
 	perr->h_error = he;
     }
@@ -349,13 +349,13 @@ int Sock_listen(int fd, char *cname, int buflen, Sock_error_t perr)
     if (R_invalid_socket(retval))
 	return Sock_error(perr, R_socket_errno(), 0);
 
-    if (cname != NULL && buflen > 0) {
+    if (cname != nullptr && buflen > 0) {
 	size_t nlen;
 	const char *name;
 	struct in_addr *iaddr = &(net_client.sin_addr);
 	hostptr = gethostbyaddr((char *)iaddr, sizeof(struct in_addr),
 				AF_INET);
-	name = (hostptr == NULL) ? "unknown" :  hostptr->h_name;
+	name = (hostptr == nullptr) ? "unknown" :  hostptr->h_name;
 	nlen = strlen(name);
 	if (size_t(buflen) < nlen + 1)
 	    nlen = buflen - 1;

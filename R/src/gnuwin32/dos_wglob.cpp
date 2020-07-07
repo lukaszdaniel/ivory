@@ -226,13 +226,13 @@ dos_wglob(const wchar_t *pattern, int flags,
 #if 1
     if (!(flags & GLOB_APPEND)) {
 	pglob->gl_pathc = 0;
-	pglob->gl_pathv = NULL;
+	pglob->gl_pathv = nullptr;
 	if (!(flags & GLOB_DOOFFS))
 	    pglob->gl_offs = 0;
     }
 #else
     pglob->gl_pathc = 0;
-    pglob->gl_pathv = NULL;
+    pglob->gl_pathv = nullptr;
     pglob->gl_offs = 0;
 #endif
     pglob->gl_flags = flags & ~GLOB_MAGCHAR;
@@ -325,7 +325,7 @@ static int globexp1(const wchar_t *pattern, wglob_t *pglob)
     if (pattern[0] == BG_LBRACE && pattern[1] == BG_RBRACE && pattern[2] == BG_EOS)
 	return glob0(pattern, pglob);
 
-    while ((ptr = (const wchar_t *) g_strchr(ptr, BG_LBRACE)) != NULL)
+    while ((ptr = (const wchar_t *) g_strchr(ptr, BG_LBRACE)) != nullptr)
 	if (!globexp2(ptr, pattern, pglob, &rv))
 	    return rv;
 
@@ -466,7 +466,7 @@ globtilde(const wchar_t *pattern, wchar_t *patbuf, size_t patbuf_len, wglob_t *p
 	 * handle a plain ~ or ~/ by expanding $HOME
 	 * first and then trying the password file
 	 */
-	if ((h = _wgetenv(L"R_USER")) == NULL) {
+	if ((h = _wgetenv(L"R_USER")) == nullptr) {
 	    return pattern;
 	}
     } else {
@@ -517,7 +517,7 @@ static int glob0(const wchar_t *pattern, wglob_t *pglob)
 	    if (c == BG_NOT)
 		++qpatnext;
 	    if (*qpatnext == BG_EOS ||
-		g_strchr((wchar_t *) qpatnext+1, BG_RBRACKET) == NULL) {
+		g_strchr((wchar_t *) qpatnext+1, BG_RBRACKET) == nullptr) {
 		*bufnext++ = BG_LBRACKET;
 		if (c == BG_NOT)
 		    --qpatnext;
@@ -712,7 +712,7 @@ static int glob3(wchar_t *pathbuf, wchar_t *pathbuf_last, wchar_t *pathend, wcha
     *pathend = BG_EOS;
     errno = 0;
 
-    if ((dirp = g_opendir(pathbuf, pglob)) == NULL) {
+    if ((dirp = g_opendir(pathbuf, pglob)) == nullptr) {
 	/* TODO: don't call for ENOENT or ENOTDIR? */
 	if (pglob->gl_errfunc) {
 	    if (g_Ctoc(pathbuf, buf, sizeof(buf)))
@@ -795,19 +795,19 @@ static int globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
 	pathv = Realloc(pglob->gl_pathv, newsize, wchar_t *);
     else
 	pathv = Calloc(newsize, wchar_t *);
-    if (pathv == NULL) {
+    if (pathv == nullptr) {
 	if (pglob->gl_pathv) {
 	    Free(pglob->gl_pathv);
-	    pglob->gl_pathv = NULL;
+	    pglob->gl_pathv = nullptr;
 	}
 	return(GLOB_NOSPACE);
     }
 
-    if (pglob->gl_pathv == NULL && pglob->gl_offs > 0) {
+    if (pglob->gl_pathv == nullptr && pglob->gl_offs > 0) {
 	/* first time around -- clear initial gl_offs items */
 	pathv += pglob->gl_offs;
 	for (i = pglob->gl_offs; --i >= 0; )
-	    *--pathv = NULL;
+	    *--pathv = nullptr;
     }
     pglob->gl_pathv = pathv;
 
@@ -816,14 +816,14 @@ static int globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
     len = (STRLEN)(p - path);
     *limitp += len;
     copy = Calloc(p-path, wchar_t);
-    if (copy != NULL) {
+    if (copy != nullptr) {
 	if (g_Ctoc(path, copy, len)) {
 	    Free(copy);
 	    return(GLOB_NOSPACE);
 	}
 	pathv[pglob->gl_offs + pglob->gl_pathc++] = copy;
     }
-    pathv[pglob->gl_offs + pglob->gl_pathc] = NULL;
+    pathv[pglob->gl_offs + pglob->gl_pathc] = nullptr;
 
     if ((pglob->gl_flags & GLOB_LIMIT) &&
 	newsize + *limitp >= ARG_MAX) {
@@ -831,7 +831,7 @@ static int globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
 	return(GLOB_NOSPACE);
     }
 
-    return(copy == NULL ? GLOB_NOSPACE : 0);
+    return(copy == nullptr ? GLOB_NOSPACE : 0);
 }
 
 
@@ -897,13 +897,13 @@ void dos_wglobfree(wglob_t *pglob)
     int i;
     wchar_t **pp;
 
-    if (pglob->gl_pathv != NULL) {
+    if (pglob->gl_pathv != nullptr) {
 	pp = pglob->gl_pathv + pglob->gl_offs;
 	for (i = pglob->gl_pathc; i--; ++pp)
 	    if (*pp)
 		Free(*pp);
 	Free(pglob->gl_pathv);
-	pglob->gl_pathv = NULL;
+	pglob->gl_pathv = nullptr;
     }
 }
 

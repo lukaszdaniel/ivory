@@ -862,11 +862,11 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     }
 
     int *pindx = INTEGER(indx);
-    SEXP sindx = NULL;
+    SEXP sindx = nullptr;
     for (i = 0; i < ns; i++) {
 	sub = pindx[i];
 	if (sub == 0) {
-	    if (sindx == NULL) {
+	    if (sindx == nullptr) {
 		sindx = PROTECT(match(s, s, 0));
 		indexnames = PROTECT(allocVector(VECSXP, ns));
 		nprotect += 2;

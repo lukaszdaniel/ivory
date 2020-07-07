@@ -150,9 +150,9 @@ static void R_de_Init(void)
     int res = R_moduleCdynload("R_de", 1, 1);
     if(!res) error(_("X11 dataentry cannot be loaded"));
     de_ptr->de = (R_X11DataEntryRoutine) 
-	R_FindSymbol("in_RX11_dataentry", "R_de", NULL);
+	R_FindSymbol("in_RX11_dataentry", "R_de", nullptr);
     de_ptr->dv = (R_X11DataViewer) 
-	R_FindSymbol("in_R_X11_dataviewer", "R_de", NULL);
+	R_FindSymbol("in_R_X11_dataviewer", "R_de", nullptr);
     de_init = 1;
     return;
 }

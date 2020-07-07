@@ -144,7 +144,7 @@ ParTable  [] = {
     { "ylab",		-3},
     { "xlim",		-3},
     { "ylim",		-3},
-    { NULL,		-1}
+    { nullptr,		-1}
 };
 
 

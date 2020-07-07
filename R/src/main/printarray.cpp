@@ -180,9 +180,9 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 #define _PRINT_ROW_LAB                     \
                                            \
-	if (cn != NULL)                        \
+	if (cn != nullptr)                        \
 		Rprintf("%*s%s\n", rlabw, "", cn); \
-	if (rn != NULL)                        \
+	if (rn != nullptr)                        \
 		Rprintf("%*s", -rlabw, rn);        \
 	else                                   \
 		Rprintf("%*s", rlabw, "")
@@ -414,7 +414,7 @@ void Rf_printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 /* == printArray(.) */
     const void *vmax = vmaxget();
     int ndim = LENGTH(dim), nprotect = 0;
-    const char *rn = NULL, *cn = NULL;
+    const char *rn = nullptr, *cn = nullptr;
 
     if (ndim == 1)
 	printVector(x, 1, quote);

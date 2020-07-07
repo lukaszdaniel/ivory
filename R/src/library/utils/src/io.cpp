@@ -69,7 +69,7 @@ struct LocalData
 	char quoteset[10];		  /* = "" */
 	int comchar;			  /* = NO_COMCHAR */
 	int ttyflag;			  /* = 0 */
-	Rconnection con;		  /* = NULL */
+	Rconnection con;		  /* = nullptr */
 	Rboolean wasopen;		  /* = FALSE */
 	Rboolean escapes;		  /* = FALSE */
 	int save;				  /* = 0; */
@@ -302,7 +302,7 @@ SEXP countfields(SEXP args)
     int blocksize, nlines, blskip;
     const char *p;
     Rboolean dbcslocale = Rboolean(MB_CUR_MAX == 2);
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {nullptr, 0, 0, '.', "", NO_COMCHAR, 0, nullptr, FALSE,
 		      FALSE, 0, FALSE,	 FALSE};
     data.NAstrings = R_NilValue;
 
@@ -541,8 +541,8 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     int i, j, len, asIs, i_exact;
     Rboolean done = FALSE, exact;
     char *endp;
-    const char *tmp = NULL;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
+    const char *tmp = nullptr;
+    LocalData data = {nullptr, 0, 0, '.', "", NO_COMCHAR, 0, nullptr, FALSE,
 		      FALSE, 0, FALSE, FALSE};
     Typecvt_Info typeInfo;      /* keep track of possible types of cvec */
     typeInfo.islogical = TRUE;  /* we can't rule anything out initially */
@@ -752,7 +752,7 @@ SEXP menu(SEXP choices)
     int c, j;
     double first;
     char buffer[MAXELTSIZE], *bufp = buffer;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {nullptr, 0, 0, '.', "", NO_COMCHAR, 0, nullptr, FALSE,
 		      FALSE, 0, FALSE, FALSE};
     data.NAstrings = R_NilValue;
 
@@ -773,7 +773,7 @@ SEXP menu(SEXP choices)
     while (Rspace((int)*bufp)) bufp++;
     first = LENGTH(choices) + 1;
     if (isdigit((int)*bufp)) {
-	first = Strtod(buffer, NULL, TRUE, &data, /*exact*/FALSE);
+	first = Strtod(buffer, nullptr, TRUE, &data, /*exact*/FALSE);
     } else {
 	for (j = 0; j < LENGTH(choices); j++) {
 	    if (streql(translateChar(STRING_ELT(choices, j)), buffer)) {
@@ -796,7 +796,7 @@ SEXP readtablehead(SEXP args)
 	blskip, skipNul;
     const char *p; char *buf;
     Rboolean empty, skip, firstnonwhite;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {nullptr, 0, 0, '.', "", NO_COMCHAR, 0, nullptr, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE};
     data.NAstrings = R_NilValue;
 
@@ -1047,9 +1047,9 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x, sep, rnames, eol, na, dec, quote, xj;
     Rboolean wasopen, quote_rn = FALSE, *quote_col;
     Rconnection con;
-    const char *csep, *ceol, *cna, *sdec, *tmp = NULL /* -Wall */;
+    const char *csep, *ceol, *cna, *sdec, *tmp = nullptr /* -Wall */;
     SEXP *levels;
-    R_StringBuffer strBuf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = {nullptr, 0, MAXELTSIZE};
     wt_info wi;
     RCNTXT cntxt;
 

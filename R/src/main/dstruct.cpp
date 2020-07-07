@@ -39,10 +39,10 @@ HIDDEN SEXP mkPRIMSXP(int offset, int eval)
 {
     SEXP result;
     SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;
-    static SEXP PrimCache = NULL;
+    static SEXP PrimCache = nullptr;
     static int FunTabSize = 0;
 
-    if (PrimCache == NULL) {
+    if (PrimCache == nullptr) {
 	/* compute the number of entires in R_FunTab */
 	while (R_FunTab[FunTabSize].name)
 	    FunTabSize++;
@@ -128,10 +128,7 @@ static bool isDDName(SEXP name)
     {
         buf += 2;
         strtol(buf, &endp, 10); // discard value
-        if (*endp != '\0')
-            return false;
-        else
-            return true;
+        return (*endp == '\0');
     }
     return false;
 }

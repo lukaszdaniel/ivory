@@ -244,7 +244,7 @@ constexpr long R_VSIZE = 67108864L;
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-
+#include <vector>
 
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
@@ -763,7 +763,7 @@ constexpr int R_EOF = -1;
 
 /* Defined and initialized in names.cpp (not main.cpp) :*/
 #ifndef __R_Names__
-extern FUNTAB R_FunTab[]; /* Built in functions */
+extern std::vector<FUNTAB> R_FunTab; /* Built in functions */
 #endif
 extern "C" {
 #include <R_ext/libextern.h>
@@ -793,8 +793,8 @@ extern0 bool	R_GCEnabled INI_as(true);
 extern0 bool	R_in_gc INI_as(false);
 extern0 bool	R_BCIntActive INI_as(false); /* bcEval called more recently than
                                             eval */
-extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
-extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */
+extern0 void*	R_BCpc INI_as(nullptr);/* current byte code instruction */
+extern0 SEXP	R_BCbody INI_as(nullptr); /* current byte code object */
 extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
 extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
 extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */
@@ -837,7 +837,7 @@ extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address *
 extern int	R_CStackDir	INI_as(1);	/* C stack direction */
 
 #ifdef R_USE_SIGNALS
-extern0 struct RPRSTACK *R_PendingPromises INI_as(NULL); /* Pending promise stack */
+extern0 struct RPRSTACK *R_PendingPromises INI_as(nullptr); /* Pending promise stack */
 #endif
 
 /* File Input/Output */
@@ -848,11 +848,11 @@ extern0 Rboolean R_Verbose	INI_as(FALSE);	/* Be verbose */
 /* extern int	R_Console; */	    /* Console active flag */
 /* IoBuffer R_ConsoleIob; : --> ./IOStuff.h */
 /* R_Consolefile is used in the internet module */
-extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */
-extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */
+extern FILE*	R_Consolefile	INI_as(nullptr);	/* Console output file */
+extern FILE*	R_Outputfile	INI_as(nullptr);	/* Output file */
 extern0 int	R_ErrorCon	INI_as(2);	/* Error connection */
-LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */
-extern0 char   *Sys_TempDir	INI_as(NULL);	/* Name of per-session dir
+LibExtern char *R_TempDir	INI_as(nullptr);	/* Name of per-session dir */
+extern0 char   *Sys_TempDir	INI_as(nullptr);	/* Name of per-session dir
 						   if set by R itself */
 extern0 char	R_StdinEnc[31]  INI_as("");	/* Encoding assumed for stdin */
 
@@ -975,9 +975,9 @@ extern bool known_to_be_latin1 INI_as(false);
 extern0 bool known_to_be_utf8 INI_as(false);
 
 /* pre-allocated boolean values */
-LibExtern SEXP R_TrueValue INI_as(NULL);
-LibExtern SEXP R_FalseValue INI_as(NULL);
-LibExtern SEXP R_LogicalNAValue INI_as(NULL);
+LibExtern SEXP R_TrueValue INI_as(nullptr);
+LibExtern SEXP R_FalseValue INI_as(nullptr);
+LibExtern SEXP R_LogicalNAValue INI_as(nullptr);
 
 /* for PCRE as from R 3.4.0 */
 extern0 bool R_PCRE_use_JIT INI_as(true);
@@ -1332,7 +1332,7 @@ SEXP Rf_matchPar(const char *, SEXP*);
 void Rf_memtrace_report(void *, void *);
 SEXP Rf_mkCLOSXP(SEXP, SEXP, SEXP);
 SEXP Rf_mkFalse(void);
-SEXP mkPRIMSXP (int, int);
+SEXP mkPRIMSXP(int, int);
 SEXP Rf_mkPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE_NR(SEXP, SEXP);

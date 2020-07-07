@@ -251,11 +251,11 @@ static int	mkText(int);
 static int	mkVerb(int);
 static int 	mkComment(int);
 
-static SEXP R_RdTagSymbol = NULL;
-static SEXP R_RdOptionSymbol = NULL;
-static SEXP R_DefinitionSymbol = NULL;
-static SEXP R_DynamicFlagSymbol = NULL;
-static SEXP R_MacroSymbol = NULL;
+static SEXP R_RdTagSymbol = nullptr;
+static SEXP R_RdOptionSymbol = nullptr;
+static SEXP R_DefinitionSymbol = nullptr;
+static SEXP R_DynamicFlagSymbol = nullptr;
+static SEXP R_MacroSymbol = nullptr;
 
 #define YYSTYPE		SEXP
 
@@ -2355,7 +2355,7 @@ yyreduce:
     break;
 
   case 52:
-                                                { yyval = xxusermacro(yyvsp[0], xxnewlist(NULL), &(yyloc)); }
+                                                { yyval = xxusermacro(yyvsp[0], xxnewlist(nullptr), &(yyloc)); }
     break;
 
   case 53:
@@ -2430,7 +2430,7 @@ yyreduce:
     break;
 
   case 69:
-                                                { xxpopMode(yyvsp[-1]); yyval = xxnewlist(NULL); }
+                                                { xxpopMode(yyvsp[-1]); yyval = xxnewlist(nullptr); }
     break;
 
   case 70:
@@ -2446,7 +2446,7 @@ yyreduce:
     break;
 
   case 73:
-                                                { xxpopMode(yyvsp[-1]); yyval = xxnewlist(NULL); }
+                                                { xxpopMode(yyvsp[-1]); yyval = xxnewlist(nullptr); }
     break;
 
   case 74:
@@ -2494,7 +2494,7 @@ yyreduce:
     break;
 
   case 85:
-                                                { yyval = xxnewlist(NULL); }
+                                                { yyval = xxnewlist(nullptr); }
     break;
 
   case 86:
@@ -2502,7 +2502,7 @@ yyreduce:
     break;
 
   case 87:
-                                                { yyval = xxnewlist(NULL); }
+                                                { yyval = xxnewlist(nullptr); }
     break;
 
   case 88:
@@ -4284,11 +4284,11 @@ static void UseState(ParseState *state) {
 static void PushState() {
     if (busy) {
     	ParseState *prev = static_cast<ParseState*>(malloc(sizeof(ParseState)));
-	if (prev == NULL) error(_("unable to allocate in PushState"));
+	if (prev == nullptr) error(_("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 
-        parseState.prevState = NULL;  
+        parseState.prevState = nullptr;  
     busy = TRUE;
 }
 

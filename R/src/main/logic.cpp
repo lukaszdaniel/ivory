@@ -110,7 +110,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	PROTECT(ynames = getAttrib(y, R_NamesSymbol));
     }
 
-    SEXP klass = NULL, tsp = NULL; // -Wall
+    SEXP klass = nullptr, tsp = nullptr; // -Wall
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */

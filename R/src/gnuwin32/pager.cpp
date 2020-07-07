@@ -48,8 +48,8 @@ extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 #define PAGERMAXTITLE 128
 
 static int pagerActualKept = 0, pagerActualShown;
-static pager pagerInstance = NULL;
-static menubar pagerBar = NULL;
+static pager pagerInstance = nullptr;
+static menubar pagerBar = nullptr;
 static xbuf pagerXbuf[PAGERMAXKEPT];
 static char pagerTitles[PAGERMAXKEPT][PAGERMAXTITLE+8];
 static menuitem pagerMenus[PAGERMAXKEPT];
@@ -80,26 +80,26 @@ static xbuf file2xbuf(const char *name, int enc, int del)
 	wchar_t wfn[MAX_PATH+1];
 	Rf_utf8towcs(wfn, name, MAX_PATH+1);
 	f = CreateFileW(wfn, GENERIC_READ, FILE_SHARE_READ,
-			NULL, OPEN_EXISTING, 0, NULL);
+			nullptr, OPEN_EXISTING, 0, nullptr);
     } else
 	f = CreateFile(name, GENERIC_READ, FILE_SHARE_READ,
-		       NULL, OPEN_EXISTING, 0, NULL);
+		       nullptr, OPEN_EXISTING, 0, nullptr);
     if (f == INVALID_HANDLE_VALUE) {
 	R_ShowMessage(G_("Error opening file"));
-	return NULL;
+	return nullptr;
     }
-    vv = GetFileSize(f, NULL);
+    vv = GetFileSize(f, nullptr);
     p = (char *) malloc((size_t) vv + 1);
     if (!p) {
 	CloseHandle(f);
 	R_ShowMessage(G_("Insufficient memory to display file in internal pager"));
-	return NULL;
+	return nullptr;
     }
-    ReadFile(f, p, vv, &rr, NULL);
+    ReadFile(f, p, vv, &rr, nullptr);
     CloseHandle(f);
     if (del) DeleteFile(name);
     p[rr] = '\0';
-    cnt = mbstowcs(NULL, p, 0);
+    cnt = mbstowcs(nullptr, p, 0);
     wp = (wchar_t *) malloc((cnt+1) * sizeof(wchar_t));
     mbstowcs(wp, p, cnt+1);
     for (q = wp, ms = 1, dim = cnt; *q; q++) {
@@ -145,7 +145,7 @@ void pagerbclose(control m)
     if (!pagerMultiple) {
 	hide(pagerInstance);
 	del(pagerInstance);
-	pagerInstance = pagerBar = NULL;
+	pagerInstance = pagerBar = nullptr;
     }
     else {
 	hide(m);
@@ -345,7 +345,7 @@ static void pagermenuact(control m)
 }
 
 
-#define MCHECK(a) if (!(a)) {freeConsoleData(p);del(c);return NULL;}
+#define MCHECK(a) if (!(a)) {freeConsoleData(p);del(c);return nullptr;}
 RECT *RgetMDIsize(void); /* in rui.cpp */
 
 static pager pagercreate(void)
@@ -359,7 +359,7 @@ static pager pagercreate(void)
 		       pagerrow, pagercol, 0, 0,
 		       guiColors,
 		       PAGER, 0, 0);
-    if (!p) return NULL;
+    if (!p) return nullptr;
 
 /*    if (ismdi()) {
       x = y = w = h = 0;
@@ -367,8 +367,8 @@ static pager pagercreate(void)
       else {
       w = WIDTH ;
       h = HEIGHT;
-      x = (devicewidth(NULL) - w) / 2;
-      y = (deviceheight(NULL) - h) / 2 ;
+      x = (devicewidth(nullptr) - w) / 2;
+      y = (deviceheight(nullptr) - h) / 2 ;
       } */
     w = WIDTH ;
     h = HEIGHT;
@@ -380,8 +380,8 @@ static pager pagercreate(void)
 	h0 = pR->bottom;
     } else {
 #endif
-	w0 = devicewidth(NULL);
-	h0 = deviceheight(NULL);
+	w0 = devicewidth(nullptr);
+	h0 = deviceheight(nullptr);
 #ifdef USE_MDI
     }
 #endif
@@ -404,7 +404,7 @@ static pager pagercreate(void)
 			  VScrollbar | HScrollbar | TrackMouse);
     if (!c) {
 	freeConsoleData(p);
-	return NULL;
+	return nullptr;
     }
     setdata(c, p);
     if(h == 0) HEIGHT = getheight(c);
@@ -470,7 +470,7 @@ static pager pagercreate(void)
     setdata(m, c);
     MCHECK(m = newmenuitem(G_("Save to File..."), 'S', pagersavefile));
     setdata(m, c);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Close"), 0, pagerclose));
     setdata(m, c);
     MCHECK(newmenu(G_("Edit")));
@@ -516,9 +516,9 @@ static pager newpager1win(const char *wtitle,
 {
     if (!pagerInstance && !(pagerInstance = pagercreate())) {
 	R_ShowMessage(G_("Unable to create pager window"));
-	return NULL;
+	return nullptr;
     }
-    if (!pageraddfile(wtitle, filename, enc, deleteonexit)) return NULL;
+    if (!pageraddfile(wtitle, filename, enc, deleteonexit)) return nullptr;
     pagerupdateview();
     return pagerInstance;
 }
@@ -530,12 +530,12 @@ static pager newpagerNwin(const char *wtitle,
     pager c = pagercreate();
     ConsoleData p;
 
-    if (!c) return NULL;
+    if (!c) return nullptr;
     settext(c, wtitle);
     p = getdata(c);
     if (!(p->lbuf = file2xbuf(filename, enc, deleteonexit))) {
 	del(c);
-	return NULL;
+	return nullptr;
     }
     if (c) {
 	gchangescrollbar(c, VWINSB, 0, NUMLINES - 1 , ROWS, 0);

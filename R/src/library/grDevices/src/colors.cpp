@@ -1323,7 +1323,7 @@ static ColorDataBaseEntry ColorDataBase[] = {
     {"yellow3",	"#CDCD00",   0xff00cdcd},
     {"yellow4",	"#8B8B00",   0xff008b8b},
     {"yellowgreen",	"#9ACD32",   0xff32cd9a},
-    {NULL,		NULL,		0}
+    {nullptr,		nullptr,		0}
 };
 
 
@@ -1538,9 +1538,9 @@ SEXP colors(void)
 {
     int n;
 
-    for (n = 0; ColorDataBase[n].name != NULL; n++) ;
+    for (n = 0; ColorDataBase[n].name != nullptr; n++) ;
     SEXP ans = PROTECT(allocVector(STRSXP, n));
-    for (n = 0; ColorDataBase[n].name != NULL; n++)
+    for (n = 0; ColorDataBase[n].name != nullptr; n++)
 	SET_STRING_ELT(ans, n, mkChar(ColorDataBase[n].name));
     UNPROTECT(1);
     return ans;

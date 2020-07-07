@@ -140,7 +140,7 @@ struct RotatedTextItem {
     RotatedTextItem *next;
 };
 
-static RotatedTextItem *first_text_item=NULL;
+static RotatedTextItem *first_text_item=nullptr;
 
 
 /* ---------------------------------------------------------------------- */
@@ -201,7 +201,7 @@ int XRfRotDrawString(Display *dpy, R_XFont *rfont, double angle,
 
 double XRotVersion(char *str, int n)
 {
-    if(str!=NULL)
+    if(str!=nullptr)
 	strncpy(str, XV_COPYRIGHT, n);
     return XV_VERSION;
 }
@@ -249,14 +249,14 @@ static XImage *MakeXImage(Display *dpy, int w, int h)
 
     /* reserve memory for image */
     data=(char *)calloc((unsigned)(((w-1)/8+1)*h), 1);
-    if(data==NULL)
-	return NULL;
+    if(data==nullptr)
+	return nullptr;
 
     /* create the XImage */
     I=XCreateImage(dpy, DefaultVisual(dpy, DefaultScreen(dpy)), 1, XYBitmap,
 		   0, data, w, h, 8, 0);
-    if(I==NULL)
-	return NULL;
+    if(I==nullptr)
+	return nullptr;
 
     I->byte_order=I->bitmap_bit_order=MSBFirst;
     return I;
@@ -350,7 +350,7 @@ static int XRotPaintAlignedString(Display *dpy, XFontStruct *font, double angle,
     Pixmap bitmap_to_paint;
 
     /* return early for NULL/empty strings */
-    if(text==NULL || *text=='\0') // R change in original R version
+    if(text==nullptr || *text=='\0') // R change in original R version
 	return 0;
 
     if(strlen(text)==0)
@@ -372,7 +372,7 @@ static int XRotPaintAlignedString(Display *dpy, XFontStruct *font, double angle,
 
     /* get a rotated bitmap */
     item=XRotRetrieveFromCache(dpy, font, angle, text, align);
-    if(item==NULL)
+    if(item==nullptr)
 	return 0;
 
     /* this gc has similar properties to the user's gc */
@@ -587,7 +587,7 @@ static int XRotDrawHorizontalString(Display *dpy, XFontStruct *font,
     int dir, asc, desc;
     XCharStruct overall;
 
-    if (text == NULL || *text=='\0') {  // addition in original R version
+    if (text == nullptr || *text=='\0') {  // addition in original R version
       DEBUG_PRINT1("Empty string, ignoring\n");
       return 0;
     }
@@ -626,7 +626,7 @@ static int XRotDrawHorizontalString(Display *dpy, XFontStruct *font,
 	yp=y;
 
     str1=strdup(text);
-    if(str1==NULL)
+    if(str1==nullptr)
 	return 1;
 
     str3=strtok(str1, str2);
@@ -653,9 +653,9 @@ static int XRotDrawHorizontalString(Display *dpy, XFontStruct *font,
 	/* move to next line */
 	yp+=height;
 
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
     XFreeGC(dpy, my_gc);
@@ -677,9 +677,9 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
 					      int align)
 {
     Font fid;
-    char *font_name=NULL;
+    char *font_name=nullptr;
     unsigned long name_value;
-    RotatedTextItem *item=NULL;
+    RotatedTextItem *item=nullptr;
     RotatedTextItem *i1=first_text_item;
 
     /* get font name, if it exists */
@@ -692,14 +692,14 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
     /* otherwise rely (unreliably?) on font ID */
     else {
 	DEBUG_PRINT1("can't get fontname, caching FID\n");
-	font_name=NULL;
+	font_name=nullptr;
 	fid=font->fid;
     }
 #else
     /* not allowed to cache font ID's */
     else {
 	DEBUG_PRINT1("can't get fontname, can't cache\n");
-	font_name=NULL;
+	font_name=nullptr;
 	fid=0;
     }
 #endif /*CACHE_FID*/
@@ -723,7 +723,7 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
 	      ((i1->align==0)?9:(i1->align-1))%3)) {
 
 	    /* now match fontname/ID */
-	    if(font_name!=NULL && i1->font_name!=NULL) {
+	    if(font_name!=nullptr && i1->font_name!=nullptr) {
 		if(strcmp(font_name, i1->font_name)==0) {
 		    item=i1;
 		    DEBUG_PRINT1("Matched against font names\n");
@@ -732,7 +732,7 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
 		    i1=i1->next;
 	    }
 #ifdef CACHE_FID
-	    else if(font_name==NULL && i1->font_name==NULL) {
+	    else if(font_name==nullptr && i1->font_name==nullptr) {
 		if(fid==i1->fid) {
 		    item=i1;
 		    DEBUG_PRINT1("Matched against FID's\n");
@@ -758,20 +758,20 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
 	/* create new item */
 	item=XRotCreateTextItem(dpy, font, angle, text, align);
 	if(!item)
-	    return NULL;
+	    return nullptr;
 
 	/* record what it shows */
 	item->text=strdup(text);
-	if(!item->text) return NULL;
+	if(!item->text) return nullptr;
 
 	/* fontname or ID */
-	if(font_name!=NULL) {
+	if(font_name!=nullptr) {
 	    item->font_name=strdup(font_name);
-	    if(!item->font_name) return NULL;
+	    if(!item->font_name) return nullptr;
 	    item->fid=0;
 	}
 	else {
-	    item->font_name=NULL;
+	    item->font_name=nullptr;
 	    item->fid=fid;
 	}
 
@@ -823,7 +823,7 @@ static RotatedTextItem *XRotRetrieveFromCache(Display *dpy, XFontStruct *font,
 static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 					   double angle, const char *text, int align)
 {
-    RotatedTextItem *item=NULL;
+    RotatedTextItem *item=nullptr;
     Pixmap canvas;
     GC font_gc;
     XImage *I_in;
@@ -848,7 +848,7 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
     /* allocate memory */
     item=(RotatedTextItem *)malloc((unsigned)sizeof(RotatedTextItem));
     if(!item)
-	return NULL;
+	return nullptr;
 
     /* count number of sections in string */
     item->nl=1;
@@ -865,9 +865,9 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 
     /* find width of longest section */
     str1=strdup(text);
-    if(str1==NULL) {
+    if(str1==nullptr) {
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     str3=strtok(str1, str2);
@@ -879,9 +879,9 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 
     /* loop through each section */
     do {
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
 
-	if(str3!=NULL) {
+	if(str3!=nullptr) {
 	    XTextExtents(font, str3, (int)strlen(str3), &dir, &asc, &desc,
 			 &overall);
 
@@ -889,7 +889,7 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 		item->max_width=overall.rbearing;
 	}
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
 
@@ -930,14 +930,14 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 	(double *)malloc((unsigned)(4*item->nl*sizeof(double)));
     if(!item->corners_x) {
 	free(item);
-	return NULL;
+	return nullptr;
     }
     item->corners_y=
 	(double *)malloc((unsigned)(4*item->nl*sizeof(double)));
     if(!item->corners_y) {
 	free(item->corners_x);
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     /* draw text horizontally */
@@ -946,11 +946,11 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
     yp=font->ascent;
 
     str1=strdup(text);
-    if(str1==NULL) {
+    if(str1==nullptr) {
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     str3=strtok(str1, str2);
@@ -988,19 +988,19 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 	/* move to next line */
 	yp+=height;
 
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
 
     /* create image to hold horizontal text */
     I_in=MakeXImage(dpy, item->cols_in, item->rows_in);
-    if(I_in==NULL) {
+    if(I_in==nullptr) {
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     /* extract horizontal text */
@@ -1033,12 +1033,12 @@ static RotatedTextItem *XRotCreateTextItem(Display *dpy, XFontStruct *font,
 
     /* create image to hold rotated text */
     item->ximage=MakeXImage(dpy, item->cols_out, item->rows_out);
-    if(item->ximage==NULL) {
+    if(item->ximage==nullptr) {
 	XDestroyImage(I_in);
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     byte_w_in=(item->cols_in-1)/8+1;
@@ -1149,8 +1149,8 @@ static void XRotAddToLinkedList(Display *dpy, RotatedTextItem *item)
 {
 
     static long int current_size=0;
-    static RotatedTextItem *last=NULL;
-    RotatedTextItem *i1=first_text_item, *i2=NULL;
+    static RotatedTextItem *last=nullptr;
+    RotatedTextItem *i1=first_text_item, *i2=nullptr;
 
 #ifdef CACHE_BITMAPS
 
@@ -1167,7 +1167,7 @@ static void XRotAddToLinkedList(Display *dpy, RotatedTextItem *item)
 	sizeof(XImage) + (int)strlen(item->text) +
 	item->nl*8*sizeof(double) + sizeof(RotatedTextItem);
 
-    if(item->font_name!=NULL)
+    if(item->font_name!=nullptr)
 	item->size+=(int)strlen(item->font_name);
     else
 	item->size+=sizeof(Font);
@@ -1203,12 +1203,12 @@ static void XRotAddToLinkedList(Display *dpy, RotatedTextItem *item)
 
 	DEBUG_PRINT2("Removed %ld bytes\n", i1->size);
 
-	if(i1->font_name!=NULL)
+	if(i1->font_name!=nullptr)
 	    DEBUG_PRINT5("  (`%s'\n   %s\n   angle=%f align=%d)\n",
 			 i1->text, i1->font_name, i1->angle, i1->align);
 
 #ifdef CACHE_FID
-	if(i1->font_name==NULL)
+	if(i1->font_name==nullptr)
 	    DEBUG_PRINT5("  (`%s'\n  FID=%ld\n   angle=%f align=%d)\n",
 			 i1->text, i1->fid, i1->angle, i1->align);
 #endif /*CACHE_FID*/
@@ -1226,13 +1226,13 @@ static void XRotAddToLinkedList(Display *dpy, RotatedTextItem *item)
     }
 
     /* add new item to end of linked list */
-    if(first_text_item==NULL) {
-	item->next=NULL;
+    if(first_text_item==nullptr) {
+	item->next=nullptr;
 	first_text_item=item;
 	last=item;
     }
     else {
-	item->next=NULL;
+	item->next=nullptr;
 	last->next=item;
 	last=item;
     }
@@ -1257,7 +1257,7 @@ static void XRotFreeTextItem(Display *dpy, RotatedTextItem *item)
 {
     free(item->text);
 
-    if(item->font_name!=NULL)
+    if(item->font_name!=nullptr)
 	free(item->font_name);
 
     free((char *)item->corners_x);
@@ -1303,8 +1303,8 @@ static XImage *XRotMagnifyImage(Display *dpy, XImage *ximage)
 
     /* this will hold final image */
     I_out=MakeXImage(dpy, cols_out, rows_out);
-    if(I_out==NULL)
-	return NULL;
+    if(I_out==nullptr)
+	return nullptr;
 
     /* width in bytes of input, output images */
     byte_width_in=(cols_in-1)/8+1;
@@ -1431,8 +1431,8 @@ XPoint *XRotTextExtents(Display *dpy, XFontStruct *font, double angle,
 
     /* find width of longest section */
     str1=strdup(text);
-    if(str1==NULL)
-	return NULL;
+    if(str1==nullptr)
+	return nullptr;
 
     str3=strtok(str1, str2);
 
@@ -1443,9 +1443,9 @@ XPoint *XRotTextExtents(Display *dpy, XFontStruct *font, double angle,
 
     /* loop through each section */
     do {
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
 
-	if(str3!=NULL) {
+	if(str3!=nullptr) {
 	    XTextExtents(font, str3, (int)strlen(str3), &dir, &asc, &desc,
 			 &overall);
 
@@ -1453,7 +1453,7 @@ XPoint *XRotTextExtents(Display *dpy, XFontStruct *font, double angle,
 		max_width=overall.rbearing;
 	}
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
 
@@ -1489,12 +1489,12 @@ XPoint *XRotTextExtents(Display *dpy, XFontStruct *font, double angle,
     /* reserve space for XPoints */
     xp_in=(XPoint *)malloc((unsigned)(5*sizeof(XPoint)));
     if(!xp_in)
-	return NULL;
+	return nullptr;
 
     xp_out=(XPoint *)malloc((unsigned)(5*sizeof(XPoint)));
     if(!xp_out) {
 	free(xp_in);
-	return NULL;
+	return nullptr;
     }
 
     /* bounding box when horizontal, relative to bitmap centre */
@@ -1611,7 +1611,7 @@ XmbRotPaintAlignedString(Display *dpy, XFontSet font, double angle,
     XFontStruct *fs;
 
     /* return early for NULL/empty strings */
-    if(text==NULL || *text=='\0')
+    if(text==nullptr || *text=='\0')
 	return 0;
 
     if(strlen(text)==0)
@@ -1633,7 +1633,7 @@ XmbRotPaintAlignedString(Display *dpy, XFontSet font, double angle,
 
     /* get a rotated bitmap */
     item=XmbRotRetrieveFromCache(dpy, font, angle, text, align);
-    if(item==NULL)
+    if(item==nullptr)
 	return 0;
 
     /* this gc has similar properties to the user's gc */
@@ -1806,7 +1806,7 @@ static int XmbRotDrawHorizontalString(Display *dpy, XFontSet font,
     const char *str2_a = "\0";
     const char *str2_b = "\n\0";
 
-    if (text == NULL || *text=='\0') {
+    if (text == nullptr || *text=='\0') {
       DEBUG_PRINT1("Empty string, ignoring\n");
       return 0;
     }
@@ -1847,7 +1847,7 @@ static int XmbRotDrawHorizontalString(Display *dpy, XFontSet font,
 	yp=y;
 
     str1 = strdup(text);
-    if(str1 == NULL) return 1;
+    if(str1 == nullptr) return 1;
 
     str3=strtok(str1, str2);
 
@@ -1871,9 +1871,9 @@ static int XmbRotDrawHorizontalString(Display *dpy, XFontSet font,
 	/* move to next line */
 	yp+=height;
 
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
     XFreeGC(dpy, my_gc);
@@ -1896,9 +1896,9 @@ static RotatedTextItem
 			 int align)
 {
     Font fid;
-    char *font_name=NULL;
+    char *font_name=nullptr;
     unsigned long name_value;
-    RotatedTextItem *item=NULL;
+    RotatedTextItem *item=nullptr;
     RotatedTextItem *i1=first_text_item;
 
     /* get font name, if it exists */
@@ -1911,14 +1911,14 @@ static RotatedTextItem
     /* otherwise rely (unreliably?) on font ID */
     else {
 	DEBUG_PRINT1("can't get fontname, caching FID\n");
-	font_name=NULL;
+	font_name=nullptr;
 	fid=font->fid;
     }
 #else
     /* not allowed to cache font ID's */
     else {
 	DEBUG_PRINT1("can't get fontname, can't cache\n");
-	font_name=NULL;
+	font_name=nullptr;
 	fid=0;
     }
 #endif /*CACHE_FID*/
@@ -1943,7 +1943,7 @@ static RotatedTextItem
 	      ((i1->align==0)?9:(i1->align-1))%3)) {
 
 	    /* now match fontname/ID */
-	    if(font_name!=NULL && i1->font_name!=NULL) {
+	    if(font_name!=nullptr && i1->font_name!=nullptr) {
 		if(strcmp(font_name, i1->font_name)==0) {
 		    item=i1;
 		    DEBUG_PRINT1("Matched against font names\n");
@@ -1952,7 +1952,7 @@ static RotatedTextItem
 		    i1=i1->next;
 	    }
 #ifdef CACHE_FID
-	    else if(font_name==NULL && i1->font_name==NULL) {
+	    else if(font_name==nullptr && i1->font_name==nullptr) {
 		if(fid==i1->fid) {
 		    item=i1;
 		    DEBUG_PRINT1("Matched against FID's\n");
@@ -1978,18 +1978,18 @@ static RotatedTextItem
 	/* create new item */
 	item=XmbRotCreateTextItem(dpy, font, angle, text, align);
 	if(!item)
-	    return NULL;
+	    return nullptr;
 
 	/* record what it shows */
 	item->text=strdup(text); // FIXME: could be NULL
 
 	/* fontname or ID */
-	if(font_name!=NULL) {
+	if(font_name!=nullptr) {
 	    item->font_name=strdup(font_name); // FIXME: could be NULL
 	    item->fid=0;
 	}
 	else {
-	    item->font_name=NULL;
+	    item->font_name=nullptr;
 	    item->fid=fid;
 	}
 
@@ -2042,7 +2042,7 @@ static RotatedTextItem
 *XmbRotCreateTextItem(Display *dpy, XFontSet font,
 		      double angle, const char *text, int align)
 {
-    RotatedTextItem *item=NULL;
+    RotatedTextItem *item=nullptr;
     Pixmap canvas;
     GC font_gc;
     XImage *I_in;
@@ -2066,7 +2066,7 @@ static RotatedTextItem
     /* allocate memory */
     item=(RotatedTextItem *)malloc((unsigned)sizeof(RotatedTextItem));
     if(!item)
-	return NULL;
+	return nullptr;
 
     /* count number of sections in string */
     item->nl=1;
@@ -2083,9 +2083,9 @@ static RotatedTextItem
 
     /* find width of longest section */
     str1=strdup(text);
-    if(str1==NULL) {
+    if(str1==nullptr) {
 	free(item);
-	return NULL;
+	return nullptr;
     }
 
     str3=strtok(str1, str2);
@@ -2096,16 +2096,16 @@ static RotatedTextItem
 
     /* loop through each section */
     do {
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
 
-	if(str3!=NULL) {
+	if(str3!=nullptr) {
 	  XRfTextExtents(font, str3, (int)strlen(str3), &r_ink, &r_log);
 
 	    if(r_log.width>item->max_width)
 		item->max_width=r_log.width;
 	}
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
 
@@ -2146,7 +2146,7 @@ static RotatedTextItem
 	free(item);
 	XFreeGC(dpy, font_gc);
 	XFreePixmap(dpy, canvas);
-	return NULL;
+	return nullptr;
     }
 
     item->corners_y=
@@ -2156,7 +2156,7 @@ static RotatedTextItem
 	free(item);
 	XFreeGC(dpy, font_gc);
 	XFreePixmap(dpy, canvas);
-	return NULL;
+	return nullptr;
     }
 
     /* draw text horizontally */
@@ -2165,13 +2165,13 @@ static RotatedTextItem
     yp=RXFontStructOfFontSet(font)->ascent;
 
     str1=strdup(text);
-    if(str1==NULL) {
+    if(str1==nullptr) {
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
 	XFreeGC(dpy, font_gc);
 	XFreePixmap(dpy, canvas);
-	return NULL;
+	return nullptr;
     }
 
     str3=strtok(str1, str2);
@@ -2210,21 +2210,21 @@ static RotatedTextItem
 	/* move to next line */
 	yp+=height;
 
-	str3=strtok((char *)NULL, str2);
+	str3=strtok((char *)nullptr, str2);
     }
-    while(str3!=NULL);
+    while(str3!=nullptr);
 
     free(str1);
 
     /* create image to hold horizontal text */
     I_in=MakeXImage(dpy, item->cols_in, item->rows_in);
-    if(I_in==NULL) {
+    if(I_in==nullptr) {
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
 	XFreeGC(dpy, font_gc);
 	XFreePixmap(dpy, canvas);
-	return NULL;
+	return nullptr;
     }
 
     /* extract horizontal text */
@@ -2257,14 +2257,14 @@ static RotatedTextItem
 
     /* create image to hold rotated text */
     item->ximage=MakeXImage(dpy, item->cols_out, item->rows_out);
-    if(item->ximage==NULL) {
+    if(item->ximage==nullptr) {
 	XDestroyImage(I_in);
 	free(item->corners_y);
 	free(item->corners_x);
 	free(item);
 	XFreeGC(dpy, font_gc);
 	XFreePixmap(dpy, canvas);
-	return NULL;
+	return nullptr;
     }
 
     byte_w_in=(item->cols_in-1)/8+1;
@@ -2408,8 +2408,8 @@ XPoint *XmbRotTextExtents(Display *dpy, XFontSet font, double angle,
 
     /* find width of longest section */
     str1=strdup(text);
-    if(str1==NULL)
-	return NULL;
+    if(str1==nullptr)
+	return nullptr;
 
     str3=strtok(str1, str2);
 
@@ -2420,16 +2420,16 @@ XPoint *XmbRotTextExtents(Display *dpy, XFontSet font, double angle,
     /* loop through each section */
 	do
 	{
-		str3 = strtok((char *)NULL, str2);
+		str3 = strtok((char *)nullptr, str2);
 
-		if (str3 != NULL)
+		if (str3 != nullptr)
 		{
 			XRfTextExtents(font, str3, (int)strlen(str3), &r_ink, &r_log);
 
 			if (r_log.width > max_width)
 				max_width = r_log.width;
 		}
-	} while (str3 != NULL);
+	} while (str3 != nullptr);
 
 	free(str1);
 
@@ -2467,12 +2467,12 @@ XPoint *XmbRotTextExtents(Display *dpy, XFontSet font, double angle,
     /* reserve space for XPoints */
     xp_in=(XPoint *)malloc((unsigned)(5*sizeof(XPoint)));
     if(!xp_in)
-	return NULL;
+	return nullptr;
 
     xp_out=(XPoint *)malloc((unsigned)(5*sizeof(XPoint)));
     if(!xp_out) {
 	free(xp_in);
-	return NULL;
+	return nullptr;
     }
 
     /* bounding box when horizontal, relative to bitmap centre */

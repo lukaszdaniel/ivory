@@ -335,7 +335,7 @@ R_INLINE static int R_integer_plus(int x, int y, Rboolean *pnaflag)
 
     if (((y > 0) && (x > (R_INT_MAX - y))) ||
 	((y < 0) && (x < (R_INT_MIN - y)))) {
-	if (pnaflag != NULL)
+	if (pnaflag != nullptr)
 	    *pnaflag = TRUE;
 	return NA_INTEGER;
     }
@@ -349,7 +349,7 @@ R_INLINE static int R_integer_minus(int x, int y, Rboolean *pnaflag)
 
     if (((y < 0) && (x > (R_INT_MAX + y))) ||
 	((y > 0) && (x < (R_INT_MIN + y)))) {
-	if (pnaflag != NULL)
+	if (pnaflag != nullptr)
 	    *pnaflag = TRUE;
 	return NA_INTEGER;
     }
@@ -370,7 +370,7 @@ R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
 	if (GOODIPROD(x, y, z) && z != NA_INTEGER)
 	    return z;
 	else {
-	    if (pnaflag != NULL)
+	    if (pnaflag != nullptr)
 		*pnaflag = TRUE;
 	    return NA_INTEGER;
 	}
@@ -659,7 +659,7 @@ HIDDEN SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 	else ynames = R_NilValue;
     }
 
-    SEXP klass = NULL, tsp = NULL; // -Wall
+    SEXP klass = nullptr, tsp = nullptr; // -Wall
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
@@ -1655,7 +1655,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP res, call2;
     int n, nprotect = 2;
-    static SEXP do_Math2_formals = NULL;
+    static SEXP do_Math2_formals = nullptr;
 
     if (length(args) >= 2 &&
 	isSymbol(CADR(args)) && R_isMissing(CADR(args), env)) {
@@ -1674,10 +1674,10 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(n_("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
 	      n, PRIMNAME(op));
 
-    static SEXP R_x_Symbol = NULL;
+    static SEXP R_x_Symbol = nullptr;
     if (! DispatchGroup("Math", call2, op, args, env, &res)) {
 	if(n == 1) {
-	    if(R_x_Symbol == NULL) R_x_Symbol = install("x");
+	    if(R_x_Symbol == nullptr) R_x_Symbol = install("x");
 	    // Ensure  we do not call it with a mis-named argument:
 	    if(CAR(args) == R_MissingArg ||
 	       (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
@@ -1689,7 +1689,7 @@ HIDDEN SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else {
 	    /* If named, do argument matching by name */
 	    if (TAG(args) != R_NilValue || TAG(CDR(args)) != R_NilValue) {
-		if (do_Math2_formals == NULL)
+		if (do_Math2_formals == nullptr)
 		    do_Math2_formals = allocFormalsList2(install("x"),
 							 install("digits"));
 		PROTECT(args = matchArgs_NR(do_Math2_formals, args, call));
@@ -1781,9 +1781,9 @@ HIDDEN SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    static SEXP do_log_formals = NULL;
-    static SEXP R_x_Symbol = NULL;
-    if (do_log_formals == NULL) {
+    static SEXP do_log_formals = nullptr;
+    static SEXP R_x_Symbol = nullptr;
+    if (do_log_formals == nullptr) {
 	R_x_Symbol = install("x");
 	do_log_formals = allocFormalsList2(R_x_Symbol, R_BaseSymbol);
     }
@@ -2213,7 +2213,7 @@ HIDDEN SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
     switch (PRIMVAL(op)) {
 
 	/* Completely dummy for -Wall -- math4() at all! : */
-    case -99: return Math4(args, (double (*)(double, double, double, double))NULL);
+    case -99: return Math4(args, (double (*)(double, double, double, double))nullptr);
 
     case  1: return Math4_1(args, dhyper);
     case  2: return Math4_2(args, phyper);
@@ -2361,6 +2361,6 @@ CCODE R_get_arith_function(int which)
     case 4: return do_math4;
     case 11: return complex_math1;
     case 12: return complex_math2;
-    default: error(_("bad arithmetic function index")); return NULL;
+    default: error(_("bad arithmetic function index")); return nullptr;
     }
 }

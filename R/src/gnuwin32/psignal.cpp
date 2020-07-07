@@ -48,7 +48,7 @@ struct downhill_Signal_Struct
 
 
 /* Static stuff **************************************************************/
-static struct downhill_Signal_Struct* downhill_Signal_Info = NULL;
+static struct downhill_Signal_Struct* downhill_Signal_Info = nullptr;
 static sigset_t                       downhill_Sigset_Mask = 0;
 static HANDLE                            IGotASignal;
 
@@ -114,14 +114,14 @@ void raise(int signal_Number)
 
 		/* Set the new signal mask */
 		sigaddset(&sigset_MaskNew,signal_Number);
-		sigprocmask(SIG_BLOCK,&sigset_MaskNew,NULL);
+		sigprocmask(SIG_BLOCK,&sigset_MaskNew,nullptr);
 
 		/* Execute the handler */
 		signal_HandlerOld(signal_Number);
 
 		/* Restore the signal mask */
 		sigprocmask(SIG_SETMASK,&sigset_MaskOriginal,
-			    NULL);
+			    nullptr);
 
 	    }
 	}
@@ -165,11 +165,11 @@ static BOOL CALLBACK hwIntrHandler (DWORD type)
 static int downhill_Signal_Init(void)
 {
     /* Skip this if we've already done it */
-    if (downhill_Signal_Info == NULL)
+    if (downhill_Signal_Info == nullptr)
     {
 	if (!(downhill_Signal_Info =
 	      calloc(sizeof(struct downhill_Signal_Struct),NSIG)) ||
-	    !(IGotASignal=CreateEvent(NULL,FALSE,FALSE,NULL)) ||
+	    !(IGotASignal=CreateEvent(nullptr,FALSE,FALSE,nullptr)) ||
 	    !SetConsoleCtrlHandler (hwIntrHandler, TRUE))
 
 	{
@@ -194,7 +194,7 @@ int sigaction(int signal_Number,struct sigaction* sigaction_Info,
 
     /* Set the signal */
     if (IS_SIGNAL(signal_Number)) {
-	if (sigaction_InfoOld != NULL)
+	if (sigaction_InfoOld != nullptr)
 	{
 	    sigaction_InfoOld->sa_handler =
 		downhill_Signal_Info[signal_Number].
@@ -206,7 +206,7 @@ int sigaction(int signal_Number,struct sigaction* sigaction_Info,
 		downhill_Signal_Info[signal_Number].
 		signal_Flags;
 	}
-	if (sigaction_Info != NULL)
+	if (sigaction_Info != nullptr)
 	{
 	    downhill_Signal_Info[signal_Number].
 		signal_Handler = sigaction_Info->sa_handler;
@@ -340,7 +340,7 @@ int sigprocmask(int mask_Function,sigset_t* sigset_Info,
     }
 
     /* Return the current value */
-    if (sigset_InfoOld != NULL)
+    if (sigset_InfoOld != nullptr)
     {
 	*sigset_InfoOld = sigset_MaskOld;
     }
@@ -384,7 +384,7 @@ int sigsetmask(int signal_MaskNew)
 {
     int signal_MaskOld = downhill_Sigset_Mask;
 
-    if (sigprocmask(SIG_SETMASK, &signal_MaskNew, NULL) == -1)
+    if (sigprocmask(SIG_SETMASK, &signal_MaskNew, nullptr) == -1)
 	return (int)-1;
 
     return signal_MaskOld;
@@ -441,13 +441,13 @@ int sigsuspend(sigset_t* sigset_Info)
     sigset_t sigset_MaskOriginal = downhill_Sigset_Mask;
 
     /* Set the new mask */
-    sigprocmask(SIG_SETMASK,sigset_Info,NULL);
+    sigprocmask(SIG_SETMASK,sigset_Info,nullptr);
 
     /* Wait for the signal */
     pause();
 
     /* Reset the old mask */
-    sigprocmask(SIG_SETMASK,&sigset_MaskOriginal,NULL);
+    sigprocmask(SIG_SETMASK,&sigset_MaskOriginal,nullptr);
 
     return -1;
 }

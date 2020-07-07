@@ -47,10 +47,10 @@
 
 extern Rboolean UserBreak;
 
-console RConsole = NULL;
+console RConsole = nullptr;
 int   RguiMDI = RW_MDI | RW_TOOLBAR | RW_STATUSBAR;
 int   MDIset = 0;
-window RFrame = NULL; /* some compilers want initialized for export */
+window RFrame = nullptr; /* some compilers want initialized for export */
 rect MDIsize;
 extern int ConsoleAcceptCmd, R_is_running;
 extern Rboolean DebugMenuitem;
@@ -86,7 +86,7 @@ static void double_backslashes(char *s, char *out)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Mbrtowc(nullptr, p, MB_CUR_MAX, &mb_st))) {
 	    if(*p == '\\') *out++ = '\\';
 	    for(i = 0; i < used; i++) *out++ = *p++;
 	}
@@ -424,7 +424,7 @@ static Rboolean isdebuggerpresent(void)
     entry =
 	(R_CheckDebugger) GetProcAddress((HMODULE)GetModuleHandle("KERNEL32"),
 					 "IsDebuggerPresent");
-    if (entry == NULL) return(FALSE);
+    if (entry == nullptr) return(FALSE);
     else return (Rboolean) entry();
 }
 
@@ -673,7 +673,7 @@ static void menuabout(control m)
 
 static void menuRhome(control m)
 {
-    ShellExecute(NULL, "open", "https://www.r-project.org", NULL, NULL, SW_SHOW);
+    ShellExecute(nullptr, "open", "https://www.r-project.org", nullptr, nullptr, SW_SHOW);
 }
 
 static void menuCRAN(control m)
@@ -787,7 +787,7 @@ void readconsolecfg()
 	    snprintf(optf, PATH_MAX+1, "%s/etc/Rconsole", getenv("R_HOME"));
 	    if (!loadRconsole(&gui, optf)) {
 		app_cleanup();
-		RConsole = NULL;
+		RConsole = nullptr;
 		exit(10);
 	    }
 	}
@@ -907,7 +907,7 @@ int RguiPackageMenu(PkgMenuItems pmenu)
 {
     MCHECK(newmenu(G_("Packages")));
     MCHECK(pmenu->mpkgl = newmenuitem(G_("Load package..."), 0, menupkgload));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(pmenu->mpkgm = newmenuitem(G_("Set CRAN mirror..."), 0,
 			       menupkgcranmirror));
     MCHECK(pmenu->mrepos = newmenuitem(G_("Select repositories..."), 0,
@@ -916,7 +916,7 @@ int RguiPackageMenu(PkgMenuItems pmenu)
 			       menupkginstallpkgs));
     MCHECK(pmenu->mpkgu = newmenuitem(G_("Update packages..."), 0,
 			       menupkgupdate));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(pmenu->mpkgil = newmenuitem(G_("Install package(s) from local files..."),
 				0, menupkginstalllocal));
     return 0;
@@ -949,7 +949,7 @@ int RguiCommonHelp(menu m, HelpMenuItems hmenu)
 
     if (!lmanintro && !lmanref && !lmandata && !lmanlang && !lmanext
        && !lmanint && !lmanadmin && !lmanSweave) {
-	MCHECK(hmenu->mman0 = newmenuitem(G_("Manuals (in PDF)"), 0, NULL));
+	MCHECK(hmenu->mman0 = newmenuitem(G_("Manuals (in PDF)"), 0, nullptr));
 	disable(hmenu->mman0);
     } else {
 	MCHECK(hmenu->mman = newsubmenu(m, G_("Manuals (in PDF)")));
@@ -981,7 +981,7 @@ int RguiCommonHelp(menu m, HelpMenuItems hmenu)
 
 
     addto(m);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(hmenu->mhelp = newmenuitem(G_("R functions (text)..."), 0,
 				      menuhelp));
     MCHECK(hmenu->mhelpstart = newmenuitem(G_("Html help"), 0, menuhelpstart));
@@ -990,12 +990,12 @@ int RguiCommonHelp(menu m, HelpMenuItems hmenu)
 					    menuhelpsearch));
     MCHECK(hmenu->msearchRsite = newmenuitem("search.r-project.org ...", 0,
 					     menusearchRsite));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(hmenu->mapropos = newmenuitem(G_("Apropos..."), 0, menuapropos));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("R Project home page"), 0, menuRhome));
     MCHECK(hmenu->mCRAN = newmenuitem(G_("CRAN home page"), 0, menuCRAN));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("About"), 0, menuabout));
     return 0;
 }
@@ -1031,7 +1031,7 @@ int setupui(void)
     if (strcmp(Rlocale, "C") == 0) strcpy(Rlocale, "en");
     setlocale(LC_CTYPE, Rlocale);
     mbcslocale = MB_CUR_MAX > 1;
-    ctype = setlocale(LC_CTYPE, NULL);
+    ctype = setlocale(LC_CTYPE, nullptr);
     p = strrchr(ctype, '.');
     if(p && isdigit(p[1])) localeCP = atoi(p+1); else localeCP = 1252;
 
@@ -1124,20 +1124,20 @@ int setupui(void)
     MCHECK(newmenuitem(G_("New script"), 0, menueditornew));
     MCHECK(newmenuitem(G_("Open script..."), 0, menueditoropen));
     MCHECK(mdisplay = newmenuitem(G_("Display file(s)..."), 0, menudisplay));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mload = newmenuitem(G_("Load Workspace..."), 0, menuloadimage));
     MCHECK(msave = newmenuitem(G_("Save Workspace..."), 'S', menusaveimage));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mloadhistory = newmenuitem(G_("Load History..."), 0,
 				      menuloadhistory));
     MCHECK(msavehistory = newmenuitem(G_("Save History..."), 0,
 				      menusavehistory));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("Change dir..."), 0, menuchangedir));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("Print..."), 'P', menuprint));
     MCHECK(newmenuitem(G_("Save to File..."), 0, menusavefile));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("Exit"), 0, menuexit));
 
     MCHECK(newmenu(G_("Edit")));
@@ -1148,9 +1148,9 @@ int setupui(void)
     MCHECK(mcopypaste = newmenuitem(G_("Copy and Paste"), 'X', menucopypaste));
     MCHECK(newmenuitem(G_("Select all"), 0, menuselectall));
     MCHECK(newmenuitem(G_("Clear console"), 'L', menuclear));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mde = newmenuitem(G_("Data editor..."), 0, menude));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mconfig = newmenuitem(G_("GUI preferences..."), 0, menuconfig));
     if (ismdi()) {
 	MCHECK(newmenu(G_("View")));
@@ -1165,7 +1165,7 @@ int setupui(void)
     MCHECK(newmenuitem(G_("Stop all computations"), 0, menukillall));
     if (DebugMenuitem || isdebuggerpresent())
 	MCHECK(newmenuitem(G_("Break to debugger"), 0, menudebug));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mlazy = newmenuitem(G_("Buffered output"), 'W', menulazy));
     MCHECK(mcomplete = newmenuitem(G_("Word completion"), 0, menucomplete));
     check(mcomplete);
@@ -1175,7 +1175,7 @@ int setupui(void)
 	check(mfncomplete);
     else
 	uncheck(mfncomplete);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(mls = newmenuitem(G_("List objects"), 0, menuls));
     MCHECK(mrm = newmenuitem(G_("Remove all objects"), 0, menurm));
     MCHECK(msearch = newmenuitem(G_("List search &path"), 0, menusearch));
@@ -1185,7 +1185,7 @@ int setupui(void)
     RguiWindowMenu();
     MCHECK(m = newmenu(G_("Help")));
     MCHECK(newmenuitem(G_("Console"), 0, menuconsolehelp));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     CheckForManuals();
     hmenu = (HelpMenuItems) malloc(sizeof(struct structHelpMenuItems));
     RguiCommonHelp(m, hmenu);
@@ -1246,7 +1246,7 @@ menuItems *wingetmenuitems(const char *mname, char *errmsg) {
 
     if (strlen(mname) > 1000) {
 	strcpy(errmsg, G_("'mname' is limited to 1000 bytes"));
-	return NULL;
+	return nullptr;
     }
 
     q = (char *)malloc(1000 * sizeof(char));
@@ -1261,7 +1261,7 @@ menuItems *wingetmenuitems(const char *mname, char *errmsg) {
     for (i = 0; i < nitems; i++) {
 	p = strstr(umitems[i]->name, mitem);
 
-	if (p == NULL)
+	if (p == nullptr)
 	    continue;
 	/* the 'mitem' pattern might be showing up */
 	/* as a substring in another valid name.  Make sure */

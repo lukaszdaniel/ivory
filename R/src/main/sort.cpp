@@ -1136,11 +1136,11 @@ HIDDEN void orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean d
 	     SEXP rho)
 {
     int c, i, j, h, t, lo = 0, hi = n-1;
-    int itmp, *isna = NULL, numna = 0;
-    int *ix = NULL /* -Wall */;
-    double *x = NULL /* -Wall */;
-    Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    int itmp, *isna = nullptr, numna = 0;
+    int *ix = nullptr /* -Wall */;
+    double *x = nullptr /* -Wall */;
+    Rcomplex *cx = nullptr /* -Wall */;
+    SEXP *sx = nullptr /* -Wall */;
 
     if (n < 2) return;
     switch (TYPEOF(key)) {
@@ -1275,11 +1275,11 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 	      Rboolean decreasing, SEXP rho)
 {
     R_xlen_t c, i, j, h, t, lo = 0, hi = n-1;
-    int *isna = NULL, numna = 0;
-    int *ix = NULL /* -Wall */;
-    double *x = NULL /* -Wall */;
-    Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    int *isna = nullptr, numna = 0;
+    int *ix = nullptr /* -Wall */;
+    double *x = nullptr /* -Wall */;
+    Rcomplex *cx = nullptr /* -Wall */;
+    SEXP *sx = nullptr /* -Wall */;
     R_xlen_t itmp;
 
     if (n < 2) return;
@@ -1485,8 +1485,8 @@ HIDDEN SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 HIDDEN SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rank, x;
-    int *ik = NULL /* -Wall */;
-    double *rk = NULL /* -Wall */;
+    int *ik = nullptr /* -Wall */;
+    double *rk = nullptr /* -Wall */;
     enum Ties {AVERAGE, MAX, MIN} ties_kind = AVERAGE;
     Rboolean isLong = FALSE;
 

@@ -32,10 +32,12 @@
 
 using namespace std;
 
-#define R_MSG_type	_("invalid 'type' (%s) of argument")
 
-	/* since INT_MIN is the NA_INTEGER value ! */
-#define Int2Real(i)	((i == NA_INTEGER) ? NA_REAL : (double)i)
+/* since INT_MIN is the NA_INTEGER value ! */
+namespace {
+	template <typename T>
+	double Int2Real(T i) { return ((i == NA_INTEGER) ? NA_REAL : (double)i); }
+}
 
 #ifdef DEBUG_sum
 #define DbgP1(s) REprintf(s)
@@ -60,16 +62,20 @@ static int isum(SEXP sx, isum_INT *value, Rboolean narm, SEXP call)
  * After the first 2^32 entries, only check every 1000th time (related to GET_REGION_BUFSIZE=512 ?)
  * Assume LONG_INT_MAX >= 2^63-1 >=~ 9.223e18 >  (1000 * 9000..0L = 9 * 10^18)
  */
-#define ISUM_OVERFLOW_CHECK do {					\
-	if (ii++ > 1000) {						\
-	    if (s > 9000000000000000L || s < -9000000000000000L) {	\
-		DbgP2("|OVERFLOW triggered: s=%ld|", s);		\
-		/* *value = s; no use, TODO continue from 'k' */	\
-		return 42; /* was overflow, NA; now switch to irsum()*/ \
-	    }								\
-	    ii = 0;							\
-	}								\
-    } while (0)
+#define ISUM_OVERFLOW_CHECK                                             \
+	do                                                                  \
+	{                                                                   \
+		if (ii++ > 1000)                                                \
+		{                                                               \
+			if (s > 9000000000000000L || s < -9000000000000000L)        \
+			{                                                           \
+				DbgP2("|OVERFLOW triggered: s=%ld|", s);                \
+				/* *value = s; no use, TODO continue from 'k' */        \
+				return 42; /* was overflow, NA; now switch to irsum()*/ \
+			}                                                           \
+			ii = 0;                                                     \
+		}                                                               \
+	} while (0)
 #else
 #define ISUM_OVERFLOW_CHECK do { } while(0)
 #endif
@@ -528,7 +534,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	case REALSXP: return real_mean(x);
 	case CPLXSXP: return complex_mean(x);
 	default:
-	    error(R_MSG_type, type2char(TYPEOF(x)));
+	    error(_("invalid 'type' (%s) of argument"), type2char(TYPEOF(x)));
 	    return R_NilValue; // -Wall on clang 4.2
 	}
     }
@@ -555,7 +561,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (ALTREP(CAR(args)) && CDDR(args) == R_NilValue &&
 	(CDR(args) == R_NilValue || TAG(CDR(args)) == R_NaRmSymbol)) {
-	SEXP toret = NULL;
+	SEXP toret = nullptr;
 	SEXP vec = CAR(args);
 	switch(PRIMVAL(op)) {
 	case 0:
@@ -579,7 +585,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	default:
 	    break;
 	}
-	if(toret != NULL) {
+	if(toret != nullptr) {
 	    UNPROTECT(1); /* args */
 	    return toret;
 	}
@@ -622,7 +628,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		break;
 	    default:
 		a = CAR(a);
-		errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+		errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     	return R_NilValue;
             }
 	    a = CDR(a);
@@ -712,7 +718,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    else updated = smax(a, &stmp, narm);
 		    break;
 		default:
-			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+			errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     		return R_NilValue;
 		}
 
@@ -849,7 +855,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    break;
 		default:
-			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+			errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     		return R_NilValue;
 		}
 
@@ -882,7 +888,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    break;
 		default:
-			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+			errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     		return R_NilValue;
 		}
 
@@ -902,7 +908,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	    case CPLXSXP:
 			if (iop == 2 || iop == 3)
 			{
-			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+			errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     		return R_NilValue;
 			}
 			break;
@@ -921,7 +927,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    break;
 		}
 	    default:
-			errorcall(call, R_MSG_type, type2char(TYPEOF(a)));
+			errorcall(call, _("invalid 'type' (%s) of argument"), type2char(TYPEOF(a)));
     		return R_NilValue;
 	    }
 	    if(ans_type < TYPEOF(a) && ans_type != CPLXSXP) {
@@ -967,7 +973,7 @@ na_answer: /* only sum(INTSXP, ...) case currently used */
     case INTSXP:	INTEGER(ans)[0] = NA_INTEGER; break;
     case REALSXP:	REAL(ans)[0] = NA_REAL; break;
     case CPLXSXP:	COMPLEX(ans)[0].r = COMPLEX(ans)[0].i = NA_REAL; break;
-    case STRSXP:        SET_STRING_ELT(ans, 0, NA_STRING); break;
+    case STRSXP:	SET_STRING_ELT(ans, 0, NA_STRING); break;
 	default:
 		break;
 	}
@@ -1078,7 +1084,7 @@ HIDDEN SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
     i = (indx != -1);
-    Rboolean large = (Rboolean) ((indx + 1) > R_INT_MAX);
+    bool large = ((indx + 1) > R_INT_MAX);
     PROTECT(ans = allocVector(large ? REALSXP : INTSXP, i ? 1 : 0));
     if (i) {
 	if(large)
@@ -1239,7 +1245,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x = coerceVector(CAR(args), anstype));
 	r = INTEGER(x);
 	n = XLENGTH(x);
-	xcopyIntegerWithRecycle(ra, r, 0, len, n);
+	xcopyWithRecycle(ra, r, 0, len, n);
 	UNPROTECT(1);
 	for(a = CDR(args); a != R_NilValue; a = CDR(a)) {
 	    x = CAR(a);
@@ -1272,7 +1278,7 @@ HIDDEN SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x = coerceVector(CAR(args), anstype));
 	r = REAL(x);
 	n = XLENGTH(x);
-	xcopyRealWithRecycle(ra, r, 0, len, n);
+	xcopyWithRecycle(ra, r, 0, len, n);
 	UNPROTECT(1);
 	for(a = CDR(args); a != R_NilValue; a = CDR(a)) {
 	    PROTECT(x = coerceVector(CAR(a), anstype));

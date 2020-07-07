@@ -59,7 +59,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
 	}
     }
     if (!nbuf)
-    	return NULL;
+    	return nullptr;
     /* Make sure it is null-terminated even if file did not end with
      *  newline.
      */
@@ -77,7 +77,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     regex_t blankline, contline, trailblank, regline, eblankline;
     regmatch_t regmatch[1];
     SEXP file, what, what2, retval, retval2, dims, dimnames;
-    Rconnection con = NULL;
+    Rconnection con = nullptr;
     bool wasopen, is_eblankline;
     RCNTXT cntxt;
 
@@ -162,7 +162,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		if(lastm >= 0) {
 		    need = (int) strlen(CHAR(STRING_ELT(retval,
 							lastm + nwhat * k))) + 2;
-		    if(tre_regexecb(&eblankline, line, 0, NULL, 0) == 0) {
+		    if(tre_regexecb(&eblankline, line, 0, nullptr, 0) == 0) {
 			is_eblankline = true;
 			if(field_fold) {
 			    n_eblanklines++;

@@ -73,7 +73,7 @@ static SEXP compact_intseq_Serialized_state(SEXP x)
     /* This drops through to standard serialization for expanded
        compact vectors */
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue)
-	return NULL;
+	return nullptr;
 #endif
     return COMPACT_SEQ_INFO(x);
 }
@@ -88,11 +88,11 @@ static SEXP compact_intseq_Unserialize(SEXP class_, SEXP state)
     int inc = COMPACT_INTSEQ_SERIALIZED_STATE_INCR(state);
 
     if (inc == 1)
-	return new_compact_intseq(n, n1,  1);
+        return new_compact_intseq(n, n1, 1);
     else if (inc == -1)
-	return new_compact_intseq(n, n1,  -1);
+        return new_compact_intseq(n, n1, -1);
     else
-	error(_("compact sequences with increment %d not supported yet"), inc);
+        error(_("compact sequences with increment %d not supported yet"), inc);
 }
 
 static SEXP compact_intseq_Coerce(SEXP x, int type)
@@ -101,7 +101,7 @@ static SEXP compact_intseq_Coerce(SEXP x, int type)
     /* This drops through to standard coercion for expanded compact
        vectors */
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue)
-	return NULL;
+	return nullptr;
 #endif
     if (type == REALSXP) {
 	SEXP info = COMPACT_SEQ_INFO(x);
@@ -110,7 +110,7 @@ static SEXP compact_intseq_Coerce(SEXP x, int type)
 	int inc = COMPACT_INTSEQ_INFO_INCR(info);
 	return new_compact_realseq(n, n1, inc);
     }
-    else return NULL;
+    else return nullptr;
 }
 
 static SEXP compact_intseq_Duplicate(SEXP x, Rboolean deep)
@@ -185,7 +185,7 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
 static const void *compact_intseq_Dataptr_or_null(SEXP x)
 {
     SEXP val = COMPACT_SEQ_EXPANDED(x);
-    return val == R_NilValue ? NULL : DATAPTR(val);
+    return val == R_NilValue ? nullptr : DATAPTR(val);
 }
 
 static int compact_intseq_Elt(SEXP x, R_xlen_t i)
@@ -201,8 +201,8 @@ static int compact_intseq_Elt(SEXP x, R_xlen_t i)
     }
 }
 
-#define CHECK_NOT_EXPANDED(x)       \
-    if (DATAPTR_OR_NULL(x) != NULL) \
+#define CHECK_NOT_EXPANDED(x)          \
+    if (DATAPTR_OR_NULL(x) != nullptr) \
     error(_("method should only handle unexpanded vectors"))
 
 static R_xlen_t compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
@@ -256,7 +256,7 @@ static SEXP compact_intseq_Sum(SEXP x, Rboolean narm)
 #ifdef COMPACT_INTSEQ_MUTABLE
     /* If the vector has been expanded it may have been modified. */
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue) 
-	return NULL;
+	return nullptr;
 #endif
     double tmp;
     SEXP info = COMPACT_SEQ_INFO(x);
@@ -281,7 +281,7 @@ R_altrep_class_t R_compact_intseq_class;
 static void InitCompactIntegerClass()
 {
     R_altrep_class_t cls = R_make_altinteger_class("compact_intseq", "base",
-						   NULL);
+						   nullptr);
     R_compact_intseq_class = cls;
 
     /* override ALTREP methods */
@@ -425,7 +425,7 @@ static void *compact_realseq_Dataptr(SEXP x, Rboolean writeable)
 static const void *compact_realseq_Dataptr_or_null(SEXP x)
 {
     SEXP val = COMPACT_SEQ_EXPANDED(x);
-    return val == R_NilValue ? NULL : DATAPTR(val);
+    return val == R_NilValue ? nullptr : DATAPTR(val);
 }
 
 static double compact_realseq_Elt(SEXP x, R_xlen_t i)
@@ -492,7 +492,7 @@ static SEXP compact_realseq_Sum(SEXP x, Rboolean narm)
 #ifdef COMPACT_INTSEQ_MUTABLE
     /* If the vector has been expanded it may have been modified. */
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue) 
-	return NULL;
+	return nullptr;
 #endif
     SEXP info = COMPACT_SEQ_INFO(x);
     double size = (double) COMPACT_REALSEQ_INFO_LENGTH(info);
@@ -512,7 +512,7 @@ R_altrep_class_t R_compact_realseq_class;
 static void InitCompactRealClass()
 {
     R_altrep_class_t cls = R_make_altreal_class("compact_realseq", "base",
-						NULL);
+						nullptr);
     R_compact_realseq_class = cls;
 
     /* override ALTREP methods */
@@ -612,14 +612,14 @@ HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
         }                                                            \
     } while (0)
 
-static SEXP R_OutDecSym = NULL;
+static SEXP R_OutDecSym = nullptr;
 
 R_INLINE static const char *DEFERRED_STRING_OUTDEC(SEXP x)
 {
     /* The default value of OutDec at startup is ".". If it is
        something different at the time the deferred string conversion
        is created then the current value is stored as an attribute. */
-    if (R_OutDecSym == NULL)
+    if (R_OutDecSym == nullptr)
 	R_OutDecSym = install("OutDec");
     SEXP info = DEFERRED_STRING_INFO(x);
     if (ATTRIB(info) != R_NilValue) {
@@ -639,7 +639,7 @@ static SEXP deferred_string_Serialized_state(SEXP x)
        and dropping the original data. */
     SEXP state = DEFERRED_STRING_STATE(x);
     DEFERRED_STRING_FIXUP_ARG_ATTRIBS(state);
-    return state != R_NilValue ? state : NULL;
+    return state != R_NilValue ? state : nullptr;
 }
 
 static SEXP deferred_string_Unserialize(SEXP class_, SEXP state)
@@ -687,7 +687,7 @@ R_INLINE static SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
     }
 
     SEXP elt = STRING_ELT(val, i);
-    if (elt == NULL) {
+    if (elt == nullptr) {
 	int warn; /* not used by the coercion functions */
 	int savedigits, savescipen;
 	SEXP data = DEFERRED_STRING_ARG(x);
@@ -761,7 +761,7 @@ static void *deferred_string_Dataptr(SEXP x, Rboolean writeable)
 static const void *deferred_string_Dataptr_or_null(SEXP x)
 {
     SEXP state = DEFERRED_STRING_STATE(x);
-    return state != R_NilValue ? NULL : DATAPTR(DEFERRED_STRING_EXPANDED(x));
+    return state != R_NilValue ? nullptr : DATAPTR(DEFERRED_STRING_EXPANDED(x));
 }
 
 static SEXP deferred_string_Elt(SEXP x, R_xlen_t i)
@@ -816,7 +816,7 @@ static int deferred_string_No_NA(SEXP x)
 
 static SEXP deferred_string_Extract_subset(SEXP x, SEXP indx, SEXP call)
 {
-    SEXP result = NULL;
+    SEXP result = nullptr;
 
     if (! OBJECT(x) && ATTRIB(x) == R_NilValue &&
 	DEFERRED_STRING_STATE(x) != R_NilValue) {
@@ -844,7 +844,7 @@ static R_altrep_class_t R_deferred_string_class;
 static void InitDefferredStringClass()
 {
     R_altrep_class_t cls = R_make_altstring_class("deferred_string", "base",
-						  NULL);
+						  nullptr);
     R_deferred_string_class = cls;
 
     /* override ALTREP methods */
@@ -877,13 +877,13 @@ HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
     case INTSXP:
     case REALSXP:
 	PROTECT(v); /* may not be needed, but to be safe ... */
-	if (info == NULL) {
+	if (info == nullptr) {
 	    PrintDefaults(); /* to set R_print from options */
 	    info = ScalarInteger(R_print.scipen);
 	    if (strcmp(OutDec, ".")) {
 		/* non-default OutDec setting -- attach as an attribute */
 		PROTECT(info);
-		if (R_OutDecSym == NULL)
+		if (R_OutDecSym == nullptr)
 		    R_OutDecSym = install("OutDec");
 		setAttrib(info, R_OutDecSym, GetOption1(R_OutDecSym));
 		UNPROTECT(1); /* info */
@@ -1017,7 +1017,7 @@ R_INLINE static void *MMAP_ADDR(SEXP x)
     SEXP eptr = MMAP_EPTR(x);
     void *addr = R_ExternalPtrAddr(eptr);
 
-    if (addr == NULL)
+    if (addr == nullptr)
 	error(_("object has been unmapped"));
     return addr;
 }
@@ -1028,14 +1028,14 @@ R_INLINE static void *MMAP_ADDR(SEXP x)
    to run a finalizer after unloading would result in an illegal
    instruction. */
 
-static SEXP mmap_list = NULL;
+static SEXP mmap_list = nullptr;
 
 constexpr int MAXCOUNT = 10;
 
 static void mmap_finalize(SEXP eptr);
 static void register_mmap_eptr(SEXP eptr)
 {
-    if (mmap_list == NULL) {
+    if (mmap_list == nullptr) {
 	mmap_list = CONS(R_NilValue, R_NilValue);
 	R_PreserveObject(mmap_list);
     }
@@ -1065,7 +1065,7 @@ static void register_mmap_eptr(SEXP eptr)
 #ifdef SIMPLEMMAP
 static void finalize_mmap_objects()
 {
-    if (mmap_list == NULL)
+    if (mmap_list == nullptr)
 	return;
 
     /* finalize any remaining mmap objects before unloading */
@@ -1090,7 +1090,7 @@ static SEXP mmap_Serialized_state(SEXP x)
     if (MMAP_SEROK(x))
 	return MMAP_STATE(x);
     else
-	return NULL;
+	return nullptr;
 }
 
 static SEXP mmap_file(SEXP, SEXPTYPE, Rboolean, Rboolean, Rboolean, Rboolean);
@@ -1104,7 +1104,7 @@ static SEXP mmap_Unserialize(SEXP class_, SEXP state)
     Rboolean serOK = (Rboolean) MMAP_STATE_SEROK(state);
 
     SEXP val = mmap_file(file, type, ptrOK, wrtOK, serOK, TRUE);
-    if (val == NULL) {
+    if (val == nullptr) {
 	/**** The attempt to memory map failed. Eventually it would be
 	      good to have a mechanism to allow the user to try to
 	      resolve this.  For now, return a length zero vector with
@@ -1149,7 +1149,7 @@ static void *mmap_Dataptr(SEXP x, Rboolean writeable)
 
 static const void *mmap_Dataptr_or_null(SEXP x)
 {
-    return MMAP_PTROK(x) ? MMAP_ADDR(x) : NULL;
+    return MMAP_PTROK(x) ? MMAP_ADDR(x) : nullptr;
 }
 
 
@@ -1283,11 +1283,11 @@ static void mmap_finalize(SEXP eptr)
     DEBUG_PRINT("finalizing ... ");
     void *p = R_ExternalPtrAddr(eptr);
     size_t size = MMAP_STATE_SIZE(MMAP_EPTR_STATE(eptr));
-    R_SetExternalPtrAddr(eptr, NULL);
+    R_SetExternalPtrAddr(eptr, nullptr);
 
-    if (p != NULL) {
+    if (p != nullptr) {
 	munmap(p, size); /* don't check for errors */
-	R_SetExternalPtrAddr(eptr, NULL);
+	R_SetExternalPtrAddr(eptr, nullptr);
     }
     DEBUG_PRINT("done\n");
 }
@@ -1298,7 +1298,7 @@ static void mmap_finalize(SEXP eptr)
         if (warn)                            \
         {                                    \
             warning(str, __VA_ARGS__);       \
-            return NULL;                     \
+            return nullptr;                     \
         }                                    \
         else                                 \
             error(str, __VA_ARGS__);         \
@@ -2020,12 +2020,12 @@ HIDDEN void R_init_altrep()
     InitCompactIntegerClass();
     InitCompactRealClass();
     InitDefferredStringClass();
-    InitMmapIntegerClass(NULL);
-    InitMmapRealClass(NULL);
-    InitWrapIntegerClass(NULL);
-    InitWrapLogicalClass(NULL);
-    InitWrapRealClass(NULL);
-    InitWrapComplexClass(NULL);
-    InitWrapRawClass(NULL);
-    InitWrapStringClass(NULL);
+    InitMmapIntegerClass(nullptr);
+    InitMmapRealClass(nullptr);
+    InitWrapIntegerClass(nullptr);
+    InitWrapLogicalClass(nullptr);
+    InitWrapRealClass(nullptr);
+    InitWrapComplexClass(nullptr);
+    InitWrapRawClass(nullptr);
+    InitWrapStringClass(nullptr);
 }

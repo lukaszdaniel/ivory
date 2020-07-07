@@ -174,7 +174,7 @@ inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 R_INLINE static SEXP CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
-    if (x != NULL && TYPEOF(x) == FREESXP)
+    if (x != nullptr && TYPEOF(x) == FREESXP)
 	error(_("unprotected object (%p) encountered (was %s)"), x, sexptype2char(OLDTYPE(x)));
     return x;
 }
@@ -186,7 +186,7 @@ R_INLINE static SEXP CHK(SEXP x)
    address and type of the first bad type seen during a collection,
    and for FREESXP nodes they record the old type as well. */
 static SEXPTYPE bad_sexp_type_seen = NILSXP;
-static SEXP bad_sexp_type_sexp = NULL;
+static SEXP bad_sexp_type_sexp = nullptr;
 #ifdef PROTECTCHECK
 static SEXPTYPE bad_sexp_type_old_type = 0;
 #endif
@@ -371,7 +371,7 @@ static void init_gc_grow_settings()
     char *arg;
 
     arg = getenv("R_GC_MEM_GROW");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	int which = (int) atof(arg);
 	switch (which) {
 	case 0: /* very conservative -- the SMALL_MEMORY settings */
@@ -393,7 +393,7 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_GROWFRAC");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	double frac = atof(arg);
 	if (0.35 <= frac && frac <= 0.75) {
 	    R_NGrowFrac = frac;
@@ -401,7 +401,7 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_GROWINCRFRAC");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80) {
 	    R_NGrowIncrFrac = frac;
@@ -409,13 +409,13 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_NGROWINCRFRAC");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80)
 	    R_NGrowIncrFrac = frac;
     }
     arg = getenv("R_GC_VGROWINCRFRAC");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80)
 	    R_VGrowIncrFrac = frac;
@@ -498,8 +498,8 @@ HIDDEN SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Miscellaneous Globals. */
 
-static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
-static SEXP R_PreciousList = NULL;      /* List of Persistent Objects */
+static SEXP R_VStack = nullptr;		/* R_alloc stack pointer */
+static SEXP R_PreciousList = nullptr;      /* List of Persistent Objects */
 static R_size_t R_LargeVallocSize = 0;
 static R_size_t R_SmallVallocSize = 0;
 static R_size_t orig_R_NSize;
@@ -961,10 +961,10 @@ static void GetNewPage(int node_class)
     page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
 
     page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
-    if (page == NULL) {
+    if (page == nullptr) {
 	R_gc_no_finalizers(0);
 	page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
-	if (page == NULL)
+	if (page == nullptr)
 	    mem_err_malloc((R_size_t) R_PAGE_SIZE);
     }
 #ifdef R_MEMORY_PROFILING
@@ -1036,8 +1036,8 @@ static void TryToReleasePages(void)
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
 
 	    /* all nodes in New space should be both free and unmarked */
-	    for (page = R_GenHeap[i].pages, rel_pages = 0, last = NULL;
-		 rel_pages < maxrel_pages && page != NULL;) {
+	    for (page = R_GenHeap[i].pages, rel_pages = 0, last = nullptr;
+		 rel_pages < maxrel_pages && page != nullptr;) {
 		int j, in_use;
 		char *data = (char*) PAGE_DATA(page);
 
@@ -1052,7 +1052,7 @@ static void TryToReleasePages(void)
 		}
 		if (! in_use) {
 		    ReleasePage(page, i);
-		    if (last == NULL)
+		    if (last == nullptr)
 			R_GenHeap[i].pages = next;
 		    else
 			last->next = next;
@@ -1113,7 +1113,7 @@ static void ReleaseLargeFreeVectors()
 	SEXP s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
 	    SEXP next = NEXT_NODE(s);
-	    if (CHAR(s) != NULL) {
+	    if (CHAR(s) != nullptr) {
 		R_size_t size;
 #ifdef PROTECTCHECK
 		if (TYPEOF(s) == FREESXP)
@@ -1222,9 +1222,9 @@ static void AdjustHeapSize(R_size_t size_needed)
 
 static void AgeNodeAndChildren(SEXP s, int gen)
 {
-    SEXP forwarded_nodes = NULL;
+    SEXP forwarded_nodes = nullptr;
     AGE_NODE(s, gen);
-    while (forwarded_nodes != NULL) {
+    while (forwarded_nodes != nullptr) {
 	s = forwarded_nodes;
 	forwarded_nodes = NEXT_NODE(forwarded_nodes);
 	if (NODE_GENERATION(s) != gen)
@@ -1311,7 +1311,7 @@ static void SortNodes(void)
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-	for (page = R_GenHeap[i].pages; page != NULL; page = page->next) {
+	for (page = R_GenHeap[i].pages; page != nullptr; page = page->next) {
 	    int j;
 	    char *data = (char*) PAGE_DATA(page);
 
@@ -1334,7 +1334,7 @@ static void SortNodes(void)
    Haskell" by Peyton Jones, Marlow, and Elliott (at
    www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz). --LT */
 
-static SEXP R_weak_refs = NULL;
+static SEXP R_weak_refs = nullptr;
 
 #define READY_TO_FINALIZE_MASK 1
 
@@ -1647,7 +1647,7 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define PROCESS_NODES()                                                     \
     do                                                                      \
     {                                                                       \
-        while (forwarded_nodes != NULL)                                     \
+        while (forwarded_nodes != nullptr)                                     \
         {                                                                   \
             s = forwarded_nodes;                                            \
             forwarded_nodes = NEXT_NODE(forwarded_nodes);                   \
@@ -1722,7 +1722,7 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 
-    forwarded_nodes = NULL;
+    forwarded_nodes = nullptr;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
@@ -1764,7 +1764,7 @@ static int RunGenCollect(R_size_t size_needed)
     FORWARD_NODE(R_print.na_string);
     FORWARD_NODE(R_print.na_string_noquote);
 
-    if (R_SymbolTable != NULL)             /* in case of GC during startup */
+    if (R_SymbolTable != nullptr)             /* in case of GC during startup */
 	for (i = 0; i < HSIZE; i++) {      /* Symbol table */
 	    FORWARD_NODE(R_SymbolTable[i]);
 	    SEXP s;
@@ -1773,7 +1773,7 @@ static int RunGenCollect(R_size_t size_needed)
 		    gc_error("****found a symbol with attributes\n");
 	}
 
-    if (R_CurrentExpr != NULL)	           /* Current expression */
+    if (R_CurrentExpr != nullptr)	           /* Current expression */
 	FORWARD_NODE(R_CurrentExpr);
 
     for (i = 0; i < R_MaxDevices; i++) {   /* Device display lists */
@@ -1786,7 +1786,7 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 
-    for (ctxt = R_GlobalContext ; ctxt != NULL ; ctxt = ctxt->nextContext()) {
+    for (ctxt = R_GlobalContext ; ctxt != nullptr ; ctxt = ctxt->nextContext()) {
 	FORWARD_NODE(ctxt->onExit());       /* on.exit expressions */
 	FORWARD_NODE(ctxt->getPromiseArgs());	   /* promises supplied to closure */
 	FORWARD_NODE(ctxt->getCallFun());       /* the closure called */
@@ -1853,7 +1853,7 @@ static int RunGenCollect(R_size_t size_needed)
     DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
 
     /* process CHARSXP cache */
-    if (R_StringHash != NULL) /* in case of GC during initialization */
+    if (R_StringHash != nullptr) /* in case of GC during initialization */
     {
 	SEXP t;
 	int nc = 0;
@@ -1906,7 +1906,7 @@ static int RunGenCollect(R_size_t size_needed)
 		    /**** could also leave this alone and restore the old
 			  node type in ReleaseLargeFreeVectors before
 			  calculating size */
-		    if (CHAR(s) != NULL) {
+		    if (CHAR(s) != nullptr) {
 			R_size_t size = getVecSizeInVEC(s);
 			SET_STDVEC_LENGTH(s, size);
 		    }
@@ -2046,19 +2046,19 @@ HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 static void init_gctorture(void)
 {
     char *arg = getenv("R_GCTORTURE");
-    if (arg != NULL) {
+    if (arg != nullptr) {
 	int gap = atoi(arg);
 	if (gap > 0) {
 	    gc_force_wait = gc_force_gap = gap;
 	    arg = getenv("R_GCTORTURE_WAIT");
-	    if (arg != NULL) {
+	    if (arg != nullptr) {
 		int wait = atoi(arg);
 		if (wait > 0)
 		    gc_force_wait = wait;
 	    }
 #ifdef PROTECTCHECK
 	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
-	    if (arg != NULL) {
+	    if (arg != nullptr) {
 		int inhibit = atoi(arg);
 		if (inhibit > 0) gc_inhibit_release = TRUE;
 		else gc_inhibit_release = FALSE;
@@ -2168,9 +2168,9 @@ HIDDEN void InitMemory()
     init_gc_grow_settings();
 
     arg = getenv("_R_GC_FAIL_ON_ERROR_");
-    if (arg != NULL && StringTrue(arg))
+    if (arg != nullptr && StringTrue(arg))
 	gc_fail_on_error = true;
-    else if (arg != NULL && StringFalse(arg))
+    else if (arg != nullptr && StringFalse(arg))
 	gc_fail_on_error = false;
 
     gc_reporting = R_Verbose;
@@ -2233,7 +2233,7 @@ HIDDEN void InitMemory()
 
     R_BCNodeStackBase =
 	(R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
-    if (R_BCNodeStackBase == NULL)
+    if (R_BCNodeStackBase == nullptr)
 	R_Suicide(_("couldn't allocate node stack"));
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
@@ -2297,7 +2297,7 @@ char *R_alloc(size_t nelem, int eltsize)
 	return (char *) DATAPTR(s);
     }
     /* One programmer has relied on this, but it is undocumented! */
-    else return NULL;
+    else return nullptr;
 }
 
 #ifdef HAVE_STDALIGN_H
@@ -2358,7 +2358,7 @@ char *S_realloc(char *p, long new_, long old, int size)
 void *R_malloc_gc(size_t n)
 {
     void *np = malloc(n);
-    if (np == NULL) {
+    if (np == nullptr) {
 	R_gc();
 	np = malloc(n);
     }
@@ -2368,7 +2368,7 @@ void *R_malloc_gc(size_t n)
 void *R_calloc_gc(size_t n, size_t s)
 {
     void *np = calloc(n, s);
-    if (np == NULL) {
+    if (np == nullptr) {
 	R_gc();
 	np = calloc(n, s);
     }
@@ -2378,7 +2378,7 @@ void *R_calloc_gc(size_t n, size_t s)
 void *R_realloc_gc(void *p, size_t n)
 {
     void *np = realloc(p, n);
-    if (np == NULL) {
+    if (np == nullptr) {
 	R_gc();
 	np = realloc(p, n);
     }
@@ -2536,7 +2536,7 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     INIT_REFCNT(newrho);
     SET_TYPEOF(newrho, ENVSXP);
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
-    ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
+    ENCLOS(newrho) = CHK(rho); if (rho != nullptr) INCREMENT_REFCNT(rho);
     HASHTAB(newrho) = R_NilValue;
     ATTRIB(newrho) = R_NilValue;
 
@@ -2607,14 +2607,14 @@ HIDDEN SEXP R_mkEVPROMISE_NR(SEXP expr, SEXP val)
    using non-standard means such as COW mmap() */
 
 static void *custom_node_alloc(R_allocator_t *allocator, size_t size) {
-    if (!allocator || !allocator->mem_alloc) return NULL;
+    if (!allocator || !allocator->mem_alloc) return nullptr;
     void *ptr = allocator->mem_alloc(allocator, size + sizeof(R_allocator_t));
     if (ptr) {
 	R_allocator_t *ca = (R_allocator_t*) ptr;
 	*ca = *allocator;
 	return (void*) (ca + 1);
     }
-    return NULL;
+    return nullptr;
 }
 
 static void custom_node_free(void *ptr) {
@@ -2827,7 +2827,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	else {
 	    Rboolean success = FALSE;
 	    R_size_t hdrsize = sizeof(SEXPREC_ALIGN);
-	    void *mem = NULL; /* initialize to suppress warning */
+	    void *mem = nullptr; /* initialize to suppress warning */
 	    if (size < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
 		/* I think subtracting the header is fine, "size" (*VSize)
 		   variables do not count the header, but the header is
@@ -2837,7 +2837,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		mem = allocator ?
 		    custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
 		    malloc(hdrsize + size * sizeof(VECREC));
-		if (mem == NULL) {
+		if (mem == nullptr) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
@@ -2846,16 +2846,16 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
-		if (mem != NULL) {
+		if (mem != nullptr) {
 		    s = (SEXP) mem;
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
 		}
-		else s = NULL;
+		else s = nullptr;
 #ifdef R_MEMORY_PROFILING
 		R_ReportAllocation(hdrsize + size * sizeof(VECREC));
 #endif
-	    } else s = NULL; /* suppress warning */
+	    } else s = nullptr; /* suppress warning */
 	    if (! success) {
 		double dsize = (double)size * sizeof(VECREC)/1024.0;
 		/* reset the vector heap limit */
@@ -3137,7 +3137,7 @@ static void R_gc_internal(R_size_t size_needed)
 #ifdef PROTECTCHECK
     SEXPTYPE first_bad_sexp_type_old_type = 0;
 #endif
-    SEXP first_bad_sexp_type_sexp = NULL;
+    SEXP first_bad_sexp_type_sexp = nullptr;
     int first_bad_sexp_type_line = 0;
     int gens_collected = 0;
 
@@ -3236,15 +3236,15 @@ static void R_gc_internal(R_size_t size_needed)
     }
 
     /* sanity check on logical scalar values */
-    if (R_TrueValue != NULL && LOGICAL(R_TrueValue)[0] != TRUE) {
+    if (R_TrueValue != nullptr && LOGICAL(R_TrueValue)[0] != TRUE) {
 	LOGICAL(R_TrueValue)[0] = TRUE;
 	gc_error(_("internal TRUE value has been modified"));
     }
-    if (R_FalseValue != NULL && LOGICAL(R_FalseValue)[0] != FALSE) {
+    if (R_FalseValue != nullptr && LOGICAL(R_FalseValue)[0] != FALSE) {
 	LOGICAL(R_FalseValue)[0] = FALSE;
 	gc_error(_("internal FALSE value has been modified"));
     }
-    if (R_LogicalNAValue != NULL &&
+    if (R_LogicalNAValue != nullptr &&
 	LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
 	LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
 	gc_error(_("internal logical NA value has been modified"));
@@ -3477,7 +3477,7 @@ void R_chk_free(void *ptr)
 {
     /* S-PLUS warns here, but there seems no reason to do so */
     /* if(!ptr) warning(_("attempt to free NULL pointer by Free")); */
-    if(ptr) free(ptr); /* ANSI C says free has no effect on NULL, but
+    if(ptr) free(ptr); /* ANSI C says free has no effect on nullptr, but
 			  better to be safe here */
 }
 
@@ -3729,7 +3729,7 @@ SEXP R_ExternalPtrProtected(SEXP s)
 
 void R_ClearExternalPtr(SEXP s)
 {
-    EXTPTR_PTR(s) = NULL;
+    EXTPTR_PTR(s) = nullptr;
 }
 
 void R_SetExternalPtrAddr(SEXP s, void *p)
@@ -3813,7 +3813,7 @@ void (MARK_ASSIGNMENT_CALL)(SEXP x) { MARK_ASSIGNMENT_CALL(CHK(x)); }
 
 void (SET_ATTRIB)(SEXP x, SEXP v) {
     if(TYPEOF(v) != LISTSXP && TYPEOF(v) != NILSXP)
-	error(_("value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"),
+	error(_("value of 'SET_ATTRIB' must be a pairlist or nullptr, not a '%s'"),
 	      type2char(TYPEOF(v)));
     FIX_REFCNT(x, ATTRIB(x), v);
     CHECK_OLD_TO_NEW(x, v);
@@ -4228,7 +4228,7 @@ int (MISSING)(SEXP x) { return MISSING(CHKCONS(x)); }
 
 void (SET_TAG)(SEXP x, SEXP v)
 {
-    if (CHKCONS(x) == NULL || x == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue)
 	error(_("incorrect value"));
     FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
@@ -4237,7 +4237,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 
 SEXP (SETCAR)(SEXP x, SEXP y)
 {
-    if (CHKCONS(x) == NULL || x == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue)
 	error(_("bad value"));
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
@@ -4250,7 +4250,7 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 
 SEXP (SETCDR)(SEXP x, SEXP y)
 {
-    if (CHKCONS(x) == NULL || x == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue)
 	error(_("bad value"));
     FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
@@ -4266,8 +4266,8 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 SEXP (SETCADR)(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (CHKCONS(x) == NULL || x == R_NilValue ||
-	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue ||
+	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue)
 	error(_("bad value"));
     cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
@@ -4280,9 +4280,9 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 SEXP (SETCADDR)(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (CHKCONS(x) == NULL || x == R_NilValue ||
-	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue ||
+	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue)
 	error(_("bad value"));
     cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
@@ -4295,10 +4295,10 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 SEXP (SETCADDDR)(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (CHKCONS(x) == NULL || x == R_NilValue ||
-	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
-	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue ||
+	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
+	CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue)
 	error(_("bad value"));
     cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
@@ -4313,11 +4313,11 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 SEXP (SETCAD4R)(SEXP x, SEXP y)
 {
     SEXP cell;
-    if (CHKCONS(x) == NULL || x == R_NilValue ||
-	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
-	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
-	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue ||
-	CHKCONS(CD4R(x)) == NULL || CD4R(x) == R_NilValue)
+    if (CHKCONS(x) == nullptr || x == R_NilValue ||
+	CHKCONS(CDR(x)) == nullptr || CDR(x) == R_NilValue ||
+	CHKCONS(CDDR(x)) == nullptr || CDDR(x) == R_NilValue ||
+	CHKCONS(CDDDR(x)) == nullptr || CDDDR(x) == R_NilValue ||
+	CHKCONS(CD4R(x)) == nullptr || CD4R(x) == R_NilValue)
 	error(_("bad value"));
     cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
@@ -4412,7 +4412,7 @@ HIDDEN
 SEXP (SET_CXTAIL)(SEXP x, SEXP v) {
 #ifdef USE_TYPE_CHECKING
     if(TYPEOF(v) != CHARSXP && TYPEOF(v) != NILSXP)
-	error(_("value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"),
+	error(_("value of 'SET_CXTAIL()' function must be a 'char' or nullptr, not a '%s'"),
 	      type2char(TYPEOF(v)));
 #endif
     /*CHECK_OLD_TO_NEW(x, v); *//* not needed since not properly traced */
@@ -4541,11 +4541,11 @@ static void R_ReportNewPage(void)
 
 static void R_EndMemReporting()
 {
-    if(R_MemReportingOutfile != NULL) {
+    if(R_MemReportingOutfile != nullptr) {
 	/* does not fclose always flush? */
 	fflush(R_MemReportingOutfile);
 	fclose(R_MemReportingOutfile);
-	R_MemReportingOutfile=NULL;
+	R_MemReportingOutfile=nullptr;
     }
     R_IsMemReporting = 0;
     return;
@@ -4554,9 +4554,9 @@ static void R_EndMemReporting()
 static void R_InitMemReporting(SEXP filename, int append,
 			       R_size_t threshold)
 {
-    if(R_MemReportingOutfile != NULL) R_EndMemReporting();
+    if(R_MemReportingOutfile != nullptr) R_EndMemReporting();
     R_MemReportingOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
-    if (R_MemReportingOutfile == NULL)
+    if (R_MemReportingOutfile == nullptr)
 	error(_("'Rprofmem()': cannot open output file '%s'"), filename);
     R_MemReportingThreshold = threshold;
     R_IsMemReporting = 1;
@@ -4600,7 +4600,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
     blen = (blen / bsize) * bsize;
     if(blen < blen1) blen += bsize;
 
-    if(buf->data == NULL) {
+    if(buf->data == nullptr) {
 	buf->data = (char *) malloc(blen);
 	if(buf->data)
 	    buf->data[0] = '\0';
@@ -4618,10 +4618,10 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 
 void R_FreeStringBuffer(R_StringBuffer *buf)
 {
-    if (buf->data != NULL) {
+    if (buf->data != nullptr) {
 	free(buf->data);
 	buf->bufsize = 0;
-	buf->data = NULL;
+	buf->data = nullptr;
     }
 }
 
@@ -4630,7 +4630,7 @@ HIDDEN void R_FreeStringBufferL(R_StringBuffer *buf)
     if (buf->bufsize > buf->defaultSize) {
 	free(buf->data);
 	buf->bufsize = 0;
-	buf->data = NULL;
+	buf->data = nullptr;
     }
 }
 

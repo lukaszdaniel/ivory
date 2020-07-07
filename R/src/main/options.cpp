@@ -97,7 +97,7 @@ constexpr int R_MAX_EXPRESSIONS_OPT = 500000;
 
 static SEXP Options(void)
 {
-    static SEXP sOptions = NULL;
+    static SEXP sOptions = nullptr;
     if(!sOptions) sOptions = install(".Options");
     return sOptions;
 }
@@ -275,7 +275,7 @@ HIDDEN int R_SetOptionWarn(int w)
 HIDDEN void Rf_InitOptions(void)
 {
     SEXP val, v;
-    const char *p = NULL;
+    const char *p = nullptr;
 
     /* options set here should be included into mandatory[] in do_options */
 #ifdef HAVE_RL_COMPLETION_MATCHES
@@ -531,8 +531,8 @@ HIDDEN SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  /* ^^^ from InitOptions ^^^ */
 		  "warn", "max.print", "show.error.messages",
 		  /* ^^^ from Common.R ^^^ */
-		  NULL};
-		for(int j = 0; mandatory[j] != NULL; j++)
+		  nullptr};
+		for(int j = 0; mandatory[j] != nullptr; j++)
 		    if (streql(CHAR(namei), mandatory[j]))
 			error(_("option '%s' cannot be deleted"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, R_NilValue));

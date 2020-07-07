@@ -820,7 +820,7 @@ static void PerspAxis(double *x, double *y, double *z,
     Vector3d u1={0.,0.,0.,0.}, u2={0.,0.,0.,0.}, u3={0.,0.,0.,0.}, v1, v2, v3;
     double tickLength = .03; /* proportion of axis length */
     double min, max, d_frac;
-    double *range = NULL; /* -Wall */
+    double *range = nullptr; /* -Wall */
     double axp[3];
     int nint, i;
     SEXP at, lab;
@@ -1491,7 +1491,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		xend = end->x1;
 		yend = end->y1;
 	    }
-	    end->next = NULL; /* <<< new for 1.2.3 */
+	    end->next = nullptr; /* <<< new for 1.2.3 */
 	    ii = i; jj = j;
 	    xend = seglist->x0;
 	    yend = seglist->y0;
@@ -1980,7 +1980,7 @@ SEXP C_contour(SEXP args)
 
     for (i = 0; i < nx; i++)
 	for (j = 0; j < ny; j++)
-	    ctr_SegDB[i + j * nx] = NULL;
+	    ctr_SegDB[i + j * nx] = nullptr;
 
     /* Draw the contours -- note the heap release */
 

@@ -294,26 +294,26 @@ static void finalize_worker(httpd_conn_t *c)
 #ifndef _WIN32
     if (c->ih) {
 	removeInputHandler(&R_InputHandlers, c->ih);
-	c->ih = NULL;
+	c->ih = nullptr;
     }
 #endif
     if (c->url) {
 	free(c->url);
-	c->url = NULL;
+	c->url = nullptr;
     }
 
     if (c->body) {
 	free(c->body);
-	c->body = NULL;
+	c->body = nullptr;
     }
 
     if (c->content_type) {
 	free(c->content_type);
-	c->content_type = NULL;
+	c->content_type = nullptr;
     }
     if (c->headers) {
 	free_buffer(c->headers);
-	c->headers = NULL;
+	c->headers = nullptr;
     }
     if (c->sock != INVALID_SOCKET) {
 	closesocket(c->sock);
@@ -361,7 +361,7 @@ static void remove_worker(httpd_conn_t *c)
     finalize_worker(c);
     for (; i < MAX_WORKERS; i++)
 	if (workers[i] == c)
-	    workers[i] = NULL;
+	    workers[i] = nullptr;
     DBG(printf("removing worker %p\n", (void*) c));
     free(c);
 }
@@ -872,10 +872,10 @@ static void worker_input_handler(void *data) {
 			return;
 		    }
 		    /* keep-alive - reset the worker so it can process a new request */
-		    if (c->url) { free(c->url); c->url = NULL; }
-		    if (c->body) { free(c->body); c->body = NULL; }
-		    if (c->content_type) { free(c->content_type); c->content_type = NULL; }
-		    if (c->headers) { free_buffer(c->headers); c->headers = NULL; }
+		    if (c->url) { free(c->url); c->url = nullptr; }
+		    if (c->body) { free(c->body); c->body = nullptr; }
+		    if (c->content_type) { free(c->content_type); c->content_type = nullptr; }
+		    if (c->headers) { free_buffer(c->headers); c->headers = nullptr; }
 		    c->body_pos = 0;
 		    c->method = 0;
 		    c->part = PART_REQUEST;
@@ -1046,10 +1046,10 @@ static void worker_input_handler(void *data) {
 		return;
 	    }
 	    /* keep-alive - reset the worker so it can process a new request */
-	    if (c->url) { free(c->url); c->url = NULL; }
-	    if (c->body) { free(c->body); c->body = NULL; }
-	    if (c->content_type) { free(c->content_type); c->content_type = NULL; }
-	    if (c->headers) { free_buffer(c->headers); c->headers = NULL; }
+	    if (c->url) { free(c->url); c->url = nullptr; }
+	    if (c->body) { free(c->body); c->body = nullptr; }
+	    if (c->content_type) { free(c->content_type); c->content_type = nullptr; }
+	    if (c->headers) { free_buffer(c->headers); c->headers = nullptr; }
 	    c->line_pos = 0; c->body_pos = 0;
 	    c->method = 0;
 	    c->part = PART_REQUEST;
@@ -1083,10 +1083,10 @@ static void worker_input_handler(void *data) {
 		    c->line_pos -= sh;
 		}
 		/* keep-alive - reset the worker so it can process a new request */
-		if (c->url) { free(c->url); c->url = NULL; }
-		if (c->body) { free(c->body); c->body = NULL; }
-		if (c->content_type) { free(c->content_type); c->content_type = NULL; }
-		if (c->headers) { free_buffer(c->headers); c->headers = NULL; }
+		if (c->url) { free(c->url); c->url = nullptr; }
+		if (c->body) { free(c->body); c->body = nullptr; }
+		if (c->content_type) { free(c->content_type); c->content_type = nullptr; }
+		if (c->headers) { free_buffer(c->headers); c->headers = nullptr; }
 		c->body_pos = 0;
 		c->method = 0;
 		c->part = PART_REQUEST;
@@ -1177,7 +1177,7 @@ static void srv_input_handler(void *data)
     if (cl_sock == INVALID_SOCKET) /* accept failed, don't bother */
 	return;
     c = (httpd_conn_t*) calloc(1, sizeof(httpd_conn_t));
-    if (c == NULL) error(_("allocation error in srv_input_handler"));
+    if (c == nullptr) error(_("allocation error in srv_input_handler"));
     c->sock = cl_sock;
     c->peer = peer_sa.sin_addr;
 #ifndef _WIN32

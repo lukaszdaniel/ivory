@@ -111,13 +111,13 @@ double Rf_currentTime(void)
        Has 2038 issue if time_t: tv.tv_sec is 32-bit.
      */
     struct timeval tv;
-    int res = gettimeofday(&tv, NULL);
+    int res = gettimeofday(&tv, nullptr);
     if(res == 0)
 	ans = (double) tv.tv_sec + 1e-6 * (double) tv.tv_usec;
 
 #else
     /* No known current OSes */
-    time_t res = time(NULL);
+    time_t res = time(nullptr);
     if(res != (time_t)(-1)) /* -1 must be an error as the real value -1
 			       was ca 1969 */
 	ans = (double) res;
@@ -159,12 +159,12 @@ HIDDEN unsigned int TimeToSeed(void)
 #elif defined(HAVE_GETTIMEOFDAY)
     {
 	struct timeval tv;
-	gettimeofday (&tv, NULL);
+	gettimeofday (&tv, nullptr);
 	seed = (unsigned int)(((uint_least64_t) tv.tv_usec << 16) ^ tv.tv_sec);
     }
 #else
     /* C89, so must work */
-    seed = (Int32) time(NULL);
+    seed = (Int32) time(nullptr);
 #endif
     seed ^= (pid <<16);
     return seed;

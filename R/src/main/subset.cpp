@@ -110,7 +110,7 @@ HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 
     if (ALTREP(x)) {
 	result = ALTVEC_EXTRACT_SUBSET(x, indx, call);
-	if (result != NULL)
+	if (result != nullptr)
 	    return result;
     }
 
@@ -634,7 +634,7 @@ static int ExtractExactArg(SEXP args)
 R_INLINE static int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
-    SEXP prom = NULL;
+    SEXP prom = nullptr;
     if (args != R_NilValue && CAR(args) != R_DotsSymbol) {
 	SEXP x = eval(CAR(args), rho);
 	PROTECT(x);
@@ -1129,10 +1129,10 @@ HIDDEN SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 HIDDEN SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
-    static SEXP bracket_op = NULL;
+    static SEXP bracket_op = nullptr;
     SEXP args, x_elt;
     if (isObject(x)) {
-        if (bracket_op == NULL)
+        if (bracket_op == nullptr)
             bracket_op = R_Primitive("[[");
         PROTECT(args = list2(x, ScalarReal(i + 1)));
         x_elt = do_subset2(call, bracket_op, args, rho);
@@ -1198,7 +1198,7 @@ HIDDEN SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
     if (TYPEOF(nlist) == PROMSXP)
 	nlist = eval(nlist, env);
     if(isSymbol(nlist)) {
-	if (syminp != NULL)
+	if (syminp != nullptr)
 	    *syminp = nlist;
 	SET_STRING_ELT(input, 0, PRINTNAME(nlist));
     } else if(isString(nlist) )
@@ -1230,7 +1230,7 @@ HIDDEN SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans;
 
     checkArity(op, args);
-    PROTECT(args = fixSubset3Args(call, args, env, NULL));
+    PROTECT(args = fixSubset3Args(call, args, env, nullptr));
 
     /* If the first argument is an object and there is */
     /* an approriate method, we dispatch to that method, */
@@ -1271,7 +1271,7 @@ HIDDEN SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
     UNPROTECT(1); /* x */
     PROTECT(x);
 
-    /* If this is not a list object we return NULL. */
+    /* If this is not a list object we return nullptr. */
 
     if (isPairList(x)) {
 	SEXP xmatch = R_NilValue;

@@ -129,7 +129,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
 {
   {
     "HersheySerif",		/* #0 */
-    NULL,
+    nullptr,
     "Complex Roman",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -184,7 +184,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerif-Italic",	/* #1 */
-    NULL,
+    nullptr,
     "Complex Italic",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -227,7 +227,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerif-Bold",		/* #2 */
-    NULL,
+    nullptr,
     "Triplex Roman",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -270,7 +270,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerif-BoldItalic",	/* #3 */
-    NULL,
+    nullptr,
     "Triplex Italic",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -313,7 +313,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyCyrillic",		/* #4 */
-    NULL,
+    nullptr,
     "Complex Cyrillic",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -357,7 +357,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyCyrillic-Oblique",	/* #5 */
-    NULL,
+    nullptr,
     "Complex Cyrillic (obliqued)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -401,7 +401,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyHiragana",		/* #6 */
-    NULL,
+    nullptr,
     "Hiragana (from oriental glyph database)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -442,7 +442,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyKatakana",		/* #7 */
-    NULL,
+    nullptr,
     "Katakana (from oriental glyph database)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -483,7 +483,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyEUC",			/* #8 */
-    NULL,
+    nullptr,
     "Composite Japanese (from oriental glyph database)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -526,7 +526,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySans",		/* #9 */
-    NULL,
+    nullptr,
     "Simplex Roman",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -581,7 +581,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySans-Oblique",	/* #10 */
-    NULL,
+    nullptr,
     "Simplex Roman (obliqued)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -624,7 +624,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySans-Bold",		/* #11 */
-    NULL,
+    nullptr,
     "Duplex Roman",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -667,7 +667,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySans-BoldOblique",	/* #12 */
-    NULL,
+    nullptr,
     "Duplex Roman (obliqued)",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -710,7 +710,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyScript",		/* #13 */
-    NULL,
+    nullptr,
     "Simplex Script",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -753,7 +753,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheyScript-Bold",		/* #14 */
-    NULL,
+    nullptr,
     "Complex Script",
     {
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -973,7 +973,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerifSymbol-Oblique",	/* #19 */
-    NULL,
+    nullptr,
     "Complex Greek (obliqued)",
     {
       /* The range 00..037 isn't accessible except through macros, since in
@@ -1021,7 +1021,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerifSymbol-Bold",	/* #20 */
-    NULL,
+    nullptr,
     "Triplex Greek",
     {
       /* The range 00..037 isn't accessible except through macros, since in
@@ -1069,7 +1069,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySerifSymbol-BoldOblique", /* #21 */
-    NULL,
+    nullptr,
     "Triplex Greek (obliqued)",
     {
       /* The range 00..037 isn't accessible except through macros, since in
@@ -1165,7 +1165,7 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
   },
   {
     "HersheySansSymbol-Oblique",	/* #23 */
-    NULL,
+    nullptr,
     "Simplex Greek (obliqued)",
     {
       /* The range 00..037 isn't accessible except through macros, since in
@@ -1212,9 +1212,9 @@ const struct plHersheyFontInfoStruct _hershey_font_info[] =
     7, 2, true, false, true
   },
   {
-    NULL,			/* DUMMY */
-    NULL,
-    NULL,
+    nullptr,			/* DUMMY */
+    nullptr,
+    nullptr,
     {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

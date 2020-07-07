@@ -211,7 +211,7 @@ static int GA_holdflush(pDevDesc dd, int level)
     if (old == 0 && xd->holdlevel > 0) {
 	if(TimerNo != 0) KillTimer(0, TimerNo);
 	drawbits(xd);
-	GA_xd = NULL;
+	GA_xd = nullptr;
 	gsetcursor(xd->gawin, WatchCursor);
     }
     return xd->holdlevel;
@@ -395,7 +395,7 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
     pGEDevDesc gdd = desc2GEDesc(dd);
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     char family[256], encoding[256], paper[256], bg[256], fg[256];
-    const char **afmpaths = NULL;
+    const char **afmpaths = nullptr;
 
     if (!ndd) {
 	R_ShowMessage(_("Not enough memory to copy graphics window"));
@@ -465,7 +465,7 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
     pGEDevDesc gdd = desc2GEDesc(dd);
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     char family[256], encoding[256], bg[256], fg[256];
-    const char **afmpaths = NULL;
+    const char **afmpaths = nullptr;
     Rboolean useCompression = FALSE;
 
     if (!ndd) {
@@ -628,12 +628,12 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  *
  * IF gcontext fontfamily is empty ("")
  * OR IF can't find gcontext fontfamily in font database
- * THEN return NULL
+ * THEN return nullptr
  */
 static char* translateFontFamily(const char* family) {
     SEXP graphicsNS, windowsenv, fontdb, fontnames;
     int i, nfonts;
-    char* result = NULL;
+    char* result = nullptr;
     PROTECT_INDEX xpi;
 
     PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
@@ -1364,7 +1364,7 @@ static void CHelpKeyIn(control w, int key)
     if (dd->gettingEvent) {
 	keyname = getKeyName(key);
 	if (keyname > knUNKNOWN) {
-	    doKeybd(dd, keyname, NULL);
+	    doKeybd(dd, keyname, nullptr);
 	    if (xd->buffered) SHOW;
 	}
     } else {
@@ -1617,21 +1617,21 @@ static Rboolean setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
 	setdata(xd->stoploc,(void *) dd);
 	hide(xd->stoploc);
     } else
-	xd->stoploc = NULL;
+	xd->stoploc = nullptr;
 
     /* First we prepare 'locator' menubar and popup */
     addto(xd->gawin);
-    MCHECK(xd->mbarloc = newmenubar(NULL));
+    MCHECK(xd->mbarloc = newmenubar(nullptr));
     MCHECK(newmenu(G_("Stop")));
     MCHECK(m = newmenuitem(G_("Stop locator"), 0, menustop));
     setdata(m, (void *) dd);
-    MCHECK(xd->locpopup = newpopup(NULL));
+    MCHECK(xd->locpopup = newpopup(nullptr));
     MCHECK(m = newmenuitem(G_("Stop"), 0, menustop));
     setdata(m, (void *) dd);
-    MCHECK(newmenuitem(G_("Continue"), 0, NULL));
+    MCHECK(newmenuitem(G_("Continue"), 0, nullptr));
 
     /* Next the 'Click for next plot' menubar */
-    MCHECK(xd->mbarconfirm = newmenubar(NULL));
+    MCHECK(xd->mbarconfirm = newmenubar(nullptr));
     MCHECK(newmenu(G_("Next")));
     MCHECK(m = newmenuitem(G_("Next plot"), 0, menunextplot));
     setdata(m, (void *) dd);
@@ -1658,23 +1658,23 @@ static Rboolean setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
     MCHECK(xd->mclpbm = newmenuitem(G_("as a Bitmap\tCTRL+C"), 0, menuclpbm));
     MCHECK(xd->mclpwm = newmenuitem(G_("as a Metafile\tCTRL+W"), 0, menuclpwm));
     addto(m);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->mprint = newmenuitem(G_("Print..."), 'P', menuprint));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->mclose = newmenuitem(G_("close Device"), 0, menuclose));
     MCHECK(newmenu(G_("History")));
     MCHECK(xd->mrec = newmenuitem(G_("Recording"), 0, menurec));
     if(recording) check(xd->mrec);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->madd = newmenuitem(G_("Add\tINS"), 0, menuadd));
     MCHECK(xd->mreplace = newmenuitem(G_("Replace"), 0, menureplace));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->mprev = newmenuitem(G_("Previous\tPgUp"), 0, menuprev));
     MCHECK(xd->mnext = newmenuitem(G_("Next\tPgDown"), 0, menunext));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->msvar = newmenuitem(G_("Save to variable..."), 0, menusvar));
     MCHECK(xd->mgvar = newmenuitem(G_("Get from variable..."), 0, menugvar));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->mclear = newmenuitem(G_("Clear history"), 0, menugrclear));
     MCHECK(newmenu(G_("Resize")));
     MCHECK(xd->mR = newmenuitem(G_("R mode"), 0, menuR));
@@ -1692,15 +1692,15 @@ static Rboolean setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
     setdata(m, (void *) dd);
     MCHECK(m = newmenuitem(G_("Copy as bitmap"), 0, menuclpbm));
     setdata(m, (void *) dd);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Save as metafile..."), 0, menuwm));
     setdata(m, (void *) dd);
     MCHECK(m = newmenuitem(G_("Save as postscript..."), 0, menups));
     setdata(m, (void *) dd);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(xd->grmenustayontop = newmenuitem(G_("Stay on top"), 0, menustayontop));
     setdata(xd->grmenustayontop, (void *) dd);
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Print..."), 'P', menuprint));
     setdata(m, (void *) dd);
     gchangepopup(xd->gawin, xd->grpopup);
@@ -1790,7 +1790,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 		    */
     xd->xshift = xd->yshift = 0;
     xd->npage = 0;
-    xd->fp = NULL; /* not all devices (e.g. TIFF) use the file pointer, but SaveAsBitmap
+    xd->fp = nullptr; /* not all devices (e.g. TIFF) use the file pointer, but SaveAsBitmap
 		      looks at it */
 
     if (!dsp[0]) {
@@ -1821,17 +1821,17 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	  irrelevant,i.e., depth of the bitmap is that of graphic card
 	  if required depth > 1
 	*/
-	if ((xd->gawin = newbitmap(w, h, 256)) == NULL) {
+	if ((xd->gawin = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
-	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
+	if ((xd->bm2 = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	snprintf(buf, 600, xd->filename, 1);
-	if ((xd->fp = R_fopen(buf, "wb")) == NULL) {
+	if ((xd->fp = R_fopen(buf, "wb")) == nullptr) {
 	    del(xd->gawin);
 	    warning(_("unable to open file '%s' for writing"), buf);
 	    return FALSE;
@@ -1851,17 +1851,17 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
 		    (int)w, (int) h);
-	if((xd->gawin = newbitmap(w, h, 256)) == NULL) {
+	if((xd->gawin = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
-	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
+	if ((xd->bm2 = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	snprintf(buf, 600, xd->filename, 1);
-	if ((xd->fp = R_fopen(buf, "wb")) == NULL) {
+	if ((xd->fp = R_fopen(buf, "wb")) == nullptr) {
 	    del(xd->gawin);
 	    warning(_("unable to open file '%s' for writing"), buf);
 	    return FALSE;
@@ -1881,12 +1881,12 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
 		    (int) w, (int) h);
-	if((xd->gawin = newbitmap(w, h, 256)) == NULL) {
+	if((xd->gawin = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
-	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
+	if ((xd->bm2 = newbitmap(w, h, 256)) == nullptr) {
 	    warning(_("unable to allocate bitmap"));
 	    return FALSE;
 	}
@@ -2182,7 +2182,7 @@ static void GA_NewPage(const pGEcontext gc,
 	char buf[600];
 	SaveAsBitmap(dd, xd->res_dpi);
 	snprintf(buf, 600, xd->filename, xd->npage);
-	if ((xd->fp = R_fopen(buf, "wb")) == NULL)
+	if ((xd->fp = R_fopen(buf, "wb")) == nullptr)
 	    error(_("unable to open file '%s' for writing"), buf);
     }
     if (xd->kind == TIFF && xd->needsave) {
@@ -2267,7 +2267,7 @@ static void GA_Close(pDevDesc dd)
 
 	del(xd->bm);
 	/* If this is the active device and buffered, shut updates off */
-	if (xd == GA_xd) GA_xd = NULL;
+	if (xd == GA_xd) GA_xd = nullptr;
 	deleteGraphMenus(ndevNumber(dd) + 1);
 
     } else if ((xd->kind == PNG) || (xd->kind == JPEG)
@@ -2286,7 +2286,7 @@ static void GA_Close(pDevDesc dd)
        device (but also on the console and others) */
     doevent();
     free(xd);
-    dd->deviceSpecific = NULL;
+    dd->deviceSpecific = nullptr;
 }
 
 	/********************************************************/
@@ -2970,7 +2970,7 @@ static SEXP GA_Cap(pDevDesc dd)
 {
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     SEXP dim, raster = R_NilValue;
-    image img = NULL;
+    image img = nullptr;
     GAbyte *screenData;
 
     /* These in-place conversions are ok */
@@ -3163,8 +3163,8 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
 	}
     }
 
-    dd->onExit = NULL;
-    xd->cntxt = NULL;
+    dd->onExit = nullptr;
+    xd->cntxt = nullptr;
 
     RCNTXT::endcontext(cntxt);
     donelocator((void *)xd);
@@ -3267,7 +3267,7 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
     ps = pointsize;
     if (ps < 1) ps = 12;
     /* Ensures a font is selected at first use */
-    xd->font = NULL;
+    xd->font = nullptr;
     xd->fontface = -1;
     xd->fontsize = -1;
     xd->fontangle = 0.0;
@@ -3277,8 +3277,8 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->startps = ps;
     dd->startlty = LTY_SOLID;
     dd->startgamma = gamma;
-    xd->bm = NULL;
-    xd->bm2 = NULL;
+    xd->bm = nullptr;
+    xd->bm2 = nullptr;
     xd->have_alpha = FALSE; /* selectively overridden in GA_Open */
     xd->warn_trans = FALSE;
     strncpy(xd->title, title, 101);
@@ -3319,12 +3319,12 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->locator = GA_Locator;
     dd->mode = GA_Mode;
     dd->metricInfo = GA_MetricInfo;
-    dd->newFrameConfirm = clickToConfirm ? GA_NewFrameConfirm : NULL;
+    dd->newFrameConfirm = clickToConfirm ? GA_NewFrameConfirm : nullptr;
     dd->hasTextUTF8 = TRUE;
     dd->strWidthUTF8 = GA_StrWidth_UTF8;
     dd->textUTF8 = GA_Text_UTF8;
     dd->useRotatedTextInContour = TRUE;
-    xd->cntxt = NULL;
+    xd->cntxt = nullptr;
     dd->holdflush = GA_holdflush;
     xd->holdlevel = 0;
 
@@ -3362,8 +3362,8 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->clipBottom = dd->bottom; dd->clipTop = dd->top;
 
     if (resize == 3) { /* might have got a shrunken window */
-	int iw = width/pixelWidth(NULL) + 0.5,
-	    ih = height/pixelHeight(NULL) + 0.5;
+	int iw = width/pixelWidth(nullptr) + 0.5,
+	    ih = height/pixelHeight(nullptr) + 0.5;
 	xd->origWidth = dd->right = iw;
 	xd->origHeight = dd->bottom = ih;
     }
@@ -3533,7 +3533,7 @@ static void SaveAsBitmap(pDevDesc dd, int res)
 	if(xd->fp) fclose(xd->fp);
     }
     gsetcliprect(xd->gawin, r);
-    xd->fp = NULL;
+    xd->fp = nullptr;
 }
 
 /* These are the menu item versions */
@@ -3544,7 +3544,7 @@ static void SaveAsPng(pDevDesc dd, const char *fn)
     unsigned char *data;
     gadesc *xd = (gadesc *) dd->deviceSpecific;
 
-    if ((fp = R_fopen(fn, "wb")) == NULL) {
+    if ((fp = R_fopen(fn, "wb")) == nullptr) {
 	char msg[MAX_PATH+32];
 
 	strcpy(msg, "Impossible to open ");
@@ -3573,7 +3573,7 @@ static void SaveAsJpeg(pDevDesc dd, int quality, const char *fn)
     unsigned char *data;
     gadesc *xd = (gadesc *) dd->deviceSpecific;
 
-    if ((fp = R_fopen(fn,"wb")) == NULL) {
+    if ((fp = R_fopen(fn,"wb")) == nullptr) {
 	char msg[MAX_PATH+32];
 	strcpy(msg, "Impossible to open ");
 	strncat(msg, fn, MAX_PATH);
@@ -3602,7 +3602,7 @@ static void SaveAsBmp(pDevDesc dd, const char *fn)
     unsigned char *data;
     gadesc *xd = (gadesc *) dd->deviceSpecific;
 
-    if ((fp = R_fopen(fn, "wb")) == NULL) {
+    if ((fp = R_fopen(fn, "wb")) == nullptr) {
 	char msg[MAX_PATH+32];
 
 	strcpy(msg, _("Impossible to open "));
@@ -3740,7 +3740,7 @@ SEXP devga(SEXP args)
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {
 	pDevDesc dev;
-	char type[100], *file = NULL, fn[MAX_PATH];
+	char type[100], *file = nullptr, fn[MAX_PATH];
 	strcpy(type, "windows");
 	if (display[0]) {
 	    strncpy(type, display, 100 - 1);
@@ -3778,7 +3778,7 @@ static void GA_onExit(pDevDesc dd)
 {
     gadesc *xd = (gadesc *) dd->deviceSpecific;
 
-    dd->onExit = NULL;
+    dd->onExit = nullptr;
     xd->confirmation = FALSE;
     dd->gettingEvent = FALSE;
 
@@ -3807,7 +3807,7 @@ static Rboolean GA_NewFrameConfirm(pDevDesc dev)
     show(xd->gawin);
     addto(xd->gawin);
     gchangemenubar(xd->mbarconfirm);
-    gchangepopup(xd->gawin, NULL);
+    gchangepopup(xd->gawin, nullptr);
     setstatus(msg);
     R_WriteConsole(msg, strlen(msg));
     R_WriteConsole("\n", 1);
@@ -3833,7 +3833,7 @@ static void GA_eventHelper(pDevDesc dd, int code)
     	show(xd->gawin);
     	addto(xd->gawin);
     	gchangemenubar(xd->mbar);
-    	gchangepopup(xd->gawin, NULL);
+    	gchangepopup(xd->gawin, nullptr);
     	if (isEnvironment(dd->eventEnv)) {
     	    SEXP prompt = findVar(install("prompt"), dd->eventEnv);
     	    if (isString(prompt) && length(prompt) == 1) {
@@ -3860,11 +3860,11 @@ static int RcairoAlreadyLoaded = 0;
 static HINSTANCE hRcairoDll;
 
 typedef SEXP (*R_cairoVersion_t)(void);
-static R_cairoVersion_t R_cairoVersion = NULL;
+static R_cairoVersion_t R_cairoVersion = nullptr;
 typedef SEXP (*R_pangoVersion_t)(void);
-static R_pangoVersion_t R_pangoVersion = NULL;
+static R_pangoVersion_t R_pangoVersion = nullptr;
 typedef SEXP (*R_cairoFT_t)(void);
-static R_cairoFT_t R_cairoFT = NULL;
+static R_cairoFT_t R_cairoFT = nullptr;
 
 static int Load_Rcairo_Dll()
 {
@@ -3874,10 +3874,10 @@ static int Load_Rcairo_Dll()
 	strcat(szFullPath, "/library/grDevices/libs/");
 	strcat(szFullPath, R_ARCH);
 	strcat(szFullPath, "/winCairo.dll");
-	if (((hRcairoDll = LoadLibrary(szFullPath)) != NULL) &&
+	if (((hRcairoDll = LoadLibrary(szFullPath)) != nullptr) &&
 	    ((R_devCairo =
 	      (R_SaveAsBitmap)GetProcAddress(hRcairoDll, "in_Cairo"))
-	     != NULL)) {
+	     != nullptr)) {
 	    R_cairoVersion = (R_cairoVersion_t)
 		GetProcAddress(hRcairoDll, "in_CairoVersion");
 	    R_pangoVersion = (R_pangoVersion_t)
@@ -3886,7 +3886,7 @@ static int Load_Rcairo_Dll()
 		GetProcAddress(hRcairoDll, "in_CairoFT");
 	    RcairoAlreadyLoaded = 1;
 	} else {
-	    if (hRcairoDll != NULL) FreeLibrary(hRcairoDll);
+	    if (hRcairoDll != nullptr) FreeLibrary(hRcairoDll);
 	    RcairoAlreadyLoaded = -1;
 	    char buf[1000];
 	    snprintf(buf, 1000, "Unable to load '%s'", szFullPath);
@@ -3909,19 +3909,19 @@ SEXP devCairo(SEXP args)
 
 SEXP cairoVersion(void)
 {
-    if (!Load_Rcairo_Dll() || R_cairoVersion == NULL) return mkString("");
+    if (!Load_Rcairo_Dll() || R_cairoVersion == nullptr) return mkString("");
     else return (R_cairoVersion)();
 }
 
 SEXP pangoVersion(void)
 {
-    if (!Load_Rcairo_Dll() || R_cairoVersion == NULL) return mkString("");
+    if (!Load_Rcairo_Dll() || R_cairoVersion == nullptr) return mkString("");
     else return (R_pangoVersion)();
 }
 
 SEXP cairoFT(void)
 {
-    if (!Load_Rcairo_Dll() || R_cairoVersion == NULL) return mkString("");
+    if (!Load_Rcairo_Dll() || R_cairoVersion == nullptr) return mkString("");
     else return (R_cairoFT)();
 }
 

@@ -60,7 +60,7 @@ static void TclHandler(void)
     if (!R_isForkedChild && !Tcl_lock 
 	&& Tcl_GetServiceMode() != TCL_SERVICE_NONE) {
 	Tcl_lock = 1;
-	(void) R_ToplevelExec(TclSpinLoop, NULL);
+	(void) R_ToplevelExec(TclSpinLoop, nullptr);
 	Tcl_lock = 0;
     }
     OldHandler();
@@ -107,7 +107,7 @@ static void RTcl_eventProc(RTcl_Event *evPtr, int flags)
 {
     fd_set *readMask = R_checkActivity(0 /*usec*/, 1 /*ignore_stdin*/);
 
-    if (readMask==NULL)
+    if (readMask==nullptr)
 	return;
 
     R_runHandlers(R_InputHandlers, readMask);
@@ -116,7 +116,7 @@ static void RTcl_checkProc(ClientData clientData, int flags)
 {
     fd_set *readMask = R_checkActivity(0 /*usec*/, 1 /*ignore_stdin*/);
     RTcl_Event * evPtr;
-    if (readMask == NULL)
+    if (readMask == nullptr)
 	return;
 
     evPtr = (RTcl_Event*) Tcl_Alloc(sizeof(RTcl_Event));
@@ -162,7 +162,7 @@ static int RTcl_ReadConsole (const char *prompt, unsigned char *buf, size_t len,
 	    Tcl_DString buf_utf8_ds;
 	    Tcl_DStringInit(&buf_utf8_ds);
 	    buf_utf8 =
-		    Tcl_UtfToExternalDString(NULL,
+		    Tcl_UtfToExternalDString(nullptr,
 		    			     Tcl_GetStringResult(RTcl_interp),
 					     len,
 					     &buf_utf8_ds);
@@ -188,7 +188,7 @@ static void RTcl_WriteConsole (const char *buf, int len)
     Tcl_DString  buf_utf8_ds;
 
     Tcl_DStringInit(&buf_utf8_ds);
-    buf_utf8 = Tcl_ExternalToUtfDString(NULL, buf, -1, &buf_utf8_ds);
+    buf_utf8 = Tcl_ExternalToUtfDString(nullptr, buf, -1, &buf_utf8_ds);
 
     /* Construct command */
     cmd[0] = Tcl_NewStringObj("Rc_write", -1);
@@ -227,6 +227,6 @@ void RTcl_ActivateConsole(void)
     ptr_R_ResetConsole = RTcl_ResetConsole;
     ptr_R_FlushConsole = RTcl_FlushConsole;
     ptr_R_ClearerrConsole = RTcl_ClearerrConsole;
-    R_Consolefile = NULL;
-    R_Outputfile = NULL;
+    R_Consolefile = nullptr;
+    R_Outputfile = nullptr;
 }

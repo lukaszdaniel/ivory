@@ -69,10 +69,10 @@ static GESystemDesc* registeredSystems[MAX_GRAPHICS_SYSTEMS];
  */
 
 static void unregisterOne(pGEDevDesc dd, int systemNumber) {
-    if (dd->gesd[systemNumber] != NULL) {
+    if (dd->gesd[systemNumber] != nullptr) {
 	(dd->gesd[systemNumber]->callback)(GE_FinaliseState, dd, R_NilValue);
 	free(dd->gesd[systemNumber]);
-	dd->gesd[systemNumber] = NULL;
+	dd->gesd[systemNumber] = nullptr;
     }
 }
 
@@ -82,10 +82,10 @@ static void unregisterOne(pGEDevDesc dd, int systemNumber) {
 void GEdestroyDevDesc(pGEDevDesc dd)
 {
     int i;
-    if (dd != NULL) {
+    if (dd != nullptr) {
 	for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) unregisterOne(dd, i);
 	free(dd->dev);
-	dd->dev = NULL;
+	dd->dev = nullptr;
 	free(dd);
     }
 }
@@ -114,7 +114,7 @@ static void registerOne(pGEDevDesc dd, int systemNumber, GEcallback cb) {
     SEXP result;
     dd->gesd[systemNumber] =
 	(GESystemDesc*) calloc(1, sizeof(GESystemDesc));
-    if (dd->gesd[systemNumber] == NULL)
+    if (dd->gesd[systemNumber] == nullptr)
 	error(_("unable to allocate memory (in 'GEregister()' function)"));
     result = cb(GE_InitState, dd, R_NilValue);
     if (isNull(result)) {
@@ -136,7 +136,7 @@ void GEregisterWithDevice(pGEDevDesc dd) {
 	/* If a graphics system has unregistered, there might be
 	 * "holes" in the array of registeredSystems.
 	 */
-	if (registeredSystems[i] != NULL)
+	if (registeredSystems[i] != nullptr)
 	    registerOne(dd, i, registeredSystems[i]->callback);
 }
 
@@ -164,7 +164,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
      * from zero and look for the first NULL 
      */
     *systemRegisterIndex = 0;
-    while (registeredSystems[*systemRegisterIndex] != NULL) {
+    while (registeredSystems[*systemRegisterIndex] != nullptr) {
         (*systemRegisterIndex)++;
     }
     /* Run through the existing devices and add the new information
@@ -183,7 +183,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
      */
     registeredSystems[*systemRegisterIndex] =
 	(GESystemDesc*) calloc(1, sizeof(GESystemDesc));
-    if (registeredSystems[*systemRegisterIndex] == NULL)
+    if (registeredSystems[*systemRegisterIndex] == nullptr)
 	error(_("unable to allocate memory (in 'GEregister()' function)"));
     registeredSystems[*systemRegisterIndex]->callback = cb;
     numGraphicsSystems += 1;
@@ -227,9 +227,9 @@ void GEunregisterSystem(int registerIndex)
      * NOTE that there is no systemSpecific information stored
      * in the global record -- just the system callback pointer.
      */
-    if (registeredSystems[registerIndex] != NULL) {
+    if (registeredSystems[registerIndex] != nullptr) {
 	free(registeredSystems[registerIndex]);
-	registeredSystems[registerIndex] = NULL;
+	registeredSystems[registerIndex] = nullptr;
     }
     numGraphicsSystems -= 1;
 }
@@ -250,7 +250,7 @@ SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
     int i;
     pGEDevDesc gdd = desc2GEDesc(dev);
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (registeredSystems[i] != NULL)
+	if (registeredSystems[i] != nullptr)
 	    (registeredSystems[i]->callback)(event, gdd, data);
     return R_NilValue;
 }
@@ -430,7 +430,7 @@ static LineEND lineend[] = {
     { "round",   GE_ROUND_CAP  },
     { "butt",	 GE_BUTT_CAP   },
     { "square",	 GE_SQUARE_CAP },
-    { NULL,	 (R_GE_lineend) 0 }
+    { nullptr,	 (R_GE_lineend) 0 }
 };
 
 static int nlineend = (int) ((sizeof(lineend) / sizeof(LineEND)) - 2);
@@ -495,7 +495,7 @@ static LineJOIN linejoin[] = {
     { "round",   GE_ROUND_JOIN },
     { "mitre",	 GE_MITRE_JOIN },
     { "bevel",	 GE_BEVEL_JOIN},
-    { NULL,	 (R_GE_linejoin) 0 }
+    { nullptr,	 (R_GE_linejoin) 0 }
 };
 
 static int nlinejoin = (int) ((sizeof(linejoin) / sizeof(LineJOIN)) - 2);
@@ -816,7 +816,7 @@ static void CScliplines(int n, double *x, double *y,
 
     xx = (double *) R_alloc(n, sizeof(double));
     yy = (double *) R_alloc(n, sizeof(double));
-    if (xx == NULL || yy == NULL)
+    if (xx == nullptr || yy == nullptr)
 	error(_("out of memory while clipping polyline"));
 
     xx[0] = x1 = x[0];
@@ -1126,7 +1126,7 @@ static void reorderVertices(int n, double *x, double *y, pGEDevDesc dd)
 static void clipPolygon(int n, double *x, double *y,
 			const pGEcontext gc, int toDevice, pGEDevDesc dd)
 {
-    double *xc = NULL, *yc = NULL;
+    double *xc = nullptr, *yc = nullptr;
     const void *vmax = vmaxget();
 
     /* if bg not specified AND need to clip AND device cannot clip
@@ -1186,7 +1186,7 @@ static void clipPolygon(int n, double *x, double *y,
             if (mustClip(xmin, xmax, ymin, ymax, toDevice, dd)) {
                 /* Draw fill */
                 int npts;
-                double *xc2 = NULL, *yc2 = NULL;
+                double *xc2 = nullptr, *yc2 = nullptr;
                 int origCol = gc->col;
                 gc->col = R_TRANWHITE;
                 npts = clipPoly(x, y, n, 0, toDevice, xc2, yc2, dd);
@@ -1710,7 +1710,7 @@ static VFontTab
       HersheySansSymbol-Oblique
     */
 
-        {NULL, 0, 0},
+        {nullptr, 0, 0},
 };
 
 /* A Hershey family (all of which have names starting with Hershey) may
@@ -1810,7 +1810,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	/* PR#7397: this seemed to reset R_Visible */
 	bool savevis = R_Visible;
 	int noMetricInfo = -1;
-	char *sbuf = NULL;
+	char *sbuf = nullptr;
 	if(str && *str) {
 	    const char *s;
 	    char *sb;
@@ -2543,7 +2543,7 @@ void GEMetricInfo(int c, const pGEcontext gc,
            So, ALSO compare dd->dev->close function pointer
            which really should be different for different devices.
 	*/
-	static pGEDevDesc last_dd= NULL;
+	static pGEDevDesc last_dd= nullptr;
 #if R_USE_PROTOTYPES
         static void (*last_close)(pDevDesc dd);
 #else
@@ -2588,7 +2588,7 @@ double GEStrWidth(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDesc
 	return R_GE_VStrWidth(str, enc, gc, dd);
     } else {
 	double w;
-	char *sbuf = NULL;
+	char *sbuf = nullptr;
 	w = 0;
 	if(str && *str) {
 	    const char *s;
@@ -2909,7 +2909,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
     int i;
     Rboolean result = TRUE;
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-        if (dd->gesd[i] != NULL)
+        if (dd->gesd[i] != nullptr)
             if (!LOGICAL((dd->gesd[i]->callback)(GE_CheckPlot, dd,
                                                  R_NilValue))[0])
                 result = FALSE;
@@ -2966,7 +2966,7 @@ void GEinitDisplayList(pGEDevDesc dd)
      * replaying the display list
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-        if (dd->gesd[i] != NULL)
+        if (dd->gesd[i] != nullptr)
             (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
     dd->displayList = dd->DLlastElt = R_NilValue;
 }
@@ -3001,7 +3001,7 @@ void GEplayDisplayList(pGEDevDesc dd)
      * replaying the display list
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL)
+	if (dd->gesd[i] != nullptr)
 	    (dd->gesd[i]->callback)(GE_RestoreState, dd, theList);
     /* Play the display list
      */
@@ -3057,7 +3057,7 @@ void GEcopyDisplayList(int fromDevice)
      * information from the "from" device to the current device
      */
     for (i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL)
+	if (dd->gesd[i] != nullptr)
 	    (dd->gesd[i]->callback)(GE_CopyState, gd, R_NilValue);
     GEplayDisplayList(dd);
     if (!dd->displayListOn) GEinitDisplayList(dd);
@@ -3099,7 +3099,7 @@ SEXP GEcreateSnapshot(pGEDevDesc dd)
      * and store that in the snapshot.
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL) {
+	if (dd->gesd[i] != nullptr) {
 	    PROTECT(state = (dd->gesd[i]->callback)(GE_SaveSnapshotState, dd,
 						    R_NilValue));
 	    SET_VECTOR_ELT(snapshot, i + 1, state);
@@ -3153,7 +3153,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
      * should protect themselves from that situation.
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != NULL)
+	if (dd->gesd[i] != nullptr)
 	    (dd->gesd[i]->callback)(GE_RestoreSnapshotState, dd, snapshot);
     /* Turn graphics engine recording on.
      * This is in case of failure during replay, which generates a new
@@ -3319,7 +3319,7 @@ void GEonExit()
 int GEstring_to_pch(SEXP pch)
 {
     int ipch = NA_INTEGER;
-    static SEXP last_pch = NULL;
+    static SEXP last_pch = nullptr;
     static int last_ipch = 0;
 
     if (pch == NA_STRING) return NA_INTEGER;
@@ -3382,7 +3382,7 @@ static LineTYPE linetype[] = {
     {"dotdash", LTY_DOTDASH},   /* 4 */
     {"longdash", LTY_LONGDASH}, /* 5 */
     {"twodash", LTY_TWODASH},   /* 6 */
-    {NULL, 0},
+    {nullptr, 0},
 };
 
 /* Duplicated from graphics.cpp */

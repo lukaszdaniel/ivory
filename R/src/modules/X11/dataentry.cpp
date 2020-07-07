@@ -81,7 +81,7 @@ enum CellType {UNKNOWNN, NUMERIC, CHARACTER};
 SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho);
 
 /* Global variables needed for the graphics */
-static Display *iodisplay = NULL;
+static Display *iodisplay = nullptr;
 static XContext deContext;
 static int nView = 0; /* number of open data windows */
 static int fdView = -1;
@@ -193,7 +193,7 @@ static char copycontents[sizeof(buf) + 1];
 
 /* The next few and used only for the editor in MBCS locales */
 static Status status;
-static XFontSet font_set = NULL;
+static XFontSet font_set = nullptr;
 static XFontStruct **fs_list;
 static int font_set_cnt;
 static const char fontset_name[] = "-*-fixed-medium-r-*-*-*-120-*-*-*-*-*-*";
@@ -212,15 +212,15 @@ static XIMStyle preedit_styles[] = {
 	XIMPreeditArea,
 	XIMPreeditNothing,
 	XIMPreeditNone,
-	(XIMStyle)NULL,
+	(XIMStyle)nullptr,
 };
 static XIMStyle status_styles[] = {
 	XIMStatusArea,
 	XIMStatusNothing,
 	XIMStatusNone,
-	(XIMStyle)NULL,
+	(XIMStyle)nullptr,
 };
-static XIC ioic = NULL;
+static XIC ioic = nullptr;
 
 #define BOXW(x) (min(((x < 100 && DE->nboxchars == 0) ? DE->boxw[x] : DE->box_w), DE->fullwindowWidth - DE->boxw[0] - 2 * DE->bwidth - 2))
 
@@ -395,10 +395,10 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	if(font_set) {
 	    XFreeFontSet(iodisplay, font_set);
-	    font_set = NULL;
+	    font_set = nullptr;
 	}
 	XCloseDisplay(iodisplay);
-	iodisplay = NULL;
+	iodisplay = nullptr;
     }
 
     /* drop out unused columns */
@@ -1202,14 +1202,14 @@ static void printstring(DEstruct DE, const char *ibuf, int buflen, int row,
     pbuf[bufw] = '\0';
 
     p = pbuf;
-    wcsbufw = (int) mbsrtowcs(wcspbuf, (const char **)&p, bufw, NULL);
+    wcsbufw = (int) mbsrtowcs(wcspbuf, (const char **)&p, bufw, nullptr);
     wcspbuf[wcsbufw]=L'\0';
     if(left) {
 	for (i = wcsbufw; i > 1; i--) {
 	    for(j=0;*(wcspc+j)!=L'\0';j++)wcs[j]=*(wcspc+j);
 	    wcs[j]=L'\0';
 	    w_p=wcs;
-	    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,NULL);
+	    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,nullptr);
 	    s[cnt]='\0';
 	    if (textwidth(DE, s, (int) strlen(s)) < (bw - DE->text_offset)) break;
 	    *(++wcspc) = L'<';
@@ -1219,7 +1219,7 @@ static void printstring(DEstruct DE, const char *ibuf, int buflen, int row,
 	    for(j=0;*(wcspc+j)!=L'\0';j++)wcs[j]=*(wcspc+j);
 	    wcs[j]=L'\0';
 	    w_p=wcs;
-	    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,NULL);
+	    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,nullptr);
 	    s[cnt]='\0';
 	    if (textwidth(DE, s, (int) strlen(s)) < (bw - DE->text_offset)) break;
 	    *(wcspbuf + i - 2) = L'>';
@@ -1229,7 +1229,7 @@ static void printstring(DEstruct DE, const char *ibuf, int buflen, int row,
     for(j=0;*(wcspc+j)!=L'\0';j++) wcs[j]=*(wcspc+j);
     wcs[j]=L'\0';
     w_p=wcs;
-    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,NULL);
+    cnt = (int) wcsrtombs(s,(const wchar_t **)&w_p,sizeof(s)-1,nullptr);
 
     drawtext(DE, x_pos + DE->text_offset, y_pos + DE->box_h - DE->text_offset,
 	     s, cnt);
@@ -1302,7 +1302,7 @@ static void handlechar(DEstruct DE, const char *text)
 
     if (currentexp == 1) {	/* we are parsing a number */
 	const char *mbs = text;
-	int i, cnt = (int)mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
+	int i, cnt = (int)mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, nullptr);
 
 	for(i = 0; i < cnt; i++) {
 	    switch (wcs[i]) {
@@ -1332,7 +1332,7 @@ static void handlechar(DEstruct DE, const char *text)
     }
     if (currentexp == 3) {
 	const char *mbs = text;
-	int i, cnt = (int) mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
+	int i, cnt = (int) mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, nullptr);
 	for(i = 0; i < cnt; i++) {
 	    if (iswspace(wcs[i])) goto donehc;
 	    if (clength == 0 && wcs[i] != L'.' && !iswalpha(wcs[i]))
@@ -1556,7 +1556,7 @@ static void eventloop(DEstruct DE)
 static void R_ProcessX11Events(void *data)
 {
     caddr_t temp;
-    DEstruct DE = NULL;
+    DEstruct DE = nullptr;
     DEEvent ioevent;
     int done = 0;
 
@@ -1607,10 +1607,10 @@ static void R_ProcessX11Events(void *data)
 	    fdView = -1;
 	    if(font_set) {
 		XFreeFontSet(iodisplay, font_set);
-		font_set = NULL;
+		font_set = nullptr;
 	    }
 	    XCloseDisplay(iodisplay);
-	    iodisplay = NULL;
+	    iodisplay = nullptr;
 	}
 
     }
@@ -1677,7 +1677,7 @@ static void doSpreadKey(DEstruct DE, int key, DEEvent * event)
     else if (DE->isEditor && (iokey == XK_BackSpace || iokey == XK_Delete)) {
 	if (clength > 0) {
 	    int last_w ;
-	    last_w = last_wchar_bytes(NULL);
+	    last_w = last_wchar_bytes(nullptr);
 	    clength -= last_w;
 	    bufp -= last_w;
 	    *bufp = '\0';
@@ -1728,7 +1728,7 @@ static KeySym GetKey(DEEvent * event)
     char text[1];
     KeySym iokey;
 
-    XLookupString((XKeyEvent *)event, text, 1, &iokey, NULL);
+    XLookupString((XKeyEvent *)event, text, 1, &iokey, nullptr);
     return iokey;
 }
 
@@ -1756,7 +1756,7 @@ static char *GetCharP(DEEvent * event)
     } else
 	XLookupString((XKeyEvent *)event,
 		      text, sizeof(text) - clength,
-		      &iokey, NULL);
+		      &iokey, nullptr);
     return text;
 }
 
@@ -1777,7 +1777,7 @@ static void doControl(DEstruct DE, DEEvent *event)
     KeySym iokey;
 
     (*event).xkey.state = 0;
-    XLookupString((XKeyEvent *)event, text, 1, &iokey, NULL);
+    XLookupString((XKeyEvent *)event, text, 1, &iokey, nullptr);
     /* one row overlap when scrolling: top line <--> bottom line */
     switch (text[0]) {
 	case 'b':
@@ -1854,7 +1854,7 @@ typedef struct gx_device_X_s {
 static XtResource x_resources[] = {
     rpix(XtNforeground, XtCForeground, foreground, "XtDefaultForeground"),
     rpix(XtNbackground, XtCBackground, background, "XtDefaultBackground"),
-    rstr(XtNgeometry, XtCGeometry, geometry, NULL),
+    rstr(XtNgeometry, XtCGeometry, geometry, nullptr),
 };
 
 static const int x_resource_count = XtNumber(x_resources);
@@ -1905,7 +1905,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     if (!XSetLocaleModifiers ("")) warning(_("X cannot set locale modifiers"));
 
     if(!iodisplay) {
-	if ((iodisplay = XOpenDisplay(NULL)) == NULL) {
+	if ((iodisplay = XOpenDisplay(nullptr)) == nullptr) {
 	    warning(_("unable to open display"));
 	    return Rboolean(TRUE);
 	}
@@ -1930,19 +1930,19 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	    sprintf(opt_fontset_name, s, "medium", "r", 12);
 	} else strcpy(opt_fontset_name, fontset_name);
 
-	if(font_set == NULL) {
+	if(font_set == nullptr) {
 	    font_set = XCreateFontSet(iodisplay, opt_fontset_name,
 				      &missing_charset_list,
 				      &missing_charset_count, &def_string);
 	    if (missing_charset_count) XFreeStringList(missing_charset_list);
 	}
-	if (font_set == NULL) {
+	if (font_set == nullptr) {
 	    warning(_("unable to create fontset %s"), opt_fontset_name);
 	    return Rboolean(TRUE); /* ERROR */
 	}
     } else {
 	DE->font_info = XLoadQueryFont(iodisplay, font_name);
-	if (DE->font_info == NULL) {
+	if (DE->font_info == nullptr) {
 	    warning(_("unable to load font %s"), font_name);
 	    return Rboolean(TRUE); /* ERROR */
 	}
@@ -2023,19 +2023,19 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	XtToolkitInitialize();
 	app_con = XtCreateApplicationContext();
 	/* XtAppSetFallbackResources(app_con, x_fallback_resources);*/
-	xtdpy = XtOpenDisplay(app_con, NULL, "r_dataentry", "R_dataentry",
-			      NULL, 0, &zero, NULL);
-	toplevel = XtAppCreateShell(NULL, "R_dataentry",
+	xtdpy = XtOpenDisplay(app_con, nullptr, "r_dataentry", "R_dataentry",
+			      nullptr, 0, &zero, nullptr);
+	toplevel = XtAppCreateShell(nullptr, "R_dataentry",
 				    applicationShellWidgetClass,
-				    xtdpy, NULL, 0);
+				    xtdpy, nullptr, 0);
 	XtGetApplicationResources(toplevel, (XtPointer) &xdev,
 				  x_resources,
 				  x_resource_count,
-				  NULL, 0);
+				  nullptr, 0);
 	XtDestroyWidget(toplevel);
 	XtCloseDisplay(xtdpy);
 	XtDestroyApplicationContext(app_con);
-	if (xdev.geometry != NULL) {
+	if (xdev.geometry != nullptr) {
 	    char gstr[40];
 	    int bitmask;
 
@@ -2074,7 +2074,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 
     /*
     XSetStandardProperties(iodisplay, DE->iowindow, ioname, ioname, None,
-			   (char **)NULL, 0, iohint);
+			   (char **)nullptr, 0, iohint);
     */
     XSetWMNormalHints(iodisplay, DE->iowindow, hint);
     XFree(hint);
@@ -2098,7 +2098,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     DE->iogc = XCreateGC(iodisplay, DE->iowindow, 0, 0);
 
     if(mbcslocale && DE->isEditor) {
-	ioim = XOpenIM(iodisplay, NULL, NULL, NULL);
+	ioim = XOpenIM(iodisplay, nullptr, nullptr, nullptr);
 	if(!ioim) {
 	    XDestroyWindow(iodisplay, DE->iowindow);
 	    XCloseDisplay(iodisplay);
@@ -2107,7 +2107,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	}
 
 	/* search supported input style */
-	XGetIMValues(ioim, XNQueryInputStyle, &ioim_styles,NULL);
+	XGetIMValues(ioim, XNQueryInputStyle, &ioim_styles,nullptr);
 	for(i = 0; i < ioim_styles->count_styles; i++) {
 	    for(j = 0; preedit_styles[j]; j++){
 		for(k = 0; status_styles[k]; k++){
@@ -2123,7 +2123,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	/* create input context */
 	xpoint.x = 0; xpoint.y=0;
 	xva_nlist = XVaCreateNestedList(0, XNFontSet, font_set,
-					XNSpotLocation, &xpoint, NULL);
+					XNSpotLocation, &xpoint, nullptr);
 
 	ioic = XCreateIC(ioim,
 			 XNInputStyle, ioim_style,
@@ -2131,7 +2131,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 			 XNFocusWindow,DE->iowindow,
 			 XNPreeditAttributes, xva_nlist,
 			 XNStatusAttributes, xva_nlist,
-			 NULL);
+			 nullptr);
 	XFree(xva_nlist);
 	if(!ioic) {
 	    XCloseIM(ioim);
@@ -2142,7 +2142,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	}
 
 	/* get XIM processes event. */
-	XGetICValues(ioic, XNFilterEvents, &fevent, NULL);
+	XGetICValues(ioic, XNFilterEvents, &fevent, nullptr);
     }
 
     if(!mbcslocale)
@@ -2579,8 +2579,8 @@ static void calc_pre_edit_pos(DEstruct DE)
     xva_nlist = XVaCreateNestedList(0,
 				    XNSpotLocation, &xpoint,
 				    XNFontSet, font_set,
-				    NULL);
-    XSetICValues(ioic, XNPreeditAttributes, xva_nlist, NULL);
+				    nullptr);
+    XSetICValues(ioic, XNPreeditAttributes, xva_nlist, nullptr);
 
     XFree(xva_nlist);
     return;
@@ -2596,7 +2596,7 @@ static int last_wchar_bytes(char *str)
     char *mbs;
     size_t bytes;
 
-    mbs = (str == NULL) ? buf : str;
+    mbs = (str == nullptr) ? buf : str;
 
     memset(wcs, 0 ,sizeof(wcs));
     memset(&mb_st,0, sizeof(mbstate_t));

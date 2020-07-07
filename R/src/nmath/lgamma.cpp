@@ -62,13 +62,13 @@ constexpr double xmax = 2.5327372760800758e+305;
 constexpr double dxrel = 1.490116119384765625e-8;
 #endif
 
-    if (sgn != NULL) *sgn = 1;
+    if (sgn != nullptr) *sgn = 1;
 
 #ifdef IEEE_754
     if(ISNAN(x)) return x;
 #endif
 
-    if (sgn != NULL && x < 0 && fmod(floor(-x), 2.) == 0)
+    if (sgn != nullptr && x < 0 && fmod(floor(-x), 2.) == 0)
 	*sgn = -1;
 
     if (x <= 0 && x == trunc(x)) { /* Negative integer argument */
@@ -122,5 +122,5 @@ constexpr double dxrel = 1.490116119384765625e-8;
 
 double Rf_lgammafn(double x)
 {
-    return Rf_lgammafn_sign(x, NULL);
+    return Rf_lgammafn_sign(x, nullptr);
 }

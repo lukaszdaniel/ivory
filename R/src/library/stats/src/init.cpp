@@ -40,7 +40,7 @@ static const R_CMethodDef CEntries[]  = {
     C_DEF(kmeans_Lloyd, 9),
     C_DEF(kmeans_MacQueen, 9),
     C_DEF(rcont2,  8),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -248,7 +248,7 @@ static const R_CallMethodDef CallEntries[] = {
 
     CALLDEF_DO(rmultinom, 3),
 
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define FDEF(name)  {#name, (DL_FUNC) &F77_NAME(name), sizeof(name ## _t)/sizeof(name ## _t[0]), name ##_t}
@@ -275,7 +275,7 @@ static const R_FortranMethodDef FortEntries[] = {
     {"kmns",   (DL_FUNC) &F77_NAME(kmns),   17},
     {"eureka", (DL_FUNC) &F77_NAME(eureka),  6},
     {"stl",    (DL_FUNC) &F77_NAME(stl),    18},
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -297,7 +297,7 @@ static const R_ExternalMethodDef ExtEntries[] = {
 
     {"signrank_free", (DL_FUNC) &stats_signrank_free, 0},
     {"wilcox_free", (DL_FUNC) &stats_wilcox_free, 0},
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"

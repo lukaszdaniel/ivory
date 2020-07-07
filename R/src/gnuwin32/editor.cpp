@@ -48,7 +48,7 @@ void reEnc2(const char *x, char *y, int ny,
 #undef gettext
 #define gettext GA_gettext
 
-#define MCHECK(a) if (!(a)) {del(c); return NULL;}
+#define MCHECK(a) if (!(a)) {del(c); return nullptr;}
 RECT *RgetMDIsize(void);
 
 /* Pointers to currently open editors */
@@ -105,7 +105,7 @@ static void editor_load_file(editor c, const char *name, int enc)
     textbox t = getdata(c);
     EditorData p = getdata(t);
     FILE *f;
-    char *buffer = NULL, tmp[MAX_PATH+50], tname[MAX_PATH+1];
+    char *buffer = nullptr, tmp[MAX_PATH+50], tname[MAX_PATH+1];
     const char *sname;
     long num = 1, bufsize;
 
@@ -119,7 +119,7 @@ static void editor_load_file(editor c, const char *name, int enc)
 	f = R_fopen(name, "r");
 	sname = name;
     }
-    if (f == NULL) {
+    if (f == nullptr) {
 	snprintf(tmp, MAX_PATH+50, 
 		 G_("unable to open file %s for reading"), sname);
 	R_ShowMessage(tmp);
@@ -155,7 +155,7 @@ static void editor_save_file(editor c, const char *name, int enc)
     char buf[MAX_PATH+30], tname[MAX_PATH+1];
     const char *sname;
 
-    if (name == NULL)
+    if (name == nullptr)
 	return;
     else {
 	if(enc == CE_UTF8) {
@@ -168,7 +168,7 @@ static void editor_save_file(editor c, const char *name, int enc)
 	    sname = name;
 	    f = R_fopen(sname, "w");
 	}
-	if (f == NULL) {
+	if (f == nullptr) {
 	    snprintf(buf, MAX_PATH+30, G_("Could not save file '%s'"), sname);
 	    askok(buf);
 	    return;
@@ -237,7 +237,7 @@ static void editorprint(control m)
     textbox t = getdata(m);
     const char *contents = gettext(t);
     char msg[LF_FACESIZE + 128];
-    char *linebuf = NULL;
+    char *linebuf = nullptr;
     int cc, rr, fh, page, linep, i, j, istartline;
     int top, left;
 
@@ -645,7 +645,7 @@ static editor neweditor(void)
     textbox t;
     long flags;
     font editorfn = (consolefn ? consolefn : FixedFont);
-    EditorData p = neweditordata(0, NULL);
+    EditorData p = neweditordata(0, nullptr);
     DWORD rand;
 
     w = (pagercol + 1)*fontwidth(editorfn);
@@ -657,8 +657,8 @@ static editor neweditor(void)
 	h0 = pR->bottom;
     } else {
 #endif
-	w0 = devicewidth(NULL);
-	h0 = deviceheight(NULL);
+	w0 = devicewidth(nullptr);
+	h0 = deviceheight(nullptr);
 #ifdef USE_MDI
     }
 #endif
@@ -675,7 +675,7 @@ static editor neweditor(void)
     if (ismdi()) flags |= Document;
 #endif
     c = (editor) newwindow("", rect(x, y, w, h), flags);
-    t = newrichtextarea(NULL, rect(0, 0, w, h));
+    t = newrichtextarea(nullptr, rect(0, 0, w, h));
     setdata(c, t);
     setdata(t, p);
 
@@ -737,16 +737,16 @@ static editor neweditor(void)
     setdata(m, c);
     MCHECK(m = newmenuitem(G_("Save as..."), 0, menueditorsaveas));
     setdata(m, c);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Print..."), 'P', editorprint));
     setdata(m, t);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Close script"), 0, menueditorclose));
     setdata(m, c);
     MCHECK(newmenu(G_("Edit")));
     MCHECK(m = newmenuitem(G_("Undo"), 'Z', editorundo));
     setdata(m, t);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(p->mcut = newmenuitem(G_("Cut"), 'X', editorcut));
     setdata(p->mcut, t);
     MCHECK(p->mcopy = newmenuitem(G_("Copy"), 'C', editorcopy));
@@ -758,17 +758,17 @@ static editor neweditor(void)
     MCHECK(m = newmenuitem(G_("Select all"), 'A', editorselectall));
     setdata(m, t);
     MCHECK(newmenuitem(G_("Clear console"), 'L', menuclear));
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(m = newmenuitem(G_("Run line or selection"), 'R', menueditorrun));
     setdata(m, t);
     MCHECK(m = newmenuitem(G_("Run all"), 0, editorrunall));
     setdata(m, t);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(p->mfind = newmenuitem(G_("Find..."), 'F', editorfind));
     setdata(p->mfind, t);
     MCHECK(p->mreplace = newmenuitem(G_("Replace..."), 'H', editorreplace));
     setdata(p->mreplace, t);
-    MCHECK(m = newmenuitem("-", 0, NULL));
+    MCHECK(m = newmenuitem("-", 0, nullptr));
     MCHECK(newmenuitem(G_("GUI preferences..."), 0, menuconfig));
 
     /* Packages menu should go here */
@@ -781,7 +781,7 @@ static editor neweditor(void)
 
     MCHECK(m = newmenu(G_("Help")));
     MCHECK(newmenuitem(G_("Editor"), 0, menueditorhelp));
-    MCHECK(newmenuitem("-", 0, NULL));
+    MCHECK(newmenuitem("-", 0, nullptr));
     p->hmenu = (HelpMenuItems) malloc(sizeof(struct structHelpMenuItems));
     RguiCommonHelp(m, p->hmenu);
 

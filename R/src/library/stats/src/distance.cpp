@@ -200,7 +200,7 @@ void R_distance(double *x, int *nr, int *nc, double *d, int *diag,
 {
     int i, j = 0; // suppress clang 9 warning
     size_t  ij;  /* can exceed 2^31 - 1 */
-    double (*distfun)(double*, int, int, int, int) = NULL;
+    double (*distfun)(double*, int, int, int, int) = nullptr;
 #ifdef _OPENMP
     int nthreads;
 #endif

@@ -77,7 +77,7 @@ static void chmod_one(const char *name, const int grpwrt)
 #ifndef _WIN32
 	chmod(name, dirmask);
 #endif
-	if ((dir = opendir(name)) != NULL) {
+	if ((dir = opendir(name)) != nullptr) {
 	    while ((de = readdir(dir))) {
 		if (streql(de->d_name, ".") || streql(de->d_name, ".."))
 		    continue;

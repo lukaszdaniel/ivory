@@ -225,10 +225,10 @@ HIDDEN SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef R_MEMORY_PROFILING
     SEXP object, previous, ans, argList;
     char buffer[21];
-    static SEXP do_retracemem_formals = NULL;
+    static SEXP do_retracemem_formals = nullptr;
     Rboolean visible; 
 
-    if (do_retracemem_formals == NULL)
+    if (do_retracemem_formals == nullptr)
 	do_retracemem_formals = allocFormalsList2(install("x"),
 						  R_PreviousSymbol);
 

@@ -134,12 +134,12 @@ static Rboolean url_open(Rconnection con)
 	UNPROTECT(1); /* utilsNS */
 	PROTECT(sagent);
 	if(TYPEOF(sagent) == NILSXP)
-	    agent = NULL;
+	    agent = nullptr;
 	else
 	    agent = CHAR(STRING_ELT(sagent, 0));
 	ctxt = in_R_HTTPOpen(url, agent, uc->headers, 0);
 	UNPROTECT(2);
-	if(ctxt == NULL) {
+	if(ctxt == nullptr) {
 	  /* if we call error() we get a connection leak*/
 	  /* so do_url has to raise the error*/
 	  /* error("cannot open URL '%s'", url); */
@@ -150,7 +150,7 @@ static Rboolean url_open(Rconnection con)
 	break;
     case FTPsh:
 	ctxt = in_R_FTPOpen(url);
-	if(ctxt == NULL) {
+	if(ctxt == nullptr) {
 	  /* if we call error() we get a connection leak*/
 	  /* so do_url has to raise the error*/
 	  /* error("cannot open URL '%s'", url); */
@@ -260,12 +260,12 @@ static Rboolean url_open2(Rconnection con)
 	agentFun = PROTECT(lang2(s_makeUserAgent, ScalarLogical(0)));
 	sagent = PROTECT(eval(agentFun, R_FindNamespace(mkString("utils"))));
 	if(TYPEOF(sagent) == NILSXP)
-	    agent = NULL;
+	    agent = nullptr;
 	else
 	    agent = CHAR(STRING_ELT(sagent, 0));
 	ctxt = in_R_HTTPOpen2(url, agent, uc->headers, 0);
 	UNPROTECT(2);
-	if(ctxt == NULL) {
+	if(ctxt == nullptr) {
 	  /* if we call error() we get a connection leak*/
 	  /* so do_url has to raise the error*/
 	  /* error("cannot open URL '%s'", url); */
@@ -276,7 +276,7 @@ static Rboolean url_open2(Rconnection con)
 	break;
     case FTPsh:
 	ctxt = in_R_FTPOpen2(url);
-	if(ctxt == NULL) {
+	if(ctxt == nullptr) {
 	  /* if we call error() we get a connection leak*/
 	  /* so do_url has to raise the error*/
 	  /* error("cannot open URL '%s'", url); */
@@ -364,14 +364,14 @@ static Rconnection in_R_newurl(const char *description, const char * const mode,
     if(!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     strcpy(newconn->connclass, "url");
     newconn->description = (char *) malloc(strlen(description) + 1);
     if(!newconn->description) {
 	free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ newconn = NULL;
+        /* for Solaris 12.5 */ newconn = nullptr;
     }
     init_con(newconn, description, CE_NATIVE, mode);
     newconn->canwrite = FALSE;
@@ -395,15 +395,15 @@ static Rconnection in_R_newurl(const char *description, const char * const mode,
     if(!newconn->connprivate) {
 	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
-    uc->headers = NULL;
+    uc->headers = nullptr;
     if(!isNull(headers)) {
 	uc->headers = strdup(CHAR(STRING_ELT(headers, 0)));
 	if(!uc->headers) {
 	    free(newconn->description); free(newconn->connclass); free(newconn->connprivate); free(newconn);
 	    error(_("allocation of url connection failed"));
-	    /* for Solaris 12.5 */ newconn = NULL;
+	    /* for Solaris 12.5 */ newconn = nullptr;
 	}
     }
 
@@ -597,7 +597,7 @@ static SEXP in_do_download(SEXP args)
 	    NULL : CHAR(STRING_ELT(sheaders, 0));
 	ctxt = Ri_HTTPOpen(url, cagent, cheaders, cacheOK);
 	UNPROTECT(2);
-	if(ctxt == NULL) status = 1;
+	if(ctxt == nullptr) status = 1;
 	else {
 //	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
@@ -714,7 +714,7 @@ static SEXP in_do_download(SEXP args)
 	R_FlushConsole();
 #endif
 	ctxt = Ri_FTPOpen(url);
-	if(ctxt == NULL) status = 1;
+	if(ctxt == nullptr) status = 1;
 	else {
 //	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
@@ -820,8 +820,8 @@ void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers, int
     void *ctxt;
     int timeout = asInteger(GetOption1(install("timeout")));
     DLsize_t len = -1;
-    char *type = NULL;
-    char *fullheaders = NULL;
+    char *type = nullptr;
+    char *fullheaders = nullptr;
 
     if(timeout == NA_INTEGER || timeout <= 0) timeout = 60;
 
@@ -839,14 +839,14 @@ void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers, int
     ctxt = RxmlNanoHTTPOpen(url, NULL, fullheaders, cacheOK);
     if (fullheaders) free(fullheaders);
 
-    if(ctxt != NULL) {
+    if(ctxt != nullptr) {
 	int rc = RxmlNanoHTTPReturnCode(ctxt);
 	if(rc != 200) {
 	    // FIXME: should this be ctxt->location, after redirection?
 	    warning(_("cannot open URL '%s': %s status was '%d %s'"),
 		    url, "HTTP", rc, RxmlNanoHTTPStatusMsg(ctxt));
 	    RxmlNanoHTTPClose(ctxt);
-	    return NULL;
+	    return nullptr;
 	} else {
 	    type = RxmlNanoHTTPContentType(ctxt);
 	    len = RxmlNanoHTTPContentLength(ctxt);
@@ -882,7 +882,7 @@ void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers, int
 #endif
 	    }
 	}
-    } else return NULL;
+    } else return nullptr;
     con = (inetconn *) malloc(sizeof(inetconn));
     if(con) {
 	con->length = len;
@@ -916,7 +916,7 @@ static void *in_R_FTPOpen(const char *url)
     if(timeout == NA_INTEGER || timeout <= 0) timeout = 60;
     RxmlNanoFTPTimeout(timeout);
     ctxt = RxmlNanoFTPOpen(url);
-    if(!ctxt) return NULL;
+    if(!ctxt) return nullptr;
     if(!IDquiet) {
 	len = RxmlNanoFTPContentLength(ctxt);
 	if(len >= 0)
@@ -930,7 +930,7 @@ static void *in_R_FTPOpen(const char *url)
     con = (inetconn *) malloc(sizeof(inetconn));
     if(con) {
 	con->length = len;
-	con->type = NULL;
+	con->type = nullptr;
 	con->ctxt = ctxt;
     }
     return con;
@@ -972,13 +972,13 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 
     wictxt = (WIctxt) malloc(sizeof(wIctxt));
     wictxt->length = -1;
-    wictxt->type = NULL;
+    wictxt->type = nullptr;
     wictxt->hand =
 	InternetOpen(agent, INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
     if(!wictxt->hand) {
 	free(wictxt);
 	/* error("cannot open Internet connection"); */
-	return NULL;
+	return nullptr;
     }
 
     // use keep-alive semantics, do not use local WinINet cache.
@@ -998,7 +998,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 		if(*p == '\n' || *p == '\r') *p = '\0'; else break;
 	    }
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return NULL;
+	    return nullptr;
 	} else {
 	    FormatMessage(
 		FORMAT_MESSAGE_FROM_HMODULE,
@@ -1012,7 +1012,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 		if(*p == '\n' || *p == '\r') *p = '\0'; else break;
 	    }
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return NULL;
+	    return nullptr;
 	}
     }
 
@@ -1028,7 +1028,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 	free(wictxt);
 	warning(_("cannot open URL '%s': %s status was '%d %s'"),
 		url, "HTTP", status, buf);
-	return NULL;
+	return nullptr;
     }
 
     HttpQueryInfo(wictxt->session,
@@ -1089,13 +1089,13 @@ static void *in_R_FTPOpen2(const char *url)
 
     wictxt = (WIctxt) malloc(sizeof(wIctxt));
     wictxt->length = -1;
-    wictxt->type = NULL;
+    wictxt->type = nullptr;
 
     wictxt->hand =
 	InternetOpen("R", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
     if(!wictxt->hand) {
 	free(wictxt);
-	return NULL;
+	return nullptr;
     }
 
     DWORD flag = INTERNET_FLAG_KEEP_CONNECTION | INTERNET_FLAG_NO_CACHE_WRITE;
@@ -1111,7 +1111,7 @@ static void *in_R_FTPOpen2(const char *url)
 	if (err1 == ERROR_INTERNET_EXTENDED_ERROR) {
 	    InternetGetLastResponseInfo(&err2, buf, &blen);
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return NULL;
+	    return nullptr;
 	} else {
 	    FormatMessage(
 		FORMAT_MESSAGE_FROM_HMODULE,
@@ -1120,7 +1120,7 @@ static void *in_R_FTPOpen2(const char *url)
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 		buf, 101, NULL);
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return NULL;
+	    return nullptr;
 	}
     }
     R_ProcessEvents();

@@ -407,7 +407,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 	if(ienc != CE_UTF8)  mbs_init(&mb_st);
 	for (i = 0; i < slen; i++) {
 	    res = (ienc == CE_UTF8) ? (int) utf8toucs(&wc, p):
-		(int) mbrtowc(&wc, p, MB_CUR_MAX, NULL);
+		(int) mbrtowc(&wc, p, MB_CUR_MAX, nullptr);
 	    if(res >= 0) {
 		if (ienc == CE_UTF8 && IS_HIGH_SURROGATE(wc))
 		    k = utf8toucs32(wc, p);
@@ -537,7 +537,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
        passed on by EncodeElement -- so no way could be end user be
        responsible for freeing it.  However, this is not thread-safe. */
 
-    static R_StringBuffer gBuffer = {NULL, 0, BUFSIZE};
+    static R_StringBuffer gBuffer = {nullptr, 0, BUFSIZE};
     R_StringBuffer *buffer = &gBuffer;
 
     if (s == NA_STRING) {
@@ -647,7 +647,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 #endif
 	for (i = 0; i < cnt; i++) {
 	    res = (int)((ienc == CE_UTF8) ? utf8toucs(&wc, p):
-			mbrtowc(&wc, p, MB_CUR_MAX, NULL));
+			mbrtowc(&wc, p, MB_CUR_MAX, nullptr));
 	    if(res >= 0) { /* res = 0 is a terminator */
 		if (ienc == CE_UTF8 && IS_HIGH_SURROGATE(wc))
 		    k = utf8toucs32(wc, p);
@@ -794,38 +794,39 @@ const char *Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
 
 const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 {
-    int w, d, e, wi, di, ei;
-    const char *res;
+	int w, d, e, wi, di, ei;
+	const char *res;
 
-    switch(TYPEOF(x)) {
-    case LGLSXP:
-	formatLogical(&LOGICAL_RO(x)[indx], 1, &w);
-	res = EncodeLogical(LOGICAL_RO(x)[indx], w);
-	break;
-    case INTSXP:
-	formatInteger(&INTEGER_RO(x)[indx], 1, &w);
-	res = EncodeInteger(INTEGER_RO(x)[indx], w);
-	break;
-    case REALSXP:
-	formatReal(&REAL_RO(x)[indx], 1, &w, &d, &e, 0);
-	res = EncodeReal0(REAL_RO(x)[indx], w, d, e, dec);
-	break;
-    case STRSXP:
-	formatString(&STRING_PTR_RO(x)[indx], 1, &w, quote);
-	res = EncodeString(STRING_ELT(x, indx), w, quote, Rprt_adj_left);
-	break;
-    case CPLXSXP:
-	formatComplex(&COMPLEX_RO(x)[indx], 1, &w, &d, &e, &wi, &di, &ei, 0);
-	res = EncodeComplex(COMPLEX_RO(x)[indx], w, d, e, wi, di, ei, dec);
-	break;
-    case RAWSXP:
-	res = EncodeRaw(RAW_RO(x)[indx], "");
-	break;
-    default:
-	res = NULL; /* -Wall */
-	UNIMPLEMENTED_TYPE("EncodeElement()", x);
-    }
-    return res;
+	switch (TYPEOF(x))
+	{
+	case LGLSXP:
+		formatLogical(&LOGICAL_RO(x)[indx], 1, &w);
+		res = EncodeLogical(LOGICAL_RO(x)[indx], w);
+		break;
+	case INTSXP:
+		formatInteger(&INTEGER_RO(x)[indx], 1, &w);
+		res = EncodeInteger(INTEGER_RO(x)[indx], w);
+		break;
+	case REALSXP:
+		formatReal(&REAL_RO(x)[indx], 1, &w, &d, &e, 0);
+		res = EncodeReal0(REAL_RO(x)[indx], w, d, e, dec);
+		break;
+	case STRSXP:
+		formatString(&STRING_PTR_RO(x)[indx], 1, &w, quote);
+		res = EncodeString(STRING_ELT(x, indx), w, quote, Rprt_adj_left);
+		break;
+	case CPLXSXP:
+		formatComplex(&COMPLEX_RO(x)[indx], 1, &w, &d, &e, &wi, &di, &ei, 0);
+		res = EncodeComplex(COMPLEX_RO(x)[indx], w, d, e, wi, di, ei, dec);
+		break;
+	case RAWSXP:
+		res = EncodeRaw(RAW_RO(x)[indx], "");
+		break;
+	default:
+		res = nullptr; /* -Wall */
+		UNIMPLEMENTED_TYPE("EncodeElement()", x);
+	}
+	return res;
 }
 
 /* EncodeChar is a simple wrapper for EncodeString
@@ -928,17 +929,16 @@ void Rvprintf(const char *format, va_list arg)
 	printcount = 0 ;
     }
 
-    do{
-      con = getConnection(con_num);
-      va_copy(argcopy, arg);
-      /* Parentheses added for Fedora with -D_FORTIFY_SOURCE=2 */
-      (con->vfprintf)(con, format, argcopy);
-      va_end(argcopy);
-      con->fflush(con);
-      con_num = getActiveSink(i++);
-    } while(con_num>0);
-
-
+	do
+	{
+		con = getConnection(con_num);
+		va_copy(argcopy, arg);
+		/* Parentheses added for Fedora with -D_FORTIFY_SOURCE=2 */
+		(con->vfprintf)(con, format, argcopy);
+		va_end(argcopy);
+		con->fflush(con);
+		con_num = getActiveSink(i++);
+	} while (con_num > 0);
 }
 
 /*
@@ -952,16 +952,16 @@ void Rvprintf(const char *format, va_list arg)
 
 void REvprintf(const char *format, va_list arg)
 {
-    static char *malloc_buf = NULL;
+    static char *malloc_buf = nullptr;
 
     if (malloc_buf) {
 	char *tmp = malloc_buf;
-	malloc_buf = NULL;
+	malloc_buf = nullptr;
 	free(tmp);
     }
     if(R_ErrorCon != 2) {
 	Rconnection con = getConnection_no_err(R_ErrorCon);
-	if(con == NULL) {
+	if(con == nullptr) {
 	    /* should never happen, but in case of corruption... */
 	    R_ErrorCon = 2;
 	} else {
@@ -1004,7 +1004,7 @@ void REvprintf(const char *format, va_list arg)
 		    printed = TRUE;
 		}
 		char *tmp = malloc_buf;
-		malloc_buf = NULL;
+		malloc_buf = nullptr;
 		free(tmp);
 	    }
 	}
@@ -1020,6 +1020,6 @@ HIDDEN int Rf_IndexWidth(R_xlen_t n)
 
 HIDDEN void Rf_VectorIndex(R_xlen_t i, int w)
 {
-/* print index label "[`i']" , using total width `w' (left filling blanks) */
-    Rprintf("%*s[%ld]", w-IndexWidth(i)-2, "", i);
+	/* print index label "[`i']" , using total width `w' (left filling blanks) */
+	Rprintf("%*s[%ld]", w - IndexWidth(i) - 2, "", i);
 }

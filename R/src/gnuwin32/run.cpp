@@ -48,7 +48,7 @@ static char RunError[501] = "";
 static char *expandcmd(const char *cmd, int whole)
 {
     char c = '\0';
-    char *s, *p, *q = NULL, *f, *dest, *src;
+    char *s, *p, *q = nullptr, *f, *dest, *src;
     int   d, ext, len = strlen(cmd)+1;
     char buf[len], fl[len], fn[MAX_PATH];
 
@@ -65,7 +65,7 @@ static char *expandcmd(const char *cmd, int whole)
 	    if (*q == '\"') d = d ? 0 : 1;
 	if (d) {
 	    strcpy(RunError,_( "A \" is missing (expandcmd)"));
-	    return NULL;
+	    return nullptr;
 	}
 	c = *q; /* character after the command, normally a space */
 	*q = '\0';
@@ -74,7 +74,7 @@ static char *expandcmd(const char *cmd, int whole)
     // This is the return value.
     if (!(s = (char *) malloc(MAX_PATH + strlen(cmd)))) {
 	strcpy(RunError, _("Insufficient memory (expandcmd)"));
-	return NULL;
+	return nullptr;
     }
 
     /*
@@ -96,13 +96,13 @@ static char *expandcmd(const char *cmd, int whole)
 	 * it might get an error after; but maybe sometimes
 	 * in the future every extension will be executable
 	 */
-	d = SearchPath(NULL, fl, NULL, MAX_PATH, fn, &f);
+	d = SearchPath(nullptr, fl, nullptr, MAX_PATH, fn, &f);
     } else {
 	int iexts = 0;
-	const char *exts[] = { ".exe" , ".com" , ".cmd" , ".bat" , NULL };
+	const char *exts[] = { ".exe" , ".com" , ".cmd" , ".bat" , nullptr };
 	while (exts[iexts]) {
 	    strcpy(dest, exts[iexts]);
-	    if ((d = SearchPath(NULL, fl, NULL, MAX_PATH, fn, &f))) break;
+	    if ((d = SearchPath(nullptr, fl, nullptr, MAX_PATH, fn, &f))) break;
 	    iexts++ ;
 	}
     }
@@ -110,7 +110,7 @@ static char *expandcmd(const char *cmd, int whole)
 	free(s);
 	snprintf(RunError, 500, _("'%s' not found"), p);
 	if(!whole) *q = c;
-	return NULL;
+	return nullptr;
     }
     /*
       NB: as of Windows 7 SearchPath does not return short names any more.
@@ -148,7 +148,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     DWORD ret;
     STARTUPINFO si;
     STARTUPINFOW wsi;
-    HANDLE dupIN, dupOUT, dupERR, job, port = NULL;
+    HANDLE dupIN, dupOUT, dupERR, job, port = nullptr;
     WORD showWindow = SW_SHOWDEFAULT;
     DWORD flags;
     BOOL inJob;
@@ -159,7 +159,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     char *ecmd;
     SECURITY_ATTRIBUTES sa;
     sa.nLength = sizeof(sa);
-    sa.lpSecurityDescriptor = NULL;
+    sa.lpSecurityDescriptor = nullptr;
     sa.bInheritHandle = TRUE;
 
     /* FIXME: this might need to be done in wchar_t */
@@ -171,7 +171,7 @@ static void pcreate(const char* cmd, cetype_t enc,
 
     if (inpipe) {
 	HANDLE hNULL = CreateFile("NUL:", GENERIC_READ | GENERIC_WRITE, 0,
-			   &sa, OPEN_EXISTING, 0, NULL);
+			   &sa, OPEN_EXISTING, 0, nullptr);
 	HANDLE hTHIS = GetCurrentProcess();
 
 	if (hIN == INVALID_HANDLE_VALUE) hIN = hNULL;
@@ -199,11 +199,11 @@ static void pcreate(const char* cmd, cetype_t enc,
 
     if(enc == CE_UTF8) {
 	wsi.cb = sizeof(wsi);
-	wsi.lpReserved = NULL;
-	wsi.lpReserved2 = NULL;
+	wsi.lpReserved = nullptr;
+	wsi.lpReserved2 = nullptr;
 	wsi.cbReserved2 = 0;
-	wsi.lpDesktop = NULL;
-	wsi.lpTitle = NULL;
+	wsi.lpDesktop = nullptr;
+	wsi.lpTitle = nullptr;
 	wsi.dwFlags = STARTF_USESHOWWINDOW;
 	wsi.wShowWindow = showWindow;
 	if (inpipe) {
@@ -214,11 +214,11 @@ static void pcreate(const char* cmd, cetype_t enc,
 	}
     } else {
 	si.cb = sizeof(si);
-	si.lpReserved = NULL;
-	si.lpReserved2 = NULL;
+	si.lpReserved = nullptr;
+	si.lpReserved2 = nullptr;
 	si.cbReserved2 = 0;
-	si.lpDesktop = NULL;
-	si.lpTitle = NULL;
+	si.lpDesktop = nullptr;
+	si.lpTitle = nullptr;
 	si.dwFlags = STARTF_USESHOWWINDOW;
 	si.wShowWindow = showWindow;
 	if (inpipe) {
@@ -257,24 +257,24 @@ static void pcreate(const char* cmd, cetype_t enc,
        The documentation does not say what would happen if we set the flag,
        but run in a job that does not allow it, so better don't. */
     breakaway = FALSE;
-    if (IsProcessInJob(GetCurrentProcess(), NULL, &inJob) && inJob) {
+    if (IsProcessInJob(GetCurrentProcess(), nullptr, &inJob) && inJob) {
 	/* The documentation does not say that it would be ok to use
 	   QueryInformationJobObject when the process is not in the job,
 	   so we have better tested that upfront. */
 	ZeroMemory(&jeli, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
 	ret = QueryInformationJobObject(
-		NULL,
+		nullptr,
 	        JobObjectExtendedLimitInformation,
 	        &jeli,
 	        sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION),
-		NULL);
+		nullptr);
 	breakaway = ret &&
 		(jeli.BasicLimitInformation.LimitFlags &
 	         JOB_OBJECT_LIMIT_BREAKAWAY_OK);
     }
 
     /* create a job that allows breakaway */
-    job = CreateJobObject(NULL, NULL);
+    job = CreateJobObject(nullptr, nullptr);
     if (job) {
 	ZeroMemory(&jeli, sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
 	jeli.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_BREAKAWAY_OK;
@@ -285,16 +285,16 @@ static void pcreate(const char* cmd, cetype_t enc,
                 sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION));
 	if (!ret) {
 	    CloseHandle(job);
-	    job = NULL;
+	    job = nullptr;
 	}
     }
 
     /* create a completion port to learn when processes exit */
     if (job) {
-	port = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 1);
+	port = CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 1);
 	if (!port) {
 	    CloseHandle(job);
-	    job = NULL;
+	    job = nullptr;
 	}
     }
     if (job) {
@@ -309,7 +309,7 @@ static void pcreate(const char* cmd, cetype_t enc,
 	if (!ret) {
 	    CloseHandle(job);
 	    CloseHandle(port);
-	    job = NULL;
+	    job = nullptr;
 	}
     }
 
@@ -325,11 +325,11 @@ static void pcreate(const char* cmd, cetype_t enc,
 	int n = strlen(ecmd); /* max no of chars */
 	wchar_t wcmd[n+1];
 	Rf_utf8towcs(wcmd, ecmd, n+1);
-	ret = CreateProcessW(NULL, wcmd, &sa, &sa, TRUE, flags,
-			     NULL, NULL, &wsi, &(pi->pi));
+	ret = CreateProcessW(nullptr, wcmd, &sa, &sa, TRUE, flags,
+			     nullptr, nullptr, &wsi, &(pi->pi));
     } else
-	ret = CreateProcess(NULL, ecmd, &sa, &sa, TRUE, flags,
-			    NULL, NULL, &si, &(pi->pi));
+	ret = CreateProcess(nullptr, ecmd, &sa, &sa, TRUE, flags,
+			    nullptr, nullptr, &si, &(pi->pi));
 
     if (ret && job) {
 	/* process was created as suspended */
@@ -338,7 +338,7 @@ static void pcreate(const char* cmd, cetype_t enc,
 	       when running in a job that does not allow breakaway */
 	    CloseHandle(job);
 	    CloseHandle(port);
-	    job = NULL;
+	    job = nullptr;
 	}
 	ResumeThread(pi->pi.hThread);
     }
@@ -351,10 +351,10 @@ static void pcreate(const char* cmd, cetype_t enc,
 	if (job) {
 	    CloseHandle(job);
 	    CloseHandle(port);
-	    job = NULL;
+	    job = nullptr;
 	}
-	pi->job = NULL;
-	pi->port = NULL;
+	pi->job = nullptr;
+	pi->port = nullptr;
     }
 
     if (inpipe) {
@@ -394,7 +394,7 @@ threadedwait(LPVOID param)
     FlushFileBuffers(p->read);
     p->active = 0;
     CloseHandle(p->thread);
-    p->thread = NULL;
+    p->thread = nullptr;
     return 0;
 }
 
@@ -408,14 +408,14 @@ static HANDLE getInputHandle(const char *fin)
     if (fin && fin[0]) {
 	SECURITY_ATTRIBUTES sa;
 	sa.nLength = sizeof(sa);
-	sa.lpSecurityDescriptor = NULL;
+	sa.lpSecurityDescriptor = nullptr;
 	sa.bInheritHandle = TRUE;
 	HANDLE hIN = CreateFile(fin, GENERIC_READ, 0,
-				&sa, OPEN_EXISTING, 0, NULL);
+				&sa, OPEN_EXISTING, 0, nullptr);
 	if (hIN == INVALID_HANDLE_VALUE) {
 	    snprintf(RunError, 500, 
 		     "unable to redirect input from '%s'", fin);
-	    return NULL;
+	    return nullptr;
 	}
 	return hIN;
     } else if (fin) {
@@ -431,14 +431,14 @@ static HANDLE getOutputHandle(const char *fout, int type)
     if (fout && fout[0]) {
 	SECURITY_ATTRIBUTES sa;
 	sa.nLength = sizeof(sa);
-	sa.lpSecurityDescriptor = NULL;
+	sa.lpSecurityDescriptor = nullptr;
 	sa.bInheritHandle = TRUE;
 	HANDLE hOUT = CreateFile(fout, GENERIC_WRITE, 0,
-				 &sa, CREATE_ALWAYS, 0, NULL);
+				 &sa, CREATE_ALWAYS, 0, nullptr);
 	if (hOUT == INVALID_HANDLE_VALUE) {
 	    snprintf(RunError, 500, 
 		     "unable to redirect output to '%s'", fout);
-	    return NULL;
+	    return nullptr;
 	} else return hOUT;
     } else if (fout) {
         /* GetStdHandle returns NULL for processes like RGui */
@@ -505,7 +505,7 @@ static void waitForJob(pinfo *pi, DWORD timeoutMillis, int* timedout)
 		JobObjectBasicAccountingInformation,
 		&jbai,
 		sizeof(JOBOBJECT_BASIC_ACCOUNTING_INFORMATION),
-		NULL);
+		nullptr);
 	if (ret && jbai.ActiveProcesses == 0)
 	    break;
     }
@@ -525,7 +525,7 @@ static void terminate_process(void *p)
     }
 
     if (pi->job)
-	waitForJob(pi, 2000, NULL);
+	waitForJob(pi, 2000, nullptr);
 }
 
 static int pwait2(pinfo *pi, DWORD timeoutMillis, int* timedout)
@@ -572,7 +572,7 @@ static int pwait2(pinfo *pi, DWORD timeoutMillis, int* timedout)
 int runcmd(const char *cmd, cetype_t enc, int wait, int visible,
 	   const char *fin, const char *fout, const char *ferr)
 {
-    return runcmd_timeout(cmd, enc, wait, visible, fin, fout, ferr, 0, NULL);
+    return runcmd_timeout(cmd, enc, wait, visible, fin, fout, ferr, 0, nullptr);
 }
 
 int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
@@ -646,19 +646,19 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
 
     if (!(r = (rpipe *) malloc(sizeof(struct structRPIPE)))) {
 	strcpy(RunError, _("Insufficient memory (rpipeOpen)"));
-	return NULL;
+	return nullptr;
     }
     r->active = 0;
-    r->pi.pi.hProcess = NULL;
-    r->pi.job = NULL;
-    r->thread = NULL;
+    r->pi.pi.hProcess = nullptr;
+    r->pi.job = nullptr;
+    r->thread = nullptr;
     r->timedout = 0;
     r->timeoutMillis = (DWORD) (1000*timeout);
-    res = CreatePipe(&hReadPipe, &hWritePipe, NULL, 0);
+    res = CreatePipe(&hReadPipe, &hWritePipe, nullptr, 0);
     if (res == FALSE) {
-	rpipeClose(r, NULL);
+	rpipeClose(r, nullptr);
 	strcpy(RunError, "CreatePipe failed");
-	return NULL;
+	return nullptr;
     }
     if(io == 1) { /* pipe for R to write to */
 	hTHIS = GetCurrentProcess();
@@ -672,7 +672,7 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
 		r->read, INVALID_HANDLE_VALUE, INVALID_HANDLE_VALUE,
 		&(r->pi));
 	r->active = 1;
-	if (!r->pi.pi.hProcess) return NULL; else return r;
+	if (!r->pi.pi.hProcess) return nullptr; else return r;
     }
 
     /* pipe for R to read from */
@@ -706,11 +706,11 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
 
     r->active = 1;
     if (!r->pi.pi.hProcess)
-	return NULL;
-    if (!(r->thread = CreateThread(NULL, 0, threadedwait, r, 0, &id))) {
-	rpipeClose(r, NULL);
+	return nullptr;
+    if (!(r->thread = CreateThread(nullptr, 0, threadedwait, r, 0, &id))) {
+	rpipeClose(r, nullptr);
 	strcpy(RunError, "CreateThread failed");
-	return NULL;
+	return nullptr;
     }
     return r;
 }
@@ -721,7 +721,7 @@ rpipeTerminate(rpipe * r)
     if (r->thread) {
 	TerminateThread(r->thread, 0);
 	CloseHandle(r->thread);
-	r->thread = NULL;
+	r->thread = nullptr;
     }
     if (r->active) {
 	terminate_process(&(r->pi));
@@ -740,14 +740,14 @@ rpipeGetc(rpipe * r)
 
     if (!r)
 	return NOLAUNCH;
-    while (PeekNamedPipe(r->read, NULL, 0, NULL, &a, NULL)) {
+    while (PeekNamedPipe(r->read, nullptr, 0, nullptr, &a, nullptr)) {
 	if (!a && !r->active) {
 	    /* I got a case in which process terminated after Peek.. */
-	    PeekNamedPipe(r->read, NULL, 0, NULL, &a, NULL);
+	    PeekNamedPipe(r->read, nullptr, 0, nullptr, &a, nullptr);
 	    if (!a) return NOLAUNCH;/* end of pipe */
 	}
 	if (a) {
-	    if (ReadFile(r->read, &c, 1, &b, NULL) == TRUE)
+	    if (ReadFile(r->read, &c, 1, &b, nullptr) == TRUE)
 		return c;
 	    else
 		return NOLAUNCH;/* error but...treated as eof */
@@ -769,10 +769,10 @@ char * rpipeGets(rpipe * r, char *buf, int len)
 {
     int   i, c;
 
-    if ((len < 2) || !r) return NULL;
+    if ((len < 2) || !r) return nullptr;
     for (i = 0; i < (len - 1); i++) {
 	if ((c = rpipeGetc(r)) == NOLAUNCH) {
-	    if (i == 0) return NULL;
+	    if (i == 0) return nullptr;
 	    else {
 		buf[i] = '\0';
 		return buf;
@@ -831,7 +831,7 @@ static Rboolean Wpipe_open(Rconnection con)
 
     io = con->mode[0] == 'w';
     if(io) visible = 1; /* Somewhere to put the output */
-    rp = rpipeOpen(con->description, con->enc, visible, NULL, io, NULL, NULL, 0);
+    rp = rpipeOpen(con->description, con->enc, visible, nullptr, io, nullptr, nullptr, 0);
     if(!rp) {
 	warning("cannot open cmd `%s'", con->description);
 	return FALSE;
@@ -849,7 +849,7 @@ static Rboolean Wpipe_open(Rconnection con)
 
 static void Wpipe_close(Rconnection con)
 {
-    con->status = rpipeClose( ((RWpipeconn)con->private) ->rp, NULL);
+    con->status = rpipeClose( ((RWpipeconn)con->private) ->rp, nullptr);
     con->isopen = FALSE;
 }
 
@@ -895,14 +895,14 @@ static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
     rpipe *rp = ((RWpipeconn)con->private) ->rp;
     DWORD ntoread, read;
 
-    while (PeekNamedPipe(rp->read, NULL, 0, NULL, &ntoread, NULL)) {
+    while (PeekNamedPipe(rp->read, nullptr, 0, nullptr, &ntoread, nullptr)) {
 	if (!ntoread && !rp->active) {
 	    /* I got a case in which process terminated after Peek.. */
-	    PeekNamedPipe(rp->read, NULL, 0, NULL, &ntoread, NULL);
+	    PeekNamedPipe(rp->read, nullptr, 0, nullptr, &ntoread, nullptr);
 	    if (!ntoread) return 0; /* end of pipe */
 	}
 	if (ntoread) {
-	    if (ReadFile(rp->read, ptr, nitems * size, &read, NULL) == TRUE)
+	    if (ReadFile(rp->read, ptr, nitems * size, &read, nullptr) == TRUE)
 		return read/size;
 	    else return 0; /* error */
 	}
@@ -923,7 +923,7 @@ static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
 	warning(_("broken Windows pipe"));
 	return 0;
     }
-    if (WriteFile(rp->write, ptr, towrite, &write, NULL) != 0)
+    if (WriteFile(rp->write, ptr, towrite, &write, nullptr) != 0)
 	return write/size;
     else return 0;
 }
@@ -965,7 +965,7 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     if (command)
 	newconn->description = (char *) malloc(len);
     else
-	newconn->description = NULL;
+	newconn->description = nullptr;
 
     if(!newconn->description) {
 	free(command); free(newconn->connclass); free(newconn);

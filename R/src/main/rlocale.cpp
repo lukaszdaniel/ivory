@@ -158,8 +158,8 @@ int Ri18n_wcwidth(R_wchar_t c)
     static const char *lc_cache = "";
     static int lc = 0;
 
-    if (0 != strcmp(setlocale(LC_CTYPE, NULL), lc_cache)) {
-	strncpy(lc_str, setlocale(LC_CTYPE, NULL), sizeof(lc_str) - 1);
+    if (0 != strcmp(setlocale(LC_CTYPE, nullptr), lc_cache)) {
+	strncpy(lc_str, setlocale(LC_CTYPE, nullptr), sizeof(lc_str) - 1);
         lc_str[sizeof(lc_str) - 1] = '\0';
 	for (i = 0, j = (int) strlen(lc_str); i < j && i < sizeof(lc_str); i++)
 	    lc_str[i] = (char) toupper(lc_str[i]);
@@ -225,13 +225,13 @@ extern const char *locale2charset(const char *);
         char *_wc_buf;                                                       \
         size_t rc;                                                           \
                                                                              \
-        strncpy(fromcode, locale2charset(NULL), sizeof(fromcode));           \
+        strncpy(fromcode, locale2charset(nullptr), sizeof(fromcode));           \
         fromcode[sizeof(fromcode) - 1] = '\0';                               \
         if (streql(fromcode, "UTF-8"))                                       \
             return wcsearch(wc, table_w##ISWNAME, table_w##ISWNAME##_count); \
         memset(mb_buf, 0, sizeof(mb_buf));                                   \
         memset(ucs4_buf, 0, sizeof(ucs4_buf));                               \
-        wcrtomb(mb_buf, wc, NULL);                                           \
+        wcrtomb(mb_buf, wc, nullptr);                                           \
         if ((void *)(-1) != (cd = Riconv_open(UNICODE, fromcode)))           \
         {                                                                    \
             wc_len = sizeof(ucs4_buf);                                       \
@@ -328,7 +328,7 @@ static const Ri18n_wctype_func_l Ri18n_wctype_func[] = {
     {"cntrl",  1<<9,  Ri18n_iswcntrl},
     {"punct",  1<<10, Ri18n_iswpunct},
     {"alnum",  1<<11, Ri18n_iswalnum},
-    {NULL,     0,     NULL}
+    {nullptr,     0,     nullptr}
 };
 
 /* These two used (via macros) in X11 dataentry */
@@ -336,7 +336,7 @@ wctype_t Ri18n_wctype(const char *name)
 {
     int i;
 
-    for (i = 0 ; Ri18n_wctype_func[i].name != NULL &&
+    for (i = 0 ; Ri18n_wctype_func[i].name != nullptr &&
 	     0 != strcmp(Ri18n_wctype_func[i].name, name) ; i++ );
     return Ri18n_wctype_func[i].wctype;
 }

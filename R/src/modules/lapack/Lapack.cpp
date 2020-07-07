@@ -157,7 +157,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     int *xdims, n, lwork, info = 0, ov;
     char jobv[2] = "U", uplo[2] = "L", range[2] = "A";
     SEXP z = R_NilValue;
-    double *work, *rx, *rvalues, tmp, *rz = NULL;
+    double *work, *rx, *rvalues, tmp, *rz = nullptr;
     int liwork, *iwork, itmp, m;
     double vl = 0.0, vu = 0.0, abstol = 0.0;
     /* valgrind seems to think vu should be set, but it is documented
@@ -334,7 +334,7 @@ static SEXP La_rg(SEXP x, SEXP only_values)
 static SEXP La_dlange(SEXP A, SEXP type)
 {
     int *xdims, m, n, nprot = 1;
-    double *work = NULL;
+    double *work = nullptr;
     char typNorm[] = {'\0', '\0'};
 
     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");

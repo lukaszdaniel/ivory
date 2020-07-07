@@ -389,7 +389,7 @@ typedef struct
     int pc;
 } winprogressbar;
 
-static winprogressbar pbar = {NULL, NULL, NULL};
+static winprogressbar pbar = {nullptr, nullptr, nullptr};
 
 static void doneprogressbar(void *data)
 {
@@ -405,7 +405,7 @@ static int progress(void *clientp, double dltotal, double dlnow,
     if (dltotal > 0.) {
 	if (total == 0.) {
 	    total = dltotal;
-	    char *type = NULL;
+	    char *type = nullptr;
 	    CURL *hnd = (CURL *) clientp;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
         if (total > 1024.0 * 1024.0)
@@ -461,7 +461,7 @@ static int progress(void *clientp, double dltotal, double dlnow,
     if ((status < 300) && (dltotal > 0.)) {
 	if (total == 0.) {
 	    total = dltotal;
-	    char *type = NULL;
+	    char *type = nullptr;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
         if (total > 1024.0 * 1024.0)
         { // might be longer than long, and is on 64-bit windows
@@ -499,7 +499,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP scmd, sfile, smode, sheaders;
     const char *url, *file, *mode;
     int quiet, cacheOK;
-    struct curl_slist *headers = NULL;
+    struct curl_slist *headers = nullptr;
 
     scmd = CAR(args); args = CDR(args);
     if (!isString(scmd) || length(scmd) < 1)
@@ -638,7 +638,7 @@ HIDDEN SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     curl_multi_perform(mhnd, &still_running);
     do {
 	int numfds;
-	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
+	CURLMcode mc = curl_multi_wait(mhnd, nullptr, 0, 100, &numfds);
 	if (mc != CURLM_OK)  { // internal, do not translate
 	    warning(_("'curl_multi_wait()' function failed, code %d"), mc);
 	    break;
@@ -804,7 +804,7 @@ static int fetchData(RCurlconn ctxt)
 
     do {
 	int numfds;
-	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
+	CURLMcode mc = curl_multi_wait(mhnd, nullptr, 0, 100, &numfds);
 	if (mc != CURLM_OK) {
 	    warning(_("'curl_multi_wait()' function failed, code %d"), mc);
 	    break;
@@ -835,11 +835,11 @@ static void Curl_destroy(Rconnection con)
 {
     RCurlconn ctxt;
 
-    if (NULL == con)
+    if (nullptr == con)
 	return;
     ctxt = (RCurlconn)(con->connprivate);
 
-    if (NULL == ctxt)
+    if (nullptr == ctxt)
 	return;
 
     free(ctxt->buf);
@@ -936,14 +936,14 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
     if (!newconn->connclass) {
 	free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     strcpy(newconn->connclass, "url-libcurl");
     newconn->description = (char *) malloc(strlen(description) + 1);
     if (!newconn->description) {
 	free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     init_con(newconn, description, CE_NATIVE, mode);
     newconn->canwrite = FALSE;
@@ -957,7 +957,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
     if (!newconn->connprivate) {
 	free(newconn->description); free(newconn->connclass); free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
     RCurlconn ctxt = (RCurlconn) newconn->connprivate;
     ctxt->bufsize = 16 * CURL_MAX_WRITE_SIZE;
@@ -966,9 +966,9 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 	free(newconn->description); free(newconn->connclass); free(newconn->connprivate);
 	free(newconn);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ newconn = NULL;
+	/* for Solaris 12.5 */ newconn = nullptr;
     }
-    ctxt->headers = NULL;
+    ctxt->headers = nullptr;
     for (int i = 0; i < LENGTH(headers); i++) {
 	struct curl_slist *tmp =
 	    curl_slist_append(ctxt->headers, CHAR(STRING_ELT(headers, i)));
@@ -976,7 +976,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 	    free(newconn->description); free(newconn->connclass); free(newconn->connprivate);
 	    free(newconn); curl_slist_free_all(ctxt->headers);
 	    error(_("allocation of url connection failed"));
-	    /* for Solaris 12.5 */ newconn = NULL;
+	    /* for Solaris 12.5 */ newconn = nullptr;
 	}
 	ctxt->headers = tmp;
     }

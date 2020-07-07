@@ -35,7 +35,7 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(C_StemLeaf, 4),
     CALLDEF(C_BinCount, 4),
     CALLDEF(RunregisterBase, 0),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 
@@ -77,13 +77,13 @@ static const R_ExternalMethodDef ExtEntries[] = {
     EXTDEF(C_plot_new, 0),
     EXTDEF(C_locator, -1),
     EXTDEF(C_identify, -1),
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 extern "C"
 void attribute_visible R_init_graphics(DllInfo *dll)
 {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, ExtEntries);
+    R_registerRoutines(dll, nullptr, CallEntries, nullptr, ExtEntries);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, TRUE);
     registerBase();

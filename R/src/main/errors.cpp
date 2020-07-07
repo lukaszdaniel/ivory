@@ -212,7 +212,7 @@ HIDDEN RETSIGTYPE Rf_onsigusr1(int dummy)
     R_FlushConsole();
     R_ClearerrConsole();
     R_ParseError = 0;
-    R_ParseErrorFile = NULL;
+    R_ParseErrorFile = nullptr;
     R_ParseErrorMsg[0] = '\0';
 
     /* Bail out if there is a browser/try on the stack--do we really
@@ -247,7 +247,7 @@ HIDDEN RETSIGTYPE Rf_onsigusr2(int dummy)
     R_FlushConsole();
     R_ClearerrConsole();
     R_ParseError = 0;
-    R_ParseErrorFile = NULL;
+    R_ParseErrorFile = nullptr;
     R_ParseErrorMsg[0] = '\0';
     R_CleanUp(SA_SAVE, 0, 0);
 }
@@ -391,7 +391,7 @@ static void reset_inWarning(void *data)
 
 static int wd(const char *buf)
 {
-    int nc = (int) mbstowcs(NULL, buf, 0), nw;
+    int nc = (int) mbstowcs(nullptr, buf, 0), nw;
     if(nc > 0 && nc < 2000) {
 	wchar_t wc[2000];
 	mbstowcs(wc, buf, nc + 1);
@@ -691,7 +691,7 @@ const char *R_curErrorBuf() {
 }
 
 /* temporary hook to allow experimenting with alternate error mechanisms */
-static void (*R_ErrorHook)(SEXP, char *) = NULL;
+static void (*R_ErrorHook)(SEXP, char *) = nullptr;
 
 static void restore_inError(void *data)
 {
@@ -869,10 +869,10 @@ NORET void Rf_errorcall(SEXP call, const char *format,...)
     vsignalError(call, format, ap);
     va_end(ap);
 
-    if (R_ErrorHook != NULL) {
+    if (R_ErrorHook != nullptr) {
 	char buf[BUFSIZE];
 	void (*hook)(SEXP, char *) = R_ErrorHook;
-	R_ErrorHook = NULL; /* to avoid recursion */
+	R_ErrorHook = nullptr; /* to avoid recursion */
 	va_start(ap, format);
 	Rvsnprintf(buf, min(BUFSIZE, R_WarnLength), format, ap);
 	va_end(ap);
@@ -998,7 +998,7 @@ static void jump_to_top_ex(Rboolean traceback,
 	R_FlushConsole();
 	R_ClearerrConsole();
 	R_ParseError = 0;
-	R_ParseErrorFile = NULL;
+	R_ParseErrorFile = nullptr;
 	R_ParseErrorMsg[0] = '\0';
     }
 
@@ -1068,7 +1068,7 @@ HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isNull(CAR(args))) {
 	SEXP rho = R_BaseEnv;
 	for (RCNTXT *cptr = R_GlobalContext->nextContext();
-	     cptr != NULL && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	     cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	     cptr = cptr->nextContext())
 	    if (cptr->getCallFlag() & CTXT_FUNCTION) {
 		/* stop() etc have internal call to .makeMessage */
@@ -1101,7 +1101,7 @@ HIDDEN SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for(i = 0; i < n; i++) {
 	    int ihead = 0, itail = 0;
 	    const char * This = translateChar(STRING_ELT(string, i));
-	    char *tmp, *head = NULL, *tail = NULL, *p, *tr;
+	    char *tmp, *head = nullptr, *tail = nullptr, *p, *tr;
 	    R_CheckStack2(strlen(This) + 1);
 	    tmp = (char *) alloca(strlen(This) + 1);
 	    strcpy(tmp, This);
@@ -1171,7 +1171,7 @@ HIDDEN SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isNull(sdom)) {
 	SEXP rho = R_BaseEnv;
 	for (RCNTXT *cptr = R_GlobalContext->nextContext();
-	     cptr != NULL && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	     cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	     cptr = cptr->nextContext())
 	    if (cptr->getCallFlag() & CTXT_FUNCTION) {
 		/* stop() etc have internal call to .makeMessage */
@@ -1225,7 +1225,7 @@ HIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"), "domain");
     if(isNull(CADR(args))) {
-	res = bindtextdomain(translateChar(STRING_ELT(CAR(args),0)), NULL);
+	res = bindtextdomain(translateChar(STRING_ELT(CAR(args),0)), nullptr);
     } else {
 	if(!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
 	    error(_("invalid '%s' value"), "dirname");
@@ -1240,7 +1240,7 @@ HIDDEN SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 static SEXP findCall(void)
 {
 	for (RCNTXT *cptr = R_GlobalContext->nextContext();
-		 cptr != NULL && cptr->getCallFlag() != CTXT_TOPLEVEL;
+		 cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 		 cptr = cptr->nextContext())
 		if (cptr->getCallFlag() & CTXT_FUNCTION)
 			return cptr->getCall();
@@ -1388,7 +1388,7 @@ HIDDEN void Rf_WarningMessage(SEXP call, int which_warn, ...)
 
 #ifdef UNUSED
 /* temporary hook to allow experimenting with alternate warning mechanisms */
-static void (*R_WarningHook)(SEXP, char *) = NULL;
+static void (*R_WarningHook)(SEXP, char *) = nullptr;
 
 void R_SetWarningHook(void (*hook)(SEXP, char *))
 {
@@ -1419,7 +1419,7 @@ NORET void R_JumpToToplevel(Rboolean restart)
     RCNTXT *c;
 
     /* Find the target for the jump */
-    for (c = R_GlobalContext; c != NULL; c = c->nextContext()) {
+    for (c = R_GlobalContext; c != nullptr; c = c->nextContext()) {
 	if (restart && c->isRestartBitSet())
 	    findcontext(CTXT_RESTART, c->workingEnvironment(), R_RestartToken);
 	else if (c->getCallFlag() == CTXT_TOPLEVEL)
@@ -1449,12 +1449,11 @@ static void R_PrintDeferredWarnings(void)
 HIDDEN
 SEXP R_GetTracebackOnly(int skip)
 {
-    int nback = 0, ns;
-    RCNTXT *c;
+    int nback = 0, ns = skip;
     SEXP s, t;
 
-    for (c = R_GlobalContext, ns = skip;
-	 c != NULL && c->getCallFlag() != CTXT_TOPLEVEL;
+    for (RCNTXT *c = R_GlobalContext;
+	 c != nullptr && c->getCallFlag() != CTXT_TOPLEVEL;
 	 c = c->nextContext())
 	if (c->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (ns > 0)
@@ -1465,8 +1464,8 @@ SEXP R_GetTracebackOnly(int skip)
 
     PROTECT(s = allocList(nback));
     t = s;
-    for (c = R_GlobalContext ;
-	 c != NULL && c->getCallFlag() != CTXT_TOPLEVEL;
+    for (RCNTXT *c = R_GlobalContext ;
+	 c != nullptr && c->getCallFlag() != CTXT_TOPLEVEL;
 	 c = c->nextContext())
 	if (c->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
@@ -1531,7 +1530,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 
     buf[0] = '\0';
     for (RCNTXT *c = R_GlobalContext;
-	 c != NULL && c->getCallFlag() != CTXT_TOPLEVEL;
+	 c != nullptr && c->getCallFlag() != CTXT_TOPLEVEL;
 	 c = c->nextContext())
 	if (c->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
@@ -1606,7 +1605,7 @@ inline SEXP ENTRY_RETURN_RESULT(SEXP e) { return VECTOR_ELT(e, 4); }
 
 constexpr R_xlen_t RESULT_SIZE = 4;
 
-static SEXP R_HandlerResultToken = NULL;
+static SEXP R_HandlerResultToken = nullptr;
 
 HIDDEN void R_FixupExitingHandlerResult(SEXP result)
 {
@@ -1620,7 +1619,7 @@ HIDDEN void R_FixupExitingHandlerResult(SEXP result)
        more favorable stack context than before the jump. The
        R_HandlerResultToken is used to make sure the result being
        modified is associated with jumping to an exiting handler. */
-    if (result != NULL &&
+    if (result != nullptr &&
 	TYPEOF(result) == VECSXP &&
 	XLENGTH(result) == RESULT_SIZE &&
 	VECTOR_ELT(result, 0) == R_NilValue &&
@@ -1635,7 +1634,7 @@ HIDDEN SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     int calling, i, n;
     PROTECT_INDEX osi;
 
-    if (R_HandlerResultToken == NULL) {
+    if (R_HandlerResultToken == nullptr) {
 	R_HandlerResultToken = allocVector(VECSXP, 1);
 	R_PreserveObject(R_HandlerResultToken);
     }
@@ -1808,7 +1807,7 @@ HIDDEN SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (IS_CALLING_ENTRY(entry)) {
 	    SEXP h = ENTRY_HANDLER(entry);
 	    if (h == R_RestartToken) {
-		const char *msgstr = NULL;
+		const char *msgstr = nullptr;
 		if (TYPEOF(msg) == STRSXP && LENGTH(msg) > 0)
 		    msgstr = translateChar(STRING_ELT(msg, 0));
 		else error(_("error message is not a character string"));
@@ -2070,7 +2069,7 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
     const void *vmax = vmaxget();
     Rboolean err = (Rboolean) (check && StringTrue(check));
     if (!err && check && StringFalse(check))
-	check = NULL; /* disabled */
+	check = nullptr; /* disabled */
     Rboolean abort = FALSE; /* R_Suicide/abort */
     Rboolean verbose = FALSE;
     Rboolean warn = FALSE;
@@ -2172,11 +2171,11 @@ HIDDEN void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawms
 		 length(value), type2char(TYPEOF(value)));
 	PrintValue(value);
 	REprintf(" --- function from context --- \n");
-	if (R_GlobalContext->getCallFun() != NULL &&
+	if (R_GlobalContext->getCallFun() != nullptr &&
 	    TYPEOF(R_GlobalContext->getCallFun()) == CLOSXP)
 	    PrintValue(R_GlobalContext->getCallFun());
 	REprintf(" --- function search by body ---\n");
-	if (R_GlobalContext->getCallFun() != NULL &&
+	if (R_GlobalContext->getCallFun() != nullptr &&
 	    TYPEOF(R_GlobalContext->getCallFun()) == CLOSXP)
 	    findFunctionForBody(R_ClosureExpr(R_GlobalContext->getCallFun()));
 	REprintf(" ----------- END OF FAILURE REPORT -------------- \n");
@@ -2257,7 +2256,7 @@ SEXP R_tryCatchError(SEXP (*body)(void *), void *bdata,
     SEXP cond = Rf_mkString("error");
 
     PROTECT(cond);
-    val = R_tryCatch(body, bdata, cond, handler, hdata, NULL, NULL);
+    val = R_tryCatch(body, bdata, cond, handler, hdata, nullptr, nullptr);
     UNPROTECT(1);
     return val;
 }
@@ -2285,7 +2284,7 @@ static SEXP default_tryCatch_handler(SEXP cond, void *data)
 
 static void default_tryCatch_finally(void *data) { }
 
-static SEXP trycatch_callback = NULL;
+static SEXP trycatch_callback = nullptr;
 static const char* trycatch_callback_source =
     "function(addr, classes, fin) {\n"
     "    handler <- function(cond)\n"
@@ -2304,9 +2303,9 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 		SEXP (*handler)(SEXP, void *), void *hdata,
 		void (*finally)(void *), void *fdata)
 {
-    if (body == NULL) error(_("body function is required"));
+    if (body == nullptr) error(_("body function is required"));
 
-    if (trycatch_callback == NULL) {
+    if (trycatch_callback == nullptr) {
 	trycatch_callback = R_ParseEvalString(trycatch_callback_source,
 					      R_BaseNamespace);
 	R_PreserveObject(trycatch_callback);
@@ -2315,9 +2314,9 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
     tryCatchData_t tcd = {
 	.body = body,
 	.bdata = bdata,
-	.handler = handler != NULL ? handler : default_tryCatch_handler,
+	.handler = handler != nullptr ? handler : default_tryCatch_handler,
 	.hdata = hdata,
-	.finally = finally != NULL ? finally : default_tryCatch_finally,
+	.finally = finally != nullptr ? finally : default_tryCatch_finally,
 	.fdata = fdata,
 	.suspended = R_interrupts_suspended
     };
@@ -2328,9 +2327,9 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 
     R_interrupts_suspended = TRUE;
 
-    if (conds == NULL) conds = allocVector(STRSXP, 0);
+    if (conds == nullptr) conds = allocVector(STRSXP, 0);
     PROTECT(conds);
-    SEXP fin = finally != NULL ? R_TrueValue : R_FalseValue;
+    SEXP fin = finally != nullptr ? R_TrueValue : R_FalseValue;
     SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
     SEXP expr = lang4(trycatch_callback, tcdptr, conds, fin);
     PROTECT(expr);
@@ -2368,11 +2367,11 @@ SEXP do_tryCatchHelper(SEXP call, SEXP op, SEXP args, SEXP env)
 	    return val;
 	}
     case 1:
-	if (ptcd->handler != NULL)
+	if (ptcd->handler != nullptr)
 	    return ptcd->handler(cond, ptcd->hdata);
 	else return R_NilValue;
     case 2:
-	if (ptcd->finally != NULL)
+	if (ptcd->finally != nullptr)
 	    ptcd->finally(ptcd->fdata);
 	return R_NilValue;
     default: return R_NilValue; /* should not happen */
@@ -2395,13 +2394,13 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     static const char* wceh_callback_source =
 	"function(cond) .Internal(C_tryCatchHelper(addr, 1L, cond))";
 
-    static SEXP wceh_callback = NULL;
-    static SEXP wceh_class = NULL;
-    static SEXP addr_sym = NULL;
+    static SEXP wceh_callback = nullptr;
+    static SEXP wceh_class = nullptr;
+    static SEXP addr_sym = nullptr;
 
-    if (body == NULL) error(_("must supply a body function"));
+    if (body == nullptr) error(_("must supply a body function"));
 
-    if (wceh_callback == NULL) {
+    if (wceh_callback == nullptr) {
 	wceh_callback = R_ParseEvalString(wceh_callback_source,
 					  R_BaseNamespace);
 	R_PreserveObject(wceh_callback);

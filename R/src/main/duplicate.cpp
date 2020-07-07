@@ -235,7 +235,7 @@ static SEXP duplicate_child(SEXP s, Rboolean deep)
 		return duplicate1(s, TRUE);
 	}
 
-	return lazy_duplicate(s);
+	return Rf_lazy_duplicate(s);
 }
 
 /*****************/
@@ -312,7 +312,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	PROTECT(s); /* the methods should protect, but ... */
 	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
 	UNPROTECT(1);
-	if (ans != NULL)
+	if (ans != nullptr)
 	    return ans;
     }
 
@@ -412,23 +412,23 @@ void Rf_copyVector(SEXP s, SEXP t)
 	xcopyStringWithRecycle(s, t, 0, ns, nt);
 	break;
     case LGLSXP:
-	xcopyLogicalWithRecycle(LOGICAL(s), LOGICAL(t), 0, ns, nt);
+	xcopyWithRecycle(LOGICAL(s), LOGICAL(t), 0, ns, nt);
 	break;
     case INTSXP:
-	xcopyIntegerWithRecycle(INTEGER(s), INTEGER(t), 0, ns, nt);
+	xcopyWithRecycle(INTEGER(s), INTEGER(t), 0, ns, nt);
 	break;
     case REALSXP:
-	xcopyRealWithRecycle(REAL(s), REAL(t), 0, ns, nt);
+	xcopyWithRecycle(REAL(s), REAL(t), 0, ns, nt);
 	break;
     case CPLXSXP:
-	xcopyComplexWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
+	xcopyWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
 	break;
     case EXPRSXP:
     case VECSXP:
 	xcopyVectorWithRecycle(s, t, 0, ns, nt);
 	break;
     case RAWSXP:
-	xcopyRawWithRecycle(RAW(s), RAW(t), 0, ns, nt);
+	xcopyWithRecycle(RAW(s), RAW(t), 0, ns, nt);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("copyVector()", s);
@@ -514,40 +514,7 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 	copyVector(s, t);
 }
 
-#define COPY_WITH_RECYCLE(VALTYPE, TNAME)                                                                 \
-	HIDDEN void                                                                                           \
-		xcopy##TNAME##WithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) \
-	{                                                                                                     \
-                                                                                                          \
-		if (nsrc >= n)                                                                                    \
-		{ /* no recycle needed */                                                                         \
-			for (R_xlen_t i = 0; i < n; i++)                                                              \
-				dst[dstart + i] = src[i];                                                                 \
-			return;                                                                                       \
-		}                                                                                                 \
-		if (nsrc == 1)                                                                                    \
-		{                                                                                                 \
-			VALTYPE val = src[0];                                                                         \
-			for (R_xlen_t i = 0; i < n; i++)                                                              \
-				dst[dstart + i] = val;                                                                    \
-			return;                                                                                       \
-		}                                                                                                 \
-                                                                                                          \
-		/* recycle needed */                                                                              \
-		R_xlen_t sidx = 0;                                                                                \
-		for (R_xlen_t i = 0; i < n; i++, sidx++)                                                          \
-		{                                                                                                 \
-			if (sidx == nsrc)                                                                             \
-				sidx = 0;                                                                                 \
-			dst[dstart + i] = src[sidx];                                                                  \
-		}                                                                                                 \
-	}
 
-COPY_WITH_RECYCLE(Rcomplex, Complex)	/* xcopyComplexWithRecycle */
-COPY_WITH_RECYCLE(int, Integer)		/* xcopyIntegerWithRecycle */
-COPY_WITH_RECYCLE(int, Logical)		/* xcopyLogicalWithRecycle */
-COPY_WITH_RECYCLE(Rbyte, Raw)		/* xcopyRawWithRecycle */
-COPY_WITH_RECYCLE(double, Real)		/* xcopyRealWithRecycle */
 
 #define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                              \
 	HIDDEN void                                                                                   \
@@ -581,21 +548,7 @@ COPY_WITH_RECYCLE(double, Real)		/* xcopyRealWithRecycle */
 COPY_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT) /* xcopyStringWithRecycle */
 COPY_ELT_WITH_RECYCLE(Vector, VECTOR_ELT_LD, SET_VECTOR_ELT) /* xcopyVectorWithRecycle */
 
-#define FILL_WITH_RECYCLE(VALTYPE, TNAME)                                                        \
-	HIDDEN void xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,                      \
-												R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, \
-												R_xlen_t cols, R_xlen_t nsrc)                    \
-	{                                                                                            \
-                                                                                                 \
-		FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)                                    \
-		dst[didx] = src[sidx];                                                                   \
-	}
 
-FILL_WITH_RECYCLE(Rcomplex, Complex)	/* xfillComplexMatrixWithRecycle */
-FILL_WITH_RECYCLE(int, Integer)		/* xfillIntegerMatrixWithRecycle */
-FILL_WITH_RECYCLE(int, Logical)		/* xfillLogicalMatrixWithRecycle */
-FILL_WITH_RECYCLE(Rbyte, Raw)		/* xfillRawMatrixWithRecycle */
-FILL_WITH_RECYCLE(double, Real)		/* xfillRealMatrixWithRecycle */
 
 #define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT)                                             \
 	HIDDEN void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,                              \

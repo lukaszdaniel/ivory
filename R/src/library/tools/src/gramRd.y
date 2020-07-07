@@ -183,11 +183,11 @@ static int	mkText(int);
 static int	mkVerb(int);
 static int 	mkComment(int);
 
-static SEXP R_RdTagSymbol = NULL;
-static SEXP R_RdOptionSymbol = NULL;
-static SEXP R_DefinitionSymbol = NULL;
-static SEXP R_DynamicFlagSymbol = NULL;
-static SEXP R_MacroSymbol = NULL;
+static SEXP R_RdTagSymbol = nullptr;
+static SEXP R_RdOptionSymbol = nullptr;
+static SEXP R_DefinitionSymbol = nullptr;
+static SEXP R_DynamicFlagSymbol = nullptr;
+static SEXP R_MacroSymbol = nullptr;
 
 #define YYSTYPE		SEXP
 
@@ -285,7 +285,7 @@ Markup:		LATEXMACRO  LatexArg 		{ $$ = xxmarkup($1, $2, STATIC, &@$); }
 	|	VERBLATEX   VerbatimArg LatexArg2 { $$ = xxmarkup2($1, $2, $3, 2, STATIC, &@$); }
 
 UserMacro:	NEWCOMMAND  VerbatimArg1 VerbatimArg { $$ = xxnewcommand($1, $2, $3, &@$); }
-	|	USERMACRO			{ $$ = xxusermacro($1, xxnewlist(NULL), &@$); }
+	|	USERMACRO			{ $$ = xxusermacro($1, xxnewlist(nullptr), &@$); }
 	|	USERMACRO1  VerbatimArg		{ $$ = xxusermacro($1, xxnewlist($2), &@$); }
 	|	USERMACRO2  VerbatimArg VerbatimArg
 						{ $$ = xxusermacro($1, xxnewlist2($2, $3), &@$); }
@@ -329,7 +329,7 @@ RLikeArg:	goRLike Arg			{ xxpopMode($1); $$ = $2; }
 /* This one is like VerbatimArg2 below:  it does the push after seeing the brace */
 
 RLikeArg2:	'{' goRLike2 ArgItems '}'	{ xxpopMode($2); $$ = $3; }
-	|	'{' goRLike2 '}'		{ xxpopMode($2); $$ = xxnewlist(NULL); }
+	|	'{' goRLike2 '}'		{ xxpopMode($2); $$ = xxnewlist(nullptr); }
 
 VerbatimArg:	goVerbatim Arg		 	{ xxpopMode($1); $$ = $2; }
 
@@ -338,7 +338,7 @@ VerbatimArg1:	goVerbatim1 Arg			{ xxpopMode($1); $$ = $2; }
 /* This one executes the push after seeing the brace starting the optional second arg */
 
 VerbatimArg2:   '{' goVerbatim2 ArgItems '}'    { xxpopMode($2); $$ = $3; }
-	|	'{' goVerbatim2 '}'		{ xxpopMode($2); $$ = xxnewlist(NULL); }
+	|	'{' goVerbatim2 '}'		{ xxpopMode($2); $$ = xxnewlist(nullptr); }
 
 IfDefTarget:	goLatexLike TEXT	{ xxpopMode($1); $$ = xxnewlist(xxtag($2, TEXT, &@$)); }
 
@@ -362,9 +362,9 @@ goItem0:	/* empty */			{ $$ = xxpushMode(LATEXLIKE, ESCAPE, FALSE); }
 goItem2:	/* empty */			{ $$ = xxpushMode(LATEXLIKE, LATEXMACRO2, FALSE); }
 
 Arg:		'{' ArgItems  '}'		{ $$ = $2; }
-	|	'{' '}'				{ $$ = xxnewlist(NULL); }
+	|	'{' '}'				{ $$ = xxnewlist(nullptr); }
 	|	'{' ArgItems error '}'		{ $$ = $2; }
-	|	'{' error '}'			{ $$ = xxnewlist(NULL); }
+	|	'{' error '}'			{ $$ = xxnewlist(nullptr); }
 	|	'{' ArgItems error END_OF_INPUT { $$ = $2; }
 
 Option:		'[' Item ']'			{ $$ = $2; }	
@@ -1902,11 +1902,11 @@ static void UseState(ParseState *state) {
 static void PushState() {
     if (busy) {
     	ParseState *prev = static_cast<ParseState*>(malloc(sizeof(ParseState)));
-	if (prev == NULL) error(_("unable to allocate in PushState"));
+	if (prev == nullptr) error(_("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 
-        parseState.prevState = NULL;  
+        parseState.prevState = nullptr;  
     busy = TRUE;
 }
 

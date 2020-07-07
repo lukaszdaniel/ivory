@@ -69,7 +69,7 @@ static bool add_point(double x, double y, pGEDevDesc dd)
 					  tmp_n, max_points,
 					  sizeof(double));
 	}
-	if (tmp_px == NULL || tmp_py == NULL) {
+	if (tmp_px == nullptr || tmp_py == nullptr) {
 	    error(_("insufficient memory to allocate point array"));
 	}
 	xpoints = tmp_px;
@@ -451,8 +451,8 @@ static bool compute_open_spline(int n, double *x, double *y, double *s,
 
   max_points = 0;
   npoints = 0;
-  xpoints = NULL;
-  ypoints = NULL;
+  xpoints = nullptr;
+  ypoints = nullptr;
 
   if (repEnds && n < 2)
       error(_("there must be at least two control points"));
@@ -512,8 +512,8 @@ static bool compute_closed_spline(int n, double *x, double *y, double *s,
 
   max_points = 0;
   npoints = 0;
-  xpoints = NULL;
-  ypoints = NULL;
+  xpoints = nullptr;
+  ypoints = nullptr;
 
   if (n < 3)
       error(_("there must be at least three control points"));

@@ -337,8 +337,10 @@ AM_CONDITIONAL(BUILD_HTML, [test "x${want_prebuilt_html}" = xyes])
 AC_ARG_ENABLE([lto],
 [AS_HELP_STRING([--enable-lto],[enable link-time optimization @<:@no@:>@])],
 [want_lto="${enableval}"], [want_lto=no])
+ltoall=no
 ## TODO: add a test for gcc >= 4.5.0 and/or clang/flang
 if test "x${want_lto}" = xyes; then
+  ltoall=yes
   ## used in Makeconf
   LTO=-flto
   ## used in etc/Makeconf
@@ -346,6 +348,7 @@ if test "x${want_lto}" = xyes; then
 elif  test "x${want_lto}" = xR; then
   LTO=-flto
 elif  test "x${want_lto}" = xcheck; then
+  ltoall=yes
   ## use for maintainer checking.
   LTO=-flto
   LTOALL=-flto
@@ -358,6 +361,7 @@ AC_SUBST(LTO)
 AC_SUBST(LTOALL)
 ## used in src/main/Makefile
 AM_CONDITIONAL(BUILD_LTO, [test "x${want_lto}" != xno])
+AM_CONDITIONAL(BUILD_LTO_ALL, [test "x${ltoall}" = xyes])
 AM_CONDITIONAL(BUILD_LTO_CHECK, [test "x${want_lto}" = xcheck])
 
 ### ivory requires Boost of at least a given version,

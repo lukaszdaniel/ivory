@@ -141,9 +141,9 @@ SEXP devcap(SEXP args)
     INTEGER(ans)[i] = dd->haveTransparency;
     INTEGER(ans)[++i] = dd->haveTransparentBg;
     /* These will be NULL if the device does not define them */
-    INTEGER(ans)[++i] = (dd->raster != NULL) ? dd->haveRaster : 1;
-    INTEGER(ans)[++i] = (dd->cap != NULL) ? dd->haveCapture : 1;
-    INTEGER(ans)[++i] = (dd->locator != NULL) ? dd->haveLocator : 1;
+    INTEGER(ans)[++i] = (dd->raster != nullptr) ? dd->haveRaster : 1;
+    INTEGER(ans)[++i] = (dd->cap != nullptr) ? dd->haveCapture : 1;
+    INTEGER(ans)[++i] = (dd->locator != nullptr) ? dd->haveLocator : 1;
     INTEGER(ans)[++i] = (int)(dd->canGenMouseDown);
     INTEGER(ans)[++i] = (int)(dd->canGenMouseMove);
     INTEGER(ans)[++i] = (int)(dd->canGenMouseUp);

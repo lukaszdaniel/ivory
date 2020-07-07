@@ -28,13 +28,14 @@
 
 static SEXP cumsum(SEXP x, SEXP s)
 {
-    LDOUBLE sum = 0.;
-    double *rx = REAL(x), *rs = REAL(s);
-    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
-	sum += rx[i]; /* NA and NaN propagated */
-	rs[i] = (double) sum;
-    }
-    return s;
+	LDOUBLE sum = 0.;
+	double *rx = REAL(x), *rs = REAL(s);
+	for (R_xlen_t i = 0; i < XLENGTH(x); i++)
+	{
+		sum += rx[i]; /* NA and NaN propagated */
+		rs[i] = (double)sum;
+	}
+	return s;
 }
 
 /* We need to ensure that overflow gives NA here */
@@ -56,28 +57,32 @@ static SEXP icumsum(SEXP x, SEXP s)
 
 static SEXP ccumsum(SEXP x, SEXP s)
 {
-    Rcomplex sum;
-    sum.r = 0;
-    sum.i = 0;
-    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
-	sum.r += COMPLEX(x)[i].r;
-	sum.i += COMPLEX(x)[i].i;
-	COMPLEX(s)[i].r = sum.r;
-	COMPLEX(s)[i].i = sum.i;
-    }
-    return s;
+	Rcomplex sum;
+	sum.r = 0;
+	sum.i = 0;
+	for (R_xlen_t i = 0; i < XLENGTH(x); i++)
+	{
+		sum.r += COMPLEX(x)[i].r;
+		sum.i += COMPLEX(x)[i].i;
+		COMPLEX(s)
+		[i].r = sum.r;
+		COMPLEX(s)
+		[i].i = sum.i;
+	}
+	return s;
 }
 
 static SEXP cumprod(SEXP x, SEXP s)
 {
-    LDOUBLE prod;
-    double *rx = REAL(x), *rs = REAL(s);
-    prod = 1.0;
-    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
-	prod *= rx[i]; /* NA and NaN propagated */
-	rs[i] = (double) prod;
-    }
-    return s;
+	LDOUBLE prod;
+	double *rx = REAL(x), *rs = REAL(s);
+	prod = 1.0;
+	for (R_xlen_t i = 0; i < XLENGTH(x); i++)
+	{
+		prod *= rx[i]; /* NA and NaN propagated */
+		rs[i] = (double)prod;
+	}
+	return s;
 }
 
 static SEXP ccumprod(SEXP x, SEXP s)

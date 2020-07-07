@@ -169,7 +169,7 @@ static void block_sigchld(sigset_t *oldset)
 
 static void restore_sigchld(sigset_t *oldset)
 {
-    sigprocmask(SIG_SETMASK, oldset, NULL);
+    sigprocmask(SIG_SETMASK, oldset, nullptr);
 }
 
 /* must not be called from a signal handler */
@@ -276,7 +276,7 @@ static int rm_child(int pid)
 
 /* delete entries for waited-for children and children that are not of this process */
 static void compact_children() {
-    child_info_t *ci = children, *prev = NULL;
+    child_info_t *ci = children, *prev = nullptr;
     pid_t ppid = getpid();
 
     /* prevent interference with signal handler accessing the list */
@@ -508,7 +508,7 @@ static void restore_sig_handler()
 {
     if (parent_handler_set) {
 	parent_handler_set = 0;
-	sigaction(SIGCHLD, &old_sig_handler, NULL);
+	sigaction(SIGCHLD, &old_sig_handler, nullptr);
     }
 }
 
@@ -887,7 +887,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 	struct timeval tv;
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
-	sr = R_SelectEx(maxfd + 1, &fs, 0, 0, &tv, NULL);
+	sr = R_SelectEx(maxfd + 1, &fs, 0, 0, &tv, nullptr);
     } else {
 	double before = currentTime();
 	double remains = timeout;
@@ -910,7 +910,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 		tv.tv_sec = 1; /* still allow to process events */
 		tv.tv_usec = 0;
 	    }
-	    sr = R_SelectEx(maxfd + 1, &fs, 0, 0, &tv, NULL);
+	    sr = R_SelectEx(maxfd + 1, &fs, 0, 0, &tv, nullptr);
 	    if (sr > 0 || (sr < 0 && errno != EINTR))
 		break;
 	    if (timeout > 0) {
@@ -1044,7 +1044,7 @@ SEXP mc_read_children(SEXP sTimeout)
     Dprintf("read_children: maxfd=%d, timeout=%d:%d\n", maxfd, (int)tv.tv_sec, (int)tv.tv_usec);
 #endif
     if (maxfd == 0) return R_NilValue; /* NULL signifies no children to tend to */
-    sr = R_SelectEx(maxfd+1, &fs, 0, 0, tvp, NULL);
+    sr = R_SelectEx(maxfd+1, &fs, 0, 0, tvp, nullptr);
 #ifdef MC_DEBUG
     Dprintf("sr = %d\n", sr);
 #endif

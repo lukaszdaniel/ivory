@@ -154,7 +154,7 @@ SEXP Rf_FixupLwd(SEXP lwd, double dflt)
 {
     int i, n;
     double w;
-    SEXP ans = NULL;
+    SEXP ans = nullptr;
 
     n = length(lwd);
     if (n == 0)
@@ -1319,7 +1319,7 @@ SEXP C_plotXY(SEXP args)
     double *x, *y, xold, yold, xx, yy, thiscex, thislwd;
     int i, n, npch, ncex, ncol, nbg, nlwd, type=0, start=0, thispch;
     rcolor thiscol, thisbg;
-    const void *vmax = NULL /* -Wall */;
+    const void *vmax = nullptr /* -Wall */;
 
     pGEDevDesc dd = GEcurrentDevice();
 
@@ -1785,7 +1785,7 @@ SEXP C_path(SEXP args)
     SEXP sx, sy, nper, rule, col, border, lty;
     int i, nx, npoly;
     double *xx, *yy;
-    const void *vmax = NULL /* -Wall */;
+    const void *vmax = nullptr /* -Wall */;
 
     pGEDevDesc dd = GEcurrentDevice();
 

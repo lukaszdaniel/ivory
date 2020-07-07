@@ -311,13 +311,13 @@ HIDDEN SEXP Rf_StringFromLogical(int x, int *warn)
 
 /* The conversions for small non-negative integers are saved in a chache. */
 constexpr int SFI_CACHE_SIZE = 512;
-static SEXP sficache = NULL;
+static SEXP sficache = nullptr;
 
 HIDDEN SEXP Rf_StringFromInteger(int x, int *warn)
 {
     if (x == NA_INTEGER) return NA_STRING;
     else if (x >= 0 && x < SFI_CACHE_SIZE) {
-	if (sficache == NULL) {
+	if (sficache == nullptr) {
 	    sficache = allocVector(STRSXP, SFI_CACHE_SIZE);
 	    R_PreserveObject(sficache);
 	}
@@ -1275,7 +1275,7 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
 		switch(TYPEOF(v)) {
 		case INTSXP:
 		case REALSXP:
-		    return R_deferred_coerceToString(v, NULL);
+		    return R_deferred_coerceToString(v, nullptr);
 		default:
 		break;
 		}
@@ -1429,7 +1429,7 @@ HIDDEN SEXP do_asatomic(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXPTYPE type = STRSXP;
 	int op0 = PRIMVAL(op);
-    const char *name = NULL /* -Wall */;
+    const char *name = nullptr /* -Wall */;
 
     check1arg(args, call, "x");
     switch(op0) {
@@ -2402,7 +2402,7 @@ static Rboolean anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 HIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
-    static SEXP do_anyNA_formals = NULL;
+    static SEXP do_anyNA_formals = nullptr;
 
     if (length(args) < 1 || length(args) > 2)
 	errorcall(call, _("'anyNA()' function takes 1 or 2 arguments"));
@@ -2418,7 +2418,7 @@ HIDDEN SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* This is a primitive, so we manage argument matching ourselves.
 	   But this takes a little time.
 	 */
-	if (do_anyNA_formals == NULL)
+	if (do_anyNA_formals == nullptr)
 	    do_anyNA_formals = allocFormalsList2(install("x"),
 						 R_RecursiveSymbol);
 	PROTECT(args = matchArgs_NR(do_anyNA_formals, args, call));
@@ -2829,9 +2829,9 @@ HIDDEN SEXP substituteList(SEXP el, SEXP rho)
 HIDDEN SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP argList, env, s, t;
-    static SEXP do_substitute_formals = NULL;
+    static SEXP do_substitute_formals = nullptr;
 
-    if (do_substitute_formals == NULL)
+    if (do_substitute_formals == nullptr)
 	do_substitute_formals = allocFormalsList2(install("expr"),
 						  install("env"));
 

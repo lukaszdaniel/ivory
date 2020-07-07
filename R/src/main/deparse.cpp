@@ -240,8 +240,8 @@ static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
     LocalParseData localData =
 	{/* linenumber */ 0,
 	 0, 0, 0, /*startline = */TRUE, 0,
-	 NULL,
-	 /* DeparseBuffer= */ {NULL, 0, BUFSIZE},
+	 nullptr,
+	 /* DeparseBuffer= */ {nullptr, 0, BUFSIZE},
 	 DEFAULT_Cutoff(), FALSE, 0, TRUE,
 #ifdef longstring_WARN
 	 FALSE,
@@ -875,11 +875,11 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    print2buff("\", ", d);
 	    SEXP slotNms; // ---- slotNms := methods::.slotNames(s)  ---------
 	    // computed alternatively, slotNms := names(getClassDef(class)@slots) :
-	    static SEXP R_getClassDef = NULL, R_slots = NULL, R_asS3 = NULL;
-	    if(R_getClassDef == NULL)
+	    static SEXP R_getClassDef = nullptr, R_slots = nullptr, R_asS3 = nullptr;
+	    if(R_getClassDef == nullptr)
 		R_getClassDef = findFun(install("getClassDef"), R_MethodsNamespace);
-	    if(R_slots == NULL) R_slots = install("slots");
-	    if(R_asS3  == NULL) R_asS3  = install("asS3");
+	    if(R_slots == nullptr) R_slots = install("slots");
+	    if(R_asS3  == nullptr) R_asS3  = install("asS3");
 	    SEXP e = PROTECT(lang2(R_getClassDef, class_));
 	    cl_def = PROTECT(eval(e, R_BaseEnv)); // correct env?
 	    slotNms = // names( cl_def@slots ) :

@@ -59,12 +59,12 @@ void internal_shellexec(const char * file)
     uintptr_t ret;
 
     home = getenv("R_HOME");
-    if (home == NULL)
+    if (home == nullptr)
 	error(_("R_HOME is not set"));
     strncpy(home2, home, 10000 - 1);
     home2[10000 - 1] = '\0';
     for(p = home2; *p; p++) if(*p == '/') *p = '\\';
-    ret = (uintptr_t) ShellExecute(NULL, "open", file, NULL, home2, SW_SHOW);
+    ret = (uintptr_t) ShellExecute(nullptr, "open", file, nullptr, home2, SW_SHOW);
     if(ret <= 32) { /* an error condition */
 	if(ret == ERROR_FILE_NOT_FOUND  || ret == ERROR_PATH_NOT_FOUND
 	   || ret == SE_ERR_FNF || ret == SE_ERR_PNF)
@@ -87,14 +87,14 @@ static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
 
     if (rhome) {
     	home = _wgetenv(L"R_HOME");
-    	if (home == NULL)
+    	if (home == nullptr)
 	    error(_("R_HOME is not set"));
     	wcsncpy(home2, home, 10000);
     	for(p = home2; *p; p++) if(*p == L'/') *p = L'\\';
 	home = home2;
-    } else home = NULL;
+    } else home = nullptr;
 
-    ret = (uintptr_t) ShellExecuteW(NULL, L"open", file, NULL, home, SW_SHOW);
+    ret = (uintptr_t) ShellExecuteW(nullptr, L"open", file, nullptr, home, SW_SHOW);
     if(ret <= 32) { /* an error condition */
 	if(ret == ERROR_FILE_NOT_FOUND  || ret == ERROR_PATH_NOT_FOUND
 	   || ret == SE_ERR_FNF || ret == SE_ERR_PNF)
@@ -125,7 +125,7 @@ int check_doc_file(const char * file)
     char path[MAX_PATH];
 
     home = getenv("R_HOME");
-    if (home == NULL)
+    if (home == nullptr)
 	error(_("R_HOME is not set"));
     if(strlen(home) + strlen(file) + 1 >= MAX_PATH) return(1); /* cannot exist */
     strcpy(path, home);
@@ -226,7 +226,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	pGNSI = (PGNSI)
 	    GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")),
 			   "GetNativeSystemInfo");
-	if(NULL != pGNSI) pGNSI(&si); else GetSystemInfo(&si);
+	if(nullptr != pGNSI) pGNSI(&si); else GetSystemInfo(&si);
 	if(si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
 	    strcat(ver, " x64");
     }
@@ -355,7 +355,7 @@ SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (dwVerInfoSize) {
 	BOOL  fRet;
 	LPSTR lpstrVffInfo;
-	LPSTR lszVer = NULL;
+	LPSTR lszVer = nullptr;
 	UINT  cchVer = 0;
 
 	lpstrVffInfo = (LPSTR) malloc(dwVerInfoSize);
@@ -423,9 +423,9 @@ const char *formatError(DWORD res)
 {
     static char buf[1000], *p;
     FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-		  NULL, res,
+		  nullptr, res,
 		  MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		  buf, 1000, NULL);
+		  buf, 1000, nullptr);
     p = buf+strlen(buf) -1;
     if(*p == '\n') *p = '\0';
     p = buf+strlen(buf) -1;
@@ -499,7 +499,7 @@ typedef BOOL (WINAPI *LPFN_GFIBH_EX) (HANDLE, FILE_INFO_BY_HANDLE_CLASS,
 
 static int isSameFile(HANDLE a, HANDLE b)
 {
-    static LPFN_GFIBH_EX gfibh = NULL;
+    static LPFN_GFIBH_EX gfibh = nullptr;
     static Rboolean initialized = FALSE;
     FILE_ID_INFO aid, bid;
 
@@ -509,7 +509,7 @@ static int isSameFile(HANDLE a, HANDLE b)
 	    GetModuleHandle(TEXT("kernel32")),
 	    "GetFileInformationByHandleEx");
     }
-    if (gfibh == NULL)
+    if (gfibh == nullptr)
 	return -1;
 
     memset(&aid, 0, sizeof(FILE_ID_INFO));
@@ -556,7 +556,7 @@ static Rboolean getFinalPathName(const char *orig, char *res)
     HANDLE horig, hres;
     int ret;
 #if _WIN32_WINNT < 0x0600
-    static LPFN_GFPNBH gfpnbh = NULL;
+    static LPFN_GFPNBH gfpnbh = nullptr;
     static Rboolean initialized = FALSE;
 
     if (!initialized) {
@@ -565,16 +565,16 @@ static Rboolean getFinalPathName(const char *orig, char *res)
 	    GetModuleHandle(TEXT("kernel32")),
 	    "GetFinalPathNameByHandleA");
     }
-    if (gfpnbh == NULL)
+    if (gfpnbh == nullptr)
 	return FALSE;
 #endif
 
     /* FILE_FLAG_BACKUP_SEMANTICS needed to open a directory */
     horig = CreateFile(orig, 0,
                        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                       NULL, OPEN_EXISTING,
+                       nullptr, OPEN_EXISTING,
 	               FILE_ATTRIBUTE_HIDDEN | FILE_FLAG_BACKUP_SEMANTICS,
-                       NULL);
+                       nullptr);
     if (horig == INVALID_HANDLE_VALUE) 
 	return FALSE;
 #if _WIN32_WINNT < 0x0600
@@ -615,9 +615,9 @@ static Rboolean getFinalPathName(const char *orig, char *res)
     /* FILE_FLAG_BACKUP_SEMANTICS needed to open a directory */
     hres = CreateFile(res, 0,
                       FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                      NULL, OPEN_EXISTING,
+                      nullptr, OPEN_EXISTING,
                       FILE_ATTRIBUTE_HIDDEN | FILE_FLAG_BACKUP_SEMANTICS,
-                      NULL);
+                      nullptr);
     if (hres == INVALID_HANDLE_VALUE) {
 	CloseHandle(horig);
 	return FALSE;
@@ -641,7 +641,7 @@ static Rboolean getFinalPathNameW(const wchar_t *orig, wchar_t *res)
     HANDLE horig, hres;
     int ret;
 #if _WIN32_WINNT < 0x0600
-    static LPFN_GFPNBHW gfpnbhw = NULL;
+    static LPFN_GFPNBHW gfpnbhw = nullptr;
     static Rboolean initialized = FALSE;
 
     if (!initialized) {
@@ -650,16 +650,16 @@ static Rboolean getFinalPathNameW(const wchar_t *orig, wchar_t *res)
 	    GetModuleHandle(TEXT("kernel32")),
 	    "GetFinalPathNameByHandleW");
     }
-    if (gfpnbhw == NULL)
+    if (gfpnbhw == nullptr)
 	return FALSE;
 #endif
 
     /* FILE_FLAG_BACKUP_SEMANTICS needed to open a directory */
     horig = CreateFileW(orig, 0,
                         FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                        NULL, OPEN_EXISTING,
+                        nullptr, OPEN_EXISTING,
                         FILE_ATTRIBUTE_HIDDEN | FILE_FLAG_BACKUP_SEMANTICS,
-                        NULL);
+                        nullptr);
     if (horig == INVALID_HANDLE_VALUE) 
 	return FALSE;
 
@@ -702,9 +702,9 @@ static Rboolean getFinalPathNameW(const wchar_t *orig, wchar_t *res)
     /* FILE_FLAG_BACKUP_SEMANTICS needed to open a directory */
     hres = CreateFileW(res, 0,
                        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                       NULL, OPEN_EXISTING,
+                       nullptr, OPEN_EXISTING,
                        FILE_ATTRIBUTE_HIDDEN | FILE_FLAG_BACKUP_SEMANTICS,
-                       NULL);
+                       nullptr);
     if (hres == INVALID_HANDLE_VALUE) {
 	CloseHandle(horig);
 	return FALSE;
@@ -755,7 +755,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if(mustWork == NA_LOGICAL)
 		warningcall(call, "path[%d]=NA", i+1);
 	} else if(getCharCE(el) == CE_UTF8) {
-	    wchar_t *norm = NULL;
+	    wchar_t *norm = nullptr;
 	    const wchar_t* wel = filenameToWchar(el, FALSE);
 
 	    if (getFinalPathNameW(wel, wtmp)) {
@@ -770,7 +770,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 		        wlongpath[1] == L':') {
 
 			ok = FALSE;
-			norm = NULL;
+			norm = nullptr;
 			/* NOTE: GetFullPathName is called twice */
 		    }
 		}
@@ -809,7 +809,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (fslash) R_UTF8fixslash(normutf8);
 	    result = mkCharCE(normutf8, CE_UTF8);
 	} else {
-	    char *norm = NULL;
+	    char *norm = nullptr;
 	    const char *tel = translateChar(el);
 	    if (getFinalPathName(tel, tmp)) {
 		norm = tmp;
@@ -822,7 +822,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 		        isalpha(longpath[0]) && longpath[1] == ':') {
 
 			ok = FALSE;
-			norm = NULL;
+			norm = nullptr;
 			/* NOTE: GetFullPathName is called twice */
 		    }
 		}
@@ -1018,20 +1018,20 @@ int winAccessW(const wchar_t *path, int mode)
 	if(!(attr & FILE_ATTRIBUTE_DIRECTORY)) { /* Directory, so OK */
 	    /* Look at extension for executables */
 	    wchar_t *p = wcsrchr(path, '.');
-	    if(p == NULL ||
+	    if(p == nullptr ||
 	       !((wcsicmp(p, L".exe") == 0) || (wcsicmp(p, L".com") == 0) ||
 		 (wcsicmp(p, L".bat") == 0) || (wcsicmp(p, L".cmd") == 0)) )
 		return -1;
 	}
     {
 	/* Now look for file security info */
-	SECURITY_DESCRIPTOR *sdPtr = NULL;
+	SECURITY_DESCRIPTOR *sdPtr = nullptr;
 	DWORD size = 0;
 	PSID sid = 0;
 	BOOL sidDefaulted;
 	SID_IDENTIFIER_AUTHORITY samba_unmapped = {{0, 0, 0, 0, 0, 22}};
 	GENERIC_MAPPING genMap;
-	HANDLE hToken = NULL;
+	HANDLE hToken = nullptr;
 	DWORD desiredAccess = 0;
 	DWORD grantedAccess = 0;
 	BOOL accessYesNo = FALSE;
@@ -1147,7 +1147,7 @@ size_t Rmbrtowc(wchar_t *wc, const char *s)
     }
     return -2;
 #else
-    return mbrtowc(wc, s, MB_CUR_MAX, NULL);
+    return mbrtowc(wc, s, MB_CUR_MAX, nullptr);
 #endif
 }
 
@@ -1167,7 +1167,7 @@ size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n)
 	}
     } else {
 	for(p = s; ; p+=m) {
-	    m  = Rmbrtowc(NULL, p);
+	    m  = Rmbrtowc(nullptr, p);
 	    if(m < 0) error(_("invalid input in '%s' function"), "Rmbstowcs()");
 	    if(m <= 0) break;
 	    res++;

@@ -1267,7 +1267,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	break;
     case EXTPTRSXP:
 	PROTECT(s = allocSExp(SEXPTYPE(type)));
-	R_SetExternalPtrAddr(s, NULL);
+	R_SetExternalPtrAddr(s, nullptr);
 	R_SetExternalPtrProtected(s, NewReadItem(sym_table, env_table, fp, m, d));
 	R_SetExternalPtrTag(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
@@ -1444,7 +1444,7 @@ static void OutStringAscii(FILE *fp, const char *x, SaveLoadData *unused)
 
 static char *InStringAscii(FILE *fp, SaveLoadData *unused)
 {
-    static char *buf = NULL;
+    static char *buf = nullptr;
     static int buflen = 0;
     int c, d, i, j;
     int nbytes, res;
@@ -1458,7 +1458,7 @@ static char *InStringAscii(FILE *fp, SaveLoadData *unused)
 	/* Protect against broken realloc */
 	if(buf) newbuf = (char *) realloc(buf, nbytes + 1);
 	else newbuf = (char *) malloc(nbytes + 1);
-	if (newbuf == NULL) /* buf remains allocated */
+	if (newbuf == nullptr) /* buf remains allocated */
 	    error(_("out of memory while reading ascii string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
@@ -1591,7 +1591,7 @@ static int InIntegerBinary(FILE *fp, SaveLoadData *unused)
 
 static char *InStringBinary(FILE *fp, SaveLoadData *unused)
 {
-    static char *buf = NULL;
+    static char *buf = nullptr;
     static int buflen = 0;
     int nbytes = InIntegerBinary(fp, unused);
     if (nbytes >= buflen) {
@@ -1599,7 +1599,7 @@ static char *InStringBinary(FILE *fp, SaveLoadData *unused)
 	/* Protect against broken realloc */
 	if(buf) newbuf = (char *) realloc(buf, nbytes + 1);
 	else newbuf = (char *) malloc(nbytes + 1);
-	if (newbuf == NULL)
+	if (newbuf == nullptr)
 	    error(_("out of memory while reading binary string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
@@ -1691,7 +1691,7 @@ static void OutStringXdr(FILE *fp, const char *s, SaveLoadData *d)
 
 static char *InStringXdr(FILE *fp, SaveLoadData *d)
 {
-    static char *buf = NULL;
+    static char *buf = nullptr;
     static int buflen = 0;
     unsigned int nbytes = InIntegerXdr(fp, d);
     if (nbytes >= (unsigned int) buflen) {
@@ -1699,7 +1699,7 @@ static char *InStringXdr(FILE *fp, SaveLoadData *d)
 	/* Protect against broken realloc */
 	if(buf) newbuf = (char *) realloc(buf, nbytes + 1);
 	else newbuf = (char *) malloc(nbytes + 1);
-	if (newbuf == NULL)
+	if (newbuf == nullptr)
 	    error(_("out of memory while reading binary string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
@@ -1875,7 +1875,7 @@ inline static int defaultSaveVersion()
     {
         char *valstr = getenv("R_DEFAULT_SAVE_VERSION");
         int val = -1;
-        if (valstr != NULL)
+        if (valstr != nullptr)
             val = atoi(valstr);
         if (val == 2 || val == 3)
             dflt = val;
@@ -1889,7 +1889,7 @@ inline static int defaultSaveVersion()
 
 HIDDEN void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
-    SaveLoadData data = {{NULL, 0, MAXELTSIZE}};
+    SaveLoadData data = {{nullptr, 0, MAXELTSIZE}};
 
     if (version == 1) {
 	if (ascii) {
@@ -1918,7 +1918,7 @@ HIDDEN void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 	R_WriteMagic(fp, magic);
 	/* version == 0 means defaultSerializeVersion()
 	   unsupported version will result in error  */
-	R_InitFileOutPStream(&out, fp, type, version, NULL, NULL);
+	R_InitFileOutPStream(&out, fp, type, version, nullptr, nullptr);
 	R_Serialize(obj, &out);
     }
 }
@@ -1935,7 +1935,7 @@ HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;
-    SaveLoadData data = {{NULL, 0, MAXELTSIZE}};
+    SaveLoadData data = {{nullptr, 0, MAXELTSIZE}};
     SEXP r;
 
     magic = R_ReadMagic(fp);
@@ -1958,15 +1958,15 @@ HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 	return_and_free(NewXdrLoad(fp, &data));
     case R_MAGIC_ASCII_V2:
     case R_MAGIC_ASCII_V3:
-	R_InitFileInPStream(&in, fp, R_pstream_ascii_format, NULL, NULL);
+	R_InitFileInPStream(&in, fp, R_pstream_ascii_format, nullptr, nullptr);
 	return_and_free(R_Unserialize(&in));
     case R_MAGIC_BINARY_V2:
     case R_MAGIC_BINARY_V3:
-	R_InitFileInPStream(&in, fp, R_pstream_binary_format, NULL, NULL);
+	R_InitFileInPStream(&in, fp, R_pstream_binary_format, nullptr, nullptr);
 	return_and_free(R_Unserialize(&in));
     case R_MAGIC_XDR_V2:
     case R_MAGIC_XDR_V3:
-	R_InitFileInPStream(&in, fp, R_pstream_xdr_format, NULL, NULL);
+	R_InitFileInPStream(&in, fp, R_pstream_xdr_format, nullptr, nullptr);
 	return_and_free(R_Unserialize(&in));
     default:
 	R_FreeStringBuffer(&data.buffer);
@@ -2284,7 +2284,7 @@ void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
     SEXP sym = install("sys.load.image");
     if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
 	FILE *fp = R_fopen(name, "rb"); /* binary file */
-	if(fp != NULL) {
+	if(fp != nullptr) {
 	    R_LoadSavedData(fp, R_GlobalEnv);
 	    if(! quiet)
 		Rprintf(_("[Previously saved workspace restored]\n\n"));
@@ -2316,7 +2316,7 @@ static void con_cleanup(void *data)
    something like
 
 	magic <- if (ascii) "RDA3\n" else ...
-	writeChar(magic, con, eos = NULL)
+	writeChar(magic, con, eos = nullptr)
 	val <- lapply(list, get, envir = envir)
 	names(val) <- list
 	invisible(serialize(val, con, ascii = ascii))
@@ -2409,7 +2409,7 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("error writing to connection"));
     }
 
-    R_InitConnOutPStream(&out, con, type, version, NULL, NULL);
+    R_InitConnOutPStream(&out, con, type, version, nullptr, nullptr);
 
     len = length(list);
     PROTECT(s = allocList(len));
@@ -2489,7 +2489,7 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	streqln((char*)buf, "RDA3\n", 5) ||
 	streqln((char*)buf, "RDB3\n", 5) ||
 	streqln((char*)buf, "RDX3\n", 5)) {
-	R_InitConnInPStream(&in, con, R_pstream_any_format, NULL, NULL);
+	R_InitConnInPStream(&in, con, R_pstream_any_format, nullptr, nullptr);
 	if (PRIMVAL(op) == 0) {
 	    int old_InitReadItemDepth = R_InitReadItemDepth,
 		old_ReadItemDepth = R_ReadItemDepth;

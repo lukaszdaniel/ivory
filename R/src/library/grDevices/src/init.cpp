@@ -83,7 +83,7 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(bringToTop, 2),
     CALLDEF(msgWindow, 2),
 #endif
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -125,7 +125,7 @@ static const R_ExternalMethodDef ExtEntries[] = {
     EXTDEF(Quartz, 11),
     EXTDEF(X11, 18),
 #endif
-    {NULL, NULL, 0}
+    {nullptr, nullptr, 0}
 };
 
 #ifdef HAVE_AQUA
@@ -137,7 +137,7 @@ extern "C"
 void attribute_visible R_init_grDevices(DllInfo *dll)
 {
     initPalette();
-    R_registerRoutines(dll, NULL, CallEntries, NULL, ExtEntries);
+    R_registerRoutines(dll, nullptr, CallEntries, nullptr, ExtEntries);
     R_useDynamicSymbols(dll, FALSE);
     R_forceSymbols(dll, TRUE);
 

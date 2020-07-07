@@ -181,12 +181,12 @@ static void R_getDLLError(char *buf, int len)
 	FORMAT_MESSAGE_ALLOCATE_BUFFER |
 	FORMAT_MESSAGE_FROM_SYSTEM |
 	FORMAT_MESSAGE_IGNORE_INSERTS,
-	NULL,
+	nullptr,
 	GetLastError(),
 	MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 	(LPSTR) &lpMsgBuf,
 	0,
-	NULL
+	nullptr
 	);
     strcpy(buf, "LoadLibrary failure:  ");
     q = buf + strlen(buf);

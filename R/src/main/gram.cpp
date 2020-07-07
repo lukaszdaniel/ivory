@@ -111,7 +111,7 @@
 #define PARSE_CONTEXT_SIZE 256	    /* Recent parse context kept in a circular buffer */
 
 static Rboolean busy = FALSE;
-static SEXP R_NullSymbol = NULL;
+static SEXP R_NullSymbol = nullptr;
 
 static int identifier;
 static void incrementId(void);
@@ -372,7 +372,7 @@ static int mbcs_get_next(int c, wchar_t *wc)
 	    s[i] = (char) c;
 	}
 	s[clen] ='\0'; /* x86 Solaris requires this */
-	res = (int) mbrtowc(wc, s, clen, NULL);
+	res = (int) mbrtowc(wc, s, clen, nullptr);
 	if(res == -1) error(_("invalid multibyte character in parser at line %d"), ParseState.xxlineno);
     } else {
 	/* This is not necessarily correct for stateful MBCS */
@@ -2052,7 +2052,7 @@ yyreduce:
     break;
 
   case 3:
-                                                { yyresult = xxvalue(NULL,2,NULL);	goto yyreturn; }
+                                                { yyresult = xxvalue(nullptr,2,nullptr);	goto yyreturn; }
     break;
 
   case 4:
@@ -3526,7 +3526,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
     	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
-	if (prev == NULL)
+	if (prev == nullptr)
 	    error(_("allocation of source reference state failed"));
     	PutSrcRefState(prev);
 	ParseState.prevState = prev;
@@ -3537,7 +3537,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
 	/* ParseState.sexps released in R_FinalizeSrcRefState */
     } else
 	/* re-use data, text, ids arrays */
-        ParseState.prevState = NULL;
+        ParseState.prevState = nullptr;
     /* set up context _after_ PutSrcRefState */
     RCNTXT::begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
@@ -4911,7 +4911,7 @@ static int StringValue(int c, Rboolean forSymbol)
 	    wchar_t wc;
 	    char s[2] = " ";
 	    s[0] = (char) c;
-	    mbrtowc(&wc, s, 2, NULL);
+	    mbrtowc(&wc, s, 2, nullptr);
 #endif
 	    WTEXT_PUSH(wc);
 	}
@@ -5038,7 +5038,7 @@ static int RawStringValue(int c0, int c)
 	    wchar_t wc;
 	    char s[2] = " ";
 	    s[0] = (char) c;
-	    mbrtowc(&wc, s, 2, NULL);
+	    mbrtowc(&wc, s, 2, nullptr);
 #endif
 	    WTEXT_PUSH(wc);
 	}
@@ -5106,15 +5106,15 @@ HIDDEN bool Rf_isValidName(const char *name)
 	   use the wchar variants */
 	size_t n = strlen(name), used;
 	wchar_t wc;
-	used = Mbrtowc(&wc, p, n, NULL); p += used; n -= used;
+	used = Mbrtowc(&wc, p, n, nullptr); p += used; n -= used;
 	if(used == 0) return 0;
 	if (wc != L'.' && !iswalpha(wc) ) return false;
 	if (wc == L'.') {
 	    /* We don't care about other than ASCII digits */
 	    if(isdigit(0xff & (int)*p)) return false;
-	    /* Mbrtowc(&wc, p, n, NULL); if(iswdigit(wc)) return 0; */
+	    /* Mbrtowc(&wc, p, n, nullptr); if(iswdigit(wc)) return 0; */
 	}
-	while((used = Mbrtowc(&wc, p, n, NULL))) {
+	while((used = Mbrtowc(&wc, p, n, nullptr))) {
 	    if (!(iswalnum(wc) || wc == L'.' || wc == L'_')) break;
 	    p += used; n -= used;
 	}
@@ -5129,7 +5129,7 @@ HIDDEN bool Rf_isValidName(const char *name)
 
     if (streql(name, "...")) return true;
 
-    for (int i = 0; keywords[i].name != NULL; i++)
+    for (int i = 0; keywords[i].name != nullptr; i++)
 	if (streql(keywords[i].name, name)) return false;
 
     return true;

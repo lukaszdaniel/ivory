@@ -93,7 +93,7 @@ static int R_CurrentDevice = 0;
 static int R_NumDevices = 1;
 /*
    R_MaxDevices is defined in ../include/Defn.h to be 64.  Slots are
-   initiialized to be NULL, and returned to NULL when a device is
+   initiialized to be nullptr, and returned to NULL when a device is
    removed.
 
    Slot 0 is the null device, and slot 63 is keep empty as a sentinel
@@ -248,7 +248,7 @@ int ndevNumber(pDevDesc dd)
 {
     int i;
     for (i = 1; i < R_MaxDevices; i++)
-	if (R_Devices[i] != NULL && R_Devices[i]->dev == dd)
+	if (R_Devices[i] != nullptr && R_Devices[i]->dev == dd)
 	    return i;
     return 0;
 }
@@ -259,7 +259,7 @@ int selectDevice(int devNum)
        See ?dev.set.
      */
     if((devNum >= 0) && (devNum < R_MaxDevices) &&
-       (R_Devices[devNum] != NULL) && active[devNum])
+       (R_Devices[devNum] != nullptr) && active[devNum])
     {
 	pGEDevDesc gdd;
 
@@ -293,7 +293,7 @@ void removeDevice(int devNum, Rboolean findNext)
 {
     /* Not vaild to remove nullDevice */
     if((devNum > 0) && (devNum < R_MaxDevices) &&
-       (R_Devices[devNum] != NULL) && active[devNum])
+       (R_Devices[devNum] != nullptr) && active[devNum])
     {
 	int i;
 	SEXP s;
@@ -326,7 +326,7 @@ void removeDevice(int devNum, Rboolean findNext)
 	}
 	g->dev->close(g->dev);
 	GEdestroyDevDesc(g);
-	R_Devices[devNum] = NULL;
+	R_Devices[devNum] = nullptr;
     }
 }
 
@@ -376,7 +376,7 @@ pGEDevDesc desc2GEDesc(pDevDesc dd)
 {
     int i;
     for (i = 1; i < R_MaxDevices; i++)
-	if (R_Devices[i] != NULL && R_Devices[i]->dev == dd)
+	if (R_Devices[i] != nullptr && R_Devices[i]->dev == dd)
 	    return R_Devices[i];
     /* shouldn't happen ...
        but might if device is not yet registered or being killed */
@@ -419,7 +419,7 @@ void GEaddDevice(pGEDevDesc gdd)
 	s = CDR(s);
 	appnd = FALSE;
     }
-    while (R_Devices[i] != NULL) {
+    while (R_Devices[i] != nullptr) {
 	i++;
 	if (CDR(s) == R_NilValue)
 	    appnd = TRUE;
@@ -492,7 +492,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
     int i;
     if (!gdd)
 	error(_("not enough memory to allocate device (in 'GEcreateDevDesc()' function)"));
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = NULL;
+    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = nullptr;
     gdd->dev = dev;
     gdd->displayListOn = dev->displayListOn;
     gdd->displayList = R_NilValue; /* gc needs this */
@@ -521,7 +521,7 @@ HIDDEN void Rf_InitGraphics(void)
     active[0] = TRUE;
     // these are static arrays, not really needed
     for (int i = 1; i < R_MaxDevices; i++) {
-	R_Devices[i] = NULL;
+	R_Devices[i] = nullptr;
 	active[i] = FALSE;
     }
 

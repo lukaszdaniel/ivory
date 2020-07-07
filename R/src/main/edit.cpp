@@ -75,7 +75,7 @@ HIDDEN void Rf_InitEd()
 #ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
 #else
-    DefaultFileName = R_tmpnam2(NULL, R_TempDir, ".R");
+    DefaultFileName = R_tmpnam2(nullptr, R_TempDir, ".R");
 #endif
 }
 
@@ -119,7 +119,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     else filename = DefaultFileName;
 
     if (x != R_NilValue) {
-	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
+	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == nullptr)
 	    errorcall(call, _("unable to open file '%s'"), filename);
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
 	PROTECT(src = deparse1(x, FALSE, FORSOURCING)); /* deparse for sourcing, not for display */
@@ -156,7 +156,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    sprintf(editcmd, "\"%s\" \"%s\"", cmd, filename);
 	else
 	    sprintf(editcmd, "%s \"%s\"", cmd, filename);
-	rc = runcmd(editcmd, CE_NATIVE, 1, 1, NULL, NULL, NULL);
+	rc = runcmd(editcmd, CE_NATIVE, 1, 1, nullptr, nullptr, nullptr);
 	if (rc == NOLAUNCH)
 	    errorcall(call, _("unable to run editor '%s'"), cmd);
 	if (rc != 0)
@@ -187,7 +187,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* <FIXME> setup a context to close the file, and parse and eval
        line by line */
-    if((fp = R_fopen(R_ExpandFileName(filename), "r")) == NULL)
+    if((fp = R_fopen(R_ExpandFileName(filename), "r")) == nullptr)
 	errorcall(call, _("unable to open file to read"));
 
     x = PROTECT(R_ParseFile(fp, -1, &status, srcfile));

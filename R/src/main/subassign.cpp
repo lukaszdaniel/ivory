@@ -133,9 +133,9 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 {
     R_xlen_t len, newtruelen;
     SEXP newx, names;
-    static SEXP R_CheckBoundsSymbol = NULL;
+    static SEXP R_CheckBoundsSymbol = nullptr;
 
-    if (R_CheckBoundsSymbol == NULL)
+    if (R_CheckBoundsSymbol == nullptr)
 	R_CheckBoundsSymbol = install("check.bounds");
 
     /* Sanity Checks */
@@ -170,7 +170,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
     static double expand = 0;
     if (expand == 0) {
 	char *envval = getenv("R_EXPAND_FRAC");
-	expand = envval != NULL ? atof(envval) : expand_dflt;
+	expand = envval != nullptr ? atof(envval) : expand_dflt;
 	if (expand < 1 || expand > 2) {
 	    expand = expand_dflt;
 	    error(_("bad expand value"));
@@ -287,10 +287,10 @@ static SEXP embedInVector(SEXP v, SEXP call)
 }
 
 static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
-    static SEXP op = NULL;
+    static SEXP op = nullptr;
     SEXP args;
     bool ans;
-    if (op == NULL)
+    if (op == nullptr)
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
@@ -1562,7 +1562,7 @@ R_INLINE static
 int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
-    SEXP prom = NULL;
+    SEXP prom = nullptr;
     if (args != R_NilValue && CAR(args) != R_DotsSymbol) {
 	SEXP x = eval(CAR(args), rho);
 	PROTECT(x);
@@ -1775,7 +1775,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     S4 = (Rboolean) IS_S4_OBJECT(x);
 
     /* Handle NULL left-hand sides.  If the right-hand side */
-    /* is NULL, just return the left-hand size otherwise, */
+    /* is nullptr, just return the left-hand size otherwise, */
     /* convert to a zero length list (VECSXP). */
 
     if (isNull(x)) {
@@ -1812,7 +1812,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     dims = getAttrib(x, R_DimSymbol);
     ndims = length(dims);
 
-    int *pdims = NULL;
+    int *pdims = nullptr;
     if (ndims > 0) {
 	if (TYPEOF(dims) == INTSXP)
 	    pdims = INTEGER(dims);
@@ -2233,7 +2233,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	nx = xlength(x);
 	nlist = PRINTNAME(nlist);
 	if (isNull(val)) {
-	    /* If "val" is NULL, this is an element deletion */
+	    /* If "val" is nullptr, this is an element deletion */
 	    /* if there is a match to "nlist" otherwise "x" */
 	    /* is unchanged.  The attributes need adjustment. */
 	    if (names != R_NilValue) {
@@ -2265,7 +2265,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	    }
 	}
 	else {
-	    /* If "val" is non-NULL, we are either replacing */
+	    /* If "val" is non-nullptr, we are either replacing */
 	    /* an existing list element or we are adding a new */
 	    /* element. */
 	    imatch = -1;

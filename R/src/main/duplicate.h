@@ -42,21 +42,47 @@ Iterator macro to fill a matrix from a vector with re-use of vector
                       (sidx >= nsrc) ? sidx -= nsrc : 0,      \
                       didx += drows)
 
-void xcopyComplexWithRecycle(Rcomplex *dst, Rcomplex *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
-void xcopyIntegerWithRecycle(int *dst, int *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
-void xcopyLogicalWithRecycle(int *dst, int *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
-void xcopyRawWithRecycle(Rbyte *dst, Rbyte *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
-void xcopyRealWithRecycle(double *dst, double *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 void xcopyStringWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 void xcopyVectorWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
+template <typename VALTYPE>
+HIDDEN void xcopyWithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc)
+{
 
-void xfillComplexMatrixWithRecycle(Rcomplex *dst, Rcomplex *src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
-void xfillIntegerMatrixWithRecycle(int *dst, int *src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
-void xfillLogicalMatrixWithRecycle(int *dst, int *src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
-void xfillRawMatrixWithRecycle(Rbyte *dst, Rbyte *src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
-void xfillRealMatrixWithRecycle(double *dst, double *src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
+	if (nsrc >= n)
+	{ /* no recycle needed */
+		for (R_xlen_t i = 0; i < n; i++)
+			dst[dstart + i] = src[i];
+		return;
+	}
+	if (nsrc == 1)
+	{
+		VALTYPE val = src[0];
+		for (R_xlen_t i = 0; i < n; i++)
+			dst[dstart + i] = val;
+		return;
+	}
+
+	/* recycle needed */
+	R_xlen_t sidx = 0;
+	for (R_xlen_t i = 0; i < n; i++, sidx++)
+	{
+		if (sidx == nsrc)
+			sidx = 0;
+		dst[dstart + i] = src[sidx];
+	}
+}
+
 void xfillStringMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
 void xfillVectorMatrixWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows, R_xlen_t cols, R_xlen_t nsrc);
+template <typename VALTYPE>
+HIDDEN void xfillMatrixWithRecycle(VALTYPE *dst, VALTYPE *src,
+                                   R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,
+                                   R_xlen_t cols, R_xlen_t nsrc)
+{
+
+    FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)
+    dst[didx] = src[sidx];
+}
 
 #define FILL_MATRIX_BYROW_ITERATE(dstart, drows, dcols, nsrc) \
     for (R_xlen_t i = 0, sidx = 0; i < drows; i++)            \

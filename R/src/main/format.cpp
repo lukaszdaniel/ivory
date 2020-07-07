@@ -182,7 +182,7 @@ void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
 
     int xmin = R_INT_MAX, xmax = INT_MIN, naflag = 0,
 	sorted;
-    SEXP tmpmin = NULL, tmpmax = NULL;
+    SEXP tmpmin = nullptr, tmpmax = nullptr;
     /*
        min and max should be VERY cheap when sortedness
        is known, so better to call them both than loop
@@ -215,7 +215,7 @@ void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
        In both of the above cases we will
        do things the hard way below
     */
-    if(tmpmin != NULL && tmpmax != NULL &&
+    if(tmpmin != nullptr && tmpmax != nullptr &&
        TYPEOF(tmpmin) == INTSXP && TYPEOF(tmpmax) == INTSXP) {
 	int l; /* only needed here so defined locally */
 	xmin = INTEGER_ELT(tmpmin, 0);
@@ -285,7 +285,7 @@ static void format_via_sprintf(double r, int d, int *kpower, int *nsig)
     static char buff[NB];
     int i;
     snprintf(buff, NB, "%#.*e", d - 1, r);
-    *kpower = (int) strtol(buff + (d + 2), NULL, 10);
+    *kpower = (int) strtol(buff + (d + 2), nullptr, 10);
     for (i = d; i >= 2; i--)
         if (buff[i] != '0') break;
     *nsig = i;
