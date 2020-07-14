@@ -78,14 +78,34 @@
       The graphics engine version, \code{R_GE_version}, has been bumped
       to 13 and so packages that provide graphics devices
       should be reinstalled.
+
+      \code{str(xS4)} now also shows extraneous attributes of an S4 object
+      \code{xS4}.
     }
   }
 
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The \emph{standalone} \file{libRmath} math library and \R's C
-      API now provide \code{log1pexp()} again as documented, and get new
+      API now provide \code{log1pexp()} again as documented, and gains
       \code{log1mexp()}.
+    }
+  }
+
+  \subsection{LINK-TIME OPTIMIZATION on a UNIX-ALIKE}{
+    \itemize{
+      \item Configuring with flag \option{--enable-lto=R} now also uses
+      LTO when installing the recommended packages.
+
+      \item \command{R CMD INSTALL} and \command{R CMD SHLIB} have a new
+      flag \option{--use-LTO} to use LTO when compiling code, for use
+      with \R configured with \option{--enable-lto=R}.  For \R
+      configured with \option{--enable-lto}, they have the new flag
+      \option{--no-use-LTO}.
+
+      Packages can opt in or out of LTO compilation \emph{via} a
+      \samp{UseLTO} field in the \file{DESCRIPTION} file.  (As usual this
+      can be overridden by the command-line flags.)
     }
   }
 
@@ -128,7 +148,7 @@
 
       \item \code{round()} and \code{signif()} no longer tolerate wrong
       argument names, notably in 1-argument calls; reported by Shane
-      Mueller on R-devel (mailing list).
+      Mueller on the  R-devel mailing list.
 
       \item \code{boxplot()} now also accepts \code{call}s for labels such
       as \code{ylab}, the same as \code{plot()}.  Reported by Marius Hofert.
@@ -139,6 +159,11 @@
       \item The help page for \code{xtabs()} now correctly states that
       \code{addNA} is setting \code{na.action = na.pass} among others;
       reported as \PR{17770} by Thomas Soeiro.
+
+      \item Low-level socket read/write operations have been fixed to
+      correctly signal communication errors. Previously, such errors could
+      lead to a segfault due to invalid memory access. Reported
+      and debugged by Dmitriy Selivanov in \PR{17850}.
     }
   }
 }
@@ -147,13 +172,29 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-       \item On platforms using \command{configure} option
-      \option{---with-internal-tzcode}, additional values
+      \item On platforms using \command{configure} option
+      \option{--with-internal-tzcode}, additional values
       \code{"internal"} and (on macOS only) \code{"macOS"} are accepted
-      for the environment variable \env{TZDIR}.
+      for the environment variable \env{TZDIR}.  (See \code{?TZDIR}.)
 
       On macOS, \code{"macOS"} is used by default if the system timezone
       database is a newer version than that in the \R installation.
+    }
+  }
+
+  \subsection{LINK-TIME OPTIMIZATION on a UNIX-ALIKE}{
+    \itemize{
+      \item There is now support for parallelized Link-Time Optimization
+      (LTO) with GCC and for \sQuote{thin} LTO with
+      \command{clang} \emph{via} setting the \samp{LTO} macro.
+
+      \item There is support for setting a different LTO flag for the
+      Fortran compiler, including to empty when mixing \command{clang}
+      and \command{gfortran} (as on macOS).  See file \file{config.site}.
+
+      \item There is a new \samp{LTO_LD} macro to set linker options for
+      LTO compilation, for example to select an alternative linker or
+      to parallelize thin LTO.
     }
   }
 
@@ -166,6 +207,10 @@
 
       \item Fix to correctly show the group labels in \code{dotchart()}
       (which where lost in the \code{ylab} improvement for \R 4.0.0).
+
+      \item \code{addmargins(*, ..)} now also works when \code{fn()} is a
+      local function, thanks to bug report and patch \PR{17124} from Alex
+      Bertram.
     }
   }
 }

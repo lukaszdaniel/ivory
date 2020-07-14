@@ -27,7 +27,7 @@
 #include <Internal.h>
 #include <Rversion.h>
 
-HIDDEN void PrintGreeting(void)
+HIDDEN void Rf_PrintGreeting(void)
 {
     char buf[500];
 

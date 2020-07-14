@@ -205,7 +205,7 @@ struct ParseState {
     ParseState *prevState;
 };
 
-static Rboolean busy = FALSE;
+static bool busy = false;
 static ParseState parseState;
 
 #define PRESERVE_SV(x) R_PreserveInMSet((x), parseState.mset)
@@ -2963,10 +2963,10 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
 #define START_MACRO -2
 #define END_MACRO -3
 
-static Rboolean isComment(SEXP elt)
+static bool isComment(SEXP elt)
 {
     SEXP a = getAttrib(elt, R_RdTagSymbol);
-    return Rboolean(isString(a) && LENGTH(a) == 1 &&
+    return (isString(a) && LENGTH(a) == 1 &&
            !strcmp(CHAR(STRING_ELT(a, 0)), "COMMENT"));
 }
 
@@ -4289,7 +4289,7 @@ static void PushState() {
     	parseState.prevState = prev;
     } else 
         parseState.prevState = nullptr;  
-    busy = TRUE;
+    busy = true;
 }
 
 static void PopState() {
@@ -4298,7 +4298,7 @@ static void PopState() {
     	UseState(prev);
     	free(prev);
     } else
-    	busy = FALSE;
+    	busy = false;
 }
 
 /* "do_parseRd" 

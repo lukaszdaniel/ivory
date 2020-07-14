@@ -99,7 +99,7 @@ HIDDEN SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     return R_NilValue; /* -Wall */
 }
 
-R_INLINE static std::complex<double> R_cpow_n(std::complex<double> X, int k)
+inline static std::complex<double> R_cpow_n(std::complex<double> X, int k)
 {
     if(k == 0) return (std::complex<double>) 1.;
     else if(k == 1) return X;

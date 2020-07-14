@@ -327,8 +327,12 @@ str.default <-
 	} else { ## S4 non-envRefClass
 	    sNms <- methods::.slotNames(object)
 	    cat(sprintf(ngettext(length(sNms), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")),  length(sNms)), "\n", sep = "")
-	    a <- trygetSlots(object, sNms)
-	    strSub(a, comp.str = "@ ", no.list=TRUE, give.length=give.length, indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
+	    s <- trygetSlots(object, sNms)
+	    strSub(s, comp.str = "@ ", no.list=TRUE, give.length=give.length, indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
+	    ## if there are non-slot nor "class" attributes, show them:
+	    if(give.attr && length(nmsa <- setdiff(names(a), c("class", sNms))))
+		strSub(a[nmsa], no.list=TRUE, give.length=give.length,
+		       indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	}
 	return(invisible())
     }

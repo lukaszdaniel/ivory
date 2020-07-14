@@ -45,15 +45,15 @@
 /* JMC convinced MM that this was not a good idea: */
 #undef _S4_subsettable
 
-
-R_INLINE static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
-    /* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
+inline static SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i)
+{
+	/* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
        Duplicating might be safer/more consistent (fix bug reported by
        Radford Neal; similar to PR15098) */
-    SEXP val = VECTOR_ELT(y, i);
-    if ((NAMED(y) || NAMED(val)))
-	ENSURE_NAMEDMAX(val);
-    return val;
+	SEXP val = VECTOR_ELT(y, i);
+	if ((NAMED(y) || NAMED(val)))
+		ENSURE_NAMEDMAX(val);
+	return val;
 }
 
 /* ExtractSubset allocates "result" and does the transfer of elements

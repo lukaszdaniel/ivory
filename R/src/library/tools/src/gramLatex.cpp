@@ -192,7 +192,7 @@ struct ParseState {
     ParseState *prevState;
 };
 
-static Rboolean busy = FALSE;
+static bool busy = false;
 static ParseState parseState;
 
 #define PRESERVE_SV(x) R_PreserveInMSet((x), parseState.mset)
@@ -2025,14 +2025,13 @@ static SEXP xxblock(SEXP body, YYLTYPE *lloc)
     return ans;
 }
 
-static int VerbatimLookup(const char *s)
+static bool VerbatimLookup(const char *s)
 {
-    int i;
-    for (i = 0; i < length(parseState.xxVerbatimList); i++) {
-    	if (strcmp(s, CHAR(STRING_ELT(parseState.xxVerbatimList, i))) == 0)
-    	    return TRUE;
+    for (int i = 0; i < length(parseState.xxVerbatimList); i++) {
+    	if (streql(s, CHAR(STRING_ELT(parseState.xxVerbatimList, i))))
+    	    return true;
     }
-    return FALSE;
+    return false;
 }
 
 static void xxSetInVerbEnv(SEXP envname)
@@ -2634,7 +2633,7 @@ static void PushState() {
     	parseState.prevState = prev;
     } else 
         parseState.prevState = nullptr;  
-    busy = TRUE;
+    busy = true;
 }
 
 static void PopState() {
@@ -2643,7 +2642,7 @@ static void PopState() {
     	UseState(prev);
     	free(prev);
     } else
-    	busy = FALSE;
+    	busy = false;
 }
 
 /* "do_parseLatex" 
