@@ -180,12 +180,13 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
 }
 
 HIDDEN
-DL_FUNC R_dotCallFn(SEXP op, SEXP call, int nargs) {
-    R_RegisteredNativeSymbol symbol = {R_CALL_SYM, {nullptr}, nullptr};
-    DL_FUNC fun = nullptr;
-    checkValidSymbolId(op, call, &fun, &symbol, nullptr);
-    /* should check arg count here as well */
-    return fun;
+DL_FUNC R_dotCallFn(SEXP op, SEXP call, int nargs)
+{
+	R_RegisteredNativeSymbol symbol = {R_CALL_SYM, {nullptr}, nullptr};
+	DL_FUNC fun = nullptr;
+	checkValidSymbolId(op, call, &fun, &symbol, nullptr);
+	/* should check arg count here as well */
+	return fun;
 }
 
 /*
@@ -514,7 +515,7 @@ static SEXP check_retval(SEXP call, SEXP val)
 	{
 		inited = TRUE;
 		const char *p = getenv("_R_CHECK_DOTCODE_RETVAL_");
-		if (p != nullptr && StringTrue(p))
+		if (p && StringTrue(p))
 			check = TRUE;
 	}
 
@@ -575,16 +576,18 @@ using VarFun = DL_FUNC;
 #endif
 
 HIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
-				  SEXP call) {
-    VarFun fun = nullptr;
-    SEXP retval = R_NilValue;	/* -Wall */
-    fun = (VarFun) ofun;
-    switch (nargs) {
-    case 0:
-	retval = (SEXP)ofun();
-	break;
+						SEXP call)
+{
+	VarFun fun = nullptr;
+	SEXP retval = R_NilValue; /* -Wall */
+	fun = (VarFun)ofun;
+	switch (nargs)
+	{
+	case 0:
+		retval = (SEXP)ofun();
+		break;
 
-/*  This macro expands out to:
+		/*  This macro expands out to:
     case 1:
 	retval = (SEXP)fun(cargs[0]);
 	break;
@@ -594,21 +597,22 @@ HIDDEN SEXP R_doDotCall(DL_FUNC ofun, int nargs, SEXP *cargs,
     ... on to case 65
 */
 
-#define ARGUMENT_LIST(Z, N, IGNORED) BOOST_PP_COMMA_IF(N) cargs[N]
+#define ARGUMENT_LIST(Z, N, IGNORED) BOOST_PP_COMMA_IF(N) \
+cargs[N]
 #define CASE_STATEMENT(Z, N, IGNORED)                       \
 	case N:                                                 \
 		retval = fun(BOOST_PP_REPEAT(N, ARGUMENT_LIST, 0)); \
 		break;
 
-	BOOST_PP_REPEAT_FROM_TO(1, BOOST_PP_INC(MAX_ARGS), CASE_STATEMENT, 0);
+		BOOST_PP_REPEAT_FROM_TO(1, BOOST_PP_INC(MAX_ARGS), CASE_STATEMENT, 0);
 
 #undef ARGUMENT_LIST
 #undef CASE_STATEMENT
 
 	default:
-	errorcall(call, _("too many arguments"));
-    }
-    return check_retval(call, retval);
+		errorcall(call, _("too many arguments"));
+	}
+	return check_retval(call, retval);
 }
 
 /* .Call(name, <args>) */
@@ -777,7 +781,7 @@ static SEXP Rf_getCallingDLL(void)
        Testing shows this is the right caller, despite the .C/.Call ...
      */
     for (cptr = R_GlobalContext;
-	 cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	 cptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	 cptr = cptr->nextContext())
 	    if (cptr->getCallFlag() & CTXT_FUNCTION) {
 		/* PrintValue(cptr->getCall()); */
@@ -1381,7 +1385,7 @@ HIDDEN SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifndef NO_CALL_R
-static const struct
+static const struct TypeInfo
 {
 	const char *const name;
 	const SEXPTYPE type;

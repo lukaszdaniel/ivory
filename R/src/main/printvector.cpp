@@ -272,7 +272,7 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
        Dataptr_or_null method. */
 
     const SEXP *xptr = (const SEXP *) DATAPTR_OR_NULL(x);
-    if(xptr != nullptr) {
+    if(xptr) {
 	printStringVector(xptr, n, quote, indx);
 	return;
     }
@@ -503,7 +503,7 @@ void Rf_printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 {
     int n;
 
-    if (title != nullptr)
+    if (title)
 	 Rprintf("%s\n", title);
 
     if ((n = LENGTH(x)) != 0) {

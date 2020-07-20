@@ -459,7 +459,7 @@ struct winprogressbar
 	int pc;
 };
 
-static winprogressbar pbar = {NULL, NULL, NULL};
+static winprogressbar pbar = {nullptr, nullptr, nullptr};
 
 static void doneprogressbar(void *data)
 {
@@ -591,10 +591,10 @@ static SEXP in_do_download(SEXP args)
 	UNPROTECT(1); /* utilsNS */
 	PROTECT(sagent);
 	const char *cagent = (TYPEOF(sagent) == NILSXP) ?
-	    NULL : CHAR(STRING_ELT(sagent, 0));
+	    nullptr : CHAR(STRING_ELT(sagent, 0));
 	/* TODO: flatten headers */
 	const char *cheaders = (TYPEOF(sheaders) == NILSXP) ?
-	    NULL : CHAR(STRING_ELT(sheaders, 0));
+	    nullptr : CHAR(STRING_ELT(sheaders, 0));
 	ctxt = Ri_HTTPOpen(url, cagent, cheaders, cacheOK);
 	UNPROTECT(2);
 	if(ctxt == nullptr) status = 1;
@@ -836,7 +836,7 @@ void *in_R_HTTPOpen(const char *url, const char *agent, const char *headers, int
 	if (headers) strcat(fullheaders, headers);
     }
 
-    ctxt = RxmlNanoHTTPOpen(url, NULL, fullheaders, cacheOK);
+    ctxt = RxmlNanoHTTPOpen(url, nullptr, fullheaders, cacheOK);
     if (fullheaders) free(fullheaders);
 
     if(ctxt != nullptr) {
@@ -974,7 +974,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
     wictxt->length = -1;
     wictxt->type = nullptr;
     wictxt->hand =
-	InternetOpen(agent, INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+	InternetOpen(agent, INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0);
     if(!wictxt->hand) {
 	free(wictxt);
 	/* error("cannot open Internet connection"); */
@@ -1005,7 +1005,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 		GetModuleHandle("wininet.dll"),
 		err1,
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		buf, 101, NULL);
+		buf, 101, nullptr);
 	    /* some of these messages end in \r\n */
 	    while(true) {
 		p = buf + strlen(buf) - 1;
@@ -1092,17 +1092,17 @@ static void *in_R_FTPOpen2(const char *url)
     wictxt->type = nullptr;
 
     wictxt->hand =
-	InternetOpen("R", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+	InternetOpen("R", INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0);
     if(!wictxt->hand) {
 	free(wictxt);
 	return nullptr;
     }
 
     DWORD flag = INTERNET_FLAG_KEEP_CONNECTION | INTERNET_FLAG_NO_CACHE_WRITE;
-    wictxt->session = InternetOpenUrl(wictxt->hand, url, NULL, 0,
+    wictxt->session = InternetOpenUrl(wictxt->hand, url, nullptr, 0,
     	flag | INTERNET_FLAG_PASSIVE, 0);
     if(!wictxt->session)
-    	wictxt->session = InternetOpenUrl(wictxt->hand, url, NULL, 0, flag, 0);
+    	wictxt->session = InternetOpenUrl(wictxt->hand, url, nullptr, 0, flag, 0);
     if(!wictxt->session) {
 	char buf[256];
 	DWORD err1 = GetLastError(), err2, blen = 256;
@@ -1118,7 +1118,7 @@ static void *in_R_FTPOpen2(const char *url)
 		GetModuleHandle("wininet.dll"),
 		err1,
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		buf, 101, NULL);
+		buf, 101, nullptr);
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
 	    return nullptr;
 	}

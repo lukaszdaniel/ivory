@@ -81,7 +81,8 @@ HIDDEN void Rf_InitEd()
 
 void Rf_CleanEd()
 {
-    if(EdFileUsed) unlink(DefaultFileName);
+    if (EdFileUsed)
+        unlink(DefaultFileName);
 }
 
 SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)

@@ -215,7 +215,7 @@ void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
        In both of the above cases we will
        do things the hard way below
     */
-    if(tmpmin != nullptr && tmpmax != nullptr &&
+    if(tmpmin && tmpmax &&
        TYPEOF(tmpmin) == INTSXP && TYPEOF(tmpmax) == INTSXP) {
 	int l; /* only needed here so defined locally */
 	xmin = INTEGER_ELT(tmpmin, 0);

@@ -4715,6 +4715,8 @@ add_dummies <- function(dir, Log)
                              ## ": warning: .* \\[-Wunused-value\\]",
                              ## warning in g++, fatal in clang++.
                              ": warning: .* \\[-Wnarrowing\\]",
+                             ## includes -Waddress-of-packed-member
+                             ": warning: .* \\[-Waddress",
                              ## -pedantic warning in gcc, fatal in clang and ODS
                              ": warning: initializer element is not a constant expression",
                              ": warning: range expressions in switch statements are non-standard",
@@ -4775,6 +4777,7 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wxor-used-as-pow\\]", # clang 10
                              ": warning: .* \\[-Winconsistent-missing-override\\]",
                              ": warning: .* \\[-Wsizeof-array-div\\]",
+                             ": warning: .* \\[-Wvarargs\\]",
                              ## also on gcc, but fewer warnings
                              ": warning: .* \\[-Wlogical-not-parentheses\\]",
                              ## For non-portable flags (seen in sub-Makefiles)

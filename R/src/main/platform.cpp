@@ -3349,13 +3349,13 @@ HIDDEN SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   PLT is used on Linux and on Solaris when the main binary
 	   is _not_ position independent. PLT is not used on macOS.
 	*/
-	if (dgemm_addr != nullptr) {
+	if (dgemm_addr) {
 
 	    /* If dgemm_addr is nullptr, dgemm is statically linked and
 	       we are on Linux. On Solaris, dgemm_addr is never NULL.
 	    */
 	    void *dgemm_next_addr = dlsym(RTLD_NEXT, dgemm_name);
-	    if (dgemm_next_addr != nullptr)
+	    if (dgemm_next_addr)
 
 		/* If dgemm_next_addr is nullptr, dgemm is statically linked.
 		   Otherwise, it is linked dynamically and dgemm_next_addr

@@ -34,8 +34,9 @@ static void transferVector(SEXP s, SEXP t);
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
+	Rconnection con = (Rconnection)data;
+	if (con->isopen)
+		con->close(con);
 }
 
 static bool field_is_foldable_p(const char *, SEXP);
@@ -328,17 +329,16 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     return(retval2);
 }
 
-
 static SEXP allocMatrixNA(SEXPTYPE mode, int nrow, int ncol)
 {
-    int k;
-    SEXP retval;
+	int k;
+	SEXP retval;
 
-    PROTECT(retval = allocMatrix(mode, nrow, ncol));
-    for(k = 0; k < LENGTH(retval); k++)
-	SET_STRING_ELT(retval, k, NA_STRING);
-    UNPROTECT(1);
-    return(retval);
+	PROTECT(retval = allocMatrix(mode, nrow, ncol));
+	for (k = 0; k < LENGTH(retval); k++)
+		SET_STRING_ELT(retval, k, NA_STRING);
+	UNPROTECT(1);
+	return (retval);
 }
 
 /* This one is needed because the normal copy operations will do
@@ -346,16 +346,17 @@ static SEXP allocMatrixNA(SEXPTYPE mode, int nrow, int ncol)
 
 static void transferVector(SEXP s, SEXP t)
 {
-    for (int i = 0; i < LENGTH(t); i++)
-	SET_STRING_ELT(s, i, STRING_ELT(t, i));
+	for (int i = 0; i < LENGTH(t); i++)
+		SET_STRING_ELT(s, i, STRING_ELT(t, i));
 }
 
 static bool field_is_foldable_p(const char *field, SEXP excludes)
 {
-    int i, n = LENGTH(excludes);
-    for(i = 0; i < n; i++) {
-	if(streql(field, CHAR(STRING_ELT(excludes, i))))
-	    return false;
-    }
-    return true;
+	int i, n = LENGTH(excludes);
+	for (i = 0; i < n; i++)
+	{
+		if (streql(field, CHAR(STRING_ELT(excludes, i))))
+			return false;
+	}
+	return true;
 }

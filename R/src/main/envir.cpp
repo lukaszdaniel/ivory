@@ -1616,7 +1616,7 @@ SEXP Rf_findFun3(SEXP symbol, SEXP rho, SEXP call)
 
 SEXP Rf_findFun(SEXP symbol, SEXP rho)
 {
-    return findFun3(symbol, rho, R_CurrentExpression);
+    return Rf_findFun3(symbol, rho, R_CurrentExpression);
 }
 
 /*----------------------------------------------------------------------
@@ -2263,7 +2263,7 @@ HIDDEN SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (streql(CHAR(STRING_ELT(CADDR(args), i % nmode)), "function"))
 	    gmode = FUNSXP;
 	else {
-	    gmode = str2type(CHAR(STRING_ELT(CADDR(args), i % nmode)));
+	    gmode = Rf_str2type(CHAR(STRING_ELT(CADDR(args), i % nmode)));
 	    if(gmode == (SEXPTYPE) (-1))
 		error(_("invalid '%s' argument"), "mode");
 	}
@@ -2736,31 +2736,12 @@ static void FrameNames(SEXP frame, int all, SEXP names, int *indx)
     }
 }
 
-/* returning the active binding function instead of the
-   value is not right, but packages are depending on it so
-   keep for now. */
-R_INLINE static SEXP BINDING_VALUE_TMP(SEXP cell)
-{
-    if (IS_ACTIVE_BINDING(cell)) {
-	static int inited = FALSE;
-	static int bugfix = FALSE;
-	if (! inited) {
-	    inited = TRUE;
-	    const char *p = getenv("_R_ENV2LIST_BUGFIX_");
-	    if (p != nullptr && StringTrue(p))
-		bugfix = TRUE;
-	}
-	return bugfix ? BINDING_VALUE(cell) : CAR(cell);
-    }
-    else return BINDING_VALUE(cell);
-}
-
 static void FrameValues(SEXP frame, int all, SEXP values, int *indx)
 {
     if (all) {
 	while (frame != R_NilValue) {
 #define DO_FrameValues                                    \
-    SEXP value = BINDING_VALUE_TMP(frame);                \
+    SEXP value = BINDING_VALUE(frame);                \
     if (TYPEOF(value) == PROMSXP)                         \
     {                                                     \
         PROTECT(value);                                   \
@@ -3218,8 +3199,7 @@ static SEXP pos2env(int pos, SEXP call)
     else if (pos == -1) {
 	/* make sure the context is a funcall */
 	cptr = R_GlobalContext;
-	while( !(cptr->getCallFlag() & CTXT_FUNCTION) && cptr->nextContext()
-	       != nullptr )
+	while( !(cptr->getCallFlag() & CTXT_FUNCTION) && cptr->nextContext())
 	    cptr = cptr->nextContext();
 	if( !(cptr->getCallFlag() & CTXT_FUNCTION) )
 	    errorcall(call, _("no enclosing environment"));
@@ -4183,7 +4163,7 @@ void do_write_cache()
 {
     int i;
     FILE *f = fopen("/tmp/CACHE", "w");
-    if (f != nullptr) {
+    if (f) {
 	fprintf(f, _("Cache size: %d\n"), LENGTH(R_StringHash));
 	fprintf(f, _("Cache pri:  %d\n"), HASHPRI(R_StringHash));
 	for (i = 0; i < LENGTH(R_StringHash); i++) {

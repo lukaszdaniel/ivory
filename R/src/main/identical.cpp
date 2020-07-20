@@ -359,10 +359,10 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 	switch (str)
 	{
 	case single_NA__num_eq:
-		return (Rboolean)(x != y);
+		return (x != y);
 	case bit_NA__num_eq:
 		if (!ISNAN(x) && !ISNAN(y))
-			return (Rboolean)(x != y);
+			return (x != y);
 		else /* bitwise check for NA/NaN's */
 			return memcmp((const void *)&x,
 						  (const void *)&y, sizeof(double))

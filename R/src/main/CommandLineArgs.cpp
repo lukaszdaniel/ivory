@@ -48,43 +48,41 @@
    of them passed to the application.
    These are populated via the routine R_set_command_line_arguments().
 */
-static int    NumCommandLineArgs = 0;
+static int NumCommandLineArgs = 0;
 static char **CommandLineArgs = nullptr; // this does not get freed
-
 
 void R_set_command_line_arguments(int argc, char *argv[])
 {
-    // nothing here is ever freed.
-    NumCommandLineArgs = argc;
-    CommandLineArgs = (char**) calloc((size_t) argc, sizeof(char*));
-    if(CommandLineArgs == nullptr)
-	R_Suicide(_("allocation failure in R_set_command_line_arguments"));
+	// nothing here is ever freed.
+	NumCommandLineArgs = argc;
+	CommandLineArgs = (char **)calloc((size_t)argc, sizeof(char *));
+	if (CommandLineArgs == nullptr)
+		R_Suicide(_("allocation failure in R_set_command_line_arguments"));
 
-    for(int i = 0; i < argc; i++) {
-	CommandLineArgs[i] = strdup(argv[i]);
-	if(CommandLineArgs[i] == nullptr)
-	    R_Suicide(_("allocation failure in R_set_command_line_arguments"));
-    }
+	for (int i = 0; i < argc; i++)
+	{
+		CommandLineArgs[i] = strdup(argv[i]);
+		if (CommandLineArgs[i] == nullptr)
+			R_Suicide(_("allocation failure in R_set_command_line_arguments"));
+	}
 }
-
 
 /*
   The .Internal which returns the command line arguments that are stored
   in global variables.
  */
-extern "C"
-HIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" HIDDEN SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int i;
-    SEXP vals;
+	int i;
+	SEXP vals;
 
-    checkArity(op, args);
-    /* need protection as mkChar allocates */
-    vals = PROTECT(allocVector(STRSXP, NumCommandLineArgs));
-    for(i = 0; i < NumCommandLineArgs; i++)
-	SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
-    UNPROTECT(1);
-    return vals;
+	checkArity(op, args);
+	/* need protection as mkChar allocates */
+	vals = PROTECT(allocVector(STRSXP, NumCommandLineArgs));
+	for (i = 0; i < NumCommandLineArgs; i++)
+		SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
+	UNPROTECT(1);
+	return vals;
 }
 
 #ifdef _WIN32

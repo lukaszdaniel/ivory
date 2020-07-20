@@ -312,7 +312,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	PROTECT(s); /* the methods should protect, but ... */
 	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
 	UNPROTECT(1);
-	if (ans != nullptr)
+	if (ans)
 	    return ans;
     }
 
@@ -568,7 +568,7 @@ FILL_ELT_WITH_RECYCLE(Vector, VECTOR_ELT, SET_VECTOR_ELT) /* xfillVectorMatrixWi
    to duplicate or shallow_duplicate if the object can't be
    wrapped. The size threshold used seems to be reaonable but could be
    tested more extensively. */
-#define WRAP_THRESHOLD 64
+constexpr R_xlen_t WRAP_THRESHOLD = 64;
 static SEXP duplicate_attr(SEXP x, Rboolean deep)
 {
     if (isVector(x) && XLENGTH(x) >= WRAP_THRESHOLD) {

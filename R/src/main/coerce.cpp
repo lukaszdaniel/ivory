@@ -89,73 +89,73 @@ HIDDEN void Rf_CoercionWarning(int warn)
    =====
    WarningMessage(R_NilValue, WARNING_....);
 */
-    if (warn & WARN_NA)
-	warning(_("NA values introduced by coercion"));
-    if (warn & WARN_INT_NA)
-	warning(_("NA values introduced by coercion to integer range"));
-    if (warn & WARN_IMAG)
-	warning(_("imaginary parts discarded in coercion"));
-    if (warn & WARN_RAW)
-	warning(_("out-of-range values treated as 0 in coercion to raw"));
+	if (warn & WARN_NA)
+		warning(_("NA values introduced by coercion"));
+	if (warn & WARN_INT_NA)
+		warning(_("NA values introduced by coercion to integer range"));
+	if (warn & WARN_IMAG)
+		warning(_("imaginary parts discarded in coercion"));
+	if (warn & WARN_RAW)
+		warning(_("out-of-range values treated as 0 in coercion to raw"));
 }
 
 HIDDEN int Rf_LogicalFromInteger(int x, int *warn)
 {
-    return (x == NA_INTEGER) ?
-	NA_LOGICAL : (x != 0);
+	return (x == NA_INTEGER) ? NA_LOGICAL : (x != 0);
 }
 
 HIDDEN int Rf_LogicalFromReal(double x, int *warn)
 {
-    return ISNAN(x) ?
-	NA_LOGICAL : (x != 0);
+	return ISNAN(x) ? NA_LOGICAL : (x != 0);
 }
 
 HIDDEN int Rf_LogicalFromComplex(Rcomplex x, int *warn)
 {
-    return (ISNAN(x.r) || ISNAN(x.i)) ?
-	NA_LOGICAL : (x.r != 0 || x.i != 0);
+	return (ISNAN(x.r) || ISNAN(x.i)) ? NA_LOGICAL : (x.r != 0 || x.i != 0);
 }
 
 HIDDEN int Rf_LogicalFromString(SEXP x, int *warn)
 {
-    if (x != R_NaString) {
-	if (StringTrue(CHAR(x))) return 1;
-	if (StringFalse(CHAR(x))) return 0;
-    }
-    return NA_LOGICAL;
+	if (x != R_NaString)
+	{
+		if (StringTrue(CHAR(x)))
+			return 1;
+		if (StringFalse(CHAR(x)))
+			return 0;
+	}
+	return NA_LOGICAL;
 }
 
 HIDDEN int Rf_IntegerFromLogical(int x, int *warn)
 {
-    return (x == NA_LOGICAL) ?
-	NA_INTEGER : x;
+	return (x == NA_LOGICAL) ? NA_INTEGER : x;
 }
 
 HIDDEN int Rf_IntegerFromReal(double x, int *warn)
 {
-    if (ISNAN(x))
-	return NA_INTEGER;
-    else if (x >= R_INT_MAX+1. || x <= INT_MIN ) {
-	*warn |= WARN_INT_NA;
-	return NA_INTEGER;
-    }
-    return (int) x;
+	if (ISNAN(x))
+		return NA_INTEGER;
+	else if (x >= R_INT_MAX + 1. || x <= INT_MIN)
+	{
+		*warn |= WARN_INT_NA;
+		return NA_INTEGER;
+	}
+	return (int)x;
 }
 
 HIDDEN int Rf_IntegerFromComplex(Rcomplex x, int *warn)
 {
-    if (ISNAN(x.r) || ISNAN(x.i))
-	return NA_INTEGER;
-    else if (x.r > R_INT_MAX+1. || x.r <= INT_MIN ) {
-	*warn |= WARN_INT_NA;
-	return NA_INTEGER;
-    }
-    if (x.i != 0)
-	*warn |= WARN_IMAG;
-    return (int) x.r;
+	if (ISNAN(x.r) || ISNAN(x.i))
+		return NA_INTEGER;
+	else if (x.r > R_INT_MAX + 1. || x.r <= INT_MIN)
+	{
+		*warn |= WARN_INT_NA;
+		return NA_INTEGER;
+	}
+	if (x.i != 0)
+		*warn |= WARN_IMAG;
+	return (int)x.r;
 }
-
 
 HIDDEN int Rf_IntegerFromString(SEXP x, int *warn)
 {
@@ -190,87 +190,80 @@ HIDDEN int Rf_IntegerFromString(SEXP x, int *warn)
 
 HIDDEN double Rf_RealFromLogical(int x, int *warn)
 {
-    return (x == NA_LOGICAL) ?
-	NA_REAL : x;
+	return (x == NA_LOGICAL) ? NA_REAL : x;
 }
 
 HIDDEN double Rf_RealFromInteger(int x, int *warn)
 {
-    if (x == NA_INTEGER)
-	return NA_REAL;
-    else
-	return x;
+	return (x == NA_INTEGER) ? NA_REAL : x;
 }
 
 HIDDEN double Rf_RealFromComplex(Rcomplex x, int *warn)
 {
-    if (ISNAN(x.r) || ISNAN(x.i))
-	return NA_REAL;
-    if (ISNAN(x.r)) return x.r;
-    if (ISNAN(x.i)) return NA_REAL;
-    if (x.i != 0)
-	*warn |= WARN_IMAG;
-    return x.r;
+	if (ISNAN(x.r) || ISNAN(x.i))
+		return NA_REAL;
+	if (ISNAN(x.r))
+		return x.r;
+	if (ISNAN(x.i))
+		return NA_REAL;
+	if (x.i != 0)
+		*warn |= WARN_IMAG;
+	return x.r;
 }
 
 HIDDEN double Rf_RealFromString(SEXP x, int *warn)
 {
-    double xdouble;
-    char *endp;
-    if (x != R_NaString && !isBlankString(CHAR(x))) { /* ASCII */
-	xdouble = R_strtod(CHAR(x), &endp); /* ASCII */
-	if (isBlankString(endp))
-	    return xdouble;
-	else
-	    *warn |= WARN_NA;
-    }
-    return NA_REAL;
+	double xdouble;
+	char *endp;
+	if (x != R_NaString && !isBlankString(CHAR(x)))
+	{										/* ASCII */
+		xdouble = R_strtod(CHAR(x), &endp); /* ASCII */
+		if (isBlankString(endp))
+			return xdouble;
+		else
+			*warn |= WARN_NA;
+	}
+	return NA_REAL;
 }
 
 HIDDEN Rcomplex Rf_ComplexFromLogical(int x, int *warn)
 {
-    Rcomplex z;
-    if (x == NA_LOGICAL) {
-	z.r = NA_REAL;
-	z.i = NA_REAL;
-    }
-    else {
-	z.r = x;
-	z.i = 0;
-    }
-    return z;
+	Rcomplex z;
+	if (x == NA_LOGICAL)
+	{
+		z.r = NA_REAL;
+		z.i = NA_REAL;
+	}
+	else
+	{
+		z.r = x;
+		z.i = 0;
+	}
+	return z;
 }
 
 HIDDEN Rcomplex Rf_ComplexFromInteger(int x, int *warn)
 {
-    Rcomplex z;
-    if (x == NA_INTEGER) {
-	z.r = NA_REAL;
-	z.i = NA_REAL;
-    }
-    else {
-	z.r = x;
-	z.i = 0;
-    }
-    return z;
+	Rcomplex z;
+	if (x == NA_INTEGER)
+	{
+		z.r = NA_REAL;
+		z.i = NA_REAL;
+	}
+	else
+	{
+		z.r = x;
+		z.i = 0;
+	}
+	return z;
 }
 
 HIDDEN Rcomplex Rf_ComplexFromReal(double x, int *warn)
 {
-    Rcomplex z;
-#ifdef PRE_R_3_3_0
-    if (ISNAN(x)) {
-	z.r = NA_REAL;
-	z.i = NA_REAL;
-    }
-    else {
-#endif
+	Rcomplex z;
 	z.r = x;
 	z.i = 0;
-#ifdef PRE_R_3_3_0
-    }
-#endif
-    return z;
+	return z;
 }
 
 HIDDEN Rcomplex Rf_ComplexFromString(SEXP x, int *warn)
@@ -1088,7 +1081,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 #endif
 	    else
 		SET_STRING_ELT(rval, i,
-			       STRING_ELT(deparse1line_(VECTOR_ELT(v, i), FALSE, NICE_NAMES),
+			       STRING_ELT(deparse1line_(VECTOR_ELT(v, i), false, NICE_NAMES),
 					  0));
 	}
     }
@@ -2232,33 +2225,35 @@ HIDDEN SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
 
 /* Same code for LISTSXP and VECSXP : */
-#define LIST_VEC_NA(s)							\
-	if (!isVector(s) || length(s) != 1)				\
-	    pa[i] = 0;							\
-	else {								\
-		switch (TYPEOF(s)) {					\
-		case LGLSXP:						\
-		case INTSXP:						\
-		    pa[i] = (INTEGER_ELT(s, 0) == NA_INTEGER);		\
-		    break;						\
-		case REALSXP:						\
-		    pa[i] = ISNAN(REAL_ELT(s, 0));			\
-		    break;						\
-		case STRSXP:						\
-		    pa[i] = (STRING_ELT(s, 0) == NA_STRING);		\
-		    break;						\
-		case CPLXSXP:						\
-		    {							\
-			Rcomplex v = COMPLEX_ELT(s, 0);			\
-			pa[i] = (ISNAN(v.r) || ISNAN(v.i));		\
-		    }							\
-		    break;						\
-		default:						\
-		    pa[i] = 0;						\
-		}							\
+#define LIST_VEC_NA(s)                                 \
+	if (!isVector(s) || length(s) != 1)                \
+		pa[i] = 0;                                     \
+	else                                               \
+	{                                                  \
+		switch (TYPEOF(s))                             \
+		{                                              \
+		case LGLSXP:                                   \
+		case INTSXP:                                   \
+			pa[i] = (INTEGER_ELT(s, 0) == NA_INTEGER); \
+			break;                                     \
+		case REALSXP:                                  \
+			pa[i] = ISNAN(REAL_ELT(s, 0));             \
+			break;                                     \
+		case STRSXP:                                   \
+			pa[i] = (STRING_ELT(s, 0) == NA_STRING);   \
+			break;                                     \
+		case CPLXSXP:                                  \
+		{                                              \
+			Rcomplex v = COMPLEX_ELT(s, 0);            \
+			pa[i] = (ISNAN(v.r) || ISNAN(v.i));        \
+		}                                              \
+		break;                                         \
+		default:                                       \
+			pa[i] = 0;                                 \
+		}                                              \
 	}
 
-    case LISTSXP:
+	case LISTSXP:
 	for (i = 0; i < n; i++) {
 	    LIST_VEC_NA(CAR(x));
 	    x = CDR(x);
@@ -2871,61 +2866,67 @@ HIDDEN SEXP do_quote(SEXP call, SEXP op, SEXP args, SEXP rho)
     return(val);
 }
 
-struct classType
+namespace
 {
-	const char *s;
-	SEXPTYPE sexp;
-	Rboolean canChange;
-};
 
-static classType classTable[] = {
-    { "logical",	LGLSXP,	   TRUE },
-    { "integer",	INTSXP,	   TRUE },
-    { "double",		REALSXP,   TRUE },
-    { "raw",		RAWSXP,    TRUE },
-    { "complex",	CPLXSXP,   TRUE },
-    { "character",	STRSXP,	   TRUE },
-    { "expression",	EXPRSXP,   TRUE },
-    { "list",		VECSXP,	   TRUE },
-    { "environment",    ENVSXP,    FALSE },
-    { "char",		CHARSXP,   TRUE },
-    { "externalptr",	EXTPTRSXP,  FALSE },
-    { "weakref",	WEAKREFSXP, FALSE },
-    { "name",		SYMSXP,	   FALSE },
+	struct classType
+	{
+		const char *s;
+		SEXPTYPE sexp;
+		bool canChange;
+	};
 
-    { (char *)NULL,	(SEXPTYPE)-1, FALSE}
-};
+	constexpr classType classTable[] = {
+		{"logical", LGLSXP, true},
+		{"integer", INTSXP, true},
+		{"double", REALSXP, true},
+		{"raw", RAWSXP, true},
+		{"complex", CPLXSXP, true},
+		{"character", STRSXP, true},
+		{"expression", EXPRSXP, true},
+		{"list", VECSXP, true},
+		{"environment", ENVSXP, false},
+		{"char", CHARSXP, true},
+		{"externalptr", EXTPTRSXP, false},
+		{"weakref", WEAKREFSXP, false},
+		{"name", SYMSXP, false},
+
+		{(char *)nullptr, (SEXPTYPE)-1, false}};
+} // namespace
 
 static int class2type(const char *s)
 {
-    /* return the type if the class string is one of the basic types, else -1.
+	/* return the type if the class string is one of the basic types, else -1.
        Note that this is NOT str2type:  only certain types are defined to be basic
        classes; e.g., "language" is a type but many classes correspond to objects of
        this type.
     */
-    int i; const char *si;
-    for(i = 0; ; i++) {
-	si = classTable[i].s;
-	if(!si)
-	    return -1;
-	if(streql(s, si))
-	    return i;
-    }
-    /* cannot get here return -1; */
+	int i;
+	const char *si;
+	for (i = 0;; i++)
+	{
+		si = classTable[i].s;
+		if (!si)
+			return -1;
+		if (streql(s, si))
+			return i;
+	}
+	/* cannot get here return -1; */
 }
 
 static SEXP do_unsetS4(SEXP obj, SEXP newClass)
 {
-  if(isNull(newClass))  { /* NULL class is only valid for S3 objects */
-    warning(_("Setting 'class(x)' to NULL. Result will no longer be an S4 object"));
-  }
-  else if(length(newClass) > 1)
-    warning(_("Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no longer be an S4 object"),
-	    translateChar(STRING_ELT(newClass, 0)), translateChar(STRING_ELT(newClass, 1)));
-  else
-    warning(_("Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer be an S4 object"), CHAR(asChar(newClass)));
-  UNSET_S4_OBJECT(obj);
-  return obj;
+	if (isNull(newClass))
+	{ /* NULL class is only valid for S3 objects */
+		warning(_("Setting 'class(x)' to NULL. Result will no longer be an S4 object"));
+	}
+	else if (length(newClass) > 1)
+		warning(_("Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no longer be an S4 object"),
+				translateChar(STRING_ELT(newClass, 0)), translateChar(STRING_ELT(newClass, 1)));
+	else
+		warning(_("Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer be an S4 object"), CHAR(asChar(newClass)));
+	UNSET_S4_OBJECT(obj);
+	return obj;
 }
 
 /* set the class to value, and return the modified object.  This is
@@ -3014,14 +3015,15 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
 
 HIDDEN SEXP R_do_set_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans;
-    checkArity(op, args);
-    check1arg(args, call, "x");
+	SEXP ans;
+	checkArity(op, args);
+	check1arg(args, call, "x");
 
-    if (MAYBE_SHARED(CAR(args))) SETCAR(args, shallow_duplicate(CAR(args)));
-    ans = R_set_class(CAR(args), CADR(args), call);
-    SETTER_CLEAR_NAMED(CAR(args));
-    return ans;
+	if (MAYBE_SHARED(CAR(args)))
+		SETCAR(args, shallow_duplicate(CAR(args)));
+	ans = R_set_class(CAR(args), CADR(args), call);
+	SETTER_CLEAR_NAMED(CAR(args));
+	return ans;
 }
 
 /* primitive */

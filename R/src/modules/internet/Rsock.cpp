@@ -262,7 +262,7 @@ static int R_SocketWait(int sockfd, int write, int timeout)
 	   modifies tv (as Linux does) */
 	used += tv.tv_sec + 1e-6 * tv.tv_usec;
 
-	howmany = R_SelectEx(maxfd+1, &rfd, &wfd, NULL, &tv, NULL);
+	howmany = R_SelectEx(maxfd+1, &rfd, &wfd, nullptr, &tv, nullptr);
 
 	if (R_socket_error(howmany)) {
 	    return -R_socket_errno();
@@ -278,7 +278,7 @@ static int R_SocketWait(int sockfd, int write, int timeout)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != nullptr) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) nullptr);
 	    continue;
 	}
 #endif
@@ -347,7 +347,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	   modifies tv (as Linux does) */
 	used += tv.tv_sec + 1e-6 * tv.tv_usec;
 
-	howmany = R_SelectEx(maxfd+1, &rfd, &wfd, NULL, &tv, NULL);
+	howmany = R_SelectEx(maxfd+1, &rfd, &wfd, nullptr, &tv, nullptr);
 
 	if (R_socket_error(howmany)) {
 	    return -R_socket_errno();
@@ -374,7 +374,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	    /* one of the extras is ready */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != nullptr) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) nullptr);
 	    continue;
 	}
 #endif
@@ -457,9 +457,9 @@ int R_SockConnect(int port, char *host, int timeout)
 	used += tv.tv_sec + 1e-6 * tv.tv_usec;
 
 #ifdef _WIN32
-	status = R_SelectEx(maxfd+1, &rfd, &wfd, &efd, &tv, NULL);
+	status = R_SelectEx(maxfd+1, &rfd, &wfd, &efd, &tv, nullptr);
 #else
-	status = R_SelectEx(maxfd+1, &rfd, &wfd, NULL, &tv, NULL);
+	status = R_SelectEx(maxfd+1, &rfd, &wfd, nullptr, &tv, nullptr);
 #endif
 	if (R_socket_error(status))
 	    /* Ermm.. ?? */
@@ -493,7 +493,7 @@ int R_SockConnect(int port, char *host, int timeout)
 	} else { /* some other handler needed */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != nullptr) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) nullptr);
 	    continue;
 #endif
 	}
@@ -544,7 +544,7 @@ ssize_t R_SockRead(int sockp, void *buf, size_t len, int blocking, int timeout)
 int R_SockOpen(int port)
 {
     check_init();
-    return Sock_open((Sock_port_t)port, 0 /* non-blocking */, NULL);
+    return Sock_open((Sock_port_t)port, 0 /* non-blocking */, nullptr);
 }
 
 int R_SockListen(int sockp, char *buf, int len, int timeout)
@@ -582,7 +582,7 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	   modifies tv (as Linux does) */
 	double maybe_used = used + tv.tv_sec + 1e-6 * tv.tv_usec;
 
-	status = R_SelectEx(maxfd+1, &rfd, NULL, NULL, &tv, NULL);
+	status = R_SelectEx(maxfd+1, &rfd, nullptr, nullptr, &tv, nullptr);
 
 	if (R_socket_error_eintr(status))
 	    /* do not advance used on EINTR */
@@ -625,7 +625,7 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != nullptr) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) nullptr);
 	    continue;
 #endif
 	}

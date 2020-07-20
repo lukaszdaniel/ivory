@@ -191,7 +191,7 @@
 
 // #include <assert.h>
 /* fake definition */
-extern void Rf_error(const char *str);
+extern void Rf_error(const char *str, ...);
 #define assert(a) if(!(a)) Rf_error(_("internal error in trio library"))
 
 

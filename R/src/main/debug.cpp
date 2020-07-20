@@ -92,10 +92,10 @@ HIDDEN SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* maintain global trace & debug state */
 
 static bool tracing_state = true, debugging_state = true;
-const bool& GET_TRACE_STATE = tracing_state;
-const bool& GET_DEBUG_STATE = debugging_state;
-inline void SET_TRACE_STATE(bool value) {tracing_state = value;}
-inline void SET_DEBUG_STATE(bool value) {debugging_state = value;}
+const bool &GET_TRACE_STATE = tracing_state;
+const bool &GET_DEBUG_STATE = debugging_state;
+inline void SET_TRACE_STATE(bool value) { tracing_state = value; }
+inline void SET_DEBUG_STATE(bool value) { debugging_state = value; }
 
 HIDDEN SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -161,14 +161,14 @@ HIDDEN SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    object=CAR(args);
+    object = CAR(args);
     if (TYPEOF(object) == CLOSXP ||
-	TYPEOF(object) == BUILTINSXP ||
-	TYPEOF(object) == SPECIALSXP)
-	errorcall(call, _("argument must not be a function"));
+        TYPEOF(object) == BUILTINSXP ||
+        TYPEOF(object) == SPECIALSXP)
+        errorcall(call, _("argument must not be a function"));
 
     if (RTRACE(object))
-	SET_RTRACE(object, 0);
+        SET_RTRACE(object, 0);
     return R_NilValue;
 }
 
@@ -199,22 +199,23 @@ static void memtrace_stack_dump(void)
 {
     RCNTXT *cptr;
 
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
-	if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN))
-	    && TYPEOF(cptr->getCall()) == LANGSXP) {
-	    SEXP fun = CAR(cptr->getCall());
-	    Rprintf("%s ",
-		    TYPEOF(fun) == SYMSXP ? translateChar(PRINTNAME(fun)) :
-		    "<Anonymous>");
-	}
+    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
+    {
+        if ((cptr->getCallFlag() & (CTXT_FUNCTION | CTXT_BUILTIN)) && TYPEOF(cptr->getCall()) == LANGSXP)
+        {
+            SEXP fun = CAR(cptr->getCall());
+            Rprintf("%s ",
+                    TYPEOF(fun) == SYMSXP ? translateChar(PRINTNAME(fun)) : "<Anonymous>");
+        }
     }
     Rprintf("\n");
 }
 
-void Rf_memtrace_report(void * old, void * _new)
+void Rf_memtrace_report(void *old, void *_new)
 {
-    if (!R_current_trace_state()) return;
-    Rprintf("tracemem[%p -> %p]: ", (void *) old, _new);
+    if (!R_current_trace_state())
+        return;
+    Rprintf("tracemem[%p -> %p]: ", (void *)old, _new);
     memtrace_stack_dump();
 }
 

@@ -77,6 +77,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <R_ext/Itermacros.h>
 #include <R_ext/Minmax.h>
 #include <rlocale.h>
+#include <vector>
 
 using namespace std;
 
@@ -398,7 +399,7 @@ HIDDEN SEXP do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t
 	n1 = XLENGTH(x),
 	n2 = XLENGTH(Xfix),
-	n = (n1 > 0 && n2 > 0) ? ((n1 >= n2) ? n1 : n2) : 0;
+	n = (n1 > 0 && n2 > 0) ? std::max(n1, n2) : 0;
     if (n == 0) return allocVector(LGLSXP, 0);
     SEXP ans = PROTECT(allocVector(LGLSXP, n));
 
@@ -519,7 +520,7 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, size_t sa
     } else if (ienc == CE_LATIN1 || ienc == CE_BYTES) {
 	in = strlen(str);
 	out = so - sa + 1;
-	memcpy(buf + sa - 1, str, (in < out) ? in : out);
+	memcpy(buf + sa - 1, str, std::min(in, out));
     } else {
 	/* This cannot work for stateful encodings */
 	if (mbcslocale) {
@@ -535,7 +536,7 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, size_t sa
 	} else {
 	    in = strlen(str);
 	    out = so - sa + 1;
-	    memcpy(buf + sa - 1, str, (in < out) ? in : out);
+	    memcpy(buf + sa - 1, str, std::min(in, out));
 	}
     }
 }
@@ -726,29 +727,29 @@ donesc:
 #define LASTCHARW(i) (!iswspace((int)wc[i-1]) && (!wc[i+1] || iswspace((int)wc[i+1])))
 #define WUP (int)(wcslen(wc) - 1)
 
-// lower-case vowels in English plus accented versions
-static int vowels[] = {
-    0x61, 0x65, 0x69, 0x6f, 0x75,
-    0xe0, 0xe1, 0x2e, 0xe3, 0xe4, 0xe5,
-    0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
-    0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc,
-    0x101, 0x103, 0x105, 0x113, 0x115, 0x117, 0x118, 0x11b,
-    0x129, 0x12b, 0x12d, 0x12f, 0x131, 0x14d, 0x14f, 0x151,
-    0x169, 0x16b, 0x16d, 0x16f, 0x171, 0x173
-};
-
-static bool iswvowel(wchar_t w)
+namespace
 {
-	int v = (int)w, n = sizeof(vowels) / sizeof(int);
+	// lower-case vowels in English plus accented versions
+	const vector<int> vowels = {
+		0x61, 0x65, 0x69, 0x6f, 0x75,
+		0xe0, 0xe1, 0x2e, 0xe3, 0xe4, 0xe5,
+		0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
+		0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc,
+		0x101, 0x103, 0x105, 0x113, 0x115, 0x117, 0x118, 0x11b,
+		0x129, 0x12b, 0x12d, 0x12f, 0x131, 0x14d, 0x14f, 0x151,
+		0x169, 0x16b, 0x16d, 0x16f, 0x171, 0x173};
 
-	for (int i = 0; i < n; i++)
-		if (v == vowels[i])
+	bool iswvowel(wchar_t w)
+	{
+		int v = (int)w;
+		for (const auto &vec : vowels)
 		{
-			return true;
+			if (vec == v)
+				return true;
 		}
-
-	return false;
-}
+		return false;
+	}
+} // namespace
 
 static void mywcscpy(wchar_t *dest, const wchar_t *src)
 {
@@ -1076,11 +1077,13 @@ enum wtr_type
 	WTR_CHAR,
 	WTR_RANGE
 };
+
 struct wtr_spec
 {
 	wtr_type type;
 	struct wtr_spec *next;
-	union {
+	union
+	{
 		wchar_t c;
 		struct
 		{
@@ -1090,8 +1093,7 @@ struct wtr_spec
 	} u;
 };
 
-static void
-wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
+static void wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
     int i, len = (int) wcslen(s);
     struct wtr_spec *This, *_new;
 
@@ -1122,19 +1124,19 @@ wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
     }
 }
 
-static void
-wtr_free_spec(struct wtr_spec *trs) {
-    struct wtr_spec *This, *next;
-    This = trs;
-    while(This) {
-	next = This->next;
-	Free(This);
-	This = next;
-    }
+static void wtr_free_spec(struct wtr_spec *trs)
+{
+	struct wtr_spec *This, *next;
+	This = trs;
+	while (This)
+	{
+		next = This->next;
+		Free(This);
+		This = next;
+	}
 }
 
-static wchar_t
-wtr_get_next_char_from_spec(struct wtr_spec **p) {
+static wchar_t wtr_get_next_char_from_spec(struct wtr_spec **p) {
     wchar_t c;
     struct wtr_spec *This;
 
@@ -1168,11 +1170,13 @@ enum tr_spec_type
 	TR_CHAR,
 	TR_RANGE
 };
+
 struct tr_spec
 {
 	tr_spec_type type;
 	struct tr_spec *next;
-	union {
+	union
+	{
 		unsigned char c;
 		struct
 		{
@@ -1213,14 +1217,16 @@ static void tr_build_spec(const char *s, struct tr_spec *trs) {
     }
 }
 
-static void tr_free_spec(struct tr_spec *trs) {
-    struct tr_spec *This, *next;
-    This = trs;
-    while(This) {
-	next = This->next;
-	Free(This);
-	This = next;
-    }
+static void tr_free_spec(struct tr_spec *trs)
+{
+	struct tr_spec *This, *next;
+	This = trs;
+	while (This)
+	{
+		next = This->next;
+		Free(This);
+		This = next;
+	}
 }
 
 static unsigned char tr_get_next_char_from_spec(struct tr_spec **p) {
@@ -1257,76 +1263,71 @@ struct xtable_t
 	wchar_t c_new;
 };
 
-R_INLINE static int xtable_comp(const void *a, const void *b)
+namespace
 {
-	return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
-}
-
-R_INLINE static int xtable_key_comp(const void *a, const void *b)
-{
-	return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
-}
-
-#define SWAP(_a, _b, _TYPE) \
-	{                       \
-		_TYPE _t;           \
-		_t = *(_a);         \
-		*(_a) = *(_b);      \
-		*(_b) = _t;         \
+	inline int xtable_comp(const void *a, const void *b)
+	{
+		return ((xtable_t *)a)->c_old - ((xtable_t *)b)->c_old;
 	}
 
-#define ISORT(_base, _num, _TYPE, _comp)                            \
-	{                                                               \
-		/* insert sort */                                           \
-		/* require stable data */                                   \
-		int _i, _j;                                                 \
-		for (_i = 1; _i < _num; _i++)                               \
-			for (_j = _i; _j > 0 &&                                 \
-						  (*_comp)(_base + _j - 1, _base + _j) > 0; \
-				 _j--)                                              \
-				SWAP(_base + _j - 1, _base + _j, _TYPE);            \
+	inline int xtable_key_comp(const void *a, const void *b)
+	{
+		return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
 	}
 
-#define COMPRESS(_base, _num, _TYPE, _comp)                   \
-	{                                                         \
-		/* supress even c_old. last use */                    \
-		int _i, _j;                                           \
-		for (_i = 0; _i < (*(_num)) - 1; _i++)                \
-		{                                                     \
-			int rc = (*_comp)(_base + _i, _base + _i + 1);    \
-			if (rc == 0)                                      \
-			{                                                 \
-				for (_j = _i, _i--; _j < (*(_num)) - 1; _j++) \
-					*((_base) + _j) = *((_base) + _j + 1);    \
-				(*(_num))--;                                  \
-			}                                                 \
-		}                                                     \
+	void ISORT(xtable_t *_base, int _num, int (*_comp)(const void *a, const void *b))
+	{
+		/* insert sort */
+		/* require stable data */
+		for (int _i = 1; _i < _num; _i++)
+			for (int _j = _i; _j > 0 &&
+							  (*_comp)(_base + _j - 1, _base + _j) > 0;
+				 _j--)
+				std::swap(*(_base + _j - 1), *(_base + _j));
 	}
 
-#define BSEARCH(_rc, _key, _base, _nmemb, _TYPE, _comp) \
-	{                                                   \
-		size_t l, u, idx;                               \
-		_TYPE *p;                                       \
-		int comp;                                       \
-		l = 0;                                          \
-		u = _nmemb;                                     \
-		_rc = nullptr;                                     \
-		while (l < u)                                   \
-		{                                               \
-			idx = (l + u) / 2;                          \
-			p = (_base) + idx;                          \
-			comp = (*_comp)(_key, p);                   \
-			if (comp < 0)                               \
-				u = idx;                                \
-			else if (comp > 0)                          \
-				l = idx + 1;                            \
-			else                                        \
-			{                                           \
-				_rc = p;                                \
-				break;                                  \
-			}                                           \
-		}                                               \
+	void COMPRESS(xtable_t *_base, int &_num, int (*_comp)(const void *a, const void *b))
+	{
+		/* supress even c_old. last use */
+		int _j;
+		for (int _i = 0; _i < _num - 1; _i++)
+		{
+			int rc = (*_comp)(_base + _i, _base + _i + 1);
+			if (rc == 0)
+			{
+				for (_j = _i, _i--; _j < _num - 1; _j++)
+					*((_base) + _j) = *((_base) + _j + 1);
+				_num--;
+			}
+		}
 	}
+
+	template <typename T>
+	void BSEARCH(T *_rc, wchar_t *_key, T *_base, int _nmemb, int (*_comp)(const void *a, const void *b))
+	{
+		size_t l, u, idx;
+		T *p = nullptr;
+		int comp;
+		l = 0;
+		u = _nmemb;
+		_rc = nullptr;
+		while (l < u)
+		{
+			idx = (l + u) / 2;
+			p = (_base) + idx;
+			comp = (*_comp)(_key, p);
+			if (comp < 0)
+				u = idx;
+			else if (comp > 0)
+				l = idx + 1;
+			else
+			{
+				_rc = p;
+				break;
+			}
+		}
+	}
+} // namespace
 
 HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1367,7 +1368,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     {
 	int j, nb, nc;
-	xtable_t *xtable, *tbl;
+	xtable_t *xtable = nullptr, *tbl = nullptr;
 	int xtable_cnt;
 	struct wtr_spec *trs_cnt, **trs_cnt_ptr;
 	wchar_t c_old, c_new, *wc;
@@ -1451,8 +1452,8 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	wtr_free_spec(trs_new);
 	Free(trs_old_ptr); Free(trs_new_ptr);
 
-	ISORT(xtable, xtable_cnt, xtable_t , xtable_comp);
-	COMPRESS(xtable, &xtable_cnt, xtable_t, xtable_comp);
+	ISORT(xtable, xtable_cnt, xtable_comp);
+	COMPRESS(xtable, xtable_cnt, xtable_comp);
 
 	PROTECT(y = allocVector(STRSXP, n));
 	vmax = vmaxget();
@@ -1477,8 +1478,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
 		for (j = 0; j < nc; j++){
-		    BSEARCH(tbl,&wc[j], xtable, xtable_cnt,
-			    xtable_t, xtable_key_comp);
+			BSEARCH(tbl, &wc[j], xtable, xtable_cnt, xtable_key_comp);
 		    if (tbl) wc[j] = tbl->c_new;
 		}
 		if (ienc == CE_UTF8) {
@@ -1666,19 +1666,21 @@ HIDDEN SEXP do_strtoi(SEXP call, SEXP op, SEXP args, SEXP env)
 /* creates a new STRSXP which is a suffix of string, starting
    with given index; the result is returned unprotected  */
 
-HIDDEN SEXP stringSuffix(SEXP string, int fromIndex) {
+HIDDEN SEXP Rf_stringSuffix(SEXP string, int fromIndex)
+{
 
-    int origLen = LENGTH(string);
-    int newLen = origLen - fromIndex;
+	int origLen = LENGTH(string);
+	int newLen = origLen - fromIndex;
 
-    SEXP res = PROTECT(allocVector(STRSXP, newLen));
-    int i;
-    for(i = 0; i < newLen; i++) {
-	SET_STRING_ELT(res, i, STRING_ELT(string, fromIndex++));
-    }
+	SEXP res = PROTECT(allocVector(STRSXP, newLen));
 
-    UNPROTECT(1); /* res */
-    return res;
+	for (int i = 0; i < newLen; i++)
+	{
+		SET_STRING_ELT(res, i, STRING_ELT(string, fromIndex++));
+	}
+
+	UNPROTECT(1); /* res */
+	return res;
 }
 
 HIDDEN SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)

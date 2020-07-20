@@ -40,17 +40,17 @@
 
 int baseRegisterIndex = -1;
 
-GPar* dpptr(pGEDevDesc dd) {
+GPar* Rf_dpptr(GEDevDesc *dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState*) dd->gesd[baseRegisterIndex]->systemSpecific;
     return &(bss->dp);
 }
 
-R_INLINE static SEXP getSymbolValue(SEXP symbol)
+inline static SEXP getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)
-	error(_("argument passed to '%s' function is not a symbol"), "getSymbolValue()");
+        error(_("argument passed to '%s' function is not a symbol"), "getSymbolValue()");
     return findVar(symbol, R_BaseEnv);
 }
 
@@ -105,8 +105,8 @@ static int R_NumDevices = 1;
    process of being closed and destroyed.  We do this to allow for GUI
    callbacks starting to kill a device whilst another is being killed.
  */
-static pGEDevDesc R_Devices[R_MaxDevices];
-static Rboolean active[R_MaxDevices];
+static GEDevDesc *R_Devices[R_MaxDevices];
+static bool active[R_MaxDevices];
 
 /* a dummy description to point to when there are no active devices */
 
@@ -121,17 +121,17 @@ static GEDevDesc nullDevice;
 */
 
 /* Used in grid */
-int NoDevices(void)
+int Rf_NoDevices(void)
 {
     return (R_NumDevices == 1 || R_CurrentDevice == 0);
 }
 
-int NumDevices(void)
+int Rf_NumDevices(void)
 {
     return R_NumDevices;
 }
 
-pGEDevDesc GEcurrentDevice(void)
+GEDevDesc *GEcurrentDevice(void)
 {
     /* If there are no active devices
      * check the options for a "default device".
@@ -179,18 +179,18 @@ pGEDevDesc GEcurrentDevice(void)
     return R_Devices[R_CurrentDevice];
 }
 
-pGEDevDesc GEgetDevice(int i)
+GEDevDesc *GEgetDevice(int i)
 {
     return R_Devices[i];
 }
 
-int curDevice(void)
+int Rf_curDevice(void)
 {
     return R_CurrentDevice;
 }
 
 
-int nextDevice(int from)
+int Rf_nextDevice(int from)
 {
     if (R_NumDevices == 1)
 	return 0;
@@ -209,7 +209,7 @@ int nextDevice(int from)
     }
 }
 
-int prevDevice(int from)
+int Rf_prevDevice(int from)
 {
     if (R_NumDevices == 1)
 	return 0;
@@ -233,38 +233,37 @@ int prevDevice(int from)
  * and you want to find the corresponding device number
  */
 
-int GEdeviceNumber(pGEDevDesc dd)
+int GEdeviceNumber(GEDevDesc *dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
-	if (R_Devices[i] == dd) return i;
+    for (int i = 1; i < R_MaxDevices; i++)
+        if (R_Devices[i] == dd)
+            return i;
     return 0;
 }
 
 /* This should be called if you have a pointer to a DevDesc
  * and you want to find the corresponding device number
  */
-int ndevNumber(pDevDesc dd)
+int Rf_ndevNumber(pDevDesc dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
-	if (R_Devices[i] != nullptr && R_Devices[i]->dev == dd)
-	    return i;
+    for (int i = 1; i < R_MaxDevices; i++)
+        if (R_Devices[i] && R_Devices[i]->dev == dd)
+            return i;
     return 0;
 }
 
-int selectDevice(int devNum)
+int Rf_selectDevice(int devNum)
 {
     /* Valid to select nullDevice, but that will open a new device.
        See ?dev.set.
      */
     if((devNum >= 0) && (devNum < R_MaxDevices) &&
-       (R_Devices[devNum] != nullptr) && active[devNum])
+       R_Devices[devNum] && active[devNum])
     {
-	pGEDevDesc gdd;
+	GEDevDesc *gdd;
 
 	if (!NoDevices()) {
-	    pGEDevDesc oldd = GEcurrentDevice();
+	    GEDevDesc *oldd = GEcurrentDevice();
 	    if (oldd->dev->deactivate) oldd->dev->deactivate(oldd->dev);
 	}
 
@@ -288,18 +287,17 @@ int selectDevice(int devNum)
    only use findNext = FALSE when shutting R dowm, and .Device[s] are not
    updated.
 */
-static
-void removeDevice(int devNum, Rboolean findNext)
+static void removeDevice(int devNum, bool findNext = true)
 {
     /* Not vaild to remove nullDevice */
     if((devNum > 0) && (devNum < R_MaxDevices) &&
-       (R_Devices[devNum] != nullptr) && active[devNum])
+       R_Devices[devNum] && active[devNum])
     {
 	int i;
 	SEXP s;
-	pGEDevDesc g = R_Devices[devNum];
+	GEDevDesc *g = R_Devices[devNum];
 
-	active[devNum] = FALSE; /* stops it being selected again */
+	active[devNum] = false; /* stops it being selected again */
 	R_NumDevices--;
 
 	if(findNext) {
@@ -319,7 +317,7 @@ void removeDevice(int devNum, Rboolean findNext)
 
 		/* activate new current device */
 		if (R_CurrentDevice) {
-		    pGEDevDesc gdd = GEcurrentDevice();
+		    GEDevDesc *gdd = GEcurrentDevice();
 		    if(gdd->dev->activate) gdd->dev->activate(gdd->dev);
 		}
 	    }
@@ -330,14 +328,14 @@ void removeDevice(int devNum, Rboolean findNext)
     }
 }
 
-void GEkillDevice(pGEDevDesc gdd)
+void GEkillDevice(GEDevDesc *gdd)
 {
-    removeDevice(GEdeviceNumber(gdd), TRUE);
+    removeDevice(GEdeviceNumber(gdd), true);
 }
 
-void killDevice(int devNum)
+void Rf_killDevice(int devNum)
 {
-    removeDevice(devNum, TRUE);
+    removeDevice(devNum, true);
 }
 
 
@@ -349,8 +347,7 @@ void Rf_KillAllDevices(void)
     /* Avoid lots of activation followed by removal of devices
        while (R_NumDevices > 1) killDevice(R_CurrentDevice);
     */
-    int i;
-    for(i = R_MaxDevices-1; i > 0; i--) removeDevice(i, FALSE);
+    for(int i = R_MaxDevices-1; i > 0; i--) removeDevice(i, false);
     R_CurrentDevice = 0;  /* the null device, for tidyness */
 
     /* <FIXME> Disable this for now */
@@ -372,12 +369,11 @@ void Rf_KillAllDevices(void)
 }
 
 /* A common construction in some graphics devices */
-pGEDevDesc desc2GEDesc(pDevDesc dd)
+GEDevDesc *Rf_desc2GEDesc(pDevDesc dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
-	if (R_Devices[i] != nullptr && R_Devices[i]->dev == dd)
-	    return R_Devices[i];
+    for (int i = 1; i < R_MaxDevices; i++)
+        if (R_Devices[i] && R_Devices[i]->dev == dd)
+            return R_Devices[i];
     /* shouldn't happen ...
        but might if device is not yet registered or being killed */
     return R_Devices[0]; /* safe as will not replay a displayList */
@@ -397,12 +393,12 @@ Rboolean R_CheckDeviceAvailableBool(void)
     else return TRUE;
 }
 
-void GEaddDevice(pGEDevDesc gdd)
+void GEaddDevice(GEDevDesc *gdd)
 {
     int i;
-    Rboolean appnd;
+    bool appnd;
     SEXP s, t;
-    pGEDevDesc oldd;
+    GEDevDesc *oldd;
 
     PROTECT(s = getSymbolValue(R_DevicesSymbol));
 
@@ -414,22 +410,22 @@ void GEaddDevice(pGEDevDesc gdd)
     /* find empty slot for new descriptor */
     i = 1;
     if (CDR(s) == R_NilValue)
-	appnd = TRUE;
+	appnd = true;
     else {
 	s = CDR(s);
-	appnd = FALSE;
+	appnd = false;
     }
-    while (R_Devices[i] != nullptr) {
+    while (R_Devices[i]) {
 	i++;
 	if (CDR(s) == R_NilValue)
-	    appnd = TRUE;
+	    appnd = true;
 	else
 	    s = CDR(s);
     }
     R_CurrentDevice = i;
     R_NumDevices++;
     R_Devices[i] = gdd;
-    active[i] = TRUE;
+    active[i] = true;
 
     GEregisterWithDevice(gdd);
     if(gdd->dev->activate) gdd->dev->activate(gdd->dev);
@@ -455,14 +451,14 @@ void GEaddDevice(pGEDevDesc gdd)
 }
 
 /* convenience wrappers */
-void GEaddDevice2(pGEDevDesc gdd, const char *name)
+void GEaddDevice2(GEDevDesc *gdd, const char *name)
 {
     gsetVar(R_DeviceSymbol, mkString(name), R_BaseEnv);
     GEaddDevice(gdd);
     GEinitDisplayList(gdd);
 }
 
-void GEaddDevice2f(pGEDevDesc gdd, const char *name, const char *file)
+void GEaddDevice2f(GEDevDesc *gdd, const char *name, const char *file)
 {
     SEXP f = PROTECT(mkString(name));
     if(file) {
@@ -480,19 +476,18 @@ Rboolean Rf_GetOptionDeviceAsk(void); /* from options.cpp */
 
 /* Create a GEDevDesc, given a pDevDesc
  */
-pGEDevDesc GEcreateDevDesc(pDevDesc dev)
+GEDevDesc *GEcreateDevDesc(pDevDesc dev)
 {
     /* Wrap the device description within a graphics engine
      * device description (add graphics engine information
      * to the device description).
      */
-    pGEDevDesc gdd = (GEDevDesc*) calloc(1, sizeof(GEDevDesc));
+    GEDevDesc *gdd = (GEDevDesc*) calloc(1, sizeof(GEDevDesc));
     /* NULL the gesd array
      */
-    int i;
     if (!gdd)
 	error(_("not enough memory to allocate device (in 'GEcreateDevDesc()' function)"));
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = nullptr;
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = nullptr;
     gdd->dev = dev;
     gdd->displayListOn = dev->displayListOn;
     gdd->displayList = R_NilValue; /* gc needs this */
@@ -518,11 +513,11 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
 HIDDEN void Rf_InitGraphics(void)
 {
     R_Devices[0] = &nullDevice;
-    active[0] = TRUE;
+    active[0] = true;
     // these are static arrays, not really needed
     for (int i = 1; i < R_MaxDevices; i++) {
 	R_Devices[i] = nullptr;
-	active[i] = FALSE;
+	active[i] = false;
     }
 
     /* init .Device and .Devices */
@@ -534,14 +529,13 @@ HIDDEN void Rf_InitGraphics(void)
 }
 
 
-void NewFrameConfirm(pDevDesc dd)
+void Rf_NewFrameConfirm(pDevDesc dd)
 {
     if(!R_Interactive) return;
     /* dd->newFrameConfirm(dd) will either handle this, or return
        FALSE to ask the engine to do so. */
-    if(dd->newFrameConfirm && dd->newFrameConfirm(dd)) ;
-    else {
+    if(dd->newFrameConfirm && dd->newFrameConfirm(dd)) return;
+
 	unsigned char buf[1024];
 	R_ReadConsole(_("Hit <Return> to see next plot: "), buf, 1024, 0);
-    }
 }

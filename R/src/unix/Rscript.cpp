@@ -203,7 +203,7 @@ int main(int argc_, char *argv_[])
 	snprintf(cmd, PATH_MAX+1, "%s\\%s\\Rterm.exe",  p, BINDIR);
     else {
 	char rhome[MAX_PATH];
-	GetModuleFileName(NULL, rhome, MAX_PATH);
+	GetModuleFileName(nullptr, rhome, MAX_PATH);
 	p = strrchr(rhome,'\\');
 	if(!p) {fprintf(stderr, ("installation problem\n")); exit(1);}
 	*p = '\0';
@@ -300,7 +300,7 @@ int main(int argc_, char *argv_[])
 	for(; i < argc; i++)
 	    av[ac++] = argv[i];
     }
-    av[ac] = (char *) NULL;
+    av[ac] = (char *) nullptr;
 #ifdef HAVE_PUTENV
     /* If provided, and default packages are not specified on the
        command line, then R_SCRIPT_DEFAULT_PACKAGES takes precedence

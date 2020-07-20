@@ -234,15 +234,15 @@ static void first_init()
 #ifdef _WIN32
     /* create a dummy message-only window for synchronization with the
      * main event loop */
-    HINSTANCE instance = GetModuleHandle(NULL);
+    HINSTANCE instance = GetModuleHandle(nullptr);
     LPCTSTR class_ = "Rhttpd";
-    WNDCLASS wndclass = { 0, RhttpdWindowProc, 0, 0, instance, NULL, 0, 0,
-			  NULL, class_ };
+    WNDCLASS wndclass = { 0, RhttpdWindowProc, 0, 0, instance, nullptr, 0, 0,
+			  nullptr, class_ };
     RegisterClass(&wndclass);
     message_window = CreateWindow(class_, "Rhttpd", 0, 1, 1, 1, 1,
-				  HWND_MESSAGE, NULL, instance, NULL);
+				  HWND_MESSAGE, nullptr, instance, nullptr);
 
-    process_request_mutex = CreateMutex(NULL, FALSE, NULL);
+    process_request_mutex = CreateMutex(nullptr, FALSE, nullptr);
     if (!process_request_mutex) 
         DBG(printf("Mutex creation failed\n"));
 #endif
@@ -931,7 +931,7 @@ static void worker_input_handler(void *data) {
 			    char *mend = url - 1;
 			    /* we generate a header with the method so it can be passed to the handler */
 			    if (!c->headers)
-				c->headers = alloc_buffer(1024, NULL);
+				c->headers = alloc_buffer(1024, nullptr);
 			    /* make sure it fits */
 			    if (c->headers->size - c->headers->length >= size_t(18 + (mend - bol))) {
 				if (!c->method) c->method = METHOD_OTHER;
@@ -956,7 +956,7 @@ static void worker_input_handler(void *data) {
 			/* --- process headers --- */
 			char *k = bol;
 			if (!c->headers)
-			    c->headers = alloc_buffer(1024, NULL);
+			    c->headers = alloc_buffer(1024, nullptr);
 			if (c->headers) { /* record the header line in the buffer */
 			    size_t l = strlen(bol);
 			    if (l) { /* this should be really always true */
@@ -1188,7 +1188,7 @@ static void srv_input_handler(void *data)
 #else
     if (!add_worker(c)) { /* create worker thread only if the worker
 			   * was accepted */
-	if (!(c->thread = CreateThread(NULL, 0, WorkerThreadProc,
+	if (!(c->thread = CreateThread(nullptr, 0, WorkerThreadProc,
 				       (LPVOID) c, 0, 0)))
 	    remove_worker(c);
     }
@@ -1255,7 +1255,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
 				  &srv_input_handler, HttpdServerActivity);
 #else
     /* do the desired Windows synchronization */
-    server_thread = CreateThread(NULL, 0, ServerThreadProc, 0, 0, 0);
+    server_thread = CreateThread(nullptr, 0, ServerThreadProc, 0, 0, 0);
 #endif
     return 0;
 }

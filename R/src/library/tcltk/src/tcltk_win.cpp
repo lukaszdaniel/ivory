@@ -36,7 +36,7 @@ static void TclSpinLoop(void *data)
 
 static void _R_tcldo(void)
 {
-    (void) R_ToplevelExec(TclSpinLoop, NULL);
+    (void) R_ToplevelExec(TclSpinLoop, nullptr);
 }
 
 /* import from src/gnuwin32/system.cpp -- private, so in no header */

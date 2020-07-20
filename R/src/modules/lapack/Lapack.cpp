@@ -1106,7 +1106,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     if(tol > 0) {
 	char one[2] = "1";
 	anorm = F77_CALL(dlange)(one, &n, &n, REAL(A), &n,
-				 (double*) NULL FCONE);
+				 (double*) nullptr FCONE);
 	work = (double *) R_alloc(4*(size_t)n, sizeof(double));
 	F77_CALL(dgecon)(one, &n, avals, &n, &anorm, &rcond, work, ipiv,
 			 &info FCONE);

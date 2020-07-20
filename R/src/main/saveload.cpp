@@ -1875,7 +1875,7 @@ inline static int defaultSaveVersion()
     {
         char *valstr = getenv("R_DEFAULT_SAVE_VERSION");
         int val = -1;
-        if (valstr != nullptr)
+        if (valstr)
             val = atoi(valstr);
         if (val == 2 || val == 3)
             dflt = val;
@@ -2284,7 +2284,7 @@ void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
     SEXP sym = install("sys.load.image");
     if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
 	FILE *fp = R_fopen(name, "rb"); /* binary file */
-	if(fp != nullptr) {
+	if(fp) {
 	    R_LoadSavedData(fp, R_GlobalEnv);
 	    if(! quiet)
 		Rprintf(_("[Previously saved workspace restored]\n\n"));

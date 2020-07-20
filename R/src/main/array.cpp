@@ -501,16 +501,16 @@ static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 #ifdef LONG_VECTOR_SUPPORT
 static SEXP do_lengths_long(SEXP x, SEXP call, SEXP rho)
 {
-    SEXP ans;
-    R_xlen_t x_len, i;
-    double *ans_elt;
+	SEXP ans;
+	R_xlen_t x_len, i;
+	double *ans_elt;
 
-    x_len = dispatch_xlength(x, call, rho);
-    PROTECT(ans = allocVector(REALSXP, x_len));
-    for (i = 0, ans_elt = REAL(ans); i < x_len; i++, ans_elt++)
-        *ans_elt = (double) getElementLength(x, i, call, rho);
-    UNPROTECT(1);
-    return ans;
+	x_len = dispatch_xlength(x, call, rho);
+	PROTECT(ans = allocVector(REALSXP, x_len));
+	for (i = 0, ans_elt = REAL(ans); i < x_len; i++, ans_elt++)
+		*ans_elt = (double)getElementLength(x, i, call, rho);
+	UNPROTECT(1);
+	return ans;
 }
 #endif
 
@@ -622,10 +622,10 @@ HIDDEN SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 static bool mayHaveNaNOrInf(double *x, R_xlen_t n)
 {
-    if ((n&1) != 0 && !R_FINITE(x[0]))
-	return true;
-    for (R_xlen_t i = n & 1; i < n; i += 2)
-	/* A precise version could use this condition:
+	if ((n & 1) != 0 && !R_FINITE(x[0]))
+		return true;
+	for (R_xlen_t i = n & 1; i < n; i += 2)
+		/* A precise version could use this condition:
 	 *
 	 * !R_FINITE(x[i]+x[i+1]) && (!R_FINITE(x[i]) || !R_FINITE(x[i+1]))
 	 *
@@ -636,9 +636,9 @@ static bool mayHaveNaNOrInf(double *x, R_xlen_t n)
 	 * The present version is imprecise because the sum of two very
 	 * large finite values (e.g. 1e308) may be infinite.
 	 */
-	if (!R_FINITE(x[i]+x[i+1]))
-	    return true;
-    return false;
+		if (!R_FINITE(x[i] + x[i + 1]))
+			return true;
+	return false;
 }
 
 /*
@@ -665,15 +665,15 @@ static Rboolean mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
 
 static bool cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
 {
-    /* With HAVE_FORTRAN_DOUBLE_COMPLEX set, it should be clear that
+	/* With HAVE_FORTRAN_DOUBLE_COMPLEX set, it should be clear that
        Rcomplex has no padding, so we could probably use mayHaveNaNOrInf,
        but better safe than sorry... */
-    if ((n&1) != 0 && (!R_FINITE(x[0].r) || !R_FINITE(x[0].i)))
-	return true;
-    for (R_xlen_t i = n&1; i < n; i += 2)
-	if (!R_FINITE(x[i].r+x[i].i+x[i+1].r+x[i+1].i))
-	    return true;
-    return false;
+	if ((n & 1) != 0 && (!R_FINITE(x[0].r) || !R_FINITE(x[0].i)))
+		return true;
+	for (R_xlen_t i = n & 1; i < n; i += 2)
+		if (!R_FINITE(x[i].r + x[i].i + x[i + 1].r + x[i + 1].i))
+			return true;
+	return false;
 }
 
 /* experimental version for SIMD hardware (see also mayHaveNaNOrInf_simd) */

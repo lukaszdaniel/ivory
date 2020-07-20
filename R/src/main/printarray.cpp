@@ -180,9 +180,9 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 #define _PRINT_ROW_LAB                     \
                                            \
-	if (cn != nullptr)                        \
+	if (cn)                                \
 		Rprintf("%*s%s\n", rlabw, "", cn); \
-	if (rn != nullptr)                        \
+	if (rn)                                \
 		Rprintf("%*s", -rlabw, rn);        \
 	else                                   \
 		Rprintf("%*s", rlabw, "")

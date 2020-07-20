@@ -174,7 +174,7 @@ inline void SETOLDTYPE(SEXP x, int v) { SETLEVELS(x, v); }
 R_INLINE static SEXP CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
-    if (x != nullptr && TYPEOF(x) == FREESXP)
+    if (x && TYPEOF(x) == FREESXP)
 	error(_("unprotected object (%p) encountered (was %s)"), x, sexptype2char(OLDTYPE(x)));
     return x;
 }
@@ -235,6 +235,27 @@ const char *Rf_sexptype2char(const SEXPTYPE type) {
     case RAWSXP:	return "RAWSXP";
     case NEWSXP:	return "NEWSXP"; /* should never happen */
     case FREESXP:	return "FREESXP";
+    case SINGLESXP: return "SINGLEEXP";
+    case intCHARSXP: return "intCHARSXP";
+    case FUNSXP:     return "FUNSXP";
+    case ALTREP_SXP: return "ALTREP_SXP";
+    case ATTRLISTSXP: return "ATTRLISTSXP";
+    case ATTRLANGSXP: return "ATTRLANGSXP";
+    case BASEENV_SXP: return "BASEENV_SXP";
+    case EMPTYENV_SXP: return "EMPTYENV_SXP";
+    case BCREPREF:    return "BCREPREF";
+    case BCREPDEF:    return "BCREPDEF";
+    case GENERICREFSXP: return "GENERICREFSXP";
+    case CLASSREFSXP: return "CLASSREFSXP";
+    case PERSISTSXP:  return "PERSISTSXP";
+    case PACKAGESXP:  return "PACKAGESXP";
+    case NAMESPACESXP: return "NAMESPACESXP";
+    case BASENAMESPACE_SXP: return "BASENAMESPACE_SXP";
+    case MISSINGARG_SXP: return "MISSINGARG_SXP";
+    case UNBOUNDVALUE_SXP: return "UNBOUNDVALUE_SXP";
+    case GLOBALENV_SXP:  return "GLOBALENV_SXP";
+    case NILVALUE_SXP:  return "NILVALUE_SXP";
+    case REFSXP:     return "REFSXP";
     default:		return "<unknown>";
     }
 }
@@ -371,7 +392,7 @@ static void init_gc_grow_settings()
     char *arg;
 
     arg = getenv("R_GC_MEM_GROW");
-    if (arg != nullptr) {
+    if (arg) {
 	int which = (int) atof(arg);
 	switch (which) {
 	case 0: /* very conservative -- the SMALL_MEMORY settings */
@@ -393,7 +414,7 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_GROWFRAC");
-    if (arg != nullptr) {
+    if (arg) {
 	double frac = atof(arg);
 	if (0.35 <= frac && frac <= 0.75) {
 	    R_NGrowFrac = frac;
@@ -401,7 +422,7 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_GROWINCRFRAC");
-    if (arg != nullptr) {
+    if (arg) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80) {
 	    R_NGrowIncrFrac = frac;
@@ -409,13 +430,13 @@ static void init_gc_grow_settings()
 	}
     }
     arg = getenv("R_GC_NGROWINCRFRAC");
-    if (arg != nullptr) {
+    if (arg) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80)
 	    R_NGrowIncrFrac = frac;
     }
     arg = getenv("R_GC_VGROWINCRFRAC");
-    if (arg != nullptr) {
+    if (arg) {
 	double frac = atof(arg);
 	if (0.05 <= frac && frac <= 0.80)
 	    R_VGrowIncrFrac = frac;
@@ -1113,7 +1134,7 @@ static void ReleaseLargeFreeVectors()
 	SEXP s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
 	    SEXP next = NEXT_NODE(s);
-	    if (CHAR(s) != nullptr) {
+	    if (CHAR(s)) {
 		R_size_t size;
 #ifdef PROTECTCHECK
 		if (TYPEOF(s) == FREESXP)
@@ -1224,7 +1245,7 @@ static void AgeNodeAndChildren(SEXP s, int gen)
 {
     SEXP forwarded_nodes = nullptr;
     AGE_NODE(s, gen);
-    while (forwarded_nodes != nullptr) {
+    while (forwarded_nodes) {
 	s = forwarded_nodes;
 	forwarded_nodes = NEXT_NODE(forwarded_nodes);
 	if (NODE_GENERATION(s) != gen)
@@ -1647,7 +1668,7 @@ HIDDEN SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define PROCESS_NODES()                                                     \
     do                                                                      \
     {                                                                       \
-        while (forwarded_nodes != nullptr)                                     \
+        while (forwarded_nodes)                                             \
         {                                                                   \
             s = forwarded_nodes;                                            \
             forwarded_nodes = NEXT_NODE(forwarded_nodes);                   \
@@ -1764,7 +1785,7 @@ static int RunGenCollect(R_size_t size_needed)
     FORWARD_NODE(R_print.na_string);
     FORWARD_NODE(R_print.na_string_noquote);
 
-    if (R_SymbolTable != nullptr)             /* in case of GC during startup */
+    if (R_SymbolTable)             /* in case of GC during startup */
 	for (i = 0; i < HSIZE; i++) {      /* Symbol table */
 	    FORWARD_NODE(R_SymbolTable[i]);
 	    SEXP s;
@@ -1773,7 +1794,7 @@ static int RunGenCollect(R_size_t size_needed)
 		    gc_error("****found a symbol with attributes\n");
 	}
 
-    if (R_CurrentExpr != nullptr)	           /* Current expression */
+    if (R_CurrentExpr)	           /* Current expression */
 	FORWARD_NODE(R_CurrentExpr);
 
     for (i = 0; i < R_MaxDevices; i++) {   /* Device display lists */
@@ -1853,7 +1874,7 @@ static int RunGenCollect(R_size_t size_needed)
     DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
 
     /* process CHARSXP cache */
-    if (R_StringHash != nullptr) /* in case of GC during initialization */
+    if (R_StringHash) /* in case of GC during initialization */
     {
 	SEXP t;
 	int nc = 0;
@@ -1906,7 +1927,7 @@ static int RunGenCollect(R_size_t size_needed)
 		    /**** could also leave this alone and restore the old
 			  node type in ReleaseLargeFreeVectors before
 			  calculating size */
-		    if (CHAR(s) != nullptr) {
+		    if (CHAR(s)) {
 			R_size_t size = getVecSizeInVEC(s);
 			SET_STDVEC_LENGTH(s, size);
 		    }
@@ -2046,19 +2067,19 @@ HIDDEN SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 static void init_gctorture(void)
 {
     char *arg = getenv("R_GCTORTURE");
-    if (arg != nullptr) {
+    if (arg) {
 	int gap = atoi(arg);
 	if (gap > 0) {
 	    gc_force_wait = gc_force_gap = gap;
 	    arg = getenv("R_GCTORTURE_WAIT");
-	    if (arg != nullptr) {
+	    if (arg) {
 		int wait = atoi(arg);
 		if (wait > 0)
 		    gc_force_wait = wait;
 	    }
 #ifdef PROTECTCHECK
 	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
-	    if (arg != nullptr) {
+	    if (arg) {
 		int inhibit = atoi(arg);
 		if (inhibit > 0) gc_inhibit_release = TRUE;
 		else gc_inhibit_release = FALSE;
@@ -2168,9 +2189,9 @@ HIDDEN void InitMemory()
     init_gc_grow_settings();
 
     arg = getenv("_R_GC_FAIL_ON_ERROR_");
-    if (arg != nullptr && StringTrue(arg))
+    if (arg && StringTrue(arg))
 	gc_fail_on_error = true;
-    else if (arg != nullptr && StringFalse(arg))
+    else if (arg && StringFalse(arg))
 	gc_fail_on_error = false;
 
     gc_reporting = R_Verbose;
@@ -2536,7 +2557,7 @@ SEXP Rf_NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     INIT_REFCNT(newrho);
     SET_TYPEOF(newrho, ENVSXP);
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
-    ENCLOS(newrho) = CHK(rho); if (rho != nullptr) INCREMENT_REFCNT(rho);
+    ENCLOS(newrho) = CHK(rho); if (rho) INCREMENT_REFCNT(rho);
     HASHTAB(newrho) = R_NilValue;
     ATTRIB(newrho) = R_NilValue;
 
@@ -2846,7 +2867,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
-		if (mem != nullptr) {
+		if (mem) {
 		    s = (SEXP) mem;
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
@@ -3236,15 +3257,15 @@ static void R_gc_internal(R_size_t size_needed)
     }
 
     /* sanity check on logical scalar values */
-    if (R_TrueValue != nullptr && LOGICAL(R_TrueValue)[0] != TRUE) {
+    if (R_TrueValue && LOGICAL(R_TrueValue)[0] != TRUE) {
 	LOGICAL(R_TrueValue)[0] = TRUE;
 	gc_error(_("internal TRUE value has been modified"));
     }
-    if (R_FalseValue != nullptr && LOGICAL(R_FalseValue)[0] != FALSE) {
+    if (R_FalseValue && LOGICAL(R_FalseValue)[0] != FALSE) {
 	LOGICAL(R_FalseValue)[0] = FALSE;
 	gc_error(_("internal FALSE value has been modified"));
     }
-    if (R_LogicalNAValue != nullptr &&
+    if (R_LogicalNAValue &&
 	LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
 	LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
 	gc_error(_("internal logical NA value has been modified"));
@@ -4541,11 +4562,11 @@ static void R_ReportNewPage(void)
 
 static void R_EndMemReporting()
 {
-    if(R_MemReportingOutfile != nullptr) {
+    if(R_MemReportingOutfile) {
 	/* does not fclose always flush? */
 	fflush(R_MemReportingOutfile);
 	fclose(R_MemReportingOutfile);
-	R_MemReportingOutfile=nullptr;
+	R_MemReportingOutfile = nullptr;
     }
     R_IsMemReporting = 0;
     return;
@@ -4554,7 +4575,7 @@ static void R_EndMemReporting()
 static void R_InitMemReporting(SEXP filename, int append,
 			       R_size_t threshold)
 {
-    if(R_MemReportingOutfile != nullptr) R_EndMemReporting();
+    if(R_MemReportingOutfile) R_EndMemReporting();
     R_MemReportingOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
     if (R_MemReportingOutfile == nullptr)
 	error(_("'Rprofmem()': cannot open output file '%s'"), filename);
@@ -4618,7 +4639,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 
 void R_FreeStringBuffer(R_StringBuffer *buf)
 {
-    if (buf->data != nullptr) {
+    if (buf->data) {
 	free(buf->data);
 	buf->bufsize = 0;
 	buf->data = nullptr;

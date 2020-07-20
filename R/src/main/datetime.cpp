@@ -85,15 +85,15 @@ known OS with 64-bit time_t and complete tables is Linux.
 
 #ifdef USE_INTERNAL_MKTIME
 #include "datetime.h"
-# undef HAVE_LOCAL_TIME_R
+#undef HAVE_LOCAL_TIME_R
 #define HAVE_LOCAL_TIME_R 1
-# undef HAVE_TM_ZONE
+#undef HAVE_TM_ZONE
 #define HAVE_TM_ZONE 1
-# undef HAVE_TM_GMTOFF
+#undef HAVE_TM_GMTOFF
 #define HAVE_TM_GMTOFF 1
-# undef MKTIME_SETS_ERRNO
+#undef MKTIME_SETS_ERRNO
 #define MKTIME_SETS_ERRNO
-# undef HAVE_WORKING_64BIT_MKTIME
+#undef HAVE_WORKING_64BIT_MKTIME
 #define HAVE_WORKING_64BIT_MKTIME 1
 #else
 
@@ -112,7 +112,7 @@ extern char *tzname[2];
 #include "Rstrptime.h"
 
 static constexpr int days_in_month[12] =
-{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 namespace
 {
@@ -253,24 +253,25 @@ static double mktime00(stm *tm)
 
 #ifdef USE_INTERNAL_MKTIME
 /* Interface to mktime or mktime00 */
-static double mktime0 (stm *tm, const int local)
+static double mktime0(stm *tm, const int local)
 {
-    if(validate_tm(tm) < 0) {
+	if (validate_tm(tm) < 0)
+	{
 #ifdef EOVERFLOW
-	errno = EOVERFLOW;
+		errno = EOVERFLOW;
 #else
-	errno = 79;
+		errno = 79;
 #endif
-	return -1.;
-    }
-    return local ? R_mktime(tm) : mktime00(tm);
+		return -1.;
+	}
+	return local ? R_mktime(tm) : mktime00(tm);
 }
 
 /* Interface to localtime_r or gmtime_r */
-static stm * localtime0(const double *tp, const int local, stm *ltm)
+static stm *localtime0(const double *tp, const int local, stm *ltm)
 {
-    time_t t = (time_t) *tp;
-    return local ? R_localtime_r(&t, ltm) : R_gmtime_r(&t, ltm);
+	time_t t = (time_t)*tp;
+	return local ? R_localtime_r(&t, ltm) : R_gmtime_r(&t, ltm);
 }
 
 #else
@@ -315,7 +316,7 @@ static constexpr time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
    915148800,1136073600,1230768000,1341100800,1435708800,1483228800};
 #endif
 
-static double guess_offset (stm *tm)
+static double guess_offset(stm *tm)
 {
     double offset, offset1, offset2;
     int i, wday, year, oldmonth, oldisdst, oldmday;
@@ -435,7 +436,7 @@ static double mktime0(stm *tm, const int local)
 }
 
 /* Interface for localtime or gmtime or internal substitute */
-static stm * localtime0(const double *tp, const int local, stm *ltm)
+static stm *localtime0(const double *tp, const int local, stm *ltm)
 {
     double d = *tp;
     int y, tmp;
@@ -642,11 +643,9 @@ static void glibc_fix(stm *tm, int *invalid)
     }
 }
 
-
-static constexpr char ltnames [][7] =
-{ "sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "isdst",
-  "zone",  "gmtoff"};
-
+static constexpr char ltnames[][7] =
+	{"sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "isdst",
+	 "zone", "gmtoff"};
 
 static void makelt(stm *tm, SEXP ans, R_xlen_t i, int valid, double frac_secs)
 {

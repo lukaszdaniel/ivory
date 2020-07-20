@@ -69,7 +69,7 @@ static GESystemDesc* registeredSystems[MAX_GRAPHICS_SYSTEMS];
  */
 
 static void unregisterOne(pGEDevDesc dd, int systemNumber) {
-    if (dd->gesd[systemNumber] != nullptr) {
+    if (dd->gesd[systemNumber]) {
 	(dd->gesd[systemNumber]->callback)(GE_FinaliseState, dd, R_NilValue);
 	free(dd->gesd[systemNumber]);
 	dd->gesd[systemNumber] = nullptr;
@@ -82,7 +82,7 @@ static void unregisterOne(pGEDevDesc dd, int systemNumber) {
 void GEdestroyDevDesc(pGEDevDesc dd)
 {
     int i;
-    if (dd != nullptr) {
+    if (dd) {
 	for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) unregisterOne(dd, i);
 	free(dd->dev);
 	dd->dev = nullptr;
@@ -136,7 +136,7 @@ void GEregisterWithDevice(pGEDevDesc dd) {
 	/* If a graphics system has unregistered, there might be
 	 * "holes" in the array of registeredSystems.
 	 */
-	if (registeredSystems[i] != nullptr)
+	if (registeredSystems[i])
 	    registerOne(dd, i, registeredSystems[i]->callback);
 }
 
@@ -164,7 +164,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
      * from zero and look for the first NULL 
      */
     *systemRegisterIndex = 0;
-    while (registeredSystems[*systemRegisterIndex] != nullptr) {
+    while (registeredSystems[*systemRegisterIndex]) {
         (*systemRegisterIndex)++;
     }
     /* Run through the existing devices and add the new information
@@ -227,7 +227,7 @@ void GEunregisterSystem(int registerIndex)
      * NOTE that there is no systemSpecific information stored
      * in the global record -- just the system callback pointer.
      */
-    if (registeredSystems[registerIndex] != nullptr) {
+    if (registeredSystems[registerIndex]) {
 	free(registeredSystems[registerIndex]);
 	registeredSystems[registerIndex] = nullptr;
     }
@@ -250,7 +250,7 @@ SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
     int i;
     pGEDevDesc gdd = desc2GEDesc(dev);
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (registeredSystems[i] != nullptr)
+	if (registeredSystems[i])
 	    (registeredSystems[i]->callback)(event, gdd, data);
     return R_NilValue;
 }
@@ -2909,7 +2909,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
     int i;
     Rboolean result = TRUE;
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-        if (dd->gesd[i] != nullptr)
+        if (dd->gesd[i])
             if (!LOGICAL((dd->gesd[i]->callback)(GE_CheckPlot, dd,
                                                  R_NilValue))[0])
                 result = FALSE;
@@ -2966,7 +2966,7 @@ void GEinitDisplayList(pGEDevDesc dd)
      * replaying the display list
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-        if (dd->gesd[i] != nullptr)
+        if (dd->gesd[i])
             (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
     dd->displayList = dd->DLlastElt = R_NilValue;
 }
@@ -3001,7 +3001,7 @@ void GEplayDisplayList(pGEDevDesc dd)
      * replaying the display list
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != nullptr)
+	if (dd->gesd[i])
 	    (dd->gesd[i]->callback)(GE_RestoreState, dd, theList);
     /* Play the display list
      */
@@ -3057,7 +3057,7 @@ void GEcopyDisplayList(int fromDevice)
      * information from the "from" device to the current device
      */
     for (i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != nullptr)
+	if (dd->gesd[i])
 	    (dd->gesd[i]->callback)(GE_CopyState, gd, R_NilValue);
     GEplayDisplayList(dd);
     if (!dd->displayListOn) GEinitDisplayList(dd);
@@ -3099,7 +3099,7 @@ SEXP GEcreateSnapshot(pGEDevDesc dd)
      * and store that in the snapshot.
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != nullptr) {
+	if (dd->gesd[i]) {
 	    PROTECT(state = (dd->gesd[i]->callback)(GE_SaveSnapshotState, dd,
 						    R_NilValue));
 	    SET_VECTOR_ELT(snapshot, i + 1, state);
@@ -3153,7 +3153,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
      * should protect themselves from that situation.
      */
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
-	if (dd->gesd[i] != nullptr)
+	if (dd->gesd[i])
 	    (dd->gesd[i]->callback)(GE_RestoreSnapshotState, dd, snapshot);
     /* Turn graphics engine recording on.
      * This is in case of failure during replay, which generates a new

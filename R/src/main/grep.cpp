@@ -989,14 +989,14 @@ static int fgrep_one(const char *pat, const char *target,
     const char *p;
 
     if (plen == 0) {
-	if (next != nullptr) *next = 1;
+	if (next) *next = 1;
 	return 0;
     }
     if (plen == 1 && (useBytes || !(mbcslocale || use_UTF8))) {
 	/* a single byte is a common case */
 	for (i = 0, p = target; *p; p++, i++)
 	    if (*p == pat[0]) {
-		if (next != nullptr) *next = i + 1;
+		if (next) *next = i + 1;
 		return i;
 	    }
 	return -1;
@@ -1005,7 +1005,7 @@ static int fgrep_one(const char *pat, const char *target,
         int ib, used;
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
 	    if (streqln(pat, target+ib, plen)) {
-		if (next != nullptr) *next = ib + plen;
+		if (next) *next = ib + plen;
 		return i;
 	    }
 	    used = utf8clen(target[ib]);
@@ -1018,7 +1018,7 @@ static int fgrep_one(const char *pat, const char *target,
 	mbs_init(&mb_st);
 	for (ib = 0, i = 0; ib <= len-plen; i++) {
 	    if (streqln(pat, target+ib, plen)) {
-		if (next != nullptr) *next = ib + plen;
+		if (next) *next = ib + plen;
 		return i;
 	    }
 	    used = (int) Mbrtowc(nullptr,  target+ib, MB_CUR_MAX, &mb_st);
@@ -1028,7 +1028,7 @@ static int fgrep_one(const char *pat, const char *target,
     } else
 	for (i = 0; i <= len-plen; i++)
 	    if (streqln(pat, target+i, plen)) {
-		if (next != nullptr) *next = i + plen;
+		if (next) *next = i + plen;
 		return i;
 	    }
     return -1;

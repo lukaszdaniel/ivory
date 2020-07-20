@@ -335,7 +335,7 @@ R_INLINE static int R_integer_plus(int x, int y, Rboolean *pnaflag)
 
     if (((y > 0) && (x > (R_INT_MAX - y))) ||
 	((y < 0) && (x < (R_INT_MIN - y)))) {
-	if (pnaflag != nullptr)
+	if (pnaflag)
 	    *pnaflag = TRUE;
 	return NA_INTEGER;
     }
@@ -349,7 +349,7 @@ R_INLINE static int R_integer_minus(int x, int y, Rboolean *pnaflag)
 
     if (((y < 0) && (x > (R_INT_MAX + y))) ||
 	((y > 0) && (x < (R_INT_MIN + y)))) {
-	if (pnaflag != nullptr)
+	if (pnaflag)
 	    *pnaflag = TRUE;
 	return NA_INTEGER;
     }
@@ -370,7 +370,7 @@ R_INLINE static int R_integer_times(int x, int y, Rboolean *pnaflag)
 	if (GOODIPROD(x, y, z) && z != NA_INTEGER)
 	    return z;
 	else {
-	    if (pnaflag != nullptr)
+	    if (pnaflag)
 		*pnaflag = TRUE;
 	    return NA_INTEGER;
 	}

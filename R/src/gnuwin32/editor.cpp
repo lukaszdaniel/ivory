@@ -227,7 +227,7 @@ static void menueditorsave(control m)
 }
 
 /* global console configuration variables */
-char fontname[LF_FACESIZE+1];
+char fontname[LF_FACESIZE + 4];
 int fontsty, pointsize;
 
 static void editorprint(control m)

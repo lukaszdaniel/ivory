@@ -206,7 +206,7 @@ static int defaultSerializeVersion()
     if (dflt < 0) {
 	char *valstr = getenv("R_DEFAULT_SERIALIZE_VERSION");
 	int val = -1;
-	if (valstr != nullptr)
+	if (valstr)
 	    val = atoi(valstr);
 	if (val == 2 || val == 3)
 	    dflt = val;
@@ -810,7 +810,7 @@ static int InRefIndex(R_inpstream_t stream, int flags)
 
 static SEXP GetPersistentName(R_outpstream_t stream, SEXP s)
 {
-    if (stream->OutPersistHookFunc != nullptr) {
+    if (stream->OutPersistHookFunc) {
 	switch (TYPEOF(s)) {
 	case WEAKREFSXP:
 	case EXTPTRSXP: break;
@@ -1034,7 +1034,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
     if (ALTREP(s) && stream->version >= 3) {
 	SEXP info = ALTREP_SERIALIZED_CLASS(s);
 	SEXP state = ALTREP_SERIALIZED_STATE(s);
-	if (info != nullptr && state != nullptr) {
+	if (info && state) {
 	    int flags = PackFlags(ALTREP_SXP, LEVELS(s), OBJECT(s), 0, 0);
 	    PROTECT(state);
 	    PROTECT(info);
@@ -2787,7 +2787,7 @@ static void InitMemOutPStream(R_outpstream_t stream, membuf_t mb,
 static void free_mem_buffer(void *data)
 {
     membuf_t mb = (membuf_t) data;
-    if (mb->buf != nullptr) {
+    if (mb->buf) {
 	unsigned char *buf = mb->buf;
 	mb->buf = nullptr;
 	free(buf);

@@ -170,7 +170,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
     static double expand = 0;
     if (expand == 0) {
 	char *envval = getenv("R_EXPAND_FRAC");
-	expand = envval != nullptr ? atof(envval) : expand_dflt;
+	expand = envval ? atof(envval) : expand_dflt;
 	if (expand < 1 || expand > 2) {
 	    expand = expand_dflt;
 	    error(_("bad expand value"));

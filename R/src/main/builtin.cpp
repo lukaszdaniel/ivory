@@ -249,42 +249,51 @@ HIDDEN SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 HIDDEN SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    if (TYPEOF(CAR(args)) == CLOSXP) {
-	SEXP f = FORMALS(CAR(args));
-	RAISE_NAMED(f, NAMED(CAR(args)));
-	return f;
-    } else {
-	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
-	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("'%s' argument is not a function"), "fun");
-	return R_NilValue;
-    }
+	checkArity(op, args);
+	if (TYPEOF(CAR(args)) == CLOSXP)
+	{
+		SEXP f = FORMALS(CAR(args));
+		RAISE_NAMED(f, NAMED(CAR(args)));
+		return f;
+	}
+	else
+	{
+		if (!(TYPEOF(CAR(args)) == BUILTINSXP ||
+			  TYPEOF(CAR(args)) == SPECIALSXP))
+			warningcall(call, _("'%s' argument is not a function"), "fun");
+		return R_NilValue;
+	}
 }
 
 HIDDEN SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    if (TYPEOF(CAR(args)) == CLOSXP) {
-	SEXP b = BODY_EXPR(CAR(args));
-	RAISE_NAMED(b, NAMED(CAR(args)));
-	return b;
-    } else {
-	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
-	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("'%s' argument is not a function"), "fun");
-	return R_NilValue;
-    }
+	checkArity(op, args);
+	if (TYPEOF(CAR(args)) == CLOSXP)
+	{
+		SEXP b = BODY_EXPR(CAR(args));
+		RAISE_NAMED(b, NAMED(CAR(args)));
+		return b;
+	}
+	else
+	{
+		if (!(TYPEOF(CAR(args)) == BUILTINSXP ||
+			  TYPEOF(CAR(args)) == SPECIALSXP))
+			warningcall(call, _("'%s' argument is not a function"), "fun");
+		return R_NilValue;
+	}
 }
 
 HIDDEN SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    if (TYPEOF(CAR(args)) == CLOSXP) {
-	SEXP bc = BODY(CAR(args));
-	RAISE_NAMED(bc, NAMED(CAR(args)));
-	return bc;
-    } else return R_NilValue;
+	checkArity(op, args);
+	if (TYPEOF(CAR(args)) == CLOSXP)
+	{
+		SEXP bc = BODY(CAR(args));
+		RAISE_NAMED(bc, NAMED(CAR(args)));
+		return bc;
+	}
+	else
+		return R_NilValue;
 }
 
 /* get environment from a subclass if possible; else return nullptr */
@@ -295,12 +304,13 @@ inline static SEXP simple_as_environment(SEXP arg)
 
 HIDDEN SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    checkArity(op, args);
-    if (TYPEOF(CAR(args)) == CLOSXP)
-	return CLOENV(CAR(args));
-    else if (CAR(args) == R_NilValue)
-	return R_GlobalContext->getSysParent();
-    else return getAttrib(CAR(args), R_DotEnvSymbol);
+	checkArity(op, args);
+	if (TYPEOF(CAR(args)) == CLOSXP)
+		return CLOENV(CAR(args));
+	else if (CAR(args) == R_NilValue)
+		return R_GlobalContext->getSysParent();
+	else
+		return getAttrib(CAR(args), R_DotEnvSymbol);
 }
 
 HIDDEN SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -496,56 +506,60 @@ static const char *trChar(SEXP x)
 
 static void cat_newline(SEXP labels, int *width, int lablen, int ntot)
 {
-    Rprintf("\n");
-    *width = 0;
-    if (labels != R_NilValue) {
-	Rprintf("%s ", EncodeString(STRING_ELT(labels, ntot % lablen),
-				    1, 0, Rprt_adj_left));
-	*width += Rstrlen(STRING_ELT(labels, ntot % lablen), 0) + 1;
-    }
+	Rprintf("\n");
+	*width = 0;
+	if (labels != R_NilValue)
+	{
+		Rprintf("%s ", EncodeString(STRING_ELT(labels, ntot % lablen),
+									1, 0, Rprt_adj_left));
+		*width += Rstrlen(STRING_ELT(labels, ntot % lablen), 0) + 1;
+	}
 }
 
-static void cat_sepwidth(SEXP sep, int *width, int ntot)
+static void cat_sepwidth(SEXP sep, int &width, int ntot)
 {
-    if (sep == R_NilValue || LENGTH(sep) == 0)
-	*width = 0;
-    else
-	*width = Rstrlen(STRING_ELT(sep, ntot % LENGTH(sep)), 0);
+	if (sep == R_NilValue || LENGTH(sep) == 0)
+		width = 0;
+	else
+		width = Rstrlen(STRING_ELT(sep, ntot % LENGTH(sep)), 0);
 }
 
 static void cat_printsep(SEXP sep, int ntot)
 {
-    const char *sepchar;
-    if (sep == R_NilValue || LENGTH(sep) == 0)
-	return;
+	const char *sepchar;
+	if (sep == R_NilValue || LENGTH(sep) == 0)
+		return;
 
-    sepchar = trChar(STRING_ELT(sep, ntot % LENGTH(sep)));
-    Rprintf("%s", sepchar);
-    return;
+	sepchar = trChar(STRING_ELT(sep, ntot % LENGTH(sep)));
+	Rprintf("%s", sepchar);
+	return;
 }
 
-struct cat_info {
-    Rboolean wasopen;
-    int changedcon;
-    Rconnection con;
+struct cat_info
+{
+	Rboolean wasopen;
+	int changedcon;
+	Rconnection con;
 #ifdef _WIN32
-    bool saveWinUTF8out;
+	bool saveWinUTF8out;
 #endif
 };
 
 static void cat_cleanup(void *data)
 {
-    cat_info *pci = (cat_info *) data;
-    Rconnection con = pci->con;
-    Rboolean wasopen = pci->wasopen;
-    int changedcon = pci->changedcon;
+	cat_info *pci = (cat_info *)data;
+	Rconnection con = pci->con;
+	Rboolean wasopen = pci->wasopen;
+	int changedcon = pci->changedcon;
 
-    con->fflush(con);
-    if(changedcon) switch_stdout(-1, 0);
-    /* previous line might have closed it */
-    if(!wasopen && con->isopen) con->close(con);
+	con->fflush(con);
+	if (changedcon)
+		switch_stdout(-1, 0);
+	/* previous line might have closed it */
+	if (!wasopen && con->isopen)
+		con->close(con);
 #ifdef _WIN32
-    WinUTF8out = pci->saveWinUTF8out;
+	WinUTF8out = pci->saveWinUTF8out;
 #endif
 }
 
@@ -673,7 +687,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("argument %d (type '%s') cannot be handled by 'cat()' function"), 1+iobj, type2char(TYPEOF(s)));
 	    /* FIXME : cat(...) should handle ANYTHING */
 	    size_t w = strlen(p);
-	    cat_sepwidth(sepr, &sepw, ntot);
+	    cat_sepwidth(sepr, sepw, ntot);
 	    if ((iobj > 0) && (width + w + sepw > (size_t) pwidth)) {
 		cat_newline(labs, &width, lablen, nlines);
 		nlines++;
@@ -691,7 +705,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 			p = buf;
 		    }
 		    w = (int) strlen(p);
-		    cat_sepwidth(sepr, &sepw, ntot);
+		    cat_sepwidth(sepr, sepw, ntot);
 		    /* This is inconsistent with the version above.
 		       As from R 2.3.0, fill <= 0 is ignored. */
 		    if ((width + w + sepw > (size_t) pwidth) && (size_t) pwidth) {
@@ -1001,15 +1015,16 @@ static SEXP expandDots(SEXP el, SEXP rho)
 
 static SEXP setDflt(SEXP arg, SEXP dflt)
 {
-    if (dflt) {
-	SEXP dflt1, dflt2;
-	PROTECT(dflt1 = deparse1line(dflt, TRUE));
-	PROTECT(dflt2 = deparse1line(CAR(arg), TRUE));
-	error(_("duplicate 'switch' defaults: '%s' and '%s'"),
-	      CHAR(STRING_ELT(dflt1, 0)), CHAR(STRING_ELT(dflt2, 0)));
-	UNPROTECT(2); /* won't get here, but just for good form */
-    }
-    return(CAR(arg));
+	if (dflt)
+	{
+		SEXP dflt1, dflt2;
+		PROTECT(dflt1 = deparse1line(dflt, TRUE));
+		PROTECT(dflt2 = deparse1line(CAR(arg), TRUE));
+		error(_("duplicate 'switch' defaults: '%s' and '%s'"),
+			  CHAR(STRING_ELT(dflt1, 0)), CHAR(STRING_ELT(dflt2, 0)));
+		UNPROTECT(2); /* won't get here, but just for good form */
+	}
+	return (CAR(arg));
 }
 
 /* For switch, evaluate the first arg, if it is a character then try

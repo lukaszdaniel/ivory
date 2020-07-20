@@ -46,7 +46,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	/** exact matches **/
 	for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), TRUE)) {
-		if (s != nullptr)
+		if (s)
 		    error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		else
 		    s = CAR(b);
@@ -56,7 +56,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	    /** partial matches **/
 	    for (b = cptr->getPromiseArgs() ; b != R_NilValue ; b = CDR(b))
 		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), FALSE)) {
-		    if ( s != nullptr)
+		    if (s)
 			error(_("formal argument '%s' matched by multiple actual arguments"), tag);
 		    else
 			s = CAR(b);
@@ -257,13 +257,13 @@ SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     if(lookup_baseenv_after_globalenv == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_BASEENV_AFTER_GLOBALENV_");
 	lookup_baseenv_after_globalenv = 
-	    ((lookup != nullptr) && StringFalse(lookup)) ? 0 : 1;
+	    ((lookup) && StringFalse(lookup)) ? 0 : 1;
     }
 
     if(lookup_report_search_path_uses == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_REPORT_SEARCH_PATH_USES_");
 	lookup_report_search_path_uses = 
-	    ((lookup != nullptr) && StringTrue(lookup)) ? 1 : 0;
+	    ((lookup) && StringTrue(lookup)) ? 1 : 0;
     }
 
     /* This evaluates promises */
@@ -524,7 +524,7 @@ HIDDEN NORET SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if(lookup_use_topenv_as_defenv == -1) {
 	lookup = getenv("_R_S3_METHOD_LOOKUP_USE_TOPENV_AS_DEFENV_");
 	lookup_use_topenv_as_defenv = 
-	    ((lookup != nullptr) && StringFalse(lookup)) ? 0 : 1;
+	    ((lookup) && StringFalse(lookup)) ? 0 : 1;
     }
 
     /* get environments needed for dispatching.
@@ -685,7 +685,7 @@ HIDDEN SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* get the env NextMethod was called from */
     sysp = R_GlobalContext->getSysParent();
-    while (cptr != nullptr) {
+    while (cptr) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION && cptr->workingEnvironment() == sysp) break;
 	cptr = cptr->nextContext();
     }
@@ -1494,7 +1494,7 @@ static SEXP get_this_generic(SEXP args)
     fname = STRING_ELT(CAR(args), 0); /* type and length checked by caller */
 
     /* check for a matching "generic" slot */
-    for(cptr = R_GlobalContext; cptr != nullptr; cptr = cptr->nextContext())
+    for(cptr = R_GlobalContext; cptr; cptr = cptr->nextContext())
 	if((cptr->getCallFlag() & CTXT_FUNCTION) && isObject(cptr->getCallFun())) {
 	    SEXP generic = getAttrib(cptr->getCallFun(), gen_name);
 	    if(isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))

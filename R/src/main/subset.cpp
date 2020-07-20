@@ -110,7 +110,7 @@ HIDDEN SEXP Rf_ExtractSubset(SEXP x, SEXP indx, SEXP call)
 
     if (ALTREP(x)) {
 	result = ALTVEC_EXTRACT_SUBSET(x, indx, call);
-	if (result != nullptr)
+	if (result)
 	    return result;
     }
 
@@ -1198,7 +1198,7 @@ HIDDEN SEXP Rf_fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
     if (TYPEOF(nlist) == PROMSXP)
 	nlist = eval(nlist, env);
     if(isSymbol(nlist)) {
-	if (syminp != nullptr)
+	if (syminp)
 	    *syminp = nlist;
 	SET_STRING_ELT(input, 0, PRINTNAME(nlist));
     } else if(isString(nlist) )

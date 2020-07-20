@@ -42,28 +42,30 @@ HIDDEN SEXP mkPRIMSXP(int offset, int eval)
     static SEXP PrimCache = nullptr;
     static int FunTabSize = 0;
 
-    if (PrimCache == nullptr) {
-	/* compute the number of entires in R_FunTab */
-	while (R_FunTab[FunTabSize].name)
-	    FunTabSize++;
+    if (PrimCache == nullptr)
+    {
+        /* compute the number of entires in R_FunTab */
+        while (R_FunTab[FunTabSize].name)
+            FunTabSize++;
 
-	/* allocate and protect the cache */
-	PrimCache = allocVector(VECSXP, FunTabSize);
-	R_PreserveObject(PrimCache);
+        /* allocate and protect the cache */
+        PrimCache = allocVector(VECSXP, FunTabSize);
+        R_PreserveObject(PrimCache);
     }
 
     if (offset < 0 || offset >= FunTabSize)
-	error(_("offset is out of R_FunTab range"));
+        error(_("offset is out of R_FunTab range"));
 
     result = VECTOR_ELT(PrimCache, offset);
 
-    if (result == R_NilValue) {
-	result = allocSExp(type);
-	SET_PRIMOFFSET(result, offset);
-	SET_VECTOR_ELT(PrimCache, offset, result);
+    if (result == R_NilValue)
+    {
+        result = allocSExp(type);
+        SET_PRIMOFFSET(result, offset);
+        SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
-	error(_("requested primitive type is not consistent with cached value"));
+        error(_("requested primitive type is not consistent with cached value"));
 
     return result;
 }
@@ -85,30 +87,31 @@ HIDDEN SEXP Rf_mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     c = allocSExp(CLOSXP);
 
 #ifdef not_used_CheckFormals
-    if(isList(formals))
-	SET_FORMALS(c, formals);
+    if (isList(formals))
+        SET_FORMALS(c, formals);
     else
-	error(_("invalid formal arguments for 'function'"));
+        error(_("invalid formal arguments for 'function'"));
 #else
     SET_FORMALS(c, formals);
 #endif
-    switch (TYPEOF(body)) {
+    switch (TYPEOF(body))
+    {
     case CLOSXP:
     case BUILTINSXP:
     case SPECIALSXP:
     case DOTSXP:
     case ANYSXP:
-	error(_("invalid body argument for 'function'"));
-	break;
+        error(_("invalid body argument for 'function'"));
+        break;
     default:
-	SET_BODY(c, body);
-	break;
+        SET_BODY(c, body);
+        break;
     }
 
-    if(rho == R_NilValue)
-	SET_CLOENV(c, R_GlobalEnv);
+    if (rho == R_NilValue)
+        SET_CLOENV(c, R_GlobalEnv);
     else
-	SET_CLOENV(c, rho);
+        SET_CLOENV(c, rho);
     UNPROTECT(3);
     return c;
 }
@@ -134,7 +137,6 @@ static bool isDDName(SEXP name)
 }
 
 HIDDEN SEXP Rf_mkSYMSXP(SEXP name, SEXP value)
-
 {
     SEXP c;
     unsigned int i;

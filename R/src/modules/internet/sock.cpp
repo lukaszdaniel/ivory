@@ -117,9 +117,9 @@ char *R_socket_strerror(int errnum)
     /* formatError() is not accessible */
     static char buf[1000];
     FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                  NULL, errnum,
+                  nullptr, errnum,
                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                  buf, 1000, NULL);
+                  buf, 1000, nullptr);
     size_t i = strlen(buf);
     if (i > 0 && buf[i-1] == '\n') buf[--i] = '\0';
     if (i > 0 && buf[i-1] == '\r') buf[--i] = '\0';
@@ -202,11 +202,11 @@ int Sock_init()
     GUSISetup(GUSIwithInternetSockets);
 #elif defined(SIGPIPE)
     struct sigaction act;
-    if (sigaction(SIGPIPE, (struct sigaction *)NULL, &act) < 0)
+    if (sigaction(SIGPIPE, (struct sigaction *)nullptr, &act) < 0)
 	return 1;
     if (act.sa_handler == SIG_DFL) {
 	act.sa_handler = SIG_IGN;
-	if (sigaction(SIGPIPE, &act, (struct sigaction *)NULL) < 0)
+	if (sigaction(SIGPIPE, &act, (struct sigaction *)nullptr) < 0)
 	    return 1;
     }
 #endif
@@ -228,7 +228,7 @@ int Sock_open(Sock_port_t port, int blocking, Sock_error_t perr)
 	/* WSA_FLAG_NO_HANDLE_INHERIT is supported from Windows 7 SP1,
 	   on older versions of Windows, WSASocket will fail when used.
 	   Try once, fall back to socket() which does not use the flag. */
-	sock = WSASocket(AF_INET, SOCK_STREAM, 0, NULL, 0,
+	sock = WSASocket(AF_INET, SOCK_STREAM, 0, nullptr, 0,
 			 WSA_FLAG_NO_HANDLE_INHERIT);
 	if (R_invalid_socket(sock)) {
 	    use_no_handle_inherit = 0;

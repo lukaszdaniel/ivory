@@ -122,9 +122,9 @@ HIDDEN void RCNTXT::R_run_onexits(RCNTXT *cptr)
 {
     for (RCNTXT *c = R_GlobalContext; c != cptr; c = c->nextContext()) {
 	// a user embedding R incorrectly triggered this (PR#15420)
-	if (c == nullptr)
+	if (!c)
 	    error(_("bad target context--should NEVER happen if R was called correctly"));
-	if (c->getContextEnd() != nullptr) {
+	if (c->getContextEnd()) {
 	    void (*cend)(void *) = c->getContextEnd();
 	    c->setContextEnd(nullptr); /* prevent recursion */
 	    R_HandlerStack = c->getHandlerStack();
@@ -337,7 +337,7 @@ HIDDEN NORET void Rf_findcontext(int mask, SEXP env, SEXP val)
     RCNTXT *cptr = R_GlobalContext;
     if (mask & CTXT_LOOP) {		/* break/next */
 	for (cptr = R_GlobalContext;
-	     cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	     cptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	     cptr = cptr->nextContext())
 	    if (cptr->getCallFlag() & CTXT_LOOP && cptr->workingEnvironment() == env )
 		cptr->R_jumpctxt(mask, val);
@@ -345,7 +345,7 @@ HIDDEN NORET void Rf_findcontext(int mask, SEXP env, SEXP val)
     }
     else {				/* return; or browser */
 	for (cptr = R_GlobalContext;
-	     cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	     cptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	     cptr = cptr->nextContext())
 	    if ((cptr->getCallFlag() & mask) && cptr->workingEnvironment() == env)
 		cptr->R_jumpctxt(mask, val);
@@ -356,7 +356,7 @@ HIDDEN NORET void Rf_findcontext(int mask, SEXP env, SEXP val)
 HIDDEN NORET void RCNTXT::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != nullptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
+	 cptr && cptr->getCallFlag() != CTXT_TOPLEVEL;
 	 cptr = cptr->nextContext()) {
 	if (cptr == target)
 	    cptr->R_jumpctxt(mask, val);
@@ -389,7 +389,7 @@ HIDDEN SEXP RCNTXT::R_sysframe(int n)
     if(n < 0)
 	error(_("not that many frames on the stack"));
 
-    while (cptr->nextContext() != nullptr) {
+    while (cptr->nextContext()) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION ) {
 	    if (n == 0) {  /* we need to detach the enclosing env */
 		return cptr->workingEnvironment();
@@ -420,19 +420,19 @@ HIDDEN int RCNTXT::R_sysparent(int n)
     SEXP s;
     if(n <= 0)
 	errorcall(R_ToplevelContext->getCall(), _("only positive values of 'n' are allowed"));
-    while (cptr->nextContext() != nullptr && n > 1) {
+    while (cptr->nextContext() && n > 1) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION )
 	    n--;
 	cptr = cptr->nextContext();
     }
     /* make sure we're looking at a return context */
-    while (cptr->nextContext() != nullptr && !(cptr->getCallFlag() & CTXT_FUNCTION) )
+    while (cptr->nextContext() && !(cptr->getCallFlag() & CTXT_FUNCTION) )
 	cptr = cptr->nextContext();
     s = cptr->getSysParent();
     if(s == R_GlobalEnv)
 	return 0;
     j = 0;
-    while (cptr != nullptr ) {
+    while (cptr) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION) {
 	    j++;
 	    if( cptr->workingEnvironment() == s )
@@ -450,7 +450,7 @@ HIDDEN int RCNTXT::Rf_framedepth()
 {
     RCNTXT *cptr = this;
     int nframe = 0;
-    while (cptr->nextContext() != nullptr)
+    while (cptr->nextContext())
     {
         if (cptr->getCallFlag() & CTXT_FUNCTION)
             nframe++;
@@ -489,7 +489,7 @@ HIDDEN SEXP RCNTXT::R_syscall(int n)
 	n = - n;
     if(n < 0)
 	error(_("not that many frames on the stack"));
-    while (cptr->nextContext() != nullptr) {
+    while (cptr->nextContext()) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION ) {
 	    if (n == 0)
 		return cptr->getCallWithSrcref();
@@ -513,7 +513,7 @@ HIDDEN SEXP RCNTXT::R_sysfunction(int n)
 	n = - n;
     if (n < 0)
 	error(_("not that many frames on the stack"));
-    while (cptr->nextContext() != nullptr) {
+    while (cptr->nextContext()) {
 	if (cptr->getCallFlag() & CTXT_FUNCTION ) {
 	    if (n == 0)
 		return duplicate(cptr->getCallFun());  /***** do we need to DUP? */
@@ -729,7 +729,7 @@ HIDDEN SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 HIDDEN
 RCNTXT *RCNTXT::R_findExecContext(RCNTXT *cptr, SEXP envir)
 {
-    while (cptr->nextContext() != nullptr) {
+    while (cptr->nextContext()) {
 	if ((cptr->getCallFlag() & CTXT_FUNCTION) != 0 && cptr->workingEnvironment() == envir)
 	    return cptr;
 	cptr = cptr->nextContext();

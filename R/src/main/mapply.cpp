@@ -69,8 +69,7 @@ HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     */
 
     SEXP fcall = R_NilValue; // -Wall
-    if (constantArgs == R_NilValue)
-	;
+    if (constantArgs == R_NilValue) {}
     else if (isVectorList(constantArgs))
 	fcall = VectorToPairList(constantArgs);
     else
@@ -78,7 +77,7 @@ HIDDEN SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_INDEX fi;
     PROTECT_WITH_INDEX(fcall, &fi);
 
-    Rboolean realIndx = (Rboolean) (longest > R_INT_MAX);
+    bool realIndx = (longest > R_INT_MAX);
     SEXP Dots = install("dots");
     for (int j = m - 1; j >= 0; j--) {
 	SET_VECTOR_ELT(mindex, j, ScalarInteger(j + 1));

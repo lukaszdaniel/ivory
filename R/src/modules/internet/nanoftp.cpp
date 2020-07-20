@@ -431,7 +431,7 @@ static void* RxmlNanoFTPNewCtxt(const char *URL) {
     ret = (RxmlNanoFTPCtxtPtr) xmlMalloc(sizeof(RxmlNanoFTPCtxt));
     if (ret == nullptr) {
 	RxmlMessage(1, _("error allocating FTP context"));
-	return(NULL);
+	return(nullptr);
     }
 
     memset(ret, 0, sizeof(RxmlNanoFTPCtxt));
@@ -686,7 +686,7 @@ static int RxmlNanoFTPCheckResponse(void *ctx) {
     FD_ZERO(&rfd);
     FD_SET(ctxt->controlFd, &rfd);
     /* no-block select call */
-    switch(R_SelectEx(ctxt->controlFd + 1, &rfd, NULL, NULL, &tv, NULL)) {
+    switch(R_SelectEx(ctxt->controlFd + 1, &rfd, nullptr, nullptr, &tv, nullptr)) {
 	case 0:
 	    return(0);
 	case -1:
@@ -1318,7 +1318,7 @@ int RxmlNanoFTPRead(void *ctx, void *dest, int len)
 	FD_SET(ctxt->dataFd, &rfd);
 	if(maxfd < ctxt->dataFd) maxfd = ctxt->dataFd;
 
-	res = R_SelectEx(maxfd + 1, &rfd, NULL, NULL, &tv, NULL);
+	res = R_SelectEx(maxfd + 1, &rfd, nullptr, nullptr, &tv, nullptr);
 
 	if (res < 0) { /* socket error */
 	    closesocket(ctxt->dataFd); ctxt->dataFd = -1;
@@ -1345,7 +1345,7 @@ int RxmlNanoFTPRead(void *ctx, void *dest, int len)
 	    /* was one of the extras */
 	    InputHandler *what;
 	    what = getSelectedHandler(R_InputHandlers, &rfd);
-	    if(what != nullptr) what->handler((void*) NULL);
+	    if(what != nullptr) what->handler((void*) nullptr);
 	    continue;
 	}
 #endif
@@ -1375,19 +1375,19 @@ void* RxmlNanoFTPOpen(const char *URL) {
     int sock;
 
     RxmlNanoFTPInit();
-    if (URL == nullptr) return(NULL);
-    if (strncmp("ftp://", URL, 6)) return(NULL);
+    if (URL == nullptr) return(nullptr);
+    if (strncmp("ftp://", URL, 6)) return(nullptr);
 
     ctxt = (RxmlNanoFTPCtxtPtr) RxmlNanoFTPNewCtxt(URL);
-    if (ctxt == nullptr) return(NULL);
+    if (ctxt == nullptr) return(nullptr);
     if (RxmlNanoFTPConnect(ctxt) < 0) {
 	RxmlNanoFTPFreeCtxt(ctxt);
-	return(NULL);
+	return(nullptr);
     }
     sock = RxmlNanoFTPGetSocket(ctxt, ctxt->path);
     if (sock < 0) {
 	RxmlNanoFTPFreeCtxt(ctxt);
-	return(NULL);
+	return(nullptr);
     }
     return(ctxt);
 }

@@ -1167,7 +1167,7 @@ local unzFile unzOpenInternal(const void *path, int is64bitOpenFunction)
 
 
     s=(unz64_s*)ALLOC(sizeof(unz64_s));
-    if( s != nullptr)
+    if(s)
     {
 	*s = us;
 	unzGoToFirstFile((unzFile)s);
@@ -1200,7 +1200,7 @@ extern int ZEXPORT unzClose(unzFile file)
 	return UNZ_PARAMERROR;
     s = (unz64_s*) file;
 
-    if (s->pfile_in_zip_read != nullptr)
+    if (s->pfile_in_zip_read)
 	unzCloseCurrentFile(file);
 
     fclose_func(s->filestream);
@@ -1349,7 +1349,7 @@ local int unz64local_GetCurrentFileInfoInternal(unzFile file,
     }
 
     // Read extrafield
-    if ((err == UNZ_OK) && (extraField != nullptr))
+    if ((err == UNZ_OK) && (extraField))
     {
 	size_t uSizeRead;
 	if (file_info.size_file_extra < extraFieldBufferSize)
@@ -1446,7 +1446,7 @@ local int unz64local_GetCurrentFileInfoInternal(unzFile file,
 	}
     }
 
-    if ((err == UNZ_OK) && (szComment != nullptr))
+    if ((err == UNZ_OK) && (szComment))
     {
 	size_t uSizeRead ;
 	if (file_info.size_file_comment<commentBufferSize)
@@ -1474,10 +1474,10 @@ local int unz64local_GetCurrentFileInfoInternal(unzFile file,
 	lSeek += file_info.size_file_comment;
 
 
-    if ((err == UNZ_OK) && (pfile_info != nullptr))
+    if ((err == UNZ_OK) && (pfile_info))
 	*pfile_info = file_info;
 
-    if ((err == UNZ_OK) && (pfile_info_internal != nullptr))
+    if ((err == UNZ_OK) && (pfile_info_internal))
 	*pfile_info_internal = file_info_internal;
 
     return err;
@@ -1742,7 +1742,7 @@ static int unzOpenCurrentFile3(unzFile file, int* method,
     file_in_zip64_read_info_s* pfile_in_zip_read_info;
     ZPOS64_T offset_local_extrafield;  /* offset of the local extra field */
     uInt  size_local_extrafield;    /* size of the local extra field */
-    if (password != nullptr) return UNZ_PARAMERROR;
+    if (password) return UNZ_PARAMERROR;
 
     if (file == nullptr)
 	return UNZ_PARAMERROR;
@@ -1750,7 +1750,7 @@ static int unzOpenCurrentFile3(unzFile file, int* method,
     if (!s->current_file_ok)
 	return UNZ_PARAMERROR;
 
-    if (s->pfile_in_zip_read != nullptr)
+    if (s->pfile_in_zip_read)
 	unzCloseCurrentFile(file);
 
     if (unz64local_CheckCurrentFileCoherencyHeader(s, &iSizeVar,
@@ -1776,10 +1776,10 @@ static int unzOpenCurrentFile3(unzFile file, int* method,
 
     pfile_in_zip_read_info->stream_initialised = 0;
 
-    if (method != nullptr)
+    if (method)
 	*method = (int)s->cur_file_info.compression_method;
 
-    if (level != nullptr)
+    if (level)
     {
 	*level = 6;
 	switch (s->cur_file_info.flag & 0x06)
@@ -2066,7 +2066,7 @@ static int unzReadCurrentFile(unzFile file, voidp buf, unsigned len)
 	    */
 	    err = inflate(&pfile_in_zip_read_info->stream, flush);
 
-	    if ((err >= 0) && (pfile_in_zip_read_info->stream.msg != nullptr))
+	    if ((err >= 0) && (pfile_in_zip_read_info->stream.msg))
 	      err = Z_DATA_ERROR;
 
 	    uTotalOutAfter = pfile_in_zip_read_info->stream.total_out;
@@ -2167,7 +2167,7 @@ static voidpf fopen_func(const void* filename, int mode)
     else if (mode & ZLIB_FILEFUNC_MODE_CREATE)
 	mode_fopen = "wb";
 
-    if ((filename != nullptr) && (mode_fopen != nullptr))
+    if (filename && mode_fopen)
 	file = fopen((const char *) filename, mode_fopen);
     return file;
 }

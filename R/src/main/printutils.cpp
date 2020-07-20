@@ -502,14 +502,14 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 HIDDEN
 int Rstrlen(SEXP s, int quote)
 {
-    cetype_t ienc = getCharCE(s);
-    if (ienc == CE_UTF8 || ienc == CE_BYTES)
-	return Rstrwid(CHAR(s), LENGTH(s), ienc, quote);
-    const void *vmax = vmaxget();
-    const char *p = translateChar(s);
-    int len = Rstrwid(p, (int)strlen(p), CE_NATIVE, quote);
-    vmaxset(vmax);
-    return len;
+	cetype_t ienc = getCharCE(s);
+	if (ienc == CE_UTF8 || ienc == CE_BYTES)
+		return Rstrwid(CHAR(s), LENGTH(s), ienc, quote);
+	const void *vmax = vmaxget();
+	const char *p = translateChar(s);
+	int len = Rstrwid(p, (int)strlen(p), CE_NATIVE, quote);
+	vmaxset(vmax);
+	return len;
 }
 
 /* Here w is the minimum field width

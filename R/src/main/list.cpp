@@ -48,7 +48,7 @@ struct NameWalkData
 	int MaxCount;
 };
 
-static void namewalk(SEXP s, NameWalkData *d)
+static void namewalk(SEXP s, NameWalkData &d)
 {
     SEXP name;
 
@@ -57,22 +57,22 @@ static void namewalk(SEXP s, NameWalkData *d)
 	name = PRINTNAME(s);
 	/* skip blank symbols */
 	if(CHAR(name)[0] == '\0') goto ignore;
-	if(d->ItemCounts < d->MaxCount) {
-	    if(d->StoreValues) {
-		if(d->UniqueNames) {
-		    for(int j = 0 ; j < d->ItemCounts ; j++) {
-			if(STRING_ELT(d->ans, j) == name)
+	if(d.ItemCounts < d.MaxCount) {
+	    if(d.StoreValues) {
+		if(d.UniqueNames) {
+		    for(int j = 0 ; j < d.ItemCounts ; j++) {
+			if(STRING_ELT(d.ans, j) == name)
 			    goto ignore;
 		    }
 		}
-		SET_STRING_ELT(d->ans, d->ItemCounts, name);
+		SET_STRING_ELT(d.ans, d.ItemCounts, name);
 	    }
-	    d->ItemCounts++;
+	    d.ItemCounts++;
 	}
     ignore:
 	break;
     case LANGSXP:
-	if(!d->IncludeFunctions) s = CDR(s);
+	if(!d.IncludeFunctions) s = CDR(s);
 	while(s != R_NilValue) {
 	    namewalk(CAR(s), d);
 	    s = CDR(s);
@@ -116,14 +116,14 @@ HIDDEN SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
     if(data.UniqueNames == NA_LOGICAL)
 	data.UniqueNames = 1;
 
-    namewalk(expr, &data);
+    namewalk(expr, data);
     savecount = data.ItemCounts;
 
     data.ans = allocVector(STRSXP, data.ItemCounts);
 
     data.StoreValues = 1;
     data.ItemCounts = 0;
-    namewalk(expr, &data);
+    namewalk(expr, data);
 
     if(data.ItemCounts != savecount) {
 	PROTECT(expr = data.ans);

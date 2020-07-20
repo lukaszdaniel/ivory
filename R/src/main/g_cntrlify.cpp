@@ -80,8 +80,8 @@
 */
 
 HIDDEN
-unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
-			      int typeface, int fontindex)
+unsigned short *_controlify(pGEDevDesc dd, const unsigned char *src,
+							int typeface, int fontindex)
 {
   unsigned short *dest;
   unsigned char c, d;

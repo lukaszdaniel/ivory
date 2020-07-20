@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2016--2017   The R Core Team
+ *  Copyright (C) 2016--2020   The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -201,8 +201,8 @@ static int compact_intseq_Elt(SEXP x, R_xlen_t i)
     }
 }
 
-#define CHECK_NOT_EXPANDED(x)          \
-    if (DATAPTR_OR_NULL(x) != nullptr) \
+#define CHECK_NOT_EXPANDED(x) \
+    if (DATAPTR_OR_NULL(x))   \
     error(_("method should only handle unexpanded vectors"))
 
 static R_xlen_t compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
@@ -564,7 +564,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
 
 HIDDEN SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
-    R_xlen_t n = n1 <= n2 ? n2 - n1 + 1 : n1 - n2 + 1;
+    R_xlen_t n = std::abs(n2 - n1) + 1;
 
     if (n >= R_XLEN_T_MAX)
 	error(_("result would be too long a vector"));
@@ -926,6 +926,7 @@ HIDDEN SEXP R_deferred_coerceToString(SEXP v, SEXP info)
    state object.
  */
 
+#ifndef Win32
 static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
 			    Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
 {
@@ -949,6 +950,7 @@ static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
     UNPROTECT(2);
     return state;
 }
+#endif
 
 #define MMAP_STATE_FILE(x) CAR(x)
 #define MMAP_STATE_SIZE(x) ((size_t) REAL_ELT(CADR(x), 0))
@@ -975,6 +977,7 @@ static R_altrep_class_t mmap_real_class;
    pointer for use by the finalizer.
 */
 
+#ifndef Win32
 static void register_mmap_eptr(SEXP eptr);
 static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
 		      Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
@@ -1002,6 +1005,7 @@ static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
     UNPROTECT(2); /* state, eptr */
     return ans;
 }
+#endif
 
 #define MMAP_EPTR(x) R_altrep_data1(x)
 #define MMAP_STATE(x) R_altrep_data2(x)
@@ -1028,6 +1032,8 @@ R_INLINE static void *MMAP_ADDR(SEXP x)
    to run a finalizer after unloading would result in an illegal
    instruction. */
 
+
+#ifndef Win32
 static SEXP mmap_list = nullptr;
 
 constexpr int MAXCOUNT = 10;
@@ -1061,6 +1067,7 @@ static void register_mmap_eptr(SEXP eptr)
     /* store the weak reference in the external pointer for do_munmap_file */
     R_SetExternalPtrTag(eptr, CAR(CDR(mmap_list)));
 }
+#endif
 
 #ifdef SIMPLEMMAP
 static void finalize_mmap_objects()
@@ -1255,10 +1262,12 @@ static void InitMmapRealClass(DllInfo *dll)
  */
 
 #ifdef Win32
+/* unused
 static void mmap_finalize(SEXP eptr)
 {
     error(_("mmap objects not supported on Windows yet"));
 }
+*/
 
 static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
 		      Rboolean serOK, Rboolean warn)
@@ -1285,7 +1294,7 @@ static void mmap_finalize(SEXP eptr)
     size_t size = MMAP_STATE_SIZE(MMAP_EPTR_STATE(eptr));
     R_SetExternalPtrAddr(eptr, nullptr);
 
-    if (p != nullptr) {
+    if (p) {
 	munmap(p, size); /* don't check for errors */
 	R_SetExternalPtrAddr(eptr, nullptr);
     }

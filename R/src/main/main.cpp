@@ -669,7 +669,7 @@ static void init_signal_handlers(void)
     /* <FIXME> may need to reinstall this if we do recover. */
     struct sigaction sa;
     signal_stack = malloc(SIGSTKSZ + R_USAGE);
-    if (signal_stack != nullptr) {
+    if (signal_stack) {
 	sigstk.ss_sp = signal_stack;
 	sigstk.ss_size = SIGSTKSZ + R_USAGE;
 	sigstk.ss_flags = 0;
@@ -711,7 +711,7 @@ static void init_signal_handlers(void)
 static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
-    if (fp != nullptr) {
+    if (fp) {
 	if (SETJMP(R_Toplevel.getCJmpBuf()))
 	    check_session_exit();
 	else {
@@ -872,21 +872,21 @@ void setup_Rmainloop(void)
     /* make sure srand is called before R_tmpnam, PR#14381 */
     srand(TimeToSeed());
 
-    InitArithmetic();
-    InitTempDir(); /* must be before InitEd */
-    InitMemory();
-    InitStringHash(); /* must be before InitNames */
-    InitBaseEnv();
-    InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
+    Rf_InitArithmetic();
+    Rf_InitTempDir(); /* must be before InitEd */
+    Rf_InitMemory();
+    Rf_InitStringHash(); /* must be before InitNames */
+    Rf_InitBaseEnv();
+    Rf_InitNames(); /* must be after InitBaseEnv to use R_EmptyEnv */
     InitParser();  /* must be after InitMemory, InitNames */
-    InitGlobalEnv();
+    Rf_InitGlobalEnv();
     InitDynload();
-    InitOptions();
-    InitEd();
-    InitGraphics();
-    InitTypeTables(); /* must be before InitS3DefaultTypes */
-    InitS3DefaultTypes();
-    PrintDefaults();
+    Rf_InitOptions();
+    Rf_InitEd();
+    Rf_InitGraphics();
+    Rf_InitTypeTables(); /* must be before InitS3DefaultTypes */
+    Rf_InitS3DefaultTypes();
+    Rf_PrintDefaults();
 
     R_Is_Running = 1;
     R_check_locale();

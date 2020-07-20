@@ -585,7 +585,7 @@ HIDDEN SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	default:
 	    break;
 	}
-	if(toret != nullptr) {
+	if(toret) {
 	    UNPROTECT(1); /* args */
 	    return toret;
 	}

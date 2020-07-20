@@ -86,7 +86,7 @@ static void RegisterClass(SEXP class_, int type, const char *cname, const char *
 static SEXP LookupClass(SEXP csym, SEXP psym)
 {
     SEXP entry = LookupClassEntry(csym, psym);
-    return entry != nullptr ? CAR(entry) : nullptr;
+    return entry ? CAR(entry) : nullptr;
 }
 
 static void reinit_altrep_class(SEXP sclass);
@@ -310,12 +310,12 @@ HIDDEN SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, in
     return val;
 }
 
-R_xlen_t /*HIDDEN*/ ALTREP_LENGTH(SEXP x)
+/*HIDDEN*/ R_xlen_t ALTREP_LENGTH(SEXP x)
 {
     return ALTREP_DISPATCH(Length, x);
 }
 
-R_xlen_t /*HIDDEN*/ ALTREP_TRUELENGTH(SEXP x) { return 0; }
+/*HIDDEN*/ R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
 
 
 /*
@@ -370,16 +370,17 @@ HIDDEN int ALTINTEGER_ELT(SEXP x, R_xlen_t i)
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     const int *x = INTEGER_OR_NULL(sx);
-    if (x != nullptr) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
-	return ncopy;
+    if (x)
+    {
+        R_xlen_t size = XLENGTH(sx);
+        R_xlen_t ncopy = size - i > n ? n : size - i;
+        for (R_xlen_t k = 0; k < ncopy; k++)
+            buf[k] = x[k + i];
+        //memcpy(buf, x + i, ncopy * sizeof(int));
+        return ncopy;
     }
     else
-	return ALTINTEGER_DISPATCH(Get_region, sx, i, n, buf);
+        return ALTINTEGER_DISPATCH(Get_region, sx, i, n, buf);
 }
 
 int INTEGER_IS_SORTED(SEXP x)
@@ -400,16 +401,17 @@ HIDDEN double ALTREAL_ELT(SEXP x, R_xlen_t i)
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
     const double *x = REAL_OR_NULL(sx);
-    if (x != nullptr) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(double));
-	return ncopy;
+    if (x)
+    {
+        R_xlen_t size = XLENGTH(sx);
+        R_xlen_t ncopy = size - i > n ? n : size - i;
+        for (R_xlen_t k = 0; k < ncopy; k++)
+            buf[k] = x[k + i];
+        //memcpy(buf, x + i, ncopy * sizeof(double));
+        return ncopy;
     }
     else
-	return ALTREAL_DISPATCH(Get_region, sx, i, n, buf);
+        return ALTREAL_DISPATCH(Get_region, sx, i, n, buf);
 }
 
 int REAL_IS_SORTED(SEXP x)
@@ -424,17 +426,18 @@ int REAL_NO_NA(SEXP x)
 
 R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    const int *x = (const int *) DATAPTR_OR_NULL(sx);
-    if (x != nullptr) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
-	return ncopy;
+    const int *x = (const int *)DATAPTR_OR_NULL(sx);
+    if (x)
+    {
+        R_xlen_t size = XLENGTH(sx);
+        R_xlen_t ncopy = size - i > n ? n : size - i;
+        for (R_xlen_t k = 0; k < ncopy; k++)
+            buf[k] = x[k + i];
+        //memcpy(buf, x + i, ncopy * sizeof(int));
+        return ncopy;
     }
     else
-	return ALTLOGICAL_DISPATCH(Get_region, sx, i, n, buf);
+        return ALTLOGICAL_DISPATCH(Get_region, sx, i, n, buf);
 }
 
 int LOGICAL_IS_SORTED(SEXP x)
@@ -448,40 +451,39 @@ int LOGICAL_NO_NA(SEXP x)
     return ALTREP(x) ? ALTLOGICAL_DISPATCH(No_NA, x) : 0;
 }
 
-
 R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
-    const Rbyte *x = (const Rbyte *) DATAPTR_OR_NULL(sx);
-    if (x != nullptr) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
-	return ncopy;
+    const Rbyte *x = (const Rbyte *)DATAPTR_OR_NULL(sx);
+    if (x)
+    {
+        R_xlen_t size = XLENGTH(sx);
+        R_xlen_t ncopy = size - i > n ? n : size - i;
+        for (R_xlen_t k = 0; k < ncopy; k++)
+            buf[k] = x[k + i];
+        //memcpy(buf, x + i, ncopy * sizeof(int));
+        return ncopy;
     }
     else
-	return ALTRAW_DISPATCH(Get_region, sx, i, n, buf);
+        return ALTRAW_DISPATCH(Get_region, sx, i, n, buf);
 }
-
 
 R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
-    const Rcomplex *x = (const Rcomplex *) DATAPTR_OR_NULL(sx);
-    if (x != nullptr) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
-	return ncopy;
+    const Rcomplex *x = (const Rcomplex *)DATAPTR_OR_NULL(sx);
+    if (x)
+    {
+        R_xlen_t size = XLENGTH(sx);
+        R_xlen_t ncopy = size - i > n ? n : size - i;
+        for (R_xlen_t k = 0; k < ncopy; k++)
+            buf[k] = x[k + i];
+        //memcpy(buf, x + i, ncopy * sizeof(int));
+        return ncopy;
     }
     else
-	return ALTCOMPLEX_DISPATCH(Get_region, sx, i, n, buf);
+        return ALTCOMPLEX_DISPATCH(Get_region, sx, i, n, buf);
 }
 
-
-SEXP /*HIDDEN*/ ALTSTRING_ELT(SEXP x, R_xlen_t i)
+/*HIDDEN*/ SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
     SEXP val = nullptr;
 
@@ -610,9 +612,9 @@ void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
  **/
 
 static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
-					 int objf, int levs)
+                                         int objf, int levs)
 {
-    altrep_methods_t *m = (altrep_methods_t *) CLASS_METHODS_TABLE(class_);
+    altrep_methods_t *m = (altrep_methods_t *)CLASS_METHODS_TABLE(class_);
     SEXP val = m->Unserialize(class_, state);
     SET_ATTRIB(val, attr);
     SET_OBJECT(val, objf);
@@ -638,7 +640,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 {
     SEXP ans = ALTREP_DUPLICATE(x, deep);
 
-    if (ans != nullptr &&
+    if (ans &&
 	ans != x) { /* leave attributes alone if returning original */
 	/* handle attributes generically */
 	SEXP attr = ATTRIB(x);
@@ -692,7 +694,7 @@ static R_xlen_t altinteger_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, i
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
-	buf[k] = INTEGER_ELT(sx, k + i);
+        buf[k] = INTEGER_ELT(sx, k + i);
     return ncopy;
 }
 
@@ -710,7 +712,7 @@ static R_xlen_t altreal_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, doub
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
-	buf[k] = REAL_ELT(sx, k + i);
+        buf[k] = REAL_ELT(sx, k + i);
     return ncopy;
 }
 
@@ -728,7 +730,7 @@ static R_xlen_t altlogical_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, i
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
-	buf[k] = LOGICAL_ELT(sx, k + i);
+        buf[k] = LOGICAL_ELT(sx, k + i);
     return ncopy;
 }
 
@@ -745,10 +747,9 @@ static R_xlen_t altraw_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
-	buf[k] = RAW_ELT(sx, k + i);
+        buf[k] = RAW_ELT(sx, k + i);
     return ncopy;
 }
-
 
 static Rcomplex altcomplex_Elt_default(SEXP x, R_xlen_t i)
 {
@@ -760,7 +761,7 @@ static R_xlen_t altcomplex_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, R
     R_xlen_t size = XLENGTH(sx);
     R_xlen_t ncopy = size - i > n ? n : size - i;
     for (R_xlen_t k = 0; k < ncopy; k++)
-	buf[k] = COMPLEX_ELT(sx, k + i);
+        buf[k] = COMPLEX_ELT(sx, k + i);
     return ncopy;
 }
 
@@ -1053,19 +1054,18 @@ Rboolean R_altrep_inherits(SEXP x, R_altrep_class_t class_)
     return (Rboolean) (ALTREP(x) && ALTREP_CLASS(x) == R_SEXP(class_));
 }
 
-extern "C"
-HIDDEN SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)
+extern "C" HIDDEN SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = CAR(args);
-    if (ALTREP(x)) {
-	SEXP info = ALTREP_SERIALIZED_CLASS(x);
-	SEXP val = allocVector(STRSXP, 2);
-	SET_STRING_ELT(val, 0, PRINTNAME(ALTREP_SERIALIZED_CLASS_CLSSYM(info)));
-	SET_STRING_ELT(val, 1, PRINTNAME(ALTREP_SERIALIZED_CLASS_PKGSYM(info)));
-	return val;
+    if (ALTREP(x))
+    {
+        SEXP info = ALTREP_SERIALIZED_CLASS(x);
+        SEXP val = allocVector(STRSXP, 2);
+        SET_STRING_ELT(val, 0, PRINTNAME(ALTREP_SERIALIZED_CLASS_CLSSYM(info)));
+        SET_STRING_ELT(val, 1, PRINTNAME(ALTREP_SERIALIZED_CLASS_PKGSYM(info)));
+        return val;
     }
     else
-	return R_NilValue;
+        return R_NilValue;
 }
-

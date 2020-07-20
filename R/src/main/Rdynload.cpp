@@ -155,7 +155,7 @@ HIDDEN void InitDynload()
    called too early during startup to use error(.) */
 static void initLoadedDLL()
 {
-    if (CountDLL != 0 || LoadedDLL != nullptr)
+    if (CountDLL != 0 || LoadedDLL)
 	R_Suicide(_("DLL table corruption detected"));
 
     /* Note that it is likely that dlopen will use up at least one file
@@ -177,7 +177,7 @@ static void initLoadedDLL()
     */
 
     char *req = getenv("R_MAX_NUM_DLLS");
-    if (req != nullptr) {
+    if (req) {
 	/* set exactly the requested limit, or fail */
 	int reqlimit = atoi(req);
 	if (reqlimit < 100) {
@@ -946,7 +946,7 @@ int R_moduleCdynload(const char *module, int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res != nullptr ? 1 : 0;
+    return res ? 1 : 0;
 }
 
 int R_cairoCdynload(int local, int now)
@@ -967,7 +967,7 @@ int R_cairoCdynload(int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res != nullptr ? 1 : 0;
+    return res ? 1 : 0;
 }
 
 /**

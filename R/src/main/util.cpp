@@ -166,8 +166,8 @@ Rboolean Rf_isOrdered(SEXP s)
 	    && inherits(s, "ordered"));
 }
 
-
-const static struct {
+namespace {
+constexpr struct {
     const char * const str;
     const SEXPTYPE type;
 }
@@ -202,33 +202,38 @@ TypeTable[] = {
 
     { (char *)nullptr,	(SEXPTYPE) -1	   }
 };
+} // namespace
 
-
-SEXPTYPE Rf_str2type(const char * const s)
+SEXPTYPE Rf_str2type(const char *const s)
 {
-    for (int i = 0; TypeTable[i].str; i++) {
-	if (streql(s, TypeTable[i].str))
-	    return TypeTable[i].type;
-    }
-    /* SEXPTYPE is an unsigned int, so the compiler warns us w/o the cast. */
-    return (SEXPTYPE) -1;
+	for (int i = 0; TypeTable[i].str; i++)
+	{
+		if (streql(s, TypeTable[i].str))
+			return TypeTable[i].type;
+	}
+	/* SEXPTYPE is an unsigned int, so the compiler warns us w/o the cast. */
+	return (SEXPTYPE)-1;
 }
 
-static struct {
-    const char *cstrName;
-    SEXP rcharName;
-    SEXP rstrName;
-    SEXP rsymName;
-} Type2Table[MAX_NUM_BASIC_SEXPTYPE];
+namespace
+{
+	struct
+	{
+		const char *cstrName;
+		SEXP rcharName;
+		SEXP rstrName;
+		SEXP rsymName;
+	} Type2Table[MAX_NUM_BASIC_SEXPTYPE];
 
+	int findTypeInTypeTable(const SEXPTYPE t)
+	{
+		for (int i = 0; TypeTable[i].str; i++)
+			if (TypeTable[i].type == t)
+				return i;
 
-static int findTypeInTypeTable(const SEXPTYPE t)
- {
-    for (int i = 0; TypeTable[i].str; i++)
-	if (TypeTable[i].type == t) return i;
-
-    return -1;
-}
+		return -1;
+	}
+} // namespace
 
 // called from main.cpp
 HIDDEN void Rf_InitTypeTables(void) {
@@ -263,7 +268,7 @@ SEXP Rf_type2str_nowarn(const SEXPTYPE t) /* returns a CHARSXP */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rcharName;
-	if (res != nullptr) return res;
+	if (res) return res;
     // }
     return R_NilValue;
 }
@@ -284,7 +289,7 @@ SEXP Rf_type2rstr(const SEXPTYPE t) /* returns a STRSXP */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) {
 	SEXP res = Type2Table[t].rstrName;
-	if (res != nullptr) return res;
+	if (res) return res;
     // }
     error(_("type %d is unimplemented in '%s' function"), t, "type2ImmutableScalarString()");
     return R_NilValue; /* for -Wall */
@@ -294,7 +299,7 @@ const char *Rf_type2char(const SEXPTYPE t) /* returns a char* */
 {
     // if (t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	const char * res = Type2Table[t].cstrName;
-	if (res != nullptr) return res;
+	if (res) return res;
     // }
     warning(_("type %d is unimplemented in '%s' function"), t, "type2char()");
     static char buf[50];
@@ -307,7 +312,7 @@ NORET SEXP Rf_type2symbol(SEXPTYPE t)
 {
     // if (t >= 0 && t < MAX_NUM_BASIC_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rsymName;
-	if (res != nullptr) return res;
+	if (res) return res;
     // }
     error(_("type %d is unimplemented in '%s' function"), t, "type2symbol()");
 }
@@ -507,7 +512,7 @@ HIDDEN SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nargs = NA_INTEGER;
 
     checkArity(op, args);
-    for (cptr = R_GlobalContext; cptr != nullptr; cptr = cptr->nextContext()) {
+    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextContext()) {
 	if ((cptr->getCallFlag() & CTXT_FUNCTION) && cptr->workingEnvironment() == rho) {
 	    nargs = length(cptr->getPromiseArgs());
 	    break;
@@ -704,7 +709,7 @@ HIDDEN SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 #include <windows.h>
 #endif
 
-SEXP static intern_getwd(void)
+static SEXP intern_getwd(void)
 {
     SEXP rval = R_NilValue;
 	char buf[4 * PATH_MAX + 1];
