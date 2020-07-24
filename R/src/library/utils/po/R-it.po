@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-utils 3.6.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -266,6 +266,11 @@ msgstr "'FUN' dev'essere una funzione o NULL"
 #, fuzzy
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' ha lunghezza errata %d  != cols = %d"
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr ""
 
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
 #: R/objects.R:0
@@ -2926,6 +2931,23 @@ msgstr ""
 "errore di elaborazione o opzione vuota in\n"
 "%s"
 
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+#, fuzzy
+msgid "path contains '..'"
+msgstr "il percorso %s contiene spazi,"
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+#, fuzzy
+msgid "path is empty"
+msgstr "'dump' è vuoto"
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 #: R/SweaveDrivers.R:0
 #, fuzzy
@@ -2989,6 +3011,16 @@ msgstr ""
 msgid "removing all entries with invalid multi-byte character data"
 msgstr ""
 "rimozione di tutte le voci con dati non validi di tipo character multi-byte"
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
@@ -3721,9 +3753,6 @@ msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "il pacchetto %s non è disponibile (%s)"
 msgstr[1] "i pacchetti %s non sono disponibili (%s)"
-
-#~ msgid "path to %s contains spaces,"
-#~ msgstr "il percorso %s contiene spazi,"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Argomento 'filter' non valido."

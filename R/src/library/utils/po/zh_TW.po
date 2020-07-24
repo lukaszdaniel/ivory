@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 15:46+0200\n"
+"POT-Creation-Date: 2020-07-23 12:01+0200\n"
 "PO-Revision-Date: 2018-09-16 23:21+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -17,268 +17,270 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: io.c:319 io.c:323 io.c:333 io.c:563 io.c:763 io.c:816 io.c:830 io.c:834
-#: io.c:840 io.c:841 io.c:1082 io.c:1083 io.c:1085 io.c:1086 io.c:1087
-#: io.c:1088 io.c:1089 io.c:1090 stubs.c:39 stubs.c:59 windows/dialogs.c:169
-#: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
-#: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
-#: windows/widgets.c:82 windows/widgets.c:87
+#: io.cpp:320 io.cpp:324 io.cpp:334 io.cpp:562 io.cpp:761 io.cpp:813 io.cpp:827
+#: io.cpp:831 io.cpp:837 io.cpp:838 io.cpp:1079 io.cpp:1080 io.cpp:1082
+#: io.cpp:1083 io.cpp:1084 io.cpp:1085 io.cpp:1086 io.cpp:1087 stubs.cpp:39
+#: stubs.cpp:59 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
+#: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
+#: windows/util.cpp:121 windows/widgets.cpp:79 windows/widgets.cpp:82
+#: windows/widgets.cpp:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "無效的 %s 引數"
 
-#: io.c:342 io.c:827
+#: io.cpp:343 io.cpp:824
 msgid "invalid quote symbol set"
 msgstr "無效的引言符號集"
 
-#: io.c:354 io.c:850 io.c:1070
+#: io.cpp:355 io.cpp:847 io.cpp:1067
 msgid "cannot open the connection"
 msgstr "無法開啟連接"
 
-#: io.c:357 io.c:361
+#: io.cpp:358 io.cpp:362
 msgid "cannot read from this connection"
 msgstr "無法從這個連接讀取"
 
-#: io.c:408 io.c:426
+#: io.cpp:409 io.cpp:427
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "引言的字串於第 %d 列被 EOF 終止"
 
-#: io.c:559
+#: io.cpp:558
 msgid "the first argument must be of mode character"
 msgstr "第一個引數必須是模式的字元"
 
-#: io.c:589
+#: io.cpp:588
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "無效的 'numerals' 字串：\"%s\""
 
-#: io.c:765
+#: io.cpp:763
 #, c-format
 msgid "Selection: "
 msgstr "選擇："
 
-#: io.c:860 io.c:875
+#: io.cpp:857 io.cpp:872
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "無法在 'readTableHead' 中配置緩衝區"
 
-#: io.c:888
+#: io.cpp:885
 msgid "\\ followed by EOF"
 msgstr "\\ EOF 跟隨在後"
 
-#: io.c:927
+#: io.cpp:924
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.c:940 io.c:944
+#: io.cpp:937 io.cpp:941
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "由 '%s' 上的 readTableHeader 找到不完整的最終列"
 
-#: io.c:1001
+#: io.cpp:997
 msgid "index out of range"
 msgstr "索引超出範圍"
 
-#: io.c:1038
+#: io.cpp:1035
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "關閉連接時有問題： %s"
 
-#: io.c:1040
+#: io.cpp:1037
 msgid "Problem closing connection"
 msgstr "關閉連接時有問題"
 
-#: io.c:1063
+#: io.cpp:1060
 #, fuzzy
 msgid "'file' argument is not a connection"
 msgstr "'file' 並非連接"
 
-#: io.c:1066
+#: io.cpp:1063
 msgid "cannot write to this connection"
 msgstr "無法寫入這個連接"
 
-#: io.c:1096
+#: io.cpp:1093
 #, fuzzy
 msgid "'dec' argument must be a single character"
 msgstr "'dec' 必須是單一字元"
 
-#: io.c:1122
+#: io.cpp:1117
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "損壞的資料框 -- 第 %d 行的長度不符合 nrows"
 
-#: io.c:1150
+#: io.cpp:1145
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "第 %s 行宣稱是因子但是沒有數值碼"
 
-#: io.c:1167
+#: io.cpp:1162
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "損壞的矩陣 -- 維度不符合長度"
 
-#: stubs.c:48
+#: stubs.cpp:48
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' 只能在 Rgui 與 Rterm 中使用"
 
-#: stubs.c:65
+#: stubs.cpp:65
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' 只能在 Rgui 與 Rterm 中使用"
 
-#: stubs.c:77
+#: stubs.cpp:77
 msgid "invalid timestamp"
 msgstr "無效的時間戳記"
 
-#: stubs.c:143 stubs.c:151
+#: stubs.cpp:143 stubs.cpp:151
 msgid "X11 dataentry cannot be loaded"
 msgstr "無法載入 X11 資料條目"
 
-#: stubs.c:147 stubs.c:176 stubs.c:182
+#: stubs.cpp:147 stubs.cpp:176 stubs.cpp:182
 msgid "X11 is not available"
 msgstr "X11 不可用"
 
-#: stubs.c:240 stubs.c:243
+#: stubs.cpp:240 stubs.cpp:243
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "無效的 '%s' 規格"
 
-#: stubs.c:246
+#: stubs.cpp:246
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
-#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
+#: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
+#: windows/widgets.cpp:183 windows/widgets.cpp:189 windows/widgets.cpp:251
+#: windows/widgets.cpp:257
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' 必須是字串"
 
-#: utils.c:86
+#: utils.cpp:87
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' 必須是長度 1 的字元向量"
 
-#: utils.c:92
+#: utils.cpp:93
 #, fuzzy, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "nsl() 無法解析主機 %s"
 
-#: utils.c:99
+#: utils.cpp:100
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "由 'gethostbyname' 回傳的未知格式"
 
-#: utils.c:108
+#: utils.cpp:109
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "nsl() 於這個平臺未被支援"
 
-#: windows/dialogs.c:181
+#: windows/dialogs.cpp:181
 msgid "unknown type"
 msgstr "未知類型"
 
-#: windows/dialogs.c:213 windows/dialogs.c:237 windows/dialogs.c:275
-#: windows/dialogs.c:310
+#: windows/dialogs.cpp:213 windows/dialogs.cpp:237 windows/dialogs.cpp:275
+#: windows/dialogs.cpp:310
 msgid "menu functions can only be used in the GUI"
 msgstr "選單函式只能在圖形介面中使用"
 
-#: windows/dialogs.c:245
+#: windows/dialogs.cpp:245
 #, fuzzy, c-format
 msgid "unable to retrieve items for '%s' (%s)"
 msgstr "無法取回用於 %s (%s) 的項目"
 
-#: windows/dialogs.c:283
+#: windows/dialogs.cpp:283
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr "無法加入選單 (%s)"
 
-#: windows/dialogs.c:295
+#: windows/dialogs.cpp:295
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr "無法加入功能表項目 (%s)"
 
-#: windows/dialogs.c:318
+#: windows/dialogs.cpp:318
 msgid "menu does not exist"
 msgstr "選單不存在"
 
-#: windows/dialogs.c:325
+#: windows/dialogs.cpp:325
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr "無法刪除功能表項目 (%s)"
 
-#: windows/registry.c:73 windows/registry.c:248 windows/registry.c:251
-#: windows/registry.c:254
+#: windows/registry.cpp:72 windows/registry.cpp:247 windows/registry.cpp:250
+#: windows/registry.cpp:253
 #, c-format
 msgid "invalid '%s' value"
 msgstr "無效的 '%s' 值"
 
-#: windows/registry.c:177
+#: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
-#: windows/registry.c:266
+#: windows/registry.cpp:265
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "註冊表索引鍵 '%ls' 找不到"
 
-#: windows/util.c:42
+#: windows/util.cpp:46
 msgid "unsupported version of Windows"
 msgstr "不支援的 Windows 版本"
 
-#: windows/util.c:281
+#: windows/util.cpp:285
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "引數必須是字元向量或純量向量"
 
-#: windows/util.c:294
+#: windows/util.cpp:298
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
-#: windows/util.c:320
+#: windows/util.cpp:324
 msgid "unable to open the clipboard"
 msgstr "無法開啟剪貼簿"
 
-#: windows/util.c:325
+#: windows/util.cpp:329
 msgid "unable to write to the clipboard"
 msgstr "無法寫入剪貼簿"
 
-#: windows/util.c:452
+#: windows/util.cpp:456
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'%s' 必須是長度 1"
 
-#: windows/util.c:565
+#: windows/util.cpp:569
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'%s' 必須是串列"
 
-#: windows/util.c:569
+#: windows/util.cpp:573
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' 元件 %d 並非視窗控柄"
 
-#: windows/widgets.c:109
+#: windows/widgets.cpp:109
 msgid "Select one or more"
 msgstr "選取一或多個"
 
-#: windows/widgets.c:109
+#: windows/widgets.cpp:109
 msgid "Select one"
 msgstr "選取一個"
 
-#: windows/widgets.c:185 windows/widgets.c:253
+#: windows/widgets.cpp:185 windows/widgets.cpp:253
 #, fuzzy
 msgid "'default' argument is overlong"
 msgstr "'default' 過長"
 
-#: windows/widgets.c:191
+#: windows/widgets.cpp:191
 #, fuzzy
 msgid "'multi' argument must be a logical value"
 msgstr "'multi' 必須是邏輯值"
 
-#: windows/widgets.c:193
+#: windows/widgets.cpp:193
 #, fuzzy
 msgid "'filterindex' argument must be an integer value"
 msgstr "'filterindex' 必須是整數值"

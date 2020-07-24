@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 15:46+0200\n"
+"POT-Creation-Date: 2020-07-23 12:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,22 +16,22 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: Rmd5.c:47
+#: Rmd5.cpp:47
 #, c-format
 msgid "'%s' argument must be character"
 msgstr "argument '%s' musi być tekstem"
 
-#: Rmd5.c:63
+#: Rmd5.cpp:63
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "md5 nie powiodło się na pliku '%ls'"
 
-#: Rmd5.c:65
+#: Rmd5.cpp:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 nie powiodło się na pliku '%s'"
 
-#: getfmts.c:53
+#: getfmts.cpp:55
 #, c-format
 msgid "only %d argument is allowed"
 msgid_plural "only %d arguments are allowed"
@@ -39,171 +39,171 @@ msgstr[0] "tylko %d argument jest dozwolony"
 msgstr[1] "tylko %d argumenty są dozwolone"
 msgstr[2] "tylko %d argumentów jest dozwolonych"
 
-#: getfmts.c:58
+#: getfmts.cpp:60
 #, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "argument '%s' nie jest wektorem tekstowym"
 
-#: getfmts.c:61
+#: getfmts.cpp:63
 #, c-format
 msgid "'%s' argument must be length 1"
 msgstr "argument '%s' musi mieć długość 1"
 
-#: getfmts.c:67
+#: getfmts.cpp:69
 #, c-format
 msgid "length of '%s' argument exceeds maximal format length %d"
 msgstr "długość argumentu '%s' przekracza maksymalną długość %d formatu"
 
-#: getfmts.c:88
+#: getfmts.cpp:90
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "nierozpoznane określenie '%s' formatu"
 
-#: getfmts.c:128
+#: getfmts.cpp:130
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#: gramLatex.c:2341 gramRd.c:3694
+#: gramLatex.cpp:2435 gramRd.cpp:3792
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.c:2535 gramRd.c:4188
+#: gramLatex.cpp:2631 gramRd.cpp:4286
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.c:2578 gramRd.c:4240 gramRd.c:4246
+#: gramLatex.cpp:2674 gramRd.cpp:4338 gramRd.cpp:4344
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawny wartość '%s'"
 
-#: gramRd.c:2315 gramRd.c:2318
+#: gramRd.cpp:2408 gramRd.cpp:2411
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "błędne oznakowanie (dodatkowa spacja?) w %s:%d:%d"
 
-#: gramRd.c:2843
+#: gramRd.cpp:2936
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' zostało już poprzednio zdefiniowane."
 
-#: gramRd.c:2853
+#: gramRd.cpp:2946
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez "
 "użytkownika."
 
-#: gramRd.c:2895
+#: gramRd.cpp:2988
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'"
 
-#: gramRd.c:2912 gramRd.c:2928
+#: gramRd.cpp:3005 gramRd.cpp:3021
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 "błąd wewnętrzny: niepoprawny argument przekazany do funkcji 'xxusermacro()'"
 
-#: gramRd.c:2957
+#: gramRd.cpp:3050
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra użytkownika '%s'"
 
-#: gramRd.c:3097 gramRd.c:3101
+#: gramRd.cpp:3190 gramRd.cpp:3194
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego łańcucha w %s:%d"
 
-#: gramRd.c:3120
+#: gramRd.cpp:3217
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
-#: gramRd.c:3150
+#: gramRd.cpp:3249
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
 
-#: gramRd.c:3556
+#: gramRd.cpp:3654
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Nie można znaleźć makra %s"
 
-#: gramRd.c:3754
+#: gramRd.cpp:3852
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 "Nieoczekiwane zakończenie wejścia (w %c cytowanym łańcuchu otwartym w %s:%d:"
 "%d)"
 
-#: gramRd.c:4253
+#: gramRd.cpp:4351
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
-#: gramRd.c:4260
+#: gramRd.cpp:4356
 msgid "cannot read from this connection"
 msgstr "nie można czytać z tego połączenia"
 
-#: gramRd.c:4268
+#: gramRd.cpp:4364
 msgid "invalid Rd file"
 msgstr "niepoprawny plik Rd"
 
-#: gramRd.c:4287
+#: gramRd.cpp:4383
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 "'deparseRd' wspiera tylko konwertowanie wyrażenia na łańcuch tekstowy dla "
 "elementów znakowych"
 
-#: gramRd.c:4290
+#: gramRd.cpp:4386
 msgid "bad state"
 msgstr "błędny stan"
 
-#: gramRd.c:4303
+#: gramRd.cpp:4399
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "błędny tryb %d tekstu w 'deparseRd'"
 
-#: http.c:32
+#: http.cpp:32
 msgid "invalid bind address specification"
 msgstr "niepoprawne określenie adresu wiążącego"
 
-#: install.c:105 install.c:124 install.c:126
+#: install.cpp:106 install.cpp:125 install.cpp:127
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: install.c:155
+#: install.cpp:156
 msgid "write error during file append"
 msgstr "błąd zapisu podczas dołączania pliku"
 
-#: pdscan.c:68
+#: pdscan.cpp:68
 msgid "too many items"
 msgstr ""
 
-#: pdscan.c:116
+#: pdscan.cpp:116
 msgid "non-character argument"
 msgstr ""
 
-#: signals.c:43 signals.c:141
+#: signals.cpp:43 signals.cpp:141
 #, c-format
 msgid "'%s' function is not supported on this platform"
 msgstr "funkcja '%s' nie jest wspierany na tej platformie"
 
-#: text.c:68
+#: text.cpp:67
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: text.c:159
+#: text.cpp:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "argument '%s' musi mieć wartość TRUE lub FALSE"
 
-#: text.c:224 text.c:246
+#: text.cpp:224 text.cpp:246
 msgid "out of memory"
 msgstr "brakło pamięci"
 
-#: text.c:266 text.c:268
+#: text.cpp:266 text.cpp:268
 msgid "first arg must be a single character string"
 msgstr "pierwszy argument musi być pojedynczym łańcuchem tekstowym"
 

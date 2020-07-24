@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3854,8 +3854,7 @@ msgstr ""
 
 
 #: R/acf.R: 0
-#. R/acf.R: gettextf("Series %s", x$series)
-#. R/acf.R: gettextf("Series %s", seq_len(nser))
+#. R/acf.R: gettextf("Series %s", if (nser == 1L) x$series else seq_len(nser))
 
 msgid "Series %s"
 msgstr ""
@@ -6021,7 +6020,7 @@ msgstr ""
 
 
 #: R/glm.R: 0
-#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, tmp_N)
+#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 
 msgid "length of 'start' should equal %d and correspond to initial coefs for %s"
 msgstr ""

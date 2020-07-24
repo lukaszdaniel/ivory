@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-21 15:45\n"
+"POT-Creation-Date: 2020-07-23 12:00\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1786,6 +1786,14 @@ msgstr ""
 #, fuzzy
 msgid "S3 method %s was declared but was not found"
 msgstr "la méthode S3 %s est déclarée mais est introuvable"
+
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
+msgstr ""
+"exportClassPattern spécifié dans le fichier NAMESPACE, mais aucune classe ne "
+"correspond dans le package %s"
 
 #. R/Defunct.R: gettext("See help(\"Defunct\")")
 #: R/Defunct.R:0

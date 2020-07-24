@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-grid 3.6.3\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -391,6 +391,11 @@ msgstr "'x0', 'y0', 'x1' e 'y1' devono essere unità"
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
+#. R/patterns.R: warning("Gradient fill applied to object with no inside")
+#: R/patterns.R:0
+msgid "Gradient fill applied to object with no inside"
+msgstr ""
+
 #. R/grob.R: stop("Invalid force target")
 #: R/grob.R:0
 msgid "Invalid force target"
@@ -400,6 +405,11 @@ msgstr "Target di forza non valido"
 #: R/grob.R:0
 msgid "Invalid revert target"
 msgstr "Target di ripristino non valido"
+
+#. R/patterns.R: warning("Missing pattern fill has been set to transparent")
+#: R/patterns.R:0
+msgid "Missing pattern fill has been set to transparent"
+msgstr ""
 
 #. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)", newGrob$name, gPath)
 #: R/grob.R:0
@@ -555,6 +565,7 @@ msgstr "argomento 'print' non valido"
 #. R/unit.R: gettextf("invalid '%s' value", "theta")
 #. R/viewport.R: gettextf("invalid '%s' value", "gp")
 #. R/viewport.R: gettextf("invalid '%s' value", "clip")
+#. R/viewport.R: gettextf("invalid '%s' value", "mask")
 #: R/gpar.R:0 R/grob.R:0 R/origin.R:0 R/unit.R:0 R/viewport.R:0
 #, fuzzy
 msgid "invalid '%s' value"

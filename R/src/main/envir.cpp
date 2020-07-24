@@ -1737,7 +1737,7 @@ void Rf_addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 	SEXP s;
 	for(s = addVars; s != end; s = CDR(s)) {
 	    if (TAG(s) == endTag) {
-		/* remove variable s from the list, because it is overriden by "end" */
+		/* remove variable s from the list, because it is overridden by "end" */
 		if (sprev == R_NilValue) {
 		    addVars = CDR(s);
 		    SET_FRAME(env, addVars);

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2016-01-09 18:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -106,7 +106,7 @@ msgstr "»file« skal være en udfyldt tegnstreng"
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr "»gamma« skal være en skala eller »sRGB«"
 
-#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
 msgstr ""
@@ -242,6 +242,14 @@ msgstr "enhed »%s« blev ikke fundet"
 msgid "Index"
 msgstr ""
 
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid 'extend' value"
+msgstr "ugyldigt første argument"
+
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
@@ -251,6 +259,17 @@ msgstr "ugyldigt skriftdatabasenavn"
 #: R/postscript.R:0
 msgid "Invalid font type"
 msgstr "ugyldig skrifttype"
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid pattern type"
+msgstr "ugyldig skrifttype"
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
+msgstr ""
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
 #: R/convertColor.R:0

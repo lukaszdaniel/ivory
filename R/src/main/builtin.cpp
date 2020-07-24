@@ -537,7 +537,7 @@ static void cat_printsep(SEXP sep, int ntot)
 
 struct cat_info
 {
-	Rboolean wasopen;
+	bool wasopen;
 	int changedcon;
 	Rconnection con;
 #ifdef _WIN32
@@ -549,7 +549,7 @@ static void cat_cleanup(void *data)
 {
 	cat_info *pci = (cat_info *)data;
 	Rconnection con = pci->con;
-	Rboolean wasopen = pci->wasopen;
+	bool wasopen = pci->wasopen;
 	int changedcon = pci->changedcon;
 
 	con->fflush(con);
@@ -637,10 +637,8 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&cat_cleanup);
-    cntxt.setContextEndData(&ci);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&cat_cleanup, &ci);
 
     nobjs = length(objs);
     width = 0;
@@ -721,7 +719,7 @@ HIDDEN SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* end the context after anything that could raise an error but before
        doing the cleanup so the cleanup doesn't get done twice */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
 
     cat_cleanup(&ci);
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-07-23 12:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,532 +18,534 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: base.c:37
+#: base.cpp:37
 msgid "no base graphics system is registered"
 msgstr ""
 
-#: base.c:304
+#: base.cpp:304
 msgid "Incompatible graphics state"
 msgstr ""
 
-#: base.c:348
+#: base.cpp:348
 msgid "event 'GE_ScalePS' requires a single numeric value"
 msgstr ""
 
-#: base.c:379 base.c:386 base.c:394
+#: base.cpp:379 base.cpp:386 base.cpp:394
 msgid "the base graphics system is not registered"
 msgstr ""
 
-#: graphics.c:290
+#: graphics.cpp:290
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr ""
 
-#: graphics.c:1811 graphics.c:1833
+#: graphics.cpp:1804 graphics.cpp:1826
 msgid "attempt to plot on null device"
 msgstr ""
 
-#: graphics.c:1863
+#: graphics.cpp:1856
 msgid "outer margins are too large (figure region is too small)"
 msgstr ""
 
-#: graphics.c:1865
+#: graphics.cpp:1858
 msgid "figure region is too large"
 msgstr ""
 
-#: graphics.c:1867
+#: graphics.cpp:1860
 msgid "figure margins are too large"
 msgstr ""
 
-#: graphics.c:1869
+#: graphics.cpp:1862
 msgid "plot region is too large"
 msgstr ""
 
-#: graphics.c:1925
+#: graphics.cpp:1918
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr ""
 
-#: graphics.c:1955
+#: graphics.cpp:1948
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr ""
 
-#: graphics.c:2193 graphics.c:2591
+#: graphics.cpp:2186 graphics.cpp:2587
 msgid "no graphics device is active"
 msgstr ""
 
-#: graphics.c:2388
+#: graphics.cpp:2380
 msgid "plot.new has not been called yet"
 msgstr ""
 
-#: graphics.c:2390
+#: graphics.cpp:2382
 msgid "invalid graphics state"
 msgstr ""
 
-#: graphics.c:2541
+#: graphics.cpp:2537
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3049
+#: graphics.cpp:3045
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr ""
 
-#: graphics.c:3130
+#: graphics.cpp:3126
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr ""
 
-#: graphics.c:3147 par.c:1121
+#: graphics.cpp:3143 par.cpp:1121
 #, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr ""
 
-#: graphics.c:3354
+#: graphics.cpp:3350
 msgid "metric information not available for this device"
 msgstr ""
 
-#: par-common.c:146
+#: par-common.cpp:146
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr ""
 
-#: par-common.c:248
+#: par-common.cpp:248
 msgid "'mgp[1:3]' are of differing sign"
 msgstr ""
 
-#: par.c:161
+#: par.cpp:161
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr ""
 
-#: par.c:168
+#: par.cpp:168
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr ""
 
-#: par.c:263 par.c:674
+#: par.cpp:263 par.cpp:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr ""
 
-#: par.c:435
+#: par.cpp:435
 msgid "parameter \"mfg\" has the wrong length"
 msgstr ""
 
-#: par.c:443 par.c:445
+#: par.cpp:443 par.cpp:445
 #, c-format
 msgid "parameter \"%s\" in \"mfg\" parameter is out of range"
 msgstr ""
 
-#: par.c:450 par.c:452
+#: par.cpp:450 par.cpp:452
 #, c-format
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr ""
 
-#: par.c:479
+#: par.cpp:479
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr ""
 
-#: par.c:666 par.c:1064
+#: par.cpp:666 par.cpp:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr ""
 
-#: par.c:670 par.c:1068
+#: par.cpp:670 par.cpp:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr ""
 
-#: par.c:1165
+#: par.cpp:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr ""
 
-#: par.c:1171
+#: par.cpp:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr ""
 
-#: par.c:1173
+#: par.cpp:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr ""
 
-#: plot.c:39 plot3d.c:38
+#: plot.cpp:41 plot3d.cpp:38
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.c:62
+#: plot.cpp:64
 msgid "invalid color specification"
 msgstr ""
 
-#: plot.c:128
+#: plot.cpp:130
 msgid "only NA allowed in logical plotting symbol"
 msgstr ""
 
-#: plot.c:130
+#: plot.cpp:132
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: plot.c:219 plot.c:2812 plot3d.c:1180 plot3d.c:1184
+#: plot.cpp:221 plot.cpp:2815 plot3d.cpp:1180 plot3d.cpp:1184
 #, c-format
 msgid "invalid '%s' specification"
 msgstr ""
 
-#: plot.c:278 plot.c:292 plot.c:479 plot.c:484 plot.c:2143 plot.c:2150
-#: plot.c:3173 plot.c:3175 plot.c:3177 plot.c:3336 plot3d.c:1164 plot3d.c:1168
-#: plot3d.c:1170 plot3d.c:1904
+#: plot.cpp:280 plot.cpp:294 plot.cpp:480 plot.cpp:485 plot.cpp:2146
+#: plot.cpp:2153 plot.cpp:3176 plot.cpp:3178 plot.cpp:3180 plot.cpp:3341
+#: plot3d.cpp:1164 plot3d.cpp:1168 plot3d.cpp:1170 plot3d.cpp:1896
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: plot.c:295
+#: plot.cpp:297
 #, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr ""
 
-#: plot.c:319
+#: plot.cpp:321
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr ""
 
-#: plot.c:393
+#: plot.cpp:394
 msgid "invalid graphics parameter"
 msgstr ""
 
-#: plot.c:475
+#: plot.cpp:476
 msgid "at least 3 arguments are required"
 msgstr ""
 
-#: plot.c:489
+#: plot.cpp:490
 msgid "\"log=\" specification must be character"
 msgstr ""
 
-#: plot.c:502
+#: plot.cpp:503
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr ""
 
-#: plot.c:518 plot.c:530
+#: plot.cpp:519 plot.cpp:531
 #, c-format
 msgid "NA values are not allowed in '%s'"
 msgstr ""
 
-#: plot.c:524 plot.c:536
+#: plot.cpp:525 plot.cpp:537
 #, c-format
 msgid "'%s' needs finite values"
 msgstr ""
 
-#: plot.c:542
+#: plot.cpp:543
 msgid "Logarithmic axis must have positive limits"
 msgstr ""
 
-#: plot.c:666
+#: plot.cpp:667
 msgid "invalid type for axis labels"
 msgstr ""
 
-#: plot.c:754 plot.c:1329 plot.c:1652 plot.c:1717 plot.c:1792 plot.c:1858
-#: plot.c:1932 plot.c:2027 plot.c:2103 plot.c:2381 plot.c:2555 plot.c:2771
-#: plot.c:3318 plot.c:3453 plot.c:3529 plot.c:3695 plot.c:3975 plot3d.c:1873
+#: plot.cpp:755 plot.cpp:1330 plot.cpp:1655 plot.cpp:1720 plot.cpp:1795
+#: plot.cpp:1861 plot.cpp:1935 plot.cpp:2030 plot.cpp:2106 plot.cpp:2384
+#: plot.cpp:2558 plot.cpp:2774 plot.cpp:3322 plot.cpp:3465 plot.cpp:3541
+#: plot.cpp:3706 plot.cpp:3986 plot3d.cpp:1865
 msgid "too few arguments"
 msgstr ""
 
-#: plot.c:765
+#: plot.cpp:766
 #, c-format
 msgid "invalid axis number %d"
 msgstr ""
 
-#: plot.c:852 plot.c:864
+#: plot.cpp:853 plot.cpp:865
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr ""
 
-#: plot.c:859 plot.c:2115 plot.c:2392 plot.c:2398 plot.c:2405 plot.c:2413
-#: plot.c:2420 plot.c:2427 plot.c:2434 plot.c:2441 plot.c:2449 plot.c:2456
-#: plot.c:3180
+#: plot.cpp:860 plot.cpp:2118 plot.cpp:2395 plot.cpp:2401 plot.cpp:2408
+#: plot.cpp:2416 plot.cpp:2423 plot.cpp:2430 plot.cpp:2437 plot.cpp:2444
+#: plot.cpp:2452 plot.cpp:2459 plot.cpp:3183
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr ""
 
-#: plot.c:894
+#: plot.cpp:895
 #, c-format
 msgid "'%s' argument must be NA or a finite number"
 msgstr ""
 
-#: plot.c:946
+#: plot.cpp:947
 msgid "'labels' argument is supplied and not 'at' argument"
 msgstr ""
 
-#: plot.c:950
+#: plot.cpp:951
 #, c-format
 msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr ""
 
-#: plot.c:969
+#: plot.cpp:970
 msgid "no locations are finite"
 msgstr ""
 
-#: plot.c:1345
+#: plot.cpp:1348
 msgid "invalid plotting structure"
 msgstr ""
 
-#: plot.c:1347
+#: plot.cpp:1350
 #, c-format
 msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr ""
 
-#: plot.c:1358
+#: plot.cpp:1361
 #, c-format
 msgid "plot type '%s' will be truncated to first character"
 msgstr ""
 
-#: plot.c:1362 plot.c:3034
+#: plot.cpp:1365 plot.cpp:3037
 msgid "invalid plot type"
 msgstr ""
 
-#: plot.c:1564
+#: plot.cpp:1567
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr ""
 
-#: plot.c:1607
+#: plot.cpp:1610
 msgid "invalid first argument"
 msgstr ""
 
-#: plot.c:1614
+#: plot.cpp:1617
 msgid "invalid second argument"
 msgstr ""
 
-#: plot.c:1622
+#: plot.cpp:1625
 msgid "invalid third argument"
 msgstr ""
 
-#: plot.c:1630
+#: plot.cpp:1633
 msgid "invalid fourth argument"
 msgstr ""
 
-#: plot.c:1638
+#: plot.cpp:1641
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr ""
 
-#: plot.c:1863
+#: plot.cpp:1866
 msgid "Empty raster"
 msgstr ""
 
-#: plot.c:1945
+#: plot.cpp:1948
 msgid "invalid arrow head length"
 msgstr ""
 
-#: plot.c:1950
+#: plot.cpp:1953
 msgid "invalid arrow head angle"
 msgstr ""
 
-#: plot.c:1955
+#: plot.cpp:1958
 msgid "invalid arrow head specification"
 msgstr ""
 
-#: plot.c:2189
+#: plot.cpp:2192
 msgid "no coordinates were supplied"
 msgstr ""
 
-#: plot.c:2821
+#: plot.cpp:2824
 msgid "'a' and 'b' arguments must be finite"
 msgstr ""
 
-#: plot.c:2957 plot.c:4066 plot.c:4069 plot.c:4072 plot.c:4075 plot.c:4095
-#: plot.c:4099 plot.c:4102 plot.c:4122 plot.c:4126 plot.c:4129 plot3d.c:1086
-#: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
-#: stem.c:152 stem.c:153 stem.c:155 stem.c:156 stem.c:202 stem.c:203
+#: plot.cpp:2960 plot.cpp:4077 plot.cpp:4080 plot.cpp:4083 plot.cpp:4086
+#: plot.cpp:4106 plot.cpp:4110 plot.cpp:4113 plot.cpp:4133 plot.cpp:4137
+#: plot.cpp:4140 plot3d.cpp:1086 plot3d.cpp:1090 plot3d.cpp:1095
+#: plot3d.cpp:1099 plot3d.cpp:1103 plot3d.cpp:1107 stem.cpp:153 stem.cpp:154
+#: stem.cpp:156 stem.cpp:157 stem.cpp:202 stem.cpp:203
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: plot.c:3029 plot.c:3169
+#: plot.cpp:3032 plot.cpp:3172
 #, c-format
 msgid "invalid number of points in '%s' function"
 msgstr ""
 
-#: plot.c:3171
+#: plot.cpp:3174
 msgid "incorrect argument type"
 msgstr ""
 
-#: plot.c:3183
+#: plot.cpp:3186
 msgid "different argument lengths"
 msgstr ""
 
-#: plot.c:3185
+#: plot.cpp:3188
 msgid "more labels than points"
 msgstr ""
 
-#: plot.c:3237
+#: plot.cpp:3240
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr ""
 
-#: plot.c:3243
+#: plot.cpp:3246
 msgid "warning: nearest point is already identified\n"
 msgstr ""
 
-#: plot.c:3329
+#: plot.cpp:3333
 msgid "invalid units"
 msgstr ""
 
-#: plot.c:3513 plot.c:3620
+#: plot.cpp:3525 plot.cpp:3632
 msgid "invalid dendrogram input"
 msgstr ""
 
-#: plot.c:3677
+#: plot.cpp:3688
 msgid "invalid symbol parameter vector"
 msgstr ""
 
-#: plot.c:3700
+#: plot.cpp:3711
 msgid "invalid symbol coordinates"
 msgstr ""
 
-#: plot.c:3708
+#: plot.cpp:3719
 msgid "x/y/parameter length mismatch"
 msgstr ""
 
-#: plot.c:3727
+#: plot.cpp:3738
 msgid "invalid circles data"
 msgstr ""
 
-#: plot.c:3729 plot.c:3750 plot.c:3775 plot.c:3805
+#: plot.cpp:3740 plot.cpp:3761 plot.cpp:3786 plot.cpp:3816
 msgid "invalid symbol parameter"
 msgstr ""
 
-#: plot.c:3748
+#: plot.cpp:3759
 msgid "invalid squares data"
 msgstr ""
 
-#: plot.c:3773
+#: plot.cpp:3784
 msgid "invalid rectangles data (need 2 columns)"
 msgstr ""
 
-#: plot.c:3803
+#: plot.cpp:3814
 msgid "invalid stars data"
 msgstr ""
 
-#: plot.c:3845
+#: plot.cpp:3856
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr ""
 
-#: plot.c:3848 plot.c:3854
+#: plot.cpp:3859 plot.cpp:3865
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr ""
 
-#: plot.c:3851
+#: plot.cpp:3862
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3893
+#: plot.cpp:3904
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr ""
 
-#: plot.c:3902
+#: plot.cpp:3913
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3904
+#: plot.cpp:3915
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr ""
 
-#: plot.c:3950
+#: plot.cpp:3961
 msgid "invalid symbol type"
 msgstr ""
 
-#: plot.c:3988 plot.c:3990 plot.c:3995 plot.c:3997
+#: plot.cpp:3999 plot.cpp:4001 plot.cpp:4006 plot.cpp:4008
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr ""
 
-#: plot.c:4014
+#: plot.cpp:4025
 msgid "unable to allocate memory (in 'xspline()')"
 msgstr ""
 
-#: plot3d.c:182 plot3d.c:1930
+#: plot3d.cpp:182 plot3d.cpp:1922
 msgid "insufficient 'x' or 'y' values"
 msgstr ""
 
-#: plot3d.c:186 plot3d.c:1933
+#: plot3d.cpp:186 plot3d.cpp:1925
 msgid "dimension mismatch"
 msgstr ""
 
-#: plot3d.c:194
+#: plot3d.cpp:194
 msgid "no contour values"
 msgstr ""
 
-#: plot3d.c:256
+#: plot3d.cpp:256
 msgid "invalid x / y values or limits"
 msgstr ""
 
-#: plot3d.c:258
+#: plot3d.cpp:258
 msgid "invalid contour levels: must be strictly increasing"
 msgstr ""
 
-#: plot3d.c:1050 plot3d.c:1063
+#: plot3d.cpp:1050 plot3d.cpp:1063
 msgid "Axis orientation not calculated"
 msgstr ""
 
-#: plot3d.c:1083
+#: plot3d.cpp:1083
 msgid "too few parameters"
 msgstr ""
 
-#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#: plot3d.cpp:1113 plot3d.cpp:1115 plot3d.cpp:1117
 #, c-format
 msgid "invalid '%s' limits"
 msgstr ""
 
-#: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
+#: plot3d.cpp:1138 plot3d.cpp:1140 plot3d.cpp:1142
 #, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr ""
 
-#: plot3d.c:1162
+#: plot3d.cpp:1162
 msgid "invalid viewing parameters"
 msgstr ""
 
-#: plot3d.c:1527
+#: plot3d.cpp:1519
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr ""
 
-#: plot3d.c:1936
+#: plot3d.cpp:1928
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.c:1940 plot3d.c:1947
+#: plot3d.cpp:1932 plot3d.cpp:1939
 #, c-format
 msgid "missing '%s' values"
 msgstr ""
 
-#: plot3d.c:1942 plot3d.c:1949
+#: plot3d.cpp:1934 plot3d.cpp:1941
 #, c-format
 msgid "increasing '%s' values expected"
 msgstr ""
 
-#: plot3d.c:1954
+#: plot3d.cpp:1946
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.c:1967
+#: plot3d.cpp:1959
 msgid "all 'z' values are equal"
 msgstr ""
 
-#: plot3d.c:1969
+#: plot3d.cpp:1961
 msgid "all 'z' values are NA"
 msgstr ""
 
-#: stem.c:102
+#: stem.cpp:103
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
 msgstr ""
 
-#: stem.c:106
+#: stem.cpp:107
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -554,7 +556,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.c:108
+#: stem.cpp:109
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -565,15 +567,15 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.c:146
+#: stem.cpp:147
 msgid "invalid input"
 msgstr ""
 
-#: stem.c:149
+#: stem.cpp:150
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr ""
 
-#: stem.c:188
+#: stem.cpp:188
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-21 15:46\n"
+"POT-Creation-Date: 2020-07-23 12:00\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -345,6 +345,11 @@ msgstr ""
 #, fuzzy
 msgid "*** someone has corrupted the Built field in package %s ***"
 msgstr "*** qualcuno ha danneggiato il campo Builr nel pacchetto '%s' ***"
+
+#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
+#: R/QC.R:0
+msgid ","
+msgstr ""
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
@@ -2318,7 +2323,7 @@ msgstr ""
 msgid "Mismatches in argument names:"
 msgstr ""
 
-#. R/QC.R: gettextf("Missing link or links in documentation object %s:", sQuote(names(xx)[i]),     domain = "R-tools")
+#. R/QC.R: gettextf("Missing link or links in documentation object %s:", sQuote(names(xb)[i]),     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Missing link or links in documentation object %s:"
@@ -2613,6 +2618,12 @@ msgstr ""
 #: R/check.R:0
 msgid "Non-Windows OSes require LF line endings."
 msgstr ""
+
+#. R/QC.R: gettextf("Non-file package-anchored link(s) in documentation object '%s':", names(xs)[i],     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-file package-anchored link(s) in documentation object '%s':"
+msgstr "Errore di sintassi nella documentazione dell'oggetto '%s':"
 
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
@@ -3501,6 +3512,11 @@ msgstr ""
 #. R/Rprof.R: gettext("Self seconds: time spent in function alone.", domain = "R-tools")
 #: R/Rprof.R:0
 msgid "Self seconds: time spent in function alone."
+msgstr ""
+
+#. R/check.R: gettext("Skipping vignette re-building", domain = "R-tools")
+#: R/check.R:0
+msgid "Skipping vignette re-building"
 msgstr ""
 
 #. R/QC.R: gettextf("Slots for class %s", dQuote(docObj[["name"]]), domain = "R-tools")
@@ -5546,12 +5562,6 @@ msgstr ""
 msgid "file EXISTS but is not of correct format"
 msgstr ""
 
-#. R/Rd2HTML.R: gettextf("file link %s in package %s does not exist and so has been treated as a topic",     sQuote(parts$targetfile), sQuote(parts$pkg))
-#: R/Rd2HTML.R:0
-msgid ""
-"file link %s in package %s does not exist and so has been treated as a topic"
-msgstr ""
-
 #. R/testing.R: gettext("files differ in number of lines", domain = "R-tools")
 #: R/testing.R:0
 msgid "files differ in number of lines"
@@ -5721,6 +5731,13 @@ msgstr "non può essere usato per il pacchetto 'base'"
 #. R/utils.R: stop("invalid package layout")
 #: R/utils.R:0
 msgid "invalid package layout"
+msgstr ""
+
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#: R/install.R:0
+msgid "invalid value %s for R_CROSS_BUILD"
 msgstr ""
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
@@ -5911,13 +5928,6 @@ msgstr ""
 #. R/install.R: gettextf("package %s %s was found, but %s %s is required by %s", sQuote(p), current,     z$op, target, sQuote(pkgname))
 #: R/install.R:0
 msgid "package %s %s was found, but %s %s is required by %s"
-msgstr ""
-
-#. R/QC.R: gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked",     sQuote(pkg))
-#: R/QC.R:0
-msgid ""
-"package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be "
-"checked"
 msgstr ""
 
 #. R/install.R: gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkg_name))
@@ -7293,13 +7303,16 @@ msgid_plural "Missing or unexported objects: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:",     domain = "R-tools")
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:")
 #: R/QC.R:0
-#, fuzzy
-msgid "Namespace dependency not required:"
-msgid_plural "Namespace dependencies not required:"
-msgstr[0] "file '%s' non trovato"
-msgstr[1] "file '%s' non trovato"
+msgid ""
+"Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends "
+"entries:"
+msgid_plural ""
+"Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends "
+"entries:"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/QC.R: ngettext(length(xx), "Namespace in Imports field not imported from: %s\nAll declared Imports should be used.",     "Namespaces in Imports field not imported from: %s\nAll declared Imports should be used.",     domain = "R-tools")
 #: R/QC.R:0
@@ -7582,6 +7595,13 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs",     domain = "R-tools")
+#: R/QC.R:0
+msgid "Undeclared package %s in Rd xrefs"
+msgid_plural "Undeclared packages %s in Rd xrefs"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/QC.R: ngettext(length(zz), "Undeclared package in foreign function calls:", "Undeclared packages in foreign function calls:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Undeclared package in foreign function calls:"
@@ -7820,6 +7840,12 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossibile creare '%s'"
 msgstr[1] "impossibile creare '%s'"
+
+#, fuzzy
+#~ msgid "Namespace dependency not required:"
+#~ msgid_plural "Namespace dependencies not required:"
+#~ msgstr[0] "file '%s' non trovato"
+#~ msgstr[1] "file '%s' non trovato"
 
 #, fuzzy
 #~ msgid "%s file wast not found"
@@ -8117,10 +8143,6 @@ msgstr[1] "impossibile creare '%s'"
 #, fuzzy
 #~ msgid "... done"
 #~ msgstr "fatto"
-
-#, fuzzy
-#~ msgid "Suspect link(s) in documentation object '%s':"
-#~ msgstr "Errore di sintassi nella documentazione dell'oggetto '%s':"
 
 #, fuzzy
 #~ msgid "No package of named %s could be found"

@@ -133,7 +133,7 @@ void R_setupHistory()
 	R_HistoryFile = (char *) ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
-	value = (int) R_Decode2Long(p, &ierr);
+	value = (int) R_Decode2Long(p, ierr);
 	if (ierr != 0 || value < 0)
 	    R_ShowMessage(_("WARNING: invalid R_HISTSIZE ignored;"));
 	else

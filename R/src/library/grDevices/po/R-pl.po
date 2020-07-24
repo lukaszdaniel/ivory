@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -100,7 +100,7 @@ msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr "argument 'gamma' musi być liczbą lub wartością 'sRGB'"
 
-#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
 msgstr "'n' ustawiono na %s, maksymalna wartość dostępna dla palety %s"
@@ -234,6 +234,14 @@ msgstr "program 'GhostScript' nie został znaleziony"
 msgid "Index"
 msgstr "Indeks"
 
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid 'extend' value"
+msgstr "niepoprawny argument '%s'"
+
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
@@ -243,6 +251,17 @@ msgstr "Niepoprawna nazwa bazy danych czcionek"
 #: R/postscript.R:0
 msgid "Invalid font type"
 msgstr "Niepoprawny typ czcionki"
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid pattern type"
+msgstr "Niepoprawny typ czcionki"
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
+msgstr ""
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
 #: R/convertColor.R:0
@@ -796,10 +815,6 @@ msgstr[2] "niepoprawne nazwy argumentów %s w '%s'"
 #, fuzzy
 #~ msgid "invalid 'names' vector"
 #~ msgstr "niepoprawna wartość 'filename'"
-
-#, fuzzy
-#~ msgid "invalid '%s' value"
-#~ msgstr "niepoprawny argument '%s'"
 
 #, fuzzy
 #~ msgid "invalid RGB specification"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 15:46+0200\n"
+"POT-Creation-Date: 2020-07-23 12:01+0200\n"
 "PO-Revision-Date: 2018-04-16 18:50+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -22,265 +22,267 @@ msgstr ""
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: io.c:319 io.c:323 io.c:333 io.c:563 io.c:763 io.c:816 io.c:830 io.c:834
-#: io.c:840 io.c:841 io.c:1082 io.c:1083 io.c:1085 io.c:1086 io.c:1087
-#: io.c:1088 io.c:1089 io.c:1090 stubs.c:39 stubs.c:59 windows/dialogs.c:169
-#: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
-#: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:79
-#: windows/widgets.c:82 windows/widgets.c:87
+#: io.cpp:320 io.cpp:324 io.cpp:334 io.cpp:562 io.cpp:761 io.cpp:813 io.cpp:827
+#: io.cpp:831 io.cpp:837 io.cpp:838 io.cpp:1079 io.cpp:1080 io.cpp:1082
+#: io.cpp:1083 io.cpp:1084 io.cpp:1085 io.cpp:1086 io.cpp:1087 stubs.cpp:39
+#: stubs.cpp:59 windows/dialogs.cpp:169 windows/dialogs.cpp:194
+#: windows/dialogs.cpp:197 windows/dialogs.cpp:241 windows/dialogs.cpp:278
+#: windows/dialogs.cpp:289 windows/dialogs.cpp:313 windows/dialogs.cpp:321
+#: windows/util.cpp:121 windows/widgets.cpp:79 windows/widgets.cpp:82
+#: windows/widgets.cpp:87
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: io.c:342 io.c:827
+#: io.cpp:343 io.cpp:824
 msgid "invalid quote symbol set"
 msgstr "неправильная установка символа кавычек"
 
-#: io.c:354 io.c:850 io.c:1070
+#: io.cpp:355 io.cpp:847 io.cpp:1067
 msgid "cannot open the connection"
 msgstr "не могу открыть соединение"
 
-#: io.c:357 io.c:361
+#: io.cpp:358 io.cpp:362
 msgid "cannot read from this connection"
 msgstr "не могу прочитать из соединения"
 
-#: io.c:408 io.c:426
+#: io.cpp:409 io.cpp:427
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "закавыченная подстрока строки %d заканчивается EOF"
 
-#: io.c:559
+#: io.cpp:558
 msgid "the first argument must be of mode character"
 msgstr "первый аргумент должен быть текстовым"
 
-#: io.c:589
+#: io.cpp:588
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "неправильная строка 'numerals': \"%s\""
 
-#: io.c:765
+#: io.cpp:763
 #, c-format
 msgid "Selection: "
 msgstr "Выбор:"
 
-#: io.c:860 io.c:875
+#: io.cpp:857 io.cpp:872
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "не могу разместить буфер в 'readTableHead'"
 
-#: io.c:888
+#: io.cpp:885
 msgid "\\ followed by EOF"
 msgstr "\\ завершается EOF"
 
-#: io.c:927
+#: io.cpp:924
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.c:940 io.c:944
+#: io.cpp:937 io.cpp:941
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "readTableHeader нашел неполную последнюю строку в '%s'"
 
-#: io.c:1001
+#: io.cpp:997
 msgid "index out of range"
 msgstr "индекс вне пределов"
 
-#: io.c:1038
+#: io.cpp:1035
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.c:1040
+#: io.cpp:1037
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "'file' -- это не соединение"
 
-#: io.c:1063
+#: io.cpp:1060
 msgid "'file' argument is not a connection"
 msgstr "'file' -- это не соединение"
 
-#: io.c:1066
+#: io.cpp:1063
 msgid "cannot write to this connection"
 msgstr "не могу писать в это соединение"
 
-#: io.c:1096
+#: io.cpp:1093
 msgid "'dec' argument must be a single character"
 msgstr "'dec' должен быть одним символом"
 
-#: io.c:1122
+#: io.cpp:1117
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
 
-#: io.c:1150
+#: io.cpp:1145
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "колонка %s считает себя фактором, но у нее нет числовых кодов"
 
-#: io.c:1167
+#: io.cpp:1162
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "поврежденная матрица -- длины измерений не сходятся"
 
-#: stubs.c:48
+#: stubs.cpp:48
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' можно использовать только в Rgui и Rterm"
 
-#: stubs.c:65
+#: stubs.cpp:65
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' можно использовать только Rgui и Rterm"
 
-#: stubs.c:77
+#: stubs.cpp:77
 msgid "invalid timestamp"
 msgstr "неправильная дата и время"
 
-#: stubs.c:143 stubs.c:151
+#: stubs.cpp:143 stubs.cpp:151
 msgid "X11 dataentry cannot be loaded"
 msgstr "таблицу X11 нельзя загрузить"
 
-#: stubs.c:147 stubs.c:176 stubs.c:182
+#: stubs.cpp:147 stubs.cpp:176 stubs.cpp:182
 msgid "X11 is not available"
 msgstr "X11 недоступна"
 
-#: stubs.c:240 stubs.c:243
+#: stubs.cpp:240 stubs.cpp:243
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "неправильное определение '%s'"
 
-#: stubs.c:246
+#: stubs.cpp:246
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:63 windows/util.c:404 windows/util.c:413 windows/widgets.c:183
-#: windows/widgets.c:189 windows/widgets.c:251 windows/widgets.c:257
+#: utils.cpp:64 windows/util.cpp:408 windows/util.cpp:417
+#: windows/widgets.cpp:183 windows/widgets.cpp:189 windows/widgets.cpp:251
+#: windows/widgets.cpp:257
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'%s' должен быть текстовой строкой"
 
-#: utils.c:86
+#: utils.cpp:87
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' должно быть текстовым вектором длиной 1"
 
-#: utils.c:92
+#: utils.cpp:93
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "'nsl()' не смог разрешить хост '%s'"
 
-#: utils.c:99
+#: utils.cpp:100
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "'gethostbyname' вернула неправильный формат"
 
-#: utils.c:108
+#: utils.cpp:109
 msgid "'nsl()' is not supported on this platform"
 msgstr "'nsl()' не поддерживается на этой платформе"
 
-#: windows/dialogs.c:181
+#: windows/dialogs.cpp:181
 msgid "unknown type"
 msgstr "неизвестный тип"
 
-#: windows/dialogs.c:213 windows/dialogs.c:237 windows/dialogs.c:275
-#: windows/dialogs.c:310
+#: windows/dialogs.cpp:213 windows/dialogs.cpp:237 windows/dialogs.cpp:275
+#: windows/dialogs.cpp:310
 msgid "menu functions can only be used in the GUI"
 msgstr "функции меню можно использовать только в GUI"
 
-#: windows/dialogs.c:245
+#: windows/dialogs.cpp:245
 #, c-format
 msgid "unable to retrieve items for '%s' (%s)"
 msgstr "не могу получить элементы для '%s' (%s)"
 
-#: windows/dialogs.c:283
+#: windows/dialogs.cpp:283
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr "не могу добавить меню (%s)"
 
-#: windows/dialogs.c:295
+#: windows/dialogs.cpp:295
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr "не могу добавить элемент меню (%s)"
 
-#: windows/dialogs.c:318
+#: windows/dialogs.cpp:318
 msgid "menu does not exist"
 msgstr "меню не существует"
 
-#: windows/dialogs.c:325
+#: windows/dialogs.cpp:325
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr "не могу удалить элемент меню (%s)"
 
-#: windows/registry.c:73 windows/registry.c:248 windows/registry.c:251
-#: windows/registry.c:254
+#: windows/registry.cpp:72 windows/registry.cpp:247 windows/registry.cpp:250
+#: windows/registry.cpp:253
 #, c-format
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: windows/registry.c:177
+#: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
-#: windows/registry.c:266
+#: windows/registry.cpp:265
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Ключ реестра '%ls' не найден"
 
-#: windows/util.c:42
+#: windows/util.cpp:46
 msgid "unsupported version of Windows"
 msgstr "неподдерживаемая версия Windows"
 
-#: windows/util.c:281
+#: windows/util.cpp:285
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "аргумент должен быть текстовым вектором или простым вектором"
 
-#: windows/util.c:294
+#: windows/util.cpp:298
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
-#: windows/util.c:320
+#: windows/util.cpp:324
 msgid "unable to open the clipboard"
 msgstr "не могу открыть буфер обмена"
 
-#: windows/util.c:325
+#: windows/util.cpp:329
 msgid "unable to write to the clipboard"
 msgstr "не могу писать в буфер обмена"
 
-#: windows/util.c:452
+#: windows/util.cpp:456
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'%s' должен быть длиной 1"
 
-#: windows/util.c:565
+#: windows/util.cpp:569
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "'%s' должен быть списком"
 
-#: windows/util.c:569
+#: windows/util.cpp:573
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' элемент из %d -- не дескриптор окна"
 
-#: windows/widgets.c:109
+#: windows/widgets.cpp:109
 msgid "Select one or more"
 msgstr "Выберите один или больше"
 
-#: windows/widgets.c:109
+#: windows/widgets.cpp:109
 msgid "Select one"
 msgstr "Выберите один"
 
-#: windows/widgets.c:185 windows/widgets.c:253
+#: windows/widgets.cpp:185 windows/widgets.cpp:253
 msgid "'default' argument is overlong"
 msgstr "'default' слишком длинный"
 
-#: windows/widgets.c:191
+#: windows/widgets.cpp:191
 msgid "'multi' argument must be a logical value"
 msgstr "'multi' должен быть логическим"
 
-#: windows/widgets.c:193
+#: windows/widgets.cpp:193
 msgid "'filterindex' argument must be an integer value"
 msgstr "'filterindex' должен быть целочисленным"
 

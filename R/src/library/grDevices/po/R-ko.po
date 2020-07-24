@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2005-05-25 14:17+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -111,7 +111,7 @@ msgstr "'file'는 비어 있지 않은 문자열이 아니면 되지 않습니�
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr "'gamma'는 scalar 또는 'sRGB'가 나오지 않으면 되지 않습니다"
 
-#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
 msgstr ""
@@ -249,6 +249,14 @@ msgstr "디바이스 '%s'는 유효하지는 않습니다"
 msgid "Index"
 msgstr ""
 
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid 'extend' value"
+msgstr "부적절한 'family' 인수입니다"
+
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
@@ -257,6 +265,16 @@ msgstr ""
 #. R/postscript.R: stop("Invalid font type")
 #: R/postscript.R:0
 msgid "Invalid font type"
+msgstr ""
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+msgid "Invalid pattern type"
+msgstr ""
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
 msgstr ""
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")

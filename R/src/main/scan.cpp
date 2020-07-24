@@ -74,26 +74,29 @@ struct LocalData
 	int comchar;			  /* = NO_COMCHAR */
 	int ttyflag;			  /* = 0 */
 	Rconnection con;		  /* = nullptr */
-	Rboolean wasopen;		  /* = FALSE */
-	Rboolean escapes;		  /* = FALSE */
+	bool wasopen;			  /* = FALSE */
+	bool escapes;			  /* = FALSE */
 	int save;				  /* = 0; */
-	Rboolean isLatin1;		  /* = FALSE */
-	Rboolean isUTF8;		  /* = FALSE */
-	Rboolean atStart;
-	Rboolean embedWarn;
-	Rboolean skipNul;
+	bool isLatin1;			  /* = FALSE */
+	bool isUTF8;			  /* = FALSE */
+	bool atStart;
+	bool embedWarn;
+	bool skipNul;
 	char convbuf[100];
+	LocalData() : NAstrings(nullptr), quiet(0), sepchar(0), decchar('.'), quoteset(nullptr), comchar(NO_COMCHAR), ttyflag(0), con(nullptr),
+				  wasopen(false), escapes(false), save(0), isLatin1(false), isUTF8(false), atStart(false), embedWarn(false), skipNul(false) {}
+	~LocalData() {}
 };
 
-static SEXP insertString(char *str, LocalData *l)
+static SEXP insertString(char *str, LocalData &l)
 {
     cetype_t enc = CE_NATIVE;
-    if (l->con->UTF8out || l->isUTF8) enc = CE_UTF8;
-    else if (l->isLatin1) enc = CE_LATIN1;
+    if (l.con->UTF8out || l.isUTF8) enc = CE_UTF8;
+    else if (l.isLatin1) enc = CE_LATIN1;
     return Rf_mkCharCE(str, enc);
 }
 
-R_INLINE static bool Rspace(unsigned int c)
+inline static bool Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return true;
 #ifdef _WIN32
@@ -161,12 +164,12 @@ static int Strtoi(const char *nptr, int base)
     return (int) res;
 }
 
-static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData &d)
 {
-	return R_strtod4(nptr, endptr, d->decchar, NA);
+	return R_strtod4(nptr, endptr, d.decchar, NA);
 }
 
-static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData &d)
 {
     Rcomplex z;
     double x, y;
@@ -211,56 +214,56 @@ static Rbyte strtoraw(const char *nptr, char **endptr)
     return (Rbyte) val;
 }
 
-inline static int scanchar_raw(LocalData *d)
+inline static int scanchar_raw(LocalData &d)
 {
-    int c = (d->ttyflag) ? ConsoleGetcharWithPushBack(d->con) :
-	Rconn_fgetc(d->con);
+    int c = (d.ttyflag) ? ConsoleGetcharWithPushBack(d.con) :
+	Rconn_fgetc(d.con);
     if(c == 0) {
-	if(d->skipNul) {
+	if(d.skipNul) {
 	    do {
-		c = (d->ttyflag) ? ConsoleGetcharWithPushBack(d->con) :
-		    Rconn_fgetc(d->con);
+		c = (d.ttyflag) ? ConsoleGetcharWithPushBack(d.con) :
+		    Rconn_fgetc(d.con);
 	    } while(c == 0);
-	} else d->embedWarn = TRUE;
+	} else d.embedWarn = TRUE;
     }
     return c;
 }
 
-inline static void unscanchar(int c, LocalData *d)
+inline static void unscanchar(int c, LocalData &d)
 {
-	d->save = c;
+	d.save = c;
 }
 
 /* For second bytes in a DBCS:
    should not be called when a char is saved, but be cautious
 */
-inline static int scanchar2(LocalData *d)
+inline static int scanchar2(LocalData &d)
 {
 	int next;
-	if (d->save)
+	if (d.save)
 	{
-		next = d->save;
-		d->save = 0;
+		next = d.save;
+		d.save = 0;
 	}
 	else
 		next = scanchar_raw(d);
 	return next;
 }
 
-static int scanchar(Rboolean inQuote, LocalData *d)
+static int scanchar(bool inQuote, LocalData &d)
 {
     int next;
-    if (d->save) {
-	next = d->save;
-	d->save = 0;
+    if (d.save) {
+	next = d.save;
+	d.save = 0;
     } else
 	next = scanchar_raw(d);
-    if(next == d->comchar && !inQuote) {
+    if(next == d.comchar && !inQuote) {
 	do
 	    next = scanchar_raw(d);
 	while (next != '\n' && next != R_EOF);
     }
-    if(next == '\\' && d->escapes) {
+    if(next == '\\' && d.escapes) {
 	next = scanchar_raw(d);
 	if ('0' <= next && next <= '8') {
 	    int octal = next - '0';
@@ -297,7 +300,7 @@ static int scanchar(Rboolean inQuote, LocalData *d)
 		/* Any other char and even EOF escapes to itself, but we
 		   need to preserve \" etc inside quotes.
 		 */
-		if(inQuote && strchr(d->quoteset, next)) {
+		if(inQuote && strchr(d.quoteset, next)) {
 		    unscanchar(next, d);
 		    next = '\\';
 		}
@@ -325,8 +328,8 @@ static void scan_cleanup(void *data)
    what if this appends to the existing content. Appears it writes in
    directly at position 0.
  */
-static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
-	   R_StringBuffer *buffer)
+static char *fillBuffer(SEXPTYPE type, int strip, int &bch, LocalData &d,
+	   R_StringBuffer &buffer)
 {
 /* The basic reader function, called from scanVector() and scanFrame().
    Reads into _buffer_	which later will be read out by extractItem().
@@ -335,21 +338,21 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 */
     char *bufp;
     int c, quote, filled, nbuf = MAXELTSIZE, m, mm = 0;
-    Rboolean dbcslocale = (Rboolean) ((MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1);
+    bool dbcslocale = ((MB_CUR_MAX == 2) && !d.isUTF8 && !d.isLatin1);
 
     m = 0;
     filled = 1;
-    if (d->sepchar == 0) {
+    if (d.sepchar == 0) {
 	/* skip all space or tabs: only look at lead bytes here */
 	strip = 0; /* documented to be ignored in this case */
-	while ((c = scanchar(FALSE, d)) == ' ' || c == '\t') ;
+	while ((c = scanchar(false, d)) == ' ' || c == '\t') ;
 	if (c == '\n' || c == '\r' || c == R_EOF) {
 	    filled = c;
 	    goto donefill;
 	}
-	if ((type == STRSXP || type == NILSXP) && strchr(d->quoteset, c)) {
+	if ((type == STRSXP || type == NILSXP) && strchr(d.quoteset, c)) {
 	    quote = c;
-	    while ((c = scanchar(TRUE, d)) != R_EOF && c != quote) {
+	    while ((c = scanchar(true, d)) != R_EOF && c != quote) {
 		if (m >= nbuf - 3) {
 		    nbuf *= 2;
 		    R_AllocStringBuffer(nbuf, buffer);
@@ -357,17 +360,17 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 		if (c == '\\') {
 		    /* If this is an embedded quote, unquote it, but
 		       otherwise keep backslashes */
-		    c = scanchar(TRUE, d);
+		    c = scanchar(true, d);
 		    if (c == R_EOF) break;
-		    if(c != quote) buffer->data[m++] = '\\';
+		    if(c != quote) buffer.data[m++] = '\\';
 		}
-		buffer->data[m++] = (char) c;
+		buffer.data[m++] = (char) c;
 		if(dbcslocale && btowc(c) == WEOF)
-		    buffer->data[m++] = (char) scanchar2(d);
+		    buffer.data[m++] = (char) scanchar2(d);
 	    }
 	    if (c == R_EOF)
 		warning(_("EOF within quoted string"));
-	    c = scanchar(FALSE, d);
+	    c = scanchar(false, d);
 	    mm = m;
 	}
 	else { /* not a quoted char string */
@@ -376,59 +379,59 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 		    nbuf *= 2;
 		    R_AllocStringBuffer(nbuf, buffer);
 		}
-		buffer->data[m++] = (char) c;
+		buffer.data[m++] = (char) c;
 		if(dbcslocale && btowc(c) == WEOF)
-		    buffer->data[m++] = (char) scanchar2(d);
-		c = scanchar(FALSE, d);
+		    buffer.data[m++] = (char) scanchar2(d);
+		c = scanchar(false, d);
 	    } while (!Rspace(c) && c != R_EOF);
 	}
 	/* skip all space or tabs: only look at lead bytes here */
-	while (c == ' ' || c == '\t') c = scanchar(FALSE, d);
+	while (c == ' ' || c == '\t') c = scanchar(false, d);
 	if (c == '\n' || c == '\r' || c == R_EOF)
 	    filled = c;
 	else
 	    unscanchar(c, d);
     }
     else { /* have separator */
-	while ((c = scanchar(FALSE, d)) != d->sepchar &&
+	while ((c = scanchar(false, d)) != d.sepchar &&
 	       c != '\n' && c != '\r' && c != R_EOF)
 	    {
 		/* eat white space */
 		if (type != STRSXP)
 		    while (c == ' ' || c == '\t')
-			if ((c = scanchar(FALSE, d)) == d->sepchar
+			if ((c = scanchar(false, d)) == d.sepchar
 			    || c == '\n' || c == '\r' || c == R_EOF) {
 			    filled = c;
 			    goto donefill;
 			}
 		/* CSV style quoted string handling */
 		if ((type == STRSXP || type == NILSXP)
-		    && c != 0 && strchr(d->quoteset, c)) {
+		    && c != 0 && strchr(d.quoteset, c)) {
 		    quote = c;
 		inquote:
-		    while ((c = scanchar(TRUE, d)) != R_EOF && c != quote) {
+		    while ((c = scanchar(true, d)) != R_EOF && c != quote) {
 			if (m >= nbuf - 3) {
 			    nbuf *= 2;
 			    R_AllocStringBuffer(nbuf, buffer);
 			}
-			buffer->data[m++] = (char) c;
+			buffer.data[m++] = (char) c;
 			if(dbcslocale && btowc(c) == WEOF)
-			    buffer->data[m++] = (char) scanchar2(d);
+			    buffer.data[m++] = (char) scanchar2(d);
 		    }
 		    if (c == R_EOF)
 			warning(_("EOF within quoted string"));
-		    c = scanchar(TRUE, d); /* only peek at lead byte
+		    c = scanchar(true, d); /* only peek at lead byte
 					      unless ASCII */
 		    if (c == quote) {
 			if (m >= nbuf - 3) {
 			    nbuf *= 2;
 			    R_AllocStringBuffer(nbuf, buffer);
 			}
-			buffer->data[m++] = (char) quote;
+			buffer.data[m++] = (char) quote;
 			goto inquote; /* FIXME: Ick! Clean up logic */
 		    }
 		    mm = m;
-		    if (c == d->sepchar || c == '\n' || c == '\r' || c == R_EOF){
+		    if (c == d.sepchar || c == '\n' || c == '\r' || c == R_EOF){
 			filled = c;
 			goto donefill;
 		    }
@@ -442,53 +445,52 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 			nbuf *= 2;
 			R_AllocStringBuffer(nbuf, buffer);
 		    }
-		    buffer->data[m++] = (char) c;
+		    buffer.data[m++] = (char) c;
 		    if(dbcslocale && btowc(c) == WEOF)
-			buffer->data[m++] = (char) scanchar2(d);
+			buffer.data[m++] = (char) scanchar2(d);
 		}
 	    }
 	filled = c; /* last lead byte in a DBCS */
     }
  donefill:
     /* strip trailing white space, if desired and if item is non-null */
-    bufp = &buffer->data[m];
+    bufp = &buffer.data[m];
     if (strip && m > mm) {
 	do {c = (int)*--bufp;} while(m-- > mm && Rspace(c));
 	bufp++;
     }
     *bufp = '\0';
     /* Remove UTF-8 BOM */
-    if(d->atStart && utf8locale &&
-       streqln(buffer->data, "\xef\xbb\xbf", 3))
-	memmove(buffer->data, buffer->data+3, strlen(buffer->data) + 1);
-    d->atStart = FALSE;
-    *bch = filled;
-    return buffer->data;
+    if(d.atStart && utf8locale &&
+       streqln(buffer.data, "\xef\xbb\xbf", 3))
+	memmove(buffer.data, buffer.data+3, strlen(buffer.data) + 1);
+    d.atStart = FALSE;
+    bch = filled;
+    return buffer.data;
 }
 
 /* If mode = 0 use for numeric fields where "" is NA
    If mode = 1 use for character fields where "" is verbatim unless
    na.strings includes "" */
-R_INLINE static int isNAstring(const char *buf, int mode, LocalData *d)
+inline static int isNAstring(const char *buf, int mode, LocalData &d)
 {
-    int i;
 
     if(!mode && strlen(buf) == 0) return 1;
-    for (i = 0; i < length(d->NAstrings); i++)
-	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
+    for (int i = 0; i < length(d.NAstrings); i++)
+	if (streql(CHAR(STRING_ELT(d.NAstrings, i)), buf)) return 1;
     return 0;
 }
 
-R_INLINE static void expected(LocalData *d)
+inline static void expected(LocalData &d)
 {
     int c;
-    if (d->ttyflag) { /* This is safe in a MBCS */
-	while ((c = scanchar(FALSE, d)) != R_EOF && c != '\n')
+    if (d.ttyflag) { /* This is safe in a MBCS */
+	while ((c = scanchar(false, d)) != R_EOF && c != '\n')
 	    ;
     }
 }
 
-static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
+static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData &d)
 {
     char *endp;
     switch(TYPEOF(ans)) {
@@ -551,7 +553,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 }
 
 static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
-		       int flush, SEXP stripwhite, int blskip, LocalData *d)
+		       int flush, SEXP stripwhite, int blskip, LocalData &d)
 {
     SEXP ans, bns;
     int c, strip, bch;
@@ -562,12 +564,12 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     if (maxitems > 0) blocksize = maxitems;
     else blocksize = SCAN_BLOCKSIZE;
 
-    R_AllocStringBuffer(0, &strBuf);
+    R_AllocStringBuffer(0, strBuf);
     PROTECT(ans = allocVector(type, blocksize));
 
     nprev = 0; n = 0; linesread = 0; bch = 1;
 
-    if (d->ttyflag)
+    if (d.ttyflag)
 	snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, "1: ");
 
     strip = asLogical(stripwhite);
@@ -575,14 +577,14 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     while(true) {
 	if(n % 10000 == 9999) R_CheckUserInterrupt();
 	if (bch == R_EOF) {
-	    if (d->ttyflag) R_ClearerrConsole();
+	    if (d.ttyflag) R_ClearerrConsole();
 	    break;
 	}
 	else if (bch == '\n') {
 	    linesread++;
 	    if (linesread == maxlines)
 		break;
-	    if (d->ttyflag)
+	    if (d.ttyflag)
 		snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE,
 		         "%lld: ", (long long) (n + 1));
 	    nprev = n;
@@ -597,39 +599,39 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 	    PROTECT(ans);
 	    copyVector(ans, bns);
 	}
-	buffer = fillBuffer(type, strip, &bch, d, &strBuf);
+	buffer = fillBuffer(type, strip, bch, d, strBuf);
 	if (nprev == n && strlen(buffer)==0 &&
 	    ((blskip && bch =='\n') || bch == R_EOF)) {
-	    if (d->ttyflag || bch == R_EOF)
+	    if (d.ttyflag || bch == R_EOF)
 		break;
 	}
 	else {
 	    extractItem(buffer, ans, n, d);
 	    if (++n == maxitems) {
-		if (d->ttyflag && bch != '\n') { /* MBCS-safe */
-		    while ((c = scanchar(FALSE, d)) != '\n')
+		if (d.ttyflag && bch != '\n') { /* MBCS-safe */
+		    while ((c = scanchar(false, d)) != '\n')
 			;
 		}
 		break;
 	    }
 	}
 	if (flush && (bch != '\n') && (bch != R_EOF)) { /* MBCS-safe */
-	    while ((c = scanchar(FALSE, d)) != '\n' && (c != R_EOF));
+	    while ((c = scanchar(false, d)) != '\n' && (c != R_EOF));
 	    bch = c;
 	}
     }
-    if (!d->quiet)
+    if (!d.quiet)
 	REprintf(n_("Read %lld item\n", "Read %lld items\n", (long long) n), (long long) n );
-    if (d->ttyflag) ConsolePrompt[0] = '\0';
+    if (d.ttyflag) ConsolePrompt[0] = '\0';
 
     if (n == 0) {
 	UNPROTECT(1);
-	R_FreeStringBuffer(&strBuf);
+	R_FreeStringBuffer(strBuf);
 	return allocVector(type,0);
     }
     if (n == maxitems) {
 	UNPROTECT(1);
-	R_FreeStringBuffer(&strBuf);
+	R_FreeStringBuffer(strBuf);
 	return ans;
     }
 
@@ -660,14 +662,14 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 	UNIMPLEMENTED_TYPEt("scanVector()", type);
     }
     UNPROTECT(1);
-    R_FreeStringBuffer(&strBuf);
+    R_FreeStringBuffer(strBuf);
     return bns;
 }
 
 
 static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
                       int flush, int fill, SEXP stripwhite, int blskip,
-                      int multiline, LocalData *d)
+                      int multiline, LocalData &d)
 {
     SEXP ans, new_, old, w;
     char *buffer = nullptr;
@@ -685,7 +687,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     else if (maxlines > 0) blksize = maxlines;
     else blksize = SCAN_BLOCKSIZE;
 
-    R_AllocStringBuffer(0, &buf);
+    R_AllocStringBuffer(0, buf);
     PROTECT(ans = allocVector(VECSXP, nc));
     for (i = 0; i < nc; i++) {
 	w = VECTOR_ELT(what, i);
@@ -704,7 +706,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     bch = 1;
     c = 0;			/* -Wall */
 
-    if (d->ttyflag)
+    if (d.ttyflag)
 	snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, "1: ");
 
     // we checked its type in do_scan
@@ -716,7 +718,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	if(linesread % 1000 == 999) R_CheckUserInterrupt();
 
 	if (bch == R_EOF) {
-	    if (d->ttyflag) R_ClearerrConsole();
+	    if (d.ttyflag) R_ClearerrConsole();
 	    goto done;
 	}
 	else if (bch == '\n') {
@@ -740,7 +742,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 		goto done;
 	    if (maxlines > 0 && linesread == maxlines)
 		goto done;
-	    if (d->ttyflag)
+	    if (d.ttyflag)
 		snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE,
 		         "%lld: ", (long long) (n + 1));
 	}
@@ -758,11 +760,11 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	}
 
 	if (vec_strip) strip = lstrip[colsread];
-	buffer = fillBuffer(TYPEOF(VECTOR_ELT(ans, ii)), strip, &bch, d, &buf);
+	buffer = fillBuffer(TYPEOF(VECTOR_ELT(ans, ii)), strip, bch, d, buf);
 	if (colsread == 0 &&
 	    strlen(buffer) == 0 &&
 	    ((blskip && bch =='\n') || bch == R_EOF)) {
-	    if (d->ttyflag || bch == R_EOF)
+	    if (d.ttyflag || bch == R_EOF)
 		break;
 	}
 	else {
@@ -775,7 +777,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 		ii = 0;
 		colsread = 0;
 		if (flush && (bch != '\n') && (bch != R_EOF)) { /* MBCS-safe */
-		    while ((c = scanchar(FALSE, d)) != '\n' && c != R_EOF);
+		    while ((c = scanchar(false, d)) != '\n' && c != R_EOF);
 		    bch = c;
 		}
 	    }
@@ -792,9 +794,9 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	}
 	n++;
     }
-    if (!d->quiet)
+    if (!d.quiet)
 	REprintf(n_("Read %lld record\n", "Read %lld records\n", (long long) n), (long long) n);
-    if (d->ttyflag) ConsolePrompt[0] = '\0';
+    if (d.ttyflag) ConsolePrompt[0] = '\0';
 
     for (i = 0; i < nc; i++) {
 	old = VECTOR_ELT(ans, i);
@@ -829,7 +831,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	SET_VECTOR_ELT(ans, i, new_);
     }
     UNPROTECT(1);
-    R_FreeStringBuffer(&buf);
+    R_FreeStringBuffer(buf);
     return ans;
 }
 
@@ -840,8 +842,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
     RCNTXT cntxt;
-    LocalData data = {nullptr, 0, 0, '.', nullptr, NO_COMCHAR, 0, nullptr, FALSE,
-		      FALSE, 0, FALSE, FALSE, FALSE, FALSE, FALSE, {FALSE}};
+    LocalData data = LocalData();
     data.NAstrings = R_NilValue;
 
     checkArity(op, args);
@@ -954,7 +955,7 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("cannot read from this connection"));
 	}
 	for (R_xlen_t i = 0; i < nskip; i++) /* MBCS-safe */
-	    while ((c = scanchar(FALSE, &data)) != '\n' && c != R_EOF);
+	    while ((c = scanchar(false, data)) != '\n' && c != R_EOF);
     }
 
     ans = R_NilValue;		/* -Wall */
@@ -962,10 +963,8 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_GlobalContext->getCall(), R_BaseEnv,
-		 R_BaseEnv, R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&scan_cleanup);
-    cntxt.setContextEndData(&data);
+    cntxt.start(CTXT_CCODE, R_GlobalContext->getCall(), R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&scan_cleanup, &data);
 
     switch (TYPEOF(what)) {
     case LGLSXP:
@@ -975,18 +974,18 @@ HIDDEN SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     case STRSXP:
     case RAWSXP:
 	ans = scanVector(TYPEOF(what), nmax, nlines, flush, stripwhite,
-			 blskip, &data);
+			 blskip, data);
 	break;
 
     case VECSXP:
 	ans = scanFrame(what, nmax, nlines, flush, fill, stripwhite,
-			blskip, multiline, &data);
+			blskip, multiline, data);
 	break;
     default:
 	error(_("invalid '%s' argument"), "what");
     }
     PROTECT(ans);
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
 
     /* we might have a character that was unscanchar-ed.
        So pushback if possible */

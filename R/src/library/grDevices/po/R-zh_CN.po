@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2015-01-17 15:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -111,7 +111,7 @@ msgstr "'file'必需是非空字符串"
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
 msgstr "'gamma'的值要么是数量，要么是'sRGB'"
 
-#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
 msgstr ""
@@ -247,6 +247,14 @@ msgstr "没有'%s'这个装置"
 msgid "Index"
 msgstr ""
 
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid 'extend' value"
+msgstr "第一个参数不对"
+
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
@@ -256,6 +264,17 @@ msgstr "字体数据库名称不对"
 #: R/postscript.R:0
 msgid "Invalid font type"
 msgstr "字体种类不对"
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Invalid pattern type"
+msgstr "字体种类不对"
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
+msgstr ""
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
 #: R/convertColor.R:0

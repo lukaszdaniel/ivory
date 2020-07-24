@@ -374,10 +374,8 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("unable to start data editor"));
 
     /* set up a context which will close the window if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&closewin_cend);
-    cntxt.setContextEndData((void *) DE);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&closewin_cend, (void *) DE);
 
     highlightrect(DE);
 
@@ -385,7 +383,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     eventloop(DE);
 
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     closewin(DE);
     if(nView == 0) {
 	if(fdView >= 0) { /* might be open after viewers, but unlikely */
@@ -511,10 +509,8 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("unable to start data viewer"));
 
     /* set up a context which will close the window if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&dv_closewin_cend);
-    cntxt.setContextEndData((void *) DE);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&dv_closewin_cend, (void *) DE);
 
     highlightrect(DE);
 

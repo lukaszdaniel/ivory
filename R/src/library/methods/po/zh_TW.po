@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-07-23 12:02+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,22 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: class_support.c:30
+#: class_support.cpp:30
 msgid "calling the C routine used as an initializer for 'externalptr' objects"
 msgstr "呼叫 C 子程式給 'externalptr' 物件進行初始化"
 
-#: do_substitute_direct.c:41
+#: do_substitute_direct.cpp:41
 msgid "invalid list for substitution"
 msgstr "置換時用的串列發生錯誤"
 
-#: methods_list_dispatch.c:150
+#: methods_list_dispatch.cpp:128
+#, c-format
+msgid "unexpected type '%s' for condition message"
+msgstr ""
+
+#: methods_list_dispatch.cpp:131
+msgid "condition message must be length 1"
+msgstr ""
+
+#: methods_list_dispatch.cpp:212
 msgid ""
 "could not find the skeleton calls for 'methods' (package detached?): expect "
 "very bad things to happen"
 msgstr ""
 "沒有能夠為 'methods' 找到骨架呼叫(程式套件被拆離了？) ：接下去很可能會出大錯"
 
-#: methods_list_dispatch.c:216
+#: methods_list_dispatch.cpp:278
 #, fuzzy, c-format
 msgid ""
 "no 'allMethods' slot found in object of class \"%s\" used as methods list "
@@ -42,45 +51,45 @@ msgstr ""
 "當函式 '%2$s' 方法串列來用的，類別為 \"%1$s\" 的物件缺少 \"allMethods\" 這麼"
 "一個槽。"
 
-#: methods_list_dispatch.c:354
+#: methods_list_dispatch.cpp:401
 #, c-format
 msgid ""
-"S language method selection got an error when called from internal dispatch "
-"for function '%s'"
+"S language method selection did not return normally when called from "
+"internal dispatch for function '%s'"
 msgstr ""
 
-#: methods_list_dispatch.c:356
+#: methods_list_dispatch.cpp:403
 msgid "Function name for method selection called internally"
 msgstr ""
 
-#: methods_list_dispatch.c:390 methods_list_dispatch.c:411
+#: methods_list_dispatch.cpp:458 methods_list_dispatch.cpp:479
 msgid "The 'package' slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.c:423
+#: methods_list_dispatch.cpp:491
 msgid "The argument 'f' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.c:424
+#: methods_list_dispatch.cpp:492
 msgid "The argument 'package' passed to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.c:429
+#: methods_list_dispatch.cpp:497
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "沒有為 '%s' 找到適用的泛型函式"
 
-#: methods_list_dispatch.c:432
+#: methods_list_dispatch.cpp:500
 #, c-format
 msgid ""
 "no generic function definition found for '%s' in the supplied environment"
 msgstr "在提供的環境裡 '%s' 沒有同屬函式定義"
 
-#: methods_list_dispatch.c:453
+#: methods_list_dispatch.cpp:521
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.c:467
+#: methods_list_dispatch.cpp:535
 #, c-format
 msgid ""
 "invalid generic function object for method selection for function '%s': "
@@ -89,25 +98,25 @@ msgstr ""
 "函式 '%s' 方法選擇時其同屬函式物件發生錯誤：需要的是函式或原始函式，得到的卻"
 "是類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.c:482
+#: methods_list_dispatch.cpp:550
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "呼叫時找不到用於 '%s' 函式的直接或繼承的方法"
 
-#: methods_list_dispatch.c:512 methods_list_dispatch.c:1061
+#: methods_list_dispatch.cpp:580 methods_list_dispatch.cpp:1145
 msgid "invalid object (non-function) used as method"
 msgstr "當方法用的物件(非函式)發生錯誤"
 
-#: methods_list_dispatch.c:530
+#: methods_list_dispatch.cpp:598
 msgid "'symbol' must be a SYMSXP expression"
 msgstr ""
 
-#: methods_list_dispatch.c:533
+#: methods_list_dispatch.cpp:601
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "呼叫框裡找不到 '%s' 這個符號"
 
-#: methods_list_dispatch.c:541
+#: methods_list_dispatch.cpp:609
 #, c-format
 msgid ""
 "invalid symbol in checking for missing argument in method dispatch: expected "
@@ -116,18 +125,25 @@ msgstr ""
 "方法調度在檢查短少引數時符號發生錯誤：需要的是個名稱，得到的卻是類別為 \"%s"
 "\" 的物件"
 
-#: methods_list_dispatch.c:544
+#: methods_list_dispatch.cpp:612
 msgid "use of NULL environment is defunct"
 msgstr "NULL 環境不再有用"
 
-#: methods_list_dispatch.c:548
+#: methods_list_dispatch.cpp:616
 #, c-format
 msgid ""
 "invalid environment in checking for missing argument, '%s', in methods "
 "dispatch: got an object of class \"%s\""
 msgstr "方法調度在檢查短少引數 '%s' 時環境發生錯誤：不需要類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.c:574
+#: methods_list_dispatch.cpp:640
+#, c-format
+msgid ""
+"error in evaluating the argument '%s' in selecting a method for function "
+"'%s': %s"
+msgstr "在為 '%2$s' 函式選擇方法時評估 '%1$s' 引數發生錯誤: %3$s "
+
+#: methods_list_dispatch.cpp:657
 #, c-format
 msgid ""
 "object of class \"%s\" used as methods list for function '%s' ( no "
@@ -136,14 +152,14 @@ msgstr ""
 "函式 '%s' 裡不能把類別為 \"%s\" 的物件當作方法串列來用(沒有 'argument' 這樣一"
 "個槽)"
 
-#: methods_list_dispatch.c:585
+#: methods_list_dispatch.cpp:668
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') '...' and related variables cannot "
 "be used for methods dispatch"
 msgstr "(在為 '%s' 函式選擇方法時)'…' 和其他有關的變數不能在方法調度時使用"
 
-#: methods_list_dispatch.c:588
+#: methods_list_dispatch.cpp:671
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') the 'environment' argument for "
@@ -152,92 +168,84 @@ msgstr ""
 "(在為 '%s' 函式選擇方法時) 調度時的 'environment' 引數必須是 R 環境；不需要類"
 "別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.c:602 methods_list_dispatch.c:614
-#: methods_list_dispatch.c:1007
-#, c-format
-msgid ""
-"error in evaluating the argument '%s' in selecting a method for function "
-"'%s': %s"
-msgstr "在為 '%2$s' 函式選擇方法時評估 '%1$s' 引數發生錯誤: %3$s "
-
-#: methods_list_dispatch.c:622
+#: methods_list_dispatch.cpp:702
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr "找不到與 '%s' 函式符合的方法(引數是 '%s'，類別為 \"%s\")"
 
-#: methods_list_dispatch.c:629
+#: methods_list_dispatch.cpp:709
 #, c-format
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
 msgstr "在方法選擇時函式 '%s' 不能有無預設方法的遞迴使用"
 
-#: methods_list_dispatch.c:662
+#: methods_list_dispatch.cpp:734
+#, c-format
+msgid "error in evaluating a 'primitive' next method: %s"
+msgstr "評估 'primitive' 其次方法時發生錯誤: %s "
+
+#: methods_list_dispatch.cpp:757
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.c:700
-#, c-format
-msgid "error in evaluating a 'primitive' next method: %s"
-msgstr "評估 'primitive' 其次方法時發生錯誤: %s "
-
-#: methods_list_dispatch.c:800
+#: methods_list_dispatch.cpp:889
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr "'%s' 必須是單一字串(現在它是長度為 %d 的字元向量)"
 
-#: methods_list_dispatch.c:804
+#: methods_list_dispatch.cpp:893
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' 必須是非空字串；現在它是空的字串"
 
-#: methods_list_dispatch.c:808
+#: methods_list_dispatch.cpp:897
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' 必須是單一字串(現在它是類別為 \"%s\" 的物件)"
 
-#: methods_list_dispatch.c:841
+#: methods_list_dispatch.cpp:930
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:843
+#: methods_list_dispatch.cpp:932
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.c:845
+#: methods_list_dispatch.cpp:934
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:885
+#: methods_list_dispatch.cpp:974
 msgid "class should be either a character-string name or a class definition"
 msgstr "類別必須是字串名稱或類別定義"
 
-#: methods_list_dispatch.c:965
+#: methods_list_dispatch.cpp:1054
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "沒有能夠為原始 \"%s\" 找到同屬函式"
 
-#: methods_list_dispatch.c:972
+#: methods_list_dispatch.cpp:1061
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr "需要的是同屬函式或原始函式，現在得到的卻是類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.c:984
+#: methods_list_dispatch.cpp:1073
 #, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.c:988
+#: methods_list_dispatch.cpp:1077
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 
-#: utils.c:32
+#: utils.cpp:32
 msgid "'R_get_primname' called on a non-primitive"
 msgstr ""

@@ -852,7 +852,7 @@ void R_setupHistory(void)
 	R_HistoryFile = ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
-	value = R_Decode2Long(p, &ierr);
+	value = R_Decode2Long(p, ierr);
 	if (ierr != 0 || value < 0)
 	    R_ShowMessage("WARNING: invalid R_HISTSIZE ignored;");
 	else
@@ -1049,7 +1049,7 @@ int cmdlineoptions(int ac, char **av)
 
     char *q = getenv("R_MAX_MEM_SIZE");
     if (q && q[0]) {
-	value = R_Decode2Long(q, &ierr);
+	value = R_Decode2Long(q, ierr);
 	if(ierr || value < 32 * Mega || value > Virtual) {
 	    snprintf(s, 1024,
 		     _("WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"));
@@ -1089,7 +1089,7 @@ int cmdlineoptions(int ac, char **av)
 		    R_ShowMessage(_("WARNING: no max-mem-size given\n"));
 		    break;
 		}
-		value = R_Decode2Long(p, &ierr);
+		value = R_Decode2Long(p, ierr);
 		if(ierr) {
 		    if(ierr < 0)
 			snprintf(s, 1024,

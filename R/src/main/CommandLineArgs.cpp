@@ -213,7 +213,7 @@ void R_common_command_line(int *pac, char *argv[], Rstart Rp)
 		}
 		int ierr;
 		R_size_t value;
-		value = R_Decode2Long(p, &ierr);
+		value = R_Decode2Long(p, ierr);
 		if(ierr) {
 		    if(ierr < 0)
 			snprintf(msg, 1024,

@@ -83,33 +83,33 @@ using namespace std;
 constexpr int BUFSIZE = 8192;  /* used by Rprintf etc */
 
 HIDDEN
-R_size_t R_Decode2Long(char *p, int *ierr)
+R_size_t R_Decode2Long(char *p, int &ierr)
 {
     R_size_t v = strtol(p, &p, 10);
-    *ierr = 0;
+    ierr = 0;
     if(p[0] == '\0') return v;
     /* else look for letter-code ending : */
     if(R_Verbose)
 	REprintf("R_Decode2Long(): v=%ld\n", v);
     // NOTE: currently, positive *ierr are not differentiated in the callers:
     if(p[0] == 'G') {
-	if((Giga * (double)v) > (double) R_SIZE_T_MAX) { *ierr = 4; return(v); }
+	if((Giga * (double)v) > (double) R_SIZE_T_MAX) { ierr = 4; return(v); }
 	return (R_size_t) Giga * v;
     }
     else if(p[0] == 'M') {
-	if((Mega * (double)v) > (double) R_SIZE_T_MAX) { *ierr = 1; return(v); }
+	if((Mega * (double)v) > (double) R_SIZE_T_MAX) { ierr = 1; return(v); }
 	return (R_size_t) Mega * v;
     }
     else if(p[0] == 'K') {
-	if((1024 * (double)v) > (double) R_SIZE_T_MAX) { *ierr = 2; return(v); }
+	if((1024 * (double)v) > (double) R_SIZE_T_MAX) { ierr = 2; return(v); }
 	return (1024*v);
     }
     else if(p[0] == 'k') {
-	if((1000 * (double)v) > (double) R_SIZE_T_MAX) { *ierr = 3; return(v); }
+	if((1000 * (double)v) > (double) R_SIZE_T_MAX) { ierr = 3; return(v); }
 	return (1000*v);
     }
     else {
-	*ierr = -1;
+	ierr = -1;
 	return(v);
     }
 }
@@ -538,7 +538,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
        responsible for freeing it.  However, this is not thread-safe. */
 
     static R_StringBuffer gBuffer = {nullptr, 0, BUFSIZE};
-    R_StringBuffer *buffer = &gBuffer;
+    R_StringBuffer &buffer = gBuffer;
 
     if (s == NA_STRING) {
 	p = quote ? CHAR(R_print.na_string) : CHAR(R_print.na_string_noquote);
@@ -778,7 +778,7 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     *q = '\0';
 
     vmaxset(vmax);
-    return buffer->data;
+    return buffer.data;
 }
 
 /* EncodeElement is called by cat(), write.table() and deparsing. */
@@ -787,9 +787,10 @@ const char *Rf_EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
    alter there if you alter this */
 const char *Rf_EncodeElement(SEXP x, int indx, int quote, char cdec)
 {
-    char dec[2];
-    dec[0] = cdec; dec[1] = '\0';
-    return EncodeElement0(x, indx, quote, dec);
+	char dec[2];
+	dec[0] = cdec;
+	dec[1] = '\0';
+	return EncodeElement0(x, indx, quote, dec);
 }
 
 const char *Rf_EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)

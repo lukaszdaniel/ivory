@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-09 21:44\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -409,6 +409,11 @@ msgstr " 'x0', 'y0', 'x1', 'y1' は単位(units)でなければなりません "
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
+#. R/patterns.R: warning("Gradient fill applied to object with no inside")
+#: R/patterns.R:0
+msgid "Gradient fill applied to object with no inside"
+msgstr ""
+
 #. R/grob.R: stop("Invalid force target")
 #: R/grob.R:0
 #, fuzzy
@@ -420,6 +425,11 @@ msgstr " 不正な 'frame' です "
 #, fuzzy
 msgid "Invalid revert target"
 msgstr " 不正な viewport 名です "
+
+#. R/patterns.R: warning("Missing pattern fill has been set to transparent")
+#: R/patterns.R:0
+msgid "Missing pattern fill has been set to transparent"
+msgstr ""
 
 #. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)", newGrob$name, gPath)
 #: R/grob.R:0
@@ -585,6 +595,7 @@ msgstr " 'axis'中の 'at' のロケーション(location)が不正です "
 #. R/unit.R: gettextf("invalid '%s' value", "theta")
 #. R/viewport.R: gettextf("invalid '%s' value", "gp")
 #. R/viewport.R: gettextf("invalid '%s' value", "clip")
+#. R/viewport.R: gettextf("invalid '%s' value", "mask")
 #: R/gpar.R:0 R/grob.R:0 R/origin.R:0 R/unit.R:0 R/viewport.R:0
 #, fuzzy
 msgid "invalid '%s' value"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -254,6 +254,11 @@ msgstr "argument 'FUN' musi być funkcją lub wartością NULL"
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' posiada niepoprawną długość %d != kolumny = %d"
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr ""
 
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
 #: R/objects.R:0
@@ -2913,6 +2918,22 @@ msgstr "pakiety %s są wzajemnie zależne"
 msgid "parse error or empty option in %s"
 msgstr "błąd parsowania lub pusta opcja w %s"
 
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+msgid "path contains '..'"
+msgstr ""
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+#, fuzzy
+msgid "path is empty"
+msgstr "'dump' jest puste"
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 #: R/SweaveDrivers.R:0
 msgid "path to %s contains spaces, this may cause problems when running LaTeX"
@@ -2977,6 +2998,16 @@ msgstr "zarejestrowana metoda S3 dla %s"
 msgid "removing all entries with invalid multi-byte character data"
 msgstr ""
 "usuwanie wszystkich wpisów z niepoprawnymi danymi o wielobajtowych znakach"
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))

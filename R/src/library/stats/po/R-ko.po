@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2915,8 +2915,7 @@ msgstr ""
 msgid "See PORT documentation.  Code (%d)"
 msgstr ""
 
-#. R/acf.R: gettextf("Series %s", x$series)
-#. R/acf.R: gettextf("Series %s", seq_len(nser))
+#. R/acf.R: gettextf("Series %s", if (nser == 1L) x$series else seq_len(nser))
 #: R/acf.R:0
 msgid "Series %s"
 msgstr ""
@@ -4536,7 +4535,7 @@ msgstr "'init'의 길이는 반드시 'filter'의 길이와 같아야 합니다"
 msgid "length of 'p' must be 1 or equal the number of columns of 'x'"
 msgstr "'p'의 길이는 반드시 1이거나 'x'의 열의 개수와 같아야 합니다"
 
-#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, tmp_N)
+#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 #: R/glm.R:0
 msgid ""
 "length of 'start' should equal %d and correspond to initial coefs for %s"

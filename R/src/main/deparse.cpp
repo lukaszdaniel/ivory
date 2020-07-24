@@ -300,7 +300,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, int cutoff,
 	warning(_("deparse may be not be sourceable by 'source()' in R version less than 2.7.0"));
 #endif
     /* somewhere lower down might have allocated ... */
-    R_FreeStringBuffer(&(localData.buffer));
+    R_FreeStringBuffer(localData.buffer);
     UNPROTECT(1);
     return svec;
 }
@@ -389,7 +389,7 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (ifile != 1) {
 	Rconnection con = getConnection(ifile);
 	RCNTXT cntxt;
-	Rboolean wasopen = con->isopen;
+	bool wasopen = con->isopen;
 	if(!wasopen) {
 	    char mode[5];
 	    strcpy(mode, con->mode);
@@ -397,10 +397,8 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(!con->open(con)) error(_("cannot open the connection"));
 	    strcpy(con->mode, mode);
 	    /* Set up a context which will close the connection on error */
-	    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-			 R_NilValue, R_NilValue);
-	    cntxt.setContextEnd(&con_cleanup);
-	    cntxt.setContextEndData(con);
+	    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	    cntxt.setContextEnd(&con_cleanup, con);
 	}
 	if(!con->canwrite) error(_("cannot write to this connection"));
 	bool havewarned = false;
@@ -412,7 +410,7 @@ HIDDEN SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 		havewarned = true;
 	    }
 	}
-	if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
+	if(!wasopen) {cntxt.end(); con->close(con);}
     }
     else { // ifile == 1 : "Stdout"
 	for (int i = 0; i < LENGTH(tval); i++)
@@ -474,7 +472,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	else {
 	    Rconnection con = getConnection(INTEGER(file)[0]);
-	    Rboolean wasopen = con->isopen;
+	    bool wasopen = con->isopen;
 	    RCNTXT cntxt;
 	    if(!wasopen) {
 		char mode[5];
@@ -483,10 +481,8 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(!con->open(con)) error(_("cannot open the connection"));
 		strcpy(con->mode, mode);
 		/* Set up a context which will close the connection on error */
-		RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-			     R_NilValue, R_NilValue);
-		cntxt.setContextEnd(&con_cleanup);
-		cntxt.setContextEndData(con);
+		cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+		cntxt.setContextEnd(&con_cleanup, con);
 	    }
 	    if(!con->canwrite) error(_("cannot write to this connection"));
 	    bool havewarned = false;
@@ -519,7 +515,7 @@ HIDDEN SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 		if (!wasopen)
 		{
-			RCNTXT::endcontext(cntxt);
+			cntxt.end();
 			con->close(con);
 		}
 	}
@@ -1486,9 +1482,9 @@ static void print2buff(const char *strng, LocalParseData *d)
 	printtab2buff(d->indent, d);	/*if at the start of a line tab over */
     }
     tlen = strlen(strng);
-    R_AllocStringBuffer(0, &(d->buffer));
+    R_AllocStringBuffer(0, d->buffer);
     bufflen = strlen(d->buffer.data);
-    R_AllocStringBuffer(bufflen + tlen, &(d->buffer));
+    R_AllocStringBuffer(bufflen + tlen, d->buffer);
     strcat(d->buffer.data, strng);
     d->len += (int) tlen;
 }

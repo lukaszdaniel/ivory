@@ -182,7 +182,7 @@ void R_SizeFromEnv(Rstart Rp)
     char *p, msg[256];
 
     if ((p = getenv("R_MAX_VSIZE"))) {
-	value = R_Decode2Long(p, &ierr);
+	value = R_Decode2Long(p, ierr);
 	if(ierr != 0 || value > Max_Vsize)
 	    R_ShowMessage(_("WARNING: invalid R_MAX_VSIZE ignored\n"));
 	else if(value < Min_Vsize) {
@@ -208,7 +208,7 @@ void R_SizeFromEnv(Rstart Rp)
     }
 #endif
     if((p = getenv("R_VSIZE"))) {
-	value = R_Decode2Long(p, &ierr);
+	value = R_Decode2Long(p, ierr);
 	if(ierr != 0 || value > Max_Vsize)
 	    R_ShowMessage(_("WARNING: invalid 'R_VSIZE' ignored\n"));
 	else if(value < Min_Vsize) {
@@ -221,7 +221,7 @@ void R_SizeFromEnv(Rstart Rp)
 	    Rp->vsize = value;
     }
     if((p = getenv("R_NSIZE"))) {
-	value = R_Decode2Long(p, &ierr);
+	value = R_Decode2Long(p, ierr);
 	if(ierr != 0 || value > Max_Nsize)
 	    R_ShowMessage(_("WARNING: invalid 'R_NSIZE' ignored\n"));
 	else if(value < Min_Nsize) {

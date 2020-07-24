@@ -846,7 +846,7 @@ typedef enum Sortness
 SEXP (ATTRIB)(SEXP x);
 int  (OBJECT)(SEXP x);
 int  (MARK)(SEXP x);
-SEXPTYPE  (TYPEOF)(SEXP x);
+SEXPTYPE (TYPEOF)(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 int  (TRACKREFS)(SEXP x);

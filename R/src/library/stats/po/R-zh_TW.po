@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -2907,8 +2907,7 @@ msgstr ""
 msgid "See PORT documentation.  Code (%d)"
 msgstr ""
 
-#. R/acf.R: gettextf("Series %s", x$series)
-#. R/acf.R: gettextf("Series %s", seq_len(nser))
+#. R/acf.R: gettextf("Series %s", if (nser == 1L) x$series else seq_len(nser))
 #: R/acf.R:0
 msgid "Series %s"
 msgstr ""
@@ -4512,7 +4511,7 @@ msgstr "'init' 的長度必須等於 'filter' 的長度"
 msgid "length of 'p' must be 1 or equal the number of columns of 'x'"
 msgstr "'p' 的長度必須是零或等於 'x' 的行數"
 
-#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, tmp_N)
+#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 #: R/glm.R:0
 msgid ""
 "length of 'start' should equal %d and correspond to initial coefs for %s"

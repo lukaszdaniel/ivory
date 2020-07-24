@@ -213,7 +213,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	if (pwidth > R_INT_MAX)
 	    error(_("result would exceed 2^31-1 bytes"));
-	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
 	for (R_xlen_t j = 0; j < nx; j++) {
@@ -284,7 +284,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	pwidth += (nx - 1) * sepw;
 	if (pwidth > R_INT_MAX)
 	    error(_("result would exceed 2^31-1 bytes"));
-	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
 	for (R_xlen_t i = 0; i < nx; i++) {
@@ -316,7 +316,7 @@ HIDDEN SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(ans = allocVector(STRSXP, 1));
 	SET_STRING_ELT(ans, 0, mkCharCE(cbuf, ienc));
     }
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
     UNPROTECT(1);
     return ans;
 }
@@ -403,7 +403,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 		pwidth += (int) strlen(translateCharFP(cs));
 	}
 	pwidth += (nx - 1) * sepw;
-	char *buf = (char*) R_AllocStringBuffer(pwidth, &cbuff);
+	char *buf = (char*) R_AllocStringBuffer(pwidth, cbuff);
 	const char *cbuf = buf;
 	for (int j = 0; j < nx; j++) {
 	    int k = LENGTH(VECTOR_ELT(x, j));
@@ -433,7 +433,7 @@ HIDDEN SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 	SET_STRING_ELT(ans, i, mkCharCE(cbuf, use_UTF8 ? CE_UTF8 : CE_NATIVE));
     }
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
     UNPROTECT(1);
     return ans;
 }

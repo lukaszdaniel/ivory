@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 21:44+0100\n"
+"POT-Creation-Date: 2020-07-23 12:02+0200\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -18,155 +18,171 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: gpar.c:474
+#: gpar.cpp:524
 msgid "updateGContext must only be called after initGContext"
 msgstr ""
 
-#: grid.c:213
+#: grid.cpp:200
+msgid "Turning clipping on or off within a clipping path is no honoured"
+msgstr ""
+
+#: grid.cpp:242
 #, fuzzy
 msgid "cannot clip to rotated viewport"
 msgstr "Kan ikke klippe til roteret viewport"
 
-#: grid.c:519 grid.c:663
+#: grid.cpp:456
+msgid "Clipping paths within a clipping path are not honoured"
+msgstr ""
+
+#: grid.cpp:475
+msgid "Masks within a clipping path are not honoured"
+msgstr ""
+
+#: grid.cpp:700 grid.cpp:882
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#: grid.cpp:917 grid.cpp:922 grid.cpp:1041 grid.cpp:1046
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "Kan ikke pop topniveau-viewporten (gitter og grafiks uddata blandet?)"
 
-#: grid.c:980
+#: grid.cpp:1247
 msgid "attempt to plot on null device"
 msgstr "forsøg på at plotte på null-enhed"
 
-#: grid.c:1401
+#: grid.cpp:1694
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Der er ingen layout defineret"
 
-#: grid.c:1621
+#: grid.cpp:1914
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Polygonkant ikke fundet (nulbredde eller nulhøjde?)"
 
-#: grid.c:1630
+#: grid.cpp:1923
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Polygonkant ikke fundet"
 
-#: grid.c:1784
+#: grid.cpp:2077
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Kræver mindst to punkter at tegne pil"
 
-#: grid.c:2103
+#: grid.cpp:2400
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Ikkebegrænsende kontrolpunkter i Xspline"
 
-#: grid.c:2983
+#: grid.cpp:3325
 msgid "non-finite x or y in graphics path"
 msgstr "ikkebegrænsende x eller y i grafiksti"
 
-#: grid.c:3027
+#: grid.cpp:3375
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3510
+#: grid.cpp:3861
 msgid "invalid plotting symbol"
 msgstr "ugyldigt plotsymbol"
 
-#: grid.c:3598
+#: grid.cpp:3955
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Kan ikke klippe til roteret rektangel"
 
-#: layout.c:601 layout.c:605 unit.c:1546
+#: layout.cpp:601 layout.cpp:605 unit.cpp:1556
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "Ugyldig enhed"
 
-#: matrix.c:51
+#: matrix.cpp:51
 msgid "singular transformation matrix"
 msgstr "entalstransformationsmatrix"
 
-#: state.c:171
+#: state.cpp:183
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "Kan ikke lagre gittertilstand.  For mange enheder åbne?"
 
-#: unit.c:66
+#: unit.cpp:66
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.c:790 unit.c:1289
+#: unit.cpp:800 unit.cpp:1299
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "Illegal enhed eller enhed er endnu ikke implementeret"
 
-#: unit.c:1346 unit.c:1377
+#: unit.cpp:1356 unit.cpp:1387
 msgid "Viewport has zero dimensions"
 msgstr ""
 
-#: unit.c:1409 unit.c:1424 unit.c:1439 unit.c:1454
+#: unit.cpp:1419 unit.cpp:1434 unit.cpp:1449 unit.cpp:1464
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1561
+#: unit.cpp:1571
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "Enheder skal være tegn"
 
-#: unit.c:1564
+#: unit.cpp:1574
 #, fuzzy, c-format
 msgid "'%s' argument must be of length > 0"
 msgstr "Enheder skal have længde > 0"
 
-#: unit.c:1575
+#: unit.cpp:1585
 msgid ""
 "data must be either NULL, have length 1, or match the length of the final "
 "unit vector"
 msgstr ""
 
-#: unit.c:1587
+#: unit.cpp:1597
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.c:1591
+#: unit.cpp:1601
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.c:1609
+#: unit.cpp:1619
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.c:1614
+#: unit.cpp:1624
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.c:1667 unit.c:1701 unit.c:1750
+#: unit.cpp:1677 unit.cpp:1711 unit.cpp:1760
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.c:1673
+#: unit.cpp:1683
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.c:1699
+#: unit.cpp:1709
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.c:1831
+#: unit.cpp:1841
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
-#: util.c:274 util.c:286
+#: util.cpp:274 util.cpp:286
 msgid "grid grob object is empty"
 msgstr ""
 
-#: viewport.c:316
+#: viewport.cpp:57
+msgid "Mask is not logical value ('none' or 'inherit')"
+msgstr ""
+
+#: viewport.cpp:331
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Ikkebegrænsende placeirng og/eller størrelse for viewport"

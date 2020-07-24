@@ -134,7 +134,7 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	CHECK_maxlen;
 
-    outputString = (char*) R_AllocStringBuffer(0, &outbuff);
+    outputString = (char*) R_AllocStringBuffer(0, outbuff);
 
     /* We do the format analysis a row at a time */
     for(ns = 0; ns < maxlen; ns++) {
@@ -452,11 +452,11 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    if(ss) {
 		outputString = (char*) R_AllocStringBuffer(strlen(outputString) +
-						   strlen(ss) + 1, &outbuff);
+						   strlen(ss) + 1, outbuff);
 		strcat(outputString, ss);
 	    } else {
 		outputString = (char*) R_AllocStringBuffer(strlen(outputString) +
-						   strlen(bit) + 1, &outbuff);
+						   strlen(bit) + 1, outbuff);
 		strcat(outputString, bit);
 	    }
 	}  /* end for ( each chunk ) */
@@ -470,6 +470,6 @@ HIDDEN SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     } /* end for(ns ...) */
 
     UNPROTECT(nprotect);
-    R_FreeStringBufferL(&outbuff);
+    R_FreeStringBufferL(outbuff);
     return ans;
 }

@@ -158,18 +158,17 @@ static void onintrEx(Rboolean resumeOK)
 	SEXP rho = R_GlobalContext->workingEnvironment();
 	int dbflag = RDEBUG(rho);
 	RCNTXT restartcontext;
-	RCNTXT::begincontext(restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
-		     R_BaseEnv, R_NilValue, R_NilValue);
+	restartcontext.start(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	if (SETJMP(restartcontext.getCJmpBuf())) {
 	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
 	    R_ReturnedValue = R_NilValue;
 	    R_Visible = false;
-	    RCNTXT::endcontext(restartcontext);
+	    restartcontext.end();
 	    return;
 	}
 	RCNTXT::R_InsertRestartHandlers(&restartcontext, "resume");
 	signalInterrupt();
-	RCNTXT::endcontext(restartcontext);
+	restartcontext.end();
     }
     else signalInterrupt();
 
@@ -438,7 +437,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
 
     /* set up a context which will restore inWarning if there is an exit */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&reset_inWarning);
 
     inWarning = 1;
@@ -495,7 +494,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	}
     }
     /* else:  w <= -1 */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     inWarning = 0;
 }
 
@@ -560,7 +559,7 @@ void Rf_PrintWarnings(const char *hdr)
     }
 
     /* set up a context which will restore inPrintWarnings if there is an exit */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.start( CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.setContextEnd(&cleanup_PrintWarnings);
 
     inPrintWarnings = 1;
@@ -651,7 +650,7 @@ void Rf_PrintWarnings(const char *hdr)
     SET_SYMVALUE(install("last.warning"), s);
     UNPROTECT(2);
 
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
 
     inPrintWarnings = 0;
     R_CollectWarnings = 0;
@@ -740,9 +739,8 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     }
 
     /* set up a context to restore inError value on exit */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&restore_inError);
-    cntxt.setContextEndData(&oldInError);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&restore_inError, &oldInError);
     oldInError = inError;
     inError = 1;
 
@@ -844,7 +842,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
 
     /* not reached */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     inError = oldInError;
 }
 
@@ -952,10 +950,8 @@ static void jump_to_top_ex(Rboolean traceback,
     int haveHandler, oldInError;
 
     /* set up a context to restore inError value on exit */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&restore_inError);
-    cntxt.setContextEndData(&oldInError);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&restore_inError, &oldInError);
 
     oldInError = inError;
 

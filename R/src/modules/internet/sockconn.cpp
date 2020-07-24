@@ -71,12 +71,10 @@ static Rboolean sock_open(Rconnection con)
 		RCNTXT cntxt;
 
 		/* set up a context which will close socket on jump. */
-		RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv,
-			     R_BaseEnv, R_NilValue, R_NilValue);
-		cntxt.setContextEnd(&listencleanup);
-		cntxt.setContextEndData(&sock1);
+		cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+		cntxt.setContextEnd(&listencleanup, &sock1);
 		sock = R_SockListen(sock1, buf, 256, timeout); /* accept() */
-		RCNTXT::endcontext(cntxt);
+		cntxt.end();
 	    }
 	    R_SockClose(sock1);
 	    if(sock < 0) {

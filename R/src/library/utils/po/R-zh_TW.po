@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -263,6 +263,11 @@ msgstr "'FUN' 的值必須是函式或 NULL"
 #, fuzzy
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' 的長度不對 %d  ！= cols = %d "
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr ""
 
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
 #: R/objects.R:0
@@ -2869,6 +2874,23 @@ msgstr ""
 "解析發生錯誤或是\n"
 "%s 裡有空白的選項"
 
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+#, fuzzy
+msgid "path contains '..'"
+msgstr "參照 %s 的路徑裡不能有空格 ,"
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+#, fuzzy
+msgid "path is empty"
+msgstr "'dump' 是空的"
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 #: R/SweaveDrivers.R:0
 #, fuzzy
@@ -2930,6 +2952,16 @@ msgstr ""
 #: R/help.search.R:0
 msgid "removing all entries with invalid multi-byte character data"
 msgstr "刪除所有多字節字元資料發生錯誤的分錄"
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
@@ -3583,9 +3615,6 @@ msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
-
-#~ msgid "path to %s contains spaces,"
-#~ msgstr "參照 %s 的路徑裡不能有空格 ,"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "'filter' 引數無效"

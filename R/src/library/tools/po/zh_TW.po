@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 15:46+0200\n"
+"POT-Creation-Date: 2020-07-23 12:00+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,184 +18,184 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: Rmd5.c:47
+#: Rmd5.cpp:47
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "引數 'files' 必須是字元"
 
-#: Rmd5.c:63
+#: Rmd5.cpp:63
 #, fuzzy, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "用於 '%s' 檔案的 md5 執行失敗"
 
-#: Rmd5.c:65
+#: Rmd5.cpp:65
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "用於 '%s' 檔案的 md5 執行失敗"
 
-#: getfmts.c:53
+#: getfmts.cpp:55
 #, fuzzy, c-format
 msgid "only %d argument is allowed"
 msgid_plural "only %d arguments are allowed"
 msgstr[0] "只允許 %d 個引數"
 
-#: getfmts.c:58
+#: getfmts.cpp:60
 #, fuzzy, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' 不是字元向量"
 
-#: getfmts.c:61
+#: getfmts.cpp:63
 #, fuzzy, c-format
 msgid "'%s' argument must be length 1"
 msgstr "'fmt' 的長度必須為一"
 
-#: getfmts.c:67
+#: getfmts.cpp:69
 #, fuzzy, c-format
 msgid "length of '%s' argument exceeds maximal format length %d"
 msgstr "'fmt' 的長度超過了最大格式長度 %d"
 
-#: getfmts.c:88
+#: getfmts.cpp:90
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "不明的格式設定 '%s'"
 
-#: getfmts.c:128
+#: getfmts.cpp:130
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一個轉換設定最多只支援一個星 '*'"
 
-#: gramLatex.c:2341 gramRd.c:3694
+#: gramLatex.cpp:2435 gramRd.cpp:3792
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.c:2535 gramRd.c:4188
+#: gramLatex.cpp:2631 gramRd.cpp:4286
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.c:2578 gramRd.c:4240 gramRd.c:4246
+#: gramLatex.cpp:2674 gramRd.cpp:4338 gramRd.cpp:4344
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"
 
-#: gramRd.c:2315 gramRd.c:2318
+#: gramRd.cpp:2408 gramRd.cpp:2411
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "壞標記(額外的空間？)在 %s：%d：%d"
 
-#: gramRd.c:2843
+#: gramRd.cpp:2936
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "'%s' 巨集之前已經定義了"
 
-#: gramRd.c:2853
+#: gramRd.cpp:2946
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "使用者定義的巨集最多只允許四個引數"
 
-#: gramRd.c:2895
+#: gramRd.cpp:2988
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s' 巨集的定義沒有。"
 
-#: gramRd.c:2912 gramRd.c:2928
+#: gramRd.cpp:3005 gramRd.cpp:3021
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.c:2957
+#: gramRd.cpp:3050
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "使用者定義的巨集最多只允許四個引數"
 
-#: gramRd.c:3097 gramRd.c:3101
+#: gramRd.cpp:3190 gramRd.cpp:3194
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "出現了換列內引號的字串在 %s:%d"
 
-#: gramRd.c:3120
+#: gramRd.cpp:3217
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "無法為在第 %d 列的長巨集指派緩衝區"
 
-#: gramRd.c:3150
+#: gramRd.cpp:3249
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "巨集巢狀過深：無限遞迴？"
 
-#: gramRd.c:3556
+#: gramRd.cpp:3654
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "找不到巨集 %s "
 
-#: gramRd.c:3754
+#: gramRd.cpp:3852
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "意外結束輸入(在 %c 引號的字串於 %s:%d:%d)"
 
-#: gramRd.c:4253
+#: gramRd.cpp:4351
 msgid "cannot open the connection"
 msgstr "打不開鏈結"
 
-#: gramRd.c:4260
+#: gramRd.cpp:4356
 msgid "cannot read from this connection"
 msgstr "無法從這個鏈結讀取"
 
-#: gramRd.c:4268
+#: gramRd.cpp:4364
 msgid "invalid Rd file"
 msgstr "Rd 檔案無效"
 
-#: gramRd.c:4287
+#: gramRd.cpp:4383
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' 只支援反解析字元元素"
 
-#: gramRd.c:4290
+#: gramRd.cpp:4386
 msgid "bad state"
 msgstr "狀態不好"
 
-#: gramRd.c:4303
+#: gramRd.cpp:4399
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd' 裡的文字模式 %d 無效"
 
-#: http.c:32
+#: http.cpp:32
 msgid "invalid bind address specification"
 msgstr "繫結位址規範無效"
 
-#: install.c:105 install.c:124 install.c:126
+#: install.cpp:106 install.cpp:125 install.cpp:127
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數無效"
 
-#: install.c:155
+#: install.cpp:156
 msgid "write error during file append"
 msgstr "檔案附加寫入時發生錯誤"
 
-#: pdscan.c:68
+#: pdscan.cpp:68
 msgid "too many items"
 msgstr ""
 
-#: pdscan.c:116
+#: pdscan.cpp:116
 msgid "non-character argument"
 msgstr ""
 
-#: signals.c:43 signals.c:141
+#: signals.cpp:43 signals.cpp:141
 #, fuzzy, c-format
 msgid "'%s' function is not supported on this platform"
 msgstr "這個平臺不支援 psnice()"
 
-#: text.c:68
+#: text.cpp:67
 msgid "invalid argument type"
 msgstr "引數種類無效"
 
-#: text.c:159
+#: text.cpp:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:224 text.c:246
+#: text.cpp:224 text.cpp:246
 msgid "out of memory"
 msgstr "記憶體不足"
 
-#: text.c:266 text.c:268
+#: text.cpp:266 text.cpp:268
 msgid "first arg must be a single character string"
 msgstr ""
 

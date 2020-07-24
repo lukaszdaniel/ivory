@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2016-01-09 20:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2855,8 +2855,7 @@ msgstr ""
 msgid "See PORT documentation.  Code (%d)"
 msgstr ""
 
-#. R/acf.R: gettextf("Series %s", x$series)
-#. R/acf.R: gettextf("Series %s", seq_len(nser))
+#. R/acf.R: gettextf("Series %s", if (nser == 1L) x$series else seq_len(nser))
 #: R/acf.R:0
 msgid "Series %s"
 msgstr ""
@@ -4419,7 +4418,7 @@ msgstr "frekvens skal være en positivt heltal >= 2 for BSM"
 msgid "length of 'p' must be 1 or equal the number of columns of 'x'"
 msgstr ""
 
-#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, tmp_N)
+#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 #: R/glm.R:0
 msgid ""
 "length of 'start' should equal %d and correspond to initial coefs for %s"

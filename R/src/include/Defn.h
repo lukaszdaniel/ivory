@@ -641,8 +641,9 @@ class RCNTXT
     SEXP getReturnValue() const { return this->returnValue; }
     void setReturnValue(SEXP rv) { this->returnValue = rv; }
     void *getContextEndData() const {return this->cenddata; };
-    void setContextEndData(void *data) { cenddata = data; }
-    void setContextEnd(void (*cendf)(void *) ) { cend = cendf; }
+    void setContextEndData(void *data = nullptr) { cenddata = data; }
+    void setContextEnd(void (*cendf)(void *) = nullptr) { cend = cendf; }
+    void setContextEnd(void (*cendf)(void *), void *data) { cend = cendf; cenddata = data;}
     auto getContextEnd() { return (this->cend); }
     int& getCallFlag() { return this->callflag; }
     int getCallFlag() const { return this->callflag; }
@@ -699,9 +700,11 @@ class RCNTXT
     NORET void R_jumpctxt(int mask, SEXP val);
     SEXP R_sysframe(int n);
     int Rf_framedepth();
+    void start(int, SEXP, SEXP, SEXP, SEXP, SEXP);
     static void begincontext(RCNTXT &, int, SEXP, SEXP, SEXP, SEXP, SEXP);
     static void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
     static SEXP dynamicfindVar(SEXP, RCNTXT *);
+    void end();
     static void endcontext(RCNTXT &);
     static void endcontext(RCNTXT *);
     static void R_InsertRestartHandlers(RCNTXT *, const char *);
@@ -1348,11 +1351,11 @@ RETSIGTYPE Rf_onsigusr2(int);
 R_xlen_t Rf_OneIndex(SEXP, SEXP, R_xlen_t, int, SEXP*, int, SEXP);
 SEXP Rf_parse(FILE*, int);
 SEXP Rf_patchArgsByActuals(SEXP, SEXP, SEXP);
-void Rf_PrintInit(R_PrintData *, SEXP);
+void Rf_PrintInit(R_PrintData &data, SEXP env);
 void Rf_PrintDefaults(void);
 void Rf_PrintGreeting(void);
 void Rf_PrintValueEnv(SEXP, SEXP);
-void Rf_PrintValueRec(SEXP, R_PrintData *);
+void Rf_PrintValueRec(SEXP s, R_PrintData &data);
 void Rf_PrintVersion(char *, size_t len);
 void Rf_PrintVersion_part_1(char *, size_t len);
 void Rf_PrintVersionString(char *, size_t len);
@@ -1437,7 +1440,7 @@ R_size_t R_GetMaxVSize(void);
 void R_SetMaxVSize(R_size_t);
 R_size_t R_GetMaxNSize(void);
 void R_SetMaxNSize(R_size_t);
-R_size_t R_Decode2Long(char *p, int *ierr);
+R_size_t R_Decode2Long(char *p, int &ierr);
 void R_SetPPSize(R_size_t);
 
 void R_expand_binding_value(SEXP);

@@ -1562,8 +1562,7 @@ static bool RunFinalizers(void)
 	    /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
-	    RCNTXT::begincontext(thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
-			 R_BaseEnv, R_NilValue, R_NilValue);
+	    thiscontext.start(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
 	    PROTECT(topExp = R_CurrentExpr);
 	    savestack = R_PPStackTop;
@@ -1584,7 +1583,7 @@ static bool RunFinalizers(void)
 		    SET_WEAKREF_NEXT(last, next);
 		R_RunWeakRefFinalizer(s);
 	    }
-	    RCNTXT::endcontext(thiscontext);
+	    thiscontext.end();
 	    UNPROTECT(1); /* next */
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
@@ -3332,16 +3331,14 @@ NORET void R_signal_protect_error(void)
     RCNTXT cntxt;
     int oldpps = R_PPStackSize;
 
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&reset_pp_stack);
-    cntxt.setContextEndData(&oldpps);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&reset_pp_stack, &oldpps);
 
     if (R_PPStackSize < R_RealPPStackSize)
 	R_PPStackSize = R_RealPPStackSize;
     errorcall(R_NilValue, _("protect(): protection stack overflow"));
 
-    RCNTXT::endcontext(cntxt); /* not reached */
+    cntxt.end(); /* not reached */
 }
 
 NORET void R_signal_unprotect_error(void)
@@ -4610,48 +4607,55 @@ SEXP do_Rprofmem(SEXP args)
 
 void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 {
-    size_t blen1, bsize = buf->defaultSize;
+    return R_AllocStringBuffer(blen, *buf);
+}
+
+void *R_AllocStringBuffer(size_t blen, R_StringBuffer &buf)
+{
+    size_t blen1, bsize = buf.defaultSize;
 
     /* for backwards compatibility, this used to free the buffer */
     if(blen == (size_t)-1)
 	error(_("'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"));
 
-    if(blen * sizeof(char) < buf->bufsize) return buf->data;
+    if(blen * sizeof(char) < buf.bufsize) return buf.data;
     blen1 = blen = (blen + 1) * sizeof(char);
     blen = (blen / bsize) * bsize;
     if(blen < blen1) blen += bsize;
 
-    if(buf->data == nullptr) {
-	buf->data = (char *) malloc(blen);
-	if(buf->data)
-	    buf->data[0] = '\0';
+    if(buf.data == nullptr) {
+	buf.data = (char *) malloc(blen);
+	if(buf.data)
+	    buf.data[0] = '\0';
     } else
-	buf->data = (char *) realloc(buf->data, blen);
-    buf->bufsize = blen;
-    if(!buf->data) {
-	buf->bufsize = 0;
+	buf.data = (char *) realloc(buf.data, blen);
+    buf.bufsize = blen;
+    if(!buf.data) {
+	buf.bufsize = 0;
 	/* don't translate internal error message */
 	error(_("could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"),
 	      (unsigned int) blen/1024/1024);
     }
-    return buf->data;
+    return buf.data;
 }
 
-void R_FreeStringBuffer(R_StringBuffer *buf)
+void R_FreeStringBuffer(R_StringBuffer &buf)
 {
-    if (buf->data) {
-	free(buf->data);
-	buf->bufsize = 0;
-	buf->data = nullptr;
+    if (buf.data)
+    {
+        free(buf.data);
+        buf.bufsize = 0;
+        buf.data = nullptr;
     }
 }
 
-HIDDEN void R_FreeStringBufferL(R_StringBuffer *buf)
+HIDDEN void R_FreeStringBufferL(R_StringBuffer &buf)
 {
-    if (buf->bufsize > buf->defaultSize) {
-	free(buf->data);
-	buf->bufsize = 0;
-	buf->data = nullptr;
+    if (buf.bufsize > buf.defaultSize)
+    {
+        free(buf.data);
+        buf.bufsize = 0;
+        buf.data = nullptr;
     }
 }
 
@@ -4664,18 +4668,19 @@ HIDDEN bool Rf_Seql(SEXP a, SEXP b)
       we have two strings in different encodings (which must be
       non-ASCII strings). Note that one of the strings could be marked
       as unknown. */
-    if (a == b) return true;
+    if (a == b)
+        return true;
     /* Leave this to compiler to optimize */
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
-	return false;
-    else {
-	SEXP vmax = R_VStack;
-	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
-	R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
-	return result;
+        return false;
+    else
+    {
+        SEXP vmax = R_VStack;
+        bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
+        R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
+        return result;
     }
 }
-
 
 #ifdef LONG_VECTOR_SUPPORT
 NORET R_len_t R_BadLongVector(SEXP x, const char *file, int line)

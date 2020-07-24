@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-15 18:32+0200\n"
+"POT-Creation-Date: 2020-07-23 12:02+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,146 +18,162 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: gpar.c:474
+#: gpar.cpp:524
 msgid "updateGContext must only be called after initGContext"
 msgstr ""
 
-#: grid.c:213
+#: grid.cpp:200
+msgid "Turning clipping on or off within a clipping path is no honoured"
+msgstr ""
+
+#: grid.cpp:242
 msgid "cannot clip to rotated viewport"
 msgstr "無法修剪至旋轉的視窗中"
 
-#: grid.c:519 grid.c:663
+#: grid.cpp:456
+msgid "Clipping paths within a clipping path are not honoured"
+msgstr ""
+
+#: grid.cpp:475
+msgid "Masks within a clipping path are not honoured"
+msgstr ""
+
+#: grid.cpp:700 grid.cpp:882
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#: grid.cpp:917 grid.cpp:922 grid.cpp:1041 grid.cpp:1046
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "無法彈到最上層的視窗('grid' 和 'graphics' 輸出有混合？)"
 
-#: grid.c:980
+#: grid.cpp:1247
 msgid "attempt to plot on null device"
 msgstr "不能在無效裝置上畫圖"
 
-#: grid.c:1401
+#: grid.cpp:1694
 msgid "there is no layout defined"
 msgstr "需要設定版面設置"
 
-#: grid.c:1621
+#: grid.cpp:1914
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "找不到多邊形的邊(零寬度或是零高度？)"
 
-#: grid.c:1630
+#: grid.cpp:1923
 msgid "polygon edge not found"
 msgstr "找不到多邊形的邊"
 
-#: grid.c:1784
+#: grid.cpp:2077
 msgid "require at least two points to draw arrow"
 msgstr "至少需要兩點才能畫一個箭頭"
 
-#: grid.c:2103
+#: grid.cpp:2400
 msgid "non-finite control point in Xspline"
 msgstr "Xspline 裡不能有無限值的控制點"
 
-#: grid.c:2983
+#: grid.cpp:3325
 msgid "non-finite x or y in graphics path"
 msgstr "圖形路徑裡 x 或 y 的值非限定"
 
-#: grid.c:3027
+#: grid.cpp:3375
 msgid "Empty raster"
 msgstr "空的柵格"
 
-#: grid.c:3510
+#: grid.cpp:3861
 msgid "invalid plotting symbol"
 msgstr "圖畫符號值無效"
 
-#: grid.c:3598
+#: grid.cpp:3955
 msgid "unable to clip to rotated rectangle"
 msgstr "無法修剪到旋轉的長方形上"
 
-#: layout.c:601 layout.c:605 unit.c:1546
+#: layout.cpp:601 layout.cpp:605 unit.cpp:1556
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "單元無效"
 
-#: matrix.c:51
+#: matrix.cpp:51
 msgid "singular transformation matrix"
 msgstr "奇異轉換矩陣"
 
-#: state.c:171
+#: state.cpp:183
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "無法保留 'grid' 的狀況。是不是因為您開啟了太多的裝置？"
 
-#: unit.c:66
+#: unit.cpp:66
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.c:790 unit.c:1289
+#: unit.cpp:800 unit.cpp:1299
 msgid "invalid unit or unit not yet implemented"
 msgstr "要麼不明的單元，要麼這個單位目前沒有被實作"
 
-#: unit.c:1346 unit.c:1377
+#: unit.cpp:1356 unit.cpp:1387
 #, fuzzy
 msgid "Viewport has zero dimensions"
 msgstr "檢視區的維度不可為零"
 
-#: unit.c:1409 unit.c:1424 unit.c:1439 unit.c:1454
+#: unit.cpp:1419 unit.cpp:1434 unit.cpp:1449 unit.cpp:1464
 msgid "Unsupported unit conversion"
 msgstr "不支援的單元轉換"
 
-#: unit.c:1561
+#: unit.cpp:1571
 #, fuzzy, c-format
 msgid "'%s' argument must be character"
 msgstr "'units' 必須是字元"
 
-#: unit.c:1564
+#: unit.cpp:1574
 #, fuzzy, c-format
 msgid "'%s' argument must be of length > 0"
 msgstr "'units' 的長度必須大於零"
 
-#: unit.c:1575
+#: unit.cpp:1585
 msgid ""
 "data must be either NULL, have length 1, or match the length of the final "
 "unit vector"
 msgstr ""
 
-#: unit.c:1587
+#: unit.cpp:1597
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.c:1591
+#: unit.cpp:1601
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.c:1609
+#: unit.cpp:1619
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.c:1614
+#: unit.cpp:1624
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.c:1667 unit.c:1701 unit.c:1750
+#: unit.cpp:1677 unit.cpp:1711 unit.cpp:1760
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.c:1673
+#: unit.cpp:1683
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.c:1699
+#: unit.cpp:1709
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.c:1831
+#: unit.cpp:1841
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
-#: util.c:274 util.c:286
+#: util.cpp:274 util.cpp:286
 msgid "grid grob object is empty"
 msgstr ""
 
-#: viewport.c:316
+#: viewport.cpp:57
+msgid "Mask is not logical value ('none' or 'inherit')"
+msgstr ""
+
+#: viewport.cpp:331
 msgid "non-finite location and/or size for viewport"
 msgstr "檢視區的位置或大小不能是無限的"
 

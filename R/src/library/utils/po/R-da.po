@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: 2016-01-09 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -254,6 +254,11 @@ msgstr "»FUN« skal være en funktion eller NULL"
 #. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "'as.is' has the wrong length %d != cols = %d"
+msgstr ""
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr ""
 
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
@@ -2804,6 +2809,22 @@ msgstr ""
 "fortolkningsfejl eller tom indstilling i\n"
 "%s"
 
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+#, fuzzy
+msgid "path contains '..'"
+msgstr "sti til %s indeholder mellemrum."
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+msgid "path is empty"
+msgstr ""
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 #: R/SweaveDrivers.R:0
 #, fuzzy
@@ -2863,6 +2884,16 @@ msgstr ""
 #. R/help.search.R: warning("removing all entries with invalid multi-byte character data")
 #: R/help.search.R:0
 msgid "removing all entries with invalid multi-byte character data"
+msgstr ""
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
 msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
@@ -3596,9 +3627,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "is not portable"
 #~ msgstr "Filter »%s« er ikke tilgængelig."
-
-#~ msgid "path to %s contains spaces,"
-#~ msgstr "sti til %s indeholder mellemrum."
 
 #~ msgid "at least one field has to be specified"
 #~ msgstr "mindst et felt skal angives"

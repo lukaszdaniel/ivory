@@ -175,7 +175,7 @@ struct InputCtxtData
     SaveLoadData *data;
 };
 
-static SEXP DataLoad(FILE*, int startup, InputRoutines *m, int version, SaveLoadData *d);
+static SEXP DataLoad(FILE*, int startup, InputRoutines &m, int version, SaveLoadData *d);
 
 
 /* ----- D u m m y -- P l a c e h o l d e r -- R o u t i n e s ----- */
@@ -207,13 +207,16 @@ static int AsciiInInteger(FILE *fp, SaveLoadData *d)
 {
     int x, res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
-    if(res != 1) error(_("read error"));
+    if (res != 1)
+        error(_("read error"));
     if (streql(d->smbuf, "NA"))
-	return NA_INTEGER;
-    else {
-	res = sscanf(d->smbuf, "%d", &x);
-	if(res != 1) error(_("read error"));
-	return x;
+        return NA_INTEGER;
+    else
+    {
+        res = sscanf(d->smbuf, "%d", &x);
+        if (res != 1)
+            error(_("read error"));
+        return x;
     }
 }
 
@@ -221,16 +224,18 @@ static double AsciiInReal(FILE *fp, SaveLoadData *d)
 {
     double x;
     int res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
-    if(res != 1) error(_("read error"));
+    if (res != 1)
+        error(_("read error"));
     if (streql(d->smbuf, "NA"))
-	x = NA_REAL;
+        x = NA_REAL;
     else if (streql(d->smbuf, "Inf"))
-	x = R_PosInf;
+        x = R_PosInf;
     else if (streql(d->smbuf, "-Inf"))
-	x = R_NegInf;
+        x = R_NegInf;
     else
-	res  = sscanf(d->smbuf, "%lg", &x);
-    if(res != 1) error(_("read error"));
+        res = sscanf(d->smbuf, "%lg", &x);
+    if (res != 1)
+        error(_("read error"));
     return x;
 }
 
@@ -306,7 +311,7 @@ static SEXP AsciiLoad(FILE *fp, int startup, SaveLoadData *d)
     m.InComplex = AsciiInComplex;
     m.InString = AsciiInString;
     m.InTerm = DummyTerm;
-    return DataLoad(fp, startup, &m, 0, d);
+    return DataLoad(fp, startup, m, 0, d);
 }
 
 static SEXP AsciiLoadOld(FILE *fp, int version, int startup, SaveLoadData *d)
@@ -319,7 +324,7 @@ static SEXP AsciiLoadOld(FILE *fp, int version, int startup, SaveLoadData *d)
     m.InComplex = AsciiInComplex;
     m.InString = AsciiInString;
     m.InTerm = DummyTerm;
-    return DataLoad(fp, startup, &m, version, d);
+    return DataLoad(fp, startup, m, version, d);
 }
 
 /* ----- L o w l e v e l -- X D R -- I / O ----- */
@@ -344,22 +349,24 @@ static int XdrInInteger(FILE * fp, SaveLoadData *d)
     return i;
 }
 
-static double XdrInReal(FILE * fp, SaveLoadData *d)
+static double XdrInReal(FILE *fp, SaveLoadData *d)
 {
     double x;
-    if (!xdr_double(&d->xdrs, &x)) {
-	xdr_destroy(&d->xdrs);
-	error(_("a 'R' read error occurred"));
+    if (!xdr_double(&d->xdrs, &x))
+    {
+        xdr_destroy(&d->xdrs);
+        error(_("a 'R' read error occurred"));
     }
     return x;
 }
 
-static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
+static Rcomplex XdrInComplex(FILE *fp, SaveLoadData *d)
 {
     Rcomplex x;
-    if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i))) {
-	xdr_destroy(&d->xdrs);
-	error(_("a 'C' read error occurred"));
+    if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i)))
+    {
+        xdr_destroy(&d->xdrs);
+        error(_("a 'C' read error occurred"));
     }
     return x;
 }
@@ -367,9 +374,10 @@ static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
 static char *XdrInString(FILE *fp, SaveLoadData *d)
 {
     char *bufp = d->buffer.data;
-    if (!xdr_string(&d->xdrs, &bufp, (unsigned int)d->buffer.bufsize)) {
-	xdr_destroy(&d->xdrs);
-	error(_("a 'S' read error occurred"));
+    if (!xdr_string(&d->xdrs, &bufp, (unsigned int)d->buffer.bufsize))
+    {
+        xdr_destroy(&d->xdrs);
+        error(_("a 'S' read error occurred"));
     }
     return d->buffer.data;
 }
@@ -384,43 +392,42 @@ static SEXP XdrLoad(FILE *fp, int startup, SaveLoadData *d)
     m.InComplex = XdrInComplex;
     m.InString = XdrInString;
     m.InTerm = XdrInTerm;
-    return DataLoad(fp, startup, &m, 0, d);
+    return DataLoad(fp, startup, m, 0, d);
 }
-
 
 /* ----- L o w l e v e l -- B i n a r y -- I / O ----- */
 
-static int BinaryInInteger(FILE * fp, SaveLoadData *unused)
+static int BinaryInInteger(FILE *fp, SaveLoadData *unused)
 {
     int i;
     if (fread(&i, sizeof(int), 1, fp) != 1)
-	error(_("a read error occurred"));
+        error(_("a read error occurred"));
     return i;
 }
 
-static double BinaryInReal(FILE * fp, SaveLoadData *unused)
+static double BinaryInReal(FILE *fp, SaveLoadData *unused)
 {
     double x;
     if (fread(&x, sizeof(double), 1, fp) != 1)
-	error(_("a read error occurred"));
+        error(_("a read error occurred"));
     return x;
 }
 
-static Rcomplex BinaryInComplex(FILE * fp, SaveLoadData *unused)
+static Rcomplex BinaryInComplex(FILE *fp, SaveLoadData *unused)
 {
     Rcomplex x;
     if (fread(&x, sizeof(Rcomplex), 1, fp) != 1)
-	error(_("a read error occurred"));
+        error(_("a read error occurred"));
     return x;
 }
 
 static char *BinaryInString(FILE *fp, SaveLoadData *d)
 {
     char *bufp = d->buffer.data;
-    do {
-	*bufp = (char) R_fgetc(fp);
-    }
-    while (*bufp++);
+    do
+    {
+        *bufp = (char)R_fgetc(fp);
+    } while (*bufp++);
     return d->buffer.data;
 }
 
@@ -434,7 +441,7 @@ static SEXP BinaryLoad(FILE *fp, int startup, SaveLoadData *d)
     m.InComplex = BinaryInComplex;
     m.InString = BinaryInString;
     m.InTerm = DummyTerm;
-    return DataLoad(fp, startup, &m, 0, d);
+    return DataLoad(fp, startup, m, 0, d);
 }
 
 static SEXP BinaryLoadOld(FILE *fp, int version, int startup, SaveLoadData *d)
@@ -447,10 +454,10 @@ static SEXP BinaryLoadOld(FILE *fp, int version, int startup, SaveLoadData *d)
     m.InComplex = BinaryInComplex;
     m.InString = BinaryInString;
     m.InTerm = DummyTerm;
-    return DataLoad(fp, startup, &m, version, d);
+    return DataLoad(fp, startup, m, version, d);
 }
 
-static SEXP OffsetToNode(int offset, NodeInfo *node)
+static SEXP OffsetToNode(int offset, NodeInfo &node)
 {
     int l, m, r;
 
@@ -462,16 +469,16 @@ static SEXP OffsetToNode(int offset, NodeInfo *node)
     /* binary search for offset */
 
     l = 0;
-    r = node->NTotal - 1;
+    r = node.NTotal - 1;
     do {
 	m = (l + r) / 2;
-	if (offset < node->OldOffset[m])
+	if (offset < node.OldOffset[m])
 	    r = m - 1;
 	else
 	    l = m + 1;
     }
-    while (offset != node->OldOffset[m] && l <= r);
-    if (offset == node->OldOffset[m]) return VECTOR_ELT(node->NewAddress, m);
+    while (offset != node.OldOffset[m] && l <= r);
+    if (offset == node.OldOffset[m]) return VECTOR_ELT(node.NewAddress, m);
 
     /* Not supposed to happen: */
     warning(_("unresolved node during restore"));
@@ -506,20 +513,20 @@ static SEXPTYPE FixupType(unsigned int type, int VersionId)
     return (SEXPTYPE) type;
 }
 
-static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines *m, SaveLoadData *d)
+static void RemakeNextSEXP(FILE *fp, NodeInfo &node, int version, InputRoutines &m, SaveLoadData *d)
 {
     unsigned int idx;
     SEXPTYPE type;
     int len;
     SEXP s = R_NilValue;	/* -Wall */
 
-    idx = m->InInteger(fp, d);
-    type = FixupType(m->InInteger(fp, d), version);
+    idx = m.InInteger(fp, d);
+    type = FixupType(m.InInteger(fp, d), version);
 
     /* skip over OBJECT, LEVELS, and ATTRIB */
-    /* OBJECT(s) = */ m->InInteger(fp, d);
-    /* LEVELS(s) = */ m->InInteger(fp, d);
-    /* ATTRIB(s) = */ m->InInteger(fp, d);
+    /* OBJECT(s) = */ m.InInteger(fp, d);
+    /* LEVELS(s) = */ m.InInteger(fp, d);
+    /* ATTRIB(s) = */ m.InInteger(fp, d);
     switch (type) {
     case LISTSXP:
     case LANGSXP:
@@ -528,92 +535,92 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
     case ENVSXP:
 	s = allocSExp(type);
 	/* skip over CAR, CDR, and TAG */
-	/* CAR(s) = */ m->InInteger(fp, d);
-	/* CDR(s) = */ m->InInteger(fp, d);
-	/* TAG(s) = */ m->InInteger(fp, d);
+	/* CAR(s) = */ m.InInteger(fp, d);
+	/* CDR(s) = */ m.InInteger(fp, d);
+	/* TAG(s) = */ m.InInteger(fp, d);
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
 	s = allocSExp(type);
 	/* skip over length and name fields */
-	/* length = */ m->InInteger(fp, d);
-	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
-	/* name = */ m->InString(fp, d);
+	/* length = */ m.InInteger(fp, d);
+	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+	/* name = */ m.InString(fp, d);
 	break;
     case CHARSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	s = allocCharsxp(len); /* This is not longer correct */
-	R_AllocStringBuffer(len, &(d->buffer));
+	R_AllocStringBuffer(len, (d->buffer));
 	/* skip over the string */
-	/* string = */ m->InString(fp, d);
+	/* string = */ m.InString(fp, d);
 	break;
     case REALSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	s = allocVector(type, len);
 	/* skip over the vector content */
 	for (auto j = 0; j < len; j++)
-	    /*REAL(s)[j] = */ m->InReal(fp, d);
+	    /*REAL(s)[j] = */ m.InReal(fp, d);
 	break;
     case CPLXSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	s = allocVector(type, len);
 	/* skip over the vector content */
 	for (auto j = 0; j < len; j++)
-	    /* COMPLEX(s)[j] = */ m->InComplex(fp, d);
+	    /* COMPLEX(s)[j] = */ m.InComplex(fp, d);
 	break;
     case INTSXP:
     case LGLSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	s = allocVector(type, len);
 	/* skip over the vector content */
 	for (auto j = 0; j < len; j++)
-	    /* INTEGER(s)[j] = */ m->InInteger(fp, d);
+	    /* INTEGER(s)[j] = */ m.InInteger(fp, d);
 	break;
     case STRSXP:
     case VECSXP:
     case EXPRSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	s = allocVector(type, len);
 	/* skip over the vector content */
 	for (auto j = 0; j < len; j++) {
-	    /* VECTOR(s)[j] = */ m->InInteger(fp, d);
+	    /* VECTOR(s)[j] = */ m.InInteger(fp, d);
 	}
 	break;
     default: error(_("bad 'SEXP' type in data file"));
     }
 
     /* install the new SEXP */
-    SET_VECTOR_ELT(node->NewAddress, idx, s);
+    SET_VECTOR_ELT(node.NewAddress, idx, s);
 }
 
-static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int version, SaveLoadData *d)
+static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines &m, NodeInfo &node, int version, SaveLoadData *d)
 {
     SEXPTYPE type;
     int len;
 
-    type = FixupType(m->InInteger(fp, d), version);
+    type = FixupType(m.InInteger(fp, d), version);
     if (type != TYPEOF(s))
       error(_("mismatch on types"));
 
-    SET_OBJECT(s, m->InInteger(fp, d));
-    SETLEVELS(s, m->InInteger(fp, d));
-    SET_ATTRIB(s, OffsetToNode(m->InInteger(fp, d), node));
+    SET_OBJECT(s, m.InInteger(fp, d));
+    SETLEVELS(s, m.InInteger(fp, d));
+    SET_ATTRIB(s, OffsetToNode(m.InInteger(fp, d), node));
     switch (TYPEOF(s)) {
     case LISTSXP:
     case LANGSXP:
     case CLOSXP:
     case PROMSXP:
     case ENVSXP:
-	SETCAR(s, OffsetToNode(m->InInteger(fp, d), node));
-	SETCDR(s, OffsetToNode(m->InInteger(fp, d), node));
-	SET_TAG(s, OffsetToNode(m->InInteger(fp, d), node));
+	SETCAR(s, OffsetToNode(m.InInteger(fp, d), node));
+	SETCDR(s, OffsetToNode(m.InInteger(fp, d), node));
+	SET_TAG(s, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
     {
-        len = m->InInteger(fp, d);
-        R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
-        int index = StrToInternal(m->InString(fp, d));
+        len = m.InInteger(fp, d);
+        R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+        int index = StrToInternal(m.InString(fp, d));
         if (index == NA_INTEGER)
         {
             warning(_("unrecognized internal function name '%s'"), d->buffer.data);
@@ -623,37 +630,37 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
     }
     break;
     case CHARSXP:
-	len = m->InInteger(fp, d);
-	R_AllocStringBuffer(len, &(d->buffer));
+	len = m.InInteger(fp, d);
+	R_AllocStringBuffer(len, (d->buffer));
 	/* Better to use a fresh copy in the cache */
-	strcpy(CHAR_RW(s), m->InString(fp, d));
+	strcpy(CHAR_RW(s), m.InString(fp, d));
 	break;
     case REALSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
-	    REAL(s)[j] = m->InReal(fp, d);
+	    REAL(s)[j] = m.InReal(fp, d);
 	break;
     case CPLXSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
-	    COMPLEX(s)[j] = m->InComplex(fp, d);
+	    COMPLEX(s)[j] = m.InComplex(fp, d);
 	break;
     case INTSXP:
     case LGLSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
-	    INTEGER(s)[j] = m->InInteger(fp, d);
+	    INTEGER(s)[j] = m.InInteger(fp, d);
 	break;
     case STRSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
-	    SET_STRING_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
+	    SET_STRING_ELT(s, j, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     case VECSXP:
     case EXPRSXP:
-	len = m->InInteger(fp, d);
+	len = m.InInteger(fp, d);
 	for (auto j = 0; j < len; j++)
-	    SET_VECTOR_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
+	    SET_VECTOR_ELT(s, j, OffsetToNode(m.InInteger(fp, d), node));
 	break;
     default: error(_("bad 'SEXP' type in data file"));
     }
@@ -668,7 +675,7 @@ static void RestoreError(/* const */ char *msg, int startup)
 }
 
 /* used for pre-version 1 formats */
-static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
+static SEXP DataLoad(FILE *fp, int startup, InputRoutines &m,
 		     int version, SaveLoadData *d)
 {
     int i, j;
@@ -678,11 +685,11 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 
     /* read in the size information */
 
-    m->InInit(fp, d);
+    m.InInit(fp, d);
 
-    node.NSymbol = m->InInteger(fp, d);
-    node.NSave = m->InInteger(fp, d);
-    node.NVSize = m->InInteger(fp, d);
+    node.NSymbol = m.InInteger(fp, d);
+    node.NSave = m.InInteger(fp, d);
+    node.NVSize = m.InInteger(fp, d);
     node.NTotal = node.NSymbol + node.NSave;
 
     /* allocate the forwarding-address tables */
@@ -702,17 +709,17 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     /* computing the forwarding addresses */
 
     for (i = 0 ; i < node.NSymbol ; i++) {
-	j = m->InInteger(fp, d);
-	node.OldOffset[j] = m->InInteger(fp, d);
-	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
-	SET_VECTOR_ELT(node.NewAddress, j, install(m->InString(fp, d)));
+	j = m.InInteger(fp, d);
+	node.OldOffset[j] = m.InInteger(fp, d);
+	R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
+	SET_VECTOR_ELT(node.NewAddress, j, install(m.InString(fp, d)));
     }
 
     /* build the full forwarding table */
 
     for (i = 0 ; i < node.NSave ; i++) {
-	j = m->InInteger(fp, d);
-	node.OldOffset[j] = m->InInteger(fp, d);
+	j = m.InInteger(fp, d);
+	node.OldOffset[j] = m.InInteger(fp, d);
     }
 
 
@@ -725,7 +732,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     /* first pass: allocate nodes */
 
     for (i = 0 ; i < node.NSave ; i++) {
-	RemakeNextSEXP(fp, &node, version, m, d);
+	RemakeNextSEXP(fp, node, version, m, d);
     }
 
 
@@ -737,7 +744,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     /* second pass: restore the contents of the nodes */
 
     for (i = 0 ; i < node.NSave ;  i++) {
-	RestoreSEXP(VECTOR_ELT(node.NewAddress, m->InInteger(fp, d)), fp, m, &node, version, d);
+	RestoreSEXP(VECTOR_ELT(node.NewAddress, m.InInteger(fp, d)), fp, m, node, version, d);
     }
 
     /* restore the heap */
@@ -746,15 +753,15 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     UNPROTECT(1);
 
     /* clean the string buffer */
-    R_FreeStringBufferL(&(d->buffer));
+    R_FreeStringBufferL((d->buffer));
 
     /* return the "top-level" object */
     /* this is usually a list */
 
-    i = m->InInteger(fp, d);
-    m->InTerm(fp, d);
+    i = m.InInteger(fp, d);
+    m.InTerm(fp, d);
 
-    return OffsetToNode(i, &node);
+    return OffsetToNode(i, node);
 }
 
 
@@ -803,7 +810,7 @@ static SEXP NewLoadSpecialHook(int type)
     case -3: return R_UnboundValue;
     case -4: return R_MissingArg;
     }
-    return (SEXP) 0;	/* not strictly legal... */
+    return nullptr;	/* not strictly legal... */
 }
 
 
@@ -1132,10 +1139,8 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 
     m->OutInit(fp, d);
     /* set up a context which will call OutTerm if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&newdatasave_cleanup);
-    cntxt.setContextEndData(&cinfo);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&newdatasave_cleanup, &cinfo);
 
     m->OutInteger(fp, sym_count = HASH_TABLE_COUNT(sym_table), d); m->OutSpace(fp, 1, d);
     m->OutInteger(fp, env_count = HASH_TABLE_COUNT(env_table), d); m->OutNewline(fp, d);
@@ -1158,7 +1163,7 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 
     /* end the context after anything that could raise an error but before
        calling OutTerm so it doesn't get called twice */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
 
     m->OutTerm(fp, d);
     UNPROTECT(2);
@@ -1187,7 +1192,7 @@ static SEXP InCHARSXP(FILE *fp, InputRoutines *m, SaveLoadData *d)
      * sized strings get implemented in R's save/load code.  */
     tmp = m->InString(fp, d);
     len = strlen(tmp);
-    R_AllocStringBuffer(len, &(d->buffer));
+    R_AllocStringBuffer(len, (d->buffer));
     s = mkChar(tmp);
     return s;
 }
@@ -1278,7 +1283,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
     case SPECIALSXP:
     case BUILTINSXP:
     {
-        R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
+        R_AllocStringBuffer(MAXELTSIZE - 1, (d->buffer));
         int index = StrToInternal(m->InString(fp, d));
         if (index == NA_INTEGER)
         {
@@ -1329,10 +1334,8 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
     m->InInit(fp, d);
 
     /* set up a context which will call InTerm if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&newdataload_cleanup);
-    cntxt.setContextEndData(&cinfo);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&newdataload_cleanup, &cinfo);
 
     /* Read the table sizes */
     sym_count = m->InInteger(fp, d);
@@ -1364,7 +1367,7 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
 
     /* end the context after anything that could raise an error but before
        calling InTerm so it doesn't get called twice */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
 
     /* Wrap up */
     m->InTerm(fp, d);
@@ -1930,7 +1933,7 @@ HIDDEN void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
 
     /* different handling of errors */
 
-#define return_and_free(X) {r = X; R_FreeStringBuffer(&data.buffer); return r;}
+#define return_and_free(X) {r = X; R_FreeStringBuffer(data.buffer); return r;}
 HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
@@ -1969,7 +1972,7 @@ HIDDEN SEXP R_LoadFromFile(FILE *fp, int startup)
 	R_InitFileInPStream(&in, fp, R_pstream_xdr_format, nullptr, nullptr);
 	return_and_free(R_Unserialize(&in));
     default:
-	R_FreeStringBuffer(&data.buffer);
+	R_FreeStringBuffer(data.buffer);
 	switch (magic) {
 	case R_MAGIC_EMPTY:
 	    error(_("restore file may be empty -- no data loaded"));
@@ -2077,10 +2080,8 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* set up a context which will close the file if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&saveload_cleanup);
-    cntxt.setContextEndData(fp);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&saveload_cleanup, fp);
 
     len = length(CAR(args));
     PROTECT(s = allocList(len));
@@ -2104,7 +2105,7 @@ HIDDEN SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(1);
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     fclose(fp);
     return R_NilValue;
 }
@@ -2187,16 +2188,14 @@ HIDDEN SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp) error(_("unable to open file '%s'"), translateChar(STRING_ELT(fname, 0)));
 
     /* set up a context which will close the file if there is an error */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&saveload_cleanup);
-    cntxt.setContextEndData(fp);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&saveload_cleanup, fp);
 
     PROTECT(val = R_LoadSavedData(fp, aenv));
 
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     fclose(fp);
     UNPROTECT(1);
     return val;
@@ -2378,10 +2377,8 @@ HIDDEN SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, mode);
 	/* set up a context which will close the connection
 	   if there is an error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(&con_cleanup);
-	cntxt.setContextEndData(con);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(&con_cleanup, con);
     }
     if(!con->canwrite)
 	error(_("connection is not open for writing"));
@@ -2447,7 +2444,7 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP aenv = R_NilValue, res = R_NilValue;
     unsigned char buf[6];
     size_t count;
-    Rboolean wasopen;
+    bool wasopen;
     RCNTXT cntxt;
 
     checkArity(op, args);
@@ -2463,10 +2460,8 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, mode);
 	/* set up a context which will close the connection
 	   if there is an error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(&con_cleanup);
-	cntxt.setContextEndData(con);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(&con_cleanup, con);
     }
     if(!con->canread) error(_("connection is not open for reading"));
     if(con->text) error(_("can only load from a binary connection"));
@@ -2502,7 +2497,7 @@ HIDDEN SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!wasopen) {
 	    /* PROTECT is paranoia: some close() method might allocate */
 	    PROTECT(res);
-	    RCNTXT::endcontext(cntxt);
+	    cntxt.end();
 	    con->close(con);
 	    UNPROTECT(1);
 	}

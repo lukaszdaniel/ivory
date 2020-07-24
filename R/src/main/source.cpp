@@ -205,7 +205,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 
     int ifile = asInteger(CAR(args));                   args = CDR(args);
     Rconnection con = getConnection(ifile);
-    Rboolean wasopen = con->isopen;
+    bool wasopen = con->isopen;
     int num = asInteger(CAR(args));			args = CDR(args);
     if (num == 0)
 	return(allocVector(EXPRSXP, 0));
@@ -227,10 +227,8 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     RCNTXT cntxt;
     /* set up context to recover known_to_be_* and to close connection on
        error if opened by do_parse */
-    RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.setContextEnd(&parse_cleanup);
-    cntxt.setContextEndData(&pci);
+    cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.setContextEnd(&parse_cleanup, &pci);
 
     known_to_be_latin1 = known_to_be_utf8 = FALSE;
     Rboolean allKnown = TRUE;
@@ -302,7 +300,7 @@ HIDDEN SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
     PROTECT(s);
-    RCNTXT::endcontext(cntxt);
+    cntxt.end();
     UNPROTECT(3);
     return s;
 }

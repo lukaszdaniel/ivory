@@ -27,15 +27,6 @@
       now gives a factor, and specifically an ordered factor when
       combining ordered factors with identical levels.
 
-      \item Graphics devices can now specify \code{canClip =
-        NA_LOGICAL}, in which case the graphics engine will never
-      perform any clipping of output itself.
-
-      The clipping that the graphics engine does perform (for both
-      \code{canClip = TRUE} and \code{canClip = FALSE}) has been
-      improved to avoid producing unnecessary artifacts in clipped
-      output.
-
       \item \code{apply()} gains a \code{simplify} argument to possibly
       disable simplifying results.
 
@@ -62,22 +53,8 @@
 
       \item \code{capabilities()} gets new entry \code{"Rprof"} which is
       \code{TRUE} when \R has been configured with the equivalent of
-      \command{--enable-R-profiling}, as it is by default; related to
+      \command{--enable-R-profiling} (as it is by default): related to
       Michael Orlitzky's report \PR{17836}.
-
-      \item The \pkg{grid} package now allows \code{gpar(fill)} to be
-      a \code{linearGradient()}, a \code{radialGradient()}, or a
-      \code{pattern()}.  The \code{viewport(clip)} can now also be
-      a grob, which defines a clipping path, and there is a new
-      \code{viewport(mask)} that can also be a grob, which defines
-      a mask.
-
-      These new features are only supported (so far) on Cairo graphics
-      devices and the \code{pdf()} device.
-
-      The graphics engine version, \code{R_GE_version}, has been bumped
-      to 13 and so packages that provide graphics devices
-      should be reinstalled.
 
       \code{str(xS4)} now also shows extraneous attributes of an S4 object
       \code{xS4}.
@@ -88,10 +65,37 @@
     }
   }
 
+  \subsection{GRAPHICS}{
+    \itemize{
+      \item The graphics engine version, \code{R_GE_version}, has been
+      bumped to 13 and so packages that provide graphics devices should
+      be reinstalled.
+
+      \item Graphics devices can now specify \code{canClip =
+        NA_LOGICAL}, in which case the graphics engine will never
+      perform any clipping of output itself.
+
+      The clipping that the graphics engine does perform (for both
+      \code{canClip = TRUE} and \code{canClip = FALSE}) has been
+      improved to avoid producing unnecessary artifacts in clipped
+      output.
+
+      \item The \pkg{grid} package now allows \code{gpar(fill)} to be
+      a \code{linearGradient()}, a \code{radialGradient()}, or a
+      \code{pattern()}.  The \code{viewport(clip)} can now also be
+      a grob, which defines a clipping path, and there is a new
+      \code{viewport(mask)} that can also be a grob, which defines
+      a mask.
+
+      These new features are only supported (so far) on Cairo graphics
+      devices and the \code{pdf()} device.
+    }
+  }
+
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The \emph{standalone} \file{libRmath} math library and \R's C
-      API now provide \code{log1pexp()} again as documented, and gains
+      API now provide \code{log1pexp()} again as documented, and gain
       \code{log1mexp()}.
     }
   }
@@ -113,12 +117,51 @@
     }
   }
 
+  \subsection{BUILDING R on Windows}{
+    \itemize{
+      \item for GCC \eqn{\ge}{>=} 8, \code{FC_LEN_T} is defined in
+      \file{config.h} and hence character lengths are passed from C to
+      Fortran in \emph{inter alia} BLAS and LAPACK calls.
+
+      \item There is a new text file
+      \file{src/gnuwin32/README.compilation}, which outlines how C/Fortran
+      code compilation is organized and documents new features:
+      \itemize{
+	\item \R can be built with Link-Time Optimization with a
+	suitable compiler -- doing so with GCC 9.2 showed several
+	inconsistencies which have been corrected.
+
+	\item There is support for cross-compiling the C and Fortran
+	code in \R and standard packages on suitable (Linux) platforms.
+	This is mainly intended to allow developers to test later
+	versions of compilers -- for example using GCC 9.2 has
+	detected issues that GCC 8.3 in Rtools40 does not.
+
+	\item There is experimental support for cross-building \R
+	packages with C, C++ and/or Fortran code.
+      }
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION on Windows}{
+    \itemize{
+      \item \command{R CMD INSTALL} and \command{R CMD SHLIB} make use
+      of their flag \option{--use-LTO} when the \samp{LTO_OPT} make
+      macro is set in file \file{etc/$\{R_ARCH\}/Makeconf}.  (For
+      details see \sQuote{Writing R Extensions} §4.5.)
+
+      This provides a valuable check on code consistency.  It does work
+      with GCC 8.3 as in Rtools40, but that does not detect everything
+      the \acronym{CRAN} checks with GCC 10 do.
+    }
+  }
+
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
-      \item Function \code{plclust()} from the package \pkg{stats}, and
+      \item Function \code{plclust()} from the package \pkg{stats} and
       \code{package.dependencies()}, \code{pkgDepends()},
       \code{getDepList()}, \code{installFoundDepends()}, and
-      \code{vignetteDepends()} from \pkg{tools} are defunct.
+      \code{vignetteDepends()} from package \pkg{tools} are defunct.
 
       \item Defunct functions \code{checkNEWS()} and \code{readNEWS()} from
       package \pkg{tools} and \code{CRAN.packages()} from \pkg{utils} have
@@ -168,6 +211,14 @@
       correctly signal communication errors. Previously, such errors could
       lead to a segfault due to invalid memory access. Reported
       and debugged by Dmitriy Selivanov in \PR{17850}.
+
+      \item The \command{R CMD check <pkg>} gives a longer and more
+      comprehensible message when \file{DESCRIPTION} misses dependencies,
+      e.g., in \code{Imports:}; thanks to the contributors of \PR{17179}.
+
+      \item \code{update.default()} now calls the generic \code{update()}
+      on the formula to work correctly for models with extended formulas;
+      as reported and suggested by Neal Fultz in \PR{17865}.
     }
   }
 }
@@ -215,6 +266,10 @@
       \item \code{addmargins(*, ..)} now also works when \code{fn()} is a
       local function, thanks to bug report and patch \PR{17124} from Alex
       Bertram.
+
+      \item \code{rank(x)} and hence \code{sort(x)} now work when \code{x}
+      is an object (per \code{is.object(x)}) and of type \code{"raw"},
+      e.g., for \code{gmp::as.bigz(.)} numbers.
     }
   }
 }

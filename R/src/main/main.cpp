@@ -111,7 +111,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    parseError(R_NilValue, R_ParseError);
 	    break;
 	case PARSE_EOF:
-	    RCNTXT::endcontext(cntxt);
+	    cntxt.end();
 	    R_FinalizeSrcRefState();
 	    return;
 	    break;
@@ -908,8 +908,7 @@ void setup_Rmainloop(void)
     R_Toplevel.setVMax(nullptr);
     R_Toplevel.setNodeStack(R_BCNodeStackTop);
     R_Toplevel.setBCProtTop(R_BCProtTop);
-    R_Toplevel.setContextEnd(nullptr);
-    R_Toplevel.setContextEndData(nullptr);
+    R_Toplevel.setContextEnd(nullptr, nullptr);
     R_Toplevel.setIntSusp(FALSE);
     R_Toplevel.setHandlerStack(R_HandlerStack);
     R_Toplevel.setRestartStack(R_RestartStack);
@@ -1221,8 +1220,8 @@ static void PrintCall(SEXP call, SEXP rho)
 	R_BrowseLines = blines;
 
     R_PrintData pars;
-    PrintInit(&pars, rho);
-    PrintValueRec(call, &pars);
+    PrintInit(pars, rho);
+    PrintValueRec(call, pars);
 
     R_BrowseLines = old_bl;
 }
@@ -1298,11 +1297,9 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* browser prompt.  The (optional) second one */
     /* acts as a target for error returns. */
 
-    RCNTXT::begincontext(returncontext, CTXT_BROWSER, call, rho,
-		 R_BaseEnv, argList, R_NilValue);
+    returncontext.start(CTXT_BROWSER, call, rho, R_BaseEnv, argList, R_NilValue);
     if (!SETJMP(returncontext.getCJmpBuf())) {
-	RCNTXT::begincontext(thiscontext, CTXT_RESTART, R_NilValue, rho,
-		     R_BaseEnv, R_NilValue, R_NilValue);
+	thiscontext.start(CTXT_RESTART, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 	if (SETJMP(thiscontext.getCJmpBuf())) {
 		thiscontext.setRestartBitOn();
 	    R_ReturnedValue = R_NilValue;
@@ -1311,9 +1308,9 @@ HIDDEN SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_GlobalContext = &thiscontext;
 	RCNTXT::R_InsertRestartHandlers(&thiscontext, "browser");
 	R_ReplConsole(rho, savestack, browselevel+1);
-	RCNTXT::endcontext(thiscontext);
+	thiscontext.end();
     }
-    RCNTXT::endcontext(returncontext);
+    returncontext.end();
 
     /* Reset the interpreter state. */
 

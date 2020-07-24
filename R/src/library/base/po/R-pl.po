@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-21 15:45\n"
+"POT-Creation-Date: 2020-07-23 12:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1663,6 +1663,14 @@ msgstr "Kodowanie kroczącej długości"
 #: R/namespace.R:0
 msgid "S3 method %s was declared but was not found"
 msgstr "metoda S3 %s została zadeklarowana, ale nie została znaleziona"
+
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
+msgstr ""
+"'exportClassPattern' określono w pliku 'NAMESPACE', ale brak pasujących klas "
+"w pakiecie %s"
 
 #. R/Defunct.R: gettext("See help(\"Defunct\")")
 #: R/Defunct.R:0

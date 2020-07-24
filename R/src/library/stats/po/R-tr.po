@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-01-10 19:25\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2927,8 +2927,7 @@ msgstr ""
 msgid "See PORT documentation.  Code (%d)"
 msgstr ""
 
-#. R/acf.R: gettextf("Series %s", x$series)
-#. R/acf.R: gettextf("Series %s", seq_len(nser))
+#. R/acf.R: gettextf("Series %s", if (nser == 1L) x$series else seq_len(nser))
 #: R/acf.R:0
 msgid "Series %s"
 msgstr ""
@@ -4529,7 +4528,7 @@ msgstr "'init' uzunluğu 'filter' ile eşit uzunlukta olmalı"
 msgid "length of 'p' must be 1 or equal the number of columns of 'x'"
 msgstr ""
 
-#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, tmp_N)
+#. R/glm.R: gettextf("length of 'start' should equal %d and correspond to initial coefs for %s",     nvars, paste(deparse(xnames), collapse = ", "), domain = "R-stats")
 #: R/glm.R:0
 msgid ""
 "length of 'start' should equal %d and correspond to initial coefs for %s"

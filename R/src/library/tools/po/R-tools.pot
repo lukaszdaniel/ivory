@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
-"POT-Creation-Date: 2020-05-21 15:46\n"
+"POT-Creation-Date: 2020-07-23 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -426,6 +426,13 @@ msgstr ""
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"]))
 
 msgid "*** someone has corrupted the Built field in package %s ***"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: paste(sQuote(undeclared), collapse = ", ")
+
+msgid ","
 msgstr ""
 
 
@@ -2852,7 +2859,7 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettextf("Missing link or links in documentation object %s:", sQuote(names(xx)[i]),     domain = "R-tools")
+#. R/QC.R: gettextf("Missing link or links in documentation object %s:", sQuote(names(xb)[i]),     domain = "R-tools")
 
 msgid "Missing link or links in documentation object %s:"
 msgstr ""
@@ -3233,6 +3240,13 @@ msgstr ""
 #. R/check.R: gettext("Non-Windows OSes require LF line endings.\n", domain = "R-tools")
 
 msgid "Non-Windows OSes require LF line endings."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettextf("Non-file package-anchored link(s) in documentation object '%s':", names(xs)[i],     domain = "R-tools")
+
+msgid "Non-file package-anchored link(s) in documentation object '%s':"
 msgstr ""
 
 
@@ -4344,6 +4358,13 @@ msgstr ""
 #. R/Rprof.R: gettext("Self seconds: time spent in function alone.", domain = "R-tools")
 
 msgid "Self seconds: time spent in function alone."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Skipping vignette re-building", domain = "R-tools")
+
+msgid "Skipping vignette re-building"
 msgstr ""
 
 
@@ -6887,13 +6908,6 @@ msgid "file EXISTS but is not of correct format"
 msgstr ""
 
 
-#: R/Rd2HTML.R: 0
-#. R/Rd2HTML.R: gettextf("file link %s in package %s does not exist and so has been treated as a topic",     sQuote(parts$targetfile), sQuote(parts$pkg))
-
-msgid "file link %s in package %s does not exist and so has been treated as a topic"
-msgstr ""
-
-
 #: R/testing.R: 0
 #. R/testing.R: gettext("files differ in number of lines", domain = "R-tools")
 
@@ -7111,6 +7125,15 @@ msgstr ""
 #. R/utils.R: stop("invalid package layout")
 
 msgid "invalid package layout"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+
+msgid "invalid value %s for R_CROSS_BUILD"
 msgstr ""
 
 
@@ -7358,13 +7381,6 @@ msgstr ""
 #. R/install.R: gettextf("package %s %s was found, but %s %s is required by %s", sQuote(p), current,     z$op, target, sQuote(pkgname))
 
 msgid "package %s %s was found, but %s %s is required by %s"
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked",     sQuote(pkg))
-
-msgid "package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked"
 msgstr ""
 
 
@@ -8970,10 +8986,10 @@ msgstr[1]    ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:",     domain = "R-tools")
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:")
 
-msgid        "Namespace dependency not required:"
-msgid_plural "Namespace dependencies not required:"
+msgid        "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:"
+msgid_plural "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:"
 msgstr[0]    ""
 msgstr[1]    ""
 
@@ -9273,6 +9289,15 @@ msgstr[1]    ""
 
 msgid        "Unavailable namespace imported from by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator."
 msgid_plural "Unavailable namespaces imported from by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs",     domain = "R-tools")
+
+msgid        "Undeclared package %s in Rd xrefs"
+msgid_plural "Undeclared packages %s in Rd xrefs"
 msgstr[0]    ""
 msgstr[1]    ""
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
-"POT-Creation-Date: 2020-05-21 15:45\n"
+"POT-Creation-Date: 2020-07-23 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2073,6 +2073,13 @@ msgstr ""
 #. R/namespace.R: gettextf("S3 method %s was declared but was not found", sQuote(method))
 
 msgid "S3 method %s was declared but was not found"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s", sQuote(package))
+
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
 msgstr ""
 
 

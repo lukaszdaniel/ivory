@@ -204,7 +204,7 @@ int R_nchar(SEXP string, nchar_type type_,
 	    if (nc >= 0) {
 		const void *vmax = vmaxget();
 		wchar_t *wc = (wchar_t *)
-		    R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+		    R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 		mbstowcs(wc, xi, nc + 1);
 		int nci18n = Ri18n_wcswidth(wc, 2147483647);
 		vmaxset(vmax);
@@ -270,7 +270,7 @@ HIDDEN SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
 	char msg_i[30]; sprintf(msg_i, _("element %ld"), (long)i+1);
 	s_[i] = R_nchar(sxi, type_, (Rboolean) allowNA, (Rboolean) keepNA, msg_i);
     }
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
     if ((d = getAttrib(x, R_NamesSymbol)) != R_NilValue)
 	setAttrib(s, R_NamesSymbol, d);
     if ((d = getAttrib(x, R_DimSymbol)) != R_NilValue)
@@ -604,14 +604,14 @@ HIDDEN SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		    ienc2 = CE_NATIVE;
 		}
 		/* might expand under MBCS */
-		buf = (char*) R_AllocStringBuffer(slen+strlen(v_ss), &cbuff);
+		buf = (char*) R_AllocStringBuffer(slen+strlen(v_ss), cbuff);
 		strcpy(buf, ss);
 		substrset(buf, v_ss, ienc2, start, stop, i, i % v);
 		SET_STRING_ELT(s, i, mkCharCE(buf, ienc2));
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(&cbuff);
+	R_FreeStringBufferL(cbuff);
     }
     UNPROTECT(1);
     return s;
@@ -854,7 +854,7 @@ HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 	    const char *s = CHAR(el);
 	    if (strIsASCII(s)) {
 		if(int(strlen(s)) > minlen) {
-		    R_AllocStringBuffer(strlen(s)+1, &cbuff);
+		    R_AllocStringBuffer(strlen(s)+1, cbuff);
 		    SET_STRING_ELT(ans, i, stripchars(s, minlen, usecl));
 		} else SET_STRING_ELT(ans, i, el);
 	    } else {
@@ -864,7 +864,7 @@ HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 		    warn = TRUE;
 		    const wchar_t *wc = wtransChar(el);
 		    nc = (int) wcslen(wc);
-		    R_AllocStringBuffer(sizeof(wchar_t)*(nc+1), &cbuff);
+		    R_AllocStringBuffer(sizeof(wchar_t)*(nc+1), cbuff);
 		    SET_STRING_ELT(ans, i, wstripchars(wc, minlen, usecl));
 		} else SET_STRING_ELT(ans, i, el);
 	    }
@@ -874,7 +874,7 @@ HIDDEN SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     if (usecl && warn) warning(_("abbreviate used with non-ASCII chars"));
     SHALLOW_DUPLICATE_ATTRIB(ans, x);
     /* This copied the class, if any */
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
     UNPROTECT(1);
     return ans;
 }
@@ -1024,7 +1024,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (nc >= 0) {
 		    /* FIXME use this buffer for new string as well */
 		    wc = (wchar_t *)
-			R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+			R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 		    if (ienc == CE_UTF8) {
 			utf8towcs(wc, xi, nc + 1);
 			for (j = 0; j < nc; j++) wc[j] = towctrans(wc[j], tr);
@@ -1047,7 +1047,7 @@ HIDDEN SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(&cbuff);
+	R_FreeStringBufferL(cbuff);
     } else {
 	char *xi;
 	vmax = vmaxget();
@@ -1388,13 +1388,13 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    s = CHAR(STRING_ELT(old, 0));
 	    nc = (int) utf8towcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "old");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
 	    nc = (int) mbstowcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "old");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 	    mbstowcs(wc, s, nc + 1);
 	}
 	wtr_build_spec(wc, trs_old);
@@ -1407,13 +1407,13 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    s = CHAR(STRING_ELT(_new, 0));
 	    nc = (int) utf8towcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "new");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
 	    nc = (int) mbstowcs(nullptr, s, 0);
 	    if (nc < 0) error(_("invalid multibyte string '%s'"), "new");
-	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
+	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), cbuff);
 	    mbstowcs(wc, s, nc + 1);
 	}
 	wtr_build_spec(wc, trs_new);
@@ -1474,7 +1474,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (nc < 0)
 		    error(_("invalid multibyte input string %d"), i+1);
 		wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t),
-						     &cbuff);
+						     cbuff);
 		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
 		for (j = 0; j < nc; j++){
@@ -1496,7 +1496,7 @@ HIDDEN SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(&cbuff);
+	R_FreeStringBufferL(cbuff);
     } else {
 	unsigned char xtable[UCHAR_MAX + 1], *p, c_old, c_new;
 	struct tr_spec *trs_old, **trs_old_ptr;
@@ -1599,7 +1599,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    w = INTEGER(width)[i % nw];
 	    This = translateChar(STRING_ELT(x, i));
 	    nc = (int) strlen(This);
-	    buf = (char*) R_AllocStringBuffer(nc, &cbuff);
+	    buf = (char*) R_AllocStringBuffer(nc, cbuff);
 	    wsum = 0;
 	    mbs_init(&mb_st);
 	    for (p = This, w0 = 0, q = buf; *p ;) {
@@ -1615,7 +1615,7 @@ HIDDEN SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_STRING_ELT(s, i, markKnown(buf, STRING_ELT(x, i)));
 	    vmaxset(vmax);
 	}
-	R_FreeStringBufferL(&cbuff);
+	R_FreeStringBufferL(cbuff);
 	UNPROTECT(1);
     }
     SHALLOW_DUPLICATE_ATTRIB(s, x);

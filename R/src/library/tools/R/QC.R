@@ -3144,8 +3144,9 @@ function(x, ...)
             strwrap("RdMacros packages must be contained in the DESCRIPTION Imports/Suggests/Depends entries."),
             "")
       },
-      if(length(bad <- x$missing_namespace_depends) >= 1L) {
-          c(.pretty_format2(ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:", domain = "R-tools"), bad), "")
+      if(length(bad <- x$missing_namespace_depends)) {
+          c(.pretty_format2(ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Suggests/Depends entries:", "Namespace dependencies missing from DESCRIPTION Imports/Suggests/Depends entries:"), sQuote(bad)),
+              "")
       },
       if(length(y <- x$many_depends)) {
           c(.pretty_format2(gettext("Depends: includes the non-default packages:", domain = "R-tools"), y),
@@ -4302,7 +4303,7 @@ function(package, dir, lib.loc = NULL)
     if(mind_suspects) {
         db <- cbind(db, suspect = FALSE)
     }
-    
+
     for (pkg in anchors) {
         ## we can't do this on the current uninstalled package!
         if (missing(package) && pkg == basename(dir)) next
@@ -4320,7 +4321,7 @@ function(package, dir, lib.loc = NULL)
             db[this, "bad"] <- !good & !suspect
             if(mind_suspects)
                 db[this, "suspect"] <- suspect
-            
+
         } else if(use_aliases_from_CRAN) {
             if(is.null(aliases_db)) {
                 ## Not yet read in.

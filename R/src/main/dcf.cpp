@@ -95,10 +95,8 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!wasopen) {
 	if(!con->open(con)) error(_("cannot open the connection"));
 	/* Set up a context which will close the connection on error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(&con_cleanup);
-	cntxt.setContextEndData(con);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(&con_cleanup, con);
     }
     if(!con->canread) error(_("cannot read from this connection"));
 
@@ -304,7 +302,7 @@ HIDDEN SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     vmaxset(vmax);
-    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
+    if(!wasopen) {cntxt.end(); con->close(con);}
     free(buf);
     tre_regfree(&blankline);
     tre_regfree(&contline);

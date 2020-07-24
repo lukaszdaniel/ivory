@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 15:46+0200\n"
+"POT-Creation-Date: 2020-07-23 12:02+0200\n"
 "PO-Revision-Date: 2015-01-17 15:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -20,45 +20,45 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: tcltk.c:63
+#: tcltk.cpp:63
 msgid "parse error in R expression"
 msgstr " R expression 内に構文エラー "
 
-#: tcltk.c:172 tcltk.c:250
+#: tcltk.cpp:172 tcltk.cpp:250
 msgid "tcl error.\n"
 msgstr " tcl エラー \n"
 
-#: tcltk.c:201 tcltk.c:276 tcltk.c:293 tcltk.c:313 tcltk.c:333 tcltk.c:408
-#: tcltk.c:473 tcltk.c:527 tcltk.c:766
+#: tcltk.cpp:201 tcltk.cpp:276 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
+#: tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527 tcltk.cpp:766
 msgid "invalid argument"
 msgstr " 不正な引数 "
 
-#: tcltk.c:283
+#: tcltk.cpp:283
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.c:315 tcltk.c:335 tcltk.c:410 tcltk.c:475 tcltk.c:529
+#: tcltk.cpp:315 tcltk.cpp:335 tcltk.cpp:410 tcltk.cpp:475 tcltk.cpp:529
 #, fuzzy
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr " 不正な tclObj - おそらく、別のセッションから保存された？ "
 
-#: tcltk.c:639
+#: tcltk.cpp:639
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr " 引数リストはtcltkの内部関数 `callback_closure' において長過ぎます "
 
-#: tcltk.c:672
+#: tcltk.cpp:672
 msgid "argument is not of correct type"
 msgstr " 引数は正しいタイプではありません "
 
-#: tcltk.c:724
+#: tcltk.cpp:724
 msgid "no DISPLAY variable so Tk is not available"
 msgstr " DISPLAY環境変数が無いのでTkは利用出来ません "
 
-#: tcltk_unix.c:88
+#: tcltk_unix.cpp:88
 msgid "Tcl is not loaded"
 msgstr " Tclはロード出来ません "
 
-#: tcltk_unix.c:92
+#: tcltk_unix.cpp:92
 msgid "Tcl is not last loaded handler"
 msgstr " Tclはロードした最後のハンドラーではありません "
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
-"POT-Creation-Date: 2020-04-15 18:32\n"
+"POT-Creation-Date: 2020-07-23 12:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 
 #: R/colorstuff.R: 0
-#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", n, palette)
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette", nc, palette)
 
 msgid "'n' set to %s, the maximum available for %s palette"
 msgstr ""
@@ -311,6 +311,15 @@ msgid "Index"
 msgstr ""
 
 
+#: R/patterns.R: 0
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+
+msgid "Invalid 'extend' value"
+msgstr ""
+
+
 #: R/postscript.R: 0
 #. R/postscript.R: stop("Invalid font database name")
 
@@ -322,6 +331,20 @@ msgstr ""
 #. R/postscript.R: stop("Invalid font type")
 
 msgid "Invalid font type"
+msgstr ""
+
+
+#: R/patterns.R: 0
+#. R/patterns.R: stop("Invalid pattern type")
+
+msgid "Invalid pattern type"
+msgstr ""
+
+
+#: R/smooth2d.R: 0
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
 msgstr ""
 
 

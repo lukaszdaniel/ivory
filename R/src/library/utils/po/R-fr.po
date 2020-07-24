@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -273,6 +273,11 @@ msgstr "'FUN' doit être une fonction ou NULL"
 #, fuzzy
 msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' de longueur incorrecte %d != cols = %d"
+
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr ""
 
 #. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
 #: R/objects.R:0
@@ -2976,6 +2981,22 @@ msgstr ""
 "erreur d'interprétation ou option vide dans\n"
 "%s"
 
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+#, fuzzy
+msgid "path contains '..'"
+msgstr "le chemin vers %s contient des espaces,"
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+msgid "path is empty"
+msgstr ""
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 #: R/SweaveDrivers.R:0
 #, fuzzy
@@ -3042,6 +3063,16 @@ msgid "removing all entries with invalid multi-byte character data"
 msgstr ""
 "suppression de toutes les entrées ayant des données de type caractère multi-"
 "octets incorrectes"
+
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
@@ -3923,9 +3954,6 @@ msgstr[1] "les packages '%s' ne sont pas disponibles (pour %s)"
 
 #~ msgid "are now renamed to 'z<name>.R'"
 #~ msgstr "sont maintenant renommés vers 'z<nom>.R'"
-
-#~ msgid "path to %s contains spaces,"
-#~ msgstr "le chemin vers %s contient des espaces,"
 
 #~ msgid "file path is too long"
 #~ msgstr "le chemin d'accès au fichier est trop long"

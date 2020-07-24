@@ -2535,10 +2535,8 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(&con_cleanup);
-	cntxt.setContextEndData(con);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(&con_cleanup, con);
     }
     if (!ascii && con->text)
 	error(_("binary-mode connection required for ascii=FALSE"));
@@ -2547,7 +2545,7 @@ HIDDEN SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_InitConnOutPStream(&out, con, type, version, hook, fun);
     R_Serialize(object, &out);
-    if(!wasopen) {RCNTXT::endcontext(cntxt); con->close(con);}
+    if(!wasopen) {cntxt.end(); con->close(con);}
 
     return R_NilValue;
 }
@@ -2565,7 +2563,7 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con;
     SEXP fun, ans;
     SEXP (*hook)(SEXP, SEXP);
-    Rboolean wasopen;
+    bool wasopen;
     RCNTXT cntxt;
 
     checkArity(op, args);
@@ -2584,10 +2582,8 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error(_("cannot open the connection"));
 	strcpy(con->mode, mode);
 	/* Set up a context which will close the connection on error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(&con_cleanup);
-	cntxt.setContextEndData(con);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(&con_cleanup, con);
     }
     if(!con->canread) error(_("connection is not open for reading"));
 
@@ -2597,7 +2593,7 @@ HIDDEN SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);    
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
-	RCNTXT::endcontext(cntxt);
+	cntxt.end();
 	con->close(con);
 	UNPROTECT(1);
     }
@@ -2840,10 +2836,8 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	SEXP val;
 
 	/* set up a context which will free the buffer if there is an error */
-	RCNTXT::begincontext(cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.setContextEnd(reinterpret_cast<void(*)(void*)>(&free_mem_buffer));
-	cntxt.setContextEndData(&mbs);
+	cntxt.start(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	cntxt.setContextEnd(reinterpret_cast<void(*)(void*)>(&free_mem_buffer), &mbs);
 
 	InitMemOutPStream(&out, &mbs, type, version, hook, fun);
 	R_Serialize(object, &out);
@@ -2852,7 +2846,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 
 	/* end the context after anything that could raise an error but before
 	   calling OutTerm so it doesn't get called twice */
-	RCNTXT::endcontext(cntxt);
+	cntxt.end();
 
 	UNPROTECT(1); /* val */
 	return val;

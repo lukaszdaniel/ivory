@@ -75,7 +75,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
 	    for (j = 0; j < nlt; j++) {
 		const char *vj = translateChar(STRING_ELT(lt, j));
 		size_t vt = strlen(vj), len = vs + vt + 2;
-		cbuf = (char*) R_AllocStringBuffer(len, &cbuff);
+		cbuf = (char*) R_AllocStringBuffer(len, cbuff);
 		snprintf(cbuf, len, "%s:%s", vi, vj);
 		SET_STRING_ELT(la, k, mkChar(cbuf));
 		k++;
@@ -87,7 +87,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     PROTECT(la = mkString("factor"));
     setAttrib(a, R_ClassSymbol, la);
     UNPROTECT(2);
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
     vmaxset(vmax);
     return a;
 }

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
-"POT-Creation-Date: 2020-05-08 22:40\n"
+"POT-Creation-Date: 2020-07-23 12:01\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,6 +315,13 @@ msgstr ""
 #. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols)
 
 msgid "'as.is' has the wrong length %d != cols = %d"
+msgstr ""
+
+
+#: R/readtable.R: 0
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+
+msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr ""
 
 
@@ -3653,6 +3660,27 @@ msgid "parse error or empty option in %s"
 msgstr ""
 
 
+#: R/tar.R: 0
+#. R/tar.R: stop("path contains '..'")
+
+msgid "path contains '..'"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: stop("path is empty")
+
+msgid "path is empty"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: stop("path starts with '~'")
+
+msgid "path starts with '~'"
+msgstr ""
+
+
 #: R/SweaveDrivers.R: 0
 #. R/SweaveDrivers.R: gettextf("path to %s contains spaces, this may cause problems when running LaTeX",     sQuote(styfile))
 
@@ -3734,6 +3762,20 @@ msgstr ""
 #. R/help.search.R: warning("removing all entries with invalid multi-byte character data")
 
 msgid "removing all entries with invalid multi-byte character data"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: gettextf("removing drive '%s'", drv)
+
+msgid "removing drive '%s'"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: warning("removing leading '/'")
+
+msgid "removing leading '/'"
 msgstr ""
 
 

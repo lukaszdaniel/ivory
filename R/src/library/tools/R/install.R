@@ -160,13 +160,30 @@ if(FALSE) {
 
     on.exit(do_exit_on_error())
     WINDOWS <- .Platform$OS.type == "windows"
+    cross <- Sys.getenv("R_CROSS_BUILD")
+    have_cross <- nzchar(cross)
+    if(have_cross && !cross %in% c("i386", "x64"))
+        stop(gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
+    if (have_cross) {
+        WINDOWS <- TRUE
+	Sys.setenv(R_OSTYPE = "windows")
+    }
 
     if (WINDOWS) MAKE <- "make"
     else MAKE <- Sys.getenv("MAKE") # FIXME shQuote, default?
     rarch <- Sys.getenv("R_ARCH") # unix only
     if (WINDOWS && nzchar(.Platform$r_arch))
         rarch <- paste0("/", .Platform$r_arch)
+    cross <- Sys.getenv("R_CROSS_BUILD")
+    if(have_cross && !cross %in% c("i386", "x64"))
+        stop(gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
     test_archs <- rarch
+    if (have_cross) {
+        WINDOWS <- TRUE
+        r_arch <- paste0("/", cross)
+        test_archs <- c()
+    }
+
 
     SHLIB_EXT <- if (WINDOWS) ".dll" else {
         ## can we do better?
@@ -177,7 +194,7 @@ if(FALSE) {
 
     if(getOption("warn") < warnOption) {
         op <- options(warn = warnOption)
-        on.exit(options(op), add=TRUE)
+        on.exit(options(op), add = TRUE)
     }
     invisible(Sys.setlocale("LC_COLLATE", "C")) # discard output
 
@@ -246,6 +263,8 @@ if(FALSE) {
             "      --no-clean-on-error	do not remove installed package on error",
             "      --merge-multiarch	multi-arch by merging (from a single tarball only)",
             "      --use-vanilla	do not read any Renviron or Rprofile files",
+            "      --use-LTO         use Link-Time Optimization",
+            "      --no-use-LTO      do not use Link-Time Optimization",
            "\nfor Unix",
             "      --configure-args=ARGS",
             "			set arguments for the configure scripts (if any)",
@@ -253,8 +272,6 @@ if(FALSE) {
             "			set variables for the configure scripts (if any)",
             "      --strip           strip shared object(s)",
             "      --strip-lib       strip static/dynamic libraries under lib/",
-            "      --use-LTO         use Link-Time Optimization",
-            "      --no-use-LTO      do not use Link-Time Optimization",
             "      --dsym            (macOS only) generate dSYM directory",
             "      --built-timestamp=STAMP",
             "                   set timestamp for Built: entry in DESCRIPTION",
@@ -982,6 +999,7 @@ if(FALSE) {
         pkg_staged_install <- SI <-
             parse_description_field(desc, "StagedInstall", default = NA)
         if (is.na(pkg_staged_install)) pkg_staged_install <- staged_install
+        if (have_cross) pkg_staged_install <- FALSE
         if (pkg_staged_install && libs_only) {
             pkg_staged_install <- FALSE
             message("not using staged install with --libs-only")
@@ -1118,7 +1136,8 @@ if(FALSE) {
                 } else { ## no src/Makefile.win
                     srcs <- dir(pattern = "\\.([cfmM]|cc|cpp|f90|f95|mm)$",
                                 all.files = TRUE)
-                    archs <- if (!force_both && !grepl(" x64 ", utils::win.version()))
+                    archs <- if(have_cross) cross
+                    else if (!force_both && !grepl(" x64 ", utils::win.version()))
                         "i386"
                     else {
                         ## see what is installed
@@ -1151,7 +1170,8 @@ if(FALSE) {
                     }
                     if(force_biarch) one_only <- FALSE
                     if(one_only || length(archs) < 2L)
-                        has_error <- run_shlib(pkg_name, srcs, instdir, rarch)
+                        has_error <-
+                            run_shlib(pkg_name, srcs, instdir, rarch, use_LTO)
                     else {
                         setwd(owd)
                         test_archs <- archs
@@ -1167,7 +1187,8 @@ if(FALSE) {
 
                             ra <- paste0("/", arch)
                             Sys.setenv(R_ARCH = ra, R_ARCH_BIN = ra)
-                            has_error <- run_shlib(pkg_name, srcs, instdir, ra)
+                            has_error <-
+                                run_shlib(pkg_name, srcs, instdir, ra, use_LTO)
                             setwd(owd)
                             if (has_error) break
                         }
@@ -1273,6 +1294,7 @@ if(FALSE) {
             if (!grepl(" x64 ", utils::win.version())) test_archs <- "i386"
         }
 
+        if (have_cross) Sys.unsetenv("R_ARCH")
 
         ## R files must start with a letter
 	if (install_R && dir.exists("R") && length(dir("R"))) {
@@ -1641,7 +1663,7 @@ if(FALSE) {
             }
         }
 
-        if (test_load) {
+        if (test_load && !have_cross) {
             if (pkg_staged_install)
 	        starsmsg(stars,
                     gettext("testing if installed package can be loaded from temporary location", domain = "R-tools"))
@@ -2214,8 +2236,8 @@ if(FALSE) {
             "  -c, --clean		remove files created during compilation",
             "  --preclean		remove files created during a previous run",
             "  -n, --dry-run		dry run, showing commands that would be used",
-            "",
-            "Unix only:",
+#            "",
+#            "Unix only:",
             "  --use-LTO		use Link-Time Optimization",
             "  --no-use-LTO		do not use Link-Time Optimization",
             "",
@@ -2229,6 +2251,14 @@ if(FALSE) {
     p1 <- function(...) paste(..., collapse = " ")
 
     WINDOWS <- .Platform$OS.type == "windows"
+    cross <- Sys.getenv("R_CROSS_BUILD")
+    if(nzchar(cross)) {
+        if(!cross %in% c("i386", "x64"))
+            stop(gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
+        WINDOWS <- TRUE
+        Sys.setenv(R_ARCH = paste0("/", cross))
+    }
+
     if (!WINDOWS) {
         mconf <- readLines(file.path(R.home(),
                                      paste0("etc", Sys.getenv("R_ARCH")),

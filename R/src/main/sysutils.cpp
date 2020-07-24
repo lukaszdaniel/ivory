@@ -663,7 +663,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    } else
 		PROTECT(ans = duplicate(x));
 	}
-	R_AllocStringBuffer(0, &cbuff);  /* 0 -> default */
+	R_AllocStringBuffer(0, cbuff);  /* 0 -> default */
 	for(R_xlen_t i = 0; i < XLENGTH(x); i++) {
 	    if (isRawlist) {
 		si = VECTOR_ELT(x, i);
@@ -694,14 +694,14 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* other possible error conditions are
 	       incomplete and invalid multibyte chars */
 	    if(res == (size_t) -1 && errno == E2BIG) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    } else if(res == (size_t) -1 && sub &&
 		      (errno == EILSEQ || errno == EINVAL)) {
 		/* it seems this gets thrown for non-convertible input too */
 		if(fromUTF8 && streql(sub, "Unicode")) {
 		    if(outb < 13) {
-			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+			R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 			goto top_of_loop;
 		    }
 		    wchar_t wc;
@@ -729,7 +729,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		    goto next_char;
 		}  else if(streql(sub, "byte")) {
 		    if(outb < 5) {
-			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+			R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 			goto top_of_loop;
 		    }
 		    snprintf(outbuf, 5, "<%02x>", (unsigned char) *inbuf);
@@ -737,7 +737,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else {
 		    size_t sub_len = strlen(sub);
 		    if(outb < sub_len) {
-			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+			R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 			goto top_of_loop;
 		    }
 		    memcpy(outbuf, sub, sub_len);
@@ -769,7 +769,7 @@ HIDDEN SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 	Riconv_close(obj);
-	R_FreeStringBuffer(&cbuff);
+	R_FreeStringBuffer(cbuff);
     }
     UNPROTECT(1);
     return ans;
@@ -862,18 +862,18 @@ static void *latin1_obj = nullptr, *utf8_obj = nullptr, *ucsmb_obj = nullptr,
 
 /* Translates string in "ans" to native encoding returning it in string
    buffer "cbuff" */
-static int translateToNative(const char *ans, R_StringBuffer *cbuff,
+static int translateToNative(const char *ans, R_StringBuffer &cbuff,
 			     nttype_t ttype, int mustWork)
 {
 
     if (ttype == NT_NONE)
 	error(_("internal error: no translation needed"));
 
-    void * obj;
+    void *obj;
     const char *inbuf, *from;
     char *outbuf;
     size_t inb, outb, res;
-    Rboolean failed = FALSE;
+    bool failed = false;
 
     if(ttype == NT_FROM_LATIN1) {
 	if(!latin1_obj) {
@@ -915,21 +915,21 @@ static int translateToNative(const char *ans, R_StringBuffer *cbuff,
     R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
-    outbuf = cbuff->data; outb = cbuff->bufsize - 1;
+    outbuf = cbuff.data; outb = cbuff.bufsize - 1;
     /* First initialize output */
     Riconv (obj, nullptr, nullptr, &outbuf, &outb);
 next_char:
     /* Then convert input  */
     res = (int) Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 13) {
-	    R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
+	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
 	}
-	failed = TRUE;
+	failed = true;
 	if (ttype == NT_FROM_UTF8) {
 	    /* if starting in UTF-8, use \uxxxx */
 	    /* This must be the first byte */
@@ -967,11 +967,11 @@ next_char:
     if (mustWork && failed) {
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to native encoding"), 
-		    cbuff->data);
+		    cbuff.data);
 	    return 1;
 	} else
 	    error(_("unable to translate '%s' to native encoding"),
-		  cbuff->data);
+		  cbuff.data);
     }
     return 0;
 }
@@ -989,12 +989,12 @@ const char *Rf_translateChar(SEXP x)
     if (t == NT_NONE) return ans;
 
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
-    translateToNative(ans, &cbuff, t, 0);
+    translateToNative(ans, cbuff, t, 0);
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1009,12 +1009,12 @@ const char *Rf_translateCharFP(SEXP x)
     if (t == NT_NONE) return ans;
 
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
-    translateToNative(ans, &cbuff, t, 1);
+    translateToNative(ans, cbuff, t, 1);
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1029,12 +1029,12 @@ HIDDEN const char *Rf_translateCharFP2(SEXP x)
     if (t == NT_NONE) return ans;
 
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
-    if (translateToNative(ans, &cbuff, t, 2)) return nullptr;
+    if (translateToNative(ans, cbuff, t, 2)) return nullptr;
 
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1049,10 +1049,10 @@ SEXP Rf_installTrChar(SEXP x)
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
     // For back-compatibility this allows installing
     // symbols with escapes, with a warning.
-    translateToNative(CHAR(x), &cbuff, t, 2);
+    translateToNative(CHAR(x), cbuff, t, 2);
 
     SEXP Sans = install(cbuff.data);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return Sans;
 }
 
@@ -1113,7 +1113,7 @@ const char *Rf_translateCharUTF8(SEXP x)
 	error(_("unsupported conversion from '%s' to '%s'"),
 	      from, "UTF-8");
 #endif
-    R_AllocStringBuffer(0, &cbuff);
+    R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; outb = cbuff.bufsize - 1;
@@ -1123,11 +1123,11 @@ next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
-	    R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
 	}
 	snprintf(outbuf, 5, "<%02x>", (unsigned char) *inbuf);
@@ -1140,7 +1140,7 @@ next_char:
     res = strlen(cbuff.data) + 1;
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1152,7 +1152,7 @@ HIDDEN const char *Rf_trCharUTF8(SEXP x)
     char *outbuf, *p, *from = (char *) "";
     size_t inb, outb, res;
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
-    Rboolean failed = FALSE;
+    bool failed = false;
 
     if(TYPEOF(x) != CHARSXP)
 	error(_("'%s' function must be called on a CHARSXP, but got '%s'"),
@@ -1178,7 +1178,7 @@ HIDDEN const char *Rf_trCharUTF8(SEXP x)
 	error(_("unsupported conversion from '%s' to '%s'"),
 	      from, "UTF-8");
 #endif
-    R_AllocStringBuffer(0, &cbuff);
+    R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; outb = cbuff.bufsize - 1;
@@ -1188,14 +1188,14 @@ next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
-	    R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
 	}
-	failed = TRUE;
+	failed = true;
 	snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
 	outbuf += 4; outb -= 4;
 	inbuf++; inb--;
@@ -1208,7 +1208,7 @@ next_char:
     res = strlen(cbuff.data) + 1;
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1284,7 +1284,7 @@ const wchar_t *Rf_wtransChar(SEXP x)
 #endif
     }
 
-    R_AllocStringBuffer(0, &cbuff);
+    R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = ans; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
@@ -1294,11 +1294,11 @@ next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	if(outb < 5) {
-	    R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	    R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	    goto top_of_loop;
 	}
 	snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
@@ -1314,7 +1314,7 @@ next_char:
     p = (wchar_t *) R_alloc(res+4, 1);
     memset(p, 0, res+4);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1389,7 +1389,7 @@ const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 
     obj = Riconv_open(tocode, fromcode);
     if(obj == (void *)(-1)) return x;
-    R_AllocStringBuffer(0, &cbuff);
+    R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = x; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
@@ -1399,13 +1399,13 @@ next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	switch(subst) {
 	case 1: /* substitute hex */
 	    if(outb < 5) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
@@ -1415,7 +1415,7 @@ next_char:
 	    break;
 	case 2: /* substitute . */
 	    if(outb < 1) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    *outbuf++ = '.'; inbuf++; outb--; inb--;
@@ -1423,7 +1423,7 @@ next_char:
 	    break;
 	case 3: /* substitute ? */
 	    if(outb < 1) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    *outbuf++ = '?'; inbuf++; outb--; inb--;
@@ -1439,7 +1439,7 @@ next_char:
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
     p = R_alloc(res, 1);
     memcpy(p, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
     return p;
 }
 
@@ -1495,7 +1495,7 @@ void reEnc2(const char *x, char *y, int ny,
 
     obj = Riconv_open(tocode, fromcode);
     if(obj == (void *)(-1)) return;
-    R_AllocStringBuffer(0, &cbuff);
+    R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = x; inb = strlen(inbuf);
     outbuf = cbuff.data; top = outb = cbuff.bufsize - 1;
@@ -1505,13 +1505,13 @@ next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     if(res == (size_t) -1 && errno == E2BIG) {
-	R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+	R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 	goto top_of_loop;
     } else if(res == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
 	switch(subst) {
 	case 1: /* substitute hex */
 	    if(outb < 5) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
@@ -1521,7 +1521,7 @@ next_char:
 	    break;
 	case 2: /* substitute . */
 	    if(outb < 1) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    *outbuf++ = '.'; inbuf++; outb--; inb--;
@@ -1529,7 +1529,7 @@ next_char:
 	    break;
 	case 3: /* substitute ? */
 	    if(outb < 1) {
-		R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+		R_AllocStringBuffer(2*cbuff.bufsize, cbuff);
 		goto top_of_loop;
 	    }
 	    *outbuf++ = '?'; inbuf++; outb--; inb--;
@@ -1545,7 +1545,7 @@ next_char:
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
     if (res > ny) error(_("converted string is too long for buffer"));
     memcpy(y, cbuff.data, res);
-    R_FreeStringBuffer(&cbuff);
+    R_FreeStringBuffer(cbuff);
 }
 #endif
 
@@ -2073,7 +2073,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 	wchar_t *w = globbuf.gl_pathv[i];
 	char *buf;
 	int nb = wcstoutf8(nullptr, w, R_INT_MAX);
-	buf = R_AllocStringBuffer(nb, &cbuff);
+	buf = R_AllocStringBuffer(nb, cbuff);
 	wcstoutf8(buf, w, nb);
 	SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
     }
@@ -2082,7 +2082,7 @@ HIDDEN SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     UNPROTECT(1);
 #ifdef _WIN32
-    R_FreeStringBufferL(&cbuff);
+    R_FreeStringBufferL(cbuff);
 #endif
     if (initialized) globfree(&globbuf);
     return ans;
